@@ -1,9 +1,8 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 45DDA3BF-6289-3C66-8847-CA19BFA37EA8' ]
-platform:        macosx
-install-name:    /System/Library/PrivateFrameworks/AVConference.framework/Frameworks/SimpleKeyExchange.framework/Versions/A/SimpleKeyExchange
-objc-constraint: none
+uuids:           [ 'x86_64: 30EA38FD-FA64-3B2A-BCFB-FF3D7B254F19', 'x86_64: 30EA38FD-FA64-3B2A-BCFB-FF3D7B254F19' ]
+platform:        zippered
+install-name:    '/System/Library/PrivateFrameworks/AVConference.framework/Frameworks/SimpleKeyExchange.framework/Versions/A/SimpleKeyExchange'
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _SKEState_CopyBlob, _SKEState_CopyBlobSync, _SKEState_CopySecretKey, 

@@ -1,21 +1,21 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 7439D424-E469-33B4-9C6D-CABFDA5C3F95' ]
-platform:        macosx
-install-name:    /System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libGLProgrammability.dylib
-objc-constraint: none
+uuids:           [ 'x86_64: 6609B909-6654-3519-90A3-AE89192B77E3', 'x86_64: 6609B909-6654-3519-90A3-AE89192B77E3' ]
+platform:        zippered
+install-name:    '/System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libGLProgrammability.dylib'
 exports:         
   - archs:           [ x86_64 ]
-    symbols:         [ _PPParserAttachStream, _PPParserAttachString, _PPParserBuildErrorString, 
-                       _PPParserCreate, _PPParserFree, _PPParserGetErrorString, _PPParserGetImageUnitsUsed, 
-                       _PPParserGetLimits, _PPParserGetOptions, _PPParserGetStream, 
-                       _PPParserInit, _PPParserParse, _PPParserSetLimits, _PPParserSetPrefs, 
-                       _PPStreamAddAddressUsage, _PPStreamAddAttribBinding, _PPStreamAddConstant, 
-                       _PPStreamAddLabel, _PPStreamAddOperation, _PPStreamAddOption, 
-                       _PPStreamAddOutputBinding, _PPStreamAddParamBinding, _PPStreamAddParamBindingArray, 
-                       _PPStreamAddRasterOp, _PPStreamAddTempUsage, _PPStreamAddTempUsageArray, 
-                       _PPStreamAddTexImage, _PPStreamAttachStream, _PPStreamAttribBindingIsEqual, 
-                       _PPStreamChunkListAddChunk, _PPStreamChunkListCreate, _PPStreamChunkListCreateFromChunkList, 
+    symbols:         [ _PPParserAttachLLVMIR, _PPParserAttachStream, _PPParserAttachString, 
+                       _PPParserBuildErrorString, _PPParserCreate, _PPParserFree, 
+                       _PPParserGetErrorString, _PPParserGetImageUnitsUsed, _PPParserGetLimits, 
+                       _PPParserGetOptions, _PPParserGetStream, _PPParserInit, _PPParserParse, 
+                       _PPParserSetLimits, _PPParserSetPrefs, _PPStreamAddAddressUsage, 
+                       _PPStreamAddAttribBinding, _PPStreamAddConstant, _PPStreamAddLabel, 
+                       _PPStreamAddOperation, _PPStreamAddOption, _PPStreamAddOutputBinding, 
+                       _PPStreamAddParamBinding, _PPStreamAddParamBindingArray, _PPStreamAddRasterOp, 
+                       _PPStreamAddTempUsage, _PPStreamAddTempUsageArray, _PPStreamAddTexImage, 
+                       _PPStreamAttachStream, _PPStreamAttribBindingIsEqual, _PPStreamChunkListAddChunk, 
+                       _PPStreamChunkListCreate, _PPStreamChunkListCreateFromChunkList, 
                        _PPStreamChunkListGetNextIndex, _PPStreamChunkListGetStream, 
                        _PPStreamChunkListRemoveChunk, _PPStreamChunkListSort, _PPStreamCompare, 
                        _PPStreamCreate, _PPStreamFree, _PPStreamGetStream, _PPStreamGetTexOperationCount, 
@@ -24,6 +24,7 @@ exports:
                        _PPStreamTokenAddTexUnitInfo, _PPStreamTokenAlloc, _PPStreamTokenConvertAttribBindings, 
                        _PPStreamTokenConvertOutputBindings, _PPStreamTokenConvertParamBindings, 
                        _PPStreamTokenConvertParamBindingsToGeneric, _PPStreamTokenFree, 
+                       _PPStreamTokenGetProgramOptions, _PPStreamTokenIsTrivialPassThrough, 
                        _PPStreamTokenValidateOptions, _ShAttributeBindingRequest, 
                        _ShCleanup, _ShCompile, _ShConstructCompiler, _ShConstructLinker, 
                        _ShDestruct, _ShFinalize, _ShFragDataBindingRequest, _ShGetActiveAttrib, 
@@ -47,9 +48,11 @@ exports:
                        _ShGetUniformBlockIndex, _ShGetUniformIndex, _ShGetUniformLocation, 
                        _ShGetUniformPartitionInfo, _ShInitialize, _ShInitializeLibrary, 
                        _ShLink, _ShSetInitialUniformValue, _ShTerminateLibrary, _ShTransformFeedbackVaryings, 
-                       _glpFreePPShaderLinearize, _glpPPDisassemble, _glpPPDisassembleFree, 
-                       _glpPPShaderLinearize, _glpPPShaderLinearizeEx, _glpPPShaderLinearizeStreamMgr, 
-                       _glpPPShaderLinearizeStreamMgrEx, _glpPPStreamTokenDump, _glpPPStreamTokenDumpFree, 
+                       _glpCallFragmentStateToLLVMIR, _glpCallVertexStateToLLVMIR, 
+                       _glpFragmentStateToPPStream, _glpFreePPShaderLinearize, _glpPPDisassemble, 
+                       _glpPPDisassembleFree, _glpPPShaderLinearize, _glpPPShaderLinearizeEx, 
+                       _glpPPShaderLinearizeStreamMgr, _glpPPShaderLinearizeStreamMgrEx, 
+                       _glpPPStreamTokenDump, _glpPPStreamTokenDumpFree, _glpVertexStateToPPStream, 
                        _glsmAllocateTextureLevels, _glsmCleanTextureGeometry, _glsmCreateBuffer, 
                        _glsmCreateSampler, _glsmCreateTexture, _glsmDestroyBuffer, 
                        _glsmDestroySampler, _glsmDestroyTexture, _glsmFreeTextureLevelBuffers, 

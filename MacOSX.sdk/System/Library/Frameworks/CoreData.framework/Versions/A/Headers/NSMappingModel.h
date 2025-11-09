@@ -1,7 +1,7 @@
 /*
     NSMappingModel.h
     Core Data
-    Copyright (c) 2004-2018, Apple Inc.
+    Copyright (c) 2004-2019, Apple Inc.
     All rights reserved.
 */
 
@@ -17,18 +17,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 API_AVAILABLE(macosx(10.5),ios(3.0))
 @interface NSMappingModel: NSObject {
-#if (!__OBJC2__)
-    @private
-    void *_reserved;
-    void *_reserved1;
-    void *_reserved2;
-    NSMutableArray *_entityMappings;
-    NSMutableDictionary *_entityMappingsByName;
-    struct __modelMappingFlags {
-        unsigned int _isInUse:1;
-        unsigned int _reservedModelMapping:31;
-    } _modelMappingFlags;
-#endif
 }
 
 /* Returns the mapping model to translate data from the source to the destination model.  This method is a companion to the mergedModelFromBundles: methods;  in this case, the framework uses the version information from the models to locate the appropriate mapping model in the available bundles.  If the mapping model for the models cannot be found, this method returns nil. 

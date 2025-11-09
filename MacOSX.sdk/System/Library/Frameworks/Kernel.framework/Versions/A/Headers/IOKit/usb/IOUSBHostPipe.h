@@ -125,6 +125,10 @@
 #include <IOKit/usb/IOUSBHostIOSource.h>
 #include <IOKit/usb/IOUSBHostStream.h>
 
+#if TARGET_OS_OSX
+#include <USBDriverKit/IOUSBHostPipe.h>
+#endif
+
 class IOUSBHostInterface;
 class AppleUSBHostController;
 
@@ -140,7 +144,11 @@ class IOUSBHostPipe : public IOUSBHostIOSource
     friend class AppleUSBHostController;
     friend class AppleUSBIORequest;
 
+#if TARGET_OS_OSX
+    OSDeclareDefaultStructorsWithDispatch(IOUSBHostPipe)
+#else
     OSDeclareDefaultStructors(IOUSBHostPipe)
+#endif
 
 public:
     /*!
@@ -459,6 +467,13 @@ public:
      */
     virtual IOReturn io(IOMemoryDescriptor* dataBuffer, IOUSBHostIsochronousFrame* frameList, uint32_t frameListCount, uint64_t firstFrameNumber = 0, IOUSBHostIsochronousCompletion* completion = NULL);
     
+    /*!
+     * @brief       Enqueue a request on a bulk or interrupt endpoint
+     * @discussion  See IOUSBHostIOSource::io for documentation
+     * @param       completionTimeoutMs Must be 0 for interrupt endpoints.
+     */
+    virtual IOReturn io(IOMemoryDescriptor* dataBuffer, uint32_t dataBufferLength, IOUSBHostBundledCompletion* completion, uint32_t completionTimeoutMs = 0);
+    
     // Public pad slots for IO
     OSMetaClassDeclareReservedUnused(IOUSBHostPipe, 50);
     OSMetaClassDeclareReservedUnused(IOUSBHostPipe, 51);
@@ -473,6 +488,12 @@ public:
 
 protected:
     virtual IOReturn isochronousIoGated(tInternalDataTransferParameters& parameters);
+
+#if TARGET_OS_OSX
+    static void asyncIOCompletionCallback(void* owner, void* parameter, IOReturn status, uint32_t bytesTransferred);
+    static void asyncIOCompletionCallbackBundled(void *owner, uint32_t ioCompletionCount, IOMemoryDescriptor** dataBufferArray, void** parameterArray, IOReturn* statusArray, uint32_t* actualByteCountArray);
+    static void asyncIsochIOCompletionCallback(void* owner, void* parameter, IOReturn status, IOUSBHostIsochronousFrame* frameList);
+#endif
     
     // Protected pad slots for IO
     OSMetaClassDeclareReservedUnused(IOUSBHostPipe, 60);
@@ -596,6 +617,10 @@ protected:
     OSMetaClassDeclareReservedUnused(IOUSBHostPipe, 107);
     OSMetaClassDeclareReservedUnused(IOUSBHostPipe, 108);
     OSMetaClassDeclareReservedUnused(IOUSBHostPipe, 109);
+
+
+private:
+    void destroyMemoryDescriptorRing();
 
 #pragma mark Deprecated
 public:

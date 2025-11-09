@@ -23,10 +23,6 @@
 #include <HIServices/HIServices.r>
 #endif
 
-#ifndef __PRINTCORE_R__
-#include <PrintCore/PrintCore.r>
-#endif
-
 #ifndef __QD_R__
 #include <QD/QD.r>
 #endif

@@ -1,9 +1,8 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: F5C6CB56-3F50-3159-B0D4-F070FBC28CFF' ]
-platform:        macosx
-install-name:    /System/Library/PrivateFrameworks/StatsKit.framework/Versions/A/StatsKit
-objc-constraint: none
+uuids:           [ 'x86_64: 97B0C968-EE2C-369D-ABD0-D88F99519768', 'x86_64: 97B0C968-EE2C-369D-ABD0-D88F99519768' ]
+platform:        zippered
+install-name:    '/System/Library/PrivateFrameworks/StatsKit.framework/Versions/A/StatsKit'
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _COM_APPLE_STATSKIT_SKCTL, _SKCopyFixedSigningIdentifierFromSelf, 

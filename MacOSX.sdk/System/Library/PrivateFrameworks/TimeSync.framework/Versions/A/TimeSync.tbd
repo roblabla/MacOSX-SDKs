@@ -1,8 +1,8 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: B2D2B1D8-0AF2-398C-80A3-0EC2ABB3773B' ]
-platform:        macosx
-install-name:    /System/Library/PrivateFrameworks/TimeSync.framework/Versions/A/TimeSync
+uuids:           [ 'x86_64: 8D910305-9C4C-3CA6-8357-CD3509C26159', 'x86_64: 8D910305-9C4C-3CA6-8357-CD3509C26159' ]
+platform:        zippered
+install-name:    '/System/Library/PrivateFrameworks/TimeSync.framework/Versions/A/TimeSync'
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _TSASCapableKey, _TSAllowedLostResponsesExceededCounterKey, 
@@ -72,30 +72,34 @@ exports:
                        _TimeSyncClockSetAllPortRemoteSyncMessageIntervals, _TimeSyncClockSetLockStateChangeCallback, 
                        _TimeSyncClockSetMasterChangeCallback, _TimeSyncClockSetgPTPGrandmasterAndPortChangeCallback, 
                        _TimeSyncClockSetgPTPGrandmasterChangeCallback, _TimeSyncClockSetgPTPLocalPortChangeCallback, 
-                       _TimeSyncRemovegPTPServices, _TimeSyncSystemDomainClockIdentifier, 
-                       _TimeSyncgPTPManagerNotifyWhenAvailable, __TSKernelClockConvertFromDomainToMachAbsoluteTime, 
-                       __TSKernelClockConvertFromMachAbsoluteToDomainTime, __TSgPTPClockConvertFromDomainToMachAbsoluteTime, 
-                       __TSgPTPClockConvertFromMachAbsoluteToDomainTime, __Z12IOTS_add_128yy, 
-                       __Z14IOTS_uint64mulyy, __ZNK9IOTS_U128dvERKS_, __ZNK9IOTS_U128mlERKS_, 
-                       __ZmlRK9IOTS_U128y, __ZmlyRK9IOTS_U128 ]
+                       _TimeSyncPortCreateFromClock, _TimeSyncPortDisable, _TimeSyncPortDispose, 
+                       _TimeSyncPortEnable, _TimeSyncPortGetCurrentPortInfo, _TimeSyncPortOverridePortReceiveMatching, 
+                       _TimeSyncPortRestorePortReceiveMatching, _TimeSyncPortSetMACLookupTimeoutCallback, 
+                       _TimeSyncPortSetRemoteSyncMessageIntervals, _TimeSyncRemovegPTPServices, 
+                       _TimeSyncSystemDomainClockIdentifier, _TimeSyncgPTPManagerNotifyWhenAvailable, 
+                       __TSKernelClockConvertFromDomainToMachAbsoluteTime, __TSKernelClockConvertFromMachAbsoluteToDomainTime, 
+                       __TSgPTPClockConvertFromDomainToMachAbsoluteTime, __TSgPTPClockConvertFromMachAbsoluteToDomainTime, 
+                       __Z12IOTS_add_128yy, __Z14IOTS_uint64mulyy, __ZNK9IOTS_U128dvERKS_, 
+                       __ZNK9IOTS_U128mlERKS_, __ZmlRK9IOTS_U128y, __ZmlyRK9IOTS_U128 ]
     objc-classes:    [ TSADEVValue, TSAllanDeviationAnalysis, TSAudioTimeErrorCalculator, 
                        TSAudioTimeErrorCorrelator, TSAudioTimeErrorCorrelatorPostUpsampler, 
                        TSAudioTimeErrorCorrelatorQuick, TSAudioTimeErrorCorrelatorResampler, 
                        TSAudioTimeErrorValue, TSBonjourAdvertise, TSBonjourBrowser, 
                        TSBonjourIPv4Address, TSBonjourIPv6Address, TSBonjourInterface, 
-                       TSBonjourNode, TSClock, TSClockManager, TSFrequencyAnalysis, 
-                       TSInterface, TSIntervalFilter, TSIntervalTimeLineFilter, TSKernelClock, 
-                       TSMADEVValue, TSMTIEMask, TSMTIEMaskElement, TSMTIEMaskError, 
-                       TSMTIEValue, TSMachAbsoluteNanoseconds, TSMaximumTimeIntervalErrorAnalysis, 
-                       TSModifiedAllanDeviationAnalysis, TSRMSTIEValue, TSRootMeanSquaredTimeIntervalErrorAnalysis, 
-                       TSTDEVValue, TSTimeDeviationAnalysis, TSTimeErrorAnalysis, 
-                       TSTimeErrorSequence, TSTimeErrorValue, TSTimeLineFilter, TSUserFilteredClock, 
-                       TSgPTPClock, TSgPTPEthernetPort, TSgPTPFDEtEPort, TSgPTPFDPtPPort, 
-                       TSgPTPMachPort, TSgPTPManager, TSgPTPNetworkPort, TSgPTPPort, 
-                       TSgPTPPortStatistics, TSgPTPTime, TSgPTPUnicastLinkLayerEtEPort, 
-                       TSgPTPUnicastLinkLayerPtPPort, TSgPTPUnicastUDPv4EtEPort, 
-                       TSgPTPUnicastUDPv4PtPPort, TSgPTPUnicastUDPv6EtEPort, TSgPTPUnicastUDPv6PtPPort, 
-                       __TSKernelClockNotification, __TSgPTPPortNotification ]
+                       TSBonjourNode, TSClock, TSClockInterface, TSClockManager, 
+                       TSClockPulser, TSFrequencyAnalysis, TSGPSTime, TSIntervalFilter, 
+                       TSIntervalTimeLineFilter, TSKernelClock, TSMADEVValue, TSMTIEMask, 
+                       TSMTIEMaskElement, TSMTIEMaskError, TSMTIEValue, TSMachAbsoluteNanoseconds, 
+                       TSMaximumTimeIntervalErrorAnalysis, TSModifiedAllanDeviationAnalysis, 
+                       TSPortInterface, TSRMSTIEValue, TSRootMeanSquaredTimeIntervalErrorAnalysis, 
+                       TSTAIUTCValue, TSTDEVValue, TSTime, TSTimeConverter, TSTimeDeviationAnalysis, 
+                       TSTimeErrorAnalysis, TSTimeErrorSequence, TSTimeErrorValue, 
+                       TSTimeLineFilter, TSUserFilteredClock, TSgPTPClock, TSgPTPEthernetPort, 
+                       TSgPTPFDEtEPort, TSgPTPFDPtPPort, TSgPTPMachPort, TSgPTPManager, 
+                       TSgPTPNetworkPort, TSgPTPPort, TSgPTPPortStatistics, TSgPTPTime, 
+                       TSgPTPUnicastLinkLayerEtEPort, TSgPTPUnicastLinkLayerPtPPort, 
+                       TSgPTPUnicastUDPv4EtEPort, TSgPTPUnicastUDPv4PtPPort, TSgPTPUnicastUDPv6EtEPort, 
+                       TSgPTPUnicastUDPv6PtPPort, __TSKernelClockNotification, __TSgPTPPortNotification ]
     objc-ivars:      [ TSAudioTimeErrorCorrelator._maxCorrelationLength, TSAudioTimeErrorCorrelator._samplingRate, 
                        TSAudioTimeErrorCorrelator._upscaleFactor, TSAudioTimeErrorCorrelatorResampler._channelABuffer, 
                        TSAudioTimeErrorCorrelatorResampler._channelBBuffer, TSAudioTimeErrorCorrelatorResampler._correlationBuffer, 

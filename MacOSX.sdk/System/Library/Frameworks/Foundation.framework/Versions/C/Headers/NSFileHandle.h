@@ -1,5 +1,5 @@
 /*	NSFileHandle.h
-	Copyright (c) 1995-2018, Apple Inc. All rights reserved.
+	Copyright (c) 1995-2019, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -17,21 +17,35 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (readonly, copy) NSData *availableData;
 
-- (NSData *)readDataToEndOfFile;
-- (NSData *)readDataOfLength:(NSUInteger)length;
-
-- (void)writeData:(NSData *)data;
-
-@property (readonly) unsigned long long offsetInFile;
-- (unsigned long long)seekToEndOfFile;
-- (void)seekToFileOffset:(unsigned long long)offset;
-
-- (void)truncateFileAtOffset:(unsigned long long)offset;
-- (void)synchronizeFile;
-- (void)closeFile;
-
 - (instancetype)initWithFileDescriptor:(int)fd closeOnDealloc:(BOOL)closeopt NS_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(NSCoder *)coder NS_DESIGNATED_INITIALIZER;
+
+- (nullable NSData *)readDataToEndOfFileAndReturnError:(out NSError **)error
+    API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0)) NS_REFINED_FOR_SWIFT;
+
+- (nullable NSData *)readDataUpToLength:(NSUInteger)length error:(out NSError **)error
+    API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0)) NS_REFINED_FOR_SWIFT;
+
+- (BOOL)writeData:(NSData *)data error:(out NSError **)error
+    API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0)) NS_REFINED_FOR_SWIFT;
+
+- (BOOL)getOffset:(out unsigned long long *)offsetInFile error:(out NSError **)error
+    API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0)) NS_REFINED_FOR_SWIFT;
+
+- (BOOL)seekToEndReturningOffset:(out unsigned long long *_Nullable)offsetInFile error:(out NSError **)error
+    API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0)) NS_REFINED_FOR_SWIFT;
+
+- (BOOL)seekToOffset:(unsigned long long)offset error:(out NSError **)error
+    API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0));
+
+- (BOOL)truncateAtOffset:(unsigned long long)offset error:(out NSError **)error
+    API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0));
+
+- (BOOL)synchronizeAndReturnError:(out NSError **)error
+    API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0));
+
+- (BOOL)closeAndReturnError:(out NSError **)error
+    API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0));
 
 @end
 
@@ -89,6 +103,62 @@ FOUNDATION_EXPORT NSString * const NSFileHandleNotificationMonitorModes API_DEPR
 - (instancetype)initWithFileDescriptor:(int)fd;
 
 @property (readonly) int fileDescriptor;
+
+@end
+
+@interface NSFileHandle (/* Deprecations */)
+
+/* The API below may throw exceptions and will be deprecated in a future version of the OS.
+ Use their replacements instead. */
+
+- (NSData *)readDataToEndOfFile
+    API_DEPRECATED_WITH_REPLACEMENT("readDataToEndOfFileAndReturnError:",
+                                    macos(10.0, API_TO_BE_DEPRECATED), ios(2.0, API_TO_BE_DEPRECATED),
+                                    watchos(2.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED));
+
+- (NSData *)readDataOfLength:(NSUInteger)length
+    API_DEPRECATED_WITH_REPLACEMENT("readDataUpToLength:error:",
+                                    macos(10.0, API_TO_BE_DEPRECATED), ios(2.0, API_TO_BE_DEPRECATED),
+                                    watchos(2.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED));
+
+
+- (void)writeData:(NSData *)data
+    API_DEPRECATED_WITH_REPLACEMENT("writeData:error:",
+                                    macos(10.0, API_TO_BE_DEPRECATED), ios(2.0, API_TO_BE_DEPRECATED),
+                                    watchos(2.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED));
+
+
+@property (readonly) unsigned long long offsetInFile
+    API_DEPRECATED_WITH_REPLACEMENT("getOffset:error:",
+                                    macos(10.0, API_TO_BE_DEPRECATED), ios(2.0, API_TO_BE_DEPRECATED),
+                                    watchos(2.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED));
+
+- (unsigned long long)seekToEndOfFile
+    API_DEPRECATED_WITH_REPLACEMENT("seekToEndReturningOffset:error:",
+                                    macos(10.0, API_TO_BE_DEPRECATED), ios(2.0, API_TO_BE_DEPRECATED),
+                                    watchos(2.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED));
+
+- (void)seekToFileOffset:(unsigned long long)offset
+    API_DEPRECATED_WITH_REPLACEMENT("seekToOffset:error:",
+                                    macos(10.0, API_TO_BE_DEPRECATED), ios(2.0, API_TO_BE_DEPRECATED),
+                                    watchos(2.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED));
+
+
+- (void)truncateFileAtOffset:(unsigned long long)offset
+    API_DEPRECATED_WITH_REPLACEMENT("truncateAtOffset:error:",
+                                    macos(10.0, API_TO_BE_DEPRECATED), ios(2.0, API_TO_BE_DEPRECATED),
+                                    watchos(2.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED));
+
+- (void)synchronizeFile
+    API_DEPRECATED_WITH_REPLACEMENT("synchronizeAndReturnError:",
+                                    macos(10.0, API_TO_BE_DEPRECATED), ios(2.0, API_TO_BE_DEPRECATED),
+                                    watchos(2.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED));
+
+- (void)closeFile
+    API_DEPRECATED_WITH_REPLACEMENT("closeAndReturnError:",
+                                    macos(10.0, API_TO_BE_DEPRECATED), ios(2.0, API_TO_BE_DEPRECATED),
+                                    watchos(2.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED));
+
 
 @end
 

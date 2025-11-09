@@ -19,7 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
  @discussion
     Constants indicating the type of an AVMetadataObject.
  */
-typedef NSString * AVMetadataObjectType NS_STRING_ENUM API_AVAILABLE(macos(10.10), ios(6.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED;
+typedef NSString * AVMetadataObjectType NS_STRING_ENUM API_AVAILABLE(macos(10.10), ios(6.0)) API_UNAVAILABLE(tvos, watchos);
 
 
 #pragma mark - AVMetadataObject
@@ -36,7 +36,7 @@ typedef NSString * AVMetadataObjectType NS_STRING_ENUM API_AVAILABLE(macos(10.10
  
     The concrete AVMetadataFaceObject is used by AVCaptureMetadataOutput for face detection.
  */
-API_AVAILABLE(macos(10.10), ios(6.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED
+API_AVAILABLE(macos(10.10), ios(6.0)) API_UNAVAILABLE(tvos, watchos)
 @interface AVMetadataObject : NSObject
 {
 @private
@@ -87,6 +87,153 @@ AV_INIT_UNAVAILABLE
 
 @end
 
+#pragma mark - AVMetadataBodyObject
+
+/*!
+ @class AVMetadataBodyObject
+ @abstract
+    AVMetadataBodyObject is an abstract class that defines an interface for a body metadata object used by AVFoundation.
+
+ @discussion
+    AVMetadataBodyObject represents a single detected body in a picture. It is the base object used to represent bodies, for example AVMetadataHumanBodyObject, AVMetadataCatBodyObject, AVMetadataDogBodyObject.
+
+ */
+API_AVAILABLE(macos(10.15), ios(13.0)) API_UNAVAILABLE(tvos, watchos)
+@interface AVMetadataBodyObject : AVMetadataObject <NSCopying>
+
+/*!
+ @property bodyID
+ @abstract
+    A unique number associated with the receiver.
+
+ @discussion
+    The value of this property is an NSInteger indicating the unique identifier of this body type (Human, Dog, Cat) in the picture. When a new body enters the picture, it is assigned a new unique identifier. bodyIDs are not re-used as bodies leave the picture and new ones enter. Bodies that leave the picture then re-enter are assigned a new bodyID.
+ */
+@property(readonly) NSInteger bodyID;
+
+@end
+
+
+#pragma mark - AVMetadataHumanBodyObject
+
+/*!
+ @constant AVMetadataObjectTypeHumanBody
+ @abstract
+    An identifier for an instance of AVMetadataHumanBodyObject.
+
+ @discussion
+    AVMetadataHumanBodyObject objects return this constant as their type.
+ */
+AVF_EXPORT AVMetadataObjectType const AVMetadataObjectTypeHumanBody API_AVAILABLE(macos(10.15), ios(13.0)) API_UNAVAILABLE(tvos, watchos);
+
+/*!
+ @class AVMetadataHumanBodyObject
+ @abstract
+    AVMetadataHumanBodyObject is a concrete subclass of AVMetadataBodyObject defining a detected human body.
+
+ @discussion
+    AVMetadataHumanBodyObject represents a single detected human body in a picture. It is an immutable object describing the various features found in the body.
+
+    On supported platforms, AVCaptureMetadataOutput outputs arrays of detected human body objects. See AVCaptureOutput.h.
+ */
+API_AVAILABLE(macos(10.15), ios(13.0)) API_UNAVAILABLE(tvos, watchos)
+@interface AVMetadataHumanBodyObject : AVMetadataBodyObject <NSCopying>
+
+@end
+
+
+#pragma mark - AVMetadataCatBodyObject
+
+/*!
+ @constant AVMetadataObjectTypeCatBody
+ @abstract
+    An identifier for an instance of AVMetadataCatBodyObject.
+
+ @discussion
+    AVMetadataCatBodyObject objects return this constant as their type.
+ */
+AVF_EXPORT AVMetadataObjectType const AVMetadataObjectTypeCatBody API_AVAILABLE(macos(10.15), ios(13.0)) API_UNAVAILABLE(tvos, watchos);
+
+/*!
+ @class AVMetadataCatBodyObject
+ @abstract
+    AVMetadataCatBodyObject is a concrete subclass of AVMetadataBodyObject defining a detected cat body.
+
+ @discussion
+    AVMetadataCatBodyObject represents a single detected cat body in a picture. It is an immutable object describing the various features found in the body.
+
+    On supported platforms, AVCaptureMetadataOutput outputs arrays of detected cat body objects. See AVCaptureOutput.h.
+ */
+API_AVAILABLE(macos(10.15), ios(13.0)) API_UNAVAILABLE(tvos, watchos)
+@interface AVMetadataCatBodyObject : AVMetadataBodyObject <NSCopying>
+
+@end
+
+
+#pragma mark - AVMetadataDogBodyObject
+
+/*!
+ @constant AVMetadataObjectTypeDogBody
+ @abstract
+    An identifier for an instance of AVMetadataDogBodyObject.
+
+ @discussion
+    AVMetadataDogBodyObject objects return this constant as their type.
+ */
+AVF_EXPORT AVMetadataObjectType const AVMetadataObjectTypeDogBody API_AVAILABLE(macos(10.15), ios(13.0)) API_UNAVAILABLE(tvos, watchos);
+
+/*!
+ @class AVMetadataDogBodyObject
+ @abstract
+    AVMetadataDogBodyObject is a concrete subclass of AVMetadataBodyObject defining a detected dog body.
+
+ @discussion
+    AVMetadataDogBodyObject represents a single detected dog body in a picture. It is an immutable object describing the various features found in the body.
+
+    On supported platforms, AVCaptureMetadataOutput outputs arrays of detected dog body objects. See AVCaptureOutput.h.
+ */
+API_AVAILABLE(macos(10.15), ios(13.0)) API_UNAVAILABLE(tvos, watchos)
+@interface AVMetadataDogBodyObject : AVMetadataBodyObject <NSCopying>
+
+@end
+
+
+#pragma mark - AVMetadataSalientObject
+
+/*!
+ @constant AVMetadataObjectTypeSalientObject
+ @abstract
+    An identifier for an instance of AVMetadataSalientObject.
+
+ @discussion
+    AVMetadataSalientObject objects return this constant as their type.
+ */
+AVF_EXPORT AVMetadataObjectType const AVMetadataObjectTypeSalientObject API_AVAILABLE(macos(10.15), ios(13.0)) API_UNAVAILABLE(tvos, watchos);
+
+/*!
+ @class AVMetadataSalientObject
+ @abstract
+    AVMetadataSalientObject is a concrete subclass of AVMetadataObject defining the features of a salient object.
+
+ @discussion
+    AVMetadataSalientObject represents a single detected salient area in a picture. It is an immutable object describing the salient object.
+
+    On supported platforms, AVCaptureMetadataOutput outputs arrays of detected salient objects. See AVCaptureOutput.h.
+ */
+API_AVAILABLE(macos(10.15), ios(13.0)) API_UNAVAILABLE(tvos, watchos)
+@interface AVMetadataSalientObject : AVMetadataObject <NSCopying>
+
+/*!
+ @property objectID
+ @abstract
+    A unique number associated with the receiver.
+
+ @discussion
+    The value of this property is an NSInteger indicating the unique identifier of this object in the picture. When a new object enters the picture, it is assigned a new unique identifier. objectIDs are not re-used as object leave the picture and new ones enter. Objects that leave the picture then re-enter are assigned a new objectID.
+ */
+@property(readonly) NSInteger objectID;
+
+@end
 
 /*!
  @constant AVMetadataObjectTypeFace
@@ -96,7 +243,7 @@ AV_INIT_UNAVAILABLE
  @discussion
     AVMetadataFaceObject objects return this constant as their type.
  */
-AVF_EXPORT AVMetadataObjectType const AVMetadataObjectTypeFace API_AVAILABLE(macos(10.10), ios(6.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED;
+AVF_EXPORT AVMetadataObjectType const AVMetadataObjectTypeFace API_AVAILABLE(macos(10.10), ios(6.0)) API_UNAVAILABLE(tvos, watchos);
 
 
 #pragma mark - AVMetadataFaceObject
@@ -113,7 +260,7 @@ AVF_EXPORT AVMetadataObjectType const AVMetadataObjectTypeFace API_AVAILABLE(mac
  
     On supported platforms, AVCaptureMetadataOutput outputs arrays of detected face objects. See AVCaptureOutput.h.
  */
-API_AVAILABLE(macos(10.10), ios(6.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED
+API_AVAILABLE(macos(10.10), ios(6.0)) API_UNAVAILABLE(tvos, watchos) 
 @interface AVMetadataFaceObject : AVMetadataObject <NSCopying>
 {
 @private
@@ -175,7 +322,7 @@ API_AVAILABLE(macos(10.10), ios(6.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED
  @discussion
     AVMetadataMachineReadableCodeObject objects generated from UPC-E codes return this constant as their type.
  */
-AVF_EXPORT AVMetadataObjectType const AVMetadataObjectTypeUPCECode API_AVAILABLE(ios(7.0)) API_UNAVAILABLE(macos) __WATCHOS_PROHIBITED __TVOS_PROHIBITED;
+AVF_EXPORT AVMetadataObjectType const AVMetadataObjectTypeUPCECode API_AVAILABLE(macos(10.15), ios(7.0)) API_UNAVAILABLE(tvos, watchos);
 
 /*!
  @constant AVMetadataObjectTypeCode39Code
@@ -185,7 +332,7 @@ AVF_EXPORT AVMetadataObjectType const AVMetadataObjectTypeUPCECode API_AVAILABLE
  @discussion
     AVMetadataMachineReadableCodeObject objects generated from Code 39 codes return this constant as their type.
  */
-AVF_EXPORT AVMetadataObjectType const AVMetadataObjectTypeCode39Code API_AVAILABLE(ios(7.0)) API_UNAVAILABLE(macos) __WATCHOS_PROHIBITED __TVOS_PROHIBITED;
+AVF_EXPORT AVMetadataObjectType const AVMetadataObjectTypeCode39Code API_AVAILABLE(macos(10.15), ios(7.0)) API_UNAVAILABLE(tvos, watchos);
 
 /*!
  @constant AVMetadataObjectTypeCode39Mod43Code
@@ -195,7 +342,7 @@ AVF_EXPORT AVMetadataObjectType const AVMetadataObjectTypeCode39Code API_AVAILAB
  @discussion
     AVMetadataMachineReadableCodeObject objects generated from Code 39 mod 43 codes return this constant as their type.
  */
-AVF_EXPORT AVMetadataObjectType const AVMetadataObjectTypeCode39Mod43Code API_AVAILABLE(ios(7.0)) API_UNAVAILABLE(macos) __WATCHOS_PROHIBITED __TVOS_PROHIBITED;
+AVF_EXPORT AVMetadataObjectType const AVMetadataObjectTypeCode39Mod43Code API_AVAILABLE(macos(10.15), ios(7.0)) API_UNAVAILABLE(tvos, watchos);
 
 /*!
  @constant AVMetadataObjectTypeEAN13Code
@@ -205,7 +352,7 @@ AVF_EXPORT AVMetadataObjectType const AVMetadataObjectTypeCode39Mod43Code API_AV
  @discussion
     AVMetadataMachineReadableCodeObject objects generated from EAN-13 (including UPC-A) codes return this constant as their type.
  */
-AVF_EXPORT AVMetadataObjectType const AVMetadataObjectTypeEAN13Code API_AVAILABLE(ios(7.0)) API_UNAVAILABLE(macos) __WATCHOS_PROHIBITED __TVOS_PROHIBITED;
+AVF_EXPORT AVMetadataObjectType const AVMetadataObjectTypeEAN13Code API_AVAILABLE(macos(10.15), ios(7.0)) API_UNAVAILABLE(tvos, watchos);
 
 /*!
  @constant AVMetadataObjectTypeEAN8Code
@@ -215,7 +362,7 @@ AVF_EXPORT AVMetadataObjectType const AVMetadataObjectTypeEAN13Code API_AVAILABL
  @discussion
     AVMetadataMachineReadableCodeObject objects generated from EAN-8 codes return this constant as their type.
  */
-AVF_EXPORT AVMetadataObjectType const AVMetadataObjectTypeEAN8Code API_AVAILABLE(ios(7.0)) API_UNAVAILABLE(macos) __WATCHOS_PROHIBITED __TVOS_PROHIBITED;
+AVF_EXPORT AVMetadataObjectType const AVMetadataObjectTypeEAN8Code API_AVAILABLE(macos(10.15), ios(7.0)) API_UNAVAILABLE(tvos, watchos);
 
 /*!
  @constant AVMetadataObjectTypeCode93Code
@@ -225,7 +372,7 @@ AVF_EXPORT AVMetadataObjectType const AVMetadataObjectTypeEAN8Code API_AVAILABLE
  @discussion
     AVMetadataMachineReadableCodeObject objects generated from Code 93 codes return this constant as their type.
  */
-AVF_EXPORT AVMetadataObjectType const AVMetadataObjectTypeCode93Code API_AVAILABLE(ios(7.0)) API_UNAVAILABLE(macos) __WATCHOS_PROHIBITED __TVOS_PROHIBITED;
+AVF_EXPORT AVMetadataObjectType const AVMetadataObjectTypeCode93Code API_AVAILABLE(macos(10.15), ios(7.0)) API_UNAVAILABLE(tvos, watchos);
 
 /*!
  @constant AVMetadataObjectTypeCode128Code
@@ -235,7 +382,7 @@ AVF_EXPORT AVMetadataObjectType const AVMetadataObjectTypeCode93Code API_AVAILAB
  @discussion
     AVMetadataMachineReadableCodeObject objects generated from Code 128 codes return this constant as their type.
  */
-AVF_EXPORT AVMetadataObjectType const AVMetadataObjectTypeCode128Code API_AVAILABLE(ios(7.0)) API_UNAVAILABLE(macos) __WATCHOS_PROHIBITED __TVOS_PROHIBITED;
+AVF_EXPORT AVMetadataObjectType const AVMetadataObjectTypeCode128Code API_AVAILABLE(macos(10.15), ios(7.0)) API_UNAVAILABLE(tvos, watchos);
 
 /*!
  @constant AVMetadataObjectTypePDF417Code
@@ -245,7 +392,7 @@ AVF_EXPORT AVMetadataObjectType const AVMetadataObjectTypeCode128Code API_AVAILA
  @discussion
     AVMetadataMachineReadableCodeObject objects generated from PDF417 codes return this constant as their type.
  */
-AVF_EXPORT AVMetadataObjectType const AVMetadataObjectTypePDF417Code API_AVAILABLE(ios(7.0)) API_UNAVAILABLE(macos) __WATCHOS_PROHIBITED __TVOS_PROHIBITED;
+AVF_EXPORT AVMetadataObjectType const AVMetadataObjectTypePDF417Code API_AVAILABLE(macos(10.15), ios(7.0)) API_UNAVAILABLE(tvos, watchos);
 
 /*!
  @constant AVMetadataObjectTypeQRCode
@@ -255,7 +402,7 @@ AVF_EXPORT AVMetadataObjectType const AVMetadataObjectTypePDF417Code API_AVAILAB
  @discussion
     AVMetadataMachineReadableCodeObject objects generated from QR codes return this constant as their type.
  */
-AVF_EXPORT AVMetadataObjectType const AVMetadataObjectTypeQRCode API_AVAILABLE(ios(7.0)) API_UNAVAILABLE(macos) __WATCHOS_PROHIBITED __TVOS_PROHIBITED;
+AVF_EXPORT AVMetadataObjectType const AVMetadataObjectTypeQRCode API_AVAILABLE(macos(10.15), ios(7.0)) API_UNAVAILABLE(tvos, watchos);
 
 /*!
  @constant AVMetadataObjectTypeAztecCode
@@ -265,7 +412,7 @@ AVF_EXPORT AVMetadataObjectType const AVMetadataObjectTypeQRCode API_AVAILABLE(i
  @discussion
     AVMetadataMachineReadableCodeObject objects generated from Aztec codes return this constant as their type.
  */
-AVF_EXPORT AVMetadataObjectType const AVMetadataObjectTypeAztecCode API_AVAILABLE(ios(7.0)) API_UNAVAILABLE(macos) __WATCHOS_PROHIBITED __TVOS_PROHIBITED;
+AVF_EXPORT AVMetadataObjectType const AVMetadataObjectTypeAztecCode API_AVAILABLE(macos(10.15), ios(7.0)) API_UNAVAILABLE(tvos, watchos);
 
 /*!
  @constant AVMetadataObjectTypeInterleaved2of5Code
@@ -275,7 +422,7 @@ AVF_EXPORT AVMetadataObjectType const AVMetadataObjectTypeAztecCode API_AVAILABL
  @discussion
     AVMetadataMachineReadableCodeObject objects generated from Interleaved 2 of 5 codes return this constant as their type.
  */
-AVF_EXPORT AVMetadataObjectType const AVMetadataObjectTypeInterleaved2of5Code API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(macos) __WATCHOS_PROHIBITED __TVOS_PROHIBITED;
+AVF_EXPORT AVMetadataObjectType const AVMetadataObjectTypeInterleaved2of5Code API_AVAILABLE(macos(10.15), ios(8.0)) API_UNAVAILABLE(tvos, watchos);
 
 /*!
  @constant AVMetadataObjectTypeITF14Code
@@ -285,7 +432,7 @@ AVF_EXPORT AVMetadataObjectType const AVMetadataObjectTypeInterleaved2of5Code AP
  @discussion
     AVMetadataMachineReadableCodeObject objects generated from ITF14 codes return this constant as their type.
  */
-AVF_EXPORT AVMetadataObjectType const AVMetadataObjectTypeITF14Code API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(macos) __WATCHOS_PROHIBITED __TVOS_PROHIBITED;
+AVF_EXPORT AVMetadataObjectType const AVMetadataObjectTypeITF14Code API_AVAILABLE(macos(10.15), ios(8.0)) API_UNAVAILABLE(tvos, watchos);
 
 /*!
  @constant AVMetadataObjectTypeDataMatrixCode
@@ -295,7 +442,7 @@ AVF_EXPORT AVMetadataObjectType const AVMetadataObjectTypeITF14Code API_AVAILABL
  @discussion
     AVMetadataMachineReadableCodeObject objects generated from DataMatrix codes return this constant as their type.
  */
-AVF_EXPORT AVMetadataObjectType const AVMetadataObjectTypeDataMatrixCode API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(macos) __WATCHOS_PROHIBITED __TVOS_PROHIBITED;
+AVF_EXPORT AVMetadataObjectType const AVMetadataObjectTypeDataMatrixCode API_AVAILABLE(macos(10.15), ios(8.0)) API_UNAVAILABLE(tvos, watchos);
 
 
 #pragma mark - AVMetadataMachineReadableCodeObject
@@ -312,7 +459,7 @@ AVF_EXPORT AVMetadataObjectType const AVMetadataObjectTypeDataMatrixCode API_AVA
  
     On supported platforms, AVCaptureMetadataOutput outputs arrays of detected machine readable code objects. See AVCaptureMetadataOutput.h.
  */
-API_AVAILABLE(ios(7.0)) API_UNAVAILABLE(macos) __WATCHOS_PROHIBITED __TVOS_PROHIBITED
+API_AVAILABLE(macos(10.15), ios(7.0)) API_UNAVAILABLE(tvos, watchos)
 @interface AVMetadataMachineReadableCodeObject : AVMetadataObject
 {
 @private
@@ -354,7 +501,7 @@ API_AVAILABLE(ios(7.0)) API_UNAVAILABLE(macos) __WATCHOS_PROHIBITED __TVOS_PROHI
  @discussion
     The value may be nil if an abstract representation of a machine readable code object is not defined for the code type or could not be detected.
  */
-@property(readonly, nullable) CIBarcodeDescriptor *descriptor API_AVAILABLE(ios(11.0));
+@property(readonly, nullable) CIBarcodeDescriptor *descriptor API_AVAILABLE(macos(10.15), ios(11.0)) API_UNAVAILABLE(tvos, watchos);
 
 @end
 

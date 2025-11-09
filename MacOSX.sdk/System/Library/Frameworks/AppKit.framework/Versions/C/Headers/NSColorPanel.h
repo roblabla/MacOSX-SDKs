@@ -1,7 +1,7 @@
 /*
 	NSColorPanel.h
 	Application Kit
-	Copyright (c) 1994-2018, Apple Inc.
+	Copyright (c) 1994-2019, Apple Inc.
 	All rights reserved.
 */
 
@@ -9,12 +9,13 @@
 #import <AppKit/NSApplication.h>
 
 NS_ASSUME_NONNULL_BEGIN
+API_UNAVAILABLE_BEGIN(ios)
 
 @class NSColorList, NSMutableArray;
 
 typedef NS_ENUM(NSInteger, NSColorPanelMode) {
     /* If the color panel is not displaying a mode, the NSColorPanelModeNone will be returned */
-    NSColorPanelModeNone NS_ENUM_AVAILABLE_MAC(10_5) = -1,
+    NSColorPanelModeNone API_AVAILABLE(macos(10.5)) = -1,
     NSColorPanelModeGray            = 0,
     NSColorPanelModeRGB             = 1,
     NSColorPanelModeCMYK            = 2,
@@ -40,43 +41,6 @@ typedef NS_OPTIONS(NSUInteger, NSColorPanelOptions) {
     
 
 @interface NSColorPanel : NSPanel
-{
-    /*All instance variables are private*/
-    id			_colorSwatch APPKIT_IVAR;
-    id                  _accessoryContainerView APPKIT_IVAR;
-    id			_colorWell APPKIT_IVAR;
-    NSMutableArray     *_pickersWithLoadedViews APPKIT_IVAR;
-    id			_magnifyButton APPKIT_IVAR;
-    id			_middleView APPKIT_IVAR;
-    id			_opacitySlider APPKIT_IVAR;
-    id			_opacityText APPKIT_IVAR;
-    id			_opacityView APPKIT_IVAR;
-    id                  _modalButtons APPKIT_IVAR;
-    id			_pickerView APPKIT_IVAR;
-    id			_customViewsList APPKIT_IVAR;
-    id			_customPickerList APPKIT_IVAR;
-    id			_currViewObject APPKIT_IVAR;
-    id			_bottomConstraint APPKIT_IVAR;
-    id			_target APPKIT_IVAR;
-    id			_accessoryView APPKIT_IVAR;
-    SEL			_action APPKIT_IVAR;
-    NSSize		_minColorPanelSize APPKIT_IVAR;
-    NSSize		_maxColorPanelSize APPKIT_IVAR;
-    id                  _accessoryContainerViewHeight APPKIT_IVAR;
-    id                  _opacityViewHeight APPKIT_IVAR;
-    id                  _reserved1 APPKIT_IVAR;
-    NSUInteger          _colorSettingSuppressionCount APPKIT_IVAR;
-    id			_resizeDimple APPKIT_IVAR;
-    BOOL                _reserved3 APPKIT_IVAR;
-    BOOL		_reserved4 APPKIT_IVAR;
-    BOOL		_handlingOpacityMoveAction APPKIT_IVAR;
-    BOOL		_ignoreConstraints APPKIT_IVAR;
-    BOOL		_continuous APPKIT_IVAR;
-    BOOL	        _reserved5 APPKIT_IVAR;
-    BOOL		_stillInitializing APPKIT_IVAR;
-    BOOL                _hasModalAppearance APPKIT_IVAR;
-    id			_opacityTextController APPKIT_IVAR;
-}
 
 @property (class, readonly, strong) NSColorPanel *sharedColorPanel;
 @property (class, readonly) BOOL sharedColorPanelExists;
@@ -106,7 +70,7 @@ typedef NS_OPTIONS(NSUInteger, NSColorPanelOptions) {
 
 #if __swift__ < 40200
 @interface NSObject(NSColorPanelResponderMethod)
-- (void)changeColor:(nullable id)sender NS_DEPRECATED_MAC(10_0, API_TO_BE_DEPRECATED, "This is now a method of the NSColorChanging protocol.");
+- (void)changeColor:(nullable id)sender API_DEPRECATED("This is now a method of the NSColorChanging protocol.", macos(10.0,API_TO_BE_DEPRECATED));
 @end
 #endif
 
@@ -114,15 +78,16 @@ typedef NS_OPTIONS(NSUInteger, NSColorPanelOptions) {
 APPKIT_EXTERN NSNotificationName NSColorPanelColorDidChangeNotification;
 
 
-static const NSColorPanelMode NSNoModeColorPanel NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSColorPanelModeNone", 10_5, 10_14) = NSColorPanelModeNone;
-static const NSColorPanelMode NSGrayModeColorPanel NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSColorPanelModeGray", 10_0, 10_14) = NSColorPanelModeGray;
-static const NSColorPanelMode NSRGBModeColorPanel NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSColorPanelModeRGB", 10_0, 10_14) = NSColorPanelModeRGB;
-static const NSColorPanelMode NSCMYKModeColorPanel NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSColorPanelModeCMYK", 10_0, 10_14) = NSColorPanelModeCMYK;
-static const NSColorPanelMode NSHSBModeColorPanel NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSColorPanelModeHSB", 10_0, 10_14) = NSColorPanelModeHSB;
-static const NSColorPanelMode NSCustomPaletteModeColorPanel NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSColorPanelModeCustomPalette", 10_0, 10_14) = NSColorPanelModeCustomPalette;
-static const NSColorPanelMode NSColorListModeColorPanel NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSColorPanelModeColorList", 10_0, 10_14) = NSColorPanelModeColorList;
-static const NSColorPanelMode NSWheelModeColorPanel NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSColorPanelModeWheel", 10_0, 10_14) = NSColorPanelModeWheel;
-static const NSColorPanelMode NSCrayonModeColorPanel NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSColorPanelModeCrayon", 10_0, 10_14) = NSColorPanelModeCrayon;
+static const NSColorPanelMode NSNoModeColorPanel API_DEPRECATED_WITH_REPLACEMENT("NSColorPanelModeNone", macos(10.5,10.14)) = NSColorPanelModeNone;
+static const NSColorPanelMode NSGrayModeColorPanel API_DEPRECATED_WITH_REPLACEMENT("NSColorPanelModeGray", macos(10.0,10.14)) = NSColorPanelModeGray;
+static const NSColorPanelMode NSRGBModeColorPanel API_DEPRECATED_WITH_REPLACEMENT("NSColorPanelModeRGB", macos(10.0,10.14)) = NSColorPanelModeRGB;
+static const NSColorPanelMode NSCMYKModeColorPanel API_DEPRECATED_WITH_REPLACEMENT("NSColorPanelModeCMYK", macos(10.0,10.14)) = NSColorPanelModeCMYK;
+static const NSColorPanelMode NSHSBModeColorPanel API_DEPRECATED_WITH_REPLACEMENT("NSColorPanelModeHSB", macos(10.0,10.14)) = NSColorPanelModeHSB;
+static const NSColorPanelMode NSCustomPaletteModeColorPanel API_DEPRECATED_WITH_REPLACEMENT("NSColorPanelModeCustomPalette", macos(10.0,10.14)) = NSColorPanelModeCustomPalette;
+static const NSColorPanelMode NSColorListModeColorPanel API_DEPRECATED_WITH_REPLACEMENT("NSColorPanelModeColorList", macos(10.0,10.14)) = NSColorPanelModeColorList;
+static const NSColorPanelMode NSWheelModeColorPanel API_DEPRECATED_WITH_REPLACEMENT("NSColorPanelModeWheel", macos(10.0,10.14)) = NSColorPanelModeWheel;
+static const NSColorPanelMode NSCrayonModeColorPanel API_DEPRECATED_WITH_REPLACEMENT("NSColorPanelModeCrayon", macos(10.0,10.14)) = NSColorPanelModeCrayon;
 
+API_UNAVAILABLE_END
 NS_ASSUME_NONNULL_END
 

@@ -31,7 +31,7 @@ CK_EXTERN CKRecordFieldKey const CKShareTypeKey API_AVAILABLE(macos(10.12), ios(
  */
 
 API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0), watchos(3.0))
-@interface CKShare : CKRecord
+@interface CKShare : CKRecord <NSSecureCoding>
 
 /*! When saving a newly created CKShare, you must save the share and its rootRecord in the same CKModifyRecordsOperation batch. */
 - (instancetype)initWithRootRecord:(CKRecord *)rootRecord;

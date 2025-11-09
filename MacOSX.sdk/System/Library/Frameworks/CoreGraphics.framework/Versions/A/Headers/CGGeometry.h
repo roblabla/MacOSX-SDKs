@@ -51,7 +51,7 @@ typedef struct CG_BOXABLE CGRect CGRect;
 
 /* Rectangle edges. */
 
-typedef CF_ENUM(uint32_t, CGRectEdge) {
+typedef CF_CLOSED_ENUM(uint32_t, CGRectEdge) {
     CGRectMinXEdge, CGRectMinYEdge, CGRectMaxXEdge, CGRectMaxYEdge
 };
 
@@ -157,7 +157,7 @@ CG_EXTERN bool CGRectEqualToRect(CGRect rect1, CGRect rect2)
 /* Standardize `rect' -- i.e., convert it to an equivalent rect which has
    positive width and height. */
 
-CG_EXTERN CGRect CGRectStandardize(CGRect rect)
+CG_EXTERN CGRect CGRectStandardize(CGRect rect) __attribute__ ((warn_unused_result))
     CG_AVAILABLE_STARTING(10.0, 2.0);
 
 /* Return true if `rect' is empty (that is, if it has zero width or height),
@@ -179,28 +179,28 @@ CG_EXTERN bool CGRectIsInfinite(CGRect rect)
 /* Inset `rect' by `(dx, dy)' -- i.e., offset its origin by `(dx, dy)', and
    decrease its size by `(2*dx, 2*dy)'. */
 
-CG_EXTERN CGRect CGRectInset(CGRect rect, CGFloat dx, CGFloat dy)
+CG_EXTERN CGRect CGRectInset(CGRect rect, CGFloat dx, CGFloat dy) __attribute__ ((warn_unused_result))
     CG_AVAILABLE_STARTING(10.0, 2.0);
 
 /* Expand `rect' to the smallest rect containing it with integral origin and
    size. */
 
-CG_EXTERN CGRect CGRectIntegral(CGRect rect)
+CG_EXTERN CGRect CGRectIntegral(CGRect rect) __attribute__ ((warn_unused_result))
     CG_AVAILABLE_STARTING(10.0, 2.0);
 
 /* Return the union of `r1' and `r2'. */
 
-CG_EXTERN CGRect CGRectUnion(CGRect r1, CGRect r2)
+CG_EXTERN CGRect CGRectUnion(CGRect r1, CGRect r2) __attribute__ ((warn_unused_result))
     CG_AVAILABLE_STARTING(10.0, 2.0);
 
 /* Return the intersection of `r1' and `r2'. This may return a null rect. */
 
-CG_EXTERN CGRect CGRectIntersection(CGRect r1, CGRect r2)
+CG_EXTERN CGRect CGRectIntersection(CGRect r1, CGRect r2) __attribute__ ((warn_unused_result))
     CG_AVAILABLE_STARTING(10.0, 2.0);
 
 /* Offset `rect' by `(dx, dy)'. */
 
-CG_EXTERN CGRect CGRectOffset(CGRect rect, CGFloat dx, CGFloat dy)
+CG_EXTERN CGRect CGRectOffset(CGRect rect, CGFloat dx, CGFloat dy) __attribute__ ((warn_unused_result))
     CG_AVAILABLE_STARTING(10.0, 2.0);
 
 /* Make two new rectangles, `slice' and `remainder', by dividing `rect' with

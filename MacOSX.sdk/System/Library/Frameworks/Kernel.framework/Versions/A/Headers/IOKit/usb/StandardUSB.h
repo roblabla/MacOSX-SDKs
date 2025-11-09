@@ -36,25 +36,17 @@
 #include <IOKit/IOTypes.h>
 #include <IOKit/IOReturn.h>
 #include <libkern/OSByteOrder.h>
+#include <IOKit/usb/AppleUSBDefinitions.h>
 
-#pragma mark Platform endianness and bitmask macros
 
-#define USBToHost16 OSSwapLittleToHostInt16
-#define HostToUSB16 OSSwapHostToLittleInt16
+#define StandardUSBBit(bit)                     IOUSBBit(bit)
+#define StandardUSBBitRange(start, end)         IOUSBBitRange(start, end)
+#define StandardUSBBitRange64(start, end)       IOUSBBitRange64(start, end)
+#define StandardUSBBitRangePhase(start, end)    IOUSBBitRangePhase(start, end)
 
-#define USBToHost32 OSSwapLittleToHostInt32
-#define HostToUSB32 OSSwapHostToLittleInt32
-
-#define USBToHost64 OSSwapLittleToHostInt64
-#define HostToUSB64 OSSwapHostToLittleInt64
-
-#define StandardUSBBit(bit)                     ((uint32_t)(1) << bit)
-#define StandardUSBBitRange(start, end)         (~(((uint32_t)(1) << start) - 1) & (((uint32_t)(1) << end) | (((uint32_t)(1) << end) - 1)))
-#define StandardUSBBitRange64(start, end)       (~(((uint64_t)(1) << start) - 1) & (((uint64_t)(1) << end) | (((uint64_t)(1) << end) - 1)))
-#define StandardUSBBitRangePhase(start, end)    (start)
-
-#define kUSB30Bitrate5Gbps  ( 5 * 1000 * 1000 * 1000ULL)
-#define kUSB30Bitrate10Gbps (10 * 1000 * 1000 * 1000ULL)
+#define kUSB30Bitrate5Gbps  kIOUSB30Bitrate5Gbps
+#define kUSB30Bitrate10Gbps kIOUSB30Bitrate10Gbps
+#define kUSB32Bitrate20Gbps kIOUSB32Bitrate20Gbps
 
 #ifdef __cplusplus
 
@@ -72,23 +64,23 @@ namespace StandardUSB
      */
     enum tDescriptorType
     {
-        kDescriptorTypeDevice = 1,
-        kDescriptorTypeConfiguration = 2,
-        kDescriptorTypeString = 3,
-        kDescriptorTypeInterface = 4,
-        kDescriptorTypeEndpoint = 5,
-        kDescriptorTypeDeviceQualifier = 6,
-        kDescriptorTypeOtherSpeedConfiguration = 7,
-        kDescriptorTypeInterfacePower = 8,
-        kDescriptorTypeOTG = 9,
-        kDescriptorTypeDebug = 10,
-        kDescriptorTypeInterfaceAssociation = 11,
-        kDescriptorTypeBOS = 15,
-        kDescriptorTypeDeviceCapability = 16,
-        kDescriptorTypeHub = 41,
-        kDescriptorTypeSuperSpeedHub = 42,
-        kDescriptorTypeSuperSpeedUSBEndpointCompanion = 48,
-        kDescriptorTypeSuperSpeedPlusIsochronousEndpointCompanion = 49
+        kDescriptorTypeDevice = kIOUSBDescriptorTypeDevice,
+        kDescriptorTypeConfiguration = kIOUSBDescriptorTypeConfiguration,
+        kDescriptorTypeString = kIOUSBDescriptorTypeString,
+        kDescriptorTypeInterface = kIOUSBDescriptorTypeInterface,
+        kDescriptorTypeEndpoint = kIOUSBDescriptorTypeEndpoint,
+        kDescriptorTypeDeviceQualifier = kIOUSBDescriptorTypeDeviceQualifier,
+        kDescriptorTypeOtherSpeedConfiguration = kIOUSBDescriptorTypeOtherSpeedConfiguration,
+        kDescriptorTypeInterfacePower = kIOUSBDescriptorTypeInterfacePower,
+        kDescriptorTypeOTG = kIOUSBDescriptorTypeOTG,
+        kDescriptorTypeDebug = kIOUSBDescriptorTypeDebug,
+        kDescriptorTypeInterfaceAssociation = kIOUSBDescriptorTypeInterfaceAssociation,
+        kDescriptorTypeBOS = kIOUSBDescriptorTypeBOS,
+        kDescriptorTypeDeviceCapability = kIOUSBDescriptorTypeDeviceCapability,
+        kDescriptorTypeHub = kIOUSBDescriptorTypeHub,
+        kDescriptorTypeSuperSpeedHub = kIOUSBDescriptorTypeSuperSpeedHub,
+        kDescriptorTypeSuperSpeedUSBEndpointCompanion = kIOUSBDescriptorTypeSuperSpeedUSBEndpointCompanion,
+        kDescriptorTypeSuperSpeedPlusIsochronousEndpointCompanion = kIOUSBDescriptorTypeSuperSpeedPlusIsochronousEndpointCompanion
     };
     
     typedef enum tDescriptorType tDescriptorType;
@@ -100,28 +92,29 @@ namespace StandardUSB
      */
     enum tDescriptorSize
     {
-        kDescriptorSize = 2,
-        kDescriptorSizeDevice = 18,
-        kDescriptorSizeConfiguration = 9,
-        kDescriptorSizeInterface = 9,
-        kDescriptorSizeEndpoint = 7,
+        kDescriptorSize = kIOUSBDescriptorHeaderSize,
+        kDescriptorSizeDevice = kIOUSBDescriptorSizeDevice,
+        kDescriptorSizeConfiguration = kIOUSBDescriptorSizeConfiguration,
+        kDescriptorSizeInterface = kIOUSBDescriptorSizeInterface,
+        kDescriptorSizeEndpoint = kIOUSBDescriptorSizeEndpoint,
         kDescriptorSizeStringMinimum = kDescriptorSize,
-        kDescriptorSizeStringMaximum = 255,
-        kDescriptorSizeDeviceQualifier = 10,
-        kDescriptorSizeInterfaceAssociation = 8,
-        kDescriptorSizeBOS = 5,
-        kDescriptorSizeDeviceCapability = 3,
-        kDescriptorSizeUSB20ExtensionCapability = 7,
-        kDescriptorSizeSuperSpeedUSBDeviceCapability = 10,
-        kDescriptorSizeContainerIDCapability = 20,
-        kDescriptorSizeHubMinimum = 9,
-        kDescriptorSizeHubMaximum = 21,
-        kDescriptorSizeSuperSpeedHub = 12,
-        kDescriptorSizeSuperSpeedUSBEndpointCompanion = 6,
-        kDescriptorSizeSuperSpeedPlusIsochronousEndpointCompanion = 8,
-        kDescriptorSizeBillboardDeviceMinimum = 44,
-        kDescriptorSizeBillboardDeviceMaximum = 256,
-        kDescriptorSizePlatformECIDCapability = 28
+        kDescriptorSizeStringMaximum = kIOUSBDescriptorSizeStringMaximum,
+        kDescriptorSizeDeviceQualifier = kIOUSBDescriptorSizeDeviceQualifier,
+        kDescriptorSizeInterfaceAssociation = kIOUSBDescriptorSizeInterfaceAssociation,
+        kDescriptorSizeBOS = kIOUSBDescriptorSizeBOS,
+        kDescriptorSizeDeviceCapability = kIOUSBDescriptorSizeDeviceCapability,
+        kDescriptorSizeUSB20ExtensionCapability = kIOUSBDescriptorSizeUSB20ExtensionCapability,
+        kDescriptorSizeSuperSpeedUSBDeviceCapability = kIOUSBDescriptorSizeSuperSpeedUSBDeviceCapability,
+        kDescriptorSizeContainerIDCapability = kIOUSBDescriptorSizeContainerIDCapability,
+        kDescriptorSizeHubMinimum = kIOUSBDescriptorSizeHubMinimum,
+        kDescriptorSizeHubMaximum = kIOUSBDescriptorSizeHubMaximum,
+        kDescriptorSizeSuperSpeedHub = kIOUSBDescriptorSizeSuperSpeedHub,
+        kDescriptorSizeSuperSpeedUSBEndpointCompanion = kIOUSBDescriptorSizeSuperSpeedUSBEndpointCompanion,
+        kDescriptorSizeSuperSpeedPlusIsochronousEndpointCompanion = kIOUSBDescriptorSizeSuperSpeedPlusIsochronousEndpointCompanion,
+        kDescriptorSizeBillboardDeviceMinimum = kIOUSBDescriptorSizeBillboardDeviceMinimum,
+        kDescriptorSizeBillboardDeviceMaximum = kIOUSBDescriptorSizeBillboardDeviceMaximum,
+        kDescriptorSizePlatformECIDCapability = kIOUSBDescriptorSizePlatformECIDCapability,
+        kDescriptorSizePlatformCapability     = kIOUSBDescriptorSizePlatformCapability
     };
     
     typedef enum tDescriptorSize tDescriptorSize;
@@ -137,7 +130,7 @@ namespace StandardUSB
         uint8_t bLength;
         uint8_t bDescriptorType;
     } __attribute__((packed));
-    
+
     typedef struct Descriptor Descriptor;
     
     
@@ -166,7 +159,7 @@ namespace StandardUSB
     } __attribute__((packed));
         
     typedef struct DeviceDescriptor DeviceDescriptor;
-        
+
     
 #ifdef __cplusplus
     // USB 2.0 9.6.2: Device Qualifier
@@ -213,8 +206,8 @@ namespace StandardUSB
     
     enum
     {
-        kConfigurationDescriptorAttributeRemoteWakeCapable  = StandardUSBBit(5),
-        kConfigurationDescriptorAttributeSelfPowered        = StandardUSBBit(6)
+        kConfigurationDescriptorAttributeRemoteWakeCapable  = kIOUSBConfigurationDescriptorAttributeRemoteWakeCapable,
+        kConfigurationDescriptorAttributeSelfPowered        = kIOUSBConfigurationDescriptorAttributeSelfPowered
     };
     
         
@@ -260,46 +253,48 @@ namespace StandardUSB
     
     enum
     {
-        kEndpointDescriptorNumber                  = StandardUSBBitRange(0, 3),
-        kEndpointDescriptorEndpointAddressReserved = StandardUSBBitRange(4, 6),
-        kEndpointDescriptorDirection               = StandardUSBBit(7),
-        kEndpointDescriptorDirectionPhase          = StandardUSBBitRangePhase(7, 7),
-        kEndpointDescriptorDirectionOut            = 0,
-        kEndpointDescriptorDirectionIn             = StandardUSBBit(7),
+        kEndpointDescriptorNumber                  = kIOUSBEndpointDescriptorNumber,
+        kEndpointDescriptorEndpointAddressReserved = kIOUSBEndpointDescriptorEndpointAddressReserved,
+        kEndpointDescriptorDirection               = kIOUSBEndpointDescriptorDirection,
+        kEndpointDescriptorDirectionPhase          = kIOUSBEndpointDescriptorDirectionPhase,
+        kEndpointDescriptorDirectionOut            = kIOUSBEndpointDescriptorDirectionOut,
+        kEndpointDescriptorDirectionIn             = kIOUSBEndpointDescriptorDirectionIn,
         
-        kEndpointDescriptorTransferType                    = StandardUSBBitRange(0, 1),
-        kEndpointDescriptorTransferTypePhase               = StandardUSBBitRangePhase(0, 1),
-        kEndpointDescriptorTransferTypeControl             = (0 << StandardUSBBitRangePhase(0, 1)),
-        kEndpointDescriptorTransferTypeIsochronous         = (1 << StandardUSBBitRangePhase(0, 1)),
-        kEndpointDescriptorTransferTypeBulk                = (2 << StandardUSBBitRangePhase(0, 1)),
-        kEndpointDescriptorTransferTypeInterrupt           = (3 << StandardUSBBitRangePhase(0, 1)),
-        kEndpointDescriptorSynchronizationType             = StandardUSBBitRange(2, 3),
-        kEndpointDescriptorSynchronizationTypeNone         = (0 << StandardUSBBitRangePhase(2, 3)),
-        kEndpointDescriptorSynchronizationTypeAsynchronous = (1 << StandardUSBBitRangePhase(2, 3)),
-        kEndpointDescriptorSynchronizationTypeAdaptive     = (2 << StandardUSBBitRangePhase(2, 3)),
-        kEndpointDescriptorSynchronizationTypeSynchronous  = (3 << StandardUSBBitRangePhase(2, 3)),
-        kEndpointDescriptorUsageType                       = StandardUSBBitRange(4, 5),
-        kEndpointDescriptorUsageTypeInterruptPeriodic      = (0 << StandardUSBBitRangePhase(4, 5)),
-        kEndpointDescriptorUsageTypeInterruptNotification  = (1 << StandardUSBBitRangePhase(4, 5)),
-        kEndpointDescriptorUsageTypeInterruptReserved1     = (2 << StandardUSBBitRangePhase(4, 5)),
-        kEndpointDescriptorUsageTypeInterruptReserved2     = (3 << StandardUSBBitRangePhase(4, 5)),
-        kEndpointDescriptorUsageTypeIsocData               = (0 << StandardUSBBitRangePhase(4, 5)),
-        kEndpointDescriptorUsageTypeIsocFeedback           = (1 << StandardUSBBitRangePhase(4, 5)),
-        kEndpointDescriptorUsageTypeIsocImplicit           = (2 << StandardUSBBitRangePhase(4, 5)),
-        kEndpointDescriptorUsageTypeIsocReserved           = (3 << StandardUSBBitRangePhase(4, 5)),
+        kEndpointDescriptorTransferType                    = kIOUSBEndpointDescriptorTransferType,
+        kEndpointDescriptorTransferTypePhase               = kIOUSBEndpointDescriptorTransferTypePhase,
+        kEndpointDescriptorTransferTypeControl             = kIOUSBEndpointDescriptorTransferTypeControl,
+        kEndpointDescriptorTransferTypeIsochronous         = kIOUSBEndpointDescriptorTransferTypeIsochronous,
+        kEndpointDescriptorTransferTypeBulk                = kIOUSBEndpointDescriptorTransferTypeBulk,
+        kEndpointDescriptorTransferTypeInterrupt           = kIOUSBEndpointDescriptorTransferTypeInterrupt,
+        kEndpointDescriptorSynchronizationType             = kIOUSBEndpointDescriptorSynchronizationType,
+        kEndpointDescriptorSynchronizationTypePhase        = kIOUSBEndpointDescriptorSynchronizationTypePhase,
+        kEndpointDescriptorSynchronizationTypeNone         = kIOUSBEndpointDescriptorSynchronizationTypeNone,
+        kEndpointDescriptorSynchronizationTypeAsynchronous = kIOUSBEndpointDescriptorSynchronizationTypeAsynchronous,
+        kEndpointDescriptorSynchronizationTypeAdaptive     = kIOUSBEndpointDescriptorSynchronizationTypeAdaptive,
+        kEndpointDescriptorSynchronizationTypeSynchronous  = kIOUSBEndpointDescriptorSynchronizationTypeSynchronous,
+        kEndpointDescriptorUsageType                       = kIOUSBEndpointDescriptorUsageType,
+        kEndpointDescriptorUsageTypePhase                  = kIOUSBEndpointDescriptorUsageTypePhase,
+        kEndpointDescriptorUsageTypeInterruptPeriodic      = kIOUSBEndpointDescriptorUsageTypeInterruptPeriodic,
+        kEndpointDescriptorUsageTypeInterruptNotification  = kIOUSBEndpointDescriptorUsageTypeInterruptNotification,
+        kEndpointDescriptorUsageTypeInterruptReserved1     = kIOUSBEndpointDescriptorUsageTypeInterruptReserved1,
+        kEndpointDescriptorUsageTypeInterruptReserved2     = kIOUSBEndpointDescriptorUsageTypeInterruptReserved2,
+        kEndpointDescriptorUsageTypeIsocData               = kIOUSBEndpointDescriptorUsageTypeIsocData,
+        kEndpointDescriptorUsageTypeIsocFeedback           = kIOUSBEndpointDescriptorUsageTypeIsocFeedback,
+        kEndpointDescriptorUsageTypeIsocImplicit           = kIOUSBEndpointDescriptorUsageTypeIsocImplicit,
+        kEndpointDescriptorUsageTypeIsocReserved           = kIOUSBEndpointDescriptorUsageTypeIsocReserved,
         
-        kEndpointDescriptorPacketSize          = StandardUSBBitRange(0, 10),
-        kEndpointDescriptorPacketSizePhase     = StandardUSBBitRangePhase(0, 10),
-        kEndpointDescriptorPacketSizeMult      = StandardUSBBitRange(11, 12),
-        kEndpointDescriptorPacketSizeMultPhase = StandardUSBBitRangePhase(11, 12),
-        kEndpointDescriptorReserved            = StandardUSBBitRange(13, 15),
-        kEndpointDescriptorReservedPhase       = StandardUSBBitRangePhase(13, 15)
+        kEndpointDescriptorPacketSize          = kIOUSBEndpointDescriptorPacketSize,
+        kEndpointDescriptorPacketSizePhase     = kIOUSBEndpointDescriptorPacketSizePhase,
+        kEndpointDescriptorPacketSizeMult      = kIOUSBEndpointDescriptorPacketSizeMult,
+        kEndpointDescriptorPacketSizeMultPhase = kIOUSBEndpointDescriptorPacketSizeMultPhase,
+        kEndpointDescriptorReserved            = kIOUSBEndpointDescriptorReserved,
+        kEndpointDescriptorReservedPhase       = kIOUSBEndpointDescriptorReservedPhase
     };
     
     // USB Language Identifiers 1.0
     enum tLanguageID
     {
-        kLanguageIDEnglishUS = 0x0409
+        kLanguageIDEnglishUS = kIOUSBLanguageIDEnglishUS
     };
     
     typedef enum tLanguageID tLanguageID;
@@ -324,22 +319,22 @@ namespace StandardUSB
     enum tDeviceCapabilityType
     {
         // USB 3.0 Table 9-13
-        kDeviceCapabilityTypeWireless               = 1,
-        kDeviceCapabilityTypeUSB20Extension         = 2,
-        kDeviceCapabilityTypeSuperSpeed             = 3,
-        kDeviceCapabilityTypeContainerID            = 4,
+        kDeviceCapabilityTypeWireless               = kIOUSBDeviceCapabilityTypeWireless,
+        kDeviceCapabilityTypeUSB20Extension         = kIOUSBDeviceCapabilityTypeUSB20Extension,
+        kDeviceCapabilityTypeSuperSpeed             = kIOUSBDeviceCapabilityTypeSuperSpeed,
+        kDeviceCapabilityTypeContainerID            = kIOUSBDeviceCapabilityTypeContainerID,
         
         // USB 3.1 Table 9-14
-        kDeviceCapabilityTypePlatform               = 5,
-        kDeviceCapabilityTypePowerDelivery          = 6,
-        kDeviceCapabilityTypeBatteryInfo            = 7,
-        kDeviceCapabilityTypePdConsumerPort         = 8,
-        kDeviceCapabilityTypePdProviderPort         = 9,
-        kDeviceCapabilityTypeSuperSpeedPlus         = 10,
-        kDeviceCapabilityTypePrecisionMeasurement   = 11,
-        kDeviceCapabilityTypeWirelessExt            = 12,
-        kDeviceCapabilityTypeBillboard              = 13,
-        kDeviceCapabilityTypeBillboardAltMode       = 15
+        kDeviceCapabilityTypePlatform               = kIOUSBDeviceCapabilityTypePlatform,
+        kDeviceCapabilityTypePowerDelivery          = kIOUSBDeviceCapabilityTypePowerDelivery,
+        kDeviceCapabilityTypeBatteryInfo            = kIOUSBDeviceCapabilityTypeBatteryInfo,
+        kDeviceCapabilityTypePdConsumerPort         = kIOUSBDeviceCapabilityTypePdConsumerPort,
+        kDeviceCapabilityTypePdProviderPort         = kIOUSBDeviceCapabilityTypePdProviderPort,
+        kDeviceCapabilityTypeSuperSpeedPlus         = kIOUSBDeviceCapabilityTypeSuperSpeedPlus,
+        kDeviceCapabilityTypePrecisionMeasurement   = kIOUSBDeviceCapabilityTypePrecisionMeasurement,
+        kDeviceCapabilityTypeWirelessExt            = kIOUSBDeviceCapabilityTypeWirelessExt,
+        kDeviceCapabilityTypeBillboard              = kIOUSBDeviceCapabilityTypeBillboard,
+        kDeviceCapabilityTypeBillboardAltMode       = kIOUSBDeviceCapabilityTypeBillboardAltMode
     };
     
     typedef enum tDeviceCapabilityType tDeviceCapabilityType;
@@ -397,16 +392,16 @@ namespace StandardUSB
     
     enum
     {
-        kUSB20ExtensionCapabilityLPM = StandardUSBBit(1),
+        kUSB20ExtensionCapabilityLPM = kIOUSBUSB20ExtensionCapabilityLPM,
         
         // From USB 2.0 ECN Errata for Link Power Management.
-        kUSB20ExtensionCapabilityBESLSupport    = StandardUSBBit(2),
-        kUSB20ExtensionCapabilityBESLValid      = StandardUSBBit(3),
-        kUSB20ExtensionCapabilityBESLDValid     = StandardUSBBit(4),
-        kUSB20ExtensionCapabilityBESL           = StandardUSBBitRange( 8, 11),
-        kUSB20ExtensionCapabilityBESLPhase      = StandardUSBBitRangePhase( 8, 11),
-        kUSB20ExtensionCapabilityBESLD          = StandardUSBBitRange(12, 15),
-        kUSB20ExtensionCapabilityBESLDPhase     = StandardUSBBitRangePhase(12, 15)
+        kUSB20ExtensionCapabilityBESLSupport    = kIOUSBUSB20ExtensionCapabilityBESLSupport,
+        kUSB20ExtensionCapabilityBESLValid      = kIOUSBUSB20ExtensionCapabilityBESLValid,
+        kUSB20ExtensionCapabilityBESLDValid     = kIOUSBUSB20ExtensionCapabilityBESLDValid,
+        kUSB20ExtensionCapabilityBESL           = kIOUSBUSB20ExtensionCapabilityBESL,
+        kUSB20ExtensionCapabilityBESLPhase      = kIOUSBUSB20ExtensionCapabilityBESLPhase,
+        kUSB20ExtensionCapabilityBESLD          = kIOUSBUSB20ExtensionCapabilityBESLD,
+        kUSB20ExtensionCapabilityBESLDPhase     = kIOUSBUSB20ExtensionCapabilityBESLDPhase
     };
     
         
@@ -433,20 +428,20 @@ namespace StandardUSB
     
     enum
     {
-        kSuperSpeedDeviceCapabilityLTM = StandardUSBBit(1),
+        kSuperSpeedDeviceCapabilityLTM = kIOUSBSuperSpeedDeviceCapabilityLTM,
         
-        kSuperSpeedDeviceCapabilityLowSpeed  = StandardUSBBit(0),
-        kSuperSpeedDeviceCapabilityFullSpeed = StandardUSBBit(1),
-        kSuperSpeedDeviceCapabilityHighSpeed = StandardUSBBit(2),
-        kSuperSpeedDeviceCapability5Gb       = StandardUSBBit(3),
+        kSuperSpeedDeviceCapabilityLowSpeed  = kIOUSBSuperSpeedDeviceCapabilityLowSpeed,
+        kSuperSpeedDeviceCapabilityFullSpeed = kIOUSBSuperSpeedDeviceCapabilityFullSpeed,
+        kSuperSpeedDeviceCapabilityHighSpeed = kIOUSBSuperSpeedDeviceCapabilityHighSpeed,
+        kSuperSpeedDeviceCapability5Gb       = kIOUSBSuperSpeedDeviceCapability5Gb,
         
-        kSuperSpeedDeviceCapabilitySupportLowSpeed  = 0,
-        kSuperSpeedDeviceCapabilitySupportFullSpeed = 1,
-        kSuperSpeedDeviceCapabilitySupportHighSpeed = 2,
-        kSuperSpeedDeviceCapabilitySupport5Gb       = 3,
+        kSuperSpeedDeviceCapabilitySupportLowSpeed  = kIOUSBSuperSpeedDeviceCapabilitySupportLowSpeed,
+        kSuperSpeedDeviceCapabilitySupportFullSpeed = kIOUSBSuperSpeedDeviceCapabilitySupportFullSpeed,
+        kSuperSpeedDeviceCapabilitySupportHighSpeed = kIOUSBSuperSpeedDeviceCapabilitySupportHighSpeed,
+        kSuperSpeedDeviceCapabilitySupport5Gb       = kIOUSBSuperSpeedDeviceCapabilitySupport5Gb,
         
-        kSuperSpeedDeviceCapabilityU1DevExitLatMax = 0xa,
-        kSuperSpeedDeviceCapabilityU2DevExitLatMax = 0x7ff
+        kSuperSpeedDeviceCapabilityU1DevExitLatMax = kIOUSBSuperSpeedDeviceCapabilityU1DevExitLatMax,
+        kSuperSpeedDeviceCapabilityU2DevExitLatMax = kIOUSBSuperSpeedDeviceCapabilityU2DevExitLatMax
     };
         
 #ifdef __cplusplus
@@ -473,57 +468,57 @@ namespace StandardUSB
     enum
     {
         //bmAttributes
-        kSuperSpeedPlusDeviceCapabilitySublinkSpeedAttrCount = StandardUSBBitRange(0, 4),
-        kSuperSpeedPlusDeviceCapabilitySublinkSpeedAttrCountPhase = StandardUSBBitRangePhase(0, 4),
+        kSuperSpeedPlusDeviceCapabilitySublinkSpeedAttrCount = kIOUSBSuperSpeedPlusDeviceCapabilitySublinkSpeedAttrCount,
+        kSuperSpeedPlusDeviceCapabilitySublinkSpeedAttrCountPhase = kIOUSBSuperSpeedPlusDeviceCapabilitySublinkSpeedAttrCountPhase,
         
-        kSuperSpeedPlusDeviceCapabilitySublinkSpeedIdCount = StandardUSBBitRange(5, 8),
-        kSuperSpeedPlusDeviceCapabilitySublinkSpeedIdCountPhase = StandardUSBBitRangePhase(5, 8),
+        kSuperSpeedPlusDeviceCapabilitySublinkSpeedIdCount = kIOUSBSuperSpeedPlusDeviceCapabilitySublinkSpeedIdCount,
+        kSuperSpeedPlusDeviceCapabilitySublinkSpeedIdCountPhase = kIOUSBSuperSpeedPlusDeviceCapabilitySublinkSpeedIdCountPhase,
         
         //wFunctionalitySupport
-        kSuperSpeedPlusDeviceCapabilitySublinkMinSpeedId = StandardUSBBitRange(0, 3),
-        kSuperSpeedPlusDeviceCapabilitySublinkMinSpeedIdPhase = StandardUSBBitRangePhase(0, 3),
+        kSuperSpeedPlusDeviceCapabilitySublinkMinSpeedId = kIOUSBSuperSpeedPlusDeviceCapabilitySublinkMinSpeedId,
+        kSuperSpeedPlusDeviceCapabilitySublinkMinSpeedIdPhase = kIOUSBSuperSpeedPlusDeviceCapabilitySublinkMinSpeedIdPhase,
         
-        kSuperSpeedPlusDeviceCapabilityReserved = StandardUSBBitRange(4, 7),
-        kSuperSpeedPlusDeviceCapabilityReservedPhase = StandardUSBBitRangePhase(4, 7),
+        kSuperSpeedPlusDeviceCapabilityReserved = kIOUSBSuperSpeedPlusDeviceCapabilityReserved,
+        kSuperSpeedPlusDeviceCapabilityReservedPhase = kIOUSBSuperSpeedPlusDeviceCapabilityReservedPhase,
         
-        kSuperSpeedPlusDeviceCapabilityMinRxLaneCount = StandardUSBBitRange(8, 11),
-        kSuperSpeedPlusDeviceCapabilityMinRxLaneCountPhase = StandardUSBBitRangePhase(8, 11),
+        kSuperSpeedPlusDeviceCapabilityMinRxLaneCount = kIOUSBSuperSpeedPlusDeviceCapabilityMinRxLaneCount,
+        kSuperSpeedPlusDeviceCapabilityMinRxLaneCountPhase = kIOUSBSuperSpeedPlusDeviceCapabilityMinRxLaneCountPhase,
         
-        kSuperSpeedPlusDeviceCapabilityMinTxLaneCount = StandardUSBBitRange(12, 15),
-        kSuperSpeedPlusDeviceCapabilityMinTxLaneCountPhase = StandardUSBBitRangePhase(12, 15),
+        kSuperSpeedPlusDeviceCapabilityMinTxLaneCount = kIOUSBSuperSpeedPlusDeviceCapabilityMinTxLaneCount,
+        kSuperSpeedPlusDeviceCapabilityMinTxLaneCountPhase = kIOUSBSuperSpeedPlusDeviceCapabilityMinTxLaneCountPhase,
         
         //bmSublinkSpeedAttr
-        kSuperSpeedPlusDeviceCapabilitySublinkSpeedId = StandardUSBBitRange(0, 3),
-        kSuperSpeedPlusDeviceCapabilitySublinkSpeedIdPhase = StandardUSBBitRangePhase(0, 3),
+        kSuperSpeedPlusDeviceCapabilitySublinkSpeedId = kIOUSBSuperSpeedPlusDeviceCapabilitySublinkSpeedId,
+        kSuperSpeedPlusDeviceCapabilitySublinkSpeedIdPhase = kIOUSBSuperSpeedPlusDeviceCapabilitySublinkSpeedIdPhase,
         
-        kSuperSpeedPlusDeviceCapabilitySublinkLSE      = StandardUSBBitRange(4, 5),
-        kSuperSpeedPlusDeviceCapabilitySublinkLSEPhase = StandardUSBBitRangePhase(4, 5),
-        kSuperSpeedPlusDeviceCapabilitySublinkLSEBits  = (0 << kSuperSpeedPlusDeviceCapabilitySublinkLSEPhase),
-        kSuperSpeedPlusDeviceCapabilitySublinkLSEKbits = (1 << kSuperSpeedPlusDeviceCapabilitySublinkLSEPhase),
-        kSuperSpeedPlusDeviceCapabilitySublinkLSEMbits = (2 << kSuperSpeedPlusDeviceCapabilitySublinkLSEPhase),
-        kSuperSpeedPlusDeviceCapabilitySublinkLSEGbits = (3 << kSuperSpeedPlusDeviceCapabilitySublinkLSEPhase),
+        kSuperSpeedPlusDeviceCapabilitySublinkLSE      = kIOUSBSuperSpeedPlusDeviceCapabilitySublinkLSE,
+        kSuperSpeedPlusDeviceCapabilitySublinkLSEPhase = kIOUSBSuperSpeedPlusDeviceCapabilitySublinkLSEPhase,
+        kSuperSpeedPlusDeviceCapabilitySublinkLSEBits  = kIOUSBSuperSpeedPlusDeviceCapabilitySublinkLSEBits,
+        kSuperSpeedPlusDeviceCapabilitySublinkLSEKbits = kIOUSBSuperSpeedPlusDeviceCapabilitySublinkLSEKbits,
+        kSuperSpeedPlusDeviceCapabilitySublinkLSEMbits = kIOUSBSuperSpeedPlusDeviceCapabilitySublinkLSEMbits,
+        kSuperSpeedPlusDeviceCapabilitySublinkLSEGbits = kIOUSBSuperSpeedPlusDeviceCapabilitySublinkLSEGbits,
         
-        kSuperSpeedPlusDeviceCapabilitySublinkType = StandardUSBBitRange(6, 7),
-        kSuperSpeedPlusDeviceCapabilitySublinkTypePhase = StandardUSBBitRangePhase(6, 7),
+        kSuperSpeedPlusDeviceCapabilitySublinkType = kIOUSBSuperSpeedPlusDeviceCapabilitySublinkType,
+        kSuperSpeedPlusDeviceCapabilitySublinkTypePhase = kIOUSBSuperSpeedPlusDeviceCapabilitySublinkTypePhase,
         
-        kSuperSpeedPlusDeviceCapabilitySublinkSymmetry = StandardUSBBit(6),
-        kSuperSpeedPlusDeviceCapabilitySublinkSymmetryPhase = StandardUSBBitRangePhase(6, 6),
-        kSuperSpeedPlusDeviceCapabilitySublinkSymmetric  = (0 << kSuperSpeedPlusDeviceCapabilitySublinkSymmetryPhase),
-        kSuperSpeedPlusDeviceCapabilitySublinkAsymmetric = (1 << kSuperSpeedPlusDeviceCapabilitySublinkSymmetryPhase),
+        kSuperSpeedPlusDeviceCapabilitySublinkSymmetry = kIOUSBSuperSpeedPlusDeviceCapabilitySublinkSymmetry,
+        kSuperSpeedPlusDeviceCapabilitySublinkSymmetryPhase = kIOUSBSuperSpeedPlusDeviceCapabilitySublinkSymmetryPhase,
+        kSuperSpeedPlusDeviceCapabilitySublinkSymmetric  = kIOUSBSuperSpeedPlusDeviceCapabilitySublinkSymmetric,
+        kSuperSpeedPlusDeviceCapabilitySublinkAsymmetric = kIOUSBSuperSpeedPlusDeviceCapabilitySublinkAsymmetric,
         
-        kSuperSpeedPlusDeviceCapabilitySublinkDirection = StandardUSBBit(7),
-        kSuperSpeedPlusDeviceCapabilitySublinkDirectionPhase = StandardUSBBitRangePhase(7, 7),
-        kSuperSpeedPlusDeviceCapabilitySublinkDirectionRx = (0 << kSuperSpeedPlusDeviceCapabilitySublinkDirectionPhase),
-        kSuperSpeedPlusDeviceCapabilitySublinkDirectionTx = (1 << kSuperSpeedPlusDeviceCapabilitySublinkDirectionPhase),
+        kSuperSpeedPlusDeviceCapabilitySublinkDirection = kIOUSBSuperSpeedPlusDeviceCapabilitySublinkDirection,
+        kSuperSpeedPlusDeviceCapabilitySublinkDirectionPhase = kIOUSBSuperSpeedPlusDeviceCapabilitySublinkDirectionPhase,
+        kSuperSpeedPlusDeviceCapabilitySublinkDirectionRx = kIOUSBSuperSpeedPlusDeviceCapabilitySublinkDirectionRx,
+        kSuperSpeedPlusDeviceCapabilitySublinkDirectionTx = kIOUSBSuperSpeedPlusDeviceCapabilitySublinkDirectionTx,
         
-        kSuperSpeedPlusDeviceCapabilitySublinkReserved = StandardUSBBitRange(8, 13),
-        kSuperSpeedPlusDeviceCapabilitySublinkReservedPhase = StandardUSBBitRangePhase(8, 13),
+        kSuperSpeedPlusDeviceCapabilitySublinkReserved = kIOUSBSuperSpeedPlusDeviceCapabilitySublinkReserved,
+        kSuperSpeedPlusDeviceCapabilitySublinkReservedPhase = kIOUSBSuperSpeedPlusDeviceCapabilitySublinkReservedPhase,
         
-        kSuperSpeedPlusDeviceCapabilitySublinkProtocol = StandardUSBBitRange(14, 15),
-        kSuperSpeedPlusDeviceCapabilitySublinkProtocolPhase = StandardUSBBitRangePhase(14, 15),
+        kSuperSpeedPlusDeviceCapabilitySublinkProtocol = kIOUSBSuperSpeedPlusDeviceCapabilitySublinkProtocol,
+        kSuperSpeedPlusDeviceCapabilitySublinkProtocolPhase = kIOUSBSuperSpeedPlusDeviceCapabilitySublinkProtocolPhase,
         
-        kSuperSpeedPlusDeviceCapabilitySublinkSpeedMantissa = StandardUSBBitRange(16, 31),
-        kSuperSpeedPlusDeviceCapabilitySublinkSpeedMantissaPhase = StandardUSBBitRangePhase(16, 31),
+        kSuperSpeedPlusDeviceCapabilitySublinkSpeedMantissa = kIOUSBSuperSpeedPlusDeviceCapabilitySublinkSpeedMantissa,
+        kSuperSpeedPlusDeviceCapabilitySublinkSpeedMantissaPhase = kIOUSBSuperSpeedPlusDeviceCapabilitySublinkSpeedMantissaPhase,
     };
 
         
@@ -556,7 +551,7 @@ namespace StandardUSB
         uint8_t   bDevCapabilityType;
 #endif
         uint8_t   bReserved;
-        uuid_t    PlatformCapabilityUUID;
+        uuid_t    uuidPlatformCapability;
     }__attribute__((packed));
 
     typedef struct PlatformCapabilityDescriptor PlatformCapabilityDescriptor;
@@ -663,18 +658,18 @@ namespace StandardUSB
     
     enum
     {
-        kSuperSpeedEndpointCompanionDescriptorMaxBurst      = StandardUSBBitRange(0, 4),
-        kSuperSpeedEndpointCompanionDescriptorMaxBurstPhase = StandardUSBBitRangePhase(0, 4),
+        kSuperSpeedEndpointCompanionDescriptorMaxBurst      = kIOUSBSuperSpeedEndpointCompanionDescriptorMaxBurst,
+        kSuperSpeedEndpointCompanionDescriptorMaxBurstPhase = kIOUSBSuperSpeedEndpointCompanionDescriptorMaxBurstPhase,
         
-        kSuperSpeedEndpointCompanionDescriptorBulkMaxStreams      = StandardUSBBitRange(0, 4),
-        kSuperSpeedEndpointCompanionDescriptorBulkMaxStreamsPhase = StandardUSBBitRangePhase(0, 4),
-        kSuperSpeedEndpointCompanionDescriptorBulkReserved        = StandardUSBBitRange(5, 7),
-        kSuperSpeedEndpointCompanionDescriptorBulkReservedPhase   = StandardUSBBitRangePhase(5, 7),
-        kSuperSpeedEndpointCompanionDescriptorIsocMult            = StandardUSBBitRange(0, 1),
-        kSuperSpeedEndpointCompanionDescriptorIsocMultPhase       = StandardUSBBitRangePhase(0, 1),
-        kSuperSpeedEndpointCompanionDescriptorIsocReserved        = StandardUSBBitRange(2, 6),
-        kSuperSpeedEndpointCompanionDescriptorIsocReservedPhase   = StandardUSBBitRangePhase(2, 6),
-        kSuperSpeedEndpointCompanionDescriptorSSPIsocCompanion    = StandardUSBBit(7)
+        kSuperSpeedEndpointCompanionDescriptorBulkMaxStreams      = kIOUSBSuperSpeedEndpointCompanionDescriptorBulkMaxStreams,
+        kSuperSpeedEndpointCompanionDescriptorBulkMaxStreamsPhase = kIOUSBSuperSpeedEndpointCompanionDescriptorBulkMaxStreamsPhase,
+        kSuperSpeedEndpointCompanionDescriptorBulkReserved        = kIOUSBSuperSpeedEndpointCompanionDescriptorBulkReserved,
+        kSuperSpeedEndpointCompanionDescriptorBulkReservedPhase   = kIOUSBSuperSpeedEndpointCompanionDescriptorBulkReservedPhase,
+        kSuperSpeedEndpointCompanionDescriptorIsocMult            = kIOUSBSuperSpeedEndpointCompanionDescriptorIsocMult,
+        kSuperSpeedEndpointCompanionDescriptorIsocMultPhase       = kIOUSBSuperSpeedEndpointCompanionDescriptorIsocMultPhase,
+        kSuperSpeedEndpointCompanionDescriptorIsocReserved        = kIOUSBSuperSpeedEndpointCompanionDescriptorIsocReserved,
+        kSuperSpeedEndpointCompanionDescriptorIsocReservedPhase   = kIOUSBSuperSpeedEndpointCompanionDescriptorIsocReservedPhase,
+        kSuperSpeedEndpointCompanionDescriptorSSPIsocCompanion    = kIOUSBSuperSpeedEndpointCompanionDescriptorSSPIsocCompanion
     };
 
 
@@ -740,17 +735,17 @@ namespace StandardUSB
     
     enum
     {
-        kSuperSpeedHubCharacteristicsPowerSwitchingMask       = StandardUSBBitRange(0, 1),
-        kSuperSpeedHubCharacteristicsPowerSwitchingGanged     = (0 << StandardUSBBitRangePhase(0, 1)),
-        kSuperSpeedHubCharacteristicsPowerSwitchingIndividual = (1 << StandardUSBBitRangePhase(0, 1)),
-        kSuperSpeedHubCharacteristicsCompoundDevice           = StandardUSBBit(2),
-        kSuperSpeedHubCharacteristicsOverCurrentMask          = StandardUSBBitRange(3, 4),
-        kSuperSpeedHubCharacteristicsOverCurrentGlobal        = (0 << StandardUSBBitRangePhase(3, 4)),
-        kSuperSpeedHubCharacteristicsOverCurrentIndividual    = (1 << StandardUSBBitRangePhase(3, 4)),
-        kSuperSpeedHubCharacteristicsReserved                 = StandardUSBBitRange(5, 15),
+        kSuperSpeedHubCharacteristicsPowerSwitchingMask       = kIOUSBSuperSpeedHubCharacteristicsPowerSwitchingMask,
+        kSuperSpeedHubCharacteristicsPowerSwitchingGanged     = kIOUSBSuperSpeedHubCharacteristicsPowerSwitchingGanged,
+        kSuperSpeedHubCharacteristicsPowerSwitchingIndividual = kIOUSBSuperSpeedHubCharacteristicsPowerSwitchingIndividual,
+        kSuperSpeedHubCharacteristicsCompoundDevice           = kIOUSBSuperSpeedHubCharacteristicsCompoundDevice,
+        kSuperSpeedHubCharacteristicsOverCurrentMask          = kIOUSBSuperSpeedHubCharacteristicsOverCurrentMask,
+        kSuperSpeedHubCharacteristicsOverCurrentGlobal        = kIOUSBSuperSpeedHubCharacteristicsOverCurrentGlobal,
+        kSuperSpeedHubCharacteristicsOverCurrentIndividual    = kIOUSBSuperSpeedHubCharacteristicsOverCurrentIndividual,
+        kSuperSpeedHubCharacteristicsReserved                 = kIOUSBSuperSpeedHubCharacteristicsReserved,
         
-        kSuperSpeedHubDecodeLatencyMax = 10,
-        kSuperSpeedHubDelayMax         = 400
+        kSuperSpeedHubDecodeLatencyMax = kIOUSBSuperSpeedHubDecodeLatencyMax,
+        kSuperSpeedHubDelayMax         = kIOUSBSuperSpeedHubDelayMax
     };
     
 #ifdef __cplusplus
@@ -1151,98 +1146,98 @@ namespace StandardUSB
     
     enum
     {
-        kDeviceRequestSize              = 8,
-        kDeviceRequestDirectionMask     = StandardUSBBit(7),
-        kDeviceRequestDirectionPhase    = StandardUSBBitRangePhase(7, 7),
-        kDeviceRequestDirectionOut      = (0 << kDeviceRequestDirectionPhase),
-        kDeviceRequestDirectionIn       = (1 << kDeviceRequestDirectionPhase),
-        kDeviceRequestTypeMask          = StandardUSBBitRange(5, 6),
-        kDeviceRequestTypePhase         = StandardUSBBitRangePhase(5, 6),
-        kDeviceRequestTypeStandard      = (0 << kDeviceRequestTypePhase),
-        kDeviceRequestTypeClass         = (1 << kDeviceRequestTypePhase),
-        kDeviceRequestTypeVendor        = (2 << kDeviceRequestTypePhase),
-        kDeviceRequestRecipientMask     = StandardUSBBitRange(0, 4),
-        kDeviceRequestRecipientPhase    = StandardUSBBitRangePhase(0, 4),
-        kDeviceRequestRecipientDevice   = (0 << kDeviceRequestRecipientPhase),
-        kDeviceRequestRecipientInterface= (1 << kDeviceRequestRecipientPhase),
-        kDeviceRequestRecipientEndpoint = (2 << kDeviceRequestRecipientPhase),
-        kDeviceRequestRecipientOther    = (3 << kDeviceRequestRecipientPhase),
+        kDeviceRequestSize              = kIOUSBDeviceRequestSize,
+        kDeviceRequestDirectionMask     = kIOUSBDeviceRequestDirectionMask,
+        kDeviceRequestDirectionPhase    = kIOUSBDeviceRequestDirectionPhase,
+        kDeviceRequestDirectionOut      = kIOUSBDeviceRequestDirectionOut,
+        kDeviceRequestDirectionIn       = kIOUSBDeviceRequestDirectionIn,
+        kDeviceRequestTypeMask          = kIOUSBDeviceRequestTypeMask,
+        kDeviceRequestTypePhase         = kIOUSBDeviceRequestTypePhase,
+        kDeviceRequestTypeStandard      = kIOUSBDeviceRequestTypeStandard,
+        kDeviceRequestTypeClass         = kIOUSBDeviceRequestTypeClass,
+        kDeviceRequestTypeVendor        = kIOUSBDeviceRequestTypeVendor,
+        kDeviceRequestRecipientMask     = kIOUSBDeviceRequestRecipientMask,
+        kDeviceRequestRecipientPhase    = kIOUSBDeviceRequestRecipientPhase,
+        kDeviceRequestRecipientDevice   = kIOUSBDeviceRequestRecipientDevice,
+        kDeviceRequestRecipientInterface= kIOUSBDeviceRequestRecipientInterface,
+        kDeviceRequestRecipientEndpoint = kIOUSBDeviceRequestRecipientEndpoint,
+        kDeviceRequestRecipientOther    = kIOUSBDeviceRequestRecipientOther,
     };
     
     // USB 2.0 9.4: Standard Device Requests
     // USB 3.0 9.4: Standard Device Requests
     enum
     {
-        kDeviceRequestGetStatus             = 0,
-        kDeviceRequestClearFeature          = 1,
-        kDeviceRequestGetState              = 2,
-        kDeviceRequestSetFeature            = 3,
-        kDeviceRequestSetAddress            = 5,
-        kDeviceRequestGetDescriptor         = 6,
-        kDeviceRequestSetDescriptor         = 7,
-        kDeviceRequestGetConfiguration      = 8,
-        kDeviceRequestSetConfiguration      = 9,
-        kDeviceRequestGetInterface          = 10,
-        kDeviceRequestSetInterface          = 11,
-        kDeviceRequestSynchFrame            = 12,
-        kDeviceRequestSetSel                = 48,
-        kDeviceRequestSetIsochronousDelay   = 49
+        kDeviceRequestGetStatus             = kIOUSBDeviceRequestGetStatus,
+        kDeviceRequestClearFeature          = kIOUSBDeviceRequestClearFeature,
+        kDeviceRequestGetState              = kIOUSBDeviceRequestGetState,
+        kDeviceRequestSetFeature            = kIOUSBDeviceRequestSetFeature,
+        kDeviceRequestSetAddress            = kIOUSBDeviceRequestSetAddress,
+        kDeviceRequestGetDescriptor         = kIOUSBDeviceRequestGetDescriptor,
+        kDeviceRequestSetDescriptor         = kIOUSBDeviceRequestSetDescriptor,
+        kDeviceRequestGetConfiguration      = kIOUSBDeviceRequestGetConfiguration,
+        kDeviceRequestSetConfiguration      = kIOUSBDeviceRequestSetConfiguration,
+        kDeviceRequestGetInterface          = kIOUSBDeviceRequestGetInterface,
+        kDeviceRequestSetInterface          = kIOUSBDeviceRequestSetInterface,
+        kDeviceRequestSynchFrame            = kIOUSBDeviceRequestSynchFrame,
+        kDeviceRequestSetSel                = kIOUSBDeviceRequestSetSel,
+        kDeviceRequestSetIsochronousDelay   = kIOUSBDeviceRequestSetIsochronousDelay
     };
     
     // USB 2.0 9.4.5: Get Status
     // USB 3.0 9.4.5: Get Status
     enum
     {
-        kDeviceStatusSelfPowered            = StandardUSBBit(0),
-        kDeviceStatusRemoteWakeEnable       = StandardUSBBit(1),
-        kDeviceStatusU1Enable               = StandardUSBBit(2),
-        kDeviceStatusU2Enable               = StandardUSBBit(3),
-        kDeviceStatusLTMEnable              = StandardUSBBit(4),
+        kDeviceStatusSelfPowered            = kIOUSBDeviceStatusSelfPowered,
+        kDeviceStatusRemoteWakeEnable       = kIOUSBDeviceStatusRemoteWakeEnable,
+        kDeviceStatusU1Enable               = kIOUSBDeviceStatusU1Enable,
+        kDeviceStatusU2Enable               = kIOUSBDeviceStatusU2Enable,
+        kDeviceStatusLTMEnable              = kIOUSBDeviceStatusLTMEnable,
         
-        kInterfaceStatusRemoteWakeCapable   = StandardUSBBit(0),
-        kInterfaceStatusRemoteWakeEnable    = StandardUSBBit(1),
+        kInterfaceStatusRemoteWakeCapable   = kIOUSBInterfaceStatusRemoteWakeCapable,
+        kInterfaceStatusRemoteWakeEnable    = kIOUSBInterfaceStatusRemoteWakeEnable,
         
-        kEndpointStatusHalt                 = StandardUSBBit(0)
+        kEndpointStatusHalt                 = IOUSBEndpointStatusHalt
     };
     
     // USB 2.0 Table 9-6: Standard Feature Selectors
     // USB 3.0 Table 9-7: Standard Feature Selectors
     enum
     {
-        kDeviceFeatureSelectorRemoteWakeup  = 1,
-        kDeviceFeatureSelectorTestMode      = 2,
-        kDeviceFeatureSelectorU1Enable      = 48,
-        kDeviceFeatureSelectorU2Enable      = 49,
-        kDeviceFeatureSelectorLTMEnable     = 50,
+        kDeviceFeatureSelectorRemoteWakeup  = kIOUSBDeviceFeatureSelectorRemoteWakeup,
+        kDeviceFeatureSelectorTestMode      = kIOUSBDeviceFeatureSelectorTestMode,
+        kDeviceFeatureSelectorU1Enable      = kIOUSBDeviceFeatureSelectorU1Enable,
+        kDeviceFeatureSelectorU2Enable      = kIOUSBDeviceFeatureSelectorU2Enable,
+        kDeviceFeatureSelectorLTMEnable     = kIOUSBDeviceFeatureSelectorLTMEnable,
         
-        kInterfaceFeatureSelectorSuspend    = 0,
+        kInterfaceFeatureSelectorSuspend    = kIOUSBInterfaceFeatureSelectorSuspend,
         
-        kEndpointFeatureSelectorStall       = 0,
+        kEndpointFeatureSelectorStall       = IOUSBEndpointFeatureSelectorStall,
     };
     
     // USB 3.0 Table 9-8: Suspend Options
     enum
     {
-        kInterfaceSuspendLowPower           = StandardUSBBit(0),
-        kInterfaceSuspendRemoteWakeEnable   = StandardUSBBit(1)
+        kInterfaceSuspendLowPower           = kIOUSBInterfaceSuspendLowPower,
+        kInterfaceSuspendRemoteWakeEnable   = kIOUSBInterfaceSuspendRemoteWakeEnable
     };
         
     // USB 3.0 Table 10-16: Hub Parameters
     enum
     {
-        kHubPort2PortExitLatencyNs          = 1000,
-        kHubDelayNs                         = 400
+        kHubPort2PortExitLatencyNs          = kIOUSBHubPort2PortExitLatencyNs,
+        kHubDelayNs                         = kIOUSBHubDelayNs
     };
         
     // USB 3.0 Table 8-33: Timing Parameters
     enum
     {
-        kPingResponseTimeNs                 = 400
+        kPingResponseTimeNs                 = kIOUSBPingResponseTimeNs
     };
 
     enum tBusVoltage
     {
-        kBusVoltageDefault                  = 5
+        kBusVoltageDefault                  = kIOUSBBusVoltageDefault
     };
         
 #ifdef __cplusplus
@@ -1273,9 +1268,9 @@ namespace StandardUSB20
 
     enum tBusCurrent
     {
-        kBusCurrentMinimum       = 100,
-        kBusCurrentDefault       = 500,
-        kBusCurrentMaxPowerUnits = 2
+        kBusCurrentMinimum       = kIOUSB20BusCurrentMinimum,
+        kBusCurrentDefault       = kIOUSB20BusCurrentDefault,
+        kBusCurrentMaxPowerUnits = kIOUSB20BusCurrentMaxPowerUnits
 
     };
 }
@@ -1284,76 +1279,76 @@ namespace StandardUSB30
 {
     enum tBusCurrent
     {
-        kBusCurrentMinimum       = 150,
-        kBusCurrentDefault       = 900,
-        kBusCurrentMaxPowerUnits = 8
+        kBusCurrentMinimum       = kIOUSB30BusCurrentMinimum,
+        kBusCurrentDefault       = kIOUSB30BusCurrentDefault,
+        kBusCurrentMaxPowerUnits = kIOUSB30BusCurrentMaxPowerUnits
     };
 
     // USB 3.0 Table 6-21
     enum tResetTimeout
     {
-        kResetMinimumTimeout                    = 80,
-        kResetTypicalTimeout                    = 100,
-        kResetMaximumTimeout                    = 120,
-        kResetMaximumWithMarginTimeout          = 150
+        kResetMinimumTimeout                    = kIOUSB30ResetMinimumTimeout,
+        kResetTypicalTimeout                    = kIOUSB30ResetTypicalTimeout,
+        kResetMaximumTimeout                    = kIOUSB30ResetMaximumTimeout,
+        kResetMaximumWithMarginTimeout          = kIOUSB30ResetMaximumWithMarginTimeout
     };
 
     // USB 3.0 Table 7-12
     enum tLinkStateTimeout
     {
-        kLinkStateSSInactiveQuietTimeout        = 12,
-        kLinkStateRxDetectQuietTimeout          = 12,
-        kLinkStatePollingLFPSTimeout            = 360,
-        kLinkStatePollingActiveTimeout          = 12,
-        kLinkStatePollingConfigurationTimeout   = 12,
-        kLinkStatePollingIdleTimeout            = 2,
-        kLinkStateU0RecoveryTimeout             = 1,
-        kLinkStateU0LTimeout                    = 0,        // 10 microseconds
-        kLinkStateU1NoLFPSResponseTimeout       = 2,
-        kLinkStateU1PingTimeout                 = 300,
-        kLinkStateU2NoLFPSResponseTimeout       = 2,
-        kLinKStateU2RxDetectDelay               = 100,
-        kLinkStateU3NoLFPSResponseTimeout       = 10,
-        kLinkStateU3WakeupRetryDelay            = 100,
-        kLinkStateU3RxDetectDelay               = 100,
-        kLinkStateRecoveryActiveTimeout         = 12,
-        kLinkStateRecoveryConfigurationTimeout  = 6,
-        kLinkStateRecoveryIdleTimeout           = 2,
-        kLinkStateLoopbackExitTimeout           = 2,
-        kLinkStateHotResetActiveTimeout         = 12,
-        kLinkStateHotResetExistTimeout          = 2,
+        kLinkStateSSInactiveQuietTimeout        = kIOUSB30LinkStateSSInactiveQuietTimeout,
+        kLinkStateRxDetectQuietTimeout          = kIOUSB30LinkStateRxDetectQuietTimeout,
+        kLinkStatePollingLFPSTimeout            = kIOUSB30LinkStatePollingLFPSTimeout,
+        kLinkStatePollingActiveTimeout          = kIOUSB30LinkStatePollingActiveTimeout,
+        kLinkStatePollingConfigurationTimeout   = kIOUSB30LinkStatePollingConfigurationTimeout,
+        kLinkStatePollingIdleTimeout            = kIOUSB30LinkStatePollingIdleTimeout,
+        kLinkStateU0RecoveryTimeout             = kIOUSB30LinkStateU0RecoveryTimeout,
+        kLinkStateU0LTimeout                    = kIOUSB30LinkStateU0LTimeout,        // 10 microseconds
+        kLinkStateU1NoLFPSResponseTimeout       = kIOUSB30LinkStateU1NoLFPSResponseTimeout,
+        kLinkStateU1PingTimeout                 = kIOUSB30LinkStateU1PingTimeout,
+        kLinkStateU2NoLFPSResponseTimeout       = kIOUSB30LinkStateU2NoLFPSResponseTimeout,
+        kLinKStateU2RxDetectDelay               = kIOUSB30LinKStateU2RxDetectDelay,
+        kLinkStateU3NoLFPSResponseTimeout       = kIOUSB30LinkStateU3NoLFPSResponseTimeout,
+        kLinkStateU3WakeupRetryDelay            = kIOUSB30LinkStateU3WakeupRetryDelay,
+        kLinkStateU3RxDetectDelay               = kIOUSB30LinkStateU3RxDetectDelay,
+        kLinkStateRecoveryActiveTimeout         = kIOUSB30LinkStateRecoveryActiveTimeout,
+        kLinkStateRecoveryConfigurationTimeout  = kIOUSB30LinkStateRecoveryConfigurationTimeout,
+        kLinkStateRecoveryIdleTimeout           = kIOUSB30LinkStateRecoveryIdleTimeout,
+        kLinkStateLoopbackExitTimeout           = kIOUSB30LinkStateLoopbackExitTimeout,
+        kLinkStateHotResetActiveTimeout         = kIOUSB30LinkStateHotResetActiveTimeout,
+        kLinkStateHotResetExistTimeout          = kIOUSB30LinkStateHotResetExistTimeout,
 
         // USB 3.0 7.5.4
-        kLinkStatePollingDeadline               = (kLinkStatePollingLFPSTimeout + 1 + kLinkStatePollingActiveTimeout + kLinkStatePollingConfigurationTimeout + kLinkStatePollingIdleTimeout),
+        kLinkStatePollingDeadline               = kIOUSB30LinkStatePollingDeadline,
 
         // USB 3.0 7.5.9 and 7.5.10
-        kLinkStateSSResumeDeadline              = (kLinkStateU3NoLFPSResponseTimeout + kLinkStateRecoveryActiveTimeout + kLinkStateRecoveryConfigurationTimeout + kLinkStateRecoveryIdleTimeout),
+        kLinkStateSSResumeDeadline              = kIOUSB30LinkStateSSResumeDeadline,
     };
     
     // USB 3.1 Table 8-18
     enum tDeviceNotificationType
     {
-        kDeviceNotificationTypeFunctionWake             = 1,
-        kDeviceNotificationTypeLatencyTolerance         = 2,
-        kDeviceNotificationTypeBusIntervalAdjustment    = 3,
-        kDeviceNotificationTypeHostRoleRequest          = 4,
-        kDeviceNotificationTypeSublinkSpeed             = 5
+        kDeviceNotificationTypeFunctionWake             = kIOUSB30DeviceNotificationTypeFunctionWake,
+        kDeviceNotificationTypeLatencyTolerance         = kIOUSB30DeviceNotificationTypeLatencyTolerance,
+        kDeviceNotificationTypeBusIntervalAdjustment    = kIOUSB30DeviceNotificationTypeBusIntervalAdjustment,
+        kDeviceNotificationTypeHostRoleRequest          = kIOUSB30DeviceNotificationTypeHostRoleRequest,
+        kDeviceNotificationTypeSublinkSpeed             = kIOUSB30DeviceNotificationTypeSublinkSpeed
     };
     
     // USB 3.1 Table 8-36
     enum tTimingParameters
     {
-        kTimingParameterBELTDefaultNs = 1 * 1000 * 1000,
-        kTimingParameterBELTMinNs     =      125 * 1000
+        kTimingParameterBELTDefaultNs = kIOUSB30TimingParameterBELTDefaultNs,
+        kTimingParameterBELTMinNs     = kIOUSB30TimingParameterBELTMinNs
     };
     
     // USB 3.1 Table 10-12 Port Status Type Codes
     enum tHubPortStatusCode
     {
-        tHubPortStatusCodeStandard = 0,
-        tHubPortStatusCodePD       = 1,
-        tHubPortStatusCodeExt      = 2,
-        tHubPortStatusCodeCount    = 3
+        tHubPortStatusCodeStandard = kIOUSB30HubPortStatusCodeStandard,
+        tHubPortStatusCodePD       = kIOUSB30HubPortStatusCodePD,
+        tHubPortStatusCodeExt      = kIOUSB30HubPortStatusCodeExt,
+        tHubPortStatusCodeCount    = kIOUSB30HubPortStatusCodeCount
     };
     
     // USB 3.1 10.16.2.6 Get Port Status
@@ -1367,17 +1362,17 @@ namespace StandardUSB30
     // USB 3.1 Table 10-11.  Note, offsets are specific to dwExtPortStatus
     enum tHubExtStatus
     {
-        kHubExtStatusRxSublinkSpeedID      = StandardUSBBitRange(0, 3),
-        kHubExtStatusRxSublinkSpeedIDPhase = StandardUSBBitRangePhase(0,3),
+        kHubExtStatusRxSublinkSpeedID      = kIOUSB30HubExtStatusRxSublinkSpeedID,
+        kHubExtStatusRxSublinkSpeedIDPhase = kIOUSB30HubExtStatusRxSublinkSpeedIDPhase,
         
-        kHubExtStatusTxSublinkSpeedID      = StandardUSBBitRange(4, 7),
-        kHubExtStatusTxSublinkSpeedIDPhase = StandardUSBBitRangePhase(4, 7),
+        kHubExtStatusTxSublinkSpeedID      = kIOUSB30HubExtStatusTxSublinkSpeedID,
+        kHubExtStatusTxSublinkSpeedIDPhase = kIOUSB30HubExtStatusTxSublinkSpeedIDPhase,
         
-        kHubExtStatusRxLaneCount      = StandardUSBBitRange(8, 11),
-        kHubExtStatusRxLaneCountPhase = StandardUSBBitRangePhase(8, 11),
+        kHubExtStatusRxLaneCount      = kIOUSB30HubExtStatusRxLaneCount,
+        kHubExtStatusRxLaneCountPhase = kIOUSB30HubExtStatusRxLaneCountPhase,
         
-        kHubExtStatusTxLaneCount      = StandardUSBBitRange(12, 15),
-        kHubExtStatusTxLaneCountPhase = StandardUSBBitRangePhase(12, 15)
+        kHubExtStatusTxLaneCount      = kIOUSB30HubExtStatusTxLaneCount,
+        kHubExtStatusTxLaneCountPhase = kIOUSB30HubExtStatusTxLaneCountPhase
     };
 }
 #endif // __cplusplus

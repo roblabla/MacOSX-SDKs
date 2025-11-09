@@ -5,6 +5,22 @@ Classes:
   Properties:
   - Name: ISOcountryCode
     SwiftName: isoCountryCode
+- Name: CLBeaconIdentityConstraint
+  Properties:
+  - Name: major
+    PropertyKind: Instance
+    SwiftPrivate: true
+  - Name: minor
+    PropertyKind: Instance
+    SwiftPrivate: true
+- Name: CLLocationManager
+  Methods:
+  - Selector: "startRangingBeaconsSatisfyingConstraint:"
+    MethodKind: Instance
+    SwiftName: "startRangingBeacons(satisfying:)"
+  - Selector: "stopRangingBeaconsSatisfyingConstraint:"
+    MethodKind: Instance
+    SwiftName: "stopRangingBeacons(satisfying:)"
 Protocols:
 - Name: CLLocationManagerDelegate
   Methods:
@@ -19,6 +35,12 @@ Protocols:
     MethodKind: Instance
   - Selector: 'locationManager:didChangeAuthorizationStatus:'
     SwiftName: 'locationManager(_:didChangeAuthorization:)'
+    MethodKind: Instance
+  - Selector: 'locationManager:didRangeBeacons:satisfyingConstraint:'
+    SwiftName: 'locationManager(_:didRange:satisfying:)'
+    MethodKind: Instance
+  - Selector: 'locationManager:didFailRangingBeaconsForConstraint:error:'
+    SwiftName: 'locationManager(_:didFailRangingFor:error:)'
     MethodKind: Instance
 Tags:
 - Name: CLError

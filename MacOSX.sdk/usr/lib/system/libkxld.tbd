@@ -1,9 +1,8 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 16D75C5C-584A-3848-84C0-3BFB312AEB92' ]
-platform:        macosx
-install-name:    /usr/lib/system/libkxld.dylib
-objc-constraint: none
+uuids:           [ 'x86_64: D66C5652-CAEF-30FF-8349-380BF2A650EC', 'x86_64: D66C5652-CAEF-30FF-8349-380BF2A650EC' ]
+platform:        zippered
+install-name:    '/usr/lib/system/libkxld.dylib'
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _isOldInterface, _isSplitKext, _kaslr_offsets, _kaslr_offsets_count, 

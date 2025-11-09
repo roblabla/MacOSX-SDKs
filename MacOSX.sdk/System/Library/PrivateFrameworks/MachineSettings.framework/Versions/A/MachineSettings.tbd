@@ -1,8 +1,8 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 5624FB77-5A78-35DA-A0F9-3F60D0BE3ED0' ]
+uuids:           [ 'x86_64: 2ED59805-3366-3C0A-9480-EDD4687F7231' ]
 platform:        macosx
-install-name:    /System/Library/PrivateFrameworks/MachineSettings.framework/Versions/A/MachineSettings
+install-name:    '/System/Library/PrivateFrameworks/MachineSettings.framework/Versions/A/MachineSettings'
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _DelayUntilRepeatKey, _DoubleClickThresholdTimeKey, _FNStateKey, 

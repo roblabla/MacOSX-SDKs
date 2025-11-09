@@ -19,11 +19,26 @@ NS_ASSUME_NONNULL_BEGIN
 typedef NS_OPTIONS(NSUInteger, MTLIndirectCommandType) {
     MTLIndirectCommandTypeDraw                = (1 << 0),
     MTLIndirectCommandTypeDrawIndexed         = (1 << 1),
-    MTLIndirectCommandTypeDrawPatches         = (1 << 2),
-    MTLIndirectCommandTypeDrawIndexedPatches  = (1 << 3) ,
+    MTLIndirectCommandTypeDrawPatches         API_UNAVAILABLE(tvos) = (1 << 2),
+    MTLIndirectCommandTypeDrawIndexedPatches  API_UNAVAILABLE(tvos) = (1 << 3) ,
+
 } API_AVAILABLE(macos(10.14), ios(12.0));
 
 
+/*!
+ @abstract The data layout required for specifying an indirect command buffer execution range.
+ */
+typedef struct
+{
+    uint32_t location;
+    uint32_t length;
+}  MTLIndirectCommandBufferExecutionRange API_AVAILABLE(macos(10.14), macCatalyst(13.0)) API_UNAVAILABLE(ios);
+
+MTL_INLINE MTLIndirectCommandBufferExecutionRange MTLIndirectCommandBufferExecutionRangeMake(uint32_t location, uint32_t length) API_AVAILABLE(macos(10.14), macCatalyst(13.0)) API_UNAVAILABLE(ios)
+{
+    MTLIndirectCommandBufferExecutionRange icbRange = {location, length};
+    return icbRange;
+}
 
 /*!
  @abstract
@@ -44,7 +59,7 @@ MTL_EXPORT API_AVAILABLE(macos(10.14), ios(12.0))
  @abstract
  Whether the render or compute pipeline are inherited from the encoder
  */
-@property (readwrite, nonatomic) BOOL inheritPipelineState API_AVAILABLE(macos(10.14)) API_UNAVAILABLE(ios);
+@property (readwrite, nonatomic) BOOL inheritPipelineState API_AVAILABLE(macos(10.14), ios(13.0));
 
 /*!
  @abstract

@@ -1,5 +1,5 @@
 /*	NSValueTransformer.h
-        Copyright (c) 2002-2018, Apple Inc. All rights reserved.
+        Copyright (c) 2002-2019, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -18,7 +18,7 @@ FOUNDATION_EXPORT NSValueTransformerName const NSUnarchiveFromDataTransformerNam
 FOUNDATION_EXPORT NSValueTransformerName const NSKeyedUnarchiveFromDataTransformerName  API_DEPRECATED_WITH_REPLACEMENT("NSSecureUnarchiveFromDataTransformerName", macos(10.3, 10.14), ios(3.0, 12.0), watchos(2.0, 5.0), tvos(9.0, 12.0));
 FOUNDATION_EXPORT NSValueTransformerName const NSSecureUnarchiveFromDataTransformerName API_AVAILABLE(macos(10.14), ios(12.0), watchos(5.0), tvos(12.0));
 
-NS_CLASS_AVAILABLE(10_3, 3_0)
+API_AVAILABLE(macos(10.3), ios(3.0), watchos(2.0), tvos(9.0))
 @interface NSValueTransformer : NSObject {
 }
 
@@ -43,7 +43,7 @@ API_AVAILABLE(macos(10.14), ios(12.0), watchos(5.0), tvos(12.0))
 
 /// The list of allowable classes which the top-level object in the archive must conform to on encoding and decoding.
 ///
-/// Returns the result of \c +transformedValueClass if not \c Nil; otherwise, currently returns \c NSArray, \c NSDictionary, \c NSString, \c NSNumber, \c NSDate, \c NSData, \c NSURL, \c NSUUID, and \c NSNull.
+/// Returns the result of \c +transformedValueClass if not \c Nil; otherwise, currently returns \c NSArray, \c NSDictionary, \c NSSet, \c NSString, \c NSNumber, \c NSDate, \c NSData, \c NSURL, \c NSUUID, and \c NSNull.
 ///
 /// Can be overridden by subclasses to provide an expanded or different set of allowed transformation classes.
 @property (class, readonly, copy) NSArray<Class> *allowedTopLevelClasses;

@@ -38,7 +38,8 @@ API_AVAILABLE(macos(10.10), ios(8.0), watchos(3.0))
  *
  *  @discussion
  *  application-identifier is the calling process' `application-identifier` entitlement on iOS / tvOS / watchOS.
- *  application-identifier is the calling process' `com.apple.application-identifier` entitlement on macOS
+ *  application-identifier is the calling process' `com.apple.application-identifier` entitlement on macOS.
+ *  On all OSes, if an `com.apple.developer.associated-application-identifier` entitlement is present, its value will be preferred over the `application-identifier` variants.
  */
 + (CKContainer *)defaultContainer;
 

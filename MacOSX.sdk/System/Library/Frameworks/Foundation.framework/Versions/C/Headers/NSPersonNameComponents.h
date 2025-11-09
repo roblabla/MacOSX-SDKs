@@ -1,5 +1,5 @@
 /*	NSPersonNameComponents.h
-	Copyright (c) 2015-2018, Apple Inc. All rights reserved.
+	Copyright (c) 2015-2019, Apple Inc. All rights reserved.
  */
 
 #import <Foundation/NSObject.h>
@@ -7,7 +7,7 @@
 #import <Foundation/NSDictionary.h>
 
 NS_ASSUME_NONNULL_BEGIN
-NS_CLASS_AVAILABLE(10_11, 9_0)
+API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0))
 @interface NSPersonNameComponents : NSObject <NSCopying, NSSecureCoding>{
 @private
     id _private;

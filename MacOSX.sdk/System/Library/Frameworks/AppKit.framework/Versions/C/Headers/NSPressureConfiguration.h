@@ -1,7 +1,7 @@
 /*
     NSPressureConfiguration.h
     Application Kit
-    Copyright (c) 2013-2018, Apple Inc.
+    Copyright (c) 2013-2019, Apple Inc.
     All rights reserved.
 */
 
@@ -11,12 +11,10 @@
 #import <AppKit/NSView.h>
 
 NS_ASSUME_NONNULL_BEGIN
+API_UNAVAILABLE_BEGIN(ios)
 
-NS_CLASS_AVAILABLE_MAC(10_10_3)
-@interface NSPressureConfiguration : NSObject {
-    NSPressureBehavior _pressureBehavior APPKIT_IVAR;
-    NSInteger _reserved1 APPKIT_IVAR;
-}
+API_AVAILABLE(macos(10.10.3))
+@interface NSPressureConfiguration : NSObject
 
 @property(readonly) NSPressureBehavior pressureBehavior;
 
@@ -34,8 +32,9 @@ NS_CLASS_AVAILABLE_MAC(10_10_3)
 
 /* The pressure configuration a Force Click trackpad should use when the cursor is over this view. The system can set this configuration before the application receives the initial mouse down event. Does not affect an active pressure event sequence.
 */
-@property(nullable, strong) NSPressureConfiguration *pressureConfiguration NS_AVAILABLE_MAC(10_11);
+@property(nullable, strong) NSPressureConfiguration *pressureConfiguration API_AVAILABLE(macos(10.11));
 
 @end
 
+API_UNAVAILABLE_END
 NS_ASSUME_NONNULL_END

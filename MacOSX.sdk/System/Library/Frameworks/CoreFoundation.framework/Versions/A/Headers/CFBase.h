@@ -1,7 +1,7 @@
 /*	CFBase.h
-	Copyright (c) 1998-2018, Apple Inc. and the Swift project authors
+	Copyright (c) 1998-2019, Apple Inc. and the Swift project authors
  
-	Portions Copyright (c) 2014-2018, Apple Inc. and the Swift project authors
+	Portions Copyright (c) 2014-2019, Apple Inc. and the Swift project authors
 	Licensed under Apache License v2.0 with Runtime Library Exception
 	See http://swift.org/LICENSE.txt for license information
 	See http://swift.org/CONTRIBUTORS.txt for the list of Swift project authors
@@ -63,21 +63,21 @@
 #define __has_extension(x) 0
 #endif
 
-#if defined(__GNUC__) || TARGET_OS_WIN32
+#if defined(__GNUC__) || 0
 #include <stdint.h>
 #include <stdbool.h>
 #endif
 
-#if __BLOCKS__ && ((TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE)) || (TARGET_OS_EMBEDDED || TARGET_OS_IPHONE))
+#if __BLOCKS__ && (TARGET_OS_OSX || TARGET_OS_IPHONE)
 #include <Block.h>
 #endif
 
 #ifndef CF_OPEN_SOURCE
-  #if defined(__CF_USE_FRAMEWORK_INCLUDES__) || ((TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE)) || (TARGET_OS_EMBEDDED || TARGET_OS_IPHONE))
+  #if defined(__CF_USE_FRAMEWORK_INCLUDES__) || (TARGET_OS_OSX || TARGET_OS_IPHONE)
     #include <MacTypes.h>
   #endif
 #else
-  #if ((TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE)) || (TARGET_OS_EMBEDDED || TARGET_OS_IPHONE)) && !DEPLOYMENT_RUNTIME_SWIFT
+  #if (TARGET_OS_OSX || TARGET_OS_IPHONE) && !DEPLOYMENT_RUNTIME_SWIFT
     #include <libkern/OSTypes.h>
   #endif
 #endif
@@ -132,21 +132,9 @@
 #endif
 #endif
 
-#if TARGET_OS_WIN32
-    #if !defined(CF_EXPORT)
-        #if defined(CF_BUILDING_CF) && defined(__cplusplus)
-            #define CF_EXPORT extern "C" __declspec(dllexport)
-        #elif defined(CF_BUILDING_CF) && !defined(__cplusplus)
-            #define CF_EXPORT extern __declspec(dllexport)
-        #elif defined(__cplusplus)
-            #define CF_EXPORT extern "C" __declspec(dllimport)
-        #else
-            #define CF_EXPORT extern __declspec(dllimport)
-        #endif
-    #endif
-#else
+
 #define CF_EXPORT extern
-#endif
+
 
 CF_EXTERN_C_BEGIN
 
@@ -177,8 +165,6 @@ CF_EXTERN_C_BEGIN
 	#define CF_INLINE static inline
     #elif defined(_MSC_VER)
         #define CF_INLINE static __inline
-    #elif TARGET_OS_WIN32
-	#define CF_INLINE static __inline__
     #endif
 #endif
 
@@ -317,6 +303,12 @@ CF_EXTERN_C_BEGIN
 #define CF_NO_TAIL_CALL __attribute__((not_tail_called))
 #else
 #define CF_NO_TAIL_CALL
+#endif
+
+#if __has_attribute(warn_unused_result)
+#define CF_WARN_UNUSED_RESULT __attribute__((warn_unused_result))
+#else
+#define CF_WARN_UNUSED_RESULT
 #endif
 
 #if !__has_feature(objc_generics_variance)
@@ -686,10 +678,8 @@ CFTypeRef CFMakeCollectable(CFTypeRef cf) CF_AUTOMATED_REFCOUNT_UNAVAILABLE;
 
 #if DEPLOYMENT_RUNTIME_SWIFT
 
-#define _CF_SWIFT_RC_PINNED_FLAG 0x1
-#define _CF_SWIFT_RC_FLAGS_COUNT 2
-#define _CF_CONSTANT_OBJECT_STRONG_RC ((1 << _CF_SWIFT_RC_FLAGS_COUNT) | _CF_SWIFT_RC_PINNED_FLAG)
-
+#define _CF_SWIFT_RC_PINNED_FLAG (0x1)
+#define _CF_CONSTANT_OBJECT_STRONG_RC ((uintptr_t)_CF_SWIFT_RC_PINNED_FLAG)
 #endif
 
 CF_EXTERN_C_END

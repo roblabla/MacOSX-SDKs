@@ -9,6 +9,7 @@
 
 #import <IOKit/IOKitLib.h>
 
+API_UNAVAILABLE(ios, watchos, tvos)
 @interface IOBluetoothObject : NSObject <NSCopying>
 {
     io_service_t		mIOService;

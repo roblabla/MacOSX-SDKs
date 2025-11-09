@@ -25,7 +25,7 @@ extern "C" {
  *  @abstract   A MPSImageDescriptor object describes a attributes of MPSImage and is used to
  *              create one (see MPSImage discussion below)
  */
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(10.0), tvos(10.0))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(10.0), macCatalyst(13.0), tvos(10.0))
 @interface MPSImageDescriptor : NSObject <NSCopying>
 /*! @property   width
  *  @abstract   The width of the CNN image.
@@ -102,7 +102,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(10.0), tvos(10.0))
                                                      usage: (MTLTextureUsage)usage;
 
 -(nonnull instancetype) copyWithZone: (NSZone* __nullable) zone
-        MPS_AVAILABLE_STARTING( macos(10.14), ios(12.0), tvos(12.0));
+        MPS_AVAILABLE_STARTING( macos(10.14), ios(12.0), macCatalyst(13.0), tvos(12.0));
 @end
 
 @class MPSKernel;
@@ -121,24 +121,34 @@ typedef NSArray<MPSImage*>  MPSImageBatch;
  *                  each object in the batch only once, avoiding this problem. Non-temporary
  *                  images and images with readCount already 0 will be ignored.
  *
+ *                  CAUTION: At many places in MPS, the framework assumes all images
+ *                  in the batch have the same characteristics, such as MPSImageFeatureChannelFormat.
+ *                  At times, for example, it is necessary to patch in a special version of the
+ *                  kernel to handle BFloat16 or another characteristic. When this happens, the
+ *                  kernel generally can't respond correctly when some images in a batch have that
+ *                  characteristic and some do not, because the special case handling code is hard
+ *                  compiled in.  For this reason, all images in a batch should be constructed from
+ *                  the same list of descriptor parameters.
+ *
  *  @param  batch   The MPSImageBatch to increment
  *  @param  amount  The value to add to the read count for each unique image in the batch
  *  @return         The number of different images in the batch
  */
 NSUInteger MPSImageBatchIncrementReadCount( MPSImageBatch * __nonnull batch, NSInteger amount )
-    MPS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), tvos(11.3));
+    MPS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3));
 
 /*! @abstract Call [MTLBlitEncoder synchronizeResource:] on unique resources*/
 void MPSImageBatchSynchronize( MPSImageBatch * __nonnull batch, __nonnull id <MTLCommandBuffer> cmdBuf )
-    MPS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), tvos(11.3));
+    MPS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3));
 
 /*! @abstract Call [MTLBlitEncoder resourceSize] on unique resources and return sum */
 NSUInteger MPSImageBatchResourceSize( MPSImageBatch * __nonnull batch )
-    MPS_AVAILABLE_STARTING( macos(10.14), ios(12.0), tvos(12.0));
+    MPS_AVAILABLE_STARTING( macos(10.14), ios(12.0), macCatalyst(13.0), tvos(12.0));
 
 /*! @abstract   Iterate over unique images in the batch
  *  @discussion This function looks only at image address to determine uniqueness.
  *              The same texture stored in different MPSImages would be considered not unique.
+ *
  *  @param      batch           The image batch
  *  @param      iteratorBlock   Callback block to execute once for each unique image.
  *                              Return a value greater than NSIntegerMin to terminate early.
@@ -147,7 +157,7 @@ NSUInteger MPSImageBatchResourceSize( MPSImageBatch * __nonnull batch )
  *  @return     The value returned by the iterator block for the last image on which it ran */
 NSInteger MPSImageBatchIterate( MPSImageBatch * __nonnull batch,
                                 NSInteger (^__nonnull iteratorBlock)( MPSImage * __nonnull image, NSUInteger index ) )
-    MPS_AVAILABLE_STARTING( macos(10.14), ios(12.0), tvos(12.0));
+    MPS_AVAILABLE_STARTING( macos(10.15), ios(13.0), macCatalyst(13.0), tvos(13.0));
 
 /*! @abstract       A class  that allocates new MPSImage or MPSTemporaryImage
  *  @discussion     Sometimes it is prohibitively costly for MPS to figure out how
@@ -269,12 +279,12 @@ NSInteger MPSImageBatchIterate( MPSImageBatch * __nonnull batch,
     typedef NS_ENUM(NSUInteger, MPSPurgeableState)
 #endif
 {
-    MPSPurgeableStateAllocationDeferred MPS_ENUM_AVAILABLE_STARTING( macos(10.13), ios(10.0), tvos(10.0)) MPS_SWIFT_NAME(allocationDeferred) = 0,                // The buffer hasn't been allocated yet. Attempts to set purgeability will be ignored.
-    MPSPurgeableStateKeepCurrent        MPS_ENUM_AVAILABLE_STARTING( macos(10.13), ios(10.0), tvos(10.0)) = MTLPurgeableStateKeepCurrent,
+    MPSPurgeableStateAllocationDeferred MPS_ENUM_AVAILABLE_STARTING( macos(10.13), ios(10.0), macCatalyst(13.0), tvos(10.0)) MPS_SWIFT_NAME(allocationDeferred) = 0,                // The buffer hasn't been allocated yet. Attempts to set purgeability will be ignored.
+    MPSPurgeableStateKeepCurrent        MPS_ENUM_AVAILABLE_STARTING( macos(10.13), ios(10.0), macCatalyst(13.0), tvos(10.0)) = MTLPurgeableStateKeepCurrent,
     
-    MPSPurgeableStateNonVolatile        MPS_ENUM_AVAILABLE_STARTING( macos(10.13), ios(10.0), tvos(10.0)) = MTLPurgeableStateNonVolatile,
-    MPSPurgeableStateVolatile           MPS_ENUM_AVAILABLE_STARTING( macos(10.13), ios(10.0), tvos(10.0)) = MTLPurgeableStateVolatile,
-    MPSPurgeableStateEmpty              MPS_ENUM_AVAILABLE_STARTING( macos(10.13), ios(10.0), tvos(10.0)) = MTLPurgeableStateEmpty,
+    MPSPurgeableStateNonVolatile        MPS_ENUM_AVAILABLE_STARTING( macos(10.13), ios(10.0), macCatalyst(13.0), tvos(10.0)) = MTLPurgeableStateNonVolatile,
+    MPSPurgeableStateVolatile           MPS_ENUM_AVAILABLE_STARTING( macos(10.13), ios(10.0), macCatalyst(13.0), tvos(10.0)) = MTLPurgeableStateVolatile,
+    MPSPurgeableStateEmpty              MPS_ENUM_AVAILABLE_STARTING( macos(10.13), ios(10.0), macCatalyst(13.0), tvos(10.0)) = MTLPurgeableStateEmpty,
 } NS_ENUM_AVAILABLE(10_11, 8_0)
 #if defined(DOXYGEN)
     MPSPurgeableState
@@ -288,9 +298,9 @@ NSInteger MPSImageBatchIterate( MPSImageBatch * __nonnull batch,
 #endif
 {
     // output as order [imageNum][imageHeight][imageWidth][numberOfFeatureChannels]
-    MPSDataLayoutHeightxWidthxFeatureChannels MPS_ENUM_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0)) MPS_SWIFT_NAME(HeightxWidthxFeatureChannels) = 0,
+    MPSDataLayoutHeightxWidthxFeatureChannels MPS_ENUM_AVAILABLE_STARTING( macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0)) MPS_SWIFT_NAME(HeightxWidthxFeatureChannels) = 0,
     // output as order [imageNum][numberOfFeatureChannels][imageHeight][imageWidth]
-    MPSDataLayoutFeatureChannelsxHeightxWidth MPS_ENUM_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0)) = 1,
+    MPSDataLayoutFeatureChannelsxHeightxWidth MPS_ENUM_AVAILABLE_STARTING( macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0)) = 1,
 } NS_ENUM_AVAILABLE(10_13, 11_0)
 #if defined(DOXYGEN)
     MPSDataLayout
@@ -375,7 +385,7 @@ typedef struct
  *              Most MPSImages of 4 or fewer feature channels can generate quicklooks output in
  *              Xcode for easy visualization of image data in the object. MPSTemporaryImages can not.
  */
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(10.0), tvos(10.0))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(10.0), macCatalyst(13.0), tvos(10.0))
 @interface MPSImage :  NSObject
 
 /*!     Get a well known MPSImageAllocator that makes MPSImages */
@@ -414,6 +424,9 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(10.0), tvos(10.0))
 
 /*! @property   pixelFormat
  *  @abstract   The MTLPixelFormat of the underlying texture
+ *  @discussion Note that in some cases, this value may be misleading. For example,
+ *              float16 data (BFloat16) is sometimes stored in MTLPixelFormatRGBA16Unorm
+ *              Please consult the featureChannelFormat.
  */
 @property (readonly, nonatomic) MTLPixelFormat pixelFormat;
 
@@ -432,6 +445,11 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(10.0), tvos(10.0))
  *  @abstract   Description of texture usage.
  */
 @property (readonly, nonatomic) MTLTextureUsage usage;
+
+/*! @property   featureChannelFormat
+ *  @abstract   The true encoding of the feature channels
+ */
+@property (readonly, nonatomic) MPSImageFeatureChannelFormat featureChannelFormat;
 
 /*!
  *  @property   pixelSize
@@ -461,7 +479,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(10.0), tvos(10.0))
 /*! @abstract   The MPSImage from which this MPSImage was derived. Otherwise nil.
  *  @discussion This will point to the original image if this image was created using
  *              -batchRepresentation, -batchRepresentationWithRange: or
- *              -subImageWithRange:.  */
+ *              -subImageWithFeatureChannelRange:.  */
 @property (readonly, nullable, retain, nonatomic)  MPSImage * parent;
 
 /*!
@@ -608,7 +626,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(10.0), tvos(10.0))
  *                  it is a sub-image or sub-batch (.parent is not nil).
  */
 -(NSUInteger)  resourceSize
-    MPS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0));
+    MPS_AVAILABLE_STARTING( macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0));
 
 /*! @abstract       Set (or query) the purgeability state of a MPSImage
  *  @discussion     Usage is per [MTLResource setPurgeableState:], except that the MTLTexture might be
@@ -639,12 +657,10 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(10.0), tvos(10.0))
             region: (MTLRegion)region
 featureChannelInfo: (MPSImageReadWriteParams)featureChannelInfo
         imageIndex: (NSUInteger)imageIndex
-        MPS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0));
+        MPS_AVAILABLE_STARTING( macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0));
 
 
-/*!
- *  @method         writeBytes
- *  @abstract       Set the values inside MPSImage with the Buffer passed in.
+/*! @abstract       Set the values inside MPSImage with the Buffer passed in.
  *  @param          dataBytes                    The array allocated by the user to be used to put data from MPSImage, the length should be
  *                                               imageWidth * imageHeight * numberOfFeatureChannels and dataType should be inferred from pixelFormat
  *                                               defined in the Image Descriptor.
@@ -655,8 +671,10 @@ featureChannelInfo: (MPSImageReadWriteParams)featureChannelInfo
  *                                               The z direction denotes the number of images, thus for 1 image, origin.z = 0 and size.depth = 1
  *  @param          featureChannelInfo           information user fills in to read from a set of feature channels in the image
  *  @param          imageIndex                   Image index in MPSImage to write to.
- *  @discussion     Use the enum to set data is coming in with what order. The data type will be determined by the pixelFormat
- *                  defined in the Image Descriptor.
+ *  @discussion     This method is used to copy data from the storage provided by dataBytes to the MPSImage. The ordering of data in
+ *                  your dataBytes buffer is given by dataLayout. Each image may be stored as either a series of planar images (a series of single WxH images, one per
+ *                  feature channel) or a single chunky image, WxHxfeature_channels. BytesPerRow and BytesPerImage are there to allow some padding between
+ *                  successive rows and successive images. No padding is allowed between successive feature channels.
  */
 -(void) writeBytes: (const void * __nonnull)dataBytes
         dataLayout: (MPSDataLayout)dataLayout
@@ -664,7 +682,36 @@ featureChannelInfo: (MPSImageReadWriteParams)featureChannelInfo
             region: (MTLRegion)region
 featureChannelInfo: (MPSImageReadWriteParams)featureChannelInfo
         imageIndex: (NSUInteger)imageIndex
-        MPS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0));
+        MPS_AVAILABLE_STARTING( macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0));
+
+/*! @abstract       Set the values inside MPSImage with the Buffer passed in.
+ *  @param          dataBytes                    The array allocated by the user to be used to put data from MPSImage, the length should be
+ *                                               imageWidth * imageHeight * numberOfFeatureChannels and dataType should be inferred from pixelFormat
+ *                                               defined in the Image Descriptor.
+ *  @param          dataLayout                   The enum tells how to layout MPS data in the buffer.
+ *  @param          bytesPerColumn               This is the stride in bytes from W[0] to W[1], for both HWC and CHW orderings in the buffer pointed to by dataBytes.
+ *  @param          bytesPerRow                  Bytes to stride to point to next row(pixel just below current one, i.e. H[0] to H[1]) in the buffer pointed to by  dataBytes.
+ *  @param          bytesPerImage                This is the stride in bytes from image[0] to image[1] im the buffer pointed to by dataBytes.
+ *  @param          region                       region of the MPSImage to write to. A region is a structure with the origin in the Image from which to start
+ *                                               writing values and a size which represents the width and height of the rectangular region to write in.
+ *                                               The z direction denotes the number of images, thus for 1 image, origin.z = 0 and size.depth = 1
+ *  @param          featureChannelInfo           information user fills in to read from a set of feature channels in the image
+ *  @param          imageIndex                   Image index in MPSImage to write to.
+ *  @discussion     This method is used to copy data from the storage provided by dataBytes to the MPSImage. The ordering of data in
+ *                  your dataBytes buffer is given by dataLayout. Each image may be stored as either a series of planar images (a series of single WxH images, one per
+ *                  feature channel) or a single chunky image, WxHxfeature_channels. BytesPerRow and BytesPerImage are there to allow some padding between
+ *                  successive rows and successive images. No padding is allowed between successive feature channels.
+ */
+-(void) writeBytes: (const void * __nonnull)dataBytes
+        dataLayout: (MPSDataLayout)dataLayout
+    bytesPerColumn: (NSUInteger)bytesPerColumn
+       bytesPerRow: (NSUInteger)bytesPerRow
+     bytesPerImage: (NSUInteger)bytesPerImage
+            region: (MTLRegion)region
+featureChannelInfo: (MPSImageReadWriteParams)featureChannelInfo
+        imageIndex: (NSUInteger)imageIndex
+        MPS_AVAILABLE_STARTING( macos(10.15), ios(13.0), macCatalyst(13.0), tvos(13.0));
+
 
 /*!
  *  @method         readBytes
@@ -674,14 +721,24 @@ featureChannelInfo: (MPSImageReadWriteParams)featureChannelInfo
  *                                               defined in the Image Descriptor.
  *  @param          dataLayout                   The enum tells how to layout MPS data in the buffer.
  *  @param          bytesPerRow                  Bytes to stride to point to next row(pixel just below current one) in the user buffer.
- *  @param          bytesPerImage                Bytes to stride to point to next slice in the user buffer.
+ *  @param          bytesPerImage                Bytes to stride to point to next dataBytes image. See region.size.depth for image count.
  *  @param          featureChannelInfo           information user fills in to write to a set of feature channels in the image
  *  @param          imageIndex                   Image index in MPSImage to write to.
  *  @param          region                       region of the MPSImage to read from. A region is a structure with the origin in the Image from which to start
  *                                               reading values and a size which represents the width and height of the rectangular region to read from.
  *                                               The z direction denotes the number of images, thus for 1 image, origin.z = 0 and size.depth = 1
- *  @discussion     Use the enum to set data is coming in with what order. The data type will be determined by the pixelFormat
- *                  defined in the Image Descriptor.
+ *
+ *  @discussion     This method is used to copy data from the MPSImage to the storage provided by dataBytes. The ordering of data in
+ *                  your dataBytes buffer is given by dataLayout. Each image may be stored as either a series of planar images (a series of single WxH images, one per
+ *                  feature channel) or a single chunky image, WxHxfeature_channels. BytesPerRow and BytesPerImage are there to allow some padding between
+ *                  successive rows and successive images. No padding is allowed between successive feature channels.
+ *
+ *                  BUG: Prior to MacOS 10.15, iOS/tvOS 13.0, incorrect behavior may be observed if region.size.depth != 1 or if
+ *                       bytesPerRow allowed for unused padding between rows.
+ *                  BUG: To provide for full capability to extract and insert content from arbitrarily sized buffers, there should
+ *                       also be a featureChannelStride in addition to bytesPerRow and bytesPerImage. With the current design, when we finish the
+ *                       last feature channel, the next byte will contain the 0th feature channel for the next texel or slice, depending
+ *                       on packing order. This method can not be used to modify some but not all of the feature channels in an image.
  */
 -(void)  readBytes: (void * __nonnull)dataBytes
         dataLayout: (MPSDataLayout)dataLayout
@@ -690,7 +747,7 @@ featureChannelInfo: (MPSImageReadWriteParams)featureChannelInfo
             region: (MTLRegion)region
 featureChannelInfo: (MPSImageReadWriteParams)featureChannelInfo
         imageIndex: (NSUInteger)imageIndex
-        MPS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0));
+        MPS_AVAILABLE_STARTING( macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0));
 
 /*!
  *  @method         writeBytes
@@ -700,7 +757,7 @@ featureChannelInfo: (MPSImageReadWriteParams)featureChannelInfo
  *                                               defined in the Image Descriptor.
  *  @param          dataLayout                   The enum tells how to layout MPS data in the buffer.
  *  @param          bytesPerRow                  Bytes to stride to point to next row(pixel just below current one) in the user buffer.
- *  @param          bytesPerImage                Bytes to stride to point to next slice in the user buffer.
+ *  @param          bytesPerImage                Bytes to stride to point to next dataBytes image. See region.size.depth for image count.
  *  @param          region                       region of the MPSImage to write to. A region is a structure with the origin in the Image from which to start
  *                                               writing values and a size which represents the width and height of the rectangular region to write in.
  *                                               The z direction denotes the number of images, thus for 1 image, origin.z = 0 and size.depth = 1
@@ -708,6 +765,13 @@ featureChannelInfo: (MPSImageReadWriteParams)featureChannelInfo
  *  @param          imageIndex                   Image index in MPSImage to write to.
  *  @discussion     Use the enum to set data is coming in with what order. The data type will be determined by the pixelFormat
  *                  defined in the Image Descriptor.
+ *
+ *                  BUG: Prior to MacOS 10.15, iOS/tvOS 13.0, incorrect behavior may be observed if region.size.depth != 1 or if
+ *                       bytesPerRow allowed for unused padding between rows.
+ *                  BUG: To provide for full capability to extract and insert content from arbitrarily sized buffers, there should
+ *                       also be a featureChannelStride in addition to bytesPerRow and bytesPerImage. With the current design, when we finish the
+ *                       last feature channel, the next byte will contain the 0th feature channel for the next texel or slice, depending
+ *                       on packing order. This method can not be used to modify some but not all of the feature channels in an image.
  */
 -(void) writeBytes: (const void * __nonnull)dataBytes
         dataLayout: (MPSDataLayout)dataLayout
@@ -716,7 +780,7 @@ featureChannelInfo: (MPSImageReadWriteParams)featureChannelInfo
             region: (MTLRegion)region
 featureChannelInfo: (MPSImageReadWriteParams)featureChannelInfo
         imageIndex: (NSUInteger)imageIndex
-        MPS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), tvos(11.3));
+        MPS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3));
 
 
 /*!
@@ -733,7 +797,7 @@ featureChannelInfo: (MPSImageReadWriteParams)featureChannelInfo
 -(void) readBytes: (void * __nonnull)dataBytes
        dataLayout: (MPSDataLayout)dataLayout
        imageIndex: (NSUInteger)imageIndex
-        MPS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0));
+        MPS_AVAILABLE_STARTING( macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0));
 
 
 /*!
@@ -750,7 +814,7 @@ featureChannelInfo: (MPSImageReadWriteParams)featureChannelInfo
 -(void) writeBytes: (const void * __nonnull)dataBytes
         dataLayout: (MPSDataLayout)dataLayout
         imageIndex: (NSUInteger)imageIndex
-        MPS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0));
+        MPS_AVAILABLE_STARTING( macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0));
 
 /*! @abstract   Flush the underlying MTLTexture from the device's caches, and invalidate any CPU caches if needed.
  *  @discussion This will call [id <MTLBlitEncoder> synchronizeResource: ] on the image's MTLTexture, if any.
@@ -759,7 +823,7 @@ featureChannelInfo: (MPSImageReadWriteParams)featureChannelInfo
  *              It is more efficient to use this method than to attempt to do this yourself with the texture property.
  *  @param      commandBuffer       The commandbuffer on which to synchronize   */
 -(void) synchronizeOnCommandBuffer: (__nonnull id <MTLCommandBuffer>) commandBuffer
-        MPS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), tvos(11.3));
+        MPS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3));
 
 
 @end
@@ -861,7 +925,7 @@ featureChannelInfo: (MPSImageReadWriteParams)featureChannelInfo
  *
  *              MPSTemporaryImages can otherwise be used wherever MPSImages are used.
  */
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(10.0), tvos(10.0))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(10.0), macCatalyst(13.0), tvos(10.0))
 @interface  MPSTemporaryImage : MPSImage
 
 /*!     Get a well known MPSImageAllocator that makes MPSTemporaryImages */
@@ -927,7 +991,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(10.0), tvos(10.0))
 +(nonnull instancetype) temporaryImageWithCommandBuffer: (nonnull id <MTLCommandBuffer>) commandBuffer
                                       textureDescriptor: (const MTLTextureDescriptor * __nonnull) textureDescriptor
                                         featureChannels: (NSUInteger) featureChannels
-                            MPS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3));
+                            MPS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3));
 
 /*! @abstract       Help MPS decide which allocations to make ahead of time
  *  @discussion     The texture cache that underlies the MPSTemporaryImage can automatically allocate new storage as

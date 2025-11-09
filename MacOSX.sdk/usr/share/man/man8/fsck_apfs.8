@@ -7,7 +7,8 @@
 .Nd APFS consistency check
 .Sh SYNOPSIS
 .Nm fsck_apfs
-.Op Fl q | n | y
+.Op Fl n | y
+.Op Fl q
 .Op Fl l
 .Op Fl s
 .Op Fl S
@@ -34,7 +35,16 @@ The options are as follows:
 .It Fl q
 Causes
 .Nm
-to quickly check whether the volume is `clean'.
+to quickly check whether the device is `clean'. If
+.Ar device
+is an APFS volume,
+.Nm
+will quickly check the APFS container and the specified APFS volume. If
+.Ar device
+is an APFS container,
+.Nm
+will quickly check the APFS container and all the APFS volumes in it.
+By default, no repairs are attempted during a quick check.
 .It Fl n
 Never attempt to repair any damage that is found.
 .It Fl y

@@ -1,7 +1,7 @@
 /*
     NSClickGestureRecognizer.h
     Application Kit
-    Copyright (c) 2013-2018, Apple Inc.
+    Copyright (c) 2013-2019, Apple Inc.
     All rights reserved.
 */
 
@@ -9,20 +9,10 @@
 #import <AppKit/NSGestureRecognizer.h>
 
 NS_ASSUME_NONNULL_BEGIN
+API_UNAVAILABLE_BEGIN(ios)
 
-NS_CLASS_AVAILABLE(10_10, NA)
-@interface NSClickGestureRecognizer : NSGestureRecognizer <NSCoding> {
-@private
-    NSInteger _flags APPKIT_IVAR;
-    NSPoint _location APPKIT_IVAR;
-    NSUInteger _buttonMask APPKIT_IVAR;
-    NSInteger _numberOfClicksRequired APPKIT_IVAR;
-    NSInteger _currentButtonCount APPKIT_IVAR;
-    NSInteger _activeButtonCount APPKIT_IVAR;
-    NSInteger _currentClickCount APPKIT_IVAR;
-    id _reserved0 APPKIT_IVAR;
-    id _reserved1 APPKIT_IVAR;
-}
+API_AVAILABLE(macos(10.10))
+@interface NSClickGestureRecognizer : NSGestureRecognizer <NSCoding>
 
 /* bitfield of the button(s) required to recognize this click where bit 0 is the primary button, 1 is the secondary button, etc...
    NSClickGestureRecognizer dynamically returns YES to delay primary, secondary and other mouse events depending on this value.
@@ -32,7 +22,8 @@ NS_CLASS_AVAILABLE(10_10, NA)
 /* the number of clicks required to match */
 @property NSInteger numberOfClicksRequired; // Defaults to 1
 
-@property NSInteger numberOfTouchesRequired NS_AVAILABLE_MAC(10_12_2);
+@property NSInteger numberOfTouchesRequired API_AVAILABLE(macos(10.12.2));
 @end
 
+API_UNAVAILABLE_END
 NS_ASSUME_NONNULL_END

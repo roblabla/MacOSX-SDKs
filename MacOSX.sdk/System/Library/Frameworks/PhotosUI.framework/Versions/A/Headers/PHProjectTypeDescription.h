@@ -9,6 +9,7 @@
 #import <PhotosUI/PhotosUITypes.h>
 
 NS_ASSUME_NONNULL_BEGIN
+API_AVAILABLE_BEGIN(macos(10.13))
 
 /**
  A PHProjectTypeDescription object represents one project type choice in the project picker that is presented
@@ -17,7 +18,6 @@ NS_ASSUME_NONNULL_BEGIN
  -[PHProjectExtensionController typeDescriptionDataSourceForCategory:invalidator:].
  The info includes a type, localized title, localized (attributed) description, image and optional subtype descriptions.
  */
-API_AVAILABLE(macos(10.13))
 @interface PHProjectTypeDescription : NSObject <NSSecureCoding>
 
 /// Identifier for the project type info. These should be added to the extensible string enum defined in PhotosUITypes.h.
@@ -80,4 +80,5 @@ API_AVAILABLE(macos(10.13))
 
 @end
 
+API_AVAILABLE_END
 NS_ASSUME_NONNULL_END

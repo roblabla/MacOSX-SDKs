@@ -78,7 +78,7 @@ typedef struct LSLaunchURLSpec {
   const AEDesc * __nullable     passThruParams;         /* passed untouched to application as optional parameter*/
   LSLaunchFlags                 launchFlags;
   void * __nullable             asyncRefCon;            /* used if you register for app birth/death notification*/
-} LSLaunchURLSpec                                                    __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+} LSLaunchURLSpec                                                    API_AVAILABLE( macos(10.0) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 
@@ -118,7 +118,7 @@ typedef struct LSLaunchURLSpec {
 extern OSStatus 
 LSOpenCFURLRef(
   CFURLRef                         inURL,
-  __nullable CFURLRef *__nullable  outLaunchedURL)                   __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  __nullable CFURLRef *__nullable  outLaunchedURL)                   API_AVAILABLE( macos(10.0) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 
@@ -154,7 +154,7 @@ LSOpenCFURLRef(
 extern OSStatus 
 LSOpenFromURLSpec(
   const LSLaunchURLSpec *          inLaunchSpec,
-  __nullable CFURLRef *__nullable  outLaunchedURL)                   __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  __nullable CFURLRef *__nullable  outLaunchedURL)                   API_AVAILABLE( macos(10.0) ) API_UNAVAILABLE( ios, tvos, watchos );
 #endif
 
 

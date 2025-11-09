@@ -23,7 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
  @discussion
     When rendering effects to images produced by cameras, or performing computer vision tasks such as correcting images for geometric distortions, it is necessary to characterize the camera's calibration information, such as its pixel focal length, principal point, lens distortion characteristics, etc. AVCameraCalibrationData provides this information.
  */
-API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0)) __WATCHOS_PROHIBITED
+API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0)) API_UNAVAILABLE(watchos)
 @interface AVCameraCalibrationData : NSObject
 {
 @private
@@ -77,7 +77,7 @@ AV_INIT_UNAVAILABLE
 /*!
  @property pixelSize
  @abstract
-    The size of one pixel in millimeters
+    The size of one pixel at intrinsicMatrixReferenceDimensions in millimeters.
  */
 @property(nonatomic, readonly) float pixelSize;
 
@@ -108,7 +108,7 @@ AV_INIT_UNAVAILABLE
 /*!
  @property lensDistortionCenter
  @abstract
-    A CGPoint describing the offset of the lens' distortion center from the top left.
+    A CGPoint describing the offset of the lens’ distortion center from the top left in intrinsicMatrixReferenceDimensions.
  
  @discussion
     Due to geometric distortions in the image, the center of the distortion may not be equal to the optical center (principal point) of the lens. When making an image rectilinear, the distortion center should be used rather than the optical center of the image. For more information, see the reference implementation below.

@@ -11,7 +11,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-__IOS_AVAILABLE(10.0) __TVOS_AVAILABLE(10.0) __WATCHOS_AVAILABLE(3.0) __OSX_AVAILABLE(10.14)
+__API_AVAILABLE(macos(10.14), ios(10.0), watchos(3.0), tvos(10.0))
 @interface UNNotification : NSObject <NSCopying, NSSecureCoding>
 
 // The date displayed on the notification.

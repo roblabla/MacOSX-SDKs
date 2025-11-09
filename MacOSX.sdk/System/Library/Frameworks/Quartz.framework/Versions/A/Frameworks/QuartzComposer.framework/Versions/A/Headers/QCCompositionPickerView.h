@@ -1,6 +1,7 @@
 /*
 	Copyright:	(c) 2003-2008 by Apple, Inc., all rights reserved.
 */
+#import <QuartzComposer/QuartzComposerDefines.h>
 #import <AppKit/AppKit.h>
 
 #if defined(MAC_OS_X_VERSION_10_5) && (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
@@ -13,12 +14,13 @@
 */
 
 /* Notification names */
-extern NSString* const QCCompositionPickerViewDidSelectCompositionNotification; //QCComposition
+extern NSString* const QCCompositionPickerViewDidSelectCompositionNotification QC_DEPRECATED_MAC(10_15); //QCComposition
 
 /* Opaque QCComposition object from QCCompositionRepository */
 @class QCComposition;
 
 /* Quartz Composer composition picker view */
+QC_CLASS_DEPRECATED_MAC(10_15)
 @interface QCCompositionPickerView : NSView
 {
 @private
@@ -132,6 +134,7 @@ Sets / Retrieves number of rows
 @end
 
 /* Informal protocol for the QCCompositionPickerView delegate */
+QC_CLASS_DEPRECATED_MAC(10_15)
 @interface NSObject (QCCompositionPickerViewDelegate)
 
 /*

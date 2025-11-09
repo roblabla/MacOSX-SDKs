@@ -5,7 +5,7 @@
  
      Version:    ATS
  
-     Copyright:  Copyright 1997-2018 by Apple Inc., all rights reserved.
+     Copyright:  Copyright 1997-2019 by Apple Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -20,17 +20,15 @@
 #include <CoreServices/CoreServices.h>
 #endif
 
-#ifndef __CARBONCORE__
-#include <CarbonCore/CarbonCore.h>
-#endif
-
 #ifndef __CGGEOMETRY__
 #include <CoreGraphics/CGGeometry.h>
 #endif
 
-
-
 #include <AvailabilityMacros.h>
+
+#ifndef __ATSDEFINES__
+#include <ATS/ATSDefines.h>
+#endif
 
 #if PRAGMA_ONCE
 #pragma once
@@ -61,6 +59,7 @@ typedef CGPoint                         ATSPoint;
 typedef Float32Point                    ATSPoint;
 #endif  /* defined(__LP64__) */
 
+#if ATS_LEGACY_API
 #ifdef __LP64__
 /*
    ATSFSSpec serves as a temporary place holder for the FSSpec data type which is deprecated for 64-bit. 
@@ -75,6 +74,7 @@ typedef struct ATSFSSpec                ATSFSSpec;
 #else
 typedef FSSpec                          ATSFSSpec;
 #endif  /* defined(__LP64__) */
+#endif // ATS_LEGACY_API
 
 /* FMGeneration */
 typedef UInt32                          FMGeneration;
@@ -138,6 +138,8 @@ enum {
   kFMTrueTypeFontTechnology     = 'true',
   kFMPostScriptFontTechnology   = 'typ1'
 };
+
+#if ATS_LEGACY_API
 
 typedef CALLBACK_API( OSStatus , FMFontFamilyCallbackFilterProcPtr )(FMFontFamily iFontFamily, void *iRefCon);
 typedef CALLBACK_API( OSStatus , FMFontCallbackFilterProcPtr )(FMFont iFont, void *iRefCon);
@@ -268,6 +270,8 @@ struct FMFilter {
   }                       filter;
 };
 typedef struct FMFilter                 FMFilter;
+
+#endif // ATS_LEGACY_API
 
 typedef OptionBits                      ATSOptionFlags;
 typedef UInt32                          ATSGeneration;

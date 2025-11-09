@@ -6,14 +6,10 @@
 	Copyright 2008-2016 Apple Inc. All rights reserved.
 */
 
-#import <AVFoundation/AVBase.h>
-#import <AVFoundation/AVAudioFormat.h>
+#import <AVFAudio/AVAudioFormat.h>
 #import <Foundation/Foundation.h>
 #import <AVFAudio/AVAudioSettings.h>
-
-#if TARGET_OS_IPHONE
 #import <AVFAudio/AVAudioSession.h>
-#endif // #if TARGET_OS_EMBEDDED
 
 #import <Availability.h>
 
@@ -23,7 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 @class NSURL, NSError;
 
 
-API_AVAILABLE(macos(10.7), ios(3.0), watchos(4.0)) API_UNAVAILABLE(tvos) 
+API_AVAILABLE(macos(10.7), ios(3.0), watchos(4.0)) API_UNAVAILABLE(tvos)
 @interface AVAudioRecorder : NSObject {
 @private
     void *_impl;
@@ -61,7 +57,7 @@ API_AVAILABLE(macos(10.7), ios(3.0), watchos(4.0)) API_UNAVAILABLE(tvos)
 @property(readonly) AVAudioFormat *format API_AVAILABLE(macos(10.12), ios(10.0), watchos(4.0)) API_UNAVAILABLE(tvos);
 
 /* the delegate will be sent messages from the AVAudioRecorderDelegate protocol */ 
-@property(assign, nullable) id<AVAudioRecorderDelegate> delegate;
+@property(weak, nullable) id<AVAudioRecorderDelegate> delegate;
 
 /* get the current time of the recording - only valid while recording */
 @property(readonly) NSTimeInterval currentTime;
@@ -77,18 +73,16 @@ API_AVAILABLE(macos(10.7), ios(3.0), watchos(4.0)) API_UNAVAILABLE(tvos)
 - (float)peakPowerForChannel:(NSUInteger)channelNumber; /* returns peak power in decibels for a given channel */
 - (float)averagePowerForChannel:(NSUInteger)channelNumber; /* returns average power in decibels for a given channel */
 
-#if TARGET_OS_IPHONE
 /* The channels property lets you assign the output to record specific channels as described by AVAudioSession's channels property */
 /* This property is nil valued until set. */
 /* The array must have the same number of channels as returned by the numberOfChannels property. */
-@property(nonatomic, copy, nullable) NSArray<AVAudioSessionChannelDescription *> *channelAssignments API_AVAILABLE(macos(10.9), ios(7.0), watchos(4.0)) API_UNAVAILABLE(tvos); /* Array of AVAudioSessionChannelDescription objects */
-#endif
+@property(nonatomic, copy, nullable) NSArray<AVAudioSessionChannelDescription *> *channelAssignments API_AVAILABLE(ios(7.0), watchos(4.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(tvos); /* Array of AVAudioSessionChannelDescription objects */
 
 @end
 
 
 /* A protocol for delegates of AVAudioRecorder */
-API_AVAILABLE(macos(10.7), ios(3.0), watchos(4.0)) API_UNAVAILABLE(tvos) 
+API_AVAILABLE(macos(10.7), ios(3.0), watchos(4.0)) API_UNAVAILABLE(tvos)
 @protocol AVAudioRecorderDelegate <NSObject>
 @optional 
 

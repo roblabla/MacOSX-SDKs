@@ -12,7 +12,7 @@
 #import <MPSRayIntersector/MPSAccelerationStructure.h>
 
 @class MPSAccelerationStructureGroup;
-@class MPSTriangleAccelerationStructure;
+@class MPSPolygonAccelerationStructure;
 
 /**
  * @brief Instance transformation type options
@@ -26,13 +26,13 @@ typedef NS_ENUM(NSUInteger, MPSTransformType) {
 
     /**
      * @brief All instances have the identity transformation (no transformation). This can be used
-     * to compose multiple triangle acceleration structures in an instance acceleration structure
+     * to compose multiple polygon acceleration structures in an instance acceleration structure
      * without the cost of transforming instances. For example, geometry can be divided into
-     * static and dynamic triangle acceleration structures which can be rebuilt and refit
+     * static and dynamic polygon acceleration structures which can be rebuilt and refit
      * independently.
      */
     MPSTransformTypeIdentity = 1
-} MPS_ENUM_AVAILABLE_STARTING(macos(10.14), ios(12.0), tvos(12.0));
+} MPS_ENUM_AVAILABLE_STARTING(macos(10.14), ios(12.0), macCatalyst(13.0), tvos(12.0));
 
 /**
  * @brief An acceleration structure built over instances of other acceleration structures
@@ -141,7 +141,7 @@ typedef NS_ENUM(NSUInteger, MPSTransformType) {
  *
  * See MPSAccelerationStructure for more information
  */
-MPS_CLASS_AVAILABLE_STARTING(macos(10.14), ios(12.0), tvos(12.0))
+MPS_CLASS_AVAILABLE_STARTING(macos(10.14), ios(12.0), macCatalyst(13.0), tvos(12.0))
 @interface MPSInstanceAccelerationStructure : MPSAccelerationStructure
 
 /**
@@ -150,10 +150,10 @@ MPS_CLASS_AVAILABLE_STARTING(macos(10.14), ios(12.0), tvos(12.0))
  * transformation matrix in the transform buffer. All acceleration structures must share a single
  * vertex buffer, optional index buffer, and optional mask buffer, though they may have different
  * offsets within each buffer, and all acceleration structures must share the same acceleration
- * structure group. If a triangle acceleration structure is rebuilt or refit, the instance
+ * structure group. If a polygon acceleration structure is rebuilt or refit, the instance
  * acceleration structure must subsequently be rebuilt or refit.
  */
-@property (nonatomic, retain) NSArray <MPSTriangleAccelerationStructure *> * _Nullable accelerationStructures;
+@property (nonatomic, retain) NSArray <MPSPolygonAccelerationStructure *> * _Nullable accelerationStructures;
 
 /**
  * @brief Buffer containing the 32 bit unsigned integer index into the acceleration structure array

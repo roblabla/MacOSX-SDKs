@@ -1,7 +1,7 @@
 /*
     NSPropertyMapping.h
     Core Data
-    Copyright (c) 2004-2018, Apple Inc.
+    Copyright (c) 2004-2019, Apple Inc.
     All rights reserved.
 */
 
@@ -15,19 +15,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 API_AVAILABLE(macosx(10.5),ios(3.0))
 @interface NSPropertyMapping : NSObject {
-#if (!__OBJC2__)
-    @private
-    void *_reserved;
-    NSArray *_transformValidations;
-    NSArray *_propertyTransforms;
-    NSString *_name;
-    NSExpression *_valueExpression;
-    NSDictionary *_userInfo;
-    struct __propertyMappingFlags {
-        unsigned int _isInUse:1;
-        unsigned int _reservedPropertyMapping:31;
-    } _propertyMappingFlags;
-#endif
 }
 
 /* Returns/sets the name of the property in the destination entity for the mapping.  

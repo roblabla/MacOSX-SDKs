@@ -2,11 +2,15 @@
 //  connection.h
 //  Network
 //
-//  Copyright (c) 2015-2018 Apple Inc. All rights reserved.
+//  Copyright (c) 2015-2019 Apple Inc. All rights reserved.
 //
 
 #ifndef __NW_CONNECTION_H__
 #define __NW_CONNECTION_H__
+
+#ifndef __NW_INDIRECT__
+#warning "Please include <Network/Network.h> instead of this file directly."
+#endif // __NW_INDIRECT__
 
 #include <Network/endpoint.h>
 #include <Network/parameters.h>
@@ -273,7 +277,7 @@ nw_connection_restart(nw_connection_t connection);
  *		caller may clean up any associated memory or objects.
  *
  *		Outstanding sends and receives will receive errors before the state changes to cancelled.
- *		There is no guarantee that any outstanding sends that have not yet send completion handlers
+ *		There is no guarantee that any outstanding sends that have not yet delivered send completion handlers
  *		will send data before the connection is closed.
  *
  * @param connection
@@ -328,7 +332,7 @@ nw_connection_cancel_current_endpoint(nw_connection_t connection);
  *
  * @param content
  *		The received content, which has a length constrained by the call to nw_connection_receive().
- *		The content may be NULL in two cases: (1) the receieve context (logical message) is now complete,
+ *		The content may be NULL in two cases: (1) the receive context (logical message) is now complete,
  *		and the callback is only delivering the completed event; or, (2) the connection encountered
  *		an error and there is no data to deliver. Note that the content may be non-NULL even in the
  *		case of an error if there was some data received before the error was encountered. The caller

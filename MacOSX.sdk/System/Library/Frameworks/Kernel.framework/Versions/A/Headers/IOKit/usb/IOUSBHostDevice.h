@@ -217,6 +217,11 @@ if(   stringDescriptor != NULL
 #include <IOKit/usb/IOUSBHostFamily.h>
 #include <IOKit/usb/IOUSBHostPipe.h>
 #include <IOKit/IOBufferMemoryDescriptor.h>
+
+#if TARGET_OS_OSX
+#include <USBDriverKit/IOUSBHostDevice.h>
+#endif
+
 #include <IOKit/IOWorkLoop.h>
 #include <IOKit/IOCommandGate.h>
 #include <IOKit/pwr_mgt/RootDomain.h>
@@ -247,7 +252,11 @@ class IOUSBHostDevice : public IOService
     friend class AppleUSBIORequest;
     friend class AppleUSBHostDeviceIdler;
 
+#if TARGET_OS_OSX
+    OSDeclareDefaultStructorsWithDispatch(IOUSBHostDevice)
+#else
     OSDeclareDefaultStructors(IOUSBHostDevice)
+#endif
 
 public:
     /*!
@@ -308,6 +317,7 @@ public:
     virtual bool compareProperty(OSDictionary* matching, const char* key);
     virtual bool compareProperty(OSDictionary* matching, const OSString* key);
     virtual bool matchPropertyTable(OSDictionary* table, SInt32* score);
+    virtual bool matchPropertyTable(OSDictionary* table);
 
     virtual IOReturn setProperties(OSObject* properties);
 
@@ -331,7 +341,9 @@ public:
      */
     virtual void close(IOService* forClient, IOOptionBits options = 0);
     virtual void handleClose(IOService* forClient, IOOptionBits options);
-    
+
+    virtual IOReturn newUserClient(task_t owningTask, void* securityID, UInt32 type, IOUserClient** handler);
+
     virtual IOReturn message(UInt32 type, IOService* provider,  void* argument = 0);
 
     virtual const char* stringFromReturn(IOReturn code);
@@ -770,6 +782,10 @@ protected:
     OSMetaClassDeclareReservedUnused(IOUSBHostDevice, 97);
     OSMetaClassDeclareReservedUnused(IOUSBHostDevice, 98);
     OSMetaClassDeclareReservedUnused(IOUSBHostDevice, 99);
+    
+#if TARGET_OS_OSX
+    static void asyncDeviceRequestCompletionCallback(void *owner, void *parameter, IOReturn status, uint32_t bytesTransferred);
+#endif
 
 protected:
     enum
@@ -804,9 +820,12 @@ protected:
         tUSBDeviceLPMStatus _lpmU1Status;
         tUSBDeviceLPMStatus _lpmU2Status;
         tUSBDeviceLPMStatus _lpmL1Status;
+        OSDictionary*       _dkInterfaceIteratorDict;
+        uintptr_t           _dkInterfaceInteratorRefID;
     };
 
     tExpansionData* _expansionData;
+
 
 private:
     enum

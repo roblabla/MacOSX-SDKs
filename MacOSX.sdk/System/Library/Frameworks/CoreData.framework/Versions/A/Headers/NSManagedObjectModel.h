@@ -1,7 +1,7 @@
 /*
     NSManagedObjectModel.h
     Core Data
-    Copyright (c) 2004-2018, Apple Inc.
+    Copyright (c) 2004-2019, Apple Inc.
     All rights reserved.
 */
 
@@ -19,24 +19,6 @@ NS_ASSUME_NONNULL_BEGIN
 // Models describe object graphs to be managed. Models (and their entities/properties/fetch request templates) are editable until they are used by a persistent store coordinator, allowing developers to create/modify them dynamically. However, once a model is being used, it MUST NOT be changed. When the persistent store coordinator first fetches data using a model, it will become uneditable. Any attempt to mutate a model or any of its subobjects after that point will cause an exception to be thrown. If you need to modify a model that is in use, create a copy, modify the copy, and then discard the objects with the old model.
 API_AVAILABLE(macosx(10.4),ios(3.0))
 @interface NSManagedObjectModel : NSObject <NSCoding, NSCopying, NSFastEnumeration> {
-#if (!__OBJC2__)
-@private
-	id _dataForOptimization;
-	id *_optimizationHints;
-    id *_additionalPrivateIvars;
-    NSMutableDictionary *_entities;
-    NSMutableDictionary *_configurations;
-    NSMutableDictionary *_fetchRequestTemplates;
-	NSSet *_versionIdentifiers;
-    struct __managedObjectModelFlags {
-        unsigned int _isInUse:1;
-        unsigned int _isImmutable:1;
-        unsigned int _isOptimizedForEncoding:1;
-        unsigned int _hasEntityWithConstraints:1;
-        unsigned int _skipUserInfoTombstones:1;
-        unsigned int _reservedEntityDescription:27;
-    } _managedObjectModelFlags;
-#endif
 }
 
 + (nullable NSManagedObjectModel *)mergedModelFromBundles:(nullable NSArray<NSBundle *> *)bundles;  // looks up all models in the specified bundles and merges them; if nil is specified as argument, uses the main bundle

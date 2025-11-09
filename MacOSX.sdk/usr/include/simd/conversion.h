@@ -1492,10 +1492,10 @@ static simd_int3  SIMD_CFUNC simd_int_sat(simd_float3   __x) { return simd_bitse
 static simd_int4  SIMD_CFUNC simd_int_sat(simd_float4   __x) { return simd_bitselect(simd_int(simd_max(__x,-0x1.0p31f)), 0x7fffffff, __x >= 0x1.0p31f); }
 static simd_int8  SIMD_CFUNC simd_int_sat(simd_float8   __x) { return simd_bitselect(simd_int(simd_max(__x,-0x1.0p31f)), 0x7fffffff, __x >= 0x1.0p31f); }
 static simd_int16 SIMD_CFUNC simd_int_sat(simd_float16  __x) { return simd_bitselect(simd_int(simd_max(__x,-0x1.0p31f)), 0x7fffffff, __x >= 0x1.0p31f); }
-static simd_int2  SIMD_CFUNC simd_int_sat(simd_long2    __x) { return simd_int(simd_clamp(__x,-0x80000000,0x7fffffff)); }
-static simd_int3  SIMD_CFUNC simd_int_sat(simd_long3    __x) { return simd_int(simd_clamp(__x,-0x80000000,0x7fffffff)); }
-static simd_int4  SIMD_CFUNC simd_int_sat(simd_long4    __x) { return simd_int(simd_clamp(__x,-0x80000000,0x7fffffff)); }
-static simd_int8  SIMD_CFUNC simd_int_sat(simd_long8    __x) { return simd_int(simd_clamp(__x,-0x80000000,0x7fffffff)); }
+static simd_int2  SIMD_CFUNC simd_int_sat(simd_long2    __x) { return simd_int(simd_clamp(__x,-0x80000000LL,0x7fffffffLL)); }
+static simd_int3  SIMD_CFUNC simd_int_sat(simd_long3    __x) { return simd_int(simd_clamp(__x,-0x80000000LL,0x7fffffffLL)); }
+static simd_int4  SIMD_CFUNC simd_int_sat(simd_long4    __x) { return simd_int(simd_clamp(__x,-0x80000000LL,0x7fffffffLL)); }
+static simd_int8  SIMD_CFUNC simd_int_sat(simd_long8    __x) { return simd_int(simd_clamp(__x,-0x80000000LL,0x7fffffffLL)); }
 static simd_int2  SIMD_CFUNC simd_int_sat(simd_double2  __x) { return simd_int(simd_clamp(__x,-0x1.0p31,0x1.fffffffcp30)); }
 static simd_int3  SIMD_CFUNC simd_int_sat(simd_double3  __x) { return simd_int(simd_clamp(__x,-0x1.0p31,0x1.fffffffcp30)); }
 static simd_int4  SIMD_CFUNC simd_int_sat(simd_double4  __x) { return simd_int(simd_clamp(__x,-0x1.0p31,0x1.fffffffcp30)); }

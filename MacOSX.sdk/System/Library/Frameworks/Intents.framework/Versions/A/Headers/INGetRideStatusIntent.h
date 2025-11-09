@@ -2,7 +2,7 @@
 //  INGetRideStatusIntent.h
 //  Intents
 //
-//  Copyright (c) 2016-2017 Apple Inc. All rights reserved.
+//  Copyright (c) 2016-2019 Apple Inc. All rights reserved.
 //
 
 #import <Intents/INIntent.h>
@@ -65,16 +65,6 @@ API_UNAVAILABLE(macosx)
 
 - (void)confirmGetRideStatus:(INGetRideStatusIntent *)intent
                   completion:(void (^)(INGetRideStatusIntentResponse *response))completion NS_SWIFT_NAME(confirm(intent:completion:));
-
-/*!
- @abstract Resolution methods - Determine if this intent is ready for the next step (confirmation)
- @discussion Called to make sure the app extension is capable of handling this intent in its current form. This method is for validating if the intent needs any further fleshing out.
-
- @param  intent The input intent
- @param  completion The response block contains an INIntentResolutionResult for the parameter being resolved
-
- @see INIntentResolutionResult
- */
 
 @end
 

@@ -2,8 +2,7 @@
 //  INSearchForNotebookItemsIntent_Deprecated.h
 //  Intents
 //
-//  Created by Kyle Zhao on 9/18/17.
-//  Copyright © 2017 Apple. All rights reserved.
+//  Copyright (c) 2016-2019 Apple Inc. All rights reserved.
 //
 
 #import <Intents/INSearchForNotebookItemsIntent.h>
@@ -20,6 +19,16 @@ NS_ASSUME_NONNULL_BEGIN
            locationSearchType:(INLocationSearchType)locationSearchType
                      dateTime:(nullable INDateComponentsRange *)dateTime
                dateSearchType:(INDateSearchType)dateSearchType API_DEPRECATED("Use the designated initializer instead", ios(11.0, 11.2), watchos(4.0, 4.2));
+
+- (instancetype)initWithTitle:(nullable INSpeakableString *)title
+                      content:(nullable NSString *)content
+                     itemType:(INNotebookItemType)itemType
+                       status:(INTaskStatus)status
+                     location:(nullable CLPlacemark *)location
+           locationSearchType:(INLocationSearchType)locationSearchType
+                     dateTime:(nullable INDateComponentsRange *)dateTime
+               dateSearchType:(INDateSearchType)dateSearchType
+       notebookItemIdentifier:(nullable NSString *)notebookItemIdentifier API_DEPRECATED("Use the designated initializer instead", ios(11.2, 13.0), watchos(4.2, 6.0));
 
 @end
 

@@ -1,7 +1,7 @@
 /*
 	NSErrors.h
 	Application Kit
-	Copyright (c) 1994-2018, Apple Inc.
+	Copyright (c) 1994-2019, Apple Inc.
 	All rights reserved.
 */
 
@@ -10,6 +10,7 @@
 @class NSString;
 
 NS_ASSUME_NONNULL_BEGIN
+API_UNAVAILABLE_BEGIN(ios)
 
 // The following strings are the names of exceptions the AppKit can raise
 
@@ -48,6 +49,7 @@ APPKIT_EXTERN NSExceptionName NSBadComparisonException;
 APPKIT_EXTERN NSExceptionName NSImageCacheException;
 APPKIT_EXTERN NSExceptionName NSNibLoadingException;
 APPKIT_EXTERN NSExceptionName NSBrowserIllegalDelegateException;
-APPKIT_EXTERN NSExceptionName NSAccessibilityException NS_DEPRECATED_MAC(10_1, 10_11, "Exceptions are no longer appropriate for indicating errors in accessibility API. Unexpected values should be handled through appropriate type checking.");
+APPKIT_EXTERN NSExceptionName NSAccessibilityException API_DEPRECATED("Exceptions are no longer appropriate for indicating errors in accessibility API. Unexpected values should be handled through appropriate type checking.", macos(10.1,10.11));
 
+API_UNAVAILABLE_END
 NS_ASSUME_NONNULL_END

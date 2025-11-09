@@ -19,6 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  Discussion:
  *    A circular geographic area.
  */
+CL_EXTERN
 API_AVAILABLE(macos(10.10), ios(7.0))
 @interface CLCircularRegion : CLRegion
 

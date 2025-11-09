@@ -1,8 +1,8 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: AA2ED670-1970-3888-B7DB-D11192EBF6BB' ]
+uuids:           [ 'x86_64: 6E50DE12-D8C3-3295-B937-1B4E13AB3C24' ]
 platform:        macosx
-install-name:    /System/Library/Frameworks/Quartz.framework/Versions/A/Frameworks/QuartzComposer.framework/Versions/A/QuartzComposer
+install-name:    '/System/Library/Frameworks/Quartz.framework/Versions/A/Frameworks/QuartzComposer.framework/Versions/A/QuartzComposer'
 current-version: 168
 exports:         
   - archs:           [ x86_64 ]

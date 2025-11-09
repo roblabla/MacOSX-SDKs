@@ -1,9 +1,9 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: F9D5F55D-9A33-326E-8B2F-B533CC91DD64' ]
-platform:        macosx
-install-name:    /System/Library/PrivateFrameworks/TextureIO.framework/Versions/A/TextureIO
-current-version: 3.8.4
+uuids:           [ 'x86_64: 69E5E636-FCF4-3C3E-B3E1-43371A7A8DB0', 'x86_64: 69E5E636-FCF4-3C3E-B3E1-43371A7A8DB0' ]
+platform:        zippered
+install-name:    '/System/Library/PrivateFrameworks/TextureIO.framework/Versions/A/TextureIO'
+current-version: 3.10.9
 exports:         
   - archs:           [ x86_64 ]
     objc-classes:    [ TXRArrayElement, TXRAssetCatalogConfig, TXRAssetCatalogFileAttributes, 

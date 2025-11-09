@@ -1,5 +1,5 @@
 .\" Copyright (c) 2015 Apple Inc. All rights reserved.
-.Dd 03/01/15
+.Dd June 2, 2016
 .Dt os_log_create 3
 .Os Darwin
 .Sh NAME
@@ -10,16 +10,16 @@
 .Ft os_log_t
 .Fn os_log_create "const char *subsystem" "const char *category"
 .Sh DESCRIPTION
-.Pp
 Use
-.Nm os_log_create
+.Nm
 to create an object that can be passed to
 .Xr os_log 3
 calls.
 Log messages to this object will be marked with the object's subsystem and category name.
 The behavior of log messages to this object can be configured using the
 .Xr log 1
-command.
+command or with a logging configuration profile (see
+.Xr os_log 5 ) .
 .Pp
 .Sh EXAMPLES
 Create a new os_log_t object and log a message:
@@ -36,4 +36,5 @@ os_log(log, "connection state changed: %d interface: %s", if, interface);
 .Pp
 .Sh SEE ALSO
 .Xr log 1 ,
-.Xr os_log 3
+.Xr os_log 3 ,
+.Xr os_log 5

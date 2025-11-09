@@ -259,38 +259,38 @@ enum {
 /* Special folders */
 enum {
   kAppearanceFolderIcon         = 'appr',
-  kAppleExtrasFolderIcon        = 0x616578C4/*'aexÄ'*/,
+  kAppleExtrasFolderIcon        = 0x616578C4/*'aexÆ’'*/,
   kAppleMenuFolderIcon          = 'amnu',
   kApplicationsFolderIcon       = 'apps',
   kApplicationSupportFolderIcon = 'asup',
-  kAssistantsFolderIcon         = 0x617374C4/*'astÄ'*/,
+  kAssistantsFolderIcon         = 0x617374C4/*'astÆ’'*/,
   kColorSyncFolderIcon          = 'prof',
   kContextualMenuItemsFolderIcon = 'cmnu',
   kControlPanelDisabledFolderIcon = 'ctrD',
   kControlPanelFolderIcon       = 'ctrl',
-  kControlStripModulesFolderIcon = 0x736476C4/*'sdvÄ'*/,
+  kControlStripModulesFolderIcon = 0x736476C4/*'sdvÆ’'*/,
   kDocumentsFolderIcon          = 'docs',
   kExtensionsDisabledFolderIcon = 'extD',
   kExtensionsFolderIcon         = 'extn',
   kFavoritesFolderIcon          = 'favs',
   kFontsFolderIcon              = 'font',
-  kHelpFolderIcon               = (int)0xC4686C70/*'Ählp' */,
-  kInternetFolderIcon           = 0x696E74C4/*'intÄ'*/,
-  kInternetPlugInFolderIcon     = (int)0xC46E6574/*'Änet' */,
+  kHelpFolderIcon               = (int)0xC4686C70/*'Æ’hlp' */,
+  kInternetFolderIcon           = 0x696E74C4/*'intÆ’'*/,
+  kInternetPlugInFolderIcon     = (int)0xC46E6574/*'Æ’net' */,
   kInternetSearchSitesFolderIcon = 'issf',
-  kLocalesFolderIcon            = (int)0xC46C6F63/*'Äloc' */,
-  kMacOSReadMeFolderIcon        = 0x6D6F72C4/*'morÄ'*/,
+  kLocalesFolderIcon            = (int)0xC46C6F63/*'Æ’loc' */,
+  kMacOSReadMeFolderIcon        = 0x6D6F72C4/*'morÆ’'*/,
   kPublicFolderIcon             = 'pubf',
-  kPreferencesFolderIcon        = 0x707266C4/*'prfÄ'*/,
+  kPreferencesFolderIcon        = 0x707266C4/*'prfÆ’'*/,
   kPrinterDescriptionFolderIcon = 'ppdf',
-  kPrinterDriverFolderIcon      = (int)0xC4707264/*'Äprd' */,
+  kPrinterDriverFolderIcon      = (int)0xC4707264/*'Æ’prd' */,
   kPrintMonitorFolderIcon       = 'prnt',
   kRecentApplicationsFolderIcon = 'rapp',
   kRecentDocumentsFolderIcon    = 'rdoc',
   kRecentServersFolderIcon      = 'rsrv',
-  kScriptingAdditionsFolderIcon = (int)0xC4736372/*'Äscr' */,
-  kSharedLibrariesFolderIcon    = (int)0xC46C6962/*'Älib' */,
-  kScriptsFolderIcon            = 0x736372C4/*'scrÄ'*/,
+  kScriptingAdditionsFolderIcon = (int)0xC4736372/*'Æ’scr' */,
+  kSharedLibrariesFolderIcon    = (int)0xC46C6962/*'Æ’lib' */,
+  kScriptsFolderIcon            = 0x736372C4/*'scrÆ’'*/,
   kShutdownItemsDisabledFolderIcon = 'shdD',
   kShutdownItemsFolderIcon      = 'shdf',
   kSpeakableItemsFolder         = 'spki',
@@ -298,9 +298,9 @@ enum {
   kStartupItemsFolderIcon       = 'strt',
   kSystemExtensionDisabledFolderIcon = 'macD',
   kSystemFolderIcon             = 'macs',
-  kTextEncodingsFolderIcon      = (int)0xC4746578/*'Ätex' */,
-  kUsersFolderIcon              = 0x757372C4/*'usrÄ'*/,
-  kUtilitiesFolderIcon          = 0x757469C4/*'utiÄ'*/,
+  kTextEncodingsFolderIcon      = (int)0xC4746578/*'Æ’tex' */,
+  kUsersFolderIcon              = 0x757372C4/*'usrÆ’'*/,
+  kUtilitiesFolderIcon          = 0x757469C4/*'utiÆ’'*/,
   kVoicesFolderIcon             = 'fvoc'
 };
 
@@ -435,7 +435,7 @@ enum {
 extern OSErr 
 GetIconRefOwners(
   IconRef   theIconRef,
-  UInt16 *  owners)                                           __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  UInt16 *  owners)                                           API_DEPRECATED( "This function is no longer supported. Use NSWorkspace and NSImage to get icons.", macos( 10.0, 10.15 ) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 
@@ -456,7 +456,7 @@ GetIconRefOwners(
  *    Non-Carbon CFM:   in IconServicesLib 8.5 and later
  */
 extern OSErr 
-AcquireIconRef(IconRef theIconRef)                            __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+AcquireIconRef(IconRef theIconRef)                            API_DEPRECATED( "This function is no longer supported. Use NSWorkspace and NSImage to get icons.", macos( 10.0, 10.15 ) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 
@@ -482,7 +482,7 @@ AcquireIconRef(IconRef theIconRef)                            __OSX_AVAILABLE_ST
  *    Non-Carbon CFM:   in IconServicesLib 8.5 and later
  */
 extern OSErr 
-ReleaseIconRef(IconRef theIconRef)                            __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+ReleaseIconRef(IconRef theIconRef)                            API_DEPRECATED( "This function is no longer supported. Use NSWorkspace and NSImage to get icons.", macos( 10.0, 10.15 ) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 
@@ -492,43 +492,6 @@ ReleaseIconRef(IconRef theIconRef)                            __OSX_AVAILABLE_ST
    Getting an IconRef
   ==============================================================================
 */
-
-
-/*
-   GetIconRefFromFile
-   
-   This routine returns an icon ref for the specified file, folder or volume.
-   The label information is provided separately, since two files with the same icon 
-   but a different label would share the same iconRef. The label can be used in 
-   PlotIconRef() for example.
-   
-   Use this routine if you have no information about the file system object. If 
-   you have already done a GetCatInfo on the file and want to save some I/O, 
-   call GetIconRefFromFolder() if you know it's a folder with no custom icon or 
-   call GetIconRef() if it's a file with no custom icon.
-   This routine increments the reference count of the returned IconRef. Call 
-   ReleaseIconRef() when you're done with it.
-   This call is deprecated. Please use GetIconRefFromFileInfo() instead.
-*/
-
-#if !__LP64__
-/*
- *  GetIconRefFromFile()   *** DEPRECATED ***
- *  
- *  Mac OS X threading:
- *    Thread safe since version 10.2
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in IconServicesLib 8.5 and later
- */
-extern OSErr 
-GetIconRefFromFile(
-  const FSSpec *  theFile,
-  IconRef *       theIconRef,
-  SInt16 *        theLabel)                                   __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_5, __IPHONE_NA, __IPHONE_NA);
-
 
 
 
@@ -544,9 +507,6 @@ GetIconRefFromFile(
    This routine increments the reference count of the returned IconRef. Call 
    ReleaseIconRef() when you're done with it.
 */
-
-#endif  /* !__LP64__ */
-
 /*
  *  GetIconRef()
  *  
@@ -563,7 +523,7 @@ GetIconRef(
   SInt16     vRefNum,
   OSType     creator,
   OSType     iconType,
-  IconRef *  theIconRef)                                      __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  IconRef *  theIconRef)                                      API_DEPRECATED( "Use -[NSWorkspace iconForFile:] instead.", macos( 10.0, 10.15 ) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 
@@ -598,7 +558,7 @@ GetIconRefFromFolder(
   SInt32     folderID,
   SInt8      attributes,
   SInt8      accessPrivileges,
-  IconRef *  theIconRef)                                      __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  IconRef *  theIconRef)                                      API_DEPRECATED( "Use -[NSWorkspace iconForFile:] instead.", macos( 10.0, 10.15 ) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 /* GetIconRefFromFileInfo*/
@@ -660,7 +620,7 @@ GetIconRefFromFileInfo(
   const FSCatalogInfo *    inCatalogInfo,          /* can be NULL */
   IconServicesUsageFlags   inUsageFlags,
   IconRef *                outIconRef,
-  SInt16 *                 outLabel)               /* can be NULL */ __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_1, __MAC_10_13, __IPHONE_NA, __IPHONE_NA, "Use -[NSWorkspace iconForFile:] instead.");
+  SInt16 *                 outLabel)               /* can be NULL */ API_DEPRECATED("Use -[NSWorkspace iconForFile:] instead.", macos(10.1,10.13) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 /* GetIconRefFromTypeInfo*/
@@ -714,7 +674,7 @@ GetIconRefFromTypeInfo(
   CFStringRef              inExtension,
   CFStringRef              inMIMEType,
   IconServicesUsageFlags   inUsageFlags,
-  IconRef *                outIconRef)                        __OSX_AVAILABLE_STARTING(__MAC_10_3, __IPHONE_NA);
+  IconRef *                outIconRef)                        API_DEPRECATED( "Use -[NSWorkspace iconForFileType:] instead.", macos( 10.3, 10.15 ) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 
@@ -751,7 +711,7 @@ extern OSStatus
 GetIconRefFromIconFamilyPtr(
   const IconFamilyResource *  inIconFamilyPtr,
   Size                        inSize,
-  IconRef *                   outIconRef)                     __OSX_AVAILABLE_STARTING(__MAC_10_3, __IPHONE_NA);
+  IconRef *                   outIconRef)                     API_DEPRECATED( "This function is no longer supported. Use NSWorkspace and NSImage to get icons.", macos( 10.3, 10.15 ) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 /* GetIconRefFromComponent*/
@@ -785,7 +745,7 @@ GetIconRefFromIconFamilyPtr(
 extern OSStatus 
 GetIconRefFromComponent(
   Component   inComponent,
-  IconRef *   outIconRef)                                     __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
+  IconRef *   outIconRef)                                     API_DEPRECATED( "This function is no longer supported. Use NSWorkspace and NSImage to get icons.", macos( 10.5, 10.15 ) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 /*
@@ -823,44 +783,9 @@ RegisterIconRefFromIconFamily(
   OSType             creator,
   OSType             iconType,
   IconFamilyHandle   iconFamily,
-  IconRef *          theIconRef)                              __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  IconRef *          theIconRef)                              API_DEPRECATED( "This function is no longer supported. Use NSWorkspace and NSImage to get icons.", macos( 10.0, 10.15 ) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
-
-/*
-   RegisterIconRefFromResource
-   
-   Registers an IconRef from a resouce file.  
-   Lower-case creators are reserved for the system.
-   The icon data to be fetched is either classic icon data or an icon family.  
-   The 'icns' icon family is searched for before the classic icon data.
-   This routine increments the reference count of the IconRef. Call ReleaseIconRef() 
-   when you're done with it.
-*/
-
-#if !__LP64__
-/*
- *  RegisterIconRefFromResource()   *** DEPRECATED ***
- *  
- *  Mac OS X threading:
- *    Thread safe since version 10.2
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in IconServicesLib 8.5 and later
- */
-extern OSErr 
-RegisterIconRefFromResource(
-  OSType          creator,
-  OSType          iconType,
-  const FSSpec *  resourceFile,
-  SInt16          resourceID,
-  IconRef *       theIconRef)                                 __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_5, __IPHONE_NA, __IPHONE_NA);
-
-
-/* RegisterIconRefFromFSRef*/
-#endif  /* !__LP64__ */
 
 /*
  *  RegisterIconRefFromFSRef()
@@ -896,7 +821,7 @@ RegisterIconRefFromFSRef(
   OSType         creator,
   OSType         iconType,
   const FSRef *  iconFile,
-  IconRef *      theIconRef)                                  __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_1, __MAC_10_13, __IPHONE_NA, __IPHONE_NA, "You do not need to register .icns files to use them with -[NSImage initWithContentsOfURL:].");
+  IconRef *      theIconRef)                                  API_DEPRECATED("You do not need to register .icns files to use them with -[NSImage initWithContentsOfURL:].", macos(10.1,10.13) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 /*
@@ -921,7 +846,7 @@ RegisterIconRefFromFSRef(
 extern OSErr 
 UnregisterIconRef(
   OSType   creator,
-  OSType   iconType)                                          __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_0, __MAC_10_13, __IPHONE_NA, __IPHONE_NA, "You do not need to unregister icons.");
+  OSType   iconType)                                          API_DEPRECATED("You do not need to unregister icons.", macos(10.0,10.13) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 
@@ -950,35 +875,7 @@ UnregisterIconRef(
  *    Non-Carbon CFM:   in IconServicesLib 8.5 and later
  */
 extern OSErr 
-UpdateIconRef(IconRef theIconRef)                             __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
-
-
-
-
-/*
-   OverrideIconRefFromResource
-   
-   This routines replaces the bitmaps of the specified IconRef with the ones
-   in the specified resource file.
-*/
-
-#if !__LP64__
-/*
- *  OverrideIconRefFromResource()   *** DEPRECATED ***
- *  
- *  Mac OS X threading:
- *    Thread safe since version 10.2
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in IconServicesLib 8.5 and later
- */
-extern OSErr 
-OverrideIconRefFromResource(
-  IconRef         theIconRef,
-  const FSSpec *  resourceFile,
-  SInt16          resourceID)                                 __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_5, __IPHONE_NA, __IPHONE_NA);
+UpdateIconRef(IconRef theIconRef)                             API_DEPRECATED( "This function is no longer supported. Use NSWorkspace and NSImage to get icons.", macos( 10.0, 10.15 ) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 
@@ -989,9 +886,6 @@ OverrideIconRefFromResource(
    This routines replaces the bitmaps of the specified IconRef with the ones
    from the new IconRef.
 */
-
-#endif  /* !__LP64__ */
-
 /*
  *  OverrideIconRef()
  *  
@@ -1006,7 +900,7 @@ OverrideIconRefFromResource(
 extern OSErr 
 OverrideIconRef(
   IconRef   oldIconRef,
-  IconRef   newIconRef)                                       __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  IconRef   newIconRef)                                       API_DEPRECATED( "This function is no longer supported. Use NSWorkspace and NSImage to get icons.", macos( 10.0, 10.15 ) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 
@@ -1028,7 +922,7 @@ OverrideIconRef(
  *    Non-Carbon CFM:   in IconServicesLib 8.5 and later
  */
 extern OSErr 
-RemoveIconRefOverride(IconRef theIconRef)                     __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+RemoveIconRefOverride(IconRef theIconRef)                     API_DEPRECATED( "This function is no longer supported. Use NSWorkspace and NSImage to get icons.", macos( 10.0, 10.15 ) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 
@@ -1061,7 +955,7 @@ extern OSErr
 CompositeIconRef(
   IconRef    backgroundIconRef,
   IconRef    foregroundIconRef,
-  IconRef *  compositeIconRef)                                __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  IconRef *  compositeIconRef)                                API_DEPRECATED( "Use NSImage or Core Graphics to composite images.", macos( 10.0, 10.15 ) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 
@@ -1086,7 +980,7 @@ extern OSErr
 IsIconRefComposite(
   IconRef    compositeIconRef,
   IconRef *  backgroundIconRef,
-  IconRef *  foregroundIconRef)                               __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  IconRef *  foregroundIconRef)                               API_DEPRECATED( "Use NSImage or Core Graphics to composite images.", macos( 10.0, 10.15 ) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 
@@ -1114,7 +1008,7 @@ IsIconRefComposite(
  *    Non-Carbon CFM:   in IconServicesLib 8.5 and later
  */
 extern Boolean 
-IsValidIconRef(IconRef theIconRef)                            __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+IsValidIconRef(IconRef theIconRef)                            API_DEPRECATED( "This function is no longer supported. Use NSWorkspace and NSImage to get icons.", macos( 10.0, 10.15 ) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 
@@ -1148,7 +1042,7 @@ IsValidIconRef(IconRef theIconRef)                            __OSX_AVAILABLE_ST
 extern Boolean 
 IsDataAvailableInIconRef(
   OSType    inIconKind,
-  IconRef   inIconRef)                                        __OSX_AVAILABLE_STARTING(__MAC_10_3, __IPHONE_NA);
+  IconRef   inIconRef)                                        API_DEPRECATED( "This function is no longer supported. Use NSWorkspace and NSImage to get icons.", macos( 10.3, 10.15 ) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 /*
@@ -1158,73 +1052,12 @@ IsDataAvailableInIconRef(
 */
 
 
-/*
-   FlushIconRefs
-   
-   Making this call will dispose of all the data for the specified icons if 
-   the data can be reacquired, for example if the data is provided from a resource.
-   '****' is a wildcard for all types or all creators.
-*/
-
-#if !__LP64__
-/*
- *  FlushIconRefs()   *** DEPRECATED ***
- *  
- *  Mac OS X threading:
- *    Thread safe since version 10.2
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.3
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in IconServicesLib 8.5 and later
- */
-extern OSErr 
-FlushIconRefs(
-  OSType   creator,
-  OSType   iconType)                                          __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_3, __IPHONE_NA, __IPHONE_NA);
-
-
-
-/*
-   FlushIconRefsByVolume
-   
-   This routine disposes of the data for the icons related to the indicated volume
-   if this data can be reacquired, for example if the data is provided from a 
-   resource.
-*/
-
-/*
- *  FlushIconRefsByVolume()   *** DEPRECATED ***
- *  
- *  Mac OS X threading:
- *    Thread safe since version 10.2
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.3
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in IconServicesLib 8.5 and later
- */
-extern OSErr 
-FlushIconRefsByVolume(SInt16 vRefNum)                         __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_3, __IPHONE_NA, __IPHONE_NA);
-
-
-
-
-/*
-  ==============================================================================
-   Controling custom icons
-  ==============================================================================
-*/
-
 
 /*
    SetCustomIconsEnabled
    
    Enable or disable custom icons on the specified volume.
 */
-
-#endif  /* !__LP64__ */
-
 /*
  *  SetCustomIconsEnabled()
  *  
@@ -1239,7 +1072,7 @@ FlushIconRefsByVolume(SInt16 vRefNum)                         __OSX_AVAILABLE_BU
 extern OSErr 
 SetCustomIconsEnabled(
   SInt16    vRefNum,
-  Boolean   enableCustomIcons)                                __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  Boolean   enableCustomIcons)                                API_DEPRECATED( "This function is no longer supported. Use NSWorkspace and NSImage to get icons.", macos( 10.0, 10.15 ) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 
@@ -1263,7 +1096,7 @@ SetCustomIconsEnabled(
 extern OSErr 
 GetCustomIconsEnabled(
   SInt16     vRefNum,
-  Boolean *  customIconsEnabled)                              __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  Boolean *  customIconsEnabled)                              API_DEPRECATED( "This function is no longer supported. Use NSWorkspace and NSImage to get icons.", macos( 10.0, 10.15 ) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 
@@ -1274,88 +1107,6 @@ GetCustomIconsEnabled(
 */
 
 
-/*
-   RegisterIconRefFromIconFile
-   This routine adds a new entry to the IconRef registry. Other clients will be 
-   able to access it using the (creator, iconType) pair specified here.
-   Lower-case creators are reserved for the system.
-   If the creator is kSystemIconsCreator and the iconType is 0, a new IconRef
-   is always returned. Otherwise, if the creator and type have already been
-   registered, the previously registered IconRef is returned.
-   This routine increments the reference count of the IconRef. Call ReleaseIconRef() 
-   when you're done with it.
-*/
-
-#if !__LP64__
-/*
- *  RegisterIconRefFromIconFile()   *** DEPRECATED ***
- *  
- *  Mac OS X threading:
- *    Thread safe since version Jagua
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in IconServicesLib 9.0 and later
- */
-extern OSErr 
-RegisterIconRefFromIconFile(
-  OSType          creator,
-  OSType          iconType,
-  const FSSpec *  iconFile,
-  IconRef *       theIconRef)                                 __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_5, __IPHONE_NA, __IPHONE_NA);
-
-
-
-/*
-   ReadIconFile
-   Read the specified icon file into the icon family handle.
-   The caller is responsible for disposing the iconFamily
-*/
-
-/*
- *  ReadIconFile()   *** DEPRECATED ***
- *  
- *  Mac OS X threading:
- *    Not thread safe
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in IconServicesLib 9.0 and later
- */
-extern OSErr 
-ReadIconFile(
-  const FSSpec *      iconFile,
-  IconFamilyHandle *  iconFamily)                             __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_5, __IPHONE_NA, __IPHONE_NA);
-
-
-
-/*
-   WriteIconFile
-   Write the iconFamily handle to the specified file
-*/
-
-/*
- *  WriteIconFile()   *** DEPRECATED ***
- *  
- *  Mac OS X threading:
- *    Not thread safe
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework [32-bit only] but deprecated in 10.5
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in IconServicesLib 9.0 and later
- */
-extern OSErr 
-WriteIconFile(
-  IconFamilyHandle   iconFamily,
-  const FSSpec *     iconFile)                                __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_5, __IPHONE_NA, __IPHONE_NA);
-
-
-
-/* ReadIconFromFSRef*/
-#endif  /* !__LP64__ */
 
 /*
  *  ReadIconFromFSRef()
@@ -1382,7 +1133,7 @@ WriteIconFile(
 extern OSStatus 
 ReadIconFromFSRef(
   const FSRef *       ref,
-  IconFamilyHandle *  iconFamily)                             __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_1, __MAC_10_13, __IPHONE_NA, __IPHONE_NA, "Use -[NSWorkspace iconForFile:] instead.");
+  IconFamilyHandle *  iconFamily)                             API_DEPRECATED("Use -[NSWorkspace iconForFile:] instead.", macos(10.1,10.13) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 

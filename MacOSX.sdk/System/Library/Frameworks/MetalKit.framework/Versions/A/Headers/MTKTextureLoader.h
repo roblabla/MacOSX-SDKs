@@ -55,6 +55,7 @@ MTK_EXTERN MTKTextureLoaderOption __nonnull const MTKTextureLoaderOptionGenerate
  @constant MTKTextureLoaderOptionSRGB
  @abstract Identifier to be used in an options NSDictionary with a boolean NSNumber specifying whether to create the texture with an sRGB (gamma corrected) pixel format
  @discussion If the boolean value specified with this string is true, the texture will be created with an sRGB pixel format regardless of whether the image file specifies that the data has already been gamma corrected. Likewise, if false, the texture will be created with a non-sRGB pixel format regardless of whether the image file specifies that the data has been gamma corrected. To use the sRGB information specified in the file, do not specify this in the options dictionary.
+ @warning When deploying to OS's prior to macOS 10.15 / iOS 13.0, this option is ignored for loading KTX textures.
  */
 MTK_EXTERN MTKTextureLoaderOption __nonnull const MTKTextureLoaderOptionSRGB NS_AVAILABLE(10_11, 9_0);
 

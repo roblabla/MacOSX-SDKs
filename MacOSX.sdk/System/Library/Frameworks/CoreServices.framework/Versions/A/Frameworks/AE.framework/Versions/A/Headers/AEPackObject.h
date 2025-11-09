@@ -22,7 +22,7 @@
 
 
 
-#include <Availability.h>
+#include <os/availability.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -47,7 +47,7 @@ extern "C" {
 extern OSErr 
 CreateOffsetDescriptor(
   long      theOffset,
-  AEDesc *  theDescriptor)                                    __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
+  AEDesc *  theDescriptor)                                    API_AVAILABLE( macos(10.0) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 /*
@@ -67,7 +67,7 @@ CreateCompDescriptor(
   AEDesc *   operand1,
   AEDesc *   operand2,
   Boolean    disposeInputs,
-  AEDesc *   theDescriptor)                                   __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
+  AEDesc *   theDescriptor)                                   API_AVAILABLE( macos(10.0) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 /*
@@ -86,7 +86,7 @@ CreateLogicalDescriptor(
   AEDescList *  theLogicalTerms,
   DescType      theLogicOperator,
   Boolean       disposeInputs,
-  AEDesc *      theDescriptor)                                __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
+  AEDesc *      theDescriptor)                                API_AVAILABLE( macos(10.0) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 
@@ -108,7 +108,7 @@ CreateObjSpecifier(
   DescType   keyForm,
   AEDesc *   keyData,
   Boolean    disposeInputs,
-  AEDesc *   objSpecifier)                                    __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
+  AEDesc *   objSpecifier)                                    API_AVAILABLE( macos(10.0) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 /*
@@ -127,7 +127,7 @@ CreateRangeDescriptor(
   AEDesc *  rangeStart,
   AEDesc *  rangeStop,
   Boolean   disposeInputs,
-  AEDesc *  theDescriptor)                                    __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
+  AEDesc *  theDescriptor)                                    __API_AVAILABLE(macos(10.0));
 
 
 

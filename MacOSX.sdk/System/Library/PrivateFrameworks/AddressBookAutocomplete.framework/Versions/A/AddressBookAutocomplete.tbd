@@ -1,9 +1,9 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: A9CA7F9D-7CEF-37B0-A4EB-E0534C6EC0CD' ]
-platform:        macosx
-install-name:    /System/Library/PrivateFrameworks/AddressBookAutocomplete.framework/Versions/A/AddressBookAutocomplete
-current-version: 1885
+uuids:           [ 'x86_64: C2CEA33D-D753-3A61-848E-7DC75C8611D8', 'x86_64: C2CEA33D-D753-3A61-848E-7DC75C8611D8' ]
+platform:        zippered
+install-name:    '/System/Library/PrivateFrameworks/AddressBookAutocomplete.framework/Versions/A/AddressBookAutocomplete'
+current-version: 2409
 exports:         
   - archs:           [ x86_64 ]
     objc-classes:    [ ABAutocompleteContactPredicate, ABAutocompleteLocalContactResultTransformBuilder, 

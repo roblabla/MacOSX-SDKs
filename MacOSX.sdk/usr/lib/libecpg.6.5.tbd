@@ -1,11 +1,10 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 53C3FFB9-E1EF-37DD-ABAF-E5B8AB6B6F0C' ]
+uuids:           [ 'x86_64: 5F1ECAA6-4514-36A4-AD7C-12F10B45543E' ]
 platform:        macosx
-install-name:    /usr/lib/libecpg.6.dylib
+install-name:    '/usr/lib/libecpg.6.dylib'
 current-version: 6.5
 compatibility-version: 6
-objc-constraint: none
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _ECPGallocate_desc, _ECPGconnect, _ECPGdeallocate, _ECPGdeallocate_all, 

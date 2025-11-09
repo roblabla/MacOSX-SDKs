@@ -1,8 +1,8 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: DCE6223D-D65D-39F2-90BC-34A1808EF6BD' ]
-platform:        macosx
-install-name:    /System/Library/PrivateFrameworks/IOAccelMemoryInfo.framework/Versions/A/IOAccelMemoryInfo
+uuids:           [ 'x86_64: A444C065-05BD-323E-B09E-908D42187496', 'x86_64: A444C065-05BD-323E-B09E-908D42187496' ]
+platform:        zippered
+install-name:    '/System/Library/PrivateFrameworks/IOAccelMemoryInfo.framework/Versions/A/IOAccelMemoryInfo'
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _IOAccelMemoryInfoErrorDomain, _IOAccelMemoryInfoIOKitDriverKey, 

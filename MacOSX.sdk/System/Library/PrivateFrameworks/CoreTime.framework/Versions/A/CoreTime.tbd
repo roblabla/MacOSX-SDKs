@@ -1,23 +1,22 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: CBA462F8-224E-394C-BF19-2C7BE35C430E' ]
-platform:        macosx
-install-name:    /System/Library/PrivateFrameworks/CoreTime.framework/Versions/A/CoreTime
-current-version: 258
+uuids:           [ 'x86_64: 3372FBEB-538B-348D-9E11-004B0567043A', 'x86_64: 3372FBEB-538B-348D-9E11-004B0567043A' ]
+platform:        zippered
+install-name:    '/System/Library/PrivateFrameworks/CoreTime.framework/Versions/A/CoreTime'
+current-version: 266
 exports:         
   - archs:           [ x86_64 ]
-    symbols:         [ _TMAirplaneModeChanged, _TMBBTimeActiveNotification, _TMConfirmTimeZone, 
-                       _TMConvertTicksToSeconds, _TMGetKernelMonotonicClock, _TMGetReferenceTime, 
+    symbols:         [ _TMBBTimeActiveNotification, _TMConfirmTimeZone, _TMConvertTicksToSeconds, 
+                       _TMGetKernelMonotonicClock, _TMGetReferenceTime, _TMGetTrustedInterval, 
                        _TMIsAutomaticTimeEnabled, _TMIsAutomaticTimeZoneEnabled, 
-                       _TMIsBBTimeActive, _TMIsLocationTimeZoneActive, _TMIsTimeZoneConfirmed, 
-                       _TMLocationTimeZoneActiveNotification, _TMProvideBBTime, _TMProvideCellularTimeZone, 
-                       _TMProvideNetworkTimeZone, _TMSetAuthenticatedSourceTime, 
+                       _TMIsBBTimeActive, _TMIsTimeZoneConfirmed, _TMLocationTimeZoneActiveNotification, 
+                       _TMProvideBBTime, _TMProvideCellularTimeZone, _TMSetAuthenticatedSourceTime, 
                        _TMSetAutomaticTimeEnabled, _TMSetAutomaticTimeZoneEnabled, 
-                       _TMSetManualTime, _TMSetReferenceUnreliable, _TMSetSourceAvailable, 
-                       _TMSetSourceTime, _TMSetSourceTimeZone, _TMSetSourceUnavailable, 
-                       _TMSetupTime, _TMSetupTimeZone, _TMSourceAPNS, _TMSourceAirPlay, 
-                       _TMSourceCdma, _TMSourceGps, _TMSourceHarvestServer, _TMSourceLocation, 
-                       _TMSourceLocationServer, _TMSourceMobileLockdown, _TMSourceNitz, 
-                       _TMSourceNtp, _TMSourceNtpLowConfidence, _TMSourceNtpPacket, 
-                       _TMSourceProxBuddy, _TMSourceiTunesServer, _TMTimeZoneConfirmedNotification ]
+                       _TMSetManualTime, _TMSetSourceAvailable, _TMSetSourceTime, 
+                       _TMSetSourceTimeZone, _TMSetSourceUnavailable, _TMSetupTime, 
+                       _TMSetupTimeZone, _TMSourceAPNS, _TMSourceAirPlay, _TMSourceCdma, 
+                       _TMSourceGps, _TMSourceHarvestServer, _TMSourceLocation, _TMSourceLocationServer, 
+                       _TMSourceMobileLockdown, _TMSourceNitz, _TMSourceNtp, _TMSourceNtpLowConfidence, 
+                       _TMSourceNtpPacket, _TMSourceProxBuddy, _TMSourceiTunesServer, 
+                       _TMTimeZoneConfirmedNotification ]
 ...

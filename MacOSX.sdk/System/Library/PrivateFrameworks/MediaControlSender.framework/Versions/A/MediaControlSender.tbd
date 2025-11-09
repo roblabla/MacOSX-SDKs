@@ -1,33 +1,25 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: C4BFD0BF-C580-384D-A217-3090E79BE47A' ]
+uuids:           [ 'x86_64: 89DEDF30-2C73-36F2-917A-A60E5681A884' ]
 platform:        macosx
-install-name:    /System/Library/PrivateFrameworks/MediaControlSender.framework/Versions/A/MediaControlSender
+install-name:    '/System/Library/PrivateFrameworks/MediaControlSender.framework/Versions/A/MediaControlSender'
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _APAudioFormatToASBD, _AVRouteDescription_HasFeature, _AVSystemController_CopyProperty, 
                        _AVSystemController_GetAirPlayInfo, _AVSystemController_GetSharedController, 
                        _AVSystemController_GetTypeID, _AVSystemController_ResumeAirPlayMirroring, 
                        _AVSystemController_SetProperty, _AVSystemController_StopAirPlay, 
-                       _AVSystemController_SuspendAirPlayMirroring, _AirPlayAudioSessionEndedOnClient, 
-                       _AirPlayAudioSessionEndedOnServer, _AirPlayAudioSessionStartedOnClient, 
-                       _AirPlayAudioSessionStartedOnServer, _AirPlayCreateModesDictionary, 
+                       _AVSystemController_SuspendAirPlayMirroring, _AirPlayCreateModesDictionary, 
                        _AirPlayGetEventQueue, _AirPlayGlobalRoute_CopyDestination, 
                        _AirPlayGlobalRoute_CopyInfo, _AirPlayGlobalRoute_CopyPassword, 
                        _AirPlayGlobalRoute_SetDestination, _AirPlayGlobalRoute_SetInfo, 
-                       _AirPlayGlobalRoute_SetPassword, _AirPlayPhotoSessionEndedOnServer, 
-                       _AirPlayPhotoSessionStartedOnServer, _AirPlayScreenSessionEndedOnClient, 
-                       _AirPlayScreenSessionEndedOnServer, _AirPlayScreenSessionStartedOnClient, 
-                       _AirPlayScreenSessionStartedOnServer, _AirPlaySetProperty, 
-                       _AirPlaySettings_CopyKeys, _AirPlaySettings_CopyValue, _AirPlaySettings_CopyValueEx, 
+                       _AirPlayGlobalRoute_SetPassword, _AirPlaySetProperty, _AirPlaySettings_CopyKeys, 
+                       _AirPlaySettings_CopyValue, _AirPlaySettings_CopyValueEx, 
                        _AirPlaySettings_GetCString, _AirPlaySettings_GetDouble, _AirPlaySettings_GetInt64, 
                        _AirPlaySettings_RemoveValue, _AirPlaySettings_SetCString, 
                        _AirPlaySettings_SetDouble, _AirPlaySettings_SetInt64, _AirPlaySettings_SetNumber, 
-                       _AirPlaySettings_SetValue, _AirPlaySettings_Synchronize, _AirPlaySlideshowSessionEndedOnServer, 
-                       _AirPlaySlideshowSessionStartedOnServer, _AirPlayVideoSessionEndedOnServer, 
-                       _AirPlayVideoSessionStartedOnServer, _Dk7hjUuq, _Fqbh1vZGfV6J, 
-                       _G30ooIXBM, _GvMGlTNs, _HasAirPlayScreenHardwareEncoder, _IsAirPlayScreenSupported, 
-                       _KUY675K4ryxHGzD5GVD, _MediaControlClient_Cancel, _MediaControlClient_CopyPlaybackInfo, 
+                       _AirPlaySettings_SetValue, _AirPlaySettings_Synchronize, _HasAirPlayScreenHardwareEncoder, 
+                       _IsAirPlayScreenSupported, _MediaControlClient_Cancel, _MediaControlClient_CopyPlaybackInfo, 
                        _MediaControlClient_CopyProperty, _MediaControlClient_Create, 
                        _MediaControlClient_DoAction, _MediaControlClient_DoAuthorize, 
                        _MediaControlClient_DoInsertPlaylistItem, _MediaControlClient_DoPlayLocal, 
@@ -42,9 +34,7 @@ exports:
                        _MediaControlClient_SetPassword, _MediaControlClient_SetProperty, 
                        _MediaControlPlayParamsToStreamType, _MediaControlSenderLogControl, 
                        _MediaControlSenderLogControlCF, _MediaControlSenderLogShow, 
-                       _PCFdAVst, _PHDcW8, _RKIu6glG, _SrtySZG0, _VBAEFt, _XoN3GgjZNCvkN1T8I3, 
-                       _aMoe8v8GNE9T, _gQblcfSzZBQsYCCV, _gVideoPlugin_SetPropertyFunc, 
-                       _h4BvW7X, _i9kF3TCOFmU, _kAVRouteDescriptionKey_DeviceID, 
+                       _gVideoPlugin_SetPropertyFunc, _kAVRouteDescriptionKey_DeviceID, 
                        _kAVRouteDescriptionKey_ForceAuth, _kAVRouteDescriptionKey_Model, 
                        _kAVRouteDescriptionKey_Name, _kAVRouteDescriptionKey_NameRaw, 
                        _kAVRouteDescriptionKey_Password, _kAVRouteDescriptionKey_PasswordRequired, 
@@ -77,8 +67,7 @@ exports:
                        _kAVSystemControllerProperty_BestForAirPlayMode, _kAVSystemControllerProperty_DiscoveryMode, 
                        _kAVSystemControllerProperty_NoUI, _kAVSystemControllerProperty_PickableRoutes, 
                        _kAVSystemControllerProperty_PickedRoute, _kAVSystemControllerProperty_RunningInAgent, 
-                       _kAVSystemControllerProperty_SelectionInProgress, _kAVSystemControllerProperty_SuspendRoute, 
-                       _o4IBrWf, _rJPl3sdBfc0E3yB, _tGvVBtfGSsOH67XQ, _xOvZekdnwD6 ]
+                       _kAVSystemControllerProperty_SelectionInProgress, _kAVSystemControllerProperty_SuspendRoute ]
     objc-classes:    [ AirPlayRemoteSlideshow, MediaControlClient ]
     objc-ivars:      [ AirPlayRemoteSlideshow._client, AirPlayRemoteSlideshow._delegate, 
                        AirPlayRemoteSlideshow._internalQueue, AirPlayRemoteSlideshow._startTime, 

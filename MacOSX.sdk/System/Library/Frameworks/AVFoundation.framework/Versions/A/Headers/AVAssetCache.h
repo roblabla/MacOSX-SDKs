@@ -25,7 +25,7 @@ NS_ASSUME_NONNULL_BEGIN
 		AVAssetCaches are vended by AVURLAsset's assetCache property.
 
 */
-NS_CLASS_AVAILABLE(10_12, 10_0)
+API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0)) API_UNAVAILABLE(watchos)
 @interface AVAssetCache : NSObject
 
 /*

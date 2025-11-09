@@ -1,6 +1,7 @@
+#if !__has_include(<UIFoundation/NSTextTable.h>)
 /*
         NSTextTable.h
-        Copyright (c) 2004-2018, Apple Inc.
+        Copyright (c) 2004-2019, Apple Inc.
         All rights reserved.
 
         Classes to represent text tables and other text blocks.
@@ -11,12 +12,12 @@
 
 #import <AppKit/NSText.h>
 
-NS_ASSUME_NONNULL_BEGIN
-
 @class NSTextTable;
 @class NSLayoutManager;
 @class NSTextContainer;
 
+NS_ASSUME_NONNULL_BEGIN
+#if !TARGET_OS_IPHONE
 
 /* Values for NSTextBlockValueType */
 typedef NS_ENUM(NSUInteger, NSTextBlockValueType) {
@@ -56,16 +57,7 @@ typedef NS_ENUM(NSUInteger, NSTextTableLayoutAlgorithm) {
 };
 
 /* NSTextBlock is the basic object for text block layout, and the superclass of the other classes. */
-@interface NSTextBlock : NSObject <NSCoding, NSCopying> {
-    /*All instance variables are private*/
-    void *_propVals APPKIT_IVAR;
-    NSUInteger _propMask APPKIT_IVAR;
-    NSUInteger _typeMask APPKIT_IVAR;
-    id _primParamVal APPKIT_IVAR;
-    id _otherParamVals APPKIT_IVAR;
-    void *_blockPrimary APPKIT_IVAR;
-    void *_blockSecondary APPKIT_IVAR;
-}
+@interface NSTextBlock : NSObject <NSSecureCoding, NSCopying>
 
 - (instancetype)init NS_DESIGNATED_INITIALIZER;
 
@@ -104,15 +96,7 @@ typedef NS_ENUM(NSUInteger, NSTextTableLayoutAlgorithm) {
 @end
 
 /* NSTextTableBlock is a subclass of NSTextBlock used for a block that appears as a cell in a text table. */
-@interface NSTextTableBlock : NSTextBlock {
-    NSTextTable *_table APPKIT_IVAR;
-    NSInteger _rowNum APPKIT_IVAR;
-    NSInteger _colNum APPKIT_IVAR;
-    NSInteger _rowSpan APPKIT_IVAR;
-    NSInteger _colSpan APPKIT_IVAR;
-    void *_tableBlockPrimary APPKIT_IVAR;
-    void *_tableBlockSecondary APPKIT_IVAR;
-}
+@interface NSTextTableBlock : NSTextBlock
 
 - (instancetype)initWithTable:(NSTextTable *)table startingRow:(NSInteger)row rowSpan:(NSInteger)rowSpan startingColumn:(NSInteger)col columnSpan:(NSInteger)colSpan NS_DESIGNATED_INITIALIZER;     // Designated initializer
 
@@ -126,13 +110,7 @@ typedef NS_ENUM(NSUInteger, NSTextTableLayoutAlgorithm) {
 @end
 
 /* NSTextTable represents a table as a whole. */
-@interface NSTextTable : NSTextBlock {
-    NSUInteger _numCols APPKIT_IVAR;
-    NSUInteger _tableFlags APPKIT_IVAR;
-    id _lcache APPKIT_IVAR;
-    void *_tablePrimary APPKIT_IVAR;
-    void *_tableSecondary APPKIT_IVAR;
-}
+@interface NSTextTable : NSTextBlock
 
 /* These methods control the basic parameters of the table. */
 @property NSUInteger numberOfColumns;
@@ -147,5 +125,11 @@ typedef NS_ENUM(NSUInteger, NSTextTableLayoutAlgorithm) {
 
 @end
 
-NS_ASSUME_NONNULL_END
 
+
+#endif // !TARGET_OS_IPHONE
+
+NS_ASSUME_NONNULL_END
+#else
+#import <UIFoundation/NSTextTable.h>
+#endif

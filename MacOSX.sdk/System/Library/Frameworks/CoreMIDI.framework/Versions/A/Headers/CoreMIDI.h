@@ -3,7 +3,7 @@
  
  	Contains:   Umbrella header for the CoreMIDI framework.
  
- 	Copyright:  (c) 2000-2015 by Apple Inc., all rights reserved.
+ 	Copyright:  (c) 2000-2018 by Apple Inc., all rights reserved.
  
  	Bugs?:  	For bug reports, consult the following page on
  				the World Wide Web:

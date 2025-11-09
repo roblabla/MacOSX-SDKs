@@ -1,5 +1,5 @@
 /*    NLTokenizer.h
-      Copyright (c) 2017-2018, Apple Inc. All rights reserved.
+      Copyright (c) 2017-2019, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/Foundation.h>

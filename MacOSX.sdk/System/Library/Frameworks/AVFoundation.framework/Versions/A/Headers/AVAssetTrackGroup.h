@@ -27,7 +27,7 @@ NS_ASSUME_NONNULL_BEGIN
 	Clients can inspect the track groups contained in an AVAsset by loading and obtaining the value of its trackGroups property.
  */
 
-NS_CLASS_AVAILABLE(10_9, 7_0)
+API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(1.0))
 @interface AVAssetTrackGroup : NSObject <NSCopying>
 {
 @private

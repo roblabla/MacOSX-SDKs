@@ -1,5 +1,5 @@
 /*	NSCharacterSet.h
-	Copyright (c) 1994-2018, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2019, Apple Inc. All rights reserved.
 */
 
 #import <CoreFoundation/CFCharacterSet.h>
@@ -38,7 +38,7 @@ enum {
 + (NSCharacterSet *)characterSetWithBitmapRepresentation:(NSData *)data;
 + (nullable NSCharacterSet *)characterSetWithContentsOfFile:(NSString *)fName;
 
-- (instancetype) initWithCoder:(NSCoder *)aDecoder NS_DESIGNATED_INITIALIZER;
+- (instancetype) initWithCoder:(NSCoder *)coder NS_DESIGNATED_INITIALIZER;
 
 - (BOOL)characterIsMember:(unichar)aCharacter;
 @property (readonly, copy) NSData *bitmapRepresentation;

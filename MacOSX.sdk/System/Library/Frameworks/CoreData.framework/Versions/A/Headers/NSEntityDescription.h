@@ -1,7 +1,7 @@
 /*
     NSEntityDescription.h
     Core Data
-    Copyright (c) 2004-2018, Apple Inc.
+    Copyright (c) 2004-2019, Apple Inc.
     All rights reserved.
 */
 
@@ -24,44 +24,6 @@ NS_ASSUME_NONNULL_BEGIN
 // Entities describe the "types" of objects available.
 API_AVAILABLE(macosx(10.4),ios(3.0))
 @interface NSEntityDescription : NSObject <NSCoding, NSCopying, NSFastEnumeration> {
-#if (!__OBJC2__)
-@private
-	int32_t  _cd_rc;
-	id _snapshotClass;
-	NSString *_versionHashModifier;
-	NSData *_versionHash;
-    NSManagedObjectModel *_model;
-    NSString *_classNameForEntity;
-    Class _instanceClass;
-    NSString *_name;
-    NSEntityDescription *_rootentity;
-    NSEntityDescription *_superentity;
-    NSMutableDictionary *_subentities;
-    NSMutableDictionary *_properties;
-    id _propertyMapping;
-    __strong NSRange *_propertyRanges;
-    struct __entityDescriptionFlags {
-        unsigned int _isAbstract:1;
-        unsigned int _shouldValidateOnSave:1;
-        unsigned int _isImmutable:1;
-        unsigned int _isFlattened:1;
-        unsigned int _skipValidation:1;
-        unsigned int _hasPropertiesIndexedBySpotlight:1;
-        unsigned int _hasPropertiesStoredInTruthFile:1;
-        unsigned int _rangesAreInDataBlob:1; 
-		unsigned int _hasAttributesWithExternalDataReferences:1;
-        unsigned int _hasNonstandardPrimitiveProperties:2;
-        unsigned int _hasUniqueProperties:1;
-        unsigned int _validationUniqueProperties:1;
-        unsigned int _hasAttributesWithFileBackedFutures:1;
-        unsigned int _reservedEntityDescription:19;
-    } _entityDescriptionFlags;
-    __strong void *_extraIvars;
-    NSMutableDictionary *_userInfo;
-    id _flattenedSubentities;
-    id** _kvcPropertyAccessors;
-    long _modelsReferenceIDForEntity;
-#endif
 }
 
 + (nullable NSEntityDescription *)entityForName:(NSString *)entityName inManagedObjectContext:(NSManagedObjectContext *)context;
@@ -106,7 +68,6 @@ API_AVAILABLE(macosx(10.4),ios(3.0))
  */
 @property (copy) NSArray <NSFetchIndexDescription *>*indexes API_AVAILABLE(macosx(10.13),ios(11.0),tvos(11.0),watchos(4.0));
 
-
 /* Returns/sets uniqueness constraints for the entity. A uniqueness constraint is a set of one or more attributes whose value must be unique over the set of instances of that entity.
 
     Sets an array of arrays, each of which contains one or more NSAttributeDescription or NSString instances (strings must be the names of attributes on the entity) on which the constraint is registered.
@@ -115,7 +76,6 @@ API_AVAILABLE(macosx(10.4),ios(3.0))
     Discussion: uniqueness constraint violations can be computationally expensive to handle. It is highly suggested that there be only one uniqueness constraint per entity hierarchy,
     although subentites may extend a sueprentity's constraint.
 */
-                                                                                                                                                                      
 @property (strong)NSArray<NSArray<id> *> *uniquenessConstraints API_AVAILABLE(macosx(10.11),ios(9.0));
 
 /*  Getter returns an array of arrays of NSPropertyDescription objects describing the components of the indexes.

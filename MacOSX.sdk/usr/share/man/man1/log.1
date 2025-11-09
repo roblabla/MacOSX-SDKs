@@ -1,7 +1,8 @@
-.Dd May 10, 2016               \" DATE
-.Dt log 1      \" Program name and manual section number
+.\" Copyright (c) 2016 Apple Inc. All rights reserved.
+.Dd May 10, 2016
+.Dt log 1
 .Os Darwin
-.Sh NAME                 \" Section Header - required - don't modify
+.Sh NAME
 .Nm log
 .Nd Access system wide log messages created by os_log, os_trace and other logging systems.
 .Sh SYNOPSIS
@@ -17,6 +18,7 @@
 .Op Fl -start Ar date/time
 .Op Fl -size Ar num Op k|m
 .Op Fl -last Ar num Op m|h|d
+.Op Fl -device | Fl -device-name Ar name | Fl -device-udid Ar UDID
 .Pp
 .Nm
 .Cm config
@@ -35,12 +37,13 @@
 .Op Fl -archive Ar archive | Fl -file Ar file
 .Op Fl -predicate Ar filter
 .Op Fl -source
-.Op Fl -style Ar default | compact | json | syslog
+.Op Fl -style Ar default | compact | json | ndjson | syslog
 .Op Fl -color Ar auto | always | none
 .Op Fl -start Ar date/time
 .Op Fl -end Ar date/time
 .Op Fl -[no-]info
 .Op Fl -[no-]debug
+.Op Fl -[no-]pager
 .Op Fl -[no-]signpost
 .Op Fl -last Ar time Op m|h|d
 .Op Fl -timezone Ar local | timezone
@@ -62,14 +65,14 @@
 .Op Fl -color Ar auto | always | none
 .Op Fl -timeout Ar time Op m|h|d
 .Op Fl -type Ar activity | log | trace
-.Sh DESCRIPTION          \" Section Header - required - don't modify
+.Sh DESCRIPTION
 .Nm
 is used to access system wide log messages created by os_log, os_trace and other logging systems. 
 Some commands require root privileges.
 .Pp
 Available commands and their options:
-.Bl -tag -width "set --mode mode"
-.It Cm help Op Ar command
+.Bl -tag -width "collect    "
+.It Cm help
 General help or help specific to command argument
 .It Cm collect
 Collect the system logs into a .logarchive that can be viewed later with tools such as
@@ -95,6 +98,12 @@ in seconds unless specified. Example: "--last 2m" or "--last 3h"
 The amount of data to be captured in kilobytes or megabytes.
 This is an approximation, as the actual size may be more than requested.
 Example: "--size 100k" or "--size 20m"
+.It Fl -device
+Collect system logs from paired device (first device found).
+.It Fl -device-name Ar name
+Collect system logs from paired device with the given name.
+.It Fl -device-udid Ar UDID
+Collect system logs from paired device with the given UDID.
 .El
 .It Cm config
 Configure, reset or read settings for the logging system.
@@ -147,17 +156,44 @@ Display events stored in the given archive. The archive must be a valid log arch
 .It Fl -file Ar file
 Display events stored in the given \fB.tracev3\fR file. In order to be decoded, the file must be contained
 within a valid \fB.logarchive\fR bundle, or part of the system logs directory.
+.It Fl -[no-]pager
+Enable or disable pagination of output via less.
 .It Fl -predicate Ar filter
 Filters messages based on the provided predicate, based on NSPredicate.
 A compound predicate or multiple predicates can be provided.
 See section \fB"PREDICATE-BASED FILTERING"\fR below.
 .It Fl -source
 Include symbol names and source line numbers for messages, if available.
-.It Fl -style Ar default | compact | json | syslog
-Output the content as a different style.
+.It Fl -style Ar style
+Control the output formatting of events:
+.Bl -tag -width "default "
+.It Ar default
+Human readable output. ISO-8601 date (microsecond precision and timezone 
+offset), thread ID, log type, activity ID, process ID, TTL, process, subsystem,
+category and message content.
+.It Ar compact
+Compact human readable output. ISO-8601 date (millisecond precision), 
+abbreviated log type, process, processID, thread ID, subsystem, category and 
+message content.  This output uses less horizontal space to indicate event 
+metadata than the
+.Ar default
+style.
+.It Ar json
+JSON output. Event data is synthesized as an array of JSON dictionaries.
+.It Ar ndjson
+Line-delimited JSON output. Event data is synthesized as JSON dictionaries,
+each emitted on a single line. A trailing record, identified by the inclusion
+of a "finished" field, is emitted to indicate the end of events.
+.It Ar syslog
+syslog-style output intended to be more compatible with the output format used by
+.Xr syslog 1 .
+.El
 .It Fl -color Ar auto | always | none
-Highlight certain types of log messages. In auto, highlighting will be disabled
-if the output is detected to be non-TTY.
+Control the display of colorized output. By default,
+.Xr log 1
+will disable colorized output when not directed to a terminal, unless overidden
+using
+.Ar always .
 .It Fl -start Ar date/time
 Shows content starting from the provided date.
 The following date/time formats are accepted:
@@ -177,7 +213,7 @@ hours or days. Time is assumed in seconds unless specified.
 Example: "--last 2m" or "--last 3h"
 .It Fl -timezone Ar local | timezone
 Displays content in the local timezone, or a specified timezone (see
-.Xr tzset 3) .
+.Xr tzset 3 ) .
 If not specified, the output is displayed in the timezone at the time the entry
 was written to source archive or file.
 .It Fl -[no-]info
@@ -264,6 +300,7 @@ For detailed information on the use of predicate based filtering, please refer t
 The
 .Ar filter
 argument defines one or more pattern clauses following NSPredicate rules.
+See \fBlog help predicates\fR for the full list of supported keys.
 Supported keys include:
 .Pp
 .Bl -tag -width "processImagePath "
@@ -313,7 +350,6 @@ Filter for a specific subsystem and sender(s):
 .nf
  \fBlog show --predicate '(subsystem == "com.example.my_subsystem") && ((senderImagePath ENDSWITH "mybinary") || (senderImagePath ENDSWITH "myframework"))'\fR
 .fi
-.El
 .Sh PREDICATE-BASED FILTERING EXAMPLES WITH LOG LINE
 .nf
 .Pp

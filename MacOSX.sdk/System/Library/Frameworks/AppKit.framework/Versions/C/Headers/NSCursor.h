@@ -1,7 +1,7 @@
 /*
 	NSCursor.h
 	Application Kit
-	Copyright (c) 1994-2018, Apple Inc.
+	Copyright (c) 1994-2019, Apple Inc.
 	All rights reserved.
 */
 
@@ -10,22 +10,13 @@
 #import <AppKit/NSApplication.h>
 
 NS_ASSUME_NONNULL_BEGIN
+API_UNAVAILABLE_BEGIN(ios)
 
 @class NSColor, NSEvent, NSImage;
 
 static const NSAppKitVersion NSAppKitVersionNumberWithCursorSizeSupport = 682.0;
 
-@interface NSCursor : NSObject <NSCoding> {
-    /*All instance variables are private*/
-    NSPoint _hotSpot APPKIT_IVAR;
-    struct _cursorFlags {
-	unsigned int onMouseExited:1;
-	unsigned int onMouseEntered:1;
-        unsigned int cursorType:8;
-	unsigned int :22;
-    } _flags APPKIT_IVAR;
-    id _image APPKIT_IVAR;
-}
+@interface NSCursor : NSObject <NSCoding>
 
 /* Returns the application's current cursor. This is not necessarily the cursor that is currently being displayed on the system. If you need the currently displayed cursor, use currentSystemCursor.
 */
@@ -37,7 +28,7 @@ static const NSAppKitVersion NSAppKitVersionNumberWithCursorSizeSupport = 682.0;
  
  This method returns nil if the currently displayed cursor could not be fetched.
  */
-@property (class, readonly, nullable, strong) NSCursor *currentSystemCursor NS_AVAILABLE_MAC(10_6);
+@property (class, readonly, nullable, strong) NSCursor *currentSystemCursor API_AVAILABLE(macos(10.6));
 
 @property (class, readonly, strong) NSCursor *arrowCursor;
 @property (class, readonly, strong) NSCursor *IBeamCursor;
@@ -52,16 +43,16 @@ static const NSAppKitVersion NSAppKitVersionNumberWithCursorSizeSupport = 682.0;
 @property (class, readonly, strong) NSCursor *resizeUpDownCursor;
 @property (class, readonly, strong) NSCursor *crosshairCursor;
 @property (class, readonly, strong) NSCursor *disappearingItemCursor;
-@property (class, readonly, strong) NSCursor *operationNotAllowedCursor NS_AVAILABLE_MAC(10_5);
-@property (class, readonly, strong) NSCursor *dragLinkCursor NS_AVAILABLE_MAC(10_6);
-@property (class, readonly, strong) NSCursor *dragCopyCursor NS_AVAILABLE_MAC(10_6);
-@property (class, readonly, strong) NSCursor *contextualMenuCursor NS_AVAILABLE_MAC(10_6);
-@property (class, readonly, strong) NSCursor *IBeamCursorForVerticalLayout NS_AVAILABLE_MAC(10_7);
+@property (class, readonly, strong) NSCursor *operationNotAllowedCursor API_AVAILABLE(macos(10.5));
+@property (class, readonly, strong) NSCursor *dragLinkCursor API_AVAILABLE(macos(10.6));
+@property (class, readonly, strong) NSCursor *dragCopyCursor API_AVAILABLE(macos(10.6));
+@property (class, readonly, strong) NSCursor *contextualMenuCursor API_AVAILABLE(macos(10.6));
+@property (class, readonly, strong) NSCursor *IBeamCursorForVerticalLayout API_AVAILABLE(macos(10.7));
 
 - (instancetype)initWithImage:(NSImage *)newImage hotSpot:(NSPoint)point NS_DESIGNATED_INITIALIZER;
 - (instancetype)initWithCoder:(NSCoder *)coder NS_DESIGNATED_INITIALIZER;
 
-- (instancetype)initWithImage:(NSImage *)newImage foregroundColorHint:(nullable NSColor *)fg backgroundColorHint:(nullable NSColor *)bg hotSpot:(NSPoint)hotSpot NS_DEPRECATED_MAC(10_0, 10_12, "Color hints are ignored. Use -initWithImage:hotSpot: instead");
+- (instancetype)initWithImage:(NSImage *)newImage foregroundColorHint:(nullable NSColor *)fg backgroundColorHint:(nullable NSColor *)bg hotSpot:(NSPoint)hotSpot API_DEPRECATED("Color hints are ignored. Use -initWithImage:hotSpot: instead", macos(10.0,10.12));
 
 + (void)hide;
 + (void)unhide;
@@ -73,13 +64,14 @@ static const NSAppKitVersion NSAppKitVersionNumberWithCursorSizeSupport = 682.0;
 - (void)push;
 - (void)pop;
 - (void)set;
-- (void)setOnMouseExited:(BOOL)flag NS_DEPRECATED_MAC(10_0, 10_13, "setOnMouseExited is unused and should not be called");
-- (void)setOnMouseEntered:(BOOL)flag NS_DEPRECATED_MAC(10_0, 10_13, "setOnMouseEntered is unused and should not be called");
-@property (getter=isSetOnMouseExited, readonly) BOOL setOnMouseExited NS_DEPRECATED_MAC(10_0, 10_13, "isSetOnMouseExited is unused");
-@property (getter=isSetOnMouseEntered, readonly) BOOL setOnMouseEntered NS_DEPRECATED_MAC(10_0, 10_13, "isSetOnMouseEntered is unused");
-- (void)mouseEntered:(NSEvent *)event NS_DEPRECATED_MAC(10_0, 10_13, "mouseEntered: is unused and should not be called");
-- (void)mouseExited:(NSEvent *)event NS_DEPRECATED_MAC(10_0, 10_13, "mouseExited: is unused and should not be called");
+- (void)setOnMouseExited:(BOOL)flag API_DEPRECATED("setOnMouseExited is unused and should not be called", macos(10.0,10.13));
+- (void)setOnMouseEntered:(BOOL)flag API_DEPRECATED("setOnMouseEntered is unused and should not be called", macos(10.0,10.13));
+@property (getter=isSetOnMouseExited, readonly) BOOL setOnMouseExited API_DEPRECATED("isSetOnMouseExited is unused", macos(10.0,10.13));
+@property (getter=isSetOnMouseEntered, readonly) BOOL setOnMouseEntered API_DEPRECATED("isSetOnMouseEntered is unused", macos(10.0,10.13));
+- (void)mouseEntered:(NSEvent *)event API_DEPRECATED("mouseEntered: is unused and should not be called", macos(10.0,10.13));
+- (void)mouseExited:(NSEvent *)event API_DEPRECATED("mouseExited: is unused and should not be called", macos(10.0,10.13));
 
 @end
 
+API_UNAVAILABLE_END
 NS_ASSUME_NONNULL_END

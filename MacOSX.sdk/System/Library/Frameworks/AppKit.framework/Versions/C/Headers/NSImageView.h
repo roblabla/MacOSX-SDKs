@@ -1,7 +1,7 @@
 /*
     NSImageView.h
     Application Kit
-    Copyright (c) 1994-2018, Apple Inc.
+    Copyright (c) 1994-2019, Apple Inc.
     All rights reserved.
 */
 
@@ -10,24 +10,9 @@
 #import <AppKit/NSMenu.h>
 
 NS_ASSUME_NONNULL_BEGIN
+API_UNAVAILABLE_BEGIN(ios)
 
-@interface NSImageView : NSControl <NSAccessibilityImage, NSMenuItemValidation> {
-    /* All instance variables are private */
-    struct __IVFlags {
-        unsigned int _hasImageSubview:1;
-        unsigned int _usesSubview:1;
-        unsigned int _hasCachedUsesSubview:1;
-        unsigned int _unused:23;
-        unsigned int _rejectsMultiFileDrops:1;
-        unsigned int _compatibleScalingAndAlignment:1;
-        unsigned int _reserved:1;
-        unsigned int _overridesDrawing:1;
-        unsigned int _allowsCutCopyPaste:1;
-        unsigned int _editable:1;
-    } _ivFlags APPKIT_IVAR;
-    id _target APPKIT_IVAR;                    // for action messages
-    SEL _action APPKIT_IVAR;                   // call here after an image drag-drop
-}
+@interface NSImageView : NSControl <NSAccessibilityImage, NSMenuItemValidation>
 
 @property (nullable, strong) NSImage *image;
 
@@ -38,7 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (getter=isEditable) BOOL editable;
 
 /*! A tint color to be used when rendering template image content. This color may be combined with other effects to produce a theme-appropriate rendition of the template image. A nil value indicates the standard set of effects without color modification. The default value is nil. */
-@property (nullable, copy) NSColor *contentTintColor NS_AVAILABLE_MAC(10_14);
+@property (nullable, copy) NSColor *contentTintColor API_AVAILABLE(macos(10.14));
 
 @property BOOL animates;
 
@@ -53,10 +38,11 @@ NS_ASSUME_NONNULL_BEGIN
  @param image The image to display within the view.
  @return An initialized image view.
  */
-+ (instancetype)imageViewWithImage:(NSImage *)image NS_AVAILABLE_MAC(10_12);
++ (instancetype)imageViewWithImage:(NSImage *)image API_AVAILABLE(macos(10.12));
 
 @end
 
+API_UNAVAILABLE_END
 NS_ASSUME_NONNULL_END
 
 

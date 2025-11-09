@@ -3,7 +3,7 @@
  
 	Contains:   AudioUnit Interfaces
   
-	Copyright:  © 2002-2008 by Apple, Inc., all rights reserved.
+	Copyright:  ï¿½ 2002-2008 by Apple, Inc., all rights reserved.
  
 	Bugs?:		For bug reports, consult the following page on
                 the World Wide Web:
@@ -64,6 +64,7 @@
 #define kAudioUnitSubType_Distortion			'dist'
 #define kAudioUnitSubType_RogerBeep				'rogr'
 #define kAudioUnitSubType_NBandEQ               'nbeq'
+#define kAudioUnitSubType_Reverb2               'rvb2'
 
 #define kAudioUnitType_Mixer					'aumx'
 #define kAudioUnitSubType_StereoMixer			'smxr'

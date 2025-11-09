@@ -3,7 +3,7 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2011-2017 Apple Inc. All rights reserved.
+	Copyright 2011-2019 Apple Inc. All rights reserved.
 
 */
 
@@ -36,7 +36,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class AVPlayerItemOutputInternal;
 
-NS_CLASS_AVAILABLE(10_8, 6_0)
+API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(1.0))
 @interface AVPlayerItemOutput : NSObject
 {
 	@private
@@ -82,7 +82,7 @@ NS_CLASS_AVAILABLE(10_8, 6_0)
 	@result			The equivalent item time.
  */
 
-- (CMTime)itemTimeForCVTimeStamp:(CVTimeStamp)timestamp NS_AVAILABLE(10_8, NA);
+- (CMTime)itemTimeForCVTimeStamp:(CVTimeStamp)timestamp API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, tvos, watchos);
 
 #endif // !TARGET_OS_IPHONE
 
@@ -94,7 +94,7 @@ NS_CLASS_AVAILABLE(10_8, 6_0)
  
 		 Whenever any output is added to an AVPlayerItem that has suppressesPlayerRendering set to YES, the media data supplied to the output will not be rendered by AVPlayer. Other media data associated with the item but not provided to such an output is not affected. For example, if an output of class AVPlayerItemVideoOutput with a value of YES for suppressesPlayerRendering is added to an AVPlayerItem, video media for that item will not be rendered by the AVPlayer, while audio media, subtitle media, and other kinds of media, if present, will be rendered.
 */
-@property (nonatomic, readwrite) BOOL suppressesPlayerRendering NS_AVAILABLE(10_8, 6_0);
+@property (nonatomic, readwrite) BOOL suppressesPlayerRendering API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 
 @end
 
@@ -159,7 +159,7 @@ NS_CLASS_AVAILABLE(10_8, 6_0)
 
 @class AVPlayerItemVideoOutputInternal;
 
-NS_CLASS_AVAILABLE(10_8, 6_0)
+API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 @interface AVPlayerItemVideoOutput : AVPlayerItemOutput
 {
 @private
@@ -191,7 +191,7 @@ NS_CLASS_AVAILABLE(10_8, 6_0)
 	@result			An instance of AVPlayerItemVideoOutput.
  */
 
-- (instancetype)initWithOutputSettings:(nullable NSDictionary<NSString *, id> *)outputSettings NS_AVAILABLE(10_12, 10_0) NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithOutputSettings:(nullable NSDictionary<NSString *, id> *)outputSettings API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0)) API_UNAVAILABLE(watchos) NS_DESIGNATED_INITIALIZER;
 
 /*!
 	@method			hasNewPixelBufferForItemTime:
@@ -248,7 +248,7 @@ NS_CLASS_AVAILABLE(10_8, 6_0)
 	@property		delegate
 	@abstract		The receiver's delegate.
  */
-@property (nonatomic, readonly, assign, nullable) id<AVPlayerItemOutputPullDelegate> delegate;
+@property (readonly, weak, nullable) id<AVPlayerItemOutputPullDelegate> delegate;
 
 /*!
 	@property		delegateQueue
@@ -275,7 +275,7 @@ NS_CLASS_AVAILABLE(10_8, 6_0)
 		This method is invoked once after the sender is messaged requestNotificationOfMediaDataChangeWithAdvanceInterval:.
   */
 
-- (void)outputMediaDataWillChange:(AVPlayerItemOutput *)sender NS_AVAILABLE(10_8, 6_0);
+- (void)outputMediaDataWillChange:(AVPlayerItemOutput *)sender API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(1.0));
  
  /*!
 	@method			outputSequenceWasFlushed:
@@ -284,7 +284,7 @@ NS_CLASS_AVAILABLE(10_8, 6_0)
 		This method is invoked after any seeking and change in playback direction. If you are maintaining any queued future samples, copied previously, you may want to discard these after receiving this message.
   */
 
-- (void)outputSequenceWasFlushed:(AVPlayerItemOutput *)output NS_AVAILABLE(10_8, 6_0);
+- (void)outputSequenceWasFlushed:(AVPlayerItemOutput *)output API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(1.0));
 
 @end
 
@@ -298,7 +298,7 @@ NS_CLASS_AVAILABLE(10_8, 6_0)
 	@discussion
 		An instance of AVPlayerItemLegibleOutput is typically initialized using the -init method.
  */
-NS_CLASS_AVAILABLE(10_9, 7_0)
+API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 @interface AVPlayerItemLegibleOutput : AVPlayerItemOutput
 {
 @private
@@ -375,7 +375,7 @@ typedef NSString * AVPlayerItemLegibleOutputTextStylingResolution NS_STRING_ENUM
  @constant		AVPlayerItemLegibleOutputTextStylingResolutionDefault
  @abstract		Specify this level of text styling resolution to receive attributed strings from an AVPlayerItemLegibleOutput that include the same level of styling information that AVFoundation would use itself to render text within an AVPlayerLayer. The text styling will accommodate user-level Media Accessibility settings.
  */
-AVF_EXPORT AVPlayerItemLegibleOutputTextStylingResolution const AVPlayerItemLegibleOutputTextStylingResolutionDefault NS_AVAILABLE(10_9, 7_0);
+AVF_EXPORT AVPlayerItemLegibleOutputTextStylingResolution const AVPlayerItemLegibleOutputTextStylingResolutionDefault API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 
 /*!
  @constant		AVPlayerItemLegibleOutputTextStylingResolutionSourceAndRulesOnly
@@ -383,7 +383,7 @@ AVF_EXPORT AVPlayerItemLegibleOutputTextStylingResolution const AVPlayerItemLegi
  @discussion
 	This level of resolution excludes styling provided by the user-level Media Accessibility settings. You would typically use it if you wish to override the styling specified in source media. If you do this, you are strongly encouraged to allow your custom styling in turn to be overriden by user preferences for text styling that are available as Media Accessibility settings.
  */
-AVF_EXPORT AVPlayerItemLegibleOutputTextStylingResolution const AVPlayerItemLegibleOutputTextStylingResolutionSourceAndRulesOnly NS_AVAILABLE(10_9, 7_0);
+AVF_EXPORT AVPlayerItemLegibleOutputTextStylingResolution const AVPlayerItemLegibleOutputTextStylingResolutionSourceAndRulesOnly API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 
 /*!
  @property		textStylingResolution
@@ -420,7 +420,7 @@ AVF_EXPORT AVPlayerItemLegibleOutputTextStylingResolution const AVPlayerItemLegi
 	@discussion
 		For each media subtype in the array passed in to -initWithMediaSubtypesForNativeRepresentation:, the delegate will receive sample buffers carrying data in its native format via the nativeSamples parameter, if there is media data of that subtype in the media resource.  For all other media subtypes present in the media resource, the delegate will receive attributed strings in a common format via the strings parameter.  See <CoreMedia/CMTextMarkup.h> for the string attributes that are used in the attributed strings.
  */
-- (void)legibleOutput:(AVPlayerItemLegibleOutput *)output didOutputAttributedStrings:(NSArray<NSAttributedString *> *)strings nativeSampleBuffers:(NSArray *)nativeSamples forItemTime:(CMTime)itemTime NS_AVAILABLE(10_9, 7_0);
+- (void)legibleOutput:(AVPlayerItemLegibleOutput *)output didOutputAttributedStrings:(NSArray<NSAttributedString *> *)strings nativeSampleBuffers:(NSArray *)nativeSamples forItemTime:(CMTime)itemTime API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 
 @end
 
@@ -454,7 +454,7 @@ AVF_EXPORT AVPlayerItemLegibleOutputTextStylingResolution const AVPlayerItemLegi
 	@discussion
 		Setting the value of suppressesPlayerRendering on an instance of AVPlayerItemMetadataOutput has no effect.
  */
-NS_CLASS_AVAILABLE(10_10, 8_0)
+API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(1.0))
 @interface AVPlayerItemMetadataOutput : AVPlayerItemOutput
 {
 @private
@@ -533,7 +533,7 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
 		Note that if the item carries multiple metadata tracks containing metadata with the same metadata identifiers, this method can be invoked for each one separately, each with reference to the associated AVPlayerItemTrack.
 		Note that the associated AVPlayerItemTrack parameter can be nil which implies that the metadata describes the asset as a whole, not just a single track of the asset.
  */
-- (void)metadataOutput:(AVPlayerItemMetadataOutput *)output didOutputTimedMetadataGroups:(NSArray<AVTimedMetadataGroup *> *)groups fromPlayerItemTrack:(nullable AVPlayerItemTrack *)track NS_AVAILABLE(10_10, 8_0);
+- (void)metadataOutput:(AVPlayerItemMetadataOutput *)output didOutputTimedMetadataGroups:(NSArray<AVTimedMetadataGroup *> *)groups fromPlayerItemTrack:(nullable AVPlayerItemTrack *)track API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(1.0));
 
 @end
 

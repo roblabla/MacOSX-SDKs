@@ -1,7 +1,7 @@
 /*
     NSFetchRequest.h
     Core Data
-    Copyright (c) 2004-2018, Apple Inc.
+    Copyright (c) 2004-2019, Apple Inc.
     All rights reserved.
 */
 
@@ -45,33 +45,6 @@ typedef NS_OPTIONS(NSUInteger, NSFetchRequestResultType) {
 
 API_AVAILABLE(macosx(10.4),ios(3.0))
 @interface NSFetchRequest<__covariant ResultType:id<NSFetchRequestResult>> : NSPersistentStoreRequest <NSCoding> {
-#if (!__OBJC2__)
-@private
-	NSArray *_groupByProperties;
-	NSPredicate *_havingPredicate;
-    id* _additionalPrivateIvars;
-	NSArray *_valuesToFetch;
-    NSEntityDescription *_entity;
-    NSPredicate *_predicate;
-    NSArray *_sortDescriptors;
-    NSUInteger _batchSize;
-    unsigned long _fetchLimit;
-    NSArray *_relationshipKeyPathsForPrefetching;
-    struct _fetchRequestFlags {
-        unsigned int distinctValuesOnly:1;
-        unsigned int includesSubentities:1;
-        unsigned int includesPropertyValues:1;
-        unsigned int resultType:3;
-        unsigned int returnsObjectsAsFaults:1;
-        unsigned int excludePendingChanges:1;
-        unsigned int isInUse:1;
-        unsigned int entityIsName:1;
-        unsigned int refreshesRefetched:1;
-        unsigned int propertiesValidated:1;
-        unsigned int disableCaching:1;
-        unsigned int _RESERVED:19;
-    } _flags;
-#endif
 }
 
 + (instancetype)fetchRequestWithEntityName:(NSString*)entityName API_AVAILABLE(macosx(10.7),ios(4.0));
@@ -156,12 +129,6 @@ typedef void (^NSPersistentStoreAsynchronousFetchResultCompletionBlock)(NSAsynch
 
 API_AVAILABLE(macosx(10.10),ios(8.0))
 @interface NSAsynchronousFetchRequest<ResultType:id<NSFetchRequestResult>> : NSPersistentStoreRequest {
-#if (!__OBJC2__)
-@private
-    NSFetchRequest* _fetchRequest;
-    id _requestCompletionBlock;
-    NSInteger _estimatedResultCount;
-#endif
 }
 @property (strong, readonly) NSFetchRequest<ResultType> * fetchRequest;
 @property (nullable, strong, readonly) NSPersistentStoreAsynchronousFetchResultCompletionBlock completionBlock;

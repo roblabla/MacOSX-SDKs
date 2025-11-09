@@ -10,6 +10,8 @@
 #import <simd/simd.h>
 
 #import <Vision/VNDefines.h>
+#import <Vision/VNTypes.h>
+
 
 
 NS_ASSUME_NONNULL_BEGIN
@@ -103,6 +105,16 @@ VN_EXPORT CGPoint VNNormalizedFaceBoundingBoxPointForLandmarkPoint(vector_float2
 	@return	the face landmark point in image coordinates.
 */
 VN_EXPORT CGPoint VNImagePointForFaceLandmarkPoint(vector_float2 faceLandmarkPoint, CGRect faceBoundingBox, size_t imageWidth, size_t imageHeight) API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0));
+
+
+/*!
+	@brief Obtain the size, in bytes, of a given element type.
+ 
+	@param	elementType		The element type.
+ 
+	@return a byte count, or 0 if the element type is unknown.
+*/
+VN_EXPORT NSUInteger VNElementTypeSize(VNElementType elementType) API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0));
 
 
 NS_ASSUME_NONNULL_END

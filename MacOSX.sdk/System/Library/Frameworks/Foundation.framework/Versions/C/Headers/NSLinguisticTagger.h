@@ -1,5 +1,5 @@
 /*	NSLinguisticTagger.h
-	Copyright (c) 2009-2018, Apple Inc. All rights reserved.
+	Copyright (c) 2009-2019, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -84,7 +84,7 @@ typedef NS_OPTIONS(NSUInteger, NSLinguisticTaggerOptions) {   /* Any combination
 };
 
 
-NS_CLASS_AVAILABLE(10_7, 5_0)
+API_AVAILABLE(macos(10.7), ios(5.0), watchos(2.0), tvos(9.0))
 @interface NSLinguisticTagger : NSObject {
 @private
     NSArray *_schemes;

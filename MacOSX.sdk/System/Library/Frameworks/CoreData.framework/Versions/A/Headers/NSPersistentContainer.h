@@ -1,7 +1,7 @@
 /*
     NSPersistentContainer.h
     Core Data
-    Copyright (c) 2016-2018, Apple Inc.
+    Copyright (c) 2016-2019, Apple Inc.
     All rights reserved.
 */
 
@@ -20,13 +20,6 @@ NS_ASSUME_NONNULL_BEGIN
 // An instance of NSPersistentContainer includes all objects needed to represent a functioning Core Data stack, and provides convenience methods and properties for common patterns.
 API_AVAILABLE(macosx(10.12),ios(10.0),tvos(10.0),watchos(3.0))
 @interface NSPersistentContainer : NSObject {
-#if (!__OBJC2__)
-@private
-    id _name;
-    NSManagedObjectContext *_viewContext;
-    id _storeCoordinator;
-    id _storeDescriptions;
-#endif
 }
 
 + (instancetype)persistentContainerWithName:(NSString *)name;

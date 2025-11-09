@@ -12,6 +12,7 @@
 #import <Metal/MTLCommandBuffer.h>
 #import <Metal/MTLComputeCommandEncoder.h>
 #import <Metal/MTLCommandQueue.h>
+#import <Metal/MTLCounters.h>
 #import <Metal/MTLDevice.h>
 #import <Metal/MTLDepthStencil.h>
 #import <Metal/MTLDrawable.h>

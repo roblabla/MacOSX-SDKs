@@ -2,14 +2,14 @@
 //  INTextNoteContent.h
 //  Intents
 //
-//  Copyright (c) 2017 Apple Inc. All rights reserved.
+//  Copyright (c) 2016-2019 Apple Inc. All rights reserved.
 //
 
 #import <Intents/INNoteContent.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-API_AVAILABLE(macosx(10.13), ios(11.0), watchos(4.0))
+API_AVAILABLE(ios(11.0), watchos(4.0)) API_UNAVAILABLE(macosx)
 @interface INTextNoteContent : INNoteContent <NSSecureCoding, NSCopying>
 
 - (instancetype)initWithText:(NSString *)text;

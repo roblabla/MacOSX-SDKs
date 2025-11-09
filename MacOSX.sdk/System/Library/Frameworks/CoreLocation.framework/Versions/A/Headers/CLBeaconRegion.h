@@ -9,26 +9,9 @@
 #import <Foundation/Foundation.h>
 #import <CoreLocation/CLRegion.h>
 #import <CoreLocation/CLAvailability.h>
+#import <CoreLocation/CLBeaconIdentityConstraint.h>
 
 NS_ASSUME_NONNULL_BEGIN
-
-/*
- *  CLBeaconMajorValue
- *
- *  Discussion:
- *    Type represents the most significant value in a beacon.
- *
- */
-typedef uint16_t CLBeaconMajorValue;
-
-/*
- *  CLBeaconMinorValue
- *
- *  Discussion:
- *    Type represents the least significant value in a beacon.
- *
- */
-typedef uint16_t CLBeaconMinorValue;
 
 /*
  *  CLBeaconRegion
@@ -36,43 +19,58 @@ typedef uint16_t CLBeaconMinorValue;
  *  Discussion:
  *    A region containing similar beacons.
  *
- *    Such a region can be defined by proximityUUID, major and minor values.
- *    proximityUUID must be specified. If proximityUUID is only specified, the major and
- *    minor values will be wildcarded and the region will match any beacons with the same
- *    proximityUUID. Similarly if only proximityUUID and major value are specified, the minor value will be
- *    wildcarded and the region will match against any beacons with the same proximityUUID and major
- *    value.
+ *    Such a region can be defined by UUID, major and minor values.
+ *    UUID must be specified. If only UUID is specified, the major and
+ *    minor values will be wildcarded and the region will match any
+ *    beacons with the same UUID. Similarly if only UUID and major
+ *    value are specified, the minor value will be wildcarded and the
+ *    region will match against any beacons with the same UUID and
+ *    major value.
  *
  */
+CL_EXTERN
 API_AVAILABLE(ios(7.0)) API_UNAVAILABLE(watchos, tvos, macos)
 @interface CLBeaconRegion : CLRegion
 
 /*
- *  initWithProximityUUID:identifier:
+ *  initWithUUID:identifier:
  *
  *  Discussion:
- *    Initialize a beacon region with a proximityUUID. Major and minor values will be wildcarded.
+ *    Initialize a beacon region with a UUID. Major and minor values will be wildcarded.
  *
  */
-- (instancetype)initWithProximityUUID:(NSUUID *)proximityUUID identifier:(NSString *)identifier;
+- (instancetype)initWithUUID:(NSUUID *)uuid identifier:(NSString *)identifier API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, tvos, macos);
+- (instancetype)initWithProximityUUID:(NSUUID *)proximityUUID identifier:(NSString *)identifier API_DEPRECATED_WITH_REPLACEMENT("-initWithUUID:identifier:", ios(7.0, 13.0));
 
 /*
- *  initWithProximityUUID:major:identifier:
+ *  initWithUUID:major:identifier:
  *
  *  Discussion:
- *    Initialize a beacon region with an proximityUUID and major value. Minor value will be wildcarded.
+ *    Initialize a beacon region with a UUID and major value. Minor value will be wildcarded.
  *
  */
-- (instancetype)initWithProximityUUID:(NSUUID *)proximityUUID major:(CLBeaconMajorValue)major identifier:(NSString *)identifier;
+- (instancetype)initWithUUID:(NSUUID *)uuid major:(CLBeaconMajorValue)major identifier:(NSString *)identifier API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, tvos, macos);
+- (instancetype)initWithProximityUUID:(NSUUID *)proximityUUID major:(CLBeaconMajorValue)major identifier:(NSString *)identifier API_DEPRECATED_WITH_REPLACEMENT("-initWithUUID:major:identifier:", ios(7.0, 13.0));
 
 /*
- *  initWithProximityUUID:major:minor:identifier:
+ *  initWithUUID:major:minor:identifier:
  *
  *  Discussion:
- *    Initialize a beacon region identified by an proximityUUID, major and minor values.
+ *    Initialize a beacon region identified by a UUID, major and minor values.
  *
  */
-- (instancetype)initWithProximityUUID:(NSUUID *)proximityUUID major:(CLBeaconMajorValue)major minor:(CLBeaconMinorValue)minor identifier:(NSString *)identifier;
+- (instancetype)initWithUUID:(NSUUID *)uuid major:(CLBeaconMajorValue)major minor:(CLBeaconMinorValue)minor identifier:(NSString *)identifier API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, tvos, macos);
+- (instancetype)initWithProximityUUID:(NSUUID *)proximityUUID major:(CLBeaconMajorValue)major minor:(CLBeaconMinorValue)minor identifier:(NSString *)identifier API_DEPRECATED_WITH_REPLACEMENT("-initWithUUID:major:identifier:", ios(7.0, 13.0));
+
+/*
+ *  initWithBeaconIdentityConstraint:identifier:
+ *
+ *  Discussion:
+ *    Initialize a beacon region described by a beacon identity
+ *    constraint.
+ *
+ */
+- (instancetype)initWithBeaconIdentityConstraint:(CLBeaconIdentityConstraint *)beaconIdentityConstraint identifier:(NSString *)identifier API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, tvos, macos);
 
 /*
  *  peripheralDataWithMeasuredPower:
@@ -90,13 +88,22 @@ API_AVAILABLE(ios(7.0)) API_UNAVAILABLE(watchos, tvos, macos)
 - (NSMutableDictionary<NSString *, id> *)peripheralDataWithMeasuredPower:(nullable NSNumber *)measuredPower;
 
 /*
- *  proximityUUID
+ *  beaconIdentityConstraint
  *
  *  Discussion:
- *    Proximity identifier associated with the region.
+ *    Returns a CLBeaconIdentityConstraint describing the beacons this region monitors.
+ */
+@property (readonly, nonatomic, copy) CLBeaconIdentityConstraint *beaconIdentityConstraint API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, tvos, macos);
+
+/*
+ *  UUID
+ *
+ *  Discussion:
+ *    UUID associated with the region.
  *
  */
-@property (readonly, nonatomic, copy) NSUUID *proximityUUID;
+@property (readonly, nonatomic, copy) NSUUID *UUID API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, tvos, macos);
+@property (readonly, nonatomic, copy) NSUUID *proximityUUID API_DEPRECATED_WITH_REPLACEMENT("-UUID", ios(7.0, 13.0));
 
 /*
  *  major
@@ -144,13 +151,23 @@ API_AVAILABLE(ios(7.0)) API_UNAVAILABLE(watchos, tvos, macos)
 }
 
 /*
- *  proximityUUID
+ *  timestamp
  *
  *  Discussion:
- *    Proximity identifier associated with the beacon.
+ *    The time when this beacon was observed.
  *
  */
-@property (readonly, nonatomic, copy) NSUUID *proximityUUID;
+@property (readonly, nonatomic, copy) NSDate *timestamp API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, tvos, macos);
+
+/*
+ *  UUID
+ *
+ *  Discussion:
+ *    UUID associated with the beacon.
+ *
+ */
+@property (readonly, nonatomic, copy) NSUUID *UUID API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, tvos, macos);
+@property (readonly, nonatomic, copy) NSUUID *proximityUUID API_DEPRECATED_WITH_REPLACEMENT("-UUID", ios(7.0, 13.0));
 
 /*
  *  major

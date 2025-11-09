@@ -1,7 +1,8 @@
+#if !__has_include(<UIFoundation/NSGlyphGenerator.h>)
 /*
         NSGlyphGenerator.h
         Application Kit
-        Copyright (c) 1993-2018, Apple Inc.
+        Copyright (c) 1993-2019, Apple Inc.
         All rights reserved.
 */
 
@@ -12,6 +13,7 @@
 
 /* NSGlyphStorage layout options */
 NS_ASSUME_NONNULL_BEGIN
+#if !TARGET_OS_IPHONE
 
 enum {
     NSShowControlGlyphs = (1 << 0), // if set, generates displayable glyphs for control chars
@@ -35,4 +37,8 @@ enum {
 @property (class, readonly, strong) NSGlyphGenerator *sharedGlyphGenerator;
 @end
 
+#endif // !TARGET_OS_IPHONE
 NS_ASSUME_NONNULL_END
+#else
+#import <UIFoundation/NSGlyphGenerator.h>
+#endif

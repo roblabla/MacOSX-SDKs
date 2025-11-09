@@ -1,5 +1,5 @@
 /*	NSRegularExpression.h
-	Copyright (c) 2009-2018, Apple Inc. All rights reserved.
+	Copyright (c) 2009-2019, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -23,7 +23,7 @@ typedef NS_OPTIONS(NSUInteger, NSRegularExpressionOptions) {
    NSRegularExpressionUseUnicodeWordBoundaries    = 1 << 6      /* Use Unicode TR#29 to specify word boundaries (otherwise, traditional regular expression word boundaries are used). */
 };
 
-NS_CLASS_AVAILABLE(10_7, 4_0)
+API_AVAILABLE(macos(10.7), ios(4.0), watchos(2.0), tvos(9.0))
 @interface NSRegularExpression : NSObject <NSCopying, NSSecureCoding> {
     @protected   // all instance variables are private
     NSString *_pattern;
@@ -107,7 +107,7 @@ NSRegularExpression is designed to be immutable and threadsafe, so that a single
 
 @end
 
-NS_CLASS_AVAILABLE(10_7, 4_0)
+API_AVAILABLE(macos(10.7), ios(4.0), watchos(2.0), tvos(9.0))
 @interface NSDataDetector : NSRegularExpression {
     @protected   // all instance variables are private
     NSTextCheckingTypes _types;

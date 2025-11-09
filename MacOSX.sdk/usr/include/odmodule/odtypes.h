@@ -345,6 +345,7 @@ ODM_CALLBACK_DECL(NodeCopySupportedRecordTypes);
 ODM_CALLBACK_DECL(NodeCopySupportedAttributes);
 ODM_CALLBACK_DECL(NodeSetCredentials);
 ODM_CALLBACK_DECL(NodeSetCredentialsExtended);
+ODM_CALLBACK_DECL(NodeSetCredentialsWithSecureToken);
 ODM_CALLBACK_DECL(NodeCreateRecord);
 ODM_CALLBACK_DECL(NodeReplaceUserRecord);
 ODM_CALLBACK_DECL(NodeCustomCall);

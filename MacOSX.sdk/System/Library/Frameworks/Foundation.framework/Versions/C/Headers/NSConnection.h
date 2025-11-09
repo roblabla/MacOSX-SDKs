@@ -1,5 +1,5 @@
 /*	NSConnection.h
-	Copyright (c) 1989-2018, Apple Inc. All rights reserved.
+	Copyright (c) 1989-2019, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -52,15 +52,15 @@ NS_SWIFT_UNAVAILABLE("Use NSXPCConnection instead")
 
 + (NSArray<NSConnection *> *)allConnections;
 
-+ (NSConnection *)defaultConnection NS_DEPRECATED(10_0, 10_6, NA, NA);
++ (NSConnection *)defaultConnection API_DEPRECATED("", macos(10.0, 10.6)) API_UNAVAILABLE(ios, watchos, tvos);
 
 + (nullable instancetype)connectionWithRegisteredName:(NSString *)name host:(nullable NSString *)hostName;
 + (nullable instancetype)connectionWithRegisteredName:(NSString *)name host:(nullable NSString *)hostName usingNameServer:(NSPortNameServer *)server;
 + (nullable NSDistantObject *)rootProxyForConnectionWithRegisteredName:(NSString *)name host:(nullable NSString *)hostName;
 + (nullable NSDistantObject *)rootProxyForConnectionWithRegisteredName:(NSString *)name host:(nullable NSString *)hostName usingNameServer:(NSPortNameServer *)server;
 
-+ (nullable instancetype)serviceConnectionWithName:(NSString *)name rootObject:(id)root usingNameServer:(NSPortNameServer *)server NS_AVAILABLE(10_5, 2_0);
-+ (nullable instancetype)serviceConnectionWithName:(NSString *)name rootObject:(id)root NS_AVAILABLE(10_5, 2_0);
++ (nullable instancetype)serviceConnectionWithName:(NSString *)name rootObject:(id)root usingNameServer:(NSPortNameServer *)server API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
++ (nullable instancetype)serviceConnectionWithName:(NSString *)name rootObject:(id)root API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
 
 @property NSTimeInterval requestTimeout;
 @property NSTimeInterval replyTimeout;
@@ -101,7 +101,7 @@ NS_SWIFT_UNAVAILABLE("Use NSXPCConnection instead")
 @property (readonly, copy) NSArray *localObjects;
 
 // NSPort subclasses should use this method to ask a connection object to dispatch Distributed Objects component data received over the wire. This will decode the data, authenticate, and send the message.
-- (void)dispatchWithComponents:(NSArray *)components NS_AVAILABLE(10_7, 5_0);
+- (void)dispatchWithComponents:(NSArray *)components API_AVAILABLE(macos(10.7), ios(5.0), watchos(2.0), tvos(9.0));
 
 @end
 

@@ -12,14 +12,14 @@
 */
 
 /* Keys for composition attributes */
-extern NSString* const QCCompositionAttributeNameKey; //NSString
-extern NSString* const QCCompositionAttributeDescriptionKey; //NSString
-extern NSString* const QCCompositionAttributeCopyrightKey; //NSString
+extern NSString* const QCCompositionAttributeNameKey QC_DEPRECATED_MAC(10_15); //NSString
+extern NSString* const QCCompositionAttributeDescriptionKey QC_DEPRECATED_MAC(10_15); //NSString
+extern NSString* const QCCompositionAttributeCopyrightKey QC_DEPRECATED_MAC(10_15); //NSString
 #if defined(MAC_OS_X_VERSION_10_5) && (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
-extern NSString* const QCCompositionAttributeBuiltInKey; //NSNumber - Boolean
-extern NSString* const QCCompositionAttributeIsTimeDependentKey; //NSNumber - Boolean
-extern NSString* const QCCompositionAttributeHasConsumersKey; //NSNumber - Boolean
-extern NSString* const QCCompositionAttributeCategoryKey; //NSString
+extern NSString* const QCCompositionAttributeBuiltInKey QC_DEPRECATED_MAC(10_15); //NSNumber - Boolean
+extern NSString* const QCCompositionAttributeIsTimeDependentKey QC_DEPRECATED_MAC(10_15); //NSNumber - Boolean
+extern NSString* const QCCompositionAttributeHasConsumersKey QC_DEPRECATED_MAC(10_15); //NSNumber - Boolean
+extern NSString* const QCCompositionAttributeCategoryKey QC_DEPRECATED_MAC(10_15); //NSString
 #endif
 
 
@@ -27,37 +27,37 @@ extern NSString* const QCCompositionAttributeCategoryKey; //NSString
 
 
 /* Standard composition categories */
-extern NSString* const QCCompositionCategoryDistortion;
-extern NSString* const QCCompositionCategoryStylize;
-extern NSString* const QCCompositionCategoryUtility;
+extern NSString* const QCCompositionCategoryDistortion QC_DEPRECATED_MAC(10_15);
+extern NSString* const QCCompositionCategoryStylize QC_DEPRECATED_MAC(10_15);
+extern NSString* const QCCompositionCategoryUtility QC_DEPRECATED_MAC(10_15);
 
 /* Standard composition input port keys */
-extern NSString* const QCCompositionInputImageKey; //Image port
-extern NSString* const QCCompositionInputSourceImageKey; //Image port
-extern NSString* const QCCompositionInputDestinationImageKey; //Image port
+extern NSString* const QCCompositionInputImageKey QC_DEPRECATED_MAC(10_15); //Image port
+extern NSString* const QCCompositionInputSourceImageKey QC_DEPRECATED_MAC(10_15); //Image port
+extern NSString* const QCCompositionInputDestinationImageKey QC_DEPRECATED_MAC(10_15); //Image port
 extern NSString* const QCCompositionInputRSSFeedURLKey QC_GL_DEPRECATED(10_5, 10_14); //String port (must be passed a http or feed scheme URL)
 extern NSString* const QCCompositionInputRSSArticleDurationKey QC_GL_DEPRECATED(10_5, 10_14); //Number port (expressed in seconds)
-extern NSString* const QCCompositionInputPreviewModeKey; //Boolean port
-extern NSString* const QCCompositionInputXKey; //Number port (normalized to the image width with the origin on the left)
-extern NSString* const QCCompositionInputYKey; //Number port (normalized to the image height with the origin at the bottom)
-extern NSString* const QCCompositionInputScreenImageKey; //Image port
-extern NSString* const QCCompositionInputAudioPeakKey; //Number port (in [0,1] range as a mono signal with no decay applied)
-extern NSString* const QCCompositionInputAudioSpectrumKey; //Structure port (contains 16 numbers in [0,1] range representing 16 spectrum bands of the mono signal from low to high frequencies with no decay applied)
-extern NSString* const QCCompositionInputTrackPositionKey; //Number port (expressed in seconds)
-extern NSString* const QCCompositionInputTrackInfoKey; //Structure port (contains the optional entries: "name" of type String, "artist" of type String, "album" of type String, "genre" of type String, "duration" of type Number and "artwork" of type Image)
-extern NSString* const QCCompositionInputTrackSignalKey; //Boolean port
-extern NSString* const QCCompositionInputPrimaryColorKey; //Color port
-extern NSString* const QCCompositionInputSecondaryColorKey; //Color port
+extern NSString* const QCCompositionInputPreviewModeKey QC_DEPRECATED_MAC(10_15); //Boolean port
+extern NSString* const QCCompositionInputXKey QC_DEPRECATED_MAC(10_15); //Number port (normalized to the image width with the origin on the left)
+extern NSString* const QCCompositionInputYKey QC_DEPRECATED_MAC(10_15); //Number port (normalized to the image height with the origin at the bottom)
+extern NSString* const QCCompositionInputScreenImageKey QC_DEPRECATED_MAC(10_15); //Image port
+extern NSString* const QCCompositionInputAudioPeakKey QC_DEPRECATED_MAC(10_15); //Number port (in [0,1] range as a mono signal with no decay applied)
+extern NSString* const QCCompositionInputAudioSpectrumKey QC_DEPRECATED_MAC(10_15); //Structure port (contains 16 numbers in [0,1] range representing 16 spectrum bands of the mono signal from low to high frequencies with no decay applied)
+extern NSString* const QCCompositionInputTrackPositionKey QC_DEPRECATED_MAC(10_15); //Number port (expressed in seconds)
+extern NSString* const QCCompositionInputTrackInfoKey QC_DEPRECATED_MAC(10_15); //Structure port (contains the optional entries: "name" of type String, "artist" of type String, "album" of type String, "genre" of type String, "duration" of type Number and "artwork" of type Image)
+extern NSString* const QCCompositionInputTrackSignalKey QC_DEPRECATED_MAC(10_15); //Boolean port
+extern NSString* const QCCompositionInputPrimaryColorKey QC_DEPRECATED_MAC(10_15); //Color port
+extern NSString* const QCCompositionInputSecondaryColorKey QC_DEPRECATED_MAC(10_15); //Color port
 extern NSString* const QCCompositionInputPaceKey; //Number port (in [0,1] range)
 #ifdef __QUARTZCOMPOSER_CORE3D__
-extern NSString* const QCCompositionInputMeshKey; //Mesh port
+extern NSString* const QCCompositionInputMeshKey QC_DEPRECATED_MAC(10_15); //Mesh port
 #endif
 
 /* Standard composition output port keys */
-extern NSString* const QCCompositionOutputImageKey; //Image port
-extern NSString* const QCCompositionOutputWebPageURLKey; //String port
+extern NSString* const QCCompositionOutputImageKey QC_DEPRECATED_MAC(10_15); //Image port
+extern NSString* const QCCompositionOutputWebPageURLKey QC_DEPRECATED_MAC(10_15); //String port
 #ifdef __QUARTZCOMPOSER_CORE3D__
-extern NSString* const QCCompositionOutputMeshKey; //Mesh port
+extern NSString* const QCCompositionOutputMeshKey QC_DEPRECATED_MAC(10_15); //Mesh port
 #endif
 
 /* Composition graphic animation protocol (the composition renders a generic graphical animation):
@@ -66,7 +66,7 @@ extern NSString* const QCCompositionOutputMeshKey; //Mesh port
 - QCCompositionInputPaceKey (optional): The global pace of the animation
 - QCCompositionInputPreviewModeKey (optional): Indicates if the animation should run in lower-quality for preview purposes
 */
-extern NSString* const QCCompositionProtocolGraphicAnimation;
+extern NSString* const QCCompositionProtocolGraphicAnimation QC_DEPRECATED_MAC(10_15);
 
 /* Composition image transition protocol (the composition renders a transition between two images for time in [0,1] range):
 - QCCompositionInputSourceImageKey: Image to transition from
@@ -75,7 +75,7 @@ extern NSString* const QCCompositionProtocolGraphicAnimation;
 - QCCompositionInputSecondaryColorKey (optional): The secondary color of the transition
 - QCCompositionInputPreviewModeKey (optional): Indicates if the transition should run in lower-quality for preview purposes
 */
-extern NSString* const QCCompositionProtocolGraphicTransition;
+extern NSString* const QCCompositionProtocolGraphicTransition QC_DEPRECATED_MAC(10_15);
 
 /* Composition image filter protocol (the composition applies an effect to a source image):
 - QCCompositionInputImageKey: Source image
@@ -84,14 +84,14 @@ extern NSString* const QCCompositionProtocolGraphicTransition;
 - QCCompositionInputPreviewModeKey (optional): Indicates if the filter should run in lower-quality for preview purposes
 - QCCompositionOutputImageKey: New image with the applied effect
 */
-extern NSString* const QCCompositionProtocolImageFilter;
+extern NSString* const QCCompositionProtocolImageFilter QC_DEPRECATED_MAC(10_15);
 
 /* Composition screen saver protocol (the composition can be used as a screen saver):
 - QCCompositionInputScreenImageKey (optional): Receives a screenshot image of the screen the screen saver will run on
 - QCCompositionInputPreviewModeKey (optional): Indicates if the screen saver is rendering in preview mode
 - QCCompositionOutputWebPageURLKey (optional): Web page URL to open in default web browser when screen saver exits (only allowed if screen saver password is disabled)
 */
-extern NSString* const QCCompositionProtocolScreenSaver;
+extern NSString* const QCCompositionProtocolScreenSaver QC_DEPRECATED_MAC(10_15);
 
 /* Composition RSS visualizer protocol (the composition acts as a visualizer for a RSS feed):
 - QCCompositionInputRSSFeedURLKey: RSS Feed URL
@@ -105,17 +105,18 @@ extern NSString* const QCCompositionProtocolRSSVisualizer QC_GL_DEPRECATED(10_5,
 - QCCompositionInputTrackInfoKey (optional): Receives information about the currently playing track
 - QCCompositionInputTrackSignalKey (optional): Indicates a new track has started playing
 */
-extern NSString* const QCCompositionProtocolMusicVisualizer;
+extern NSString* const QCCompositionProtocolMusicVisualizer QC_DEPRECATED_MAC(10_15);
 
 #ifdef __QUARTZCOMPOSER_CORE3D__
 /* Composition mesh filter protocol (the composition applies an effect to a source image):
 - QCCompositionInputMeshKey: Source image
 - QCCompositionOutputMeshKey: New image with the applied effect
 */
-extern NSString* const QCCompositionProtocolMeshFilter;
+extern NSString* const QCCompositionProtocolMeshFilter QC_DEPRECATED_MAC(10_15);
 #endif
 
 /* Opaque composition object */
+QC_CLASS_DEPRECATED_MAC(10_15)
 @interface QCComposition : NSObject <NSCopying>
 {
 @private

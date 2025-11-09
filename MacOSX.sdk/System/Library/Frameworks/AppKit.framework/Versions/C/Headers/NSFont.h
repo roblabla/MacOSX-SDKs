@@ -1,7 +1,7 @@
 /*
 	NSFont.h
 	Application Kit
-	Copyright (c) 1994-2018, Apple Inc.
+	Copyright (c) 1994-2019, Apple Inc.
 	All rights reserved.
 */
 
@@ -12,6 +12,7 @@
 #import <AppKit/NSFontDescriptor.h>
 
 NS_ASSUME_NONNULL_BEGIN
+API_UNAVAILABLE_BEGIN(ios)
 
 @class NSFontDescriptor, NSAffineTransform, NSGraphicsContext;
 
@@ -21,23 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
 APPKIT_EXTERN const CGFloat * NSFontIdentityMatrix;
 
 NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE
-@interface NSFont : NSObject <NSCopying, NSSecureCoding> {
-    /* All instance variables are private */
-    NSString *_name APPKIT_IVAR;
-    CGFloat _size APPKIT_IVAR;
-    NSInteger _retainCount APPKIT_IVAR;
-    struct __fFlags {
-        unsigned int _isScreenFont:1;
-        unsigned int _systemFontType:8;
-        unsigned int _reserved1:4;
-        unsigned int _matrixIsIdentity:1;
-        unsigned int _renderingMode:3;
-        unsigned int _inInstanceCache:1;
-        unsigned int _appearanceSize:1;
-        unsigned int _reserved2:13;
-    } _fFlags APPKIT_IVAR;
-    id _private APPKIT_IVAR;
-}
+@interface NSFont : NSObject <NSCopying, NSSecureCoding>
 
 /********* Factory *********/
 + (nullable NSFont *)fontWithName:(NSString *)fontName size:(CGFloat)fontSize;
@@ -74,8 +59,11 @@ NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE
 
 /* Following two factory methods return system font with NSFontWeightTrait. Returns the system font object corresponding to fontSize and weight. +monospacedDigitSystemFontOfSize:weight: always return a system font instance with monospaced digit glyphs. It's recommended to use the symbolic weight values declared in NSFontDescriptor.h. Due to sophisticated system font weight matching logic underneath, it's recommended to use this factory method all the time when getting non-standard weight system fonts instead of transforming existing instances via methods like -[NSFontManager convertFont:toSize]. When asked for a missing weight for the running version of OS X, this method returns the nearest heavier weight available if the application is linked against the current or older SDK; otherwise, it returns the nearest lighter weight available.
 */
-+ (NSFont *)systemFontOfSize:(CGFloat)fontSize weight:(NSFontWeight)weight NS_AVAILABLE_MAC(10_11);
-+ (NSFont *)monospacedDigitSystemFontOfSize:(CGFloat)fontSize weight:(NSFontWeight)weight NS_AVAILABLE_MAC(10_11);
++ (NSFont *)systemFontOfSize:(CGFloat)fontSize weight:(NSFontWeight)weight API_AVAILABLE(macos(10.11));
++ (NSFont *)monospacedDigitSystemFontOfSize:(CGFloat)fontSize weight:(NSFontWeight)weight API_AVAILABLE(macos(10.11));
+
+/* Returns current default monospaced font for system UI. Clients of this API should be aware that the monospaced system font has a similar coverage of default system UI font, which includes Latin and common symbols used for displaying text like source code. For the characters it does not cover, the subtituted fonts are usually not the same width as the monospaced system font, they can be wider, narrower, or variable. To ensure fixed advances in text layout, clients can consider using string attributes like NSFontFixedAdvanceAttribute. */
++ (NSFont *)monospacedSystemFontOfSize:(CGFloat)fontSize weight:(NSFontWeight)weight API_AVAILABLE(macos(10.15));
 
 /* UI font size settings
 */
@@ -118,12 +106,12 @@ NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE
 
 /********* Glyph metrics *********/
 /********* Glyph metrics *********/
-- (NSRect)boundingRectForCGGlyph:(CGGlyph)glyph NS_AVAILABLE_MAC(10_13);
-- (NSSize)advancementForCGGlyph:(CGGlyph)glyph NS_AVAILABLE_MAC(10_13);
+- (NSRect)boundingRectForCGGlyph:(CGGlyph)glyph API_AVAILABLE(macos(10.13));
+- (NSSize)advancementForCGGlyph:(CGGlyph)glyph API_AVAILABLE(macos(10.13));
 
 // bulk query
-- (void)getBoundingRects:(NSRectArray)bounds forCGGlyphs:(const CGGlyph *)glyphs count:(NSUInteger)glyphCount NS_AVAILABLE_MAC(10_13);
-- (void)getAdvancements:(NSSizeArray)advancements forCGGlyphs:(const CGGlyph *)glyphs count:(NSUInteger)glyphCount NS_AVAILABLE_MAC(10_13);
+- (void)getBoundingRects:(NSRectArray)bounds forCGGlyphs:(const CGGlyph *)glyphs count:(NSUInteger)glyphCount API_AVAILABLE(macos(10.13));
+- (void)getAdvancements:(NSSizeArray)advancements forCGGlyphs:(const CGGlyph *)glyphs count:(NSUInteger)glyphCount API_AVAILABLE(macos(10.13));
 
 /********* NSGraphicsContext-related *********/
 - (void)set;
@@ -131,10 +119,10 @@ NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE
 
 /********* Vertical mode *********/
 /* Returns a vertical version of the receiver if such a configuration is supported.  Returns the receiver if no vertical variant available.  A vertical font applies appropriate rotation to the text matrix in -setInContext:, returns vertical metrics, and enables the vertical glyph substitution feature by default. */
-@property (readonly, copy) NSFont *verticalFont NS_AVAILABLE_MAC(10_7);
+@property (readonly, copy) NSFont *verticalFont API_AVAILABLE(macos(10.7));
 
 /* Returns YES if a vertical variant */
-@property (getter=isVertical, readonly) BOOL vertical NS_AVAILABLE_MAC(10_7);
+@property (getter=isVertical, readonly) BOOL vertical API_AVAILABLE(macos(10.7));
 @end
 
 /********* Notifications *********/
@@ -166,10 +154,10 @@ typedef NS_ENUM(NSUInteger, NSFontRenderingMode) {
 };
 
 typedef NS_ENUM(NSUInteger, NSMultibyteGlyphPacking) {
-    NSNativeShortGlyphPacking NS_ENUM_DEPRECATED_MAC(10_0, 10_13) = 5
-} NS_ENUM_DEPRECATED_MAC(10_0, 10_13);
+    NSNativeShortGlyphPacking API_DEPRECATED("", macos(10.0,10.13)) = 5
+} API_DEPRECATED("", macos(10.0,10.13));
 
-APPKIT_EXTERN NSInteger NSConvertGlyphsToPackedGlyphs(NSGlyph * __nonnull glBuf, NSInteger count, NSMultibyteGlyphPacking packing, char * __nonnull packedGlyphs) NS_DEPRECATED_MAC(10_0, 10_13);
+APPKIT_EXTERN NSInteger NSConvertGlyphsToPackedGlyphs(NSGlyph * _Nonnull glBuf, NSInteger count, NSMultibyteGlyphPacking packing, char * _Nonnull packedGlyphs) API_DEPRECATED("", macos(10.0,10.13));
 
 @interface NSFont (NSFont_Deprecated)
 - (NSGlyph)glyphWithName:(NSString *)name;
@@ -188,67 +176,7 @@ APPKIT_EXTERN NSInteger NSConvertGlyphsToPackedGlyphs(NSGlyph * __nonnull glBuf,
 @property (readonly) NSFontRenderingMode renderingMode;
 @end
 
+API_UNAVAILABLE_END
 NS_ASSUME_NONNULL_END
 
 // The remaining portion is deprecated on Mac OS X 10.4 and Later.
-#if !__LP64__
-#if MAC_OS_X_VERSION_MIN_REQUIRED <= MAC_OS_X_VERSION_10_4
-/* Only NSNativeShortGlyphPacking is supported on Mac OS X.
-*/
-enum {
-    NSOneByteGlyphPacking,
-    NSJapaneseEUCGlyphPacking,
-    NSAsciiWithDoubleByteEUCGlyphPacking,
-    NSTwoByteGlyphPacking,
-    NSFourByteGlyphPacking,
-} NS_ENUM_DEPRECATED_MAC(10_0, 10_4);
-
-enum _NSGlyphRelation {
-    NSGlyphBelow = 1,
-    NSGlyphAbove = 2
-} NS_ENUM_DEPRECATED_MAC(10_0, 10_4);
-#endif /* MAC_OS_X_VERSION_MIN_REQUIRED <= MAC_OS_X_VERSION_10_4 */
-typedef NSUInteger  NSGlyphRelation NS_DEPRECATED_MAC(10_0, 10_4);
-
-@interface NSFont (NSFontDeprecated)
-+ (void)useFont:(null_unspecified NSString *)fontName NS_DEPRECATED_MAC(10_0, 10_4); // This is now automatically handled by Quartz.
-- (CGFloat)widthOfString:(null_unspecified NSString *)string NS_DEPRECATED_MAC(10_0, 10_4); // This API never returns correct value. Use NSStringDrawing API instead.
-- (BOOL)isBaseFont NS_DEPRECATED_MAC(10_0, 10_4);
-- (null_unspecified NSDictionary *)afmDictionary NS_DEPRECATED_MAC(10_0, 10_4);
-- (BOOL)glyphIsEncoded:(NSGlyph)glyph NS_DEPRECATED_MAC(10_0, 10_4); // Can be deduced by aGlyph < [NSFont numberOfGlyphs] since only NSNativeShortGlyphPacking is supported.
-- (CGFloat)defaultLineHeightForFont NS_DEPRECATED_MAC(10_0, 10_4); // Use -[NSLayoutManager defaultLineHeightForFont:] instead.
-+ (null_unspecified NSArray *)preferredFontNames NS_DEPRECATED_MAC(10_0, 10_4); // NSFontCascadeListAttribute offers more powerful font substitution management
-+ (void)setPreferredFontNames:(null_unspecified NSArray *)fontNameArray NS_DEPRECATED_MAC(10_0, 10_4);
-- (null_unspecified NSString *)encodingScheme NS_DEPRECATED_MAC(10_0, 10_4);
-- (NSMultibyteGlyphPacking) glyphPacking NS_DEPRECATED_MAC(10_0, 10_4);
-
-NS_ASSUME_NONNULL_BEGIN
-// The context-sensitive inter-glyph spacing is now performed at the typesetting stage.
-- (NSPoint)positionOfGlyph:(NSGlyph)glyph precededByGlyph:(NSGlyph)prevGlyph isNominal:(null_unspecified BOOL *)nominal NS_DEPRECATED_MAC(10_0, 10_4);
-- (NSInteger)positionsForCompositeSequence:(null_unspecified NSGlyph *)someGlyphs numberOfGlyphs:(NSInteger)numGlyphs pointArray:(NSPointArray)points NS_DEPRECATED_MAC(10_0, 10_4);
-- (NSPoint)positionOfGlyph:(NSGlyph)glyph struckOverGlyph:(NSGlyph)prevGlyph metricsExist:(null_unspecified BOOL *)exist NS_DEPRECATED_MAC(10_0, 10_4);
-- (NSPoint)positionOfGlyph:(NSGlyph)glyph struckOverRect:(NSRect)rect metricsExist:(null_unspecified BOOL *)exist NS_DEPRECATED_MAC(10_0, 10_4);
-- (NSPoint)positionOfGlyph:(NSGlyph)glyph forCharacter:(unichar)character struckOverRect:(NSRect)rect NS_DEPRECATED_MAC(10_0, 10_4);
-- (NSPoint)positionOfGlyph:(NSGlyph)thisGlyph withRelation:(NSGlyphRelation)rel toBaseGlyph:(NSGlyph)baseGlyph totalAdvancement:(NSSizePointer)adv metricsExist:(null_unspecified BOOL *)exist NS_DEPRECATED_MAC(10_0, 10_4);
-@end
-
-APPKIT_EXTERN NSString *NSAFMFamilyName         NS_DEPRECATED_MAC(10_0, 10_4);
-APPKIT_EXTERN NSString *NSAFMFontName           NS_DEPRECATED_MAC(10_0, 10_4);
-APPKIT_EXTERN NSString *NSAFMFormatVersion      NS_DEPRECATED_MAC(10_0, 10_4);
-APPKIT_EXTERN NSString *NSAFMFullName           NS_DEPRECATED_MAC(10_0, 10_4);
-APPKIT_EXTERN NSString *NSAFMNotice             NS_DEPRECATED_MAC(10_0, 10_4);
-APPKIT_EXTERN NSString *NSAFMVersion            NS_DEPRECATED_MAC(10_0, 10_4);
-APPKIT_EXTERN NSString *NSAFMWeight             NS_DEPRECATED_MAC(10_0, 10_4);
-APPKIT_EXTERN NSString *NSAFMEncodingScheme     NS_DEPRECATED_MAC(10_0, 10_4);
-APPKIT_EXTERN NSString *NSAFMCharacterSet       NS_DEPRECATED_MAC(10_0, 10_4);
-APPKIT_EXTERN NSString *NSAFMCapHeight          NS_DEPRECATED_MAC(10_0, 10_4);
-APPKIT_EXTERN NSString *NSAFMXHeight            NS_DEPRECATED_MAC(10_0, 10_4);
-APPKIT_EXTERN NSString *NSAFMAscender           NS_DEPRECATED_MAC(10_0, 10_4);
-APPKIT_EXTERN NSString *NSAFMDescender          NS_DEPRECATED_MAC(10_0, 10_4);
-APPKIT_EXTERN NSString *NSAFMUnderlinePosition  NS_DEPRECATED_MAC(10_0, 10_4);
-APPKIT_EXTERN NSString *NSAFMUnderlineThickness NS_DEPRECATED_MAC(10_0, 10_4);
-APPKIT_EXTERN NSString *NSAFMItalicAngle        NS_DEPRECATED_MAC(10_0, 10_4);
-APPKIT_EXTERN NSString *NSAFMMappingScheme      NS_DEPRECATED_MAC(10_0, 10_4);
-NS_ASSUME_NONNULL_END
-
-#endif /* !__LP64__ */

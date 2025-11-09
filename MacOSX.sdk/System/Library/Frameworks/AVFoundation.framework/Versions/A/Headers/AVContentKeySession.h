@@ -32,21 +32,27 @@ NS_ASSUME_NONNULL_BEGIN
  @group         AVContentKeySystem string constants
  @brief         Used by AVContentKeySession to determine the method of key delivery
  */
-typedef NSString *AVContentKeySystem NS_STRING_ENUM API_AVAILABLE(macos(10.12.4), ios(10.3), tvos(10.2)) __WATCHOS_PROHIBITED;
+typedef NSString *AVContentKeySystem NS_STRING_ENUM API_AVAILABLE(macos(10.12.4), ios(10.3), tvos(10.2)) API_UNAVAILABLE(watchos);
 
 /*!
  @constant      AVContentKeySystemFairPlayStreaming
  @discussion    Used to specify FairPlay Streaming (FPS) as the method of key delivery.
  */
-AVF_EXPORT AVContentKeySystem const AVContentKeySystemFairPlayStreaming API_AVAILABLE(macos(10.12.4), ios(10.3), tvos(10.2)) __WATCHOS_PROHIBITED;
+AVF_EXPORT AVContentKeySystem const AVContentKeySystemFairPlayStreaming API_AVAILABLE(macos(10.12.4), ios(10.3), tvos(10.2)) API_UNAVAILABLE(watchos);
 
 /*!
  @constant      AVContentKeySystemClearKey
  @discussion    Used to specify clear key as the method of key delivery.
  */
-AVF_EXPORT AVContentKeySystem const AVContentKeySystemClearKey API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0)) __WATCHOS_PROHIBITED;
+AVF_EXPORT AVContentKeySystem const AVContentKeySystemClearKey API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0)) API_UNAVAILABLE(watchos);
 
-API_AVAILABLE(macos(10.12.4), ios(10.3), tvos(10.2)) __WATCHOS_PROHIBITED
+/*!
+ @constant      AVContentKeySystemAuthorizationToken
+ @discussion    Used to specify a token that could be used to authorize playback of associated content key recipients.
+ */
+AVF_EXPORT AVContentKeySystem const AVContentKeySystemAuthorizationToken API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0)) API_UNAVAILABLE(watchos);
+
+API_AVAILABLE(macos(10.12.4), ios(10.3), tvos(10.2)) API_UNAVAILABLE(watchos)
 @interface AVContentKeySession : NSObject {
 @private
     AVContentKeySessionInternal *_session;
@@ -61,7 +67,7 @@ AV_INIT_UNAVAILABLE
  @result        A new AVContentKeySession.
  @discussion    This method returns an AVContentKeySession instance that is capable of managing collection of media content keys corresponding to the input keySystem. An NSInvalidArgumentException will be raised if the value of keySystem is unsupported.
  */
-+ (instancetype)contentKeySessionWithKeySystem:(AVContentKeySystem)keySystem API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0)) __WATCHOS_PROHIBITED;
++ (instancetype)contentKeySessionWithKeySystem:(AVContentKeySystem)keySystem API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0)) API_UNAVAILABLE(watchos);
 
 /*!
  @method        contentKeySessionWithKeySystem:storageDirectoryAtURL:
@@ -134,7 +140,7 @@ AV_INIT_UNAVAILABLE
  @param         initializationData
                 Container- and protocol-specific data to be used to obtain a key response. Either identifier or initializationData must be non-nil. Both can be non-nil, if the content protection protocol requires both.
  @param         options
-                No options are defined at this time, may be nil.
+                Additional information necessary to obtain the key, or nil if none. See AVContentKeyRequest*Key below.
  @discussion    May be used to generate an AVContentKeyRequest from request initialization data already in hand, without awaiting such data during the processing of media data of an associated recipient.
 */
 - (void)processContentKeyRequestWithIdentifier:(nullable id)identifier initializationData:(nullable NSData *)initializationData options:(nullable NSDictionary<NSString *, id> *)options;
@@ -147,7 +153,7 @@ AV_INIT_UNAVAILABLE
 - (void)renewExpiringResponseDataForContentKeyRequest:(AVContentKeyRequest *)contentKeyRequest;
 
 /*!
- @method        makeSecureTokenForExpirationDateOfPersistableContentKey:
+ @method        makeSecureTokenForExpirationDateOfPersistableContentKey:completionHandler:
  @abstract      Creates a secure server playback context (SPC) that the client could send to the key server to obtain an expiration date for the provided persistable content key data.
  @param         persistableContentKeyData
                 Persistable content key data that was previously created using -[AVContentKeyRequest persistableContentKeyFromKeyVendorResponse:options:error:] or obtained via AVContentKeySessionDelegate callback -contentKeySession:didUpdatePersistableContentKey:forContentKeyIdentifier:.
@@ -155,7 +161,57 @@ AV_INIT_UNAVAILABLE
                 Once the secure token is ready, this block will be called with the token or an error describing the failure.
  */
 - (void)makeSecureTokenForExpirationDateOfPersistableContentKey:(NSData *)persistableContentKeyData
-											  completionHandler:(void (^)(NSData * _Nullable secureTokenData, NSError * _Nullable error))handler API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos, tvos, watchos);
+											  completionHandler:(void (^)(NSData * _Nullable secureTokenData, NSError * _Nullable error))handler API_AVAILABLE(macos(10.15), ios(11.0)) API_UNAVAILABLE(tvos, watchos);
+
+/*!
+ @typedef       AVContentKeySessionServerPlaybackContextKey
+ @abstract      Options keys used to specify additional information for generating server playback context (SPC) in
+                    -[AVContentKeySession invalidatePersistableContentKey:options:completionHandler:] and
+                    -[AVContentKeySession invalidateAllPersistableContentKeysForApp:options:completionHandler:]
+ */
+typedef NSString * AVContentKeySessionServerPlaybackContextOption NS_STRING_ENUM;
+
+/*!
+ @constant      AVContentKeySessionServerPlaybackContextOptionProtocolVersions
+ @abstract      Specifies the versions of the content protection protocol supported by the application as an NSArray of one or more NSNumber objects. If not specified default protocol version of 1 is assumed.
+ */
+AVF_EXPORT AVContentKeySessionServerPlaybackContextOption const AVContentKeySessionServerPlaybackContextOptionProtocolVersions API_AVAILABLE(macos(10.15), ios(12.2)) API_UNAVAILABLE(tvos, watchos);
+
+/*!
+ @constant      AVContentKeySessionServerPlaybackContextOptionServerChallenge
+ @abstract      Specifies a nonce as a 8-byte NSData object to be included in the secure server playback context (SPC) in order to prevent replay attacks. If not specified default server challenge of 0 is assumed.
+ */
+AVF_EXPORT AVContentKeySessionServerPlaybackContextOption const AVContentKeySessionServerPlaybackContextOptionServerChallenge API_AVAILABLE(macos(10.15), ios(12.2)) API_UNAVAILABLE(tvos, watchos);
+
+/*!
+ @method        invalidatePersistableContentKey:options:completionHandler:
+ @abstract      Invalidates the persistable content key and creates a secure server playback context (SPC) that the client could send to the key server to verify the outcome of invalidation request.
+ @param         persistableContentKeyData
+                Persistable content key data that was previously created using -[AVContentKeyRequest persistableContentKeyFromKeyVendorResponse:options:error:] or obtained via AVContentKeySessionDelegate callback -contentKeySession:didUpdatePersistableContentKey:forContentKeyIdentifier:.
+ @param         options
+                Additional information necessary to generate the server playback context, or nil if none. See AVContentKeySessionServerPlaybackContextOption for supported options.
+ @param         handler
+                Once the server playback context is ready, this block will be called with the data or an error describing the failure.
+ @discussion    Once invalidated, a persistable content key cannot be used to answer key requests during later playback sessions.
+ */
+- (void)invalidatePersistableContentKey:(NSData *)persistableContentKeyData
+								options:(nullable NSDictionary<AVContentKeySessionServerPlaybackContextOption, id> *)options
+					  completionHandler:(void (^)(NSData * _Nullable secureTokenData, NSError * _Nullable error))handler API_AVAILABLE(macos(10.15), ios(12.2)) API_UNAVAILABLE(tvos, watchos);
+
+/*!
+ @method        invalidateAllPersistableContentKeysForApp:options:completionHandler:
+ @abstract      Invalidates all persistable content keys associated with the application and creates a secure server playback context (SPC) that the client could send to the key server to verify the outcome of invalidation request.
+ @param         appIdentifier
+                An opaque identifier for the application. The contents of this identifier depend on the particular protocol in use by the entity that controls the use of the media data.
+ @param         options
+                Additional information necessary to generate the server playback context, or nil if none. See AVContentKeySessionServerPlaybackContextOption for supported options.
+ @param         handler
+                Once the server playback context is ready, this block will be called with the data or an error describing the failure.
+ @discussion    Once invalidated, persistable content keys cannot be used to answer key requests during later playback sessions.
+ */
+- (void)invalidateAllPersistableContentKeysForApp:(NSData *)appIdentifier
+										  options:(nullable NSDictionary<AVContentKeySessionServerPlaybackContextOption, id> *)options
+								completionHandler:(void (^)(NSData * _Nullable secureTokenData, NSError * _Nullable error))handler API_AVAILABLE(macos(10.15), ios(12.2)) API_UNAVAILABLE(tvos, watchos);
 
 @end
 
@@ -216,27 +272,27 @@ AV_INIT_UNAVAILABLE
  @group         AVContentKeyRequestRetryReason string constants
  @brief         Used to specify a reason for asking the client to retry a content key request.
  */
-typedef NSString *AVContentKeyRequestRetryReason NS_STRING_ENUM API_AVAILABLE(macos(10.12.4), ios(10.3), tvos(10.2)) __WATCHOS_PROHIBITED;
+typedef NSString *AVContentKeyRequestRetryReason NS_STRING_ENUM API_AVAILABLE(macos(10.12.4), ios(10.3), tvos(10.2)) API_UNAVAILABLE(watchos);
 
 /*!
  @constant      AVContentKeyRequestRetryReasonTimedOut
  @discussion    Indicates that the content key request should be retried because the key response was not set soon enough either due the initial request/response was taking too long, or a lease was expiring in the meantime.
  */
-AVF_EXPORT AVContentKeyRequestRetryReason const AVContentKeyRequestRetryReasonTimedOut API_AVAILABLE(macos(10.12.4), ios(10.3), tvos(10.2)) __WATCHOS_PROHIBITED;
+AVF_EXPORT AVContentKeyRequestRetryReason const AVContentKeyRequestRetryReasonTimedOut API_AVAILABLE(macos(10.12.4), ios(10.3), tvos(10.2)) API_UNAVAILABLE(watchos);
 
 /*!
  @constant      AVContentKeyRequestRetryReasonReceivedResponseWithExpiredLease
  @discussion    Indicates that the content key request should be retried because a key response with expired lease was set on the previous content key request.
  */
-AVF_EXPORT AVContentKeyRequestRetryReason const AVContentKeyRequestRetryReasonReceivedResponseWithExpiredLease API_AVAILABLE(macos(10.12.4), ios(10.3), tvos(10.2)) __WATCHOS_PROHIBITED;
+AVF_EXPORT AVContentKeyRequestRetryReason const AVContentKeyRequestRetryReasonReceivedResponseWithExpiredLease API_AVAILABLE(macos(10.12.4), ios(10.3), tvos(10.2)) API_UNAVAILABLE(watchos);
 
 /*!
  @constant      AVContentKeyRequestRetryReasonReceivedObsoleteContentKey
  @discussion    Indicates that the content key request should be retried because an obsolete key response was set on the previous content key request.
  */
-AVF_EXPORT AVContentKeyRequestRetryReason const AVContentKeyRequestRetryReasonReceivedObsoleteContentKey API_AVAILABLE(macos(10.12.4), ios(10.3), tvos(10.2)) __WATCHOS_PROHIBITED;
+AVF_EXPORT AVContentKeyRequestRetryReason const AVContentKeyRequestRetryReasonReceivedObsoleteContentKey API_AVAILABLE(macos(10.12.4), ios(10.3), tvos(10.2)) API_UNAVAILABLE(watchos);
 
-API_AVAILABLE(macos(10.12.4), ios(10.3), tvos(10.2)) __WATCHOS_PROHIBITED
+API_AVAILABLE(macos(10.12.4), ios(10.3), tvos(10.2)) API_UNAVAILABLE(watchos)
 @protocol AVContentKeySessionDelegate <NSObject>
 
 /*!
@@ -287,7 +343,7 @@ API_AVAILABLE(macos(10.12.4), ios(10.3), tvos(10.2)) __WATCHOS_PROHIBITED
  @discussion    If the content key session provides an updated persistable content key data, the previous key data is no longer valid and cannot be used to answer future loading requests.
  */
 @optional
-- (void)contentKeySession:(AVContentKeySession *)session didUpdatePersistableContentKey:(NSData *)persistableContentKey forContentKeyIdentifier:(id)keyIdentifier API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos, tvos, watchos);
+- (void)contentKeySession:(AVContentKeySession *)session didUpdatePersistableContentKey:(NSData *)persistableContentKey forContentKeyIdentifier:(id)keyIdentifier API_AVAILABLE(macos(10.15), ios(11.0)) API_UNAVAILABLE(tvos, watchos);
 
 /*!
  @method        contentKeySession:contentKeyRequest:didFailWithError:
@@ -327,7 +383,7 @@ API_AVAILABLE(macos(10.12.4), ios(10.3), tvos(10.2)) __WATCHOS_PROHIBITED
  @discussion    Will be invoked by an AVContentKeySession when it is certain that the response client provided via -[AVContentKeyRequest processContentKeyResponse:] was successfully processed by the system.
  */
 @optional
-- (void)contentKeySession:(AVContentKeySession *)session contentKeyRequestDidSucceed:(AVContentKeyRequest *)keyRequest API_AVAILABLE(macos(10.14), ios(12.0), tvos(12.0)) __WATCHOS_PROHIBITED;
+- (void)contentKeySession:(AVContentKeySession *)session contentKeyRequestDidSucceed:(AVContentKeyRequest *)keyRequest API_AVAILABLE(macos(10.14), ios(12.0), tvos(12.0)) API_UNAVAILABLE(watchos);
 
 /*!
  @method        contentKeySessionContentProtectionSessionIdentifierDidChange:
@@ -345,7 +401,7 @@ API_AVAILABLE(macos(10.12.4), ios(10.3), tvos(10.2)) __WATCHOS_PROHIBITED
  @discussion    Will be invoked by an AVContentKeySession when an expired session report is added to the storageURL
 */
 @optional
-- (void)contentKeySessionDidGenerateExpiredSessionReport:(AVContentKeySession *)session API_AVAILABLE(macos(10.14), ios(12.0), tvos(12.0)) __WATCHOS_PROHIBITED;
+- (void)contentKeySessionDidGenerateExpiredSessionReport:(AVContentKeySession *)session API_AVAILABLE(macos(10.14), ios(12.0), tvos(12.0)) API_UNAVAILABLE(watchos);
 @end
 
 
@@ -364,17 +420,17 @@ API_AVAILABLE(macos(10.12.4), ios(10.3), tvos(10.2)) __WATCHOS_PROHIBITED
     Indicates that the request has encountered an error. See also the error property.
 */
 typedef NS_ENUM(NSInteger, AVContentKeyRequestStatus) {
-    AVContentKeyRequestStatusRequestingResponse,
-    AVContentKeyRequestStatusReceivedResponse,
-    AVContentKeyRequestStatusRenewed,
-	AVContentKeyRequestStatusRetried,
-    AVContentKeyRequestStatusCancelled,
-    AVContentKeyRequestStatusFailed
-} API_AVAILABLE(macos(10.12.4), ios(10.3), tvos(10.2)) __WATCHOS_PROHIBITED;
+    AVContentKeyRequestStatusRequestingResponse = 0,
+    AVContentKeyRequestStatusReceivedResponse = 1,
+    AVContentKeyRequestStatusRenewed = 2,
+	AVContentKeyRequestStatusRetried = 3,
+    AVContentKeyRequestStatusCancelled = 4,
+    AVContentKeyRequestStatusFailed = 5
+} API_AVAILABLE(macos(10.12.4), ios(10.3), tvos(10.2)) API_UNAVAILABLE(watchos);
 
 @class AVContentKeyRequestInternal;
 
-API_AVAILABLE(macos(10.12.4), ios(10.3), tvos(10.2)) __WATCHOS_PROHIBITED
+API_AVAILABLE(macos(10.12.4), ios(10.3), tvos(10.2)) API_UNAVAILABLE(watchos)
 @interface AVContentKeyRequest : NSObject
 {
 @private
@@ -408,11 +464,23 @@ API_AVAILABLE(macos(10.12.4), ios(10.3), tvos(10.2)) __WATCHOS_PROHIBITED
 @property (nonatomic, readonly, nullable) NSData *initializationData;
 
 /*
+ @property      options
+ @abstract      Additional information specified while initiaing key loading using -processContentKeyRequestWithIdentifier:initializationData:options:.
+ */
+@property (readonly, copy) NSDictionary<NSString *, id> *options API_AVAILABLE(macos(10.14.4), ios(12.2), tvos(12.2)) API_UNAVAILABLE(watchos);
+
+/*
  @property      canProvidePersistableContentKey
  @abstract      When the value of this property is YES, you can use the method -persistableContentKeyFromKeyVendorResponse:options:error: to create a persistable content key from the content key response.
  @dicsussion    The value of this property will be YES only when the receiver is provided to your AVContentKeySession delegate via the method -contentKeySession:didProvidePersistableContentKeyRequest:. If you have an AVContentKeyRequest for which the value of canProvidePersistableContentKey is NO, but you wish to obtain a persistable content key, send the AVContentKeyRequest the message -respondByRequestingPersistableContentKeyRequest.
  */
 @property (readonly) BOOL canProvidePersistableContentKey;
+
+/*
+ @constant      AVContentKeyRequestRequiresValidationDataInSecureTokenKey
+ @abstract      Request secure token to have extended validation data. The value for the key should be previously created offline key using -[AVContentKeyRequest persistableContentKeyFromKeyVendorResponse:options:error:].
+ */
+AVF_EXPORT NSString *const AVContentKeyRequestRequiresValidationDataInSecureTokenKey API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0), watchos(6.0));
 
 /*!
  @method        makeStreamingContentKeyRequestDataForApp:contentIdentifier:options:completionHandler:
@@ -463,11 +531,11 @@ API_AVAILABLE(macos(10.12.4), ios(10.3), tvos(10.2)) __WATCHOS_PROHIBITED
  @result		YES if sucessful. If NO, this request should be responded to via processContentKeyResponse: or processContentKeyResponseError:.
  @discussion	When you receive an AVContentKeyRequest via -contentKeySession:didProvideContentKeyRequest: and you want the resulting key response to produce a key that can persist across multiple playback sessions, you must invoke -respondByRequestingPersistableContentKeyRequest on that AVContentKeyRequest in order to signal that you want to process an AVPersistableContentKeyRequest instead. If the underlying protocol supports persistable content keys, in response your delegate will receive an AVPersistableContentKeyRequest via -contentKeySession:didProvidePersistableContentKeyRequest:. NSInternalInconsistencyException will be raised, if you are attempting to create and use a persistable key but your AVContentKeySession delegate does not respond to contentKeySession:didProvidePersistableContentKeyRequest:.
 */
-- (BOOL)respondByRequestingPersistableContentKeyRequestAndReturnError:(NSError **)outError API_AVAILABLE(ios(11.2)) API_UNAVAILABLE(macos, tvos, watchos);
+- (BOOL)respondByRequestingPersistableContentKeyRequestAndReturnError:(NSError **)outError API_AVAILABLE(macos(10.15), ios(11.2)) API_UNAVAILABLE(tvos, watchos);
 
 @end
 
-API_AVAILABLE(ios(10.3), tvos(10.3)) __WATCHOS_PROHIBITED
+API_AVAILABLE(macos(10.15), ios(10.3), tvos(10.3)) API_UNAVAILABLE(watchos)
 @interface AVPersistableContentKeyRequest : AVContentKeyRequest
 
 /*!
@@ -504,7 +572,7 @@ API_AVAILABLE(ios(10.3), tvos(10.3)) __WATCHOS_PROHIBITED
  @class         AVContentKeyResponse
  @abstract      AVContentKeyResponse is used to represent the data returned from the key server when requesting a key for decrypting content.
 */
-API_AVAILABLE(macos(10.12.4), ios(10.3), tvos(10.2)) __WATCHOS_PROHIBITED
+API_AVAILABLE(macos(10.12.4), ios(10.3), tvos(10.2)) API_UNAVAILABLE(watchos)
 @interface AVContentKeyResponse : NSObject
 {
 @private
@@ -532,16 +600,31 @@ API_AVAILABLE(macos(10.12.4), ios(10.3), tvos(10.2)) __WATCHOS_PROHIBITED
  @result		A new AVContentKeyResponse holding Clear Key data.
  @discussion	The object created by this method is typically used with an AVContentKeyRequest created by an AVContentKeySession using keySystem AVContentKeySystemClearKey. It is passed to AVContentKeyRequest -processContentKeyResponse: in order to supply the decryptor with key data.
 */
-+ (instancetype)contentKeyResponseWithClearKeyData:(NSData *)keyData initializationVector:(nullable NSData *)initializationVector API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0)) __WATCHOS_PROHIBITED;
++ (instancetype)contentKeyResponseWithClearKeyData:(NSData *)keyData initializationVector:(nullable NSData *)initializationVector API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0)) API_UNAVAILABLE(watchos);
+
+/*!
+ @method        contentKeyResponseWithAuthorizationTokenData:
+ @abstract      Create an AVContentKeyResponse from authorization token data when using AVContentKeySystemAuthorizationToken key system.
+ @param         authorizationTokenData
+				Data blob containing the authorization token.
+ @result        A new AVContentKeyResponse holding the authorization token data.
+ @discussion    The object created by this method is typically used with an AVContentKeyRequest created by an AVContentKeySession using keySystem AVContentKeySystemAuthorizationToken. It is passed to AVContentKeyRequest -processContentKeyResponse: in order to supply the authorization token data.
+ */
++ (instancetype) contentKeyResponseWithAuthorizationTokenData:(NSData *)authorizationTokenData API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0)) API_UNAVAILABLE(watchos);
 
 @end
 
-// Options keys for use with -[AVContentKeyRequest makeStreamingContentKeyRequestDataForApp:contentIdentifier:options:completionHandler:]
+/*!
+ Options keys for use with the following methods:
+	-[AVContentKeySession processContentKeyRequestWithIdentifier:initializationData:options:]
+	-[AVContentKeyRequest makeStreamingContentKeyRequestDataForApp:contentIdentifier:options:completionHandler:]
+ */
+
 /*!
  @constant      AVContentKeyRequestProtocolVersionsKey
  @abstract      Specifies the versions of the content protection protocol supported by the application as an NSArray of one or more NSNumber objects.
  */
-AVF_EXPORT NSString *const AVContentKeyRequestProtocolVersionsKey API_AVAILABLE(macos(10.12.4), ios(10.3), tvos(10.2)) __WATCHOS_PROHIBITED;
+AVF_EXPORT NSString *const AVContentKeyRequestProtocolVersionsKey API_AVAILABLE(macos(10.12.4), ios(10.3), tvos(10.2)) API_UNAVAILABLE(watchos);
 
 /*!
   @protocol      AVContentKeyRecipient
@@ -549,7 +632,7 @@ AVF_EXPORT NSString *const AVContentKeyRequestProtocolVersionsKey API_AVAILABLE(
   @abstract
     Classes of objects that may require decryption keys for media data in order to enable processing, such as parsing or playback, conform to this protocol.
 */
-API_AVAILABLE(macos(10.12.4), ios(10.3), tvos(10.2), watchos(3.3))
+API_AVAILABLE(macos(10.12.4), ios(10.3), tvos(10.2)) API_UNAVAILABLE(watchos)
 @protocol AVContentKeyRecipient
 
 @required

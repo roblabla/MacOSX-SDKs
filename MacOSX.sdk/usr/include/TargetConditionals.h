@@ -35,10 +35,6 @@
 #ifndef __TARGETCONDITIONALS__
 #define __TARGETCONDITIONALS__
 
-#if __has_include(<TargetConditionalsInternal.h>)
-  #include <TargetConditionalsInternal.h>
-#endif
-
 /****************************************************************************************************
 
     TARGET_CPU_*    
@@ -74,21 +70,22 @@
               TARGET_OS_TV              - Generated code will run under Apple TV OS
               TARGET_OS_WATCH           - Generated code will run under Apple Watch OS
               TARGET_OS_BRIDGE          - Generated code will run under Bridge devices
+              TARGET_OS_MACCATALYST     - Generated code will run under macOS
            TARGET_OS_SIMULATOR      - Generated code will run under a simulator
        
         TARGET_OS_EMBEDDED        - DEPRECATED: Use TARGET_OS_IPHONE and/or TARGET_OS_SIMULATOR instead
         TARGET_IPHONE_SIMULATOR   - DEPRECATED: Same as TARGET_OS_SIMULATOR
         TARGET_OS_NANO            - DEPRECATED: Same as TARGET_OS_WATCH
 
-      +------------------------------------------------+
-      |                TARGET_OS_MAC                   |
-      | +---+  +-------------------------------------+ |
-      | |   |  |          TARGET_OS_IPHONE           | |
-      | |OSX|  | +-----+ +----+ +-------+ +--------+ | |
-      | |   |  | | IOS | | TV | | WATCH | | BRIDGE | | |
-      | |   |  | +-----+ +----+ +-------+ +--------+ | |
-      | +---+  +-------------------------------------+ |
-      +------------------------------------------------+
+      +----------------------------------------------------------------+
+      |                TARGET_OS_MAC                                   |
+      | +---+  +-----------------------------------------------------+ |
+      | |   |  |          TARGET_OS_IPHONE                           | |
+      | |OSX|  | +-----+ +----+ +-------+ +--------+ +-------------+ | |
+      | |   |  | | IOS | | TV | | WATCH | | BRIDGE | | MACCATALYST | | |
+      | |   |  | +-----+ +----+ +-------+ +--------+ +-------------+ | |
+      | +---+  +-----------------------------------------------------+ |
+      +----------------------------------------------------------------+
 
     TARGET_RT_* 
     These conditionals specify in which runtime the generated code will
@@ -104,6 +101,108 @@
 
 ****************************************************************************************************/
  
+ /*
+ * TARGET_OS conditionals can be enabled via clang preprocessor extensions:
+ *
+ *      __is_target_arch
+ *      __is_target_vendor
+ *      __is_target_os
+ *      __is_target_environment
+ *
+ *  “-target=x86_64-apple-ios12-macabi”
+ *      TARGET_OS_MAC=1
+ *      TARGET_OS_IPHONE=1
+ *      TARGET_OS_IOS=1
+ *      TARGET_OS_MACCATALYST=1
+ *
+ *  “-target=x86_64-apple-ios12-simulator”
+ *      TARGET_OS_MAC=1
+ *      TARGET_OS_IPHONE=1
+ *      TARGET_OS_IOS=1
+ *      TARGET_OS_SIMULATOR=1
+ *
+ * DYNAMIC_TARGETS_ENABLED indicates that the core TARGET_OS macros were enabled via clang preprocessor extensions.
+ * If this value is not set, the macro enablements will fall back to the static behavior.
+ * It is disabled by default.
+ */
+
+#if defined(__has_builtin)
+ #if __has_builtin(__is_target_arch)
+  #if __has_builtin(__is_target_vendor)
+   #if __has_builtin(__is_target_os)
+    #if __has_builtin(__is_target_environment)
+
+    /* “-target=x86_64-apple-ios12-macabi” */
+    #if __is_target_arch(x86_64) && __is_target_vendor(apple) && __is_target_os(ios) && __is_target_environment(macabi)
+        #define TARGET_OS_OSX               0
+        #define TARGET_OS_IPHONE            1
+        #define TARGET_OS_IOS               1
+        #define TARGET_OS_WATCH             0
+        
+        #define TARGET_OS_TV                0
+        #define TARGET_OS_SIMULATOR         0
+        #define TARGET_OS_EMBEDDED          0    
+        #define TARGET_OS_RTKIT             0
+        #define TARGET_OS_MACCATALYST       1
+        #define TARGET_OS_MACCATALYST            1
+        #ifndef TARGET_OS_UIKITFORMAC
+         #define TARGET_OS_UIKITFORMAC      1
+        #endif
+        #define TARGET_OS_DRIVERKIT         0
+        #define DYNAMIC_TARGETS_ENABLED     1
+    #endif 
+
+    /* “-target=x86_64-apple-ios12-simulator” */
+    #if __is_target_arch(x86_64) && __is_target_vendor(apple) && __is_target_os(ios) && __is_target_environment(simulator)
+        #define TARGET_OS_OSX               0
+        #define TARGET_OS_IPHONE            1
+        #define TARGET_OS_IOS               1
+        #define TARGET_OS_WATCH             0
+        
+        #define TARGET_OS_TV                0
+        #define TARGET_OS_SIMULATOR         1
+        #define TARGET_OS_EMBEDDED          0    
+        #define TARGET_OS_RTKIT             0
+        #define TARGET_OS_MACCATALYST       0
+        #define TARGET_OS_MACCATALYST            0
+        #ifndef TARGET_OS_UIKITFORMAC
+         #define TARGET_OS_UIKITFORMAC      0
+        #endif
+        #define TARGET_OS_DRIVERKIT         0
+        #define DYNAMIC_TARGETS_ENABLED     1
+    #endif 
+
+    /* -target=x86_64-apple-driverkit19.0 */
+    #if __is_target_arch(x86_64) && __is_target_vendor(apple) && __is_target_os(driverkit)
+        #define TARGET_OS_OSX               0
+        #define TARGET_OS_IPHONE            0
+        #define TARGET_OS_IOS               0
+        #define TARGET_OS_WATCH             0
+        
+        #define TARGET_OS_TV                0
+        #define TARGET_OS_SIMULATOR         0
+        #define TARGET_OS_EMBEDDED          0
+        #define TARGET_OS_RTKIT             0
+        #define TARGET_OS_MACCATALYST       0
+        #define TARGET_OS_MACCATALYST            0
+        #ifndef TARGET_OS_UIKITFORMAC
+         #define TARGET_OS_UIKITFORMAC      0
+        #endif
+        #define TARGET_OS_DRIVERKIT         1
+        #define DYNAMIC_TARGETS_ENABLED     1
+    #endif
+
+    #endif /* #if __has_builtin(__is_target_environment) */
+   #endif /* #if __has_builtin(__is_target_os) */
+  #endif /* #if __has_builtin(__is_target_vendor) */
+ #endif /* #if __has_builtin(__is_target_arch) */
+#endif /* #if defined(__has_builtin) */
+
+
+#ifndef DYNAMIC_TARGETS_ENABLED
+ #define DYNAMIC_TARGETS_ENABLED   0
+#endif /* DYNAMIC_TARGETS_ENABLED */
+
 /*
  *    gcc based compiler used on Mac OS X
  */
@@ -119,14 +218,21 @@
         #define TARGET_OS_WATCH             0
         
         #define TARGET_OS_TV                0
+        #define TARGET_OS_MACCATALYST       0
+        #define TARGET_OS_MACCATALYST            0
+        #ifndef TARGET_OS_UIKITFORMAC
+         #define TARGET_OS_UIKITFORMAC      0
+        #endif
         #define TARGET_OS_SIMULATOR         0
         #define TARGET_OS_EMBEDDED          0 
         #define TARGET_OS_RTKIT             0 
+        #define TARGET_OS_DRIVERKIT         0
     #endif
     
     #define TARGET_IPHONE_SIMULATOR     TARGET_OS_SIMULATOR /* deprecated */
     #define TARGET_OS_NANO              TARGET_OS_WATCH /* deprecated */ 
-    #if defined(__ppc__) 
+    #define TARGET_ABI_USES_IOS_VALUES  (TARGET_OS_IPHONE && !TARGET_OS_MACCATALYST)
+    #if defined(__ppc__)
         #define TARGET_CPU_PPC          1
         #define TARGET_CPU_PPC64        0
         #define TARGET_CPU_68K          0

@@ -1,3 +1,4 @@
+#if (defined(USE_AUDIOTOOLBOX_PUBLIC_HEADERS) && USE_AUDIOTOOLBOX_PUBLIC_HEADERS) || !__has_include(<AudioToolboxCore/AudioFile.h>)
 /*!
 	@file		AudioFile.h
 	@framework	AudioToolbox.framework
@@ -13,13 +14,8 @@
 //=============================================================================
 
 #include <Availability.h>
-#if !defined(__COREAUDIO_USE_FLAT_INCLUDES__)
-	#include <CoreAudio/CoreAudioTypes.h>
-	#include <CoreFoundation/CoreFoundation.h>
-#else
-	#include <CoreAudioTypes.h>
-	#include <CoreFoundation.h>
-#endif
+#include <CoreAudioTypes/CoreAudioTypes.h>
+#include <CoreFoundation/CoreFoundation.h>
 
 CF_ASSUME_NONNULL_BEGIN
 
@@ -71,6 +67,9 @@ typedef UInt32 AudioFileTypeID;
     @constant   kAudioFileAMRType
     @constant   kAudioFileFLACType
                     Free Lossless Audio Codec
+    @constant   kAudioFileLATMInLOASType
+                    Low-overhead audio stream with low-overhead audio transport multiplex, per ISO/IEC 14496-3.
+                    Support is limited to AudioSyncStream using AudioMuxElement with mux config present.
 */
 CF_ENUM(AudioFileTypeID) {
         kAudioFileAIFFType				= 'AIFF',
@@ -91,7 +90,8 @@ CF_ENUM(AudioFileTypeID) {
 		kAudioFile3GPType				= '3gpp',
 		kAudioFile3GP2Type				= '3gp2',		
 		kAudioFileAMRType				= 'amrf',
-		kAudioFileFLACType				= 'flac'
+		kAudioFileFLACType				= 'flac',
+		kAudioFileLATMInLOASType		= 'loas'
 };
 
 /*!
@@ -119,6 +119,9 @@ CF_ENUM(AudioFileTypeID) {
     @constant   kAudioFileInvalidPacketOffsetError 
 		A packet offset was past the end of the file, or not at the end of the file when writing a VBR format, 
 		or a corrupt packet size was read when building the packet table. 
+    @constant   kAudioFileInvalidPacketDependencyError
+		Either the packet dependency info that's necessary for the audio format has not been provided,
+		or the provided packet dependency info indicates dependency on a packet that's unavailable.
     @constant   kAudioFileInvalidFileError 
 		The file is malformed, or otherwise not a valid instance of an audio file of its type. 
     @constant   kAudioFileOperationNotSupportedError 
@@ -145,6 +148,7 @@ CF_ENUM(OSStatus) {
         kAudioFileInvalidChunkError						= 'chk?',		// 0x63686B3F, 1667787583
         kAudioFileDoesNotAllow64BitDataSizeError		= 'off?',		// 0x6F66663F, 1868981823
         kAudioFileInvalidPacketOffsetError				= 'pck?',		// 0x70636B3F, 1885563711
+        kAudioFileInvalidPacketDependencyError			= 'dep?',		// 0x6465703F, 1684369471
         kAudioFileInvalidFileError						= 'dta?',		// 0x6474613F, 1685348671
 		kAudioFileOperationNotSupportedError			= 0x6F703F3F, 	// 'op??', integer used because of trigraph
 		// general file error codes
@@ -218,11 +222,11 @@ CF_ENUM(UInt32) {
 /*!
     @struct		AudioFile_SMPTE_Time
     @abstract   A struct for describing a SMPTE time.
-    @field      mHours						The hours.
-    @field      mMinutes					The minutes.
-    @field      mSeconds					The seconds.
-    @field      mFrames						The frames.
-    @field      mSubFrameSampleOffset		The sample offset within a frame.
+    @var        mHours						The hours.
+    @var        mMinutes					The minutes.
+    @var        mSeconds					The seconds.
+    @var        mFrames						The frames.
+    @var        mSubFrameSampleOffset		The sample offset within a frame.
 */
 struct AudioFile_SMPTE_Time
 {
@@ -249,13 +253,13 @@ CF_ENUM(UInt32) {
     @struct		AudioFileMarker
     @abstract   A marker annotates a position in an audio file with additional information.
     @discussion (description)
-    @field      mFramePosition	The frame in the file counting from the start of the audio data.
-    @field      mName			The name of this marker.
-    @field      mMarkerID		A unique ID for this marker.
-    @field      mSMPTETime		The SMPTE time for this marker.
-    @field      mType			The marker type.
-    @field      mReserved		A reserved field. Set to zero.
-    @field      mChannel		The channel number that the marker refers to. Set to zero if marker applies to all channels.
+    @var        mFramePosition	The frame in the file counting from the start of the audio data.
+    @var        mName			The name of this marker.
+    @var        mMarkerID		A unique ID for this marker.
+    @var        mSMPTETime		The SMPTE time for this marker.
+    @var        mType			The marker type.
+    @var        mReserved		A reserved field. Set to zero.
+    @var        mChannel		The channel number that the marker refers to. Set to zero if marker applies to all channels.
 */
 struct AudioFileMarker
 {
@@ -274,11 +278,11 @@ typedef struct AudioFileMarker AudioFileMarker;
 /*!
     @struct		AudioFileMarkerList
     @abstract   A list of AudioFileMarker.
-    @field      mSMPTE_TimeType
+    @var        mSMPTE_TimeType
 					This defines the SMPTE timing scheme used in the marker list. See CAFFile.h for the values used here.
-    @field      mNumberMarkers
+    @var        mNumberMarkers
 					The number of markers in the mMarkers list.
-    @field      mMarkers
+    @var        mMarkers
 					A list of AudioFileMarker.
 */
 struct AudioFileMarkerList
@@ -351,15 +355,15 @@ typedef CF_OPTIONS(UInt32, AudioFileRegionFlags) {
     @abstract   An AudioFileRegion specifies a segment of audio data.
     @discussion Generally a region consists of at least two markers marking the beginning and end of the segment.
 				There may also be other markers defining other meta information such as sync point.
-    @field      mRegionID 
+    @var        mRegionID 
 					each region must have a unique ID.
-    @field      mName 
+    @var        mName 
 					The name of the region.
-    @field      mFlags 
+    @var        mFlags 
 					AudioFileRegionFlags.
-    @field      mNumberMarkers 
+    @var        mNumberMarkers 
 					The number of markers in the mMarkers array.
-    @field      mMarkers 
+    @var        mMarkers 
 					A variable length array of AudioFileMarkers.
 */
 struct AudioFileRegion
@@ -377,11 +381,11 @@ typedef struct AudioFileRegion AudioFileRegion;
     @struct		AudioFileRegionList
     @abstract   A list of the AudioFileRegions in a file.
     @discussion This is the struct used by the kAudioFilePropertyRegionList property.
-    @field      mSMPTE_TimeType
+    @var        mSMPTE_TimeType
 					This defines the SMPTE timing scheme used in the file. See CAFFile.h for the values used here.
-    @field      mNumberRegions
+    @var        mNumberRegions
 					The number of regions in the mRegions list.
-    @field      mRegions
+    @var        mRegions
 					A list of AudioFileRegions. Note that AudioFileMarkers are variable length, so this list cannot 
 					be accessed as an array. Use the NextAudioFileRegion macro for traversing the list instead.
 */
@@ -403,6 +407,10 @@ typedef struct AudioFileRegionList AudioFileRegionList;
     @result     a pointer to the region after the current region. This does not protect you from walking off the end of the list, 
 				so obey mNumberRegions.
 */
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wold-style-cast"
+#pragma clang diagnostic ignored "-Wcast-qual"
+#pragma clang diagnostic ignored "-Wcast-align"
 #ifdef CF_INLINE
 CF_INLINE AudioFileRegion *NextAudioFileRegion(const AudioFileRegion *inAFRegionPtr)
 {
@@ -412,14 +420,15 @@ CF_INLINE AudioFileRegion *NextAudioFileRegion(const AudioFileRegion *inAFRegion
 #define NextAudioFileRegion(inAFRegionPtr) \
         ((AudioFileRegion*)((char*)(inAFRegionPtr) + offsetof(AudioFileRegion, mMarkers) + ((inAFRegionPtr)->mNumberMarkers)*sizeof(AudioFileMarker)))
 #endif
+#pragma clang diagnostic pop
 
 /*!
     @struct		AudioFramePacketTranslation
     @abstract   used for properties kAudioFilePropertyPacketToFrame and kAudioFilePropertyFrameToPacket
     @discussion See description of kAudioFilePropertyPacketToFrame and kAudioFilePropertyFrameToPacket
-    @field      mFrame		a frame number.
-    @field      mPacket		a packet number.
-    @field      mFrameOffsetInPacket		a frame offset in a packet.
+    @var        mFrame		a frame number.
+    @var        mPacket		a packet number.
+    @var        mFrameOffsetInPacket		a frame offset in a packet.
 */
 struct AudioFramePacketTranslation
 {
@@ -447,10 +456,10 @@ typedef CF_OPTIONS(UInt32, AudioBytePacketTranslationFlags) {
     @struct		AudioBytePacketTranslation
     @abstract   used for properties kAudioFileByteToPacket and kAudioFilePacketToByte
     @discussion See description of kAudioFileByteToPacket and kAudioFilePacketToByte
-    @field      mByte		a byte number.
-    @field      mPacket		a packet number.
-    @field      mByteOffsetInPacket		a byte offset in a packet.
-    @field      mFlags		if kBytePacketTranslationFlag_IsEstimate is set, then the value is an estimate.
+    @var        mByte		a byte number.
+    @var        mPacket		a packet number.
+    @var        mByteOffsetInPacket		a byte offset in a packet.
+    @var        mFlags		if kBytePacketTranslationFlag_IsEstimate is set, then the value is an estimate.
 */
 struct AudioBytePacketTranslation
 {
@@ -472,9 +481,9 @@ typedef struct AudioBytePacketTranslation AudioBytePacketTranslation;
 				discarded. The total number of packets in the file times the frames per packet (or counting each packet's frames 
 				individually for a variable frames per packet format) minus mPrimingFrames, minus mRemainderFrames, should 
 				equal mNumberValidFrames.
-    @field      mNumberValidFrames the number of valid frames in the file.
-    @field      mPrimingFrames the number of invalid frames at the beginning of the file.
-    @field      mRemainderFrames the number of invalid frames at the end of the file.
+    @var        mNumberValidFrames the number of valid frames in the file.
+    @var        mPrimingFrames the number of invalid frames at the beginning of the file.
+    @var        mRemainderFrames the number of invalid frames at the end of the file.
 */
 struct AudioFilePacketTableInfo
 {
@@ -483,6 +492,71 @@ struct AudioFilePacketTableInfo
         SInt32  mRemainderFrames;
 };
 typedef struct AudioFilePacketTableInfo AudioFilePacketTableInfo;
+
+
+/*!
+    @struct	AudioPacketRangeByteCountTranslation
+    @abstract   used for property kAudioFilePropertyPacketRangeByteCountUpperBound
+    @discussion See description of kAudioFilePropertyPacketRangeByteCountUpperBound
+    @var        mPacket					a packet number.
+    @var        mPacketCount			a packet count.
+    @var        mByteCountUpperBound	an upper bound for the total size of the specified packets.
+*/
+struct AudioPacketRangeByteCountTranslation
+{
+	SInt64 mPacket;
+	SInt64 mPacketCount;
+	SInt64 mByteCountUpperBound;
+};
+typedef struct AudioPacketRangeByteCountTranslation AudioPacketRangeByteCountTranslation;
+
+
+/*!
+    @struct		AudioPacketRollDistanceTranslation
+    @abstract   used for property kAudioFilePropertyPacketToRollDistance
+    @discussion See descriptions of kAudioFilePropertyPacketToRollDistance and kAudioFilePropertyRestrictsRandomAccess
+    @var        mPacket         a packet number
+    @var        mRollDistance   a count of packets that must be decoded prior to the packet with the specified number in order to achieve the best practice for the decoding of that packet
+*/
+struct AudioPacketRollDistanceTranslation
+{
+	SInt64 mPacket;
+	SInt64 mRollDistance;
+};
+typedef struct AudioPacketRollDistanceTranslation AudioPacketRollDistanceTranslation;
+
+
+/*!
+    @struct		AudioIndependentPacketTranslation
+    @abstract   used for property kAudioFilePropertyPreviousIndependentPacket and kAudioFilePropertyNextIndependentPacket
+    @discussion See descriptions of kAudioFilePropertyPreviousIndependentPacket and kAudioFilePropertyNextIndependentPacket
+    @var        mPacket                         a packet number
+    @var        mIndependentlyDecodablePacket   a packet number not equal to mPacket of an independent packet
+*/
+struct AudioIndependentPacketTranslation
+{
+	SInt64 mPacket;
+	SInt64 mIndependentlyDecodablePacket;
+};
+typedef struct AudioIndependentPacketTranslation AudioIndependentPacketTranslation;
+
+
+/*!
+    @struct		AudioPacketDependencyInfoTranslation
+    @abstract   used for property kAudioFilePropertyPacketToDependencyInfo
+    @discussion See descriptions of kAudioFilePropertyPacketToDependencyInfo and kAudioFilePropertyRestrictsRandomAccess
+    @var        mPacket                     a packet number
+    @var        mIsIndependentlyDecodable   1 means that the specified packet is independently decodable; 0 means it's not
+    @var        mNumberPrerollPackets       if the packet is independently decodable, the count of packets that must be decoded after the packet with the specified number in order to refresh the decoder
+*/
+struct AudioPacketDependencyInfoTranslation
+{
+	SInt64 mPacket;
+	UInt32 mIsIndependentlyDecodable;
+	UInt32 mNumberPrerollPackets;
+};
+typedef struct AudioPacketDependencyInfoTranslation AudioPacketDependencyInfoTranslation;
+
 
 //=============================================================================
 //	Info String Keys
@@ -977,6 +1051,35 @@ AudioFileRemoveUserData ( AudioFileID		inAudioFile,
     @constant   kAudioFilePropertyFrameToPacket 
 					pass a AudioFramePacketTranslation with mFrame filled out and get mPacket and mFrameOffsetInPacket back.
 					
+    @constant   kAudioFilePropertyRestrictsRandomAccess
+					A UInt32 indicating whether an Audio File contains packets that cannot be used as random access points.
+					A value of 0 indicates that any packet can be used as a random access point, i.e. that a decoder can start decoding with any packet.
+					A value of 1 indicates that some packets cannot be used as random access points, i.e. that kAudioFilePropertyPacketToRollDistance must be employed in order to identify an appropriate initial packet for decoding.
+    @constant   kAudioFilePropertyPacketToRollDistance
+					Pass an AudioPacketRollDistanceTranslation with mPacket filled out and get mRollDistance back.
+					The roll distance indicates the count of packets that must be decoded prior to the packet with the specified number in order to achieve the best practice for the decoding of that packet.
+					For file types for which a minimal roll distance is prohibitively expensive to determine per packet, the value returned may be derived from an upper bound for all packet roll distances.
+					If the value of kAudioFilePropertyRestrictsRandomAccess is 1, either kAudioFilePropertyPacketToRollDistance
+					or kAudioFilePropertyPacketToDependencyInfo must be used in order to identify an appropriate random access point.
+					If the value of kAudioFilePropertyRestrictsRandomAccess is 0, kAudioFilePropertyPacketToRollDistance can be used in
+					order to identify the best available random access point, which may be prior to the specified packet even if the specified
+					packet can be used as a random access point.
+    @constant   kAudioFilePropertyPreviousIndependentPacket
+    @constant   kAudioFilePropertyNextIndependentPacket
+					Pass an AudioIndependentPacketTranslation with mPacket filled out and get mIndependentlyDecodablePacket back.
+					A value of -1 means that no independent packet is present in the stream in the direction of interest. Otherwise,
+					for kAudioFilePropertyPreviousIndependentPacket, mIndependentlyDecodablePacket will be less than mPacket, and
+					for kAudioFilePropertyNextIndependentPacket, mIndependentlyDecodablePacket will be greater than mPacket.
+    @constant   kAudioFilePropertyPacketToDependencyInfo
+					Pass an AudioPacketDependencyInfoTranslation with mPacket filled out and get mIsIndependentlyDecodable
+					and mPrerollPacketCount back.
+					A value of 0 for mIsIndependentlyDecodable indicates that the specified packet is not independently decodable.
+					A value of 1 for mIsIndependentlyDecodable indicates that the specified packet is independently decodable.
+					For independently decodable packets, mPrerollPacketCount indicates the count of packets that must be decoded
+					after the packet with the specified number in order to refresh the decoder.
+					If the value of kAudioFilePropertyRestrictsRandomAccess is 1, either kAudioFilePropertyPacketToRollDistance or
+					kAudioFilePropertyPacketToDependencyInfo must be used in order to identify an appropriate random access point.
+
 	@constant	kAudioFilePropertyPacketToByte
 					pass an AudioBytePacketTranslation struct with mPacket filled out and get mByte back.
 					mByteOffsetInPacket is ignored. If the mByte value is an estimate then 
@@ -1001,6 +1104,15 @@ AudioFileRemoveUserData ( AudioFileID		inAudioFile,
 	@constant	kAudioFilePropertyPacketSizeUpperBound
 					a UInt32 for the theoretical maximum packet size in the file (without actually scanning
 					the whole file to find the largest packet, as may happen with kAudioFilePropertyMaximumPacketSize).
+    @constant   kAudioFilePropertyPacketRangeByteCountUpperBound
+					Pass an AudioPacketRangeByteCountTranslation with mPacket and mPacketCount filled out
+					and get mByteCountUpperBound back. The value of mByteCountUpperBound can be used to allocate a buffer
+					for use with AudioFileReadPacketData in order to accommodate the entire packet range.
+					May require scanning in order to obtain the requested information, but even if so, no scanning will occur
+					beyond the last packet in the specified range.
+					For file formats in which packets are directly accessible and stored both contiguously and byte-aligned,
+					the returned upper bound will be equal to the total size of the packets in the range. Otherwise the
+					upper bound may reflect per-packet storage overhead.
 	@constant	kAudioFilePropertyReserveDuration
 					The value is a Float64 of the duration in seconds of data that is expected to be written.
 					Setting this property before any data has been written reserves space in the file header for a packet table 
@@ -1044,6 +1156,11 @@ CF_ENUM(AudioFilePropertyID)
 	kAudioFilePropertyRegionList			=	'rgls',
 	kAudioFilePropertyPacketToFrame			=	'pkfr',
 	kAudioFilePropertyFrameToPacket			=	'frpk',
+	kAudioFilePropertyRestrictsRandomAccess	=	'rrap',
+	kAudioFilePropertyPacketToRollDistance	=	'pkrl',
+	kAudioFilePropertyPreviousIndependentPacket	= 'pind',
+	kAudioFilePropertyNextIndependentPacket	=	'nind',
+	kAudioFilePropertyPacketToDependencyInfo =	'pkdp',
 	kAudioFilePropertyPacketToByte			=	'pkby',
 	kAudioFilePropertyByteToPacket			=	'bypk',
 	kAudioFilePropertyChunkIDs				=	'chid',
@@ -1051,6 +1168,7 @@ CF_ENUM(AudioFilePropertyID)
 	kAudioFilePropertyPacketTableInfo		=	'pnfo',
 	kAudioFilePropertyFormatList			=	'flst',
 	kAudioFilePropertyPacketSizeUpperBound  =	'pkub',
+	kAudioFilePropertyPacketRangeByteCountUpperBound = 'prub',
 	kAudioFilePropertyReserveDuration		=	'rsrv',
 	kAudioFilePropertyEstimatedDuration		=	'edur',
 	kAudioFilePropertyBitRate				=	'brat',
@@ -1233,9 +1351,9 @@ CF_ENUM(AudioFilePropertyID)
     @abstract   This is used as a specifier for kAudioFileGlobalInfo_AvailableStreamDescriptions
     @discussion This struct is used to specify a desired audio file type and data format ID  so
 				that a list of stream descriptions of available formats can be obtained.
-    @field      mFileType
+    @var        mFileType
 					a four char code for the file type such as kAudioFileAIFFType, kAudioFileCAFType, etc.
-    @field      mFormatID
+    @var        mFormatID
 					a four char code for the format ID such as kAudioFormatLinearPCM, kAudioFormatMPEG4AAC, etc.
 */
 struct AudioFileTypeAndFormatID
@@ -1281,6 +1399,7 @@ AudioFileGetGlobalInfo(			AudioFilePropertyID		inPropertyID,
 
 #pragma mark - Deprecated
 	
+#if !TARGET_OS_IPHONE
 struct FSRef;
 /*!
     @function	AudioFileCreate
@@ -1351,6 +1470,7 @@ AudioFileOpen (	const struct FSRef		*inFileRef,
                 AudioFileTypeID			inFileTypeHint,
                 AudioFileID	__nullable * __nonnull	outAudioFile)			API_DEPRECATED("no longer supported", macos(10.2, 10.6)) API_UNAVAILABLE(ios, watchos, tvos);
 
+#endif
 	
 #if defined(__cplusplus)
 }
@@ -1359,3 +1479,6 @@ AudioFileOpen (	const struct FSRef		*inFileRef,
 CF_ASSUME_NONNULL_END
 
 #endif // AudioToolbox_AudioFile_h
+#else
+#include <AudioToolboxCore/AudioFile.h>
+#endif

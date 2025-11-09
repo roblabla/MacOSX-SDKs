@@ -1,8 +1,8 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: A1992F1C-A3B3-36EA-BDA7-7663AEC5DF8F' ]
+uuids:           [ 'x86_64: 0AB2BEDB-1718-37EB-969F-767B79B44E8F' ]
 platform:        macosx
-install-name:    /System/Library/PrivateFrameworks/NetworkStatistics.framework/Versions/A/NetworkStatistics
+install-name:    '/System/Library/PrivateFrameworks/NetworkStatistics.framework/Versions/A/NetworkStatistics'
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _NStatManagerAddAllRoutes, _NStatManagerAddAllRoutesWithFilter, 
@@ -26,15 +26,16 @@ exports:
                        _kNStatSrcKeyChannelArchitecture, _kNStatSrcKeyConnProbeFailed, 
                        _kNStatSrcKeyConnectAttempt, _kNStatSrcKeyConnectSuccess, 
                        _kNStatSrcKeyDurationAbsoluteTime, _kNStatSrcKeyEPID, _kNStatSrcKeyEUPID, 
-                       _kNStatSrcKeyEUUID, _kNStatSrcKeyInterface, _kNStatSrcKeyInterfaceCellConfigBackoffTime, 
-                       _kNStatSrcKeyInterfaceCellConfigInactivityTime, _kNStatSrcKeyInterfaceCellUlAvgQueueSize, 
-                       _kNStatSrcKeyInterfaceCellUlMaxQueueSize, _kNStatSrcKeyInterfaceCellUlMinQueueSize, 
-                       _kNStatSrcKeyInterfaceDescription, _kNStatSrcKeyInterfaceDlCurrentBandwidth, 
-                       _kNStatSrcKeyInterfaceDlMaxBandwidth, _kNStatSrcKeyInterfaceIsAWD, 
-                       _kNStatSrcKeyInterfaceIsAWDL, _kNStatSrcKeyInterfaceIsCellFallback, 
-                       _kNStatSrcKeyInterfaceIsExpensive, _kNStatSrcKeyInterfaceLinkQualityMetric, 
-                       _kNStatSrcKeyInterfaceName, _kNStatSrcKeyInterfaceThreshold, 
-                       _kNStatSrcKeyInterfaceType, _kNStatSrcKeyInterfaceTypeCellular, 
+                       _kNStatSrcKeyEUUID, _kNStatSrcKeyEventFlags, _kNStatSrcKeyInterface, 
+                       _kNStatSrcKeyInterfaceCellConfigBackoffTime, _kNStatSrcKeyInterfaceCellConfigInactivityTime, 
+                       _kNStatSrcKeyInterfaceCellUlAvgQueueSize, _kNStatSrcKeyInterfaceCellUlMaxQueueSize, 
+                       _kNStatSrcKeyInterfaceCellUlMinQueueSize, _kNStatSrcKeyInterfaceDescription, 
+                       _kNStatSrcKeyInterfaceDlCurrentBandwidth, _kNStatSrcKeyInterfaceDlMaxBandwidth, 
+                       _kNStatSrcKeyInterfaceIsAWD, _kNStatSrcKeyInterfaceIsAWDL, 
+                       _kNStatSrcKeyInterfaceIsCellFallback, _kNStatSrcKeyInterfaceIsExpensive, 
+                       _kNStatSrcKeyInterfaceLinkQualityMetric, _kNStatSrcKeyInterfaceName, 
+                       _kNStatSrcKeyInterfaceThreshold, _kNStatSrcKeyInterfaceType, 
+                       _kNStatSrcKeyInterfaceTypeCellular, _kNStatSrcKeyInterfaceTypeCompanionLink, 
                        _kNStatSrcKeyInterfaceTypeLoopback, _kNStatSrcKeyInterfaceTypeUnknown, 
                        _kNStatSrcKeyInterfaceTypeWiFi, _kNStatSrcKeyInterfaceTypeWired, 
                        _kNStatSrcKeyInterfaceUlBytesLost, _kNStatSrcKeyInterfaceUlCurrentBandwidth, 
@@ -65,9 +66,9 @@ exports:
                        _kNStatSrcTCPStateFinWait2, _kNStatSrcTCPStateLastAck, _kNStatSrcTCPStateListen, 
                        _kNStatSrcTCPStateSynReceived, _kNStatSrcTCPStateSynSent, 
                        _kNStatSrcTCPStateTimeWait ]
-    objc-classes:    [ NWSInterfaceSnapshot, NWSProtocolSnapshot, NWSRouteSnapshot, 
-                       NWSRouteSnapshotter, NWSSnapshot, NWSSnapshotSource, NWSSnapshotter, 
-                       NWSTCPSnapshot, NWSUDPSnapshot, NWStatisticsDelegateBlockWrapper, 
-                       NWStatisticsInterfaceSource, NWStatisticsManager, NWStatisticsRouteSource, 
+    objc-classes:    [ NWSInterfaceSnapshot, NWSProtocolSnapshot, NWSQUICSnapshot, 
+                       NWSRouteSnapshot, NWSRouteSnapshotter, NWSSnapshot, NWSSnapshotSource, 
+                       NWSSnapshotter, NWSTCPSnapshot, NWSUDPSnapshot, NWStatisticsInterfaceSource, 
+                       NWStatisticsManager, NWStatisticsQUICSource, NWStatisticsRouteSource, 
                        NWStatisticsSource, NWStatisticsTCPSource, NWStatisticsUDPSource ]
 ...

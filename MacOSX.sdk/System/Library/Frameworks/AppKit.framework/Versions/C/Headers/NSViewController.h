@@ -1,7 +1,7 @@
 /*
 	NSViewController.h
 	Application Kit
-	Copyright (c) 2006-2018, Apple Inc.
+	Copyright (c) 2006-2019, Apple Inc.
 	All rights reserved.
 */
 
@@ -15,11 +15,13 @@
 #import <AppKit/NSStoryboardSegue.h>
 #import <AppKit/NSUserInterfaceItemIdentification.h>
 
+@protocol NSExtensionRequestHandling;
+
 NS_ASSUME_NONNULL_BEGIN
+API_UNAVAILABLE_BEGIN(ios)
 
 @class NSBundle, NSPointerArray, NSView;
 @protocol NSViewControllerPresentationAnimator;
-@protocol NSExtensionRequestHandling;
 
 typedef NS_OPTIONS(NSUInteger, NSViewControllerTransitionOptions) {
     /* No animation (the default).  Specifying any animation from the options below negates the "None" option.
@@ -41,27 +43,10 @@ typedef NS_OPTIONS(NSUInteger, NSViewControllerTransitionOptions) {
 
     NSViewControllerTransitionAllowUserInteraction  = 0x1000,   // Allow user interaction during the transaction; normally it is prevented for the parent view controller while the transition is happening.
 
-} NS_ENUM_AVAILABLE_MAC(10_10);
+} API_AVAILABLE(macos(10.10));
 
-NS_CLASS_AVAILABLE(10_5, NA)
-@interface NSViewController : NSResponder <NSEditor, NSSeguePerforming, NSUserInterfaceItemIdentification> {
-@private
-    NSNibName _nibName APPKIT_IVAR;
-    NSBundle *_nibBundle APPKIT_IVAR;
-    id _representedObject APPKIT_IVAR;
-    NSString *_title APPKIT_IVAR;
-    NSView *view APPKIT_IVAR;
-    NSArray *_topLevelObjects APPKIT_IVAR;
-    NSPointerArray *_editors APPKIT_IVAR;
-    id _autounbinder APPKIT_IVAR;
-    NSString *_designNibBundleIdentifier APPKIT_IVAR;
-    id __privateData APPKIT_IVAR;
-    unsigned int _viewIsAppearing:1 APPKIT_IVAR;
-    unsigned int _delayViewDidAppear:1 APPKIT_IVAR;
-    unsigned int _isContentViewController:1 APPKIT_IVAR;
-    unsigned int _shouldDirtyLayoutOnSizeChanges:1 APPKIT_IVAR;
-    unsigned int _reserved:28 __unused APPKIT_IVAR;
-}
+API_AVAILABLE(macos(10.5))
+@interface NSViewController : NSResponder <NSEditor, NSSeguePerforming, NSUserInterfaceItemIdentification>
 
 /* The designated initializer. The specified nib should typically have the class of the file's owner set to NSViewController, or a subclass of yours, with the "view" outlet connected to a view. If you pass in a nil nib name then -nibName will return nil. -loadView can be used to assign a view before -view is invoked. If you pass in a nil bundle then -nibBundle will return nil and -loadView will interpret it using the same rules as -[NSNib initWithNibNamed:bundle:].
 
@@ -106,43 +91,43 @@ Prior to 10.10, -loadView would not have well defined behavior if [self nibName]
 
 /* Called after the view has been loaded. For view controllers created in code, this is after -loadView. For view controllers unarchived from a nib, this is after the view is set. Default does nothing.
 */
-- (void)viewDidLoad NS_AVAILABLE_MAC(10_10);
+- (void)viewDidLoad API_AVAILABLE(macos(10.10));
 
 /* Returns whether the view has been loaded or not.
 */
-@property (readonly, getter=isViewLoaded) BOOL viewLoaded NS_AVAILABLE_MAC(10_10);
+@property (readonly, getter=isViewLoaded) BOOL viewLoaded API_AVAILABLE(macos(10.10));
 
 /* Called when the view is about to appear, meaning it is going from a state of being "hidden" or having a hidden ancestor, and/or not being in a window or being in a window that is ordered out, to a state where none of these conditions is true. Default does nothing. In general, it is good practice to call [super viewWillAppear] in case a superclass implements this method. Causing a view to become hidden or removed from its window, or causing its window to be ordered out, in response to -viewWillAppear is not recommended and may result in an exception being raised. When such responses are necessary, defer them to a future runloop cycle.
 */
-- (void)viewWillAppear NS_AVAILABLE_MAC(10_10);
+- (void)viewWillAppear API_AVAILABLE(macos(10.10));
 
 /* Called when the view has been fully transitioned onto the screen, meaning it is not "hidden", does not have a hidden ancestor, and is in a window that's ordered in. Default does nothing. In general, it is good practice to call [super viewDidAppear] in case a superclass implements this method.
 */
-- (void)viewDidAppear NS_AVAILABLE_MAC(10_10);
+- (void)viewDidAppear API_AVAILABLE(macos(10.10));
 
 /* Called when the view is about to disappear, meaning it is going from a state of not being "hidden", nor having a hidden ancestor, nor having a nil window or being in a window that's ordered out, to a state where at least one of these conditions is true. Default does nothing. In general, it is good practice to call [super viewWillDisappear] in case a superclass implements this method. Causing a view to become unhidden, or causing its window to be ordered in, in response to -viewWillDisappear is not recommended and may result in an exception being raised. When such responses are necessary, defer them to a future runloop cycle.
 */
-- (void)viewWillDisappear NS_AVAILABLE_MAC(10_10);
+- (void)viewWillDisappear API_AVAILABLE(macos(10.10));
 
 /* Called after the view has been fully transitioned off the screen, meaning it is now "hidden" or has a hidden ancestor, or it not in a window, or is in a window that is ordered out. Default does nothing. In general, it is good practice to call [super viewDidDisappear] in case a superclass implements this method.
 */
-- (void)viewDidDisappear NS_AVAILABLE_MAC(10_10);
+- (void)viewDidDisappear API_AVAILABLE(macos(10.10));
 
 /* Expresses the view's desired size.  May be consulted by a parent ViewController when performing layout.
  */
-@property NSSize preferredContentSize NS_AVAILABLE_MAC(10_10);
+@property NSSize preferredContentSize API_AVAILABLE(macos(10.10));
 
 /*  The base implementation sends -updateConstraints to the view. When a view has a view controller, this message is sent to the view controller during the autolayout updateConstraints pass in lieu of sending updateConstraints directly to the view. You may override this method in a NSViewController subclass for updating custom constraints instead of subclassing your view and overriding -[NSView updateConstraints].  Overrides must call super or send -updateConstraints to the view. This method is only called for applications that link on 10.10 and higher.
 */
-- (void)updateViewConstraints NS_AVAILABLE_MAC(10_10);
+- (void)updateViewConstraints API_AVAILABLE(macos(10.10));
 
 /* Called just before the view controller's view's layout method is invoked. Subclasses can implement as necessary. The default is a no-op.
 */
-- (void)viewWillLayout NS_AVAILABLE_MAC(10_10);
+- (void)viewWillLayout API_AVAILABLE(macos(10.10));
 
 /* Called just after the view controller's view's layout method is invoked. Subclasses can implement as necessary. The default is a no-op.
 */
-- (void)viewDidLayout NS_AVAILABLE_MAC(10_10);
+- (void)viewDidLayout API_AVAILABLE(macos(10.10));
 
 @end
 
@@ -151,23 +136,23 @@ Prior to 10.10, -loadView would not have well defined behavior if [self nibName]
 
 /* Presents the viewController with a specific animator that handles both the presentation and dismissal of the viewController. The animator is held onto until dismissViewController: is called. This is the fundamental primitive for displaying view controllers that block interaction in some way. The method will assert if animator is nil. In general, you will not directly call this method unless you have a custom animator. Instead, you will use one of the standard cover methods that provide the animator: [NSViewController presentViewControllerAsSheet:], [NSViewController presentViewControllerAsModalWindow:], [NSViewController presentViewController:asPopoverRelativeToRect:...]
 */
-- (void)presentViewController:(NSViewController *)viewController animator:(id <NSViewControllerPresentationAnimator>)animator NS_AVAILABLE_MAC(10_10);
+- (void)presentViewController:(NSViewController *)viewController animator:(id <NSViewControllerPresentationAnimator>)animator API_AVAILABLE(macos(10.10));
 
 /* Dismisses the viewController that was previously presented with the same animator that presented the viewController. This is the generic way to close a given viewController, no matter how it was presented.
 */
-- (void)dismissViewController:(NSViewController *)viewController NS_AVAILABLE_MAC(10_10);
+- (void)dismissViewController:(NSViewController *)viewController API_AVAILABLE(macos(10.10));
 
 /* Dismisses the receiver.  If the receiver’s presenter is an NSViewController, it will be sent a -dismissViewController: message with this receiver as the parameter.  Does nothing if the receiver is not currently presented.
 */
-- (IBAction)dismissController:(nullable id)sender NS_AVAILABLE_MAC(10_10);
+- (IBAction)dismissController:(nullable id)sender API_AVAILABLE(macos(10.10));
 
 /* The view controllers that were presented by this view controller. In other words, 'self' displayed each of the items in the array. This is a one-to-many relationship.
 */
-@property (nullable, readonly) NSArray<__kindof NSViewController *> *presentedViewControllers NS_AVAILABLE_MAC(10_10);
+@property (nullable, readonly) NSArray<__kindof NSViewController *> *presentedViewControllers API_AVAILABLE(macos(10.10));
 
 /* The view controller that presented this view controller (or its farthest ancestor). In other words, 'presentingViewController' is the one that displayed 'self' to screen.
 */
-@property (nullable, readonly, assign) NSViewController *presentingViewController NS_AVAILABLE_MAC(10_10);
+@property (nullable, readonly, assign) NSViewController *presentingViewController API_AVAILABLE(macos(10.10));
 
 @end
 
@@ -175,19 +160,19 @@ Prior to 10.10, -loadView would not have well defined behavior if [self nibName]
 
 /* Presents the viewController as a sheet. The viewController is made the delegate and contentViewController of the sheet while it is shown. This method calls [self presentViewController:viewController animator:] with an animator that controls the sheet animation. Call [presentingViewController dismissViewController:viewController] to close the viewController that was previously shown as a sheet.
 */
-- (void)presentViewControllerAsSheet:(NSViewController *)viewController NS_AVAILABLE_MAC(10_10);
+- (void)presentViewControllerAsSheet:(NSViewController *)viewController API_AVAILABLE(macos(10.10));
 
 /* Presents the viewController as a modal window (also known as an alert). The viewController is made the delegate and contentViewController of the window while it is shown. NSWindow delegate methods can be used to prevent closing of the window (if needed). This method calls [self presentViewController:viewController animator:] with an animator that controls the displaying of the window. Call [presentingViewController dismissViewController:viewController] to close the viewController that was previously shown as a modal window.
 */
-- (void)presentViewControllerAsModalWindow:(NSViewController *)viewController NS_AVAILABLE_MAC(10_10);
+- (void)presentViewControllerAsModalWindow:(NSViewController *)viewController API_AVAILABLE(macos(10.10));
 
 /* Presents the viewController as a popover. The viewController is made the delegate and contentViewController of the popover while it is shown. NSPopover delegate methods can be used to customize the popover. This method calls [self presentViewController:viewController animator:] with an animator that controls the displaying of the popover. Call [presentingViewController dismissViewController:viewController] to close the viewController that was previously shown as a popover.
 */
-- (void)presentViewController:(NSViewController *)viewController asPopoverRelativeToRect:(NSRect)positioningRect ofView:(NSView *)positioningView preferredEdge:(NSRectEdge)preferredEdge behavior:(NSPopoverBehavior)behavior NS_AVAILABLE_MAC(10_10);
+- (void)presentViewController:(NSViewController *)viewController asPopoverRelativeToRect:(NSRect)positioningRect ofView:(NSView *)positioningView preferredEdge:(NSRectEdge)preferredEdge behavior:(NSPopoverBehavior)behavior API_AVAILABLE(macos(10.10));
 
 /* This method can be used to transition between sibling child view controllers. The receiver of this method is their common parent view controller. (Use [NSViewController addChildViewController:] to create the parent/child relationship.) This method will add the toViewController's view to the superview of the fromViewController's view. The fromViewController's view will be removed from the parent at the appropriate time. It is important to allow this method to add and remove the views. This method will throw an exception/assertion if the parent view controllers are not the same as the receiver, or if fromViewController.view does not have a superview.
 */
-- (void)transitionFromViewController:(NSViewController *)fromViewController toViewController:(NSViewController *)toViewController options:(NSViewControllerTransitionOptions)options completionHandler:(void (^ __nullable)(void))completion NS_AVAILABLE_MAC(10_10);
+- (void)transitionFromViewController:(NSViewController *)fromViewController toViewController:(NSViewController *)toViewController options:(NSViewControllerTransitionOptions)options completionHandler:(void (^ _Nullable)(void))completion API_AVAILABLE(macos(10.10));
 
 @end
 
@@ -196,34 +181,34 @@ Prior to 10.10, -loadView would not have well defined behavior if [self nibName]
 
 /* Returns the ancestor of this view controller. Can return nil if this is the contentViewController, or there is no parent for the given view controller.
 */
-@property (nullable, readonly) NSViewController *parentViewController NS_AVAILABLE_MAC(10_10);
+@property (nullable, readonly) NSViewController *parentViewController API_AVAILABLE(macos(10.10));
 
 /* An array of children view controllers. Assignment of the array filters all additions and removals through the insert and remove API below.
 */
-@property (copy) NSArray<__kindof NSViewController *> *childViewControllers NS_AVAILABLE_MAC(10_10);
+@property (copy) NSArray<__kindof NSViewController *> *childViewControllers API_AVAILABLE(macos(10.10));
 
 /* A convenience method for adding a child view controller; this simply calls insertChildViewController:atIndex: at the end of the array.
 */
-- (void)addChildViewController:(NSViewController *)childViewController NS_AVAILABLE_MAC(10_10);
+- (void)addChildViewController:(NSViewController *)childViewController API_AVAILABLE(macos(10.10));
 
 /* Removes the child controller from this parent controller. This method simply calls [self.parentViewController removeChildViewControllerAtIndex:index] with the appropriate index in the array.
 */
-- (void)removeFromParentViewController NS_AVAILABLE_MAC(10_10);
+- (void)removeFromParentViewController API_AVAILABLE(macos(10.10));
 
 /* Primitive method to insert a child view controller in the childViewControllers array. If the child controller has a different parent controller, it will first be removed from its current parent by calling [childViewController removeFromParentViewController]. If this method is overridden then the super implementation should be called. This is the primitive to override for performing insert operations in a container class, and has little value in itself if the parent doesn't do something with the children.
 */
-- (void)insertChildViewController:(NSViewController *)childViewController atIndex:(NSInteger)index NS_AVAILABLE_MAC(10_10);
+- (void)insertChildViewController:(NSViewController *)childViewController atIndex:(NSInteger)index API_AVAILABLE(macos(10.10));
 
 /* Primitive method to remove a child view controller in the childViewControllers array. This method can be overridden to do additional work when a child is removed. If it is overridden, then the super implementation should be called. This is the primitive to override for performing insert operations in a container class, and has little value in itself if the parent doesn't do something with the children. */
-- (void)removeChildViewControllerAtIndex:(NSInteger)index NS_AVAILABLE_MAC(10_10);
+- (void)removeChildViewControllerAtIndex:(NSInteger)index API_AVAILABLE(macos(10.10));
 
 /* Sent to a view controller when the `preferredContentSize` property of one of its child or presented view controllers changes.
 */
-- (void)preferredContentSizeDidChangeForViewController:(NSViewController *)viewController NS_AVAILABLE_MAC(10_10);
+- (void)preferredContentSizeDidChangeForViewController:(NSViewController *)viewController API_AVAILABLE(macos(10.10));
 
 /* Sent to a service view controller when its view is about to be resized.  Override this, if desired, to perform relayout in response to the resize, potentially in an animated way.
 */
-- (void)viewWillTransitionToSize:(NSSize)newSize NS_AVAILABLE_MAC(10_10);
+- (void)viewWillTransitionToSize:(NSSize)newSize API_AVAILABLE(macos(10.10));
 
 @end
 
@@ -236,11 +221,11 @@ Prior to 10.10, -loadView would not have well defined behavior if [self nibName]
 
 /* Called when the view controller is going to be presented. Implement presentation in this method when it is called.
 */
-- (void)animatePresentationOfViewController:(NSViewController *)viewController fromViewController:(NSViewController *)fromViewController NS_AVAILABLE_MAC(10_10);
+- (void)animatePresentationOfViewController:(NSViewController *)viewController fromViewController:(NSViewController *)fromViewController API_AVAILABLE(macos(10.10));
 
 /* Called to dismiss a previously shown view controller.
 */
-- (void)animateDismissalOfViewController:(NSViewController *)viewController fromViewController:(NSViewController *)fromViewController NS_AVAILABLE_MAC(10_10);
+- (void)animateDismissalOfViewController:(NSViewController *)viewController fromViewController:(NSViewController *)fromViewController API_AVAILABLE(macos(10.10));
 
 @end
 
@@ -251,34 +236,33 @@ Prior to 10.10, -loadView would not have well defined behavior if [self nibName]
 
 /* The Storyboard the ViewController was loaded from. Returns nil if the ViewController was not loaded from a Storyboard.
 */
-@property(nullable, readonly, strong) NSStoryboard *storyboard NS_AVAILABLE_MAC(10_10);
+@property(nullable, readonly, strong) NSStoryboard *storyboard API_AVAILABLE(macos(10.10));
 
 @end
 
-#if __OBJC2__ // These methods are usable by application extensions, which must be 64-bit on OS X.
 @interface NSViewController(NSExtensionAdditions) <NSExtensionRequestHandling>
 
 /* Returns the extension context. Also acts as a convenience method for a view controller to check if it participating in an extension request.
 */
-@property (nullable, readonly,retain) NSExtensionContext *extensionContext NS_AVAILABLE_MAC(10_10);
+@property (nullable, readonly,retain) NSExtensionContext *extensionContext API_AVAILABLE(macos(10.10));
 
 /* For services that vend UI.  Identifies the view (if any) in the service’s UI that displays the source image.  Defaults to nil.  When your service loads its UI (or in your service UI's xib file), you can set this to point to an image view, or some containing border view, that’s a descendant of the ViewController’s view.  Doing so helps the system to position and animate the service’s UI with respect to the source item representation.  If your service UI doesn't display the source item at its original screen position and size, leave this set to nil.
 */
-@property(nullable, strong) IBOutlet NSView *sourceItemView NS_AVAILABLE_MAC(10_10);
+@property(nullable, strong) IBOutlet NSView *sourceItemView API_AVAILABLE(macos(10.10));
 
 /* For services that vend UI.  Set this to position the service UI's lower-left corner in screen space.  (Use the `preferredContentSize` property to specify the service UI's desired size, in screen units.)
 */
-@property NSPoint preferredScreenOrigin NS_AVAILABLE_MAC(10_10);
+@property NSPoint preferredScreenOrigin API_AVAILABLE(macos(10.10));
 
 /* For services that vend UI.  Expresses the smallest allowable size for the service’s root view, in screen units.  A service should return the minimum dimensions its root view can accommodate, based on the items the service has been sent.  This defaults to a small but non-empty size.
 */
-@property(readonly) NSSize preferredMinimumSize NS_AVAILABLE_MAC(10_10);
+@property(readonly) NSSize preferredMinimumSize API_AVAILABLE(macos(10.10));
 
 /* For services that vend UI.  Expresses the largest allowable size for the service’s root view, in screen units.  A service should return the maximum dimensions that are potentially useful for its root view, based on the items the service has been sent.  This defaults to a large or infinite size.
 */
-@property(readonly) NSSize preferredMaximumSize NS_AVAILABLE_MAC(10_10);
+@property(readonly) NSSize preferredMaximumSize API_AVAILABLE(macos(10.10));
 
 @end
-#endif
 
+API_UNAVAILABLE_END
 NS_ASSUME_NONNULL_END

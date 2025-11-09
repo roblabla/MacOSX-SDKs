@@ -1,7 +1,7 @@
 /*
  NSPathControlItem.h
  Application Kit
- Copyright (c) 2013-2018, Apple Inc.
+ Copyright (c) 2013-2019, Apple Inc.
  All rights reserved.
  */
 
@@ -9,17 +9,15 @@
 #import <AppKit/AppKitDefines.h>
 
 NS_ASSUME_NONNULL_BEGIN
+API_UNAVAILABLE_BEGIN(ios)
 
 @class NSPathComponentCell;
 
 /*  NSPathControlItem is used to represent an individual path segment in an NSPathControl.
     NSPathControlItem should not be subclassed.
  */
-NS_CLASS_AVAILABLE_MAC(10_10)
-@interface NSPathControlItem : NSObject {
-@private
-    NSPathComponentCell *_secretCell APPKIT_IVAR;
-}
+API_AVAILABLE(macos(10.10))
+@interface NSPathControlItem : NSObject
 
 /* The title of the path item.
  */
@@ -36,4 +34,5 @@ NS_CLASS_AVAILABLE_MAC(10_10)
 
 @end
 
+API_UNAVAILABLE_END
 NS_ASSUME_NONNULL_END

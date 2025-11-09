@@ -6,8 +6,8 @@
  *
  */
 
-#ifndef _IOSURFACE_H
-#define _IOSURFACE_H 1
+#ifndef IOSURFACE_H
+#define IOSURFACE_H 1
 
 #include <IOSurface/IOSurfaceBase.h>
 #include <IOSurface/IOSurfaceAPI.h>

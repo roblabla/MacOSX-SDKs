@@ -120,9 +120,9 @@ enum WSTypeID {
 };
 typedef enum WSTypeID WSTypeID;
 
-typedef void *(*WSClientContextRetainCallBackProcPtr)(void * info) __OSX_AVAILABLE_STARTING(__MAC_10_2,__IPHONE_NA);
-typedef void (*WSClientContextReleaseCallBackProcPtr)(void * info) __OSX_AVAILABLE_STARTING(__MAC_10_2,__IPHONE_NA);
-typedef CFStringRef (*WSClientContextCopyDescriptionCallBackProcPtr)(void * info) __OSX_AVAILABLE_STARTING(__MAC_10_2,__IPHONE_NA);
+typedef void *(*WSClientContextRetainCallBackProcPtr)(void * info) API_AVAILABLE( macos(10.2) ) API_UNAVAILABLE( ios, tvos, watchos );
+typedef void (*WSClientContextReleaseCallBackProcPtr)(void * info) API_AVAILABLE( macos(10.2) ) API_UNAVAILABLE( ios, tvos, watchos );
+typedef CFStringRef (*WSClientContextCopyDescriptionCallBackProcPtr)(void * info) API_AVAILABLE( macos(10.2) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 /*
  *  WSClientContext
@@ -133,7 +133,7 @@ typedef CFStringRef (*WSClientContextCopyDescriptionCallBackProcPtr)(void * info
  *    retained.  When the callback is made, the info pointer is passed
  *    to the callback.
  */
-struct WSClientContext {
+struct API_AVAILABLE( macos(10.2) ) API_UNAVAILABLE( ios, tvos, watchos ) WSClientContext {
 
   /*
    * set to zero (0)
@@ -160,7 +160,7 @@ struct WSClientContext {
    */
   WSClientContextCopyDescriptionCallBackProcPtr  copyDescription;
 };
-typedef struct WSClientContext          WSClientContext __OSX_AVAILABLE_STARTING(__MAC_10_2,__IPHONE_NA);
+typedef struct WSClientContext          WSClientContext API_AVAILABLE( macos(10.2) ) API_UNAVAILABLE( ios, tvos, watchos );
 /*
     Web Service protocol types.  These constant strings specify the type
     of web service method invocation created.  These are passed to
@@ -172,9 +172,9 @@ typedef struct WSClientContext          WSClientContext __OSX_AVAILABLE_STARTING
     SOAP 1.1:   <http://www.w3.org/TR/SOAP/>
     SOAP 1.2:   <http://www.w3.org/2002/ws/>
 */
-extern CFStringRef kWSXMLRPCProtocol                                 __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2,__MAC_10_8,__IPHONE_NA,__IPHONE_NA);
-extern CFStringRef kWSSOAP1999Protocol                               __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2,__MAC_10_8,__IPHONE_NA,__IPHONE_NA);
-extern CFStringRef kWSSOAP2001Protocol                               __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2,__MAC_10_8,__IPHONE_NA,__IPHONE_NA);
+extern CFStringRef kWSXMLRPCProtocol                                 API_DEPRECATED("No longer supported", macos(10.2,10.8) ) API_UNAVAILABLE( ios, tvos, watchos );
+extern CFStringRef kWSSOAP1999Protocol                               API_DEPRECATED("No longer supported", macos(10.2,10.8) ) API_UNAVAILABLE( ios, tvos, watchos );
+extern CFStringRef kWSSOAP2001Protocol                               API_DEPRECATED("No longer supported", macos(10.2,10.8) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 /*
@@ -203,7 +203,7 @@ extern CFStringRef kWSSOAP2001Protocol                               __OSX_AVAIL
  *    Non-Carbon CFM:   not available
  */
 extern WSTypeID 
-WSGetWSTypeIDFromCFType(CFTypeRef ref)                        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2,__MAC_10_8,__IPHONE_NA,__IPHONE_NA);
+WSGetWSTypeIDFromCFType(CFTypeRef ref)                        API_DEPRECATED("No longer supported", macos(10.2,10.8) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 /*
@@ -231,7 +231,7 @@ WSGetWSTypeIDFromCFType(CFTypeRef ref)                        __OSX_AVAILABLE_BU
  *    Non-Carbon CFM:   not available
  */
 extern CFTypeID 
-WSGetCFTypeIDFromWSTypeID(WSTypeID typeID)                    __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2,__MAC_10_8,__IPHONE_NA,__IPHONE_NA);
+WSGetCFTypeIDFromWSTypeID(WSTypeID typeID)                    API_DEPRECATED("No longer supported", macos(10.2,10.8) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 

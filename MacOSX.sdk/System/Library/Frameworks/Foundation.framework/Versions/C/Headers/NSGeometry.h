@@ -1,21 +1,17 @@
 /*	NSGeometry.h
-	Copyright (c) 1994-2018, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2019, Apple Inc. All rights reserved.
 */
 
 #import <AvailabilityMacros.h>
 #import <Foundation/NSValue.h>
 #import <Foundation/NSCoder.h>
 
-#if TARGET_OS_WIN32
-#import <CGCompat.h>
-#else
 #import <CoreGraphics/CGBase.h>
 #import <CoreGraphics/CGGeometry.h>
-#endif
 
 NS_ASSUME_NONNULL_BEGIN
 
-#if __LP64__ || TARGET_OS_EMBEDDED || TARGET_OS_IPHONE || TARGET_OS_WIN32 || NS_BUILD_32_LIKE_64
+#if __LP64__ || TARGET_OS_IPHONE || NS_BUILD_32_LIKE_64
 
 typedef CGPoint NSPoint;
 
@@ -41,7 +37,7 @@ typedef NS_ENUM(NSUInteger, NSRectEdge) {
     NSMinXEdge NS_SWIFT_UNAVAILABLE("Use NSRectEdge.MinX instead") = NSRectEdgeMinX,
     NSMinYEdge NS_SWIFT_UNAVAILABLE("Use NSRectEdge.MinY instead") = NSRectEdgeMinY,
     NSMaxXEdge NS_SWIFT_UNAVAILABLE("Use NSRectEdge.MaxX instead") = NSRectEdgeMaxX,
-    NSMaxYEdge NS_SWIFT_UNAVAILABLE("Use NSRectEdge.MaxX instead") = NSRectEdgeMaxY,
+    NSMaxYEdge NS_SWIFT_UNAVAILABLE("Use NSRectEdge.MaxY instead") = NSRectEdgeMaxY,
 };
 
 #define NSGEOMETRY_TYPES_SAME_AS_CGGEOMETRY_TYPES 1

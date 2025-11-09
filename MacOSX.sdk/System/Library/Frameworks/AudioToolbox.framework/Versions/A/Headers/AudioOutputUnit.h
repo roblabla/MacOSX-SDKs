@@ -1,3 +1,4 @@
+#if (defined(USE_AUDIOTOOLBOX_PUBLIC_HEADERS) && USE_AUDIOTOOLBOX_PUBLIC_HEADERS) || !__has_include(<AudioToolboxCore/AudioOutputUnit.h>)
 /*!
 	@file		AudioOutputUnit.h
  	@framework	AudioToolbox.framework
@@ -9,11 +10,7 @@
 #define AudioUnit_AudioOutputUnit_h
 
 #include <Availability.h>
-#if !defined(__COREAUDIO_USE_FLAT_INCLUDES__)
-	#include <AudioToolbox/AUComponent.h>
-#else
-	#include <AUComponent.h>
-#endif
+#include <AudioToolbox/AUComponent.h>
 
 CF_ASSUME_NONNULL_BEGIN
 
@@ -55,3 +52,6 @@ typedef OSStatus	(*AudioOutputUnitStopProc) (void *self);
 CF_ASSUME_NONNULL_END
 
 #endif /* AudioUnit_AudioOutputUnit_h */
+#else
+#include <AudioToolboxCore/AudioOutputUnit.h>
+#endif

@@ -11,7 +11,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 API_AVAILABLE(macos(10.14), ios(12.0), watchos(5.0), tvos(12.0))
 ML_EXPORT
-@interface MLImageSize : NSObject
+@interface MLImageSize : NSObject <NSSecureCoding>
 
 @property (readonly) NSInteger pixelsWide;
 

@@ -21,7 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
  *    Represents the current state of the device with reference to a region.
  *
  */
-typedef NS_ENUM(NSInteger, CLRegionState) {
+typedef NS_CLOSED_ENUM(NSInteger, CLRegionState) {
 	CLRegionStateUnknown,
 	CLRegionStateInside,
 	CLRegionStateOutside
@@ -47,6 +47,7 @@ typedef NS_ENUM(NSInteger, CLProximity) {
  *  Discussion:
  *    A logical area.
  */
+CL_EXTERN
 API_AVAILABLE(macos(10.7), ios(4.0))
 @interface CLRegion : NSObject <NSCopying, NSSecureCoding>
 {

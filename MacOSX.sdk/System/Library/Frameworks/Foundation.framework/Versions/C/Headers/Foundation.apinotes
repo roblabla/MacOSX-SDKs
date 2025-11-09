@@ -70,6 +70,12 @@ Classes:
   - Selector: 'dataWithContentsOfMappedFile:'
     SwiftName: dataWithContentsOfMappedFile(_:)
     MethodKind: Class
+  - Selector: 'decompressedDataUsingAlgorithm:error:'
+    SwiftName: decompressed(using:)
+    MethodKind: Instance
+  - Selector: 'compressedDataUsingAlgorithm:error:'
+    SwiftName: compressed(using:)
+    MethodKind: Instance
 - Name: NSDate
   SwiftBridge: Date
   Properties:
@@ -218,6 +224,11 @@ Classes:
     MethodKind: Instance
 - Name: NSNotification
   SwiftBridge: Notification
+- Name: NSOrderedCollectionChange
+  SwiftImportAsNonGeneric: true
+- Name: NSOrderedCollectionDifference
+  SwiftBridge: Swift.CollectionDifference
+  SwiftImportAsNonGeneric: true
 - Name: NSPersonNameComponents
   SwiftBridge: PersonNameComponents
 - Name: NSProcessInfo
@@ -276,8 +287,28 @@ Classes:
   SwiftName: URLSessionTaskMetrics
 - Name: NSURLSessionTaskTransactionMetrics
   SwiftName: URLSessionTaskTransactionMetrics
+  Properties:
+  - Name: localPort
+    SwiftPrivate: true
+  - Name: remotePort
+    SwiftPrivate: true
+  - Name: negotiatedTLSProtocolVersion
+    SwiftPrivate: true
+  - Name: negotiatedTLSCipherSuite
+    SwiftPrivate: true
 - Name: NSURLSessionUploadTask
   SwiftName: URLSessionUploadTask
+- Name: NSURLSessionWebSocketMessage
+  SwiftPrivate: true
+- Name: NSURLSessionWebSocketTask
+  SwiftName: URLSessionWebSocketTask
+  Methods:
+  - Selector: 'sendMessage:completionHandler:'
+    SwiftPrivate: true
+    MethodKind: Instance
+  - Selector: 'receiveMessageWithCompletionHandler:'
+    SwiftPrivate: true
+    MethodKind: Instance
 - Name: NSURLRequest
   SwiftBridge: URLRequest
 - Name: NSURLQueryItem
@@ -712,6 +743,12 @@ Classes:
   SwiftName: JSONSerialization
 - Name: NSLengthFormatter
   SwiftName: LengthFormatter
+- Name: NSListFormatter
+  SwiftName: ListFormatter
+  Methods:
+  - Selector: 'stringFromItems:'
+    SwiftName: string(from:)
+    MethodKind: Instance
 - Name: NSMassFormatter
   SwiftName: MassFormatter
 - Name: NSMeasurementFormatter
@@ -769,6 +806,8 @@ Classes:
   - Selector: 'propertyListFromData:mutabilityOption:format:errorDescription:'
     SwiftName: propertyListFromData(_:mutabilityOption:format:errorDescription:)
     MethodKind: Class
+- Name: NSRelativeDateTimeFormatter
+  SwiftName: RelativeDateTimeFormatter
 - Name: NSRunLoop
   SwiftName: RunLoop
   Methods:
@@ -869,6 +908,10 @@ Classes:
   SwiftName: URLAuthenticationChallenge
 - Name: NSURLCache
   SwiftName: URLCache
+  Methods:
+  - Selector: 'initWithMemoryCapacity:diskCapacity:directoryURL:'
+    SwiftPrivate: true
+    MethodKind: Instance
 - Name: NSURLCredential
   SwiftName: URLCredential
   Methods:
@@ -1058,6 +1101,8 @@ Protocols:
   SwiftName: URLSessionStreamDelegate
 - Name: NSURLSessionTaskDelegate
   SwiftName: URLSessionTaskDelegate
+- Name: NSURLSessionWebSocketDelegate
+  SwiftName: URLSessionWebSocketDelegate
 Tags:
 - Name: NSActivityOptions
   SwiftName: ProcessInfo.ActivityOptions
@@ -1089,6 +1134,8 @@ Tags:
   SwiftName: NSCalendar.Unit
 - Name: NSCalendarOptions
   SwiftName: NSCalendar.Options
+- Name: NSDataCompressionAlgorithm
+  SwiftName: NSData.CompressionAlgorithm
 - Name: NSDecodingFailurePolicy
   SwiftName: NSCoder.DecodingFailurePolicy
 - Name: NSComparisonPredicateOptions
@@ -1208,6 +1255,8 @@ Tags:
   SwiftName: URLCache.StoragePolicy
 - Name: NSURLCredentialPersistence
   SwiftName: URLCredential.Persistence
+- Name: NSURLErrorNetworkUnavailableReason
+  Availability: nonswift
 - Name: NSURLRequestCachePolicy
   SwiftName: NSURLRequest.CachePolicy
 - Name: NSURLRequestNetworkServiceType
@@ -1220,6 +1269,10 @@ Tags:
   SwiftName: URLSession.ResponseDisposition
 - Name: NSURLSessionTaskMetricsResourceFetchType
   SwiftName: URLSessionTaskMetrics.ResourceFetchType
+- Name: NSURLSessionWebSocketMessageType
+  SwiftPrivate: true
+- Name: NSURLSessionWebSocketCloseCode
+  SwiftName: URLSessionWebSocketTask.CloseCode
 - Name: NSUserNotificationActivationType
   SwiftName: NSUserNotification.ActivationType
 - Name: NSXMLDocumentContentKind
@@ -1260,6 +1313,10 @@ Tags:
   SwiftName: NSNetService.Options
 - Name: NSPointerFunctionsOptions
   SwiftName: NSPointerFunctions.Options
+- Name: NSRelativeDateTimeFormatterStyle
+  SwiftName: RelativeDateTimeFormatter.DateTimeStyle
+- Name: NSRelativeDateTimeFormatterUnitsStyle
+  SwiftName: RelativeDateTimeFormatter.UnitsStyle
 - Name: NSSearchPathDirectory
   SwiftName: FileManager.SearchPathDirectory
 - Name: NSSearchPathDomainMask
@@ -1301,6 +1358,8 @@ Typedefs:
   SwiftName: FileProtectionType
 - Name: NSHTTPCookiePropertyKey
   SwiftName: HTTPCookiePropertyKey
+- Name: NSHTTPCookieStringPolicy
+  SwiftName: HTTPCookieStringPolicy
 - Name: NSItemProviderCompletionHandler
   SwiftName: NSItemProvider.CompletionHandler
 - Name: NSItemProviderLoadHandler
@@ -1463,6 +1522,14 @@ Globals:
 Enumerators:
 - Name: NSConstantValueExpressionType
   SwiftName: constantValue
+- Name: NSDataCompressionAlgorithmLZFSE
+  SwiftName: lzfse
+- Name: NSDataCompressionAlgorithmLZ4
+  SwiftName: lz4
+- Name: NSDataCompressionAlgorithmLZMA
+  SwiftName: lzma
+- Name: NSDataCompressionAlgorithmZlib
+  SwiftName: zlib
 - Name: NSEvaluatedObjectExpressionType
   SwiftName: evaluatedObject
 - Name: NSVariableExpressionType
@@ -1717,6 +1784,10 @@ Enumerators:
   SwiftName: callSignaling
 - Name: NSURLNetworkServiceTypeResponsiveData
   SwiftName: responsiveData
+- Name: NSURLNetworkServiceTypeAVStreaming
+  SwiftName: avStreaming
+- Name: NSURLNetworkServiceTypeResponsiveAV
+  SwiftName: responsiveAV
 - Name: NSXMLEntityGeneralKind
   SwiftName: general
 - Name: NSXMLEntityParsedKind

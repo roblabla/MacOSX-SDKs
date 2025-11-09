@@ -1,11 +1,10 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: BC2984BD-6D91-319E-AF8A-113280FEC277' ]
+uuids:           [ 'x86_64: 97ED486E-B4D1-3188-9B03-7301D957214D' ]
 platform:        macosx
-install-name:    /usr/lib/libnetsnmpmibs.25.dylib
+install-name:    '/usr/lib/libnetsnmpmibs.25.dylib'
 current-version: 26.2
 compatibility-version: 26
-objc-constraint: none
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _Add_Entry, _Check_HR_FileSys_NFS, _End_HR_FileSys, _Exit, 

@@ -1,4 +1,4 @@
-.Dd July 08, 2018
+.Dd July 02, 2019
 .Dt fdesetup 8 
 .Os macOS
 .Sh NAME
@@ -70,7 +70,7 @@ option to specify either a mount path (e.g. /Volumes/myvolume), a bsd name ident
 .Sy list
 command, or using diskutil(8)).   If you specify a device parameter and it finds the institutional recovery key, a hex representation of the public key hash will be returned in lieu of "true".
 .Pp
-On CoreStorage volumes, if a user currently has the system unlocked using the recovery key, the
+If a user currently has the system unlocked using the recovery key, the
 .Sy usingrecoverykey
 command will return "true".
 .Pp
@@ -387,6 +387,12 @@ To remove an active deferred enablement configuration, you can use the
 .Sy disable
 command, even if FileVault is not currently enabled.
 .Pp
+Starting with macOS 10.15, when using the
+.Sy -defer
+option at logout time,
+.Nm
+may not finish the enablement until after the system returns to the login window.  If you are displaying the recovery key to the user, it will not appear until the enable operstion has completed.
+.Pp
 .Sh INPUT PROPERTY LIST
 .Bd -literal -offset indent
     <plist>
@@ -443,9 +449,27 @@ The path to the private key keychain file if you are authenticating to certain c
 .El
 Care should be taken with passwords that may be used within files. Precautions should be taken in your scripts to try to pass plist data directly from one tool to another to avoid writing this information to a persistent location.
 .Pp
+.Sh AUTHORIZATION POLICY
+.Pp
+Starting in macOS 10.15, you cannot use
+.Nm
+to enable FileVault encryption unless one of the following occurs:
+.Pp
+.Bl -tag -width indent
+1) The responsible application is authorized for "Full Disk Access" in the System Preferences Privacy pane.
+.Pp
+2) System Integrity Protection (SIP) is disabled.
+.Pp
+3)
+.Nm
+was run due to a device configuration profile installation that was either DEP enrolled or MDM user approved.
+.Pp
+4) The user has explicitly authorized the enablement of FileVault via a confirmation dialog.
+.El
+.Pp
 .Sh EXAMPLES
 .Pp
-.Bl -tag -width -indent  \" Differs from above in tag removed 
+.Bl -tag -width -indent  \" Differs from above in tag removed
 .It "fdesetup enable"
 Enable FileVault after prompting for an OpenDirectory user name and password, and return the personal recovery key.
 .It "fdesetup enable -keychain -norecoverykey"

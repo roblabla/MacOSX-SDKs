@@ -1,7 +1,7 @@
 /*
         NSGraphicsContext.h
         Application Kit
-        Copyright (c) 1997-2018, Apple Inc.
+        Copyright (c) 1997-2019, Apple Inc.
         All rights reserved.
 */
 
@@ -14,6 +14,7 @@
 #import <CoreGraphics/CGContext.h>
 
 NS_ASSUME_NONNULL_BEGIN
+API_UNAVAILABLE_BEGIN(ios)
 
 @class NSString;
 @class NSWindow;
@@ -33,12 +34,11 @@ typedef NS_ENUM(NSUInteger, NSImageInterpolation) {
    NSImageInterpolationDefault = 0,
    NSImageInterpolationNone = 1,
    NSImageInterpolationLow = 2, /* Low quality, fast interpolation. */
-   NSImageInterpolationMedium NS_ENUM_AVAILABLE_MAC(10_6) = 4, /* Medium quality, slower than NSImageInterpolationLow. */
+   NSImageInterpolationMedium API_AVAILABLE(macos(10.6)) = 4, /* Medium quality, slower than NSImageInterpolationLow. */
    NSImageInterpolationHigh = 3 /* Highest quality, slower than NSImageInterpolationMedium. */
 };
 
-@interface NSGraphicsContext : NSObject {
-}
+@interface NSGraphicsContext : NSObject
 
 // Instantiates from an appropriate concrete subclass depending on NSGraphicsContextDestinationAttributeName attribute
 + (nullable NSGraphicsContext *)graphicsContextWithAttributes:(NSDictionary<NSGraphicsContextAttributeKey, id> *)attributes;
@@ -52,7 +52,7 @@ typedef NS_ENUM(NSUInteger, NSImageInterpolation) {
 
 /* Instantiates from a CGContextRef.  initialFlippedState is used to determine the return value from -isFlipped when no view is focused in the context.
 */
-+ (NSGraphicsContext *)graphicsContextWithCGContext:(CGContextRef)graphicsPort flipped:(BOOL)initialFlippedState NS_AVAILABLE_MAC(10_10);
++ (NSGraphicsContext *)graphicsContextWithCGContext:(CGContextRef)graphicsPort flipped:(BOOL)initialFlippedState API_AVAILABLE(macos(10.10));
 
 // Setting and identifying the current context in the thread
 @property (class, nullable, strong) NSGraphicsContext *currentContext;
@@ -60,10 +60,10 @@ typedef NS_ENUM(NSUInteger, NSImageInterpolation) {
 // Convenience cover method for [[NSGraphicsContext currentContext] isDrawingToScreen]
 + (BOOL)currentContextDrawingToScreen;
 
-// Graphics state controls
-// Calls -saveGraphicsContext, and pushes the current context on per-thread stack. It's functional equivalent of PSgsave
+// Calls -saveGraphicsState on the current context, and pushes it on the per-thread stack.
 + (void)saveGraphicsState;
-// Pops a context from per-thread stack, makes it current, and calls -restoreGraphicsContext. It's functional equivalent of PSgrestore
+
+// Pops a context from the per-thread stack, makes it current, and calls -restoreGraphicsState on it.
 + (void)restoreGraphicsState;
 
 // Returns attributes used to create this instance
@@ -78,7 +78,7 @@ typedef NS_ENUM(NSUInteger, NSImageInterpolation) {
 
 - (void)flushGraphics;
 
-@property (readonly) CGContextRef CGContext NS_RETURNS_INNER_POINTER NS_AVAILABLE_MAC(10_10);
+@property (readonly) CGContextRef CGContext NS_RETURNS_INNER_POINTER API_AVAILABLE(macos(10.10));
 
 /* Returns the flip state of the receiver.  The state is determined by messaging -isFlipped to the focus view in the context.  If no view has focus, returns NO unless the receiver is instantiated via graphicsContextWithGraphicsPort:drawingToScreen:flipped: with initialFlippedState == YES.
 */
@@ -92,7 +92,7 @@ typedef NS_ENUM(NSUInteger, NSImageInterpolation) {
 
 @property NSPoint patternPhase;
 @property NSCompositingOperation compositingOperation;
-@property NSColorRenderingIntent colorRenderingIntent NS_AVAILABLE_MAC(10_5);
+@property NSColorRenderingIntent colorRenderingIntent API_AVAILABLE(macos(10.5));
 @end
 
 @class CIContext;
@@ -102,14 +102,15 @@ typedef NS_ENUM(NSUInteger, NSImageInterpolation) {
 
 @interface NSGraphicsContext (NSGraphicsContextDeprecated)
 
-+ (void)setGraphicsState:(NSInteger)gState NS_DEPRECATED_MAC(10_0, 10_10, "This method has no effect");
++ (void)setGraphicsState:(NSInteger)gState API_DEPRECATED("This method has no effect", macos(10.0,10.10));
 
-- (null_unspecified id)focusStack NS_DEPRECATED_MAC(10_0, 10_6);
-- (void)setFocusStack:(null_unspecified id)stack NS_DEPRECATED_MAC(10_0, 10_6);
+- (null_unspecified id)focusStack API_DEPRECATED("", macos(10.0,10.6));
+- (void)setFocusStack:(null_unspecified id)stack API_DEPRECATED("", macos(10.0,10.6));
 
-+ (NSGraphicsContext *)graphicsContextWithGraphicsPort:(void *)graphicsPort flipped:(BOOL)initialFlippedState NS_DEPRECATED_WITH_REPLACEMENT_MAC("graphicsContextWithCGContext:flipped:", 10_0, 10_14);
-@property (readonly) void *graphicsPort NS_RETURNS_INNER_POINTER NS_DEPRECATED_WITH_REPLACEMENT_MAC("CGContext", 10_0, 10_14);
++ (NSGraphicsContext *)graphicsContextWithGraphicsPort:(void *)graphicsPort flipped:(BOOL)initialFlippedState API_DEPRECATED_WITH_REPLACEMENT("graphicsContextWithCGContext:flipped:", macos(10.0,10.14));
+@property (readonly) void *graphicsPort NS_RETURNS_INNER_POINTER API_DEPRECATED_WITH_REPLACEMENT("CGContext", macos(10.0,10.14));
 
 @end
 
+API_UNAVAILABLE_END
 NS_ASSUME_NONNULL_END

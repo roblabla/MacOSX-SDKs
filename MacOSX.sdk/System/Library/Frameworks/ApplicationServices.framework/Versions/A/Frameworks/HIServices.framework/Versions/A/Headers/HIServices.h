@@ -3,7 +3,7 @@
  
      Contains:   Master include for HIServices framework
  
-     Copyright:  © 2002-2012 by Apple Computer, Inc., all rights reserved.
+     Copyright:  2002-2018 by Apple, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -14,10 +14,13 @@
 #ifndef __HISERVICES__
 #define __HISERVICES__
 
+#include <TargetConditionals.h>
+
 #ifndef __CORESERVICES__
 #include <CoreServices/CoreServices.h>
 #endif
 
+#if TARGET_OS_OSX
 
 #ifndef __HISHAPE__
 #include <HIServices/HIShape.h>
@@ -46,10 +49,12 @@
 #ifndef __ACCESSIBILITY__
 #include <HIServices/Accessibility.h>
 #endif
+
 #ifndef __UNIVERSALACCESS__
 #include <HIServices/UniversalAccess.h>
 #endif
 
+#endif
 
 #endif /* __HISERVICES__ */
 

@@ -8,6 +8,7 @@
 @class ABPerson;
 
 OBJC_GC_UNAVAILABLE
+API_AVAILABLE(macos(10.9)) API_UNAVAILABLE(macCatalyst)
 @protocol ABPersonPickerDelegate <NSObject>
 
 /*!

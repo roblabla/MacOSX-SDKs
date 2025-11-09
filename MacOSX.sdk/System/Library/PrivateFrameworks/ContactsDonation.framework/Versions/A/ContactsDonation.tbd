@@ -1,8 +1,8 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: C26F1967-8324-3C53-B2E0-3695270A69A6' ]
-platform:        macosx
-install-name:    /System/Library/PrivateFrameworks/ContactsDonation.framework/Versions/A/ContactsDonation
+uuids:           [ 'x86_64: 7595FC60-43C3-3C9E-9CAD-D6D5E9BD0F1F', 'x86_64: 7595FC60-43C3-3C9E-9CAD-D6D5E9BD0F1F' ]
+platform:        zippered
+install-name:    '/System/Library/PrivateFrameworks/ContactsDonation.framework/Versions/A/ContactsDonation'
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _CNDDonationsEnabledNotificationName, _CNDDonationsEnabledPreferencesKey, 

@@ -1,9 +1,8 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 2528E230-11E9-3436-ADCF-ED149F50A264' ]
+uuids:           [ 'x86_64: 42E5535D-F68D-319C-8842-17E04831F32B' ]
 platform:        macosx
-install-name:    /System/Library/PrivateFrameworks/LoginUIKit.framework/Versions/A/Frameworks/LoginUICore.framework/Versions/A/LoginUICore
-objc-constraint: none
+install-name:    '/System/Library/PrivateFrameworks/LoginUIKit.framework/Versions/A/Frameworks/LoginUICore.framework/Versions/A/LoginUICore'
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _LUI2CButtonBack, _LUI2CButtonLogin, _LUICAvatarMask, _LUICAvatarOverlay, 
@@ -14,7 +13,8 @@ exports:
                        _LUICButtonShiftLeft, _LUICButtonShiftRight, _LUICButtonShutDown, 
                        _LUICButtonSleep, _LUICButtonSwitchUser, _LUICDigitField, 
                        _LUICDigitFieldFocus, _LUICEFIImageIdentifier, _LUICGetBootStyle, 
-                       _LUICImageAppleLogo, _LUICImageAvatarSelection1Line, _LUICImageAvatarSelection2Lines, 
+                       _LUICImageAppleLogo, _LUICImageAvatarSelection1Line, _LUICImageAvatarSelection1LineRT, 
+                       _LUICImageAvatarSelection2Lines, _LUICImageAvatarSelection2LinesRT, 
                        _LUICImageGenericUser, _LUICImageGenericUserSmall, _LUICImageGuestUser, 
                        _LUICImageGuestUserSmall, _LUICImageHintDividerLine, _LUICImageLoggedInBadge, 
                        _LUICImageMacOSX, _LUICImageOtherUser, _LUICImagePocketShadowLeft, 

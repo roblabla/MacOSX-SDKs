@@ -204,6 +204,10 @@ module Darwin [system] [extern_c] [no_undeclared_includes] {
    export *
   }
 
+  module ctermid {
+   header "_ctermid.h"
+   export *
+  }
  }
 
  // POSIX
@@ -2097,4 +2101,10 @@ module SQLite3 [system] [extern_c] {
   export *
  }
  export *
+}
+
+module xcselect [system] [extern_c] {
+ header "xcselect.h"
+ export *
+ link "xcselect"
 }

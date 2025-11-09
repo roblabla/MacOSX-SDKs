@@ -2,7 +2,7 @@
  *  CTGlyphInfo.h
  *  CoreText
  *
- *  Copyright (c) 2006-2018 Apple Inc. All rights reserved.
+ *  Copyright (c) 2006-2019 Apple Inc. All rights reserved.
  *
  */
 
@@ -116,7 +116,7 @@ typedef CF_ENUM(uint16_t, CTCharacterCollection) {
     @result     This function will return a reference to a CTGlyphInfo object.
 */
 
-CTGlyphInfoRef CTGlyphInfoCreateWithGlyphName(
+CTGlyphInfoRef _Nullable CTGlyphInfoCreateWithGlyphName(
     CFStringRef glyphName,
     CTFontRef font,
     CFStringRef baseString ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
@@ -142,7 +142,7 @@ CTGlyphInfoRef CTGlyphInfoCreateWithGlyphName(
     @result     This function will return a reference to a CTGlyphInfo object.
 */
 
-CTGlyphInfoRef CTGlyphInfoCreateWithGlyph(
+CTGlyphInfoRef _Nullable CTGlyphInfoCreateWithGlyph(
     CGGlyph glyph,
     CTFontRef font,
     CFStringRef baseString ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
@@ -168,7 +168,7 @@ CTGlyphInfoRef CTGlyphInfoCreateWithGlyph(
     @result     This function will return a reference to a CTGlyphInfo object.
 */
 
-CTGlyphInfoRef CTGlyphInfoCreateWithCharacterIdentifier(
+CTGlyphInfoRef _Nullable CTGlyphInfoCreateWithCharacterIdentifier(
     CGFontIndex cid,
     CTCharacterCollection collection,
     CFStringRef baseString ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
@@ -193,6 +193,23 @@ CTGlyphInfoRef CTGlyphInfoCreateWithCharacterIdentifier(
 
 CFStringRef _Nullable CTGlyphInfoGetGlyphName(
     CTGlyphInfoRef glyphInfo ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
+
+
+/*!
+    @function   CTGlyphInfoGetGlyph
+    @abstract   Gets the glyph for a glyph info, if applicable.
+
+    @discussion This function will return the glyph.
+
+    @param      glyphInfo
+                The glyph info from which you would like the glyph.
+
+    @result     If the glyph info object was created with a font, it will be
+                returned. Otherwise, this function will return 0.
+*/
+
+CGGlyph CTGlyphInfoGetGlyph(
+    CTGlyphInfoRef glyphInfo ) CT_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0));
 
 
 /*!

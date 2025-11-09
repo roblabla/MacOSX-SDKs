@@ -1,8 +1,8 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: FEF7E676-7DED-334C-B006-E01477B20EAD' ]
+uuids:           [ 'x86_64: BD189F1C-F2AC-306A-902E-3B59590949F8' ]
 platform:        macosx
-install-name:    /System/Library/PrivateFrameworks/ClockMenuExtraPreferences.framework/Versions/A/ClockMenuExtraPreferences
+install-name:    '/System/Library/PrivateFrameworks/ClockMenuExtraPreferences.framework/Versions/A/ClockMenuExtraPreferences'
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _CLKAppendAMPMLegacyKey, _CLKAppleDatePreferencesChangedNotification, 

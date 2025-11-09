@@ -1,7 +1,7 @@
 /*
 	NSRunningApplication.h
 	Application Kit
-	Copyright (c) 1994-2018, Apple Inc.
+	Copyright (c) 1994-2019, Apple Inc.
 	All rights reserved.
 */
 
@@ -26,6 +26,7 @@
 
 /* The following flags are for activateWithOptions:. */
 NS_ASSUME_NONNULL_BEGIN
+API_UNAVAILABLE_BEGIN(ios)
 
 typedef NS_OPTIONS(NSUInteger, NSApplicationActivationOptions) {
     /* By default, activation brings only the main and key windows forward.  If you specify NSApplicationActivateAllWindows, all of the application's windows are brought forward. */
@@ -53,39 +54,8 @@ typedef NS_ENUM(NSInteger, NSApplicationActivationPolicy) {
 
 @class NSLock, NSDate, NSImage, NSURL;
 
-NS_CLASS_AVAILABLE(10_6, NA)
-@interface NSRunningApplication : NSObject {
-    @private
-    id _superReserved __unused APPKIT_IVAR;
-    void *_asn APPKIT_IVAR;
-    void **_helpers APPKIT_IVAR;
-    id _obsInfo APPKIT_IVAR;
-    NSLock *_lock APPKIT_IVAR;
-    NSString *_bundleID APPKIT_IVAR;
-    NSString *_localizedName APPKIT_IVAR;
-    NSURL *_bundleURL APPKIT_IVAR;
-    NSURL *_executableURL APPKIT_IVAR;
-    NSDate *_launchDate APPKIT_IVAR;
-    NSImage *_icon APPKIT_IVAR;
-    int _pid APPKIT_IVAR;
-    unsigned int _lastSeed APPKIT_IVAR;
-    unsigned int _activeSeed APPKIT_IVAR;
-    unsigned int _staleSeed APPKIT_IVAR;
-    unsigned long long _obsMask APPKIT_IVAR;
-    struct {
-	unsigned fetchedDynamic:1;
-	unsigned deadToUs:1;
-        unsigned terminated:1;
-        unsigned finishedLaunching:1;
-        unsigned hidden:1;
-        unsigned active:1;
-        unsigned ownsMenuBar:1;
-	unsigned arch:3;
-	unsigned activationPolicy:3;
-        unsigned reserved1:19;
-    } _aflags APPKIT_IVAR;
-    id _appReserved __unused APPKIT_IVAR;
-}
+API_AVAILABLE(macos(10.6))
+@interface NSRunningApplication : NSObject
 
 /* Indicates that the process is an exited application.  This is observable through KVO. */
 @property (readonly, getter=isTerminated) BOOL terminated;
@@ -100,7 +70,7 @@ NS_CLASS_AVAILABLE(10_6, NA)
 @property (readonly, getter=isActive) BOOL active;
 
 /* Indicates whether the application currently owns the menu bar.  This is observable through KVO. */
-@property (readonly) BOOL ownsMenuBar NS_AVAILABLE_MAC(10_7);
+@property (readonly) BOOL ownsMenuBar API_AVAILABLE(macos(10.7));
 
 /* Indicates the activation policy of the application.   This is observable through KVO (the type is usually fixed, but may be changed through a call to -[NSApplication setActivationPolicy:]).  */
 @property (readonly) NSApplicationActivationPolicy activationPolicy;
@@ -167,9 +137,10 @@ NS_CLASS_AVAILABLE(10_6, NA)
  
  This property is thread safe, in that it may be called from background threads and the result is returned atomically.  This property is observable through KVO.
  */
-@property (readonly, copy) NSArray<NSRunningApplication *> *runningApplications NS_AVAILABLE_MAC(10_6);
+@property (readonly, copy) NSArray<NSRunningApplication *> *runningApplications API_AVAILABLE(macos(10.6));
 
 @end
 
+API_UNAVAILABLE_END
 NS_ASSUME_NONNULL_END
 

@@ -20,6 +20,8 @@
 #import <AVFAudio/AVAudioRecorder.h>
 #import <AVFAudio/AVAudioSequencer.h>
 #import <AVFAudio/AVAudioSettings.h>
+#import <AVFAudio/AVAudioSinkNode.h>
+#import <AVFAudio/AVAudioSourceNode.h>
 #import <AVFAudio/AVAudioTime.h>
 #import <AVFAudio/AVAudioTypes.h>
 #import <AVFAudio/AVAudioUnit.h>
@@ -36,8 +38,8 @@
 #import <AVFAudio/AVAudioUnitTimePitch.h>
 #import <AVFAudio/AVAudioUnitVarispeed.h>
 #import <AVFAudio/AVMIDIPlayer.h>
+#import <AVFAudio/AVSpeechSynthesis.h>
 
 #if TARGET_OS_IPHONE
 #import <AVFAudio/AVAudioSession.h>
-#import <AVFAudio/AVSpeechSynthesis.h>
 #endif

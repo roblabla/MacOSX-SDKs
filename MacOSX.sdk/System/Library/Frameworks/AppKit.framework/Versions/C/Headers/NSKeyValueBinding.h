@@ -1,7 +1,7 @@
 /*
 	NSKeyValueBinding.h
 	Application Kit
-	Copyright (c) 2002-2018, Apple Inc.
+	Copyright (c) 2002-2019, Apple Inc.
 	All rights reserved.
  */
 
@@ -13,27 +13,32 @@
 #import <CoreData/NSManagedObjectContext.h>
 
 NS_ASSUME_NONNULL_BEGIN
+API_UNAVAILABLE_BEGIN(ios)
 
 @class NSString, NSError, NSAttributeDescription;
 
-NS_CLASS_AVAILABLE_MAC(10_14)
+typedef NSString * NSBindingName NS_TYPED_EXTENSIBLE_ENUM;
+typedef NSString * NSBindingOption NS_TYPED_ENUM;
+
+API_AVAILABLE(macos(10.14))
 @interface NSBindingSelectionMarker : NSObject <NSCopying>
 // Subclassing or instantiating NSBindingSelectionMarker is not supported.
 - (instancetype)init NS_UNAVAILABLE;
 
-@property (class, readonly, strong) NSBindingSelectionMarker *multipleValuesSelectionMarker NS_AVAILABLE_MAC(10_14);
-@property (class, readonly, strong) NSBindingSelectionMarker *noSelectionMarker NS_AVAILABLE_MAC(10_14);
-@property (class, readonly, strong) NSBindingSelectionMarker *notApplicableSelectionMarker NS_AVAILABLE_MAC(10_14);
+@property (class, readonly, strong) NSBindingSelectionMarker *multipleValuesSelectionMarker API_AVAILABLE(macos(10.14));
+@property (class, readonly, strong) NSBindingSelectionMarker *noSelectionMarker API_AVAILABLE(macos(10.14));
+@property (class, readonly, strong) NSBindingSelectionMarker *notApplicableSelectionMarker API_AVAILABLE(macos(10.14));
+
++ (void)setDefaultPlaceholder:(nullable id)placeholder forMarker:(nullable NSBindingSelectionMarker *)marker onClass:(Class)objectClass withBinding:(NSBindingName)binding API_AVAILABLE(macos(10.15)); // marker can be nil or one of multipleValuesSelectionMarker, noSelectionMarker, notApplicableSelectionMarker
++ (nullable id)defaultPlaceholderForMarker:(nullable NSBindingSelectionMarker *)marker onClass:(Class)objectClass withBinding:(NSBindingName)binding API_AVAILABLE(macos(10.15)); // marker can be nil or one of multipleValuesSelectionMarker, noSelectionMarker, notApplicableSelectionMarker
+
 @end
 
-APPKIT_EXTERN NSBindingSelectionMarker * NSMultipleValuesMarker NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSBindingSelectionMarker.multipleValuesSelectionMarker", 10_0, API_TO_BE_DEPRECATED);
-APPKIT_EXTERN NSBindingSelectionMarker * NSNoSelectionMarker NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSBindingSelectionMarker.noSelectionMarker", 10_0, API_TO_BE_DEPRECATED);
-APPKIT_EXTERN NSBindingSelectionMarker * NSNotApplicableMarker NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSBindingSelectionMarker.notApplicableSelectionMarker", 10_0, API_TO_BE_DEPRECATED);
+APPKIT_EXTERN id NSMultipleValuesMarker API_DEPRECATED_WITH_REPLACEMENT("NSBindingSelectionMarker.multipleValuesSelectionMarker", macos(10.0,API_TO_BE_DEPRECATED));
+APPKIT_EXTERN id NSNoSelectionMarker API_DEPRECATED_WITH_REPLACEMENT("NSBindingSelectionMarker.noSelectionMarker", macos(10.0,API_TO_BE_DEPRECATED));
+APPKIT_EXTERN id NSNotApplicableMarker API_DEPRECATED_WITH_REPLACEMENT("NSBindingSelectionMarker.notApplicableSelectionMarker", macos(10.0,API_TO_BE_DEPRECATED));
 
-APPKIT_EXTERN BOOL NSIsControllerMarker(__nullable id object);
-
-typedef NSString * NSBindingName NS_TYPED_EXTENSIBLE_ENUM;
-typedef NSString * NSBindingOption NS_TYPED_ENUM;
+APPKIT_EXTERN BOOL NSIsControllerMarker(_Nullable id object);
 
 // keys for the returned dictionary of -infoForBinding:
 typedef NSString * NSBindingInfoKey NS_TYPED_ENUM;
@@ -65,15 +70,15 @@ APPKIT_EXTERN NSBindingInfoKey NSOptionsKey;
 - The default value shown in the options editor comes from the attribute description's defaultValue.*/
 
 
-- (NSArray<NSAttributeDescription *> *)optionDescriptionsForBinding:(NSBindingName)binding NS_AVAILABLE_MAC(10_5);
+- (NSArray<NSAttributeDescription *> *)optionDescriptionsForBinding:(NSBindingName)binding API_AVAILABLE(macos(10.5));
 
 
 @end
 
 @interface NSObject (NSPlaceholders)
 
-+ (void)setDefaultPlaceholder:(nullable id)placeholder forMarker:(nullable NSBindingSelectionMarker *)marker withBinding:(NSBindingName)binding;    // marker can be nil or one of multipleValuesSelectionMarker, noSelectionMarker, notApplicableSelectionMarker
-+ (nullable id)defaultPlaceholderForMarker:(nullable NSBindingSelectionMarker *)marker withBinding:(NSBindingName)binding;    // marker can be nil or one of multipleValuesSelectionMarker, noSelectionMarker, notApplicableSelectionMarker
++ (void)setDefaultPlaceholder:(nullable id)placeholder forMarker:(nullable id)marker withBinding:(NSBindingName)binding API_DEPRECATED_WITH_REPLACEMENT("+[NSBindingSelectionMarker setDefaultPlaceholder:forMarker:withBinding:onClass:]", macos(10.0,API_TO_BE_DEPRECATED));
++ (nullable id)defaultPlaceholderForMarker:(nullable id)marker withBinding:(NSBindingName)binding API_DEPRECATED_WITH_REPLACEMENT("+[NSBindingSelectionMarker defaultPlaceholder:forMarker:withBinding:onClass:]", macos(10.0,API_TO_BE_DEPRECATED));
 
 @end
 
@@ -97,7 +102,7 @@ If an error occurs while attempting to commit, because key-value coding validati
  
  If you have enabled autosaving in your application, and your application has custom objects that implement or override the NSEditor protocol, you must also implement this method in those NSEditors.
  */
-- (BOOL)commitEditingAndReturnError:(NSError **)error NS_AVAILABLE_MAC(10_7);
+- (BOOL)commitEditingAndReturnError:(NSError **)error API_AVAILABLE(macos(10.7));
 
 @end
 
@@ -110,15 +115,15 @@ If an error occurs while attempting to commit, because key-value coding validati
 
 #if __swift__ < 40200
 @interface NSObject (NSEditor)
-- (void)discardEditing NS_DEPRECATED_MAC(10_0, API_TO_BE_DEPRECATED, "This is now a method of the NSEditor protocol.");
-- (BOOL)commitEditing NS_DEPRECATED_MAC(10_0, API_TO_BE_DEPRECATED, "This is now a method of the NSEditor protocol.");
-- (void)commitEditingWithDelegate:(nullable id)delegate didCommitSelector:(nullable SEL)didCommitSelector contextInfo:(nullable void *)contextInfo NS_DEPRECATED_MAC(10_0, API_TO_BE_DEPRECATED, "This is now a method of the NSEditor protocol.");
-- (BOOL)commitEditingAndReturnError:(NSError **)error NS_DEPRECATED_MAC(10_7, API_TO_BE_DEPRECATED, "This is now a method of the NSEditor protocol.");
+- (void)discardEditing API_DEPRECATED("This is now a method of the NSEditor protocol.", macos(10.0,API_TO_BE_DEPRECATED));
+- (BOOL)commitEditing API_DEPRECATED("This is now a method of the NSEditor protocol.", macos(10.0,API_TO_BE_DEPRECATED));
+- (void)commitEditingWithDelegate:(nullable id)delegate didCommitSelector:(nullable SEL)didCommitSelector contextInfo:(nullable void *)contextInfo API_DEPRECATED("This is now a method of the NSEditor protocol.", macos(10.0,API_TO_BE_DEPRECATED));
+- (BOOL)commitEditingAndReturnError:(NSError **)error API_DEPRECATED("This is now a method of the NSEditor protocol.", macos(10.7,API_TO_BE_DEPRECATED));
 @end
 
 @interface NSObject (NSEditorRegistration)
-- (void)objectDidBeginEditing:(id<NSEditor>)editor NS_DEPRECATED_MAC(10_0, API_TO_BE_DEPRECATED, "This is now a method of the NSEditorRegistration protocol.");
-- (void)objectDidEndEditing:(id<NSEditor>)editor NS_DEPRECATED_MAC(10_0, API_TO_BE_DEPRECATED, "This is now a method of the NSEditorRegistration protocol.");
+- (void)objectDidBeginEditing:(id<NSEditor>)editor API_DEPRECATED("This is now a method of the NSEditorRegistration protocol.", macos(10.0,API_TO_BE_DEPRECATED));
+- (void)objectDidEndEditing:(id<NSEditor>)editor API_DEPRECATED("This is now a method of the NSEditorRegistration protocol.", macos(10.0,API_TO_BE_DEPRECATED));
 @end
 #endif
 
@@ -133,7 +138,7 @@ APPKIT_EXTERN NSBindingName NSAttributedStringBinding;
 APPKIT_EXTERN NSBindingName NSContentArrayBinding;
 APPKIT_EXTERN NSBindingName NSContentArrayForMultipleSelectionBinding;
 APPKIT_EXTERN NSBindingName NSContentBinding;
-APPKIT_EXTERN NSBindingName NSContentDictionaryBinding		NS_AVAILABLE_MAC(10_5);
+APPKIT_EXTERN NSBindingName NSContentDictionaryBinding		API_AVAILABLE(macos(10.5));
 APPKIT_EXTERN NSBindingName NSContentHeightBinding;
 APPKIT_EXTERN NSBindingName NSContentObjectBinding;
 APPKIT_EXTERN NSBindingName NSContentObjectsBinding;
@@ -149,7 +154,7 @@ APPKIT_EXTERN NSBindingName NSDoubleClickArgumentBinding;
 APPKIT_EXTERN NSBindingName NSDoubleClickTargetBinding;
 APPKIT_EXTERN NSBindingName NSEditableBinding;
 APPKIT_EXTERN NSBindingName NSEnabledBinding;
-APPKIT_EXTERN NSBindingName NSExcludedKeysBinding		NS_AVAILABLE_MAC(10_5);
+APPKIT_EXTERN NSBindingName NSExcludedKeysBinding		API_AVAILABLE(macos(10.5));
 APPKIT_EXTERN NSBindingName NSFilterPredicateBinding;
 APPKIT_EXTERN NSBindingName NSFontBinding;
 APPKIT_EXTERN NSBindingName NSFontBoldBinding;
@@ -160,12 +165,12 @@ APPKIT_EXTERN NSBindingName NSFontSizeBinding;
 APPKIT_EXTERN NSBindingName NSHeaderTitleBinding;
 APPKIT_EXTERN NSBindingName NSHiddenBinding;
 APPKIT_EXTERN NSBindingName NSImageBinding;
-APPKIT_EXTERN NSBindingName NSIncludedKeysBinding		NS_AVAILABLE_MAC(10_5);
-APPKIT_EXTERN NSBindingName NSInitialKeyBinding		NS_AVAILABLE_MAC(10_5);
-APPKIT_EXTERN NSBindingName NSInitialValueBinding		NS_AVAILABLE_MAC(10_5);
+APPKIT_EXTERN NSBindingName NSIncludedKeysBinding		API_AVAILABLE(macos(10.5));
+APPKIT_EXTERN NSBindingName NSInitialKeyBinding		API_AVAILABLE(macos(10.5));
+APPKIT_EXTERN NSBindingName NSInitialValueBinding		API_AVAILABLE(macos(10.5));
 APPKIT_EXTERN NSBindingName NSIsIndeterminateBinding;
 APPKIT_EXTERN NSBindingName NSLabelBinding;
-APPKIT_EXTERN NSBindingName NSLocalizedKeyDictionaryBinding		NS_AVAILABLE_MAC(10_5);
+APPKIT_EXTERN NSBindingName NSLocalizedKeyDictionaryBinding		API_AVAILABLE(macos(10.5));
 APPKIT_EXTERN NSBindingName NSManagedObjectContextBinding;
 APPKIT_EXTERN NSBindingName NSMaximumRecentsBinding;
 APPKIT_EXTERN NSBindingName NSMaxValueBinding;
@@ -175,7 +180,7 @@ APPKIT_EXTERN NSBindingName NSMinWidthBinding;
 APPKIT_EXTERN NSBindingName NSMixedStateImageBinding;
 APPKIT_EXTERN NSBindingName NSOffStateImageBinding;
 APPKIT_EXTERN NSBindingName NSOnStateImageBinding;
-APPKIT_EXTERN NSBindingName NSPositioningRectBinding            NS_AVAILABLE_MAC(10_7);
+APPKIT_EXTERN NSBindingName NSPositioningRectBinding            API_AVAILABLE(macos(10.7));
 APPKIT_EXTERN NSBindingName NSPredicateBinding;
 APPKIT_EXTERN NSBindingName NSRecentSearchesBinding;
 APPKIT_EXTERN NSBindingName NSRepresentedFilenameBinding;
@@ -195,7 +200,7 @@ APPKIT_EXTERN NSBindingName NSTargetBinding;
 APPKIT_EXTERN NSBindingName NSTextColorBinding;
 APPKIT_EXTERN NSBindingName NSTitleBinding;
 APPKIT_EXTERN NSBindingName NSToolTipBinding;
-APPKIT_EXTERN NSBindingName NSTransparentBinding		NS_AVAILABLE_MAC(10_5);
+APPKIT_EXTERN NSBindingName NSTransparentBinding		API_AVAILABLE(macos(10.5));
 APPKIT_EXTERN NSBindingName NSValueBinding;
 APPKIT_EXTERN NSBindingName NSValuePathBinding;
 APPKIT_EXTERN NSBindingName NSValueURLBinding;
@@ -215,7 +220,7 @@ APPKIT_EXTERN NSBindingOption NSCreatesSortDescriptorBindingOption;
 APPKIT_EXTERN NSBindingOption NSDeletesObjectsOnRemoveBindingsOption;
 APPKIT_EXTERN NSBindingOption NSDisplayNameBindingOption;
 APPKIT_EXTERN NSBindingOption NSDisplayPatternBindingOption;
-APPKIT_EXTERN NSBindingOption NSContentPlacementTagBindingOption		NS_AVAILABLE_MAC(10_5);
+APPKIT_EXTERN NSBindingOption NSContentPlacementTagBindingOption		API_AVAILABLE(macos(10.5));
 APPKIT_EXTERN NSBindingOption NSHandlesContentAsCompoundValueBindingOption;
 APPKIT_EXTERN NSBindingOption NSInsertsNullPlaceholderBindingOption;
 APPKIT_EXTERN NSBindingOption NSInvokesSeparatelyWithArrayObjectsBindingOption;
@@ -235,5 +240,6 @@ APPKIT_EXTERN NSBindingOption NSValueTransformerBindingOption;
 @interface NSManagedObjectContext (NSEditorAndEditorRegistrationConformance) <NSEditor, NSEditorRegistration>
 @end
 
+API_UNAVAILABLE_END
 NS_ASSUME_NONNULL_END
 

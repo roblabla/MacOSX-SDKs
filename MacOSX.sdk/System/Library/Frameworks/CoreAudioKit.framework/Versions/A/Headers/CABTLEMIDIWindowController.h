@@ -20,6 +20,7 @@
  
  @discussion To use this class, create an instance of the CABTLEMIDIWindowController, initialize it, and call showWindow: to display the UI.
  */
+API_AVAILABLE(macos(10.11)) API_UNAVAILABLE(ios, tvos, watchos)
 @interface CABTLEMIDIWindowController : NSWindowController {
 @private
     CABTLEMIDIImpl     *_impl;

@@ -1,3 +1,4 @@
+#if (defined(USE_AUDIOTOOLBOX_PUBLIC_HEADERS) && USE_AUDIOTOOLBOX_PUBLIC_HEADERS) || !__has_include(<AudioToolboxCore/ExtendedAudioFile.h>)
 /*!
 	@file		ExtendedAudioFile.h
 	@framework	AudioToolbox.framework
@@ -15,13 +16,8 @@
 #define AudioToolbox_ExtendedAudioFile_h
 
 #include <Availability.h>
-#if !defined(__COREAUDIO_USE_FLAT_INCLUDES__)
-	#include <CoreFoundation/CoreFoundation.h>
-	#include <AudioToolbox/AudioFile.h>
-#else
-	#include <CoreFoundation.h>
-	#include <AudioFile.h>
-#endif
+#include <CoreFoundation/CoreFoundation.h>
+#include <AudioToolbox/AudioFile.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -191,6 +187,29 @@ CF_ENUM(OSStatus) {
 	kExtAudioFileError_AsyncWriteBufferOverflow	= -66570	// an async write could not be completed in time
 };
 
+#if TARGET_OS_IPHONE
+/*!
+    @enum           ExtAudioFile errors
+    @constant       kExtAudioFileError_CodecUnavailableInputConsumed
+						iOS only. Returned when ExtAudioFileWrite was interrupted. You must stop calling
+						ExtAudioFileWrite. If the underlying audio converter can resume after an
+						interruption (see kAudioConverterPropertyCanResumeFromInterruption), you must
+						wait for an EndInterruption notification from AudioSession, and call AudioSessionSetActive(true)
+						before resuming. In this situation, the buffer you provided to ExtAudioFileWrite was successfully
+						consumed and you may proceed to the next buffer.
+    @constant       kExtAudioFileError_CodecUnavailableInputNotConsumed
+						iOS only. Returned when ExtAudioFileWrite was interrupted. You must stop calling
+						ExtAudioFileWrite. If the underlying audio converter can resume after an
+						interruption (see kAudioConverterPropertyCanResumeFromInterruption), you must
+						wait for an EndInterruption notification from AudioSession, and call AudioSessionSetActive(true)
+						before resuming. In this situation, the buffer you provided to ExtAudioFileWrite was not
+						successfully consumed and you must try to write it again.
+*/
+CF_ENUM(OSStatus) {
+	kExtAudioFileError_CodecUnavailableInputConsumed    = -66559,
+	kExtAudioFileError_CodecUnavailableInputNotConsumed = -66560,
+};
+#endif
 
 
 //==================================================================================================
@@ -279,6 +298,7 @@ ExtAudioFileCreateWithURL(	CFURLRef							inURL,
 							ExtAudioFileRef __nullable * __nonnull outExtAudioFile)
 																			API_AVAILABLE(macos(10.5), ios(2.1), watchos(2.0), tvos(9.0));
 																			
+#if !TARGET_OS_IPHONE
 /*!
 	@function   ExtAudioFileOpen
 	
@@ -334,6 +354,7 @@ ExtAudioFileCreateNew(		const struct FSRef *				inParentDir,
 							const AudioChannelLayout * __nullable inChannelLayout,
 							ExtAudioFileRef __nullable * __nonnull outExtAudioFile)
 																			API_DEPRECATED("no longer supported", macos(10.4, 10.6)) API_UNAVAILABLE(ios, watchos, tvos);
+#endif
 
 /*!
 	@function   ExtAudioFileDispose
@@ -484,8 +505,6 @@ ExtAudioFileSeek(			ExtAudioFileRef			inExtAudioFile,
 					On exit, the file's current read/write position in sample frames. This is specified in the 
 					sample rate and frame count of the file's format (not the client format)
 	@result		An OSStatus error code.
-	
-	@discussion
 */
 extern OSStatus
 ExtAudioFileTell(			ExtAudioFileRef			inExtAudioFile,
@@ -511,8 +530,6 @@ ExtAudioFileTell(			ExtAudioFileRef			inExtAudioFile,
 	@param		outWritable
 					If non-null, on exit, this indicates whether the property value is settable.
 	@result		An OSStatus error code.
-
-	@discussion
 */
 extern OSStatus
 ExtAudioFileGetPropertyInfo(ExtAudioFileRef			inExtAudioFile,
@@ -535,8 +552,6 @@ ExtAudioFileGetPropertyInfo(ExtAudioFileRef			inExtAudioFile,
 	@param		outPropertyData
 					The value of the property is copied to the memory this points to.
 	@result		An OSStatus error code.
-
-	@discussion
 */
 extern OSStatus
 ExtAudioFileGetProperty(	ExtAudioFileRef			inExtAudioFile,
@@ -558,8 +573,6 @@ ExtAudioFileGetProperty(	ExtAudioFileRef			inExtAudioFile,
 	@param		inPropertyData
 					Points to the property's new value.
 	@result		An OSStatus error code.
-
-	@discussion
 */
 extern OSStatus
 ExtAudioFileSetProperty(	ExtAudioFileRef			inExtAudioFile,
@@ -575,3 +588,6 @@ CF_ASSUME_NONNULL_END
 #endif
 
 #endif // AudioToolbox_ExtendedAudioFile_h
+#else
+#include <AudioToolboxCore/ExtendedAudioFile.h>
+#endif

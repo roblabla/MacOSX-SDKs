@@ -48,7 +48,7 @@ extern "C" {
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
-extern const CFStringRef kCSIdentityErrorDomain							__OSX_AVAILABLE_STARTING( __MAC_10_5,__IPHONE_5_0 ); 
+extern const CFStringRef kCSIdentityErrorDomain							API_AVAILABLE( ios(5.0 ), macos(10.5), tvos(9.0), watchos(4.0) ); 
 
 /*
  *  CSIdentity error codes

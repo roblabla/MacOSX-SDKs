@@ -18,6 +18,8 @@
 @abstract  An AUPannerView object retrieves and instantiates a generic panner view for the given panner unit
 */
 NS_ASSUME_NONNULL_BEGIN
+
+API_AVAILABLE(macos(10.5)) API_UNAVAILABLE(ios, tvos, watchos)
 @interface AUPannerView : NSView {}
 /*! @property audioUnit
 	@abstract Read-only property for the audio unit associated with the view

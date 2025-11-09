@@ -29,7 +29,7 @@ typedef NS_OPTIONS(NSUInteger, AVB17221EntityPropertyChanged)
 	@constant	AVB17221EntityPropertyChangedEntityID
 	@abstract	The entityID property of the entity has changed.
  */
-	AVB17221EntityPropertyChangedEntityID NS_ENUM_AVAILABLE(10_9, NA)	=					0x00000002,
+	AVB17221EntityPropertyChangedEntityID API_AVAILABLE(macos(10.9))	=					0x00000002,
 /*!
 	@constant	AVB17221EntityPropertyChangedVendorID
 	@abstract	The vendor ID property of the entity has changed.
@@ -84,7 +84,7 @@ typedef NS_OPTIONS(NSUInteger, AVB17221EntityPropertyChanged)
 	@constant	AVB17221EntityPropertyChangedGPTPGrandmasterID
 	@abstract	The gPTP grandmaster ID property of the entity has changed.
  */
-	AVB17221EntityPropertyChangedGPTPGrandmasterID NS_ENUM_AVAILABLE(10_9, NA) =			0x00000800,
+	AVB17221EntityPropertyChangedGPTPGrandmasterID API_AVAILABLE(macos(10.9)) =			0x00000800,
 /*!
 	@constant	AVB17221EntityPropertyChangedMACAddress
 	@abstract	The MAC address property of the entity has changed.
@@ -104,18 +104,18 @@ typedef NS_OPTIONS(NSUInteger, AVB17221EntityPropertyChanged)
 	@constant	AVB17221EntityPropertyChangedIdentifyControlIndex
 	@abstract	The identify control index property of the entity has changed.
  */
-	AVB17221EntityPropertyChangedIdentifyControlIndex NS_ENUM_AVAILABLE(10_9, NA) =			0x00020000,
+	AVB17221EntityPropertyChangedIdentifyControlIndex API_AVAILABLE(macos(10.9)) =			0x00020000,
 /*!
 	@constant	AVB17221EntityPropertyChangedInterfaceIndex
 	@abstract	The interface index property of the entity has changed.
  */
-	AVB17221EntityPropertyChangedInterfaceIndex NS_ENUM_AVAILABLE(10_9, NA) =				0x00040000,
+	AVB17221EntityPropertyChangedInterfaceIndex API_AVAILABLE(macos(10.9)) =				0x00040000,
 /*!
 	@constant	AVB17221EntityPropertyChangedGPTPDomainNumber
 	@abstract	The gPTP domain property of the entity has changed.
  */
-	AVB17221EntityPropertyChangedGPTPDomainNumber NS_ENUM_AVAILABLE(10_9, NA) =				0x00080000,
-} NS_ENUM_AVAILABLE(10_8, NA);
+	AVB17221EntityPropertyChangedGPTPDomainNumber API_AVAILABLE(macos(10.9)) =				0x00080000,
+} API_AVAILABLE(macos(10.8));
 
 
 /*!

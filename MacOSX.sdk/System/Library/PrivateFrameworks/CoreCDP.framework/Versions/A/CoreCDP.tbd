@@ -1,8 +1,8 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: C1A2470A-B37E-3A73-9A18-7A377A9058E2' ]
-platform:        macosx
-install-name:    /System/Library/PrivateFrameworks/CoreCDP.framework/Versions/A/CoreCDP
+uuids:           [ 'x86_64: E4C1EAD5-BB5C-3C82-B9FA-0EB2A9F57482', 'x86_64: E4C1EAD5-BB5C-3C82-B9FA-0EB2A9F57482' ]
+platform:        zippered
+install-name:    '/System/Library/PrivateFrameworks/CoreCDP.framework/Versions/A/CoreCDP'
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _CDPAuthProviderExportedInterface, _CDPCloudDataProtectionEnabledNotification, 
@@ -13,14 +13,16 @@ exports:
                        _CDP_FOLLOWUP_OFFLINE_PASSCODE, _CDP_FOLLOWUP_RECOVERY_KEY_REGEN, 
                        _CDP_FOLLOWUP_STATE_REPAIR, _CoreCDPVersionNumber, _CoreCDPVersionString, 
                        __CDPGetLogSystem, __CDPStateError, __CDPStateErrorWithUnderlying, 
-                       __CDPSuffixForDeviceClass, __CDPSuffixForSecretType, __CDPSuffixForUnqualifiedDeviceClass ]
+                       __CDPSuffixForDeviceClass, __CDPSuffixForSecretType, __CDPSuffixForUnqualifiedDeviceClass, 
+                       _hasFullCDPSupport ]
     objc-classes:    [ CDPAccount, CDPAuthProviderProxy, CDPCircleProxyImpl, CDPContext, 
                        CDPController, CDPDaemonConnection, CDPDevice, CDPFollowUpContext, 
                        CDPFollowUpController, CDPKeychainSync, CDPLocalDevice, CDPLocalDeviceSecretHandler, 
-                       CDPLocalizedStringBuilder, CDPManateeStateController, CDPPCSUtilities, 
-                       CDPProtectedCloudStorageProxyImpl, CDPRecoveryController, 
-                       CDPRecoveryKeyValidatorProxyImpl, CDPRemoteDeviceSecretValidator, 
-                       CDPStateController, CDPStateUIProviderProxy, CDPUtilities ]
+                       CDPLocalDeviceSecretProxyImpl, CDPLocalizedStringBuilder, 
+                       CDPManateeStateController, CDPPCSUtilities, CDPProtectedCloudStorageProxyImpl, 
+                       CDPRecoveryController, CDPRecoveryKeyValidatorProxyImpl, CDPRemoteDeviceSecretValidator, 
+                       CDPStateController, CDPStateUIProviderProxy, CDPToolFakeUIProvider, 
+                       CDPUtilities ]
     objc-ivars:      [ CDPDevice._deviceColor, CDPDevice._enclosureColor, CDPDevice._hasNumericSecret, 
                        CDPDevice._hasRandomSecret, CDPDevice._isCurrentDevice, CDPDevice._isUsingMultipleiCSC, 
                        CDPDevice._localizedName, CDPDevice._machineID, CDPDevice._model, 

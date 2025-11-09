@@ -1,7 +1,7 @@
 /*
  NSUserInterfaceCompression.h
  Application Kit
- Copyright (c) 2015-2018, Apple Inc.
+ Copyright (c) 2015-2019, Apple Inc.
  All rights reserved.
  */
 
@@ -11,12 +11,10 @@
 #import <AppKit/AppKitDefines.h>
 
 NS_ASSUME_NONNULL_BEGIN
+API_UNAVAILABLE_BEGIN(ios)
 
-NS_CLASS_AVAILABLE_MAC(10_13)
-@interface NSUserInterfaceCompressionOptions : NSObject <NSCopying, NSCoding> {
-    NSSet *_identifiers APPKIT_IVAR;
-}
-
+API_AVAILABLE(macos(10.13))
+@interface NSUserInterfaceCompressionOptions : NSObject <NSCopying, NSCoding>
 /*
  Returns an option with an empty set of identifiers. This represents the absence of any options.
  */
@@ -119,5 +117,6 @@ NS_CLASS_AVAILABLE_MAC(10_13)
 
 @end
 
+API_UNAVAILABLE_END
 NS_ASSUME_NONNULL_END
 

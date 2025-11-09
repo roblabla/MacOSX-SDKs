@@ -3,17 +3,14 @@
  
  Framework:  AVFoundation
  
- Copyright 2013-2015 Apple Inc. All rights reserved.
+ Copyright 2013-2018 Apple Inc. All rights reserved.
  */
 
-#if !0
-
-#import <AVFoundation/AVBase.h>
 #import <Foundation/Foundation.h>
 
 #ifdef __OBJC2__
 
-@class AVAudioSessionChannelDescription;
+@class AVAudioSession, AVAudioSessionChannelDescription, AVAudioBuffer;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -27,16 +24,24 @@ typedef NS_ENUM(NSInteger, AVSpeechSynthesisVoiceQuality) {
     AVSpeechSynthesisVoiceQualityEnhanced
 } NS_ENUM_AVAILABLE(10_14, 9_0);
 
-AVF_EXPORT const float AVSpeechUtteranceMinimumSpeechRate API_AVAILABLE(ios(7.0), watchos(1.0), tvos(7.0), macos(10.14));
-AVF_EXPORT const float AVSpeechUtteranceMaximumSpeechRate API_AVAILABLE(ios(7.0), watchos(1.0), tvos(7.0), macos(10.14));
-AVF_EXPORT const float AVSpeechUtteranceDefaultSpeechRate API_AVAILABLE(ios(7.0), watchos(1.0), tvos(7.0), macos(10.14));
+typedef NS_ENUM(NSInteger, AVSpeechSynthesisVoiceGender) {
+    AVSpeechSynthesisVoiceGenderUnspecified,
+    AVSpeechSynthesisVoiceGenderMale,
+    AVSpeechSynthesisVoiceGenderFemale
+} NS_ENUM_AVAILABLE(10_15, 13_0);
+
+extern const float AVSpeechUtteranceMinimumSpeechRate API_AVAILABLE(ios(7.0), watchos(1.0), tvos(7.0), macos(10.14));
+extern const float AVSpeechUtteranceMaximumSpeechRate API_AVAILABLE(ios(7.0), watchos(1.0), tvos(7.0), macos(10.14));
+extern const float AVSpeechUtteranceDefaultSpeechRate API_AVAILABLE(ios(7.0), watchos(1.0), tvos(7.0), macos(10.14));
 
 // Use the Alex identifier with voiceWithIdentifier:. If the voice is present on the system,
 // an AVSpeechSynthesisVoice will be returned. Alex is en-US only.
-AVF_EXPORT NSString *const AVSpeechSynthesisVoiceIdentifierAlex API_AVAILABLE(ios(9.0), watchos(2.0), tvos(9.0), macos(10.14));
+extern NSString *const AVSpeechSynthesisVoiceIdentifierAlex API_AVAILABLE(ios(9.0), watchos(2.0), tvos(9.0), macos(10.14));
 
 //NSString, containing International Phonetic Alphabet (IPA) symbols. Controls pronunciation of a certain word or phrase, e.g. a proper name.
-AVF_EXPORT NSString *const AVSpeechSynthesisIPANotationAttribute API_AVAILABLE(ios(10.0), watchos(3.0), tvos(10.0), macos(10.14));
+extern NSString *const AVSpeechSynthesisIPANotationAttribute API_AVAILABLE(ios(10.0), watchos(3.0), tvos(10.0), macos(10.14));
+
+typedef void (^AVSpeechSynthesizerBufferCallback)(AVAudioBuffer *buffer) NS_SWIFT_NAME(AVSpeechSynthesizer.BufferCallback);
 
 @protocol AVSpeechSynthesizerDelegate;
 
@@ -58,7 +63,7 @@ NS_CLASS_AVAILABLE(10_14, 7_0)
 /*!
  @method        voiceWithLanguage:
  @abstract      Use a BCP-47 language tag to specify the desired language and region.
- @param			language
+ @param			languageCode
  Specifies the BCP-47 language tag that represents the voice.
  @discussion
  The default is the system's region and language.
@@ -84,6 +89,12 @@ NS_CLASS_AVAILABLE(10_14, 7_0)
 @property(nonatomic, readonly) NSString *identifier API_AVAILABLE(ios(9.0), watchos(2.0), tvos(9.0), macos(10.14));
 @property(nonatomic, readonly) NSString *name API_AVAILABLE(ios(9.0), watchos(2.0), tvos(9.0), macos(10.14));
 @property(nonatomic, readonly) AVSpeechSynthesisVoiceQuality quality API_AVAILABLE(ios(9.0), watchos(2.0), tvos(9.0), macos(10.14));
+@property(nonatomic, readonly) AVSpeechSynthesisVoiceGender gender API_AVAILABLE(ios(13.0), watchos(6.0), tvos(13.0), macos(10.15));
+
+// This is a dictionary of properties that can be used to create an AVAudioFile using -[AVAudioFile initForWriting:settings:commonFormat:interleaved:error:]
+// The data provided by AVSpeechSynthesizerBufferCallback will be in this specified format when using this voice.
+// The AVAudioCommonFormat and interleaved properties can be determined by properties within the settings dictionary.
+@property(nonatomic, readonly) NSDictionary<NSString *, id> *audioFileSettings API_AVAILABLE(ios(13.0), watchos(6.0), tvos(13.0), macos(10.15));
 
 @end
 
@@ -119,7 +130,6 @@ NS_CLASS_AVAILABLE(10_14, 7_0)
 @property(nonatomic) NSTimeInterval preUtteranceDelay;    // Default is 0.0
 @property(nonatomic) NSTimeInterval postUtteranceDelay;   // Default is 0.0
 
-
 @end
 
 /*!
@@ -142,6 +152,10 @@ NS_CLASS_AVAILABLE(10_14, 7_0)
    Enqueing the same AVSpeechUtterance that is already enqueued or is speaking will raise an exception. */
 - (void)speakUtterance:(AVSpeechUtterance *)utterance;
 
+// Use this method to receive audio buffers that can be used to store or further process synthesized speech.
+// The dictionary provided by -[AVSpeechSynthesisVoice audioFileSettings] can be used to create an AVAudioFile.
+- (void)writeUtterance:(AVSpeechUtterance *)utterance toBufferCallback:(AVSpeechSynthesizerBufferCallback)bufferCallback API_AVAILABLE(ios(13.0), watchos(6.0), tvos(13.0), macos(10.15)) ;
+
 /* These methods will operate on the speech utterance that is speaking. Returns YES if it succeeds, NO for failure. */
 
 /* Call stopSpeakingAtBoundary: to interrupt current speech and clear the queue. */
@@ -152,7 +166,17 @@ NS_CLASS_AVAILABLE(10_14, 7_0)
 // Specify the audio channels to be used for synthesized speech as described by the channel descriptions in AVAudioSession's current route.
 // Speech audio will be replicated to each specified channel.
 // Default is nil, which implies system defaults.
-@property(nonatomic, retain, nullable) NSArray<AVAudioSessionChannelDescription *> *outputChannels API_AVAILABLE(ios(10.0), watchos(3.0), tvos(10.0), macos(10.14));
+@property(nonatomic, retain, nullable) NSArray<AVAudioSessionChannelDescription *> *outputChannels API_AVAILABLE(ios(10.0), watchos(3.0), tvos(10.0)) API_UNAVAILABLE(macos) ;
+
+/* The AVSpeechSynthesizer will use the AVAudioSession sharedInstance when set to YES.
+   The AVSpeechSynthesizer will use a separate AVAudioSession for playback when set to NO. Additionally, the audio session will mix and duck other audio, and its active state will be managed automatically.
+   The separate audio session will use AVAudioSessionRouteSharingPolicyDefault, which means that it may have a different route from the app’s shared instance session.
+   Default is YES. */
+@property(nonatomic, assign) BOOL usesApplicationAudioSession API_AVAILABLE(ios(13.0), watchos(6.0), tvos(13.0)) API_UNAVAILABLE( macCatalyst, macos);
+
+// Set to YES to send synthesized speech into an outgoing telephony audio stream.
+// If there's no active call, setting this property has no effect.
+@property(nonatomic, assign) BOOL mixToTelephonyUplink API_AVAILABLE(ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos, macos);
 
 @end
 
@@ -177,4 +201,3 @@ NS_ASSUME_NONNULL_END
 
 #endif // __OBJC2__
 
-#endif // !TARGET_OS_BRIDGE

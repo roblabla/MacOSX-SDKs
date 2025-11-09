@@ -1,13 +1,12 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: F099E6ED-E08D-3F37-B381-0DF3109B27AA' ]
-platform:        macosx
-install-name:    /System/Library/PrivateFrameworks/GraphicsServices.framework/Versions/A/GraphicsServices
+uuids:           [ 'x86_64: 2A736E71-6C33-3DC1-AA20-1C44C3CFF3FE', 'x86_64: 2A736E71-6C33-3DC1-AA20-1C44C3CFF3FE' ]
+platform:        zippered
+install-name:    '/System/Library/PrivateFrameworks/GraphicsServices.framework/Versions/A/GraphicsServices'
 current-version: 14
 exports:         
   - archs:           [ x86_64 ]
-    symbols:         [ _GSApplicationSetUsesLegacyUI, _GSApplicationUsesLegacyUI, 
-                       _GSColorCreateColorWithDeviceRGBA, _GSColorCreateColorWithDeviceRGBAInfo, 
+    symbols:         [ _GSColorCreateColorWithDeviceRGBA, _GSColorCreateColorWithDeviceRGBAInfo, 
                        _GSColorCreateWithDeviceWhite, _GSColorGetRGBAComponents, 
                        _GSColorGetRGBAInfo, _GSCopyPurpleNamedPerPIDPort, _GSCopyPurpleNamedPort, 
                        _GSCurrentEventTimestamp, _GSEventAccelerometerAxisX, _GSEventAccelerometerAxisY, 
@@ -33,27 +32,26 @@ exports:
                        _GSEventPopRunLoopMode, _GSEventPushRunLoopMode, _GSEventQueueContainsMouseEvent, 
                        _GSEventQuitTopApplication, _GSEventReceiveRunLoopMode, _GSEventRegisterEventCallBack, 
                        _GSEventRemoveShouldRouteToFrontMost, _GSEventResetIdleTimer, 
-                       _GSEventRestoreSensitivity, _GSEventRotateSimulator, _GSEventRun, 
-                       _GSEventRunModal, _GSEventSendApplicationOpenURL, _GSEventSendKeyEvent, 
-                       _GSEventSetBacklightLevel, _GSEventSetCharacters, _GSEventSetHardwareKeyboardAttached, 
-                       _GSEventSetHardwareKeyboardAttachedWithCountryCodeAndType, 
-                       _GSEventSetLocationInWindow, _GSEventSetPathInfoAtIndex, _GSEventSetSensitivity, 
-                       _GSEventSetType, _GSEventShouldRouteToFrontMost, _GSEventSourceIsHardware, 
+                       _GSEventRun, _GSEventRunModal, _GSEventSendApplicationOpenURL, 
+                       _GSEventSendKeyEvent, _GSEventSetBacklightLevel, _GSEventSetCharacters, 
+                       _GSEventSetHardwareKeyboardAttached, _GSEventSetHardwareKeyboardAttachedWithCountryCodeAndType, 
+                       _GSEventSetLocationInWindow, _GSEventSetPathInfoAtIndex, _GSEventSetType, 
+                       _GSEventShouldRouteToFrontMost, _GSEventSourceIsHardware, 
                        _GSEventStopModal, _GSEventStopVibrator, _GSEventVibrateForDuration, 
                        _GSGetPurpleApplicationPort, _GSGetPurpleSystemAppPort, _GSGetPurpleSystemEventPort, 
                        _GSGetPurpleWorkspacePort, _GSGetTimeEventHandling, _GSInitialize, 
-                       _GSKeyboardCreate, _GSKeyboardGetHWKeyboardType, _GSKeyboardGetLayout, 
-                       _GSKeyboardGetLiveModifierState, _GSKeyboardGetModifierState, 
+                       _GSKeyboardCreate, _GSKeyboardGetHWKeyboardType, _GSKeyboardGetKeyCodeForChar, 
+                       _GSKeyboardGetLayout, _GSKeyboardGetLiveModifierState, _GSKeyboardGetModifierState, 
                        _GSKeyboardGetStickyLockModifierState, _GSKeyboardGetTranslationOptions, 
                        _GSKeyboardGetTypeID, _GSKeyboardHWKeyboardLayoutsPlist, _GSKeyboardHWKeyboardNormalizeInput, 
                        _GSKeyboardRelease, _GSKeyboardReset, _GSKeyboardSetLayout, 
                        _GSKeyboardSetTranslationOptions, _GSKeyboardTranslateKey, 
                        _GSKeyboardTranslateKeyExtended, _GSKeyboardTranslateKeyExtendedCommand, 
-                       _GSMainScreenOrientation, _GSMainScreenPixelSize, _GSMainScreenPointSize, 
-                       _GSMainScreenPositionTransform, _GSMainScreenScaleFactor, 
-                       _GSMainScreenSize, _GSMainScreenWindowTransform, _GSRegisterPurpleNamedPerPIDPort, 
-                       _GSRegisterPurpleNamedPort, _GSSaveEventHandlingTimes, _GSSendAppPreferencesChanged, 
-                       _GSSendApplicationFinishedBackgroundContentFetchingEvent, 
+                       _GSKeyboardTranslateKeyWithModifiers, _GSMainScreenOrientation, 
+                       _GSMainScreenPixelSize, _GSMainScreenPointSize, _GSMainScreenPositionTransform, 
+                       _GSMainScreenScaleFactor, _GSMainScreenSize, _GSMainScreenWindowTransform, 
+                       _GSRegisterPurpleNamedPerPIDPort, _GSRegisterPurpleNamedPort, 
+                       _GSSaveEventHandlingTimes, _GSSendAppPreferencesChanged, _GSSendApplicationFinishedBackgroundContentFetchingEvent, 
                        _GSSendApplicationFinishedBackgroundContentFetchingEventWithSequenceNumber, 
                        _GSSendApplicationFinishedBackgroundNotificationActionEvent, 
                        _GSSendApplicationSuspendEvent, _GSSendApplicationSuspendedSettingsUpdatedEvent, 

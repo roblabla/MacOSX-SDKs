@@ -764,7 +764,7 @@ protected:
 private:
 	
 	
-#if !TARGET_OS_EMBEDDED
+#if !TARGET_OS_IPHONE
 	// Space reserved for future expansion.
     OSMetaClassDeclareReservedUnused ( IOSCSIProtocolServices,  8 );
     OSMetaClassDeclareReservedUnused ( IOSCSIProtocolServices, 	9 );
@@ -775,7 +775,7 @@ private:
     OSMetaClassDeclareReservedUnused ( IOSCSIProtocolServices, 14 );
     OSMetaClassDeclareReservedUnused ( IOSCSIProtocolServices, 15 );
     OSMetaClassDeclareReservedUnused ( IOSCSIProtocolServices, 16 );
-#endif /* !TARGET_OS_EMBEDDED */
+#endif /* !TARGET_OS_IPHONE */
     
 };
 

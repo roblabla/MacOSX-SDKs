@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015-2018 Apple Inc.
+ * Copyright (c) 2015-2019 Apple Inc.
  * All rights reserved.
  */
 
@@ -16,6 +16,7 @@
 @class NEFilterFlow;
 @class NEFilterBrowserFlow;
 @class NEFilterSocketFlow;
+@class NEFilterSettings;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -30,7 +31,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @interface NEFilterDataProvider
  * @discussion The NEFilterDataProvider class declares the programmatic interface for an object that evaluates network data flows based on a set of locally-available rules and makes decisions about whether to block or allow the flows.
  */
-API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, watchos, tvos)
+API_AVAILABLE(macos(10.15), ios(9.0)) API_UNAVAILABLE(watchos, tvos)
 @interface NEFilterDataProvider : NEFilterProvider
 
 /*!
@@ -39,27 +40,27 @@ API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, watchos, tvos)
  * @param flow An NEFilterFlow object containing details about the new flow.
  * @return An NEFilterNewFlowVerdict object containing the veridct for the new flow.
  */
-- (NEFilterNewFlowVerdict *)handleNewFlow:(NEFilterFlow *)flow API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, watchos, tvos);
+- (NEFilterNewFlowVerdict *)handleNewFlow:(NEFilterFlow *)flow API_AVAILABLE(macos(10.15), ios(9.0)) API_UNAVAILABLE(watchos, tvos);
 
 /*!
  * @method handleInboundDataFromFlow:readBytesStartOffset:readBytes:
  * @discussion This function is called by the framework when a filtering decision needs to be made about some inbound data that the filter previously requested access to via the NEFilterFlowDataVerdict or the NEFilterNewFlowVerdict. Subclasses must override this method.
  * @param flow The NEFilterFlow from which the data was read.
- * @param offset The offset in bytes from the start of the flow's data of readBytes.
+ * @param offset The offset in bytes from the start of the flow's inbound data at which readBytes begins.
  * @param readBytes The data that was read.
  * @return An NEFilterFlowDataVerdict containing the verdict for the flow.
  */
-- (NEFilterDataVerdict *)handleInboundDataFromFlow:(NEFilterFlow *)flow readBytesStartOffset:(NSUInteger)offset readBytes:(NSData *)readBytes API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, watchos, tvos);
+- (NEFilterDataVerdict *)handleInboundDataFromFlow:(NEFilterFlow *)flow readBytesStartOffset:(NSUInteger)offset readBytes:(NSData *)readBytes API_AVAILABLE(macos(10.15), ios(9.0)) API_UNAVAILABLE(watchos, tvos);
 
 /*!
  * @method handleOutboundDataFromFlow:readBytesStartOffset:readBytes:
  * @discussion This function is called by the framework when a filtering decision needs to be made about some outbound data that the filter previously requested access to via the NEFilterFlowDataVerdict or the NEFilterNewFlowVerdict. Subclasses must override this method.
  * @param flow The NEFilterFlow from which the data was read.
- * @param offset The offset in bytes from the start of the flow's data of readBytes.
+ * @param offset The offset in bytes from the start of the flow's outbound data at which readBytes begins.
  * @param readBytes The data that was read.
  * @return An NEFilterFlowDataVerdict containing the verdict for the flow.
  */
-- (NEFilterDataVerdict *)handleOutboundDataFromFlow:(NEFilterFlow *)flow readBytesStartOffset:(NSUInteger)offset readBytes:(NSData *)readBytes API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, watchos, tvos);
+- (NEFilterDataVerdict *)handleOutboundDataFromFlow:(NEFilterFlow *)flow readBytesStartOffset:(NSUInteger)offset readBytes:(NSData *)readBytes API_AVAILABLE(macos(10.15), ios(9.0)) API_UNAVAILABLE(watchos, tvos);
 
 /*!
  * @method handleInboundDataCompleteForFlow:
@@ -67,7 +68,7 @@ API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, watchos, tvos)
  * @param flow The flow
  * @return The final NEFilterFlowDataVerdict verdict for the flow.
  */
-- (NEFilterDataVerdict *)handleInboundDataCompleteForFlow:(NEFilterFlow *)flow API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, watchos, tvos);
+- (NEFilterDataVerdict *)handleInboundDataCompleteForFlow:(NEFilterFlow *)flow API_AVAILABLE(macos(10.15), ios(9.0)) API_UNAVAILABLE(watchos, tvos);
 
 /*!
  * @method handleOutboundDataCompleteForFlow:
@@ -75,7 +76,7 @@ API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, watchos, tvos)
  * @param flow The flow
  * @return The final NEFilterFlowDataVerdict verdict for the flow.
  */
-- (NEFilterDataVerdict *)handleOutboundDataCompleteForFlow:(NEFilterFlow *)flow API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, watchos, tvos);
+- (NEFilterDataVerdict *)handleOutboundDataCompleteForFlow:(NEFilterFlow *)flow API_AVAILABLE(macos(10.15), ios(9.0)) API_UNAVAILABLE(watchos, tvos);
 
 /*!
  * @method handleRemediationForFlow:
@@ -91,6 +92,26 @@ API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, watchos, tvos)
  */
 - (void)handleRulesChanged API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, watchos, tvos);
 
+/*!
+ * @method applyFilterRules:defaultAction:withCompletionHandler:
+ * @discussion The provider calls this function to apply the current set of filtering rules associated with the provider and also change the default filtering action.
+ * @param settings A NEFilterSettings object containing the filter settings to apply to the system. Pass nil to revert to the default settings, which are an
+ *     empty list of rules and a default action of NEFilterActionFilterData.
+ * @param completionHandler A block that will be executed when the settings have been applied to the system. If an error occurs then the error parameter will be non-nil.
+ */
+- (void)applySettings:(nullable NEFilterSettings *)settings completionHandler:(void (^)(NSError * _Nullable error))completionHandler API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, watchos, tvos);
+
+/*!
+ * @method resumeFlow:withVerdict:
+ * @discussion This function is called by the provider to resume a flow that was previously paused by the provider returning a pause verdict.
+ * @param flow The flow to resume
+ * @param verdict The next NEFilterDataVerdict for the flow. This verdict is used as the verdict corresponding to the
+ *    flow handler callback (handleNewFlow:, handleInboundDataFromFlow:, etc.) that returned the pause verdict that
+ *    paused the flow. This must be either a NEFilterDataVerdict or a NEFilterNewFlowVerdict. It is invalid to resume
+ *    a flow that is not paused.
+ */
+- (void)resumeFlow:(NEFilterFlow *)flow withVerdict:(NEFilterVerdict *)verdict API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, watchos, tvos);
+
 @end
 
 /*!
@@ -99,7 +120,7 @@ API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, watchos, tvos)
  *
  * NEFilterDataVerdict is part of NetworkExtension.framework
  */
-API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, watchos, tvos)
+API_AVAILABLE(macos(10.15), ios(9.0)) API_UNAVAILABLE(watchos, tvos)
 @interface NEFilterDataVerdict : NEFilterVerdict <NSSecureCoding,NSCopying>
 
 /*!
@@ -107,14 +128,14 @@ API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, watchos, tvos)
  * @discussion This class method returns a verdict indicating that the flow should be allowed.
  * @return The NEFilterDataVerdict object.
  */
-+ (NEFilterDataVerdict *) allowVerdict API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, watchos, tvos);
++ (NEFilterDataVerdict *)allowVerdict API_AVAILABLE(macos(10.15), ios(9.0)) API_UNAVAILABLE(watchos, tvos);
 
 /*!
  * @method dropVerdict
  * @discussion This class method returns a verdict indicating that the flow should be dropped.
  * @return The NEFilterDataVerdict object.
  */
-+ (NEFilterDataVerdict *) dropVerdict API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, watchos, tvos);
++ (NEFilterDataVerdict *)dropVerdict API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(watchos, tvos);
 
 /*!
  * @method remediateVerdictWithRemediationURLMapKey:remediationButtonTextMapKey:
@@ -132,7 +153,7 @@ API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, watchos, tvos)
  * @param peekBytes The number of bytes after the end of the bytes passed that the filter wants to see in the next call to -[NEFilterDataProvider handleOutboundDataFromFlow:readBytesStartOffset:readBytes:] or -[NEFilterDataProvider handleInboundDataFromFlow:readBytesStartOffset:readBytes:].
  * @return The data flow verdict.
  */
-+ (NEFilterDataVerdict *)dataVerdictWithPassBytes:(NSUInteger)passBytes peekBytes:(NSUInteger)peekBytes API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, watchos, tvos);
++ (NEFilterDataVerdict *)dataVerdictWithPassBytes:(NSUInteger)passBytes peekBytes:(NSUInteger)peekBytes API_AVAILABLE(macos(10.15), ios(9.0)) API_UNAVAILABLE(watchos, tvos);
 
 /*!
  * @method needRulesVerdict
@@ -140,6 +161,16 @@ API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, watchos, tvos)
  * @return The NEFilterDataVerdict object.
  */
 + (NEFilterDataVerdict *)needRulesVerdict API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, watchos, tvos);
+
+/*!
+ * @method pauseVerdict
+ * @discussion This class method returns a verdict indicating that none of the data provider's handler callbacks shall be called for the flow until after the flow is resumed
+ *     by a call to -[NEFilterDataProvider resumeFlow:withVerdict:]. TCP flows may be paused indefinitely. UDP flows will be dropped if not resumed within 10 seconds of
+ *     being paused. It is invalid to pause a flow that is already paused.
+ * @return The NEFilterDataVerdict object.
+ */
++ (NEFilterDataVerdict *)pauseVerdict API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, watchos, tvos);
+
 @end
 
 /*!

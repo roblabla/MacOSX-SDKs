@@ -21,7 +21,7 @@
 #endif
 
 
-#include <Availability.h>
+#include <os/availability.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -126,7 +126,7 @@ CF_ENUM(DescType) {
   typeEventRecord               = 'evrc',
   typeTrue                      = 'true',
   typeFalse                     = 'fals',
-  typeAlias                     = 'alis', /* AliasPtr, from a valid AliasHandle */
+  typeAlias                     = 'alis', /* AliasPtr, from a valid AliasHandle. Deprecated; use typeFileURL or typeBookmark data to refer to files */
   typeEnumerated                = 'enum',
   typeType                      = 'type', /* OSType */
   typeAppParameters             = 'appa',
@@ -138,7 +138,7 @@ CF_ENUM(DescType) {
   typeSectionH                  = 'sect',
   typeWildCard                  = '****',
   typeApplSignature             = 'sign', /* OSType */
-  typeQDRectangle               = 'qdrt',
+  typeQDRectangle               = 'qdrt', /* Deprecated */
   typeFixed                     = 'fixd',
   typeProcessSerialNumber       = 'psn ', /* ProcessSerialNumber */
   typeApplicationURL            = 'aprl',
@@ -449,7 +449,7 @@ typedef STACK_UPP_TYPE(AECoercePtrProcPtr)                      AECoercePtrUPP;
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern AECoerceDescUPP
-NewAECoerceDescUPP(AECoerceDescProcPtr userRoutine)           __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
+NewAECoerceDescUPP(AECoerceDescProcPtr userRoutine)           API_AVAILABLE( macos(10.0) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 /*
  *  NewAECoercePtrUPP()
@@ -460,7 +460,7 @@ NewAECoerceDescUPP(AECoerceDescProcPtr userRoutine)           __OSX_AVAILABLE_ST
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern AECoercePtrUPP
-NewAECoercePtrUPP(AECoercePtrProcPtr userRoutine)             __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
+NewAECoercePtrUPP(AECoercePtrProcPtr userRoutine)             API_AVAILABLE( macos(10.0) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 /*
  *  DisposeAECoerceDescUPP()
@@ -471,7 +471,7 @@ NewAECoercePtrUPP(AECoercePtrProcPtr userRoutine)             __OSX_AVAILABLE_ST
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeAECoerceDescUPP(AECoerceDescUPP userUPP)               __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
+DisposeAECoerceDescUPP(AECoerceDescUPP userUPP)               API_AVAILABLE( macos(10.0) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 /*
  *  DisposeAECoercePtrUPP()
@@ -482,7 +482,7 @@ DisposeAECoerceDescUPP(AECoerceDescUPP userUPP)               __OSX_AVAILABLE_ST
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeAECoercePtrUPP(AECoercePtrUPP userUPP)                 __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
+DisposeAECoercePtrUPP(AECoercePtrUPP userUPP)                 API_AVAILABLE( macos(10.0) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 /*
  *  InvokeAECoerceDescUPP()
@@ -498,7 +498,7 @@ InvokeAECoerceDescUPP(
   DescType         toType,
   SRefCon          handlerRefcon,
   AEDesc *         toDesc,
-  AECoerceDescUPP  userUPP)                                   __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
+  AECoerceDescUPP  userUPP)                                   API_AVAILABLE( macos(10.0) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 /*
  *  InvokeAECoercePtrUPP()
@@ -516,7 +516,7 @@ InvokeAECoercePtrUPP(
   DescType        toType,
   SRefCon         handlerRefcon,
   AEDesc *        result,
-  AECoercePtrUPP  userUPP)                                    __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
+  AECoercePtrUPP  userUPP)                                    API_AVAILABLE( macos(10.0) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 #if __MACH__
   #ifdef __cplusplus
@@ -613,7 +613,7 @@ AEInstallCoercionHandler(
   AECoercionHandlerUPP   handler,
   SRefCon                handlerRefcon,
   Boolean                fromTypeIsDesc,
-  Boolean                isSysHandler)                        __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
+  Boolean                isSysHandler)                        API_AVAILABLE( macos(10.0) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 /*
@@ -657,7 +657,7 @@ AERemoveCoercionHandler(
   DescType               fromType,
   DescType               toType,
   AECoercionHandlerUPP   handler,
-  Boolean                isSysHandler)                        __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
+  Boolean                isSysHandler)                        API_AVAILABLE( macos(10.0) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 /*
@@ -714,7 +714,7 @@ AEGetCoercionHandler(
   AECoercionHandlerUPP *  handler,
   SRefCon *               handlerRefcon,
   Boolean *               fromTypeIsDesc,
-  Boolean                 isSysHandler)                       __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
+  Boolean                 isSysHandler)                       API_AVAILABLE( macos(10.0) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 /**************************************************************************
@@ -763,7 +763,7 @@ AECoercePtr(
   const void *  dataPtr,
   Size          dataSize,
   DescType      toType,
-  AEDesc *      result)                                       __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
+  AEDesc *      result)                                       API_AVAILABLE( macos(10.0) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 /*
@@ -801,7 +801,7 @@ extern OSErr
 AECoerceDesc(
   const AEDesc *  theAEDesc,
   DescType        toType,
-  AEDesc *        result)                                     __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
+  AEDesc *        result)                                     API_AVAILABLE( macos(10.0) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 
@@ -834,7 +834,7 @@ AECoerceDesc(
  *    Non-Carbon CFM:   not available
  */
 extern void 
-AEInitializeDesc(AEDesc * desc)                               __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
+AEInitializeDesc(AEDesc * desc)                               API_AVAILABLE( macos(10.0) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 
@@ -893,7 +893,7 @@ AECreateDesc(
   DescType      typeCode,
   const void *  dataPtr,
   Size          dataSize,
-  AEDesc *      result)                                       __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
+  AEDesc *      result)                                       API_AVAILABLE( macos(10.0) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 /*
@@ -931,7 +931,7 @@ AECreateDesc(
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern OSErr 
-AEDisposeDesc(AEDesc * theAEDesc)                             __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
+AEDisposeDesc(AEDesc * theAEDesc)                             API_AVAILABLE( macos(10.0) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 /*
@@ -977,7 +977,7 @@ AEDisposeDesc(AEDesc * theAEDesc)                             __OSX_AVAILABLE_ST
 extern OSErr 
 AEDuplicateDesc(
   const AEDesc *  theAEDesc,
-  AEDesc *        result)                                     __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
+  AEDesc *        result)                                     API_AVAILABLE( macos(10.0) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 
@@ -1062,7 +1062,7 @@ AECreateDescFromExternalPtr(
   Size                   dataLength,
   AEDisposeExternalUPP   disposeCallback,
   SRefCon                disposeRefcon,
-  AEDesc *               theDesc)                             __OSX_AVAILABLE_STARTING( __MAC_10_2, __IPHONE_NA );
+  AEDesc *               theDesc)                             API_AVAILABLE( macos(10.2) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 	
 
@@ -1106,7 +1106,7 @@ AECreateDescFromExternalPtr(
 	 *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
 	 */
 	extern OSStatus
-	AECompareDesc( const AEDesc * desc1, const AEDesc* desc2, Boolean* resultP ) __OSX_AVAILABLE_STARTING( __MAC_10_8, __IPHONE_NA );
+	AECompareDesc( const AEDesc * desc1, const AEDesc* desc2, Boolean* resultP ) API_AVAILABLE( macos(10.8) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 /**************************************************************************
   The following calls apply to AEDescList. Since AEDescList is a subtype of
@@ -1159,7 +1159,7 @@ AECreateList(
   const void *  factoringPtr,
   Size          factoredSize,
   Boolean       isRecord,
-  AEDescList *  resultList)                                   __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
+  AEDescList *  resultList)                                   API_AVAILABLE( macos(10.0) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 /*
@@ -1189,7 +1189,7 @@ AECreateList(
 extern OSErr 
 AECountItems(
   const AEDescList *  theAEDescList,
-  long *              theCount)                               __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
+  long *              theCount)                               API_AVAILABLE( macos(10.0) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 /*
@@ -1237,7 +1237,7 @@ AEPutPtr(
   long          index,
   DescType      typeCode,
   const void *  dataPtr,
-  Size          dataSize)                                     __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
+  Size          dataSize)                                     API_AVAILABLE( macos(10.0) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 /*
@@ -1277,7 +1277,7 @@ extern OSErr
 AEPutDesc(
   AEDescList *    theAEDescList,
   long            index,
-  const AEDesc *  theAEDesc)                                  __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
+  const AEDesc *  theAEDesc)                                  API_AVAILABLE( macos(10.0) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 /*
@@ -1359,7 +1359,7 @@ AEGetNthPtr(
   DescType *          typeCode,            /* can be NULL */
   void *              dataPtr,
   Size                maximumSize,
-  Size *              actualSize)          /* can be NULL */  __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
+  Size *              actualSize)          /* can be NULL */  API_AVAILABLE( macos(10.0) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 /*
@@ -1422,7 +1422,7 @@ AEGetNthDesc(
   long                index,
   DescType            desiredType,
   AEKeyword *         theAEKeyword,        /* can be NULL */
-  AEDesc *            result)                                 __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
+  AEDesc *            result)                                 API_AVAILABLE( macos(10.0) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 /*
@@ -1466,7 +1466,7 @@ AESizeOfNthItem(
   const AEDescList *  theAEDescList,
   long                index,
   DescType *          typeCode,            /* can be NULL */
-  Size *              dataSize)            /* can be NULL */  __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
+  Size *              dataSize)            /* can be NULL */  API_AVAILABLE( macos(10.0) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 /*
@@ -1537,7 +1537,7 @@ AEGetArray(
   Size                 maximumSize,
   DescType *           itemType,
   Size *               itemSize,
-  long *               itemCount)                             __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
+  long *               itemCount)                             API_AVAILABLE( macos(10.0) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 /*
@@ -1599,7 +1599,7 @@ AEPutArray(
   const AEArrayData *  arrayPtr,
   DescType             itemType,
   Size                 itemSize,
-  long                 itemCount)                             __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
+  long                 itemCount)                             API_AVAILABLE( macos(10.0) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 /*
@@ -1633,7 +1633,7 @@ AEPutArray(
 extern OSErr 
 AEDeleteItem(
   AEDescList *  theAEDescList,
-  long          index)                                        __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
+  long          index)                                        API_AVAILABLE( macos(10.0) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 /**************************************************************************
@@ -1658,7 +1658,7 @@ AEDeleteItem(
  *    Non-Carbon CFM:   not available
  */
 extern Boolean 
-AECheckIsRecord(const AEDesc * theDesc)                       __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
+AECheckIsRecord(const AEDesc * theDesc)                       API_AVAILABLE( macos(10.0) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 /*
@@ -1764,7 +1764,7 @@ AECreateAppleEvent(
   const AEAddressDesc *  target,                /* can be NULL */
   AEReturnID             returnID,
   AETransactionID        transactionID,
-  AppleEvent *           result)                              __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
+  AppleEvent *           result)                              API_AVAILABLE( macos(10.0) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 /**************************************************************************
@@ -1815,7 +1815,7 @@ AEPutParamPtr(
   AEKeyword     theAEKeyword,
   DescType      typeCode,
   const void *  dataPtr,
-  Size          dataSize)                                     __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
+  Size          dataSize)                                     API_AVAILABLE( macos(10.0) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 /*
@@ -1851,7 +1851,7 @@ extern OSErr
 AEPutParamDesc(
   AppleEvent *    theAppleEvent,
   AEKeyword       theAEKeyword,
-  const AEDesc *  theAEDesc)                                  __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
+  const AEDesc *  theAEDesc)                                  API_AVAILABLE( macos(10.0) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 /*
@@ -1950,7 +1950,7 @@ AEGetParamPtr(
   DescType *          actualType,          /* can be NULL */
   void *              dataPtr,
   Size                maximumSize,
-  Size *              actualSize)          /* can be NULL */  __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
+  Size *              actualSize)          /* can be NULL */  API_AVAILABLE( macos(10.0) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 /*
@@ -2012,7 +2012,7 @@ AEGetParamDesc(
   const AppleEvent *  theAppleEvent,
   AEKeyword           theAEKeyword,
   DescType            desiredType,
-  AEDesc *            result)                                 __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
+  AEDesc *            result)                                 API_AVAILABLE( macos(10.0) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 /*
@@ -2052,7 +2052,7 @@ AESizeOfParam(
   const AppleEvent *  theAppleEvent,
   AEKeyword           theAEKeyword,
   DescType *          typeCode,            /* can be NULL */
-  Size *              dataSize)            /* can be NULL */  __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
+  Size *              dataSize)            /* can be NULL */  API_AVAILABLE( macos(10.0) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 /*
@@ -2082,7 +2082,7 @@ AESizeOfParam(
 extern OSErr 
 AEDeleteParam(
   AppleEvent *  theAppleEvent,
-  AEKeyword     theAEKeyword)                                 __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
+  AEKeyword     theAEKeyword)                                 API_AVAILABLE( macos(10.0) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 
@@ -2177,7 +2177,7 @@ AEGetAttributePtr(
   DescType *          typeCode,            /* can be NULL */
   void *              dataPtr,
   Size                maximumSize,
-  Size *              actualSize)          /* can be NULL */  __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
+  Size *              actualSize)          /* can be NULL */  API_AVAILABLE( macos(10.0) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 /*
@@ -2235,7 +2235,7 @@ AEGetAttributeDesc(
   const AppleEvent *  theAppleEvent,
   AEKeyword           theAEKeyword,
   DescType            desiredType,
-  AEDesc *            result)                                 __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
+  AEDesc *            result)                                 API_AVAILABLE( macos(10.0) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 /*
@@ -2274,7 +2274,7 @@ AESizeOfAttribute(
   const AppleEvent *  theAppleEvent,
   AEKeyword           theAEKeyword,
   DescType *          typeCode,            /* can be NULL */
-  Size *              dataSize)            /* can be NULL */  __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
+  Size *              dataSize)            /* can be NULL */  API_AVAILABLE( macos(10.0) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 
@@ -2319,7 +2319,7 @@ AEPutAttributePtr(
   AEKeyword     theAEKeyword,
   DescType      typeCode,
   const void *  dataPtr,
-  Size          dataSize)                                     __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
+  Size          dataSize)                                     API_AVAILABLE( macos(10.0) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 /*
@@ -2366,7 +2366,7 @@ extern OSErr
 AEPutAttributeDesc(
   AppleEvent *    theAppleEvent,
   AEKeyword       theAEKeyword,
-  const AEDesc *  theAEDesc)                                  __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
+  const AEDesc *  theAEDesc)                                  API_AVAILABLE( macos(10.0) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 
@@ -2403,7 +2403,7 @@ AEPutAttributeDesc(
  *    Non-Carbon CFM:   not available
  */
 extern Size 
-AESizeOfFlattenedDesc(const AEDesc * theAEDesc)               __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
+AESizeOfFlattenedDesc(const AEDesc * theAEDesc)               API_AVAILABLE( macos(10.0) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 /*
@@ -2454,7 +2454,7 @@ AEFlattenDesc(
   const AEDesc *  theAEDesc,
   Ptr             buffer,
   Size            bufferSize,
-  Size *          actualSize)                                 __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
+  Size *          actualSize)                                 API_AVAILABLE( macos(10.0) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 /*
@@ -2489,7 +2489,7 @@ AEFlattenDesc(
 extern OSStatus 
 AEUnflattenDesc(
   const void *  buffer,
-  AEDesc *      result)                                       __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
+  AEDesc *      result)                                       API_AVAILABLE( macos(10.0) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 /**************************************************************************
@@ -2535,7 +2535,7 @@ extern OSErr
 AEGetDescData(
   const AEDesc *  theAEDesc,
   void *          dataPtr,
-  Size            maximumSize)                                __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
+  Size            maximumSize)                                API_AVAILABLE( macos(10.0) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 /*
@@ -2559,7 +2559,7 @@ AEGetDescData(
  *    Non-Carbon CFM:   in CarbonAccessors.o 1.0 and later
  */
 extern Size 
-AEGetDescDataSize(const AEDesc * theAEDesc)                   __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
+AEGetDescDataSize(const AEDesc * theAEDesc)                   API_AVAILABLE( macos(10.0) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 /*
@@ -2597,7 +2597,7 @@ AEReplaceDescData(
   DescType      typeCode,
   const void *  dataPtr,
   Size          dataSize,
-  AEDesc *      theAEDesc)                                    __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
+  AEDesc *      theAEDesc)                                    API_AVAILABLE( macos(10.0) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 /*
@@ -2642,7 +2642,7 @@ AEGetDescDataRange(
   const AEDesc *  dataDesc,
   void *          buffer,
   Size            offset,
-  Size            length)                                     __OSX_AVAILABLE_STARTING( __MAC_10_2, __IPHONE_NA );
+  Size            length)                                     API_AVAILABLE( macos(10.2) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 /**************************************************************************
@@ -2659,7 +2659,7 @@ typedef STACK_UPP_TYPE(AEEventHandlerProcPtr)                   AEEventHandlerUP
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern AEDisposeExternalUPP
-NewAEDisposeExternalUPP(AEDisposeExternalProcPtr userRoutine) __OSX_AVAILABLE_STARTING( __MAC_10_2, __IPHONE_NA );
+NewAEDisposeExternalUPP(AEDisposeExternalProcPtr userRoutine) API_AVAILABLE( macos(10.2) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 /*
  *  NewAEEventHandlerUPP()
@@ -2670,7 +2670,7 @@ NewAEDisposeExternalUPP(AEDisposeExternalProcPtr userRoutine) __OSX_AVAILABLE_ST
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern AEEventHandlerUPP
-NewAEEventHandlerUPP(AEEventHandlerProcPtr userRoutine)       __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
+NewAEEventHandlerUPP(AEEventHandlerProcPtr userRoutine)       API_AVAILABLE( macos(10.0) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 /*
  *  DisposeAEDisposeExternalUPP()
@@ -2681,7 +2681,7 @@ NewAEEventHandlerUPP(AEEventHandlerProcPtr userRoutine)       __OSX_AVAILABLE_ST
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeAEDisposeExternalUPP(AEDisposeExternalUPP userUPP)     __OSX_AVAILABLE_STARTING( __MAC_10_2, __IPHONE_NA );
+DisposeAEDisposeExternalUPP(AEDisposeExternalUPP userUPP)     API_AVAILABLE( macos(10.2) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 /*
  *  DisposeAEEventHandlerUPP()
@@ -2692,7 +2692,7 @@ DisposeAEDisposeExternalUPP(AEDisposeExternalUPP userUPP)     __OSX_AVAILABLE_ST
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeAEEventHandlerUPP(AEEventHandlerUPP userUPP)           __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
+DisposeAEEventHandlerUPP(AEEventHandlerUPP userUPP)           API_AVAILABLE( macos(10.0) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 /*
  *  InvokeAEDisposeExternalUPP()
@@ -2707,7 +2707,7 @@ InvokeAEDisposeExternalUPP(
   const void *          dataPtr,
   Size                  dataLength,
   SRefCon               refcon,
-  AEDisposeExternalUPP  userUPP)                              __OSX_AVAILABLE_STARTING( __MAC_10_2, __IPHONE_NA );
+  AEDisposeExternalUPP  userUPP)                              API_AVAILABLE( macos(10.2) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 /*
  *  InvokeAEEventHandlerUPP()
@@ -2722,7 +2722,7 @@ InvokeAEEventHandlerUPP(
   const AppleEvent *  theAppleEvent,
   AppleEvent *        reply,
   SRefCon             handlerRefcon,
-						AEEventHandlerUPP   userUPP)                                __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
+						AEEventHandlerUPP   userUPP)                                API_AVAILABLE( macos(10.0) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 #if __MACH__
   #ifdef __cplusplus

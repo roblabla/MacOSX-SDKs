@@ -1,7 +1,7 @@
 /*
 	NSControl.h
 	Application Kit
-	Copyright (c) 1994-2018, Apple Inc.
+	Copyright (c) 1994-2019, Apple Inc.
 	All rights reserved.
 */
 
@@ -11,28 +11,14 @@
 #import <AppKit/NSCell.h>
 
 NS_ASSUME_NONNULL_BEGIN
+API_UNAVAILABLE_BEGIN(ios)
 
-@class NSCell, NSFont, NSTextView, NSNotification, NSAttributedString, NSFormatter, NSControlAuxiliary;
+@class NSCell, NSFont, NSTextView, NSNotification, NSAttributedString, NSFormatter;
 
 @interface NSControl : NSView
-{
-    /*All instance variables are private*/
-    NSControlAuxiliary *_aux APPKIT_IVAR;
-    id		_cell APPKIT_IVAR;
-    struct __conFlags {
-        unsigned int enabled:1;
-        unsigned int ignoreMultiClick:1;
-        unsigned int calcSize:1;
-        unsigned int drawingAncestor:1;
-        unsigned int ibReserved:1;
-        unsigned int updateCellFocus:1;
-        unsigned int allowsLogicalLayoutDirection:1;
-        unsigned int asmlwidth:1;
-        unsigned int hsmlwidth:1;
-        unsigned int dontValidate:1;
-        unsigned int reserved:22;
-    } _conFlags APPKIT_IVAR;
-}
+
+- (instancetype)initWithFrame:(NSRect)frameRect NS_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithCoder:(NSCoder *)coder NS_DESIGNATED_INITIALIZER;
 
 @property (nullable, weak) id target; // Target is weak for zeroing-weak compatible objects in apps linked on 10.10 or later. Otherwise the behavior of this property is 'assign’.
 @property (nullable) SEL action;
@@ -41,29 +27,22 @@ NS_ASSUME_NONNULL_BEGIN
 @property (getter=isContinuous) BOOL continuous;
 @property (getter=isEnabled) BOOL enabled;
 @property BOOL refusesFirstResponder;
-@property (getter=isHighlighted) BOOL highlighted NS_AVAILABLE_MAC(10_10);
-@property NSControlSize controlSize NS_AVAILABLE_MAC(10_10);
+@property (getter=isHighlighted) BOOL highlighted API_AVAILABLE(macos(10.10));
+@property NSControlSize controlSize API_AVAILABLE(macos(10.10));
 @property (nullable, strong) __kindof NSFormatter *formatter;
 
+@property (nullable, copy) id  /* id<NSCopying> */ objectValue;
 @property (copy) NSString *stringValue;
 @property (copy) NSAttributedString *attributedStringValue;
-@property (nullable, copy) id  /* id<NSCopying> */ objectValue;
 @property int intValue;
 @property NSInteger integerValue;
 @property float floatValue;
 @property double doubleValue;
 
-
-- (NSSize)sizeThatFits:(NSSize)size NS_AVAILABLE_MAC(10_10);
-- (instancetype)initWithFrame:(NSRect)frameRect NS_DESIGNATED_INITIALIZER;
-- (nullable instancetype)initWithCoder:(NSCoder *)coder NS_DESIGNATED_INITIALIZER;
+- (NSSize)sizeThatFits:(NSSize)size API_AVAILABLE(macos(10.10));
 - (void)sizeToFit;
 
-#if __LP64__
 - (NSInteger)sendActionOn:(NSEventMask)mask;
-#else
-- (NSInteger)sendActionOn:(NSInteger)mask;
-#endif
 
 - (BOOL)sendAction:(nullable SEL)action to:(nullable id)target;
 - (void)takeIntValueFrom:(nullable id)sender;
@@ -71,40 +50,38 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)takeDoubleValueFrom:(nullable id)sender;
 - (void)takeStringValueFrom:(nullable id)sender;
 - (void)takeObjectValueFrom:(nullable id)sender;
-- (void)takeIntegerValueFrom:(nullable id)sender NS_AVAILABLE_MAC(10_5);
+- (void)takeIntegerValueFrom:(nullable id)sender API_AVAILABLE(macos(10.5));
 
 - (void)mouseDown:(NSEvent *)event;
-
-@end
-
-@interface NSControl(NSKeyboardUI)
 - (void)performClick:(nullable id)sender;
-@end
 
+@end
 
 /* The following category applies only to controls with apparent textual content of some sort (buttons with labels, textfields, etc.).
  */
 @interface NSControl(NSControlTextMethods)
 
-@property NSTextAlignment alignment;
 @property (nullable, copy) NSFont *font;
-@property NSLineBreakMode lineBreakMode NS_AVAILABLE_MAC(10_10);
-@property BOOL usesSingleLineMode NS_AVAILABLE_MAC(10_10);
+@property BOOL usesSingleLineMode API_AVAILABLE(macos(10.10));
 
+#if !TARGET_OS_IPHONE
+@property NSLineBreakMode lineBreakMode API_AVAILABLE(macos(10.10));
+@property NSTextAlignment alignment;
 @property NSWritingDirection baseWritingDirection;
+#endif
 
 /* Gets and sets the ability for expansion tool tips to be shown or not. Expansion tooltips are automatically shown when the cell can not show the full content. This is controlled by the NSCell API expansionFrameWithFrame:inView: and is drawn by drawWithExpansionFrame:inView:. The default value is NO.
     This value is encoded along with the control. In general, it is recommended to turn this on for NSTextFields in a View Based NSTableView.
  */
-@property BOOL allowsExpansionToolTips NS_AVAILABLE_MAC(10_8);
+@property BOOL allowsExpansionToolTips API_AVAILABLE(macos(10.8));
 
 /*  Allows the control to return an expansion tool tip frame if contentFrame is too small for the entire contents in the view. When the mouse is hovered over the text in certain controls, the full contents will be shown in a special floating tool tip view. If the frame is not too small, return an empty rect, and no expansion tool tip view will be shown. By default, NSControl returns NSZeroRect, while some subclasses (such as NSTextField) will return the proper frame when required.
  */
-- (NSRect)expansionFrameWithFrame:(NSRect)contentFrame NS_AVAILABLE_MAC(10_10);
+- (NSRect)expansionFrameWithFrame:(NSRect)contentFrame API_AVAILABLE(macos(10.10));
 
 /* Allows the control to perform custom expansion tool tip drawing. Note that the view may be different from the original view that the text appeared in.
  */
-- (void)drawWithExpansionFrame:(NSRect)contentFrame inView:(NSView *)view NS_AVAILABLE_MAC(10_10);
+- (void)drawWithExpansionFrame:(NSRect)contentFrame inView:(NSView *)view API_AVAILABLE(macos(10.10));
 
 @end
 
@@ -116,19 +93,10 @@ NS_ASSUME_NONNULL_BEGIN
 - (BOOL)abortEditing;
 - (void)validateEditing;
 
-- (void)editWithFrame:(NSRect)rect editor:(NSText *)textObj delegate:(nullable id)delegate event:(NSEvent *)event NS_AVAILABLE_MAC(10_10);
-- (void)selectWithFrame:(NSRect)rect editor:(NSText *)textObj delegate:(nullable id)delegate start:(NSInteger)selStart length:(NSInteger)selLength NS_AVAILABLE_MAC(10_10);
-- (void)endEditing:(NSText *)textObj NS_AVAILABLE_MAC(10_10);
+- (void)editWithFrame:(NSRect)rect editor:(NSText *)textObj delegate:(nullable id)delegate event:(NSEvent *)event API_AVAILABLE(macos(10.10));
+- (void)selectWithFrame:(NSRect)rect editor:(NSText *)textObj delegate:(nullable id)delegate start:(NSInteger)selStart length:(NSInteger)selLength API_AVAILABLE(macos(10.10));
+- (void)endEditing:(NSText *)textObj API_AVAILABLE(macos(10.10));
 @end
-
-
-#if __swift__ < 40200
-@interface NSObject(NSControlSubclassNotifications)
-- (void)controlTextDidBeginEditing:(NSNotification *)obj NS_DEPRECATED_MAC(10_0, API_TO_BE_DEPRECATED, "This is now an optional method of the NSControlTextEditingDelegate protocol.");
-- (void)controlTextDidEndEditing:(NSNotification *)obj NS_DEPRECATED_MAC(10_0, API_TO_BE_DEPRECATED, "This is now an optional method of the NSControlTextEditingDelegate protocol.");
-- (void)controlTextDidChange:(NSNotification *)obj NS_DEPRECATED_MAC(10_0, API_TO_BE_DEPRECATED, "This is now an optional method of the NSControlTextEditingDelegate protocol.");
-@end
-#endif
 
 @protocol NSControlTextEditingDelegate <NSObject>
 @optional
@@ -157,7 +125,7 @@ APPKIT_EXTERN NSNotificationName NSControlTextDidChangeNotification;		//	@"NSFie
 @interface NSControl (NSDeprecated)
 
 // Use formatters instead.  See -[NSControl formatter] and -[NSControl setFormatter:].
-- (void)setFloatingPointFormat:(BOOL)autoRange left:(NSUInteger)leftDigits right:(NSUInteger)rightDigits NS_DEPRECATED_MAC(10_0, 10_0);
+- (void)setFloatingPointFormat:(BOOL)autoRange left:(NSUInteger)leftDigits right:(NSUInteger)rightDigits API_DEPRECATED("", macos(10.0,10.0));
 
 @property (class, nullable) Class cellClass;
 
@@ -166,8 +134,8 @@ APPKIT_EXTERN NSNotificationName NSControlTextDidChangeNotification;		//	@"NSFie
 - (nullable __kindof NSCell *)selectedCell;
 - (NSInteger)selectedTag;
 
-- (void)setNeedsDisplay NS_DEPRECATED_MAC(10_0, 10_14, "Use setNeedsDisplay:YES instead");
-- (void)calcSize NS_DEPRECATED_MAC(10_0, 10_14, "Override -layout instead. This method should never be called");
+- (void)setNeedsDisplay API_DEPRECATED("Use setNeedsDisplay:YES instead", macos(10.0,10.14));
+- (void)calcSize API_DEPRECATED("Override -layout instead. This method should never be called", macos(10.0,10.14));
 
 - (void)updateCell:(NSCell *)cell;
 - (void)updateCellInside:(NSCell *)cell;
@@ -177,5 +145,13 @@ APPKIT_EXTERN NSNotificationName NSControlTextDidChangeNotification;		//	@"NSFie
 
 @end
 
-NS_ASSUME_NONNULL_END
+#if __swift__ < 40200
+@interface NSObject(NSControlSubclassNotifications)
+- (void)controlTextDidBeginEditing:(NSNotification *)obj API_DEPRECATED("This is now an optional method of the NSControlTextEditingDelegate protocol.", macos(10.0,API_TO_BE_DEPRECATED));
+- (void)controlTextDidEndEditing:(NSNotification *)obj API_DEPRECATED("This is now an optional method of the NSControlTextEditingDelegate protocol.", macos(10.0,API_TO_BE_DEPRECATED));
+- (void)controlTextDidChange:(NSNotification *)obj API_DEPRECATED("This is now an optional method of the NSControlTextEditingDelegate protocol.", macos(10.0,API_TO_BE_DEPRECATED));
+@end
+#endif
 
+API_UNAVAILABLE_END
+NS_ASSUME_NONNULL_END

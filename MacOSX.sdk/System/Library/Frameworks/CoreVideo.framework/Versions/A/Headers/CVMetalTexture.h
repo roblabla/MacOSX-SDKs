@@ -70,16 +70,22 @@ CV_EXPORT Boolean CVMetalTextureIsFlipped( CVMetalTextureRef CV_NONNULL image ) 
     @param      upperLeft  - array of two floats where the s and t normalized texture coordinates of the upper right corner of the image will be stored
 */
 CV_EXPORT void CVMetalTextureGetCleanTexCoords( CVMetalTextureRef CV_NONNULL image,
-                                                   float lowerLeft[2],
-                                                   float lowerRight[2],
-                                                   float upperRight[2],
-                                                   float upperLeft[2] ) API_AVAILABLE(macosx(10.11), ios(8.0), tvos(9.0)) __WATCHOS_PROHIBITED;
+                                                   float lowerLeft[CV_NONNULL 2],
+                                                   float lowerRight[CV_NONNULL 2],
+                                                   float upperRight[CV_NONNULL 2],
+                                                   float upperLeft[CV_NONNULL 2] ) API_AVAILABLE(macosx(10.11), ios(8.0), tvos(9.0)) __WATCHOS_PROHIBITED;
 #endif // defined(__OBJC__)
 	
 /*!
     @discussion kCVMetalTextureUsage is a property that can be placed on a CVMetalTextureCache to instruct the MTLTextureUsage of the created MTLTexture. Values for this can can be read from MTLTexture.h
  */
 CV_EXPORT const CFStringRef CV_NONNULL kCVMetalTextureUsage API_AVAILABLE(macosx(10.13), ios(11.0), tvos(11.0)) __WATCHOS_PROHIBITED;
+	
+	
+/*!
+ @discussion kCVMetalTextureStorageMode is a property that can be placed on a CVMetalTextureCache to instruct the MTLTextureStorageMode of the created MTLTexture. Values for this can can be read from MTLTexture.h
+ */
+CV_EXPORT const CFStringRef CV_NONNULL kCVMetalTextureStorageMode API_AVAILABLE(macosx(10.15), ios(13.0), tvos(13.0)) __WATCHOS_PROHIBITED;
 
 #endif // COREVIDEO_SUPPORTS_METAL
 	

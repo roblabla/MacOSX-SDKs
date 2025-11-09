@@ -1,6 +1,6 @@
 /*
 	NSKeyValueObserving.h
-	Copyright (c) 2003-2018, Apple Inc.
+	Copyright (c) 2003-2019, Apple Inc.
 	All rights reserved.
 */
 
@@ -187,7 +187,7 @@ You can't really override this method when you add a computed property to an exi
 
 @end
 
-#if (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE))
+#if TARGET_OS_OSX
 
 @interface NSObject(NSDeprecatedKeyValueObservingCustomization)
 

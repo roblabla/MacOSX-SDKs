@@ -26,7 +26,7 @@ NS_ASSUME_NONNULL_BEGIN
  *    Detected visits are sent to the delegate's -locationManager:didVisit:
  *    method.
  */
-- (void)startMonitoringVisits NS_AVAILABLE(NA, 8_0) API_UNAVAILABLE(watchos, tvos);
+- (void)startMonitoringVisits API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(watchos, tvos, macos);
 
 /*
  *  stopMonitoringVisits
@@ -38,7 +38,7 @@ NS_ASSUME_NONNULL_BEGIN
  *    Note that stopping and starting are asynchronous operations and may not
  *    immediately reflect in delegate callback patterns.
  */
-- (void)stopMonitoringVisits NS_AVAILABLE(NA, 8_0) API_UNAVAILABLE(watchos, tvos);
+- (void)stopMonitoringVisits API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(watchos, tvos, macos);
 
 @end
 

@@ -24,6 +24,12 @@
 
 #include <xpc/base.h>
 
+#if __has_include(<xpc/xpc_transaction_deprecate.h>)
+#include <xpc/xpc_transaction_deprecate.h>
+#else // __has_include(<xpc/transaction_deprecate.h>)
+#define XPC_TRANSACTION_DEPRECATED
+#endif // __has_include(<xpc/transaction_deprecate.h>)
+
 XPC_ASSUME_NONNULL_BEGIN
 __BEGIN_DECLS
 
@@ -38,9 +44,9 @@ __BEGIN_DECLS
  * A type that describes XPC object types.
  */
 typedef const struct _xpc_type_s * xpc_type_t;
-#ifndef __XPC_BUILDING_XPC__
+#ifndef XPC_TYPE
 #define XPC_TYPE(type) const struct _xpc_type_s type
-#endif // __XPC_BUILDING_XPC__
+#endif // XPC_TYPE
 
 /*!
  * @typedef xpc_object_t
@@ -61,9 +67,9 @@ typedef const struct _xpc_type_s * xpc_type_t;
  * See <os/object.h> for details.
  */
 OS_OBJECT_DECL(xpc_object);
-#ifndef __XPC_PROJECT_BUILD__
+#ifndef XPC_DECL
 #define XPC_DECL(name) typedef xpc_object_t name##_t
-#endif // __XPC_PROJECT_BUILD__
+#endif // XPC_DECL
 
 #define XPC_GLOBAL_OBJECT(object) ((OS_OBJECT_BRIDGE xpc_object_t)&(object))
 #define XPC_RETURNS_RETAINED OS_OBJECT_RETURNS_RETAINED
@@ -321,7 +327,7 @@ XPC_EXPORT
 const char * const _xpc_event_key_name;
 
 XPC_ASSUME_NONNULL_END
-#ifndef __XPC_BUILDING_XPC__
+#if !defined(__XPC_BUILDING_XPC__) || !__XPC_BUILDING_XPC__
 #include <xpc/endpoint.h>
 #include <xpc/debug.h>
 #if __BLOCKS__
@@ -330,7 +336,7 @@ XPC_ASSUME_NONNULL_END
 #endif // __BLOCKS__
 #undef __XPC_INDIRECT__
 #include <launch.h>
-#endif // __XPC_BUILDING_XPC__
+#endif // !defined(__XPC_BUILDING_XPC__) || !__XPC_BUILDING_XPC__
 XPC_ASSUME_NONNULL_BEGIN
 
 #pragma mark XPC Object Protocol
@@ -402,6 +408,24 @@ __OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_5_0)
 XPC_EXPORT XPC_NONNULL_ALL XPC_WARN_RESULT
 xpc_type_t
 xpc_get_type(xpc_object_t object);
+
+/*!
+ * @function xpc_type_get_name
+ *
+ * @abstract
+ * Returns a string describing an XPC object type.
+ *
+ * @param type
+ * The type to describe.
+ *
+ * @result
+ * A string describing the type of an object, like "string" or "int64".
+ * This string should not be freed or modified.
+ */
+__OSX_AVAILABLE_STARTING(__MAC_10_15, __IPHONE_13_0)
+XPC_EXPORT XPC_NONNULL1
+const char *
+xpc_type_get_name(xpc_type_t type);
 
 /*!
  * @function xpc_copy
@@ -2547,16 +2571,6 @@ XPC_EXPORT XPC_NORETURN XPC_NONNULL1
 void
 xpc_main(xpc_connection_handler_t handler);
 
-#if XPC_HOSTING_OLD_MAIN
-typedef void (*xpc_service_event_handler_t)(xpc_connection_t, xpc_object_t);
-
-__OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_7, __MAC_10_7, __IPHONE_5_0, __IPHONE_5_0)
-XPC_EXPORT XPC_NORETURN XPC_NONNULL3
-void
-xpc_service_main(int argc, const char *argv[],
-	xpc_service_event_handler_t handler);
-#endif // XPC_HOSTING_OLD_MAIN
-
 #pragma mark Transactions
 /*!
  * @function xpc_transaction_begin
@@ -2589,6 +2603,7 @@ xpc_service_main(int argc, const char *argv[],
  * connection.
  */
 __OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_5_0)
+XPC_TRANSACTION_DEPRECATED
 XPC_EXPORT
 void
 xpc_transaction_begin(void);
@@ -2605,6 +2620,7 @@ xpc_transaction_begin(void);
  * the XPC runtime's idle-exit policy.
  */
 __OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_5_0)
+XPC_TRANSACTION_DEPRECATED
 XPC_EXPORT
 void
 xpc_transaction_end(void);

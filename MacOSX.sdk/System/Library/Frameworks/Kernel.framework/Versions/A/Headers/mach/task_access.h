@@ -110,7 +110,7 @@ __END_DECLS
 #define __Request__task_access_subsystem__defined
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -120,11 +120,11 @@ __END_DECLS
 		int32_t target_pid;
 	} __Request__check_task_access_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -132,7 +132,7 @@ __END_DECLS
 		int32_t new_pid;
 	} __Request__find_code_signature_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 #endif /* !__Request__task_access_subsystem__defined */
 
@@ -151,7 +151,7 @@ union __RequestUnion__task_access_subsystem {
 #define __Reply__task_access_subsystem__defined
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -159,11 +159,11 @@ union __RequestUnion__task_access_subsystem {
 		kern_return_t RetCode;
 	} __Reply__check_task_access_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -171,7 +171,7 @@ union __RequestUnion__task_access_subsystem {
 		kern_return_t RetCode;
 	} __Reply__find_code_signature_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 #endif /* !__Reply__task_access_subsystem__defined */
 

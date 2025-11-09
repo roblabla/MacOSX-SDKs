@@ -1,11 +1,11 @@
 /*
     CFURLEnumerator.h
-    Copyright (c) 2008-2018, Apple Inc. All rights reserved.
+    Copyright (c) 2008-2019, Apple Inc. All rights reserved.
  */
 
 #include <CoreFoundation/CFBase.h>
 
-#if (TARGET_OS_MAC || TARGET_OS_EMBEDDED || TARGET_OS_IPHONE) || CF_BUILDING_CF || NSBUILDINGFOUNDATION
+#if TARGET_OS_MAC || CF_BUILDING_CF || NSBUILDINGFOUNDATION
 
 #if !defined(__COREFOUNDATION_CFURLENUMERATOR__)
 #define __COREFOUNDATION_CFURLENUMERATOR__ 1
@@ -35,6 +35,7 @@ typedef CF_OPTIONS(CFOptionFlags, CFURLEnumeratorOptions) {
     kCFURLEnumeratorIncludeDirectoriesPreOrder      = 1UL << 4, /* With this option set, a recursive directory enumerator will return directory URLs when CFURLEnumeratorGetNextURL() returns kCFURLEnumeratorSuccess before any of the directory's descendants are visited (pre-order). */
     kCFURLEnumeratorIncludeDirectoriesPostOrder     = 1UL << 5, /* With this option set, a recursive directory enumerator will return directory URLs when CFURLEnumeratorGetNextURL() returns kCFURLEnumeratorDirectoryPostOrderSuccess after all of directory's descendants have been visited (post-order). */
     /* Note: if both kCFURLEnumeratorIncludeDirectoriesPreOrder and kCFURLEnumeratorIncludeDirectoriesPostOrder are used, directories will be seen twice (even empty directories and directories whose descendants are skipped) -- once when kCFURLEnumeratorSuccess is returned and once when kCFURLEnumeratorDirectoryPostOrderSuccess is returned. */
+    kCFURLEnumeratorGenerateRelativePathURLs API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0)) = 1UL << 6, /* The directory enumerator always generates file path URLs relative to the directory URL. This can reduce the size of each URL object returned during enumeration. */
 };
 
 /* CFURLEnumeratorCreateForDirectoryURL - Creates a directory enumerator, flat or recursive. Client specifies the directory URL to enumerate, a bit array of options, and an optional array of property keys to pre-fetch for the found URLs. Specifying pre-fetch properties allows the implementation to optimize device access by using bulk operations when available. Pre-fetching more properties than are actually needed may degrade performance.

@@ -2,7 +2,7 @@
 //  SceneKit.h
 //  SceneKit
 //
-//  Copyright © 2012-2018 Apple Inc. All rights reserved.
+//  Copyright © 2012-2019 Apple Inc. All rights reserved.
 //
 
 /*! @framework SceneKit
@@ -54,3 +54,6 @@
 
 //scripting
 #import <SceneKit/SCNJavascript.h>
+
+//deprecated
+#import <SceneKit/SceneKitDeprecated.h>

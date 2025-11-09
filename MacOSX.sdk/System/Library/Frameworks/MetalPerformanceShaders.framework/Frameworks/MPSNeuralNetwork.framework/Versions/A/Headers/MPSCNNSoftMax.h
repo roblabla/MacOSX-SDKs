@@ -30,7 +30,7 @@ extern "C" {
  *                      where N is the number of feature channels
  *
  */
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(10.0), tvos(10.0))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(10.0), macCatalyst(13.0), tvos(10.0))
 @interface MPSCNNSoftMax : MPSCNNKernel
 
 @end    /* MPSCNNSoftMax */
@@ -52,7 +52,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(10.0), tvos(10.0))
  *              The original output of corresponding softMax is the secondary source.
  *
  */
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), tvos(11.3))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3))
 @interface MPSCNNSoftMaxGradient : MPSCNNGradientKernel
 
 /*!
@@ -92,7 +92,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), tvos(11.3))
  *                      where N is the number of feature channels and y = ln{x} satisfies e^y = x.
  *
  */
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(10.0), tvos(10.0))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(10.0), macCatalyst(13.0), tvos(10.0))
 @interface MPSCNNLogSoftMax : MPSCNNKernel
 
 @end    /* MPSCNNLogSoftMax */
@@ -114,7 +114,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(10.0), tvos(10.0))
  *              The original output of corresponding logSoftMax is the secondary source.
  *
  */
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), tvos(11.3))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3))
 @interface MPSCNNLogSoftMaxGradient : MPSCNNGradientKernel
 
 /*!

@@ -1,15 +1,17 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: DAE4D76A-6454-3104-9E16-43450A1937FE' ]
+uuids:           [ 'x86_64: 8097BDFE-C27E-3B6C-A130-9DE4FD907250' ]
 platform:        macosx
-install-name:    /System/Library/PrivateFrameworks/MailUI.framework/Versions/A/MailUI
-current-version: 3445.100.43
+install-name:    '/System/Library/PrivateFrameworks/MailUI.framework/Versions/A/MailUI'
+current-version: 3578.1
 exports:         
   - archs:           [ x86_64 ]
-    allowable-clients: [ Mail, MailShareExtension, MailUIWebBundle ]
+    allowable-clients: [ Mail, MailQuickLookExtension, MailShareExtension, MailUIWebBundle ]
     symbols:         [ _DefaultsKeyViewMessagesWithDarkBackgrounds, _MUIAddressPasteboardType, 
                        _MUIAddressesBinding, _MUIAttachmentInfoKeyContentID, _MUIAttachmentInfoKeyFrame, 
                        _MUIAttachmentInfoKeySnapshot, _MUIBundleResourceProtocolScheme, 
+                       _MUIComposeGroupIdentifier, _MUIContextMenuAttachmentIdentifierKey, 
+                       _MUIContextMenuSelectedAttachmentIdentifiersKey, _MUIContextMenuSelectionIsWebAddressKey, 
                        _MUIDefaultsKeyEnableAutomaticListInsertion, _MUIDismissAutocompletionNotification, 
                        _MUIDocumentLoadContextKeyAttachmentRegistrationScript, _MUIDocumentLoadContextKeyBaseURLHost, 
                        _MUIDocumentLoadContextKeyDataDetectorsContext, _MUIDocumentLoadContextKeyJSDocumentContext, 
@@ -18,11 +20,11 @@ exports:
                        _MUISegmentedControlForDescriptors, _MUISelectionContextDictionaryKeyAbsoluteImageURL, 
                        _MUISelectionContextDictionaryKeyAbsoluteLinkURL, _MUISelectionContextDictionaryKeyAbsoluteMediaURL, 
                        _MUISelectionContextDictionaryKeyClickedAttachmentInfo, _MUISelectionContextDictionaryKeySelectedAttachmentInfos, 
-                       _MUIStringKeyAddLink, _MUIStringKeyEditLink, _MUIStringKeyOpenMultipleAttachmentTitle, 
-                       _MUIStringKeyOpenOneAttachmentTitle, _MUIStringKeyQuickLookMenuitem, 
-                       _MUIStringKeyQuickLookMultipleAttachmentsTitle, _MUIStringKeyQuickLookOneAttachmentTitle, 
-                       _MUIStringKeyRemoveLink, _MUIStringKeySaveButton, _MUIStringKeySaveMultipleAttachmentsTitle, 
-                       _MUIStringKeySaveOneAttachmentTitle, _MUIStringKeyShare, _MUIStringKeyViewAttachmentAsIconTitle, 
+                       _MUIStringKeyOpenMultipleAttachmentTitle, _MUIStringKeyOpenOneAttachmentTitle, 
+                       _MUIStringKeyQuickLookMenuitem, _MUIStringKeyQuickLookMultipleAttachmentsTitle, 
+                       _MUIStringKeyQuickLookOneAttachmentTitle, _MUIStringKeySaveButton, 
+                       _MUIStringKeySaveMultipleAttachmentsTitle, _MUIStringKeySaveOneAttachmentTitle, 
+                       _MUIStringKeyShare, _MUIStringKeyViewAttachmentAsIconTitle, 
                        _MUIStringKeyViewAttachmentInPlaceTitle, _MUISuggestionsPboardType, 
                        _MUITokenAddressFieldGainedFocusNotification, _MUITokenAddressFieldLostFocusNotification, 
                        _MUITokenAddressFieldMouseActionNotification, _MUIToolbarSegmentKeyAlternateImage, 
@@ -30,31 +32,27 @@ exports:
                        _MUIToolbarSegmentKeyTag, _MUIToolbarSegmentKeyToolTip, _MUIToolbarSegmentKeyWidth, 
                        _MUIToolbarSegmentedItemGroupKeyIdentifier, _MUIToolbarSegmentedItemGroupKeyItems, 
                        _MUIToolbarSegmentedItemKeyIdentifier, _MUIToolbarSegmentedItemKeyLabels, 
-                       _MUIToolbarSegmentedItemKeySegments, _MUIWKWebViewDraggingEntered, 
-                       _MUIWebDocumentBinding, _MUIWebDocumentContextKeyLocalizedStrings, 
-                       _MUIWebDocumentContextKeySelectedTextBackgroundColor, _MUIWebDocumentDidChangeContentNotification, 
+                       _MUIToolbarSegmentedItemKeySegments, _MUIUserFontChangedNotification, 
+                       _MUIWebDocumentContextKeyLocalizedStrings, _MUIWebDocumentContextKeySelectedTextBackgroundColor, 
                        _MUIWebDocumentDidChangeSelectionNotification, _MUIWebDocumentPartialPasteboardType, 
                        _MUIWebDocumentPasteboardType, _MUIXWebDocURLProtocolScheme, 
-                       _MailUIVersionNumber, _MailUIVersionString, _mUIDocumentContentStateSource, 
-                       _mUIDocumentContentStateSourceLength, _mUIDottedBlockquoteAbbreviatorSource, 
-                       _mUIDottedBlockquoteAbbreviatorSourceLength, _mUIHashtableSource, 
-                       _mUIHashtableSourceLength, _mUIMIMEDocumentGeneratorSource, 
-                       _mUIMIMEDocumentGeneratorSourceLength, _mUIRedundantContentAbbreviatorSource, 
-                       _mUIRedundantContentAbbreviatorSourceLength, _mUIRedundantContentClusterSource, 
-                       _mUIRedundantContentClusterSourceLength, _mUIRedundantTextUtilitiesSource, 
-                       _mUIRedundantTextUtilitiesSourceLength, _mUISimpleLinkAbbreviatorSource, 
-                       _mUISimpleLinkAbbreviatorSourceLength, _mUISimpleLinkWithDottedBlockquoteBarAbbreviatorSource, 
-                       _mUISimpleLinkWithDottedBlockquoteBarAbbreviatorSourceLength, 
-                       _mUISmartListsControllerSource, _mUISmartListsControllerSourceLength, 
-                       _mUITrailingBlankLineRemoverSource, _mUITrailingBlankLineRemoverSourceLength, 
-                       _mUIWebAttachmentControllerSource, _mUIWebAttachmentControllerSourceLength, 
-                       _mUIWebDocumentDisplayControllerDelegateSource, _mUIWebDocumentDisplayControllerDelegateSourceLength, 
-                       _mUIWebDocumentDisplayControllerSource, _mUIWebDocumentDisplayControllerSourceLength ]
+                       _MessageViewAppearanceChangedNotification, _kMUIDocumentContentStateSource, 
+                       _kMUIDocumentContentStateSourceLength, _kMUIDottedBlockquoteAbbreviatorSource, 
+                       _kMUIDottedBlockquoteAbbreviatorSourceLength, _kMUIRedundantContentAbbreviatorSource, 
+                       _kMUIRedundantContentAbbreviatorSourceLength, _kMUIRedundantContentClusterSource, 
+                       _kMUIRedundantContentClusterSourceLength, _kMUIRedundantTextUtilitiesSource, 
+                       _kMUIRedundantTextUtilitiesSourceLength, _kMUISimpleLinkAbbreviatorSource, 
+                       _kMUISimpleLinkAbbreviatorSourceLength, _kMUISimpleLinkWithDottedBlockquoteBarAbbreviatorSource, 
+                       _kMUISimpleLinkWithDottedBlockquoteBarAbbreviatorSourceLength, 
+                       _kMUITrailingBlankLineRemoverSource, _kMUITrailingBlankLineRemoverSourceLength, 
+                       _kMUIWebAttachmentControllerSource, _kMUIWebAttachmentControllerSourceLength, 
+                       _kMUIWebDocumentDisplayControllerDelegateSource, _kMUIWebDocumentDisplayControllerDelegateSourceLength, 
+                       _kMUIWebDocumentDisplayControllerSource, _kMUIWebDocumentDisplayControllerSourceLength ]
     objc-classes:    [ MUIAddressField, MUIAddressFieldScrollDocumentView, MUIAddressTokenAttachmentCell, 
-                       MUIAutomaticallyAdjustingScrollView, MUIBundleResourceURLProtocol, 
-                       MUICollectionCellView, MUICollectionHeightStorage, MUICollectionView, 
-                       MUIFramework, MUILinkEditWindowController, MUIMIMEDocumentGenerator, 
-                       MUIRemoteImageCollector, MUISegmentedToolbarItem, MUISelectionAndClickInformation, 
+                       MUIAttachmentInfo, MUIBundleResourceURLProtocol, MUICollectionCellView, 
+                       MUICollectionHeightStorage, MUICollectionView, MUIFramework, 
+                       MUIOpenWithApplicationHelper, MUIOriginalMessageInfo, MUIRemoteImageCollector, 
+                       MUISegmentedToolbarItem, MUISelectionAndClickInformation, 
                        MUITokenAddress, MUITokenAddressField, MUITokenAddressFieldCell, 
                        MUITokenAddressTextStorage, MUITokenAddressTextView, MUIWKWebView, 
                        MUIWKWebViewConfigurationManager, MUIWKWebViewController, 

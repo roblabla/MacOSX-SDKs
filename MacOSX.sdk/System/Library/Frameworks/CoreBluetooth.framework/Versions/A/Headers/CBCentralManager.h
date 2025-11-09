@@ -41,6 +41,32 @@ typedef NS_ENUM(NSInteger, CBCentralManagerState) {
 	CBCentralManagerStatePoweredOn = CBManagerStatePoweredOn,
 } NS_DEPRECATED(10_7, 10_13, 5_0, 10_0, "Use CBManagerState instead");
 
+/*!
+ *  @enum CBConnectionEvent
+ *
+ *  @discussion Represents the connection state of a peer.
+ *
+ *  @constant CBConnectionEventPeerDisconnected	Peer is disconnected.
+ *  @constant CBConnectionEventPeerConnected	Peer is connected.
+ *
+ */
+typedef NS_ENUM(NSInteger, CBConnectionEvent) {
+	CBConnectionEventPeerDisconnected = 0,
+	CBConnectionEventPeerConnected	= 1,
+};
+
+/*!
+ *  @enum CBCentralManagerFeature
+ *
+ *  @discussion The set of device specific features.
+ *
+ *	@constant CBCentralManagerFeatureExtendedScanAndConnect      The hardware supports extended scans and enhanced connection creation
+ *
+ */
+typedef NS_OPTIONS(NSUInteger, CBCentralManagerFeature) {
+	CBCentralManagerFeatureExtendedScanAndConnect = 1UL << 0,
+} NS_ENUM_AVAILABLE_IOS(13_0) NS_SWIFT_NAME(CBCentralManager.Feature);
+
 @protocol CBCentralManagerDelegate;
 @class CBUUID, CBPeripheral;
 
@@ -68,6 +94,16 @@ CB_EXTERN_CLASS @interface CBCentralManager : CBManager
  *
  */
 @property(nonatomic, assign, readonly) BOOL isScanning NS_AVAILABLE(10_13, 9_0);
+
+/*!
+ *  @method supportsFeatures
+ *
+ *  @param features	One or more features you would like to check if supported.
+ *
+ *  @discussion     Returns a boolean value representing the support for the provided features.
+ *
+ */
++ (BOOL)supportsFeatures:(CBCentralManagerFeature)features NS_AVAILABLE_IOS(13_0) NS_SWIFT_NAME(supports(_:));
 
 - (instancetype)init;
 
@@ -169,6 +205,8 @@ CB_EXTERN_CLASS @interface CBCentralManager : CBManager
  *  @seealso            CBConnectPeripheralOptionNotifyOnConnectionKey
  *  @seealso            CBConnectPeripheralOptionNotifyOnDisconnectionKey
  *  @seealso            CBConnectPeripheralOptionNotifyOnNotificationKey
+ *  @seealso            CBConnectPeripheralOptionEnableTransportBridgingKey
+ *	@seealso			CBConnectPeripheralOptionRequiresANCS
  *
  */
 - (void)connectPeripheral:(CBPeripheral *)peripheral options:(nullable NSDictionary<NSString *, id> *)options;
@@ -185,6 +223,20 @@ CB_EXTERN_CLASS @interface CBCentralManager : CBManager
  *
  */
 - (void)cancelPeripheralConnection:(CBPeripheral *)peripheral;
+
+/*!
+ *  @method registerForConnectionEventsWithOptions:
+ *
+ *  @param options		A dictionary specifying connection event options.
+ *
+ *  @discussion     	Calls {@link centralManager:connectionEventDidOccur:forPeripheral:} when a connection event occurs matching any of the given options.
+ *                      Passing nil in the option parameter clears any prior registered matching options.
+ *
+ *  @see				centralManager:connectionEventDidOccur:forPeripheral:
+ *  @seealso        	CBConnectionEventMatchingOptionServiceUUIDs
+ *  @seealso            CBConnectionEventMatchingOptionPeripheralUUIDs
+ */
+- (void)registerForConnectionEventsWithOptions:(nullable NSDictionary<CBConnectionEventMatchingOption, id> *)options NS_AVAILABLE_IOS(13_0);
 
 
 @end
@@ -292,6 +344,29 @@ CB_EXTERN_CLASS @interface CBCentralManager : CBManager
  *
  */
 - (void)centralManager:(CBCentralManager *)central didDisconnectPeripheral:(CBPeripheral *)peripheral error:(nullable NSError *)error;
+
+/*!
+ *  @method centralManager:connectionEventDidOccur:forPeripheral:
+ *
+ *  @param central      The central manager providing this information.
+ *  @param event		The <code>CBConnectionEvent</code> that has occurred.
+ *  @param peripheral   The <code>CBPeripheral</code> that caused the event.
+ *
+ *  @discussion         This method is invoked upon the connection or disconnection of a peripheral that matches any of the options provided in {@link registerForConnectionEventsWithOptions:}.
+ *
+ */
+- (void)centralManager:(CBCentralManager *)central connectionEventDidOccur:(CBConnectionEvent)event forPeripheral:(CBPeripheral *)peripheral NS_AVAILABLE_IOS(13_0);
+
+/*!
+ *  @method centralManager:didUpdateANCSAuthorizationForPeripheral:
+ *
+ *  @param central      The central manager providing this information.
+ *  @param peripheral   The <code>CBPeripheral</code> that caused the event.
+ *
+ *  @discussion         This method is invoked when the authorization status changes for a peripheral connected with {@link connectPeripheral:} option {@link CBConnectPeripheralOptionRequiresANCS}.
+ *
+ */
+- (void)centralManager:(CBCentralManager *)central didUpdateANCSAuthorizationForPeripheral:(CBPeripheral *)peripheral NS_AVAILABLE_IOS(13_0);
 
 @end
 

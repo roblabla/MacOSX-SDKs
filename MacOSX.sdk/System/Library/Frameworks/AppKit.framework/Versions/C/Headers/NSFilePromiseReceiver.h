@@ -1,7 +1,7 @@
 /*
 	NSFilePromiseReceiver.h
 	Application Kit
-	Copyright (c) 2015-2018, Apple Inc.
+	Copyright (c) 2015-2019, Apple Inc.
 	All rights reserved.
 */
 
@@ -12,29 +12,12 @@
 #import <AppKit/NSPasteboard.h>
 
 NS_ASSUME_NONNULL_BEGIN
+API_UNAVAILABLE_BEGIN(ios)
 
 @class NSOperationQueue;
 
-NS_CLASS_AVAILABLE_MAC(10_12)
-@interface NSFilePromiseReceiver : NSObject <NSPasteboardReading> {
-@private
-    NSPasteboard *_pasteboard APPKIT_IVAR;
-    NSPasteboardItem *_pasteboardItem APPKIT_IVAR;
-    NSArray<NSString*> *_fileTypes APPKIT_IVAR;
-    NSArray<NSString *> *_reservedA APPKIT_IVAR;
-    NSArray<NSString*> *_fileNames APPKIT_IVAR;
-    NSArray<NSURL*> *_fileURLs APPKIT_IVAR;
-    NSOperationQueue *_operationQueue APPKIT_IVAR;
-    NSInteger _promiseType APPKIT_IVAR;
-    void (^_readerBlock)(NSURL *, NSError * __nullable) APPKIT_IVAR;
-    struct {
-        unsigned int usesFileCoordination:1;
-        unsigned int registered:1;
-        unsigned int reserved:30;
-    } _flags APPKIT_IVAR;
-    id _private __unused APPKIT_IVAR;
-}
-
+API_AVAILABLE(macos(10.12))
+@interface NSFilePromiseReceiver : NSObject <NSPasteboardReading>
 /* A view must register what types it accepts via -registerForDraggedTypes:. Use this class method to get the file promise drag types that NSFilePromiseReceiver can accept, in order to register a view to accept promised files.
  */
 @property (class, readonly, copy) NSArray<NSString *> *readableDraggedTypes;
@@ -55,7 +38,8 @@ NS_CLASS_AVAILABLE_MAC(10_12)
  The options dictionary is ignored for now.
  Note: Writing of the promised file may be cancelled or fail. When either occurs, the readerBlock is still called, but with a non-nil NSError. When NSError is non-nil, fileURL should be ignored.
  */
-- (void)receivePromisedFilesAtDestination:(NSURL *)destinationDir options:(NSDictionary *)options operationQueue:(NSOperationQueue *)operationQueue reader:(void(^)(NSURL *fileURL, NSError * __nullable errorOrNil))reader;
+- (void)receivePromisedFilesAtDestination:(NSURL *)destinationDir options:(NSDictionary *)options operationQueue:(NSOperationQueue *)operationQueue reader:(void(^)(NSURL *fileURL, NSError * _Nullable errorOrNil))reader;
 @end
 
+API_UNAVAILABLE_END
 NS_ASSUME_NONNULL_END

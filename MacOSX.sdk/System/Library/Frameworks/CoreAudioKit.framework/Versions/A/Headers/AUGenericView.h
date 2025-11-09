@@ -28,12 +28,15 @@ typedef NS_OPTIONS(UInt32, AUGenericViewDisplayFlags)  {
 @class AUGenericView
 @abstract  An AUGenericView object retrieves and instantiates a generic user interface view for the given audio unit
 */
+API_AVAILABLE(macos(10.4)) API_UNAVAILABLE(ios, tvos, watchos)
 @interface AUGenericView : NSView <AUCustomViewPersistentData> {
+    @private
 #if __OBJC_GC__
 	__strong
 #endif
 	void *		_reserved[32];
 }
+
 /* @property audioUnit
 @abstract Read-only property for the audio unit associated with the view
 @result	  The audio unit associated with the generic view

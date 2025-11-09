@@ -1,6 +1,6 @@
 /*
  *  NSPointerArray.h
- *  Copyright (c) 2005-2018, Apple Inc. All rights reserved.
+ *  Copyright (c) 2005-2019, Apple Inc. All rights reserved.
  *
  */
  
@@ -23,7 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
    The fast enumeration protocol (supporting the for..in statement) will yield NULLs if present.  It is defined for all types of pointers although the language syntax doesn't directly support this.
 */
 
-NS_CLASS_AVAILABLE(10_5, 6_0)
+API_AVAILABLE(macos(10.5), ios(6.0), watchos(2.0), tvos(9.0))
 @interface NSPointerArray : NSObject <NSFastEnumeration, NSCopying, NSSecureCoding>
 // construction
 - (instancetype)initWithOptions:(NSPointerFunctionsOptions)options NS_DESIGNATED_INITIALIZER;
@@ -56,7 +56,7 @@ NS_CLASS_AVAILABLE(10_5, 6_0)
 @interface NSPointerArray (NSPointerArrayConveniences)  
 
 // construction
-#if (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE))
+#if TARGET_OS_OSX
 + (id) pointerArrayWithStrongObjects API_DEPRECATED("GC no longer supported", macos(10.5,10.8)) API_UNAVAILABLE(ios, watchos, tvos); // strong objects
 + (id) pointerArrayWithWeakObjects API_DEPRECATED("GC no longer supported", macos(10.5,10.8)) API_UNAVAILABLE(ios, watchos, tvos); // weak objects
 #endif

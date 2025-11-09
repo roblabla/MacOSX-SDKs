@@ -75,7 +75,7 @@ typedef NS_ENUM(NSUInteger, MTLSamplerAddressMode) {
  @abstract Specify the color value that will be clamped to when the sampler address mode is MTLSamplerAddressModeClampToBorderColor.
  
  @constant MTLSamplerBorderColorTransparentBlack
- Transparent black returns {0,0,0,1} for clamped texture values.
+ Transparent black returns {0,0,0,0} for clamped texture values.
  
  @constant MTLSamplerBorderColorOpaqueBlack
  OpaqueBlack returns {0,0,0,1} for clamped texture values.
@@ -88,7 +88,6 @@ typedef NS_ENUM(NSUInteger, MTLSamplerBorderColor) {
     MTLSamplerBorderColorOpaqueBlack = 1,       // {0,0,0,1}
     MTLSamplerBorderColorOpaqueWhite = 2,       // {1,1,1,1}
 } API_AVAILABLE(macos(10.12)) API_UNAVAILABLE(ios);
-
 
 /*!
  @class MTLSamplerDescriptor
@@ -175,7 +174,7 @@ MTL_EXPORT API_AVAILABLE(macos(10.11), ios(8.0))
  @abstract If YES, an average level of detail will be used when sampling from a texture. If NO, no averaging is performed.
  @discussion lodAverage defaults to NO. This option is a performance hint. An implementation is free to ignore this property.
  */
-@property (nonatomic) BOOL lodAverage API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos);
+@property (nonatomic) BOOL lodAverage API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, macCatalyst);
 
 /*!
  @property compareFunction
@@ -188,7 +187,6 @@ MTL_EXPORT API_AVAILABLE(macos(10.11), ios(8.0))
  @abstract true if the sampler can be used inside an argument buffer
 */
 @property (nonatomic) BOOL supportArgumentBuffers API_AVAILABLE(macos(10.13), ios(11.0));
-
 
 /*!
  @property label

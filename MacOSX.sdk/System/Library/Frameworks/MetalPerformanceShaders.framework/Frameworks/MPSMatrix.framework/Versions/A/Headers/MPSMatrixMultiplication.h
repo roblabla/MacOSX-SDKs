@@ -10,6 +10,7 @@
 
 #import <MPSCore/MPSKernel.h>
 #import <MPSMatrix/MPSMatrixTypes.h>
+#import <MPSCore/MPSNDArray.h>
 
 /*!
  *  @class      MPSMatrixMultiplication
@@ -35,7 +36,7 @@
  *              and the scalar values alpha and beta.
  *
  */
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(10.0), tvos(10.0))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(10.0), macCatalyst(13.0), tvos(10.0))
 @interface MPSMatrixMultiplication : MPSKernel
 /*! @property   resultMatrixOrigin
  *
@@ -146,7 +147,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(10.0), tvos(10.0))
                             resultRows: (NSUInteger) resultRows
                          resultColumns: (NSUInteger) resultColumns
                        interiorColumns: (NSUInteger) interiorColumns
-MPS_AVAILABLE_STARTING(macos(10.13), ios(11.0), tvos(11.0));
+MPS_AVAILABLE_STARTING(macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0));
 
 /*!
  @discussion Use the above initialization method instead.
@@ -213,7 +214,7 @@ MPS_AVAILABLE_STARTING(macos(10.13), ios(11.0), tvos(11.0));
  *              and the scalar values alpha and beta.
  *
  */
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0))
 @interface MPSMatrixVectorMultiplication : MPSMatrixBinaryKernel
 
 /*!

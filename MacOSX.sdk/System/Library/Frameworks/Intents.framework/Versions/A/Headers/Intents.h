@@ -2,7 +2,7 @@
 //  Intents.h
 //  Intents
 //
-//  Copyright (c) 2016-2017 Apple Inc. All rights reserved.
+//  Copyright (c) 2016-2019 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -24,6 +24,7 @@ FOUNDATION_EXPORT const unsigned char IntentsVersionString[];
 #import <Intents/INIntentIdentifiers.h>
 #import <Intents/INIntentResponse.h>
 #import <Intents/INIntentResolutionResult.h>
+#import <Intents/INIntentResolutionResult+Custom.h>
 #import <Intents/INDomainHandling.h>
 #import <Intents/INInteraction.h>
 #import <Intents/INSpeakable.h>
@@ -48,6 +49,7 @@ FOUNDATION_EXPORT const unsigned char IntentsVersionString[];
 #import <Intents/INPerson.h>
 #import <Intents/INRecurrenceRule.h>
 #import <Intents/INSpeakableString.h>
+#import <Intents/INFile.h>
 
 // Common Resolution Results
 #import <Intents/INBooleanResolutionResult.h>
@@ -62,6 +64,15 @@ FOUNDATION_EXPORT const unsigned char IntentsVersionString[];
 #import <Intents/INDateComponentsResolutionResult.h>
 #import <Intents/INRestaurantResolutionResult.h>
 #import <Intents/INRestaurantGuestResolutionResult.h>
+#import <Intents/INURLResolutionResult.h>
+#import <Intents/INLengthResolutionResult.h>
+#import <Intents/INMassResolutionResult.h>
+#import <Intents/INVolumeResolutionResult.h>
+#import <Intents/INSpeedResolutionResult.h>
+#import <Intents/INEnergyResolutionResult.h>
+#import <Intents/INEnumResolutionResult.h>
+#import <Intents/INObjectResolutionResult.h>
+#import <Intents/INTimeIntervalResolutionResult.h>
 
 // Messages Domain
 #import <Intents/INMessage.h>
@@ -79,8 +90,21 @@ FOUNDATION_EXPORT const unsigned char IntentsVersionString[];
 #import <Intents/INRidePartySizeOption.h>
 #import <Intents/INRideCompletionStatus.h>
 
+// Reservation Common
+#import <Intents/INReservation.h>
+#import <Intents/INReservationAction.h>
+
+// Flight Reservation
+#import <Intents/INFlightReservation.h>
+
 // Restaurant Booking
 #import <Intents/INIntentRestaurantReservation.h>
+
+#import <Intents/INLodgingReservation.h>
+#import <Intents/INRentalCarReservation.h>
+#import <Intents/INRestaurantReservation.h>
+#import <Intents/INTicketedEventReservation.h>
+#import <Intents/INTrainReservation.h>
 
 // User Vocabulary
 #import <Intents/INVocabulary.h>
@@ -94,6 +118,11 @@ FOUNDATION_EXPORT const unsigned char IntentsVersionString[];
 #import <Intents/NSUserActivity+IntentsAdditions.h>
 #import <Intents/INPerson+SiriAdditions.h>
 #import <Intents/NSString+Intents.h>
+#import <Intents/NSExtensionContext+ShareExtension.h>
+
+// User Context
+#import <Intents/INUserContext.h>
+#import <Intents/INMediaUserContext.h>
 
 // Notes
 #import <Intents/INNoteContent.h>
@@ -106,6 +135,9 @@ FOUNDATION_EXPORT const unsigned char IntentsVersionString[];
 #import <Intents/INShortcut.h>
 #import <Intents/INVoiceShortcut.h>
 #import <Intents/INVoiceShortcutCenter.h>
+
+// Media
+#import <Intents/INMediaItem.h>
 
 // Deprecated
 #import <Intents/INPerson_Deprecated.h>
@@ -121,3 +153,7 @@ FOUNDATION_EXPORT const unsigned char IntentsVersionString[];
 #import <Intents/INSetDefrosterSettingsInCarIntent_Deprecated.h>
 #import <Intents/INSetSeatSettingsInCarIntent_Deprecated.h>
 #import <Intents/INSearchForNotebookItemsIntent_Deprecated.h>
+#import <Intents/INPlayMediaIntent_Deprecated.h>
+#import <Intents/INSetTaskAttributeIntent_Deprecated.h>
+#import <Intents/INAddTasksIntent_Deprecated.h>
+#import <Intents/INMediaSearch_Deprecated.h>

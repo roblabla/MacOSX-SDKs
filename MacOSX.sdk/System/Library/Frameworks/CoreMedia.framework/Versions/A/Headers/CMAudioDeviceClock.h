@@ -35,7 +35,7 @@ CMAudioDeviceClockCreate(
 		CFAllocatorRef CM_NULLABLE allocator,
 		CFStringRef	CM_NULLABLE deviceUID,
 		CM_RETURNS_RETAINED_PARAMETER CMClockRef CM_NULLABLE * CM_NONNULL clockOut)
-			API_AVAILABLE(macosx(10.8)) API_UNAVAILABLE(ios, tvos, watchos);
+			API_AVAILABLE(macosx(10.8), macCatalyst(12.0)) API_UNAVAILABLE(ios, tvos, watchos);
 
 /*!
 	@function	CMAudioDeviceClockCreateFromAudioDeviceID
@@ -46,7 +46,7 @@ CMAudioDeviceClockCreateFromAudioDeviceID(
 		CFAllocatorRef CM_NULLABLE allocator,
 		AudioDeviceID deviceID,
 		CM_RETURNS_RETAINED_PARAMETER CMClockRef CM_NULLABLE * CM_NONNULL clockOut)
-			API_AVAILABLE(macosx(10.8)) API_UNAVAILABLE(ios, tvos, watchos);
+			API_AVAILABLE(macosx(10.8), macCatalyst(12.0)) API_UNAVAILABLE(ios, tvos, watchos);
 
 CF_IMPLICIT_BRIDGING_ENABLED
 
@@ -60,7 +60,7 @@ CM_EXPORT OSStatus
 CMAudioDeviceClockSetAudioDeviceUID(
 		CMClockRef CM_NONNULL clock,
 		CFStringRef CM_NULLABLE deviceUID)
-			API_AVAILABLE(macosx(10.8)) API_UNAVAILABLE(ios, tvos, watchos);
+			API_AVAILABLE(macosx(10.8), macCatalyst(12.0)) API_UNAVAILABLE(ios, tvos, watchos);
 
 /*!
 	@function	CMAudioDeviceClockSetAudioDeviceUID
@@ -70,7 +70,7 @@ CM_EXPORT OSStatus
 CMAudioDeviceClockSetAudioDeviceID(
 		CMClockRef CM_NONNULL clock,
 		AudioDeviceID deviceID)
-			API_AVAILABLE(macosx(10.8)) API_UNAVAILABLE(ios, tvos, watchos);
+			API_AVAILABLE(macosx(10.8), macCatalyst(12.0)) API_UNAVAILABLE(ios, tvos, watchos);
 
 /*!
 	@function	CMAudioDeviceClockGetAudioDevice
@@ -88,7 +88,7 @@ CM_EXPORT OSStatus CMAudioDeviceClockGetAudioDevice(
 		CM_RETURNS_NOT_RETAINED_PARAMETER CFStringRef CM_NULLABLE * CM_NULLABLE deviceUIDOut,	// may be NULL
 		AudioDeviceID * CM_NULLABLE deviceIDOut,			// may be NULL
 		Boolean * CM_NULLABLE trackingDefaultDeviceOut)	// may be NULL
-			API_AVAILABLE(macosx(10.8)) API_UNAVAILABLE(ios, tvos, watchos);
+			API_AVAILABLE(macosx(10.8), macCatalyst(12.0)) API_UNAVAILABLE(ios, tvos, watchos);
 
 CF_IMPLICIT_BRIDGING_DISABLED
 

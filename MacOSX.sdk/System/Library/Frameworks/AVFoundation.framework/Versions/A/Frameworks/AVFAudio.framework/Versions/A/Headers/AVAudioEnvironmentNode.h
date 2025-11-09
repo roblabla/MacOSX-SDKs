@@ -50,7 +50,7 @@ typedef NS_ENUM(NSInteger, AVAudioEnvironmentDistanceAttenuationModel) {
         A standalone instance of AVAudioEnvironmentDistanceAttenuationParameters cannot be created. 
         Only an instance vended out by a source object (e.g. AVAudioEnvironmentNode) can be used.
 */
-OS_EXPORT API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0))
+API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0))
 @interface AVAudioEnvironmentDistanceAttenuationParameters : NSObject {
 @private
 	void *_impl;
@@ -113,7 +113,7 @@ OS_EXPORT API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0))
         Only an instance vended out by a source object (e.g. AVAudioEnvironmentNode) can be used.
 */
 
-OS_EXPORT API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0))
+API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0))
 @interface AVAudioEnvironmentReverbParameters : NSObject {
 @private
 	void *_impl;
@@ -154,6 +154,37 @@ OS_EXPORT API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0))
 @end
 
 
+/*! @enum AVAudioEnvironmentOutputType
+ @abstract   Types of output for AVAudio3DMixingRenderingAlgorithmAuto
+ @discussion
+    The output type determines the rendering method for any input bus using
+    AVAudio3DMixingRenderingAlgorithmAuto.
+ 
+    AVAudioEnvironmentOutputTypeAuto
+        Automatically detect playback route and pick the correct output type when possible.
+        Wired output defaults to AVAudioEnvironmentOutputTypeHeadphones and Manual Rendering
+        with a two-channel output layout defaults to AVAudioEnvironmentOutputTypeExternalSpeakers.
+ 
+    AVAudioEnvironmentOutputTypeHeadphones
+        Render for headphones.
+ 
+    AVAudioEnvironmentOutputTypeBuiltInSpeakers
+        Render for built-in speakers on the current hardware. The output will not be suitable
+        for playback on other hardware. On iOS devices, the rendering may be specific to
+        device orientation. Manual Rendering modes may not provide the intended rendering if
+        the orientation changes between rendering the audio and playing it back.
+ 
+    AVAudioEnvironmentOutputTypeExternalSpeakers
+        Render for external speakers based on the environment node's output channel layout.
+ */
+typedef NS_ENUM(NSInteger, AVAudioEnvironmentOutputType) {
+    AVAudioEnvironmentOutputTypeAuto                = 0,
+    AVAudioEnvironmentOutputTypeHeadphones          = 1,
+    AVAudioEnvironmentOutputTypeBuiltInSpeakers     = 2,
+    AVAudioEnvironmentOutputTypeExternalSpeakers    = 3
+} API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0)) API_UNAVAILABLE(watchos);
+
+
 /*!
     @class AVAudioEnvironmentNode
     @abstract Mixer node that simulates a 3D environment
@@ -167,26 +198,32 @@ OS_EXPORT API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0))
         In addition, this node also defines properties for distance attenuation and reverberation 
         that help characterize the environment.
  
-        It is important to note that only inputs with a mono channel connection format to the 
-        environment node are spatialized. If the input is stereo, the audio is passed through 
-        without being spatialized. Currently inputs with connection formats of more than 2 channels 
-        are not supported.
+        It is important to note that AVAudio3DMixingSourceMode affects how inputs with different channel
+        configurations are rendered. By default, only inputs with a mono channel are spatialized.
  
-        In order to set the environment node’s output to a multichannel format, use an AVAudioFormat 
-        having one of the following AudioChannelLayoutTags.
- 
-        kAudioChannelLayoutTag_AudioUnit_4
-        kAudioChannelLayoutTag_AudioUnit_5_0;
-        kAudioChannelLayoutTag_AudioUnit_6_0;
-        kAudioChannelLayoutTag_AudioUnit_7_0;
-        kAudioChannelLayoutTag_AudioUnit_7_0_Front;
-        kAudioChannelLayoutTag_AudioUnit_8;
+        In order to set the environment node’s output to a multichannel format, use an AVAudioFormat
+        with a desired AudioChannelLayout.
 */
 
-OS_EXPORT API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0)) API_UNAVAILABLE(watchos)
+API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 @interface AVAudioEnvironmentNode : AVAudioNode <AVAudioMixing>
 
 - (instancetype)init NS_DESIGNATED_INITIALIZER;
+
+/*! @property outputType
+    @abstract Type of output hardware to be used with AVAudio3DMixingRenderingAlgorithmAuto
+    @discussion
+        Output hardware cannot be automatically determined in Manual Rendering modes or for wired
+        output. This property can be used to override the output type if the correct type is known.
+ 
+        Selecting an output type that does not match the actual hardware can produce unexpected
+        results, especially with AVAudioEnvironmentOutputTypeBuiltInSpeakers. An app choosing
+        a value other than AVAudio3DMixingOutputTypeAuto should listen to route change
+        notifications and update the output type accordingly.
+ 
+        Default:    AVAudio3DMixingOutputTypeAuto
+ */
+@property (nonatomic) AVAudioEnvironmentOutputType outputType API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0)) API_UNAVAILABLE(watchos) ;
 
 /*! @property outputVolume
 	@abstract The mixer's output volume.

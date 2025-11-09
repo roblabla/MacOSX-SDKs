@@ -1,7 +1,7 @@
 /*
     NSPersistentStore.h
     Core Data
-    Copyright (c) 2004-2018, Apple Inc.
+    Copyright (c) 2004-2019, Apple Inc.
     All rights reserved.
 */
 
@@ -25,27 +25,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 API_AVAILABLE(macosx(10.5),ios(3.0))
 @interface NSPersistentStore : NSObject {
-#if (!__OBJC2__)
-    @private
-    NSPersistentStoreCoordinator *_coordinator;
-    NSString *_configurationName;
-    NSURL *_url;
-    NSDictionary *_options;
-    id* _oidFactories;
-    id _defaultFaultHandler;
-    struct _objectStoreFlags {
-        unsigned int isReadOnly:1;
-        unsigned int cleanOnRemove:1;
-        unsigned int isMDDirty:1;
-        unsigned int _RESERVED:29;
-    } _flags;
-	void *_temporaryIDClass;
-	id _coreSpotlightDelegate;
-    int32_t _reserved32_1;
-#if __LP64__
-    int32_t _reserved32_2;
-#endif
-#endif
 }
 
 /* Get metadata from the persistent store at url. Must be overriden by subclasses.

@@ -2,7 +2,7 @@
 //  INStartVideoCallIntentResponse.h
 //  Intents
 //
-//  Copyright (c) 2016-2017 Apple Inc. All rights reserved.
+//  Copyright (c) 2016-2019 Apple Inc. All rights reserved.
 //
 
 #import <Intents/INIntentResponse.h>
@@ -16,13 +16,14 @@ typedef NS_ENUM(NSInteger, INStartVideoCallIntentResponseCode) {
     INStartVideoCallIntentResponseCodeFailureAppConfigurationRequired,
     INStartVideoCallIntentResponseCodeFailureCallingServiceNotAvailable,
     INStartVideoCallIntentResponseCodeFailureContactNotSupportedByApp,
-    INStartVideoCallIntentResponseCodeFailureInvalidNumber API_AVAILABLE(ios(11.0), macosx(10.13)),
-} API_AVAILABLE(ios(10.0), macosx(10.12)) API_UNAVAILABLE(watchos);
+    INStartVideoCallIntentResponseCodeFailureInvalidNumber API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macosx),
+} API_UNAVAILABLE(watchos) API_UNAVAILABLE(macosx) API_DEPRECATED("INStartVideoCallIntent is deprecated. Please adopt INStartCallIntent instead", ios(10.0, 13.0));
 
 NS_ASSUME_NONNULL_BEGIN
 
-API_AVAILABLE(ios(10.0), macosx(10.12))
 API_UNAVAILABLE(watchos)
+API_UNAVAILABLE(macosx)
+API_DEPRECATED("INStartVideoCallIntent is deprecated. Please adopt INStartCallIntent instead", ios(10.0, 13.0))
 @interface INStartVideoCallIntentResponse : INIntentResponse
 
 - (id)init NS_UNAVAILABLE;

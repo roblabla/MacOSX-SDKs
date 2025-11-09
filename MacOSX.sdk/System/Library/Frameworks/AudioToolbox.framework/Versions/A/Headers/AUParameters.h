@@ -1,3 +1,4 @@
+#if (defined(USE_AUDIOTOOLBOX_PUBLIC_HEADERS) && USE_AUDIOTOOLBOX_PUBLIC_HEADERS) || !__has_include(<AudioToolboxCore/AUParameters.h>)
 /*!
 	@file		AUParameters.h
  	@framework	AudioToolbox.framework
@@ -6,7 +7,9 @@
 	@brief		Objects representing an AUAudioUnit's tree of parameters.
 */
 
-#if __OBJC2__
+#ifndef AudioToolbox_AUParameters_h
+#define AudioToolbox_AUParameters_h
+#ifdef __OBJC2__
 
 #import <AudioToolbox/AUComponent.h>
 #import <AudioToolbox/AudioUnitProperties.h>
@@ -121,7 +124,7 @@ typedef void *AUParameterObserverToken;
 	@discussion
 		Nodes are instances of either AUParameterGroup or AUParameter.
 */
-OS_EXPORT API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0))
+API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0))
 @interface AUParameterNode : NSObject
 
 /*!	@property	identifier
@@ -232,7 +235,7 @@ OS_EXPORT API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0))
 		A parameter group is KVC-compliant for its children; e.g. valueForKey:@"volume" will
 		return a child parameter whose identifier is "volume".
 */
-OS_EXPORT API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0))
+API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0))
 @interface AUParameterGroup : AUParameterNode <NSSecureCoding>
 
 /// The group's child nodes (AUParameterGroupNode).
@@ -260,7 +263,7 @@ OS_EXPORT API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0))
 		mostly immutable (except for values and implementor hooks); the only way to modify them
 		is to publish a new tree.
 */
-OS_EXPORT API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0))
+API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0))
 @interface AUParameterTree : AUParameterGroup <NSSecureCoding>
 
 /*!	@method	parameterWithAddress:
@@ -290,7 +293,7 @@ OS_EXPORT API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0))
 /*!	@class	AUParameter
 	@brief	A node representing a single parameter.
 */
-OS_EXPORT API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0))
+API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0))
 @interface AUParameter : AUParameterNode <NSSecureCoding>
 
 /// The parameter's minimum value.
@@ -364,3 +367,7 @@ OS_EXPORT API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0))
 NS_ASSUME_NONNULL_END
 
 #endif // __OBJC2__
+#endif // AudioToolbox_AUParameters_h
+#else
+#include <AudioToolboxCore/AUParameters.h>
+#endif

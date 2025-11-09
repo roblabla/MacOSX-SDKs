@@ -1,11 +1,13 @@
 /*
     NSUserInterfaceLayout.h
     Application Kit
-    Copyright (c) 2015-2018, Apple Inc.
+    Copyright (c) 2015-2019, Apple Inc.
     All rights reserved.
  */
 
 #import <AppKit/AppKitDefines.h>
+
+API_UNAVAILABLE_BEGIN(ios)
 
 typedef NS_ENUM(NSInteger, NSUserInterfaceLayoutDirection) {
     NSUserInterfaceLayoutDirectionLeftToRight = 0,
@@ -15,4 +17,6 @@ typedef NS_ENUM(NSInteger, NSUserInterfaceLayoutDirection) {
 typedef NS_ENUM(NSInteger, NSUserInterfaceLayoutOrientation) {
     NSUserInterfaceLayoutOrientationHorizontal = 0,
     NSUserInterfaceLayoutOrientationVertical = 1
-} NS_ENUM_AVAILABLE_MAC(10_9);
+} API_AVAILABLE(macos(10.9));
+
+API_UNAVAILABLE_END

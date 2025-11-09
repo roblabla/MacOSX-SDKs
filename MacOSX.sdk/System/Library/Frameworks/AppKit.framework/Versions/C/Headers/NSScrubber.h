@@ -1,13 +1,14 @@
 /*
  NSScrubber.h
  Application Kit
- Copyright (c) 2016-2018, Apple Inc.
+ Copyright (c) 2016-2019, Apple Inc.
  All rights reserved.
  */
 
 #import <AppKit/NSControl.h>
 
 NS_ASSUME_NONNULL_BEGIN
+API_UNAVAILABLE_BEGIN(ios)
 
 @class NSScrubber, NSScrubberItemView, NSScrubberSelectionView, NSScrubberLayout, NSPanGestureRecognizer, NSPressGestureRecognizer, NSButton, NSNib;
 
@@ -15,19 +16,19 @@ NS_ASSUME_NONNULL_BEGIN
 
 @protocol NSScrubberDataSource <NSObject>
 @required
-- (NSInteger)numberOfItemsForScrubber:(NSScrubber *)scrubber NS_AVAILABLE_MAC(10_12_2);
-- (__kindof NSScrubberItemView *)scrubber:(NSScrubber *)scrubber viewForItemAtIndex:(NSInteger)index NS_AVAILABLE_MAC(10_12_2);
+- (NSInteger)numberOfItemsForScrubber:(NSScrubber *)scrubber API_AVAILABLE(macos(10.12.2));
+- (__kindof NSScrubberItemView *)scrubber:(NSScrubber *)scrubber viewForItemAtIndex:(NSInteger)index API_AVAILABLE(macos(10.12.2));
 @end
 
 @protocol NSScrubberDelegate <NSObject>
 @optional
-- (void)scrubber:(NSScrubber *)scrubber didSelectItemAtIndex:(NSInteger)selectedIndex NS_AVAILABLE_MAC(10_12_2);
-- (void)scrubber:(NSScrubber *)scrubber didHighlightItemAtIndex:(NSInteger)highlightedIndex NS_AVAILABLE_MAC(10_12_2);
-- (void)scrubber:(NSScrubber *)scrubber didChangeVisibleRange:(NSRange)visibleRange NS_AVAILABLE_MAC(10_12_2);
+- (void)scrubber:(NSScrubber *)scrubber didSelectItemAtIndex:(NSInteger)selectedIndex API_AVAILABLE(macos(10.12.2));
+- (void)scrubber:(NSScrubber *)scrubber didHighlightItemAtIndex:(NSInteger)highlightedIndex API_AVAILABLE(macos(10.12.2));
+- (void)scrubber:(NSScrubber *)scrubber didChangeVisibleRange:(NSRange)visibleRange API_AVAILABLE(macos(10.12.2));
 
-- (void)didBeginInteractingWithScrubber:(NSScrubber *)scrubber NS_AVAILABLE_MAC(10_12_2);
-- (void)didFinishInteractingWithScrubber:(NSScrubber *)scrubber NS_AVAILABLE_MAC(10_12_2);
-- (void)didCancelInteractingWithScrubber:(NSScrubber *)scrubber NS_AVAILABLE_MAC(10_12_2);
+- (void)didBeginInteractingWithScrubber:(NSScrubber *)scrubber API_AVAILABLE(macos(10.12.2));
+- (void)didFinishInteractingWithScrubber:(NSScrubber *)scrubber API_AVAILABLE(macos(10.12.2));
+- (void)didCancelInteractingWithScrubber:(NSScrubber *)scrubber API_AVAILABLE(macos(10.12.2));
 @end
 
 #pragma mark - Associated Types
@@ -42,7 +43,7 @@ NS_ASSUME_NONNULL_BEGIN
 typedef NS_ENUM(NSInteger, NSScrubberMode) {
     NSScrubberModeFixed = 0,
     NSScrubberModeFree
-} NS_ENUM_AVAILABLE_MAC(10_12_2);
+} API_AVAILABLE(macos(10.12.2));
 
 /*!
  * @typedef NSScrubberAlignment
@@ -58,14 +59,14 @@ typedef NS_ENUM(NSInteger, NSScrubberAlignment) {
     NSScrubberAlignmentLeading,
     NSScrubberAlignmentTrailing,
     NSScrubberAlignmentCenter
-} NS_ENUM_AVAILABLE_MAC(10_12_2);
+} API_AVAILABLE(macos(10.12.2));
 
 /*!
  * @class NSScrubberSelectionStyle
  * @abstract @c NSScrubberSelectionStyle is an abstract class that provides decorative accessory views for selected and highlighted items within a NSScrubber control. Class properties provide convenient access to built-in styles. For a completely custom style, subclassers can override @c -makeSelectionView to create and configure arbitrary @c NSScrubberSelectionView subclasses.
  *
  */
-NS_CLASS_AVAILABLE_MAC(10_12_2)
+API_AVAILABLE(macos(10.12.2))
 @interface NSScrubberSelectionStyle : NSObject <NSCoding>
 
 #pragma mark Built-in Styles
@@ -93,45 +94,8 @@ NS_CLASS_AVAILABLE_MAC(10_12_2)
  * Clients provide data to @c NSScrubber via a data source object (see the @c NSScrubberDataSource protocol) and react to user interaction via a delegate object (see the @c NSScrubberDelegate protocol).
  *
  */
-NS_CLASS_AVAILABLE_MAC(10_12_2)
-@interface NSScrubber : NSView {
-@private
-    __weak id _delegate APPKIT_IVAR;
-    __weak id _dataSource APPKIT_IVAR;
-    id _tx APPKIT_IVAR;
-
-    NSScrollView *_scrollView APPKIT_IVAR;
-    NSView *_translationView APPKIT_IVAR;
-    NSPanGestureRecognizer   *_scrubGestureRecognizer APPKIT_IVAR;
-    NSPanGestureRecognizer   *_scrollGestureRecognizer APPKIT_IVAR;
-    NSPressGestureRecognizer *_pressGestureRecognizer APPKIT_IVAR;
-    
-    NSButton *_arrowLeft APPKIT_IVAR;
-    NSButton *_arrowRight APPKIT_IVAR;
-    
-    NSView  *_backgroundView APPKIT_IVAR;
-    NSColor *_backgroundColor APPKIT_IVAR;
-    
-    NSScrubberAlignment _itemAlignment APPKIT_IVAR;
-    NSScrubberMode _mode APPKIT_IVAR;
-    
-    id _autoscrollLink APPKIT_IVAR;
-    NSPoint _autoscrollEffectivePoint APPKIT_IVAR;
-    CGFloat _autoscrollRatio APPKIT_IVAR;
-    CGFloat _autoscrollVelocity APPKIT_IVAR;
-    NSTimeInterval _autoscrollBasis APPKIT_IVAR;
-    
-    unsigned int _isInteracting:1 APPKIT_IVAR;
-    unsigned int _isMovingSelection:1 APPKIT_IVAR;
-    unsigned int _continuous:1 APPKIT_IVAR;
-    unsigned int _ignoresTouches:1 APPKIT_IVAR;
-    unsigned int _trackingChangedItem:1 APPKIT_IVAR;
-    unsigned int _reservedFlags:27 __unused APPKIT_IVAR;
-    
-#ifndef __OBJC2__
-    id _reserved __unused APPKIT_IVAR;
-#endif
-}
+API_AVAILABLE(macos(10.12.2))
+@interface NSScrubber : NSView
 
 #pragma mark Properties
 
@@ -224,4 +188,5 @@ NS_CLASS_AVAILABLE_MAC(10_12_2)
 
 @end
 
+API_UNAVAILABLE_END
 NS_ASSUME_NONNULL_END

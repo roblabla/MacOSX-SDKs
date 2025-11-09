@@ -14,14 +14,8 @@
 #if !defined(CoreAudio_CoreAudio_h)
 #define CoreAudio_CoreAudio_h
 
-#if !defined(__COREAUDIO_USE_FLAT_INCLUDES__)
-    #include <CoreAudio/CoreAudioTypes.h>
-    #include <CoreAudio/AudioHardware.h>
-    #include <CoreAudio/HostTime.h>
-#else
-    #include <CoreAudioTypes.h>
-    #include <AudioHardware.h>
-    #include <HostTime.h>
-#endif
+#include <CoreAudioTypes/CoreAudioTypes.h>
+#include <CoreAudio/AudioHardware.h>
+#include <CoreAudio/HostTime.h>
 
 #endif

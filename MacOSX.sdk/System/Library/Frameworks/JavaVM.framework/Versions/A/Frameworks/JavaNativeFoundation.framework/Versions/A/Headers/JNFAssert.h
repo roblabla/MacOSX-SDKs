@@ -26,9 +26,9 @@
 
 JNF_EXPORT void JNFDebugWarning(const char *fmt, ...);
 
-#ifdef JAVA_ASSERTIONS_ON
-
 JNF_EXPORT void JNFAssertionFailure(const char *file, int line, const char *condition, const char *msg);
+
+#ifdef JAVA_ASSERTIONS_ON
 
 #define JNF_ASSERT_FAILURE(condition, msg)					\
 	JNFAssertionFailure(__FILE__, __LINE__, condition, msg)	\

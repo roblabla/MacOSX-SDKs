@@ -21,7 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
     example of an effect unit.
  
 */
-OS_EXPORT API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0)) API_UNAVAILABLE(watchos)
+API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 @interface AVAudioUnitEffect : AVAudioUnit
 
 #if AVAUDIOUNIT_HAVE_AUDIOUNIT
@@ -29,7 +29,7 @@ OS_EXPORT API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0)) API_UNAVAILABLE(watch
     @abstract Create an AVAudioUnitEffect object.
     
     @param audioComponentDescription
-    @abstract AudioComponentDescription of the audio unit to be instantiated.
+    AudioComponentDescription of the audio unit to be instantiated.
     @discussion
     The componentType must be one of these types
     kAudioUnitType_Effect

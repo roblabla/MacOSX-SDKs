@@ -133,7 +133,7 @@ __END_DECLS
 #define __Request__lockd_mach_subsystem__defined
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -152,27 +152,27 @@ __END_DECLS
 		nfs_handle fh;
 	} __Request__lockd_request_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
 	} __Request__lockd_ping_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
 	} __Request__lockd_shutdown_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 #endif /* !__Request__lockd_mach_subsystem__defined */
 
@@ -192,7 +192,7 @@ union __RequestUnion__lockd_mach_subsystem {
 #define __Reply__lockd_mach_subsystem__defined
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -200,11 +200,11 @@ union __RequestUnion__lockd_mach_subsystem {
 		kern_return_t RetCode;
 	} __Reply__lockd_request_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -212,11 +212,11 @@ union __RequestUnion__lockd_mach_subsystem {
 		kern_return_t RetCode;
 	} __Reply__lockd_ping_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -224,7 +224,7 @@ union __RequestUnion__lockd_mach_subsystem {
 		kern_return_t RetCode;
 	} __Reply__lockd_shutdown_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 #endif /* !__Reply__lockd_mach_subsystem__defined */
 

@@ -3,7 +3,7 @@
 
 	Framework:  AVFoundation
  
-    Copyright 2010-2018 Apple Inc. All rights reserved.
+    Copyright 2010-2017 Apple Inc. All rights reserved.
 
 */
 
@@ -31,7 +31,7 @@ NS_ASSUME_NONNULL_BEGIN
 	
 	IMPORTANT PERFORMANCE NOTE: Make sure to set the alwaysCopiesSampleData property to NO if you do not need to modify the sample data in-place, to avoid unnecessary and inefficient copying.
  */
-NS_CLASS_AVAILABLE(10_7, 4_1)
+API_AVAILABLE(macos(10.7), ios(4.1), tvos(9.0)) API_UNAVAILABLE(watchos)
 @interface AVAssetReaderOutput : NSObject
 {
 @private
@@ -58,7 +58,7 @@ NS_CLASS_AVAILABLE(10_7, 4_1)
  
 	The default value is YES.
  */
-@property (nonatomic) BOOL alwaysCopiesSampleData NS_AVAILABLE(10_8, 5_0);
+@property (nonatomic) BOOL alwaysCopiesSampleData API_AVAILABLE(macos(10.8), ios(5.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 
 /*!
  @method copyNextSampleBuffer
@@ -86,11 +86,11 @@ NS_CLASS_AVAILABLE(10_7, 4_1)
  @discussion
 	When the value of this property is YES, the time ranges read by the asset reader output can be reconfigured during reading using the -resetForReadingTimeRanges: method.  This also prevents the attached AVAssetReader from progressing to AVAssetReaderStatusCompleted until -markConfigurationAsFinal has been invoked.
  
-	The default value is NO, which means that the asset reader output may not be reconfigured once reading has begin.  When the value of this property is NO, AVAssetReader may be able to read media data more efficiently, particularly when multiple asset reader outputs are attached.
+	The default value is NO, which means that the asset reader output may not be reconfigured once reading has begun.  When the value of this property is NO, AVAssetReader may be able to read media data more efficiently, particularly when multiple asset reader outputs are attached.
  
 	This property may not be set after -startReading has been called on the attached asset reader.
  */
-@property (nonatomic) BOOL supportsRandomAccess NS_AVAILABLE(10_10, 8_0);
+@property (nonatomic) BOOL supportsRandomAccess API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 
 /*!
  @method resetForReadingTimeRanges:
@@ -111,7 +111,7 @@ NS_CLASS_AVAILABLE(10_7, 4_1)
  
 	If this method is invoked before all media data has been read (i.e. -copyNextSampleBuffer has not yet returned NULL), an exception will be thrown.  This method may not be called before -startReading has been invoked on the attached asset reader.
  */
-- (void)resetForReadingTimeRanges:(NSArray<NSValue *> *)timeRanges NS_AVAILABLE(10_10, 8_0);
+- (void)resetForReadingTimeRanges:(NSArray<NSValue *> *)timeRanges API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 
 /*!
  @method markConfigurationAsFinal
@@ -125,7 +125,7 @@ NS_CLASS_AVAILABLE(10_7, 4_1)
  
 	Once this method has been called, further invocations of -resetForReadingTimeRanges: are disallowed.
  */
-- (void)markConfigurationAsFinal NS_AVAILABLE(10_10, 8_0);
+- (void)markConfigurationAsFinal API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 
 @end
 
@@ -139,7 +139,7 @@ NS_CLASS_AVAILABLE(10_7, 4_1)
  @discussion
 	Clients can read the media data of an asset track by adding an instance of AVAssetReaderTrackOutput to an AVAssetReader using the -[AVAssetReader addOutput:] method. The track's media samples can either be read in the format in which they are stored in the asset, or they can be converted to a different format.
  */
-NS_CLASS_AVAILABLE(10_7, 4_1)
+API_AVAILABLE(macos(10.7), ios(4.1), tvos(9.0)) API_UNAVAILABLE(watchos)
 @interface AVAssetReaderTrackOutput : AVAssetReaderOutput
 {
 @private
@@ -247,7 +247,7 @@ AV_INIT_UNAVAILABLE
  
 	The default value is AVAudioTimePitchAlgorithmSpectral.
  */
-@property (nonatomic, copy) AVAudioTimePitchAlgorithm audioTimePitchAlgorithm NS_AVAILABLE(10_9, 7_0);
+@property (nonatomic, copy) AVAudioTimePitchAlgorithm audioTimePitchAlgorithm API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 
 @end
 
@@ -262,7 +262,7 @@ AV_INIT_UNAVAILABLE
  @discussion
 	Clients can read the audio data mixed from one or more asset tracks by adding an instance of AVAssetReaderAudioMixOutput to an AVAssetReader using the -[AVAssetReader addOutput:] method.
  */
-NS_CLASS_AVAILABLE(10_7, 4_1)
+API_AVAILABLE(macos(10.7), ios(4.1), tvos(9.0)) API_UNAVAILABLE(watchos)
 @interface AVAssetReaderAudioMixOutput : AVAssetReaderOutput
 {
 @private
@@ -350,7 +350,7 @@ AV_INIT_UNAVAILABLE
  
 	The default value is AVAudioTimePitchAlgorithmSpectral.
  */
-@property (nonatomic, copy) AVAudioTimePitchAlgorithm audioTimePitchAlgorithm NS_AVAILABLE(10_9, 7_0);
+@property (nonatomic, copy) AVAudioTimePitchAlgorithm audioTimePitchAlgorithm API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 
 @end
 
@@ -365,7 +365,7 @@ AV_INIT_UNAVAILABLE
  @discussion
 	Clients can read the video frames composited from one or more asset tracks by adding an instance of AVAssetReaderVideoCompositionOutput to an AVAssetReader using the -[AVAssetReader addOutput:] method.
  */
-NS_CLASS_AVAILABLE(10_7, 4_1)
+API_AVAILABLE(macos(10.7), ios(4.1), tvos(9.0)) API_UNAVAILABLE(watchos)
 @interface AVAssetReaderVideoCompositionOutput : AVAssetReaderOutput
 {
 @private
@@ -462,7 +462,7 @@ AV_INIT_UNAVAILABLE
  @discussion
  	This property is nil if there is no video compositor, or if the internal video compositor is in use.
  */
-@property (nonatomic, readonly, nullable) id <AVVideoCompositing> customVideoCompositor NS_AVAILABLE(10_9, 7_0);
+@property (nonatomic, readonly, nullable) id <AVVideoCompositing> customVideoCompositor API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 
 @end
 
@@ -476,7 +476,7 @@ AV_INIT_UNAVAILABLE
 	Defines an interface for reading metadata, packaged as instances of AVTimedMetadataGroup, from a single AVAssetReaderTrackOutput object.
  */
 
-NS_CLASS_AVAILABLE(10_10, 8_0)
+API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 @interface AVAssetReaderOutputMetadataAdaptor : NSObject
 {
 @private
@@ -558,7 +558,7 @@ AV_INIT_UNAVAILABLE
 	Since no sample data is ever returned by instances of AVAssetReaderSampleReferenceOutput, the value of the alwaysCopiesSampleData property is ignored.
  */
 
-NS_CLASS_AVAILABLE(10_10, 8_0)
+API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 @interface AVAssetReaderSampleReferenceOutput : AVAssetReaderOutput
 {
 @private

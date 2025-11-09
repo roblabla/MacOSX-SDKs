@@ -2,11 +2,12 @@
 //  INTask.h
 //  Intents
 //
-//  Copyright (c) 2016-2017 Apple Inc. All rights reserved.
+//  Copyright (c) 2016-2019 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 
+#import <Intents/INTaskPriority.h>
 #import <Intents/INTaskStatus.h>
 #import <Intents/INTaskType.h>
 
@@ -27,7 +28,17 @@ API_UNAVAILABLE(macosx)
          temporalEventTrigger:(nullable INTemporalEventTrigger *)temporalEventTrigger
         createdDateComponents:(nullable NSDateComponents *)createdDateComponents
        modifiedDateComponents:(nullable NSDateComponents *)modifiedDateComponents
-                   identifier:(nullable NSString *)identifier NS_DESIGNATED_INITIALIZER;
+                   identifier:(nullable NSString *)identifier
+                     priority:(INTaskPriority)priority NS_DESIGNATED_INITIALIZER API_AVAILABLE(ios(13.0), watchos(6.0));
+
+- (instancetype)initWithTitle:(INSpeakableString *)title
+                       status:(INTaskStatus)status
+                     taskType:(INTaskType)taskType
+          spatialEventTrigger:(nullable INSpatialEventTrigger *)spatialEventTrigger
+         temporalEventTrigger:(nullable INTemporalEventTrigger *)temporalEventTrigger
+        createdDateComponents:(nullable NSDateComponents *)createdDateComponents
+       modifiedDateComponents:(nullable NSDateComponents *)modifiedDateComponents
+                   identifier:(nullable NSString *)identifier;
 
 @property (readonly, copy, NS_NONATOMIC_IOSONLY) INSpeakableString *title;
 
@@ -44,6 +55,8 @@ API_UNAVAILABLE(macosx)
 @property (readonly, copy, nullable, NS_NONATOMIC_IOSONLY) NSString *identifier;
 
 @property (readonly, assign, NS_NONATOMIC_IOSONLY) INTaskType taskType;
+
+@property (readonly, assign, NS_NONATOMIC_IOSONLY) INTaskPriority priority API_AVAILABLE(ios(13.0), watchos(6.0));
 
 @end
 

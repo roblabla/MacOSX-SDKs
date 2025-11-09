@@ -595,8 +595,8 @@ typedef void	(*DVDEventCallBackFunctionPtr)(DVDEventCode inEventCode, DVDEventVa
 //						Returns an error of kDVDErrorInitializingLib if the playback framework is already being used.
 //	DVDDispose		- 	Call when completely done with playback. Usually when the application is quitting.
 //-----------------------------------------------------
-extern	OSStatus	DVDInitialize()																				AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-extern	OSStatus	DVDDispose()																				AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+extern	OSStatus	DVDInitialize()																			    API_DEPRECATED("No longer supported", macos(10.3, 10.15)) API_UNAVAILABLE(ios, tvos, watchos);
+extern	OSStatus	DVDDispose()																				API_DEPRECATED("No longer supported", macos(10.3, 10.15)) API_UNAVAILABLE(ios, tvos, watchos);
 
 
 
@@ -619,15 +619,15 @@ extern	OSStatus	DVDDispose()																				AVAILABLE_MAC_OS_X_VERSION_10_3_
 //	DVDOpenMediaVolumeWithURL	- 	Opens a DVD disc for playback with a CFURLRef.
 //	DVDCloseMediaVolume			-	Closes a previously opened DVD disc.
 //-----------------------------------------------------
-extern	OSStatus	DVDIsValidMediaRef(FSRef *inRef,Boolean *outIsValid)										AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-extern	OSStatus	DVDIsValidMediaURL(CFURLRef inRef,Boolean *outIsValid)										AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-extern	OSStatus	DVDHasMedia(Boolean *outHasMedia)															AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-extern	OSStatus	DVDOpenMediaFile(FSRef *inFile)																AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-extern	OSStatus	DVDOpenMediaFileWithURL(CFURLRef inFile)													AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-extern	OSStatus	DVDCloseMediaFile()																			AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-extern	OSStatus	DVDOpenMediaVolume(FSRef *inVolume)															AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-extern	OSStatus	DVDOpenMediaVolumeWithURL(CFURLRef inVolume)												AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-extern	OSStatus	DVDCloseMediaVolume()																		AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+extern	OSStatus	DVDIsValidMediaRef(FSRef *inRef,Boolean *outIsValid)										API_DEPRECATED("No longer supported", macos(10.3, 10.15)) API_UNAVAILABLE(ios, tvos, watchos);
+extern	OSStatus	DVDIsValidMediaURL(CFURLRef inRef,Boolean *outIsValid)										API_DEPRECATED("No longer supported", macos(10.5, 10.15)) API_UNAVAILABLE(ios, tvos, watchos);
+extern	OSStatus	DVDHasMedia(Boolean *outHasMedia)															API_DEPRECATED("No longer supported", macos(10.3, 10.15)) API_UNAVAILABLE(ios, tvos, watchos);
+extern	OSStatus	DVDOpenMediaFile(FSRef *inFile)																API_DEPRECATED("No longer supported", macos(10.3, 10.15)) API_UNAVAILABLE(ios, tvos, watchos);
+extern	OSStatus	DVDOpenMediaFileWithURL(CFURLRef inFile)													API_DEPRECATED("No longer supported", macos(10.5, 10.15)) API_UNAVAILABLE(ios, tvos, watchos);
+extern	OSStatus	DVDCloseMediaFile()																			API_DEPRECATED("No longer supported", macos(10.3, 10.15)) API_UNAVAILABLE(ios, tvos, watchos);
+extern	OSStatus	DVDOpenMediaVolume(FSRef *inVolume)															API_DEPRECATED("No longer supported", macos(10.3, 10.15)) API_UNAVAILABLE(ios, tvos, watchos);
+extern	OSStatus	DVDOpenMediaVolumeWithURL(CFURLRef inVolume)												API_DEPRECATED("No longer supported", macos(10.5, 10.15)) API_UNAVAILABLE(ios, tvos, watchos);
+extern	OSStatus	DVDCloseMediaVolume()																		API_DEPRECATED("No longer supported", macos(10.3, 10.15)) API_UNAVAILABLE(ios, tvos, watchos);
 
 
 
@@ -668,10 +668,10 @@ extern	OSStatus	DVDGetVideoDevice(GDHandle* outDevice)											AVAILABLE_MAC_O
 //	DVDSetVideoDisplay		- 	Set the display to playback video on.
 //	DVDGetVideoDisplay		- 	Returns the display video playback is on.
 //-----------------------------------------------------
-extern	OSStatus	DVDIsSupportedDisplay(CGDirectDisplayID inDisplay, Boolean* outSupported)		AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-extern	OSStatus	DVDSwitchToDisplay(CGDirectDisplayID newDisplay, Boolean* outSupported)			AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-extern	OSStatus	DVDSetVideoDisplay(CGDirectDisplayID inDisplay)									AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-extern	OSStatus	DVDGetVideoDisplay(CGDirectDisplayID *outDisplay)								AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+extern	OSStatus	DVDIsSupportedDisplay(CGDirectDisplayID inDisplay, Boolean* outSupported)		API_DEPRECATED("No longer supported", macos(10.3, 10.15)) API_UNAVAILABLE(ios, tvos, watchos);
+extern	OSStatus	DVDSwitchToDisplay(CGDirectDisplayID newDisplay, Boolean* outSupported)			API_DEPRECATED("No longer supported", macos(10.3, 10.15)) API_UNAVAILABLE(ios, tvos, watchos);
+extern	OSStatus	DVDSetVideoDisplay(CGDirectDisplayID inDisplay)									API_DEPRECATED("No longer supported", macos(10.3, 10.15)) API_UNAVAILABLE(ios, tvos, watchos);
+extern	OSStatus	DVDGetVideoDisplay(CGDirectDisplayID *outDisplay)								API_DEPRECATED("No longer supported", macos(10.3, 10.15)) API_UNAVAILABLE(ios, tvos, watchos);
 
 
 
@@ -708,22 +708,22 @@ extern	OSStatus	DVDGetVideoDisplay(CGDirectDisplayID *outDisplay)								AVAILAB
 extern	OSStatus	DVDSetVideoPort(CGrafPtr inVidPort)															AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 extern	OSStatus	DVDGetVideoPort(CGrafPtr* outVidPort)														AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 #endif
-extern	OSStatus	DVDSetVideoWindowID(UInt32 inVidWindowID)													AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-extern	OSStatus	DVDGetVideoWindowID(UInt32 *outVidWindowID)													AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+extern	OSStatus	DVDSetVideoWindowID(UInt32 inVidWindowID)													API_DEPRECATED("No longer supported", macos(10.3, 10.15)) API_UNAVAILABLE(ios, tvos, watchos);
+extern	OSStatus	DVDGetVideoWindowID(UInt32 *outVidWindowID)													API_DEPRECATED("No longer supported", macos(10.3, 10.15)) API_UNAVAILABLE(ios, tvos, watchos);
 #if !__LP64__
 extern	OSStatus	DVDSetVideoBounds(Rect *inPortRect)															AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 extern	OSStatus	DVDGetVideoBounds(Rect *outPortRect)														AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 extern	OSStatus	DVDGetVideoKeyColor(RGBColor *outKeyColor)													AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 #endif
-extern	OSStatus	DVDGetNativeVideoSize(UInt16 *outWidth, UInt16 *outHeight)									AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-extern	OSStatus	DVDGetAspectRatio(DVDAspectRatio *outRatio)													AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-extern	OSStatus	DVDSetAspectRatio(DVDAspectRatio inRatio)													AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-extern	OSStatus	DVDGetFormatStandard(DVDFormat *outFormat)													AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+extern	OSStatus	DVDGetNativeVideoSize(UInt16 *outWidth, UInt16 *outHeight)									API_DEPRECATED("No longer supported", macos(10.3, 10.15)) API_UNAVAILABLE(ios, tvos, watchos);
+extern	OSStatus	DVDGetAspectRatio(DVDAspectRatio *outRatio)													API_DEPRECATED("No longer supported", macos(10.3, 10.15)) API_UNAVAILABLE(ios, tvos, watchos);
+extern	OSStatus	DVDSetAspectRatio(DVDAspectRatio inRatio)													API_DEPRECATED("No longer supported", macos(10.3, 10.15)) API_UNAVAILABLE(ios, tvos, watchos);
+extern	OSStatus	DVDGetFormatStandard(DVDFormat *outFormat)													API_DEPRECATED("No longer supported", macos(10.3, 10.15)) API_UNAVAILABLE(ios, tvos, watchos);
 
-extern	OSStatus	DVDSetVideoWindowRef(WindowRef DVD_NULLABLE inWindowRef)									AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-extern	OSStatus	DVDGetVideoWindowRef(WindowRef DVD_NONNULL * DVD_NONNULL outWindowRef)						AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-extern	OSStatus	DVDSetVideoCGBounds(CGRect *inRect)															AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-extern	OSStatus	DVDGetVideoCGBounds(CGRect *outRect)														AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+extern	OSStatus	DVDSetVideoWindowRef(WindowRef DVD_NULLABLE inWindowRef)									API_DEPRECATED("No longer supported", macos(10.5, 10.15)) API_UNAVAILABLE(ios, tvos, watchos);
+extern	OSStatus	DVDGetVideoWindowRef(WindowRef DVD_NONNULL * DVD_NONNULL outWindowRef)						API_DEPRECATED("No longer supported", macos(10.5, 10.15)) API_UNAVAILABLE(ios, tvos, watchos);
+extern	OSStatus	DVDSetVideoCGBounds(CGRect *inRect)															API_DEPRECATED("No longer supported", macos(10.5, 10.15)) API_UNAVAILABLE(ios, tvos, watchos);
+extern	OSStatus	DVDGetVideoCGBounds(CGRect *outRect)														API_DEPRECATED("No longer supported", macos(10.5, 10.15)) API_UNAVAILABLE(ios, tvos, watchos);
 
 
 
@@ -745,16 +745,16 @@ extern	OSStatus	DVDGetVideoCGBounds(CGRect *outRect)														AVAILABLE_MAC_
 //	DVDSetSPDIFDataOutDevice			- selects a SPDIF capable audio device
 //	DVDGetSPDIFDataOutDevice			- returns the selected SPDIF capable audio device
 //-----------------------------------------------------
-extern	OSStatus	DVDGetAudioStreamFormat(DVDAudioFormat* DVD_NULLABLE outFormat, UInt32* DVD_NULLABLE outBitsPerSample, UInt32* DVD_NULLABLE outSamplesPerSecond, UInt32* DVD_NULLABLE outChannels)								AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-extern	OSStatus	DVDGetAudioStreamFormatByStream(UInt32 inStreamNum, DVDAudioFormat* DVD_NULLABLE outFormat, UInt32* DVD_NULLABLE outBitsPerSample, UInt32* DVD_NULLABLE outSamplesPerSecond, UInt32* DVD_NULLABLE outChannels)	AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+extern	OSStatus	DVDGetAudioStreamFormat(DVDAudioFormat* DVD_NULLABLE outFormat, UInt32* DVD_NULLABLE outBitsPerSample, UInt32* DVD_NULLABLE outSamplesPerSecond, UInt32* DVD_NULLABLE outChannels)								API_DEPRECATED("No longer supported", macos(10.3, 10.15)) API_UNAVAILABLE(ios, tvos, watchos);
+extern	OSStatus	DVDGetAudioStreamFormatByStream(UInt32 inStreamNum, DVDAudioFormat* DVD_NULLABLE outFormat, UInt32* DVD_NULLABLE outBitsPerSample, UInt32* DVD_NULLABLE outSamplesPerSecond, UInt32* DVD_NULLABLE outChannels)	API_DEPRECATED("No longer supported", macos(10.4, 10.15)) API_UNAVAILABLE(ios, tvos, watchos);
 
-extern	OSStatus	DVDGetAudioOutputModeCapabilities(DVDAudioMode *outModes)										AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-extern	OSStatus	DVDSetAudioOutputMode(DVDAudioMode inMode)														AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-extern	OSStatus	DVDGetAudioOutputMode(DVDAudioMode *outMode)													AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-extern	OSStatus	DVDGetSPDIFDataOutDeviceCount(UInt32 *outCount)													AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-extern	OSStatus	DVDGetSPDIFDataOutDeviceCFName(UInt32 inIndex, CFStringRef DVD_NONNULL * DVD_NONNULL outName)	AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-extern	OSStatus	DVDSetSPDIFDataOutDevice(UInt32 inIndex)														AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-extern	OSStatus	DVDGetSPDIFDataOutDevice(UInt32 *outIndex)														AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+extern	OSStatus	DVDGetAudioOutputModeCapabilities(DVDAudioMode *outModes)										API_DEPRECATED("No longer supported", macos(10.3, 10.15)) API_UNAVAILABLE(ios, tvos, watchos);
+extern	OSStatus	DVDSetAudioOutputMode(DVDAudioMode inMode)														API_DEPRECATED("No longer supported", macos(10.3, 10.15)) API_UNAVAILABLE(ios, tvos, watchos);
+extern	OSStatus	DVDGetAudioOutputMode(DVDAudioMode *outMode)													API_DEPRECATED("No longer supported", macos(10.3, 10.15)) API_UNAVAILABLE(ios, tvos, watchos);
+extern	OSStatus	DVDGetSPDIFDataOutDeviceCount(UInt32 *outCount)													API_DEPRECATED("No longer supported", macos(10.3, 10.15)) API_UNAVAILABLE(ios, tvos, watchos);
+extern	OSStatus	DVDGetSPDIFDataOutDeviceCFName(UInt32 inIndex, CFStringRef DVD_NONNULL * DVD_NONNULL outName)	API_DEPRECATED("No longer supported", macos(10.3, 10.15)) API_UNAVAILABLE(ios, tvos, watchos);
+extern	OSStatus	DVDSetSPDIFDataOutDevice(UInt32 inIndex)														API_DEPRECATED("No longer supported", macos(10.3, 10.15)) API_UNAVAILABLE(ios, tvos, watchos);
+extern	OSStatus	DVDGetSPDIFDataOutDevice(UInt32 *outIndex)														API_DEPRECATED("No longer supported", macos(10.3, 10.15)) API_UNAVAILABLE(ios, tvos, watchos);
 
 
 
@@ -769,8 +769,8 @@ extern	OSStatus	DVDGetSPDIFDataOutDevice(UInt32 *outIndex)														AVAILABL
 //	DVDGetTime	- 	Gets the current playback position in the current title in seconds relative 
 //				  	to the requested time code (elapsed,remaining).
 //-----------------------------------------------------
-extern	OSStatus	DVDSetTime(DVDTimeCode inTimeCode,DVDTimePosition inTime,UInt16 inFrames)					AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-extern	OSStatus	DVDGetTime(DVDTimeCode inTimeCode,DVDTimePosition *outTime,UInt16 *outFrames)				AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+extern	OSStatus	DVDSetTime(DVDTimeCode inTimeCode,DVDTimePosition inTime,UInt16 inFrames)					API_DEPRECATED("No longer supported", macos(10.3, 10.15)) API_UNAVAILABLE(ios, tvos, watchos);
+extern	OSStatus	DVDGetTime(DVDTimeCode inTimeCode,DVDTimePosition *outTime,UInt16 *outFrames)				API_DEPRECATED("No longer supported", macos(10.3, 10.15)) API_UNAVAILABLE(ios, tvos, watchos);
 
 
 
@@ -782,9 +782,9 @@ extern	OSStatus	DVDGetTime(DVDTimeCode inTimeCode,DVDTimePosition *outTime,UInt1
 //	DVDIdle			- 	Allows the framework to get a consistent time to process at. (Might be removed in the future).
 //	DVDUpdateVideo	- 	Forces the video to be updated.
 //-----------------------------------------------------
-extern	OSStatus	DVDGetState(DVDState *outState)																AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-extern	OSStatus	DVDIdle()																					AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-extern	OSStatus	DVDUpdateVideo()																			AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+extern	OSStatus	DVDGetState(DVDState *outState)																API_DEPRECATED("No longer supported", macos(10.3, 10.15)) API_UNAVAILABLE(ios, tvos, watchos);
+extern	OSStatus	DVDIdle()																					API_DEPRECATED("No longer supported", macos(10.3, 10.15)) API_UNAVAILABLE(ios, tvos, watchos);
+extern	OSStatus	DVDUpdateVideo()																			API_DEPRECATED("No longer supported", macos(10.3, 10.15)) API_UNAVAILABLE(ios, tvos, watchos);
 
 
 
@@ -804,15 +804,15 @@ extern	OSStatus	DVDUpdateVideo()																			AVAILABLE_MAC_OS_X_VERSION_10
 //	DVDStepFrame	- 	Steps one frame in the direction specified in DVDScanDirection.
 //						Currently only supports kDVDScanDirectionForward.
 //-----------------------------------------------------
-extern	OSStatus	DVDIsPlaying(Boolean *outIsPlaying)															AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-extern	OSStatus	DVDIsPaused(Boolean *outIsPaused)															AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-extern	OSStatus	DVDPlay()																					AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-extern	OSStatus	DVDPause()																					AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-extern	OSStatus	DVDResume()																					AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-extern	OSStatus	DVDStop()																					AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-extern	OSStatus	DVDScan(DVDScanRate inRate,DVDScanDirection inDirection)									AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;	// fast forward, rewind, slow mo
-extern	OSStatus	DVDGetScanRate(DVDScanRate* DVD_NULLABLE outRate, DVDScanDirection* DVD_NULLABLE outDirection)	AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;	// get the current play rate (fast forward, etc)
-extern	OSStatus	DVDStepFrame(DVDScanDirection inDirection)													AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+extern	OSStatus	DVDIsPlaying(Boolean *outIsPlaying)															API_DEPRECATED("No longer supported", macos(10.3, 10.15)) API_UNAVAILABLE(ios, tvos, watchos);
+extern	OSStatus	DVDIsPaused(Boolean *outIsPaused)															API_DEPRECATED("No longer supported", macos(10.3, 10.15)) API_UNAVAILABLE(ios, tvos, watchos);
+extern	OSStatus	DVDPlay()																					API_DEPRECATED("No longer supported", macos(10.3, 10.15)) API_UNAVAILABLE(ios, tvos, watchos);
+extern	OSStatus	DVDPause()																					API_DEPRECATED("No longer supported", macos(10.3, 10.15)) API_UNAVAILABLE(ios, tvos, watchos);
+extern	OSStatus	DVDResume()																					API_DEPRECATED("No longer supported", macos(10.3, 10.15)) API_UNAVAILABLE(ios, tvos, watchos);
+extern	OSStatus	DVDStop()																					API_DEPRECATED("No longer supported", macos(10.3, 10.15)) API_UNAVAILABLE(ios, tvos, watchos);
+extern	OSStatus	DVDScan(DVDScanRate inRate,DVDScanDirection inDirection)									API_DEPRECATED("No longer supported", macos(10.3, 10.15)) API_UNAVAILABLE(ios, tvos, watchos);	// fast forward, rewind, slow mo
+extern	OSStatus	DVDGetScanRate(DVDScanRate* DVD_NULLABLE outRate, DVDScanDirection* DVD_NULLABLE outDirection)	API_DEPRECATED("No longer supported", macos(10.3, 10.15)) API_UNAVAILABLE(ios, tvos, watchos);	// get the current play rate (fast forward, etc)
+extern	OSStatus	DVDStepFrame(DVDScanDirection inDirection)													API_DEPRECATED("No longer supported", macos(10.3, 10.15)) API_UNAVAILABLE(ios, tvos, watchos);
 
 
 
@@ -829,11 +829,11 @@ extern	OSStatus	DVDStepFrame(DVDScanDirection inDirection)													AVAILABLE
 //	DVDGetAudioVolume		- 	Gets the current playback volume (0 - 255).
 //	DVDGetAudioVolumeInfo	- 	Gets the playback volume info (minimum, maximum, and current volume).
 //-----------------------------------------------------
-extern	OSStatus	DVDIsMuted(Boolean *outIsMuted)																AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-extern	OSStatus	DVDMute(Boolean inMute)																		AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-extern	OSStatus	DVDSetAudioVolume(UInt16 inVolume)															AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-extern	OSStatus	DVDGetAudioVolume(UInt16 *outVolume)														AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-extern	OSStatus	DVDGetAudioVolumeInfo(UInt16* DVD_NULLABLE outMinVolume, UInt16* DVD_NULLABLE outCurVolume, UInt16* DVD_NULLABLE outMaxVolume)	AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER; // can pass null
+extern	OSStatus	DVDIsMuted(Boolean *outIsMuted)																API_DEPRECATED("No longer supported", macos(10.3, 10.15)) API_UNAVAILABLE(ios, tvos, watchos);
+extern	OSStatus	DVDMute(Boolean inMute)																		API_DEPRECATED("No longer supported", macos(10.3, 10.15)) API_UNAVAILABLE(ios, tvos, watchos);
+extern	OSStatus	DVDSetAudioVolume(UInt16 inVolume)															API_DEPRECATED("No longer supported", macos(10.3, 10.15)) API_UNAVAILABLE(ios, tvos, watchos);
+extern	OSStatus	DVDGetAudioVolume(UInt16 *outVolume)														API_DEPRECATED("No longer supported", macos(10.3, 10.15)) API_UNAVAILABLE(ios, tvos, watchos);
+extern	OSStatus	DVDGetAudioVolumeInfo(UInt16* DVD_NULLABLE outMinVolume, UInt16* DVD_NULLABLE outCurVolume, UInt16* DVD_NULLABLE outMaxVolume)	API_DEPRECATED("No longer supported", macos(10.3, 10.15)) API_UNAVAILABLE(ios, tvos, watchos); // can pass null
 
 
 
@@ -858,27 +858,27 @@ extern	OSStatus	DVDGetAudioVolumeInfo(UInt16* DVD_NULLABLE outMinVolume, UInt16*
 //	DVDDoMenuCGClick		-	If the point (in window root view coordinates) coincides with a menu button, it will be selected.
 //	DVDDoMenuCGMouseOver	-	If the point (in window root view coordinates) coincides with a menu button, it will be hightlighted
 //-----------------------------------------------------
-extern	OSStatus	DVDHasMenu(DVDMenu inMenu, Boolean *outHasMenu)												AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-extern	OSStatus	DVDIsOnMenu(Boolean* DVD_NULLABLE outOnMenu, DVDMenu* DVD_NULLABLE outMenu)					AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-extern	OSStatus	DVDGoToMenu(DVDMenu inMenu)																	AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-extern	OSStatus	DVDReturnToTitle()																			AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-extern	OSStatus	DVDGoBackOneLevel()																			AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-extern	OSStatus	DVDDoUserNavigation(DVDUserNavigation inNavigation)											AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+extern	OSStatus	DVDHasMenu(DVDMenu inMenu, Boolean *outHasMenu)												API_DEPRECATED("No longer supported", macos(10.3, 10.15)) API_UNAVAILABLE(ios, tvos, watchos);
+extern	OSStatus	DVDIsOnMenu(Boolean* DVD_NULLABLE outOnMenu, DVDMenu* DVD_NULLABLE outMenu)					API_DEPRECATED("No longer supported", macos(10.3, 10.15)) API_UNAVAILABLE(ios, tvos, watchos);
+extern	OSStatus	DVDGoToMenu(DVDMenu inMenu)																	API_DEPRECATED("No longer supported", macos(10.3, 10.15)) API_UNAVAILABLE(ios, tvos, watchos);
+extern	OSStatus	DVDReturnToTitle()																			API_DEPRECATED("No longer supported", macos(10.3, 10.15)) API_UNAVAILABLE(ios, tvos, watchos);
+extern	OSStatus	DVDGoBackOneLevel()																			API_DEPRECATED("No longer supported", macos(10.3, 10.15)) API_UNAVAILABLE(ios, tvos, watchos);
+extern	OSStatus	DVDDoUserNavigation(DVDUserNavigation inNavigation)											API_DEPRECATED("No longer supported", macos(10.3, 10.15)) API_UNAVAILABLE(ios, tvos, watchos);
 #if !__LP64__
 extern	OSStatus	DVDDoMenuClick(Point inPortPt, SInt32 *outIndex)											AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 extern	OSStatus	DVDDoMenuMouseOver(Point inPortPt, SInt32 *outIndex)										AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_5;
 #endif
-extern	OSStatus	DVDDoButtonActivate(SInt32 inIndex)															AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+extern	OSStatus	DVDDoButtonActivate(SInt32 inIndex)															API_DEPRECATED("No longer supported", macos(10.4, 10.15)) API_UNAVAILABLE(ios, tvos, watchos);
 
 extern	OSStatus	DVDGetButtoninfo(UInt32* DVD_NULLABLE numberOfButtons,
 									 UInt32* DVD_NULLABLE selectedButton,
 									 UInt32* DVD_NULLABLE forcedActivateButton,
 									 UInt32* DVD_NULLABLE userButtonOffset,
-									 UInt32* DVD_NULLABLE numberOfUserButtons)									AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
-extern	OSStatus	DVDGetButtonPosition(UInt32 index, CGRect *outRect, UInt32 *autoAction)						AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+									 UInt32* DVD_NULLABLE numberOfUserButtons)									API_DEPRECATED("No longer supported", macos(10.4, 10.15)) API_UNAVAILABLE(ios, tvos, watchos);
+extern	OSStatus	DVDGetButtonPosition(UInt32 index, CGRect *outRect, UInt32 *autoAction)						API_DEPRECATED("No longer supported", macos(10.4, 10.15)) API_UNAVAILABLE(ios, tvos, watchos);
 
-extern	OSStatus	DVDDoMenuCGClick(CGPoint *inPt, SInt32 *outIndex)											AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-extern	OSStatus	DVDDoMenuCGMouseOver(CGPoint *inPt, SInt32 *outIndex)										AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+extern	OSStatus	DVDDoMenuCGClick(CGPoint *inPt, SInt32 *outIndex)											API_DEPRECATED("No longer supported", macos(10.5, 10.15)) API_UNAVAILABLE(ios, tvos, watchos);
+extern	OSStatus	DVDDoMenuCGMouseOver(CGPoint *inPt, SInt32 *outIndex)										API_DEPRECATED("No longer supported", macos(10.5, 10.15)) API_UNAVAILABLE(ios, tvos, watchos);
 
 
 
@@ -890,9 +890,9 @@ extern	OSStatus	DVDDoMenuCGMouseOver(CGPoint *inPt, SInt32 *outIndex)										A
 //	DVDGetMediaVolumeName	- returns the volume name of the current disc/media
 //	DVDGetMediaVolumeCFName	- returns the volume name of the current disc/media as a CFSring
 //-----------------------------------------------------
-extern	OSStatus	DVDGetMediaUniqueID(DVDDiscID outDiscID)													AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-extern	OSStatus	DVDGetMediaVolumeName(char* DVD_NONNULL * DVD_NONNULL outDiscVolumeName)					AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-extern	OSStatus	DVDGetMediaVolumeCFName(CFStringRef DVD_NONNULL * DVD_NONNULL outDiscVolumeCFName)			AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+extern	OSStatus	DVDGetMediaUniqueID(DVDDiscID outDiscID)													API_DEPRECATED("No longer supported", macos(10.3, 10.15)) API_UNAVAILABLE(ios, tvos, watchos);
+extern	OSStatus	DVDGetMediaVolumeName(char* DVD_NONNULL * DVD_NONNULL outDiscVolumeName)					API_DEPRECATED("No longer supported", macos(10.3, 10.15)) API_UNAVAILABLE(ios, tvos, watchos);
+extern	OSStatus	DVDGetMediaVolumeCFName(CFStringRef DVD_NONNULL * DVD_NONNULL outDiscVolumeCFName)			API_DEPRECATED("No longer supported", macos(10.4, 10.15)) API_UNAVAILABLE(ios, tvos, watchos);
 
 
 
@@ -903,9 +903,9 @@ extern	OSStatus	DVDGetMediaVolumeCFName(CFStringRef DVD_NONNULL * DVD_NONNULL ou
 //	DVDGetTitle		- 	Gets the current title.
 //	DVDGetNumTitles	- 	Gets the number of titles available on the media.
 //-----------------------------------------------------
-extern	OSStatus	DVDSetTitle(UInt16 inTitleNum)																AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-extern	OSStatus	DVDGetTitle(UInt16 *outTitleNum)															AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-extern	OSStatus	DVDGetNumTitles(UInt16 *outNumTitles)														AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+extern	OSStatus	DVDSetTitle(UInt16 inTitleNum)																API_DEPRECATED("No longer supported", macos(10.3, 10.15)) API_UNAVAILABLE(ios, tvos, watchos);
+extern	OSStatus	DVDGetTitle(UInt16 *outTitleNum)															API_DEPRECATED("No longer supported", macos(10.3, 10.15)) API_UNAVAILABLE(ios, tvos, watchos);
+extern	OSStatus	DVDGetNumTitles(UInt16 *outNumTitles)														API_DEPRECATED("No longer supported", macos(10.3, 10.15)) API_UNAVAILABLE(ios, tvos, watchos);
 
 
 
@@ -923,13 +923,13 @@ extern	OSStatus	DVDGetNumTitles(UInt16 *outNumTitles)														AVAILABLE_MAC
 //	DVDPreviousChapter		- 	Sets to the previous chapter on the current title.
 //	DVDNextChapter			-	Sets to the next chapter on the current title.
 //-----------------------------------------------------
-extern	OSStatus	DVDHasPreviousChapter(Boolean *outHasChapter)												AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-extern	OSStatus	DVDHasNextChapter(Boolean *outHasChapter)													AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-extern	OSStatus	DVDSetChapter(UInt16 inChapterNum)															AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-extern	OSStatus	DVDGetChapter(UInt16 *outChapterNum)														AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-extern	OSStatus	DVDGetNumChapters(UInt16 inTitleNum, UInt16 *outNumChapters)								AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-extern	OSStatus	DVDPreviousChapter()																		AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-extern	OSStatus	DVDNextChapter()																			AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+extern	OSStatus	DVDHasPreviousChapter(Boolean *outHasChapter)												API_DEPRECATED("No longer supported", macos(10.3, 10.15)) API_UNAVAILABLE(ios, tvos, watchos);
+extern	OSStatus	DVDHasNextChapter(Boolean *outHasChapter)													API_DEPRECATED("No longer supported", macos(10.3, 10.15)) API_UNAVAILABLE(ios, tvos, watchos);
+extern	OSStatus	DVDSetChapter(UInt16 inChapterNum)															API_DEPRECATED("No longer supported", macos(10.3, 10.15)) API_UNAVAILABLE(ios, tvos, watchos);
+extern	OSStatus	DVDGetChapter(UInt16 *outChapterNum)														API_DEPRECATED("No longer supported", macos(10.3, 10.15)) API_UNAVAILABLE(ios, tvos, watchos);
+extern	OSStatus	DVDGetNumChapters(UInt16 inTitleNum, UInt16 *outNumChapters)								API_DEPRECATED("No longer supported", macos(10.3, 10.15)) API_UNAVAILABLE(ios, tvos, watchos);
+extern	OSStatus	DVDPreviousChapter()																		API_DEPRECATED("No longer supported", macos(10.3, 10.15)) API_UNAVAILABLE(ios, tvos, watchos);
+extern	OSStatus	DVDNextChapter()																			API_DEPRECATED("No longer supported", macos(10.3, 10.15)) API_UNAVAILABLE(ios, tvos, watchos);
 
 
 
@@ -943,9 +943,9 @@ extern	OSStatus	DVDNextChapter()																			AVAILABLE_MAC_OS_X_VERSION_10
 //	DVDGetAngle		-	Gets the angle displayed.
 //	DVDGetNumAngles	-	Gets the number of angles currently available.
 //-----------------------------------------------------
-extern	OSStatus	DVDSetAngle(UInt16 inAngleNum)																AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-extern	OSStatus	DVDGetAngle(UInt16 *outAngleNum)															AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-extern	OSStatus	DVDGetNumAngles(UInt16 *outNumAngles)														AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+extern	OSStatus	DVDSetAngle(UInt16 inAngleNum)																API_DEPRECATED("No longer supported", macos(10.3, 10.15)) API_UNAVAILABLE(ios, tvos, watchos);
+extern	OSStatus	DVDGetAngle(UInt16 *outAngleNum)															API_DEPRECATED("No longer supported", macos(10.3, 10.15)) API_UNAVAILABLE(ios, tvos, watchos);
+extern	OSStatus	DVDGetNumAngles(UInt16 *outNumAngles)														API_DEPRECATED("No longer supported", macos(10.3, 10.15)) API_UNAVAILABLE(ios, tvos, watchos);
 
 
 
@@ -961,11 +961,11 @@ extern	OSStatus	DVDGetNumAngles(UInt16 *outNumAngles)														AVAILABLE_MAC
 //	DVDGetSubPictureStream		-	Gets the sub picture stream being displayed.
 //	DVDGetNumSubPictureStreams	-	Gets the number of sub pictures streams currently available.
 //-----------------------------------------------------
-extern	OSStatus	DVDDisplaySubPicture(Boolean inDisplay)											AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-extern	OSStatus	DVDIsDisplayingSubPicture(Boolean *outDisplayingSubPicture)						AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-extern	OSStatus	DVDSetSubPictureStream(UInt16 inStreamNum)										AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-extern	OSStatus	DVDGetSubPictureStream(UInt16 *outStreamNum)									AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-extern	OSStatus	DVDGetNumSubPictureStreams(UInt16 *outNumStreams)								AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+extern	OSStatus	DVDDisplaySubPicture(Boolean inDisplay)											API_DEPRECATED("No longer supported", macos(10.3, 10.15)) API_UNAVAILABLE(ios, tvos, watchos);
+extern	OSStatus	DVDIsDisplayingSubPicture(Boolean *outDisplayingSubPicture)						API_DEPRECATED("No longer supported", macos(10.3, 10.15)) API_UNAVAILABLE(ios, tvos, watchos);
+extern	OSStatus	DVDSetSubPictureStream(UInt16 inStreamNum)										API_DEPRECATED("No longer supported", macos(10.3, 10.15)) API_UNAVAILABLE(ios, tvos, watchos);
+extern	OSStatus	DVDGetSubPictureStream(UInt16 *outStreamNum)									API_DEPRECATED("No longer supported", macos(10.3, 10.15)) API_UNAVAILABLE(ios, tvos, watchos);
+extern	OSStatus	DVDGetNumSubPictureStreams(UInt16 *outNumStreams)								API_DEPRECATED("No longer supported", macos(10.3, 10.15)) API_UNAVAILABLE(ios, tvos, watchos);
 
 
 
@@ -979,9 +979,9 @@ extern	OSStatus	DVDGetNumSubPictureStreams(UInt16 *outNumStreams)								AVAILAB
 //	DVDGetAudioStream		-	Gets the audio stream currently being used.
 //	DVDGetNumAudioStreams	-	Gets the number of audio streams currently available.
 //-----------------------------------------------------
-extern	OSStatus	DVDSetAudioStream(UInt16 inStreamNum)											AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-extern	OSStatus	DVDGetAudioStream(UInt16 *outStreamNum)											AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-extern	OSStatus	DVDGetNumAudioStreams(UInt16 *outNumStreams)									AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+extern	OSStatus	DVDSetAudioStream(UInt16 inStreamNum)											API_DEPRECATED("No longer supported", macos(10.3, 10.15)) API_UNAVAILABLE(ios, tvos, watchos);
+extern	OSStatus	DVDGetAudioStream(UInt16 *outStreamNum)											API_DEPRECATED("No longer supported", macos(10.3, 10.15)) API_UNAVAILABLE(ios, tvos, watchos);
+extern	OSStatus	DVDGetNumAudioStreams(UInt16 *outNumStreams)									API_DEPRECATED("No longer supported", macos(10.3, 10.15)) API_UNAVAILABLE(ios, tvos, watchos);
 
 
 
@@ -1007,16 +1007,16 @@ extern	OSStatus	DVDGetNumAudioStreams(UInt16 *outNumStreams)									AVAILABLE_M
 //	DVDSetDefaultMenuLanguageCode			-	Sets the default menu language code to be used.
 //	DVDGetMenuLanguageCode					-	Returns the menu language code being used.
 //-----------------------------------------------------
-extern	OSStatus	DVDSetDefaultSubPictureLanguageCode(DVDLanguageCode inCode, DVDSubpictureExtensionCode inExtension)								AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-extern	OSStatus	DVDGetSubPictureLanguageCode(DVDLanguageCode* DVD_NULLABLE outCode, DVDSubpictureExtensionCode* DVD_NULLABLE outExtension)		AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-extern	OSStatus	DVDGetSubPictureLanguageCodeByStream(UInt16 inStreamNum, DVDLanguageCode* DVD_NULLABLE outCode, DVDSubpictureExtensionCode* DVD_NULLABLE outExtension)	AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+extern	OSStatus	DVDSetDefaultSubPictureLanguageCode(DVDLanguageCode inCode, DVDSubpictureExtensionCode inExtension)								API_DEPRECATED("No longer supported", macos(10.3, 10.15)) API_UNAVAILABLE(ios, tvos, watchos);
+extern	OSStatus	DVDGetSubPictureLanguageCode(DVDLanguageCode* DVD_NULLABLE outCode, DVDSubpictureExtensionCode* DVD_NULLABLE outExtension)		API_DEPRECATED("No longer supported", macos(10.3, 10.15)) API_UNAVAILABLE(ios, tvos, watchos);
+extern	OSStatus	DVDGetSubPictureLanguageCodeByStream(UInt16 inStreamNum, DVDLanguageCode* DVD_NULLABLE outCode, DVDSubpictureExtensionCode* DVD_NULLABLE outExtension)	API_DEPRECATED("No longer supported", macos(10.3, 10.15)) API_UNAVAILABLE(ios, tvos, watchos);
 
-extern	OSStatus	DVDSetDefaultAudioLanguageCode(DVDLanguageCode inCode, DVDAudioExtensionCode inExtension)														AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-extern	OSStatus	DVDGetAudioLanguageCode(DVDLanguageCode* DVD_NULLABLE outCode, DVDAudioExtensionCode* DVD_NULLABLE outExtension)								AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-extern	OSStatus	DVDGetAudioLanguageCodeByStream(UInt16 inStreamNum, DVDLanguageCode* DVD_NULLABLE outCode, DVDAudioExtensionCode* DVD_NULLABLE outExtension)	AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+extern	OSStatus	DVDSetDefaultAudioLanguageCode(DVDLanguageCode inCode, DVDAudioExtensionCode inExtension)														API_DEPRECATED("No longer supported", macos(10.3, 10.15)) API_UNAVAILABLE(ios, tvos, watchos);
+extern	OSStatus	DVDGetAudioLanguageCode(DVDLanguageCode* DVD_NULLABLE outCode, DVDAudioExtensionCode* DVD_NULLABLE outExtension)								API_DEPRECATED("No longer supported", macos(10.3, 10.15)) API_UNAVAILABLE(ios, tvos, watchos);
+extern	OSStatus	DVDGetAudioLanguageCodeByStream(UInt16 inStreamNum, DVDLanguageCode* DVD_NULLABLE outCode, DVDAudioExtensionCode* DVD_NULLABLE outExtension)	API_DEPRECATED("No longer supported", macos(10.3, 10.15)) API_UNAVAILABLE(ios, tvos, watchos);
 
-extern	OSStatus	DVDSetDefaultMenuLanguageCode(DVDLanguageCode inCode)																			AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-extern	OSStatus	DVDGetMenuLanguageCode(DVDLanguageCode *outCode)																				AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+extern	OSStatus	DVDSetDefaultMenuLanguageCode(DVDLanguageCode inCode)																			API_DEPRECATED("No longer supported", macos(10.3, 10.15)) API_UNAVAILABLE(ios, tvos, watchos);
+extern	OSStatus	DVDGetMenuLanguageCode(DVDLanguageCode *outCode)																				API_DEPRECATED("No longer supported", macos(10.3, 10.15)) API_UNAVAILABLE(ios, tvos, watchos);
 
 
 
@@ -1031,12 +1031,12 @@ extern	OSStatus	DVDGetMenuLanguageCode(DVDLanguageCode *outCode)																
 //	DVDSetLastPlayBookmark		- sets last play bookmark for next Play command
 //	DVDClearLastPlayBookmark	- clears last play bookmark for next Play command
 //-----------------------------------------------------
-extern	OSStatus	DVDGetBookmark(void* DVD_NULLABLE outBookMarkData, UInt32 *ioBookMarkDataSize)			AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-extern	OSStatus	DVDGotoBookmark(void *inBookMarkData, UInt32 inBookMarkDataSize)						AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+extern	OSStatus	DVDGetBookmark(void* DVD_NULLABLE outBookMarkData, UInt32 *ioBookMarkDataSize)			API_DEPRECATED("No longer supported", macos(10.3, 10.15)) API_UNAVAILABLE(ios, tvos, watchos);
+extern	OSStatus	DVDGotoBookmark(void *inBookMarkData, UInt32 inBookMarkDataSize)						API_DEPRECATED("No longer supported", macos(10.3, 10.15)) API_UNAVAILABLE(ios, tvos, watchos);
 
-extern	OSStatus	DVDGetLastPlayBookmark(void* DVD_NULLABLE outBookMarkData, UInt32 *ioBookMarkDataSize)	AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-extern	OSStatus	DVDSetLastPlayBookmark(void *inBookMarkData, UInt32 inBookMarkDataSize)					AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-extern	OSStatus	DVDClearLastPlayBookmark()																AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+extern	OSStatus	DVDGetLastPlayBookmark(void* DVD_NULLABLE outBookMarkData, UInt32 *ioBookMarkDataSize)	API_DEPRECATED("No longer supported", macos(10.3, 10.15)) API_UNAVAILABLE(ios, tvos, watchos);
+extern	OSStatus	DVDSetLastPlayBookmark(void *inBookMarkData, UInt32 inBookMarkDataSize)					API_DEPRECATED("No longer supported", macos(10.3, 10.15)) API_UNAVAILABLE(ios, tvos, watchos);
+extern	OSStatus	DVDClearLastPlayBookmark()																API_DEPRECATED("No longer supported", macos(10.3, 10.15)) API_UNAVAILABLE(ios, tvos, watchos);
 
  
 
@@ -1052,9 +1052,9 @@ extern	OSStatus	DVDClearLastPlayBookmark()																AVAILABLE_MAC_OS_X_VER
 //	DVDGetDriveRegionCode	-	Returns the region code the drive is set to and how many changes are left.
 //	DVDSetDriveRegionCode	-	Sets the drive region code (requires user authentication). 
 //-----------------------------------------------------	
-extern	OSStatus	DVDGetDiscRegionCode(DVDRegionCode *outCode)											AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-extern	OSStatus	DVDGetDriveRegionCode(DVDRegionCode* DVD_NULLABLE outCode, SInt16* DVD_NULLABLE outNumberChangesLeft)	AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-extern	OSStatus	DVDSetDriveRegionCode(DVDRegionCode inCode, AuthorizationRef inAuthorization)			AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+extern	OSStatus	DVDGetDiscRegionCode(DVDRegionCode *outCode)											API_DEPRECATED("No longer supported", macos(10.3, 10.15)) API_UNAVAILABLE(ios, tvos, watchos);
+extern	OSStatus	DVDGetDriveRegionCode(DVDRegionCode* DVD_NULLABLE outCode, SInt16* DVD_NULLABLE outNumberChangesLeft)	API_DEPRECATED("No longer supported", macos(10.3, 10.15)) API_UNAVAILABLE(ios, tvos, watchos);
+extern	OSStatus	DVDSetDriveRegionCode(DVDRegionCode inCode, AuthorizationRef inAuthorization)			API_DEPRECATED("No longer supported", macos(10.3, 10.15)) API_UNAVAILABLE(ios, tvos, watchos);
 
 
 
@@ -1065,8 +1065,8 @@ extern	OSStatus	DVDSetDriveRegionCode(DVDRegionCode inCode, AuthorizationRef inA
 //	DVDEnableWebAccess	-	Turns DVD@ccess support on or off.
 //	DVDGetGPRMValue		-	Returns current value of a GPRM register [index:0...16]
 //-----------------------------------------------------
-extern	OSStatus	DVDEnableWebAccess(Boolean inEnable)													AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-extern	OSStatus	DVDGetGPRMValue(UInt32 index, UInt32 *value)											AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+extern	OSStatus	DVDEnableWebAccess(Boolean inEnable)													API_DEPRECATED("No longer supported", macos(10.3, 10.15)) API_UNAVAILABLE(ios, tvos, watchos);
+extern	OSStatus	DVDGetGPRMValue(UInt32 index, UInt32 *value)											API_DEPRECATED("No longer supported", macos(10.4, 10.15)) API_UNAVAILABLE(ios, tvos, watchos);
 
 
 
@@ -1085,14 +1085,14 @@ extern	OSStatus	DVDGetGPRMValue(UInt32 index, UInt32 *value)											AVAILABLE
 //	DVDGetTimeEventRate				-	Gets the rate of the time DVD event.
 //
 //-----------------------------------------------------
-extern	OSStatus	DVDSetFatalErrorCallBack(DVDFatalErrCallBackFunctionPtr inCallBackProc, void* DVD_NULLABLE inRefCon)		AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+extern	OSStatus	DVDSetFatalErrorCallBack(DVDFatalErrCallBackFunctionPtr inCallBackProc, void* DVD_NULLABLE inRefCon)		API_DEPRECATED("No longer supported", macos(10.3, 10.15)) API_UNAVAILABLE(ios, tvos, watchos);
 
-extern	OSStatus	DVDRegisterEventCallBack(DVDEventCallBackFunctionPtr inCallBackProc, DVDEventCode* inCode, UInt32 inCodeCount, void* DVD_NULLABLE inRefCon, DVDEventCallBackRef DVD_NONNULL * DVD_NONNULL outCallBackID)	AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-extern	OSStatus	DVDUnregisterEventCallBack(DVDEventCallBackRef inCallBackID)												AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-extern	Boolean		DVDIsRegisteredEventCallBack(DVDEventCallBackRef inCallBackID)												AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+extern	OSStatus	DVDRegisterEventCallBack(DVDEventCallBackFunctionPtr inCallBackProc, DVDEventCode* inCode, UInt32 inCodeCount, void* DVD_NULLABLE inRefCon, DVDEventCallBackRef DVD_NONNULL * DVD_NONNULL outCallBackID)	API_DEPRECATED("No longer supported", macos(10.3, 10.15)) API_UNAVAILABLE(ios, tvos, watchos);
+extern	OSStatus	DVDUnregisterEventCallBack(DVDEventCallBackRef inCallBackID)												API_DEPRECATED("No longer supported", macos(10.3, 10.15)) API_UNAVAILABLE(ios, tvos, watchos);
+extern	Boolean		DVDIsRegisteredEventCallBack(DVDEventCallBackRef inCallBackID)												API_DEPRECATED("No longer supported", macos(10.3, 10.15)) API_UNAVAILABLE(ios, tvos, watchos);
 
-extern	OSStatus	DVDSetTimeEventRate(UInt32 inMilliseconds)																	AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-extern	OSStatus	DVDGetTimeEventRate(UInt32 *outMilliseconds)																AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+extern	OSStatus	DVDSetTimeEventRate(UInt32 inMilliseconds)																	API_DEPRECATED("No longer supported", macos(10.3, 10.15)) API_UNAVAILABLE(ios, tvos, watchos);
+extern	OSStatus	DVDGetTimeEventRate(UInt32 *outMilliseconds)																API_DEPRECATED("No longer supported", macos(10.3, 10.15)) API_UNAVAILABLE(ios, tvos, watchos);
 
 
 
@@ -1106,8 +1106,8 @@ extern	OSStatus	DVDGetTimeEventRate(UInt32 *outMilliseconds)																AVAI
 //	DVDSleep	- Call when system is putting machine to sleep so playback information can be saved.
 //	DVDWakeUp	- Call when system is waking up so playback information can be reset.
 //-----------------------------------------------------
-extern	OSStatus	DVDSleep(void)																				AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
-extern	OSStatus	DVDWakeUp(void)																				AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+extern	OSStatus	DVDSleep(void)																				API_DEPRECATED("No longer supported", macos(10.3, 10.15)) API_UNAVAILABLE(ios, tvos, watchos);
+extern	OSStatus	DVDWakeUp(void)																				API_DEPRECATED("No longer supported", macos(10.3, 10.15)) API_UNAVAILABLE(ios, tvos, watchos);
 
 
 

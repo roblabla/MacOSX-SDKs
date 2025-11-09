@@ -1,8 +1,8 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 43EE556B-A6FB-3091-9882-B249F694A627' ]
-platform:        macosx
-install-name:    /System/Library/PrivateFrameworks/PersonaKit.framework/Versions/A/PersonaKit
+uuids:           [ 'x86_64: 69BCCF2A-0482-3DA6-9871-EB290C5B2A5D', 'x86_64: 69BCCF2A-0482-3DA6-9871-EB290C5B2A5D' ]
+platform:        zippered
+install-name:    '/System/Library/PrivateFrameworks/PersonaKit.framework/Versions/A/PersonaKit'
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _PRCachedOtherValuesDidChangeNotification, _PRCachedSelfValuesDidChangeNotification, 

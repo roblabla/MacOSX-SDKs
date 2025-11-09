@@ -37,7 +37,7 @@ typedef NS_ENUM(NSInteger, CBPeripheralManagerAuthorizationStatus) {
 	CBPeripheralManagerAuthorizationStatusRestricted,
 	CBPeripheralManagerAuthorizationStatusDenied,
 	CBPeripheralManagerAuthorizationStatusAuthorized,		
-} NS_ENUM_AVAILABLE(10_9, 7_0);
+} NS_DEPRECATED(10_9, 10_15, 7_0, 13_0, "Use CBManagerAuthorization instead");
 
 /*!
  *  @enum CBPeripheralManagerState
@@ -125,7 +125,8 @@ CB_EXTERN_CLASS @interface CBPeripheralManager : CBManager
  *
  *  @see		CBPeripheralManagerAuthorizationStatus
  */
-+ (CBPeripheralManagerAuthorizationStatus)authorizationStatus NS_AVAILABLE(10_9, 7_0);
++ (CBPeripheralManagerAuthorizationStatus)authorizationStatus NS_DEPRECATED(10_9, 10_15, 7_0, 13_0, "Use CBManagerAuthorization instead");
+
 
 - (instancetype)init;
 
@@ -463,20 +464,26 @@ CB_EXTERN_CLASS @interface CBPeripheralManager : CBManager
 - (void)peripheralManager:(CBPeripheralManager *)peripheral didUnpublishL2CAPChannel:(CBL2CAPPSM)PSM error:(nullable NSError *)error;
 
 /*!
+ *  @method peripheral:didOpenL2CAPChannel:error:
+ *
+ *  @param peripheral		The peripheral providing this information.
+ *  @param channel			A <code>CBL2CAPChannel</code> object.
+ *	@param error			If an error occurred, the cause of the failure.
+ *
+ *  @discussion				This method returns the result of a @link openL2CAPChannel: @link call.
+ */
+/*!
  *  @method peripheralManager:didOpenL2CAPChannel:error:
  *
- *  @param peripheral   The peripheral manager requesting this information.
- *  @param requests     A list of one or more <code>CBATTRequest</code> objects.
+ *  @param peripheral   	The peripheral manager requesting this information.
+ *  @param channel	      	A <code>CBL2CAPChannel</code> object.
+ *	@param error		If an error occurred, the cause of the failure.
  *
- *  @discussion         This method is invoked when <i>peripheral</i> receives an ATT request or command for one or more characteristics with a dynamic value.
- *                      For every invocation of this method, @link respondToRequest:withResult: @/link should be called exactly once. If <i>requests</i> contains
- *                      multiple requests, they must be treated as an atomic unit. If the execution of one of the requests would cause a failure, the request
- *                      and error reason should be provided to <code>respondToRequest:withResult:</code> and none of the requests should be executed.
- *
- *  @see                CBATTRequest
+ *  @discussion			This method returns the result of establishing an incoming L2CAP channel , following publishing a channel using @link publishL2CAPChannel: @link call.
  *
  */
 - (void)peripheralManager:(CBPeripheralManager *)peripheral didOpenL2CAPChannel:(nullable CBL2CAPChannel *)channel error:(nullable NSError *)error;
+
 @end
 
 NS_ASSUME_NONNULL_END

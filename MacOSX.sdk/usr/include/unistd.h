@@ -164,7 +164,8 @@
 #endif /* __DARWIN_C_LEVEL */
 
 #define	__ILP32_OFF32          (-1)
-#define	__ILP32_OFFBIG         (1)
+#define	__ILP32_OFFBIG         (-1)
+
 #define	__LP64_OFF64           (1)
 #define	__LPBIG_OFFBIG         (1)
 
@@ -521,6 +522,7 @@ __END_DECLS
  */
 
 #if __DARWIN_C_LEVEL >= 199506L
+#include <_ctermid.h>
                                /* These F_* are really XSI or Issue 6 */
 #define F_ULOCK         0      /* unlock locked section */
 #define	F_LOCK          1      /* lock a section for exclusive use */
@@ -540,11 +542,6 @@ int	 chroot(const char *) __POSIX_C_DEPRECATED(199506L);
 #endif
 
 char	*crypt(const char *, const char *);
-#ifndef __CTERMID_DEFINED
-/* Multiply defined in stdio.h and unistd.h by SUS */
-#define __CTERMID_DEFINED 1
-char    *ctermid(char *);
-#endif
 #if __DARWIN_UNIX03
 void	 encrypt(char *, int) __DARWIN_ALIAS(encrypt);
 #else /* !__DARWIN_UNIX03 */

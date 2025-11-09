@@ -41,19 +41,6 @@
 */
 + (IOBluetoothPairingController *)pairingController;
 
-/*!	@method	withPairingControllerRef:
-	@abstract	Method call to convert an IOBluetoothPairingControllerRef into an IOBluetoothPairingController *.
-        @param	pairingControllerRef IOBluetoothPairingControllerRef for which an IOBluetoothPairingController * is desired.
-	@result		Returns the IOBluetoothPairingController * for the given IOBluetoothPairingControllerRef.
-*/
-+ (IOBluetoothPairingController *)withPairingControllerRef:(IOBluetoothPairingControllerRef)pairingControllerRef DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
-
-/*!	@method	getPairingControllerRef
-	@abstract	Returns an IOBluetoothPairingControllerRef representation of the target IOBluetoothPairingController object.
-	@result		Returns an IOBluetoothPairingControllerRef representation of the target IOBluetoothPairingController object.
-*/
-- (IOBluetoothPairingControllerRef)getPairingControllerRef DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
-
 /*!
     @method		runModal
 	@abstract	Runs the pairing panel in a modal session to allow the user to select a Bluetooth device.

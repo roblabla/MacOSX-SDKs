@@ -1,5 +1,5 @@
 //
-//  MLCustomLayer.h
+//  MLCustomModel.h
 //  CoreML
 //
 //  Copyright © 2018 Apple Inc. All rights reserved.
@@ -41,7 +41,7 @@ API_AVAILABLE(macos(10.14), ios(12.0), watchos(5.0), tvos(12.0))
 
 @optional
 
-/// Batch prediction with explict options, if not implemented the single input predictionFromFeatures:options:error will be used
+/// Batch prediction with explicit options, if not implemented the single input predictionFromFeatures:options:error will be used
 - (nullable id<MLBatchProvider>)predictionsFromBatch:(id<MLBatchProvider>)inputBatch
                                              options:(MLPredictionOptions *)options
                                                error:(NSError **)error;

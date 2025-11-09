@@ -21,13 +21,15 @@ typedef NSString * AVOutputSettingsPreset NS_STRING_ENUM;
  
  When source format information is supplied with these presets, the resulting video settings will not scale up the video from a smaller size.
  */
-AVF_EXPORT AVOutputSettingsPreset const AVOutputSettingsPreset640x480		NS_AVAILABLE(10_9, 7_0);
-AVF_EXPORT AVOutputSettingsPreset const AVOutputSettingsPreset960x540   	NS_AVAILABLE(10_9, 7_0);
-AVF_EXPORT AVOutputSettingsPreset const AVOutputSettingsPreset1280x720  	NS_AVAILABLE(10_9, 7_0);
-AVF_EXPORT AVOutputSettingsPreset const AVOutputSettingsPreset1920x1080		NS_AVAILABLE(10_9, 7_0);
-AVF_EXPORT AVOutputSettingsPreset const AVOutputSettingsPreset3840x2160		NS_AVAILABLE(10_10, 9_0);
-AVF_EXPORT AVOutputSettingsPreset const AVOutputSettingsPresetHEVC1920x1080	NS_AVAILABLE(10_13, 11_0);
-AVF_EXPORT AVOutputSettingsPreset const AVOutputSettingsPresetHEVC3840x2160	NS_AVAILABLE(10_13, 11_0);
+AVF_EXPORT AVOutputSettingsPreset const AVOutputSettingsPreset640x480					API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0)) API_UNAVAILABLE(watchos);
+AVF_EXPORT AVOutputSettingsPreset const AVOutputSettingsPreset960x540					API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0)) API_UNAVAILABLE(watchos);
+AVF_EXPORT AVOutputSettingsPreset const AVOutputSettingsPreset1280x720					API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0)) API_UNAVAILABLE(watchos);
+AVF_EXPORT AVOutputSettingsPreset const AVOutputSettingsPreset1920x1080					API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0)) API_UNAVAILABLE(watchos);
+AVF_EXPORT AVOutputSettingsPreset const AVOutputSettingsPreset3840x2160					API_AVAILABLE(macos(10.10), ios(9.0), tvos(9.0)) API_UNAVAILABLE(watchos);
+AVF_EXPORT AVOutputSettingsPreset const AVOutputSettingsPresetHEVC1920x1080				API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0)) API_UNAVAILABLE(watchos);
+AVF_EXPORT AVOutputSettingsPreset const AVOutputSettingsPresetHEVC1920x1080WithAlpha	API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0)) API_UNAVAILABLE(watchos);
+AVF_EXPORT AVOutputSettingsPreset const AVOutputSettingsPresetHEVC3840x2160				API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0)) API_UNAVAILABLE(watchos);
+AVF_EXPORT AVOutputSettingsPreset const AVOutputSettingsPresetHEVC3840x2160WithAlpha	API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0)) API_UNAVAILABLE(watchos);
 
 @class AVOutputSettingsAssistantInternal;
 
@@ -40,7 +42,7 @@ AVF_EXPORT AVOutputSettingsPreset const AVOutputSettingsPresetHEVC3840x2160	NS_A
  
 		The recommendations made by an instance get better as you tell it more about the format of your source data.  For example, if you set the sourceVideoFormat property, the recommendation made by the videoSettings property will ensure that your video frames are not scaled up from a smaller size.
  */
-NS_CLASS_AVAILABLE(10_9, 7_0)
+API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 @interface AVOutputSettingsAssistant : NSObject
 {
 @private
@@ -59,7 +61,7 @@ AV_INIT_UNAVAILABLE
  
 		On iOS, the returned array may be different between different device models.
  */
-+ (NSArray<AVOutputSettingsPreset> *)availableOutputSettingsPresets NS_AVAILABLE(10_10, 7_0);
++ (NSArray<AVOutputSettingsPreset> *)availableOutputSettingsPresets API_AVAILABLE(macos(10.10), ios(7.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 
 /*!
 	@method outputSettingsAssistantWithPreset:
@@ -157,7 +159,7 @@ AV_INIT_UNAVAILABLE
  
 		It is an error to set this property to a value that is not positive or not numeric.  See CMTIME_IS_NUMERIC.
  */
-@property (nonatomic) CMTime sourceVideoMinFrameDuration NS_AVAILABLE(10_10, 7_0);
+@property (nonatomic) CMTime sourceVideoMinFrameDuration API_AVAILABLE(macos(10.10), ios(7.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 
 @end
 

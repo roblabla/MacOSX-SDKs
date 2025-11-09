@@ -1,9 +1,9 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 089301DF-60C9-3BED-9357-2F91336C1579' ]
-platform:        macosx
-install-name:    /System/Library/PrivateFrameworks/GenerationalStorage.framework/Versions/A/GenerationalStorage
-current-version: 285.101
+uuids:           [ 'x86_64: 11D069EE-A1D7-384A-BD7E-81DB8A23A9BC', 'x86_64: 11D069EE-A1D7-384A-BD7E-81DB8A23A9BC' ]
+platform:        zippered
+install-name:    '/System/Library/PrivateFrameworks/GenerationalStorage.framework/Versions/A/GenerationalStorage'
+current-version: 310
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _GSAdditionCreationDisplayNameKey, _GSAdditionCreationInfoValidate, 
@@ -26,22 +26,20 @@ exports:
                        _GSLibraryGetOrAllocateDocumentId, _GSLibraryGetStorageOptions, 
                        _GSLibraryHasGenerationsForPaths, _GSLibraryInternalStatGeneration, 
                        _GSLibraryPrivateCompactChunkStorage, _GSLibraryPrivateCopyGenerationsForFile, 
-                       _GSLibraryPrivateCreateGenerationArchiveForFile, _GSLibraryPrivateDeleteChunkBackedFile, 
-                       _GSLibraryPrivateDestroyGenerationArchiveForFile, _GSLibraryPrivateImportArchivedGenerationsForFile, 
-                       _GSLibraryPrivateMakeChunkBackedFile, _GSLibraryPrivatePushGenerationAndOverwriteFile, 
-                       _GSLibraryPrivateReleaseReadLockOnVolume, _GSLibraryPrivateRequestFreeSpaceOnVolume, 
-                       _GSLibraryPrivateRequestReadLockOnVolume, _GSLibraryPrivateSetLogLevel, 
-                       _GSLibraryPrivateTransferGenerationToClientName, _GSLibraryRemoveGenerations, 
-                       _GSLibraryResolveDocumentId2, _GSLibraryRestoreGeneration, 
-                       _GSLibrarySetGenerationInfoValueForKey, _GSLibrarySetGenerationOptions, 
-                       _GSLibrarySetGenerationOriginalDisplayName, _GSLibrarySetStorageOptions, 
-                       _GSLibraryStorageMove, _GSMergeInfoValueDictionary, _GSMutableInfoDictionary, 
-                       _GSSetGenerationOptions, _GSSetInfoDictionary, _GSSetOriginalDisplayName, 
-                       _GSSetOriginalPOSIXName, _GSTrackDocument, _GSUbiquitousConflictsNameSpace, 
-                       __BeforePathRemove, __GSError, __GSErrorForErrno, __GSErrorForStatus, 
-                       __GSIsDocumentRevision, __GSOpenByID, __PathRename, __PathResolve, 
-                       __RemoveSubTrees, __RemoveTree, __SetBirthTimeSpecForFD, _get_volume_uuid, 
-                       _kGSLibraryErrorDomain ]
+                       _GSLibraryPrivateDeleteChunkBackedFile, _GSLibraryPrivateMakeChunkBackedFile, 
+                       _GSLibraryPrivatePushGenerationAndOverwriteFile, _GSLibraryPrivateReleaseReadLockOnVolume, 
+                       _GSLibraryPrivateRequestFreeSpaceOnVolume, _GSLibraryPrivateRequestReadLockOnVolume, 
+                       _GSLibraryPrivateSetLogLevel, _GSLibraryPrivateTransferGenerationToClientName, 
+                       _GSLibraryRemoveGenerations, _GSLibraryResolveDocumentId2, 
+                       _GSLibraryRestoreGeneration, _GSLibrarySetGenerationInfoValueForKey, 
+                       _GSLibrarySetGenerationOptions, _GSLibrarySetGenerationOriginalDisplayName, 
+                       _GSLibrarySetStorageOptions, _GSLibraryStorageMove, _GSLibraryTransferDocumentId, 
+                       _GSMergeInfoValueDictionary, _GSMutableInfoDictionary, _GSSetGenerationOptions, 
+                       _GSSetInfoDictionary, _GSSetOriginalDisplayName, _GSSetOriginalPOSIXName, 
+                       _GSTrackDocument, _GSUbiquitousConflictsNameSpace, __BeforePathRemove, 
+                       __GSError, __GSErrorForErrno, __GSErrorForStatus, __GSIsDocumentRevision, 
+                       __GSOpenByID, __PathRename, __PathResolve, __RemoveSubTrees, 
+                       __RemoveTree, __SetBirthTimeSpecForFD, _get_volume_uuid, _kGSLibraryErrorDomain ]
     objc-classes:    [ GSAddition, GSDaemonProxySync, GSDocumentIdentifier, GSPermanentStorage, 
                        GSStagingPrefix, GSStorageManager, GSTemporaryStorage ]
     objc-ivars:      [ GSDaemonProxySync._error, GSDaemonProxySync._result, GSDaemonProxySync._target, 

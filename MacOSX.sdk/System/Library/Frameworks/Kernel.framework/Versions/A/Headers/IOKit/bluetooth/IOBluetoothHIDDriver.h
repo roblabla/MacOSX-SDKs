@@ -142,34 +142,34 @@ public:
 	// Standard IOService Methods
     virtual IOService*  probe( IOService * provider, SInt32 * score );
 	virtual bool		init( OSDictionary *properties );
-	virtual void		free();
+	virtual void		free(void);
 	virtual bool 		willTerminate( IOService * provider, IOOptionBits options );
 	
 	// Starting & Stopping
     virtual bool		handleStart( IOService * provider );
     virtual void		handleStop( IOService *  provider );
-	virtual void		deviceReady();
-	virtual void		closeDownServices();
+	virtual void		deviceReady(void);
+	virtual void		closeDownServices(void);
 
 	// Power Management
-    virtual void		handleSleep();
-    virtual void		handleWake();
-    virtual void		handleShutdown();			// Does nothing
-    virtual void		handleRestart();			// Does nothing
+    virtual void		handleSleep(void);
+    virtual void		handleWake(void);
+    virtual void		handleShutdown(void);			// Does nothing
+    virtual void		handleRestart(void);			// Does nothing
 	
 	// HID Properties
-	virtual OSString*	newTransportString() const;
-	virtual OSString*	newManufacturerString() const;
-	virtual OSString*	newProductString() const;
-	virtual OSNumber*	newVendorIDSourceNumber() const;
-	virtual OSNumber*	newVendorIDNumber() const;
-	virtual OSNumber*	newProductIDNumber() const;
-	virtual OSNumber*	newVersionNumber() const;
+	virtual OSString*	newTransportString(void) const;
+	virtual OSString*	newManufacturerString(void) const;
+	virtual OSString*	newProductString(void) const;
+	virtual OSNumber*	newVendorIDSourceNumber(void) const;
+	virtual OSNumber*	newVendorIDNumber(void) const;
+	virtual OSNumber*	newProductIDNumber(void) const;
+	virtual OSNumber*	newVersionNumber(void) const;
     virtual IOReturn	newReportDescriptor( IOMemoryDescriptor ** descriptor ) const;
-	virtual OSString*	newSerialNumberString() const;
-	virtual OSNumber*	newLocationIDNumber() const;
-    virtual OSNumber*	newCountryCodeNumber() const;
-	virtual OSNumber*	newReportIntervalNumber() const;
+	virtual OSString*	newSerialNumberString(void) const;
+	virtual OSNumber*	newLocationIDNumber(void) const;
+    virtual OSNumber*	newCountryCodeNumber(void) const;
+	virtual OSNumber*	newReportIntervalNumber(void) const;
 
 	// Main UserLand Entry Points
     virtual IOReturn	getReport( IOMemoryDescriptor* report, IOHIDReportType reportType, IOOptionBits options = 0 );
@@ -181,24 +181,24 @@ public:
     virtual void		processControlData( UInt8 *buffer, UInt16 length );
     virtual void		processInterruptData( UInt8 *buffer, UInt16 length );
 	virtual IOReturn	waitForData( IOMemoryDescriptor* report, UInt8 btReportType, UInt8 reportID );
-	virtual IOReturn	waitForHandshake();
+	virtual IOReturn	waitForHandshake(void);
 	
 	// HID Transaction Methods
 	virtual IOReturn	hidControl( UInt8 controlOperation );
-	virtual int			getProtocol();
+	virtual int			getProtocol(void);
 	virtual IOReturn	setProtocol( UInt8 protocol );
-	virtual int			getIdle();
+	virtual int			getIdle(void);
 	virtual IOReturn	setIdle( UInt8 idleRate );
 
 	// Device Introspection
-	virtual bool		isKeyboard();
-	virtual bool		isMouse();
+	virtual bool		isKeyboard(void);
+	virtual bool		isMouse(void);
 	
 	// Misc
 	virtual IOReturn	setPowerState( unsigned long powerStateOrdinal, IOService* whatDevice );
 	virtual IOReturn	createCommandGate( IOService* provider );
 	virtual IOReturn	getDeviceProperties( IOService* provider );
-	virtual	bool		readDeviceName();
+	virtual	bool		readDeviceName(void);
 	
 	// Command Gate Actions
 	static	IOReturn	staticCloseDownServicesAction( OSObject* owner, void* arg1, void* arg2, void* arg3, void* arg4 );
@@ -208,8 +208,8 @@ public:
 	static	IOReturn	staticWillTerminateAction( OSObject* owner, void* arg1, void* arg2, void* arg3, void* arg4 );
 	
 	// Work Loop Methods
-	virtual void		closeDownServicesWL();
-	virtual IOReturn	prepInterruptChannelWL();
+	virtual void		closeDownServicesWL(void);
+	virtual IOReturn	prepInterruptChannelWL(void);
 	virtual IOReturn	getReportWL( IOMemoryDescriptor* report, IOHIDReportType reportType, IOOptionBits options );
 	virtual IOReturn	setReportWL( IOMemoryDescriptor* report, IOHIDReportType reportType, IOOptionBits options );
 	virtual IOReturn	processCommandWL( OSString* command, OSNumber* commandParameter );
@@ -219,11 +219,11 @@ public:
 	// Timeout Handler
 	static	void		deviceConnectTimerFired( OSObject* owner, IOTimerEventSource* sender );
 	static	void		timerFired( OSObject* owner, IOTimerEventSource* sender );
-	virtual void		handleTimeout();
+	virtual void		handleTimeout(void);
 	
 	// IO Counting
-	virtual void		incrementOutstandingIO();
-	virtual void		decrementOutstandingIO();
+	virtual void		incrementOutstandingIO(void);
+	virtual void		decrementOutstandingIO(void);
 	
 	// ReadyToSleepTimeout Handler
 	static	void		ReadyToSleepTimerFired( OSObject* owner, IOTimerEventSource* sender );
@@ -262,7 +262,7 @@ public:
 	virtual UInt32			GetCurrentTime( void );
 	
     OSMetaClassDeclareReservedUsed( IOBluetoothHIDDriver,  9 );
-	virtual void			handleReadyToSleepTimerFired();
+	virtual void			handleReadyToSleepTimerFired(void);
 
     OSMetaClassDeclareReservedUsed( IOBluetoothHIDDriver, 10 );
 	virtual	IOReturn		HIDCommandSleep (void		*	event,

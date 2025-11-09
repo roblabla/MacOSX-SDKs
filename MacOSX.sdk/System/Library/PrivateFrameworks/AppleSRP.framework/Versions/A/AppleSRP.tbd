@@ -1,9 +1,8 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: B8E2BEC9-FAFB-3E26-BF26-E2E58C545006' ]
-platform:        macosx
-install-name:    /System/Library/PrivateFrameworks/AppleSRP.framework/Versions/A/AppleSRP
-objc-constraint: none
+uuids:           [ 'x86_64: 82CB4F67-06AE-3371-9E94-399E4BDDBB97', 'x86_64: 82CB4F67-06AE-3371-9E94-399E4BDDBB97' ]
+platform:        zippered
+install-name:    '/System/Library/PrivateFrameworks/AppleSRP.framework/Versions/A/AppleSRP'
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _BigIntegerAdd, _BigIntegerAddInt, _BigIntegerBitLen, _BigIntegerCheckPrime, 

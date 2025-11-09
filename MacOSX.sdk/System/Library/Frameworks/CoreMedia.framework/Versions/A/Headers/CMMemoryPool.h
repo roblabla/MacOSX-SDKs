@@ -49,10 +49,10 @@ CF_IMPLICIT_BRIDGING_ENABLED
 		CFAllocatorDeallocate methods.
 */
 
-typedef struct CM_BRIDGED_TYPE(id) OpaqueCMMemoryPool *CMMemoryPoolRef; // a CF type; use CFRetain and CFRelease.
+typedef struct CM_BRIDGED_TYPE(id) OpaqueCMMemoryPool *CMMemoryPoolRef API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0)); // a CF type; use CFRetain and CFRelease.
 
 CM_EXPORT CFTypeID CMMemoryPoolGetTypeID(void)
-						__OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_6_0);
+						API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0));
 
 /*!
 	@const		kCMMemoryPoolOption_AgeOutPeriod
@@ -60,28 +60,28 @@ CM_EXPORT CFTypeID CMMemoryPoolGetTypeID(void)
 	@discussion	Pass this in the options dictionary to CMMemoryPoolCreate.
 */
 CM_EXPORT const CFStringRef CM_NONNULL kCMMemoryPoolOption_AgeOutPeriod // CFNumber (seconds)
-								__OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_6_0);
+								API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0));
 
 /*!
 	@function	CMMemoryPoolCreate
 	@abstract	Creates a new CMMemoryPool.
 */
 CM_EXPORT CMMemoryPoolRef CM_NONNULL CMMemoryPoolCreate( CFDictionaryRef CM_NULLABLE options ) // pass NULL for defaults
-								__OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_6_0);
+								API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0));
 
 /*!
 	@function	CMMemoryPoolGetAllocator
 	@abstract	Returns the pool's CFAllocator.
 */
 CM_EXPORT CFAllocatorRef CM_NONNULL CMMemoryPoolGetAllocator( CMMemoryPoolRef CM_NONNULL pool )
-								__OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_6_0);
+								API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0));
 
 /*!
 	@function	CMMemoryPoolFlush
 	@abstract	Deallocates all memory the pool was holding for recycling.
 */
 CM_EXPORT void CMMemoryPoolFlush( CMMemoryPoolRef CM_NONNULL pool )
-					__OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_6_0);
+					API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0));
 
 /*!
 	@function	CMMemoryPoolInvalidate
@@ -93,7 +93,7 @@ CM_EXPORT void CMMemoryPoolFlush( CMMemoryPoolRef CM_NONNULL pool )
 		except that under GC it may be delayed.
 */
 CM_EXPORT void CMMemoryPoolInvalidate( CMMemoryPoolRef CM_NONNULL pool )
-					__OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_6_0);
+					API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0));
 	
 CF_IMPLICIT_BRIDGING_DISABLED
 

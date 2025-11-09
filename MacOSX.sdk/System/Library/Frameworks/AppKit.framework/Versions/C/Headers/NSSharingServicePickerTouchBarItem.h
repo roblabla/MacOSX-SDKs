@@ -1,7 +1,7 @@
 /*
     NSSharingServicePickerTouchBarItem.h
     Application Kit
-    Copyright (c) 2016-2018, Apple Inc.
+    Copyright (c) 2016-2019, Apple Inc.
     All rights reserved.
 */
 
@@ -11,23 +11,14 @@
 @protocol NSSharingServicePickerTouchBarItemDelegate;
 
 NS_ASSUME_NONNULL_BEGIN
+API_UNAVAILABLE_BEGIN(ios)
 
-@class NSTouchBarSharingServicePickerViewController, NSPopoverTouchBarItem;
+API_AVAILABLE(macos(10.12.2), ios(10.13))
+@interface NSSharingServicePickerTouchBarItem : NSTouchBarItem
 
-NS_CLASS_AVAILABLE_MAC(10_12_2)
-@interface NSSharingServicePickerTouchBarItem : NSTouchBarItem {
-@private
-    __kindof NSPopoverTouchBarItem *_internalPopoverItem APPKIT_IVAR;
-    __weak NSTouchBarSharingServicePickerViewController *_pickerViewController APPKIT_IVAR;
-    NSString *_customizationLabel APPKIT_IVAR;
-    __weak id<NSSharingServicePickerTouchBarItemDelegate> _delegate APPKIT_IVAR;
-
-#if !__OBJC2__
-    void *_sharingServicePickerTouchBarItemReserved[4] __unused APPKIT_IVAR;
-#endif
-}
-
+#if !TARGET_OS_IPHONE
 @property (weak) id<NSSharingServicePickerTouchBarItemDelegate> delegate;
+#endif
 
 /* Enables or disabled the sharing button; if the popover is shown, it will first be closed.
  */
@@ -35,15 +26,23 @@ NS_CLASS_AVAILABLE_MAC(10_12_2)
 
 /* Get/set the button title and image. By default, the button title is an empty string, and the button image is a share picker image. */
 @property (copy) NSString *buttonTitle;
-@property (nullable, retain) NSImage *buttonImage;
+
+#if !TARGET_OS_IPHONE
+@property (nullable, strong) NSImage *buttonImage;
+#else
+@property (nullable, strong) UIImage *buttonImage;
+#endif
 
 @end
 
+#if !TARGET_OS_IPHONE
 @protocol NSSharingServicePickerTouchBarItemDelegate <NSSharingServicePickerDelegate>
 @required
 /* Return the items that represent the objects to be shared. They must conform to the <NSPasteboardWriting> protocol or be an NSItemProvider. (e.g. NSString, NSImage, NSURL, etc.). */
 - (NSArray *)itemsForSharingServicePickerTouchBarItem:(NSSharingServicePickerTouchBarItem *)pickerTouchBarItem;
 
 @end
+#endif
 
+API_UNAVAILABLE_END
 NS_ASSUME_NONNULL_END

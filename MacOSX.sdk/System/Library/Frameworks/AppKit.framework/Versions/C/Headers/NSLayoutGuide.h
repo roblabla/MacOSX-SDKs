@@ -1,7 +1,7 @@
 /*
 	NSLayoutGuide.h
 	Application Kit
-	Copyright (c) 2015-2018, Apple Inc.
+	Copyright (c) 2015-2019, Apple Inc.
 	All rights reserved.
  */
 
@@ -10,42 +10,18 @@
 #import <AppKit/NSLayoutAnchor.h>
 #import <AppKit/NSUserInterfaceItemIdentification.h>
 
+@class NSLayoutXAxisAnchor;
+@class NSLayoutYAxisAnchor;
+@class NSLayoutDimension;
+@class NSLayoutConstraint;
+
 NS_ASSUME_NONNULL_BEGIN
-@class NSISVariable;
+API_UNAVAILABLE_BEGIN(ios)
 
 /* NSLayoutGuides will not show up in the view hierarchy, but may be used as items in an NSLayoutConstraint and represent a rectangle in the layout engine.
  */
-NS_CLASS_AVAILABLE_MAC(10_11)
+API_AVAILABLE(macos(10.11))
 @interface NSLayoutGuide : NSObject <NSCoding, NSUserInterfaceItemIdentification>
-{
-    @private
-    id            _owningView APPKIT_IVAR;
-    NSString     *_identifier APPKIT_IVAR;
-    NSISVariable *_minYVariable APPKIT_IVAR;
-    NSISVariable *_minXVariable APPKIT_IVAR;
-    NSISVariable *_widthVariable APPKIT_IVAR;
-    NSISVariable *_heightVariable APPKIT_IVAR;
-    __weak NSLayoutXAxisAnchor *_left APPKIT_IVAR;
-    __weak NSLayoutXAxisAnchor *_right APPKIT_IVAR;
-    __weak NSLayoutXAxisAnchor *_leading APPKIT_IVAR;
-    __weak NSLayoutXAxisAnchor *_trailing APPKIT_IVAR;
-    __weak NSLayoutYAxisAnchor *_top APPKIT_IVAR;
-    __weak NSLayoutYAxisAnchor *_bottom APPKIT_IVAR;
-    __weak NSLayoutDimension   *_width APPKIT_IVAR;
-    __weak NSLayoutDimension   *_height APPKIT_IVAR;
-    __weak NSLayoutXAxisAnchor *_centerX APPKIT_IVAR;
-    __weak NSLayoutYAxisAnchor *_centerY APPKIT_IVAR;
-    
-    NSRect  _frame APPKIT_IVAR;
-    id _aux APPKIT_IVAR;
-    id  _reserved2 __unused APPKIT_IVAR;
-
-    unsigned int    _shouldBeArchived:1 APPKIT_IVAR;
-    unsigned int    _frameNeedsUpdate:1 APPKIT_IVAR;
-    unsigned int    _frameIsObserved:1 APPKIT_IVAR;
-    unsigned int    _reservedFlags:29 __unused APPKIT_IVAR;
-}
-
 
 // The frame of the NSLayoutGuide in its owningView's coordinate system. Valid by the time the owningView is laid out.
 @property (readonly) NSRect frame;
@@ -74,11 +50,11 @@ NS_CLASS_AVAILABLE_MAC(10_11)
 @property (readonly, strong) NSLayoutXAxisAnchor *centerXAnchor;
 @property (readonly, strong) NSLayoutYAxisAnchor *centerYAnchor;
 
-
+#if !TARGET_OS_IPHONE
 // For debugging purposes:
-@property (readonly) BOOL hasAmbiguousLayout NS_AVAILABLE_MAC(10_12);
-- (NSArray<NSLayoutConstraint *> *)constraintsAffectingLayoutForOrientation:(NSLayoutConstraintOrientation)orientation NS_AVAILABLE_MAC(10_12);
-
+@property (readonly) BOOL hasAmbiguousLayout API_AVAILABLE(macos(10.12));
+- (NSArray<NSLayoutConstraint *> *)constraintsAffectingLayoutForOrientation:(NSLayoutConstraintOrientation)orientation API_AVAILABLE(macos(10.12));
+#endif
 
 @end
 
@@ -87,11 +63,12 @@ NS_CLASS_AVAILABLE_MAC(10_11)
  */
 @interface NSView (NSLayoutGuideSupport)
 
-- (void)addLayoutGuide:(NSLayoutGuide *)guide NS_AVAILABLE_MAC(10_11);
-- (void)removeLayoutGuide:(NSLayoutGuide *)guide NS_AVAILABLE_MAC(10_11);
+- (void)addLayoutGuide:(NSLayoutGuide *)guide API_AVAILABLE(macos(10.11));
+- (void)removeLayoutGuide:(NSLayoutGuide *)guide API_AVAILABLE(macos(10.11));
 
-@property (readonly, copy) NSArray<NSLayoutGuide *> *layoutGuides NS_AVAILABLE_MAC(10_11); // This array may contain guides owned by the system, and the ordering is not guaranteed.  Please be careful.
+@property (readonly, copy) NSArray<NSLayoutGuide *> *layoutGuides API_AVAILABLE(macos(10.11)); // This array may contain guides owned by the system, and the ordering is not guaranteed.  Please be careful.
 
 @end
 
+API_UNAVAILABLE_END
 NS_ASSUME_NONNULL_END

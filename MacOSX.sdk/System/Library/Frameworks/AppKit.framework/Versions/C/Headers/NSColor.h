@@ -1,7 +1,7 @@
 /*
 	NSColor.h
 	Application Kit
-	Copyright (c) 1994-2018, Apple Inc.
+	Copyright (c) 1994-2019, Apple Inc.
 	All rights reserved.
 */
 
@@ -50,8 +50,9 @@
 #import <CoreImage/CIColor.h>
 
 NS_ASSUME_NONNULL_BEGIN
+API_UNAVAILABLE_BEGIN(ios)
 
-@class NSImage, NSColorSpace;
+@class NSImage, NSColorSpace, NSAppearance;
 
 static const NSAppKitVersion NSAppKitVersionNumberWithPatternColorLeakFix = 641.0;
 
@@ -69,7 +70,7 @@ typedef NS_ENUM(NSInteger, NSColorSystemEffect) {
     NSColorSystemEffectDeepPressed,
     NSColorSystemEffectDisabled,
     NSColorSystemEffectRollover,
-} NS_AVAILABLE_MAC(10_14);
+} API_AVAILABLE(macos(10.14));
 
 @interface NSColor : NSObject <NSCopying, NSSecureCoding, NSPasteboardReading, NSPasteboardWriting>
 
@@ -84,21 +85,21 @@ typedef NS_ENUM(NSInteger, NSColorSystemEffect) {
 
 /* Create component-based colors in the sRGB, GenericGamma22Gray, or P3 colorspaces.
 */
-+ (NSColor *)colorWithSRGBRed:(CGFloat)red green:(CGFloat)green blue:(CGFloat)blue alpha:(CGFloat)alpha  NS_AVAILABLE_MAC(10_7);
-+ (NSColor *)colorWithGenericGamma22White:(CGFloat)white alpha:(CGFloat)alpha  NS_AVAILABLE_MAC(10_7);
-+ (NSColor *)colorWithDisplayP3Red:(CGFloat)red green:(CGFloat)green blue:(CGFloat)blue alpha:(CGFloat)alpha NS_AVAILABLE_MAC(10_12);
++ (NSColor *)colorWithSRGBRed:(CGFloat)red green:(CGFloat)green blue:(CGFloat)blue alpha:(CGFloat)alpha  API_AVAILABLE(macos(10.7));
++ (NSColor *)colorWithGenericGamma22White:(CGFloat)white alpha:(CGFloat)alpha  API_AVAILABLE(macos(10.7));
++ (NSColor *)colorWithDisplayP3Red:(CGFloat)red green:(CGFloat)green blue:(CGFloat)blue alpha:(CGFloat)alpha API_AVAILABLE(macos(10.12));
 
 
 /* Create component-based colors that are compatible with sRGB colorspace; these methods are effectively same as colorWithSRGBRed:... or colorWithGenericGamma22White:..., but provided for easier reuse of code that uses UIColor on iOS.  If red, green, blue, or saturation, brightness, or white values are outside of the 0..1 range, these will create colors in the extended sRGB (or for colorWithWhite:alpha:, extendedGenericGamma22GrayColorSpace) color spaces. This behavior is compatible with iOS UIColor.
  */
-+ (NSColor *)colorWithWhite:(CGFloat)white alpha:(CGFloat)alpha NS_AVAILABLE_MAC(10_9);
-+ (NSColor *)colorWithRed:(CGFloat)red green:(CGFloat)green blue:(CGFloat)blue alpha:(CGFloat)alpha NS_AVAILABLE_MAC(10_9);
-+ (NSColor *)colorWithHue:(CGFloat)hue saturation:(CGFloat)saturation brightness:(CGFloat)brightness alpha:(CGFloat)alpha NS_AVAILABLE_MAC(10_9);
++ (NSColor *)colorWithWhite:(CGFloat)white alpha:(CGFloat)alpha API_AVAILABLE(macos(10.9));
++ (NSColor *)colorWithRed:(CGFloat)red green:(CGFloat)green blue:(CGFloat)blue alpha:(CGFloat)alpha API_AVAILABLE(macos(10.9));
++ (NSColor *)colorWithHue:(CGFloat)hue saturation:(CGFloat)saturation brightness:(CGFloat)brightness alpha:(CGFloat)alpha API_AVAILABLE(macos(10.9));
 
 
 /* Create a RGB-based color using HSB component values. An exception will be raised if the color model of the provided color space is not RGB.
  */
-+ (NSColor *)colorWithColorSpace:(NSColorSpace *)space hue:(CGFloat)hue saturation:(CGFloat)saturation brightness:(CGFloat)brightness alpha:(CGFloat)alpha NS_AVAILABLE_MAC(10_12);
++ (NSColor *)colorWithColorSpace:(NSColorSpace *)space hue:(CGFloat)hue saturation:(CGFloat)saturation brightness:(CGFloat)brightness alpha:(CGFloat)alpha API_AVAILABLE(macos(10.12));
 
 
 
@@ -108,9 +109,16 @@ typedef NS_ENUM(NSInteger, NSColorSystemEffect) {
 
 /* Create catalog colors from values stored with the given name in the Asset Catalog of the specified bundle.  To look in the main bundle, use the method without the bundle argument, or specify a nil bundle argument.
  */
-+ (nullable NSColor *)colorNamed:(NSColorName)name bundle:(nullable NSBundle *)bundle NS_AVAILABLE_MAC(10_13);
-+ (nullable NSColor *)colorNamed:(NSColorName)name NS_AVAILABLE_MAC(10_13);
++ (nullable NSColor *)colorNamed:(NSColorName)name bundle:(nullable NSBundle *)bundle API_AVAILABLE(macos(10.13));
++ (nullable NSColor *)colorNamed:(NSColorName)name API_AVAILABLE(macos(10.13));
 
+/* Create a dynamic catalog color with a provider that is used to lazily resolve the exact color value.
+ *
+ * When methods are called on this color that need color component values, the provider is called with +NSAppearance.currentAppearance. The provider can use the appearance to return another color to be used for drawing. As much as possible, use the given appearance to make that decision, not other state.
+ * The `colorName` should be universally unique and equates to the identity of the color, if nil is provided a unique name will be generated.
+ * The name and the Aqua appearance color fallback will be encoded as part of the color. The decoded color is also able to 'join' to a color that gets registered with the same name and become dynamic again.
+ */
++ (NSColor *)colorWithName:(nullable NSColorName)colorName dynamicProvider:(NSColor * (^)(NSAppearance *))dynamicProvider API_AVAILABLE(macos(10.15));
 
 /* Create component-based colors in various device color spaces.
  */
@@ -137,11 +145,11 @@ typedef NS_ENUM(NSInteger, NSColorSystemEffect) {
  
  Note that as of macOS 10.13, the new APIs type and colorUsingType: replace colorSpaceName and colorUsingColorSpaceName: as the funnel APIs for determining the type of color.  In code destined to run on 10.13 and newer systems, subclassers are encouraged to implement these two rather than the older colorSpaceName based methods.
  */
-@property (readonly) NSColorType type NS_AVAILABLE_MAC(10_13);
+@property (readonly) NSColorType type API_AVAILABLE(macos(10.13));
 
 /* Convert the color to a color of different type; return nil if conversion is not possible.
  */
-- (nullable NSColor *)colorUsingType:(NSColorType)type NS_AVAILABLE_MAC(10_13);
+- (nullable NSColor *)colorUsingType:(NSColorType)type API_AVAILABLE(macos(10.13));
 
 
 /* colorUsingColorSpace: will convert existing color to a new color space, if the receiver can be represented as a component-based color.  This method will return the receiver if its colorspace is already the same as the one specified.  Will return nil if conversion is not possible.
@@ -177,29 +185,29 @@ typedef NS_ENUM(NSInteger, NSColorSystemEffect) {
  */
 
 /* Foreground Colors */
-@property (class, strong, readonly) NSColor *labelColor NS_AVAILABLE_MAC(10_10);           // Foreground color for static text and related elements
-@property (class, strong, readonly) NSColor *secondaryLabelColor NS_AVAILABLE_MAC(10_10);  // Foreground color for secondary static text and related elements
-@property (class, strong, readonly) NSColor *tertiaryLabelColor NS_AVAILABLE_MAC(10_10);   // Foreground color for disabled static text and related elements
-@property (class, strong, readonly) NSColor *quaternaryLabelColor NS_AVAILABLE_MAC(10_10); // Foreground color for large secondary or disabled static text, separators, large glyphs/icons, etc
+@property (class, strong, readonly) NSColor *labelColor API_AVAILABLE(macos(10.10));           // Foreground color for static text and related elements
+@property (class, strong, readonly) NSColor *secondaryLabelColor API_AVAILABLE(macos(10.10));  // Foreground color for secondary static text and related elements
+@property (class, strong, readonly) NSColor *tertiaryLabelColor API_AVAILABLE(macos(10.10));   // Foreground color for disabled static text and related elements
+@property (class, strong, readonly) NSColor *quaternaryLabelColor API_AVAILABLE(macos(10.10)); // Foreground color for large secondary or disabled static text, separators, large glyphs/icons, etc
 
-@property (class, strong, readonly) NSColor *linkColor NS_AVAILABLE_MAC(10_10);            // Foreground color for standard system links
-@property (class, strong, readonly) NSColor *placeholderTextColor NS_AVAILABLE_MAC(10_10); // Foreground color for placeholder text in controls or text views
+@property (class, strong, readonly) NSColor *linkColor API_AVAILABLE(macos(10.10));            // Foreground color for standard system links
+@property (class, strong, readonly) NSColor *placeholderTextColor API_AVAILABLE(macos(10.10)); // Foreground color for placeholder text in controls or text views
 @property (class, strong, readonly) NSColor *windowFrameTextColor;                         // Foreground color on window chrome
 @property (class, strong, readonly) NSColor *selectedMenuItemTextColor;                    // Foreground color inside selected menu items. Equivalent to +labelColor in a NSBackgroundStyleEmphasized context.
 @property (class, strong, readonly) NSColor *alternateSelectedControlTextColor;            // Foreground color inside emphasized and selected content: table views rows, collection views, etc. Equivalent to +labelColor in a NSBackgroundStyleEmphasized context.
 @property (class, strong, readonly) NSColor *headerTextColor;                              // Foreground color for header cells in Table/OutlineView
-@property (class, strong, readonly) NSColor *separatorColor NS_AVAILABLE_MAC(10_14);       // Foreground used for separators between sections of content. Not appropriate for use as split view or window chrome dividers.
+@property (class, strong, readonly) NSColor *separatorColor API_AVAILABLE(macos(10.14));       // Foreground used for separators between sections of content. Not appropriate for use as split view or window chrome dividers.
 @property (class, strong, readonly) NSColor *gridColor;                                    // Grids in controls
 
 
 /* Background Colors */
 @property (class, strong, readonly) NSColor *windowBackgroundColor;                        // Background for windows. This should not be used for drawing, and NSVisualEffectMaterialWindowBackground should be used instead.
-@property (class, strong, readonly) NSColor *underPageBackgroundColor NS_AVAILABLE_MAC(10_8); // Background areas revealed behind documents. This should not be used for drawing, and NSVisualEffectMaterialUnderPageBackground should be used instead.
+@property (class, strong, readonly) NSColor *underPageBackgroundColor API_AVAILABLE(macos(10.8)); // Background areas revealed behind documents. This should not be used for drawing, and NSVisualEffectMaterialUnderPageBackground should be used instead.
 @property (class, strong, readonly) NSColor *controlBackgroundColor;                       // Background for content areas: scroll views, table views, collection views. This should not be used for drawing, and NSVisualEffectMaterialContentBackground should be used instead.
-@property (class, strong, readonly) NSColor *selectedContentBackgroundColor NS_AVAILABLE_MAC(10_14); // The background color of selected and emphasized (focused) content: table views rows, collection views, etc. Alias for +alternateSelectedControlColor
-@property (class, strong, readonly) NSColor *unemphasizedSelectedContentBackgroundColor NS_AVAILABLE_MAC(10_14); // The background color of selected and unemphasized content: table views rows, collection views, etc. Alias for +secondarySelectedControlColor
-@property (class, strong, readonly) NSArray<NSColor *> *alternatingContentBackgroundColors NS_AVAILABLE_MAC(10_14); // The background colors for alternating content items: such as table view rows, collection view items. Alias for +controlAlternatingRowBackgroundColors
-@property (class, strong, readonly) NSColor *findHighlightColor NS_AVAILABLE_MAC(10_13);   // Background color of find indicators: the bubbles that show inline search result hits
+@property (class, strong, readonly) NSColor *selectedContentBackgroundColor API_AVAILABLE(macos(10.14)); // The background color of selected and emphasized (focused) content: table views rows, collection views, etc. Alias for +alternateSelectedControlColor
+@property (class, strong, readonly) NSColor *unemphasizedSelectedContentBackgroundColor API_AVAILABLE(macos(10.14)); // The background color of selected and unemphasized content: table views rows, collection views, etc. Alias for +secondarySelectedControlColor
+@property (class, strong, readonly) NSArray<NSColor *> *alternatingContentBackgroundColors API_AVAILABLE(macos(10.14)); // The background colors for alternating content items: such as table view rows, collection view items. Alias for +controlAlternatingRowBackgroundColors
+@property (class, strong, readonly) NSColor *findHighlightColor API_AVAILABLE(macos(10.13));   // Background color of find indicators: the bubbles that show inline search result hits
 
 
 /* Text Colors */
@@ -208,8 +216,8 @@ typedef NS_ENUM(NSInteger, NSColorSystemEffect) {
 
 @property (class, strong, readonly) NSColor *selectedTextColor;                            // Selected document text
 @property (class, strong, readonly) NSColor *selectedTextBackgroundColor;                  // Selected document text background
-@property (class, strong, readonly) NSColor *unemphasizedSelectedTextBackgroundColor NS_AVAILABLE_MAC(10_14); // The background for unemphasized text selection (e.g. when the associated control/view/window is not key)
-@property (class, strong, readonly) NSColor *unemphasizedSelectedTextColor NS_AVAILABLE_MAC(10_14); // The foreground for unemphasized text selection (e.g. when the associated control/view/window is not key)
+@property (class, strong, readonly) NSColor *unemphasizedSelectedTextBackgroundColor API_AVAILABLE(macos(10.14)); // The background for unemphasized text selection (e.g. when the associated control/view/window is not key)
+@property (class, strong, readonly) NSColor *unemphasizedSelectedTextColor API_AVAILABLE(macos(10.14)); // The foreground for unemphasized text selection (e.g. when the associated control/view/window is not key)
 
 /* Control Colors */
 @property (class, strong, readonly) NSColor *controlColor;                                 // Approximate background for the color of control faces (such as buttons).
@@ -219,26 +227,29 @@ typedef NS_ENUM(NSInteger, NSColorSystemEffect) {
 @property (class, strong, readonly) NSColor *disabledControlTextColor;                     // Text on disabled controls
 @property (class, strong, readonly) NSColor *keyboardFocusIndicatorColor;                  // Keyboard focus ring around controls
 
-@property (class, strong, readonly) NSColor *scrubberTexturedBackgroundColor NS_AVAILABLE_MAC(10_12_2); // Patterned background color for use in NSScrubber
+@property (class, strong, readonly) NSColor *scrubberTexturedBackgroundColor API_AVAILABLE(macos(10.12.2)); // Patterned background color for use in NSScrubber
 
 
 /* Some colors that are used by system elements and applications. Like the above dynamic system colors, these return named colors whose values may vary between different appearances and releases.  Do not make assumptions about the color spaces or actual colors used.
  */
-@property (class, strong, readonly) NSColor *systemRedColor NS_AVAILABLE_MAC(10_10);
-@property (class, strong, readonly) NSColor *systemGreenColor NS_AVAILABLE_MAC(10_10);
-@property (class, strong, readonly) NSColor *systemBlueColor NS_AVAILABLE_MAC(10_10);
-@property (class, strong, readonly) NSColor *systemOrangeColor NS_AVAILABLE_MAC(10_10);
-@property (class, strong, readonly) NSColor *systemYellowColor NS_AVAILABLE_MAC(10_10);
-@property (class, strong, readonly) NSColor *systemBrownColor NS_AVAILABLE_MAC(10_10);
-@property (class, strong, readonly) NSColor *systemPinkColor NS_AVAILABLE_MAC(10_10);
-@property (class, strong, readonly) NSColor *systemPurpleColor NS_AVAILABLE_MAC(10_10);
-@property (class, strong, readonly) NSColor *systemGrayColor NS_AVAILABLE_MAC(10_10);
+@property (class, strong, readonly) NSColor *systemRedColor API_AVAILABLE(macos(10.10));
+@property (class, strong, readonly) NSColor *systemGreenColor API_AVAILABLE(macos(10.10));
+@property (class, strong, readonly) NSColor *systemBlueColor API_AVAILABLE(macos(10.10));
+@property (class, strong, readonly) NSColor *systemOrangeColor API_AVAILABLE(macos(10.10));
+@property (class, strong, readonly) NSColor *systemYellowColor API_AVAILABLE(macos(10.10));
+@property (class, strong, readonly) NSColor *systemBrownColor API_AVAILABLE(macos(10.10));
+@property (class, strong, readonly) NSColor *systemPinkColor API_AVAILABLE(macos(10.10));
+@property (class, strong, readonly) NSColor *systemPurpleColor API_AVAILABLE(macos(10.10));
+@property (class, strong, readonly) NSColor *systemGrayColor API_AVAILABLE(macos(10.10));
+@property (class, strong, readonly) NSColor *systemTealColor API_AVAILABLE(macos(10.12));
+@property (class, strong, readonly) NSColor *systemIndigoColor API_AVAILABLE(macos(10.15));
+
 
 /*! A dynamic color that reflects the user's current preferred accent color. This color automatically updates when the accent color preference changes. Do not make assumptions about the color space of this color, which may change across releases. */
-@property (class, strong, readonly) NSColor *controlAccentColor NS_AVAILABLE_MAC(10_14);
+@property (class, strong, readonly) NSColor *controlAccentColor API_AVAILABLE(macos(10.14));
 
 @property (class, readonly) NSControlTint currentControlTint;   // returns current system control tint
-+ (NSColor *)colorForControlTint:(NSControlTint)controlTint NS_DEPRECATED_MAC(10_0, API_TO_BE_DEPRECATED, "NSControlTint does not describe the full range of available control accent colors. Use +[NSColor controlAccentColor] instead.");
++ (NSColor *)colorForControlTint:(NSControlTint)controlTint API_DEPRECATED("NSControlTint does not describe the full range of available control accent colors. Use +[NSColor controlAccentColor] instead.", macos(10.0,API_TO_BE_DEPRECATED));
 
 @property (class, strong, readonly) NSColor *highlightColor; // Highlight color for UI elements (this is abstract and defines the color all highlights tend toward)
 @property (class, strong, readonly) NSColor *shadowColor;    // Shadow color for UI elements (this is abstract and defines the color all shadows tend toward)
@@ -246,7 +257,7 @@ typedef NS_ENUM(NSInteger, NSColorSystemEffect) {
 - (nullable NSColor *)shadowWithLevel:(CGFloat)val;          // val = 0 => receiver, val = 1 => shadowColor
 
 /// Returns a color representing the base color with a system defined effect applied to it. This color is safe to create before draw time, as the resolution of the final color only happens when being `-set`, retrieving its `CGColor`, resolving with `-colorWithType:`, etc. The return color type is `.named`.
-- (NSColor *)colorWithSystemEffect:(NSColorSystemEffect)systemEffect NS_AVAILABLE_MAC(10_14);
+- (NSColor *)colorWithSystemEffect:(NSColorSystemEffect)systemEffect API_AVAILABLE(macos(10.14));
 
 
 /* Set the color: Sets the fill and stroke colors in the current drawing context. If the color doesn't know about alpha, it's set to 1.0. Should be implemented by subclassers.
@@ -344,8 +355,8 @@ typedef NS_ENUM(NSInteger, NSColorSystemEffect) {
 
 /* Convert to and from CGColorRef.
 */
-+ (nullable NSColor *)colorWithCGColor:(CGColorRef)cgColor NS_AVAILABLE_MAC(10_8);          // May return nil
-@property (readonly) CGColorRef CGColor NS_RETURNS_INNER_POINTER NS_AVAILABLE_MAC(10_8);    // Returns an autoreleased CGColor. This will never be NULL, although the return value may be an approximation in some cases, so there isn't guaranteed round-trip fidelity.
++ (nullable NSColor *)colorWithCGColor:(CGColorRef)cgColor API_AVAILABLE(macos(10.8));          // May return nil
+@property (readonly) CGColorRef CGColor NS_RETURNS_INNER_POINTER API_AVAILABLE(macos(10.8));    // Returns an autoreleased CGColor. This will never be NULL, although the return value may be an approximation in some cases, so there isn't guaranteed round-trip fidelity.
 
 
 /* Global flag for determining whether an application supports alpha.  This flag is consulted when an application imports alpha (through color dragging, for instance). The value of this flag also determines whether the color panel has an opacity slider. This value is YES by default, indicating that the opacity components of imported colors will be set to 1.0. If an application wants alpha, it can either set the "NSIgnoreAlpha" default to NO or call the set method below.
@@ -359,38 +370,38 @@ This method provides a global approach to removing alpha which might not always 
 @interface NSColor (NSDeprecated)
 
 /// Historically used as the inner border highlight color for beveled buttons. No longer used.
-@property (class, strong, readonly) NSColor *controlHighlightColor NS_DEPRECATED_MAC(10_0, API_TO_BE_DEPRECATED, "Use a color that matches the semantics being used, such as `separatorColor`");
+@property (class, strong, readonly) NSColor *controlHighlightColor API_DEPRECATED("Use a color that matches the semantics being used, such as `separatorColor`", macos(10.0,API_TO_BE_DEPRECATED));
 /// Historically used as the outer border highlight color for beveled buttons. No longer used.
-@property (class, strong, readonly) NSColor *controlLightHighlightColor NS_DEPRECATED_MAC(10_0, API_TO_BE_DEPRECATED, "Use a color that matches the semantics being used, such as `separatorColor`");
+@property (class, strong, readonly) NSColor *controlLightHighlightColor API_DEPRECATED("Use a color that matches the semantics being used, such as `separatorColor`", macos(10.0,API_TO_BE_DEPRECATED));
 /// Historically used as the inner border shadow color for beveled buttons. No longer used.
-@property (class, strong, readonly) NSColor *controlShadowColor NS_DEPRECATED_MAC(10_0, API_TO_BE_DEPRECATED, "Use a color that matches the semantics being used, such as `separatorColor`");
+@property (class, strong, readonly) NSColor *controlShadowColor API_DEPRECATED("Use a color that matches the semantics being used, such as `separatorColor`", macos(10.0,API_TO_BE_DEPRECATED));
 /// Historically used as the outer border shadow color for beveled buttons. No longer used.
-@property (class, strong, readonly) NSColor *controlDarkShadowColor NS_DEPRECATED_MAC(10_0, API_TO_BE_DEPRECATED, "Use a color that matches the semantics being used, such as `separatorColor`");
+@property (class, strong, readonly) NSColor *controlDarkShadowColor API_DEPRECATED("Use a color that matches the semantics being used, such as `separatorColor`", macos(10.0,API_TO_BE_DEPRECATED));
 
 /// Historically used as the color of scroll bars. No longer used.
-@property (class, strong, readonly) NSColor *scrollBarColor NS_DEPRECATED_MAC(10_0, API_TO_BE_DEPRECATED, "Use NSScroller instead");
+@property (class, strong, readonly) NSColor *scrollBarColor API_DEPRECATED("Use NSScroller instead", macos(10.0,API_TO_BE_DEPRECATED));
 /// Historically used as the color of scroll bar knobs. No longer used.
-@property (class, strong, readonly) NSColor *knobColor NS_DEPRECATED_MAC(10_0, API_TO_BE_DEPRECATED, "Use NSScroller instead");
+@property (class, strong, readonly) NSColor *knobColor API_DEPRECATED("Use NSScroller instead", macos(10.0,API_TO_BE_DEPRECATED));
 /// Historically used as the color of scroll bar knobs being dragged. No longer used.
-@property (class, strong, readonly) NSColor *selectedKnobColor NS_DEPRECATED_MAC(10_0, API_TO_BE_DEPRECATED, "Use NSScroller instead");
+@property (class, strong, readonly) NSColor *selectedKnobColor API_DEPRECATED("Use NSScroller instead", macos(10.0,API_TO_BE_DEPRECATED));
 
 /// Historically used as the color of the window chrome, which is no longer able to be represented by a color. No longer used.
-@property (class, strong, readonly) NSColor *windowFrameColor NS_DEPRECATED_MAC(10_0, API_TO_BE_DEPRECATED, "Use NSVisualEffectMaterialTitlebar");
+@property (class, strong, readonly) NSColor *windowFrameColor API_DEPRECATED("Use NSVisualEffectMaterialTitlebar", macos(10.0,API_TO_BE_DEPRECATED));
 /// Historically used as the color of selected menu items, which is no longer a color but a tinted blur effect. No longer used.
-@property (class, strong, readonly) NSColor *selectedMenuItemColor NS_DEPRECATED_MAC(10_0, API_TO_BE_DEPRECATED, "Use NSVisualEffectMaterialSelection");
+@property (class, strong, readonly) NSColor *selectedMenuItemColor API_DEPRECATED("Use NSVisualEffectMaterialSelection", macos(10.0,API_TO_BE_DEPRECATED));
 /// Historically used as the color of table headers, which is no longer a color but a tinted blur effect.
-@property (class, strong, readonly) NSColor *headerColor NS_DEPRECATED_MAC(10_0, API_TO_BE_DEPRECATED, "Use NSVisualEffectMaterialHeaderView");
+@property (class, strong, readonly) NSColor *headerColor API_DEPRECATED("Use NSVisualEffectMaterialHeaderView", macos(10.0,API_TO_BE_DEPRECATED));
 
 /// The background color of selected content or text that is unemphasized. Older alias for +unemphasizedSelectedContentBackgroundColor and +unemphasizedSelectedTextBackgroundColor
-@property (class, strong, readonly) NSColor *secondarySelectedControlColor NS_DEPRECATED_WITH_REPLACEMENT_MAC("unemphasizedSelectedContentBackgroundColor", 10_1, API_TO_BE_DEPRECATED);
+@property (class, strong, readonly) NSColor *secondarySelectedControlColor API_DEPRECATED_WITH_REPLACEMENT("unemphasizedSelectedContentBackgroundColor", macos(10.1,API_TO_BE_DEPRECATED));
 /// The background color of selected and emphasized (focused) content: table views rows, collection views, etc. Older alias for +selectedContentBackgroundColor
-@property (class, strong, readonly) NSColor *alternateSelectedControlColor NS_DEPRECATED_WITH_REPLACEMENT_MAC("selectedContentBackgroundColor", 10_2, API_TO_BE_DEPRECATED);
+@property (class, strong, readonly) NSColor *alternateSelectedControlColor API_DEPRECATED_WITH_REPLACEMENT("selectedContentBackgroundColor", macos(10.2,API_TO_BE_DEPRECATED));
 /// The background colors for alternating content items: such as table view rows, collection view items. Older alias for +alternatingContentBackgroundColors
-@property (class, strong, readonly) NSArray<NSColor *> *controlAlternatingRowBackgroundColors NS_DEPRECATED_WITH_REPLACEMENT_MAC("alternatingContentBackgroundColors", 10_3, API_TO_BE_DEPRECATED);
+@property (class, strong, readonly) NSArray<NSColor *> *controlAlternatingRowBackgroundColors API_DEPRECATED_WITH_REPLACEMENT("alternatingContentBackgroundColors", macos(10.3,API_TO_BE_DEPRECATED));
 
 /* Get the color space name of the color. Note that here "color space name" doesn't refer to the name of an NSColorSpace, but rather an older way to distinguish the color type of different types of colors, as described at the top of this file. Should be implemented by subclassers for code destined to run on 10.12 or earlier. Newer code can choose to implement type instead.
  */
-@property (readonly, copy) NSColorSpaceName colorSpaceName NS_DEPRECATED_MAC(10_0, 10_14, "Use -type and NSColorType instead");
+@property (readonly, copy) NSColorSpaceName colorSpaceName API_DEPRECATED("Use -type and NSColorType instead", macos(10.0,10.14));
 
 
 /* Convert the color to a color of another color space name. This may return nil if the specified conversion cannot be done. The abstract implementation of this method returns the receiver if the specified name matches that of the receiver; otherwise it returns nil. Subclassers who can convert themselves to other color space names override this method to do something better.
@@ -401,8 +412,8 @@ This method provides a global approach to removing alpha which might not always 
 
  If colorSpaceName is nil, then the most appropriate color space is used.
  */
-- (nullable NSColor *)colorUsingColorSpaceName:(nullable NSColorSpaceName)name device:(nullable NSDictionary<NSDeviceDescriptionKey, id> *)deviceDescription NS_DEPRECATED_MAC(10_0, 10_14, "Use -colorUsingType: or -colorUsingColorSpace: instead");
-- (nullable NSColor *)colorUsingColorSpaceName:(NSColorSpaceName)name NS_DEPRECATED_MAC(10_0, 10_14, "Use -colorUsingType: or -colorUsingColorSpace: instead");
+- (nullable NSColor *)colorUsingColorSpaceName:(nullable NSColorSpaceName)name device:(nullable NSDictionary<NSDeviceDescriptionKey, id> *)deviceDescription API_DEPRECATED("Use -colorUsingType: or -colorUsingColorSpace: instead", macos(10.0,10.14));
+- (nullable NSColor *)colorUsingColorSpaceName:(NSColorSpaceName)name API_DEPRECATED("Use -colorUsingType: or -colorUsingColorSpace: instead", macos(10.0,10.14));
 
 
 @end
@@ -420,10 +431,11 @@ This method provides a global approach to removing alpha which might not always 
 
 /* To decode NXColors... Will return nil if the archived color was "invalid" (written out by the kit in a few instances). Otherwise returns autoreleased NSColor. Can't write NSColors as NXColors, so we have no corresponding encode method.
 */
-- (null_unspecified NSColor *)decodeNXColor NS_DEPRECATED_MAC(10_0, 10_9);
+- (null_unspecified NSColor *)decodeNXColor API_DEPRECATED("", macos(10.0,10.9));
 
 @end
 
 APPKIT_EXTERN NSNotificationName NSSystemColorsDidChangeNotification;
 
+API_UNAVAILABLE_END
 NS_ASSUME_NONNULL_END

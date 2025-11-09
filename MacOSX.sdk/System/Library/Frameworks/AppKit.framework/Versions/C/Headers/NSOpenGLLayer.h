@@ -1,7 +1,7 @@
 /*
         NSOpenGLLayer.h
         Application Kit
-        Copyright (c) 2008-2018, Apple Inc.
+        Copyright (c) 2008-2019, Apple Inc.
         All rights reserved.
 */
 
@@ -11,15 +11,10 @@
 
 
 NS_ASSUME_NONNULL_BEGIN
+API_UNAVAILABLE_BEGIN(ios)
 
-NS_OPENGL_CLASS_DEPRECATED(10_6, 10_14, "Please use CAMetalLayer instead.")
+NS_OPENGL_CLASS_DEPRECATED("Please use CAMetalLayer instead.", 10.6, 10.14)
 @interface NSOpenGLLayer : CAOpenGLLayer
-{
-@private
-#ifndef __OBJC2__
-    void *_reserved[7] __unused APPKIT_IVAR;
-#endif
-}
 
 /* Provides access to the layer's associated view.  Subclasses shouldn't invoke -setView:, but can override it if desired to intercept the layer's association to, or dissociation from, a view.
 */
@@ -51,4 +46,5 @@ NS_OPENGL_CLASS_DEPRECATED(10_6, 10_14, "Please use CAMetalLayer instead.")
 
 @end
 
+API_UNAVAILABLE_END
 NS_ASSUME_NONNULL_END

@@ -1,9 +1,8 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 435FB24F-0289-3330-B485-713909D6DA44' ]
-platform:        macosx
-install-name:    /usr/lib/libtidy.A.dylib
-objc-constraint: none
+uuids:           [ 'x86_64: 770393A7-BEF2-3FAE-A8D1-F664CECEE5EF', 'x86_64: 770393A7-BEF2-3FAE-A8D1-F664CECEE5EF' ]
+platform:        zippered
+install-name:    '/usr/lib/libtidy.A.dylib'
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _tidyAccessWarningCount, _tidyAttrFirst, _tidyAttrGetABBR, 

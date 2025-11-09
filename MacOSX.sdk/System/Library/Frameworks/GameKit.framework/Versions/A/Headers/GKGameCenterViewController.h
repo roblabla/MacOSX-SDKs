@@ -2,7 +2,7 @@
 //  GKGameCenterViewController.h
 //  Game Center
 //
-//  Copyright 2012-2018 Apple Inc. All rights reserved.
+//  Copyright 2012-2019 Apple Inc. All rights reserved.
 //
 
 #import <GameKit/GKLeaderboard.h>
@@ -32,7 +32,7 @@ NS_CLASS_AVAILABLE(10_9, 6_0)
 #else
 NS_CLASS_AVAILABLE(10_9, 6_0)
 @interface GKGameCenterViewController : NSViewController  <GKViewController> {
-	id _internal1,_internal2,_internal3;
+	id _internal1, __weak _internal2, _internal3;
     GKGameCenterViewControllerState _viewState;
     NSString *_leaderboardIdentifier;
     NSString *_leaderboardCategory;
@@ -43,18 +43,17 @@ NS_CLASS_AVAILABLE(10_9, 6_0)
 #endif
 
 @interface GKGameCenterViewController ()
-@property (assign, nullable, NS_NONATOMIC_IOSONLY)   id<GKGameCenterControllerDelegate>      gameCenterDelegate;
-@property (assign, NS_NONATOMIC_IOSONLY)   GKGameCenterViewControllerState         viewState ;
-
+@property (weak, nullable, NS_NONATOMIC_IOSONLY) id<GKGameCenterControllerDelegate> gameCenterDelegate;
+@property (assign, NS_NONATOMIC_IOSONLY) GKGameCenterViewControllerState viewState ;
 
 @end
 
 @interface GKGameCenterViewController (Leaderboards)
 
-@property (nonatomic, assign)   GKLeaderboardTimeScope leaderboardTimeScope NS_AVAILABLE(10_8, 4_1) ;
-@property (nonatomic, nullable, retain)   NSString *leaderboardIdentifier NS_AVAILABLE(10_10, 7_0) ;
+@property (nonatomic, assign) GKLeaderboardTimeScope leaderboardTimeScope NS_AVAILABLE(10_8, 4_1) ;
+@property (nonatomic, nullable, strong) NSString *leaderboardIdentifier NS_AVAILABLE(10_10, 7_0) ;
 
-@property (nonatomic, nullable, retain)   NSString *leaderboardCategory    NS_DEPRECATED(10_8, 10_10, 4_1, 7_0, "GKGameCenterViewController's leaderboardCategory property is deprecated. Use leaderboardIdentifier instead.") ;
+@property (nonatomic, nullable, strong) NSString *leaderboardCategory    NS_DEPRECATED(10_8, 10_10, 4_1, 7_0, "GKGameCenterViewController's leaderboardCategory property is deprecated. Use leaderboardIdentifier instead.") ;
 
 @end
 

@@ -1,12 +1,12 @@
 /*	NSURL.h
-	Copyright (c) 1997-2018, Apple Inc. All rights reserved.
+	Copyright (c) 1997-2019, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
 #import <Foundation/NSString.h>
 #import <Foundation/NSCharacterSet.h>
 #import <Foundation/NSItemProvider.h>
-#if !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE)
+#if TARGET_OS_OSX || TARGET_OS_MACCATALYST
 #import <Foundation/NSURLHandle.h>
 #endif
 
@@ -16,11 +16,7 @@ typedef NSString * NSURLResourceKey NS_EXTENSIBLE_STRING_ENUM;
 
 NS_ASSUME_NONNULL_BEGIN
 
-#if (TARGET_OS_EMBEDDED || TARGET_OS_IPHONE)
 @interface NSURL: NSObject <NSSecureCoding, NSCopying>
-#else
-@interface NSURL: NSObject <NSSecureCoding, NSCopying, NSURLHandleClient>
-#endif
 {
     NSString *_urlString;
     NSURL *_baseURL;
@@ -104,7 +100,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, readonly, copy) NSString *password;
 @property (nullable, readonly, copy) NSString *path;
 @property (nullable, readonly, copy) NSString *fragment;
-@property (nullable, readonly, copy) NSString *parameterString;
+@property (nullable, readonly, copy) NSString *parameterString API_DEPRECATED("The parameterString method is deprecated. Post deprecation for applications linked with or after the macOS 10.15, and for all iOS, watchOS, and tvOS applications, parameterString will always return nil, and the path method will return the complete path including the semicolon separator and params component if the URL string contains them.", macosx(10.2,10.15), ios(2.0,13.0), watchos(2.0,6.0), tvos(9.0,13.0));
 @property (nullable, readonly, copy) NSString *query;
 @property (nullable, readonly, copy) NSString *relativePath; // The same as path if baseURL is nil
 
@@ -238,7 +234,7 @@ FOUNDATION_EXPORT NSURLResourceKey const NSURLCanonicalPathKey               API
 FOUNDATION_EXPORT NSURLResourceKey const NSURLIsMountTriggerKey              API_AVAILABLE(macos(10.7), ios(5.0), watchos(2.0), tvos(9.0)); // true if this URL is a file system trigger directory. Traversing or opening a file system trigger will cause an attempt to mount a file system on the trigger directory. (Read-only, value type boolean NSNumber)
 FOUNDATION_EXPORT NSURLResourceKey const NSURLGenerationIdentifierKey API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0)); // An opaque generation identifier which can be compared using isEqual: to determine if the data in a document has been modified. For URLs which refer to the same file inode, the generation identifier will change when the data in the file's data fork is changed (changes to extended attributes or other file system metadata do not change the generation identifier). For URLs which refer to the same directory inode, the generation identifier will change when direct children of that directory are added, removed or renamed (changes to the data of the direct children of that directory will not change the generation identifier). The generation identifier is persistent across system restarts. The generation identifier is tied to a specific document on a specific volume and is not transferred when the document is copied to another volume. This property is not supported by all volumes. (Read-only, value type id <NSCopying, NSCoding, NSSecureCoding, NSObject>)
 FOUNDATION_EXPORT NSURLResourceKey const NSURLDocumentIdentifierKey API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0)); // The document identifier -- a value assigned by the kernel to a document (which can be either a file or directory) and is used to identify the document regardless of where it gets moved on a volume. The document identifier survives "safe save” operations; i.e it is sticky to the path it was assigned to (-replaceItemAtURL:withItemAtURL:backupItemName:options:resultingItemURL:error: is the preferred safe-save API). The document identifier is persistent across system restarts. The document identifier is not transferred when the file is copied. Document identifiers are only unique within a single volume. This property is not supported by all volumes. (Read-only, value type NSNumber)
-FOUNDATION_EXPORT NSURLResourceKey const NSURLAddedToDirectoryDateKey API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0)); // The date the resource was created, or renamed into or within its parent directory. Note that inconsistent behavior may be observed when this attribute is requested on hard-linked items. This property is not supported by all volumes. (Read-only, value type NSDate)
+FOUNDATION_EXPORT NSURLResourceKey const NSURLAddedToDirectoryDateKey API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0)); // The date the resource was created, or renamed into or within its parent directory. Note that inconsistent behavior may be observed when this attribute is requested on hard-linked items. This property is not supported by all volumes. (Read-only before macOS 10.15, iOS 13.0, watchOS 6.0, and tvOS 13.0; Read-write after, value type NSDate)
 FOUNDATION_EXPORT NSURLResourceKey const NSURLQuarantinePropertiesKey API_AVAILABLE(macos(10.10)) API_UNAVAILABLE(ios, watchos, tvos); // The quarantine properties as defined in LSQuarantine.h. To remove quarantine information from a file, pass NSNull as the value when setting this property. (Read-write, value type NSDictionary)
 FOUNDATION_EXPORT NSURLResourceKey const NSURLFileResourceTypeKey            API_AVAILABLE(macos(10.7), ios(5.0), watchos(2.0), tvos(9.0)); // Returns the file system object type. (Read-only, value type NSString)
 
@@ -255,13 +251,13 @@ FOUNDATION_EXPORT NSURLFileResourceType const NSURLFileResourceTypeSymbolicLink 
 FOUNDATION_EXPORT NSURLFileResourceType const NSURLFileResourceTypeSocket         API_AVAILABLE(macos(10.7), ios(5.0), watchos(2.0), tvos(9.0));
 FOUNDATION_EXPORT NSURLFileResourceType const NSURLFileResourceTypeUnknown        API_AVAILABLE(macos(10.7), ios(5.0), watchos(2.0), tvos(9.0));
 
-FOUNDATION_EXPORT NSURLResourceKey const NSURLThumbnailDictionaryKey         API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0)); // dictionary of NSImage/UIImage objects keyed by size
-FOUNDATION_EXPORT NSURLResourceKey const NSURLThumbnailKey                   API_AVAILABLE(macos(10.10)) API_UNAVAILABLE(ios, watchos, tvos); // returns all thumbnails as a single NSImage
+FOUNDATION_EXPORT NSURLResourceKey const NSURLThumbnailDictionaryKey         API_DEPRECATED("Use the QuickLookThumbnailing framework and extension point instead", macos(10.10, API_TO_BE_DEPRECATED), ios(8.0, API_TO_BE_DEPRECATED), watchos(2.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED)); // dictionary of NSImage/UIImage objects keyed by size
+FOUNDATION_EXPORT NSURLResourceKey const NSURLThumbnailKey                   API_DEPRECATED("Use the QuickLookThumbnailing framework and extension point instead", macos(10.10, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(ios, watchos, tvos); // returns all thumbnails as a single NSImage
 
 typedef NSString *NSURLThumbnailDictionaryItem NS_EXTENSIBLE_STRING_ENUM;
 /* size keys for the dictionary returned by NSURLThumbnailDictionaryKey
  */
-FOUNDATION_EXPORT NSURLThumbnailDictionaryItem const NSThumbnail1024x1024SizeKey         API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0)); // size key for a 1024 x 1024 thumbnail image
+FOUNDATION_EXPORT NSURLThumbnailDictionaryItem const NSThumbnail1024x1024SizeKey         API_DEPRECATED("Use the QuickLookThumbnailing framework and extension point instead", macos(10.10, API_TO_BE_DEPRECATED), ios(8.0, API_TO_BE_DEPRECATED), watchos(2.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED)); // size key for a 1024 x 1024 thumbnail image
 
 /* Resource keys applicable only to regular files
  */
@@ -355,11 +351,11 @@ FOUNDATION_EXPORT NSURLResourceKey const NSURLUbiquitousItemUploadingErrorKey   
 FOUNDATION_EXPORT NSURLResourceKey const NSURLUbiquitousItemDownloadRequestedKey      API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0)); // returns whether a download of this item has already been requested with an API like -startDownloadingUbiquitousItemAtURL:error: (Read-only, value type boolean NSNumber)
 FOUNDATION_EXPORT NSURLResourceKey const NSURLUbiquitousItemContainerDisplayNameKey   API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0)); // returns the name of this item's container as displayed to users.
 
-FOUNDATION_EXPORT NSURLResourceKey const NSURLUbiquitousItemIsSharedKey                               API_AVAILABLE(macosx(10.12), ios(10.0)) __TVOS_PROHIBITED __WATCHOS_PROHIBITED; // true if the ubiquitous item is shared. (Read-only, value type boolean NSNumber)
-FOUNDATION_EXPORT NSURLResourceKey const NSURLUbiquitousSharedItemCurrentUserRoleKey                  API_AVAILABLE(macosx(10.12), ios(10.0)) __TVOS_PROHIBITED __WATCHOS_PROHIBITED; // returns the current user's role for this shared item, or nil if not shared. (Read-only, value type NSString). Possible values below.
-FOUNDATION_EXPORT NSURLResourceKey const NSURLUbiquitousSharedItemCurrentUserPermissionsKey           API_AVAILABLE(macosx(10.12), ios(10.0)) __TVOS_PROHIBITED __WATCHOS_PROHIBITED; // returns the permissions for the current user, or nil if not shared. (Read-only, value type NSString). Possible values below.
-FOUNDATION_EXPORT NSURLResourceKey const NSURLUbiquitousSharedItemOwnerNameComponentsKey              API_AVAILABLE(macosx(10.12), ios(10.0)) __TVOS_PROHIBITED __WATCHOS_PROHIBITED; // returns a NSPersonNameComponents, or nil if the current user. (Read-only, value type NSPersonNameComponents)
-FOUNDATION_EXPORT NSURLResourceKey const NSURLUbiquitousSharedItemMostRecentEditorNameComponentsKey   API_AVAILABLE(macosx(10.12), ios(10.0)) __TVOS_PROHIBITED __WATCHOS_PROHIBITED; // returns a NSPersonNameComponents for the most recent editor of the document, or nil if it is the current user. (Read-only, value type NSPersonNameComponents)
+FOUNDATION_EXPORT NSURLResourceKey const NSURLUbiquitousItemIsSharedKey                               API_AVAILABLE(macosx(10.12), ios(10.0)) API_UNAVAILABLE(watchos, tvos); // true if the ubiquitous item is shared. (Read-only, value type boolean NSNumber)
+FOUNDATION_EXPORT NSURLResourceKey const NSURLUbiquitousSharedItemCurrentUserRoleKey                  API_AVAILABLE(macosx(10.12), ios(10.0)) API_UNAVAILABLE(watchos, tvos); // returns the current user's role for this shared item, or nil if not shared. (Read-only, value type NSString). Possible values below.
+FOUNDATION_EXPORT NSURLResourceKey const NSURLUbiquitousSharedItemCurrentUserPermissionsKey           API_AVAILABLE(macosx(10.12), ios(10.0)) API_UNAVAILABLE(watchos, tvos); // returns the permissions for the current user, or nil if not shared. (Read-only, value type NSString). Possible values below.
+FOUNDATION_EXPORT NSURLResourceKey const NSURLUbiquitousSharedItemOwnerNameComponentsKey              API_AVAILABLE(macosx(10.12), ios(10.0)) API_UNAVAILABLE(watchos, tvos); // returns a NSPersonNameComponents, or nil if the current user. (Read-only, value type NSPersonNameComponents)
+FOUNDATION_EXPORT NSURLResourceKey const NSURLUbiquitousSharedItemMostRecentEditorNameComponentsKey   API_AVAILABLE(macosx(10.12), ios(10.0)) API_UNAVAILABLE(watchos, tvos); // returns a NSPersonNameComponents for the most recent editor of the document, or nil if it is the current user. (Read-only, value type NSPersonNameComponents)
 
 typedef NSString * NSURLUbiquitousItemDownloadingStatus NS_STRING_ENUM;
 /* The values returned for the NSURLUbiquitousItemDownloadingStatusKey
@@ -372,15 +368,15 @@ typedef NSString * NSURLUbiquitousSharedItemRole NS_STRING_ENUM;
 
 /* The values returned for the NSURLUbiquitousSharedItemCurrentUserRoleKey
  */
-FOUNDATION_EXPORT NSURLUbiquitousSharedItemRole const NSURLUbiquitousSharedItemRoleOwner       API_AVAILABLE(macosx(10.12), ios(10.0)) __TVOS_PROHIBITED __WATCHOS_PROHIBITED; // the current user is the owner of this shared item.
-FOUNDATION_EXPORT NSURLUbiquitousSharedItemRole const NSURLUbiquitousSharedItemRoleParticipant API_AVAILABLE(macosx(10.12), ios(10.0)) __TVOS_PROHIBITED __WATCHOS_PROHIBITED; // the current user is a participant of this shared item.
+FOUNDATION_EXPORT NSURLUbiquitousSharedItemRole const NSURLUbiquitousSharedItemRoleOwner       API_AVAILABLE(macosx(10.12), ios(10.0)) API_UNAVAILABLE(watchos, tvos); // the current user is the owner of this shared item.
+FOUNDATION_EXPORT NSURLUbiquitousSharedItemRole const NSURLUbiquitousSharedItemRoleParticipant API_AVAILABLE(macosx(10.12), ios(10.0)) API_UNAVAILABLE(watchos, tvos); // the current user is a participant of this shared item.
 
 typedef NSString * NSURLUbiquitousSharedItemPermissions NS_STRING_ENUM;
 
 /* The values returned for the NSURLUbiquitousSharedItemCurrentUserPermissionsKey
  */
-FOUNDATION_EXPORT NSURLUbiquitousSharedItemPermissions const NSURLUbiquitousSharedItemPermissionsReadOnly     API_AVAILABLE(macosx(10.12), ios(10.0)) __TVOS_PROHIBITED __WATCHOS_PROHIBITED; // the current user is only allowed to read this item
-FOUNDATION_EXPORT NSURLUbiquitousSharedItemPermissions const NSURLUbiquitousSharedItemPermissionsReadWrite    API_AVAILABLE(macosx(10.12), ios(10.0)) __TVOS_PROHIBITED __WATCHOS_PROHIBITED; // the current user is allowed to both read and write this item
+FOUNDATION_EXPORT NSURLUbiquitousSharedItemPermissions const NSURLUbiquitousSharedItemPermissionsReadOnly     API_AVAILABLE(macosx(10.12), ios(10.0)) API_UNAVAILABLE(watchos, tvos); // the current user is only allowed to read this item
+FOUNDATION_EXPORT NSURLUbiquitousSharedItemPermissions const NSURLUbiquitousSharedItemPermissionsReadWrite    API_AVAILABLE(macosx(10.12), ios(10.0)) API_UNAVAILABLE(watchos, tvos); // the current user is allowed to both read and write this item
 
 /* Working with Bookmarks and alias (bookmark) files 
  */
@@ -389,14 +385,14 @@ typedef NS_OPTIONS(NSUInteger, NSURLBookmarkCreationOptions) {
     NSURLBookmarkCreationPreferFileIDResolution API_DEPRECATED("Not supported", macos(10.6,10.9), ios(4.0,7.0), watchos(2.0,2.0), tvos(9.0,9.0)) = ( 1UL << 8 ), /* This option does nothing and has no effect on bookmark resolution */
     NSURLBookmarkCreationMinimalBookmark = ( 1UL << 9 ), /* creates bookmark data with "less" information, which may be smaller but still be able to resolve in certain ways */
     NSURLBookmarkCreationSuitableForBookmarkFile = ( 1UL << 10 ), /* include the properties required by writeBookmarkData:toURL:options: in the bookmark data created */
-    NSURLBookmarkCreationWithSecurityScope NS_ENUM_AVAILABLE(10_7, NA) = ( 1 << 11 ), /* include information in the bookmark data which allows the same sandboxed process to access the resource after being relaunched */
-    NSURLBookmarkCreationSecurityScopeAllowOnlyReadAccess NS_ENUM_AVAILABLE(10_7, NA) = ( 1 << 12 ), /* if used with kCFURLBookmarkCreationWithSecurityScope, at resolution time only read access to the resource will be granted */
+    NSURLBookmarkCreationWithSecurityScope API_AVAILABLE(macos(10.7)) API_UNAVAILABLE(ios, watchos, tvos) = ( 1 << 11 ), /* include information in the bookmark data which allows the same sandboxed process to access the resource after being relaunched */
+    NSURLBookmarkCreationSecurityScopeAllowOnlyReadAccess API_AVAILABLE(macos(10.7)) API_UNAVAILABLE(ios, watchos, tvos) = ( 1 << 12 ), /* if used with kCFURLBookmarkCreationWithSecurityScope, at resolution time only read access to the resource will be granted */
 } API_AVAILABLE(macos(10.6), ios(4.0), watchos(2.0), tvos(9.0));
 
 typedef NS_OPTIONS(NSUInteger, NSURLBookmarkResolutionOptions) {
     NSURLBookmarkResolutionWithoutUI = ( 1UL << 8 ), /* don't perform any user interaction during bookmark resolution */
     NSURLBookmarkResolutionWithoutMounting = ( 1UL << 9 ), /* don't mount a volume during bookmark resolution */
-    NSURLBookmarkResolutionWithSecurityScope NS_ENUM_AVAILABLE(10_7, NA) = ( 1 << 10 ) /* use the secure information included at creation time to provide the ability to access the resource in a sandboxed process */
+    NSURLBookmarkResolutionWithSecurityScope API_AVAILABLE(macos(10.7)) API_UNAVAILABLE(ios, watchos, tvos) = ( 1 << 10 ) /* use the secure information included at creation time to provide the ability to access the resource in a sandboxed process */
 } API_AVAILABLE(macos(10.6), ios(4.0), watchos(2.0), tvos(9.0));
 
 typedef NSUInteger NSURLBookmarkFileCreationOptions;
@@ -463,7 +459,7 @@ typedef NSUInteger NSURLBookmarkFileCreationOptions;
 @end
 
 
-NS_CLASS_AVAILABLE(10_10, 8_0)
+API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0))
 // NSURLQueryItem encapsulates a single query name-value pair. The name and value strings of a query name-value pair are not percent encoded. For use with the NSURLComponents queryItems property.
 @interface NSURLQueryItem : NSObject <NSSecureCoding, NSCopying> {
 @private
@@ -477,7 +473,7 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
 @end
 
 
-NS_CLASS_AVAILABLE(10_9, 7_0)
+API_AVAILABLE(macos(10.9), ios(7.0), watchos(2.0), tvos(9.0))
 @interface NSURLComponents : NSObject <NSCopying>
 
 // Initialize a NSURLComponents with all components undefined. Designated initializer.
@@ -618,12 +614,12 @@ NS_CLASS_AVAILABLE(10_9, 7_0)
 @end
 
 
-#if (TARGET_OS_MAC || (TARGET_OS_EMBEDDED || TARGET_OS_IPHONE))
+#if (TARGET_OS_MAC || TARGET_OS_IPHONE)
 /* NSFileSecurity encapsulates a file system object's security information. NSFileSecurity and CFFileSecurity are toll-free bridged. Use the CFFileSecurity API for access to the low-level file security properties encapsulated by NSFileSecurity.
  */
-NS_CLASS_AVAILABLE(10_7, 5_0)
+API_AVAILABLE(macos(10.7), ios(5.0), watchos(2.0), tvos(9.0))
 @interface NSFileSecurity : NSObject <NSCopying, NSSecureCoding>
-- (nullable instancetype) initWithCoder:(NSCoder *)aDecoder NS_DESIGNATED_INITIALIZER;
+- (nullable instancetype) initWithCoder:(NSCoder *)coder NS_DESIGNATED_INITIALIZER;
 @end
 #endif
 
@@ -631,7 +627,7 @@ NS_CLASS_AVAILABLE(10_7, 5_0)
 /* deprecated interfaces
  */
 
-#if (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE))
+#if TARGET_OS_OSX
 /* NSURLClient and NSURLLoading are deprecated; use NSURLConnection instead.
  */
 

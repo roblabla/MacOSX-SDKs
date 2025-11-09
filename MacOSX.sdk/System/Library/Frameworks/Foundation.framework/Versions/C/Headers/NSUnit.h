@@ -1,6 +1,6 @@
 /*
  NSUnit.h
- Copyright (c) 2015-2018, Apple Inc.
+ Copyright (c) 2015-2019, Apple Inc.
  All rights reserved.
  */
 
@@ -93,8 +93,8 @@ API_AVAILABLE(macosx(10.12), ios(10.0), watchos(3.0), tvos(10.0))
 
 @property (readonly, copy) NSString *symbol;
 
-- (instancetype)init NS_UNAVAILABLE;
-+ (instancetype)new NS_UNAVAILABLE;
+- (instancetype)init API_UNAVAILABLE(macos, ios, watchos, tvos);
++ (instancetype)new API_UNAVAILABLE(macos, ios, watchos, tvos);
 
 - (instancetype)initWithSymbol:(NSString *)symbol NS_DESIGNATED_INITIALIZER;
 
@@ -204,9 +204,13 @@ API_AVAILABLE(macosx(10.12), ios(10.0), watchos(3.0), tvos(10.0))
  Base unit - seconds
  */
 
-@property (class, readonly, copy) NSUnitDuration *seconds;
-@property (class, readonly, copy) NSUnitDuration *minutes;
 @property (class, readonly, copy) NSUnitDuration *hours;
+@property (class, readonly, copy) NSUnitDuration *minutes;
+@property (class, readonly, copy) NSUnitDuration *seconds;
+@property (class, readonly, copy) NSUnitDuration *milliseconds API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0), watchos(6.0));
+@property (class, readonly, copy) NSUnitDuration *microseconds API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0), watchos(6.0));
+@property (class, readonly, copy) NSUnitDuration *nanoseconds API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0), watchos(6.0));
+@property (class, readonly, copy) NSUnitDuration *picoseconds API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0), watchos(6.0));
 
 @end
 
@@ -296,6 +300,9 @@ API_AVAILABLE(macosx(10.12), ios(10.0), watchos(3.0), tvos(10.0))
 @property (class, readonly, copy) NSUnitFrequency *microhertz;
 @property (class, readonly, copy) NSUnitFrequency *nanohertz;
 
+// 1 FPS ≡ 1 Hertz
+@property (class, readonly, copy) NSUnitFrequency *framesPerSecond API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0), watchos(6.0));
+
 @end
 
 API_AVAILABLE(macosx(10.12), ios(10.0), watchos(3.0), tvos(10.0))
@@ -307,6 +314,65 @@ API_AVAILABLE(macosx(10.12), ios(10.0), watchos(3.0), tvos(10.0))
 @property (class, readonly, copy) NSUnitFuelEfficiency *litersPer100Kilometers;
 @property (class, readonly, copy) NSUnitFuelEfficiency *milesPerImperialGallon;
 @property (class, readonly, copy) NSUnitFuelEfficiency *milesPerGallon;
+
+@end
+
+/*
+ A dimension for representing amounts of digital information.
+ Base Unit: Byte
+
+ The values of the below follow IEC 80000-13 definitions and conventions.
+ */
+API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0), watchos(6.0))
+NS_SWIFT_NAME(UnitInformationStorage)
+@interface NSUnitInformationStorage : NSDimension <NSSecureCoding>
+
+// Bytes are defined by IEC 80000-13: one byte is 8 bits.
+@property (readonly, class, copy) NSUnitInformationStorage *bytes;
+
+// One byte is 8 bits; one nibble is 4 bits.
+@property (readonly, class, copy) NSUnitInformationStorage *bits;
+@property (readonly, class, copy) NSUnitInformationStorage *nibbles;
+
+// SI-prefixed units (i.e. base 10):
+// 1 kilobyte = 1000¹ bytes; 1 megabyte = 1000² bytes; etc.
+@property (readonly, class, copy) NSUnitInformationStorage *yottabytes;
+@property (readonly, class, copy) NSUnitInformationStorage *zettabytes;
+@property (readonly, class, copy) NSUnitInformationStorage *exabytes;
+@property (readonly, class, copy) NSUnitInformationStorage *petabytes;
+@property (readonly, class, copy) NSUnitInformationStorage *terabytes;
+@property (readonly, class, copy) NSUnitInformationStorage *gigabytes;
+@property (readonly, class, copy) NSUnitInformationStorage *megabytes;
+@property (readonly, class, copy) NSUnitInformationStorage *kilobytes;
+
+@property (readonly, class, copy) NSUnitInformationStorage *yottabits;
+@property (readonly, class, copy) NSUnitInformationStorage *zettabits;
+@property (readonly, class, copy) NSUnitInformationStorage *exabits;
+@property (readonly, class, copy) NSUnitInformationStorage *petabits;
+@property (readonly, class, copy) NSUnitInformationStorage *terabits;
+@property (readonly, class, copy) NSUnitInformationStorage *gigabits;
+@property (readonly, class, copy) NSUnitInformationStorage *megabits;
+@property (readonly, class, copy) NSUnitInformationStorage *kilobits;
+
+// IEC-prefixed units (i.e. base 2):
+// 1 kibibyte = 1024¹ bytes; 1 mebibyte = 1024² bytes; etc.
+@property (readonly, class, copy) NSUnitInformationStorage *yobibytes;
+@property (readonly, class, copy) NSUnitInformationStorage *zebibytes;
+@property (readonly, class, copy) NSUnitInformationStorage *exbibytes;
+@property (readonly, class, copy) NSUnitInformationStorage *pebibytes;
+@property (readonly, class, copy) NSUnitInformationStorage *tebibytes;
+@property (readonly, class, copy) NSUnitInformationStorage *gibibytes;
+@property (readonly, class, copy) NSUnitInformationStorage *mebibytes;
+@property (readonly, class, copy) NSUnitInformationStorage *kibibytes;
+
+@property (readonly, class, copy) NSUnitInformationStorage *yobibits;
+@property (readonly, class, copy) NSUnitInformationStorage *zebibits;
+@property (readonly, class, copy) NSUnitInformationStorage *exbibits;
+@property (readonly, class, copy) NSUnitInformationStorage *pebibits;
+@property (readonly, class, copy) NSUnitInformationStorage *tebibits;
+@property (readonly, class, copy) NSUnitInformationStorage *gibibits;
+@property (readonly, class, copy) NSUnitInformationStorage *mebibits;
+@property (readonly, class, copy) NSUnitInformationStorage *kibibits;
 
 @end
 

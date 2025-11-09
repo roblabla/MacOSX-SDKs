@@ -47,6 +47,9 @@
 #endif
 
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wold-style-cast"
+
 CF_ASSUME_NONNULL_BEGIN
 
 #if defined(__cplusplus)
@@ -227,9 +230,9 @@ typedef struct MIDIMetaEvent
 /*!
 	@struct		MusicEventUserData
 	@discussion	Provides a general struct for specifying a user defined event. 
-	@field		length
+	@var  		length
 					the size in bytes of the data
-	@field		data
+	@var  		data
 					size bytes of user defined event data
 */
 typedef struct MusicEventUserData
@@ -287,15 +290,15 @@ typedef struct AUPresetEvent
 	@struct		CABarBeatTime
 	@abstract	A display representation of a musical time in beats.
 	
-	@field	bar
+	@var  	bar
 				A measure number.
-	@field	beat
+	@var  	beat
 				A beat number (1..n).
-	@field	subbeat
+	@var  	subbeat
 				The numerator of the fractional number of beats.
-	@field	subbeatDivisor
+	@var  	subbeatDivisor
 				The denominator of the fractional number of beats.
-	@field	reserved
+	@var  	reserved
 				Must be 0.
 	@discussion
 				A clock's internal representation of musical time is in beats based on the
@@ -771,7 +774,7 @@ MusicSequenceGetAUGraph(	MusicSequence 					inSequence,
 */
 extern OSStatus
 MusicSequenceSetMIDIEndpoint(	MusicSequence 	inSequence,
-								MIDIEndpointRef	inEndpoint)						API_AVAILABLE(macos(10.1), ios(5.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED;
+								MIDIEndpointRef	inEndpoint)						API_AVAILABLE(macos(10.1), ios(5.0), tvos(12.0)) __WATCHOS_PROHIBITED;
 	
 /*!
 	@function	MusicSequenceSetSequenceType
@@ -1106,7 +1109,7 @@ MusicTrackSetDestNode(	MusicTrack 			inTrack,
 */
 extern OSStatus
 MusicTrackSetDestMIDIEndpoint(	MusicTrack			inTrack,
-								MIDIEndpointRef		inEndpoint)					API_AVAILABLE(macos(10.1), ios(5.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED;
+								MIDIEndpointRef		inEndpoint)					API_AVAILABLE(macos(10.1), ios(5.0), tvos(12.0)) __WATCHOS_PROHIBITED;
 	
 /*!
 	@function	MusicTrackGetDestNode
@@ -1130,7 +1133,7 @@ MusicTrackGetDestNode(			MusicTrack 			inTrack,
 */
 extern OSStatus
 MusicTrackGetDestMIDIEndpoint(	MusicTrack			inTrack,
-								MIDIEndpointRef	*	outEndpoint)				API_AVAILABLE(macos(10.1), ios(5.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED;
+								MIDIEndpointRef	*	outEndpoint)				API_AVAILABLE(macos(10.1), ios(5.0), tvos(12.0)) __WATCHOS_PROHIBITED;
 	
 /*!
 	@function	MusicTrackSetProperty
@@ -1637,6 +1640,7 @@ NewMusicTrackFrom(		MusicTrack			inSourceTrack,
 						MusicTimeStamp		inSourceEndTime,
 						MusicTrack __nullable * __nonnull outNewTrack)	API_DEPRECATED("no longer supported", macos(10.0, 10.6)) API_UNAVAILABLE(ios, watchos, tvos);
 
+#if !TARGET_OS_IPHONE
 enum {
 	kMusicEventType_ExtendedControl			= 2
 };
@@ -1653,11 +1657,14 @@ MusicTrackNewExtendedControlEvent(	MusicTrack 					inTrack,
 									MusicTimeStamp				inTimeStamp,
 									const ExtendedControlEvent	*inInfo)		
 																	API_DEPRECATED("no longer supported", macos(10.0, 10.7)) API_UNAVAILABLE(ios, watchos, tvos);
+#endif
 
 #if defined(__cplusplus)
 }
 #endif
 
 CF_ASSUME_NONNULL_END
+
+#pragma clang diagnostic pop
 
 #endif // AudioToolbox_MusicPlayer_h

@@ -1,18 +1,17 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 80DE2FD1-85DB-3E98-98BD-F22A2600DD25' ]
-platform:        macosx
-install-name:    /System/Library/Frameworks/MetalPerformanceShaders.framework/Frameworks/MPSImage.framework/Versions/A/MPSImage
-current-version: 121.1.1
-parent-umbrella: MetalPerformanceShaders
+uuids:           [ 'x86_64: 144A9994-9AD3-340D-A890-C7F10DDEF489', 'x86_64: 144A9994-9AD3-340D-A890-C7F10DDEF489' ]
+platform:        zippered
+install-name:    '/System/Library/Frameworks/MetalPerformanceShaders.framework/Frameworks/MPSImage.framework/Versions/A/MPSImage'
+current-version: 122.0.52
 exports:         
   - archs:           [ x86_64 ]
-    allowable-clients: [ MetalPerformanceShaders ]
+    allowable-clients: [ MPSNeuralNetwork, MetalPerformanceShaders ]
     symbols:         [ _MPSSubTileEncode ]
     objc-classes:    [ MPSBinaryImageKernel, MPSImageAdd, MPSImageAreaMax, MPSImageAreaMin, 
-                       MPSImageArithmetic, MPSImageBilinearScale, MPSImageBox, MPSImageConversion, 
-                       MPSImageConvolution, MPSImageCopyToMatrix, MPSImageDilate, 
-                       MPSImageDivide, MPSImageErode, MPSImageEuclideanDistanceTransform, 
+                       MPSImageArithmetic, MPSImageBilinearScale, MPSImageBox, MPSImageBox3D, 
+                       MPSImageConversion, MPSImageConvolution, MPSImageCopyToMatrix, 
+                       MPSImageDilate, MPSImageDivide, MPSImageErode, MPSImageEuclideanDistanceTransform, 
                        MPSImageFindKeypoints, MPSImageGaussianBlur, MPSImageGaussianPyramid, 
                        MPSImageGuidedFilter, MPSImageHistogram, MPSImageHistogramEqualization, 
                        MPSImageHistogramSpecification, MPSImageIntegral, MPSImageIntegralOfSquares, 
@@ -22,6 +21,7 @@ exports:
                        MPSImageReduceColumnMax, MPSImageReduceColumnMean, MPSImageReduceColumnMin, 
                        MPSImageReduceColumnSum, MPSImageReduceRowMax, MPSImageReduceRowMean, 
                        MPSImageReduceRowMin, MPSImageReduceRowSum, MPSImageSobel, 
+                       MPSImageSpatioTemporalGuidedFilter, MPSImageSpatioTemporalGuidedFilterDescriptor, 
                        MPSImageStatisticsMean, MPSImageStatisticsMeanAndVariance, 
                        MPSImageStatisticsMinAndMax, MPSImageSubtract, MPSImageTent, 
                        MPSImageThresholdBinary, MPSImageThresholdBinaryInverse, MPSImageThresholdToZero, 

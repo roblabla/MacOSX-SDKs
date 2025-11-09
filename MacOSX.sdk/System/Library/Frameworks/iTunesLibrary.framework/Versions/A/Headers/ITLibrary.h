@@ -49,9 +49,8 @@ typedef NS_ENUM( NSUInteger, ITLibInitOptions )
 	@abstract A class representing an iTunes library whose metadata is being queried.
 */
 ITLIB_EXPORT @interface ITLibrary : NSObject
-{
-	void * _impl;
-}
+
+- (instancetype)init NS_UNAVAILABLE;
 
 /*! @abstract The version of iTunes being accessed. */
 @property (nonatomic, readonly, copy) NSString* applicationVersion;
@@ -120,7 +119,7 @@ ITLIB_EXPORT @interface ITLibrary : NSObject
 	@param error A pointer to a variable that will receive an NSError if this method fails. May be nil if caller does not care about error.
 	@return An ITLibrary instance, or nil if this method fails.
  */
-- (nullable instancetype)initWithAPIVersion:(NSString*)requestedAPIVersion options:(ITLibInitOptions)options error:(NSError **)error API_AVAILABLE(macos(10.14));
+- (nullable instancetype)initWithAPIVersion:(NSString*)requestedAPIVersion options:(ITLibInitOptions)options error:(NSError **)error API_AVAILABLE(macos(10.14)) NS_DESIGNATED_INITIALIZER;
 
 /*! 
 	@abstract Retrieves the artwork from a media file. 

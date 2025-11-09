@@ -21,7 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
                                    :(size_t)height
 							 format:(CIFormat)f
 						 colorSpace:(nullable CGColorSpaceRef)cs
-                            options:(nullable NSDictionary<NSString *,id> *)options
+                            options:(nullable NSDictionary<CIImageOption,id> *)options
     NS_AVAILABLE(10_4, 9_0);
 
 - (instancetype)initWithImageProvider:(id)p
@@ -29,7 +29,7 @@ NS_ASSUME_NONNULL_BEGIN
                                      :(size_t)height
                                format:(CIFormat)f
                            colorSpace:(nullable CGColorSpaceRef)cs
-                              options:(nullable NSDictionary<NSString *,id> *)options
+                              options:(nullable NSDictionary<CIImageOption,id> *)options
     NS_AVAILABLE(10_4, 9_0);
 
 @end
@@ -74,11 +74,11 @@ NS_ASSUME_NONNULL_BEGIN
  *
  *   NSNull, then provideImageData: can be called for any possible origin and size.
  */
-CORE_IMAGE_EXPORT NSString * const kCIImageProviderTileSize NS_AVAILABLE(10_4, 9_0);
+CORE_IMAGE_EXPORT CIImageOption const kCIImageProviderTileSize NS_AVAILABLE(10_4, 9_0);
 
 /* The object passed when the provideImageData: method is called.
  * It is retained until the image is deallocated.
  */
-CORE_IMAGE_EXPORT NSString * const kCIImageProviderUserInfo NS_AVAILABLE(10_4, 9_0);
+CORE_IMAGE_EXPORT CIImageOption const kCIImageProviderUserInfo NS_AVAILABLE(10_4, 9_0);
 
 NS_ASSUME_NONNULL_END

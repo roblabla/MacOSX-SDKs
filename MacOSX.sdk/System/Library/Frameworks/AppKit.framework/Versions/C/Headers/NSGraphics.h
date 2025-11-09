@@ -1,7 +1,7 @@
 /*
 	NSGraphics.h
 	Application Kit
-	Copyright (c) 1994-2018, Apple Inc.
+	Copyright (c) 1994-2019, Apple Inc.
 	All rights reserved.
 */
 
@@ -9,6 +9,7 @@
 #import <AppKit/AppKitDefines.h>
 
 NS_ASSUME_NONNULL_BEGIN
+API_UNAVAILABLE_BEGIN(ios)
 
 @class NSColor, NSView;
 
@@ -28,62 +29,62 @@ typedef NS_ENUM(NSUInteger, NSCompositingOperation) {
     NSCompositingOperationDestinationAtop,
     NSCompositingOperationXOR,
     NSCompositingOperationPlusDarker,
-    NSCompositingOperationHighlight NS_DEPRECATED_MAC(10_0, 10_0, "Use NSCompositingOperationSourceOver instead"),
+    NSCompositingOperationHighlight API_DEPRECATED("Use NSCompositingOperationSourceOver instead", macos(10.0,10.0)),
     NSCompositingOperationPlusLighter,
     
     /* Separable blend-modes */
     /* http://www.w3.org/TR/2014/CR-compositing-1-20140220/#blendingseparable */
-    NSCompositingOperationMultiply	NS_AVAILABLE_MAC(10_10),
-    NSCompositingOperationScreen	NS_AVAILABLE_MAC(10_10),
-    NSCompositingOperationOverlay	NS_AVAILABLE_MAC(10_10),
-    NSCompositingOperationDarken	NS_AVAILABLE_MAC(10_10),
-    NSCompositingOperationLighten	NS_AVAILABLE_MAC(10_10),
-    NSCompositingOperationColorDodge	NS_AVAILABLE_MAC(10_10),
-    NSCompositingOperationColorBurn	NS_AVAILABLE_MAC(10_10),
-    NSCompositingOperationSoftLight	NS_AVAILABLE_MAC(10_10),
-    NSCompositingOperationHardLight	NS_AVAILABLE_MAC(10_10),
-    NSCompositingOperationDifference	NS_AVAILABLE_MAC(10_10),
-    NSCompositingOperationExclusion	NS_AVAILABLE_MAC(10_10),
+    NSCompositingOperationMultiply	API_AVAILABLE(macos(10.10)),
+    NSCompositingOperationScreen	API_AVAILABLE(macos(10.10)),
+    NSCompositingOperationOverlay	API_AVAILABLE(macos(10.10)),
+    NSCompositingOperationDarken	API_AVAILABLE(macos(10.10)),
+    NSCompositingOperationLighten	API_AVAILABLE(macos(10.10)),
+    NSCompositingOperationColorDodge	API_AVAILABLE(macos(10.10)),
+    NSCompositingOperationColorBurn	API_AVAILABLE(macos(10.10)),
+    NSCompositingOperationSoftLight	API_AVAILABLE(macos(10.10)),
+    NSCompositingOperationHardLight	API_AVAILABLE(macos(10.10)),
+    NSCompositingOperationDifference	API_AVAILABLE(macos(10.10)),
+    NSCompositingOperationExclusion	API_AVAILABLE(macos(10.10)),
     
     /* Non-separable blend-modes */
     /* http://www.w3.org/TR/2014/CR-compositing-1-20140220/#blendingnonseparable */
-    NSCompositingOperationHue		NS_AVAILABLE_MAC(10_10),
-    NSCompositingOperationSaturation	NS_AVAILABLE_MAC(10_10),
-    NSCompositingOperationColor		NS_AVAILABLE_MAC(10_10),
-    NSCompositingOperationLuminosity	NS_AVAILABLE_MAC(10_10),
+    NSCompositingOperationHue		API_AVAILABLE(macos(10.10)),
+    NSCompositingOperationSaturation	API_AVAILABLE(macos(10.10)),
+    NSCompositingOperationColor		API_AVAILABLE(macos(10.10)),
+    NSCompositingOperationLuminosity	API_AVAILABLE(macos(10.10)),
 };
 
 
-static const NSCompositingOperation NSCompositeClear NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSCompositingOperationClear", 10_0, 10_12) = NSCompositingOperationClear;
-static const NSCompositingOperation NSCompositeCopy NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSCompositingOperationCopy", 10_0, 10_12) = NSCompositingOperationCopy;
-static const NSCompositingOperation NSCompositeSourceOver NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSCompositingOperationSourceOver", 10_0, 10_12) = NSCompositingOperationSourceOver;
-static const NSCompositingOperation NSCompositeSourceIn NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSCompositingOperationSourceIn", 10_0, 10_12) = NSCompositingOperationSourceIn;
-static const NSCompositingOperation NSCompositeSourceOut NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSCompositingOperationSourceOut", 10_0, 10_12) = NSCompositingOperationSourceOut;
-static const NSCompositingOperation NSCompositeSourceAtop NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSCompositingOperationSourceAtop", 10_0, 10_12) = NSCompositingOperationSourceAtop;
-static const NSCompositingOperation NSCompositeDestinationOver NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSCompositingOperationDestinationOver", 10_0, 10_12) = NSCompositingOperationDestinationOver;
-static const NSCompositingOperation NSCompositeDestinationIn NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSCompositingOperationDestinationIn", 10_0, 10_12) = NSCompositingOperationDestinationIn;
-static const NSCompositingOperation NSCompositeDestinationOut NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSCompositingOperationDestinationOut", 10_0, 10_12) = NSCompositingOperationDestinationOut;
-static const NSCompositingOperation NSCompositeDestinationAtop NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSCompositingOperationDestinationAtop", 10_0, 10_12) = NSCompositingOperationDestinationAtop;
-static const NSCompositingOperation NSCompositeXOR NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSCompositingOperationXOR", 10_0, 10_12) = NSCompositingOperationXOR;
-static const NSCompositingOperation NSCompositePlusDarker NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSCompositingOperationPlusDarker", 10_0, 10_12) = NSCompositingOperationPlusDarker;
-static const NSCompositingOperation NSCompositeHighlight NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSCompositingOperationSourceOver", 10_0, 10_0) = NSCompositingOperationHighlight;
-static const NSCompositingOperation NSCompositePlusLighter NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSCompositingOperationPlusLighter", 10_0, 10_12) = NSCompositingOperationPlusLighter;
-static const NSCompositingOperation NSCompositeMultiply	NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSCompositingOperationMultiply", 10_0, 10_12) = NSCompositingOperationMultiply;
-static const NSCompositingOperation NSCompositeScreen NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSCompositingOperationScreen", 10_0, 10_12) = NSCompositingOperationScreen;
-static const NSCompositingOperation NSCompositeOverlay NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSCompositingOperationOverlay", 10_0, 10_12) = NSCompositingOperationOverlay;
-static const NSCompositingOperation NSCompositeDarken NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSCompositingOperationDarken", 10_0, 10_12) = NSCompositingOperationDarken;
-static const NSCompositingOperation NSCompositeLighten NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSCompositingOperationLighten", 10_0, 10_12) = NSCompositingOperationLighten;
-static const NSCompositingOperation NSCompositeColorDodge NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSCompositingOperationColorDodge", 10_0, 10_12) = NSCompositingOperationColorDodge;
-static const NSCompositingOperation NSCompositeColorBurn NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSCompositingOperationColorBurn", 10_0, 10_12) = NSCompositingOperationColorBurn;
-static const NSCompositingOperation NSCompositeSoftLight NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSCompositingOperationSoftLight", 10_0, 10_12) = NSCompositingOperationSoftLight;
-static const NSCompositingOperation NSCompositeHardLight NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSCompositingOperationHardLight", 10_0, 10_12) = NSCompositingOperationHardLight;
-static const NSCompositingOperation NSCompositeDifference NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSCompositingOperationDifference", 10_0, 10_12) = NSCompositingOperationDifference;
-static const NSCompositingOperation NSCompositeExclusion NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSCompositingOperationExclusion", 10_0, 10_12) = NSCompositingOperationExclusion;
+static const NSCompositingOperation NSCompositeClear API_DEPRECATED_WITH_REPLACEMENT("NSCompositingOperationClear", macos(10.0,10.12)) = NSCompositingOperationClear;
+static const NSCompositingOperation NSCompositeCopy API_DEPRECATED_WITH_REPLACEMENT("NSCompositingOperationCopy", macos(10.0,10.12)) = NSCompositingOperationCopy;
+static const NSCompositingOperation NSCompositeSourceOver API_DEPRECATED_WITH_REPLACEMENT("NSCompositingOperationSourceOver", macos(10.0,10.12)) = NSCompositingOperationSourceOver;
+static const NSCompositingOperation NSCompositeSourceIn API_DEPRECATED_WITH_REPLACEMENT("NSCompositingOperationSourceIn", macos(10.0,10.12)) = NSCompositingOperationSourceIn;
+static const NSCompositingOperation NSCompositeSourceOut API_DEPRECATED_WITH_REPLACEMENT("NSCompositingOperationSourceOut", macos(10.0,10.12)) = NSCompositingOperationSourceOut;
+static const NSCompositingOperation NSCompositeSourceAtop API_DEPRECATED_WITH_REPLACEMENT("NSCompositingOperationSourceAtop", macos(10.0,10.12)) = NSCompositingOperationSourceAtop;
+static const NSCompositingOperation NSCompositeDestinationOver API_DEPRECATED_WITH_REPLACEMENT("NSCompositingOperationDestinationOver", macos(10.0,10.12)) = NSCompositingOperationDestinationOver;
+static const NSCompositingOperation NSCompositeDestinationIn API_DEPRECATED_WITH_REPLACEMENT("NSCompositingOperationDestinationIn", macos(10.0,10.12)) = NSCompositingOperationDestinationIn;
+static const NSCompositingOperation NSCompositeDestinationOut API_DEPRECATED_WITH_REPLACEMENT("NSCompositingOperationDestinationOut", macos(10.0,10.12)) = NSCompositingOperationDestinationOut;
+static const NSCompositingOperation NSCompositeDestinationAtop API_DEPRECATED_WITH_REPLACEMENT("NSCompositingOperationDestinationAtop", macos(10.0,10.12)) = NSCompositingOperationDestinationAtop;
+static const NSCompositingOperation NSCompositeXOR API_DEPRECATED_WITH_REPLACEMENT("NSCompositingOperationXOR", macos(10.0,10.12)) = NSCompositingOperationXOR;
+static const NSCompositingOperation NSCompositePlusDarker API_DEPRECATED_WITH_REPLACEMENT("NSCompositingOperationPlusDarker", macos(10.0,10.12)) = NSCompositingOperationPlusDarker;
+static const NSCompositingOperation NSCompositeHighlight API_DEPRECATED_WITH_REPLACEMENT("NSCompositingOperationSourceOver", macos(10.0,10.0)) = NSCompositingOperationHighlight;
+static const NSCompositingOperation NSCompositePlusLighter API_DEPRECATED_WITH_REPLACEMENT("NSCompositingOperationPlusLighter", macos(10.0,10.12)) = NSCompositingOperationPlusLighter;
+static const NSCompositingOperation NSCompositeMultiply	API_DEPRECATED_WITH_REPLACEMENT("NSCompositingOperationMultiply", macos(10.0,10.12)) = NSCompositingOperationMultiply;
+static const NSCompositingOperation NSCompositeScreen API_DEPRECATED_WITH_REPLACEMENT("NSCompositingOperationScreen", macos(10.0,10.12)) = NSCompositingOperationScreen;
+static const NSCompositingOperation NSCompositeOverlay API_DEPRECATED_WITH_REPLACEMENT("NSCompositingOperationOverlay", macos(10.0,10.12)) = NSCompositingOperationOverlay;
+static const NSCompositingOperation NSCompositeDarken API_DEPRECATED_WITH_REPLACEMENT("NSCompositingOperationDarken", macos(10.0,10.12)) = NSCompositingOperationDarken;
+static const NSCompositingOperation NSCompositeLighten API_DEPRECATED_WITH_REPLACEMENT("NSCompositingOperationLighten", macos(10.0,10.12)) = NSCompositingOperationLighten;
+static const NSCompositingOperation NSCompositeColorDodge API_DEPRECATED_WITH_REPLACEMENT("NSCompositingOperationColorDodge", macos(10.0,10.12)) = NSCompositingOperationColorDodge;
+static const NSCompositingOperation NSCompositeColorBurn API_DEPRECATED_WITH_REPLACEMENT("NSCompositingOperationColorBurn", macos(10.0,10.12)) = NSCompositingOperationColorBurn;
+static const NSCompositingOperation NSCompositeSoftLight API_DEPRECATED_WITH_REPLACEMENT("NSCompositingOperationSoftLight", macos(10.0,10.12)) = NSCompositingOperationSoftLight;
+static const NSCompositingOperation NSCompositeHardLight API_DEPRECATED_WITH_REPLACEMENT("NSCompositingOperationHardLight", macos(10.0,10.12)) = NSCompositingOperationHardLight;
+static const NSCompositingOperation NSCompositeDifference API_DEPRECATED_WITH_REPLACEMENT("NSCompositingOperationDifference", macos(10.0,10.12)) = NSCompositingOperationDifference;
+static const NSCompositingOperation NSCompositeExclusion API_DEPRECATED_WITH_REPLACEMENT("NSCompositingOperationExclusion", macos(10.0,10.12)) = NSCompositingOperationExclusion;
 
-static const NSCompositingOperation NSCompositeHue NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSCompositingOperationHue", 10_0, 10_12) = NSCompositingOperationHue;
-static const NSCompositingOperation NSCompositeSaturation NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSCompositingOperationSaturation", 10_0, 10_12) = NSCompositingOperationSaturation;
-static const NSCompositingOperation NSCompositeColor NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSCompositingOperationColor", 10_0, 10_12) = NSCompositingOperationColor;
-static const NSCompositingOperation NSCompositeLuminosity NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSCompositingOperationLuminosity", 10_0, 10_12) = NSCompositingOperationLuminosity;
+static const NSCompositingOperation NSCompositeHue API_DEPRECATED_WITH_REPLACEMENT("NSCompositingOperationHue", macos(10.0,10.12)) = NSCompositingOperationHue;
+static const NSCompositingOperation NSCompositeSaturation API_DEPRECATED_WITH_REPLACEMENT("NSCompositingOperationSaturation", macos(10.0,10.12)) = NSCompositingOperationSaturation;
+static const NSCompositingOperation NSCompositeColor API_DEPRECATED_WITH_REPLACEMENT("NSCompositingOperationColor", macos(10.0,10.12)) = NSCompositingOperationColor;
+static const NSCompositingOperation NSCompositeLuminosity API_DEPRECATED_WITH_REPLACEMENT("NSCompositingOperationLuminosity", macos(10.0,10.12)) = NSCompositingOperationLuminosity;
 
 
 
@@ -93,8 +94,8 @@ static const NSCompositingOperation NSCompositeLuminosity NS_DEPRECATED_WITH_REP
 typedef NS_ENUM(NSUInteger, NSBackingStoreType) {
     /* NSBackingStoreRetained and NSBackingStoreNonretained have effectively been synonyms of NSBackingStoreBuffered since OS X Mountain Lion.  Please switch to the equivalent NSBackingStoreBuffered.
      */
-    NSBackingStoreRetained NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSBackingStoreBuffered", 10_0, 10_13) = 0,
-    NSBackingStoreNonretained NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSBackingStoreBuffered", 10_0, 10_13) = 1,
+    NSBackingStoreRetained API_DEPRECATED_WITH_REPLACEMENT("NSBackingStoreBuffered", macos(10.0,10.13)) = 0,
+    NSBackingStoreNonretained API_DEPRECATED_WITH_REPLACEMENT("NSBackingStoreBuffered", macos(10.0,10.13)) = 1,
     NSBackingStoreBuffered = 2,
 };
 
@@ -127,7 +128,7 @@ typedef NS_ENUM(NSInteger, NSColorRenderingIntent) {
     NSColorRenderingIntentRelativeColorimetric, //  = kCGRenderingIntentRelativeColorimetric,
     NSColorRenderingIntentPerceptual, // = kCGRenderingIntentPerceptual,
     NSColorRenderingIntentSaturation // = kCGRenderingIntentSaturation
-} NS_ENUM_AVAILABLE_MAC(10_5);
+} API_AVAILABLE(macos(10.5));
 
 
 typedef NSString * NSColorSpaceName NS_TYPED_ENUM;
@@ -144,8 +145,8 @@ APPKIT_EXTERN NSColorSpaceName NSCustomColorSpace;		/* Used to indicate a custom
 
 /* Prefer colorspaces where 1.0 means white.
  */
-APPKIT_EXTERN NSColorSpaceName NSCalibratedBlackColorSpace     /* 1.0 == black */ NS_DEPRECATED_MAC(10_0, 10_6);
-APPKIT_EXTERN NSColorSpaceName NSDeviceBlackColorSpace 	/* 1.0 == black */ NS_DEPRECATED_MAC(10_0, 10_6);
+APPKIT_EXTERN NSColorSpaceName NSCalibratedBlackColorSpace     /* 1.0 == black */ API_DEPRECATED("", macos(10.0,10.6));
+APPKIT_EXTERN NSColorSpaceName NSDeviceBlackColorSpace 	/* 1.0 == black */ API_DEPRECATED("", macos(10.0,10.6));
 
 
 /* NSWindowDepth defines the values used in setting window depth limits. "0" indicates default depth. Window depths should not be made persistent as they will not be the same across systems. Use the functions NSBitsPerSampleFromDepth(), NSColorSpaceFromDepth(), NSBitsPerPixelFromDepth(), and NSPlanarFromDepth() to extract info from an NSWindowDepth 
@@ -158,15 +159,15 @@ typedef NS_ENUM(int32_t, NSWindowDepth) {
     NSWindowDepthTwentyfourBitRGB = 0x208,
     NSWindowDepthSixtyfourBitRGB = 0x210,
     NSWindowDepthOnehundredtwentyeightBitRGB = 0x220
-} NS_ENUM_AVAILABLE_MAC(10_6);
+} API_AVAILABLE(macos(10.6));
 
-APPKIT_EXTERN NSWindowDepth NSBestDepth (NSColorSpaceName colorSpace, NSInteger bps, NSInteger bpp, BOOL planar, BOOL * __nullable exactMatch);
+APPKIT_EXTERN NSWindowDepth NSBestDepth (NSColorSpaceName colorSpace, NSInteger bps, NSInteger bpp, BOOL planar, BOOL * _Nullable exactMatch);
 APPKIT_EXTERN BOOL NSPlanarFromDepth (NSWindowDepth depth);
-APPKIT_EXTERN NSColorSpaceName __nullable NSColorSpaceFromDepth (NSWindowDepth depth);
+APPKIT_EXTERN NSColorSpaceName _Nullable NSColorSpaceFromDepth (NSWindowDepth depth);
 APPKIT_EXTERN NSInteger NSBitsPerSampleFromDepth(NSWindowDepth depth);
 APPKIT_EXTERN NSInteger NSBitsPerPixelFromDepth(NSWindowDepth depth);
 APPKIT_EXTERN NSInteger NSNumberOfColorComponents(NSColorSpaceName colorSpaceName);
-APPKIT_EXTERN const NSWindowDepth *NSAvailableWindowDepths (void); /* 0 terminated */
+APPKIT_EXTERN const NSWindowDepth *NSAvailableWindowDepths(void); /* returns pointer to 0-terminated array */
 
 
 /* Standard gray values for the 2-bit deep grayscale colorspace.
@@ -181,7 +182,7 @@ APPKIT_EXTERN const CGFloat NSBlack;
 typedef NS_ENUM(NSInteger, NSDisplayGamut) {
     NSDisplayGamutSRGB = 1,
     NSDisplayGamutP3 
-} NS_ENUM_AVAILABLE_MAC(10_12);
+} API_AVAILABLE(macos(10.12));
 
 /* Keys for deviceDescription dictionaries.
 */
@@ -199,10 +200,10 @@ APPKIT_EXTERN NSDeviceDescriptionKey NSDeviceSize;			/* NSValue containing NSSiz
 APPKIT_EXTERN void NSRectFill(NSRect rect);
 APPKIT_EXTERN void NSRectFillList(const NSRect *rects, NSInteger count);
 APPKIT_EXTERN void NSRectFillListWithGrays(const NSRect *rects, const CGFloat *grays, NSInteger num);
-APPKIT_EXTERN void NSRectFillListWithColors(const NSRect *rects,  NSColor * const __nonnull * __nonnull colors, NSInteger num);
+APPKIT_EXTERN void NSRectFillListWithColors(const NSRect *rects,  NSColor * const _Nonnull * _Nonnull colors, NSInteger num);
 APPKIT_EXTERN void NSRectFillUsingOperation(NSRect rect, NSCompositingOperation op);
 APPKIT_EXTERN void NSRectFillListUsingOperation(const NSRect *rects, NSInteger count, NSCompositingOperation op);
-APPKIT_EXTERN void NSRectFillListWithColorsUsingOperation(const NSRect *rects, NSColor * const __nonnull * __nonnull colors, NSInteger num, NSCompositingOperation op);
+APPKIT_EXTERN void NSRectFillListWithColorsUsingOperation(const NSRect *rects, NSColor * const _Nonnull * _Nonnull colors, NSInteger num, NSCompositingOperation op);
 APPKIT_EXTERN void NSFrameRect(NSRect rect);
 APPKIT_EXTERN void NSFrameRectWithWidth(NSRect rect, CGFloat frameWidth);
 APPKIT_EXTERN void NSFrameRectWithWidthUsingOperation(NSRect rect, CGFloat frameWidth, NSCompositingOperation op);
@@ -214,16 +215,16 @@ APPKIT_EXTERN void NSDrawGroove(NSRect rect, NSRect clipRect);
 APPKIT_EXTERN void NSDrawWhiteBezel(NSRect rect, NSRect clipRect);
 APPKIT_EXTERN void NSDrawButton(NSRect rect, NSRect clipRect);
 APPKIT_EXTERN void NSEraseRect(NSRect rect);
-APPKIT_EXTERN NSColor * __nullable NSReadPixel(NSPoint passedPoint) NS_DEPRECATED_MAC(10_0, 10_14, "Use -[NSBitmapImageRep colorAtX:y:] to interrogate pixel values.  If necessary, use -[NSView cacheDisplayInRect:toBitmapImageRep:] to snapshot a view hierarchy into an NSBitmapImageRep.");
-APPKIT_EXTERN void NSDrawBitmap(NSRect rect, NSInteger width, NSInteger height, NSInteger bps, NSInteger spp, NSInteger bpp, NSInteger bpr, BOOL isPlanar, BOOL hasAlpha, NSColorSpaceName colorSpaceName, const unsigned char *const __nullable data[__nonnull 5]);
+APPKIT_EXTERN NSColor * _Nullable NSReadPixel(NSPoint passedPoint) API_DEPRECATED("Use -[NSBitmapImageRep colorAtX:y:] to interrogate pixel values.  If necessary, use -[NSView cacheDisplayInRect:toBitmapImageRep:] to snapshot a view hierarchy into an NSBitmapImageRep.", macos(10.0,10.14));
+APPKIT_EXTERN void NSDrawBitmap(NSRect rect, NSInteger width, NSInteger height, NSInteger bps, NSInteger spp, NSInteger bpp, NSInteger bpr, BOOL isPlanar, BOOL hasAlpha, NSColorSpaceName colorSpaceName, const unsigned char *const _Nullable data[_Nonnull 5]);
 
-APPKIT_EXTERN void NSHighlightRect(NSRect rect) NS_DEPRECATED_MAC(10_0, 10_0);
+APPKIT_EXTERN void NSHighlightRect(NSRect rect) API_DEPRECATED("", macos(10.0,10.0));
 APPKIT_EXTERN void NSBeep(void);
 
 /* gets performance stats about window server memory usage */
-APPKIT_EXTERN NSInteger NSGetWindowServerMemory(NSInteger context, NSInteger *virtualMemory, NSInteger *windowBackingMemory, NSString * __nonnull * __nonnull windowDumpString) NS_DEPRECATED_MAC(10_0, 10_14, "Doesn't return anything useful since 10.0");
+APPKIT_EXTERN NSInteger NSGetWindowServerMemory(NSInteger context, NSInteger *virtualMemory, NSInteger *windowBackingMemory, NSString * _Nonnull * _Nonnull windowDumpString) API_DEPRECATED("Doesn't return anything useful since 10.0", macos(10.0,10.14));
 
-APPKIT_EXTERN NSRect NSDrawColorTiledRects(NSRect boundsRect, NSRect clipRect, const NSRectEdge *sides, NSColor * __nonnull * __nonnull colors, NSInteger count);
+APPKIT_EXTERN NSRect NSDrawColorTiledRects(NSRect boundsRect, NSRect clipRect, const NSRectEdge *sides, NSColor * _Nonnull * _Nonnull colors, NSInteger count);
 APPKIT_EXTERN void NSDrawDarkBezel(NSRect rect, NSRect clipRect);
 APPKIT_EXTERN void NSDrawLightBezel(NSRect rect, NSRect clipRect);
 APPKIT_EXTERN void NSDottedFrameRect(NSRect rect);
@@ -231,9 +232,9 @@ APPKIT_EXTERN void NSDottedFrameRect(NSRect rect);
 APPKIT_EXTERN void NSDrawWindowBackground(NSRect rect);
 APPKIT_EXTERN void NSSetFocusRingStyle(NSFocusRingPlacement placement);
 
-APPKIT_EXTERN void NSDisableScreenUpdates(void) NS_DEPRECATED_MAC(10_0, 10_11, "As of 10.11 it is not generally necessary to take explicit action to achieve visual atomicity. +[NSAnimationContext runAnimationGroup:] and other similar methods can be used when a stronger than normal need for visual atomicity is required. The NSAnimationContext methods do not suffer from the same performance problems as NSDisableScreenUpdates.");
+APPKIT_EXTERN void NSDisableScreenUpdates(void) API_DEPRECATED("As of 10.11 it is not generally necessary to take explicit action to achieve visual atomicity. +[NSAnimationContext runAnimationGroup:] and other similar methods can be used when a stronger than normal need for visual atomicity is required. The NSAnimationContext methods do not suffer from the same performance problems as NSDisableScreenUpdates.", macos(10.0,10.11));
 
-APPKIT_EXTERN void NSEnableScreenUpdates(void) NS_DEPRECATED_MAC(10_0, 10_11, "As of 10.11 it is not generally necessary to take explicit action to achieve visual atomicity. +[NSAnimationContext runAnimationGroup:] and other similar methods can be used when a stronger than normal need for visual atomicity is required. The NSAnimationContext methods do not suffer from the same performance problems as NSEnableScreenUpdates.");
+APPKIT_EXTERN void NSEnableScreenUpdates(void) API_DEPRECATED("As of 10.11 it is not generally necessary to take explicit action to achieve visual atomicity. +[NSAnimationContext runAnimationGroup:] and other similar methods can be used when a stronger than normal need for visual atomicity is required. The NSAnimationContext methods do not suffer from the same performance problems as NSEnableScreenUpdates.", macos(10.0,10.11));
 
 /* Runs one of the standard system animation effects (display and sound).
 ** 'centerLocation' represents the center, in screen coordinates, to show the effect.
@@ -254,12 +255,13 @@ typedef NS_ENUM(NSUInteger, NSAnimationEffect) {
 	NSAnimationEffectPoof = 10
 };
 
-APPKIT_EXTERN void NSShowAnimationEffect(NSAnimationEffect animationEffect, NSPoint centerLocation, NSSize size, __nullable id animationDelegate, __nullable SEL didEndSelector, void * __nullable contextInfo);
+APPKIT_EXTERN void NSShowAnimationEffect(NSAnimationEffect animationEffect, NSPoint centerLocation, NSSize size, _Nullable id animationDelegate, _Nullable SEL didEndSelector, void * _Nullable contextInfo);
 
-APPKIT_EXTERN void NSCountWindows(NSInteger *count) NS_DEPRECATED_MAC(10_0, 10_6, "Use +[NSWindow windowNumbersWithOptions:] instead");
-APPKIT_EXTERN void NSWindowList(NSInteger size, NSInteger list[__nonnull]) NS_DEPRECATED_MAC(10_0, 10_6, "Use +[NSWindow windowNumbersWithOptions:] instead");
-APPKIT_EXTERN void NSCountWindowsForContext(NSInteger context, NSInteger *count) NS_DEPRECATED_MAC(10_0, 10_6, "Use +[NSWindow windowNumbersWithOptions:] instead");
-APPKIT_EXTERN void NSWindowListForContext(NSInteger context, NSInteger size, NSInteger list[__nonnull]) NS_DEPRECATED_MAC(10_0, 10_6, "Use +[NSWindow windowNumbersWithOptions:] instead");
-APPKIT_EXTERN void NSCopyBits(NSInteger srcGState, NSRect srcRect, NSPoint destPoint) NS_DEPRECATED_MAC(10_0, 10_10);
+APPKIT_EXTERN void NSCountWindows(NSInteger *count) API_DEPRECATED("Use +[NSWindow windowNumbersWithOptions:] instead", macos(10.0,10.6));
+APPKIT_EXTERN void NSWindowList(NSInteger size, NSInteger list[_Nonnull]) API_DEPRECATED("Use +[NSWindow windowNumbersWithOptions:] instead", macos(10.0,10.6));
+APPKIT_EXTERN void NSCountWindowsForContext(NSInteger context, NSInteger *count) API_DEPRECATED("Use +[NSWindow windowNumbersWithOptions:] instead", macos(10.0,10.6));
+APPKIT_EXTERN void NSWindowListForContext(NSInteger context, NSInteger size, NSInteger list[_Nonnull]) API_DEPRECATED("Use +[NSWindow windowNumbersWithOptions:] instead", macos(10.0,10.6));
+APPKIT_EXTERN void NSCopyBits(NSInteger srcGState, NSRect srcRect, NSPoint destPoint) API_DEPRECATED("", macos(10.0,10.10));
 
+API_UNAVAILABLE_END
 NS_ASSUME_NONNULL_END

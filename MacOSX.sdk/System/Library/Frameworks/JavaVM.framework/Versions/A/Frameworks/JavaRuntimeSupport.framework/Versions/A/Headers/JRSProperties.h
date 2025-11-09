@@ -3,6 +3,6 @@
 //  Copyright 2008-2011 Apple Inc. All rights reserved.
 //
 
-char *JRSCopyOSName();
-char *JRSCopyOSVersion();
-char *JRSCopyOSJavaSupportVersion();
+char *JRSCopyOSName(void);
+char *JRSCopyOSVersion(void);
+char *JRSCopyOSJavaSupportVersion(void);

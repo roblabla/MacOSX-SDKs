@@ -1,9 +1,8 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 77F95762-3AAD-356E-8739-9ADB8E01003C' ]
+uuids:           [ 'x86_64: 9BA7C1D8-2E46-3E3F-AB5C-79E78E8EB668' ]
 platform:        macosx
-install-name:    /System/Library/PrivateFrameworks/DirectoryServer.framework/Frameworks/CFDirectoryServer.framework/Versions/A/CFDirectoryServer
-objc-constraint: none
+install-name:    '/System/Library/PrivateFrameworks/DirectoryServer.framework/Frameworks/CFDirectoryServer.framework/Versions/A/CFDirectoryServer'
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _DSCStringCreate, _DSChangePasswordWithPolicy, _DSConfigCopyEnabledAuthMechs, 

@@ -1,7 +1,7 @@
 /*
     NSSegmentedCell.h
     Application Kit
-    Copyright (c) 2003-2018, Apple Inc.
+    Copyright (c) 2003-2019, Apple Inc.
     All rights reserved.
 */
 
@@ -10,36 +10,11 @@
 #import <AppKit/NSSegmentedControl.h>
 
 NS_ASSUME_NONNULL_BEGIN
+API_UNAVAILABLE_BEGIN(ios)
 
 @class NSMutableArray;
 
-@interface NSSegmentedCell : NSActionCell {
-  @private
-    NSMutableArray* _segmentItems APPKIT_IVAR;
-    NSInteger           _selectedSegment APPKIT_IVAR;
-    NSInteger           _keySegment APPKIT_IVAR;
-    NSRect          _lastBounds APPKIT_IVAR;
-    struct {
-        unsigned int trackingMode:3;
-        unsigned int trimmedLabels:1;
-        unsigned int drawing:1;
-        unsigned int reserved1:2;
-        unsigned int recalcToolTips:1;
-        unsigned int usesWindowsStyle:1;
-        unsigned int dontShowSelectedAndPressedAppearance:1;
-        unsigned int menuShouldBeUniquedAgainstMain:1;
-        unsigned int style:8;
-        unsigned int flatMinX:1;
-        unsigned int flatMaxX:1;
-        unsigned int segmentedSeparated:1;
-        unsigned int animateNextLayout:1;
-        unsigned int reserved:9;
-    } _seFlags APPKIT_IVAR;
-    id           _segmentTrackingInfo APPKIT_IVAR;
-    id           _menuUniquer APPKIT_IVAR;
-    NSInteger    _reserved3 APPKIT_IVAR;
-    NSInteger    _reserved4 APPKIT_IVAR;
-}
+@interface NSSegmentedCell : NSActionCell
 
 /* Number of segments
 */
@@ -69,8 +44,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (nullable NSImage *)imageForSegment:(NSInteger)segment;
 
 
-- (void)setImageScaling:(NSImageScaling)scaling forSegment:(NSInteger)segment NS_AVAILABLE_MAC(10_5);
-- (NSImageScaling)imageScalingForSegment:(NSInteger)segment NS_AVAILABLE_MAC(10_5);
+- (void)setImageScaling:(NSImageScaling)scaling forSegment:(NSInteger)segment API_AVAILABLE(macos(10.5));
+- (NSImageScaling)imageScalingForSegment:(NSInteger)segment API_AVAILABLE(macos(10.5));
 
 
 - (void)setLabel:(NSString *)label forSegment:(NSInteger)segment;
@@ -92,7 +67,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSInteger)tagForSegment:(NSInteger)segment;
 
 /* see NSSegmentedControl.h for segment style names and values */
-@property NSSegmentStyle segmentStyle NS_AVAILABLE_MAC(10_5);
+@property NSSegmentStyle segmentStyle API_AVAILABLE(macos(10.5));
 
 /* For custom content drawing. frame has been adjusted to content area
 */
@@ -103,8 +78,9 @@ NS_ASSUME_NONNULL_BEGIN
 @interface NSSegmentedCell (NSSegmentBackgroundStyle)
 /* Describes the surface drawn onto in -[NSCell drawSegment:inFrame:withView:]. That method draws a segment interior, not the segment bezel.  This is both an override point and a useful method to call. A segmented cell that draws a custom bezel would override this to describe that surface. A cell that has custom segment drawing might query this method to help pick an image that looks good on the cell. Calling this method gives you some independence from changes in framework art style.
 */
-- (NSBackgroundStyle)interiorBackgroundStyleForSegment:(NSInteger)segment NS_AVAILABLE_MAC(10_5);
+- (NSBackgroundStyle)interiorBackgroundStyleForSegment:(NSInteger)segment API_AVAILABLE(macos(10.5));
 @end
 
+API_UNAVAILABLE_END
 NS_ASSUME_NONNULL_END
 

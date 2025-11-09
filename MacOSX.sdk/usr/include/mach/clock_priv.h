@@ -111,7 +111,7 @@ __END_DECLS
 #define __Request__clock_priv_subsystem__defined
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -119,11 +119,11 @@ __END_DECLS
 		mach_timespec_t new_time;
 	} __Request__clock_set_time_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -133,7 +133,7 @@ __END_DECLS
 		int clock_attr[1];
 	} __Request__clock_set_attributes_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 #endif /* !__Request__clock_priv_subsystem__defined */
 
@@ -152,7 +152,7 @@ union __RequestUnion__clock_priv_subsystem {
 #define __Reply__clock_priv_subsystem__defined
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -160,11 +160,11 @@ union __RequestUnion__clock_priv_subsystem {
 		kern_return_t RetCode;
 	} __Reply__clock_set_time_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -172,7 +172,7 @@ union __RequestUnion__clock_priv_subsystem {
 		kern_return_t RetCode;
 	} __Reply__clock_set_attributes_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 #endif /* !__Reply__clock_priv_subsystem__defined */
 

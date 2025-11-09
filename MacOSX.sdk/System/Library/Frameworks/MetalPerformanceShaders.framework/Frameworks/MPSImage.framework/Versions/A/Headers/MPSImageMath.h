@@ -53,7 +53,7 @@
  *              
  *              You must use one of the sub-classes of MPSImageArithmetic.
  */
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0))
 @interface  MPSImageArithmetic : MPSBinaryImageKernel
 
 @property (readwrite, nonatomic) float primaryScale;
@@ -77,14 +77,14 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
  *              result = clamp(result, minimumValue, maximumValue).
  *              The default value of minimumValue is -FLT_MAX.
  */
-@property (readwrite, nonatomic) float          minimumValue    MPS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), tvos(11.3));
+@property (readwrite, nonatomic) float          minimumValue    MPS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3));
 
 /*! @property   maximumValue
  *  @abstract   maximumValue is used to clamp the result of an arithmetic operation:
  *              result = clamp(result, minimumValue, maximumValue).
  *              The default value of maximumValue is FLT_MAX.
  */
-@property (readwrite, nonatomic) float          maximumValue    MPS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), tvos(11.3));
+@property (readwrite, nonatomic) float          maximumValue    MPS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3));
 
 /*
  * You must use one of the sub-classes of MPSImageArithmetic.
@@ -101,7 +101,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
  *              For each pixel in the primary source image (x) and each pixel in a secondary source image (y),
  *              it applies the following function: result = ((primaryScale * x) + (secondaryScale * y)) + bias.
  */
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0))
 @interface  MPSImageAdd : MPSImageArithmetic
 
 /*!
@@ -121,7 +121,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
  *              For each pixel in the primary source image (x) and each pixel in a secondary source image (y),
  *              it applies the following function: result = ((primaryScale * x) - (secondaryScale * y)) + bias.
  */
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0))
 @interface  MPSImageSubtract : MPSImageArithmetic
 
 /*!
@@ -141,7 +141,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
  *              For each pixel in the primary source image (x) and each pixel in a secondary source image (y),
  *              it applies the following function: result = ((primaryScale * x) * (secondaryScale * y)) + bias.
  */
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0))
 @interface  MPSImageMultiply : MPSImageArithmetic
 
 /*!
@@ -161,7 +161,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
  *              For each pixel in the primary source image (x) and each pixel in a secondary source image (y),
  *              it applies the following function: result = ((primaryScale * x) / (secondaryScale * y)) + bias.
  */
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0))
 @interface  MPSImageDivide : MPSImageArithmetic
 
 /*!

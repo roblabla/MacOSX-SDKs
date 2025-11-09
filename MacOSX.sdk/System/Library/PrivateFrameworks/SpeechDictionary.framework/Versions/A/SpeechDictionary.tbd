@@ -1,9 +1,8 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 8F5F303A-F05C-37FC-9520-DEE92F0AE71B' ]
+uuids:           [ 'x86_64: 6AFB21E2-03A7-3182-A920-2D3779CC461C' ]
 platform:        macosx
-install-name:    /System/Library/PrivateFrameworks/SpeechDictionary.framework/Versions/A/SpeechDictionary
-objc-constraint: none
+install-name:    '/System/Library/PrivateFrameworks/SpeechDictionary.framework/Versions/A/SpeechDictionary'
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _SLHomographCopyTune, _SLHomographGetPOS, _SLHomographGetPhonemes, 
@@ -18,10 +17,18 @@ exports:
                        __ZN10SLCartDictC1EPv, __ZN10SLCartDictC2EPv, __ZN10SLCartDictD0Ev, 
                        __ZN10SLCartDictD1Ev, __ZN10SLCartDictD2Ev, __ZN10SLMMapHint10MappedSizeEv, 
                        __ZN10SLMMapHintD0Ev, __ZN10SLMMapHintD1Ev, __ZN10SLMMapHintD2Ev, 
-                       __ZN11SLHomographC1Ev, __ZN11SLHomographC2Ev, __ZN11SLHomographD1Ev, 
-                       __ZN11SLHomographD2Ev, __ZN11SLMMapCache19IsFileAlreadyMappedEPKc, 
-                       __ZN11SLMMapCache3MapEPK7__CFURLP10SLMMapHint, __ZN11SLMMapCache3MapEPKcP10SLMMapHint, 
-                       __ZN11SLMMapCache5UnmapEPv, __ZN11SLTmpLookupC1ERKNSt3__112basic_stringIcNS0_11char_traitsIcEENS0_9allocatorIcEEEEP12SLDictLookup, 
+                       __ZN10SLPhonTuneC1Ev, __ZN10SLPhonTuneC2Ev, __ZN11SLDissecter11DissectDateEP7SLTokenPNS_8DateInfoE, 
+                       __ZN11SLDissecter11DissectTimeEP7SLTokenPNS_8TimeInfoE, __ZN11SLDissecter11DissectUnitEP7SLTokenPNS_8UnitInfoE, 
+                       __ZN11SLDissecter12DissectRomanEP7SLTokenPNS_8UnitInfoE, __ZN11SLDissecter13DissectGeoLocEP7SLTokenPNS_10GeoLocInfoE, 
+                       __ZN11SLDissecter13DissectNumberEP7SLToken7CFRangePNS_7NumInfoE, 
+                       __ZN11SLDissecter13EvaluateRomanEP7SLToken7CFRange, __ZN11SLDissecter19DissectDottedNumberEP7SLTokenPNS_16DottedNumberInfoE, 
+                       __ZN11SLDissecter20DissectNumericBulletEP7SLTokenPNS_17NumericBulletInfoE, 
+                       __ZN11SLDissecter6CreateEP12SLPronouncer, __ZN11SLDissecterC1EP12SLPronouncer, 
+                       __ZN11SLDissecterC2EP12SLPronouncer, __ZN11SLHomographC1Ev, 
+                       __ZN11SLHomographC2Ev, __ZN11SLHomographD1Ev, __ZN11SLHomographD2Ev, 
+                       __ZN11SLMMapCache19IsFileAlreadyMappedEPKc, __ZN11SLMMapCache3MapEPK7__CFURLP10SLMMapHint, 
+                       __ZN11SLMMapCache3MapEPKcP10SLMMapHint, __ZN11SLMMapCache5UnmapEPv, 
+                       __ZN11SLTmpLookupC1ERKNSt3__112basic_stringIcNS0_11char_traitsIcEENS0_9allocatorIcEEEEP12SLDictLookup, 
                        __ZN11SLTmpLookupC2ERKNSt3__112basic_stringIcNS0_11char_traitsIcEENS0_9allocatorIcEEEEP12SLDictLookup, 
                        __ZN11SLTmpLookupD1Ev, __ZN11SLTmpLookupD2Ev, __ZN11SLTokenList9push_backEP7SLToken, 
                        __ZN11SLTokenListC1Ev, __ZN11SLTokenListC2Ev, __ZN12SLDictLookup20CreatePhonemeSymbolsEPK10__CFLocale, 

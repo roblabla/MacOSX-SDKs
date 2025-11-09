@@ -20,7 +20,7 @@
 // ABPersonView provides a view for displaying and editing ABPerson objects in your
 // user interface.
 
-
+API_AVAILABLE(macos(10.7)) API_UNAVAILABLE(macCatalyst)
 @interface ABPersonView : NSView {
 @private
 	ABAddressBook *_addressBook;

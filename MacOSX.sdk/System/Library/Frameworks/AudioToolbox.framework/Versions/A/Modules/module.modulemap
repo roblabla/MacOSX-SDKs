@@ -7,4 +7,5 @@ framework module AudioToolbox [extern_c] [system] {
 
 	explicit module DefaultAudioOutput { header "DefaultAudioOutput.h" export * }
 	explicit module AUCocoaUIView { header "AUCocoaUIView.h" export * }
+	explicit module AudioUnitCarbonView { header "AudioUnitCarbonView.h" export * }
 }

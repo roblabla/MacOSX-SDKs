@@ -1,10 +1,9 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: F92BC0C5-1F72-3CC0-ADCE-802EEA28A9CA' ]
+uuids:           [ 'x86_64: AD6E8EFE-8285-3505-9C5D-DA42F7DBA540' ]
 platform:        macosx
-install-name:    /System/Library/PrivateFrameworks/GPUCompiler.framework/Versions/3802/Libraries/libLLVM.dylib
-current-version: 3802.5.31
-objc-constraint: none
+install-name:    '/System/Library/PrivateFrameworks/GPUCompiler.framework/Versions/3802/Libraries/libLLVM.dylib'
+current-version: 3802.6.4
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _ConvertUTF16toUTF32, _ConvertUTF16toUTF8, _ConvertUTF32toUTF16, 
@@ -1933,7 +1932,7 @@ exports:
                        __ZN4llvm15CatchReturnInstC1ERKS0_, __ZN4llvm15CatchReturnInstC2EPNS_5ValueEPNS_10BasicBlockEPNS_11InstructionE, 
                        __ZN4llvm15CatchReturnInstC2EPNS_5ValueEPNS_10BasicBlockES4_, 
                        __ZN4llvm15CatchReturnInstC2ERKS0_, __ZN4llvm15CatchSwitchInst10addHandlerEPNS_10BasicBlockE, 
-                       __ZN4llvm15CatchSwitchInst12growOperandsEj, __ZN4llvm15CatchSwitchInst13removeHandlerENS_15mapped_iteratorIPNS_3UseENSt3__125pointer_to_unary_functionIPNS_5ValueEPNS_10BasicBlockEEEEE, 
+                       __ZN4llvm15CatchSwitchInst12growOperandsEj, __ZN4llvm15CatchSwitchInst13removeHandlerENS_15mapped_iteratorIPNS_3UseEPFPNS_10BasicBlockEPNS_5ValueEEEE, 
                        __ZN4llvm15CatchSwitchInst13setSuccessorVEjPNS_10BasicBlockE, 
                        __ZN4llvm15CatchSwitchInst4initEPNS_5ValueEPNS_10BasicBlockEj, 
                        __ZN4llvm15CatchSwitchInstC1EPNS_5ValueEPNS_10BasicBlockEjRKNS_5TwineEPNS_11InstructionE, 

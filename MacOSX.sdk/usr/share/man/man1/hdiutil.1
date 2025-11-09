@@ -38,7 +38,6 @@ The rest of the verbs are currently:
 .Sy "plugins",
 .Sy "udifrez",
 .Sy "udifderez",
-.Sy "internet-enable",
 .Sy "resize",
 .Sy "segment",
 .Sy "makehybrid",
@@ -369,19 +368,6 @@ specify whether bad checksums should be ignored.  The default is to abort
 when a bad checksum is detected.
 .br
 Preferences key: ignore-bad-checksums
-.It Fl [no]idme
-do [not] perform IDME actions on IDME images.  IDME actions are not
-performed by default.
-.br
-Preferences key: skip-idme
-.It Fl [no]idmereveal
-do [not] reveal (in the Finder) the results of IDME processing.
-.br
-Preferences key: skip-idme-reveal
-.It Fl [no]idmetrash
-do [not] put IDME images in the trash after processing.
-.br
-Preferences key: skip-idme-trash
 .It Fl [no]autoopen
 do [not] auto-open volumes (in the Finder) after attaching an image.
 By default, double-clicking a read-only disk image causes the resulting
@@ -540,6 +526,12 @@ or
 .Fl size )
 are invalid and ignored when using
 .Fl srcdevice .
+.Pp
+With APFS, imaging from a
+.Ar device
+that is an individual APFS volume is invalid. To create a valid APFS disk image,
+.Ar device
+needs to be an APFS container or contain an APFS container partition.
 .El
 .Pp
 Common options:
@@ -828,6 +820,8 @@ UDCO - UDIF ADC-compressed image
 UDZO - UDIF zlib-compressed image
 .It
 ULFO - UDIF lzfse-compressed image (OS X 10.11+ only)
+.It
+ULMO - UDIF lzma-compressed image (macOS 10.15+ only)
 .It
 UDBZ - UDIF bzip2-compressed image (Mac OS X 10.4+ only)
 .It
@@ -1399,45 +1393,14 @@ and
 .\"             -- unflatten --
 .It Sy unflatten Ar image
 .br
-unflatten a UDIF disk image, creating an OS 9-style dual-fork image file
-(no XML metadata).  If the resource fork representation of the metadata
-becomes greater than 16 MB, the operation will fail with error -39 ("End
-of fork").
-.Pp
-Common options:
-.Fl "encryption",
-.Fl "stdinpass",
-and
-.Fl "srcimagekey".
+.Sy unflatten
+is deprecated.
 .\"
 .\"             -- flatten --
 .It Sy flatten Ar image
 .br
-Flatten a read-only (or compressed) UDIF disk image into a single-fork
-file.  By default, metadata will be stored both as XML (for the kernel's
-use) and in an embedded resource fork (for Mac OS X 10.1 and earlier).
-.Pp
-Common options:
-.Fl "srcimagekey",
-.Fl "encryption",
-and
-.Fl "stdinpass".
-Since images are created
-.Qq flat
-by default,
 .Sy flatten
-is only required if the UDIF has previously been
-.Ns Sy unflatten Ns ed.
-.Bl -hang -width "norsrcfork" -compact
-.Pp
-Other options:
-.It Fl noxml
-don't embed XML data for in-kernel attachment.  The image will never
-attach in-kernel.
-.It Fl norsrcfork
-don't embed resource fork data.  The image will not attach on OS X versions
-prior to Mac OS X 10.2.
-.El
+is deprecated.
 .\"
 .\"             -- fsid --
 .It Sy fsid Ar image
@@ -1551,19 +1514,6 @@ Common options:
 .Fl plist .
 .Pp
 .\"
-.\"             -- internet-enable --
-.It Sy internet-enable
-.Op Fl yes
-|
-.Fl no
-|
-.Fl query
-.Ar image
-.br
-.Sy internet-enable
-is deprecated.  As of OS X 10.7, nothing in OS X processes images
-configured for IDME.
-.\"
 .\"             -- resize --
 .It Sy resize Ar size_spec image
 .br
@@ -1619,7 +1569,7 @@ and related, and
 .Fl "plist".
 .Pp
 Size specifiers:
-.Bl -hang -width "partitionNumber" -compact
+.Bl -hang -width "partitiononly" -compact
 .It Fl size Ar ??b|??k|??m|??g|??t|??p|??e
 .It Fl sectors Ar sector_count | min
 .br
@@ -1632,7 +1582,7 @@ automatically determines the smallest possible size.
 .El
 .Pp
 Other options:
-.Bl -hang -width "partitionNumber" -compact
+.Bl -hang -width "partitiononly" -compact
 .It Fl imageonly
 only resize the image file, not the partition(s) and filesystems inside
 of it.
@@ -1642,23 +1592,14 @@ only resize a partition / filesystem in the image, not the image.
 will fail if the new size won't fit inside the image.  On APM, shrinking
 a partition results in an explicit Apple_Free entry taking up the
 remaining space in the image.
-.It Fl partitionNumber Ar partitionNumber
+.It Fl partitionID Ar partitionID
 .br
 specifies which partition to resize (UDIF only -- see HISTORY below).
-.Ar partitionNumber
-is 0-based, but, per
-.Nm
-.Sy pmap Ns ,
-partition 0 is the partition map itself.
-.Pp
-.It Fl growonly
-only allow the image to grow
-.It Fl shrinkonly
-only allow the image to shrink
+.Ar partitionID
+is 1-based.
 .It Fl nofinalgap
 allow resize to entirely eliminate the trailing free partition in an APM
 map.  Restoring such images to very old hardware may interfere with booting.
-.Pp
 .It Fl limits
 Displays the minimum, current, and maximum sizes (in 512-byte sectors)
 for the image.  In addition to any hosted filesystem constraints, UDRW
@@ -2317,7 +2258,19 @@ Files stored in APFS-based images may not be accessible in future
 releases of macOS, and won't work in past ones.  All data to be stored
 in APFS volumes should be backed up prior to using APFS and regularly
 backed up while using APFS.
-.\"
+.Pp
+macOS 10.15:
+.Bl -bullet -offset indent
+.It
+Introduced lzma compression in the ULMO format, providing smaller images
+compared to ULFO. These images are not supported in-kernel, and will not
+work on any earlier versions of the OS.
+.It
+Deprecated OS 9-style dual-fork file support (hdiutil flatten/unflatten).
+.It
+Removed the deprecated "hdiutil internet-enable" command and
+the IDME attach flags.
+.El
 .Sh HISTORY
 Disk images were first invented to electronically store and transmit
 representations of floppy disks for manufacturing replication.  These
@@ -2350,6 +2303,10 @@ recognizes the filesystems.  They can also be burned with
 .Ns Sy burn .
 .\"
 .Sh WHAT'S NEW
+macOS 10.15 added ULMO format images compressed with lzma.  These images are 
+smaller than comparable ULFO images compressed with lzfse.
+These images are not supported in-kernel, and are not usable on earlier OSes.
+.Pp
 macOS 10.12 introduced the pre-release APFS for evaluation (see COMPATIBILITY
 above).  10.12 also added an option to disable atomic copying during image from
 folder operations, 

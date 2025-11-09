@@ -1,7 +1,7 @@
 /*
 	NSDataAsset.h
 	Application Kit
-	Copyright (c) 2015-2018, Apple Inc.
+	Copyright (c) 2015-2019, Apple Inc.
 	All rights reserved.
 */
 
@@ -10,14 +10,14 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-typedef NSString * NSDataAssetName NS_SWIFT_BRIDGED_TYPEDEF;
+#if !TARGET_OS_IPHONE
+
+typedef NSString * NSDataAssetName NS_SWIFT_BRIDGED_TYPEDEF API_AVAILABLE(ios(9.0), macos(10.11), tvos(9.0), watchos(2.0));
 
 /* An NSDataAsset instance provides access to a data entry in an asset catalog such as Images.xcassets. Data entries and image entries in asset catalogs do not share the same namespace. For example, if an asset catalog contains an image entry named @"foo" but no data entry named @"foo", [[NSDataAsset alloc] initWithName:@"foo"] will return nil.
 */
 
-NS_CLASS_AVAILABLE_MAC(10_11) @interface NSDataAsset : NSObject<NSCopying> {
-    void *_namedData APPKIT_IVAR;
-}
+API_AVAILABLE(ios(9.0), macos(10.11), tvos(9.0), watchos(2.0)) @interface NSDataAsset : NSObject<NSCopying>
 
 - (instancetype)init NS_UNAVAILABLE;
 
@@ -34,5 +34,6 @@ NS_CLASS_AVAILABLE_MAC(10_11) @interface NSDataAsset : NSObject<NSCopying> {
 @property (readonly, copy) NSString *typeIdentifier;
 
 @end
+#endif // !TARGET_OS_IPHONE
 
 NS_ASSUME_NONNULL_END

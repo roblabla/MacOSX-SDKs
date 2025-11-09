@@ -1,11 +1,10 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 737F51C7-98A2-3ACB-A54B-844A72DB85A2' ]
+uuids:           [ 'x86_64: CC4698C8-DE4C-3760-93ED-53B029D7D99C' ]
 platform:        macosx
-install-name:    /System/Library/Frameworks/Python.framework/Versions/2.7/Python
-current-version: 2.7.10
+install-name:    '/System/Library/Frameworks/Python.framework/Versions/2.7/Python'
+current-version: 2.7.16
 compatibility-version: 2.7
-objc-constraint: none
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _AEDesc_Convert, _AEDesc_New, _AEDesc_NewBorrowed, _BMObj_Convert, 
@@ -345,11 +344,15 @@ exports:
                        __PyArg_NoKeywords, __PyArg_ParseTupleAndKeywords_SizeT, __PyArg_ParseTuple_SizeT, 
                        __PyArg_Parse_SizeT, __PyArg_VaParseTupleAndKeywords_SizeT, 
                        __PyArg_VaParse_SizeT, __PyBuiltin_Init, __PyByteArray_empty_string, 
-                       __PyBytes_FormatAdvanced, __PyCode_CheckLineNumber, __PyCodec_Lookup, 
-                       __PyComplex_FormatAdvanced, __PyDict_Contains, __PyDict_MaybeUntrack, 
-                       __PyDict_NewPresized, __PyDict_Next, __PyErr_BadInternalCall, 
-                       __PyErr_ReplaceException, __PyEval_CallTracing, __PyEval_SliceIndex, 
-                       __PyExc_Fini, __PyExc_Init, __PyFile_SanitizeMode, __PyFloat_FormatAdvanced, 
+                       __PyBytes_FormatAdvanced, __PyCode_CheckLineNumber, __PyCode_ConstantKey, 
+                       __PyCodecInfo_GetIncrementalDecoder, __PyCodecInfo_GetIncrementalEncoder, 
+                       __PyCodec_DecodeText, __PyCodec_EncodeText, __PyCodec_Lookup, 
+                       __PyCodec_LookupTextEncoding, __PyComplex_FormatAdvanced, 
+                       __PyDict_Contains, __PyDict_DelItemIf, __PyDict_GetItemWithError, 
+                       __PyDict_MaybeUntrack, __PyDict_NewPresized, __PyDict_Next, 
+                       __PyErr_BadInternalCall, __PyErr_ReplaceException, __PyEval_CallTracing, 
+                       __PyEval_SliceIndex, __PyEval_SliceIndexNotNone, __PyExc_Fini, 
+                       __PyExc_Init, __PyFile_SanitizeMode, __PyFloat_FormatAdvanced, 
                        __PyFloat_Init, __PyFloat_Pack4, __PyFloat_Pack8, __PyFloat_Unpack4, 
                        __PyFloat_Unpack8, __PyFrame_Init, __PyGC_Dump, __PyGC_generation0, 
                        __PyGILState_Fini, __PyGILState_Init, __PyImportHooks_Init, 
@@ -377,14 +380,15 @@ exports:
                        __PyObject_RealIsSubclass, __PyObject_SlotCompare, __PyObject_Str, 
                        __PyParser_Grammar, __PyParser_TokenNames, __PyRandom_Fini, 
                        __PyRandom_Init, __PySequence_IterSearch, __PySet_Next, __PySet_NextEntry, 
-                       __PySet_Update, __PySlice_FromIndices, __PyString_Eq, __PyString_FormatLong, 
-                       __PyString_InsertThousandsGrouping, __PyString_Join, __PyString_Resize, 
-                       __PySys_GetSizeOf, __PySys_Init, __PyThreadState_Current, 
-                       __PyThreadState_GetFrame, __PyThreadState_Init, __PyThreadState_Prealloc, 
-                       __PyThread_CurrentFrames, __PyTrash_delete_later, __PyTrash_delete_nesting, 
-                       __PyTrash_deposit_object, __PyTrash_destroy_chain, __PyTrash_thread_deposit_object, 
-                       __PyTrash_thread_destroy_chain, __PyTuple_MaybeUntrack, __PyTuple_Resize, 
-                       __PyType_Lookup, __PyUnicodeUCS2_AsDefaultEncodedString, __PyUnicodeUCS2_Fini, 
+                       __PySet_Update, __PySlice_AdjustIndices, __PySlice_FromIndices, 
+                       __PySlice_Unpack, __PyString_Eq, __PyString_FormatLong, __PyString_InsertThousandsGrouping, 
+                       __PyString_Join, __PyString_Resize, __PySys_GetSizeOf, __PySys_Init, 
+                       __PyThreadState_Current, __PyThreadState_GetFrame, __PyThreadState_Init, 
+                       __PyThreadState_Prealloc, __PyThread_CurrentFrames, __PyTrash_delete_later, 
+                       __PyTrash_delete_nesting, __PyTrash_deposit_object, __PyTrash_destroy_chain, 
+                       __PyTrash_thread_deposit_object, __PyTrash_thread_destroy_chain, 
+                       __PyTuple_MaybeUntrack, __PyTuple_Resize, __PyType_Lookup, 
+                       __PyUnicodeUCS2_AsDefaultEncodedString, __PyUnicodeUCS2_Fini, 
                        __PyUnicodeUCS2_Init, __PyUnicodeUCS2_IsAlpha, __PyUnicodeUCS2_IsDecimalDigit, 
                        __PyUnicodeUCS2_IsDigit, __PyUnicodeUCS2_IsLinebreak, __PyUnicodeUCS2_IsLowercase, 
                        __PyUnicodeUCS2_IsNumeric, __PyUnicodeUCS2_IsTitlecase, __PyUnicodeUCS2_IsUppercase, 
@@ -424,15 +428,15 @@ exports:
                        __Py_c_sum, __Py_capitalize__doc__, __Py_capsule_hack, __Py_cobject_hack, 
                        __Py_comprehension, __Py_ctype_table, __Py_ctype_tolower, 
                        __Py_ctype_toupper, __Py_delbitset, __Py_dg_dtoa, __Py_dg_freedtoa, 
-                       __Py_dg_strtod, __Py_double_round, __Py_findlabel, __Py_hgidentifier, 
-                       __Py_hgversion, __Py_isalnum__doc__, __Py_isalpha__doc__, 
-                       __Py_isdigit__doc__, __Py_islower__doc__, __Py_isspace__doc__, 
-                       __Py_istitle__doc__, __Py_isupper__doc__, __Py_keyword, __Py_lower__doc__, 
-                       __Py_mergebitset, __Py_meta_grammar, __Py_newbitset, __Py_newgrammar, 
-                       __Py_parse_inf_or_nan, __Py_pgen, __Py_samebitset, __Py_svnversion, 
-                       __Py_swapcase__doc__, __Py_title__doc__, __Py_translatelabels, 
-                       __Py_upper__doc__, _asdl_int_seq_new, _asdl_seq_new, _init_ast, 
-                       _init_codecs, _init_sre, _init_symtable, _init_weakref, _initerrno, 
-                       _initgc, _initimp, _initposix, _initpwd, _initsignal, _initthread, 
-                       _initxxsubtype, _initzipimport ]
+                       __Py_dg_strtod, __Py_double_round, __Py_findlabel, __Py_freegrammar, 
+                       __Py_gitidentifier, __Py_gitversion, __Py_isalnum__doc__, 
+                       __Py_isalpha__doc__, __Py_isdigit__doc__, __Py_islower__doc__, 
+                       __Py_isspace__doc__, __Py_istitle__doc__, __Py_isupper__doc__, 
+                       __Py_keyword, __Py_lower__doc__, __Py_mergebitset, __Py_meta_grammar, 
+                       __Py_newbitset, __Py_newgrammar, __Py_parse_inf_or_nan, __Py_pgen, 
+                       __Py_samebitset, __Py_swapcase__doc__, __Py_title__doc__, 
+                       __Py_translatelabels, __Py_upper__doc__, _asdl_int_seq_new, 
+                       _asdl_seq_new, _init_ast, _init_codecs, _init_sre, _init_symtable, 
+                       _init_weakref, _initerrno, _initgc, _initimp, _initposix, 
+                       _initpwd, _initsignal, _initthread, _initxxsubtype, _initzipimport ]
 ...

@@ -1,11 +1,10 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 60BB16D6-DE7E-356A-B9DE-F73EE179934A' ]
-platform:        macosx
-install-name:    /System/Library/PrivateFrameworks/AppleSauce.framework/Versions/A/AppleSauce
+uuids:           [ 'x86_64: 7AF61A24-2E0D-3D2E-8A0A-A04E78669234', 'x86_64: 7AF61A24-2E0D-3D2E-8A0A-A04E78669234' ]
+platform:        zippered
+install-name:    '/System/Library/PrivateFrameworks/AppleSauce.framework/Versions/A/AppleSauce'
 current-version: 0
 compatibility-version: 0
-objc-constraint: none
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ __ZN10applesauce3xpc10auto_reply16create_from_dictERKNS0_4dictERKNS0_10connectionE, 

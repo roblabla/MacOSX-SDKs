@@ -1,11 +1,10 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 77FFE376-0DBC-3D7D-BF1A-E068E9C0AF8E' ]
+uuids:           [ 'x86_64: 4833DA48-04E2-3BB5-B620-399B80284F45' ]
 platform:        macosx
-install-name:    /System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/Print.framework/Versions/A/Plugins/PMBrowser.framework/Versions/A/PMBrowser
+install-name:    '/System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/Print.framework/Versions/A/Plugins/PMBrowser.framework/Versions/A/PMBrowser'
 current-version: 0
 compatibility-version: 0
-objc-constraint: none
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _CheckPrinterList, _ComputerLocation, _FilterDNSSDSuffix, 
@@ -32,10 +31,11 @@ exports:
                        _USBGetDeviceID, _USBGetDeviceIDUsingInterface, _USBGetDeviceInfo, 
                        _USBGetDeviceInfo2, _USBIteratePrintersUsingBlock, _USBIterateScannersUsingBlock, 
                        _USBPrinterInterfaceInterface, _USBSupportsIPPEInterfaces, 
-                       _close_pipe, _cpl_cupsDoFileRequest, _dprintfMakequeues, _examineBundle, 
-                       _examineFile, _getKnownDevices, _getPrinters, _open_pipe, 
-                       _serverSupportsKerberos, _start_process, _str_for_ioreturn, 
-                       _supportsCurrentArcitecture, _supportsIntelArcitecture, _supportsPowerPCArcitecture ]
+                       _USBSupportsIPPEInterfaces2, _close_pipe, _cpl_cupsDoFileRequest, 
+                       _dprintfMakequeues, _examineBundle, _examineFile, _getKnownDevices, 
+                       _getPrinterClassDriverPath, _getPrinters, _open_pipe, _serverSupportsKerberos, 
+                       _start_process, _str_for_ioreturn, _supportsCurrentArcitecture, 
+                       _supportsIntelArcitecture, _supportsPowerPCArcitecture ]
     objc-classes:    [ DNSSDBrowser, DNSSDConfigure, DNSSDPrinter, DNSServiceObject, 
                        FilteringArrayController, IPPrinter, PMBrowserNoUIPlugin, 
                        PMBrowserPlugin, PMBrowserPrinter, PMPPDPopUpButton, PMPluginsManager, 

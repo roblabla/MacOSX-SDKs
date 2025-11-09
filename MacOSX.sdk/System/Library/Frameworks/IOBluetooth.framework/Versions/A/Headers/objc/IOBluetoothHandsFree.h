@@ -130,7 +130,7 @@ IOBLUETOOTH_EXPORT NSString * const IOBluetoothPDUUserData;					/* PDU's payload
  @coclass IOBluetoothHandsFreeDevice
  @coclass IOBluetoothHandsFreeAudioGateway
  */
-NS_CLASS_AVAILABLE(10_7, NA)
+API_AVAILABLE(macos(10.7)) API_UNAVAILABLE(ios, watchos, tvos)
 @interface IOBluetoothHandsFree : NSObject {
 	IOBluetoothRFCOMMChannel *		_rfcommChannel;
 	IOBluetoothUserNotification *	_rfcommChannelNotification;
@@ -370,6 +370,7 @@ NS_CLASS_AVAILABLE(10_7, NA)
 
 @end
 
+API_UNAVAILABLE(ios, watchos, tvos)
 @protocol IOBluetoothHandsFreeDelegate <NSObject>
 
 @optional
@@ -408,15 +409,8 @@ NS_CLASS_AVAILABLE(10_7, NA)
 
 @end
 
+API_UNAVAILABLE(ios, watchos, tvos)
 @interface IOBluetoothDevice ( HandsFreeDeviceAdditions )
-
-/*!
- @method		handsFreeAudioGatewayDriverID
- @abstract		Return the hands free gateway driver ID
- @discussion	Returns the hands free gateway driver ID which is unique based on BT Address.
- @result		The hands free gateway driver ID
- */
-- (NSString *)handsFreeAudioGatewayDriverID NS_DEPRECATED_MAC(10_7, 10_8);
 
 /*!
  @method		handsFreeAudioGatewayServiceRecord
@@ -433,14 +427,6 @@ NS_CLASS_AVAILABLE(10_7, NA)
  @result		YES if the device supports hands free gateway; otherwise, NO.
  */
 @property (readonly, getter = isHandsFreeAudioGateway) BOOL handsFreeAudioGateway NS_AVAILABLE_MAC(10_7);
-
-/*!
- @method		handsFreeDeviceDriverID
- @abstract		Return the hands free device driver ID
- @discussion	Returns the hands free device driver ID which is unique based on BT Address.
- @result		The hands free device driver ID
- */
-- (NSString *)handsFreeDeviceDriverID NS_DEPRECATED_MAC(10_7, 10_8);
 
 /*!
  @method		handsFreeDeviceServiceRecord
@@ -460,6 +446,7 @@ NS_CLASS_AVAILABLE(10_7, NA)
 
 @end
 
+API_UNAVAILABLE(ios, watchos, tvos)
 @interface IOBluetoothSDPServiceRecord ( HandsFreeSDPServiceRecordAdditions )
 
 /*!

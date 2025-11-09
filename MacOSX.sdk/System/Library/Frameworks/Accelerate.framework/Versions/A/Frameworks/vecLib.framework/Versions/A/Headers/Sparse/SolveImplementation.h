@@ -218,7 +218,7 @@ SPARSE_PARAMETER_CHECK((sf).status == SparseStatusOK && \
 #endif /* SPARSE_CHECK_CONSISTENT_DS_VEC_OUT_PLACE */
 
 /* Iterative Methods */
-OS_ENUM(_SparseIterativeMethod, int,
+SPARSE_ENUM(_SparseIterativeMethod, int,
   /*! @abstract Conjugate Gradient */
   _SparseMethodCG = 0,
   /*! @abstract GMRES or variant */

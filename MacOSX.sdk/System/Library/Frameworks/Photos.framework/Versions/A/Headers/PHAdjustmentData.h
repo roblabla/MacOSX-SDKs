@@ -8,8 +8,10 @@
 #import <Foundation/Foundation.h>
 
 NS_ASSUME_NONNULL_BEGIN
+API_AVAILABLE_BEGIN(macos(10.11), ios(8), tvos(10))
 
-NS_CLASS_AVAILABLE_MAC(10_11) @interface PHAdjustmentData : NSObject
+OS_EXPORT
+@interface PHAdjustmentData : NSObject
 
 - (instancetype)initWithFormatIdentifier:(NSString *)formatIdentifier formatVersion:(NSString *)formatVersion data:(NSData *)data;
 
@@ -22,4 +24,5 @@ NS_CLASS_AVAILABLE_MAC(10_11) @interface PHAdjustmentData : NSObject
 
 @end
 
+API_AVAILABLE_END
 NS_ASSUME_NONNULL_END

@@ -1,7 +1,7 @@
 /*!
 	@file		AudioToolbox.h
 	@framework	AudioToolbox.framework
-	@copyright	(c) 2002-2015 by Apple, Inc., all rights reserved.
+	@copyright	(c) 2002-2018 by Apple, Inc., all rights reserved.
 	@abstract	Umbrella header for AudioToolbox framework.
 */
 
@@ -13,61 +13,39 @@
 
 #include <Availability.h>
 #include <TargetConditionals.h>
-#if !defined(__COREAUDIO_USE_FLAT_INCLUDES__)
-	#include <AudioToolbox/AUComponent.h>
-	#include <AudioToolbox/AUGraph.h>
-	#include <AudioToolbox/AudioComponent.h>
-	#include <AudioToolbox/AudioConverter.h>
-	#include <AudioToolbox/AudioFile.h>
-	#include <AudioToolbox/AudioFileStream.h>
-	#include <AudioToolbox/AudioFormat.h>
-	#include <AudioToolbox/AudioOutputUnit.h>
-	#include <AudioToolbox/AudioQueue.h>
-	#include <AudioToolbox/AudioServices.h>
-	#include <AudioToolbox/AudioUnitParameters.h>
-	#include <AudioToolbox/AudioUnitProperties.h>
-	#include <AudioToolbox/CAFFile.h>
-	#include <AudioToolbox/ExtendedAudioFile.h>
-	#include <AudioToolbox/MusicDevice.h>
-	#include <AudioToolbox/MusicPlayer.h>
 
-		// OS X only
-		#include <AudioToolbox/AudioCodec.h>
-		#include <AudioToolbox/AudioFileComponent.h>
-		#include <AudioToolbox/AudioUnitUtilities.h>
-		#include <AudioToolbox/AUMIDIController.h>
-		#include <AudioToolbox/CoreAudioClock.h>
+#include <AudioToolbox/AudioCodec.h>
+#include <AudioToolbox/AUComponent.h>
+#include <AudioToolbox/AUGraph.h>
+#include <AudioToolbox/AudioComponent.h>
+#include <AudioToolbox/AudioConverter.h>
+#include <AudioToolbox/AudioFile.h>
+#include <AudioToolbox/AudioFileStream.h>
+#include <AudioToolbox/AudioFormat.h>
+#include <AudioToolbox/AudioOutputUnit.h>
+#include <AudioToolbox/AudioQueue.h>
+#include <AudioToolbox/AudioServices.h>
+#include <AudioToolbox/AudioUnitParameters.h>
+#include <AudioToolbox/AudioUnitProperties.h>
+#include <AudioToolbox/CAFFile.h>
+#include <AudioToolbox/CAShow.h>
+#include <AudioToolbox/ExtendedAudioFile.h>
+#include <AudioToolbox/MusicDevice.h>
+#include <AudioToolbox/MusicPlayer.h>
 
-	#ifdef __OBJC2__
-		// iOS (all architectures), OS X 64-bit only
-		#import <AudioToolbox/AUAudioUnit.h>
-		#import <AudioToolbox/AUAudioUnitImplementation.h>
-		#import <AudioToolbox/AUParameters.h>
-	#endif
+#if !TARGET_OS_IPHONE
+	// OS X only
+	#include <AudioToolbox/AudioFileComponent.h>
+	#include <AudioToolbox/AudioUnitUtilities.h>
+	#include <AudioToolbox/AUMIDIController.h>
+	#include <AudioToolbox/CoreAudioClock.h>
+#endif
 
-#else
-	#include <AUComponent.h>
-	#include <AUGraph.h>
-	#include <AudioComponent.h>
-	#include <AudioConverter.h>
-	#include <AudioFile.h>
-	#include <AudioFileComponent.h>
-	#include <AudioFileStream.h>
-	#include <AudioFormat.h>
-	#include <AudioOutputUnit.h>
-	#include <AudioQueue.h>
-	#include <AudioServices.h>
-	#include <AudioUnitParameters.h>
-	#include <AudioUnitProperties.h>
-	#include <CAFFile.h>
-	#include <ExtendedAudioFile.h>
-	#include <MusicDevice.h>
-	#include <MusicPlayer.h>
-
-	#include <AudioCodec.h>
-	#include <AudioUnitUtilities.h>
-	#include <AUMIDIController.h>
-	#include <CoreAudioClock.h>
+#ifdef __OBJC2__
+	// iOS (all architectures), OS X 64-bit only
+	#import <AudioToolbox/AUAudioUnit.h>
+	#import <AudioToolbox/AUAudioUnitImplementation.h>
+	#import <AudioToolbox/AUParameters.h>
 #endif
 
 /*!	@mainpage
@@ -103,19 +81,13 @@ extern "C"
 {
 #endif
 
-// prints out the internal state of an object to stdio
-extern void CAShow (void* inObject) 
-											API_AVAILABLE(macos(10.2), ios(2.0), watchos(2.0), tvos(9.0));
-
-// prints out the internal state of an object to the supplied FILE
-extern void CAShowFile (void* inObject, FILE* inFile) 
-											API_AVAILABLE(macos(10.2), ios(2.0), watchos(2.0), tvos(9.0));
-	
+#if !TARGET_OS_IPHONE
 // this will return the name of a sound bank from a sound bank file
 // the name should be released by the caller
 struct FSRef;
-extern OSStatus GetNameFromSoundBank (const struct FSRef *inSoundBankRef, CFStringRef __nullable * __nonnull outName)
+OS_EXPORT OSStatus GetNameFromSoundBank (const struct FSRef *inSoundBankRef, CFStringRef __nullable * __nonnull outName)
 											API_DEPRECATED("no longer supported", macos(10.2, 10.5)) API_UNAVAILABLE(ios, watchos, tvos);
+#endif
 
 /*!
     @function		CopyNameFromSoundBank
@@ -130,7 +102,7 @@ extern OSStatus GetNameFromSoundBank (const struct FSRef *inSoundBankRef, CFStri
     @result			returns noErr if successful.
 */
 
-extern OSStatus
+OS_EXPORT OSStatus
 CopyNameFromSoundBank (CFURLRef inURL, CFStringRef __nullable * __nonnull outName)
 											API_AVAILABLE(macos(10.5), ios(7.0), watchos(2.0), tvos(9.0));
 
@@ -158,7 +130,8 @@ CopyNameFromSoundBank (CFURLRef inURL, CFStringRef __nullable * __nonnull outNam
     @result			returns noErr if successful.
 */
 
-extern OSStatus CopyInstrumentInfoFromSoundBank (CFURLRef inURL, CFArrayRef __nullable * __nonnull outInstrumentInfo)
+OS_EXPORT OSStatus
+CopyInstrumentInfoFromSoundBank (CFURLRef inURL, CFArrayRef __nullable * __nonnull outInstrumentInfo)
 														API_AVAILABLE(macos(10.8), ios(7.0), watchos(2.0), tvos(9.0));
 	
 #define kInstrumentInfoKey_Name		"name"

@@ -7,7 +7,7 @@
 #import <CoreImage/CoreImageDefines.h>
 #import <CoreVideo/CoreVideo.h>
 
-#if TARGET_OS_IPHONE && (TARGET_OS_EMBEDDED || TARGET_OS_SIMULATOR || !0)
+#if TARGET_OS_IPHONE && (TARGET_OS_EMBEDDED || TARGET_OS_SIMULATOR || !TARGET_OS_MACCATALYST)
  #import <OpenGLES/EAGL.h>
 #elif TARGET_OS_OSX
  #import <OpenGL/CGLTypes.h>
@@ -15,7 +15,7 @@
 
 @class CIFilter;
 
-@protocol MTLDevice, MTLTexture, MTLCommandBuffer;
+@protocol MTLDevice, MTLTexture, MTLCommandBuffer, MTLCommandQueue;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -39,10 +39,10 @@ CORE_IMAGE_EXPORT CIContextOption const kCIContextOutputColorSpace;
 CORE_IMAGE_EXPORT CIContextOption const kCIContextWorkingColorSpace;
 
 /* An NSNumber with a CIFormat value defining the pixel format to use for intermediate buffers.
-* On iOS GPU the supported values for this key are RGBA8 and RGBAh. If not specified RGBA8 us used.
-* On iOS CPU the only supported value for this key is RGBAf. If not specified RGBAf us used.
-* On OSX GPU the supported values for this key are RGBA8, RGBAh and RGBAf. If not specified RGBAh us used.
-* On OSX CPU the supported values for this key are RGBA8, RGBAh and RGBAf. If not specified RGBAh us used. */
+ * On iOS the supported values for this key are RGBA8 and RGBAh. If not specified:
+ *   RGBA8 is used if app is linked against OSX 10.12 SDK or earlier.
+ *   RGBAh is used if app is linked against OSX 10.13 SDK or later.
+ * On OSX the supported values for this key are RGBA8, RGBAh and RGBAf. If not specified, RGBAh is used. */
 CORE_IMAGE_EXPORT CIContextOption const kCIContextWorkingFormat NS_AVAILABLE(10_4,8_0);
 
 /* A boolean NSNumber controlling the quality of affine downsample operations.
@@ -67,6 +67,11 @@ CORE_IMAGE_EXPORT CIContextOption const kCIContextUseSoftwareRenderer;
 /* An NSNumber with a boolean value. When @YES the context will use 
  * low priority rendering on the GPU. */
 CORE_IMAGE_EXPORT CIContextOption const kCIContextPriorityRequestLow NS_AVAILABLE(10_12, 8_0);
+
+/* A boolean value specifying whether or not to allow use of low-power devices for GPU rendering.
+ * If @YES, the context will use a low power GPU if available and the high power device is not already in use.
+ * The default value is @NO which instructs the context to use the highest power/performance device. */
+CORE_IMAGE_EXPORT CIContextOption const kCIContextAllowLowPower NS_AVAILABLE(10_12, 13_0);
 
 
 #pragma mark - contextWithCGLContext
@@ -141,7 +146,7 @@ NS_AVAILABLE(10_4,5_0);
  *
  * The [context drawImage:...] render methods will render to the EAGLContext.
  */
-#if TARGET_OS_IPHONE && (TARGET_OS_EMBEDDED || TARGET_OS_SIMULATOR || !0)
+#if TARGET_OS_IPHONE && (TARGET_OS_EMBEDDED || TARGET_OS_SIMULATOR || !TARGET_OS_MACCATALYST)
 + (CIContext *)contextWithEAGLContext:(EAGLContext *)eaglContext
     CI_GL_DEPRECATED_IOS(5_0,12_0);
 
@@ -161,6 +166,15 @@ NS_AVAILABLE(10_4,5_0);
 + (CIContext *)contextWithMTLDevice:(id<MTLDevice>)device
                             options:(nullable NSDictionary<CIContextOption, id> *)options
     NS_AVAILABLE(10_11,9_0);
+
+#pragma mark - contextWithMTLCommandQueue
+
+/* Create a CIContext that commits commands to a specific queue.*/
++ (CIContext *)contextWithMTLCommandQueue:(id<MTLCommandQueue>)commandQueue NS_AVAILABLE(10_15,13_0);
+
++ (CIContext *)contextWithMTLCommandQueue:(id<MTLCommandQueue>)commandQueue
+                            options:(nullable NSDictionary<CIContextOption, id> *)options
+NS_AVAILABLE(10_15,13_0);
 
 
 #pragma mark - properties
@@ -187,42 +201,6 @@ NS_AVAILABLE(10_4,5_0);
            inRect:(CGRect)inRect
          fromRect:(CGRect)fromRect;
 
-/* Render the region 'fromRect' of image 'image' into a temporary buffer using
- * the context, then create and return a new CoreGraphics image with
- * the results. The caller is responsible for releasing the returned image.
- * The return value will be null if size is empty or too big. */
-- (nullable CGImageRef)createCGImage:(CIImage *)image
-                            fromRect:(CGRect)fromRect
-CF_RETURNS_RETAINED;
-
-/* Create a new CGImage from the specified subrect of the image. If
- * non-nil the new image will be created in the specified format and colorspace.
- * The CGColorSpace must be kCGColorSpaceModelRGB or kCGColorSpaceModelMonochrome
- * and must match the specified CIFormat.
- * This will return null if fromRect is empty or infinite or the format isn't supported.
- */
-- (nullable CGImageRef)createCGImage:(CIImage *)image
-                            fromRect:(CGRect)fromRect
-                              format:(CIFormat)format
-                          colorSpace:(nullable CGColorSpaceRef)colorSpace
-CF_RETURNS_RETAINED;
-
-/* Create a new CGImage from the specified subrect of the image.
- * The new CGImageRef will be created in the specified format and colorspace.
- * The return value will be null if fromRect is empty or infinite.
- * The CGColorSpace must be kCGColorSpaceModelRGB or kCGColorSpaceModelMonochrome
- * and must match the specified CIFormat.
- * This will return null if fromRect is empty or infinite or the format isn't supported.
- * If deferred is NO, then the CIImage will be rendered once when this method is called.
- * If deferred is YES, then the CIImage will be rendered whenever the CGImage is rendered.
- */
-- (nullable CGImageRef)createCGImage:(CIImage *)image
-                            fromRect:(CGRect)fromRect
-                              format:(CIFormat)format
-                          colorSpace:(nullable CGColorSpaceRef)colorSpace
-                            deferred:(BOOL)deferred
-CF_RETURNS_RETAINED NS_AVAILABLE(10_12,10_0);
-
 /* Create a CoreGraphics layer object suitable for creating content for
  * subsequently rendering into this CI context. The 'info' parameter is
  * passed into CGLayerCreate () as the auxiliaryInfo dictionary.
@@ -248,7 +226,7 @@ CF_RETURNS_RETAINED NS_DEPRECATED_MAC(10_4,10_11);
 		format:(CIFormat)format
 	colorSpace:(nullable CGColorSpaceRef)colorSpace;
 
-#if !TARGET_OS_SIMULATOR
+#if COREIMAGE_SUPPORTS_IOSURFACE
 /* Render 'image' to the given IOSurface.
  * The 'bounds' parameter has the following behavior:
  *    The 'image' is rendered into 'surface' so that
@@ -286,6 +264,9 @@ toCVPixelBuffer:(CVPixelBufferRef)buffer
 
 /* Render 'bounds' of 'image' to a Metal texture, optionally specifying what command buffer to use.
  * Texture type must be MTLTexture2D.
+ * NOTE: Rendering to a texture initialized with a commandBuffer requires encoding all the commands to render an image into the specified buffer.
+ * This may impact system responsiveness and may result in higher memory usage if the image requires many passes to render.
+ * To avoid this impact, it is recommended to create a context using [CIContext contextWithMTLCommandQueue:].
  */
 - (void)render:(CIImage *)image
   toMTLTexture:(id<MTLTexture>)texture
@@ -313,6 +294,47 @@ toCVPixelBuffer:(CVPixelBufferRef)buffer
 /* Returns the maximum dimension for image that can be rendered 
  * on the context. */
 - (CGSize)outputImageMaximumSize NS_AVAILABLE_IOS(5_0);
+
+@end
+
+
+@interface CIContext (createCGImage)
+
+/* Render the region 'fromRect' of image 'image' into a temporary buffer using
+ * the context, then create and return a new CoreGraphics image with
+ * the results. The caller is responsible for releasing the returned image.
+ * The return value will be null if size is empty or too big. */
+- (nullable CGImageRef)createCGImage:(CIImage *)image
+                            fromRect:(CGRect)fromRect
+CF_RETURNS_RETAINED;
+
+/* Create a new CGImage from the specified subrect of the image. If
+ * non-nil the new image will be created in the specified format and colorspace.
+ * The CGColorSpace must be kCGColorSpaceModelRGB or kCGColorSpaceModelMonochrome
+ * and must match the specified CIFormat.
+ * This will return null if fromRect is empty or infinite or the format isn't supported.
+ */
+- (nullable CGImageRef)createCGImage:(CIImage *)image
+                            fromRect:(CGRect)fromRect
+                              format:(CIFormat)format
+                          colorSpace:(nullable CGColorSpaceRef)colorSpace
+CF_RETURNS_RETAINED;
+
+/* Create a new CGImage from the specified subrect of the image.
+ * The new CGImageRef will be created in the specified format and colorspace.
+ * The return value will be null if fromRect is empty or infinite.
+ * The CGColorSpace must be kCGColorSpaceModelRGB or kCGColorSpaceModelMonochrome
+ * and must match the specified CIFormat.
+ * This will return null if fromRect is empty or infinite or the format isn't supported.
+ * If deferred is NO, then the CIImage will be rendered once when this method is called.
+ * If deferred is YES, then the CIImage will be rendered whenever the CGImage is rendered.
+ */
+- (nullable CGImageRef)createCGImage:(CIImage *)image
+                            fromRect:(CGRect)fromRect
+                              format:(CIFormat)format
+                          colorSpace:(nullable CGColorSpaceRef)colorSpace
+                            deferred:(BOOL)deferred
+CF_RETURNS_RETAINED NS_AVAILABLE(10_12,10_0);
 
 @end
 
@@ -345,12 +367,35 @@ typedef NSString * CIImageRepresentationOption NS_TYPED_ENUM;
 
 @interface CIContext (ImageRepresentation)
 
+// The value for kCIImageRepresentationAVDepthData should be an AVDepthData object. */
 CORE_IMAGE_EXPORT CIImageRepresentationOption const kCIImageRepresentationAVDepthData NS_AVAILABLE(10_13,11_0);
+
+// The value for kCIImageRepresentationDepthImage should be a monochome CIImage object. */
 CORE_IMAGE_EXPORT CIImageRepresentationOption const kCIImageRepresentationDepthImage NS_AVAILABLE(10_13,11_0);
+
+// The value for kCIImageRepresentationDisparityImage should be a monochome CIImage object. */
 CORE_IMAGE_EXPORT CIImageRepresentationOption const kCIImageRepresentationDisparityImage NS_AVAILABLE(10_13,11_0);
 
+
+// The value for kCIImageRepresentationAVPortraitEffectsMatte should be an AVPortraitEffectsMatte object. */
 CORE_IMAGE_EXPORT CIImageRepresentationOption const kCIImageRepresentationAVPortraitEffectsMatte NS_AVAILABLE(10_14,12_0);
+
+// The value for kCIImageRepresentationPortraitEffectsMatteImage should be a monochome CIImage object. */
 CORE_IMAGE_EXPORT CIImageRepresentationOption const kCIImageRepresentationPortraitEffectsMatteImage NS_AVAILABLE(10_14,12_0);
+
+
+// The value for kCIImageRepresentationAVSemanticSegmentationMattes should be an array of AVSemanticSegmentationMatte objects. */
+CORE_IMAGE_EXPORT CIImageRepresentationOption const kCIImageRepresentationAVSemanticSegmentationMattes NS_AVAILABLE(10_15, 13_0);
+
+// The value for kCIImageRepresentationSemanticSegmentationSkinMatteImage should be a monochome CIImage object. */
+CORE_IMAGE_EXPORT CIImageRepresentationOption const kCIImageRepresentationSemanticSegmentationSkinMatteImage NS_AVAILABLE(10_15, 13_0);
+
+// The value for kCIImageRepresentationSemanticSegmentationHairMatteImage should be a monochome CIImage object. */
+CORE_IMAGE_EXPORT CIImageRepresentationOption const kCIImageRepresentationSemanticSegmentationHairMatteImage NS_AVAILABLE(10_15, 13_0);
+
+// The value for kCIImageRepresentationSemanticSegmentationTeethMatteImage should be a monochome CIImage object. */
+CORE_IMAGE_EXPORT CIImageRepresentationOption const kCIImageRepresentationSemanticSegmentationTeethMatteImage NS_AVAILABLE(10_15, 13_0);
+
 
 /* Render a CIImage to TIFF data. Image must have a finite non-empty extent. */
 /* The CGColorSpace must be kCGColorSpaceModelRGB or kCGColorSpaceModelMonochrome */
@@ -364,9 +409,7 @@ CORE_IMAGE_EXPORT CIImageRepresentationOption const kCIImageRepresentationPortra
 /* Render a CIImage to JPEG data. Image must have a finite non-empty extent. */
 /* The CGColorSpace must be kCGColorSpaceModelRGB or kCGColorSpaceModelMonochrome. */
 /* Supported options keys are kCGImageDestinationLossyCompressionQuality, */
-/* kCIImageRepresentationAVDepthData, kCIImageRepresentationDepthImage, */
-/* kCIImageRepresentationDisparityImage, kCIImageRepresentationAVPortraitEffectsMatte, */
-/* kCIImageRepresentationPortraitEffectsMatteImage. */
+/* and the depth, disparity, and matte options. */
 - (nullable NSData*) JPEGRepresentationOfImage:(CIImage*)image
                                     colorSpace:(CGColorSpaceRef)colorSpace
                                        options:(NSDictionary<CIImageRepresentationOption, id>*)options NS_AVAILABLE(10_12,10_0);
@@ -375,9 +418,7 @@ CORE_IMAGE_EXPORT CIImageRepresentationOption const kCIImageRepresentationPortra
 /* The CGColorSpace must be kCGColorSpaceModelRGB or kCGColorSpaceModelMonochrome */
 /* and must match the specified CIFormat. */
 /* Supported options keys are kCGImageDestinationLossyCompressionQuality, */
-/* kCIImageRepresentationAVDepthData, kCIImageRepresentationDepthImage, */
-/* kCIImageRepresentationDisparityImage, kCIImageRepresentationAVPortraitEffectsMatte, */
-/* kCIImageRepresentationPortraitEffectsMatteImage. */
+/* and the depth, disparity, and matte options. */
 - (nullable NSData*) HEIFRepresentationOfImage:(CIImage*)image
                                         format:(CIFormat)format
                                     colorSpace:(CGColorSpaceRef)colorSpace
@@ -417,9 +458,7 @@ CORE_IMAGE_EXPORT CIImageRepresentationOption const kCIImageRepresentationPortra
 /* Render a CIImage to JPEG file. Image must have a finite non-empty extent. */
 /* The CGColorSpace must be kCGColorSpaceModelRGB or kCGColorSpaceModelMonochrome. */
 /* Supported options keys are kCGImageDestinationLossyCompressionQuality, */
-/* kCIImageRepresentationAVDepthData, kCIImageRepresentationDepthImage, */
-/* kCIImageRepresentationDisparityImage, kCIImageRepresentationAVPortraitEffectsMatte, */
-/* kCIImageRepresentationPortraitEffectsMatteImage. */
+/* and the depth, disparity, and matte options. */
 - (BOOL) writeJPEGRepresentationOfImage:(CIImage*)image
                                   toURL:(NSURL*)url
                              colorSpace:(CGColorSpaceRef)colorSpace
@@ -430,9 +469,7 @@ CORE_IMAGE_EXPORT CIImageRepresentationOption const kCIImageRepresentationPortra
 /* The CGColorSpace must be kCGColorSpaceModelRGB or kCGColorSpaceModelMonochrome */
 /* and must match the specified CIFormat. */
 /* Supported options keys are kCGImageDestinationLossyCompressionQuality, */
-/* kCIImageRepresentationAVDepthData, kCIImageRepresentationDepthImage, */
-/* kCIImageRepresentationDisparityImage, kCIImageRepresentationAVPortraitEffectsMatte, */
-/* kCIImageRepresentationPortraitEffectsMatteImage. */
+/* and the depth, disparity, and matte options. */
 - (BOOL) writeHEIFRepresentationOfImage:(CIImage*)image
                                   toURL:(NSURL*)url
                                  format:(CIFormat)format
@@ -479,6 +516,14 @@ CORE_IMAGE_EXPORT CIImageRepresentationOption const kCIImageRepresentationPortra
                                  portraitEffectsMatte:(nullable CIImage *)portraitEffectsMatte
                                           orientation:(CGImagePropertyOrientation)orientation
                                               options:(nullable NSDictionary *)options NS_AVAILABLE(10_14,12_0);
+
+- (nullable CIFilter *) depthBlurEffectFilterForImage:(CIImage *)image
+                                       disparityImage:(CIImage *)disparityImage
+                                 portraitEffectsMatte:(nullable CIImage *)portraitEffectsMatte
+                             hairSemanticSegmentation:(nullable CIImage *)hairSemanticSegmentation
+                                          orientation:(CGImagePropertyOrientation)orientation
+                                              options:(nullable NSDictionary *)options NS_AVAILABLE(10_15,13_0);
+
 
 @end
 

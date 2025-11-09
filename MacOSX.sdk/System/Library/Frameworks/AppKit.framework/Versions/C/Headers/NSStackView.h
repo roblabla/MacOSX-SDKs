@@ -1,7 +1,7 @@
 /*
  NSStackView.h
  Application Kit
- Copyright (c) 2012-2018, Apple Inc.
+ Copyright (c) 2012-2019, Apple Inc.
  All rights reserved.
  */
 
@@ -11,6 +11,7 @@
 #import <AppKit/NSView.h>
 
 NS_ASSUME_NONNULL_BEGIN
+API_UNAVAILABLE_BEGIN(ios)
 
 @class NSView;
 @protocol NSStackViewDelegate;
@@ -40,7 +41,7 @@ typedef NS_ENUM(NSInteger, NSStackViewGravity) {
     NSStackViewGravityCenter = 2, // The center gravity area, this is the center regardless of orientation
     NSStackViewGravityBottom = 3, // The bottom-most gravity area, should only be used when orientation = NSUserInterfaceLayoutOrientationVertical
     NSStackViewGravityTrailing = 3 // The trailing gravity area (as described by userInterfaceLayoutDirection), should only be used when orientation = NSUserInterfaceLayoutOrientationHorizontal
-} NS_ENUM_AVAILABLE_MAC(10_9);
+} API_AVAILABLE(macos(10.9));
 
 
 /* Distribution—the layout along the stacking axis.
@@ -64,7 +65,7 @@ typedef NS_ENUM(NSInteger, NSStackViewDistribution) {
 
     /// Equal center-to-center spacing of the items is maintained as much as possible while still maintaining the minimum spacing between each view.
     NSStackViewDistributionEqualCentering,
-} NS_ENUM_AVAILABLE_MAC(10_11);
+} API_AVAILABLE(macos(10.11));
 
 
 /*
@@ -81,11 +82,11 @@ typedef NS_ENUM(NSInteger, NSStackViewDistribution) {
  - clippingResistancePriority
  - detachedViews
  */
-typedef float NSStackViewVisibilityPriority NS_TYPED_EXTENSIBLE_ENUM NS_AVAILABLE_MAC(10_9);
+typedef float NSStackViewVisibilityPriority NS_TYPED_EXTENSIBLE_ENUM API_AVAILABLE(macos(10.9));
 
-static const NSStackViewVisibilityPriority NSStackViewVisibilityPriorityMustHold NS_AVAILABLE_MAC(10_9) = 1000; //Maximum, default - the view will never be detached
-static const NSStackViewVisibilityPriority NSStackViewVisibilityPriorityDetachOnlyIfNecessary NS_AVAILABLE_MAC(10_9) = 900;
-static const NSStackViewVisibilityPriority NSStackViewVisibilityPriorityNotVisible NS_AVAILABLE_MAC(10_9) = 0; //Minimum - will force a view to be detached
+static const NSStackViewVisibilityPriority NSStackViewVisibilityPriorityMustHold API_AVAILABLE(macos(10.9)) = 1000; //Maximum, default - the view will never be detached
+static const NSStackViewVisibilityPriority NSStackViewVisibilityPriorityDetachOnlyIfNecessary API_AVAILABLE(macos(10.9)) = 900;
+static const NSStackViewVisibilityPriority NSStackViewVisibilityPriorityNotVisible API_AVAILABLE(macos(10.9)) = 0; //Minimum - will force a view to be detached
 
 
 /*
@@ -95,37 +96,11 @@ static const NSStackViewVisibilityPriority NSStackViewVisibilityPriorityNotVisib
  - setCustomSpacing:afterView:
  - customSpacingAfterView:
  */
-static const CGFloat NSStackViewSpacingUseDefault NS_AVAILABLE_MAC(10_9) = FLT_MAX;
+static const CGFloat NSStackViewSpacingUseDefault API_AVAILABLE(macos(10.9)) = FLT_MAX;
 
 #pragma mark - NSStackViewLayout
-NS_CLASS_AVAILABLE(10_9, NA)
-@interface NSStackView : NSView {
-@private
-    id _delegate APPKIT_IVAR;
-    
-    NSUserInterfaceLayoutOrientation _orientation APPKIT_IVAR;
-    NSInteger _alignment APPKIT_IVAR;
-    NSEdgeInsets _edgeInsets APPKIT_IVAR;
-    CGFloat _spacing APPKIT_IVAR;
-    
-    NSLayoutPriority _verticalClippingResistancePriority APPKIT_IVAR;
-    NSLayoutPriority _horizontalClippingResistancePriority APPKIT_IVAR;
-    NSLayoutPriority _verticalHuggingPriority APPKIT_IVAR;
-    NSLayoutPriority _horizontalHuggingPriority APPKIT_IVAR;
-    
-    BOOL _unused __unused APPKIT_IVAR;
-    id _unused2 __unused APPKIT_IVAR;
-    id _unused3 __unused APPKIT_IVAR;
-    
-    id _private APPKIT_IVAR;
-    
-    struct {
-        unsigned int _inDealloc:1;
-        unsigned int _detachesHiddenViews:1;
-        unsigned int _baselineRelativeArrangement:1;
-        unsigned int _reserved:29;
-    } _flags APPKIT_IVAR;
-}
+API_AVAILABLE(macos(10.9))
+@interface NSStackView : NSView
 
 + (instancetype)stackViewWithViews:(NSArray<NSView *> *)views; // Returns an autoreleased horizontal StackView with the provided views set as the leading views, and has translatesAutoresizingMaskIntoConstraints set to NO.
 
@@ -136,14 +111,17 @@ NS_CLASS_AVAILABLE(10_9, NA)
 /// Orientation of the StackView, defaults to NSUserInterfaceLayoutOrientationHorizontal
 @property NSUserInterfaceLayoutOrientation orientation;
 
+#if !TARGET_OS_IPHONE
+
 /// Describes how subviews are aligned within the StackView, defaults to `NSLayoutAttributeCenterY` for horizontal stacks, `NSLayoutAttributeCenterX` for vertical stacks. Setting `NSLayoutAttributeNotAnAttribute` will cause the internal alignment constraints to not be created, and could result in an ambiguous layout. Setting an inapplicable attribute for the set orientation will result in the alignment being ignored (similar to its handling with NSLayoutAttributeNotAnAttribute). The alignment constraints are established at a priority of `NSLayoutPriorityDefaultLow` and are overridable for individual views using external constraints.
 @property NSLayoutAttribute alignment;
+#endif
 
 /// Default padding inside the StackView, around all of the subviews.
 @property NSEdgeInsets edgeInsets;
 
 /// The spacing and sizing distribution of stacked views along the primary axis. Defaults to GravityAreas.
-@property NSStackViewDistribution distribution NS_AVAILABLE_MAC(10_11);
+@property NSStackViewDistribution distribution API_AVAILABLE(macos(10.11));
 
 /// Default (minimum) spacing between each view
 @property CGFloat spacing;
@@ -158,31 +136,31 @@ NS_CLASS_AVAILABLE(10_9, NA)
 - (CGFloat)customSpacingAfterView:(NSView *)view;
 
 /// If YES, when a stacked view's `hidden` property is set to YES, the view will be detached from the stack and reattached when set to NO. Similarly, if the view has a lowered visibility priority and is detached from the stack view, it will be set as `hidden` rather than removed from the view hierarchy. Defaults to YES for apps linked on the 10.11 SDK or later.
-@property BOOL detachesHiddenViews NS_AVAILABLE_MAC(10_11);
+@property BOOL detachesHiddenViews API_AVAILABLE(macos(10.11));
 
 
 #pragma mark Arranged Subviews
 
 /// The list of views that are arranged in a stack by the receiver. They are a subset of \c -subviews, with potential difference in ordering.
-@property (readonly, copy) NSArray<__kindof NSView *> *arrangedSubviews NS_AVAILABLE_MAC(10_11);
+@property (readonly, copy) NSArray<__kindof NSView *> *arrangedSubviews API_AVAILABLE(macos(10.11));
 
 /*!
  * Adds a view to the end of the arrangedSubviews list. If the view is not a subview of the receiver, it will be added as one.
  */
-- (void)addArrangedSubview:(NSView *)view NS_AVAILABLE_MAC(10_11);
+- (void)addArrangedSubview:(NSView *)view API_AVAILABLE(macos(10.11));
 
 /*!
  * Adds a view to the arrangedSubviews list at a specific index.
  * If the view is already in the arrangedSubviews list, it will move the view to the specified index (but not change the subview index).
  * If the view is not a subview of the receiver, it will be added as one (not necessarily at the same index).
  */
-- (void)insertArrangedSubview:(NSView *)view atIndex:(NSInteger)index NS_AVAILABLE_MAC(10_11);
+- (void)insertArrangedSubview:(NSView *)view atIndex:(NSInteger)index API_AVAILABLE(macos(10.11));
 
 /*!
  * Removes a subview from the list of arranged subviews without removing it as a subview of the receiver.
  * Removing the view as a subview (either by -[view removeFromSuperview] or setting the receiver's subviews) will automatically remove it as an arranged subview.
  */
-- (void)removeArrangedSubview:(NSView *)view NS_AVAILABLE_MAC(10_11);
+- (void)removeArrangedSubview:(NSView *)view API_AVAILABLE(macos(10.11));
 
 /// The arrangedSubviews that are currently detached/hidden.
 @property (readonly, copy) NSArray<__kindof NSView *> *detachedViews;
@@ -207,6 +185,7 @@ NS_CLASS_AVAILABLE(10_9, NA)
  Priority at which the StackView will not clip its views, defaults to NSLayoutPriorityRequired
  Clipping begins from the trailing and bottom sides of the StackView.
  */
+#if !TARGET_OS_IPHONE
 - (NSLayoutPriority)clippingResistancePriorityForOrientation:(NSLayoutConstraintOrientation)orientation;
 - (void)setClippingResistancePriority:(NSLayoutPriority)clippingResistancePriority forOrientation:(NSLayoutConstraintOrientation)orientation;
 
@@ -223,6 +202,7 @@ NS_CLASS_AVAILABLE(10_9, NA)
  */
 - (NSLayoutPriority)huggingPriorityForOrientation:(NSLayoutConstraintOrientation)orientation;
 - (void)setHuggingPriority:(NSLayoutPriority)huggingPriority forOrientation:(NSLayoutConstraintOrientation)orientation;
+#endif
 
 @end
 
@@ -283,7 +263,8 @@ NS_CLASS_AVAILABLE(10_9, NA)
  - All spacing is == each other @ NSLayoutPriorityDefaultLow
  - Custom spacing is ignored. StackView's spacing property is used as the minimum spacing between each view
  */
-@property BOOL hasEqualSpacing NS_DEPRECATED_MAC(10_9, 10_11, "Set -distribution to NSStackViewDistributionEqualSpacing instead.");
+@property BOOL hasEqualSpacing API_DEPRECATED("Set -distribution to NSStackViewDistributionEqualSpacing instead.", macos(10.9,10.11));
 @end
 
+API_UNAVAILABLE_END
 NS_ASSUME_NONNULL_END

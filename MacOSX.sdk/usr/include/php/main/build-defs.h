@@ -12,13 +12,11 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@php.net so we can mail you a copy immediately.               |
    +----------------------------------------------------------------------+
-   | Author: Stig Sæther Bakken <ssb@php.net>                             |
+   | Author: Stig SÃ¦ther Bakken <ssb@php.net>                             |
    +----------------------------------------------------------------------+
 */
 
-/* $Id$ */
-
-#define CONFIGURE_COMMAND " '/Library/Caches/com.apple.xbs/Binaries/apache_mod_php/install/TempContent/Objects/php/configure'  '--prefix=/usr' '--mandir=/usr/share/man' '--infodir=/usr/share/info' '--disable-dependency-tracking' '--sysconfdir=/private/etc' '--with-libdir=lib' '--enable-cli' '--with-iconv=/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.Internal.sdk/usr' '--with-config-file-path=/etc' '--with-libxml-dir=/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.Internal.sdk/usr' '--with-openssl=/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.Internal.sdk/usr/local/libressl' '--with-kerberos=/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.Internal.sdk/usr' '--with-zlib=/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.Internal.sdk/usr' '--enable-bcmath' '--with-bz2=/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.Internal.sdk/usr' '--enable-calendar' '--disable-cgi' '--with-curl=/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.Internal.sdk/usr' '--enable-dba' '--with-ndbm=/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.Internal.sdk/usr' '--enable-exif' '--enable-fpm' '--enable-ftp' '--with-gd' '--with-png-dir=/usr/local' '--with-jpeg-dir=/usr/local' '--enable-gd-native-ttf' '--with-icu-dir=/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.Internal.sdk/usr' '--with-ldap=/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.Internal.sdk/usr' '--with-ldap-sasl=/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.Internal.sdk/usr' '--with-libedit=/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.Internal.sdk/usr' '--enable-mbstring' '--enable-mbregex' '--with-mysqli=mysqlnd' '--with-pcre-regex=/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.Internal.sdk/usr' '--without-pcre-jit' '--with-pdo-pgsql=/Applications/Xcode.app/Contents/Developer/Toolchains/OSX10.14.xctoolchain/usr/local/bin' '--with-pgsql=/Applications/Xcode.app/Contents/Developer/Toolchains/OSX10.14.xctoolchain/local/bin' '--without-pear' '--with-pear=no' '--with-pdo-mysql=mysqlnd' '--with-mysql-sock=/var/mysql/mysql.sock' '--disable-phpdbg' '--with-readline=/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.Internal.sdk/usr' '--enable-shmop' '--with-snmp=/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.Internal.sdk/usr' '--enable-soap' '--enable-sockets' '--enable-sysvmsg' '--enable-sysvsem' '--enable-sysvshm' '--with-tidy=/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.Internal.sdk/usr' '--enable-wddx' '--with-xmlrpc' '--with-iconv-dir=/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.Internal.sdk/usr' '--with-xsl=/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.Internal.sdk/usr' '--with-apxs2=/Applications/Xcode.app/Contents/Developer/Toolchains/OSX10.14.xctoolchain/usr/local/bin/apxs' '--enable-zip' 'YACC=/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/bison'"
+#define CONFIGURE_COMMAND " '/Library/Caches/com.apple.xbs/Binaries/apache_mod_php/install/TempContent/Objects/php/configure'  '--prefix=/usr' '--mandir=/usr/share/man' '--infodir=/usr/share/info' '--disable-dependency-tracking' '--sysconfdir=/private/etc' '--with-libdir=lib' '--enable-cli' '--with-iconv=$(SDKROOT)/usr' '--with-config-file-path=/etc' '--with-libxml-dir=$(SDKROOT)/usr' '--with-openssl=$(SDKROOT)/usr/local/libressl' '--with-kerberos=$(SDKROOT)/usr' '--with-zlib=$(SDKROOT)/usr' '--enable-bcmath' '--with-bz2=$(SDKROOT)/usr' '--enable-calendar' '--disable-cgi' '--with-curl=$(SDKROOT)/usr' '--enable-dba' '--with-ndbm=$(SDKROOT)/usr' '--enable-exif' '--enable-fpm' '--enable-ftp' '--with-gd' '--with-png-dir=/usr/local' '--with-jpeg-dir=/usr/local' '--enable-gd-native-ttf' '--with-icu-dir=$(SDKROOT)/usr' '--with-ldap=$(SDKROOT)/usr' '--with-ldap-sasl=$(SDKROOT)/usr' '--with-libedit=$(SDKROOT)/usr' '--enable-mbstring' '--enable-mbregex' '--with-mysqli=mysqlnd' '--without-pcre-jit' '--with-pdo-pgsql=/usr/local/bin' '--with-pgsql=/usr/local/bin' '--without-pear' '--with-pear=no' '--with-pdo-mysql=mysqlnd' '--with-mysql-sock=/var/mysql/mysql.sock' '--disable-phpdbg' '--with-readline=$(SDKROOT)/usr' '--enable-shmop' '--with-snmp=$(SDKROOT)/usr' '--enable-soap' '--enable-sockets' '--enable-sysvmsg' '--enable-sysvsem' '--enable-sysvshm' '--with-tidy=$(SDKROOT)/usr' '--enable-wddx' '--with-xmlrpc' '--with-iconv-dir=$(SDKROOT)/usr' '--with-xsl=$(SDKROOT)/usr' '--with-apxs2=/usr/local/bin/apxs' 'YACC=/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/bison'"
 #define PHP_ADA_INCLUDE		""
 #define PHP_ADA_LFLAGS		""
 #define PHP_ADA_LIBS		""
@@ -37,7 +35,7 @@
 #define PHP_IFX_INCLUDE		""
 #define PHP_IFX_LFLAGS		""
 #define PHP_IFX_LIBS		""
-#define PHP_INSTALL_IT		"$(mkinstalldirs) '$(INSTALL_ROOT)/usr/libexec/apache2' &&                 $(mkinstalldirs) '$(INSTALL_ROOT)/private/etc/apache2' &&                  /Applications/Xcode.app/Contents/Developer/Toolchains/OSX10.14.xctoolchain/usr/local/bin/apxs -S LIBEXECDIR='$(INSTALL_ROOT)/usr/libexec/apache2'                        -S SYSCONFDIR='$(INSTALL_ROOT)/private/etc/apache2'                        -i -n php7 libs/libphp7.so"
+#define PHP_INSTALL_IT		"$(mkinstalldirs) '$(INSTALL_ROOT)/usr/libexec/apache2' &&                 $(mkinstalldirs) '$(INSTALL_ROOT)/private/etc/apache2' &&                  /usr/local/bin/apxs -S LIBEXECDIR='$(INSTALL_ROOT)/usr/libexec/apache2'                        -S SYSCONFDIR='$(INSTALL_ROOT)/private/etc/apache2'                        -i -n php7 libs/libphp7.so"
 #define PHP_IODBC_INCLUDE	""
 #define PHP_IODBC_LFLAGS	""
 #define PHP_IODBC_LIBS		""
@@ -73,11 +71,9 @@
 #define PHP_LDAP_LFLAGS		""
 #define PHP_LDAP_INCLUDE	""
 #define PHP_LDAP_LIBS		""
-#define PHP_BIRDSTEP_INCLUDE     ""
-#define PHP_BIRDSTEP_LIBS        ""
 #define PEAR_INSTALLDIR         ""
 #define PHP_INCLUDE_PATH	".:"
-#define PHP_EXTENSION_DIR       "/usr/lib/php/extensions/no-debug-non-zts-20160303"
+#define PHP_EXTENSION_DIR       "/usr/lib/php/extensions/no-debug-non-zts-20180731"
 #define PHP_PREFIX              "/usr"
 #define PHP_BINDIR              "/usr/bin"
 #define PHP_SBINDIR             "/usr/sbin"
@@ -89,3 +85,4 @@
 #define PHP_CONFIG_FILE_PATH    "/etc"
 #define PHP_CONFIG_FILE_SCAN_DIR    ""
 #define PHP_SHLIB_SUFFIX        "so"
+#define PHP_SHLIB_EXT_PREFIX    ""

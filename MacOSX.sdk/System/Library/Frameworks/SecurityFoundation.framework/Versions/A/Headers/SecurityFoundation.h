@@ -24,3 +24,5 @@
 #if TARGET_OS_OSX
 #include <SecurityFoundation/SFAuthorization.h>
 #endif
+
+#include <SecurityFoundation/SFDefines.h>

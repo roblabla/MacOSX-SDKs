@@ -1,7 +1,7 @@
 /*
     NSFetchedResultsController.h
     Core Data
-    Copyright (c) 2009-2018, Apple Inc.
+    Copyright (c) 2009-2019, Apple Inc.
     All rights reserved.
 */
 
@@ -41,6 +41,7 @@
 #import <Foundation/NSSet.h>
 #import <Foundation/NSError.h>
 #import <Foundation/NSIndexPath.h>
+#import <Foundation/NSOrderedCollectionDifference.h>
 #import <CoreData/NSManagedObjectContext.h>
 #import <CoreData/NSManagedObject.h>
 #import <CoreData/NSFetchRequest.h>
@@ -50,39 +51,10 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol NSFetchedResultsControllerDelegate;
 @protocol NSFetchedResultsSectionInfo;
 
+@class NSDiffableDataSourceSnapshot<SectionIdentifierType, ItemIdentifierType>;
+
 API_AVAILABLE(macosx(10.12),ios(3.0))
-@interface NSFetchedResultsController<ResultType:id<NSFetchRequestResult>> : NSObject {
-#if (!__OBJC2__)
-@private
-	NSFetchRequest *_fetchRequest;
-	NSManagedObjectContext *_managedObjectContext;
-	NSString *_sectionNameKeyPath;
-	NSString *_sectionNameKey;
-	NSString *_cacheName;
-	void	  *_cache;
-	struct _fetchResultsControllerFlags {
-	  unsigned int _sendObjectChangeNotifications:1;
-	  unsigned int _sendSectionChangeNotifications:1;
-	  unsigned int _sendDidChangeContentNotifications:1;
-	  unsigned int _sendWillChangeContentNotifications:1;
-	  unsigned int _sendSectionIndexTitleForSectionName:1;
-	  unsigned int _changedResultsSinceLastSave:1;
-	  unsigned int _hasMutableFetchedResults:1;
-	  unsigned int _hasBatchedArrayResults:1;
-	  unsigned int _hasSections:1;
-	  unsigned int _usesNonpersistedProperties:1;
-	  unsigned int _includesSubentities:1;
-	  unsigned int _reservedFlags:21;
-	} _flags;
-	id _delegate;
-	id _sortKeys;
-	id _fetchedObjects;
-	id _sections;
-	id _sectionsByName;
-	id _sectionIndexTitles;
-	id _sectionIndexTitlesSections;
-#endif
-}
+@interface NSFetchedResultsController<ResultType:id<NSFetchRequestResult>> : NSObject
 
 /* ========================================================*/
 /* ========================= INITIALIZERS ====================*/
@@ -207,15 +179,40 @@ API_AVAILABLE(macosx(10.12),ios(3.0))
 @end // NSFetchedResultsSectionInfo
 
 
+typedef NS_ENUM(NSUInteger, NSFetchedResultsChangeType) {
+    NSFetchedResultsChangeInsert = 1,
+    NSFetchedResultsChangeDelete = 2,
+    NSFetchedResultsChangeMove = 3,
+    NSFetchedResultsChangeUpdate = 4
+} API_AVAILABLE(macosx(10.12), ios(3.0));
+
 
 @protocol NSFetchedResultsControllerDelegate <NSObject>
+@optional
 
-typedef NS_ENUM(NSUInteger, NSFetchedResultsChangeType) {
-	NSFetchedResultsChangeInsert = 1,
-	NSFetchedResultsChangeDelete = 2,
-	NSFetchedResultsChangeMove = 3,
-	NSFetchedResultsChangeUpdate = 4
-} API_AVAILABLE(macosx(10.12), ios(3.0));
+#pragma mark -
+#pragma mark ***** Snapshot Based Content Change Reporting *****
+
+/* Called when the contents of the fetched results controller change.
+ * If this method is implemented, no other delegate methods will be invoked.
+ */
+- (void)controller:(NSFetchedResultsController *)controller didChangeContentWithSnapshot:(NSDiffableDataSourceSnapshot<NSString *, NSManagedObjectID *> *)snapshot API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0), watchos(6.0));
+
+#pragma mark -
+#pragma mark ***** Difference Based Content Change Reporting *****
+
+/* Called when the contents of the fetched results controller change.
+ * If this method is implemented and the controller is configured with
+ * sectionNameKeyPath = nil, no other delegate methods will be invoked.
+ *
+ * This method is only invoked if the controller's `sectionNameKeyPath`
+ * property is nil and `controller:didChangeContentWithSnapshot:` is not
+ * implemented.
+ */
+- (void)controller:(NSFetchedResultsController *)controller didChangeContentWithDifference:(NSOrderedCollectionDifference<NSManagedObjectID *> *)diff API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0), watchos(6.0));
+
+#pragma mark -
+#pragma mark ***** Legacy Content Change Reporting *****
 
 /* Notifies the delegate that a fetched object has been changed due to an add, remove, move, or update. Enables NSFetchedResultsController change tracking.
 	controller - controller instance that noticed the change on its fetched objects

@@ -124,6 +124,14 @@ SwiftVersions:
     - Name: prefersTrackingUntilMouseUp
       PropertyKind: Class
       SwiftImportAsAccessors: true
+  - Name: NSCollectionView
+    Methods:
+    - Selector: "supplementaryViewForElementKind:atIndexPath:"
+      MethodKind: Instance
+      ResultType: "NSView * _Nullable"
+    - Selector: "visibleSupplementaryViewsOfKind:"
+      MethodKind: Instance
+      ResultType: "NSArray<NSView *> * _Nonnull"
   - Name: NSCollectionViewLayout
     Properties:
     - Name: invalidationContextClass
@@ -483,6 +491,18 @@ SwiftVersions:
     - Name: currentOperation
       PropertyKind: Class
       SwiftImportAsAccessors: true
+  - Name: NSPrintPanel
+    Methods:
+    - Selector: "addAccessoryController::"
+      MethodKind: Instance
+      Parameters:
+      - Position: 0
+        Type: "NSViewController * _Nonnull"
+    - Selector: "removeAccessoryController:"
+      MethodKind: Instance
+      Parameters:
+      - Position: 0
+        Type: "NSViewController * _Nonnull"
   - Name: NSPrinter
     Properties:
     - Name: printerNames
@@ -5028,6 +5048,70 @@ Classes:
   - Selector: "autoscroll:"
     MethodKind: Instance
     SwiftName: autoscroll(with:)
+- Name: NSCollectionLayoutDecorationItem
+  Methods:
+  - Selector: "backgroundDecorationItemWithElementKind:"
+    MethodKind: Class
+    SwiftName: background(elementKind:)
+- Name: NSCollectionLayoutDimension
+  Methods:
+  - Selector: "absoluteDimension:"
+    MethodKind: Class
+    SwiftName: absolute(_:)
+  - Selector: "estimatedDimension:"
+    MethodKind: Class
+    SwiftName: estimated(_:)
+  - Selector: "fractionalHeightDimension:"
+    MethodKind: Class
+    SwiftName: fractionalHeight(_:)
+  - Selector: "fractionalWidthDimension:"
+    MethodKind: Class
+    SwiftName: fractionalWidth(_:)
+- Name: NSCollectionLayoutEdgeSpacing
+  Methods:
+  - Selector: "spacingForLeading:top:trailing:bottom:"
+    MethodKind: Class
+    SwiftName: init(leading:top:trailing:bottom:)
+- Name: NSCollectionLayoutGroup
+  Methods:
+  - Selector: "customGroupWithLayoutSize:itemProvider:"
+    MethodKind: Class
+    SwiftName: custom(layoutSize:itemProvider:)
+  - Selector: "horizontalGroupWithLayoutSize:subitem:count:"
+    MethodKind: Class
+    SwiftName: horizontal(layoutSize:subitem:count:)
+  - Selector: "horizontalGroupWithLayoutSize:subitems:"
+    MethodKind: Class
+    SwiftName: horizontal(layoutSize:subitems:)
+  - Selector: "verticalGroupWithLayoutSize:subitem:count:"
+    MethodKind: Class
+    SwiftName: vertical(layoutSize:subitem:count:)
+  - Selector: "verticalGroupWithLayoutSize:subitems:"
+    MethodKind: Class
+    SwiftName: vertical(layoutSize:subitems:)
+- Name: NSCollectionLayoutSection
+  Methods:
+  - Selector: "sectionWithGroup:"
+    MethodKind: Class
+    SwiftName: init(group:)
+- Name: NSCollectionLayoutSpacing
+  Methods:
+  - Selector: "fixedSpacing:"
+    MethodKind: Class
+    SwiftName: fixed(_:)
+  - Selector: "flexibleSpacing:"
+    MethodKind: Class
+    SwiftName: flexible(_:)
+  Properties:
+  - Name: isFixedSpacing
+    PropertyKind: Instance
+    SwiftName: isFixed
+  - Name: isFlexibleSpacing
+    PropertyKind: Instance
+    SwiftName: isFlexible
+- Name: NSCollectionViewDiffableDataSource
+  SwiftName: NSCollectionViewDiffableDataSourceReference
+  SwiftImportAsNonGeneric: true
 - Name: NSColor
   Methods:
   - Selector: "blendedColorWithFraction:ofColor:"
@@ -5239,14 +5323,6 @@ Classes:
   - Selector: "selectItemWithObjectValue:"
     MethodKind: Instance
     SwiftName: selectItem(withObjectValue:)
-- Name: NSCompressionGroupTouchBarItem
-  Methods:
-  - Selector: "alertCompressionGroupItemWithIdentifier:"
-    MethodKind: Class
-    SwiftName: init(alertGroupWithIdentifier:)
-  - Selector: "compressionGroupItemWithIdentifier:allowedOptions:"
-    MethodKind: Class
-    SwiftName: init(identifier:allowedOptions:)
 - Name: NSControl
   Methods:
   - Selector: "drawCellInside:"
@@ -5272,6 +5348,9 @@ Classes:
   - Selector: "mouseExited:"
     MethodKind: Instance
     SwiftName: mouseExited(with:)
+- Name: NSDiffableDataSourceSnapshot
+  SwiftName: NSDiffableDataSourceSnapshotReference
+  SwiftImportAsNonGeneric: true
 - Name: NSDocument
   Methods:
   - Selector: "browseDocumentVersions:"
@@ -5870,6 +5949,14 @@ Classes:
   - Selector: "removeStatusItem:"
     MethodKind: Instance
     SwiftName: removeStatusItem(_:)
+- Name: NSStoryboard
+  Methods:
+  - Selector: "instantiateControllerWithIdentifier:creator:"
+    MethodKind: Instance
+    SwiftPrivate: true
+  - Selector: "instantiateInitialControllerWithCreator:"
+    MethodKind: Instance
+    SwiftPrivate: true
 - Name: NSString
   Methods:
   - Selector: "sizeWithAttributes:"
@@ -6326,6 +6413,8 @@ Classes:
     SwiftName: "requestAuthorization(to:completionHandler:)"
 - Name: NSWorkspaceAuthorization
   SwiftName: NSWorkspace.Authorization
+- Name: NSWorkspaceOpenConfiguration
+  SwiftName: NSWorkspace.OpenConfiguration
 Protocols:
 - Name: NSAccessibility
   Methods:
@@ -6619,6 +6708,10 @@ Tags:
   SwiftName: NSPasteboard.WritingOptions
 - Name: NSPathStyle
   SwiftName: NSPathControl.Style
+- Name: NSPickerTouchBarItemSelectionMode
+  SwiftName: NSPickerTouchBarItem.SelectionMode
+- Name: NSPickerTouchBarItemControlRepresentation
+  SwiftName: NSPickerTouchBarItem.ControlRepresentation
 - Name: NSPointingDeviceType
   SwiftName: NSEvent.PointingDeviceType
 - Name: NSPopUpArrowPosition
@@ -6777,6 +6870,10 @@ Tags:
   SwiftName: NSTokenField.TokenStyle
 - Name: NSToolbarDisplayMode
   SwiftName: NSToolbar.DisplayMode
+- Name: NSToolbarItemGroupControlRepresentation
+  SwiftName: NSToolbarItemGroup.ControlRepresentation
+- Name: NSToolbarItemGroupSelectionMode
+  SwiftName: NSToolbarItemGroup.SelectionMode
 - Name: NSToolbarSizeMode
   SwiftName: NSToolbar.SizeMode
 - Name: NSTouchPhase
@@ -7034,6 +7131,10 @@ Typedefs:
   SwiftName: NSCell.StateValue
 - Name: NSCollectionViewDecorationElementKind
   SwiftName: NSCollectionView.DecorationElementKind
+- Name: NSCollectionViewDiffableDataSourceItemProvider
+  SwiftName: NSCollectionViewDiffableDataSourceReferenceItemProvider
+- Name: NSCollectionViewDiffableDataSourceSupplementaryViewProvider
+  SwiftName: NSCollectionViewDiffableDataSourceReferenceSupplementaryViewProvider
 - Name: NSCollectionViewReusableItemIdentifier
   SwiftName: NSCollectionView.ReusableItemIdentifier
 - Name: NSCollectionViewReusableSupplementaryViewIdentifier
@@ -7066,6 +7167,8 @@ Typedefs:
   SwiftName: NSFontDescriptor.AttributeName
 - Name: NSFontDescriptorFeatureKey
   SwiftName: NSFontDescriptor.FeatureKey
+- Name: NSFontDescriptorSystemDesign
+  SwiftName: NSFontDescriptor.SystemDesign
 - Name: NSFontDescriptorTraitKey
   SwiftName: NSFontDescriptor.TraitKey
 - Name: NSFontDescriptorVariationKey
@@ -7166,6 +7269,8 @@ Typedefs:
   SwiftName: NSStackView.VisibilityPriority
 - Name: NSStatusItemAutosaveName
   SwiftName: NSStatusItem.AutosaveName
+- Name: NSStoryboardControllerCreator
+  SwiftPrivate: true
 - Name: NSStoryboardName
   SwiftName: NSStoryboard.Name
 - Name: NSStoryboardSceneIdentifier
@@ -7589,6 +7694,10 @@ Enumerators:
   SwiftPrivate: true
 - Name: NSTextReadWriteErrorMinimum
   SwiftPrivate: true
+- Name: NSTextScalingStandard
+  SwiftName: standard
+- Name: NSTextScalingiOS
+  SwiftName: iOS
 - Name: NSTextWriteInapplicableDocumentTypeError
   SwiftPrivate: true
 - Name: NSUnderlineStyleDouble
@@ -9786,6 +9895,10 @@ Globals:
 - Name: NSSoundPboardType
   Availability: nonswift
   AvailabilityMsg: "use 'PasteboardType.sound'"
+- Name: NSSourceTextScalingDocumentAttribute
+  SwiftName: sourceTextScaling
+- Name: NSSourceTextScalingDocumentOption
+  SwiftName: sourceTextScaling
 - Name: NSSpeechCharacterModeProperty
   SwiftName: characterMode
 - Name: NSSpeechCommandDelimiterProperty
@@ -9910,6 +10023,8 @@ Globals:
   AvailabilityMsg: "use 'PasteboardType.tabularText'"
 - Name: NSTargetBinding
   SwiftName: target
+- Name: NSTargetTextScalingDocumentOption
+  SwiftName: targetTextScaling
 - Name: NSTextAlternativesAttributeName
   SwiftName: textAlternatives
 - Name: NSTextAlternativesSelectedAlternativeStringNotification
@@ -9962,6 +10077,8 @@ Globals:
   SwiftName: textLayoutSections
 - Name: NSTextMovementUserInfoKey
   SwiftName: NSText.movementUserInfoKey
+- Name: NSTextScalingDocumentAttribute
+  SwiftName: textScaling
 - Name: NSTextSizeMultiplierDocumentOption
   SwiftName: textSizeMultiplier
 - Name: NSTextStorageDidProcessEditingNotification

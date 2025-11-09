@@ -1,10 +1,9 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: C6A34D09-9707-3F28-838F-63B59B8A12D5' ]
-platform:        macosx
-install-name:    /System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/SearchKit.framework/Versions/A/SearchKit
-current-version: 200.1
-objc-constraint: none
+uuids:           [ 'x86_64: F3705C6E-AA86-3232-89D3-D37841357E45', 'x86_64: F3705C6E-AA86-3232-89D3-D37841357E45' ]
+platform:        zippered
+install-name:    '/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/SearchKit.framework/Versions/A/SearchKit'
+current-version: 417.1
 parent-umbrella: CoreServices
 exports:         
   - archs:           [ x86_64 ]

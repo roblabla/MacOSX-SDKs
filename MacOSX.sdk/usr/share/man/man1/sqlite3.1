@@ -2,7 +2,7 @@
 .\" First parameter, NAME, should be all caps
 .\" Second parameter, SECTION, should be 1-8, maybe w/ subsection
 .\" other parameters are allowed: see man(7), man(1)
-.TH SQLITE3 1 "Fri Oct 31 10:41:31 EDT 2014"
+.TH SQLITE3 1 "Fri May 10 23:44:29 PDT 2019"
 .\" Please adjust this date whenever revising the manpage.
 .\"
 .\" Some roff macros, for reference:
@@ -49,21 +49,21 @@ a table named "memos" and insert a couple of records into that table:
 $ 
 .B sqlite3 mydata.db
 .br
-SQLite version 3.16.0 2016-12-16 21:29:42
+SQLite version 3.28.0 2019-04-15 14:49:49
 .br
 Enter ".help" for usage hints.
 .br
 sqlite>
-.B create table memos(text, priority INTEGER);
+.B CREATE TABLE memos(text, priority INTEGER);
 .br
 sqlite>
-.B insert into memos values('deliver project description', 10);
+.B INSERT INTO memos VALUES('deliver project description', 10);
 .br
 sqlite>
-.B insert into memos values('lunch with Christine', 100);
+.B INSERT INTO memos VALUES('lunch with Christine', 100);
 .br
 sqlite>
-.B select * from memos;
+.B SELECT * FROM memos;
 .br
 deliver project description|10
 .br
@@ -85,7 +85,7 @@ semi-colons.
 For example:
 .sp
 $ 
-.B sqlite3 -line mydata.db 'select * from memos where priority > 20;'
+.B sqlite3 -line mydata.db 'SELECT * FROM memos WHERE priority > 20;'
 .br
     text = lunch with Christine
 .br
@@ -108,77 +108,64 @@ sqlite>
 .B .help
 .nf
 .tr %.
-%auth ON|OFF           Show authorizer callbacks
-%backup ?DB? FILE      Backup DB (default "main") to FILE
-%bail on|off           Stop after hitting an error.  Default OFF
-%binary on|off         Turn binary output on or off.  Default OFF
-%changes on|off        Show number of rows changed by SQL
-%check GLOB            Fail if output since .testcase does not match
-%clone NEWDB           Clone data into NEWDB from the existing database
-%databases             List names and files of attached databases
-%dbinfo ?DB?           Show status information about the database
-%dump ?TABLE? ...      Dump the database in an SQL text format
-                         If TABLE specified, only dump tables matching
-                         LIKE pattern TABLE.
-%echo on|off           Turn command echo on or off
-%eqp on|off|full       Enable or disable automatic EXPLAIN QUERY PLAN
-%exit                  Exit this program
-%explain ?on|off|auto? Turn EXPLAIN output mode on or off or to automatic
-%fullschema ?--indent? Show schema and the content of sqlite_stat tables
-%headers on|off        Turn display of headers on or off
-%help                  Show this message
-%import FILE TABLE     Import data from FILE into TABLE
-%imposter INDEX TABLE  Create imposter table TABLE on index INDEX
-%indexes ?TABLE?       Show names of all indexes
-                         If TABLE specified, only show indexes for tables
-                         matching LIKE pattern TABLE.
-%limit ?LIMIT? ?VAL?   Display or change the value of an SQLITE_LIMIT
-%lint OPTIONS          Report potential schema issues. Options:
-                         fkey-indexes     Find missing foreign key indexes
-%log FILE|off          Turn logging on or off.  FILE can be stderr/stdout
-%mode MODE ?TABLE?     Set output mode where MODE is one of:
-                         ascii    Columns/rows delimited by 0x1F and 0x1E
-                         csv      Comma-separated values
-                         column   Left-aligned columns.  (See .width)
-                         html     HTML <table> code
-                         insert   SQL insert statements for TABLE
-                         line     One value per line
-                         list     Values delimited by .separator strings
-                         quote    Escape answers as for SQL
-                         tabs     Tab-separated values
-                         tcl      TCL list elements
-%nullvalue STRING      Use STRING in place of NULL values
-%once FILENAME         Output for the next SQL command only to FILENAME
-%open ?--new? ?FILE?   Close existing database and reopen FILE
-                         The --new starts with an empty file
-%output ?FILENAME?     Send output to FILENAME or stdout
-%print STRING...       Print literal STRING
-%prompt MAIN CONTINUE  Replace the standard prompts
-%quit                  Exit this program
-%read FILENAME         Execute SQL in FILENAME
-%restore ?DB? FILE     Restore content of DB (default "main") from FILE
-%save FILE             Write in-memory database into FILE
-%scanstats on|off      Turn sqlite3_stmt_scanstatus() metrics on or off
-%schema ?PATTERN?      Show the CREATE statements matching PATTERN
-                          Add --indent for pretty-printing
-%separator COL ?ROW?   Change the column separator and optionally the row
-                         separator for both the output mode and .import
-%shell CMD ARGS...     Run CMD ARGS... in a system shell
-%show                  Show the current values for various settings
-%stats ?on|off?        Show stats or turn stats on or off
-%system CMD ARGS...    Run CMD ARGS... in a system shell
-%tables ?TABLE?        List names of tables
-                         If TABLE specified, only list tables matching
-                         LIKE pattern TABLE.
-%testcase NAME         Begin redirecting output to 'testcase-out.txt'
-%timeout MS            Try opening locked tables for MS milliseconds
-%timer on|off          Turn SQL timer on or off
-%trace FILE|off        Output each SQL statement as it is run
-%vfsinfo ?AUX?         Information about the top-level VFS
-%vfslist               List all available VFSes
-%vfsname ?AUX?         Print the name of the VFS stack
-%width NUM1 NUM2 ...   Set column widths for "column" mode
-                         Negative values right-justify
+%auth ON|OFF             Show authorizer callbacks
+%backup ?DB? FILE        Backup DB (default "main") to FILE
+%bail on|off             Stop after hitting an error.  Default OFF
+%binary on|off           Turn binary output on or off.  Default OFF
+%cd DIRECTORY            Change the working directory to DIRECTORY
+%changes on|off          Show number of rows changed by SQL
+%check GLOB              Fail if output since .testcase does not match
+%clone NEWDB             Clone data into NEWDB from the existing database
+%databases               List names and files of attached databases
+%dbconfig ?op? ?val?     List or change sqlite3_db_config() options
+%dbinfo ?DB?             Show status information about the database
+%dump ?TABLE? ...        Render all database content as SQL
+%echo on|off             Turn command echo on or off
+%eqp on|off|full|...     Enable or disable automatic EXPLAIN QUERY PLAN
+%excel                   Display the output of next command in a spreadsheet
+%exit ?CODE?             Exit this program with return-code CODE
+%expert                  EXPERIMENTAL. Suggest indexes for specified queries
+%fullschema ?--indent?   Show schema and the content of sqlite_stat tables
+%headers on|off          Turn display of headers on or off
+%help ?-all? ?PATTERN?   Show help text for PATTERN
+%import FILE TABLE       Import data from FILE into TABLE
+%imposter INDEX TABLE    Create imposter table TABLE on index INDEX
+%indexes ?TABLE?         Show names of indexes
+%limit ?LIMIT? ?VAL?     Display or change the value of an SQLITE_LIMIT
+%lint OPTIONS            Report potential schema issues.
+%log FILE|off            Turn logging on or off.  FILE can be stderr/stdout
+%mode MODE ?TABLE?       Set output mode
+%nullvalue STRING        Use STRING in place of NULL values
+%once (-e|-x|FILE)       Output for the next SQL command only to FILE
+%open ?OPTIONS? ?FILE?   Close existing database and reopen FILE
+%output ?FILE?           Send output to FILE or stdout if FILE is omitted
+%parameter CMD ...       Manage SQL parameter bindings
+%print STRING...         Print literal STRING
+%progress N              Invoke progress handler after every N opcodes
+%prompt MAIN CONTINUE    Replace the standard prompts
+%quit                    Exit this program
+%read FILE               Read input from FILE
+%restore ?DB? FILE       Restore content of DB (default "main") from FILE
+%save FILE               Write in-memory database into FILE
+%scanstats on|off        Turn sqlite3_stmt_scanstatus() metrics on or off
+%schema ?PATTERN?        Show the CREATE statements matching PATTERN
+%selftest ?OPTIONS?      Run tests defined in the SELFTEST table
+%separator COL ?ROW?     Change the column and row separators
+%session ?NAME? CMD ...  Create or control sessions
+%sha3sum ...             Compute a SHA3 hash of database content
+%shell CMD ARGS...       Run CMD ARGS... in a system shell
+%show                    Show the current values for various settings
+%stats ?on|off?          Show stats or turn stats on or off
+%system CMD ARGS...      Run CMD ARGS... in a system shell
+%tables ?TABLE?          List names of tables matching LIKE pattern TABLE
+%testcase NAME           Begin redirecting output to 'testcase-out.txt'
+%timeout MS              Try opening locked tables for MS milliseconds
+%timer on|off            Turn SQL timer on or off
+%trace ?OPTIONS?         Output each SQL statement as it is run
+%vfsinfo ?AUX?           Information about the top-level VFS
+%vfslist                 List all available VFSes
+%vfsname ?AUX?           Print the name of the VFS stack
+%width NUM1 NUM2 ...     Set column widths for "column" mode
 sqlite>
 .sp
 .fi
@@ -207,6 +194,9 @@ before reading stdin
 .TP
 .B \-csv
 Set output mode to CSV (comma separated values).
+.TP
+.B \-deserialize
+Open the database using sqlite3_deserialize()
 .TP
 .B \-echo
 Print commands before execution.
@@ -243,6 +233,11 @@ Use
 entries of
 .I size
 bytes for lookaside memory
+.TP
+.BI \-maxsize\ N
+Limits size of a -deserialize database to
+.I N
+bytes
 .TP
 .BI \-mmap\  N
 Set default mmap size to
@@ -294,8 +289,7 @@ continue prompt = "   ...> "
 o If the file 
 .B ~/.sqliterc
 exists, it is processed first.
-can be found in the user's home directory, it is
-read and processed.  It should generally only contain meta-commands.
+It should generally only contain meta-commands.
 
 o If the -init option is present, the specified file is processed.
 

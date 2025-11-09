@@ -1,10 +1,9 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 9FBE7BFB-3A81-37AC-8E15-E6F7932BBDC0' ]
+uuids:           [ 'x86_64: 76BF7526-6876-388B-8E14-03BED28B6041' ]
 platform:        macosx
-install-name:    /System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/CarbonCore.framework/Versions/A/CarbonCore
-current-version: 1178.11
-objc-constraint: none
+install-name:    '/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/CarbonCore.framework/Versions/A/CarbonCore'
+current-version: 1214
 parent-umbrella: CoreServices
 exports:         
   - archs:           [ x86_64 ]
@@ -75,8 +74,9 @@ exports:
                        _DisposeUnicodeToTextInfoNoInit, _DisposeUnicodeToTextRunInfo, 
                        _DisposeVNUPP, _DurationToAbsolute, _DurationToNanoseconds, 
                        _EmptyCollection, _EmptyHandle, _Endian64_Swap, _Enqueue, 
-                       _EqualString, _ErrorTranslate, _ExtendedToString, _FNGetDirectoryForSubscription, 
-                       _FNNotify, _FNNotifyAll, _FNNotifyByPath, _FNSubscribe, _FNSubscribeByPath, 
+                       _EqualString, _ErrorTranslate, _ExtendedToString, _FIDDumpFileIDMap, 
+                       _FIDListFileIDMaps, _FNGetDirectoryForSubscription, _FNNotify, 
+                       _FNNotifyAll, _FNNotifyByPath, _FNSubscribe, _FNSubscribeByPath, 
                        _FNUnsubscribe, _FSAllocateFork, _FSCancelVolumeOperation, 
                        _FSCatalogSearch, _FSCloseFork, _FSCloseIterator, _FSCompareFSRefs, 
                        _FSCopyAliasInfo, _FSCopyDADiskForVolume, _FSCopyDiskIDForVolume, 
@@ -115,8 +115,8 @@ exports:
                        _FSMountLocalVolumeAsync, _FSMountLocalVolumeSync, _FSMountMakepath, 
                        _FSMountMountIDToVRefNum, _FSMountPrepare, _FSMountPrepareWithMountPointString, 
                        _FSMountRenameVolume, _FSMountServerVolumeAsync, _FSMountServerVolumeSync, 
-                       _FSMountSetProperty, _FSMountStorageSize, _FSMountVCBVRefNum, 
-                       _FSMoveObject, _FSMoveObjectAsync, _FSMoveObjectAsyncWithCallbacks, 
+                       _FSMountSetProperty, _FSMountStorageSize, _FSMountUpdateCaseInsensitiveName, 
+                       _FSMountVCBVRefNum, _FSMoveObject, _FSMoveObjectAsync, _FSMoveObjectAsyncWithCallbacks, 
                        _FSMoveObjectSync, _FSMoveObjectToTrashAsync, _FSMoveObjectToTrashSync, 
                        _FSNewAlias, _FSNewAliasFromPath, _FSNewAliasMinimal, _FSNewAliasMinimalUnicode, 
                        _FSNewAliasUnicode, _FSObjTypeToFSNodeObjectType, _FSOpenFork, 
@@ -130,7 +130,7 @@ exports:
                        _FSPathMoveObjectSyncWithCallbacks, _FSPathMoveObjectToTrashAsync, 
                        _FSPathMoveObjectToTrashSync, _FSPathRemoveExtendedAttribute, 
                        _FSPathReplaceObject, _FSPathSetExtendedAttribute, _FSReadFork, 
-                       _FSRefCreate, _FSRefMakePath, _FSRemoveExtendedAttribute, 
+                       _FSRefCreate64, _FSRefMakePath, _FSRemoveExtendedAttribute, 
                        _FSRemoveExtendedAttributeByForkRefNum, _FSRenameUnicode, 
                        _FSReplaceObject, _FSReservationAcquire, _FSReservationCopyPath, 
                        _FSReservationCreateWithFSRef, _FSReservationCreateWithPath, 
@@ -476,9 +476,9 @@ exports:
                        __CSBackupStopBackingUpItem, __CSBackupSuspendAutomaticActivity, 
                        __CSBackupSystemVersionCompare, __CSBackupURLIsBackupItem, 
                        __CSBackupUnregisterMTMExclusions, __CSBackupWasItemEverBackedUp, 
-                       __CSCheckFix, __CSCheckFixSetBundleInformation, __CSCheckFixWithInfo, 
-                       __CSCopyLazyValuesForKey, __CSCreateSeed, __CSDestroySeed, 
-                       __CSFlushNamedData, __CSGetNamedData, __CSGetProcessorArchitecture, 
+                       __CSCheckFix, __CSCheckFixDisable, __CSCheckFixSetBundleInformation, 
+                       __CSCheckFixWithInfo, __CSCopyLazyValuesForKey, __CSCreateSeed, 
+                       __CSDestroySeed, __CSFlushNamedData, __CSGetNamedData, __CSGetProcessorArchitecture, 
                        __CSIncrementSeed, __CSReadSeed, __CSReleaseNamedData, __CSSetNamedData, 
                        __CSWriteSeed, __CharacterByteType, __ConvertLocalTimeToUTC, 
                        __ConvertLocalToUTCDateTime, __ConvertUTCToLocalDateTime, 
@@ -505,10 +505,11 @@ exports:
                        __FSCreateUserAccessRightsDictionaryForObject, __FSDeallocateQuarantineData, 
                        __FSDisableAutoDiskArbHandling, __FSDisposeFSPackedFSRef, 
                        __FSEffectiveAccessEntryCopyUUID, __FSEffectiveAccessEntryGetEffectiveAccessControlInfo, 
-                       __FSEffectiveAccessEntryGetUUIDBytes, __FSFileSecurityCreateForFileFromDirectory, 
-                       __FSFileSecurityGetfilesec_t, __FSFileSecurityUnsetAccessControlList, 
-                       __FSFileSecurityUnsetGroup, __FSFileSecurityUnsetGroupUUID, 
-                       __FSFileSecurityUnsetMode, __FSFileSecurityUnsetOwner, __FSFileSecurityUnsetOwnerUUID, 
+                       __FSEffectiveAccessEntryGetUUIDBytes, __FSErrorTranslate, 
+                       __FSFileSecurityCreateForFileFromDirectory, __FSFileSecurityGetfilesec_t, 
+                       __FSFileSecurityUnsetAccessControlList, __FSFileSecurityUnsetGroup, 
+                       __FSFileSecurityUnsetGroupUUID, __FSFileSecurityUnsetMode, 
+                       __FSFileSecurityUnsetOwner, __FSFileSecurityUnsetOwnerUUID, 
                        __FSFlattenFSRef, __FSFlipAFPXVolMountInfo, __FSForkAdvise, 
                        __FSGetAliasInfoFromAliasPtr, __FSGetCatalogInfoByName, __FSGetDisableNetworkVolumes, 
                        __FSGetExtendedUserAccess, __FSGetFSRefFromPackedFSRef, __FSGetFSRefInformationFast, 

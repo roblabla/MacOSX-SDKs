@@ -5,8 +5,6 @@
 	Copyright (c) 2015 Apple Inc. All Rights Reserved.
 */
 
-#if !0
-
 #import <Foundation/Foundation.h>
 
 #if __has_include(<CoreMIDI/MIDIServices.h>)
@@ -68,7 +66,7 @@ NS_INLINE AVBeatRange AVMakeBeatRange(AVMusicTimeStamp startBeat, AVMusicTimeSta
 /*! @class AVAudioSequencer
 	@abstract A collection of MIDI events organized into AVMusicTracks, plus a player to play back the events.
 */
-OS_EXPORT API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0)) API_UNAVAILABLE(watchos)
+API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 @interface AVAudioSequencer : NSObject {
 @protected
 	void *_impl;
@@ -91,18 +89,22 @@ OS_EXPORT API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0)) API_UNAVAILABLE(watch
 /*! @method loadFromURL:options:error:
 	@abstract Load the file referenced by the URL and add the events to the sequence
 	@param fileURL
+        the URL to the file
 	@param options
 		determines how the file's contents are mapped to tracks inside the sequence
 	@param outError
+        on exit, if an error occurs, a description of the error
 */
 - (BOOL)loadFromURL:(NSURL *)fileURL options:(AVMusicSequenceLoadOptions)options error:(NSError **)outError;
 
 /*! @method loadFromData:options:error:
 	@abstract Parse the data and add the its events to the sequence
 	@param data
+        the data to load from
 	@param options
 		determines how the contents are mapped to tracks inside the sequence
 	@param outError
+        on exit, if an error occurs, a description of the error
 */
 - (BOOL)loadFromData:(NSData *)data options:(AVMusicSequenceLoadOptions)options error:(NSError **)outError;
 
@@ -117,6 +119,7 @@ OS_EXPORT API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0)) API_UNAVAILABLE(watch
 		if the file already exists, YES will cause it to be overwritten with the new data.
 		Otherwise the call will fail with a permission error.
 	@param outError
+        on exit, if an error occurs, a description of the error
 	@discussion
 		Only MIDI events are written when writing to the MIDI file. MIDI files are normally beat
 		based, but can also have a SMPTE (or real-time rather than beat time) representation.
@@ -239,6 +242,8 @@ OS_EXPORT API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0)) API_UNAVAILABLE(watch
 	@abstract	Start the sequencer's player
 	@discussion
 		If the AVAudioSequencer has not been prerolled, it will pre-roll itself and then start.
+		When the sequencer is associated with an audio engine, the sequencer's player will only
+		play if the audio engine is running.
 */
 - (BOOL)startAndReturnError:(NSError **)outError;
 
@@ -258,7 +263,7 @@ OS_EXPORT API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0)) API_UNAVAILABLE(watch
 	@abstract A collection of music events which will be sent to a given destination, and which can be 
 				offset, muted, etc. independently of events in other tracks.
 */
-OS_EXPORT API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0)) API_UNAVAILABLE(watchos)
+API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 @interface AVMusicTrack : NSObject {
 @protected
 	void *_impl;
@@ -374,5 +379,3 @@ typedef NS_ENUM(NSInteger, AVMusicTrackLoopCount) {
 @end
 
 NS_ASSUME_NONNULL_END
-
-#endif // !TARGET_OS_BRIDGE

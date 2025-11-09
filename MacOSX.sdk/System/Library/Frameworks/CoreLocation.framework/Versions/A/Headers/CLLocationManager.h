@@ -50,17 +50,19 @@ typedef NS_ENUM(int, CLAuthorizationStatus) {
 	// location services are disabled in Settings.
 	kCLAuthorizationStatusDenied,
 
-	// User has granted authorization to use their location at any time,
-	// including monitoring for regions, visits, or significant location changes.
+	// User has granted authorization to use their location at any
+	// time.  Your app may be launched into the background by
+	// monitoring APIs such as visit monitoring, region monitoring,
+	// and significant location change monitoring.
 	//
 	// This value should be used on iOS, tvOS and watchOS.  It is available on
 	// MacOS, but kCLAuthorizationStatusAuthorized is synonymous and preferred.
 	kCLAuthorizationStatusAuthorizedAlways API_AVAILABLE(macos(10.12), ios(8.0)),
 
-	// User has granted authorization to use their location only when your app
-	// is visible to them (it will be made visible to them if you continue to
-	// receive location updates while in the background).  Authorization to use
-	// launch APIs has not been granted.
+	// User has granted authorization to use their location only while
+	// they are using your app.  Note: You can reflect the user's
+	// continued engagement with your app using
+	// -allowsBackgroundLocationUpdates.
 	//
 	// This value is not available on MacOS.  It should be used on iOS, tvOS and
 	// watchOS.
@@ -92,6 +94,7 @@ typedef NS_ENUM(NSInteger, CLActivityType) {
 @class CLLocation;
 @class CLHeading;
 @class CLBeaconRegion;
+@class CLBeaconIdentityConstraint;
 @protocol CLLocationManagerDelegate;
 
 /*
@@ -100,6 +103,7 @@ typedef NS_ENUM(NSInteger, CLActivityType) {
  *  Discussion:
  *    The CLLocationManager object is your entry point to the location service.
  */
+CL_EXTERN
 API_AVAILABLE(macos(10.6), ios(2.0))
 @interface CLLocationManager : NSObject
 {
@@ -165,7 +169,7 @@ API_AVAILABLE(macos(10.6), ios(2.0))
  *      Determines whether the device supports ranging.
  *      If NO, all attempts to range beacons will fail.
  */
-+ (BOOL)isRangingAvailable API_AVAILABLE(ios(7.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(watchos, tvos);
++ (BOOL)isRangingAvailable API_AVAILABLE(ios(7.0)) API_UNAVAILABLE(watchos, tvos, macos);
 
 /*
  *  authorizationStatus
@@ -175,7 +179,7 @@ API_AVAILABLE(macos(10.6), ios(2.0))
  */
 + (CLAuthorizationStatus)authorizationStatus API_AVAILABLE(ios(4.2), macos(10.7));
 
-@property(assign, nonatomic, nullable) id<CLLocationManagerDelegate> delegate;
+@property(weak, nonatomic, nullable) id<CLLocationManagerDelegate> delegate;
 
 /*
  *  locationServicesEnabled
@@ -183,7 +187,7 @@ API_AVAILABLE(macos(10.6), ios(2.0))
  *  Discussion:
  *      Deprecated. Use +locationServicesEnabled instead.
  */
-@property(readonly, nonatomic) BOOL locationServicesEnabled API_DEPRECATED_WITH_REPLACEMENT("+locationServicesEnabled", ios(2.0, 4.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(watchos, tvos);
+@property(readonly, nonatomic) BOOL locationServicesEnabled API_DEPRECATED_WITH_REPLACEMENT("+locationServicesEnabled", ios(2.0, 4.0)) API_UNAVAILABLE(macos, macCatalyst) API_UNAVAILABLE(watchos, tvos);
 
 /*
  *  purpose
@@ -205,7 +209,7 @@ API_AVAILABLE(macos(10.6), ios(2.0))
  *		the determination of when location updates may be automatically paused.
  *		By default, CLActivityTypeOther is used.
  */
-@property(assign, nonatomic) CLActivityType activityType API_AVAILABLE(ios(6.0), watchos(4.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(tvos);
+@property(assign, nonatomic) CLActivityType activityType API_AVAILABLE(ios(6.0), watchos(4.0)) API_UNAVAILABLE(tvos, macos);
 
 /*
  *  distanceFilter
@@ -237,7 +241,7 @@ API_AVAILABLE(macos(10.6), ios(2.0))
  *		Specifies that location updates may automatically be paused when possible.
  *		By default, this is YES for applications linked against iOS 6.0 or later.
  */
-@property(assign, nonatomic) BOOL pausesLocationUpdatesAutomatically API_AVAILABLE(ios(6.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(watchos, tvos);
+@property(assign, nonatomic) BOOL pausesLocationUpdatesAutomatically API_AVAILABLE(ios(6.0)) API_UNAVAILABLE(watchos, tvos, macos);
 
 /*
  *  allowsBackgroundLocationUpdates
@@ -263,7 +267,7 @@ API_AVAILABLE(macos(10.6), ios(2.0))
  *      See -requestWhenInUseAuthorization and -requestAlwaysAuthorization for
  *      more details on possible authorization values.
  */
-@property(assign, nonatomic) BOOL allowsBackgroundLocationUpdates API_AVAILABLE(ios(9.0), watchos(4.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(tvos);
+@property(assign, nonatomic) BOOL allowsBackgroundLocationUpdates API_AVAILABLE(ios(9.0), watchos(4.0)) API_UNAVAILABLE(tvos, macos);
 
 /*
  *  showsBackgroundLocationIndicator
@@ -283,7 +287,7 @@ API_AVAILABLE(macos(10.6), ios(2.0))
  *
  *      The default value of this property is NO.
  */
-@property(assign, nonatomic) BOOL showsBackgroundLocationIndicator API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(watchos, tvos);
+@property(assign, nonatomic) BOOL showsBackgroundLocationIndicator API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, tvos, macos);
 
 /*
  *  location
@@ -299,7 +303,7 @@ API_AVAILABLE(macos(10.6), ios(2.0))
  *  Discussion:
  *      Deprecated. Use +headingAvailable instead.
  */
-@property(readonly, nonatomic) BOOL headingAvailable API_DEPRECATED_WITH_REPLACEMENT("+headingAvailable", ios(3.0, 4.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(watchos, tvos);
+@property(readonly, nonatomic) BOOL headingAvailable API_DEPRECATED_WITH_REPLACEMENT("+headingAvailable", ios(3.0, 4.0)) API_UNAVAILABLE(macos, macCatalyst) API_UNAVAILABLE(watchos, tvos);
 
 /*
  *  headingFilter
@@ -309,7 +313,7 @@ API_AVAILABLE(macos(10.6), ios(2.0))
  *      be notified of updates less than the stated filter value. Pass in kCLHeadingFilterNone to be
  *      notified of all updates. By default, 1 degree is used.
  */
-@property(assign, nonatomic) CLLocationDegrees headingFilter API_AVAILABLE(ios(3.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(watchos, tvos);
+@property(assign, nonatomic) CLLocationDegrees headingFilter API_AVAILABLE(ios(3.0)) API_UNAVAILABLE(watchos, tvos, macos);
 
 /*
  *  headingOrientation
@@ -320,7 +324,7 @@ API_AVAILABLE(macos(10.6), ios(2.0))
  *      CLDeviceOrientationFaceDown are ignored.
  *      
  */
-@property(assign, nonatomic) CLDeviceOrientation headingOrientation API_AVAILABLE(ios(4.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(watchos, tvos);
+@property(assign, nonatomic) CLDeviceOrientation headingOrientation API_AVAILABLE(ios(4.0)) API_UNAVAILABLE(watchos, tvos, macos);
 
 /*
  *  heading
@@ -328,7 +332,7 @@ API_AVAILABLE(macos(10.6), ios(2.0))
  *  Discussion:
  *      Returns the latest heading update received, or nil if none is available.
  */
-@property(readonly, nonatomic, copy, nullable) CLHeading *heading API_AVAILABLE(ios(4.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(watchos, tvos);
+@property(readonly, nonatomic, copy, nullable) CLHeading *heading API_AVAILABLE(ios(4.0)) API_UNAVAILABLE(watchos, tvos, macos);
 
 /*
  *  maximumRegionMonitoringDistance
@@ -356,7 +360,15 @@ API_AVAILABLE(macos(10.6), ios(2.0))
  *  Discussion:
  *       Retrieve a set of objects representing the regions for which this location manager is actively providing ranging.
  */
-@property (readonly, nonatomic, copy) NSSet<__kindof CLRegion *> *rangedRegions API_AVAILABLE(ios(7.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(watchos, tvos);
+@property (readonly, nonatomic, copy) NSSet<__kindof CLRegion *> *rangedRegions API_DEPRECATED("Use -rangedBeaconConstraints", ios(7.0, 13.0)) API_UNAVAILABLE(macos, macCatalyst) API_UNAVAILABLE(watchos, tvos);
+
+/*
+ *  rangedBeaconConstraints
+ *
+ *  Discussion:
+ *      Retrieve a set of beacon constraints for which this location manager is actively providing ranging.
+ */
+@property (readonly, nonatomic, copy) NSSet<CLBeaconIdentityConstraint *> *rangedBeaconConstraints API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, tvos, macos);
 
 /*
  *  requestWhenInUseAuthorization
@@ -364,25 +376,28 @@ API_AVAILABLE(macos(10.6), ios(2.0))
  *  Discussion:
  *      When +authorizationStatus == kCLAuthorizationStatusNotDetermined,
  *      calling this method will trigger a prompt to request "when-in-use"
- *      authorization from the user.  If possible, perform this call in response
- *      to direct user request for a location-based service so that the reason
- *      for the prompt will be clear.  Any authorization change as a result of
+ *      authorization from the user.  Any authorization change as a result of
  *      the prompt will be reflected via the usual delegate callback:
  *      -locationManager:didChangeAuthorizationStatus:.
  *
- *      If received, "when-in-use" authorization grants access to the user's
- *      location via -startUpdatingLocation/-startRangingBeaconsInRegion while
- *      in the foreground.  If updates have been started when going to the
- *      background, then a status bar banner will be displayed to maintain
- *      visibility to the user, and updates will continue until stopped
- *      normally, or the app is killed by the user.
+ *      If possible, perform this call in response to direct user request for a
+ *      location-based service so that the reason for the prompt will be clear,
+ *      and the utility of a one-time grant is maximized.
  *
- *      "When-in-use" authorization does NOT enable monitoring API on regions,
- *      significant location changes, or visits, and -startUpdatingLocation will
- *      not succeed if invoked from the background.
+ *      If received, "when-in-use" authorization grants access to the user's
+ *      location via any CoreLocation API as long as your app is being actively
+ *      used by the user.  Typically this means your app must be in the
+ *      foreground.  If you start a Continuous Background Location session (see
+ *      -allowsBackgroundLocationUpdates), then CoreLocation will maintain
+ *      visibility for your app as it enters the background.  This will enable
+ *      your app to continue receiving location information even as another app
+ *      enters the foreground.  Your app will remain visible in this way until
+ *      location updates are stopped or your app is killed by the user.
  *
  *      When +authorizationStatus != kCLAuthorizationStatusNotDetermined, (ie
  *      generally after the first call) this method will do nothing.
+ *
+ *      If your app is not currently in use, this method will do nothing.
  *
  *      The NSLocationWhenInUseUsageDescription key must be specified in your
  *      Info.plist; otherwise, this method will do nothing, as your app will be
@@ -395,18 +410,19 @@ API_AVAILABLE(macos(10.6), ios(2.0))
  *
  *  Discussion:
  *      When +authorizationStatus == kCLAuthorizationStatusNotDetermined,
- *      calling this method will trigger a prompt to request "always"
- *      authorization from the user.  If possible, perform this call in response
- *      to direct user request for a location-based service so that the reason
- *      for the prompt will be clear.  Any authorization change as a result of
+ *      calling this method will start the process of requesting "always"
+ *      authorization from the user.  Any authorization change as a result of
  *      the prompt will be reflected via the usual delegate callback:
  *      -locationManager:didChangeAuthorizationStatus:.
  *
- *      If received, "always" authorization grants access to the user's
- *      location via any CLLocationManager API, and grants access to
- *      launch-capable monitoring API such as geofencing/region monitoring,
- *      significant location visits, etc.  Even if killed by the user, launch
- *      events triggered by monitored regions or visit patterns will cause a
+ *      If possible, perform this call in response to direct user request for a
+ *      location-based service so that the reason for the prompt will be clear,
+ *      and the utility of a one-time grant is maximized.
+ *
+ *      If received, "always" authorization grants access to the user's location
+ *      via any CLLocationManager API.  In addition, monitoring APIs may launch
+ *      your app into the background when they detect an event.  Even if killed by
+ *      the user, launch events triggered by monitoring APIs will cause a
  *      relaunch.
  *
  *      "Always" authorization presents a significant risk to user privacy, and
@@ -420,12 +436,14 @@ API_AVAILABLE(macos(10.6), ios(2.0))
  *      +authorizationStatus != kCLAuthorizationStatusNotDetermined, (ie
  *      generally after the first call) this method will do nothing.
  *
+ *      If your app is not currently in use, this method will do nothing.
+ *
  *      Both the NSLocationAlwaysAndWhenInUseUsageDescription and
  *      NSLocationWhenInUseUsageDescription keys must be specified in your
  *      Info.plist; otherwise, this method will do nothing, as your app will be
  *      assumed not to support Always authorization.
  */
-- (void)requestAlwaysAuthorization API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(tvos);
+- (void)requestAlwaysAuthorization API_AVAILABLE(ios(8.0), macos(10.15)) API_UNAVAILABLE(tvos);
 
 /*
  *  startUpdatingLocation
@@ -473,7 +491,7 @@ API_AVAILABLE(macos(10.6), ios(2.0))
  *  Discussion:
  *      Start updating heading.
  */
-- (void)startUpdatingHeading API_AVAILABLE(ios(3.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(watchos, tvos);
+- (void)startUpdatingHeading API_AVAILABLE(ios(3.0)) API_UNAVAILABLE(watchos, tvos, macos);
 
 /*
  *  stopUpdatingHeading
@@ -481,7 +499,7 @@ API_AVAILABLE(macos(10.6), ios(2.0))
  *  Discussion:
  *      Stop updating heading.
  */
-- (void)stopUpdatingHeading API_AVAILABLE(ios(3.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(watchos, tvos);
+- (void)stopUpdatingHeading API_AVAILABLE(ios(3.0)) API_UNAVAILABLE(watchos, tvos, macos);
 
 /*
  *  dismissHeadingCalibrationDisplay
@@ -489,7 +507,7 @@ API_AVAILABLE(macos(10.6), ios(2.0))
  *  Discussion:
  *      Dismiss the heading calibration immediately.
  */
-- (void)dismissHeadingCalibrationDisplay API_AVAILABLE(ios(3.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(watchos, tvos);
+- (void)dismissHeadingCalibrationDisplay API_AVAILABLE(ios(3.0)) API_UNAVAILABLE(watchos, tvos, macos);
 
 /*
  *  startMonitoringSignificantLocationChanges
@@ -527,7 +545,7 @@ API_AVAILABLE(macos(10.6), ios(2.0))
  *      This is done asynchronously and may not be immediately reflected in monitoredRegions.
  */
 - (void)startMonitoringForRegion:(CLRegion *)region
-                 desiredAccuracy:(CLLocationAccuracy)accuracy API_DEPRECATED_WITH_REPLACEMENT("-startMonitoringForRegion:", ios(4.0, 6.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(watchos, tvos);
+                 desiredAccuracy:(CLLocationAccuracy)accuracy API_DEPRECATED_WITH_REPLACEMENT("-startMonitoringForRegion:", ios(4.0, 6.0)) API_UNAVAILABLE(macos, macCatalyst) API_UNAVAILABLE(watchos, tvos);
 
 /*
  *  stopMonitoringForRegion:
@@ -569,7 +587,7 @@ API_AVAILABLE(macos(10.6), ios(2.0))
  *  Discussion:
  *      Start calculating ranges for beacons in the specified region.
  */
-- (void)startRangingBeaconsInRegion:(CLBeaconRegion *)region API_AVAILABLE(ios(7.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(watchos, tvos);
+- (void)startRangingBeaconsInRegion:(CLBeaconRegion *)region API_DEPRECATED("Use -startRangingBeaconsSatisfyingConstraint:", ios(7.0, 13.0)) API_UNAVAILABLE(macos, macCatalyst) API_UNAVAILABLE(watchos, tvos);
 
 /*
  *  stopRangingBeaconsInRegion:
@@ -577,7 +595,25 @@ API_AVAILABLE(macos(10.6), ios(2.0))
  *  Discussion:
  *      Stop calculating ranges for the specified region.
  */
-- (void)stopRangingBeaconsInRegion:(CLBeaconRegion *)region API_AVAILABLE(ios(7.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(watchos, tvos);
+- (void)stopRangingBeaconsInRegion:(CLBeaconRegion *)region API_DEPRECATED("Use -stopRangingBeaconsSatisfyingConstraint:", ios(7.0, 13.0)) API_UNAVAILABLE(macos, macCatalyst) API_UNAVAILABLE(watchos, tvos);
+
+/*
+ *  startRangingBeaconsSatisfyingConstraint:
+ *
+ *  Discussion:
+ *      Start producing ranging measurements for beacons that satisfy
+ *      the provided constraint.  Ranging will continue until you pass
+ *      an equivalent constraint to stopRangingBeaconsSatisfyingConstraint:.
+ */
+- (void)startRangingBeaconsSatisfyingConstraint:(CLBeaconIdentityConstraint *)constraint API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, tvos, macos);
+
+/*
+ *  stopRangingBeaconsSatisfyingConstraint:
+ *
+ *  Discussion:
+ *      Stop an earlier beacon ranging request.  See startRangingBeaconsSatisfyingConstraint:.
+ */
+- (void)stopRangingBeaconsSatisfyingConstraint:(CLBeaconIdentityConstraint *)constraint API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, tvos, macos);
 
 /*
  *	allowDeferredLocationUpdatesUntilTraveled:timeout:
@@ -614,7 +650,7 @@ API_AVAILABLE(macos(10.6), ios(2.0))
  *		criteria have not been met.
  */
 - (void)allowDeferredLocationUpdatesUntilTraveled:(CLLocationDistance)distance
-					  timeout:(NSTimeInterval)timeout API_AVAILABLE(ios(6.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(watchos, tvos);
+                                          timeout:(NSTimeInterval)timeout API_DEPRECATED("You can remove calls to this method", ios(6.0, 13.0)) API_UNAVAILABLE(macos, macCatalyst) API_UNAVAILABLE(watchos, tvos);
 
 /*
  *	disallowDeferredLocationUpdates
@@ -623,7 +659,7 @@ API_AVAILABLE(macos(10.6), ios(2.0))
  *		Disallow deferred location updates if previously enabled. Any outstanding
  *		updates will be sent and regular location updates will resume.
  */
-- (void)disallowDeferredLocationUpdates API_AVAILABLE(ios(6.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(watchos, tvos);
+- (void)disallowDeferredLocationUpdates API_DEPRECATED("You can remove calls to this method", ios(6.0, 13.0)) API_UNAVAILABLE(macos, macCatalyst) API_UNAVAILABLE(watchos, tvos);
 
 /*
  *  deferredLocationUpdatesAvailable
@@ -631,7 +667,7 @@ API_AVAILABLE(macos(10.6), ios(2.0))
  *  Discussion:
  *      Returns YES if the device supports deferred location updates, otherwise NO.
  */
-+ (BOOL)deferredLocationUpdatesAvailable API_AVAILABLE(ios(6.0), macos(10.9)) API_UNAVAILABLE(watchos, tvos);
++ (BOOL)deferredLocationUpdatesAvailable API_DEPRECATED("You can remove calls to this method", ios(6.0, 13.0), macos(10.9, 10.15)) API_UNAVAILABLE(watchos, tvos);
 
 @end
 

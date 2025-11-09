@@ -1,6 +1,6 @@
 .\" see 'man mdoc' for syntax examples
 .\" this should go in /usr/share/man/man1/
-.Dd May 25, 2018
+.Dd June 18, 2019
 .Dt profiles 1
 .Os macOS
 .Sh NAME
@@ -17,6 +17,8 @@ is used to install, remove, list, or otherwise handle various profile types on m
 Note that the command parameters have changed starting in version 5.0 of this tool, but the older options are still valid and can also be used.  Use the man profiles.old(1) page to view the old parameters.  These older style options will not be updated to provide support for some of the newer profiles tool features, so it's suggested you move to use the new parameter structure.
 .Pp
 To prevent unintended installations, profiles containing certain payloads (specifically com.apple.Safari) will require a manual verification even when running as root.
+.Pp
+WARNING: In the future, some features in this tool may be removed in favor of using user approved, high level UI to install configuration profiles.  Clients should instead use the Profiles System Preferences pane to install configuration profiles.
 .Pp
 .Sh VERBS
 Each command verb is listed with its description and optional individual arguments.   Most commands use the -type option to determine which kind of profile should be used in the command.  For those commands, if no type is specified, the default will be to use the configuration profile type.
@@ -53,7 +55,7 @@ Show expanded information for profiles.   For an enrollment, this will show the 
 .Sy -path Ar file_path
 .Sy -forced
 .br
-Install profiles.   Installing a startup profile only sets up the profile for installation at restart time.
+Install profiles.   Installing a startup profile only sets up the profile for installation at restart time.   The profile type "enrollment" cannot be used in this command.
 .Pp
 .\"             -- remove --
 .It Sy remove
@@ -106,7 +108,7 @@ Displays current tool version.
 .Bl -tag -width indent
 .Pp
 .It Fl type Ar profile_type
-The profile_type can be one of either: "configuration", "provisioning", "startup", or "enrollment" (DEP).  If a command requires a profile type and none is specified, "configuration" will be used.
+The profile_type can be one of either: "configuration", "provisioning", "startup", "bootstraptoken", or "enrollment" (DEP).  If a command requires a profile type and none is specified, "configuration" will be used.
 .It Fl path Ar file_path
 A file path or "-" to represent stdout.   When used by the remove command for startup profiles, this should only contain the file name of the profile.
 .It Fl user Ar user_name
@@ -140,6 +142,8 @@ A provisioning profile.
 A device enrollment program (DEP) or mobile device management (MDM) enrollment profile or feature.
 .It startup
 A startup-enabled configuration profile.
+.It bootstraptoken
+Bootstrap Token options.   Requires DEP enrolled MDM client.
 .El
 .Pp
 .Sh EXAMPLES
@@ -165,6 +169,8 @@ Sets up the profile as a startup profile to be triggered at the next system star
 Displays the current DEP configuration information.
 .It profiles renew -type enrollment
 Re-enables the DEP user notification enrollment messages.
+.It profiles install -type bootstraptoken
+Creates or updates the Bootstrap Token APFS record and escrows the information to the server.
 .El                      \" Ends the list
 .Sh SEE ALSO
 .Xr profiles.old 1

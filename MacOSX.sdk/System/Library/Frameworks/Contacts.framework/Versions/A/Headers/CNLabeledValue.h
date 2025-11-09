@@ -2,7 +2,7 @@
 //  CNLabeledValue.h
 //  Contacts
 //
-//  Copyright (c) 2015 Apple Inc. All rights reserved.
+//  Copyright (c) 2015–2019 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -54,6 +54,7 @@ NS_CLASS_AVAILABLE(10_11, 9_0)
 // Generic labels
 CONTACTS_EXTERN NSString * const CNLabelHome                             NS_AVAILABLE(10_11, 9_0);
 CONTACTS_EXTERN NSString * const CNLabelWork                             NS_AVAILABLE(10_11, 9_0);
+CONTACTS_EXTERN NSString * const CNLabelSchool                           NS_AVAILABLE(10_15, 13_0);
 CONTACTS_EXTERN NSString * const CNLabelOther                            NS_AVAILABLE(10_11, 9_0);
 
 // Additional email labels

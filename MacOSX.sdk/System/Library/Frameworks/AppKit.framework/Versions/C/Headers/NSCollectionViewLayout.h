@@ -1,7 +1,7 @@
 /*
     NSCollectionViewLayout.h
     Application Kit
-    Copyright (c) 2015-2018, Apple Inc.
+    Copyright (c) 2015-2019, Apple Inc.
     All rights reserved.
 */
 
@@ -19,49 +19,25 @@ typedef NS_ENUM(NSInteger, NSCollectionElementCategory) {
     NSCollectionElementCategorySupplementaryView,
     NSCollectionElementCategoryDecorationView,
     NSCollectionElementCategoryInterItemGap
-} NS_ENUM_AVAILABLE_MAC(10_11);
+} API_AVAILABLE(macos(10.11));
 
 @class NSIndexPath;
 
 NS_ASSUME_NONNULL_BEGIN
+API_UNAVAILABLE_BEGIN(ios)
 
 typedef NSString * NSCollectionViewDecorationElementKind NS_SWIFT_BRIDGED_TYPEDEF;
 
 /* The elementKind that NSCollectionView uses to identify an inter-item gap, when the proposedDropOperation is NSCollectionViewDropBefore.  A client can customize the default look of the inter-item gap drop target indicator by registering a supplementary view nib or class for this elementKind.  If your -collectionView:validateDrop:proposedIndexPath:dropOperation: method disallows NSCollectionViewDropBefore operations, the CollectionView won't show this indicator.
 */
-APPKIT_EXTERN NSCollectionViewSupplementaryElementKind const NSCollectionElementKindInterItemGapIndicator NS_AVAILABLE_MAC(10_11);
+APPKIT_EXTERN NSCollectionViewSupplementaryElementKind const NSCollectionElementKindInterItemGapIndicator API_AVAILABLE(macos(10.11));
 
 @class NSCollectionViewLayoutAttributes;
 @class NSCollectionView;
 @class NSNib;
 
-NS_CLASS_AVAILABLE_MAC(10_11)
+API_AVAILABLE(macos(10.11))
 @interface NSCollectionViewLayoutAttributes : NSObject <NSCopying>
-#ifndef __OBJC2__
-{
-@private
-    NSString* _elementKind APPKIT_IVAR;
-    NSString* _reuseIdentifier APPKIT_IVAR;
-    NSPoint _center APPKIT_IVAR;
-    NSSize _size APPKIT_IVAR;
-    NSRect _frame APPKIT_IVAR;
-    CGFloat _alpha APPKIT_IVAR;
-    CGFloat _reserved2[16] APPKIT_IVAR;
-    NSIndexPath* _indexPath APPKIT_IVAR;
-    NSString *_isCloneString APPKIT_IVAR;
-    struct {
-        unsigned int isCellKind:1;
-        unsigned int isDecorationView:1;
-        unsigned int isHidden:1;
-        unsigned int isClone:1;
-        unsigned int isInterItemGap:1;
-        unsigned int isInterSectionGap:1;
-        unsigned int reserved:26;
-    } _layoutFlags APPKIT_IVAR;
-    NSInteger _zIndex APPKIT_IVAR;
-    id _reserved[32] APPKIT_IVAR;
-}
-#endif
 
 @property NSRect frame;
 @property NSSize size;
@@ -86,20 +62,10 @@ typedef NS_ENUM(NSInteger, NSCollectionUpdateAction) {
     NSCollectionUpdateActionReload,
     NSCollectionUpdateActionMove,
     NSCollectionUpdateActionNone
-} NS_ENUM_AVAILABLE_MAC(10_11);
+} API_AVAILABLE(macos(10.11));
 
-NS_CLASS_AVAILABLE_MAC(10_11)
+API_AVAILABLE(macos(10.11))
 @interface NSCollectionViewUpdateItem : NSObject
-#ifndef __OBJC2__
-{
-@private
-    NSIndexPath* _initialIndexPath APPKIT_IVAR;
-    NSIndexPath* _finalIndexPath APPKIT_IVAR;
-    NSCollectionUpdateAction _updateAction APPKIT_IVAR;
-    id _gap APPKIT_IVAR;
-    id _reserved[11] APPKIT_IVAR;
-}
-#endif
 
 @property (nullable, readonly) NSIndexPath *indexPathBeforeUpdate; // nil for NSCollectionUpdateActionInsert
 @property (nullable, readonly) NSIndexPath *indexPathAfterUpdate; // nil for NSCollectionUpdateActionDelete
@@ -107,27 +73,8 @@ NS_CLASS_AVAILABLE_MAC(10_11)
 
 @end
 
-NS_CLASS_AVAILABLE_MAC(10_11)
+API_AVAILABLE(macos(10.11))
 @interface NSCollectionViewLayoutInvalidationContext : NSObject
-#ifndef __OBJC2__
-{
-@private
-    NSMutableSet* _invalidatedItemIndexPaths APPKIT_IVAR;
-    NSMutableDictionary* _invalidatedSupplementaryIndexPaths APPKIT_IVAR;
-    NSMutableDictionary* _invalidatedDecorationIndexPaths APPKIT_IVAR;
-    NSArray* _updateItems APPKIT_IVAR;
-    
-    CGPoint _contentOffsetAdjustment APPKIT_IVAR;
-    CGSize _contentSizeAdjustment APPKIT_IVAR;
-    
-    struct {
-        unsigned int invalidateDataSource:1;
-        unsigned int invalidateEverything:1;
-        unsigned int reserved:30;
-    } _invalidationContextFlags APPKIT_IVAR;
-    id _reserved[6] APPKIT_IVAR;
-}
-#endif
 
 @property (readonly) BOOL invalidateEverything; // set to YES when invalidation occurs because the collection view is sent -reloadData
 @property (readonly) BOOL invalidateDataSourceCounts; // if YES, the layout should requery section and item counts from the collection view - set to YES when the collection view is sent -reloadData and when items are inserted or deleted
@@ -146,47 +93,8 @@ NS_CLASS_AVAILABLE_MAC(10_11)
 
 /* The NSCollectionViewLayout class is provided as an abstract class for subclassing to define custom collection layouts.  Defining a custom layout is an advanced operation intended for applications with complex needs.
 */
-NS_CLASS_AVAILABLE_MAC(10_11)
+API_AVAILABLE(macos(10.11))
 @interface NSCollectionViewLayout : NSObject <NSCoding>
-#ifndef __OBJC2__
-{
-@package
-    CGSize _collectionViewBoundsSize APPKIT_IVAR;
-    NSMutableDictionary* _initialAnimationLayoutAttributesDict APPKIT_IVAR;
-    NSMutableDictionary* _finalAnimationLayoutAttributesDict APPKIT_IVAR;
-    NSMutableDictionary* _deletedSupplementaryIndexPathsDict APPKIT_IVAR;
-    NSMutableDictionary* _insertedSupplementaryIndexPathsDict APPKIT_IVAR;
-    NSMutableDictionary* _deletedDecorationIndexPathsDict APPKIT_IVAR;
-    NSMutableDictionary* _insertedDecorationIndexPathsDict APPKIT_IVAR;
-    NSMutableIndexSet* _deletedSectionsSet APPKIT_IVAR;
-    NSMutableIndexSet* _insertedSectionsSet APPKIT_IVAR;
-    
-    NSMutableDictionary* _decorationViewClassDict APPKIT_IVAR;
-    NSMutableDictionary* _decorationViewNibDict APPKIT_IVAR;
-    NSMutableDictionary* _decorationViewExternalObjectsTables APPKIT_IVAR;
-    
-    NSCollectionViewLayout* _transitioningFromLayout APPKIT_IVAR;
-    NSCollectionViewLayout* _transitioningToLayout APPKIT_IVAR;
-    
-    NSCollectionViewLayoutInvalidationContext* _invalidationContext APPKIT_IVAR;
-    
-    CGRect _frame APPKIT_IVAR;
-    NSIndexSet* _sections APPKIT_IVAR;
-    NSIndexSet* _items APPKIT_IVAR;
-    NSArray* _elementKinds APPKIT_IVAR;
-    NSCollectionViewLayout* _siblingLayout APPKIT_IVAR;
-    CGPoint _layoutOffset APPKIT_IVAR;
-    NSUInteger _layoutOffsetEdges APPKIT_IVAR;
-    
-    struct {
-        unsigned int inTransitionFromTransitionLayout:1;
-        unsigned int inTransitionToTransitionLayout:1;
-        unsigned int prepared:1;
-        unsigned int reserved:29;
-    } _layoutFlags APPKIT_IVAR;
-    id _reserved[3] APPKIT_IVAR;
-}
-#endif
 
 /* Methods in this class are meant to be overridden and will be called by its collection view to gather layout information.  To get the truth on the current state of the collection view, call methods on NSCollectionView rather than these.
 */
@@ -276,4 +184,5 @@ NS_CLASS_AVAILABLE_MAC(10_11)
 
 @end
 
+API_UNAVAILABLE_END
 NS_ASSUME_NONNULL_END

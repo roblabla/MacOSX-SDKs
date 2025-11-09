@@ -175,6 +175,8 @@ CFN_EXPORT const CFStringRef kCFStreamNetworkServiceTypeVoice      CF_AVAILABLE(
 CFN_EXPORT const CFStringRef kCFStreamNetworkServiceTypeBackground CF_AVAILABLE(10_7, 5_0);   // background
 CFN_EXPORT const CFStringRef kCFStreamNetworkServiceTypeResponsiveData __OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_6_0); // responsive (time sensitive) data
 CFN_EXPORT const CFStringRef kCFStreamNetworkServiceTypeCallSignaling	   CF_AVAILABLE(10_12, 10_0); //Call Signaling
+CFN_EXPORT const CFStringRef kCFStreamNetworkServiceTypeAVStreaming __OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_6_0);					// multimedia audio/video streaming
+CFN_EXPORT const CFStringRef kCFStreamNetworkServiceTypeResponsiveAV __OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_6_0);				// responsive multimedia audio/video
 
 /* deprecated network service type: */
 CFN_EXPORT const CFStringRef kCFStreamNetworkServiceTypeVoIP       CF_DEPRECATED(10_7, 10_11, 4_0, 9_0, "use PushKit for VoIP control purposes");   // voice over IP control - this service type is deprecated in favor of using PushKit for VoIP control
@@ -202,6 +204,43 @@ CFN_EXPORT const CFStringRef kCFStreamPropertyNoCellular CF_AVAILABLE(10_8, 5_0)
  *  interface or has not yet established a connection.
  */
 CFN_EXPORT const CFStringRef kCFStreamPropertyConnectionIsCellular CF_AVAILABLE(10_8, 6_0);
+
+/*
+ *  kCFStreamPropertyAllowExpensiveNetworkAccess
+ *
+ *  Discussion:
+ *  Stream property value, for both set and copy operations.
+ *  The value is a CFBooleanRef which indicates whether the connection
+ *  is allowed to use network interfaces that are marked expensive.  A value of
+ *  kCFBooleanTrue (the default) allows use of expensive interfaces.  kCFBooleanFalse
+ *  disallows use of expensive interfaces.
+ *
+ */
+CFN_EXPORT const CFStringRef kCFStreamPropertyAllowExpensiveNetworkAccess API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0));
+
+/*
+ *  kCFStreamPropertyConnectionIsExpensive
+ *
+ *  Discussion:
+ *  Stream property key for copy operations.  Returns a CFBooleanRef value
+ *  of kCFBooleanTrue if the stream has connected using an "expensive" interface.
+ *  It returns kCFBooleanFalse if the stream is conneceted over an "inexpensive"
+ *  interface.  If the connection has not been established yet NULL will be returned.
+ */
+CFN_EXPORT const CFStringRef kCFStreamPropertyConnectionIsExpensive API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0));
+
+/*
+ *  kCFStreamPropertyAllowConstrainedNetworkAccess
+ *
+ *  Discussion:
+ *  Stream property value, for both set and copy operations.
+ *  The value is a CFBooleanRef which indicates whether the connection
+ *  is allowed to use "constrained" networks.  A value of kCFBooleanTrue (the default)
+ *  allows the  use of constrained interfaces.  kCFBooleanFalse
+ *  disallows use of constrained interfaces.
+ *
+ */
+CFN_EXPORT const CFStringRef kCFStreamPropertyAllowConstrainedNetworkAccess API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0));
 
 /*
  *  kCFStreamErrorDomainWinSock

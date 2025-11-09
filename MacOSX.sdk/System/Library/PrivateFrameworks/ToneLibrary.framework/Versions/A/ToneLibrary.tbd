@@ -1,8 +1,8 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 3AEA8490-6454-3156-B11D-6B816EA2FE9A' ]
-platform:        macosx
-install-name:    /System/Library/PrivateFrameworks/ToneLibrary.framework/Versions/A/ToneLibrary
+uuids:           [ 'x86_64: F4DC0F41-F79A-3702-B71A-EE6080CE4FB4', 'x86_64: F4DC0F41-F79A-3702-B71A-EE6080CE4FB4' ]
+platform:        zippered
+install-name:    '/System/Library/PrivateFrameworks/ToneLibrary.framework/Versions/A/ToneLibrary'
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _NSStringFromTLAlertPlaybackCompletionType, _NSStringFromTLAlertType, 
@@ -16,7 +16,10 @@ exports:
                        _TLAlertTopicPhotosNotificationSharingPost, _TLAlertTopicSOSButtonChordingTimeout, 
                        _TLAlertTopicSOSCountdownPreannounce, _TLAlertTopicSOSCountdownTick, 
                        _TLAlertTopicSOSDialStart, _TLAlertTopicSystemNotificationFindMyDevice, 
-                       _TLAlertTopicSystemNotificationGeneric, _TLAlertTopicTextMessageInConversation, 
+                       _TLAlertTopicSystemNotificationGeneric, _TLAlertTopicTextMessageAcknowledgmentExclamation, 
+                       _TLAlertTopicTextMessageAcknowledgmentHaHa, _TLAlertTopicTextMessageAcknowledgmentHeart, 
+                       _TLAlertTopicTextMessageAcknowledgmentQuestionMark, _TLAlertTopicTextMessageAcknowledgmentThumbsDown, 
+                       _TLAlertTopicTextMessageAcknowledgmentThumbsUp, _TLAlertTopicTextMessageInConversation, 
                        _TLAlertTopicWalkieTalkieActiveEnd, _TLAlertTopicWalkieTalkieActiveStart, 
                        _TLAlertTypeFromString, _TLLocalizedString, _TLLogGeneral, 
                        _TLLogPlayback, _TLLogToneManagement, _TLLogVibrationManagement, 
@@ -34,8 +37,9 @@ exports:
                        _kToneStoreItemIdentifierKey, _kToneSyncIdentifierKey, _kToneTitleKey ]
     objc-classes:    [ TLAccessQueue, TLAlert, TLAlertActivationAssertion, TLAlertConfiguration, 
                        TLAlertContext, TLAlertController, TLAlertPlaybackCompletionContext, 
-                       TLAlertQueuePlayerController, TLAlertStoppingOptions, TLAlertSystemSoundContext, 
-                       TLAlertSystemSoundController, TLAlertTone, TLBacklight, TLCapabilitiesManager, 
+                       TLAlertPlaybackPolicy, TLAlertQueuePlayerController, TLAlertStoppingOptions, 
+                       TLAlertSystemSoundContext, TLAlertSystemSoundController, TLAlertTone, 
+                       TLBacklight, TLCapabilitiesManager, TLContentProtectionStateObserver, 
                        TLITunesTone, TLPreferencesUtilities, TLSystemApplication, 
                        TLSystemSound, TLToneManager, TLToneStoreDownload ]
 ...

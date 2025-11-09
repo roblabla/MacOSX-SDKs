@@ -2,7 +2,7 @@
 //  INPerson.h
 //  Intents
 //
-//  Copyright (c) 2016-2017 Apple Inc. All rights reserved.
+//  Copyright (c) 2016-2019 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -14,7 +14,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-API_AVAILABLE(macosx(10.12), ios(10.0), watchos(3.2))
+API_AVAILABLE(ios(10.0), watchos(3.2)) API_UNAVAILABLE(macosx)
 @interface INPerson : NSObject <NSCopying, NSSecureCoding>
 
 - (instancetype)init NS_UNAVAILABLE;
@@ -54,12 +54,12 @@ API_AVAILABLE(macosx(10.12), ios(10.0), watchos(3.2))
 @property (readonly, copy, nullable, NS_NONATOMIC_IOSONLY) NSString *customIdentifier;
 
 // This person's relationship to the user
-@property (readonly, copy, nullable, NS_NONATOMIC_IOSONLY) INPersonRelationship relationship API_AVAILABLE(ios(10.2), macosx(10.12.2));
+@property (readonly, copy, nullable, NS_NONATOMIC_IOSONLY) INPersonRelationship relationship API_AVAILABLE(ios(10.2)) API_UNAVAILABLE(macosx);
 
 @end
 
 typedef NS_ENUM(NSInteger, INPersonSuggestionType) {
-    INPersonSuggestionTypeNone API_AVAILABLE(macosx(10.14), ios(12.0), watchos(5.0)) = 0,
+    INPersonSuggestionTypeNone API_AVAILABLE(ios(12.0), watchos(5.0)) API_UNAVAILABLE(macosx) = 0,
     INPersonSuggestionTypeSocialProfile,
     INPersonSuggestionTypeInstantMessageAddress
 };

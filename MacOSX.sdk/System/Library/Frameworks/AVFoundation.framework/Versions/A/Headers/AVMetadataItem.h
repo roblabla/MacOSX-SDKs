@@ -40,17 +40,17 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class AVMetadataItemInternal;
 
-NS_CLASS_AVAILABLE(10_7, 4_0)
+API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0))
 @interface AVMetadataItem : NSObject <AVAsynchronousKeyValueLoading, NSCopying, NSMutableCopying>
 {
 	AVMetadataItemInternal	*_priv;
 }
 
 /* Indicates the identifier of the metadata item. Publicly defined identifiers are declared in AVMetadataIdentifiers.h. */
-@property (nonatomic, readonly, copy, nullable) AVMetadataIdentifier identifier NS_AVAILABLE(10_10, 8_0);
+@property (nonatomic, readonly, copy, nullable) AVMetadataIdentifier identifier API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(1.0));
 
 /* indicates the IETF BCP 47 (RFC 4646) language identifier of the metadata item; may be nil if no language tag information is available */
-@property (nonatomic, readonly, copy, nullable) NSString *extendedLanguageTag NS_AVAILABLE(10_10, 8_0);
+@property (nonatomic, readonly, copy, nullable) NSString *extendedLanguageTag API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(1.0));
 
 /* indicates the locale of the metadata item; may be nil if no locale information is available for the metadata item */
 @property (nonatomic, readonly, copy, nullable) NSLocale *locale;
@@ -59,10 +59,10 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 @property (nonatomic, readonly) CMTime time;
 
 /* indicates the duration of the metadata item */
-@property (nonatomic, readonly) CMTime duration NS_AVAILABLE(10_7, 4_2);
+@property (nonatomic, readonly) CMTime duration API_AVAILABLE(macos(10.7), ios(4.2), tvos(9.0), watchos(1.0));
 
 /* indicates the data type of the metadata item's value.  Publicly defined data types are declared in <CoreMedia/CMMetadata.h> */
-@property (nonatomic, readonly, copy, nullable) NSString *dataType NS_AVAILABLE(10_10, 8_0);
+@property (nonatomic, readonly, copy, nullable) NSString *dataType API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(1.0));
 
 /* provides the value of the metadata item */
 @property (nonatomic, readonly, copy, nullable) id<NSObject, NSCopying> value;
@@ -76,7 +76,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 @interface AVMetadataItem (AVMetadataItemDateRepresentation)
 
 /* indicates the start date of the timed metadata; nil if no date is indicated */
-@property (nonatomic, readonly, copy, nullable) NSDate *startDate NS_AVAILABLE(10_11, 9_0);
+@property (nonatomic, readonly, copy, nullable) NSDate *startDate API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(2.0));
 
 @end
 
@@ -102,9 +102,9 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 
 /* The following two methods of the AVAsynchronousKeyValueLoading protocol are re-declared here so that they can be annotated with availability information. See AVAsynchronousKeyValueLoading.h for documentation. */
 
-- (AVKeyValueStatus)statusOfValueForKey:(NSString *)key error:(NSError * _Nullable * _Nullable)outError NS_AVAILABLE(10_7, 4_2);
+- (AVKeyValueStatus)statusOfValueForKey:(NSString *)key error:(NSError * _Nullable * _Nullable)outError API_AVAILABLE(macos(10.7), ios(4.2), tvos(9.0), watchos(1.0));
 
-- (void)loadValuesAsynchronouslyForKeys:(NSArray<NSString *> *)keys completionHandler:(nullable void (^)(void))handler NS_AVAILABLE(10_7, 4_2);
+- (void)loadValuesAsynchronouslyForKeys:(NSArray<NSString *> *)keys completionHandler:(nullable void (^)(void))handler API_AVAILABLE(macos(10.7), ios(4.2), tvos(9.0), watchos(1.0));
 
 @end
 
@@ -120,7 +120,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 				An array of language identifiers in order of preference, each of which is an IETF BCP 47 (RFC 4646) language identifier. Use +[NSLocale preferredLanguages] to obtain the user's list of preferred languages.
  @result		An instance of NSArray containing metadata items of the specified NSArray that match a preferred language, sorted according to the order of preference of the language each matches.
 */
-+ (NSArray<AVMetadataItem *> *)metadataItemsFromArray:(NSArray<AVMetadataItem *> *)metadataItems filteredAndSortedAccordingToPreferredLanguages:(NSArray<NSString *> *)preferredLanguages NS_AVAILABLE(10_8, 6_0);
++ (NSArray<AVMetadataItem *> *)metadataItemsFromArray:(NSArray<AVMetadataItem *> *)metadataItems filteredAndSortedAccordingToPreferredLanguages:(NSArray<NSString *> *)preferredLanguages API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(1.0));
 
 /*!
 	@method			metadataItemsFromArray:filteredByIdentifier:
@@ -131,7 +131,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 	The identifier that must be matched for a metadata item to be copied to the output array. Items are considered a match not only when their identifiers are equal to the specified identifier, and also when their identifiers conform to the specified identifier.
 	@result			An instance of NSArray containing the metadata items of the target NSArray that match the specified identifier.
 */
-+ (NSArray<AVMetadataItem *> *)metadataItemsFromArray:(NSArray<AVMetadataItem *> *)metadataItems filteredByIdentifier:(AVMetadataIdentifier)identifier NS_AVAILABLE(10_10, 8_0);
++ (NSArray<AVMetadataItem *> *)metadataItemsFromArray:(NSArray<AVMetadataItem *> *)metadataItems filteredByIdentifier:(AVMetadataIdentifier)identifier API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(1.0));
 
 /*!
 	@method			metadataItemsFromArray:filteredByMetadataItemFilter:
@@ -142,7 +142,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 					The AVMetadataItemFilter object for filtering the metadataItems.
 	@result			An instance of NSArray containing the metadata items of the target NSArray that have not been removed by metadataItemFilter.
 */
-+ (NSArray<AVMetadataItem *> *)metadataItemsFromArray:(NSArray<AVMetadataItem *> *)metadataItems filteredByMetadataItemFilter:(AVMetadataItemFilter *)metadataItemFilter NS_AVAILABLE(10_9, 7_0);
++ (NSArray<AVMetadataItem *> *)metadataItemsFromArray:(NSArray<AVMetadataItem *> *)metadataItems filteredByMetadataItemFilter:(AVMetadataItemFilter *)metadataItemFilter API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(1.0));
 
 @end
 
@@ -161,13 +161,13 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
  
 		For custom identifiers, the keySpace AVMetadataKeySpaceQuickTimeMetadata is recommended.  This keySpace defines its key values to be expressed as reverse-DNS strings, which allows third parties to define their own keys in a well established way that avoids collisions.
 */
-+ (nullable AVMetadataIdentifier)identifierForKey:(id)key keySpace:(AVMetadataKeySpace)keySpace NS_AVAILABLE(10_10, 8_0);
++ (nullable AVMetadataIdentifier)identifierForKey:(id)key keySpace:(AVMetadataKeySpace)keySpace API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(1.0));
 
 /* provides the metadata keySpace indicated by the identifier  */
-+ (nullable AVMetadataKeySpace)keySpaceForIdentifier:(AVMetadataIdentifier)identifier NS_AVAILABLE(10_10, 8_0);
++ (nullable AVMetadataKeySpace)keySpaceForIdentifier:(AVMetadataIdentifier)identifier API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(1.0));
 
 /* provides the metadata key indicated by the identifier  */
-+ (nullable id)keyForIdentifier:(AVMetadataIdentifier)identifier NS_AVAILABLE(10_10, 8_0);
++ (nullable id)keyForIdentifier:(AVMetadataIdentifier)identifier API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(1.0));
 
 /* indicates the key of the metadata item */
 @property (nonatomic, readonly, copy, nullable) id<NSObject, NSCopying> key;
@@ -193,17 +193,17 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 
 @class AVMutableMetadataItemInternal;
 
-NS_CLASS_AVAILABLE(10_7, 4_0)
+API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0))
 @interface AVMutableMetadataItem : AVMetadataItem
 {
 	AVMutableMetadataItemInternal	*_mutablePriv;
 }
 
 /* Indicates the identifier of the metadata item. Publicly defined identifiers are declared in AVMetadataIdentifiers.h. */
-@property (nonatomic, readwrite, copy, nullable) AVMetadataIdentifier identifier NS_AVAILABLE(10_10, 8_0);
+@property (nonatomic, readwrite, copy, nullable) AVMetadataIdentifier identifier API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(1.0));
 
 /* indicates the IETF BCP 47 (RFC 4646) language identifier of the metadata item; may be nil if no language tag information is available */
-@property (nonatomic, readwrite, copy, nullable) NSString *extendedLanguageTag NS_AVAILABLE(10_10, 8_0);
+@property (nonatomic, readwrite, copy, nullable) NSString *extendedLanguageTag API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(1.0));
 
 /* indicates the locale of the metadata item; may be nil if no locale information is available for the metadata item */
 @property (nonatomic, readwrite, copy, nullable) NSLocale *locale;
@@ -212,10 +212,10 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 @property (nonatomic, readwrite) CMTime time;
 
 /* indicates the duration of the metadata item */
-@property (nonatomic, readwrite) CMTime duration NS_AVAILABLE(10_7, 4_2);
+@property (nonatomic, readwrite) CMTime duration API_AVAILABLE(macos(10.7), ios(4.2), tvos(9.0), watchos(1.0));
 
 /* indicates the data type of the metadata item's value.  Publicly defined data types are declared in <CoreMedia/CMMetadata.h> */
-@property (nonatomic, readwrite, copy, nullable) NSString *dataType NS_AVAILABLE(10_10, 8_0);
+@property (nonatomic, readwrite, copy, nullable) NSString *dataType API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(1.0));
 
 /* provides the value of the metadata item */
 @property (nonatomic, readwrite, copy, nullable) id<NSObject, NSCopying> value;
@@ -234,7 +234,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 @interface AVMutableMetadataItem (AVMutableMetadataItemDateRepresentation)
 
 /* indicates the start date of the timed metadata; nil if no date is indicated */
-@property (nonatomic, readwrite, copy, nullable) NSDate *startDate NS_AVAILABLE(10_11, 9_0);
+@property (nonatomic, readwrite, copy, nullable) NSDate *startDate API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(2.0));
 
 @end
 
@@ -264,13 +264,13 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
  		This method is intended for the creation of metadata items for optional display purposes, when there is no immediate need to load specific metadata values. For example, see the interface for navigation markers as consumed by AVPlayerViewController. It's not intended for the creation of metadata items with values that are required immediately, such as metadata items that are provided for impending serialization operations (e.g. via -[AVAssetExportSession setMetadata:] and other similar methods defined on AVAssetWriter and AVAssetWriterInput). 
 		When -loadValuesAsynchronouslyForKeys:completionHandler: is invoked on an AVMetadataItem created via +metadataItemWithPropertiesOfMetadataItem:valueLoadingHandler: and @"value" is among the keys for which loading is requested, the block you provide as the value loading handler will be executed on an arbitrary dispatch queue, off the main thread. The handler can perform I/O and other necessary operations to obtain the value. If loading of the value succeeds, provide the value by invoking -[AVMetadataItemValueRequest respondWithValue:]. If loading of the value fails, provide an instance of NSError that describes the failure by invoking -[AVMetadataItemValueRequest respondWithError:].
 */
-+ (AVMetadataItem *)metadataItemWithPropertiesOfMetadataItem:(AVMetadataItem *)metadataItem valueLoadingHandler:(void (^)(AVMetadataItemValueRequest *valueRequest))handler NS_AVAILABLE(10_11, 9_0);
++ (AVMetadataItem *)metadataItemWithPropertiesOfMetadataItem:(AVMetadataItem *)metadataItem valueLoadingHandler:(void (^)(AVMetadataItemValueRequest *valueRequest))handler API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(2.0));
 
 @end
 
 @class AVMetadataItemValueRequestInternal;
 
-NS_CLASS_AVAILABLE(10_11, 9_0)
+API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(2.0))
 @interface AVMetadataItemValueRequest : NSObject {
 @private
 	AVMetadataItemValueRequestInternal	*_valueRequest;
@@ -307,7 +307,7 @@ NS_CLASS_AVAILABLE(10_11, 9_0)
 
 @class AVMetadataItemFilterInternal;
 
-NS_CLASS_AVAILABLE(10_9, 7_0)
+API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 @interface AVMetadataItemFilter : NSObject {
 @private
 	AVMetadataItemFilterInternal	*_itemFilterInternal __attribute__((unused));

@@ -1,7 +1,7 @@
 /*
         NSApplicationScripting.h
         AppKit Framework
-        Copyright (c) 1997-2018, Apple Inc.
+        Copyright (c) 1997-2019, Apple Inc.
         All rights reserved.
 */
 
@@ -9,6 +9,7 @@
 #import <AppKit/NSApplication.h>
 
 NS_ASSUME_NONNULL_BEGIN
+API_UNAVAILABLE_BEGIN(ios)
 
 @class NSDocument, NSWindow;
 
@@ -26,9 +27,10 @@ NS_ASSUME_NONNULL_BEGIN
 @interface NSObject(NSApplicationScriptingDelegation)
 
 // Return YES if the receiving delegate object can respond to key value coding messages for a specific keyed attribute, to-one relationship, or to-many relationship.  Return NO otherwise.
-- (BOOL)application:(NSApplication *)sender delegateHandlesKey:(NSString *)key NS_DEPRECATED_MAC(10_0, API_TO_BE_DEPRECATED, "This is now an optional method of the NSApplicationDelegate protocol.");
+- (BOOL)application:(NSApplication *)sender delegateHandlesKey:(NSString *)key API_DEPRECATED("This is now an optional method of the NSApplicationDelegate protocol.", macos(10.0,API_TO_BE_DEPRECATED));
 
 @end
 #endif
 
+API_UNAVAILABLE_END
 NS_ASSUME_NONNULL_END

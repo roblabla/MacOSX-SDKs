@@ -45,15 +45,23 @@ ML_EXPORT
 - (nullable id<MLFeatureProvider>)predictionFromFeatures:(id<MLFeatureProvider>)input
                                                    error:(NSError **)error;
 
-/// Prediction with explict options
+/// Prediction with explicit options
 - (nullable id<MLFeatureProvider>)predictionFromFeatures:(id<MLFeatureProvider>)input
                                                  options:(MLPredictionOptions *)options
                                                    error:(NSError **)error;
 
-/// Batch prediction with explict options
+/// Batch prediction without explicit options
+- (nullable id<MLBatchProvider>)predictionsFromBatch:(id<MLBatchProvider>)inputBatch
+                                               error:(NSError **)error API_AVAILABLE(macos(10.14), ios(12.0), watchos(5.0), tvos(12.0));
+
+/// Batch prediction with explicit options
 - (nullable id<MLBatchProvider>)predictionsFromBatch:(id<MLBatchProvider>)inputBatch
                                              options:(MLPredictionOptions *)options
                                                error:(NSError **)error API_AVAILABLE(macos(10.14), ios(12.0), watchos(5.0), tvos(12.0));
+
+/// Provides value for the given parameter. Returns nil on error.
+- (nullable id)parameterValueForKey:(MLParameterKey *)key
+                              error:(NSError * _Nullable __autoreleasing * _Nullable)error API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0));
 
 @end
 

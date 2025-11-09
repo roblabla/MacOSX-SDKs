@@ -151,7 +151,7 @@ public:
 private:
 	
 
-#if !TARGET_OS_EMBEDDED
+#if !TARGET_OS_IPHONE
 	// Space reserved for future expansion.
 	OSMetaClassDeclareReservedUnused ( IOSCSIPeripheralDeviceNub,  1 );
 	OSMetaClassDeclareReservedUnused ( IOSCSIPeripheralDeviceNub,  2 );
@@ -169,7 +169,7 @@ private:
 	OSMetaClassDeclareReservedUnused ( IOSCSIPeripheralDeviceNub, 14 );
 	OSMetaClassDeclareReservedUnused ( IOSCSIPeripheralDeviceNub, 15 );
 	OSMetaClassDeclareReservedUnused ( IOSCSIPeripheralDeviceNub, 16 );
-#endif /* !TARGET_OS_EMBEDDED */
+#endif /* !TARGET_OS_IPHONE */
 	
 };
 
@@ -200,7 +200,7 @@ public:
 	
 private:
 	
-#if !TARGET_OS_EMBEDDED
+#if !TARGET_OS_IPHONE
 	// Space reserved for future expansion.
 	OSMetaClassDeclareReservedUnused ( IOSCSILogicalUnitNub,  1 );
 	OSMetaClassDeclareReservedUnused ( IOSCSILogicalUnitNub,  2 );
@@ -218,7 +218,7 @@ private:
 	OSMetaClassDeclareReservedUnused ( IOSCSILogicalUnitNub, 14 );
 	OSMetaClassDeclareReservedUnused ( IOSCSILogicalUnitNub, 15 );
 	OSMetaClassDeclareReservedUnused ( IOSCSILogicalUnitNub, 16 );
-#endif /* !TARGET_OS_EMBEDDED */
+#endif /* !TARGET_OS_IPHONE */
 	
 };
 

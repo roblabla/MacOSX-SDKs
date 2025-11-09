@@ -1,7 +1,7 @@
 /*
     NSMergePolicy.h
     Core Data
-    Copyright (c) 2004-2018, Apple Inc.
+    Copyright (c) 2004-2019, Apple Inc.
     All rights reserved.
 */
 
@@ -41,15 +41,6 @@ typedef NS_ENUM(NSUInteger, NSMergePolicyType) {
 
 API_AVAILABLE(macosx(10.7),ios(5.0))
 @interface NSMergeConflict : NSObject {
-#if (!__OBJC2__)
-@private
-    id _source;
-    id _snapshot1;
-    id _snapshot2;
-    id _snapshot3;
-    NSUInteger _newVersion;
-    NSUInteger _oldVersion;
-#endif
 }
 
 @property (readonly, retain) NSManagedObject* sourceObject;
@@ -86,15 +77,6 @@ API_AVAILABLE(macosx(10.7),ios(5.0))
  */
 API_AVAILABLE(macosx(10.11),ios(9.0))
 @interface NSConstraintConflict : NSObject {
-#if (!__OBJC2__)
-@private
-    NSArray *_constraint;
-    NSManagedObject *_databaseObject;
-    NSDictionary *_databaseSnapshot;
-    NSDictionary *_conflictedValues;
-    NSArray *_conflictingObjects;
-    NSArray *_conflictingSnapshots;
-#endif
 }
 
 @property (readonly, copy) NSArray <NSString *> *constraint; // The constraint which has been violated.
@@ -124,12 +106,6 @@ API_AVAILABLE(macosx(10.11),ios(9.0))
 
 API_AVAILABLE(macosx(10.7),ios(5.0))
 @interface NSMergePolicy : NSObject {
-#if (!__OBJC2__)
-@private
-    NSUInteger _type;
-    void* _reserved2;
-    void* _reserved3;
-#endif
 }
 
 @property (class, readonly, strong) NSMergePolicy *errorMergePolicy API_AVAILABLE(macosx(10.12),ios(10.0),tvos(10.0),watchos(3.0));

@@ -4,6 +4,7 @@
    All rights reserved. */
 
 #import <QuartzCore/CALayer.h>
+#import <QuartzCore/CAEDRMetadata.h>
 #import <Metal/MTLPixelFormat.h>
 #import <Metal/MTLDrawable.h>
 
@@ -29,7 +30,7 @@ NS_ASSUME_NONNULL_BEGIN
 /* This is an object that conforms to the MTLTexture protocol and will
  * typically be used to create an MTLRenderTargetDescriptor. */
 
-@property(readonly) id <MTLTexture> texture;
+@property(readonly) id<MTLTexture> texture;
 
 /* This is the CAMetalLayer responsible for displaying the drawable */
 
@@ -49,11 +50,16 @@ API_AVAILABLE(macos(10.11), ios(8.0), watchos(2.0), tvos(9.0))
 
 /* This property determines which MTLDevice the MTLTexture objects for
  * the drawables will be created from.
- * On iOS this defaults to the device returned by MTLCreateSystemDefaultDevice().
- * On MacOS this defaults to nil and must be set explicitly before asking for
+ * On iOS this defaults to MTLCreateSystemDefaultDevice().
+ * On macOS this defaults to nil and must be set explicitly before asking for
  * the first drawable. */
 
-@property(nullable, retain) id <MTLDevice> device;
+@property(nullable, retain) id<MTLDevice> device;
+
+/* This property returns the preferred MTLDevice for this CAMetalLayer. */
+
+@property(nullable, readonly) id<MTLDevice> preferredDevice
+  API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0));
 
 /* This property controls the pixel format of the MTLTexture objects.
  * The two supported values are MTLPixelFormatBGRA8Unorm and
@@ -77,19 +83,21 @@ API_AVAILABLE(macos(10.11), ios(8.0), watchos(2.0), tvos(9.0))
 
 @property CGSize drawableSize;
 
-/* Get the swap queue's next available drawable. Always blocks until a drawable is available.
- * Can return nil under the following conditions:
+/* Get the swap queue's next available drawable. Always blocks until a drawable
+ * is available. Can return nil under the following conditions:
  *     1) The layer has an invalid combination of drawable properties.
- *     2) All drawables in the swap queue are in-use and the 1 second timeout has elapsed.
- *        (except when `allowsNextDrawableTimeout' is set to NO)
+ *     2) All drawables in the swap queue are in-use and the 1 second timeout
+ *        has elapsed. (except when `allowsNextDrawableTimeout' is set to NO)
  *     3) Process is out of memory. */
 
-- (nullable id <CAMetalDrawable>)nextDrawable;
+- (nullable id<CAMetalDrawable>)nextDrawable;
 
-/* Controls the number maximum number of drawables in the swap queue. The default value is 3.
- * Values set outside of range [2, 3] are ignored and an exception will be thrown. */
+/* Controls the number maximum number of drawables in the swap queue. The
+ * default value is 3. Values set outside of range [2, 3] are ignored and an
+ * exception will be thrown. */
 
-@property NSUInteger maximumDrawableCount API_AVAILABLE(macos(10.13.2), ios(11.2), watchos(4.2), tvos(11.2));
+@property NSUInteger maximumDrawableCount
+  API_AVAILABLE(macos(10.13.2), ios(11.2), watchos(4.2), tvos(11.2));
 
 /* When false (the default value) changes to the layer's render buffer
  * appear on-screen asynchronously to normal layer updates. When true,
@@ -110,16 +118,26 @@ API_AVAILABLE(macos(10.11), ios(8.0), watchos(2.0), tvos(9.0))
 
 @property BOOL wantsExtendedDynamicRangeContent;
 
+/* Metadata describing extended dynamic range content in the layer's drawable.
+ * Must be set before calling nextDrawable. If non-nil, content may be
+ * tone mapped to match the current display characteristics. If nil, samples
+ * will be rendered without tone mapping and values above the maximum EDR value
+ * -[NSScreen maximumExtendedDynamicRangeColorComponentValue] may be clamped.
+ * Defaults to nil. */
+@property (strong, nullable) CAEDRMetadata *EDRMetadata API_AVAILABLE(macos(10.15));
+
 /* This property controls if this layer and its drawables will be synchronized
  * to the display's Vsync. The default value is YES. */
 
 @property BOOL displaySyncEnabled API_AVAILABLE(macos(10.13));
 
-/* Controls if `-nextDrawable' is allowed to timeout after 1 second and return nil if
- * the system does not have a free drawable available. The default value is YES.
- * If set to NO, then `-nextDrawable' will block forever until a free drawable is available. */
+/* Controls if `-nextDrawable' is allowed to timeout after 1 second and return
+ * nil if * the system does not have a free drawable available. The default
+ * value is YES. If set to NO, then `-nextDrawable' will block forever until a
+ * free drawable is available. */
 
-@property BOOL allowsNextDrawableTimeout API_AVAILABLE(macos(10.13), ios(11.0), watchos(4.0), tvos(11.0));
+@property BOOL allowsNextDrawableTimeout
+  API_AVAILABLE(macos(10.13), ios(11.0), watchos(4.0), tvos(11.0));
 
 @end
 

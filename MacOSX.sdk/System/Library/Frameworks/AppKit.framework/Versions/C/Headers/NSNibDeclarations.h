@@ -1,7 +1,7 @@
 /*
         NSNibDeclarations.h
         Application Kit
-        Copyright (c) 1996-2018, Apple Inc.
+        Copyright (c) 1996-2019, Apple Inc.
         All rights reserved.
 */
 
@@ -21,3 +21,6 @@
 #define IB_DESIGNABLE
 #endif
 
+#ifndef IBSegueAction
+#define IBSegueAction
+#endif

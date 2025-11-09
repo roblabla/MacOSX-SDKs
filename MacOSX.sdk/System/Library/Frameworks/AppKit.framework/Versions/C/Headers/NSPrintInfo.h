@@ -1,7 +1,7 @@
 /*
 	NSPrintInfo.h
 	Application Kit
-	Copyright (c) 1994-2018, Apple Inc.
+	Copyright (c) 1994-2019, Apple Inc.
 	All rights reserved.
 */
 
@@ -13,6 +13,7 @@
 #import <AppKit/NSPrinter.h>
 
 NS_ASSUME_NONNULL_BEGIN
+API_UNAVAILABLE_BEGIN(ios)
 
 @class NSPDFInfo, NSPrinter;
 
@@ -21,7 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
 typedef NS_ENUM(NSInteger, NSPaperOrientation) {
     NSPaperOrientationPortrait = 0,
     NSPaperOrientationLandscape = 1
-} NS_ENUM_AVAILABLE_MAC(10_9);
+} API_AVAILABLE(macos(10.9));
 
 /* Valid values for the NSPrintHorizontalPagination and NSPrintVerticalPagination attributes.
 */
@@ -68,9 +69,9 @@ APPKIT_EXTERN NSPrintInfoAttributeKey const NSPrintTime; // an NSDate containing
 APPKIT_EXTERN NSPrintInfoAttributeKey const NSPrintDetailedErrorReporting; // an NSNumber containing a boolean value
 APPKIT_EXTERN NSPrintInfoAttributeKey const NSPrintFaxNumber; // an NSString containing a fax number
 APPKIT_EXTERN NSPrintInfoAttributeKey const NSPrintPrinterName; // an NSString containing the name of a printer
-APPKIT_EXTERN NSPrintInfoAttributeKey const NSPrintSelectionOnly NS_AVAILABLE_MAC(10_6); // an NSNumber containing a boolean value
-APPKIT_EXTERN NSPrintInfoAttributeKey const NSPrintJobSavingURL NS_AVAILABLE_MAC(10_6); // an NSURL containing the location to which the job file will be saved, for NSPrintSaveJob
-APPKIT_EXTERN NSPrintInfoAttributeKey const NSPrintJobSavingFileNameExtensionHidden NS_AVAILABLE_MAC(10_6); // A boolean NSNumber for whether the job file's name extension should be hidden, for NSPrintSaveJob
+APPKIT_EXTERN NSPrintInfoAttributeKey const NSPrintSelectionOnly API_AVAILABLE(macos(10.6)); // an NSNumber containing a boolean value
+APPKIT_EXTERN NSPrintInfoAttributeKey const NSPrintJobSavingURL API_AVAILABLE(macos(10.6)); // an NSURL containing the location to which the job file will be saved, for NSPrintSaveJob
+APPKIT_EXTERN NSPrintInfoAttributeKey const NSPrintJobSavingFileNameExtensionHidden API_AVAILABLE(macos(10.6)); // A boolean NSNumber for whether the job file's name extension should be hidden, for NSPrintSaveJob
 
 /* Keys for page adornment attributes that are recognized by NSPrintInfo.
 */
@@ -88,11 +89,7 @@ APPKIT_EXTERN NSPrintJobDispositionValue const NSPrintCancelJob;
 
 typedef NSString *NSPrintInfoSettingKey NS_SWIFT_BRIDGED_TYPEDEF;
 
-@interface NSPrintInfo : NSObject<NSCopying, NSCoding> {
-    @private
-    NSMutableDictionary *_attributes APPKIT_IVAR;
-    id _moreVars APPKIT_IVAR;
-}
+@interface NSPrintInfo : NSObject<NSCopying, NSCoding>
 
 /* Set or get the "shared" instance of NSPrintInfo. The shared print info object is the one that is used automatically by -[NSPageLayout runModal] and +[NSPrintOperation printOperationWithView:].
 */
@@ -101,7 +98,7 @@ typedef NSString *NSPrintInfoSettingKey NS_SWIFT_BRIDGED_TYPEDEF;
 /* Given a dictionary that contains attribute entries, initialize. Attributes that are recognized by the NSPrintInfo class will be silently validated in the context of the printer selected by the attributes dictionary, or the default printer if the attributes dictionary selects no printer. Attributes that are not recognized by the NSPrintInfo class will be preserved, and returned in the dictionary returned by the -dictionary method, but otherwise ignored. This is the designated initializer for this class.
 */
 - (instancetype)initWithDictionary:(NSDictionary<NSPrintInfoAttributeKey, id> *)attributes NS_DESIGNATED_INITIALIZER;
-- (instancetype)initWithCoder:(NSCoder *)inDecoder NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithCoder:(NSCoder *)coder NS_DESIGNATED_INITIALIZER;
 - (instancetype)init; // Convience method that calls through to initWithDictionary:nil
 
 /* Return a dictionary that contains attribute entries. This dictionary may contain attributes that were not specified in the dictionary originally passed to this object by -initWithDictionary. Changes to this dictionary will be reflected in the values returned by subsequent invocations of other of this class' methods.
@@ -113,7 +110,7 @@ typedef NSString *NSPrintInfoSettingKey NS_SWIFT_BRIDGED_TYPEDEF;
 @property (nullable, copy) NSPrinterPaperName paperName;
 @property NSSize paperSize;
 @property NSPaperOrientation orientation;
-@property CGFloat scalingFactor NS_AVAILABLE_MAC(10_6);
+@property CGFloat scalingFactor API_AVAILABLE(macos(10.6));
 
 /* Set or get the values of the pagination attributes.
 */
@@ -157,58 +154,59 @@ typedef NSString *NSPrintInfoSettingKey NS_SWIFT_BRIDGED_TYPEDEF;
 
 /* The print info's print settings. You can put values in this dictionary to store them in any preset that the user creates while editing this print info with a print panel. Such values must be property list objects. This class is key-value coding (KVC) and key-value observing (KVO) compliant for "printSettings" so you can often bind controls in print panel accessory views directly to entries in this dictionary. You can also use this dictionary to get values that have been set by other parts of the printing system, like a printer driver's print dialog extension (the same sort of values that are returned by the Carbon Printing Manager's PMPrintSettingsGetValue() function). Other parts of the printing system often use key strings like "com.apple.print.PrintSettings.PMColorSyncProfileID" but dots like those in key strings wouldn't work well with KVC, so those dots are replaced with underscores in keys that appear in this dictionary, as in "com_apple_print_PrintSettings_PMColorSyncProfileID". You should use the same convention when adding entries to this dictionary.
 */
-@property (readonly, strong) NSMutableDictionary<NSPrintInfoSettingKey, id> *printSettings NS_AVAILABLE_MAC(10_5);
+@property (readonly, strong) NSMutableDictionary<NSPrintInfoSettingKey, id> *printSettings API_AVAILABLE(macos(10.5));
 
 /* Return a Printing Manager PMPrintSession, PMPageFormat, or PMPrintSettings object, respectively. The returned object is always consistent with the state of the NSPrintInfo at the moment the method is invoked, but isn't necessarily updated immediately if other NSPrintInfo methods like -setPaperSize: and -setPaperOrientation: are invoked. The returned object will always be valid (in the Printing Manager sense). If you set any values in the returned PMPageFormat or PMPrintSettings you should afterward invoke -updateFromPMPageFormat or -updateFromPMPrintSettings, respectively. You don't also have to call PMSessionValidatePageFormat() or PMSessionValidatePrintSettings() if you do that. You should not call PMRelease() for the returned object, except of course to balance any calls of PMRetain() you do.
 */
-- (void *)PMPrintSession NS_RETURNS_INNER_POINTER NS_AVAILABLE_MAC(10_5); // the result should be cast to PMPrintSession
-- (void *)PMPageFormat NS_RETURNS_INNER_POINTER NS_AVAILABLE_MAC(10_5); // the result should be cast to PMPageFormat
-- (void *)PMPrintSettings NS_RETURNS_INNER_POINTER NS_AVAILABLE_MAC(10_5); // the result should be cast to PMPrintSettings
+- (void *)PMPrintSession NS_RETURNS_INNER_POINTER API_AVAILABLE(macos(10.5)); // the result should be cast to PMPrintSession
+- (void *)PMPageFormat NS_RETURNS_INNER_POINTER API_AVAILABLE(macos(10.5)); // the result should be cast to PMPageFormat
+- (void *)PMPrintSettings NS_RETURNS_INNER_POINTER API_AVAILABLE(macos(10.5)); // the result should be cast to PMPrintSettings
 
 /* Given that the NSPrintInfo's PMPageFormat or PMPrintSettings has been changed by something other than the NSPrintInfo itself, update the NSPrintInfo to be consistent.
 */
-- (void)updateFromPMPageFormat NS_AVAILABLE_MAC(10_5);
-- (void)updateFromPMPrintSettings NS_AVAILABLE_MAC(10_5);
+- (void)updateFromPMPageFormat API_AVAILABLE(macos(10.5));
+- (void)updateFromPMPrintSettings API_AVAILABLE(macos(10.5));
 
 
 
 /* Set or get whether only the selected content should be printed.
 */
-@property (getter=isSelectionOnly) BOOL selectionOnly NS_AVAILABLE_MAC(10_6);
+@property (getter=isSelectionOnly) BOOL selectionOnly API_AVAILABLE(macos(10.6));
 
 /* Update the receiver with all settings and attributes present in the given NSPDFInfo. Entries in the given NSPDFInfo's attributes dictionary will be copied into the receiver's attributes dictionary ([self dictionary]). If inPDFInfo is the result of an NSPDFPanel with the NSPDFPanelRequestsParentDirectory option enabled, you must first modify inPDFInfo.URL by appending a file name. If inPDFInfo.URL points to a directory, this method will throw an exception.
 */
-- (void)takeSettingsFromPDFInfo:(NSPDFInfo *)inPDFInfo NS_AVAILABLE_MAC(10_9);
+- (void)takeSettingsFromPDFInfo:(NSPDFInfo *)inPDFInfo API_AVAILABLE(macos(10.9));
 
 @end
 
 @interface NSPrintInfo(NSDeprecated)
 
-+ (void)setDefaultPrinter:(nullable NSPrinter *)printer NS_DEPRECATED_MAC(10_0, 10_2, "NSPrintInfo's implementation has no effect");
++ (void)setDefaultPrinter:(nullable NSPrinter *)printer API_DEPRECATED("NSPrintInfo's implementation has no effect", macos(10.0,10.2));
 
 /* NSPrintInfo's implementation of this method recognizes only a small fixed set of paper names, and does not take the details of any particular printer into account.
 */
-+ (NSSize)sizeForPaperName:(nullable NSPrinterPaperName)name NS_DEPRECATED_MAC(10_0, 10_2, "Use -[NSPrinter pageSizeForPaper:] instead");
++ (NSSize)sizeForPaperName:(nullable NSPrinterPaperName)name API_DEPRECATED("Use -[NSPrinter pageSizeForPaper:] instead", macos(10.0,10.2));
 
 @end
 
-APPKIT_EXTERN NSString * const NSPrintFormName NS_DEPRECATED_MAC(10_0, 10_2, "NSPrintInfo does not recognize this attribute");
-APPKIT_EXTERN NSString * const NSPrintJobFeatures NS_DEPRECATED_MAC(10_0, 10_2, "NSPrintInfo does not recognize this attribute. -[NSPrintInfo setUpPrintOperationDefaultValues] sets a default value of an empty dictionary");
-APPKIT_EXTERN NSString * const NSPrintManualFeed NS_DEPRECATED_MAC(10_0, 10_2, "NSPrintInfo does not recognize this attribute");
-APPKIT_EXTERN NSString * const NSPrintPagesPerSheet NS_DEPRECATED_MAC(10_0, 10_2, "NSPrintInfo does not recognize this attribute. -[NSPrintInfo setUpPrintOperationDefaultValues] sets a default value of 1");
-APPKIT_EXTERN NSString * const NSPrintPaperFeed NS_DEPRECATED_MAC(10_0, 10_2, "NSPrintInfo does not recognize this attribute");
+APPKIT_EXTERN NSString * const NSPrintFormName API_DEPRECATED("NSPrintInfo does not recognize this attribute", macos(10.0,10.2));
+APPKIT_EXTERN NSString * const NSPrintJobFeatures API_DEPRECATED("NSPrintInfo does not recognize this attribute. -[NSPrintInfo setUpPrintOperationDefaultValues] sets a default value of an empty dictionary", macos(10.0,10.2));
+APPKIT_EXTERN NSString * const NSPrintManualFeed API_DEPRECATED("NSPrintInfo does not recognize this attribute", macos(10.0,10.2));
+APPKIT_EXTERN NSString * const NSPrintPagesPerSheet API_DEPRECATED("NSPrintInfo does not recognize this attribute. -[NSPrintInfo setUpPrintOperationDefaultValues] sets a default value of 1", macos(10.0,10.2));
+APPKIT_EXTERN NSString * const NSPrintPaperFeed API_DEPRECATED("NSPrintInfo does not recognize this attribute", macos(10.0,10.2));
 
-APPKIT_EXTERN NSString * const NSPrintSavePath NS_DEPRECATED_MAC(10_0, 10_6, "Use NSPrintJobSavingURL instead");
+APPKIT_EXTERN NSString * const NSPrintSavePath API_DEPRECATED("Use NSPrintJobSavingURL instead", macos(10.0,10.6));
 
 typedef NS_ENUM(NSUInteger, NSPrintingOrientation) {
-    NSPortraitOrientation NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSPaperOrientationPortrait", 10_0, 10_14) = 0,
-    NSLandscapeOrientation NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSPaperOrientationLandscape", 10_0, 10_14) = 1
-} NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSPaperOrientation", 10_0, 10_14);
+    NSPortraitOrientation API_DEPRECATED_WITH_REPLACEMENT("NSPaperOrientationPortrait", macos(10.0,10.14)) = 0,
+    NSLandscapeOrientation API_DEPRECATED_WITH_REPLACEMENT("NSPaperOrientationLandscape", macos(10.0,10.14)) = 1
+} API_DEPRECATED_WITH_REPLACEMENT("NSPaperOrientation", macos(10.0,10.14));
 
 /* Deprecated legacy printing pagination mode constants. Prefer to use NSPrintingPaginationMode values instead.
 */
-static const NSPrintingPaginationMode NSAutoPagination NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSPrintingPaginationModeAutomatic", 10_0, API_TO_BE_DEPRECATED) = NSPrintingPaginationModeAutomatic;
-static const NSPrintingPaginationMode NSFitPagination NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSPrintingPaginationModeFit", 10_0, API_TO_BE_DEPRECATED) = NSPrintingPaginationModeFit;
-static const NSPrintingPaginationMode NSClipPagination NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSPrintingPaginationModeClip", 10_0, API_TO_BE_DEPRECATED) = NSPrintingPaginationModeClip;
+static const NSPrintingPaginationMode NSAutoPagination API_DEPRECATED_WITH_REPLACEMENT("NSPrintingPaginationModeAutomatic", macos(10.0,API_TO_BE_DEPRECATED)) = NSPrintingPaginationModeAutomatic;
+static const NSPrintingPaginationMode NSFitPagination API_DEPRECATED_WITH_REPLACEMENT("NSPrintingPaginationModeFit", macos(10.0,API_TO_BE_DEPRECATED)) = NSPrintingPaginationModeFit;
+static const NSPrintingPaginationMode NSClipPagination API_DEPRECATED_WITH_REPLACEMENT("NSPrintingPaginationModeClip", macos(10.0,API_TO_BE_DEPRECATED)) = NSPrintingPaginationModeClip;
 
+API_UNAVAILABLE_END
 NS_ASSUME_NONNULL_END

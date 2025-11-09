@@ -36,7 +36,7 @@
  *
  *              Each matrix in the array may have an independent origin.
  */
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0))
 @interface MPSMatrixSum : MPSKernel
 /*
  * Use initWithDevice:count:rows:columns:transpose instead.
@@ -69,6 +69,15 @@ NS_DESIGNATED_INITIALIZER;
 
 /*! @abstract   The transposition used to initialize the kernel. */
 @property (nonatomic, readonly) BOOL transpose;
+
+/*! @property   resultMatrixOrigin
+ *
+ *  @discussion The origin, relative to [0, 0] in the result matrix, at which to
+ *              start writing results.  This property is modifiable and defaults
+ *              to [0, 0] at initialization time.  If a different origin is desired
+ *              then this should be modified prior to encoding the kernel.
+ */
+@property (readwrite, nonatomic) MTLOrigin resultMatrixOrigin;
 
 /*!
  *  @abstract   Specifies a neuron activation function to be used.

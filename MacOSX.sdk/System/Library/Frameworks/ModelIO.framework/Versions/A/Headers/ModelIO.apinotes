@@ -41,3 +41,17 @@ Classes:
   - Selector: 'double4x4AtTime:'
     MethodKind: Instance
     SwiftName: 'double4x4Value(atTime:)'
+- Name: MDLAnimatedQuaternion
+  Methods:
+  - Selector: 'setFloatQuaternion:atTime:'
+    MethodKind: Instance
+    SwiftName: 'setFloatQuaternion(_:atTime:)'
+  - Selector: 'setDoubleQuaternion:atTime:'
+    MethodKind: Instance
+    SwiftName: 'setDoubleQuaternion(_:atTime:)'
+  - Selector: 'floatQuaternionAtTime:'
+    MethodKind: Instance
+    SwiftName: 'floatQuaternionValue(atTime:)'
+  - Selector: 'doubleQuaternionAtTime:'
+    MethodKind: Instance
+    SwiftName: 'doubleQuaternionValue(atTime:)'

@@ -33,16 +33,17 @@
 @interface DRBurnSetupPanel : DRSetupPanel
 {
     /*All instance variables are private*/
-	IBOutlet id				_advancedItems;
-	IBOutlet NSButton*		_expander;
-	IBOutlet NSPopUpButton*	_burnSpeedPopup;
-	IBOutlet NSButton*		_appendable;
-	IBOutlet NSMatrix*		_completionActions;
-	IBOutlet NSButton*		_testBurn;
-	IBOutlet NSButton*		_verifyBurn;
-	IBOutlet NSButton*		_eraseDisc;
-	void*					_reservedBurnSetupPanel[4];
-	void*					_bsp_privateStorage;
+@private
+    IBOutlet id                _advancedItems;
+    IBOutlet NSButton*        _expander;
+    IBOutlet NSPopUpButton*    _burnSpeedPopup;
+    IBOutlet NSButton*        _appendable;
+    IBOutlet NSMatrix*        _completionActions;
+    IBOutlet NSButton*        _testBurn;
+    IBOutlet NSButton*        _verifyBurn;
+    IBOutlet NSButton*        _eraseDisc;
+    void*                    _reservedBurnSetupPanel[4];
+    void*                    _bsp_privateStorage;
 }
 
 /* ----------------------------------------------------------------------------- */

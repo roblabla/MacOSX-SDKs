@@ -1,7 +1,7 @@
 /*
  NSLayoutAnchor.h
  Application Kit
- Copyright (c) 2015-2018, Apple Inc.
+ Copyright (c) 2015-2019, Apple Inc.
  All rights reserved.
  */
 
@@ -10,6 +10,14 @@
 #import <AppKit/AppKitDefines.h>
 
 NS_ASSUME_NONNULL_BEGIN
+
+#if !TARGET_OS_IPHONE
+
+#if __cplusplus
+#define NSLAYOUTANCHOR_EXTERN extern "C" __attribute((visibility("default")))
+#else
+#define NSLAYOUTANCHOR_EXTERN extern __attribute((visibility("default")))
+#endif
 
 @class NSLayoutConstraint, NSLayoutDimension;
 
@@ -21,80 +29,74 @@ NS_ASSUME_NONNULL_BEGIN
  The -constraint* methods are available in multiple flavors to support use of different relations and omission of unused options.
  
  */
-NS_CLASS_AVAILABLE(10_11, 9_0)
-@interface NSLayoutAnchor<AnchorType> : NSObject <NSCopying, NSCoding>
-{
-    @private
-    id  _item APPKIT_IVAR;
-    NSInteger _attr APPKIT_IVAR;
-    id _reserved1 APPKIT_IVAR;
-    id _reserved2 APPKIT_IVAR;
-    id _reserved3 APPKIT_IVAR;
-    id _reserved4 APPKIT_IVAR;
-    id _reserved5 APPKIT_IVAR;
-}
+NSLAYOUTANCHOR_EXTERN API_AVAILABLE(macos(10.11), ios(9.0))
+@interface NSLayoutAnchor<AnchorType> : NSObject
+// NSLayoutAnchor conforms to <NSCopying> and <NSCoding> on macOS 10.12, iOS 10, and tvOS 10
+#if (__MAC_OS_X_VERSION_MIN_REQUIRED >= 101200) || \
+    (__IPHONE_OS_VERSION_MIN_REQUIRED >= 100000) || \
+    (__TV_OS_VERSION_MIN_REQUIRED >= 100000)
+        <NSCopying, NSCoding>
+#endif
 
 // These methods return an inactive constraint of the form thisAnchor = otherAnchor.
-- (NSLayoutConstraint*)constraintEqualToAnchor:(NSLayoutAnchor<AnchorType>*)anchor;
-- (NSLayoutConstraint*)constraintGreaterThanOrEqualToAnchor:(NSLayoutAnchor<AnchorType>*)anchor;
-- (NSLayoutConstraint*)constraintLessThanOrEqualToAnchor:(NSLayoutAnchor<AnchorType>*)anchor;
+- (NSLayoutConstraint *)constraintEqualToAnchor:(NSLayoutAnchor<AnchorType> *)anchor __attribute__((warn_unused_result));
+- (NSLayoutConstraint *)constraintGreaterThanOrEqualToAnchor:(NSLayoutAnchor<AnchorType> *)anchor __attribute__((warn_unused_result));
+- (NSLayoutConstraint *)constraintLessThanOrEqualToAnchor:(NSLayoutAnchor<AnchorType> *)anchor __attribute__((warn_unused_result));
 
 // These methods return an inactive constraint of the form thisAnchor = otherAnchor + constant.
-- (NSLayoutConstraint*)constraintEqualToAnchor:(NSLayoutAnchor<AnchorType>*)anchor constant:(CGFloat)c;
-- (NSLayoutConstraint*)constraintGreaterThanOrEqualToAnchor:(NSLayoutAnchor<AnchorType>*)anchor constant:(CGFloat)c;
-- (NSLayoutConstraint*)constraintLessThanOrEqualToAnchor:(NSLayoutAnchor<AnchorType>*)anchor constant:(CGFloat)c;
-
+- (NSLayoutConstraint *)constraintEqualToAnchor:(NSLayoutAnchor<AnchorType> *)anchor constant:(CGFloat)c __attribute__((warn_unused_result));
+- (NSLayoutConstraint *)constraintGreaterThanOrEqualToAnchor:(NSLayoutAnchor<AnchorType> *)anchor constant:(CGFloat)c __attribute__((warn_unused_result));
+- (NSLayoutConstraint *)constraintLessThanOrEqualToAnchor:(NSLayoutAnchor<AnchorType> *)anchor constant:(CGFloat)c __attribute__((warn_unused_result));
 
 // These properties are for debugging only:
-@property (readonly, copy) NSString *name NS_AVAILABLE(10_12, 10_0);
-@property (readonly, nullable, weak) id item NS_AVAILABLE(10_12, 10_0);
-@property (readonly) BOOL hasAmbiguousLayout NS_AVAILABLE(10_12, 10_0);
-@property (readonly) NSArray<NSLayoutConstraint *> *constraintsAffectingLayout NS_AVAILABLE(10_12, 10_0);
+@property (readonly, copy) NSString *name API_AVAILABLE(macos(10.12)) API_UNAVAILABLE(ios, watchos, tvos);
+@property (readonly, nullable, weak) id item API_AVAILABLE(macos(10.12)) API_UNAVAILABLE(ios, watchos, tvos);
+@property (readonly) BOOL hasAmbiguousLayout API_AVAILABLE(macos(10.12)) API_UNAVAILABLE(ios, watchos, tvos);
+@property (readonly) NSArray<NSLayoutConstraint *> *constraintsAffectingLayout API_AVAILABLE(macos(10.12)) API_UNAVAILABLE(ios, watchos, tvos);
 
 @end
-
 
 // Axis-specific subclasses for location anchors: top/bottom, leading/trailing, baseline, etc.
-@class NSLayoutXAxisAnchor, NSLayoutYAxisAnchor;
+@class NSLayoutXAxisAnchor, NSLayoutYAxisAnchor, NSLayoutDimension;
 
-NS_CLASS_AVAILABLE(10_11, 9_0)
-@interface NSLayoutXAxisAnchor : NSLayoutAnchor<NSLayoutXAxisAnchor*>
+NSLAYOUTANCHOR_EXTERN API_AVAILABLE(macos(10.11), ios(9.0))
+@interface NSLayoutXAxisAnchor : NSLayoutAnchor<NSLayoutXAxisAnchor *>
 
-// Creation of composite anchors:
-- (NSLayoutDimension *)anchorWithOffsetToAnchor:(NSLayoutXAxisAnchor *)otherAnchor NS_AVAILABLE(10_12, 10_0);
+// A composite anchor for creating constraints relating horizontal distances between locations.
+- (NSLayoutDimension *)anchorWithOffsetToAnchor:(NSLayoutXAxisAnchor *)otherAnchor API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0));
+
 @end
 
-NS_CLASS_AVAILABLE(10_11, 9_0)
-@interface NSLayoutYAxisAnchor : NSLayoutAnchor<NSLayoutYAxisAnchor*>
+NSLAYOUTANCHOR_EXTERN API_AVAILABLE(macos(10.11), ios(9.0))
+@interface NSLayoutYAxisAnchor : NSLayoutAnchor<NSLayoutYAxisAnchor *>
 
-// Creation of composite anchors:
-- (NSLayoutDimension *)anchorWithOffsetToAnchor:(NSLayoutYAxisAnchor *)otherAnchor NS_AVAILABLE(10_12, 10_0);
+// A composite anchor for creating constraints relating vertical distances between locations.
+- (NSLayoutDimension *)anchorWithOffsetToAnchor:(NSLayoutYAxisAnchor *)otherAnchor API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0));
+
 @end
 
-
-/*
- This layout anchor subclass is used for sizes (width & height).
- */
-@class NSLayoutDimension;
-NS_CLASS_AVAILABLE(10_11, 9_0)
-@interface NSLayoutDimension : NSLayoutAnchor<NSLayoutDimension*>
+// This layout anchor subclass is used for sizes (width & height).
+NSLAYOUTANCHOR_EXTERN API_AVAILABLE(macos(10.11), ios(9.0))
+@interface NSLayoutDimension : NSLayoutAnchor<NSLayoutDimension *>
 
 // These methods return an inactive constraint of the form thisVariable = constant.
-- (NSLayoutConstraint*)constraintEqualToConstant:(CGFloat)c;
-- (NSLayoutConstraint*)constraintGreaterThanOrEqualToConstant:(CGFloat)c;
-- (NSLayoutConstraint*)constraintLessThanOrEqualToConstant:(CGFloat)c;
+- (NSLayoutConstraint *)constraintEqualToConstant:(CGFloat)c __attribute__((warn_unused_result));
+- (NSLayoutConstraint *)constraintGreaterThanOrEqualToConstant:(CGFloat)c __attribute__((warn_unused_result));
+- (NSLayoutConstraint *)constraintLessThanOrEqualToConstant:(CGFloat)c __attribute__((warn_unused_result));
 
 // These methods return an inactive constraint of the form thisAnchor = otherAnchor * multiplier.
-- (NSLayoutConstraint*)constraintEqualToAnchor:(NSLayoutDimension*)anchor multiplier:(CGFloat)m;
-- (NSLayoutConstraint*)constraintGreaterThanOrEqualToAnchor:(NSLayoutDimension*)anchor multiplier:(CGFloat)m;
-- (NSLayoutConstraint*)constraintLessThanOrEqualToAnchor:(NSLayoutDimension*)anchor multiplier:(CGFloat)m;
+- (NSLayoutConstraint *)constraintEqualToAnchor:(NSLayoutDimension *)anchor multiplier:(CGFloat)m __attribute__((warn_unused_result));
+- (NSLayoutConstraint *)constraintGreaterThanOrEqualToAnchor:(NSLayoutDimension *)anchor multiplier:(CGFloat)m __attribute__((warn_unused_result));
+- (NSLayoutConstraint *)constraintLessThanOrEqualToAnchor:(NSLayoutDimension *)anchor multiplier:(CGFloat)m __attribute__((warn_unused_result));
 
 // These methods return an inactive constraint of the form thisAnchor = otherAnchor * multiplier + constant.
-- (NSLayoutConstraint*)constraintEqualToAnchor:(NSLayoutDimension*)anchor multiplier:(CGFloat)m constant:(CGFloat)c;
-- (NSLayoutConstraint*)constraintGreaterThanOrEqualToAnchor:(NSLayoutDimension*)anchor multiplier:(CGFloat)m constant:(CGFloat)c;
-- (NSLayoutConstraint*)constraintLessThanOrEqualToAnchor:(NSLayoutDimension*)anchor multiplier:(CGFloat)m constant:(CGFloat)c;
+- (NSLayoutConstraint *)constraintEqualToAnchor:(NSLayoutDimension *)anchor multiplier:(CGFloat)m constant:(CGFloat)c __attribute__((warn_unused_result));
+- (NSLayoutConstraint *)constraintGreaterThanOrEqualToAnchor:(NSLayoutDimension *)anchor multiplier:(CGFloat)m constant:(CGFloat)c __attribute__((warn_unused_result));
+- (NSLayoutConstraint *)constraintLessThanOrEqualToAnchor:(NSLayoutDimension *)anchor multiplier:(CGFloat)m constant:(CGFloat)c __attribute__((warn_unused_result));
 
 @end
 
+
+#endif // !TARGET_OS_IPHONE
 
 NS_ASSUME_NONNULL_END

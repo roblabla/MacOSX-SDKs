@@ -1,7 +1,7 @@
 /*
 	NSPageLayout.h
 	Application Kit
-	Copyright (c) 1994-2018, Apple Inc.
+	Copyright (c) 1994-2019, Apple Inc.
 	All rights reserved.
 */
 
@@ -9,22 +9,11 @@
 #import <AppKit/NSApplication.h>
 
 NS_ASSUME_NONNULL_BEGIN
+API_UNAVAILABLE_BEGIN(ios)
 
 @class NSPrintInfo, NSView, NSViewController, NSWindow, NSWindowController;
 
-@interface NSPageLayout : NSObject {
-    @private
-    NSMutableArray *_accessoryControllers APPKIT_IVAR;
-    NSPrintInfo *_originalPrintInfo APPKIT_IVAR;
-    id _delegate APPKIT_IVAR;
-    SEL _didEndSelector APPKIT_IVAR;
-    void *_contextInfo APPKIT_IVAR;
-    NSPrintInfo *_presentedPrintInfo APPKIT_IVAR;
-    NSWindowController *_windowController APPKIT_IVAR;
-#if ! __LP64__
-    unsigned char _compatibilityPadding[156] APPKIT_IVAR;
-#endif
-}
+@interface NSPageLayout : NSObject
 
 /* Create a new NSPageLayout.
 */
@@ -33,9 +22,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 /* Controllers for the accessory views that will be presented in the page setup panel by the methods below. When the page setup panel is presented to the user each controller is automatically sent a -setRepresentedObject: message with this object's NSPrintInfo. Because NSViewControllers are KVC and KVO compliant for "representedObject," you can use one as the file's owner of an accessory view's nib and bind controls to the file's owner using key paths that start with "representedObject." to take advantage of NSPrintInfo's KVC and KVO compliance. Each controller is also automatically sent a -title message. If that returns nil the application's short name is used in the popup menu that lets the user choose an accessory view.
 */
-- (void)addAccessoryController:(NSViewController *)accessoryController NS_AVAILABLE_MAC(10_5);
-- (void)removeAccessoryController:(NSViewController *)accessoryController NS_AVAILABLE_MAC(10_5);
-@property (readonly, copy) NSArray<__kindof NSViewController *> *accessoryControllers NS_AVAILABLE_MAC(10_5);
+- (void)addAccessoryController:(NSViewController *)accessoryController API_AVAILABLE(macos(10.5));
+- (void)removeAccessoryController:(NSViewController *)accessoryController API_AVAILABLE(macos(10.5));
+@property (readonly, copy) NSArray<__kindof NSViewController *> *accessoryControllers API_AVAILABLE(macos(10.5));
 
 
 /* Present a page setup panel to the user, document-modally. When the user has dismissed it, send the message selected by didEndSelector to the delegate, with the contextInfo as the last argument. The method selected by didEndSelector must have the same signature as:
@@ -59,11 +48,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 /* -setAccessoryView: replaces all of the accessory controllers that have been added so far by -addAccessoryController:. -accessoryView merely returns the view of the first accessory controller, or nil.
 */
-- (void)setAccessoryView:(null_unspecified NSView *)accessoryView NS_DEPRECATED_MAC(10_0, 10_5);
-- (null_unspecified NSView *)accessoryView NS_DEPRECATED_MAC(10_0, 10_5);
+- (void)setAccessoryView:(null_unspecified NSView *)accessoryView API_DEPRECATED("", macos(10.0,10.5));
+- (null_unspecified NSView *)accessoryView API_DEPRECATED("", macos(10.0,10.5));
 
-- (void)readPrintInfo NS_DEPRECATED_MAC(10_0, 10_5);
-- (void)writePrintInfo NS_DEPRECATED_MAC(10_0, 10_5);
+- (void)readPrintInfo API_DEPRECATED("", macos(10.0,10.5));
+- (void)writePrintInfo API_DEPRECATED("", macos(10.0,10.5));
 
 @end
 
@@ -75,4 +64,5 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+API_UNAVAILABLE_END
 NS_ASSUME_NONNULL_END

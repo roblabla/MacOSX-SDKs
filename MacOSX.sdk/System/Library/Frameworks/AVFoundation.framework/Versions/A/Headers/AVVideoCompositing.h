@@ -40,7 +40,7 @@ typedef struct {
 
 @class AVVideoCompositionRenderContextInternal;
 
-NS_CLASS_AVAILABLE(10_9, 7_0)
+API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 @interface AVVideoCompositionRenderContext : NSObject {
 @private
 	AVVideoCompositionRenderContextInternal	*_internal;
@@ -80,6 +80,26 @@ NS_CLASS_AVAILABLE(10_9, 7_0)
 
 @end
 
+/*!
+	@class		AVVideoCompositionRenderHint
+	@abstract	An AVVideoCompositionRenderHint instance contains the information necessary for announcing upcoming rendering request time ranges.
+*/
+
+@class AVVideoCompositionRenderHintInternal;
+
+API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0)) API_UNAVAILABLE(watchos)
+@interface AVVideoCompositionRenderHint : NSObject {
+@private
+	AVVideoCompositionRenderHintInternal *_internal;
+}
+
+/*! The start time of the upcoming composition requests. */
+@property (nonatomic, readonly) CMTime startCompositionTime;
+
+/*! The end time of the upcoming composition requests. */
+@property (nonatomic, readonly) CMTime endCompositionTime;
+
+@end
 
 /*!
 	@protocol		AVVideoCompositing
@@ -91,7 +111,7 @@ NS_CLASS_AVAILABLE(10_9, 7_0)
 
 		Custom video compositor instances will then be retained by the AVFoundation object for as long as the value of its videoComposition property indicates that an instance of the same custom video compositor class should be used, even if the value is changed from one instance of AVVideoComposition to another instance that's associated with the same custom video compositor class.
 */
-NS_CLASS_AVAILABLE(10_9, 7_0)
+API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 @protocol AVVideoCompositing<NSObject>
 
 @required
@@ -169,7 +189,41 @@ NS_CLASS_AVAILABLE(10_9, 7_0)
  @discussion 
 	Controls whether the client will receive frames that contain wide color information. Care should be taken to avoid clamping.
  */
-@property (nonatomic, readonly) BOOL supportsWideColorSourceFrames NS_AVAILABLE(10_12, 10_0);
+@property (nonatomic, readonly) BOOL supportsWideColorSourceFrames API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0)) API_UNAVAILABLE(watchos);
+
+/*!
+	@method			anticipateRenderingUsingHint:
+	@abstract		Informs a custom video compositor about upcoming rendering requests.
+	@param			renderHint
+					Information about the upcoming composition requests.
+	@discussion
+		In the method the compositor can load composition resources such as overlay images which will be needed in the anticipated rendering time range.
+
+		Unlike -startVideoCompositionRequest, which is invoked only when the frame compositing is necessary, the framework typically calls this method every frame duration. It allows the custom compositor to load and unload a composition resource such as overlay images at an appropriate timing.
+
+		In forward playback, renderHint's startCompositionTime is less than endCompositionTime. In reverse playback, its endCompositionTime is less than startCompositionTime. For seeking, startCompositionTime == endCompositionTime, which means the upcoming composition request time range is unknown and the compositor shouldn’t preload time associated composition resources eagerly.
+
+		The method is guaranteed to be called before -startVideoCompositionRequest: for a given composition time.
+
+		The method is synchronous. The implementation should return quickly because otherwise the playback would stall and cause frame drops.
+*/
+- (void)anticipateRenderingUsingHint:(AVVideoCompositionRenderHint *)renderHint API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0)) API_UNAVAILABLE(watchos);
+
+/*!
+	@method			prerollForRenderingUsingHint:
+	@abstract		Tell a custom video compositor to perform any work in prerolling phase.
+	@param			renderHint
+					Information about the upcoming composition requests.
+	@discussion
+		The framework may perform prerolling to load media data to prime the render pipelines for smoother playback. This method is called in the prerolling phase so that the compositor can load composition resources such as overlay images which will be needed as soon as the playback starts.
+
+		Not all rendering scenarios use prerolling. For example, the method won't be called while seeking.
+
+		If called, the method is guaranteed to be invoked before the first -startVideoCompositionRequest: call.
+
+		The method is synchronous. The prerolling won't finish until the method returns.
+*/
+-(void)prerollForRenderingUsingHint:(AVVideoCompositionRenderHint *)renderHint API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0)) API_UNAVAILABLE(watchos);
 
 @end
 
@@ -181,7 +235,7 @@ NS_CLASS_AVAILABLE(10_9, 7_0)
 
 @class AVAsynchronousVideoCompositionRequestInternal;
 
-NS_CLASS_AVAILABLE(10_9, 7_0)
+API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 @interface AVAsynchronousVideoCompositionRequest : NSObject <NSCopying> {
 @private
 	AVAsynchronousVideoCompositionRequestInternal *_internal;
@@ -228,7 +282,7 @@ NS_CLASS_AVAILABLE(10_9, 7_0)
 @class CIImage;
 @class CIContext;
 
-NS_CLASS_AVAILABLE(10_11, 9_0)
+API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 @interface AVAsynchronousCIImageFilteringRequest : NSObject <NSCopying> {
 @private
 	AVAsynchronousCIImageFilteringRequestInternal *_internal;
@@ -261,7 +315,7 @@ It is safe to pass in the sourceImage in which case the filter will appear to ha
  
 	@abstract	The AVVideoCompositionInstruction protocol is implemented by objects to represent operations to be performed by a compositor.
 */
-NS_CLASS_AVAILABLE(10_9, 7_0)
+API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 @protocol AVVideoCompositionInstruction<NSObject>
 
 @required

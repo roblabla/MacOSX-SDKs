@@ -2,17 +2,19 @@
 //  PHFetchResult.h
 //  Photos
 //
-//  Copyright © 2017 Apple, Inc. All rights reserved.
+//  Copyright (c) 2013 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import <Photos/PhotosTypes.h>
 
 NS_ASSUME_NONNULL_BEGIN
+API_AVAILABLE_BEGIN(macos(10.13), ios(8), tvos(10))
 
 // Accessing fetched results (fetches objects from the backing store in chunks on demand rather than all at once)
 // Fetched objects will be kept in a cache and purged under memory pressure
-NS_CLASS_AVAILABLE(10_13, 8_0) @interface PHFetchResult<ObjectType> : NSObject <NSCopying, NSFastEnumeration>
+OS_EXPORT
+@interface PHFetchResult<__covariant ObjectType> : NSObject <NSCopying, NSFastEnumeration>
 
 @property (readonly) NSUInteger count;
 - (ObjectType)objectAtIndex:(NSUInteger)index;
@@ -36,4 +38,5 @@ NS_CLASS_AVAILABLE(10_13, 8_0) @interface PHFetchResult<ObjectType> : NSObject <
 
 @end
 
+API_AVAILABLE_END
 NS_ASSUME_NONNULL_END

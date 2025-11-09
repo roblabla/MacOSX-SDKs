@@ -3,7 +3,7 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2010-2018 Apple Inc. All rights reserved.
+	Copyright 2010-2019 Apple Inc. All rights reserved.
 
 */
 
@@ -56,7 +56,7 @@ NS_ASSUME_NONNULL_BEGIN
 @class AVDisplayCriteria;
 @class AVAssetInternal;
 
-NS_CLASS_AVAILABLE(10_7, 4_0)
+API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0))
 @interface AVAsset : NSObject <NSCopying, AVAsynchronousKeyValueLoading>
 {
 @private
@@ -91,13 +91,20 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 
 /*	The following property is deprecated. Instead, use the naturalSize and preferredTransform, as appropriate, of the receiver's video tracks. See -tracksWithMediaType: below.
 */
-@property (nonatomic, readonly) CGSize naturalSize NS_DEPRECATED(10_7, 10_8, 4_0, 5_0);
+@property (nonatomic, readonly) CGSize naturalSize API_DEPRECATED("No longer supported", macos(10.7, 10.8), ios(4.0, 5.0), tvos(9.0, 9.0)) API_UNAVAILABLE(watchos);
 
 /*!
  @property	preferredDisplayCriteria
  @abstract	Guides to a display mode that is optimal for playing this particular asset.
  */
 @property (nonatomic, readonly) AVDisplayCriteria *preferredDisplayCriteria API_AVAILABLE(tvos(11.2)) API_UNAVAILABLE(ios) API_UNAVAILABLE(macos, watchos);
+
+/*!
+ @property		minimumTimeOffsetFromLive
+ @abstract		Indicates how close to the latest content in a live stream playback can be sustained.
+ @discussion	For non-live assets this value is kCMTimeInvalid.
+ */
+@property (nonatomic, readonly) CMTime minimumTimeOffsetFromLive API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0), watchos(6.0));
 
 @end
 
@@ -144,6 +151,8 @@ typedef NS_OPTIONS(NSUInteger, AVAssetReferenceRestrictions) {
 	AVAssetReferenceRestrictionForbidCrossSiteReference = (1UL << 2),
 	AVAssetReferenceRestrictionForbidLocalReferenceToLocal = (1UL << 3),
 	AVAssetReferenceRestrictionForbidAll = 0xFFFFUL,
+	
+	AVAssetReferenceRestrictionDefaultPolicy = AVAssetReferenceRestrictionForbidLocalReferenceToRemote
 };
 
 /*!
@@ -152,7 +161,7 @@ typedef NS_OPTIONS(NSUInteger, AVAssetReferenceRestrictions) {
   @discussion
 	For AVURLAsset, this property reflects the value passed in for AVURLAssetReferenceRestrictionsKey, if any. See AVURLAssetReferenceRestrictionsKey below for a full discussion of reference restrictions. The default value for this property is AVAssetReferenceRestrictionForbidNone.
 */
-@property (nonatomic, readonly) AVAssetReferenceRestrictions referenceRestrictions NS_AVAILABLE(10_7, 5_0);
+@property (nonatomic, readonly) AVAssetReferenceRestrictions referenceRestrictions API_AVAILABLE(macos(10.7), ios(5.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 
 @end
 
@@ -205,7 +214,7 @@ typedef NS_OPTIONS(NSUInteger, AVAssetReferenceRestrictions) {
  @discussion
 	The value of this property is an NSArray of AVAssetTrackGroups, each representing a different grouping of tracks in the receiver.
  */
-@property (nonatomic, readonly) NSArray<AVAssetTrackGroup *> *trackGroups NS_AVAILABLE(10_9, 7_0);
+@property (nonatomic, readonly) NSArray<AVAssetTrackGroup *> *trackGroups API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(1.0));
 
 @end
 
@@ -216,7 +225,7 @@ typedef NS_OPTIONS(NSUInteger, AVAssetReferenceRestrictions) {
 
 /* Indicates the creation date of the asset as an AVMetadataItem. May be nil. If a creation date has been stored by the asset in a form that can be converted to an NSDate, the dateValue property of the AVMetadataItem will provide an instance of NSDate. Otherwise the creation date is available only as a string value, via -[AVMetadataItem stringValue].
 */
-@property (nonatomic, readonly, nullable) AVMetadataItem *creationDate NS_AVAILABLE(10_8, 5_0);
+@property (nonatomic, readonly, nullable) AVMetadataItem *creationDate API_AVAILABLE(macos(10.8), ios(5.0), tvos(9.0), watchos(1.0));
 
 /* Provides access to the lyrics of the asset suitable for the current locale.
 */
@@ -228,7 +237,7 @@ typedef NS_OPTIONS(NSUInteger, AVAssetReferenceRestrictions) {
 
 /* Provides access to an array of AVMetadataItems for all metadata identifiers for which a value is available; items can be filtered according to language via +[AVMetadataItem metadataItemsFromArray:filteredAndSortedAccordingToPreferredLanguages:] and according to identifier via +[AVMetadataItem metadataItemsFromArray:filteredByIdentifier:].
 */
-@property (nonatomic, readonly) NSArray<AVMetadataItem *> *metadata NS_AVAILABLE(10_10, 8_0);
+@property (nonatomic, readonly) NSArray<AVMetadataItem *> *metadata API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(1.0));
 
 /* Provides an NSArray of NSStrings, each representing a metadata format that's available to the asset (e.g. ID3, iTunes metadata, etc.). Metadata formats are defined in AVMetadataFormat.h.
 */
@@ -253,7 +262,7 @@ typedef NS_OPTIONS(NSUInteger, AVAssetReferenceRestrictions) {
 
 /* array of NSLocale
 */
-@property (readonly) NSArray<NSLocale *> *availableChapterLocales NS_AVAILABLE(10_7, 4_3);
+@property (readonly) NSArray<NSLocale *> *availableChapterLocales API_AVAILABLE(macos(10.7), ios(4.3), tvos(9.0), watchos(1.0));
 
 /*!
   @method		chapterMetadataGroupsWithTitleLocale:containingMetadataItemsWithCommonKeys:
@@ -271,7 +280,7 @@ typedef NS_OPTIONS(NSUInteger, AVAssetReferenceRestrictions) {
  
 	Further filtering of the metadata items in AVTimedMetadataGroups according to language can be accomplished using +[AVMetadataItem metadataItemsFromArray:filteredAndSortedAccordingToPreferredLanguages:]; filtering of the metadata items according to locale can be accomplished using +[AVMetadataItem metadataItemsFromArray:withLocale:].
 */
-- (NSArray<AVTimedMetadataGroup *> *)chapterMetadataGroupsWithTitleLocale:(NSLocale *)locale containingItemsWithCommonKeys:(nullable NSArray<AVMetadataKey> *)commonKeys NS_AVAILABLE(10_7, 4_3);
+- (NSArray<AVTimedMetadataGroup *> *)chapterMetadataGroupsWithTitleLocale:(NSLocale *)locale containingItemsWithCommonKeys:(nullable NSArray<AVMetadataKey> *)commonKeys API_AVAILABLE(macos(10.7), ios(4.3), tvos(9.0), watchos(1.0));
 
 /*!
  @method		chapterMetadataGroupsBestMatchingPreferredLanguages:
@@ -289,7 +298,7 @@ typedef NS_OPTIONS(NSUInteger, AVAssetReferenceRestrictions) {
  Further filtering of the metadata items in AVTimedMetadataGroups according to language can be accomplished using +[AVMetadataItem metadataItemsFromArray:filteredAndSortedAccordingToPreferredLanguages:]; filtering of the metadata items according to locale can be accomplished using +[AVMetadataItem metadataItemsFromArray:withLocale:].
 .
 */
-- (NSArray<AVTimedMetadataGroup *> *)chapterMetadataGroupsBestMatchingPreferredLanguages:(NSArray<NSString *> *)preferredLanguages NS_AVAILABLE(10_8, 6_0);
+- (NSArray<AVTimedMetadataGroup *> *)chapterMetadataGroupsBestMatchingPreferredLanguages:(NSArray<NSString *> *)preferredLanguages API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(1.0));
 
 
 @end
@@ -301,7 +310,7 @@ typedef NS_OPTIONS(NSUInteger, AVAssetReferenceRestrictions) {
 
 /* Provides an NSArray of NSStrings, each NSString indicating a media characteristic for which a media selection option is available.
 */
-@property (nonatomic, readonly) NSArray<AVMediaCharacteristic> *availableMediaCharacteristicsWithMediaSelectionOptions NS_AVAILABLE(10_8, 5_0);
+@property (nonatomic, readonly) NSArray<AVMediaCharacteristic> *availableMediaCharacteristicsWithMediaSelectionOptions API_AVAILABLE(macos(10.8), ios(5.0), tvos(9.0), watchos(1.0));
 
 /*!
   @method		mediaSelectionGroupForMediaCharacteristic:
@@ -320,13 +329,13 @@ typedef NS_OPTIONS(NSUInteger, AVAssetReferenceRestrictions) {
 	
 	Filtering of the options in the returned AVMediaSelectionGroup according to playability, locale, and additional media characteristics can be accomplished using the category AVMediaSelectionOptionFiltering defined on AVMediaSelectionGroup.
 */
-- (nullable AVMediaSelectionGroup *)mediaSelectionGroupForMediaCharacteristic:(AVMediaCharacteristic)mediaCharacteristic NS_AVAILABLE(10_8, 5_0);
+- (nullable AVMediaSelectionGroup *)mediaSelectionGroupForMediaCharacteristic:(AVMediaCharacteristic)mediaCharacteristic API_AVAILABLE(macos(10.8), ios(5.0), tvos(9.0), watchos(1.0));
 
 /*!
   @property		preferredMediaSelection
   @abstract		Provides an instance of AVMediaSelection with default selections for each of the receiver's media selection groups.
 */
-@property (nonatomic, readonly) AVMediaSelection *preferredMediaSelection NS_AVAILABLE(10_11, 9_0);
+@property (nonatomic, readonly) AVMediaSelection *preferredMediaSelection API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(2.0));
 
 /*!
   @property		allMediaSelections
@@ -334,7 +343,7 @@ typedef NS_OPTIONS(NSUInteger, AVAssetReferenceRestrictions) {
   @discussion
 	Becomes callable without blocking when the key @"availableMediaCharacteristicsWithMediaSelectionOptions" has been loaded.
 */
-@property (nonatomic, readonly) NSArray <AVMediaSelection *> *allMediaSelections NS_AVAILABLE(10_13, 11_0);
+@property (nonatomic, readonly) NSArray <AVMediaSelection *> *allMediaSelections API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0));
 
 @end
 
@@ -346,7 +355,7 @@ typedef NS_OPTIONS(NSUInteger, AVAssetReferenceRestrictions) {
   @abstract		Indicates whether or not the asset has protected content.
   @discussion	Assets containing protected content may not be playable without successful authorization, even if the value of the "playable" property is YES.  See the properties in the AVAssetUsability category for details on how such an asset may be used.  On OS X, clients can use the interfaces in AVPlayerItemProtectedContentAdditions.h to request authorization to play the asset.
 */
-@property (nonatomic, readonly) BOOL hasProtectedContent NS_AVAILABLE(10_7, 4_2);
+@property (nonatomic, readonly) BOOL hasProtectedContent API_AVAILABLE(macos(10.7), ios(4.2), tvos(9.0)) API_UNAVAILABLE(watchos);
 
 @end
 
@@ -359,21 +368,21 @@ typedef NS_OPTIONS(NSUInteger, AVAssetReferenceRestrictions) {
   @discussion	For QuickTime movie files and MPEG-4 files, the value of canContainFragments is YES if an 'mvex' box is present in the 'moov' box. For those types, the 'mvex' box signals the possible presence of later 'moof' boxes.
 */
 
-@property (nonatomic, readonly) BOOL canContainFragments NS_AVAILABLE(10_11, 9_0);
+@property (nonatomic, readonly) BOOL canContainFragments API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 
 /*!
   @property		containsFragments
   @abstract		Indicates whether the asset is extended by at least one fragment.
   @discussion	For QuickTime movie files and MPEG-4 files, the value of this property is YES if canContainFragments is YES and at least one 'moof' box is present after the 'moov' box.
 */
-@property (nonatomic, readonly) BOOL containsFragments NS_AVAILABLE(10_11, 9_0);
+@property (nonatomic, readonly) BOOL containsFragments API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 
 /*!
   @property		overallDurationHint
   @abstract		Indicates the total duration of fragments that either exist now or may be appended in the future in order to extend the duration of the asset.
   @discussion	For QuickTime movie files and MPEG-4 files, the value of this property is obtained from the 'mehd' box of the 'mvex' box, if present. If no total fragment duration hint is available, the value of this property is kCMTimeInvalid.
 */
-@property (nonatomic, readonly) CMTime overallDurationHint NS_AVAILABLE(10_12_2, 10_2);
+@property (nonatomic, readonly) CMTime overallDurationHint API_AVAILABLE(macos(10.12.2), ios(10.2), tvos(10.2), watchos(3.2));
 
 @end
 
@@ -385,25 +394,25 @@ typedef NS_OPTIONS(NSUInteger, AVAssetReferenceRestrictions) {
  @abstract		Indicates whether an AVPlayer can play the contents of the asset in a manner that meets user expectations.
  @discussion	A client can attempt playback when playable is NO, this however may lead to a substandard playback experience.
 */
-@property (nonatomic, readonly, getter=isPlayable) BOOL playable NS_AVAILABLE(10_7, 4_3);
+@property (nonatomic, readonly, getter=isPlayable) BOOL playable API_AVAILABLE(macos(10.7), ios(4.3), tvos(9.0), watchos(1.0));
 
 /* indicates whether an AVAssetExportSession can be used with the receiver for export
 */
-@property (nonatomic, readonly, getter=isExportable) BOOL exportable NS_AVAILABLE(10_7, 4_3);
+@property (nonatomic, readonly, getter=isExportable) BOOL exportable API_AVAILABLE(macos(10.7), ios(4.3), tvos(9.0)) API_UNAVAILABLE(watchos);
 
 /* indicates whether an AVAssetReader can be used with the receiver for extracting media data
 */
-@property (nonatomic, readonly, getter=isReadable) BOOL readable NS_AVAILABLE(10_7, 4_3);
+@property (nonatomic, readonly, getter=isReadable) BOOL readable API_AVAILABLE(macos(10.7), ios(4.3), tvos(9.0)) API_UNAVAILABLE(watchos);
 
 /* indicates whether the receiver can be used to build an AVMutableComposition
 */
-@property (nonatomic, readonly, getter=isComposable) BOOL composable NS_AVAILABLE(10_7, 4_3);
+@property (nonatomic, readonly, getter=isComposable) BOOL composable API_AVAILABLE(macos(10.7), ios(4.3), tvos(9.0), watchos(1.0));
 
 #if TARGET_OS_IPHONE
 
 /* indicates whether the receiver can be written to the saved photos album
 */
-@property (nonatomic, readonly, getter=isCompatibleWithSavedPhotosAlbum) BOOL compatibleWithSavedPhotosAlbum NS_AVAILABLE_IOS(5_0);
+@property (nonatomic, readonly, getter=isCompatibleWithSavedPhotosAlbum) BOOL compatibleWithSavedPhotosAlbum API_AVAILABLE(ios(5.0), tvos(9.0)) API_UNAVAILABLE(watchos) API_UNAVAILABLE(macos);
 
 #endif	// TARGET_OS_IPHONE
 
@@ -412,7 +421,8 @@ typedef NS_OPTIONS(NSUInteger, AVAssetReferenceRestrictions) {
   @abstract		Indicates whether the asset is compatible with AirPlay Video.
   @discussion	YES if an AVPlayerItem initialized with the receiver can be played by an external device via AirPlay Video.
  */
-@property (nonatomic, readonly, getter=isCompatibleWithAirPlayVideo) BOOL compatibleWithAirPlayVideo NS_AVAILABLE(10_11, 9_0);
+@property (nonatomic, readonly, getter=isCompatibleWithAirPlayVideo) BOOL compatibleWithAirPlayVideo API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0)) API_UNAVAILABLE(watchos);
+
 
 @end
 
@@ -433,7 +443,7 @@ typedef NS_OPTIONS(NSUInteger, AVAssetReferenceRestrictions) {
 	If precise duration and timing is not possible for the timed media resource referenced by the asset's URL, AVAsset.providesPreciseDurationAndTiming will be NO even if precise timing is requested via the use of this key.
 					
 */
-AVF_EXPORT NSString *const AVURLAssetPreferPreciseDurationAndTimingKey NS_AVAILABLE(10_7, 4_0);
+AVF_EXPORT NSString *const AVURLAssetPreferPreciseDurationAndTimingKey API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0));
 
 /*!
   @constant		AVURLAssetReferenceRestrictionsKey
@@ -442,7 +452,7 @@ AVF_EXPORT NSString *const AVURLAssetPreferPreciseDurationAndTimingKey NS_AVAILA
   @discussion
 	Some assets can contain references to media data stored outside the asset's container file, for example in another file. This key can be used to specify a policy to use when these references are encountered. If an asset contains one or more references of a type that is forbidden by the reference restrictions, loading of asset properties will fail. In addition, such an asset cannot be used with other AVFoundation modules, such as AVPlayerItem or AVAssetExportSession.
 */
-AVF_EXPORT NSString *const AVURLAssetReferenceRestrictionsKey NS_AVAILABLE(10_7, 5_0);
+AVF_EXPORT NSString *const AVURLAssetReferenceRestrictionsKey API_AVAILABLE(macos(10.7), ios(5.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 
 /*!
  @constant		AVURLAssetHTTPCookiesKey
@@ -459,7 +469,7 @@ AVF_EXPORT NSString *const AVURLAssetReferenceRestrictionsKey NS_AVAILABLE(10_7,
 	In both of these cases, HTTP requests will be missing any cookies that do not apply to the AVURLAsset's URL.  
 	This init option allows the AVURLAsset to use additional HTTP cookies for those HTTP(S) requests.
  */
-AVF_EXPORT NSString *const AVURLAssetHTTPCookiesKey API_AVAILABLE(ios(8.0), tvos(9.0)) API_UNAVAILABLE(macos) __WATCHOS_PROHIBITED;
+AVF_EXPORT NSString *const AVURLAssetHTTPCookiesKey API_AVAILABLE(macos(10.15), ios(8.0), tvos(9.0), watchos(1.0));
 
 /*
  @constant		AVURLAssetAllowsCellularAccessKey
@@ -467,7 +477,23 @@ AVF_EXPORT NSString *const AVURLAssetHTTPCookiesKey API_AVAILABLE(ios(8.0), tvos
  @discussion
  	Default is YES.
 */
-AVF_EXPORT NSString *const AVURLAssetAllowsCellularAccessKey API_AVAILABLE(ios(10.0), tvos(10.0)) API_UNAVAILABLE(macos) __WATCHOS_PROHIBITED;
+AVF_EXPORT NSString *const AVURLAssetAllowsCellularAccessKey API_AVAILABLE(macos(10.15), ios(10.0), tvos(10.0), watchos(3.0));
+
+/*
+ @constant		AVURLAssetAllowsExpensiveNetworkAccessKey
+ @abstract		Indicates whether network requests on behalf of this asset are allowed to use the expensive interface (e.g. cellular, tethered, constrained).
+ @discussion
+ 	Default is YES.
+ */
+AVF_EXPORT NSString *const AVURLAssetAllowsExpensiveNetworkAccessKey API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0), watchos(6.0));
+
+/*
+ @constant		AVURLAssetAllowsConstrainedNetworkAccessKey
+ @abstract		Indicates whether network requests on behalf of this asset are allowed to use the constrained interface (e.g. interfaces marked as being in data saver mode).
+ @discussion
+ 	Default is YES.
+ */
+AVF_EXPORT NSString *const AVURLAssetAllowsConstrainedNetworkAccessKey API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0), watchos(6.0));
 
 /*!
   @class		AVURLAsset
@@ -483,7 +509,7 @@ AVF_EXPORT NSString *const AVURLAssetAllowsCellularAccessKey API_AVAILABLE(ios(1
 */
 @class AVURLAssetInternal;
 
-NS_CLASS_AVAILABLE(10_7, 4_0)
+API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0))
 @interface AVURLAsset : AVAsset
 {
 @private
@@ -496,14 +522,14 @@ AV_INIT_UNAVAILABLE
   @abstract		Provides the file types the AVURLAsset class understands.
   @result		An NSArray of UTIs identifying the file types the AVURLAsset class understands.
 */
-+ (NSArray<AVFileType> *)audiovisualTypes NS_AVAILABLE(10_7, 5_0);
++ (NSArray<AVFileType> *)audiovisualTypes API_AVAILABLE(macos(10.7), ios(5.0), tvos(9.0), watchos(1.0));
 
 /*!
   @method		audiovisualMIMETypes
   @abstract		Provides the MIME types the AVURLAsset class understands.
   @result		An NSArray of NSStrings containing MIME types the AVURLAsset class understands.
 */
-+ (NSArray<NSString *> *)audiovisualMIMETypes NS_AVAILABLE(10_7, 5_0);
++ (NSArray<NSString *> *)audiovisualMIMETypes API_AVAILABLE(macos(10.7), ios(5.0), tvos(9.0), watchos(1.0));
 
 /*!
   @method		isPlayableExtendedMIMEType:
@@ -511,7 +537,7 @@ AV_INIT_UNAVAILABLE
   @param		extendedMIMEType
   @result		YES or NO.
 */
-+ (BOOL)isPlayableExtendedMIMEType: (NSString *)extendedMIMEType NS_AVAILABLE(10_7, 5_0);
++ (BOOL)isPlayableExtendedMIMEType: (NSString *)extendedMIMEType API_AVAILABLE(macos(10.7), ios(5.0), tvos(9.0), watchos(1.0));
 
 /*!
   @method		URLAssetWithURL:options:
@@ -553,7 +579,7 @@ AV_INIT_UNAVAILABLE
     The loading of file URLs cannot be mediated via use of AVAssetResourceLoader.
     Note that copies of an AVAsset will vend the same instance of AVAssetResourceLoader.
 */
-@property (nonatomic, readonly) AVAssetResourceLoader *resourceLoader NS_AVAILABLE(10_9, 6_0);
+@property (nonatomic, readonly) AVAssetResourceLoader *resourceLoader API_AVAILABLE(macos(10.9), ios(6.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 
 @end
 
@@ -565,7 +591,7 @@ AV_INIT_UNAVAILABLE
  @property	assetCache
  @abstract	Provides access to an instance of AVAssetCache to use for inspection of locally cached media data. Will be nil if an asset has not been configured to store or access media data from disk.
 */
-@property (nonatomic, readonly, nullable) AVAssetCache *assetCache NS_AVAILABLE(10_12, 10_0);
+@property (nonatomic, readonly, nullable) AVAssetCache *assetCache API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0)) API_UNAVAILABLE(watchos);
 
 @end
 
@@ -597,7 +623,7 @@ AV_INIT_UNAVAILABLE
  @constant       AVAssetDurationDidChangeNotification
  @abstract       Posted when the duration of an AVFragmentedAsset changes while it's being minded by an AVFragmentedAssetMinder, but only for changes that occur after the status of the value of @"duration" has reached AVKeyValueStatusLoaded.
 */
-AVF_EXPORT NSString *const AVAssetDurationDidChangeNotification NS_AVAILABLE(10_11, 9_0);
+AVF_EXPORT NSString *const AVAssetDurationDidChangeNotification API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(2.0));
 
 /*!
  @constant       AVAssetContainsFragmentsDidChangeNotification
@@ -616,13 +642,13 @@ AVF_EXPORT NSString *const AVAssetWasDefragmentedNotification API_AVAILABLE(maco
  @constant       AVAssetChapterMetadataGroupsDidChangeNotification
  @abstract       Posted when the collection of arrays of timed metadata groups representing chapters of an AVAsset change and when any of the contents of the timed metadata groups change, but only for changes that occur after the status of the value of @"availableChapterLocales" has reached AVKeyValueStatusLoaded.
 */
-AVF_EXPORT NSString *const AVAssetChapterMetadataGroupsDidChangeNotification NS_AVAILABLE(10_11, 9_0);
+AVF_EXPORT NSString *const AVAssetChapterMetadataGroupsDidChangeNotification API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(2.0));
 /*!
 
  @constant       AVAssetMediaSelectionGroupsDidChangeNotification
  @abstract       Posted when the collection of media selection groups provided by an AVAsset changes and when any of the contents of its media selection groups change, but only for changes that occur after the status of the value of @"availableMediaCharacteristicsWithMediaSelectionOptions" has reached AVKeyValueStatusLoaded.
 */
-AVF_EXPORT NSString *const AVAssetMediaSelectionGroupsDidChangeNotification NS_AVAILABLE(10_11, 9_0);
+AVF_EXPORT NSString *const AVAssetMediaSelectionGroupsDidChangeNotification API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(2.0));
 
 #pragma mark --- AVFragmentedAsset ---
 /*!
@@ -641,13 +667,13 @@ AVF_EXPORT NSString *const AVAssetMediaSelectionGroupsDidChangeNotification NS_A
   @abstract		Indicates whether an AVAsset that supports fragment minding is currently associated with a fragment minder, e.g. an instance of AVFragmentedAssetMinder.
   @discussion	AVAssets that support fragment minding post change notifications only while associated with a fragment minder.
 */
-@property (nonatomic, readonly, getter=isAssociatedWithFragmentMinder) BOOL associatedWithFragmentMinder API_AVAILABLE(macos(10.11), ios(12.0), tvos(12.0)) API_UNAVAILABLE(watchos);
+@property (nonatomic, readonly, getter=isAssociatedWithFragmentMinder) BOOL associatedWithFragmentMinder API_AVAILABLE(macos(10.11), ios(12.0), tvos(12.0), watchos(6.0));
 
 @end
 
 @class AVFragmentedAssetInternal;
 
-API_AVAILABLE(macos(10.11), ios(12.0), tvos(12.0)) API_UNAVAILABLE(watchos)
+API_AVAILABLE(macos(10.11), ios(12.0), tvos(12.0), watchos(6.0))
 @interface AVFragmentedAsset : AVURLAsset <AVFragmentMinding>
 {
 @private
@@ -716,7 +742,7 @@ API_AVAILABLE(macos(10.11), ios(12.0), tvos(12.0)) API_UNAVAILABLE(watchos)
 
 @class AVFragmentedAssetMinderInternal;
 
-API_AVAILABLE(macos(10.11), ios(12.0), tvos(12.0)) API_UNAVAILABLE(watchos)
+API_AVAILABLE(macos(10.11), ios(12.0), tvos(12.0), watchos(6.0))
 @interface AVFragmentedAssetMinder : NSObject
 {
 @private
@@ -775,6 +801,7 @@ API_AVAILABLE(macos(10.11), ios(12.0), tvos(12.0)) API_UNAVAILABLE(watchos)
 
 @end
 
+API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 @interface AVURLAsset (AVURLAssetContentKeyEligibility) <AVContentKeyRecipient>
 
 /*!

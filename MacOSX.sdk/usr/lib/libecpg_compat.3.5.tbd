@@ -1,11 +1,10 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 70CFD33E-95E2-367B-A26F-D414D887F820' ]
+uuids:           [ 'x86_64: 908E0959-84FA-3618-A04A-439FE183D11E' ]
 platform:        macosx
-install-name:    /usr/lib/libecpg_compat.3.dylib
+install-name:    '/usr/lib/libecpg_compat.3.dylib'
 current-version: 3.5
 compatibility-version: 3
-objc-constraint: none
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _ECPG_informix_get_var, _ECPG_informix_reset_sqlca, _ECPG_informix_set_var, 

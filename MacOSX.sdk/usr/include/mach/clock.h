@@ -125,17 +125,17 @@ __END_DECLS
 #define __Request__clock_subsystem__defined
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
 	} __Request__clock_get_time_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -144,11 +144,11 @@ __END_DECLS
 		mach_msg_type_number_t clock_attrCnt;
 	} __Request__clock_get_attributes_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -161,7 +161,7 @@ __END_DECLS
 		mach_timespec_t alarm_time;
 	} __Request__clock_alarm_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 #endif /* !__Request__clock_subsystem__defined */
 
@@ -181,7 +181,7 @@ union __RequestUnion__clock_subsystem {
 #define __Reply__clock_subsystem__defined
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -190,11 +190,11 @@ union __RequestUnion__clock_subsystem {
 		mach_timespec_t cur_time;
 	} __Reply__clock_get_time_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -204,11 +204,11 @@ union __RequestUnion__clock_subsystem {
 		int clock_attr[1];
 	} __Reply__clock_get_attributes_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -216,7 +216,7 @@ union __RequestUnion__clock_subsystem {
 		kern_return_t RetCode;
 	} __Reply__clock_alarm_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 #endif /* !__Reply__clock_subsystem__defined */
 

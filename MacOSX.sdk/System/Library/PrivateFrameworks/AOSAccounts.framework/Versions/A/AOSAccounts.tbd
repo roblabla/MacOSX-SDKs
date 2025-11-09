@@ -1,15 +1,12 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 38D02713-68E9-34F8-AC9E-A540D2BE2D9D' ]
+uuids:           [ 'x86_64: B2799815-669D-3252-A899-7EE3D1C3B0E6' ]
 platform:        macosx
-install-name:    /System/Library/PrivateFrameworks/AOSAccounts.framework/Versions/A/AOSAccounts
+install-name:    '/System/Library/PrivateFrameworks/AOSAccounts.framework/Versions/A/AOSAccounts'
 current-version: 1.9.95
 exports:         
   - archs:           [ x86_64 ]
-    symbols:         [ _AADataclassActionErrorDomain, _AADataclassActionUserInfoLibrarySize, 
-                       _AAFollowUpActionDismiss, _AAFollowUpActionPrimary, _AAFollowUpIdentifierVerifyTerms, 
-                       _AAFollowUpUserInfoAccountIdentifier, _AAFollowUpUserInfoAltDSID, 
-                       _AOSAccountsGetLogLevel, _AOSAccountsSetLogLevel, _AOSDebugUserDictValueForKey, 
+    symbols:         [ _AOSAccountsGetLogLevel, _AOSAccountsSetLogLevel, _AOSDebugUserDictValueForKey, 
                        _AOSLogSafeDictionaryForDictionary, _CopyAccountPrefsForAltDSID, 
                        _CopyAccountValueForAltDSID, _MMAOSAccountStatusConfigInfoUpdatedNotification, 
                        _MMAOSAccountStatusLoginNotification, _MMAOSAccountStatusLogoutNotification, 
@@ -36,19 +33,21 @@ exports:
                        _MMCopySignUpInfo, _MMCopySignUpInfoForMB, _MMDeleteUserAccount, 
                        _MMDisableKeychainBackup, _MMEnableKeychainBackup, _MMGetDeviceUDID, 
                        _MMGetMCXKeyForDataclass, _MMInvokeDelegatesWithDictionary, 
-                       _MMIsDataclassAvailable, _MMIsSignupAllowed, _MMMBPostAquaSessionSetup, 
-                       _MMRecoverKeychainBackup, _MMRegisterCredentials, _MMRegisterWithICloud, 
-                       _MMRelayCookie, _MMRemoveAccountFromDefaults, _MMResendVerificationEmail, 
-                       _MMRetrieveQuotaStorageURL, _MMRetrieveRampState, _MMSendSMSChallenge, 
-                       _MMServiceCopyProperties, _MMServiceCopyProperty, _MMServiceIsAvailable, 
-                       _MMServiceIsEnabled, _MMServiceIsEnabledForDisplay, _MMServiceIsInactiveOrEnabled, 
-                       _MMServiceReconcileStatus, _MMServiceRemoveProperty, _MMServiceSetEnabled, 
-                       _MMServiceSetEnabledWithCompletion, _MMServiceSetEnabledWithOption, 
-                       _MMServiceSetProperty, _MMServiceSetPropertyOnACAccount, _MMServiceSetPropertyWithCompletion, 
-                       _MMSetACAccountTermsFlag, _MMSetMeCardToiCloud, _MMShouldAccountBePrimary, 
+                       _MMIsDataclassAvailable, _MMIsEnabledOnACAccount, _MMIsSignupAllowed, 
+                       _MMMBPostAquaSessionSetup, _MMRecoverKeychainBackup, _MMRegisterCredentials, 
+                       _MMRegisterWithICloud, _MMRelayCookie, _MMRemoveAccountFromDefaults, 
+                       _MMResendVerificationEmail, _MMRetrieveQuotaStorageURL, _MMRetrieveRampState, 
+                       _MMSendSMSChallenge, _MMServiceCopyProperties, _MMServiceCopyProperty, 
+                       _MMServiceIsAvailable, _MMServiceIsEnabled, _MMServiceIsEnabledForDisplay, 
+                       _MMServiceIsInactiveOrEnabled, _MMServiceReconcileStatus, 
+                       _MMServiceRemoveProperty, _MMServiceSetEnabled, _MMServiceSetEnabledWithCompletion, 
+                       _MMServiceSetEnabledWithOption, _MMServiceSetProperty, _MMServiceSetPropertyOnACAccount, 
+                       _MMServiceSetPropertyWithCompletion, _MMSetACAccountTermsFlag, 
+                       _MMSetEnabledOnACAccount, _MMSetMeCardToiCloud, _MMShouldAccountBePrimary, 
                        _MMUpdateACAccount, _MMUpdateiCloudAccountMgr, _MMValidateAccount, 
-                       _MMVerifyAccount, _MMVerifyAccountOLD, _RefreshAccount, _SetAccountValueForAltDSID, 
-                       __AOSAccountsLog, __AOSAccountsReadIsFamilyAllowed, __AOSAccountsReadQuotaNotifyTime, 
+                       _MMVerifyAccount, _MMVerifyAccountOLD, _ParseAccountInfo, 
+                       _RefreshAccount, _SetAccountValueForAltDSID, __AOSAccountsLog, 
+                       __AOSAccountsReadIsFamilyAllowed, __AOSAccountsReadQuotaNotifyTime, 
                        __AOSAccountsReadShouldShowBeforeWebClientIsReady, __AOSAccountsReadUseDemodLookMeUpByEmail, 
                        __AOSLogging, __AccountIsPrimary, __CopyAccountPrefs, __MMServiceSetEnabled, 
                        __RemoveAccountInfo, __handlePreSignedOutActions, _canLogAtLevel, 
@@ -174,8 +173,8 @@ exports:
                        _kMMServiceStatusChangedNotification, _kVettingEmailNotification, 
                        _kiCloudAccountRenewCredentialsComplete, _kiCloudAccountRenewCredentialsDSID, 
                        _kiCloudAccountTermsContext, _renewCredentialsOnACAccount ]
-    objc-classes:    [ AAFollowUpController, MMDelegatePluginManager, MMiCloudAccountsMigrator, 
-                       iCloudAccountMgr, iCloudUserNotification, iCloudUserNotifier ]
+    objc-classes:    [ MMDelegatePluginManager, MMiCloudAccountsMigrator, iCloudAccountMgr, 
+                       iCloudUserNotification, iCloudUserNotifier ]
     objc-ivars:      [ MMDelegatePluginManager._done, MMDelegatePluginManager._mbSetupPlugins, 
                        MMDelegatePluginManager._succeeded ]
     weak-def-symbols: [ __ZTINSt3__115basic_stringbufIwNS_11char_traitsIwEENS_9allocatorIwEEEE, 

@@ -5,6 +5,8 @@ Tags:
   NSErrorDomain: MTLCommandBufferErrorDomain
 - Name: MTLLibraryError
   NSErrorDomain: MTLLibraryErrorDomain
+- Name: MTLCounterSampleBufferError
+  NSErrorDomain: MTLCounterErrorDomain
 Globals:
 - Name: MTLDeviceWasAddedNotification
   SwiftName: wasAdded
@@ -399,6 +401,12 @@ Protocols:
   - Selector: 'optimizeIndirectCommandBuffer:withRange:'
     MethodKind: Instance
     SwiftPrivate: true
+  - Selector: 'resolveCounters:inRange:destinationBuffer:destinationOffset:'
+    MethodKind: Instance
+    SwiftPrivate: true
+  - Selector: 'sampleCountersInBuffer:atSampleIndex:withBarrier:'
+    MethodKind: Instance
+    SwiftName: sampleCounters(sampleBuffer:sampleIndex:barrier:)
 - Name: MTLBuffer
   Methods:
   - Selector: 'newTextureWithDescriptor:offset:bytesPerRow:'
@@ -410,7 +418,12 @@ Protocols:
   - Selector: 'addDebugMarker:range:'
     MethodKind: Instance
     SwiftPrivate: true
+  - Selector: 'newRemoteBufferViewForDevice:'
+    SwiftName: makeRemoteBufferView(_:)
+    MethodKind: Instance
   Properties:
+  - Name: remoteStorageBuffer
+    SwiftName: remoteStorageBuffer
 - Name: MTLCommandBuffer
   Methods:
   - Selector: 'blitCommandEncoder'
@@ -508,6 +521,9 @@ Protocols:
     MethodKind: Instance
     SwiftName: __memoryBarrier(resources:count:)
     SwiftPrivate: true
+  - Selector: 'sampleCountersInBuffer:atSampleIndex:withBarrier:'
+    MethodKind: Instance
+    SwiftName: sampleCounters(sampleBuffer:sampleIndex:barrier:)
 - Name: MTLDevice
   Methods:
   - Selector: 'getDefaultSamplePositions:count:'
@@ -627,6 +643,12 @@ Protocols:
   - Selector: 'newIndirectCommandBufferWithDescriptor:maxCommandCount:options:'
     SwiftName: makeIndirectCommandBuffer(descriptor:maxCommandCount:options:)
     MethodKind: Instance
+  - Selector: 'newCounterSampleBufferWithDescriptor:error:'
+    SwiftName: makeCounterSampleBuffer(descriptor:)
+    MethodKind: Instance
+  - Selector: 'sampleTimestamps:gpuTimestamp:'
+    MethodKind: Instance
+    SwiftPrivate: true
 - Name: MTLDrawable
   Methods:
   - Selector: 'presentAtTime:'
@@ -642,6 +664,12 @@ Protocols:
     MethodKind: Instance
   - Selector: 'newTextureWithDescriptor:'
     SwiftName: makeTexture(descriptor:)
+    MethodKind: Instance
+  - Selector: 'newBufferWithLength:options:offset:'
+    SwiftName: makeBuffer(length:options:offset:)
+    MethodKind: Instance
+  - Selector: 'newTextureWithDescriptor:offset:'
+    SwiftName: makeTexture(descriptor:offset:)
     MethodKind: Instance
 - Name: MTLIndirectArgumentEncoder
   Methods:
@@ -705,12 +733,6 @@ Protocols:
     MethodKind: Instance
 - Name: MTLFunction
   Methods:
-  - Selector: 'newIndirectArgumentEncoderWithBufferIndex:'
-    SwiftName: makeIndirectArgumentEncoder(bufferIndex:)
-    MethodKind: Instance
-  - Selector: 'newIndirectArgumentEncoderWithBufferIndex:reflection:'
-    SwiftName: makeIndirectArgumentEncoder(bufferIndex:reflection:)
-    MethodKind: Instance
   - Selector: 'newArgumentEncoderWithBufferIndex:'
     SwiftName: makeArgumentEncoder(bufferIndex:)
     MethodKind: Instance
@@ -875,6 +897,9 @@ Protocols:
   - Selector: 'executeCommandsInBuffer:indirectBuffer:indirectBufferOffset:'
     MethodKind: Instance
     SwiftPrivate: true
+  - Selector: 'sampleCountersInBuffer:atSampleIndex:withBarrier:'
+    MethodKind: Instance
+    SwiftName: sampleCounters(sampleBuffer:sampleIndex:barrier:)
 - Name: MTLSharedEvent
   Methods:
   - Selector: 'newSharedEventHandle'
@@ -888,6 +913,9 @@ Protocols:
   - Selector: 'newTextureViewWithPixelFormat:textureType:levels:slices:'
     MethodKind: Instance
     SwiftPrivate: true
+  - Selector: 'newTextureViewWithPixelFormat:textureType:levels:slices:swizzle:'
+    MethodKind: Instance
+    SwiftPrivate: true
   - Selector: 'replaceRegion:mipmapLevel:withBytes:bytesPerRow:'
     SwiftName: replace(region:mipmapLevel:withBytes:bytesPerRow:)
     MethodKind: Instance
@@ -897,7 +925,12 @@ Protocols:
   - Selector: 'newSharedTextureHandle'
     SwiftName: makeSharedTextureHandle()
     MethodKind: Instance
+  - Selector: 'newRemoteTextureViewForDevice:'
+    SwiftName: makeRemoteTextureView(_:)
+    MethodKind: Instance
   Properties:
+  - Name: remoteStorageTexture
+    SwiftName: remoteStorageTexture
 - Name: MTLIndirectCommandBuffer
   Methods:
   - Selector: 'indirectRenderCommandAtIndex:'
@@ -914,6 +947,11 @@ Protocols:
   - Selector: 'setFragmentBuffer:offset:atIndex:'
     SwiftName: setFragmentBuffer(_:offset:at:)
     MethodKind: Instance
+- Name: MTLCounterSampleBuffer
+  Methods:
+  - Selector: 'resolveCounterRange:'
+    MethodKind: Instance
+    SwiftPrivate: true
 SwiftVersions:
 - Version: 3
   Functions:
@@ -1313,6 +1351,10 @@ SwiftVersions:
       NullabilityOfRet: N
     - Selector: 'newTextureViewWithPixelFormat:textureType:levels:slices:'
       SwiftName: makeTextureView(pixelFormat:textureType:levels:slices:)
+      MethodKind: Instance
+      NullabilityOfRet: N
+    - Selector: 'newTextureViewWithPixelFormat:textureType:levels:slices:swizzle:'
+      SwiftName: makeTextureView(pixelFormat:textureType:levels:slices:swizzle:)
       MethodKind: Instance
       NullabilityOfRet: N
 - Version: 4

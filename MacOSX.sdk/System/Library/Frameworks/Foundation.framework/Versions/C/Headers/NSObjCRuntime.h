@@ -1,11 +1,11 @@
 /*	NSObjCRuntime.h
-	Copyright (c) 1994-2018, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2019, Apple Inc. All rights reserved.
 */
 
 #include <TargetConditionals.h>
 #include <Availability.h>
 
-#if (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE)) || (TARGET_OS_EMBEDDED || TARGET_OS_IPHONE)
+#if TARGET_OS_OSX || TARGET_OS_IPHONE
 #include <objc/NSObjCRuntime.h>
 #include <stdarg.h>
 #include <stdint.h>
@@ -19,20 +19,8 @@
 #define FOUNDATION_EXTERN extern
 #endif
 
-#if TARGET_OS_WIN32
-
-    #if defined(NSBUILDINGFOUNDATION)
-        #define FOUNDATION_EXPORT FOUNDATION_EXTERN __declspec(dllexport)
-    #else
-        #define FOUNDATION_EXPORT FOUNDATION_EXTERN __declspec(dllimport)
-    #endif
-
-    #define FOUNDATION_IMPORT FOUNDATION_EXTERN __declspec(dllimport)
-
-#else
-    #define FOUNDATION_EXPORT  FOUNDATION_EXTERN
-    #define FOUNDATION_IMPORT FOUNDATION_EXTERN
-#endif
+#define FOUNDATION_EXPORT FOUNDATION_EXTERN
+#define FOUNDATION_IMPORT FOUNDATION_EXTERN
 
 #if !defined(NS_INLINE)
     #if defined(__GNUC__)
@@ -41,8 +29,6 @@
         #define NS_INLINE static inline
     #elif defined(_MSC_VER)
         #define NS_INLINE static __inline
-    #elif TARGET_OS_WIN32
-        #define NS_INLINE static __inline__
     #endif
 #endif
 
@@ -55,14 +41,10 @@
 #endif
 
 #if !defined(NS_REQUIRES_NIL_TERMINATION)
-    #if TARGET_OS_WIN32
-        #define NS_REQUIRES_NIL_TERMINATION
+    #if defined(__APPLE_CC__) && (__APPLE_CC__ >= 5549)
+        #define NS_REQUIRES_NIL_TERMINATION __attribute__((sentinel(0,1)))
     #else
-        #if defined(__APPLE_CC__) && (__APPLE_CC__ >= 5549)
-            #define NS_REQUIRES_NIL_TERMINATION __attribute__((sentinel(0,1)))
-        #else
-            #define NS_REQUIRES_NIL_TERMINATION __attribute__((sentinel))
-        #endif
+        #define NS_REQUIRES_NIL_TERMINATION __attribute__((sentinel))
     #endif
 #endif
 
@@ -75,14 +57,28 @@
 #endif
 
 // Marks APIs whose iOS versions are nonatomic, that is cannot be set/get from multiple threads safely without additional synchronization
-#if !defined(NS_NONATOMIC_IOSONLY)
-    #if TARGET_OS_IPHONE
-	#define NS_NONATOMIC_IOSONLY nonatomic
-    #else
-        #if __has_feature(objc_property_explicit_atomic)
-            #define NS_NONATOMIC_IOSONLY atomic
+#if __clang_tapi__
+    #if !defined(NS_NONATOMIC_IOSONLY)
+        #if TARGET_OS_OSX || TARGET_OS_MACCATALYST
+            #if __has_feature(objc_property_explicit_atomic)
+                #define NS_NONATOMIC_IOSONLY atomic
+            #else
+                #define NS_NONATOMIC_IOSONLY
+            #endif
         #else
-            #define NS_NONATOMIC_IOSONLY
+            #define NS_NONATOMIC_IOSONLY nonatomic
+        #endif
+    #endif
+#else
+    #if !defined(NS_NONATOMIC_IOSONLY)
+        #if TARGET_OS_IPHONE
+            #define NS_NONATOMIC_IOSONLY nonatomic
+        #else
+            #if __has_feature(objc_property_explicit_atomic)
+                #define NS_NONATOMIC_IOSONLY atomic
+            #else
+                #define NS_NONATOMIC_IOSONLY
+            #endif
         #endif
     #endif
 #endif
@@ -94,7 +90,7 @@
 
 // Marks APIs which format strings by taking a format string and optional varargs as arguments
 #if !defined(NS_FORMAT_FUNCTION)
-    #if (__GNUC__*10+__GNUC_MINOR__ >= 42) && (TARGET_OS_MAC || TARGET_OS_EMBEDDED)
+    #if (__GNUC__*10+__GNUC_MINOR__ >= 42)
 	#define NS_FORMAT_FUNCTION(F,A) __attribute__((format(__NSString__, F, A)))
     #else
 	#define NS_FORMAT_FUNCTION(F,A)
@@ -243,13 +239,6 @@
 #define __unsafe_unretained
 #endif
 
-#if TARGET_OS_WIN32
-#import <objc/objc.h>
-#include <stdarg.h>
-#include <stdint.h>
-#include <limits.h>
-#endif
-
 #include <CoreFoundation/CFAvailability.h>
 
 #define NS_AVAILABLE(_mac, _ios) CF_AVAILABLE(_mac, _ios)
@@ -374,6 +363,8 @@ Usually, this is because the enum represents a mathematically complete set. For 
 #define NS_SWIFT_NOTHROW
 #endif
 
+#define NS_WARN_UNUSED_RESULT CF_WARN_UNUSED_RESULT
+
 // There is no need to use this macro any longer, the last Foundation epoch 
 // was 8 and that is now assumed to be the final version. 
 #define FOUNDATION_SWIFT_SDK_EPOCH_AT_LEAST(__epoch__) (!defined(SWIFT_CLASS_EXTRA))
@@ -496,17 +487,6 @@ FOUNDATION_EXPORT double NSFoundationVersionNumber;
 #define NSFoundationVersionNumber_iOS_9_3 1242.12
 #define NSFoundationVersionNumber_iOS_9_4 1280.25
 #define NSFoundationVersionNumber_iOS_9_x_Max 1299
-#endif
-
-#if TARGET_OS_WIN32
-typedef long NSInteger;
-typedef unsigned long NSUInteger;
-
-#define NSIntegerMax    LONG_MAX
-#define NSIntegerMin    LONG_MIN
-#define NSUIntegerMax   ULONG_MAX
-
-#define NSINTEGER_DEFINED 1
 #endif
 
 @class NSString, Protocol;

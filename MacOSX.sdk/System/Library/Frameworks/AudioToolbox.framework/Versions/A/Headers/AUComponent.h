@@ -1,3 +1,4 @@
+#if (defined(USE_AUDIOTOOLBOX_PUBLIC_HEADERS) && USE_AUDIOTOOLBOX_PUBLIC_HEADERS) || !__has_include(<AudioToolboxCore/AUComponent.h>)
 /*!
 	@file		AUComponent.h
  	@framework	AudioUnit.framework
@@ -61,20 +62,14 @@
 //================================================================================================
 #pragma mark Overview
 
-
-
-#include <Availability.h>
-#if !defined(__COREAUDIO_USE_FLAT_INCLUDES__)
-	#include <AudioToolbox/AudioComponent.h>
-	#include <CoreAudio/CoreAudioTypes.h>
-#else
-	#include <AudioComponent.h>
-	#include <CoreAudioTypes.h>
-#endif
+#include <AudioToolbox/AudioComponent.h>
 
 CF_ASSUME_NONNULL_BEGIN
 
-#define AU_SUPPORT_INTERAPP_AUDIO (TARGET_OS_IPHONE && !(0 && !TARGET_OS_SIMULATOR && !TARGET_OS_EMBEDDED))
+#define AU_SUPPORT_INTERAPP_AUDIO (TARGET_OS_IPHONE && !TARGET_OS_MACCATALYST)
+
+#define INTERAPP_AUDIO_DEPRECATED API_DEPRECATED("Inter-App Audio API is deprecated in favor of Audio Units", ios(7.0, 13.0), watchos(2.0, 6.0), tvos(9.0, 13.0))
+
 
 #ifdef __cplusplus
 extern "C" {
@@ -278,10 +273,11 @@ CF_ENUM(UInt32) {
 	kAudioUnitSubType_VoiceProcessingIO		= 'vpio'
 };
 
+#if !TARGET_OS_IPHONE
 /*!
 	@enum			Apple input/output audio unit sub types (OS X)
 	@constant		kAudioUnitSubType_HALOutput			
-						- desktop only
+						- desktop only (a.k.a. "AUHAL")
 					The audio unit that interfaces to any audio device. The user specifies which 
 					audio device to track. The audio unit can do input from the device as well as 
 					output to the device. Bus 0 is used for the output side, bus 1 is used
@@ -304,6 +300,18 @@ CF_ENUM(UInt32) {
 	kAudioUnitSubType_DefaultOutput			= 'def ',
 	kAudioUnitSubType_SystemOutput			= 'sys ',
 };
+#else
+/*!
+	@enum			Apple input/output audio unit sub types (iOS)
+	@constant		kAudioUnitSubType_RemoteIO			
+					The audio unit that interfaces to the iOS audio system. The
+					audio unit can do input as well as output. Bus 0 is used for the output side, 
+					bus 1 is used to get audio input.
+*/
+CF_ENUM(UInt32) {
+	kAudioUnitSubType_RemoteIO				= 'rioc',
+};
+#endif
 
 /*!
 	@enum			Apple music instrument audio unit sub types 
@@ -321,7 +329,9 @@ CF_ENUM(UInt32) {
 					It can load instruments from sample banks in either DLS or SoundFont formats.
 */
 CF_ENUM(UInt32) {
+#if !TARGET_OS_IPHONE
 	kAudioUnitSubType_DLSSynth				= 'dls ',
+#endif
 	kAudioUnitSubType_Sampler				= 'samp',
 	kAudioUnitSubType_MIDISynth				= 'msyn'
 };
@@ -382,6 +392,7 @@ CF_ENUM(UInt32) {
 	kAudioUnitSubType_RoundTripAAC			= 'raac',
 };
 
+#if !TARGET_OS_IPHONE
 /*!
 	@enum			Apple converter audio unit sub types (OS X only)
 	@constant		kAudioUnitSubType_TimePitch
@@ -394,6 +405,17 @@ CF_ENUM(UInt32) {
 CF_ENUM(UInt32) {
 	kAudioUnitSubType_TimePitch				= 'tmpt'
 };
+#elif !TARGET_OS_MACCATALYST
+/*!
+	@enum			Apple converter audio unit sub types (iOS only)
+	@constant		kAudioUnitSubType_AUiPodTime
+					An audio unit that provides simple (and limited) control over playback rate
+					and time.
+*/
+CF_ENUM(UInt32) {
+	kAudioUnitSubType_AUiPodTime API_DEPRECATED_WITH_REPLACEMENT("kAudioUnitSubType_NewTimePitch", ios(2.0, 13.0), watchos(2.0, 6.0), tvos(9.0, 13.0)) API_UNAVAILABLE(macos)	= 'iptm'
+};
+#endif
 
 /*!
 	@enum			Apple effect audio unit sub types 
@@ -437,7 +459,10 @@ CF_ENUM(UInt32) {
 					
 	@constant		kAudioUnitSubType_NBandEQ
 					A generalized N-band graphic EQ with specifiable filter types per-band
-	
+
+    @constant       kAudioUnitSubType_Reverb2
+                    A lite reverb that can be used to simulate various and different spaces
+
 */
 CF_ENUM(UInt32) {
 	kAudioUnitSubType_PeakLimiter			= 'lmtr',
@@ -451,9 +476,11 @@ CF_ENUM(UInt32) {
 	kAudioUnitSubType_Distortion			= 'dist',
 	kAudioUnitSubType_Delay					= 'dely',
 	kAudioUnitSubType_SampleDelay			= 'sdly',
-	kAudioUnitSubType_NBandEQ				= 'nbeq'
+	kAudioUnitSubType_NBandEQ				= 'nbeq',
+    kAudioUnitSubType_Reverb2               = 'rvb2'
 };
 
+#if !TARGET_OS_IPHONE
 /*!
 	@enum			Apple effect audio unit sub types (OS X only)
 	@constant		kAudioUnitSubType_GraphicEQ				
@@ -482,6 +509,16 @@ CF_ENUM(UInt32) {
 	kAudioUnitSubType_NetSend				= 'nsnd',
 	kAudioUnitSubType_RogerBeep				= 'rogr'
 };
+#elif !TARGET_OS_MACCATALYST
+/*!
+	@enum			Apple effect audio unit sub types (iOS only)
+	@constant		kAudioUnitSubType_AUiPodEQ
+					A simple graphic EQ with common presets
+*/
+CF_ENUM(UInt32) {
+	kAudioUnitSubType_AUiPodEQ API_DEPRECATED_WITH_REPLACEMENT("kAudioUnitSubType_GraphicEQ", ios(2.0, 13.0), watchos(2.0, 6.0), tvos(9.0, 13.0)) API_UNAVAILABLE(macos)	= 'ipeq'
+};
+#endif
 
 
 
@@ -514,6 +551,7 @@ CF_ENUM(UInt32) {
     kAudioUnitSubType_SpatialMixer          = '3dem',
 };
 
+#if !TARGET_OS_IPHONE
 /*!
 	@enum			Apple mixer audio unit sub types (OS X only)
 	@constant		kAudioUnitSubType_StereoMixer
@@ -533,6 +571,19 @@ CF_ENUM(UInt32) {
 											= '3dmx',
 											// use kAudioUnitSubType_SpatialMixer instead
 };
+#else
+/*!
+	@enum			Apple mixer audio unit sub types (iOS only)
+	@constant		kAudioUnitSubType_AU3DMixerEmbedded
+						- iPhone only (renamed to kAudioUnitSubType_SpatialMixer)
+					A scaled-down version of the AU3DMixer that presents a stereo output, mono or 
+					stereo inputs
+*/
+CF_ENUM(UInt32) {
+	kAudioUnitSubType_AU3DMixerEmbedded	__attribute__((deprecated("renamed to kAudioUnitSubType_SpatialMixer")))
+											= '3dem' 
+};
+#endif
 
 /*!
 	@enum			Apple panner audio unit sub types 
@@ -556,12 +607,14 @@ CF_ENUM(UInt32) {
 						- desktop only
 					A panner unit that uses a generic "HRTF" model to pan to a stereo output
 */
+#if !TARGET_OS_IPHONE
 CF_ENUM(UInt32) {
 	kAudioUnitSubType_SphericalHeadPanner	= 'sphr',
 	kAudioUnitSubType_VectorPanner			= 'vbas',
 	kAudioUnitSubType_SoundFieldPanner		= 'ambi',
 	kAudioUnitSubType_HRTFPanner			= 'hrtf'
 };
+#endif
 
 /*!
 	@enum			Apple generator audio unit sub types 
@@ -582,7 +635,9 @@ CF_ENUM(UInt32) {
 					sends. It presents a custom UI so can be used in a UI context as well
 */
 CF_ENUM(UInt32) {
+#if !TARGET_OS_IPHONE
 	kAudioUnitSubType_NetReceive			= 'nrcv',
+#endif
 	kAudioUnitSubType_ScheduledSoundPlayer	= 'sspl',
 	kAudioUnitSubType_AudioFilePlayer		= 'afpl'
 };
@@ -608,10 +663,15 @@ CF_ENUM(UInt32) {
 					called after the render operation is completed.
 
 	@constant		kAudioUnitRenderAction_OutputIsSilence
-					This flag can be set in a render input callback (or in the audio unit's render 
-					operation itself) and is used to indicate that the render buffer contains only 
-					silence. It can then be used by the caller as a hint to whether the buffer 
-					needs to be processed or not.
+					The originator of a buffer, in a render input callback, or in an audio unit's
+					render operation, may use this flag to indicate that the buffer contains
+					only silence.
+
+					The receiver of the buffer can then use the flag as a hint as to whether the
+					buffer needs to be processed or not.
+
+					Note that because the flag is only a hint, when setting the silence flag,
+					the originator of a buffer must also ensure that it contains silence (zeroes).
 					
 	@constant		kAudioOfflineUnitRenderAction_Preflight
 					This is used with offline audio units (of type 'auol'). It is used when an 
@@ -717,16 +777,21 @@ typedef CF_OPTIONS(UInt32, AudioUnitRenderActionFlags)
 					than the default allocated buffer. The audio unit can provide a size hint, in
 					case it needs a larger buffer. See the documentation for AUAudioUnit's
 					MIDIOutputBufferSizeHint property.
-    @constant   kAudioComponentErr_InstanceInvalidated
-        The component instance's implementation is not available, most likely because the process
-        that published it is no longer running.
-	@constant	kAudioUnitErr_RenderTimeout
-		The audio unit did not satisfy the render request in time.
-	@constant kAudioUnitErr_ExtensionNotFound
-		The specified identifier did not match any Audio Unit Extensions.
+	@constant		kAudioComponentErr_InstanceInvalidated
+					The component instance's implementation is not available, most likely because the process
+					that published it is no longer running.
+	@constant		kAudioUnitErr_RenderTimeout
+					The audio unit did not satisfy the render request in time.
+	@constant 		kAudioUnitErr_ExtensionNotFound
+					The specified identifier did not match any Audio Unit Extensions.
 	@constant		kAudioUnitErr_InvalidParameterValue
 					The parameter value is not supported, e.g. the value specified is NaN or
 					infinite.
+ 	@constant 		kAudioUnitErr_InvalidFilePath
+ 					The file path that was passed is not supported. It is either too long or contains
+ 					invalid characters.
+ 	@constant		kAudioUnitErr_MissingKey
+ 					A required key is missing from a dictionary object.
 */
 CF_ENUM(OSStatus) {
 	kAudioUnitErr_InvalidProperty			= -10879,
@@ -749,11 +814,13 @@ CF_ENUM(OSStatus) {
 	kAudioUnitErr_InvalidOfflineRender		= -10848,
 	kAudioUnitErr_Unauthorized				= -10847,
 	kAudioUnitErr_MIDIOutputBufferFull		= -66753,
-	kAudioComponentErr_InstanceTimedOut     = -66754,
-	kAudioComponentErr_InstanceInvalidated  = -66749,
+	kAudioComponentErr_InstanceTimedOut		= -66754,
+	kAudioComponentErr_InstanceInvalidated	= -66749,
 	kAudioUnitErr_RenderTimeout				= -66745,
 	kAudioUnitErr_ExtensionNotFound			= -66744,
 	kAudioUnitErr_InvalidParameterValue		= -66743,
+	kAudioUnitErr_InvalidFilePath			= -66742,
+	kAudioUnitErr_MissingKey				= -66741
 };
 
 
@@ -850,18 +917,18 @@ typedef CF_ENUM(UInt32, AUParameterEventType)
 					
 					See AudioUnitScheduleParameters
 
-	@field			scope	
+	@var  			scope	
 					The scope for the parameter
-	@field			element
+	@var  			element
 					The element for the parameter
-	@field			parameter
+	@var  			parameter
 					The parameterID for the parameter
 	
-	@field			eventType
+	@var  			eventType
 					The event type. This field further defines how the union described by 
 					eventValues is to be interpreted.
 	
-	@field			eventValues
+	@var  			eventValues
 					If the parameter event type is _Immediate, then the immediate struct of this 
 					union should be used.
 					If the parameter event type is _Ramped, then the ramp struct of this union 
@@ -903,13 +970,13 @@ typedef struct AudioUnitParameterEvent	AudioUnitParameterEvent;
 					to deal with audio unit parameters, but is included in this header file for 
 					completeness.
 
-	@field			mAudioUnit
+	@var  			mAudioUnit
 					The audio unit instance to which the specified parameter applies.
-	@field			mParameterID
+	@var  			mParameterID
 					The parameterID for the parameter
-	@field			mScope	
+	@var  			mScope	
 					The scope for the parameter
-	@field			mElement
+	@var  			mElement
 					The element for the parameter
 */
 struct AudioUnitParameter
@@ -928,13 +995,13 @@ typedef struct AudioUnitParameter	AudioUnitParameter;
 					to deal with audio unit properties, but is included in this header file for 
 					completeness.
 
-	@field			mAudioUnit
+	@var  			mAudioUnit
 					The audio unit instance which the specified property applies too
-	@field			mPropertyID
+	@var  			mPropertyID
 					The propertyID for the property
-	@field			mScope	
+	@var  			mScope	
 					The scope for the property
-	@field			mElement
+	@var  			mElement
 					The element for the property
 */
 struct AudioUnitProperty
@@ -1531,7 +1598,7 @@ AudioOutputUnitPublish(         const AudioComponentDescription *   inDesc,
                                 CFStringRef                         inName,
                                 UInt32                              inVersion,
 								AudioUnit                           inOutputUnit)
-                                                API_AVAILABLE(ios(7.0), watchos(2.0), tvos(9.0)) API_UNAVAILABLE(macos);
+                                                API_UNAVAILABLE(macos) INTERAPP_AUDIO_DEPRECATED;
 
 
 #if defined(__OBJC__)
@@ -1539,10 +1606,10 @@ AudioOutputUnitPublish(         const AudioComponentDescription *   inDesc,
 
 extern UIImage * __nullable
 AudioOutputUnitGetHostIcon(AudioUnit au, float desiredPointSize)
-                                                API_AVAILABLE(ios(7.0), watchos(2.0), tvos(9.0)) API_UNAVAILABLE(macos);
+                                                API_UNAVAILABLE(macos) INTERAPP_AUDIO_DEPRECATED;
 extern UIImage * __nullable
 AudioComponentGetIcon(AudioComponent comp, float desiredPointSize)
-                                                API_AVAILABLE(ios(7.0), watchos(2.0), tvos(9.0)) API_UNAVAILABLE(macos);
+                                                API_UNAVAILABLE(macos) INTERAPP_AUDIO_DEPRECATED;
 
 #endif // __OBJC__
 
@@ -1554,13 +1621,13 @@ AudioComponentGetIcon(AudioComponent comp, float desiredPointSize)
 		Inter-app audio hosts can use this to sort the list of available nodes by how recently
 		the user interacted with them.
 	
-    @param          inComponent
+    @param          comp
                         The AudioComponent being queried.
     @result         The CFAbsoluteTime at which the node was last active (0 if never).
 */
 extern CFAbsoluteTime
 AudioComponentGetLastActiveTime(AudioComponent comp)
-                                                API_AVAILABLE(ios(7.0), watchos(2.0), tvos(9.0)) API_UNAVAILABLE(macos);
+                                                API_UNAVAILABLE(macos) INTERAPP_AUDIO_DEPRECATED;
 #endif // AU_SUPPORT_INTERAPP_AUDIO
 
 #if defined(__LP64__) || TARGET_OS_IPHONE
@@ -1718,10 +1785,6 @@ typedef OSStatus
 	@param			inComponentStorage
 					For a component manager component, this is the component instance storage 
 					pointer
-	@param			inID
-	@param			inScope
-	@param			inElement
-	@param			outValue
 */
 typedef OSStatus
 (*AudioUnitGetParameterProc)(	void *						inComponentStorage,
@@ -1740,11 +1803,6 @@ typedef OSStatus
 	@param			inComponentStorage
 					For a component manager component, this is the component instance storage 
 					pointer
-	@param			inID
-	@param			inScope
-	@param			inElement
-	@param			inValue
-	@param			inBufferOffsetInFrames
 */
 typedef OSStatus
 (*AudioUnitSetParameterProc)(	void *						inComponentStorage,
@@ -1764,11 +1822,6 @@ typedef OSStatus
 	@param			inComponentStorage
 					For a component manager component, this is the component instance storage 
 					pointer
-	@param			ioActionFlags
-	@param			inTimeStamp
-	@param			inOutputBusNumber
-	@param			inNumberFrames
-	@param			ioData
 */
 typedef OSStatus
 (*AudioUnitRenderProc)(			void *							inComponentStorage,
@@ -1816,3 +1869,6 @@ AudioUnitRemovePropertyListener(	AudioUnit						inUnit,
 CF_ASSUME_NONNULL_END
 
 #endif /* AudioUnit_AUComponent_h */
+#else
+#include <AudioToolboxCore/AUComponent.h>
+#endif

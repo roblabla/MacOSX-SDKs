@@ -13,6 +13,7 @@
 
 #ifdef __METAL_VERSION__
 #include <metal_stdlib>
+#include <simd/simd.h>
 
 using namespace metal;
 
@@ -117,6 +118,26 @@ typedef struct {
      */
     vector_float3 direction;
 } MPSRayOriginDirection;
+
+/**
+ * @brief Represents a 3D ray with an origin and a direction
+ *
+ * @discussion This type is available from the Metal Shading Language by including the
+ * MetalPerformanceShaders/MetalPerformanceShaders.h header.
+ */
+typedef struct {
+    /**
+     * @brief Ray origin. The intersection test will be skipped if the origin contains NaNs
+     * or infinities.
+     */
+    MPSPackedFloat3 origin;
+
+    /**
+     * @brief Ray direction. Does not need to be normalized. The intersection test will be
+     * skipped if the direction has length zero or contains NaNs or infinities.
+     */
+    MPSPackedFloat3 direction;
+} MPSRayPackedOriginDirection;
 
 /**
  * @brief Represents a 3D ray with an origin, a direction, and an intersection
@@ -228,7 +249,7 @@ typedef struct {
 
 /**
  * @brief Intersection result which contains the distance from the ray origin to the intersection
- * point, the index of the intersected primitive, and the first two barycentric coordinates of
+ * point, the index of the intersected primitive, and the two dimensional parameterization of
  * the intersection point.
  *
  * @discussion This type is available from the Metal Shading Language by including the
@@ -250,9 +271,42 @@ typedef struct {
     unsigned int primitiveIndex;
 
     /**
-     * @brief The first two barycentric coordinates U and V of the intersection point. The
-     * third coordinate W = 1 - U - V. Undefined if the ray does not intersect a primitive
-     * or if the intersection type is MPSIntersectionTypeAny.
+     * @brief A two dimensional coordinate representing the intersection point according to the
+     * primitive's parameterization.
+     *
+     * For triangle primitives, these are the first two barycentric coordinates U and V of the
+     * intersection point. The third coordinate W = 1 - U - V. If the triangle has vertices v0, v1,
+     * and v2, the position of the intersection point (and other per-vertex attributes) can be
+     * interpolated as follows:
+     *
+     *     @code
+     *     float3 v_interpolated = U * v0 + V * v1 + W * v2;
+     *     @endcode
+     *
+     * Quadrilateral primitives are treated as two triangles internally. If the quadrilateral has
+     * vertices v0, v1, v2, and v3, the two triangles will have vertices v0, v1, v2 and v0, v2, v3.
+     * The coordinates will still be the first two barycentric coordinates of the intersected
+     * triangle, but they will be subtracted from one for the second triangle. In that case, the
+     * third coordinate W = 1 - U - V will be less than zero. This can be used to interpolate per-
+     * vertex attributes as follows:
+     *
+     *     @code
+     *     float W = 1 - U - V;
+     *     float3 v_interpolated;
+     *
+     *     if (W < 0.0f) {
+     *         U = 1 - U;
+     *         V = 1 - V;
+     *         W = 1 - U - V;
+     *         v_interpolated = U * v0 + V * v2 + W * v3;
+     *     }
+     *     else {
+     *         v_interpolated = U * v0 + V * v1 + W * v2;
+     *     }
+     *     @endcode
+     *
+     * This value is undefined if the ray does not intersect a primitive or if the intersection
+     * type is MPSIntersectionTypeAny.
      */
     vector_float2 coordinates;
 } MPSIntersectionDistancePrimitiveIndexCoordinates;
@@ -290,7 +344,7 @@ typedef struct {
 /**
  * @brief Intersection result which contains the distance from the ray origin to the intersection
  * point, the index of the intersected primitive, the index of the intersected instance, and the
- * first two barycentric coordinates of the intersection point.
+ * two dimensional parameterization of the intersection point.
  *
  * @discussion This type is available from the Metal Shading Language by including the
  * MetalPerformanceShaders/MetalPerformanceShaders.h header.
@@ -318,9 +372,42 @@ typedef struct {
     unsigned int instanceIndex;
 
     /**
-     * @brief The first two barycentric coordinates U and V of the intersection point. The
-     * third coordinate W = 1 - U - V. Undefined if the ray does not intersect a primitive
-     * or if the intersection type is MPSIntersectionTypeAny.
+     * @brief A two dimensional coordinate representing the intersection point according to the
+     * primitive's parameterization.
+     *
+     * For triangle primitives, these are the first two barycentric coordinates U and V of the
+     * intersection point. The third coordinate W = 1 - U - V. If the triangle has vertices v0, v1,
+     * and v2, the position of the intersection point (and other per-vertex attributes) can be
+     * interpolated as follows:
+     *
+     *     @code
+     *     float3 v_interpolated = U * v0 + V * v1 + W * v2;
+     *     @endcode
+     *
+     * Quadrilateral primitives are treated as two triangles internally. If the quadrilateral has
+     * vertices v0, v1, v2, and v3, the two triangles will have vertices v0, v1, v2 and v0, v2, v3.
+     * The coordinates will still be the first two barycentric coordinates of the intersected
+     * triangle, but they will be subtracted from one for the second triangle. In that case, the
+     * third coordinate W = 1 - U - V will be less than zero. This can be used to interpolate per-
+     * vertex attributes as follows:
+     *
+     *     @code
+     *     float W = 1 - U - V;
+     *     float3 v_interpolated;
+     *
+     *     if (W < 0.0f) {
+     *         U = 1 - U;
+     *         V = 1 - V;
+     *         W = 1 - U - V;
+     *         v_interpolated = U * v0 + V * v2 + W * v3;
+     *     }
+     *     else {
+     *         v_interpolated = U * v0 + V * v1 + W * v2;
+     *     }
+     *     @endcode
+     *
+     * This value is undefined if the ray does not intersect a primitive or if the intersection
+     * type is MPSIntersectionTypeAny.
      */
     vector_float2 coordinates;
 } MPSIntersectionDistancePrimitiveIndexInstanceIndexCoordinates;

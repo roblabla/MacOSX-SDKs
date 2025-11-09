@@ -112,7 +112,7 @@ typedef STACK_UPP_TYPE(SleepQProcPtr)   SleepQUPP;
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern SleepQUPP
-NewSleepQUPP(SleepQProcPtr userRoutine)                       __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0,__MAC_10_5,__IPHONE_NA,__IPHONE_NA);
+NewSleepQUPP(SleepQProcPtr userRoutine)                       API_DEPRECATED("No longer supported", macos(10.0,10.5) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 /*
@@ -124,7 +124,7 @@ NewSleepQUPP(SleepQProcPtr userRoutine)                       __OSX_AVAILABLE_BU
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeSleepQUPP(SleepQUPP userUPP)                           __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0,__MAC_10_5,__IPHONE_NA,__IPHONE_NA);
+DisposeSleepQUPP(SleepQUPP userUPP)                           API_DEPRECATED("No longer supported", macos(10.0,10.5) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 /*
@@ -139,7 +139,7 @@ extern long
 InvokeSleepQUPP(
   long          message,
   SleepQRecPtr  qRecPtr,
-  SleepQUPP     userUPP)                                      __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0,__MAC_10_5,__IPHONE_NA,__IPHONE_NA);
+  SleepQUPP     userUPP)                                      API_DEPRECATED("No longer supported", macos(10.0,10.5) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 #ifdef __cplusplus
@@ -178,7 +178,7 @@ struct SleepQRec {
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern long 
-GetCPUSpeed(void)                                             __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0,__MAC_10_8,__IPHONE_NA,__IPHONE_NA);
+GetCPUSpeed(void)                                             API_DEPRECATED("No longer supported", macos(10.0,10.8) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 /*
@@ -201,7 +201,7 @@ GetCPUSpeed(void)                                             __OSX_AVAILABLE_BU
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-SleepQInstall(SleepQRecPtr qRecPtr)                           __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0,__MAC_10_8,__IPHONE_NA,__IPHONE_NA);
+SleepQInstall(SleepQRecPtr qRecPtr)                           API_DEPRECATED("No longer supported", macos(10.0,10.8) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 /*
@@ -224,7 +224,7 @@ SleepQInstall(SleepQRecPtr qRecPtr)                           __OSX_AVAILABLE_BU
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-SleepQRemove(SleepQRecPtr qRecPtr)                            __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0,__MAC_10_8,__IPHONE_NA,__IPHONE_NA);
+SleepQRemove(SleepQRecPtr qRecPtr)                            API_DEPRECATED("No longer supported", macos(10.0,10.8) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 /*
@@ -246,7 +246,7 @@ SleepQRemove(SleepQRecPtr qRecPtr)                            __OSX_AVAILABLE_BU
  *    Non-Carbon CFM:   in PowerMgrLib 1.0 and later
  */
 extern short 
-MaximumProcessorSpeed(void)                                   __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0,__MAC_10_8,__IPHONE_NA,__IPHONE_NA);
+MaximumProcessorSpeed(void)                                   API_DEPRECATED("No longer supported", macos(10.0,10.8) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 /*
@@ -269,7 +269,7 @@ MaximumProcessorSpeed(void)                                   __OSX_AVAILABLE_BU
  *    Non-Carbon CFM:   in PowerMgrLib 1.0 and later
  */
 extern short 
-MinimumProcessorSpeed(void)                                   __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_1,__MAC_10_8,__IPHONE_NA,__IPHONE_NA);
+MinimumProcessorSpeed(void)                                   API_DEPRECATED("No longer supported", macos(10.1,10.8) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 /*
@@ -294,7 +294,7 @@ MinimumProcessorSpeed(void)                                   __OSX_AVAILABLE_BU
  *    Non-Carbon CFM:   in PowerMgrLib 1.0 and later
  */
 extern short 
-CurrentProcessorSpeed(void)                                   __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0,__MAC_10_8,__IPHONE_NA,__IPHONE_NA);
+CurrentProcessorSpeed(void)                                   API_DEPRECATED("No longer supported", macos(10.0,10.8) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 /*
@@ -315,7 +315,7 @@ CurrentProcessorSpeed(void)                                   __OSX_AVAILABLE_BU
  *    Non-Carbon CFM:   in PowerMgrLib 1.0 and later
  */
 extern short 
-BatteryCount(void)                                            __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0,__MAC_10_8,__IPHONE_NA,__IPHONE_NA);
+BatteryCount(void)                                            API_DEPRECATED("No longer supported", macos(10.0,10.8) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 /*
@@ -364,7 +364,7 @@ BatteryCount(void)                                            __OSX_AVAILABLE_BU
  *    Non-Carbon CFM:   in PowerMgrLib 1.0 and later
  */
 extern OSErr 
-UpdateSystemActivity(UInt8 activity)                          __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0,__MAC_10_8,__IPHONE_NA,__IPHONE_NA);
+UpdateSystemActivity(UInt8 activity)                          API_DEPRECATED("No longer supported", macos(10.0,10.8) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 #pragma pack(pop)

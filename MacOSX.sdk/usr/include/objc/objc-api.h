@@ -105,17 +105,43 @@
         // Variadic IMP is comparable via OpaquePointer; non-variadic IMP isn't.
 #       define OBJC_OLD_DISPATCH_PROTOTYPES 1
 #   else
-#       define OBJC_OLD_DISPATCH_PROTOTYPES 1
+#       define OBJC_OLD_DISPATCH_PROTOTYPES 0
 #   endif
 #endif
 
 
 /* OBJC_AVAILABLE: shorthand for all-OS availability */
-#if !defined(OBJC_AVAILABLE)
-#   define OBJC_AVAILABLE(x, i, t, w, b)                            \
-        __OSX_AVAILABLE(x)  __IOS_AVAILABLE(i)  __TVOS_AVAILABLE(t) \
-        __WATCHOS_AVAILABLE(w)  
-#endif
+
+#   if !defined(OBJC_AVAILABLE)
+#       define OBJC_AVAILABLE(x, i, t, w, b)                            \
+            __OSX_AVAILABLE(x)  __IOS_AVAILABLE(i)  __TVOS_AVAILABLE(t) \
+            __WATCHOS_AVAILABLE(w)
+#   endif
+
+
+
+/* OBJC_OSX_DEPRECATED_OTHERS_UNAVAILABLE: Deprecated on OS X,
+ * unavailable everywhere else. */
+
+#   if !defined(OBJC_OSX_DEPRECATED_OTHERS_UNAVAILABLE)
+#       define OBJC_OSX_DEPRECATED_OTHERS_UNAVAILABLE(_start, _dep, _msg) \
+            __OSX_DEPRECATED(_start, _dep, _msg)                          \
+            __IOS_UNAVAILABLE __TVOS_UNAVAILABLE                          \
+            __WATCHOS_UNAVAILABLE
+#   endif
+
+
+
+/* OBJC_OSX_AVAILABLE_OTHERS_UNAVAILABLE: Available on OS X,
+ * unavailable everywhere else. */
+
+#   if !defined(OBJC_OSX_AVAILABLE_OTHERS_UNAVAILABLE)
+#       define OBJC_OSX_AVAILABLE_OTHERS_UNAVAILABLE(vers) \
+            __OSX_AVAILABLE(vers)                          \
+            __IOS_UNAVAILABLE __TVOS_UNAVAILABLE           \
+            __WATCHOS_UNAVAILABLE
+#    endif
+
 
 
 /* OBJC_ISA_AVAILABILITY: `isa` will be deprecated or unavailable 
@@ -201,15 +227,9 @@
 #endif
 
 #if !defined(OBJC_VISIBLE)
-#   if TARGET_OS_WIN32
-#       if defined(BUILDING_OBJC)
-#           define OBJC_VISIBLE __declspec(dllexport)
-#       else
-#           define OBJC_VISIBLE __declspec(dllimport)
-#       endif
-#   else
+
 #       define OBJC_VISIBLE  __attribute__((visibility("default")))
-#   endif
+
 #endif
 
 #if !defined(OBJC_EXPORT)

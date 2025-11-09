@@ -24,6 +24,7 @@
 					it perform certain functions.
 */
 
+API_UNAVAILABLE(ios, watchos, tvos)
 @interface IOBluetoothHostController : NSObject
 {
 @private
@@ -110,6 +111,7 @@
 					deadlock your process.
 */
 
+API_UNAVAILABLE(ios, watchos, tvos)
 @interface NSObject( IOBluetoothHostControllerDelegate )
 
 //---------------------------------------------------------------------------------------------------------------------------

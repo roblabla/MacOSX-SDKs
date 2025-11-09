@@ -35,7 +35,7 @@ NS_CLASS_AVAILABLE_MAC(10_10)
 
 @end
 
-
+NS_AVAILABLE_MAC(10_10)
 @protocol NCWidgetSearchViewDelegate <NSObject>
 
 /* Called as new search terms are typed.

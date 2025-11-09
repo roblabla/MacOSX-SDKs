@@ -3,7 +3,7 @@
 
 	Framework:		AVFoundation
  
-	Copyright 2009-2018 Apple Inc. All rights reserved.
+	Copyright 2009-2019 Apple Inc. All rights reserved.
 
 */
 
@@ -42,14 +42,14 @@ NS_ASSUME_NONNULL_BEGIN
   @discussion
 	Some movies can contain references to media data stored outside the movie's container, for example in another file. This key can be used to specify a policy to use when these references are encountered. If a movie contains one or more references of a type that is forbidden by the reference restrictions, loading of movie properties will fail. In addition, such a movie cannot be used with other AVFoundation modules, such as AVPlayerItem or AVAssetExportSession.
 */
-AVF_EXPORT NSString *const AVMovieReferenceRestrictionsKey NS_AVAILABLE_MAC(10_10);
+AVF_EXPORT NSString *const AVMovieReferenceRestrictionsKey API_AVAILABLE(macos(10.10), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos);
 
 @class AVMovieInternal;
 @class AVMediaDataStorage;
 @class AVMetadataItem;
 
 #pragma mark --- AVMovie ---
-NS_CLASS_AVAILABLE_MAC(10_10)
+API_AVAILABLE(macos(10.10), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos)
 @interface AVMovie : AVAsset <NSCopying, NSMutableCopying>
 {
 @private
@@ -102,7 +102,7 @@ NS_CLASS_AVAILABLE_MAC(10_10)
 	@discussion     You can use this method to operate on movie headers that are not stored in files; this might include movie headers on the pasteboard (which do not contain media data). In general you should avoid loading an entire movie file with its media data into an instance of NSData! By default, the defaultMediaDataStorage property will be nil and each associated AVMovieTrack's mediaDataStorage property will be nil.
                     If you want to create an AVMutableMovie from an NSData object and then append sample buffers to any of its tracks, you must first set one of these properties to indicate where the sample data should be written.
 */
-+ (instancetype)movieWithData:(NSData *)data options:(nullable NSDictionary<NSString *, id> *)options NS_AVAILABLE_MAC(10_11);
++ (instancetype)movieWithData:(NSData *)data options:(nullable NSDictionary<NSString *, id> *)options API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos);
 
 /*!
 	@method			initWithData:options:
@@ -116,7 +116,7 @@ NS_CLASS_AVAILABLE_MAC(10_10)
  
                     By default, the defaultMediaDataStorage property will be nil and each associated AVMovieTrack's mediaDataStorage property will be nil. If you want to create an AVMutableMovie from an NSData object and then append sample buffers to any of its tracks, you must first set one of these properties to indicate where the sample data should be written.
 */
-- (instancetype)initWithData:(NSData *)data options:(nullable NSDictionary<NSString *, id> *)options NS_DESIGNATED_INITIALIZER NS_AVAILABLE_MAC(10_11);
+- (instancetype)initWithData:(NSData *)data options:(nullable NSDictionary<NSString *, id> *)options NS_DESIGNATED_INITIALIZER API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos);
 
 /*!
 	@property       URL
@@ -128,14 +128,14 @@ NS_CLASS_AVAILABLE_MAC(10_10)
 	@property       data
 	@abstract       The data block with which the instance of AVMovie was initialized; may be nil.
 */
-@property (nonatomic, readonly, nullable) NSData *data NS_AVAILABLE_MAC(10_11);
+@property (nonatomic, readonly, nullable) NSData *data API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos);
 
 /*!
 	@property       defaultMediaDataStorage
 	@abstract       The default storage container for media data added to a movie.
 	@discussion     The value of this property is an AVMediaDataStorage object that indicates where sample data that is added to a movie should be written by default.
 */
-@property (nonatomic, readonly, nullable) AVMediaDataStorage *defaultMediaDataStorage NS_AVAILABLE_MAC(10_11);
+@property (nonatomic, readonly, nullable) AVMediaDataStorage *defaultMediaDataStorage API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos);
 
 /*!
 	@property       tracks
@@ -156,7 +156,7 @@ NS_CLASS_AVAILABLE_MAC(10_10)
 	@abstract       Indicates whether the movie file is extended by at least one movie fragment.
 	@discussion     The value of this property is YES if canContainMovieFragments is YES and at least one 'moof' box is present after the 'moov' box.
 */
-@property (nonatomic, readonly) BOOL containsMovieFragments NS_AVAILABLE_MAC(10_11);
+@property (nonatomic, readonly) BOOL containsMovieFragments API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos);
 
 @end
 
@@ -172,7 +172,7 @@ NS_CLASS_AVAILABLE_MAC(10_10)
 typedef NS_OPTIONS(NSUInteger, AVMovieWritingOptions) {
 	AVMovieWritingAddMovieHeaderToDestination =					0,
 	AVMovieWritingTruncateDestinationToMovieHeaderOnly =		(1UL << 0)
-} NS_AVAILABLE_MAC(10_11);
+} API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos);
 
 @interface AVMovie (AVMovieMovieHeaderSupport)
 
@@ -186,7 +186,7 @@ typedef NS_OPTIONS(NSUInteger, AVMovieWritingOptions) {
 	@result			An NSData object.
 	@discussion     The movie header will be a pure reference movie, with no base URL, suitable for use on the pasteboard.
 */
-- (nullable NSData *)movieHeaderWithFileType:(AVFileType)fileType error:(NSError * _Nullable * _Nullable)outError NS_AVAILABLE_MAC(10_11);
+- (nullable NSData *)movieHeaderWithFileType:(AVFileType)fileType error:(NSError * _Nullable * _Nullable)outError API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos);
 
 /*!
 	@method			writeMovieHeaderToURL:fileType:options:error:
@@ -201,7 +201,7 @@ typedef NS_OPTIONS(NSUInteger, AVMovieWritingOptions) {
 					If an error occurs writing the movie header, describes the nature of the failure.
 	@discussion		Note that modifications to instances of AVMutableMovie, to their constituent AVMutableMovieTracks, or to their collections of metadata are committed to storage when their movie headers are written.
 */
-- (BOOL)writeMovieHeaderToURL:(NSURL *)URL fileType:(AVFileType)fileType options:(AVMovieWritingOptions)options error:(NSError * _Nullable * _Nullable)outError NS_AVAILABLE_MAC(10_11);
+- (BOOL)writeMovieHeaderToURL:(NSURL *)URL fileType:(AVFileType)fileType options:(AVMovieWritingOptions)options error:(NSError * _Nullable * _Nullable)outError API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos);
 
 /*!
 	@method			isCompatibleWithFileType:
@@ -210,7 +210,7 @@ typedef NS_OPTIONS(NSUInteger, AVMovieWritingOptions) {
 					A UTI indicating a movie file format (e.g. AVFileTypeQuickTimeMovie for a QuickTime movie).
 	@discussion     This method returns a BOOL that indicates whether a movie header of the specified type can be created for the receiver. For example, this method returns NO if the movie contains tracks whose media types or media subtypes are not allowed by the specified file type.
 */
-- (BOOL)isCompatibleWithFileType:(AVFileType)fileType NS_AVAILABLE_MAC(10_11);
+- (BOOL)isCompatibleWithFileType:(AVFileType)fileType API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos);
 
 @end
 
@@ -263,7 +263,7 @@ typedef NS_OPTIONS(NSUInteger, AVMovieWritingOptions) {
 	@discussion     By default, after creating an AVMutableMovie the defaultMediaDataStorage property will be nil and each associated AVMutableMovieTrack's mediaDataStorage property will be nil. If you want to create an AVMutableMovie from a file and then append sample buffers to any of its tracks, you must first set one of these properties to indicate where the sample data should be written.
 */
 
-NS_CLASS_AVAILABLE_MAC(10_11)
+API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos)
 @interface AVMutableMovie : AVMovie
 {
 @private
@@ -316,7 +316,7 @@ NS_CLASS_AVAILABLE_MAC(10_11)
  
                     By default, the defaultMediaDataStorage property will be nil and each associated AVMutableMovieTrack's mediaDataStorage property will be nil. If you want to create an AVMutableMovie from an NSData object and then append sample buffers to any of its tracks, you must first set one of these properties to indicate where the sample data should be written.
 */
-+ (nullable instancetype)movieWithData:(NSData *)data options:(nullable NSDictionary<NSString *, id> *)options error:(NSError * _Nullable * _Nullable)outError NS_AVAILABLE_MAC(10_11);
++ (nullable instancetype)movieWithData:(NSData *)data options:(nullable NSDictionary<NSString *, id> *)options error:(NSError * _Nullable * _Nullable)outError API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos);
 
 /*!
 	@method			initWithData:options:error:
@@ -584,7 +584,7 @@ NS_CLASS_AVAILABLE_MAC(10_11)
 
 #pragma mark --- AVMediaDataStorage ---
 @class AVMediaDataStorageInternal;
-NS_CLASS_AVAILABLE_MAC(10_11)
+API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos)
 @interface AVMediaDataStorage : NSObject {
 @private
 	AVMediaDataStorageInternal			*_mediaDataStorageInternal;
@@ -622,21 +622,23 @@ AV_INIT_UNAVAILABLE
  @constant       AVFragmentedMovieContainsMovieFragmentsDidChangeNotification
  @abstract       Posted after the value of @"containsMovieFragments" has already been loaded and the AVFragmentedMovie is added to an AVFragmentedMovieMinder, either when 1) movie fragments are detected in the movie file on disk after it had previously contained none or when 2) no movie fragments are detected in the movie file on disk after it had previously contained one or more.
 */
-AVF_EXPORT NSString *const AVFragmentedMovieContainsMovieFragmentsDidChangeNotification NS_AVAILABLE_MAC(10_10);
+AVF_EXPORT NSString *const AVFragmentedMovieContainsMovieFragmentsDidChangeNotification API_AVAILABLE(macos(10.10), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos);
 
 /*!
  @constant       AVFragmentedMovieDurationDidChangeNotification
  @abstract       Posted when the duration of an AVFragmentedMovie changes while it's being minded by an AVFragmentedMovieMinder, but only for changes that occur after the status of the value of @"duration" has reached AVKeyValueStatusLoaded.
 */
-AVF_EXPORT NSString *const AVFragmentedMovieDurationDidChangeNotification NS_AVAILABLE_MAC(10_10);
+AVF_EXPORT NSString *const AVFragmentedMovieDurationDidChangeNotification API_AVAILABLE(macos(10.10), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos);
 
 /*!
  @constant       AVFragmentedMovieWasDefragmentedNotification
  @abstract       Posted when the movie file on disk is defragmented while an AVFragmentedMovie is being minded by an AVFragmentedMovieMinder, but only if the defragmentation occurs after the status of the value of @"canContainMovieFragments" has reached AVKeyValueStatusLoaded.
 */
-AVF_EXPORT NSString *const AVFragmentedMovieWasDefragmentedNotification NS_AVAILABLE_MAC(10_10);
+AVF_EXPORT NSString *const AVFragmentedMovieWasDefragmentedNotification API_AVAILABLE(macos(10.10), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos);
 
-NS_CLASS_AVAILABLE_MAC(10_10)
+@class AVFragmentedMovieInternal;
+
+API_AVAILABLE(macos(10.10), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos)
 @interface AVFragmentedMovie : AVMovie <AVFragmentMinding>
 {
 @private
@@ -692,7 +694,7 @@ NS_CLASS_AVAILABLE_MAC(10_10)
 	@discussion		AVFragmentedMovieMinder is identical to AVFragmentedAssetMinder except that it's capable of minding only assets of class AVFragmentedMovie.
 */
 
-NS_CLASS_AVAILABLE_MAC(10_10)
+API_AVAILABLE(macos(10.10), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos)
 @interface AVFragmentedMovieMinder : AVFragmentedAssetMinder
 
 /*!

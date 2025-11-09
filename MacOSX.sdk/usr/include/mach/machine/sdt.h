@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2007 Apple Inc. All rights reserved.
+ * Copyright (c) 2007-2019 Apple Inc. All rights reserved.
  */
 /*
  * CDDL HEADER START
@@ -28,9 +28,9 @@
  */
 
 #ifndef _MACH_MACHINE_SYS_SDT_H
-#define	_MACH_MACHINE_SYS_SDT_H
+#define _MACH_MACHINE_SYS_SDT_H
 
 #include <mach/machine/sdt_isa.h>
 
 
-#endif	/* _MACH_MACHINE_SYS_SDT_H */
+#endif  /* _MACH_MACHINE_SYS_SDT_H */

@@ -1,7 +1,7 @@
 /*
     NSRulerView.h
     Application Kit
-    Copyright (c) 1994-2018, Apple Inc.
+    Copyright (c) 1994-2019, Apple Inc.
     All rights reserved.
 */
 
@@ -9,6 +9,7 @@
 #import <AppKit/NSView.h>
 
 NS_ASSUME_NONNULL_BEGIN
+API_UNAVAILABLE_BEGIN(ios)
 
 @class NSScrollView, NSRulerMarker;
 
@@ -18,38 +19,12 @@ typedef NS_ENUM(NSUInteger, NSRulerOrientation) {
 };
 
 typedef NSString * NSRulerViewUnitName NS_TYPED_EXTENSIBLE_ENUM;
-APPKIT_EXTERN NSRulerViewUnitName const NSRulerViewUnitInches NS_AVAILABLE_MAC(10_13);
-APPKIT_EXTERN NSRulerViewUnitName const NSRulerViewUnitCentimeters NS_AVAILABLE_MAC(10_13);
-APPKIT_EXTERN NSRulerViewUnitName const NSRulerViewUnitPoints NS_AVAILABLE_MAC(10_13);
-APPKIT_EXTERN NSRulerViewUnitName const NSRulerViewUnitPicas NS_AVAILABLE_MAC(10_13);
+APPKIT_EXTERN NSRulerViewUnitName const NSRulerViewUnitInches API_AVAILABLE(macos(10.13));
+APPKIT_EXTERN NSRulerViewUnitName const NSRulerViewUnitCentimeters API_AVAILABLE(macos(10.13));
+APPKIT_EXTERN NSRulerViewUnitName const NSRulerViewUnitPoints API_AVAILABLE(macos(10.13));
+APPKIT_EXTERN NSRulerViewUnitName const NSRulerViewUnitPicas API_AVAILABLE(macos(10.13));
 
-@interface NSRulerView : NSView {
-@private
-    __weak NSScrollView *_scrollView APPKIT_IVAR;
-    NSRulerOrientation _orientation APPKIT_IVAR;
-
-    NSString *_units APPKIT_IVAR;
-    CGFloat _originOffset APPKIT_IVAR;
-
-    CGFloat _ruleThickness APPKIT_IVAR;
-    CGFloat _thicknessForMarkers APPKIT_IVAR;
-    CGFloat _thicknessForAccessoryView APPKIT_IVAR;
-
-    __weak NSView *_clientView APPKIT_IVAR;
-    NSMutableArray *_markers APPKIT_IVAR;
-    NSView *_accessoryView APPKIT_IVAR;
-
-    // Hash dict related caching
-    NSDictionary *_cachedHashDict APPKIT_IVAR;
-    CGFloat _cachedDocViewToRulerConversion APPKIT_IVAR;
-
-    NSPoint _reservedRulerView2 APPKIT_IVAR;
-
-    // Dragging related caching
-    NSRulerMarker *_draggingMarker APPKIT_IVAR;
-
-    id _reservedRulerView1 APPKIT_IVAR;
-}
+@interface NSRulerView : NSView
 
 /************************* Registering new units *************************/
 
@@ -164,10 +139,11 @@ APPKIT_EXTERN NSRulerViewUnitName const NSRulerViewUnitPicas NS_AVAILABLE_MAC(10
 - (void)rulerView:(NSRulerView *)ruler willSetClientView:(NSView *)newClient;
     // This is sent to the existing client before it is replaced by the new client.  The existing client can catch this to clean up any cached state it keeps while it is the client of a ruler.
 
-- (CGFloat)rulerView:(NSRulerView *)ruler locationForPoint:(NSPoint)point NS_AVAILABLE_MAC(10_7);
-- (NSPoint)rulerView:(NSRulerView *)ruler pointForLocation:(CGFloat)point NS_AVAILABLE_MAC(10_7);
+- (CGFloat)rulerView:(NSRulerView *)ruler locationForPoint:(NSPoint)point API_AVAILABLE(macos(10.7));
+- (NSPoint)rulerView:(NSRulerView *)ruler pointForLocation:(CGFloat)point API_AVAILABLE(macos(10.7));
     // This additional mapping allows mapping between location and point for clients with rotated coordinate system (e.g., vertical text view).
 
 @end
 
+API_UNAVAILABLE_END
 NS_ASSUME_NONNULL_END

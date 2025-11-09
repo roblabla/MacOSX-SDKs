@@ -17,7 +17,7 @@
 
 // JNFNativeMethodEnter - called on entry to each native method by the
 // JNF_COCOA_ENTER(env) macro in JNFJNI.h
-JNF_EXPORT JNFAutoreleasePoolToken *JNFNativeMethodEnter();
+JNF_EXPORT JNFAutoreleasePoolToken *JNFNativeMethodEnter(void);
 
 // JNFNativeMethodExit - called on exit from each native method by the
 // JNF_COCOA_EXIT(env) macro in JNFJNI.h

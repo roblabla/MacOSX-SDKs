@@ -1,7 +1,7 @@
 /*
     NSGestureRecognizer.h
     Application Kit
-    Copyright (c) 2013-2018, Apple Inc.
+    Copyright (c) 2013-2019, Apple Inc.
     All rights reserved.
 */
 
@@ -10,11 +10,12 @@
 #import <AppKit/NSTouch.h>
 
 NS_ASSUME_NONNULL_BEGIN
+API_UNAVAILABLE_BEGIN(ios)
 
 @protocol NSGestureRecognizerDelegate;
 @class NSView, NSEvent, NSPressureConfiguration, NSTouch;
 
-NS_ENUM_AVAILABLE_MAC(10_10)
+API_AVAILABLE(macos(10.10))
 typedef NS_ENUM(NSInteger, NSGestureRecognizerState) {
     NSGestureRecognizerStatePossible,   // the recognizer has not yet recognized its gesture, but may be evaluating events. this is the default state
     
@@ -29,29 +30,8 @@ typedef NS_ENUM(NSInteger, NSGestureRecognizerState) {
     NSGestureRecognizerStateRecognized = NSGestureRecognizerStateEnded // the recognizer has received events recognized as the gesture. the action method will be called at the next turn of the run loop and the recognizer will be reset to NSGestureRecognizerStatePossible
 };
 
-NS_CLASS_AVAILABLE_MAC(10_10)
-@interface NSGestureRecognizer : NSObject <NSCoding> {
-  @private
-    NSMutableArray                   *_targets APPKIT_IVAR;
-    id                                _target APPKIT_IVAR;
-    SEL                               _action APPKIT_IVAR;
-    NSMutableArray                   *_delayedEvents APPKIT_IVAR;
-    NSView                           *_view APPKIT_IVAR;
-    NSEvent                          *_updateEvent APPKIT_IVAR;
-    id <NSGestureRecognizerDelegate>  _delegate APPKIT_IVAR;
-    NSMutableSet                     *_friends APPKIT_IVAR;
-    NSGestureRecognizerState          _state APPKIT_IVAR;
-    NSUInteger                        _gestureFlags APPKIT_IVAR;
-    NSUInteger                        _delayFlags APPKIT_IVAR;
-    
-    NSMutableSet                     *_failureRequirements APPKIT_IVAR;
-    NSMutableSet                     *_failureDependents APPKIT_IVAR;
-    NSMutableSet                     *_dynamicFailureRequirements APPKIT_IVAR;
-    NSMutableSet                     *_dynamicFailureDependents APPKIT_IVAR;
-    id                                _failureMap APPKIT_IVAR;
-    
-    id                                _reserved APPKIT_IVAR;
-}
+API_AVAILABLE(macos(10.10))
+@interface NSGestureRecognizer : NSObject <NSCoding>
 
 /* valid action method signatures:
      -(void)handleGesture;
@@ -78,7 +58,7 @@ NS_CLASS_AVAILABLE_MAC(10_10)
 @property (nullable, readonly) NSView *view;
 
 /* The pressure configuration the view should use when this recognizer is eligible for recognition. At any point in time during recognition the view's effective pressure configuration will be the most compatible configuration among the set of active recognizers. This property may be set at any time before or during recognition. If recognition fails, the effective configuration will revert to the view's -pressureConfiguration. */
-@property (strong) NSPressureConfiguration *pressureConfiguration NS_AVAILABLE_MAC(10_11);
+@property (strong) NSPressureConfiguration *pressureConfiguration API_AVAILABLE(macos(10.11));
 
 /*  causes the specified events to be delivered to the target view only after this gesture has failed recognition. set to YES to prevent views from processing any events that may be recognized as part of this gesture. note: once a gesture recognizer starts delaying one type of event, all event types are delayed until this gesture has failed recognition. refer to specific gesture subclasses as they have different defaults.
 */
@@ -96,7 +76,7 @@ NS_CLASS_AVAILABLE_MAC(10_10)
 
 @interface NSGestureRecognizer (NSTouchBar)
 /* Currently, only NSTouchTypeDirect is supported. Defaults to 0 */
-@property NSTouchTypeMask allowedTouchTypes NS_AVAILABLE_MAC(10_12_2);
+@property NSTouchTypeMask allowedTouchTypes API_AVAILABLE(macos(10.12.2));
 @end
 
 @protocol NSGestureRecognizerDelegate <NSObject>
@@ -104,7 +84,7 @@ NS_CLASS_AVAILABLE_MAC(10_10)
 /* called when the window begins a new recognition stream
  return YES to allow the recognizer to process events. return NO to fail recognition and opt the recognizer out of the event stream
  */
-- (BOOL)gestureRecognizer:(NSGestureRecognizer *)gestureRecognizer shouldAttemptToRecognizeWithEvent:(NSEvent *)event NS_AVAILABLE_MAC(10_11);
+- (BOOL)gestureRecognizer:(NSGestureRecognizer *)gestureRecognizer shouldAttemptToRecognizeWithEvent:(NSEvent *)event API_AVAILABLE(macos(10.11));
 
 /* called when a gesture recognizer attempts to transition out of NSGestureRecognizerStatePossible. returning NO causes it to transition to NSGestureRecognizerStateFailed */
 - (BOOL)gestureRecognizerShouldBegin:(NSGestureRecognizer *)gestureRecognizer;
@@ -126,7 +106,7 @@ NS_CLASS_AVAILABLE_MAC(10_10)
 
 /* called before touchesBegan:withEvent: is called on the gesture recognizer for a new touch. return NO to prevent the gesture recognizer from seeing this touch
  */
-- (BOOL)gestureRecognizer:(NSGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(NSTouch *)touch NS_AVAILABLE_MAC(10_12_2);
+- (BOOL)gestureRecognizer:(NSGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(NSTouch *)touch API_AVAILABLE(macos(10.12.2));
 @end
 
 // the extensions in this header are to be used only by subclasses of NSGestureRecognizer
@@ -172,11 +152,12 @@ NS_CLASS_AVAILABLE_MAC(10_10)
 - (void)tabletPoint:(NSEvent *)event;
 - (void)magnifyWithEvent:(NSEvent *)event;
 - (void)rotateWithEvent:(NSEvent *)event;
-- (void)pressureChangeWithEvent:(NSEvent *)event NS_AVAILABLE_MAC(10_10_3);
-- (void)touchesBeganWithEvent:(NSEvent *)event NS_AVAILABLE_MAC(10_12_2);
-- (void)touchesMovedWithEvent:(NSEvent *)event NS_AVAILABLE_MAC(10_12_2);
-- (void)touchesEndedWithEvent:(NSEvent *)event NS_AVAILABLE_MAC(10_12_2);
-- (void)touchesCancelledWithEvent:(NSEvent *)event NS_AVAILABLE_MAC(10_12_2);
+- (void)pressureChangeWithEvent:(NSEvent *)event API_AVAILABLE(macos(10.10.3));
+- (void)touchesBeganWithEvent:(NSEvent *)event API_AVAILABLE(macos(10.12.2));
+- (void)touchesMovedWithEvent:(NSEvent *)event API_AVAILABLE(macos(10.12.2));
+- (void)touchesEndedWithEvent:(NSEvent *)event API_AVAILABLE(macos(10.12.2));
+- (void)touchesCancelledWithEvent:(NSEvent *)event API_AVAILABLE(macos(10.12.2));
 @end
 
+API_UNAVAILABLE_END
 NS_ASSUME_NONNULL_END

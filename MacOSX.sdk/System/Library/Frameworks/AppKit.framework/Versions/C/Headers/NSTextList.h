@@ -1,6 +1,7 @@
+#if !__has_include(<UIFoundation/NSTextList.h>)
 /*
     NSTextList.h
-    Copyright (c) 2004-2018, Apple Inc.
+    Copyright (c) 2004-2019, Apple Inc.
     All rights reserved.
 
     Class to represent text lists.
@@ -10,44 +11,45 @@
 #import <AppKit/AppKitDefines.h>
 
 NS_ASSUME_NONNULL_BEGIN
+#if !TARGET_OS_IPHONE
 
 typedef NSString * NSTextListMarkerFormat NS_TYPED_EXTENSIBLE_ENUM;
-APPKIT_EXTERN NSTextListMarkerFormat const NSTextListMarkerBox NS_AVAILABLE_MAC(10_13);
-APPKIT_EXTERN NSTextListMarkerFormat const NSTextListMarkerCheck NS_AVAILABLE_MAC(10_13);
-APPKIT_EXTERN NSTextListMarkerFormat const NSTextListMarkerCircle NS_AVAILABLE_MAC(10_13);
-APPKIT_EXTERN NSTextListMarkerFormat const NSTextListMarkerDiamond NS_AVAILABLE_MAC(10_13);
-APPKIT_EXTERN NSTextListMarkerFormat const NSTextListMarkerDisc NS_AVAILABLE_MAC(10_13);
-APPKIT_EXTERN NSTextListMarkerFormat const NSTextListMarkerHyphen NS_AVAILABLE_MAC(10_13);
-APPKIT_EXTERN NSTextListMarkerFormat const NSTextListMarkerSquare NS_AVAILABLE_MAC(10_13);
-APPKIT_EXTERN NSTextListMarkerFormat const NSTextListMarkerLowercaseHexadecimal NS_AVAILABLE_MAC(10_13);
-APPKIT_EXTERN NSTextListMarkerFormat const NSTextListMarkerUppercaseHexadecimal NS_AVAILABLE_MAC(10_13);
-APPKIT_EXTERN NSTextListMarkerFormat const NSTextListMarkerOctal NS_AVAILABLE_MAC(10_13);
-APPKIT_EXTERN NSTextListMarkerFormat const NSTextListMarkerLowercaseAlpha NS_AVAILABLE_MAC(10_13);
-APPKIT_EXTERN NSTextListMarkerFormat const NSTextListMarkerUppercaseAlpha NS_AVAILABLE_MAC(10_13);
-APPKIT_EXTERN NSTextListMarkerFormat const NSTextListMarkerLowercaseLatin NS_AVAILABLE_MAC(10_13);
-APPKIT_EXTERN NSTextListMarkerFormat const NSTextListMarkerUppercaseLatin NS_AVAILABLE_MAC(10_13);
-APPKIT_EXTERN NSTextListMarkerFormat const NSTextListMarkerLowercaseRoman NS_AVAILABLE_MAC(10_13);
-APPKIT_EXTERN NSTextListMarkerFormat const NSTextListMarkerUppercaseRoman NS_AVAILABLE_MAC(10_13);
-APPKIT_EXTERN NSTextListMarkerFormat const NSTextListMarkerDecimal NS_AVAILABLE_MAC(10_13);
+APPKIT_EXTERN NSTextListMarkerFormat const NSTextListMarkerBox API_AVAILABLE(macos(10.13));
+APPKIT_EXTERN NSTextListMarkerFormat const NSTextListMarkerCheck API_AVAILABLE(macos(10.13));
+APPKIT_EXTERN NSTextListMarkerFormat const NSTextListMarkerCircle API_AVAILABLE(macos(10.13));
+APPKIT_EXTERN NSTextListMarkerFormat const NSTextListMarkerDiamond API_AVAILABLE(macos(10.13));
+APPKIT_EXTERN NSTextListMarkerFormat const NSTextListMarkerDisc API_AVAILABLE(macos(10.13));
+APPKIT_EXTERN NSTextListMarkerFormat const NSTextListMarkerHyphen API_AVAILABLE(macos(10.13));
+APPKIT_EXTERN NSTextListMarkerFormat const NSTextListMarkerSquare API_AVAILABLE(macos(10.13));
+APPKIT_EXTERN NSTextListMarkerFormat const NSTextListMarkerLowercaseHexadecimal API_AVAILABLE(macos(10.13));
+APPKIT_EXTERN NSTextListMarkerFormat const NSTextListMarkerUppercaseHexadecimal API_AVAILABLE(macos(10.13));
+APPKIT_EXTERN NSTextListMarkerFormat const NSTextListMarkerOctal API_AVAILABLE(macos(10.13));
+APPKIT_EXTERN NSTextListMarkerFormat const NSTextListMarkerLowercaseAlpha API_AVAILABLE(macos(10.13));
+APPKIT_EXTERN NSTextListMarkerFormat const NSTextListMarkerUppercaseAlpha API_AVAILABLE(macos(10.13));
+APPKIT_EXTERN NSTextListMarkerFormat const NSTextListMarkerLowercaseLatin API_AVAILABLE(macos(10.13));
+APPKIT_EXTERN NSTextListMarkerFormat const NSTextListMarkerUppercaseLatin API_AVAILABLE(macos(10.13));
+APPKIT_EXTERN NSTextListMarkerFormat const NSTextListMarkerLowercaseRoman API_AVAILABLE(macos(10.13));
+APPKIT_EXTERN NSTextListMarkerFormat const NSTextListMarkerUppercaseRoman API_AVAILABLE(macos(10.13));
+APPKIT_EXTERN NSTextListMarkerFormat const NSTextListMarkerDecimal API_AVAILABLE(macos(10.13));
 
 typedef NS_OPTIONS(NSUInteger, NSTextListOptions) {
     NSTextListPrependEnclosingMarker = (1 << 0)
 };
 
-@interface NSTextList : NSObject <NSCoding, NSCopying> {
-    /*All instance variables are private*/
-    NSString *_markerFormat APPKIT_IVAR;
-    NSUInteger _listFlags APPKIT_IVAR;
-    NSInteger _startIndex APPKIT_IVAR;
-    void *_listSecondary APPKIT_IVAR;
-}
+@interface NSTextList : NSObject <NSSecureCoding, NSCopying>
 
 - (instancetype)initWithMarkerFormat:(NSTextListMarkerFormat)format options:(NSUInteger)mask;
 @property (readonly, copy) NSTextListMarkerFormat markerFormat;
 @property (readonly) NSTextListOptions listOptions;
 - (NSString *)markerForItemNumber:(NSInteger)itemNum;
-@property NSInteger startingItemNumber NS_AVAILABLE_MAC(10_6);
+@property NSInteger startingItemNumber API_AVAILABLE(macos(10.6));
 
 @end
 
+
+
+#endif // !TARGET_OS_IPHONE
 NS_ASSUME_NONNULL_END
+#else
+#import <UIFoundation/NSTextList.h>
+#endif

@@ -1,8 +1,8 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 28DEBFFB-BABE-3493-8230-12CE3E5EC1E3' ]
+uuids:           [ 'x86_64: 8BCD0838-D7E0-3CBC-8B2A-A825301DA064' ]
 platform:        macosx
-install-name:    /System/Library/PrivateFrameworks/CorePDF.framework/Versions/A/CorePDF
+install-name:    '/System/Library/PrivateFrameworks/CorePDF.framework/Versions/A/CorePDF'
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _CGPDFArchiveAddSelection, _CGPDFArchiveCreate, _CGPDFArchiveGetHTML, 
@@ -21,9 +21,10 @@ exports:
                        _CGPDFLayoutCreateSelectionToPointWithOptions, _CGPDFLayoutCreateString, 
                        _CGPDFLayoutCreateStringForRanges, _CGPDFLayoutDebugLineElement, 
                        _CGPDFLayoutGetBoundsForTextRange, _CGPDFLayoutGetCGFont, 
-                       _CGPDFLayoutGetCharacterAnchorY, _CGPDFLayoutGetCharacterBounds, 
-                       _CGPDFLayoutGetCharacterMarker, _CGPDFLayoutGetCharacterRotation, 
-                       _CGPDFLayoutGetCharacterUnicode, _CGPDFLayoutGetGlyph, _CGPDFLayoutGetLineRangesForTextRange, 
+                       _CGPDFLayoutGetCharacterAnchorY, _CGPDFLayoutGetCharacterBBox, 
+                       _CGPDFLayoutGetCharacterBounds, _CGPDFLayoutGetCharacterMarker, 
+                       _CGPDFLayoutGetCharacterRotation, _CGPDFLayoutGetCharacterUnicode, 
+                       _CGPDFLayoutGetGlyph, _CGPDFLayoutGetLineRangesForTextRange, 
                        _CGPDFLayoutGetNumberOfTextElements, _CGPDFLayoutGetOffsetInLine, 
                        _CGPDFLayoutGetPage, _CGPDFLayoutGetRectForTextRange, _CGPDFLayoutGetRootNode, 
                        _CGPDFLayoutGetRootTaggedNode, _CGPDFLayoutGetTextMatrix, 

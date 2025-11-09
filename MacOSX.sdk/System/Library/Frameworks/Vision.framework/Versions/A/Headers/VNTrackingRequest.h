@@ -39,7 +39,7 @@ API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0))
 
 /*!
  @property property trackingLevel
- @abstract Tracking level allows tuning tracking algorithm to prefer speed (VNRequestOptionTrackingLevelFast) vs. tracking object location accuracy (VNRequestOptionTrackingLevelAccurate)
+ @abstract Tracking level allows tuning tracking algorithm to prefer speed (VNRequestTrackingLevelFast) vs. tracking object location accuracy (VNRequestTrackingLevelAccurate). This property has no effect on general purpose object tracker (VNTrackObjectRequest) revision 2 (VNTrackObjectRequestRevision2)
  */
 @property (readwrite, nonatomic, assign) VNRequestTrackingLevel trackingLevel;
 

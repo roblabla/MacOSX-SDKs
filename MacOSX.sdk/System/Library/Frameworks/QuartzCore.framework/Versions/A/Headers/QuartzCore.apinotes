@@ -281,3 +281,9 @@ Globals:
   SwiftName: round
 - Name: kCALineCapSquare
   SwiftName: square
+#
+#CALayerCornerCurve
+- Name: kCACornerCurveCircular
+  SwiftName: circular
+- Name: kCACornerCurveContinuous
+  SwiftName: continuous

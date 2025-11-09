@@ -3,7 +3,7 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2010-2018 Apple Inc. All rights reserved.
+	Copyright 2010-2019 Apple Inc. All rights reserved.
 
 */
 
@@ -16,7 +16,9 @@
 	@discussion
 	  Note that inspection of media assets is provided by AVAsset.
 	  This class is intended to represent presentation state for an asset that's played by an AVPlayer and to permit observation of that state.
-
+ 
+  	  It is important to avoid key-value observation with a key path containing the asset's property.  Observe the AVPlayerItem's property instead.  For example, use the "duration" key path instead of the "asset.duration" key path.
+ 
 	  To allow clients to add and remove their objects as key-value observers safely, AVPlayerItem serializes notifications of
 	  changes that occur dynamically during playback on the same dispatch queue on which notifications of playback state changes
 	  are serialized by its associated AVPlayer. By default, this queue is the main queue. See dispatch_get_main_queue().
@@ -40,15 +42,18 @@ NS_ASSUME_NONNULL_BEGIN
 /* Note that NSNotifications posted by AVPlayerItem may be posted on a different thread from the one on which the observer was registered. */
 
 // notifications                                                                                description
-AVF_EXPORT NSString *const AVPlayerItemTimeJumpedNotification			 NS_AVAILABLE(10_7, 5_0);	// the item's current time has changed discontinuously
-AVF_EXPORT NSString *const AVPlayerItemDidPlayToEndTimeNotification      NS_AVAILABLE(10_7, 4_0);   // item has played to its end time
-AVF_EXPORT NSString *const AVPlayerItemFailedToPlayToEndTimeNotification NS_AVAILABLE(10_7, 4_3);   // item has failed to play to its end time
-AVF_EXPORT NSString *const AVPlayerItemPlaybackStalledNotification       NS_AVAILABLE(10_9, 6_0);    // media did not arrive in time to continue playback
-AVF_EXPORT NSString *const AVPlayerItemNewAccessLogEntryNotification	 NS_AVAILABLE(10_9, 6_0);	// a new access log entry has been added
-AVF_EXPORT NSString *const AVPlayerItemNewErrorLogEntryNotification		 NS_AVAILABLE(10_9, 6_0);	// a new error log entry has been added
+AVF_EXPORT NSString *const AVPlayerItemTimeJumpedNotification			 API_AVAILABLE(macos(10.7), ios(5.0), tvos(9.0), watchos(1.0));	// the item's current time has changed discontinuously
+AVF_EXPORT NSString *const AVPlayerItemDidPlayToEndTimeNotification      API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0));   // item has played to its end time
+AVF_EXPORT NSString *const AVPlayerItemFailedToPlayToEndTimeNotification API_AVAILABLE(macos(10.7), ios(4.3), tvos(9.0), watchos(1.0));   // item has failed to play to its end time
+AVF_EXPORT NSString *const AVPlayerItemPlaybackStalledNotification       API_AVAILABLE(macos(10.9), ios(6.0), tvos(9.0), watchos(1.0));    // media did not arrive in time to continue playback
+AVF_EXPORT NSString *const AVPlayerItemNewAccessLogEntryNotification	 API_AVAILABLE(macos(10.9), ios(6.0), tvos(9.0), watchos(1.0));	// a new access log entry has been added
+AVF_EXPORT NSString *const AVPlayerItemNewErrorLogEntryNotification		 API_AVAILABLE(macos(10.9), ios(6.0), tvos(9.0), watchos(1.0));	// a new error log entry has been added
+AVF_EXPORT NSNotificationName const AVPlayerItemRecommendedTimeOffsetFromLiveDidChangeNotification		 API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0), watchos(6.0));	// the value of recommendedTimeOffsetFromLive has changed
+AVF_EXPORT NSNotificationName const AVPlayerItemMediaSelectionDidChangeNotification		API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0), watchos(6.0)); // a media selection group changed its selected option
+
 
 // notification userInfo key                                                                    type
-AVF_EXPORT NSString *const AVPlayerItemFailedToPlayToEndTimeErrorKey     NS_AVAILABLE(10_7, 4_3);   // NSError
+AVF_EXPORT NSString *const AVPlayerItemFailedToPlayToEndTimeErrorKey     API_AVAILABLE(macos(10.7), ios(4.3), tvos(9.0), watchos(1.0));   // NSError
 
 /*!
  @enum AVPlayerItemStatus
@@ -65,9 +70,9 @@ AVF_EXPORT NSString *const AVPlayerItemFailedToPlayToEndTimeErrorKey     NS_AVAI
 	the player item's error property.
  */
 typedef NS_ENUM(NSInteger, AVPlayerItemStatus) {
-	AVPlayerItemStatusUnknown,
-	AVPlayerItemStatusReadyToPlay,
-	AVPlayerItemStatusFailed
+	AVPlayerItemStatusUnknown = 0,
+	AVPlayerItemStatusReadyToPlay = 1,
+	AVPlayerItemStatusFailed = 2
 };
 
 @class AVPlayer;
@@ -81,7 +86,7 @@ typedef NS_ENUM(NSInteger, AVPlayerItemStatus) {
 @class AVPlayerItemInternal;
 @protocol AVVideoCompositing;
 
-NS_CLASS_AVAILABLE(10_7, 4_0)
+API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0))
 @interface AVPlayerItem : NSObject <NSCopying>
 {
 @private
@@ -116,7 +121,7 @@ AV_INIT_UNAVAILABLE
  @result		An instance of AVPlayerItem.
  @discussion	The value of each key in automaticallyLoadedAssetKeys will be automatically be loaded by the underlying AVAsset before the receiver achieves the status AVPlayerItemStatusReadyToPlay; i.e. when the item is ready to play, the value of -[[AVPlayerItem asset] statusOfValueForKey:error:] will be one of the terminal status values greater than AVKeyValueStatusLoading.
  */
-+ (instancetype)playerItemWithAsset:(AVAsset *)asset automaticallyLoadedAssetKeys:(nullable NSArray<NSString *> *)automaticallyLoadedAssetKeys NS_AVAILABLE(10_9, 7_0);
++ (instancetype)playerItemWithAsset:(AVAsset *)asset automaticallyLoadedAssetKeys:(nullable NSArray<NSString *> *)automaticallyLoadedAssetKeys API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(1.0));
 
 /*!
  @method		initWithURL:
@@ -146,7 +151,7 @@ AV_INIT_UNAVAILABLE
  @result		An instance of AVPlayerItem
  @discussion	The value of each key in automaticallyLoadedAssetKeys will be automatically be loaded by the underlying AVAsset before the receiver achieves the status AVPlayerItemStatusReadyToPlay; i.e. when the item is ready to play, the value of -[[AVPlayerItem asset] statusOfValueForKey:error:] will be one of the terminal status values greater than AVKeyValueStatusLoading.
  */
-- (instancetype)initWithAsset:(AVAsset *)asset automaticallyLoadedAssetKeys:(nullable NSArray<NSString *> *)automaticallyLoadedAssetKeys NS_DESIGNATED_INITIALIZER NS_AVAILABLE(10_9, 7_0);
+- (instancetype)initWithAsset:(AVAsset *)asset automaticallyLoadedAssetKeys:(nullable NSArray<NSString *> *)automaticallyLoadedAssetKeys NS_DESIGNATED_INITIALIZER API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(1.0));
 
 /*!
  @property status
@@ -157,9 +162,10 @@ AV_INIT_UNAVAILABLE
 	The value of this property is an AVPlayerItemStatus that indicates whether the receiver can be used for playback.
 	When the value of this property is AVPlayerItemStatusFailed, the receiver can no longer be used for playback and
 	a new instance needs to be created in its place. When this happens, clients can check the value of the error
-	property to determine the nature of the failure. This property is key value observable.
+	property to determine the nature of the failure. The value of this property will not be updated after the receiver
+	is removed from an AVPlayer. This property is key value observable.
  */
-@property (nonatomic, readonly) AVPlayerItemStatus status;
+@property (readonly) AVPlayerItemStatus status;
 
 /*!
  @property error
@@ -170,7 +176,7 @@ AV_INIT_UNAVAILABLE
 	The value of this property is an NSError that describes what caused the receiver to no longer be able to be played.
 	If the receiver's status is not AVPlayerItemStatusFailed, the value of this property is nil.
  */
-@property (nonatomic, readonly, nullable) NSError *error;
+@property (readonly, nullable) NSError *error;
 
 @end
 
@@ -195,7 +201,7 @@ AV_INIT_UNAVAILABLE
 	Before the underlying media resource has been sufficiently loaded, its value is an empty NSArray. Use key-value observation to obtain
 	a valid array of tracks as soon as it becomes available.
  */
-@property (nonatomic, readonly) NSArray<AVPlayerItemTrack *> *tracks;
+@property (readonly) NSArray<AVPlayerItemTrack *> *tracks;
 
 /*!
  @property duration
@@ -212,7 +218,7 @@ AV_INIT_UNAVAILABLE
 	obtain a valid duration as soon as it becomes available. (Note that the value of duration may remain kCMTimeIndefinite,
 	e.g. for live streams.)
  */
-@property (nonatomic, readonly) CMTime duration NS_AVAILABLE(10_7, 4_3);
+@property (readonly) CMTime duration API_AVAILABLE(macos(10.7), ios(4.3), tvos(9.0), watchos(1.0));
 
 /*!
  @property presentationSize
@@ -227,7 +233,7 @@ AV_INIT_UNAVAILABLE
 	Before the underlying media resource is sufficiently loaded, its value is CGSizeZero. Use key-value observation to obtain a valid
 	presentationSize as soon as it becomes available. (Note that the value of presentationSize may remain CGSizeZero, e.g. for audio-only items.)
  */
-@property (nonatomic, readonly) CGSize presentationSize;
+@property (readonly) CGSize presentationSize;
 
 /*!
  @property timedMetadata
@@ -236,7 +242,7 @@ AV_INIT_UNAVAILABLE
    Notifications of changes are available via key-value observation.
    As an optimization for playback, AVPlayerItem may omit the processing of timed metadata when no observer of this property is registered. Therefore, when no such observer is registered, the value of the timedMetadata property may remain nil regardless of the contents of the underlying media.
  */
-@property (nonatomic, readonly, nullable) NSArray<AVMetadataItem *> *timedMetadata;
+@property (nonatomic, readonly, nullable) NSArray<AVMetadataItem *> *timedMetadata API_DEPRECATED("Use AVPlayerItemMetadataOutput to obtain timed metadata", macos(10.7, 10.15), ios(4.0, 13.0), tvos(9.0, 13.0)) API_UNAVAILABLE(watchos);
 
 /*!
  @property automaticallyLoadedAssetKeys
@@ -244,7 +250,7 @@ AV_INIT_UNAVAILABLE
  @discussion
    The value of each key in automaticallyLoadedAssetKeys will be automatically be loaded by the underlying AVAsset before the receiver achieves the status AVPlayerItemStatusReadyToPlay; i.e. when the item is ready to play, the value of -[[AVPlayerItem asset] statusOfValueForKey:error:] will be AVKeyValueStatusLoaded. If loading of any of the values fails, the status of the AVPlayerItem will change instead to AVPlayerItemStatusFailed..
  */
-@property (nonatomic, readonly) NSArray<NSString *> *automaticallyLoadedAssetKeys NS_AVAILABLE(10_9, 7_0);
+@property (nonatomic, readonly) NSArray<NSString *> *automaticallyLoadedAssetKeys API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(1.0));
 
 @end
 
@@ -254,28 +260,56 @@ AV_INIT_UNAVAILABLE
 /* For releases of OS X prior to 10.9 and releases of iOS prior to 7.0, indicates whether the item can be played at rates greater than 1.0.
    Starting with OS X 10.9 and iOS 7.0, all AVPlayerItems with status AVPlayerItemReadyToPlay can be played at rates between 1.0 and 2.0, inclusive, even if canPlayFastForward is NO; for those releases canPlayFastForward indicates whether the item can be played at rates greater than 2.0.
 */
-@property (nonatomic, readonly) BOOL canPlayFastForward NS_AVAILABLE(10_8, 5_0);
+@property (readonly) BOOL canPlayFastForward API_AVAILABLE(macos(10.8), ios(5.0), tvos(9.0), watchos(1.0));
 
 /* indicates whether the item can be played at rates between 0.0 and 1.0 */
-@property (nonatomic, readonly) BOOL canPlaySlowForward NS_AVAILABLE(10_8, 6_0);
+@property (readonly) BOOL canPlaySlowForward API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(1.0));
 
 /* indicates whether the item can be played at rate -1.0 */
-@property (nonatomic, readonly) BOOL canPlayReverse NS_AVAILABLE(10_8, 6_0);
+@property (readonly) BOOL canPlayReverse API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(1.0));
 
 /* indicates whether the item can be played at rates less between 0.0 and -1.0 */
-@property (nonatomic, readonly) BOOL canPlaySlowReverse NS_AVAILABLE(10_8, 6_0);
+@property (readonly) BOOL canPlaySlowReverse API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(1.0));
 
 /* indicates whether the item can be played at rates less than -1.0 */
-@property (nonatomic, readonly) BOOL canPlayFastReverse NS_AVAILABLE(10_8, 5_0);
+@property (readonly) BOOL canPlayFastReverse API_AVAILABLE(macos(10.8), ios(5.0), tvos(9.0), watchos(1.0));
 
 /* Indicates whether the item supports stepping forward; see -stepByCount:. Once the item has become ready to play, the value of canStepForward does not change even when boundary conditions are reached, such as when the item's currentTime is its end time. */
-@property (nonatomic, readonly) BOOL canStepForward NS_AVAILABLE(10_8, 6_0);
+@property (readonly) BOOL canStepForward API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(1.0));
 
 /* indicates whether the item supports stepping backward; see -stepByCount:. Once the item has become ready to play, the value of canStepBackward does not change even when boundary conditions are reached, such as when the item's currentTime is equal to kCMTimeZero. */
-@property (nonatomic, readonly) BOOL canStepBackward NS_AVAILABLE(10_8, 6_0);
+@property (readonly) BOOL canStepBackward API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(1.0));
+
+/*!
+ @property		configuredTimeOffsetFromLive
+ @abstract		Indicates how close to the latest content in a live stream playback will begin after a live start or a seek to kCMTimePositiveInfinity.
+ @discussion	For non-live assets this value is kCMTimeInvalid.
+ */
+@property CMTime configuredTimeOffsetFromLive API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0), watchos(6.0));
+
+/*!
+ @property		recommendedTimeOffsetFromLive
+ @abstract		A recommended value for configuredTimeOffsetFromLive, based on observed network conditions.
+ @discussion	For non-live assets this value is kCMTimeInvalid.
+ */
+@property (nonatomic, readonly) CMTime recommendedTimeOffsetFromLive API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0), watchos(6.0));
+
+/*!
+ @property		automaticallyPreservesTimeOffsetFromLive
+ @abstract		Indicates that after the player spends a period of time buffering media, it will skip forward if necessary to restore the playhead's distance from the live edge of the presentation to what it was when buffering began.
+ @discussion
+  If the value of this property is YES and the player must buffer media from the network in order to resume playback, the player will seek forward if necessary before resuming playback to restore the position that the playhead had when rebuffering began, relative to the end of the current AVPlayerItem's seekableTimeRange. 
+
+  This behavior applies to media buffering that occurs as a consequence of starting playback, seeking, and recovering from a playback stall.
+
+  Note that if the network cannot deliver media quickly enough to maintain the playback rate, playback may stall interminably.
+ 
+ This property value has no effect if the asset is not a live stream. The default value of this property is NO.
+ */
+
+@property (nonatomic) BOOL automaticallyPreservesTimeOffsetFromLive API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0),watchos(6.0));
 
 @end
-
 
 @interface AVPlayerItem (AVPlayerItemTimeControl)
 
@@ -302,7 +336,7 @@ AV_INIT_UNAVAILABLE
 
 	The value of this property has no effect on playback when the rate is negative.
  */
-@property (nonatomic) CMTime forwardPlaybackEndTime;
+@property CMTime forwardPlaybackEndTime;
 
 /*!
  @property reversePlaybackEndTime
@@ -319,14 +353,14 @@ AV_INIT_UNAVAILABLE
 
 	The value of this property has no effect on playback when the rate is positive.
  */
-@property (nonatomic) CMTime reversePlaybackEndTime;
+@property CMTime reversePlaybackEndTime;
 
 /*!
  @property seekableTimeRanges
  @abstract This property provides a collection of time ranges that the player item can seek to. The ranges provided might be discontinous.
  @discussion Returns an NSArray of NSValues containing CMTimeRanges.
  */
-@property (nonatomic, readonly) NSArray<NSValue *> *seekableTimeRanges;
+@property (readonly) NSArray<NSValue *> *seekableTimeRanges;
 
 /*!
  @method			seekToTime:completionHandler:
@@ -339,7 +373,7 @@ AV_INIT_UNAVAILABLE
  					completion handler will be invoked with the finished parameter set to YES. 
 					If the seek time is outside of seekable time ranges as indicated by seekableTimeRanges property, the seek request will be cancelled and the completion handler will be invoked with the finished parameter set to NO.
  */
-- (void)seekToTime:(CMTime)time completionHandler:(void (^_Nullable)(BOOL finished))completionHandler NS_AVAILABLE(10_7, 5_0);
+- (void)seekToTime:(CMTime)time completionHandler:(void (^_Nullable)(BOOL finished))completionHandler API_AVAILABLE(macos(10.7), ios(5.0), tvos(9.0), watchos(1.0));
 
 /*!
  @method			seekToTime:toleranceBefore:toleranceAfter:completionHandler:
@@ -357,7 +391,7 @@ AV_INIT_UNAVAILABLE
 					finished parameter set to YES.
 					If the seek time is outside of seekable time ranges as indicated by seekableTimeRanges property, the seek request will be cancelled and the completion handler will be invoked with the finished parameter set to NO.
  */
-- (void)seekToTime:(CMTime)time toleranceBefore:(CMTime)toleranceBefore toleranceAfter:(CMTime)toleranceAfter completionHandler:(void (^_Nullable)(BOOL finished))completionHandler NS_AVAILABLE(10_7, 5_0);
+- (void)seekToTime:(CMTime)time toleranceBefore:(CMTime)toleranceBefore toleranceAfter:(CMTime)toleranceAfter completionHandler:(void (^_Nullable)(BOOL finished))completionHandler API_AVAILABLE(macos(10.7), ios(5.0), tvos(9.0), watchos(1.0));
 
 /*!
  @method			cancelPendingSeeks
@@ -365,7 +399,7 @@ AV_INIT_UNAVAILABLE
  @discussion		Use this method to cancel and release the completion handlers of pending seeks. The finished parameter of the completion handlers will
  					be set to NO.
  */
-- (void)cancelPendingSeeks NS_AVAILABLE(10_7, 5_0);
+- (void)cancelPendingSeeks API_AVAILABLE(macos(10.7), ios(5.0), tvos(9.0), watchos(1.0));
 
 /*!
 	@method	currentDate
@@ -388,7 +422,7 @@ AV_INIT_UNAVAILABLE
  @param			completionHandler	The block to invoke when seek operation is complete
  @result		Returns true if the playhead was moved to the supplied date.
  */
-- (BOOL)seekToDate:(NSDate *)date completionHandler:(void (^_Nullable)(BOOL finished))completionHandler NS_AVAILABLE(10_9, 6_0);
+- (BOOL)seekToDate:(NSDate *)date completionHandler:(void (^_Nullable)(BOOL finished))completionHandler API_AVAILABLE(macos(10.9), ios(6.0), tvos(9.0), watchos(1.0));
 
 /*!
  @method		stepByCount:
@@ -407,7 +441,7 @@ AV_INIT_UNAVAILABLE
    You can examine the timebase to discover the relationship between the item's time and the master clock used for drift synchronization.
    This timebase is read-only; you cannot set its time or rate to affect playback.  The value of this property may change during playback.
  */
-@property (nonatomic, readonly, nullable) __attribute__((NSObject)) CMTimebaseRef timebase NS_AVAILABLE(10_8, 6_0);
+@property (nonatomic, readonly, nullable) __attribute__((NSObject)) CMTimebaseRef timebase API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(1.0));
 
 @end
 
@@ -420,7 +454,7 @@ AV_INIT_UNAVAILABLE
  @property videoComposition
  @abstract Indicates the video composition settings to be applied during playback.
  */
-@property (nonatomic, copy, nullable) AVVideoComposition *videoComposition;
+@property (nonatomic, copy, nullable) AVVideoComposition *videoComposition API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 
 /*!
  @property customVideoCompositor
@@ -429,7 +463,7 @@ AV_INIT_UNAVAILABLE
  	This property is nil if there is no video compositor, or if the internal video compositor is in use. This reference can be used to provide
 	extra context to the custom video compositor instance if required.
  */
-@property (nonatomic, readonly, nullable) id<AVVideoCompositing> customVideoCompositor NS_AVAILABLE(10_9, 7_0);
+@property (nonatomic, readonly, nullable) id<AVVideoCompositing> customVideoCompositor API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 
 /*!
  @property seekingWaitsForVideoCompositionRendering
@@ -446,7 +480,7 @@ AV_INIT_UNAVAILABLE
    This property has no effect on items for which videoComposition is nil.
 
  */
-@property (nonatomic) BOOL seekingWaitsForVideoCompositionRendering NS_AVAILABLE(10_9, 6_0);
+@property BOOL seekingWaitsForVideoCompositionRendering API_AVAILABLE(macos(10.9), ios(6.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 
 /*!
  @property textStyleRules
@@ -456,7 +490,7 @@ AV_INIT_UNAVAILABLE
  
 	This property has an effect only for tracks with media subtype kCMSubtitleFormatType_WebVTT.
 */
-@property (nonatomic, copy, nullable) NSArray<AVTextStyleRule *> *textStyleRules NS_AVAILABLE(10_9, 6_0);
+@property (copy, nullable) NSArray<AVTextStyleRule *> *textStyleRules API_AVAILABLE(macos(10.9), ios(6.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 
 /*!
  @property	videoApertureMode
@@ -464,7 +498,7 @@ AV_INIT_UNAVAILABLE
  @discussion
 	See AVVideoApertureMode constants defined in AVVideoSettings.h. Default is AVVideoApertureModeCleanAperture.
  */
-@property (nonatomic, copy) AVVideoApertureMode videoApertureMode API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0)) __WATCHOS_PROHIBITED;
+@property (copy) AVVideoApertureMode videoApertureMode API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0)) API_UNAVAILABLE(watchos);
 
 @end
 
@@ -478,7 +512,15 @@ AV_INIT_UNAVAILABLE
    Constants for various time pitch algorithms, e.g. AVAudioTimePitchSpectral, are defined in AVAudioProcessingSettings.h.
    The default value on iOS is AVAudioTimePitchAlgorithmLowQualityZeroLatency and on OS X is AVAudioTimePitchAlgorithmSpectral.
 */
-@property (nonatomic, copy) AVAudioTimePitchAlgorithm audioTimePitchAlgorithm NS_AVAILABLE(10_9, 7_0);
+@property (copy) AVAudioTimePitchAlgorithm audioTimePitchAlgorithm API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(1.0));
+
+/*!
+ @property		audioSpatializationAllowed
+ @abstract		Indicates whether audio spatialization is allowed
+ @discussion
+ 	When audio spatialization is allowed for an AVPlayerItem, the AVPlayer may render multichannel audio if available even if the output device doesn't support multichannel audio on its own, via use of a synthetic channel layout. When audio spatialization is not allowed, the AVPlayer must render audio with a channel layout that best matches the capabilities of the output device. This property is not observable. Defaults to YES.
+ */
+@property (nonatomic, assign, getter=isAudioSpatializationAllowed) BOOL audioSpatializationAllowed API_AVAILABLE(macos(10.15), ios(13.0)) API_UNAVAILABLE(tvos, watchos);
 
 /*!
  @property audioMix
@@ -498,7 +540,7 @@ AV_INIT_UNAVAILABLE
  @abstract This property provides a collection of time ranges for which the player has the media data readily available. The ranges provided might be discontinuous.
  @discussion Returns an NSArray of NSValues containing CMTimeRanges.
  */
-@property (nonatomic, readonly) NSArray<NSValue *> *loadedTimeRanges;
+@property (readonly) NSArray<NSValue *> *loadedTimeRanges;
 
 /*!
  @property playbackLikelyToKeepUp
@@ -510,7 +552,7 @@ AV_INIT_UNAVAILABLE
 	keep up. It is left to the application programmer to decide to continue media playback or not. 
 	See playbackBufferFull below.
   */
-@property (nonatomic, readonly, getter=isPlaybackLikelyToKeepUp) BOOL playbackLikelyToKeepUp;
+@property (readonly, getter=isPlaybackLikelyToKeepUp) BOOL playbackLikelyToKeepUp;
 
 /*! 
  @property playbackBufferFull
@@ -519,10 +561,10 @@ AV_INIT_UNAVAILABLE
 	Despite the playback buffer reaching capacity there might not exist sufficient statistical 
 	data to support a playbackLikelyToKeepUp prediction of YES. See playbackLikelyToKeepUp above.
  */
-@property (nonatomic, readonly, getter=isPlaybackBufferFull) BOOL playbackBufferFull;
+@property (readonly, getter=isPlaybackBufferFull) BOOL playbackBufferFull;
 
 /* indicates that playback has consumed all buffered media and that playback will stall or end */
-@property (nonatomic, readonly, getter=isPlaybackBufferEmpty) BOOL playbackBufferEmpty;
+@property (readonly, getter=isPlaybackBufferEmpty) BOOL playbackBufferEmpty;
 
 /*!
  @property canUseNetworkResourcesForLiveStreamingWhilePaused
@@ -532,7 +574,7 @@ AV_INIT_UNAVAILABLE
  
 	For clients linked on or after OS X 10.11 or iOS 9.0, the default value is NO.  To minimize power usage, avoid setting this property to YES when you do not need playback state to stay up to date while paused.
  */
-@property (nonatomic, assign) BOOL canUseNetworkResourcesForLiveStreamingWhilePaused NS_AVAILABLE(10_11, 9_0);
+@property (assign) BOOL canUseNetworkResourcesForLiveStreamingWhilePaused API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(2.0));
 
 /*!
 @property	preferredForwardBufferDuration
@@ -541,7 +583,7 @@ AV_INIT_UNAVAILABLE
 			Note that setting this property to a low value will increase the chance that playback will stall and re-buffer, while setting it to a high value will increase demand on system resources.
 			Note that the system may buffer less than the value of this property in order to manage resource consumption.
 */
-@property (nonatomic) NSTimeInterval preferredForwardBufferDuration NS_AVAILABLE(10_12, 10_0);
+@property NSTimeInterval preferredForwardBufferDuration API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0), watchos(3.0));
 
 @end
 
@@ -557,7 +599,7 @@ AV_INIT_UNAVAILABLE
 
 	If network bandwidth consumption cannot be lowered to meet the preferredPeakBitRate, it will be reduced as much as possible while continuing to play the item.
 */
-@property (nonatomic) double preferredPeakBitRate NS_AVAILABLE(10_10, 8_0);
+@property double preferredPeakBitRate API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(1.0));
 
 /*!
  @property preferredMaximumResolution
@@ -566,7 +608,7 @@ AV_INIT_UNAVAILABLE
 	The default value is CGSizeZero, which indicates that the client enforces no limit on video resolution. Other values indicate a preferred maximum video resolution.
 	It only applies to HTTP Live Streaming asset.
  */
-@property (nonatomic) CGSize preferredMaximumResolution NS_AVAILABLE(10_13, 11_0);
+@property CGSize preferredMaximumResolution API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0)) API_UNAVAILABLE(watchos);
 
 @end
 
@@ -585,7 +627,7 @@ AV_INIT_UNAVAILABLE
    all media selection options in the group.
    Note that if multiple options within a group meet your criteria for selection according to locale or other considerations, and if these options are otherwise indistinguishable to you according to media characteristics that are meaningful for your application, content is typically authored so that the first available option that meets your criteria is appropriate for selection.
  */
-- (void)selectMediaOption:(nullable AVMediaSelectionOption *)mediaSelectionOption inMediaSelectionGroup:(AVMediaSelectionGroup *)mediaSelectionGroup NS_AVAILABLE(10_8, 5_0);
+- (void)selectMediaOption:(nullable AVMediaSelectionOption *)mediaSelectionOption inMediaSelectionGroup:(AVMediaSelectionGroup *)mediaSelectionGroup API_AVAILABLE(macos(10.8), ios(5.0), tvos(9.0), watchos(1.0));
 
 /*!
  @method		selectMediaOptionAutomaticallyInMediaSelectionGroup:
@@ -595,13 +637,13 @@ AV_INIT_UNAVAILABLE
  @discussion
    Has no effect unless the appliesMediaSelectionCriteriaAutomatically property of the associated AVPlayer is YES and unless automatic media selection has previously been overridden via -[AVPlayerItem selectMediaOption:inMediaSelectionGroup:].
  */
-- (void)selectMediaOptionAutomaticallyInMediaSelectionGroup:(AVMediaSelectionGroup *)mediaSelectionGroup NS_AVAILABLE(10_9, 7_0);
+- (void)selectMediaOptionAutomaticallyInMediaSelectionGroup:(AVMediaSelectionGroup *)mediaSelectionGroup API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(1.0));
 
 /*!
   @property		currentMediaSelection
   @abstract		Provides an instance of AVMediaSelection carrying current selections for each of the receiver's media selection groups.
 */
-@property (nonatomic, readonly) AVMediaSelection *currentMediaSelection NS_AVAILABLE(10_11, 9_0);
+@property (nonatomic, readonly) AVMediaSelection *currentMediaSelection API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(2.0));
 
 @end
 
@@ -623,7 +665,7 @@ AV_INIT_UNAVAILABLE
 				An AVPlayerItemNewAccessLogEntryNotification will be posted when new logging information becomes available. However, accessLog might already return a non-nil value even before the first notification is posted.
  @result		An autoreleased AVPlayerItemAccessLog instance.
  */
-- (nullable AVPlayerItemAccessLog *)accessLog NS_AVAILABLE(10_7, 4_3);
+- (nullable AVPlayerItemAccessLog *)accessLog API_AVAILABLE(macos(10.7), ios(4.3), tvos(9.0), watchos(1.0));
 
 /*!
  @method		errorLog
@@ -632,7 +674,7 @@ AV_INIT_UNAVAILABLE
  				If nil is returned then there is no logging information currently available for this AVPlayerItem.
  @result		An autoreleased AVPlayerItemErrorLog instance.
  */
-- (nullable AVPlayerItemErrorLog *)errorLog NS_AVAILABLE(10_7, 4_3);
+- (nullable AVPlayerItemErrorLog *)errorLog API_AVAILABLE(macos(10.7), ios(4.3), tvos(9.0), watchos(1.0));
 
 @end
 
@@ -651,7 +693,7 @@ AV_INIT_UNAVAILABLE
 				An instance of AVPlayerItemOutput
  */
 
-- (void)addOutput:(AVPlayerItemOutput *)output NS_AVAILABLE(10_8, 6_0);
+- (void)addOutput:(AVPlayerItemOutput *)output API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(1.0));
 
 /*!
  @method		removeOutput:
@@ -660,14 +702,14 @@ AV_INIT_UNAVAILABLE
 				An instance of AVPlayerItemOutput
  */
 
-- (void)removeOutput:(AVPlayerItemOutput *)output NS_AVAILABLE(10_8, 6_0);
+- (void)removeOutput:(AVPlayerItemOutput *)output API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(1.0));
 
 /*!
  @property		outputs
  @abstract		The collection of associated outputs.
  */
 
-@property (nonatomic, readonly) NSArray<AVPlayerItemOutput *> *outputs NS_AVAILABLE(10_8, 6_0);
+@property (nonatomic, readonly) NSArray<AVPlayerItemOutput *> *outputs API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(1.0));
 
 @end
 
@@ -683,7 +725,7 @@ AV_INIT_UNAVAILABLE
  @param			collector
 				An instance of AVPlayerItemMediaDataCollector
 */
-- (void)addMediaDataCollector:(AVPlayerItemMediaDataCollector *)collector NS_AVAILABLE(10_11_3, 9_3);
+- (void)addMediaDataCollector:(AVPlayerItemMediaDataCollector *)collector API_AVAILABLE(macos(10.11.3), ios(9.3), tvos(9.3), watchos(2.3));
 
 /*!
  @method		removeMediaDataCollector:
@@ -691,13 +733,13 @@ AV_INIT_UNAVAILABLE
  @param			collector
 				An instance of AVPlayerItemMediaDataCollector
 */
-- (void)removeMediaDataCollector:(AVPlayerItemMediaDataCollector *)collector NS_AVAILABLE(10_11_3, 9_3);
+- (void)removeMediaDataCollector:(AVPlayerItemMediaDataCollector *)collector API_AVAILABLE(macos(10.11.3), ios(9.3), tvos(9.3), watchos(2.3));
 
 /*!
  @property		mediaDataCollectors
  @abstract		The collection of associated mediaDataCollectors.
 */
-@property (nonatomic, readonly) NSArray<AVPlayerItemMediaDataCollector *> *mediaDataCollectors NS_AVAILABLE(10_11_3, 9_3);;
+@property (nonatomic, readonly) NSArray<AVPlayerItemMediaDataCollector *> *mediaDataCollectors API_AVAILABLE(macos(10.11.3), ios(9.3), tvos(9.3), watchos(2.3));
 
 @end
 
@@ -711,7 +753,7 @@ AV_INIT_UNAVAILABLE
 					The time seeked to may differ from the specified time for efficiency. For sample accurate seeking see seekToTime:toleranceBefore:toleranceAfter:.
 					If the seek time is outside of seekable time ranges as indicated by seekableTimeRanges property, the seek request will be cancelled.
  */
-- (void)seekToTime:(CMTime)time NS_DEPRECATED(10_7, 10_13, 4_0, 11_0, "Use -seekToTime:completionHandler:, passing nil for the completionHandler if you don't require notification of completion");
+- (void)seekToTime:(CMTime)time API_DEPRECATED("Use -seekToTime:completionHandler:, passing nil for the completionHandler if you don't require notification of completion", macos(10.7, 10.13), ios(4.0, 11.0), tvos(9.0, 11.0)) API_UNAVAILABLE(watchos);
 
 /*!
  @method			seekToTime:toleranceBefore:toleranceAfter:
@@ -727,7 +769,7 @@ AV_INIT_UNAVAILABLE
 					within the seekable ranges.
 					If the seek time is outside of seekable time ranges as indicated by seekableTimeRanges property, the seek request will be cancelled.
  */
-- (void)seekToTime:(CMTime)time toleranceBefore:(CMTime)toleranceBefore toleranceAfter:(CMTime)toleranceAfter NS_DEPRECATED(10_7, 10_13, 4_0, 11_0, "Use -seekToTime:toleranceBefore:toleranceAfter:completionHandler:, passing nil for the completionHandler if you don't require notification of completion");
+- (void)seekToTime:(CMTime)time toleranceBefore:(CMTime)toleranceBefore toleranceAfter:(CMTime)toleranceAfter API_DEPRECATED("Use -seekToTime:toleranceBefore:toleranceAfter:completionHandler:, passing nil for the completionHandler if you don't require notification of completion", macos(10.7, 10.13), ios(4.0, 11.0), tvos(9.0, 11.0)) API_UNAVAILABLE(watchos);
 
 /*!
  @method		seekToDate
@@ -739,7 +781,7 @@ AV_INIT_UNAVAILABLE
  @param			date	The new position for the playhead.
  @result		Returns true if the playhead was moved to the supplied date.
  */
-- (BOOL)seekToDate:(NSDate *)date NS_DEPRECATED(10_7, 10_13, 4_0, 11_0, "Use -seekToDate:completionHandler:, passing nil for the completionHandler if you don't require notification of completion");
+- (BOOL)seekToDate:(NSDate *)date API_DEPRECATED("Use -seekToDate:completionHandler:, passing nil for the completionHandler if you don't require notification of completion", macos(10.7, 10.13), ios(4.0, 11.0), tvos(9.0, 11.0)) API_UNAVAILABLE(watchos);
 
 /*!
  @method		selectedMediaOptionInMediaSelectionGroup:
@@ -749,7 +791,7 @@ AV_INIT_UNAVAILABLE
  @discussion
    If the value of the property allowsEmptySelection of the AVMediaSelectionGroup is YES, the currently selected option in the group may be nil.
  */
-- (nullable AVMediaSelectionOption *)selectedMediaOptionInMediaSelectionGroup:(AVMediaSelectionGroup *)mediaSelectionGroup NS_DEPRECATED(10_8, 10_13, 5_0, 11_0, "Use currentMediaSelection to obtain an instance of AVMediaSelection, which encompasses the currently selected AVMediaSelectionOption in each of the available AVMediaSelectionGroups");
+- (nullable AVMediaSelectionOption *)selectedMediaOptionInMediaSelectionGroup:(AVMediaSelectionGroup *)mediaSelectionGroup API_DEPRECATED("Use currentMediaSelection to obtain an instance of AVMediaSelection, which encompasses the currently selected AVMediaSelectionOption in each of the available AVMediaSelectionGroups", macos(10.8, 10.13), ios(5.0, 11.0), tvos(9.0, 11.0)) API_UNAVAILABLE(watchos);
 
 @end
 
@@ -762,7 +804,7 @@ AV_INIT_UNAVAILABLE
  				of AVPlayerItemAccessLogEvent instances. Each AVPlayerItemAccessLogEvent instance collates the data 
  				that relates to each uninterrupted period of playback.
 */
-NS_CLASS_AVAILABLE(10_7, 4_3)
+API_AVAILABLE(macos(10.7), ios(4.3), tvos(9.0), watchos(1.0))
 @interface AVPlayerItemAccessLog : NSObject <NSCopying>
 {
 @private
@@ -805,7 +847,7 @@ AV_INIT_UNAVAILABLE
  @abstract		An AVPlayerItemErrorLog provides methods to retrieve the error log in a format suitable for serialization.
  @discussion	An AVPlayerItemErrorLog provides data to identify if, and when, network resource playback failures occured.
 */
-NS_CLASS_AVAILABLE(10_7, 4_3)
+API_AVAILABLE(macos(10.7), ios(4.3), tvos(9.0), watchos(1.0))
 @interface AVPlayerItemErrorLog : NSObject <NSCopying>
 {
 @private
@@ -849,7 +891,7 @@ AV_INIT_UNAVAILABLE
 				fields of each log event. None of the properties of this class are observable.
 */
 
-NS_CLASS_AVAILABLE(10_7, 4_3)
+API_AVAILABLE(macos(10.7), ios(4.3), tvos(9.0), watchos(1.0))
 @interface AVPlayerItemAccessLogEvent : NSObject <NSCopying>
 {
 @private
@@ -864,7 +906,7 @@ AV_INIT_UNAVAILABLE
  				This property is not observable.
  				This property is deprecated. Use numberOfMediaRequests instead.
  */
-@property (nonatomic, readonly) NSInteger numberOfSegmentsDownloaded NS_DEPRECATED(10_7, 10_9, 4_3, 7_0);
+@property (nonatomic, readonly) NSInteger numberOfSegmentsDownloaded API_DEPRECATED("No longer supported", macos(10.7, 10.9), ios(4.3, 7.0), tvos(9.0, 9.0)) API_UNAVAILABLE(watchos);
 
 /*!
  @property		numberOfMediaRequests
@@ -874,7 +916,7 @@ AV_INIT_UNAVAILABLE
 				For progressive-style HTTP media downloads, a count of HTTP GET (byte-range) requests for the resource.
  				This property is not observable. 
  */
-@property (nonatomic, readonly) NSInteger numberOfMediaRequests NS_AVAILABLE(10_9, 6_0);
+@property (nonatomic, readonly) NSInteger numberOfMediaRequests API_AVAILABLE(macos(10.9), ios(6.0), tvos(9.0), watchos(1.0));
 
 /*!
  @property		playbackStartDate
@@ -962,7 +1004,7 @@ AV_INIT_UNAVAILABLE
  @discussion	Value is negative if unknown. Corresponds to "c-transfer-duration".
 				This property is not observable.
  */
-@property (nonatomic, readonly) NSTimeInterval transferDuration NS_AVAILABLE(10_9, 7_0);
+@property (nonatomic, readonly) NSTimeInterval transferDuration API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(1.0));
 
 /*!
  @property		observedBitrate
@@ -986,7 +1028,7 @@ AV_INIT_UNAVAILABLE
  @discussion	Value is negative if unknown. Corresponds to "sc-indicated-avg-bitrate".
  This property is not observable.
  */
-@property (nonatomic, readonly) double indicatedAverageBitrate NS_AVAILABLE(10_12, 10_0);
+@property (nonatomic, readonly) double indicatedAverageBitrate API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0), watchos(3.0));
 
 /*!
  @property		averageVideoBitrate
@@ -994,7 +1036,7 @@ AV_INIT_UNAVAILABLE
  @discussion	Value is negative if unknown. Corresponds to "c-avg-video-bitrate".
  This property is not observable.
  */
-@property (nonatomic, readonly) double averageVideoBitrate NS_AVAILABLE(10_12, 10_0);
+@property (nonatomic, readonly) double averageVideoBitrate API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0)) API_UNAVAILABLE(watchos);
 
 /*!
  @property		averageAudioBitrate
@@ -1002,7 +1044,7 @@ AV_INIT_UNAVAILABLE
  @discussion	Value is negative if unknown. Corresponds to "c-avg-audio-bitrate".
  This property is not observable.
  */
-@property (nonatomic, readonly) double averageAudioBitrate NS_AVAILABLE(10_12, 10_0);
+@property (nonatomic, readonly) double averageAudioBitrate API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0), watchos(3.0));
 
 /*!
  @property		numberOfDroppedVideoFrames
@@ -1018,7 +1060,7 @@ AV_INIT_UNAVAILABLE
  @discussion	Value is negative if unknown. Corresponds to "c-startup-time".
 				This property is not observable.
  */
-@property (nonatomic, readonly) NSTimeInterval startupTime NS_AVAILABLE(10_9, 7_0);
+@property (nonatomic, readonly) NSTimeInterval startupTime API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(1.0));
 
 /*!
  @property		downloadOverdue
@@ -1026,7 +1068,7 @@ AV_INIT_UNAVAILABLE
  @discussion	Value is negative if unknown. Corresponds to "c-overdue".
 				This property is not observable.
  */
-@property (nonatomic, readonly) NSInteger downloadOverdue NS_AVAILABLE(10_9, 7_0);
+@property (nonatomic, readonly) NSInteger downloadOverdue API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(1.0));
 
 /*!
  @property		observedMaxBitrate
@@ -1034,7 +1076,7 @@ AV_INIT_UNAVAILABLE
  @discussion	Value is negative if unknown. Corresponds to "c-observed-max-bitrate".
 				This property is not observable.
  */
-@property (nonatomic, readonly) double observedMaxBitrate NS_AVAILABLE(10_9, 7_0);
+@property (nonatomic, readonly) double observedMaxBitrate API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(1.0));
 
 /*!
  @property		observedMinBitrate
@@ -1042,7 +1084,7 @@ AV_INIT_UNAVAILABLE
  @discussion	Value is negative if unknown. Corresponds to "c-observed-min-bitrate".
 				This property is not observable.
  */
-@property (nonatomic, readonly) double observedMinBitrate NS_AVAILABLE(10_9, 7_0);
+@property (nonatomic, readonly) double observedMinBitrate API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(1.0));
 
 /*!
  @property		observedBitrateStandardDeviation
@@ -1050,7 +1092,7 @@ AV_INIT_UNAVAILABLE
  @discussion	Value is negative if unknown. Corresponds to "c-observed-bitrate-sd".
 				This property is not observable.
  */
-@property (nonatomic, readonly) double observedBitrateStandardDeviation NS_AVAILABLE(10_9, 7_0);
+@property (nonatomic, readonly) double observedBitrateStandardDeviation API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(1.0));
 
 /*!
  @property		playbackType
@@ -1058,7 +1100,7 @@ AV_INIT_UNAVAILABLE
  @discussion	If nil is returned the playback type is unknown. Corresponds to "s-playback-type".
 				This property is not observable.
  */
-@property (nonatomic, readonly, nullable) NSString *playbackType NS_AVAILABLE(10_9, 7_0);
+@property (nonatomic, readonly, nullable) NSString *playbackType API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(1.0));
 
 /*!
  @property		mediaRequestsWWAN
@@ -1066,7 +1108,7 @@ AV_INIT_UNAVAILABLE
  @discussion	Value is negative if unknown. Corresponds to "sc-wwan-count".
 				This property is not observable.
  */
-@property (nonatomic, readonly) NSInteger mediaRequestsWWAN NS_AVAILABLE(10_9, 7_0);
+@property (nonatomic, readonly) NSInteger mediaRequestsWWAN API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(1.0));
 
 /*!
  @property		switchBitrate
@@ -1074,7 +1116,7 @@ AV_INIT_UNAVAILABLE
  @discussion	Value is negative if unknown. Corresponds to "c-switch-bitrate".
 				This property is not observable.
  */
-@property (nonatomic, readonly) double switchBitrate NS_AVAILABLE(10_9, 7_0);
+@property (nonatomic, readonly) double switchBitrate API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(1.0));
 
 @end
 
@@ -1084,7 +1126,7 @@ AV_INIT_UNAVAILABLE
  @discussion	An AVPlayerItemErrorLogEvent provides named properties for accessing the data
 				fields of each log event. None of the properties of this class are observable.
 */
-NS_CLASS_AVAILABLE(10_7, 4_3)
+API_AVAILABLE(macos(10.7), ios(4.3), tvos(9.0), watchos(1.0))
 @interface AVPlayerItemErrorLogEvent : NSObject <NSCopying>
 {
 @private

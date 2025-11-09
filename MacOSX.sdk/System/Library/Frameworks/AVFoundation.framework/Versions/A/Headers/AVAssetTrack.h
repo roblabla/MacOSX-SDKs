@@ -3,7 +3,7 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2010-2018 Apple Inc. All rights reserved.
+	Copyright 2010-2019 Apple Inc. All rights reserved.
 
 */
 
@@ -28,7 +28,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class AVAssetTrackInternal;
 
-NS_CLASS_AVAILABLE(10_7, 4_0)
+API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0))
 @interface AVAssetTrack : NSObject <NSCopying, AVAsynchronousKeyValueLoading>
 {
 @private
@@ -59,10 +59,10 @@ AV_INIT_UNAVAILABLE
 @property (nonatomic, readonly) NSArray *formatDescriptions;
 
 /* Indicates whether the receiver is playable in the current environment; if YES, an AVPlayerItemTrack of an AVPlayerItem initialized with the receiver's asset can be enabled for playback.  */
-@property (nonatomic, readonly, getter=isPlayable) BOOL playable NS_AVAILABLE(10_8, 5_0);
+@property (nonatomic, readonly, getter=isPlayable) BOOL playable API_AVAILABLE(macos(10.8), ios(5.0), tvos(9.0), watchos(1.0));
 
 /* Indicates whether the receiver is decodable in the current environment; if YES, the track can be decoded even though decoding may be too slow for real time playback.  */
-@property (nonatomic, readonly, getter=isDecodable) BOOL decodable NS_AVAILABLE(10_13, 11_0);
+@property (nonatomic, readonly, getter=isDecodable) BOOL decodable API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0));
 
 /* indicates whether the track is enabled according to state stored in its container or construct;
    note that its presentation state can be changed from this default via AVPlayerItemTrack */
@@ -132,6 +132,9 @@ AV_INIT_UNAVAILABLE
 /* indicates the volume specified in the track's storage container as the preferred volume of the audible media data */
 @property (nonatomic, readonly) float preferredVolume;
 
+/* indicates whether this audio track has dependencies (e.g. kAudioFormatMPEGD_USAC) */
+@property (nonatomic, readonly) BOOL hasAudioSampleDependencies;
+
 @end
 
 
@@ -145,13 +148,13 @@ AV_INIT_UNAVAILABLE
 @property (nonatomic, readonly) float nominalFrameRate;
 
 /* indicates the minimum duration of the track's frames; the value will be kCMTimeInvalid if the minimum frame duration is not known or cannot be calculated */
-@property (nonatomic, readonly) CMTime minFrameDuration NS_AVAILABLE(10_10, 7_0);
+@property (nonatomic, readonly) CMTime minFrameDuration API_AVAILABLE(macos(10.10), ios(7.0), tvos(9.0), watchos(1.0));
 
 /*!
 	@property       requiresFrameReordering
 	@abstract       Indicates whether samples in the track may have different values for their presentation and decode timestamps.
 */
-@property (nonatomic, readonly) BOOL requiresFrameReordering NS_AVAILABLE(10_10, 8_0);
+@property (nonatomic, readonly) BOOL requiresFrameReordering API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(1.0));
 
 @end
 
@@ -193,7 +196,7 @@ AV_INIT_UNAVAILABLE
 
 /* Provides access to an array of AVMetadataItems for all metadata identifiers for which a value is available; items can be filtered according to language via +[AVMetadataItem metadataItemsFromArray:filteredAndSortedAccordingToPreferredLanguages:] and according to identifier via +[AVMetadataItem metadataItemsFromArray:filteredByIdentifier:].
 */
-@property (nonatomic, readonly) NSArray<AVMetadataItem *> *metadata NS_AVAILABLE(10_10, 8_0);
+@property (nonatomic, readonly) NSArray<AVMetadataItem *> *metadata API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(1.0));
 
 /* provides an NSArray of NSStrings, each representing a format of metadata that's available for the track (e.g. QuickTime userdata, etc.)
    Metadata formats are defined in AVMetadataItem.h. */
@@ -231,7 +234,7 @@ typedef NSString * AVTrackAssociationType NS_STRING_ENUM;
 	Example: Using AVTrackAssociationTypeAudioFallback, a stereo audio track with media subtype kAudioFormatMPEG4AAC could be nominated as the "fallback" for an audio track encoding the same source material but with media subtype kAudioFormatAC3 and a 5.1 channel layout.  This would ensure that all clients are capable of playing back some form of the audio.
 
  */
-AVF_EXPORT AVTrackAssociationType const AVTrackAssociationTypeAudioFallback NS_AVAILABLE(10_9, 7_0);
+AVF_EXPORT AVTrackAssociationType const AVTrackAssociationTypeAudioFallback API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(1.0));
 
 /*
  @constant		AVTrackAssociationTypeChapterList
@@ -240,7 +243,7 @@ AVF_EXPORT AVTrackAssociationType const AVTrackAssociationTypeAudioFallback NS_A
  @discussion
 	This association is not symmetric; when used with -[AVAssetWriterInput addTrackAssociationWithTrackOfInput:type:], the receiver should be an instance of AVAssetWriterInput with a corresponding track that has renderable content while the input parameter should be an instance of AVAssetWriterInput with a corresponding track that contains chapter metadata.
  */
-AVF_EXPORT AVTrackAssociationType const AVTrackAssociationTypeChapterList NS_AVAILABLE(10_9, 7_0);
+AVF_EXPORT AVTrackAssociationType const AVTrackAssociationTypeChapterList API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(1.0));
 
 /*
  @constant		AVTrackAssociationTypeForcedSubtitlesOnly
@@ -249,7 +252,7 @@ AVF_EXPORT AVTrackAssociationType const AVTrackAssociationTypeChapterList NS_AVA
  @discussion
 	Associations of type AVTrackAssociationTypeForcedSubtitlesOnly are supported only between subtitle tracks.  This association is not symmetric; when used with -[AVAssetWriterInput addTrackAssociationWithTrackOfInput:type:], the receiver should be an instance of AVAssetWriterInput with a corresponding subtitle track that contains non-forced subtitles, and the input parameter should be an instance of AVAssetWriterInput with a corresponding subtitle track that contains forced subtitles only.
  */
-AVF_EXPORT AVTrackAssociationType const AVTrackAssociationTypeForcedSubtitlesOnly NS_AVAILABLE(10_9, 7_0);
+AVF_EXPORT AVTrackAssociationType const AVTrackAssociationTypeForcedSubtitlesOnly API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(1.0));
 
 /*
  @constant		AVTrackAssociationTypeSelectionFollower
@@ -258,7 +261,7 @@ AVF_EXPORT AVTrackAssociationType const AVTrackAssociationTypeForcedSubtitlesOnl
  @discussion
 	This association is not symmetric; when used with -[AVAssetWriterInput addTrackAssociationWithTrackOfInput:type:], the input parameter should be an instance of AVAssetWriterInput whose selection may depend on the selection of the receiver.  In the example above, the receiver would be the instance of AVAssetWriterInput corresponding with the audio track and the input parameter would be the instance of AVAssetWriterInput corresponding with the subtitle track.
  */
-AVF_EXPORT AVTrackAssociationType const AVTrackAssociationTypeSelectionFollower NS_AVAILABLE(10_9, 7_0);
+AVF_EXPORT AVTrackAssociationType const AVTrackAssociationTypeSelectionFollower API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(1.0));
 
 /*
  @constant		AVTrackAssociationTypeTimecode
@@ -267,7 +270,7 @@ AVF_EXPORT AVTrackAssociationType const AVTrackAssociationTypeSelectionFollower 
  @discussion
 	This association is not symmetric; when used with -[AVAssetWriterInput addTrackAssociationWithTrackOfInput:type:], the receiver should be an instance of AVAssetWriterInput with a corresponding track that may be a video track or an audio track while the input parameter should be an instance of AVAssetWriterInput with a corresponding timecode track.
  */
-AVF_EXPORT AVTrackAssociationType const AVTrackAssociationTypeTimecode NS_AVAILABLE(10_9, 7_0);
+AVF_EXPORT AVTrackAssociationType const AVTrackAssociationTypeTimecode API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(1.0));
 
 /*
 @constant		AVTrackAssociationTypeMetadataReferent
@@ -277,11 +280,11 @@ AVF_EXPORT AVTrackAssociationType const AVTrackAssociationTypeTimecode NS_AVAILA
 	This track association is optional for AVAssetTracks with the mediaType AVMediaTypeMetadata. When a metadata track lacks this track association, its contents are assumed to describe or annotate the asset as a whole.
 	This association is not symmetric; when used with -[AVAssetWriterInput addTrackAssociationWithTrackOfInput:type:], the receiver should be an instance of AVAssetWriterInput with mediaType AVMediaTypeMetadata while the input parameter should be an instance of AVAssetWriterInput that's used to create the track to which the contents of the receiver's corresponding metadata track refer.
 */
-AVF_EXPORT AVTrackAssociationType const AVTrackAssociationTypeMetadataReferent NS_AVAILABLE(10_10, 8_0);
+AVF_EXPORT AVTrackAssociationType const AVTrackAssociationTypeMetadataReferent API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(1.0));
 
 /* Provides an NSArray of NSStrings, each representing a type of track association that the receiver has with one or more of the other tracks of the asset (e.g. AVTrackAssociationTypeChapterList, AVTrackAssociationTypeTimecode, etc.).
    Track association types are defined immediately above. */
-@property (nonatomic, readonly) NSArray<AVTrackAssociationType> *availableTrackAssociationTypes NS_AVAILABLE(10_9, 7_0);
+@property (nonatomic, readonly) NSArray<AVTrackAssociationType> *availableTrackAssociationTypes API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(1.0));
 
 /*!
 	@method			associatedTracksOfType:
@@ -291,7 +294,7 @@ AVF_EXPORT AVTrackAssociationType const AVTrackAssociationTypeMetadataReferent N
 	@result			An NSArray containing AVAssetTracks; may be empty if there is no associated tracks of the specified type.
 	@discussion		Becomes callable without blocking when the key @"availableTrackAssociationTypes" has been loaded.
 */
-- (NSArray<AVAssetTrack *> *)associatedTracksOfType:(AVTrackAssociationType)trackAssociationType NS_AVAILABLE(10_9, 7_0);
+- (NSArray<AVAssetTrack *> *)associatedTracksOfType:(AVTrackAssociationType)trackAssociationType API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(1.0));
 
 @end
 
@@ -303,7 +306,7 @@ AVF_EXPORT AVTrackAssociationType const AVTrackAssociationTypeMetadataReferent N
 @interface AVAssetTrack (AVAssetTrackSampleCursorProvision)
 
 /* Indicates whether the receiver can provide instances of AVSampleCursor for traversing its media samples and discovering information about them. */
-@property (nonatomic, readonly) BOOL canProvideSampleCursors NS_AVAILABLE_MAC(10_10);
+@property (nonatomic, readonly) BOOL canProvideSampleCursors API_AVAILABLE(macos(10.10)) API_UNAVAILABLE(ios, tvos, watchos);
 
 /*!
 	@method			makeSampleCursorWithPresentationTimeStamp:
@@ -313,22 +316,25 @@ AVF_EXPORT AVTrackAssociationType const AVTrackAssociationTypeMetadataReferent N
 	@result			An instance of AVSampleCursor.
 	@discussion		If the receiver's asset has a value of YES for providesPreciseDurationAndTiming, the sample cursor will be accurately positioned at the receiver's last media sample with presentation timestamp less than or equal to the desired timestamp, or, if there are no such samples, the first sample in presentation order.
 					If the receiver's asset has a value of NO for providesPreciseDurationAndTiming, and it is prohibitively expensive to locate the precise sample at the desired timestamp, the sample cursor may be approximately positioned.
+ 					This method will return nil if there are no samples in the track.
 */
-- (nullable AVSampleCursor *)makeSampleCursorWithPresentationTimeStamp:(CMTime)presentationTimeStamp NS_AVAILABLE_MAC(10_10);
+- (nullable AVSampleCursor *)makeSampleCursorWithPresentationTimeStamp:(CMTime)presentationTimeStamp API_AVAILABLE(macos(10.10)) API_UNAVAILABLE(ios, tvos, watchos);
 
 /*!
 	@method			makeSampleCursorAtFirstSampleInDecodeOrder:
 	@abstract		Creates an instance of AVSampleCursor and positions it at the receiver's first media sample in decode order.
 	@result			An instance of AVSampleCursor.
+	@discussion		This method will return nil if there are no samples in the track.
 */
-- (nullable AVSampleCursor *)makeSampleCursorAtFirstSampleInDecodeOrder NS_AVAILABLE_MAC(10_10);
+- (nullable AVSampleCursor *)makeSampleCursorAtFirstSampleInDecodeOrder API_AVAILABLE(macos(10.10)) API_UNAVAILABLE(ios, tvos, watchos);
 
 /*!
 	@method			makeSampleCursorAtLastSampleInDecodeOrder:
 	@abstract		Creates an instance of AVSampleCursor and positions it at the receiver's last media sample in decode order.
 	@result			An instance of AVSampleCursor.
+	@discussion		This method will return nil if there are no samples in the track.
 */
-- (nullable AVSampleCursor *)makeSampleCursorAtLastSampleInDecodeOrder NS_AVAILABLE_MAC(10_10);
+- (nullable AVSampleCursor *)makeSampleCursorAtLastSampleInDecodeOrder API_AVAILABLE(macos(10.10)) API_UNAVAILABLE(ios, tvos, watchos);
 
 @end
 
@@ -345,19 +351,19 @@ AVF_EXPORT AVTrackAssociationType const AVTrackAssociationTypeMetadataReferent N
  @constant       AVAssetTrackTimeRangeDidChangeNotification
  @abstract       Posted when the timeRange of an AVFragmentedAssetTrack changes while the associated instance of AVFragmentedAsset is being minded by an AVFragmentedAssetMinder, but only for changes that occur after the status of the value of @"timeRange" has reached AVKeyValueStatusLoaded.
 */
-AVF_EXPORT NSString *const AVAssetTrackTimeRangeDidChangeNotification NS_AVAILABLE(10_11, 9_0);
+AVF_EXPORT NSString *const AVAssetTrackTimeRangeDidChangeNotification API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(2.0));
 
 /*!
  @constant       AVAssetTrackSegmentsDidChangeNotification
  @abstract       Posted when the array of segments of an AVFragmentedAssetTrack changes while the associated instance of AVFragmentedAsset is being minded by an AVFragmentedAssetMinder, but only for changes that occur after the status of the value of @"segments" has reached AVKeyValueStatusLoaded.
 */
-AVF_EXPORT NSString *const AVAssetTrackSegmentsDidChangeNotification NS_AVAILABLE(10_11, 9_0);
+AVF_EXPORT NSString *const AVAssetTrackSegmentsDidChangeNotification API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(2.0));
 
 /*!
  @constant       AVAssetTrackTrackAssociationsDidChangeNotification
  @abstract       Posted when the collection of track associations of an AVAssetTrack changes, but only for changes that occur after the status of the value of @"availableTrackAssociationTypes" has reached AVKeyValueStatusLoaded.
 */
-AVF_EXPORT NSString *const AVAssetTrackTrackAssociationsDidChangeNotification NS_AVAILABLE(10_11, 9_0);
+AVF_EXPORT NSString *const AVAssetTrackTrackAssociationsDidChangeNotification API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(2.0));
 
 #pragma mark --- AVFragmentedAssetTrack ---
 /*!
@@ -368,7 +374,7 @@ AVF_EXPORT NSString *const AVAssetTrackTrackAssociationsDidChangeNotification NS
 
 @class AVFragmentedAssetTrackInternal;
 
-API_AVAILABLE(macos(10.11), ios(12.0), tvos(12.0)) API_UNAVAILABLE(watchos)
+API_AVAILABLE(macos(10.11), ios(12.0), tvos(12.0), watchos(6.0))
 @interface AVFragmentedAssetTrack : AVAssetTrack
 {
 @private

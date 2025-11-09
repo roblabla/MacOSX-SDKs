@@ -1,55 +1,50 @@
-.TH SKYWALKCTL 8 "August 31, 2016"
+.TH SKYWALKCTL 8 "Jul 24, 2018"
 .SH NAME
 skywalkctl \- Interact with Skywalk subsystem
 .SH SYNOPSIS
-\fBskywalkctl\fP [ -f \fIOUTFILE\fP ] <command> [ <args> ]
+\fBskywalkctl\fP <command> [ <args> ]
 .SH DESCRIPTION
-\fBskywalkctl\fP is a utility used to interact with the
-Skywalk subsystem, which provides the plumbing between
-various networking-related pieces of software and hardware.
-It should only be used in a test and debug context. Using
-it for any other purpose is strongly discouraged.
-.SH OPTIONS
-.TP
-\fB-f\fP \fIOUTFILE\fP
-Redirect output to the file specified by \fIOUTFILE\fP,
-instead of stdout.
+\fBskywalkctl\fP is a utility used to interact with the Skywalk subsystem,
+which provides the plumbing between various networking-related pieces of
+software and hardware.
+It should only be used in a test and debug context. Using it for any other
+purpose is strongly discouraged.
+It is composed of multiple commands list below. Use
+skywalkctl \fICOMMAND\fP help to see
+usage of each command.
+
 .SH COMMANDS
 .TP
-\fCtree\fR [ \fIROOT-UUID\fP ]
-Output JSON representing a tree of all current Skywalk
-objects. If provided, the tree will start at \fIROOT-UUID\fP
-instead of the global root.
+\fCshow\fR
+Prints a brief overview of Skywalk runtime.
 .TP
-\fCchannel-stats\fR [ --interval, -I \fIinterval\fP ]
-Display performance and error statistics for all currently
-registered Skywalk channels.
-.RS
+\fCflow\fR
+Display Skywalk flow.
 .TP
-\fB-I\fP \fIinterval\fP
-Re-print channel statistics with a period of \fIinterval\fP
-seconds, until the SIGINT signal is received.
-.RE
+\fCflow-adv\fR
+Display flow advisory information.
 .TP
-\fClist-providers\fR [ --details, -D ]
-Print a human-readable table of Skywalk nexus providers
-and their child instances
-.RS
+\fCflow-owner\fR
+Display flow owner information.
 .TP
-\fB-D\fP
-Provide more details about each provider
-.RE
+\fCflow-route\fR
+Display flow route information.
 .TP
-\fCnetns\fR [ -a ] | [ -i, --ip \fIIP\fP -p, --proto \fIPROTO\fP ]
-Print information about L4 port reservations for the given
-<\fIIP\fP, \fIPROTO\fP> where \fIIP\fP is either an IPv4/v6 address
-or 'global', and \fIPROTO\fP is the common name for a
-transportation-layer protocol ('tcp' or 'udp').
-.RS
+\fCchannel\fR
+Display channels with performance and error statistics.
 .TP
-\fB-a\fP
-ignore any other specifiers and list the contents of every namespace,
-one after another
-.RE
+\fCmemory\fR
+Display memory usage.
+.TP
+\fCprovider\fR
+Display Skywalk nexus providers and their child instances.
+.TP
+\fCnetns\fR
+Display information about port reservations.
+.TP
+\fClog\fR
+Display and manipulate Skywalk kernel logging verbosity.
+\fCenable\fR
+Enable/disable Skywalk via boot-args.
 .SH "SEE ALSO"
 netstat(1), lsof(8)

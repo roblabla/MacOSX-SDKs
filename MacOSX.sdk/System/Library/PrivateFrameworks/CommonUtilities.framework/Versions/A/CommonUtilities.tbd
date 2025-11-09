@@ -1,8 +1,8 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: BE71A0AD-7ED9-3B2A-BF7D-DA7841640FE0' ]
-platform:        macosx
-install-name:    /System/Library/PrivateFrameworks/CommonUtilities.framework/Versions/A/CommonUtilities
+uuids:           [ 'x86_64: 02B5989A-F392-3A09-861D-75F0243FAEBC', 'x86_64: 02B5989A-F392-3A09-861D-75F0243FAEBC' ]
+platform:        zippered
+install-name:    '/System/Library/PrivateFrameworks/CommonUtilities.framework/Versions/A/CommonUtilities'
 current-version: 800
 exports:         
   - archs:           [ x86_64 ]
@@ -26,17 +26,15 @@ exports:
                        _cut_log_group_generation, _cut_non_arc_os_release ]
     objc-classes:    [ CUTAsyncReducer, CUTAsyncReducerState, CUTCheckpoint, CUTCheckpointInstant, 
                        CUTCheckpointRange, CUTCheckpointSignpost, CUTCheckpointTrace, 
-                       CUTDeferredTaskQueue, CUTFileCopier, CUTImplicitPromise, CUTNetworkInterfaceListener, 
+                       CUTDeferredTaskQueue, CUTFileCopier, CUTNetworkInterfaceListener, 
                        CUTPowerAssertion, CUTPowerMonitor, CUTPromise, CUTPromiseSeal, 
                        CUTReachability, CUTReporting, CUTResult, CUTTelephonyManager, 
-                       CUTWeakReference, CUTWiFiManager ]
-    objc-ivars:      [ CUTCheckpoint._frozen, CUTImplicitPromise._promise, CUTNetworkInterfaceListener._IPv4Addresses, 
+                       CUTUnsafePromise, CUTUnsafePromiseSeal, CUTWeakReference, 
+                       CUTWiFiManager ]
+    objc-ivars:      [ CUTCheckpoint._frozen, CUTNetworkInterfaceListener._IPv4Addresses, 
                        CUTNetworkInterfaceListener._IPv6Addresses, CUTNetworkInterfaceListener._cellState, 
                        CUTNetworkInterfaceListener._delegateMap, CUTNetworkInterfaceListener._delegateQueue, 
                        CUTNetworkInterfaceListener._dynamicStore, CUTNetworkInterfaceListener._wifiState, 
-                       CUTPowerAssertion._assertion, CUTPowerAssertion._identifier, 
-                       CUTPowerAssertion._stack, CUTPromise._done, CUTPromise._group, 
-                       CUTPromise._queue, CUTPromise._result, CUTPromiseSeal._promise, 
-                       CUTPromiseSeal._queue, CUTResult._inError, CUTResult._inValue, 
+                       CUTPowerAssertion._internal, CUTResult._inError, CUTResult._inValue, 
                        CUTResult._state ]
 ...

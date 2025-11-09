@@ -3,4 +3,3 @@ framework module CryptoTokenKit [extern_c] {
   export *
   module * { export * }
 }
-

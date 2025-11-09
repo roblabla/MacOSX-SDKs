@@ -1,7 +1,7 @@
 /*
 	NSSearchFieldCell.h
 	Application Kit
-	Copyright (c) 2003-2018, Apple Inc.
+	Copyright (c) 2003-2019, Apple Inc.
 	All rights reserved.
  */
 
@@ -24,43 +24,11 @@ static const NSInteger NSSearchFieldClearRecentsMenuItemTag = 1002;
 static const NSInteger NSSearchFieldNoRecentsMenuItemTag = 1003;
 
 NS_ASSUME_NONNULL_BEGIN
+API_UNAVAILABLE_BEGIN(ios)
 
-@class NSButtonCell, NSMenu, NSMutableArray, NSTimer;
+@class NSButtonCell, NSMenu, NSMutableArray, NSTimer, NSImage;
 
-@interface NSSearchFieldCell : NSTextFieldCell {
-  @private
-    struct __sfFlags {
-	unsigned int sendsWholeSearchString:1;
-	unsigned int maximumRecents:8;
-	unsigned int cancelVisible:1;
-	unsigned int reserved2:2;
-	unsigned int disableText:1;
-	unsigned int menuTracking:1;
-	unsigned int deferredUpdate:1;
-	unsigned int sendsImmediately:1;
-        unsigned int centeredLook:1;
-        unsigned int renderingCentered:1;
-        unsigned int becomeTransition:1;
-        unsigned int resignTransition:1;
-        unsigned int subclassOverridesRectForSearchButtonWhenCentered:2;
-        unsigned int subclassOverridesRectForSearchTextWhenCentered:2;
-        unsigned int subclassOverridesRectForCancelButtonWhenCentered:2;
-	unsigned int resumeEditingOnCancel:1;
-	unsigned int reserved:5;
-    } _sfFlags APPKIT_IVAR;
-    NSButtonCell*   _searchButtonCell APPKIT_IVAR;
-    NSButtonCell*   _cancelButtonCell APPKIT_IVAR;
-    NSMenu*         _searchMenuTemplate APPKIT_IVAR;
-    NSString*       _recentsAutosaveName APPKIT_IVAR;
-    NSMutableArray* _recentSearches APPKIT_IVAR;
-    NSMenu*         _searchMenu APPKIT_IVAR;
-    NSTimer*        _partialStringTimer APPKIT_IVAR;
-    unsigned int _reserved1 APPKIT_IVAR;
-    unsigned int _reserved2 APPKIT_IVAR;
-    unsigned int _reserved3 APPKIT_IVAR;
-    unsigned int _reserved4 __unused APPKIT_IVAR;
-}
-
+@interface NSSearchFieldCell : NSTextFieldCell
 
 - (instancetype)initTextCell:(NSString *)string NS_DESIGNATED_INITIALIZER;
 - (instancetype)initWithCoder:(NSCoder *)coder NS_DESIGNATED_INITIALIZER;
@@ -100,5 +68,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+API_UNAVAILABLE_END
 NS_ASSUME_NONNULL_END
 

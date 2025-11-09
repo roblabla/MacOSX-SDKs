@@ -1,8 +1,8 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 7BF55174-B48C-3B4A-A1D5-EB354DC4B222' ]
+uuids:           [ 'x86_64: 8C233057-0413-345B-9F8F-E9C57CE54BCD' ]
 platform:        macosx
-install-name:    /System/Library/PrivateFrameworks/OpenDirectoryConfig.framework/Versions/A/OpenDirectoryConfig
+install-name:    '/System/Library/PrivateFrameworks/OpenDirectoryConfig.framework/Versions/A/OpenDirectoryConfig'
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _ODCActionErrorActionsKey, _ODCActionErrorDomain, _ODCActionFinishedNotification, 

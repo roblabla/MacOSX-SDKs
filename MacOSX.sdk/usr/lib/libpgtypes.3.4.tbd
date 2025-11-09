@@ -1,11 +1,10 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 01955D31-5EFA-333F-9287-927160DBFB09' ]
+uuids:           [ 'x86_64: CCA994FC-6984-3786-A130-56A0902B6C7B' ]
 platform:        macosx
-install-name:    /usr/lib/libpgtypes.3.dylib
+install-name:    '/usr/lib/libpgtypes.3.dylib'
 current-version: 3.4
 compatibility-version: 3
-objc-constraint: none
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _PGTYPESdate_dayofweek, _PGTYPESdate_defmt_asc, _PGTYPESdate_fmt_asc, 

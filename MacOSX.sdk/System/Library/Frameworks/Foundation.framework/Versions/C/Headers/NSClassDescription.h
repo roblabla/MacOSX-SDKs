@@ -1,5 +1,5 @@
 /*	NSClassDescription.h
-	Copyright (c) 1995-2018, Apple Inc. All rights reserved.
+	Copyright (c) 1995-2019, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>

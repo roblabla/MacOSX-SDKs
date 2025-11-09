@@ -2,7 +2,7 @@
 //  INInteraction.h
 //  Intents
 //
-//  Copyright (c) 2016-2017 Apple Inc. All rights reserved.
+//  Copyright (c) 2016-2019 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -17,14 +17,14 @@ typedef NS_ENUM(NSInteger, INIntentHandlingStatus) {
     INIntentHandlingStatusSuccess,
     INIntentHandlingStatusFailure,
     INIntentHandlingStatusDeferredToApplication,
-    INIntentHandlingStatusUserConfirmationRequired API_AVAILABLE(macosx(10.14), ios(12.0), watchos(5.0)),
-} API_AVAILABLE(macosx(10.12), ios(10.0), watchos(3.2));
+    INIntentHandlingStatusUserConfirmationRequired API_AVAILABLE(ios(12.0), watchos(5.0)) API_UNAVAILABLE(macosx),
+} API_AVAILABLE(ios(10.0), watchos(3.2)) API_UNAVAILABLE(macosx);
 
 typedef NS_ENUM(NSInteger, INInteractionDirection) {
     INInteractionDirectionUnspecified = 0,
     INInteractionDirectionOutgoing,
     INInteractionDirectionIncoming,
-} API_AVAILABLE(macosx(10.12), ios(10.0), watchos(3.2));
+} API_AVAILABLE(ios(10.0), watchos(3.2)) API_UNAVAILABLE(macosx);
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -34,7 +34,7 @@ NS_ASSUME_NONNULL_BEGIN
  The system may also launch the app with an NSUserActivity containing an INInteraction such that the app can perform the action if it chooses.
 */
 
-API_AVAILABLE(macosx(10.12), ios(10.0), watchos(3.2))
+API_AVAILABLE(ios(10.0), watchos(3.2)) API_UNAVAILABLE(macosx)
 @interface INInteraction : NSObject <NSSecureCoding, NSCopying>
 
 - (instancetype)init NS_UNAVAILABLE;

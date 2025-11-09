@@ -74,7 +74,7 @@ enum
 	kCMMetadataIdentifierError_BadKeySpace					= -16306,
 	kCMMetadataIdentifierError_BadIdentifier				= -16307,
 	kCMMetadataIdentifierError_NoKeyValueAvailable			= -16308,
-};
+} API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0));
 
 /*!
 	@enum CMMetadata DataType Registry Errors
@@ -99,7 +99,7 @@ enum
 	kCMMetadataDataTypeRegistryError_DataTypeAlreadyRegistered		= -16313,
 	kCMMetadataDataTypeRegistryError_RequiresConformingBaseType		= -16314,
 	kCMMetadataDataTypeRegistryError_MultipleConformingBaseTypes	= -16315,
-};
+} API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0));
 
 
 /*!
@@ -125,19 +125,19 @@ enum
 CM_ASSUME_NONNULL_BEGIN
 
 CM_EXPORT const CFStringRef kCMMetadataKeySpace_QuickTimeUserData
-								__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
+								API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0));
 CM_EXPORT const CFStringRef kCMMetadataKeySpace_ISOUserData
-								__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
+								API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0));
 CM_EXPORT const CFStringRef kCMMetadataKeySpace_QuickTimeMetadata
-								__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
+								API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0));
 CM_EXPORT const CFStringRef kCMMetadataKeySpace_iTunes
-								__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
+								API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0));
 CM_EXPORT const CFStringRef kCMMetadataKeySpace_ID3
-								__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
+								API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0));
 CM_EXPORT const CFStringRef kCMMetadataKeySpace_Icy
-								__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
+								API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0));
 CM_EXPORT const CFStringRef kCMMetadataKeySpace_HLSDateRange
-								__OSX_AVAILABLE_STARTING(__MAC_10_11_3, __IPHONE_9_3);
+								API_AVAILABLE(macos(10.11.3), ios(9.3), tvos(9.3), watchos(6.0));
 
 /*!
 	@const kCMMetadataIdentifier_QuickTimeMetadataLocation_ISO6709
@@ -146,9 +146,9 @@ CM_EXPORT const CFStringRef kCMMetadataKeySpace_HLSDateRange
 		Direction the observer is facing.
 */
 CM_EXPORT const CFStringRef kCMMetadataIdentifier_QuickTimeMetadataLocation_ISO6709
-								__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
+								API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0));
 CM_EXPORT const CFStringRef kCMMetadataIdentifier_QuickTimeMetadataDirection_Facing
-								__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
+								API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0));
 
 /*!
 	@const kCMMetadataIdentifier_QuickTimeMetadataPreferredAffineTransform
@@ -159,7 +159,7 @@ CM_EXPORT const CFStringRef kCMMetadataIdentifier_QuickTimeMetadataDirection_Fac
 		will allow a player to adjust its rendering at the time the rotation occurred.
 */
 CM_EXPORT const CFStringRef kCMMetadataIdentifier_QuickTimeMetadataPreferredAffineTransform
-								__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
+								API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0));
 
 /*!
 	@const kCMMetadataIdentifier_QuickTimeMetadataVideoOrientation
@@ -167,7 +167,14 @@ CM_EXPORT const CFStringRef kCMMetadataIdentifier_QuickTimeMetadataPreferredAffi
 		(see <ImageIO/CGImageProperties.h>).
 */
 CM_EXPORT const CFStringRef kCMMetadataIdentifier_QuickTimeMetadataVideoOrientation
-								__OSX_AVAILABLE_STARTING(__MAC_10_11,__IPHONE_9_0);
+								API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(6.0));
+	
+/*!
+	@const kCMMetadataIdentifier_QuickTimeMetadataLivePhotoStillImageTransform
+		A perspective transform that can be used to adjust a Live Photo still image to match the Live Photo movie.
+*/
+CM_EXPORT const CFStringRef kCMMetadataIdentifier_QuickTimeMetadataLivePhotoStillImageTransform
+								API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0), watchos(6.0));
 	
 CM_ASSUME_NONNULL_END
 
@@ -235,7 +242,7 @@ OSStatus CMMetadataCreateIdentifierForKeyAndKeySpace(
 																ASCII characters. */
 	CM_RETURNS_RETAINED_PARAMETER CFStringRef CM_NULLABLE * CM_NONNULL identifierOut)		/*! @param identifierOut
 																The created identifier. */
-							__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
+							API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0));
 
 /*!
 	@function	CMMetadataCreateKeyFromIdentifier
@@ -259,7 +266,7 @@ OSStatus CMMetadataCreateKeyFromIdentifier(
 										Identifier being inspected. */
 	CM_RETURNS_RETAINED_PARAMETER CFTypeRef CM_NULLABLE * CM_NONNULL keyOut)				/*! @param keyOut
 										The key data that was used create the identifier. */
-							__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
+							API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0));
 
 /*!
 	@function	CMMetadataCreateKeyFromIdentifierAsCFData
@@ -274,7 +281,7 @@ OSStatus CMMetadataCreateKeyFromIdentifierAsCFData(
 													Identifier being inspected. */
 	CM_RETURNS_RETAINED_PARAMETER CFDataRef CM_NULLABLE * CM_NONNULL keyOut)	/*! @param keyOut
 													The key data that was used create the identifier, as a CFData. */
-							__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
+							API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0));
 
 /*!
 	@function	CMMetadataCreateKeySpaceFromIdentifier
@@ -288,7 +295,7 @@ OSStatus CMMetadataCreateKeySpaceFromIdentifier(
 															Identifier being inspected. */
 	CM_RETURNS_RETAINED_PARAMETER CFStringRef CM_NULLABLE * CM_NONNULL keySpaceOut)	/*! @param keySpaceOut
 															The key space that was used to create the identifier. */
-							__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
+							API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0));
 	
 CF_IMPLICIT_BRIDGING_ENABLED
 
@@ -347,57 +354,61 @@ CF_IMPLICIT_BRIDGING_ENABLED
 		Two or more pairs of 32-bit floating point numbers (x and y values) that define a multi-segmented line.
 	@const kCMMetadataBaseDataType_JSON
 		UTF-8 encoded JSON data.
+	@const kCMMetadataBaseDataType_PerspectiveTransformF64
+		A 3x3 matrix of 64-bit big endian floating point numbers stored in row-major order that specify a perspective transform.
 */
 CM_ASSUME_NONNULL_BEGIN
 
 CM_EXPORT const CFStringRef kCMMetadataBaseDataType_RawData
-								__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
+								API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0));
 CM_EXPORT const CFStringRef kCMMetadataBaseDataType_UTF8
-								__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
+								API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0));
 CM_EXPORT const CFStringRef kCMMetadataBaseDataType_UTF16
-								__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
+								API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0));
 CM_EXPORT const CFStringRef kCMMetadataBaseDataType_GIF
-								__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
+								API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0));
 CM_EXPORT const CFStringRef kCMMetadataBaseDataType_JPEG
-								__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
+								API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0));
 CM_EXPORT const CFStringRef kCMMetadataBaseDataType_PNG
-								__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
+								API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0));
 CM_EXPORT const CFStringRef kCMMetadataBaseDataType_BMP
-								__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
+								API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0));
 CM_EXPORT const CFStringRef kCMMetadataBaseDataType_Float32
-								__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
+								API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0));
 CM_EXPORT const CFStringRef kCMMetadataBaseDataType_Float64
-								__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
+								API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0));
 CM_EXPORT const CFStringRef kCMMetadataBaseDataType_SInt8
-								__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
+								API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0));
 CM_EXPORT const CFStringRef kCMMetadataBaseDataType_SInt16
-								__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
+								API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0));
 CM_EXPORT const CFStringRef kCMMetadataBaseDataType_SInt32
-								__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
+								API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0));
 CM_EXPORT const CFStringRef kCMMetadataBaseDataType_SInt64
-								__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
+								API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0));
 CM_EXPORT const CFStringRef kCMMetadataBaseDataType_UInt8
-								__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
+								API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0));
 CM_EXPORT const CFStringRef kCMMetadataBaseDataType_UInt16
-								__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
+								API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0));
 CM_EXPORT const CFStringRef kCMMetadataBaseDataType_UInt32
-								__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
+								API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0));
 CM_EXPORT const CFStringRef kCMMetadataBaseDataType_UInt64
-								__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
+								API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0));
 CM_EXPORT const CFStringRef kCMMetadataBaseDataType_PointF32
-								__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
+								API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0));
 CM_EXPORT const CFStringRef kCMMetadataBaseDataType_DimensionsF32
-								__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
+								API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0));
 CM_EXPORT const CFStringRef kCMMetadataBaseDataType_RectF32
-								__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
+								API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0));
 CM_EXPORT const CFStringRef kCMMetadataBaseDataType_AffineTransformF64
-								__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
+								API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0));
 CM_EXPORT const CFStringRef kCMMetadataBaseDataType_PolygonF32
-								__OSX_AVAILABLE_STARTING(__MAC_10_11,__IPHONE_9_0);
+								API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(6.0));
 CM_EXPORT const CFStringRef kCMMetadataBaseDataType_PolylineF32
-								__OSX_AVAILABLE_STARTING(__MAC_10_11,__IPHONE_9_0);
+								API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(6.0));
 CM_EXPORT const CFStringRef kCMMetadataBaseDataType_JSON
-								__OSX_AVAILABLE_STARTING(__MAC_10_11,__IPHONE_9_0);
+								API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(6.0));
+CM_EXPORT const CFStringRef kCMMetadataBaseDataType_PerspectiveTransformF64
+								API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0), watchos(6.0));
 
 /*!
 	@const kCMMetadataDataType_Location_ISO6709
@@ -408,9 +419,9 @@ CM_EXPORT const CFStringRef kCMMetadataBaseDataType_JSON
 		kCMMetadataBaseDataType_UTF8.
 */
 CM_EXPORT const CFStringRef kCMMetadataDataType_QuickTimeMetadataLocation_ISO6709
-								__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
+								API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0));
 CM_EXPORT const CFStringRef kCMMetadataDataType_QuickTimeMetadataDirection
-								__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
+								API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0));
 
 CM_ASSUME_NONNULL_END
 
@@ -437,7 +448,7 @@ OSStatus CMMetadataDataTypeRegistryRegisterDataType(
 																(for aiding debugging operations) */
 	CFArrayRef CM_NONNULL conformingDataTypes)				/*! @param conformingDataTypes
 																Data types that this data type conforms to. */
-							__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
+							API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0));
 
 /*!
 	@function	CMMetadataDataTypeRegistryDataTypeIsRegistered
@@ -447,7 +458,7 @@ CM_EXPORT
 Boolean CMMetadataDataTypeRegistryDataTypeIsRegistered(
 	CFStringRef CM_NONNULL dataType)						/*! @param dataType
 																Identifier of data type being checked. */
-							__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
+							API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0));
 
 /*!
 	@function	CMMetadataDataTypeRegistryGetDataTypeDescription
@@ -457,7 +468,7 @@ CM_EXPORT
 CFStringRef CM_NONNULL CMMetadataDataTypeRegistryGetDataTypeDescription(
 	CFStringRef CM_NONNULL dataType)						/*! @param dataType
 																Identifier of data type being interrogated. */
-							__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
+							API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0));
 
 /*!
 	@function	CMMetadataDataTypeRegistryGetConformingDataTypes
@@ -470,7 +481,7 @@ CM_EXPORT
 CFArrayRef CM_NONNULL CMMetadataDataTypeRegistryGetConformingDataTypes(
 	CFStringRef CM_NONNULL dataType)						/*! @param dataType
 																Identifier of data type being interrogated. */
-							__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
+							API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0));
 
 /*!
 	@function	CMMetadataDataTypeRegistryDataTypeConformsToDataType
@@ -491,7 +502,7 @@ Boolean CMMetadataDataTypeRegistryDataTypeConformsToDataType(
 	CFStringRef CM_NONNULL conformsToDataType)				/*! @param conformsToDataType
 																Identifier of data type being checked as as
 																conforming data type. */
-							__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
+							API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0));
 
 /*!
 	@function	CMMetadataDataTypeRegistryGetBaseDataTypes
@@ -502,7 +513,7 @@ Boolean CMMetadataDataTypeRegistryDataTypeConformsToDataType(
 */
 CM_EXPORT
 CFArrayRef CM_NULLABLE CMMetadataDataTypeRegistryGetBaseDataTypes(void)
-							__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
+							API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0));
 
 /*!
 	@function	CMMetadataDataTypeRegistryDataTypeIsBaseDataType
@@ -515,7 +526,7 @@ CM_EXPORT
 Boolean CMMetadataDataTypeRegistryDataTypeIsBaseDataType(
 	CFStringRef CM_NONNULL dataType)						/*! @param dataType
 																Identifier of data type being checked. */
-							__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
+							API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0));
 
 /*!
 	@function	CMMetadataDataTypeRegistryGetBaseDataTypeForConformingDataType
@@ -529,7 +540,7 @@ CM_EXPORT
 CFStringRef CM_NONNULL CMMetadataDataTypeRegistryGetBaseDataTypeForConformingDataType(
 	CFStringRef CM_NONNULL dataType)								/*! @param dataType
 																		Identifier of data type being interrogated. */
-							__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
+							API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0));
 	
 CF_IMPLICIT_BRIDGING_DISABLED
 

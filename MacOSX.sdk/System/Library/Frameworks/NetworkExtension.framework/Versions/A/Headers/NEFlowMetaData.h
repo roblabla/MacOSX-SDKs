@@ -28,6 +28,12 @@ API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(watchos, tvos)
  */
 @property (readonly) NSString *sourceAppSigningIdentifier API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(watchos, tvos);
 
+/*!
+ *	@property sourceAppAuditToken
+ *	@discussion Audit token of the source application of the flow.
+ */
+@property (readonly, nullable) NSData *sourceAppAuditToken API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, watchos, tvos);
+
 @end
 
 NS_ASSUME_NONNULL_END

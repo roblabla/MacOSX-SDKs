@@ -1,6 +1,7 @@
+#if !__has_include(<UIFoundation/NSTextStorage.h>)
 /*
         NSTextStorage.h
-        Copyright (c) 1994-2018, Apple Inc.
+        Copyright (c) 1994-2019, Apple Inc.
         All rights reserved.
 */
 
@@ -13,11 +14,12 @@
 @protocol NSTextStorageDelegate;
 
 NS_ASSUME_NONNULL_BEGIN
+#if !TARGET_OS_IPHONE
 
 typedef NS_OPTIONS(NSUInteger, NSTextStorageEditActions) {
-    NSTextStorageEditedAttributes NS_ENUM_AVAILABLE(10_0, 7_0) = (1 << 0),
-    NSTextStorageEditedCharacters NS_ENUM_AVAILABLE(10_0, 7_0) = (1 << 1)
-} NS_ENUM_AVAILABLE(10_11, 7_0);
+    NSTextStorageEditedAttributes API_AVAILABLE(macos(10.0), ios(7.0), tvos(9.0)) = (1 << 0),
+    NSTextStorageEditedCharacters API_AVAILABLE(macos(10.0), ios(7.0), tvos(9.0)) = (1 << 1)
+} API_AVAILABLE(macos(10.11), ios(7.0), tvos(9.0));
 
 
 /* Note for subclassing NSTextStorage: NSTextStorage is a semi-abstract subclass of NSMutableAttributedString. It implements change management (beginEditing/endEditing), verification of attributes, delegate handling, and layout management notification. The one aspect it does not implement is the actual attributed string storage --- this is left up to the subclassers, which need to override the two NSMutableAttributedString primitives in addition to two NSAttributedString primitives:
@@ -31,24 +33,7 @@ typedef NS_OPTIONS(NSUInteger, NSTextStorageEditActions) {
  These primitives should perform the change then call edited:range:changeInLength: to get everything else to happen.
 */
 
-NS_CLASS_AVAILABLE(10_0, 7_0) @interface NSTextStorage : NSMutableAttributedString
-{
-    /*All instance variables are private*/
-    NSRange _editedRange APPKIT_IVAR;
-    NSInteger _editedDelta APPKIT_IVAR;
-    struct {
-        unsigned int editedMask:8;
-        unsigned int postWillProcess:1;
-        unsigned int postDidProcess:1;
-        unsigned int :6;
-        unsigned int disabled:16;
-#if __LP64__
-        unsigned int :32;
-#endif
-    } _flags APPKIT_IVAR;
-    NSMutableArray *_layoutManagers APPKIT_IVAR;
-    id _sideData APPKIT_IVAR;
-}
+API_AVAILABLE(macos(10.0), ios(7.0), tvos(9.0)) @interface NSTextStorage : NSMutableAttributedString <NSSecureCoding>
 
 /**************************** Layout manager ****************************/
 
@@ -99,7 +84,6 @@ NS_CLASS_AVAILABLE(10_0, 7_0) @interface NSTextStorage : NSMutableAttributedStri
 
 // Ensures all attributes in range are validated and ready to be used.  An NSTextStorage that is lazy is required to call the following method before accessing any attributes.  This gives the attribute fixing a chance to occur if necessary.  NSTextStorage subclasses that wish to support laziness must call it from all attribute accessors that they implement.  The default concrete subclass does call this from its accessors.
 - (void)ensureAttributesAreFixedInRange:(NSRange)range;
-
 @end
 
 
@@ -109,26 +93,31 @@ NS_CLASS_AVAILABLE(10_0, 7_0) @interface NSTextStorage : NSMutableAttributedStri
 @optional
 
 // Sent inside -processEditing right before fixing attributes.  Delegates can change the characters or attributes.
-- (void)textStorage:(NSTextStorage *)textStorage willProcessEditing:(NSTextStorageEditActions)editedMask range:(NSRange)editedRange changeInLength:(NSInteger)delta NS_AVAILABLE(10_11, 7_0);
+- (void)textStorage:(NSTextStorage *)textStorage willProcessEditing:(NSTextStorageEditActions)editedMask range:(NSRange)editedRange changeInLength:(NSInteger)delta API_AVAILABLE(macos(10.11), ios(7.0), tvos(9.0));
 
 // Sent inside -processEditing right before notifying layout managers.  Delegates can change the attributes.
-- (void)textStorage:(NSTextStorage *)textStorage didProcessEditing:(NSTextStorageEditActions)editedMask range:(NSRange)editedRange changeInLength:(NSInteger)delta NS_AVAILABLE(10_11, 7_0);
+- (void)textStorage:(NSTextStorage *)textStorage didProcessEditing:(NSTextStorageEditActions)editedMask range:(NSRange)editedRange changeInLength:(NSInteger)delta API_AVAILABLE(macos(10.11), ios(7.0), tvos(9.0));
 
 @end
 
 /**** Notifications ****/
 
-APPKIT_EXTERN NSNotificationName  NSTextStorageWillProcessEditingNotification NS_AVAILABLE(10_0, 7_0);
-APPKIT_EXTERN NSNotificationName  NSTextStorageDidProcessEditingNotification NS_AVAILABLE(10_0, 7_0);
+APPKIT_EXTERN NSNotificationName  NSTextStorageWillProcessEditingNotification API_AVAILABLE(macos(10.0), ios(7.0), tvos(9.0));
+APPKIT_EXTERN NSNotificationName  NSTextStorageDidProcessEditingNotification API_AVAILABLE(macos(10.0), ios(7.0), tvos(9.0));
 
 /**** Deprecations ****/
 // NSTextStorageEditedOptions is deprecated along with -[NSLayoutManager textStorage:edited:range:changeInLength:invalidatedRange:. Use NSTextStorageEditActions.
 typedef NSUInteger NSTextStorageEditedOptions;
 
 @interface NSObject (NSDeprecatedTextStorageDelegateInterface)
-- (void)textStorageWillProcessEditing:(NSNotification *)notification NS_DEPRECATED_MAC(10_0, 10_11, "Use -textStorage:willProcessEditing:range:changeInLength: instead.");
-- (void)textStorageDidProcessEditing:(NSNotification *)notification NS_DEPRECATED_MAC(10_0, 10_11, "Use -textStorage:didProcessEditing:range:changeInLength: instead.");
+- (void)textStorageWillProcessEditing:(NSNotification *)notification API_DEPRECATED("Use -textStorage:willProcessEditing:range:changeInLength: instead.", macos(10.0,10.11));
+- (void)textStorageDidProcessEditing:(NSNotification *)notification API_DEPRECATED("Use -textStorage:didProcessEditing:range:changeInLength: instead.", macos(10.0,10.11));
 @end
 
 
+
+#endif // !TARGET_OS_IPHONE
 NS_ASSUME_NONNULL_END
+#else
+#import <UIFoundation/NSTextStorage.h>
+#endif

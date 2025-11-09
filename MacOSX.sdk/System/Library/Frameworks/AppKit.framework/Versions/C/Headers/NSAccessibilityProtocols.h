@@ -1,7 +1,7 @@
 /*
  NSAccessibilityProtocols.h
  Application Kit
- Copyright (c) 2013-2018, Apple Inc.
+ Copyright (c) 2013-2019, Apple Inc.
  All rights reserved.
  */
 
@@ -12,6 +12,7 @@
 @class NSAccessibilityCustomRotor;
 
 NS_ASSUME_NONNULL_BEGIN
+API_UNAVAILABLE_BEGIN(ios)
 
 NS_PROTOCOL_REQUIRES_EXPLICIT_IMPLEMENTATION
 @protocol NSAccessibilityElement <NSObject>
@@ -155,7 +156,7 @@ NS_PROTOCOL_REQUIRES_EXPLICIT_IMPLEMENTATION
 - (nullable NSArray *)accessibilityVisibleColumns;
 - (nullable NSArray *)accessibilitySelectedColumns;
 
-- (nullable NSString *)accessibilityHeaderGroup NS_DEPRECATED_WITH_REPLACEMENT_MAC("accessibilityHeader", 10_9, 10_14);
+- (nullable NSString *)accessibilityHeaderGroup API_DEPRECATED_WITH_REPLACEMENT("accessibilityHeader", macos(10.9,10.14));
 
 - (nullable NSArray *)accessibilitySelectedCells;
 - (nullable NSArray *)accessibilityVisibleCells;
@@ -237,187 +238,187 @@ API_AVAILABLE(macos(10.13)) @protocol NSAccessibilityElementLoading <NSObject>
 
 #pragma mark General
 // Return YES if the UIElement should be exposed
-@property (getter = isAccessibilityElement) BOOL accessibilityElement NS_AVAILABLE_MAC(10_10);
+@property (getter = isAccessibilityElement) BOOL accessibilityElement API_AVAILABLE(macos(10.10));
 
 // The frame of the UIElement in screen coordinates. See NSAccessibilityFrameInView()
 // Invokes when clients request NSAccessibilitySizeAttribute or NSAccessibilityPositionAttribute
-@property NSRect accessibilityFrame NS_AVAILABLE_MAC(10_10);
+@property NSRect accessibilityFrame API_AVAILABLE(macos(10.10));
 
 // Returns YES if the element is focused (generally, accessibilityFocused is equivilent to the
 // UIElement with the focus ring or selection)
 // Invokes when clients request NSAccessibilityFocusedAttribute
-@property (getter = isAccessibilityFocused) BOOL accessibilityFocused NS_AVAILABLE_MAC(10_10);
+@property (getter = isAccessibilityFocused) BOOL accessibilityFocused API_AVAILABLE(macos(10.10));
 
 // Activation point for the UIElement, in screen coordinates. See NSAccessibilityPointInView()
-@property NSPoint accessibilityActivationPoint NS_AVAILABLE_MAC(10_10);
+@property NSPoint accessibilityActivationPoint API_AVAILABLE(macos(10.10));
 
 // UIElement for the containing top level element
 // Invokes when clients request NSAccessibilityTopLevelUIElementAttribute
-@property (nullable, weak) id accessibilityTopLevelUIElement NS_AVAILABLE_MAC(10_10);
+@property (nullable, weak) id accessibilityTopLevelUIElement API_AVAILABLE(macos(10.10));
 
 // URL of the UIElement
 // Invokes when clients request NSAccessibilityURLAttribute
-@property (nullable, copy) NSURL *accessibilityURL NS_AVAILABLE_MAC(10_10);
+@property (nullable, copy) NSURL *accessibilityURL API_AVAILABLE(macos(10.10));
 
 // Value of the UIElement
 // Invokes when clients request NSAccessibilityValueAttribute
-@property (nullable, strong) id accessibilityValue NS_AVAILABLE_MAC(10_10);
+@property (nullable, strong) id accessibilityValue API_AVAILABLE(macos(10.10));
 
 // Human-readable description of value
 // Invokes when clients request NSAccessibilityValueDescriptionAttribute
-@property (nullable, copy) NSString *accessibilityValueDescription NS_AVAILABLE_MAC(10_10);
+@property (nullable, copy) NSString *accessibilityValueDescription API_AVAILABLE(macos(10.10));
 
 // Array of child UIElement which are visible
 // Invokes when clients request NSAccessibilityVisibleChildrenAttribute
-@property (nullable, copy) NSArray *accessibilityVisibleChildren NS_AVAILABLE_MAC(10_10);
+@property (nullable, copy) NSArray *accessibilityVisibleChildren API_AVAILABLE(macos(10.10));
 
 // Sub-role, non - localized (e.g. NSAccessibilityCloseButtonSubrole)
 // Invokes when clients request NSAccessibilitySubroleAttribute
-@property (nullable, copy) NSAccessibilitySubrole accessibilitySubrole NS_AVAILABLE_MAC(10_10);
+@property (nullable, copy) NSAccessibilitySubrole accessibilitySubrole API_AVAILABLE(macos(10.10));
 
 // Visible text on the UIElement
 // Invokes when clients request NSAccessibilityTitleAttribute
-@property (nullable, copy) NSString *accessibilityTitle NS_AVAILABLE_MAC(10_10);
+@property (nullable, copy) NSString *accessibilityTitle API_AVAILABLE(macos(10.10));
 
 // UIElement for the title
 // Invokes when clients request NSAccessibilityTitleUIElementAttribute
-@property (nullable, weak) id accessibilityTitleUIElement NS_AVAILABLE_MAC(10_10);
+@property (nullable, weak) id accessibilityTitleUIElement API_AVAILABLE(macos(10.10));
 
 // Next content UIElement
 // Invokes when clients request NSAccessibilityNextContentsAttribute
-@property (nullable, copy) NSArray *accessibilityNextContents NS_AVAILABLE_MAC(10_10);
+@property (nullable, copy) NSArray *accessibilityNextContents API_AVAILABLE(macos(10.10));
 
 // UIElement orientation
 // Invokes when clients request NSAccessibilityOrientationAttribute
-@property NSAccessibilityOrientation accessibilityOrientation NS_AVAILABLE_MAC(10_10);
+@property NSAccessibilityOrientation accessibilityOrientation API_AVAILABLE(macos(10.10));
 
 // UIElement for overflow
 // Invokes when clients request NSAccessibilityOverflowButtonAttribute
-@property (nullable, strong) id accessibilityOverflowButton NS_AVAILABLE_MAC(10_10);
+@property (nullable, strong) id accessibilityOverflowButton API_AVAILABLE(macos(10.10));
 
 // Element containing this UIElement
 // Invokes when clients request NSAccessibilityParentAttribute
-@property (nullable, weak) id accessibilityParent NS_AVAILABLE_MAC(10_10);
+@property (nullable, weak) id accessibilityParent API_AVAILABLE(macos(10.10));
 
 // Placeholder value of a control such as a text field
 // Invokes when clients request NSAccessibilityPlaceholderValueAttribute
-@property (nullable, copy) NSString *accessibilityPlaceholderValue NS_AVAILABLE_MAC(10_10);
+@property (nullable, copy) NSString *accessibilityPlaceholderValue API_AVAILABLE(macos(10.10));
 
 // Previous content UIElement.
 // Invokes when clients request NSAccessibilityPreviousContentsAttribute
-@property (nullable, copy) NSArray *accessibilityPreviousContents NS_AVAILABLE_MAC(10_10);
+@property (nullable, copy) NSArray *accessibilityPreviousContents API_AVAILABLE(macos(10.10));
 
 // Role, non - localized (e.g. NSAccessibilityRadioButtonRole)
 // Invokes when clients request NSAccessibilityRoleAttribute
-@property (nullable, copy) NSAccessibilityRole accessibilityRole NS_AVAILABLE_MAC(10_10);
+@property (nullable, copy) NSAccessibilityRole accessibilityRole API_AVAILABLE(macos(10.10));
 
 // Human readable role description (e.g. "radio button");
 // Invokes when clients request NSAccessibilityRoleDescriptionAttribute
-@property (nullable, copy) NSString *accessibilityRoleDescription NS_AVAILABLE_MAC(10_10);
+@property (nullable, copy) NSString *accessibilityRoleDescription API_AVAILABLE(macos(10.10));
 
 // UIElement for search field search button
 // Invokes when clients request NSAccessibilitySearchButtonAttribute
-@property (nullable, strong) id accessibilitySearchButton NS_AVAILABLE_MAC(10_10);
+@property (nullable, strong) id accessibilitySearchButton API_AVAILABLE(macos(10.10));
 
 // UIElement for search field menu
 // Invokes when clients request NSAccessibilitySearchMenuAttribute
-@property (nullable, strong) id accessibilitySearchMenu NS_AVAILABLE_MAC(10_10);
+@property (nullable, strong) id accessibilitySearchMenu API_AVAILABLE(macos(10.10));
 
 // Returns YES if the UIElement is selected
 // Invokes when clients request NSAccessibilitySelectedAttribute
-@property (getter = isAccessibilitySelected) BOOL accessibilitySelected NS_AVAILABLE_MAC(10_10);
+@property (getter = isAccessibilitySelected) BOOL accessibilitySelected API_AVAILABLE(macos(10.10));
 
 // Array of selected child UIElements
 // Invokes when clients request NSAccessibilitySelectedChildrenAttribute
-@property (nullable, copy) NSArray *accessibilitySelectedChildren NS_AVAILABLE_MAC(10_10);
+@property (nullable, copy) NSArray *accessibilitySelectedChildren API_AVAILABLE(macos(10.10));
 
 // Array of UIElements that this titles
 // Invokes when clients request NSAccessibilityServesAsTitleForUIElementsAttribute
-@property (nullable, copy) NSArray *accessibilityServesAsTitleForUIElements NS_AVAILABLE_MAC(10_10);
+@property (nullable, copy) NSArray *accessibilityServesAsTitleForUIElements API_AVAILABLE(macos(10.10));
 
 // Menu being displayed for the UIElement
 // Invokes when clients request NSAccessibilityShownMenuAttribute
-@property (nullable, strong) id accessibilityShownMenu NS_AVAILABLE_MAC(10_10);
+@property (nullable, strong) id accessibilityShownMenu API_AVAILABLE(macos(10.10));
 
 // The UIElement's minimum value
 // Invokes when clients request NSAccessibilityMinValueAttribute
-@property (nullable, strong) id accessibilityMinValue NS_AVAILABLE_MAC(10_10);
+@property (nullable, strong) id accessibilityMinValue API_AVAILABLE(macos(10.10));
 
 // The UIElement's maximum value
 // Invokes when clients request NSAccessibilityMaxValueAttribute
-@property (nullable, strong) id accessibilityMaxValue NS_AVAILABLE_MAC(10_10);
+@property (nullable, strong) id accessibilityMaxValue API_AVAILABLE(macos(10.10));
 
 // Corresponding UIElements
 // Invokes when clients request NSAccessibilityLinkedUIElementsAttribute
-@property (nullable, copy) NSArray *accessibilityLinkedUIElements NS_AVAILABLE_MAC(10_10);
+@property (nullable, copy) NSArray *accessibilityLinkedUIElements API_AVAILABLE(macos(10.10));
 
 // UIElement for the containing window
 // Invokes when clients request NSAccessibilityWindowAttribute
-@property (nullable, weak) id accessibilityWindow NS_AVAILABLE_MAC(10_10);
+@property (nullable, weak) id accessibilityWindow API_AVAILABLE(macos(10.10));
 
 // Unique identifier for the UIElement
 // Invokes when clients request NSAccessibilityIdentifierAttribute
-@property (nullable, copy) NSString *accessibilityIdentifier NS_AVAILABLE_MAC(10_10);
+@property (nullable, copy) NSString *accessibilityIdentifier API_AVAILABLE(macos(10.10));
 
 // Instance description (e.g. a tool tip)
 // Invokes when clients request NSAccessibilityHelpAttribute
-@property (nullable, copy) NSString *accessibilityHelp NS_AVAILABLE_MAC(10_10);
+@property (nullable, copy) NSString *accessibilityHelp API_AVAILABLE(macos(10.10));
 
 // Filename of the underlying asset
 // Invokes when clients request NSAccessibilityFilenameAttribute
-@property (nullable, copy) NSString *accessibilityFilename NS_AVAILABLE_MAC(10_10);
+@property (nullable, copy) NSString *accessibilityFilename API_AVAILABLE(macos(10.10));
 
 // Returns YES if the UIElement is expanded
 // Invokes when clients request NSAccessibilityExpandedAttribute
-@property (getter = isAccessibilityExpanded) BOOL accessibilityExpanded NS_AVAILABLE_MAC(10_10);
+@property (getter = isAccessibilityExpanded) BOOL accessibilityExpanded API_AVAILABLE(macos(10.10));
 
 // Returns YES if the UIElement has been edited
 // Invokes when clients request NSAccessibilityEditedAttribute
-@property (getter = isAccessibilityEdited) BOOL accessibilityEdited NS_AVAILABLE_MAC(10_10);
+@property (getter = isAccessibilityEdited) BOOL accessibilityEdited API_AVAILABLE(macos(10.10));
 
 // Returns YES if the element responds to user events
 // Invokes when clients request NSAccessibilityEnabledAttribute
-@property (getter = isAccessibilityEnabled) BOOL accessibilityEnabled NS_AVAILABLE_MAC(10_10);
+@property (getter = isAccessibilityEnabled) BOOL accessibilityEnabled API_AVAILABLE(macos(10.10));
 
 // Array of UIElements that represent children of the current UIElement
 // Invokes when clients request NSAccessibilityChildrenAttribute
-@property (nullable, copy) NSArray *accessibilityChildren NS_AVAILABLE_MAC(10_10);
+@property (nullable, copy) NSArray *accessibilityChildren API_AVAILABLE(macos(10.10));
 
 // Returns an array of children UIElements ordered for linear navigation.
 // This array should match all UIElements found in accessibilityChildren, but in an order that's more suitable for navigation
-@property (nullable, copy) NSArray <id<NSAccessibilityElement>> *accessibilityChildrenInNavigationOrder NS_AVAILABLE_MAC(10_13);
+@property (nullable, copy) NSArray <id<NSAccessibilityElement>> *accessibilityChildrenInNavigationOrder API_AVAILABLE(macos(10.13));
 
 // UIElement for search field clear button
 // Invokes when clients request NSAccessibilityClearButtonAttribute
-@property (nullable, strong) id accessibilityClearButton NS_AVAILABLE_MAC(10_10);
+@property (nullable, strong) id accessibilityClearButton API_AVAILABLE(macos(10.10));
 
 // UIElement for cancel button
 // Invokes when clients request NSAccessibilityCancelButtonAttribute
-@property (nullable, strong) id accessibilityCancelButton NS_AVAILABLE_MAC(10_10);
+@property (nullable, strong) id accessibilityCancelButton API_AVAILABLE(macos(10.10));
 
 // Returns YES if the UIElement contains protected content
 // Invokes when clients request NSAccessibilityContainsProtectedContentAttribute
-@property (getter = isAccessibilityProtectedContent) BOOL accessibilityProtectedContent NS_AVAILABLE_MAC(10_10);
+@property (getter = isAccessibilityProtectedContent) BOOL accessibilityProtectedContent API_AVAILABLE(macos(10.10));
 
 // Array of primary content elements
 // Invokes when clients request NSAccessibilityContentsAttribute
-@property (nullable, copy) NSArray *accessibilityContents NS_AVAILABLE_MAC(10_10);
+@property (nullable, copy) NSArray *accessibilityContents API_AVAILABLE(macos(10.10));
 
 // Description of UIElement
 // Invokes when clients request NSAccessibilityDescriptionAttribute
-@property (nullable, copy) NSString *accessibilityLabel NS_AVAILABLE_MAC(10_10);
+@property (nullable, copy) NSString *accessibilityLabel API_AVAILABLE(macos(10.10));
 
 // Returns YES if the element is has been triggered to display alternate UIs
 // Invokes when clients request NSAccessibilityAlternateUIVisibleAttribute
-@property (getter = isAccessibilityAlternateUIVisible) BOOL accessibilityAlternateUIVisible NS_AVAILABLE_MAC(10_10);
+@property (getter = isAccessibilityAlternateUIVisible) BOOL accessibilityAlternateUIVisible API_AVAILABLE(macos(10.10));
 
 // Array of elements with which this element shares keyboard focus
 // Invokes when clients request NSAccessibilitySharedFocusElementsAttribute
-@property (nullable, copy) NSArray *accessibilitySharedFocusElements NS_AVAILABLE_MAC(10_10);
+@property (nullable, copy) NSArray *accessibilitySharedFocusElements API_AVAILABLE(macos(10.10));
 
 // Returns YES if the UIElement is required to have content for successful submission of a form
 // Invokes when clients request NSAccessibilityRequiredAttribute
-@property (getter=isAccessibilityRequired) BOOL accessibilityRequired NS_AVAILABLE_MAC(10_12);
+@property (getter=isAccessibilityRequired) BOOL accessibilityRequired API_AVAILABLE(macos(10.12));
 
 /*
  * @brief Returns an array of custom rotors. Custom rotors are lists of
@@ -431,412 +432,413 @@ API_AVAILABLE(macos(10.13)) @protocol NSAccessibilityElementLoading <NSObject>
 // Returns YES if the element is focused (generally, accessibilityFocused is equivalent to the
 // to the UIElement with the focus ring or selection)
 // Invokes when clients request NSAccessibilityFocusedUIElementAttribute
-@property (nullable, strong) id accessibilityApplicationFocusedUIElement NS_AVAILABLE_MAC(10_10);
+@property (nullable, strong) id accessibilityApplicationFocusedUIElement API_AVAILABLE(macos(10.10));
 
 // UIElement for the main window.
 // Invokes when clients request NSAccessibilityMainWindowAttribute
-@property (nullable, strong) id accessibilityMainWindow NS_AVAILABLE_MAC(10_10);
+@property (nullable, strong) id accessibilityMainWindow API_AVAILABLE(macos(10.10));
 
 // Returns YES if the app hidden
 // Invokes when clients request NSAccessibilityHiddenAttribute
-@property (getter = isAccessibilityHidden) BOOL accessibilityHidden NS_AVAILABLE_MAC(10_10);
+@property (getter = isAccessibilityHidden) BOOL accessibilityHidden API_AVAILABLE(macos(10.10));
 
 // Returns YES if the app is active
 // Invokes when clients request NSAccessibilityFrontmostAttribute
-@property (getter = isAccessibilityFrontmost) BOOL accessibilityFrontmost NS_AVAILABLE_MAC(10_10);
+@property (getter = isAccessibilityFrontmost) BOOL accessibilityFrontmost API_AVAILABLE(macos(10.10));
 
 // UIElement for the key window.
 // Invokes when clients request NSAccessibilityFocusedWindowAttribute
-@property (nullable, strong) id accessibilityFocusedWindow NS_AVAILABLE_MAC(10_10);
+@property (nullable, strong) id accessibilityFocusedWindow API_AVAILABLE(macos(10.10));
 
 // Array of UIElements for the windows
 // Invokes when clients request NSAccessibilityWindowsAttribute
-@property (nullable, copy) NSArray *accessibilityWindows NS_AVAILABLE_MAC(10_10);
+@property (nullable, copy) NSArray *accessibilityWindows API_AVAILABLE(macos(10.10));
 
 // UIElement for the application extras menu bar.
 // Invokes when clients request NSAccessibilityExtrasMenuBarAttribute
-@property (nullable, weak) id accessibilityExtrasMenuBar NS_AVAILABLE_MAC(10_10);
+@property (nullable, weak) id accessibilityExtrasMenuBar API_AVAILABLE(macos(10.10));
 
 // UIElement for the menu bar
 // Invokes when clients request NSAccessibilityMenuBarAttribute
-@property (nullable, weak) id accessibilityMenuBar NS_AVAILABLE_MAC(10_10);
+@property (nullable, weak) id accessibilityMenuBar API_AVAILABLE(macos(10.10));
 
 #pragma mark Browser
 // Array of UIElements for titles
 // Invokes when clients request NSAccessibilityColumnTitlesAttribute
-@property (nullable, copy) NSArray *accessibilityColumnTitles NS_AVAILABLE_MAC(10_10);
+@property (nullable, copy) NSArray *accessibilityColumnTitles API_AVAILABLE(macos(10.10));
 
 #pragma mark Grid
 // Returns a BOOL indicating whether the children are ordered row major, or column major.
 // Invokes when clients request NSAccessibilityOrderedByRowAttribute
-@property (getter = isAccessibilityOrderedByRow) BOOL accessibilityOrderedByRow NS_AVAILABLE_MAC(10_10);
+@property (getter = isAccessibilityOrderedByRow) BOOL accessibilityOrderedByRow API_AVAILABLE(macos(10.10));
 
 #pragma mark Layout area
 // Horizontal units
 // Invokes when clients request NSAccessibilityHorizontalUnitsAttribute
-@property NSAccessibilityUnits accessibilityHorizontalUnits NS_AVAILABLE_MAC(10_10);
+@property NSAccessibilityUnits accessibilityHorizontalUnits API_AVAILABLE(macos(10.10));
 
 // Vertical units
 // Invokes when clients request NSAccessibilityVerticalUnitsAttribute
-@property NSAccessibilityUnits accessibilityVerticalUnits NS_AVAILABLE_MAC(10_10);
+@property NSAccessibilityUnits accessibilityVerticalUnits API_AVAILABLE(macos(10.10));
 
 // Human-readable description of the horizontal units
 // Invokes when clients request NSAccessibilityHorizontalUnitDescriptionAttribute
-@property (nullable, copy) NSString *accessibilityHorizontalUnitDescription NS_AVAILABLE_MAC(10_10);
+@property (nullable, copy) NSString *accessibilityHorizontalUnitDescription API_AVAILABLE(macos(10.10));
 
 // Human-readable description of the vertical units
 // Invokes when clients request NSAccessibilityVerticalUnitDescriptionAttribute
-@property (nullable, copy) NSString *accessibilityVerticalUnitDescription NS_AVAILABLE_MAC(10_10);
+@property (nullable, copy) NSString *accessibilityVerticalUnitDescription API_AVAILABLE(macos(10.10));
 
 // Layout point from screen point
 // Invokes when clients request NSAccessibilityLayoutPointForScreenPointParameterizedAttribute
-- (NSPoint)accessibilityLayoutPointForScreenPoint:(NSPoint)point NS_AVAILABLE_MAC(10_10);
+- (NSPoint)accessibilityLayoutPointForScreenPoint:(NSPoint)point API_AVAILABLE(macos(10.10));
 
 // Layout size from screen size
 // Invokes when clients request NSAccessibilityLayoutSizeForScreenSizeParameterizedAttribute
-- (NSSize)accessibilityLayoutSizeForScreenSize:(NSSize)size NS_AVAILABLE_MAC(10_10);
+- (NSSize)accessibilityLayoutSizeForScreenSize:(NSSize)size API_AVAILABLE(macos(10.10));
 
 // Screen point from layout point
 // Invokes when clients request NSAccessibilityScreenPointForLayoutPointParameterizedAttribute
-- (NSPoint)accessibilityScreenPointForLayoutPoint:(NSPoint)point NS_AVAILABLE_MAC(10_10);
+- (NSPoint)accessibilityScreenPointForLayoutPoint:(NSPoint)point API_AVAILABLE(macos(10.10));
 
 // Screen size from layout size
 // Invokes when clients request NSAccessibilityScreenSizeForLayoutSizeParameterizedAttribute
-- (NSSize)accessibilityScreenSizeForLayoutSize:(NSSize)size NS_AVAILABLE_MAC(10_10);
+- (NSSize)accessibilityScreenSizeForLayoutSize:(NSSize)size API_AVAILABLE(macos(10.10));
 
 #pragma mark Layout item
 // UIElements for handles
 // Invokes when clients request NSAccessibilityHandlesAttribute
-@property (nullable, copy) NSArray *accessibilityHandles NS_AVAILABLE_MAC(10_10);
+@property (nullable, copy) NSArray *accessibilityHandles API_AVAILABLE(macos(10.10));
 
 #pragma mark Level indicator
 // Warning value of a level indicator, typically a number
 // Invokes when clients request NSAccessibilityWarningValueAttribute
-@property (nullable, strong) id accessibilityWarningValue NS_AVAILABLE_MAC(10_10);
+@property (nullable, strong) id accessibilityWarningValue API_AVAILABLE(macos(10.10));
 
 // Critical value of a level indicator, typically a number
 // Invokes when clients request NSAccessibilityCriticalValueAttribute
-@property (nullable, strong) id accessibilityCriticalValue NS_AVAILABLE_MAC(10_10);
+@property (nullable, strong) id accessibilityCriticalValue API_AVAILABLE(macos(10.10));
 
 #pragma mark Outline
 // Returns true if sub-rows are visible
 // Invokes when clients request NSAccessibilityDisclosingAttribute
-@property (getter = isAccessibilityDisclosed) BOOL accessibilityDisclosed NS_AVAILABLE_MAC(10_10);
+@property (getter = isAccessibilityDisclosed) BOOL accessibilityDisclosed API_AVAILABLE(macos(10.10));
 
 // UIElement for disclosing row
 // Invokes when clients request NSAccessibilityDisclosedByRowAttribute
-@property (nullable, weak) id accessibilityDisclosedByRow NS_AVAILABLE_MAC(10_10);
+@property (nullable, weak) id accessibilityDisclosedByRow API_AVAILABLE(macos(10.10));
 
 // Array of UIElements for disclosed rows of the current ruw (ie, sub-rows)
 // Invokes when clients request NSAccessibilityDisclosedRowsAttribute
-@property (nullable, strong) id accessibilityDisclosedRows NS_AVAILABLE_MAC(10_10);
+@property (nullable, strong) id accessibilityDisclosedRows API_AVAILABLE(macos(10.10));
 
 // Indentation level
 // Invokes when clients request NSAccessibilityDisclosureLevelAttribute
-@property NSInteger accessibilityDisclosureLevel NS_AVAILABLE_MAC(10_10);
+@property NSInteger accessibilityDisclosureLevel API_AVAILABLE(macos(10.10));
 
 #pragma mark Ruler
 // Invokes when clients request NSAccessibilityMarkerUIElementsAttribute
-@property (nullable, copy) NSArray *accessibilityMarkerUIElements NS_AVAILABLE_MAC(10_10);
+@property (nullable, copy) NSArray *accessibilityMarkerUIElements API_AVAILABLE(macos(10.10));
 
 // Invokes when clients request NSAccessibilityMarkerValuesAttribute
-@property (nullable, strong) id accessibilityMarkerValues NS_AVAILABLE_MAC(10_10);
+@property (nullable, strong) id accessibilityMarkerValues API_AVAILABLE(macos(10.10));
 
 // Invokes when clients request NSAccessibilityMarkerGroupUIElementAttribute
-@property (nullable, strong) id accessibilityMarkerGroupUIElement NS_AVAILABLE_MAC(10_10);
+@property (nullable, strong) id accessibilityMarkerGroupUIElement API_AVAILABLE(macos(10.10));
 
 // Ruler units
 // Invokes when clients request NSAccessibilityUnitsAttribute
-@property NSAccessibilityUnits accessibilityUnits NS_AVAILABLE_MAC(10_10);
+@property NSAccessibilityUnits accessibilityUnits API_AVAILABLE(macos(10.10));
 
 // Human-readable description of the ruler units
 // Invokes when clients request NSAccessibilityUnitDescriptionAttribute
-@property (nullable, copy) NSString *accessibilityUnitDescription NS_AVAILABLE_MAC(10_10);
+@property (nullable, copy) NSString *accessibilityUnitDescription API_AVAILABLE(macos(10.10));
 
 // Marker type
 // Invokes when clients request NSAccessibilityMarkerTypeAttribute
-@property NSAccessibilityRulerMarkerType accessibilityRulerMarkerType NS_AVAILABLE_MAC(10_10);
+@property NSAccessibilityRulerMarkerType accessibilityRulerMarkerType API_AVAILABLE(macos(10.10));
 
 // Human-readable description of the marker type
 // Invokes when clients request NSAccessibilityMarkerTypeDescriptionAttribute
-@property (nullable, copy) NSString *accessibilityMarkerTypeDescription NS_AVAILABLE_MAC(10_10);
+@property (nullable, copy) NSString *accessibilityMarkerTypeDescription API_AVAILABLE(macos(10.10));
 
 #pragma mark Scrollable region
 // UIElement for the horizontal scroller
 // Invokes when clients request NSAccessibilityHorizontalScrollBarAttribute
-@property (nullable, strong) id accessibilityHorizontalScrollBar NS_AVAILABLE_MAC(10_10);
+@property (nullable, strong) id accessibilityHorizontalScrollBar API_AVAILABLE(macos(10.10));
 
 // UIElement for the vertical scroller
 // Invokes when clients request NSAccessibilityVerticalScrollBarAttribute
-@property (nullable, strong) id accessibilityVerticalScrollBar NS_AVAILABLE_MAC(10_10);
+@property (nullable, strong) id accessibilityVerticalScrollBar API_AVAILABLE(macos(10.10));
 
 #pragma mark Slider
 // Array of allowed values
 // Invokes when clients request NSAccessibilityAllowedValuesAttribute
-@property (nullable, copy) NSArray<NSNumber *> *accessibilityAllowedValues NS_AVAILABLE_MAC(10_10);
+@property (nullable, copy) NSArray<NSNumber *> *accessibilityAllowedValues API_AVAILABLE(macos(10.10));
 
 // Array of label UIElements
 // Invokes when clients request NSAccessibilityLabelUIElementsAttribute
-@property (nullable, copy) NSArray *accessibilityLabelUIElements NS_AVAILABLE_MAC(10_10);
+@property (nullable, copy) NSArray *accessibilityLabelUIElements API_AVAILABLE(macos(10.10));
 
 // Value of a label UIElement
 // Invokes when clients request NSAccessibilityLabelValueAttribute
-@property float accessibilityLabelValue NS_AVAILABLE_MAC(10_10);
+@property float accessibilityLabelValue API_AVAILABLE(macos(10.10));
 
 #pragma mark Splitter
 // UIElements for splitters
 // Invokes when clients request NSAccessibilitySplittersAttribute
-@property (nullable, copy) NSArray *accessibilitySplitters NS_AVAILABLE_MAC(10_10);
+@property (nullable, copy) NSArray *accessibilitySplitters API_AVAILABLE(macos(10.10));
 
 #pragma mark Stepper
 // UIElement for the decrement button
 // Invokes when clients request NSAccessibilityDecrementButtonAttribute
-@property (nullable, strong) id accessibilityDecrementButton NS_AVAILABLE_MAC(10_10);
+@property (nullable, strong) id accessibilityDecrementButton API_AVAILABLE(macos(10.10));
 
 // UIElement for the increment button
 // Invokes when clients request NSAccessibilityIncrementButtonAttribute
-@property (nullable, strong) id accessibilityIncrementButton NS_AVAILABLE_MAC(10_10);
+@property (nullable, strong) id accessibilityIncrementButton API_AVAILABLE(macos(10.10));
 
 #pragma mark Tab view
 // UIElements for tabs
 // Invokes when clients request NSAccessibilityTabsAttribute
-@property (nullable, copy) NSArray *accessibilityTabs NS_AVAILABLE_MAC(10_10);
+@property (nullable, copy) NSArray *accessibilityTabs API_AVAILABLE(macos(10.10));
 
 #pragma mark Table/Outline
 // UIElement for header
 // Invokes when clients request NSAccessibilityHeaderAttribute
-@property (nullable, strong) id accessibilityHeader NS_AVAILABLE_MAC(10_10);
+@property (nullable, strong) id accessibilityHeader API_AVAILABLE(macos(10.10));
 
 // Number of columns
 // Invokes when clients request NSAccessibilityColumnCountAttribute
-@property NSInteger accessibilityColumnCount NS_AVAILABLE_MAC(10_10);
+@property NSInteger accessibilityColumnCount API_AVAILABLE(macos(10.10));
 
 // Number of rows
 // Invokes when clients request NSAccessibilityRowCountAttribute
-@property NSInteger accessibilityRowCount NS_AVAILABLE_MAC(10_10);
+@property NSInteger accessibilityRowCount API_AVAILABLE(macos(10.10));
 
 // Index of the current UIElement (row index for a row, column index for a column)
 // Invokes when clients request NSAccessibilityIndexAttribute
-@property NSInteger accessibilityIndex NS_AVAILABLE_MAC(10_10);
+@property NSInteger accessibilityIndex API_AVAILABLE(macos(10.10));
 
 // Array of UIElements for columns
 // Invokes when clients request NSAccessibilityColumnsAttribute
-@property (nullable, copy) NSArray *accessibilityColumns NS_AVAILABLE_MAC(10_10);
+@property (nullable, copy) NSArray *accessibilityColumns API_AVAILABLE(macos(10.10));
 
 // Array of UIElements for rows
 // Invokes when clients request NSAccessibilityRowsAttribute
-@property (nullable, copy) NSArray *accessibilityRows NS_AVAILABLE_MAC(10_10);
+@property (nullable, copy) NSArray *accessibilityRows API_AVAILABLE(macos(10.10));
 
 // Array of UIElements for visible rows
 // Invokes when clients request NSAccessibilityVisibleRowsAttribute
-@property (nullable, copy) NSArray *accessibilityVisibleRows NS_AVAILABLE_MAC(10_10);
+@property (nullable, copy) NSArray *accessibilityVisibleRows API_AVAILABLE(macos(10.10));
 
 // Array of UIElements for selected rows
 // Invokes when clients request NSAccessibilitySelectedRowsAttribute
-@property (nullable, copy) NSArray *accessibilitySelectedRows NS_AVAILABLE_MAC(10_10);
+@property (nullable, copy) NSArray *accessibilitySelectedRows API_AVAILABLE(macos(10.10));
 
 // Array of UIElements for visible columns
 // Invokes when clients request NSAccessibilityVisibleColumnsAttribute
-@property (nullable, copy) NSArray *accessibilityVisibleColumns NS_AVAILABLE_MAC(10_10);
+@property (nullable, copy) NSArray *accessibilityVisibleColumns API_AVAILABLE(macos(10.10));
 
 // Array of UIElements for selected columns
 // Invokes when clients request NSAccessibilitySelectedColumnsAttribute
-@property (nullable, copy) NSArray *accessibilitySelectedColumns NS_AVAILABLE_MAC(10_10);
+@property (nullable, copy) NSArray *accessibilitySelectedColumns API_AVAILABLE(macos(10.10));
 
 // Sort direction
 // Invokes when clients request NSAccessibilitySortDirectionAttribute
-@property NSAccessibilitySortDirection accessibilitySortDirection NS_AVAILABLE_MAC(10_10);
+@property NSAccessibilitySortDirection accessibilitySortDirection API_AVAILABLE(macos(10.10));
 
 #pragma mark Table (cell based)
 // Array of UIElements for row headers
 // Invokes when clients request NSAccessibilityRowHeaderUIElementsAttribute
-@property (nullable, copy) NSArray *accessibilityRowHeaderUIElements NS_AVAILABLE_MAC(10_10);
+@property (nullable, copy) NSArray *accessibilityRowHeaderUIElements API_AVAILABLE(macos(10.10));
 
 // Array of UIElements for selected cells
 // Invokes when clients request NSAccessibilitySelectedCellsAttribute
-@property (nullable, copy) NSArray *accessibilitySelectedCells NS_AVAILABLE_MAC(10_10);
+@property (nullable, copy) NSArray *accessibilitySelectedCells API_AVAILABLE(macos(10.10));
 
 // Array of UIElements for visible cells
 // Invokes when clients request NSAccessibilityVisibleCellsAttribute
-@property (nullable, copy) NSArray *accessibilityVisibleCells NS_AVAILABLE_MAC(10_10);
+@property (nullable, copy) NSArray *accessibilityVisibleCells API_AVAILABLE(macos(10.10));
 
 // Array of UIElements for column headers
 // Invokes when clients request NSAccessibilityColumnHeaderUIElementsAttribute
-@property (nullable, copy) NSArray *accessibilityColumnHeaderUIElements NS_AVAILABLE_MAC(10_10);
+@property (nullable, copy) NSArray *accessibilityColumnHeaderUIElements API_AVAILABLE(macos(10.10));
 
 // UIElement for cell at specified row and column
 // Invokes when clients request NSAccessibilityCellForColumnAndRowParameterizedAttribute
-- (nullable id)accessibilityCellForColumn:(NSInteger)column row:(NSInteger)row NS_AVAILABLE_MAC(10_10);
+- (nullable id)accessibilityCellForColumn:(NSInteger)column row:(NSInteger)row API_AVAILABLE(macos(10.10));
 
 #pragma mark Table cell
 // Cell location and row span
 // Invokes when clients request NSAccessibilityRowIndexRangeAttribute
-@property NSRange accessibilityRowIndexRange NS_AVAILABLE_MAC(10_10);
+@property NSRange accessibilityRowIndexRange API_AVAILABLE(macos(10.10));
 
 // Cell location and column span
 // Invokes when clients request NSAccessibilityColumnIndexRangeAttribute
-@property NSRange accessibilityColumnIndexRange NS_AVAILABLE_MAC(10_10);
+@property NSRange accessibilityColumnIndexRange API_AVAILABLE(macos(10.10));
 
 #pragma mark Text
 // Line number containing caret
 // Invokes when clients request NSAccessibilityInsertionPointLineNumberAttribute
-@property NSInteger accessibilityInsertionPointLineNumber NS_AVAILABLE_MAC(10_10);
+@property NSInteger accessibilityInsertionPointLineNumber API_AVAILABLE(macos(10.10));
 
 // Part of shared text in this view
 // Invokes when clients request NSAccessibilitySharedCharacterRangeAttribute
-@property NSRange accessibilitySharedCharacterRange NS_AVAILABLE_MAC(10_10);
+@property NSRange accessibilitySharedCharacterRange API_AVAILABLE(macos(10.10));
 
 // Text views sharing text
 // Invokes when clients request NSAccessibilitySharedTextUIElementsAttribute
-@property (nullable, copy) NSArray *accessibilitySharedTextUIElements NS_AVAILABLE_MAC(10_10);
+@property (nullable, copy) NSArray *accessibilitySharedTextUIElements API_AVAILABLE(macos(10.10));
 
 // Range of visible text
 // Invokes when clients request NSAccessibilityVisibleCharacterRangeAttribute
-@property NSRange accessibilityVisibleCharacterRange NS_AVAILABLE_MAC(10_10);
+@property NSRange accessibilityVisibleCharacterRange API_AVAILABLE(macos(10.10));
 
 // Number of characters
 // Invokes when clients request NSAccessibilityNumberOfCharactersAttribute
-@property NSInteger accessibilityNumberOfCharacters NS_AVAILABLE_MAC(10_10);
+@property NSInteger accessibilityNumberOfCharacters API_AVAILABLE(macos(10.10));
 
 // String of selected text
 // Invokes when clients request NSAccessibilitySelectedTextAttribute
-@property (nullable, copy) NSString *accessibilitySelectedText NS_AVAILABLE_MAC(10_10);
+@property (nullable, copy) NSString *accessibilitySelectedText API_AVAILABLE(macos(10.10));
 
 // Range of selected text
 // Invokes when clients request NSAccessibilitySelectedTextRangeAttribute
-@property NSRange accessibilitySelectedTextRange NS_AVAILABLE_MAC(10_10);
+@property NSRange accessibilitySelectedTextRange API_AVAILABLE(macos(10.10));
 
 // Array of NSValue (rangeValue) ranges of selected text
 // Invokes when clients request NSAccessibilitySelectedTextRangesAttribute
-@property (nullable, copy) NSArray<NSValue *> *accessibilitySelectedTextRanges NS_AVAILABLE_MAC(10_10);
+@property (nullable, copy) NSArray<NSValue *> *accessibilitySelectedTextRanges API_AVAILABLE(macos(10.10));
 
 // Attributed string for a provided range.
 // does _not_ use attributes from Appkit/AttributedString.h
 // Invokes when clients request NSAccessibilityAttributedStringForRangeParameterizedAttribute
-- (nullable NSAttributedString *)accessibilityAttributedStringForRange:(NSRange)range NS_AVAILABLE_MAC(10_10);
+- (nullable NSAttributedString *)accessibilityAttributedStringForRange:(NSRange)range API_AVAILABLE(macos(10.10));
 
 // Range for the provided line number
 // Invokes when clients request NSAccessibilityRangeForLineParameterizedAttribute
-- (NSRange)accessibilityRangeForLine:(NSInteger)line NS_AVAILABLE_MAC(10_10);
+- (NSRange)accessibilityRangeForLine:(NSInteger)line API_AVAILABLE(macos(10.10));
 
 // String for the provided range
 // Invokes when clients request NSAccessibilityStringForRangeParameterizedAttribute
-- (nullable NSString *)accessibilityStringForRange:(NSRange)range NS_AVAILABLE_MAC(10_10);
+- (nullable NSString *)accessibilityStringForRange:(NSRange)range API_AVAILABLE(macos(10.10));
 
 // Composed character range for the character at the provided point
 // Invokes when clients request NSAccessibilityRangeForPositionParameterizedAttribute
-- (NSRange)accessibilityRangeForPosition:(NSPoint)point NS_AVAILABLE_MAC(10_10);
+- (NSRange)accessibilityRangeForPosition:(NSPoint)point API_AVAILABLE(macos(10.10));
 
 // Composed character range for the provided index
 // Invokes when clients request NSAccessibilityRangeForIndexParameterizedAttribute
-- (NSRange)accessibilityRangeForIndex:(NSInteger)index NS_AVAILABLE_MAC(10_10);
+- (NSRange)accessibilityRangeForIndex:(NSInteger)index API_AVAILABLE(macos(10.10));
 
 // Frame of text in the provided range (in screen coordinates.) See NSAccessibilityFrameInView()
 // Invokes when clients request NSAccessibilityBoundsForRangeParameterizedAttribute
-- (NSRect)accessibilityFrameForRange:(NSRange)range NS_AVAILABLE_MAC(10_10);
+- (NSRect)accessibilityFrameForRange:(NSRange)range API_AVAILABLE(macos(10.10));
 
 // RTF data for text in the provided range
 // Invokes when clients request NSAccessibilityRTFForRangeParameterizedAttribute
-- (nullable NSData *)accessibilityRTFForRange:(NSRange)range NS_AVAILABLE_MAC(10_10);
+- (nullable NSData *)accessibilityRTFForRange:(NSRange)range API_AVAILABLE(macos(10.10));
 
 // Extent of style run at the provided index
 // Invokes when clients request NSAccessibilityStyleRangeForIndexParameterizedAttribute
-- (NSRange)accessibilityStyleRangeForIndex:(NSInteger)index NS_AVAILABLE_MAC(10_10);
+- (NSRange)accessibilityStyleRangeForIndex:(NSInteger)index API_AVAILABLE(macos(10.10));
 
 // Line number for character index
 // Invokes when clients request NSAccessibilityLineForIndexParameterizedAttribute
-- (NSInteger)accessibilityLineForIndex:(NSInteger)index NS_AVAILABLE_MAC(10_10);
+- (NSInteger)accessibilityLineForIndex:(NSInteger)index API_AVAILABLE(macos(10.10));
 
 #pragma mark Window
 // UIElement for toolbar box (or nil)
 // Invokes when clients request NSAccessibilityToolbarButtonAttribute
-@property (nullable, strong) id accessibilityToolbarButton NS_AVAILABLE_MAC(10_10);
+@property (nullable, strong) id accessibilityToolbarButton API_AVAILABLE(macos(10.10));
 
 // Is the window modal
 // Invokes when clients request NSAccessibilityModalAttribute
-@property (getter = isAccessibilityModal) BOOL accessibilityModal NS_AVAILABLE_MAC(10_10);
+@property (getter = isAccessibilityModal) BOOL accessibilityModal API_AVAILABLE(macos(10.10));
 
 // UIElement for title's icon (or nil)
 // Invokes when clients request NSAccessibilityProxyAttribute
-@property (nullable, strong) id accessibilityProxy NS_AVAILABLE_MAC(10_10);
+@property (nullable, strong) id accessibilityProxy API_AVAILABLE(macos(10.10));
 
 // Returns YES if this is it the main window
 // Invokes when clients request NSAccessibilityMainAttribute
-@property (getter = isAccessibilityMain) BOOL accessibilityMain NS_AVAILABLE_MAC(10_10);
+@property (getter = isAccessibilityMain) BOOL accessibilityMain API_AVAILABLE(macos(10.10));
 
 // UIElement for full screen button
 // Invokes when clients request NSAccessibilityFullScreenButtonAttribute
-@property (nullable, strong) id accessibilityFullScreenButton NS_AVAILABLE_MAC(10_10);
+@property (nullable, strong) id accessibilityFullScreenButton API_AVAILABLE(macos(10.10));
 
 // UIElement for grow box
 // Invokes when clients request NSAccessibilityGrowAreaAttribute
-@property (nullable, strong) id accessibilityGrowArea NS_AVAILABLE_MAC(10_10);
+@property (nullable, strong) id accessibilityGrowArea API_AVAILABLE(macos(10.10));
 
 // URL for open document
 // Invokes when clients request NSAccessibilityDocumentAttribute
-@property (nullable, copy) NSString *accessibilityDocument NS_AVAILABLE_MAC(10_10);
+@property (nullable, copy) NSString *accessibilityDocument API_AVAILABLE(macos(10.10));
 
 // UIElement for default button
 // Invokes when clients request NSAccessibilityDefaultButtonAttribute
-@property (nullable, strong) id accessibilityDefaultButton NS_AVAILABLE_MAC(10_10);
+@property (nullable, strong) id accessibilityDefaultButton API_AVAILABLE(macos(10.10));
 
 // UIElement for close button
 // Invokes when clients request NSAccessibilityCloseButtonAttribute
-@property (nullable, strong) id accessibilityCloseButton NS_AVAILABLE_MAC(10_10);
+@property (nullable, strong) id accessibilityCloseButton API_AVAILABLE(macos(10.10));
 
 // UIElement for zoom button
 // Invokes when clients request NSAccessibilityZoomButtonAttribute
-@property (nullable, strong) id accessibilityZoomButton NS_AVAILABLE_MAC(10_10);
+@property (nullable, strong) id accessibilityZoomButton API_AVAILABLE(macos(10.10));
 
 // UIElement for minimize button
 // Invokes when clients request NSAccessibilityMinimizeButtonAttribute
-@property (nullable, strong) id accessibilityMinimizeButton NS_AVAILABLE_MAC(10_10);
+@property (nullable, strong) id accessibilityMinimizeButton API_AVAILABLE(macos(10.10));
 
 // Returns YES if the window minimized
 // Invokes when clients request NSAccessibilityMinimizedAttribute
-@property (getter = isAccessibilityMinimized) BOOL accessibilityMinimized NS_AVAILABLE_MAC(10_10);
+@property (getter = isAccessibilityMinimized) BOOL accessibilityMinimized API_AVAILABLE(macos(10.10));
 
 #pragma mark Actions
 
-@property (nullable, copy) NSArray<NSAccessibilityCustomAction *> *accessibilityCustomActions NS_AVAILABLE_MAC(10_13);
+@property (nullable, copy) NSArray<NSAccessibilityCustomAction *> *accessibilityCustomActions API_AVAILABLE(macos(10.13));
 
 // Invokes when clients perform NSAccessibilityCancelAction
-- (BOOL)accessibilityPerformCancel NS_AVAILABLE_MAC(10_10);
+- (BOOL)accessibilityPerformCancel API_AVAILABLE(macos(10.10));
 
 // Invokes when clients perform NSAccessibilityConfirmAction
-- (BOOL)accessibilityPerformConfirm NS_AVAILABLE_MAC(10_10);
+- (BOOL)accessibilityPerformConfirm API_AVAILABLE(macos(10.10));
 
 // Invokes when clients perform NSAccessibilityDecrementAction
-- (BOOL)accessibilityPerformDecrement NS_AVAILABLE_MAC(10_10);
+- (BOOL)accessibilityPerformDecrement API_AVAILABLE(macos(10.10));
 
 // Invokes when clients perform NSAccessibilityDeleteAction
-- (BOOL)accessibilityPerformDelete NS_AVAILABLE_MAC(10_10);
+- (BOOL)accessibilityPerformDelete API_AVAILABLE(macos(10.10));
 
 // Invokes when clients perform NSAccessibilityIncrementAction
-- (BOOL)accessibilityPerformIncrement NS_AVAILABLE_MAC(10_10);
+- (BOOL)accessibilityPerformIncrement API_AVAILABLE(macos(10.10));
 
 // Invokes when clients perform NSAccessibilityPickAction
-- (BOOL)accessibilityPerformPick NS_AVAILABLE_MAC(10_10);
+- (BOOL)accessibilityPerformPick API_AVAILABLE(macos(10.10));
 
 // Invokes when clients perform NSAccessibilityPressAction
-- (BOOL)accessibilityPerformPress NS_AVAILABLE_MAC(10_10);
+- (BOOL)accessibilityPerformPress API_AVAILABLE(macos(10.10));
 
 // Invokes when clients perform NSAccessibilityRaiseAction
-- (BOOL)accessibilityPerformRaise NS_AVAILABLE_MAC(10_10);
+- (BOOL)accessibilityPerformRaise API_AVAILABLE(macos(10.10));
 
 // Invokes when clients perform NSAccessibilityShowAlternateUIAction
-- (BOOL)accessibilityPerformShowAlternateUI NS_AVAILABLE_MAC(10_10);
+- (BOOL)accessibilityPerformShowAlternateUI API_AVAILABLE(macos(10.10));
 
 // Invokes when clients perform NSAccessibilityShowDefaultUIAction
-- (BOOL)accessibilityPerformShowDefaultUI NS_AVAILABLE_MAC(10_10);
+- (BOOL)accessibilityPerformShowDefaultUI API_AVAILABLE(macos(10.10));
 
 // Invokes when clients perform NSAccessibilityShowMenuAction
-- (BOOL)accessibilityPerformShowMenu NS_AVAILABLE_MAC(10_10);
+- (BOOL)accessibilityPerformShowMenu API_AVAILABLE(macos(10.10));
 
 #pragma mark Allowed Selectors
 // Returns YES if accessibility clients should be able to invoke the provided selector
-- (BOOL)isAccessibilitySelectorAllowed:(SEL)selector NS_AVAILABLE_MAC(10_10);
+- (BOOL)isAccessibilitySelectorAllowed:(SEL)selector API_AVAILABLE(macos(10.10));
 
 @end
 
+API_UNAVAILABLE_END
 NS_ASSUME_NONNULL_END

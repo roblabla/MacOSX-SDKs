@@ -2,7 +2,7 @@
 //  SCNMaterial.h
 //  SceneKit
 //
-//  Copyright © 2012-2018 Apple Inc. All rights reserved.
+//  Copyright © 2012-2019 Apple Inc. All rights reserved.
 //
 
 #import <SceneKit/SceneKitTypes.h>
@@ -77,6 +77,12 @@ NS_ASSUME_NONNULL_BEGIN
    and
      <ambient> — The 'ambient' property of the SCNMaterial instance
      <diffuse> — The 'diffuse' property of the SCNMaterial instance
+
+ SCNLightingModelShadowOnly:
+    Produces a shaded surface that only renders received shadows.
+    Use this lighting model in combination with a multiply blend mode to compose shadows over the background.
+    The typical use case is to use on a plane that receive shadows in a AR application.
+    The shadow intensity can be adjusted using the alpha of the lights's shadow color.
  */
 
 typedef NSString * SCNLightingModel NS_STRING_ENUM;
@@ -85,6 +91,7 @@ SCN_EXPORT SCNLightingModel const SCNLightingModelBlinn;
 SCN_EXPORT SCNLightingModel const SCNLightingModelLambert;
 SCN_EXPORT SCNLightingModel const SCNLightingModelConstant;
 SCN_EXPORT SCNLightingModel const SCNLightingModelPhysicallyBased API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0));
+SCN_EXPORT SCNLightingModel const SCNLightingModelShadowOnly API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0), watchos(6.0));
 
 typedef NS_ENUM(NSUInteger, SCNFillMode) {
     SCNFillModeFill  = 0,
@@ -230,6 +237,25 @@ SCN_EXPORT
  @abstract The roughness property specifies the apparent smoothness of the surface. Lower values (darker colors) cause the material to appear shiny, with well-defined specular highlights. Higher values (brighter colors) cause specular highlights to spread out and the diffuse property of the material to become more retroreflective. This property is only used when 'lightingModelName' is 'SCNLightingModelPhysicallyBased'.
  */
 @property(nonatomic, readonly) SCNMaterialProperty *roughness API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0));
+
+/*!
+ @property clearCoat
+ @abstract The clearCoat property specifies color and intensity of the coat layer.
+ */
+@property(nonatomic, readonly) SCNMaterialProperty *clearCoat API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0), watchos(6.0));
+
+/*!
+ @property clearCoatRoughness
+ @abstract The clearCoat property specifies color and intensity of the coat roughness.
+ */
+@property(nonatomic, readonly) SCNMaterialProperty *clearCoatRoughness API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0), watchos(6.0));
+
+/*!
+ @property clearCoatNormal
+ @abstract The clearCoatNormal property specifies color and intensity of the optional coat normal map.
+ */
+@property(nonatomic, readonly) SCNMaterialProperty *clearCoatNormal API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0), watchos(6.0));
+
 
 // MARK: -
 

@@ -2,6 +2,7 @@
 	Copyright:	(c) 2003-2008 by Apple, Inc., all rights reserved.
 */
 
+#import <QuartzComposer/QuartzComposerDefines.h>
 #import <QuartzComposer/QCComposition.h>
 
 /* HIGH-LEVEL NOTES:
@@ -18,9 +19,10 @@
 #if defined(MAC_OS_X_VERSION_10_5) && (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
 
 /* Notification names */
-extern NSString* const QCCompositionRepositoryDidUpdateNotification;
+extern NSString* const QCCompositionRepositoryDidUpdateNotification QC_DEPRECATED_MAC(10_15);
 
 /* Extensions to QCComposition */
+QC_CLASS_DEPRECATED_MAC(10_15)
 @interface QCComposition (QCCompositionRepository)
 
 /*
@@ -31,6 +33,7 @@ Returns a unique and persistent identifier for the composition if its comes from
 @end
 
 /* System-wide composition repository */
+QC_CLASS_DEPRECATED_MAC(10_15)
 @interface QCCompositionRepository : NSObject
 {
 @private

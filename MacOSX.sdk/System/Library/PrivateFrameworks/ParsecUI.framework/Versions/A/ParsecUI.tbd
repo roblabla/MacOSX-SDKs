@@ -1,9 +1,9 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 95B7A511-6192-327A-9377-52A8D1E62BDE' ]
+uuids:           [ 'x86_64: 9DAFF4CE-0AEB-3D34-8B38-4AA36622A44A' ]
 platform:        macosx
-install-name:    /System/Library/PrivateFrameworks/ParsecUI.framework/Versions/A/ParsecUI
-current-version: 1191.52
+install-name:    '/System/Library/PrivateFrameworks/ParsecUI.framework/Versions/A/ParsecUI'
+current-version: 0
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _CeilToPixel, _ClientInfo, _CreateCredential, _DefaultStocksCountryCode, 
@@ -14,17 +14,16 @@ exports:
                        _PRSCircledImage, _PRSCircledRect, _PRSDescriptionBodyColorOfWeight, 
                        _PRSDescriptionBodyFontOfWeightSize, _PRSDescriptionBodyLineSpacingOfSize, 
                        _PRSDescriptionTitleColorOfWeight, _PRSDescriptionTitleFontOfWeight, 
-                       _PRSEnSpaceCharacter, _PRSExtraLargeFont, _PRSHeaderColor, 
-                       _PRSHeaderFont, _PRSLargeFont, _PRSLargeSiriFont, _PRSLinkColor, 
-                       _PRSMediumFont, _PRSMicroFont, _PRSOpticalBoldFont, _PRSPreviewViewClosedNotification, 
-                       _PRSQuaternaryColor, _PRSRowKeyColorOfWeight, _PRSRowKeyFontOfWeight, 
-                       _PRSRowValueColorOfWeight, _PRSRowValueFontOfWeight, _PRSSecondaryColor, 
-                       _PRSSecondaryFont, _PRSSecondaryTextAttributes, _PRSSmallHeaderColor, 
-                       _PRSSmallHeaderFont, _PRSTertiaryColor, _PRSTextAttributesForFontAndColor, 
-                       _PRSTextColumnsBodyColorOfWeight, _PRSTextColumnsBodyFontOfWeight, 
-                       _PRSTextColumnsTitleColorOfWeight, _PRSTextColumnsTitleFontOfWeight, 
-                       _PRSThinSmallFont, _PRSThinSpaceCharacter, _PRSTinyFont, _PRSTitleFont, 
-                       _ParameterString, _ParsecUIVersionNumber, _ParsecUIVersionString, 
+                       _PRSExtraLargeFont, _PRSHeaderColor, _PRSHeaderFont, _PRSLargeFont, 
+                       _PRSLargeSiriFont, _PRSLinkColor, _PRSMediumFont, _PRSMicroFont, 
+                       _PRSOpticalBoldFont, _PRSPreviewViewClosedNotification, _PRSQuaternaryColor, 
+                       _PRSRowKeyColorOfWeight, _PRSRowKeyFontOfWeight, _PRSRowValueColorOfWeight, 
+                       _PRSRowValueFontOfWeight, _PRSSecondaryColor, _PRSSecondaryFont, 
+                       _PRSSecondaryTextAttributes, _PRSSmallHeaderColor, _PRSSmallHeaderFont, 
+                       _PRSTertiaryColor, _PRSTextAttributesForFontAndColor, _PRSTextColumnsBodyColorOfWeight, 
+                       _PRSTextColumnsBodyFontOfWeight, _PRSTextColumnsTitleColorOfWeight, 
+                       _PRSTextColumnsTitleFontOfWeight, _PRSThinSmallFont, _PRSTinyFont, 
+                       _PRSTitleFont, _ParameterString, _ParsecUIVersionNumber, _ParsecUIVersionString, 
                        _RoundRectToPixel, _RoundToPixel, _RowDataTypeKey, _SelectedChartIntervalDefaultsKey, 
                        _SetNumberFormatterFractionDigits, _ShowsPercentKey, _StockAverageVolumeKey, 
                        _StockChangeKey, _StockCompanyNameKey, _StockDataSourceIDKey, 
@@ -39,21 +38,18 @@ exports:
                        _StockWasMovedNotification, _StockWillBeRemovedNotification, 
                        _StockYearHighKey, _StockYearLowKey, _StocksDidReloadFromDefaultsNotification, 
                        _StocksErrorDomain, _StocksWillSyncNotification, _SyncedStocksOverride, 
-                       __ConsumerKey, __ConsumerSecret, __SPStartedPlaying, ___shouldLog, 
-                       _kFlightViewAllowedShrinkage ]
+                       __ConsumerKey, __ConsumerSecret, __SPStartedPlaying, ___shouldLog ]
     objc-classes:    [ ChartLabelInfo, ChartLabelInfoManager, ChartUpdater, DashedLineView, 
-                       Exchange, ExchangeManager, FlippedView, GraphRenderOperation, 
-                       GraphRenderer, NetPreferences, PRSActionButtonImageView, PRSAppLinkController, 
+                       Exchange, ExchangeManager, GraphRenderOperation, GraphRenderer, 
+                       NetPreferences, PRSActionButtonImageView, PRSAppLinkController, 
                        PRSAppLinkSliceView, PRSAppearanceTextField, PRSAssistantPreviewController, 
                        PRSAutoLayout, PRSButton, PRSCardSectionSliceViewController, 
                        PRSColumnsSliceView, PRSColumnsSliceViewController, PRSDescriptionSliceView, 
                        PRSDescriptionSliceViewController, PRSEncyclopediaPreviewController, 
-                       PRSFTEController, PRSFUSETrackSliceView, PRSFUSETrackSliceViewController, 
-                       PRSFlightsViewController, PRSGlyphTextAttachmentCell, PRSHTMLSliceViewController, 
-                       PRSImageView, PRSLevelIndicatorView, PRSLinkButton, PRSLinkTableSliceView, 
-                       PRSLinkTableSliceViewController, PRSLocationPreviewController, 
-                       PRSMoviesSliceView, PRSMoviesSliceViewController, PRSMultiTwitterSliceView, 
-                       PRSPreviewController, PRSPreviewHostingView, PRSResultsView, 
+                       PRSGlyphTextAttachmentCell, PRSHTMLSliceViewController, PRSImageView, 
+                       PRSLevelIndicatorView, PRSLinkButton, PRSLinkTableSliceView, 
+                       PRSLinkTableSliceViewController, PRSMoviesSliceView, PRSMoviesSliceViewController, 
+                       PRSPattern, PRSPreviewController, PRSPreviewHostingView, PRSResultsView, 
                        PRSRichTitleSliceView, PRSRichTitleSliceViewController, PRSRoundedCornerImageView, 
                        PRSRowSliceView, PRSRowSliceViewController, PRSSlice, PRSSliceViewController, 
                        PRSSpacerSliceView, PRSSpacerSliceViewController, PRSSportsSummaryScoreSliceView, 
@@ -61,16 +57,17 @@ exports:
                        PRSStockChartSliceViewController, PRSTVRowSliceView, PRSTVRowSliceViewController, 
                        PRSTableHeaderSliceViewController, PRSTableRowSliceView, PRSTableRowSliceViewController, 
                        PRSTableRowView, PRSTableView, PRSTableViewScrollView, PRSTemplateACEHeaderSliceView, 
-                       PRSTemplateACEHeaderSliceViewController, PRSTextContainer, 
+                       PRSTemplateACEHeaderSliceViewController, PRSTestResults, PRSTestRosterResult, 
+                       PRSTestScheduleResult, PRSTestStandingsResult, PRSTextContainer, 
                        PRSTextFieldSliceView, PRSTextFieldSliceViewController, PRSTextView, 
                        PRSThreeMoviesSliceView, PRSTitleSliceView, PRSTitleSliceViewController, 
                        PRSTrackSliceView, PRSTrackSliceViewController, PRSTrailersSliceView, 
-                       PRSTrailersSliceViewController, PRSTwitterSliceView, PRSTwitterSliceViewController, 
-                       PRSTwoColumnsSliceView, PRSVibrantButton, PRSVibrantTextField, 
-                       PRSVibrantTextView, PRSVibrantWebView, PRSWebSliceController, 
-                       SearchUITableLayoutInfo, Stock, StockChartData, StockChartDisplayMode, 
-                       StockDataSource, StockGraphImageSet, StockGraphView, StockManager, 
-                       StocksBundles, StocksPreferences, YQLRequest ]
+                       PRSTrailersSliceViewController, PRSTwoColumnsSliceView, PRSVibrantButton, 
+                       PRSVibrantTextField, PRSVibrantTextView, PRSVibrantWebView, 
+                       PRSWebSliceController, SearchUITableLayoutInfo, Stock, StockChartData, 
+                       StockChartDisplayMode, StockDataSource, StockGraphImageSet, 
+                       StockGraphView, StockManager, StocksBundles, StocksPreferences, 
+                       YQLRequest ]
     objc-ivars:      [ ChartUpdater._currentChartData, ChartUpdater._interval, ChartUpdater._stock, 
                        GraphRenderer._cancelled, GraphRenderer._queue, NetPreferences._UUID, 
                        NetPreferences._buildVersion, NetPreferences._isNetworkReachable, 

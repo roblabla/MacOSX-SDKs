@@ -15,11 +15,17 @@
 .Nm 
 .Op Fl xml
 .Op Fl detailLevel Ar level
+.Nm
+.Op Fl json
+.Ar dataType1 ... dataTypeN
+.Nm
+.Op Fl json
+.Op Fl detailLevel Ar level
 .Sh DESCRIPTION  
 .Nm 
 reports on the hardware and software configuration
 of the system.  It can generate plain text reports 
-or XML reports which can be opened with System Information.app
+or XML reports which can be opened with System Information.app, or JSON reports
 .Pp		
 Progress and error messages are printed to stderr while 
 actual report data is printed to stdout. Redirect stderr 
@@ -33,6 +39,9 @@ Generates a report in XML format.
 If the XML report is redirected to a 
 file with a ".spx" suffix that file can
 be opened with System Information.app.
+.Pp
+.It Fl json
+Generates a report in JSON format.
 .Pp
 .It Fl listDataTypes
 Lists the available datatypes.

@@ -12,7 +12,7 @@
  @abstract	APIs for managing a hands free audio gateway
  @copyright	(c) 2010 by Apple Inc. All rights reserved.
  */
-NS_CLASS_AVAILABLE(10_7, NA)
+API_AVAILABLE(macos(10.7)) API_UNAVAILABLE(ios, watchos, tvos)
 @interface IOBluetoothHandsFreeAudioGateway : IOBluetoothHandsFree {
 	BOOL				_indicatorMode;
 	BOOL				_indicatorEventReporting;
@@ -74,6 +74,7 @@ NS_CLASS_AVAILABLE(10_7, NA)
 
 @end
 
+API_UNAVAILABLE(ios, watchos, tvos)
 @protocol IOBluetoothHandsFreeAudioGatewayDelegate
 @optional
 

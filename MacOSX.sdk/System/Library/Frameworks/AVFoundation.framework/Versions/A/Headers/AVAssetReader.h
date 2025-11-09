@@ -3,7 +3,7 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2010-2016 Apple Inc. All rights reserved.
+	Copyright 2010-2018 Apple Inc. All rights reserved.
 
 */
 
@@ -37,10 +37,10 @@ NS_ASSUME_NONNULL_BEGIN
  */
 typedef NS_ENUM(NSInteger, AVAssetReaderStatus) {
     AVAssetReaderStatusUnknown = 0,
-    AVAssetReaderStatusReading,
-    AVAssetReaderStatusCompleted,
-    AVAssetReaderStatusFailed,
-    AVAssetReaderStatusCancelled,
+    AVAssetReaderStatusReading = 1,
+    AVAssetReaderStatusCompleted = 2,
+    AVAssetReaderStatusFailed = 3,
+    AVAssetReaderStatusCancelled = 4,
 };
 
 /*!
@@ -57,7 +57,7 @@ typedef NS_ENUM(NSInteger, AVAssetReaderStatus) {
 	
 	AVAssetReaderAudioMixOutput mixes multiple audio tracks of the asset after reading them, while AVAssetReaderVideoCompositionOutput composites multiple video tracks after reading them.
  */
-NS_CLASS_AVAILABLE(10_7, 4_1)
+API_AVAILABLE(macos(10.7), ios(4.1), tvos(9.0)) API_UNAVAILABLE(watchos)
 @interface AVAssetReader : NSObject
 {
 @private

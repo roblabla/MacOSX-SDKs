@@ -1,5 +1,5 @@
 /*    NLTagScheme.h
-      Copyright (c) 2017-2018, Apple Inc. All rights reserved.
+      Copyright (c) 2017-2019, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/Foundation.h>
@@ -16,6 +16,7 @@ FOUNDATION_EXPORT NLTagScheme const NLTagSchemeNameTypeOrLexicalClass API_AVAILA
 FOUNDATION_EXPORT NLTagScheme const NLTagSchemeLemma API_AVAILABLE(macos(10.14), ios(12.0), watchos(5.0), tvos(12.0));                   /* This tag scheme supplies a stem form for each word token (if known). */
 FOUNDATION_EXPORT NLTagScheme const NLTagSchemeLanguage API_AVAILABLE(macos(10.14), ios(12.0), watchos(5.0), tvos(12.0));                /* This tag scheme tags tokens according to their most likely language (if known). */
 FOUNDATION_EXPORT NLTagScheme const NLTagSchemeScript API_AVAILABLE(macos(10.14), ios(12.0), watchos(5.0), tvos(12.0));                  /* This tag scheme tags tokens according to their script. */
+FOUNDATION_EXPORT NLTagScheme const NLTagSchemeSentimentScore API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0));          /* This tag scheme classifies sentences or paragraphs according to their sentiment on a scale of -1.0 to 1.0. */
 
 /* An NLTag is a tag associated with a given tag scheme that can be returned by NLTagger. Each tag scheme has its own set of tags. For NLTagSchemeTokenType, NLTagSchemeLexicalClass, NLTagSchemeNameType, and NLTagSchemeNameTypeOrLexicalClass, tags will be taken from the lists below (clients may use == comparison). Tags for NLTagSchemeLemma are lemmas from the language. Tags for NLTagSchemeLanguage are standard language abbreviations. Tags for NLTagSchemeScript are standard script abbreviations
 */

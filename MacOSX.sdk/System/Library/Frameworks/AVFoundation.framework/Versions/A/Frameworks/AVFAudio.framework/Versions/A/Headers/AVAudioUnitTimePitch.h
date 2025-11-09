@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
         In this time effect, the playback rate and pitch parameters function independently of each other
  
 */
-OS_EXPORT API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0)) API_UNAVAILABLE(watchos) 
+API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0)) API_UNAVAILABLE(watchos) 
 @interface AVAudioUnitTimePitch : AVAudioUnitTimeEffect
 
 /*! @property rate

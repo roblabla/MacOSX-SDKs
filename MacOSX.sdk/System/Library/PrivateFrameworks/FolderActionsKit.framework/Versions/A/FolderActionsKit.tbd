@@ -1,8 +1,8 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 92558E74-163F-3C75-8ECC-C361E1AE3680' ]
+uuids:           [ 'x86_64: 2EDE240C-5EE6-393B-90D8-62BDE8A78FF2' ]
 platform:        macosx
-install-name:    /System/Library/PrivateFrameworks/FolderActionsKit.framework/Versions/A/FolderActionsKit
+install-name:    '/System/Library/PrivateFrameworks/FolderActionsKit.framework/Versions/A/FolderActionsKit'
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _FAFolderActionDispatcherSetLaunchDaemonEnabled, _FolderActionsKitVersionNumber, 

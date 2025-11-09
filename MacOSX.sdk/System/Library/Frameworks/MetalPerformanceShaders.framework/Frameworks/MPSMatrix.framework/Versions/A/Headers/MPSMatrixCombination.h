@@ -44,13 +44,13 @@ extern "C" {
  *              The MPSMatriceCopyDescriptor provides a container to list the operations.
  *              The operations occur in any order, and may not alias.
  */
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0))
 @interface  MPSMatrixCopyDescriptor : NSObject
 /*! @abstract   convenience allocator for single copies */
 +(nonnull instancetype) descriptorWithSourceMatrix: (MPSMatrix * __nonnull) sourceMatrix
                                  destinationMatrix: (MPSMatrix * __nonnull) destinationMatrix
                                            offsets: (MPSMatrixCopyOffsets) offsets
-MPS_AVAILABLE_STARTING(macos(10.13), ios(11.0), tvos(11.0) );
+MPS_AVAILABLE_STARTING(macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0) );
 
 /*! @abstract       initialize a MPSMatrixCopyDescriptor with default values.
  *  @discussion     Use -setCopyOperationAtIndex:sourceMatrix:destinationMatrix:copyOffsets
@@ -62,7 +62,7 @@ MPS_AVAILABLE_STARTING(macos(10.13), ios(11.0), tvos(11.0) );
 -(nonnull instancetype)     initWithDevice: (nonnull id <MTLDevice>) device
                                      count: (NSUInteger) count
 NS_DESIGNATED_INITIALIZER
-MPS_AVAILABLE_STARTING(macos(10.13), ios(11.0), tvos(11.0) );
+MPS_AVAILABLE_STARTING(macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0) );
 
 /*! @abstract    Initialize a MPSMatrixCopyDescriptor using offsets generated on the CPU
  *  @discussion  This is for one at a time intialization of the copy operations
@@ -74,7 +74,7 @@ MPS_AVAILABLE_STARTING(macos(10.13), ios(11.0), tvos(11.0) );
                    sourceMatrix: (MPSMatrix * __nonnull) sourceMatrix
               destinationMatrix: (MPSMatrix * __nonnull) destinationMatrix
                         offsets: (MPSMatrixCopyOffsets) offsets
-MPS_AVAILABLE_STARTING(macos(10.13), ios(11.0), tvos(11.0) );
+MPS_AVAILABLE_STARTING(macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0) );
 
 
 /*! @abstract       Initialize a MPSMatrixCopyDescriptor using offsets generated on the GPU
@@ -93,14 +93,14 @@ MPS_AVAILABLE_STARTING(macos(10.13), ios(11.0), tvos(11.0) );
                                   offsetVector: (MPSVector * __nullable) offsets
                                         offset: (NSUInteger) byteOffset
 NS_DESIGNATED_INITIALIZER
-MPS_AVAILABLE_STARTING(macos(10.13), ios(11.0), tvos(11.0) );
+MPS_AVAILABLE_STARTING(macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0) );
 
 
 -(nonnull instancetype) init    NS_UNAVAILABLE;
 
 @end
 
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0))
 @interface MPSMatrixCopy : MPSKernel
 
 /*
@@ -111,8 +111,8 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
 /*! @abstract   Initialize a copy operator
  *  @param      copyRows        The number of rows to copy for each copy operation
  *  @param      copyColumns     The number of matrix columns to copy in each copy operation
- *  @param      sourcesAreTransposed       If YES, the sources are in row major storage order
- *  @param      destinationsAreTransposed  If YES, the destinations are in row major storage order
+ *  @param      sourcesAreTransposed       If YES, the sources are in column major storage order
+ *  @param      destinationsAreTransposed  If YES, the destinations are in column major storage order
  */
 -(nonnull instancetype) initWithDevice: (nonnull id <MTLDevice>) device
                               copyRows: (NSUInteger) copyRows
@@ -120,7 +120,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
                   sourcesAreTransposed: (BOOL) sourcesAreTransposed
              destinationsAreTransposed: (BOOL) destinationsAreTransposed
 NS_DESIGNATED_INITIALIZER
-MPS_AVAILABLE_STARTING(macos(10.13), ios(11.0), tvos(11.0) );
+MPS_AVAILABLE_STARTING(macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0) );
 
 /*! @abstract   The number of rows to copy for each copy operation */
 @property (nonatomic, readonly) NSUInteger copyRows;
@@ -190,7 +190,7 @@ MPS_SWIFT_NAME( encode(commandBuffer:copyDescriptor:rowPermuteIndices:rowPermute
  */
 -(nullable instancetype) initWithCoder:(NSCoder * __nonnull)aDecoder
                                 device:(nonnull id <MTLDevice>) device NS_DESIGNATED_INITIALIZER
-MPS_AVAILABLE_STARTING(macos(10.13), ios(11.0), tvos(11.0));
+MPS_AVAILABLE_STARTING(macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0));
 
 @end
 

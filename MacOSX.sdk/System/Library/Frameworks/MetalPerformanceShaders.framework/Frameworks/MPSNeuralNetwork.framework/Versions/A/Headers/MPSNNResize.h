@@ -26,7 +26,7 @@ extern "C" {
  *              The number of output feature channels remains the same as the number of input feature
  *              channels.
  */
-MPS_CLASS_AVAILABLE_STARTING(macos(10.14), ios(12.0), tvos(12.0))
+MPS_CLASS_AVAILABLE_STARTING(macos(10.14), ios(12.0), macCatalyst(13.0), tvos(12.0))
 @interface MPSNNResizeBilinear : MPSCNNKernel
 
 /*! @property   resizeWidth
@@ -89,7 +89,7 @@ MPS_CLASS_AVAILABLE_STARTING(macos(10.14), ios(12.0), tvos(12.0))
  *              The number of output feature channels remains the same as the number of input feature
  *              channels.
  */
-MPS_CLASS_AVAILABLE_STARTING(macos(10.14), ios(12.0), tvos(12.0))
+MPS_CLASS_AVAILABLE_STARTING(macos(10.14), ios(12.0), macCatalyst(13.0), tvos(12.0))
 @interface MPSNNCropAndResizeBilinear : MPSCNNKernel
 
 /*! @property   resizeWidth

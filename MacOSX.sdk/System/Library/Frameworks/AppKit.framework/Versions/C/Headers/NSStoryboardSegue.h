@@ -1,7 +1,7 @@
 /*
         NSStoryboardSegue.h
         Application Kit
-        Copyright (c) 2013-2018, Apple Inc.
+        Copyright (c) 2013-2019, Apple Inc.
         All rights reserved.
 */
 
@@ -9,18 +9,12 @@
 #import <AppKit/AppKitDefines.h>
 
 NS_ASSUME_NONNULL_BEGIN
+API_UNAVAILABLE_BEGIN(ios)
 
 typedef NSString * NSStoryboardSegueIdentifier NS_SWIFT_BRIDGED_TYPEDEF;
 
-NS_CLASS_AVAILABLE_MAC(10_10)
-@interface NSStoryboardSegue : NSObject {
-@private
-    void (^_performHandler)(void) APPKIT_IVAR;
-    NSString *_identifier APPKIT_IVAR;
-    id _sourceController APPKIT_IVAR;
-    id _destinationController APPKIT_IVAR;
-    void (^_prepareHandler)(void) APPKIT_IVAR;
-}
+API_AVAILABLE(macos(10.10))
+@interface NSStoryboardSegue : NSObject
 
 // Convenience constructor for returning a segue that performs a handler block in its -perform method.
 + (instancetype)segueWithIdentifier:(NSStoryboardSegueIdentifier)identifier source:(id)sourceController destination:(id)destinationController performHandler:(void (^)(void))performHandler;
@@ -48,16 +42,17 @@ NS_CLASS_AVAILABLE_MAC(10_10)
 
 /* Subclasses should override this to do any necessary work preparing for the destination ViewController or WindowController.
  */
-- (void)prepareForSegue:(NSStoryboardSegue *)segue sender:(nullable id)sender NS_AVAILABLE_MAC(10_10);
+- (void)prepareForSegue:(NSStoryboardSegue *)segue sender:(nullable id)sender API_AVAILABLE(macos(10.10));
 
 /* Performs the identified Segue created from this WindowController. Throws exception if identifier is nil or not associated with the receiver.
  */
-- (void)performSegueWithIdentifier:(NSStoryboardSegueIdentifier)identifier sender:(nullable id)sender NS_AVAILABLE_MAC(10_10);
+- (void)performSegueWithIdentifier:(NSStoryboardSegueIdentifier)identifier sender:(nullable id)sender API_AVAILABLE(macos(10.10));
 
 /* Invoked immediately prior to initiating a segue. Return NO to prevent the segue from firing. The default implementations in NSViewController and NSWindowController return YES. This method is invoked when -performSegueWithIdentifier:sender: is used.
  */
-- (BOOL)shouldPerformSegueWithIdentifier:(NSStoryboardSegueIdentifier)identifier sender:(nullable id)sender NS_AVAILABLE_MAC(10_10);
+- (BOOL)shouldPerformSegueWithIdentifier:(NSStoryboardSegueIdentifier)identifier sender:(nullable id)sender API_AVAILABLE(macos(10.10));
 
 @end
 
+API_UNAVAILABLE_END
 NS_ASSUME_NONNULL_END

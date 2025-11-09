@@ -12,8 +12,6 @@ NS_ASSUME_NONNULL_BEGIN
 API_AVAILABLE(macos(10.7))
 @interface CARemoteLayerServer : NSObject
 {
-@private
-  id _impl;
 }
 
 /* Return the singleton server instance. */

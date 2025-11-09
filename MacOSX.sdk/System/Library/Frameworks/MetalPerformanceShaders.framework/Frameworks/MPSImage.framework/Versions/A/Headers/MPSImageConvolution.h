@@ -45,7 +45,7 @@
  *
  */
 
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(9.0), tvos(9.0))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(9.0), macCatalyst(13.0), tvos(9.0))
 @interface  MPSImageConvolution : MPSUnaryImageKernel
 
 /*! @property kernelHeight
@@ -99,7 +99,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(9.0), tvos(9.0))
  */
 -(nullable instancetype) initWithCoder:(NSCoder * __nonnull)aDecoder
                                 device:(nonnull id <MTLDevice>) device NS_DESIGNATED_INITIALIZER
-                MPS_AVAILABLE_STARTING(macos(10.13), ios(11.0), tvos(11.0));
+                MPS_AVAILABLE_STARTING(macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0));
 
 @end
 
@@ -115,7 +115,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(9.0), tvos(9.0))
  *              The optimized convolution filter used by MPSImageLaplacian can also be used by creating a MPSImageConvolution
  *              object with kernelWidth = 3, kernelHeight = 3 and weights as specified above.
  */
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(10.0), tvos(10.0))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(10.0), macCatalyst(13.0), tvos(10.0))
 @interface  MPSImageLaplacian : MPSUnaryImageKernel
 
 /*! @property    bias
@@ -142,7 +142,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(10.0), tvos(10.0))
  *              is aware of this and will act accordingly to give best performance for multi-dimensional blurs.
  */
 
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(9.0), tvos(9.0))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(9.0), macCatalyst(13.0), tvos(9.0))
 @interface  MPSImageBox : MPSUnaryImageKernel
 
 
@@ -179,7 +179,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(9.0), tvos(9.0))
  */
 -(nullable instancetype) initWithCoder:(NSCoder * __nonnull)aDecoder
                                 device:(nonnull id <MTLDevice>) device NS_DESIGNATED_INITIALIZER
-                MPS_AVAILABLE_STARTING(macos(10.13), ios(11.0), tvos(11.0));
+                MPS_AVAILABLE_STARTING(macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0));
 
 /* You must use initWithDevice:kernelWidth:kernelHeight: instead. */
 -(nonnull instancetype) initWithDevice:(nonnull id<MTLDevice>)device    NS_UNAVAILABLE;
@@ -215,7 +215,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(9.0), tvos(9.0))
  *              The tent blur is a separable filter. The implementation is aware of this and will act accordingly
  *              to give best performance for multi-dimensional blurs.
  */
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(9.0), tvos(9.0))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(9.0), macCatalyst(13.0), tvos(9.0))
 @interface MPSImageTent : MPSImageBox
 
 @end
@@ -233,7 +233,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(9.0), tvos(9.0))
  *                  to be suitable for all common image processing needs demanding ~10 bits of precision or
  *                  less.
  */
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(9.0), tvos(9.0))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(9.0), macCatalyst(13.0), tvos(9.0))
 @interface  MPSImageGaussianBlur : MPSUnaryImageKernel
 
 /*! @abstract   Initialize a gaussian blur filter for a particular sigma and device
@@ -263,7 +263,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(9.0), tvos(9.0))
  */
 -(nullable instancetype) initWithCoder:(NSCoder * __nonnull)aDecoder
                                 device:(nonnull id <MTLDevice>) device NS_DESIGNATED_INITIALIZER
-                                MPS_AVAILABLE_STARTING(macos(10.13), ios(11.0), tvos(11.0));
+                                MPS_AVAILABLE_STARTING(macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0));
 
 
 /* You must use initWithDevice:sigma: instead. */
@@ -287,7 +287,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(9.0), tvos(9.0))
  *
  *                  Luminance = v[0] * pixel.x + v[1] * pixel.y + v[2] * pixel.z;
  */
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(9.0), tvos(9.0))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(9.0), macCatalyst(13.0), tvos(9.0))
 @interface  MPSImageSobel : MPSUnaryImageKernel
 
 /*! @abstract   Initialize a Sobel filter on a given device using the default color 
@@ -325,7 +325,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(9.0), tvos(9.0))
  */
 -(nullable instancetype) initWithCoder:(NSCoder * __nonnull)aDecoder
                                 device:(nonnull id <MTLDevice>) device NS_DESIGNATED_INITIALIZER
-                MPS_AVAILABLE_STARTING(macos(10.13), ios(11.0), tvos(11.0));
+                MPS_AVAILABLE_STARTING(macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0));
 
 
 /*! @property    colorTransform
@@ -363,7 +363,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(9.0), tvos(9.0))
  *              where w_0, h_0 are the zeroth level width and height. ie the image dimensions themselves.
  */
 
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(10.0), tvos(10.0))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(10.0), macCatalyst(13.0), tvos(10.0))
 @interface  MPSImagePyramid : MPSUnaryImageKernel
 
 /*! @abstract   Initialize a downwards 5-tap image pyramid with the default filter kernel and device
@@ -424,16 +424,21 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(10.0), tvos(10.0))
  */
 -(nullable instancetype) initWithCoder:(NSCoder * __nonnull)aDecoder
                                 device:(nonnull id <MTLDevice>) device NS_DESIGNATED_INITIALIZER
-                        MPS_AVAILABLE_STARTING(macos(10.13), ios(11.0), tvos(11.0));
+                        MPS_AVAILABLE_STARTING(macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0));
 
 @end
 
 /*!
  *  @class      MPSImageGaussianPyramid
- *  @discussion The Gaussian image pyramid is constructed as follows:
- *              First the zeroth level mipmap of the input image is filtered with the specified
- *              convolution kernel.
- *              The default the convolution filter kernel is
+ *  @discussion A Gaussian image pyramid is constructed as follows:
+ *              The mipmap level zero is the source of the operation and is left untouched and
+ *              the subsequent mipmap levels are constructed from it recursively:
+ *              @code
+ *                  mip[ level = n + 1 ] = Downsample( filter( mip[ level = n ] ) ), where
+ *              @endcode
+ *              "filter()" applies a filter with the specified convolution kernel and
+ *              "Downsample()" removes odd rows and columns from the input image.
+ *              The default convolution filter kernel for this operation is
  *              @code
  *                  k = w w^T, where w = [ 1/16,  1/4,  3/8,  1/4,  1/16 ]^T,
  *              @endcode
@@ -441,8 +446,8 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(10.0), tvos(10.0))
  *              @code
  *                  k = w w^T, where w = [ (1/4 - a/2),  1/4,  a,  1/4,  (1/4 - a/2) ]^T
  *              @endcode
- *              or the user can provide a completely custom kernel. After this the image is downsampled by
- *              removing all odd rows and columns, which defines the next level in the Gaussian image pyramid.
+ *              or the user can provide a completely custom kernel.
+ *
  *              This procedure is continued until every mipmap level present in the image texture are
  *              filled with the pyramid levels.
  *
@@ -451,7 +456,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(10.0), tvos(10.0))
  *              where the fallback allocator is ignored.
  */
 
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(10.0), tvos(10.0))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(10.0), macCatalyst(13.0), tvos(10.0))
 @interface  MPSImageGaussianPyramid : MPSImagePyramid
 @end
 
@@ -502,7 +507,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(10.0), tvos(10.0))
  *                    (from which they are inherited), corresponding to no offset applied to the source and unbounded region of interest
  *                    in every destination mip-level; all updates to these properties are ignored.
  */
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(10.0), tvos(10.0))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(10.0), macCatalyst(13.0), tvos(10.0))
 @interface  MPSImageLaplacianPyramid : MPSImagePyramid
     @property(readwrite, assign, nonatomic, setter = setLaplacianBias:,  getter = getLaplacianBias  ) float laplacianBias;
     @property(readwrite, assign, nonatomic, setter = setLaplacianScale:, getter = getLaplacianScale ) float laplacianScale;
@@ -522,7 +527,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(10.0), tvos(10.0))
  *              for reconstruction of the original Gaussian pyramid data, and it is user's responsibility 
  *              to propagate it around, i.e. via the use of MTLBlitCommandEncoder.
  */
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(10.0), tvos(10.0))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(10.0), macCatalyst(13.0), tvos(10.0))
 @interface  MPSImageLaplacianPyramidSubtract : MPSImageLaplacianPyramid
 @end
 
@@ -545,7 +550,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(10.0), tvos(10.0))
  *             discussed for MPSImageLaplacianPyramidSubtract. Just like for MPSImageLaplacianPyramidSubtract, if the destination texture needs 
  *             to contain all mip-level of the Gaussian pyramid including the top level, it can be just from the source texture.
  */
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(10.0), tvos(10.0))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(10.0), macCatalyst(13.0), tvos(10.0))
 @interface  MPSImageLaplacianPyramidAdd : MPSImageLaplacianPyramid
 @end
 

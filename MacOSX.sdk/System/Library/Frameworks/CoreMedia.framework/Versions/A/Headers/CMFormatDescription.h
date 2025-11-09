@@ -3,7 +3,7 @@
 
 	Framework:  CoreMedia
  
-	Copyright © 2005-2018 Apple Inc. All rights reserved.
+	Copyright © 2005-2019 Apple Inc. All rights reserved.
 
 */
 
@@ -24,7 +24,6 @@
 #include <CoreMedia/CMTime.h>
 #include <CoreFoundation/CoreFoundation.h>
 #include <CoreAudio/CoreAudioTypes.h>
-#include <AudioToolbox/AudioFormat.h>
 #include <CoreGraphics/CGBase.h>
 #include <CoreGraphics/CGGeometry.h>
 #include <CoreVideo/CoreVideo.h>
@@ -53,13 +52,13 @@ enum
 	kCMFormatDescriptionError_InvalidParameter		= -12710,
 	kCMFormatDescriptionError_AllocationFailed		= -12711,
 	kCMFormatDescriptionError_ValueNotAvailable		= -12718,
-};
+} API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
 
 /*!
 	@typedef	CMFormatDescriptionRef
 	@abstract	A reference to a CMFormatDescription, a CF object describing media of a particular type (audio, video, muxed, etc).
 */
-typedef const struct CM_BRIDGED_TYPE(id) opaqueCMFormatDescription *CMFormatDescriptionRef;
+typedef const struct CM_BRIDGED_TYPE(id) opaqueCMFormatDescription *CMFormatDescriptionRef API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
 
 /*!
 	@enum CMMediaType
@@ -73,7 +72,7 @@ typedef const struct CM_BRIDGED_TYPE(id) opaqueCMFormatDescription *CMFormatDesc
 	@constant kCMMediaType_TimeCode TimeCode media
 	@constant kCMMediaType_Metadata Metadata media
 */
-typedef FourCharCode CMMediaType;
+typedef FourCharCode CMMediaType API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
 #if COREMEDIA_USE_DERIVED_ENUMS_FOR_CONSTANTS
 enum : CMMediaType
 #else
@@ -88,7 +87,7 @@ enum
 	kCMMediaType_Subtitle			= 'sbtl',
 	kCMMediaType_TimeCode			= 'tmcd',
 	kCMMediaType_Metadata			= 'meta',
-};
+} API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
 
 /*! 
 	@functiongroup	Media-type-agnostic functions
@@ -117,7 +116,7 @@ CMFormatDescriptionCreate(
 																	Dictionary of extensions to be attached to the CMFormatDescription. May be NULL. */
 	CM_RETURNS_RETAINED_PARAMETER CMFormatDescriptionRef CM_NULLABLE * CM_NONNULL formatDescriptionOut)	/*! @param formatDescriptionOut
 																	Receives the newly-created CMFormatDescription. */
-							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
+							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
 
 CF_IMPLICIT_BRIDGING_ENABLED
 
@@ -129,7 +128,7 @@ CF_IMPLICIT_BRIDGING_ENABLED
 */
 CM_EXPORT
 CFTypeID CMFormatDescriptionGetTypeID(void)
-							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
+							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
 
 /*!
 	@function	CMFormatDescriptionEqual
@@ -143,7 +142,7 @@ Boolean CMFormatDescriptionEqual(
 									The first formatDescription. */
 	CMFormatDescriptionRef CM_NULLABLE otherFormatDescription)	/*! @param otherFormatDescription
 									The second formatDescription. */
-							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
+							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
 
 /*!
 	@function	CMFormatDescriptionEqualIgnoringExtensionKeys
@@ -167,7 +166,7 @@ Boolean CMFormatDescriptionEqualIgnoringExtensionKeys(
 	CMFormatDescriptionRef CM_NULLABLE otherFormatDescription,
 	CFTypeRef CM_NULLABLE formatDescriptionExtensionKeysToIgnore,
 	CFTypeRef CM_NULLABLE sampleDescriptionExtensionAtomKeysToIgnore )
-							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_3);
+							API_AVAILABLE(macos(10.7), ios(4.3), tvos(9.0), watchos(6.0));
 
 /*!
 	@function	CMFormatDescriptionGetMediaType
@@ -178,7 +177,7 @@ Boolean CMFormatDescriptionEqualIgnoringExtensionKeys(
 CM_EXPORT
 CMMediaType CMFormatDescriptionGetMediaType(
 	CMFormatDescriptionRef CM_NONNULL desc)	/*! @param desc CMFormatDescription being interrogated */
-							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
+							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
 
 /*!
 	@function	CMFormatDescriptionGetMediaSubType
@@ -197,7 +196,7 @@ CMMediaType CMFormatDescriptionGetMediaType(
 CM_EXPORT
 FourCharCode CMFormatDescriptionGetMediaSubType(
 	CMFormatDescriptionRef CM_NONNULL desc)	/*! @param desc CMFormatDescription being interrogated */
-							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
+							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
 
 /*!
 	@function	CMFormatDescriptionGetExtensions
@@ -212,7 +211,7 @@ FourCharCode CMFormatDescriptionGetMediaSubType(
 CM_EXPORT
 CFDictionaryRef CM_NULLABLE CMFormatDescriptionGetExtensions(
 	CMFormatDescriptionRef CM_NONNULL desc)	/*! @param desc CMFormatDescription being interrogated */
-							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
+							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
 
 CM_ASSUME_NONNULL_BEGIN
 
@@ -225,7 +224,7 @@ CM_ASSUME_NONNULL_BEGIN
 				CFDictionary, CFDate, or CFData.
 */
 CM_EXPORT const CFStringRef kCMFormatDescriptionExtension_OriginalCompressionSettings	// CFDictionary
-							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
+							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
 
 /*!
 	@define 	kCMFormatDescriptionExtension_SampleDescriptionExtensionAtoms
@@ -237,7 +236,7 @@ CM_EXPORT const CFStringRef kCMFormatDescriptionExtension_OriginalCompressionSet
 				specific type) to CFArrays of CFData containing those payloads.
 */
 CM_EXPORT const CFStringRef kCMFormatDescriptionExtension_SampleDescriptionExtensionAtoms	// CFDictionary of CFString (four-char-code, atom type) -> ( CFData (atom payload) or CFArray of CFData (atom payload) )
-							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
+							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
 
 /*!
 	@define 	kCMFormatDescriptionExtension_VerbatimSampleDescription
@@ -249,7 +248,7 @@ CM_EXPORT const CFStringRef kCMFormatDescriptionExtension_SampleDescriptionExten
 				delete this extension from the clone, or your modifications could be lost.
 */
 CM_EXPORT const CFStringRef kCMFormatDescriptionExtension_VerbatimSampleDescription		// CFData
-							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
+							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
 
 /*!
 	@define 	kCMFormatDescriptionExtension_VerbatimISOSampleEntry
@@ -261,7 +260,7 @@ CM_EXPORT const CFStringRef kCMFormatDescriptionExtension_VerbatimSampleDescript
 				delete this extension from the clone, or your modifications could be lost.
 */
 CM_EXPORT const CFStringRef kCMFormatDescriptionExtension_VerbatimISOSampleEntry		// CFData
-							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
+							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
 	
 CM_ASSUME_NONNULL_END
 
@@ -280,7 +279,7 @@ CM_EXPORT
 CFPropertyListRef CM_NULLABLE CMFormatDescriptionGetExtension(
 	CMFormatDescriptionRef CM_NONNULL desc,	/*! @param desc				CMFormatDescription being interrogated */
 	CFStringRef CM_NONNULL extensionKey)		/*! @param extensionID		Key of extension to be returned. Cannot be NULL. */
-							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
+							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
 
 				
 #pragma mark CMAudioFormatDescription
@@ -295,7 +294,7 @@ CFPropertyListRef CM_NULLABLE CMFormatDescriptionGetExtension(
 	@constant	kCMAudioCodecType_AAC_LCProtected iTMS protected low-complexity AAC.
 	@constant	kCMAudioCodecType_AAC_AudibleProtected Audible's protected AAC.
 */
-typedef FourCharCode CMAudioCodecType;
+typedef FourCharCode CMAudioCodecType API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
 #if COREMEDIA_USE_DERIVED_ENUMS_FOR_CONSTANTS
 enum : CMAudioCodecType
 #else
@@ -304,13 +303,13 @@ enum
 {
     kCMAudioCodecType_AAC_LCProtected      = 'paac',
 	kCMAudioCodecType_AAC_AudibleProtected = 'aaac'
-};
+} API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
 
 /*!
 	@typedef CMAudioFormatDescriptionRef
 	SYnonym type used for manipulating audio CMFormatDescriptions
 */
-typedef CMFormatDescriptionRef CMAudioFormatDescriptionRef;
+typedef CMFormatDescriptionRef CMAudioFormatDescriptionRef API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
 
 CF_IMPLICIT_BRIDGING_DISABLED
 
@@ -335,7 +334,7 @@ OSStatus CMAudioFormatDescriptionCreate(
 																			Values are always property list objects (ie. CFData, CFString, CFArray, CFDictionary,
 																			CFDate, CFBoolean, or CFNumber). Can be NULL. */
 	CM_RETURNS_RETAINED_PARAMETER CMAudioFormatDescriptionRef CM_NULLABLE * CM_NONNULL formatDescriptionOut)		/*! @param formatDescriptionOut			Returned newly created audio CMFormatDescription */
-							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
+							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
 
 CF_IMPLICIT_BRIDGING_ENABLED
 
@@ -349,7 +348,7 @@ CF_IMPLICIT_BRIDGING_ENABLED
 CM_EXPORT
 const AudioStreamBasicDescription * CM_NULLABLE CMAudioFormatDescriptionGetStreamBasicDescription(
 	CMAudioFormatDescriptionRef CM_NONNULL desc)		/*! @param desc		CMFormatDescription being interrogated. */
-							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
+							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
 
 /*!
 	@function	CMAudioFormatDescriptionGetMagicCookie
@@ -365,7 +364,7 @@ CM_EXPORT
 const void * CM_NULLABLE CMAudioFormatDescriptionGetMagicCookie(
 	CMAudioFormatDescriptionRef CM_NONNULL desc,		/*! @param desc				CMFormatDescription being interrogated. */
 	size_t * CM_NULLABLE sizeOut)						/*! @param sizeOut	Pointer to variable that will be written with the size of the cookie. Can be NULL. */
-							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
+							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
 
 /*!
 	@function	CMAudioFormatDescriptionGetChannelLayout
@@ -382,7 +381,7 @@ const AudioChannelLayout * CM_NULLABLE CMAudioFormatDescriptionGetChannelLayout(
 	CMAudioFormatDescriptionRef CM_NONNULL desc,		/*! @param desc			CMFormatDescription being interrogated. */
 	size_t * CM_NULLABLE sizeOut)						/*! @param sizeOut	Pointer to variable that will be written with the size of the layout.
 																	Can be NULL. */    
-							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
+							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
 
 /*!
 	@function	CMAudioFormatDescriptionGetFormatList
@@ -399,7 +398,7 @@ const AudioFormatListItem * CM_NULLABLE CMAudioFormatDescriptionGetFormatList(
 	CMAudioFormatDescriptionRef CM_NONNULL desc,		/*! @param desc             CMFormatDescription being interrogated. */
 	size_t * CM_NULLABLE sizeOut)			            /*! @param sizeOut	Pointer to variable that will be written with the size of the formatList.
                                                                         Can be NULL. */
-							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
+							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
 
 /*!
 	@function	CMAudioFormatDescriptionGetRichestDecodableFormat
@@ -414,7 +413,7 @@ const AudioFormatListItem * CM_NULLABLE CMAudioFormatDescriptionGetFormatList(
 CM_EXPORT
 const AudioFormatListItem * CM_NULLABLE CMAudioFormatDescriptionGetRichestDecodableFormat(
 	CMAudioFormatDescriptionRef CM_NONNULL desc)	     /*! @param desc             CMFormatDescription being interrogated. */
-							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
+							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
 
 
 /*!
@@ -428,7 +427,7 @@ const AudioFormatListItem * CM_NULLABLE CMAudioFormatDescriptionGetRichestDecoda
 CM_EXPORT
 const AudioFormatListItem * CM_NULLABLE CMAudioFormatDescriptionGetMostCompatibleFormat(
 	CMAudioFormatDescriptionRef CM_NONNULL desc)	     /*! @param desc             CMFormatDescription being interrogated. */
-							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
+							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
 
 CF_IMPLICIT_BRIDGING_DISABLED
 
@@ -445,7 +444,7 @@ CM_EXPORT OSStatus CMAudioFormatDescriptionCreateSummary(
 		CFArrayRef CM_NONNULL formatDescriptionArray, // CFArray[CMAudioFormatDescription]
 		uint32_t flags, // pass 0
 		CM_RETURNS_RETAINED_PARAMETER CMAudioFormatDescriptionRef CM_NULLABLE * CM_NONNULL formatDescriptionOut )
-							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
+							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
 
 CF_IMPLICIT_BRIDGING_ENABLED
 
@@ -459,7 +458,7 @@ CF_IMPLICIT_BRIDGING_ENABLED
 	@constant	CMAudioFormatDescriptionMask_Extensions					Represents the format description extensions.
 	@constant	CMAudioFormatDescriptionMask_All						Represents all the parts of an audio format description.
 */
-typedef uint32_t CMAudioFormatDescriptionMask;
+typedef uint32_t CMAudioFormatDescriptionMask API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
 #if COREMEDIA_USE_DERIVED_ENUMS_FOR_CONSTANTS
 enum : CMAudioFormatDescriptionMask
 #else
@@ -474,7 +473,7 @@ enum
 															| kCMAudioFormatDescriptionMask_MagicCookie
 															| kCMAudioFormatDescriptionMask_ChannelLayout
 															| kCMAudioFormatDescriptionMask_Extensions
-};
+} API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
 
 /*!
 	@function	CMAudioFormatDescriptionEqual
@@ -495,7 +494,7 @@ Boolean CMAudioFormatDescriptionEqual(
 	CMAudioFormatDescriptionMask * CM_NULLABLE equalityMaskOut)	/*! @param equalityMaskOut  Pointer to variable that will be written with the results by part.
 																				Bits not set in equalityMask will not be set in equalityMaskOut.
 																				Can be NULL. */
-							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
+							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
 
 #pragma mark CMVideoFormatDescription
 
@@ -507,7 +506,7 @@ Boolean CMAudioFormatDescriptionEqual(
 	@typedef CMVideoFormatDescriptionRef
 	Synonym type used for manipulating video CMFormatDescriptions
 */
-typedef CMFormatDescriptionRef CMVideoFormatDescriptionRef;
+typedef CMFormatDescriptionRef CMVideoFormatDescriptionRef API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
 
 /*!
 	@enum CMPixelFormatType
@@ -530,7 +529,7 @@ typedef CMFormatDescriptionRef CMVideoFormatDescriptionRef;
 	@constant	kCMPixelFormat_444YpCbCr10 Component Y'CbCr 10-bit 4:4:4
 	@constant	kCMPixelFormat_8IndexedGray_WhiteIsZero 8 bit indexed gray, white is zero
 */
-typedef FourCharCode CMPixelFormatType;
+typedef FourCharCode CMPixelFormatType API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
 #if COREMEDIA_USE_DERIVED_ENUMS_FOR_CONSTANTS
 enum : CMPixelFormatType
 #else
@@ -553,7 +552,7 @@ enum
 	kCMPixelFormat_422YpCbCr10              = 'v210',
 	kCMPixelFormat_444YpCbCr10              = 'v410',
 	kCMPixelFormat_8IndexedGray_WhiteIsZero = 0x00000028,
-};
+} API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
 
 /*!
 	@enum CMVideoCodecType
@@ -569,6 +568,9 @@ enum
 	@constant	kCMVideoCodecType_H263	ITU-T H.263 format
 	@constant	kCMVideoCodecType_H264	ITU-T H.264 format (AKA ISO/IEC 14496-10 - MPEG-4 Part 10, Advanced Video Coding format)
 	@constant	kCMVideoCodecType_HEVC	ITU-T HEVC format
+	@constant	kCMVideoCodecType_HEVCWithAlpha	HEVC format with alpha support defined in Annex-F.
+				  IMPORTANT NOTE: this constant is used to select the appropriate encoder, but is NOT used on the encoded content,
+				  which is backwards compatible and hence uses 'hvc1' as its codec type.
 	@constant	kCMVideoCodecType_MPEG4Video	ISO/IEC Moving Picture Experts Group (MPEG) MPEG-4 Part 2 video format
 	@constant	kCMVideoCodecType_MPEG2Video	MPEG-2 video format
 	@constant	kCMVideoCodecType_MPEG1Video	MPEG-1 video format
@@ -592,7 +594,7 @@ enum
 	@constant	kCMVideoCodecType_AppleProResRAW	Apple ProRes RAW format
 	@constant	kCMVideoCodecType_AppleProResRAWHQ	Apple ProRes RAW HQ format
 */
-typedef FourCharCode CMVideoCodecType;
+typedef FourCharCode CMVideoCodecType API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
 #if COREMEDIA_USE_DERIVED_ENUMS_FOR_CONSTANTS
 enum : CMVideoCodecType
 #else
@@ -609,6 +611,7 @@ enum
 	kCMVideoCodecType_H263             = 'h263',
 	kCMVideoCodecType_H264             = 'avc1',
 	kCMVideoCodecType_HEVC             = 'hvc1',
+	kCMVideoCodecType_HEVCWithAlpha    = 'muxa',
 	kCMVideoCodecType_MPEG4Video       = 'mp4v',
 	kCMVideoCodecType_MPEG2Video       = 'mp2v',
 	kCMVideoCodecType_MPEG1Video       = 'mp1v',
@@ -634,7 +637,7 @@ enum
 
 	kCMVideoCodecType_AppleProResRAW   = 'aprn',
 	kCMVideoCodecType_AppleProResRAWHQ = 'aprh',
-};
+} API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
 
 /*!
 	@typedef CMVideoDimensions
@@ -643,21 +646,21 @@ enum
 typedef struct {
 	int32_t width;
 	int32_t height;
-} CMVideoDimensions;
+} CMVideoDimensions API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
 
 CM_ASSUME_NONNULL_BEGIN
 
 CM_EXPORT const CFStringRef kCMFormatDescriptionExtension_FormatName	// CFString
-							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
+							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
 CM_EXPORT const CFStringRef kCMFormatDescriptionExtension_Depth			// CFNumber with depth value as directed by http://developer.apple.com/qa/qa2001/qa1183.html
-							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
+							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
 
 // Many of the following extension keys and values are the same as the corresponding CVImageBuffer attachment keys and values
-CM_EXPORT const CFStringRef kCMFormatDescriptionExtension_CleanAperture __OSX_AVAILABLE_STARTING(__MAC_10_11,__IPHONE_9_0);
-CM_EXPORT const CFStringRef kCMFormatDescriptionKey_CleanApertureWidth __OSX_AVAILABLE_STARTING(__MAC_10_11,__IPHONE_9_0);
-CM_EXPORT const CFStringRef kCMFormatDescriptionKey_CleanApertureHeight __OSX_AVAILABLE_STARTING(__MAC_10_11,__IPHONE_9_0);
-CM_EXPORT const CFStringRef kCMFormatDescriptionKey_CleanApertureHorizontalOffset __OSX_AVAILABLE_STARTING(__MAC_10_11,__IPHONE_9_0);
-CM_EXPORT const CFStringRef kCMFormatDescriptionKey_CleanApertureVerticalOffset __OSX_AVAILABLE_STARTING(__MAC_10_11,__IPHONE_9_0);
+CM_EXPORT const CFStringRef kCMFormatDescriptionExtension_CleanAperture API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(6.0));
+CM_EXPORT const CFStringRef kCMFormatDescriptionKey_CleanApertureWidth API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(6.0));
+CM_EXPORT const CFStringRef kCMFormatDescriptionKey_CleanApertureHeight API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(6.0));
+CM_EXPORT const CFStringRef kCMFormatDescriptionKey_CleanApertureHorizontalOffset API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(6.0));
+CM_EXPORT const CFStringRef kCMFormatDescriptionKey_CleanApertureVerticalOffset API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(6.0));
 #define kCMFormatDescriptionExtension_CleanAperture				kCVImageBufferCleanApertureKey					// CFDictionary containing the following four keys
 #define kCMFormatDescriptionKey_CleanApertureWidth				kCVImageBufferCleanApertureWidthKey				// CFNumber
 #define kCMFormatDescriptionKey_CleanApertureHeight				kCVImageBufferCleanApertureHeightKey			// CFNumber
@@ -667,104 +670,106 @@ CM_EXPORT const CFStringRef kCMFormatDescriptionKey_CleanApertureVerticalOffset 
 // These additional keys are used to record the precise numerator and denominator in cases where the number is not an integer.
 // NOTE: Some modules only read the float-valued keys, so if you set any of the ...Rational keys, you should also set the corresponding floating-point keys.
 CM_EXPORT const CFStringRef kCMFormatDescriptionKey_CleanApertureWidthRational									// CFArray of 2 CFNumbers: numerator, denominator
-							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
+							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
 CM_EXPORT const CFStringRef kCMFormatDescriptionKey_CleanApertureHeightRational									// CFArray of 2 CFNumbers: numerator, denominator
-							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
+							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
 CM_EXPORT const CFStringRef kCMFormatDescriptionKey_CleanApertureHorizontalOffsetRational						// CFArray of 2 CFNumbers: numerator, denominator
-							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
+							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
 CM_EXPORT const CFStringRef kCMFormatDescriptionKey_CleanApertureVerticalOffsetRational							// CFArray of 2 CFNumbers: numerator, denominator
-							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
+							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
 
-CM_EXPORT const CFStringRef kCMFormatDescriptionExtension_FieldCount __OSX_AVAILABLE_STARTING(__MAC_10_11,__IPHONE_9_0);
+CM_EXPORT const CFStringRef kCMFormatDescriptionExtension_FieldCount API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(6.0));
 #define kCMFormatDescriptionExtension_FieldCount				kCVImageBufferFieldCountKey						// CFNumber, 1 or 2
 
-CM_EXPORT const CFStringRef kCMFormatDescriptionExtension_FieldDetail __OSX_AVAILABLE_STARTING(__MAC_10_11,__IPHONE_9_0);
-CM_EXPORT const CFStringRef kCMFormatDescriptionFieldDetail_TemporalTopFirst __OSX_AVAILABLE_STARTING(__MAC_10_11,__IPHONE_9_0);
-CM_EXPORT const CFStringRef kCMFormatDescriptionFieldDetail_TemporalBottomFirst __OSX_AVAILABLE_STARTING(__MAC_10_11,__IPHONE_9_0);
-CM_EXPORT const CFStringRef kCMFormatDescriptionFieldDetail_SpatialFirstLineEarly __OSX_AVAILABLE_STARTING(__MAC_10_11,__IPHONE_9_0);
-CM_EXPORT const CFStringRef kCMFormatDescriptionFieldDetail_SpatialFirstLineLate __OSX_AVAILABLE_STARTING(__MAC_10_11,__IPHONE_9_0);
+CM_EXPORT const CFStringRef kCMFormatDescriptionExtension_FieldDetail API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(6.0));
+CM_EXPORT const CFStringRef kCMFormatDescriptionFieldDetail_TemporalTopFirst API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(6.0));
+CM_EXPORT const CFStringRef kCMFormatDescriptionFieldDetail_TemporalBottomFirst API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(6.0));
+CM_EXPORT const CFStringRef kCMFormatDescriptionFieldDetail_SpatialFirstLineEarly API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(6.0));
+CM_EXPORT const CFStringRef kCMFormatDescriptionFieldDetail_SpatialFirstLineLate API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(6.0));
 #define kCMFormatDescriptionExtension_FieldDetail				kCVImageBufferFieldDetailKey					// CFString with one of the following four values
 #define kCMFormatDescriptionFieldDetail_TemporalTopFirst		kCVImageBufferFieldDetailTemporalTopFirst
 #define kCMFormatDescriptionFieldDetail_TemporalBottomFirst		kCVImageBufferFieldDetailTemporalBottomFirst
 #define kCMFormatDescriptionFieldDetail_SpatialFirstLineEarly	kCVImageBufferFieldDetailSpatialFirstLineEarly
 #define kCMFormatDescriptionFieldDetail_SpatialFirstLineLate	kCVImageBufferFieldDetailSpatialFirstLineLate
 
-CM_EXPORT const CFStringRef kCMFormatDescriptionExtension_PixelAspectRatio __OSX_AVAILABLE_STARTING(__MAC_10_11,__IPHONE_9_0);
-CM_EXPORT const CFStringRef kCMFormatDescriptionKey_PixelAspectRatioHorizontalSpacing __OSX_AVAILABLE_STARTING(__MAC_10_11,__IPHONE_9_0);
-CM_EXPORT const CFStringRef kCMFormatDescriptionKey_PixelAspectRatioVerticalSpacing __OSX_AVAILABLE_STARTING(__MAC_10_11,__IPHONE_9_0);
+CM_EXPORT const CFStringRef kCMFormatDescriptionExtension_PixelAspectRatio API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(6.0));
+CM_EXPORT const CFStringRef kCMFormatDescriptionKey_PixelAspectRatioHorizontalSpacing API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(6.0));
+CM_EXPORT const CFStringRef kCMFormatDescriptionKey_PixelAspectRatioVerticalSpacing API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(6.0));
 #define kCMFormatDescriptionExtension_PixelAspectRatio			kCVImageBufferPixelAspectRatioKey				// CFDictionary with the following two keys
 #define kCMFormatDescriptionKey_PixelAspectRatioHorizontalSpacing	kCVImageBufferPixelAspectRatioHorizontalSpacingKey	// CFNumber
 #define kCMFormatDescriptionKey_PixelAspectRatioVerticalSpacing	kCVImageBufferPixelAspectRatioVerticalSpacingKey	// CFNumber
 
-CM_EXPORT const CFStringRef kCMFormatDescriptionExtension_ColorPrimaries __OSX_AVAILABLE_STARTING(__MAC_10_11,__IPHONE_9_0);
-CM_EXPORT const CFStringRef kCMFormatDescriptionColorPrimaries_ITU_R_709_2 __OSX_AVAILABLE_STARTING(__MAC_10_11,__IPHONE_9_0);
-CM_EXPORT const CFStringRef kCMFormatDescriptionColorPrimaries_EBU_3213 __OSX_AVAILABLE_STARTING(__MAC_10_11,__IPHONE_9_0);
-CM_EXPORT const CFStringRef kCMFormatDescriptionColorPrimaries_SMPTE_C __OSX_AVAILABLE_STARTING(__MAC_10_11,__IPHONE_9_0);
+CM_EXPORT const CFStringRef kCMFormatDescriptionExtension_ColorPrimaries API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(6.0));
+CM_EXPORT const CFStringRef kCMFormatDescriptionColorPrimaries_ITU_R_709_2 API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(6.0));
+CM_EXPORT const CFStringRef kCMFormatDescriptionColorPrimaries_EBU_3213 API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(6.0));
+CM_EXPORT const CFStringRef kCMFormatDescriptionColorPrimaries_SMPTE_C API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(6.0));
 #define kCMFormatDescriptionExtension_ColorPrimaries			kCVImageBufferColorPrimariesKey					// CFString describing the color primaries. This key can be one of the following values:
 #define kCMFormatDescriptionColorPrimaries_ITU_R_709_2			kCVImageBufferColorPrimaries_ITU_R_709_2		// CFString
 #define kCMFormatDescriptionColorPrimaries_EBU_3213				kCVImageBufferColorPrimaries_EBU_3213			// CFString
 #define kCMFormatDescriptionColorPrimaries_SMPTE_C				kCVImageBufferColorPrimaries_SMPTE_C			// CFString
 CM_EXPORT const CFStringRef kCMFormatDescriptionColorPrimaries_DCI_P3											// same as kCVImageBufferColorPrimaries_DCI_P3
-							__OSX_AVAILABLE_STARTING(__MAC_10_11,__IPHONE_9_0);
+							API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(6.0));
 CM_EXPORT const CFStringRef kCMFormatDescriptionColorPrimaries_P3_D65											// same as kCVImageBufferColorPrimaries_P3_D65
-							__OSX_AVAILABLE_STARTING(__MAC_10_11,__IPHONE_9_0);
+							API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(6.0));
 CM_EXPORT const CFStringRef kCMFormatDescriptionColorPrimaries_ITU_R_2020										// same as kCVImageBufferColorPrimaries_ITU_R_2020
-							__OSX_AVAILABLE_STARTING(__MAC_10_11,__IPHONE_9_0);
+							API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(6.0));
 CM_EXPORT const CFStringRef kCMFormatDescriptionColorPrimaries_P22												// same as kCVImageBufferColorPrimaries_P22
-							__OSX_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_6_0);
+							API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0));
 
-CM_EXPORT const CFStringRef kCMFormatDescriptionExtension_TransferFunction __OSX_AVAILABLE_STARTING(__MAC_10_11,__IPHONE_9_0);
-CM_EXPORT const CFStringRef kCMFormatDescriptionTransferFunction_ITU_R_709_2 __OSX_AVAILABLE_STARTING(__MAC_10_11,__IPHONE_9_0);
-CM_EXPORT const CFStringRef kCMFormatDescriptionTransferFunction_SMPTE_240M_1995 __OSX_AVAILABLE_STARTING(__MAC_10_11,__IPHONE_9_0);
-CM_EXPORT const CFStringRef kCMFormatDescriptionTransferFunction_UseGamma __OSX_AVAILABLE_STARTING(__MAC_10_11,__IPHONE_9_0);
+CM_EXPORT const CFStringRef kCMFormatDescriptionExtension_TransferFunction API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(6.0));
+CM_EXPORT const CFStringRef kCMFormatDescriptionTransferFunction_ITU_R_709_2 API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(6.0));
+CM_EXPORT const CFStringRef kCMFormatDescriptionTransferFunction_SMPTE_240M_1995 API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(6.0));
+CM_EXPORT const CFStringRef kCMFormatDescriptionTransferFunction_UseGamma API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(6.0));
 #define kCMFormatDescriptionExtension_TransferFunction			kCVImageBufferTransferFunctionKey				// CFString describing the transfer function. This key can be one of the following values:
 #define kCMFormatDescriptionTransferFunction_ITU_R_709_2		kCVImageBufferTransferFunction_ITU_R_709_2		// CFString
 #define kCMFormatDescriptionTransferFunction_SMPTE_240M_1995	kCVImageBufferTransferFunction_SMPTE_240M_1995	// CFString
 #define kCMFormatDescriptionTransferFunction_UseGamma			kCVImageBufferTransferFunction_UseGamma			// CFString
 CM_EXPORT const CFStringRef kCMFormatDescriptionTransferFunction_ITU_R_2020										// same as kCVImageBufferTransferFunction_ITU_R_2020. note: semantically equivalent to kCMFormatDescriptionTransferFunction_ITU_R_709_2, which is preferred.
-							__OSX_AVAILABLE_STARTING(__MAC_10_11,__IPHONE_9_0);
+							API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(6.0));
 CM_EXPORT const CFStringRef kCMFormatDescriptionTransferFunction_SMPTE_ST_428_1									// same as kCVImageBufferTransferFunction_SMPTE_ST_428_1
-							__OSX_AVAILABLE_STARTING(__MAC_10_12,__IPHONE_10_0);
+							API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0), watchos(6.0));
 CM_EXPORT const CFStringRef kCMFormatDescriptionTransferFunction_SMPTE_ST_2084_PQ								// same as kCVImageBufferTransferFunction_SMPTE_ST_2084_PQ
-							__OSX_AVAILABLE_STARTING(__MAC_10_13,__IPHONE_11_0);
+							API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(6.0));
 CM_EXPORT const CFStringRef kCMFormatDescriptionTransferFunction_ITU_R_2100_HLG								// same as kCVImageBufferTransferFunction_ITU_R_2100_HLG
-							__OSX_AVAILABLE_STARTING(__MAC_10_13,__IPHONE_11_0);
+							API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(6.0));
 CM_EXPORT const CFStringRef kCMFormatDescriptionTransferFunction_Linear											// same as kCVImageBufferTransferFunction_Linear
-							API_AVAILABLE(macosx(10.14), ios(12.0), tvos(12.0), watchos(5.0));
+							API_AVAILABLE(macos(10.14), ios(12.0), tvos(12.0), watchos(6.0));
+CM_EXPORT const CFStringRef kCMFormatDescriptionTransferFunction_sRGB										// same as kCVImageBufferTransferFunction_sRGB
+							API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0), watchos(6.0));
 
-CM_EXPORT const CFStringRef kCMFormatDescriptionExtension_GammaLevel __OSX_AVAILABLE_STARTING(__MAC_10_11,__IPHONE_9_0);
+CM_EXPORT const CFStringRef kCMFormatDescriptionExtension_GammaLevel API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(6.0));
 #define kCMFormatDescriptionExtension_GammaLevel				kCVImageBufferGammaLevelKey						// CFNumber describing the gamma level, used in absence of (or ignorance of) kCMFormatDescriptionExtension_TransferFunction
 
-CM_EXPORT const CFStringRef kCMFormatDescriptionExtension_YCbCrMatrix __OSX_AVAILABLE_STARTING(__MAC_10_11,__IPHONE_9_0);
-CM_EXPORT const CFStringRef kCMFormatDescriptionYCbCrMatrix_ITU_R_709_2 __OSX_AVAILABLE_STARTING(__MAC_10_11,__IPHONE_9_0);
-CM_EXPORT const CFStringRef kCMFormatDescriptionYCbCrMatrix_ITU_R_601_4 __OSX_AVAILABLE_STARTING(__MAC_10_11,__IPHONE_9_0);
-CM_EXPORT const CFStringRef kCMFormatDescriptionYCbCrMatrix_SMPTE_240M_1995 __OSX_AVAILABLE_STARTING(__MAC_10_11,__IPHONE_9_0);
+CM_EXPORT const CFStringRef kCMFormatDescriptionExtension_YCbCrMatrix API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(6.0));
+CM_EXPORT const CFStringRef kCMFormatDescriptionYCbCrMatrix_ITU_R_709_2 API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(6.0));
+CM_EXPORT const CFStringRef kCMFormatDescriptionYCbCrMatrix_ITU_R_601_4 API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(6.0));
+CM_EXPORT const CFStringRef kCMFormatDescriptionYCbCrMatrix_SMPTE_240M_1995 API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(6.0));
 #define kCMFormatDescriptionExtension_YCbCrMatrix				kCVImageBufferYCbCrMatrixKey					// CFString describing the color matrix for YCbCr->RGB. This key can be one of the following values:
 #define kCMFormatDescriptionYCbCrMatrix_ITU_R_709_2				kCVImageBufferYCbCrMatrix_ITU_R_709_2			// CFString
 #define kCMFormatDescriptionYCbCrMatrix_ITU_R_601_4				kCVImageBufferYCbCrMatrix_ITU_R_601_4			// CFString
 #define kCMFormatDescriptionYCbCrMatrix_SMPTE_240M_1995			kCVImageBufferYCbCrMatrix_SMPTE_240M_1995		// CFString
 CM_EXPORT const CFStringRef kCMFormatDescriptionYCbCrMatrix_ITU_R_2020											// same as kCVImageBufferYCbCrMatrix_ITU_R_2020
-							__OSX_AVAILABLE_STARTING(__MAC_10_11,__IPHONE_9_0);
+							API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(6.0));
 
 CM_EXPORT const CFStringRef kCMFormatDescriptionExtension_FullRangeVideo										// CFBoolean; by default, false for YCbCr-based compressed formats, indicating that pixel values are video-range rather than full-range
-							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_3);
+							API_AVAILABLE(macos(10.7), ios(4.3), tvos(9.0), watchos(6.0));
 
 CM_EXPORT const CFStringRef kCMFormatDescriptionExtension_ICCProfile											// CFData
-							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
+							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
 
 CM_EXPORT const CFStringRef kCMFormatDescriptionExtension_BytesPerRow											// CFNumber describing the bytes per row of raster pixel data (not used for compressed, planar, tiled or downsampled formats)
-							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
+							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
 
 /* Chroma siting information. For progressive images, only the TopField value is used. */
-CM_EXPORT const CFStringRef kCMFormatDescriptionExtension_ChromaLocationTopField __OSX_AVAILABLE_STARTING(__MAC_10_11,__IPHONE_9_0);
-CM_EXPORT const CFStringRef kCMFormatDescriptionExtension_ChromaLocationBottomField __OSX_AVAILABLE_STARTING(__MAC_10_11,__IPHONE_9_0);
-CM_EXPORT const CFStringRef kCMFormatDescriptionChromaLocation_Left __OSX_AVAILABLE_STARTING(__MAC_10_11,__IPHONE_9_0);
-CM_EXPORT const CFStringRef kCMFormatDescriptionChromaLocation_Center __OSX_AVAILABLE_STARTING(__MAC_10_11,__IPHONE_9_0);
-CM_EXPORT const CFStringRef kCMFormatDescriptionChromaLocation_TopLeft __OSX_AVAILABLE_STARTING(__MAC_10_11,__IPHONE_9_0);
-CM_EXPORT const CFStringRef kCMFormatDescriptionChromaLocation_Top __OSX_AVAILABLE_STARTING(__MAC_10_11,__IPHONE_9_0);
-CM_EXPORT const CFStringRef kCMFormatDescriptionChromaLocation_BottomLeft __OSX_AVAILABLE_STARTING(__MAC_10_11,__IPHONE_9_0);
-CM_EXPORT const CFStringRef kCMFormatDescriptionChromaLocation_Bottom __OSX_AVAILABLE_STARTING(__MAC_10_11,__IPHONE_9_0);
-CM_EXPORT const CFStringRef kCMFormatDescriptionChromaLocation_DV420 __OSX_AVAILABLE_STARTING(__MAC_10_11,__IPHONE_9_0);
+CM_EXPORT const CFStringRef kCMFormatDescriptionExtension_ChromaLocationTopField API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(6.0));
+CM_EXPORT const CFStringRef kCMFormatDescriptionExtension_ChromaLocationBottomField API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(6.0));
+CM_EXPORT const CFStringRef kCMFormatDescriptionChromaLocation_Left API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(6.0));
+CM_EXPORT const CFStringRef kCMFormatDescriptionChromaLocation_Center API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(6.0));
+CM_EXPORT const CFStringRef kCMFormatDescriptionChromaLocation_TopLeft API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(6.0));
+CM_EXPORT const CFStringRef kCMFormatDescriptionChromaLocation_Top API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(6.0));
+CM_EXPORT const CFStringRef kCMFormatDescriptionChromaLocation_BottomLeft API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(6.0));
+CM_EXPORT const CFStringRef kCMFormatDescriptionChromaLocation_Bottom API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(6.0));
+CM_EXPORT const CFStringRef kCMFormatDescriptionChromaLocation_DV420 API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(6.0));
 #define kCMFormatDescriptionExtension_ChromaLocationTopField		kCVImageBufferChromaLocationTopFieldKey		// CFString with one of the following CFString values
 #define kCMFormatDescriptionExtension_ChromaLocationBottomField 	kCVImageBufferChromaLocationBottomFieldKey	// CFString with one of the following CFString values
 #define kCMFormatDescriptionChromaLocation_Left						kCVImageBufferChromaLocation_Left			// Chroma sample is horizontally co-sited with the left column of luma samples, but centered vertically.
@@ -777,7 +782,7 @@ CM_EXPORT const CFStringRef kCMFormatDescriptionChromaLocation_DV420 __OSX_AVAIL
 
 /* MPEG-2-conformant formats */
 CM_EXPORT const CFStringRef kCMFormatDescriptionConformsToMPEG2VideoProfile			// CFNumber specifying a kCMMPEG2VideoProfile_*
-							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
+							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
 
 #if COREMEDIA_USE_DERIVED_ENUMS_FOR_CONSTANTS
 enum : int32_t
@@ -823,30 +828,45 @@ enum
 	kCMMPEG2VideoProfile_XDCAM_HD422_720p25_CBR50 = 'xd55',
 	kCMMPEG2VideoProfile_XDCAM_HD422_720p30_CBR50 = 'xd51',
 	kCMMPEG2VideoProfile_XF = 'xfz1',
-};
+} API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
 
 CM_EXPORT const CFStringRef kCMFormatDescriptionExtension_TemporalQuality			// CFNumber
-							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
+							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
 CM_EXPORT const CFStringRef kCMFormatDescriptionExtension_SpatialQuality			// CFNumber
-							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
+							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
 
-CM_EXPORT const CFStringRef kCMFormatDescriptionExtension_VerbatimImageDescription __OSX_AVAILABLE_STARTING(__MAC_10_11,__IPHONE_9_0);
+CM_EXPORT const CFStringRef kCMFormatDescriptionExtension_VerbatimImageDescription API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(6.0));
 #define kCMFormatDescriptionExtension_VerbatimImageDescription	kCMFormatDescriptionExtension_VerbatimSampleDescription
 
 CM_EXPORT const CFStringRef kCMFormatDescriptionExtension_Version					// CFNumber
-							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
+							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
 CM_EXPORT const CFStringRef kCMFormatDescriptionExtension_RevisionLevel				// CFNumber
-							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
+							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
 CM_EXPORT const CFStringRef kCMFormatDescriptionExtension_Vendor					// CFString of fourCC
-							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
+							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
 
 CM_EXPORT const CFStringRef kCMFormatDescriptionVendor_Apple
-							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
+							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
 
 CM_EXPORT const CFStringRef kCMFormatDescriptionExtension_MasteringDisplayColorVolume	// CFData(24 bytes); big-endian structure; same as kCVImageBufferMasteringDisplayColorVolumeKey; matches payload of ISO/IEC 23008-2:2015(E), D.2.28 Mastering display colour volume SEI message
-							__OSX_AVAILABLE_STARTING(__MAC_10_13,__IPHONE_11_0);
+							API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(6.0));
 CM_EXPORT const CFStringRef kCMFormatDescriptionExtension_ContentLightLevelInfo			// CFData(4 bytes); big-endian structure; same as kCVImageBufferContentLightLevelInfoKey
-							__OSX_AVAILABLE_STARTING(__MAC_10_13,__IPHONE_11_0);
+							API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(6.0));
+CM_EXPORT const CFStringRef kCMFormatDescriptionExtension_AlternativeTransferCharacteristics	// CFString (usually kCMFormatDescriptionTransferFunction_ITU_R_2100_HLG when used); corresponds to D.2.38 Alternative Transfer Characteristics SEI message
+							API_AVAILABLE(macos(10.14), ios(12.0), tvos(12.0), watchos(6.0));
+
+CM_EXPORT const CFStringRef kCMFormatDescriptionExtension_AuxiliaryTypeInfo
+							API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0), watchos(6.0)); // CFString (Auxiliary type URN)
+	
+CM_EXPORT const CFStringRef kCMFormatDescriptionExtension_AlphaChannelMode	// one of:
+							API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0), watchos(6.0));
+CM_EXPORT const CFStringRef kCMFormatDescriptionAlphaChannelMode_StraightAlpha
+							API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0), watchos(6.0));
+CM_EXPORT const CFStringRef kCMFormatDescriptionAlphaChannelMode_PremultipliedAlpha
+							API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0), watchos(6.0));
+
+CM_EXPORT const CFStringRef kCMFormatDescriptionExtension_ContainsAlphaChannel	// CFBoolean; used to signal the presence of alpha channel in the bitstream.
+							API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0), watchos(6.0));
 
 CM_ASSUME_NONNULL_END
 
@@ -868,7 +888,7 @@ OSStatus CMVideoFormatDescriptionCreate(
 																		Values are always property list objects (ie. CFData, CFString, CFArray,
 																		CFDictionary, CFDate, CFBoolean, or CFNumber). Can be NULL. */
 	CM_RETURNS_RETAINED_PARAMETER CMVideoFormatDescriptionRef CM_NULLABLE * CM_NONNULL formatDescriptionOut)	/*! @param formatDescriptionOut		Returned newly created video CMFormatDescription */
-							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
+							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
 
 /*!
 	@function	CMVideoFormatDescriptionCreateForImageBuffer
@@ -893,7 +913,7 @@ OSStatus CMVideoFormatDescriptionCreateForImageBuffer(
 																		Image buffer for which we are creating the format description. */
 	CM_RETURNS_RETAINED_PARAMETER CMVideoFormatDescriptionRef CM_NULLABLE * CM_NONNULL formatDescriptionOut)	/*! @param formatDescriptionOut
 																		Returned newly-created video CMFormatDescription */
-							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
+							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
 
 /*!
 	@function	CMVideoFormatDescriptionCreateFromH264ParameterSets
@@ -916,7 +936,7 @@ OSStatus CMVideoFormatDescriptionCreateFromH264ParameterSets(
 																				Size, in bytes, of the NALUnitLength field in an AVC video sample or AVC parameter set sample. Pass 1, 2 or 4. */
 	CM_RETURNS_RETAINED_PARAMETER CMFormatDescriptionRef CM_NULLABLE * CM_NONNULL formatDescriptionOut )	/*! @param formatDescriptionOut
 																				Returned newly-created video CMFormatDescription */
-							__OSX_AVAILABLE_STARTING(__MAC_10_9,__IPHONE_7_0);
+							API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(6.0));
 	
 /*!
 	@function	CMVideoFormatDescriptionCreateFromHEVCParameterSets
@@ -942,7 +962,7 @@ OSStatus CMVideoFormatDescriptionCreateFromHEVCParameterSets(
 																				CFDictionary, CFDate, CFBoolean, or CFNumber). Can be NULL. */
 	CM_RETURNS_RETAINED_PARAMETER CMFormatDescriptionRef CM_NULLABLE * CM_NONNULL formatDescriptionOut )	/*! @param formatDescriptionOut
 																				 Returned newly-created video CMFormatDescription */
-							__OSX_AVAILABLE_STARTING(__MAC_10_13,__IPHONE_11_0);
+							API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(6.0));
 					
 CF_IMPLICIT_BRIDGING_ENABLED
 
@@ -968,7 +988,7 @@ OSStatus CMVideoFormatDescriptionGetH264ParameterSetAtIndex(
 																			Number of parameter sets in the AVC decoder configuration record contained in videoDesc. Pass NULL if you do not   want this information. */
 		int * CM_NULLABLE NALUnitHeaderLengthOut )						/*! @param NALUnitHeaderLengthOut
 																			Points to an int to receive the size, in bytes, of the NALUnitLength field in an AVC video sample or AVC parameter set sample. Pass NULL if you do not want this information. */
-							__OSX_AVAILABLE_STARTING(__MAC_10_9,__IPHONE_7_0);
+							API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(6.0));
 	
 /*!
 	@function	CMVideoFormatDescriptionGetHEVCParameterSetAtIndex
@@ -992,7 +1012,7 @@ OSStatus CMVideoFormatDescriptionGetHEVCParameterSetAtIndex(
 																			 Number of parameter sets in the HEVC decoder configuration record contained in videoDesc. Pass NULL if you do not want this information. */
 		int * CM_NULLABLE NALUnitHeaderLengthOut )						/*! @param NALUnitHeaderLengthOut
 																			 Points to an int to receive the size, in bytes, of the NALUnitLength field in an HEVC video sample or HEVC parameter set sample. Pass NULL if you do not want this information. */
-							__OSX_AVAILABLE_STARTING(__MAC_10_13,__IPHONE_11_0);
+							API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(6.0));
 
 #define CMVideoFormatDescriptionGetCodecType(desc)  CMFormatDescriptionGetMediaSubType(desc)
 
@@ -1005,7 +1025,7 @@ CM_EXPORT
 CMVideoDimensions CMVideoFormatDescriptionGetDimensions(
 	CMVideoFormatDescriptionRef CM_NONNULL videoDesc)	/*! @param videoDesc
 											FormatDescription being interrogated. */ 
-							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
+							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
 
 /*!
 	@function	CMVideoFormatDescriptionGetPresentationDimensions
@@ -1021,7 +1041,7 @@ CGSize CMVideoFormatDescriptionGetPresentationDimensions(
 																	Compute the dimensions maintaining pixel aspect ratio */
 		Boolean useCleanAperture )								/*! @param useCleanAperture
 																	Compute the dimensions using the clean aperture */
-							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
+							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
 
 /*!
 	@function	CMVideoFormatDescriptionGetCleanAperture
@@ -1041,7 +1061,7 @@ CGRect CMVideoFormatDescriptionGetCleanAperture(
 																	Pass false if the CGRect will be used in an environment 
 																	where (0,0) is at the bottom-left corner of an enclosing rectangle 
 																	and y coordinates increase as you go up. */
-							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
+							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
 
 /*!
 	@function	CMVideoFormatDescriptionGetExtensionKeysCommonWithImageBuffers
@@ -1067,10 +1087,12 @@ CGRect CMVideoFormatDescriptionGetCleanAperture(
 				kCMFormatDescriptionExtension_ICCProfile
 				kCMFormatDescriptionExtension_ChromaLocationTopField
 				kCMFormatDescriptionExtension_ChromaLocationBottomField
+				kCMFormatDescriptionExtension_MasteringDisplayColorVolume
+				kCMFormatDescriptionExtension_ContentLightLevelInfo
 */
 CM_EXPORT
 CFArrayRef CM_NONNULL CMVideoFormatDescriptionGetExtensionKeysCommonWithImageBuffers(void)
-							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
+							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
 
 /*!
 	@function	CMVideoFormatDescriptionMatchesImageBuffer
@@ -1084,7 +1106,7 @@ CM_EXPORT
 Boolean CMVideoFormatDescriptionMatchesImageBuffer(
 	CMVideoFormatDescriptionRef CM_NONNULL desc,	/*! @param desc			format description to validate. */
 	CVImageBufferRef CM_NONNULL imageBuffer)		/*! @param imageBuffer	image buffer validate against. */
-							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
+							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
 
 #pragma mark CMMuxedFormatDescription
 
@@ -1096,7 +1118,7 @@ Boolean CMVideoFormatDescriptionMatchesImageBuffer(
 	@typedef CMMuxedFormatDescriptionRef
 	Synonym type used for manipulating muxed media CMFormatDescriptions
 */
-typedef CMFormatDescriptionRef CMMuxedFormatDescriptionRef;
+typedef CMFormatDescriptionRef CMMuxedFormatDescriptionRef API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
 
 /*!
 	@enum CMMuxedStreamType
@@ -1106,7 +1128,7 @@ typedef CMFormatDescriptionRef CMMuxedFormatDescriptionRef;
 	@constant	kCMMuxedStreamType_MPEG2Program	MPEG-2 Program stream
 	@constant	kCMMuxedStreamType_DV	DV stream
 */
-typedef FourCharCode CMMuxedStreamType;
+typedef FourCharCode CMMuxedStreamType API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
 #if COREMEDIA_USE_DERIVED_ENUMS_FOR_CONSTANTS
 enum : CMMuxedStreamType
 #else
@@ -1117,7 +1139,7 @@ enum
 	kCMMuxedStreamType_MPEG2Transport	= 'mp2t',
 	kCMMuxedStreamType_MPEG2Program		= 'mp2p',
 	kCMMuxedStreamType_DV				= 'dv  '
-};
+} API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
 
 #define CMMuxedFormatDescriptionGetStreamType(desc)  CMFormatDescriptionGetMediaSubType(desc)
 
@@ -1144,7 +1166,7 @@ OSStatus CMMuxedFormatDescriptionCreate(
 																		Values are always property list objects (ie. CFData, CFString, CFArray,
 																		CFDictionary, CFDate, CFBoolean, or CFNumber). Can be NULL. */
 	CM_RETURNS_RETAINED_PARAMETER CMMuxedFormatDescriptionRef CM_NULLABLE * CM_NONNULL formatDescriptionOut)	/*! @param formatDescriptionOut		Returned newly created muxed CMFormatDescription */
-							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
+							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
 
 CF_IMPLICIT_BRIDGING_ENABLED
 
@@ -1158,7 +1180,7 @@ CF_IMPLICIT_BRIDGING_ENABLED
 	@typedef CMClosedCaptionFormatDescriptionRef
 	Synonym type used for manipulating closed-caption media CMFormatDescriptions
 */
-typedef CMFormatDescriptionRef CMClosedCaptionFormatDescriptionRef;
+typedef CMFormatDescriptionRef CMClosedCaptionFormatDescriptionRef API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
 
 /*!
 	@enum CMClosedCaptionFormatType
@@ -1168,7 +1190,7 @@ typedef CMFormatDescriptionRef CMClosedCaptionFormatDescriptionRef;
 	@constant	kCMClosedCaptionFormatType_CEA708	CEA 708-compliant samples
 	@constant	kCMClosedCaptionFormatType_ATSC		ATSC/52 part-4 compliant samples
 */
-typedef FourCharCode CMClosedCaptionFormatType;
+typedef FourCharCode CMClosedCaptionFormatType API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
 #if COREMEDIA_USE_DERIVED_ENUMS_FOR_CONSTANTS
 enum : CMClosedCaptionFormatType
 #else
@@ -1178,7 +1200,7 @@ enum
 	kCMClosedCaptionFormatType_CEA608	= 'c608',
 	kCMClosedCaptionFormatType_CEA708	= 'c708',
 	kCMClosedCaptionFormatType_ATSC		= 'atcc'
-};
+} API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
 
 #define CMClosedCaptionFormatDescriptionGetFormatType(desc)  CMFormatDescriptionGetMediaSubType(desc)
 
@@ -1193,7 +1215,7 @@ enum
 	@typedef CMTextFormatDescriptionRef
 	Synonym type used for manipulating Text media CMFormatDescriptions
 */
-typedef CMFormatDescriptionRef CMTextFormatDescriptionRef;
+typedef CMFormatDescriptionRef CMTextFormatDescriptionRef API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
 
 /*!
 	@enum CMTextFormatType
@@ -1201,7 +1223,7 @@ typedef CMFormatDescriptionRef CMTextFormatDescriptionRef;
 	@constant	kCMTextFormatType_QTText	QuickTime Text media
 	@constant	kCMTextFormatType_3GText	3GPP Text media
 */
-typedef FourCharCode CMTextFormatType;
+typedef FourCharCode CMTextFormatType API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
 #if COREMEDIA_USE_DERIVED_ENUMS_FOR_CONSTANTS
 enum : CMTextFormatType
 #else
@@ -1210,7 +1232,7 @@ enum
 {
     kCMTextFormatType_QTText           = 'text',
     kCMTextFormatType_3GText           = 'tx3g',
-};
+} API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
 
 /*!
 	@enum CMTextDisplayFlags
@@ -1229,7 +1251,7 @@ enum
 	@constant	kCMTextDisplayFlag_forcedSubtitlesPresent	There are forced subtitles present, e.g., a subtitle which only displays during foreign language sections of the video. Check individual samples to determine what type of subtitle is contained.
 	@constant	kCMTextDisplayFlag_allSubtitlesForced	Treat all subtitle samples as if they contain forced subtitles.
 */
-typedef uint32_t CMTextDisplayFlags;
+typedef uint32_t CMTextDisplayFlags API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
 #if COREMEDIA_USE_DERIVED_ENUMS_FOR_CONSTANTS
 enum : CMTextDisplayFlags
 #else
@@ -1249,7 +1271,7 @@ enum
     kCMTextDisplayFlag_obeySubtitleFormatting      = 0x20000000,
     kCMTextDisplayFlag_forcedSubtitlesPresent      = 0x40000000,
     kCMTextDisplayFlag_allSubtitlesForced          = 0x80000000,
-};
+} API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
 
 /*!
 	@enum CMTextJustificationValue
@@ -1258,7 +1280,7 @@ enum
 	@constant	kCMTextJustification_centered	Center justification (both horizontal and vertical justification).
 	@constant	kCMTextJustification_bottom_right	Bottom justification when specified for vertical justification, right justification for horizontal justification.
 */
-typedef int8_t CMTextJustificationValue;
+typedef int8_t CMTextJustificationValue API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
 #if COREMEDIA_USE_DERIVED_ENUMS_FOR_CONSTANTS
 enum : CMTextJustificationValue
 #else
@@ -1268,67 +1290,67 @@ enum
 	kCMTextJustification_left_top		=  0,
 	kCMTextJustification_centered		=  1,
 	kCMTextJustification_bottom_right	= -1
-};
+} API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
 
 CM_ASSUME_NONNULL_BEGIN
 
 // Extension keys and values common to kCMTextFormatType_QTText and kCMTextFormatType_3GText format descriptions
 CM_EXPORT const CFStringRef kCMTextFormatDescriptionExtension_DisplayFlags                 // CFNumber (SInt32 holding CMTextDisplayFlags)
-								__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
+								API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
 CM_EXPORT const CFStringRef kCMTextFormatDescriptionExtension_BackgroundColor              // CFDictionary
-								__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
+								API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
     CM_EXPORT const CFStringRef kCMTextFormatDescriptionColor_Red                          // CFNumber (SInt8 for 3G), (SInt16 for QT)
-								__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
+								API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
     CM_EXPORT const CFStringRef kCMTextFormatDescriptionColor_Green                        // CFNumber (SInt8 for 3G), (SInt16 for QT)
-								__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
+								API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
     CM_EXPORT const CFStringRef kCMTextFormatDescriptionColor_Blue                         // CFNumber (SInt8 for 3G), (SInt16 for QT)
-								__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
+								API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
     CM_EXPORT const CFStringRef kCMTextFormatDescriptionColor_Alpha                        // CFNumber (SInt8 for 3G), not applicable for QT text.
-								__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
+								API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
 CM_EXPORT const CFStringRef kCMTextFormatDescriptionExtension_DefaultTextBox               // CFDictionary
-								__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
+								API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
     CM_EXPORT const CFStringRef kCMTextFormatDescriptionRect_Top                           // CFNumber (SInt16)
-								__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
+								API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
     CM_EXPORT const CFStringRef kCMTextFormatDescriptionRect_Left                          // CFNumber (SInt16)
-								__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
+								API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
     CM_EXPORT const CFStringRef kCMTextFormatDescriptionRect_Bottom                        // CFNumber (SInt16)
-								__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
+								API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
     CM_EXPORT const CFStringRef kCMTextFormatDescriptionRect_Right                         // CFNumber (SInt16)
-								__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
+								API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
 CM_EXPORT const CFStringRef kCMTextFormatDescriptionExtension_DefaultStyle                 // CFDictionary
-								__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
+								API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
     CM_EXPORT const CFStringRef kCMTextFormatDescriptionStyle_StartChar             		// CFNumber (SInt16 for 3G), (SInt32 for QT)
-								__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
+								API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
     CM_EXPORT const CFStringRef kCMTextFormatDescriptionStyle_Font                  		// CFNumber (SInt16)
-								__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
+								API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
     CM_EXPORT const CFStringRef kCMTextFormatDescriptionStyle_FontFace              		// CFNumber (SInt8)
-								__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
+								API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
     CM_EXPORT const CFStringRef kCMTextFormatDescriptionStyle_ForegroundColor       		// CFDictionary (kCMTextFormatDescriptionColor_Red, kCMTextFormatDescriptionColor_Green, etc)
-								__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
+								API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
     CM_EXPORT const CFStringRef kCMTextFormatDescriptionStyle_FontSize              		// CFNumber (SInt8 for 3G), (SInt16 for QT)
-								__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
+								API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
     
 // Extension keys and values specific to kCMTextFormatType_3GText
 CM_EXPORT const CFStringRef kCMTextFormatDescriptionExtension_HorizontalJustification      // CFNumber (SInt8 holding a CMTextJustificationValue)
-								__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
+								API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
 CM_EXPORT const CFStringRef kCMTextFormatDescriptionExtension_VerticalJustification        // CFNumber (SInt8 holding a CMTextJustificationValue)
-								__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
+								API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
     // Extension keys and values specific to the kCMTextFormatType_3GText kCMTextFormatDescriptionExtension_DefaultStyle dictionary
     CM_EXPORT const CFStringRef kCMTextFormatDescriptionStyle_EndChar               		// CFNumber (SInt16)
-								__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
+								API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
 CM_EXPORT const CFStringRef kCMTextFormatDescriptionExtension_FontTable                    // CFDictionary (Keys are FontIDs as CFStrings, vals are font names as CFStrings)
-								__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
+								API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
     
 // Extension keys and values specific to kCMTextFormatType_QTText
 CM_EXPORT const CFStringRef kCMTextFormatDescriptionExtension_TextJustification            // CFNumber (SInt32 holding a CMTextJustificationValue)
-								__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
+								API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
     // Extension keys and values specific to the kCMTextFormatType_QTText kCMTextFormatDescriptionExtension_DefaultStyle dictionary
     CM_EXPORT const CFStringRef kCMTextFormatDescriptionStyle_Height                		// CFNumber (SInt16)
-								__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
+								API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
     CM_EXPORT const CFStringRef kCMTextFormatDescriptionStyle_Ascent                		// CFNumber (SInt16)
-								__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
+								API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
 CM_EXPORT const CFStringRef kCMTextFormatDescriptionExtension_DefaultFontName              // CFString
-								__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
+								API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
 	
 CM_ASSUME_NONNULL_END
 
@@ -1344,7 +1366,7 @@ OSStatus CMTextFormatDescriptionGetDisplayFlags(
 											FormatDescription being interrogated. */
 	CMTextDisplayFlags * CM_NONNULL displayFlagsOut)	/*! @param displayFlagsOut
 											Receives the display flags. */
-							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
+							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
 
 /*!
 	@function	CMTextFormatDescriptionGetJustification
@@ -1360,7 +1382,7 @@ OSStatus CMTextFormatDescriptionGetJustification(
 													Horizontal justification mode. May be NULL. */
 	CMTextJustificationValue * CM_NULLABLE verticalJustificationOut)		/*! @param verticalJustificationOut
 													Vertical justification mode. May be NULL. */
-							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
+							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
 
 /*!
 	@function	CMTextFormatDescriptionGetDefaultTextBox
@@ -1385,7 +1407,7 @@ OSStatus CMTextFormatDescriptionGetDefaultTextBox(
 													Ignored if originIsAtTopLeft is true. */
 	CGRect * CM_NONNULL defaultTextBoxOut)		/*! @param defaultTextBoxOut
 													Receives the default text box. */
-							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
+							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
 
 /*!
 	@function	CMTextFormatDescriptionGetDefaultStyle
@@ -1409,7 +1431,7 @@ OSStatus CMTextFormatDescriptionGetDefaultStyle(
 													FontSize in points. May be NULL. */
 	CGFloat colorComponentsOut[CM_NULLABLE 4])	/*! @param colorComponentsOut
 													Components are in order red, green, blue, alpha. May be NULL. */
-							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
+							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
 	
 CF_IMPLICIT_BRIDGING_DISABLED
 
@@ -1427,13 +1449,13 @@ OSStatus CMTextFormatDescriptionGetFontName(
 																Font number, local to the FormatDescription. */
 	CM_RETURNS_NOT_RETAINED_PARAMETER CFStringRef CM_NULLABLE * CM_NONNULL fontNameOut)		/*! @param fontNameOut
 																Name of the font. */
-							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
+							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
 	
 CF_IMPLICIT_BRIDGING_ENABLED
 
 #pragma mark CMSubtitleFormatDescription
 
-typedef FourCharCode CMSubtitleFormatType;
+typedef FourCharCode CMSubtitleFormatType API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
 	
 #if COREMEDIA_USE_DERIVED_ENUMS_FOR_CONSTANTS
 enum : CMSubtitleFormatType
@@ -1443,7 +1465,7 @@ enum
 {
     kCMSubtitleFormatType_3GText = 'tx3g',
 	kCMSubtitleFormatType_WebVTT = 'wvtt',
-};
+} API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
 	
 #define CMSubtitleFormatDescriptionGetFormatType(desc)	CMFormatDescriptionGetMediaSubType(desc)
 
@@ -1457,7 +1479,7 @@ enum
 	@typedef CMTimeCodeFormatDescriptionRef
 	SYnonym type used for manipulating TimeCode media CMFormatDescriptions
 */
-typedef CMFormatDescriptionRef CMTimeCodeFormatDescriptionRef;
+typedef CMFormatDescriptionRef CMTimeCodeFormatDescriptionRef API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
 
 /*!
 	@enum CMTimeCodeFormatType
@@ -1467,7 +1489,7 @@ typedef CMFormatDescriptionRef CMTimeCodeFormatDescriptionRef;
 	@constant	kCMTimeCodeFormatType_Counter32 32-bit counter-mode sample.
 	@constant	kCMTimeCodeFormatType_Counter64 64-bit counter-mode sample.
 */
-typedef FourCharCode CMTimeCodeFormatType;
+typedef FourCharCode CMTimeCodeFormatType API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
 
 #if COREMEDIA_USE_DERIVED_ENUMS_FOR_CONSTANTS
 enum : CMTimeCodeFormatType
@@ -1479,7 +1501,7 @@ enum
 	kCMTimeCodeFormatType_TimeCode64	= 'tc64',
 	kCMTimeCodeFormatType_Counter32		= 'cn32',
 	kCMTimeCodeFormatType_Counter64		= 'cn64'
-};
+} API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
 
 #define CMTimeCodeFormatDescriptionGetFormatType(desc)	CMFormatDescriptionGetMediaSubType(desc)
 
@@ -1499,7 +1521,7 @@ enum
 	kCMTimeCodeFlag_DropFrame	= 1 << 0,
 	kCMTimeCodeFlag_24HourMax	= 1 << 1,
 	kCMTimeCodeFlag_NegTimesOK	= 1 << 2
-};
+} API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
 
 CF_IMPLICIT_BRIDGING_DISABLED
 
@@ -1525,7 +1547,7 @@ OSStatus CMTimeCodeFormatDescriptionCreate(
 																			Keys are always CFStrings. Values are always property list objects (ie. CFData). May be NULL. */
 	CM_RETURNS_RETAINED_PARAMETER CMTimeCodeFormatDescriptionRef CM_NULLABLE * CM_NONNULL formatDescriptionOut)	/*! @param formatDescriptionOut
 																			Receives the newly-created CMFormatDescription. */
-							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
+							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
 
 CF_IMPLICIT_BRIDGING_ENABLED
 
@@ -1537,7 +1559,7 @@ CM_EXPORT
 CMTime CMTimeCodeFormatDescriptionGetFrameDuration(
 	CMTimeCodeFormatDescriptionRef CM_NONNULL timeCodeFormatDescription)	/*! @param timeCodeFormatDescription
 																FormatDescription being interrogated */
-							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
+							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
 
 /*!
 	@function	CMTimeCodeFormatDescriptionGetFrameQuanta
@@ -1547,7 +1569,7 @@ CM_EXPORT
 uint32_t CMTimeCodeFormatDescriptionGetFrameQuanta(
 	CMTimeCodeFormatDescriptionRef CM_NONNULL timeCodeFormatDescription)	/*! @param timeCodeFormatDescription
 																FormatDescription being interrogated */
-							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
+							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
 
 /*!
 	@function	CMTimeCodeFormatDescriptionGetTimeCodeFlags
@@ -1557,16 +1579,16 @@ CM_EXPORT
 uint32_t CMTimeCodeFormatDescriptionGetTimeCodeFlags(
 	CMTimeCodeFormatDescriptionRef CM_NONNULL desc)	/*! @param desc
 											FormatDescription being interrogated */
-							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
+							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
 	
 CM_ASSUME_NONNULL_BEGIN
 
 CM_EXPORT const CFStringRef kCMTimeCodeFormatDescriptionExtension_SourceReferenceName	// CFDictionary containing the following two keys
-							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
+							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
 CM_EXPORT const CFStringRef kCMTimeCodeFormatDescriptionKey_Value						// CFString
-							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
+							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
 CM_EXPORT const CFStringRef kCMTimeCodeFormatDescriptionKey_LangCode					// CFNumber
-							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
+							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
 	
 CM_ASSUME_NONNULL_END
 
@@ -1580,7 +1602,7 @@ CM_ASSUME_NONNULL_END
 	@typedef CMMetadataFormatDescriptionRef
 	SYnonym type used for manipulating Metadata media CMFormatDescriptions
 */
-typedef CMFormatDescriptionRef CMMetadataFormatDescriptionRef;
+typedef CMFormatDescriptionRef CMMetadataFormatDescriptionRef API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
 
 /*!
 	@enum CMMetadataFormatType
@@ -1588,8 +1610,9 @@ typedef CMFormatDescriptionRef CMMetadataFormatDescriptionRef;
 	@constant	kCMMetadataFormatType_ICY		SHOUTCast format.
 	@constant	kCMMetadataFormatType_ID3		ID3 format.
 	@constant	kCMMetadataFormatType_Boxed		Boxed format.
+	@constant	kCMMetadataFormatType_EMSG		EMSG format.
 */
-typedef FourCharCode CMMetadataFormatType;
+typedef FourCharCode CMMetadataFormatType API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
 #if COREMEDIA_USE_DERIVED_ENUMS_FOR_CONSTANTS
 enum : CMMetadataFormatType
 #else
@@ -1599,44 +1622,45 @@ enum
 	kCMMetadataFormatType_ICY   = 'icy ',
 	kCMMetadataFormatType_ID3   = 'id3 ',
 	kCMMetadataFormatType_Boxed = 'mebx',
-};
+	kCMMetadataFormatType_EMSG 	= 'emsg',
+} API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
 
 CM_ASSUME_NONNULL_BEGIN
 
 CM_EXPORT const CFStringRef kCMFormatDescriptionExtensionKey_MetadataKeyTable
-							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
+							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
 	CM_EXPORT const CFStringRef kCMMetadataFormatDescriptionKey_Namespace	// CFNumber(OSType) native endian
-							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
+							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
 	CM_EXPORT const CFStringRef kCMMetadataFormatDescriptionKey_Value		// CFData
-							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
+							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
 	CM_EXPORT const CFStringRef kCMMetadataFormatDescriptionKey_LocalID 	// CFNumber(OSType) native endian
-							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
+							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
 	CM_EXPORT const CFStringRef kCMMetadataFormatDescriptionKey_DataType 	// CFData
-							__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
+							API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0));
 	CM_EXPORT const CFStringRef kCMMetadataFormatDescriptionKey_DataTypeNamespace 	// CFNumber(SInt32) native endian
-							__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
+							API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0));
 	CM_EXPORT const CFStringRef kCMMetadataFormatDescriptionKey_ConformingDataTypes // CFArray(CFDictionary) of DataType and DataTypeNamespace
-							__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
+							API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0));
 	CM_EXPORT const CFStringRef kCMMetadataFormatDescriptionKey_LanguageTag	// CFString
-							__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
+							API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0));
 	CM_EXPORT const CFStringRef kCMMetadataFormatDescriptionKey_StructuralDependency	// CFDictionary
-							__OSX_AVAILABLE_STARTING(__MAC_10_11,__IPHONE_9_0);
+							API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(6.0));
 	CM_EXPORT const CFStringRef kCMMetadataFormatDescriptionKey_SetupData	// CFData
-							__OSX_AVAILABLE_STARTING(__MAC_10_11,__IPHONE_9_0);
+							API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(6.0));
 
 CM_EXPORT const CFStringRef kCMMetadataFormatDescription_StructuralDependencyKey_DependencyIsInvalidFlag	// CFBoolean
-							__OSX_AVAILABLE_STARTING(__MAC_10_11,__IPHONE_9_0);
+							API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(6.0));
 
 CM_EXPORT const CFStringRef kCMMetadataFormatDescriptionMetadataSpecificationKey_Identifier				// CFString
-							__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
+							API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0));
 CM_EXPORT const CFStringRef kCMMetadataFormatDescriptionMetadataSpecificationKey_DataType				// CFString
-							__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
+							API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0));
 CM_EXPORT const CFStringRef kCMMetadataFormatDescriptionMetadataSpecificationKey_ExtendedLanguageTag	// CFString in BCP 47 format
-							__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
+							API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0));
 CM_EXPORT const CFStringRef kCMMetadataFormatDescriptionMetadataSpecificationKey_StructuralDependency	// CFDictionary
-							__OSX_AVAILABLE_STARTING(__MAC_10_11,__IPHONE_9_0);
+							API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(6.0));
 CM_EXPORT const CFStringRef kCMMetadataFormatDescriptionMetadataSpecificationKey_SetupData				// CFData
-							__OSX_AVAILABLE_STARTING(__MAC_10_11,__IPHONE_9_0);
+							API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(6.0));
 
 CM_ASSUME_NONNULL_END
 CF_IMPLICIT_BRIDGING_DISABLED
@@ -1653,7 +1677,7 @@ OSStatus CMMetadataFormatDescriptionCreateWithKeys(
 																			kCMMetadataFormatDescriptionKey_Value
 																			kCMMetadataFormatDescriptionKey_LocalID */
 	CM_RETURNS_RETAINED_PARAMETER CMMetadataFormatDescriptionRef CM_NULLABLE * CM_NONNULL formatDescriptionOut)	/*! @param formatDescriptionOut		Returned newly created metadata CMFormatDescription */
-							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
+							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
 
 CM_EXPORT
 OSStatus CMMetadataFormatDescriptionCreateWithMetadataSpecifications(
@@ -1661,7 +1685,7 @@ OSStatus CMMetadataFormatDescriptionCreateWithMetadataSpecifications(
 	CMMetadataFormatType metadataType,									/*! @param metadataType		Currently the type must be kCMMetadataFormatType_Boxed. */
 	CFArrayRef CM_NONNULL metadataSpecifications,						/*! @param metadataSpecifications	An array of dictionaries, each dictionary supplies a metadata identifier, a datatype, and an optional language tag. */
 	CM_RETURNS_RETAINED_PARAMETER CMMetadataFormatDescriptionRef CM_NULLABLE * CM_NONNULL formatDescriptionOut)	/*! @param formatDescriptionOut			Returned newly created metadata CMFormatDescription */
-							__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
+							API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0));
 
 CM_EXPORT
 OSStatus CMMetadataFormatDescriptionCreateWithMetadataFormatDescriptionAndMetadataSpecifications(
@@ -1669,7 +1693,7 @@ OSStatus CMMetadataFormatDescriptionCreateWithMetadataFormatDescriptionAndMetada
 	CMMetadataFormatDescriptionRef CM_NONNULL sourceDescription,					/*! @param sourceDescription			Source metadata format description being extended */
 	CFArrayRef CM_NONNULL metadataSpecifications,						/*! @param metadataSpecifications	An array of dictionaries, each dictionary supplies a metadata identifier, a datatype, and an optional language tag. */
 	CM_RETURNS_RETAINED_PARAMETER CMMetadataFormatDescriptionRef CM_NULLABLE * CM_NONNULL formatDescriptionOut)	/*! @param formatDescriptionOut			Returned newly created metadata CMFormatDescription */
-							__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
+							API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0));
 
 CM_EXPORT
 OSStatus CMMetadataFormatDescriptionCreateByMergingMetadataFormatDescriptions(
@@ -1677,17 +1701,17 @@ OSStatus CMMetadataFormatDescriptionCreateByMergingMetadataFormatDescriptions(
 	CMMetadataFormatDescriptionRef CM_NONNULL sourceDescription,					/*! @param sourceDescription			Metadata format description being merged */
 	CMMetadataFormatDescriptionRef CM_NONNULL otherSourceDescription,					/*! @param otherSourceDescription			Metadata format description being merged */
 	CM_RETURNS_RETAINED_PARAMETER CMMetadataFormatDescriptionRef CM_NULLABLE * CM_NONNULL formatDescriptionOut)	/*! @param formatDescriptionOut			Returned newly created metadata CMFormatDescription */
-							__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
+							API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0));
 
 CF_IMPLICIT_BRIDGING_ENABLED
 
 CM_EXPORT
 CFDictionaryRef CM_NULLABLE CMMetadataFormatDescriptionGetKeyWithLocalID( CMMetadataFormatDescriptionRef CM_NONNULL desc, OSType localKeyID)
-							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
+							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
 
 CM_EXPORT
 CFArrayRef CM_NULLABLE CMMetadataFormatDescriptionGetIdentifiers( CMMetadataFormatDescriptionRef CM_NONNULL desc)
-							__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
+							API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0));
 
 CF_IMPLICIT_BRIDGING_DISABLED
 

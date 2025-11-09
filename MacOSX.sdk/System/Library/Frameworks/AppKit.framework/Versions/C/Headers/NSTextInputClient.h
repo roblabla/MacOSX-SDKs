@@ -1,7 +1,7 @@
 /*
 	NSTextInputClient.h
 	Application Kit
-	Copyright (c) 2006-2018, Apple Inc.
+	Copyright (c) 2006-2019, Apple Inc.
 	All rights reserved.
  */
 
@@ -12,6 +12,7 @@
 #import <Foundation/NSAttributedString.h>
 
 NS_ASSUME_NONNULL_BEGIN
+API_UNAVAILABLE_BEGIN(ios)
 
 @class NSAttributedString;
 
@@ -80,7 +81,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 /* Returns if the marked text is in vertical layout.
  */
-- (BOOL)drawsVerticallyForCharacterAtIndex:(NSUInteger)charIndex NS_AVAILABLE_MAC(10_6);
+- (BOOL)drawsVerticallyForCharacterAtIndex:(NSUInteger)charIndex API_AVAILABLE(macos(10.6));
 @end
 
+API_UNAVAILABLE_END
 NS_ASSUME_NONNULL_END

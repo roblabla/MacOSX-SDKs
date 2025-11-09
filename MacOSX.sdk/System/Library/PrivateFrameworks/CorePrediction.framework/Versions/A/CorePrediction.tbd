@@ -1,8 +1,8 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: BD34AB8C-8899-3BB1-95A2-0A2A1C901ADC' ]
-platform:        macosx
-install-name:    /System/Library/PrivateFrameworks/CorePrediction.framework/Versions/A/CorePrediction
+uuids:           [ 'x86_64: 3CCC0148-D6C8-3350-9DD1-DC9E2D4FE5BE', 'x86_64: 3CCC0148-D6C8-3350-9DD1-DC9E2D4FE5BE' ]
+platform:        zippered
+install-name:    '/System/Library/PrivateFrameworks/CorePrediction.framework/Versions/A/CorePrediction'
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _CPMLAnalysisClassify, _CPMLAnalysisRegressionPrediction, 

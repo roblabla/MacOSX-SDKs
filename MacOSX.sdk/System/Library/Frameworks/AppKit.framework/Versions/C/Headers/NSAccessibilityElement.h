@@ -1,7 +1,7 @@
 /*
 	NSAccessibilityElement.h
 	Application Kit
-	Copyright (c) 2013-2018, Apple Inc.
+	Copyright (c) 2013-2019, Apple Inc.
 	All rights reserved.
 */
 
@@ -12,12 +12,10 @@
 /* An NSAccessibilityElement is used to convey information regarding onscreen UI through the  accessibility API for UI that may not already have a single backing object. For example, if a single NSView subclass draws 4 buttons, it would vend 4 NSAccessibilityElements as accessibilityChildren. Note that as long as the UI is around, the vendor of NSAccessibilityElements must maintain ownership of the NSAccessibilityElements. */
 
 NS_ASSUME_NONNULL_BEGIN
+API_UNAVAILABLE_BEGIN(ios)
 
-NS_CLASS_AVAILABLE(10_10, NA)
+API_AVAILABLE(macos(10.10))
 @interface NSAccessibilityElement : NSObject <NSAccessibility>
-{
-    id _private APPKIT_IVAR;
-}
 
 + (id)accessibilityElementWithRole:(NSAccessibilityRole)role frame:(NSRect)frame label:(nullable NSString *)label parent:(nullable id)parent;
 - (void)accessibilityAddChildElement:(NSAccessibilityElement *)childElement;
@@ -27,4 +25,5 @@ NS_CLASS_AVAILABLE(10_10, NA)
 
 @end
 
+API_UNAVAILABLE_END
 NS_ASSUME_NONNULL_END

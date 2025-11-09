@@ -41,7 +41,7 @@ at_encoder_t \-
 .in -1c
 .SH "Detailed Description"
 .PP 
-An encoder for compressing and decompressing textures into formats such as ASTC\&.  The \fBat_encoder_t\fP defines an interface for an opaque object that can both compress and decompress common texture formats, such as ASTC\&. These formats generally comsume texels (pixels) in a small rectangular region and produce a single block of compressed data\&. For example, for the at_texel_format_astc_4x4_ldr (MTLPixelFormatASTC_4x4_LDR) compressed texture type, the image is segmented in 4x4 rectangles\&. Each of these is encoded by a variety of means to a 128-bit block\&. When compressing an image texels are consumed and blocks are produced\&. When decompressing an image blocks are consumed and texels are produced\&. Not all encoder types are capable of both encoding and decoding\&.
+An encoder for compressing and decompressing textures into formats such as ASTC\&.  The \fBat_encoder_t\fP defines an interface for an opaque object that can both compress and decompress common texture formats, such as ASTC\&. These formats generally comsume texels (pixels) in a small rectangular region and produce a single block of compressed data\&. For example, for the at_block_format_astc_4x4_ldr (MTLPixelFormatASTC_4x4_LDR) compressed texture type, the image is segmented in 4x4 rectangles\&. Each of these is encoded by a variety of means to a 128-bit block\&. When compressing an image texels are consumed and blocks are produced\&. When decompressing an image blocks are consumed and texels are produced\&. Not all encoder types are capable of both encoding and decoding\&.
 .PP
 When working with such formats, it is important to know the block size, since you generally need to stride through the image in multiples of the block size to avoid encoding artifacts at the block seams\&. For texel coordinates, this is given by \fBat_encoder_get_block_dimensions()\fP\&. For block coordinates, this is given by \fBat_encoder_get_block_size()\fP\&.
 .PP
@@ -80,8 +80,12 @@ all
 Currently supported output formats are: 
 .PP
 .nf
-at_texel_format_astc_4x4_ldr
-at_texel_format_astc_8x8_ldr
+at_block_format_astc_4x4_ldr
+at_block_format_astc_8x8_ldr
+at_block_format_bc1
+at_block_format_bc4
+at_block_format_bc5
+at_block_format_bc7
 
 .fi
 .PP

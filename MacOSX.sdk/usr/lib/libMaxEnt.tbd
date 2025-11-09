@@ -1,9 +1,8 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 622329BE-883D-3BE8-8516-8E73E3D16B74' ]
+uuids:           [ 'x86_64: 948A559B-D0A1-3A48-9C1E-8082DD6B8BB5' ]
 platform:        macosx
-install-name:    /usr/lib/libMaxEnt.dylib
-objc-constraint: none
+install-name:    '/usr/lib/libMaxEnt.dylib'
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ __ZN8ME_Model11perform_GISEi, __ZN8ME_Model11perform_SGDEv, 

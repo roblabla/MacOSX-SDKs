@@ -9,8 +9,12 @@
 #include <CoreFoundation/CoreFoundation.h>
 
 #ifdef __cplusplus
-extern "C" {
+#define NETFS_EXPORT    extern "C" __attribute__((visibility ("default")))
+#else
+#define NETFS_EXPORT    extern __attribute__((visibility ("default")))
 #endif
+
+API_UNAVAILABLE_BEGIN(ios, tvos, watchos)
 
 typedef SInt32 netfsError;
 
@@ -245,7 +249,6 @@ typedef SInt32 netfsError;
 //#define kNetFSMountedByKerberosKey	CFSTR("MountedByKerberos")	/* defined for OpenSession above */
 //#define kNetFSMountedMultiUserKey	CFSTR("MountedMultiUser")	/* defined for OpenSession above */
 
-
 /*
  ********************************
  *
@@ -304,7 +307,7 @@ typedef void * AsyncRequestID;
  *	kNetAuthErrorAlreadyClosed	-6005
  *
  */
-int
+NETFS_EXPORT int
 NetFSMountURLSync(
 	CFURLRef url,				// URL to mount, e.g. nfs://server/path
 	CFURLRef mountpath,			// Path for the mountpoint
@@ -333,7 +336,7 @@ typedef	void (^NetFSMountURLBlock)(int status, AsyncRequestID requestID, CFArray
  *
  * The return result is as described above for NetFSMountURLSync().
  */
-int
+NETFS_EXPORT int
 NetFSMountURLAsync(
 	CFURLRef url,				// URL to mount, e.g. nfs://server/path
 	CFURLRef mountpath,			// Path for the mountpoint
@@ -350,7 +353,7 @@ NetFSMountURLAsync(
  * The AsyncRequestID is that returned by NetFSMountURLAsync().
  * The NetFSMountURLBlock is not called.
  */
-int
+NETFS_EXPORT int
 NetFSMountURLCancel(AsyncRequestID requestID) 	__OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_NA);
 
 /*
@@ -395,7 +398,7 @@ NetFSMountURLCancel(AsyncRequestID requestID) 	__OSX_AVAILABLE_STARTING(__MAC_10
  * responds first, it may lose out if a protocol earlier in the list
  * responds within the timeout.
  */
-CFStringRef
+NETFS_EXPORT CFStringRef
 NetFSMountURLProbe(CFStringRef hostname);
         
 /*
@@ -406,11 +409,9 @@ NetFSMountURLProbe(CFStringRef hostname);
  * The return value is a CFURLRef of the server, or NULL if localPathURL
  * isn't a mounted network share.
  */
-CFURLRef
+NETFS_EXPORT CFURLRef
 NetFSCopyURLForRemountingVolume(CFURLRef localPathURL);
 
-#ifdef __cplusplus
-}
-#endif
+API_UNAVAILABLE_END
 
 #endif /* !_NETFS_H_ */

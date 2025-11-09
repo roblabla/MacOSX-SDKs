@@ -14,12 +14,13 @@
 @class PHProjectInfo;
 
 NS_ASSUME_NONNULL_BEGIN
+API_AVAILABLE_BEGIN(macos(10.13))
 
 /**
  When a Photos project extension is initialized, it is handed a PHProjectExtensionContext object.
  This object provides the extension access to the underlying project as well as the photo library from which assets can be fetched.
  */
-NS_CLASS_AVAILABLE_MAC(10_13)
+OS_EXPORT
 @interface PHProjectExtensionContext : NSExtensionContext
 
 @property (nonatomic, readonly) PHPhotoLibrary *photoLibrary;
@@ -49,4 +50,5 @@ NS_CLASS_AVAILABLE_MAC(10_13)
 
 @end
 
+API_AVAILABLE_END
 NS_ASSUME_NONNULL_END

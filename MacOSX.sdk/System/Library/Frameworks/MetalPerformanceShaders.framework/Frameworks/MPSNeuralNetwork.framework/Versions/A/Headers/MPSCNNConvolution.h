@@ -32,7 +32,7 @@ extern "C" {
  *  @dependency This depends on Metal.framework
  *  @discussion The MPSCNNConvolutionDescriptor specifies a convolution descriptor
  */
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(10.0), tvos(10.0))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(10.0), macCatalyst(13.0), tvos(10.0))
 @interface MPSCNNConvolutionDescriptor : NSObject <NSSecureCoding, NSCopying>
 
 /*! @property   kernelWidth
@@ -124,7 +124,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(10.0), tvos(10.0))
  *              MPSCNNConvolution. If the neuron type changes after either is made, behavior is undefined.
  */
 @property(readwrite, nonatomic, retain) MPSNNNeuronDescriptor* __nonnull fusedNeuronDescriptor
-                                        MPS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3));
+                                        MPS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3));
 
 /*! @property   neuron
  *  @abstract   MPSCNNNeuron filter to be applied as part of convolution. This is applied after BatchNormalization in the end.
@@ -136,17 +136,17 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(10.0), tvos(10.0))
         MPS_AVAILABLE_STARTING_BUT_DEPRECATED(  "A MPSCNNNeuron:MPSKernel is much too heavy an object to\n"
                                                 "represent what is a type code and two floats. It is deprecated.\n"
                                                 "Please set fusedNeuronDescriptor property instead.",
-                                                ios(10.0, 11.0), tvos(10.0, 11.0));
+                                                ios(10.0, 11.0), tvos(10.0, 11.0))  MPS_UNAVAILABLE(macCatalyst);
 
 /*! @abstract <NSSecureCoding> support */
 @property (class, readonly) BOOL supportsSecureCoding
-            MPS_AVAILABLE_STARTING(macos(10.13), ios(11.0), tvos(11.0));
+            MPS_AVAILABLE_STARTING(macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0));
 /*! @abstract <NSSecureCoding> support */
 - (void)encodeWithCoder:(NSCoder *__nonnull)aCoder
-            MPS_AVAILABLE_STARTING(macos(10.13), ios(11.0), tvos(11.0));
+            MPS_AVAILABLE_STARTING(macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0));
 /*! @abstract <NSSecureCoding> support */
 - (nullable instancetype)initWithCoder:(NSCoder *__nonnull)aDecoder
-            MPS_AVAILABLE_STARTING(macos(10.13), ios(11.0), tvos(11.0)) NS_DESIGNATED_INITIALIZER;
+            MPS_AVAILABLE_STARTING(macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0)) NS_DESIGNATED_INITIALIZER;
 
 /*!
  *  @abstract   This method is deprecated. Please use neuronType, neuronParameterA and neuronParameterB properites to fuse
@@ -164,7 +164,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(10.0), tvos(10.0))
                                           outputFeatureChannels: (NSUInteger) outputFeatureChannels
                                                    neuronFilter: (const MPSCNNNeuron * __nullable) neuronFilter
     MPS_AVAILABLE_STARTING_BUT_DEPRECATED( "Please use neuronType, neuronParameterA and neuronParameterB properties instead.",
-                                            ios(10.0, 11.0), tvos(10.0, 11.0));
+                                            ios(10.0, 11.0), tvos(10.0, 11.0))  MPS_UNAVAILABLE(macCatalyst);
 
 /*!
  *  @abstract   Creates a convolution descriptor.
@@ -178,7 +178,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(10.0), tvos(10.0))
                                                    kernelHeight: (NSUInteger) kernelHeight
                                            inputFeatureChannels: (NSUInteger) inputFeatureChannels
                                           outputFeatureChannels: (NSUInteger) outputFeatureChannels
-    MPS_AVAILABLE_STARTING(macos(10.13), ios(11.0), tvos(11.0) );
+    MPS_AVAILABLE_STARTING(macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0) );
 
 
 
@@ -241,7 +241,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(10.0), tvos(10.0))
                                                       gamma: (const float * __nullable) gamma
                                                        beta: (const float * __nullable) beta
                                                     epsilon: (const float) epsilon
-                                                                MPS_AVAILABLE_STARTING(macos(10.13), ios(11.0), tvos(11.0));
+                                                                MPS_AVAILABLE_STARTING(macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0));
 
 /*!
  *  @abstract   Adds a neuron activation function to convolution descriptor.
@@ -267,28 +267,28 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(10.0), tvos(10.0))
            parameterA: (float) parameterA
            parameterB: (float) parameterB
                                         MPS_AVAILABLE_STARTING_BUT_DEPRECATED( "set fusedNeuronDescriptor property instead",
-                                              macos(10.13, 10.13.4), ios(11.0, 11.3), tvos(11.0, 11.3) );
+                                              macos(10.13, 10.13.4), ios(11.0, 11.3), tvos(11.0, 11.3) )  MPS_UNAVAILABLE(macCatalyst);
 
 /*!
  *  @abstract   Getter funtion for neuronType set using setNeuronType:parameterA:parameterB method
  */
 -(MPSCNNNeuronType) neuronType
                     MPS_AVAILABLE_STARTING_BUT_DEPRECATED( "use fusedNeuronDescriptor property instead",
-                                      macos(10.13, 10.13.4), ios(11.0, 11.3), tvos(11.0, 11.3) );
+                                      macos(10.13, 10.13.4), ios(11.0, 11.3), tvos(11.0, 11.3) )  MPS_UNAVAILABLE(macCatalyst);
 
 /*!
  *  @abstract   Getter funtion for neuronType set using setNeuronType:parameterA:parameterB method
  */
 -(float) neuronParameterA
                     MPS_AVAILABLE_STARTING_BUT_DEPRECATED( "use fusedNeuronDescriptor property instead",
-                                      macos(10.13, 10.13.4), ios(11.0, 11.3), tvos(11.0, 11.3) );
+                                      macos(10.13, 10.13.4), ios(11.0, 11.3), tvos(11.0, 11.3) )  MPS_UNAVAILABLE(macCatalyst);
 
 /*!
  *  @abstract   Getter funtion for neuronType set using setNeuronType:parameterA:parameterB method
  */
 -(float) neuronParameterB
                     MPS_AVAILABLE_STARTING_BUT_DEPRECATED( "use fusedNeuronDescriptor property instead",
-                                      macos(10.13, 10.13.4), ios(11.0, 11.3), tvos(11.0, 11.3) );
+                                      macos(10.13, 10.13.4), ios(11.0, 11.3), tvos(11.0, 11.3) )  MPS_UNAVAILABLE(macCatalyst);
 
 /*!
  *  @abstract   Add per-channel neuron parameters A for PReLu neuron activation functions.
@@ -319,7 +319,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(10.0), tvos(10.0))
  */
 -(void) setNeuronToPReLUWithParametersA: (NSData* __nonnull) A
                             MPS_AVAILABLE_STARTING_BUT_DEPRECATED( "use fusedNeuronDescriptor property instead",
-                                      macos(10.13, 10.13.4), ios(11.0, 11.3), tvos(11.0, 11.3) );
+                                      macos(10.13, 10.13.4), ios(11.0, 11.3), tvos(11.0, 11.3))  MPS_UNAVAILABLE(macCatalyst);
 
 @end    /* MPSCNNConvolutionDescriptor */
 
@@ -348,7 +348,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(10.0), tvos(10.0))
  *                   2) The destination MPSImage to encode call must have at least N/r^2 + destinationFeatureChannelOffset channels.
  *                   3) Number of feature channels in reshaped output image (N/r^2) can be any value when groups = 1 but must be multiple of 4 when groups > 1.
 */
-MPS_CLASS_AVAILABLE_STARTING(macos(10.13), ios(11.0), tvos(11.0))
+MPS_CLASS_AVAILABLE_STARTING(macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0))
 @interface MPSCNNSubPixelConvolutionDescriptor : MPSCNNConvolutionDescriptor
 
 /*! @property      subPixelScaleFactor
@@ -376,7 +376,7 @@ MPS_CLASS_AVAILABLE_STARTING(macos(10.13), ios(11.0), tvos(11.0))
  *
  *                    Currently only channel multipler of 1 is supported i.e. inputFeatureChannels == outputFeatureChannels
  */
-MPS_CLASS_AVAILABLE_STARTING(macos(10.13), ios(11.0), tvos(11.0))
+MPS_CLASS_AVAILABLE_STARTING(macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0))
 @interface MPSCNNDepthWiseConvolutionDescriptor : MPSCNNConvolutionDescriptor
 
 /*! @property      channelMultiplier
@@ -386,6 +386,25 @@ MPS_CLASS_AVAILABLE_STARTING(macos(10.13), ios(11.0), tvos(11.0))
 @property(readonly, nonatomic) NSUInteger      channelMultiplier;
 
 @end
+    
+/*! @enum        MPSCNNConvolutionWeightsLayout
+ *  @discussion  A value to specify layout of weights returned by MPSCNNConvolutionDataSource
+ *               Currently only OHWI layout is supported.
+ *
+ *  @constant   MPSCNNConvolutionWeightsLayoutOHWI  // weights[ outputFeatureChannels ][ kernelHeight ][ kernelWidth ][ inputFeatureChannels/groups ]
+ */
+#if defined(DOXYGEN)
+    typedef enum MPSCNNConvolutionWeightsLayout
+#else
+    typedef NS_ENUM(uint32_t, MPSCNNConvolutionWeightsLayout)
+#endif
+    {
+        MPSCNNConvolutionWeightsLayoutOHWI           MPS_ENUM_AVAILABLE_STARTING( macos(10.15), ios(13.0), macCatalyst(13.0), tvos(13.0)) MPS_SWIFT_NAME(OHWI) = 0,
+    }
+#if defined(DOXYGEN)
+    MPSCNNConvolutionWeightsLayout
+#endif
+    ;
     
 /*! @enum        MPSCNNWeightsQuantizationType
  *  @discussion A value to specify a type of quantization used to generate quantized UInt weights.
@@ -402,9 +421,9 @@ MPS_CLASS_AVAILABLE_STARTING(macos(10.13), ios(11.0), tvos(11.0))
     typedef NS_ENUM(uint32_t, MPSCNNWeightsQuantizationType)
 #endif
     {
-        MPSCNNWeightsQuantizationTypeNone           MPS_ENUM_AVAILABLE_STARTING( macos(10.14), ios(11.0), tvos(11.0)) MPS_SWIFT_NAME(none) = 0,
-        MPSCNNWeightsQuantizationTypeLinear         MPS_ENUM_AVAILABLE_STARTING( macos(10.14), ios(11.0), tvos(11.0)) MPS_SWIFT_NAME(none) = 1,
-        MPSCNNWeightsQuantizationTypeLookupTable    MPS_ENUM_AVAILABLE_STARTING( macos(10.14), ios(11.0), tvos(11.0)) MPS_SWIFT_NAME(none) = 2,
+        MPSCNNWeightsQuantizationTypeNone           MPS_ENUM_AVAILABLE_STARTING( macos(10.14), ios(11.0), macCatalyst(13.0), tvos(11.0)) MPS_SWIFT_NAME(none) = 0,
+        MPSCNNWeightsQuantizationTypeLinear         MPS_ENUM_AVAILABLE_STARTING( macos(10.14), ios(11.0), macCatalyst(13.0), tvos(11.0)) MPS_SWIFT_NAME(none) = 1,
+        MPSCNNWeightsQuantizationTypeLookupTable    MPS_ENUM_AVAILABLE_STARTING( macos(10.14), ios(11.0), macCatalyst(13.0), tvos(11.0)) MPS_SWIFT_NAME(none) = 2,
     }
 #if defined(DOXYGEN)
     MPSCNNWeightsQuantizationType
@@ -418,7 +437,7 @@ MPS_CLASS_AVAILABLE_STARTING(macos(10.13), ios(11.0), tvos(11.0))
  *  @class      MPSCNNConvolutionGradientState
  *  @discussion The MPSCNNConvolutionGradientState is returned by resultStateForSourceImage:sourceStates method on MPSCNNConvolution object.
  *              Note that resultStateForSourceImage:sourceStates:destinationImage creates the object on autoreleasepool.
- *              It will be consumed by MPSCNNConvolutionGradient. This used by MPSCNNConvolutionTranspose encode call
+ *              It will be consumed by MPSCNNConvolutionGradient. This is also used by MPSCNNConvolutionTranspose encode call
  *              that returns MPSImage on left hand side to correctly size the destination.
  *              Note that state objects are not usable across batches i.e. when batch is done you should nuke the state object and create
  *              new one for next batch.
@@ -461,7 +480,7 @@ MPS_CLASS_AVAILABLE_STARTING(macos(10.13), ios(11.0), tvos(11.0))
  *                        will reload the weights from application's update kernel in dest on GPU without CPU side involvement.
  *
  */
-MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3))
+MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3))
 @interface MPSCNNConvolutionGradientState : MPSNNGradientState <MPSImageSizeEncodingState>
 
 /*! @property   gradientForWeights
@@ -470,6 +489,8 @@ MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3))
  *              the weights layout provided by data source i.e. it can be interpreted as 4D array
  *
  *                   gradientForWeights[outputFeatureChannels][kernelHeight][kernelWidth][inputFeatureChannels/groups]
+ *              For depthwise convolution it will be (since we only support channel multiplier of 1 currently)
+ *                   gradientForWeights[outputFeatureChannels][kernelHeight][kernelWidth]
  */
 @property (readonly, nonatomic) __nonnull id<MTLBuffer> gradientForWeights;
 
@@ -479,14 +500,55 @@ MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3))
 @property (readonly, nonatomic) __nonnull id<MTLBuffer> gradientForBiases;
 
 /*! @property   convolution
- *  @abstract   The convolution filter that produced the state. */
+ *  @abstract   The convolution filter that produced the state.
+ *              For child MPSCNNConvolutionTrasposeGradientState object, convolution
+ *              below refers to MPSCNNConvolution object that produced MPSCNNConvolutionGradientState object
+ *              which was used to create MPSCNNConvolutionTransposeGradientState object. See resultStateForSourceImage:sourceStates
+ *              method of MPSCNNConvolutionTranspose below.
+ */
 @property (readonly, nonatomic, retain, nonnull) MPSCNNConvolution * convolution;
 
+/*! @property   gradientForWeightsLayout
+ *  @abstract   Layout of gradient with respect to weights in gradientForWeights buffer.
+ *              Currently only MPSCNNConvolutionWeightsLayoutOHWI is supported.
+ */
+@property (readonly, nonatomic) MPSCNNConvolutionWeightsLayout gradientForWeightsLayout
+               MPS_AVAILABLE_STARTING(macos(10.15), ios(13.0), macCatalyst(13.0), tvos(13.0));
 @end
     
 typedef NSArray<MPSCNNConvolutionGradientState*>  MPSCNNConvolutionGradientStateBatch
-        MPS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3));
+        MPS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3));
 
+@class MPSCNNConvolutionTranspose;
+/*!
+ *  @class      MPSCNNConvolutionTransposeGradientState
+ *  @discussion The MPSCNNConvolutionTransposeGradientState is returned by resultStateForSourceImage:sourceStates method on MPSCNNConvolutionTranspose object.
+ *              Note that resultStateForSourceImage:sourceStates:destinationImage creates the object on autoreleasepool.
+ *              It will be consumed by MPSCNNConvolutionTransposeGradient. It contains reference to MPSCNNConvolutionGradientState object that connects
+ *              MPSCNNConvolution and its corresponding MPSCNNConvolutionTranspose in forward pass of autoencoder. In an autoencoder forward pass, MPSCNNConvolutionGradientState is produced
+ *              by MPSCNNConvolution object and is used by corresponding MPSCNNConvolutionTraspose of forward pass that "undo" the corresponding MPSCNNConvolution. It is used to correctly size
+ *              destination image that is returned on left hand side by encode call MPSCNNConvolutionTranspose as well as automatically set kernelOffsetX/Y on MPSCNNConvolutionTranspose using
+ *              the offset and other properties of corresponding MPSCNNConvolution object. During training, same MPSCNNConvolutionGradientState object will be consumed by MPSCNNConvolutionGradient
+ *              object and the MPSCNNConvolutionTransposeGradientState produced by MPSCNNConvolutionTranspose's resultStateForSourceImage:sourceStates:destinationImage will be consumed by
+ *              MPSCNNConvolutionTransposeGradient object
+ *
+ *              Note that state objects are not usable across batches i.e. when batch is done you should nuke the state object and create
+ *              new one for next batch.
+ *              Weights update process for MPSCNNConvolutionTranspose is same as explained above for MPSCNNConvolution. See comments for MPSCNNConvolutionGradientState.
+ *
+ */
+MPS_CLASS_AVAILABLE_STARTING(macos(10.15.0), ios(13.0), macCatalyst(13.0), tvos(13.0))
+@interface MPSCNNConvolutionTransposeGradientState : MPSCNNConvolutionGradientState
+
+/*! @property   convolutionTranspose
+ *  @abstract   The convolutionTranspose filter that produced the state. */
+@property (readonly, nonatomic, retain, nonnull) MPSCNNConvolutionTranspose * convolutionTranspose;
+
+@end
+    
+typedef NSArray<MPSCNNConvolutionTransposeGradientState*>  MPSCNNConvolutionTransposeGradientStateBatch
+                                MPS_AVAILABLE_STARTING(macos(10.15.0), ios(13.0), macCatalyst(13.0), tvos(13.0));
+    
 /*!
  *  @class      MPSCNNConvolutionWeightsAndBiasesState
  *  @discussion The MPSCNNConvolutionWeightsAndBiasesState is returned by exportWeightsAndBiasesWithCommandBuffer: method on MPSCNNConvolution object.
@@ -496,7 +558,7 @@ typedef NSArray<MPSCNNConvolutionGradientState*>  MPSCNNConvolutionGradientState
  *              MTLBuffer. If application does not want to keep a copy of weights/biases, it can call [MPSCNNConvolution exportWeightsAndBiasesWithCommandBuffer:] to get
  *              the current weights from convolution itself, do the updated and call reloadWithCommandBuffer.
  */
-MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3))
+MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3))
 @interface MPSCNNConvolutionWeightsAndBiasesState : MPSState
 
 /*! @property   weights
@@ -505,6 +567,8 @@ MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3))
  *              the weights layout provided by data source i.e. it can be interpreted as 4D array
  *
  *                   weights[outputFeatureChannels][kernelHeight][kernelWidth][inputFeatureChannels/groups]
+ *              for regular convolution. For depthwise convolution
+ *                   weights[outputFeatureChannels][kernelHeight][kernelWidth] as we currently only support channel multiplier of 1.
  */
 @property (readonly, nonatomic) __nonnull id<MTLBuffer> weights;
 
@@ -513,17 +577,64 @@ MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3))
  */
 @property (readonly, nonatomic) __nullable id<MTLBuffer> biases;
 
+/*! @property   weightsOffset
+ *  @discussion Offset at which weights start in weights buffer
+ *              Default value is 0.
+ */
+@property (readonly, nonatomic) NSUInteger weightsOffset;
+
+/*! @property   biasesOffset
+ *  @discussion Offset at which weights start in biases buffer
+ *              Default value is 0.
+ */
+@property (readonly, nonatomic) NSUInteger biasesOffset;
+
+/*!@abstract    Create and initialize MPSCNNConvolutionWeightsAndBiasesState with application
+ *              provided weights and biases buffers.
+ * @discussion  This is the convinience API when buffers of exact size i.e.
+ *                 [weights length] =  inputFeatureChannels*kernelWidth*kernelHeight*channelMultiplier*sizeof(float)                   // for depthwise convolution
+ *                               outputFeatureChannels*kernelWidth*kernelHeight*(inputChannels/groups)*sizeof(float)      // for regular otherwise
+ *              and [biases length]  =  outputFeatureChannels*sizeof(float)
+ */
 - (nonnull instancetype) initWithWeights: (__nonnull id<MTLBuffer>) weights
                                   biases: (__nullable id<MTLBuffer>) biases;
 
+/*!@abstract    Create and initialize MPSCNNConvolutionWeightsAndBiasesState with application provided convolution descriptor
+ * @discussion  Create weights and biases buffers of appropriate size
+ */
 - (nonnull instancetype) initWithDevice: (__nonnull id<MTLDevice>) device
                cnnConvolutionDescriptor: (MPSCNNConvolutionDescriptor* __nonnull) descriptor;
+
+/*!@abstract    Create and initialize temporary MPSCNNConvolutionWeightsAndBiasesState with application provided convolution descriptor
+ * @discussion  Create weights and biases buffers of appropriate size from command buffer cache.
+ */
 
 + (nonnull instancetype) temporaryCNNConvolutionWeightsAndBiasesStateWithCommandBuffer: (__nonnull id<MTLCommandBuffer>) commandBuffer
                                                               cnnConvolutionDescriptor: (MPSCNNConvolutionDescriptor* __nonnull) descriptor;
 
+/*!@abstract    Create and initialize MPSCNNConvolutionWeightsAndBiasesState with application
+ *              provided weights and biases buffers.
+ * @discussion  It gives finer allocation control to application e.g. application can pass same buffer for weights and biases with
+ *              appropriate offsets. Or offset into some larger buffer from application managed heap etc. Number of weights
+ *              and biases or the length of weights and biases buffer this object owns (will read or write to), starting at offset is
+ *              determined by MPSCNNConvolutionDescriptor passed in.
+ *              weightsLength =  inputFeatureChannels*kernelWidth*kernelHeight*channelMultiplier*sizeof(float)                   // for depthwise convolution
+ *                           outputFeatureChannels*kernelWidth*kernelHeight*(inputChannels/groups)*sizeof(float)      // for regular otherwise
+ *              biasesLength  =  outputFeatureChannels*sizeof(float)
+ *              Thus filters operating on this object will read or write to NSRange(weightsOffset, weightsLength) of weights buffer
+ *              and NSRange(biasesOffset, biasesLength) of biases buffer. Thus sizes of buffers provided must be such that
+ *                              weightsOffset + weightsLength <= [weights length]
+ *                         and     biasesOffset + biasesLength <= [biases length]
+ *              Offsets must of sizeof(float) aligned i.e. multiple of 4.
+ */
+- (nonnull instancetype) initWithWeights: (__nonnull id<MTLBuffer>) weights
+                           weightsOffset: (NSUInteger) weightsOffset
+                                  biases: (__nullable id<MTLBuffer>) biases
+                            biasesOffset: (NSUInteger) biasesOffset
+                cnnConvolutionDescriptor: (MPSCNNConvolutionDescriptor* __nonnull) descriptor
+                                              MPS_AVAILABLE_STARTING(macos(10.15.0), ios(13.0), macCatalyst(13.0), tvos(13.0));
+
 @end
-    
     
 /*! @protocol   MPSCNNConvolutionDataSource
  *  @abstract   Provides convolution filter weights and bias terms
@@ -683,7 +794,7 @@ MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3))
     -(MPSCNNConvolutionWeightsAndBiasesState* __nullable) updateWithCommandBuffer: (__nonnull id<MTLCommandBuffer>) commandBuffer
                                                                     gradientState: (MPSCNNConvolutionGradientState* __nonnull) gradientState
                                                                       sourceState: (MPSCNNConvolutionWeightsAndBiasesState* __nonnull) sourceState
-                                                                                        MPS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3));
+                                                                                        MPS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3));
     
     /*! @abstract   Callback for the MPSNNGraph to update the convolution weights on CPU.
      *                               MPSCNNConvolutionGradientNode.MPSNNTrainingStyle controls where you want your update
@@ -700,8 +811,8 @@ MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3))
      */
     - (BOOL) updateWithGradientState: (MPSCNNConvolutionGradientState* __nonnull) gradientState
                          sourceState: (MPSCNNConvolutionWeightsAndBiasesState* __nonnull) sourceState
-                                         MPS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3));
-
+                                         MPS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3));
+    
     /*! @abstract  When copyWithZone:device on convolution is called, data source copyWithZone:device
      *             will be called if data source object responds to this selector. If not, copyWithZone:
      *             will be called if data source responds to it. Otherwise, it is simply retained.
@@ -712,8 +823,14 @@ MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3))
      */
 
     -(nonnull instancetype) copyWithZone: (nullable NSZone*) zone
-                                  device: (nullable id <MTLDevice>) device MPS_AVAILABLE_STARTING(macos(10.14), ios(12.0), tvos(12.0));
+                                  device: (nullable id <MTLDevice>) device MPS_AVAILABLE_STARTING(macos(10.14), ios(12.0), macCatalyst(13.0), tvos(12.0));
 
+    /*! @abstract Layout of weights returned by data source. Currently only OHWI layout is supported which is default.
+                  See MPSCNNConvolutionWeightsLayout above.
+     */
+    
+    -(MPSCNNConvolutionWeightsLayout) weightsLayout
+                                  MPS_AVAILABLE_STARTING(macos(10.15), ios(13.0), macCatalyst(13.0), tvos(13.0));
 
 @end
     
@@ -726,7 +843,7 @@ MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3))
  *  @discussion The MPSCNNConvolution specifies a convolution.
  *              The MPSCNNConvolution convolves the input image with a set of filters, each producing one feature map in the output image.
  */
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(10.0), tvos(10.0))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(10.0), macCatalyst(13.0), tvos(10.0))
 @interface  MPSCNNConvolution : MPSCNNKernel
 
 /*! @property   inputFeatureChannels
@@ -760,36 +877,36 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(10.0), tvos(10.0))
  */
 @property(readonly, nonatomic) const MPSCNNNeuron * __nullable  neuron
     MPS_AVAILABLE_STARTING_BUT_DEPRECATED( "A MPSCNNNeuron is much too heavy for this purpose. Please set fusedNeuronDescriptor property of convolution descriptor instead.",
-                                            ios(10.0, 11.0), tvos(10.0, 11.0) );
+                                            ios(10.0, 11.0), tvos(10.0, 11.0) )  MPS_UNAVAILABLE(macCatalyst);
 
 /*! @abstract   The type of neuron to append to the convolution
  *  @discussion Please see class description for a full list. Default is MPSCNNNeuronTypeNone. */
 @property   (readonly, nonatomic) MPSCNNNeuronType     neuronType
     MPS_AVAILABLE_STARTING_BUT_DEPRECATED( "Use fusedNeuronDesciptor instead.",
-                                        macos(10.13, 10.14), ios(10.0, 12.0), tvos(10.0, 12.0) );
+                                        macos(10.13, 10.14), ios(10.0, 12.0), tvos(10.0, 12.0))  MPS_UNAVAILABLE(macCatalyst);
 
 /*! @abstract   Parameter "a" for the neuron.  Default: 1.0f
  *  @discussion Please see class description for interpretation of a. */
 @property   (readonly, nonatomic) float                neuronParameterA
     MPS_AVAILABLE_STARTING_BUT_DEPRECATED( "Use fusedNeuronDesciptor instead.",
-                                        macos(10.13, 10.14), ios(10.0, 12.0), tvos(10.0, 12.0) );
+                                        macos(10.13, 10.14), ios(10.0, 12.0), tvos(10.0, 12.0) )  MPS_UNAVAILABLE(macCatalyst);
 
 /*! @abstract   Parameter "b" for the neuron.  Default: 1.0f
  *  @discussion Please see class description for interpretation of b. */
 @property   (readonly, nonatomic) float                neuronParameterB
     MPS_AVAILABLE_STARTING_BUT_DEPRECATED( "Use fusedNeuronDesciptor instead.",
-                                        macos(10.13, 10.14), ios(10.0, 12.0), tvos(10.0, 12.0) );
+                                        macos(10.13, 10.14), ios(10.0, 12.0), tvos(10.0, 12.0) )  MPS_UNAVAILABLE(macCatalyst);
 
 /*! @abstract   Parameter "c" for the neuron.  Default: 1.0f
  *  @discussion Please see class description for interpretation of c. */
 @property   (readonly, nonatomic) float                neuronParameterC
     MPS_AVAILABLE_STARTING_BUT_DEPRECATED( "Use fusedNeuronDesciptor instead.",
-                                        macos(10.13, 10.14), ios(10.0, 12.0), tvos(10.0, 12.0) );
+                                        macos(10.13, 10.14), ios(10.0, 12.0), tvos(10.0, 12.0) )  MPS_UNAVAILABLE(macCatalyst);
 
 /*! @abstract   Fused neuron descritor passed in convolution descriptor for fusion with convolution.
  *  @discussion Please see class description for interpretation of c. */
 @property (readonly, nonatomic) MPSNNNeuronDescriptor* __nullable fusedNeuronDescriptor
-                                MPS_CLASS_AVAILABLE_STARTING( macos(10.14), ios(12.0), tvos(12.0));
+                                MPS_CLASS_AVAILABLE_STARTING( macos(10.14), ios(12.0), macCatalyst(13.0), tvos(12.0));
 
 /*! @abstract   Channel multiplier.
  *  @discussion For convolution created with MPSCNNDepthWiseConvolutionDescriptor, it is the number of
@@ -802,7 +919,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(10.0), tvos(10.0))
  *  @discussion  See MPSNeuralNetworkTypes.h for discussion. Default is MPSNNConvolutionAccumulatorPrecisionOptionFloat.
  */
 @property   (readwrite, nonatomic) MPSNNConvolutionAccumulatorPrecisionOption accumulatorPrecisionOption
-                                                                      MPS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3));
+                                                                      MPS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3));
 
 /*!
  *  @abstract   Initializes a convolution kernel
@@ -816,7 +933,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(10.0), tvos(10.0))
  */
 -(nonnull instancetype) initWithDevice: (nonnull id <MTLDevice>) device
                                weights: (nonnull id <MPSCNNConvolutionDataSource>) weights NS_DESIGNATED_INITIALIZER
-                                        MPS_AVAILABLE_STARTING(macos(10.13), ios(11.0), tvos(11.0));
+                                        MPS_AVAILABLE_STARTING(macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0));
 
 /*!
  *  @abstract   Initializes a convolution kernel
@@ -842,7 +959,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(10.0), tvos(10.0))
                              biasTerms: (const float * __nullable) biasTerms
                                  flags: (MPSCNNConvolutionFlags) flags  NS_DESIGNATED_INITIALIZER
         MPS_AVAILABLE_STARTING_BUT_DEPRECATED( "Please use  -initWithDevice:convolutionDescriptor:weights: instead.",
-                                                ios(10.0, 11.0), tvos(10.0, 11.0) );
+                                                ios(10.0, 11.0), tvos(10.0, 11.0) )  MPS_UNAVAILABLE(macCatalyst);
 
 /*! @abstract NSSecureCoding compatability
  *  @discussion While the standard NSSecureCoding/NSCoding method
@@ -856,7 +973,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(10.0), tvos(10.0))
  */
 -(nullable instancetype) initWithCoder:(NSCoder * __nonnull)aDecoder
                                 device:(nonnull id <MTLDevice>) device NS_DESIGNATED_INITIALIZER
-                                        MPS_AVAILABLE_STARTING(macos(10.13), ios(11.0), tvos(11.0));
+                                        MPS_AVAILABLE_STARTING(macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0));
 
 /*
  * Use initWithDevice:weights instead
@@ -876,38 +993,38 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(10.0), tvos(10.0))
                                                             sourceStates: (NSArray <MPSState *> *__nullable) sourceStates
                                                         destinationImage: (MPSImage *__nonnull) destinationImage
                                                                                 MPS_SWIFT_NAME( resultState(sourceImage:sourceStates:destinationImage:))
-                                                                                MPS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3));
+                                                                                MPS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3));
 
 /* To be used with batch encode call. Since same state is used across entire batch, it will return copy of same state in returned NSArray*/
 -(MPSCNNConvolutionGradientStateBatch * __nullable) resultStateBatchForSourceImage: (MPSImageBatch * __nonnull) sourceImage
                                                                       sourceStates: (NSArray<MPSStateBatch *> * __nullable) sourceStates
                                                                   destinationImage:(MPSImageBatch * _Nonnull)destinationImage
                                                                     MPS_SWIFT_NAME( resultStateBatch(sourceImage:sourceStates:destinationImage:))
-                                                                    MPS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3));
+                                                                    MPS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3));
 
 -(MPSCNNConvolutionGradientState * __nullable) temporaryResultStateForCommandBuffer: (nonnull id <MTLCommandBuffer>) commandBuffer
                                                                         sourceImage: (MPSImage *__nonnull) sourceImage
                                                                        sourceStates: (NSArray <MPSState *> *__nullable) sourceStates
                                                                    destinationImage: (MPSImage * __nonnull)destinationImage
-                                                                    MPS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), tvos(11.3))
+                                                                    MPS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3))
                                                                     MPS_SWIFT_NAME( temporaryResultState(commandBuffer:sourceImage:sourceStates:destinationImage:));
 
 -(MPSCNNConvolutionGradientStateBatch * __nullable) temporaryResultStateBatchForCommandBuffer: (nonnull id <MTLCommandBuffer>) commandBuffer
                                                                                   sourceImage: (MPSImageBatch *__nonnull) sourceImage
                                                                                  sourceStates: (NSArray <MPSStateBatch *> *__nullable) sourceStates
                                                                              destinationImage: (MPSImageBatch *__nonnull) destinationImage
-                                                                    MPS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), tvos(11.3))
+                                                                    MPS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3))
                                                                     MPS_SWIFT_NAME( temporaryResultStateBatch(commandBuffer:sourceImage:sourceStates:destinationImage:));
 
 /*! @abstract   CPU side reload. Reload the updated weights and biases from data provider into internal weights and bias buffers. Weights and biases
  *              gradients needed for update are obtained from MPSCNNConvolutionGradientState object. Data provider passed in init call is used for this purpose.
  */
 -(void) reloadWeightsAndBiasesFromDataSource
-            MPS_AVAILABLE_STARTING(macos(10.14), ios(12.0), tvos(12.0));
+            MPS_AVAILABLE_STARTING(macos(10.14), ios(12.0), macCatalyst(13.0), tvos(12.0));
 
 /*! Deprecated. dataSource will be ignored. */
 -(void) reloadWeightsAndBiasesWithDataSource: (__nonnull id<MPSCNNConvolutionDataSource>) dataSource
-            MPS_AVAILABLE_STARTING_BUT_DEPRECATED("Please use -reloadWeightsAndBiasesFromDataSource instead. ", macos(10.13.4, 10.14), ios(11.3, 12.0), tvos(11.3, 12.0));
+            MPS_AVAILABLE_STARTING_BUT_DEPRECATED("Please use -reloadWeightsAndBiasesFromDataSource instead. ", macos(10.13.4, 10.14), ios(11.3, 12.0), tvos(11.3, 12.0))  MPS_UNAVAILABLE(macCatalyst);
 
 
 /*! @abstract   GPU side reload. Reload the updated weights and biases from update buffer produced by application enqueued metal kernel into internal weights
@@ -921,7 +1038,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(10.0), tvos(10.0))
  */
 -(void) reloadWeightsAndBiasesWithCommandBuffer: (__nonnull id<MTLCommandBuffer>) commandBuffer
                                           state: (MPSCNNConvolutionWeightsAndBiasesState* __nonnull) state
-                                    MPS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3));
+                                    MPS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3));
 
 /*! @abstract   GPU side export. Enqueue a kernel to export current weights and biases stored in MPSCNNConvoltion's internal buffers into weights and biases MTLBuffer
  *              returned in MPSCNNConvolutionWeightsAndBiasesState.
@@ -933,7 +1050,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(10.0), tvos(10.0))
  */
 - (MPSCNNConvolutionWeightsAndBiasesState* __nonnull) exportWeightsAndBiasesWithCommandBuffer: (__nonnull id<MTLCommandBuffer>) commandBuffer
                                                                     resultStateCanBeTemporary: (BOOL) resultStateCanBeTemporary
-                                                                     MPS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3));
+                                                                     MPS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3));
 
 @end    /* MPSCNNConvolution */
     
@@ -948,13 +1065,13 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(10.0), tvos(10.0))
 #endif
 {
     // Only compute gradient with respect to data
-    MPSCNNConvolutionGradientOptionGradientWithData              MPS_ENUM_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), tvos(11.3)) MPS_SWIFT_NAME(gradientWithData)           = 1U,
+    MPSCNNConvolutionGradientOptionGradientWithData              MPS_ENUM_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3)) MPS_SWIFT_NAME(gradientWithData)           = 1U,
     
     // Only compute gradient with respect to weights and bias
-    MPSCNNConvolutionGradientOptionGradientWithWeightsAndBias    MPS_ENUM_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), tvos(11.3)) MPS_SWIFT_NAME(gradientWithWeightsAndBias) = 2U,
+    MPSCNNConvolutionGradientOptionGradientWithWeightsAndBias    MPS_ENUM_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3)) MPS_SWIFT_NAME(gradientWithWeightsAndBias) = 2U,
     
     // Compute both gradients
-    MPSCNNConvolutionGradientOptionAll                           MPS_ENUM_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), tvos(11.3)) MPS_SWIFT_NAME(gradientWithWeightsAndBias) = MPSCNNConvolutionGradientOptionGradientWithData | MPSCNNConvolutionGradientOptionGradientWithWeightsAndBias
+    MPSCNNConvolutionGradientOptionAll                           MPS_ENUM_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3)) MPS_SWIFT_NAME(gradientWithWeightsAndBias) = MPSCNNConvolutionGradientOptionGradientWithData | MPSCNNConvolutionGradientOptionGradientWithWeightsAndBias
 };
     
 /*!
@@ -993,8 +1110,8 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(10.0), tvos(10.0))
  *              If I denotes the input image to corresponding MPSCNNConvolution in forward pass and E denoates the loss gradient from previous layer
  *              (normally neuron backward layer) in backward pass, gradient of E with respect to weights is
  *
- *              delta_E/delta_Wkpqc = sum_i sum_j [ E(i - primaryOffset.x,j - primaryOffset.y, k) * I( secondaryStrideInPixelX*i + secondaryOffset.x - secondaryDilationRateX*secondaryKernelWidth/2 + secondaryDilationRateX*p,
- *                                                                                                     secondaryStrideinPixelY*i + secondaryOffset.y - secondaryDilationRateY*secondaryKernelHeight/2 + secondaryDilationRateY*q, c) ]
+ *              delta_E/delta_Wkpqc = sum_i sum_j [ E(i, j, k) * I( secondaryStrideInPixelX*i + secondaryOffset.x + secondaryDilationRateX*p,
+ *                                                                  secondaryStrideinPixelY*i + secondaryOffset.y + secondaryDilationRateY*q, c) ]
  *
  *              where i goes over 0..W-1 and j goes over 0..H-1, (W,H) being width and height of E.
  *              p in [0, secondaryKernelWidth-1]
@@ -1004,7 +1121,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(10.0), tvos(10.0))
  *
  *              and gradient with respect to bias
  *
- *              delta_E/delta_bk = sum_i sum_j [ E(i - primaryOffset.x,j - primaryOffset.y, k) ]
+ *              delta_E/delta_bk = sum_i sum_j [ E(i, j, k) ]
  *
  *              These gradients with respect to weights and bias are returned as buffers in MPSCNNConvolutionGradientState object passed in the encode call.
  *              These are consumed by MPSCNNConvolution object's -updateWeightsAndBias:MPSCNNConvolutionGradientState* method for CPU side update and
@@ -1032,8 +1149,45 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(10.0), tvos(10.0))
  *
  *              Currently back propagation for gradients is only supported for regualar convolution and depthwise convolution. Back propagation
  *              sub-pixel convolution are not supported. So channelMultiplier and subPixelScaleFactor must be one.
+ *
+ *  Note on setting correct offsets
+ *  ===============================
+ *              If the forward convolution is called with
+ *                              offset = _offset; kernelWidth = kW; kernelHeight = kH; strideInPixelsX = sX; strideInPixelsY = sY;
+ *                              dilationRateX = dX; dilationRateY = dY;
+ *              thus dilated filter parameters are
+ *                              kW_Dilated = (kW - 1)*dX + 1; kH_Dilated = (kH - 1)*dY + 1;
+ *              Then the correct offset can be computed as follows.
+ *              Convoluton Gradient with Data
+ *              =============================
+ *                Convolution gradient with data of forward convolution with stride > 1 is essentially normal convoution with unit stride,
+ *                on an image that is formed by inserting strideInPixelsX-1 zeros in between each column and strideInPixelsY-1 zeros in between each
+ *                row of input gradient (output gradient of last layer) with kernel weights that are rotated by 180 degrees in spatial dimension (MPSCNNConvolutionGradient
+ *                does this rotation internally). primaryOffset property defines offset in original input gradient coordinate system. In order to
+ *                translate it in zero filled intermediate image coordinate system, kernelOffsetX and kernelOffsetY properties can be used as follows
+ *                       offsetInZeroFilledImageX = primaryOffset.x * primaryStrideInPixelsX + kernelOffsetX;
+ *                       offsetInZeroFilledImageY = primaryOffset.y * primaryStrideInPixelsY + kernelOffsetY;
+ *                This is what internally MPSCNNConvolutionGradient do. In order to correctly match forward convolution offset setting (so that padding policy is
+ *                consistent), application should set
+ *                       primaryOffset.x = 0; primaryOffset.y = 0;
+ *                       kernelOffset.x = -_offset.x + (~(NSInteger) kW_Dilated & 1L);
+ *                       kernelOffset.y = -_offset.y + (~(NSInteger) kH_Dilated & 1L);
+ *                Convolution gradient with data does not use secondaryOffset.
+ *
+ *                Convolution Gradient with Weights and Biases
+ *                ============================================
+ *                 For consistent padding policy with respect to forward convolution,
+ *                       secondaryOffset.x = _offset.x - kW_Dilated/2
+ *                       secondaryOffset.y = _offset.y - kH_Dilated/2
+ *                 Convolution gradient with weights and biases does not use primaryOffset (or it is assumed to be zero) as summation is over entire
+ *                 gradient image and only gradient image without any padding is currently accepted. If previous layer produces gradient image with
+ *                 padding, slice operation should be used to extract out the gradient which will be input to MPSCNNConvolutionGradient.
+ *
+ *             Note that if application uses encode method that return destination gradient on left hand side and consumes MPSCNNConvolutionGradientState
+ *             object produced by forward MPSCNNConvolution, all these parameters are set automatically for the application i.e. applicaiton does not
+ *             need to worry about setting these.
 */
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), tvos(11.3))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3))
 @interface  MPSCNNConvolutionGradient : MPSCNNGradientKernel
 
 /*! @property   sourceGradientFeatureChannels
@@ -1086,7 +1240,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), tvos(11.3))
  */
 @property   (readwrite, nonatomic) BOOL serializeWeightsAndBiases
                             MPS_AVAILABLE_STARTING_BUT_DEPRECATED( "This is deprecated and doesn't do anything. It is here for backward compatibility. MPSCNNConvolutionGradient doesn't serialize weights. It gets weight from state.convolution.dataSource on first use i.e. first encodeToCommandBuffer call",
-                                      macos(10.13.4, 10.14), ios(11.3, 12.0), tvos(11.3, 12.0) );
+                                      macos(10.13.4, 10.14), ios(11.3, 12.0), tvos(11.3, 12.0))  MPS_UNAVAILABLE(macCatalyst);
 
 /*!
  *  @abstract   Initializes a convolution gradient (with respect to weights and bias) object.
@@ -1132,7 +1286,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), tvos(11.3))
  */
 -(void) reloadWeightsAndBiasesWithCommandBuffer: (__nonnull id<MTLCommandBuffer>) commandBuffer
                                           state: (MPSCNNConvolutionWeightsAndBiasesState* __nonnull) state
-                                                MPS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3));
+                                                MPS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3));
 
 @end    /* MPSCNNConvolutionGradient */
 
@@ -1170,7 +1324,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), tvos(11.3))
  *              performant method which may not be possible when using a general convolution. For example,
  *              we may internally use matrix multiplication or special reduction kernels for a specific platform.
  */
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(10.0), tvos(10.0))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(10.0), macCatalyst(13.0), tvos(10.0))
 @interface  MPSCNNFullyConnected : MPSCNNConvolution
 
 /*!
@@ -1185,7 +1339,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(10.0), tvos(10.0))
  */
 -(nonnull instancetype) initWithDevice: (nonnull id <MTLDevice>) device
                                weights: (nonnull id <MPSCNNConvolutionDataSource>) weights NS_DESIGNATED_INITIALIZER
-                                                MPS_AVAILABLE_STARTING(macos(10.13), ios(11.0), tvos(11.0));
+                                                MPS_AVAILABLE_STARTING(macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0));
 
 /*!
  *  @abstract   Initializes a convolution kernel
@@ -1211,7 +1365,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(10.0), tvos(10.0))
                              biasTerms: (const float * __nullable) biasTerms
                                  flags: (MPSCNNConvolutionFlags) flags  NS_DESIGNATED_INITIALIZER
                 MPS_AVAILABLE_STARTING_BUT_DEPRECATED( "Please use  -initWithDevice:convolutionDescriptor:weights: instead.",
-                                                            ios(10.0, 11.0), tvos(10.0, 11.0) );
+                                                            ios(10.0, 11.0), tvos(10.0, 11.0))  MPS_UNAVAILABLE(macos, macCatalyst);
 
 /*! @abstract NSSecureCoding compatability
  *  @discussion While the standard NSSecureCoding/NSCoding method
@@ -1225,7 +1379,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(10.0), tvos(10.0))
  */
 -(nullable instancetype) initWithCoder:(NSCoder * __nonnull)aDecoder
                                 device:(nonnull id <MTLDevice>) device NS_DESIGNATED_INITIALIZER
-                                                MPS_AVAILABLE_STARTING(macos(10.13), ios(11.0), tvos(11.0));
+                                                MPS_AVAILABLE_STARTING(macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0));
 
 /*
  * Use initWithDevice:weights instead
@@ -1244,7 +1398,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(10.0), tvos(10.0))
  *  @dependency This depends on Metal.framework
  *  @discussion Compute the gradient for fully connected layer.
  */
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), tvos(11.3))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3))
 @interface  MPSCNNFullyConnectedGradient : MPSCNNConvolutionGradient
 
 /*!
@@ -1386,10 +1540,13 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), tvos(11.3))
  *
  * @endcode
  *
+ *      Note that if your application is not using MPSCNNConvolutionGradientState to configure the convolution transpose with respect to convolution,
+ *      your application may do this using padding policy. In such case if convolution uses valid padding policy, than convolution transpose should use
+ *      full padding policy and vice vera. Full padding remains full. 
  */
 
 
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0))
 @interface  MPSCNNConvolutionTranspose : MPSCNNKernel
 
 /*! @property   inputFeatureChannels
@@ -1421,7 +1578,13 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
  *  @discussion  See MPSNeuralNetworkTypes.h for discussion. Default is MPSNNConvolutionAccumulatorPrecisionOptionFloat.
  */
 @property   (readwrite, nonatomic) MPSNNConvolutionAccumulatorPrecisionOption accumulatorPrecisionOption
-                                                    MPS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3));
+                                                    MPS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3));
+
+/*! @property   dataSource
+ *  @abstract   dataSource with which convolution transpose object was created
+ */
+@property(readonly, nonatomic, retain, nonnull) id<MPSCNNConvolutionDataSource>      dataSource
+                                MPS_AVAILABLE_STARTING(macos(10.15.0), ios(13.0), macCatalyst(13.0), tvos(13.0));
 
 /*!
  *  @abstract   Initializes a convolution transpose kernel
@@ -1458,6 +1621,10 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
  *
  *                  Note: the regular encodeToCommandBuffer:sourceImage: method may be used when no state is needed,
  *                  such as when the convolution transpose operation is not balanced by a matching convolution object upstream.
+ *                  These encode methods are for auto encoders where each convolution in inference pass is coupled with convolution
+ *                  transpose. In order for convolution transpose to correctly undo the convolution downsampling, MPSCNNConvolutionGradientState
+ *                  produced by convolution is needed by convolution transpose to correctly size destination image.
+ *                  These methods are only useful for inference only network. For training, use encode methods that take MPSCNNConvolutionTransposeGradientState below.
  *
  *  @param          commandBuffer       The command buffer
  *  @param          sourceImage         A MPSImage to use as the source images for the filter.
@@ -1472,32 +1639,225 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
 -(MPSImage * __nonnull) encodeToCommandBuffer: (nonnull id <MTLCommandBuffer>) commandBuffer
                                   sourceImage: (MPSImage *  __nonnull) sourceImage
                      convolutionGradientState: (MPSCNNConvolutionGradientState * __nullable) convolutionGradientState
-                        MPS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), tvos(11.3))
+                        MPS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3))
                         MPS_SWIFT_NAME( encode(commandBuffer:sourceImage:convolutionGradientState:));
 
 -(MPSImageBatch * __nonnull) encodeBatchToCommandBuffer: (nonnull id <MTLCommandBuffer>) commandBuffer
                                            sourceImages: (MPSImageBatch *  __nonnull) sourceImage
                               convolutionGradientStates: (MPSCNNConvolutionGradientStateBatch * __nullable) convolutionGradientState
-                        MPS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), tvos(11.3))
+                        MPS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3))
                         MPS_SWIFT_NAME( encodeBatch(commandBuffer:sourceImages:convolutionGradientStates:));
 
 -(void) encodeToCommandBuffer: (nonnull id <MTLCommandBuffer>) commandBuffer
                   sourceImage: (MPSImage *  __nonnull) sourceImage
      convolutionGradientState: (MPSCNNConvolutionGradientState * __nullable) convolutionGradientState
              destinationImage: (MPSImage * __nonnull) destinationImage
-                        MPS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3))
+                        MPS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3))
                         MPS_SWIFT_NAME(encode(commandBuffer:sourceImage:convolutionGradientState:destinationImage:));
 
 -(void) encodeBatchToCommandBuffer: (nonnull id <MTLCommandBuffer>) commandBuffer
                       sourceImages: (MPSImageBatch *  __nonnull) sourceImage
          convolutionGradientStates: (MPSCNNConvolutionGradientStateBatch * __nullable) convolutionGradientState
                  destinationImages: (MPSImageBatch * __nonnull) destinationImage
-                        MPS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3))
+                        MPS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3))
                         MPS_SWIFT_NAME(encodeBatch(commandBuffer:sourceImages:convolutionGradientStates:destinationImages:));
 
+/*! @abstract   Allocate a MPCNNConvolutionTransposeGradientState to hold the results from a -encodeBatchToCommandBuffer... operation
+ *
+ *  @param      sourceImage         The MPSImage consumed by the associated -encode call.
+ *  @param      sourceStates        The list of MPSCNNConvolutionGradientState consumed by the associated -encode call,
+ *                                  for a batch size of 1. In auto encoders, this state is produced by corresponding MPSCNNConvolution.
+ *
+ *  @return     The list of states produced by the -encode call for batch size of 1.
+ *              -isResultStateReusedAcrossBatch returns YES for MPSCNNConvolutionTranspose so same
+ *              state is used across entire batch. State object is not reusasable across batches.
+ */
+-(MPSCNNConvolutionTransposeGradientState * __nullable) resultStateForSourceImage: (MPSImage *__nonnull) sourceImage
+                                                                     sourceStates: (NSArray <MPSCNNConvolutionGradientState *> *__nullable) sourceStates
+                                                                 destinationImage: (MPSImage *__nonnull) destinationImage
+                                MPS_SWIFT_NAME( resultState(sourceImage:sourceStates:destinationImage:))
+                                    MPS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3));
+
+/* To be used with batch encode call. Since same state is used across entire batch, it will return copy of same state in returned NSArray*/
+-(MPSCNNConvolutionTransposeGradientStateBatch * __nullable) resultStateBatchForSourceImage: (MPSImageBatch * __nonnull) sourceImage
+                                                                               sourceStates: (NSArray<MPSCNNConvolutionGradientStateBatch *> * __nullable) sourceStates
+                                                                           destinationImage:(MPSImageBatch * _Nonnull)destinationImage
+                                    MPS_SWIFT_NAME( resultStateBatch(sourceImage:sourceStates:destinationImage:))
+                                    MPS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3));
+
+-(MPSCNNConvolutionTransposeGradientState * __nullable) temporaryResultStateForCommandBuffer: (nonnull id <MTLCommandBuffer>) commandBuffer
+                                                                                 sourceImage: (MPSImage *__nonnull) sourceImage
+                                                                                sourceStates: (NSArray <MPSCNNConvolutionGradientState *> *__nullable) sourceStates
+                                                                            destinationImage: (MPSImage * __nonnull)destinationImage
+                                                                MPS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3))
+                                                        MPS_SWIFT_NAME( temporaryResultState(commandBuffer:sourceImage:sourceStates:destinationImage:));
+
+-(MPSCNNConvolutionTransposeGradientStateBatch * __nullable) temporaryResultStateBatchForCommandBuffer: (nonnull id <MTLCommandBuffer>) commandBuffer
+                                                                                           sourceImage: (MPSImageBatch *__nonnull) sourceImage
+                                                                                          sourceStates: (NSArray <MPSCNNConvolutionGradientStateBatch *> *__nullable) sourceStates
+                                                                                      destinationImage: (MPSImageBatch *__nonnull) destinationImage
+                                                                MPS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3))
+                                                                    MPS_SWIFT_NAME( temporaryResultStateBatch(commandBuffer:sourceImage:sourceStates:destinationImage:));
+
+/*! @abstract   CPU side reload. Reload the updated weights and biases from data provider into internal weights and bias buffers. Weights and biases
+ *              gradients needed for update are obtained from MPSCNNConvolutionTransposeGradientState object. Data provider passed in init call is used for this purpose.
+ */
+-(void) reloadWeightsAndBiasesFromDataSource
+            MPS_AVAILABLE_STARTING(macos(10.15.0), ios(13.0), macCatalyst(13.0), tvos(13.0));
+
+
+/*! @abstract   GPU side reload. Reload the updated weights and biases from update buffer produced by application enqueued metal kernel into internal weights
+ *              and biases buffer. Weights and biases gradients needed for update are obtained from MPSCNNConvolutionTransposeGradientState object's gradientForWeights and gradientForBiases metal buffer.
+ *
+ *  @param      commandBuffer      Metal command buffer on which application update kernel was enqueued consuming MPSCNNConvolutionGradientState's gradientForWeights and gradientForBiases buffers
+ *                                 and producing updateBuffer metal buffer.
+ *  @param      state              MPSCNNConvolutionWeightsAndBiasesState containing weights and biases buffers which have updated weights produced by application's update kernel.
+ *                                 The state readcount will be decremented.
+ *
+ */
+-(void) reloadWeightsAndBiasesWithCommandBuffer: (__nonnull id<MTLCommandBuffer>) commandBuffer
+                                          state: (MPSCNNConvolutionWeightsAndBiasesState* __nonnull) state
+                            MPS_AVAILABLE_STARTING(macos(10.15.0), ios(13.0), macCatalyst(13.0), tvos(13.0));
+
+/*! @abstract   GPU side export. Enqueue a kernel to export current weights and biases stored in MPSCNNConvoltionTranspose's internal buffers into weights and biases MTLBuffer
+ *              returned in MPSCNNConvolutionWeightsAndBiasesState.
+ *
+ *  @param      commandBuffer              Metal command buffer on which export kernel is enqueued.
+ *  @param      resultStateCanBeTemporary  If FALSE, state returned will be non-temporary. If TRUE, returned state may or may not be temporary.
+ *  @return     MPSCNNConvolutionWeightsAndBiasesState containing weights and biases buffer to which weights got exported. This state and be
+ temporary or non-temporary depending on the flag resultStateCanBeTemporary
+ */
+- (MPSCNNConvolutionWeightsAndBiasesState* __nonnull) exportWeightsAndBiasesWithCommandBuffer: (__nonnull id<MTLCommandBuffer>) commandBuffer
+                                                                    resultStateCanBeTemporary: (BOOL) resultStateCanBeTemporary
+                                                    MPS_AVAILABLE_STARTING(macos(10.15.0), ios(13.0), macCatalyst(13.0), tvos(13.0));
+
+/*! @abstract        These low level encode functions should be used during training. The first two encode functions, which return
+ *                   destination image on left hand side, takes in MPSCNNConvolutionGradientState that was produced by corresponding
+ *                   MPSCNNConvolution when there is one e.g. auto encoders. This state is used to correctly size destination being returned.
+ *                   These encode methods return MPSCNNConvoltionTransposeGradientState object on auto release pool to be consumed by MPSCNNConvolutionTransposeGradient.
+ */
+-(MPSImage * __nonnull) encodeToCommandBuffer: (nonnull id <MTLCommandBuffer>) commandBuffer
+                                  sourceImage: (MPSImage *  __nonnull) sourceImage
+                     convolutionGradientState: (MPSCNNConvolutionGradientState * __nullable) convolutionGradientState
+                             destinationState: (__autoreleasing MPSCNNConvolutionTransposeGradientState * __nullable * __nonnull) outState
+                  destinationStateIsTemporary: (BOOL) isTemporary
+                    MPS_AVAILABLE_STARTING(macos(10.15.0), ios(13.0), macCatalyst(13.0), tvos(13.0))
+                    MPS_SWIFT_NAME( encode(commandBuffer:sourceImage:convolutionGradientState:destinationState:destinationStateIsTemporary:));
+
+-(MPSImageBatch * __nonnull) encodeBatchToCommandBuffer: (nonnull id <MTLCommandBuffer>) commandBuffer
+                                           sourceImages: (MPSImageBatch *  __nonnull) sourceImages
+                              convolutionGradientStates: (MPSCNNConvolutionGradientStateBatch * __nullable) convolutionGradientStates
+                                      destinationStates: (__autoreleasing MPSCNNConvolutionTransposeGradientStateBatch * __nullable * __nonnull) outStates
+                            destinationStateIsTemporary: (BOOL) isTemporary
+                                MPS_AVAILABLE_STARTING(macos(10.15.0), ios(13.0), macCatalyst(13.0), tvos(13.0))
+                                MPS_SWIFT_NAME( encodeBatch(commandBuffer:sourceImages:convolutionGradientStates:destinationStates:destinationStateIsTemporary:));
+
+/*! @abstract        These low level encode functions can be called directly from MPSCNNKernel base class.
+ *                   If the destinationState is of type MPSCNNConvolutionTransposeGradient and contains MPSCNNConvolutionGradient* that is temporary, its readCount is decremented.
+ *                   If destinationState is of type MPSCNNConvolutionGradient* and is temporary, its readCount is decremented.
+ *                   These encode methods can be used with MPSCNNConvolutionTransposeGradientState that is created using resultStateForSourceImage:sourceStates:destinationImage:.
+ *                   If there is MPSCNNConvolutionGradientState coupling MPSCNNConvolution and this MPSCNNConvolutionTranspose e.g. in auto encoder, it should be passed as sourceStates
+ *                   to resultStateForSourceImage:sourceStates:destinationImage: method when creating MPSCNNConvolutionTransposeGradientState.
+ 
+-(void) encodeToCommandBuffer: (nonnull id <MTLCommandBuffer>) commandBuffer
+                  sourceImage: (MPSImage * __nonnull) sourceImage
+             destinationState: (MPSState * __nullable) destinationState
+             destinationImage: (MPSImage * __nonnull) destinationImage;
+
+-(void) encodeBatchToCommandBuffer: (nonnull id <MTLCommandBuffer>) commandBuffer
+                      sourceImages: (MPSImageBatch * __nonnull) sourceImages
+                 destinationStates: (MPSStateBatch * __nullable) destinationStates
+                 destinationImages: (MPSImageBatch * __nonnull) destinationImages
+ */
 
 @end    /* MPSCNNConvolutionTranspose */
     
+    
+/*!
+ *  @class      MPSCNNConvolutionTransposeGradient
+ *  @dependency This depends on Metal.framework
+ *  @discussion The MPSCNNConvolutionTransposeGradient implementents backward propagation of gradient for MPSCNNConvolutionTranspose forward filter
+ */
+MPS_CLASS_AVAILABLE_STARTING( macos(10.15), ios(13.0), macCatalyst(13.0), tvos(13.0))
+@interface  MPSCNNConvolutionTransposeGradient : MPSCNNGradientKernel
+
+/*! @property   sourceGradientFeatureChannels
+ *  @abstract   The number of feature channels per pixel in the gradient image (primarySource) of encode call. This is same is outputFeatureChannels
+ *              or the feature channels of destination image in forward convolution i.e. dataSource.descriptor.outputFeatureChannels
+ */
+@property(readonly, nonatomic) NSUInteger       sourceGradientFeatureChannels;
+
+/*! @property   sourceImageFeatureChannels
+ *  @abstract   The number of feature channels per pixel in the input image to forward convolution which is used here as secondarySource.
+ *              This is same as dataSource.descriptor.inputFeatureChannels. This is also the number of feature channels in destinatin image
+ *              here i.e. gradient with respect to data.
+ */
+@property(readonly, nonatomic) NSUInteger       sourceImageFeatureChannels;
+
+/*! @property   groups
+ *  @abstract   Number of groups input and output channels are divided into.
+ */
+@property(readonly, nonatomic) NSUInteger      groups;
+
+/*! @property   dataSource
+ *  @abstract   dataSource with which gradient object was created
+ */
+@property(readonly, nonatomic, retain, nonnull) id<MPSCNNConvolutionDataSource>      dataSource;
+
+
+/*! @property   gradientOption
+ *  @abstract   Option to control which gradient to compute. Default is MPSCNNConvolutionGradientOptionAll
+ *              which means both gradient with respect to data and gradient with respect to weight and bias are computed.
+ */
+@property(readwrite, nonatomic) MPSCNNConvolutionGradientOption      gradientOption;
+
+/*!
+ *  @abstract   Initializes a convolution transpose gradient (with respect to weights and bias) object.
+ *  @param      device                          The MTLDevice on which this MPSCNNConvolutionGradient filter will be used
+ *  @param      weights                         A pointer to a object that conforms to the MPSCNNConvolutionDataSource
+ *                                              protocol. Note that same data source as provided to forward convolution should be used.
+ *
+ *  @return     A valid MPSCNNConvolutionTransposeGradient object or nil, if failure.
+ */
+-(nonnull instancetype) initWithDevice: (nonnull id <MTLDevice>) device
+                               weights: (nonnull id <MPSCNNConvolutionDataSource>) weights NS_DESIGNATED_INITIALIZER;
+
+/*! @abstract NSSecureCoding compatability
+ *  @discussion While the standard NSSecureCoding/NSCoding method
+ *              -initWithCoder: should work, since the file can't
+ *              know which device your data is allocated on, we
+ *              have to guess and may guess incorrectly.  To avoid
+ *              that problem, use initWithCoder:device instead.
+ *  @param      aDecoder    The NSCoder subclass with your serialized MPSKernel
+ *  @param      device      The MTLDevice on which to make the MPSKernel
+ *  @return     A new MPSKernel object, or nil if failure.
+ */
+-(nullable instancetype) initWithCoder:(NSCoder * __nonnull)aDecoder
+                                device:(nonnull id <MTLDevice>) device NS_DESIGNATED_INITIALIZER;
+
+/*
+ * Use initWithDevice:weights instead
+ */
+-(nonnull instancetype) initWithDevice: (nonnull id <MTLDevice>) device NS_UNAVAILABLE;
+
+/*! @abstract   CPU side reload. Reload the updated weights and biases from data provider into internal weights and bias buffers. Weights and biases
+ *              gradients needed for update are obtained from MPSCNNConvolutionGradientState object. Data provider passed in init call is used for this purpose.
+ */
+-(void) reloadWeightsAndBiasesFromDataSource;
+
+/*! @abstract   GPU side reload. Reload the updated weights and biases from update buffer produced by application enqueued metal kernel into internal weights
+ *              and biases buffer. Weights and biases gradients needed for update are obtained from MPSCNNConvolutionGradientState object's gradientForWeights and gradientForBiases metal buffer.
+ *
+ *  @param      commandBuffer      Metal command buffer on which application update kernel was enqueued consuming MPSCNNConvolutionGradientState's gradientForWeights and gradientForBiases buffer
+ *                                 and producing updateBuffer metal buffer.
+ *  @param      state              MPSCNNConvolutionWeightsAndBiasesState containing weights and biases buffers which have updated weights produced by application's update kernel.
+ *
+ */
+-(void) reloadWeightsAndBiasesWithCommandBuffer: (__nonnull id<MTLCommandBuffer>) commandBuffer
+                                          state: (MPSCNNConvolutionWeightsAndBiasesState* __nonnull) state;
+
+@end    /* MPSCNNConvolutionTransposeGradient */
+
 
 
 #pragma mark -
@@ -1556,7 +1916,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
  *              NOTE: MPSCNNBinaryConvolution does not currently support groups > 1.
  *
  */
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0))
 @interface  MPSCNNBinaryConvolution : MPSCNNKernel
 
 @property(readonly, nonatomic) NSUInteger       inputFeatureChannels;
@@ -1685,7 +2045,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
  *              filters. It uses MPSNNPaddingMethodSizeValidOnly instead of MPSNNPaddingMethodSizeSame.
  */
 
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0))
 @interface  MPSCNNBinaryFullyConnected : MPSCNNBinaryConvolution
 
 
@@ -1795,6 +2155,137 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
 
 
 
+#pragma mark -
+#pragma mark MPSNNGramMatrixCalculation
+
+/*!
+ *  @class      MPSNNGramMatrixCalculation
+ *  @dependency This depends on Metal.framework
+ *  @discussion The MPSNNGramMatrixCalculation filter specifies a layer which computes the uncentered cross-correlation
+ *              values between the image planes of each feature channel of an image. If the input image batch is
+ *              x = x[b, y, x, c], where 'b' is batch index, 'y' and 'x' are the image coordinate and
+ *              'c' is the feature channel index then this filter computes the values:
+ *
+ *              y = y[b, 1, f, c] = alpha * sum_{x,y} x[b,y,x,f] * x[b,y,x,c], where
+ *
+ *              'alpha' is a scaling factor. This operation can be interpreted to be computing all combinations
+ *              of fully connected layers between the different image planes of the input image. The results
+ *              are stored in the feature channel and 'x'-coordinate indices of the output batch.
+ *              The operation is performed independently on different images in the batch.
+ *
+ *              NOTE: Due to the nature of the operation this filter specifies a special padding policy
+ *              and hence does not support non-default offset or cliprect properties.
+ */
+
+MPS_CLASS_AVAILABLE_STARTING( macos(10.15), ios(13.0), macCatalyst(13.0), tvos(13.0))
+@interface  MPSNNGramMatrixCalculation : MPSCNNKernel
+
+
+/*! @property   alpha
+ *  @abstract   Scaling factor for the output. Default: 1.0f.
+ */
+@property(readwrite, nonatomic) float       alpha;
+
+
+/*! @abstract NSSecureCoding compatability
+ *  @discussion While the standard NSSecureCoding/NSCoding method
+ *              -initWithCoder: should work, since the file can't
+ *              know which device your data is allocated on, we
+ *              have to guess and may guess incorrectly.  To avoid
+ *              that problem, use initWithCoder:device instead.
+ *  @param      aDecoder    The NSCoder subclass with your serialized MPSKernel
+ *  @param      device      The MTLDevice on which to make the MPSKernel
+ *  @return     A new MPSKernel object, or nil if failure.
+ */
+-(nullable instancetype) initWithCoder:(NSCoder * __nonnull)aDecoder
+                                device:(nonnull id <MTLDevice>) device NS_DESIGNATED_INITIALIZER;
+
+
+/*!
+ *  @abstract   Initializes a MPSNNGramMatrixCalculation kernel.
+ *
+ *  @param      device      The MTLDevice on which this MPSNNGramMatrixCalculation filter will be used.
+ *  @param      alpha       Scaling factor for the output.
+ *  @return     A valid MPSNNGramMatrixCalculation object or nil, if failure.
+ */
+-(nonnull instancetype) initWithDevice: (nonnull id <MTLDevice>) device
+                                 alpha: (float) alpha
+NS_DESIGNATED_INITIALIZER;
+
+/*!
+ *  @abstract   Initializes a MPSNNGramMatrixCalculation kernel with scaling factor alpha = 1.0f.
+ *
+ *  @param      device      The MTLDevice on which this MPSNNGramMatrixCalculation filter will be used.
+ *  @return     A valid MPSNNGramMatrixCalculation object or nil, if failure.
+ */
+-(nonnull instancetype) initWithDevice: (nonnull id <MTLDevice>) device;
+
+/*!
+ * NOTE:    The encodeToCommandBuffer API in MPSCNNKernel can be used to encode this kernel to a MTLCommandBuffer.
+ */
+
+@end    /* MPSNNGramMatrixCalculation */
+
+
+#pragma mark -
+#pragma mark MPSNNGramMatrixCalculationGradient
+
+    /*!
+     *  @class      MPSNNGramMatrixCalculationGradient
+     *  @dependency This depends on Metal.framework
+     *  @discussion The MPSNNGramMatrixCalculationGradient defines the gradient filter for MPSNNGramMatrixCalculation.
+     */
+
+MPS_CLASS_AVAILABLE_STARTING( macos(10.15), ios(13.0), macCatalyst(13.0), tvos(13.0))
+@interface  MPSNNGramMatrixCalculationGradient : MPSCNNGradientKernel
+
+
+/*! @property   alpha
+ *  @abstract   Scaling factor for the output. Default: 1.0f. NOTE: the value for alpha is automatically adjusted by
+ *              the @ref MPSNNGradientState when it is provided in the encode call.
+ */
+@property(readwrite, nonatomic) float       alpha;
+
+
+/*! @abstract NSSecureCoding compatability
+ *  @discussion While the standard NSSecureCoding/NSCoding method
+ *              -initWithCoder: should work, since the file can't
+ *              know which device your data is allocated on, we
+ *              have to guess and may guess incorrectly.  To avoid
+ *              that problem, use initWithCoder:device instead.
+ *  @param      aDecoder    The NSCoder subclass with your serialized MPSKernel
+ *  @param      device      The MTLDevice on which to make the MPSKernel
+ *  @return     A new MPSKernel object, or nil if failure.
+ */
+-(nullable instancetype) initWithCoder:(NSCoder * __nonnull)aDecoder
+                                device:(nonnull id <MTLDevice>) device NS_DESIGNATED_INITIALIZER;
+
+
+/*!
+ *  @abstract   Initializes a MPSNNGramMatrixCalculationGradient kernel.
+ *
+ *  @param      device      The MTLDevice on which this MPSNNGramMatrixCalculationGradient filter will be used.
+ *  @param      alpha       Scaling factor for the output. NOTE: the value for alpha is automatically adjusted by
+ *                          the @ref MPSNNGradientState when it is provided in the encode call.
+ *  @return     A valid MPSNNGramMatrixCalculationGradient object or nil, if failure.
+ */
+-(nonnull instancetype) initWithDevice: (nonnull id <MTLDevice>) device
+                                 alpha: (float) alpha
+NS_DESIGNATED_INITIALIZER;
+
+/*!
+ *  @abstract   Initializes a MPSNNGramMatrixCalculationGradient kernel with scaling factor alpha = 1.0f.
+ *
+ *  @param      device      The MTLDevice on which this MPSNNGramMatrixCalculationGradient filter will be used.
+ *  @return     A valid MPSNNGramMatrixCalculationGradient object or nil, if failure.
+ */
+-(nonnull instancetype) initWithDevice: (nonnull id <MTLDevice>) device;
+
+/*!
+ * NOTE:    The encodeToCommandBuffer API in MPSCNNKernel can be used to encode this kernel to a MTLCommandBuffer.
+ */
+
+@end    /* MPSNNGramMatrixCalculationGradient */
 
 
 

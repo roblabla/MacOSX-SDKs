@@ -70,7 +70,6 @@ VT_EXPORT const CFStringRef kVTPropertySupportedValueMaximumKey API_AVAILABLE(ma
 VT_EXPORT const CFStringRef kVTPropertySupportedValueListKey API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2)); // CFArray of appropriate values
 VT_EXPORT const CFStringRef kVTPropertyDocumentationKey API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2)); // a CFString for developer eyes only
 
-	
 CM_ASSUME_NONNULL_END
 
 /*!
@@ -142,7 +141,6 @@ VTSessionCopySerializableProperties(
   CM_NONNULL VTSessionRef					session,
   CM_NULLABLE CFAllocatorRef				allocator,
   CM_RETURNS_RETAINED_PARAMETER CM_NULLABLE CFDictionaryRef * CM_NONNULL	dictionaryOut ) API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2));
-
 
 #pragma pack(pop)
     

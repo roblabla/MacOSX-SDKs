@@ -5,8 +5,6 @@
  Copyright (c) 2014-2015 Apple Inc. All Rights Reserved.
  */
 
-#if !0
-
 #import <AVFAudio/AVAudioTypes.h>
 
 #if __has_include(<AudioToolbox/AudioComponent.h>)
@@ -18,19 +16,19 @@
 NS_ASSUME_NONNULL_BEGIN
 
 // Standard Audio Unit Types
-AVF_EXPORT NSString * const AVAudioUnitTypeOutput				API_AVAILABLE(macos(10.10), ios(9.0), tvos(9.0)) API_UNAVAILABLE(watchos);
-AVF_EXPORT NSString * const AVAudioUnitTypeMusicDevice			API_AVAILABLE(macos(10.10), ios(9.0), tvos(9.0)) API_UNAVAILABLE(watchos);
-AVF_EXPORT NSString * const AVAudioUnitTypeMusicEffect			API_AVAILABLE(macos(10.10), ios(9.0), tvos(9.0)) API_UNAVAILABLE(watchos);
-AVF_EXPORT NSString * const AVAudioUnitTypeFormatConverter		API_AVAILABLE(macos(10.10), ios(9.0), tvos(9.0)) API_UNAVAILABLE(watchos);
-AVF_EXPORT NSString * const AVAudioUnitTypeEffect				API_AVAILABLE(macos(10.10), ios(9.0), tvos(9.0)) API_UNAVAILABLE(watchos);
-AVF_EXPORT NSString * const AVAudioUnitTypeMixer				API_AVAILABLE(macos(10.10), ios(9.0), tvos(9.0)) API_UNAVAILABLE(watchos);
-AVF_EXPORT NSString * const AVAudioUnitTypePanner				API_AVAILABLE(macos(10.10), ios(9.0), tvos(9.0)) API_UNAVAILABLE(watchos);
-AVF_EXPORT NSString * const AVAudioUnitTypeGenerator			API_AVAILABLE(macos(10.10), ios(9.0), tvos(9.0)) API_UNAVAILABLE(watchos);
-AVF_EXPORT NSString * const AVAudioUnitTypeOfflineEffect		API_AVAILABLE(macos(10.10), ios(9.0), tvos(9.0)) API_UNAVAILABLE(watchos);
-AVF_EXPORT NSString * const AVAudioUnitTypeMIDIProcessor		API_AVAILABLE(macos(10.10), ios(9.0), tvos(9.0)) API_UNAVAILABLE(watchos);
+extern NSString * const AVAudioUnitTypeOutput				API_AVAILABLE(macos(10.10), ios(9.0), tvos(9.0)) API_UNAVAILABLE(watchos);
+extern NSString * const AVAudioUnitTypeMusicDevice			API_AVAILABLE(macos(10.10), ios(9.0), tvos(9.0)) API_UNAVAILABLE(watchos);
+extern NSString * const AVAudioUnitTypeMusicEffect			API_AVAILABLE(macos(10.10), ios(9.0), tvos(9.0)) API_UNAVAILABLE(watchos);
+extern NSString * const AVAudioUnitTypeFormatConverter		API_AVAILABLE(macos(10.10), ios(9.0), tvos(9.0)) API_UNAVAILABLE(watchos);
+extern NSString * const AVAudioUnitTypeEffect				API_AVAILABLE(macos(10.10), ios(9.0), tvos(9.0)) API_UNAVAILABLE(watchos);
+extern NSString * const AVAudioUnitTypeMixer				API_AVAILABLE(macos(10.10), ios(9.0), tvos(9.0)) API_UNAVAILABLE(watchos);
+extern NSString * const AVAudioUnitTypePanner				API_AVAILABLE(macos(10.10), ios(9.0), tvos(9.0)) API_UNAVAILABLE(watchos);
+extern NSString * const AVAudioUnitTypeGenerator			API_AVAILABLE(macos(10.10), ios(9.0), tvos(9.0)) API_UNAVAILABLE(watchos);
+extern NSString * const AVAudioUnitTypeOfflineEffect		API_AVAILABLE(macos(10.10), ios(9.0), tvos(9.0)) API_UNAVAILABLE(watchos);
+extern NSString * const AVAudioUnitTypeMIDIProcessor		API_AVAILABLE(macos(10.10), ios(9.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 
 // Standard Audio Unit Manufacturers
-AVF_EXPORT NSString * const AVAudioUnitManufacturerNameApple	API_AVAILABLE(macos(10.10), ios(9.0), tvos(9.0)) API_UNAVAILABLE(watchos);
+extern NSString * const AVAudioUnitManufacturerNameApple	API_AVAILABLE(macos(10.10), ios(9.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 
 #pragma mark AVAudioUnitComponent
 
@@ -42,7 +40,7 @@ AVF_EXPORT NSString * const AVAudioUnitManufacturerNameApple	API_AVAILABLE(macos
  	 for display.
  */
 
-OS_EXPORT API_AVAILABLE(macos(10.10), ios(9.0), tvos(9.0)) API_UNAVAILABLE(watchos)
+API_AVAILABLE(macos(10.10), ios(9.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 @interface AVAudioUnitComponent : NSObject
 {
 	void *_impl;
@@ -172,7 +170,7 @@ OS_EXPORT API_AVAILABLE(macos(10.10), ios(9.0), tvos(9.0)) API_UNAVAILABLE(watch
 #pragma mark AVAudioUnitComponentManager
 
 /* The notification object is an AVAudioUnitComponent object */
-AVF_EXPORT NSString * const AVAudioUnitComponentTagsDidChangeNotification API_AVAILABLE(macos(10.10), ios(9.0), tvos(9.0)) API_UNAVAILABLE(watchos);
+extern NSString * const AVAudioUnitComponentTagsDidChangeNotification API_AVAILABLE(macos(10.10), ios(9.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 
 /*!
  @class AVAudioUnitComponentManager
@@ -193,7 +191,7 @@ AVF_EXPORT NSString * const AVAudioUnitComponentTagsDidChangeNotification API_AV
 			- using an AudioComponentDescription
  */
 
-OS_EXPORT API_AVAILABLE(macos(10.10), ios(9.0), tvos(9.0)) API_UNAVAILABLE(watchos)
+API_AVAILABLE(macos(10.10), ios(9.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 @interface AVAudioUnitComponentManager : NSObject
 {
 	void *_impl;
@@ -247,6 +245,18 @@ OS_EXPORT API_AVAILABLE(macos(10.10), ios(9.0), tvos(9.0)) API_UNAVAILABLE(watch
 
 @end
 
-NS_ASSUME_NONNULL_END
+/*!	@constant AVAudioUnitComponentManagerRegistrationsChangedNotification
+	@abstract
+		A notification generated when AVAudioUnitComponentManager updates its list of components.
+	@discussion
+		Register for this notification on the shared AVAudioUnitComponentManager instance,
+		as follows:
 
-#endif // !TARGET_OS_BRIDGE
+		[[NSNotificationCenter defaultCenter] addObserver: myObject
+			selector:    @selector(registrationsChanged:)
+			name:        AVAudioUnitComponentManagerRegistrationsChangedNotification
+			object:      [AVAudioUnitComponentManager sharedAudioUnitComponentManager]];
+ */
+extern NSNotificationName const AVAudioUnitComponentManagerRegistrationsChangedNotification NS_SWIFT_NAME(AVAudioUnitComponentManager.registrationsChangedNotification) API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0)) API_UNAVAILABLE(watchos);
+
+NS_ASSUME_NONNULL_END

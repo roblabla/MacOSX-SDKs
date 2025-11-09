@@ -2,7 +2,7 @@
 //  INUpcomingMediaManager.h
 //  Intents
 //
-//  Copyright © 2018 Apple. All rights reserved.
+//  Copyright (c) 2016-2019 Apple Inc. All rights reserved.
 //
 
 #import <Intents/INPlayMediaIntent.h>

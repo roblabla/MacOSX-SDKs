@@ -134,15 +134,6 @@ extern const NSString*	IMKCandidatesSendServerKeyEventFirst;
 
 -(void)showSublist:(NSArray *)candidates subListDelegate:(id)delegate;
 
-/*!
- @method     
- @abstract   Returns the current selection.
- @discussion Call this to get the string that the user has selected. Will return nil if no selection or window is not visible.
- */
--(NSAttributedString*)selectedCandidateString;
-
--(void) setCandidateFrameTopLeft:(NSPoint)point;
-
 -(NSRect)candidateFrame;
 
 #pragma mark __Appearance__
@@ -224,13 +215,6 @@ extern const NSString*	IMKCandidatesSendServerKeyEventFirst;
  @abstract   Returns the dismissesAutomatically flag.
  */
 -(BOOL)dismissesAutomatically;
-
-/*!
- @method
- @abstract	Returns the currently selected candidate string.
- @discussion Attempts to determine the string for the selected candidate.  If there is no selection the return value can be nil.  The attributed string is an autoreleased object.
-*/
--(NSAttributedString*)selectedCandidateString AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 /*!
  @method

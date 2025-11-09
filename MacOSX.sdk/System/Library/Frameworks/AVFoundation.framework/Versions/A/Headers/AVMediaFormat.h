@@ -13,14 +13,14 @@
 // Media types
 typedef NSString * AVMediaType NS_EXTENSIBLE_STRING_ENUM;
 
-AVF_EXPORT AVMediaType const AVMediaTypeVideo                 NS_AVAILABLE(10_7, 4_0);
-AVF_EXPORT AVMediaType const AVMediaTypeAudio                 NS_AVAILABLE(10_7, 4_0);
-AVF_EXPORT AVMediaType const AVMediaTypeText                  NS_AVAILABLE(10_7, 4_0);
-AVF_EXPORT AVMediaType const AVMediaTypeClosedCaption         NS_AVAILABLE(10_7, 4_0);
-AVF_EXPORT AVMediaType const AVMediaTypeSubtitle              NS_AVAILABLE(10_7, 4_0);
-AVF_EXPORT AVMediaType const AVMediaTypeTimecode              NS_AVAILABLE(10_7, 4_0);
-AVF_EXPORT AVMediaType const AVMediaTypeMetadata              NS_AVAILABLE(10_8, 6_0);
-AVF_EXPORT AVMediaType const AVMediaTypeMuxed                 NS_AVAILABLE(10_7, 4_0);
+AVF_EXPORT AVMediaType const AVMediaTypeVideo                 API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0));
+AVF_EXPORT AVMediaType const AVMediaTypeAudio                 API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0));
+AVF_EXPORT AVMediaType const AVMediaTypeText                  API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0));
+AVF_EXPORT AVMediaType const AVMediaTypeClosedCaption         API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0));
+AVF_EXPORT AVMediaType const AVMediaTypeSubtitle              API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0));
+AVF_EXPORT AVMediaType const AVMediaTypeTimecode              API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0));
+AVF_EXPORT AVMediaType const AVMediaTypeMetadata              API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(1.0));
+AVF_EXPORT AVMediaType const AVMediaTypeMuxed                 API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0));
 
 /*!
  @constant AVMediaTypeMetadataObject
@@ -53,9 +53,9 @@ AVF_EXPORT AVMediaType const AVMediaTypeMuxed                 NS_AVAILABLE(10_7,
  If clients want to record a particular kind of metadata to a movie, they must manually form connections
  between a AVMediaTypeMetadata port and the movie file output using AVCaptureSession's -addConnection API.
 */
-AVF_EXPORT AVMediaType const AVMediaTypeMetadataObject API_AVAILABLE(ios(9.0), tvos(9.0)) API_UNAVAILABLE(macos) __WATCHOS_PROHIBITED;
+AVF_EXPORT AVMediaType const AVMediaTypeMetadataObject API_AVAILABLE(ios(9.0), tvos(9.0)) API_UNAVAILABLE(macos, watchos);
 
-AVF_EXPORT AVMediaType const AVMediaTypeDepthData NS_AVAILABLE(10_13, 11_0);
+AVF_EXPORT AVMediaType const AVMediaTypeDepthData API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0)) API_UNAVAILABLE(watchos);
 
 
 // Media characteristics
@@ -68,7 +68,7 @@ typedef NSString * AVMediaCharacteristic NS_EXTENSIBLE_STRING_ENUM;
  AVMediaTypeVideo, AVMediaTypeSubtitle, AVMediaTypeClosedCaption are examples of media types with the characteristic AVMediaCharacteristicVisual.
  Also see -[AVAssetTrack hasMediaCharacteristic:] and -[AVMediaSelectionOption hasMediaCharacteristic:].
 */
-AVF_EXPORT AVMediaCharacteristic const AVMediaCharacteristicVisual      NS_AVAILABLE(10_7, 4_0);
+AVF_EXPORT AVMediaCharacteristic const AVMediaCharacteristicVisual      API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0));
 
 /*!
  @constant AVMediaCharacteristicAudible
@@ -77,7 +77,7 @@ AVF_EXPORT AVMediaCharacteristic const AVMediaCharacteristicVisual      NS_AVAIL
  AVMediaTypeAudio is a media type with the characteristic AVMediaCharacteristicAudible.
  Also see -[AVAssetTrack hasMediaCharacteristic:] and -[AVMediaSelectionOption hasMediaCharacteristic:].
 */
-AVF_EXPORT AVMediaCharacteristic const AVMediaCharacteristicAudible     NS_AVAILABLE(10_7, 4_0);
+AVF_EXPORT AVMediaCharacteristic const AVMediaCharacteristicAudible     API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0));
 
 /*!
  @constant AVMediaCharacteristicLegible
@@ -86,7 +86,7 @@ AVF_EXPORT AVMediaCharacteristic const AVMediaCharacteristicAudible     NS_AVAIL
  AVMediaTypeSubtitle and AVMediaTypeClosedCaption are examples of media types with the characteristic AVMediaCharacteristicLegible.
  Also see -[AVAssetTrack hasMediaCharacteristic:] and -[AVMediaSelectionOption hasMediaCharacteristic:].
 */
-AVF_EXPORT AVMediaCharacteristic const AVMediaCharacteristicLegible     NS_AVAILABLE(10_7, 4_0);
+AVF_EXPORT AVMediaCharacteristic const AVMediaCharacteristicLegible     API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0));
 
 /*!
  @constant AVMediaCharacteristicFrameBased
@@ -95,7 +95,7 @@ AVF_EXPORT AVMediaCharacteristic const AVMediaCharacteristicLegible     NS_AVAIL
  Frame-based content typically comprises discrete media samples that, once rendered, can remain current for indefinite periods of time without additional processing in support of "time-stretching". Further, any dependencies between samples are always explicitly signalled, so that the operations required to render any single sample can readily be performed on demand. AVMediaTypeVideo is the most common type of frame-based media. AVMediaTypeAudio is the most common counterexample. 
  Also see -[AVAssetTrack hasMediaCharacteristic:] and -[AVMediaSelectionOption hasMediaCharacteristic:].
 */
-AVF_EXPORT AVMediaCharacteristic const AVMediaCharacteristicFrameBased  NS_AVAILABLE(10_7, 4_0);
+AVF_EXPORT AVMediaCharacteristic const AVMediaCharacteristicFrameBased  API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0));
 
 /*!
  @constant AVMediaCharacteristicUsesWideGamutColorSpace
@@ -103,7 +103,15 @@ AVF_EXPORT AVMediaCharacteristic const AVMediaCharacteristicFrameBased  NS_AVAIL
  @discussion
  A wide color space such as AVVideo*_P3_D65 contains additional dynamic range that may benefit from special treatment when compositing. Care should be taken to avoid clamping. Non-wide spaces include AVVideo*_ITU_R_709_2 and AVVideo*_SMPTE_C.
 */
-AVF_EXPORT AVMediaCharacteristic const AVMediaCharacteristicUsesWideGamutColorSpace NS_AVAILABLE(10_12, 10_0);
+AVF_EXPORT AVMediaCharacteristic const AVMediaCharacteristicUsesWideGamutColorSpace API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0), watchos(3.0));
+
+/*!
+ @constant AVMediaCharacteristicContainsAlphaChannel
+ @abstract A media characteristic that indicates that a track contains an alpha channel.
+ @discussion
+ To determine whether alpha is straight or pre-multiplied, look for the format description extension with key kCMFormatDescriptionExtension_AlphaChannelMode.
+ */
+AVF_EXPORT AVMediaCharacteristic const AVMediaCharacteristicContainsAlphaChannel API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0)) API_UNAVAILABLE(watchos);
 
 /*!
  @constant AVMediaCharacteristicIsMainProgramContent
@@ -115,7 +123,7 @@ AVF_EXPORT AVMediaCharacteristic const AVMediaCharacteristicUsesWideGamutColorSp
 
  Also see -[AVAssetTrack hasMediaCharacteristic:] and -[AVMediaSelectionOption hasMediaCharacteristic:].
 */
-AVF_EXPORT AVMediaCharacteristic const AVMediaCharacteristicIsMainProgramContent NS_AVAILABLE(10_8, 5_0);
+AVF_EXPORT AVMediaCharacteristic const AVMediaCharacteristicIsMainProgramContent API_AVAILABLE(macos(10.8), ios(5.0), tvos(9.0), watchos(1.0));
 
 /*!
  @constant AVMediaCharacteristicIsAuxiliaryContent
@@ -128,7 +136,20 @@ AVF_EXPORT AVMediaCharacteristic const AVMediaCharacteristicIsMainProgramContent
 
  Also see -[AVAssetTrack hasMediaCharacteristic:] and -[AVMediaSelectionOption hasMediaCharacteristic:].
 */
-AVF_EXPORT AVMediaCharacteristic const AVMediaCharacteristicIsAuxiliaryContent NS_AVAILABLE(10_8, 5_0);
+AVF_EXPORT AVMediaCharacteristic const AVMediaCharacteristicIsAuxiliaryContent API_AVAILABLE(macos(10.8), ios(5.0), tvos(9.0), watchos(1.0));
+
+/*!
+ @constant AVMediaCharacteristicIsOriginalContent
+ @abstract A media characteristic that indicates that a track or media selection option includes content that's marked by the content author as original to the principal production of the media, as opposed to supplementary or derivative content created by means of language translation or by other means.
+ @discussion
+ The value of this characteristic is @"public.original-content".
+ Example: an option that presents audio media with dialog in the principal language of the production may be tagged with this characteristic; audio media containing dialog dubbed in a language other than the principal language of the production typically would not be tagged with this characteristic.
+ Note for content authors: for QuickTime movie and .m4v files and for HTTP Live Streaming, a media option is considered to have the characteristic AVMediaCharacteristicIsOriginalContent only if it's explicitly tagged with the characteristic.
+ See the discussion of the tagging of tracks with media characteristics below.
+
+ Also see -[AVAssetTrack hasMediaCharacteristic:] and -[AVMediaSelectionOption hasMediaCharacteristic:].
+*/
+AVF_EXPORT AVMediaCharacteristic const AVMediaCharacteristicIsOriginalContent API_AVAILABLE(macos(10.14), ios(12.0), tvos(12.0), watchos(5.0));
 
 /*!
  @constant AVMediaCharacteristicContainsOnlyForcedSubtitles
@@ -140,7 +161,7 @@ AVF_EXPORT AVMediaCharacteristic const AVMediaCharacteristicIsAuxiliaryContent N
 
  Also see -[AVAssetTrack hasMediaCharacteristic:] and -[AVMediaSelectionOption hasMediaCharacteristic:].
 */
-AVF_EXPORT AVMediaCharacteristic const AVMediaCharacteristicContainsOnlyForcedSubtitles NS_AVAILABLE(10_8, 5_0);
+AVF_EXPORT AVMediaCharacteristic const AVMediaCharacteristicContainsOnlyForcedSubtitles API_AVAILABLE(macos(10.8), ios(5.0), tvos(9.0), watchos(1.0));
 
 /*!
  @constant AVMediaCharacteristicTranscribesSpokenDialogForAccessibility
@@ -159,7 +180,7 @@ AVF_EXPORT AVMediaCharacteristic const AVMediaCharacteristicContainsOnlyForcedSu
 
  Also see -[AVAssetTrack hasMediaCharacteristic:] and -[AVMediaSelectionOption hasMediaCharacteristic:].
 */
-AVF_EXPORT AVMediaCharacteristic const AVMediaCharacteristicTranscribesSpokenDialogForAccessibility NS_AVAILABLE(10_8, 5_0);
+AVF_EXPORT AVMediaCharacteristic const AVMediaCharacteristicTranscribesSpokenDialogForAccessibility API_AVAILABLE(macos(10.8), ios(5.0), tvos(9.0), watchos(1.0));
 
 /*!
  @constant AVMediaCharacteristicDescribesMusicAndSoundForAccessibility
@@ -178,7 +199,7 @@ AVF_EXPORT AVMediaCharacteristic const AVMediaCharacteristicTranscribesSpokenDia
 
  Also see -[AVAssetTrack hasMediaCharacteristic:] and -[AVMediaSelectionOption hasMediaCharacteristic:].
 */
-AVF_EXPORT AVMediaCharacteristic const AVMediaCharacteristicDescribesMusicAndSoundForAccessibility NS_AVAILABLE(10_8, 5_0);
+AVF_EXPORT AVMediaCharacteristic const AVMediaCharacteristicDescribesMusicAndSoundForAccessibility API_AVAILABLE(macos(10.8), ios(5.0), tvos(9.0), watchos(1.0));
 
 /*!
  @constant AVMediaCharacteristicEasyToRead
@@ -193,7 +214,7 @@ AVF_EXPORT AVMediaCharacteristic const AVMediaCharacteristicDescribesMusicAndSou
 
  Also see -[AVAssetTrack hasMediaCharacteristic:] and -[AVMediaSelectionOption hasMediaCharacteristic:].
 */
-AVF_EXPORT AVMediaCharacteristic const AVMediaCharacteristicEasyToRead NS_AVAILABLE(10_8, 6_0);
+AVF_EXPORT AVMediaCharacteristic const AVMediaCharacteristicEasyToRead API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(1.0));
 
 /*!
  @constant AVMediaCharacteristicDescribesVideoForAccessibility
@@ -206,7 +227,7 @@ AVF_EXPORT AVMediaCharacteristic const AVMediaCharacteristicEasyToRead NS_AVAILA
 
  Also see -[AVAssetTrack hasMediaCharacteristic:] and -[AVMediaSelectionOption hasMediaCharacteristic:].
 */
-AVF_EXPORT AVMediaCharacteristic const AVMediaCharacteristicDescribesVideoForAccessibility NS_AVAILABLE(10_8, 5_0);
+AVF_EXPORT AVMediaCharacteristic const AVMediaCharacteristicDescribesVideoForAccessibility API_AVAILABLE(macos(10.8), ios(5.0), tvos(9.0), watchos(1.0));
 
 /*!
  @constant AVMediaCharacteristicLanguageTranslation
@@ -217,7 +238,7 @@ AVF_EXPORT AVMediaCharacteristic const AVMediaCharacteristicDescribesVideoForAcc
  Note for content authors: for QuickTime movie and .m4v files a media option is considered to have the characteristic AVMediaCharacteristicLanguageTranslation only if it's explicitly tagged with that characteristic.
  See the discussion of the tagging of tracks with media characteristics below.
 */
-AVF_EXPORT AVMediaCharacteristic const AVMediaCharacteristicLanguageTranslation NS_AVAILABLE(10_11, 9_0);
+AVF_EXPORT AVMediaCharacteristic const AVMediaCharacteristicLanguageTranslation API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(2.0));
 
 /*!
  @constant AVMediaCharacteristicDubbedTranslation
@@ -229,10 +250,10 @@ AVF_EXPORT AVMediaCharacteristic const AVMediaCharacteristicLanguageTranslation 
  Note for content authors: for QuickTime movie and .m4v files a media option is considered to have the characteristic AVMediaCharacteristicDubbedTranslation only if it's explicitly tagged with that characteristic.
  See the discussion of the tagging of tracks with media characteristics below.
 */
-AVF_EXPORT AVMediaCharacteristic const AVMediaCharacteristicDubbedTranslation NS_AVAILABLE(10_11, 9_0);
+AVF_EXPORT AVMediaCharacteristic const AVMediaCharacteristicDubbedTranslation API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(2.0));
 
 /*!
- @constant AVMediaCharacteristicVoiceOverTranslation NS_AVAILABLE(10_11, 9_0);
+ @constant AVMediaCharacteristicVoiceOverTranslation
  @abstract A media characteristic that indicates that a track or media selection option contains a language translation of originally or previously produced content, created by adding, in its designated language, a verbal interpretation of dialog and translations of other important information to a new mix of the audio content.
  @discussion
  Tracks to which this characteristic is assigned should typically also be assigned the characteristic AVMediaCharacteristicLanguageTranslation.
@@ -241,7 +262,7 @@ AVF_EXPORT AVMediaCharacteristic const AVMediaCharacteristicDubbedTranslation NS
  Note for content authors: for QuickTime movie and .m4v files a media option is considered to have the characteristic AVMediaCharacteristicVoiceOverTranslation only if it's explicitly tagged with that characteristic.
  See the discussion of the tagging of tracks with media characteristics below.
 */
-AVF_EXPORT AVMediaCharacteristic const AVMediaCharacteristicVoiceOverTranslation NS_AVAILABLE(10_11, 9_0);
+AVF_EXPORT AVMediaCharacteristic const AVMediaCharacteristicVoiceOverTranslation API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(2.0));
 
 /*
 	Tagging of tracks of .mov and .m4v files with media characteristics
@@ -288,7 +309,7 @@ typedef NSString * AVFileType NS_EXTENSIBLE_STRING_ENUM;
  The value of this UTI is @"com.apple.quicktime-movie".
  Files are identified with the .mov and .qt extensions.
  */
-AVF_EXPORT AVFileType const AVFileTypeQuickTimeMovie NS_AVAILABLE(10_7, 4_0);
+AVF_EXPORT AVFileType const AVFileTypeQuickTimeMovie API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0));
 
 /*!
  @constant AVFileTypeMPEG4
@@ -297,7 +318,7 @@ AVF_EXPORT AVFileType const AVFileTypeQuickTimeMovie NS_AVAILABLE(10_7, 4_0);
  The value of this UTI is @"public.mpeg-4".
  Files are identified with the .mp4 extension.
  */
-AVF_EXPORT AVFileType const AVFileTypeMPEG4 NS_AVAILABLE(10_7, 4_0);
+AVF_EXPORT AVFileType const AVFileTypeMPEG4 API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0));
 
 /*!
  @constant AVFileTypeAppleM4V
@@ -305,7 +326,7 @@ AVF_EXPORT AVFileType const AVFileTypeMPEG4 NS_AVAILABLE(10_7, 4_0);
  The value of this UTI is @"com.apple.m4v-video".
  Files are identified with the .m4v extension.
  */
-AVF_EXPORT AVFileType const AVFileTypeAppleM4V NS_AVAILABLE(10_7, 4_0);
+AVF_EXPORT AVFileType const AVFileTypeAppleM4V API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0));
 
 /*!
  @constant AVFileTypeAppleM4A
@@ -313,7 +334,7 @@ AVF_EXPORT AVFileType const AVFileTypeAppleM4V NS_AVAILABLE(10_7, 4_0);
  The value of this UTI is @"com.apple.m4a-audio".
  Files are identified with the .m4a extension.
  */
-AVF_EXPORT AVFileType const AVFileTypeAppleM4A NS_AVAILABLE(10_7, 4_0);
+AVF_EXPORT AVFileType const AVFileTypeAppleM4A API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0));
 
 /*!
  @constant AVFileType3GPP
@@ -322,7 +343,7 @@ AVF_EXPORT AVFileType const AVFileTypeAppleM4A NS_AVAILABLE(10_7, 4_0);
  The value of this UTI is @"public.3gpp".
  Files are identified with the .3gp, .3gpp, and .sdv extensions.
  */
-AVF_EXPORT AVFileType const AVFileType3GPP NS_AVAILABLE(10_11, 4_0);
+AVF_EXPORT AVFileType const AVFileType3GPP API_AVAILABLE(macos(10.11), ios(4.0), tvos(9.0), watchos(1.0));
 
 /*!
  @constant AVFileType3GPP2
@@ -331,7 +352,7 @@ AVF_EXPORT AVFileType const AVFileType3GPP NS_AVAILABLE(10_11, 4_0);
  The value of this UTI is @"public.3gpp2".
  Files are identified with the .3g2, .3gp2 extensions.
  */
-AVF_EXPORT AVFileType const AVFileType3GPP2 NS_AVAILABLE(10_11, 4_0);
+AVF_EXPORT AVFileType const AVFileType3GPP2 API_AVAILABLE(macos(10.11), ios(4.0), tvos(9.0), watchos(1.0));
 
 /*!
  @constant AVFileTypeCoreAudioFormat
@@ -340,7 +361,7 @@ AVF_EXPORT AVFileType const AVFileType3GPP2 NS_AVAILABLE(10_11, 4_0);
  The value of this UTI is @"com.apple.coreaudio-format".
  Files are identified with the .caf extension.
  */
-AVF_EXPORT AVFileType const AVFileTypeCoreAudioFormat NS_AVAILABLE(10_7, 4_0);
+AVF_EXPORT AVFileType const AVFileTypeCoreAudioFormat API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0));
 
 /*!
  @constant AVFileTypeWAVE
@@ -349,7 +370,7 @@ AVF_EXPORT AVFileType const AVFileTypeCoreAudioFormat NS_AVAILABLE(10_7, 4_0);
  The value of this UTI is @"com.microsoft.waveform-audio".
  Files are identified with the .wav, .wave, and .bwf extensions.
  */
-AVF_EXPORT AVFileType const AVFileTypeWAVE NS_AVAILABLE(10_7, 4_0);
+AVF_EXPORT AVFileType const AVFileTypeWAVE API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0));
 
 /*!
  @constant AVFileTypeAIFF
@@ -358,7 +379,7 @@ AVF_EXPORT AVFileType const AVFileTypeWAVE NS_AVAILABLE(10_7, 4_0);
  The value of this UTI is @"public.aiff-audio".
  Files are identified with the .aif and .aiff extensions.
  */
-AVF_EXPORT AVFileType const AVFileTypeAIFF NS_AVAILABLE(10_7, 4_0);
+AVF_EXPORT AVFileType const AVFileTypeAIFF API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0));
 
 /*!
  @constant AVFileTypeAIFC
@@ -367,7 +388,7 @@ AVF_EXPORT AVFileType const AVFileTypeAIFF NS_AVAILABLE(10_7, 4_0);
  The value of this UTI is @"public.aifc-audio".
  Files are identified with the .aifc and .cdda extensions.
  */
-AVF_EXPORT AVFileType const AVFileTypeAIFC NS_AVAILABLE(10_7, 4_0);
+AVF_EXPORT AVFileType const AVFileTypeAIFC API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0));
 
 /*!
  @constant AVFileTypeAMR
@@ -376,7 +397,7 @@ AVF_EXPORT AVFileType const AVFileTypeAIFC NS_AVAILABLE(10_7, 4_0);
  The value of this UTI is @"org.3gpp.adaptive-multi-rate-audio".
  Files are identified with the .amr extension.
  */
-AVF_EXPORT AVFileType const AVFileTypeAMR NS_AVAILABLE(10_7, 4_0);
+AVF_EXPORT AVFileType const AVFileTypeAMR API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0));
 
 /*!
  @constant AVFileTypeMPEGLayer3
@@ -385,7 +406,7 @@ AVF_EXPORT AVFileType const AVFileTypeAMR NS_AVAILABLE(10_7, 4_0);
  The value of this UTI is @"public.mp3".
  Files are identified with the .mp3 extension.
  */
-AVF_EXPORT AVFileType const AVFileTypeMPEGLayer3 NS_AVAILABLE(10_9, 7_0);
+AVF_EXPORT AVFileType const AVFileTypeMPEGLayer3 API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(1.0));
 
 /*!
  @constant AVFileTypeSunAU
@@ -394,7 +415,7 @@ AVF_EXPORT AVFileType const AVFileTypeMPEGLayer3 NS_AVAILABLE(10_9, 7_0);
  The value of this UTI is @"public.au-audio".
  Files are identified with the .au and .snd extensions.
  */
-AVF_EXPORT AVFileType const AVFileTypeSunAU NS_AVAILABLE(10_9, 7_0);
+AVF_EXPORT AVFileType const AVFileTypeSunAU API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(1.0));
 
 /*!
  @constant AVFileTypeAC3
@@ -403,7 +424,7 @@ AVF_EXPORT AVFileType const AVFileTypeSunAU NS_AVAILABLE(10_9, 7_0);
  The value of this UTI is @"public.ac3-audio".
  Files are identified with the .ac3 extension.
  */
-AVF_EXPORT AVFileType const AVFileTypeAC3 NS_AVAILABLE(10_9, 7_0);
+AVF_EXPORT AVFileType const AVFileTypeAC3 API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(1.0));
 
 /*!
  @constant AVFileTypeEnhancedAC3
@@ -412,7 +433,7 @@ AVF_EXPORT AVFileType const AVFileTypeAC3 NS_AVAILABLE(10_9, 7_0);
  The value of this UTI is @"public.enhanced-ac3-audio".
  Files are identified with the .eac3 extension.
  */
-AVF_EXPORT AVFileType const AVFileTypeEnhancedAC3 NS_AVAILABLE(10_11, 9_0);
+AVF_EXPORT AVFileType const AVFileTypeEnhancedAC3 API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(2.0));
 
 /*!
  @constant AVFileTypeJPEG
@@ -421,7 +442,7 @@ AVF_EXPORT AVFileType const AVFileTypeEnhancedAC3 NS_AVAILABLE(10_11, 9_0);
  The value of this UTI is @"public.jpeg".
  Files are identified with the .jpg or .jpeg extension.
  */
-AVF_EXPORT AVFileType const AVFileTypeJPEG NS_AVAILABLE(10_13, 11_0);
+AVF_EXPORT AVFileType const AVFileTypeJPEG API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0));
 
 /*!
  @constant AVFileTypeDNG
@@ -430,7 +451,7 @@ AVF_EXPORT AVFileType const AVFileTypeJPEG NS_AVAILABLE(10_13, 11_0);
  The value of this UTI is @"com.adobe.raw-image".
  Files are identified with the .dng extension.
  */
-AVF_EXPORT AVFileType const AVFileTypeDNG NS_AVAILABLE(10_13, 11_0);
+AVF_EXPORT AVFileType const AVFileTypeDNG API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0));
 
 /*!
  @constant AVFileTypeHEIC
@@ -439,7 +460,7 @@ AVF_EXPORT AVFileType const AVFileTypeDNG NS_AVAILABLE(10_13, 11_0);
  The value of this UTI is @"public.heic".
  Files are identified with the .heic extension.
  */
-AVF_EXPORT AVFileType const AVFileTypeHEIC NS_AVAILABLE(10_13, 11_0);
+AVF_EXPORT AVFileType const AVFileTypeHEIC API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0));
 
 /*!
  @constant AVFileTypeAVCI
@@ -448,7 +469,7 @@ AVF_EXPORT AVFileType const AVFileTypeHEIC NS_AVAILABLE(10_13, 11_0);
  The value of this UTI is @"public.avci".
  Files are identified with the .avci extension.
  */
-AVF_EXPORT AVFileType const AVFileTypeAVCI NS_AVAILABLE(10_13, 11_0);
+AVF_EXPORT AVFileType const AVFileTypeAVCI API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0));
 
 /*!
  @constant AVFileTypeHEIF
@@ -457,7 +478,7 @@ AVF_EXPORT AVFileType const AVFileTypeAVCI NS_AVAILABLE(10_13, 11_0);
  The value of this UTI is @"public.heif".
  Files are identified with the .heif extension.
  */
-AVF_EXPORT AVFileType const AVFileTypeHEIF NS_AVAILABLE(10_13, 11_0);
+AVF_EXPORT AVFileType const AVFileTypeHEIF API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0));
 
 /*!
  @constant AVFileTypeTIFF
@@ -466,7 +487,7 @@ AVF_EXPORT AVFileType const AVFileTypeHEIF NS_AVAILABLE(10_13, 11_0);
  The value of this UTI is @"public.tiff".
  Files are identified with the .tiff or .tif extension.
  */
-AVF_EXPORT AVFileType const AVFileTypeTIFF NS_AVAILABLE(10_13, 11_0);
+AVF_EXPORT AVFileType const AVFileTypeTIFF API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0));
 
 /*!
  @constant AVStreamingKeyDeliveryContentKeyType
@@ -474,7 +495,7 @@ AVF_EXPORT AVFileType const AVFileTypeTIFF NS_AVAILABLE(10_13, 11_0);
  @discussion
  The value of this UTI is @"com.apple.streamingkeydelivery.contentkey".
  */
-AVF_EXPORT NSString * const AVStreamingKeyDeliveryContentKeyType NS_AVAILABLE(10_11, 9_0);
+AVF_EXPORT NSString * const AVStreamingKeyDeliveryContentKeyType API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(2.0));
 
 /*!
  @constant AVStreamingKeyDeliveryPersistentContentKeyType
@@ -482,6 +503,6 @@ AVF_EXPORT NSString * const AVStreamingKeyDeliveryContentKeyType NS_AVAILABLE(10
  @discussion
  The value of this UTI is @"com.apple.streamingkeydelivery.persistentcontentkey".
  */
-AVF_EXPORT NSString * const AVStreamingKeyDeliveryPersistentContentKeyType NS_AVAILABLE(10_11, 9_0);
+AVF_EXPORT NSString * const AVStreamingKeyDeliveryPersistentContentKeyType API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(2.0));
 
 

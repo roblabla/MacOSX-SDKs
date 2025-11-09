@@ -24,9 +24,6 @@
 #pragma once
 #endif
 
-#if !__LP64__
-#pragma options align=mac68k
-#endif /* !__LP64__ */
 
 /* Printing objects */
 typedef const void *                    PMObject;
@@ -218,7 +215,6 @@ enum {
   kPMInvalidPrintSettings       = -30875, /* the printsettings reference is invalid */
   kPMInvalidPageFormat          = -30876, /* the pageformat reference is invalid */
   kPMValueOutOfRange            = -30877, /* a value passed in is out of range */
-  kPMLockIgnored                = -30878 /* the lock value was ignored */
 };
 
 enum {
@@ -310,13 +306,6 @@ typedef enum PMDataFormat PMDataFormat;
 	kPMPresetGraphicsTypeNone excludes all graphics types.
 */
 #define kPMPresetGraphicsTypeNone 		CFSTR("None")
-
-
-
-#if !__LP64__
-#pragma options align=reset
-#endif
-
 
 #endif /* __PMDEFINITIONS__ */
 

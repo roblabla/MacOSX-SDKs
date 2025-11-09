@@ -1,7 +1,7 @@
 /*
     NSCandidateListTouchBarItem.h
     Application Kit
-    Copyright (c) 2016-2018, Apple Inc.
+    Copyright (c) 2016-2019, Apple Inc.
     All rights reserved.
 */
 
@@ -13,31 +13,14 @@
 @protocol NSTextInputClient;
 
 NS_ASSUME_NONNULL_BEGIN
+API_UNAVAILABLE_BEGIN(ios)
 
 /* NSCandidateListTouchBarItem is an NSTouchBarItem that shows the word completion candidates for assisting users typing with text input capable views. In addition to candidates supplied by its client, the NSTouchBarItem can show candidates coming from the active input method. NSCandidateListTouchBarItem has two states: expanded and collapsed. When expanded, the item replaces any NSTouchBarItems occupying its location on the bar.
 */
 
 #pragma mark NSCandidateListTouchBarItem
-NS_CLASS_AVAILABLE_MAC(10_12_2)
+API_AVAILABLE(macos(10.12.2))
 @interface NSCandidateListTouchBarItem<CandidateType> : NSTouchBarItem
-#if !__OBJC2__
-{
-@private
-    id _candidateViewController APPKIT_IVAR;
-    NSString *_customizationLabel APPKIT_IVAR;
-    
-    NSViewController *_inputContextViewController APPKIT_IVAR;
-    
-    struct {
-        unsigned int _allowsIM:1;
-        unsigned int _collapsed:1;
-        unsigned int _isTextCompletionItem:1;
-        unsigned int _reserved:29;
-    } _clfbiFlags APPKIT_IVAR;
-    
-    void *_candidateListTouchBarItemReserved[4] __unused APPKIT_IVAR;
-}
-#endif
 
 #pragma mark Client
 // The client object for the receiver.
@@ -81,24 +64,25 @@ NS_CLASS_AVAILABLE_MAC(10_12_2)
 @optional
 
 // Invoked when user touches down on a candidate in the bar.
-- (void)candidateListTouchBarItem:(NSCandidateListTouchBarItem *)anItem beginSelectingCandidateAtIndex:(NSInteger)index NS_AVAILABLE_MAC(10_12_2);
+- (void)candidateListTouchBarItem:(NSCandidateListTouchBarItem *)anItem beginSelectingCandidateAtIndex:(NSInteger)index API_AVAILABLE(macos(10.12.2));
 
 // Invoked when user moves from touching one candidate in the bar to another.
-- (void)candidateListTouchBarItem:(NSCandidateListTouchBarItem *)anItem changeSelectionFromCandidateAtIndex:(NSInteger)previousIndex toIndex:(NSInteger)index NS_AVAILABLE_MAC(10_12_2);
+- (void)candidateListTouchBarItem:(NSCandidateListTouchBarItem *)anItem changeSelectionFromCandidateAtIndex:(NSInteger)previousIndex toIndex:(NSInteger)index API_AVAILABLE(macos(10.12.2));
 
 // Invoked when user stops touching candidates in the bar. If index==NSNotFound, user didn't select any candidate.
-- (void)candidateListTouchBarItem:(NSCandidateListTouchBarItem *)anItem endSelectingCandidateAtIndex:(NSInteger)index NS_AVAILABLE_MAC(10_12_2);
+- (void)candidateListTouchBarItem:(NSCandidateListTouchBarItem *)anItem endSelectingCandidateAtIndex:(NSInteger)index API_AVAILABLE(macos(10.12.2));
 
 // Invoked when -candidateListVisible changed the visibility state.
-- (void)candidateListTouchBarItem:(NSCandidateListTouchBarItem *)anItem changedCandidateListVisibility:(BOOL)isVisible NS_AVAILABLE_MAC(10_12_2);
+- (void)candidateListTouchBarItem:(NSCandidateListTouchBarItem *)anItem changedCandidateListVisibility:(BOOL)isVisible API_AVAILABLE(macos(10.12.2));
 @end
 
 @interface NSView (NSCandidateListTouchBarItem)
 // Returns NSCandidateListTouchBarItem used by the receiver when the first responder. The default implementation just returns nil. NSTextInputContext uses the item returned from this method for showing the candidates from input methods.
-@property (nullable, readonly, strong) NSCandidateListTouchBarItem *candidateListTouchBarItem NS_AVAILABLE_MAC(10_12_2);
+@property (nullable, readonly, strong) NSCandidateListTouchBarItem *candidateListTouchBarItem API_AVAILABLE(macos(10.12.2));
 @end
 
 // The standard identifier for NSCandidateListTouchBarItem. -[NSView candidateListTouchBarItem] concrete overrides should be using this identifier for instantiating the NSTouchBarItem.
-APPKIT_EXTERN NSTouchBarItemIdentifier const NSTouchBarItemIdentifierCandidateList NS_AVAILABLE_MAC(10_12_2);
+APPKIT_EXTERN NSTouchBarItemIdentifier const NSTouchBarItemIdentifierCandidateList API_AVAILABLE(macos(10.12.2));
 
+API_UNAVAILABLE_END
 NS_ASSUME_NONNULL_END

@@ -1,6 +1,7 @@
+#if !__has_include(<UIFoundation/NSStringDrawing.h>)
 /*
         NSStringDrawing.h
-        Copyright (c) 1994-2018, Apple Inc.  All rights reserved.
+        Copyright (c) 1994-2019, Apple Inc.  All rights reserved.
 */
 
 #import <Foundation/NSString.h>
@@ -9,16 +10,11 @@
 @class NSStringDrawingContext;
 
 NS_ASSUME_NONNULL_BEGIN
+#if !TARGET_OS_IPHONE
 
 // When attributes=nil, the methods declared here uses the default behavior for each attribute described in <AppKit/NSAttributedString.h>. When stringDrawingContext=nil, it's equivalent of passing the default instance initialized with [[NSStringDrawingContext alloc] init].
 
-NS_CLASS_AVAILABLE(10_11, 6_0) @interface NSStringDrawingContext : NSObject
-#if !__OBJC2__
-{
-@private
-    id impl APPKIT_IVAR;
-}
-#endif
+API_AVAILABLE(macos(10.11), ios(6.0), watchos(2.0), tvos(9.0)) @interface NSStringDrawingContext : NSObject
 
 // Minimum scale factor for drawWithRect:options:context: and boundingRectWithSize:options:context: methods. If this property is set, the extended string drawing methods will attempt to draw the attributed string in the given bounds by proportionally scaling the font(s) in the attributed string
 @property CGFloat minimumScaleFactor;
@@ -32,38 +28,38 @@ NS_CLASS_AVAILABLE(10_11, 6_0) @interface NSStringDrawingContext : NSObject
 @end
 
 @interface NSString(NSStringDrawing)
-- (NSSize)sizeWithAttributes:(nullable NSDictionary<NSAttributedStringKey, id> *)attrs NS_AVAILABLE(10_0, 7_0);
-- (void)drawAtPoint:(NSPoint)point withAttributes:(nullable NSDictionary<NSAttributedStringKey, id> *)attrs NS_AVAILABLE(10_0, 7_0);
-- (void)drawInRect:(NSRect)rect withAttributes:(nullable NSDictionary<NSAttributedStringKey, id> *)attrs NS_AVAILABLE(10_0, 7_0);
+- (NSSize)sizeWithAttributes:(nullable NSDictionary<NSAttributedStringKey, id> *)attrs API_AVAILABLE(macos(10.0), ios(7.0), watchos(2.0), tvos(9.0));
+- (void)drawAtPoint:(NSPoint)point withAttributes:(nullable NSDictionary<NSAttributedStringKey, id> *)attrs API_AVAILABLE(macos(10.0), ios(7.0), watchos(2.0), tvos(9.0));
+- (void)drawInRect:(NSRect)rect withAttributes:(nullable NSDictionary<NSAttributedStringKey, id> *)attrs API_AVAILABLE(macos(10.0), ios(7.0), watchos(2.0), tvos(9.0));
 @end
 
 @interface NSAttributedString(NSStringDrawing)
-- (NSSize)size NS_AVAILABLE(10_0, 6_0);
-- (void)drawAtPoint:(NSPoint)point NS_AVAILABLE(10_0, 6_0);
-- (void)drawInRect:(NSRect)rect NS_AVAILABLE(10_0, 6_0);
+- (NSSize)size API_AVAILABLE(macos(10.0), ios(6.0), watchos(2.0), tvos(9.0));
+- (void)drawAtPoint:(NSPoint)point API_AVAILABLE(macos(10.0), ios(6.0), watchos(2.0), tvos(9.0));
+- (void)drawInRect:(NSRect)rect API_AVAILABLE(macos(10.0), ios(6.0), watchos(2.0), tvos(9.0));
 @end
 
 typedef NS_OPTIONS(NSInteger, NSStringDrawingOptions) {
     NSStringDrawingUsesLineFragmentOrigin = 1 << 0, // The specified origin is the line fragment origin, not the base line origin
     NSStringDrawingUsesFontLeading = 1 << 1, // Uses the font leading for calculating line heights
     NSStringDrawingUsesDeviceMetrics = 1 << 3, // Uses image glyph bounds instead of typographic bounds
-    NSStringDrawingTruncatesLastVisibleLine NS_ENUM_AVAILABLE(10_5, 6_0) = 1 << 5, // Truncates and adds the ellipsis character to the last visible line if the text doesn't fit into the bounds specified. Ignored if NSStringDrawingUsesLineFragmentOrigin is not also set.
+    NSStringDrawingTruncatesLastVisibleLine API_AVAILABLE(macos(10.5), ios(6.0), watchos(2.0), tvos(9.0)) = 1 << 5, // Truncates and adds the ellipsis character to the last visible line if the text doesn't fit into the bounds specified. Ignored if NSStringDrawingUsesLineFragmentOrigin is not also set.
 
-    NSStringDrawingDisableScreenFontSubstitution NS_ENUM_DEPRECATED_MAC(10_0, 10_11) = (1 << 2),
-    NSStringDrawingOneShot NS_ENUM_DEPRECATED_MAC(10_0, 10_11) = (1 << 4)
-} NS_ENUM_AVAILABLE(10_0, 6_0);
+    NSStringDrawingDisableScreenFontSubstitution API_DEPRECATED("", macos(10.0,10.11)) = (1 << 2),
+    NSStringDrawingOneShot API_DEPRECATED("", macos(10.0,10.11)) = (1 << 4)
+} API_AVAILABLE(macos(10.0), ios(6.0), watchos(2.0), tvos(9.0));
 
 
 // NOTE: All of the following methods will default to drawing on a baseline, limiting drawing to a single line.
 // To correctly draw and size multi-line text, pass NSStringDrawingUsesLineFragmentOrigin in the options parameter.
 @interface NSString (NSExtendedStringDrawing)
-- (void)drawWithRect:(NSRect)rect options:(NSStringDrawingOptions)options attributes:(nullable NSDictionary<NSAttributedStringKey, id> *)attributes context:(nullable NSStringDrawingContext *)context NS_AVAILABLE(10_11, 7_0);
-- (NSRect)boundingRectWithSize:(NSSize)size options:(NSStringDrawingOptions)options attributes:(nullable NSDictionary<NSAttributedStringKey, id> *)attributes context:(nullable NSStringDrawingContext *)context NS_AVAILABLE(10_11, 7_0);
+- (void)drawWithRect:(NSRect)rect options:(NSStringDrawingOptions)options attributes:(nullable NSDictionary<NSAttributedStringKey, id> *)attributes context:(nullable NSStringDrawingContext *)context API_AVAILABLE(macos(10.11), ios(7.0), watchos(2.0), tvos(9.0));
+- (NSRect)boundingRectWithSize:(NSSize)size options:(NSStringDrawingOptions)options attributes:(nullable NSDictionary<NSAttributedStringKey, id> *)attributes context:(nullable NSStringDrawingContext *)context API_AVAILABLE(macos(10.11), ios(7.0), watchos(2.0), tvos(9.0));
 @end
 
 @interface NSAttributedString (NSExtendedStringDrawing)
-- (void)drawWithRect:(NSRect)rect options:(NSStringDrawingOptions)options context:(nullable NSStringDrawingContext *)context NS_AVAILABLE(10_11, 6_0);
-- (NSRect)boundingRectWithSize:(NSSize)size options:(NSStringDrawingOptions)options context:(nullable NSStringDrawingContext *)context NS_AVAILABLE(10_11, 6_0);
+- (void)drawWithRect:(NSRect)rect options:(NSStringDrawingOptions)options context:(nullable NSStringDrawingContext *)context API_AVAILABLE(macos(10.11), ios(6.0), watchos(2.0), tvos(9.0));
+- (NSRect)boundingRectWithSize:(NSSize)size options:(NSStringDrawingOptions)options context:(nullable NSStringDrawingContext *)context API_AVAILABLE(macos(10.11), ios(6.0), watchos(2.0), tvos(9.0));
 @end
 
 /************************ Deprecated ************************/
@@ -79,5 +75,9 @@ typedef NS_OPTIONS(NSInteger, NSStringDrawingOptions) {
 - (NSRect)boundingRectWithSize:(NSSize)size options:(NSStringDrawingOptions)options; // Use -boundingRectWithSize:options:context: instead
 @end
 
-
+#endif // !TARGET_OS_IPHONE
 NS_ASSUME_NONNULL_END
+#else
+#import <UIFoundation/NSStringDrawing.h>
+#endif
+

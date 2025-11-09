@@ -2,7 +2,7 @@
 //  AVB17221ACMPInterface.h
 //  AudioVideoBridging
 //
-//  Copyright (c) 2011-2014 Apple Inc. All rights reserved.
+//  Copyright (c) 2011-2019 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -23,8 +23,8 @@ typedef void (^AVB17221ACMPInterfaceCompletion)(NSError * __nullable error, AVB1
 
 /*!
  @protocol	AVB17221ACMPClient
- @abstract	AVB17221ACMPClient is an objective-c protocol for classes intending to receive callbacks from AVB1722ACMPInterface.
- @discussion	AVB17221ACMPClient is an objective-c protocol for classes intending to receive callbacks from AVB1722ACMPInterface.
+ @abstract	AVB17221ACMPClient is an objective-c protocol for classes intending to receive callbacks from AVB17221ACMPInterface.
+ @discussion	AVB17221ACMPClient is an objective-c protocol for classes intending to receive callbacks from AVB17221ACMPInterface.
  There is a separate callback for each IEEE Std 1722.1™-2013 AVDECC Connection Managment Protocol (ACMP) command and response messages.
  */
 @protocol AVB17221ACMPClient
@@ -58,13 +58,9 @@ typedef void (^AVB17221ACMPInterfaceCompletion)(NSError * __nullable error, AVB1
 				It provides callbacks per entity EntityID via a handler object implementing the AVB17221ACMPClient protocol. AVB17221ACMPInterface objects
 				are typically not created directly but are created indirectly and accessed via the acmp property of the AVBInterface object.
  */
-NS_CLASS_AVAILABLE(10_8, NA)
+API_AVAILABLE(macos(10.8))
 @interface AVB17221ACMPInterface : AVB1722ControlInterface
 {
-#if AVB_LEGACY_OBJC_RUNTIME
-@private
-	void *_implACMPInterface;
-#endif
 }
 
 /*!
@@ -90,33 +86,19 @@ NS_CLASS_AVAILABLE(10_8, NA)
 + (AVB17221ACMPInterface *)ACMPInterfaceWithInterfaceNamed:(NSString *)anInterfaceName;
 
 /*!
-	@method		setHandler:forGUID:
-	@abstract	Add an object implementing the AVB17221ACMPClient protocol as a handler for messages to or from a specified GUID.
-	@param		handler	The object which will handle all of the commands and responses.
-	@param		targetGUID	The GUID of the entity the messages are to or from.
-	@result		YES if the handler was added, NO if there is already a handler or if the routing ID couldn't be added.
- */
-- (BOOL)setHandler:(id<AVB17221ACMPClient>)handler forGUID:(uint64_t)targetGUID  NS_DEPRECATED(10_8, 10_9, NA, NA);
-/*!
 	@method		setHandler:forEntityID:
 	@abstract	Add an object implementing the AVB17221ACMPClient protocol as a handler for messages to or from a specified EntityID.
 	@param		handler	The object which will handle all of the commands and responses.
 	@param		targetEntityID	The EntityID of the entity the messages are to or from.
 	@result		YES if the handler was added, NO if there is already a handler or if the routing ID couldn't be added.
  */
-- (BOOL)setHandler:(id<AVB17221ACMPClient>)handler forEntityID:(uint64_t)targetEntityID NS_AVAILABLE(10_9, NA);
-/*!
-	@method		removeHandlerForGUID:
-	@abstract	Removed a handler  for messages to or from a specified GUID.
-	@param		targetGUID	The GUID of the entity the messages are to or from.
- */
-- (void)removeHandlerForGUID:(uint64_t)targetGUID NS_DEPRECATED(10_8, 10_9, NA, NA);
+- (BOOL)setHandler:(id<AVB17221ACMPClient>)handler forEntityID:(uint64_t)targetEntityID API_AVAILABLE(macos(10.9));
 /*!
 	@method		removeHandlerForEntityID:
 	@abstract	Removed a handler  for messages to or from a specified EntityID.
 	@param		targetEntityID	The EntityID of the entity the messages are to or from.
  */
-- (void)removeHandlerForEntityID:(uint64_t)targetEntityID NS_AVAILABLE(10_9, NA);
+- (void)removeHandlerForEntityID:(uint64_t)targetEntityID API_AVAILABLE(macos(10.9));
 
 /*!
 	@method		sendACMPResponseMessage:

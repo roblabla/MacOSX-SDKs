@@ -237,6 +237,16 @@ typedef NSString *ODPolicyType;
 typedef CFStringRef ODPolicyType;
 #endif
 
+/*!
+    @typedef    ODErrorUserInfoKeyType
+    @abstract   Type for any additional keys in userInfo dictionary in NS/CFError
+ */
+#ifdef __OBJC__
+typedef NSString *ODErrorUserInfoKeyType;
+#else
+typedef CFStringRef ODErrorUserInfoKeyType;
+#endif
+
 // Compatibility
 typedef ODRecordType _ODRecordType;
 typedef ODAttributeType _ODAttributeType;
@@ -4134,6 +4144,8 @@ ODPolicyAttributeType kODPolicyAttributeDaysUntilExpiration __OSX_AVAILABLE_STAR
  @constant kODErrorCredentialsAccountDisabled is when the account is disabled
  @constant kODErrorCredentialsAccountExpired is when the account is expired
  @constant kODErrorCredentialsAccountInactive is when the account is inactive
+ @constant kODErrorCredentialsAccountTemporarilyLocked is when the account is in backoff (verification attempts ignored for a period of time)
+ @constant kODErrorCredentialsAccountLocked is when the account is locked due to too many verification failures.
  @constant kODErrorCredentialsPasswordExpired is when the password has expired and must be changed
  @constant kODErrorCredentialsPasswordChangeRequired is when a password change is required
  @constant kODErrorCredentialsPasswordQualityFailed is when a password provided for change did not meet quality minimum requirements
@@ -4219,7 +4231,9 @@ enum ODFrameworkErrors
 	kODErrorCredentialsAccountDisabled			=	5301,
 	kODErrorCredentialsAccountExpired			=	5302,
 	kODErrorCredentialsAccountInactive			=	5303,
-	
+    kODErrorCredentialsAccountTemporarilyLocked =   5304,
+    kODErrorCredentialsAccountLocked            =   5305,
+
 	kODErrorCredentialsPasswordExpired			=	5400,
 	kODErrorCredentialsPasswordChangeRequired	=	5401,
 	kODErrorCredentialsPasswordQualityFailed	=	5402,
@@ -4243,5 +4257,15 @@ enum ODFrameworkErrors
 	kODErrorDaemonError							=	10002,
     kODErrorPluginOperationTimeout              =   10003,
 };
+
+/*!
+    @const      kODBackOffSeconds
+    @abstract   Number of seconds an account is in backoff
+    @discussion Returned by verifyPassword and authenticationAllowed APIs.
+                This is the number of seconds the account is in "back off".
+                During backoff authentication attempts are ignored.
+ */
+CF_EXPORT
+ODErrorUserInfoKeyType kODBackOffSeconds __OSX_AVAILABLE_STARTING(__MAC_10_15, __IPHONE_NA);
 
 #endif

@@ -49,7 +49,7 @@ typedef function_table_entry   *function_table_t;
 #endif /* AUTOTEST */
 
 #ifndef	mach_port_MSG_COUNT
-#define	mach_port_MSG_COUNT	37
+#define	mach_port_MSG_COUNT	39
 #endif	/* mach_port_MSG_COUNT */
 
 #include <mach/std_types.h>
@@ -576,6 +576,34 @@ kern_return_t mach_port_special_reply_port_reset_link
 	boolean_t *srp_lost_link
 );
 
+/* Routine mach_port_guard_with_flags */
+#ifdef	mig_external
+mig_external
+#else
+extern
+#endif	/* mig_external */
+kern_return_t mach_port_guard_with_flags
+(
+	ipc_space_t task,
+	mach_port_name_t name,
+	uint64_t guard,
+	uint64_t flags
+);
+
+/* Routine mach_port_swap_guard */
+#ifdef	mig_external
+mig_external
+#else
+extern
+#endif	/* mig_external */
+kern_return_t mach_port_swap_guard
+(
+	ipc_space_t task,
+	mach_port_name_t name,
+	uint64_t old_guard,
+	uint64_t new_guard
+);
+
 __END_DECLS
 
 /********************** Caution **************************/
@@ -595,17 +623,17 @@ __END_DECLS
 #define __Request__mach_port_subsystem__defined
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
 	} __Request__mach_port_names_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -613,11 +641,11 @@ __END_DECLS
 		mach_port_name_t name;
 	} __Request__mach_port_type_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -626,11 +654,11 @@ __END_DECLS
 		mach_port_name_t new_name;
 	} __Request__mach_port_rename_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -639,11 +667,11 @@ __END_DECLS
 		mach_port_name_t name;
 	} __Request__mach_port_allocate_name_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -651,11 +679,11 @@ __END_DECLS
 		mach_port_right_t right;
 	} __Request__mach_port_allocate_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -663,11 +691,11 @@ __END_DECLS
 		mach_port_name_t name;
 	} __Request__mach_port_destroy_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -675,11 +703,11 @@ __END_DECLS
 		mach_port_name_t name;
 	} __Request__mach_port_deallocate_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -688,11 +716,11 @@ __END_DECLS
 		mach_port_right_t right;
 	} __Request__mach_port_get_refs_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -702,11 +730,11 @@ __END_DECLS
 		mach_port_delta_t delta;
 	} __Request__mach_port_mod_refs_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -717,11 +745,11 @@ __END_DECLS
 		mach_msg_type_number_t trailer_infopCnt;
 	} __Request__mach_port_peek_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -730,11 +758,11 @@ __END_DECLS
 		mach_port_mscount_t mscount;
 	} __Request__mach_port_set_mscount_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -742,11 +770,11 @@ __END_DECLS
 		mach_port_name_t name;
 	} __Request__mach_port_get_set_status_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -755,11 +783,11 @@ __END_DECLS
 		mach_port_name_t after;
 	} __Request__mach_port_move_member_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -773,11 +801,11 @@ __END_DECLS
 		mach_port_mscount_t sync;
 	} __Request__mach_port_request_notification_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -789,11 +817,11 @@ __END_DECLS
 		mach_port_name_t name;
 	} __Request__mach_port_insert_right_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -802,11 +830,11 @@ __END_DECLS
 		mach_msg_type_name_t msgt_name;
 	} __Request__mach_port_extract_right_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -815,11 +843,11 @@ __END_DECLS
 		mach_port_seqno_t seqno;
 	} __Request__mach_port_set_seqno_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -829,11 +857,11 @@ __END_DECLS
 		mach_msg_type_number_t port_info_outCnt;
 	} __Request__mach_port_get_attributes_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -844,11 +872,11 @@ __END_DECLS
 		integer_t port_info[17];
 	} __Request__mach_port_set_attributes_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -857,11 +885,11 @@ __END_DECLS
 		mach_port_qos_t qos;
 	} __Request__mach_port_allocate_qos_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -875,11 +903,11 @@ __END_DECLS
 		mach_port_name_t name;
 	} __Request__mach_port_allocate_full_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -887,11 +915,11 @@ __END_DECLS
 		int table_entries;
 	} __Request__task_set_port_space_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -899,21 +927,21 @@ __END_DECLS
 		mach_port_name_t name;
 	} __Request__mach_port_get_srights_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
 	} __Request__mach_port_space_info_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -921,11 +949,11 @@ __END_DECLS
 		mach_port_name_t name;
 	} __Request__mach_port_dnrequest_info_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -933,11 +961,11 @@ __END_DECLS
 		mach_port_name_t name;
 	} __Request__mach_port_kernel_object_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -946,11 +974,11 @@ __END_DECLS
 		mach_port_name_t pset;
 	} __Request__mach_port_insert_member_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -959,11 +987,11 @@ __END_DECLS
 		mach_port_name_t pset;
 	} __Request__mach_port_extract_member_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -971,11 +999,11 @@ __END_DECLS
 		mach_port_name_t name;
 	} __Request__mach_port_get_context_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -984,11 +1012,11 @@ __END_DECLS
 		mach_vm_address_t context;
 	} __Request__mach_port_set_context_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -996,11 +1024,11 @@ __END_DECLS
 		mach_port_name_t name;
 	} __Request__mach_port_kobject_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -1012,11 +1040,11 @@ __END_DECLS
 		uint64_t context;
 	} __Request__mach_port_construct_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -1026,11 +1054,11 @@ __END_DECLS
 		uint64_t guard;
 	} __Request__mach_port_destruct_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -1040,11 +1068,11 @@ __END_DECLS
 		boolean_t strict;
 	} __Request__mach_port_guard_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -1053,21 +1081,21 @@ __END_DECLS
 		uint64_t guard;
 	} __Request__mach_port_unguard_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
 	} __Request__mach_port_space_basic_info_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -1075,7 +1103,35 @@ __END_DECLS
 		mach_port_name_t name;
 	} __Request__mach_port_special_reply_port_reset_link_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
+#endif
+
+#ifdef  __MigPackStructs
+#pragma pack(push, 4)
+#endif
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		mach_port_name_t name;
+		uint64_t guard;
+		uint64_t flags;
+	} __Request__mach_port_guard_with_flags_t __attribute__((unused));
+#ifdef  __MigPackStructs
+#pragma pack(pop)
+#endif
+
+#ifdef  __MigPackStructs
+#pragma pack(push, 4)
+#endif
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		mach_port_name_t name;
+		uint64_t old_guard;
+		uint64_t new_guard;
+	} __Request__mach_port_swap_guard_t __attribute__((unused));
+#ifdef  __MigPackStructs
+#pragma pack(pop)
 #endif
 #endif /* !__Request__mach_port_subsystem__defined */
 
@@ -1121,6 +1177,8 @@ union __RequestUnion__mach_port_subsystem {
 	__Request__mach_port_unguard_t Request_mach_port_unguard;
 	__Request__mach_port_space_basic_info_t Request_mach_port_space_basic_info;
 	__Request__mach_port_special_reply_port_reset_link_t Request_mach_port_special_reply_port_reset_link;
+	__Request__mach_port_guard_with_flags_t Request_mach_port_guard_with_flags;
+	__Request__mach_port_swap_guard_t Request_mach_port_swap_guard;
 };
 #endif /* !__RequestUnion__mach_port_subsystem__defined */
 /* typedefs for all replies */
@@ -1129,7 +1187,7 @@ union __RequestUnion__mach_port_subsystem {
 #define __Reply__mach_port_subsystem__defined
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -1143,11 +1201,11 @@ union __RequestUnion__mach_port_subsystem {
 		mach_msg_type_number_t typesCnt;
 	} __Reply__mach_port_names_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -1156,11 +1214,11 @@ union __RequestUnion__mach_port_subsystem {
 		mach_port_type_t ptype;
 	} __Reply__mach_port_type_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -1168,11 +1226,11 @@ union __RequestUnion__mach_port_subsystem {
 		kern_return_t RetCode;
 	} __Reply__mach_port_rename_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -1180,11 +1238,11 @@ union __RequestUnion__mach_port_subsystem {
 		kern_return_t RetCode;
 	} __Reply__mach_port_allocate_name_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -1193,11 +1251,11 @@ union __RequestUnion__mach_port_subsystem {
 		mach_port_name_t name;
 	} __Reply__mach_port_allocate_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -1205,11 +1263,11 @@ union __RequestUnion__mach_port_subsystem {
 		kern_return_t RetCode;
 	} __Reply__mach_port_destroy_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -1217,11 +1275,11 @@ union __RequestUnion__mach_port_subsystem {
 		kern_return_t RetCode;
 	} __Reply__mach_port_deallocate_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -1230,11 +1288,11 @@ union __RequestUnion__mach_port_subsystem {
 		mach_port_urefs_t refs;
 	} __Reply__mach_port_get_refs_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -1242,11 +1300,11 @@ union __RequestUnion__mach_port_subsystem {
 		kern_return_t RetCode;
 	} __Reply__mach_port_mod_refs_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -1259,11 +1317,11 @@ union __RequestUnion__mach_port_subsystem {
 		char trailer_infop[68];
 	} __Reply__mach_port_peek_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -1271,11 +1329,11 @@ union __RequestUnion__mach_port_subsystem {
 		kern_return_t RetCode;
 	} __Reply__mach_port_set_mscount_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -1287,11 +1345,11 @@ union __RequestUnion__mach_port_subsystem {
 		mach_msg_type_number_t membersCnt;
 	} __Reply__mach_port_get_set_status_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -1299,11 +1357,11 @@ union __RequestUnion__mach_port_subsystem {
 		kern_return_t RetCode;
 	} __Reply__mach_port_move_member_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -1313,11 +1371,11 @@ union __RequestUnion__mach_port_subsystem {
 		/* end of the kernel processed data */
 	} __Reply__mach_port_request_notification_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -1325,11 +1383,11 @@ union __RequestUnion__mach_port_subsystem {
 		kern_return_t RetCode;
 	} __Reply__mach_port_insert_right_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -1339,11 +1397,11 @@ union __RequestUnion__mach_port_subsystem {
 		/* end of the kernel processed data */
 	} __Reply__mach_port_extract_right_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -1351,11 +1409,11 @@ union __RequestUnion__mach_port_subsystem {
 		kern_return_t RetCode;
 	} __Reply__mach_port_set_seqno_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -1365,11 +1423,11 @@ union __RequestUnion__mach_port_subsystem {
 		integer_t port_info_out[17];
 	} __Reply__mach_port_get_attributes_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -1377,11 +1435,11 @@ union __RequestUnion__mach_port_subsystem {
 		kern_return_t RetCode;
 	} __Reply__mach_port_set_attributes_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -1391,11 +1449,11 @@ union __RequestUnion__mach_port_subsystem {
 		mach_port_name_t name;
 	} __Reply__mach_port_allocate_qos_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -1405,11 +1463,11 @@ union __RequestUnion__mach_port_subsystem {
 		mach_port_name_t name;
 	} __Reply__mach_port_allocate_full_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -1417,11 +1475,11 @@ union __RequestUnion__mach_port_subsystem {
 		kern_return_t RetCode;
 	} __Reply__task_set_port_space_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -1430,11 +1488,11 @@ union __RequestUnion__mach_port_subsystem {
 		mach_port_rights_t srights;
 	} __Reply__mach_port_get_srights_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -1449,11 +1507,11 @@ union __RequestUnion__mach_port_subsystem {
 		mach_msg_type_number_t tree_infoCnt;
 	} __Reply__mach_port_space_info_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -1463,11 +1521,11 @@ union __RequestUnion__mach_port_subsystem {
 		unsigned dnr_used;
 	} __Reply__mach_port_dnrequest_info_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -1477,11 +1535,11 @@ union __RequestUnion__mach_port_subsystem {
 		unsigned object_addr;
 	} __Reply__mach_port_kernel_object_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -1489,11 +1547,11 @@ union __RequestUnion__mach_port_subsystem {
 		kern_return_t RetCode;
 	} __Reply__mach_port_insert_member_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -1501,11 +1559,11 @@ union __RequestUnion__mach_port_subsystem {
 		kern_return_t RetCode;
 	} __Reply__mach_port_extract_member_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -1514,11 +1572,11 @@ union __RequestUnion__mach_port_subsystem {
 		mach_vm_address_t context;
 	} __Reply__mach_port_get_context_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -1526,11 +1584,11 @@ union __RequestUnion__mach_port_subsystem {
 		kern_return_t RetCode;
 	} __Reply__mach_port_set_context_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -1540,11 +1598,11 @@ union __RequestUnion__mach_port_subsystem {
 		mach_vm_address_t object_addr;
 	} __Reply__mach_port_kobject_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -1553,11 +1611,11 @@ union __RequestUnion__mach_port_subsystem {
 		mach_port_name_t name;
 	} __Reply__mach_port_construct_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -1565,11 +1623,11 @@ union __RequestUnion__mach_port_subsystem {
 		kern_return_t RetCode;
 	} __Reply__mach_port_destruct_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -1577,11 +1635,11 @@ union __RequestUnion__mach_port_subsystem {
 		kern_return_t RetCode;
 	} __Reply__mach_port_guard_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -1589,11 +1647,11 @@ union __RequestUnion__mach_port_subsystem {
 		kern_return_t RetCode;
 	} __Reply__mach_port_unguard_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -1602,11 +1660,11 @@ union __RequestUnion__mach_port_subsystem {
 		ipc_info_space_basic_t basic_info;
 	} __Reply__mach_port_space_basic_info_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -1615,7 +1673,31 @@ union __RequestUnion__mach_port_subsystem {
 		boolean_t srp_lost_link;
 	} __Reply__mach_port_special_reply_port_reset_link_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
+#endif
+
+#ifdef  __MigPackStructs
+#pragma pack(push, 4)
+#endif
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+	} __Reply__mach_port_guard_with_flags_t __attribute__((unused));
+#ifdef  __MigPackStructs
+#pragma pack(pop)
+#endif
+
+#ifdef  __MigPackStructs
+#pragma pack(push, 4)
+#endif
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+	} __Reply__mach_port_swap_guard_t __attribute__((unused));
+#ifdef  __MigPackStructs
+#pragma pack(pop)
 #endif
 #endif /* !__Reply__mach_port_subsystem__defined */
 
@@ -1661,6 +1743,8 @@ union __ReplyUnion__mach_port_subsystem {
 	__Reply__mach_port_unguard_t Reply_mach_port_unguard;
 	__Reply__mach_port_space_basic_info_t Reply_mach_port_space_basic_info;
 	__Reply__mach_port_special_reply_port_reset_link_t Reply_mach_port_special_reply_port_reset_link;
+	__Reply__mach_port_guard_with_flags_t Reply_mach_port_guard_with_flags;
+	__Reply__mach_port_swap_guard_t Reply_mach_port_swap_guard;
 };
 #endif /* !__RequestUnion__mach_port_subsystem__defined */
 
@@ -1702,7 +1786,9 @@ union __ReplyUnion__mach_port_subsystem {
     { "mach_port_guard", 3233 },\
     { "mach_port_unguard", 3234 },\
     { "mach_port_space_basic_info", 3235 },\
-    { "mach_port_special_reply_port_reset_link", 3236 }
+    { "mach_port_special_reply_port_reset_link", 3236 },\
+    { "mach_port_guard_with_flags", 3237 },\
+    { "mach_port_swap_guard", 3238 }
 #endif
 
 #ifdef __AfterMigUserHeader

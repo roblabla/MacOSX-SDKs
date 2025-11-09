@@ -1,5 +1,5 @@
 /*	NSDateFormatter.h
-	Copyright (c) 1995-2018, Apple Inc. All rights reserved.
+	Copyright (c) 1995-2019, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSFormatter.h>
@@ -53,7 +53,7 @@ typedef NS_ENUM(NSUInteger, NSDateFormatterStyle) {    // date and time format s
 
 typedef NS_ENUM(NSUInteger, NSDateFormatterBehavior) {
     NSDateFormatterBehaviorDefault = 0,
-#if (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE))
+#if TARGET_OS_OSX
     NSDateFormatterBehavior10_0 = 1000,
 #endif
     NSDateFormatterBehavior10_4 = 1040,
@@ -115,11 +115,11 @@ typedef NS_ENUM(NSUInteger, NSDateFormatterBehavior) {
 
 @end
 
-#if (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE))
+#if TARGET_OS_OSX
 @interface NSDateFormatter (NSDateFormatterCompatibility)
 
-- (id)initWithDateFormat:(NSString *)format allowNaturalLanguage:(BOOL)flag NS_CALENDAR_DEPRECATED_MAC(10_4, 10_9, "Create an NSDateFormatter with `init` and set the dateFormat property instead.");
-- (BOOL)allowsNaturalLanguage NS_CALENDAR_DEPRECATED_MAC(10_4, 10_9, "There is no replacement");
+- (id)initWithDateFormat:(NSString *)format allowNaturalLanguage:(BOOL)flag API_DEPRECATED("Create an NSDateFormatter with `init` and set the dateFormat property instead.", macos(10.4, 10.9));
+- (BOOL)allowsNaturalLanguage API_DEPRECATED("There is no replacement", macos(10.4, 10.9));
 
 @end
 #endif

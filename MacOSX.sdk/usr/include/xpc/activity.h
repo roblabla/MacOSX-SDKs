@@ -156,7 +156,7 @@ const char * const XPC_ACTIVITY_ALLOW_BATTERY;
  * @constant XPC_ACTIVITY_REQUIRE_SCREEN_SLEEP
  * A Boolean value indicating whether the activity should only be performed
  * while device appears to be asleep.  Note that the definition of screen sleep
- * may very by platform and may include states where the device is known to be
+ * may vary by platform and may include states where the device is known to be
  * idle despite the fact that the display itself is still powered.  Defaults to
  * false.
  */

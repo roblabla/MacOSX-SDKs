@@ -56,7 +56,9 @@
  *          Improvements to ASTC 8x8 block image quality
  *          Fix giant values in macOS/iOS/tvOS availability macros
  *          no new API, so still AT_AVAILABILITY_v1. See at_encoder_get_version() to identify these improvements.
- *
+ *      version 2a (AT_AVAILABILITY_v2): MacOS X.15, iOS 13, tvOS 13    (library version 2.0.x)
+ *          DirectX BCn support
+ *          No longer supports garbage collection.  Use ARC or manual retain/release.
  *
  *  The major field of the at_encoder_get_version build version corresponds with
  *  the availability version (e.g. AT_AVAILABILITY_v1) here.
@@ -64,9 +66,11 @@
 
 #   define AT_AVAILABILITY_v1       __API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0), watchos(5.0))
 #   define AT_ENUM_AVAILABILITY_v1  __API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0), watchos(5.0))
+#   define AT_ENUM_AVAILABILITY_v2  __API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0), watchos(6.0))
 
 #else   /* AT_LINK_STATIC */
 #   define      AT_ENUM_AVAILABILITY_v1
+#   define      AT_ENUM_AVAILABILITY_v2
 #   define      AT_AVAILABILITY_v1
 #endif  /* AT_LINK_STATIC */
 
@@ -234,7 +238,33 @@ typedef enum at_block_format_t{
     at_block_format_astc_10x10_ldr  AT_ENUM_AVAILABILITY_v1,         ///< MTLPixelFormatASTC_10x10_LDR, decode only
     at_block_format_astc_12x10_ldr  AT_ENUM_AVAILABILITY_v1,         ///< MTLPixelFormatASTC_12x10_LDR, decode only
     at_block_format_astc_12x12_ldr  AT_ENUM_AVAILABILITY_v1,         ///< MTLPixelFormatASTC_12x12_LDR, decode only
-    
+  
+    at_block_format_astc_4x4_hdr    AT_ENUM_AVAILABILITY_v2 = 17,    ///< MTLPixelFormatASTC_4x4_HDR, decode only
+    at_block_format_astc_5x4_hdr    AT_ENUM_AVAILABILITY_v2,         ///< MTLPixelFormatASTC_5x4_HDR, decode only
+    at_block_format_astc_5x5_hdr    AT_ENUM_AVAILABILITY_v2,         ///< MTLPixelFormatASTC_5x5_HDR, decode only
+    at_block_format_astc_6x5_hdr    AT_ENUM_AVAILABILITY_v2,         ///< MTLPixelFormatASTC_6x5_HDR, decode only
+    at_block_format_astc_6x6_hdr    AT_ENUM_AVAILABILITY_v2,         ///< MTLPixelFormatASTC_6x6_HDR, decode only
+    at_block_format_astc_8x5_hdr    AT_ENUM_AVAILABILITY_v2,         ///< MTLPixelFormatASTC_8x5_HDR, decode only
+    at_block_format_astc_8x6_hdr    AT_ENUM_AVAILABILITY_v2,         ///< MTLPixelFormatASTC_8x6_HDR, decode only
+    at_block_format_astc_8x8_hdr    AT_ENUM_AVAILABILITY_v2,         ///< MTLPixelFormatASTC_8x8_HDR, decode only
+    at_block_format_astc_10x5_hdr   AT_ENUM_AVAILABILITY_v2,         ///< MTLPixelFormatASTC_10x5_HDR, decode only
+    at_block_format_astc_10x6_hdr   AT_ENUM_AVAILABILITY_v2,         ///< MTLPixelFormatASTC_10x6_HDR, decode only
+    at_block_format_astc_10x8_hdr   AT_ENUM_AVAILABILITY_v2,         ///< MTLPixelFormatASTC_10x5_HDR, decode only
+    at_block_format_astc_10x10_hdr  AT_ENUM_AVAILABILITY_v2,         ///< MTLPixelFormatASTC_10x10_HDR, decode only
+    at_block_format_astc_12x10_hdr  AT_ENUM_AVAILABILITY_v2,         ///< MTLPixelFormatASTC_12x10_HDR, decode only
+    at_block_format_astc_12x12_hdr  AT_ENUM_AVAILABILITY_v2,         ///< MTLPixelFormatASTC_12x12_HDR, decode only
+  
+    at_block_format_bc1             AT_ENUM_AVAILABILITY_v2 = 33,    ///< MTLPixelFormatBC1_RGBA
+    at_block_format_bc2             AT_ENUM_AVAILABILITY_v2,         ///< MTLPixelFormatBC2_RGBA
+    at_block_format_bc3             AT_ENUM_AVAILABILITY_v2,         ///< MTLPixelFormatBC3_RGBA
+    at_block_format_bc4             AT_ENUM_AVAILABILITY_v2,         ///< MTLPixelFormatBC4_RUnorm
+    at_block_format_bc4s            AT_ENUM_AVAILABILITY_v2,         ///< MTLPixelFormatBC4_RSnorm
+    at_block_format_bc5             AT_ENUM_AVAILABILITY_v2,         ///< MTLPixelFormatBC5_RGUnorm
+    at_block_format_bc5s            AT_ENUM_AVAILABILITY_v2,         ///< MTLPixelFormatBC5_RGSnorm
+    at_block_format_bc6             AT_ENUM_AVAILABILITY_v2,         ///< MTLPixelFormatBC6H_RGBFloat, decode only
+    at_block_format_bc6u            AT_ENUM_AVAILABILITY_v2,         ///< MTLPixelFormatBC6H_RGBUFloat, decode only
+    at_block_format_bc7             AT_ENUM_AVAILABILITY_v2,         ///< MTLPixelFormatBC7_RGBAUnorm
+
     // always last
     at_block_format_count                                           /* CAUTION: value subject to change! */
 };
@@ -256,6 +286,32 @@ OS_ENUM( at_block_format, unsigned long,
     at_block_format_astc_10x10_ldr  AT_ENUM_AVAILABILITY_v1,       ///< MTLPixelFormatASTC_10x10_LDR, decode only
     at_block_format_astc_12x10_ldr  AT_ENUM_AVAILABILITY_v1,       ///< MTLPixelFormatASTC_12x10_LDR, decode only
     at_block_format_astc_12x12_ldr  AT_ENUM_AVAILABILITY_v1,       ///< MTLPixelFormatASTC_12x12_LDR, decode only
+
+    at_block_format_astc_4x4_hdr    AT_ENUM_AVAILABILITY_v2 = 17,  ///< MTLPixelFormatASTC_4x4_HDR, decode only
+    at_block_format_astc_5x4_hdr    AT_ENUM_AVAILABILITY_v2,       ///< MTLPixelFormatASTC_5x4_HDR, decode only
+    at_block_format_astc_5x5_hdr    AT_ENUM_AVAILABILITY_v2,       ///< MTLPixelFormatASTC_5x5_HDR, decode only
+    at_block_format_astc_6x5_hdr    AT_ENUM_AVAILABILITY_v2,       ///< MTLPixelFormatASTC_6x5_HDR, decode only
+    at_block_format_astc_6x6_hdr    AT_ENUM_AVAILABILITY_v2,       ///< MTLPixelFormatASTC_6x6_HDR, decode only
+    at_block_format_astc_8x5_hdr    AT_ENUM_AVAILABILITY_v2,       ///< MTLPixelFormatASTC_8x5_HDR, decode only
+    at_block_format_astc_8x6_hdr    AT_ENUM_AVAILABILITY_v2,       ///< MTLPixelFormatASTC_8x6_HDR, decode only
+    at_block_format_astc_8x8_hdr    AT_ENUM_AVAILABILITY_v2,       ///< MTLPixelFormatASTC_8x8_HDR, decode only
+    at_block_format_astc_10x5_hdr   AT_ENUM_AVAILABILITY_v2,       ///< MTLPixelFormatASTC_10x5_HDR, decode only
+    at_block_format_astc_10x6_hdr   AT_ENUM_AVAILABILITY_v2,       ///< MTLPixelFormatASTC_10x6_HDR, decode only
+    at_block_format_astc_10x8_hdr   AT_ENUM_AVAILABILITY_v2,       ///< MTLPixelFormatASTC_10x5_HDR, decode only
+    at_block_format_astc_10x10_hdr  AT_ENUM_AVAILABILITY_v2,       ///< MTLPixelFormatASTC_10x10_HDR, decode only
+    at_block_format_astc_12x10_hdr  AT_ENUM_AVAILABILITY_v2,       ///< MTLPixelFormatASTC_12x10_HDR, decode only
+    at_block_format_astc_12x12_hdr  AT_ENUM_AVAILABILITY_v2,       ///< MTLPixelFormatASTC_12x12_HDR, decode only
+  
+    at_block_format_bc1             AT_ENUM_AVAILABILITY_v2 = 33,  ///< MTLPixelFormatBC1_RGBA
+    at_block_format_bc2             AT_ENUM_AVAILABILITY_v2,       ///< MTLPixelFormatBC2_RGBA
+    at_block_format_bc3             AT_ENUM_AVAILABILITY_v2,       ///< MTLPixelFormatBC3_RGBA
+    at_block_format_bc4             AT_ENUM_AVAILABILITY_v2,       ///< MTLPixelFormatBC4_RUnorm
+    at_block_format_bc4s            AT_ENUM_AVAILABILITY_v2,       ///< MTLPixelFormatBC4_RSnorm
+    at_block_format_bc5             AT_ENUM_AVAILABILITY_v2,       ///< MTLPixelFormatBC5_RGUnorm
+    at_block_format_bc5s            AT_ENUM_AVAILABILITY_v2,       ///< MTLPixelFormatBC5_RGSnorm
+    at_block_format_bc6             AT_ENUM_AVAILABILITY_v2,       ///< MTLPixelFormatBC6H_RGBFloat
+    at_block_format_bc6u            AT_ENUM_AVAILABILITY_v2,       ///< MTLPixelFormatBC6H_RGBUFloat
+    at_block_format_bc7             AT_ENUM_AVAILABILITY_v2,       ///< MTLPixelFormatBC7_RGBAUnorm
 
     // always last
     at_block_format_count                                          /* CAUTION: value subject to change! */
@@ -320,6 +376,8 @@ OS_ENUM( at_flags, uint64_t,
  *                                                  a reserved block encoding was encountered during decoding.
  *  @constant   at_error_invalid_flag               The option requested by the flag is unsupported for this
  *                                                  at_encoder_t encode or decode operation. Retry with at_flags_default.
+ *  @constant   at_error_hdr_block_format_required  The file contains HDR data but an LDR block format was specified.
+ *                                                  Retry with an HDR block format.
  */
 #if defined(DOXYGEN)
 typedef enum at_error_t
@@ -331,6 +389,7 @@ typedef enum at_error_t
     at_error_operation_unsupported         AT_ENUM_AVAILABILITY_v1  =   -2,
     at_error_invalid_source_data           AT_ENUM_AVAILABILITY_v1  =   -3,
     at_error_invalid_flag                  AT_ENUM_AVAILABILITY_v1  =   -4,
+    at_error_hdr_block_format_required     AT_ENUM_AVAILABILITY_v2  =   -5,
 };
 #else
 OS_ENUM( at_error, long,
@@ -341,6 +400,7 @@ OS_ENUM( at_error, long,
     at_error_operation_unsupported         AT_ENUM_AVAILABILITY_v1  =   -2,
     at_error_invalid_source_data           AT_ENUM_AVAILABILITY_v1  =   -3,
     at_error_invalid_flag                  AT_ENUM_AVAILABILITY_v1  =   -4,
+    at_error_hdr_block_format_required     AT_ENUM_AVAILABILITY_v2  =   -5,
 );
 #endif
         
@@ -386,7 +446,7 @@ typedef struct at_block_buffer_t
  *              both compress and decompress common texture formats, such as ASTC.
  *              These formats generally comsume texels (pixels) in a small rectangular
  *              region and produce a single block of compressed data. For example,
- *              for the at_texel_format_astc_4x4_ldr (MTLPixelFormatASTC_4x4_LDR) 
+ *              for the at_block_format_astc_4x4_ldr (MTLPixelFormatASTC_4x4_LDR)
  *              compressed texture type, the image is segmented in 4x4 rectangles.
  *              Each of these is encoded by a variety of means to a 128-bit block.
  *              When compressing an image texels are consumed and blocks are produced.
@@ -493,8 +553,12 @@ at_encoder_t __nullable OS_OBJECT_RETURNS_RETAINED at_encoder_create(
  *
  *              Currently supported output formats are:
  *              @code
- *                  at_texel_format_astc_4x4_ldr
- *                  at_texel_format_astc_8x8_ldr
+ *                  at_block_format_astc_4x4_ldr
+ *                  at_block_format_astc_8x8_ldr
+ *                  at_block_format_bc1
+ *                  at_block_format_bc4
+ *                  at_block_format_bc5
+ *                  at_block_format_bc7
  *              @endcode
  *
  *              Per the LDR subset of the ASTC specification, only 2D textures are supported.
@@ -555,6 +619,7 @@ float at_encoder_compress_texels(
  *              Currently supported input formats are:
  *              @code
  *                  all ASTC
+ *                  all BCn
  *              @endcode
  *
  *              Currently supported output formats are:
@@ -564,7 +629,9 @@ float at_encoder_compress_texels(
  *
  *              Per the LDR subset of the ASTC specification, only 2D textures are supported.
  *              sRGB textures (e.g. MTLPixelFormatASTC_4x4_sRGB) should be decoded using the LDR
- *              formats in conjunction with the at_flags_srgb_linear_texels flag.
+ *              formats in conjunction with the at_flags_srgb_linear_texels flag.  Signed or HDR
+ *              block formats must be paired with a float texel format and cannot be paired with
+ *              at_flags_srgb_linear_texels.
  *
  *  @param      encoder             A valid at_encoder_t
  *  @param      src                 Pointer to a valid at_block_buffer_t describing which blocks to read

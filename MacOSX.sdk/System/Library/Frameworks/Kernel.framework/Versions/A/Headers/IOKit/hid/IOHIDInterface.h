@@ -27,8 +27,13 @@
 
 #include <IOKit/IOService.h>
 #include <IOKit/hid/IOHIDKeys.h>
+#include <HIDDriverKit/IOHIDInterface.h>
+#include <IOKit/IOWorkLoop.h>
+#include <IOKit/IOCommandGate.h>
 
 class IOHIDDevice;
+class IOBufferMemoryDescriptor;
+class OSAction;
 
 /*! @class IOHIDInterface : public IOService
     @abstract In kernel interface to a HID device.
@@ -36,7 +41,7 @@ class IOHIDDevice;
 
 class IOHIDInterface: public IOService
 {
-    OSDeclareDefaultStructors( IOHIDInterface )
+    OSDeclareDefaultStructorsWithDispatch( IOHIDInterface )
     
 public:
 
@@ -92,15 +97,39 @@ private:
     UInt32                      _countryCode;
     IOByteCount                 _maxReportSize[kIOHIDReportTypeCount];
 
-    struct ExpansionData { 
-        UInt32                  reportInterval;
+    struct ExpansionData {
+        UInt32                      reportInterval;
+        OSAction                    *reportAction;
+        IOWorkLoop                  *workLoop;
+        IOCommandGate               *commandGate;
+        OSArray                     *deviceElements;
+        OSSet                     	*reportPool;
+        bool                        opened;
+        bool                        sleeping;
     };
+
     /*! @var reserved
         Reserved for future use.  (Internal use only)  */
     ExpansionData *             _reserved;
+	
+    bool openGated(IOService *forClient, IOOptionBits options, OSAction *action);
+    void closeGated(IOService *forClient, IOOptionBits options);
+    void handleReportGated(AbsoluteTime timestamp,
+                           IOMemoryDescriptor *report,
+                           IOHIDReportType type,
+                           UInt32 reportID,
+                           void *ctx);
+    IOReturn addReportToPoolGated(IOMemoryDescriptor *report);
     
 protected:
+	
+	void HandleReportPrivate(AbsoluteTime timestamp,
+							 IOMemoryDescriptor * report,
+							 IOHIDReportType type,
+							 UInt32 reportID,
+							 void * ctx);
 
+	
     /*! 
         @function free
         @abstract Free the IOHIDInterface object.

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1998-2009 Apple Inc. All rights reserved.
+ * Copyright (c) 1998-2018 Apple Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -1137,7 +1137,12 @@ typedef struct SCSICmd_INQUIRY_PageB2_Provisioning_Group_Descriptor
 
 enum
 {
-	kC0DataMaxStringLen = 32,
+	kC0DataMaxStringLen = 32
+};
+
+enum
+{
+	kINQUIRY_PageC0_Features_HasSEP_LUN = ( 1 << 3 )
 };
 
 typedef struct  SCSICmd_INQUIRY_PageCx_Header
@@ -1176,6 +1181,7 @@ typedef struct SCSICmd_INQUIRY_PageC0_Data
 	UInt64							fWorkArounds;
     UInt16                          fEncryptionType;
     UInt8                           fReserved3[2];
+    UInt64                          fInstalledRAMSize;
 
 } SCSICmd_INQUIRY_PageC0_Data;
 

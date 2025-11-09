@@ -1,7 +1,7 @@
 /*
     NSSplitViewItem.h
     Application Kit
-    Copyright (c) 2014-2018, Apple Inc.
+    Copyright (c) 2014-2019, Apple Inc.
     All rights reserved.
 */
 
@@ -10,6 +10,7 @@
 #import <AppKit/NSAnimation.h>
 
 NS_ASSUME_NONNULL_BEGIN
+API_UNAVAILABLE_BEGIN(ios)
 
 @class NSViewController;
 
@@ -17,7 +18,7 @@ typedef NS_ENUM(NSInteger, NSSplitViewItemBehavior) {
     NSSplitViewItemBehaviorDefault,
     NSSplitViewItemBehaviorSidebar,
     NSSplitViewItemBehaviorContentList
-} NS_AVAILABLE_MAC(10_11);
+} API_AVAILABLE(macos(10.11));
 
 typedef NS_ENUM(NSInteger, NSSplitViewItemCollapseBehavior) {
     /// The item uses the default collapsing behavior for its set `behavior`. The default may change over time.
@@ -28,30 +29,18 @@ typedef NS_ENUM(NSInteger, NSSplitViewItemCollapseBehavior) {
     NSSplitViewItemCollapseBehaviorPreferResizingSiblingsWithFixedSplitView,
     /// The item will collapse/uncollapse purely from a constraint animation, with a constraint priority of the item’s `holdingPriority`. This could result in a partial internal content resize and window resize, and has no implications for keeping the window on screen. External constraints can be used to tweak exactly how the animation affects item, sibling, and window size and positions.
     NSSplitViewItemCollapseBehaviorUseConstraints
-} NS_AVAILABLE_MAC(10_11);
+} API_AVAILABLE(macos(10.11));
 
 
 /// This constant can be used with any sizing related \c NSSplitViewItem properties to unset their values.
-APPKIT_EXTERN const CGFloat NSSplitViewItemUnspecifiedDimension NS_AVAILABLE_MAC(10_11);
+APPKIT_EXTERN const CGFloat NSSplitViewItemUnspecifiedDimension API_AVAILABLE(macos(10.11));
 
 /*!
  * NSSplitViewItem implements the items used in an NSSplitViewController.
  * The item describes a child ViewController's state in a SplitViewController, e.g. its collapsibility, holding priority and other metrics, and collapsed state.
  */
-NS_CLASS_AVAILABLE_MAC(10_10)
-@interface NSSplitViewItem : NSObject <NSAnimatablePropertyContainer, NSCoding> {
-@private
-    id _splitViewItemPrivateData APPKIT_IVAR;
-    struct {
-        unsigned int _collapsed:1;
-        unsigned int _canCollapse:1;
-        unsigned int _isOverlaid:1;
-        unsigned int _revealsOnEdgeHoverInFullscreen:1;
-        unsigned int _springLoaded:1;
-        unsigned int _forceWithinWindowBlending:1;
-        unsigned int _reserved:26;
-    } _flags APPKIT_IVAR;
-}
+API_AVAILABLE(macos(10.10))
+@interface NSSplitViewItem : NSObject <NSAnimatablePropertyContainer, NSCoding>
 
 /*!
  * Creates an autoreleased SplitViewItem that represents the provided ViewController. All other properties are left at their default.
@@ -73,7 +62,7 @@ NS_CLASS_AVAILABLE_MAC(10_10)
  * \param viewController The view controller used to set the viewController property
  * \return An autoreleased SplitViewItem that acts as a sidebar.
  */
-+ (instancetype)sidebarWithViewController:(NSViewController *)viewController NS_AVAILABLE_MAC(10_11);
++ (instancetype)sidebarWithViewController:(NSViewController *)viewController API_AVAILABLE(macos(10.11));
 
 /*!
  * Creates a split view item representing a content list for the provided ViewController, akin to Mail's message list, Note's note list.
@@ -84,10 +73,10 @@ NS_CLASS_AVAILABLE_MAC(10_10)
  * \param viewController The view controller used to set the viewController property
  * \return An autoreleased SplitViewItem that acts as a content list.
  */
-+ (instancetype)contentListWithViewController:(NSViewController *)viewController NS_AVAILABLE_MAC(10_11);
++ (instancetype)contentListWithViewController:(NSViewController *)viewController API_AVAILABLE(macos(10.11));
 
 /// The standard behavior type of the receiver. See initializers for descriptions of each behavior.
-@property (readonly) NSSplitViewItemBehavior behavior NS_AVAILABLE_MAC(10_11);
+@property (readonly) NSSplitViewItemBehavior behavior API_AVAILABLE(macos(10.11));
 
 /// The view controller represented by the SplitViewItem. An exception will be thrown if a new viewController is set while the receiving SplitViewItem is added to a SplitViewController.
 @property (strong) NSViewController *viewController;
@@ -99,26 +88,29 @@ NS_CLASS_AVAILABLE_MAC(10_10)
 @property BOOL canCollapse;
 
 /// The resize behavior when the receiver toggles its `collapsed` state programmatically, both animatedly and not. Defaults to `.Default`.
-@property NSSplitViewItemCollapseBehavior collapseBehavior NS_AVAILABLE_MAC(10_11);
+@property NSSplitViewItemCollapseBehavior collapseBehavior API_AVAILABLE(macos(10.11));
 
 /// A convenience to set the minimum thickness of the split view item -- width for "vertical" split views, height otherwise. If NSSplitViewItemUnspecifiedDimension, no minimum size is enforced by the SplitViewItem, although constraints in the contained view hierarchy might have constraints specify some minimum size on their own. Defaults to NSSplitViewItemUnspecifiedDimension.
-@property CGFloat minimumThickness NS_AVAILABLE_MAC(10_11);
+@property CGFloat minimumThickness API_AVAILABLE(macos(10.11));
 
 /// A convenience to set the maximum thickness of the split view item -- width for "vertical" split views, height otherwise. If NSSplitViewItemUnspecifiedDimension, no maximum size is enforced by the SplitViewItem, although constraints in the contained view hierarchy might have constraints specify some maximum size on their own. Defaults to NSSplitViewItemUnspecifiedDimension.
-@property CGFloat maximumThickness NS_AVAILABLE_MAC(10_11);
+@property CGFloat maximumThickness API_AVAILABLE(macos(10.11));
 
 /// The percentage of the contained NSSplitView that the NSSplitViewItem prefers to encompass. This is used when double-clicking on a neighbor divider to return to that standard ratio. As well as after entering fullscreen to determine the initial size of the receiver. Defaults to NSSplitViewItemUnspecifiedDimension, which means no resize will occur on double-clicks, and the absolute size is preserved when entering fullscreen.
-@property CGFloat preferredThicknessFraction NS_AVAILABLE_MAC(10_11);
+@property CGFloat preferredThicknessFraction API_AVAILABLE(macos(10.11));
 
+#if !TARGET_OS_IPHONE
 /// Sets the priority under which a SplitViewItem will hold its width (for a vertical split view) or height (for a horizontal split view). The view with the lowest priority will be the first to take on additional width if the split view grows or shrinks. The default is \c NSLayoutPriorityDefaultLow.
 @property NSLayoutPriority holdingPriority;
+#endif
 
 /// The maximum thickness of the split view item when resizing due to automatic sizing, such as entering fullscreen with a set preferredThicknessFraction or proportional sizing. The user can still resize up to the absolute maximum size by dragging the divider or otherwise. If NSSplitViewItemUnspecifiedDimension, no automatic maximum is enforced. Defaults to NSSplitViewItemUnspecifiedDimension.
-@property CGFloat automaticMaximumThickness NS_AVAILABLE_MAC(10_11);
+@property CGFloat automaticMaximumThickness API_AVAILABLE(macos(10.11));
 
 /// If YES, the split view item can be temporarily uncollapsed during a drag by hovering or deep clicking on its neighboring divider. Defaults to NO.
-@property (getter=isSpringLoaded) BOOL springLoaded NS_AVAILABLE_MAC(10_11);
+@property (getter=isSpringLoaded) BOOL springLoaded API_AVAILABLE(macos(10.11));
 
 @end
 
+API_UNAVAILABLE_END
 NS_ASSUME_NONNULL_END

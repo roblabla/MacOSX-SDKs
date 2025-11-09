@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-typedef NSString * CAMediaTimingFunctionName NS_STRING_ENUM;
+typedef NSString * CAMediaTimingFunctionName NS_TYPED_ENUM;
 
 /* Represents one segment of a function describing a timing curve. The
  * function maps an input time normalized to the range [0,1] to an

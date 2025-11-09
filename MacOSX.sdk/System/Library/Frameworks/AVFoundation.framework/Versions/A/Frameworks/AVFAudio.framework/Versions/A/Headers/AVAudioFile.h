@@ -26,7 +26,7 @@ NS_ASSUME_NONNULL_BEGIN
 		Reads and writes are always sequential, but random access is possible by setting the
 		framePosition property.
 */
-OS_EXPORT API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0))
+API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0))
 @interface AVAudioFile : NSObject {
 @private
 	void *_impl;

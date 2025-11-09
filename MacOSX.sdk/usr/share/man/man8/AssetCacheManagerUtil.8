@@ -85,6 +85,10 @@ the cache at
 .Ar path
 is not modified, otherwise it is emptied.
 This command only starts the absorption, which proceeds and finishes in the background.
+Use the
+.Xr log 1
+command to view progress, for example:
+log show --predicate 'subsystem == "com.apple.AssetCache"' --style compact --last 5m
 .El
 .Sh "SEE ALSO"
 System Preferences > Sharing > Content Caching,

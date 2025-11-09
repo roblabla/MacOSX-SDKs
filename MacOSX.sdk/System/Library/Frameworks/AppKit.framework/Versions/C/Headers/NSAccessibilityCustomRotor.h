@@ -1,7 +1,7 @@
 /*
 	NSAccessibilityCustomRotor.h
 	Application Kit
-	Copyright (c) 2016-2018, Apple Inc.
+	Copyright (c) 2016-2019, Apple Inc.
 	All rights reserved.
  */
 
@@ -23,6 +23,7 @@
  */
 
 NS_ASSUME_NONNULL_BEGIN
+API_UNAVAILABLE_BEGIN(ios)
 
 @class NSAccessibilityCustomRotor;
 @class NSAccessibilityCustomRotorItemResult;
@@ -81,13 +82,6 @@ typedef NS_ENUM(NSInteger, NSAccessibilityCustomRotorType) {
  * VoiceOver, to search applications for content related to the given label.
  */
 API_AVAILABLE(macos(10.13)) @interface NSAccessibilityCustomRotor : NSObject
-{
-@private
-    NSAccessibilityCustomRotorType _type APPKIT_IVAR;
-    NSString *_label APPKIT_IVAR;
-    __weak id<NSAccessibilityCustomRotorItemSearchDelegate> _itemSearchDelegate APPKIT_IVAR;
-    __weak id<NSAccessibilityElementLoading> _itemLoadingDelegate APPKIT_IVAR;
-}
 
 /*!
  * @brief Convenience initializer that uses
@@ -144,12 +138,6 @@ API_AVAILABLE(macos(10.13)) @interface NSAccessibilityCustomRotor : NSObject
  * NSAccessibilityCustomRotorItemResult.
  */
 API_AVAILABLE(macos(10.13)) @interface NSAccessibilityCustomRotorSearchParameters : NSObject
-{
-@private
-    NSAccessibilityCustomRotorItemResult *_currentItem APPKIT_IVAR;
-    NSAccessibilityCustomRotorSearchDirection _searchDirection APPKIT_IVAR;
-    NSString *_filterString APPKIT_IVAR;
-}
 
 /*!
  * @brief The currentItem determines where the search will start from. If 
@@ -180,14 +168,6 @@ API_AVAILABLE(macos(10.13)) @interface NSAccessibilityCustomRotorSearchParameter
  * to assistive technologies that match a search parameter criteria.
  */
 API_AVAILABLE(macos(10.13)) @interface NSAccessibilityCustomRotorItemResult : NSObject
-{
-@private
-    __weak id<NSAccessibilityElement> _targetElement APPKIT_IVAR;
-    
-    NSRange _targetRange APPKIT_IVAR;
-    NSString *_customLabel APPKIT_IVAR;
-    id<NSSecureCoding, NSObject> _itemLoadingToken APPKIT_IVAR;
-}
 
 + (instancetype)new NS_UNAVAILABLE;
 - (instancetype)init NS_UNAVAILABLE;
@@ -250,4 +230,5 @@ API_AVAILABLE(macos(10.13)) @protocol NSAccessibilityCustomRotorItemSearchDelega
 
 @end
 
+API_UNAVAILABLE_END
 NS_ASSUME_NONNULL_END

@@ -1,3 +1,4 @@
+#if (defined(USE_AUDIOTOOLBOX_PUBLIC_HEADERS) && USE_AUDIOTOOLBOX_PUBLIC_HEADERS) || !__has_include(<AudioToolboxCore/MusicDevice.h>)
 /*!
 	@file		MusicDevice.h
 	@framework	AudioToolbox.framework
@@ -43,14 +44,7 @@
 #ifndef AudioUnit_MusicDevice_h
 #define AudioUnit_MusicDevice_h
 
-#include <Availability.h>
-#if !defined(__COREAUDIO_USE_FLAT_INCLUDES__)
-	#include <CoreAudio/CoreAudioTypes.h>
-	#include <AudioToolbox/AUComponent.h>
-#else
-	#include <CoreAudioTypes.h>
-	#include <AUComponent.h>
-#endif
+#include <AudioToolbox/AUComponent.h>
 
 CF_ASSUME_NONNULL_BEGIN
 
@@ -75,12 +69,12 @@ typedef UInt32                          MusicDeviceInstrumentID;
 	@discussion This struct is the common usage for MusicDeviceStartNote, as most synths that implement this functionality 
 				will only allow for the specification of a note number and velocity when starting a new note.
 	
-	@param			argCount
+	@var  			argCount
 			Should be set to 2
-	@param			mPitch
+	@var  			mPitch
 			The pitch of the new note, typically specified using a MIDI note number (and a fractional pitch) within the 
 					range of 0 < 128. So 60 is middle C, 60.5 is middle C + 50 cents.
-	@param			mVelocity
+	@var  			mVelocity
 			The velocity of the new note - this can be a fractional value - specified as MIDI (within the range of 0 < 128)
 */
 struct MusicDeviceStdNoteParams
@@ -98,9 +92,9 @@ typedef struct MusicDeviceStdNoteParams		MusicDeviceStdNoteParams;
 	@discussion This struct is used to describe a parameterID (a control in MIDI terminology, though it is not limited to 
 					MIDI CC specifications) and the value of this parameter.
 	
-	@param			mID
+	@var  			mID
 			The parameter ID
-	@param			mValue
+	@var  			mValue
 			The value of that parameter
 */
 struct NoteParamsControlValue
@@ -119,14 +113,14 @@ typedef struct NoteParamsControlValue		NoteParamsControlValue;
 				for the common use case, as many audio unit instruments will not respond to control values provided 
 				in the start note function
 	
-	@param			argCount
+	@var  			argCount
 			The number of controls + 2 (for mPitch and mVelocity)
-	@param			mPitch
+	@var  			mPitch
 			The pitch of the new note, typically specified using a MIDI note number (and a fractional pitch) within the 
 				range of 0 < 128. So 60 is middle C, 60.5 is middle C + 50 cents.
-	@param			mVelocity
+	@var  			mVelocity
 			The velocity of the new note - this can be a fractional value - specified as MIDI (within the range of 0 < 128)
-	@param			mControls
+	@var  			mControls
 			A variable length array with the number of elements: argCount - 2.
 */
 struct MusicDeviceNoteParams
@@ -343,10 +337,6 @@ enum {
 	
 	@param			self
 					For a component manager component, this is the component instance storage pointer
-	@param			inStatus
-	@param			inData1
-	@param			inData2
-	@param			inOffsetSampleFrame
 
 	@result			noErr, or an audio unit error code
 */
@@ -366,8 +356,6 @@ typedef OSStatus
 	
 	@param			self
 					For a component manager component, this is the component instance storage pointer
-	@param			inData
-	@param			inLength
 
 	@result			noErr, or an audio unit error code
 */
@@ -385,11 +373,6 @@ typedef OSStatus
 	
 	@param			self
 					For a component manager component, this is the component instance storage pointer
-	@param			inInstrument
-	@param			inGroupID
-	@param			outNoteInstanceID
-	@param			inOffsetSampleFrame
-	@param			inParams
 	
 	@result			noErr, or an audio unit error code
 */
@@ -410,9 +393,6 @@ typedef OSStatus
 	
 	@param			self
 					For a component manager component, this is the component instance storage pointer
-	@param			inGroupID
-	@param			inNoteInstanceID
-	@param			inOffsetSampleFrame
 	
 	@result			noErr, or an audio unit error code
 */
@@ -455,3 +435,6 @@ CF_ASSUME_NONNULL_END
 
 #endif /* AudioUnit_MusicDevice_h */
 
+#else
+#include <AudioToolboxCore/MusicDevice.h>
+#endif

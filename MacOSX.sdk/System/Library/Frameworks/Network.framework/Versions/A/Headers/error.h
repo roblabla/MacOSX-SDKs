@@ -2,11 +2,15 @@
 //  error.h
 //  Network
 //
-//  Copyright (c) 2016-2018 Apple Inc. All rights reserved.
+//  Copyright (c) 2016-2019 Apple Inc. All rights reserved.
 //
 
 #ifndef __NW_ERROR_H__
 #define __NW_ERROR_H__
+
+#ifndef __NW_INDIRECT__
+#warning "Please include <Network/Network.h> instead of this file directly."
+#endif // __NW_INDIRECT__
 
 #include <Network/nw_object.h>
 #include <dns_sd.h>

@@ -1,6 +1,7 @@
-/*      MDQuery.h
-        Copyright (c) 2003-2005, Apple Inc. All rights reserved.
-*/
+/*
+ *       MDQuery.h
+ *       Copyright (c) 2003-2019, Apple Inc. All rights reserved.
+ */
 
 /*!
         @header MDQuery
@@ -63,15 +64,11 @@
 #if !defined(__MDQUERY__)
 #define __MDQUERY__ 1
 
+#include <CoreFoundation/CoreFoundation.h>
+
 #if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
 
-#include <sys/types.h>
-#include <CoreFoundation/CFString.h>
-#include <CoreFoundation/CFDictionary.h>
-#include <CoreFoundation/CFArray.h>
-#include <CoreFoundation/CFRunLoop.h>
 #include <Metadata/MDItem.h>
-#include <dispatch/dispatch.h>
 
 CF_IMPLICIT_BRIDGING_ENABLED
 MD_BEGIN_C_DECLS
@@ -179,7 +176,7 @@ MD_EXPORT MDQueryRef MDQueryCreate(CFAllocatorRef allocator, CFStringRef querySt
                 increases the memory usage of an MDQuery. The attribute
                 names are CFStrings.
         @param sortingAttrs An optional array of attribute names. The
-                query will results of the query based on the values of
+                query will sort results of the query based on the values of
                 these attributes. The first name in the array is used as
                 the primary sort key, the second as the secondary key, and
                 so on. The comparison of like-typed values is a simple,
@@ -235,7 +232,7 @@ MD_EXPORT MDQueryRef MDQueryCreateForItems(CFAllocatorRef allocator,
 										   CFStringRef queryString,
 										   CFArrayRef valueListAttrs,
 										   CFArrayRef sortingAttrs,
-										   CFArrayRef items) AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;
+										   CFArrayRef items) API_AVAILABLE( macos(10.7) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 /*!
@@ -532,7 +529,7 @@ MD_EXPORT void MDQuerySetCreateValueFunction(MDQueryRef query, MDQueryCreateValu
 	@param queue The dispatch queue on which results should be delivered.
  */
 
-MD_EXPORT void MDQuerySetDispatchQueue(MDQueryRef query, dispatch_queue_t queue) AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+MD_EXPORT void MDQuerySetDispatchQueue(MDQueryRef query, dispatch_queue_t queue) API_AVAILABLE( macos(10.6) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 /*!
         @function MDQueryExecute
@@ -745,7 +742,7 @@ MD_EXPORT CFIndex MDQueryGetCountOfResultsWithAttributeValue(MDQueryRef query, C
   are CFStrings
  @result A boolean, true on success, false on failure.
  */
-MD_EXPORT Boolean MDQuerySetSortOrder(MDQueryRef query, CFArrayRef sortingAttrs) AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;
+MD_EXPORT Boolean MDQuerySetSortOrder(MDQueryRef query, CFArrayRef sortingAttrs) API_AVAILABLE( macos(10.7) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 /*!   
  @enum MDQuerySortOptionFlags
@@ -765,7 +762,7 @@ typedef enum {
  @param flags A uint32_t containing MDQuerySortOptionFlags to be applied to the attibute
  @result A boolean, true on success, false on failure.
  */
-MD_EXPORT Boolean MDQuerySetSortOptionFlagsForAttribute(MDQueryRef query, CFStringRef fieldName, uint32_t flags) AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;
+MD_EXPORT Boolean MDQuerySetSortOptionFlagsForAttribute(MDQueryRef query, CFStringRef fieldName, uint32_t flags) API_AVAILABLE( macos(10.7) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 /*!
  @function MDQueryGetSortOptionFlagsForAttribute
@@ -774,7 +771,7 @@ MD_EXPORT Boolean MDQuerySetSortOptionFlagsForAttribute(MDQueryRef query, CFStri
  @param fieldName The attribute name for which sort option flags are to be fetched.  
  @result A uint32_t, with MDQuerySortOptionFlags set for the attribute.
  */
-MD_EXPORT uint32_t MDQueryGetSortOptionFlagsForAttribute(MDQueryRef query, CFStringRef fieldName) AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;
+MD_EXPORT uint32_t MDQueryGetSortOptionFlagsForAttribute(MDQueryRef query, CFStringRef fieldName) API_AVAILABLE( macos(10.7) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 /*!
@@ -862,7 +859,7 @@ MD_EXPORT void MDQuerySetSortComparator(MDQueryRef query, MDQuerySortComparatorF
 */
 
 #ifdef __BLOCKS__
-MD_EXPORT void MDQuerySetSortComparatorBlock(MDQueryRef query, CFComparisonResult (^comparator)(const CFTypeRef attrs1[], const CFTypeRef attrs2[])) AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+MD_EXPORT void MDQuerySetSortComparatorBlock(MDQueryRef query, CFComparisonResult (^comparator)(const CFTypeRef attrs1[], const CFTypeRef attrs2[])) API_AVAILABLE( macos(10.6) ) API_UNAVAILABLE( ios, tvos, watchos );
 #endif
 
 /*!
@@ -1031,7 +1028,7 @@ MD_EXPORT const CFStringRef kMDQueryScopeNetwork MD_AVAIL;
  that the search should be restricted to indexed, locally mounted volumes and
  indexed user mounted remote volumes, plus the user's home directory.
  */
-MD_EXPORT const CFStringRef kMDQueryScopeAllIndexed AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+MD_EXPORT const CFStringRef kMDQueryScopeAllIndexed API_AVAILABLE( macos(10.6) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 /*!
  @constant kMDQueryScopeComputerIndexed
@@ -1039,14 +1036,14 @@ MD_EXPORT const CFStringRef kMDQueryScopeAllIndexed AVAILABLE_MAC_OS_X_VERSION_1
  that the search should be restricted to indexed, locally mounted volumes, plus the user's
  home directory (which may be on a remote volume).
  */
-MD_EXPORT const CFStringRef kMDQueryScopeComputerIndexed AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+MD_EXPORT const CFStringRef kMDQueryScopeComputerIndexed API_AVAILABLE( macos(10.6) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 /*!
  @constant kMDQueryScopeNetworkIndexed
  A constant, which can be passed in the scopeDirectories array, to specify
  that the search should include indexed user mounted remote volumes.
  */
-MD_EXPORT const CFStringRef kMDQueryScopeNetworkIndexed AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+MD_EXPORT const CFStringRef kMDQueryScopeNetworkIndexed API_AVAILABLE( macos(10.6) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 /*!
  @function MDQuerySetMaxCount

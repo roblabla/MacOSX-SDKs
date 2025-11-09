@@ -1,5 +1,5 @@
 /*	NSExtensionItem.h
-        Copyright (c) 2013-2018, Apple Inc. All rights reserved.
+        Copyright (c) 2013-2019, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/Foundation.h>
@@ -9,7 +9,7 @@
 // A NSExtensionItem is an immutable collection of values representing different aspects of an item for the extension to act upon.
 NS_ASSUME_NONNULL_BEGIN
 
-NS_CLASS_AVAILABLE(10_10, 8_0)
+API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0))
 @interface NSExtensionItem : NSObject<NSCopying, NSSecureCoding>
 
 // (optional) title for the item

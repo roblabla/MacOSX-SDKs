@@ -1,13 +1,12 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: B8E531B9-0324-3C85-8D8F-364CB74C2049' ]
-platform:        macosx
-install-name:    /System/Library/PrivateFrameworks/CoreCaptureControl.framework/Versions/A/CoreCaptureControl
-objc-constraint: none
+uuids:           [ 'x86_64: A52C7EC1-A4B3-3327-996F-E08E95E17312', 'x86_64: A52C7EC1-A4B3-3327-996F-E08E95E17312' ]
+platform:        zippered
+install-name:    '/System/Library/PrivateFrameworks/CoreCaptureControl.framework/Versions/A/CoreCaptureControl'
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _CoreCaptureControlCapture, _CoreCaptureControlCaptureWithComponentDirectory, 
                        _CoreCaptureControlConfigurePipe, _CoreCaptureControlConfigureProfile, 
                        _CoreCaptureControlConfigureStream, _CoreCaptureControlCreate, 
-                       _CoreCaptureControlGetTypeID, _CoreCaptureControlStart, _CoreCaptureControlStop ]
+                       _CoreCaptureControlStart, _CoreCaptureControlStop ]
 ...

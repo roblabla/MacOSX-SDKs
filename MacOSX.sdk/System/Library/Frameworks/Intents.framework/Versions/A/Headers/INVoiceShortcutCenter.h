@@ -2,7 +2,7 @@
 //  INVoiceShortcutCenter.h
 //  Intents
 //
-//  Copyright © 2018 Apple. All rights reserved.
+//  Copyright (c) 2016-2019 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -34,7 +34,7 @@ API_AVAILABLE(ios(12.0), watchos(5.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(mac
 
 /*!
  @abstract Get all of the shortcuts associated with this app that have been added to Siri.
- These could have either been added with `INUIAddVoiceShortcutViewController`, or separately by the user, in the Settings app.
+ These could have either been added with `INUIAddVoiceShortcutViewController`, or separately by the user in the Shortcuts app.
  */
 - (void)getAllVoiceShortcutsWithCompletion:(void(^)(NSArray<INVoiceShortcut *> * _Nullable voiceShortcuts, NSError * _Nullable error))completionHandler;
 
@@ -45,7 +45,7 @@ API_AVAILABLE(ios(12.0), watchos(5.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(mac
 
 /*!
  @abstract Set some shortcuts that should be suggested to the user to add to Siri.
- @discussion These suggestions are shown to the user in the Settings app.
+ @discussion These suggestions are shown to the user in the Shortcuts app.
  */
 - (void)setShortcutSuggestions:(NSArray<INShortcut *> *)suggestions;
 

@@ -2,7 +2,7 @@
 //  SCNMaterialProperty.h
 //  SceneKit
 //
-//  Copyright © 2012-2018 Apple Inc. All rights reserved.
+//  Copyright © 2012-2019 Apple Inc. All rights reserved.
 //
 
 #import <SceneKit/SceneKitTypes.h>
@@ -80,7 +80,7 @@ SCN_EXPORT
 /*! 
  @property mipFilter
  @abstract Specifies the mipmap filter to use during minification.
- @discussion Defaults to SCNFilterModeNone on macOS 10.11 or earlier and iOS 9 or earlier, SCNFilterModeNearest starting in macOS 10.12 and iOS 10.
+ @discussion Defaults to SCNFilterModeNearest starting macOS 10.12, iOS 10, tvOS 10 and watchOS 3. Defaults to SCNFilterModeNone in previous versions.
  */
 @property(nonatomic) SCNFilterMode mipFilter;
 
@@ -101,13 +101,6 @@ SCN_EXPORT
  @abstract Determines the receiver's wrap mode for the t texture coordinate. Defaults to SCNWrapModeClamp.
  */
 @property(nonatomic) SCNWrapMode wrapT;
-
-/*! 
- @property borderColor
- @abstract Determines the receiver's border color (CGColorRef or NSColor). Animatable.
- @discussion The border color is ignored on iOS and is always considered as clear color (0,0,0,0) when the texture has an alpha channel and opaque back (0,0,0,1) otherwise.
- */
-@property(nonatomic, retain, nullable) id borderColor API_DEPRECATED("Deprecated", macos(10.8, 10.12), ios(8.0, 10.0)) API_UNAVAILABLE(watchos, tvos);
 
 /*! 
  @property mappingChannel

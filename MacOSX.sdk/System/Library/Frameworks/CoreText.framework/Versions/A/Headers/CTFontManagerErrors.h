@@ -2,7 +2,7 @@
  *  CTFontManagerErrors.h
  *  CoreText
  *
- *  Copyright (c) 2008-2018 Apple Inc. All rights reserved.
+ *  Copyright (c) 2008-2019 Apple Inc. All rights reserved.
  *
  */
 
@@ -27,8 +27,22 @@ CT_EXPORT const CFStringRef kCTFontManagerErrorDomain CT_AVAILABLE(macos(10.6), 
     @constant   kCTFontManagerErrorFontURLsKey
     @abstract   User info key to be used with CFError references returned from registration functions.
     @discussion The value associated with this key in the user info dictionary of a CFError is a CFArray of font URLs that failed with given error.
-*/
+ */
 CT_EXPORT const CFStringRef kCTFontManagerErrorFontURLsKey CT_AVAILABLE(macos(10.6), ios(3.2), watchos(2.0), tvos(9.0));
+
+/*!
+    @constant   kCTFontManagerErrorFontDescriptorsKey
+    @abstract   User info key to be used with CFError references returned from registration functions.
+    @discussion The value associated with this key in the user info dictionary of a CFError is a CFArray of font descriptors that failed with given error.
+ */
+CT_EXPORT const CFStringRef kCTFontManagerErrorFontDescriptorsKey CT_AVAILABLE(ios(13.0)) API_UNAVAILABLE(macos, watchos, tvos);
+
+/*!
+    @constant   kCTFontManagerErrorFontAssetNameKey
+    @abstract   User info key to be used with CFError references returned from registration functions.
+    @discussion The value associated with this key in the user info dictionary of a CFError is a CFArray of font asset name strings that failed with given error.
+ */
+CT_EXPORT const CFStringRef kCTFontManagerErrorFontAssetNameKey CT_AVAILABLE(ios(13.0)) API_UNAVAILABLE(macos, watchos, tvos);
 
 /*!
     @enum
@@ -51,6 +65,21 @@ CT_EXPORT const CFStringRef kCTFontManagerErrorFontURLsKey CT_AVAILABLE(macos(10
                 The font file is actively in use and cannot be unregistered.
     @constant   kCTFontManagerErrorSystemRequired
                 The file is required by the system and cannot be unregistered.
+    @constant   kCTFontManagerErrorRegistrationFailed
+                The file could not be processed due to an unexpected FontProvider error.
+    @constant   kCTFontManagerErrorMissingEntitlement
+                The file could not be processed because the provider does not have a necessary entitlement.
+    @constant   kCTFontManagerErrorInsufficientInfo
+                The font descriptor does not have information to specify a font file.
+    @constant   kCTFontManagerErrorCancelledByUser
+                The operation was cancelled by the user.
+    @constant   kCTFontManagerErrorDuplicatedName
+                The file could not be registered because of a duplicated font name.
+    @constant   kCTFontManagerErrorInvalidFilePath
+                The file is not in an allowed location. It must be either in the application's bundle or an on-demand resource.
+    @constant   kCTFontManagerErrorExceededResourceLimit
+                The operation failed due to a system limitation.
+
 */
 typedef CF_ENUM(CFIndex, CTFontManagerError) {
     kCTFontManagerErrorFileNotFound             = 101,
@@ -58,9 +87,16 @@ typedef CF_ENUM(CFIndex, CTFontManagerError) {
     kCTFontManagerErrorUnrecognizedFormat       = 103,
     kCTFontManagerErrorInvalidFontData          = 104,
     kCTFontManagerErrorAlreadyRegistered        = 105,
+    kCTFontManagerErrorExceededResourceLimit    = 106,
     kCTFontManagerErrorNotRegistered            = 201,
     kCTFontManagerErrorInUse                    = 202,
     kCTFontManagerErrorSystemRequired           = 203,
+    kCTFontManagerErrorRegistrationFailed       = 301,
+    kCTFontManagerErrorMissingEntitlement       = 302,
+    kCTFontManagerErrorInsufficientInfo         = 303,
+    kCTFontManagerErrorCancelledByUser          = 304,
+    kCTFontManagerErrorDuplicatedName           = 305,
+    kCTFontManagerErrorInvalidFilePath          = 306,
 };
 
 CF_ASSUME_NONNULL_END

@@ -2,7 +2,7 @@
 //  PHChange.h
 //  Photos
 //
-//  Copyright © 2017 Apple, Inc. All rights reserved.
+//  Copyright (c) 2013 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -13,8 +13,10 @@
 @class PHFetchResultChangeDetails;
 
 NS_ASSUME_NONNULL_BEGIN
+API_AVAILABLE_BEGIN(macos(10.13), ios(8), tvos(10))
 
-NS_CLASS_AVAILABLE(10_13, 8_0) @interface PHChange : NSObject
+OS_EXPORT
+@interface PHChange : NSObject
 
 - (nullable PHObjectChangeDetails *)changeDetailsForObject:(PHObject *)object;
 - (nullable PHFetchResultChangeDetails *)changeDetailsForFetchResult:(PHFetchResult *)object;
@@ -22,14 +24,15 @@ NS_CLASS_AVAILABLE(10_13, 8_0) @interface PHChange : NSObject
 @end
 
 
-
-NS_CLASS_AVAILABLE(10_13, 8_0) @interface PHObjectChangeDetails<ObjectType: PHObject *> : NSObject
+#pragma mark -
+OS_EXPORT
+@interface PHObjectChangeDetails<ObjectType: PHObject *> : NSObject
 
 // the object in the state before this change (returns the object that was passed in to changeDetailsForObject:)
-@property (atomic, strong, readonly) __kindof ObjectType objectBeforeChanges;
+@property (atomic, strong, readonly) ObjectType objectBeforeChanges;
 
 // the object in the state after this change
-@property (atomic, strong, readonly, nullable) __kindof ObjectType objectAfterChanges;
+@property (atomic, strong, readonly, nullable) ObjectType objectAfterChanges;
 
 // YES if the image or video content for this object has been changed
 @property (atomic, readonly) BOOL assetContentChanged;
@@ -40,8 +43,9 @@ NS_CLASS_AVAILABLE(10_13, 8_0) @interface PHObjectChangeDetails<ObjectType: PHOb
 @end
 
 
-
-NS_CLASS_AVAILABLE(10_13, 8_0) @interface PHFetchResultChangeDetails<ObjectType: PHObject *> : NSObject
+#pragma mark -
+OS_EXPORT
+@interface PHFetchResultChangeDetails<ObjectType: PHObject *> : NSObject
 
 // fetch result with the state of the fetched objects before this change (returns the fetch result passed in to changeDetailsForFetchResult:)
 @property (atomic, strong, readonly) PHFetchResult<ObjectType> *fetchResultBeforeChanges;
@@ -75,10 +79,10 @@ NS_CLASS_AVAILABLE(10_13, 8_0) @interface PHFetchResultChangeDetails<ObjectType:
 // returns NO if hasIncrementalChanges is NO
 @property (atomic, assign, readonly) BOOL hasMoves;
 
-
 // Provides a "diff" between 2 PHFetchResult objects.
 + (instancetype)changeDetailsFromFetchResult:(PHFetchResult<ObjectType> *)fromResult toFetchResult:(PHFetchResult<ObjectType> *)toResult changedObjects:(NSArray<ObjectType> *)changedObjects;
 
 @end
 
+API_AVAILABLE_END
 NS_ASSUME_NONNULL_END

@@ -1,9 +1,8 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 2D6EDDA6-4D44-31EF-84CE-14A6F50A135E' ]
-platform:        macosx
-install-name:    /System/Library/PrivateFrameworks/kperf.framework/Versions/A/kperf
-objc-constraint: none
+uuids:           [ 'x86_64: EB49A06C-941F-3B6A-9FE2-F0B533D6BD5C', 'x86_64: EB49A06C-941F-3B6A-9FE2-F0B533D6BD5C' ]
+platform:        zippered
+install-name:    '/System/Library/PrivateFrameworks/kperf.framework/Versions/A/kperf'
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _kpc_counterbuf_alloc, _kpc_counterbuf_free, _kpc_cpu_string, 

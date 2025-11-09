@@ -273,8 +273,19 @@ os_log_create(const char *subsystem, const char *category);
  * line is decoded.  This string must be a constant string, not dynamically
  * generated.  Supports all standard printf types and %@ (objects).
  */
+#if OS_LOG_TARGET_HAS_10_15_FEATURES
+#define os_log_debug(log, format, ...) __extension__({ \
+    os_log_t _log_tmp = (log); \
+    os_log_type_t _type_tmp = OS_LOG_TYPE_DEBUG; \
+    if (os_log_type_enabled(_log_tmp, _type_tmp)) { \
+        OS_LOG_CALL_WITH_FORMAT(_os_log_debug_impl, \
+                (&__dso_handle, _log_tmp, _type_tmp), format, ##__VA_ARGS__); \
+    } \
+})
+#else
 #define os_log_debug(log, format, ...) \
         os_log_with_type(log, OS_LOG_TYPE_DEBUG, format, ##__VA_ARGS__)
+#endif // OS_LOG_TARGET_HAS_10_15_FEATURES
 
 /*!
  * @function os_log_error
@@ -407,25 +418,37 @@ _os_log_impl(void *dso, os_log_t log, os_log_type_t type,
         const char *format, uint8_t *buf, uint32_t size);
 
 /*!
+ * @function _os_log_debug_impl
+ *
+ * @abstract
+ * Internal function that is taken for any debug log emitted in the system.
+ */
+API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0), watchos(6.0))
+OS_EXPORT OS_NOTHROW OS_NOT_TAIL_CALLED OS_COLD
+void
+_os_log_debug_impl(void *dso, os_log_t log, os_log_type_t type,
+        const char *format, uint8_t *buf, uint32_t size);
+
+/*!
  * @function _os_log_error_impl
  *
  * @abstract
  * Internal function that is taken for any error emitted in the system.
  */
 API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0))
-OS_EXPORT OS_NOTHROW OS_NOT_TAIL_CALLED
+OS_EXPORT OS_NOTHROW OS_NOT_TAIL_CALLED OS_COLD
 void
 _os_log_error_impl(void *dso, os_log_t log, os_log_type_t type,
         const char *format, uint8_t *buf, uint32_t size);
 
 /*!
- * @function _os_log_impl
+ * @function _os_log_fault_impl
  *
  * @abstract
  * Internal function that is taken for any fault emitted in the system.
  */
 API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0))
-OS_EXPORT OS_NOTHROW OS_NOT_TAIL_CALLED
+OS_EXPORT OS_NOTHROW OS_NOT_TAIL_CALLED OS_COLD
 void
 _os_log_fault_impl(void *dso, os_log_t log, os_log_type_t type,
         const char *format, uint8_t *buf, uint32_t size);

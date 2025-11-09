@@ -1,7 +1,8 @@
+#if !__has_include(<UIFoundation/NSATSTypesetter.h>)
 /*
         NSATSTypesetter.h
         Application Kit
-        Copyright (c) 2002-2018, Apple Inc.
+        Copyright (c) 2002-2019, Apple Inc.
         All rights reserved.
 */
 
@@ -9,34 +10,10 @@
 #import <AppKit/NSParagraphStyle.h>
 
 NS_ASSUME_NONNULL_BEGIN
+#if !TARGET_OS_IPHONE
 
 NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE
-@interface NSATSTypesetter : NSTypesetter {
-/* Ivars used for primitive typesetting */
-    NSAttributedString *attributedString APPKIT_IVAR; // The text backing-store (usually NSTextStorage)
-
-    NSRange paragraphGlyphRange APPKIT_IVAR; // The current glyph range being processed
-
-    NSRange paragraphSeparatorGlyphRange APPKIT_IVAR; // The current paragraph separator range (the length == 0 at the end of document)
-
-    CGFloat lineFragmentPadding APPKIT_IVAR; // The margin on both sides of lines
-
-/* Ivars for the Cocoa Text System interface */
-    NSLayoutManager *layoutManager APPKIT_IVAR;
-    NSArray *textContainers APPKIT_IVAR;
-
-/* Cached NSTextContainer settings */
-    NSTextContainer *currentTextContainer APPKIT_IVAR;
-    NSUInteger currentTextContainerIndex APPKIT_IVAR;
-    NSSize currentTextContainerSize APPKIT_IVAR;
-
-/* Cached NSParagraphStyle */
-    NSParagraphStyle *currentParagraphStyle APPKIT_IVAR;
-
-@private
-    void *_atsReserved[8] APPKIT_IVAR;
-    id _private APPKIT_IVAR;
-}
+@interface NSATSTypesetter : NSTypesetter
 
 // Factory methods
 @property (class, readonly, strong) NSATSTypesetter *sharedTypesetter;
@@ -44,7 +21,7 @@ NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE
 
 @interface NSATSTypesetter (NSPantherCompatibility)
 // Use -getLineFragmentRect:usedRect:forStartingGlyphAtIndex:proposedRect:lineSpacing:paragraphSpacingBefore:paragraphSpacingAfter:remainingRect: instead
-- (NSRect)lineFragmentRectForProposedRect:(NSRect)proposedRect remainingRect:(null_unspecified NSRectPointer)remainingRect NS_DEPRECATED_MAC(10_3, 10_4);
+- (NSRect)lineFragmentRectForProposedRect:(NSRect)proposedRect remainingRect:(null_unspecified NSRectPointer)remainingRect API_DEPRECATED("", macos(10.3,10.4));
 @end
 
 // The following interfaces are moved to the abstract NSTypesetter class
@@ -113,8 +90,13 @@ NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE
 /* NSGlyphStorageInterface declares all primitives interfacing to the glyph storage (usually NSLayoutManager). By overriding all the methods, you can implement an NSATSTypesetter subclass that interacts with custom glyph storage. */
 @interface NSATSTypesetter (NSGlyphStorageInterface)
 // Glyph data
-- (NSUInteger)getGlyphsInRange:(NSRange)glyphsRange glyphs:(null_unspecified NSGlyph *)glyphBuffer characterIndexes:(null_unspecified NSUInteger *)charIndexBuffer glyphInscriptions:(null_unspecified NSGlyphInscription *)inscribeBuffer elasticBits:(null_unspecified BOOL *)elasticBuffer NS_DEPRECATED_MAC(10_3, 10_13);
+- (NSUInteger)getGlyphsInRange:(NSRange)glyphsRange glyphs:(null_unspecified NSGlyph *)glyphBuffer characterIndexes:(null_unspecified NSUInteger *)charIndexBuffer glyphInscriptions:(null_unspecified NSGlyphInscription *)inscribeBuffer elasticBits:(null_unspecified BOOL *)elasticBuffer API_DEPRECATED("", macos(10.3,10.13));
 @end
 
-NS_ASSUME_NONNULL_END
 
+
+#endif // !TARGET_OS_IPHONE
+NS_ASSUME_NONNULL_END
+#else
+#import <UIFoundation/NSATSTypesetter.h>
+#endif

@@ -1,6 +1,6 @@
 /*
 	NSScriptCommandDescription.h
-	Copyright (c) 1997-2018, Apple Inc. All rights reserved.
+	Copyright (c) 1997-2019, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -21,7 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
     id _moreVars;
 }
 
-- (id)init NS_UNAVAILABLE;
+- (id)init API_UNAVAILABLE(macos, ios, watchos, tvos);
 
 /* Initialize, given a scripting suite name, command name, and command declaration dictionary of the sort that is valid in .scriptSuite property list files.
 */

@@ -3,9 +3,9 @@
  
      Contains:   SearchKit Interfaces.
  
-     Version:    SearchKit-407~38
+     Version:    SearchKit-417.1
  
-     Copyright:  © 2004-2008 by Apple Computer, Inc., all rights reserved
+     Copyright:  2004-2019 by Apple, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -66,7 +66,7 @@ typedef struct __SKSummary*             SKSummaryRef;
  *    Non-Carbon CFM:   not available
  */
 extern CFTypeID 
-SKSummaryGetTypeID(void)                                      AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+SKSummaryGetTypeID(void)                                      API_AVAILABLE( macos(10.4) ) API_UNAVAILABLE( macCatalyst );
 
 
 /*
@@ -94,7 +94,7 @@ SKSummaryGetTypeID(void)                                      AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   not available
  */
 extern SKSummaryRef 
-SKSummaryCreateWithString(CFStringRef inString)               AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+SKSummaryCreateWithString(CFStringRef inString)               API_AVAILABLE( macos(10.4) ) API_UNAVAILABLE( macCatalyst );
 
 
 /*
@@ -114,7 +114,7 @@ SKSummaryCreateWithString(CFStringRef inString)               AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   not available
  */
 extern CFIndex 
-SKSummaryGetSentenceCount(SKSummaryRef summary)               AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+SKSummaryGetSentenceCount(SKSummaryRef summary)               API_AVAILABLE( macos(10.4) ) API_UNAVAILABLE( macCatalyst );
 
 
 /*
@@ -134,7 +134,7 @@ SKSummaryGetSentenceCount(SKSummaryRef summary)               AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   not available
  */
 extern CFIndex 
-SKSummaryGetParagraphCount(SKSummaryRef summary)              AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+SKSummaryGetParagraphCount(SKSummaryRef summary)              API_AVAILABLE( macos(10.4) ) API_UNAVAILABLE( macCatalyst );
 
 
 /*
@@ -159,7 +159,7 @@ SKSummaryGetParagraphCount(SKSummaryRef summary)              AVAILABLE_MAC_OS_X
 extern CFStringRef 
 SKSummaryCopySentenceAtIndex(
   SKSummaryRef   summary,
-  CFIndex        i)                                           AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  CFIndex        i)                                           API_AVAILABLE( macos(10.4) ) API_UNAVAILABLE( macCatalyst );
 
 
 /*
@@ -184,7 +184,7 @@ SKSummaryCopySentenceAtIndex(
 extern CFStringRef 
 SKSummaryCopyParagraphAtIndex(
   SKSummaryRef   summary,
-  CFIndex        i)                                           AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  CFIndex        i)                                           API_AVAILABLE( macos(10.4) ) API_UNAVAILABLE( macCatalyst );
 
 
 /*
@@ -210,7 +210,7 @@ SKSummaryCopyParagraphAtIndex(
 extern CFStringRef 
 SKSummaryCopySentenceSummaryString(
   SKSummaryRef   summary,
-  CFIndex        numSentences)                                AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  CFIndex        numSentences)                                API_AVAILABLE( macos(10.4) ) API_UNAVAILABLE( macCatalyst );
 
 
 /*
@@ -236,7 +236,7 @@ SKSummaryCopySentenceSummaryString(
 extern CFStringRef 
 SKSummaryCopyParagraphSummaryString(
   SKSummaryRef   summary,
-  CFIndex        numParagraphs)                               AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  CFIndex        numParagraphs)                               API_AVAILABLE( macos(10.4) ) API_UNAVAILABLE( macCatalyst );
 
 
 /*
@@ -280,7 +280,7 @@ SKSummaryGetSentenceSummaryInfo(
   CFIndex        numSentencesInSummary,
   CFIndex *      outRankOrderOfSentences,
   CFIndex *      outSentenceIndexOfSentences,
-  CFIndex *      outParagraphIndexOfSentences)                AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  CFIndex *      outParagraphIndexOfSentences)                API_AVAILABLE( macos(10.4) ) API_UNAVAILABLE( macCatalyst );
 
 
 /*
@@ -319,7 +319,7 @@ SKSummaryGetParagraphSummaryInfo(
   SKSummaryRef   summary,
   CFIndex        numParagraphsInSummary,
   CFIndex *      outRankOrderOfParagraphs,
-  CFIndex *      outParagraphIndexOfParagraphs)               AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  CFIndex *      outParagraphIndexOfParagraphs)               API_AVAILABLE( macos(10.4) ) API_UNAVAILABLE( macCatalyst );
 
 
 

@@ -1,7 +1,7 @@
 /*
 	NSDocument.h
 	Application Kit
-	Copyright (c) 1997-2018, Apple Inc.
+	Copyright (c) 1997-2019, Apple Inc.
 	All rights reserved.
 */
 
@@ -16,6 +16,7 @@
 #import <AppKit/NSKeyValueBinding.h>
 
 NS_ASSUME_NONNULL_BEGIN
+API_UNAVAILABLE_BEGIN(ios)
 
 @class NSData, NSDate, NSError, NSFileWrapper, NSMenuItem, NSPageLayout, NSPrintInfo, NSPrintOperation, NSSavePanel, NSSharingService, NSSharingServicePicker, NSUndoManager, NSURL, NSView, NSWindow, NSWindowController;
 
@@ -31,7 +32,7 @@ typedef NS_ENUM(NSUInteger, NSDocumentChangeType) {
 
 /* The value to pass to indicate that a single change has been redone. For example, NSDocument's built-in undo support uses this whenever a document receives an NSUndoManagerDidRedoChangeNotification from its own undo manager.
 */
-    NSChangeRedone NS_ENUM_AVAILABLE_MAC(10_5) = 5,
+    NSChangeRedone API_AVAILABLE(macos(10.5)) = 5,
 
 /* The value to pass to indicate that the document has been synchronized with its file or file package. For example, both -revertToContentsOfURL:ofType:error: and -saveToURL:ofType:forSaveOperation:completionHandler: may use this when they invoke -updateChangeCount:.
 */
@@ -47,7 +48,7 @@ typedef NS_ENUM(NSUInteger, NSDocumentChangeType) {
     
 /* Use this mask to indicate that a discardable change has been done. Discardable changes cause the document to be edited. In a locked document, for example, discardable changes may be thrown away instead of prompting the user to save them. Bitwise-or this value with the appropriate kind of change, NSChangeDone, NSChangeUndone, or NSChangeRedone. For example, a discardable change is "NSChangeDone | NSChangeDiscardable".
 */
-    NSChangeDiscardable NS_ENUM_AVAILABLE_MAC(10_7) = 256
+    NSChangeDiscardable API_AVAILABLE(macos(10.7)) = 256
     
 };
 
@@ -67,46 +68,23 @@ typedef NS_ENUM(NSUInteger, NSSaveOperationType) {
 
 /* The overwriting of a document's file or file package with the document's current contents even though the user has not explicitly commanded it.
 */
-    NSAutosaveInPlaceOperation NS_ENUM_AVAILABLE_MAC(10_7) = 4,
+    NSAutosaveInPlaceOperation API_AVAILABLE(macos(10.7)) = 4,
 
 /* The writing of a document's current contents to a file or file package that is separate from the document's current one, without changing the document's current one. For an NSDocument subclass that overrides Mac OS 10.7's +autosavesInPlaces to return YES this is only used during autosaving of documents that have never been saved and therefore do not yet have a document file that can be overwritten during autosaving.
 */
-    NSAutosaveElsewhereOperation NS_ENUM_AVAILABLE_MAC(10_7) = 3,
+    NSAutosaveElsewhereOperation API_AVAILABLE(macos(10.7)) = 3,
     
 /* The writing of a document's current contents to new file or file package even though the user has not explicitly commanded it, and then making the just-written file or file package the document's current one.
 */
-    NSAutosaveAsOperation NS_ENUM_AVAILABLE_MAC(10_8) = 5,
+    NSAutosaveAsOperation API_AVAILABLE(macos(10.8)) = 5,
     
 /* An old name for NSAutosaveElsewhereOperation that was deprecated in Mac OS 10.7.
 */
-    NSAutosaveOperation NS_ENUM_DEPRECATED_MAC(10_4, 10_7, "Use NSAutosaveElsewhereOperation instead")= 3
+    NSAutosaveOperation API_DEPRECATED("Use NSAutosaveElsewhereOperation instead", macos(10.4,10.7))= 3
     
 };
 
-@interface NSDocument : NSObject<NSEditorRegistration, NSFilePresenter, NSMenuItemValidation, NSUserInterfaceValidations> {
-    @private
-    NSWindow *_window APPKIT_IVAR;
-    id _windowControllers APPKIT_IVAR;
-    NSURL *_fileURL APPKIT_IVAR;
-    NSString *_fileType APPKIT_IVAR;
-    NSPrintInfo *_printInfo APPKIT_IVAR;
-    long _documentReserved __unused APPKIT_IVAR;
-    NSView *savePanelAccessory __unused APPKIT_IVAR;
-    id _displayName APPKIT_IVAR;
-    id _privateData APPKIT_IVAR;
-    NSUndoManager *_undoManager APPKIT_IVAR;
-    struct __docFlags {
-	unsigned int inClose:1;
-	unsigned int hasUndoManager:1;
-	unsigned int unused:1;
-	unsigned int reconciledToFileName:1;
-	unsigned int checkingDisplayName:1;
-	unsigned int hasInvalidRestorableState:1;
-	unsigned int hasEverHadInvalidRestorableState:1;
-	unsigned int RESERVED:25;
-    } _docFlags APPKIT_IVAR;
-    NSString *_savePanelSaveType APPKIT_IVAR;
-}
+@interface NSDocument : NSObject<NSEditorRegistration, NSFilePresenter, NSMenuItemValidation, NSUserInterfaceValidations>
 
 #pragma mark *** Initialization ***
 
@@ -128,7 +106,7 @@ You can override this method to perform initialization that must be done when cr
 
 /* Return whether instances of the receiving class can concurrently read documents of the specified type. The default implementation of this method returns NO. You can override it to return YES to enable concurrent opening of documents but you must make sure your document reading code can be safely executed concurrently, in non-main threads.
 */
-+ (BOOL)canConcurrentlyReadDocumentsOfType:(NSString *)typeName NS_AVAILABLE_MAC(10_6);
++ (BOOL)canConcurrentlyReadDocumentsOfType:(NSString *)typeName API_AVAILABLE(macos(10.6));
 
 /* Initialize a document located by a URL, of a specified type, and return it if successful. If not successful, return nil after setting *outError to an NSError that encapsulates the reason why the document could not be initialized. The default implementation of this method invokes [self init], [self readFromURL:url ofType:typeName error:outError], [self setFileURL:url], [self setFileType:typeName], and [self setFileModificationDate:theModificationDate].
 
@@ -169,7 +147,7 @@ For backward binary compatibility with Mac OS 10.3 and earlier, the default impl
 
 /* Whether the document is a draft that the user has not expressed an interest in keeping around. A save panel will be presented when the user closes a draft document. Only documents with non-nil values for [self fileURL] should be considered drafts.
 */
-@property (getter=isDraft) BOOL draft NS_AVAILABLE_MAC(10_8);
+@property (getter=isDraft) BOOL draft API_AVAILABLE(macos(10.8));
 
 #pragma mark *** UI and File Access Serialization ***
 
@@ -199,13 +177,13 @@ You should not invoke this method during the invocation of the block passed to -
 
 Some asynchronous activities, like saving, need to do work on the main thread as they are completing. A deadlock would be inevitable if there were no way to interrupt this method's blocking of the main thread. See -continueAsynchronousWorkOnMainThreadUsingBlock: to find out how to interrupt this method's blocking of the main thread.
 */
-- (void)performActivityWithSynchronousWaiting:(BOOL)waitSynchronously usingBlock:(void (^)(void (^activityCompletionHandler)(void)))block NS_AVAILABLE_MAC(10_7);
+- (void)performActivityWithSynchronousWaiting:(BOOL)waitSynchronously usingBlock:(void (^)(void (^activityCompletionHandler)(void)))block API_AVAILABLE(macos(10.7));
 
 /* If a block that was passed to -performActivityWithSynchronousWaiting:usingBlock: is being invoked, invoke the passed-in block, having recorded state that makes inner invocations of -performActivityWithSynchronousWaiting:usingBlock: not wait. If this method is invoked outside of an invocation of a block passed to -performActivityWithSynchronousWaiting:usingBlock:, simply invoke the passed-in block.
 
 This method is useful when code executed in a block passed to -performActivityWithSynchronousWaiting:usingBlock: may also invoke that method. For example, -saveDocumentWithDelegate:didSaveSelector:contextInfo:, which uses -performActivityWithSynchronousWaiting:usingBlock:, uses this around its invocation of -runModalSavePanelForSaveOperation:delegate:didSaveSelector: or -saveToURL:ofType:forSaveOperation:delegate:didSaveSelector:contextInfo: because both of those methods also use -performActivityWithSynchronousWaiting:usingBlock:. Without the use of this method that inner invocation of -performActivityWithSynchronousWaiting:usingBlock: would wait forever.
 */
-- (void)continueActivityUsingBlock:(void (NS_NOESCAPE ^)(void))block NS_AVAILABLE_MAC(10_7);
+- (void)continueActivityUsingBlock:(void (NS_NOESCAPE ^)(void))block API_AVAILABLE(macos(10.7));
 
 /* Invoke the block on the main thread. If the main thread is blocked by an invocation of -performActivityWithSynchronousWaiting:usingBlock: or -performSynchronousFileAccessUsingBlock:, interrupt that blocking to invoke the block, and then resume blocking when the invocation of the block has returned. Invocations of this method always return before the passed-in block is invoked.
 
@@ -213,7 +191,7 @@ You can invoke this method when work is being done on a non-main thread and part
 
 This method can of course be invoked on any thread.
 */
-- (void)continueAsynchronousWorkOnMainThreadUsingBlock:(void (^)(void))block NS_AVAILABLE_MAC(10_7);
+- (void)continueAsynchronousWorkOnMainThreadUsingBlock:(void (^)(void))block API_AVAILABLE(macos(10.7));
 
 /* Given a block that will perform file access, wait for any file access scheduled by previous invocations of this method or -performAsynchronousFileAccessUsingBlock: to be complete, and then invoke the block. When the block invocation returns allow the next scheduled file access to to be performed, if any.
 
@@ -226,13 +204,13 @@ In general you should use this method or -performAsynchronousFileAccessUsingBloc
 - -updateChangeCountWithToken:forSaveOperation: and, sometimes, updateChangeCount:, to make using this mechanism when invoking -isDocumentEdited and -hasUnautosavedChanges meaningful.
 - -backupFileURL, since it depends on -fileURL.
  */
-- (void)performSynchronousFileAccessUsingBlock:(void (NS_NOESCAPE ^)(void))block NS_AVAILABLE_MAC(10_7);
+- (void)performSynchronousFileAccessUsingBlock:(void (NS_NOESCAPE ^)(void))block API_AVAILABLE(macos(10.7));
 
 /* Do the same sort of thing as -performSynchronousFileAccessUsingBlock:, but without ever blocking the main thread, and perhaps not invoking the block until after the method invocation has returned, though still always on the same thread as the method invocation. The block is passed another block, the file access completion handler, which must be invoked when the file access is complete, though it can be invoked from any thread. This method is for use with file access that might begin on one thread but continue on another before it is complete. saveToURL:ofType:forSaveOperation:completionHandler: for for example uses this method instead of -performSynchronousFileAccessUsingBlock: because if it does asynchronous saving then there is no way for it to actually complete all of its file access before returning from the file access block.
 
 The distinction between entire activities and the file accessing part of activities established by having both activity performing methods and file access performing methods is worthwhile because sometimes it is valuable to perform file access without any risk of waiting for the user to dismiss a modal panel. For example, NSDocument's implementation of -[NSFilePresenter relinquishPresentedItemToWriter:] uses -performAsynchronousFileAccessUsingBlock: to ensure that the uses of -performSynchronousFileAccessUsingBlock: described above wait while another process is moving, renaming, or changing the file. Using -performActivityWithSynchronousWaiting:usingBlock: instead would not be appropriate because that would introduce the possibility of the other process' writing being blocked until the user has dismissed a sheet that is being presented as part of a previously scheduled activity.
 */
-- (void)performAsynchronousFileAccessUsingBlock:(void (^)(void (^fileAccessCompletionHandler)(void)))block NS_AVAILABLE_MAC(10_7);
+- (void)performAsynchronousFileAccessUsingBlock:(void (^)(void (^fileAccessCompletionHandler)(void)))block API_AVAILABLE(macos(10.7));
 
 #pragma mark *** Reverting ***
 
@@ -272,7 +250,7 @@ For backward binary compatibility with Mac OS 10.3 and earlier, the default impl
 
 /* Return YES if the document's entire file is loaded into memory, NO otherwise. The default implementation of this method returns YES. You can override this method to return NO if additional data may need to be read from the file. NSDocument may use this value to do things like prevent volume ejection or warn the user when a partially loaded file disappears from the file system.
  */
-@property (getter=isEntireFileLoaded, readonly) BOOL entireFileLoaded NS_AVAILABLE_MAC(10_7);
+@property (getter=isEntireFileLoaded, readonly) BOOL entireFileLoaded API_AVAILABLE(macos(10.7));
 
 /* ...and also one of these. */
 
@@ -296,13 +274,13 @@ For backward binary compatibility with Mac OS 10.3 and earlier, the default impl
 
 /* If -saveToURL:ofType:forSaveOperation:completionHandler: is writing on a non-main thread because -canAsynchronouslyWriteToURL:ofType:forSaveOperation: has returned YES, but is still blocking the main thread, unblock the main thread. Otherwise, do nothing. For example, the default implementation of -fileWrapperOfType:error: invokes this when it has created the NSFileWrapper to return. Assuming that the NSFileWrapper will not be mutated by subsequent user actions, it is effectively a "snapshot" of the document's contents, and once it is created it is safe to resume handling user events on the main thread, even though some of those user events might change the document's contents before the NSFileWrapper has been safely written. You can invoke this method to make asynchronous saving actually asynchronous if you've overridden -writeSafelyToURL:ofType:forSaveOperation:error:, -writeToURL:forSaveOperation:originalContentsURL:error:, or -writeToURL:ofType:error: in such a way that the invocation of this method done by -writeToURL:ofType:error:'s default implementation won't happen during writing.
 */
-- (void)unblockUserInteraction NS_AVAILABLE_MAC(10_7);
+- (void)unblockUserInteraction API_AVAILABLE(macos(10.7));
 
 /* Return YES if autosaving is being done right now but nothing bad would happen if it were to be cancelled, NO otherwise. For example, when periodic autosaving is being done just for crash protection, which doesn't really have to be done all of the time, this method returns YES. When autosaving is being done because the document is being closed this method returns NO.
 
 You can use this notion of implicitly cancellable autosaving when implementing a "stop-copying-on-write" model so that your document class' writing code can invoke -unblockUserInteraction relatively quickly during writing on a non-main thread regardless of how much work must actually be done to make the sort of snapshot mentioned in the comment for -unblockUserInteraction. When this method returns YES your writing code can invoke -unblockUserInteraction after having merely recorded the fact that changes to the document model made by the user should first cancel the rest of the writing. Your code that makes changes to the document model then has to actually always do that cancellation first. (This may be a significant amount of work but hopefully less than implementing a copy-on-write model, which is another option for invoking -unblockUserInteraction as quickly as possible.) If your writing code is implicitly cancelled like that it should signal NSCocoaErrorDomain/NSUserCancelledError, the one kind of error that is never actually presented to the user.
 */
-@property (readonly) BOOL autosavingIsImplicitlyCancellable NS_AVAILABLE_MAC(10_7);
+@property (readonly) BOOL autosavingIsImplicitlyCancellable API_AVAILABLE(macos(10.7));
 
 #pragma mark *** Advanced Writing ***
 
@@ -348,7 +326,7 @@ Implementations of -writeSafelyToURL:ofType:forSaveOperation:error: must check t
 
 The default implementation of this method returns a non-nil value based off the value of [self fileURL] only if the document's file needs to be preserved prior to saving, or if +preservesVersions returns NO. Otherwise, it returns nil.
 */
-@property (nullable, readonly, copy) NSURL *backupFileURL NS_AVAILABLE_MAC(10_8);
+@property (nullable, readonly, copy) NSURL *backupFileURL API_AVAILABLE(macos(10.8));
 
 #pragma mark *** Saving ***
 
@@ -416,11 +394,11 @@ The default implementation of this method first makes sure that any editor regis
 
 For backward binary compatibility with Mac OS 10.6 and earlier, the default implementation of this method instead invokes [self saveToURL:url ofType:typeName forSaveOperation:saveOperation error:&anError] if that method is overridden and this one is not, and passes any error to the completion handler.
 */
-- (void)saveToURL:(NSURL *)url ofType:(NSString *)typeName forSaveOperation:(NSSaveOperationType)saveOperation completionHandler:(void (^)(NSError * __nullable errorOrNil))completionHandler NS_AVAILABLE_MAC(10_7);
+- (void)saveToURL:(NSURL *)url ofType:(NSString *)typeName forSaveOperation:(NSSaveOperationType)saveOperation completionHandler:(void (^)(NSError * _Nullable errorOrNil))completionHandler API_AVAILABLE(macos(10.7));
 
 /* Return whether the receiver can concurrently write to a file or file package located by a URL, formatted for a specific type, for a specific kind of save operation. The default implementation of this method returns NO. You are strongly encouraged to override it and make it return YES, after making sure your overrides of -write... methods can be safely invoked on a non-main thread, and making sure that -unblockUserInteraction will be invoked at some appropriate time during writing.
 */
-- (BOOL)canAsynchronouslyWriteToURL:(NSURL *)url ofType:(NSString *)typeName forSaveOperation:(NSSaveOperationType)saveOperation NS_AVAILABLE_MAC(10_7);
+- (BOOL)canAsynchronouslyWriteToURL:(NSURL *)url ofType:(NSString *)typeName forSaveOperation:(NSSaveOperationType)saveOperation API_AVAILABLE(macos(10.7));
 
 #pragma mark *** Autosaving ***
 
@@ -430,11 +408,11 @@ In an application that has adopted Mac OS 10.7's new document model by overridin
 
 When autosaving in place is turned on an NSDocument may invoke this method when it receives notification from its NSUndoManager that the user changed the document, or undid or redid a change. (Or it may not. NSDocument does not invoke this method for scripted changes or after some kinds of reverting.) If an error is returned it presents the error to the user, allowing the user to choose a recovery option. If the error is recovered from then it repeats this until no error is signalled, to make sure that all checks have been done. This means that when you signal an error and the user's choice of recovery option indicates that they have seen and disregarded a safety concern you must record that fact, and not do that particular safety check again. Once all errors are recovered from NSDocument continues on by invoking -updateChangeCount:, which it has done in response to NSUndoManager notifications since Mac OS 10.0. If an error is not recovered from then NSDocument invokes -[NSUndoManager undo] or -[NSUndoManager redo] to roll back the change. So, some of the NSError recovery options you let the user select, like NSDocument's own "Duplicate and "Cancel," should indicate failed recovery and that will cause the document to be unchanged afterward.
 */
-- (BOOL)checkAutosavingSafetyAndReturnError:(NSError **)outError NS_AVAILABLE_MAC(10_7);
+- (BOOL)checkAutosavingSafetyAndReturnError:(NSError **)outError API_AVAILABLE(macos(10.7));
 
 /* Schedule periodic autosaving for the purpose of crash protection. The default implementation of this method generally checks to see if autosaving is turned on and if so, and if [self hasUnautosavedChanges] returns YES, schedules an NSTimer to invoke -autosaveDocumentWithDelegate:didAutosaveSelector:contextInfo: in the future. If [self hasUnautosavedChanges] returns NO it will unschedule any previously scheduled timer. It takes care not to cause -autosaveDocumentWithDelegate:didAutosaveSelector:contextInfo: to be invoked before a previous invocation caused by it has finished. The exact timings it uses are complicated and subject to change in future releases of Mac OS X. You can override this method to control when exactly periodic autosaving happens. It is invoked by -updateChangeCount: and -updateChangeCountWithToken:forSaveOperation:.
 */
-- (void)scheduleAutosaving NS_AVAILABLE_MAC(10_7);
+- (void)scheduleAutosaving API_AVAILABLE(macos(10.7));
 
 /* Return YES if the document has changes that have not been autosaved, NO otherwise, as determined by the history of previous invocations of -updateChangeCount:. The default implementation of this method returns NO immediately after invocation of -updateChangeCount:NSChangeCleared or -updateChangeCount:NSChangeAutosaved. It will then return YES if subsequent invocations of -updateChangeCount: have recorded a situation in which the document has changes that have not been autosaved. (-updateChangeCount:NSChangeReadOtherContents has no effect on what the default implementation of this method returns.)
 */
@@ -456,37 +434,37 @@ This method is only invoked by AppKit itself as a result of -scheduleAutosaving 
 
 The default implementation of this method invokes [self hasUnautosavedChanges] and, if that returns YES, figures out where the autosaved document contents should go and invokes [self saveToURL:autosavedDocumentContentsURL ofType:[self autosavingFileType] forSaveOperation:oneOfTheAutosaveOperations completionHandler:aCompletionHandler]. oneOfTheAutosaveOperations will be NSAutosaveAsOperation if the document has been changed with NSChangeDone and the current document should be turned into a draft, NSAutosaveInPlaceOperation if [[self class] autosavesInPlace] returns YES and [self fileURL] returns non-nil, or NSAutosaveElsewhereOperation otherwise. The check of [self fileURL] is because there's no such thing as autosaving "in place" when the document does not yet have a permanent place.
 */
-- (void)autosaveWithImplicitCancellability:(BOOL)autosavingIsImplicitlyCancellable completionHandler:(void (^)(NSError * __nullable errorOrNil))completionHandler NS_AVAILABLE_MAC(10_7);
+- (void)autosaveWithImplicitCancellability:(BOOL)autosavingIsImplicitlyCancellable completionHandler:(void (^)(NSError * _Nullable errorOrNil))completionHandler API_AVAILABLE(macos(10.7));
 
 /* Return YES if the receiving subclass of NSDocument supports Mac OS 10.7 autosaving in place, NO otherwise. The default implementation of this method returns NO. You can override it and return YES to declare your NSDocument subclass' ability to do Mac OS 10.7 autosaving in place. You should not invoke this method to find out whether autosaving in place is actually being done at any particular moment. You should instead use the NSSaveOperationType parameter passed to your overrides of -save... and -write... methods.
  
 AppKit invokes this method at a variety of times, and not always on the main thread. For example, -autosaveWithImplicitCancellability:completionHandler: invokes this as part of determining whether the autosaving will be an NSAutosaveInPlaceOperation instead of an NSAutosaveElsewhereOperation. For another example, -canCloseDocumentWithDelegate:shouldCloseSelector:contextInfo: and NSDocumentController's machinery for handling unsaved changes at application termination time both invoke this as part of determining whether alerts about unsaved changes should be presented to the user.
 */
-@property(class, readonly) BOOL autosavesInPlace NS_AVAILABLE_MAC(10_7);
+@property(class, readonly) BOOL autosavesInPlace API_AVAILABLE(macos(10.7));
 
 /* Return YES if the receiving subclass of NSDocument supports Mac OS 10.7 version preservation, NO otherwise. The default implementation of this method returns [self autosavesInPlace]. You can override it and return NO to declare that NSDocument should not preserve old document versions.
 
 Returning NO from this method will disable version browsing and -revertDocumentToSaved:, which rely on version preservation when autosaving in place. Returning YES from this method when +autosavesInPlace returns NO will result in undefined behavior.
  */
-@property(class, readonly) BOOL preservesVersions NS_AVAILABLE_MAC(10_7);
+@property(class, readonly) BOOL preservesVersions API_AVAILABLE(macos(10.7));
 
 /* The action of the Browse Saved Versions menu item in a document-based application. The default implementation causes the document's main window, specified by [self windowForSheet], to enter the Versions browser.
 */
-- (IBAction)browseDocumentVersions:(nullable id)sender NS_AVAILABLE_MAC(10_8);
+- (IBAction)browseDocumentVersions:(nullable id)sender API_AVAILABLE(macos(10.8));
 
 /* Whether the receiver is currently displaying the Versions browser. KVO-compliant.
 */
-@property (getter=isBrowsingVersions, readonly) BOOL browsingVersions NS_AVAILABLE_MAC(10_12);
+@property (getter=isBrowsingVersions, readonly) BOOL browsingVersions API_AVAILABLE(macos(10.12));
 
 /* If the receiver is currently displaying the Versions browser, cleanly stop browsing versions (which includes waiting for any animations to complete). Then invoke the completion handler on the main thread.
 */
-- (void)stopBrowsingVersionsWithCompletionHandler:(void (^ _Nullable)(void))completionHandler NS_AVAILABLE_MAC(10_12);
+- (void)stopBrowsingVersionsWithCompletionHandler:(void (^ _Nullable)(void))completionHandler API_AVAILABLE(macos(10.12));
 
 /* Return YES if the receiving subclass of NSDocument supports Mac OS 10.8 autosaving of drafts, NO otherwise. The default implementation of this method returns YES for applications linked on or after Mac OS 10.8. You can override it and return YES to declare your NSDocument subclass' ability to do Mac OS 10.8 autosaving of drafts. You can also override it and return NO to opt out of this behavior after linking with 10.8. You should not invoke this method to find out whether autosaving of a draft will be done. Instances of subclasses that return YES from this method should be ready to properly handle save operations with NSAutosaveAsOperation.
 
 AppKit invokes this method at a variety of times. For example, when -updateChangeCount is called with NSChangeDone (without NSChangeDiscardable), NSDocument will the next autosave to use NSAutosaveAsOperation and return the document into a draft.
 */
-@property(class, readonly) BOOL autosavesDrafts NS_AVAILABLE_MAC(10_8);
+@property(class, readonly) BOOL autosavesDrafts API_AVAILABLE(macos(10.8));
 
 /* Return the document type that should be used for an autosave operation. The default implementation just returns [self fileType].
 */
@@ -516,7 +494,7 @@ The default implementation of this method has two rather different behaviors. If
 
 /* The action of the File menu's Duplicate item in a document-based application. The default implementation of this method merely invokes [self duplicateDocumentWithDelegate:nil didDuplicateSelector:NULL contextInfo:NULL].
 */
-- (IBAction)duplicateDocument:(nullable id)sender NS_AVAILABLE_MAC(10_7);
+- (IBAction)duplicateDocument:(nullable id)sender API_AVAILABLE(macos(10.7));
 
 /* Create a new document whose contents are the same as the receiver's and that doesn't yet have a fileURL. When duplicating is completed, regardless of success or failure, or has been rejected one way or another by the user, send the message selected by didDuplicateSelector to the delegate, with the contextInfo as the last argument. The method selected by didDuplicateSelector must have the same signature as:
  
@@ -524,7 +502,7 @@ The default implementation of this method has two rather different behaviors. If
 
 The default implementation of this method first makes sure that any editor registered using Cocoa Bindings' NSEditorRegistration protocol has committed its changes, then checks to see if there are recent changes that might have been inadvertent and, if so, presents a panel giving the user the choice of canceling, duplicating, or duplicating then also discarding recent changes. Unless the user cancels duplicating, or if no panel was presented, it then invokes -duplicateAndReturnError:. If the user chose duplicating and discarding it also discards recent changes after duplicating.
 */
-- (void)duplicateDocumentWithDelegate:(nullable id)delegate didDuplicateSelector:(nullable SEL)didDuplicateSelector contextInfo:(nullable void *)contextInfo NS_AVAILABLE_MAC(10_7);
+- (void)duplicateDocumentWithDelegate:(nullable id)delegate didDuplicateSelector:(nullable SEL)didDuplicateSelector contextInfo:(nullable void *)contextInfo API_AVAILABLE(macos(10.7));
 
 /* Create and return a new document whose contents are the same as the receiver and that doesn't yet have a fileURL, and return it if successful. If not successful, return nil after setting *outError to an NSError that encapsulates the reason why the document could not be duplicated.
 
@@ -532,70 +510,70 @@ The default implementation of this method first uses -writeSafelyToURL:ofType:fo
 
 You can override this method to customize what is done during document duplication, but if your override does not invoke -[NSDocumentController duplicateDocumentWithContentsOfURL:copying:displayName:error:] you must take care to do things that that method does, especially invoking -[NSDocumentController addDocument:] and +[NSFileCoordinator addFilePresenter:].
 */
-- (nullable __kindof NSDocument *)duplicateAndReturnError:(NSError **)outError NS_AVAILABLE_MAC(10_7);
+- (nullable __kindof NSDocument *)duplicateAndReturnError:(NSError **)outError API_AVAILABLE(macos(10.7));
 
 #pragma mark *** Renaming ***
 
 /* The action of the Rename menu item in a document-based application. The default implementation of this method initiates a renaming session in the window returned by [self windowForSheet].
 */
-- (IBAction)renameDocument:(nullable id)sender NS_AVAILABLE_MAC(10_8);
+- (IBAction)renameDocument:(nullable id)sender API_AVAILABLE(macos(10.8));
 
 #pragma mark *** Moving ***
 
 /* The action of the Move to iCloud… menu item in a document-based application. The default implementation of this method presents an alert, asking the user to confirm the move, then invokes -moveToURL:completionHandler: with a URL in the application's default ubiquity container.
 */
-- (IBAction)moveDocumentToUbiquityContainer:(nullable id)sender NS_AVAILABLE_MAC(10_8);
+- (IBAction)moveDocumentToUbiquityContainer:(nullable id)sender API_AVAILABLE(macos(10.8));
 
 /* The action of the Move To… menu item in a document-based application. The default implementation of this method merely invokes [self moveDocumentWithCompletionHandler:nil].
 */
-- (IBAction)moveDocument:(nullable id)sender NS_AVAILABLE_MAC(10_8);
+- (IBAction)moveDocument:(nullable id)sender API_AVAILABLE(macos(10.8));
 
 /* Present a move panel to the user, then try to save the document if the user OKs the panel. When moving is completed, regardless of success, failure, or cancellation, invoke the given block.
 
 The default implementation of this method first makes sure that any editor registered using Cocoa Binding's NSEditorRegistration protocol has committed its changes if necessary. Then, if [self fileURL] is non-nil, it creates and presents a move panel. If the user OKs the panel, -moveToURL:completionHandler: is invoked. If a file already exists at the location the user chooses, the user will be asked to choose between replacing that file, renaming the current document, or canceling. If [self fileURL] is nil, then this method will instead invoke [self runModalSavePanelForSaveOperation:NSSaveAsOperation delegate:didSaveSelector:contextInfo:].
 */
-- (void)moveDocumentWithCompletionHandler:(void (^ __nullable)(BOOL didMove))completionHandler NS_AVAILABLE_MAC(10_8);
+- (void)moveDocumentWithCompletionHandler:(void (^ _Nullable)(BOOL didMove))completionHandler API_AVAILABLE(macos(10.8));
 
 /* Move the document's file to the given URL and invoke the passed-in completion handler at some point in the future, perhaps after the method invocation has returned. The completion handler must be invoked on the main thread. If successful, pass a nil error. If not successful, pass an NSError that encapsulates the reason why the document could not be moved.
 
 The default implementation of this method does a coordinated move of the file at [self fileURL] to the given URL, replacing any file that may currently exist at that URL, and invokes -setFileURL: if the operation is successful. If [self fileURL] is nil, then this method will instead invoke [self saveToURL:url ofType:[self fileType] forSaveOperation:NSSaveAsOperation completionHandler:aCompletionHandler].
 */
-- (void)moveToURL:(NSURL *)url completionHandler:(void (^ __nullable)(NSError * __nullable))completionHandler NS_AVAILABLE_MAC(10_8);
+- (void)moveToURL:(NSURL *)url completionHandler:(void (^ _Nullable)(NSError * _Nullable))completionHandler API_AVAILABLE(macos(10.8));
 
 #pragma mark *** Locking ***
 
 /* The actions of the Lock and Unlock menu items in a document-based application. The default implementations of these method invoke -lockDocumentWithCompletionHandler: and -unlockDocumentWithCompletionHandler: respectively.
 */
-- (IBAction)lockDocument:(nullable id)sender NS_AVAILABLE_MAC(10_8);
-- (IBAction)unlockDocument:(nullable id)sender NS_AVAILABLE_MAC(10_8);
+- (IBAction)lockDocument:(nullable id)sender API_AVAILABLE(macos(10.8));
+- (IBAction)unlockDocument:(nullable id)sender API_AVAILABLE(macos(10.8));
 
 /* Lock the document to prevent the user from making further modifications. When locking is completed, regardless of success or failure, invoke the given block.
 
 The default implementation of this method first makes sure that any editor registered using Cocoa Binding's NSEditorRegistration protocol has committed its changes and immediately autosaves the document. If the autosave completes successfully or isn't necessary, this method invokes [self lockWithCompletionHandler:]. When locking succeeds, -isLocked will begin returning YES. Documents that return nil from [self fileURL] cannot be locked.
 */
-- (void)lockDocumentWithCompletionHandler:(void (^ __nullable)(BOOL didLock))completionHandler NS_AVAILABLE_MAC(10_8);
+- (void)lockDocumentWithCompletionHandler:(void (^ _Nullable)(BOOL didLock))completionHandler API_AVAILABLE(macos(10.8));
 
 /* Lock the file at [self fileURL] to prevent further modifications. When locking is completed regardless of success or failure, invoke the given block.
 
 The default implementation of this method enables the "user immutable" flag on the file at [self fileURL].
 */
-- (void)lockWithCompletionHandler:(void (^ __nullable)(NSError * __nullable))completionHandler NS_AVAILABLE_MAC(10_8);
+- (void)lockWithCompletionHandler:(void (^ _Nullable)(NSError * _Nullable))completionHandler API_AVAILABLE(macos(10.8));
 
 /* Unlock the document and allow the user to make modifications to the document. When unlocking is completed, regardless of success or failure, invoke the given block.
 
 The default implementation of this method invokes [self unlockWithCompletionHandler:]. This method also disables autosaving safety checking, meaning that -checkAutosavingSafetyAndReturnError: will no longer be invoked on this document. When unlocking succeeds, -isLocked will being returning NO.
 */
-- (void)unlockDocumentWithCompletionHandler:(void (^ __nullable)(BOOL didUnlock))completionHandler NS_AVAILABLE_MAC(10_8);
+- (void)unlockDocumentWithCompletionHandler:(void (^ _Nullable)(BOOL didUnlock))completionHandler API_AVAILABLE(macos(10.8));
 
 /* Unlock the file at [self fileURL] to allow modifications. When unlocking is completed, regardless of success of failure, invoke the given block.
 
 The default implementation of this method tries to clear the "user immutable" flag and add write permissions (if necessary) to the file at [self fileURL].
 */
-- (void)unlockWithCompletionHandler:(void (^ __nullable)(NSError * __nullable))completionHandler NS_AVAILABLE_MAC(10_8);
+- (void)unlockWithCompletionHandler:(void (^ _Nullable)(NSError * _Nullable))completionHandler API_AVAILABLE(macos(10.8));
 
 /* Returns YES when it appears the file at [self fileURL] cannot be written to. The conditions that cause this to return YES are subject to change, but may include the lack of write permissions, the "user immutable" flag, a read-only parent directory or volume, a return value of NO from -checkAutosavingSafetyAndReturnError:. You should not override this method.
 */
-@property (getter=isLocked, readonly) BOOL locked NS_AVAILABLE_MAC(10_8);
+@property (getter=isLocked, readonly) BOOL locked API_AVAILABLE(macos(10.8));
 
 #pragma mark *** Printing ***
 
@@ -653,11 +631,11 @@ For backward binary compatibility with Mac OS 10.3 and earlier, the default impl
 
 /* The action of the File menu's Export As PDF... item in a document-based application. The default implementation of this method merely invokes [self printDocumentWithSettings:@{ NSPrintJobDisposition : NSPrintSaveJob } showPrintPanel:NO delegate:nil didPrintSelector:NULL contextInfo:NULL].
  */
-- (IBAction)saveDocumentToPDF:(nullable id)sender NS_AVAILABLE_MAC(10_9);
+- (IBAction)saveDocumentToPDF:(nullable id)sender API_AVAILABLE(macos(10.9));
 
 /* Create a print operation that can be run to create a PDF representation of the document's current contents, and return it if successful. You typically should not use [self printInfo] when creating this print operation, but you should instead maintain a separate NSPrintInfo instance specifically for creating PDFs. The default implementation of this method simply invokes [self printOperationWithSettings:@{ NSPrintJobDisposition : NSPrintSaveJob } error:NULL], but you are highly encouraged to override it if your document subclass supports creating PDF representations.
  */
-@property (readonly, strong) NSPrintOperation *PDFPrintOperation NS_AVAILABLE_MAC(10_9);
+@property (readonly, strong) NSPrintOperation *PDFPrintOperation API_AVAILABLE(macos(10.9));
 
 #pragma mark *** Sharing ***
 
@@ -665,7 +643,7 @@ For backward binary compatibility with Mac OS 10.3 and earlier, the default impl
  
  By default, this returns the same value as [[self class] autosavesInPlace].
  */
-@property (readonly) BOOL allowsDocumentSharing NS_AVAILABLE_MAC(10_13);
+@property (readonly) BOOL allowsDocumentSharing API_AVAILABLE(macos(10.13));
 
 /* Share the document's file using the given NSSharingService. First, ensure the document is in a state where it can be properly shared by the given service by saving or relocating the receiver's file, if necessary. Then perform the given sharing service with 'self.fileURL' as the only item. When sharing is complete or fails, invoke the completion handler indicating whether the operation was successful.
  
@@ -675,11 +653,11 @@ For backward binary compatibility with Mac OS 10.3 and earlier, the default impl
  
  When an NSDocument is the only item being used with NSSharingServicePicker or NSSharingServicePickerTouchBarItem, it will invoke this method instead of calling -[NSSharingService performWithItems:] directly.
  */
-- (void)shareDocumentWithSharingService:(NSSharingService *)sharingService completionHandler:(void (^ _Nullable)(BOOL success))completionHandler NS_AVAILABLE_MAC(10_13);
+- (void)shareDocumentWithSharingService:(NSSharingService *)sharingService completionHandler:(void (^ _Nullable)(BOOL success))completionHandler API_AVAILABLE(macos(10.13));
 
 /* Given the NSSharingServicePicker used by an NSDocumentController-owned Share menu (either an automatically inserted one, or one returned by +[NSDocumentController standardShareMenuItem]), make any final changes before that menu is presented. Specifically, you may choose to set a custom NSSharingServicePickerDelegate to customize the construction of the resulting menu, or provide a custom NSSharingServiceDelegate for the chosen service.
  */
-- (void)prepareSharingServicePicker:(NSSharingServicePicker *)sharingServicePicker NS_AVAILABLE_MAC(10_13);
+- (void)prepareSharingServicePicker:(NSSharingServicePicker *)sharingServicePicker API_AVAILABLE(macos(10.13));
 
 #pragma mark *** Change Management ***
 
@@ -689,7 +667,7 @@ For backward binary compatibility with Mac OS 10.3 and earlier, the default impl
 
 /* Return YES if the document is in read-only "viewing mode". You may use this information to prevent certain kinds of user actions or changes when the user is viewing an old document version.
 */
-@property (getter=isInViewingMode, readonly) BOOL inViewingMode NS_AVAILABLE_MAC(10_7);
+@property (getter=isInViewingMode, readonly) BOOL inViewingMode API_AVAILABLE(macos(10.7));
 
 /* Record the fact that a change affecting the values returned by -isDocumentEdited and -hasUnautosavedChanges has occurred. See the comments for NSDocumentChangeType for examples of when this method is invoked by NSDocument's own method implementations. Your application only needs to invoke this method explicitly if it is not taking advantage of NSDocument's built-in undo support. The default implementation of this method also sends all of the document's window controllers -setDocumentEdited: messages when appropriate.
 */
@@ -697,13 +675,13 @@ For backward binary compatibility with Mac OS 10.3 and earlier, the default impl
 
 /* Return an object that encapsulates the current record of document change at the beginning of a save operation, for passing to -updateChangeCountWithToken:forSaveOperation: at the end of the save operation. For example, -saveToURL:ofType:forSaveOperation:completionHandler: invokes this method, on the main thread, before it does any actual saving.
 */
-- (id)changeCountTokenForSaveOperation:(NSSaveOperationType)saveOperation NS_AVAILABLE_MAC(10_7);
+- (id)changeCountTokenForSaveOperation:(NSSaveOperationType)saveOperation API_AVAILABLE(macos(10.7));
 
 /* Record the fact that saving has succeeded and update the values returned by methods like -isDocumentEdited and -hasUnautosavedChanges. For example, -saveToURL:ofType:forSaveOperation:completionHandler: invokes this method, on the main thread, when it is done saving. The default implementation of this method also sends all of the document's window controllers -setDocumentEdited: messages when appropriate.
 
 This was method was introduced with support for asynchronous saving in Mac OS 10.7. Because the goal of asynchronous saving is to let the user continue changing the document during save operations, the old mechanism of merely invoke [self updateChangeCount:NSChangeCleared] when saving has succeeded is no longer sufficient.
 */
-- (void)updateChangeCountWithToken:(id)changeCountToken forSaveOperation:(NSSaveOperationType)saveOperation NS_AVAILABLE_MAC(10_7);
+- (void)updateChangeCountWithToken:(id)changeCountToken forSaveOperation:(NSSaveOperationType)saveOperation API_AVAILABLE(macos(10.7));
 
 /* The document's undo manager. The default implementation of -setUndoManager:, in addition to recording the undo manager, registers the document as an observer of various NSUndoManager notifications so that -updateChangeCount: is invoked as undoable changes are made to the document. The default implementation of -undoManager creates an undo manager if the document does not already have one and -hasUndoManager would return YES.
 */
@@ -729,7 +707,7 @@ You can customize the presentation of errors on a per-NSDocument-subclass basis 
 
 /* Given an NSError that has been returned by an NSDocument method, accommodate the fact that the NSError is not going to be presented to the user and the error is definitely not going to be recovered from. Some NSDocument methods, like those involved in writing, sometimes don't immediately delete temporary files if there is a chance that the error can be recovered from and the operation can continue. To make sure that cleanup is always done you should invoke this method with NSDocument errors that are not going to be passed to one of the presentError:... methods. For example, when NSDocument's implementation of -[NSFilePresenter savePresentedItemChangesWithCompletionHandler:] invokes this method when it invokes -autosaveWithImplicitCancellability:completionHandler: and the completion handler is passed an NSError, because it does not present the error to the user.
 */
-- (void)willNotPresentError:(NSError *)error NS_AVAILABLE_MAC(10_7);
+- (void)willNotPresentError:(NSError *)error API_AVAILABLE(macos(10.7));
 
 #pragma mark *** Windows and Window Controllers ***
 
@@ -773,7 +751,7 @@ The default implementation of this method sends the window controller a -shouldC
 
 /* Set the name for this document that is fit for presentation to the user. If the value is nil then a name based on -defaultDraftName is used.
 */
-- (void)setDisplayName:(nullable NSString *)displayNameOrNil NS_AVAILABLE_MAC(10_7);
+- (void)setDisplayName:(nullable NSString *)displayNameOrNil API_AVAILABLE(macos(10.7));
 
 /* Returns the name for this document that is fit for presentation to the user. You can override this method, but overriding -[NSWindowController windowTitleForDocumentDisplayName:] is usually better, because a document's display name is used in error alerts, alerts presented during document saving, the alert that's presented when the user attempts to close a document that has unsaved changes, and save panels (as the default value of the "Save As:" field). In those places the document file's actual name really is what should be used.
 */
@@ -783,7 +761,7 @@ The default implementation of this method sends the window controller a -shouldC
  
  NSDocument invokes this in -displayName when the receiver hasn't yet been assigned one and also prior to autosaving with NSAutosaveAsOperation. NSDocument will append a number to this string if there is a already another document or file with the same name. Applications will typically return a name that describes the kind of document. For example, a spreadsheet application may return "Spreadsheet". Alternatively, a document created from a template may choose to return the name of that template, like "Résumé".
 */
-- (NSString *)defaultDraftName NS_AVAILABLE_MAC(10_8);
+- (NSString *)defaultDraftName API_AVAILABLE(macos(10.8));
 
 /* Of the windows associated with this document, return the one most appropriate to use as the parent window of a document-modal sheet. This method may return nil, in which case the invoker should present an application-modal panel. NSDocument's implementation of this method returns the window of the first window controller, or nil if there are no window controllers or if the first window controller has no window.
 */
@@ -815,7 +793,7 @@ You can invoke this method when creating a custom save panel accessory view to e
 
 You can override this method to customize the appending of extensions to file names by NSDocument. It's invoked from a variety of places within AppKit itself.
 */
-- (nullable NSString *)fileNameExtensionForType:(NSString *)typeName saveOperation:(NSSaveOperationType)saveOperation NS_AVAILABLE_MAC(10_5);
+- (nullable NSString *)fileNameExtensionForType:(NSString *)typeName saveOperation:(NSSaveOperationType)saveOperation API_AVAILABLE(macos(10.5));
 
 #pragma mark *** Menu Item Validation ***
 
@@ -826,7 +804,7 @@ You can override this method to customize the appending of extensions to file na
 #pragma mark *** Ubiquitous Storage ***
 
 /* Return YES if instances of this class should allow the use of ubiquitous document storage. The default implementation of this method returns YES if the application has a valid ubiquity container entitlement. When this method returns YES, NSDocument may do things like add new menu items and other UI for ubiquitous documents and allow documents to be saved or moved into the default ubiquity container. You can override this method to return NO for document classes that should not include these features. */
-@property (class, readonly) BOOL usesUbiquitousStorage NS_AVAILABLE_MAC(10_8);
+@property (class, readonly) BOOL usesUbiquitousStorage API_AVAILABLE(macos(10.8));
 
 @end
 
@@ -836,31 +814,32 @@ You can override this method to customize the appending of extensions to file na
 
 /* Methods that were deprecated in Mac OS 10.6. See the comments above for information about when your overrides of them are still invoked, for backward binary compatibility.
 */
-- (BOOL)saveToURL:(NSURL *)url ofType:(NSString *)typeName forSaveOperation:(NSSaveOperationType)saveOperation error:(NSError **)outError NS_DEPRECATED_MAC(10_4, 10_6, "Use -saveToURL:ofType:forSaveOperation:completionHandler: instead");
+- (BOOL)saveToURL:(NSURL *)url ofType:(NSString *)typeName forSaveOperation:(NSSaveOperationType)saveOperation error:(NSError **)outError API_DEPRECATED("Use -saveToURL:ofType:forSaveOperation:completionHandler: instead", macos(10.4,10.6));
 
 /* Methods that were deprecated in Mac OS 10.4. See the comments above for information about when your overrides of them are still invoked, for backward binary compatibility.
 */
-- (nullable NSData *)dataRepresentationOfType:(NSString *)type NS_DEPRECATED_MAC(10_0, 10_4);
-- (nullable NSDictionary *)fileAttributesToWriteToFile:(NSString *)fullDocumentPath ofType:(NSString *)documentTypeName saveOperation:(NSSaveOperationType)saveOperationType NS_DEPRECATED_MAC(10_1, 10_4);
-- (nullable NSString *)fileName NS_DEPRECATED_MAC(10_0, 10_4);
-- (nullable NSFileWrapper *)fileWrapperRepresentationOfType:(NSString *)type NS_DEPRECATED_MAC(10_0, 10_4);
-- (nullable id)initWithContentsOfFile:(NSString *)absolutePath ofType:(NSString *)typeName NS_DEPRECATED_MAC(10_0, 10_4);
-- (nullable id)initWithContentsOfURL:(NSURL *)url ofType:(NSString *)typeName NS_DEPRECATED_MAC(10_0, 10_4);
-- (BOOL)loadDataRepresentation:(NSData *)data ofType:(NSString *)type NS_DEPRECATED_MAC(10_0, 10_4);
-- (BOOL)loadFileWrapperRepresentation:(NSFileWrapper *)wrapper ofType:(NSString *)type NS_DEPRECATED_MAC(10_0, 10_4);
-- (void)printShowingPrintPanel:(BOOL)flag NS_DEPRECATED_MAC(10_0, 10_4);
-- (BOOL)readFromFile:(NSString *)fileName ofType:(NSString *)type NS_DEPRECATED_MAC(10_0, 10_4);
-- (BOOL)readFromURL:(NSURL *)url ofType:(NSString *)type NS_DEPRECATED_MAC(10_0, 10_4);
-- (BOOL)revertToSavedFromFile:(NSString *)fileName ofType:(NSString *)type NS_DEPRECATED_MAC(10_0, 10_4);
-- (BOOL)revertToSavedFromURL:(NSURL *)url ofType:(NSString *)type NS_DEPRECATED_MAC(10_0, 10_4);
-- (NSInteger)runModalPageLayoutWithPrintInfo:(NSPrintInfo *)printInfo NS_DEPRECATED_MAC(10_0, 10_4);
-- (void)saveToFile:(NSString *)fileName saveOperation:(NSSaveOperationType)saveOperation delegate:(nullable id)delegate didSaveSelector:(nullable SEL)didSaveSelector contextInfo:(nullable void *)contextInfo NS_DEPRECATED_MAC(10_0, 10_4);
-- (void)setFileName:(nullable NSString *)fileName NS_DEPRECATED_MAC(10_0, 10_4);
-- (BOOL)writeToFile:(NSString *)fileName ofType:(NSString *)type NS_DEPRECATED_MAC(10_0, 10_4);
-- (BOOL)writeToFile:(NSString *)fullDocumentPath ofType:(NSString *)documentTypeName originalFile:(nullable NSString *)fullOriginalDocumentPath saveOperation:(NSSaveOperationType)saveOperationType NS_DEPRECATED_MAC(10_0, 10_4);
-- (BOOL)writeToURL:(NSURL *)url ofType:(NSString *)type NS_DEPRECATED_MAC(10_0, 10_4);
-- (BOOL)writeWithBackupToFile:(NSString *)fullDocumentPath ofType:(NSString *)documentTypeName saveOperation:(NSSaveOperationType)saveOperationType NS_DEPRECATED_MAC(10_0, 10_4);
+- (nullable NSData *)dataRepresentationOfType:(NSString *)type API_DEPRECATED("", macos(10.0,10.4));
+- (nullable NSDictionary *)fileAttributesToWriteToFile:(NSString *)fullDocumentPath ofType:(NSString *)documentTypeName saveOperation:(NSSaveOperationType)saveOperationType API_DEPRECATED("", macos(10.1,10.4));
+- (nullable NSString *)fileName API_DEPRECATED("", macos(10.0,10.4));
+- (nullable NSFileWrapper *)fileWrapperRepresentationOfType:(NSString *)type API_DEPRECATED("", macos(10.0,10.4));
+- (nullable id)initWithContentsOfFile:(NSString *)absolutePath ofType:(NSString *)typeName API_DEPRECATED("", macos(10.0,10.4));
+- (nullable id)initWithContentsOfURL:(NSURL *)url ofType:(NSString *)typeName API_DEPRECATED("", macos(10.0,10.4));
+- (BOOL)loadDataRepresentation:(NSData *)data ofType:(NSString *)type API_DEPRECATED("", macos(10.0,10.4));
+- (BOOL)loadFileWrapperRepresentation:(NSFileWrapper *)wrapper ofType:(NSString *)type API_DEPRECATED("", macos(10.0,10.4));
+- (void)printShowingPrintPanel:(BOOL)flag API_DEPRECATED("", macos(10.0,10.4));
+- (BOOL)readFromFile:(NSString *)fileName ofType:(NSString *)type API_DEPRECATED("", macos(10.0,10.4));
+- (BOOL)readFromURL:(NSURL *)url ofType:(NSString *)type API_DEPRECATED("", macos(10.0,10.4));
+- (BOOL)revertToSavedFromFile:(NSString *)fileName ofType:(NSString *)type API_DEPRECATED("", macos(10.0,10.4));
+- (BOOL)revertToSavedFromURL:(NSURL *)url ofType:(NSString *)type API_DEPRECATED("", macos(10.0,10.4));
+- (NSInteger)runModalPageLayoutWithPrintInfo:(NSPrintInfo *)printInfo API_DEPRECATED("", macos(10.0,10.4));
+- (void)saveToFile:(NSString *)fileName saveOperation:(NSSaveOperationType)saveOperation delegate:(nullable id)delegate didSaveSelector:(nullable SEL)didSaveSelector contextInfo:(nullable void *)contextInfo API_DEPRECATED("", macos(10.0,10.4));
+- (void)setFileName:(nullable NSString *)fileName API_DEPRECATED("", macos(10.0,10.4));
+- (BOOL)writeToFile:(NSString *)fileName ofType:(NSString *)type API_DEPRECATED("", macos(10.0,10.4));
+- (BOOL)writeToFile:(NSString *)fullDocumentPath ofType:(NSString *)documentTypeName originalFile:(nullable NSString *)fullOriginalDocumentPath saveOperation:(NSSaveOperationType)saveOperationType API_DEPRECATED("", macos(10.0,10.4));
+- (BOOL)writeToURL:(NSURL *)url ofType:(NSString *)type API_DEPRECATED("", macos(10.0,10.4));
+- (BOOL)writeWithBackupToFile:(NSString *)fullDocumentPath ofType:(NSString *)documentTypeName saveOperation:(NSSaveOperationType)saveOperationType API_DEPRECATED("", macos(10.0,10.4));
 
 @end
 
+API_UNAVAILABLE_END
 NS_ASSUME_NONNULL_END

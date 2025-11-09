@@ -464,6 +464,8 @@ enum
                         A UInt32 where a value of 0 indicates the device's streams will drop frames when altering frame rates, and a value of 1 means that they won't.
     @constant       kCMIODevicePropertyLocation
                         A UInt32 indicating the location of the device (for values see kCMIODevicePropertyLocationUnknown, etc., below).
+    @constant       kCMIODevicePropertyDeviceHasStreamingError
+                        A UInt32 where 1 means that the CMIODevice failed to stream.
 */
 enum
 {
@@ -495,7 +497,8 @@ enum
     kCMIODevicePropertyIIDCInitialUnitSpace                 = 'iuns',
     kCMIODevicePropertyIIDCCSRData                          = 'csrd',
     kCMIODevicePropertyCanSwitchFrameRatesWithoutFrameDrops = 'frnd',
-    kCMIODevicePropertyLocation                             = 'dloc'
+    kCMIODevicePropertyLocation                             = 'dloc',
+    kCMIODevicePropertyDeviceHasStreamingError              = 'serr',
 };
 
 /*!

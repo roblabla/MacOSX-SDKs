@@ -29,12 +29,6 @@ __BEGIN_DECLS
 #include <Availability.h>
 #endif // __has_include(<xpc/availability.h>)
 
-#if XPC_SERVICE_MAIN_IN_LIBXPC
-#define XPC_HOSTING_OLD_MAIN 1
-#else // XPC_SERVICE_MAIN_IN_LIBXPC
-#define XPC_HOSTING_OLD_MAIN 0
-#endif // XPC_SERVICE_MAIN_IN_LIBXPC
-
 #ifndef __XPC_INDIRECT__
 #error "Please #include <xpc/xpc.h> instead of this file directly."
 #endif // __XPC_INDIRECT__ 
@@ -91,13 +85,13 @@ __BEGIN_DECLS
 #define XPC_DEPRECATED(m) __attribute__((deprecated))
 #endif // __clang 
 
-#if __XPC_TEST__
+#if defined(__XPC_TEST__) && __XPC_TEST__
 #define XPC_TESTSTATIC
 #define XPC_TESTEXTERN(x) extern x
-#else // __XPC_TEST__
+#else // defined(__XPC_TEST__) && __XPC_TEST__
 #define XPC_TESTSTATIC static
 #define XPC_TESTEXTERN(x)
-#endif // __XPC_TEST__
+#endif // defined(__XPC_TEST__) && __XPC_TEST__
 
 #if __has_feature(objc_arc)
 #define XPC_GIVES_REFERENCE __strong
@@ -196,6 +190,22 @@ __BEGIN_DECLS
 #else
 #define XPC_NONNULL_ARRAY
 #endif
+
+#ifdef OS_CLOSED_OPTIONS
+#define XPC_FLAGS_ENUM(_name, _type, ...) \
+		OS_CLOSED_OPTIONS(_name, _type, __VA_ARGS__)
+#else // OS_CLOSED_ENUM
+#define XPC_FLAGS_ENUM(_name, _type, ...) \
+		OS_ENUM(_name, _type, __VA_ARGS__)
+#endif // OS_CLOSED_ENUM
+
+#ifdef OS_CLOSED_ENUM
+#define XPC_ENUM(_name, _type, ...) \
+		OS_CLOSED_ENUM(_name, _type, __VA_ARGS__)
+#else // OS_CLOSED_ENUM
+#define XPC_ENUM(_name, _type, ...) \
+		OS_ENUM(_name, _type, __VA_ARGS__)
+#endif // OS_CLOSED_ENUM
 
 __END_DECLS
 

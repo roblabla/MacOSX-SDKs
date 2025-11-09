@@ -1,6 +1,6 @@
 /*
 	NSFileVersion.h
-	Copyright (c) 2010-2018, Apple Inc.
+	Copyright (c) 2010-2019, Apple Inc.
 	All rights reserved.
 */
 
@@ -28,7 +28,7 @@ typedef NS_OPTIONS(NSUInteger, NSFileVersionReplacingOptions) {
 
 /* Instances of NSFileVersion for the same version of the same file are equal, and instances of NSFileVersion for different versions of the same file are not equal, but the equality of NSFileVersions for different files is undefined. Repeated invocations of the methods that return NSFileVersions do not necessarily return the exact same instance of NSFileVersion.
 */
-NS_CLASS_AVAILABLE(10_7, 5_0)
+API_AVAILABLE(macos(10.7), ios(5.0), watchos(2.0), tvos(9.0))
 @interface NSFileVersion : NSObject {
 @private
     NSURL *_fileURL;
@@ -96,7 +96,7 @@ When adding or removing versions of a file you should do it as part of a "coordi
 
 /* The name components of the user who created this version of the file. Is nil if the file is not shared or if the current user is the originator.
 */
-@property (nullable, readonly, copy) NSPersonNameComponents *originatorNameComponents API_AVAILABLE(macosx(10.12), ios(10.0)) __TVOS_PROHIBITED __WATCHOS_PROHIBITED;
+@property (nullable, readonly, copy) NSPersonNameComponents *originatorNameComponents API_AVAILABLE(macosx(10.12), ios(10.0)) API_UNAVAILABLE(watchos, tvos);
 
 /* The modification date of the version, or possibly nil if the receiver's storage has been deleted.
 */

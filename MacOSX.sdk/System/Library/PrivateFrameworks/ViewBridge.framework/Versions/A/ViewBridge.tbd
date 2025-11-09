@@ -1,13 +1,16 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: B93A89EB-4421-3FF1-AA28-EBC3AC5076FE' ]
+uuids:           [ 'x86_64: BD434F3C-130C-3607-BCD4-A7F0125A89C5' ]
 platform:        macosx
-install-name:    /System/Library/PrivateFrameworks/ViewBridge.framework/Versions/A/ViewBridge
+install-name:    '/System/Library/PrivateFrameworks/ViewBridge.framework/Versions/A/ViewBridge'
 exports:         
   - archs:           [ x86_64 ]
-    symbols:         [ _NSViewBridgeErrorDomain, _NSViewServiceApplicationMain, _ViewBridgeAuxiliaryMain ]
-    objc-classes:    [ NSCFRunLoopSemaphore, NSLayerCentricRemoteView, NSRemoteView, 
-                       NSRemoteViewController, NSServiceViewController, NSViewBridge, 
-                       NSViewService, NSViewServiceAccessoryView, NSViewServiceBridge, 
-                       NSXPCSharedListener ]
+    symbols:         [ _NSServiceViewControllerDidAdvanceToRunPhaseNotification, 
+                       _NSServiceViewControllerWillAdvanceToRunPhaseNotification, 
+                       _NSViewBridgeErrorDomain, _NSViewServiceApplicationMain, _ViewBridgeAuxiliaryMain ]
+    objc-classes:    [ NSCFRunLoopSemaphore, NSLayerCentricRemoteView, NSPreviewHostView, 
+                       NSPreviewHostViewController, NSPreviewTargetViewController, 
+                       NSRemoteView, NSRemoteViewController, NSServiceViewController, 
+                       NSVBKeyboardEventSpecification, NSViewBridge, NSViewService, 
+                       NSViewServiceAccessoryView, NSViewServiceBridge, NSXPCSharedListener ]
 ...

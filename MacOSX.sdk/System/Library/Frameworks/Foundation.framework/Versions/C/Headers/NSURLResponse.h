@@ -1,6 +1,6 @@
 /*	
     NSURLResponse.h
-    Copyright (c) 2003-2018, Apple Inc. All rights reserved.    
+    Copyright (c) 2003-2019, Apple Inc. All rights reserved.    
     
     Public header file.
 */
@@ -154,6 +154,18 @@ NS_ASSUME_NONNULL_BEGIN
     receiver.
 */
 @property (readonly, copy) NSDictionary *allHeaderFields;
+
+/*!
+    @method valueForHTTPHeaderField:
+    @abstract Returns the value which corresponds to the given header
+    field. Note that, in keeping with the HTTP RFC, HTTP header field
+    names are case-insensitive.
+    @param field the header field name to use for the lookup
+    (case-insensitive).
+    @result the value associated with the given header field, or nil if
+    there is no value associated with the given header field.
+ */
+- (nullable NSString *)valueForHTTPHeaderField:(NSString *)field API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0));
 
 /*! 
     @method localizedStringForStatusCode:

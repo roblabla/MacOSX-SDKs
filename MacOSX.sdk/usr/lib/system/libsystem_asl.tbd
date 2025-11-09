@@ -1,18 +1,17 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: EC9D8AD4-E5CB-3765-804A-9E1E9DC045D2' ]
-platform:        macosx
-install-name:    /usr/lib/system/libsystem_asl.dylib
-current-version: 356.200.4
-objc-constraint: none
+uuids:           [ 'x86_64: A125594C-D9F3-3D17-8BBC-E949DDB49C46', 'x86_64: A125594C-D9F3-3D17-8BBC-E949DDB49C46' ]
+platform:        zippered
+install-name:    '/usr/lib/system/libsystem_asl.dylib'
+current-version: 377.0.1
 parent-umbrella: System
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _ASL_LEVEL_TO_STRING, __asl_evaluate_send, __asl_fork_child, 
-                       __asl_lib_log, __asl_log_args_to_xpc, __asl_msg_dump, __asl_server_cancel_direct_watch, 
+                       __asl_lib_log, __asl_log_args_to_xpc, __asl_msg_dump, __asl_mt_shim_fork_child, 
+                       __asl_mt_shim_send_message, __asl_server_cancel_direct_watch, 
                        __asl_server_control_query, __asl_server_create_aux_link, 
-                       __asl_server_match, __asl_server_message, __asl_server_prune, 
-                       __asl_server_query, __asl_server_query_2, __asl_server_query_timeout, 
+                       __asl_server_match, __asl_server_message, __asl_server_query_2, 
                        __asl_server_register_direct_watch, _asl_add_log_file, _asl_add_output, 
                        _asl_add_output_file, _asl_append, _asl_base_msg, _asl_client_add_output_file, 
                        _asl_client_get_control, _asl_client_kvdict, _asl_client_match, 

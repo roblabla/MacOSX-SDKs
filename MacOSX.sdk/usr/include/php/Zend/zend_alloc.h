@@ -12,13 +12,11 @@
    | obtain it through the world-wide-web, please send a note to          |
    | license@zend.com so we can mail you a copy immediately.              |
    +----------------------------------------------------------------------+
-   | Authors: Andi Gutmans <andi@zend.com>                                |
-   |          Zeev Suraski <zeev@zend.com>                                |
-   |          Dmitry Stogov <dmitry@zend.com>                             |
+   | Authors: Andi Gutmans <andi@php.net>                                 |
+   |          Zeev Suraski <zeev@php.net>                                 |
+   |          Dmitry Stogov <dmitry@php.net>                              |
    +----------------------------------------------------------------------+
 */
-
-/* $Id$ */
 
 #ifndef ZEND_ALLOC_H
 #define ZEND_ALLOC_H
@@ -50,8 +48,8 @@ typedef struct _zend_leak_info {
 	size_t size;
 	const char *filename;
 	const char *orig_filename;
-	uint lineno;
-	uint orig_lineno;
+	uint32_t lineno;
+	uint32_t orig_lineno;
 } zend_leak_info;
 
 #if ZEND_DEBUG
@@ -59,12 +57,12 @@ typedef struct _zend_mm_debug_info {
 	size_t             size;
 	const char        *filename;
 	const char        *orig_filename;
-	uint               lineno;
-	uint               orig_lineno;
+	uint32_t               lineno;
+	uint32_t               orig_lineno;
 } zend_mm_debug_info;
 
 # define ZEND_MM_OVERHEAD ZEND_MM_ALIGNED_SIZE(sizeof(zend_mm_debug_info))
-#else 
+#else
 # define ZEND_MM_OVERHEAD 0
 #endif
 
@@ -195,7 +193,14 @@ ZEND_API void * __zend_realloc(void *p, size_t len) ZEND_ATTRIBUTE_ALLOC_SIZE(2)
 #define pemalloc(size, persistent) ((persistent)?__zend_malloc(size):emalloc(size))
 #define safe_pemalloc(nmemb, size, offset, persistent)	((persistent)?_safe_malloc(nmemb, size, offset):safe_emalloc(nmemb, size, offset))
 #define pefree(ptr, persistent)  ((persistent)?free(ptr):efree(ptr))
-#define pefree_size(ptr, size, persistent)  ((persistent)?free(ptr):efree_size(ptr, size))
+#define pefree_size(ptr, size, persistent)  do { \
+		if (persistent) { \
+			free(ptr); \
+		} else { \
+			efree_size(ptr, size);\
+		} \
+	} while (0)
+
 #define pecalloc(nmemb, size, persistent) ((persistent)?__zend_calloc((nmemb), (size)):ecalloc((nmemb), (size)))
 #define perealloc(ptr, size, persistent) ((persistent)?__zend_realloc((ptr), (size)):erealloc((ptr), (size)))
 #define perealloc2(ptr, size, copy_size, persistent) ((persistent)?__zend_realloc((ptr), (size)):erealloc2((ptr), (size), (copy_size)))
@@ -376,7 +381,7 @@ static void apc_init_heap(void)
 
 	// Preallocate properly aligned SHM chunks (64MB)
 	tmp_data.mem = shm_memalign(ZEND_MM_CHUNK_SIZE, ZEND_MM_CHUNK_SIZE * 32);
-	
+
 	// Initialize temporary storage data
 	tmp_data.free_pages = 0;
 
@@ -389,7 +394,7 @@ static void apc_init_heap(void)
 	zend_hash_init(apc_ht, 64, NULL, ZVAL_PTR_DTOR, 0);
 	zend_mm_set_heap(old_heap);
 }
- 
+
 */
 
 END_EXTERN_C()
@@ -402,4 +407,6 @@ END_EXTERN_C()
  * c-basic-offset: 4
  * indent-tabs-mode: t
  * End:
+ * vim600: sw=4 ts=4 fdm=marker
+ * vim<600: sw=4 ts=4
  */

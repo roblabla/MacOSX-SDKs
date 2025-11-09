@@ -294,6 +294,38 @@ os_signpost_enabled(os_log_t log);
 #define OS_LOG_CATEGORY_POINTS_OF_INTEREST "PointsOfInterest"
 #endif
 
+#pragma mark - Dynamic Tracing
+
+/*!
+ * @const OS_LOG_CATEGORY_DYNAMIC_TRACING
+ *
+ * Provide this value as the category to os_log_create to indicate that
+ * signposts emitted to the resulting log handle should be disabled by
+ * default, reducing the runtime overhead. os_signpost_enabled calls on
+ * the resulting log handle will only return 'true' when a performance
+ * tool like Instruments.app is recording.
+ */
+#if OS_LOG_TARGET_HAS_10_15_FEATURES
+#ifndef __swift__
+#define OS_LOG_CATEGORY_DYNAMIC_TRACING "DynamicTracing"
+#endif
+#endif
+
+/*!
+ * @const OS_LOG_CATEGORY_DYNAMIC_STACK_TRACING
+ *
+ * Provide this value as the category to os_log_create to indicate that
+ * signposts emitted to the resulting log handle should capture user
+ * backtraces. This behavior is more expensive, so os_signpost_enabled
+ * will only return 'true' when a performance tool like Instruments.app
+ * is recording.
+ */
+#if OS_LOG_TARGET_HAS_10_15_FEATURES
+#ifndef __swift__
+#define OS_LOG_CATEGORY_DYNAMIC_STACK_TRACING "DynamicStackTracing"
+#endif
+#endif
+
 #pragma mark - Signpost Internals
 
 /*!

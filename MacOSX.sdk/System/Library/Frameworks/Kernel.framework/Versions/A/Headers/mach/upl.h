@@ -141,7 +141,7 @@ __END_DECLS
 #define __Request__upl_subsystem__defined
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -149,11 +149,11 @@ __END_DECLS
 		integer_t abort_cond;
 	} __Request__upl_abort_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -163,11 +163,11 @@ __END_DECLS
 		integer_t abort_cond;
 	} __Request__upl_abort_range_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -176,11 +176,11 @@ __END_DECLS
 		upl_page_info_t page_list[256];
 	} __Request__upl_commit_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -192,7 +192,7 @@ __END_DECLS
 		upl_page_info_t page_list[256];
 	} __Request__upl_commit_range_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 #endif /* !__Request__upl_subsystem__defined */
 
@@ -213,7 +213,7 @@ union __RequestUnion__upl_subsystem {
 #define __Reply__upl_subsystem__defined
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -221,11 +221,11 @@ union __RequestUnion__upl_subsystem {
 		kern_return_t RetCode;
 	} __Reply__upl_abort_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -234,11 +234,11 @@ union __RequestUnion__upl_subsystem {
 		boolean_t empty;
 	} __Reply__upl_abort_range_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -246,11 +246,11 @@ union __RequestUnion__upl_subsystem {
 		kern_return_t RetCode;
 	} __Reply__upl_commit_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -259,7 +259,7 @@ union __RequestUnion__upl_subsystem {
 		boolean_t empty;
 	} __Reply__upl_commit_range_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 #endif /* !__Reply__upl_subsystem__defined */
 

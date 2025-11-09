@@ -1,7 +1,7 @@
 /*
         NSBezierPath.h
         Application Kit
-        Copyright (c) 1997-2018, Apple Inc.
+        Copyright (c) 1997-2019, Apple Inc.
         All rights reserved.
 */
 
@@ -10,6 +10,7 @@
 #import <AppKit/NSFont.h>
 
 NS_ASSUME_NONNULL_BEGIN
+API_UNAVAILABLE_BEGIN(ios)
 
 @class NSAffineTransform;
 
@@ -38,40 +39,13 @@ typedef NS_ENUM(NSUInteger, NSBezierPathElement) {
 };
 
 @interface NSBezierPath : NSObject <NSCopying, NSSecureCoding>
-{
-    @private
-    NSInteger _elementCount APPKIT_IVAR;
-    NSInteger _elementMax APPKIT_IVAR;
-    struct PATHSEGMENT *_head APPKIT_IVAR;
-    NSInteger _lastSubpathIndex APPKIT_IVAR;
-    void *_extraSegments APPKIT_IVAR;
-    CGFloat _lineWidth APPKIT_IVAR;
-    NSRect _controlPointBounds APPKIT_IVAR;
-    CGFloat _miterLimit APPKIT_IVAR;
-    CGFloat _flatness APPKIT_IVAR;
-    CGFloat *_dashedLinePattern APPKIT_IVAR;
-    NSUInteger _dashedLineCount APPKIT_IVAR;
-    CGFloat _dashedLinePhase APPKIT_IVAR;
-    void *_path APPKIT_IVAR;
-    NSInteger _extraSegmentCount APPKIT_IVAR;
-    NSInteger _extraSegmentMax APPKIT_IVAR;
-#if !__LP64__    
-    id _private[2] APPKIT_IVAR;
-#endif
-    struct {
-        unsigned int _flags:8;
-        unsigned int _pathState:2;
-
-        unsigned int _unused:22;
-    } _bpFlags APPKIT_IVAR;
-}
 
 // Creating common paths.
 
 + (NSBezierPath *)bezierPath;
 + (NSBezierPath *)bezierPathWithRect:(NSRect)rect;
 + (NSBezierPath *)bezierPathWithOvalInRect:(NSRect)rect;
-+ (NSBezierPath *)bezierPathWithRoundedRect:(NSRect)rect xRadius:(CGFloat)xRadius yRadius:(CGFloat)yRadius NS_AVAILABLE_MAC(10_5);
++ (NSBezierPath *)bezierPathWithRoundedRect:(NSRect)rect xRadius:(CGFloat)xRadius yRadius:(CGFloat)yRadius API_AVAILABLE(macos(10.5));
 
 // Immediate mode drawing of common paths.
 
@@ -176,48 +150,49 @@ typedef NS_ENUM(NSUInteger, NSBezierPathElement) {
 				 toPoint:(NSPoint)point2
 				  radius:(CGFloat)radius;
 
-- (void)appendBezierPathWithCGGlyph:(CGGlyph)glyph inFont:(NSFont *)font NS_AVAILABLE_MAC(10_13);
-- (void)appendBezierPathWithCGGlyphs:(const CGGlyph *)glyphs count:(NSInteger)count inFont:(NSFont *)font NS_AVAILABLE_MAC(10_13);
+- (void)appendBezierPathWithCGGlyph:(CGGlyph)glyph inFont:(NSFont *)font API_AVAILABLE(macos(10.13));
+- (void)appendBezierPathWithCGGlyphs:(const CGGlyph *)glyphs count:(NSInteger)count inFont:(NSFont *)font API_AVAILABLE(macos(10.13));
 
 // Appends paths for a rounded rectangle.
-- (void)appendBezierPathWithRoundedRect:(NSRect)rect xRadius:(CGFloat)xRadius yRadius:(CGFloat)yRadius NS_AVAILABLE_MAC(10_5);
+- (void)appendBezierPathWithRoundedRect:(NSRect)rect xRadius:(CGFloat)xRadius yRadius:(CGFloat)yRadius API_AVAILABLE(macos(10.5));
 
 // Hit detection.
 - (BOOL)containsPoint:(NSPoint)point;
 @end
 
 @interface NSBezierPath (NSBezierPathDeprecated)
-- (BOOL)cachesBezierPath NS_DEPRECATED_MAC(10_0, 10_0);
-- (void)setCachesBezierPath:(BOOL)flag NS_DEPRECATED_MAC(10_0, 10_0);
+- (BOOL)cachesBezierPath API_DEPRECATED("", macos(10.0,10.0));
+- (void)setCachesBezierPath:(BOOL)flag API_DEPRECATED("", macos(10.0,10.0));
 
 // The following NSGlyph-related methods are deprecated. Use corresponding CGGlyph-based methods instead
-- (void)appendBezierPathWithGlyph:(NSGlyph)glyph inFont:(NSFont *)font NS_DEPRECATED_MAC(10_0, 10_14, "Use -appendBezierPathWithCGGlyph:inFont: instead");
-- (void)appendBezierPathWithGlyphs:(NSGlyph *)glyphs count:(NSInteger)count inFont:(NSFont *)font NS_DEPRECATED_MAC(10_0, 10_14, "Use -appendBezierPathWithCGGlyphs:count:inFont: instead");
-- (void)appendBezierPathWithPackedGlyphs:(const char *)packedGlyphs NS_DEPRECATED_MAC(10_0, 10_14, "Use -appendBezierPathWithCGGlyphs:count:inFont: instead");
+- (void)appendBezierPathWithGlyph:(NSGlyph)glyph inFont:(NSFont *)font API_DEPRECATED("Use -appendBezierPathWithCGGlyph:inFont: instead", macos(10.0,10.14));
+- (void)appendBezierPathWithGlyphs:(NSGlyph *)glyphs count:(NSInteger)count inFont:(NSFont *)font API_DEPRECATED("Use -appendBezierPathWithCGGlyphs:count:inFont: instead", macos(10.0,10.14));
+- (void)appendBezierPathWithPackedGlyphs:(const char *)packedGlyphs API_DEPRECATED("Use -appendBezierPathWithCGGlyphs:count:inFont: instead", macos(10.0,10.14));
 @end
-
-NS_ASSUME_NONNULL_END
 
 /* Deprecated legacy line cap style constants. Prefer to use NSLineCapStyle values instead.
 */
-static const NSLineCapStyle NSButtLineCapStyle NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSLineCapStyleButt", 10_0, API_TO_BE_DEPRECATED) = NSLineCapStyleButt;
-static const NSLineCapStyle NSRoundLineCapStyle NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSLineCapStyleRound", 10_0, API_TO_BE_DEPRECATED) = NSLineCapStyleRound;
-static const NSLineCapStyle NSSquareLineCapStyle NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSLineCapStyleSquare", 10_0, API_TO_BE_DEPRECATED) = NSLineCapStyleSquare;
+static const NSLineCapStyle NSButtLineCapStyle API_DEPRECATED_WITH_REPLACEMENT("NSLineCapStyleButt", macos(10.0,API_TO_BE_DEPRECATED)) = NSLineCapStyleButt;
+static const NSLineCapStyle NSRoundLineCapStyle API_DEPRECATED_WITH_REPLACEMENT("NSLineCapStyleRound", macos(10.0,API_TO_BE_DEPRECATED)) = NSLineCapStyleRound;
+static const NSLineCapStyle NSSquareLineCapStyle API_DEPRECATED_WITH_REPLACEMENT("NSLineCapStyleSquare", macos(10.0,API_TO_BE_DEPRECATED)) = NSLineCapStyleSquare;
 
 /* Deprecated legacy line join style constants. Prefer to use NSLineJoinStyle values instead.
 */
-static const NSLineJoinStyle NSMiterLineJoinStyle NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSLineJoinStyleMiter", 10_0, API_TO_BE_DEPRECATED) = NSLineJoinStyleMiter;
-static const NSLineJoinStyle NSRoundLineJoinStyle NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSLineJoinStyleRound", 10_0, API_TO_BE_DEPRECATED) = NSLineJoinStyleRound;
-static const NSLineJoinStyle NSBevelLineJoinStyle NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSLineJoinStyleBevel", 10_0, API_TO_BE_DEPRECATED) = NSLineJoinStyleBevel;
+static const NSLineJoinStyle NSMiterLineJoinStyle API_DEPRECATED_WITH_REPLACEMENT("NSLineJoinStyleMiter", macos(10.0,API_TO_BE_DEPRECATED)) = NSLineJoinStyleMiter;
+static const NSLineJoinStyle NSRoundLineJoinStyle API_DEPRECATED_WITH_REPLACEMENT("NSLineJoinStyleRound", macos(10.0,API_TO_BE_DEPRECATED)) = NSLineJoinStyleRound;
+static const NSLineJoinStyle NSBevelLineJoinStyle API_DEPRECATED_WITH_REPLACEMENT("NSLineJoinStyleBevel", macos(10.0,API_TO_BE_DEPRECATED)) = NSLineJoinStyleBevel;
 
 /* Deprecated legacy winding rule constants. Prefer to use NSWindingRule values instead.
 */
-static const NSWindingRule NSNonZeroWindingRule NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSWindingRuleNonZero", 10_0, API_TO_BE_DEPRECATED) = NSWindingRuleNonZero;
-static const NSWindingRule NSEvenOddWindingRule NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSWindingRuleEvenOdd", 10_0, API_TO_BE_DEPRECATED) = NSWindingRuleEvenOdd;
+static const NSWindingRule NSNonZeroWindingRule API_DEPRECATED_WITH_REPLACEMENT("NSWindingRuleNonZero", macos(10.0,API_TO_BE_DEPRECATED)) = NSWindingRuleNonZero;
+static const NSWindingRule NSEvenOddWindingRule API_DEPRECATED_WITH_REPLACEMENT("NSWindingRuleEvenOdd", macos(10.0,API_TO_BE_DEPRECATED)) = NSWindingRuleEvenOdd;
 
 /* Deprecated legacy Bezier path element constants. Prefer to use NSBezierPathElement values instead.
 */
-static const NSBezierPathElement NSMoveToBezierPathElement NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSBezierPathElementMoveTo", 10_0, API_TO_BE_DEPRECATED) = NSBezierPathElementMoveTo;
-static const NSBezierPathElement NSLineToBezierPathElement NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSBezierPathElementLineTo", 10_0, API_TO_BE_DEPRECATED) = NSBezierPathElementLineTo;
-static const NSBezierPathElement NSCurveToBezierPathElement NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSBezierPathElementCurveTo", 10_0, API_TO_BE_DEPRECATED) = NSBezierPathElementCurveTo;
-static const NSBezierPathElement NSClosePathBezierPathElement NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSBezierPathElementClosePath", 10_0, API_TO_BE_DEPRECATED) = NSBezierPathElementClosePath;
+static const NSBezierPathElement NSMoveToBezierPathElement API_DEPRECATED_WITH_REPLACEMENT("NSBezierPathElementMoveTo", macos(10.0,API_TO_BE_DEPRECATED)) = NSBezierPathElementMoveTo;
+static const NSBezierPathElement NSLineToBezierPathElement API_DEPRECATED_WITH_REPLACEMENT("NSBezierPathElementLineTo", macos(10.0,API_TO_BE_DEPRECATED)) = NSBezierPathElementLineTo;
+static const NSBezierPathElement NSCurveToBezierPathElement API_DEPRECATED_WITH_REPLACEMENT("NSBezierPathElementCurveTo", macos(10.0,API_TO_BE_DEPRECATED)) = NSBezierPathElementCurveTo;
+static const NSBezierPathElement NSClosePathBezierPathElement API_DEPRECATED_WITH_REPLACEMENT("NSBezierPathElementClosePath", macos(10.0,API_TO_BE_DEPRECATED)) = NSBezierPathElementClosePath;
+
+API_UNAVAILABLE_END
+NS_ASSUME_NONNULL_END

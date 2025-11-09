@@ -9,6 +9,7 @@
 
 #import <CoreML/MLFeatureType.h>
 #import <CoreML/MLFeatureValue.h>
+#import <CoreML/MLFeatureValue+MLImageConversion.h>
 #import <CoreML/MLFeatureDescription.h>
 #import <CoreML/MLFeatureProvider.h>
 #import <CoreML/MLDictionaryFeatureProvider.h>
@@ -43,3 +44,15 @@
 #import <CoreML/MLCustomModel.h>
 
 #import <CoreML/MLExport.h>
+
+#import <CoreML/MLKey.h>
+#import <CoreML/MLTask.h>
+#import <CoreML/MLUpdateTask.h>
+#import <CoreML/MLWritable.h>
+#import <CoreML/MLUpdateProgressEvent.h>
+#import <CoreML/MLUpdateContext.h>
+#import <CoreML/MLUpdateProgressHandlers.h>
+#import <CoreML/MLMetricKey.h>
+#import <CoreML/MLNumericConstraint.h>
+#import <CoreML/MLParameterDescription.h>
+#import <CoreML/MLParameterKey.h>

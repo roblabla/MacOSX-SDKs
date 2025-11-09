@@ -133,7 +133,7 @@
 .\" ========================================================================
 .\"
 .IX Title "PERLMACOSX 1"
-.TH PERLMACOSX 1 "2018-08-17" "perl v5.18.2" "Perl Programmers Reference Guide"
+.TH PERLMACOSX 1 "2019-07-14" "perl v5.18.4" "Perl Programmers Reference Guide"
 .\" For nroff, turn off justification.  Always turn off hyphenation; it makes
 .\" way too many mistakes in technical documents.
 .if n .ad l
@@ -145,9 +145,9 @@ perlmacosx \- Perl under Mac OS X
 This document briefly describes Perl under Mac \s-1OS X.\s0
 .PP
 .Vb 7
-\&  curl http://www.cpan.org/src/perl\-5.18.2.tar.gz > perl\-5.18.0.tar.gz
-\&  tar \-xzf perl\-5.18.2.tar.gz
-\&  cd perl\-5.18.2
+\&  curl http://www.cpan.org/src/perl\-5.18.4.tar.gz > perl\-5.18.0.tar.gz
+\&  tar \-xzf perl\-5.18.4.tar.gz
+\&  cd perl\-5.18.4
 \&  ./Configure \-des \-Dprefix=/usr/local/
 \&  make
 \&  make test
@@ -155,7 +155,7 @@ This document briefly describes Perl under Mac \s-1OS X.\s0
 .Ve
 .SH "DESCRIPTION"
 .IX Header "DESCRIPTION"
-The latest Perl release (5.18.2 as of this writing) builds without changes
+The latest Perl release (5.18.4 as of this writing) builds without changes
 under all versions of Mac \s-1OS X\s0 from 10.3 \*(L"Panther\*(R" onwards.
 .PP
 In order to build your own version of Perl you will need 'make',
@@ -202,7 +202,7 @@ In 10.5 \*(L"Leopard\*(R" and beyond, the environment variable \s-1NO_PERL_PREPE
 Likewise, the \s-1NO_PERL_APPENDTOPATH\s0 environment variable will case perl to not
 load any AppendToPath file.
 .PP
-In 10.5.7 for versions of perl before 5.18.2, there is a new path,
+In 10.5.7 for versions of perl before 5.18.4, there is a new path,
 \&'/Library/Perl/Updates/${version}' that comes before the system perl directory.
 When 'INSTALLDIRS=perl' is specified to Makefile.PL, modules that
 previous overwrite those in '/System/Library/Perl/${version}', will now be
@@ -216,9 +216,9 @@ There are also the new parameters \*(L"installupdateslib\*(R", \*(L"installupdat
 \&\*(L"updateslib\*(R" and \*(L"updatesarch\*(R", which also correspond to this new directory,
 and are provided for completeness.
 .PP
-However, for perl 5.18.2 in Mac \s-1OS X 10.7,\s0 the order of the include
-paths was changed so that '/Library/Perl/5.18.2' came before
-\&'/System/Library/Perl/5.18.2', so '/Library/Perl/Updates' is no longer needed.
+However, for perl 5.18.4 in Mac \s-1OS X 10.7,\s0 the order of the include
+paths was changed so that '/Library/Perl/5.18.4' came before
+\&'/System/Library/Perl/5.18.4', so '/Library/Perl/Updates' is no longer needed.
 The Config parameters \*(L"installprivlib\*(R" and \*(L"installarchlib\*(R" have returned
 to their original values, and \*(L"installupdateslib\*(R", \*(L"installupdatesarch\*(R",
 \&\*(L"updateslib\*(R" and \*(L"updatesarch\*(R" have been removed.
@@ -331,22 +331,12 @@ by simply running the following command:
 .PP
 Subsequent invocations of '/usr/bin/perl' will then use the  version.
 .PP
-In addition, both perl versions will ship as a universal binary containing
-64\-bit support, which will be on by default.
-For those cases where 32\-bit perl is desired, the following command can
-be used:
-.PP
-.Vb 1
-\&    % defaults write com.apple.versioner.perl Prefer\-32\-Bit \-bool yes
-.Ve
-.PP
-To set defaults systemwide, use the above commands, but replace the third
+To set defaults systemwide, use the above command, but replace the third
 argument with '/Library/Preferences/com.apple.versioner.perl' (admin privileges
 will be required).
 .PP
-The environment variables \s-1VERSIONER_PERL_VERSION \s0(set to one of the supported versions) and
-\&\s-1VERSIONER_PERL_PREFER_32_BIT \s0(set to 'true', 'false', 'yes', 'no', '1' or '0')
-can also be set, and they override the settings in any preference files.
+The environment variable \s-1VERSIONER_PERL_VERSION \s0(set to one of the supported versions)
+can also be set, and it overrides the settings in any preference files.
 .PP
 Note: this may changes in future versions of Mac \s-1OS X,\s0 which may use
 an improved scheme for making such settings.

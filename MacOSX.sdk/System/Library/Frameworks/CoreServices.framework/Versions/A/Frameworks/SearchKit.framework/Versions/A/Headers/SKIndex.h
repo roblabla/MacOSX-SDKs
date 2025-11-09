@@ -3,9 +3,9 @@
  
      Contains:   SearchKit Interfaces.
  
-     Version:    SearchKit-407~38
+     Version:    SearchKit-417.1
  
-     Copyright:  © 2003-2008 by Apple Computer, Inc., all rights reserved
+     Copyright:  2003-2019 by Apple, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -72,7 +72,7 @@ typedef struct __SKIndex*               SKIndexRef;
  *    Non-Carbon CFM:   not available
  */
 extern CFTypeID 
-SKIndexGetTypeID(void)                                        AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+SKIndexGetTypeID(void)                                        API_AVAILABLE( macos(10.3) ) API_UNAVAILABLE( macCatalyst );
 
 
 
@@ -96,7 +96,7 @@ typedef struct __SKIndexDocumentIterator*  SKIndexDocumentIteratorRef;
  *    Non-Carbon CFM:   not available
  */
 extern CFTypeID 
-SKIndexDocumentIteratorGetTypeID(void)                        AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+SKIndexDocumentIteratorGetTypeID(void)                        API_AVAILABLE( macos(10.3) ) API_UNAVAILABLE( macCatalyst );
 
 
 /*
@@ -215,7 +215,7 @@ SKIndexCreateWithURL(
   CFURLRef          inURL,
   CFStringRef       inIndexName,                /* can be NULL */
   SKIndexType       inIndexType,
-  CFDictionaryRef   inAnalysisProperties)       /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+  CFDictionaryRef   inAnalysisProperties)       /* can be NULL */ API_AVAILABLE( macos(10.3) ) API_UNAVAILABLE( macCatalyst );
 
 
 /*
@@ -255,7 +255,7 @@ extern SKIndexRef
 SKIndexOpenWithURL(
   CFURLRef      inURL,
   CFStringRef   inIndexName,         /* can be NULL */
-  Boolean       inWriteAccess)                                AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+  Boolean       inWriteAccess)                                API_AVAILABLE( macos(10.3) ) API_UNAVAILABLE( macCatalyst );
 
 
 /*
@@ -295,7 +295,7 @@ SKIndexCreateWithMutableData(
   CFMutableDataRef   inData,
   CFStringRef        inIndexName,                /* can be NULL */
   SKIndexType        inIndexType,
-  CFDictionaryRef    inAnalysisProperties)       /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+  CFDictionaryRef    inAnalysisProperties)       /* can be NULL */ API_AVAILABLE( macos(10.3) ) API_UNAVAILABLE( macCatalyst );
 
 
 /*
@@ -330,7 +330,7 @@ SKIndexCreateWithMutableData(
 extern SKIndexRef 
 SKIndexOpenWithData(
   CFDataRef     inData,
-  CFStringRef   inIndexName)       /* can be NULL */          AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+  CFStringRef   inIndexName)       /* can be NULL */          API_AVAILABLE( macos(10.3) ) API_UNAVAILABLE( macCatalyst );
 
 
 /*
@@ -366,7 +366,7 @@ SKIndexOpenWithData(
 extern SKIndexRef 
 SKIndexOpenWithMutableData(
   CFMutableDataRef   inData,
-  CFStringRef        inIndexName)       /* can be NULL */     AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+  CFStringRef        inIndexName)       /* can be NULL */     API_AVAILABLE( macos(10.3) ) API_UNAVAILABLE( macCatalyst );
 
 
 /*
@@ -391,7 +391,7 @@ SKIndexOpenWithMutableData(
  *    Non-Carbon CFM:   not available
  */
 extern Boolean 
-SKIndexFlush(SKIndexRef inIndex)                              AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+SKIndexFlush(SKIndexRef inIndex)                              API_AVAILABLE( macos(10.3) ) API_UNAVAILABLE( macCatalyst );
 
 
 /*
@@ -408,7 +408,7 @@ SKIndexFlush(SKIndexRef inIndex)                              AVAILABLE_MAC_OS_X
 extern void 
 SKIndexSetMaximumBytesBeforeFlush(
   SKIndexRef   inIndex,
-  CFIndex      inBytesForUpdate)                              AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+  CFIndex      inBytesForUpdate)                              API_AVAILABLE( macos(10.3) ) API_UNAVAILABLE( macCatalyst );
 
 
 /*
@@ -427,7 +427,7 @@ SKIndexSetMaximumBytesBeforeFlush(
  *    Non-Carbon CFM:   not available
  */
 extern CFIndex 
-SKIndexGetMaximumBytesBeforeFlush(SKIndexRef inIndex)         AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+SKIndexGetMaximumBytesBeforeFlush(SKIndexRef inIndex)         API_AVAILABLE( macos(10.3) ) API_UNAVAILABLE( macCatalyst );
 
 
 /*
@@ -453,7 +453,7 @@ SKIndexGetMaximumBytesBeforeFlush(SKIndexRef inIndex)         AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   not available
  */
 extern Boolean 
-SKIndexCompact(SKIndexRef inIndex)                            AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+SKIndexCompact(SKIndexRef inIndex)                            API_AVAILABLE( macos(10.3) ) API_UNAVAILABLE( macCatalyst );
 
 
 /*
@@ -476,7 +476,7 @@ SKIndexCompact(SKIndexRef inIndex)                            AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   not available
  */
 extern SKIndexType 
-SKIndexGetIndexType(SKIndexRef inIndex)                       AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+SKIndexGetIndexType(SKIndexRef inIndex)                       API_AVAILABLE( macos(10.3) ) API_UNAVAILABLE( macCatalyst );
 
 
 /*
@@ -495,7 +495,7 @@ SKIndexGetIndexType(SKIndexRef inIndex)                       AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   not available
  */
 extern CFDictionaryRef 
-SKIndexGetAnalysisProperties(SKIndexRef inIndex)              AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+SKIndexGetAnalysisProperties(SKIndexRef inIndex)              API_AVAILABLE( macos(10.3) ) API_UNAVAILABLE( macCatalyst );
 
 
 /*
@@ -519,7 +519,7 @@ SKIndexGetAnalysisProperties(SKIndexRef inIndex)              AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   not available
  */
 extern CFIndex 
-SKIndexGetDocumentCount(SKIndexRef inIndex)                   AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+SKIndexGetDocumentCount(SKIndexRef inIndex)                   API_AVAILABLE( macos(10.3) ) API_UNAVAILABLE( macCatalyst );
 
 
 /*
@@ -534,7 +534,7 @@ SKIndexGetDocumentCount(SKIndexRef inIndex)                   AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   not available
  */
 extern void 
-SKIndexClose(SKIndexRef inIndex)                              AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+SKIndexClose(SKIndexRef inIndex)                              API_AVAILABLE( macos(10.4) ) API_UNAVAILABLE( macCatalyst );
 
 
 /*
@@ -576,7 +576,7 @@ SKIndexAddDocumentWithText(
   SKIndexRef      inIndex,
   SKDocumentRef   inDocument,
   CFStringRef     inDocumentText,       /* can be NULL */
-  Boolean         inCanReplace)                               AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+  Boolean         inCanReplace)                               API_AVAILABLE( macos(10.3) ) API_UNAVAILABLE( macCatalyst );
 
 
 /*
@@ -625,7 +625,7 @@ SKIndexAddDocument(
   SKIndexRef      inIndex,
   SKDocumentRef   inDocument,
   CFStringRef     inMIMETypeHint,       /* can be NULL */
-  Boolean         inCanReplace)                               AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+  Boolean         inCanReplace)                               API_AVAILABLE( macos(10.3) ) API_UNAVAILABLE( macCatalyst );
 
 
 /*
@@ -655,7 +655,7 @@ SKIndexAddDocument(
 extern Boolean 
 SKIndexRemoveDocument(
   SKIndexRef      inIndex,
-  SKDocumentRef   inDocument)                                 AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+  SKDocumentRef   inDocument)                                 API_AVAILABLE( macos(10.3) ) API_UNAVAILABLE( macCatalyst );
 
 
 /*
@@ -676,7 +676,7 @@ SKIndexRemoveDocument(
 extern CFDictionaryRef 
 SKIndexCopyDocumentProperties(
   SKIndexRef      inIndex,
-  SKDocumentRef   inDocument)                                 AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+  SKDocumentRef   inDocument)                                 API_AVAILABLE( macos(10.3) ) API_UNAVAILABLE( macCatalyst );
 
 
 /*
@@ -696,7 +696,7 @@ extern void
 SKIndexSetDocumentProperties(
   SKIndexRef        inIndex,
   SKDocumentRef     inDocument,
-  CFDictionaryRef   inProperties)                             AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+  CFDictionaryRef   inProperties)                             API_AVAILABLE( macos(10.3) ) API_UNAVAILABLE( macCatalyst );
 
 
 /*
@@ -720,7 +720,7 @@ SKIndexSetDocumentProperties(
 extern SKDocumentIndexState 
 SKIndexGetDocumentState(
   SKIndexRef      inIndex,
-  SKDocumentRef   inDocument)                                 AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+  SKDocumentRef   inDocument)                                 API_AVAILABLE( macos(10.3) ) API_UNAVAILABLE( macCatalyst );
 
 
 /*
@@ -741,7 +741,7 @@ SKIndexGetDocumentState(
 extern SKDocumentID 
 SKIndexGetDocumentID(
   SKIndexRef      inIndex,
-  SKDocumentRef   inDocument)                                 AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+  SKDocumentRef   inDocument)                                 API_AVAILABLE( macos(10.3) ) API_UNAVAILABLE( macCatalyst );
 
 
 /*
@@ -758,7 +758,7 @@ SKIndexGetDocumentID(
 extern SKDocumentRef 
 SKIndexCopyDocumentForDocumentID(
   SKIndexRef     inIndex,
-  SKDocumentID   inDocumentID)                                AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+  SKDocumentID   inDocumentID)                                API_AVAILABLE( macos(10.3) ) API_UNAVAILABLE( macCatalyst );
 
 
 /*
@@ -776,7 +776,7 @@ extern Boolean
 SKIndexRenameDocument(
   SKIndexRef      inIndex,
   SKDocumentRef   inDocument,
-  CFStringRef     inNewName)                                  AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+  CFStringRef     inNewName)                                  API_AVAILABLE( macos(10.3) ) API_UNAVAILABLE( macCatalyst );
 
 
 /*
@@ -794,7 +794,7 @@ extern Boolean
 SKIndexMoveDocument(
   SKIndexRef      inIndex,
   SKDocumentRef   inDocument,
-  SKDocumentRef   inNewParent)                                AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+  SKDocumentRef   inNewParent)                                API_AVAILABLE( macos(10.3) ) API_UNAVAILABLE( macCatalyst );
 
 
 /*
@@ -812,7 +812,7 @@ SKIndexMoveDocument(
 extern SKIndexDocumentIteratorRef 
 SKIndexDocumentIteratorCreate(
   SKIndexRef      inIndex,
-  SKDocumentRef   inParentDocument)                           AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+  SKDocumentRef   inParentDocument)                           API_AVAILABLE( macos(10.3) ) API_UNAVAILABLE( macCatalyst );
 
 
 /*
@@ -832,7 +832,7 @@ SKIndexDocumentIteratorCreate(
  *    Non-Carbon CFM:   not available
  */
 extern SKDocumentRef 
-SKIndexDocumentIteratorCopyNext(SKIndexDocumentIteratorRef inIterator) AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+SKIndexDocumentIteratorCopyNext(SKIndexDocumentIteratorRef inIterator) API_AVAILABLE( macos(10.3) ) API_UNAVAILABLE( macCatalyst );
 
 
 /*
@@ -850,7 +850,7 @@ SKIndexDocumentIteratorCopyNext(SKIndexDocumentIteratorRef inIterator) AVAILABLE
  *    Non-Carbon CFM:   not available
  */
 extern SKDocumentID 
-SKIndexGetMaximumDocumentID(SKIndexRef inIndex)               AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+SKIndexGetMaximumDocumentID(SKIndexRef inIndex)               API_AVAILABLE( macos(10.3) ) API_UNAVAILABLE( macCatalyst );
 
 
 /*
@@ -867,7 +867,7 @@ SKIndexGetMaximumDocumentID(SKIndexRef inIndex)               AVAILABLE_MAC_OS_X
 extern CFIndex 
 SKIndexGetDocumentTermCount(
   SKIndexRef     inIndex,
-  SKDocumentID   inDocumentID)                                AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+  SKDocumentID   inDocumentID)                                API_AVAILABLE( macos(10.3) ) API_UNAVAILABLE( macCatalyst );
 
 
 /*
@@ -887,7 +887,7 @@ SKIndexGetDocumentTermCount(
 extern CFArrayRef 
 SKIndexCopyTermIDArrayForDocumentID(
   SKIndexRef     inIndex,
-  SKDocumentID   inDocumentID)                                AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+  SKDocumentID   inDocumentID)                                API_AVAILABLE( macos(10.3) ) API_UNAVAILABLE( macCatalyst );
 
 
 /*
@@ -905,7 +905,7 @@ extern CFIndex
 SKIndexGetDocumentTermFrequency(
   SKIndexRef     inIndex,
   SKDocumentID   inDocumentID,
-  CFIndex        inTermID)                                    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+  CFIndex        inTermID)                                    API_AVAILABLE( macos(10.3) ) API_UNAVAILABLE( macCatalyst );
 
 
 /*
@@ -925,7 +925,7 @@ SKIndexGetDocumentTermFrequency(
  *    Non-Carbon CFM:   not available
  */
 extern CFIndex 
-SKIndexGetMaximumTermID(SKIndexRef inIndex)                   AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+SKIndexGetMaximumTermID(SKIndexRef inIndex)                   API_AVAILABLE( macos(10.3) ) API_UNAVAILABLE( macCatalyst );
 
 
 /*
@@ -942,7 +942,7 @@ SKIndexGetMaximumTermID(SKIndexRef inIndex)                   AVAILABLE_MAC_OS_X
 extern CFIndex 
 SKIndexGetTermDocumentCount(
   SKIndexRef   inIndex,
-  CFIndex      inTermID)                                      AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+  CFIndex      inTermID)                                      API_AVAILABLE( macos(10.3) ) API_UNAVAILABLE( macCatalyst );
 
 
 /*
@@ -962,7 +962,7 @@ SKIndexGetTermDocumentCount(
 extern CFArrayRef 
 SKIndexCopyDocumentIDArrayForTermID(
   SKIndexRef   inIndex,
-  CFIndex      inTermID)                                      AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+  CFIndex      inTermID)                                      API_AVAILABLE( macos(10.3) ) API_UNAVAILABLE( macCatalyst );
 
 
 /*
@@ -979,7 +979,7 @@ SKIndexCopyDocumentIDArrayForTermID(
 extern CFStringRef 
 SKIndexCopyTermStringForTermID(
   SKIndexRef   inIndex,
-  CFIndex      inTermID)                                      AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+  CFIndex      inTermID)                                      API_AVAILABLE( macos(10.3) ) API_UNAVAILABLE( macCatalyst );
 
 
 /*
@@ -999,7 +999,7 @@ SKIndexCopyTermStringForTermID(
 extern CFIndex 
 SKIndexGetTermIDForTermString(
   SKIndexRef    inIndex,
-  CFStringRef   inTermString)                                 AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+  CFStringRef   inTermString)                                 API_AVAILABLE( macos(10.3) ) API_UNAVAILABLE( macCatalyst );
 
 
 
@@ -1023,7 +1023,7 @@ SKIndexGetTermIDForTermString(
  *    Non-Carbon CFM:   not available
  */
 extern void 
-SKLoadDefaultExtractorPlugIns(void)                           AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+SKLoadDefaultExtractorPlugIns(void)                           API_AVAILABLE( macos(10.3) ) API_UNAVAILABLE( macCatalyst );
 
 
 

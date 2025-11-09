@@ -6,8 +6,8 @@
  *
  */
 
-#ifndef _IOSURFACE_OBJC_H
-#define _IOSURFACE_OBJC_H 1
+#ifndef IOSURFACE_OBJC_H
+#define IOSURFACE_OBJC_H 1
 
 #if defined(__OBJC__)
 

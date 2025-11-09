@@ -1,5 +1,5 @@
 /*	NSComparisonPredicate.h
-	Copyright (c) 2004-2018, Apple Inc. All rights reserved.
+	Copyright (c) 2004-2019, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSPredicate.h>
@@ -44,7 +44,7 @@ typedef NS_ENUM(NSUInteger, NSPredicateOperatorType) {
 
 // Comparison predicates are predicates which do some form of comparison between the results of two expressions and return a BOOL. They take an operator, a left expression, and a right expression, and return the result of invoking the operator with the results of evaluating the expressions.
 
-NS_CLASS_AVAILABLE(10_4, 3_0)
+API_AVAILABLE(macos(10.4), ios(3.0), watchos(2.0), tvos(9.0))
 @interface NSComparisonPredicate : NSPredicate {
     @private
     void *_reserved2;

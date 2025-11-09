@@ -1,8 +1,9 @@
 /*	NSByteCountFormatter.h
-	Copyright (c) 2012-2018, Apple Inc. All rights reserved.
+	Copyright (c) 2012-2019, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSFormatter.h>
+#import <Foundation/NSMeasurement.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -34,7 +35,7 @@ typedef NS_ENUM(NSInteger, NSByteCountFormatterCountStyle) {
 };
 
 
-NS_CLASS_AVAILABLE(10_8, 6_0)
+API_AVAILABLE(macos(10.8), ios(6.0), watchos(2.0), tvos(9.0))
 @interface NSByteCountFormatter : NSFormatter {
     @private
     unsigned int _allowedUnits;
@@ -51,6 +52,26 @@ NS_CLASS_AVAILABLE(10_8, 6_0)
 /* Convenience method on stringForObjectValue:. Convert a byte count into a string without creating an NSNumber.
  */
 - (NSString *)stringFromByteCount:(long long)byteCount;
+
+/* Formats the value of the given measurement using the given `countStyle`.
+
+   Throws an exception if the given measurement's unit does not belong to the `NSUnitInformationStorage` dimension.
+ */
++ (NSString *)stringFromMeasurement:(NSMeasurement<NSUnitInformationStorage *> *)measurement countStyle:(NSByteCountFormatterCountStyle)countStyle API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0), watchos(6.0));
+
+/* Formats the value of the given measurement using the receiver's `countStyle`.
+   Converts the measurement to the units allowed by the receiver's `allowedUnits` before formatting; depending on the value of the measurement, this may result in a string which implies an approximate value (e.g. if the measurement is too large to represent in `allowedUnits`, like `1e20 YB` expressed in `NSByteCountFormatterUseBytes`).
+
+   Throws an exception if the given measurement's unit does not belong to the `NSUnitInformationStorage` dimension.
+ */
+- (NSString *)stringFromMeasurement:(NSMeasurement<NSUnitInformationStorage *> *)measurement API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0), watchos(6.0));
+
+/* Formats `obj` as a byte count (if `obj` is an `NSNumber`) or specific byte measurement (if `obj` is an `NSMeasurement`) using the receiver's settings.
+
+   Returns `nil` if `obj` is not of the correct class (`NSNumber` or `NSMeasurement`).
+   Throws an exception if `obj` is an `NSMeasurement` whose unit does not belong to the `NSUnitInformationStorage` dimension.
+ */
+- (nullable NSString *)stringForObjectValue:(nullable id)obj;
     
 /* Specify the units that can be used in the output. If NSByteCountFormatterUseDefault, uses platform-appropriate settings; otherwise will only use the specified units. This is the default value. Note that ZB and YB cannot be covered by the range of possible values, but you can still choose to use these units to get fractional display ("0.0035 ZB" for instance).
  */

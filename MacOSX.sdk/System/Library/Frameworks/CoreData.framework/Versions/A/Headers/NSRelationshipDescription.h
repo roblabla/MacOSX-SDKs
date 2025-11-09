@@ -1,7 +1,7 @@
 /*
     NSRelationshipDescription.h
     Core Data
-    Copyright (c) 2004-2018, Apple Inc.
+    Copyright (c) 2004-2019, Apple Inc.
     All rights reserved.
 */
 
@@ -22,18 +22,6 @@ typedef NS_ENUM(NSUInteger, NSDeleteRule) {
 // Relationships represent references to other objects. They usually come in pairs, where the reference back is called the "inverse".
 API_AVAILABLE(macosx(10.4),ios(3.0))
 @interface NSRelationshipDescription : NSPropertyDescription {
-#if (!__OBJC2__)
-@private
-	void *_reserved5;
-	void *_reserved6;
-    NSEntityDescription *_destinationEntity;
-    NSString *_lazyDestinationEntityName;
-    NSRelationshipDescription *_inverseRelationship;
-    NSString *_lazyInverseRelationshipName;
-    unsigned long _maxCount;
-    unsigned long _minCount;
-    NSDeleteRule _deleteRule;
-#endif
 }
 
 @property (nullable, nonatomic, assign) NSEntityDescription *destinationEntity;

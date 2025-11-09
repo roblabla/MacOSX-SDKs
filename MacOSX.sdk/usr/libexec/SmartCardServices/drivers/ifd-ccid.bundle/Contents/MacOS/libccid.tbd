@@ -1,11 +1,10 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: B7FA1B46-C6B0-3118-BC0A-6D8DA77FEC22' ]
+uuids:           [ 'x86_64: 23C6D973-426C-37F7-A7D4-98DD2A57548D' ]
 platform:        macosx
-install-name:    /usr/libexec/SmartCardServices/drivers/ifd-ccid.bundle/Contents/MacOS/libccid.dylib
+install-name:    '/usr/libexec/SmartCardServices/drivers/ifd-ccid.bundle/Contents/MacOS/libccid.dylib'
 current-version: 0
 compatibility-version: 0
-objc-constraint: none
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _IFDHCloseChannel, _IFDHControl, _IFDHCreateChannel, _IFDHCreateChannelByName, 

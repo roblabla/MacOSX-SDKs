@@ -1,15 +1,12 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 14D08CED-8F8F-3C06-BE6B-1FAE49F26E7B' ]
+uuids:           [ 'x86_64: B29B5055-81F9-3BFF-9C50-8D25C6F082E4' ]
 platform:        macosx
-install-name:    /System/Library/PrivateFrameworks/CalendarAgent.framework/Versions/A/CalendarAgent
-current-version: 416
+install-name:    '/System/Library/PrivateFrameworks/CalendarAgent.framework/Versions/A/CalendarAgent'
+current-version: 927
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _CalAgentErrorDomain, _CalAgentErrorGenerateStringVersion, 
-                       _CalAgentExitStatusCode_AccountsMigrationNotComplete, _CalAgentExitStatusCode_DatabaseResetRequired, 
-                       _CalAgentExitStatusCode_NoCoreDataConnection, _CalAgentExitStatusCode_Normal, 
-                       _CalAgentExitStatusCode_NotLaunchedByLaunchd, _CalAgentExitStatusCode_UnexpectedCompletionOfMainFunction, 
                        _CalAgentNS_ApplePushServiceConnection, _CalAgentNS_Log, _CalAgentNS_Log_Accounts, 
                        _CalAgentNS_Log_Operations, _CalAgentNS_Log_Push, _CalAgentNS_Log_Refresh, 
                        _CalAgentNS_Log_XPC, _CalAgentNS_Preference_DefaultEventCalendar, 

@@ -1,5 +1,5 @@
 /*	NSArchiver.h
-	Copyright (c) 1994-2018, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2019, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSCoder.h>
@@ -85,10 +85,6 @@ API_DEPRECATED("Use NSKeyedUnarchiver instead", macos(10.0,10.13), ios(2.0,11.0)
 - (void)replaceObject:(id)object withObject:(id)newObject;
 
 @end
-
-/************		Exceptions		****************/
-
-FOUNDATION_EXPORT NSExceptionName const NSInconsistentArchiveException;
 
 /************		Object call back		****************/
 

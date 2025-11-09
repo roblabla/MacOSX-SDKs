@@ -26,7 +26,7 @@
  *
  *              This kernel accepts uint and int textures in addition to unorm and floating-point textures.
  */
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(9.0), tvos(9.0))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(9.0), macCatalyst(13.0), tvos(9.0))
 @interface  MPSImageIntegral : MPSUnaryImageKernel
 
 @end    /* MPSImageIntegral */
@@ -47,7 +47,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(9.0), tvos(9.0))
  *
  *              This kernel accepts uint and int textures in addition to unorm and floating-point textures.
  */
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(9.0), tvos(9.0))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(9.0), macCatalyst(13.0), tvos(9.0))
 @interface  MPSImageIntegralOfSquares : MPSUnaryImageKernel
 
 @end    /* MPSImageIntegralOfSquares */

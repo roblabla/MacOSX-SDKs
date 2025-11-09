@@ -326,6 +326,10 @@
  */
 #define kAXAnnouncementKey	CFSTR("AXAnnouncementKey")
 
+/*! @abstract Notification info key used to specify the title of an element to be spoken with a notification.
+ */
+#define kAXUIElementTitleKey    CFSTR("AXUIElementTitleKey")
+
 /*! @abstract Priority values used for kAXPriorityKey
  */
 typedef CF_ENUM(CFIndex, AXPriority) {

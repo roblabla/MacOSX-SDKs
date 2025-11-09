@@ -1,7 +1,7 @@
 /*
     NSExpressionDescription.h
     Core Data
-    Copyright (c) 2004-2018, Apple Inc.
+    Copyright (c) 2004-2019, Apple Inc.
     All rights reserved.
 */
 
@@ -19,20 +19,6 @@ NS_ASSUME_NONNULL_BEGIN
    max(attribute). NSExpressionDescriptions cannot be set as properties on NSEntityDescription. */
 API_AVAILABLE(macosx(10.6),ios(3.0))
 @interface NSExpressionDescription : NSPropertyDescription {
-#if (!__OBJC2__)
-	@private
-	id _reservedtype1_1;
-	id _reservedtype1_2;
-    NSAttributeType _reservedtype1_3;
-    id _reservedtype1_4;
-    NSUInteger _reservedtype1_5;
-    id _reservedtype1_6;
-	void *_reservedtype2_1;
-	void *_reservedtype2_2;
-	void *_reservedtype2_3;
-	NSExpression *_expression;
-	NSAttributeType _expressionResultType;
-#endif
 }
 
 @property (nullable, strong) NSExpression *expression;

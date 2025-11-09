@@ -33,11 +33,22 @@ API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0))
 
 + (nullable instancetype) modelForMLModel:(MLModel*)model error:(NSError**)error;
 
+/*!
+ @brief The name of the MLFeatureValue that Vision will set from the VNRequestHandler. Vision will use the first input it finds by default but it can be set to another featureName instead.
+ */
+@property (readwrite, nonatomic, copy) NSString *inputImageFeatureName API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0));
+
+
+/*!
+ @brief An optional object conforming to the MLFeatureProvider protocol that is used by the model during the predict call to support inputs that are not supplied by Vision. Vision will provide the image for the inputImageFeatureName from the the VNRequestHandler. A feature provider is necessary for models that have more than one input and require those parameters to be set. Models that only have one image input will not use the feature provider as that input will be set by Vision.
+ */
+@property (readwrite, nonatomic, nullable, strong) id<MLFeatureProvider> featureProvider API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0));
+
 @end
 
 /*!
 	@brief   The VNCoreMLRequest uses a VNCoreMLModel, that is based on a CoreML MLModel object, to run predictions with that model. Depending on the model the returned
-             observation is either a VNClassificationObservation for classifier models, VNPixelBufferObservations for image-to-image models or VNMLFeatureValueObservation for everything else.
+             observation is either a VNClassificationObservation for classifier models, VNPixelBufferObservations for image-to-image models, VNRecognizedObjectObservation for object recognition models or VNCoreMLFeatureValueObservation for everything else.
  */
 
 API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0))
@@ -46,7 +57,7 @@ API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0))
 /*!
  @brief The model from CoreML wrapped in a VNCoreMLModel.
  */
-@property (readonly, nonatomic, nonnull) VNCoreMLModel *model;
+@property (readonly, nonatomic) VNCoreMLModel *model;
 
 @property (nonatomic)VNImageCropAndScaleOption imageCropAndScaleOption;
 

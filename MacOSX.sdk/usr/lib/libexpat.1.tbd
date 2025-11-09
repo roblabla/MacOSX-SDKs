@@ -1,11 +1,10 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: D91D81FF-D190-36A7-B440-F4AEB4220C80' ]
-platform:        macosx
-install-name:    /usr/lib/libexpat.1.dylib
+uuids:           [ 'x86_64: F618C770-09F6-3EE9-9681-43B1A81559E7', 'x86_64: F618C770-09F6-3EE9-9681-43B1A81559E7' ]
+platform:        zippered
+install-name:    '/usr/lib/libexpat.1.dylib'
 current-version: 8
 compatibility-version: 7
-objc-constraint: none
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _XML_DefaultCurrent, _XML_ErrorString, _XML_ExpatVersion, 
@@ -30,11 +29,5 @@ exports:
                        _XML_SetStartDoctypeDeclHandler, _XML_SetStartElementHandler, 
                        _XML_SetStartNamespaceDeclHandler, _XML_SetUnknownEncodingHandler, 
                        _XML_SetUnparsedEntityDeclHandler, _XML_SetUserData, _XML_SetXmlDeclHandler, 
-                       _XML_StopParser, _XML_UseForeignDTD, _XML_UseParserAsHandlerArg, 
-                       _XmlGetUtf16InternalEncoding, _XmlGetUtf16InternalEncodingNS, 
-                       _XmlGetUtf8InternalEncoding, _XmlGetUtf8InternalEncodingNS, 
-                       _XmlInitEncoding, _XmlInitEncodingNS, _XmlInitUnknownEncoding, 
-                       _XmlInitUnknownEncodingNS, _XmlParseXmlDecl, _XmlParseXmlDeclNS, 
-                       _XmlPrologStateInit, _XmlPrologStateInitExternalEntity, _XmlSizeOfUnknownEncoding, 
-                       _XmlUtf16Encode, _XmlUtf8Encode, _align_limit_to_full_utf8_characters ]
+                       _XML_StopParser, _XML_UseForeignDTD, _XML_UseParserAsHandlerArg ]
 ...

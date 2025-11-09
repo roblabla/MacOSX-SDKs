@@ -1,3 +1,4 @@
+#if (defined(USE_AUDIOTOOLBOX_PUBLIC_HEADERS) && USE_AUDIOTOOLBOX_PUBLIC_HEADERS) || !__has_include(<AudioToolboxCore/AudioUnitUtilities.h>)
 /*!
 	@file		AudioUnitUtilities.h
 	@framework	AudioToolbox.framework
@@ -28,11 +29,7 @@
 #define AudioToolbox_AudioUnitUtilities_h
 
 #include <Availability.h>
-#if !defined(__COREAUDIO_USE_FLAT_INCLUDES__)
-    #include <AudioToolbox/AudioUnit.h>
-#else
-    #include <AudioUnit.h>
-#endif
+#include <AudioToolbox/AudioUnit.h>
 #ifdef __BLOCKS__
     #include <dispatch/dispatch.h>
 #endif
@@ -84,7 +81,6 @@ typedef CF_ENUM(UInt32, AudioUnitEventType) {
 /*!
     @typedef        AUParameterListenerRef
     @abstract       An object which receives notifications of Audio Unit parameter value changes.
-    @discussion
 */
 typedef struct AUListenerBase *AUParameterListenerRef;
     // opaque
@@ -102,9 +98,9 @@ typedef AUParameterListenerRef AUEventListenerRef;
 /*!
     @struct     AudioUnitEvent
     @abstract   Describes a change to an Audio Unit's state.
-    @field      mEventType
+    @var        mEventType
         The type of event.
-    @field      mArgument
+    @var        mArgument
         Specifies the parameter or property which has changed.
 */  
 struct AudioUnitEvent {
@@ -262,7 +258,6 @@ AUListenerCreate(                   AUParameterListenerProc         inProc,
     @abstract   Dispose a parameter listener object.
     @param      inListener
                     The parameter listener to dispose.
-    @discussion 
 */
 extern OSStatus
 AUListenerDispose(                  AUParameterListenerRef          inListener)     API_AVAILABLE(macos(10.2), ios(6.0), watchos(2.0), tvos(9.0));
@@ -297,7 +292,6 @@ AUListenerAddParameter(             AUParameterListenerRef          inListener,
                     The object which is no longer interested in the value of the parameter.
     @param      inParameter
                     The parameter whose value changes are to stop generating callbacks.
-    @discussion 
 */
 extern OSStatus
 AUListenerRemoveParameter(          AUParameterListenerRef          inListener, 
@@ -539,7 +533,6 @@ AUEventListenerNotify(              AUEventListenerRef __nullable  inSendingList
                     the supplied linear value to a value that is natural to that parameter.
     @result
                 The converted parameter value, in the parameter's natural units.
-    @discussion 
 */
 extern AudioUnitParameterValue
 AUParameterValueFromLinear(         Float32                     inLinearValue,      // 0-1
@@ -557,7 +550,6 @@ AUParameterValueFromLinear(         Float32                     inLinearValue,  
                     the supplied parameter value to a corresponding linear value.
     @result
                 A number 0.0-1.0.
-    @discussion 
 */
 extern Float32
 AUParameterValueToLinear(           AudioUnitParameterValue     inParameterValue,
@@ -608,3 +600,6 @@ AUParameterFormatValue(             Float64                     inParameterValue
 CF_ASSUME_NONNULL_END
 
 #endif // AudioToolbox_AudioUnitUtilities_h
+#else
+#include <AudioToolboxCore/AudioUnitUtilities.h>
+#endif

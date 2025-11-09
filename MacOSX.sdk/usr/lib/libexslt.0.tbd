@@ -1,11 +1,10 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 24E42113-9B18-39D3-B071-203CAC1E17D6' ]
+uuids:           [ 'x86_64: 673F5117-1895-3AAD-889B-CA9D878F23A6' ]
 platform:        macosx
-install-name:    /usr/lib/libexslt.0.dylib
+install-name:    '/usr/lib/libexslt.0.dylib'
 current-version: 9.15
 compatibility-version: 9
-objc-constraint: none
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _exsltCommonRegister, _exsltDateRegister, _exsltDateXpathCtxtRegister, 

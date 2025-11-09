@@ -1,47 +1,24 @@
 /*
  NSTouchBar.h
  Application Kit
- Copyright (c) 2015-2018, Apple Inc.
+ Copyright (c) 2015-2019, Apple Inc.
  All rights reserved.
 */
 
-#import <AppKit/NSResponder.h>
-#import <AppKit/NSApplication.h>
 #import <AppKit/NSTouchBarItem.h>
+#if !TARGET_OS_IPHONE
+#import <AppKit/NSApplication.h>
+#import <AppKit/NSResponder.h>
+#endif
 
 NS_ASSUME_NONNULL_BEGIN
 
-typedef NSString * NSTouchBarCustomizationIdentifier NS_SWIFT_BRIDGED_TYPEDEF;
+typedef NSString * NSTouchBarCustomizationIdentifier NS_SWIFT_BRIDGED_TYPEDEF API_AVAILABLE(ios(13.0));
 
 @protocol NSTouchBarDelegate, NSTouchBarProvider;
 
-NS_CLASS_AVAILABLE_MAC(10_12_2)
-@interface NSTouchBar : NSObject <NSCoding> {
-@private
-    id _configuration APPKIT_IVAR;
-
-    NSTouchBarItemIdentifier _principalItemIdentifier APPKIT_IVAR;
-    
-    NSSet<NSTouchBarItem *> *_templateItems APPKIT_IVAR;
-    
-    __weak id <NSTouchBarDelegate> _delegate APPKIT_IVAR;
-    
-    NSMutableDictionary *_itemCache APPKIT_IVAR;
-    
-    NSInteger _visibilityCount APPKIT_IVAR;
-    
-    unsigned _isBuildingItems:1 APPKIT_IVAR;
-    
-    unsigned _suppressesLessFocusedTouchBars:1 APPKIT_IVAR;
-    unsigned _suppressesMoreFocusedTouchBars:1 APPKIT_IVAR;
-    unsigned _suppressedByLessFocusedTouchBars:1 APPKIT_IVAR;
-    unsigned _suppressedByMoreFocusedTouchBars:1 APPKIT_IVAR;
-    
-    id _fbReserved APPKIT_IVAR;
-#if !__OBJC2__
-    void *_touchBarReserved[4] __unused APPKIT_IVAR;
-#endif /* !__OBJC2__ */
-}
+API_AVAILABLE(macos(10.12.2), ios(13.0))
+@interface NSTouchBar : NSObject <NSCoding>
 
 /* 
     -init is a designated initializer.
@@ -51,7 +28,7 @@ NS_CLASS_AVAILABLE_MAC(10_12_2)
 /* 
     -initWithCoder: is also a designated initializer.
 */
-- (nullable instancetype)initWithCoder:(NSCoder *)aDecoder NS_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithCoder:(NSCoder *)coder NS_DESIGNATED_INITIALIZER;
 
 /* 
     A string uniquely identifying this bar for customization purposes. All bars with this identifier will have their items coordinated automatically during customization or instantiation.
@@ -139,8 +116,14 @@ NS_CLASS_AVAILABLE_MAC(10_12_2)
 */
 @property (readonly, getter=isVisible) BOOL visible;
 
+/*
+ Convenience method for the NSApp's automaticCustomizeTouchBarMenuItemEnabled property.
+ */
+@property (class, getter=isAutomaticCustomizeTouchBarMenuItemEnabled) BOOL automaticCustomizeTouchBarMenuItemEnabled API_AVAILABLE(macos(10.15), ios(13.0));
+
 @end
 
+API_AVAILABLE(ios(13.0))
 @protocol NSTouchBarDelegate <NSObject>
 @optional
 /*
@@ -181,34 +164,36 @@ NS_CLASS_AVAILABLE_MAC(10_12_2)
 
     NSTouchBars can be nested by including the special NSTouchBarItemIdentifierOtherItemsProxy item identifier. This allows more broadly scoped NSTouchBars (closer to the app delegate) to also display the contents of more narrowly scoped NSTouchBars (closer to the first responder.) If an NSTouchBar omits the special NSTouchBarItemIdentifierOtherItemsProxy item identifier, it will be hidden if a more narrowly scoped NSTouchBar is provided.
 */
+API_AVAILABLE(ios(13.0))
 @protocol NSTouchBarProvider <NSObject>
 @required
 /*
     The basic method for providing an NSTouchBar. AppKit will key value observe this property, if for some reason you wish to replace a live NSTouchBar wholesale.
     Note that many subclasses of NSResponder already implement this method and conform to this protocol.
 */
-@property (strong, readonly, nullable) NSTouchBar *touchBar NS_AVAILABLE_MAC(10_12_2);
+@property (strong, readonly, nullable) NSTouchBar *touchBar API_AVAILABLE(macos(10.12.2));
 @end
 
+#if !TARGET_OS_IPHONE
 @interface NSResponder (NSTouchBarProvider) <NSTouchBarProvider>
 /*
     The NSTouchBar object associated with this responder. If no NSTouchBar is explicitly set, NSResponder will send -makeTouchBar to itself to create the default NSTouchBar for this responder. This property is archived.
 */
-@property (strong, readwrite, nullable) NSTouchBar *touchBar NS_AVAILABLE_MAC(10_12_2);
+@property (strong, readwrite, nullable) NSTouchBar *touchBar API_AVAILABLE(macos(10.12.2));
 
 /*
     Subclasses should over-ride this method to create and configure the default NSTouchBar for this responder.
 */
-- (nullable NSTouchBar *)makeTouchBar NS_AVAILABLE_MAC(10_12_2);
+- (nullable NSTouchBar *)makeTouchBar API_AVAILABLE(macos(10.12.2));
 @end
-
 
 @interface NSApplication (NSTouchBarCustomization)
 /// Whether or not a menu item to customize the NSTouchBar can be automatically added to the main menu. It will only actually be added when Touch Bar hardware or simulator is present. Defaults to NO. Setting this property to YES is the recommended way to add the customization menu item. But if non-standard placement of the menu item is needed, creating a menu item with an action of `toggleTouchBarCustomizationPalette:` can be used instead.
-@property (getter=isAutomaticCustomizeTouchBarMenuItemEnabled) BOOL automaticCustomizeTouchBarMenuItemEnabled NS_AVAILABLE_MAC(10_12_2);
+@property (getter=isAutomaticCustomizeTouchBarMenuItemEnabled) BOOL automaticCustomizeTouchBarMenuItemEnabled API_AVAILABLE(macos(10.12.2));
 
 /// Show or dismiss the customization palette for the currently displayed NSTouchBars. NSApplication validates this selector against whether the current NSTouchBars are customizable and, if configured on a menu item, will standardize and localize the title. If the current system does not have Touch Bar support, the menu item will be automatically hidden.
-- (IBAction)toggleTouchBarCustomizationPalette:(nullable id)sender NS_AVAILABLE_MAC(10_12_2);
+- (IBAction)toggleTouchBarCustomizationPalette:(nullable id)sender API_AVAILABLE(macos(10.12.2));
 @end
+#endif
 
 NS_ASSUME_NONNULL_END

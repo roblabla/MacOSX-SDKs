@@ -27,7 +27,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class AVCompositionTrackSegmentInternal;
 
-NS_CLASS_AVAILABLE(10_7, 4_0)
+API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0))
 @interface AVCompositionTrackSegment : AVAssetTrackSegment
 {
 @private

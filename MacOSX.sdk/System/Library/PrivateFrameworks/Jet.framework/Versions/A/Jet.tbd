@@ -1,15 +1,15 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 35F80579-653D-3999-A39E-D484BCC8916A' ]
+uuids:           [ 'x86_64: 6D54B9CE-E230-32F4-B54A-E195AA26026A' ]
 platform:        macosx
-install-name:    /System/Library/PrivateFrameworks/Jet.framework/Versions/A/Jet
+install-name:    '/System/Library/PrivateFrameworks/Jet.framework/Versions/A/Jet'
+current-version: 8.14
 exports:         
   - archs:           [ x86_64 ]
-    symbols:         [ _JetVersionNumber, _JetVersionString, __Z10jet_assertbP8NSString, 
-                       __Z13xglCheckErrorv, __Z13xglPrintErrorv, __Z13xglPrintFloatPKcj, 
-                       __Z13xglPrintStatev, __Z14jet_util_isPOTjj, __Z14xglLinkProgramj, 
-                       __Z15xglPrintBooleanPKcj, __Z15xglPrintIntegerPKcj, __Z16floatToHalfFloatf, 
-                       __Z16mach_time_in_secv, __Z16xglAssertNoErrorv, __Z16xglCompileShaderPjjPKcPPNSt3__112basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEE, 
+    symbols:         [ __Z10jet_assertbP8NSString, __Z13xglCheckErrorv, __Z13xglPrintErrorv, 
+                       __Z13xglPrintFloatPKcj, __Z13xglPrintStatev, __Z14jet_util_isPOTjj, 
+                       __Z14xglLinkProgramj, __Z15xglPrintBooleanPKcj, __Z15xglPrintIntegerPKcj, 
+                       __Z16floatToHalfFloatf, __Z16xglAssertNoErrorv, __Z16xglCompileShaderPjjPKcPPNSt3__112basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEE, 
                        __Z17jet_createContextv, __Z18jet_getClientLabelv, __Z18jet_setClientLabelP8NSString, 
                        __Z18xglValidateProgramj, __Z19jet_createGLContextP15NSOpenGLContext, 
                        __Z19xglPrintFramebufferv, __Z20jet_isMetalSupportedv, __Z20xglPrintVertexAttribj, 
@@ -134,6 +134,7 @@ exports:
                        __ZN17jet_context_Metal20set_fragment_samplerEP11jet_sampleri, 
                        __ZN17jet_context_Metal20set_fragment_textureEP11jet_texturei, 
                        __ZN17jet_context_Metal21set_fragment_constantEP12jet_constanti, 
+                       __ZN17jet_context_Metal21set_scheduled_handlerENSt3__18functionIFvvEEE, 
                        __ZN17jet_context_Metal21submit_command_bufferEP18jet_command_buffer, 
                        __ZN17jet_context_Metal22use_depth_stencil_modeEP22jet_depth_stencil_mode, 
                        __ZN17jet_context_Metal25create_depth_stencil_modeEb19jet_compare_fuctionP16jet_stencil_modeS2_, 
@@ -213,32 +214,5 @@ exports:
                        __ZTV15jet_buffer_pool, __ZTV15jet_framebuffer, __ZTV15jet_render_mode, 
                        __ZTV16jet_stencil_mode, __ZTV17jet_context_Metal, __ZTV18jet_context_OpenGL, 
                        __ZTV22jet_depth_stencil_mode, __ZTV9jet_fence ]
-    objc-classes:    [ JetView ]
-    weak-def-symbols: [ __ZTI12jet_function, __ZTI13jet_render_op, __ZTI15jet_fence_Metal, 
-                        __ZTI16jet_buffer_Metal, __ZTI16jet_fence_OpenGL, __ZTI17jet_buffer_OpenGL, 
-                        __ZTI17jet_program_Metal, __ZTI17jet_sampler_Metal, __ZTI17jet_texture_Metal, 
-                        __ZTI18jet_command_buffer, __ZTI18jet_constant_Metal, __ZTI18jet_function_Metal, 
-                        __ZTI18jet_program_OpenGL, __ZTI18jet_sampler_OpenGL, __ZTI18jet_texture_OpenGL, 
-                        __ZTI19jet_constant_OpenGL, __ZTI19jet_function_OpenGL, __ZTI21jet_buffer_pool_Metal, 
-                        __ZTI21jet_framebuffer_Metal, __ZTI21jet_render_mode_Metal, 
-                        __ZTI22jet_buffer_pool_OpenGL, __ZTI22jet_framebuffer_OpenGL, 
-                        __ZTI22jet_render_mode_OpenGL, __ZTI22jet_stencil_mode_Metal, 
-                        __ZTI23jet_stencil_mode_OpenGL, __ZTI28jet_depth_stencil_mode_Metal, 
-                        __ZTI29jet_depth_stencil_mode_OpenGL, __ZTINSt3__117bad_function_callE, 
-                        __ZTINSt3__120__shared_ptr_pointerIP15jet_fence_MetalNS_14default_deleteIS1_EENS_9allocatorIS1_EEEE, 
-                        __ZTINSt3__120__shared_ptr_pointerIP16jet_fence_OpenGLNS_14default_deleteIS1_EENS_9allocatorIS1_EEEE, 
-                        __ZTS12jet_function, __ZTS13jet_render_op, __ZTS15jet_fence_Metal, 
-                        __ZTS16jet_buffer_Metal, __ZTS16jet_fence_OpenGL, __ZTS17jet_buffer_OpenGL, 
-                        __ZTS17jet_program_Metal, __ZTS17jet_sampler_Metal, __ZTS17jet_texture_Metal, 
-                        __ZTS18jet_command_buffer, __ZTS18jet_constant_Metal, __ZTS18jet_function_Metal, 
-                        __ZTS18jet_program_OpenGL, __ZTS18jet_sampler_OpenGL, __ZTS18jet_texture_OpenGL, 
-                        __ZTS19jet_constant_OpenGL, __ZTS19jet_function_OpenGL, __ZTS21jet_buffer_pool_Metal, 
-                        __ZTS21jet_framebuffer_Metal, __ZTS21jet_render_mode_Metal, 
-                        __ZTS22jet_buffer_pool_OpenGL, __ZTS22jet_framebuffer_OpenGL, 
-                        __ZTS22jet_render_mode_OpenGL, __ZTS22jet_stencil_mode_Metal, 
-                        __ZTS23jet_stencil_mode_OpenGL, __ZTS28jet_depth_stencil_mode_Metal, 
-                        __ZTS29jet_depth_stencil_mode_OpenGL, __ZTSNSt3__114default_deleteI15jet_fence_MetalEE, 
-                        __ZTSNSt3__114default_deleteI16jet_fence_OpenGLEE, __ZTSNSt3__117bad_function_callE, 
-                        __ZTSNSt3__120__shared_ptr_pointerIP15jet_fence_MetalNS_14default_deleteIS1_EENS_9allocatorIS1_EEEE, 
-                        __ZTSNSt3__120__shared_ptr_pointerIP16jet_fence_OpenGLNS_14default_deleteIS1_EENS_9allocatorIS1_EEEE ]
+    weak-def-symbols: [ __ZTINSt3__117bad_function_callE, __ZTSNSt3__117bad_function_callE ]
 ...

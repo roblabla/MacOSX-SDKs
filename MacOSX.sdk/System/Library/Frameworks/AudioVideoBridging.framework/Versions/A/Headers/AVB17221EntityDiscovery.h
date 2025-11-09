@@ -2,7 +2,7 @@
 //  AVB17221EntityDiscovery.h
 //  AudioVideoBridging
 //
-//  Copyright (c) 2010-2014 Apple Inc. All rights reserved.
+//  Copyright (c) 2010-2019 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -28,22 +28,16 @@ NS_ASSUME_NONNULL_BEGIN
 				the discoveryDelegate should be set and the primeIterators method should be called. Until 
 				primeIterators is called, no entities will be discovered.
  */
-NS_CLASS_AVAILABLE(10_8, NA)
+API_AVAILABLE(macos(10.8))
 @interface AVB17221EntityDiscovery : NSObject
 {
 	@private
 	io_connect_t connection;
 	
-#if AVB_LEGACY_OBJC_RUNTIME
-	NSString *interfaceName;
-	AVBInterface *interface;
-	
-	id <AVB17221EntityDiscoveryDelegate> discoveryDelegate;
-#endif
-	
 	IONotificationPortRef notificationPort;
 	
 	dispatch_queue_t callbackQueue;
+	dispatch_queue_t callbackActionQueue;
 	
 	io_iterator_t localArrivalIterator;
 	io_iterator_t localDepartureIterator;
@@ -123,16 +117,6 @@ NS_CLASS_AVAILABLE(10_8, NA)
 - (BOOL)removeLocalEntity:(uint64_t)guid error:(NSError **)error;
 
 /*!
-	@method		changeEntityWithGUID:toNewASGrandmasterID:
-	@abstract	Change the as_grandmaster_id value of the entity when the grandmaster changes.
-	@param		entityGUID		The GUID of the entity to change.
-	@param		asGrandmasterID	The new IEEE Std 802.1AS grandmaster ID.
-	@param		error			If the request couldn't be completed, on return it contains an instance of NSError that describes the reason why.
-	@result		A boolean indicating if the entity was updated.
- */
-- (BOOL)changeEntityWithGUID:(uint64_t)entityGUID toNewASGrandmasterID:(uint64_t)asGrandmasterID error:(NSError **)error NS_DEPRECATED(10_8, 10_9, NA, NA);
-
-/*!
 	@method		changeEntityWithEntityID:toNewGPTPGrandmasterID:
 	@abstract	Change the gptp_grandmaster_id value of the entity when the grandmaster changes.
 	@param		entityID		The entity_id of the entity to change.
@@ -140,7 +124,7 @@ NS_CLASS_AVAILABLE(10_8, NA)
 	@param		error			If the request couldn't be completed, on return it contains an instance of NSError that describes the reason why.
 	@result		A boolean indicating if the entity was updated.
  */
-- (BOOL)changeEntityWithEntityID:(uint64_t)entityID toNewGPTPGrandmasterID:(uint64_t)gPTPGrandmasterID error:(NSError **)error NS_AVAILABLE(10_9, NA);
+- (BOOL)changeEntityWithEntityID:(uint64_t)entityID toNewGPTPGrandmasterID:(uint64_t)gPTPGrandmasterID error:(NSError **)error API_AVAILABLE(macos(10.9));
 
 @end
 

@@ -34,6 +34,9 @@ typedef NSString * CIRAWFilterOption NS_TYPED_ENUM;
  as well as the root properties attachment from the CMSampleBufferRef. */
 + (CIFilter *)filterWithCVPixelBuffer:(CVPixelBufferRef)pixelBuffer properties:(NSDictionary *)properties options:(NSDictionary<CIRAWFilterOption, id> *)options NS_AVAILABLE(10_12, 10_0);
 
+/** Returns a NSArray containing the names of all supported RAW cameras. */
++ (NSArray<NSString*> *) supportedRawCameraModels NS_AVAILABLE(10_15,13_0);
+
 /** NSNumber (BOOL) : Setting Draft Mode to YES can improve image decoding speed without minimal loss of quality.
     The default value is NO. */
 CORE_IMAGE_EXPORT CIRAWFilterOption const kCIInputAllowDraftModeKey NS_AVAILABLE(10_5, 10_0);
@@ -126,6 +129,10 @@ CORE_IMAGE_EXPORT CIRAWFilterOption const kCIInputNoiseReductionContrastAmountKe
 
 /** NSNumber (double) : The amount of noise reduction detail applied. Range is 0 to 1. */
 CORE_IMAGE_EXPORT CIRAWFilterOption const kCIInputNoiseReductionDetailAmountKey NS_AVAILABLE(10_10, 10_0);
+
+
+/** NSNumber (BOOL) : Allows the output to have an Extended Dynamic Range with values greater than 1 possible */
+CORE_IMAGE_EXPORT NSString *const kCIInputEnableEDRModeKey NS_AVAILABLE(10_14, 12_0);
 
 
 

@@ -1,9 +1,8 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 4BCDADBF-79F5-3829-B47D-64DA0D44BCBF' ]
-platform:        macosx
-install-name:    /usr/lib/system/libcopyfile.dylib
-objc-constraint: none
+uuids:           [ 'x86_64: 70326785-B1AD-3FD9-90E2-AD4A3EE63855', 'x86_64: 70326785-B1AD-3FD9-90E2-AD4A3EE63855' ]
+platform:        zippered
+install-name:    '/usr/lib/system/libcopyfile.dylib'
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _copyfile, _copyfile_state_alloc, _copyfile_state_free, _copyfile_state_get, 

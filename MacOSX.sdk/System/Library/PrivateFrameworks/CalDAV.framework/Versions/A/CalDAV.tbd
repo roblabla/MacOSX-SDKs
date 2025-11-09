@@ -1,9 +1,9 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 30C9E6DF-FF9F-396C-AFE1-070329E09B68' ]
-platform:        macosx
-install-name:    /System/Library/PrivateFrameworks/CalDAV.framework/Versions/A/CalDAV
-current-version: 265
+uuids:           [ 'x86_64: F2400744-3DF1-3DF5-9816-2A906D08A95D', 'x86_64: F2400744-3DF1-3DF5-9816-2A906D08A95D' ]
+platform:        zippered
+install-name:    '/System/Library/PrivateFrameworks/CalDAV.framework/Versions/A/CalDAV'
+current-version: 787
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _CalDAVComplianceClass_AutoSchedule, _CalDAVComplianceClass_CalendarAudit, 
@@ -109,8 +109,9 @@ exports:
                        CalDAVPostStreamTask, CalDAVPostWithSharedAsResponse, CalDAVPrincipalEmailDetailsResult, 
                        CalDAVPrincipalPropertySearchTask, CalDAVPrincipalSearchPropertySet, 
                        CalDAVPrincipalSearchSupport, CalDAVPropPatchWithFallbackTaskGroup, 
-                       CalDAVPutCalendarItemTask, CalDAVReplyToSharedCalendarInvitationTaskGroup, 
-                       CalDAVReportJunkTaskGroup, CalDAVResourceTypeItem, CalDAVRetrieveSharedCalendarShareesTaskGroup, 
+                       CalDAVPutCalendarItemTask, CalDAVRecurrenceSplitAction, CalDAVRecurrenceSplitTaskGroup, 
+                       CalDAVReplyToSharedCalendarInvitationTaskGroup, CalDAVReportJunkTaskGroup, 
+                       CalDAVResourceTypeItem, CalDAVRetrieveSharedCalendarShareesTaskGroup, 
                        CalDAVScheduleCalendarTranspItem, CalDAVScheduleResponseDetailsItem, 
                        CalDAVScheduleResponseItem, CalDAVScheduleTask, CalDAVServerVersion, 
                        CalDAVSetOfficeHoursTaskGroup, CalDAVSupportedCalendarComponentSet, 

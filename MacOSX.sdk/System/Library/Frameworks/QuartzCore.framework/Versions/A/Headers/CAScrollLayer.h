@@ -7,7 +7,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-typedef NSString * CAScrollLayerScrollMode NS_STRING_ENUM;
+typedef NSString * CAScrollLayerScrollMode NS_TYPED_ENUM;
 
 API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0))
 @interface CAScrollLayer : CALayer

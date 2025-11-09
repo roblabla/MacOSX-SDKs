@@ -22,6 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
  
  @discussion To use this class, create an instance of the CANetworkBrowserWindowController, initialize it, and call showWindow: to display the UI.
  */
+API_AVAILABLE(macos(10.11)) API_UNAVAILABLE(ios, tvos, watchos)
 @interface CANetworkBrowserWindowController : NSWindowController {
 @private
     CANetworkBrowserImpl *_impl;

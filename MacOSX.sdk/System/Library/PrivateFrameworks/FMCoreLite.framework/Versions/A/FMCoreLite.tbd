@@ -1,8 +1,8 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 2BC50179-CDF8-3968-BF89-2DBA0BECA028' ]
-platform:        macosx
-install-name:    /System/Library/PrivateFrameworks/FMCoreLite.framework/Versions/A/FMCoreLite
+uuids:           [ 'x86_64: EB1F3E02-56E2-31BE-9227-8CAC78A8BEBE', 'x86_64: EB1F3E02-56E2-31BE-9227-8CAC78A8BEBE' ]
+platform:        zippered
+install-name:    '/System/Library/PrivateFrameworks/FMCoreLite.framework/Versions/A/FMCoreLite'
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _FMAlertCategoryNone, _FMEmptyResult, _FMErrorDomain, _FMFutureCallbackStack, 
@@ -12,5 +12,6 @@ exports:
     objc-classes:    [ FMAlert, FMCancelationToken, FMConcurrentMutableArray, FMConcurrentMutableDictionary, 
                        FMDataArchiver, FMFuture, FMInternalFileContainer, FMPair, 
                        FMPreferencesUtil, FMPromise, FMQueue, FMReadWriteLock, FMScheduler, 
-                       FMSharedFileContainer, FMSynchronizer, FMValueThrottler, _FMLazyFuture ]
+                       FMSharedFileContainer, FMSynchronizer, FMValueThrottler, FMXPCServiceDescription, 
+                       FMXPCSession, FMXPCTimer, _FMLazyFuture ]
 ...

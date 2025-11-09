@@ -8,6 +8,10 @@
 #ifndef _FORCEFEEDBACKCONSTANTS_H_
 #define _FORCEFEEDBACKCONSTANTS_H_
 
+#ifndef __MACTYPES__
+#include <MacTypes.h>
+#endif
+
 #if PRAGMA_ONCE
 #pragma once
 #endif

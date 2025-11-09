@@ -21,6 +21,7 @@ CF_ASSUME_NONNULL_BEGIN
 IMAGEIO_EXTERN const CFStringRef kCGImagePropertyTIFFDictionary  IMAGEIO_AVAILABLE_STARTING(10.4, 4.0);
 IMAGEIO_EXTERN const CFStringRef kCGImagePropertyGIFDictionary  IMAGEIO_AVAILABLE_STARTING(10.4, 4.0);
 IMAGEIO_EXTERN const CFStringRef kCGImagePropertyJFIFDictionary  IMAGEIO_AVAILABLE_STARTING(10.4, 4.0);
+IMAGEIO_EXTERN const CFStringRef kCGImagePropertyHEICSDictionary  IMAGEIO_AVAILABLE_STARTING(10.15, 13.0);
 IMAGEIO_EXTERN const CFStringRef kCGImagePropertyExifDictionary  IMAGEIO_AVAILABLE_STARTING(10.4, 4.0);
 IMAGEIO_EXTERN const CFStringRef kCGImagePropertyPNGDictionary  IMAGEIO_AVAILABLE_STARTING(10.4, 4.0);
 IMAGEIO_EXTERN const CFStringRef kCGImagePropertyIPTCDictionary  IMAGEIO_AVAILABLE_STARTING(10.4, 4.0);
@@ -154,6 +155,14 @@ IMAGEIO_EXTERN const CFStringRef kCGImagePropertyJFIFYDensity  IMAGEIO_AVAILABLE
 IMAGEIO_EXTERN const CFStringRef kCGImagePropertyJFIFDensityUnit  IMAGEIO_AVAILABLE_STARTING(10.4, 4.0);
 IMAGEIO_EXTERN const CFStringRef kCGImagePropertyJFIFIsProgressive  IMAGEIO_AVAILABLE_STARTING(10.4, 4.0);
 
+/* Possible keys for kCGImagePropertyHEICSDictionary */
+
+IMAGEIO_EXTERN const CFStringRef kCGImagePropertyHEICSLoopCount  IMAGEIO_AVAILABLE_STARTING(10.15, 13.0);
+IMAGEIO_EXTERN const CFStringRef kCGImagePropertyHEICSDelayTime  IMAGEIO_AVAILABLE_STARTING(10.15, 13.0);
+IMAGEIO_EXTERN const CFStringRef kCGImagePropertyHEICSUnclampedDelayTime  IMAGEIO_AVAILABLE_STARTING(10.15, 13.0);
+IMAGEIO_EXTERN const CFStringRef kCGImagePropertyHEICSCanvasPixelWidth IMAGEIO_AVAILABLE_STARTING(10.15, 13.0);
+IMAGEIO_EXTERN const CFStringRef kCGImagePropertyHEICSCanvasPixelHeight IMAGEIO_AVAILABLE_STARTING(10.15, 13.0);
+IMAGEIO_EXTERN const CFStringRef kCGImagePropertyHEICSFrameInfoArray  IMAGEIO_AVAILABLE_STARTING(10.15, 13.0);
 
 /* Possible keys for kCGImagePropertyExifDictionary */
 
@@ -172,6 +181,9 @@ IMAGEIO_EXTERN const CFStringRef kCGImagePropertyExifISOSpeedLatitudezzz  IMAGEI
 IMAGEIO_EXTERN const CFStringRef kCGImagePropertyExifVersion  IMAGEIO_AVAILABLE_STARTING(10.4, 4.0);
 IMAGEIO_EXTERN const CFStringRef kCGImagePropertyExifDateTimeOriginal  IMAGEIO_AVAILABLE_STARTING(10.4, 4.0);
 IMAGEIO_EXTERN const CFStringRef kCGImagePropertyExifDateTimeDigitized  IMAGEIO_AVAILABLE_STARTING(10.4, 4.0);
+IMAGEIO_EXTERN const CFStringRef kCGImagePropertyExifOffsetTime  IMAGEIO_AVAILABLE_STARTING(10.15, 13.0);
+IMAGEIO_EXTERN const CFStringRef kCGImagePropertyExifOffsetTimeOriginal  IMAGEIO_AVAILABLE_STARTING(10.15, 13.0);
+IMAGEIO_EXTERN const CFStringRef kCGImagePropertyExifOffsetTimeDigitized  IMAGEIO_AVAILABLE_STARTING(10.15, 13.0);
 IMAGEIO_EXTERN const CFStringRef kCGImagePropertyExifComponentsConfiguration  IMAGEIO_AVAILABLE_STARTING(10.4, 4.0);
 IMAGEIO_EXTERN const CFStringRef kCGImagePropertyExifCompressedBitsPerPixel  IMAGEIO_AVAILABLE_STARTING(10.4, 4.0);
 IMAGEIO_EXTERN const CFStringRef kCGImagePropertyExifShutterSpeedValue  IMAGEIO_AVAILABLE_STARTING(10.4, 4.0);
@@ -248,6 +260,9 @@ IMAGEIO_EXTERN const CFStringRef kCGImagePropertyGIFDelayTime  IMAGEIO_AVAILABLE
 IMAGEIO_EXTERN const CFStringRef kCGImagePropertyGIFImageColorMap  IMAGEIO_AVAILABLE_STARTING(10.4, 4.0);
 IMAGEIO_EXTERN const CFStringRef kCGImagePropertyGIFHasGlobalColorMap  IMAGEIO_AVAILABLE_STARTING(10.4, 4.0);
 IMAGEIO_EXTERN const CFStringRef kCGImagePropertyGIFUnclampedDelayTime  IMAGEIO_AVAILABLE_STARTING(10.7, 4.0);
+IMAGEIO_EXTERN const CFStringRef kCGImagePropertyGIFCanvasPixelWidth  IMAGEIO_AVAILABLE_STARTING(10.15, 13.0);
+IMAGEIO_EXTERN const CFStringRef kCGImagePropertyGIFCanvasPixelHeight  IMAGEIO_AVAILABLE_STARTING(10.15, 13.0);
+IMAGEIO_EXTERN const CFStringRef kCGImagePropertyGIFFrameInfoArray  IMAGEIO_AVAILABLE_STARTING(10.15, 13.0);
 
 /* Possible keys for kCGImagePropertyPNGDictionary */
 
@@ -272,6 +287,9 @@ IMAGEIO_EXTERN const CFStringRef kCGImagePropertyPNGYPixelsPerMeter  IMAGEIO_AVA
 IMAGEIO_EXTERN const CFStringRef kCGImagePropertyAPNGLoopCount  IMAGEIO_AVAILABLE_STARTING(10.10, 8.0);
 IMAGEIO_EXTERN const CFStringRef kCGImagePropertyAPNGDelayTime  IMAGEIO_AVAILABLE_STARTING(10.10, 8.0);
 IMAGEIO_EXTERN const CFStringRef kCGImagePropertyAPNGUnclampedDelayTime  IMAGEIO_AVAILABLE_STARTING(10.10, 8.0);
+IMAGEIO_EXTERN const CFStringRef kCGImagePropertyAPNGFrameInfoArray IMAGEIO_AVAILABLE_STARTING(10.15, 13.0);
+IMAGEIO_EXTERN const CFStringRef kCGImagePropertyAPNGCanvasPixelWidth IMAGEIO_AVAILABLE_STARTING(10.15, 13.0);
+IMAGEIO_EXTERN const CFStringRef kCGImagePropertyAPNGCanvasPixelHeight IMAGEIO_AVAILABLE_STARTING(10.15, 13.0);
 
 /* Possible keys for kCGImagePropertyGPSDictionary */
 
@@ -721,7 +739,7 @@ IMAGEIO_EXTERN const CFStringRef  kCGImagePropertyOpenEXRAspectRatio  IMAGEIO_AV
 
 
 /* Possible int values for kCGImagePropertyTIFFOrientation */
-typedef CF_ENUM(uint32_t, CGImagePropertyOrientation) {
+typedef CF_CLOSED_ENUM(uint32_t, CGImagePropertyOrientation) {
     kCGImagePropertyOrientationUp = 1,        // 0th row at top,    0th column on left   - default orientation
     kCGImagePropertyOrientationUpMirrored,    // 0th row at top,    0th column on right  - horizontal flip
     kCGImagePropertyOrientationDown,          // 0th row at bottom, 0th column on right  - 180 deg rotation
@@ -759,6 +777,9 @@ IMAGEIO_EXTERN const CFStringRef kCGImageAuxiliaryDataTypeDepth IMAGEIO_AVAILABL
 IMAGEIO_EXTERN const CFStringRef kCGImageAuxiliaryDataTypeDisparity IMAGEIO_AVAILABLE_STARTING(10.13, 11.0);
 IMAGEIO_EXTERN const CFStringRef kCGImageAuxiliaryDataTypePortraitEffectsMatte IMAGEIO_AVAILABLE_STARTING(10.14, 12.0);
 
+IMAGEIO_EXTERN const CFStringRef kCGImageAuxiliaryDataTypeSemanticSegmentationSkinMatte IMAGEIO_AVAILABLE_STARTING(10.15, 13.0);
+IMAGEIO_EXTERN const CFStringRef kCGImageAuxiliaryDataTypeSemanticSegmentationHairMatte IMAGEIO_AVAILABLE_STARTING(10.15, 13.0);
+IMAGEIO_EXTERN const CFStringRef kCGImageAuxiliaryDataTypeSemanticSegmentationTeethMatte IMAGEIO_AVAILABLE_STARTING(10.15, 13.0);
 
 /* Depth/Disparity data support for JPEG, HEIF, and DNG images:
  * CGImageSourceCopyAuxiliaryDataInfoAtIndex and CGImageDestinationAddAuxiliaryDataInfo will use these keys in the dictionary:

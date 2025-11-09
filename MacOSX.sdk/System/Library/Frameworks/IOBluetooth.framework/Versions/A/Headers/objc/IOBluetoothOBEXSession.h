@@ -27,6 +27,7 @@
 
 #pragma mark === IOBluetoothOBEXSession ===
 
+API_UNAVAILABLE(ios, watchos, tvos)
 @interface IOBluetoothOBEXSession : OBEXSession <IOBluetoothRFCOMMChannelDelegate>
 {
 	/* All instance variables are protected. Use accessors to get to them if you need to. */

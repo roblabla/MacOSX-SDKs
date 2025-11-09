@@ -2,7 +2,7 @@
 //  INNoteContentTypeResolutionResult.h
 //  Intents
 //
-//  Copyright (c) 2016-2017 Apple Inc. All rights reserved.
+//  Copyright (c) 2016-2019 Apple Inc. All rights reserved.
 //
 
 #import <Intents/INIntentResolutionResult.h>
@@ -11,7 +11,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-API_AVAILABLE(ios(11.0), watchos(4.0))
+API_DEPRECATED("This resolution result is no longer used", ios(11.0, 13.0), watchos(4.0, 6.0))
 API_UNAVAILABLE(macosx)
 @interface INNoteContentTypeResolutionResult : INIntentResolutionResult
 

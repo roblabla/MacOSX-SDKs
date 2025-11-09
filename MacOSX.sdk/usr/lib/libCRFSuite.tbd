@@ -1,9 +1,8 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 62EDD39F-6D1B-334B-A9A2-5800714255BB' ]
-platform:        macosx
-install-name:    /usr/lib/libCRFSuite.dylib
-objc-constraint: none
+uuids:           [ 'x86_64: 75CAE6A9-B518-3C91-8707-4F0A0C3ED2C6', 'x86_64: 75CAE6A9-B518-3C91-8707-4F0A0C3ED2C6' ]
+platform:        zippered
+install-name:    '/usr/lib/libCRFSuite.dylib'
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _crf_content_copy, _crf_content_init, _crf_content_set, _crf_create_instance, 

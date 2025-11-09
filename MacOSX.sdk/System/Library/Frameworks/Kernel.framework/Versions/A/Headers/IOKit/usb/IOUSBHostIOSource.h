@@ -63,12 +63,31 @@ struct IOUSBHostCompletion
     void* parameter;
 };
 
+typedef void (*IOUSBHostBundledCompletionAction)(void *owner, uint32_t ioCompletionCount, IOMemoryDescriptor** dataBufferArray, void** parameter, IOReturn* statusArray, uint32_t* actualByteCountArray);
+
+/*!
+ * @struct      IOUSBHostBundledCompletion
+ * @discussion  Struture describing the completion callback for an asynchronous bulk, control, or interrupt IO operation
+ * @field       owner Pointer to an object that owns the transfer.  May be used as <code>this</code> for an action passed via OSMemberFunctionCast.
+ * @field       action IOUSBHostBundledCompletion to run when the IO request completes.
+ * @field       parameter Pointer to be used as context within the completion action.
+ */
+struct IOUSBHostBundledCompletion
+{
+    void* owner;
+    IOUSBHostBundledCompletionAction action;
+    void* parameter;
+};
+
+
+
 /*!
  * @struct      IOUSBHostIsochronousFrame
  * @discussion  Structure representing a single frame in an isochronous transfer.
  * @field       status Completion status for this individual frame.  IOUSBHostFamily will initialize this to kIOReturnInvalid and will update the field with a valid status code upon completion of the frame.
  * @field       requestCount The number of bytes requested to transfer for this frame.  This field must be initialized by the caller before this structure is submitted to IOUSBHostFamily.
  * @field       completeCount The number of bytes actually transferred for this frame.  IOUSBHostFamily will update this field upon completion of the frame.
+ * @field       reserved Reserved for future use.
  * @field       timeStamp The observed AbsoluteTime for this frame's completion.  Note that interrupt latency and system load may result in more than one frame completing with the same timestamp.
  */
 struct IOUSBHostIsochronousFrame
@@ -76,8 +95,9 @@ struct IOUSBHostIsochronousFrame
     IOReturn     status;
     uint32_t     requestCount;
     uint32_t     completeCount;
+    uint32_t     reserved;
     AbsoluteTime timeStamp;
-};
+} __attribute__((packed));
 
 typedef void (*IOUSBHostIsochronousCompletionAction)(void* owner, void* parameter, IOReturn status, IOUSBHostIsochronousFrame* frameList);
 
@@ -104,6 +124,36 @@ struct IOUSBHostIOSourceClientRecord
     UInt32                      outstandingIO;
     IOUSBHostIOSourceClientRecordLink link;
 };
+
+/*!
+ * @struct      tPacketFilterMetadata
+ * @discussion  Struture providing information about the IOUSBHostIOSource's parents
+ * @field       deviceAddress Address of the parent IOUSBHostDevice.
+ * @field       interfaceClass If enpointAddress is non-zero, the class of the parent IOUSBHostInteface.
+ * @field       interfaceSubClass If enpointAddress is non-zero, the sub-class of the parent IOUSBHostInteface.
+ * @field       interfaceProtocol If enpointAddress is non-zero, the protocol of the parent IOUSBHostInteface.
+ * @field       interfaceAltSetting Current alternate setting of the parent IOUSBHostInterface.
+ * @field       endpointAddress The address of the endpoint including the direction.
+ * @field       endpointType See tEndpointType in IOUSBHostFamily.h.
+ * @field       speed See tUSBHostConnectionSpeed in IOUSBHostFamily.h.
+ * @field       vid Vendor ID of the parent IOUSBHostDevice.
+ * @field       pid Product ID of the parent IOUSBHostDevice.
+ * @field       locationID USB locationID of the parent IOUSBHostDevice.
+ */
+struct tPacketFilterMetadata
+{
+    uint8_t  deviceAddress;
+    uint8_t  interfaceClass;
+    uint8_t  interfaceSubclass;
+    uint8_t  interfaceProtocol;
+    uint8_t  interfaceAltSetting;
+    uint8_t  endpointAddress;
+    uint8_t  endpointType;
+    uint8_t  speed;
+    uint16_t vid;
+    uint16_t pid;
+    uint32_t locationID;
+} __attribute__((packed));
 
 /*!
  * @class       IOUSBHostIOSource
@@ -273,9 +323,30 @@ public:
      * @return      IOReturn value indicating the result of the IO request
      */
     virtual IOReturn io(IOMemoryDescriptor* dataBuffer, uint32_t dataBufferLength, uint32_t& bytesTransferred, uint32_t completionTimeoutMs = 0);
+
+
+    OSMetaClassDeclareReservedUsed(IOUSBHostIOSource, 30);
+
+    /*!
+     * @brief       Enqueue an IO request on the source
+     * @discussion  This method is used to issue an asynchronous I/O request on a bulk or interrupt pipe that will trigger a IOUSBHostBundledCompletionAction callback.
+     *              I/O requests enqueued with this method may be completed in bundles that may reduce the total number of callbacks.
+     *              The 'ioCompletionCount'  callback parameter indicates the number of completed I/Os associated with this callback and the size of the
+     *              'dataBufferArray', 'statusArray' and' actualByteCountArray.  Clients must iterate over these arrays to extract the completion status/length
+     *              of each individual IOMemoryDescriptor.
+     *              See IOUSBHostPipe::io and IOUSBHostStream::io for object-specific interface notes.
+     * @param       dataBuffer IOMemoryDescriptor pointer containing the buffer to use for the transfer
+     * @param       dataBufferLength Length of the request.  Must be <= <code>dataBuffer->getLength()</code>
+     * @param       completion Pointer to a IOUSBHostBundledCompletion structure.  This will be copied and can therefore be stack-allocated.
+     * @param       completionTimeoutMs Timeout of the request in milliseconds.  If 0, the request will never timeout.  Must be 0 for interrupt pipes and streams.
+     * @return      kIOReuturnSuccess if the completion will be called in the future, otherwise error
+     */
+    virtual IOReturn io(IOMemoryDescriptor* dataBuffer, uint32_t dataBufferLength, IOUSBHostBundledCompletion* completion, uint32_t completionTimeoutMs = 0);
     
+    
+
+
     // Public pad slots for IO
-    OSMetaClassDeclareReservedUnused(IOUSBHostIOSource, 30);
     OSMetaClassDeclareReservedUnused(IOUSBHostIOSource, 31);
     OSMetaClassDeclareReservedUnused(IOUSBHostIOSource, 32);
     OSMetaClassDeclareReservedUnused(IOUSBHostIOSource, 33);
@@ -297,7 +368,6 @@ protected:
     OSMetaClassDeclareReservedUnused(IOUSBHostIOSource, 46);
     OSMetaClassDeclareReservedUnused(IOUSBHostIOSource, 47);
     OSMetaClassDeclareReservedUnused(IOUSBHostIOSource, 48);
-    OSMetaClassDeclareReservedUnused(IOUSBHostIOSource, 49);
     
 protected:
     struct tInternalDataTransferParameters
@@ -306,6 +376,7 @@ protected:
         uint32_t                        dataBufferLength;
         uint32_t*                       bytesTransferred;
         IOUSBHostCompletion*            completion;
+        IOUSBHostBundledCompletion*     bundledCompletion;
         uint32_t                        completionTimeoutMs;
         IOUSBHostIsochronousFrame*      frameList;
         uint32_t                        frameListCount;
@@ -313,11 +384,17 @@ protected:
         IOUSBHostIsochronousCompletion* isochronousCompletion;
     };
     
-    virtual IOReturn ioGated(tInternalDataTransferParameters& parameters);
+    OSMetaClassDeclareReservedUsed(IOUSBHostIOSource, 49);
+    virtual IOReturn ioBundledGated(tInternalDataTransferParameters& parameters);
     
+    virtual IOReturn ioGated(tInternalDataTransferParameters& parameters);
+
     struct tExpansionData
     {
         IOUSBHostIOSourceClientRecordList _ioRecordList;
+        tPacketFilterMetadata             _metadata;
+        void*                             _dkMemoryDescriptorRing;
+        IOCommandGate*                    _controllerCommandGate;
     };
     
     tExpansionData* _expansionData;

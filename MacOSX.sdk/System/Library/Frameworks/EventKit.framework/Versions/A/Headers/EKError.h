@@ -53,6 +53,11 @@ EVENTKIT_EXTERN NSString *const EKErrorDomain NS_AVAILABLE(10_8, 4_0);
     @constant   EKErrorProcedureAlarmsNotMutable        Procedure alarms may not be created or modified.
     @constant   EKErrorEventStoreNotAuthorized          The user has not authorized your application to access their events and/or reminders.
     @constant   EKErrorOSNotSupported                   The action is not supported on the current operating system.
+    @constant   EKErrorInvalidCalendar                  The given calendar is invalid or nil.
+    @constant   EKErrorNotificationsCollectionFlagNotSet  The given notification collection does not have the EKNotificationsCollectionFlag set.
+    @constant   EKErrorSourceMismatch                     The source for an object does not match its containers source.
+    @constant   EKErrorNotificationCollectionMismatch     The notification collection containing a given notification does not match the collection we are trying to save.
+    @constant   EKErrorNotificationSavedWithoutCollection The notification is being saved without first adding it to a notification collection and saving the collection.
 */
 
 #if __IPHONE_4_0 <= __IPHONE_OS_VERSION_MAX_ALLOWED || !TARGET_OS_IPHONE
@@ -88,7 +93,12 @@ typedef NS_ENUM(NSInteger, EKErrorCode) {
     EKErrorProcedureAlarmsNotMutable,
     EKErrorEventStoreNotAuthorized,
     EKErrorOSNotSupported,
-
+    EKErrorInvalidInviteReplyCalendar,
+    EKErrorNotificationsCollectionFlagNotSet,
+    EKErrorSourceMismatch,
+    EKErrorNotificationCollectionMismatch,
+    EKErrorNotificationSavedWithoutCollection,
+    
     EKErrorLast // used internally
 };
 #endif

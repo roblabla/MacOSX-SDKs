@@ -1,15 +1,15 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 105C2108-7EF5-3650-A8F2-1A790273B1CE' ]
-platform:        macosx
-install-name:    /System/Library/PrivateFrameworks/CoreSDB.framework/Versions/A/CoreSDB
+uuids:           [ 'x86_64: A490412F-84CD-3A9C-A9D4-22BDF429D2F3', 'x86_64: A490412F-84CD-3A9C-A9D4-22BDF429D2F3' ]
+platform:        zippered
+install-name:    '/System/Library/PrivateFrameworks/CoreSDB.framework/Versions/A/CoreSDB'
 current-version: 800
 exports:         
   - archs:           [ x86_64 ]
-    symbols:         [ _CSDBCheckResultWithStatement, _CSDBConfigLookaside, _CSDBCreateDirectoriesToPath, 
+    symbols:         [ _CSDBCheckResultWithStatement, _CSDBCreateDirectoriesToPath, 
                        _CSDBCreateDirectoriesToPathWithOwnership, _CSDBCreateThreadedRecordStore, 
-                       _CSDBCreateThreadedRecordStoreWithQOSClass, _CSDBCreateUTF8StringFromCFString, 
-                       _CSDBDataMethods, _CSDBDatabasePassesIntegrityCheckAtPath, 
+                       _CSDBCreateThreadedRecordStoreWithQOSClass, _CSDBCreateThreadedRecordStoreWithQOSClassAndLookAsideBufferConfig, 
+                       _CSDBCreateUTF8StringFromCFString, _CSDBDataMethods, _CSDBDatabasePassesIntegrityCheckAtPath, 
                        _CSDBDefaultCorruptedDatabaseHandler, _CSDBDeregisterReconnectBlockWithIdentifier, 
                        _CSDBGenerateInClauseForCount, _CSDBGetCorruptDatabaseHandler, 
                        _CSDBGetLastSQLCommands, _CSDBGetMobileUserDirectory, _CSDBGetMobileUserGID, 
@@ -88,14 +88,15 @@ exports:
                        _CSDBSqliteDatabaseRegisterFunctionForDB, _CSDBSqliteDatabaseReleaseSqliteConnection, 
                        _CSDBSqliteDatabaseReleaseSqliteStatement, _CSDBSqliteDatabaseSetConnectionInitializer, 
                        _CSDBSqliteDatabaseSetDataProtectionClass, _CSDBSqliteDatabaseSetLoggingEnabled, 
-                       _CSDBSqliteDatabaseSetMigrationHandlers, _CSDBSqliteDatabaseSetSetupHandler, 
-                       _CSDBSqliteDatabaseSetShouldMigrateInExternalProcess, _CSDBSqliteDatabaseSetValueForProperty, 
-                       _CSDBSqliteDatabaseSetVersion, _CSDBSqliteDatabaseStatementForReading, 
-                       _CSDBSqliteDatabaseStatementForWriting, _CSDBSqliteDatabaseVacuum, 
-                       _CSDBSqliteDeleteDatabase, _CSDBSqliteErrMsg, _CSDBSqlitePreparedStatement, 
-                       _CSDBSqliteSetDefaultPageCacheSize, _CSDBSqliteSetupLoggingForDatabaseHandle, 
-                       _CSDBSqliteStatementApplyValuesFromRecord, _CSDBSqliteStatementApplyValuesFromRecordWithNullValue, 
-                       _CSDBSqliteStatementBindValuesForColumns, _CSDBSqliteStatementCopyAllRowsStringsForColumnsAtIndices, 
+                       _CSDBSqliteDatabaseSetLookAsideConfig, _CSDBSqliteDatabaseSetMigrationHandlers, 
+                       _CSDBSqliteDatabaseSetSetupHandler, _CSDBSqliteDatabaseSetShouldMigrateInExternalProcess, 
+                       _CSDBSqliteDatabaseSetValueForProperty, _CSDBSqliteDatabaseSetVersion, 
+                       _CSDBSqliteDatabaseStatementForReading, _CSDBSqliteDatabaseStatementForWriting, 
+                       _CSDBSqliteDatabaseVacuum, _CSDBSqliteDeleteDatabase, _CSDBSqliteErrMsg, 
+                       _CSDBSqlitePreparedStatement, _CSDBSqliteSetDefaultPageCacheSize, 
+                       _CSDBSqliteSetupLoggingForDatabaseHandle, _CSDBSqliteStatementApplyValuesFromRecord, 
+                       _CSDBSqliteStatementApplyValuesFromRecordWithNullValue, _CSDBSqliteStatementBindValuesForColumns, 
+                       _CSDBSqliteStatementCopyAllRowsStringsForColumnsAtIndices, 
                        _CSDBSqliteStatementCopyDataResult, _CSDBSqliteStatementCopyStringResult, 
                        _CSDBSqliteStatementCopyStringsForColumnsAtIndices, _CSDBSqliteStatementInteger64Result, 
                        _CSDBSqliteStatementInteger64ResultColumn, _CSDBSqliteStatementIntegerResult, 

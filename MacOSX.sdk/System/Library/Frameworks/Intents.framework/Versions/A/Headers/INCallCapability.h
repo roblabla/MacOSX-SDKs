@@ -2,7 +2,7 @@
 //  INCallCapability.h
 //  Intents
 //
-//  Copyright (c) 2016-2017 Apple Inc. All rights reserved.
+//  Copyright (c) 2016-2019 Apple Inc. All rights reserved.
 //
 
 #ifndef INCallCapability_h
@@ -15,6 +15,6 @@ typedef NS_ENUM(NSInteger, INCallCapability) {
     INCallCapabilityUnknown = 0,
     INCallCapabilityAudioCall,
     INCallCapabilityVideoCall,
-} API_AVAILABLE(ios(10.0), watchos(3.2), macosx(10.12));
+} API_AVAILABLE(ios(10.0), watchos(3.2)) API_UNAVAILABLE(macosx);
 
 #endif // INCallCapability_h

@@ -2,7 +2,7 @@
 //  GKTurnBasedMatchmakerViewController.h
 //  Game Center
 //
-//  Copyright 2010-2018 Apple Inc. All rights reserved.
+//  Copyright 2010-2019 Apple Inc. All rights reserved.
 //
 
 @protocol GKTurnBasedMatchmakerViewControllerDelegate;
@@ -27,7 +27,7 @@ NS_ASSUME_NONNULL_BEGIN
 NS_CLASS_AVAILABLE(10_8, 5_0)
 @interface GKTurnBasedMatchmakerViewController : NSViewController <GKViewController> {
     id _remoteViewController;
-    id<GKTurnBasedMatchmakerViewControllerDelegate> _turnBasedMatchmakerDelegateWeak;
+    id<GKTurnBasedMatchmakerViewControllerDelegate> __weak _turnBasedMatchmakerDelegate;
     GKMatchRequest *_matchRequest;
     BOOL _showExistingMatches;
     BOOL _internalFlag;
@@ -37,7 +37,7 @@ NS_CLASS_AVAILABLE(10_8, 5_0)
 
 @interface GKTurnBasedMatchmakerViewController ()
 
-@property (nonatomic, nullable, readwrite, assign) id<GKTurnBasedMatchmakerViewControllerDelegate> turnBasedMatchmakerDelegate;
+@property (nonatomic, nullable, readwrite, weak) id<GKTurnBasedMatchmakerViewControllerDelegate> turnBasedMatchmakerDelegate;
 @property (nonatomic, readwrite, assign) BOOL showExistingMatches; // defaults to YES
 
 - (id)initWithMatchRequest:(GKMatchRequest *)request;

@@ -1,7 +1,7 @@
 /*
 	NSFontDescriptor.h
 	Application Kit
-	Copyright (c) 2003-2018, Apple Inc.
+	Copyright (c) 2003-2019, Apple Inc.
 	All rights reserved.
 */
 
@@ -14,6 +14,7 @@
 
 
 NS_ASSUME_NONNULL_BEGIN
+API_UNAVAILABLE_BEGIN(ios)
 
 /* Symbolic Font Traits */
 typedef uint32_t NSFontSymbolicTraits; // Deprecated. Use NSFontDescriptorSymbolicTraits instead
@@ -51,16 +52,9 @@ typedef NSString * NSFontDescriptorTraitKey NS_TYPED_ENUM;
 typedef NSString * NSFontDescriptorVariationKey NS_TYPED_ENUM;
 typedef NSString * NSFontDescriptorFeatureKey NS_TYPED_EXTENSIBLE_ENUM;
 typedef CGFloat NSFontWeight NS_TYPED_EXTENSIBLE_ENUM;
+typedef NSString * NSFontDescriptorSystemDesign NS_TYPED_ENUM;
 
-@interface NSFontDescriptor: NSObject <NSCopying, NSSecureCoding> {
-/* All instance variables are private */
-    NSMutableDictionary *_attributes APPKIT_IVAR;
-    id _reserved1 APPKIT_IVAR;
-    id _reserved2 APPKIT_IVAR;
-    id _reserved3 APPKIT_IVAR;
-    id _reserved4 APPKIT_IVAR;
-    id _reserved5 APPKIT_IVAR;
-}
+@interface NSFontDescriptor: NSObject <NSCopying, NSSecureCoding>
 
 /* Core attribute access */
 @property (nullable, readonly, copy) NSString *postscriptName;
@@ -69,7 +63,7 @@ typedef CGFloat NSFontWeight NS_TYPED_EXTENSIBLE_ENUM;
 @property (readonly) NSFontDescriptorSymbolicTraits symbolicTraits;
 /* YES indicates that any fonts matching the descriptor needs to be downloaded prior to instantiating a font. To ensure that the matching fonts are available before use, use NSFontAssetRequest to download. NO indicates that the descriptor is not available for download, has already been downloaded, or is backed by an installed font.
  */
-@property (readonly) BOOL requiresFontAssetRequest NS_AVAILABLE_MAC(10_13);
+@property (readonly) BOOL requiresFontAssetRequest API_AVAILABLE(macos(10.13));
 
 - (nullable id)objectForKey:(NSFontDescriptorAttributeName)attribute;
 
@@ -88,7 +82,7 @@ typedef CGFloat NSFontWeight NS_TYPED_EXTENSIBLE_ENUM;
 
 /* Returns a "normalized" font descriptor matching the receiver. It is the first element returned from -matchingFontDescriptorsWithMandatoryKeys:. mandatoryKeys is an NSSet instance containing keys that are required to be identical in order to be matched. mandatoryKeys can be nil.
  */
-- (nullable NSFontDescriptor *)matchingFontDescriptorWithMandatoryKeys:(nullable NSSet<NSFontDescriptorAttributeName> *)mandatoryKeys NS_AVAILABLE_MAC(10_5);
+- (nullable NSFontDescriptor *)matchingFontDescriptorWithMandatoryKeys:(nullable NSSet<NSFontDescriptorAttributeName> *)mandatoryKeys API_AVAILABLE(macos(10.5));
 
 - (NSFontDescriptor *)fontDescriptorByAddingAttributes:(NSDictionary<NSFontDescriptorAttributeName, id> *)attributes; // the new attributes take precedence over the existing ones in the receiver
 - (NSFontDescriptor *)fontDescriptorWithSymbolicTraits:(NSFontDescriptorSymbolicTraits)symbolicTraits;
@@ -96,6 +90,8 @@ typedef CGFloat NSFontWeight NS_TYPED_EXTENSIBLE_ENUM;
 - (NSFontDescriptor *)fontDescriptorWithMatrix:(NSAffineTransform *)matrix;
 - (NSFontDescriptor *)fontDescriptorWithFace:(NSString *)newFace;
 - (NSFontDescriptor *)fontDescriptorWithFamily:(NSString *)newFamily;
+
+- (nullable instancetype)fontDescriptorWithDesign:(NSFontDescriptorSystemDesign)design API_AVAILABLE(macos(10.15));
 @end
 
 /* Predefined font attributes not defined in NSAttributedString.h */
@@ -112,7 +108,7 @@ APPKIT_EXTERN NSFontDescriptorAttributeName NSFontCharacterSetAttribute         
 APPKIT_EXTERN NSFontDescriptorAttributeName NSFontCascadeListAttribute             ; // An NSArray instance. Each member of the array is a sub-descriptor. (default: the system default cascading list for user's locale)
 APPKIT_EXTERN NSFontDescriptorAttributeName NSFontTraitsAttribute                  ; // An NSDictionary instance fully describing font traits. (default: supplied by font)
 APPKIT_EXTERN NSFontDescriptorAttributeName NSFontFixedAdvanceAttribute            ; // A float represented as an NSNumber. The value overrides glyph advancement specified by the font. (default: 0.0)
-APPKIT_EXTERN NSFontDescriptorAttributeName NSFontFeatureSettingsAttribute          NS_AVAILABLE_MAC(10_5); // An array of dictionaries representing non-default font feature settings. Each dictionary contains NSFontFeatureTypeIdentifierKey and NSFontFeatureSelectorIdentifierKey.
+APPKIT_EXTERN NSFontDescriptorAttributeName NSFontFeatureSettingsAttribute          API_AVAILABLE(macos(10.5)); // An array of dictionaries representing non-default font feature settings. Each dictionary contains NSFontFeatureTypeIdentifierKey and NSFontFeatureSelectorIdentifierKey.
 
 /* Font traits keys */
 /* This key is used with a trait dictionary to get the symbolic traits value as an NSNumber.
@@ -155,24 +151,29 @@ APPKIT_EXTERN NSFontDescriptorVariationKey NSFontVariationAxisNameKey;
 /* Font feature keys */
 /* A number object specifying font feature type such as ligature, character shape, etc. Refer to ATS/SFNTLayoutTypes.h for predefined feature types.
  */
-APPKIT_EXTERN NSFontDescriptorFeatureKey NSFontFeatureTypeIdentifierKey NS_AVAILABLE_MAC(10_5);
+APPKIT_EXTERN NSFontDescriptorFeatureKey NSFontFeatureTypeIdentifierKey API_AVAILABLE(macos(10.5));
 
 /* A number object specifying font feature selector such as common ligature off, traditional character shape, etc. Refer to ATS/SFNTLayoutTypes.h for predefined feature selectors.
  */
-APPKIT_EXTERN NSFontDescriptorFeatureKey NSFontFeatureSelectorIdentifierKey NS_AVAILABLE_MAC(10_5);
+APPKIT_EXTERN NSFontDescriptorFeatureKey NSFontFeatureSelectorIdentifierKey API_AVAILABLE(macos(10.5));
 
 /* Font weight trait */
 /* Predefined symbolic weight values used for NSFontWeightTrait and +[NSFont systemFontOfSize:weight:].
  */
-APPKIT_EXTERN const NSFontWeight NSFontWeightUltraLight NS_AVAILABLE_MAC(10_11);
-APPKIT_EXTERN const NSFontWeight NSFontWeightThin NS_AVAILABLE_MAC(10_11);
-APPKIT_EXTERN const NSFontWeight NSFontWeightLight NS_AVAILABLE_MAC(10_11);
-APPKIT_EXTERN const NSFontWeight NSFontWeightRegular NS_AVAILABLE_MAC(10_11);
-APPKIT_EXTERN const NSFontWeight NSFontWeightMedium NS_AVAILABLE_MAC(10_11);
-APPKIT_EXTERN const NSFontWeight NSFontWeightSemibold NS_AVAILABLE_MAC(10_11);
-APPKIT_EXTERN const NSFontWeight NSFontWeightBold NS_AVAILABLE_MAC(10_11);
-APPKIT_EXTERN const NSFontWeight NSFontWeightHeavy NS_AVAILABLE_MAC(10_11);
-APPKIT_EXTERN const NSFontWeight NSFontWeightBlack NS_AVAILABLE_MAC(10_11);
+APPKIT_EXTERN const NSFontWeight NSFontWeightUltraLight API_AVAILABLE(macos(10.11));
+APPKIT_EXTERN const NSFontWeight NSFontWeightThin API_AVAILABLE(macos(10.11));
+APPKIT_EXTERN const NSFontWeight NSFontWeightLight API_AVAILABLE(macos(10.11));
+APPKIT_EXTERN const NSFontWeight NSFontWeightRegular API_AVAILABLE(macos(10.11));
+APPKIT_EXTERN const NSFontWeight NSFontWeightMedium API_AVAILABLE(macos(10.11));
+APPKIT_EXTERN const NSFontWeight NSFontWeightSemibold API_AVAILABLE(macos(10.11));
+APPKIT_EXTERN const NSFontWeight NSFontWeightBold API_AVAILABLE(macos(10.11));
+APPKIT_EXTERN const NSFontWeight NSFontWeightHeavy API_AVAILABLE(macos(10.11));
+APPKIT_EXTERN const NSFontWeight NSFontWeightBlack API_AVAILABLE(macos(10.11));
+
+APPKIT_EXTERN NSFontDescriptorSystemDesign const NSFontDescriptorSystemDesignDefault API_AVAILABLE(macos(10.15));
+APPKIT_EXTERN NSFontDescriptorSystemDesign const NSFontDescriptorSystemDesignSerif API_AVAILABLE(macos(10.15));
+APPKIT_EXTERN NSFontDescriptorSystemDesign const NSFontDescriptorSystemDesignMonospaced API_AVAILABLE(macos(10.15));
+APPKIT_EXTERN NSFontDescriptorSystemDesign const NSFontDescriptorSystemDesignRounded API_AVAILABLE(macos(10.15));
 
 // Deprecated
 typedef uint32_t NSFontFamilyClass; // Deprecated. Use NSFontDescriptorSymbolicTraits instead
@@ -206,6 +207,9 @@ enum {
     NSFontUIOptimizedTrait = (1 << 12)
 };
 
-APPKIT_EXTERN NSString * NSFontColorAttribute 			NS_DEPRECATED_MAC(10_3, 10_4); // This attribute is obsolete. Use NSForegroundColorAttributeName instead.
+APPKIT_EXTERN NSString * NSFontColorAttribute 			API_DEPRECATED("", macos(10.3,10.4)); // This attribute is obsolete. Use NSForegroundColorAttributeName instead.
 
+
+
+API_UNAVAILABLE_END
 NS_ASSUME_NONNULL_END

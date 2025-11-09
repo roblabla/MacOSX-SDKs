@@ -1,7 +1,7 @@
 /*
 	NSPasteboardItem.h
 	Application Kit
-	Copyright (c) 2008-2018, Apple Inc.
+	Copyright (c) 2008-2019, Apple Inc.
 	All rights reserved.
 */
 
@@ -13,6 +13,7 @@
 
 
 NS_ASSUME_NONNULL_BEGIN
+API_UNAVAILABLE_BEGIN(ios)
 
 @class NSPasteboard;
 @protocol NSPasteboardItemDataProvider;
@@ -34,16 +35,8 @@ The pasteboard item API is very similar to the NSPasteboard API for a single ite
 
 */
 
-NS_CLASS_AVAILABLE(10_6, NA)
-@interface NSPasteboardItem : NSObject <NSPasteboardWriting, NSPasteboardReading> {
-    @private
-    NSPasteboard    *_pasteboard APPKIT_IVAR;
-    NSUInteger	    _index APPKIT_IVAR;
-    NSInteger	    _gen APPKIT_IVAR;
-    id		    _auxObject APPKIT_IVAR;
-    void	    *_reserved __unused APPKIT_IVAR;
-}
-
+API_AVAILABLE(macos(10.6))
+@interface NSPasteboardItem : NSObject <NSPasteboardWriting, NSPasteboardReading>
 /* Returns an array of UTI strings of the data types supported by the receiver.
 */
 @property (readonly, copy) NSArray<NSPasteboardType> *types;
@@ -85,5 +78,6 @@ NS_CLASS_AVAILABLE(10_6, NA)
 
 @end
 
+API_UNAVAILABLE_END
 NS_ASSUME_NONNULL_END
 

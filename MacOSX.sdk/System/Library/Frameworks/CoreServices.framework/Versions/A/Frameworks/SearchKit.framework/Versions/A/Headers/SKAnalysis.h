@@ -3,9 +3,9 @@
  
      Contains:   SearchKit Interfaces.
  
-     Version:    SearchKit-407~38
+     Version:    SearchKit-417.1
  
-     Copyright:  © 2003-2008 by Apple Computer, Inc., all rights reserved
+     Copyright:  2003-2019 by Apple, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -51,7 +51,7 @@
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
-extern const CFStringRef kSKMinTermLength                            AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+extern const CFStringRef kSKMinTermLength                            API_AVAILABLE( macos(10.3) ) API_UNAVAILABLE( macCatalyst );
 /*
  *  kSKSubstitutions
  *  
@@ -68,7 +68,7 @@ extern const CFStringRef kSKMinTermLength                            AVAILABLE_M
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
-extern const CFStringRef kSKSubstitutions                            AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+extern const CFStringRef kSKSubstitutions                            API_AVAILABLE( macos(10.3) ) API_UNAVAILABLE( macCatalyst );
 /*
  *  kSKStopWords
  *  
@@ -85,7 +85,7 @@ extern const CFStringRef kSKSubstitutions                            AVAILABLE_M
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
-extern const CFStringRef kSKStopWords                                AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+extern const CFStringRef kSKStopWords                                API_AVAILABLE( macos(10.3) ) API_UNAVAILABLE( macCatalyst );
 /*
  *  kSKProximityIndexing
  *  
@@ -104,7 +104,7 @@ extern const CFStringRef kSKStopWords                                AVAILABLE_M
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
-extern const CFStringRef kSKProximityIndexing                        AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+extern const CFStringRef kSKProximityIndexing                        API_AVAILABLE( macos(10.4) ) API_UNAVAILABLE( macCatalyst );
 /*
  *  kSKMaximumTerms
  *  
@@ -124,7 +124,7 @@ extern const CFStringRef kSKProximityIndexing                        AVAILABLE_M
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
-extern const CFStringRef kSKMaximumTerms                             AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+extern const CFStringRef kSKMaximumTerms                             API_AVAILABLE( macos(10.4) ) API_UNAVAILABLE( macCatalyst );
 /*
  *  kSKTermChars
  *  
@@ -143,7 +143,7 @@ extern const CFStringRef kSKMaximumTerms                             AVAILABLE_M
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
-extern const CFStringRef kSKTermChars                                AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+extern const CFStringRef kSKTermChars                                API_AVAILABLE( macos(10.4) ) API_UNAVAILABLE( macCatalyst );
 /*
  *  kSKStartTermChars
  *  
@@ -162,7 +162,7 @@ extern const CFStringRef kSKTermChars                                AVAILABLE_M
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
-extern const CFStringRef kSKStartTermChars                           AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+extern const CFStringRef kSKStartTermChars                           API_AVAILABLE( macos(10.4) ) API_UNAVAILABLE( macCatalyst );
 /*
  *  kSKEndTermChars
  *  
@@ -181,7 +181,7 @@ extern const CFStringRef kSKStartTermChars                           AVAILABLE_M
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
-extern const CFStringRef kSKEndTermChars                             AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+extern const CFStringRef kSKEndTermChars                             API_AVAILABLE( macos(10.4) ) API_UNAVAILABLE( macCatalyst );
 /*
  *  kSKLanguageTypes   *** DEPRECATED ***
  *  
@@ -204,7 +204,7 @@ extern const CFStringRef kSKEndTermChars                             AVAILABLE_M
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
-extern const CFStringRef kSKLanguageTypes                            AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+extern const CFStringRef kSKLanguageTypes                            API_DEPRECATED("No longer supported", macos(10.3, 10.4)) API_UNAVAILABLE( macCatalyst );
 
 
 #endif /* __SKANALYSIS__ */

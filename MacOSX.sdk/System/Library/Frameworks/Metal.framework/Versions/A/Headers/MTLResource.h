@@ -80,11 +80,24 @@ typedef NS_ENUM(NSUInteger, MTLCPUCacheMode)
 typedef NS_ENUM(NSUInteger, MTLStorageMode)
 {
     MTLStorageModeShared  = 0,
-    MTLStorageModeManaged API_AVAILABLE(macos(10.11)) API_UNAVAILABLE(ios) = 1,
+    MTLStorageModeManaged API_AVAILABLE(macos(10.11), macCatalyst(13.0)) API_UNAVAILABLE(ios) = 1,
     MTLStorageModePrivate = 2,
-    MTLStorageModeMemoryless API_AVAILABLE(ios(10.0)) API_UNAVAILABLE(macos) = 3,
+    MTLStorageModeMemoryless API_AVAILABLE(ios(10.0)) API_UNAVAILABLE(macos, macCatalyst) = 3,
 } API_AVAILABLE(macos(10.11), ios(9.0));
 
+/*!
+ @enum MTLHazardTrackingMode
+ @abstract Describes how hazard tracking is performed.
+ @constant MTLHazardTrackingModeDefault The default hazard tracking mode for the context. Refer to the usage of the field for semantics.
+ @constant MTLHazardTrackingModeUntracked Do not perform hazard tracking.
+ @constant MTLHazardTrackingModeTracked Do perform hazard tracking.
+*/
+typedef NS_ENUM(NSUInteger, MTLHazardTrackingMode)
+{
+    MTLHazardTrackingModeDefault = 0,
+    MTLHazardTrackingModeUntracked = 1,
+    MTLHazardTrackingModeTracked = 2,
+} API_AVAILABLE(macos(10.15), ios(13.0));
 
 /*!
  @enum MTLResourceOptions
@@ -124,10 +137,20 @@ typedef NS_ENUM(NSUInteger, MTLStorageMode)
  MTLTexture descriptor. Textures created with MTLStorageModeMemoryless dont have an IOAccelResource at any point in their
  lifetime. The only way to populate such resource is to perform rendering operations on it. Blit operations are disallowed.
  
+ @constant MTLResourceHazardTrackingModeDefault
+ This mode is the default for the context in which it is specified,
+ which may be either MTLResourceHazardTrackingModeUntracked or MTLResourceHazardTrackingModeTracked.
+ Refer to the point of use to determing the meaning of this flag.
+ 
  @constant MTLResourceHazardTrackingModeUntracked
- In this mode, Command encoder dependencies for this resource are tracked manually with MTLFence.
- This value is always set for resources sub-allocated from a MTLHeap and may optionally be specified
- for non-heap resources.
+ In this mode, command encoder dependencies for this resource are tracked manually with MTLFence.
+ This value is the default for MTLHeap and resources sub-allocated from a MTLHeap,
+ and may optionally be specified for non-heap resources.
+
+ @constant MTLResourceHazardTrackingModeTracked
+ In this mode, command encoder dependencies for this resource are tracked automatically.
+ This value is the default for resources allocated from a MTLDevice,
+ and may optionally be specified for MTLHeap and resources sub-allocated from such heaps.
  
  @discussion
  Note that resource options are a property of MTLTextureDescriptor (resourceOptions), so apply to texture creation.
@@ -141,7 +164,7 @@ typedef NS_ENUM(NSUInteger, MTLStorageMode)
 #define MTLResourceStorageModeMask              (0xfUL << MTLResourceStorageModeShift)
 
 #define MTLResourceHazardTrackingModeShift      8
-#define MTLResourceHazardTrackingModeMask       (0x1UL << MTLResourceHazardTrackingModeShift)
+#define MTLResourceHazardTrackingModeMask       (0x3UL << MTLResourceHazardTrackingModeShift)
 
 typedef NS_OPTIONS(NSUInteger, MTLResourceOptions)
 {
@@ -149,11 +172,13 @@ typedef NS_OPTIONS(NSUInteger, MTLResourceOptions)
     MTLResourceCPUCacheModeWriteCombined = MTLCPUCacheModeWriteCombined << MTLResourceCPUCacheModeShift,
 
     MTLResourceStorageModeShared     API_AVAILABLE(macos(10.11), ios(9.0))  = MTLStorageModeShared     << MTLResourceStorageModeShift,
-    MTLResourceStorageModeManaged    API_AVAILABLE(macos(10.11)) API_UNAVAILABLE(ios)   = MTLStorageModeManaged    << MTLResourceStorageModeShift,
+    MTLResourceStorageModeManaged    API_AVAILABLE(macos(10.11), macCatalyst(13.0)) API_UNAVAILABLE(ios)   = MTLStorageModeManaged    << MTLResourceStorageModeShift,
     MTLResourceStorageModePrivate    API_AVAILABLE(macos(10.11), ios(9.0))  = MTLStorageModePrivate    << MTLResourceStorageModeShift,
-    MTLResourceStorageModeMemoryless API_AVAILABLE(ios(10.0)) API_UNAVAILABLE(macos) = MTLStorageModeMemoryless << MTLResourceStorageModeShift,
-
-    MTLResourceHazardTrackingModeUntracked API_AVAILABLE(macos(10.13), ios(10.0)) = 0x1UL << MTLResourceHazardTrackingModeShift,
+    MTLResourceStorageModeMemoryless API_AVAILABLE(ios(10.0)) API_UNAVAILABLE(macos, macCatalyst) = MTLStorageModeMemoryless << MTLResourceStorageModeShift,    
+    
+    MTLResourceHazardTrackingModeDefault API_AVAILABLE(macos(10.13), ios(10.0)) = MTLHazardTrackingModeDefault << MTLResourceHazardTrackingModeShift,
+    MTLResourceHazardTrackingModeUntracked API_AVAILABLE(macos(10.13), ios(10.0)) = MTLHazardTrackingModeUntracked << MTLResourceHazardTrackingModeShift,
+    MTLResourceHazardTrackingModeTracked API_AVAILABLE(macos(10.15), ios(13.0)) = MTLHazardTrackingModeTracked << MTLResourceHazardTrackingModeShift,
     
     // Deprecated spellings
     MTLResourceOptionCPUCacheModeDefault       = MTLResourceCPUCacheModeDefaultCache,
@@ -196,6 +221,20 @@ API_AVAILABLE(macos(10.11), ios(8.0))
 @property (readonly) MTLStorageMode storageMode API_AVAILABLE(macos(10.11), ios(9.0));
 
 /*!
+ @property hazardTrackingMode
+ @abstract Whether or not the resource is hazard tracked.
+ @discussion This value can be either MTLHazardTrackingModeUntracked or MTLHazardTrackingModeTracked.
+ Resources created from heaps are by default untracked, whereas resources created from the device are by default tracked.
+ */
+@property (readonly) MTLHazardTrackingMode hazardTrackingMode API_AVAILABLE(macos(10.15), ios(13.0));
+
+/*!
+ @property resourceOptions
+ @abstract A packed tuple of the storageMode, cpuCacheMode and hazardTrackingMode properties.
+ */
+@property (readonly) MTLResourceOptions resourceOptions API_AVAILABLE(macos(10.15), ios(13.0));
+
+/*!
  @method setPurgeableState
  @abstract Set (or query) the purgeability state of a resource
  @discussion Synchronously set the purgeability state of a resource and return what the prior (or current) state is.
@@ -209,6 +248,13 @@ API_AVAILABLE(macos(10.11), ios(8.0))
  @discussion Nil when this resource is not backed by a heap.
  */
 @property (readonly, nullable) id <MTLHeap> heap API_AVAILABLE(macos(10.13), ios(10.0));
+
+/*!
+ @property heapOffset
+ @abstract The offset inside the heap at which this resource was created.
+ @discussion Zero when this resource was not created on a heap with MTLHeapTypePlacement.
+ */
+@property (readonly) NSUInteger heapOffset API_AVAILABLE(macos(10.15), ios(13.0));
 
 /*!
  @property allocatedSize

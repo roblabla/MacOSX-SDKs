@@ -1,7 +1,7 @@
 /*
         NSPopUpButton.h
         Application Kit
-        Copyright (c) 1997-2018, Apple Inc.
+        Copyright (c) 1997-2019, Apple Inc.
         All rights reserved.
 */
 
@@ -11,20 +11,11 @@
 #import <AppKit/NSMenuItem.h>
 
 NS_ASSUME_NONNULL_BEGIN
+API_UNAVAILABLE_BEGIN(ios)
 
 @class NSMenu;
 
-@interface NSPopUpButton : NSButton {
-    /*All instance variables are private*/
-    @private
-    struct __pbFlags {
-        unsigned int needsPullsDownFromTemplate:1;  // for decoding old nibs only!
-        unsigned int RESERVED:31;
-    } _pbFlags APPKIT_IVAR;
-#if __LP64__
-    id _popupReserved __unused APPKIT_IVAR;
-#endif
-}
+@interface NSPopUpButton : NSButton
 
 - (instancetype)initWithFrame:(NSRect)buttonFrame pullsDown:(BOOL)flag;
 
@@ -86,4 +77,5 @@ NS_ASSUME_NONNULL_BEGIN
 /* Notifications */
 APPKIT_EXTERN NSNotificationName NSPopUpButtonWillPopUpNotification;
 
+API_UNAVAILABLE_END
 NS_ASSUME_NONNULL_END

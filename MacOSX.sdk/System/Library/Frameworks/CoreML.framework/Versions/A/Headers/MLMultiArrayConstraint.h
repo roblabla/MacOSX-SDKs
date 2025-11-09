@@ -17,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 API_AVAILABLE(macos(10.13), ios(11.0), watchos(4.0), tvos(11.0))
 ML_EXPORT
-@interface MLMultiArrayConstraint : NSObject
+@interface MLMultiArrayConstraint : NSObject <NSSecureCoding>
 
 // Required or default shape of multiarray
 @property (readonly, nonatomic) NSArray<NSNumber *> *shape;

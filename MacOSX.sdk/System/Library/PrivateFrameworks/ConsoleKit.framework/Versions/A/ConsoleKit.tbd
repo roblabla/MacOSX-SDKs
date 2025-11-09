@@ -1,8 +1,8 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 4F559CE5-6993-3EE7-A714-09449C6B3FE2' ]
+uuids:           [ 'x86_64: 9FE54189-2892-3547-9919-BB9F34876432' ]
 platform:        macosx
-install-name:    /System/Library/PrivateFrameworks/ConsoleKit.framework/Versions/A/ConsoleKit
+install-name:    '/System/Library/PrivateFrameworks/ConsoleKit.framework/Versions/A/ConsoleKit'
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _ConsoleKitVersionNumber, _ConsoleKitVersionString, _HashBytes, 
@@ -29,12 +29,14 @@ exports:
                        CSKActivitiesViewController, CSKActivity, CSKActivityDetailsViewController, 
                        CSKActivityExtendedHeaderView, CSKActivityHeaderView, CSKActivityHeaderViewController, 
                        CSKArchiveActivitiesTableColumnLayout, CSKArchiveMessagesTableColumnLayout, 
-                       CSKArchiveTable, CSKBadgeLabel, CSKCoalescer, CSKDatabaseHandle, 
-                       CSKDetailsViewController, CSKDevice, CSKDeviceManager, CSKDirectoryObserver, 
-                       CSKEntity, CSKExtendedTextField, CSKFileNode, CSKFileObserver, 
+                       CSKArchiveTable, CSKAuthenticationController, CSKBadgeLabel, 
+                       CSKCoalescer, CSKDatabaseHandle, CSKDetailsViewController, 
+                       CSKDevice, CSKDeviceManager, CSKDirectoryObserver, CSKEntity, 
+                       CSKEvent, CSKExtendedTextField, CSKFileNode, CSKFileObserver, 
                        CSKFileSystem, CSKFileTailObserver, CSKFilter, CSKHeaderView, 
                        CSKHeaderViewController, CSKHelpers, CSKIconTableCellView, 
-                       CSKLogging, CSKMenu, CSKMenuItemRepresentation, CSKMenuItemStateRepresentation, 
+                       CSKLoadRange, CSKLoadRangeViewController, CSKLogging, CSKMenu, 
+                       CSKMenuItemRepresentation, CSKMenuItemStateRepresentation, 
                        CSKMessage, CSKMessageDetailsViewController, CSKMessageExtendedHeaderView, 
                        CSKMessageHeaderView, CSKMessageHeaderViewController, CSKMessagesTableColumnLayout, 
                        CSKMessagesTableView, CSKMessagesViewController, CSKSQLMessageDetailsViewController, 
@@ -55,4 +57,12 @@ exports:
                        CSKTableViewController, CSKTextFinder, CSKTextRelationIndicatorTableCellView, 
                        CSKTextTableCellView, CSKTextViewController, CSKToken, CSKTokenAttachmentCell, 
                        CSKTokenField, CSKTokenFieldCell, CSKTokenFieldController ]
+    objc-ivars:      [ CSKAuthenticationController.errorTextField, CSKAuthenticationController.iconImageView, 
+                       CSKAuthenticationController.messageDetailTextField, CSKAuthenticationController.messageTitleTextField, 
+                       CSKAuthenticationController.passwordAuthenticationSheet, CSKAuthenticationController.passwordLabel, 
+                       CSKAuthenticationController.passwordSecureTextField, CSKAuthenticationController.topErrorConstraint, 
+                       CSKAuthenticationController.topPasswordConstraint, CSKAuthenticationController.topSecureTextFieldErrorConstraint, 
+                       CSKAuthenticationController.topSecureTextFieldMessageConstraint, 
+                       CSKAuthenticationController.topsecureTextFieldConstraint, 
+                       CSKAuthenticationController.userNameTextField ]
 ...

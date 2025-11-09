@@ -1,10 +1,10 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64, x86_64h ]
-uuids:           [ 'x86_64: 95AA3236-5D63-35AF-9305-FDC361365110', 'x86_64h: 2F576522-08B1-3C65-8F00-3427E938ADDA' ]
-platform:        macosx
-install-name:    /System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/libvDSP.dylib
-current-version: 671.220.1
-objc-constraint: none
+uuids:           [ 'x86_64: 6CCE40B0-2F6F-3778-AE1C-E7B2895F8641', 'x86_64: 6CCE40B0-2F6F-3778-AE1C-E7B2895F8641', 
+                   'x86_64h: EE2CBD92-EA9A-3288-B9B4-D61AA08F1114', 'x86_64h: EE2CBD92-EA9A-3288-B9B4-D61AA08F1114' ]
+platform:        zippered
+install-name:    '/System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/libvDSP.dylib'
+current-version: 735
 exports:         
   - archs:           [ x86_64, x86_64h ]
     symbols:         [ _vDSP_DCT_CreateSetup, _vDSP_DCT_Execute, _vDSP_DFT_CreateSetup, 

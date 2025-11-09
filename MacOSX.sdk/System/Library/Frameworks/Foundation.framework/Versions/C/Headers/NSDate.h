@@ -1,5 +1,5 @@
 /*	NSDate.h
-	Copyright (c) 1994-2018, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2019, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -21,7 +21,7 @@ typedef double NSTimeInterval;
 
 - (instancetype)init NS_DESIGNATED_INITIALIZER;
 - (instancetype)initWithTimeIntervalSinceReferenceDate:(NSTimeInterval)ti NS_DESIGNATED_INITIALIZER;
-- (nullable instancetype)initWithCoder:(NSCoder *)aDecoder NS_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithCoder:(NSCoder *)coder NS_DESIGNATED_INITIALIZER;
 
 @end
 
@@ -56,6 +56,8 @@ typedef double NSTimeInterval;
 
 @property (class, readonly, copy) NSDate *distantFuture;
 @property (class, readonly, copy) NSDate *distantPast;
+
+@property (class, readonly, copy) NSDate *now API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0));
 
 - (instancetype)initWithTimeIntervalSinceNow:(NSTimeInterval)secs;
 - (instancetype)initWithTimeIntervalSince1970:(NSTimeInterval)secs;

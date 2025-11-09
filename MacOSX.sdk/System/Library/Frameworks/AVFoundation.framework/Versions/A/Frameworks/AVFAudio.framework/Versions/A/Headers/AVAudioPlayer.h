@@ -6,26 +6,20 @@
 	Copyright 2008-2016 Apple Inc. All rights reserved.
 */
 
-#import <AVFoundation/AVBase.h>
-#import <AVFoundation/AVAudioFormat.h>
+#import <AVFAudio/AVAudioFormat.h>
 #import <Foundation/Foundation.h>
 #import <AVFAudio/AVAudioSettings.h>
-
-#if (TARGET_OS_IPHONE && __has_include(<AVFoundation/AVAudioSession.h>))
 #import <AVFAudio/AVAudioSession.h>
-#endif // #if TARGET_OS_EMBEDDED
 
 #import <Availability.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
 @class NSData, NSURL, NSError;
-#if (TARGET_OS_IPHONE && __has_include(<AVFoundation/AVAudioSession.h>))
 @class AVAudioSessionChannelDescription;
-#endif
 @protocol AVAudioPlayerDelegate;
 
-OS_EXPORT API_AVAILABLE(macos(10.7), ios(2.2), watchos(3.0), tvos(9.0))
+API_AVAILABLE(macos(10.7), ios(2.2), watchos(3.0), tvos(9.0))
 @interface AVAudioPlayer : NSObject {
 @private
 	id _impl;
@@ -63,7 +57,7 @@ OS_EXPORT API_AVAILABLE(macos(10.7), ios(2.2), watchos(3.0), tvos(9.0))
 @property(copy, nullable) NSString *currentDevice API_AVAILABLE(macos(10.13)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /* the delegate will be sent messages from the AVAudioPlayerDelegate protocol */ 
-@property(assign, nullable) id<AVAudioPlayerDelegate> delegate;
+@property(weak, nullable) id<AVAudioPlayerDelegate> delegate;
 
 /* one of these properties will be non-nil based on the init... method used */
 @property(readonly, nullable) NSURL *url; /* returns nil if object was not created with a URL */
@@ -106,12 +100,10 @@ Any negative number will loop indefinitely until stopped.
 - (float)peakPowerForChannel:(NSUInteger)channelNumber; /* returns peak power in decibels for a given channel */
 - (float)averagePowerForChannel:(NSUInteger)channelNumber; /* returns average power in decibels for a given channel */
 
-#if (TARGET_OS_IPHONE && !0 && __has_include(<AVFoundation/AVAudioSession.h>))
 /* The channels property lets you assign the output to play to specific channels as described by AVAudioSession's channels property */
 /* This property is nil valued until set. */
 /* The array must have the same number of channels as returned by the numberOfChannels property. */
-@property(nonatomic, copy, nullable) NSArray<AVAudioSessionChannelDescription *> *channelAssignments API_AVAILABLE(macos(10.9), ios(7.0), watchos(2.0), tvos(9.0)); /* Array of AVAudioSessionChannelDescription objects */
-#endif
+@property(nonatomic, copy, nullable) NSArray<AVAudioSessionChannelDescription *> *channelAssignments API_AVAILABLE(ios(7.0), watchos(2.0), tvos(9.0)) API_UNAVAILABLE(macos) ; /* Array of AVAudioSessionChannelDescription objects */
 
 @end
 

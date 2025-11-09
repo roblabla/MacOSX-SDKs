@@ -3,7 +3,7 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2010-2017 Apple Inc. All rights reserved.
+	Copyright 2010-2018 Apple Inc. All rights reserved.
 
 */
 
@@ -44,7 +44,7 @@ typedef NSString * AVAssetImageGeneratorApertureMode NS_STRING_ENUM;
 	@discussion
 		An image's clean aperture is a region of video free from transition artifacts caused by the encoding of the signal.
 */
-AVF_EXPORT AVAssetImageGeneratorApertureMode const AVAssetImageGeneratorApertureModeCleanAperture NS_AVAILABLE(10_7, 4_0);
+AVF_EXPORT AVAssetImageGeneratorApertureMode const AVAssetImageGeneratorApertureModeCleanAperture API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 
 /*!
 	@constant		AVAssetImageGeneratorApertureModeProductionAperture
@@ -52,7 +52,7 @@ AVF_EXPORT AVAssetImageGeneratorApertureMode const AVAssetImageGeneratorAperture
 	@discussion
 		The image is not cropped to the clean aperture region, but it is scaled according to the pixel aspect ratio. Use this option when you want to see all the pixels in your video, including the edges.
 */
-AVF_EXPORT AVAssetImageGeneratorApertureMode const AVAssetImageGeneratorApertureModeProductionAperture NS_AVAILABLE(10_7, 4_0);
+AVF_EXPORT AVAssetImageGeneratorApertureMode const AVAssetImageGeneratorApertureModeProductionAperture API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 
 /*!
 	@constant		AVAssetImageGeneratorApertureModeEncodedPixels
@@ -60,16 +60,16 @@ AVF_EXPORT AVAssetImageGeneratorApertureMode const AVAssetImageGeneratorAperture
 	@discussion
 		The image is not cropped to the clean aperture region and is not scaled according to the pixel aspect ratio. The encoded dimensions of the image description are displayed.
 */
-AVF_EXPORT AVAssetImageGeneratorApertureMode const AVAssetImageGeneratorApertureModeEncodedPixels NS_AVAILABLE(10_7, 4_0);
+AVF_EXPORT AVAssetImageGeneratorApertureMode const AVAssetImageGeneratorApertureModeEncodedPixels API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 
 typedef NS_ENUM(NSInteger, AVAssetImageGeneratorResult)
 {
-	AVAssetImageGeneratorSucceeded,
-	AVAssetImageGeneratorFailed,
-	AVAssetImageGeneratorCancelled,
+	AVAssetImageGeneratorSucceeded = 0,
+	AVAssetImageGeneratorFailed = 1,
+	AVAssetImageGeneratorCancelled = 2,
 };
 
-NS_CLASS_AVAILABLE(10_7, 4_0)
+API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 @interface AVAssetImageGenerator : NSObject
 {
 @private
@@ -78,7 +78,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 AV_INIT_UNAVAILABLE
 
 /* Indicates the instance of AVAsset with which the AVAssetImageGenerator was initialized  */ 
-@property (nonatomic, readonly) AVAsset *asset NS_AVAILABLE(10_9, 6_0);
+@property (nonatomic, readonly) AVAsset *asset API_AVAILABLE(macos(10.9), ios(6.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 
 /* Specifies whether or not to apply the track's preferredTransform (see -[AVAssetTrack preferredTransform]) when extracting an image from the asset.
    Default is NO.  Only rotation by 90, 180, or 270 degrees is supported. */
@@ -98,13 +98,13 @@ AV_INIT_UNAVAILABLE
 @property (nonatomic, copy, nullable) AVVideoComposition *videoComposition;
 
 /* Indicates the custom video compositor instance used, if any */
-@property (nonatomic, readonly, nullable) id <AVVideoCompositing> customVideoCompositor NS_AVAILABLE(10_9, 7_0);
+@property (nonatomic, readonly, nullable) id <AVVideoCompositing> customVideoCompositor API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 
 /* The actual time of the generated images will be within the range [requestedTime-toleranceBefore, requestedTime+toleranceAfter] and may differ from the requested time for efficiency.
    Pass kCMTimeZero for both toleranceBefore and toleranceAfter to request frame-accurate image generation; this may incur additional decoding delay.
    Default is kCMTimePositiveInfinity. */
-@property (nonatomic) CMTime requestedTimeToleranceBefore NS_AVAILABLE(10_7, 5_0);
-@property (nonatomic) CMTime requestedTimeToleranceAfter NS_AVAILABLE(10_7, 5_0);
+@property (nonatomic) CMTime requestedTimeToleranceBefore API_AVAILABLE(macos(10.7), ios(5.0), tvos(9.0)) API_UNAVAILABLE(watchos);
+@property (nonatomic) CMTime requestedTimeToleranceAfter API_AVAILABLE(macos(10.7), ios(5.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 
 /*!
 	@method			assetImageGeneratorWithAsset:

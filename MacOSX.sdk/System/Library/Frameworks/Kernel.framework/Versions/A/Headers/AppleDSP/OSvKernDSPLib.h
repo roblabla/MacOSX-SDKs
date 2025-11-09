@@ -23,13 +23,9 @@ extern "C" {
 #include <stdint.h>
 typedef __darwin_ptrdiff_t ptrdiff_t;
 
-#if defined __i386__ || defined __x86_64__
-
 typedef unsigned int	vUInt32 __attribute__((__vector_size__(16)));
 typedef signed int		vSInt32 __attribute__((__vector_size__(16)));
 typedef unsigned char	vUInt8  __attribute__((__vector_size__(16)));
-
-#endif	//	#if defined __i386__ || defined __x86_64__
 
 // Types for 24 bit data
 typedef struct { uint8_t bytes[3];} vDSP_uint24;
@@ -227,8 +223,6 @@ void
 void vDSP_biquad2_ResetState(vDSP_biquad_Setup);
 void vDSP_biquad2_CopyState(vDSP_biquad_Setup, vDSP_biquad_Setup);
 
-#if defined __i386__ || defined __x86_64__
-
 //-----------------------------------
 //		vBasicOps
 
@@ -318,8 +312,6 @@ extern float __sinpif(float);
 extern float __cospif(float);
 
 void vvexpf (float * /* y */, const float * /* x */, const int * /* n */);
-
-#endif	//	#if defined __i386__ || defined __x86_64__
 
 #ifdef __cplusplus
 }

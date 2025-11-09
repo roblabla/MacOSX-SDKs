@@ -11,7 +11,6 @@
 #import <AppKit/AppKit.h>
 
 #import <QuartzCore/CAMetalLayer.h>
-
 #import <Metal/Metal.h>
 
 @protocol MTKViewDelegate;
@@ -64,6 +63,21 @@ NS_CLASS_AVAILABLE(10_11, 9_0)
  @discussion This defaults to YES. This property controls whether or not the returned drawables' MTLTextures may only be used for framebuffer attachments (YES) or whether they may also be used for texture sampling and pixel read/write operations (NO). A value of YES allows the CAMetalLayer to allocate the MTLTexture objects in ways that are optimized for display purposes that makes them unsuitable for sampling. The recommended value for most applications is YES.
  */
 @property (nonatomic) BOOL framebufferOnly;
+
+/*!
+ @property depthStencilAttachmentTextureUsage
+ @abstract The usage flags set on the depth attachment.
+ @discussion This property controls the texture usage flags set on the MTKView's depth-stencil attachment on creation.  This value defaults to MTLTextureUsageRenderTarget. The recommended value for most applications is MTLTextureUsageRenderTarget. Changing this value re-creates the depth attachment, but any data currently in the depth attachment will be lost.
+ */
+@property (nonatomic) MTLTextureUsage depthStencilAttachmentTextureUsage API_AVAILABLE(macos(10.15), ios(13.0));
+
+/*!
+ @property multisampleColorAttachmentTextureUsage
+ @abstract The texture usage flags for the multisample color attachment.
+ @discussion This property controls the texture usage flags set on the the multisample color attachment attachment.  This value defaults to MTLTextureUsageRenderTarget. The recommended value for most applications is MTLTextureUsageRenderTarget. Changing this value re-creates the multisample color attachment, but any data currently in the multisample color attachment will be lost.
+ */
+@property (nonatomic) MTLTextureUsage multisampleColorAttachmentTextureUsage API_AVAILABLE(macos(10.15), ios(13.0));
+
 
 /*!
  @property presentsWithTransaction
@@ -167,6 +181,21 @@ NS_CLASS_AVAILABLE(10_11, 9_0)
  @discussion The size currentDrawable's texture, depthStencilTexture, and multisampleColorTexture.  If autoResizeDrawable is true this value will be updated as the view's size changes. If autoResizeDrawable is false, this can be set to fix the size of the drawable textures.
  */
 @property (nonatomic) CGSize drawableSize;
+
+
+/*!
+ @property preferredDrawableSize
+ @abstract The preferred drawable size reported by the backing NSView to match a NSView's native resolution.
+ @discussion this value can be observed via key-value observation to determine if the current native drawable size has changed.
+ */
+@property (nonatomic, readonly) CGSize preferredDrawableSize API_AVAILABLE(macos(10.15));
+
+/*!
+ @property preferredDevice
+ @abstract The preferred device is updated per-frame by the system in order to identify the most efficient GPU for presentation (e.g. the one being used for compositing).
+ @discussion This value is determined by the underlying CAMetalLayer and this property is a convenience accessor for it.
+ */
+@property(nullable, readonly) id<MTLDevice> preferredDevice API_AVAILABLE(macos(10.15), ios(13.0));
 
 /*!
  @property paused

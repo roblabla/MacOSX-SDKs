@@ -1,4 +1,4 @@
-.Dd 19 April, 2014
+.Dd 30 July, 2019
 .Dt launchd.plist 5
 .Os Darwin
 .Sh NAME
@@ -160,7 +160,7 @@ key is no longer supported.
 .It Sy LimitLoadFromHosts <array of strings>
 This configuration file only applies to hosts NOT listed with this key. This
 key is no longer supported.
-.It Sy LimitLoadToSessionType <string or array or strings>
+.It Sy LimitLoadToSessionType <string or array of strings>
 This configuration file only applies to sessions of the type(s) specified. This
 key only applies to jobs which are agents. There are no distinct sessions in the
 privileged system context.
@@ -209,32 +209,34 @@ mechanism to update the program arguments before invocation.
 .It Sy EnableTransactions <boolean>
 This key instructs
 .Nm launchd
-that the job promises to use
+that the job uses
 .Xr xpc_transaction_begin 3
 and
 .Xr xpc_transaction_end 3
-to track outstanding transactions that need to be reconciled before the process
-can safely terminate. If no outstanding transactions are in progress, then
+to track outstanding transactions. When a process has an outstanding
+transaction, it is considered active, otherwise inactive. A transaction is
+automatically created when an XPC message expecting a reply is received,
+until the reply is sent or the request message is discarded. When
 .Nm launchd
-will SIGKILL the process when it determines that the job needs to be stopped.
+stops an active process, it sends SIGTERM first, and then SIGKILL after a
+reasonable timeout. If the process is inactive, SIGKILL is sent immediately.
 .It Sy EnablePressuredExit <boolean>
 This key opts the job into the system's Pressured Exit facility. Use of this key
-implies the same responsibilities as use of the
+implies
 .Nm EnableTransactions
-key, but it also enables automatic tracking of activity based on XPC message
-lifetime. If the job becomes clean, the system will consider it eligible for
-reclamation under memory pressure. See
+, and also lets the system consider process eligible for reclamation under
+memory pressure when it's inactive. See
 .Xr xpc_main 3
-for details.
+for details. Jobs that opt into Pressured Exit will be automatically relaunched
+if they exit or crash while holding open transactions.
 .Pp
 .Em NOTE :
-Jobs which opt into Pressured Exit have a more heavily-managed lifecycle than
-normal jobs, and they will be automatically relaunched if they exit while
-holding open transactions. Therefore,
 .Xr launchd 8
 does not respect
-.Fa KeepAlive
-criteria for jobs which have opted into Pressured Exit.
+.Nm EnablePressuredExit 
+for jobs that have
+.Nm KeepAlive
+set to true.
 .Pp
 .Em IMPORTANT :
 Jobs which opt into Pressured Exit will ignore SIGTERM rather than exiting by
@@ -599,6 +601,14 @@ low priority when doing filesystem I/O.
 This optional key specifies whether the kernel should consider this daemon to be
 low priority when doing filesystem I/O when the process is throttled with the
 Darwin-background classification.
+.It Sy MaterializeDatalessFiles
+This optional key specifies the dataless file materialization policy.
+Setting this key to true causes dataless files to be materialized.
+Setting this key to false causes dataless files to not be materialized.
+If this key is not set, the default system policy for dataless files will be
+used.
+See
+.Xr setiopolicy_np 3
 .It Sy LaunchOnlyOnce <boolean>
 This optional key specifies whether the job can only be run once and only once.
 In other words, if the job cannot be safely respawned without a full machine
@@ -611,7 +621,7 @@ true or a dictionary in order for the service to be advertised. Valid keys in
 this dictionary are:
 .Bl -ohang -offset indent
 .It Sy ResetAtClose <boolean>
-The default value for this keyis false, and so the port is recycled, thus
+The default value for this key is false, and so the port is recycled, thus
 leaving clients to remain oblivious to the demand nature of the job. If the
 value is set to true, clients receive port death notifications when the job lets
 go of the receive right. The port will be recreated atomically with respect to
@@ -648,7 +658,7 @@ to let
 .Nm launchd
 know when to run the job. The job must check-in to get a copy of the file
 descriptors using the
-.Xr launch_activate_sockets 3
+.Xr launch_activate_socket 3
 API.
 The keys of the top level Sockets dictionary can be anything. These keys are
 meant for the application developer to associate which socket descriptors
@@ -660,7 +670,7 @@ The parameters below are used as inputs to call
 .Bl -ohang -offset indent
 .It Sy SockType <string>
 This optional key tells
-.Nm launchctl
+.Nm launchd
 what type of socket to create. The default is "stream" and other valid values
 for this key are "dgram" and "seqpacket" respectively.
 .It Sy SockPassive <boolean>
@@ -755,6 +765,10 @@ not be coalesced with other timers. This key may have no effect if the job's
 is not set to Interactive.
 .El
 .Pp
+.Sh CAVEATS
+Daemons and agents managed by launchd are subject to macOS user privacy protections.
+Specifying privacy sensitive files and folders in a launchd plist may not have
+the desired effect, and may prevent the job from running.
 .Sh DEPENDENCIES
 Unlike many bootstrapping daemons, launchd has no explicit dependency model.
 Interdependencies are expected to be solved through the use of IPC. It is
@@ -804,14 +818,7 @@ Per-user agents provided by OS X.
 .It Pa /System/Library/LaunchDaemons
 System-wide daemons provided by OS X.
 .El
-.Sh CAVEATS
-In the description of the
-.Fa OnDemand
-key, an earlier version of this manual page said true when it meant false and
-said false when it meant true. You may only ask one true/false question to
-determine which one is correct. Just kidding! This version of the manual
-page is definitely telling the truth.
-.Sh SEE ALSO 
+.Sh SEE ALSO
 .Xr launchctl 1 ,
 .Xr sysctl 3 ,
 .Xr launchd 8 ,

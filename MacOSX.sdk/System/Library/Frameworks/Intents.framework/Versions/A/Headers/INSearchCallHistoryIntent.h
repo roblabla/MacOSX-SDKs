@@ -2,7 +2,7 @@
 //  INSearchCallHistoryIntent.h
 //  Intents
 //
-//  Copyright (c) 2016-2017 Apple Inc. All rights reserved.
+//  Copyright (c) 2016-2019 Apple Inc. All rights reserved.
 //
 
 #import <Intents/INIntent.h>
@@ -22,7 +22,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-API_AVAILABLE(ios(10.0), watchos(3.2), macosx(10.12))
+API_AVAILABLE(ios(10.0), watchos(3.2))
+API_UNAVAILABLE(macosx)
 @interface INSearchCallHistoryIntent : INIntent
 
 - (instancetype)initWithDateCreated:(nullable INDateComponentsRange *)dateCreated
@@ -38,9 +39,9 @@ API_AVAILABLE(ios(10.0), watchos(3.2), macosx(10.12))
 
 @property (readonly, assign, NS_NONATOMIC_IOSONLY) INCallCapabilityOptions callCapabilities;
 
-@property (readonly, assign, NS_NONATOMIC_IOSONLY) INCallRecordTypeOptions callTypes API_AVAILABLE(ios(11.0), watchos(4.0), macosx(10.13));
+@property (readonly, assign, NS_NONATOMIC_IOSONLY) INCallRecordTypeOptions callTypes API_AVAILABLE(ios(11.0), watchos(4.0)) API_UNAVAILABLE(macosx);
 
-@property (readonly, copy, nullable, NS_NONATOMIC_IOSONLY) NSNumber *unseen NS_REFINED_FOR_SWIFT API_AVAILABLE(ios(11.0), watchos(4.0), macosx(10.13));
+@property (readonly, copy, nullable, NS_NONATOMIC_IOSONLY) NSNumber *unseen NS_REFINED_FOR_SWIFT API_AVAILABLE(ios(11.0), watchos(4.0)) API_UNAVAILABLE(macosx);
 
 @end
 
@@ -51,7 +52,8 @@ API_AVAILABLE(ios(10.0), watchos(3.2), macosx(10.12))
  @discussion The minimum requirement for an implementing class is that it should be able to handle the intent. The resolution and confirmation methods are optional. The handling method is always called last, after resolving and confirming the intent.
  */
 
-API_AVAILABLE(ios(10.0), watchos(3.2), macosx(10.12))
+API_AVAILABLE(ios(10.0), watchos(3.2))
+API_UNAVAILABLE(macosx)
 @protocol INSearchCallHistoryIntentHandling <NSObject>
 
 @required
@@ -95,7 +97,7 @@ API_AVAILABLE(ios(10.0), watchos(3.2), macosx(10.12))
  */
 
 - (void)resolveCallTypeForSearchCallHistory:(INSearchCallHistoryIntent *)intent
-                    withCompletion:(void (^)(INCallRecordTypeResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveCallType(for:with:)) API_DEPRECATED("resolveCallTypeForSearchCallHistory:withCompletion: is deprecated. Use resolveCallTypesForSearchCallHistory:withCompletion: instead", ios(10.0, 11.0), watchos(3.2, 4.0), macosx(10.12, 10.13));
+                    withCompletion:(void (^)(INCallRecordTypeResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveCallType(for:with:)) API_DEPRECATED("resolveCallTypeForSearchCallHistory:withCompletion: is deprecated. Use resolveCallTypesForSearchCallHistory:withCompletion: instead", ios(10.0, 11.0), watchos(3.2, 4.0));
 
 - (void)resolveDateCreatedForSearchCallHistory:(INSearchCallHistoryIntent *)intent
                     withCompletion:(void (^)(INDateComponentsRangeResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveDateCreated(for:with:));
@@ -104,10 +106,10 @@ API_AVAILABLE(ios(10.0), watchos(3.2), macosx(10.12))
                     withCompletion:(void (^)(INPersonResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveRecipient(for:with:));
 
 - (void)resolveCallTypesForSearchCallHistory:(INSearchCallHistoryIntent *)intent
-                    withCompletion:(void (^)(INCallRecordTypeOptionsResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveCallTypes(for:with:)) API_AVAILABLE(ios(11.0), watchos(4.0), macosx(10.13));
+                    withCompletion:(void (^)(INCallRecordTypeOptionsResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveCallTypes(for:with:)) API_AVAILABLE(ios(11.0), watchos(4.0)) API_UNAVAILABLE(macosx);
 
 - (void)resolveUnseenForSearchCallHistory:(INSearchCallHistoryIntent *)intent
-                    withCompletion:(void (^)(INBooleanResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveUnseen(for:with:)) API_AVAILABLE(ios(11.0), watchos(4.0), macosx(10.13));
+                    withCompletion:(void (^)(INBooleanResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveUnseen(for:with:)) API_AVAILABLE(ios(11.0), watchos(4.0)) API_UNAVAILABLE(macosx);
 
 @end
 

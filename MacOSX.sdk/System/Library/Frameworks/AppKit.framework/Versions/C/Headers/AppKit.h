@@ -1,7 +1,7 @@
 /*
 	AppKit.h
 	Application Kit
-	Copyright (c) 1994-2018, Apple Inc.
+	Copyright (c) 1994-2019, Apple Inc.
 	All rights reserved.
 
 	This file is included by all AppKit application source files for easy building.  Using this file is preferred over importing individual files because it will use a precompiled version.
@@ -26,10 +26,13 @@
 #import <AppKit/NSClipView.h>
 #import <AppKit/NSCollectionView.h>
 #import <AppKit/NSCollectionViewLayout.h>
+#import <AppKit/NSCollectionViewCompositionalLayout.h>
 #import <AppKit/NSCollectionViewFlowLayout.h>
 #import <AppKit/NSCollectionViewGridLayout.h>
 #import <AppKit/NSCollectionViewTransitionLayout.h>
+#import <AppKit/NSColorSampler.h>
 #import <AppKit/NSControl.h>
+#import <AppKit/NSDiffableDataSource.h>
 #import <AppKit/NSDockTile.h>
 #import <AppKit/NSFont.h>
 #import <AppKit/NSFontAssetRequest.h>
@@ -126,8 +129,11 @@
 #import <AppKit/NSSliderCell.h>
 #import <AppKit/NSSpellProtocol.h>
 #import <AppKit/NSStackView.h>
+#import <AppKit/NSSwitch.h>
 #import <AppKit/NSGridView.h>
 #import <AppKit/NSText.h>
+#import <AppKit/NSTextCheckingClient.h>
+#import <AppKit/NSTextCheckingController.h>
 #import <AppKit/NSTextField.h>
 #import <AppKit/NSTextFieldCell.h>
 #import <AppKit/NSText.h>
@@ -174,7 +180,6 @@
 #import <AppKit/NSTabView.h>
 #import <AppKit/NSTabViewController.h>
 #import <AppKit/NSTabViewItem.h>
-#import <AppKit/NSMenuView.h>
 #import <AppKit/NSMenuItemCell.h>
 #import <AppKit/NSPopUpButtonCell.h>
 #import <AppKit/NSAffineTransform.h>
@@ -185,9 +190,7 @@
 #import <AppKit/NSStatusItem.h>
 #import <AppKit/NSSound.h>
 #import <AppKit/NSMovie.h>
-#import <AppKit/NSMovieView.h>
 #import <AppKit/NSPDFImageRep.h>
-#import <AppKit/NSQuickDrawView.h>
 #import <AppKit/NSDrawer.h>
 #import <AppKit/NSOpenGL.h>
 #import <AppKit/NSOpenGLLayer.h>
@@ -198,6 +201,8 @@
 #import <AppKit/NSToolbar.h>
 #import <AppKit/NSToolbarItem.h>
 #import <AppKit/NSToolbarItemGroup.h>
+#import <AppKit/NSMenuToolbarItem.h>
+#import <AppKit/NSSharingServicePickerToolbarItem.h>
 #import <AppKit/NSWindowScripting.h>
 #import <AppKit/NSStepper.h>
 #import <AppKit/NSStepperCell.h>
@@ -248,3 +253,6 @@
 #import <AppKit/NSAlignmentFeedbackFilter.h>
 #import <AppKit/NSHapticFeedback.h>
 #import <AppKit/NSPressureConfiguration.h>
+#import <AppKit/NSButtonTouchBarItem.h>
+#import <AppKit/NSPickerTouchBarItem.h>
+#import <AppKit/NSStepperTouchBarItem.h>

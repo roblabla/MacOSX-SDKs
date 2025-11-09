@@ -1,8 +1,8 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 4BEB2735-A559-3C2B-AAC2-5813478EBD65' ]
-platform:        macosx
-install-name:    /System/Library/PrivateFrameworks/CaptiveNetwork.framework/Versions/A/CaptiveNetwork
+uuids:           [ 'x86_64: D00B837C-070A-3FA8-A95C-468AD2082547', 'x86_64: D00B837C-070A-3FA8-A95C-468AD2082547' ]
+platform:        zippered
+install-name:    '/System/Library/PrivateFrameworks/CaptiveNetwork.framework/Versions/A/CaptiveNetwork'
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _CNAccountsAdd, _CNAccountsCopy, _CNAccountsResolve, _CNAccountsUse, 
@@ -26,9 +26,11 @@ exports:
                        _CaptiveCopyWiFiLandingPageURL, _CaptiveNetworkVersionNumber, 
                        _CaptiveNetworkVersionString, _ServerConnectionCreate, _ServerConnectionGetHandlerQueue, 
                        _ServerConnectionProvideResponse, _ServerConnectionRelease, 
-                       _ServerConnectionResume, ___CNCopyCurrentNetworkInfo, ___CNCopySupportedInterfaces, 
-                       ___CNMarkPortalOffline, ___CNMarkPortalOnline, ___CNSetSupportedSSIDs, 
-                       _kCNPluginOptionDisplayName, _kCNSCaptiveBypassProperty, _kCNSCaptiveNetworkProperty, 
+                       _ServerConnectionResume, _ServerConnectionSendCmdAck, ___CNCopyCurrentNetworkInfo, 
+                       ___CNCopySupportedInterfaces, ___CNMarkPortalOffline, ___CNMarkPortalOnline, 
+                       ___CNSetSupportedSSIDs, _kCNPluginOptionDisplayName, _kCNSBrokenBackhaulPromptDateProperty, 
+                       _kCNSBrokenBackhaulUseCellularProperty, _kCNSCaptiveBypassProperty, 
+                       _kCNSCaptiveNetworkProperty, _kCNSCaptiveNetworkWebSheetLoginDateProperty, 
                        _kCNSDisabledByCaptiveProperty, _kCNSIsWhitelistedCaptiveNetworkProperty, 
                        _kCNSNetworkWasCaptiveProperty, _kCNSWebsheetInfoPropertyInterfaceName, 
                        _kCNSWebsheetInfoPropertySSID, _kCNSWebsheetInfoPropertyURL, 

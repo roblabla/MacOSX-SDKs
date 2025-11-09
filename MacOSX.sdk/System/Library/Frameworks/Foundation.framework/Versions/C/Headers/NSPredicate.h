@@ -1,5 +1,5 @@
 /*	NSPredicate.h
-	Copyright (c) 2004-2018, Apple Inc. All rights reserved.
+	Copyright (c) 2004-2019, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 // Predicates wrap some combination of expressions and operators and when evaluated return a BOOL.
 
-NS_CLASS_AVAILABLE(10_4, 3_0)
+API_AVAILABLE(macos(10.4), ios(3.0), watchos(2.0), tvos(9.0))
 @interface NSPredicate : NSObject <NSSecureCoding, NSCopying> {
     struct _predicateFlags {
         unsigned int _evaluationBlocked:1;

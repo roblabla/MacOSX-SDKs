@@ -55,7 +55,7 @@ typedef struct CF_BRIDGED_TYPE(id) __QLThumbnailRequest *QLThumbnailRequestRef;
  *      @function QLThumbnailRequestGetTypeID
  *      @abstract Returns the CoreFoundation type ID for QLThumbnailRequests.
  */
-QL_EXPORT CFTypeID QLThumbnailRequestGetTypeID();
+QL_EXPORT CFTypeID QLThumbnailRequestGetTypeID() API_DEPRECATED("Use a QLFileThumbnailRequest in a Thumbnail Extension to provide thumbnails for your file types.", macos(10.0, API_TO_BE_DEPRECATED));
 
 /*!
  *      @function QLThumbnailRequestCopyURL
@@ -63,7 +63,7 @@ QL_EXPORT CFTypeID QLThumbnailRequestGetTypeID();
  *      @param thumbnail The thumbnail request.
  *      @result The url of the file for the thumbnail request.
  */
-QL_EXPORT CFURLRef QLThumbnailRequestCopyURL(QLThumbnailRequestRef thumbnail);
+QL_EXPORT CFURLRef QLThumbnailRequestCopyURL(QLThumbnailRequestRef thumbnail) API_DEPRECATED("Use a QLFileThumbnailRequest in a Thumbnail Extension to provide thumbnails for your file types.", macos(10.0, API_TO_BE_DEPRECATED));
 
 /*!
  *      @function QLThumbnailRequestCopyOptions
@@ -71,7 +71,7 @@ QL_EXPORT CFURLRef QLThumbnailRequestCopyURL(QLThumbnailRequestRef thumbnail);
  *      @param thumbnail The thumbnail request.
  *      @result The desired options for the thumbnail request.
  */
-QL_EXPORT CFDictionaryRef QLThumbnailRequestCopyOptions(QLThumbnailRequestRef thumbnail);
+QL_EXPORT CFDictionaryRef QLThumbnailRequestCopyOptions(QLThumbnailRequestRef thumbnail) API_DEPRECATED("Use a QLFileThumbnailRequest in a Thumbnail Extension to provide thumbnails for your file types.", macos(10.0, API_TO_BE_DEPRECATED));
 
 /*!
  *      @function QLThumbnailRequestCopyContentUTI
@@ -79,7 +79,7 @@ QL_EXPORT CFDictionaryRef QLThumbnailRequestCopyOptions(QLThumbnailRequestRef th
  *      @param thumbnail The thumbnail request.
  *      @result The UTI of the content being thumbnailed, NULL if not available.
  */
-QL_EXPORT CFStringRef QLThumbnailRequestCopyContentUTI(QLThumbnailRequestRef thumbnail);
+QL_EXPORT CFStringRef QLThumbnailRequestCopyContentUTI(QLThumbnailRequestRef thumbnail) API_DEPRECATED("Use a QLFileThumbnailRequest in a Thumbnail Extension to provide thumbnails for your file types.", macos(10.0, API_TO_BE_DEPRECATED));
 
 /*!
  *      @function QLThumbnailRequestGetMaximumSize
@@ -87,14 +87,14 @@ QL_EXPORT CFStringRef QLThumbnailRequestCopyContentUTI(QLThumbnailRequestRef thu
  *      @param thumbnail The thumbnail request.
  *      @result The maximum desired size (in points) for the thumbnail request.
  */
-QL_EXPORT CGSize QLThumbnailRequestGetMaximumSize(QLThumbnailRequestRef thumbnail);
+QL_EXPORT CGSize QLThumbnailRequestGetMaximumSize(QLThumbnailRequestRef thumbnail) API_DEPRECATED("Use a QLFileThumbnailRequest in a Thumbnail Extension to provide thumbnails for your file types.", macos(10.0, API_TO_BE_DEPRECATED));
 
 /*!
  *      @function QLThumbnailRequestGetGeneratorBundle
  *      @abstract Get the thumbnail request generator bundle.
  *      @param thumbnail The thumbnail request.
  */
-QL_EXPORT CFBundleRef QLThumbnailRequestGetGeneratorBundle(QLThumbnailRequestRef thumbnail);
+QL_EXPORT CFBundleRef QLThumbnailRequestGetGeneratorBundle(QLThumbnailRequestRef thumbnail) API_DEPRECATED("Use a QLFileThumbnailRequest in a Thumbnail Extension to provide thumbnails for your file types.", macos(10.0, API_TO_BE_DEPRECATED));
 
 /*!
  *      @function QLThumbnailRequestSetDocumentObject
@@ -104,7 +104,7 @@ QL_EXPORT CFBundleRef QLThumbnailRequestGetGeneratorBundle(QLThumbnailRequestRef
  *      @param callbacks Callbacks to retain/release/etc. the object.
  *      @discussion You can only call this function once per request.
  */
-QL_EXPORT void QLThumbnailRequestSetDocumentObject(QLThumbnailRequestRef thumbnail, const void* object, const CFArrayCallBacks* callbacks) AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+QL_EXPORT void QLThumbnailRequestSetDocumentObject(QLThumbnailRequestRef thumbnail, const void* object, const CFArrayCallBacks* callbacks) API_DEPRECATED("Use a QLFileThumbnailRequest in a Thumbnail Extension to provide thumbnails for your file types.", macos(10.6, API_TO_BE_DEPRECATED));
 
 /*!
  *      @function QLThumbnailRequestGetDocumentObject
@@ -112,7 +112,7 @@ QL_EXPORT void QLThumbnailRequestSetDocumentObject(QLThumbnailRequestRef thumbna
  *      @param thumbnail The thumbnail request.
  *      @result The object representing the document
  */
-QL_EXPORT const void* QLThumbnailRequestGetDocumentObject(QLThumbnailRequestRef thumbnail) AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+QL_EXPORT const void* QLThumbnailRequestGetDocumentObject(QLThumbnailRequestRef thumbnail) API_DEPRECATED("Use a QLFileThumbnailRequest in a Thumbnail Extension to provide thumbnails for your file types.", macos(10.6, API_TO_BE_DEPRECATED));
 
 /*!
  *      @function QLThumbnailRequestSetImage
@@ -121,7 +121,7 @@ QL_EXPORT const void* QLThumbnailRequestGetDocumentObject(QLThumbnailRequestRef 
  *      @param image The thumbnail image response.
  *      @param properties See possible properties below.
  */
-QL_EXPORT void QLThumbnailRequestSetImage(QLThumbnailRequestRef thumbnail, CGImageRef image, CFDictionaryRef properties);
+QL_EXPORT void QLThumbnailRequestSetImage(QLThumbnailRequestRef thumbnail, CGImageRef image, CFDictionaryRef properties) API_DEPRECATED("Use a QLThumbnailReply in a Thumbnail Extension to provide thumbnails for your file types", macos(10.0, API_TO_BE_DEPRECATED));
 
 /*!
  *      @function QLThumbnailRequestSetImageWithData
@@ -130,7 +130,7 @@ QL_EXPORT void QLThumbnailRequestSetImage(QLThumbnailRequestRef thumbnail, CGIma
  *      @param data The thumbnail image response as data. The image format should be supported by ImageIO
  *      @param properties See possible properties below. Additional useful properties: kCGImageSourceTypeIdentifierHint (see ImageIO documentation).
  */
-QL_EXPORT void QLThumbnailRequestSetImageWithData(QLThumbnailRequestRef thumbnail, CFDataRef data, CFDictionaryRef properties);
+QL_EXPORT void QLThumbnailRequestSetImageWithData(QLThumbnailRequestRef thumbnail, CFDataRef data, CFDictionaryRef properties) API_DEPRECATED("Use a QLThumbnailReply in a Thumbnail Extension to provide thumbnails for your file types.", macos(10.0, API_TO_BE_DEPRECATED));
 
 /*!
  *      @function QLThumbnailRequestCreateContext
@@ -142,7 +142,7 @@ QL_EXPORT void QLThumbnailRequestSetImageWithData(QLThumbnailRequestRef thumbnai
  *      @result A graphic context to draw to.
  *      @discussion Once the thumbnail is fully drawn, you should call QLThumbnailRequestFlushContext().
  */
-QL_EXPORT CGContextRef QLThumbnailRequestCreateContext(QLThumbnailRequestRef thumbnail, CGSize size, Boolean isBitmap, CFDictionaryRef properties);
+QL_EXPORT CGContextRef QLThumbnailRequestCreateContext(QLThumbnailRequestRef thumbnail, CGSize size, Boolean isBitmap, CFDictionaryRef properties) API_DEPRECATED("Use a QLThumbnailReply in a Thumbnail Extension to provide thumbnails for your file types.", macos(10.0, API_TO_BE_DEPRECATED));
 
 /*!
  *      @function QLThumbnailRequestFlushContext
@@ -150,7 +150,7 @@ QL_EXPORT CGContextRef QLThumbnailRequestCreateContext(QLThumbnailRequestRef thu
  *      @param thumbnail The thumbnail request.
  *      @param context The graphic context created by QLThumbnailRequestCreateContext().
  */
-QL_EXPORT void QLThumbnailRequestFlushContext(QLThumbnailRequestRef thumbnail, CGContextRef context);
+QL_EXPORT void QLThumbnailRequestFlushContext(QLThumbnailRequestRef thumbnail, CGContextRef context) API_DEPRECATED("Use a QLThumbnailReply in a Thumbnail Extension to provide thumbnails for your file types.", macos(10.0, API_TO_BE_DEPRECATED));
 
 /*!
  *      @function QLThumbnailRequestSetImageAtURL
@@ -159,7 +159,7 @@ QL_EXPORT void QLThumbnailRequestFlushContext(QLThumbnailRequestRef thumbnail, C
  *      @param url The url to the thumbnail image response.
  *      @param properties Currently unused.
  */
-QL_EXPORT void QLThumbnailRequestSetImageAtURL(QLThumbnailRequestRef thumbnail, CFURLRef url, CFDictionaryRef properties);
+QL_EXPORT void QLThumbnailRequestSetImageAtURL(QLThumbnailRequestRef thumbnail, CFURLRef url, CFDictionaryRef properties) API_DEPRECATED("Use a QLThumbnailReply in a Thumbnail Extension to provide thumbnails for your file types.", macos(10.0, API_TO_BE_DEPRECATED));
 
 /*!
  *      @function QLThumbnailRequestSetThumbnailWithDataRepresentation
@@ -171,7 +171,7 @@ QL_EXPORT void QLThumbnailRequestSetImageAtURL(QLThumbnailRequestRef thumbnail, 
  *      @param properties Currently unused.
  *      @discussion Currently supported UTIs are: none. This call only works if your generator is set to be run in the main thread
  */
-QL_EXPORT void QLThumbnailRequestSetThumbnailWithDataRepresentation(QLThumbnailRequestRef thumbnail, CFDataRef data, CFStringRef contentTypeUTI, CFDictionaryRef previewProperties, CFDictionaryRef properties) AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+QL_EXPORT void QLThumbnailRequestSetThumbnailWithDataRepresentation(QLThumbnailRequestRef thumbnail, CFDataRef data, CFStringRef contentTypeUTI, CFDictionaryRef previewProperties, CFDictionaryRef properties) API_DEPRECATED("Use a QLThumbnailReply in a Thumbnail Extension to provide thumbnails for your file types.", macos(10.6, API_TO_BE_DEPRECATED));
 
 /*!
  *      @function QLThumbnailRequestSetThumbnailWithURLRepresentation
@@ -182,7 +182,7 @@ QL_EXPORT void QLThumbnailRequestSetThumbnailWithDataRepresentation(QLThumbnailR
  *      @param properties Additional properties for the preview response.
  *      @discussion Currently supported UTIs are: none. This call only works if your generator is set to be run in the main thread
  */
-QL_EXPORT void QLThumbnailRequestSetThumbnailWithURLRepresentation(QLThumbnailRequestRef thumbnail, CFURLRef url, CFStringRef contentTypeUTI, CFDictionaryRef previewProperties, CFDictionaryRef properties) AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+QL_EXPORT void QLThumbnailRequestSetThumbnailWithURLRepresentation(QLThumbnailRequestRef thumbnail, CFURLRef url, CFStringRef contentTypeUTI, CFDictionaryRef previewProperties, CFDictionaryRef properties) API_DEPRECATED("Use a QLThumbnailReply in a Thumbnail Extension to provide thumbnails for your file types.", macos(10.6, API_TO_BE_DEPRECATED));
 
 /*!
  *      @function QLThumbnailRequestIsCancelled
@@ -190,19 +190,19 @@ QL_EXPORT void QLThumbnailRequestSetThumbnailWithURLRepresentation(QLThumbnailRe
  *      @param thumbnail The thumbnail request.
  *      @result true if the request was cancelled.
  */
-QL_EXPORT Boolean QLThumbnailRequestIsCancelled(QLThumbnailRequestRef thumbnail);
+QL_EXPORT Boolean QLThumbnailRequestIsCancelled(QLThumbnailRequestRef thumbnail) API_DEPRECATED("Use a QLFileThumbnailRequest in a Thumbnail Extension to provide thumbnails for your file types.", macos(10.0, API_TO_BE_DEPRECATED));
 
 /*!
  *      @constant kQLThumbnailPropertyExtensionKey
  *      @abstract Value should be a CFString. The extension is used as a badge when producing an icon.
  */
-QL_EXPORT const CFStringRef kQLThumbnailPropertyExtensionKey AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+QL_EXPORT const CFStringRef kQLThumbnailPropertyExtensionKey API_DEPRECATED("Use a QLThumbnailReply in a Thumbnail Extension to provide thumbnails for your file types.", macos(10.6, API_TO_BE_DEPRECATED));
 
 /*!
  *      @constant kQLThumbnailPropertyExtensionKey
  *      @abstract Value should be a CGImage. The badge is used when producing an icon.
  */
-QL_EXPORT const CFStringRef kQLThumbnailPropertyBadgeImageKey AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+QL_EXPORT const CFStringRef kQLThumbnailPropertyBadgeImageKey API_DEPRECATED("Use a QLThumbnailReply in a Thumbnail Extension to provide thumbnails for your file types.", macos(10.6, API_TO_BE_DEPRECATED));
 
 /*!
  *      @constant kQLThumbnailPropertyExtensionKey
@@ -210,7 +210,7 @@ QL_EXPORT const CFStringRef kQLThumbnailPropertyBadgeImageKey AVAILABLE_MAC_OS_X
  *      @discussion Only useful when using QLThumbnailRequestSetImageAtURL() or QLThumbnailRequestSetThumbnailWithURLRepresentation().
  *                  By default, Quick Look will only accept files within the current document bundle.
  */
-QL_EXPORT const CFStringRef kQLThumbnailPropertyBaseBundlePathKey AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+QL_EXPORT const CFStringRef kQLThumbnailPropertyBaseBundlePathKey API_DEPRECATED("Use a QLThumbnailReply in a Thumbnail Extension to provide thumbnails for your file types.", macos(10.6, API_TO_BE_DEPRECATED));
 
 #pragma mark Preview generator callback
 
@@ -224,25 +224,25 @@ typedef struct CF_BRIDGED_TYPE(id) __QLPreviewRequest *QLPreviewRequestRef;
  *      @function QLPreviewRequestGetTypeID
  *      @abstract Returns the CoreFoundation type ID for QLPreviewRequests.
  */
-QL_EXPORT CFTypeID QLPreviewRequestGetTypeID();
+QL_EXPORT CFTypeID QLPreviewRequestGetTypeID() API_DEPRECATED("Use a QLPreviewingController in a Preview Extension to provide previews for your file types.", macos(10.0, API_TO_BE_DEPRECATED));
 
 /*!
  *      @constant kQLPreviewPropertyDisplayNameKey
  *      @abstract Customizes Displayed name in the preview panel. This replaces the document's display name. Value is a CFString.
  */
-QL_EXPORT const CFStringRef kQLPreviewPropertyDisplayNameKey; // useful to customize the title of the QuickLook panel
+QL_EXPORT const CFStringRef kQLPreviewPropertyDisplayNameKey API_DEPRECATED("Use the title property of your QLPreviewingController in a Preview Extension.", macos(10.0, API_TO_BE_DEPRECATED)); // useful to customize the title of the QuickLook panel
 
 /*!
  *      @constant kQLPreviewPropertyWidthKey
  *      @abstract Gives the width (in points) of the preview. Value is a CFNumber.
  */
-QL_EXPORT const CFStringRef kQLPreviewPropertyWidthKey;
+QL_EXPORT const CFStringRef kQLPreviewPropertyWidthKey API_DEPRECATED("Use the preferredContentSize property of your QLPreviewingController in a Preview Extension.", macos(10.0, API_TO_BE_DEPRECATED));
 
 /*!
  *      @constant kQLPreviewPropertyHeightKey
  *      @abstract Gives the height (in points) of the preview. Value is a CFNumber.
  */
-QL_EXPORT const CFStringRef kQLPreviewPropertyHeightKey;
+QL_EXPORT const CFStringRef kQLPreviewPropertyHeightKey API_DEPRECATED("Use the preferredContentSize property of your QLPreviewingController in a Preview Extension.", macos(10.0, API_TO_BE_DEPRECATED));
 
 /*!
  *      @constant kQLPreviewPropertyBaseBundlePathKey
@@ -250,13 +250,13 @@ QL_EXPORT const CFStringRef kQLPreviewPropertyHeightKey;
  *      @discussion Only useful when using QLPreviewRequestSetURLRepresentation().
  *                  By default, Quick Look will only accept files within the current document bundle.
  */
-QL_EXPORT const CFStringRef kQLPreviewPropertyBaseBundlePathKey AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+QL_EXPORT const CFStringRef kQLPreviewPropertyBaseBundlePathKey API_DEPRECATED("Use a QLPreviewingController in a Preview Extension to provide previews for your file types.", macos(10.6, API_TO_BE_DEPRECATED));
 
 /*!
  *      @constant kQLPreviewPropertyStringEncodingKey
  *      @abstract Gives the CFStringEncoding of the preview data if the preview type is plain text. Value is a CFNumber.
  */
-QL_EXPORT const CFStringRef kQLPreviewPropertyStringEncodingKey;
+QL_EXPORT const CFStringRef kQLPreviewPropertyStringEncodingKey API_DEPRECATED("Use a QLPreviewingController in a Preview Extension to provide previews for your file types.", macos(10.0, API_TO_BE_DEPRECATED));
 
 typedef enum {
     kQLPreviewPDFStandardStyle						= 0,
@@ -268,21 +268,21 @@ typedef enum {
  *      @constant kQLPreviewPropertyPDFStyleKey
  *      @abstract Specify the preferred way to display PDF content. Value is a CFNumber using QLPreviewPDFStyle values.
  */
-QL_EXPORT const CFStringRef kQLPreviewPropertyPDFStyleKey AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+QL_EXPORT const CFStringRef kQLPreviewPropertyPDFStyleKey API_DEPRECATED("Use a QLPreviewingController in a Preview Extension to provide previews for your file types.", macos(10.6, API_TO_BE_DEPRECATED));
 
 /*!
  *      @constant kQLPreviewOptionCursorKey
  *      @abstract Value is the same CFNumber passed by potential previous calls to generator's preview callback for the same document with kQLPreviewPropertyCursorKey.
  *      @discussion Use this value to provide more of the preview content.
  */
-QL_EXPORT const CFStringRef kQLPreviewOptionCursorKey AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+QL_EXPORT const CFStringRef kQLPreviewOptionCursorKey API_DEPRECATED("Use a QLPreviewingController in a Preview Extension to provide previews for your file types.", macos(10.6, API_TO_BE_DEPRECATED));
 
 /*!
  *      @constant kQLPreviewPropertyCursorKey
  *      @abstract Value should be a CFNumber. This value will be used to get more of the document's preview if necessary
  *                (and if the preview genererator returns kQLReturnHasMore)
  */
-QL_EXPORT const CFStringRef kQLPreviewPropertyCursorKey AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+QL_EXPORT const CFStringRef kQLPreviewPropertyCursorKey API_DEPRECATED("Use a QLPreviewingController in a Preview Extension to provide previews for your file types.", macos(10.6, API_TO_BE_DEPRECATED));
 
 /*!
  *      @function QLPreviewRequestCopyURL
@@ -290,7 +290,7 @@ QL_EXPORT const CFStringRef kQLPreviewPropertyCursorKey AVAILABLE_MAC_OS_X_VERSI
  *      @param preview The preview request.
  *      @result The url of the file for the preview request.
  */
-QL_EXPORT CFURLRef QLPreviewRequestCopyURL(QLPreviewRequestRef preview);
+QL_EXPORT CFURLRef QLPreviewRequestCopyURL(QLPreviewRequestRef preview) API_DEPRECATED("Use a QLPreviewingController in a Preview Extension to provide previews for your file types.", macos(10.0, API_TO_BE_DEPRECATED));
 
 /*!
  *      @function QLPreviewRequestCopyOptions
@@ -298,7 +298,7 @@ QL_EXPORT CFURLRef QLPreviewRequestCopyURL(QLPreviewRequestRef preview);
  *      @param preview The preview request.
  *      @result The desired options for the preview request.
  */
-QL_EXPORT CFDictionaryRef QLPreviewRequestCopyOptions(QLPreviewRequestRef preview);
+QL_EXPORT CFDictionaryRef QLPreviewRequestCopyOptions(QLPreviewRequestRef preview) API_DEPRECATED("Use a QLPreviewingController in a Preview Extension to provide previews for your file types.", macos(10.0, API_TO_BE_DEPRECATED));
 
 /*!
  *      @function QLPreviewRequestCopyContentUTI
@@ -306,14 +306,14 @@ QL_EXPORT CFDictionaryRef QLPreviewRequestCopyOptions(QLPreviewRequestRef previe
  *      @param preview The preview request.
  *      @result The UTI of the content being previewed, NULL if not available.
  */
-QL_EXPORT CFStringRef QLPreviewRequestCopyContentUTI(QLPreviewRequestRef preview);
+QL_EXPORT CFStringRef QLPreviewRequestCopyContentUTI(QLPreviewRequestRef preview) API_DEPRECATED("Use a QLPreviewingController in a Preview Extension to provide previews for your file types.", macos(10.0, API_TO_BE_DEPRECATED));
 
 /*!
  *      @function QLPreviewRequestGetGeneratorBundle
  *      @abstract Gets the preview request generator bundle.
  *      @param preview The preview request.
  */
-QL_EXPORT CFBundleRef QLPreviewRequestGetGeneratorBundle(QLPreviewRequestRef preview);
+QL_EXPORT CFBundleRef QLPreviewRequestGetGeneratorBundle(QLPreviewRequestRef preview) API_DEPRECATED("Use a QLPreviewingController in a Preview Extension to provide previews for your file types.", macos(10.0, API_TO_BE_DEPRECATED));
 
 /*!
  *      @function QLPreviewRequestSetDocumentObject
@@ -323,7 +323,7 @@ QL_EXPORT CFBundleRef QLPreviewRequestGetGeneratorBundle(QLPreviewRequestRef pre
  *      @param callbacks Callbacks to retain/release/etc. the object.
  *      @discussion You can only call this function once per request.
  */
-QL_EXPORT void QLPreviewRequestSetDocumentObject(QLPreviewRequestRef preview, const void* object, const CFArrayCallBacks* callbacks) AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+QL_EXPORT void QLPreviewRequestSetDocumentObject(QLPreviewRequestRef preview, const void* object, const CFArrayCallBacks* callbacks) API_DEPRECATED("Use a QLPreviewingController in a Preview Extension to provide previews for your file types.", macos(10.6, API_TO_BE_DEPRECATED));
 
 /*!
  *      @function QLPreviewRequestGetDocumentObject
@@ -331,7 +331,7 @@ QL_EXPORT void QLPreviewRequestSetDocumentObject(QLPreviewRequestRef preview, co
  *      @param preview The preview request.
  *      @result The object representing the document
  */
-QL_EXPORT const void* QLPreviewRequestGetDocumentObject(QLPreviewRequestRef preview) AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+QL_EXPORT const void* QLPreviewRequestGetDocumentObject(QLPreviewRequestRef preview) API_DEPRECATED("Use a QLPreviewingController in a Preview Extension to provide previews for your file types.", macos(10.6, API_TO_BE_DEPRECATED));
 
 /*!
  *      @function QLPreviewRequestIsCancelled
@@ -339,7 +339,7 @@ QL_EXPORT const void* QLPreviewRequestGetDocumentObject(QLPreviewRequestRef prev
  *      @param preview The preview request.
  *      @result true if the request was cancelled.
  */
-QL_EXPORT Boolean QLPreviewRequestIsCancelled(QLPreviewRequestRef preview);
+QL_EXPORT Boolean QLPreviewRequestIsCancelled(QLPreviewRequestRef preview) API_DEPRECATED("Use a QLPreviewingController in a Preview Extension to provide previews for your file types.", macos(10.0, API_TO_BE_DEPRECATED));
 
 #pragma mark Set preview to some native type preview data
 
@@ -354,7 +354,7 @@ QL_EXPORT Boolean QLPreviewRequestIsCancelled(QLPreviewRequestRef preview);
  *             kUTTypeXML, kUTTypePlainText, kUTTypeRTF, kUTTypeMovie, kUTTypeAudio,
  *             and "org.khronos.collada.digital-asset-exchange" (from OSX 10.9)
  */
-QL_EXPORT void QLPreviewRequestSetDataRepresentation(QLPreviewRequestRef preview, CFDataRef data, CFStringRef contentTypeUTI, CFDictionaryRef properties);
+QL_EXPORT void QLPreviewRequestSetDataRepresentation(QLPreviewRequestRef preview, CFDataRef data, CFStringRef contentTypeUTI, CFDictionaryRef properties) API_DEPRECATED("Use a QLPreviewingController in a Preview Extension to provide previews for your file types.", macos(10.0, API_TO_BE_DEPRECATED));
 
 /*!
  *      @function QLPreviewRequestSetURLRepresentation
@@ -367,7 +367,7 @@ QL_EXPORT void QLPreviewRequestSetDataRepresentation(QLPreviewRequestRef preview
  *                  kUTTypeXML, kUTTypePlainText, kUTTypeRTF, kUTTypeRTFD, kUTTypeMovie, kUTTypeAudio,
  *                  and "org.khronos.collada.digital-asset-exchange" (from OSX 10.9)
  */
-QL_EXPORT void QLPreviewRequestSetURLRepresentation(QLPreviewRequestRef preview, CFURLRef url, CFStringRef contentTypeUTI, CFDictionaryRef properties);
+QL_EXPORT void QLPreviewRequestSetURLRepresentation(QLPreviewRequestRef preview, CFURLRef url, CFStringRef contentTypeUTI, CFDictionaryRef properties) API_DEPRECATED("Use a QLPreviewingController in a Preview Extension to provide previews for your file types.", macos(10.0, API_TO_BE_DEPRECATED));
 
 #pragma mark Draw preview in a context
 
@@ -379,7 +379,7 @@ QL_EXPORT void QLPreviewRequestSetURLRepresentation(QLPreviewRequestRef preview,
  *      @param isBitmap true if preview is bitmap-based.
  *      @param properties Additional properties for the preview response.
  */
-QL_EXPORT CGContextRef QLPreviewRequestCreateContext(QLPreviewRequestRef preview, CGSize size, Boolean isBitmap, CFDictionaryRef properties);
+QL_EXPORT CGContextRef QLPreviewRequestCreateContext(QLPreviewRequestRef preview, CGSize size, Boolean isBitmap, CFDictionaryRef properties) API_DEPRECATED("Use a QLPreviewingController in a Preview Extension to provide previews for your file types.", macos(10.0, API_TO_BE_DEPRECATED));
 
 /*!
  *      @function QLPreviewRequestCreatePDFContext
@@ -389,7 +389,7 @@ QL_EXPORT CGContextRef QLPreviewRequestCreateContext(QLPreviewRequestRef preview
  *      @param auxiliaryInfo The PDF auxiliary info. see CGPDFContextCreate().
  *      @param properties Additional properties for the preview response.
  */
-QL_EXPORT CGContextRef QLPreviewRequestCreatePDFContext(QLPreviewRequestRef preview, const CGRect * mediaBox, CFDictionaryRef auxiliaryInfo, CFDictionaryRef properties);
+QL_EXPORT CGContextRef QLPreviewRequestCreatePDFContext(QLPreviewRequestRef preview, const CGRect * mediaBox, CFDictionaryRef auxiliaryInfo, CFDictionaryRef properties) API_DEPRECATED("Use a QLPreviewingController in a Preview Extension to provide previews for your file types.", macos(10.0, API_TO_BE_DEPRECATED));
 
 
 /*!
@@ -399,7 +399,7 @@ QL_EXPORT CGContextRef QLPreviewRequestCreatePDFContext(QLPreviewRequestRef prev
  *      @param context context previously created by QLPreviewRequestCreateContext() or QLPreviewRequestCreatePDFContext().
  */
 
-QL_EXPORT void QLPreviewRequestFlushContext(QLPreviewRequestRef preview, CGContextRef context);
+QL_EXPORT void QLPreviewRequestFlushContext(QLPreviewRequestRef preview, CGContextRef context) API_DEPRECATED("Use a QLPreviewingController in a Preview Extension to provide previews for your file types.", macos(10.0, API_TO_BE_DEPRECATED));
 
 #pragma mark Provide preview as Web content using QLPreviewRequestSetDataRepresentation
 
@@ -407,19 +407,19 @@ QL_EXPORT void QLPreviewRequestFlushContext(QLPreviewRequestRef preview, CGConte
  *      @constant kQLPreviewPropertyMIMETypeKey
  *      @abstract Gives the web content or attachment mime type. For the main data, default is text/html. Value is a CFString.
  */
-QL_EXPORT const CFStringRef kQLPreviewPropertyMIMETypeKey;
+QL_EXPORT const CFStringRef kQLPreviewPropertyMIMETypeKey API_DEPRECATED("Use a QLPreviewingController in a Preview Extension to provide previews for your file types.", macos(10.0, API_TO_BE_DEPRECATED));
 
 /*!
  *      @constant kQLPreviewPropertyTextEncodingNameKey
  *      @abstract Gives the web content or attachment text encoding. Use IANA encodings like UTF-8. Value is a CFString.
  */
-QL_EXPORT const CFStringRef kQLPreviewPropertyTextEncodingNameKey;
+QL_EXPORT const CFStringRef kQLPreviewPropertyTextEncodingNameKey; API_DEPRECATED("Use a QLPreviewingController in a Preview Extension to provide previews for your file types.", macos(10.0, API_TO_BE_DEPRECATED))
 
 /*!
  *      @constant kQLPreviewPropertyAttachmentDataKey
  *      @abstract Gives the attachment data. Value is a CFData.
  */
-QL_EXPORT const CFStringRef kQLPreviewPropertyAttachmentDataKey;
+QL_EXPORT const CFStringRef kQLPreviewPropertyAttachmentDataKey API_DEPRECATED("Use a QLPreviewingController in a Preview Extension to provide previews for your file types.", macos(10.0, API_TO_BE_DEPRECATED));
 
 /*!
  *      @constant kQLPreviewPropertyAttachmentsKey
@@ -428,13 +428,13 @@ QL_EXPORT const CFStringRef kQLPreviewPropertyAttachmentDataKey;
  *                  Values are dictionaries using kQLPreviewPropertyAttachmentDataKey,
  *                  kQLPreviewPropertyMIMETypeKey and kQLPreviewPropertyTextEncodingNameKey keys.
  */
-QL_EXPORT const CFStringRef kQLPreviewPropertyAttachmentsKey;
+QL_EXPORT const CFStringRef kQLPreviewPropertyAttachmentsKey API_DEPRECATED("Use a QLPreviewingController in a Preview Extension to provide previews for your file types.", macos(10.0, API_TO_BE_DEPRECATED));
 
 /*!
  *      @constant kQLPreviewContentIDScheme
  *      @abstract Is the "cid" URL scheme.
  */
-QL_EXPORT const CFStringRef kQLPreviewContentIDScheme;
+QL_EXPORT const CFStringRef kQLPreviewContentIDScheme API_DEPRECATED("Use a QLPreviewingController in a Preview Extension to provide previews for your file types.", macos(10.0, API_TO_BE_DEPRECATED));
 
 #pragma mark
 

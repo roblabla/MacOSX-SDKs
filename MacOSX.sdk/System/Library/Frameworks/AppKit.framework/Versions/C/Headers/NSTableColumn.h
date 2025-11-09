@@ -1,7 +1,7 @@
 /*
     NSTableColumn.h
     Application Kit
-    Copyright (c) 1995-2018, Apple Inc.
+    Copyright (c) 1995-2019, Apple Inc.
     All rights reserved.
 */
 
@@ -10,6 +10,7 @@
 #import <AppKit/NSUserInterfaceItemIdentification.h>
 
 NS_ASSUME_NONNULL_BEGIN
+API_UNAVAILABLE_BEGIN(ios)
 
 @class NSTableView, NSCell, NSImage, NSSortDescriptor, NSTableHeaderCell;
 
@@ -21,27 +22,7 @@ typedef NS_OPTIONS(NSUInteger, NSTableColumnResizingOptions) {
     NSTableColumnUserResizingMask = ( 1 << 1 ), // The user can resize this column manually.
 };
 
-@interface NSTableColumn : NSObject <NSCoding, NSUserInterfaceItemIdentification> {
-    /*All instance variables are private */
-    id		_identifier APPKIT_IVAR;
-    CGFloat	_width APPKIT_IVAR;
-    CGFloat	_minWidth APPKIT_IVAR;
-    CGFloat	_maxWidth APPKIT_IVAR;
-    __weak NSTableView *_tableView APPKIT_IVAR;
-    NSCell	*_headerCell APPKIT_IVAR;
-    NSCell	*_dataCell APPKIT_IVAR;
-    struct __colFlags {
-        unsigned int	oldIsResizable:1;
-        unsigned int	isEditable:1;
-        unsigned int	resizedPostingDisableCount:8;
-        unsigned int    canUseReorderResizeImageCache:1;
-        unsigned int    userResizingAllowed:1;
-        unsigned int    autoResizingAllowed:1;
-        unsigned int    hidden:1; // Defaults to NO
-        unsigned int	RESERVED:18;
-    } _cFlags APPKIT_IVAR;
-    id _tcAuxiliaryStorage APPKIT_IVAR;
-}
+@interface NSTableColumn : NSObject <NSCoding, NSUserInterfaceItemIdentification>
 
 /* Designated initializer for NSTableColumns. Prior to 10.7, the parameter type was 'id', but it is now an 'NSString *'. See also -setIdentifier: and -identifier, and NSUserInterfaceItemIdentification.
  */
@@ -59,6 +40,8 @@ typedef NS_OPTIONS(NSUInteger, NSTableColumnResizingOptions) {
 @property CGFloat width;
 
 /* Gets and sets the minimum width of the NSTableColumn. The default for is 10.0. If -[self width] is less than the 'minWidth' value when -setMinWidth: is called, the width will automatically be increased to the minWidth and [tableView tile] will be called.
+   Note that if the NSTableColumn is the outlineTableColumn of an NSOutlineView, minWidth will return
+    the maximum of the value set and NSOutlineView.indentationPerLevel.
  */
 @property CGFloat minWidth;
 
@@ -88,11 +71,11 @@ typedef NS_OPTIONS(NSUInteger, NSTableColumnResizingOptions) {
 
 /* Get and set the Tool Tip for the NSTableColumn header that appears when hovering the mouse over the header for the NSTableColumn. The default value is 'nil', meaning there is no headerToolTip.
 */
-@property (nullable, copy) NSString *headerToolTip NS_AVAILABLE_MAC(10_5);
+@property (nullable, copy) NSString *headerToolTip API_AVAILABLE(macos(10.5));
 
 /* Determines if the column is hidden or not. The isHidden value is stored out when the NSTableView automatically saves out NSTableColumn state. Note that columns which are hidden still exist in the the -[NSTableView tableColumns] array and -[NSTableView numberOfColumns] includes columns which are hidden. The default value is NO, meaning the NSTableColumn will not be hidden.
 */
-@property (getter=isHidden) BOOL hidden NS_AVAILABLE_MAC(10_5);
+@property (getter=isHidden) BOOL hidden API_AVAILABLE(macos(10.5));
 
 @end
 
@@ -104,8 +87,8 @@ typedef NS_OPTIONS(NSUInteger, NSTableColumnResizingOptions) {
 
 /* Deprecated in Mac OS 10.4.  If flag is YES, calls setResizingMask:(NSTableColumnUserResizingMask | NSTableColumnAutoresizingMask).  If flag is NO, calls setResizingMask:(NSTableColumnNoResizing).
  */
-- (void)setResizable:(BOOL)flag NS_DEPRECATED_MAC(10_0, 10_4);
-- (BOOL)isResizable NS_DEPRECATED_MAC(10_0, 10_4);
+- (void)setResizable:(BOOL)flag API_DEPRECATED("", macos(10.0,10.4));
+- (BOOL)isResizable API_DEPRECATED("", macos(10.0,10.4));
 
 /* Cell-based NSTableViews are deprecated in Mac OS 10.10.  Use view-based NSTableViews instead.
  */
@@ -114,4 +97,7 @@ typedef NS_OPTIONS(NSUInteger, NSTableColumnResizingOptions) {
 
 @end
 
+
+
+API_UNAVAILABLE_END
 NS_ASSUME_NONNULL_END

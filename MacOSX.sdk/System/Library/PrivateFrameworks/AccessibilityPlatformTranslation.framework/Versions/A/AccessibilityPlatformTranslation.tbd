@@ -1,18 +1,19 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 55CFEA39-D960-316C-811D-2ACCDC37A4DF' ]
+uuids:           [ 'x86_64: D86D9440-E555-3767-883C-AFE3447A2B67' ]
 platform:        macosx
-install-name:    /System/Library/PrivateFrameworks/AccessibilityPlatformTranslation.framework/Versions/A/AccessibilityPlatformTranslation
+install-name:    '/System/Library/PrivateFrameworks/AccessibilityPlatformTranslation.framework/Versions/A/AccessibilityPlatformTranslation'
 exports:         
   - archs:           [ x86_64 ]
-    symbols:         [ _AXPConvertIncomingValue, _AXPCustomActionIdentifier, _AXPCustomActionName, 
+    symbols:         [ _AXPConvertValue, _AXPCustomActionIdentifier, _AXPCustomActionName, 
                        _AXPCustomRotorDirection, _AXPCustomRotorName, _AXPCustomRotorSystemType, 
                        _AXPCustomRotorTargetElement, _AXPCustomRotorTargetRange, 
                        _AXPCustomRotorUUID, _AccessibilityPlatformTranslationVersionNumber, 
                        _AccessibilityPlatformTranslationVersionString, __AXPActionToString, 
                        __AXPAttributeToString, __AXPConvertRoleToMacRole, __AXPConvertSubroleToMacSubrole, 
-                       __AXPNotificationToString, __convertAXPRotorTypeToMacRotorType, 
-                       __convertMacRotorDirection ]
+                       __AXPNotificationToString, __ApplicationElement, __convertAXPActionToMacActionName, 
+                       __convertAXPRotorTypeToMacRotorType, __convertMacRotorDirection ]
     objc-classes:    [ AXPMacPlatformElement, AXPTranslationObject, AXPTranslator, 
-                       AXPTranslatorRequest, AXPTranslatorResponse, AXPTranslator_macOS ]
+                       AXPTranslatorRequest, AXPTranslatorResponse, AXPTranslator_iOS, 
+                       AXPTranslator_macOS, AXPiOSElementData ]
 ...

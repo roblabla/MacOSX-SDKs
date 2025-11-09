@@ -1,7 +1,7 @@
 /*
 	NSMatrix.h
 	Application Kit
-	Copyright (c) 1994-2018, Apple Inc.
+	Copyright (c) 1994-2019, Apple Inc.
 	All rights reserved.
 */
 
@@ -10,6 +10,7 @@
 #import <AppKit/NSUserInterfaceValidation.h>
 
 NS_ASSUME_NONNULL_BEGIN
+API_UNAVAILABLE_BEGIN(ios)
 
 @class NSColor;
 @protocol NSMatrixDelegate;
@@ -23,64 +24,10 @@ typedef NS_ENUM(NSUInteger, NSMatrixMode) {
     NSTrackModeMatrix			= 3
 };
 
-typedef struct __MFlags {
-    unsigned int	reservedMatrix:2;
-    unsigned int	cellSizeNeedsAutorecalc:1;
-    unsigned int	autorecalculatesCellSize:1;
-    unsigned int	drawingContextMenuHighlightOnAllSelectedRows:1;
-    unsigned int	drawingContextMenuHighlight:1;
-    unsigned int	browserOptimizationsEnabled:1;
-    unsigned int	reservedMatrix3:1;
-    unsigned int	tmpAllowNonVisibleCellsToBecomeFirstResponder:1;
-    unsigned int	reservedMatrix2:3;
-    unsigned int	checkForSimpleTrackingMode:1;
-    unsigned int	useSimpleTrackingMode:1;
-    unsigned int	refusesFirstResponder:1;
-    unsigned int	dontScroll:1;
-    unsigned int	changingSelectionWithKeyboard:1;
-    unsigned int	onlySetKeyCell:1;
-    unsigned int	currentlySelectingCell:1;
-    unsigned int	allowsIncrementalSearching:1;
-    unsigned int	tabKeyTraversesCellsExplicitlySet:1;
-    unsigned int	tabKeyTraversesCells:1;
-    unsigned int	drawingAncestor:1;
-    unsigned int	autosizeCells:1;
-    unsigned int	drawsBackground:1;
-    unsigned int	drawsCellBackground:1;
-    unsigned int	selectionByRect:1;
-    unsigned int	autoscroll:1;
-    unsigned int	allowEmptySel:1;
-    unsigned int	listMode:1;
-    unsigned int	radioMode:1;
-    unsigned int	highlightMode:1;
-} _MFlags;
-
 /*
     NSMatrix is deprecated and will be unsupported in future releases.  For radio button grouping, sibling radio buttons that share the same action will operate in an exclusive mode.
  */
 @interface NSMatrix : NSControl <NSUserInterfaceValidations, NSViewToolTipOwner>
-{
-    /*All instance variables are private*/
-    id                          _reserved2 APPKIT_IVAR;
-    SEL                         _reserved3 APPKIT_IVAR;
-    SEL                         _doubleAction APPKIT_IVAR;
-    SEL                         _errorAction APPKIT_IVAR;
-    __weak id                   _delegate APPKIT_IVAR;
-    id                          _selectedCell APPKIT_IVAR;
-    NSInteger                   _selectedRow APPKIT_IVAR;
-    NSInteger                   _selectedCol APPKIT_IVAR;
-    NSInteger                   _numRows APPKIT_IVAR;
-    NSInteger                   _numCols APPKIT_IVAR;
-    NSSize                      _cellSize APPKIT_IVAR;
-    NSSize                      _intercell APPKIT_IVAR;
-    id                          _font APPKIT_IVAR;
-    id                          _protoCell APPKIT_IVAR;
-    id                          _cellClass APPKIT_IVAR;
-    NSColor                    *_backgroundColor APPKIT_IVAR;
-    id                          _private APPKIT_IVAR;
-    NSMutableArray	       *_cells APPKIT_IVAR;
-    _MFlags                     _mFlags APPKIT_IVAR;
-}
 
 
 - (instancetype)initWithFrame:(NSRect)frameRect;
@@ -96,7 +43,7 @@ typedef struct __MFlags {
 - (void)sendAction:(SEL)selector to:(id)object forAllCells:(BOOL)flag;
 @property (readonly, copy) NSArray<NSCell *> *cells;
 - (void)sortUsingSelector:(SEL)comparator;
-- (void)sortUsingFunction:(NSInteger (NS_NOESCAPE *)(id, id, void * __nullable))compare context:(nullable void *)context;
+- (void)sortUsingFunction:(NSInteger (NS_NOESCAPE *)(id, id, void * _Nullable))compare context:(nullable void *)context;
 @property (nullable, readonly, strong) __kindof NSCell *selectedCell;
 @property (readonly, copy) NSArray<__kindof NSCell *> *selectedCells;
 @property (readonly) NSInteger selectedRow;
@@ -167,7 +114,7 @@ typedef struct __MFlags {
  
    The default is NO. When using autolayout, you typically want this to be set to YES.
  */
-@property BOOL autorecalculatesCellSize NS_AVAILABLE_MAC(10_8);
+@property BOOL autorecalculatesCellSize API_AVAILABLE(macos(10.8));
 
 @end
 
@@ -178,5 +125,8 @@ typedef struct __MFlags {
 
 @protocol NSMatrixDelegate <NSControlTextEditingDelegate> @end
 
+
+
+API_UNAVAILABLE_END
 NS_ASSUME_NONNULL_END
 

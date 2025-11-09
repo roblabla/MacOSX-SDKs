@@ -5,6 +5,9 @@
 //  Copyright (c) 2012 Apple Inc. All rights reserved.
 //
 
+#ifndef GKDialogController_h
+#define GKDialogController_h
+
 #import <Cocoa/Cocoa.h>
 
 NS_ASSUME_NONNULL_BEGIN
@@ -14,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface GKDialogController : NSResponder
 
-@property (assign, nullable) IBOutlet NSWindow *parentWindow;
+@property (weak, nullable) IBOutlet NSWindow *parentWindow;
 
 - (BOOL)presentViewController:(NSViewController<GKViewController>  *)viewController;
 - (IBAction)dismiss:(id)sender;
@@ -26,3 +29,5 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 NS_ASSUME_NONNULL_END
+
+#endif

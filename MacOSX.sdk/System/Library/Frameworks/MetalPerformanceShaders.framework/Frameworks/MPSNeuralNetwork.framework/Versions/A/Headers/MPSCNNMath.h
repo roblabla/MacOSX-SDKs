@@ -30,7 +30,7 @@ extern "C" {
  *
  *              The clamp mask is stored internally and is not accessible by the user.
  */
-MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3))
+MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3))
 @interface MPSCNNArithmeticGradientState : MPSNNBinaryGradientState
 
 /*
@@ -45,7 +45,7 @@ MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3))
 #pragma mark MPSCNNArithmeticGradientStateBatch
 
 typedef NSArray<MPSCNNArithmeticGradientState*> MPSCNNArithmeticGradientStateBatch
-MPS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3));
+MPS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3));
 
 
 #pragma mark -
@@ -94,7 +94,7 @@ MPS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3));
  *
  *              You must use one of the sub-classes of MPSImageArithmetic.
  */
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), tvos(11.3))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3))
 @interface MPSCNNArithmetic : MPSCNNBinaryKernel
 
 @property (readwrite, nonatomic) float primaryScale;
@@ -186,7 +186,7 @@ MPS_SWIFT_NAME( encodeBatch(commandBuffer:primaryImages:secondaryImages:destinat
  *              For each pixel in the primary source image (x) and each pixel in a secondary source image (y),
  *              it applies the following function: result = ((primaryScale * x) + (secondaryScale * y)) + bias.
  */
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), tvos(11.3))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3))
 @interface  MPSCNNAdd : MPSCNNArithmetic
 
 /*!
@@ -209,7 +209,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), tvos(11.3))
  *              For each pixel in the primary source image (x) and each pixel in a secondary source image (y),
  *              it applies the following function: result = ((primaryScale * x) - (secondaryScale * y)) + bias.
  */
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), tvos(11.3))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3))
 @interface  MPSCNNSubtract : MPSCNNArithmetic
 
 /*!
@@ -232,7 +232,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), tvos(11.3))
  *              For each pixel in the primary source image (x) and each pixel in a secondary source image (y),
  *              it applies the following function: result = ((primaryScale * x) * (secondaryScale * y)) + bias.
  */
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), tvos(11.3))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3))
 @interface  MPSCNNMultiply : MPSCNNArithmetic
 
 /*!
@@ -255,7 +255,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), tvos(11.3))
  *              For each pixel in the primary source image (x) and each pixel in a secondary source image (y),
  *              it applies the following function: result = ((primaryScale * x) / (secondaryScale * y)) + bias.
  */
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), tvos(11.3))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3))
 @interface  MPSCNNDivide : MPSCNNArithmetic
 
 /*!
@@ -279,12 +279,12 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), tvos(11.3))
     typedef NS_OPTIONS(NSUInteger, MPSNNComparisonType)
 #endif
 {
-    MPSNNComparisonTypeEqual       MPS_ENUM_AVAILABLE_STARTING( macos(10.14.1), ios(12.1), tvos(12.1))   MPS_SWIFT_NAME(equal),
-    MPSNNComparisonTypeNotEqual    MPS_ENUM_AVAILABLE_STARTING( macos(10.14.1), ios(12.1), tvos(12.1))   MPS_SWIFT_NAME(notEqual),
-    MPSNNComparisonTypeLess        MPS_ENUM_AVAILABLE_STARTING( macos(10.14.1), ios(12.1), tvos(12.1))   MPS_SWIFT_NAME(less),
-    MPSNNComparisonTypeLessOrEqual MPS_ENUM_AVAILABLE_STARTING( macos(10.14.1), ios(12.1), tvos(12.1))   MPS_SWIFT_NAME(lessOrEqual),
-    MPSNNComparisonTypeGreater     MPS_ENUM_AVAILABLE_STARTING( macos(10.14.1), ios(12.1), tvos(12.1))   MPS_SWIFT_NAME(greater),
-    MPSNNComparisonTypeGreaterOrEqual  MPS_ENUM_AVAILABLE_STARTING( macos(10.14.1), ios(12.1), tvos(12.1))   MPS_SWIFT_NAME(greaterOrEqual)
+    MPSNNComparisonTypeEqual       MPS_ENUM_AVAILABLE_STARTING( macos(10.14.1), ios(12.1), macCatalyst(13.0), tvos(12.1))   MPS_SWIFT_NAME(equal),
+    MPSNNComparisonTypeNotEqual    MPS_ENUM_AVAILABLE_STARTING( macos(10.14.1), ios(12.1), macCatalyst(13.0), tvos(12.1))   MPS_SWIFT_NAME(notEqual),
+    MPSNNComparisonTypeLess        MPS_ENUM_AVAILABLE_STARTING( macos(10.14.1), ios(12.1), macCatalyst(13.0), tvos(12.1))   MPS_SWIFT_NAME(less),
+    MPSNNComparisonTypeLessOrEqual MPS_ENUM_AVAILABLE_STARTING( macos(10.14.1), ios(12.1), macCatalyst(13.0), tvos(12.1))   MPS_SWIFT_NAME(lessOrEqual),
+    MPSNNComparisonTypeGreater     MPS_ENUM_AVAILABLE_STARTING( macos(10.14.1), ios(12.1), macCatalyst(13.0), tvos(12.1))   MPS_SWIFT_NAME(greater),
+    MPSNNComparisonTypeGreaterOrEqual  MPS_ENUM_AVAILABLE_STARTING( macos(10.14.1), ios(12.1), macCatalyst(13.0), tvos(12.1))   MPS_SWIFT_NAME(greaterOrEqual)
 };
     
 /*!
@@ -294,7 +294,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), tvos(11.3))
  *              For each pixel in the primary source image (x) and each pixel in a secondary source image (y),
  *              it applies the following function: result = (abs(x-y)) <= threshold
  */
-MPS_CLASS_AVAILABLE_STARTING( macos(10.14.1), ios(12.1), tvos(12.1))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.14.1), ios(12.1), macCatalyst(13.0), tvos(12.1))
 @interface  MPSNNCompare : MPSCNNArithmetic
 /*! @property   comparisonType
  *  @abstract   The comparison type to use
@@ -385,7 +385,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.14.1), ios(12.1), tvos(12.1))
  *
  *              You must use one of the sub-classes of MPSImageArithmeticGradient.
  */
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), tvos(11.3))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3))
 @interface MPSCNNArithmeticGradient : MPSCNNGradientKernel
 
 @property (readwrite, nonatomic) float primaryScale;
@@ -454,7 +454,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), tvos(11.3))
  *              combination thereof) to produce the destination image of the size that matches the
  *              primary/secondary input images used in the forward pass.
  */
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), tvos(11.3))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3))
 @interface  MPSCNNAddGradient : MPSCNNArithmeticGradient
 
 /*!
@@ -494,7 +494,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), tvos(11.3))
  *              combination thereof) to produce the destination image of the size that matches the
  *              primary/secondary input images used in the forward pass.
  */
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), tvos(11.3))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3))
 @interface  MPSCNNSubtractGradient : MPSCNNArithmeticGradient
 
 /*!
@@ -535,7 +535,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), tvos(11.3))
  *              combination thereof) to produce the destination image of the size that matches the
  *              primary/secondary input images used in the forward pass.
  */
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), tvos(11.3))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3))
 @interface  MPSCNNMultiplyGradient : MPSCNNArithmeticGradient
 
 /*!

@@ -19,6 +19,8 @@ NS_ASSUME_NONNULL_BEGIN
 NS_CLASS_AVAILABLE_MAC(10_7)
 @interface CWNetworkProfile : NSObject <NSCopying, NSMutableCopying, NSSecureCoding> {
     
+@private
+
     NSData          *_ssidData;
     
     NSString        *_ssid;
@@ -31,8 +33,10 @@ NS_CLASS_AVAILABLE_MAC(10_7)
     
     BOOL            _hiddenNetwork;
     
-    NSDate          *_lastConnected;
-    
+    NSDate          *_lastAutoJoinAt;
+
+    NSDate          *_lastManualJoinAt;
+
     NSInteger       _captiveNetworkStatus;
     
     BOOL            _wasCaptiveNetwork;
@@ -40,6 +44,8 @@ NS_CLASS_AVAILABLE_MAC(10_7)
     BOOL            _temporarilyDisabled;
     
     BOOL            _captiveBypass;
+
+    NSDate          *_captiveSheetTimestamp;
 
     BOOL            _isPasspoint;
     
@@ -72,6 +78,10 @@ NS_CLASS_AVAILABLE_MAC(10_7)
     NSString        *_payloadUUID;
     
     NSUInteger      _addedBy;
+    
+    NSDate          *_addedAt;
+
+    NSDate          *_wasHiddenBefore;
 }
 
 /*!
@@ -190,7 +200,7 @@ NS_CLASS_AVAILABLE_MAC(10_7)
  * @abstract
  * Set the service set identifier (SSID).
  */
-@property(copy, nullable) NSData *ssidData NS_AVAILABLE_MAC(10_7);
+@property(nullable, copy) NSData *ssidData NS_AVAILABLE_MAC(10_7);
 
 /*!
  * @property

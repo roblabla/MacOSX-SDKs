@@ -58,7 +58,7 @@ typedef struct __CSIdentityAuthority*   CSIdentityAuthorityRef;
  *    Non-Carbon CFM:   not available
  */
 extern CFTypeID 
-CSIdentityAuthorityGetTypeID(void)                            __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_5_0);
+CSIdentityAuthorityGetTypeID(void)                            API_AVAILABLE( ios(5.0), macos(10.5), tvos(9.0), watchos(1.0) );
 
 
 
@@ -86,7 +86,7 @@ CSIdentityAuthorityGetTypeID(void)                            __OSX_AVAILABLE_ST
  *    Non-Carbon CFM:   not available
  */
 extern CSIdentityAuthorityRef 
-CSGetDefaultIdentityAuthority(void)                           __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_NA);
+CSGetDefaultIdentityAuthority(void)                           API_AVAILABLE( macos(10.5) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 
@@ -109,7 +109,7 @@ CSGetDefaultIdentityAuthority(void)                           __OSX_AVAILABLE_ST
  *    Non-Carbon CFM:   not available
  */
 extern CSIdentityAuthorityRef 
-CSGetLocalIdentityAuthority(void)                             __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_NA);
+CSGetLocalIdentityAuthority(void)                             API_AVAILABLE( macos(10.5) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 
@@ -137,7 +137,7 @@ CSGetLocalIdentityAuthority(void)                             __OSX_AVAILABLE_ST
  *    Non-Carbon CFM:   not available
  */
 extern CSIdentityAuthorityRef 
-CSGetManagedIdentityAuthority(void)                           __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_NA);
+CSGetManagedIdentityAuthority(void)                           API_AVAILABLE( macos(10.5) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 
@@ -164,7 +164,7 @@ CSGetManagedIdentityAuthority(void)                           __OSX_AVAILABLE_ST
  *    Non-Carbon CFM:   not available
  */
 extern CFStringRef 
-CSIdentityAuthorityCopyLocalizedName(CSIdentityAuthorityRef authority) __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_5_0);
+CSIdentityAuthorityCopyLocalizedName(CSIdentityAuthorityRef authority) API_AVAILABLE( ios(5.0), macos(10.5), tvos(9.0), watchos(1.0) );
 
 
 

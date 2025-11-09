@@ -1,29 +1,20 @@
 /*
 	NSCustomImageRep.h
 	Application Kit
-	Copyright (c) 1994-2018, Apple Inc.
+	Copyright (c) 1994-2019, Apple Inc.
 	All rights reserved.
 */
 
 #import <AppKit/NSImageRep.h>
 
 NS_ASSUME_NONNULL_BEGIN
+API_UNAVAILABLE_BEGIN(ios)
 
-@interface NSCustomImageRep : NSImageRep {
-    /*All instance variables are private*/
-#if __OBJC2__
-    unsigned int _reserved APPKIT_IVAR;
-    SEL _drawMethod APPKIT_IVAR;
-    id _drawObject APPKIT_IVAR;
-#else /* __OBJC2__ */
-    SEL _drawMethod APPKIT_IVAR;
-    id _drawObject APPKIT_IVAR;
-    unsigned int _reserved APPKIT_IVAR;
-#endif /* __OBJC2__ */
-}
+@interface NSCustomImageRep : NSImageRep
+
 // Note that the block passed to the below method may be invoked whenever and on whatever thread the image itself is drawn on. Care should be taken to ensure that all state accessed within the drawingHandler block is done so in a thread safe manner.
-- (instancetype)initWithSize:(NSSize)size flipped:(BOOL)drawingHandlerShouldBeCalledWithFlippedContext drawingHandler:(BOOL (^)(NSRect dstRect))drawingHandler NS_AVAILABLE_MAC(10_8);
-@property (nullable, readonly, copy) BOOL (^drawingHandler)(NSRect) NS_AVAILABLE_MAC(10_8);
+- (instancetype)initWithSize:(NSSize)size flipped:(BOOL)drawingHandlerShouldBeCalledWithFlippedContext drawingHandler:(BOOL (^)(NSRect dstRect))drawingHandler API_AVAILABLE(macos(10.8));
+@property (nullable, readonly, copy) BOOL (^drawingHandler)(NSRect) API_AVAILABLE(macos(10.8));
 
 - (instancetype)initWithDrawSelector:(SEL)selector delegate:(id)delegate;
 @property (nullable, readonly) SEL drawSelector;
@@ -31,5 +22,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+API_UNAVAILABLE_END
 NS_ASSUME_NONNULL_END
 

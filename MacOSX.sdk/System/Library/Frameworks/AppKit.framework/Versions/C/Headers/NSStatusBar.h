@@ -1,7 +1,7 @@
 /*
         NSStatusBar.h
         Application Kit
-        Copyright (c) 1997-2018, Apple Inc.
+        Copyright (c) 1997-2019, Apple Inc.
         All rights reserved.
 */
 
@@ -10,6 +10,7 @@
 #import <AppKit/AppKitDefines.h>
 
 NS_ASSUME_NONNULL_BEGIN
+API_UNAVAILABLE_BEGIN(ios)
 
 @class NSColor;
 @class NSFont;
@@ -20,13 +21,6 @@ static const CGFloat NSVariableStatusItemLength = -1.0;
 static const CGFloat NSSquareStatusItemLength = -2.0;
 
 @interface NSStatusBar : NSObject
-{
- @private
-    id             _items APPKIT_IVAR;
-    void           *_fReserved1 APPKIT_IVAR;
-    void           *_fReserved2 __unused APPKIT_IVAR;
-    NSInteger      _registeredForNote APPKIT_IVAR;
-}
 
 @property (class, readonly, strong) NSStatusBar *systemStatusBar;
 
@@ -38,4 +32,5 @@ static const CGFloat NSSquareStatusItemLength = -2.0;
 
 @end
 
+API_UNAVAILABLE_END
 NS_ASSUME_NONNULL_END

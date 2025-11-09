@@ -2,7 +2,7 @@
 //  INStartVideoCallIntent.h
 //  Intents
 //
-//  Copyright (c) 2016-2017 Apple Inc. All rights reserved.
+//  Copyright (c) 2016-2019 Apple Inc. All rights reserved.
 //
 
 #import <Intents/INIntent.h>
@@ -13,8 +13,9 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-API_AVAILABLE(ios(10.0), macosx(10.12))
 API_UNAVAILABLE(watchos)
+API_UNAVAILABLE(macosx)
+API_DEPRECATED("INStartVideoCallIntent is deprecated. Please adopt INStartCallIntent instead", ios(10.0, 13.0))
 @interface INStartVideoCallIntent : INIntent
 
 - (instancetype)initWithContacts:(nullable NSArray<INPerson *> *)contacts NS_DESIGNATED_INITIALIZER;
@@ -31,8 +32,9 @@ API_UNAVAILABLE(watchos)
  @discussion The minimum requirement for an implementing class is that it should be able to handle the intent. The resolution and confirmation methods are optional. The handling method is always called last, after resolving and confirming the intent.
  */
 
-API_AVAILABLE(ios(10.0), macosx(10.12))
 API_UNAVAILABLE(watchos)
+API_UNAVAILABLE(macosx)
+API_DEPRECATED("INStartVideoCallIntent is deprecated. Please adopt INStartCallIntent instead", ios(10.0, 13.0))
 @protocol INStartVideoCallIntentHandling <NSObject>
 
 @required

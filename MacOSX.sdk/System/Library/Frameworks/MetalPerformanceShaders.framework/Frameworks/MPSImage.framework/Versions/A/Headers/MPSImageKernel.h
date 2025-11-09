@@ -124,7 +124,7 @@ typedef id <MTLTexture> __nonnull NS_RETURNS_RETAINED (^MPSCopyAllocator)(
  *  @dependency This depends on Metal.framework
  *  @discussion A MPSUnaryImageKernel consumes one MTLTexture and produces one MTLTexture.
  */
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(9.0), tvos(9.0))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(9.0), macCatalyst(13.0), tvos(9.0))
 @interface MPSUnaryImageKernel : MPSKernel
 
 
@@ -182,7 +182,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(9.0), tvos(9.0))
  */
 -(nullable instancetype) initWithCoder:(NSCoder * __nonnull)aDecoder
                                 device:(nonnull id <MTLDevice>) device NS_DESIGNATED_INITIALIZER
-                            MPS_AVAILABLE_STARTING(macos(10.13), ios(11.0), tvos(11.0));
+                            MPS_AVAILABLE_STARTING(macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0));
 
 /*!
  *  This method attempts to apply the MPSKernel in place on a texture.
@@ -219,14 +219,14 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(9.0), tvos(9.0))
  *  Sample usage with a copy allocator:
  *  @code
  *  id <MTLTexture> inPlaceTex = ...;
- *  MPSImageSobel *sobelFiler = [[MPSImageSobel alloc] initWithDevice: my_device];
+ *  MPSImageSobel *sobelFiler = [[MPSImageSobel alloc] initWithDevice: myDevice];
  *
  *  // With a fallback MPSCopyAllocator, failure should only occur in exceptional
  *  // conditions such as MTLTexture allocation failure or programmer error.
  *  // That is, the operation is roughly as robust as the MPSCopyAllocator.
  *  // Depending on the quality of that, we might decide we are justified here
  *  // in not checking the return value.
- *  [sobelFilter encodeToCommandBuffer: my_command_buffer
+ *  [sobelFilter encodeToCommandBuffer: myCommandBuffer
  *                      inPlaceTexture: &inPlaceTex  // may be replaced!
  *               fallbackCopyAllocator: myAllocator];
  *
@@ -341,7 +341,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(9.0), tvos(9.0))
  *  @dependency This depends on Metal.framework
  *  @discussion A MPSBinaryImageKernel consumes two MTLTextures and produces one MTLTexture.
  */
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(9.0), tvos(9.0))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(9.0), macCatalyst(13.0), tvos(9.0))
 @interface MPSBinaryImageKernel : MPSKernel
 
 /*! @property   primaryOffset
@@ -421,7 +421,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(9.0), tvos(9.0))
  */
 -(nullable instancetype) initWithCoder:(NSCoder * __nonnull)aDecoder
                                 device:(nonnull id <MTLDevice>) device NS_DESIGNATED_INITIALIZER
-                MPS_AVAILABLE_STARTING(macos(10.13), ios(11.0), tvos(11.0));
+                MPS_AVAILABLE_STARTING(macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0));
 
 
 /*!

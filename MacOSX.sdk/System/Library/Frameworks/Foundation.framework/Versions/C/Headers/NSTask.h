@@ -1,5 +1,5 @@
 /*	NSTask.h
-	Copyright (c) 1996-2018, Apple Inc. All rights reserved.
+	Copyright (c) 1996-2019, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 typedef NS_ENUM(NSInteger, NSTaskTerminationReason) {
     NSTaskTerminationReasonExit = 1,
     NSTaskTerminationReasonUncaughtSignal = 2
-} NS_ENUM_AVAILABLE(10_6, NA);
+} API_AVAILABLE(macos(10.6)) API_UNAVAILABLE(ios, watchos, tvos);
 
 @interface NSTask : NSObject
 
@@ -72,12 +72,12 @@ A block to be invoked when the process underlying the NSTask terminates.  Settin
 
 @interface NSTask (NSDeprecated)
 
-@property (nullable, copy) NSString *launchPath;
-@property (copy) NSString *currentDirectoryPath; // if not set, use current
+@property (nullable, copy) NSString *launchPath API_DEPRECATED_WITH_REPLACEMENT("executableURL", macos(10.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(ios, watchos, tvos);
+@property (copy) NSString *currentDirectoryPath API_DEPRECATED_WITH_REPLACEMENT("currentDirectoryURL", macos(10.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(ios, watchos, tvos); // if not set, use current
 
-- (void)launch;
+- (void)launch API_DEPRECATED_WITH_REPLACEMENT("launchAndReturnError:", macos(10.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(ios, watchos, tvos);
 
-+ (NSTask *)launchedTaskWithLaunchPath:(NSString *)path arguments:(NSArray<NSString *> *)arguments;
++ (NSTask *)launchedTaskWithLaunchPath:(NSString *)path arguments:(NSArray<NSString *> *)arguments API_DEPRECATED_WITH_REPLACEMENT("launchedTaskWithExecutableURL:arguments:error:", macos(10.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(ios, watchos, tvos);
 // convenience; create and launch
 
 @end

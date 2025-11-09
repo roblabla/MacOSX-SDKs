@@ -1,7 +1,7 @@
 /*
         NSPDFPanel.h
         Application Kit
-        Copyright (c) 2013-2018, Apple Inc.
+        Copyright (c) 2013-2019, Apple Inc.
         All rights reserved.
 */
 
@@ -9,6 +9,7 @@
 #import <AppKit/AppKitDefines.h>
 
 NS_ASSUME_NONNULL_BEGIN
+API_UNAVAILABLE_BEGIN(ios)
 
 @class NSMutableArray, NSString;
 @class NSPDFInfo, NSViewController, NSWindow;
@@ -17,16 +18,10 @@ typedef NS_OPTIONS(NSInteger, NSPDFPanelOptions) {
     NSPDFPanelShowsPaperSize = 1 << 2,
     NSPDFPanelShowsOrientation = 1 << 3,
     NSPDFPanelRequestsParentDirectory = 1 << 24
-} NS_ENUM_AVAILABLE_MAC(10_9);
+} API_AVAILABLE(macos(10.9));
 
-NS_CLASS_AVAILABLE_MAC(10_9)
-@interface NSPDFPanel : NSObject {
-    NSViewController *_accessoryController APPKIT_IVAR;
-    NSPDFPanelOptions _options APPKIT_IVAR;
-    NSString *_defaultFileName APPKIT_IVAR;
-    id _panel APPKIT_IVAR;
-    id _private APPKIT_IVAR;
-};
+API_AVAILABLE(macos(10.9))
+@interface NSPDFPanel : NSObject
 
 /* Create a new NSPDFPanel.
 */
@@ -49,4 +44,5 @@ NS_CLASS_AVAILABLE_MAC(10_9)
 - (void)beginSheetWithPDFInfo:(NSPDFInfo *)pdfInfo modalForWindow:(nullable NSWindow *)docWindow completionHandler:(void (^)(NSInteger))completionHandler;
 @end
 
+API_UNAVAILABLE_END
 NS_ASSUME_NONNULL_END

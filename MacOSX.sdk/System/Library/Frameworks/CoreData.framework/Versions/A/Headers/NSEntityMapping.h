@@ -1,7 +1,7 @@
 /*
     NSEntityMapping.h
     Core Data
-    Copyright (c) 2004-2018, Apple Inc.
+    Copyright (c) 2004-2019, Apple Inc.
     All rights reserved.
 */
 
@@ -28,29 +28,6 @@ typedef NS_ENUM(NSUInteger, NSEntityMappingType) {
 
 API_AVAILABLE(macosx(10.5),ios(3.0))
 @interface NSEntityMapping : NSObject {
-#if (!__OBJC2__)
-@private
-    void *_reserved;
-    void *_reserved1;
-    NSDictionary *_mappingsByName;
-    NSString *_name;
-    NSEntityMappingType _mappingType;
-    NSString *_sourceEntityName;
-    NSData *_sourceEntityVersionHash;
-    NSString *_destinationEntityName;
-    NSData *_destinationEntityVersionHash;
-    NSExpression *_sourceExpression;
-    NSDictionary *_userInfo;
-    NSString *_entityMigrationPolicyClassName;
-    NSMutableArray *_attributeMappings;
-    NSMutableArray *_relationshipMappings;
-
-    struct __entityMappingFlags {
-        unsigned int _isInUse:1;
-        unsigned int _changeIsConstraintOnly:1;
-        unsigned int _reservedEntityMapping:30;
-    } _entityMappingFlags;
-#endif
 }
 
 /* Returns/sets the name of the mapping. The name is used only as a means of distinguishing mappings in a model.  If not specified, defaults to the string composed by the source entity name followed by the destination entity name (ex. SourceName->DestinationName)

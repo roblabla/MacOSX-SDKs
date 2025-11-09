@@ -1,9 +1,10 @@
 /*    NLTagger.h
-      Copyright (c) 2017-2018, Apple Inc. All rights reserved.
+      Copyright (c) 2017-2019, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/Foundation.h>
 #import <NaturalLanguage/NLLanguage.h>
+#import <NaturalLanguage/NLGazetteer.h>
 #import <NaturalLanguage/NLTagScheme.h>
 #import <NaturalLanguage/NLTokenizer.h>
 
@@ -61,8 +62,24 @@ NS_CLASS_AVAILABLE(10_14, 12_0)
 
 /* In addition to the built-in models for predefined tag schemes, clients can set custom models that they have trained, either for existing tag schemes or for custom tag schemes. If multiple models are specified, they will be matched to text based on the language that they specify.
 */
-- (void)setModels:(NSArray <NLModel *> *)models forTagScheme:(NLTagScheme)tagScheme;
-- (NSArray <NLModel *> *)modelsForTagScheme:(NLTagScheme)tagScheme;
+- (void)setModels:(NSArray <NLModel *> *)models forTagScheme:(NLTagScheme)tagScheme API_AVAILABLE(macos(10.14), ios(12.0), watchos(5.0), tvos(12.0));
+- (NSArray <NLModel *> *)modelsForTagScheme:(NLTagScheme)tagScheme API_AVAILABLE(macos(10.14), ios(12.0), watchos(5.0), tvos(12.0));
+
+/* In addition to the model for a given tag scheme, clients can add a custom gazetteer that will override the tags for that scheme, for terms that are included in the gazetteer. If multiple gazetteers are specified, they will be matched to text based on the language that they specify.
+*/
+- (void)setGazetteers:(NSArray <NLGazetteer *> *)gazetteers forTagScheme:(NLTagScheme)tagScheme API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0)) NS_SWIFT_NAME(setGazetteers(_:for:));
+- (NSArray <NLGazetteer *> *)gazetteersForTagScheme:(NLTagScheme)tagScheme API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0)) NS_SWIFT_NAME(gazetteers(for:));
+
+/* If a given tag scheme is not available for a particular language on the current device, it may be because necessary assets have not been loaded onto this device. In those cases, clients may put in a request for those assets. If they are available for loading, then they will be requested and at some point will be loaded and made available on the device, and the completion handler will be called on an arbitrary queue. The completion handler may be called immediately if the state of the assets is already known or if an error occurs.
+*/
+
+typedef NS_ENUM(NSInteger, NLTaggerAssetsResult) {
+    NLTaggerAssetsResultAvailable,
+    NLTaggerAssetsResultNotAvailable,
+    NLTaggerAssetsResultError
+} NS_SWIFT_NAME(NLTagger.AssetsResult);
+
++ (void)requestAssetsForLanguage:(NLLanguage)language tagScheme:(NLTagScheme)tagScheme completionHandler:(void (^)(NLTaggerAssetsResult result, NSError * _Nullable error))completionHandler API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0)) NS_SWIFT_NAME(requestAssets(for:tagScheme:completionHandler:));
 
 @end
 

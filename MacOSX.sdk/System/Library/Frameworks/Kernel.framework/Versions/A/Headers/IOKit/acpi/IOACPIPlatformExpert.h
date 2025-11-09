@@ -45,7 +45,7 @@ protected:
     ExpansionData *  reserved;
 
 public:
-    virtual bool     start( IOService * provider );
+    virtual bool     start( IOService * provider ) APPLE_KEXT_OVERRIDE;
 
 protected:
     // Map ACPI event to interrupt event source index

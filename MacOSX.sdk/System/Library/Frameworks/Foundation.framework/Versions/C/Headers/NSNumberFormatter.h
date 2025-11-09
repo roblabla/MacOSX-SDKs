@@ -1,5 +1,5 @@
 /*	NSNumberFormatter.h
-	Copyright (c) 1996-2018, Apple Inc. All rights reserved.
+	Copyright (c) 1996-2019, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSFormatter.h>
@@ -11,7 +11,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 typedef NS_ENUM(NSUInteger, NSNumberFormatterBehavior) {
     NSNumberFormatterBehaviorDefault = 0,
-#if (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE))
+#if TARGET_OS_OSX
     NSNumberFormatterBehavior10_0 = 1000,
 #endif
     NSNumberFormatterBehavior10_4 = 1040,
@@ -147,7 +147,7 @@ typedef NS_ENUM(NSUInteger, NSNumberFormatterRoundingMode) {
 
 @class NSDecimalNumberHandler;
 
-#if (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE))
+#if TARGET_OS_OSX
 @interface NSNumberFormatter (NSNumberFormatterCompatibility)
 
 @property BOOL hasThousandSeparators;

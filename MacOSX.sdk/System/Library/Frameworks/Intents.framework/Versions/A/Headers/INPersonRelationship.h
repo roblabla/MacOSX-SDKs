@@ -2,7 +2,7 @@
 //  INPersonRelationship.h
 //  Intents
 //
-//  Copyright (c) 2016-2017 Apple Inc. All rights reserved.
+//  Copyright (c) 2016-2019 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -21,3 +21,5 @@ INTENTS_EXTERN INPersonRelationship const INPersonRelationshipSpouse NS_SWIFT_NA
 INTENTS_EXTERN INPersonRelationship const INPersonRelationshipPartner NS_SWIFT_NAME(INPersonRelationship.partner) API_AVAILABLE(ios(10.2), watchos(3.2), macosx(10.12.2));
 INTENTS_EXTERN INPersonRelationship const INPersonRelationshipAssistant NS_SWIFT_NAME(INPersonRelationship.assistant) API_AVAILABLE(ios(10.2), watchos(3.2), macosx(10.12.2));
 INTENTS_EXTERN INPersonRelationship const INPersonRelationshipManager NS_SWIFT_NAME(INPersonRelationship.manager) API_AVAILABLE(ios(10.2), watchos(3.2), macosx(10.12.2));
+INTENTS_EXTERN INPersonRelationship const INPersonRelationshipSon NS_SWIFT_NAME(INPersonRelationship.son) API_AVAILABLE(ios(13.0), watchos(6.0), macosx(10.15));
+INTENTS_EXTERN INPersonRelationship const INPersonRelationshipDaughter NS_SWIFT_NAME(INPersonRelationship.daughter) API_AVAILABLE(ios(13.0), watchos(6.0), macosx(10.15));

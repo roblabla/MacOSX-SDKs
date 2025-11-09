@@ -242,6 +242,15 @@ typedef NS_ENUM(NSInteger, CWInterfaceMode)
  * @constant kCWSecurityWPA2Enterprise
  * WPA2 Enterprise authentication.
  *
+ * @constant kCWSecurityWPA3Enterprise
+ * WPA3 Enterprise authentication.
+ *
+ * @constant kCWSecurityWPA3Personal
+ * WPA3 Personal authentication.
+ *
+ * @constant kCWSecurityWPA3Transition
+ * WPA3 Transition (WPA3/WPA2 Personal) authentication.
+ *
  * @constant kCWSecurityUnknown 
  * Unknown security type.
  */
@@ -258,6 +267,9 @@ typedef NS_ENUM(NSInteger, CWSecurity)
     kCWSecurityWPAEnterpriseMixed   = 8,
 	kCWSecurityWPA2Enterprise       = 9,
     kCWSecurityEnterprise           = 10,
+	kCWSecurityWPA3Personal         = 11,
+	kCWSecurityWPA3Enterprise       = 12,
+	kCWSecurityWPA3Transition       = 13,
     kCWSecurityUnknown              = NSIntegerMax,
 } NS_ENUM_AVAILABLE_MAC(10_7);
 

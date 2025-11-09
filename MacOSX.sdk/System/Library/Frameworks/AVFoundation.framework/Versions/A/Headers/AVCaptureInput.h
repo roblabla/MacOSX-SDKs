@@ -8,6 +8,7 @@
 
 #import <AVFoundation/AVBase.h>
 #import <AVFoundation/AVMediaFormat.h>
+#import <AVFoundation/AVCaptureDevice.h>
 #import <Foundation/Foundation.h>
 #import <CoreMedia/CMFormatDescription.h>
 #import <CoreMedia/CMSync.h>
@@ -135,6 +136,30 @@ AV_INIT_UNAVAILABLE
  */
 @property(nonatomic, readonly, nullable) __attribute__((NSObject)) CMClockRef clock API_AVAILABLE(macos(10.9), ios(7.0));
 
+/*!
+ @property sourceDeviceType
+ @abstract
+    The AVCaptureDeviceType of the source device providing input through this port.
+ 
+ @discussion
+    All AVCaptureInputPorts contained in an AVCaptureDeviceInput's ports array have the same sourceDeviceType, which is equal to deviceInput.device.deviceType. All of these ports are legal for use in an AVCaptureSession. When working with virtual devices such as the DualCamera in an AVCaptureMultiCamSession, it is possible to stream media from the virtual device's constituent device streams by discovering and connecting hidden ports. In the case of the DualCamera, its constituent devices are the WideAngle camera and the Telephoto camera. By calling -[AVCaptureDeviceInput portsWithMediaType:sourceDeviceType:sourceDevicePosition:], you may discover ports originating from one or more of the virtual device's constituent devices and then make connections using those ports. Constituent device ports are never present in their owning virtual device input's ports array. As an example, to find the video port originating from the DualCamera's Telephoto camera constituent device, you call [dualCameraDeviceInput portsWithMediaType:AVMediaTypeVideo sourceDeviceType:AVCaptureDeviceTypeBuiltInTelephotoCamera sourceDevicePosition:dualCamera.position] and use the first port in the resulting array.
+ */
+@property(nonatomic, readonly, nullable) AVCaptureDeviceType sourceDeviceType API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(tvos, watchos);
+
+/*!
+ @property sourceDevicePosition
+ @abstract
+    The AVCaptureDevicePosition of the source device providing input through this port.
+ 
+ @discussion
+    All AVCaptureInputPorts contained in an AVCaptureDeviceInput's ports array have the same sourceDevicePosition, which is deviceInput.device.position. When working with microphone input in an AVCaptureMultiCamSession, it is possible to record multiple microphone directions simultaneously, for instance, to record front-facing microphone input to pair with video from the front facing camera, and back-facing microphone input to pair with the video from the back-facing camera. By calling -[AVCaptureDeviceInput portsWithMediaType:sourceDeviceType:sourceDevicePosition:], you may discover additional hidden ports originating from the source audio device. These ports represent individual microphones positioned to pick up audio from one particular direction. Examples follow.
+ 
+        To discover the audio port that captures omnidirectional audio, use [microphoneDeviceInput portsWithMediaType:AVMediaTypeAudio sourceDeviceType:AVCaptureDeviceTypeBuiltInMicrophone sourceDevicePosition:AVCaptureDevicePositionUnspecified].firstObject.
+        To discover the audio port that captures front-facing audio, use [microphoneDeviceInput portsWithMediaType:AVMediaTypeAudio sourceDeviceType:AVCaptureDeviceTypeBuiltInMicrophone sourceDevicePosition:AVCaptureDevicePositionFront].firstObject.
+        To discover the audio port that captures back-facing audio, use [microphoneDeviceInput portsWithMediaType:AVMediaTypeAudio sourceDeviceType:AVCaptureDeviceTypeBuiltInMicrophone sourceDevicePosition:AVCaptureDevicePositionBack].firstObject.
+ */
+@property(nonatomic, readonly) AVCaptureDevicePosition sourceDevicePosition API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(tvos, watchos);
+
 @end
 
 
@@ -213,6 +238,47 @@ API_AVAILABLE(macos(10.7), ios(4.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED
     Note that if you manually set the device's min frame rate, max frame rate, or max exposure duration, your custom values will override the device defaults regardless of whether you've set this property to YES.
  */
 @property(nonatomic) BOOL unifiedAutoExposureDefaultsEnabled API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(macos, tvos, watchos);
+
+/*!
+ @method portsWithMediaType:sourceDeviceType:sourceDevicePosition:
+ @abstract
+    An accessor method used to retrieve a virtual device's constituent device ports for use in an AVCaptureMultiCamSession.
+ 
+ @param mediaType
+    The AVMediaType of the port for which you're searching, or nil if all media types should be considered.
+ @param sourceDeviceType
+    The AVCaptureDeviceType of the port for which you're searching, or nil if source device type is irrelevant.
+ @param sourceDevicePosition
+    The AVCaptureDevicePosition of the port for which you're searching. AVCaptureDevicePositionUnspecified is germane to audio devices, indicating omnidirectional audio. For other types of capture devices (e.g. cameras), AVCaptureDevicePositionUnspecified means all positions should be considered in the search.
+ 
+ @result
+    An array of AVCaptureInputPorts satisfying the search criteria, or an empty array could be found.
+ 
+ @discussion
+    When using AVCaptureMultiCamSession, multiple devices may be run simultaneously. You may also run simultaneous streams from a virtual device such as the Dual Camera. By inspecting a virtual device's constituentDevices property, you can find its underlying physical devices and, using this method, search for ports originating from one of those constituent devices. Note that the AVCaptureInput.ports array does not include constituent device ports for virtual devices. You must use this accessor method to discover the ports for which you're specifically looking. These constituent device ports may be used to make connections to outputs for use with an AVCaptureMultiCamSession. Using the Dual Camera as an example, the AVCaptureInput.ports property exposes only those ports supported by the virtual device (it switches automatically between wide and telephoto cameras according to the zoom factor). You may use this method to find the video ports for the constituentDevices.
+ 
+         AVCaptureInputPort *wideVideoPort = [dualCameraInput portsWithMediaType:AVMediaTypeVideo sourceDeviceType:AVCaptureDeviceTypeBuiltInWideAngleCamera sourceDevicePosition:AVCaptureDevicePositionBack].firstObject;
+         AVCaptureInputPort *teleVideoPort = [dualCameraInput portsWithMediaType:AVMediaTypeVideo sourceDeviceType:AVCaptureDeviceTypeBuiltInTelephotoCamera sourceDevicePosition:AVCaptureDevicePositionBack].firstObject;
+
+    These ports may be used to create connections, say, to two AVCaptureVideoDataOutput instances, allowing for synchronized full frame rate delivery of both wide and telephoto streams.
+ 
+    As of iOS 13, constituent device ports may not be connected to AVCapturePhotoOutput instances. Clients who wish to capture multiple photos from a virtual device should use AVCapturePhotoOutput's virtualDeviceConstituentPhotoDeliveryEnabled feature.
+ 
+    When used in conjunction with an audio device, this method allows you to discover microphones in different AVCaptureDevicePositions. When you intend to work with an AVCaptureMultiCamSession, you may use these ports to make connections and simultaneously capture both front facing and back facing audio simultaneously to two different outputs. When used with an AVCaptureMultiCamSession, the audio device port whose sourceDevicePosition is AVCaptureDevicePositionUnspecified produces omnidirectional sound.
+ */
+- (NSArray<AVCaptureInputPort *> *)portsWithMediaType:(nullable AVMediaType)mediaType sourceDeviceType:(nullable AVCaptureDeviceType)sourceDeviceType sourceDevicePosition:(AVCaptureDevicePosition)sourceDevicePosition API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(tvos, watchos);
+
+/*!
+ @property videoMinFrameDurationOverride
+ @abstract
+    A property that acts as a modifier to the AVCaptureDevice's activeVideoMinFrameDuration property. Default value is kCMTimeInvalid.
+ 
+ @discussion
+    An AVCaptureDevice's activeVideoMinFrameDuration property is the reciprocal of its active maximum frame rate. To limit the max frame rate of the capture device, clients may set the device's activeVideoMinFrameDuration to a value supported by the receiver's activeFormat (see AVCaptureDeviceFormat's videoSupportedFrameRateRanges property). Changes you make to the device's activeVideoMinFrameDuration property take effect immediately without disrupting preview. Therefore, the AVCaptureSession must always allocate sufficient resources to allow the device to run at its activeFormat's max allowable frame rate. If you wish to use a particular device format but only ever run it at lower frame rates (for instance, only run a 1080p240 fps format at a max frame rate of 60), you can set the AVCaptureDeviceInput's videoMinFrameDurationOverride property to the reciprocal of the max frame rate you intend to use before starting the session (or within a beginConfiguration / commitConfiguration block while running the session).
+ 
+    When a device input is added to a session, this property reverts back to the default of kCMTimeInvalid (no override).
+ */
+@property(nonatomic) CMTime videoMinFrameDurationOverride API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(tvos, watchos);
 
 @end
 

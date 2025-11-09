@@ -1,11 +1,13 @@
 /*
 	NSAppleEventDescriptor.h
-	Copyright (c) 1997-2018, Apple Inc. All rights reserved.
+	Copyright (c) 1997-2019, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
 #import <Foundation/NSDate.h>
+#if !TARGET_OS_MACCATALYST
 #import <ApplicationServices/ApplicationServices.h>
+#endif
 
 @class NSData;
 
@@ -24,7 +26,7 @@ typedef NS_OPTIONS(NSUInteger, NSAppleEventSendOptions) {
     NSAppleEventSendDontAnnotate   = kAEDoNotAutomaticallyAddAnnotationsToEvent, /* don't automatically add any sandbox or other annotations to the event */
 
     NSAppleEventSendDefaultOptions = NSAppleEventSendWaitForReply | NSAppleEventSendCanInteract
-} NS_ENUM_AVAILABLE_MAC(10_11);
+} API_AVAILABLE(macos(10.11)) API_UNAVAILABLE(ios, watchos, tvos);
 
 @interface NSAppleEventDescriptor : NSObject<NSCopying, NSSecureCoding> {
     @private

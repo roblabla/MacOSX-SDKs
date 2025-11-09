@@ -1,9 +1,8 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 0FEAEB01-B926-37FA-AB47-99BAC481C10B' ]
-platform:        macosx
-install-name:    /usr/lib/libresolv.9.dylib
-objc-constraint: none
+uuids:           [ 'x86_64: BA609ACC-20C3-311A-A161-7E68F68D9E00', 'x86_64: BA609ACC-20C3-311A-A161-7E68F68D9E00' ]
+platform:        zippered
+install-name:    '/usr/lib/libresolv.9.dylib'
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ ___res_9_p_type_syms, __res_9_h_errno_set, __res_9_ns_flagdata, 

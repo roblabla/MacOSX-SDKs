@@ -36,11 +36,11 @@ MA_EXPORT const CFStringRef kMACaptionAppearanceSettingsChangedNotification;
  @constant kMACaptionAppearanceDomainDefault
     The system defaults which will not change during a user session. These settings should be used for comparison, not to render captions. For example, when rendering a glyph some caption render engines need to get the user-defined font and the system-defined font to determeine the final pixel size to render a glyph. Most render engines will never need to use this domain.
  */
-typedef CF_ENUM(CFIndex, MACaptionAppearanceDomain) {
-    kMACaptionAppearanceDomainDefault   = 0,
-    kMACaptionAppearanceDomainUser      = 1,
+typedef CF_ENUM(CFIndex, MACaptionAppearanceDomain)
+{
+    kMACaptionAppearanceDomainDefault = 0,
+    kMACaptionAppearanceDomainUser = 1,
 } CF_ENUM_AVAILABLE(10_9, 7_0);
-
 
 /*!
  @enum MACaptionAppearanceDisplayType
@@ -55,10 +55,11 @@ typedef CF_ENUM(CFIndex, MACaptionAppearanceDomain) {
  @constant kMACaptionAppearanceDisplayTypeAlwaysOn
     The best available captioning track should always be displayed, whether it be CC, SDH, or subtitles.
  */
-typedef CF_ENUM(CFIndex, MACaptionAppearanceDisplayType) {
-    kMACaptionAppearanceDisplayTypeForcedOnly     = 0,
-    kMACaptionAppearanceDisplayTypeAutomatic      = 1,
-    kMACaptionAppearanceDisplayTypeAlwaysOn       = 2,
+typedef CF_ENUM(CFIndex, MACaptionAppearanceDisplayType)
+{
+    kMACaptionAppearanceDisplayTypeForcedOnly = 0,
+    kMACaptionAppearanceDisplayTypeAutomatic = 1,
+    kMACaptionAppearanceDisplayTypeAlwaysOn = 2,
 } CF_ENUM_AVAILABLE(10_9, 7_0);
 
 /*!
@@ -72,9 +73,10 @@ typedef CF_ENUM(CFIndex, MACaptionAppearanceDisplayType) {
  @constant kMACaptionAppearanceBehaviorUseContentIfAvailable
     Content, application, or otherwise-defined values should override the returned value. If no other value is defined, then the return value should be used.
  */
-typedef CF_ENUM(CFIndex, MACaptionAppearanceBehavior) {
-    kMACaptionAppearanceBehaviorUseValue                = 0,
-    kMACaptionAppearanceBehaviorUseContentIfAvailable   = 1,
+typedef CF_ENUM(CFIndex, MACaptionAppearanceBehavior)
+{
+    kMACaptionAppearanceBehaviorUseValue = 0,
+    kMACaptionAppearanceBehaviorUseContentIfAvailable = 1,
 } CF_ENUM_AVAILABLE(10_9, 7_0);
 
 /*!
@@ -100,15 +102,16 @@ typedef CF_ENUM(CFIndex, MACaptionAppearanceBehavior) {
  @constant kMACaptionAppearanceFontStyleSmallCapital
     Font style for fonts similar to Engravers Gothic.
  */
-typedef CF_ENUM(CFIndex, MACaptionAppearanceFontStyle) {
-    kMACaptionAppearanceFontStyleDefault                    = 0,
-    kMACaptionAppearanceFontStyleMonospacedWithSerif        = 1,
-    kMACaptionAppearanceFontStyleProportionalWithSerif      = 2,
-    kMACaptionAppearanceFontStyleMonospacedWithoutSerif     = 3,
-    kMACaptionAppearanceFontStyleProportionalWithoutSerif   = 4,
-    kMACaptionAppearanceFontStyleCasual                     = 5,
-    kMACaptionAppearanceFontStyleCursive                    = 6,
-    kMACaptionAppearanceFontStyleSmallCapital               = 7,
+typedef CF_ENUM(CFIndex, MACaptionAppearanceFontStyle)
+{
+    kMACaptionAppearanceFontStyleDefault = 0,
+    kMACaptionAppearanceFontStyleMonospacedWithSerif = 1,
+    kMACaptionAppearanceFontStyleProportionalWithSerif = 2,
+    kMACaptionAppearanceFontStyleMonospacedWithoutSerif = 3,
+    kMACaptionAppearanceFontStyleProportionalWithoutSerif = 4,
+    kMACaptionAppearanceFontStyleCasual = 5,
+    kMACaptionAppearanceFontStyleCursive = 6,
+    kMACaptionAppearanceFontStyleSmallCapital = 7,
 } CF_ENUM_AVAILABLE(10_9, 7_0);
 
 /*!
@@ -130,13 +133,14 @@ typedef CF_ENUM(CFIndex, MACaptionAppearanceFontStyle) {
  @constant kMACaptionAppearanceTextEdgeStyleDropShadow
     Shadow edge style.
  */
-typedef CF_ENUM(CFIndex, MACaptionAppearanceTextEdgeStyle) {
-    kMACaptionAppearanceTextEdgeStyleUndefined      = 0,
-    kMACaptionAppearanceTextEdgeStyleNone           = 1,
-    kMACaptionAppearanceTextEdgeStyleRaised         = 2,
-    kMACaptionAppearanceTextEdgeStyleDepressed      = 3,
-    kMACaptionAppearanceTextEdgeStyleUniform        = 4,
-    kMACaptionAppearanceTextEdgeStyleDropShadow     = 5,
+typedef CF_ENUM(CFIndex, MACaptionAppearanceTextEdgeStyle)
+{
+    kMACaptionAppearanceTextEdgeStyleUndefined = 0,
+    kMACaptionAppearanceTextEdgeStyleNone = 1,
+    kMACaptionAppearanceTextEdgeStyleRaised = 2,
+    kMACaptionAppearanceTextEdgeStyleDepressed = 3,
+    kMACaptionAppearanceTextEdgeStyleUniform = 4,
+    kMACaptionAppearanceTextEdgeStyleDropShadow = 5,
 } CF_ENUM_AVAILABLE(10_9, 7_0);
 
 /*!
@@ -162,6 +166,12 @@ MA_EXPORT CFStringRef const MAMediaCharacteristicDescribesMusicAndSoundForAccess
  */
 MA_EXPORT CFStringRef const MAMediaCharacteristicTranscribesSpokenDialogForAccessibility CF_AVAILABLE(10_9, 7_0);
 
+/*!
+ @function MACaptionAppearanceDidDisplayCaptions
+ @abstract Called by clients to inform accessibility products that captions have been displayed onscreen.
+ @param strings An array of CFStringRef or CFAttributedStringRef objects that represent the text that is being displayed. An empty array is used to indicate that no captions are being displayed.
+ */
+void MACaptionAppearanceDidDisplayCaptions(CFArrayRef strings);
 
 #pragma mark Language preferences
 /*——————————————————————————————————————————————————————————————————————————————————————*/
@@ -232,8 +242,6 @@ void MACaptionAppearanceSetDisplayType(MACaptionAppearanceDomain domain, MACapti
 MA_EXPORT
 CFArrayRef MACaptionAppearanceCopyPreferredCaptioningMediaCharacteristics(MACaptionAppearanceDomain domain) CF_AVAILABLE(10_9, 7_0);
 
-
-
 #pragma mark Color preferences
 /*——————————————————————————————————————————————————————————————————————————————————————*/
 /*! @group Color preferences                                                            */
@@ -246,7 +254,7 @@ CFArrayRef MACaptionAppearanceCopyPreferredCaptioningMediaCharacteristics(MACapt
  @result User preference for foreground/text color.
  */
 MA_EXPORT
-CGColorRef MACaptionAppearanceCopyForegroundColor(MACaptionAppearanceDomain domain, MACaptionAppearanceBehavior * __nullable behavior) CF_AVAILABLE(10_9, 7_0);
+CGColorRef MACaptionAppearanceCopyForegroundColor(MACaptionAppearanceDomain domain, MACaptionAppearanceBehavior *__nullable behavior) CF_AVAILABLE(10_9, 7_0);
 
 /*!
  @function MACaptionAppearanceCopyBackgroundColor
@@ -257,7 +265,7 @@ CGColorRef MACaptionAppearanceCopyForegroundColor(MACaptionAppearanceDomain doma
  @result User preference for background color.
  */
 MA_EXPORT
-CGColorRef MACaptionAppearanceCopyBackgroundColor(MACaptionAppearanceDomain domain, MACaptionAppearanceBehavior * __nullable behavior) CF_AVAILABLE(10_9, 7_0);
+CGColorRef MACaptionAppearanceCopyBackgroundColor(MACaptionAppearanceDomain domain, MACaptionAppearanceBehavior *__nullable behavior) CF_AVAILABLE(10_9, 7_0);
 
 /*!
  @function MACaptionAppearanceCopyWindowColor
@@ -268,7 +276,7 @@ CGColorRef MACaptionAppearanceCopyBackgroundColor(MACaptionAppearanceDomain doma
  @result User preference for window color.
  */
 MA_EXPORT
-CGColorRef MACaptionAppearanceCopyWindowColor(MACaptionAppearanceDomain domain,MACaptionAppearanceBehavior * __nullable behavior) CF_AVAILABLE(10_9, 7_0);
+CGColorRef MACaptionAppearanceCopyWindowColor(MACaptionAppearanceDomain domain, MACaptionAppearanceBehavior *__nullable behavior) CF_AVAILABLE(10_9, 7_0);
 
 /*!
  @function MACaptionAppearanceGetForegroundOpacity
@@ -278,7 +286,7 @@ CGColorRef MACaptionAppearanceCopyWindowColor(MACaptionAppearanceDomain domain,M
  @result User preference for foreground opacity.
  */
 MA_EXPORT
-CGFloat MACaptionAppearanceGetForegroundOpacity(MACaptionAppearanceDomain domain, MACaptionAppearanceBehavior * __nullable behavior) CF_AVAILABLE(10_9, 7_0);
+CGFloat MACaptionAppearanceGetForegroundOpacity(MACaptionAppearanceDomain domain, MACaptionAppearanceBehavior *__nullable behavior) CF_AVAILABLE(10_9, 7_0);
 
 /*!
  @function MACaptionAppearanceGetBackgroundOpacity
@@ -288,7 +296,7 @@ CGFloat MACaptionAppearanceGetForegroundOpacity(MACaptionAppearanceDomain domain
  @result User preference for background opacity.
  */
 MA_EXPORT
-CGFloat MACaptionAppearanceGetBackgroundOpacity(MACaptionAppearanceDomain domain, MACaptionAppearanceBehavior * __nullable behavior) CF_AVAILABLE(10_9, 7_0);
+CGFloat MACaptionAppearanceGetBackgroundOpacity(MACaptionAppearanceDomain domain, MACaptionAppearanceBehavior *__nullable behavior) CF_AVAILABLE(10_9, 7_0);
 
 /*!
  @function MACaptionAppearanceGetWindowOpacity
@@ -298,7 +306,7 @@ CGFloat MACaptionAppearanceGetBackgroundOpacity(MACaptionAppearanceDomain domain
  @result User preference for window opacity.
  */
 MA_EXPORT
-CGFloat MACaptionAppearanceGetWindowOpacity(MACaptionAppearanceDomain domain,MACaptionAppearanceBehavior * __nullable behavior) CF_AVAILABLE(10_9, 7_0);
+CGFloat MACaptionAppearanceGetWindowOpacity(MACaptionAppearanceDomain domain, MACaptionAppearanceBehavior *__nullable behavior) CF_AVAILABLE(10_9, 7_0);
 
 /*!
  @function MACaptionAppearanceGetWindowRoundedCornerRadius
@@ -308,7 +316,7 @@ CGFloat MACaptionAppearanceGetWindowOpacity(MACaptionAppearanceDomain domain,MAC
  @result User preference for caption-window corner radius.
  */
 MA_EXPORT
-CGFloat MACaptionAppearanceGetWindowRoundedCornerRadius(MACaptionAppearanceDomain domain, MACaptionAppearanceBehavior * __nullable behavior) CF_AVAILABLE(10_9, 7_0);
+CGFloat MACaptionAppearanceGetWindowRoundedCornerRadius(MACaptionAppearanceDomain domain, MACaptionAppearanceBehavior *__nullable behavior) CF_AVAILABLE(10_9, 7_0);
 
 #pragma mark Text Preferences
 /*——————————————————————————————————————————————————————————————————————————————————————*/

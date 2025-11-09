@@ -1,6 +1,7 @@
+#if !__has_include(<UIFoundation/NSParagraphStyle.h>)
 /*
         NSParagraphStyle.h
-        Copyright (c) 1994-2018, Apple Inc.  All rights reserved.
+        Copyright (c) 1994-2019, Apple Inc.  All rights reserved.
  
 	NSParagraphStyle and NSMutableParagraphStyle hold paragraph style information
 	NSTextTab holds information about a single tab stop
@@ -14,26 +15,24 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+#if !TARGET_OS_IPHONE
+
+typedef NS_ENUM(NSUInteger, NSLineBreakMode) {
+    NSLineBreakByWordWrapping = 0,         // Wrap at word boundaries, default
+    NSLineBreakByCharWrapping,        // Wrap at character boundaries
+    NSLineBreakByClipping,        // Simply clip
+    NSLineBreakByTruncatingHead,    // Truncate at head of line: "...wxyz"
+    NSLineBreakByTruncatingTail,    // Truncate at tail of line: "abcd..."
+    NSLineBreakByTruncatingMiddle    // Truncate middle of line:  "ab...yz"
+} API_AVAILABLE(macos(10.0), ios(6.0), watchos(2.0), tvos(9.0));
+
 // NSTextTab
 typedef NSString * NSTextTabOptionKey NS_TYPED_ENUM;
-APPKIT_EXTERN NSTextTabOptionKey  NSTabColumnTerminatorsAttributeName NS_AVAILABLE(10_0, 7_0); // An attribute for NSTextTab options.  The value is NSCharacterSet.  The character set is used to determine the tab column terminating character.  The tab and newline characters are implied even if not included in the character set.
+APPKIT_EXTERN NSTextTabOptionKey  NSTabColumnTerminatorsAttributeName API_AVAILABLE(macos(10.0), ios(7.0), watchos(2.0), tvos(9.0)); // An attribute for NSTextTab options.  The value is NSCharacterSet.  The character set is used to determine the tab column terminating character.  The tab and newline characters are implied even if not included in the character set.
 
-NS_CLASS_AVAILABLE(10_0, 7_0) @interface NSTextTab : NSObject <NSCopying, NSCoding, NSSecureCoding>
-{
-    /*All instance variables are private*/
-    struct {
-        NSTextAlignment alignment:4;
-        unsigned int refCount:24;
-        unsigned int unused:4;
-#if __LP64__
-        unsigned int :32;
-#endif
-    } _flags APPKIT_IVAR;
-    CGFloat _location APPKIT_IVAR;
-    id _reserved APPKIT_IVAR;
-}
+API_AVAILABLE(macos(10.0), ios(7.0), watchos(2.0), tvos(9.0)) @interface NSTextTab : NSObject <NSCopying, NSCoding, NSSecureCoding>
 
-+ (NSCharacterSet *)columnTerminatorsForLocale:(nullable NSLocale *)aLocale NS_AVAILABLE(10_11, 7_0); // Returns the column terminators for locale. Passing nil returns an instance corresponding to +[NSLocale systemLocale]. For matching user's formatting preferences, pass +[NSLocale currentLocale]. Can be used as the value for NSTabColumnTerminatorsAttributeName to make a decimal tab stop.
++ (NSCharacterSet *)columnTerminatorsForLocale:(nullable NSLocale *)aLocale API_AVAILABLE(macos(10.11), ios(7.0), watchos(2.0), tvos(9.0)); // Returns the column terminators for locale. Passing nil returns an instance corresponding to +[NSLocale systemLocale]. For matching user's formatting preferences, pass +[NSLocale currentLocale]. Can be used as the value for NSTabColumnTerminatorsAttributeName to make a decimal tab stop.
 
 - (instancetype)initWithTextAlignment:(NSTextAlignment)alignment location:(CGFloat)loc options:(NSDictionary<NSTextTabOptionKey, id> *)options NS_DESIGNATED_INITIALIZER; // Initializes a text tab with the text alignment, location, and options.  The text alignment is used to determine the position of text inside the tab column.
 
@@ -45,43 +44,8 @@ NS_CLASS_AVAILABLE(10_0, 7_0) @interface NSTextTab : NSObject <NSCopying, NSCodi
 
 
 // NSParagraphStyle
-typedef NS_ENUM(NSUInteger, NSLineBreakMode) {
-    NSLineBreakByWordWrapping = 0,     	// Wrap at word boundaries, default
-    NSLineBreakByCharWrapping,		// Wrap at character boundaries
-    NSLineBreakByClipping,		// Simply clip
-    NSLineBreakByTruncatingHead,	// Truncate at head of line: "...wxyz"
-    NSLineBreakByTruncatingTail,	// Truncate at tail of line: "abcd..."
-    NSLineBreakByTruncatingMiddle	// Truncate middle of line:  "ab...yz"
-} NS_ENUM_AVAILABLE(10_0, 6_0);
 
-
-NS_CLASS_AVAILABLE(10_0, 6_0) @interface NSParagraphStyle : NSObject <NSCopying, NSMutableCopying, NSSecureCoding>
-{
-    /*All instance variables are private*/
-    CGFloat _lineSpacing APPKIT_IVAR;
-    CGFloat _paragraphSpacing APPKIT_IVAR;
-    CGFloat _headIndent APPKIT_IVAR;
-    CGFloat _tailIndent APPKIT_IVAR;
-    CGFloat _firstLineHeadIndent APPKIT_IVAR;
-    CGFloat _minimumLineHeight APPKIT_IVAR;
-    CGFloat _maximumLineHeight APPKIT_IVAR;
-    NSArray *_tabStops APPKIT_IVAR;
-    struct {
-        NSTextAlignment alignment:4;
-        NSLineBreakMode lineBreakMode:4;
-        unsigned int tabStopsIsMutable:1;
-        unsigned int isNaturalDirection:1;
-        unsigned int rightToLeftDirection:1;
-        unsigned int fixedMultiple:2;
-        unsigned int tightensForTruncation:1;
-        unsigned int refCount:18;
-#if __LP64__
-        unsigned int :32;
-#endif
-    } _flags APPKIT_IVAR;
-    CGFloat _defaultTabInterval APPKIT_IVAR;
-    id _extraData APPKIT_IVAR;
-}
+API_AVAILABLE(macos(10.0), ios(6.0), watchos(2.0), tvos(9.0)) @interface NSParagraphStyle : NSObject <NSCopying, NSMutableCopying, NSSecureCoding>
 
 @property (class, readonly, copy) NSParagraphStyle *defaultParagraphStyle; // This class property returns a shared and cached NSParagraphStyle instance with the default style settings, with same value as the result of [[NSParagraphStyle alloc] init].
 
@@ -110,10 +74,10 @@ NS_CLASS_AVAILABLE(10_0, 6_0) @interface NSParagraphStyle : NSObject <NSCopying,
 // Specifies the threshold for hyphenation.  Valid values lie between 0.0 and 1.0 inclusive.  Hyphenation will be attempted when the ratio of the text width as broken without hyphenation to the width of the line fragment is less than the hyphenation factor.  When this takes on its default value of 0.0, the layout manager's hyphenation factor is used instead.  When both are 0.0, hyphenation is disabled.
 @property (readonly) float hyphenationFactor;
 
-@property (readonly,copy) NSArray<NSTextTab *> *tabStops NS_AVAILABLE(10_0, 7_0); // An array of NSTextTabs. Contents should be ordered by location. The default value is an array of 12 left-aligned tabs at 28pt interval
-@property (readonly) CGFloat defaultTabInterval NS_AVAILABLE(10_0, 7_0); // The default tab interval used for locations beyond the last element in tabStops
+@property (readonly,copy) NSArray<NSTextTab *> *tabStops API_AVAILABLE(macos(10.0), ios(7.0), watchos(2.0), tvos(9.0)); // An array of NSTextTabs. Contents should be ordered by location. The default value is an array of 12 left-aligned tabs at 28pt interval
+@property (readonly) CGFloat defaultTabInterval API_AVAILABLE(macos(10.0), ios(7.0), watchos(2.0), tvos(9.0)); // The default tab interval used for locations beyond the last element in tabStops
 
-@property (readonly) BOOL allowsDefaultTighteningForTruncation NS_AVAILABLE(10_11, 9_0); // Tightens inter-character spacing in attempt to fit lines wider than the available space if the line break mode is one of the truncation modes before starting to truncate. YES by default for apps linked against 10.11 and later SDK. The maximum amount of tightening performed is determined by the system based on contexts such as font, line width, etc.
+@property (readonly) BOOL allowsDefaultTighteningForTruncation API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0)); // Tightens inter-character spacing in attempt to fit lines wider than the available space if the line break mode is one of the truncation modes before starting to truncate. YES by default for apps linked against 10.11 and later SDK. The maximum amount of tightening performed is determined by the system based on contexts such as font, line width, etc.
 
 // Specifies the threshold for using tightening as an alternative to truncation when -allowsDefaultTighteningForTruncation=NO.  When the line break mode specifies truncation, the text system will attempt to tighten inter-character spacing as an alternative to truncation, provided that the ratio of the text width to the line fragment width does not exceed 1.0 + tighteningFactorForTruncation.  Otherwise the text will be truncated at a location determined by the line break mode.  The default value is 0.0 for apps linked against 10.11 and later SDK. This property is ignored when -allowsDefaultTighteningForTruncation=YES. Explicitly setting this property to 0.0 has a side effect of also setting -allowsDefaultTighteningForTruncation to NO.
 @property (readonly) float tighteningFactorForTruncation;
@@ -126,7 +90,7 @@ NS_CLASS_AVAILABLE(10_0, 6_0) @interface NSParagraphStyle : NSObject <NSCopying,
 @end
 
 
-NS_CLASS_AVAILABLE(10_0, 6_0) @interface NSMutableParagraphStyle : NSParagraphStyle
+API_AVAILABLE(macos(10.0), ios(6.0), watchos(2.0), tvos(9.0)) @interface NSMutableParagraphStyle : NSParagraphStyle
 
 @property CGFloat lineSpacing;
 @property CGFloat paragraphSpacing;
@@ -141,14 +105,14 @@ NS_CLASS_AVAILABLE(10_0, 6_0) @interface NSMutableParagraphStyle : NSParagraphSt
 @property CGFloat lineHeightMultiple;
 @property CGFloat paragraphSpacingBefore;
 @property float hyphenationFactor;
-@property (null_resettable, copy) NSArray<NSTextTab *> *tabStops NS_AVAILABLE(10_0, 7_0);
-@property CGFloat defaultTabInterval NS_AVAILABLE(10_0, 7_0);
-@property BOOL allowsDefaultTighteningForTruncation NS_AVAILABLE(10_11, 9_0);
+@property (null_resettable, copy) NSArray<NSTextTab *> *tabStops API_AVAILABLE(macos(10.0), ios(7.0), watchos(2.0), tvos(9.0));
+@property CGFloat defaultTabInterval API_AVAILABLE(macos(10.0), ios(7.0), watchos(2.0), tvos(9.0));
+@property BOOL allowsDefaultTighteningForTruncation API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0));
 
-- (void)addTabStop:(NSTextTab *)anObject NS_AVAILABLE(10_0, 9_0);
-- (void)removeTabStop:(NSTextTab *)anObject NS_AVAILABLE(10_0, 9_0);
+- (void)addTabStop:(NSTextTab *)anObject API_AVAILABLE(macos(10.0), ios(9.0), watchos(2.0), tvos(9.0));
+- (void)removeTabStop:(NSTextTab *)anObject API_AVAILABLE(macos(10.0), ios(9.0), watchos(2.0), tvos(9.0));
 
-- (void)setParagraphStyle:(NSParagraphStyle *)obj NS_AVAILABLE(10_0, 9_0);
+- (void)setParagraphStyle:(NSParagraphStyle *)obj API_AVAILABLE(macos(10.0), ios(9.0), watchos(2.0), tvos(9.0));
 
 @property float tighteningFactorForTruncation;
 @property (copy) NSArray<__kindof NSTextBlock *> *textBlocks;
@@ -170,4 +134,12 @@ typedef NS_ENUM(NSUInteger, NSTextTabType) {
 @property (readonly) NSTextTabType tabStopType; // Use -alignment and -options
 @end
 
+
+
+#endif // !TARGET_OS_IPHONE
+
 NS_ASSUME_NONNULL_END
+#else
+#import <UIFoundation/NSParagraphStyle.h>
+#endif
+

@@ -36,7 +36,7 @@ NS_ASSUME_NONNULL_BEGIN
 @class CIContext;
 @class CIImage;
 
-NS_CLASS_AVAILABLE(10_7, 4_0)
+API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 @interface AVVideoComposition : NSObject <NSCopying, NSMutableCopying> {
 @private
     AVVideoCompositionInternal    *_videoComposition;
@@ -60,23 +60,23 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
    If the specified asset has no video tracks, this method will return an AVVideoComposition instance with an empty collection of instructions.
  
 */
-+ (AVVideoComposition *)videoCompositionWithPropertiesOfAsset:(AVAsset *)asset NS_AVAILABLE(10_9, 6_0);
++ (AVVideoComposition *)videoCompositionWithPropertiesOfAsset:(AVAsset *)asset API_AVAILABLE(macos(10.9), ios(6.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 
 /* indicates a custom compositor class to use. The class must implement the AVVideoCompositing protocol.
    If nil, the default, internal video compositor is used */
-@property (nonatomic, readonly, nullable) Class<AVVideoCompositing> customVideoCompositorClass NS_AVAILABLE(10_9, 7_0);
+@property (nonatomic, readonly, nullable) Class<AVVideoCompositing> customVideoCompositorClass API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 
 /* indicates the interval which the video composition, when enabled, should render composed video frames */
 @property (nonatomic, readonly) CMTime frameDuration;
 
 /* If sourceTrackIDForFrameTiming is not kCMPersistentTrackID_Invalid, frame timing for the video composition is derived from the source asset's track with the corresponding ID. This may be used to preserve a source asset's variable frame timing. If an empty edit is encountered in the source asset’s track, the compositor composes frames as needed up to the frequency specified in frameDuration property. */
-@property (nonatomic, readonly) CMPersistentTrackID sourceTrackIDForFrameTiming NS_AVAILABLE(10_13, 11_0);
+@property (nonatomic, readonly) CMPersistentTrackID sourceTrackIDForFrameTiming API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0)) API_UNAVAILABLE(watchos);
 
 /* indicates the size at which the video composition, when enabled, should render */
 @property (nonatomic, readonly) CGSize renderSize;
 
 /* indicates the scale at which the video composition should render. May only be other than 1.0 for a video composition set on an AVPlayerItem */
-@property (nonatomic, readonly) float renderScale API_AVAILABLE(macos(10.14), ios(4.0), tvos(9.0)) __WATCHOS_PROHIBITED;
+@property (nonatomic, readonly) float renderScale API_AVAILABLE(macos(10.14), ios(4.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 
 /* Indicates instructions for video composition via an NSArray of instances of classes implementing the AVVideoCompositionInstruction protocol.
    For the first instruction in the array, timeRange.start must be less than or equal to the earliest time for which playback or other processing will be attempted
@@ -122,7 +122,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
  @discussion
     Default is nil. Valid values are those suitable for AVVideoColorPrimariesKey. Generally set as a triple along with colorYCbCrMatrix and colorTransferFunction.
 */
-@property (nonatomic, readonly, nullable) NSString *colorPrimaries NS_AVAILABLE(10_12, 10_0);
+@property (nonatomic, readonly, nullable) NSString *colorPrimaries API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0)) API_UNAVAILABLE(watchos);
 
 /*
  @property     colorYCbCrMatrix
@@ -131,7 +131,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
  @discussion
     Default is nil. Valid values are those suitable for AVVideoYCbCrMatrixKey. Generally set as a triple along with colorPrimaries and colorTransferFunction.
 */
-@property (nonatomic, readonly, nullable) NSString *colorYCbCrMatrix NS_AVAILABLE(10_12, 10_0);
+@property (nonatomic, readonly, nullable) NSString *colorYCbCrMatrix API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0)) API_UNAVAILABLE(watchos);
 
 /*
  @property     colorTransferFunction
@@ -140,7 +140,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
  @discussion
     Default is nil. Valid values are those suitable for AVVideoTransferFunctionKey. Generally set as a triple along with colorYCbCrMatrix and colorYCbCrMatrix.
 */
-@property (nonatomic, readonly, nullable) NSString *colorTransferFunction NS_AVAILABLE(10_12, 10_0);
+@property (nonatomic, readonly, nullable) NSString *colorTransferFunction API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0)) API_UNAVAILABLE(watchos);
 
 @end
 
@@ -180,7 +180,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 			}];
 */
 + (AVVideoComposition *)videoCompositionWithAsset:(AVAsset *)asset
-			 applyingCIFiltersWithHandler:(void (^)(AVAsynchronousCIImageFilteringRequest *request))applier NS_AVAILABLE(10_11, 9_0);
+			 applyingCIFiltersWithHandler:(void (^)(AVAsynchronousCIImageFilteringRequest *request))applier API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 
 @end
 
@@ -193,7 +193,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 
 @class AVMutableVideoCompositionInternal;
 
-NS_CLASS_AVAILABLE(10_7, 4_0)
+API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 @interface AVMutableVideoComposition : AVVideoComposition {
 @private
     AVMutableVideoCompositionInternal    *_mutableVideoComposition __attribute__((unused));
@@ -225,22 +225,40 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
    If the specified asset has no video tracks, this method will return an AVMutableVideoComposition instance with an empty collection of instructions.
  
 */
-+ (AVMutableVideoComposition *)videoCompositionWithPropertiesOfAsset:(AVAsset *)asset NS_AVAILABLE(10_9, 6_0);
++ (AVMutableVideoComposition *)videoCompositionWithPropertiesOfAsset:(AVAsset *)asset API_AVAILABLE(macos(10.9), ios(6.0), tvos(9.0)) API_UNAVAILABLE(watchos);
+
+/*
+ @method		videoCompositionWithPropertiesOfAsset:prototypeInstruction:
+ @abstract
+    Returns a new instance of AVMutableVideoComposition with values and instructions suitable for presenting the video tracks of the specified asset according to its temporal and geometric properties and those of its tracks, and also overrides default properties with those from a prototypeInstruction.
+ @param			asset		An instance of AVAsset. For best performance, ensure that the duration and tracks properties of the asset are already loaded before invoking this method.
+ @param			prototypeInstruction		Custom instructions that the client can choose to override.
+ @result		An instance of AVMutableVideoComposition.
+ @discussion
+   Also see videoCompositionWithPropertiesOfAsset:.
+   The returned AVVideoComposition will have instructions that respect the spatial properties and timeRanges of the specified asset's video tracks. Anything not pertaining to spatial layout and timing, such as background color for their composition or post-processing behaviors, is eligible to be specified via a prototype instruction.
+   Example: To add a background color,
+   myPrototypeInstruction = [[AVMutableVideoCompositionInstruction alloc] init];
+   myPrototypeInstruction.backgroundColor = myCGColorRef; // Do not use constant CGColorRef colors here.
+   myVideoComposition = [AVVideoComposition videoCompositionWithPropertiesOfAsset:myAsset prototypeInstruction:myPrototypeInstruction];
+ 
+ */
++ (AVMutableVideoComposition *)videoCompositionWithPropertiesOfAsset:(AVAsset *)asset prototypeInstruction:(AVVideoCompositionInstruction *)prototypeInstruction API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0)) API_UNAVAILABLE(watchos);
 
 /* indicates the custom compositor class to use. If nil, the default, internal video compositor is used */
-@property (nonatomic, retain, nullable) Class<AVVideoCompositing> customVideoCompositorClass NS_AVAILABLE(10_9, 7_0);
+@property (nonatomic, retain, nullable) Class<AVVideoCompositing> customVideoCompositorClass API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 
 /* indicates the interval which the video composition, when enabled, should render composed video frames */
 @property (nonatomic) CMTime frameDuration;
 
 /* If sourceTrackIDForFrameTiming is not kCMPersistentTrackID_Invalid, frame timing for the video composition is derived from the source asset's track with the corresponding ID. This may be used to preserve a source asset's variable frame timing. If an empty edit is encountered in the source asset’s track, the compositor composes frames as needed up to the frequency specified in frameDuration property. */
-@property (nonatomic) CMPersistentTrackID sourceTrackIDForFrameTiming NS_AVAILABLE(10_13, 11_0);
+@property (nonatomic) CMPersistentTrackID sourceTrackIDForFrameTiming API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0)) API_UNAVAILABLE(watchos);
 
 /* indicates the size at which the video composition, when enabled, should render */
 @property (nonatomic) CGSize renderSize;
 
 /* indicates the scale at which the video composition should render. May only be other than 1.0 for a video composition set on an AVPlayerItem */
-@property (nonatomic) float renderScale API_AVAILABLE(macos(10.14), ios(4.0), tvos(9.0)) __WATCHOS_PROHIBITED;
+@property (nonatomic) float renderScale API_AVAILABLE(macos(10.14), ios(4.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 
 /* Indicates instructions for video composition via an NSArray of instances of classes implementing the AVVideoCompositionInstruction protocol.
    For the first instruction in the array, timeRange.start must be less than or equal to the earliest time for which playback or other processing will be attempted
@@ -286,7 +304,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
  @discussion
     Default is nil. Valid values are those suitable for AVVideoColorPrimariesKey. Generally set as a triple along with colorYCbCrMatrix and colorTransferFunction.
 */
-@property (nonatomic, copy, nullable) NSString *colorPrimaries NS_AVAILABLE(10_12, 10_0);
+@property (nonatomic, copy, nullable) NSString *colorPrimaries API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0)) API_UNAVAILABLE(watchos);
 
 /*
  @property     colorYCbCrMatrix
@@ -295,7 +313,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
  @discussion
     Default is nil. Valid values are those suitable for AVVideoYCbCrMatrixKey. Generally set as a triple along with colorPrimaries and colorTransferFunction.
 */
-@property (nonatomic, copy, nullable) NSString *colorYCbCrMatrix NS_AVAILABLE(10_12, 10_0);
+@property (nonatomic, copy, nullable) NSString *colorYCbCrMatrix API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0)) API_UNAVAILABLE(watchos);
 
 /*
  @property     colorTransferFunction
@@ -304,7 +322,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
  @discussion
     Default is nil. Valid values are those suitable for AVVideoTransferFunctionKey. Generally set as a triple along with colorYCbCrMatrix and colorYCbCrMatrix.
 */
-@property (nonatomic, copy, nullable) NSString *colorTransferFunction NS_AVAILABLE(10_12, 10_0);
+@property (nonatomic, copy, nullable) NSString *colorTransferFunction API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0)) API_UNAVAILABLE(watchos);
 
 @end
 
@@ -344,7 +362,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 			}];
 */
 + (AVMutableVideoComposition *)videoCompositionWithAsset:(AVAsset *)asset
-			 applyingCIFiltersWithHandler:(void (^)(AVAsynchronousCIImageFilteringRequest *request))applier NS_AVAILABLE(10_11, 9_0);
+			 applyingCIFiltersWithHandler:(void (^)(AVAsynchronousCIImageFilteringRequest *request))applier API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 
 @end
 
@@ -360,7 +378,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 
 @class AVVideoCompositionInstructionInternal;
 
-NS_CLASS_AVAILABLE(10_7, 4_0)
+API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 @interface AVVideoCompositionInstruction : NSObject <NSSecureCoding, NSCopying, NSMutableCopying, AVVideoCompositionInstruction> {
 @private
 	AVVideoCompositionInstructionInternal	*_instruction;
@@ -385,12 +403,12 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 @property (nonatomic, readonly) BOOL enablePostProcessing;
 
 /* List of video track IDs required to compose frames for this instruction. The value of this property is computed from the layer instructions. */
-@property (nonatomic, readonly) NSArray<NSValue *> *requiredSourceTrackIDs NS_AVAILABLE(10_9, 7_0);
+@property (nonatomic, readonly) NSArray<NSValue *> *requiredSourceTrackIDs API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 
 /* If the video composition result is one of the source frames for the duration of the instruction, this property
    returns the corresponding track ID. The compositor won't be run for the duration of the instruction and the proper source
    frame will be used instead. The value of this property is computed from the layer instructions */
-@property (nonatomic, readonly) CMPersistentTrackID passthroughTrackID NS_AVAILABLE(10_9, 7_0); // kCMPersistentTrackID_Invalid if not a passthrough instruction
+@property (nonatomic, readonly) CMPersistentTrackID passthroughTrackID API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0)) API_UNAVAILABLE(watchos); // kCMPersistentTrackID_Invalid if not a passthrough instruction
 
 @end
 
@@ -405,7 +423,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 
 @class AVMutableVideoCompositionInstructionInternal;
 
-NS_CLASS_AVAILABLE(10_7, 4_0)
+API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 @interface AVMutableVideoCompositionInstruction : AVVideoCompositionInstruction {
 @private
 	AVMutableVideoCompositionInstructionInternal	*_mutableInstruction __attribute__((unused));
@@ -447,7 +465,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 
 @class AVVideoCompositionLayerInstructionInternal;
 
-NS_CLASS_AVAILABLE(10_7, 4_0)
+API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 @interface AVVideoCompositionLayerInstruction : NSObject <NSSecureCoding, NSCopying, NSMutableCopying> {
 @private
 	AVVideoCompositionLayerInstructionInternal	*_layerInstruction;
@@ -505,7 +523,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
  @result
    An indication of success. NO will be returned if the specified time is beyond the duration of the last crop rectangle ramp that has been set.
 */
-- (BOOL)getCropRectangleRampForTime:(CMTime)time startCropRectangle:(nullable CGRect *)startCropRectangle endCropRectangle:(nullable CGRect *)endCropRectangle timeRange:(nullable CMTimeRange *)timeRange NS_AVAILABLE(10_9, 7_0);
+- (BOOL)getCropRectangleRampForTime:(CMTime)time startCropRectangle:(nullable CGRect *)startCropRectangle endCropRectangle:(nullable CGRect *)endCropRectangle timeRange:(nullable CMTimeRange *)timeRange API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 
 @end
 
@@ -517,7 +535,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 
 @class AVMutableVideoCompositionLayerInstructionInternal;
 
-NS_CLASS_AVAILABLE(10_7, 4_0)
+API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 @interface AVMutableVideoCompositionLayerInstruction : AVVideoCompositionLayerInstruction {
 @private
 	AVMutableVideoCompositionLayerInstructionInternal	*_mutableLayerInstruction __attribute__((unused));
@@ -629,7 +647,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
    Before the first specified time for which a crop rectangle is set, the crop rectangle is held constant to CGRectInfinite
    after the last time for which a crop rectangle is set, the crop rectangle is held constant at that last value.
 */
-- (void)setCropRectangleRampFromStartCropRectangle:(CGRect)startCropRectangle toEndCropRectangle:(CGRect)endCropRectangle timeRange:(CMTimeRange)timeRange NS_AVAILABLE(10_9, 7_0);
+- (void)setCropRectangleRampFromStartCropRectangle:(CGRect)startCropRectangle toEndCropRectangle:(CGRect)endCropRectangle timeRange:(CMTimeRange)timeRange API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 
 /*  
  @method		setCropRectangle:atTime:
@@ -647,7 +665,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
    Before the first specified time for which a crop rectangle is set, the crop rectangle is held constant to CGRectInfinite
    after the last time for which a crop rectangle is set, the crop rectangle is held constant at that last value.
 */
-- (void)setCropRectangle:(CGRect)cropRectangle atTime:(CMTime)time NS_AVAILABLE(10_9, 7_0);
+- (void)setCropRectangle:(CGRect)cropRectangle atTime:(CMTime)time API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 
 @end
 
@@ -672,7 +690,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 @class CALayer;
 @class AVVideoCompositionCoreAnimationToolInternal;
 
-NS_CLASS_AVAILABLE(10_7, 4_0)
+API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 @interface AVVideoCompositionCoreAnimationTool : NSObject {
 @private
 	AVVideoCompositionCoreAnimationToolInternal	*_videoCompositionTool;
@@ -718,7 +736,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 								to YES in the layer hierarchy to get the same result when attaching a CALayer to a AVVideoCompositionCoreAnimationTool
 								as when using it to back a UIView.
 */
-+ (instancetype)videoCompositionCoreAnimationToolWithPostProcessingAsVideoLayers:(NSArray<CALayer *> *)videoLayers inLayer:(CALayer *)animationLayer NS_AVAILABLE(10_9, 7_0);
++ (instancetype)videoCompositionCoreAnimationToolWithPostProcessingAsVideoLayers:(NSArray<CALayer *> *)videoLayers inLayer:(CALayer *)animationLayer API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 
 @end
 
@@ -748,7 +766,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
    In the course of validation, the receiver will invoke its validationDelegate with reference to any trouble spots in the video composition.
    An exception will be raised if the delegate modifies the receiver's array of instructions or the array of layerInstructions of any AVVideoCompositionInstruction contained therein during validation.
 */
-- (BOOL)isValidForAsset:(nullable AVAsset *)asset timeRange:(CMTimeRange)timeRange validationDelegate:(nullable id<AVVideoCompositionValidationHandling>)validationDelegate NS_AVAILABLE(10_8, 5_0);
+- (BOOL)isValidForAsset:(nullable AVAsset *)asset timeRange:(CMTimeRange)timeRange validationDelegate:(nullable id<AVVideoCompositionValidationHandling>)validationDelegate API_AVAILABLE(macos(10.8), ios(5.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 
 @end
 
@@ -763,7 +781,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
  @result
    An indication of whether the AVVideoComposition should continue validation in order to report additional problems that may exist.
 */
-- (BOOL)videoComposition:(AVVideoComposition *)videoComposition shouldContinueValidatingAfterFindingInvalidValueForKey:(NSString *)key NS_AVAILABLE(10_8, 5_0);
+- (BOOL)videoComposition:(AVVideoComposition *)videoComposition shouldContinueValidatingAfterFindingInvalidValueForKey:(NSString *)key API_AVAILABLE(macos(10.8), ios(5.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 
 /*!
  @method		videoComposition:shouldContinueValidatingAfterFindingEmptyTimeRange:
@@ -772,7 +790,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
  @result
    An indication of whether the AVVideoComposition should continue validation in order to report additional problems that may exist.
 */
-- (BOOL)videoComposition:(AVVideoComposition *)videoComposition shouldContinueValidatingAfterFindingEmptyTimeRange:(CMTimeRange)timeRange NS_AVAILABLE(10_8, 5_0);
+- (BOOL)videoComposition:(AVVideoComposition *)videoComposition shouldContinueValidatingAfterFindingEmptyTimeRange:(CMTimeRange)timeRange API_AVAILABLE(macos(10.8), ios(5.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 
 /*!
  @method		videoComposition:shouldContinueValidatingAfterFindingInvalidTimeRangeInInstruction:
@@ -783,7 +801,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
  @result
    An indication of whether the AVVideoComposition should continue validation in order to report additional problems that may exist.
 */
-- (BOOL)videoComposition:(AVVideoComposition *)videoComposition shouldContinueValidatingAfterFindingInvalidTimeRangeInInstruction:(id<AVVideoCompositionInstruction>)videoCompositionInstruction NS_AVAILABLE(10_8, 5_0);
+- (BOOL)videoComposition:(AVVideoComposition *)videoComposition shouldContinueValidatingAfterFindingInvalidTimeRangeInInstruction:(id<AVVideoCompositionInstruction>)videoCompositionInstruction API_AVAILABLE(macos(10.8), ios(5.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 
 /*!
  @method		videoComposition:shouldContinueValidatingAfterFindingInvalidTrackIDInInstruction:layerInstruction:asset:
@@ -792,7 +810,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
  @result
    An indication of whether the AVVideoComposition should continue validation in order to report additional problems that may exist.
 */
-- (BOOL)videoComposition:(AVVideoComposition *)videoComposition shouldContinueValidatingAfterFindingInvalidTrackIDInInstruction:(id<AVVideoCompositionInstruction>)videoCompositionInstruction layerInstruction:(AVVideoCompositionLayerInstruction *)layerInstruction asset:(AVAsset *)asset NS_AVAILABLE(10_8, 5_0);
+- (BOOL)videoComposition:(AVVideoComposition *)videoComposition shouldContinueValidatingAfterFindingInvalidTrackIDInInstruction:(id<AVVideoCompositionInstruction>)videoCompositionInstruction layerInstruction:(AVVideoCompositionLayerInstruction *)layerInstruction asset:(AVAsset *)asset API_AVAILABLE(macos(10.8), ios(5.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 
 @end
 

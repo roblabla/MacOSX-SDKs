@@ -4926,54 +4926,6 @@ HIViewDrawCGImage(
   const HIRect *  inBounds,
   CGImageRef      inImage)                                    AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
-
-#endif  /* !__LP64__ */
-
-#ifdef __OBJC__
-#if !__LP64__
-/*
- *  HIViewDrawNSImage()
- *  
- *  Discussion:
- *    Draws an image in the right direction for an HIView. This is
- *    functionally similar to HIViewDrawCGImage, in that it flips the
- *    context appropriately so that the image is drawn correctly for
- *    the default HIView coordinate space.
- *  
- *  Mac OS X threading:
- *    Not thread safe
- *  
- *  Parameters:
- *    
- *    inContext:
- *      The context to draw in.
- *    
- *    inBounds:
- *      The bounds to draw the image into.
- *    
- *    inImage:
- *      The image to draw.
- *  
- *  Result:
- *    An operating system status code.
- *  
- *  Availability:
- *    Mac OS X:         in version 10.5 and later in Carbon.framework [32-bit only]
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   not available
- */
-extern OSStatus 
-HIViewDrawNSImage(
-  CGContextRef    inContext,
-  const HIRect *  inBounds,
-  NSImage *       inImage)                                    AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-
-
-#endif  /* !__LP64__ */
-
-#endif  /* defined(__OBJC__) */
-
-#if !__LP64__
 /*
  *  HIViewGetFeatures()
  *  

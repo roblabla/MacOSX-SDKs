@@ -104,10 +104,10 @@ protected:
 		bool				fWriteCacheEnabled;
 		bool				fDeviceIsShared;
 		UInt64				fMediumBlockCount64;
-#if !TARGET_OS_EMBEDDED
+#if !TARGET_OS_IPHONE
 		bool				fDeviceHasSATTranslation;
         bool                fDeviceHasNVMETranslation;
-#endif /* !TARGET_OS_EMBEDDED */
+#endif /* !TARGET_OS_IPHONE */
 		bool				fProtocolSpecificPowerControl;
 		bool				fRequiresEjectWithStartStopUnit;
 		UInt32				fMaximumUnmapLBACount;
@@ -144,13 +144,13 @@ protected:
 	// SetMediumCharacteristics() should be used to set it.
 	#define fMediumBlockCount64	fIOSCSIBlockCommandsDeviceReserved->fMediumBlockCount64
 
-#if !TARGET_OS_EMBEDDED
+#if !TARGET_OS_IPHONE
 	#define fDeviceHasSATTranslation fIOSCSIBlockCommandsDeviceReserved->fDeviceHasSATTranslation
-#endif /* !TARGET_OS_EMBEDDED */
+#endif /* !TARGET_OS_IPHONE */
 
-#if !TARGET_OS_EMBEDDED
+#if !TARGET_OS_IPHONE
     #define fDeviceHasNVMETranslation fIOSCSIBlockCommandsDeviceReserved->fDeviceHasNVMETranslation
-#endif /* !TARGET_OS_EMBEDDED */
+#endif /* !TARGET_OS_IPHONE */
 
 	// Device support protocol specific power off
 	#define fProtocolSpecificPowerControl fIOSCSIBlockCommandsDeviceReserved->fProtocolSpecificPowerControl
@@ -1574,7 +1574,7 @@ public:
 
 private:
 
-#if !TARGET_OS_EMBEDDED
+#if !TARGET_OS_IPHONE
 	// Space reserved for future expansion.
 	OSMetaClassDeclareReservedUnused ( IOSCSIBlockCommandsDevice, 8 );
 	OSMetaClassDeclareReservedUnused ( IOSCSIBlockCommandsDevice, 9 );
@@ -1585,7 +1585,7 @@ private:
 	OSMetaClassDeclareReservedUnused ( IOSCSIBlockCommandsDevice, 14 );
 	OSMetaClassDeclareReservedUnused ( IOSCSIBlockCommandsDevice, 15 );
 	OSMetaClassDeclareReservedUnused ( IOSCSIBlockCommandsDevice, 16 );
-#endif /* !TARGET_OS_EMBEDDED */
+#endif /* !TARGET_OS_IPHONE */
 
 };
 

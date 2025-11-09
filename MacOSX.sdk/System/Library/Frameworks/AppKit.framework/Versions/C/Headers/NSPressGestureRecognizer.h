@@ -1,7 +1,7 @@
 /*
     NSPressGestureRecognizer.h
     Application Kit
-    Copyright (c) 2013-2018, Apple Inc.
+    Copyright (c) 2013-2019, Apple Inc.
     All rights reserved.
 */
 
@@ -9,18 +9,10 @@
 #import <AppKit/NSGestureRecognizer.h>
 
 NS_ASSUME_NONNULL_BEGIN
+API_UNAVAILABLE_BEGIN(ios)
 
-NS_CLASS_AVAILABLE(10_10, NA)
-@interface NSPressGestureRecognizer : NSGestureRecognizer <NSCoding> {
-@private
-    NSPoint _location APPKIT_IVAR;
-    NSUInteger _buttonMask APPKIT_IVAR;
-    NSTimeInterval _minimumPressDuration APPKIT_IVAR;
-    CGFloat _allowableMovement APPKIT_IVAR;
-    NSInteger _buttonCount APPKIT_IVAR;
-    NSInteger _lcflags APPKIT_IVAR;
-    id _reserved1 APPKIT_IVAR;
-}
+API_AVAILABLE(macos(10.10))
+@interface NSPressGestureRecognizer : NSGestureRecognizer <NSCoding>
 
 /* bitfield of the button(s) required to recognize this click where bit 0 is the primary button, 1 is the secondary button, etc...
    NSPressGestureRecognizer dynamically returns YES to delay primary, secondary and other mouse events depending on this value.
@@ -34,7 +26,8 @@ NS_CLASS_AVAILABLE(10_10, NA)
 */
 @property CGFloat allowableMovement; // in screen points. Defaults to double-click distance
 
-@property NSInteger numberOfTouchesRequired NS_AVAILABLE_MAC(10_12_2);
+@property NSInteger numberOfTouchesRequired API_AVAILABLE(macos(10.12.2));
 @end
 
+API_UNAVAILABLE_END
 NS_ASSUME_NONNULL_END

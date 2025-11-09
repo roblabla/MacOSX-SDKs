@@ -16,6 +16,10 @@
 NS_ASSUME_NONNULL_BEGIN
 @protocol MTLDevice;
 
+@protocol MTLCounterSampleBuffer;
+#define MTLCounterDontSample ((NSUInteger)-1)
+#define MTLMaxRenderPassSampleBuffers 4
+
 typedef NS_ENUM(NSUInteger, MTLLoadAction) {
     MTLLoadActionDontCare = 0,
     MTLLoadActionLoad = 1,
@@ -182,7 +186,7 @@ typedef NS_ENUM(NSUInteger, MTLMultisampleStencilResolveFilter)
      @abstract The stencil sample corresponding to whichever depth sample is selected by the depth resolve filter. If depth resolve is not enabled, the stencil sample is chosen based on what a depth resolve filter would have selected.
      */
     MTLMultisampleStencilResolveFilterDepthResolvedSample   = 1,
-} API_AVAILABLE(macos(10.14), ios(12.0));
+} API_AVAILABLE(macos(10.14), ios(12.0)) API_UNAVAILABLE(tvos);
 
 
 
@@ -199,7 +203,7 @@ MTL_EXPORT API_AVAILABLE(macos(10.11), ios(8.0))
  @property stencilResolveFilter
  @abstract The filter to be used for stencil multisample resolve. Defaults to MTLMultisampleStencilResolveFilterSample0.
  */
-@property (nonatomic) MTLMultisampleStencilResolveFilter stencilResolveFilter API_AVAILABLE(macos(10.14), ios(12.0));
+@property (nonatomic) MTLMultisampleStencilResolveFilter stencilResolveFilter API_AVAILABLE(macos(10.14), ios(12.0)) API_UNAVAILABLE(tvos);
 
 @end
 
@@ -214,6 +218,7 @@ MTL_EXPORT API_AVAILABLE(macos(10.11), ios(8.0))
 - (void)setObject:(nullable MTLRenderPassColorAttachmentDescriptor *)attachment atIndexedSubscript:(NSUInteger)attachmentIndex;
 
 @end
+
 
 /*!
  @class MTLRenderPassDescriptor
@@ -244,11 +249,30 @@ MTL_EXPORT API_AVAILABLE(macos(10.11), ios(8.0))
  @property renderTargetArrayLength:
  @abstract The number of active layers
  */
-@property (nonatomic) NSUInteger renderTargetArrayLength API_AVAILABLE(macos(10.11)) API_UNAVAILABLE(ios);
+@property (nonatomic) NSUInteger renderTargetArrayLength API_AVAILABLE(macos(10.11), ios(12.0)) API_UNAVAILABLE(tvos);
 
 
 
 
+/*!
+ @property defaultRasterSampleCount:
+ @abstract The raster sample count for the render pass when no attachments are given.
+ */
+@property (nonatomic) NSUInteger defaultRasterSampleCount API_AVAILABLE(ios(11.0), macos(10.15), macCatalyst(13.0)) API_UNAVAILABLE(tvos);
+
+/*!
+ @property renderTargetWidth:
+ @abstract The width in pixels to constrain the render target to.
+ @discussion Defaults to 0. If non-zero the value must be smaller than or equal to the minimum width of all attachments.
+ */
+@property (nonatomic) NSUInteger renderTargetWidth API_AVAILABLE(ios(11.0), macos(10.15), macCatalyst(13.0)) API_UNAVAILABLE(tvos);
+
+/*!
+ @property renderTargetHeight:
+ @abstract The height in pixels to constrain the render target to.
+ @discussion Defaults to 0. If non-zero the value must be smaller than or equal to the minimum height of all attachments.
+ */
+@property (nonatomic) NSUInteger renderTargetHeight API_AVAILABLE(ios(11.0), macos(10.15), macCatalyst(13.0)) API_UNAVAILABLE(tvos);
 
 /*!
  @method setSamplePositions:count:
@@ -266,6 +290,8 @@ MTL_EXPORT API_AVAILABLE(macos(10.11), ios(8.0))
  @return The number of previously configured custom sample positions.
  */
 - (NSUInteger)getSamplePositions:(MTLSamplePosition * _Nullable)positions count:(NSUInteger)count API_AVAILABLE(macos(10.13), ios(11.0));
+
+
 
 
 @end

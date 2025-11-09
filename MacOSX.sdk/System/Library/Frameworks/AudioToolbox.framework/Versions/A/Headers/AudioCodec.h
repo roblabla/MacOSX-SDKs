@@ -1,3 +1,4 @@
+#if (defined(USE_AUDIOTOOLBOX_PUBLIC_HEADERS) && USE_AUDIOTOOLBOX_PUBLIC_HEADERS) || !__has_include(<AudioToolboxCore/AudioCodec.h>)
 /*==================================================================================================
      File:       AudioToolbox/AudioCodec.h
 
@@ -80,13 +81,7 @@
 #include <TargetConditionals.h>
 #include <Availability.h>
 
-#if !defined(__COREAUDIO_USE_FLAT_INCLUDES__)
-	#include <CoreAudio/CoreAudioTypes.h>
-	#include <AudioToolbox/AudioComponent.h>
-#else
-	#include "AudioComponent.h"
-	#include "CoreAudioTypes.h"
-#endif
+#include <AudioToolbox/AudioComponent.h>
 
 #if defined(__cplusplus)
 extern "C"
@@ -112,9 +107,9 @@ typedef UInt32					AudioCodecPropertyID;
 				The first four + sizeof(void *) bytes of the buffer pointed at by outPropertyData
 				will contain this struct.
  
-	@field mMagicCookieSize
+	@var   mMagicCookieSize
         The size of the magic cookie
-	@field mMagicCookie
+	@var   mMagicCookie
         Generic const pointer to magic cookie
 */
 struct AudioCodecMagicCookieInfo 
@@ -129,6 +124,7 @@ typedef struct AudioCodecMagicCookieInfo	AudioCodecMagicCookieInfo;
 //=============================================================================
 
 
+#if !TARGET_OS_IPHONE
 /*!
 	@enum           AudioCodecComponentType
  
@@ -150,6 +146,7 @@ CF_ENUM(UInt32)
 	kAudioEncoderComponentType								= 'aenc',	
 	kAudioUnityCodecComponentType							= 'acdc'
 };
+#endif
 
 //=============================================================================
 #pragma	mark Global Codec Properties
@@ -290,6 +287,10 @@ CF_ENUM(AudioCodecPropertyID)
 						Any codec that reports 1 for this property must be able to handle packet
 						descriptions, though it does not have to require them.
 						May be writable.
+	@constant		kAudioCodecPropertyEmploysDependentPackets
+						A UInt32 where 0 indicates that all packets in the codec's format
+						are independently decodable, and 1 indicates that some may not be
+						independently decodable.
 	@constant		kAudioCodecPropertyMaximumPacketByteSize
 						A UInt32 indicating the maximum number of bytes a packet of data
 						in the codec's format will be. If the format is constant bit rate,
@@ -430,6 +431,9 @@ CF_ENUM(AudioCodecPropertyID)
 						The property value is between [0 - 0x7F].
 						See also kAudioCodecPropertyQualitySetting
 						Writable if supported.
+    @constant       kAudioCodecPropertyBitRateForVBR
+                        A UInt32 that can be used to set the target bit rate when the encoder is configured
+                        for VBR mode (kAudioCodecBitRateControlMode_Variable). Writable if supported.
     @constant		kAudioCodecPropertyDelayMode
                         A UInt32 specifying the delay mode. See enum below.                        
                         Writable if supported.
@@ -464,6 +468,7 @@ CF_ENUM(AudioCodecPropertyID)
 	kAudioCodecPropertyInputBufferSize											= 'tbuf',
 	kAudioCodecPropertyPacketFrameSize											= 'pakf',
 	kAudioCodecPropertyHasVariablePacketByteSizes								= 'vpk?',
+	kAudioCodecPropertyEmploysDependentPackets									= 'dpk?',
 	kAudioCodecPropertyMaximumPacketByteSize									= 'pakb',
     kAudioCodecPropertyPacketSizeLimitForVBR                                    = 'pakl',
 	kAudioCodecPropertyCurrentInputFormat										= 'ifmt',
@@ -488,6 +493,7 @@ CF_ENUM(AudioCodecPropertyID)
 	kAudioCodecPropertyFormatList												= 'acfl',
 	kAudioCodecPropertyBitRateControlMode										= 'acbf',
 	kAudioCodecPropertySoundQualityForVBR										= 'vbrq',
+    kAudioCodecPropertyBitRateForVBR                                            = 'vbrb',
 	kAudioCodecPropertyDelayMode                                                = 'dmod',
     kAudioCodecPropertyAdjustLocalQuality										= '^qal',
     kAudioCodecPropertyProgramTargetLevel										= 'pptl',
@@ -648,9 +654,9 @@ CF_ENUM(UInt32)
 	@discussion		Specifies the number of leading and trailing empty frames
 					which have to be inserted.
  
-	@field			leadingFrames
+	@var  			leadingFrames
 						An unsigned integer specifying the number of leading empty frames
-	@field			trailingFrames
+	@var  			trailingFrames
 						An unsigned integer specifying the number of trailing empty frames 
 */
 typedef struct AudioCodecPrimeInfo 
@@ -1282,3 +1288,6 @@ CF_ENUM(UInt32)
 CF_ASSUME_NONNULL_END
 
 #endif	//	AudioUnit_AudioCodec_h
+#else
+#include <AudioToolboxCore/AudioCodec.h>
+#endif

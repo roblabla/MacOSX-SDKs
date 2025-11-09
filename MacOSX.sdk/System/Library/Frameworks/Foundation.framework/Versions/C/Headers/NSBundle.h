@@ -1,5 +1,5 @@
 /*	NSBundle.h
-	Copyright (c) 1994-2018, Apple Inc.  All rights reserved.
+	Copyright (c) 1994-2019, Apple Inc.  All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -24,8 +24,7 @@ NS_ASSUME_NONNULL_BEGIN
     Class		_principalClass;
     id                  _initialPath;
     id                  _resolvedPath;
-    Class               _firstClass;
-    id                  _lock;
+    NSString           *_firstClassName;
 }
 
 /* Methods for creating or retrieving bundle instances. */
@@ -158,10 +157,11 @@ FOUNDATION_EXPORT NSString * const NSLoadedClasses;	// notification key
  
  The request object itself is lightweight. You may create as many as you need, for example to request the same set of tags in different components of your application.
 */
-NS_CLASS_AVAILABLE(NA, 9_0)
+
+API_AVAILABLE(ios(9.0), watchos(2.0), tvos(9.0)) API_UNAVAILABLE(macos)
 @interface NSBundleResourceRequest : NSObject <NSProgressReporting>
 
-- (instancetype)init NS_UNAVAILABLE;
+- (instancetype)init API_UNAVAILABLE(macos, ios, watchos, tvos);
 
 /*
  A tag and bundle are required arguments to the init methods. The tag argument is required and it must exist in the manifest of the specified bundle. The bundle argument describes an existing bundle which was built with on demand resources support. Any resources downloaded can be found using the standard NSBundle resource lookup API once the request is completed. If no bundle is specified then the main bundle is used.

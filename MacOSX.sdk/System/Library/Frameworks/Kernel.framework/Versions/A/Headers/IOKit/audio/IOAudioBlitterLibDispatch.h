@@ -93,6 +93,17 @@ typedef float	Float32;
  */
 typedef double	Float64;
 
+#ifndef __OPEN_SOURCE__
+/*!
+ * @function IOAF_Int8ToFloat32
+ * @abstract Converts 8-bit integer float to 32-bit float
+ * @param src Pointer to the data to convert
+ * @param dest Pointer to the converted data
+ * @param count The number of items to convert
+ */
+extern void IOAF_Int8ToFloat32( const SInt8 *src, Float32 *dest, unsigned int count );
+#endif
+
 /*!
  * @function IOAF_NativeInt16ToFloat32
  * @abstract Converts native 16-bit integer float to 32-bit float
@@ -146,6 +157,17 @@ extern void IOAF_NativeInt32ToFloat32( const SInt32 *src, Float32 *dest, unsigne
  * @param count The number of items to convert
  */
 extern void IOAF_SwapInt32ToFloat32( const SInt32 *src, Float32 *dest, unsigned int count );
+
+#ifndef __OPEN_SOURCE__
+/*!
+ * @function IOAF_Float32ToInt8
+ * @abstract Converts 32-bit floating point to 8-bit integer
+ * @param src Pointer to the data to convert
+ * @param dest Pointer to the converted data
+ * @param count The number of items to convert
+ */
+extern void IOAF_Float32ToInt8( const Float32 *src, SInt8 *dest, unsigned int count );
+#endif
 
 /*!
  * @function IOAF_Float32ToNativeInt16

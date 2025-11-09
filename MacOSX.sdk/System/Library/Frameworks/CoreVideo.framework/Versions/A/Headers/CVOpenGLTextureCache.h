@@ -33,12 +33,12 @@ typedef struct CV_BRIDGED_TYPE(id) __CVOpenGLTextureCache *CVOpenGLTextureCacheR
    size is something reasonable for the GPU being used.   The automatic behaviour can be overridden below.  Note that setting
    kCVOpenGLTextureCacheChromaSamplingModeHighQuality is only a request.   GPUs that don't support ARB_fragment_program will still
    resort back to the native hardware support for YCbCr textures. */
-CV_EXPORT const CFStringRef CV_NONNULL kCVOpenGLTextureCacheChromaSamplingModeKey COREVIDEO_GL_DEPRECATED(macosx, 10.4, 10.14) ;
-CV_EXPORT const CFStringRef CV_NONNULL kCVOpenGLTextureCacheChromaSamplingModeAutomatic COREVIDEO_GL_DEPRECATED(macosx, 10.4, 10.14) ;	// Defaut if the key is not present
-CV_EXPORT const CFStringRef CV_NONNULL kCVOpenGLTextureCacheChromaSamplingModeHighestQuality COREVIDEO_GL_DEPRECATED(macosx, 10.4, 10.14) ;	// Force highest quality regardless of performance impact
-CV_EXPORT const CFStringRef CV_NONNULL kCVOpenGLTextureCacheChromaSamplingModeBestPerformance COREVIDEO_GL_DEPRECATED(macosx, 10.4, 10.14) ;	// Do it the quickest way possible
+CV_EXPORT const CFStringRef CV_NONNULL kCVOpenGLTextureCacheChromaSamplingModeKey COREVIDEO_GL_DEPRECATED(macosx, 10.4, 10.14) API_UNAVAILABLE(macCatalyst);
+CV_EXPORT const CFStringRef CV_NONNULL kCVOpenGLTextureCacheChromaSamplingModeAutomatic COREVIDEO_GL_DEPRECATED(macosx, 10.4, 10.14) API_UNAVAILABLE(macCatalyst);	// Defaut if the key is not present
+CV_EXPORT const CFStringRef CV_NONNULL kCVOpenGLTextureCacheChromaSamplingModeHighestQuality COREVIDEO_GL_DEPRECATED(macosx, 10.4, 10.14) API_UNAVAILABLE(macCatalyst);	// Force highest quality regardless of performance impact
+CV_EXPORT const CFStringRef CV_NONNULL kCVOpenGLTextureCacheChromaSamplingModeBestPerformance COREVIDEO_GL_DEPRECATED(macosx, 10.4, 10.14) API_UNAVAILABLE(macCatalyst);	// Do it the quickest way possible
 
-CV_EXPORT CFTypeID CVOpenGLTextureCacheGetTypeID(void) COREVIDEO_GL_DEPRECATED(macosx, 10.4, 10.14) ;
+CV_EXPORT CFTypeID CVOpenGLTextureCacheGetTypeID(void) COREVIDEO_GL_DEPRECATED(macosx, 10.4, 10.14) API_UNAVAILABLE(macCatalyst);
 
 /*!
     @function   CVOpenGLTextureCacheRetain
@@ -47,7 +47,7 @@ CV_EXPORT CFTypeID CVOpenGLTextureCacheGetTypeID(void) COREVIDEO_GL_DEPRECATED(m
     @param      buffer A CVOpenGLTextureCache object that you want to retain.
     @result     A CVOpenGLTextureCache object that is the same as the passed in buffer.
 */
-CV_EXPORT CVOpenGLTextureCacheRef CV_NULLABLE CVOpenGLTextureCacheRetain( CVOpenGLTextureCacheRef CV_NULLABLE textureCache ) COREVIDEO_GL_DEPRECATED(macosx, 10.4, 10.14) ; // NULL-safe
+CV_EXPORT CVOpenGLTextureCacheRef CV_NULLABLE CVOpenGLTextureCacheRetain( CVOpenGLTextureCacheRef CV_NULLABLE textureCache ) COREVIDEO_GL_DEPRECATED(macosx, 10.4, 10.14) API_UNAVAILABLE(macCatalyst); // NULL-safe
 
 /*!
     @function   CVOpenGLTextureCacheRelease
@@ -55,7 +55,7 @@ CV_EXPORT CVOpenGLTextureCacheRef CV_NULLABLE CVOpenGLTextureCacheRetain( CVOpen
     @discussion Equivalent to CFRelease, but NULL safe
     @param      buffer A CVOpenGLTextureCache object that you want to release.
 */
-CV_EXPORT void CVOpenGLTextureCacheRelease( CV_RELEASES_ARGUMENT CVOpenGLTextureCacheRef CV_NULLABLE textureCache ) COREVIDEO_GL_DEPRECATED(macosx, 10.4, 10.14) ; // NULL-safe
+CV_EXPORT void CVOpenGLTextureCacheRelease( CV_RELEASES_ARGUMENT CVOpenGLTextureCacheRef CV_NULLABLE textureCache ) COREVIDEO_GL_DEPRECATED(macosx, 10.4, 10.14) API_UNAVAILABLE(macCatalyst); // NULL-safe
 
 /*!
     @function   CVOpenGLTextureCacheCreate
@@ -74,7 +74,7 @@ CV_EXPORT CVReturn CVOpenGLTextureCacheCreate(
     CGLContextObj CV_NONNULL cglContext,
     CGLPixelFormatObj CV_NONNULL cglPixelFormat,
     CFDictionaryRef CV_NULLABLE textureAttributes,
-    CV_RETURNS_RETAINED_PARAMETER CVOpenGLTextureCacheRef CV_NULLABLE * CV_NONNULL cacheOut ) COREVIDEO_GL_DEPRECATED(macosx, 10.4, 10.14) ;
+    CV_RETURNS_RETAINED_PARAMETER CVOpenGLTextureCacheRef CV_NULLABLE * CV_NONNULL cacheOut ) COREVIDEO_GL_DEPRECATED(macosx, 10.4, 10.14) API_UNAVAILABLE(macCatalyst);
 
 /*!
     @function   CVOpenGLTextureCacheCreateTextureFromImage
@@ -91,7 +91,7 @@ CV_EXPORT CVReturn CVOpenGLTextureCacheCreateTextureFromImage(
     CVOpenGLTextureCacheRef CV_NONNULL textureCache,
     CVImageBufferRef CV_NONNULL sourceImage,
     CFDictionaryRef CV_NULLABLE attributes,
-    CV_RETURNS_RETAINED_PARAMETER CVOpenGLTextureRef CV_NULLABLE * CV_NONNULL textureOut ) COREVIDEO_GL_DEPRECATED(macosx, 10.4, 10.14) ;
+    CV_RETURNS_RETAINED_PARAMETER CVOpenGLTextureRef CV_NULLABLE * CV_NONNULL textureOut ) COREVIDEO_GL_DEPRECATED(macosx, 10.4, 10.14) API_UNAVAILABLE(macCatalyst);
 
 /*!
     @function   CVOpenGLTextureCacheFlush
@@ -102,7 +102,7 @@ CV_EXPORT CVReturn CVOpenGLTextureCacheCreateTextureFromImage(
     @param      options Currently unused, set to 0.
     @result     Returns kCVReturnSuccess on success
 */
-CV_EXPORT void CVOpenGLTextureCacheFlush( CVOpenGLTextureCacheRef CV_NONNULL textureCache, CVOptionFlags options ) COREVIDEO_GL_DEPRECATED(macosx, 10.4, 10.14) ;
+CV_EXPORT void CVOpenGLTextureCacheFlush( CVOpenGLTextureCacheRef CV_NONNULL textureCache, CVOptionFlags options ) COREVIDEO_GL_DEPRECATED(macosx, 10.4, 10.14) API_UNAVAILABLE(macCatalyst);
 
 #if defined(__cplusplus)
 }

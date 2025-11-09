@@ -20,7 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
   @class		AVSampleBufferRenderSynchronizer
   @abstract		AVSampleBufferRenderSynchronizer can synchronize multiple objects conforming to AVQueuedSampleBufferRendering to a single timebase.
 */
-API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0)) __WATCHOS_PROHIBITED
+API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0))
 @interface AVSampleBufferRenderSynchronizer : NSObject
 {
 @private
@@ -53,7 +53,7 @@ API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0)) __WATCHOS_PROHIBITED
 	@discussion
 		The rate can change as a result of setting the rate property, either by directly setting the property or calling -setRate:time:.  The rate can also change at any time, without any action by the client of the render synchronizer.  For example, on iOS if the app's playback is interrupted (e.g. by a phone call or another non-mixable app starting playback), the rate will automatically be set to zero.  This notification will be sent in all of those cases.
  */
-AVF_EXPORT NSNotificationName const AVSampleBufferRenderSynchronizerRateDidChangeNotification API_AVAILABLE(macos(10.14), ios(12.0), tvos(12.0)) __WATCHOS_PROHIBITED;
+AVF_EXPORT NSNotificationName const AVSampleBufferRenderSynchronizerRateDidChangeNotification API_AVAILABLE(macos(10.14), ios(12.0), tvos(12.0), watchos(5.0));
 
 /*!
 	@method			currentTime
@@ -61,7 +61,7 @@ AVF_EXPORT NSNotificationName const AVSampleBufferRenderSynchronizerRateDidChang
 	@result			A CMTime
 	@discussion		Returns the current time of the synchronizer. Not key-value observable; use -addPeriodicTimeObserverForInterval:queue:usingBlock: instead.
 */
-- (CMTime)currentTime API_AVAILABLE(macos(10.14), ios(12.0), tvos(12.0)) __WATCHOS_PROHIBITED;
+- (CMTime)currentTime API_AVAILABLE(macos(10.14), ios(12.0), tvos(12.0), watchos(5.0));
 
 /*!
 	@method			setRate:time:

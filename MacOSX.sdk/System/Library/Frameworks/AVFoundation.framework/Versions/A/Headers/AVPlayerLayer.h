@@ -37,6 +37,8 @@
 
 #import <AVFoundation/AVBase.h>
 #import <AVFoundation/AVAnimation.h>
+
+#if __has_include(<QuartzCore/CoreAnimation.h>)
 #import <QuartzCore/CoreAnimation.h>
 
 @class AVPlayer;
@@ -44,7 +46,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-NS_CLASS_AVAILABLE(10_7, 4_0)
+API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 @interface AVPlayerLayer : CALayer
 {
 @private
@@ -86,15 +88,17 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 	@property		videoRect
 	@abstract		The current size and position of the video image as displayed within the receiver's bounds.
  */
-@property (nonatomic, readonly) CGRect videoRect NS_AVAILABLE(10_9, 7_0);
+@property (nonatomic, readonly) CGRect videoRect API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 
 /*!
 	@property		pixelBufferAttributes
 	@abstract		The client requirements for the visual output displayed in AVPlayerLayer during playback.  	
 	@discussion		Pixel buffer attribute keys are defined in <CoreVideo/CVPixelBuffer.h>
  */
-@property (nonatomic, copy, nullable) NSDictionary<NSString *, id> *pixelBufferAttributes NS_AVAILABLE(10_11, 9_0);
+@property (nonatomic, copy, nullable) NSDictionary<NSString *, id> *pixelBufferAttributes API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 
 @end
 
 NS_ASSUME_NONNULL_END
+
+#endif  // __has_include(<QuartzCore/CoreAnimation.h>)

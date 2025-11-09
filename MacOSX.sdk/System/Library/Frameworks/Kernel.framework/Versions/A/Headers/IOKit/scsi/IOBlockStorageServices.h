@@ -145,7 +145,7 @@ public:
 											   IOStorageGetProvisionStatusOptions    options = 0) APPLE_KEXT_OVERRIDE;
 
 	
-#if !TARGET_OS_EMBEDDED
+#if !TARGET_OS_IPHONE
 	// Space reserved for future expansion.
     OSMetaClassDeclareReservedUnused ( IOBlockStorageServices, 1 );
     OSMetaClassDeclareReservedUnused ( IOBlockStorageServices, 2 );
@@ -155,7 +155,7 @@ public:
     OSMetaClassDeclareReservedUnused ( IOBlockStorageServices, 6 );
     OSMetaClassDeclareReservedUnused ( IOBlockStorageServices, 7 );
     OSMetaClassDeclareReservedUnused ( IOBlockStorageServices, 8 );
-#endif /* !TARGET_OS_EMBEDDED */
+#endif /* !TARGET_OS_IPHONE */
 	
 };
 

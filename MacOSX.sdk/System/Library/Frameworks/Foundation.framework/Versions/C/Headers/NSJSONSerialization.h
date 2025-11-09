@@ -1,6 +1,6 @@
 /*	
     NSJSONSerialization.h
-    Copyright (c) 2009-2018, Apple Inc. All rights reserved.
+    Copyright (c) 2009-2019, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -12,7 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 typedef NS_OPTIONS(NSUInteger, NSJSONReadingOptions) {
     NSJSONReadingMutableContainers = (1UL << 0),
     NSJSONReadingMutableLeaves = (1UL << 1),
-    NSJSONReadingAllowFragments = (1UL << 2)
+    NSJSONReadingFragmentsAllowed = (1UL << 2),
+    NSJSONReadingAllowFragments API_DEPRECATED_WITH_REPLACEMENT("NSJSONReadingFragmentsAllowed", macos(10.7, API_TO_BE_DEPRECATED), ios(5.0, API_TO_BE_DEPRECATED), watchos(2.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED)) = NSJSONReadingFragmentsAllowed,
 } API_AVAILABLE(macos(10.7), ios(5.0), watchos(2.0), tvos(9.0));
 
 typedef NS_OPTIONS(NSUInteger, NSJSONWritingOptions) {
@@ -20,7 +21,9 @@ typedef NS_OPTIONS(NSUInteger, NSJSONWritingOptions) {
 
     /* Sorts dictionary keys for output using [NSLocale systemLocale]. Keys are compared using NSNumericSearch. The specific sorting method used is subject to change.
      */
-    NSJSONWritingSortedKeys API_AVAILABLE(macos(10.13), ios(11.0), watchos(4.0), tvos(11.0)) = (1UL << 1)
+    NSJSONWritingSortedKeys API_AVAILABLE(macos(10.13), ios(11.0), watchos(4.0), tvos(11.0)) = (1UL << 1),
+    NSJSONWritingFragmentsAllowed = (1UL << 2),
+    NSJSONWritingWithoutEscapingSlashes API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0)) = (1UL << 3),
 } API_AVAILABLE(macos(10.7), ios(5.0), watchos(2.0), tvos(9.0));
 
 /* A class for converting JSON to Foundation objects and converting Foundation objects to JSON.
@@ -31,7 +34,7 @@ typedef NS_OPTIONS(NSUInteger, NSJSONWritingOptions) {
     - All dictionary keys are NSStrings
     - NSNumbers are not NaN or infinity
 */
-NS_CLASS_AVAILABLE(10_7, 5_0)
+API_AVAILABLE(macos(10.7), ios(5.0), watchos(2.0), tvos(9.0))
 @interface NSJSONSerialization : NSObject {
 @private
     void *reserved[6];

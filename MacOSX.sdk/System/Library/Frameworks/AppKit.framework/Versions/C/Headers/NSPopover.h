@@ -1,7 +1,7 @@
 /*
     NSPopover.h
     Application Kit
-    Copyright (c) 2010-2018, Apple Inc.
+    Copyright (c) 2010-2019, Apple Inc.
     All rights reserved.
 */
 
@@ -14,6 +14,7 @@
 #import <AppKit/NSResponder.h>
 
 NS_ASSUME_NONNULL_BEGIN
+API_UNAVAILABLE_BEGIN(ios)
 
 @class NSView, NSViewController, NSWindow, NSNotification, NSString;
 
@@ -28,10 +29,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 typedef NS_ENUM(NSInteger, NSPopoverAppearance) {
     ///  The popover will use the default, light content appearance.
-    NSPopoverAppearanceMinimal NS_ENUM_DEPRECATED_MAC(10_7, 10_10) = 0,
+    NSPopoverAppearanceMinimal API_DEPRECATED("", macos(10.7,10.10)) = 0,
     /// The popover will draw with a HUD appearance.
-    NSPopoverAppearanceHUD NS_ENUM_DEPRECATED_MAC(10_7, 10_10) = 1
-} NS_ENUM_DEPRECATED_MAC(10_7, 10_10);
+    NSPopoverAppearanceHUD API_DEPRECATED("", macos(10.7,10.10)) = 1
+} API_DEPRECATED("", macos(10.7,10.10));
 
 /*  AppKit supports transient, semi-transient, and application-defined behaviors. Please see the class description above for more information.  The default popover behavior is NSPopoverBehaviorApplicationDefined. 
  */
@@ -51,52 +52,12 @@ typedef NS_ENUM(NSInteger, NSPopoverBehavior) {
 
 @protocol NSPopoverDelegate;
 
-NS_CLASS_AVAILABLE(10_7, NA)
+API_AVAILABLE(macos(10.7))
 #if MAC_OS_X_VERSION_MIN_REQUIRED >= MAC_OS_X_VERSION_10_10
-@interface NSPopover : NSResponder <NSAppearanceCustomization, NSAccessibilityElement, NSAccessibility> {
+@interface NSPopover : NSResponder <NSAppearanceCustomization, NSAccessibilityElement, NSAccessibility>
 #else
-@interface NSPopover : NSResponder <NSAccessibilityElement, NSAccessibility> {
+@interface NSPopover : NSResponder <NSAccessibilityElement, NSAccessibility>
 #endif
-@private
-    id _bindingAdaptor APPKIT_IVAR;
-    id _delegate APPKIT_IVAR;
-    id _visualRepresentation APPKIT_IVAR;
-    NSView *_positioningView APPKIT_IVAR;
-    NSViewController *_contentViewController APPKIT_IVAR;
-    NSWindow *_positioningWindow APPKIT_IVAR;
-    NSAppearance *_appearance APPKIT_IVAR;
-    NSPopoverBehavior _behavior APPKIT_IVAR;
-    id _popoverPrivateData APPKIT_IVAR;
-    NSRectEdge _preferredEdge APPKIT_IVAR;
-#if !__LP64__    
-    NSPoint _unused2 APPKIT_IVAR;
-#endif
-    NSSize _contentSize APPKIT_IVAR;
-    NSRect _positioningRect APPKIT_IVAR;
-#if !__LP64__
-    id _unused3 APPKIT_IVAR;
-#endif
-    id _postCloseBlock APPKIT_IVAR;
-#if !__LP64__
-    id _reserved[1] APPKIT_IVAR;
-#endif
-    struct {
-        unsigned int animates:1;
-        unsigned int positioningRectIsBounds:1;
-        unsigned int registeredAsTransient:1;
-        unsigned int registeredAsSemitransient:1;
-        unsigned int shown:1;
-        unsigned int toolbarHidesAnchor:1;
-        unsigned int closing:1;
-        unsigned int registeredForGeometryInWindowDidChange:1;
-        unsigned int registeredForEffectiveAppearanceDidChange:1;
-        unsigned int keepTopStable:1;
-        unsigned int implicitlyDetached:1;
-        unsigned int hidesDetachedWindowOnDeactivate:1;
-        unsigned int requiresCorrectContentAppearance:1;
-        unsigned int reserved:19;
-    } _flags APPKIT_IVAR;
-}
 
 - (instancetype)init NS_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(NSCoder *)coder NS_DESIGNATED_INITIALIZER;
@@ -129,9 +90,9 @@ NS_CLASS_AVAILABLE(10_7, NA)
  * If nil is set, nil will be returned, and the effective appearance will return to the default.
  * To prevent conflicts with the previous appearance property, this is only available for apps that target 10.10 and higher.
  */
-@property (nullable, strong) NSAppearance *appearance NS_AVAILABLE_MAC(10_10);
+@property (nullable, strong) NSAppearance *appearance API_AVAILABLE(macos(10.10));
 
-@property (readonly, strong) NSAppearance *effectiveAppearance NS_AVAILABLE_MAC(10_10);
+@property (readonly, strong) NSAppearance *effectiveAppearance API_AVAILABLE(macos(10.10));
 
 #pragma clang diagnostic pop
 #else
@@ -141,7 +102,7 @@ NS_CLASS_AVAILABLE(10_7, NA)
  * A transition to the NSAppearance-based property should be made where possible.
  * The default is NSPopoverAppearanceMinimal.
  */
-@property NSPopoverAppearance appearance NS_DEPRECATED_MAC(10_7, 10_10);
+@property NSPopoverAppearance appearance API_DEPRECATED("", macos(10.7,10.10));
 
 #endif
 
@@ -168,7 +129,7 @@ NS_CLASS_AVAILABLE(10_7, NA)
 @property(readonly, getter=isShown) BOOL shown;
 
 /// Returns \c YES if the window is detached to an implicitly created detached window, \c NO otherwise. This method does not apply when the popover is detached to a window returned with \c -detachableWindowForPopover:.
-@property (readonly, getter=isDetached) BOOL detached NS_AVAILABLE_MAC(10_10);
+@property (readonly, getter=isDetached) BOOL detached API_AVAILABLE(macos(10.10));
 
 
 /*  Popovers are positioned relative to a positioning view and are automatically moved when the location or size of the positioning view changes.  Sometimes it is desirable to position popovers relative to a rectangle within the positioning view.  In this case, you must update the positioningRect binding whenever this rectangle changes, or use the positioningRect binding so AppKit can re-position the popover when appropriate. 
@@ -197,30 +158,30 @@ NS_CLASS_AVAILABLE(10_7, NA)
 
 /* Specifies the close reason.  Currently used only as the userInfo key for the NSPopoverWillCloseNotification.
  */
-APPKIT_EXTERN NSString * const NSPopoverCloseReasonKey NS_AVAILABLE_MAC(10_7);
+APPKIT_EXTERN NSString * const NSPopoverCloseReasonKey API_AVAILABLE(macos(10.7));
 
 /* Possible values for NSPopoverCloseReasonKey */
 typedef NSString * NSPopoverCloseReasonValue NS_TYPED_ENUM;
 /* the popover is being closed in a standard way */
-APPKIT_EXTERN NSPopoverCloseReasonValue const NSPopoverCloseReasonStandard NS_AVAILABLE_MAC(10_7);
+APPKIT_EXTERN NSPopoverCloseReasonValue const NSPopoverCloseReasonStandard API_AVAILABLE(macos(10.7));
 /* The popover has been closed because it is being detached to a window */
-APPKIT_EXTERN NSPopoverCloseReasonValue const NSPopoverCloseReasonDetachToWindow NS_AVAILABLE_MAC(10_7);
+APPKIT_EXTERN NSPopoverCloseReasonValue const NSPopoverCloseReasonDetachToWindow API_AVAILABLE(macos(10.7));
 
 /*  Sent before the popover is shown. 
  */
-APPKIT_EXTERN NSNotificationName const NSPopoverWillShowNotification NS_AVAILABLE_MAC(10_7);
+APPKIT_EXTERN NSNotificationName const NSPopoverWillShowNotification API_AVAILABLE(macos(10.7));
 
 /*  Sent after the popover has finished animating onscreen. 
  */
-APPKIT_EXTERN NSNotificationName const NSPopoverDidShowNotification NS_AVAILABLE_MAC(10_7);
+APPKIT_EXTERN NSNotificationName const NSPopoverDidShowNotification API_AVAILABLE(macos(10.7));
 
 /*  Sent before the popover is closed. The userInfo key NSPopoverCloseReasonKey specifies the reason for closing.  It can currently be either NSPopoverCloseReasonStandard or NSPopoverCloseReasonDetachToWindow, although more reasons for closing may be added in the future. 
  */
-APPKIT_EXTERN NSNotificationName const NSPopoverWillCloseNotification NS_AVAILABLE_MAC(10_7);
+APPKIT_EXTERN NSNotificationName const NSPopoverWillCloseNotification API_AVAILABLE(macos(10.7));
 
 /*  Sent after the popover has finished animating offscreen.  This notification has the same user info keys as NSPopoverWillCloseNotification. 
  */
-APPKIT_EXTERN NSNotificationName const NSPopoverDidCloseNotification NS_AVAILABLE_MAC(10_7);
+APPKIT_EXTERN NSNotificationName const NSPopoverDidCloseNotification API_AVAILABLE(macos(10.7));
 
 #pragma mark -
 #pragma mark Delegate Methods
@@ -242,13 +203,13 @@ APPKIT_EXTERN NSNotificationName const NSPopoverDidCloseNotification NS_AVAILABL
  * \param popover The popover that may be detached
  * \return YES if the popover should detach, whether to a custom window or the implicitly detached window. NO if not.
  */
-- (BOOL)popoverShouldDetach:(NSPopover *)popover NS_AVAILABLE_MAC(10_10);
+- (BOOL)popoverShouldDetach:(NSPopover *)popover API_AVAILABLE(macos(10.10));
 
 /*!
  * This is called when the popover has been released in an implicitly detached state, i.e. not when detached to a custom window returned from \c -detachableWindowForPopover:.
  * \param popover The popover that detached from its anchor view and is not closing.
  */
-- (void)popoverDidDetach:(NSPopover *)popover NS_AVAILABLE_MAC(10_10);
+- (void)popoverDidDetach:(NSPopover *)popover API_AVAILABLE(macos(10.10));
 
 /*!
  * Return a custom window to which the popover should be detached. This should be used when the content of the detached window is wanted to be different from the content of the popover. If the same content should be used in the detached window, only \c -popoverShouldDetach: needs to be implemented.
@@ -282,4 +243,5 @@ APPKIT_EXTERN NSNotificationName const NSPopoverDidCloseNotification NS_AVAILABL
 
 @end
 
+API_UNAVAILABLE_END
 NS_ASSUME_NONNULL_END

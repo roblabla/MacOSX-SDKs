@@ -81,7 +81,7 @@
 #pragma mark Includes
 
 #include <Availability.h>
-#include <CoreAudio/CoreAudioTypes.h>
+#include <CoreAudioTypes/CoreAudioTypes.h>
 #include <CoreAudio/AudioHardwareBase.h>
 #include <CoreFoundation/CoreFoundation.h>
 #include <dispatch/dispatch.h>
@@ -248,7 +248,7 @@ AudioObjectIsPropertySettable(  AudioObjectID                       inObjectID,
                         A UInt32 indicating the size of the buffer pointed to by inQualifierData.
                         Note that not all properties require qualification, in which case this
                         value will be 0.
-    @param          inQualifierData,
+    @param          inQualifierData
                         A buffer of data to be used in determining the data of the property being
                         queried. Note that not all properties require qualification, in which case
                         this value will be NULL.
@@ -275,7 +275,7 @@ AudioObjectGetPropertyDataSize( AudioObjectID                       inObjectID,
                         A UInt32 indicating the size of the buffer pointed to by inQualifierData.
                         Note that not all properties require qualification, in which case this
                         value will be 0.
-    @param          inQualifierData,
+    @param          inQualifierData
                         A buffer of data to be used in determining the data of the property being
                         queried. Note that not all properties require qualification, in which case
                         this value will be NULL.
@@ -310,7 +310,7 @@ AudioObjectGetPropertyData( AudioObjectID                       inObjectID,
                         A UInt32 indicating the size of the buffer pointed to by inQualifierData.
                         Note that not all properties require qualification, in which case this
                         value will be 0.
-    @param          inQualifierData,
+    @param          inQualifierData
                         A buffer of data to be used in determining the data of the property being
                         queried. Note that not all properties require qualification, in which case
                         this value will be NULL.
@@ -623,7 +623,7 @@ CF_ENUM(AudioObjectPropertySelector)
     @result         An OSStatus indicating success or failure.
 */
 extern OSStatus
-AudioHardwareUnload()                                                                               __OSX_AVAILABLE_STARTING(__MAC_10_1, __IPHONE_2_0);
+AudioHardwareUnload(void)                                                                           __OSX_AVAILABLE_STARTING(__MAC_10_1, __IPHONE_2_0);
 
 /*!
     @function       AudioHardwareCreateAggregateDevice
@@ -1330,7 +1330,7 @@ AudioDeviceCreateIOProcID(  AudioObjectID                               inDevice
                         IOBlocks are dispatched synchronously. Note that this dispatch queue will be
                         retained until a matching call to AudioDeviceDestroyIOProcID is made. If
                         this value is NULL, then the IOBlock will be directly invoked.
-    @param          inBlock
+    @param          inIOBlock
                         The AudioDeviceIOBlock to register.  Note that this block will be
                         Block_copy'd and the reference maintained until a matching call to
                         AudioDeviceDestroyIOProcID is made.

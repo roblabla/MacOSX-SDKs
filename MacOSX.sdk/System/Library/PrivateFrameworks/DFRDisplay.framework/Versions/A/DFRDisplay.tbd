@@ -1,11 +1,10 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 45B060E2-7B84-31D1-AD70-106FE072A7EA' ]
+uuids:           [ 'x86_64: BCE02B03-6530-3916-BB45-9C215CE4297F' ]
 platform:        macosx
-install-name:    /System/Library/PrivateFrameworks/DFRDisplay.framework/Versions/A/DFRDisplay
-current-version: 112.220.3
+install-name:    '/System/Library/PrivateFrameworks/DFRDisplay.framework/Versions/A/DFRDisplay'
+current-version: 171
 compatibility-version: 0
-objc-constraint: none
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _DFRDisplayClearDisplay, _DFRDisplayClearWhite, _DFRDisplayCloseInterface, 

@@ -2,14 +2,19 @@
 //  PHProject.h
 //  Photos
 //
-//  Copyright © 2017 Apple, Inc. All rights reserved.
+//  Copyright © 2018 Apple Inc. All rights reserved.
 //
 
+#import <Photos/PHObject.h>
 #import <Photos/PHCollection.h>
 
 NS_ASSUME_NONNULL_BEGIN
+API_AVAILABLE_BEGIN(macos(10.13))
 
-NS_CLASS_AVAILABLE(10_13, NA)
+API_UNAVAILABLE_BEGIN(ios, tvos, macCatalyst)
+
+
+OS_EXPORT
 @interface PHProject : PHAssetCollection
 
 @property (nonatomic, readonly) NSData *projectExtensionData;
@@ -18,8 +23,12 @@ NS_CLASS_AVAILABLE(10_13, NA)
  Property to determine if a project preview was previously set.
  Use -[PHProjectChangeRequest setProjectPreviewImage:] to set a project preview.
  */
-@property (nonatomic, readonly) BOOL hasProjectPreview API_AVAILABLE(macos(10.14));
+@property (nonatomic, readonly) BOOL hasProjectPreview;
 
 @end
 
+
+API_UNAVAILABLE_END
+
+API_AVAILABLE_END
 NS_ASSUME_NONNULL_END

@@ -1,23 +1,24 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: F5E2C817-2D01-3401-89F0-B024FE296FC6' ]
-platform:        macosx
-install-name:    /System/Library/Frameworks/CoreLocation.framework/Versions/A/CoreLocation
-current-version: 2245.8.12
-objc-constraint: none
+uuids:           [ 'x86_64: 4F5A01EB-688C-3691-BEF3-B50DEA539C50', 'x86_64: 4F5A01EB-688C-3691-BEF3-B50DEA539C50' ]
+platform:        zippered
+install-name:    '/System/Library/Frameworks/CoreLocation.framework/Versions/A/CoreLocation'
+current-version: 2387.0.8
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _CLAppResetChangedNotification, _CLAppStatusChangedNotification, 
-                       _CLAuthStatusChangedNotification, _CLAuthorizationStatusChangedNotification, 
-                       _CLBeaconRegionAnyIdentifier, _CLClientCreateIso6709Notation, 
-                       _CLClientCreateWithBundleIdentifierAndPath, _CLClientCreateWithBundleIdentifierAndPathOnRunLoop, 
-                       _CLClientDisplayStats, _CLClientGetAuthorizationStatus, _CLClientGetDistanceCoordinates, 
+                       _CLApplyArchivedAuthorizationDecisions, _CLAuthStatusChangedNotification, 
+                       _CLAuthorizationStatusChangedNotification, _CLBeaconRegionAnyIdentifier, 
+                       _CLClientCreateIso6709Notation, _CLClientCreateWithBundleIdentifierAndPath, 
+                       _CLClientCreateWithBundleIdentifierAndPathOnSilo, _CLClientDisplayStats, 
+                       _CLClientGetAuthorizationStatus, _CLClientGetDistanceCoordinates, 
                        _CLClientGetDistanceHighPrecision, _CLClientGetError, _CLClientGetHeading, 
                        _CLClientGetLocation, _CLClientGetTypeID, _CLClientInvalidate, 
-                       _CLClientIsHeadingAvailable, _CLClientIsLocationServicesAvailable, 
-                       _CLClientIsLocationServicesEnabled, _CLClientIsValid, _CLClientLog, 
-                       _CLClientLogDump, _CLClientRequestAuthorization, _CLClientRetrieveAuthorizationStatus, 
-                       _CLClientRetrieveLocation, _CLClientRetrieveLocationWithDynamicAccuracyReductionAndAlteredAccessoryLocations, 
+                       _CLClientIsAuthorizationPromptMapDisplayEnabled, _CLClientIsHeadingAvailable, 
+                       _CLClientIsLocationServicesAvailable, _CLClientIsLocationServicesEnabled, 
+                       _CLClientIsValid, _CLClientLog, _CLClientLogDump, _CLClientRequestAuthorization, 
+                       _CLClientRetrieveAuthorizationStatus, _CLClientRetrieveLocation, 
+                       _CLClientRetrieveLocationWithDynamicAccuracyReductionAndAlteredAccessoryLocations, 
                        _CLClientSetAllowsMapCorrection, _CLClientSetCallback, _CLClientSetShowLocationPrompt, 
                        _CLClientShowHeadingCalibration, _CLClientShutdownDaemon, 
                        _CLClientStartHeadingUpdates, _CLClientStartLocationUpdates, 
@@ -25,30 +26,25 @@ exports:
                        _CLClientStartVehicleHeadingUpdates, _CLClientStartVehicleSpeedUpdates, 
                        _CLClientStopHeadingUpdates, _CLClientStopLocationUpdates, 
                        _CLClientStopVehicleHeadingUpdates, _CLClientStopVehicleSpeedUpdates, 
-                       _CLCopyAppsUsingLocation, _CLCopyTechnologiesInUse, _CLDaemonShutdownNotification, 
-                       _CLDaemonStartedNotification, _CLGenerateRoadSegmentId, _CLGetControlPlaneStatusReport, 
-                       _CLGetLocationDefault, _CLGetStatusBarIconState, _CLInternalPerformMigration, 
-                       _CLLocationCoordinate2DGetDistanceFrom, _CLLocationCoordinate2DIsValid, 
-                       _CLLocationCoordinate2DMake, _CLLocationDistanceMax, _CLPingDaemon, 
-                       _CLSetLocationDefault, _CLSetMapMatchingRouteHint, _CLShouldDisplayStatusBarIconChangedNotification, 
-                       _CLStartStopAdvertisingBeacon, _CLTechStatusChangedNotification, 
-                       _CLTilesManagerClientApplicationsArray, _CLTilesManagerClientDataApplicationId, 
-                       _CLTilesManagerClientDataType_Applications, _CLTilesManagerClientKeyDataType, 
-                       _CLTilesManagerClientKeyDataType_AppsAvailability, _CLTilesManagerClientKeyHorizontalUncertainty, 
-                       _CLTilesManagerClientKeyLatitude, _CLTilesManagerClientKeyLocalAppsAvailable_age_12plus, 
-                       _CLTilesManagerClientKeyLocalAppsAvailable_age_17plus, _CLTilesManagerClientKeyLocalAppsAvailable_age_4plus, 
-                       _CLTilesManagerClientKeyLocalAppsAvailable_age_9plus, _CLTilesManagerClientKeyLongitude, 
-                       _CLTilesManagerClientKeyNotification, _CLTilesManagerClientKeyRadius, 
-                       _CLTilesManagerClientKeyReturnCode, _CLTilesManagerClientKeyScore, 
-                       _CLTilesManagerClientKeyTimestamp, _CLTilesManagerClientNotificationAppAvailabilityChanged, 
-                       _CLTilesManagerClientQueryReturnDetails, _CLTilesManagerClientReturnCode_DataNotAccessible, 
-                       _CLTilesManagerClientReturnCode_DataNotAvailable, _CLTilesManagerClientReturnCode_ERROR, 
-                       _CLTilesManagerClientReturnCode_OK, _CLTimeIntervalMax, _kCLClientDistanceFilterNone, 
-                       _kCLClientHeadingFilterNone, _kCLCommonLocationAlwaysAndWhenInUseUsageDescriptionKey, 
-                       _kCLCommonLocationAlwaysUsageDescriptionKey, _kCLCommonLocationUsageDescriptionKey, 
-                       _kCLCommonLocationWhenInUseUsageDescriptionKey, _kCLDistanceFilterNone, 
-                       _kCLErrorDomain, _kCLErrorDomainPrivate, _kCLErrorUserInfoAlternateRegionKey, 
-                       _kCLHeadingFilterNone, _kCLLocationAccuracyBest, _kCLLocationAccuracyBestForNavigation, 
+                       _CLClientUpdateARSessionState, _CLClientUpdateLSLHeadingEstimation, 
+                       _CLClientUpdateVIOEstimation, _CLCopyAppsUsingLocation, _CLCopyNearbyAssetSettings, 
+                       _CLCopyTechnologiesInUse, _CLDaemonShutdownNotification, _CLDaemonStartedNotification, 
+                       _CLDeleteCurrentEmergencyLocationAsset, _CLGenerateRoadSegmentId, 
+                       _CLGetArchivedAuthorizationDecisions, _CLGetControlPlaneStatusReport, 
+                       _CLGetEmergencyLocationSettingsVersionInfo, _CLGetLocationDefault, 
+                       _CLGetStatusBarIconState, _CLInternalPerformMigration, _CLLocationCoordinate2DGetDistanceFrom, 
+                       _CLLocationCoordinate2DIsValid, _CLLocationCoordinate2DMake, 
+                       _CLLocationDistanceMax, _CLPassKitNotifyPayment, _CLPingDaemon, 
+                       _CLSetLocationDefault, _CLSetMapMatchingRouteHint, _CLSetRouteHintsForMapMatching, 
+                       _CLShouldDisplayStatusBarIconChangedNotification, _CLStartStopAdvertisingBeacon, 
+                       _CLTechStatusChangedNotification, _CLTimeIntervalMax, _CLWeatherNotifyForecast, 
+                       _kCLClientDistanceFilterNone, _kCLClientHeadingFilterNone, 
+                       _kCLCommonLocationAlwaysAndWhenInUseUsageDescriptionKey, _kCLCommonLocationAlwaysUsageDescriptionKey, 
+                       _kCLCommonLocationUsageDescriptionKey, _kCLCommonLocationWhenInUseUsageDescriptionKey, 
+                       _kCLCommonWKRunsIndependentlyOfCompanionAppKey, _kCLCommonWKWatchOnlyKey, 
+                       _kCLDistanceFilterNone, _kCLErrorDomain, _kCLErrorDomainPrivate, 
+                       _kCLErrorUserInfoAlternateRegionKey, _kCLHeadingFilterNone, 
+                       _kCLLocationAccuracyBest, _kCLLocationAccuracyBestForNavigation, 
                        _kCLLocationAccuracyBystander, _kCLLocationAccuracyE911CallInviteHigh, 
                        _kCLLocationAccuracyE911CallInviteLow, _kCLLocationAccuracyHundredMeters, 
                        _kCLLocationAccuracyKilometer, _kCLLocationAccuracyLeech, 
@@ -56,8 +52,12 @@ exports:
                        _kCLLocationCoordinate2DInvalid, _kCLLocationIntegrityHigh, 
                        _kCLLocationIntegrityLow, _kCLLocationIntegrityMedium, _kCLLocationIntegrityNone, 
                        _kInvalidMacAddress ]
-    objc-classes:    [ CLAssertion, CLBeacon, CLBeaconRegion, CLCircularRegion, CLEmergencyEnablementAssertion, 
+    objc-classes:    [ CLAssertion, CLBeacon, CLBeaconIdentityConstraint, CLBeaconRegion, 
+                       CLCircularRegion, CLEmergencyEnablementAssertion, CLFloor, 
                        CLGeocoder, CLHeading, CLLocation, CLLocationManager, CLLocationManagerRoutine, 
-                       CLPlacemark, CLRegion, CLSimulationManager, CLStateTracker, 
-                       CLTilesManagerClient, _CLRangingPeer, _CLRangingPeerDistance ]
+                       CLLocationMatchInfo, CLPlacemark, CLRegion, CLSimulationManager, 
+                       CLStateTracker, CLVisit, _CLLSLHeading, _CLLSLHeadingEstimation, 
+                       _CLLSLHeadingSupplInfo, _CLLSLLocation, _CLLSLLocationCoordinate, 
+                       _CLLSLMapRoadSegment, _CLLocationGroundAltitude, _CLPlaceInference, 
+                       _CLRangingPeer, _CLRangingPeerDistance, _CLVIOEstimation ]
 ...

@@ -1,22 +1,16 @@
 /*
      NSAccessibilityCustomAction.h
      Application Kit
-     Copyright (c) 2017-2018, Apple Inc. All rights reserved.
+     Copyright (c) 2017-2019, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/Foundation.h>
 #import <AppKit/AppKitDefines.h>
 
 NS_ASSUME_NONNULL_BEGIN
+API_UNAVAILABLE_BEGIN(ios)
 
-NS_CLASS_AVAILABLE_MAC(10_13) @interface NSAccessibilityCustomAction : NSObject
-{
-@private
-    NSString *_name APPKIT_IVAR;
-    __weak id<NSObject> _target APPKIT_IVAR;
-    BOOL (^_handler)(void) APPKIT_IVAR;
-    SEL _selector APPKIT_IVAR;
-}
+API_AVAILABLE(macos(10.13)) @interface NSAccessibilityCustomAction : NSObject
 
 /* Creates a custom action that performs the action via a block handler.
     The block should return whether the action was executed successfully or not.
@@ -48,4 +42,5 @@ NS_CLASS_AVAILABLE_MAC(10_13) @interface NSAccessibilityCustomAction : NSObject
 
 @end
 
+API_UNAVAILABLE_END
 NS_ASSUME_NONNULL_END

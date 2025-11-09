@@ -1,9 +1,8 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 9A690E6E-F987-3660-BED6-B1A4D1906B6C' ]
-platform:        macosx
-install-name:    /System/Library/PrivateFrameworks/AppleJPEG.framework/Versions/A/AppleJPEG
-objc-constraint: none
+uuids:           [ 'x86_64: 46F47962-68CE-321B-845E-744C54843148', 'x86_64: 46F47962-68CE-321B-845E-744C54843148' ]
+platform:        zippered
+install-name:    '/System/Library/PrivateFrameworks/AppleJPEG.framework/Versions/A/AppleJPEG'
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _AJReducerCloseSource, _AJReducerCreate, _AJReducerDestinationBytesWritten, 
@@ -23,7 +22,8 @@ exports:
                        _applejpeg_decode_get_ra_table_sz, _applejpeg_decode_get_rows_written, 
                        _applejpeg_decode_get_segment_info, _applejpeg_decode_image_all, 
                        _applejpeg_decode_image_row, _applejpeg_decode_image_row_texture, 
-                       _applejpeg_decode_open_file, _applejpeg_decode_open_mem, _applejpeg_decode_options_init, 
+                       _applejpeg_decode_open_file, _applejpeg_decode_open_jpeg_dib, 
+                       _applejpeg_decode_open_mem, _applejpeg_decode_options_init, 
                        _applejpeg_decode_set_option_aspect, _applejpeg_decode_set_option_buildindex, 
                        _applejpeg_decode_set_option_callback, _applejpeg_decode_set_option_crop, 
                        _applejpeg_decode_set_option_error_fill, _applejpeg_decode_set_option_force_app14, 

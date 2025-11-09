@@ -2,7 +2,7 @@
 //  SCNLayer.h
 //  SceneKit
 //
-//  Copyright © 2012-2018 Apple Inc. All rights reserved.
+//  Copyright © 2012-2019 Apple Inc. All rights reserved.
 //
 
 #import <QuartzCore/QuartzCore.h>
@@ -17,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
  @abstract A SCNLayer is a layer that can display a SCNScene. 
  */
 
-SCN_EXPORT API_UNAVAILABLE(ios, tvos, watchos)
+SCN_EXPORT SCN_GL_DEPRECATED_MAC(10_8, 10_14) API_UNAVAILABLE(ios, tvos, watchos, macCatalyst)
 @interface SCNLayer : CAOpenGLLayer <SCNSceneRenderer, SCNTechniqueSupport>
 
 /*! 

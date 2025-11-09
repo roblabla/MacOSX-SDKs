@@ -35,11 +35,11 @@ Classes:
     MethodKind: Instance
   # AVAudioSession setCategory
   - Selector: 'setCategory:error:'
+    SwiftName: setCategory(_:)
     MethodKind: Instance
-    Availability: nonswift
   - Selector: 'setCategory:withOptions:error:'
+    SwiftName: setCategory(_:options:)
     MethodKind: Instance
-    Availability: nonswift
   - Selector: 'setCategory:mode:options:error:'
     SwiftName: setCategory(_:mode:options:)
     MethodKind: Instance
@@ -127,6 +127,11 @@ Classes:
   - Name: supportedColorSpaces
     PropertyKind: Instance
     SwiftPrivate: true
+- Name: AVCaptureDeviceInput
+  Methods:
+  - Selector: 'portsWithMediaType:sourceDeviceType:sourceDevicePosition:'
+    SwiftName: 'ports(for:sourceDeviceType:sourceDevicePosition:)'
+    MethodKind: Instance
 - Name: AVCaptureDeviceInputSource
   SwiftName: AVCaptureDevice.InputSource
 - Name: AVCaptureFileOutput
@@ -166,6 +171,11 @@ Classes:
     MethodKind: Instance
   - Selector: 'rectForMetadataOutputRectOfInterest:'
     SwiftName: 'outputRectConverted(fromMetadataOutputRect:)'
+    MethodKind: Instance
+- Name: AVCapturePhoto
+  Methods:
+  - Selector: 'semanticSegmentationMatteForType:'
+    SwiftName: 'semanticSegmentationMatte(for:)'
     MethodKind: Instance
 - Name: AVCapturePhotoOutput
   Methods:
@@ -592,8 +602,6 @@ Tags:
   SwiftName: AVAssetWriter.Status
 - Name: AVAudioSessionCategoryOptions
   SwiftName: AVAudioSession.CategoryOptions
-- Name: AVAudioSessionErrorCode
-  SwiftName: AVAudioSession.ErrorCode
 - Name: AVAudioSessionInterruptionOptions
   SwiftName: AVAudioSession.InterruptionOptions
 - Name: AVAudioSessionInterruptionType
@@ -608,6 +616,8 @@ Tags:
   SwiftName: AVAudioSession.RouteChangeReason
 - Name: AVAudioSessionRouteSharingPolicy
   SwiftName: AVAudioSession.RouteSharingPolicy
+- Name: AVAudioSessionPromptStyle
+  SwiftName: AVAudioSession.PromptStyle
 - Name: AVAudioSessionSetActiveOptions
   SwiftName: AVAudioSession.SetActiveOptions
 - Name: AVAudioSessionSilenceSecondaryAudioHintType
@@ -630,6 +640,8 @@ Tags:
   SwiftName: AVCaptureDevice.LensStabilizationStatus
 - Name: AVCaptureOutputDataDroppedReason
   SwiftName: AVCaptureOutput.DataDroppedReason
+- Name: AVCapturePhotoQualityPrioritization
+  SwiftName: AVCapturePhotoOutput.QualityPrioritization
 - Name: AVCaptureSessionInterruptionReason
   SwiftName: AVCaptureSession.InterruptionReason
 - Name: AVCaptureSystemPressureFactors
@@ -701,6 +713,8 @@ Typedefs:
   SwiftName: AVPlayerItemLegibleOutput.TextStylingResolution
 - Name: AVPlayerWaitingReason
   SwiftName: AVPlayer.WaitingReason
+- Name: AVSemanticSegmentationMatteType
+  SwiftName: AVSemanticSegmentationMatte.MatteType
 - Name: AVTrackAssociationType
   SwiftName: AVAssetTrack.AssociationType
 Globals:
@@ -1055,10 +1069,26 @@ Globals:
   SwiftName: proRes4444
 - Name: AVVideoCodecTypeAppleProRes422
   SwiftName: proRes422
+- Name: AVVideoCodecTypeAppleProRes422HQ
+  SwiftName: proRes422HQ
+- Name: AVVideoCodecTypeAppleProRes422LT
+  SwiftName: proRes422LT
+- Name: AVVideoCodecTypeAppleProRes422Proxy
+  SwiftName: proRes422Proxy
 
 # AVSampleBufferRenderSynchronizer
 - Name: AVSampleBufferRenderSynchronizerRateDidChangeNotification
   SwiftName: AVSampleBufferRenderSynchronizer.rateDidChangeNotification
+
+# AVPlayer
+- Name: AVPlayerEligibleForHDRPlaybackDidChangeNotification
+  SwiftName: AVPlayer.eligibleForHDRPlaybackDidChangeNotification
+
+# AVPlayerItem
+- Name: AVPlayerItemRecommendedTimeOffsetFromLiveDidChangeNotification
+  SwiftName: AVPlayerItem.recommendedTimeOffsetFromLiveDidChangeNotification
+- Name: AVPlayerItemMediaSelectionDidChangeNotification
+  SwiftName: AVPlayerItem.mediaSelectionDidChangeNotification
 
 SwiftVersions:
 - Version: 3
@@ -2454,34 +2484,6 @@ SwiftVersions:
       PropertyKind: Instance
       Type: 'NSArray<NSString *> *'
       Nullability: O
-  Enumerators:
-  # AVAudioSession Error Codes
-  - Name: AVAudioSessionErrorCodeNone
-    SwiftName: codeNone
-  - Name: AVAudioSessionErrorCodeMediaServicesFailed
-    SwiftName: codeMediaServicesFailed
-  - Name: AVAudioSessionErrorCodeIsBusy
-    SwiftName: codeIsBusy
-  - Name: AVAudioSessionErrorCodeIncompatibleCategory
-    SwiftName: codeIncompatibleCategory
-  - Name: AVAudioSessionErrorCodeCannotInterruptOthers
-    SwiftName: codeCannotInterruptOthers
-  - Name: AVAudioSessionErrorCodeMissingEntitlement
-    SwiftName: codeMissingEntitlement
-  - Name: AVAudioSessionErrorCodeSiriIsRecording
-    SwiftName: codeSiriIsRecording
-  - Name: AVAudioSessionErrorCodeCannotStartPlaying
-    SwiftName: codeCannotStartPlaying
-  - Name: AVAudioSessionErrorCodeCannotStartRecording
-    SwiftName: codeCannotStartRecording
-  - Name: AVAudioSessionErrorCodeBadParam
-    SwiftName: codeBadParam
-  - Name: AVAudioSessionErrorCodeInsufficientPriority
-    SwiftName: insufficientPriority
-  - Name: AVAudioSessionErrorCodeResourceNotAvailable
-    SwiftName: codeResourceNotAvailable
-  - Name: AVAudioSessionErrorCodeUnspecified
-    SwiftName: codeUnspecified
   Tags:
   - Name: AVAssetExportSessionStatus
     SwiftName: AVAssetExportSessionStatus
@@ -2494,8 +2496,6 @@ SwiftVersions:
 # AVAudioSession Options and Enums
   - Name: AVAudioSessionCategoryOptions
     SwiftName: AVAudioSessionCategoryOptions
-  - Name: AVAudioSessionErrorCode
-    SwiftName: AVAudioSessionErrorCode
   - Name: AVAudioSessionInterruptionOptions
     SwiftName: AVAudioSessionInterruptionOptions
   - Name: AVAudioSessionInterruptionType
@@ -2570,3 +2570,14 @@ SwiftVersions:
     SwiftName: AVAudioSessionRouteChange
   - Name: AVAudioSessionSilenceSecondaryAudioHintNotification
     SwiftName: AVAudioSessionSilenceSecondaryAudioHint
+
+- Version: 4.2
+  Classes:
+  - Name: AVCaptureConnection
+    Properties:
+    - Name: output
+      PropertyKind: Instance
+      Nullability: N
+    - Name: videoPreviewLayer
+      PropertyKind: Instance
+      Nullability: N

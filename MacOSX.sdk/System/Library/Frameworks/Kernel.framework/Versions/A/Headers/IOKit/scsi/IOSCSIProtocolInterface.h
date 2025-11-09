@@ -195,12 +195,20 @@ the tray locking state of an ATAPI device.
 @constant kSCSIServicesNotification_ExclusivityChanged
 Message sent when a change in exclusivity state occurs. Usually in
 response to acquiring/releasing exclusive access to a device via a user client.
+@constant kSCSIProtocolNotification_ForcePowerDown
+Message sent between a SCSI protocol service provider and
+SCSI application layer driver to initiate transition to the lowest power state.
+@constant kSCSIProtocolNotification_ForcePowerUp
+Message sent between a SCSI protocol service provider and
+SCSI application layer driver to initiate transition to the highest power state.
 */
 enum
 {
 	kSCSIProtocolNotification_DeviceRemoved			= 0x69000010,
 	kSCSIProtocolNotification_VerifyDeviceState		= 0x69000020,
-	kSCSIServicesNotification_ExclusivityChanged	= 0x69000030
+	kSCSIServicesNotification_ExclusivityChanged	= 0x69000030,
+    kSCSIProtocolNotification_ForcePowerDown        = 0x69000040,
+    kSCSIProtocolNotification_ForcePowerUp          = 0x69000050
 };
 
 
@@ -886,7 +894,7 @@ private:
 	// Method to show that the disk spinning up in spindump stacks
 	void							__DISK_IS_ASLEEP__ ( void ) __attribute__((noinline));
 
-#if !TARGET_OS_EMBEDDED
+#if !TARGET_OS_IPHONE
 	// Space reserved for future expansion.
 	OSMetaClassDeclareReservedUnused ( IOSCSIProtocolInterface,  7 );
 	OSMetaClassDeclareReservedUnused ( IOSCSIProtocolInterface,  8 );
@@ -898,7 +906,7 @@ private:
 	OSMetaClassDeclareReservedUnused ( IOSCSIProtocolInterface, 14 );
 	OSMetaClassDeclareReservedUnused ( IOSCSIProtocolInterface, 15 );
 	OSMetaClassDeclareReservedUnused ( IOSCSIProtocolInterface, 16 );
-#endif /* !TARGET_OS_EMBEDDED */
+#endif /* !TARGET_OS_IPHONE */
 	
 };
 

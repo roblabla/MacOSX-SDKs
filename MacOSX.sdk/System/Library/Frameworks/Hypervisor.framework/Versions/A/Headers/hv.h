@@ -2,7 +2,7 @@
  *  hv.h
  *  Hypervisor Framework
  *
- *  Copyright (c) 2013 Apple Inc. All rights reserved.
+ *  Copyright (c) 2013-2019 Apple Inc. All rights reserved.
  */
 
 #ifndef __HYPERVISOR_HV__
@@ -17,10 +17,20 @@
 #include <Hypervisor/hv_arch_x86.h>
 
 #define __HV_10_10 __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_NA)
+#define __HV_10_15 __OSX_AVAILABLE_STARTING(__MAC_10_15, __IPHONE_NA)
 
 #ifdef __cplusplus
 extern "C" {
 #endif
+
+/*!
+ * @function   hv_capability
+ * @abstract   Enumerate supported hypervisor capabilities
+ * @param      capability  ID of the capability
+ * @result     0 on success or error code
+ */
+extern hv_return_t hv_capability(hv_capability_t capability,
+    uint64_t *value) __HV_10_15;
 
 /*!
  * @function   hv_vm_create
@@ -38,6 +48,23 @@ extern hv_return_t hv_vm_create(hv_vm_options_t flags) __HV_10_10;
 extern hv_return_t hv_vm_destroy(void) __HV_10_10;
 
 /*!
+ * @function   hv_vm_space_create
+ * @abstract   Creates an additional guest address space for the current task
+ * @param      asid  Pointer to the addresss space ID (written on success)
+ * @result     0 on success or error code
+ */
+extern hv_return_t hv_vm_space_create(hv_vm_space_t *asid) __HV_10_15;
+
+/*!
+ * @function   hv_vm_space_destroy
+ * @abstract   Destroys the address space instance associated with the
+ *             current task
+ * @param      asid  address space ID
+ * @result     0 on success or error code
+ */
+extern hv_return_t hv_vm_space_destroy(hv_vm_space_t asid) __HV_10_15;
+
+/*!
  * @function   hv_vm_map
  * @abstract   Maps a region in the virtual address space of the current task
  *             into the guest physical address space of the VM
@@ -46,6 +73,8 @@ extern hv_return_t hv_vm_destroy(void) __HV_10_10;
  * @param      size   Size in bytes of the region to be mapped
  * @param      flags  READ, WRITE and EXECUTE permissions of the region
  * @result     0 on success or error code
+ * @discussion
+ *             Operates on the default address space
  */
 extern hv_return_t hv_vm_map(hv_uvaddr_t uva, hv_gpaddr_t gpa, size_t size,
 	hv_memory_flags_t flags) __HV_10_10;
@@ -56,6 +85,8 @@ extern hv_return_t hv_vm_map(hv_uvaddr_t uva, hv_gpaddr_t gpa, size_t size,
  * @param      gpa   Page aligned address in the guest physical address space
  * @param      size  Size in bytes of the region to be unmapped
  * @result     0 on success or error code
+ * @discussion
+ *             Operates on the default address space
  */
 extern hv_return_t hv_vm_unmap(hv_gpaddr_t gpa, size_t size) __HV_10_10;
 
@@ -67,9 +98,49 @@ extern hv_return_t hv_vm_unmap(hv_gpaddr_t gpa, size_t size) __HV_10_10;
  * @param      size  Size in bytes of the region to be modified
  * @param      flags New READ, WRITE and EXECUTE permissions of the region
  * @result     0 on success or error code
+ * @discussion
+ *             Operates on the default address space
  */
 extern hv_return_t hv_vm_protect(hv_gpaddr_t gpa, size_t size,
 	hv_memory_flags_t flags) __HV_10_10;
+
+/*!
+ * @function   hv_vm_map_space
+ * @abstract   Maps a region in the virtual address space of the current task
+ *             into a guest physical address space of the VM
+ * @param      asid   Address space ID
+ * @param      uva    Page aligned virtual address in the current task
+ * @param      gpa    Page aligned address in the guest physical address space
+ * @param      size   Size in bytes of the region to be mapped
+ * @param      flags  READ, WRITE and EXECUTE permissions of the region
+ * @result     0 on success or error code
+ */
+extern hv_return_t hv_vm_map_space(hv_vm_space_t asid, hv_uvaddr_t uva,
+	hv_gpaddr_t gpa, size_t size, hv_memory_flags_t flags) __HV_10_15;
+
+/*!
+ * @function   hv_vm_unmap_space
+ * @abstract   Unmaps a region in a guest physical address space of the VM
+ * @param      asid  Address space ID
+ * @param      gpa   Page aligned address in the guest physical address space
+ * @param      size  Size in bytes of the region to be unmapped
+ * @result     0 on success or error code
+ */
+extern hv_return_t hv_vm_unmap_space(hv_vm_space_t asid, hv_gpaddr_t gpa,
+	size_t size) __HV_10_15;
+
+/*!
+ * @function   hv_vm_protect_space
+ * @abstract   Modifies the permissions of a region in a guest physical
+ *             address space of the VM
+ * @param      asid  Address space ID
+ * @param      gpa   Page aligned address in the guest physical address space
+ * @param      size  Size in bytes of the region to be modified
+ * @param      flags New READ, WRITE and EXECUTE permissions of the region
+ * @result     0 on success or error code
+ */
+extern hv_return_t hv_vm_protect_space(hv_vm_space_t asid, hv_gpaddr_t gpa,
+	size_t size, hv_memory_flags_t flags) __HV_10_15;
 
 /*!
  * @function   hv_vm_sync_tsc
@@ -98,6 +169,18 @@ extern hv_return_t hv_vcpu_create(hv_vcpuid_t *vcpu,
  *             Must be called by the owning thread
  */
 extern hv_return_t hv_vcpu_destroy(hv_vcpuid_t vcpu) __HV_10_10;
+
+/*!
+ * @function   hv_vcpu_set_space
+ * @abstract   Associates the vCPU instance with an allocated address space
+ * @param      vcpu  vCPU ID
+ * @param      asid  address space ID
+ * @result     0 on success or error code
+ * @discussion
+ *             Must be called by the owning thread
+ */
+extern hv_return_t hv_vcpu_set_space(hv_vcpuid_t vcpu, hv_vm_space_t asid)
+	__HV_10_15;
 
 /*!
  * @function   hv_vcpu_read_register
@@ -233,6 +316,22 @@ extern hv_return_t hv_vcpu_invalidate_tlb(hv_vcpuid_t vcpu) __HV_10_10;
  *             Must be called by the owning thread
  */
 extern hv_return_t hv_vcpu_run(hv_vcpuid_t vcpu) __HV_10_10;
+
+/*!
+ * @function   hv_vcpu_run_until
+ * @abstract   Executes a vCPU until the given deadline.
+ * @param      vcpu      vCPU ID
+ * @param      deadline  The timer deadline in mach absolute time units.
+ * @result     0 on success or error code
+ *
+ *             This call blocks until the next VMEXIT or until the given
+ *             deadline expires. This call uses the VMX preemption timer, and
+ *             returns HV_UNSUPPORTED if the hardware doesn't support it.
+ *
+ *             Must be called by the owning thread
+ */
+extern hv_return_t hv_vcpu_run_until(hv_vcpuid_t vcpu,
+	uint64_t deadline) __HV_10_15;
 
 /*!
  * @function   hv_vcpu_interrupt

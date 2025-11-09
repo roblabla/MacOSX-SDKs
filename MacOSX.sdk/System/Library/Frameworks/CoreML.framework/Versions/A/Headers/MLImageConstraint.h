@@ -17,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 API_AVAILABLE(macos(10.13), ios(11.0), watchos(4.0), tvos(11.0))
 ML_EXPORT
-@interface MLImageConstraint : NSObject
+@interface MLImageConstraint : NSObject <NSSecureCoding>
 
 /// The required or default height of the image
 @property (readonly, nonatomic) NSInteger pixelsHigh;
@@ -30,6 +30,9 @@ ML_EXPORT
 
 /// Detailed image size constraint
 @property (readonly, nonatomic) MLImageSizeConstraint *sizeConstraint API_AVAILABLE(macos(10.14), ios(12.0), watchos(5.0), tvos(12.0));
+
+// cannot construct object without parameters.
+- (instancetype)init NS_UNAVAILABLE NS_SWIFT_UNAVAILABLE("");
 
 @end
 

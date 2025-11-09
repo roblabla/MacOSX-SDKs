@@ -1,3 +1,4 @@
+#if (defined(USE_AUDIOTOOLBOX_PUBLIC_HEADERS) && USE_AUDIOTOOLBOX_PUBLIC_HEADERS) || !__has_include(<AudioToolboxCore/AudioFormat.h>)
 /*!
 	@file		AudioFormat.h
 	@framework	AudioToolbox.framework
@@ -14,11 +15,7 @@
 
 //	System Includes
 #include <Availability.h>
-#if !defined(__COREAUDIO_USE_FLAT_INCLUDES__)
-	#include <CoreAudio/CoreAudioTypes.h>
-#else
-	#include <CoreAudioTypes.h>
-#endif
+#include <CoreAudioTypes/CoreAudioTypes.h>
 
 CF_ASSUME_NONNULL_BEGIN
 
@@ -53,16 +50,16 @@ typedef CF_ENUM(UInt32, AudioPanningMode) {
 /*!
     @struct		AudioPanningInfo
     @abstract   This struct is for use with kAudioFormatProperty_PanningMatrix.
-    @field      mPanningMode			the PanningMode to be used for the pan
-    @field      mCoordinateFlags		the coordinates are specified as in the AudioChannelDescription struct in CoreAudioTypes.h
-    @field      mCoordinates			the coordinates are specified as in the AudioChannelDescription struct in CoreAudioTypes.h
-    @field      mGainScale				
+    @var        mPanningMode			the PanningMode to be used for the pan
+    @var        mCoordinateFlags		the coordinates are specified as in the AudioChannelDescription struct in CoreAudioTypes.h
+    @var        mCoordinates			the coordinates are specified as in the AudioChannelDescription struct in CoreAudioTypes.h
+    @var        mGainScale				
 					mGainScale is used to multiply the panning values.
 					In typical usage you are applying an existing volume.
 					value in 0 -> 1 (where 1 is unity gain) to the panned values.
 					1 would give you panning at unity.
 					0 would give you back a matrix of zeroes.
-    @field      mOutputChannelMap				
+    @var        mOutputChannelMap				
 					This is the channel map that is going to be used to determine channel volumes for this pan.
 */
 struct AudioPanningInfo {
@@ -93,13 +90,13 @@ typedef CF_ENUM(UInt32, AudioBalanceFadeType) {
 /*!
     @struct		AudioBalanceFade
     @abstract   this struct is used with kAudioFormatProperty_BalanceFade
-    @field      mLeftRightBalance 
+    @var        mLeftRightBalance 
 					-1 is full left, 0 is center, +1 is full right
-    @field      mBackFrontFade 
+    @var        mBackFrontFade 
 					-1 is full rear, 0 is center, +1 is full front
-    @field      mType 
+    @var        mType 
 					an AudioBalanceFadeType constant
-    @field      mChannelLayout 
+    @var        mChannelLayout 
 					a pointer to an AudioChannelLayout
 */
 struct AudioBalanceFade
@@ -114,11 +111,11 @@ typedef struct AudioBalanceFade AudioBalanceFade;
 /*!
     @struct		AudioFormatInfo
     @abstract   this struct is used as a specifier for the kAudioFormatProperty_FormatList property
-    @field      mASBD 
+    @var        mASBD 
 					an AudioStreamBasicDescription
-    @field      mMagicCookie 
+    @var        mMagicCookie 
 					a pointer to the decompression info for the data described in mASBD
-    @field      mMagicCookieSize 
+    @var        mMagicCookieSize 
 					the size in bytes of mMagicCookie
 */
 struct AudioFormatInfo
@@ -132,13 +129,13 @@ typedef struct AudioFormatInfo AudioFormatInfo;
 /*!
     @struct		ExtendedAudioFormatInfo
     @abstract   this struct is used as a specifier for the kAudioFormatProperty_FormatList property
-    @field      mASBD 
+    @var        mASBD 
 					an AudioStreamBasicDescription
-    @field      mMagicCookie 
+    @var        mMagicCookie 
 					a pointer to the decompression info for the data described in mASBD
-    @field      mMagicCookieSize 
+    @var        mMagicCookieSize 
 					the size in bytes of mMagicCookie
-	@field		mClassDescription
+	@var  		mClassDescription
 					an AudioClassDescription specifying the codec to be used in answering the question.
 */
 struct ExtendedAudioFormatInfo
@@ -149,21 +146,6 @@ struct ExtendedAudioFormatInfo
 	AudioClassDescription			mClassDescription;
 };
 typedef struct ExtendedAudioFormatInfo ExtendedAudioFormatInfo;
-
-/*!
-    @struct		AudioFormatListItem
-    @abstract   this struct is used as output from the kAudioFormatProperty_FormatList property
-    @field      mASBD 
-					an AudioStreamBasicDescription
-    @field      mChannelLayoutTag 
-					an AudioChannelLayoutTag
-*/
-struct AudioFormatListItem
-{
-	AudioStreamBasicDescription		mASBD;
-	AudioChannelLayoutTag			mChannelLayoutTag;
-};
-typedef struct AudioFormatListItem AudioFormatListItem;
 
 //=============================================================================
 //	Properties - for various format structures.
@@ -193,6 +175,13 @@ typedef struct AudioFormatListItem AudioFormatListItem;
 					the format to ask about. The value is a UInt32 where non-zero means
 					the format is externally framed. Any format which has variable byte sized packets
 					requires AudioStreamPacketDescriptions.
+    @constant   kAudioFormatProperty_FormatEmploysDependentPackets
+					Returns whether or not a format is capable of combining independently
+					decodable packets with dependent packets. The specifier is an
+					AudioStreamBasicDescription describing the format to ask about.
+					The value is a UInt32 where zero means that all packets in streams
+					of the specified format are independently decodable and non-zero means
+					that streams of the specified format may include dependent packets.
     @constant   kAudioFormatProperty_FormatIsEncrypted
                     Returns whether or not a format is encrypted. The specifier is a UInt32 format ID.
                     The value is a UInt32 where non-zero means the format is encrypted.
@@ -391,6 +380,7 @@ CF_ENUM(AudioFormatPropertyID)
 	kAudioFormatProperty_FirstPlayableFormatFromList	= 'fpfl',
 	kAudioFormatProperty_FormatIsVBR					= 'fvbr',	
 	kAudioFormatProperty_FormatIsExternallyFramed		= 'fexf',
+	kAudioFormatProperty_FormatEmploysDependentPackets  = 'fdep',
 	kAudioFormatProperty_FormatIsEncrypted				= 'cryp',
 	kAudioFormatProperty_Encoders						= 'aven',	
 	kAudioFormatProperty_Decoders						= 'avde',
@@ -431,6 +421,50 @@ CF_ENUM(AudioFormatPropertyID)
 	kAudioFormatProperty_ID3TagToDictionary				= 'id3d'
 };
 
+#if TARGET_OS_IPHONE
+
+CF_ENUM(AudioFormatPropertyID) {
+	kAudioFormatProperty_HardwareCodecCapabilities		= 'hwcc',
+} __attribute__((deprecated));
+
+/*!
+	@enum           AudioCodecComponentType
+ 
+	@discussion     Collection of audio codec component types.
+					(On Mac OS X these declarations are in AudioToolbox/AudioCodec.h).
+ 
+	@constant		kAudioDecoderComponentType
+					A codec that translates data in some other format into linear PCM.
+					The component subtype specifies the format ID of the other format.
+	@constant		kAudioEncoderComponentType
+					A codec that translates linear PCM data into some other format
+					The component subtype specifies the format ID of the other format
+*/
+CF_ENUM(UInt32)
+{
+	kAudioDecoderComponentType								= 'adec',	
+	kAudioEncoderComponentType								= 'aenc',	
+};
+
+/*!
+	@enum			AudioCodecComponentManufacturer
+
+	@discussion		Audio codec component manufacturer codes. On iPhoneOS, a codec's
+					manufacturer can be used to distinguish between hardware and
+					software codecs.
+
+	@constant		kAppleSoftwareAudioCodecManufacturer
+					Apple software audio codecs.
+	@constant		kAppleHardwareAudioCodecManufacturer
+					Apple hardware audio codecs.
+*/
+CF_ENUM(UInt32)
+{
+	kAppleSoftwareAudioCodecManufacturer					= 'appl',
+	kAppleHardwareAudioCodecManufacturer					= 'aphw'
+};
+
+#endif
 
 
 //=============================================================================
@@ -494,3 +528,6 @@ CF_ENUM(OSStatus)
 CF_ASSUME_NONNULL_END
 
 #endif // AudioToolbox_AudioFormat_h
+#else
+#include <AudioToolboxCore/AudioFormat.h>
+#endif

@@ -6,26 +6,17 @@
 .Nd scriptable image processing system.
 .Sh SYNOPSIS
 .Nm
-.Op Ar image-query-functions
+.Op Ar image-functions
 .Ar imagefile
 .Ar ...
 .Nm
-.Op Ar profile-query-functions
+.Op Ar profile-functions
 .Ar profile
 .Ar ...
-.Nm
-.Op Ar image-modification-functions
-.Ar imagefile
-.Ar ...
-.Op Fl -out Ar result-file-or-dir
-.Nm
-.Op Ar profile-modification-functions
-.Ar profile
-.Ar ...
-.Op Fl -out Ar result-file-or-dir
 .Sh DESCRIPTION
 This tool is used to query or modify raster image files and ColorSync ICC profiles.
 Its functionality can also be used through the "Image Events" AppleScript suite.
+It also supports executing JavaScript to either modify or generate images.
 .Pp
 .Sh FUNCTIONS
 .Pp
@@ -40,9 +31,12 @@ Output the property value for key to stdout.
 .It Fl -extractTag Ar tag Ar tagFile 
 Write a profile tag element to tagFile.
 .Pp
-.It Fl v 
 .It Fl -verify 
 Verify any profile problems and log output to stdout.
+.Pp
+.It Fl 1 
+.It Fl -oneLine 
+Output for each file on a single line with tab delimiter
 .Pp
 .El
 Image query functions:
@@ -55,6 +49,10 @@ Output the property value for key to stdout.
 .It Fl x Ar profile 
 .It Fl -extractProfile Ar profile 
 Get the embedded profile from image and write it to profile.
+.Pp
+.It Fl 1 
+.It Fl -oneLine 
+Output for each file on a single line with tab delimiter
 .Pp
 .El
 Profile modification functions:
@@ -79,6 +77,9 @@ Set the tag element of a profile to the contents of tagFile.
 .Pp
 .It Fl -repair 
 Repair any profile problems and log output to stdout.
+.Pp
+.It Fl o Ar file-or-directory 
+.It Fl -out Ar file-or-directory 
 .Pp
 .El
 Image modification functions:
@@ -121,6 +122,9 @@ Delete color management properties in TIFF, PNG, and EXIF dictionaries.
 .It Fl -cropToHeightWidth Ar pixelsH Ar pixelsW 
 Crop image to fit specified size.
 .Pp
+.It Fl -cropOffset Ar offsetY Ar offsetH 
+Crop offset from top left corner.
+.Pp
 .It Fl p Ar pixelsH Ar pixelsW 
 .It Fl -padToHeightWidth Ar pixelsH Ar pixelsW 
 Pad image with pixels to fit specified size.
@@ -142,11 +146,93 @@ Resample image to specified height.
 .It Fl -resampleHeightWidthMax Ar pixelsWH 
 Resample image so height and width aren't greater than specified size.
 .Pp
-.It Fl o 
+.It Fl i 
+.It Fl -addIcon 
+Add a Finder icon to image file.
+.Pp
 .It Fl -optimizeColorForSharing 
 Optimize color for sharing.
 .Pp
+.It Fl o Ar file-or-directory 
+.It Fl -out Ar file-or-directory 
+.Pp
+.It Fl j Ar file 
+.It Fl -js Ar file 
+Execute JavaScript file
+.Pp
 .El
+Other functions:
+.Bl -tag -width xxxx -compact
+.Pp
+.It Fl -debug 
+Enable debugging output
+.Pp
+.It Fl h 
+.It Fl -help 
+Show help
+.Pp
+.It Fl H 
+.It Fl -helpProperties 
+Show help for properties
+.Pp
+.It Fl -man 
+Generate man pages
+.Pp
+.It Fl v 
+.It Fl -version 
+Show the version
+.Pp
+.It Fl -formats 
+Show the read/write formats
+.Pp
+.El
+.Sh JavaScript
+HTML Canvas objects can be created and used to create a 2D drawing context.
+The commands for drawing into the context are well documented elsewhere.
+This section will describe the sips global object and other interesting classes.
+.Pp
+Global variable (sips) properties
+.Bl -tag -width xxxx -compact
+.It images
+Valid images passed as arguments converted into an array of Image objects
+.It arguments
+Arguments passed into the program as an array of strings
+.It size
+Recommended size for output. Setting the crop or resample flags will set this value.
+.It longestEdge
+If specified, the value of the -Z/--resampleHeightWidthMax option. [default: 0]
+.It outputPath
+Output directory [default: current directory]
+.El
+.Pp
+Image Object
+.Bl -tag -width xxxx -compact
+.It name
+Name of image
+.It size
+Size of image (pixels)
+.It properties
+Image properties
+.It getProperty(name)
+Return the image property for name, if any.
+.It sizeToFitLongestEdge(length)
+Return the size that will contain the image with the longest edge set to length. Maintains aspect ratio.
+.El
+.Pp
+Output Object
+.Bl -tag -width xxxx -compact
+.It new Output(context, name[, type])
+Output the context to disk with name and optional type (extension or UTI).
+.It addToQueue()
+Adds the output to the queue to be written to disk.
+.El
+.Pp
+Functions
+.Bl -tag -width xxxx -compact
+.It print(str)
+Output to standard output. Equivalent to console.log(str).
+.El
+.Pp
 .Sh OPTIONS
 The commands --getProperty, --setProperty, and --deleteProperty
 can use one of the following keys as a parameter.

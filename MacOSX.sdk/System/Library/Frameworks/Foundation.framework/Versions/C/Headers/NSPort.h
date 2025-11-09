@@ -1,5 +1,5 @@
 /*	NSPort.h
-	Copyright (c) 1994-2018, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2019, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -56,7 +56,7 @@ FOUNDATION_EXPORT NSNotificationName const NSPortDidBecomeInvalidNotification;
 	// receives this message.  If multiple DO transports are
 	// being used in the same program, this requires some care.
 
-#if (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE)) || (TARGET_OS_WIN32)
+#if TARGET_OS_OSX || TARGET_OS_MACCATALYST
 - (void)addConnection:(NSConnection *)conn toRunLoop:(NSRunLoop *)runLoop forMode:(NSRunLoopMode)mode NS_SWIFT_UNAVAILABLE("Use NSXPCConnection instead") API_DEPRECATED("Use NSXPCConnection instead", macosx(10.0, 10.13), ios(2.0,11.0), watchos(2.0,4.0), tvos(9.0,11.0));
 - (void)removeConnection:(NSConnection *)conn fromRunLoop:(NSRunLoop *)runLoop forMode:(NSRunLoopMode)mode NS_SWIFT_UNAVAILABLE("Use NSXPCConnection instead") API_DEPRECATED("Use NSXPCConnection instead", macosx(10.0, 10.13), ios(2.0,11.0), watchos(2.0,4.0), tvos(9.0,11.0));
 	// The default implementation of these two methods is to
@@ -76,7 +76,7 @@ FOUNDATION_EXPORT NSNotificationName const NSPortDidBecomeInvalidNotification;
 	// more specific that it wants to try to send first
 @end
 
-#if (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE)) || (TARGET_OS_EMBEDDED || TARGET_OS_IPHONE)
+#if TARGET_OS_OSX || TARGET_OS_IPHONE
 
 NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE 
 @interface NSMachPort : NSPort {
@@ -99,8 +99,8 @@ typedef NS_OPTIONS(NSUInteger, NSMachPortOptions) {
     NSMachPortDeallocateReceiveRight = (1UL << 1)
 } API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
 
-+ (NSPort *)portWithMachPort:(uint32_t)machPort options:(NSMachPortOptions)f NS_AVAILABLE(10_5, 2_0);
-- (instancetype)initWithMachPort:(uint32_t)machPort options:(NSMachPortOptions)f NS_AVAILABLE(10_5, 2_0) NS_DESIGNATED_INITIALIZER;
++ (NSPort *)portWithMachPort:(uint32_t)machPort options:(NSMachPortOptions)f API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
+- (instancetype)initWithMachPort:(uint32_t)machPort options:(NSMachPortOptions)f API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0)) NS_DESIGNATED_INITIALIZER;
 
 @property (readonly) uint32_t machPort;
 
@@ -134,7 +134,7 @@ NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE
 
 @end
 
-#if (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE)) || TARGET_OS_WIN32 || TARGET_IPHONE_SIMULATOR
+#if TARGET_OS_OSX || TARGET_IPHONE_SIMULATOR
 
 // A subclass of NSPort which can be used for remote
 // message sending on all platforms.

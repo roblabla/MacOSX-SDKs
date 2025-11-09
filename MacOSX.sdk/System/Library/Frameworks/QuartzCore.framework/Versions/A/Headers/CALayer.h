@@ -16,9 +16,10 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-typedef NSString * CALayerContentsGravity NS_STRING_ENUM;
-typedef NSString * CALayerContentsFormat NS_STRING_ENUM;
-typedef NSString * CALayerContentsFilter NS_STRING_ENUM;
+typedef NSString * CALayerContentsGravity NS_TYPED_ENUM;
+typedef NSString * CALayerContentsFormat NS_TYPED_ENUM;
+typedef NSString * CALayerContentsFilter NS_TYPED_ENUM;
+typedef NSString * CALayerCornerCurve NS_TYPED_ENUM;
 
 /* Bit definitions for `autoresizingMask' property. */
 
@@ -500,6 +501,18 @@ API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0))
 @property CACornerMask maskedCorners
   API_AVAILABLE(macos(10.13), ios(11.0), watchos(4.0), tvos(11.0));
 
+/* Defines the curve used for rendering the rounded corners of the layer.
+ * Defaults to 'kCACornerCurveCircular'. */
+
+@property(copy) CALayerCornerCurve cornerCurve
+  API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0));
+
+/* Expansion scale factor applied to the rounded corner bounding box size
+ * when specific corner curve is used. */
+
++ (CGFloat)cornerCurveExpansionFactor:(CALayerCornerCurve)curve
+  API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0));
+
 /* The width of the layer's border, inset from the layer bounds. The
  * border is composited above the layer's content and sublayers and
  * includes the effects of the `cornerRadius' property. Defaults to
@@ -928,6 +941,13 @@ CA_EXTERN CALayerContentsFilter const kCAFilterLinear
 
 CA_EXTERN CALayerContentsFilter const kCAFilterTrilinear
     API_AVAILABLE(macos(10.6), ios(3.0), watchos(2.0), tvos(9.0));
+
+/** Corner curve names. **/
+
+CA_EXTERN CALayerCornerCurve const kCACornerCurveCircular
+    API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0));
+CA_EXTERN CALayerCornerCurve const kCACornerCurveContinuous
+    API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0));
 
 /** Layer event names. **/
 

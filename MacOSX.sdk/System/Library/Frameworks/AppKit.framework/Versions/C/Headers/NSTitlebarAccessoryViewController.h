@@ -1,7 +1,7 @@
 /*
     NSTitlebarAccessoryViewController.h
     Application Kit
-    Copyright (c) 2014-2018, Apple Inc.
+    Copyright (c) 2014-2019, Apple Inc.
     All rights reserved.
 */
 
@@ -11,29 +11,13 @@
 @class NSClipView;
 
 NS_ASSUME_NONNULL_BEGIN
+API_UNAVAILABLE_BEGIN(ios)
 
 /* For use with NSWindow's API addTitlebarAccessoryViewController:, etc. */
-NS_CLASS_AVAILABLE(10_10, NA)
-@interface NSTitlebarAccessoryViewController : NSViewController <NSAnimationDelegate, NSAnimatablePropertyContainer> {
-@private
-    NSLayoutAttribute _layoutAttribute APPKIT_IVAR;
-    CGFloat _fullScreenMinHeight APPKIT_IVAR;
-    NSClipView *_containingClipView APPKIT_IVAR;
-    CGFloat _revealAmount APPKIT_IVAR;
-    BOOL _inFullScreen APPKIT_IVAR;
-    BOOL _isToolbarAccessoryView APPKIT_IVAR;
-    NSInteger _updateCount APPKIT_IVAR;
-    
-    unsigned int _hidden:1 APPKIT_IVAR;
-    unsigned int _unusedTVC2:1 __unused APPKIT_IVAR;
-    unsigned int _updatingFrame:1 APPKIT_IVAR;
-    unsigned int _registered:1 APPKIT_IVAR;
-    unsigned int _reservedTVC:28 __unused APPKIT_IVAR;
+API_AVAILABLE(macos(10.10))
+@interface NSTitlebarAccessoryViewController : NSViewController <NSAnimationDelegate, NSAnimatablePropertyContainer>
 
-    id _animationData APPKIT_IVAR;
-    CGFloat _visibleAmount APPKIT_IVAR; // For animating visibility
-}
-
+#if !TARGET_OS_IPHONE
 /* The layoutAttribute defaults to NSLayoutAttributeBottom, telling the window to place this view controller's view under the titlebar. NSLayoutAttributeRight is also supported, telling the window to place the view controller's view on the right side of the window. For applications linked on Mac OS 10.11 or later, NSLayoutAttributeLeft is also supported; placing the item on the left side of the window (adjacent and to the right of the close/minimize/maximize buttons). All other values are currently invalid and will assert.
  
     For applications linked on 10.11 and higher, a layoutAttribute== NSLayoutAttributeRight will no longer right indent toolbar items (previously it would leave a space), unless  the titleVisibility == NSWindowTitleHidden. 
@@ -44,6 +28,7 @@ NS_CLASS_AVAILABLE(10_10, NA)
 
  */
 @property NSLayoutAttribute layoutAttribute;
+#endif
 
 /* The fullScreenMinHeight controls the visual minimum height of the view when it is in full screen. It only applies to controllers with the layoutAttribute set to NSLayoutAttributeBottom. Note that the view's height is never actually changed, and it is automatically clipped by an internal clip view.
  
@@ -56,7 +41,7 @@ NS_CLASS_AVAILABLE(10_10, NA)
 @property CGFloat fullScreenMinHeight;
 
 /* Indicates whether the accessory view is actually visible in the window. This property only applies to controllers set with the top or bottom layoutAtribute. When set, this property will collapse the accessory view to 0 height (animatable) but NOT remove it from the window. That way, you can easily show and hide it without difficulty. Set through the animator object to animate it. */
-@property (getter=isHidden) BOOL hidden NS_AVAILABLE_MAC(10_12);
+@property (getter=isHidden) BOOL hidden API_AVAILABLE(macos(10.12));
 
 - (void)viewWillAppear NS_REQUIRES_SUPER;
 - (void)viewDidAppear NS_REQUIRES_SUPER;
@@ -70,4 +55,5 @@ NS_CLASS_AVAILABLE(10_10, NA)
 
 @end
 
+API_UNAVAILABLE_END
 NS_ASSUME_NONNULL_END

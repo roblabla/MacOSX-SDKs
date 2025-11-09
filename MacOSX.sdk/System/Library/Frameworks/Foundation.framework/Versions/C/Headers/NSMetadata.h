@@ -1,5 +1,5 @@
 /*	NSMetadata.h
-	Copyright (c) 2004-2018, Apple Inc. All rights reserved.
+	Copyright (c) 2004-2019, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSMetadataAttributes.h>
@@ -14,7 +14,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-NS_CLASS_AVAILABLE(10_4, 5_0)
+API_AVAILABLE(macos(10.4), ios(5.0), watchos(2.0), tvos(9.0))
 @interface NSMetadataQuery : NSObject {
 @private
     NSUInteger _flags;
@@ -108,7 +108,7 @@ FOUNDATION_EXPORT NSString * const NSMetadataQueryUbiquitousDataScope API_AVAILA
 FOUNDATION_EXPORT NSString * const NSMetadataQueryAccessibleUbiquitousExternalDocumentsScope API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0)); // documents from outside the application's container that are accessible without user interaction. NSMetadataItemURLKey attributes of results are security-scoped NSURLs.
 
 
-NS_CLASS_AVAILABLE(10_4, 5_0)
+API_AVAILABLE(macos(10.4), ios(5.0), watchos(2.0), tvos(9.0))
 @interface NSMetadataItem : NSObject {
 @private
     id _item;
@@ -124,7 +124,7 @@ NS_CLASS_AVAILABLE(10_4, 5_0)
 
 @end
 
-NS_CLASS_AVAILABLE(10_4, 5_0)
+API_AVAILABLE(macos(10.4), ios(5.0), watchos(2.0), tvos(9.0))
 @interface NSMetadataQueryAttributeValueTuple : NSObject {
 @private
     id _attr;
@@ -139,7 +139,7 @@ NS_CLASS_AVAILABLE(10_4, 5_0)
 
 @end
 
-NS_CLASS_AVAILABLE(10_4, 5_0)
+API_AVAILABLE(macos(10.4), ios(5.0), watchos(2.0), tvos(9.0))
 @interface NSMetadataQueryResultGroup : NSObject {
 @private
     id _private[9];

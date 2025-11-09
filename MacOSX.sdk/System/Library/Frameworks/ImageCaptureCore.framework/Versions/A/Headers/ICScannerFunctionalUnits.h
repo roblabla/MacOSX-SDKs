@@ -1,3 +1,4 @@
+
 //------------------------------------------------------------------------------------------------------------------------------
 //
 //  ICScannerFunctionalUnits.h
@@ -12,14 +13,15 @@
 #pragma once
 
 /*!
-    @header ICScannerFunctionalUnit
-    @abstract ICScannerFunctionalUnit is an abstract class that represents a scanner functiona unit. ImageCaptureCore defines three concrete subclasses of ICScannerFunctionalUnit: ICScannerFunctionalUnitFlatbed, ICScannerFunctionalUnitPositiveTransparency, ICScannerFunctionalUnitNegativeTransparency and ICScannerFunctionalUnitDocumentFeeder. ICScannerDevice creates instances of these concrete subclasses.
+  @header ICScannerFunctionalUnit
+  @abstract ICScannerFunctionalUnit is an abstract class that represents a scanner functiona unit. ImageCaptureCore defines three concrete subclasses of ICScannerFunctionalUnit: ICScannerFunctionalUnitFlatbed, ICScannerFunctionalUnitPositiveTransparency, ICScannerFunctionalUnitNegativeTransparency and ICScannerFunctionalUnitDocumentFeeder. ICScannerDevice creates instances of these concrete subclasses.
 */
 
 //------------------------------------------------------------------------------------------------------------------------------
 
 #import <ImageCaptureCore/ImageCapturePlatform.h>
-#import <ImageCaptureCore/ICCommonConstants.h>
+#import <ImageCaptureCore/ImageCaptureConstants.h>
+#import <Foundation/Foundation.h>
 
 //-------------------------------------------------------------------------------------------------------------------- Constants
 /*!
@@ -31,14 +33,13 @@
   @constant ICScannerFunctionalUnitTypeDocumentFeeder Document feeder functional unit.
 */
 
-IMAGECAPTURE_ENUM_AVAILABLE( 10_4, NA )
 typedef NS_ENUM(NSUInteger, ICScannerFunctionalUnitType)
 {
     ICScannerFunctionalUnitTypeFlatbed              = 0,
     ICScannerFunctionalUnitTypePositiveTransparency = 1,
     ICScannerFunctionalUnitTypeNegativeTransparency = 2,
     ICScannerFunctionalUnitTypeDocumentFeeder       = 3
-};
+} IC_AVAILABLE(macos(10.4)) IC_UNAVAILABLE(ios);
 
 /*!
   @ICScannerMeasurementUnit
@@ -48,10 +49,9 @@ typedef NS_ENUM(NSUInteger, ICScannerFunctionalUnitType)
   @constant ICScannerMeasurementUnitPicas       1 pica  = .42333333    cm or 1/6    inches
   @constant ICScannerMeasurementUnitPoints      1 point = .0352777775  cm or 1/72   inches
   @constant ICScannerMeasurementUnitTwips       1 twip  = .0001763888  cm or 1/1440 inches
-  @constant ICScannerMeasurementUnitPixels      
+  @constant ICScannerMeasurementUnitPixels
 */
 
-IMAGECAPTURE_ENUM_AVAILABLE( 10_4, NA )
 typedef NS_ENUM(NSUInteger, ICScannerMeasurementUnit)
 {
     ICScannerMeasurementUnitInches      = 0,
@@ -60,7 +60,7 @@ typedef NS_ENUM(NSUInteger, ICScannerMeasurementUnit)
     ICScannerMeasurementUnitPoints      = 3,
     ICScannerMeasurementUnitTwips       = 4,
     ICScannerMeasurementUnitPixels      = 5
-};
+} IC_AVAILABLE(macos(10.4)) IC_UNAVAILABLE(ios);
 
 /*!
   @ICScannerBitDepth
@@ -70,13 +70,12 @@ typedef NS_ENUM(NSUInteger, ICScannerMeasurementUnit)
   @constant ICScannerBitDepth16Bits Image with 16 bits per channel.
 */
 
-IMAGECAPTURE_ENUM_AVAILABLE( 10_4, NA )
 typedef NS_ENUM(NSUInteger, ICScannerBitDepth)
 {
     ICScannerBitDepth1Bit   = 1,
     ICScannerBitDepth8Bits  = 8,
     ICScannerBitDepth16Bits = 16
-};
+} IC_AVAILABLE(macos(10.4)) IC_UNAVAILABLE(ios);
 
 /*!
   @ICScannerColorDataFormatType
@@ -85,12 +84,11 @@ typedef NS_ENUM(NSUInteger, ICScannerBitDepth)
   @constant ICScannerColorDataFormatTypePlanar For multi-channel data (e.g., RGB) each channel is transferred sequentially.
 */
 
-IMAGECAPTURE_ENUM_AVAILABLE( 10_4, NA )
 typedef NS_ENUM(NSUInteger, ICScannerColorDataFormatType)
 {
     ICScannerColorDataFormatTypeChunky  = 0,
     ICScannerColorDataFormatTypePlanar  = 1
-};
+} IC_AVAILABLE(macos(10.4)) IC_UNAVAILABLE(ios);
 
 /*!
   @ICScannerPixelDataType
@@ -106,7 +104,6 @@ typedef NS_ENUM(NSUInteger, ICScannerColorDataFormatType)
   @constant ICScannerPixelDataTypeCIEXYZ Color image in CIEXYZ color space.
 */
 
-IMAGECAPTURE_ENUM_AVAILABLE( 10_4, NA )
 typedef NS_ENUM(NSUInteger, ICScannerPixelDataType)
 {
     ICScannerPixelDataTypeBW      = 0,
@@ -118,7 +115,7 @@ typedef NS_ENUM(NSUInteger, ICScannerPixelDataType)
     ICScannerPixelDataTypeYUV     = 6,
     ICScannerPixelDataTypeYUVK    = 7,
     ICScannerPixelDataTypeCIEXYZ  = 8
-};
+} IC_AVAILABLE(macos(10.4)) IC_UNAVAILABLE(ios);
 
 /*!
   @ICScannerDocumentType
@@ -153,7 +150,7 @@ typedef NS_ENUM(NSUInteger, ICScannerPixelDataType)
   @constant ICScannerDocumentTypeISOB2          ISO B2,                           500.00 mm x  707.00 mm
   @constant ICScannerDocumentTypeISOB5          ISO B5,                           176.00 mm x  250.00 mm
   @constant ICScannerDocumentTypeISOB7          ISO B7,                            88.00 mm x  125.00 mm
-  @constant ICScannerDocumentTypeISOB8          ISO B8,                            62.00 mm x   88.00 mm     
+  @constant ICScannerDocumentTypeISOB8          ISO B8,                            62.00 mm x   88.00 mm
   @constant ICScannerDocumentTypeISOB9          ISO B9,                            44.00 mm x   62.00 mm
   @constant ICScannerDocumentTypeISOB10         ISO B10,                           31.00 mm x   44.00 mm
   @constant ICScannerDocumentTypeJISB0          JIS B0,                          1030.00 mm x 1456.00 mm
@@ -162,20 +159,20 @@ typedef NS_ENUM(NSUInteger, ICScannerPixelDataType)
   @constant ICScannerDocumentTypeJISB3          JIS B3,                           364.00 mm x  515.00 mm
   @constant ICScannerDocumentTypeJISB4          JIS B4,                           257.00 mm x  364.00 mm
   @constant ICScannerDocumentTypeJISB6          JIS B6,                           128.00 mm x  182.00 mm
-  @constant ICScannerDocumentTypeJISB7          JIS B7,                            91.00 mm x  128.00 mm 
+  @constant ICScannerDocumentTypeJISB7          JIS B7,                            91.00 mm x  128.00 mm
   @constant ICScannerDocumentTypeJISB8          JIS B8,                            64.00 mm x   91.00 mm
   @constant ICScannerDocumentTypeJISB9          JIS B9,                            45.00 mm x   64.00 mm
   @constant ICScannerDocumentTypeJISB10         JIS B10,                           32.00 mm x   45.00 mm
   @constant ICScannerDocumentTypeC0             C0,                               917.00 mm x 1297.00 mm
   @constant ICScannerDocumentTypeC1             C1,                               648.00 mm x  917.00 mm
-  @constant ICScannerDocumentTypeC2             C2,                               458.00 mm x  648.00 mm 
-  @constant ICScannerDocumentTypeC3             C3,                               324.00 mm x  458.00 mm 
+  @constant ICScannerDocumentTypeC2             C2,                               458.00 mm x  648.00 mm
+  @constant ICScannerDocumentTypeC3             C3,                               324.00 mm x  458.00 mm
   @constant ICScannerDocumentTypeC7             C7,                                81.00 mm x  114.00 mm
-  @constant ICScannerDocumentTypeC8             C8,                                57.00 mm x   81.00 mm 
+  @constant ICScannerDocumentTypeC8             C8,                                57.00 mm x   81.00 mm
   @constant ICScannerDocumentTypeC9             C9,                                40.00 mm x   57.00 mm
   @constant ICScannerDocumentTypeC10            C10,                               28.00 mm x   40.00 mm
   @constant ICScannerDocumentTypeUSStatement    US Statement,     5.5” x  8.5”,   139.70 mm x  215.90 mm
-  @constant ICScannerDocumentTypeBusinessCard   Business Card,                     90.00 mm x   55.00 mm 
+  @constant ICScannerDocumentTypeBusinessCard   Business Card,                     90.00 mm x   55.00 mm
 
   @constant ICScannerDocumentTypeE              Japanese E,      3.25" x 4.75"     82.55 mm x  120.65 mm      11:16
   @constant ICScannerDocumentType3R             3R,              3.5"  x 5"        88.90 mm x  127.00 mm       7:10
@@ -200,7 +197,6 @@ typedef NS_ENUM(NSUInteger, ICScannerPixelDataType)
   @constant ICScannerDocumentTypeLF             Large Format,                     100.00 mm x  120.00 mm
 */
 
-IMAGECAPTURE_ENUM_AVAILABLE( 10_4, NA )
 typedef NS_ENUM(NSUInteger, ICScannerDocumentType)
 {
     ICScannerDocumentTypeDefault      = 0,
@@ -276,7 +272,7 @@ typedef NS_ENUM(NSUInteger, ICScannerDocumentType)
     ICScannerDocumentType135          = 76,
     ICScannerDocumentTypeMF           = 77,
     ICScannerDocumentTypeLF           = 78
-};
+} IC_AVAILABLE(macos(10.4)) IC_UNAVAILABLE(ios);
 
 /*!
   @ICScannerFunctionalUnitState
@@ -286,13 +282,12 @@ typedef NS_ENUM(NSUInteger, ICScannerDocumentType)
   @constant ICScannerStateOverviewScanInProgress The scanner functional unit is performing an overview scan.
 */
 
-IMAGECAPTURE_ENUM_AVAILABLE( 10_4, NA )
-typedef NS_ENUM(unsigned int, ICScannerFunctionalUnitState)
+typedef NS_ENUM(NSUInteger, ICScannerFunctionalUnitState)
 {
     ICScannerFunctionalUnitStateReady                  = (1 << 0),
     ICScannerFunctionalUnitStateScanInProgress         = (1 << 1),
     ICScannerFunctionalUnitStateOverviewScanInProgress = (1 << 2)
-};
+}IC_AVAILABLE(macos(10.4)) IC_UNAVAILABLE(ios);
 
 /*!
   @ICScannerFeatureType
@@ -302,23 +297,22 @@ typedef NS_ENUM(unsigned int, ICScannerFunctionalUnitState)
   @constant ICScannerFeatureTypeBoolean The value of this feature can be YES or NO.
 */
 
-IMAGECAPTURE_ENUM_AVAILABLE( 10_4, NA )
 typedef NS_ENUM(NSUInteger, ICScannerFeatureType)
 {
     ICScannerFeatureTypeEnumeration = 0,
     ICScannerFeatureTypeRange       = 1,
     ICScannerFeatureTypeBoolean     = 2,
     ICScannerFeatureTypeTemplate    = 3
-};
+}IC_AVAILABLE(macos(10.4)) IC_UNAVAILABLE(ios);
 
 //------------------------------------------------------------------------------------------------------------- ICScannerFeature
 /*!
-    @class ICScannerFeature
-    @abstract ICScannerFeature class is an abstract base class used to describe a scanner feature. ImageCaptureCore defines three concrete subclasses of ICScannerFeature: ICScannerFeatureEnumeration, ICScannerFeatureRange and ICScannerFeatureBoolean.
-    @discussion The scanner functional units may have one or more instances of these classes to allow users to choose scanner-specific settings or operations before performing a scan.
+  @class ICScannerFeature
+  @abstract ICScannerFeature class is an abstract base class used to describe a scanner feature. ImageCaptureCore defines three concrete subclasses of ICScannerFeature: ICScannerFeatureEnumeration, ICScannerFeatureRange and ICScannerFeatureBoolean.
+  @discussion The scanner functional units may have one or more instances of these classes to allow users to choose scanner-specific settings or operations before performing a scan.
 */
 
-IMAGECAPTURE_CLASS_AVAILABLE( 10_4, NA )
+IC_AVAILABLE(macos(10.4)) IC_UNAVAILABLE(ios)
 @interface ICScannerFeature : NSObject
 {
 @private
@@ -326,43 +320,39 @@ IMAGECAPTURE_CLASS_AVAILABLE( 10_4, NA )
 }
 
 /*!
-    @property type
-    @abstract ￼Scanner feature type.
-
+  @property type
+  @abstract ￼Scanner feature type.
 */
-@property(readonly)   ICScannerFeatureType      type;
+@property (readonly) ICScannerFeatureType type;
 
 /*!
-    @property internalName
-    @abstract ￼The internal name of this feature.
-
+  @property internalName
+  @abstract ￼The internal name of this feature.
 */
-@property(readonly,nullable)   NSString*                 internalName;
+@property (readonly, nullable) NSString* internalName;
 
 /*!
-    @property humanReadableName
-    @abstract The human readable name of this feature.
-
+  @property humanReadableName
+  @abstract The human readable name of this feature.
 */
-@property(readonly,nullable)   NSString*                 humanReadableName;
+@property (readonly, nullable) NSString* humanReadableName;
 
 /*!
-    @property tooltip
-    @abstract ￼Tooltip text describing the feature.
-
+  @property tooltip
+  @abstract ￼Tooltip text describing the feature.
 */
-@property(readonly,nullable)   NSString*                 tooltip;
+@property (readonly, nullable) NSString* tooltip;
 @end
 
-//-------------------------------------------------------------------------------------------------- ICScannerFeatureEnumeration
-/*!
-    @class ICScannerFeatureEnumeration
-    @abstract ICScannerFeatureEnumeration object is used to represent a feature of a scanner functional unit that can have one of several discrete values.
+    //-------------------------------------------------------------------------------------------------- ICScannerFeatureEnumeration
+    /*!
+  @class ICScannerFeatureEnumeration
+  @abstract ICScannerFeatureEnumeration object is used to represent a feature of a scanner functional unit that can have one of several discrete values.
 */
 
 NS_ASSUME_NONNULL_BEGIN
 
-IMAGECAPTURE_CLASS_AVAILABLE( 10_4, NA )
+IC_AVAILABLE(macos(10.4)) IC_UNAVAILABLE(ios)
 @interface ICScannerFeatureEnumeration : ICScannerFeature
 {
 @private
@@ -370,48 +360,43 @@ IMAGECAPTURE_CLASS_AVAILABLE( 10_4, NA )
 }
 
 /*!
-    @property currentValue
-    @abstract The current value. The current value can be set to one of the possible values in the "values" property below￼.
-
+  @property currentValue
+  @abstract The current value. The current value can be set to one of the possible values in the "values" property below￼.
 */
-@property(assign)     id        currentValue;
+@property (assign) id currentValue;
 
 /*!
-    @property defaultValue
-    @abstract ￼The default value. The default value can be set to one of the possible values in the "values" property below.
-
+  @property defaultValue
+  @abstract ￼The default value. The default value can be set to one of the possible values in the "values" property below.
 */
-@property(readonly)   id        defaultValue;
+@property (readonly) id defaultValue;
 
 /*!
-    @property values
-    @abstract An array of possible values. All items in this array must be of same type￼.
-
+  @property values
+  @abstract An array of possible values. All items in this array must be of same type￼.
 */
-@property(readonly)   NSArray<NSNumber*>*  values;
+@property (readonly) NSArray<NSNumber*>* values;
 
 /*!
-    @property menuItemLabels
-    @abstract ￼The human readable menu item labels to be used in a menu to allow the user to select the current value from an array of possible values.
-
+  @property menuItemLabels
+  @abstract ￼The human readable menu item labels to be used in a menu to allow the user to select the current value from an array of possible values.
 */
-@property(readonly)   NSArray<NSString*>*  menuItemLabels;
+@property (readonly) NSArray<NSString*>* menuItemLabels;
 
 /*!
-    @property menuItemLabelsTooltips
-    @abstract ￼Tooltip text associated with the menu items.
-
+  @property menuItemLabelsTooltips
+  @abstract ￼Tooltip text associated with the menu items.
 */
-@property(readonly)   NSArray<NSString*>*  menuItemLabelsTooltips;
+@property (readonly) NSArray<NSString*>* menuItemLabelsTooltips;
 @end
 
-//-------------------------------------------------------------------------------------------------------- ICScannerFeatureRange
-/*!
-    @class ICScannerFeatureRange
-    @abstract ICScannerFeatureRange object is used to represent a property of a scanner functional unit whose value lies within a range.
+    //-------------------------------------------------------------------------------------------------------- ICScannerFeatureRange
+    /*!
+  @class ICScannerFeatureRange
+  @abstract ICScannerFeatureRange object is used to represent a property of a scanner functional unit whose value lies within a range.
 */
 
-IMAGECAPTURE_CLASS_AVAILABLE( 10_4, NA )
+IC_AVAILABLE(macos(10.4)) IC_UNAVAILABLE(ios)
 @interface ICScannerFeatureRange : ICScannerFeature
 {
 @private
@@ -419,48 +404,43 @@ IMAGECAPTURE_CLASS_AVAILABLE( 10_4, NA )
 }
 
 /*!
-    @property currentValue
-    @abstract ￼The current value. Attempting to set the current value to a value that is not coincident with a step will result in a value corresponding to the nearest step being assigned to the current value.
-
+  @property currentValue
+  @abstract ￼The current value. Attempting to set the current value to a value that is not coincident with a step will result in a value corresponding to the nearest step being assigned to the current value.
 */
-@property(assign)     CGFloat currentValue;
+@property (assign) CGFloat currentValue;
 
 /*!
-    @property defaultValue
-    @abstract The default value￼. Attempting to set the default value to a value that is not coincident with a step will result in a value corresponding to the nearest step being assigned to the default value.
-
+  @property defaultValue
+  @abstract The default value￼. Attempting to set the default value to a value that is not coincident with a step will result in a value corresponding to the nearest step being assigned to the default value.
 */
-@property(readonly)   CGFloat defaultValue;
+@property (readonly) CGFloat defaultValue;
 
 /*!
-    @property minValue
-    @abstract The minimum value.
-
+  @property minValue
+  @abstract The minimum value.
 */
-@property(readonly)   CGFloat minValue;
+@property (readonly) CGFloat minValue;
 
 /*!
-    @property maxValue
-    @abstract ￼The maximum value.
-
+  @property maxValue
+  @abstract ￼The maximum value.
 */
-@property(readonly)   CGFloat maxValue;
+@property (readonly) CGFloat maxValue;
 
 /*!
-    @property stepSize
-    @abstract ￼The step size.
-
+  @property stepSize
+  @abstract ￼The step size.
 */
-@property(readonly)   CGFloat stepSize;
+@property (readonly) CGFloat stepSize;
 @end
 
-//----------------------------------------------------------------------------------------------------- ICScannerFeatureBoolean
-/*!
-    @class ICScannerFeatureBoolean
-    @abstract ICScannerFeatureBoolean object is used to represent a property of a scanner functional unit whose value can be YES or NO.
+    //----------------------------------------------------------------------------------------------------- ICScannerFeatureBoolean
+    /*!
+  @class ICScannerFeatureBoolean
+  @abstract ICScannerFeatureBoolean object is used to represent a property of a scanner functional unit whose value can be YES or NO.
 */
 
-IMAGECAPTURE_CLASS_AVAILABLE( 10_4, NA )
+IC_AVAILABLE(macos(10.4)) IC_UNAVAILABLE(ios)
 @interface ICScannerFeatureBoolean : ICScannerFeature
 {
 @private
@@ -468,263 +448,230 @@ IMAGECAPTURE_CLASS_AVAILABLE( 10_4, NA )
 }
 
 /*!
-    @property value
-    @abstract ￼The value of this feature.
-
+  @property value
+  @abstract ￼The value of this feature.
 */
-@property(readwrite)  BOOL    value;
+@property (readwrite) BOOL value;
 @end
 
-//---------------------------------------------------------------------------------------------------- ICScannerFeatureTemplate
-/*!
-    @class ICScannerFeatureTemplate
-    @abstract ICScannerFeatureTemplate object is used to define a group of one or more rectangular scan areas that can be used with a scanner functional unit.
+    //---------------------------------------------------------------------------------------------------- ICScannerFeatureTemplate
+    /*!
+  @class ICScannerFeatureTemplate
+  @abstract ICScannerFeatureTemplate object is used to define a group of one or more rectangular scan areas that can be used with a scanner functional unit.
 */
 
-IMAGECAPTURE_CLASS_AVAILABLE( 10_4, NA )
-@interface ICScannerFeatureTemplate : ICScannerFeature
+    IC_AVAILABLE(macos(10.4)) IC_UNAVAILABLE(ios) @interface ICScannerFeatureTemplate : ICScannerFeature
 {
 @private
     id _tvProps;
 }
 
-@property(readonly) NSArray<NSMutableArray*>*  targets;
+@property (readonly) NSArray<NSMutableArray*>* targets;
 @end
 
-//------------------------------------------------------------------------------------------------------ ICScannerFunctionalUnit
-/*!
-    @class ICScannerFunctionalUnit
-    @abstract ICScannerFunctionalUnit is an abstract class that represents a scanner functiona unit. ImageCaptureCore defines three concrete subclasses of ICScannerFunctionalUnit: ICScannerFunctionalUnitFlatbed, ICScannerFunctionalUnitPositiveTransparency, ICScannerFunctionalUnitNegativeTransparency and ICScannerFunctionalUnitDocumentFeeder. ICScannerDevice creates instances of these concrete subclasses.
+    //------------------------------------------------------------------------------------------------------ ICScannerFunctionalUnit
+    /*!
+  @class ICScannerFunctionalUnit
+  @abstract ICScannerFunctionalUnit is an abstract class that represents a scanner functiona unit. ImageCaptureCore defines three concrete subclasses of ICScannerFunctionalUnit: ICScannerFunctionalUnitFlatbed, ICScannerFunctionalUnitPositiveTransparency, ICScannerFunctionalUnitNegativeTransparency and ICScannerFunctionalUnitDocumentFeeder. ICScannerDevice creates instances of these concrete subclasses.
 */
 
-IMAGECAPTURE_CLASS_AVAILABLE( 10_4, NA )
-@interface ICScannerFunctionalUnit : NSObject
+    IC_AVAILABLE(macos(10.4)) IC_UNAVAILABLE(ios) @interface ICScannerFunctionalUnit : NSObject
 {
 @private
     id _fuProps;
 }
 
 /*!
-    @property type
-    @abstract ￼Functional unit type.
-
+  @property type
+  @abstract ￼Functional unit type.
 */
-@property(readonly)   ICScannerFunctionalUnitType   type;
+@property (readonly) ICScannerFunctionalUnitType type;
 
 /*!
-    @property pixelDataType
-    @abstract ￼The pixel data type.
-
+  @property pixelDataType
+  @abstract ￼The pixel data type.
 */
-@property(readwrite)  ICScannerPixelDataType        pixelDataType;
+@property (readwrite) ICScannerPixelDataType pixelDataType;
 
 /*!
-    @property supportedBitDepths
-    @abstract ￼Supported bit depths. The values in this set are valid values defined by ICScannerBitDepth.
-
+  @property supportedBitDepths
+  @abstract ￼Supported bit depths. The values in this set are valid values defined by ICScannerBitDepth.
 */
-@property(readonly)   NSIndexSet*                   supportedBitDepths;
+@property (readonly) NSIndexSet* supportedBitDepths;
 
 /*!
-    @property bitDepth
-    @abstract ￼The bit depth to use when performing the final scan. This will always be one of the supported bit depths.
-
+  @property bitDepth
+  @abstract ￼The bit depth to use when performing the final scan. This will always be one of the supported bit depths.
 */
-@property(readwrite)  ICScannerBitDepth             bitDepth;
+@property (readwrite) ICScannerBitDepth bitDepth;
 
 /*!
-    @property supportedMeasurementUnits
-    @abstract ￼Supported measurement units. The values in this set are valid values defined by ICScannerMeasurementUnit.
-
+  @property supportedMeasurementUnits
+  @abstract ￼Supported measurement units. The values in this set are valid values defined by ICScannerMeasurementUnit.
 */
-@property(readonly)   NSIndexSet*                   supportedMeasurementUnits;
+@property (readonly) NSIndexSet* supportedMeasurementUnits;
 
 /*!
-    @property measurementUnit
-    @abstract ￼Current measurement unit. This will always be one of the supported measurement units.
-
+  @property measurementUnit
+  @abstract ￼Current measurement unit. This will always be one of the supported measurement units.
 */
-@property(readwrite)  ICScannerMeasurementUnit      measurementUnit;
+@property (readwrite) ICScannerMeasurementUnit measurementUnit;
 
 /*!
-    @property supportedResolutions
-    @abstract ￼Supported scan resolutions in DPI.
-
+  @property supportedResolutions
+  @abstract ￼Supported scan resolutions in DPI.
 */
-@property(readonly)   NSIndexSet*                   supportedResolutions;
+@property (readonly) NSIndexSet* supportedResolutions;
 
 /*!
-    @property preferredResolutions
-    @abstract ￼Preferred scan resolutions in DPI.
-
+  @property preferredResolutions
+  @abstract ￼Preferred scan resolutions in DPI.
 */
-@property(readonly)   NSIndexSet*                   preferredResolutions;
+@property (readonly) NSIndexSet* preferredResolutions;
 
 /*!
-    @property resolution
-    @abstract ￼Current scan resolution. This will always be one of the supported resolution values.
-
+  @property resolution
+  @abstract ￼Current scan resolution. This will always be one of the supported resolution values.
 */
-@property(readwrite)  NSUInteger                    resolution;
+@property (readwrite) NSUInteger resolution;
 
 /*!
-    @property nativeXResolution
-    @abstract ￼Optical resolution along the X axis.
-
+  @property nativeXResolution
+  @abstract ￼Optical resolution along the X axis.
 */
-@property(readonly)  NSUInteger                     nativeXResolution;
+@property (readonly) NSUInteger nativeXResolution;
 
 /*!
-    @property nativeYResolution
-    @abstract ￼Optical resolution along the Y axis.
-
+  @property nativeYResolution
+  @abstract ￼Optical resolution along the Y axis.
 */
-@property(readonly)  NSUInteger                     nativeYResolution;
+@property (readonly) NSUInteger nativeYResolution;
 
 /*!
-    @property supportedScaleFactors
-    @abstract ￼Supported scale factors in percentage.
-
+  @property supportedScaleFactors
+  @abstract ￼Supported scale factors in percentage.
 */
-@property(readonly)   NSIndexSet*                   supportedScaleFactors;
+@property (readonly) NSIndexSet* supportedScaleFactors;
 
 /*!
-    @property preferredScaleFactors
-    @abstract ￼Preferred scale factors in percentage.
-
+  @property preferredScaleFactors
+  @abstract ￼Preferred scale factors in percentage.
 */
-@property(readonly)   NSIndexSet*                   preferredScaleFactors;
+@property (readonly) NSIndexSet* preferredScaleFactors;
 
 /*!
-    @property scaleFactor
-    @abstract ￼Current scale factor. This will always be one of the supported scale factor values.
-
+  @property scaleFactor
+  @abstract ￼Current scale factor. This will always be one of the supported scale factor values.
 */
-@property(readwrite)  NSUInteger                    scaleFactor;
+@property (readwrite) NSUInteger scaleFactor;
 
 /*!
-    @property templates
-    @abstract An array of objects of type ICScannerFeatureTemplate.
-
+  @property templates
+  @abstract An array of objects of type ICScannerFeatureTemplate.
 */
-@property(readonly)   NSArray<ICScannerFeatureTemplate*>*                      templates;
+@property (readonly) NSArray<ICScannerFeatureTemplate*>* templates;
 
 /*!
-    @property vendorFeatures
-    @abstract An array of objects of type ICScannerFeature.
-
+  @property vendorFeatures
+  @abstract An array of objects of type ICScannerFeature.
 */
-@property(readonly,nullable)   NSArray<ICScannerFeature*>*                      vendorFeatures;
+@property (readonly, nullable) NSArray<ICScannerFeature*>* vendorFeatures;
 
 /*!
-    @property physicalSize
-    @abstract ￼Physical size of the scan area in current measurement unit.
-
+  @property physicalSize
+  @abstract ￼Physical size of the scan area in current measurement unit.
 */
-@property(readonly)   NSSize                        physicalSize;
+@property (readonly) ICSize physicalSize;
 
 /*!
-    @property scanArea
-    @abstract ￼This property along with scanAreaOrientation describes the area to be scanned.
-
+  @property scanArea
+  @abstract ￼This property along with scanAreaOrientation describes the area to be scanned.
 */
-@property(readwrite)  NSRect                        scanArea;
+@property (readwrite) ICRect scanArea;
 
 /*!
-    @property scanAreaOrientation
-    @abstract ￼Desired orientation of the scan area. This property along with scanArea describes the area to be scanned.
-    @discussion This property is set to ICEXIFOrientation1 initially. This property is not used by the ICScannerFunctionalUnitDocumentFeeder subclass.
-
+  @property scanAreaOrientation
+  @abstract ￼Desired orientation of the scan area. This property along with scanArea describes the area to be scanned.
+  @discussion This property is set to ICEXIFOrientation1 initially. This property is not used by the ICScannerFunctionalUnitDocumentFeeder subclass.
 */
-@property(readwrite)  ICEXIFOrientationType         scanAreaOrientation;
+@property (readwrite) ICEXIFOrientationType scanAreaOrientation;
 
 /*!
-    @property acceptsThresholdForBlackAndWhiteScanning
-    @abstract ￼Indicates if this functional unit accepts threshold value to be used when performing a scan in black & white.
-
+  @property acceptsThresholdForBlackAndWhiteScanning
+  @abstract ￼Indicates if this functional unit accepts threshold value to be used when performing a scan in black & white.
 */
-@property(readonly)   BOOL                          acceptsThresholdForBlackAndWhiteScanning;
+@property (readonly) BOOL acceptsThresholdForBlackAndWhiteScanning;
 
 /*!
-    @property usesThresholdForBlackAndWhiteScanning
-    @abstract ￼Indicates if this functional unit uses threshold value to be used when performing a scan in black & white.
-
+  @property usesThresholdForBlackAndWhiteScanning
+  @abstract ￼Indicates if this functional unit uses threshold value to be used when performing a scan in black & white.
 */
-@property(readwrite)  BOOL                          usesThresholdForBlackAndWhiteScanning;
+@property (readwrite) BOOL usesThresholdForBlackAndWhiteScanning;
 
 /*!
-    @property defaultThresholdForBlackAndWhiteScanning
-    @abstract ￼Default threshold value used when performing a scan in black & white. This value is from 0 to 255.
-
+  @property defaultThresholdForBlackAndWhiteScanning
+  @abstract ￼Default threshold value used when performing a scan in black & white. This value is from 0 to 255.
 */
-@property(readonly)   unsigned char                 defaultThresholdForBlackAndWhiteScanning;
+@property (readonly) unsigned char defaultThresholdForBlackAndWhiteScanning;
 
 /*!
-    @property thresholdForBlackAndWhiteScanning
-    @abstract ￼Threshold value to be used when performing a scan in black & white. This value should be from 0 to 255.
-
+  @property thresholdForBlackAndWhiteScanning
+  @abstract ￼Threshold value to be used when performing a scan in black & white. This value should be from 0 to 255.
 */
-@property(readwrite)  unsigned char                 thresholdForBlackAndWhiteScanning;
+@property (readwrite) unsigned char thresholdForBlackAndWhiteScanning;
 
 /*!
-    @property state
-    @abstract ￼Indicates the current state of the functional unit.
-
+  @property state
+  @abstract ￼Indicates the current state of the functional unit.
 */
-@property(readonly)   ICScannerFunctionalUnitState  state;
+@property (readonly) ICScannerFunctionalUnitState state;
 
 /*!
-    @property scanInProgress
-    @abstract ￼Indicates if a scan is in progress.
-
+  @property scanInProgress
+  @abstract ￼Indicates if a scan is in progress.
 */
-@property(readonly)   BOOL                          scanInProgress;
+@property (readonly) BOOL scanInProgress;
 
 /*!
-    @property scanProgressPercentDone
-    @abstract ￼Indicates percentage of scan completed.
-
+  @property scanProgressPercentDone
+  @abstract ￼Indicates percentage of scan completed.
 */
-@property(readonly)   CGFloat                       scanProgressPercentDone;
+@property (readonly) CGFloat scanProgressPercentDone;
 
 /*!
-    @property canPerformOverviewScan
-    @abstract ￼Indicates if this functional unit can perfrom an overview scan. Not all functional units can perform an overview scan. For example, a document feeder or a sheet feeder unit cannot perform an overview scan.
-
+  @property canPerformOverviewScan
+  @abstract ￼Indicates if this functional unit can perfrom an overview scan. Not all functional units can perform an overview scan. For example, a document feeder or a sheet feeder unit cannot perform an overview scan.
 */
-@property(readonly)   BOOL                          canPerformOverviewScan;
+@property (readonly) BOOL canPerformOverviewScan;
 
 /*!
-    @property overviewScanInProgress
-    @abstract ￼Indicates if an overview scan is in progress.
-
+  @property overviewScanInProgress
+  @abstract ￼Indicates if an overview scan is in progress.
 */
-@property(readonly)   BOOL                          overviewScanInProgress;
+@property (readonly) BOOL overviewScanInProgress;
 
 /*!
-    @property overviewImage
-    @abstract ￼Overview scan image. This property will be NULL for functional units that do not support overview scans.
-
+  @property overviewImage
+  @abstract ￼Overview scan image. This property will be NULL for functional units that do not support overview scans.
 */
-@property(readonly,nullable)   CGImageRef                    overviewImage;
+@property (readonly, nullable) CGImageRef overviewImage;
 
 /*!
-    @property overviewResolution
-    @abstract ￼Overview image resolution. Value assigned to this will be contrained by resolutions allowed by the device.
-
+  @property overviewResolution
+  @abstract ￼Overview image resolution. Value assigned to this will be contrained by resolutions allowed by the device.
 */
-@property(readwrite)  NSUInteger                    overviewResolution;
+@property (readwrite) NSUInteger overviewResolution;
 
 @end
 
-//----------------------------------------------------------------------------------------------- ICScannerFunctionalUnitFlatbed
-/*!
-    @class ICScannerFunctionalUnitFlatbed
-    @abstract ICScannerFunctionalUnitFlatbed is a concrete subclass of ICScannerFunctionalUnit class. ICScannerDevice creates instances of this class.
-    @discussion This represents the flatbed  unit on the scanner.
+    //----------------------------------------------------------------------------------------------- ICScannerFunctionalUnitFlatbed
+    /*!
+  @class ICScannerFunctionalUnitFlatbed
+  @abstract ICScannerFunctionalUnitFlatbed is a concrete subclass of ICScannerFunctionalUnit class. ICScannerDevice creates instances of this class.
+  @discussion This represents the flatbed  unit on the scanner.
 */
 
-IMAGECAPTURE_CLASS_AVAILABLE( 10_4, NA )
+IC_AVAILABLE(macos(10.4)) IC_UNAVAILABLE(ios)
 @interface ICScannerFunctionalUnitFlatbed : ICScannerFunctionalUnit
 {
 @private
@@ -732,36 +679,33 @@ IMAGECAPTURE_CLASS_AVAILABLE( 10_4, NA )
 }
 
 /*!
-    @property supportedDocumentTypes
-    @abstract ￼Supported document types. The values in this set are valid values defined by ICScannerDocumentType.
-
+  @property supportedDocumentTypes
+  @abstract ￼Supported document types. The values in this set are valid values defined by ICScannerDocumentType.
 */
-@property(readonly, nonnull)   NSIndexSet*                   supportedDocumentTypes;
+@property (readonly, nonnull) NSIndexSet* supportedDocumentTypes;
 
 /*!
-    @property documentType
-    @abstract ￼Current document type. This will always be one of the supported document types.
-
+  @property documentType
+  @abstract ￼Current document type. This will always be one of the supported document types.
 */
-@property(readwrite)  ICScannerDocumentType         documentType;
+@property (readwrite) ICScannerDocumentType documentType;
 
 /*!
-    @property documentSize
-    @abstract ￼Document size of the current document type expressed in current measurement unit.
-
+  @property documentSize
+  @abstract ￼Document size of the current document type expressed in current measurement unit.
 */
-@property(readonly) NSSize                          documentSize;
+@property (readonly) ICSize documentSize;
 
 @end
 
-//---------------------------------------------------------------------------------- ICScannerFunctionalUnitPositiveTransparency
-/*!
-    @class ICScannerFunctionalUnitPositiveTransparency
-    @abstract ICScannerFunctionalUnitPositiveTransparency is a concrete subclass of ICScannerFunctionalUnit class. ICScannerDevice creates instances of this class.
-    @discussion This represents the transparency unit on the scanner for scanning postives
+    //---------------------------------------------------------------------------------- ICScannerFunctionalUnitPositiveTransparency
+    /*!
+  @class ICScannerFunctionalUnitPositiveTransparency
+  @abstract ICScannerFunctionalUnitPositiveTransparency is a concrete subclass of ICScannerFunctionalUnit class. ICScannerDevice creates instances of this class.
+  @discussion This represents the transparency unit on the scanner for scanning postives
 */
 
-IMAGECAPTURE_CLASS_AVAILABLE( 10_4, NA )
+IC_AVAILABLE(macos(10.4)) IC_UNAVAILABLE(ios)
 @interface ICScannerFunctionalUnitPositiveTransparency : ICScannerFunctionalUnit
 {
 @private
@@ -769,36 +713,33 @@ IMAGECAPTURE_CLASS_AVAILABLE( 10_4, NA )
 }
 
 /*!
-    @property supportedDocumentTypes
-    @abstract ￼Supported document types. The values in this set are valid values defined by ICScannerDocumentType.
-
+  @property supportedDocumentTypes
+  @abstract ￼Supported document types. The values in this set are valid values defined by ICScannerDocumentType.
 */
-@property(readonly)   NSIndexSet*                   supportedDocumentTypes;
+@property (readonly) NSIndexSet* supportedDocumentTypes;
 
 /*!
-    @property documentType
-    @abstract ￼Current document type. This will always be one of the supported document types.
-
+  @property documentType
+  @abstract ￼Current document type. This will always be one of the supported document types.
 */
-@property(readwrite)  ICScannerDocumentType         documentType;
+@property (readwrite) ICScannerDocumentType documentType;
 
 /*!
-    @property documentSize
-    @abstract ￼Document size of the current document type expressed in current measurement unit.
-
+  @property documentSize
+  @abstract ￼Document size of the current document type expressed in current measurement unit.
 */
-@property(readonly) NSSize                          documentSize;
+@property (readonly) ICSize documentSize;
 
 @end
 
-//---------------------------------------------------------------------------------- ICScannerFunctionalUnitNegativeTransparency
-/*!
-    @class ICScannerFunctionalUnitNegativeTransparency
-    @abstract ICScannerFunctionalUnitNegativeTransparency is a concrete subclass of ICScannerFunctionalUnit class. ICScannerDevice creates instances of this class.
-    @discussion This represents the transparency unit on the scanner for scanning negatives.
+    //---------------------------------------------------------------------------------- ICScannerFunctionalUnitNegativeTransparency
+    /*!
+  @class ICScannerFunctionalUnitNegativeTransparency
+  @abstract ICScannerFunctionalUnitNegativeTransparency is a concrete subclass of ICScannerFunctionalUnit class. ICScannerDevice creates instances of this class.
+  @discussion This represents the transparency unit on the scanner for scanning negatives.
 */
 
-IMAGECAPTURE_CLASS_AVAILABLE( 10_4, NA )
+IC_AVAILABLE(macos(10.4)) IC_UNAVAILABLE(ios)
 @interface ICScannerFunctionalUnitNegativeTransparency : ICScannerFunctionalUnit
 {
 @private
@@ -806,36 +747,33 @@ IMAGECAPTURE_CLASS_AVAILABLE( 10_4, NA )
 }
 
 /*!
-    @property supportedDocumentTypes
-    @abstract ￼Supported document types. The values in this set are valid values defined by ICScannerDocumentType.
-
+  @property supportedDocumentTypes
+  @abstract ￼Supported document types. The values in this set are valid values defined by ICScannerDocumentType.
 */
-@property(readonly)   NSIndexSet*                   supportedDocumentTypes;
+@property (readonly) NSIndexSet* supportedDocumentTypes;
 
 /*!
-    @property documentType
-    @abstract ￼Current document type. This will always be one of the supported document types.
-
+  @property documentType
+  @abstract ￼Current document type. This will always be one of the supported document types.
 */
-@property(readwrite)  ICScannerDocumentType         documentType;
+@property (readwrite) ICScannerDocumentType documentType;
 
 /*!
-    @property documentSize
-    @abstract ￼Document size of the current document type expressed in current measurement unit.
-
+  @property documentSize
+  @abstract ￼Document size of the current document type expressed in current measurement unit.
 */
-@property(readonly) NSSize                          documentSize;
+@property (readonly) ICSize documentSize;
 
 @end
 
-//---------------------------------------------------------------------------------------- ICScannerFunctionalUnitDocumentFeeder
-/*!
-    @class ICScannerFunctionalUnitDocumentFeeder
-    @abstract ICScannerFunctionalUnitDocumentFeeder is a concrete subclass of ICScannerFunctionalUnit class. ICScannerDevice creates instances of this class.
-    @discussion This represents the document feeder unit on the scanner.
+    //---------------------------------------------------------------------------------------- ICScannerFunctionalUnitDocumentFeeder
+    /*!
+  @class ICScannerFunctionalUnitDocumentFeeder
+  @abstract ICScannerFunctionalUnitDocumentFeeder is a concrete subclass of ICScannerFunctionalUnit class. ICScannerDevice creates instances of this class.
+  @discussion This represents the document feeder unit on the scanner.
 */
 
-IMAGECAPTURE_CLASS_AVAILABLE( 10_4, NA )
+IC_AVAILABLE(macos(10.4)) IC_UNAVAILABLE(ios)
 @interface ICScannerFunctionalUnitDocumentFeeder : ICScannerFunctionalUnit
 {
 @private
@@ -843,70 +781,62 @@ IMAGECAPTURE_CLASS_AVAILABLE( 10_4, NA )
 }
 
 /*!
-    @property supportedDocumentTypes
-    @abstract ￼Supported document types. The values in this set are valid values defined by ICScannerDocumentType.
-
+  @property supportedDocumentTypes
+  @abstract ￼Supported document types. The values in this set are valid values defined by ICScannerDocumentType.
 */
-@property(readonly)   NSIndexSet*                   supportedDocumentTypes;
+@property (readonly) NSIndexSet* supportedDocumentTypes;
 
 /*!
-    @property documentType
-    @abstract ￼Current document type. This will always be one of the supported document types.
-
+  @property documentType
+  @abstract ￼Current document type. This will always be one of the supported document types.
 */
-@property(readwrite)  ICScannerDocumentType         documentType;
+@property (readwrite) ICScannerDocumentType documentType;
 
 /*!
-    @property documentSize
-    @abstract ￼Document size of the current document type expressed in current measurement unit.
-
+  @property documentSize
+  @abstract ￼Document size of the current document type expressed in current measurement unit.
 */
-@property(readonly) NSSize                          documentSize;
+@property (readonly) ICSize documentSize;
 
 /*!
-    @property supportsDuplexScanning
-    @abstract ￼Indicates whether duplex scanning is supported.
-
+  @property supportsDuplexScanning
+  @abstract ￼Indicates whether duplex scanning is supported.
 */
-@property(readonly)   BOOL                          supportsDuplexScanning;
+@property (readonly) BOOL supportsDuplexScanning;
 
 /*!
-    @property duplexScanningEnabled
-    @abstract ￼Indicates whether duplex scanning is enabled.
-
+  @property duplexScanningEnabled
+  @abstract ￼Indicates whether duplex scanning is enabled.
 */
-@property(readwrite)  BOOL                          duplexScanningEnabled;
+@property (readwrite) BOOL duplexScanningEnabled;
 
 /*!
-    @property documentLoaded
-    @abstract ￼Indicates whether the feeder has documents to scan.
-    @discussion This value will change when the document is loaded or removed from the feeder, if the scanner module has the capability to detect this state.
-
+  @property documentLoaded
+  @abstract ￼Indicates whether the feeder has documents to scan.
+  @discussion This value will change when the document is loaded or removed from the feeder, if the scanner module has the capability to detect this state.
 */
-@property(readonly)   BOOL                          documentLoaded;
+@property (readonly) BOOL documentLoaded;
 
 /*!
-    @property oddPageOrientation
-    @abstract ￼Desired orientation of the odd pages of the scanned document.
-    @discussion This property is set to ICEXIFOrientation1 initially. 
-
+  @property oddPageOrientation
+  @abstract ￼Desired orientation of the odd pages of the scanned document.
+  @discussion This property is set to ICEXIFOrientation1 initially.
 */
-@property(readwrite)  ICEXIFOrientationType         oddPageOrientation;
+@property (readwrite) ICEXIFOrientationType oddPageOrientation;
 
 /*!
-    @property evenPageOrientation
-    @abstract ￼Desired orientation of the even pages of the scanned document.
-    @discussion This property is set to ICEXIFOrientation1 initially. 
-
+  @property evenPageOrientation
+  @abstract ￼Desired orientation of the even pages of the scanned document.
+  @discussion This property is set to ICEXIFOrientation1 initially.
 */
-@property(readwrite)  ICEXIFOrientationType         evenPageOrientation;
+@property (readwrite) ICEXIFOrientationType evenPageOrientation;
 
 /*!
  @property reverseFeederPageOrder
  @abstract ￼Indicates whether the document feeder reads pages from back to front.
  
  */
-@property(readonly)   BOOL                          reverseFeederPageOrder;
+@property (readonly) BOOL reverseFeederPageOrder;
 
 NS_ASSUME_NONNULL_END
 

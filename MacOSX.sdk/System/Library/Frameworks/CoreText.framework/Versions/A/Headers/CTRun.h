@@ -447,6 +447,49 @@ CGAffineTransform CTRunGetTextMatrix(
 
 
 /*!
+    @function   CTRunGetBaseAdvancesAndOrigins
+    @abstract   Copies a range of base advances and/or origins into user-provided
+                buffers.
+
+    @discussion A run's base advances and origins determine the positions of its
+                glyphs but require additional processing before being used for
+                drawing. Similar to the advances returned by CTRunGetAdvances,
+                base advances are the displacement from the origin of a glyph
+                to the origin of the next glyph, except base advances do not
+                include any positioning the font layout tables may have done
+                relative to another glyph (such as a mark relative to its base).
+                The actual position of the current glyph is determined by the
+                displacement of its origin from the starting position, and the
+                position of the next glyph by the displacement of the current
+                glyph's base advance from the starting position.
+
+    @param      runRef
+                The run whose base advances and/or origins you wish to copy.
+
+    @param      range
+                The range of values to be copied. If the length of the
+                range is set to 0, then the copy operation will continue from the
+                range's start index to the end of the run.
+
+    @param      advancesBuffer
+                The buffer where the base advances will be copied to, or NULL.
+                If not NULL, the buffer must allow for at least as many elements
+                as specified by the range's length.
+
+    @param      originsBuffer
+                The buffer where the origins will be copied to, or NULL. If not
+                NULL, the buffer must allow for at least as many elements as
+                specified by the range's length.
+*/
+
+void CTRunGetBaseAdvancesAndOrigins(
+    CTRunRef runRef,
+    CFRange range,
+    CGSize advancesBuffer[_Nullable],
+    CGPoint originsBuffer[_Nullable] ) CT_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0));
+
+
+/*!
     @function   CTRunDraw
     @abstract   Draws a complete run or part of one.
 

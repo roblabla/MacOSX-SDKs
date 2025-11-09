@@ -1,8 +1,8 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 865AA5EC-E78E-38B4-A1AD-CCE3C3565157' ]
-platform:        macosx
-install-name:    /System/Library/PrivateFrameworks/AggregateDictionaryHistory.framework/Versions/A/AggregateDictionaryHistory
+uuids:           [ 'x86_64: 5EAC6A16-728F-37E8-A38B-B3B86725E524', 'x86_64: 5EAC6A16-728F-37E8-A38B-B3B86725E524' ]
+platform:        zippered
+install-name:    '/System/Library/PrivateFrameworks/AggregateDictionaryHistory.framework/Versions/A/AggregateDictionaryHistory'
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _ADDatabaseUtilitiesCleanUpCorruption, _ADHistoryCalculateSummaryStatistics, 

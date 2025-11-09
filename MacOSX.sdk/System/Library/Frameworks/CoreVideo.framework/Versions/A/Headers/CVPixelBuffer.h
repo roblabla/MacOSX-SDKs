@@ -101,6 +101,7 @@ enum
   kCVPixelFormatType_420YpCbCr10BiPlanarFullRange  = 'xf20', /* 2 plane YCbCr10 4:2:0, each 10 bits in the MSBs of 16bits, full-range (Y range 0-1023) */
   kCVPixelFormatType_422YpCbCr10BiPlanarFullRange  = 'xf22', /* 2 plane YCbCr10 4:2:2, each 10 bits in the MSBs of 16bits, full-range (Y range 0-1023) */
   kCVPixelFormatType_444YpCbCr10BiPlanarFullRange  = 'xf44', /* 2 plane YCbCr10 4:4:4, each 10 bits in the MSBs of 16bits, full-range (Y range 0-1023) */
+  kCVPixelFormatType_420YpCbCr8VideoRange_8A_TriPlanar   = 'v0a8', /* first and second planes as per 420YpCbCr8BiPlanarVideoRange (420v), alpha 8 bits in third plane full-range.  No CVPlanarPixelBufferInfo struct. */
 };
 
 	
@@ -159,10 +160,10 @@ CV_EXPORT const CFStringRef CV_NONNULL kCVPixelBufferCGImageCompatibilityKey API
 	CV_EXPORT const CFStringRef CV_NONNULL kCVPixelBufferOpenGLCompatibilityKey API_AVAILABLE(macosx(10.4), ios(4.0), tvos(9.0), watchos(4.0));   // CFBoolean
 CV_EXPORT const CFStringRef CV_NONNULL kCVPixelBufferPlaneAlignmentKey API_AVAILABLE(macosx(10.6), ios(4.0), tvos(9.0), watchos(4.0));		    // CFNumber
 CV_EXPORT const CFStringRef CV_NONNULL kCVPixelBufferIOSurfacePropertiesKey API_AVAILABLE(macosx(10.6), ios(4.0), tvos(9.0), watchos(4.0));     // CFDictionary; presence requests buffer allocation via IOSurface
-CV_EXPORT const CFStringRef CV_NONNULL kCVPixelBufferOpenGLESCompatibilityKey API_AVAILABLE(ios(6.0), tvos(9.0)) API_UNAVAILABLE(macosx) __WATCHOS_PROHIBITED;	    // CFBoolean
+CV_EXPORT const CFStringRef CV_NONNULL kCVPixelBufferOpenGLESCompatibilityKey API_AVAILABLE(ios(6.0), tvos(9.0)) API_UNAVAILABLE(macosx, macCatalyst) __WATCHOS_PROHIBITED;	    // CFBoolean
 CV_EXPORT const CFStringRef CV_NONNULL kCVPixelBufferMetalCompatibilityKey API_AVAILABLE(macosx(10.11), ios(8.0), tvos(9.0), watchos(4.0));	    // CFBoolean
 CV_EXPORT const CFStringRef CV_NONNULL kCVPixelBufferOpenGLTextureCacheCompatibilityKey API_AVAILABLE(macosx(10.11)) API_UNAVAILABLE(ios, tvos, watchos);
-CV_EXPORT const CFStringRef CV_NONNULL kCVPixelBufferOpenGLESTextureCacheCompatibilityKey API_AVAILABLE(ios(9.0), tvos(9.0)) API_UNAVAILABLE(macosx) __WATCHOS_PROHIBITED;
+CV_EXPORT const CFStringRef CV_NONNULL kCVPixelBufferOpenGLESTextureCacheCompatibilityKey API_AVAILABLE(ios(9.0), tvos(9.0)) API_UNAVAILABLE(macosx, macCatalyst) __WATCHOS_PROHIBITED;
 
 /*!
     @typedef	CVPixelBufferRef
@@ -253,7 +254,7 @@ CV_EXPORT CVReturn CVPixelBufferCreateWithBytes(
     CFDictionaryRef CV_NULLABLE pixelBufferAttributes,
     CV_RETURNS_RETAINED_PARAMETER CVPixelBufferRef CV_NULLABLE * CV_NONNULL pixelBufferOut) __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);
 
-typedef void (*CVPixelBufferReleasePlanarBytesCallback)( void * CV_NULLABLE releaseRefCon, const void * CV_NULLABLE dataPtr, size_t dataSize, size_t numberOfPlanes, const void * CV_NULLABLE planeAddresses[] );
+typedef void (*CVPixelBufferReleasePlanarBytesCallback)( void * CV_NULLABLE releaseRefCon, const void * CV_NULLABLE dataPtr, size_t dataSize, size_t numberOfPlanes, const void * CV_NULLABLE planeAddresses[CV_NULLABLE ] );
 
 /*!
     @function   CVPixelBufferCreateWithPlanarBytes
@@ -283,10 +284,10 @@ CV_EXPORT CVReturn CVPixelBufferCreateWithPlanarBytes(
     void * CV_NULLABLE dataPtr, // pass a pointer to a plane descriptor block, or NULL
     size_t dataSize, // pass size if planes are contiguous, NULL if not
     size_t numberOfPlanes,
-    void * CV_NULLABLE planeBaseAddress[],
-    size_t planeWidth[],
-    size_t planeHeight[],
-    size_t planeBytesPerRow[],
+    void * CV_NULLABLE planeBaseAddress[CV_NONNULL ],
+    size_t planeWidth[CV_NONNULL ],
+    size_t planeHeight[CV_NONNULL ],
+    size_t planeBytesPerRow[CV_NONNULL ],
     CVPixelBufferReleasePlanarBytesCallback CV_NULLABLE releaseCallback,
     void * CV_NULLABLE releaseRefCon,
     CFDictionaryRef CV_NULLABLE pixelBufferAttributes,

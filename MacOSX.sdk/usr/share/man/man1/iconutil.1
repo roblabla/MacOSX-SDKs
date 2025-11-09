@@ -9,9 +9,10 @@
 .Fl c Ar {icns | iconset}     
 .Op Fl o Ar file        
 .Ar file   
+.Op icon-name
 .Sh DESCRIPTION
 .Nm 
-converts between '.iconset' and '.icns' files. The tool takes a single source '.icns' file or '.iconset' and converts it to either a '.icns' or '.iconset' depending on the value of the
+converts between '.iconset' and '.icns' files, and can extract icons from '.car' asset catalog files. The tool takes a single source '.icns' file, '.iconset' or a '.car' file and icon name. It converts the input to either a '.icns' or '.iconset' depending on the value of the
 .Fl c 
 flag's argument.  
 It is possible to specify the name of the output file by passing the file path as the argument to the
@@ -20,7 +21,7 @@ flag. If
 .Fl o 
 is not set  
 .Nm 
-will write converted '.icns' file or '.iconset' to the same directory as the source file using the same file name with the correct extension for the output type.
+will write converted '.icns' file or '.iconset' to the same directory as the source file using either the name of the icon in the '.car' or the input file name with the extension derived from the output type.
 .Pp                    
 .Sh OPTIONS
 .Bl -tag -width -indent
@@ -28,11 +29,11 @@ will write converted '.icns' file or '.iconset' to the same directory as the sou
 Given the argument 
 .Ar iconset ,
 .Nm 
-converts the source '.icns' file to an '.iconset'.  The '.iconset' is saved in the same directory as the source '.icns'. It is given the same file name as but with the '.iconset' file extension.
+converts the source '.icns' file to an '.iconset'.  The '.iconset' is saved in the same directory as the source '.icns'. It is given a file name derived from the input file name or the input icon name with the '.iconset' file extension.
 If the argument is
 .Ar icns ,
 .Nm 
-converts the source '.iconset' to an '.icns'.  The '.icns' is saved in the same directory as the source '.iconset'. It is given the same file name as the source file but with the '.iconset' file extension.
+converts the source '.iconset' to an '.icns'.  The '.icns' is saved in the same directory as the source '.iconset'. It is given a file name derived from the input file name or the input icon name with the '.iconset' file extension.
 .It Fl o Fl Fl output
 Overrides the default output file name that
 .Nm

@@ -1,5 +1,5 @@
 /*	NSXMLElement.h
-	Copyright (c) 2004-2018, Apple Inc. All rights reserved.
+	Copyright (c) 2004-2019, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSXMLNode.h>
@@ -201,7 +201,7 @@ NS_ASSUME_NONNULL_BEGIN
     @abstract Set the attributes base on a name-value dictionary.
     @discussion This method is deprecated and does not function correctly. Use -setAttributesWithDictionary: instead.
  */
-- (void)setAttributesAsDictionary:(NSDictionary *)attributes;
+- (void)setAttributesAsDictionary:(NSDictionary *)attributes API_DEPRECATED_WITH_REPLACEMENT("setAttributesWithDictionary:", macos(10.0, API_TO_BE_DEPRECATED), ios(2.0, API_TO_BE_DEPRECATED), watchos(2.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED));
 @end
 
 NS_ASSUME_NONNULL_END

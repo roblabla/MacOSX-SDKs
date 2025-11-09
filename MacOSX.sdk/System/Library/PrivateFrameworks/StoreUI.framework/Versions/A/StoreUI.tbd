@@ -1,16 +1,20 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: BE13E7F6-A139-3A2A-8D3C-9CC41C2B3770' ]
+uuids:           [ 'x86_64: 384FEA76-F2AC-3AC8-B891-6087132C8DC6' ]
 platform:        macosx
-install-name:    /System/Library/PrivateFrameworks/StoreUI.framework/Versions/A/StoreUI
+install-name:    '/System/Library/PrivateFrameworks/StoreUI.framework/Versions/A/StoreUI'
 current-version: 379
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _FRBundleAppIsFrontmostChangedEvent, _FRBundleAuthenticateFinishedEvent, 
                        _FRBundleUserChangedEvent, _FRBundleViewDidBecomeVisibleEvent, 
                        _FRBundleViewWillBeHiddenEvent, _FRCachesDirectory, _FRDefaultPagesToolbarItemIdentifier, 
-                       _FRDefaultProgressToolbarItemIdentifier, _FRLocalizedString, 
-                       _FRParentalControl_MCXIdentifier, _FRParentalControl_RestrictPurchaseKey, 
+                       _FRDefaultProgressToolbarItemIdentifier, _FRJSCodeRedeemerFunctionNameFadeIn, 
+                       _FRJSCodeRedeemerFunctionNameFadeOut, _FRJSCodeRedeemerFunctionNameRestart, 
+                       _FRJSCodeRedeemerFunctionNameSetFadeDuration, _FRJSCodeRedeemerFunctionNameSetSessionTimeout, 
+                       _FRJSCodeRedeemerFunctionNameShowStatus, _FRJSCodeRedeemerFunctionNameShutdown, 
+                       _FRJSCodeRedeemerFunctionNameStop, _FRJSCodeRedeemerPropertyNameIsSupported, 
+                       _FRLocalizedString, _FRParentalControl_MCXIdentifier, _FRParentalControl_RestrictPurchaseKey, 
                        _FRParentalControl_RestrictPurchaseLimitKey, _FRParentalControl_iTunesGamesLimitKey, 
                        _FRParentalControl_iTunesRestrictGamesKey, _FRStoreReachabilityChangedNotification, 
                        _FRTabItemUserInfoPostDataKey, _FRTabItemUserInfoReferrerKey, 
@@ -21,10 +25,10 @@ exports:
                        _NSBackFrontToolbarItemIdentifier, _NSSearchToolbarItemIdentifier, 
                        _gAuthorized ]
     objc-classes:    [ FRContentViewController, FRJSAccount, FRJSAccountCreationSecureContext, 
-                       FRJSAppleAccountStore, FRJSFacebookSession, FRJSHistory, FRJSRootObject, 
-                       FRJSStorage, FRJSWindow, FRManagedUser, FRPageToolbarView, 
-                       FRParentalControlPreferencesModule, FRPreferencesModule, FRSearchField, 
-                       FRSharingHelper, FRStoreReachability, FRStoreWebViewController, 
+                       FRJSAppleAccountStore, FRJSCodeRedeemer, FRJSFacebookSession, 
+                       FRJSHistory, FRJSRootObject, FRJSStorage, FRJSWindow, FRManagedUser, 
+                       FRPageToolbarView, FRParentalControlPreferencesModule, FRPreferencesModule, 
+                       FRSearchField, FRSharingHelper, FRStoreReachability, FRStoreWebViewController, 
                        FRSuggester, FRTabBarItem, FRTabBarItemBadgedIcon, FRToolbarButton, 
                        FRToolbarManager, FRViewNavigationController, FRWKView, FRWindowBackgroundView, 
                        _FRWKLocalIconProtocol ]

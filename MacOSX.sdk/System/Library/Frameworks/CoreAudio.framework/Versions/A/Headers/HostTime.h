@@ -27,11 +27,7 @@
 #pragma mark Includes
 
 #include <Availability.h>
-#if !defined(__COREAUDIO_USE_FLAT_INCLUDES__)
-    #include <CoreAudio/CoreAudioTypes.h>
-#else
-    #include <CoreAudioTypes.h>
-#endif
+#include <CoreAudioTypes/CoreAudioTypes.h>
 
 //==================================================================================================
 
@@ -54,7 +50,7 @@ extern "C"
     @result         A UInt64 containing the current host time.
 */
 extern UInt64
-AudioGetCurrentHostTime()                                                                           __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_2_0);
+AudioGetCurrentHostTime(void)                                                                       __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_2_0);
 
 /*!
     @function       AudioGetHostClockFrequency
@@ -62,7 +58,7 @@ AudioGetCurrentHostTime()                                                       
     @result         A Float64 containing the number of ticks per second in the host time base.
 */
 extern Float64
-AudioGetHostClockFrequency()                                                                        __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_2_0);
+AudioGetHostClockFrequency(void)                                                                    __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_2_0);
 
 /*!
     @function       AudioGetHostClockMinimumTimeDelta
@@ -72,7 +68,7 @@ AudioGetHostClockFrequency()                                                    
                     ever differ.
 */
 extern UInt32
-AudioGetHostClockMinimumTimeDelta()                                                                 __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_2_0);
+AudioGetHostClockMinimumTimeDelta(void)                                                             __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_2_0);
 
 /*!
     @function       AudioConvertHostTimeToNanos

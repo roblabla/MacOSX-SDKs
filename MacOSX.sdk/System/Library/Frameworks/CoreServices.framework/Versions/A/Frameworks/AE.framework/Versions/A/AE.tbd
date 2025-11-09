@@ -1,13 +1,15 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: BBFEAB6C-B1F9-3D22-934E-8298155AC459' ]
-platform:        macosx
-install-name:    /System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/AE.framework/Versions/A/AE
-current-version: 771
-objc-constraint: none
+uuids:           [ 'x86_64: 0DF53735-58DB-354B-9BC2-F8B0ED698782', 'x86_64: 0DF53735-58DB-354B-9BC2-F8B0ED698782' ]
+platform:        zippered
+install-name:    '/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/AE.framework/Versions/A/AE'
+current-version: 835.1
+compatibility-version: 0
 parent-umbrella: CoreServices
 exports:         
   - archs:           [ x86_64 ]
+    allowable-clients: [ DesktopServices, Foundation, HIServices, LaunchServices, 
+                         PrintCore ]
     symbols:         [ _AEBuildAppleEvent, _AEBuildDesc, _AEBuildParameters, _AECallObjectAccessor, 
                        _AECheckIsRecord, _AECoerceDesc, _AECoercePtr, _AECoercionHandlersApplyFunction, 
                        _AECompareDesc, _AEConvertFromMsg, _AECountItems, _AECreateAppleEvent, 
@@ -49,9 +51,9 @@ exports:
                        __AEDescRecordIndexedItem, __AEDescToInternalImpl, __AEDoesAppleEventContainAnyTypesWhichRequireAnnotation, 
                        __AEEventDescGetInformation, __AEEventRequiresSecurityHandlerChecks, 
                        __AEEventSecurityHandlerDoChecks, __AEGenerateAnnotations, 
-                       __AEGetSKServiceDescription, __AEInstallEventHandlerBlock, 
-                       __AEInstallEventSecurityHandler, __AEInstallEventSecurityHandlerBlock, 
-                       __AEIsAppleEventTargetInSandbox, __AERegisterCurrentApplicationInfomationWithAppleEventsD, 
+                       __AEInstallEventHandlerBlock, __AEInstallEventSecurityHandler, 
+                       __AEInstallEventSecurityHandlerBlock, __AEIsAppleEventTargetInSandbox, 
+                       __AERegisterCurrentApplicationInfomationWithAppleEventsD, 
                        __AERemoveAEReceivePort, __AERemoveEventSecurityHandler, __AEUnflattenDescFromBytes, 
                        __AppleEventsCheckInApp, __AppleEventsCheckInAppWithBlock, 
                        __AppleEventsCopyApplicationEntitlements, __AppleEventsCopyApplicationEntitlementsWithBlock, 

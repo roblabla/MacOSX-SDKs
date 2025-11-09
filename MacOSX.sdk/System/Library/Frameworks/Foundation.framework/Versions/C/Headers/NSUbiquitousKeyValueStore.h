@@ -1,5 +1,5 @@
 /*	NSUbiquitousKeyValueStore.h
-	Copyright (c) 2011-2018, Apple Inc. All rights reserved.
+	Copyright (c) 2011-2019, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -9,7 +9,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-NS_CLASS_AVAILABLE(10_7, 5_0) __WATCHOS_PROHIBITED
+API_AVAILABLE(macos(10.7), ios(5.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 @interface NSUbiquitousKeyValueStore : NSObject {
 @private
     id _private1;
@@ -18,7 +18,7 @@ NS_CLASS_AVAILABLE(10_7, 5_0) __WATCHOS_PROHIBITED
     void *_private4;
     void *_reserved[3];
     int _daemonWakeToken;
-#if DEPLOYMENT_TARGET_MACOSX
+#if TARGET_OS_OSX || TARGET_OS_MACCATALYST
     BOOL _disabledSuddenTermination;
 #endif
 }

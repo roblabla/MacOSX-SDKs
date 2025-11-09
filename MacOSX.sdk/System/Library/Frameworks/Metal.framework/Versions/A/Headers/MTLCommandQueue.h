@@ -32,6 +32,7 @@ API_AVAILABLE(macos(10.11), ios(8.0))
 */
 - (nullable id <MTLCommandBuffer>)commandBuffer;
 
+
 /*!
  @method commandBufferWithUnretainedReferences
  @abstract Returns a new autoreleased command buffer used to encode work into this queue that 
@@ -46,4 +47,5 @@ API_AVAILABLE(macos(10.11), ios(8.0))
 - (void)insertDebugCaptureBoundary API_DEPRECATED("Use MTLCaptureScope instead", macos(10.11, 10.13), ios(8.0, 11.0));
 
 @end
+
 NS_ASSUME_NONNULL_END

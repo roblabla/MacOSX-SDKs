@@ -1,21 +1,28 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 922102BF-0F85-3396-910B-B27255F15A4F' ]
-platform:        macosx
-install-name:    /System/Library/PrivateFrameworks/SymptomDiagnosticReporter.framework/Versions/A/SymptomDiagnosticReporter
-current-version: 820.227.2
+uuids:           [ 'x86_64: BE499ACD-18B5-3D45-95B3-BE9A98FB099D', 'x86_64: BE499ACD-18B5-3D45-95B3-BE9A98FB099D' ]
+platform:        zippered
+install-name:    '/System/Library/PrivateFrameworks/SymptomDiagnosticReporter.framework/Versions/A/SymptomDiagnosticReporter'
+current-version: 1238.0.2
 exports:         
   - archs:           [ x86_64 ]
-    symbols:         [ _kAutoBugCaptureStatusKeyAPNSEnable, _kAutoBugCaptureStatusKeyAPNSEnvironment, 
-                       _kAutoBugCaptureStatusKeyAPNSToken, _kDebuggabilityPath, _kDiagnosticCaseSummaryKeyAttachments, 
+    symbols:         [ _SDRGetAllLogFileURLs, _diagnosticErrorStringForCode, _kAutoBugCaptureStatusKeyAPNSEnable, 
+                       _kAutoBugCaptureStatusKeyAPNSEnvironment, _kAutoBugCaptureStatusKeyAPNSToken, 
+                       _kDebuggabilityPath, _kDiagnosticCaseSummaryKeyAttachments, 
                        _kDiagnosticCaseSummaryKeyCaseIdentifier, _kDiagnosticCaseSummaryKeyCaseStatus, 
                        _kDiagnosticCaseSummaryKeyCaseStatusCaseClosedTime, _kDiagnosticCaseSummaryKeyCaseStatusCaseClosedTimestamp, 
                        _kDiagnosticCaseSummaryKeyCaseStatusCaseOpenedTime, _kDiagnosticCaseSummaryKeyCaseStatusCaseOpenedTimestamp, 
                        _kDiagnosticCaseSummaryKeyCaseStatusClosureType, _kDiagnosticCaseSummaryKeyCaseStatusDampeningType, 
                        _kDiagnosticCaseSummaryKeyCaseStatusRemoteTrigger, _kDiagnosticCaseSummaryKeyEvent, 
+                       _kDiagnosticCaseSummaryKeyNetworkProperties, _kDiagnosticCaseSummaryKeyNetworkPropertiesPrimaryInterfaceTime, 
+                       _kDiagnosticCaseSummaryKeyNetworkPropertiesPrimaryInterfaceTimeEstimated, 
+                       _kDiagnosticCaseSummaryKeyNetworkPropertiesPrimaryInterfaceTimestamp, 
+                       _kDiagnosticCaseSummaryKeyNetworkPropertiesPrimaryInterfaceTimestampEstimated, 
+                       _kDiagnosticCaseSummaryKeyNetworkPropertiesPrimaryInterfaceType, 
                        _kDiagnosticCaseSummaryKeySignature, _kDiagnosticCaseSummaryKeySystemProperties, 
-                       _kDiagnosticCaseSummaryKeySystemPropertiesBuildVersion, _kDiagnosticCaseSummaryKeySystemPropertiesProductName, 
-                       _kDiagnosticCaseSummaryKeySystemPropertiesProductType, _kDiagnosticCaseSummaryKeySystemPropertiesProductVersion, 
+                       _kDiagnosticCaseSummaryKeySystemPropertiesBuildVariant, _kDiagnosticCaseSummaryKeySystemPropertiesBuildVersion, 
+                       _kDiagnosticCaseSummaryKeySystemPropertiesProductName, _kDiagnosticCaseSummaryKeySystemPropertiesProductType, 
+                       _kDiagnosticCaseSummaryKeySystemPropertiesProductVersion, 
                        _kExpertSystemStatusKeyActiveCases, _kExpertSystemStatusKeyAutoBugCaptureAdministrator, 
                        _kExpertSystemStatusKeyAverageCasesPerDay, _kExpertSystemStatusKeyCLIPSModules, 
                        _kExpertSystemStatusKeyFailedToLoadDefaultRules, _kExpertSystemStatusKeyHasOpenCases, 
@@ -64,8 +71,9 @@ exports:
                        _kSymptomDiagnosticPayloadTypeFile, _kSymptomDiagnosticPayloadTypeGetNetworkInfo, 
                        _kSymptomDiagnosticPayloadTypeLogArchive, _kSymptomDiagnosticPayloadTypePacketCapture, 
                        _kSymptomDiagnosticPayloadTypePlist, _kSymptomDiagnosticReplyGroupID, 
-                       _kSymptomDiagnosticReplyReason, _kSymptomDiagnosticReplySessionID, 
-                       _kSymptomDiagnosticReplySuccess, _kSymptomDiagnosticReporterPayloadCollectionWindow, 
+                       _kSymptomDiagnosticReplyReason, _kSymptomDiagnosticReplyReasonString, 
+                       _kSymptomDiagnosticReplySessionID, _kSymptomDiagnosticReplySuccess, 
+                       _kSymptomDiagnosticReporterPayloadCollectionWindow, _kSymptomDiagnosticSignatureBuildVariant, 
                        _kSymptomDiagnosticSignatureBundleIdentifier, _kSymptomDiagnosticSignatureCaseGroupID, 
                        _kSymptomDiagnosticSignatureContext, _kSymptomDiagnosticSignatureDetectedProcess, 
                        _kSymptomDiagnosticSignatureDomain, _kSymptomDiagnosticSignatureEffectiveProcess, 

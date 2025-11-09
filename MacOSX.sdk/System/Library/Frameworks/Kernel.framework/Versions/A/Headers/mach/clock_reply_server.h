@@ -60,6 +60,10 @@ typedef function_table_entry   *function_table_t;
 __BeforeMigServerHeader
 #endif /* __BeforeMigServerHeader */
 
+#ifndef MIG_SERVER_ROUTINE
+#define MIG_SERVER_ROUTINE
+#endif
+
 
 /* SimpleRoutine clock_alarm_reply */
 #ifdef	mig_external
@@ -67,6 +71,7 @@ mig_external
 #else
 extern
 #endif	/* mig_external */
+MIG_SERVER_ROUTINE
 kern_return_t clock_alarm_reply
 (
 	clock_reply_t alarm_port,
@@ -110,7 +115,7 @@ extern const struct clock_reply_subsystem {
 #define __Request__clock_reply_subsystem__defined
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -120,7 +125,7 @@ extern const struct clock_reply_subsystem {
 		mach_timespec_t alarm_time;
 	} __Request__clock_alarm_reply_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 #endif /* !__Request__clock_reply_subsystem__defined */
 
@@ -139,7 +144,7 @@ union __RequestUnion__clock_reply_subsystem {
 #define __Reply__clock_reply_subsystem__defined
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -147,7 +152,7 @@ union __RequestUnion__clock_reply_subsystem {
 		kern_return_t RetCode;
 	} __Reply__clock_alarm_reply_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 #endif /* !__Reply__clock_reply_subsystem__defined */
 
@@ -159,7 +164,7 @@ union __RequestUnion__clock_reply_subsystem {
 union __ReplyUnion__clock_reply_subsystem {
 	__Reply__clock_alarm_reply_t Reply_clock_alarm_reply;
 };
-#endif /* __RequestUnion__clock_reply_subsystem__defined */
+#endif /* __ReplyUnion__clock_reply_subsystem__defined */
 
 #ifndef subsystem_to_name_map_clock_reply
 #define subsystem_to_name_map_clock_reply \

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015, 2018 Apple Inc.
+ * Copyright (c) 2015, 2018, 2019 Apple Inc.
  * All rights reserved.
  */
 
@@ -50,6 +50,8 @@ typedef NS_ENUM(NSInteger, NETunnelProviderRoutingMethod) {
 	NETunnelProviderRoutingMethodDestinationIP = 1,
 	/*! @const NETunnelProviderRoutingMethodSourceApplication Route network traffic to the tunnel based on source application */
 	NETunnelProviderRoutingMethodSourceApplication = 2,
+	/*! @const NETunnelProviderRoutingMethodNetworkRule Route traffic to the tunnel (or proxy) based on NENetworkRule objects specified by the provider */
+	NETunnelProviderRoutingMethodNetworkRule API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, watchos, tvos) = 3,
 } API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(watchos, tvos);
 
 

@@ -1,7 +1,7 @@
 /*
     NSManagedObjectContext.h
     Core Data
-    Copyright (c) 2004-2018, Apple Inc.
+    Copyright (c) 2004-2019, Apple Inc.
     All rights reserved.
 */
 
@@ -70,70 +70,6 @@ typedef NS_ENUM(NSUInteger, NSManagedObjectContextConcurrencyType) {
 
 API_AVAILABLE(macosx(10.4),ios(3.0))
 @interface NSManagedObjectContext : NSObject <NSCoding, NSLocking> {
-#if (!__OBJC2__)
-@private
-  volatile id _queueOwner;
-  void *_dispatchQueue;
-  void* _reserved1;
-  int32_t _spinLock;
-  id _parentObjectStore;
-  struct _managedObjectContextFlags {
-      unsigned int _registeredForCallback:1;
-      unsigned int _propagatesDeletesAtEndOfEvent:1;
-      unsigned int _exhaustiveValidation:1;
-      unsigned int _processingChanges:1;
-      unsigned int _useCommittedSnapshot:1;
-      unsigned int _registeredUndoTransactionID:1;
-      unsigned int _retainsAllRegisteredObjects:1;
-      unsigned int _savingInProgress:1;
-      unsigned int _wasDisposed:1;
-      unsigned int _unprocessedChangesPending:1;
-      unsigned int _isDirty:1;
-      unsigned int _ignoreUndoCheckpoints:1;
-	  unsigned int _propagatingDeletes:1;
-	  unsigned int _isNSEditorEditing:1;
-      unsigned int _isMainThreadBlessed:1;
-      unsigned int _isImportContext:1;
-      unsigned int _preflightSaveInProgress:1;
-      unsigned int _disableDiscardEditing:1;
-      unsigned int _isParentStoreContext:1;
-      unsigned int _postSaveNotifications:1;
-      unsigned int _isMerging:1;
-      unsigned int _concurrencyType:1;
-      unsigned int _deleteInaccessible:1;
-      unsigned int _priority:2;
-      unsigned int _autoMerge:1;
-      unsigned int _isXPCServerContext:1;
-      unsigned int _pushSecureDelete:1;
-      unsigned int _refreshAfterSave:1;
-      unsigned int _allowAncillary:1;
-      unsigned int _reservedFlags:2;
-  } _flags;
-  NSMutableSet *_unprocessedChanges;
-  NSMutableSet *_unprocessedDeletes;
-  NSMutableSet *_unprocessedInserts;
-  NSMutableSet *_insertedObjects;
-  NSMutableSet *_deletedObjects;
-  NSMutableSet *_changedObjects;
-  NSMutableSet *_lockedObjects;
-  NSMutableSet *_refreshedObjects;
-  id _infoByGID;
-  id* _cachedObsInfoByEntity;
-  short _undoTransactionID;
-  id _lock;
-  long _lockCount;
-  long _objectStoreLockCount;
-  NSTimeInterval _fetchTimestamp;
-  intptr_t _referenceCallbackRegistration;
-  id _referenceQueue;
-  id _reserved3;
-  id _reserved4;
-  int32_t _cd_rc;
-  int32_t _ignoreChangeNotification;
-  id _reserved6;
-  NSString* _contextLabel;
-  id* _additionalPrivateIvars;
-#endif
 }
 
 + (instancetype)new API_DEPRECATED( "Use -initWithConcurrencyType: instead", macosx(10.4,10.11), ios(3.0,9.0));

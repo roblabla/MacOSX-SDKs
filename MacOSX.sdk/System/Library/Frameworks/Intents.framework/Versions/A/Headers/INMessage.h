@@ -2,7 +2,7 @@
 //  INMessage.h
 //  Intents
 //
-//  Copyright (c) 2016-2017 Apple Inc. All rights reserved.
+//  Copyright (c) 2016-2019 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -32,16 +32,17 @@ typedef NS_ENUM(NSInteger, INMessageType) {
     INMessageTypeMediaVideo,
     INMessageTypeMediaPass,
     INMessageTypeMediaAudio,
-    INMessageTypePaymentSent API_AVAILABLE(macosx(10.14), ios(12.0), watchos(5.0)),
-    INMessageTypePaymentRequest API_AVAILABLE(macosx(10.14), ios(12.0), watchos(5.0)),
-    INMessageTypePaymentNote API_AVAILABLE(macosx(10.14), ios(12.0), watchos(5.0)),
-    INMessageTypeAnimoji API_AVAILABLE(macosx(10.14), ios(12.0), watchos(5.0)),
-    INMessageTypeActivitySnippet API_AVAILABLE(macosx(10.14), ios(12.0), watchos(5.0)),
-    INMessageTypeFile API_AVAILABLE(macosx(10.14), ios(12.0), watchos(5.0)),
-    INMessageTypeLink API_AVAILABLE(macosx(10.14), ios(12.0), watchos(5.0)),
-} API_AVAILABLE(macosx(10.13), ios(11.0), watchos(4.0));
+    INMessageTypePaymentSent API_AVAILABLE(ios(12.0), watchos(5.0)) API_UNAVAILABLE(macosx),
+    INMessageTypePaymentRequest API_AVAILABLE(ios(12.0), watchos(5.0)) API_UNAVAILABLE(macosx),
+    INMessageTypePaymentNote API_AVAILABLE(ios(12.0), watchos(5.0)) API_UNAVAILABLE(macosx),
+    INMessageTypeAnimoji API_AVAILABLE(ios(12.0), watchos(5.0)) API_UNAVAILABLE(macosx),
+    INMessageTypeActivitySnippet API_AVAILABLE(ios(12.0), watchos(5.0)) API_UNAVAILABLE(macosx),
+    INMessageTypeFile API_AVAILABLE(ios(12.0), watchos(5.0)) API_UNAVAILABLE(macosx),
+    INMessageTypeLink API_AVAILABLE(ios(12.0), watchos(5.0)) API_UNAVAILABLE(macosx),
+} API_AVAILABLE(ios(11.0), watchos(4.0)) API_UNAVAILABLE(macosx);
 
-API_AVAILABLE(macosx(10.12), ios(10.0), watchos(3.2))
+API_AVAILABLE(ios(10.0), watchos(3.2))
+API_UNAVAILABLE(macosx)
 @interface INMessage : NSObject <NSCopying, NSSecureCoding>
 
 - (id)init NS_UNAVAILABLE;
@@ -53,7 +54,7 @@ API_AVAILABLE(macosx(10.12), ios(10.0), watchos(3.2))
                             sender:(nullable INPerson *)sender
                         recipients:(nullable NSArray<INPerson *> *)recipients
                          groupName:(nullable INSpeakableString *)groupName
-                       messageType:(INMessageType)messageType NS_DESIGNATED_INITIALIZER API_AVAILABLE(macosx(10.13), ios(11.0), watchos(4.0));
+                       messageType:(INMessageType)messageType NS_DESIGNATED_INITIALIZER API_AVAILABLE(ios(11.0), watchos(4.0)) API_UNAVAILABLE(macosx);
 
 - (instancetype)initWithIdentifier:(NSString *)identifier
             conversationIdentifier:(nullable NSString *)conversationIdentifier
@@ -61,7 +62,7 @@ API_AVAILABLE(macosx(10.12), ios(10.0), watchos(3.2))
                           dateSent:(nullable NSDate *)dateSent
                             sender:(nullable INPerson *)sender
                         recipients:(nullable NSArray<INPerson *> *)recipients
-                       messageType:(INMessageType)messageType API_AVAILABLE(macosx(10.13), ios(11.0), watchos(4.0));
+                       messageType:(INMessageType)messageType API_AVAILABLE(ios(11.0), watchos(4.0)) API_UNAVAILABLE(macosx);
 
 - (instancetype)initWithIdentifier:(NSString *)identifier
                            content:(nullable NSString *)content
@@ -71,7 +72,7 @@ API_AVAILABLE(macosx(10.12), ios(10.0), watchos(3.2))
 
 @property (readonly, copy, NS_NONATOMIC_IOSONLY) NSString *identifier;
 
-@property (readonly, copy, nullable, NS_NONATOMIC_IOSONLY) NSString *conversationIdentifier API_AVAILABLE(macosx(10.13), ios(11.0), watchos(4.0));
+@property (readonly, copy, nullable, NS_NONATOMIC_IOSONLY) NSString *conversationIdentifier API_AVAILABLE(ios(11.0), watchos(4.0)) API_UNAVAILABLE(macosx);
 
 @property (readonly, copy, nullable, NS_NONATOMIC_IOSONLY) NSString *content;
 
@@ -81,9 +82,9 @@ API_AVAILABLE(macosx(10.12), ios(10.0), watchos(3.2))
 
 @property (readonly, copy, nullable, NS_NONATOMIC_IOSONLY) NSArray<INPerson *> *recipients;
 
-@property (readonly, copy, nullable, NS_NONATOMIC_IOSONLY) INSpeakableString *groupName API_AVAILABLE(macosx(10.13), ios(11.0), watchos(4.0));
+@property (readonly, copy, nullable, NS_NONATOMIC_IOSONLY) INSpeakableString *groupName API_AVAILABLE(ios(11.0), watchos(4.0)) API_UNAVAILABLE(macosx);
 
-@property (readonly, NS_NONATOMIC_IOSONLY) INMessageType messageType API_AVAILABLE(macosx(10.13), ios(11.0), watchos(4.0));
+@property (readonly, NS_NONATOMIC_IOSONLY) INMessageType messageType API_AVAILABLE(ios(11.0), watchos(4.0)) API_UNAVAILABLE(macosx);
 
 @end
 

@@ -1,5 +1,5 @@
 /*	NSData.h
-	Copyright (c) 1994-2018, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2019, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -17,23 +17,23 @@ typedef NS_OPTIONS(NSUInteger, NSDataReadingOptions) {
     NSDataReadingMappedAlways API_AVAILABLE(macos(10.7), ios(5.0), watchos(2.0), tvos(9.0)) = 1UL << 3,	// Hint to map the file in if possible. This takes precedence over NSDataReadingMappedIfSafe if both are given.
     
     // Options with old names for NSData reading methods. Please stop using these old names.
-    NSDataReadingMapped = NSDataReadingMappedIfSafe,	// Deprecated name for NSDataReadingMappedIfSafe
-    NSMappedRead = NSDataReadingMapped,			// Deprecated name for NSDataReadingMapped
-    NSUncachedRead = NSDataReadingUncached		// Deprecated name for NSDataReadingUncached
+    NSDataReadingMapped API_DEPRECATED_WITH_REPLACEMENT("NSDataReadingMappedIfSafe", macos(10.0, API_TO_BE_DEPRECATED), ios(2.0, API_TO_BE_DEPRECATED), watchos(2.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED)) = NSDataReadingMappedIfSafe,	// Deprecated name for NSDataReadingMappedIfSafe
+    NSMappedRead API_DEPRECATED_WITH_REPLACEMENT("NSDataReadingMapped", macos(10.0, API_TO_BE_DEPRECATED), ios(2.0, API_TO_BE_DEPRECATED), watchos(2.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED)) = NSDataReadingMapped,			// Deprecated name for NSDataReadingMapped
+    NSUncachedRead API_DEPRECATED_WITH_REPLACEMENT("NSDataReadingUncached", macos(10.0, API_TO_BE_DEPRECATED), ios(2.0, API_TO_BE_DEPRECATED), watchos(2.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED)) = NSDataReadingUncached		// Deprecated name for NSDataReadingUncached
 };
 
 typedef NS_OPTIONS(NSUInteger, NSDataWritingOptions) {
     NSDataWritingAtomic = 1UL << 0,	// Hint to use auxiliary file when saving; equivalent to atomically:YES
     NSDataWritingWithoutOverwriting API_AVAILABLE(macos(10.8), ios(6.0), watchos(2.0), tvos(9.0)) = 1UL << 1, // Hint to  prevent overwriting an existing file. Cannot be combined with NSDataWritingAtomic.
 
-    NSDataWritingFileProtectionNone NS_ENUM_AVAILABLE_IOS(4_0)                                  = 0x10000000,
-    NSDataWritingFileProtectionComplete NS_ENUM_AVAILABLE_IOS(4_0)                              = 0x20000000,
-    NSDataWritingFileProtectionCompleteUnlessOpen NS_ENUM_AVAILABLE_IOS(5_0)                    = 0x30000000,
-    NSDataWritingFileProtectionCompleteUntilFirstUserAuthentication NS_ENUM_AVAILABLE_IOS(5_0)  = 0x40000000,
-    NSDataWritingFileProtectionMask NS_ENUM_AVAILABLE_IOS(4_0)                                  = 0xf0000000,
+    NSDataWritingFileProtectionNone API_AVAILABLE(ios(4.0), watchos(2.0), tvos(9.0)) API_UNAVAILABLE(macos)                                  = 0x10000000,
+    NSDataWritingFileProtectionComplete API_AVAILABLE(ios(4.0), watchos(2.0), tvos(9.0)) API_UNAVAILABLE(macos)                              = 0x20000000,
+    NSDataWritingFileProtectionCompleteUnlessOpen API_AVAILABLE(ios(5.0), watchos(2.0), tvos(9.0)) API_UNAVAILABLE(macos)                    = 0x30000000,
+    NSDataWritingFileProtectionCompleteUntilFirstUserAuthentication API_AVAILABLE(ios(5.0), watchos(2.0), tvos(9.0)) API_UNAVAILABLE(macos)  = 0x40000000,
+    NSDataWritingFileProtectionMask API_AVAILABLE(ios(4.0), watchos(2.0), tvos(9.0)) API_UNAVAILABLE(macos)                                  = 0xf0000000,
 
     // Options with old names for NSData writing methods. Please stop using these old names.
-    NSAtomicWrite = NSDataWritingAtomic	    // Deprecated name for NSDataWritingAtomic
+    NSAtomicWrite API_DEPRECATED_WITH_REPLACEMENT("NSDataWritingAtomic", macos(10.0, API_TO_BE_DEPRECATED), ios(2.0, API_TO_BE_DEPRECATED), watchos(2.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED)) = NSDataWritingAtomic	    // Deprecated name for NSDataWritingAtomic
 };
 
 
@@ -142,6 +142,36 @@ typedef NS_OPTIONS(NSUInteger, NSDataBase64DecodingOptions) {
 
 @end
 
+/* Various algorithms provided for compression APIs. See NSData and NSMutableData.
+ */
+typedef NS_ENUM(NSInteger, NSDataCompressionAlgorithm) {
+    
+    // LZFSE is the recommended compression algorithm if you don't have a specific reason to use another algorithm. Note that LZFSE is intended for use with Apple devices only. This algorithm generally compresses better than Zlib, but not as well as LZMA. It is generally slower than LZ4.
+    NSDataCompressionAlgorithmLZFSE = 0,
+    
+    // LZ4 is appropriate if compression speed is critical. LZ4 generally sacrifices compression ratio in order to achieve its greater speed.
+    // This implementation of LZ4 makes a small modification to the standard format, which is described in greater detail in <compression.h>.
+    NSDataCompressionAlgorithmLZ4,
+    
+    // LZMA is appropriate if compression ratio is critical and memory usage and compression speed are not a factor. LZMA is an order of magnitude slower for both compression and decompression than other algorithms. It can also use a very large amount of memory, so if you need to compress large amounts of data on embedded devices with limited memory you should probably avoid LZMA.
+    // Encoding uses LZMA level 6 only, but decompression works with any compression level.
+    NSDataCompressionAlgorithmLZMA,
+    
+    // Zlib is appropriate if you want a good balance between compression speed and compression ratio, but only if you need interoperability with non-Apple platforms. Otherwise, LZFSE is generally a better choice than Zlib.
+    // Encoding uses Zlib level 5 only, but decompression works with any compression level. It uses the raw DEFLATE format as described in IETF RFC 1951.
+    NSDataCompressionAlgorithmZlib,
+    
+} API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0));
+
+@interface NSData (NSDataCompression)
+
+/* These methods return a compressed or decompressed version of the receiver using the specified algorithm.
+ */
+- (nullable instancetype)decompressedDataUsingAlgorithm:(NSDataCompressionAlgorithm)algorithm error:(NSError **)error API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0));
+- (nullable instancetype)compressedDataUsingAlgorithm:(NSDataCompressionAlgorithm)algorithm error:(NSError **)error API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0));
+
+@end
+
 
 @interface NSData (NSDeprecated)
 
@@ -186,9 +216,18 @@ typedef NS_OPTIONS(NSUInteger, NSDataBase64DecodingOptions) {
 
 @end
 
+@interface NSMutableData (NSMutableDataCompression)
+
+/* These methods compress or decompress the receiver's contents in-place using the specified algorithm. If the operation is not successful, these methods leave the receiver unchanged..
+ */
+- (BOOL)decompressUsingAlgorithm:(NSDataCompressionAlgorithm)algorithm error:(NSError **)error API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0));
+- (BOOL)compressUsingAlgorithm:(NSDataCompressionAlgorithm)algorithm error:(NSError **)error API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0));
+
+@end
+
 /****************	    Purgeable Data	****************/
 
-NS_CLASS_AVAILABLE(10_6, 4_0)
+API_AVAILABLE(macos(10.6), ios(4.0), watchos(2.0), tvos(9.0))
 @interface NSPurgeableData : NSMutableData <NSDiscardableContent> {
 @private
     NSUInteger _length;

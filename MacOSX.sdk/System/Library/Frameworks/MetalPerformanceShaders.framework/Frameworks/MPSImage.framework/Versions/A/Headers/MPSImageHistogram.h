@@ -29,7 +29,7 @@ typedef struct
  *  @discussion The MPSImageHistogram computes the histogram of an image.
  *              
  */
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(9.0), tvos(9.0))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(9.0), macCatalyst(13.0), tvos(9.0))
 @interface  MPSImageHistogram : MPSKernel
 
 /*! @property   clipRectSource
@@ -88,7 +88,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(9.0), tvos(9.0))
  */
 -(nullable instancetype) initWithCoder:(NSCoder * __nonnull)aDecoder
                                 device:(nonnull id <MTLDevice>) device NS_DESIGNATED_INITIALIZER
-                        MPS_AVAILABLE_STARTING(macos(10.13), ios(11.0), tvos(11.0));
+                        MPS_AVAILABLE_STARTING(macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0));
 
 /*!
  *  @abstract Encode the filter to a command buffer using a MTLComputeCommandEncoder.
@@ -141,7 +141,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(9.0), tvos(9.0))
  *              min(computed maximum pixel value, MPSImageHistogramInfo.maxPixelValue) are used to
  *              compute the normalized histogram.
  */
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(9.0), tvos(9.0))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(9.0), macCatalyst(13.0), tvos(9.0))
 @interface  MPSImageNormalizedHistogram : MPSKernel
 
 /*! @property   clipRectSource
@@ -190,7 +190,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(9.0), tvos(9.0))
  */
 -(nullable instancetype) initWithCoder:(NSCoder * __nonnull)aDecoder
                                 device:(nonnull id <MTLDevice>) device NS_DESIGNATED_INITIALIZER
-MPS_AVAILABLE_STARTING(macos(10.13), ios(11.0), tvos(11.0));
+MPS_AVAILABLE_STARTING(macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0));
 
 /*!
  *  @abstract Encode the filter to a command buffer using a MTLComputeCommandEncoder.
@@ -264,7 +264,7 @@ MPS_AVAILABLE_STARTING(macos(10.13), ios(11.0), tvos(11.0));
  *              they will probably not be equalized by it.) This filter usually will not be able 
  *              to work in place.
  */
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(9.0), tvos(9.0))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(9.0), macCatalyst(13.0), tvos(9.0))
 @interface  MPSImageHistogramEqualization : MPSUnaryImageKernel
 
 /*! @property   histogramInfo
@@ -296,7 +296,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(9.0), tvos(9.0))
  */
 -(nullable instancetype) initWithCoder:(NSCoder * __nonnull)aDecoder
                                 device:(nonnull id <MTLDevice>) device NS_DESIGNATED_INITIALIZER
-                            MPS_AVAILABLE_STARTING(macos(10.13), ios(11.0), tvos(11.0));
+                            MPS_AVAILABLE_STARTING(macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0));
 
 /*!
  *  @abstract Encode the transform function to a command buffer using a MTLComputeCommandEncoder.
@@ -336,7 +336,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(9.0), tvos(9.0))
  *              converts the image so that its histogram matches the desired histogram.
  *
  */
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(9.0), tvos(9.0))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(9.0), macCatalyst(13.0), tvos(9.0))
 @interface  MPSImageHistogramSpecification : MPSUnaryImageKernel
 
 /*! @property   histogramInfo
@@ -393,7 +393,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(9.0), tvos(9.0))
  */
 -(nullable instancetype) initWithCoder:(NSCoder * __nonnull)aDecoder
                                 device:(nonnull id <MTLDevice>) device NS_DESIGNATED_INITIALIZER
-                            MPS_AVAILABLE_STARTING(macos(10.13), ios(11.0), tvos(11.0));
+                            MPS_AVAILABLE_STARTING(macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0));
 
 /*!
  *  @abstract Encode the transform function to a command buffer using a MTLComputeCommandEncoder.

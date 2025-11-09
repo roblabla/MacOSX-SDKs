@@ -12,4 +12,5 @@
 #import <MPSMatrix/MPSMatrixCombination.h>
 #import <MPSMatrix/MPSMatrixSoftMax.h>
 #import <MPSMatrix/MPSMatrixFindTopK.h>
+#import <MPSMatrix/MPSMatrixRandom.h>
 

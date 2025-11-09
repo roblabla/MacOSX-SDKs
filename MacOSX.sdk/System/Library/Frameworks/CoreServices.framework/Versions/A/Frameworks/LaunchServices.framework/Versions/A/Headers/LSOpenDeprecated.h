@@ -26,11 +26,11 @@ extern "C" {
 
 
 enum {
-  kLSLaunchInhibitBGOnly        __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_0, __MAC_10_12, __IPHONE_NA, __IPHONE_NA, "This option does nothing.") = 0x00000080, /* Does nothing.*/
-  kLSLaunchNoParams             __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_0, __MAC_10_12, __IPHONE_NA, __IPHONE_NA, "This option does nothing.") = 0x00000800, /* Does nothing.*/
-  kLSLaunchStartClassic         __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_0, __MAC_10_11, __IPHONE_NA, __IPHONE_NA, "The Classic environment is no longer supported.") = 0x00020000, /* Does nothing.*/
-  kLSLaunchInClassic            __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_0, __MAC_10_11, __IPHONE_NA, __IPHONE_NA, "The Classic environment is no longer supported.") = 0x00040000, /* Always fails with kLSNoClassicEnvironmentErr.*/
-  kLSLaunchHasUntrustedContents __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_4, __MAC_10_12, __IPHONE_NA, __IPHONE_NA, "This option does nothing.") = 0x00400000, /* Does nothing.*/
+  kLSLaunchInhibitBGOnly        API_DEPRECATED("This option does nothing.", macos(10.0,10.12) ) API_UNAVAILABLE( ios, tvos, watchos ) = 0x00000080, /* Does nothing.*/
+  kLSLaunchNoParams             API_DEPRECATED("This option does nothing.", macos(10.0,10.12) ) API_UNAVAILABLE( ios, tvos, watchos ) = 0x00000800, /* Does nothing.*/
+  kLSLaunchStartClassic         API_DEPRECATED("The Classic environment is no longer supported.", macos(10.0,10.11) ) API_UNAVAILABLE( ios, tvos, watchos ) = 0x00020000, /* Does nothing.*/
+  kLSLaunchInClassic            API_DEPRECATED("The Classic environment is no longer supported.", macos(10.0,10.11) ) API_UNAVAILABLE( ios, tvos, watchos ) = 0x00040000, /* Always fails with kLSNoClassicEnvironmentErr.*/
+  kLSLaunchHasUntrustedContents API_DEPRECATED("This option does nothing.", macos(10.4,10.12) ) API_UNAVAILABLE( ios, tvos, watchos ) = 0x00400000, /* Does nothing.*/
 };
 
 
@@ -44,7 +44,7 @@ typedef struct LSLaunchFSRefSpec {
                                               /* with keyword keyAEPropData (can be NULL)*/
   LSLaunchFlags       launchFlags;
   void *              asyncRefCon;            /* used if you register for app birth/death notification*/
-} LSLaunchFSRefSpec __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_0, __MAC_10_10, __IPHONE_NA, __IPHONE_NA, "Use LSLaunchURLSpec instead.");
+} LSLaunchFSRefSpec API_DEPRECATED("Use LSLaunchURLSpec instead.", macos(10.0,10.10) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 
@@ -85,7 +85,7 @@ typedef struct LSLaunchFSRefSpec {
 extern OSStatus 
 LSOpenFSRef(
   const FSRef *  inRef,
-  FSRef *        outLaunchedRef)       /* can be NULL */      __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_0, __MAC_10_10, __IPHONE_NA, __IPHONE_NA, "Use LSOpenCFURLRef or -[NSWorkspace openURL:] instead.");
+  FSRef *        outLaunchedRef)       /* can be NULL */      API_DEPRECATED("Use LSOpenCFURLRef or -[NSWorkspace openURL:] instead.", macos(10.0,10.10) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 	
 
@@ -122,7 +122,7 @@ LSOpenFSRef(
 extern OSStatus 
 LSOpenFromRefSpec(
   const LSLaunchFSRefSpec *  inLaunchSpec,
-  FSRef *                    outLaunchedRef)       /* can be NULL */ __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_0, __MAC_10_10, __IPHONE_NA, __IPHONE_NA, "Use LSOpenFromURLSpec or NSWorkspace instead.");
+  FSRef *                    outLaunchedRef)       /* can be NULL */ API_DEPRECATED("Use LSOpenFromURLSpec or NSWorkspace instead.", macos(10.0,10.10) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 
@@ -150,7 +150,7 @@ typedef struct LSApplicationParameters {
   CFArrayRef          argv;                   /* Note: argv is ignored on 10.4. On 10.5 and later, the array elements */
                                               /* (which must be CFStringRefs) are passed as arguments to main() in the launched process. */
   AppleEvent *        initialEvent;           /* The first Apple Event to be sent to the launched process. Can be NULL. */
-} LSApplicationParameters __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_4, __MAC_10_10, __IPHONE_NA, __IPHONE_NA, "Use NSWorkspace instead.");
+} LSApplicationParameters API_DEPRECATED("Use NSWorkspace instead.", macos(10.4,10.10) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 
@@ -184,7 +184,7 @@ typedef struct LSApplicationParameters {
 extern OSStatus 
 LSOpenApplication(
   const LSApplicationParameters *  appParams,
-  ProcessSerialNumber *            outPSN)          /* can be NULL */ __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_4, __MAC_10_10, __IPHONE_NA, __IPHONE_NA, "Use -[NSWorkspace launchApplicationAtURL:options:configuration:error:] instead.");
+  ProcessSerialNumber *            outPSN)          /* can be NULL */ API_DEPRECATED("Use -[NSWorkspace launchApplicationAtURL:options:configuration:error:] instead.", macos(10.4,10.10) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 
@@ -234,7 +234,7 @@ LSOpenItemsWithRole(
   const AEKeyDesc *                inAEParam,           /* can be NULL */
   const LSApplicationParameters *  inAppParams,         /* can be NULL */
   ProcessSerialNumber *            outPSNs,             /* can be NULL */
-  CFIndex                          inMaxPSNCount)             __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_4, __MAC_10_10, __IPHONE_NA, __IPHONE_NA, "Use NSWorkspace instead.");
+  CFIndex                          inMaxPSNCount)             API_DEPRECATED("Use NSWorkspace instead.", macos(10.4,10.10) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 
@@ -286,7 +286,7 @@ LSOpenURLsWithRole(
   const AEKeyDesc *                inAEParam,           /* can be NULL */
   const LSApplicationParameters *  inAppParams,         /* can be NULL */
   ProcessSerialNumber *            outPSNs,             /* can be NULL */
-  CFIndex                          inMaxPSNCount)             __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_4, __MAC_10_10, __IPHONE_NA, __IPHONE_NA, "Use NSWorkspace instead.");
+  CFIndex                          inMaxPSNCount)             API_DEPRECATED("Use NSWorkspace instead.", macos(10.4,10.10) ) API_UNAVAILABLE( ios, tvos, watchos );
 #endif
 
 

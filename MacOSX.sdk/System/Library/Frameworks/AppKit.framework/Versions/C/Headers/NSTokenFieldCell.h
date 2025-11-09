@@ -1,7 +1,7 @@
 /*
 	NSTokenFieldCell.h
 	Application Kit
-	Copyright (c) 2004-2018, Apple Inc.
+	Copyright (c) 2004-2019, Apple Inc.
 	All rights reserved.
 
 */
@@ -11,6 +11,7 @@
 
 
 NS_ASSUME_NONNULL_BEGIN
+API_UNAVAILABLE_BEGIN(ios)
 
 @class NSTextContainer;
 @protocol NSTokenFieldCellDelegate;
@@ -19,36 +20,11 @@ typedef NS_ENUM(NSUInteger, NSTokenStyle) {
     NSTokenStyleDefault, // This is equivalent to NSTokenStyleRounded. This may change in future releases.
     NSTokenStyleNone, // Style to use for data you want represented as plain-text and without any token background.
     NSTokenStyleRounded, // A token with rounded edges.
-    NSTokenStyleSquared NS_ENUM_AVAILABLE_MAC(10_10), // A token with squared edges.
-    NSTokenStylePlainSquared NS_ENUM_AVAILABLE_MAC(10_10), // A token with squared edges that has no background unless selected or highlighted.
+    NSTokenStyleSquared API_AVAILABLE(macos(10.10)), // A token with squared edges.
+    NSTokenStylePlainSquared API_AVAILABLE(macos(10.10)), // A token with squared edges that has no background unless selected or highlighted.
 };
 
-@interface NSTokenFieldCell : NSTextFieldCell {
-@private
-    NSCharacterSet *_tokenizingCharacterSet APPKIT_IVAR;
-    __weak id _delegate APPKIT_IVAR;
-    NSTimeInterval _completionDelay APPKIT_IVAR;
-    id _cache APPKIT_IVAR;
-    id _defaultTerminator APPKIT_IVAR;
-    id _trackingArea APPKIT_IVAR;
-    id _lastCell APPKIT_IVAR;
-    NSRect _lastCellFrame APPKIT_IVAR;
-    BOOL *_autoCompleteCancel APPKIT_IVAR;
-    id _reserved[6] __unused APPKIT_IVAR;
-    struct {
-        unsigned int _style:4;
-
-        unsigned int _invalidCache:1;
-        unsigned int _inDidChange:1;
-        unsigned int _validationDisabled:1;
-        unsigned int _reserved1:1;
-        unsigned int _autoCompleteMode:2;
-        unsigned int _inValidateEditing:1;
-        unsigned int _performingDrop:1;
-
-        unsigned int _reserved:20;
-    } _tfcFlags APPKIT_IVAR;
-}
+@interface NSTokenFieldCell : NSTextFieldCell
 
 /* Sets the default token style used for each new token.  However, if the delegate implements tokenField:styleForRepresentedObject:, that return value will be used instead.
 */
@@ -103,8 +79,9 @@ typedef NS_ENUM(NSUInteger, NSTokenStyle) {
 
 @end
 
-static const NSTokenStyle NSDefaultTokenStyle NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSTokenStyleDefault", 10_0, 10_14) = NSTokenStyleDefault;
-static const NSTokenStyle NSPlainTextTokenStyle NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSTokenStyleNone", 10_0, 10_14) = NSTokenStyleNone;
-static const NSTokenStyle NSRoundedTokenStyle NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSTokenStyleRounded", 10_0, 10_14) = NSTokenStyleRounded;
+static const NSTokenStyle NSDefaultTokenStyle API_DEPRECATED_WITH_REPLACEMENT("NSTokenStyleDefault", macos(10.0,10.14)) = NSTokenStyleDefault;
+static const NSTokenStyle NSPlainTextTokenStyle API_DEPRECATED_WITH_REPLACEMENT("NSTokenStyleNone", macos(10.0,10.14)) = NSTokenStyleNone;
+static const NSTokenStyle NSRoundedTokenStyle API_DEPRECATED_WITH_REPLACEMENT("NSTokenStyleRounded", macos(10.0,10.14)) = NSTokenStyleRounded;
 
+API_UNAVAILABLE_END
 NS_ASSUME_NONNULL_END

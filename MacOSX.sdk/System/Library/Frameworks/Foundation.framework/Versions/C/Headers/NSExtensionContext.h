@@ -1,5 +1,5 @@
 /*	NSExtensionContext.h
-        Copyright (c) 2013-2018, Apple Inc. All rights reserved.
+        Copyright (c) 2013-2019, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/Foundation.h>
@@ -9,7 +9,7 @@
 // Class representing the extension request's context
 NS_ASSUME_NONNULL_BEGIN
 
-NS_CLASS_AVAILABLE(10_10, 8_0)
+API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0))
 @interface NSExtensionContext : NSObject
 
 // The list of input NSExtensionItems associated with the context. If the context has no input items, this array will be empty.

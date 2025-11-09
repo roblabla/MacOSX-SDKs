@@ -1,7 +1,7 @@
 /*
         NSTrackingArea.h
         Application Kit
-        Copyright (c) 2006-2018, Apple Inc.
+        Copyright (c) 2006-2019, Apple Inc.
         All rights reserved.
 */
 
@@ -13,6 +13,7 @@
 
 
 NS_ASSUME_NONNULL_BEGIN
+API_UNAVAILABLE_BEGIN(ios)
 
 typedef NS_OPTIONS(NSUInteger, NSTrackingAreaOptions) {
     /* Type of tracking area.  You must specify one or more type from this list in the NSTrackingAreaOptions argument of -initWithRect:options:owner:userInfo: */
@@ -37,17 +38,8 @@ typedef NS_OPTIONS(NSUInteger, NSTrackingAreaOptions) {
 }; 
 
 
-NS_CLASS_AVAILABLE(10_5, NA)
+API_AVAILABLE(macos(10.5))
 @interface NSTrackingArea : NSObject <NSCopying, NSCoding>
-{
-@private
-    NSRect _rect APPKIT_IVAR;
-    __weak id _owner APPKIT_IVAR;
-    NSDictionary * _userInfo APPKIT_IVAR;
-    NSTrackingAreaOptions _options APPKIT_IVAR;
-    NSInteger _privateFlags APPKIT_IVAR;
-    id _reserved APPKIT_IVAR;
-}
 - (instancetype)initWithRect:(NSRect)rect options:(NSTrackingAreaOptions)options owner:(nullable id)owner userInfo:(nullable NSDictionary<id, id> *)userInfo;
 @property (readonly) NSRect rect;
 @property (readonly) NSTrackingAreaOptions options;
@@ -55,4 +47,5 @@ NS_CLASS_AVAILABLE(10_5, NA)
 @property (nullable, readonly, copy) NSDictionary<id, id> *userInfo;
 @end
 
+API_UNAVAILABLE_END
 NS_ASSUME_NONNULL_END

@@ -170,9 +170,9 @@ protected:
                                         AbsoluteTime ts);
 
 public:
-  virtual bool init(OSDictionary * properties = 0);
-  virtual bool start(IOService * provider);
-  virtual void free();
+  virtual bool init(OSDictionary * properties = 0) APPLE_KEXT_OVERRIDE;
+  virtual bool start(IOService * provider) APPLE_KEXT_OVERRIDE;
+  virtual void free(void) APPLE_KEXT_OVERRIDE;
 
   virtual bool open(IOService *                client,
 		    IOOptionBits	       options,
@@ -187,17 +187,17 @@ public:
                     AbsolutePointerEventCallback	apeCallback,
                     ScrollWheelEventCallback		sweCallback);
 
-  virtual void close(IOService * client, IOOptionBits );
+  virtual void close(IOService * client, IOOptionBits ) APPLE_KEXT_OVERRIDE;
   virtual IOReturn message( UInt32 type, IOService * provider,
-                              void * argument = 0 );
+                              void * argument = 0 ) APPLE_KEXT_OVERRIDE;
 
-  virtual IOHIDKind hidKind();
-  virtual bool 	    updateProperties( void );
-  virtual IOReturn  setParamProperties( OSDictionary * dict );
+  virtual IOHIDKind hidKind(void) APPLE_KEXT_OVERRIDE;
+  virtual bool 	    updateProperties( void ) APPLE_KEXT_OVERRIDE;
+  virtual IOReturn  setParamProperties( OSDictionary * dict ) APPLE_KEXT_OVERRIDE;
   virtual IOReturn  powerStateWillChangeTo( IOPMPowerFlags powerFlags,
-                        unsigned long newState, IOService * device);
+                        unsigned long newState, IOService * device) APPLE_KEXT_OVERRIDE;
   virtual IOReturn  powerStateDidChangeTo( IOPMPowerFlags powerFlags,
-                        unsigned long newState, IOService * device);
+                        unsigned long newState, IOService * device) APPLE_KEXT_OVERRIDE;
 
 protected: // for subclasses to implement
   virtual OSData *    copyAccelerationTable();

@@ -1,8 +1,8 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 48CC931C-76EB-3EED-8D0C-B55124C77354' ]
-platform:        macosx
-install-name:    /System/Library/PrivateFrameworks/NetworkServiceProxy.framework/Versions/A/NetworkServiceProxy
+uuids:           [ 'x86_64: 875FD7EE-2916-34D9-8BD2-548DF69A01B0', 'x86_64: 875FD7EE-2916-34D9-8BD2-548DF69A01B0' ]
+platform:        zippered
+install-name:    '/System/Library/PrivateFrameworks/NetworkServiceProxy.framework/Versions/A/NetworkServiceProxy'
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _NPFlowProperty, _NPFlowPropertyFlag, _NPGetInternalQueue, 
@@ -58,15 +58,14 @@ exports:
                        NPTunnelFlowTelemetry, NPTunnelFlowUDP, NPTunnelNSURLSessionDelegate, 
                        NPTunnelTuscany, NPTunnelTuscanyEndpoint, NPTunnelTuscanyLoopback, 
                        NPTuscanyEdge, NPTuscanyLoopbackConnection, NPTuscanyOnRamp, 
-                       NPUtilities, NPWaldo, NSPAppRule, NSPByteParser, NSPConfiguration, 
-                       NSPConnectionInfo, NSPControlConnection, NSPDNSPacket, NSPDNSQuery, 
-                       NSPDNSResourceRecord, NSPFlowDivert, NSPFlowDivertProvider, 
-                       NSPKeyNetworkAgent, NSPManager, NSPNetworkAgent, NSPServerClient, 
-                       NetworkServiceProxyConnectionStats, NetworkServiceProxyControlRequestStats, 
-                       NetworkServiceProxyDurationBuckets, NetworkServiceProxyRequestStats, 
-                       NetworkServiceProxyRespTimeBuckets, NetworkServiceProxyStats ]
-    objc-ivars:      [ NPTunnel._protocol, NPTuscanyLoopbackConnection._blobSizes, 
-                       NPTuscanyLoopbackConnection._currentInputFrames, NPTuscanyLoopbackConnection._protocol ]
+                       NPUsageReport, NPUtilities, NPWaldo, NSPAppRule, NSPByteParser, 
+                       NSPConfiguration, NSPConnectionInfo, NSPControlConnection, 
+                       NSPDNSPacket, NSPDNSQuery, NSPDNSResourceRecord, NSPFlowDivert, 
+                       NSPFlowDivertProvider, NSPKeyNetworkAgent, NSPManager, NSPNetworkAgent, 
+                       NSPServerClient ]
+    objc-ivars:      [ NPTunnel._protocol, NPTunnelFlow._hasTunnel, NPTunnelFlow._tunnelError, 
+                       NPTuscanyLoopbackConnection._blobSizes, NPTuscanyLoopbackConnection._currentInputFrames, 
+                       NPTuscanyLoopbackConnection._protocol ]
     weak-def-symbols: [ __ZTI10BufferPool, __ZTI11FrameStream, __ZTI11PendingPool, 
                         __ZTI13PendingStream, __ZTI15NPTuscanyClient, __ZTI23NPTuscanyLoopbackClient, 
                         __ZTI2IO, __ZTI3Log, __ZTI6Buffer, __ZTI6Client, __ZTI6Reader, 

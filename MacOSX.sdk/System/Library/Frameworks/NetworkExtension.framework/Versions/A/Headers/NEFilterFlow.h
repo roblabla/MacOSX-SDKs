@@ -7,6 +7,8 @@
 #error "Please import the NetworkExtension module instead of this file directly."
 #endif
 
+#import <NetworkExtension/NENetworkRule.h>
+
 NS_ASSUME_NONNULL_BEGIN
 
 /*!
@@ -29,13 +31,13 @@ NS_ASSUME_NONNULL_BEGIN
  *
  * NEFilterFlow is part of NetworkExtension.framework
  */
-API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, watchos, tvos)
+API_AVAILABLE(macos(10.15), ios(9.0)) API_UNAVAILABLE(watchos, tvos)
 @interface NEFilterFlow : NSObject <NSSecureCoding,NSCopying>
 /*!
  * @property URL
  * @discussion The flow's HTTP request URL. Will be nil if the flow did not originate from WebKit.
  */
-@property (readonly, nullable) NSURL *URL API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, watchos, tvos);
+@property (readonly, nullable) NSURL *URL API_AVAILABLE(macos(10.15), ios(9.0)) API_UNAVAILABLE(watchos, tvos);
 
 /*!
  * @property sourceAppUniqueIdentifier
@@ -55,6 +57,18 @@ API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, watchos, tvos)
  */
 @property (readonly, nullable) NSString *sourceAppVersion API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos, watchos, tvos);
 
+/*!
+ *	@property direction
+ *	@discussion Initial direciton of the flow (outgoing or incoming flow)
+ */
+@property (readonly) NETrafficDirection direction API_AVAILABLE(macos(10.15), ios(13.0)) API_UNAVAILABLE(watchos, tvos);
+
+/*!
+ *	@property sourceAppAuditToken
+ *	@discussion Audit token of the source application of the flow.
+ */
+@property (readonly, nullable) NSData *sourceAppAuditToken API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, watchos, tvos);
+
 @end
 
 /*!
@@ -64,18 +78,18 @@ API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, watchos, tvos)
  * NEFilterBrowserFlow is part of NetworkExtension.framework
  */
 API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, watchos, tvos)
-@interface NEFilterBrowserFlow :  NEFilterFlow <NSSecureCoding,NSCopying>
+@interface NEFilterBrowserFlow : NEFilterFlow <NSSecureCoding,NSCopying>
 /*!
  *	@property request
  *	@discussion The NSURLRequest of the flow. This property is always nil for the control providers.
  */
-@property (readonly, nullable) NSURLRequest *request API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(watchos, tvos);
+@property (readonly, nullable) NSURLRequest *request API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, watchos, tvos);
 
 /*!
  *	@property response
  *	@discussion The NSURLResponse of the flow. This will be nil until the request is sent to the server and the response headers are received. And this property is always nil for the control providers.
  */
-@property (readonly, nullable) NSURLResponse *response API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(watchos, tvos);
+@property (readonly, nullable) NSURLResponse *response API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, watchos, tvos);
 /*!
  *	@property parentURL
  *	@discussion The parent URL for the current flow which is created to load the sub frames because the flow with the parent URL was allowed. Will be nil if the parent flow does not exist.
@@ -89,39 +103,39 @@ API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, watchos, tvos)
  *
  * NEFilterSocketFlow is part of NetworkExtension.framework
  */
-API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, watchos, tvos)
+API_AVAILABLE(macos(10.15), ios(9.0)) API_UNAVAILABLE(watchos, tvos)
 @interface NEFilterSocketFlow : NEFilterFlow <NSSecureCoding,NSCopying>
 /*!
  * @property remoteEndpoint
  * @discussion The flow's remote endpoint. This endpoint object may be nil when [NEFilterDataProvider handleNewFlow:] is invoked and if so will be populated upon receiving network data.
 		In such a case, filtering on the flow may still be performed based on its socket type, socket family or socket protocol.
  */
-@property (readonly, nullable) NWEndpoint *remoteEndpoint API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, watchos, tvos);
+@property (readonly, nullable) NWEndpoint *remoteEndpoint API_AVAILABLE(macos(10.15), ios(9.0)) API_UNAVAILABLE(watchos, tvos);
 
 /*!
  * @property localEndpoint
  * @discussion The flow's local endpoint. This endpoint object may be nil when [NEFilterDataProvider handleNewFlow:] is invoked and if so will be populated upon receiving network data.
 		In such a case, filtering on the flow may still be performed based on its socket type, socket family or socket protocol.
  */
-@property (readonly, nullable) NWEndpoint *localEndpoint API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, watchos, tvos);
+@property (readonly, nullable) NWEndpoint *localEndpoint API_AVAILABLE(macos(10.15), ios(9.0)) API_UNAVAILABLE(watchos, tvos);
 
 /*!
  *	@property socketFamily
  *	@discussion Socket family of the socket flow, such as PF_INET.
  */
-@property int socketFamily API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, watchos, tvos);
+@property (readonly) int socketFamily API_AVAILABLE(macos(10.15), ios(9.0)) API_UNAVAILABLE(watchos, tvos);
 
 /*!
  *	@property socketType
  *	@discussion Socket type of the socket flow, such as SOCK_STREAM.
  */
-@property int socketType API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, watchos, tvos);
+@property (readonly) int socketType API_AVAILABLE(macos(10.15), ios(9.0)) API_UNAVAILABLE(watchos, tvos);
 
 /*!
  *	@property socketProtocol
  *	@discussion Socket protocol of the socket flow, such as IPPROTO_TCP.
  */
-@property int socketProtocol API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, watchos, tvos);
+@property (readonly) int socketProtocol API_AVAILABLE(macos(10.15), ios(9.0)) API_UNAVAILABLE(watchos, tvos);
 @end
 
 NS_ASSUME_NONNULL_END

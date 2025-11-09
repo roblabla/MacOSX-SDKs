@@ -1,6 +1,6 @@
 /*	
     NSURLCache.h
-    Copyright (c) 2003-2018, Apple Inc. All rights reserved.    
+    Copyright (c) 2003-2019, Apple Inc. All rights reserved.    
     
     Public header file.
 */
@@ -161,7 +161,17 @@ typedef NS_ENUM(NSUInteger, NSURLCacheStoragePolicy)
     @result an initialized NSURLCache, with the given capacity, backed
     by disk.
 */
-- (instancetype)initWithMemoryCapacity:(NSUInteger)memoryCapacity diskCapacity:(NSUInteger)diskCapacity diskPath:(nullable NSString *)path;
+- (instancetype)initWithMemoryCapacity:(NSUInteger)memoryCapacity diskCapacity:(NSUInteger)diskCapacity diskPath:(nullable NSString *)path API_DEPRECATED_WITH_REPLACEMENT("initWithMemoryCapacity:diskCapacity:directoryURL:", macos(10.2,API_TO_BE_DEPRECATED), ios(2.0,API_TO_BE_DEPRECATED), watchos(2.0,API_TO_BE_DEPRECATED), tvos(9.0,API_TO_BE_DEPRECATED)) API_UNAVAILABLE(macCatalyst);
+
+/*!
+    @method initWithMemoryCapacity:diskCapacity:directoryURL:
+    @abstract Initializes an NSURLCache with the given capacity and directory.
+    @param memoryCapacity the capacity, measured in bytes, for the cache in memory. Or 0 to disable memory cache.
+    @param diskCapacity the capacity, measured in bytes, for the cache on disk. Or 0 to disable disk cache.
+    @param directoryURL the path to a directory on disk where the cache data is stored. Or nil for default directory.
+    @result an initialized NSURLCache, with the given capacity, optionally backed by disk.
+ */
+- (instancetype)initWithMemoryCapacity:(NSUInteger)memoryCapacity diskCapacity:(NSUInteger)diskCapacity directoryURL:(nullable NSURL *)directoryURL API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0));
 
 /*! 
     @method cachedResponseForRequest:

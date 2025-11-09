@@ -25,7 +25,7 @@ NS_ASSUME_NONNULL_BEGIN
 	@abstract	AVMetadataGroup is the common superclass for AVTimedMetadataGroup and AVDateRangeMetadataGroup; each represents a collection of metadata items associated with a segment of a timeline. AVTimedMetadataGroup is typically used with content that defines an independent timeline, while AVDateRangeMetadataGroup is typically used with content that's associated with a specific range of dates.
 */
 
-NS_CLASS_AVAILABLE(10_11, 9_0)
+API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(2.0))
 @interface AVMetadataGroup : NSObject
 
 @property (nonatomic, readonly, copy) NSArray<AVMetadataItem *> *items;
@@ -35,10 +35,10 @@ NS_CLASS_AVAILABLE(10_11, 9_0)
 @interface AVMetadataGroup (AVMetadataGroupIdentification)
 
 /* indicates the classifyingLabel of the group; nil if no classifyingLabel is indicated */
-@property (nonatomic, readonly, nullable) NSString *classifyingLabel NS_AVAILABLE(10_11_3, 9_3);
+@property (nonatomic, readonly, nullable) NSString *classifyingLabel API_AVAILABLE(macos(10.11.3), ios(9.3), tvos(9.3), watchos(2.3));
 
 /* indicates the unique identifier of the group; nil if no unique identifier is indicated */
-@property (nonatomic, readonly, nullable) NSString *uniqueID NS_AVAILABLE(10_11_3, 9_3);
+@property (nonatomic, readonly, nullable) NSString *uniqueID API_AVAILABLE(macos(10.11.3), ios(9.3), tvos(9.3), watchos(2.3));
 
 @end
 
@@ -48,7 +48,7 @@ NS_CLASS_AVAILABLE(10_11, 9_0)
 	@abstract	AVTimedMetadataGroup is used to represent a collection of metadata items that are valid for use during a specific range of time. For example, AVTimedMetadataGroups are used to represent chapters, optionally containing metadata items for chapter titles and chapter images.
 */
 
-NS_CLASS_AVAILABLE(10_7, 4_3)
+API_AVAILABLE(macos(10.7), ios(4.3), tvos(9.0), watchos(1.0))
 @interface AVTimedMetadataGroup : AVMetadataGroup <NSCopying, NSMutableCopying>
 {
 @private
@@ -73,7 +73,7 @@ NS_CLASS_AVAILABLE(10_7, 4_3)
 				A CMSampleBuffer with media type kCMMediaType_Metadata.
 	@result		An instance of AVTimedMetadataGroup.
 */
-- (nullable instancetype)initWithSampleBuffer:(CMSampleBufferRef)sampleBuffer NS_AVAILABLE(10_10, 8_0);
+- (nullable instancetype)initWithSampleBuffer:(CMSampleBufferRef)sampleBuffer API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(1.0));
 
 /* indicates the time range of the timed metadata */
 @property (nonatomic, readonly) CMTimeRange timeRange;
@@ -94,7 +94,7 @@ NS_CLASS_AVAILABLE(10_7, 4_3)
  
 		Each item referenced by the receiver must carry a non-nil value for its dataType property.  An exception will be thrown if any item does not have a data type.
 */
-- (nullable CMMetadataFormatDescriptionRef)copyFormatDescription NS_AVAILABLE(10_10, 8_0) CF_RETURNS_RETAINED;
+- (nullable CMMetadataFormatDescriptionRef)copyFormatDescription API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(1.0)) CF_RETURNS_RETAINED;
 
 @end
 
@@ -104,7 +104,7 @@ NS_CLASS_AVAILABLE(10_7, 4_3)
 	@abstract	AVMutableTimedMetadataGroup is used to represent a mutable collection of metadata items that are valid for use during a specific range of time.
 */
 
-NS_CLASS_AVAILABLE(10_7, 4_3)
+API_AVAILABLE(macos(10.7), ios(4.3), tvos(9.0), watchos(1.0))
 @interface AVMutableTimedMetadataGroup : AVTimedMetadataGroup
 {
 @private
@@ -125,7 +125,7 @@ NS_CLASS_AVAILABLE(10_7, 4_3)
 	@abstract	AVDateRangeMetadataGroup is used to represent a collection of metadata items that are valid for use within a specific range of dates.
 */
 
-NS_CLASS_AVAILABLE(10_11, 9_0)
+API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(2.0))
 @interface AVDateRangeMetadataGroup : AVMetadataGroup <NSCopying, NSMutableCopying>
 {
 @private
@@ -162,7 +162,7 @@ NS_CLASS_AVAILABLE(10_11, 9_0)
 	@abstract	AVMutableDateRangeMetadataGroup is used to represent a mutable collection of metadata items that are valid for use within a specific range of dates.
 */
 
-NS_CLASS_AVAILABLE(10_11, 9_0)
+API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(2.0))
 @interface AVMutableDateRangeMetadataGroup : AVDateRangeMetadataGroup
 {
 @private

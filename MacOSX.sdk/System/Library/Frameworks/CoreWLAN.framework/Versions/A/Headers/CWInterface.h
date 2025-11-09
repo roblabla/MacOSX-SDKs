@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreWLAN/CoreWLANTypes.h>
+#import <IOKit/IOKitLib.h>
 
 @class CWNetwork;
 
@@ -153,6 +154,12 @@ NS_CLASS_AVAILABLE_MAC(10_6)
  * @discussion 
  * Returns a UTF-8 string using hexadecimal characters formatted as XX:XX:XX:XX:XX:XX.
  * Returns nil if an error occurred, or if the interface is not participating in a Wi-Fi network.
+ *
+ * @note
+ * BSSID information is not available unless Location Services is enabled and the user has authorized the calling app to use location services.
+ *
+ * @seealso
+ * CLLocationManager
  */
 - (nullable NSString *)bssid NS_AVAILABLE_MAC(10_6);
 
@@ -454,6 +461,12 @@ NS_CLASS_AVAILABLE_MAC(10_6)
  *
  * @discussion 
  * This method will block for the duration of the scan.
+ *
+ * @note
+ * Returned networks will not contain BSSID information unless Location Services is enabled and the user has authorized the calling app to use location services.
+ *
+ * @seealso
+ * CLLocationManager
  */
 - (nullable NSSet<CWNetwork *> *)scanForNetworksWithSSID:(nullable NSData *)ssid error:(out NSError **)error NS_AVAILABLE_MAC(10_7);
 
@@ -480,6 +493,12 @@ NS_CLASS_AVAILABLE_MAC(10_6)
  *
  * @discussion
  * This method will block for the duration of the scan.
+ *
+ * @note
+ * Returned networks will not contain BSSID information unless Location Services is enabled and the user has authorized the calling app to use location services.
+ *
+ * @seealso
+ * CLLocationManager
  */
 - (nullable NSSet<CWNetwork *> *)scanForNetworksWithSSID:(nullable NSData *)ssid includeHidden:(BOOL)includeHidden error:(out NSError **)error NS_AVAILABLE_MAC(10_13);
 
@@ -503,6 +522,12 @@ NS_CLASS_AVAILABLE_MAC(10_6)
  *
  * @discussion
  * This method will block for the duration of the scan.
+ *
+ * @note
+ * Returned networks will not contain BSSID information unless Location Services is enabled and the user has authorized the calling app to use location services.
+ *
+ * @seealso
+ * CLLocationManager
  */
 - (nullable NSSet<CWNetwork *> *)scanForNetworksWithName:(nullable NSString *)networkName error:(out NSError **)error NS_AVAILABLE_MAC(10_7);
 
@@ -529,6 +554,12 @@ NS_CLASS_AVAILABLE_MAC(10_6)
  *
  * @discussion
  * This method will block for the duration of the scan.
+ *
+ * @note
+ * Returned networks will not contain BSSID information unless Location Services is enabled and the user has authorized the calling app to use location services.
+ *
+ * @seealso
+ * CLLocationManager
  */
 - (nullable NSSet<CWNetwork *> *)scanForNetworksWithName:(nullable NSString *)networkName includeHidden:(BOOL)includeHidden error:(out NSError **)error NS_AVAILABLE_MAC(10_13);
 

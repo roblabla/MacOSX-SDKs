@@ -20,7 +20,7 @@ typedef NS_ENUM(NSUInteger, VNImageCropAndScaleOption)
 {
     VNImageCropAndScaleOptionCenterCrop = 0,  // scale image maintaining aspect ratio to fit on the short side and crop centered on the long side
     VNImageCropAndScaleOptionScaleFit = 1,    // scale to size required by algorithm
-    VNImageCropAndScaleOptionScaleFill
+    VNImageCropAndScaleOptionScaleFill = 2
 };
 
 /*!
@@ -48,3 +48,11 @@ VN_EXPORT VNBarcodeSymbology const VNBarcodeSymbologyPDF417 API_AVAILABLE(macos(
 VN_EXPORT VNBarcodeSymbology const VNBarcodeSymbologyQR API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0));
 VN_EXPORT VNBarcodeSymbology const VNBarcodeSymbologyUPCE API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0));
 
+
+API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0))
+typedef NS_ENUM(NSUInteger, VNElementType)
+{
+	VNElementTypeUnknown = 0,
+	VNElementTypeFloat   = 1,		// IEEE 754 single-precision floating point value
+	VNElementTypeDouble  = 2,		// IEEE 754 double-precision floating point value
+};

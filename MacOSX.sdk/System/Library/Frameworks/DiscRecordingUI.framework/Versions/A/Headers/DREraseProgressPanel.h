@@ -82,15 +82,16 @@ AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 @interface DREraseProgressPanel : NSPanel
 {
     /*All instance variables are private*/
-	IBOutlet NSTextField*			_taskDescription;
-	IBOutlet NSProgressIndicator*	_progress;
-	IBOutlet NSImageView*			_icon;
-	
-	id						_owner;
-	DRErase*				_eraseObject;
-	NSSound*				_successSound;
-	NSSound*				_failureSound;
-	NSString*				_description;
+@private
+    IBOutlet NSTextField*            _taskDescription;
+    IBOutlet NSProgressIndicator*    _progress;
+    IBOutlet NSImageView*            _icon;
+    
+    id                        _owner;
+    DRErase*                _eraseObject;
+    NSSound*                _successSound;
+    NSSound*                _failureSound;
+    NSString*                _description;
 }
 
 /*! 

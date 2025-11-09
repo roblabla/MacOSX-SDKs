@@ -197,6 +197,18 @@ VT_EXPORT const CFStringRef kVTPixelTransferPropertyKey_DestinationICCProfile AP
 */
 VT_EXPORT const CFStringRef kVTPixelTransferPropertyKey_DestinationYCbCrMatrix API_AVAILABLE(macosx(10.8), ios(9.0), tvos(10.2)); // Read/write, CFString (see kCMFormatDescriptionExtension_YCbCrMatrix), Optional
 
+/*!
+    @constant   kVTPixelTransferPropertyKey_RealTime
+    @abstract
+        Hints the transfer session that the operation is, or is not, being performed in real time.
+    @discussion
+        Set this property to kCFBooleanTrue to indicate that the transfer is part of realtime operation.  If set to
+        true, the VTPixelTransferSession may be given precedence over non-realtime tasks.  This can be set to false
+        for transfers being performed as part of background operations.
+        By default this value is NULL indicating that it is unspecified.
+*/
+VT_EXPORT const CFStringRef kVTPixelTransferPropertyKey_RealTime; // Read/write, CFBoolean, default NULL
+
 	
 CM_ASSUME_NONNULL_END
 

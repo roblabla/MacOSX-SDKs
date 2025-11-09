@@ -1,13 +1,14 @@
 /*
 	NSAccessibilityConstants.h
 	Application Kit
-	Copyright (c) 2001-2018, Apple Inc.
+	Copyright (c) 2001-2019, Apple Inc.
 	All rights reserved.
 */
 #import <AppKit/AppKitDefines.h>
 #import <Foundation/Foundation.h>
 
 NS_ASSUME_NONNULL_BEGIN
+API_UNAVAILABLE_BEGIN(ios)
 
 /*** Exception Constants ***/
 
@@ -46,8 +47,8 @@ APPKIT_EXTERN NSAccessibilityAttributeName const NSAccessibilityTitleAttribute;	
 APPKIT_EXTERN NSAccessibilityAttributeName const NSAccessibilityDescriptionAttribute;	//(NSString *) - instance description
 APPKIT_EXTERN NSAccessibilityAttributeName const NSAccessibilityShownMenuAttribute;		//(id)         - menu being displayed
 APPKIT_EXTERN NSAccessibilityAttributeName const NSAccessibilityValueDescriptionAttribute	//(NSString *)  - text description of value
-NS_AVAILABLE_MAC(10_5);
-APPKIT_EXTERN NSAccessibilityAttributeName const NSAccessibilitySharedFocusElementsAttribute NS_AVAILABLE_MAC(10_10);  //(NSArray *)  - elements that share focus
+API_AVAILABLE(macos(10.5));
+APPKIT_EXTERN NSAccessibilityAttributeName const NSAccessibilitySharedFocusElementsAttribute API_AVAILABLE(macos(10.10));  //(NSArray *)  - elements that share focus
 
 
 /* Misc attributes
@@ -73,21 +74,21 @@ APPKIT_EXTERN NSAccessibilityAttributeName const NSAccessibilityURLAttribute;		/
 APPKIT_EXTERN NSAccessibilityAttributeName const NSAccessibilityIndexAttribute;		//(NSNumber *)  - (intValue)
 
 APPKIT_EXTERN NSAccessibilityAttributeName const NSAccessibilityRowCountAttribute		//(NSNumber *)  - (intValue) number of rows
-NS_AVAILABLE_MAC(10_5);
+API_AVAILABLE(macos(10.5));
 APPKIT_EXTERN NSAccessibilityAttributeName const NSAccessibilityColumnCountAttribute	//(NSNumber *)  - (intValue) number of columns
-NS_AVAILABLE_MAC(10_5);
+API_AVAILABLE(macos(10.5));
 APPKIT_EXTERN NSAccessibilityAttributeName const NSAccessibilityOrderedByRowAttribute	//(NSNumber *)  - (boolValue) is ordered by row?
-NS_AVAILABLE_MAC(10_5);
+API_AVAILABLE(macos(10.5));
 
 APPKIT_EXTERN NSAccessibilityAttributeName const NSAccessibilityWarningValueAttribute	//(id)  - warning value of a level indicator, typically a number
-NS_AVAILABLE_MAC(10_6);
+API_AVAILABLE(macos(10.6));
 APPKIT_EXTERN NSAccessibilityAttributeName const NSAccessibilityCriticalValueAttribute	//(id)  - critical value of a level indicator, typically a number
-NS_AVAILABLE_MAC(10_6);
+API_AVAILABLE(macos(10.6));
 APPKIT_EXTERN NSAccessibilityAttributeName const NSAccessibilityPlaceholderValueAttribute	//(NSString *)  - placeholder value of a control such as a text field
-NS_AVAILABLE_MAC(10_6);
-APPKIT_EXTERN NSAccessibilityAttributeName const NSAccessibilityContainsProtectedContentAttribute NS_AVAILABLE_MAC(10_9);   // (NSNumber *) - (boolValue) contains protected content?
-APPKIT_EXTERN NSAccessibilityAttributeName const NSAccessibilityAlternateUIVisibleAttribute NS_AVAILABLE_MAC(10_10);  //(NSNumber *) - (boolValue)
-APPKIT_EXTERN NSAccessibilityAttributeName const NSAccessibilityRequiredAttribute NS_AVAILABLE_MAC(10_12);  //(NSNumber *) - (boolValue) whether a form field is required to have content for successful submission of the form
+API_AVAILABLE(macos(10.6));
+APPKIT_EXTERN NSAccessibilityAttributeName const NSAccessibilityContainsProtectedContentAttribute API_AVAILABLE(macos(10.9));   // (NSNumber *) - (boolValue) contains protected content?
+APPKIT_EXTERN NSAccessibilityAttributeName const NSAccessibilityAlternateUIVisibleAttribute API_AVAILABLE(macos(10.10));  //(NSNumber *) - (boolValue)
+APPKIT_EXTERN NSAccessibilityAttributeName const NSAccessibilityRequiredAttribute API_AVAILABLE(macos(10.12));  //(NSNumber *) - (boolValue) whether a form field is required to have content for successful submission of the form
 
 
 /* Linkage attributes
@@ -107,7 +108,7 @@ APPKIT_EXTERN NSAccessibilityAttributeName const NSAccessibilitySharedTextUIElem
 APPKIT_EXTERN NSAccessibilityAttributeName const NSAccessibilitySharedCharacterRangeAttribute;	//(NSValue *)  - (rangeValue) part of shared text in this view
 APPKIT_EXTERN NSAccessibilityAttributeName const NSAccessibilityInsertionPointLineNumberAttribute;	//(NSNumber *) - line# containing caret
 APPKIT_EXTERN NSAccessibilityAttributeName const NSAccessibilitySelectedTextRangesAttribute	//(NSArray<NSValue *> *) - array of NSValue (rangeValue) ranges of selected text
-NS_AVAILABLE_MAC(10_5);
+API_AVAILABLE(macos(10.5));
 
 
 /* Parameterized text-specific attributes
@@ -137,14 +138,14 @@ APPKIT_EXTERN NSAttributedStringKey const NSAccessibilityStrikethroughTextAttrib
 APPKIT_EXTERN NSAttributedStringKey const NSAccessibilityShadowTextAttribute;		//(NSNumber *)	    - (boolValue)
 APPKIT_EXTERN NSAttributedStringKey const NSAccessibilityAttachmentTextAttribute;		//id - corresponding element
 APPKIT_EXTERN NSAttributedStringKey const NSAccessibilityLinkTextAttribute;			//id - corresponding element
-APPKIT_EXTERN NSAttributedStringKey const NSAccessibilityAutocorrectedTextAttribute NS_AVAILABLE_MAC(10_7);		//(NSNumber *)	    - (boolValue)
-APPKIT_EXTERN NSAttributedStringKey const NSAccessibilityTextAlignmentAttribute NS_AVAILABLE_MAC(10_12);		//(NSNumber *) - (NSTextAlignment)
+APPKIT_EXTERN NSAttributedStringKey const NSAccessibilityAutocorrectedTextAttribute API_AVAILABLE(macos(10.7));		//(NSNumber *)	    - (boolValue)
+APPKIT_EXTERN NSAttributedStringKey const NSAccessibilityTextAlignmentAttribute API_AVAILABLE(macos(10.12));		//(NSNumber *) - (NSTextAlignment)
 
 /* Textual list attributes and constants. Examples: unordered or ordered lists in a document.
  */
-APPKIT_EXTERN NSAttributedStringKey const NSAccessibilityListItemPrefixTextAttribute    NS_AVAILABLE_MAC(10_11);    // NSAttributedString, the prepended string of the list item. If the string is a common unicode character (e.g. a bullet •), return that unicode character. For lists with images before the text, return a reasonable label of the image.
-APPKIT_EXTERN NSAttributedStringKey const NSAccessibilityListItemIndexTextAttribute     NS_AVAILABLE_MAC(10_11);    // NSNumber, integerValue of the line index. Each list item increments the index, even for unordered lists. The first item should have index 0.
-APPKIT_EXTERN NSAttributedStringKey const NSAccessibilityListItemLevelTextAttribute     NS_AVAILABLE_MAC(10_11);    // NSNumber, integerValue of the indent level. Each sublist increments the level. The first item should have level 0.
+APPKIT_EXTERN NSAttributedStringKey const NSAccessibilityListItemPrefixTextAttribute    API_AVAILABLE(macos(10.11));    // NSAttributedString, the prepended string of the list item. If the string is a common unicode character (e.g. a bullet •), return that unicode character. For lists with images before the text, return a reasonable label of the image.
+APPKIT_EXTERN NSAttributedStringKey const NSAccessibilityListItemIndexTextAttribute     API_AVAILABLE(macos(10.11));    // NSNumber, integerValue of the line index. Each list item increments the index, even for unordered lists. The first item should have index 0.
+APPKIT_EXTERN NSAttributedStringKey const NSAccessibilityListItemLevelTextAttribute     API_AVAILABLE(macos(10.11));    // NSNumber, integerValue of the indent level. Each sublist increments the level. The first item should have level 0.
 
 /*
  About MisspelledText attributes for attribute strings:
@@ -156,31 +157,31 @@ APPKIT_EXTERN NSAttributedStringKey const NSAccessibilityListItemLevelTextAttrib
  When implementing accessibility for a custom text-editing engine, you should generally provide the MarkedMisspelledText attribute in order to support VoiceOver, especially in OS X 10.9 and later. You may optionally also support the MisspelledText attribute for compatibility with other accessibility clients.
  */
 APPKIT_EXTERN NSAttributedStringKey const NSAccessibilityMisspelledTextAttribute;		//(NSNumber *)	    - (boolValue)
-APPKIT_EXTERN NSAttributedStringKey const NSAccessibilityMarkedMisspelledTextAttribute NS_AVAILABLE_MAC(10_4);	//(NSNumber *) - (boolValue)
+APPKIT_EXTERN NSAttributedStringKey const NSAccessibilityMarkedMisspelledTextAttribute API_AVAILABLE(macos(10.4));	//(NSNumber *) - (boolValue)
 
 
-APPKIT_EXTERN NSAttributedStringKey const NSAccessibilityLanguageTextAttribute NS_AVAILABLE_MAC(10_13); //(NSString *) - BCP-47 langugage code to identify the language of a segment of string
+APPKIT_EXTERN NSAttributedStringKey const NSAccessibilityLanguageTextAttribute API_AVAILABLE(macos(10.13)); //(NSString *) - BCP-47 langugage code to identify the language of a segment of string
 
 // This key in attributed string allows developers to return an array of localized strings to describe custom text attributes
-APPKIT_EXTERN NSAttributedStringKey const NSAccessibilityCustomTextAttribute NS_AVAILABLE_MAC(10_13);   //(NSArray *) - NSString per custom text attribute
+APPKIT_EXTERN NSAttributedStringKey const NSAccessibilityCustomTextAttribute API_AVAILABLE(macos(10.13));   //(NSArray *) - NSString per custom text attribute
 /*
  NSAccessibilityAnnotationTextAttribute allows annotation information to be conveyed.  It returns an array to allow overlapping annotations.  Each annotation attribute dictionary can describe itself via the set of NSAccessibilityAnnotationAttributeKeys.
     NSAccessibilityAnnotationLabel: Describe the annotation
     NSAccessibilityAnnotationElement: Annotation UIElement.  Should return this if the element is interactive.
     NSAccessibilityAnnotationLocation: The position where the annotation applies.  Generally, this is the entire range.  But in the case where the annotation, like a comment arrow, points to a position between two characters, the range is zero.  Since NSAttributedString requires adding an attribute to string of length greater than zero, the string nearest the annotation with at least length of one needs to be returned.  So NSAccessibilityAnnotationLocation is a way to indicate exactly which end of that range the annotation is intended.
  */
-APPKIT_EXTERN NSAttributedStringKey const NSAccessibilityAnnotationTextAttribute NS_AVAILABLE_MAC(10_13);   //(NSArray *) - (NSDictionary<NSAccessibilityAnnotationAttributeKey, id> *)
+APPKIT_EXTERN NSAttributedStringKey const NSAccessibilityAnnotationTextAttribute API_AVAILABLE(macos(10.13));   //(NSArray *) - (NSDictionary<NSAccessibilityAnnotationAttributeKey, id> *)
 
 typedef NSString * NSAccessibilityAnnotationAttributeKey NS_TYPED_ENUM;
-APPKIT_EXTERN NSAccessibilityAnnotationAttributeKey const NSAccessibilityAnnotationLabel; // required (NSString *)
-APPKIT_EXTERN NSAccessibilityAnnotationAttributeKey const NSAccessibilityAnnotationElement; // optional (id) - UIElement for the annotation object
-APPKIT_EXTERN NSAccessibilityAnnotationAttributeKey const NSAccessibilityAnnotationLocation; // optional (NSNumber *) - (NSAccessibilityAnnotationPosition)
+APPKIT_EXTERN NSAccessibilityAnnotationAttributeKey const NSAccessibilityAnnotationLabel API_AVAILABLE(macos(10.13)); // required (NSString *)
+APPKIT_EXTERN NSAccessibilityAnnotationAttributeKey const NSAccessibilityAnnotationElement API_AVAILABLE(macos(10.13)); // optional (id) - UIElement for the annotation object
+APPKIT_EXTERN NSAccessibilityAnnotationAttributeKey const NSAccessibilityAnnotationLocation API_AVAILABLE(macos(10.13)); // optional (NSNumber *) - (NSAccessibilityAnnotationPosition)
 
 typedef NS_ENUM(NSInteger, NSAccessibilityAnnotationPosition) {
     NSAccessibilityAnnotationPositionFullRange,
     NSAccessibilityAnnotationPositionStart,
     NSAccessibilityAnnotationPositionEnd,
-} NS_ENUM_AVAILABLE_MAC(10_13);
+} API_AVAILABLE(macos(10.13));
 
 typedef NSString * NSAccessibilityFontAttributeKey NS_TYPED_ENUM;
 APPKIT_EXTERN NSAccessibilityFontAttributeKey const NSAccessibilityFontNameKey;	// required
@@ -202,7 +203,7 @@ APPKIT_EXTERN NSAccessibilityAttributeName const NSAccessibilityGrowAreaAttribut
 APPKIT_EXTERN NSAccessibilityAttributeName const NSAccessibilityModalAttribute;		//(NSNumber *) - (boolValue) is the window modal
 APPKIT_EXTERN NSAccessibilityAttributeName const NSAccessibilityDefaultButtonAttribute;	//(id) - UIElement for default button
 APPKIT_EXTERN NSAccessibilityAttributeName const NSAccessibilityCancelButtonAttribute;	//(id) - UIElement for cancel button
-APPKIT_EXTERN NSAccessibilityAttributeName const NSAccessibilityFullScreenButtonAttribute NS_AVAILABLE_MAC(10_7); //(id) - UIElement for full screen button (or nil)
+APPKIT_EXTERN NSAccessibilityAttributeName const NSAccessibilityFullScreenButtonAttribute API_AVAILABLE(macos(10.7)); //(id) - UIElement for full screen button (or nil)
 
 /* Application-specific attributes
  */
@@ -213,13 +214,13 @@ APPKIT_EXTERN NSAccessibilityAttributeName const NSAccessibilityHiddenAttribute;
 APPKIT_EXTERN NSAccessibilityAttributeName const NSAccessibilityMainWindowAttribute;	//(id)         - UIElement for the main window.
 APPKIT_EXTERN NSAccessibilityAttributeName const NSAccessibilityFocusedWindowAttribute;	//(id)         - UIElement for the key window.
 APPKIT_EXTERN NSAccessibilityAttributeName const NSAccessibilityFocusedUIElementAttribute;	//(id)         - Currently focused UIElement.
-APPKIT_EXTERN NSAccessibilityAttributeName const NSAccessibilityExtrasMenuBarAttribute NS_AVAILABLE_MAC(10_8);    //(id)         - UIElement for the application extras menu bar.
+APPKIT_EXTERN NSAccessibilityAttributeName const NSAccessibilityExtrasMenuBarAttribute API_AVAILABLE(macos(10.8));    //(id)         - UIElement for the application extras menu bar.
 
 typedef NS_ENUM(NSInteger, NSAccessibilityOrientation) {
     NSAccessibilityOrientationUnknown = 0,
     NSAccessibilityOrientationVertical = 1,
     NSAccessibilityOrientationHorizontal = 2,
-} NS_ENUM_AVAILABLE_MAC(10_10);
+} API_AVAILABLE(macos(10.10));
 
 APPKIT_EXTERN NSAccessibilityAttributeName const NSAccessibilityOrientationAttribute;	//(NSAccessibilityOrientationValue)
 typedef NSString * NSAccessibilityOrientationValue NS_TYPED_ENUM;
@@ -247,37 +248,37 @@ APPKIT_EXTERN NSAccessibilityAttributeName const NSAccessibilitySortDirectionAtt
 
 /* Cell-based table attributes
  */
-APPKIT_EXTERN NSAccessibilityAttributeName const NSAccessibilitySelectedCellsAttribute NS_AVAILABLE_MAC(10_6);	//(NSArray *)  - UIElements for selected cells
-APPKIT_EXTERN NSAccessibilityAttributeName const NSAccessibilityVisibleCellsAttribute NS_AVAILABLE_MAC(10_6);	//(NSArray *)  - UIElements for visible cells
-APPKIT_EXTERN NSAccessibilityAttributeName const NSAccessibilityRowHeaderUIElementsAttribute NS_AVAILABLE_MAC(10_6);	//(NSArray *)  - UIElements for row headers
-APPKIT_EXTERN NSAccessibilityAttributeName const NSAccessibilityColumnHeaderUIElementsAttribute NS_AVAILABLE_MAC(10_6);	//(NSArray *)  - UIElements for column headers
+APPKIT_EXTERN NSAccessibilityAttributeName const NSAccessibilitySelectedCellsAttribute API_AVAILABLE(macos(10.6));	//(NSArray *)  - UIElements for selected cells
+APPKIT_EXTERN NSAccessibilityAttributeName const NSAccessibilityVisibleCellsAttribute API_AVAILABLE(macos(10.6));	//(NSArray *)  - UIElements for visible cells
+APPKIT_EXTERN NSAccessibilityAttributeName const NSAccessibilityRowHeaderUIElementsAttribute API_AVAILABLE(macos(10.6));	//(NSArray *)  - UIElements for row headers
+APPKIT_EXTERN NSAccessibilityAttributeName const NSAccessibilityColumnHeaderUIElementsAttribute API_AVAILABLE(macos(10.6));	//(NSArray *)  - UIElements for column headers
 
 /* Cell-based table parameterized attributes.  The parameter for this attribute is an NSArray containing two NSNumbers, the first NSNumber specifies the column index, the second NSNumber specifies the row index.
  */
-APPKIT_EXTERN NSAccessibilityParameterizedAttributeName const NSAccessibilityCellForColumnAndRowParameterizedAttribute NS_AVAILABLE_MAC(10_6);  // (id) - UIElement for cell at specified row and column
+APPKIT_EXTERN NSAccessibilityParameterizedAttributeName const NSAccessibilityCellForColumnAndRowParameterizedAttribute API_AVAILABLE(macos(10.6));  // (id) - UIElement for cell at specified row and column
 
 /* Cell attributes.  The index range contains both the starting index, and the index span in a table.
  */
-APPKIT_EXTERN NSAccessibilityAttributeName const NSAccessibilityRowIndexRangeAttribute NS_AVAILABLE_MAC(10_6);	//(NSValue *)  - (rangeValue) location and row span
-APPKIT_EXTERN NSAccessibilityAttributeName const NSAccessibilityColumnIndexRangeAttribute NS_AVAILABLE_MAC(10_6);   //(NSValue *)  - (rangeValue) location and column span
+APPKIT_EXTERN NSAccessibilityAttributeName const NSAccessibilityRowIndexRangeAttribute API_AVAILABLE(macos(10.6));	//(NSValue *)  - (rangeValue) location and row span
+APPKIT_EXTERN NSAccessibilityAttributeName const NSAccessibilityColumnIndexRangeAttribute API_AVAILABLE(macos(10.6));   //(NSValue *)  - (rangeValue) location and column span
 
 /* Layout area attributes
  */
-APPKIT_EXTERN NSAccessibilityAttributeName const NSAccessibilityHorizontalUnitsAttribute NS_AVAILABLE_MAC(10_6);   //(NSAccessibilityRulerUnitValue)
-APPKIT_EXTERN NSAccessibilityAttributeName const NSAccessibilityVerticalUnitsAttribute NS_AVAILABLE_MAC(10_6);	    //(NSAccessibilityRulerUnitValue)
-APPKIT_EXTERN NSAccessibilityAttributeName const NSAccessibilityHorizontalUnitDescriptionAttribute NS_AVAILABLE_MAC(10_6); //(NSString *)
-APPKIT_EXTERN NSAccessibilityAttributeName const NSAccessibilityVerticalUnitDescriptionAttribute NS_AVAILABLE_MAC(10_6);    //(NSString *)
+APPKIT_EXTERN NSAccessibilityAttributeName const NSAccessibilityHorizontalUnitsAttribute API_AVAILABLE(macos(10.6));   //(NSAccessibilityRulerUnitValue)
+APPKIT_EXTERN NSAccessibilityAttributeName const NSAccessibilityVerticalUnitsAttribute API_AVAILABLE(macos(10.6));	    //(NSAccessibilityRulerUnitValue)
+APPKIT_EXTERN NSAccessibilityAttributeName const NSAccessibilityHorizontalUnitDescriptionAttribute API_AVAILABLE(macos(10.6)); //(NSString *)
+APPKIT_EXTERN NSAccessibilityAttributeName const NSAccessibilityVerticalUnitDescriptionAttribute API_AVAILABLE(macos(10.6));    //(NSString *)
 
 /* Layout area parameterized attributes
  */
-APPKIT_EXTERN NSAccessibilityParameterizedAttributeName const NSAccessibilityLayoutPointForScreenPointParameterizedAttribute NS_AVAILABLE_MAC(10_6); //(NSValue *)  - (pointValue); param:(NSValue * - pointValue)
-APPKIT_EXTERN NSAccessibilityParameterizedAttributeName const NSAccessibilityLayoutSizeForScreenSizeParameterizedAttribute NS_AVAILABLE_MAC(10_6); //(NSValue *)  - (sizeValue); param:(NSValue * - sizeValue)
-APPKIT_EXTERN NSAccessibilityParameterizedAttributeName const NSAccessibilityScreenPointForLayoutPointParameterizedAttribute NS_AVAILABLE_MAC(10_6); //(NSValue *)  - (pointValue); param:(NSValue * - pointValue)
-APPKIT_EXTERN NSAccessibilityParameterizedAttributeName const NSAccessibilityScreenSizeForLayoutSizeParameterizedAttribute NS_AVAILABLE_MAC(10_6); //(NSValue *)  - (sizeValue); param:(NSValue * - sizeValue)
+APPKIT_EXTERN NSAccessibilityParameterizedAttributeName const NSAccessibilityLayoutPointForScreenPointParameterizedAttribute API_AVAILABLE(macos(10.6)); //(NSValue *)  - (pointValue); param:(NSValue * - pointValue)
+APPKIT_EXTERN NSAccessibilityParameterizedAttributeName const NSAccessibilityLayoutSizeForScreenSizeParameterizedAttribute API_AVAILABLE(macos(10.6)); //(NSValue *)  - (sizeValue); param:(NSValue * - sizeValue)
+APPKIT_EXTERN NSAccessibilityParameterizedAttributeName const NSAccessibilityScreenPointForLayoutPointParameterizedAttribute API_AVAILABLE(macos(10.6)); //(NSValue *)  - (pointValue); param:(NSValue * - pointValue)
+APPKIT_EXTERN NSAccessibilityParameterizedAttributeName const NSAccessibilityScreenSizeForLayoutSizeParameterizedAttribute API_AVAILABLE(macos(10.6)); //(NSValue *)  - (sizeValue); param:(NSValue * - sizeValue)
 
 /* Layout item attributes
  */
-APPKIT_EXTERN NSAccessibilityAttributeName const NSAccessibilityHandlesAttribute NS_AVAILABLE_MAC(10_6); //(NSArray *)  - UIElements for handles
+APPKIT_EXTERN NSAccessibilityAttributeName const NSAccessibilityHandlesAttribute API_AVAILABLE(macos(10.6)); //(NSArray *)  - UIElements for handles
 
 /* Sort direction values
  */
@@ -290,7 +291,7 @@ typedef NS_ENUM(NSInteger, NSAccessibilitySortDirection) {
     NSAccessibilitySortDirectionUnknown = 0,
     NSAccessibilitySortDirectionAscending = 1,
     NSAccessibilitySortDirectionDescending = 2,
-} NS_ENUM_AVAILABLE_MAC(10_10);
+} API_AVAILABLE(macos(10.10));
 
 /* Outline attributes
  */
@@ -308,8 +309,8 @@ APPKIT_EXTERN NSAccessibilityAttributeName const NSAccessibilityLabelValueAttrib
 /* Matte attributes
  */
 // Attributes no longer supported
-APPKIT_EXTERN NSAccessibilityAttributeName const NSAccessibilityMatteHoleAttribute NS_DEPRECATED_MAC(10_1, 10_10);		//(NSValue *) - (rect value) bounds of matte hole in screen coords
-APPKIT_EXTERN NSAccessibilityAttributeName const NSAccessibilityMatteContentUIElementAttribute NS_DEPRECATED_MAC(10_1, 10_10); //(id) - UIElement clipped by the matte
+APPKIT_EXTERN NSAccessibilityAttributeName const NSAccessibilityMatteHoleAttribute API_DEPRECATED("", macos(10.1,10.10));		//(NSValue *) - (rect value) bounds of matte hole in screen coords
+APPKIT_EXTERN NSAccessibilityAttributeName const NSAccessibilityMatteContentUIElementAttribute API_DEPRECATED("", macos(10.1,10.10)); //(id) - UIElement clipped by the matte
 
 /* Ruler view attributes
  */
@@ -324,7 +325,7 @@ APPKIT_EXTERN NSAccessibilityAttributeName const NSAccessibilityMarkerTypeDescri
 /* UI element identification attributes
  */
 APPKIT_EXTERN NSAccessibilityAttributeName const NSAccessibilityIdentifierAttribute		//(NSString *)
-NS_AVAILABLE_MAC(10_7);
+API_AVAILABLE(macos(10.7));
 
 /* Ruler marker type values
  */
@@ -347,7 +348,7 @@ typedef NS_ENUM(NSInteger, NSAccessibilityRulerMarkerType) {
     NSAccessibilityRulerMarkerTypeIndentHead = 5,
     NSAccessibilityRulerMarkerTypeIndentTail = 6,
     NSAccessibilityRulerMarkerTypeIndentFirstLine = 7
-} NS_ENUM_AVAILABLE_MAC(10_10);
+} API_AVAILABLE(macos(10.10));
 
 /* Ruler unit values
  */
@@ -364,7 +365,7 @@ typedef NS_ENUM(NSInteger, NSAccessibilityUnits) {
     NSAccessibilityUnitsCentimeters = 2,
     NSAccessibilityUnitsPoints = 3,
     NSAccessibilityUnitsPicas = 4
-} NS_ENUM_AVAILABLE_MAC(10_10);
+} API_AVAILABLE(macos(10.10));
 
 /* Actions
  */
@@ -381,8 +382,8 @@ APPKIT_EXTERN NSAccessibilityActionName const NSAccessibilityDeleteAction;
 
 /* Actions that allow the developer to present either alternative or original UI. There may be new UI elements that appear. There may be UI elements that disappear. There may be changes to existing UI elements. Or a combination of them. Currently this is typically seen during a mouse hovering event.
  */
-APPKIT_EXTERN NSAccessibilityActionName const NSAccessibilityShowAlternateUIAction NS_AVAILABLE_MAC(10_9);
-APPKIT_EXTERN NSAccessibilityActionName const NSAccessibilityShowDefaultUIAction NS_AVAILABLE_MAC(10_9);
+APPKIT_EXTERN NSAccessibilityActionName const NSAccessibilityShowAlternateUIAction API_AVAILABLE(macos(10.9));
+APPKIT_EXTERN NSAccessibilityActionName const NSAccessibilityShowDefaultUIAction API_AVAILABLE(macos(10.9));
 
 /* Notifications
  */
@@ -425,7 +426,7 @@ APPKIT_EXTERN NSAccessibilityNotificationName const NSAccessibilityCreatedNotifi
 
 /* Used when UI changes require the attention of assistive application.  Pass along a user info dictionary with the key NSAccessibilityUIElementsKey and an array of elements that have been added or changed as a result of this layout change.
  */
-APPKIT_EXTERN NSAccessibilityNotificationName const NSAccessibilityLayoutChangedNotification NS_AVAILABLE_MAC(10_9);
+APPKIT_EXTERN NSAccessibilityNotificationName const NSAccessibilityLayoutChangedNotification API_AVAILABLE(macos(10.9));
 
 /* Misc notifications
  */
@@ -436,21 +437,21 @@ APPKIT_EXTERN NSAccessibilityNotificationName const NSAccessibilitySelectedChild
 APPKIT_EXTERN NSAccessibilityNotificationName const NSAccessibilitySelectedRowsChangedNotification;
 APPKIT_EXTERN NSAccessibilityNotificationName const NSAccessibilitySelectedColumnsChangedNotification;
 
-APPKIT_EXTERN NSAccessibilityNotificationName const NSAccessibilityRowExpandedNotification NS_AVAILABLE_MAC(10_6);
-APPKIT_EXTERN NSAccessibilityNotificationName const NSAccessibilityRowCollapsedNotification NS_AVAILABLE_MAC(10_6);
+APPKIT_EXTERN NSAccessibilityNotificationName const NSAccessibilityRowExpandedNotification API_AVAILABLE(macos(10.6));
+APPKIT_EXTERN NSAccessibilityNotificationName const NSAccessibilityRowCollapsedNotification API_AVAILABLE(macos(10.6));
 
 /* Cell-table notifications
  */
-APPKIT_EXTERN NSAccessibilityNotificationName const NSAccessibilitySelectedCellsChangedNotification NS_AVAILABLE_MAC(10_6);
+APPKIT_EXTERN NSAccessibilityNotificationName const NSAccessibilitySelectedCellsChangedNotification API_AVAILABLE(macos(10.6));
 
 /* Layout area notifications
  */
-APPKIT_EXTERN NSAccessibilityNotificationName const NSAccessibilityUnitsChangedNotification NS_AVAILABLE_MAC(10_6);
-APPKIT_EXTERN NSAccessibilityNotificationName const NSAccessibilitySelectedChildrenMovedNotification NS_AVAILABLE_MAC(10_6);
+APPKIT_EXTERN NSAccessibilityNotificationName const NSAccessibilityUnitsChangedNotification API_AVAILABLE(macos(10.6));
+APPKIT_EXTERN NSAccessibilityNotificationName const NSAccessibilitySelectedChildrenMovedNotification API_AVAILABLE(macos(10.6));
 
 /* This notification allows an application to request that an announcement be made to the user by an assistive application such as VoiceOver.  The notification requires a user info dictionary with the key NSAccessibilityAnnouncementKey and the announcement as a localized string.  In addition, the key NSAccessibilityAnnouncementPriorityKey should also be used to help an assistive application determine the importance of this announcement.  This notification should be posted for the application element.
  */
-APPKIT_EXTERN NSAccessibilityNotificationName const NSAccessibilityAnnouncementRequestedNotification NS_AVAILABLE_MAC(10_7);
+APPKIT_EXTERN NSAccessibilityNotificationName const NSAccessibilityAnnouncementRequestedNotification API_AVAILABLE(macos(10.7));
 
 
 /* Roles
@@ -477,7 +478,7 @@ APPKIT_EXTERN NSAccessibilityRole const NSAccessibilityScrollBarRole;
 APPKIT_EXTERN NSAccessibilityRole const NSAccessibilityValueIndicatorRole;
 APPKIT_EXTERN NSAccessibilityRole const NSAccessibilityImageRole;
 APPKIT_EXTERN NSAccessibilityRole const NSAccessibilityMenuBarRole;
-APPKIT_EXTERN NSAccessibilityRole const NSAccessibilityMenuBarItemRole NS_AVAILABLE_MAC(10_12);
+APPKIT_EXTERN NSAccessibilityRole const NSAccessibilityMenuBarItemRole API_AVAILABLE(macos(10.12));
 APPKIT_EXTERN NSAccessibilityRole const NSAccessibilityMenuRole;
 APPKIT_EXTERN NSAccessibilityRole const NSAccessibilityMenuItemRole;
 APPKIT_EXTERN NSAccessibilityRole const NSAccessibilityColumnRole;
@@ -502,19 +503,19 @@ APPKIT_EXTERN NSAccessibilityRole const NSAccessibilityMatteRole;
 APPKIT_EXTERN NSAccessibilityRole const NSAccessibilityRulerRole;
 APPKIT_EXTERN NSAccessibilityRole const NSAccessibilityRulerMarkerRole;
 APPKIT_EXTERN NSAccessibilityRole const NSAccessibilityLinkRole;
-APPKIT_EXTERN NSAccessibilityRole const NSAccessibilityDisclosureTriangleRole NS_AVAILABLE_MAC(10_5);
-APPKIT_EXTERN NSAccessibilityRole const NSAccessibilityGridRole NS_AVAILABLE_MAC(10_5);
+APPKIT_EXTERN NSAccessibilityRole const NSAccessibilityDisclosureTriangleRole API_AVAILABLE(macos(10.5));
+APPKIT_EXTERN NSAccessibilityRole const NSAccessibilityGridRole API_AVAILABLE(macos(10.5));
 APPKIT_EXTERN NSAccessibilityRole const NSAccessibilityRelevanceIndicatorRole;
-APPKIT_EXTERN NSAccessibilityRole const NSAccessibilityLevelIndicatorRole NS_AVAILABLE_MAC(10_6);
-APPKIT_EXTERN NSAccessibilityRole const NSAccessibilityCellRole NS_AVAILABLE_MAC(10_6); // As found in a cell-based table
-APPKIT_EXTERN NSAccessibilityRole const NSAccessibilityPopoverRole NS_AVAILABLE_MAC(10_7);
-APPKIT_EXTERN NSAccessibilityRole const NSAccessibilityPageRole NS_AVAILABLE_MAC(10_13);
+APPKIT_EXTERN NSAccessibilityRole const NSAccessibilityLevelIndicatorRole API_AVAILABLE(macos(10.6));
+APPKIT_EXTERN NSAccessibilityRole const NSAccessibilityCellRole API_AVAILABLE(macos(10.6)); // As found in a cell-based table
+APPKIT_EXTERN NSAccessibilityRole const NSAccessibilityPopoverRole API_AVAILABLE(macos(10.7));
+APPKIT_EXTERN NSAccessibilityRole const NSAccessibilityPageRole API_AVAILABLE(macos(10.13));
 
 /* Layout-area roles
  */
-APPKIT_EXTERN NSAccessibilityRole const NSAccessibilityLayoutAreaRole NS_AVAILABLE_MAC(10_6);
-APPKIT_EXTERN NSAccessibilityRole const NSAccessibilityLayoutItemRole NS_AVAILABLE_MAC(10_6);
-APPKIT_EXTERN NSAccessibilityRole const NSAccessibilityHandleRole NS_AVAILABLE_MAC(10_6);
+APPKIT_EXTERN NSAccessibilityRole const NSAccessibilityLayoutAreaRole API_AVAILABLE(macos(10.6));
+APPKIT_EXTERN NSAccessibilityRole const NSAccessibilityLayoutItemRole API_AVAILABLE(macos(10.6));
+APPKIT_EXTERN NSAccessibilityRole const NSAccessibilityHandleRole API_AVAILABLE(macos(10.6));
 
 /* Subroles
  */
@@ -539,37 +540,37 @@ APPKIT_EXTERN NSAccessibilitySubrole const NSAccessibilityDecrementPageSubrole;
 APPKIT_EXTERN NSAccessibilitySubrole const NSAccessibilitySearchFieldSubrole;
 APPKIT_EXTERN NSAccessibilitySubrole const NSAccessibilityTextAttachmentSubrole;
 APPKIT_EXTERN NSAccessibilitySubrole const NSAccessibilityTextLinkSubrole;
-APPKIT_EXTERN NSAccessibilitySubrole const NSAccessibilityTimelineSubrole NS_AVAILABLE_MAC(10_5);
-APPKIT_EXTERN NSAccessibilitySubrole const NSAccessibilitySortButtonSubrole NS_AVAILABLE_MAC(10_6);
-APPKIT_EXTERN NSAccessibilitySubrole const NSAccessibilityRatingIndicatorSubrole NS_AVAILABLE_MAC(10_6);
-APPKIT_EXTERN NSAccessibilitySubrole const NSAccessibilityContentListSubrole NS_AVAILABLE_MAC(10_6);
-APPKIT_EXTERN NSAccessibilitySubrole const NSAccessibilityDefinitionListSubrole NS_AVAILABLE_MAC(10_6);
-APPKIT_EXTERN NSAccessibilitySubrole const NSAccessibilityFullScreenButtonSubrole NS_AVAILABLE_MAC(10_7);
-APPKIT_EXTERN NSAccessibilitySubrole const NSAccessibilityToggleSubrole NS_AVAILABLE_MAC(10_9);
-APPKIT_EXTERN NSAccessibilitySubrole const NSAccessibilitySwitchSubrole NS_AVAILABLE_MAC(10_9);
-APPKIT_EXTERN NSAccessibilitySubrole const NSAccessibilityDescriptionListSubrole NS_AVAILABLE_MAC(10_9);
-APPKIT_EXTERN NSAccessibilitySubrole const NSAccessibilityTabButtonSubrole NS_AVAILABLE_MAC(10_13);
-APPKIT_EXTERN NSAccessibilitySubrole const NSAccessibilityCollectionListSubrole NS_AVAILABLE_MAC(10_13);
-APPKIT_EXTERN NSAccessibilitySubrole const NSAccessibilitySectionListSubrole NS_AVAILABLE_MAC(10_13);
+APPKIT_EXTERN NSAccessibilitySubrole const NSAccessibilityTimelineSubrole API_AVAILABLE(macos(10.5));
+APPKIT_EXTERN NSAccessibilitySubrole const NSAccessibilitySortButtonSubrole API_AVAILABLE(macos(10.6));
+APPKIT_EXTERN NSAccessibilitySubrole const NSAccessibilityRatingIndicatorSubrole API_AVAILABLE(macos(10.6));
+APPKIT_EXTERN NSAccessibilitySubrole const NSAccessibilityContentListSubrole API_AVAILABLE(macos(10.6));
+APPKIT_EXTERN NSAccessibilitySubrole const NSAccessibilityDefinitionListSubrole API_AVAILABLE(macos(10.6));
+APPKIT_EXTERN NSAccessibilitySubrole const NSAccessibilityFullScreenButtonSubrole API_AVAILABLE(macos(10.7));
+APPKIT_EXTERN NSAccessibilitySubrole const NSAccessibilityToggleSubrole API_AVAILABLE(macos(10.9));
+APPKIT_EXTERN NSAccessibilitySubrole const NSAccessibilitySwitchSubrole API_AVAILABLE(macos(10.9));
+APPKIT_EXTERN NSAccessibilitySubrole const NSAccessibilityDescriptionListSubrole API_AVAILABLE(macos(10.9));
+APPKIT_EXTERN NSAccessibilitySubrole const NSAccessibilityTabButtonSubrole API_AVAILABLE(macos(10.13));
+APPKIT_EXTERN NSAccessibilitySubrole const NSAccessibilityCollectionListSubrole API_AVAILABLE(macos(10.13));
+APPKIT_EXTERN NSAccessibilitySubrole const NSAccessibilitySectionListSubrole API_AVAILABLE(macos(10.13));
 
 /* Below are keys used for the user info dictionary of the NSAccessibilityPostNotificationWithUserInfo API */
 typedef NSString * NSAccessibilityNotificationUserInfoKey NS_TYPED_ENUM;
 /* Key used in the user info dictionary for notifications.  The value is an array of elements that is associated with the notification.  For example, a NSAccessibilityLayoutChangedNotification should include an array of elements that have been added/changed using this key.
  */
-APPKIT_EXTERN NSAccessibilityNotificationUserInfoKey const NSAccessibilityUIElementsKey NS_AVAILABLE_MAC(10_9);
+APPKIT_EXTERN NSAccessibilityNotificationUserInfoKey const NSAccessibilityUIElementsKey API_AVAILABLE(macos(10.9));
 
 /* Key used in the user info dictionary for any relevant notification.  This gives the assistive application client an opportunity to determine how to handle the corresponding notification based on the priority.  For example, a developer should pass the priority key for NSAccessibilityAnnouncementRequestedNotification.  Then clients such as VoiceOver can decide to speak the announcement immediately or after the current speech is completed based on the priority level.  This key is required for NSAccessibilityAnnouncementRequestedNotification.  The NSAccessibilityLayoutChangedNotification is another example where priority can help assistive applications determine how to handle the UI change.
  */
-APPKIT_EXTERN NSAccessibilityNotificationUserInfoKey const NSAccessibilityPriorityKey NS_AVAILABLE_MAC(10_9);
+APPKIT_EXTERN NSAccessibilityNotificationUserInfoKey const NSAccessibilityPriorityKey API_AVAILABLE(macos(10.9));
 
 /* Key used in the user info dictionary sent with the NSAccessibilityAnnouncementRequestedNotification.  The value for the announcement should be a localized string.  This should generally be used in conjunction with the NSAccessibilityPriorityKey to help assistive applications determine the importance of this announcement.
  */
-APPKIT_EXTERN NSAccessibilityNotificationUserInfoKey const NSAccessibilityAnnouncementKey NS_AVAILABLE_MAC(10_7);
+APPKIT_EXTERN NSAccessibilityNotificationUserInfoKey const NSAccessibilityAnnouncementKey API_AVAILABLE(macos(10.7));
 
 
 /* This function allows an accessibility notification to be posted with a user info dictionary.  The user info dictionary can be nil.  Valid contents of the user info dictionary are limited to classes which can be returned to an accessibility client.  That list currently includes NSString, NSNumber, NSArray, NSValues of points, ranges, sizes, rects, and valid NSAccessibility objects.  Most accessibility notifications do not require a user info dictionary.
  */
-APPKIT_EXTERN void NSAccessibilityPostNotificationWithUserInfo(id element, NSAccessibilityNotificationName notification, NSDictionary<NSAccessibilityNotificationUserInfoKey, id> * __nullable userInfo) NS_AVAILABLE_MAC(10_7);
+APPKIT_EXTERN void NSAccessibilityPostNotificationWithUserInfo(id element, NSAccessibilityNotificationName notification, NSDictionary<NSAccessibilityNotificationUserInfoKey, id> * _Nullable userInfo) API_AVAILABLE(macos(10.7));
 
 
 
@@ -579,7 +580,7 @@ typedef NS_ENUM(NSInteger, NSAccessibilityPriorityLevel) {
     NSAccessibilityPriorityLow = 10,
     NSAccessibilityPriorityMedium = 50,
     NSAccessibilityPriorityHigh = 90
-} NS_ENUM_AVAILABLE_MAC(10_9);
+} API_AVAILABLE(macos(10.9));
 
 
 // token type for loading search element
@@ -587,6 +588,7 @@ typedef id<NSSecureCoding, NSObject> NSAccessibilityLoadingToken;
 
 /* Deprecated
  */
-APPKIT_EXTERN NSAccessibilityRole const NSAccessibilitySortButtonRole NS_DEPRECATED_MAC(10_4, 10_6);
+APPKIT_EXTERN NSAccessibilityRole const NSAccessibilitySortButtonRole API_DEPRECATED("", macos(10.4,10.6));
 
+API_UNAVAILABLE_END
 NS_ASSUME_NONNULL_END

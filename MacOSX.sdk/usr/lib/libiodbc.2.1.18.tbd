@@ -1,11 +1,10 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 6E4D0F87-4255-3686-8FD4-B9965997137B' ]
+uuids:           [ 'x86_64: 8F7A88C6-796E-3358-83C1-F1956DC5B2A7' ]
 platform:        macosx
-install-name:    /usr/lib/libiodbc.2.dylib
+install-name:    '/usr/lib/libiodbc.2.dylib'
 current-version: 4.18
 compatibility-version: 4
-objc-constraint: none
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _Done_iODBC, _GetPrivateProfileString, _Init_iODBC, _ODBCSharedTraceFlag, 

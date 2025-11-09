@@ -1,7 +1,7 @@
 /*
     NSWindowTabGroup.h
     Application Kit
-    Copyright (c) 2017-2018, Apple Inc.
+    Copyright (c) 2017-2019, Apple Inc.
     All rights reserved.
 */
 
@@ -9,14 +9,12 @@
 #import <AppKit/NSWindow.h>
 
 NS_ASSUME_NONNULL_BEGIN
+API_UNAVAILABLE_BEGIN(ios)
 
 /* NSWindowTabGroup represents a group of windows that are shown together in one tab group. See NSWindow's tabGroup property.
  */
-NS_CLASS_AVAILABLE_MAC(10_13)
-@interface NSWindowTabGroup : NSObject {
-@private
-    NSWindowTabbingIdentifier _identifier APPKIT_IVAR;
-}
+API_AVAILABLE(macos(10.13))
+@interface NSWindowTabGroup : NSObject
 
 /* The identifier for this group; all windows in the group will have the same identifier.
  */
@@ -48,4 +46,5 @@ NS_CLASS_AVAILABLE_MAC(10_13)
 @end
 
 
+API_UNAVAILABLE_END
 NS_ASSUME_NONNULL_END

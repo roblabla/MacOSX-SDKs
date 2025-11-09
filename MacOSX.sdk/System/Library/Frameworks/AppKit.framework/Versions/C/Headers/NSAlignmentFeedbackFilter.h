@@ -1,7 +1,7 @@
 /*
  NSAlignmentFeedbackFilter.h
  Application Kit
- Copyright (c) 2015-2018, Apple Inc.
+ Copyright (c) 2015-2019, Apple Inc.
  All rights reserved.
  */
 
@@ -16,8 +16,9 @@
 @end
 
 NS_ASSUME_NONNULL_BEGIN
+API_UNAVAILABLE_BEGIN(ios)
 
-NS_CLASS_AVAILABLE(10_11, NA)
+API_AVAILABLE(macos(10.11))
 @interface NSAlignmentFeedbackFilter : NSObject
 
 /*  The event mask indicating which event types the filter accepts. Suitable for use in tracking loops.
@@ -50,4 +51,5 @@ NS_CLASS_AVAILABLE(10_11, NA)
 
 @end
 
+API_UNAVAILABLE_END
 NS_ASSUME_NONNULL_END

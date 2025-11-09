@@ -137,7 +137,6 @@ VT_EXPORT const CFStringRef kVTDecompressionPropertyKey_MaxOutputPresentationTim
 VT_EXPORT const CFStringRef kVTDecompressionPropertyKey_ContentHasInterframeDependencies API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2)); // Read-only, CFBoolean
 
 #pragma mark Hardware acceleration
-// hardware acceleration is default behavior on iOS.  no opt-in required.
 #if !TARGET_OS_IPHONE
 /*!
 	@constant	kVTVideoDecoderSpecification_EnableHardwareAcceleratedVideoDecoder
@@ -146,12 +145,11 @@ VT_EXPORT const CFStringRef kVTDecompressionPropertyKey_ContentHasInterframeDepe
 		kCFBooleanFalse, hardware decode will never be used.
 	@discussion
 		This key is set in the decoderSpecification passed in to VTDecompressionSessionCreate.  Set it
-		to kCFBooleanTrue to allow hardware accelerated decode.  To specifically prevent hardware decode,
+		to kCFBooleanTrue to allow hardware accelerated decode.  To  prevent hardware decode,
 		this property can be set to kCFBooleanFalse.
-		This is useful for clients doing realtime decode operations to allow the VideoToolbox
-		to choose the optimal decode path.
+		In MacOS 10.15 and later, hardware decode is enabled in VTDecompressionSessions by default.
 */
-VT_EXPORT const CFStringRef kVTVideoDecoderSpecification_EnableHardwareAcceleratedVideoDecoder API_AVAILABLE(macosx(10.9), ios(8.0), tvos(10.2)); // CFBoolean, Optional
+VT_EXPORT const CFStringRef kVTVideoDecoderSpecification_EnableHardwareAcceleratedVideoDecoder API_AVAILABLE(macosx(10.9), ios(8.0), tvos(10.2)); // CFBoolean, Optional, true by default
 
 /*!
 	@constant	kVTVideoDecoderSpecification_RequireHardwareAcceleratedVideoDecoder
@@ -187,9 +185,6 @@ VT_EXPORT const CFStringRef kVTDecompressionPropertyKey_UsingHardwareAccelerated
 	
 #pragma mark Decoder behavior
 
-// Standard properties regarding decoder behavior.
-// Video decoders may report optionally report these.
-	
 /*!
 	@constant	kVTDecompressionPropertyKey_RealTime
 	@abstract
@@ -417,6 +412,17 @@ VT_EXPORT const CFStringRef kVTVideoDecoderSpecification_RequiredDecoderGPURegis
 		This option can only be used to specify a GPU registryID corresponding to a removable GPU (eGPU).
 */
 VT_EXPORT const CFStringRef kVTVideoDecoderSpecification_PreferredDecoderGPURegistryID API_AVAILABLE(macosx(10.13)); // CFNumber, Optional
+
+/*!
+	@constant	kVTDecompressionPropertyKey_UsingGPURegistryID
+	@abstract
+		returns CFNumber indicating the gpu registryID of the decoder that was selected.  NULL indicates a built-in decoder or software decode was used.
+	@discussion
+		You can query this property using VTSessionCopyProperty after building a VTDecompressionSession to find out which GPU the decoder is using.
+		If a decoder based on a built-in GPU was used it will return NULL.  If a software decoder is used, it will return NULL
+*/
+VT_EXPORT const CFStringRef kVTDecompressionPropertyKey_UsingGPURegistryID API_AVAILABLE(macosx(10.15)) ; // CFNumberRef, Read;
+
 
 	
 CM_ASSUME_NONNULL_END

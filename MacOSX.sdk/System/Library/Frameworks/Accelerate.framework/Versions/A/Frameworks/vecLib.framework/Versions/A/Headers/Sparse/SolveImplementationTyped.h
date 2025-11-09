@@ -299,6 +299,7 @@ _SPARSE_VARIANT(SparseMatrix) SparseConvertFromCoordinate(
   SPARSE_PARAMETER_CHECK(workspace, _SPARSE_VARIANT(_SparseNullMatrix),
                          "Failed to allocate workspace of size %ld.\n", rowCount*sizeof(int));
   _SPARSE_VARIANT(SparseMatrix) result =  _SPARSE_VARIANT(_SparseConvertFromCoordinate)(rowCount, columnCount, blockCount, blockSize, attributes, row, column, data, storage, workspace);
+  result.structure.columnStarts = (long *)storage; // redundant to assignment in _SparseConvertFromCoordinate call, used to suppress static analyzer warning
   free(workspace);
   result.structure.attributes._allocatedBySparse = true;
   return result;
@@ -352,10 +353,10 @@ void SparseMultiply(_SPARSE_IMPLEMENTATION_TYPE alpha, _SPARSE_VARIANT(SparseMat
   int m = A.structure.blockSize * ((A.structure.attributes.transpose) ? A.structure.columnCount : A.structure.rowCount);
   int n = A.structure.blockSize * ((A.structure.attributes.transpose) ? A.structure.rowCount : A.structure.columnCount);
   SPARSE_PARAMETER_CHECK(n == x.count, /* No result */,
-                         "Matix dimensions (%dx%d) do not match x vector dimensions %dx%d\n",
+                         "Matrix dimensions (%dx%d) do not match x vector dimensions %dx%d\n",
                          m, n, x.count, 1);
   SPARSE_PARAMETER_CHECK(m == y.count, /* No result */,
-                         "Matix dimensions (%dx%d) do not match y vector dimensions %dx%d\n",
+                         "Matrix dimensions (%dx%d) do not match y vector dimensions %dx%d\n",
                          m, n, y.count, 1);
   _SPARSE_VARIANT(_SparseSpMV)(alpha, A, _SPARSE_VARIANT(_DenseMatrixFromVector)(x),
                                false, _SPARSE_VARIANT(_DenseMatrixFromVector)(y));
@@ -401,10 +402,10 @@ void SparseMultiplyAdd(_SPARSE_IMPLEMENTATION_TYPE alpha, _SPARSE_VARIANT(Sparse
   int m = A.structure.blockSize * ((A.structure.attributes.transpose) ? A.structure.columnCount : A.structure.rowCount);
   int n = A.structure.blockSize * ((A.structure.attributes.transpose) ? A.structure.rowCount : A.structure.columnCount);
   SPARSE_PARAMETER_CHECK(n == x.count, /* No result */,
-                         "Matix dimensions (%dx%d) do not match x vector dimensions %dx%d\n",
+                         "Matrix dimensions (%dx%d) do not match x vector dimensions %dx%d\n",
                          m, n, x.count, 1);
   SPARSE_PARAMETER_CHECK(m == y.count, /* No result */,
-                         "Matix dimensions (%dx%d) do not match y vector dimensions %dx%d\n",
+                         "Matrix dimensions (%dx%d) do not match y vector dimensions %dx%d\n",
                          m, n, y.count, 1);
   _SPARSE_VARIANT(_SparseSpMV)(alpha, A, _SPARSE_VARIANT(_DenseMatrixFromVector)(x),
                                true, _SPARSE_VARIANT(_DenseMatrixFromVector)(y));
@@ -519,7 +520,6 @@ _SPARSE_VARIANT(SparseOpaqueFactorization) SparseFactor(SparseOpaqueSymbolicFact
   }
   result.userFactorStorage = userFactorStorage; // Flag whether we should free memory on destruction or not
   if(!userWorkspace) options.free(workspace); // If we allocated workspace, free it
-  if(result.status < 0 && !userFactorStorage) options.free(factorStorage); // free anything we allocated on error
   return result;
 }
 
@@ -1582,12 +1582,12 @@ _SPARSE_VARIANT(SparseOpaqueSubfactor) SparseRetain(_SPARSE_VARIANT(SparseOpaque
 
 static inline SPARSE_PUBLIC_INTERFACE
 void SparseCleanup(_SPARSE_VARIANT(SparseOpaqueFactorization) toFree) {
-  if (toFree.status >= 0) _SPARSE_VARIANT(_SparseDestroyOpaqueNumeric)(&toFree);
+  _SPARSE_VARIANT(_SparseDestroyOpaqueNumeric)(&toFree);
 }
 
 static inline SPARSE_PUBLIC_INTERFACE
 void SparseCleanup(_SPARSE_VARIANT(SparseOpaqueSubfactor) toFree) {
-  if (toFree.factor.status >= 0) _SPARSE_VARIANT(_SparseDestroyOpaqueNumeric)(&toFree.factor);
+  _SPARSE_VARIANT(_SparseDestroyOpaqueNumeric)(&toFree.factor);
 }
 
 static inline SPARSE_PUBLIC_INTERFACE

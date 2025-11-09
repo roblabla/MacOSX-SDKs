@@ -9,12 +9,10 @@
 #define LocalAuthentication_LAPublicDefines_h
 
 // Policies
-#define kLAPolicyDeviceOwnerAuthenticationWithBiometrics    1
-#define kLAPolicyDeviceOwnerAuthentication                  2
-
-// Options
-#define kLAOptionUserFallback                               1
-#define kLAOptionAuthenticationReason                       2
+#define kLAPolicyDeviceOwnerAuthenticationWithBiometrics        1
+#define kLAPolicyDeviceOwnerAuthentication                      2
+#define kLAPolicyDeviceOwnerAuthenticationWithWatch             3
+#define kLAPolicyDeviceOwnerAuthenticationWithBiometricsOrWatch 4
 
 // Credential types
 #define kLACredentialTypeApplicationPassword                0
@@ -30,6 +28,7 @@
 #define kLAErrorTouchIDLockout                             -8
 #define kLAErrorAppCancel                                  -9
 #define kLAErrorInvalidContext                            -10
+#define kLAErrorWatchNotAvailable                         -11
 #define kLAErrorNotInteractive                          -1004
 
 #define kLAErrorBiometryNotAvailable                        kLAErrorTouchIDNotAvailable

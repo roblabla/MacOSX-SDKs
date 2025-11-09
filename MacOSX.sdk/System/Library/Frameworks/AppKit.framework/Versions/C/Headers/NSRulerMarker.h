@@ -1,7 +1,7 @@
 /*
         NSRulerMarker.h
         Application Kit
-        Copyright (c) 1994-2018, Apple Inc.
+        Copyright (c) 1994-2019, Apple Inc.
         All rights reserved.
 */
 
@@ -10,26 +10,11 @@
 #import <AppKit/AppKitDefines.h>
 
 NS_ASSUME_NONNULL_BEGIN
+API_UNAVAILABLE_BEGIN(ios)
 
 @class NSEvent, NSImage, NSRulerView;
 
-@interface NSRulerMarker : NSObject <NSCopying, NSCoding> {
-    /*All instance variables are private*/
-    __weak NSRulerView *_ruler APPKIT_IVAR;
-    CGFloat _location APPKIT_IVAR;
-    NSImage *_image APPKIT_IVAR;
-    NSPoint _imageOrigin APPKIT_IVAR;
-
-    struct __rFlags {
-        unsigned int movable:1;
-        unsigned int removable:1;
-        unsigned int dragging:1;
-        unsigned int pinned:1;
-        unsigned int _reserved:28;
-    } _rFlags APPKIT_IVAR;
-
-    id _representedObject APPKIT_IVAR;
-}
+@interface NSRulerMarker : NSObject <NSCopying, NSCoding>
 
 /**************************** Initialization ****************************/
 
@@ -91,4 +76,5 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+API_UNAVAILABLE_END
 NS_ASSUME_NONNULL_END

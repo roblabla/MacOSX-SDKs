@@ -168,7 +168,7 @@
 /* #undef HAVE_PRIV_H */
 
 /* Define to 1 if you have the `pthread_kill' function. */
-/* #undef HAVE_PTHREAD_KILL */
+#define HAVE_PTHREAD_KILL 1
 
 /* Define to 1 if you have the <pwd.h> header file. */
 #define HAVE_PWD_H 1

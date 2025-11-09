@@ -1,23 +1,30 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: ED88E1A7-F24F-32A4-A0B7-933A01EF669B' ]
-platform:        macosx
-install-name:    /System/Library/PrivateFrameworks/SidecarCore.framework/Versions/A/SidecarCore
-current-version: 38.1
+uuids:           [ 'x86_64: 4D65FC60-F255-30E8-AA22-41DD69DF2740', 'x86_64: 4D65FC60-F255-30E8-AA22-41DD69DF2740' ]
+platform:        zippered
+install-name:    '/System/Library/PrivateFrameworks/SidecarCore.framework/Versions/A/SidecarCore'
+current-version: 188
 exports:         
   - archs:           [ x86_64 ]
-    symbols:         [ _SidecarDeviceGeneration, _SidecarDevicesChangedNotification, 
-                       _SidecarDiagnose, _SidecarErrorDomain, _SidecarLocalizedString, 
-                       _SidecarMessageCreateMutable, _SidecarMessageGetDefaults, 
-                       _SidecarMessageGetDictionaryRepresentation, _SidecarMessageGetItemData, 
-                       _SidecarMessageGetRequestID, _SidecarMessageGetServiceName, 
+    symbols:         [ _SidecarBundle, _SidecarDeviceGeneration, _SidecarDevicesChangedNotification, 
+                       _SidecarDiagnose, _SidecarDisplayManagerConnectedDevicesChangedNotification, 
+                       _SidecarDisplayManagerPreferencesChangedNotification, _SidecarErrorDomain, 
+                       _SidecarGetProcessUniqueID, _SidecarLocalizedString, _SidecarMarkServicePresenterReady, 
+                       _SidecarMarkServiceProviderReady, _SidecarMessageCreateMutable, 
+                       _SidecarMessageGetDefaults, _SidecarMessageGetDictionaryRepresentation, 
+                       _SidecarMessageGetItemData, _SidecarMessageGetRequestID, _SidecarMessageGetServiceName, 
                        _SidecarMessageGetTransferID, _SidecarMessageGetType, _SidecarMessageSetDefaults, 
                        _SidecarMessageSetItemData, _SidecarMessageSetItemMetaData, 
                        _SidecarMessageSetRequestID, _SidecarMessageSetServiceName, 
-                       _SidecarMessageSetTransferID, _SidecarMessageSetType, _SidecarPDFDefaultPageRect, 
-                       _SidecarPDFJPEGCompression, _SidecarPasteboardInfoType, _SidecarRegisterServiceProvider, 
-                       _SidecarServiceNameScanDocument, _SidecarServiceNameTakePhoto, 
-                       _SidecarServiceName_32FD056D3D ]
-    objc-classes:    [ SidecarDevice, SidecarItem, SidecarPasteboardInfo, SidecarRequest, 
-                       SidecarResponse, SidecarService, SidecarSession ]
+                       _SidecarMessageSetTransferID, _SidecarMessageSetType, _SidecarOptOutOfReconnect, 
+                       _SidecarPDFDefaultPageRect, _SidecarPDFJPEGCompression, _SidecarPasteboardInfoType, 
+                       _SidecarRegisterServicePresenter, _SidecarRegisterServiceProvider, 
+                       _SidecarServiceNameAnnotation, _SidecarServiceNameDisplay, 
+                       _SidecarServiceNameMarkupDisplay, _SidecarServiceNameScanDocument, 
+                       _SidecarServiceNameSignature, _SidecarServiceNameSketch, _SidecarServiceNameTakePhoto, 
+                       _makeDeviceIdentifierMap ]
+    objc-classes:    [ SidecarDebugRequest, SidecarDevice, SidecarDisplayConfig, 
+                       SidecarDisplayManager, SidecarItem, SidecarPasteboardInfo, 
+                       SidecarRequest, SidecarResponse, SidecarService, SidecarSession, 
+                       SidecarStream ]
 ...

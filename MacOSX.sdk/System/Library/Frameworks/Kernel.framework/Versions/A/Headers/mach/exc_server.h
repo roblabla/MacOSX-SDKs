@@ -61,6 +61,10 @@ typedef function_table_entry   *function_table_t;
 __BeforeMigServerHeader
 #endif /* __BeforeMigServerHeader */
 
+#ifndef MIG_SERVER_ROUTINE
+#define MIG_SERVER_ROUTINE
+#endif
+
 
 /* Routine exception_raise */
 #ifdef	mig_external
@@ -68,6 +72,7 @@ mig_external
 #else
 extern
 #endif	/* mig_external */
+MIG_SERVER_ROUTINE
 kern_return_t catch_exception_raise
 (
 	mach_port_t exception_port,
@@ -84,6 +89,7 @@ mig_external
 #else
 extern
 #endif	/* mig_external */
+MIG_SERVER_ROUTINE
 kern_return_t catch_exception_raise_state
 (
 	mach_port_t exception_port,
@@ -103,6 +109,7 @@ mig_external
 #else
 extern
 #endif	/* mig_external */
+MIG_SERVER_ROUTINE
 kern_return_t catch_exception_raise_state_identity
 (
 	mach_port_t exception_port,
@@ -153,7 +160,7 @@ extern const struct catch_exc_subsystem {
 #define __Request__exc_subsystem__defined
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -168,11 +175,11 @@ extern const struct catch_exc_subsystem {
 		integer_t code[2];
 	} __Request__exception_raise_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -185,11 +192,11 @@ extern const struct catch_exc_subsystem {
 		natural_t old_state[614];
 	} __Request__exception_raise_state_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -207,7 +214,7 @@ extern const struct catch_exc_subsystem {
 		natural_t old_state[614];
 	} __Request__exception_raise_state_identity_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 #endif /* !__Request__exc_subsystem__defined */
 
@@ -228,7 +235,7 @@ union __RequestUnion__catch_exc_subsystem {
 #define __Reply__exc_subsystem__defined
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -236,11 +243,11 @@ union __RequestUnion__catch_exc_subsystem {
 		kern_return_t RetCode;
 	} __Reply__exception_raise_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -251,11 +258,11 @@ union __RequestUnion__catch_exc_subsystem {
 		natural_t new_state[614];
 	} __Reply__exception_raise_state_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -266,7 +273,7 @@ union __RequestUnion__catch_exc_subsystem {
 		natural_t new_state[614];
 	} __Reply__exception_raise_state_identity_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 #endif /* !__Reply__exc_subsystem__defined */
 
@@ -280,7 +287,7 @@ union __ReplyUnion__catch_exc_subsystem {
 	__Reply__exception_raise_state_t Reply_exception_raise_state;
 	__Reply__exception_raise_state_identity_t Reply_exception_raise_state_identity;
 };
-#endif /* __RequestUnion__catch_exc_subsystem__defined */
+#endif /* __ReplyUnion__catch_exc_subsystem__defined */
 
 #ifndef subsystem_to_name_map_exc
 #define subsystem_to_name_map_exc \

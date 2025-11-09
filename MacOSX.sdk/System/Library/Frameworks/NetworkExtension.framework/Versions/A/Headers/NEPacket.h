@@ -8,6 +8,8 @@
 #endif
 
 #import <netinet/in.h>
+#import <NetworkExtension/NENetworkRule.h>
+#import "NEFilterFlow.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -46,6 +48,12 @@ API_AVAILABLE(macosx(10.12), ios(10.0), watchos(3.0), tvos(10.0))
  * @discussion The protocol family of the packet (such as AF_INET or AF_INET6).
  */
 @property (readonly) sa_family_t protocolFamily API_AVAILABLE(macosx(10.12), ios(10.0), watchos(3.0), tvos(10.0));
+
+/*!
+ * @property direction
+ * @discussion The direction of the packet.
+ */
+@property (readonly) NETrafficDirection direction API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*!
  * @property metadata

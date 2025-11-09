@@ -30,4 +30,5 @@ API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0))
 API_AVAILABLE(macos(10.14), ios(12.0), tvos(12.0))
 static const NSUInteger VNDetectTextRectanglesRequestRevision1 = 1;
 
+
 NS_ASSUME_NONNULL_END

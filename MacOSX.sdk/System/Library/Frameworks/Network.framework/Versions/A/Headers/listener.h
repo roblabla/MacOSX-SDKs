@@ -2,11 +2,15 @@
 //  listener.h
 //  Network
 //
-//  Copyright (c) 2016-2018 Apple Inc. All rights reserved.
+//  Copyright (c) 2016-2019 Apple Inc. All rights reserved.
 //
 
 #ifndef __NW_LISTENER_H__
 #define __NW_LISTENER_H__
+
+#ifndef __NW_INDIRECT__
+#warning "Please include <Network/Network.h> instead of this file directly."
+#endif // __NW_INDIRECT__
 
 #include <Network/connection.h>
 #include <Network/advertise_descriptor.h>
@@ -205,6 +209,62 @@ nw_listener_set_new_connection_handler(nw_listener_t listener,
 									   _Nullable nw_listener_new_connection_handler_t handler);
 
 #endif // __BLOCKS__
+
+/*!
+ * @define NW_LISTENER_INFINITE_CONNECTION_LIMIT
+ * @discussion This value indicates that a listener should not limit incoming connections
+ */
+#define NW_LISTENER_INFINITE_CONNECTION_LIMIT UINT32_MAX
+
+/*!
+ * @function nw_listener_get_new_connection_limit
+ *
+ * @abstract
+ *		Gets the listener new connection limit. The default value is
+ *      NW_LISTENER_INFINITE_CONNECTION_LIMIT which indicates that
+ *      the listener should not limit incoming connections. If the value
+ *      is not NW_LISTENER_INFINITE_CONNECTION_LIMIT, it will be decremented
+ *      by 1 every time a new connection is created. When the value becomes
+ *      0, new connection handlers will no longer be invoked until
+ *      nw_listener_set_new_connection_limit() is invoked with a value
+ *      that is greater than 0. Incoming connections will eventually be rejected
+ *      if nw_listener_set_new_connection_limit() is not called after the connection
+ *      limit reaches 0.
+ *
+ * @param listener
+ *		The listener object.
+ *
+ * @result
+ *		Returns current new connection limit
+ */
+API_AVAILABLE(macos(10.15), ios(12.0), watchos(5.0), tvos(12.0))
+uint32_t
+nw_listener_get_new_connection_limit(nw_listener_t listener);
+
+/*!
+ * @function nw_listener_set_new_connection_limit
+ *
+ * @abstract
+ *		Sets the listener new connection limit. Use the value NW_LISTENER_INFINITE_CONNECTION_LIMIT
+ *      to disable connection limits. If the value is not NW_LISTENER_INFINITE_CONNECTION_LIMIT,
+ *      it will be decremented by 1 every time a new connection is created. When the value becomes
+ *      0, new connection handlers will no longer be invoked until
+ *      nw_listener_set_new_connection_limit() is invoked with a value
+ *      that is greater than 0. Incoming connections will eventually be rejected
+ *      if nw_listener_set_new_connection_limit() is not called after the connection
+ *      limit reaches 0.
+ *
+ * @param listener
+ *		The listener object.
+ *
+ * @param new_connection_limit
+ *		The new connection limit. Pass NW_LISTENER_INFINITE_CONNECTION_LIMIT
+ *      to disable new connection limiting.
+ */
+API_AVAILABLE(macos(10.15), ios(12.0), watchos(5.0), tvos(12.0))
+void
+nw_listener_set_new_connection_limit(nw_listener_t listener,
+									 uint32_t new_connection_limit);
 
 /*!
  * @function nw_listener_set_advertise_descriptor

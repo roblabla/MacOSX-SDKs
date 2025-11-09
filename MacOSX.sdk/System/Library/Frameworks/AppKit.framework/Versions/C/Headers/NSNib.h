@@ -1,7 +1,7 @@
 /*
 	NSNib.h
 	Application Kit
-	Copyright (c) 2003-2018, Apple Inc.
+	Copyright (c) 2003-2019, Apple Inc.
 	All rights reserved.
 
 NSNib serves as a wrapper around a single InterfaceBuilder nib.  When an NSNib instance is created from a nib file, all of the data needed to instantiate the nib (the object graph as well as images and sounds that might be in the nib bundle) are read from the disk, however the nib is not instantiated until you call one of the instantiation methods.
@@ -18,27 +18,11 @@ As are all NSObjects, instantiated nib objects are allocated in a memory zone (N
 
 
 NS_ASSUME_NONNULL_BEGIN
+API_UNAVAILABLE_BEGIN(ios)
 
 typedef NSString * NSNibName NS_SWIFT_BRIDGED_TYPEDEF;
 
-@class NSIBObjectData;
-
-@interface NSNib : NSObject <NSCoding> {
-   @private
-    NSData *_data APPKIT_IVAR;
-    NSArray *_images APPKIT_IVAR;
-    NSArray *_sounds APPKIT_IVAR;
-    NSBundle *_bundle APPKIT_IVAR;
-    struct _NSNibFlags {
-        unsigned int _isKeyed:1;
-        unsigned int _inheritsDecodeTimeBundle:1;
-        unsigned int _inheritsDecodeTimePath:1;
-        unsigned int _reserved:29;
-    } _flags APPKIT_IVAR;
-    NSString *_path APPKIT_IVAR;
-    id _reusableDecoder APPKIT_IVAR;
-}
-
+@interface NSNib : NSObject <NSCoding>
 
 // Initializes an instance with a nib file called nibName in the specified bundle.
 // If bundle is nil, it tries to find the nib in the main bundle.
@@ -50,7 +34,7 @@ typedef NSString * NSNibName NS_SWIFT_BRIDGED_TYPEDEF;
 // Initializes an instance with nib data and specified bundle for locating resources
 // such as images and localized strings. If bundle is nil, the main bundle is assumed.
 // 
-- (instancetype)initWithNibData:(NSData *)nibData bundle:(nullable NSBundle *)bundle NS_AVAILABLE_MAC(10_8);
+- (instancetype)initWithNibData:(NSData *)nibData bundle:(nullable NSBundle *)bundle API_AVAILABLE(macos(10.8));
 
 // Instantiates objects in the nib file with the specified owner.
 // Upon success, the method returns YES and the optional out-parameter topLevelObjects is
@@ -59,18 +43,19 @@ typedef NSString * NSNibName NS_SWIFT_BRIDGED_TYPEDEF;
 // objects should be strong (retain) to demonstrate ownership and prevent deallocation.
 // Alternatively, one may hold a strong reference to the top level objects array.
 //
-- (BOOL)instantiateWithOwner:(nullable id)owner topLevelObjects:(NSArray * __nullable * __nullable)topLevelObjects NS_AVAILABLE_MAC(10_8);
+- (BOOL)instantiateWithOwner:(nullable id)owner topLevelObjects:(NSArray * _Nullable * _Nullable)topLevelObjects API_AVAILABLE(macos(10.8));
 
 @end
 
 @interface NSNib (NSDeprecated)
-- (null_unspecified id)initWithContentsOfURL:(null_unspecified NSURL *)nibFileURL NS_DEPRECATED_MAC(10_0, 10_8);
-- (BOOL)instantiateNibWithExternalNameTable:(null_unspecified NSDictionary *)externalNameTable NS_DEPRECATED_MAC(10_0, 10_8);
-- (BOOL)instantiateNibWithOwner:(null_unspecified id)owner topLevelObjects:(NSArray * __null_unspecified* __null_unspecified)topLevelObjects NS_DEPRECATED_MAC(10_3, 10_8);
+- (null_unspecified id)initWithContentsOfURL:(null_unspecified NSURL *)nibFileURL API_DEPRECATED("", macos(10.0,10.8));
+- (BOOL)instantiateNibWithExternalNameTable:(null_unspecified NSDictionary *)externalNameTable API_DEPRECATED("", macos(10.0,10.8));
+- (BOOL)instantiateNibWithOwner:(null_unspecified id)owner topLevelObjects:(NSArray * _Null_unspecified* _Null_unspecified)topLevelObjects API_DEPRECATED("", macos(10.3,10.8));
 @end
 
 // ** External Name Table Keys **
-APPKIT_EXTERN NSString * NSNibOwner NS_DEPRECATED_MAC(10_0, 10_8);
-APPKIT_EXTERN NSString * NSNibTopLevelObjects NS_DEPRECATED_MAC(10_0, 10_8);
+APPKIT_EXTERN NSString * NSNibOwner API_DEPRECATED("", macos(10.0,10.8));
+APPKIT_EXTERN NSString * NSNibTopLevelObjects API_DEPRECATED("", macos(10.0,10.8));
 
+API_UNAVAILABLE_END
 NS_ASSUME_NONNULL_END

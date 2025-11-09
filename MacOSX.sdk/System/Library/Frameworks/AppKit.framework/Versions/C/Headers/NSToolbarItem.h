@@ -1,82 +1,35 @@
 /*
 	NSToolbarItem.h
 	Application Kit
-	Copyright (c) 2000-2018, Apple Inc.
+	Copyright (c) 2000-2019, Apple Inc.
 	All rights reserved.
 */
 
+#if !TARGET_OS_IPHONE
 #import <AppKit/NSText.h>
-#import <AppKit/NSToolbar.h>
 #import <AppKit/NSMenu.h>
 #import <AppKit/NSUserInterfaceValidation.h>
+#endif
+#import <AppKit/NSToolbar.h>
 #import <Foundation/Foundation.h>
+#import <Foundation/NSGeometry.h>
+
+#if TARGET_OS_IPHONE
+@class UIImage;
+#endif
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class NSToolbarItemViewer, NSMenuItem, NSView, NSImage, CKShare;
+@class NSMenuItem, NSView, NSImage, CKShare;
 
-typedef NSInteger NSToolbarItemVisibilityPriority NS_TYPED_EXTENSIBLE_ENUM;
-static const NSToolbarItemVisibilityPriority NSToolbarItemVisibilityPriorityStandard = 0;
-static const NSToolbarItemVisibilityPriority NSToolbarItemVisibilityPriorityLow  = -1000;
-static const NSToolbarItemVisibilityPriority NSToolbarItemVisibilityPriorityHigh  = 1000;
-static const NSToolbarItemVisibilityPriority NSToolbarItemVisibilityPriorityUser  = 2000;
+typedef NSInteger NSToolbarItemVisibilityPriority NS_TYPED_EXTENSIBLE_ENUM API_AVAILABLE(ios(13.0));
+static const NSToolbarItemVisibilityPriority NSToolbarItemVisibilityPriorityStandard API_AVAILABLE(ios(13.0)) = 0;
+static const NSToolbarItemVisibilityPriority NSToolbarItemVisibilityPriorityLow API_AVAILABLE(ios(13.0)) = -1000;
+static const NSToolbarItemVisibilityPriority NSToolbarItemVisibilityPriorityHigh API_AVAILABLE(ios(13.0)) = 1000;
+static const NSToolbarItemVisibilityPriority NSToolbarItemVisibilityPriorityUser API_AVAILABLE(ios(13.0)) = 2000;
 
-@interface NSToolbarItem : NSObject <NSCopying, NSMenuItemValidation, NSValidatedUserInterfaceItem> {
-@private
-    __weak NSToolbar *  _toolbar APPKIT_IVAR;
-    NSImage *		_image APPKIT_IVAR;
-    NSToolbarItemIdentifier _itemIdentifier APPKIT_IVAR;
-    
-    NSString *		_label APPKIT_IVAR;
-    NSTextAlignment	_labelAlignment APPKIT_IVAR;
-    NSString *		_paletteLabel APPKIT_IVAR;
-    
-    NSString *		_toolTip APPKIT_IVAR;
-    NSMenuItem *	_menuItemRep APPKIT_IVAR;
-    NSInteger		_tag APPKIT_IVAR;
-    
-    struct __tbiFlags {
-	unsigned int viewRespondsToIsEnabled:1;
-	unsigned int viewRespondsToSetEnabled:1;
-	unsigned int viewRespondsToTag:1;
-	unsigned int viewRespondsToSetTag:1;
-	unsigned int viewRespondsToAction:1;
-	unsigned int viewRespondsToSetAction:1;
-	unsigned int viewRespondsToTarget:1;
-	unsigned int viewRespondsToSetTarget:1;
-        unsigned int viewRespondsToImage:1;
-        unsigned int viewRespondsToSetImage:1;
-	unsigned int isEnabled:1;
-	unsigned int isUserRemovable:1;
-	unsigned int menuHasBeenSet:1;
-        unsigned int menuRepIsDefault:1;
-        unsigned int viewHasBeenLoaded:1;
-        unsigned int drawingForDragImage:1;
-        unsigned int isCustomItemType:1;
-	unsigned int hasValidatedAutoModeConfiguration:1;
-	unsigned int useAutoModeConfiguration:1;
-        unsigned int fromBaseLocalizedNib:1;
-        unsigned int autovalidationDisabled:1;
-        unsigned int tagHasBeenSet:1;
-	unsigned int sizeHasBeenSet:1;
-        unsigned int stateWasDisabledBeforeSheet:1;
-        unsigned int wantsToBeCentered:1;
-        unsigned int isMeasuring:1;
-        unsigned int ignoresEncodedMinMaxValue:1;
-        unsigned int usesStaticMinMaxValues:1;
-
-        unsigned int RESERVED:4;
-    } _tbiFlags APPKIT_IVAR;
-    id                  _tbiReserved APPKIT_IVAR;
-        
-    id			_itemViewer APPKIT_IVAR;
-    NSView *		_view APPKIT_IVAR;
-    NSSize		_minSize APPKIT_IVAR;
-    NSSize		_maxSize APPKIT_IVAR;
-#if __LP64__
-    id			_toolbarItemReserved __unused APPKIT_IVAR;
-#endif
-}
+API_AVAILABLE(ios(13.0))
+@interface NSToolbarItem : NSObject <NSCopying>
 
 /* Initialize the toolbar item with an identifier which is a development language string used by the toolbar and its delegate for identification purposes.  */
 - (instancetype)initWithItemIdentifier:(NSToolbarItemIdentifier)itemIdentifier NS_DESIGNATED_INITIALIZER;
@@ -97,7 +50,7 @@ static const NSToolbarItemVisibilityPriority NSToolbarItemVisibilityPriorityUser
 @property (nullable, copy) NSString *toolTip;
 
 /* The menu form of a toolbar item's purpose is twofold.  First, when the window is too small to display an item, it will be clipped but remain accessible from a "clipped items" menu containing the menu item returned here.  Second, in text only mode, the menu returned will be used to create the displayed items.  Singleton menu items will be clickable, while submenu items will be represented as a pull down.  For instance, say you want a button that allows you to switch between modes A, B, and C.  You could represent this as a menu by :  a menu item "mode" with three submenu items "A", "B", and "C".   By default, this method returns a singleton menu item with item label as the title.  For standard items, the target, action is set.  */
-@property (nullable, strong) NSMenuItem *menuFormRepresentation;
+@property (nullable, strong) NSMenuItem *menuFormRepresentation API_UNAVAILABLE(ios);
 
 /* Tag for your own custom purpose. (forwards to -view if it responds) */ 
 @property NSInteger tag;
@@ -112,10 +65,23 @@ static const NSToolbarItemVisibilityPriority NSToolbarItemVisibilityPriorityUser
 @property (getter=isEnabled) BOOL enabled;
 
 /* Set and get the image of an item.  For custom views, this method will call setImage:/image on the view if it responds. (forwards to -view if it responds) */
+#if !TARGET_OS_IPHONE
 @property (nullable, strong) NSImage *image;
+#else
+@property (nullable, strong) UIImage *image API_AVAILABLE(ios(13.0));
+#endif
+
+/* Set and get the title of an item. For custom views, this method will call setTitle:/title on the view if it responds. (forwards to -view if it responds) */
+@property (copy) NSString *title API_AVAILABLE(macos(10.15), ios(13.0));
+
+/*
+ When set on an item without a custom view, the button produced will have a bordered style.
+ Defaults to NO.
+ */
+@property (getter=isBordered) BOOL bordered API_AVAILABLE(macos(10.15), ios(13.0));
 
 /* Use setView: if you want your toolbar item to use something other than the standard.  Note that, by default, many of the set/get methods will be implemented by calls forwarded to the view you set, if it responds to it.  Also, your view must be archivable (in order for the toolbar to make copies of your item to hand off to the config palette). */
-@property (nullable, strong) NSView *view;
+@property (nullable, strong) NSView *view API_UNAVAILABLE(ios);
 
 /*
  Unless you have already set your own custom view, you should not call these methods.
@@ -123,8 +89,8 @@ static const NSToolbarItemVisibilityPriority NSToolbarItemVisibilityPriorityUser
  If you do not set a min/max size, the view's size properties will be calculated using constraints. Apps linked before 10.14 will use the view's current size.
  In general, apps should rely on the automatic measurements and constraints to define min/max sizes rather than setting these properties since this will account for localizations.
  */
-@property NSSize minSize;
-@property NSSize maxSize;
+@property NSSize minSize API_UNAVAILABLE(ios);
+@property NSSize maxSize API_UNAVAILABLE(ios);
 
 /* When a toolbar does not have enough space to fit all its items, it must push some into the overflow menu.  Items with the highest visibility priority level are choosen last for the overflow menu.  The default visibilityPriority value is NSToolbarItemVisibilityPriorityStandard.  To suggest that an item always remain visible, give it a value greater than NSToolbarItemVisibilityPriorityStandard, but less than NSToolbarItemVisibilityPriorityUser.   In 10.7, users can no longer modify the toolbar item visibility priority. */
 @property NSToolbarItemVisibilityPriority visibilityPriority;
@@ -133,21 +99,27 @@ static const NSToolbarItemVisibilityPriority NSToolbarItemVisibilityPriorityUser
 // ----- Validation of the items -----
 
 /* Typically you should not invoke this method.  This method is called by its toolbar during validation.  Standard items validate themselves by sending the validateToolbarItem: validate message to the current validator.  Since items with custom views don't always have meaningful target/actions, they do nothing.  So for your custom items it may be useful to override this method and invent your own validation. */
-- (void)validate;
+- (void)validate API_AVAILABLE(ios(13.0));
 
 
 /* By default NSToolbar automatically invokes its items validate method on a regular basis.  To be in complete control of when the -validate method is invoked, you can disable automatic validation on a per-item basis.  In particular, if your validation code is slow, you may want to do this for performance reasons. */
-@property BOOL autovalidates;
+@property BOOL autovalidates API_AVAILABLE(ios(13.0));
 
 
 
 // ----- Controlling Duplicates In The Toolbar -----
 
 /* Return YES to allow dragging duplicate items into the toolbar.  By default, if an item with the same identifier is already in the toolbar, dragging in will act as a move of this item.  However, for instance, the separator item drags in as a duplicate always. */
-@property (readonly) BOOL allowsDuplicatesInToolbar;
+@property (readonly) BOOL allowsDuplicatesInToolbar API_UNAVAILABLE(ios);
 
 @end
 
+#if !TARGET_OS_IPHONE
+@interface NSToolbarItem () <NSMenuItemValidation, NSValidatedUserInterfaceItem>
+@end
+#endif
+
+#if !TARGET_OS_IPHONE
 
 @protocol NSToolbarItemValidation <NSObject>
 
@@ -158,7 +130,7 @@ static const NSToolbarItemVisibilityPriority NSToolbarItemVisibilityPriorityUser
 
 #if __swift__ < 40200
 @interface NSObject (NSToolbarItemValidation)
-- (BOOL)validateToolbarItem:(NSToolbarItem *)item NS_DEPRECATED_MAC(10_0, API_TO_BE_DEPRECATED, "This is now a method of the NSToolbarItemValidation protocol.");
+- (BOOL)validateToolbarItem:(NSToolbarItem *)item API_DEPRECATED("This is now a method of the NSToolbarItemValidation protocol.", macos(10.0,API_TO_BE_DEPRECATED));
 @end
 #endif
 
@@ -169,18 +141,19 @@ static const NSToolbarItemVisibilityPriority NSToolbarItemVisibilityPriorityUser
 
 @end
 
+#endif
 
 /* standard toolbar item identifiers */
 
-APPKIT_EXTERN NSToolbarItemIdentifier NSToolbarSeparatorItemIdentifier;
-APPKIT_EXTERN NSToolbarItemIdentifier NSToolbarSpaceItemIdentifier;
-APPKIT_EXTERN NSToolbarItemIdentifier NSToolbarFlexibleSpaceItemIdentifier;
+APPKIT_EXTERN NSToolbarItemIdentifier NSToolbarSeparatorItemIdentifier API_DEPRECATED("This item is no longer recommended and will be ignored on 10.7 and later.", macos(10.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(ios);
+APPKIT_EXTERN NSToolbarItemIdentifier NSToolbarSpaceItemIdentifier API_AVAILABLE(ios(13.0));
+APPKIT_EXTERN NSToolbarItemIdentifier NSToolbarFlexibleSpaceItemIdentifier API_AVAILABLE(ios(13.0));
 
-APPKIT_EXTERN NSToolbarItemIdentifier NSToolbarShowColorsItemIdentifier;        // Shows the color panel.
-APPKIT_EXTERN NSToolbarItemIdentifier NSToolbarShowFontsItemIdentifier;         // Shows the font panel.
-APPKIT_EXTERN NSToolbarItemIdentifier NSToolbarCustomizeToolbarItemIdentifier;  // Puts the current toolbar into customize mode.
-APPKIT_EXTERN NSToolbarItemIdentifier NSToolbarPrintItemIdentifier;             // Sends printDocument: to firstResponder, but you can change this in toolbarWillAddItem: if you need to do so.
-APPKIT_EXTERN NSToolbarItemIdentifier NSToolbarToggleSidebarItemIdentifier NS_AVAILABLE_MAC(10_11);  // A standard toolbar item identifier for sidebars. It sends -toggleSidebar: to the firstResponder.
-APPKIT_EXTERN NSToolbarItemIdentifier NSToolbarCloudSharingItemIdentifier NS_AVAILABLE_MAC(10_12); // A standard toolbar item identifier for cloud sharing via NSSharingServiceNameCloudSharing. It validates itself and modifies its appearance by using the NSCloudSharingValidation protocol. It sends -performCloudSharing: to the firstResponder.
+APPKIT_EXTERN NSToolbarItemIdentifier NSToolbarShowColorsItemIdentifier API_AVAILABLE(ios(13.0));        // Shows the color panel.
+APPKIT_EXTERN NSToolbarItemIdentifier NSToolbarShowFontsItemIdentifier API_AVAILABLE(ios(13.0));         // Shows the font panel.
+APPKIT_EXTERN NSToolbarItemIdentifier NSToolbarCustomizeToolbarItemIdentifier API_DEPRECATED("This item is no longer recommended and will be ignored on 10.7 and later.", macos(10.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(ios);
+APPKIT_EXTERN NSToolbarItemIdentifier NSToolbarPrintItemIdentifier API_AVAILABLE(ios(13.0));             // Sends printDocument: to firstResponder, but you can change this in toolbarWillAddItem: if you need to do so.
+APPKIT_EXTERN NSToolbarItemIdentifier NSToolbarToggleSidebarItemIdentifier API_AVAILABLE(macos(10.11), ios(13.0));  // A standard toolbar item identifier for sidebars. It sends -toggleSidebar: to the firstResponder.
+APPKIT_EXTERN NSToolbarItemIdentifier NSToolbarCloudSharingItemIdentifier API_AVAILABLE(macos(10.12)); // A standard toolbar item identifier for cloud sharing via NSSharingServiceNameCloudSharing. It validates itself and modifies its appearance by using the NSCloudSharingValidation protocol. It sends -performCloudSharing: to the firstResponder.
 
 NS_ASSUME_NONNULL_END

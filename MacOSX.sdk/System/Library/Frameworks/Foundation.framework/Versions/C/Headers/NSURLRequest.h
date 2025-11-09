@@ -1,6 +1,6 @@
 /*	
     NSURLRequest.h
-    Copyright (c) 2003-2018, Apple Inc. All rights reserved.    
+    Copyright (c) 2003-2019, Apple Inc. All rights reserved.    
     
     Public header file.
 */
@@ -70,7 +70,7 @@ NS_ASSUME_NONNULL_BEGIN
     @constant NSURLRequestReloadIgnoringLocalAndRemoteCacheData Specifies that
     not only should the local cache data be ignored, but that proxies and
     other intermediates should be instructed to disregard their caches
-    so far as the protocol allows.  Unimplemented.
+    so far as the protocol allows.
 
     @constant NSURLRequestReloadIgnoringCacheData Older name for
     NSURLRequestReloadIgnoringLocalCacheData.
@@ -92,20 +92,20 @@ NS_ASSUME_NONNULL_BEGIN
     @constant NSURLRequestReloadRevalidatingCacheData Specifies that
     the existing cache data may be used provided the origin source
     confirms its validity, otherwise the URL is loaded from the
-    origin source.  Unimplemented.
+    origin source.
 */
 typedef NS_ENUM(NSUInteger, NSURLRequestCachePolicy)
 {
     NSURLRequestUseProtocolCachePolicy = 0,
 
     NSURLRequestReloadIgnoringLocalCacheData = 1,
-    NSURLRequestReloadIgnoringLocalAndRemoteCacheData = 4, // Unimplemented
+    NSURLRequestReloadIgnoringLocalAndRemoteCacheData = 4,
     NSURLRequestReloadIgnoringCacheData = NSURLRequestReloadIgnoringLocalCacheData,
 
     NSURLRequestReturnCacheDataElseLoad = 2,
     NSURLRequestReturnCacheDataDontLoad = 3,
 
-    NSURLRequestReloadRevalidatingCacheData = 5, // Unimplemented
+    NSURLRequestReloadRevalidatingCacheData = 5,
 };
 
 /*!
@@ -132,16 +132,22 @@ typedef NS_ENUM(NSUInteger, NSURLRequestCachePolicy)
 
  @constant NSURLNetworkServiceTypeResponsiveData Specifies that the request is for responsive (time sensitive) data.
 
+ @constant NSURLNetworkServiceTypeAVStreaming Specifies that the request is streaming audio/video data.
+
+ @constant NSURLNetworkServiceTypeResponsiveAV Specifies that the request is for responsive (time sensitive) audio/video data.
+
  @constant NSURLNetworkServiceTypeCallSignaling Specifies that the request is for call signaling.
 */
 typedef NS_ENUM(NSUInteger, NSURLRequestNetworkServiceType)
 {
     NSURLNetworkServiceTypeDefault = 0,	// Standard internet traffic
-    NSURLNetworkServiceTypeVoIP = 1,	// Voice over IP control traffic
+    NSURLNetworkServiceTypeVoIP API_DEPRECATED("Use PushKit for VoIP control purposes", macos(10.7,10.15), ios(4.0,13.0), watchos(2.0,6.0), tvos(9.0,13.0)) = 1,	// Voice over IP control traffic
     NSURLNetworkServiceTypeVideo = 2,	// Video traffic
     NSURLNetworkServiceTypeBackground = 3, // Background traffic
     NSURLNetworkServiceTypeVoice = 4,	   // Voice data
     NSURLNetworkServiceTypeResponsiveData = 6, // Responsive data
+    NSURLNetworkServiceTypeAVStreaming API_AVAILABLE(macosx(10.9), ios(7.0), watchos(2.0), tvos(9.0)) = 8 , // Multimedia Audio/Video Streaming
+    NSURLNetworkServiceTypeResponsiveAV API_AVAILABLE(macosx(10.9), ios(7.0), watchos(2.0), tvos(9.0)) = 9, // Responsive Multimedia Audio/Video
     NSURLNetworkServiceTypeCallSignaling API_AVAILABLE(macosx(10.12), ios(10.0), watchos(3.0), tvos(10.0)) = 11, // Call Signaling
 };
 
@@ -295,6 +301,22 @@ typedef NS_ENUM(NSUInteger, NSURLRequestNetworkServiceType)
  */
 @property (readonly) BOOL allowsCellularAccess  API_AVAILABLE(macos(10.8), ios(6.0), watchos(2.0), tvos(9.0));
 
+/*!
+ @abstract returns whether a connection created with this request is allowed to use
+ network interfaces which have been marked as expensive.
+ @result YES if the receiver is allowed to use an interface marked as expensive to
+ satify the request, NO otherwise.
+ */
+@property (readonly) BOOL allowsExpensiveNetworkAccess API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0));
+
+/*!
+ @abstract returns whether a connection created with this request is allowed to use
+ network interfaces which have been marked as constrained.
+ @result YES if the receiver is allowed to use an interface marked as constrained to
+ satify the request, NO otherwise.
+ */
+@property (readonly) BOOL allowsConstrainedNetworkAccess API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0));
+
 @end
 
 
@@ -383,6 +405,22 @@ typedef NS_ENUM(NSUInteger, NSURLRequestNetworkServiceType)
  cellular radios to satisfy the request, YES otherwise.  The default is YES.
  */
 @property BOOL allowsCellularAccess API_AVAILABLE(macos(10.8), ios(6.0), watchos(2.0), tvos(9.0));
+
+/*!
+ @abstract sets whether a connection created with this request is allowed to use
+ network interfaces which have been marked as expensive.
+ @discussion NO if the receiver should not be allowed to use an interface marked as expensive to
+ satify the request, YES otherwise.
+ */
+@property BOOL allowsExpensiveNetworkAccess API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0));
+
+/*!
+ @abstract sets whether a connection created with this request is allowed to use
+ network interfaces which have been marked as constrained.
+ @discussion NO if the receiver should not be allowed to use an interface marked as constrained to
+ satify the request, YES otherwise.
+ */
+@property BOOL allowsConstrainedNetworkAccess API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0));
 
 @end
 

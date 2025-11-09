@@ -20,7 +20,9 @@
 
 #ifdef IMAGEIO_BUILDING_IMAGEIO
 
+# undef __OSX_AVAILABLE_STARTING
 # define __OSX_AVAILABLE_STARTING(m0,i)
+# undef __OSX_AVAILABLE_BUT_DEPRECATED
 # define __OSX_AVAILABLE_BUT_DEPRECATED(m0,m1,i0,i1)
 # define IMAGEIO_AVAILABLE_STARTING(...)
 # define IMAGEIO_AVAILABLE_BUT_DEPRECATED(...)
@@ -72,9 +74,9 @@
 #       endif /* !defined(IMAGEIO_BUILDING_IMAGEIO) */
 #   else /* !defined(__WIN32__) */
 #       if defined(__cplusplus)
-#           define IMAGEIO_EXTERN extern "C"
+#           define IMAGEIO_EXTERN extern "C" __attribute__((visibility("default")))
 #       else /* !defined(__cplusplus) */
-#           define IMAGEIO_EXTERN extern
+#           define IMAGEIO_EXTERN extern __attribute__((visibility("default")))
 #       endif /* !defined(__cplusplus) */
 #   endif /* !defined(__WIN32__) */
 #endif /* !defined(IMAGEIO_EXTERN) */
@@ -90,7 +92,7 @@
 #   endif
 #endif
 
-#if ((TARGET_OS_MAC || TARGET_OS_IPHONE) && !TARGET_OS_SIMULATOR)
+#if (TARGET_OS_MAC || TARGET_OS_IPHONE) 
 #    define IIO_HAS_IOSURFACE 1
 #else
 #    define IIO_HAS_IOSURFACE 0

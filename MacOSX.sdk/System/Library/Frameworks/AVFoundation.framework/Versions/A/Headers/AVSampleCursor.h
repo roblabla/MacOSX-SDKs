@@ -31,7 +31,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class AVSampleCursorInternal;
 
-NS_CLASS_AVAILABLE_MAC(10_10)
+API_AVAILABLE(macos(10.10)) API_UNAVAILABLE(ios, tvos, watchos)
 @interface AVSampleCursor : NSObject <NSCopying> {
 @private
 	AVSampleCursorInternal	*_sampleCursor;
@@ -197,6 +197,29 @@ typedef struct {
 @property (nonatomic, readonly) AVSampleCursorDependencyInfo currentSampleDependencyInfo;
 
 /*!
+	@struct		AVSampleCursorAudioDependencyInfo
+	@abstract   A struct for describing the independent decodability of audio samples
+	@field      audioSampleIsIndependentlyDecodable
+				Indicates whether the sample is independently decodable.  Will be YES for Immediate Playout Frames (IPFs) and Independent Frames (IFs).
+	@field      audioSamplePacketRefreshCount
+				If audioSampleIsIndependentlyDecodable is YES, indicates how many samples, starting at this sample, must be fed to the decoder to achieve full decoder refresh.  Will be zero for Immediate Playout Frames (IPFs). 
+*/
+typedef struct {
+	BOOL		audioSampleIsIndependentlyDecodable;
+	NSInteger	audioSamplePacketRefreshCount;
+} AVSampleCursorAudioDependencyInfo;
+
+/*!
+	@property	currentSampleAudioDependencyInfo
+	@abstract	Provides information about the independent decodability of an audio sample.
+	@discussion	In order to position a sample cursor at the first sample that the audio decoder requires for a full refresh, you will need to walk it back from
+ 				the current sample until you find a sample that is independently decodable, and whose audioSamplePacketRefreshCount is greater than or equal to
+ 				the number of steps back you have taken.  This implies that if the current sample (before this walk) is independently decodable, with an
+ 				audioSampleRefreshCount of zero, no walk is required.
+*/
+@property (nonatomic, readonly) AVSampleCursorAudioDependencyInfo currentSampleAudioDependencyInfo;
+
+/*!
 	@property		samplesRequiredForDecoderRefresh
 	@abstract		Count of samples prior to the current sample, in decode order, that the decoder requires in order to achieve fully coherent output at the current decode time, as after a seek. Zero will be returned if no samples are required for decoder refresh or if the track does not contain this information.
 	@discussion		Some sample sequences that do not indicate sample dependencies may instead indicate that in order for a specific sample to be decoded with all available accuracy, samples prior to that sample in decode order must be decoded before the specific sample is decoded.
@@ -212,7 +235,7 @@ typedef struct {
 			// in order to decode the sample at the position of mySampleCursor in full
 			
 */
-@property (nonatomic, readonly) NSInteger samplesRequiredForDecoderRefresh NS_AVAILABLE_MAC(10_11);
+@property (nonatomic, readonly) NSInteger samplesRequiredForDecoderRefresh API_AVAILABLE(macos(10.11)) API_UNAVAILABLE(ios, tvos, watchos);
 
 @end
 

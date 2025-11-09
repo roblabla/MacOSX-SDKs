@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014-2015, 2018 Apple Inc.
+ * Copyright (c) 2014-2015, 2018-2019 Apple Inc.
  * All rights reserved.
  */
 
@@ -28,6 +28,8 @@ typedef NS_ENUM(NSInteger, NEVPNIKEv2EncryptionAlgorithm) {
 	NEVPNIKEv2EncryptionAlgorithmAES128GCM API_AVAILABLE(macos(10.11), ios(8.3)) API_UNAVAILABLE(watchos, tvos) = 5,
 	/*! @const NEVPNIKEv2EncryptionAlgorithmAES256GCM Advanced Encryption Standard 256 bit (AES256GCM) */
 	NEVPNIKEv2EncryptionAlgorithmAES256GCM API_AVAILABLE(macos(10.11), ios(8.3)) API_UNAVAILABLE(watchos, tvos) = 6,
+	/*! @const NEVPNIKEv2EncryptionAlgorithmChaCha20Poly1305 ChaCha20 and Poly1305 (ChaCha20Poly1305) */
+	NEVPNIKEv2EncryptionAlgorithmChaCha20Poly1305 API_AVAILABLE(macos(10.15), ios(13.0)) API_UNAVAILABLE(watchos, tvos) = 7,
 } API_AVAILABLE(macos(10.11), ios(8.0)) API_UNAVAILABLE(watchos, tvos);
 
 /*!
@@ -91,6 +93,8 @@ typedef NS_ENUM(NSInteger, NEVPNIKEv2DiffieHellmanGroup) {
 	NEVPNIKEv2DiffieHellmanGroup20 = 20,
 	/*! @const NEVPNIKEv2DiffieHellmanGroup21 Diffie Hellman group 21 (521-bit random ECP) */
 	NEVPNIKEv2DiffieHellmanGroup21 = 21,
+	/*! @const NEVPNIKEv2DiffieHellmanGroup31 Diffie Hellman group 31 (Curve25519) */
+	NEVPNIKEv2DiffieHellmanGroup31 API_AVAILABLE(macos(10.15), ios(13.0)) API_UNAVAILABLE(watchos, tvos) = 31,
 } API_AVAILABLE(macos(10.11), ios(8.0)) API_UNAVAILABLE(watchos, tvos);
 
 /*!
@@ -106,6 +110,8 @@ typedef NS_ENUM(NSInteger, NEVPNIKEv2CertificateType) {
     NEVPNIKEv2CertificateTypeECDSA384 = 3,
     /*! @const NEVPNIKEv2CertificateTypeECDSA521 ECDSA with p-521 curve */
     NEVPNIKEv2CertificateTypeECDSA521 = 4,
+	/*! @const NEVPNIKEv2CertificateTypeEd25519 Edwards 25519 curve */
+	NEVPNIKEv2CertificateTypeEd25519 API_AVAILABLE(macos(10.15), ios(13.0)) API_UNAVAILABLE(watchos, tvos) = 5,
 } API_AVAILABLE(macos(10.11), ios(8.3)) API_UNAVAILABLE(watchos, tvos);
 
 /*!
@@ -251,6 +257,15 @@ API_AVAILABLE(macos(10.11), ios(8.0)) API_UNAVAILABLE(watchos, tvos)
  * @discussion Sets a maximum TLS version to allow for EAP-TLS authentication. Default is NEVPNIKEv2TLSVersionDefault.
  */
 @property NEVPNIKEv2TLSVersion maximumTLSVersion API_AVAILABLE(macos(10.13), ios(11.0)) API_UNAVAILABLE(watchos, tvos);
+
+/*!
+ * @property enableFallback
+ * @discussion Enable Fallback is used to support Wi-Fi Assist. Wi-Fi Assist allows connections for foreground apps to switch over
+ *     to Cellular Data when WiFi connectivity is poor. By setting the EnableFallback key, the device will bring up a tunnel over
+ *     Cellular Data to carry traffic that is eligible for Wi-Fi Assist and also requires VPN. Enabling fallback requires that the
+ *     server support multiple tunnels for a single user. Default is NO.
+ */
+@property BOOL enableFallback API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(macos, watchos, tvos);
 
 @end
 

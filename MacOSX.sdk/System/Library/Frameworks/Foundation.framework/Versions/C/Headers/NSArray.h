@@ -1,11 +1,12 @@
 /*	NSArray.h
-	Copyright (c) 1994-2018, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2019, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
 #import <Foundation/NSEnumerator.h>
 #import <Foundation/NSRange.h>
 #import <Foundation/NSObjCRuntime.h>
+#import <Foundation/NSOrderedCollectionDifference.h>
 
 @class NSData, NSIndexSet, NSString, NSURL;
 
@@ -19,7 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (ObjectType)objectAtIndex:(NSUInteger)index;
 - (instancetype)init NS_DESIGNATED_INITIALIZER;
 - (instancetype)initWithObjects:(const ObjectType _Nonnull [_Nullable])objects count:(NSUInteger)cnt NS_DESIGNATED_INITIALIZER;
-- (nullable instancetype)initWithCoder:(NSCoder *)aDecoder NS_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithCoder:(NSCoder *)coder NS_DESIGNATED_INITIALIZER;
 
 @end
 
@@ -103,20 +104,35 @@ typedef NS_OPTIONS(NSUInteger, NSBinarySearchingOptions) {
 
 @end
 
+API_AVAILABLE(macosx(10.15), ios(13.0), watchos(6.0), tvos(13.0))
+NS_SWIFT_UNAVAILABLE("NSArray diffing methods are not available in Swift, use Collection.difference(from:) instead")
+@interface NSArray<ObjectType> (NSArrayDiffing)
+
+- (NSOrderedCollectionDifference<ObjectType> *)differenceFromArray:(NSArray<ObjectType> *)other withOptions:(NSOrderedCollectionDifferenceCalculationOptions)options usingEquivalenceTest:(BOOL (NS_NOESCAPE ^)(ObjectType obj1, ObjectType obj2))block;
+
+- (NSOrderedCollectionDifference<ObjectType> *)differenceFromArray:(NSArray<ObjectType> *)other withOptions:(NSOrderedCollectionDifferenceCalculationOptions)options;
+
+// Uses isEqual: to determine the difference between the parameter and the receiver
+- (NSOrderedCollectionDifference<ObjectType> *)differenceFromArray:(NSArray<ObjectType> *)other;
+
+- (nullable NSArray<ObjectType> *)arrayByApplyingDifference:(NSOrderedCollectionDifference<ObjectType> *)difference;
+
+@end
+
 @interface NSArray<ObjectType> (NSDeprecated)
 
 /* This method is unsafe because it could potentially cause buffer overruns. You should use -getObjects:range: instead.
-*/
+ */
 
 - (void)getObjects:(ObjectType _Nonnull __unsafe_unretained [_Nonnull])objects NS_SWIFT_UNAVAILABLE("Use 'as [AnyObject]' instead") API_DEPRECATED("Use -getObjects:range: instead", macos(10.0, 10.13), ios(2.0, 11.0), watchos(2.0, 4.0), tvos(9.0, 11.0));
 
 /* These methods are deprecated, and will be marked with API_DEPRECATED in a subsequent release. Use the variants that use errors instead. */
-+ (nullable NSArray<ObjectType> *)arrayWithContentsOfFile:(NSString *)path;
-+ (nullable NSArray<ObjectType> *)arrayWithContentsOfURL:(NSURL *)url;
-- (nullable NSArray<ObjectType> *)initWithContentsOfFile:(NSString *)path;
-- (nullable NSArray<ObjectType> *)initWithContentsOfURL:(NSURL *)url;
-- (BOOL)writeToFile:(NSString *)path atomically:(BOOL)useAuxiliaryFile;
-- (BOOL)writeToURL:(NSURL *)url atomically:(BOOL)atomically;
++ (nullable NSArray<ObjectType> *)arrayWithContentsOfFile:(NSString *)path API_DEPRECATED_WITH_REPLACEMENT("arrayWithContentsOfURL:error:", macos(10.0, API_TO_BE_DEPRECATED), ios(2.0, API_TO_BE_DEPRECATED), watchos(2.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED));
++ (nullable NSArray<ObjectType> *)arrayWithContentsOfURL:(NSURL *)url API_DEPRECATED_WITH_REPLACEMENT("arrayWithContentsOfURL:error:", macos(10.0, API_TO_BE_DEPRECATED), ios(2.0, API_TO_BE_DEPRECATED), watchos(2.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED));
+- (nullable NSArray<ObjectType> *)initWithContentsOfFile:(NSString *)path API_DEPRECATED_WITH_REPLACEMENT("initWithContentsOfURL:error:", macos(10.0, API_TO_BE_DEPRECATED), ios(2.0, API_TO_BE_DEPRECATED), watchos(2.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED));
+- (nullable NSArray<ObjectType> *)initWithContentsOfURL:(NSURL *)url API_DEPRECATED_WITH_REPLACEMENT("initWithContentsOfURL:error:", macos(10.0, API_TO_BE_DEPRECATED), ios(2.0, API_TO_BE_DEPRECATED), watchos(2.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED));
+- (BOOL)writeToFile:(NSString *)path atomically:(BOOL)useAuxiliaryFile API_DEPRECATED_WITH_REPLACEMENT("writeToURL:error:", macos(10.0, API_TO_BE_DEPRECATED), ios(2.0, API_TO_BE_DEPRECATED), watchos(2.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED));
+- (BOOL)writeToURL:(NSURL *)url atomically:(BOOL)atomically API_DEPRECATED_WITH_REPLACEMENT("writeToURL:error:", macos(10.0, API_TO_BE_DEPRECATED), ios(2.0, API_TO_BE_DEPRECATED), watchos(2.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED));
 
 @end
 
@@ -131,7 +147,7 @@ typedef NS_OPTIONS(NSUInteger, NSBinarySearchingOptions) {
 - (void)replaceObjectAtIndex:(NSUInteger)index withObject:(ObjectType)anObject;
 - (instancetype)init NS_DESIGNATED_INITIALIZER;
 - (instancetype)initWithCapacity:(NSUInteger)numItems NS_DESIGNATED_INITIALIZER;
-- (nullable instancetype)initWithCoder:(NSCoder *)aDecoder NS_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithCoder:(NSCoder *)coder NS_DESIGNATED_INITIALIZER;
 
 @end
 
@@ -172,6 +188,14 @@ typedef NS_OPTIONS(NSUInteger, NSBinarySearchingOptions) {
 + (nullable NSMutableArray<ObjectType> *)arrayWithContentsOfURL:(NSURL *)url;
 - (nullable NSMutableArray<ObjectType> *)initWithContentsOfFile:(NSString *)path;
 - (nullable NSMutableArray<ObjectType> *)initWithContentsOfURL:(NSURL *)url;
+
+@end
+
+API_AVAILABLE(macosx(10.15), ios(13.0), watchos(6.0), tvos(13.0))
+NS_SWIFT_UNAVAILABLE("NSMutableArray diffing methods are not available in Swift")
+@interface NSMutableArray<ObjectType> (NSMutableArrayDiffing)
+
+- (void)applyDifference:(NSOrderedCollectionDifference<ObjectType> *)difference;
 
 @end
 

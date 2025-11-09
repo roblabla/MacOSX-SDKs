@@ -111,7 +111,7 @@ AEBuildDesc(
   AEDesc *        dst,
   AEBuildError *  error,       /* can be NULL */
   const char *    src,
-  ...)                                                        __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
+  ...)                                                        API_AVAILABLE( macos(10.0) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 /* varargs version of AEBuildDesc*/
@@ -131,7 +131,7 @@ vAEBuildDesc(
   AEDesc *        dst,
   AEBuildError *  error,       /* can be NULL */
   const char *    src,
-  va_list         args)                                       __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
+  va_list         args)                                       API_AVAILABLE( macos(10.0) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 
@@ -152,7 +152,7 @@ AEBuildParameters(
   AppleEvent *    event,
   AEBuildError *  error,        /* can be NULL */
   const char *    format,
-  ...)                                                        __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
+  ...)                                                        API_AVAILABLE( macos(10.0) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 /* varargs version of AEBuildParameters*/
@@ -172,7 +172,7 @@ vAEBuildParameters(
   AppleEvent *    event,
   AEBuildError *  error,        /* can be NULL */
   const char *    format,
-  va_list         args)                                       __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
+  va_list         args)                                       API_AVAILABLE( macos(10.0) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 /* Building an entire Apple event:*/
@@ -199,7 +199,7 @@ AEBuildAppleEvent(
   AppleEvent *    result,
   AEBuildError *  error,               /* can be NULL */
   const char *    paramsFmt,
-  ...)                                                        __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
+  ...)                                                        API_AVAILABLE( macos(10.0) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 /* varargs version of AEBuildAppleEvent*/
@@ -226,7 +226,7 @@ vAEBuildAppleEvent(
   AppleEvent *    resultEvt,
   AEBuildError *  error,               /* can be NULL */
   const char *    paramsFmt,
-  va_list         args)                                       __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
+  va_list         args)                                       API_AVAILABLE( macos(10.0) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 /*
@@ -252,7 +252,7 @@ vAEBuildAppleEvent(
 extern OSStatus 
 AEPrintDescToHandle(
   const AEDesc *  desc,
-  Handle *        result)                                     __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
+  Handle *        result)                                     API_AVAILABLE( macos(10.0) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 /*
@@ -282,7 +282,7 @@ typedef struct OpaqueAEStreamRef*       AEStreamRef;
  *    Non-Carbon CFM:   not available
  */
 extern AEStreamRef 
-AEStreamOpen(void)                                            __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
+AEStreamOpen(void)                                            API_AVAILABLE( macos(10.0) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 /*
@@ -304,7 +304,7 @@ AEStreamOpen(void)                                            __OSX_AVAILABLE_ST
 extern OSStatus 
 AEStreamClose(
   AEStreamRef   ref,
-  AEDesc *      desc)                                         __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
+  AEDesc *      desc)                                         API_AVAILABLE( macos(10.0) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 /*
@@ -325,7 +325,7 @@ AEStreamClose(
 extern OSStatus 
 AEStreamOpenDesc(
   AEStreamRef   ref,
-  DescType      newType)                                      __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
+  DescType      newType)                                      API_AVAILABLE( macos(10.0) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 /* Append data to the previously opened desc.*/
@@ -344,7 +344,7 @@ extern OSStatus
 AEStreamWriteData(
   AEStreamRef   ref,
   const void *  data,
-  Size          length)                                       __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
+  Size          length)                                       API_AVAILABLE( macos(10.0) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 /*
@@ -363,7 +363,7 @@ AEStreamWriteData(
  *    Non-Carbon CFM:   not available
  */
 extern OSStatus 
-AEStreamCloseDesc(AEStreamRef ref)                            __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
+AEStreamCloseDesc(AEStreamRef ref)                            API_AVAILABLE( macos(10.0) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 /* Write data as a desc to the stream*/
@@ -383,7 +383,7 @@ AEStreamWriteDesc(
   AEStreamRef   ref,
   DescType      newType,
   const void *  data,
-  Size          length)                                       __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
+  Size          length)                                       API_AVAILABLE( macos(10.0) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 /* Write an entire desc to the stream*/
@@ -401,7 +401,7 @@ AEStreamWriteDesc(
 extern OSStatus 
 AEStreamWriteAEDesc(
   AEStreamRef     ref,
-  const AEDesc *  desc)                                       __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
+  const AEDesc *  desc)                                       API_AVAILABLE( macos(10.0) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 /*
@@ -420,7 +420,7 @@ AEStreamWriteAEDesc(
  *    Non-Carbon CFM:   not available
  */
 extern OSStatus 
-AEStreamOpenList(AEStreamRef ref)                             __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
+AEStreamOpenList(AEStreamRef ref)                             API_AVAILABLE( macos(10.0) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 /* Finish a list.*/
@@ -436,7 +436,7 @@ AEStreamOpenList(AEStreamRef ref)                             __OSX_AVAILABLE_ST
  *    Non-Carbon CFM:   not available
  */
 extern OSStatus 
-AEStreamCloseList(AEStreamRef ref)                            __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
+AEStreamCloseList(AEStreamRef ref)                            API_AVAILABLE( macos(10.0) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 /*
@@ -457,7 +457,7 @@ AEStreamCloseList(AEStreamRef ref)                            __OSX_AVAILABLE_ST
 extern OSStatus 
 AEStreamOpenRecord(
   AEStreamRef   ref,
-  DescType      newType)                                      __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
+  DescType      newType)                                      API_AVAILABLE( macos(10.0) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 /* Change the type of a record.*/
@@ -475,7 +475,7 @@ AEStreamOpenRecord(
 extern OSStatus 
 AEStreamSetRecordType(
   AEStreamRef   ref,
-  DescType      newType)                                      __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
+  DescType      newType)                                      API_AVAILABLE( macos(10.0) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 /* Finish a record*/
@@ -491,7 +491,7 @@ AEStreamSetRecordType(
  *    Non-Carbon CFM:   not available
  */
 extern OSStatus 
-AEStreamCloseRecord(AEStreamRef ref)                          __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
+AEStreamCloseRecord(AEStreamRef ref)                          API_AVAILABLE( macos(10.0) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 /*
@@ -515,7 +515,7 @@ AEStreamWriteKeyDesc(
   AEKeyword     key,
   DescType      newType,
   const void *  data,
-  Size          length)                                       __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
+  Size          length)                                       API_AVAILABLE( macos(10.0) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 /*
@@ -537,7 +537,7 @@ extern OSStatus
 AEStreamOpenKeyDesc(
   AEStreamRef   ref,
   AEKeyword     key,
-  DescType      newType)                                      __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
+  DescType      newType)                                      API_AVAILABLE( macos(10.0) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 /* Write a key to the stream - you can follow this with an AEWriteDesc.*/
@@ -555,7 +555,7 @@ AEStreamOpenKeyDesc(
 extern OSStatus 
 AEStreamWriteKey(
   AEStreamRef   ref,
-  AEKeyword     key)                                          __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
+  AEKeyword     key)                                          API_AVAILABLE( macos(10.0) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 /*
@@ -582,7 +582,7 @@ AEStreamCreateEvent(
   const void *   targetData,
   Size           targetLength,
   SInt16         returnID,
-  SInt32         transactionID)                               __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
+  SInt32         transactionID)                               API_AVAILABLE( macos(10.0) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 /*
@@ -605,7 +605,7 @@ AEStreamCreateEvent(
  *    Non-Carbon CFM:   not available
  */
 extern AEStreamRef 
-AEStreamOpenEvent(AppleEvent * event)                         __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
+AEStreamOpenEvent(AppleEvent * event)                         API_AVAILABLE( macos(10.0) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 /* Mark a keyword as being an optional parameter.*/
@@ -623,7 +623,7 @@ AEStreamOpenEvent(AppleEvent * event)                         __OSX_AVAILABLE_ST
 extern OSStatus 
 AEStreamOptionalParam(
   AEStreamRef   ref,
-  AEKeyword     key)                                          __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
+  AEKeyword     key)                                          API_AVAILABLE( macos(10.0) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 

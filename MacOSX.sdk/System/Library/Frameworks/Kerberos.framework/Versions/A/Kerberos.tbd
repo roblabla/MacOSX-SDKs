@@ -1,11 +1,10 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 8BE3D524-257D-3663-A937-F1AC76BDF4D9' ]
-platform:        macosx
-install-name:    /System/Library/Frameworks/Kerberos.framework/Versions/A/Kerberos
+uuids:           [ 'x86_64: 63F0D476-38D8-319F-9834-FF669DB28B5D', 'x86_64: 63F0D476-38D8-319F-9834-FF669DB28B5D' ]
+platform:        zippered
+install-name:    '/System/Library/Frameworks/Kerberos.framework/Versions/A/Kerberos'
 current-version: 6
 compatibility-version: 5
-objc-constraint: none
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _FSp_krb_get_svc_in_tkt, _FSp_profile_init, _FSp_profile_init_path, 

@@ -38,66 +38,67 @@
 
 /* Keys for plug-in attributes */
 #if defined(MAC_OS_X_VERSION_10_5) && (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
-extern NSString* const QCPlugInAttributeNameKey;
-extern NSString* const QCPlugInAttributeDescriptionKey;
-extern NSString* const QCPlugInAttributeCopyrightKey;
+extern NSString* const QCPlugInAttributeNameKey QC_DEPRECATED_MAC(10_15);
+extern NSString* const QCPlugInAttributeDescriptionKey QC_DEPRECATED_MAC(10_15);
+extern NSString* const QCPlugInAttributeCopyrightKey QC_DEPRECATED_MAC(10_15);
 #endif
 #if defined(MAC_OS_X_VERSION_10_7) && (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_7)
-extern NSString* const QCPlugInAttributeCategoriesKey; // Return an NSArray with category strings.
-extern NSString* const QCPlugInAttributeExamplesKey; // Return an NSArray of examples. Examples may be NSURLs or NSString paths that are relative to the plug-in's Resources directory.
+extern NSString* const QCPlugInAttributeCategoriesKey QC_DEPRECATED_MAC(10_15); // Return an NSArray with category strings.
+extern NSString* const QCPlugInAttributeExamplesKey QC_DEPRECATED_MAC(10_15); // Return an NSArray of examples. Examples may be NSURLs or NSString paths that are relative to the plug-in's Resources directory.
 #endif
 
 /* Keys for input / output ports attributes */
-extern NSString* const QCPortAttributeTypeKey;
-extern NSString* const QCPortAttributeNameKey;
-extern NSString* const QCPortAttributeMinimumValueKey; //For Number ports only
-extern NSString* const QCPortAttributeMaximumValueKey; //For Index and Number ports only
+extern NSString* const QCPortAttributeTypeKey QC_DEPRECATED_MAC(10_15);
+extern NSString* const QCPortAttributeNameKey QC_DEPRECATED_MAC(10_15);
+extern NSString* const QCPortAttributeMinimumValueKey QC_DEPRECATED_MAC(10_15); //For Number ports only
+extern NSString* const QCPortAttributeMaximumValueKey QC_DEPRECATED_MAC(10_15); //For Index and Number ports only
 #if defined(MAC_OS_X_VERSION_10_5) && (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
-extern NSString* const QCPortAttributeDefaultValueKey; //For value ports only (Boolean, Index, Number, Color and String)
-extern NSString* const QCPortAttributeMenuItemsKey; //For Index ports only
+extern NSString* const QCPortAttributeDefaultValueKey QC_DEPRECATED_MAC(10_15); //For value ports only (Boolean, Index, Number, Color and String)
+extern NSString* const QCPortAttributeMenuItemsKey QC_DEPRECATED_MAC(10_15); //For Index ports only
 #endif
 
 /* Values for QCPortAttributeTypeKey corresponding to the possible types of input / output ports */
-extern NSString* const QCPortTypeBoolean;
-extern NSString* const QCPortTypeIndex;
-extern NSString* const QCPortTypeNumber;
-extern NSString* const QCPortTypeString;
-extern NSString* const QCPortTypeColor;
-extern NSString* const QCPortTypeImage;
-extern NSString* const QCPortTypeStructure;
+extern NSString* const QCPortTypeBoolean QC_DEPRECATED_MAC(10_15);
+extern NSString* const QCPortTypeIndex QC_DEPRECATED_MAC(10_15);
+extern NSString* const QCPortTypeNumber QC_DEPRECATED_MAC(10_15);
+extern NSString* const QCPortTypeString QC_DEPRECATED_MAC(10_15);
+extern NSString* const QCPortTypeColor QC_DEPRECATED_MAC(10_15);
+extern NSString* const QCPortTypeImage QC_DEPRECATED_MAC(10_15);
+extern NSString* const QCPortTypeStructure QC_DEPRECATED_MAC(10_15);
 
 #if defined(MAC_OS_X_VERSION_10_5) && (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
 
 /* Supported image pixel formats */
-extern NSString* const QCPlugInPixelFormatARGB8; //Recommended on PPC for optimal performances
-extern NSString* const QCPlugInPixelFormatBGRA8; //Recommended on X86 for optimal performances
-extern NSString* const QCPlugInPixelFormatRGBAf;
-extern NSString* const QCPlugInPixelFormatI8;
-extern NSString* const QCPlugInPixelFormatIf;
+extern NSString* const QCPlugInPixelFormatARGB8 QC_DEPRECATED_MAC(10_15); //Recommended on PPC for optimal performances
+extern NSString* const QCPlugInPixelFormatBGRA8 QC_DEPRECATED_MAC(10_15); //Recommended on X86 for optimal performances
+extern NSString* const QCPlugInPixelFormatRGBAf QC_DEPRECATED_MAC(10_15);
+extern NSString* const QCPlugInPixelFormatI8 QC_DEPRECATED_MAC(10_15);
+extern NSString* const QCPlugInPixelFormatIf QC_DEPRECATED_MAC(10_15);
 
 /* Optional arguments received by -execute:atTime:withArguments: */
-extern NSString* const QCPlugInExecutionArgumentEventKey;
-extern NSString* const QCPlugInExecutionArgumentMouseLocationKey;
+extern NSString* const QCPlugInExecutionArgumentEventKey QC_DEPRECATED_MAC(10_15);
+extern NSString* const QCPlugInExecutionArgumentMouseLocationKey QC_DEPRECATED_MAC(10_15);
 
 /* Supported execution modes for plug-ins */
 typedef enum {
 	kQCPlugInExecutionModeProvider = 1,
 	kQCPlugInExecutionModeProcessor,
 	kQCPlugInExecutionModeConsumer
-} QCPlugInExecutionMode;
+} QCPlugInExecutionMode QC_DEPRECATED_MAC(10_15);;
 
 /* Supported time modes for plug-ins */
 typedef enum {
 	kQCPlugInTimeModeNone = 0,
 	kQCPlugInTimeModeIdle,
 	kQCPlugInTimeModeTimeBase
-} QCPlugInTimeMode;
+} QCPlugInTimeMode QC_DEPRECATED_MAC(10_15);;
 
 /* Callbacks */
-typedef void (*QCPlugInBufferReleaseCallback)(const void* address, void* context);
-typedef void (*QCPlugInTextureReleaseCallback)(CGLContextObj cgl_ctx, GLuint name, void* context);
+typedef void (*QCPlugInBufferReleaseCallback)(const void* address, void* context) QC_DEPRECATED_MAC(10_15);;
+typedef void (*QCPlugInTextureReleaseCallback)(CGLContextObj cgl_ctx, GLuint name, void* context) QC_DEPRECATED_MAC(10_15);;
 
 /* Protocol for plug-ins execution context (do not retain context object) */
+QC_CLASS_DEPRECATED_MAC(10_15)
 @protocol QCPlugInContext
 
 /*
@@ -154,6 +155,7 @@ The release callback must be defined and will be called and passed the texture n
 @end
 
 /* Protocol for images received as inputs */
+QC_CLASS_DEPRECATED_MAC(10_15)
 @protocol QCPlugInInputImageSource
 
 /*
@@ -258,6 +260,7 @@ Destroy the OpenGL texture representation of the image source.
 @end
 
 /* Protocol for images produced as outputs */
+QC_CLASS_DEPRECATED_MAC(10_15)
 @protocol QCPlugInOutputImageProvider
 
 /*
@@ -327,6 +330,7 @@ The rendering must save / restore all the OpenGL states it changes except the on
 @end
 
 /* The abstract plug-in class */
+QC_CLASS_DEPRECATED_MAC(10_15)
 @interface QCPlugIn : NSObject
 {
 @private
@@ -423,6 +427,7 @@ The default implementation calls -setValue:forKey: after decoding the serialized
 
 @end
 
+QC_CLASS_DEPRECATED_MAC(10_15)
 @interface QCPlugIn (Ports)
 
 /*
@@ -470,6 +475,7 @@ This method will throw an exception if called from within an execution method, o
 @end
 
 /* The plug-in registry */
+QC_CLASS_DEPRECATED_MAC(10_15)
 @interface QCPlugIn (Registry)
 
 /*

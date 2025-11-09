@@ -1,7 +1,7 @@
 /*
 	NSFontAssetRequest.h
 	Application Kit
-	Copyright (c) 2017-2018, Apple Inc.
+	Copyright (c) 2017-2019, Apple Inc.
 	All rights reserved.
 */
 
@@ -12,12 +12,12 @@
 
 @class NSFontDescriptor;
 
-#if __OBJC2__
 NS_ASSUME_NONNULL_BEGIN
+API_UNAVAILABLE_BEGIN(ios)
 
 typedef NS_OPTIONS(NSUInteger, NSFontAssetRequestOptions) {
     NSFontAssetRequestOptionUsesStandardUI = 1 << 0, // Use standard system UI for downloading.
-} NS_ENUM_AVAILABLE_MAC(10_13);
+} API_AVAILABLE(macos(10.13));
 
 /*
  The NSFontAssetRequest class is used to interact with the on demand font assets.
@@ -28,7 +28,7 @@ typedef NS_OPTIONS(NSUInteger, NSFontAssetRequestOptions) {
 
  The request object itself is lightweight. You may create as many as you need, for example to request the same set of font descriptors in different components of your application.
 */
-NS_CLASS_AVAILABLE_MAC(10_13)
+API_AVAILABLE(macos(10.13))
 @interface NSFontAssetRequest : NSObject <NSProgressReporting>
 
 - (instancetype)init NS_UNAVAILABLE;
@@ -55,5 +55,5 @@ NS_CLASS_AVAILABLE_MAC(10_13)
 
 @end
 
+API_UNAVAILABLE_END
 NS_ASSUME_NONNULL_END
-#endif

@@ -1,6 +1,6 @@
 /*
     NSMeasurement.h
-    Copyright (c) 2015-2018, Apple Inc.
+    Copyright (c) 2015-2019, Apple Inc.
     All rights reserved.
  */
 
@@ -9,7 +9,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-NS_CLASS_AVAILABLE(10_12, 10_0)
+API_AVAILABLE(macos(10.12), ios(10.0), watchos(3.0), tvos(10.0))
 @interface NSMeasurement<UnitType: NSUnit *> : NSObject<NSCopying, NSSecureCoding> {
 @private
     UnitType _unit;
@@ -19,7 +19,7 @@ NS_CLASS_AVAILABLE(10_12, 10_0)
 @property (readonly, copy) UnitType unit;
 @property (readonly) double doubleValue;
 
-- (instancetype)init NS_UNAVAILABLE;
+- (instancetype)init API_UNAVAILABLE(macos, ios, watchos, tvos);
 - (instancetype)initWithDoubleValue:(double)doubleValue unit:(UnitType)unit NS_DESIGNATED_INITIALIZER;
 
 /*

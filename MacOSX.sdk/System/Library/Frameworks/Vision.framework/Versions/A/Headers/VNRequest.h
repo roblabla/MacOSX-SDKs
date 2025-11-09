@@ -94,6 +94,11 @@ API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0))
 /*! @abstract Provides the current revison supported by the request. */
 @property (class, readonly, nonatomic, assign) NSUInteger currentRevision API_AVAILABLE(macos(10.14), ios(12.0), tvos(12.0));
 
+/*!
+ * @discussion Tries to abort the request as soon as possible. Results will be nil. The completionHandler (if present) will be called with an error of VNErrorRequestCancelled.
+ */
+- (void)cancel API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0));
+
 @end
 
 
@@ -120,5 +125,35 @@ API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0))
 
 @end
 
+
+
+/*!
+ @abstract A block that is executed at intervals during the processing of a request.
+ @param request The VNRequest that has been completed. The results of the request, if no error was encountered, are populated in the results array of the request.
+ @param fractionCompleted When possible the request will report its progress between 0.0 and 1.0. If the requests indeterminate property is set, then this value is undefined.
+ @param    error The error that caused the request to fail, or nil if completed successfully.
+ @discussion The results in the request can be populated with partial results. The progressHandler can be called on a different dispatch queue than what the request was initiated from.
+ */
+typedef void (^VNRequestProgressHandler)(VNRequest *request, double fractionCompleted, NSError * _Nullable error);
+
+
+API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0))
+@protocol VNRequestProgressProviding < NSObject >
+
+/*!
+ @brief Requests that support the VNRequestProgressProviding protocol would periodically call the progressHandler to report progress on longer running tasks.
+ 
+ @discussion The progessHandler is optional allowing clients of the request to report progress to the user and/or display or process partial results when they become available. Note that the progressHandler can be called on a different dispatch queue than what the request was initiated from.
+ */
+@property (readwrite, nonatomic, copy) VNRequestProgressHandler progressHandler;
+
+
+/*!
+ @brief If a request cannot determine its progress in fractions completed, this property will be set.
+ @discussion If this is set, it doesn't mean that the request will run forever just that the nature of the request is not broken down into identifiable fractions on which progress can be reported in increments. The progressHandler will nonetheless be called at suitable intervals.
+ */
+@property (readonly) BOOL indeterminate;
+
+@end
 
 NS_ASSUME_NONNULL_END

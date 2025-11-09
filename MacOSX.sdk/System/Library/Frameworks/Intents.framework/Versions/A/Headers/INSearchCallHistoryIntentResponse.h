@@ -2,7 +2,7 @@
 //  INSearchCallHistoryIntentResponse.h
 //  Intents
 //
-//  Copyright (c) 2016-2017 Apple Inc. All rights reserved.
+//  Copyright (c) 2016-2019 Apple Inc. All rights reserved.
 //
 
 #import <Intents/INIntentResponse.h>
@@ -18,11 +18,12 @@ typedef NS_ENUM(NSInteger, INSearchCallHistoryIntentResponseCode) {
     INSearchCallHistoryIntentResponseCodeFailureAppConfigurationRequired,
     INSearchCallHistoryIntentResponseCodeInProgress API_AVAILABLE(ios(11.0), watchos(4.0), macosx(10.13)),
     INSearchCallHistoryIntentResponseCodeSuccess API_AVAILABLE(ios(11.0), watchos(4.0), macosx(10.13)),
-} API_AVAILABLE(ios(10.0), watchos(3.2), macosx(10.12));
+} API_AVAILABLE(ios(10.0), watchos(3.2)) API_UNAVAILABLE(macosx);
 
 NS_ASSUME_NONNULL_BEGIN
 
-API_AVAILABLE(ios(10.0), watchos(3.2), macosx(10.12))
+API_AVAILABLE(ios(10.0), watchos(3.2))
+API_UNAVAILABLE(macosx)
 @interface INSearchCallHistoryIntentResponse : INIntentResponse
 
 - (id)init NS_UNAVAILABLE;
@@ -34,7 +35,7 @@ API_AVAILABLE(ios(10.0), watchos(3.2), macosx(10.12))
 
 @property (readonly, NS_NONATOMIC_IOSONLY) INSearchCallHistoryIntentResponseCode code;
 
-@property (readwrite, copy, nullable, NS_NONATOMIC_IOSONLY) NSArray<INCallRecord *> *callRecords API_AVAILABLE(ios(11.0), macosx(10.13));
+@property (readwrite, copy, nullable, NS_NONATOMIC_IOSONLY) NSArray<INCallRecord *> *callRecords API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macosx);
 
 @end
 

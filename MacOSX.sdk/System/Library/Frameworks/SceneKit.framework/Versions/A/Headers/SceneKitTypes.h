@@ -2,26 +2,39 @@
 //  SceneKitTypes.h
 //  SceneKit
 //
-//  Copyright © 2012-2018 Apple Inc. All rights reserved.
+//  Copyright © 2012-2019 Apple Inc. All rights reserved.
 //
 
 #import <SceneKit/SceneKitAvailability.h>
 #import <CoreGraphics/CoreGraphics.h>
 #import <simd/simd.h>
 
-#import <QuartzCore/QuartzCore.h>
-#import <GLKit/GLKMathTypes.h>
-
 /*! @header SceneKitTypes
  @abstract Various types and utility functions used throughout SceneKit
  */
 
 #define SCN_ENABLE_METAL 1
+#define SCN_ENABLE_OPENGL 1
+
+#ifdef SCN_SILENCE_GL_DEPRECATION
+#define SCN_GL_DEPRECATED_MAC(from, to) NS_AVAILABLE_MAC(from)
+#define SCN_GL_DEPRECATED_IOS(from, to) NS_AVAILABLE_IOS(from)
+#define SCN_GL_DEPRECATED(fromM,toM, fromI,toI) NS_AVAILABLE(fromM,fromI)
+#else
+#define SCN_GL_DEPRECATED_MAC(from, to) NS_DEPRECATED_MAC(from, to, "OpenGL API deprecated, please use Metal instead. (Define SCN_SILENCE_GL_DEPRECATION to silence these warnings)")
+#define SCN_GL_DEPRECATED_IOS(from, to) NS_DEPRECATED_IOS(from, to, "OpenGL API deprecated, please use Metal instead. (Define SCN_SILENCE_GL_DEPRECATION to silence these warnings)")
+#define SCN_GL_DEPRECATED(fromM, toM, fromI, toI) NS_DEPRECATED(fromM, toM, fromI, toI, "OpenGL API deprecated, please use Metal instead. (Define SCN_SILENCE_GL_DEPRECATION to silence these warnings)")
+#endif
 
 #if SCN_ENABLE_METAL
 #import <Metal/Metal.h>
 #endif
 
+#if SCN_ENABLE_OPENGL
+#import <GLKit/GLKMathTypes.h>
+#endif
+
+#import <QuartzCore/QuartzCore.h>
 
 // Color
 #define SCNColor NSColor
@@ -150,6 +163,8 @@ SCN_EXPORT SCNMatrix4 SCNMatrix4Mult(SCNMatrix4 a, SCNMatrix4 b) API_AVAILABLE(m
 
 #pragma mark - GLKit Bridge
 
+#if SCN_ENABLE_OPENGL
+    
 NS_INLINE SCNVector3 SCNVector3FromGLKVector3(GLKVector3 vector) {
 #if CGFLOAT_IS_DOUBLE
     return (SCNVector3){vector.v[0], vector.v[1], vector.v[2]};
@@ -186,6 +201,8 @@ SCN_EXPORT GLKMatrix4 SCNMatrix4ToGLKMatrix4(SCNMatrix4 mat) API_AVAILABLE(macos
 SCN_EXPORT SCNMatrix4 SCNMatrix4FromGLKMatrix4(GLKMatrix4 mat) API_AVAILABLE(macos(10.10));
 #define GLKMatrix4FromCATransform3D(X) SCNMatrix4ToGLKMatrix4(X)
 #define GLKMatrix4ToCATransform3D(X)   SCNMatrix4FromGLKMatrix4(X)
+
+#endif //SCN_ENABLE_OPENGL
 
 
 #pragma mark - SIMD Bridge

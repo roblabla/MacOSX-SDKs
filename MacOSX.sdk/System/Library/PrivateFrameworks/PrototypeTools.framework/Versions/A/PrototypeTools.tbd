@@ -1,8 +1,8 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 16D2ABCD-1242-3F48-977A-B7AAD5BC9F41' ]
-platform:        macosx
-install-name:    /System/Library/PrivateFrameworks/PrototypeTools.framework/Versions/A/PrototypeTools
+uuids:           [ 'x86_64: DF8320B7-7855-300D-B24E-65B663942477', 'x86_64: DF8320B7-7855-300D-B24E-65B663942477' ]
+platform:        zippered
+install-name:    '/System/Library/PrivateFrameworks/PrototypeTools.framework/Versions/A/PrototypeTools'
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _PTDomainClientInterface, _PTDomainMachService, _PTDomainServerDomainsChangedNotification, 

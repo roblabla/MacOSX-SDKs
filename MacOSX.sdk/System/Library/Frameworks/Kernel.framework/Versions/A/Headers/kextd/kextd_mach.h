@@ -98,13 +98,13 @@ __END_DECLS
 #define __Request__kextd_kernel_request_subsystem__defined
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
 	} __Request__kextd_ping_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 #endif /* !__Request__kextd_kernel_request_subsystem__defined */
 
@@ -122,7 +122,7 @@ union __RequestUnion__kextd_kernel_request_subsystem {
 #define __Reply__kextd_kernel_request_subsystem__defined
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -130,7 +130,7 @@ union __RequestUnion__kextd_kernel_request_subsystem {
 		kern_return_t RetCode;
 	} __Reply__kextd_ping_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 #endif /* !__Reply__kextd_kernel_request_subsystem__defined */
 

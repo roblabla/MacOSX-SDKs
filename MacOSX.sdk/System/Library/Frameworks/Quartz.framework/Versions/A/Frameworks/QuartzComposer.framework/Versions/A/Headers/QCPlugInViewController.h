@@ -2,6 +2,7 @@
 	Copyright:	(c) 2003-2008 by Apple, Inc., all rights reserved.
 */
 
+#import <QuartzComposer/QuartzComposerDefines.h>
 #import <AppKit/AppKit.h>
 
 #if defined(MAC_OS_X_VERSION_10_5) && (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
@@ -19,6 +20,7 @@
 */
 
 /* The view controller for QCPlugIn user-interface */
+QC_CLASS_DEPRECATED_MAC(10_15)
 @interface QCPlugInViewController : NSViewController
 {
 @private
@@ -38,6 +40,7 @@ Returns the plug-in instance for this plug-in view controller.
 @end
 
 /* Extension to QCPlugIn for user-interface support */
+QC_CLASS_DEPRECATED_MAC(10_15)
 @interface QCPlugIn (QCPlugInViewController)
 
 /*

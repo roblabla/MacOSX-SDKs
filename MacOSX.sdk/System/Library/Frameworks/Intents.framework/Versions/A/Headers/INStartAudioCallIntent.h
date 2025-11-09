@@ -2,7 +2,7 @@
 //  INStartAudioCallIntent.h
 //  Intents
 //
-//  Copyright (c) 2016-2017 Apple Inc. All rights reserved.
+//  Copyright (c) 2016-2019 Apple Inc. All rights reserved.
 //
 
 #import <Intents/INIntent.h>
@@ -16,13 +16,14 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-API_AVAILABLE(ios(10.0), watchos(3.2), macosx(10.12))
+API_UNAVAILABLE(macosx)
+API_DEPRECATED("INStartAudioCallIntent is deprecated. Please adopt INStartCallIntent instead", ios(10.0, 13.0), watchos(3.2, 6.0))
 @interface INStartAudioCallIntent : INIntent
 
 - (instancetype)initWithDestinationType:(INCallDestinationType)destinationType
                                contacts:(nullable NSArray<INPerson *> *)contacts NS_DESIGNATED_INITIALIZER API_AVAILABLE(ios(11.0), watchos(4.0), macosx(10.13));
 
-@property (readonly, assign, NS_NONATOMIC_IOSONLY) INCallDestinationType destinationType API_AVAILABLE(ios(11.0), watchos(4.0), macosx(10.13));
+@property (readonly, assign, NS_NONATOMIC_IOSONLY) INCallDestinationType destinationType API_AVAILABLE(ios(11.0), watchos(4.0)) API_UNAVAILABLE(macosx);
 
 // Recipients of the audio call.
 @property (readonly, copy, nullable, NS_NONATOMIC_IOSONLY) NSArray<INPerson *> *contacts;
@@ -36,7 +37,8 @@ API_AVAILABLE(ios(10.0), watchos(3.2), macosx(10.12))
  @discussion The minimum requirement for an implementing class is that it should be able to handle the intent. The resolution and confirmation methods are optional. The handling method is always called last, after resolving and confirming the intent.
  */
 
-API_AVAILABLE(ios(10.0), watchos(3.2), macosx(10.12))
+API_UNAVAILABLE(macosx)
+API_DEPRECATED("INStartAudioCallIntent is deprecated. Please adopt INStartCallIntent instead", ios(10.0, 13.0), watchos(3.2, 6.0))
 @protocol INStartAudioCallIntentHandling <NSObject>
 
 @required
@@ -80,7 +82,7 @@ API_AVAILABLE(ios(10.0), watchos(3.2), macosx(10.12))
  */
 
 - (void)resolveDestinationTypeForStartAudioCall:(INStartAudioCallIntent *)intent
-                    withCompletion:(void (^)(INCallDestinationTypeResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveDestinationType(for:with:)) API_AVAILABLE(ios(11.0), watchos(4.0), macosx(10.13));
+                    withCompletion:(void (^)(INCallDestinationTypeResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveDestinationType(for:with:)) API_AVAILABLE(ios(11.0), watchos(4.0)) API_UNAVAILABLE(macosx);
 
 - (void)resolveContactsForStartAudioCall:(INStartAudioCallIntent *)intent
                     withCompletion:(void (^)(NSArray<INPersonResolutionResult *> *resolutionResults))completion NS_SWIFT_NAME(resolveContacts(for:with:));

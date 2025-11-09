@@ -2,7 +2,7 @@
 //  SCNRenderer.h
 //  SceneKit
 //
-//  Copyright © 2012-2018 Apple Inc. All rights reserved.
+//  Copyright © 2012-2019 Apple Inc. All rights reserved.
 //
 
 #import <SceneKit/SCNSceneRenderer.h>
@@ -23,6 +23,8 @@ API_UNAVAILABLE(watchos)
 SCN_EXPORT
 @interface SCNRenderer : NSObject <SCNSceneRenderer, SCNTechniqueSupport>
 
+#if SCN_ENABLE_OPENGL
+
 /*! 
  @method rendererWithContext:options:
  @abstract Creates a new renderer object.
@@ -30,6 +32,8 @@ SCN_EXPORT
  @param options An optional dictionary for future extensions.
  */
 + (instancetype)rendererWithContext:(nullable CGLContextObj)context options:(nullable NSDictionary *)options;
+
+#endif
 
 /*!
  @method rendererWithDevice:options:
@@ -92,15 +96,6 @@ SCN_EXPORT
  @discussion Light probes are only supported with Metal. This method is observable using NSProgress.
  */
 - (void)updateProbes:(NSArray<SCNNode*> *)lightProbes atTime:(CFTimeInterval)time API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0));
-
-
-// Deprecated
-/*!
- @method render
- @abstract renders the receiver's scene at the current system time.
- @discussion This method only work if the receiver was allocated with an OpenGL context and it is deprecated (use renderAtTime: instead). Use renderAtTime:withEncoder:pass:commandQueue: to render with Metal.
- */
-- (void)render API_DEPRECATED_WITH_REPLACEMENT("-renderAtTime:withEncoder:pass:commandQueue:", macos(10.8, 10.11), ios(8.0, 9.0)) API_UNAVAILABLE(watchos, tvos);
 
 @end
 

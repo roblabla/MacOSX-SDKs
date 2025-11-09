@@ -2,7 +2,7 @@
 //  AVB1722ControlInterface.h
 //  AudioVideoBridging
 //
-//  Copyright (c) 2010-2014 Apple Inc. All rights reserved.
+//  Copyright (c) 2010-2019 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -19,13 +19,9 @@ NS_ASSUME_NONNULL_BEGIN
 	@discussion	AVB1722ControlInterface is an abstract class providing the common API for utilizing control services based on IEEE 1722-2011 control frames.
 				It provides the API for the basic IOKit interactions to talk to the kernel driver.
  */
-NS_CLASS_AVAILABLE(10_8, NA)
+API_AVAILABLE(macos(10.8))
 @interface AVB1722ControlInterface : NSObject
 {
-#if AVB_LEGACY_OBJC_RUNTIME
-@private
-	void *_implControlInterface;
-#endif
 }
 
 @property (readonly, copy) NSString *interfaceName;
@@ -43,7 +39,7 @@ NS_CLASS_AVAILABLE(10_8, NA)
 	@param		anInterfaceName	The BSD name of the interface on which to create the object.
 	@result		The initialized receiver.
  */
-- (nullable instancetype)initWithInterfaceName:(NSString *)anInterfaceName NS_AVAILABLE(10_9, NA);
+- (nullable instancetype)initWithInterfaceName:(NSString *)anInterfaceName API_AVAILABLE(macos(10.9));
 
 /*!
 	@method		initWithInterface:
@@ -51,7 +47,7 @@ NS_CLASS_AVAILABLE(10_8, NA)
 	@param		anInterface	The AVBInterface object of the interface on which to create the object.
 	@result		The initialized receiver.
  */
-- (nullable instancetype)initWithInterface:(AVBInterface *)anInterface NS_AVAILABLE(10_11, NA);
+- (nullable instancetype)initWithInterface:(AVBInterface *)anInterface API_AVAILABLE(macos(10.11));
 
 @end
 

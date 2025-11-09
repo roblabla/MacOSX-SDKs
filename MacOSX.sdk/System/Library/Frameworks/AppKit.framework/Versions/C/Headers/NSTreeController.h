@@ -1,7 +1,7 @@
 /*
 	NSTreeController.h
 	Application Kit
-	Copyright (c) 2003-2018, Apple Inc.
+	Copyright (c) 2003-2019, Apple Inc.
 	All rights reserved.
  */
 
@@ -10,38 +10,12 @@
 #import <Foundation/NSIndexPath.h>
 
 NS_ASSUME_NONNULL_BEGIN
+API_UNAVAILABLE_BEGIN(ios)
 
 @class NSSortDescriptor, NSTreeNode;
 
 
-@interface NSTreeController : NSObjectController {
-    id _treeControllerReserved1 APPKIT_IVAR;
-    NSArray *_modelObservingKeyPaths APPKIT_IVAR;
-    id _treeStructureObservers APPKIT_IVAR;
-    id _arrangedObjects APPKIT_IVAR;
-    id _rootNode APPKIT_IVAR;
-    id _selectionIndexPaths APPKIT_IVAR;
-    struct __treeControllerFlags {
-        unsigned int _avoidsEmptySelection:1;
-        unsigned int _preservesSelection:1;
-        unsigned int _selectsInsertedObjects:1;
-        unsigned int _explicitlyCannotInsert:1;
-        unsigned int _explicitlyCannotInsertChild:1;
-        unsigned int _explicitlyCannotAddChild:1;
-        unsigned int _alwaysUsesMultipleValuesMarker:1;
-        unsigned int _observingThroughArrangedObjects:1;
-        unsigned int _mutatingNodes:1;
-        unsigned int _performingFetch:1;
-        unsigned int _skipSortingAfterFetch:1;
-	unsigned int _usesIdenticalComparisonOfModelObjects:1;
-        unsigned int _reservedTreeController:20;
-    } _treeControllerFlags APPKIT_IVAR;
-    NSArray *_selectedObjects APPKIT_IVAR;
-    NSString *_childrenKeyPath APPKIT_IVAR;
-    NSString *_countKeyPath APPKIT_IVAR;
-    NSString *_leafKeyPath APPKIT_IVAR;
-    NSArray *_sortDescriptors APPKIT_IVAR;
-}
+@interface NSTreeController : NSObjectController
 
 - (void)rearrangeObjects; // triggers rearranging the content objects for the user interface, including sorting (and filtering if provided by subclasses); subclasses can invoke this method if any parameter that affects the arranged objects changes
 
@@ -86,17 +60,18 @@ NS_ASSUME_NONNULL_BEGIN
 - (BOOL)addSelectionIndexPaths:(NSArray<NSIndexPath *> *)indexPaths;
 - (BOOL)removeSelectionIndexPaths:(NSArray<NSIndexPath *> *)indexPaths;
 
-@property (readonly, copy) NSArray<NSTreeNode *> *selectedNodes NS_AVAILABLE_MAC(10_5);
+@property (readonly, copy) NSArray<NSTreeNode *> *selectedNodes API_AVAILABLE(macos(10.5));
 
-- (void)moveNode:(NSTreeNode *)node toIndexPath:(NSIndexPath *)indexPath NS_AVAILABLE_MAC(10_5);
-- (void)moveNodes:(NSArray<NSTreeNode *> *)nodes toIndexPath:(NSIndexPath *)startingIndexPath NS_AVAILABLE_MAC(10_5);
+- (void)moveNode:(NSTreeNode *)node toIndexPath:(NSIndexPath *)indexPath API_AVAILABLE(macos(10.5));
+- (void)moveNodes:(NSArray<NSTreeNode *> *)nodes toIndexPath:(NSIndexPath *)startingIndexPath API_AVAILABLE(macos(10.5));
 
-- (nullable NSString *)childrenKeyPathForNode:(NSTreeNode *)node NS_AVAILABLE_MAC(10_5);
-- (nullable NSString *)countKeyPathForNode:(NSTreeNode *)node NS_AVAILABLE_MAC(10_5);
-- (nullable NSString *)leafKeyPathForNode:(NSTreeNode *)node NS_AVAILABLE_MAC(10_5);
+- (nullable NSString *)childrenKeyPathForNode:(NSTreeNode *)node API_AVAILABLE(macos(10.5));
+- (nullable NSString *)countKeyPathForNode:(NSTreeNode *)node API_AVAILABLE(macos(10.5));
+- (nullable NSString *)leafKeyPathForNode:(NSTreeNode *)node API_AVAILABLE(macos(10.5));
 
 
 @end
 
+API_UNAVAILABLE_END
 NS_ASSUME_NONNULL_END
 

@@ -1,10 +1,12 @@
 /*
 	NSAppleEventManager.h
-	Copyright (c) 1997-2018, Apple Inc. All rights reserved.
+	Copyright (c) 1997-2019, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
+#if !TARGET_OS_MACCATALYST
 #import <ApplicationServices/ApplicationServices.h>
+#endif
 #import <Foundation/NSNotification.h>
 
 @class NSAppleEventDescriptor;

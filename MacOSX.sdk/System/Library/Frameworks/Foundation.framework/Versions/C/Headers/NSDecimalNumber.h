@@ -1,5 +1,5 @@
 /*	NSDecimalNumber.h
-	Copyright (c) 1995-2018, Apple Inc. All rights reserved.
+	Copyright (c) 1995-2019, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSValue.h>
@@ -145,7 +145,11 @@ FOUNDATION_EXPORT NSExceptionName const NSDecimalNumberDivideByZeroException;
 
 @interface NSScanner (NSDecimalNumberScanning)
 
-- (BOOL)scanDecimal:(nullable NSDecimal *)dcm;
+- (BOOL)scanDecimal:(nullable NSDecimal *)dcm
+#if defined(__swift__) // Deprecated for Swift only:
+    API_DEPRECATED_WITH_REPLACEMENT("scanDecimal()", macosx(10.0,10.15), ios(2.0,13.0), watchos(2.0,13.0), tvos(9.0,13.0))
+#endif
+    ;
 
 @end
 

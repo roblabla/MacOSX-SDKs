@@ -1,10 +1,9 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 4D713DDA-AE5D-3316-8468-F509BB5852C1' ]
-platform:        macosx
-install-name:    /System/Library/Frameworks/CoreMIDI.framework/Versions/A/CoreMIDI
+uuids:           [ 'x86_64: CB99D24B-A011-3E8E-8F06-C281C9B57531', 'x86_64: CB99D24B-A011-3E8E-8F06-C281C9B57531' ]
+platform:        zippered
+install-name:    '/System/Library/Frameworks/CoreMIDI.framework/Versions/A/CoreMIDI'
 current-version: 69
-objc-constraint: none
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _MIDIClientCreate, _MIDIClientCreateWithBlock, _MIDIClientDispose, 
@@ -52,8 +51,9 @@ exports:
                        _kMIDIPropertyIsMixer, _kMIDIPropertyIsSampler, _kMIDIPropertyManufacturer, 
                        _kMIDIPropertyMaxReceiveChannels, _kMIDIPropertyMaxSysExSpeed, 
                        _kMIDIPropertyMaxTransmitChannels, _kMIDIPropertyModel, _kMIDIPropertyName, 
-                       _kMIDIPropertyNameConfiguration, _kMIDIPropertyOffline, _kMIDIPropertyPanDisruptsStereo, 
-                       _kMIDIPropertyPrivate, _kMIDIPropertyReceiveChannels, _kMIDIPropertyReceivesBankSelectLSB, 
+                       _kMIDIPropertyNameConfiguration, _kMIDIPropertyNameConfigurationDictionary, 
+                       _kMIDIPropertyOffline, _kMIDIPropertyPanDisruptsStereo, _kMIDIPropertyPrivate, 
+                       _kMIDIPropertyReceiveChannels, _kMIDIPropertyReceivesBankSelectLSB, 
                        _kMIDIPropertyReceivesBankSelectMSB, _kMIDIPropertyReceivesClock, 
                        _kMIDIPropertyReceivesMTC, _kMIDIPropertyReceivesNotes, _kMIDIPropertyReceivesProgramChanges, 
                        _kMIDIPropertySingleRealtimeEntity, _kMIDIPropertySupportsGeneralMIDI, 

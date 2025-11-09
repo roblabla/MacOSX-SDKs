@@ -1,8 +1,8 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 51A67990-C76D-3BC6-BFFD-0B3653C86C35' ]
-platform:        macosx
-install-name:    /System/Library/PrivateFrameworks/ScreenReader.framework/Versions/A/Frameworks/ScreenReaderBrailleDriver.framework/Versions/A/ScreenReaderBrailleDriver
+uuids:           [ 'x86_64: BF28DC7E-42FF-3AC2-9434-F3D68FDCCD72', 'x86_64: BF28DC7E-42FF-3AC2-9434-F3D68FDCCD72' ]
+platform:        zippered
+install-name:    '/System/Library/PrivateFrameworks/ScreenReader.framework/Versions/A/Frameworks/ScreenReaderBrailleDriver.framework/Versions/A/ScreenReaderBrailleDriver'
 current-version: 390
 exports:         
   - archs:           [ x86_64 ]

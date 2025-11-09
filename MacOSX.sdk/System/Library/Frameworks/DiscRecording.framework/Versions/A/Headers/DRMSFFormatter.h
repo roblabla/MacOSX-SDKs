@@ -34,7 +34,8 @@
 @interface DRMSFFormatter : NSFormatter
 {
     /*All instance variables are private*/
-	NSString*	_format;
+@private
+    NSString*    _format;
 }
 
 /*!

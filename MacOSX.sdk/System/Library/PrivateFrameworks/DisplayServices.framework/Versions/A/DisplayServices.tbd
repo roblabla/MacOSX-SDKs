@@ -1,11 +1,11 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 511645F4-94EB-33A0-A076-66402F52581A' ]
+uuids:           [ 'x86_64: A1AFC19C-A9A2-3320-ABA9-E2867CD5DF79' ]
 platform:        macosx
-install-name:    /System/Library/PrivateFrameworks/DisplayServices.framework/Versions/A/DisplayServices
+install-name:    '/System/Library/PrivateFrameworks/DisplayServices.framework/Versions/A/DisplayServices'
 exports:         
   - archs:           [ x86_64 ]
-    re-exports:      [ /usr/lib/libobjc.A.dylib ]
+    re-exports:      [ '/usr/lib/libobjc.A.dylib' ]
     symbols:         [ _CreateNotificationKeyFromNameAndDisplayID, _DSDisplayIDKey, 
                        _DSLogClose, _DSNotificationNameKey, _DisplayServicesAmbientLightCompensationEnabled, 
                        _DisplayServicesAmbientLightResetChanged, _DisplayServicesBezelButtonsLocked, 

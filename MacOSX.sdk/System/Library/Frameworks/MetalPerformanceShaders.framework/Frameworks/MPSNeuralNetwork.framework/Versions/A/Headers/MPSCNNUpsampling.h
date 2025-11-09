@@ -33,7 +33,7 @@ extern "C" {
  *              
  *              Nearest and bilinear variants are supported.
  */
-MPS_CLASS_AVAILABLE_STARTING(macos(10.13), ios(11.0), tvos(11.0))
+MPS_CLASS_AVAILABLE_STARTING(macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0))
 @interface MPSCNNUpsampling : MPSCNNKernel
 
 /*! @property   scaleFactorX
@@ -70,7 +70,7 @@ MPS_CLASS_AVAILABLE_STARTING(macos(10.13), ios(11.0), tvos(11.0))
  *  @dependency This depends on Metal.framework.
  *  @discussion Specifies the nearest spatial upsampling filter.
  */
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0))
 @interface MPSCNNUpsamplingNearest : MPSCNNUpsampling
 
 /*!
@@ -95,7 +95,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
  *  @dependency This depends on Metal.framework.
  *  @discussion Specifies the bilinear spatial upsampling filter.
  */
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0))
 @interface MPSCNNUpsamplingBilinear : MPSCNNUpsampling
 
 /*!
@@ -170,7 +170,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
  *                      w = d1 + d2 + d3 + d4
  *
  */
-MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3))
+MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3))
 @interface MPSCNNUpsamplingGradient : MPSCNNGradientKernel
 
 /*! @property   scaleFactorX
@@ -201,7 +201,7 @@ MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3))
  *  @dependency This depends on Metal.framework.
  *  @discussion Specifies the nearest spatial downsampling filter.
  */
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), tvos(11.3))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3))
 @interface MPSCNNUpsamplingNearestGradient : MPSCNNUpsamplingGradient
 
 /*!
@@ -226,7 +226,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), tvos(11.3))
  *  @dependency This depends on Metal.framework.
  *  @discussion Specifies the bilinear spatial downsampling filter.
  */
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), tvos(11.3))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3))
 @interface MPSCNNUpsamplingBilinearGradient : MPSCNNUpsamplingGradient
 
 /*!

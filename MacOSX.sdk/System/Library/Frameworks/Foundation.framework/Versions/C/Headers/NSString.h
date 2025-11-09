@@ -1,5 +1,5 @@
 /*	NSString.h
-	Copyright (c) 1994-2018, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2019, Apple Inc. All rights reserved.
 */
 
 /*
@@ -108,7 +108,7 @@ typedef NS_OPTIONS(NSUInteger, NSStringEncodingConversionOptions) {
 /* The initializers available to subclasses. See further below for additional init methods.
 */
 - (instancetype)init NS_DESIGNATED_INITIALIZER;
-- (nullable instancetype)initWithCoder:(NSCoder *)aDecoder NS_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithCoder:(NSCoder *)coder NS_DESIGNATED_INITIALIZER;
 
 @end
 
@@ -536,6 +536,7 @@ NS_ENUM(NSStringEncoding) {
 #endif
 #define NS_UNICHAR_IS_EIGHT_BIT 0
 
+NS_SWIFT_UNAVAILABLE("Use String or NSString instead.")
 @interface NSSimpleCString : NSString {
 @package
     char *bytes;
@@ -546,10 +547,11 @@ NS_ENUM(NSStringEncoding) {
 }
 @end
 
+NS_SWIFT_UNAVAILABLE("Use String or NSString instead.")
 @interface NSConstantString : NSSimpleCString
 @end
 
-#if __LP64__
+#if __OBJC2__
 #else
 extern void *_NSConstantStringClassReference;
 #endif

@@ -2,18 +2,23 @@
 //  INAddTasksIntent.h
 //  Intents
 //
-//  Copyright (c) 2016-2017 Apple Inc. All rights reserved.
+//  Copyright (c) 2016-2019 Apple Inc. All rights reserved.
 //
 
 #import <Intents/INIntent.h>
 #import <Intents/INIntentResolutionResult.h>
 
+#import <Intents/INTaskPriority.h>
+
+@class INAddTasksTargetTaskListResolutionResult;
+@class INAddTasksTemporalEventTriggerResolutionResult;
 @class INSpatialEventTrigger;
 @class INSpatialEventTriggerResolutionResult;
 @class INSpeakableString;
 @class INSpeakableStringResolutionResult;
 @class INTaskList;
 @class INTaskListResolutionResult;
+@class INTaskPriorityResolutionResult;
 @class INTemporalEventTrigger;
 @class INTemporalEventTriggerResolutionResult;
 
@@ -26,7 +31,8 @@ API_UNAVAILABLE(macosx)
 - (instancetype)initWithTargetTaskList:(nullable INTaskList *)targetTaskList
                             taskTitles:(nullable NSArray<INSpeakableString *> *)taskTitles
                    spatialEventTrigger:(nullable INSpatialEventTrigger *)spatialEventTrigger
-                  temporalEventTrigger:(nullable INTemporalEventTrigger *)temporalEventTrigger NS_DESIGNATED_INITIALIZER;
+                  temporalEventTrigger:(nullable INTemporalEventTrigger *)temporalEventTrigger
+                              priority:(INTaskPriority)priority NS_DESIGNATED_INITIALIZER API_AVAILABLE(ios(13.0), watchos(6.0));
 
 @property (readonly, copy, nullable, NS_NONATOMIC_IOSONLY) INTaskList *targetTaskList;
 
@@ -35,6 +41,8 @@ API_UNAVAILABLE(macosx)
 @property (readonly, copy, nullable, NS_NONATOMIC_IOSONLY) INSpatialEventTrigger *spatialEventTrigger;
 
 @property (readonly, copy, nullable, NS_NONATOMIC_IOSONLY) INTemporalEventTrigger *temporalEventTrigger;
+
+@property (readonly, assign, NS_NONATOMIC_IOSONLY) INTaskPriority priority API_AVAILABLE(ios(13.0), watchos(6.0));
 
 @end
 
@@ -90,7 +98,10 @@ API_UNAVAILABLE(macosx)
  */
 
 - (void)resolveTargetTaskListForAddTasks:(INAddTasksIntent *)intent
-                    withCompletion:(void (^)(INTaskListResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveTargetTaskList(for:with:));
+                    withCompletion:(void (^)(INTaskListResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveTargetTaskList(for:with:)) API_DEPRECATED("resolveTargetTaskListForAddTasks:withCompletion: is deprecated. Use resolveTargetTaskListForAddTasks:completion: instead", ios(11.0, 13.0), watchos(4.0, 6.0));
+
+- (void)resolveTargetTaskListForAddTasks:(INAddTasksIntent *)intent
+                    completion:(void (^)(INAddTasksTargetTaskListResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveTargetTaskList(for:with:)) API_AVAILABLE(ios(13.0), watchos(6.0));
 
 - (void)resolveTaskTitlesForAddTasks:(INAddTasksIntent *)intent
                     withCompletion:(void (^)(NSArray<INSpeakableStringResolutionResult *> *resolutionResults))completion NS_SWIFT_NAME(resolveTaskTitles(for:with:));
@@ -99,7 +110,13 @@ API_UNAVAILABLE(macosx)
                     withCompletion:(void (^)(INSpatialEventTriggerResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveSpatialEventTrigger(for:with:));
 
 - (void)resolveTemporalEventTriggerForAddTasks:(INAddTasksIntent *)intent
-                    withCompletion:(void (^)(INTemporalEventTriggerResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveTemporalEventTrigger(for:with:));
+                    withCompletion:(void (^)(INTemporalEventTriggerResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveTemporalEventTrigger(for:with:)) API_DEPRECATED("resolveTemporalEventTriggerForAddTasks:withCompletion: is deprecated. Use resolveTemporalEventTriggerForAddTasks:completion: instead", ios(11.0, 13.0), watchos(4.0, 6.0));
+
+- (void)resolveTemporalEventTriggerForAddTasks:(INAddTasksIntent *)intent
+                    completion:(void (^)(INAddTasksTemporalEventTriggerResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveTemporalEventTrigger(for:with:)) API_AVAILABLE(ios(13.0), watchos(6.0));
+
+- (void)resolvePriorityForAddTasks:(INAddTasksIntent *)intent
+                    withCompletion:(void (^)(INTaskPriorityResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolvePriority(for:with:)) API_AVAILABLE(ios(13.0), watchos(6.0));
 
 @end
 

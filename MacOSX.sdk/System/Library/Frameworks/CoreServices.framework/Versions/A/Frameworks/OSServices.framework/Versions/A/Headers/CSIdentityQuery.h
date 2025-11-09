@@ -50,7 +50,7 @@ extern "C" {
  *    Non-Carbon CFM:   not available
  */
 extern CFTypeID 
-CSIdentityQueryGetTypeID(void)                                __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_5_0);
+CSIdentityQueryGetTypeID(void)                                API_AVAILABLE( ios(5.0), macos(10.5), tvos(9.0), watchos(1.0) );
 
 
 
@@ -142,7 +142,7 @@ extern CSIdentityQueryRef
 CSIdentityQueryCreate(
   CFAllocatorRef           allocator,
   CSIdentityClass          identityClass,
-  CSIdentityAuthorityRef   authority)                         __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_NA);
+  CSIdentityAuthorityRef   authority)                         API_AVAILABLE( macos(10.5) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 
@@ -190,7 +190,7 @@ CSIdentityQueryCreateForName(
   CFStringRef                             name,
   CSIdentityQueryStringComparisonMethod   comparisonMethod,
   CSIdentityClass                         identityClass,
-  CSIdentityAuthorityRef                  authority)          __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_5_0);
+  CSIdentityAuthorityRef                  authority)          API_AVAILABLE( ios(5.0), macos(10.5), tvos(9.0), watchos(1.0) );
 
 
 
@@ -229,7 +229,7 @@ extern CSIdentityQueryRef
 CSIdentityQueryCreateForUUID(
   CFAllocatorRef           allocator,
   CFUUIDRef                uuid,
-  CSIdentityAuthorityRef   authority)                         __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_NA);
+  CSIdentityAuthorityRef   authority)                         API_AVAILABLE( macos(10.5) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 
@@ -272,7 +272,7 @@ CSIdentityQueryCreateForPosixID(
   CFAllocatorRef           allocator,
   id_t                     posixID,
   CSIdentityClass          identityClass,
-  CSIdentityAuthorityRef   authority)                         __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_NA);
+  CSIdentityAuthorityRef   authority)                         API_AVAILABLE( macos(10.5) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 
@@ -309,7 +309,7 @@ CSIdentityQueryCreateForPosixID(
 extern CSIdentityQueryRef 
 CSIdentityQueryCreateForPersistentReference(
   CFAllocatorRef   allocator,
-  CFDataRef        referenceData)                             __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_5_0);
+  CFDataRef        referenceData)                             API_AVAILABLE( ios(5.0), macos(10.5), tvos(9.0), watchos(1.0) );
 
 
 
@@ -336,7 +336,7 @@ CSIdentityQueryCreateForPersistentReference(
  *    Non-Carbon CFM:   not available
  */
 extern CSIdentityQueryRef 
-CSIdentityQueryCreateForCurrentUser(CFAllocatorRef allocator) __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_NA);
+CSIdentityQueryCreateForCurrentUser(CFAllocatorRef allocator) API_AVAILABLE( macos(10.5) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 
@@ -367,7 +367,7 @@ CSIdentityQueryCreateForCurrentUser(CFAllocatorRef allocator) __OSX_AVAILABLE_ST
  *    Non-Carbon CFM:   not available
  */
 extern CFArrayRef 
-CSIdentityQueryCopyResults(CSIdentityQueryRef query)          __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_5_0);
+CSIdentityQueryCopyResults(CSIdentityQueryRef query)          API_AVAILABLE( ios(5.0), macos(10.5), tvos(9.0), watchos(1.0) );
 
 
 
@@ -405,7 +405,7 @@ extern Boolean
 CSIdentityQueryExecute(
   CSIdentityQueryRef     query,
   CSIdentityQueryFlags   flags,
-  CFErrorRef *           error)       /* can be NULL */       __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_5_0);
+  CFErrorRef *           error)       /* can be NULL */       API_AVAILABLE( ios(5.0), macos(10.5), tvos(9.0), watchos(1.0) );
 
 
 
@@ -535,7 +535,7 @@ CSIdentityQueryExecuteAsynchronously(
   CSIdentityQueryFlags                  flags,
   const CSIdentityQueryClientContext *  clientContext,
   CFRunLoopRef                          runLoop,
-  CFStringRef                           runLoopMode)          __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_5_0);
+  CFStringRef                           runLoopMode)          API_AVAILABLE( ios(5.0), macos(10.5), tvos(9.0), watchos(1.0) );
 
 
 
@@ -565,7 +565,7 @@ CSIdentityQueryExecuteAsynchronously(
  *    Non-Carbon CFM:   not available
  */
 extern void 
-CSIdentityQueryStop(CSIdentityQueryRef query)                 __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_5_0);
+CSIdentityQueryStop(CSIdentityQueryRef query)                 API_AVAILABLE( ios(5.0), macos(10.5), tvos(9.0), watchos(1.0) );
 
 
 

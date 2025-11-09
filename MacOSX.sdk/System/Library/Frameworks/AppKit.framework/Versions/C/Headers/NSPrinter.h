@@ -1,7 +1,7 @@
 /*
 	NSPrinter.h
 	Application Kit
-	Copyright (c) 1994-2018, Apple Inc.
+	Copyright (c) 1994-2019, Apple Inc.
 	All rights reserved.
 */
 
@@ -12,6 +12,7 @@
 #import <AppKit/NSGraphics.h>
 
 NS_ASSUME_NONNULL_BEGIN
+API_UNAVAILABLE_BEGIN(ios)
 
 @class NSString;
 
@@ -26,18 +27,7 @@ typedef NS_ENUM(NSUInteger, NSPrinterTableStatus) {
 typedef NSString * NSPrinterTypeName NS_TYPED_EXTENSIBLE_ENUM;
 typedef NSString * NSPrinterPaperName NS_TYPED_EXTENSIBLE_ENUM;
 
-@interface NSPrinter: NSObject<NSCopying, NSCoding> {
-    @private
-    NSString *_printerName APPKIT_IVAR;
-    void *_printer APPKIT_IVAR;
-    NSDictionary *_cachedDeviceDescription APPKIT_IVAR;
-    int _ppdCreationNum __unused APPKIT_IVAR;
-    void *_ppdNodes __unused APPKIT_IVAR;
-    void *_ppdPriv __unused APPKIT_IVAR;
-#if ! __LP64__
-    unsigned char _compatibilityPadding[20] APPKIT_IVAR;
-#endif
-}
+@interface NSPrinter: NSObject<NSCopying, NSCoding>
 
 /* Return an array of strings that contain the human-readable names of all available printers.
 */
@@ -82,38 +72,39 @@ typedef NSString * NSPrinterPaperName NS_TYPED_EXTENSIBLE_ENUM;
 
 /* PMPrinter API should be used instead. Return the status of the named table in the printer's PostScript Printer Description (PPD) if the PPD is available. NSPrinterTableNotFound is returned for every table name if no PPD is available.
  */
-- (NSPrinterTableStatus)statusForTable:(NSString *)tableName NS_DEPRECATED_MAC(10_0, 10_9);
+- (NSPrinterTableStatus)statusForTable:(NSString *)tableName API_DEPRECATED("", macos(10.0,10.9));
 
 /* PMPrinter API should be used instead. Methods for accessing the information in the printer's PPD. If no PPD is available for the printer, values such as NO, 0, NSZeroRect, NSZeroSize, and nil are returned.
  */
-- (BOOL)isKey:(nullable NSString *)key inTable:(NSString *)table NS_DEPRECATED_MAC(10_0, 10_9);
-- (BOOL)booleanForKey:(nullable NSString *)key inTable:(NSString *)table NS_DEPRECATED_MAC(10_0, 10_9);
-- (float)floatForKey:(nullable NSString *)key inTable:(NSString *)table NS_DEPRECATED_MAC(10_0, 10_9);
-- (int)intForKey:(nullable NSString *)key inTable:(NSString *)table NS_DEPRECATED_MAC(10_0, 10_9);
-- (NSRect)rectForKey:(nullable NSString *)key inTable:(NSString *)table NS_DEPRECATED_MAC(10_0, 10_9);
-- (NSSize)sizeForKey:(nullable NSString *)key inTable:(NSString *)table NS_DEPRECATED_MAC(10_0, 10_9);
-- (nullable NSString *)stringForKey:(nullable NSString *)key inTable:(NSString *)table NS_DEPRECATED_MAC(10_0, 10_9);
-- (nullable NSArray *)stringListForKey:(nullable NSString *)key inTable:(NSString *)table NS_DEPRECATED_MAC(10_0, 10_9);
+- (BOOL)isKey:(nullable NSString *)key inTable:(NSString *)table API_DEPRECATED("", macos(10.0,10.9));
+- (BOOL)booleanForKey:(nullable NSString *)key inTable:(NSString *)table API_DEPRECATED("", macos(10.0,10.9));
+- (float)floatForKey:(nullable NSString *)key inTable:(NSString *)table API_DEPRECATED("", macos(10.0,10.9));
+- (int)intForKey:(nullable NSString *)key inTable:(NSString *)table API_DEPRECATED("", macos(10.0,10.9));
+- (NSRect)rectForKey:(nullable NSString *)key inTable:(NSString *)table API_DEPRECATED("", macos(10.0,10.9));
+- (NSSize)sizeForKey:(nullable NSString *)key inTable:(NSString *)table API_DEPRECATED("", macos(10.0,10.9));
+- (nullable NSString *)stringForKey:(nullable NSString *)key inTable:(NSString *)table API_DEPRECATED("", macos(10.0,10.9));
+- (nullable NSArray *)stringListForKey:(nullable NSString *)key inTable:(NSString *)table API_DEPRECATED("", macos(10.0,10.9));
 
 
 /* -[NSPrinter imageRectForPaper:] will attempt to determine and return the bounds of the imageable area for a particular paper name, but querying such information by paper name alone is not reliable. Use -[NSPrintInfo imageablePageBounds], which was introduced in Mac OS 10.2, instead.
 */
-- (NSRect)imageRectForPaper:(nullable NSString *)paperName NS_DEPRECATED_MAC(10_0, 10_2);
+- (NSRect)imageRectForPaper:(nullable NSString *)paperName API_DEPRECATED("", macos(10.0,10.2));
 
 /* NSPrinter's implementations of these methods return values that are not reliable or meaningful for some printers.
 */
-- (BOOL)acceptsBinary NS_DEPRECATED_MAC(10_0, 10_2);
-- (BOOL)isColor NS_DEPRECATED_MAC(10_0, 10_2);
-- (BOOL)isFontAvailable:(nullable NSString *)faceName NS_DEPRECATED_MAC(10_0, 10_2);
-- (BOOL)isOutputStackInReverseOrder NS_DEPRECATED_MAC(10_0, 10_2);
+- (BOOL)acceptsBinary API_DEPRECATED("", macos(10.0,10.2));
+- (BOOL)isColor API_DEPRECATED("", macos(10.0,10.2));
+- (BOOL)isFontAvailable:(nullable NSString *)faceName API_DEPRECATED("", macos(10.0,10.2));
+- (BOOL)isOutputStackInReverseOrder API_DEPRECATED("", macos(10.0,10.2));
 
 /* NSPrinter's implementation of each of these methods returns nil.
 */
-+ (nullable NSPrinter *)printerWithName:(NSString *)name domain:(nullable NSString *)domain includeUnavailable:(BOOL)flag NS_DEPRECATED_MAC(10_0, 10_2);
-- (NSString *)domain NS_DEPRECATED_MAC(10_0, 10_2);
-- (NSString *)host NS_DEPRECATED_MAC(10_0, 10_2);
-- (NSString *)note NS_DEPRECATED_MAC(10_0, 10_2);
++ (nullable NSPrinter *)printerWithName:(NSString *)name domain:(nullable NSString *)domain includeUnavailable:(BOOL)flag API_DEPRECATED("", macos(10.0,10.2));
+- (NSString *)domain API_DEPRECATED("", macos(10.0,10.2));
+- (NSString *)host API_DEPRECATED("", macos(10.0,10.2));
+- (NSString *)note API_DEPRECATED("", macos(10.0,10.2));
 
 @end
 
+API_UNAVAILABLE_END
 NS_ASSUME_NONNULL_END

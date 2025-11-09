@@ -1,5 +1,5 @@
 /*      MDItem.h
-        Copyright (c) 2003-2010, Apple Inc. All rights reserved.
+        Copyright (c) 2003-2019, Apple Inc. All rights reserved.
 */
 
 /*!
@@ -30,12 +30,9 @@
 #if !defined(__MDITEM__)
 #define __MDITEM__ 1
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
+#include <CoreFoundation/CoreFoundation.h>
 
-#include <CoreFoundation/CFString.h>
-#include <CoreFoundation/CFDictionary.h>
-#include <CoreFoundation/CFArray.h>
-#include <CoreFoundation/CFURL.h>
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
 
 #if !defined(MD_EXPORT)
         #if defined(macintosh) && defined(__MWERKS__)
@@ -43,8 +40,8 @@
         #else
                 #define MD_EXPORT extern
         #endif
-        #define MD_AVAIL AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER
-        #define MD_AVAIL_LEOPARD AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER
+        #define MD_AVAIL API_AVAILABLE( macos(10.4) ) API_UNAVAILABLE( ios, tvos, watchos )
+        #define MD_AVAIL_LEOPARD API_AVAILABLE( macos(10.5) ) API_UNAVAILABLE( ios, tvos, watchos )
         #if defined(__cplusplus)
                 #define MD_BEGIN_C_DECLS extern "C" {
                 #define MD_END_C_DECLS   }
@@ -101,7 +98,7 @@ MD_EXPORT MDItemRef MDItemCreate(CFAllocatorRef allocator, CFStringRef path) MD_
  may not be uniqued. Use CFEqual() to compare them.]]
  @result An MDItemRef, or NULL on failure.
  */
-MD_EXPORT MDItemRef MDItemCreateWithURL(CFAllocatorRef allocator, CFURLRef url) AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+MD_EXPORT MDItemRef MDItemCreateWithURL(CFAllocatorRef allocator, CFURLRef url) API_AVAILABLE( macos(10.6) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 /*!
  @function MDItemsCreateWithURLs
@@ -112,7 +109,7 @@ MD_EXPORT MDItemRef MDItemCreateWithURL(CFAllocatorRef allocator, CFURLRef url) 
  @param urls A CFArray of urls to the file for which to create the MDItem.
  @result A CFArrayRef of MDItemRefs, or NULL on failure. Missing items will have kCFNull entries in the result array.
  */
-MD_EXPORT CFArrayRef MDItemsCreateWithURLs(CFAllocatorRef allocator, CFArrayRef urls) AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;
+MD_EXPORT CFArrayRef MDItemsCreateWithURLs(CFAllocatorRef allocator, CFArrayRef urls) API_AVAILABLE( macos(10.7) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 /*!
         @function MDItemCopyAttribute
@@ -170,7 +167,7 @@ MD_EXPORT CFArrayRef MDItemCopyAttributeNames(MDItemRef item) MD_AVAIL;
   if the item is not accessible, or a CFArray of attribute values. 
   If an attribute is not available, there will be a kCFNull in its slot in the nested array.
  */
-MD_EXPORT CFArrayRef MDItemsCopyAttributes(CFArrayRef items, CFArrayRef names) AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;
+MD_EXPORT CFArrayRef MDItemsCopyAttributes(CFArrayRef items, CFArrayRef names) API_AVAILABLE( macos(10.12) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 /* List of well-known attributes */
 
@@ -463,23 +460,23 @@ MD_EXPORT const CFStringRef     kMDItemKeywords MD_AVAIL;                  // CF
 MD_EXPORT const CFStringRef     kMDItemTitle MD_AVAIL;                     // CFString
 MD_EXPORT const CFStringRef     kMDItemAuthors MD_AVAIL;                   // CFArray of CFString
 MD_EXPORT const CFStringRef     kMDItemEditors MD_AVAIL_LEOPARD;           // CFArray of CFString
-MD_EXPORT const CFStringRef     kMDItemParticipants AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER; // CFArray of CFString
+MD_EXPORT const CFStringRef     kMDItemParticipants API_AVAILABLE( macos(10.6) ) API_UNAVAILABLE( ios, tvos, watchos ); // CFArray of CFString
 MD_EXPORT const CFStringRef     kMDItemProjects MD_AVAIL;                  // CFArray of CFString
-MD_EXPORT const CFStringRef     kMDItemDownloadedDate AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER; // CFDate
+MD_EXPORT const CFStringRef     kMDItemDownloadedDate API_AVAILABLE( macos(10.7) ) API_UNAVAILABLE( ios, tvos, watchos ); // CFDate
 MD_EXPORT const CFStringRef     kMDItemWhereFroms MD_AVAIL;                // CFArray of CFString
 MD_EXPORT const CFStringRef     kMDItemComment MD_AVAIL;                   // CFString
 MD_EXPORT const CFStringRef     kMDItemCopyright MD_AVAIL;                 // CFString
 MD_EXPORT const CFStringRef     kMDItemLastUsedDate MD_AVAIL;              // CFDate
 MD_EXPORT const CFStringRef     kMDItemContentCreationDate MD_AVAIL;       // CFDate
 MD_EXPORT const CFStringRef     kMDItemContentModificationDate MD_AVAIL;   // CFDate
-MD_EXPORT const CFStringRef     kMDItemDateAdded AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER; // CFDate
+MD_EXPORT const CFStringRef     kMDItemDateAdded API_AVAILABLE( macos(10.7) ) API_UNAVAILABLE( ios, tvos, watchos ); // CFDate
 MD_EXPORT const CFStringRef     kMDItemDurationSeconds MD_AVAIL;           // CFNumber
 MD_EXPORT const CFStringRef     kMDItemContactKeywords MD_AVAIL;           // CFArray of CFString
 MD_EXPORT const CFStringRef     kMDItemVersion MD_AVAIL;                   // CFString
 
 MD_EXPORT const CFStringRef     kMDItemPixelHeight MD_AVAIL;               // CFNumber
 MD_EXPORT const CFStringRef     kMDItemPixelWidth MD_AVAIL;                // CFNumber
-MD_EXPORT const CFStringRef     kMDItemPixelCount AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER; // CFNumber
+MD_EXPORT const CFStringRef     kMDItemPixelCount API_AVAILABLE( macos(10.6) ) API_UNAVAILABLE( ios, tvos, watchos ); // CFNumber
 MD_EXPORT const CFStringRef     kMDItemColorSpace MD_AVAIL;                // CFString
 MD_EXPORT const CFStringRef     kMDItemBitsPerSample MD_AVAIL;             // CFNumber
 MD_EXPORT const CFStringRef     kMDItemFlashOnOff MD_AVAIL;                // CFBoolean
@@ -498,9 +495,9 @@ MD_EXPORT const CFStringRef     kMDItemExposureMode MD_AVAIL;              // CF
 MD_EXPORT const CFStringRef     kMDItemExposureTimeSeconds MD_AVAIL;       // CFNumber
 MD_EXPORT const CFStringRef     kMDItemEXIFVersion MD_AVAIL;               // CFString
 
-MD_EXPORT const CFStringRef kMDItemCameraOwner AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;       // CFString
-MD_EXPORT const CFStringRef kMDItemFocalLength35mm AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;   // CFNumber
-MD_EXPORT const CFStringRef kMDItemLensModel AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;         // CFString
+MD_EXPORT const CFStringRef kMDItemCameraOwner API_AVAILABLE( macos(10.7) ) API_UNAVAILABLE( ios, tvos, watchos );       // CFString
+MD_EXPORT const CFStringRef kMDItemFocalLength35mm API_AVAILABLE( macos(10.7) ) API_UNAVAILABLE( ios, tvos, watchos );   // CFNumber
+MD_EXPORT const CFStringRef kMDItemLensModel API_AVAILABLE( macos(10.7) ) API_UNAVAILABLE( ios, tvos, watchos );         // CFString
 
 MD_EXPORT const CFStringRef     kMDItemEXIFGPSVersion MD_AVAIL_LEOPARD;    // CFString
 MD_EXPORT const CFStringRef     kMDItemAltitude MD_AVAIL_LEOPARD;          // CFNumber
@@ -510,20 +507,20 @@ MD_EXPORT const CFStringRef     kMDItemSpeed MD_AVAIL_LEOPARD;             // CF
 MD_EXPORT const CFStringRef     kMDItemTimestamp MD_AVAIL_LEOPARD;         // CFDate
 MD_EXPORT const CFStringRef     kMDItemGPSTrack MD_AVAIL_LEOPARD;          // CFNumber
 MD_EXPORT const CFStringRef     kMDItemImageDirection MD_AVAIL_LEOPARD;    // CFNumber
-MD_EXPORT const CFStringRef     kMDItemNamedLocation AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER; // CFString
+MD_EXPORT const CFStringRef     kMDItemNamedLocation API_AVAILABLE( macos(10.6) ) API_UNAVAILABLE( ios, tvos, watchos ); // CFString
 
-MD_EXPORT const CFStringRef kMDItemGPSStatus AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;             // CFString
-MD_EXPORT const CFStringRef kMDItemGPSMeasureMode AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;        // CFString
-MD_EXPORT const CFStringRef kMDItemGPSDOP AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;                // CFNumber
-MD_EXPORT const CFStringRef kMDItemGPSMapDatum AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;           // CFString
-MD_EXPORT const CFStringRef kMDItemGPSDestLatitude AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;       // CFNumber
-MD_EXPORT const CFStringRef kMDItemGPSDestLongitude AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;      // CFNumber
-MD_EXPORT const CFStringRef kMDItemGPSDestBearing AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;        // CFNumber
-MD_EXPORT const CFStringRef kMDItemGPSDestDistance AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;       // CFNumber
-MD_EXPORT const CFStringRef kMDItemGPSProcessingMethod AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;   // CFString
-MD_EXPORT const CFStringRef kMDItemGPSAreaInformation AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;    // CFString
-MD_EXPORT const CFStringRef kMDItemGPSDateStamp AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;          // CFDate
-MD_EXPORT const CFStringRef kMDItemGPSDifferental AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER;        // CFNumber
+MD_EXPORT const CFStringRef kMDItemGPSStatus API_AVAILABLE( macos(10.7) ) API_UNAVAILABLE( ios, tvos, watchos );             // CFString
+MD_EXPORT const CFStringRef kMDItemGPSMeasureMode API_AVAILABLE( macos(10.7) ) API_UNAVAILABLE( ios, tvos, watchos );        // CFString
+MD_EXPORT const CFStringRef kMDItemGPSDOP API_AVAILABLE( macos(10.7) ) API_UNAVAILABLE( ios, tvos, watchos );                // CFNumber
+MD_EXPORT const CFStringRef kMDItemGPSMapDatum API_AVAILABLE( macos(10.7) ) API_UNAVAILABLE( ios, tvos, watchos );           // CFString
+MD_EXPORT const CFStringRef kMDItemGPSDestLatitude API_AVAILABLE( macos(10.7) ) API_UNAVAILABLE( ios, tvos, watchos );       // CFNumber
+MD_EXPORT const CFStringRef kMDItemGPSDestLongitude API_AVAILABLE( macos(10.7) ) API_UNAVAILABLE( ios, tvos, watchos );      // CFNumber
+MD_EXPORT const CFStringRef kMDItemGPSDestBearing API_AVAILABLE( macos(10.7) ) API_UNAVAILABLE( ios, tvos, watchos );        // CFNumber
+MD_EXPORT const CFStringRef kMDItemGPSDestDistance API_AVAILABLE( macos(10.7) ) API_UNAVAILABLE( ios, tvos, watchos );       // CFNumber
+MD_EXPORT const CFStringRef kMDItemGPSProcessingMethod API_AVAILABLE( macos(10.7) ) API_UNAVAILABLE( ios, tvos, watchos );   // CFString
+MD_EXPORT const CFStringRef kMDItemGPSAreaInformation API_AVAILABLE( macos(10.7) ) API_UNAVAILABLE( ios, tvos, watchos );    // CFString
+MD_EXPORT const CFStringRef kMDItemGPSDateStamp API_AVAILABLE( macos(10.7) ) API_UNAVAILABLE( ios, tvos, watchos );          // CFDate
+MD_EXPORT const CFStringRef kMDItemGPSDifferental API_AVAILABLE( macos(10.7) ) API_UNAVAILABLE( ios, tvos, watchos );        // CFNumber
 
 MD_EXPORT const CFStringRef     kMDItemCodecs MD_AVAIL;                    // CFArray of CFString
 MD_EXPORT const CFStringRef     kMDItemMediaTypes MD_AVAIL;                // CFArray of CFString
@@ -623,9 +620,9 @@ MD_EXPORT const CFStringRef     kMDItemFSCreationDate MD_AVAIL;          // CFDa
 MD_EXPORT const CFStringRef     kMDItemFSContentChangeDate MD_AVAIL;     // CFDate
 MD_EXPORT const CFStringRef     kMDItemFSOwnerUserID MD_AVAIL;           // CFNumber
 MD_EXPORT const CFStringRef     kMDItemFSOwnerGroupID MD_AVAIL;          // CFNumber
-MD_EXPORT const CFStringRef     kMDItemFSExists AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER_BUT_DEPRECATED;
-MD_EXPORT const CFStringRef     kMDItemFSIsReadable AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER_BUT_DEPRECATED;
-MD_EXPORT const CFStringRef     kMDItemFSIsWriteable AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER_BUT_DEPRECATED;
+MD_EXPORT const CFStringRef     kMDItemFSExists API_DEPRECATED("No longer supported", macos(10.4, 10.4)) API_UNAVAILABLE( ios, tvos, watchos );
+MD_EXPORT const CFStringRef     kMDItemFSIsReadable API_DEPRECATED("No longer supported", macos(10.4, 10.4)) API_UNAVAILABLE( ios, tvos, watchos );
+MD_EXPORT const CFStringRef     kMDItemFSIsWriteable API_DEPRECATED("No longer supported", macos(10.4, 10.4)) API_UNAVAILABLE( ios, tvos, watchos );
 MD_EXPORT const CFStringRef     kMDItemFSHasCustomIcon MD_AVAIL;         // CFBoolean
 MD_EXPORT const CFStringRef     kMDItemFSIsExtensionHidden MD_AVAIL;     // CFBoolean
 MD_EXPORT const CFStringRef     kMDItemFSIsStationery MD_AVAIL;          // CFBoolean
@@ -633,7 +630,7 @@ MD_EXPORT const CFStringRef     kMDItemFSInvisible MD_AVAIL;             // CFBo
 MD_EXPORT const CFStringRef     kMDItemFSLabel MD_AVAIL;                 // CFNumber
 MD_EXPORT const CFStringRef     kMDItemFSNodeCount MD_AVAIL;             // CFNumber
 
-MD_EXPORT const CFStringRef     kMDItemHTMLContent AVAILABLE_MAC_OS_X_VERSION_10_11_AND_LATER;      // a Write-Only CFString
+MD_EXPORT const CFStringRef     kMDItemHTMLContent API_AVAILABLE( macos(10.11) ) API_UNAVAILABLE( ios, tvos, watchos );      // a Write-Only CFString
 MD_EXPORT const CFStringRef     kMDItemTextContent MD_AVAIL;             // a Write-Only CFString
 
 /*!
@@ -929,7 +926,7 @@ MD_EXPORT const CFStringRef    kMDItemMusicalInstrumentCategory MD_AVAIL;       
 MD_EXPORT const CFStringRef    kMDItemMusicalInstrumentName MD_AVAIL;            // CFString
 
 MD_EXPORT const CFStringRef    kMDItemCFBundleIdentifier MD_AVAIL_LEOPARD;       // CFString
-MD_EXPORT const CFStringRef    kMDItemSupportFileType AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER_BUT_DEPRECATED;          // CFArray of CFStrings
+MD_EXPORT const CFStringRef    kMDItemSupportFileType API_DEPRECATED("No longer supported", macos(10.5, 10.5)) API_UNAVAILABLE( ios, tvos, watchos );          // CFArray of CFStrings
 
 /*!
         @const kMDItemInformation
@@ -992,21 +989,21 @@ MD_EXPORT const CFStringRef    kMDItemOriginalFormat MD_AVAIL_LEOPARD;          
 MD_EXPORT const CFStringRef    kMDItemOriginalSource MD_AVAIL_LEOPARD;           // CFString
 MD_EXPORT const CFStringRef    kMDItemAuthorEmailAddresses MD_AVAIL_LEOPARD;     // CFArray of CFString
 MD_EXPORT const CFStringRef    kMDItemRecipientEmailAddresses MD_AVAIL_LEOPARD;  // CFArray of CFString
-MD_EXPORT const CFStringRef    kMDItemAuthorAddresses AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;     // CFArray of CFString
-MD_EXPORT const CFStringRef    kMDItemRecipientAddresses AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;  // CFArray of CFString
+MD_EXPORT const CFStringRef    kMDItemAuthorAddresses API_AVAILABLE( macos(10.6) ) API_UNAVAILABLE( ios, tvos, watchos );     // CFArray of CFString
+MD_EXPORT const CFStringRef    kMDItemRecipientAddresses API_AVAILABLE( macos(10.6) ) API_UNAVAILABLE( ios, tvos, watchos );  // CFArray of CFString
 MD_EXPORT const CFStringRef    kMDItemURL MD_AVAIL_LEOPARD;                      // CFString
 
-MD_EXPORT const CFStringRef    kMDItemLabelIcon AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER_BUT_DEPRECATED;
-MD_EXPORT const CFStringRef    kMDItemLabelID AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER_BUT_DEPRECATED;
-MD_EXPORT const CFStringRef    kMDItemLabelKind AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER_BUT_DEPRECATED;
-MD_EXPORT const CFStringRef    kMDItemLabelUUID AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER_BUT_DEPRECATED;
+MD_EXPORT const CFStringRef    kMDItemLabelIcon API_DEPRECATED("No longer supported", macos(10.7, 10.7)) API_UNAVAILABLE( ios, tvos, watchos );
+MD_EXPORT const CFStringRef    kMDItemLabelID API_DEPRECATED("No longer supported", macos(10.7, 10.7)) API_UNAVAILABLE( ios, tvos, watchos );
+MD_EXPORT const CFStringRef    kMDItemLabelKind API_DEPRECATED("No longer supported", macos(10.7, 10.7)) API_UNAVAILABLE( ios, tvos, watchos );
+MD_EXPORT const CFStringRef    kMDItemLabelUUID API_DEPRECATED("No longer supported", macos(10.7, 10.7)) API_UNAVAILABLE( ios, tvos, watchos );
 
-MD_EXPORT const CFStringRef    kMDItemIsLikelyJunk AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER; // CFBoolean
-MD_EXPORT const CFStringRef    kMDItemExecutableArchitectures AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER; // CFArray of CFString
-MD_EXPORT const CFStringRef    kMDItemExecutablePlatform AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER; // CFString
-MD_EXPORT const CFStringRef    kMDItemApplicationCategories AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER; // CFArray of CFString
+MD_EXPORT const CFStringRef    kMDItemIsLikelyJunk API_AVAILABLE( macos(10.7) ) API_UNAVAILABLE( ios, tvos, watchos ); // CFBoolean
+MD_EXPORT const CFStringRef    kMDItemExecutableArchitectures API_AVAILABLE( macos(10.7) ) API_UNAVAILABLE( ios, tvos, watchos ); // CFArray of CFString
+MD_EXPORT const CFStringRef    kMDItemExecutablePlatform API_AVAILABLE( macos(10.7) ) API_UNAVAILABLE( ios, tvos, watchos ); // CFString
+MD_EXPORT const CFStringRef    kMDItemApplicationCategories API_AVAILABLE( macos(10.7) ) API_UNAVAILABLE( ios, tvos, watchos ); // CFArray of CFString
 
-MD_EXPORT const CFStringRef    kMDItemIsApplicationManaged AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER; // CFBoolean
+MD_EXPORT const CFStringRef    kMDItemIsApplicationManaged API_AVAILABLE( macos(10.7) ) API_UNAVAILABLE( ios, tvos, watchos ); // CFBoolean
 
 MD_END_C_DECLS
 
@@ -1025,4 +1022,3 @@ CF_IMPLICIT_BRIDGING_DISABLED
 #endif /* MAC_OS_X_VERSION_MAX_ALLOWED */
 
 #endif /* __MDITEM__ */
-

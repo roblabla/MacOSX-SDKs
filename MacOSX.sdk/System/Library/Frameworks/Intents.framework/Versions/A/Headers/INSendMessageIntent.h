@@ -2,7 +2,7 @@
 //  INSendMessageIntent.h
 //  Intents
 //
-//  Copyright (c) 2016-2017 Apple Inc. All rights reserved.
+//  Copyright (c) 2016-2019 Apple Inc. All rights reserved.
 //
 
 #import <Intents/INIntent.h>
@@ -17,7 +17,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-API_AVAILABLE(ios(10.0), watchos(3.2), macosx(10.12))
+API_AVAILABLE(ios(10.0), watchos(3.2))
+API_UNAVAILABLE(macosx)
 @interface INSendMessageIntent : INIntent
 
 - (instancetype)initWithRecipients:(nullable NSArray<INPerson *> *)recipients
@@ -25,7 +26,7 @@ API_AVAILABLE(ios(10.0), watchos(3.2), macosx(10.12))
                 speakableGroupName:(nullable INSpeakableString *)speakableGroupName
             conversationIdentifier:(nullable NSString *)conversationIdentifier
                        serviceName:(nullable NSString *)serviceName
-                            sender:(nullable INPerson *)sender NS_DESIGNATED_INITIALIZER API_AVAILABLE(ios(11.0), watchos(4.0), macosx(10.13));
+                            sender:(nullable INPerson *)sender NS_DESIGNATED_INITIALIZER API_AVAILABLE(ios(11.0), watchos(4.0));
 
 // Contacts to whom the message should be sent.
 @property (readonly, copy, nullable, NS_NONATOMIC_IOSONLY) NSArray<INPerson *> *recipients;
@@ -33,9 +34,9 @@ API_AVAILABLE(ios(10.0), watchos(3.2), macosx(10.12))
 // Body text of the message.
 @property (readonly, copy, nullable, NS_NONATOMIC_IOSONLY) NSString *content;
 
-@property (readonly, copy, nullable, NS_NONATOMIC_IOSONLY) INSpeakableString *speakableGroupName API_AVAILABLE(ios(11.0), watchos(4.0), macosx(10.13));
+@property (readonly, copy, nullable, NS_NONATOMIC_IOSONLY) INSpeakableString *speakableGroupName API_AVAILABLE(ios(11.0), watchos(4.0));
 
-@property (readonly, copy, nullable, NS_NONATOMIC_IOSONLY) NSString *conversationIdentifier API_AVAILABLE(ios(11.0), watchos(4.0), macosx(10.13));
+@property (readonly, copy, nullable, NS_NONATOMIC_IOSONLY) NSString *conversationIdentifier API_AVAILABLE(ios(11.0), watchos(4.0));
 
 // Specified service for the message.
 @property (readonly, copy, nullable, NS_NONATOMIC_IOSONLY) NSString *serviceName;
@@ -52,7 +53,8 @@ API_AVAILABLE(ios(10.0), watchos(3.2), macosx(10.12))
  @discussion The minimum requirement for an implementing class is that it should be able to handle the intent. The resolution and confirmation methods are optional. The handling method is always called last, after resolving and confirming the intent.
  */
 
-API_AVAILABLE(ios(10.0), watchos(3.2), macosx(10.12))
+API_AVAILABLE(ios(10.0), watchos(3.2))
+API_UNAVAILABLE(macosx)
 @protocol INSendMessageIntentHandling <NSObject>
 
 @required
@@ -102,13 +104,13 @@ API_AVAILABLE(ios(10.0), watchos(3.2), macosx(10.12))
                     completion:(void (^)(NSArray<INSendMessageRecipientResolutionResult *> *resolutionResults))completion NS_SWIFT_NAME(resolveRecipients(for:with:)) API_AVAILABLE(ios(11.0), watchos(4.0));
 
 - (void)resolveGroupNameForSendMessage:(INSendMessageIntent *)intent
-                    withCompletion:(void (^)(INStringResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveGroupName(for:with:)) API_DEPRECATED("resolveGroupNameForSendMessage:withCompletion: is deprecated. Use resolveSpeakableGroupNameForSendMessage:withCompletion: instead", ios(10.0, 11.0), watchos(3.2, 4.0), macosx(10.12, 10.13));
+                    withCompletion:(void (^)(INStringResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveGroupName(for:with:)) API_DEPRECATED("resolveGroupNameForSendMessage:withCompletion: is deprecated. Use resolveSpeakableGroupNameForSendMessage:withCompletion: instead", ios(10.0, 11.0), watchos(3.2, 4.0));
 
 - (void)resolveContentForSendMessage:(INSendMessageIntent *)intent
                     withCompletion:(void (^)(INStringResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveContent(for:with:));
 
 - (void)resolveSpeakableGroupNameForSendMessage:(INSendMessageIntent *)intent
-                    withCompletion:(void (^)(INSpeakableStringResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveSpeakableGroupName(for:with:)) API_AVAILABLE(ios(11.0), watchos(4.0), macosx(10.13));
+                    withCompletion:(void (^)(INSpeakableStringResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveSpeakableGroupName(for:with:)) API_AVAILABLE(ios(11.0), watchos(4.0));
 
 @end
 

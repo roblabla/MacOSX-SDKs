@@ -29,7 +29,7 @@
  *              equations are to be solved.  X is the resulting matrix of
  *              solutions.
  */
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0))
 @interface MPSMatrixSolveTriangular : MPSMatrixBinaryKernel
 
 /*!
@@ -129,7 +129,7 @@ MPS_SWIFT_NAME(encode(commandBuffer:sourceMatrix:rightHandSideMatrix:solutionMat
  *              Where op(A) is A**T or A.  B is the array of right hand sides for which
  *              the equations are to be solved.  X is the resulting matrix of solutions.
  */
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0))
 @interface MPSMatrixSolveLU : MPSMatrixBinaryKernel
 /*!
  *  @abstract   Initialize an MPSMatrixSolveLU object on a device
@@ -208,7 +208,7 @@ MPS_SWIFT_NAME(encode(commandBuffer:sourceMatrix:rightHandSideMatrix:pivotIndice
  *              right hand sides for which the equations are to be solved.
  *              X is the resulting matrix of solutions.
  */
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0))
 @interface MPSMatrixSolveCholesky : MPSMatrixBinaryKernel
 /*!
  *  @abstract   Initialize an MPSMatrixSolveCholesky object on a device

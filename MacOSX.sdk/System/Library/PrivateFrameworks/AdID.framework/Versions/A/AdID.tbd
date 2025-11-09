@@ -1,8 +1,8 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 543A9577-54EB-3920-8769-DE99451DC940' ]
+uuids:           [ 'x86_64: D4C25B52-E7BE-3000-B5AC-CB90EAB97AAC' ]
 platform:        macosx
-install-name:    /System/Library/PrivateFrameworks/AdID.framework/Versions/A/AdID
+install-name:    '/System/Library/PrivateFrameworks/AdID.framework/Versions/A/AdID'
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _ADSimulatedCrashKillCode_InternalInconsistency, _AdIDVersionNumber, 

@@ -1,6 +1,6 @@
 /*
 	NSFileWrapper.h
-	Copyright (c) 1995-2018, Apple Inc. All rights reserved.
+	Copyright (c) 1995-2019, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -33,7 +33,7 @@ typedef NS_OPTIONS(NSUInteger, NSFileWrapperWritingOptions) {
 
 } API_AVAILABLE(macos(10.6), ios(4.0), watchos(2.0), tvos(9.0));
 
-NS_CLASS_AVAILABLE(10_0, 4_0)
+API_AVAILABLE(macos(10.0), ios(4.0), watchos(2.0), tvos(9.0))
 @interface NSFileWrapper : NSObject<NSSecureCoding> {
     @private
     NSDictionary *_fileAttributes;
@@ -157,7 +157,7 @@ Some instances of NSFileWrapper may be created without a preferredFilename (e.g.
 
 @end
 
-#if (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE))
+#if TARGET_OS_OSX
 
 @interface NSFileWrapper(NSDeprecated)
 

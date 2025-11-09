@@ -3,7 +3,7 @@
  
     Framework:  AVFoundation
  
-	Copyright 2010-2016 Apple Inc. All rights reserved.
+	Copyright 2010-2018 Apple Inc. All rights reserved.
  
  */
 
@@ -13,11 +13,11 @@
 NS_ASSUME_NONNULL_BEGIN
 
 typedef NS_ENUM(NSInteger, AVKeyValueStatus) {
-	AVKeyValueStatusUnknown,
-	AVKeyValueStatusLoading,
-	AVKeyValueStatusLoaded,
-	AVKeyValueStatusFailed,
-	AVKeyValueStatusCancelled
+	AVKeyValueStatusUnknown = 0,
+	AVKeyValueStatusLoading = 1,
+	AVKeyValueStatusLoaded = 2,
+	AVKeyValueStatusFailed = 3,
+	AVKeyValueStatusCancelled = 4
 };
 
 /*!

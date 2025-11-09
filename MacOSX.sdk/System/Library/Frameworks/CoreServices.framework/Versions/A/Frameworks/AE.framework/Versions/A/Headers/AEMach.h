@@ -35,7 +35,7 @@ extern "C" {
 #endif
 #endif
 
-#include <Availability.h>
+#include <os/availability.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -110,7 +110,7 @@ CF_ENUM(DescType) {
  *    Non-Carbon CFM:   not available
  */
 extern mach_port_t 
-AEGetRegisteredMachPort(void)                                 __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
+AEGetRegisteredMachPort(void)                                 API_AVAILABLE( macos(10.0) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 /*
@@ -152,7 +152,7 @@ extern OSStatus
 AEDecodeMessage(
   mach_msg_header_t *  header,
   AppleEvent *         event,
-  AppleEvent *         reply)        /* can be NULL */        __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
+  AppleEvent *         reply)        /* can be NULL */        API_AVAILABLE( macos(10.0) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 /*
@@ -177,7 +177,7 @@ AEDecodeMessage(
  *    Non-Carbon CFM:   not available
  */
 extern OSStatus 
-AEProcessMessage(mach_msg_header_t * header)                  __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
+AEProcessMessage(mach_msg_header_t * header)                  API_AVAILABLE( macos(10.0) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 /*
@@ -217,7 +217,7 @@ AESendMessage(
   const AppleEvent *  event,
   AppleEvent *        reply,                /* can be NULL */
   AESendMode          sendMode,
-  long                timeOutInTicks)                         __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
+  long                timeOutInTicks)                         API_AVAILABLE( macos(10.0) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 

@@ -1,7 +1,7 @@
 /* 
     NSMediaLibraryBrowserController.h
     Application Kit
-    Copyright (c) 2012-2018, Apple Inc.
+    Copyright (c) 2012-2019, Apple Inc.
     All rights reserved.
 */
 
@@ -21,12 +21,13 @@
 #import <AppKit/AppKitDefines.h>
 
 NS_ASSUME_NONNULL_BEGIN
+API_UNAVAILABLE_BEGIN(ios)
 
 typedef NS_OPTIONS(NSUInteger, NSMediaLibrary) {
     NSMediaLibraryAudio = 1UL << 0,
     NSMediaLibraryImage = 1UL << 1,
     NSMediaLibraryMovie = 1UL << 2
-} NS_ENUM_AVAILABLE(10_9, NA);
+} API_AVAILABLE(macos(10.9));
 
 /*
     class:
@@ -38,12 +39,8 @@ typedef NS_OPTIONS(NSUInteger, NSMediaLibrary) {
     NSMediaLibraryBrowserController is not an NSPanel!  It has NSPanel like methods to remotely control the Media Library Browser.  Clients have no direct programmatic access to the panel displaying the Media Library Browser.
 */
 
-NS_CLASS_AVAILABLE(10_9, NA)
+API_AVAILABLE(macos(10.9))
 @interface NSMediaLibraryBrowserController : NSObject
-{
-@private
-    id _browserProxy APPKIT_IVAR;
-}
 
 @property (getter=isVisible) BOOL visible;
 @property NSRect frame;
@@ -54,4 +51,5 @@ NS_CLASS_AVAILABLE(10_9, NA)
 
 @end
 
+API_UNAVAILABLE_END
 NS_ASSUME_NONNULL_END

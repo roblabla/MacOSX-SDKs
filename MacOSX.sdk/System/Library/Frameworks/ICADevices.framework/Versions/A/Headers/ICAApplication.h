@@ -1242,22 +1242,6 @@ enum
 
 /*!
     @struct ICADownloadFilePB
-    @field header
-        See description for ICAHeader. <->
-    @field object
-        The file object. <--
-    @field dirFSRef
-        FSRef of destination directiory. <--
-    @field flags 
-        Any combination of flag values defined above. <--
-    @field fileType
-        Four-char code indicating the type of file. <--
-    @field fileCreator
-        Four-char code indicating with the creator of the file. <--
-    @field rotationAngle
-        Rotation angle in steps of 90 degress. <--
-    @field fileFSRef
-        A pointer to FSRef struct to hold the FSRef of downloaded file. Set this to NULL if the FSRef of downloaded file is not of interest. --> 
 */
 typedef struct ICADownloadFilePB {
     ICAHeader           header;
@@ -1268,51 +1252,10 @@ typedef struct ICADownloadFilePB {
     OSType              fileCreator;
     Fixed               rotationAngle;
     FSRef *             fileFSRef;
-} ICADownloadFilePB;
+} ICADownloadFilePB __attribute__ ((deprecated));
 
 /*!
     @function ICADownloadFile
-    @abstract
-        Use this API to download a file to disk. 
-    @discussion
-      This API is a convenient way to download a file to disk. To receive the image data in memory use ICACopyObjectData. Using ICAGetPropertyData is not recommend for this purpose since ICAGetPropertyData is Deprecated in 10.5.
-
-<pre>
-@textblock
-        Example:
-        
-        void DownloadFile()
-        {
-            OSErr             err;
-            ICADownloadFilePB pb = {};
-
-            pb.flags         = <#UInt32 flags#>;
-            pb.rotationAngle = <#Fixed rotationAngle#>;
-            pb.object        = <#ICAObject object#>;
-            pb.fileCreator   = <#OSType fileCreator#>;
-            pb.dirFSRef      = <#FSRef * dirFSRef#>;
-            pb.fileType      = <#OSType fileType#>;
-            
-            err = ICADownloadFile( &pb, NULL );
-
-            if ( noErr != err )
-            {
-                // handle error
-            }
-            else
-            {
-                // pb.fileFSRef   // FSRef *
-            }
-        }
-@/textblock
-</pre>
-
-    @param pb
-        A pointer to an <code><b>ICADownloadFilePB</b></code> parameter block.
-    @param completion
-        A pointer to a completion routine that will be invoked at the completion of <code><b>ICADownloadFile</b></code> function. Set this parameter to <code><b>NULL</b></code> to invoke this API synchronously. 
-    @result
-        Returns an error code defined in ICAApplication.h
 */
 extern ICAError 
 ICADownloadFile(
@@ -1338,62 +1281,16 @@ enum
 
 /*!
     @struct ICAUploadFilePB
-    @field header
-        See description for ICAHeader. <->
-    @field parentObject <->
-        An ICAObject corresponding to a folder on the device. The device will store the uploaded file inside this folder if possible.
-    @field fileFSRef <--
-        An FSRef for the file to be uploaded to the device.
-    @field flags <--
-        One of the flags defined above.
 */
 typedef struct ICAUploadFilePB {
     ICAHeader           header;
     ICAObject           parentObject;
     FSRef*              fileFSRef;
     UInt32              flags;
-} ICAUploadFilePB;
+} ICAUploadFilePB __attribute__ ((deprecated));
 
 /*!
     @function ICAUploadFile
-    @abstract
-        Use this API to upload a file to a device that supports this capability.
-    @discussion
-        The device choses an appropriate destination location for the uploaded image and sends a kICANotificationTypeObjectAdded notification.
-        
-<pre>
-@textblock
-        Example:
-        
-        void  UploadFile()
-        {
-            OSErr           err;
-            ICAUploadFilePB pb = {};
-
-            pb.fileFSRef    = <#FSRef * fileFSRef#>;
-            pb.flags        = <#UInt32 flags#>;
-            pb.parentObject = <#ICAObject parentObject#>;
-            
-            err = ICAUploadFile( &pb, NULL );
-
-            if ( noErr != err )
-            {
-                // handle error
-            }
-            else
-            {
-                // no return value(s)
-            }
-        }
-@/textblock
-</pre>
-
-    @param pb
-        A pointer to an <code><b>ICAUploadFilePB</b></code> parameter block.
-    @param completion
-        A pointer to a completion routine that will be invoked at the completion of <code><b>ICAUploadFile</b></code> function. Set this parameter to <code><b>NULL</b></code> to invoke this API synchronously. 
-    @result
-        Returns an error code defined in ICAApplication.h
 */
 extern ICAError 
 ICAUploadFile(
@@ -1405,30 +1302,6 @@ ICAUploadFile(
 #pragma mark Device related APIs
 //---------------------------------------------------------------------------------------------------------- ICALoadDeviceModule
 /* struct ICALoadDeviceModulePB
-    Legal Key-Value pairs for populating paramDictionary:
-            
-    Key                             Value                               Comment
-    
-    kICADeviceModulePathKey         CFStringRef                         Path to the device module bundle that needs to be launched.
-    kICATransportTypeKey            CFStringRef                         Should be one of the six predifined transport types.
-    kICABluetoothAddressKey         CFStringRef                         Bluetooth device address string formatted as "00-11-22-33-44-55". 
-    kICAUSBLocationIDKey            CFNumberRef (kCFNumberLongType)     32 bit USB location ID.
-    kICAFireWireGUIDKey             CFNumberRef (kCFNumberLongLongType) 64 bit FireWire GUID.                                                               
-    kICAIOServicePathKey            CFStringRef                         IO service path to the device obtained from the IO registry.
-    kICAIPAddressKey                CFStringRef                         IP address of the device. This can be a host address ("camera.apple.com"),
-                                                                        ipv4 address ('192.168.123.10") or ipv6 address ("3ff3:0000:0000:0000:0123:4567:89ab:cdef")
-    kICAIPPortKey                   CFNumberRef (kCFNumberLongType)     IP port number of the device.
-    kICAIPNameKey                   CFStringRef                         Human readable device name.
-    kICAIPGUIDKey                   CFStringRef                         16 byte GUID string of the device formatted as "01234567-89ab-cdef-0123-456789abcdef".
-    kICATWAINDSPathKey              CFStringRef                         Path to TWAIN DS bundle. */
-
-
-/*!
-    @struct ICALoadDeviceModulePB
-    @field header
-        See description for ICAHeader. <->
-    @field paramDictionary <--
-        A parameter dictionary with sufficient key-value pairs to load a device module. This dictionary itself or the information provided in this dictionary will be sent to the device module.
 */
 typedef struct ICALoadDeviceModulePB {
     ICAHeader           header;
@@ -1437,16 +1310,6 @@ typedef struct ICALoadDeviceModulePB {
 
 /*!
     @function ICALoadDeviceModule
-    @abstract
-        Use this API to load a device module.
-    @discussion
-        Typically, connecting a FireWire or an USB device will automatically load an appropriate device module. This API is needed only for loading a device module manually for devices that do not use a hot-plug interface, such as Bluetooth, SCSI, or TCP/IP.
-    @param pb
-        A pointer to an <code><b>ICALoadDeviceModulePB</b></code> parameter block.
-    @param completion
-        A pointer to a completion routine that will be invoked at the completion of <code><b>ICALoadDeviceModule</b></code> function. Set this parameter to <code><b>NULL</b></code> to invoke this API synchronously. 
-    @result
-        Returns an error code defined in ICAApplication.h
 */
 extern ICAError 
 ICALoadDeviceModule(

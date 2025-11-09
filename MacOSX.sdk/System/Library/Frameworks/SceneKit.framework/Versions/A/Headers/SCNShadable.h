@@ -2,7 +2,7 @@
 //  SCNShadable.h
 //  SceneKit
 //
-//  Copyright © 2013-2018 Apple Inc. All rights reserved.
+//  Copyright © 2013-2019 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -32,7 +32,7 @@ typedef NS_ENUM(NSInteger, SCNBufferFrequency) {
 } API_AVAILABLE(macos(10.11), ios(9.0));
 
 @protocol SCNBufferStream <NSObject>
-- (void)writeBytes:(void *)bytes length:(NSUInteger)length;
+- (void)writeBytes:(void const *)bytes length:(NSUInteger)length;
 @end
 
 /*!
@@ -260,19 +260,19 @@ SCN_EXPORT
  @property tessellationControlShader
  @abstract Determines the receiver's tessellation control shader. Tessellation shaders require OpenGL Core Profile.
  */
-@property(nonatomic, copy, nullable) NSString *tessellationControlShader API_AVAILABLE(macos(10.10)) API_UNAVAILABLE(ios, tvos, watchos);
+@property(nonatomic, copy, nullable) NSString *tessellationControlShader API_AVAILABLE(macos(10.10)) API_UNAVAILABLE(ios, tvos, watchos, macCatalyst);
 
 /*!
  @property tessellationEvaluationShader
  @abstract Determines the receiver's tessellation evaluation shader. Tessellation shaders require OpenGL Core Profile.
  */
-@property(nonatomic, copy, nullable) NSString *tessellationEvaluationShader API_AVAILABLE(macos(10.10)) API_UNAVAILABLE(ios, tvos, watchos);
+@property(nonatomic, copy, nullable) NSString *tessellationEvaluationShader API_AVAILABLE(macos(10.10)) API_UNAVAILABLE(ios, tvos, watchos, macCatalyst);
 
 /*!
  @property geometryShader
  @abstract Determines the receiver's geometry shader. Geometry shaders require OpenGL Core Profile.
  */
-@property(nonatomic, copy, nullable) NSString *geometryShader API_AVAILABLE(macos(10.10)) API_UNAVAILABLE(ios, tvos, watchos);
+@property(nonatomic, copy, nullable) NSString *geometryShader API_AVAILABLE(macos(10.10)) API_UNAVAILABLE(ios, tvos, watchos, macCatalyst);
 
 /*!
  @property vertexFunctionName
@@ -354,7 +354,7 @@ API_UNAVAILABLE(watchos)
  @param programID The program object.
  @param renderer The renderer that is currently rendering the scene.
  */
-- (BOOL)program:(SCNProgram *)program bindValueForSymbol:(NSString *)symbol atLocation:(unsigned int)location programID:(unsigned int)programID renderer:(SCNRenderer *)renderer API_DEPRECATED("Use -[SCNShadable handleBindingOfSymbol:usingBlock:] instead", macos(10.8, 10.10)) API_UNAVAILABLE(ios, tvos, watchos);
+- (BOOL)program:(SCNProgram *)program bindValueForSymbol:(NSString *)symbol atLocation:(unsigned int)location programID:(unsigned int)programID renderer:(SCNRenderer *)renderer API_DEPRECATED("Use -[SCNShadable handleBindingOfSymbol:usingBlock:] instead", macos(10.8, 10.10)) API_UNAVAILABLE(ios, tvos, watchos, macCatalyst);
 
 /*!
  @method program:withID:bindValueForSymbol:atLocation:renderer:
@@ -365,7 +365,7 @@ API_UNAVAILABLE(watchos)
  @param programID The program object.
  @param renderer The renderer that is currently rendering the scene.
  */
-- (void)program:(SCNProgram *)program unbindValueForSymbol:(NSString *)symbol atLocation:(unsigned int)location programID:(unsigned int)programID renderer:(SCNRenderer *)renderer API_DEPRECATED("Use -[SCNShadable handleUnbindingOfSymbol:usingBlock:] instead", macos(10.8, 10.10)) API_UNAVAILABLE(ios, tvos, watchos);
+- (void)program:(SCNProgram *)program unbindValueForSymbol:(NSString *)symbol atLocation:(unsigned int)location programID:(unsigned int)programID renderer:(SCNRenderer *)renderer API_DEPRECATED("Use -[SCNShadable handleUnbindingOfSymbol:usingBlock:] instead", macos(10.8, 10.10)) API_UNAVAILABLE(ios, tvos, watchos, macCatalyst);
 
 /*!
  @method handleError
@@ -382,7 +382,7 @@ API_UNAVAILABLE(watchos)
  @param program The queried program.
  @discussion This is deprecated. Use SCNProgram's opaque property instead.
  */
-- (BOOL)programIsOpaque:(SCNProgram *)program API_DEPRECATED("Use SCNProgram.opaque instead", macos(10.8, 10.10)) API_UNAVAILABLE(ios, tvos, watchos);
+- (BOOL)programIsOpaque:(SCNProgram *)program API_DEPRECATED("Use SCNProgram.opaque instead", macos(10.8, 10.10)) API_UNAVAILABLE(ios, tvos, watchos, macCatalyst);
 
 @end
 
@@ -418,7 +418,7 @@ API_UNAVAILABLE(watchos)
  Example: Simple sinusoidal deformation
  
      GLSL
-     | uniform Amplitude = 0.1;
+     | uniform float Amplitude = 0.1;
      |
      | _geometry.position.xyz += _geometry.normal * (Amplitude * _geometry.position.y * _geometry.position.x) * sin(u_time);
  
@@ -426,7 +426,7 @@ API_UNAVAILABLE(watchos)
      | #pragma arguments
      | float Amplitude;
      |
-     | _geometry.position.xyz += _geometry.normal * (Amplitude * _geometry.position.y * _geometry.position.x) * sin(u_time);
+     | _geometry.position.xyz += _geometry.normal * (Amplitude * _geometry.position.y * _geometry.position.x) * sin(scn_frame.time);
  
  */
 SCN_EXPORT SCNShaderModifierEntryPoint const SCNShaderModifierEntryPointGeometry API_AVAILABLE(macos(10.9));
@@ -438,35 +438,41 @@ SCN_EXPORT SCNShaderModifierEntryPoint const SCNShaderModifierEntryPointGeometry
  Structures available from the SCNShaderModifierEntryPointSurface entry point:
  
  | struct SCNShaderSurface {
- |    float3 view;                     // Direction from the point on the surface toward the camera (V)
- |    float3 position;                 // Position of the fragment
- |    float3 normal;                   // Normal of the fragment (N)
- |    float3 geometryNormal;           // Geometric normal of the fragment (normal map is ignored)
- |    float3 tangent;                  // Tangent of the fragment
- |    float3 bitangent;                // Bitangent of the fragment
- |    float4 ambient;                  // Ambient property of the fragment
- |    float2 ambientTexcoord;          // Ambient texture coordinates
- |    float4 diffuse;                  // Diffuse property of the fragment. Alpha contains the opacity.
- |    float2 diffuseTexcoord;          // Diffuse texture coordinates
- |    float4 specular;                 // Specular property of the fragment
- |    float2 specularTexcoord;         // Specular texture coordinates
- |    float4 emission;                 // Emission property of the fragment
- |    float2 emissionTexcoord;         // Emission texture coordinates
- |    float4 multiply;                 // Multiply property of the fragment
- |    float2 multiplyTexcoord;         // Multiply texture coordinates
- |    float4 transparent;              // Transparent property of the fragment
- |    float2 transparentTexcoord;      // Transparent texture coordinates
- |    float4 reflective;               // Reflective property of the fragment
- |    float  metalness;                // Metalness property of the fragment
- |    float2 metalnessTexcoord;        // Metalness texture coordinates
- |    float  roughness;                // Roughness property of the fragment
- |    float2 roughnessTexcoord;        // Roughness texture coordinates
- |    float4 selfIllumination;         // Self Illumination property of the fragment. Available since macOS 10.13, iOS 11, tvOS 11 and watchOS 4. Available as `emission` in previous versions.
- |    float2 selfIlluminationTexcoord; // Self Illumination texture coordinates. Available since macOS 10.13, iOS 11, tvOS 11 and watchOS 4. Available as `emissionTexcoord` in previous versions.
- |    float  ambientOcclusion;         // Ambient Occlusion property of the fragment. Available macOS 10.13, iOS 11, tvOS 11 and watchOS 4. Available as `multiply` in previous versions.
- |    float2 ambientOcclusionTexcoord; // Ambient Occlusion texture coordinates. Available since macOS 10.13, iOS 11, tvOS 11 and watchOS 4. Available as `multiplyTexcoord` in previous versions.
- |    float  shininess;                // Shininess property of the fragment
- |    float  fresnel;                  // Fresnel property of the fragment
+ |    float3 view;                       // Direction from the point on the surface toward the camera (V)
+ |    float3 position;                   // Position of the fragment
+ |    float3 normal;                     // Normal of the fragment (N)
+ |    float3 geometryNormal;             // Geometric normal of the fragment (normal map is ignored)
+ |    float3 tangent;                    // Tangent of the fragment
+ |    float3 bitangent;                  // Bitangent of the fragment
+ |    float4 ambient;                    // Ambient property of the fragment
+ |    float2 ambientTexcoord;            // Ambient texture coordinates
+ |    float4 diffuse;                    // Diffuse property of the fragment. Alpha contains the opacity.
+ |    float2 diffuseTexcoord;            // Diffuse texture coordinates
+ |    float4 specular;                   // Specular property of the fragment
+ |    float2 specularTexcoord;           // Specular texture coordinates
+ |    float4 emission;                   // Emission property of the fragment
+ |    float2 emissionTexcoord;           // Emission texture coordinates
+ |    float4 multiply;                   // Multiply property of the fragment
+ |    float2 multiplyTexcoord;           // Multiply texture coordinates
+ |    float4 transparent;                // Transparent property of the fragment
+ |    float2 transparentTexcoord;        // Transparent texture coordinates
+ |    float4 reflective;                 // Reflective property of the fragment
+ |    float  metalness;                  // Metalness property of the fragment
+ |    float2 metalnessTexcoord;          // Metalness texture coordinates
+ |    float  roughness;                  // Roughness property of the fragment
+ |    float2 roughnessTexcoord;          // Roughness texture coordinates
+ |    float  clearCoat;                  // Clear Coat property of the fragment.           Available since macOS 10.15, iOS 13, tvOS 13 and watchOS 6.
+ |    float2 clearCoatTexcoord;          // Clear Coat texture coordinates.                Available since macOS 10.15, iOS 13, tvOS 13 and watchOS 6.
+ |    float  clearCoatRoughness;         // Clear Coat Roughness property of the fragment. Available since macOS 10.15, iOS 13, tvOS 13 and watchOS 6.
+ |    float2 clearCoatRoughnessTexcoord; // Clear Coat Roughness texture coordinates.      Available since macOS 10.15, iOS 13, tvOS 13 and watchOS 6.
+ |    float3 clearCoatNormal;            // Clear Coat Normal property of the fragment.    Available since macOS 10.15, iOS 13, tvOS 13 and watchOS 6.
+ |    float2 clearCoatNormalTexcoord;    // Clear Coat Normnal texture coordinates.        Available since macOS 10.15, iOS 13, tvOS 13 and watchOS 6.
+ |    float4 selfIllumination;           // Self Illumination property of the fragment.    Available since macOS 10.13, iOS 11, tvOS 11 and watchOS 4. Available as `emission` in previous versions.
+ |    float2 selfIlluminationTexcoord;   // Self Illumination texture coordinates.         Available since macOS 10.13, iOS 11, tvOS 11 and watchOS 4. Available as `emissionTexcoord` in previous versions.
+ |    float  ambientOcclusion;           // Ambient Occlusion property of the fragment.    Available since macOS 10.13, iOS 11, tvOS 11 and watchOS 4. Available as `multiply` in previous versions.
+ |    float2 ambientOcclusionTexcoord;   // Ambient Occlusion texture coordinates.         Available since macOS 10.13, iOS 11, tvOS 11 and watchOS 4. Available as `multiplyTexcoord` in previous versions.
+ |    float  shininess;                  // Shininess property of the fragment
+ |    float  fresnel;                    // Fresnel property of the fragment
  | } _surface;
  |
  | Access: ReadWrite

@@ -1,8 +1,8 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: BD9AFAF9-CBE3-3F2C-ABC7-F2A0AB551078' ]
-platform:        macosx
-install-name:    /System/Library/PrivateFrameworks/RemoteTextInput.framework/Versions/A/RemoteTextInput
+uuids:           [ 'x86_64: AE970140-CE3F-3211-A9A8-D54DD4F06364', 'x86_64: AE970140-CE3F-3211-A9A8-D54DD4F06364' ]
+platform:        zippered
+install-name:    '/System/Library/PrivateFrameworks/RemoteTextInput.framework/Versions/A/RemoteTextInput'
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _RTICanLogMessageAtLevel, _RTILogFacility, _RTIServiceAnonymousName, 

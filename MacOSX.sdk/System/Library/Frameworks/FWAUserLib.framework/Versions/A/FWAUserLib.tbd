@@ -1,9 +1,8 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: B104033D-18FF-397A-813E-AC9DDAB1A70B' ]
+uuids:           [ 'x86_64: 32D065A2-E217-3E0D-AD37-8F15738339C2' ]
 platform:        macosx
-install-name:    /System/Library/Frameworks/FWAUserLib.framework/Versions/A/FWAUserLib
-objc-constraint: none
+install-name:    '/System/Library/Frameworks/FWAUserLib.framework/Versions/A/FWAUserLib'
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _CreateAsyncWakePort, _FWAAttachFWAudioMIDIStream, _FWAAttachFWAudioStream, 
@@ -30,18 +29,17 @@ exports:
                        _FWAGetSupportedSampleRates, _FWAGetVendorID, _FWAGetVendorName, 
                        _FWAInitAEvntSource, _FWAIsMIDICapable, _FWAMIDIDeviceNubAttachMIDIPlug, 
                        _FWAMIDIDeviceNubDetachMIDIPlug, _FWAOpen, _FWAOpenLocal, 
-                       _FWAOpenLocalWithInterface, _FWAOpenWithService, _FWAReadBlock, 
-                       _FWAReadMIDIData, _FWAReadMIDIDataAsync, _FWAReadQuadlet, 
+                       _FWAOpenLocalWithInterface, _FWAOpenWithService, _FWARead, 
+                       _FWAReadBlock, _FWAReadMIDIData, _FWAReadMIDIDataAsync, _FWAReadQuadlet, 
                        _FWAReserveIsochSequences, _FWASetAutoLoad, _FWASetClockSource, 
                        _FWASetCycleTimeOffset, _FWASetDeviceStreamInfo, _FWASetFWAudioMIDIPlugChannel, 
                        _FWASetFWAudioMIDIPlugProperty, _FWASetFWAudioPlugChannel, 
                        _FWASetFWAudioPlugProperty, _FWASetIsochStreamAudioSequenceCount, 
-                       _FWASetIsochStreamAudioType, _FWASetIsochStreamCallbackFunction, 
-                       _FWASetIsochStreamChannelID, _FWASetIsochStreamMIDISequenceCount, 
-                       _FWASetIsochStreamOutputSpeed, _FWASetIsochStreamSampleRate, 
-                       _FWASetNumMIDIInputPlugs, _FWASetNumMIDIOutputPlugs, _FWASetPluginPath, 
-                       _FWASetProperty, _FWAStartFWAudioDevice, _FWAStartIsochStream, 
-                       _FWAStopFWAudioDevice, _FWAStopIsochStream, _FWASyncUpDevice, 
-                       _FWAWriteBlock, _FWAWriteMIDIData, _FWAWriteMIDIDataAsync, 
-                       _FWAWriteQuadlet, _kFWADeviceStatusCurrentVersion ]
+                       _FWASetIsochStreamAudioType, _FWASetIsochStreamChannelID, 
+                       _FWASetIsochStreamMIDISequenceCount, _FWASetIsochStreamOutputSpeed, 
+                       _FWASetIsochStreamSampleRate, _FWASetNumMIDIInputPlugs, _FWASetNumMIDIOutputPlugs, 
+                       _FWASetPluginPath, _FWASetProperty, _FWAStartFWAudioDevice, 
+                       _FWAStartIsochStream, _FWAStopFWAudioDevice, _FWAStopIsochStream, 
+                       _FWASyncUpDevice, _FWAWrite, _FWAWriteBlock, _FWAWriteMIDIData, 
+                       _FWAWriteMIDIDataAsync, _FWAWriteQuadlet ]
 ...

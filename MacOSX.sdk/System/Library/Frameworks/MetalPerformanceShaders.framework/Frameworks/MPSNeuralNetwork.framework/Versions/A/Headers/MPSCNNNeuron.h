@@ -82,8 +82,8 @@ extern "C" {
  *              https://www.tensorflow.org/api_docs/cc/class/tensorflow/ops/relu6.
  *              For default behavior, set the value of a to 1.0f and the value of b to 6.0f.
  */
-MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3))
-@interface MPSNNNeuronDescriptor : NSObject <NSCopying>
+MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3))
+@interface MPSNNNeuronDescriptor : NSObject <NSCopying, NSSecureCoding>
 
 @property (readwrite, nonatomic) MPSCNNNeuronType neuronType;
 @property (readwrite, nonatomic) float a;
@@ -179,15 +179,16 @@ MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3))
  *  MPSCNNNeuronTypePower           ///< f(x) = (a * x + b) ^ c
  *  MPSCNNNeuronTypeExponential     ///< f(x) = c ^ (a * x + b)
  *  MPSCNNNeuronTypeLogarithm       ///< f(x) = log_c(a * x + b)
+ *  MPSCNNNeuronTypeGeLU            ///< f(x) = (1.0 + erf(x * sqrt(0.5))) * 0.5 * x
  */
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(10.0), tvos(10.0))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(10.0), macCatalyst(13.0), tvos(10.0))
 @interface  MPSCNNNeuron : MPSCNNKernel
 
-@property (readonly, nonatomic) MPSCNNNeuronType neuronType MPS_AVAILABLE_STARTING(macos(10.13), ios(11.0), tvos(11.0));
+@property (readonly, nonatomic) MPSCNNNeuronType neuronType MPS_AVAILABLE_STARTING(macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0));
 @property (readonly, nonatomic) float a;
 @property (readonly, nonatomic) float b;
 @property (readonly, nonatomic) float c;
-@property (readonly, nonatomic, retain, nullable) NSData* data MPS_AVAILABLE_STARTING(macos(10.13), ios(11.0), tvos(11.0));
+@property (readonly, nonatomic, retain, nullable) NSData* data MPS_AVAILABLE_STARTING(macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0));
 
 /*
  * You must use initWithDevice:neuronDescriptor or use one of the sub-classes of MPSCNNNeuron instead.
@@ -206,7 +207,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(10.0), tvos(10.0))
  */
 -(nonnull instancetype) initWithDevice: (nonnull id <MTLDevice>) device
                       neuronDescriptor: (MPSNNNeuronDescriptor* _Nonnull) neuronDescriptor NS_DESIGNATED_INITIALIZER
-MPS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3));
+MPS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3));
 
 /*! @abstract NSSecureCoding compatability
  *  @discussion While the standard NSSecureCoding/NSCoding method
@@ -256,11 +257,12 @@ MPS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3));
  *                                               [ a * log(c) * c^(a * x + b), if c != -1
  *  MPSCNNNeuronTypeLogarithm       ///< df/dx = [            a / (a * in + b), if c == -1
  *                                               [ a / (log(c) * (a * in + b)), if c != -1
+ *  MPSCNNNeuronTypeGeLU            ///< df/dx = 0.5 * (1.0 + erf(x * sqrt(0.5))) + (sqrt(0.5) * M_2_SQRTPI * exp(-x*x * 0.5) * x) )
  *
  * The result of the above operation is multiplied with the gradient, computed
  * by the preceeding filter (going backwards).
  */
-MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3))
+MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3))
 @interface MPSCNNNeuronGradient : MPSCNNGradientKernel
 
 @property (readonly, nonatomic) MPSCNNNeuronType neuronType;
@@ -286,7 +288,7 @@ MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3))
  */
 -(nonnull instancetype) initWithDevice: (nonnull id <MTLDevice>) device
                       neuronDescriptor: (MPSNNNeuronDescriptor* _Nonnull) neuronDescriptor NS_DESIGNATED_INITIALIZER
-MPS_AVAILABLE_STARTING(macos(10.13), ios(11.0), tvos(11.0));
+MPS_AVAILABLE_STARTING(macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0));
 
 /*! @abstract NSSecureCoding compatability
  *  @discussion While the standard NSSecureCoding/NSCoding method
@@ -312,7 +314,7 @@ MPS_AVAILABLE_STARTING(macos(10.13), ios(11.0), tvos(11.0));
  *  @dependency This depends on Metal.framework
  *  @discussion Specifies the linear neuron filter. For each pixel, applies the following function: f(x) = a * x + b
  */
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(10.0), tvos(10.0))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(10.0), macCatalyst(13.0), tvos(10.0))
 @interface  MPSCNNNeuronLinear : MPSCNNNeuron
 
 /*!
@@ -326,7 +328,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(10.0), tvos(10.0))
                                      a: (float) a
                                      b: (float) b NS_DESIGNATED_INITIALIZER
                 MPS_AVAILABLE_STARTING_BUT_DEPRECATED(  "Please use MPSCNNNeuron initWithDevice:neuronDescriptor.",
-                                                      macos(10.13, 10.14), ios(10.0, 12.0), tvos(10.0, 12.0));
+                                                      macos(10.13, 10.14), ios(10.0, 12.0), tvos(10.0, 12.0))  MPS_UNAVAILABLE(macCatalyst);
 
 /*
  * You must use initWithDevice:a:b instead
@@ -345,7 +347,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(10.0), tvos(10.0))
  *              This is called Leaky ReLU in literature. Some literature defines
  *              classical ReLU as max(0, x). If you want this behavior, simply pass a = 0
  */
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(10.0), tvos(10.0))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(10.0), macCatalyst(13.0), tvos(10.0))
 @interface  MPSCNNNeuronReLU : MPSCNNNeuron
 
 /*!
@@ -357,7 +359,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(10.0), tvos(10.0))
 -(nonnull instancetype) initWithDevice: (nonnull id <MTLDevice>) device
                                      a: (float) a NS_DESIGNATED_INITIALIZER
     MPS_AVAILABLE_STARTING_BUT_DEPRECATED(  "Please use MPSCNNNeuron initWithDevice:neuronDescriptor.",
-                                      macos(10.13, 10.14), ios(10.0, 12.0), tvos(10.0, 12.0));
+                                      macos(10.13, 10.14), ios(10.0, 12.0), tvos(10.0, 12.0))  MPS_UNAVAILABLE(macCatalyst);
 
 
 /*
@@ -378,7 +380,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(10.0), tvos(10.0))
  *              this to ReLu where parameter a is shared across all channels.
  *              See https://arxiv.org/pdf/1502.01852.pdf for details.
  */
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0))
 @interface  MPSCNNNeuronPReLU : MPSCNNNeuron
 
 /*!
@@ -393,7 +395,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
                                      a: (const float* _Nonnull) a
                                  count: (NSUInteger) count NS_DESIGNATED_INITIALIZER
             MPS_AVAILABLE_STARTING_BUT_DEPRECATED(  "Please use MPSCNNNeuron initWithDevice:neuronDescriptor.",
-                                      macos(10.13, 10.14), ios(10.0, 12.0), tvos(10.0, 12.0));
+                                      macos(10.13, 10.14), ios(10.0, 12.0), tvos(10.0, 12.0))  MPS_UNAVAILABLE(macCatalyst);
 
 
 /*
@@ -409,7 +411,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
  *  @dependency This depends on Metal.framework
  *  @discussion Specifies the sigmoid neuron filter.  For each pixel, applies the following function: f(x) = 1 / (1 + e^-x)
  */
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(10.0), tvos(10.0))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(10.0), macCatalyst(13.0), tvos(10.0))
 @interface  MPSCNNNeuronSigmoid : MPSCNNNeuron
 
 /*!
@@ -419,7 +421,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(10.0), tvos(10.0))
  */
 -(nonnull instancetype) initWithDevice: (nonnull id <MTLDevice>) device NS_DESIGNATED_INITIALIZER
                 MPS_AVAILABLE_STARTING_BUT_DEPRECATED(  "Please use MPSCNNNeuron initWithDevice:neuronDescriptor.",
-                                      macos(10.13, 10.14), ios(10.0, 12.0), tvos(10.0, 12.0));
+                                      macos(10.13, 10.14), ios(10.0, 12.0), tvos(10.0, 12.0))  MPS_UNAVAILABLE(macCatalyst);
 
 
 @end    /* MPSCNNNeuronSigmoid */
@@ -430,7 +432,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(10.0), tvos(10.0))
  *  @dependency This depends on Metal.framework
  *  @discussion Specifies the hard sigmoid neuron filter.  For each pixel, applies the following function: f(x) = clamp((a * x) + b, 0, 1)
  */
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0))
 @interface  MPSCNNNeuronHardSigmoid : MPSCNNNeuron
 
 /*!
@@ -444,7 +446,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
                                      a: (float) a
                                      b: (float) b NS_DESIGNATED_INITIALIZER
                 MPS_AVAILABLE_STARTING_BUT_DEPRECATED(  "Please use MPSCNNNeuron initWithDevice:neuronDescriptor.",
-                                      macos(10.13, 10.14), ios(10.0, 12.0), tvos(10.0, 12.0));
+                                      macos(10.13, 10.14), ios(10.0, 12.0), tvos(10.0, 12.0))  MPS_UNAVAILABLE(macCatalyst);
 
 /*
  * Use initWithDevice:a:b: instead
@@ -460,7 +462,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
  *  @discussion Specifies the hyperbolic tangent neuron filter.
  *              For each pixel, applies the following function: f(x) = a * tanh(b * x)
  */
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(10.0), tvos(10.0))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(10.0), macCatalyst(13.0), tvos(10.0))
 @interface  MPSCNNNeuronTanH : MPSCNNNeuron
 
 /*!
@@ -474,7 +476,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(10.0), tvos(10.0))
                                      a: (float) a
                                      b: (float) b NS_DESIGNATED_INITIALIZER
             MPS_AVAILABLE_STARTING_BUT_DEPRECATED(  "Please use MPSCNNNeuron initWithDevice:neuronDescriptor.",
-                                      macos(10.13, 10.14), ios(10.0, 12.0), tvos(10.0, 12.0));
+                                      macos(10.13, 10.14), ios(10.0, 12.0), tvos(10.0, 12.0))  MPS_UNAVAILABLE(macCatalyst);
 
 /*
  * Use initWithDevice:a:b: instead
@@ -489,7 +491,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(10.0), tvos(10.0))
  *  @dependency This depends on Metal.framework
  *  @discussion Specifies the absolute neuron filter.  For each pixel, applies the following function: f(x) = | x |
  */
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(10.0), tvos(10.0))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(10.0), macCatalyst(13.0), tvos(10.0))
 @interface  MPSCNNNeuronAbsolute : MPSCNNNeuron
 
 /*!
@@ -499,7 +501,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(10.0), tvos(10.0))
  */
 -(nonnull instancetype) initWithDevice: (nonnull id <MTLDevice>) device NS_DESIGNATED_INITIALIZER
             MPS_AVAILABLE_STARTING_BUT_DEPRECATED(  "Please use MPSCNNNeuron initWithDevice:neuronDescriptor.",
-                                      macos(10.13, 10.14), ios(10.0, 12.0), tvos(10.0, 12.0));
+                                      macos(10.13, 10.14), ios(10.0, 12.0), tvos(10.0, 12.0))  MPS_UNAVAILABLE(macCatalyst);
 
 
 @end    /* MPSCNNNeuronAbsolute */
@@ -511,7 +513,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(10.0), tvos(10.0))
  *  @discussion Specifies the parametric softplus neuron filter.
  *              For each pixel, applies the following function: f(x) = a * log(1 + e^(b * x))
  */
-MPS_CLASS_AVAILABLE_STARTING(macos(10.13), ios(11.0), tvos(11.0))
+MPS_CLASS_AVAILABLE_STARTING(macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0))
 @interface  MPSCNNNeuronSoftPlus : MPSCNNNeuron
 
 /*!
@@ -525,7 +527,7 @@ MPS_CLASS_AVAILABLE_STARTING(macos(10.13), ios(11.0), tvos(11.0))
                                      a: (float) a
                                      b: (float) b NS_DESIGNATED_INITIALIZER
         MPS_AVAILABLE_STARTING_BUT_DEPRECATED(  "Please use MPSCNNNeuron initWithDevice:neuronDescriptor.",
-                                      macos(10.13, 10.14), ios(10.0, 12.0), tvos(10.0, 12.0));
+                                      macos(10.13, 10.14), ios(10.0, 12.0), tvos(10.0, 12.0))  MPS_UNAVAILABLE(macCatalyst);
 
 /*
  * Use initWithDevice:a:b: instead
@@ -541,7 +543,7 @@ MPS_CLASS_AVAILABLE_STARTING(macos(10.13), ios(11.0), tvos(11.0))
  *  @discussion Specifies the softsign neuron filter.
  *              For each pixel, applies the following function: f(x) = x / (1 + abs(x))
  */
-MPS_CLASS_AVAILABLE_STARTING(macos(10.13), ios(11.0), tvos(11.0))
+MPS_CLASS_AVAILABLE_STARTING(macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0))
 @interface  MPSCNNNeuronSoftSign : MPSCNNNeuron
 
 /*!
@@ -551,7 +553,7 @@ MPS_CLASS_AVAILABLE_STARTING(macos(10.13), ios(11.0), tvos(11.0))
  */
 -(nonnull instancetype) initWithDevice: (nonnull id <MTLDevice>) device NS_DESIGNATED_INITIALIZER
         MPS_AVAILABLE_STARTING_BUT_DEPRECATED(  "Please use MPSCNNNeuron initWithDevice:neuronDescriptor.",
-                                      macos(10.13, 10.14), ios(10.0, 12.0), tvos(10.0, 12.0));
+                                      macos(10.13, 10.14), ios(10.0, 12.0), tvos(10.0, 12.0))  MPS_UNAVAILABLE(macCatalyst);
 
 
 @end    /* MPSCNNNeuronSoftSign */
@@ -564,7 +566,7 @@ MPS_CLASS_AVAILABLE_STARTING(macos(10.13), ios(11.0), tvos(11.0))
  *              For each pixel, applies the following function: f(x) = [ a * (exp(x) - 1), x <  0
  *                                                                     [ x               , x >= 0
  */
-MPS_CLASS_AVAILABLE_STARTING(macos(10.13), ios(11.0), tvos(11.0))
+MPS_CLASS_AVAILABLE_STARTING(macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0))
 @interface  MPSCNNNeuronELU : MPSCNNNeuron
 
 /*!
@@ -576,7 +578,7 @@ MPS_CLASS_AVAILABLE_STARTING(macos(10.13), ios(11.0), tvos(11.0))
 -(nonnull instancetype) initWithDevice: (nonnull id <MTLDevice>) device
                                      a: (float) a NS_DESIGNATED_INITIALIZER
     MPS_AVAILABLE_STARTING_BUT_DEPRECATED(  "Please use MPSCNNNeuron initWithDevice:neuronDescriptor.",
-                                      macos(10.13, 10.14), ios(10.0, 12.0), tvos(10.0, 12.0));
+                                      macos(10.13, 10.14), ios(10.0, 12.0), tvos(10.0, 12.0))  MPS_UNAVAILABLE(macCatalyst);
 
 /*
  * Use initWithDevice:a: instead
@@ -598,7 +600,7 @@ MPS_CLASS_AVAILABLE_STARTING(macos(10.13), ios(11.0), tvos(11.0))
  *              https://www.tensorflow.org/api_docs/cc/class/tensorflow/ops/relu6.
  *
  */
-MPS_CLASS_AVAILABLE_STARTING(macos(10.13), ios(11.0), tvos(11.0))
+MPS_CLASS_AVAILABLE_STARTING(macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0))
 @interface  MPSCNNNeuronReLUN : MPSCNNNeuron
 
 /*!
@@ -612,7 +614,7 @@ MPS_CLASS_AVAILABLE_STARTING(macos(10.13), ios(11.0), tvos(11.0))
                                      a: (float) a
                                      b: (float) b NS_DESIGNATED_INITIALIZER
         MPS_AVAILABLE_STARTING_BUT_DEPRECATED(  "Please use MPSCNNNeuron initWithDevice:neuronDescriptor.",
-                                      macos(10.13, 10.14), ios(10.0, 12.0), tvos(10.0, 12.0));
+                                      macos(10.13, 10.14), ios(10.0, 12.0), tvos(10.0, 12.0))  MPS_UNAVAILABLE(macCatalyst);
 
 /*
  * Use initWithDevice:a: instead
@@ -629,7 +631,7 @@ MPS_CLASS_AVAILABLE_STARTING(macos(10.13), ios(11.0), tvos(11.0))
  *              For each pixel, applies the following function: f(x) = (a * x + b) ^ c.
  *
  */
-MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3))
+MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3))
 @interface  MPSCNNNeuronPower : MPSCNNNeuron
 
 /*!
@@ -645,7 +647,7 @@ MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3))
                                      b: (float) b
                                      c: (float) c NS_DESIGNATED_INITIALIZER
     MPS_AVAILABLE_STARTING_BUT_DEPRECATED(  "Please use MPSCNNNeuron initWithDevice:neuronDescriptor.",
-                                      macos(10.13, 10.14), ios(10.0, 12.0), tvos(10.0, 12.0));
+                                      macos(10.13, 10.14), ios(10.0, 12.0), tvos(10.0, 12.0))  MPS_UNAVAILABLE(macCatalyst);
 
 /*
  * Use initWithDevice:a:b:c instead
@@ -663,7 +665,7 @@ MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3))
  *
  *              If the value of c is -1.0f, the base (c) is set to e.
  */
-MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3))
+MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3))
 @interface  MPSCNNNeuronExponential : MPSCNNNeuron
 
 /*!
@@ -679,7 +681,7 @@ MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3))
                                      b: (float) b
                                      c: (float) c NS_DESIGNATED_INITIALIZER
     MPS_AVAILABLE_STARTING_BUT_DEPRECATED(  "Please use MPSCNNNeuron initWithDevice:neuronDescriptor.",
-                                      macos(10.13, 10.14), ios(10.0, 12.0), tvos(10.0, 12.0));
+                                      macos(10.13, 10.14), ios(10.0, 12.0), tvos(10.0, 12.0))  MPS_UNAVAILABLE(macCatalyst);
 
 /*
  * Use initWithDevice:a:b:c instead
@@ -697,7 +699,7 @@ MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3))
  *
  *              If the value of c is -1.0f, the base (c) is set to e.
  */
-MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3))
+MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3))
 @interface  MPSCNNNeuronLogarithm : MPSCNNNeuron
 
 /*!
@@ -713,7 +715,7 @@ MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3))
                                      b: (float) b
                                      c: (float) c NS_DESIGNATED_INITIALIZER
     MPS_AVAILABLE_STARTING_BUT_DEPRECATED(  "Please use MPSCNNNeuron initWithDevice:neuronDescriptor.",
-                                      macos(10.13, 10.14), ios(10.0, 12.0), tvos(10.0, 12.0));
+                                      macos(10.13, 10.14), ios(10.0, 12.0), tvos(10.0, 12.0))  MPS_UNAVAILABLE(macCatalyst);
 
 /*
  * Use initWithDevice:a:b:c instead

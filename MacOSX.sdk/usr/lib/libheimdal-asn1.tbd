@@ -1,9 +1,8 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 5302394C-ECF0-3C3B-BA67-4830EEF3CC40' ]
-platform:        macosx
-install-name:    /usr/lib/libheimdal-asn1.dylib
-objc-constraint: none
+uuids:           [ 'x86_64: 51551E63-5AC6-30D3-B178-8BDA782C80EA', 'x86_64: 51551E63-5AC6-30D3-B178-8BDA782C80EA' ]
+platform:        zippered
+install-name:    '/usr/lib/libheimdal-asn1.dylib'
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ ___crashreporter_info__, __asn1_bmember_isset_bit, __asn1_bmember_put_bit, 

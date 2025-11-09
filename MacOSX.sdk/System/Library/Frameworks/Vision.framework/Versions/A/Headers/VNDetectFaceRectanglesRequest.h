@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 /*!
 	@brief A request that will detect faces in an image.
 
-	@details This request will generate VNFaceObservation objects with defined a boundingBox.
+	@details This request will generate VNFaceObservation objects with a defined boundingBox.
 */
 API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0))
 @interface VNDetectFaceRectanglesRequest : VNImageBasedRequest

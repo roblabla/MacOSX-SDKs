@@ -1,9 +1,8 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: F303B3D9-C6AD-30B9-9414-09DB34357E12' ]
-platform:        macosx
-install-name:    /usr/lib/libMobileGestalt.dylib
-objc-constraint: none
+uuids:           [ 'x86_64: 0004FCE7-5945-32BE-8CD5-06867AC5A8AD', 'x86_64: 0004FCE7-5945-32BE-8CD5-06867AC5A8AD' ]
+platform:        zippered
+install-name:    '/usr/lib/libMobileGestalt.dylib'
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _MGCancelNotifications, _MGCopyAnswer, _MGCopyAnswerWithError, 
@@ -11,9 +10,10 @@ exports:
                        _MGGetProductType, _MGGetSInt32Answer, _MGGetSInt64Answer, 
                        _MGGetStringAnswer, _MGIsDeviceOfType, _MGIsDeviceOneOfType, 
                        _MGIsQuestionValid, _MGRegisterForBulkUpdates, _MGRegisterForUpdates, 
-                       _MGSetAnswer, _MGSetLogHandler, __MGCacheValid, __MGClearInProcessCache, 
-                       __MGCopyDeviceDescription, __MGCopyIteratedDeviceDescription, 
-                       __MGGetFastPathLog, __MGIterateDevices, __MGLog, __MGPrintIteratedDeviceDescription, 
+                       _MGSetAnswer, _MGSetLogHandler, __MGCacheCopyValueForKey, 
+                       __MGCacheValid, __MGClearInProcessCache, __MGCopyDeviceDescription, 
+                       __MGCopyIteratedDeviceDescription, __MGGetFastPathLog, __MGIterateDevices, 
+                       __MGLog, __MGPrintIteratedDeviceDescription, __MGRebuildCache, 
                        __MGServerCopyAnswerWithError, __MGServerQuestionIsPlatform, 
                        __MGSetServer, __MGWaitForDevices, __MGWriteCache, _kMGQDiskUsageAmountDataAvailable, 
                        _kMGQDiskUsageAmountDataReserved, _kMGQDiskUsageAmountRestoreAvailable, 

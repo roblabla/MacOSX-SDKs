@@ -1,7 +1,7 @@
 /*
         NSPopUpButtonCell.h
         Application Kit
-        Copyright (c) 1997-2018, Apple Inc.
+        Copyright (c) 1997-2019, Apple Inc.
         All rights reserved.
 */
 
@@ -11,6 +11,7 @@
 #import <AppKit/NSMenuItem.h>
 
 NS_ASSUME_NONNULL_BEGIN
+API_UNAVAILABLE_BEGIN(ios)
 
 @class NSMenu;
 
@@ -20,27 +21,7 @@ typedef NS_ENUM(NSUInteger, NSPopUpArrowPosition) {
     NSPopUpArrowAtBottom = 2
 };
 
-@interface NSPopUpButtonCell : NSMenuItemCell <NSMenuItemValidation> {
-    /*All instance variables are private*/
-    @private
-    NSMenu *_menu APPKIT_IVAR;
-    int _selectedIndex APPKIT_IVAR;
-    struct __pbcFlags {
-        unsigned int pullsDown:1;
-        unsigned int preferredEdge:3;
-        unsigned int menuIsAttached:1;
-        unsigned int usesItemFromMenu:1;
-        unsigned int altersStateOfSelectedItem:1;
-        unsigned int decoding:1;
-        unsigned int arrowPosition:2;
-        unsigned int drawing:1;
-        unsigned int menuShouldBeUniquedAgainstMain:1;
-        unsigned int RESERVED:20;
-    } _pbcFlags APPKIT_IVAR;
-#if __LP64__
-    id _popupReserved __unused APPKIT_IVAR;
-#endif
-}
+@interface NSPopUpButtonCell : NSMenuItemCell <NSMenuItemValidation>
 
 - (instancetype)initTextCell:(NSString *)stringValue pullsDown:(BOOL)pullDown NS_DESIGNATED_INITIALIZER;
 - (instancetype)initWithCoder:(NSCoder *)coder NS_DESIGNATED_INITIALIZER;
@@ -118,4 +99,5 @@ typedef NS_ENUM(NSUInteger, NSPopUpArrowPosition) {
 /* Notifications */
 APPKIT_EXTERN NSNotificationName NSPopUpButtonCellWillPopUpNotification;
 
+API_UNAVAILABLE_END
 NS_ASSUME_NONNULL_END

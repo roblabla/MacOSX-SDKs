@@ -1,5 +1,5 @@
 /*	NSUserDefaults.h
-	Copyright (c) 1994-2018, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2019, Apple Inc. All rights reserved.
  */
 
 #import <Foundation/NSObject.h>
@@ -164,7 +164,7 @@ FOUNDATION_EXPORT NSString * const NSRegistrationDomain;
 - (void)removePersistentDomainForName:(NSString *)domainName;
 
 /*!
- -synchronize is deprecated and will be marked with the NS_DEPRECATED macro in a future release.
+ -synchronize is deprecated and will be marked with the API_DEPRECATED macro in a future release.
  
  -synchronize blocks the calling thread until all in-progress set operations have completed. This is no longer necessary. Replacements for previous uses of -synchronize depend on what the intent of calling synchronize was. If you synchronized...
  - ...before reading in order to fetch updated values: remove the synchronize call
@@ -209,35 +209,35 @@ FOUNDATION_EXPORT NSNotificationName const NSUbiquitousUserDefaultsCompletedInit
  */
 FOUNDATION_EXPORT NSNotificationName const NSUserDefaultsDidChangeNotification;
 
-#if (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE)) || TARGET_OS_WIN32
+#if TARGET_OS_OSX
 /* The following keys and their values are deprecated in Mac OS X 10.5 "Leopard". Developers should use NSLocale, NSDateFormatter and NSNumberFormatter to retrieve the values formerly returned by these keys.
  */
-FOUNDATION_EXPORT NSString * const NSWeekDayNameArray NS_DEPRECATED(10_0, 10_5, NA, NA);
-FOUNDATION_EXPORT NSString * const NSShortWeekDayNameArray NS_DEPRECATED(10_0, 10_5, NA, NA);
-FOUNDATION_EXPORT NSString * const NSMonthNameArray NS_DEPRECATED(10_0, 10_5, NA, NA);
-FOUNDATION_EXPORT NSString * const NSShortMonthNameArray NS_DEPRECATED(10_0, 10_5, NA, NA);
-FOUNDATION_EXPORT NSString * const NSTimeFormatString NS_DEPRECATED(10_0, 10_5, NA, NA);
-FOUNDATION_EXPORT NSString * const NSDateFormatString NS_DEPRECATED(10_0, 10_5, NA, NA);
-FOUNDATION_EXPORT NSString * const NSTimeDateFormatString NS_DEPRECATED(10_0, 10_5, NA, NA);
-FOUNDATION_EXPORT NSString * const NSShortTimeDateFormatString NS_DEPRECATED(10_0, 10_5, NA, NA);
-FOUNDATION_EXPORT NSString * const NSCurrencySymbol NS_DEPRECATED(10_0, 10_5, NA, NA);
-FOUNDATION_EXPORT NSString * const NSDecimalSeparator NS_DEPRECATED(10_0, 10_5, NA, NA);
-FOUNDATION_EXPORT NSString * const NSThousandsSeparator NS_DEPRECATED(10_0, 10_5, NA, NA);
-FOUNDATION_EXPORT NSString * const NSDecimalDigits NS_DEPRECATED(10_0, 10_5, NA, NA);
-FOUNDATION_EXPORT NSString * const NSAMPMDesignation NS_DEPRECATED(10_0, 10_5, NA, NA);
-FOUNDATION_EXPORT NSString * const NSHourNameDesignations NS_DEPRECATED(10_0, 10_5, NA, NA);
-FOUNDATION_EXPORT NSString * const NSYearMonthWeekDesignations NS_DEPRECATED(10_0, 10_5, NA, NA);
-FOUNDATION_EXPORT NSString * const NSEarlierTimeDesignations NS_DEPRECATED(10_0, 10_5, NA, NA);
-FOUNDATION_EXPORT NSString * const NSLaterTimeDesignations NS_DEPRECATED(10_0, 10_5, NA, NA);
-FOUNDATION_EXPORT NSString * const NSThisDayDesignations NS_DEPRECATED(10_0, 10_5, NA, NA);
-FOUNDATION_EXPORT NSString * const NSNextDayDesignations NS_DEPRECATED(10_0, 10_5, NA, NA);
-FOUNDATION_EXPORT NSString * const NSNextNextDayDesignations NS_DEPRECATED(10_0, 10_5, NA, NA);
-FOUNDATION_EXPORT NSString * const NSPriorDayDesignations NS_DEPRECATED(10_0, 10_5, NA, NA);
-FOUNDATION_EXPORT NSString * const NSDateTimeOrdering NS_DEPRECATED(10_0, 10_5, NA, NA);
-FOUNDATION_EXPORT NSString * const NSInternationalCurrencyString NS_DEPRECATED(10_0, 10_5, NA, NA);
-FOUNDATION_EXPORT NSString * const NSShortDateFormatString NS_DEPRECATED(10_0, 10_5, NA, NA);
-FOUNDATION_EXPORT NSString * const NSPositiveCurrencyFormatString NS_DEPRECATED(10_0, 10_5, NA, NA);
-FOUNDATION_EXPORT NSString * const NSNegativeCurrencyFormatString NS_DEPRECATED(10_0, 10_5, NA, NA);
+FOUNDATION_EXPORT NSString * const NSWeekDayNameArray API_DEPRECATED("", macos(10.0, 10.5)) API_UNAVAILABLE(ios, watchos, tvos);
+FOUNDATION_EXPORT NSString * const NSShortWeekDayNameArray API_DEPRECATED("", macos(10.0, 10.5)) API_UNAVAILABLE(ios, watchos, tvos);
+FOUNDATION_EXPORT NSString * const NSMonthNameArray API_DEPRECATED("", macos(10.0, 10.5)) API_UNAVAILABLE(ios, watchos, tvos);
+FOUNDATION_EXPORT NSString * const NSShortMonthNameArray API_DEPRECATED("", macos(10.0, 10.5)) API_UNAVAILABLE(ios, watchos, tvos);
+FOUNDATION_EXPORT NSString * const NSTimeFormatString API_DEPRECATED("", macos(10.0, 10.5)) API_UNAVAILABLE(ios, watchos, tvos);
+FOUNDATION_EXPORT NSString * const NSDateFormatString API_DEPRECATED("", macos(10.0, 10.5)) API_UNAVAILABLE(ios, watchos, tvos);
+FOUNDATION_EXPORT NSString * const NSTimeDateFormatString API_DEPRECATED("", macos(10.0, 10.5)) API_UNAVAILABLE(ios, watchos, tvos);
+FOUNDATION_EXPORT NSString * const NSShortTimeDateFormatString API_DEPRECATED("", macos(10.0, 10.5)) API_UNAVAILABLE(ios, watchos, tvos);
+FOUNDATION_EXPORT NSString * const NSCurrencySymbol API_DEPRECATED("", macos(10.0, 10.5)) API_UNAVAILABLE(ios, watchos, tvos);
+FOUNDATION_EXPORT NSString * const NSDecimalSeparator API_DEPRECATED("", macos(10.0, 10.5)) API_UNAVAILABLE(ios, watchos, tvos);
+FOUNDATION_EXPORT NSString * const NSThousandsSeparator API_DEPRECATED("", macos(10.0, 10.5)) API_UNAVAILABLE(ios, watchos, tvos);
+FOUNDATION_EXPORT NSString * const NSDecimalDigits API_DEPRECATED("", macos(10.0, 10.5)) API_UNAVAILABLE(ios, watchos, tvos);
+FOUNDATION_EXPORT NSString * const NSAMPMDesignation API_DEPRECATED("", macos(10.0, 10.5)) API_UNAVAILABLE(ios, watchos, tvos);
+FOUNDATION_EXPORT NSString * const NSHourNameDesignations API_DEPRECATED("", macos(10.0, 10.5)) API_UNAVAILABLE(ios, watchos, tvos);
+FOUNDATION_EXPORT NSString * const NSYearMonthWeekDesignations API_DEPRECATED("", macos(10.0, 10.5)) API_UNAVAILABLE(ios, watchos, tvos);
+FOUNDATION_EXPORT NSString * const NSEarlierTimeDesignations API_DEPRECATED("", macos(10.0, 10.5)) API_UNAVAILABLE(ios, watchos, tvos);
+FOUNDATION_EXPORT NSString * const NSLaterTimeDesignations API_DEPRECATED("", macos(10.0, 10.5)) API_UNAVAILABLE(ios, watchos, tvos);
+FOUNDATION_EXPORT NSString * const NSThisDayDesignations API_DEPRECATED("", macos(10.0, 10.5)) API_UNAVAILABLE(ios, watchos, tvos);
+FOUNDATION_EXPORT NSString * const NSNextDayDesignations API_DEPRECATED("", macos(10.0, 10.5)) API_UNAVAILABLE(ios, watchos, tvos);
+FOUNDATION_EXPORT NSString * const NSNextNextDayDesignations API_DEPRECATED("", macos(10.0, 10.5)) API_UNAVAILABLE(ios, watchos, tvos);
+FOUNDATION_EXPORT NSString * const NSPriorDayDesignations API_DEPRECATED("", macos(10.0, 10.5)) API_UNAVAILABLE(ios, watchos, tvos);
+FOUNDATION_EXPORT NSString * const NSDateTimeOrdering API_DEPRECATED("", macos(10.0, 10.5)) API_UNAVAILABLE(ios, watchos, tvos);
+FOUNDATION_EXPORT NSString * const NSInternationalCurrencyString API_DEPRECATED("", macos(10.0, 10.5)) API_UNAVAILABLE(ios, watchos, tvos);
+FOUNDATION_EXPORT NSString * const NSShortDateFormatString API_DEPRECATED("", macos(10.0, 10.5)) API_UNAVAILABLE(ios, watchos, tvos);
+FOUNDATION_EXPORT NSString * const NSPositiveCurrencyFormatString API_DEPRECATED("", macos(10.0, 10.5)) API_UNAVAILABLE(ios, watchos, tvos);
+FOUNDATION_EXPORT NSString * const NSNegativeCurrencyFormatString API_DEPRECATED("", macos(10.0, 10.5)) API_UNAVAILABLE(ios, watchos, tvos);
 #endif
 
 NS_ASSUME_NONNULL_END

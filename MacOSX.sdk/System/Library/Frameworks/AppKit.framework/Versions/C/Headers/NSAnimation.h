@@ -1,7 +1,7 @@
 /*
     NSAnimation.h
     Application Kit
-    Copyright (c) 2004-2018, Apple Inc.
+    Copyright (c) 2004-2019, Apple Inc.
     All rights reserved.
 */
 
@@ -9,8 +9,9 @@
 #import <Foundation/Foundation.h>
 
 NS_ASSUME_NONNULL_BEGIN
+API_UNAVAILABLE_BEGIN(ios)
 
-@class NSGraphicsContext, NSString, NSDisplayLink1;
+@class NSGraphicsContext, NSString;
 @protocol NSAnimationDelegate;
 
 typedef NS_ENUM(NSUInteger, NSAnimationCurve) {
@@ -31,42 +32,7 @@ typedef float NSAnimationProgress;
 APPKIT_EXTERN NSNotificationName NSAnimationProgressMarkNotification; // has single entry in user info dictionary
 APPKIT_EXTERN NSString * NSAnimationProgressMark; // NSNumber(float) with NSAnimationProgress
 
-@interface NSAnimation : NSObject <NSCopying, NSCoding> {
-  @private
-    NSTimeInterval _duration APPKIT_IVAR;
-    NSAnimationProgress _currentProgress APPKIT_IVAR;
-    float _framesPerSecond APPKIT_IVAR;
-    __weak id<NSAnimationDelegate> _delegate APPKIT_IVAR;
-    NSDisplayLink1 *_displayLink APPKIT_IVAR;
-    NSTimeInterval _startTime APPKIT_IVAR;
-    NSMutableArray *_progressMarks APPKIT_IVAR;
-    NSAnimation *_startAnimation APPKIT_IVAR;
-    NSAnimation *_stopAnimation APPKIT_IVAR;
-    int _nextProgressMark APPKIT_IVAR;
-    struct __aFlags {
-	unsigned int delegateAnimationShouldStart:1;
-	unsigned int delegateAnimationDidStop:1;
-	unsigned int delegateAnimationDidEnd:1;
-	unsigned int delegateAnimationValueForProgress:1;
-	unsigned int delegateAnimationDidReachProgressMark:1;
-	unsigned int animating:1;
-	unsigned int blocking:1;
-        unsigned int sendProgressAllTheTime:1;
-        unsigned int hasHandler:1;
-	unsigned int reserved:23;
-    } _aFlags APPKIT_IVAR;
-    struct __aSettings {
-	unsigned int animationCurve:8;
-	unsigned int animationBlockingMode:2;
-	unsigned int reserved:22;
-    } _aSettings APPKIT_IVAR;
-    NSRunLoop *_scheduledRunLoop APPKIT_IVAR;
-#ifndef __OBJC2__
-    NSInteger _reserved2 APPKIT_IVAR;
-    NSInteger _reserved3 APPKIT_IVAR;
-    NSInteger _reserved4 APPKIT_IVAR;
-#endif
-}
+@interface NSAnimation : NSObject <NSCopying, NSCoding>
 
 - (instancetype)initWithDuration:(NSTimeInterval)duration animationCurve:(NSAnimationCurve)animationCurve NS_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(NSCoder *)coder NS_DESIGNATED_INITIALIZER;
@@ -125,24 +91,7 @@ typedef NSString * NSViewAnimationEffectName NS_TYPED_ENUM;
 APPKIT_EXTERN NSViewAnimationEffectName NSViewAnimationFadeInEffect;
 APPKIT_EXTERN NSViewAnimationEffectName NSViewAnimationFadeOutEffect;
 
-@interface NSViewAnimation : NSAnimation {
-  @private
-    NSArray                *_viewAnimations APPKIT_IVAR;
-    id                      _viewAnimationInfo APPKIT_IVAR;
-    id                      _windowAnimationInfo APPKIT_IVAR;
-#ifndef __OBJC2__
-    NSUInteger                  _reserved4a APPKIT_IVAR;
-    NSUInteger                  _reserved4b APPKIT_IVAR;
-    NSUInteger                  _reserved4c APPKIT_IVAR;
-    struct __vaFlags {
-	unsigned int reserved:32;
-    }                       _vaFlags APPKIT_IVAR;    
-    NSUInteger                  _reserved5 APPKIT_IVAR;
-    NSUInteger                  _reserved6 APPKIT_IVAR;
-    NSUInteger                  _reserved7 APPKIT_IVAR;
-    NSUInteger                  _reserved8 APPKIT_IVAR;
-#endif
-}
+@interface NSViewAnimation : NSAnimation
 
 - (instancetype)initWithViewAnimations:(NSArray<NSDictionary<NSViewAnimationKey, id> *> *)viewAnimations;
 
@@ -152,21 +101,22 @@ APPKIT_EXTERN NSViewAnimationEffectName NSViewAnimationFadeOutEffect;
 
 typedef NSString * NSAnimatablePropertyKey NS_SWIFT_BRIDGED_TYPEDEF;
 
+API_AVAILABLE(macos(10.5), ios(10.13))
 @protocol NSAnimatablePropertyContainer
 
 /* Returns a proxy object for the receiver that can be used to initiate implied animation of property changes. An object's "animator" should be treated as if it was the object itself, and may be passed to any code that accepts the object as a parameter. Sending of KVC-compliant "set" messages to the proxy will trigger animation for automatically animated properties of its target object, if the active NSAnimationContext in the current thread has a duration value greater than zero, and an animation to use for the property key is found by the -animationForKey: search mechanism defined below. An object's automatically animated properties are those for which [theObject animationForKey:] finds and returns an CAAnimation instead of nil, often because [[theObject class] defaultAnimationForKey:] specifies a default animation for the key.
 
 It's perfectly valid to set a new value for a property for which an animation is currently in progress; this simply sets a new target value for that property, with animation to the new target proceeding from whatever current value the property has reached. An in-flight property animation can be stopped by setting a new value for the property with 0.0 as the surrounding NSAnimationContext's duration value.
 */
-- (instancetype)animator NS_AVAILABLE_MAC(10_5);
+- (instancetype)animator API_AVAILABLE(macos(10.5));
 
 /* An animatable property container's optional "animations" dictionary maps NSString keys to CAAnimation values. When an occurrence matching the key fires for the view, -animationForKey: first looks in this dictionary for an animation to execute in response. Typically, the key will name a property of the object whose value has just changed, but it may instead specify a special event trigger (NSAnimationTriggerOrderIn or NSAnimationTriggerOrderOut).
 */
-@property (readwrite, copy) NSDictionary<NSAnimatablePropertyKey, id> *animations NS_AVAILABLE_MAC(10_5);
+@property (readwrite, copy) NSDictionary<NSAnimatablePropertyKey, id> *animations API_AVAILABLE(macos(10.5));
 
 /* When the occurrence specified by "key" fires for an object, this method is consulted to find the animation, if any, that should be performed in response. Like its counterpart, -[CALayer actionForKey:], this method is a funnel point that defines the order in which the search for an animation proceeds, and is not one that clients would typically need to override. It first checks the receiver's "animations" dictionary, then falls back to  +defaultAnimationForKey: for the receiver's class.
 */
-- (nullable id)animationForKey:(NSAnimatablePropertyKey)key NS_AVAILABLE_MAC(10_5);
+- (nullable id)animationForKey:(NSAnimatablePropertyKey)key API_AVAILABLE(macos(10.5));
 
 /* As described above, -animationForKey: consults this class method when its search of an instance's "animations" dictionary doesn't turn up an animation to use for a given property change.
 
@@ -188,13 +138,14 @@ The full set of available CAAnimation classes can be found in QuartzCore/CAAnima
 }
 @end
 */
-+ (nullable id)defaultAnimationForKey:(NSAnimatablePropertyKey)key NS_AVAILABLE_MAC(10_5);
++ (nullable id)defaultAnimationForKey:(NSAnimatablePropertyKey)key API_AVAILABLE(macos(10.5));
 
 @end /* @protocol NSAnimatablePropertyContainer */
 
-APPKIT_EXTERN NSAnimatablePropertyKey NSAnimationTriggerOrderIn NS_AVAILABLE_MAC(10_5);
-APPKIT_EXTERN NSAnimatablePropertyKey NSAnimationTriggerOrderOut NS_AVAILABLE_MAC(10_5);
+APPKIT_EXTERN NSAnimatablePropertyKey NSAnimationTriggerOrderIn API_AVAILABLE(macos(10.5));
+APPKIT_EXTERN NSAnimatablePropertyKey NSAnimationTriggerOrderOut API_AVAILABLE(macos(10.5));
 
+API_UNAVAILABLE_END
 NS_ASSUME_NONNULL_END
 
 

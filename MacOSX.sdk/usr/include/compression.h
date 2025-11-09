@@ -105,15 +105,14 @@ extern "C" {
 */
 typedef enum {
 
-    /* Commonly-available encoders */
-    COMPRESSION_LZ4     = 0x100,       // available starting OS X 10.11, iOS 9.0
-    COMPRESSION_ZLIB    = 0x205,       // available starting OS X 10.11, iOS 9.0
-    COMPRESSION_LZMA    = 0x306,       // available starting OS X 10.11, iOS 9.0
+    /* Commonly-available algorithms */
+    COMPRESSION_LZ4      = 0x100,       // available starting OS X 10.11, iOS 9.0
+    COMPRESSION_ZLIB     = 0x205,       // available starting OS X 10.11, iOS 9.0
+    COMPRESSION_LZMA     = 0x306,       // available starting OS X 10.11, iOS 9.0
+    COMPRESSION_LZ4_RAW  = 0x101,       // available starting OS X 10.11, iOS 9.0
 
-    COMPRESSION_LZ4_RAW = 0x101,       // available starting OS X 10.11, iOS 9.0
-
-    /* Apple-specific encoders */
-    COMPRESSION_LZFSE    = 0x801,      // available starting OS X 10.11, iOS 9.0
+    /* Apple-specific algorithm */
+    COMPRESSION_LZFSE    = 0x801,       // available starting OS X 10.11, iOS 9.0
 
 } compression_algorithm;
 
@@ -400,9 +399,9 @@ __API_AVAILABLE(macos(10.11), ios(9.0));
  Binary OR of zero or more compression_stream_flags:
  
  COMPRESSION_STREAM_FINALIZE
- If set, indicates that no further input block will be added to the
- stream, and thus that the end of stream should be indicated if the input
- block is completely processed.
+ If set, indicates that no further input will be added to the stream, and
+ thus that the end of stream should be indicated if the input block is
+ completely processed.
 
  @discussion
  Processes the buffers described by the stream object until the source buffer
@@ -425,7 +424,18 @@ __API_AVAILABLE(macos(10.11), ios(9.0));
  
  COMPRESSION_STATUS_ERROR is returned if an error is encountered (if the
  encoded data is corrupted, for example).
- 
+
+ When decoding a valid stream, the end of stream will be detected from the contents
+ of the input, and COMPRESSION_STATUS_END will be returned in that case, even if
+ COMPRESSION_STREAM_FINALIZE is not set, or more input is provided.
+
+ When decoding a corrupted or truncated stream, if COMPRESSION_STREAM_FINALIZE is not
+ set to notify the decoder that no more input is coming, the decoder will not consume
+ or produce any data, and return COMPRESSION_STATUS_OK.  In that case, the client code
+ will call compression_stream_process again with the same state, entering an infinite loop.
+ To avoid this, it is strongly advised to always set COMPRESSION_STREAM_FINALIZE when
+ no more input is expected, for both encoding and decoding.
+
 */
 extern compression_status
 compression_stream_process(compression_stream * stream,

@@ -6,13 +6,14 @@
 //
 
 #import <CoreVideo/CVPixelBuffer.h>
-#import <CoreImage/CoreImage.h>
 
 #import <Vision/VNRequest.h>
 #import <Vision/VNRequestHandler.h>
 
 
 NS_ASSUME_NONNULL_BEGIN
+
+@class CIImage;
 
 
 /*!

@@ -68,7 +68,7 @@ AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 extern DRFolderRef
 DRFolderCreateReal(
 	const FSRef *				fsRef)
-AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+__OSX_DEPRECATED(10.2, 10.14, "Please use DRFolderCreateRealWithURL(const CFURLRef urlRef) instead");
 
 
 /*!

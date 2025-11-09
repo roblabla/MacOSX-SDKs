@@ -1,5 +1,5 @@
 /*	NSObject.h
-	Copyright (c) 1994-2018, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2019, Apple Inc. All rights reserved.
 */
 
 #include <TargetConditionals.h>
@@ -28,8 +28,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @protocol NSCoding
 
-- (void)encodeWithCoder:(NSCoder *)aCoder;
-- (nullable instancetype)initWithCoder:(NSCoder *)aDecoder; // NS_DESIGNATED_INITIALIZER
+- (void)encodeWithCoder:(NSCoder *)coder;
+- (nullable instancetype)initWithCoder:(NSCoder *)coder; // NS_DESIGNATED_INITIALIZER
 
 @end
 
@@ -50,12 +50,12 @@ NS_ASSUME_NONNULL_BEGIN
 + (NSInteger)version;
 + (void)setVersion:(NSInteger)aVersion;
 @property (readonly) Class classForCoder;
-- (nullable id)replacementObjectForCoder:(NSCoder *)aCoder;
-- (nullable id)awakeAfterUsingCoder:(NSCoder *)aDecoder NS_REPLACES_RECEIVER;
+- (nullable id)replacementObjectForCoder:(NSCoder *)coder;
+- (nullable id)awakeAfterUsingCoder:(NSCoder *)coder NS_REPLACES_RECEIVER;
 
 @end
 
-#if (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE))
+#if TARGET_OS_OSX
 @interface NSObject (NSDeprecatedMethods)
 
 + (void)poseAsClass:(Class)aClass API_DEPRECATED("Posing no longer supported", macos(10.0,10.5), ios(2.0,2.0), watchos(2.0,2.0), tvos(9.0,9.0))
@@ -117,8 +117,8 @@ NS_INLINE CF_RETURNS_RETAINED CFTypeRef _Nullable CFBridgingRetain(id _Nullable 
     return X ? CFRetain((CFTypeRef)X) : NULL;
 }
 
-// This function is intended for use while converting to ARC mode only.
-NS_INLINE id _Nullable CFBridgingRelease(CFTypeRef CF_CONSUMED _Nullable X) {
+// Casts a CoreFoundation object to an Objective-C object, transferring ownership to ARC (ie. no need to CFRelease to balance a prior +1 CFRetain count). NS_RETURNS_RETAINED is used to indicate that the Objective-C object returned has +1 retain count.  So the object is 'released' as far as CoreFoundation reference counting semantics are concerned, but retained (and in need of releasing) in the view of ARC. This function is intended for use while converting to ARC mode only.
+NS_INLINE id _Nullable CFBridgingRelease(CFTypeRef CF_CONSUMED _Nullable X) NS_RETURNS_RETAINED {
     return [(id)CFMakeCollectable(X) autorelease];
 }
 

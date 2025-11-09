@@ -1,8 +1,8 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 0B3040A6-7DD8-3C63-BECC-F0846DDC368C' ]
-platform:        macosx
-install-name:    /System/Library/PrivateFrameworks/IMFoundation.framework/Versions/A/IMFoundation
+uuids:           [ 'x86_64: 412B8F80-FC07-33B7-B759-6515296C357F', 'x86_64: 412B8F80-FC07-33B7-B759-6515296C357F' ]
+platform:        zippered
+install-name:    '/System/Library/PrivateFrameworks/IMFoundation.framework/Versions/A/IMFoundation'
 current-version: 800
 exports:         
   - archs:           [ x86_64 ]
@@ -253,10 +253,11 @@ exports:
                        _kFZListenerCapAccounts, _kFZListenerCapAppleAC, _kFZListenerCapAppleLegacyVC, 
                        _kFZListenerCapAppleVC, _kFZListenerCapAuxInput, _kFZListenerCapBuddyList, 
                        _kFZListenerCapChatCountsObserver, _kFZListenerCapChats, _kFZListenerCapDatabaseUpdateObserver, 
-                       _kFZListenerCapFileTransfers, _kFZListenerCapIDQueries, _kFZListenerCapManageStatus, 
-                       _kFZListenerCapMessageHistory, _kFZListenerCapModifyReadState, 
-                       _kFZListenerCapNotifications, _kFZListenerCapOnDemandChatRegistry, 
-                       _kFZListenerCapOneTimeCode, _kFZListenerCapSendMessages, _kFZListenerCapSentMessageObserver, 
+                       _kFZListenerCapEvenMoreTruncatedChatRegistry, _kFZListenerCapFileTransfers, 
+                       _kFZListenerCapIDQueries, _kFZListenerCapManageStatus, _kFZListenerCapMessageHistory, 
+                       _kFZListenerCapModifyReadState, _kFZListenerCapNotifications, 
+                       _kFZListenerCapOnDemandChatRegistry, _kFZListenerCapOneTimeCode, 
+                       _kFZListenerCapSendMessages, _kFZListenerCapSentMessageObserver, 
                        _kFZListenerCapSkipLastMessageLoad, _kFZListenerCapTruncatedChatRegistry, 
                        _kFZListenerCapVCInvitations, _kFZLocationLatitude, _kFZLocationLongitude, 
                        _kFZNowPlayingAlbum, _kFZNowPlayingArtist, _kFZNowPlayingGenre, 
@@ -348,15 +349,14 @@ exports:
                        IMLockdownManager, IMLogging, IMMacNotificationCenterManager, 
                        IMManualUpdater, IMMessageContext, IMMobileNetworkManager, 
                        IMMockURLResponse, IMMultiDict, IMMultiQueue, IMNetworkAvailability, 
-                       IMNetworkConnectionMonitor, IMNetworkManager, IMOrderedMutableDictionary, 
-                       IMPair, IMPingStatistics, IMPingTest, IMPowerAssertion, IMRGLog, 
-                       IMRKMessageResponseManager, IMRKResponse, IMReachability, 
-                       IMRemoteObject, IMRemoteObjectBroadcaster, IMRemoteURLConnection, 
-                       IMRemoteURLConnectionMockScheduler, IMScheduledUpdater, IMSystemMonitor, 
-                       IMSystemProxySettingsFetcher, IMTimer, IMTimingCollection, 
-                       IMURLResponseToPlist, IMUserDefaults, IMUserNotification, 
-                       IMUserNotificationCenter, IMWeakObjectCache, IMWeakReference, 
-                       NetworkChangeNotifier, OSLogHandleManager ]
+                       IMNetworkConnectionMonitor, IMOrderedMutableDictionary, IMPair, 
+                       IMPingStatistics, IMPingTest, IMPowerAssertion, IMRGLog, IMRKMessageResponseManager, 
+                       IMRKResponse, IMReachability, IMRemoteObject, IMRemoteObjectBroadcaster, 
+                       IMRemoteURLConnection, IMRemoteURLConnectionMockScheduler, 
+                       IMScheduledUpdater, IMSystemMonitor, IMSystemProxySettingsFetcher, 
+                       IMTimer, IMTimingCollection, IMURLResponseToPlist, IMUserDefaults, 
+                       IMUserNotification, IMUserNotificationCenter, IMWeakObjectCache, 
+                       IMWeakReference, NetworkChangeNotifier, OSLogHandleManager ]
     objc-ivars:      [ IMLocalObject._internal, IMMacNotificationCenterManager._center, 
                        IMMacNotificationCenterManager._connection, IMMacNotificationCenterManager._identifier, 
                        IMMacNotificationCenterManager._topics, IMManualUpdater._action, 

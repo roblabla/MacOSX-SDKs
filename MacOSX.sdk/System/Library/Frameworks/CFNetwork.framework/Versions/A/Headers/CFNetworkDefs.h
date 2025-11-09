@@ -18,6 +18,7 @@
 
 // To pick-up the CALLBACK_API_C definition.
 #include <ConditionalMacros.h>
+#include <CoreFoundation/CoreFoundation.h>
 
 /* Standard incantation for exporting/importing DLL symbols */
 #if defined(__WIN32__)

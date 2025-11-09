@@ -20,7 +20,8 @@ NS_ASSUME_NONNULL_BEGIN
  *    An instance of this class represents a possibly open-ended event
  *    during which the device was at the specified coordinate.
  */
-API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(watchos, tvos)
+CL_EXTERN
+API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(watchos, tvos, macos)
 @interface CLVisit : NSObject <NSSecureCoding, NSCopying>
 
 /*

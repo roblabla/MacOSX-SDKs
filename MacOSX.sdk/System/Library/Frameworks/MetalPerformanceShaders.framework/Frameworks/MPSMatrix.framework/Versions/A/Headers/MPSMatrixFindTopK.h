@@ -27,7 +27,7 @@
  *
  */
 
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), tvos(11.3))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3))
 @interface MPSMatrixFindTopK : MPSMatrixUnaryKernel
 
 /*! @property   sourceRows

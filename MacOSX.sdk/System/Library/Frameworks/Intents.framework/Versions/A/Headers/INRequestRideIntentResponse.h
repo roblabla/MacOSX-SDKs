@@ -2,7 +2,7 @@
 //  INRequestRideIntentResponse.h
 //  Intents
 //
-//  Copyright (c) 2016-2017 Apple Inc. All rights reserved.
+//  Copyright (c) 2016-2019 Apple Inc. All rights reserved.
 //
 
 #import <Intents/INIntentResponse.h>
@@ -20,6 +20,7 @@ typedef NS_ENUM(NSInteger, INRequestRideIntentResponseCode) {
     INRequestRideIntentResponseCodeFailureRequiringAppLaunchNoServiceInArea,
     INRequestRideIntentResponseCodeFailureRequiringAppLaunchServiceTemporarilyUnavailable,
     INRequestRideIntentResponseCodeFailureRequiringAppLaunchPreviousRideNeedsCompletion,
+    INRequestRideIntentResponseCodeFailureRequiringAppLaunchRideScheduledTooFar API_AVAILABLE(ios(12.0), watchos(5.0)),
 } API_AVAILABLE(ios(10.0), watchos(3.2)) API_UNAVAILABLE(macosx);
 
 NS_ASSUME_NONNULL_BEGIN

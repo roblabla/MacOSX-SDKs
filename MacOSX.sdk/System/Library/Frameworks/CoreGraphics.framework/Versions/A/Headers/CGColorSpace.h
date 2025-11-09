@@ -122,6 +122,25 @@ CG_AVAILABLE_STARTING(10.11, 9.0);
 CG_EXTERN const CFStringRef kCGColorSpaceDCIP3
 CG_AVAILABLE_STARTING(10.11, 9.0);
 
+CG_EXTERN const CFStringRef kCGColorSpaceExtendedLinearITUR_2020
+CG_AVAILABLE_STARTING(10.14.3, 12.3);
+
+CG_EXTERN const CFStringRef kCGColorSpaceExtendedLinearDisplayP3
+CG_AVAILABLE_STARTING(10.14.3, 12.3);
+
+CG_EXTERN const CFStringRef kCGColorSpaceITUR_2020_PQ_EOTF
+CG_AVAILABLE_STARTING(10.14, 12.0);
+
+CG_EXTERN const CFStringRef kCGColorSpaceDisplayP3_PQ_EOTF
+CG_AVAILABLE_STARTING(10.14.6, 13);
+
+CG_EXTERN const CFStringRef kCGColorSpaceDisplayP3_HLG
+CG_AVAILABLE_STARTING(10.14.6, 13);
+
+CG_EXTERN const CFStringRef kCGColorSpaceITUR_2020_HLG
+CG_AVAILABLE_STARTING(10.14.6, 13);
+
+
 /*  The name of the extended sRGB color space.
     The extended sRGB color space allows to specify colors beyond the range of [0.0, 1.0],
     while still preserving the colorimetry and encoding of sRGB (see above for more details).
@@ -357,6 +376,12 @@ CG_AVAILABLE_STARTING(10.12, 10.0);
 
 CG_EXTERN bool CGColorSpaceIsWideGamutRGB(CGColorSpaceRef)
 CG_AVAILABLE_STARTING(10.12, 10.0);
+
+/* Return true if color space is HDR */
+
+CG_EXTERN bool CGColorSpaceIsHDR(CGColorSpaceRef)
+CG_AVAILABLE_STARTING(10.15, 13.0);
+
 
 /* Return true if `space' can be used as a destination color space; false
  otherwise. */

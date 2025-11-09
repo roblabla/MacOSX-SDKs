@@ -1,7 +1,7 @@
 /*
         NSSpellProtocol.h
         Application Kit
-        Copyright (c) 1990-2018, Apple Inc.
+        Copyright (c) 1990-2019, Apple Inc.
         All rights reserved.
 */
 
@@ -12,6 +12,7 @@ SpellCheckable objects can respond to this method if they want to support not on
 */
  
 NS_ASSUME_NONNULL_BEGIN
+API_UNAVAILABLE_BEGIN(ios)
 
 @protocol NSChangeSpelling
 - (void)changeSpelling:(nullable id)sender;
@@ -25,4 +26,5 @@ SpellCheckable objects can respond to this method if they wish to be able to ign
 - (void)ignoreSpelling:(nullable id)sender;
 @end
 
+API_UNAVAILABLE_END
 NS_ASSUME_NONNULL_END

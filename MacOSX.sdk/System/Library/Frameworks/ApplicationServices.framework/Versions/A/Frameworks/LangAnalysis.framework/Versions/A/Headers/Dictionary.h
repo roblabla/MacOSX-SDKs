@@ -20,12 +20,6 @@
 #include <CoreServices/CoreServices.h>
 #endif
 
-#ifndef __AE__
-#include <AE/AE.h>
-#endif
-
-
-
 #include <AvailabilityMacros.h>
 
 #if PRAGMA_ONCE

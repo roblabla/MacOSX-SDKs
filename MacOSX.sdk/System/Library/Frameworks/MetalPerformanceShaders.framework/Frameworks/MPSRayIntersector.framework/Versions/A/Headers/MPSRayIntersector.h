@@ -17,7 +17,10 @@
 #ifndef __METAL_VERSION__
 #import <MPSRayIntersector/MPSAccelerationStructureGroup.h>
 #import <MPSRayIntersector/MPSTriangleAccelerationStructure.h>
+#import <MPSRayIntersector/MPSQuadrilateralAccelerationStructure.h>
 #import <MPSRayIntersector/MPSInstanceAccelerationStructure.h>
+#import <MPSRayIntersector/MPSSVGF.h>
+#import <MPSRayIntersector/MPSTemporalAA.h>
 
 /**
  * @brief Options for the MPSRayIntersector intersection type property
@@ -35,7 +38,7 @@ typedef NS_ENUM(NSUInteger, MPSIntersectionType) {
      * MPSIntersectionTypeNearest and is well suited to shadow and occlusion rays.
      */
     MPSIntersectionTypeAny = 1,
-} MPS_ENUM_AVAILABLE_STARTING(macos(10.14), ios(12.0), tvos(12.0));
+} MPS_ENUM_AVAILABLE_STARTING(macos(10.14), ios(12.0), macCatalyst(13.0), tvos(12.0));
 
 /**
  * @brief Options for the MPSRayIntersector triangle intersection test type property
@@ -52,29 +55,45 @@ typedef NS_ENUM(NSUInteger, MPSTriangleIntersectionTestType) {
      * than MPSTriangleIntersectionTestTypeDefault.
      */
     MPSTriangleIntersectionTestTypeWatertight = 1,
-} MPS_ENUM_AVAILABLE_STARTING(macos(10.14), ios(12.0), tvos(12.0));
+} MPS_ENUM_AVAILABLE_STARTING(macos(10.14), ios(12.0), macCatalyst(13.0), tvos(12.0));
 
 /**
  * @brief Options for the MPSRayIntersector bounding box intersection test type property
  */
 typedef NS_ENUM(NSUInteger, MPSBoundingBoxIntersectionTestType) {
     /**
-     * @brief Use the default ray/bounding box intersection test
+     * @brief Use the default MPSBoundingBoxIntersectionTestTypeAxisAligned ray/bounding box
+     * intersection test.
+     *
+     * Note: this option was equivalent to MPSBoundingBoxIntersectionTestTypeFast in
+     * macOS 10.14/iOS 12.0. This option was changed in macOS 10.15/iOS 13.0 to handle axis-aligned
+     * rays correctly by default. The old behavior can be restored by explicitly setting the
+     * intersection test type to MPSBoundingBoxIntersectionTestTypeFast on macOS 10.15/iOS 13.0
+     * and above.
      */
     MPSBoundingBoxIntersectionTestTypeDefault = 0,
 
     /**
-     * @brief The default ray/bounding box intersection test can generate false negatives for
+     * @brief This intersection test is potentially slower than
+     * MPSBoundingBoxIntersectionTestTypeFast but does not generate false negatives for
      * axis aligned rays (i.e. rays which have one or more components of their direction set to
      * zero). These rays often do not come up in practice due to perspective projections and
      * randomized ray distributions. However, synthetic ray distributions or orthographic
-     * projections can generate these rays. This intersection test properly reports intersections
-     * between axis aligned rays and bounding boxes, but may be slower than
-     * MPSBoundingBoxIntersectionTestTypeDefault. It may be faster to slightly perturb the ray
-     * direction and use the default intersection test type.
+     * projections can generate these rays. It may be faster to slightly perturb the ray
+     * direction and use the fast intersection test type.
      */
     MPSBoundingBoxIntersectionTestTypeAxisAligned = 1,
-} MPS_ENUM_AVAILABLE_STARTING(macos(10.14), ios(12.0), tvos(12.0));
+
+    /**
+     * @brief This intersection test is potentially faster than
+     * MPSBoundingBoxIntersectionTestTypeAxisAligned but can generate false negatives for
+     * axis aligned rays (i.e. rays which have one or more components of their direction set to
+     * zero). These rays often do not come up in practice due to perspective projections and
+     * randomized ray distributions. However, synthetic ray distributions or orthographic
+     * projections can generate these rays.
+     */
+    MPSBoundingBoxIntersectionTestTypeFast MPS_ENUM_AVAILABLE_STARTING(macos(10.15), ios(13.0), macCatalyst(13.0), tvos(13.0)) = 2,
+} MPS_ENUM_AVAILABLE_STARTING(macos(10.14), ios(12.0), macCatalyst(13.0), tvos(12.0));
 
 /**
  * @brief Options for the MPSRayIntersector ray mask options property
@@ -94,7 +113,7 @@ typedef NS_OPTIONS(NSUInteger, MPSRayMaskOptions) {
      * @brief Enable instance masks
      */
     MPSRayMaskOptionInstance = 2,
-} MPS_ENUM_AVAILABLE_STARTING(macos(10.14), ios(12.0), tvos(12.0));
+} MPS_ENUM_AVAILABLE_STARTING(macos(10.14), ios(12.0), macCatalyst(13.0), tvos(12.0));
 
 /**
  * @brief Options for the MPSRayIntersector ray data type property
@@ -114,7 +133,12 @@ typedef NS_ENUM(NSUInteger, MPSRayDataType) {
      * @brief Use the MPSRayOriginMaxDistanceDirectionMask struct type
      */
     MPSRayDataTypeOriginMaskDirectionMaxDistance = 2,
-} MPS_ENUM_AVAILABLE_STARTING(macos(10.14), ios(12.0), tvos(12.0));
+
+    /**
+     * @brief Use the MPSPackedRayOriginDirection struct type
+     */
+    MPSRayDataTypePackedOriginDirection MPS_ENUM_AVAILABLE_STARTING(macos(10.15), ios(13.0), macCatalyst(13.0), tvos(13.0)) = 3,
+} MPS_ENUM_AVAILABLE_STARTING(macos(10.14), ios(12.0), macCatalyst(13.0), tvos(12.0));
 
 /**
  * @brief Intersection data type options
@@ -144,7 +168,64 @@ typedef NS_ENUM(NSUInteger, MPSIntersectionDataType) {
      * @brief Use the DistancePrimitiveIndexInstanceIndexCoordinates struct type
      */
     MPSIntersectionDataTypeDistancePrimitiveIndexInstanceIndexCoordinates = 4,
-} MPS_ENUM_AVAILABLE_STARTING(macos(10.14), ios(12.0), tvos(12.0));
+} MPS_ENUM_AVAILABLE_STARTING(macos(10.14), ios(12.0), macCatalyst(13.0), tvos(12.0));
+
+/**
+ * @brief Options for the MPSRayIntersector ray mask operator property
+ */
+typedef NS_ENUM(NSUInteger, MPSRayMaskOperator) {
+    /**
+     * @brief Accept the intersection if (primitive mask & ray mask) != 0.
+     */
+    MPSRayMaskOperatorAnd = 0,
+
+    /**
+     * @brief Accept the intersection if ~(primitive mask & ray mask) != 0.
+     */
+    MPSRayMaskOperatorNotAnd = 1,
+
+    /**
+     * @brief Accept the intersection if (primitive mask | ray mask) != 0.
+     */
+    MPSRayMaskOperatorOr = 2,
+
+    /**
+     * @brief Accept the intersection if ~(primitive mask | ray mask) != 0.
+     */
+    MPSRayMaskOperatorNotOr = 3,
+
+    /**
+     * @brief Accept the intersection if (primitive mask ^ ray mask) != 0. Note that this is
+     * equivalent to the "!=" operator.
+     */
+    MPSRayMaskOperatorXor = 4,
+
+    /**
+     * @brief Accept the intersection if ~(primitive mask ^ ray mask) != 0. Note that this is
+     * equivalent to the "==" operator.
+     */
+    MPSRayMaskOperatorNotXor = 5,
+
+    /**
+     * @brief Accept the intersection if (primitive mask < ray mask) != 0.
+     */
+    MPSRayMaskOperatorLessThan = 6,
+
+    /**
+     * @brief Accept the intersection if (primitive mask <= ray mask) != 0.
+     */
+    MPSRayMaskOperatorLessThanOrEqualTo = 7,
+
+    /**
+     * @brief Accept the intersection if (primitive mask > ray mask) != 0.
+     */
+    MPSRayMaskOperatorGreaterThan = 8,
+
+    /**
+     * @brief Accept the intersection if (primitive mask >= ray mask) != 0.
+     */
+    MPSRayMaskOperatorGreaterThanOrEqualTo = 9,
+} MPS_ENUM_AVAILABLE_STARTING(macos(10.15), ios(13.0), macCatalyst(13.0), tvos(13.0));
 
 /**
  * @class MPSRayIntersector
@@ -496,12 +577,12 @@ typedef NS_ENUM(NSUInteger, MPSIntersectionDataType) {
  *       MPSKernelOptionsSkipAPIValidation.
  *
  *     - Choose the minimal ray and intersection data types for your use case. Loading and storing
- *       extra values such as ray masks or triangle indices can reduce raytracing performance, so
+ *       extra values such as ray masks or primitive indices can reduce raytracing performance, so
  *       use a simpler data type if they are not needed. For example, camera rays typically have no
  *       need for a maximum distance field, while shadow rays do.
  *
- *     - Use MPSTriangleIntersectionTestTypeAny when possible: this is typically much faster than
- *       MPSTriangleIntersectionTestTypeNearest and can be used when you only need to check for
+ *     - Use MPSIntersectionTestTypeAny when possible: this is typically much faster than
+ *       MPSIntersectionTestTypeNearest and can be used when you only need to check for
  *       binary visibility between two points such as shadow and ambient occlusion rays. Combine
  *       this with MPSRayDataTypeDistance to minimize memory bandwidth usage.
  *
@@ -532,38 +613,41 @@ typedef NS_ENUM(NSUInteger, MPSIntersectionDataType) {
  * intersection tests from multiple threads result in undefined behavior. Instead, multiple
  * threads should copy or create their own MPSRayIntersectors.
  */
-MPS_CLASS_AVAILABLE_STARTING(macos(10.14), ios(12.0), tvos(12.0))
+MPS_CLASS_AVAILABLE_STARTING(macos(10.14), ios(12.0), macCatalyst(13.0), tvos(12.0))
 @interface MPSRayIntersector : MPSKernel <NSSecureCoding, NSCopying>
 
 /**
- * @brief Whether to ignore intersections between rays and back-facing or front-facing triangles.
- * Defaults to MTLCullModeNone.
+ * @brief Whether to ignore intersections between rays and back-facing or front-facing triangles
+ * or quadrilaterals. Defaults to MTLCullModeNone.
  *
- * @discussion A triangle is back-facing if its normal points in the same direction as a ray and
- * front-facing if its normal points in the opposite direction as a ray. If the cull mode is set to
- * MTLCullModeBack, then back-facing triangles which be ignored. If the cull mode is set to
- * MTLCullModeFront, then front-facing triangles will be ignored. Otherwise, if the cull mode is
- * set to MTLCullModeNone, no triangles will be ignored. The front and back faces can be swapped
- * using the frontFacingWinding property.
+ * @discussion A triangle or quadrilateral is back-facing if its normal points in the same
+ * direction as a ray and front-facing if its normal points in the opposite direction as a ray. If
+ * the cull mode is set to MTLCullModeBack, then back-facing triangles and quadrilaterals will be
+ * ignored. If the cull mode is set to MTLCullModeFront, then front-facing triangles and
+ * quadrilaterals will be ignored. Otherwise, if the cull mode is set to MTLCullModeNone, no
+ * triangles or quadrilaterals will be ignored. The front and back faces can be swapped using the
+ * frontFacingWinding property.
  *
  * Backface culling is necessary for some scenes but can reduce raytracing performance.
  */
 @property (nonatomic) MTLCullMode cullMode;
 
 /**
- * @brief Winding order used to determine which direction a triangle's normal points when back face
- * or front face culling is enabled. Defaults to MTLWindingClockwise.
+ * @brief Winding order used to determine which direction a triangle or quadrilateral's normal
+ * points when back face or front face culling is enabled. Defaults to MTLWindingClockwise.
  *
- * @discussion If the front face winding is set to MTLWindingClockwise, the triangle normal is
- * considered to point towards the direction where the vertices are in clockwise order when
- * viewed from that direction. Otherwise, if the front facing winding is set to
- * MTLWindingCounterClockwise, the triangle normal is considered to point in the opposite
- * direction.
+ * @discussion If the front face winding is set to MTLWindingClockwise, the triangle or
+ * quadrilateral normal is considered to point towards the direction where the vertices are in
+ * clockwise order when viewed from that direction. Otherwise, if the front facing winding is set
+ * to MTLWindingCounterClockwise, the triangle or quadrilateral normal is considered to point in
+ * the opposite direction.
  */
 @property (nonatomic) MTLWinding frontFacingWinding;
 
 /**
  * @brief Ray/triangle intersection test type. Defaults to MPSTriangleIntersectionTestTypeDefault.
+ * Quads are broken into two triangles for intersection testing, so this property also applies to
+ * quadrilateral intersections.
  */
 @property (nonatomic) MPSTriangleIntersectionTestType triangleIntersectionTestType;
 
@@ -579,7 +663,8 @@ MPS_CLASS_AVAILABLE_STARTING(macos(10.14), ios(12.0), tvos(12.0))
  * @discussion If MPSRayMaskOptionPrimitive or MPSRayMaskOptionInstance is enabled, each ray and
  * primitive and/or instance is associated with a 32 bit unsigned integer mask. Before checking
  * for intersection between a ray and a primitive or instance, the corresponding masks are
- * logically AND-ed together. If the result is zero, the intersection is skipped.
+ * compared using the ray mask operator defined by the rayMaskOperator property. If the result is
+ * zero, the intersection is skipped.
  *
  * This can be used to make certain primitives or instances invisible to certain rays. For example,
  * objects can be grouped into layers and their visibility can be toggled by modifying the ray
@@ -590,6 +675,12 @@ MPS_CLASS_AVAILABLE_STARTING(macos(10.14), ios(12.0), tvos(12.0))
  * Enabling this option may reduce raytracing performance.
  */
 @property (nonatomic) MPSRayMaskOptions rayMaskOptions;
+
+/**
+ * @brief The operator to apply to determine whether to accept an intersection between a ray and a
+ * primitive or instance. Defaults to MPSRayMaskOperatorAnd.
+ */
+@property (nonatomic) MPSRayMaskOperator rayMaskOperator MPS_AVAILABLE_STARTING(macos(10.15), ios(13.0), macCatalyst(13.0), tvos(13.0));
 
 /**
  * @brief Offset, in bytes, between consecutive rays in the ray buffer. Defaults to 0, indicating
@@ -621,6 +712,18 @@ MPS_CLASS_AVAILABLE_STARTING(macos(10.14), ios(12.0), tvos(12.0))
  * MPSIntersectionDataTypeDistancePrimitiveIndexCoordinates.
  */
 @property (nonatomic) MPSIntersectionDataType intersectionDataType;
+
+/**
+ * @brief Ray index data type. Defaults to MPSDataTypeUInt32. Only MPSDataTypeUInt16 and
+ * MPSDataTypeUInt32 are supported.
+ */
+@property (nonatomic) MPSDataType rayIndexDataType MPS_AVAILABLE_STARTING(macos(10.15), ios(13.0), macCatalyst(13.0), tvos(13.0));
+
+/**
+ * @brief Global ray mask. Defaults to 0xFFFFFFFF. This value will be logically AND-ed with the
+ * per-ray mask if the ray data type contains a mask.
+ */
+@property (nonatomic) unsigned int rayMask MPS_AVAILABLE_STARTING(macos(10.15), ios(13.0), macCatalyst(13.0), tvos(13.0));
 
 - (nonnull instancetype)init NS_UNAVAILABLE;
 
@@ -727,6 +830,147 @@ MPS_CLASS_AVAILABLE_STARTING(macos(10.14), ios(12.0), tvos(12.0))
                      rayCountBufferOffset:(NSUInteger)rayCountBufferOffset
                     accelerationStructure:(nonnull MPSAccelerationStructure *)accelerationStructure
                     MPS_SWIFT_NAME(encodeIntersection(commandBuffer:intersectionType:rayBuffer:rayBufferOffset:intersectionBuffer:intersectionBufferOffset:rayCountBuffer:rayCountBufferOffset:accelerationStructure:));
+
+/**
+ * @brief Schedule intersection tests between rays and an acceleration structure
+ *
+ * @param commandBuffer            Command buffer to schedule intersection testing in
+ * @param intersectionType         Which type of intersection to test for
+ * @param rayBuffer                Buffer containing rays to intersect against the acceleration
+ *                                 structure. The ray data type is defined by the rayDataType
+ *                                 and rayStride properties.
+ * @param rayBufferOffset          Offset, in bytes, into the ray buffer. Must be a multiple of
+ *                                 the ray stride.
+ * @param rayIndexBuffer           Buffer containing ray indices. Each index references a ray in
+ *                                 the ray buffer. The ray index data type is controlled by the
+ *                                 rayIndexDataType property.
+ * @param rayIndexBufferOffset     Offset, in bytes, into the ray index buffer. Must be a multiple
+ *                                 of the stride of the ray index type.
+ * @param intersectionBuffer       Buffer to store intersection in. Intersections are stored in
+ *                                 the same order as the ray buffer, one intersection per ray.
+ *                                 The intersection data type is defined by the
+ *                                 intersectionDataType and intersectionStride properties.
+ * @param intersectionBufferOffset Offset, in bytes, into the intersection buffer. Must be a
+ *                                 multiple of the intersection stride.
+ * @param rayIndexCount            Number of ray indices
+ * @param accelerationStructure    Acceleration structure to test against
+ */
+- (void)encodeIntersectionToCommandBuffer:(nonnull id <MTLCommandBuffer>)commandBuffer
+                         intersectionType:(MPSIntersectionType)intersectionType
+                                rayBuffer:(nonnull id <MTLBuffer>)rayBuffer
+                          rayBufferOffset:(NSUInteger)rayBufferOffset
+                           rayIndexBuffer:(nonnull id <MTLBuffer>)rayIndexBuffer
+                     rayIndexBufferOffset:(NSUInteger)rayIndexBufferOffset
+                       intersectionBuffer:(nonnull id <MTLBuffer>)intersectionBuffer
+                 intersectionBufferOffset:(NSUInteger)intersectionBufferOffset
+                            rayIndexCount:(NSUInteger)rayIndexCount
+                    accelerationStructure:(nonnull MPSAccelerationStructure *)accelerationStructure
+    MPS_SWIFT_NAME(encodeIntersection(commandBuffer:intersectionType:rayBuffer:rayBufferOffset:rayIndexBuffer:rayIndexBufferOffset:intersectionBuffer:intersectionBufferOffset:rayIndexCount:accelerationStructure:))
+    MPS_AVAILABLE_STARTING(macos(10.15), ios(13.0), macCatalyst(13.0), tvos(13.0));
+
+/**
+ * @brief Schedule intersection tests between rays and an acceleration structure with a ray count
+ * provided in a buffer
+ *
+ * @param commandBuffer             Command buffer to schedule intersection testing in
+ * @param intersectionType          Which type of intersection to test for
+ * @param rayBuffer                 Buffer containing rays to intersect against the acceleration
+ *                                  structure. The ray data type is defined by the rayDataType
+ *                                  and rayStride properties.
+ * @param rayBufferOffset           Offset, in bytes, into the ray buffer. Must be a multiple of
+ *                                  the ray stride.
+ * @param rayIndexBuffer            Buffer containing ray indices. Each index references a ray in
+ *                                  the ray buffer. The ray index data type is controlled by the
+ *                                  rayIndexDataType property.
+ * @param rayIndexBufferOffset      Offset, in bytes, into the ray index buffer. Must be a multiple
+ *                                  of the stride of the ray index type.
+ * @param intersectionBuffer        Buffer to store intersection in. Intersections are stored in
+ *                                  the same order as the ray buffer, one intersection per ray.
+ *                                  The intersection data type is defined by the
+ *                                  intersectionDataType and intersectionStride properties.
+ * @param intersectionBufferOffset  Offset, in bytes, into the intersection buffer. Must be a
+ *                                  multiple of the intersection stride.
+ * @param rayIndexCountBuffer       Buffer containing number of rays as a 32 bit unsigned integer
+ * @param rayIndexCountBufferOffset Offset, in bytes, into the ray count buffer. Must be a multiple
+ *                                  of 4 bytes.
+ * @param accelerationStructure     Acceleration structure to test against
+ */
+- (void)encodeIntersectionToCommandBuffer:(nonnull id <MTLCommandBuffer>)commandBuffer
+                         intersectionType:(MPSIntersectionType)intersectionType
+                                rayBuffer:(nonnull id <MTLBuffer>)rayBuffer
+                          rayBufferOffset:(NSUInteger)rayBufferOffset
+                           rayIndexBuffer:(nonnull id <MTLBuffer>)rayIndexBuffer
+                     rayIndexBufferOffset:(NSUInteger)rayIndexBufferOffset
+                       intersectionBuffer:(nonnull id <MTLBuffer>)intersectionBuffer
+                 intersectionBufferOffset:(NSUInteger)intersectionBufferOffset
+                      rayIndexCountBuffer:(nonnull id <MTLBuffer>)rayIndexCountBuffer
+                rayIndexCountBufferOffset:(NSUInteger)rayIndexCountBufferOffset
+                    accelerationStructure:(nonnull MPSAccelerationStructure *)accelerationStructure
+                    MPS_SWIFT_NAME(encodeIntersection(commandBuffer:intersectionType:rayBuffer:rayBufferOffset:rayIndexBuffer:rayIndexBufferOffset:intersectionBuffer:intersectionBufferOffset:rayIndexCountBuffer:rayIndexCountBufferOffset:accelerationStructure:))
+                    MPS_AVAILABLE_STARTING(macos(10.15), ios(13.0), macCatalyst(13.0), tvos(13.0));
+
+/**
+ * @brief Schedule intersection tests between rays and an acceleration structure, where rays and
+ * loaded from a texture and intersections are stored into a texture.
+ *
+ * This is convenient for hybrid rendering applications which produce ray data from a fragment
+ * shader. The ray and intersection texture must be 2D array textures. Ray data must be packed into
+ * consecutive channels and slices of the ray texture. Intersection data will be packed the same
+ * way. The ray and intersection data types are defined by the rayDataType and intersectionDataType
+ * properties. The rayStride and intersectionStride properties are ignored. Channels and slices
+ * beyond the required number are ignored when reading from the ray texture. Channels and slices
+ * beyond the required number are undefined when writing to the intersection texture.
+ *
+ * For example, if the ray data type is MPSRayDataTypeOriginMaskDirectionMaxDistance, the ray
+ * texture must have pixel format MTLPixelFormatRGBA32Float and at least two array slices, packed
+ * as follows:
+ *
+ *     @code
+ *     tex.write(float4(ray.position, as_type<float>(ray.mask)), pixel, 0); // slice 0
+ *     tex.write(float4(ray.direction, ray.maxDistance), pixel, 1);         // slice 1
+ *     @end
+ *
+ * If the intersection data type is MPSIntersectionDataTypeDistance, the intersection texture may
+ * have pixel format MTLPixelFormatR32Float with just a single channel and one array slice, and
+ * should be unpacked as follows:
+ *
+ *     @code
+ *     float distance = tex.read(pixel, 0).x;
+ *     @end
+ *
+ * On the other hand, if the intersection data type is 
+ * MPSIntersectionDistancePrimitiveIndexInstanceIndexCoordinates, the intersection texture must
+ * have pixel format MTLPixelFormatRGBA32Float and at least two slices:
+ *
+ *     @code
+ *     float3 f0 = tex.read(pixel, 0);
+ *
+ *     float distance = f0.x;
+ *     unsigned int primitiveIndex = as_type<unsigned int>(f0.y);
+ *     unsigned int instanceIndex = as_type<unsigned int>(f0.z);
+ *     // w component is padding for this intersection data type
+ *
+ *     float2 coordinates = tex.read(pixel, 1).xy;
+ *     @end
+ *
+ * @param commandBuffer            Command buffer to schedule intersection testing in
+ * @param intersectionType         Which type of intersection to test for
+ * @param rayTexture               A 2D array texture containing rays to intersect against the
+ *                                 acceleration structure. The ray data type is defined by the
+ *                                 rayDataType property.
+ * @param intersectionTexture      Texture to store intersection in. Intersections are stored in
+ *                                 the same position as the ray texture, one intersection per ray.
+ *                                 The intersection data type is defined by the
+ *                                 intersectionDataType property.
+ * @param accelerationStructure    Acceleration structure to test against
+ */
+- (void)encodeIntersectionToCommandBuffer:(nonnull id <MTLCommandBuffer>)commandBuffer
+                         intersectionType:(MPSIntersectionType)intersectionType
+                               rayTexture:(nonnull id <MTLTexture>)rayTexture
+                      intersectionTexture:(nonnull id <MTLTexture>)intersectionTexture
+                    accelerationStructure:(nonnull MPSAccelerationStructure *)accelerationStructure
+    MPS_SWIFT_NAME(encodeIntersection(commandBuffer:intersectionType:rayTexture:intersectionTexture:accelerationStructure:))
+    MPS_AVAILABLE_STARTING(macos(10.15), ios(13.0), macCatalyst(13.0), tvos(13.0));
 
 @end
 #endif

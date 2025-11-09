@@ -59,7 +59,7 @@ API_AVAILABLE(macos(10.11), ios(8.0))
  It is not valid to invoke this method on buffers of other storage modes.
  @param range The range of bytes that have been modified.
  */
-- (void)didModifyRange:(NSRange)range API_AVAILABLE(macos(10.11)) API_UNAVAILABLE(ios);
+- (void)didModifyRange:(NSRange)range API_AVAILABLE(macos(10.11), macCatalyst(13.0)) API_UNAVAILABLE(ios);
 
 /*!
  @method newTextureWithDescriptor:offset:bytesPerRow:
@@ -82,6 +82,18 @@ API_AVAILABLE(macos(10.11), ios(8.0))
  */
 - (void)removeAllDebugMarkers API_AVAILABLE(macos(10.12), ios(10.0));
 
+/*!
+ @property remoteStorageBuffer
+ @abstract For Metal buffer objects that are remote views, this returns the buffer associated with the storage on the originating device.
+ */
+@property (nullable, readonly) id<MTLBuffer> remoteStorageBuffer API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios);
+
+/*!
+ @method newRemoteBufferViewForDevice:
+ @abstract On Metal devices that support peer to peer transfers, this method is used to create a remote buffer view on another device
+ within the peer group.  The receiver must use MTLStorageModePrivate or be backed by an IOSurface.
+ */
+- (nullable id <MTLBuffer>) newRemoteBufferViewForDevice:(id <MTLDevice>)device API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios);
 
 @end
 NS_ASSUME_NONNULL_END

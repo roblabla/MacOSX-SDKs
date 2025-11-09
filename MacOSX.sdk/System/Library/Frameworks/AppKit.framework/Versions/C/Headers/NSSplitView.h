@@ -1,7 +1,7 @@
 /*
 	NSSplitView.h
 	Application Kit
-	Copyright (c) 1994-2018, Apple Inc.
+	Copyright (c) 1994-2019, Apple Inc.
 	All rights reserved.
 */
 
@@ -9,6 +9,7 @@
 #import <AppKit/NSLayoutConstraint.h>
 
 NS_ASSUME_NONNULL_BEGIN
+API_UNAVAILABLE_BEGIN(ios)
 
 typedef NSString * NSSplitViewAutosaveName NS_SWIFT_BRIDGED_TYPEDEF;
 
@@ -18,14 +19,11 @@ typedef NSString * NSSplitViewAutosaveName NS_SWIFT_BRIDGED_TYPEDEF;
 typedef NS_ENUM(NSInteger, NSSplitViewDividerStyle) {
     NSSplitViewDividerStyleThick = 1,
     NSSplitViewDividerStyleThin = 2,
-    NSSplitViewDividerStylePaneSplitter NS_ENUM_AVAILABLE_MAC(10_6) = 3,
-} NS_ENUM_AVAILABLE_MAC(10_5);
+    NSSplitViewDividerStylePaneSplitter API_AVAILABLE(macos(10.6)) = 3,
+} API_AVAILABLE(macos(10.5));
 
 
-@interface NSSplitView : NSView {
-    @private
-    id _variables APPKIT_IVAR;
-}
+@interface NSSplitView : NSView
 
 /* Set or get whether the long axes of a split view's dividers are oriented up-and-down (YES) or left-and-right (NO).
 */
@@ -34,11 +32,11 @@ typedef NS_ENUM(NSInteger, NSSplitViewDividerStyle) {
 
 /* What kind of divider to use. NSSplitViewThickDividerStyle is the default.
 */
-@property NSSplitViewDividerStyle dividerStyle NS_AVAILABLE_MAC(10_5);
+@property NSSplitViewDividerStyle dividerStyle API_AVAILABLE(macos(10.5));
 
 /* The name to use when autosaving the positions of dividers, and whether or not subviews are collapsed, to preferences. If this value is nil or the string is empty no autosaving is done.
 */
-@property (nullable, copy) NSSplitViewAutosaveName autosaveName NS_AVAILABLE_MAC(10_5);
+@property (nullable, copy) NSSplitViewAutosaveName autosaveName API_AVAILABLE(macos(10.5));
 
 
 /* Set or get the delegate of the split view. The delegate will be sent NSSplitViewDelegate messages to which it responds. 
@@ -53,7 +51,7 @@ typedef NS_ENUM(NSInteger, NSSplitViewDividerStyle) {
 
 /* Return the color of the dividers that the split view is drawing between subviews. The default implementation of this method returns [NSColor clearColor] for the thick divider style. It will also return [NSColor clearColor] for the thin divider style when the split view is in a textured window. All other thin dividers are drawn with a color that looks good between two white panes. You can override this method to change the color of dividers.
 */
-@property (readonly, copy) NSColor *dividerColor NS_AVAILABLE_MAC(10_5);
+@property (readonly, copy) NSColor *dividerColor API_AVAILABLE(macos(10.5));
 
 
 /* Return the thickness of the dividers that the split view is drawing between subviews. The default implementation returns a value that depends on the divider style. You can override this method to change the size of dividers.
@@ -74,19 +72,21 @@ typedef NS_ENUM(NSInteger, NSSplitViewDividerStyle) {
 
 /* Get the minimum or maximum possible position of a divider. The position is "possible" in that it is dictated by the bounds of this view and the current position of other dividers. ("Allowable" positions are those that result from letting the delegate apply constraints to the possible positions.) You can invoke these methods to determine the range of values that can be usefully passed to -setPosition:ofDividerAtIndex:. You can also invoke them from delegate methods like -splitView:constrainSplitPosition:ofSubviewAt: to implement relatively complex behaviors that depend on the current state of the split view. The results of invoking these methods when -adjustSubviews has not been invoked recently enough for the subview frames to be valid are undefined.
 */
-- (CGFloat)minPossiblePositionOfDividerAtIndex:(NSInteger)dividerIndex NS_AVAILABLE_MAC(10_5);
-- (CGFloat)maxPossiblePositionOfDividerAtIndex:(NSInteger)dividerIndex NS_AVAILABLE_MAC(10_5);
+- (CGFloat)minPossiblePositionOfDividerAtIndex:(NSInteger)dividerIndex API_AVAILABLE(macos(10.5));
+- (CGFloat)maxPossiblePositionOfDividerAtIndex:(NSInteger)dividerIndex API_AVAILABLE(macos(10.5));
 
 /* Set the position of a divider. The default implementation of this method behaves as if the user were attempting to drag the divider to the proposed position, so the constraints imposed by the delegate are applied and one of the views adjacent to the divider may be collapsed. This method is not invoked by NSSplitView itself, so there's probably not much point in overriding it.
 */
-- (void)setPosition:(CGFloat)position ofDividerAtIndex:(NSInteger)dividerIndex NS_AVAILABLE_MAC(10_5);
+- (void)setPosition:(CGFloat)position ofDividerAtIndex:(NSInteger)dividerIndex API_AVAILABLE(macos(10.5));
 
 /* Sets the priority under which split view subviews hold their widths (for a vertical split view) or height (for a horizontal split view). The view with the lowest priority will be the first to take on additional width if the split view grows or shrinks. The default is NSLayoutPriorityDefaultLow. 
  
    There is no reason to use the default, but you should use priorities less than NSLayoutPriorityDragThatCannotResizeWindow (490)
  */
-- (NSLayoutPriority)holdingPriorityForSubviewAtIndex:(NSInteger)subviewIndex NS_AVAILABLE_MAC(10_8);
-- (void)setHoldingPriority:(NSLayoutPriority)priority forSubviewAtIndex:(NSInteger)subviewIndex NS_AVAILABLE_MAC(10_8);
+#if !TARGET_OS_IPHONE
+- (NSLayoutPriority)holdingPriorityForSubviewAtIndex:(NSInteger)subviewIndex API_AVAILABLE(macos(10.8));
+- (void)setHoldingPriority:(NSLayoutPriority)priority forSubviewAtIndex:(NSInteger)subviewIndex API_AVAILABLE(macos(10.8));
+#endif
 
 @end
 
@@ -96,31 +96,31 @@ typedef NS_ENUM(NSInteger, NSSplitViewDividerStyle) {
  * Whether or not all subviews will be added as arranged views. When NO, a subview must be explicitly added as an arrangedSubview if the view should be arranged as a split pane. When YES, \c -arrangedSubviews always be identical to \c -subviews. Defaults to YES.
  * Setting this from YES to NO will leave all existing subviews as \c -arrangedSubviews. Setting this from NO to YES will cause \c -arrangedSubviews to become the value of \c -subviews.
  */
-@property BOOL arrangesAllSubviews NS_AVAILABLE_MAC(10_11);
+@property BOOL arrangesAllSubviews API_AVAILABLE(macos(10.11));
 
 /*!
  * The list of views that are arranged as split panes in the receiver.
  * They are a subset of \c -subviews, with potential difference in ordering. If \c -arrangesAllSubviews is YES, then \c -arrangedSubviews is identical to \c -subviews.
  */
-@property (readonly, copy) NSArray<__kindof NSView *> *arrangedSubviews NS_AVAILABLE_MAC(10_11);
+@property (readonly, copy) NSArray<__kindof NSView *> *arrangedSubviews API_AVAILABLE(macos(10.11));
 
 /*!
  * Adds a view as arranged split pane. If the view is not a subview of the receiver, it will be added as one.
  */
-- (void)addArrangedSubview:(NSView *)view NS_AVAILABLE_MAC(10_11);
+- (void)addArrangedSubview:(NSView *)view API_AVAILABLE(macos(10.11));
 
 /*!
  * Adds a view as an arranged split pane list at the specific index.
  * If the view is already an arranged split view, it will move the view the specified index (but not move the subview index).
  * If the view is not a subview of the receiver, it will be added as one (not necessarily at the same index).
  */
-- (void)insertArrangedSubview:(NSView *)view atIndex:(NSInteger)index NS_AVAILABLE_MAC(10_11);
+- (void)insertArrangedSubview:(NSView *)view atIndex:(NSInteger)index API_AVAILABLE(macos(10.11));
 
 /*!
  * Removes a view as arranged split pane. If \c -arrangesAllSubviews is set to NO, this does not remove the view as a subview.
  * Removing the view as a subview (either by -[view removeFromSuperview] or setting the receiver's subviews) will automatically remove it as an arranged subview.
  */
-- (void)removeArrangedSubview:(NSView *)view NS_AVAILABLE_MAC(10_11);
+- (void)removeArrangedSubview:(NSView *)view API_AVAILABLE(macos(10.11));
 
 @end
 
@@ -137,7 +137,7 @@ typedef NS_ENUM(NSInteger, NSSplitViewDividerStyle) {
 
 /* Return YES if the subview should be collapsed because the user has double-clicked on an adjacent divider. If a split view has a delegate, and the delegate responds to this message, it will be sent once for the subview before a divider when the user double-clicks on that divider, and again for the subview after the divider, but only if the delegate returned YES when sent -splitView:canCollapseSubview: for the subview in question. When the delegate indicates that both subviews should be collapsed NSSplitView's behavior is undefined.
 */
-- (BOOL)splitView:(NSSplitView *)splitView shouldCollapseSubview:(NSView *)subview forDoubleClickOnDividerAtIndex:(NSInteger)dividerIndex NS_AVAILABLE_MAC(10_5);
+- (BOOL)splitView:(NSSplitView *)splitView shouldCollapseSubview:(NSView *)subview forDoubleClickOnDividerAtIndex:(NSInteger)dividerIndex API_DEPRECATED("NSSplitView no longer supports collapsing sections via double-click. This delegate method is never called.", macos(10.5, 10.15));
 
 
 /* Given a proposed minimum allowable position for one of the dividers of a split view, return the minimum allowable position for the divider. If a split view has no delegate, or if its delegate does not respond to this message, the split view behaves as if it has a delegate that responds to this message by merely returning the proposed minimum. If a split view has a delegate, and the delegate responds to this message, it will be sent at least once when the user begins dragging one of the split view's dividers, and may be resent as the user continues to drag the divider.
@@ -165,21 +165,21 @@ Delegates that respond to this message should adjust the frames of the uncollaps
 
 /* Given that a split view has been resized and is adjusting its subviews to accomodate the new size, return YES if -adjustSubviews can change the size of the indexed subview, NO otherwise. -adjustSubviews may change the origin of the indexed subview regardless of what this method returns. -adjustSubviews may also resize otherwise nonresizable subviews to prevent an invalid subview layout. If a split view has no delegate, or if its delegate does not respond to this message, the split view behaves as if it has a delegate that returns YES when sent this message.
  */
-- (BOOL)splitView:(NSSplitView *)splitView shouldAdjustSizeOfSubview:(NSView *)view NS_AVAILABLE_MAC(10_6);
+- (BOOL)splitView:(NSSplitView *)splitView shouldAdjustSizeOfSubview:(NSView *)view API_AVAILABLE(macos(10.6));
 
 
 
 /* Given that a split view has been resized and is adjusting its subviews to accomodate the new size, or that the user is dragging a divider, return YES to allow the divider to be dragged or adjusted off the edge of the split view where it will not be visible. If a split view has no delegate, or if its delegate does not respond to this message, the split view behaves as if it has a delegate that returns NO when sent this message.
 */
-- (BOOL)splitView:(NSSplitView *)splitView shouldHideDividerAtIndex:(NSInteger)dividerIndex NS_AVAILABLE_MAC(10_5);
+- (BOOL)splitView:(NSSplitView *)splitView shouldHideDividerAtIndex:(NSInteger)dividerIndex API_AVAILABLE(macos(10.5));
 
 /* Given the drawn frame of a divider (in the coordinate system established by the split view's bounds), return the frame in which mouse clicks should initiate divider dragging. If a split view has no delegate, or if its delegate does not respond to this message, the split view behaves as if it has a delegate that returns proposedEffectiveRect when sent this message. A split view with thick dividers proposes the drawn frame as the effective frame. A split view with thin dividers proposes an effective frame that's a litte larger than the drawn frame, to make it easier for the user to actually grab the divider.
 */
-- (NSRect)splitView:(NSSplitView *)splitView effectiveRect:(NSRect)proposedEffectiveRect forDrawnRect:(NSRect)drawnRect ofDividerAtIndex:(NSInteger)dividerIndex NS_AVAILABLE_MAC(10_5);
+- (NSRect)splitView:(NSSplitView *)splitView effectiveRect:(NSRect)proposedEffectiveRect forDrawnRect:(NSRect)drawnRect ofDividerAtIndex:(NSInteger)dividerIndex API_AVAILABLE(macos(10.5));
 
 /* Given a divider index, return an additional rectangular area (in the coordinate system established by the split view's bounds) in which mouse clicks should also initiate divider dragging, or NSZeroRect to not add one. If a split view has no delegate, or if its delegate does not respond to this message, only mouse clicks within the effective frame of a divider initiate divider dragging.
 */
-- (NSRect)splitView:(NSSplitView *)splitView additionalEffectiveRectOfDividerAtIndex:(NSInteger)dividerIndex NS_AVAILABLE_MAC(10_5);
+- (NSRect)splitView:(NSSplitView *)splitView additionalEffectiveRectOfDividerAtIndex:(NSInteger)dividerIndex API_AVAILABLE(macos(10.5));
 
 
 /* Respond as if the delegate had registered for the NSSplitViewDidResizeSubviewsNotification or NSSplitViewWillResizeSubviewsNotification notification, described below. A split view's behavior is not explicitly affected by a delegate's ability or inability to respond to these messages, though the delegate may send messages to the split view in response to these messages.
@@ -202,9 +202,10 @@ APPKIT_EXTERN NSNotificationName NSSplitViewDidResizeSubviewsNotification;
 
 /* Set or get whether the split view is a "pane splitter" (YES) or "grabber" (NO) split view. In Mac OS 10.5 the value of this property has no effect. These methods are deprecated in Mac OS 10.6.
  */
-- (void)setIsPaneSplitter:(BOOL)flag NS_DEPRECATED_MAC(10_0, 10_6);
-- (BOOL)isPaneSplitter NS_DEPRECATED_MAC(10_0, 10_6);
+- (void)setIsPaneSplitter:(BOOL)flag API_DEPRECATED("", macos(10.0,10.6));
+- (BOOL)isPaneSplitter API_DEPRECATED("", macos(10.0,10.6));
 
 @end
 
+API_UNAVAILABLE_END
 NS_ASSUME_NONNULL_END

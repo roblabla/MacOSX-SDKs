@@ -1,9 +1,8 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 93CF1D80-A3A8-378B-9DF7-BF17A206C57D' ]
-platform:        macosx
-install-name:    /System/Library/PrivateFrameworks/CommonAuth.framework/Versions/A/CommonAuth
-objc-constraint: none
+uuids:           [ 'x86_64: BDE39131-6389-3243-9C4A-DBA165B8A2F9', 'x86_64: BDE39131-6389-3243-9C4A-DBA165B8A2F9' ]
+platform:        zippered
+install-name:    '/System/Library/PrivateFrameworks/CommonAuth.framework/Versions/A/CommonAuth'
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ ___crashreporter_info__, __heim_scram_pairs_free, __heim_scram_parse, 

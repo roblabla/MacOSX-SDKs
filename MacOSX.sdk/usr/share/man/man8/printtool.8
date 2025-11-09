@@ -1,24 +1,29 @@
-.\"Copyright (c) 2016 Apple Inc. All rights reserved.
+.\"Copyright (c) 2016-2018 Apple Inc. All rights reserved.
 .\"
-.Dd December 8, 2016
-.Dt printtool 8
-.Os "macOS"
-.Sh NAME
-.Nm printtool
-.Nd a tool to perform privileged operations on the printing system
-.Sh SYNOPSIS
-\&\s-1NONE\s0 (launched by launchd)
-.Sh DESCRIPTION
-.Nm
-acts as a privileged gateway between macOS applications and the printing system.
-.Pp
-This command is not intended to be invoked directly.
-.Sh FILES
-.Bl -tag -width -indent
-.It Pa /System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/PrintCore.framework/Versions/A/printtool
-.El
-.Sh SEE ALSO
-.Xr launchd 8
-.Sh HISTORY
-.Nm
-first appeared in macOS 10.4.
+.TH printtool 8 macOS "December 8, 2016" "Apple Inc."
+.SH NAME
+printtool \-\- a command line tool to configure the printing system
+.SH SYNOPSIS
+.B printtool 
+[
+.B \-\-reset
+] [
+.B \-f
+]
+.SH DESCRIPTION
+A tool to perform privileged configuration operations on the printing system.
+.SH OPTIONS
+The following options are recognized:
+.TP 5
+.B \-\-reset
+Reset the printing system
+.TP 5
+.B \-f
+Do not prompt for confirmation
+.SH FILES
+/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/PrintCore.framework/Versions/A/printtool
+.EL
+.XR launchd 8
+.SH HISTORY
+.NM printtool
+First appeared in Mac OS 10.4. Reset command added in Mac OS 10.14

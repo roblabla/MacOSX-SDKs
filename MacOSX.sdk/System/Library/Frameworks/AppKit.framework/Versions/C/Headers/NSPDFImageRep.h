@@ -1,24 +1,16 @@
 /*
         NSPDFImageRep.h
         Application Kit
-        Copyright (c) 1999-2018, Apple Inc.
+        Copyright (c) 1999-2019, Apple Inc.
         All rights reserved.
 */
 
 #import <AppKit/NSImageRep.h>
 
 NS_ASSUME_NONNULL_BEGIN
+API_UNAVAILABLE_BEGIN(ios)
 
 @interface NSPDFImageRep : NSImageRep
-{
-  @private
-    NSData *_pdfData APPKIT_IVAR;
-#if !__OBJC2__
-    int     _reserved1 __unused APPKIT_IVAR;
-    int     _reserved2 __unused APPKIT_IVAR;
-#endif /* !__OBJC2__ */
-    id      _private APPKIT_IVAR;
-}
 
 + (nullable instancetype)imageRepWithData:(NSData *)pdfData;
 - (nullable instancetype)initWithData:(NSData *)pdfData;
@@ -30,5 +22,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+API_UNAVAILABLE_END
 NS_ASSUME_NONNULL_END
 

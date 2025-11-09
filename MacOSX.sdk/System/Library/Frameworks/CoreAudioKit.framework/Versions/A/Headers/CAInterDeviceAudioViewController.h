@@ -15,6 +15,7 @@
  
  @discussion To use this class, create an instance of the CAInterDeviceAudioController, get the view and add it as a subview of a NSWindow.
  */
+API_AVAILABLE(macos(10.11)) API_UNAVAILABLE(ios, tvos, watchos)
 @interface CAInterDeviceAudioViewController : NSViewController
 @end
 #endif

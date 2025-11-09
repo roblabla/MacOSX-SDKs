@@ -1,3 +1,4 @@
+#if (defined(USE_AUDIOTOOLBOX_PUBLIC_HEADERS) && USE_AUDIOTOOLBOX_PUBLIC_HEADERS) || !__has_include(<AudioToolboxCore/AUAudioUnit.h>)
 /*!
 	@file		AUAudioUnit.h
  	@framework	AudioToolbox.framework
@@ -6,13 +7,16 @@
 	@brief		Objective-C interfaces for hosting and implementing Audio Units.
 */
 
-#if __OBJC2__
+#ifndef AudioToolbox_AUAudioUnit_h
+#define AudioToolbox_AUAudioUnit_h
+#ifdef __OBJC2__
 
 #import <AudioToolbox/AUParameters.h>
 #import <Foundation/NSExtensionRequestHandling.h>
 
-// for AudioObjectID for setDeviceID:error:
-#import <CoreAudio/AudioHardwareBase.h>
+#if !TARGET_OS_IPHONE
+typedef UInt32 AUAudioObjectID; // AudioObjectID
+#endif
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -319,7 +323,7 @@ typedef BOOL (^AUHostTransportStateBlock)(AUHostTransportStateFlags * __nullable
 		with a v3 audio unit, all major pieces of functionality are bridged between the
 		two API's. This header describes, for each v3 method or property, the v2 equivalent.
 */
-OS_EXPORT API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0))
+API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0))
 @interface AUAudioUnit : NSObject
 
 - (instancetype)init NS_UNAVAILABLE;
@@ -538,14 +542,18 @@ OS_EXPORT API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0))
 		values are invalidated. This includes changes to currentPreset, fullState, and
 		fullStateForDocument.
  
+		Hosts should not attempt to set this property.
+
 		Subclassers should implement the parameterTree getter to expose parameters to hosts. They
 		should cache as much as possible and send KVO notifications on "parameterTree" when altering
 		the structure of the tree or the static information (ranges, etc) of parameters.
 		
 		This is similar to the v2 properties kAudioUnitProperty_ParameterList and
 		kAudioUnitProperty_ParameterInfo.
+ 
+		Note that it is not safe to modify this property in a real-time context.
 */
-@property (NS_NONATOMIC_IOSONLY, readonly, nullable) AUParameterTree *parameterTree;
+@property (NS_NONATOMIC_IOSONLY, nullable, retain) AUParameterTree *parameterTree;
 
 /*!	@method		parametersForOverviewWithCount:
 	@brief		Returns the audio unit's `count` most important parameters.
@@ -669,11 +677,159 @@ OS_EXPORT API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0))
 	@brief		A collection of presets provided by the audio unit's developer.
 	@discussion
 		A preset provides users of an audio unit with an easily-selectable, fine-tuned set of
-		parameters provided by the developer. This property returns all of the available presets.
+		parameters provided by the developer. This property returns all of the available factory presets.
 
 		Bridged to the v2 property kAudioUnitProperty_FactoryPresets.
 */
 @property (NS_NONATOMIC_IOSONLY, readonly, copy, nullable) NSArray<AUAudioUnitPreset *> *factoryPresets;
+
+/*!	@property	userPresets
+	@brief		A collection of presets saved by the user
+	@discussion
+		In addition to factory presets, provided by the audio unit vendor, users have the ability to
+		save the values of the parameters of an audio unit into a user preset. These users presets
+		can be accessed using this property.
+
+		The default implementation of this method will load the user presets from an internal
+		location that might not be directly accessible to the audio unit host application or to the
+		audio unit. Instead of accessing this path directly, the audio unit should rely on the
+		superclass implementation of this method to retrieve the presets.
+
+		Audio Units are free to override this method to load their user presets via different means
+		(e.g. from their iCloud container).
+*/
+@property (NS_NONATOMIC_IOSONLY, readonly, copy) NSArray<AUAudioUnitPreset *> *userPresets API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0));
+
+/*!	@method		saveUserPreset:userPreset:error
+	@brief		Persistently save the current state of the audio unit into a userPreset
+	@discussion
+		The new preset will be added to userPresets and will become selectable by assigning it
+		to the currentPreset property.
+		If a preset with the provided name already exists then it will be overwritten.
+
+		For user presets, the preset number is required to be negative.
+		If a positive number is passed, the sign will be changed to negative.
+		If zero is passed, the number will be set to -1.
+		These changes will be reflected on the userPreset argument.
+
+		The default implementation of this method will save the user preset to an internal
+		location.
+
+		Audio Units are free to override this method to operate on a different location (e.g. their
+		iCloud container).
+	@param	userPreset
+		The preset under which the current state will be saved.
+	@param outError
+		In the event of a failure, the method will return NO and outError will be set to an 
+		NSError, describing the problem. 
+		Some possible errors: 
+				- domain: NSOSStatusErrorDomain code: kAudioUnitErr_NoConnection
+				- domain: NSOSStatusErrorDomain	code: kAudioUnitErr_InvalidFilePath
+				- domain: NSOSStatusErrorDomain	code: kAudioUnitErr_MissingKey
+	@return
+		YES for success. NO in the event of a failure, in which case the error is returned in
+		outError.
+ */
+- (BOOL)saveUserPreset:(AUAudioUnitPreset *)userPreset error:(NSError **) outError API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0));
+
+/*!	@method		deleteUserPreset:userPreset:error
+	@brief		Remove a user preset.
+	@discussion
+		The user preset will be removed from userPresets and will be permanently deleted.
+
+		The default implementation of this method will delete the user preset from an internal
+		location.
+
+		Audio Units are free to override this method to operate on a different location (e.g. their
+		iCloud container).
+	@param	userPreset
+		The preset to be deleted.
+	@param	outError
+		In the event of a failure, the method will return NO and outError will be set to an 
+		NSError, describing the problem. 
+		Some possible errors: 
+				- domain: NSOSStatusErrorDomain code: kAudioUnitErr_NoConnection
+				- domain: NSPOSIXErrorDomain	code: ENOENT
+				- domain: NSOSStatusErrorDomain	code: kAudioUnitErr_InvalidFilePath
+	@return
+		YES for success. NO in the event of a failure, in which case the error is returned in
+		outError.
+*/
+- (BOOL)deleteUserPreset:(AUAudioUnitPreset *)userPreset error:(NSError **) outError API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0));
+
+/*! @method		presetStateFor:userPreset:error
+	@brief		Retrieve the state stored in a user preset
+ 	@discussion
+		This method allows access to the contents of a preset without having to set that preset as
+		current. The returned dictionary is assignable to the audio unit's fullState and/or
+		fullStateForDocument properties.
+ 
+		Audio units can override this method in order to vend user presets from a different location
+		(e.g. their iCloud container).
+
+		In order to restore the state from a user preset, the audio unit should override the setter
+		for the currentPreset property and check the preset number to determine the type of preset.
+		If the preset number is >= 0 then the preset is a factory preset.
+		If the preset number is < 0 then it is a user preset.
+
+		This method can then be called to retrieve the state stored in a user preset and the audio
+		unit can assign this to fullState or fullStateForDocument.
+
+	@param	userPreset
+		The preset to be selected.
+	@param	outError
+		In the event of a failure, the method will return nil and outError will be set to an 
+		NSError, describing the problem. 
+		Some possible errors: 
+				- domain: NSOSStatusErrorDomain code: kAudioUnitErr_NoConnection
+				- domain: NSPOSIXErrorDomain	code: ENOENT
+				- domain: NSCocoaErrorDomain	code: NSCoderReadCorruptError
+	@return
+		Returns nil if there was an error, otherwise returns a dictionary containing the full state
+		of the audio unit saved in the preset.
+		For details on the possible keys present in the full state dictionary, please see the
+		documentation for kAudioUnitProperty_ClassInfo.
+ 		The minimal set of keys and their type is:	@kAUPresetTypeKey : NSNumber,
+													@kAUPresetSubtypeKey : NSNumber,
+ 													@kAUPresetManufacturerKey : NSNumber,
+ 											   		@kAUPresetVersionKey : NSNumber,
+ 													@kAUPresetNameKey : NSString,
+ 													@kAUPresetNumberKey: NSNumber,
+													@kAUPresetDataKey : NSData
+*/
+- (nullable NSDictionary<NSString *, id> *)presetStateFor:(AUAudioUnitPreset *)userPreset error:(NSError **) outError API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0));
+
+/*!	@property	supportsUserPresets
+	@brief		Specifies whether an audio unit supports loading and saving user presets
+	@discussion
+		The audio unit should set this property to YES if a user preset can be assigned to
+		currentPreset.
+
+		Audio unit host applications should query this property to determine whether the audio unit
+		supports user presets.
+
+		Assigning a user preset to the currentPreset property of an audio unit that does not support
+		restoring state from user presets may result in incorrect behavior.
+*/
+@property (NS_NONATOMIC_IOSONLY, readonly) BOOL supportsUserPresets API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0));
+
+/*!	@property	isLoadedInProcess
+	@brief		Set to YES when an AUAudioUnit is loaded in-process
+	@discussion
+		If the AUAudioUnit is instantiated with kAudioComponentInstantiation_LoadInProcess, but the
+		audio unit is not packaged properly to support loading in-process, the system will silently
+		fall back to loading the audio unit out-of-process.
+
+		This property can be used to determine whether the instantiation succeeded as intended and
+		the audio unit is running in-process.
+
+		The presence of an extension process is not sufficient indication that the audio unit failed
+		to load in-process, since the framework might launch the audio unit extension process to
+		fulfill auxiliary functionality. If the audio unit is loaded in-process then rendering is
+		done in the host process. Other operations that are not essential to rendering audio, might
+		be done in the audio unit's extension process.
+*/
+@property (NS_NONATOMIC_IOSONLY, readonly) BOOL isLoadedInProcess API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*!	@property	currentPreset
 	@brief		The audio unit's last-selected preset.
@@ -681,7 +837,7 @@ OS_EXPORT API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0))
 		Hosts can let the user select a preset by setting this property. Note that when getting
 		this property, it does not reflect whether parameters may have been modified since the
 		preset was selected.
-		
+
 		Bridged to the v2 property kAudioUnitProperty_PresentPreset.
 */
 @property (NS_NONATOMIC_IOSONLY, retain, nullable) AUAudioUnitPreset *currentPreset;
@@ -966,10 +1122,11 @@ typedef void (^AUInputHandler)(AudioUnitRenderActionFlags *actionFlags, const Au
 */
 @property (nonatomic, copy, nullable) AUInputHandler inputHandler;
 
+#if !TARGET_OS_IPHONE
 /*!	@property	device
 	@brief		Get the I/O hardware device.
 */
-@property (nonatomic, readonly) AudioObjectID deviceID;
+@property (nonatomic, readonly) AUAudioObjectID deviceID;
 
 /*!	@method		setDeviceID:error:
 	@brief		Set the I/O hardware device.
@@ -978,7 +1135,7 @@ typedef void (^AUInputHandler)(AudioUnitRenderActionFlags *actionFlags, const Au
 	@param outError
 		Returned in the event of failure.
 */
-- (BOOL)setDeviceID:(AudioObjectID)deviceID error:(NSError **)outError;
+- (BOOL)setDeviceID:(AUAudioObjectID)deviceID error:(NSError **)outError;
 
 /*!	@property	deviceInputLatency
 	@brief		The audio device's input latency, in seconds.
@@ -995,6 +1152,7 @@ typedef void (^AUInputHandler)(AudioUnitRenderActionFlags *actionFlags, const Au
 		by v2 input/output units.
 */
 @property (nonatomic, readonly) NSTimeInterval deviceOutputLatency API_AVAILABLE(macos(10.13));
+#endif // TARGET_OS_IPHONE
 
 /*!	@property	running
 	@brief		The audio device's running state.
@@ -1035,7 +1193,7 @@ typedef void (^AUInputHandler)(AudioUnitRenderActionFlags *actionFlags, const Au
 		
 		The bus array is bridged to the v2 property kAudioUnitProperty_ElementCount.
 */
-OS_EXPORT API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0))
+API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0))
 @interface AUAudioUnitBusArray : NSObject <NSFastEnumeration>
 
 - (instancetype)init NS_UNAVAILABLE;
@@ -1093,7 +1251,7 @@ OS_EXPORT API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0))
 /*!	@class	AUAudioUnitBus
 	@brief	An input or output connection point on an audio unit.
 */
-OS_EXPORT API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0))
+API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0))
 @interface AUAudioUnitBus : NSObject
 
 /*!	@property	format
@@ -1218,7 +1376,7 @@ OS_EXPORT API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0))
 	@brief	A collection of parameter settings provided by the audio unit implementor, producing a
 			useful sound or starting point.
 */
-OS_EXPORT API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0))
+API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0))
 @interface AUAudioUnitPreset : NSObject <NSSecureCoding>
 
 /*!	@property	number
@@ -1236,3 +1394,7 @@ OS_EXPORT API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0))
 NS_ASSUME_NONNULL_END
 
 #endif // __OBJC2__
+#endif // AudioToolbox_AUAudioUnit_h
+#else
+#include <AudioToolboxCore/AUAudioUnit.h>
+#endif

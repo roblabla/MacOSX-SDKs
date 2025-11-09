@@ -30,6 +30,7 @@
 					stopped this object. If you do not heed this warning, you could potentially deadlock your process.
 */
 
+API_UNAVAILABLE(ios, watchos, tvos)
 @interface IOBluetoothDeviceInquiry : NSObject
 {
 @private
@@ -183,6 +184,7 @@
 					deadlock your process.
 */
 
+API_UNAVAILABLE(ios, watchos, tvos)
 @protocol IOBluetoothDeviceInquiryDelegate
 @optional
 //---------------------------------------------------------------------------------------------------------------------------

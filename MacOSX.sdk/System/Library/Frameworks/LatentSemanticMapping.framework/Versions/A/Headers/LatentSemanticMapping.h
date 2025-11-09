@@ -5,7 +5,7 @@
 
 	Version:	Mac OS X
 
-	Copyright:	© 2001-2015 by Apple Inc., all rights reserved.
+	Copyright 2001-2018 Apple Inc. All rights reserved.
 
 	Bugs?:		For bug reports, consult the following page on
 				the World Wide Web:
@@ -22,7 +22,7 @@
 #define __LATENTSEMANTICMAPPING__
 
 #include <CoreFoundation/CoreFoundation.h>
-#if TARGET_OS_EMBEDDED || TARGET_IPHONE_SIMULATOR
+#if TARGET_OS_IPHONE
 #define __DRIVERSERVICES__
 #define __FP__
 #define __MACHINEEXCEPTIONS__

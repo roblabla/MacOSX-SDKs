@@ -5,6 +5,8 @@
 //  Copyright (c) 2012-2015 Apple Inc. All rights reserved.
 //
 
+API_DEPRECATED_BEGIN("MediaLibrary.framework will be removed in a future OS version", macos(10.9, 10.15))
+
 typedef NS_OPTIONS(NSUInteger, MLMediaSourceType)
 {
 	MLMediaSourceTypeAudio = 1 << 0,
@@ -52,12 +54,12 @@ extern NSString* const MLPhotosAlbumTypeIdentifier NS_AVAILABLE_MAC(10_10);
 extern NSString* const MLPhotosFolderTypeIdentifier NS_AVAILABLE_MAC(10_10);
 extern NSString* const MLPhotosSmartAlbumTypeIdentifier NS_AVAILABLE_MAC(10_10);
 extern NSString* const MLPhotosPublishedAlbumTypeIdentifier NS_AVAILABLE_MAC(10_10);
-extern NSString* const MLPhotosAllMomentsGroupTypeIdentifier NS_AVAILABLE_MAC(10_10);
-extern NSString* const MLPhotosMomentGroupTypeIdentifier NS_AVAILABLE_MAC(10_10);
-extern NSString* const MLPhotosAllCollectionsGroupTypeIdentifier NS_AVAILABLE_MAC(10_10);
-extern NSString* const MLPhotosCollectionGroupTypeIdentifier NS_AVAILABLE_MAC(10_10);
-extern NSString* const MLPhotosAllYearsGroupTypeIdentifier NS_AVAILABLE_MAC(10_10);
-extern NSString* const MLPhotosYearGroupTypeIdentifier NS_AVAILABLE_MAC(10_10);
+extern NSString* const MLPhotosAllMomentsGroupTypeIdentifier API_DEPRECATED("No longer supported", macos(10.10, 10.15));
+extern NSString* const MLPhotosMomentGroupTypeIdentifier API_DEPRECATED("No longer supported", macos(10.10, 10.15));
+extern NSString* const MLPhotosAllCollectionsGroupTypeIdentifier API_DEPRECATED("No longer supported", macos(10.10, 10.15));
+extern NSString* const MLPhotosCollectionGroupTypeIdentifier API_DEPRECATED("No longer supported", macos(10.10, 10.15));
+extern NSString* const MLPhotosAllYearsGroupTypeIdentifier API_DEPRECATED("No longer supported", macos(10.10, 10.15));
+extern NSString* const MLPhotosYearGroupTypeIdentifier API_DEPRECATED("No longer supported", macos(10.10, 10.15));
 extern NSString* const MLPhotosLastImportGroupTypeIdentifier NS_AVAILABLE_MAC(10_10);
 extern NSString* const MLPhotosMyPhotoStreamTypeIdentifier NS_AVAILABLE_MAC(10_10);
 extern NSString* const MLPhotosSharedPhotoStreamTypeIdentifier NS_AVAILABLE_MAC(10_10);
@@ -175,3 +177,5 @@ extern NSString* const MLMediaObjectKeywordsKey;		// NSArray of NSStrings
 extern NSString* const MLMediaObjectProtectedKey;		// NSNumber (BOOL)
 
 NS_ASSUME_NONNULL_END
+
+API_DEPRECATED_END

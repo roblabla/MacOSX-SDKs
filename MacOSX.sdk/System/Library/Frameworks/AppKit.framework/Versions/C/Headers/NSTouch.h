@@ -1,7 +1,7 @@
 /*
     NSTouch.h
     Application Kit
-    Copyright (c) 2009-2018, Apple Inc.
+    Copyright (c) 2009-2019, Apple Inc.
     All rights reserved.
 */
 
@@ -12,6 +12,7 @@
 #import <AppKit/AppKitDefines.h>
 
 NS_ASSUME_NONNULL_BEGIN
+API_UNAVAILABLE_BEGIN(ios)
 
 @class NSView;
 
@@ -24,43 +25,24 @@ typedef NS_OPTIONS(NSUInteger, NSTouchPhase) {
 
     NSTouchPhaseTouching        = NSTouchPhaseBegan | NSTouchPhaseMoved | NSTouchPhaseStationary,
     NSTouchPhaseAny             = NSUIntegerMax
-} NS_ENUM_AVAILABLE_MAC(10_7);
+} API_AVAILABLE(macos(10.7));
 
 typedef NS_ENUM(NSInteger, NSTouchType) {
     NSTouchTypeDirect,      // A direct touch from a finger (on a screen)
     NSTouchTypeIndirect,      // An indirect touch (not a screen)
-} NS_ENUM_AVAILABLE_MAC(10_12_2);
+} API_AVAILABLE(macos(10.12.2));
 
 typedef NS_OPTIONS(NSUInteger, NSTouchTypeMask) {
     NSTouchTypeMaskDirect      = (1 <<  NSTouchTypeDirect),      // A direct touch from a finger (on a screen)
     NSTouchTypeMaskIndirect    = (1 <<  NSTouchTypeIndirect),      // An indirect touch (not a screen)
-} NS_ENUM_AVAILABLE_MAC(10_12_2);
+} API_AVAILABLE(macos(10.12.2));
 
 NS_INLINE NSTouchTypeMask NSTouchTypeMaskFromType(NSTouchType type) { return (1 << type); }
 
 /* Unlike the iPhone, NSTouch objects do not persist for the life of the touch.
 */
-NS_CLASS_AVAILABLE(10_6, NA)
-@interface NSTouch : NSObject <NSCopying> {
-@private
-    NSInteger _index APPKIT_IVAR;
-    id _identity APPKIT_IVAR;
-    NSTouchPhase _phase APPKIT_IVAR;
-    NSPoint _pos1 APPKIT_IVAR;
-    NSInteger _privateFlags APPKIT_IVAR;
-    NSView *_view APPKIT_IVAR;
-    id _reserved1 APPKIT_IVAR;
-    NSPoint _pos0 APPKIT_IVAR;
-    NSInteger _reserved4 APPKIT_IVAR;
-    id _device APPKIT_IVAR;
-    NSSize  _deviceSize APPKIT_IVAR;
-    NSInteger _contextId APPKIT_IVAR;
-    NSTimeInterval _timestamp APPKIT_IVAR;
-#if ! __LP64__
-    id _reserved8 APPKIT_IVAR;
-#endif
-}
-
+API_AVAILABLE(macos(10.6))
+@interface NSTouch : NSObject <NSCopying>
 /* Properties of this touch */
 /* Use the identity property to track changes to a particular touch during the touch's life. While touch identities may be re-used, they are unique during the life of the touch, even when multiple devices are present. Note: identity objects implement the NSCopying protocol so that they may be used as keys in an NSDictionary. Use isEqual: to compare two touch identities.
 */
@@ -80,12 +62,13 @@ NS_CLASS_AVAILABLE(10_6, NA)
 
 @interface NSTouch (NSTouchBar)
 /* A touch can only be one type at a time */
-@property(readonly) NSTouchType type NS_AVAILABLE_MAC(10_12_2);
+@property(readonly) NSTouchType type API_AVAILABLE(macos(10.12.2));
 
 /* These two methods are only valid for Direct touches. A nil view means the touch location in the root container of touch. */
-- (NSPoint)locationInView:(nullable NSView *)view NS_AVAILABLE_MAC(10_12_2);
-- (NSPoint)previousLocationInView:(nullable NSView *)view NS_AVAILABLE_MAC(10_12_2);
+- (NSPoint)locationInView:(nullable NSView *)view API_AVAILABLE(macos(10.12.2));
+- (NSPoint)previousLocationInView:(nullable NSView *)view API_AVAILABLE(macos(10.12.2));
 @end
 
+API_UNAVAILABLE_END
 NS_ASSUME_NONNULL_END
 

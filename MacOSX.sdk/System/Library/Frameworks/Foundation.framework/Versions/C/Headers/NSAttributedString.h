@@ -1,5 +1,5 @@
 /*	NSAttributedString.h
-	Copyright (c) 1994-2018, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2019, Apple Inc. All rights reserved.
 */
 
 
@@ -10,7 +10,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 typedef NSString * NSAttributedStringKey NS_EXTENSIBLE_STRING_ENUM;
 
-NS_CLASS_AVAILABLE(10_0, 3_2)
+API_AVAILABLE(macos(10.0), ios(3.2), watchos(2.0), tvos(9.0))
 @interface NSAttributedString : NSObject <NSCopying, NSMutableCopying, NSSecureCoding>
 
 @property (readonly, copy) NSString *string;
@@ -43,7 +43,7 @@ typedef NS_OPTIONS(NSUInteger, NSAttributedStringEnumerationOptions) {
 
 @end
 
-NS_CLASS_AVAILABLE(10_0, 3_2)
+API_AVAILABLE(macos(10.0), ios(3.2), watchos(2.0), tvos(9.0))
 @interface NSMutableAttributedString : NSAttributedString
 
 - (void)replaceCharactersInRange:(NSRange)range withString:(NSString *)str;

@@ -1,8 +1,8 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 1DEBBE36-8945-3AD8-BD48-2850AD845711' ]
-platform:        macosx
-install-name:    /System/Library/PrivateFrameworks/AggregateDictionary.framework/Versions/A/AggregateDictionary
+uuids:           [ 'x86_64: 4462E294-E63D-31FD-80B1-01D8F63220F9', 'x86_64: 4462E294-E63D-31FD-80B1-01D8F63220F9' ]
+platform:        zippered
+install-name:    '/System/Library/PrivateFrameworks/AggregateDictionary.framework/Versions/A/AggregateDictionary'
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _ADClientAddValueForScalarKey, _ADClientBatchKeys, _ADClientCheckpoint, 

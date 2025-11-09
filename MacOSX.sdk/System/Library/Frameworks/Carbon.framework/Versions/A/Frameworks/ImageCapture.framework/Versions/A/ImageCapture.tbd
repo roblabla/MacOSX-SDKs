@@ -1,8 +1,8 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 47915C3C-DED4-3E0C-9155-6B130FFF89BB' ]
+uuids:           [ 'x86_64: 96798C26-3B90-36C8-B3CE-916AA17D6505' ]
 platform:        macosx
-install-name:    /System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/ImageCapture.framework/Versions/A/ImageCapture
+install-name:    '/System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/ImageCapture.framework/Versions/A/ImageCapture'
 current-version: 5
 parent-umbrella: Carbon
 exports:         

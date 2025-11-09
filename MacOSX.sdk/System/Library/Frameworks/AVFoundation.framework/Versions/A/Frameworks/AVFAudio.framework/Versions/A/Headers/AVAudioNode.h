@@ -48,7 +48,7 @@ typedef void (^AVAudioNodeTapBlock)(AVAudioPCMBuffer *buffer, AVAudioTime *when)
 
 		Nodes do not currently provide useful functionality until attached to an engine.
 */
-OS_EXPORT API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0))
+API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0))
 @interface AVAudioNode : NSObject {
 @protected
 	void *_impl;
@@ -120,8 +120,6 @@ AVAudioFormat *format = [input outputFormatForBus: 0];
 	@abstract Destroy a tap.
 	@param bus
 		the node output bus whose tap is to be destroyed
-	@return
-		YES for success.
 */
 - (void)removeTapOnBus:(AVAudioNodeBus)bus;
 

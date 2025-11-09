@@ -24,7 +24,7 @@ API_AVAILABLE(macosx(10.9))
 	@property	player
 	@abstract	The player from which to source the media content for the view.
  */
-@property (nullable) AVPlayer *player;
+@property (nullable, strong) AVPlayer *player;
 
 /*!
 	@constant	AVPlayerViewControlsStyleNone
@@ -112,6 +112,12 @@ typedef NS_ENUM(NSInteger, AVPlayerViewControlsStyle) {
  */
 @property BOOL showsFullScreenToggleButton;
 
+/*!
+	@property    showsTimecodes
+	@abstract    If timecodes are available, allow the AVPlayerView controls to enter timecode mode. Default is NO.
+ */
+@property BOOL showsTimecodes API_AVAILABLE(macos(10.15));
+
 @end
 
 
@@ -156,6 +162,92 @@ typedef NS_ENUM(NSInteger, AVPlayerViewTrimResult) {
 	@abstract	Display the provided chapter number and title momentarily.
  */
 - (void)flashChapterNumber:(NSUInteger)chapterNumber chapterTitle:(nullable NSString *)chapterTitle;
+
+@end
+
+
+@protocol AVPlayerViewPictureInPictureDelegate;
+
+@interface AVPlayerView (AVPlayerViewPictureInPictureSupport)
+
+/*!
+ 	@property	allowsPictureInPicturePlayback
+ 	@abstract	Whether or not the receiver allows Picture in Picture playback. Default is NO.
+ */
+@property (nonatomic) BOOL allowsPictureInPicturePlayback API_AVAILABLE(macos(10.15));
+
+/*!
+ 	@property	pictureInPictureDelegate
+ 	@abstract	A delegate for customizing Picture in Picture playback experience.
+ */
+@property (nonatomic, nullable, weak) id<AVPlayerViewPictureInPictureDelegate> pictureInPictureDelegate API_AVAILABLE(macos(10.15));
+
+@end
+
+
+API_AVAILABLE(macos(10.15))
+@protocol AVPlayerViewPictureInPictureDelegate <NSObject>
+@optional
+
+/*!
+ 	@method		playerViewWillStartPictureInPicture:
+ 	@param		playerView
+ 				The player view.
+ 	@abstract	Delegate can implement this method to be notified when Picture in Picture will start.
+ */
+- (void)playerViewWillStartPictureInPicture:(AVPlayerView *)playerView;
+
+/*!
+ 	@method		playerViewDidStartPictureInPicture:
+ 	@param		playerView
+ 				The player view.
+ 	@abstract	Delegate can implement this method to be notified when Picture in Picture did start.
+ */
+- (void)playerViewDidStartPictureInPicture:(AVPlayerView *)playerView;
+
+/*!
+ 	@method		playerView:failedToStartPictureInPictureWithError:
+ 	@param		playerView
+ 				The player view.
+ 	@param		error
+ 				An error describing why it failed.
+ 	@abstract	Delegate can implement this method to be notified when Picture in Picture failed to start.
+ */
+- (void)playerView:(AVPlayerView *)playerView failedToStartPictureInPictureWithError:(NSError *)error;
+
+/*!
+ 	@method		playerViewWillStopPictureInPicture:
+ 	@param		playerView
+ 				The player view.
+ 	@abstract	Delegate can implement this method to be notified when Picture in Picture will stop.
+ */
+- (void)playerViewWillStopPictureInPicture:(AVPlayerView *)playerView;
+
+/*!
+ 	@method		playerViewDidStopPictureInPicture:
+ 	@param		playerView
+ 				The player view.
+ 	@abstract	Delegate can implement this method to be notified when Picture in Picture did stop.
+ */
+- (void)playerViewDidStopPictureInPicture:(AVPlayerView *)playerView;
+
+/*!
+ 	@method		playerView:restoreUserInterfaceForPictureInPictureStopWithCompletionHandler:
+ 	@param		playerView
+ 				The player view.
+ 	@param		completionHandler
+ 				The completion handler the delegate needs to call after restore.
+ 	@abstract	Delegate can implement this method to restore the user interface before Picture in Picture stops.
+ */
+- (void)playerView:(AVPlayerView *)playerView restoreUserInterfaceForPictureInPictureStopWithCompletionHandler:(void (^)(BOOL restored))completionHandler;
+
+/*!
+ 	@method		playerViewShouldAutomaticallyDismissAtPictureInPictureStart:
+ 	@param		playerView
+ 				The player view.
+ 	@abstract	Delegate can implement this method and return NO to prevent player view from automatically being miniaturized or losing focus when Picture in Picture starts.
+ */
+- (BOOL)playerViewShouldAutomaticallyDismissAtPictureInPictureStart:(AVPlayerView *)playerView;
 
 @end
 

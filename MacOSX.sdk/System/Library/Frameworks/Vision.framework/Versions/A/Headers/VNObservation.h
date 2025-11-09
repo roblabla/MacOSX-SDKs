@@ -86,6 +86,7 @@ API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0))
 
 /*!
  @brief create a new VNFaceObservation with a normalized bounding box, roll and yaw
+ @discussion If you're creating your bounding box without using Vision, set the requestRevision to VNRequestRevisionUnspecified
  */
 + (instancetype)faceObservationWithRequestRevision:(NSUInteger)requestRevision boundingBox:(CGRect)boundingBox roll:(nullable NSNumber *)roll yaw:(nullable NSNumber *)yaw API_AVAILABLE(macos(10.14), ios(12.0), tvos(12.0));
 
@@ -95,12 +96,17 @@ API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0))
 @property (readonly, nonatomic, strong, nullable)  VNFaceLandmarks2D *landmarks;
 
 /*!
- @brief Face roll angle populated by VNDetectFaceRectanglesRequest. The roll is reported in radians, positive angle corresponds to counterclockwise direction, range [-Pi, Pi). nil value indicated that the roll angle hasn't been computed
+ @brief The capture quality of the face as a normalized value between 0.0 and 1.0 that can be used to compare the quality of the face in terms of it capture attributes (lighting, blur, position). This score can be used to compare the capture quality of a face against other captures of the same face in a given set.
+ */
+@property (readonly, nonatomic, strong, nullable) NSNumber *faceCaptureQuality API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0));
+
+/*!
+ @brief Face roll angle populated by VNDetectFaceRectanglesRequest. The roll is reported in radians, positive angle corresponds to counterclockwise direction, range [-Pi, Pi). nil value indicates that the roll angle hasn't been computed
  */
 @property (readonly, nonatomic, strong, nullable) NSNumber *roll API_AVAILABLE(macos(10.14), ios(12.0), tvos(12.0));
 
 /*!
- @brief Face yaw angle populated by VNDetectFaceRectanglesRequest. The yaw is reported in radians, positive angle corresponds to counterclockwise direction, range [-Pi/2, Pi/2). nil value indicated that the yaw angle hasn't been computed
+ @brief Face yaw angle populated by VNDetectFaceRectanglesRequest. The yaw is reported in radians, positive angle corresponds to counterclockwise direction, range [-Pi/2, Pi/2). nil value indicates that the yaw angle hasn't been computed
  */
 @property (readonly, nonatomic, strong, nullable) NSNumber *yaw API_AVAILABLE(macos(10.14), ios(12.0), tvos(12.0));
 
@@ -117,11 +123,52 @@ API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0))
 @interface VNClassificationObservation : VNObservation
 
 /*!
- @brief The is the label or identifier of a classificaiton request. An example classification could be a string like 'cat' or 'hotdog'. The string is defined in the model that was used for the classification. Usually these are technical labels that are not localized and not meant to be used directly to be presented to an end user in the UI.
+ @brief The is the label or identifier of a classification request. An example classification could be a string like 'cat' or 'hotdog'. The string is defined in the model that was used for the classification. Usually these are technical labels that are not localized and not meant to be used directly to be presented to an end user in the UI.
  */
 @property (readonly, nonatomic, copy) NSString *identifier;
 
 @end
+
+
+/*!
+ @discussion VNClassificationObservation mave have precision/recall curves which can be used to decide on an "optimal" operation point.
+             Precision is a value in the range of [0..1] which represents the fraction of relevant instances among the retrieved instances.
+             Recall is a value in the range of [0..1] which represents the fraction of relevant instances that have been retrieved over the total amount of relevant instances.
+*/
+API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0))
+@interface VNClassificationObservation (PrecisionRecallAdditions)
+
+/*!
+	@brief	Determine whether or not precision/recall curves are available with the observation.
+	@discussion	If this property is YES, then all other precision/recall related methods in this addition can be called.
+*/
+@property (readonly, nonatomic, assign) BOOL hasPrecisionRecallCurve;
+
+/*!
+	@brief	Determine whether or not the observation's operation point for a specific precision has a minimum recall value.
+ 
+	@param minimumRecall	The minimum recall desired for an operation point.
+ 
+	@param precision		The precision value used to select the operation point.
+ 
+	@return YES if the recall value for the operation point specified by a precision value has the minimum value; otherwise, NO.
+*/
+- (BOOL) hasMinimumRecall:(float)minimumRecall forPrecision:(float)precision;
+
+/*!
+	@brief	Determine whether or not the observation's operation point for a specific recall has a minimum precision value.
+
+	@param minimumPrecision	The minimum precision desired for an operation point.
+ 
+	@param recall		The recall value used to select the operation point.
+ 
+	@return YES if the precision value for the operation point specified by a recall value has the minimum value; otherwise, NO.
+*/
+- (BOOL) hasMinimumPrecision:(float)minimumPrecision forRecall:(float)recall;
+
+@end
+
+
 
 /*!
  @class VNRecognizedObjectObservation
@@ -148,7 +195,14 @@ API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0))
 /*!
  @brief The result VNCoreMLRequest where the model produces an MLFeatureValue that is neither a classification or image. Refer to the Core ML documentation and the model itself for the handling of the content of the featureValue.
  
- */@property (readonly, nonatomic, copy) MLFeatureValue *featureValue;
+ */
+@property (readonly, nonatomic, copy) MLFeatureValue *featureValue;
+
+/*!
+ @brief The name used in the model description of the CoreML model that produced this observation allowing to correlate the observation back to the output of the model.
+ 
+ */
+@property (readonly, nonatomic, copy) NSString *featureName API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0));
 
 @end
 
@@ -168,6 +222,12 @@ API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0))
  */
 @property (readonly, nonatomic) CVPixelBufferRef pixelBuffer;
 
+/*!
+ @brief The name used in the model description of the CoreML model that produced this observation allowing to correlate the observation back to the output of the model. This can be nil if the observation is not the result of a VNCoreMLRequest operation.
+ 
+ */
+@property (readonly, nonatomic, copy, nullable) NSString *featureName API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0));
+
 @end
 
 
@@ -180,6 +240,8 @@ API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0))
  */
 API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0))
 @interface VNRectangleObservation : VNDetectedObjectObservation
+
++ (instancetype)rectangleObservationWithRequestRevision:(NSUInteger)requestRevision topLeft:(CGPoint)topLeft bottomLeft:(CGPoint)bottomLeft bottomRight:(CGPoint)bottomRight topRight:(CGPoint)topRight API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0));
 
 @property (readonly, nonatomic, assign) CGPoint topLeft;
 @property (readonly, nonatomic, assign) CGPoint topRight;
@@ -202,6 +264,50 @@ API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0))
 	@discussion	If the associated request indicated that it is interested in character boxes by setting the VNRequestOptionReportCharacterBoxes option to @YES, this property will be non-nil (but may still be empty, depending on the detection results).
 */
 @property (readonly, nonatomic, copy, nullable) NSArray<VNRectangleObservation *> *characterBoxes;
+
+@end
+
+/*!
+ @class VNRecognizedText
+ @brief VNRecognizedText A block of recognized text. There can be multiple VNRecognizedText objects returned in a VNRecognizedTextObservation - one for each candidate.
+ */
+API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0))
+@interface VNRecognizedText : NSObject < NSCopying, NSSecureCoding >
+
+/*!
+ @brief        Field that contains recognized text.
+ @discussion   This is the top candidate of the recognized text.
+ */
+@property (readonly, nonatomic, copy) NSString *string;
+
+/*!
+ * @brief The level of confidence normalized to [0.0, 1.0] where 1.0 is most confident
+ */
+@property (readonly, nonatomic, assign) VNConfidence confidence;
+
+/*!
+ * @brief Calculate the bounding box around the characters in the range of the string.
+ * @discussion The bounding boxes are not guaranteed to be an exact fit around the characters and are purely meant for UI purposes and not for image processing.
+ */
+- (nullable VNRectangleObservation *)boundingBoxForRange:(NSRange)range error:(NSError**)error;
+
+@end
+
+/*!
+ @class VNRecognizedTextObservation
+ @superclass VNDetectedObjectObservation
+ @brief VNRecognizedTextObservation Describes a text area detected and recognized by the VNRecognizeTextRequest request.
+ */
+API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0))
+@interface VNRecognizedTextObservation : VNRectangleObservation
+
+
+/*!
+ * @brief Returns the top N candidates sorted by decreasing confidence score
+ * @discussion This will return no more than N but can be less than N candidates. The maximum number of candidates returned cannot exceed 10 candidates.
+ */
+- (NSArray<VNRecognizedText*>*) topCandidates:(NSUInteger)maxCandidateCount;
+
 
 @end
 
@@ -275,11 +381,57 @@ API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0))
 /*!
  @class VNImageHomographicAlignmentObservation
  @superclass VNImageAlignmentObservation
- @brief An observation describing the results of performing a homorgraphic image alignment.
+ @brief An observation describing the results of performing a homographic image alignment.
 */
 API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0))
 @interface VNImageHomographicAlignmentObservation : VNImageAlignmentObservation
 @property (readwrite, nonatomic, assign) matrix_float3x3 warpTransform;
+@end
+
+/*!
+ @class VNSaliencyImageObservation
+ @superclass VNPixelBufferObservation
+ @brief VNSaliencyImageObservation provides a grayscale "heat" map of important areas of an image.
+ @discussion In the revision1, the "heat" map is a OneComponent32Float pixel format CVPixelBuffer.
+ 
+ */
+API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0))
+@interface VNSaliencyImageObservation : VNPixelBufferObservation
+
+/*!
+ @brief An array of bounds of salient objects within the image. Each box represents a distinct mode of the heat map.
+*/
+@property (readonly, nonatomic, nullable) NSArray<VNRectangleObservation*>* salientObjects;
+
+@end
+
+
+/*!
+*/
+API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0))
+@interface VNFeaturePrintObservation : VNObservation
+
+/*!
+	@brief The type of each element in the data.
+*/
+@property (readonly, atomic, assign) VNElementType elementType;
+
+/*!
+	@brief The total number of elements in the data.
+*/
+@property (readonly, atomic, assign) NSUInteger elementCount;
+
+/*!
+	@brief The feature print data.
+*/
+@property (readonly, atomic, strong) NSData* data;
+
+/*!
+ @brief Computes the distance between two observations.
+ @discussion The larger the distance the more dissimlar the feature prints are. In case of an error this method returns false with an error describing the error condition, for instance comparing two non-comparable feature prints.
+ */
+- (BOOL)computeDistance:(float *)outDistance toFeaturePrintObservation:(VNFeaturePrintObservation *)featurePrint error:(NSError **)error;
+
 @end
 
 

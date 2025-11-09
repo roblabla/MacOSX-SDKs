@@ -1,5 +1,5 @@
 /*	NSCalendar.h
-	Copyright (c) 2004-2018, Apple Inc. All rights reserved.
+	Copyright (c) 2004-2019, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -64,22 +64,22 @@ typedef NS_OPTIONS(NSUInteger, NSCalendarUnit) {
         NSCalendarUnitCalendar           API_AVAILABLE(macos(10.7), ios(4.0), watchos(2.0), tvos(9.0)) = (1 << 20),
         NSCalendarUnitTimeZone           API_AVAILABLE(macos(10.7), ios(4.0), watchos(2.0), tvos(9.0)) = (1 << 21),
 
-	NSEraCalendarUnit NS_CALENDAR_ENUM_DEPRECATED(10_4, 10_10, 2_0, 8_0, "Use NSCalendarUnitEra instead") = NSCalendarUnitEra,
-	NSYearCalendarUnit NS_CALENDAR_ENUM_DEPRECATED(10_4, 10_10, 2_0, 8_0, "Use NSCalendarUnitYear instead") = NSCalendarUnitYear,
-	NSMonthCalendarUnit NS_CALENDAR_ENUM_DEPRECATED(10_4, 10_10, 2_0, 8_0, "Use NSCalendarUnitMonth instead") = NSCalendarUnitMonth,
-	NSDayCalendarUnit NS_CALENDAR_ENUM_DEPRECATED(10_4, 10_10, 2_0, 8_0, "Use NSCalendarUnitDay instead") = NSCalendarUnitDay,
-	NSHourCalendarUnit NS_CALENDAR_ENUM_DEPRECATED(10_4, 10_10, 2_0, 8_0, "Use NSCalendarUnitHour instead") = NSCalendarUnitHour,
-	NSMinuteCalendarUnit NS_CALENDAR_ENUM_DEPRECATED(10_4, 10_10, 2_0, 8_0, "Use NSCalendarUnitMinute instead") = NSCalendarUnitMinute,
-	NSSecondCalendarUnit NS_CALENDAR_ENUM_DEPRECATED(10_4, 10_10, 2_0, 8_0, "Use NSCalendarUnitSecond instead") = NSCalendarUnitSecond,
-	NSWeekCalendarUnit NS_CALENDAR_ENUM_DEPRECATED(10_4, 10_10, 2_0, 8_0, "Use NSCalendarUnitWeekOfMonth or NSCalendarUnitWeekOfYear, depending on which you mean") = kCFCalendarUnitWeek,
-	NSWeekdayCalendarUnit NS_CALENDAR_ENUM_DEPRECATED(10_4, 10_10, 2_0, 8_0, "Use NSCalendarUnitWeekday instead") = NSCalendarUnitWeekday,
-	NSWeekdayOrdinalCalendarUnit NS_CALENDAR_ENUM_DEPRECATED(10_4, 10_10, 2_0, 8_0, "Use NSCalendarUnitWeekdayOrdinal instead") = NSCalendarUnitWeekdayOrdinal,
-	NSQuarterCalendarUnit NS_CALENDAR_ENUM_DEPRECATED(10_6, 10_10, 4_0, 8_0, "Use NSCalendarUnitQuarter instead") = NSCalendarUnitQuarter,
-	NSWeekOfMonthCalendarUnit NS_CALENDAR_ENUM_DEPRECATED(10_7, 10_10, 5_0, 8_0, "Use NSCalendarUnitWeekOfMonth instead") = NSCalendarUnitWeekOfMonth,
-	NSWeekOfYearCalendarUnit NS_CALENDAR_ENUM_DEPRECATED(10_7, 10_10, 5_0, 8_0, "Use NSCalendarUnitWeekOfYear instead") = NSCalendarUnitWeekOfYear,
-	NSYearForWeekOfYearCalendarUnit NS_CALENDAR_ENUM_DEPRECATED(10_7, 10_10, 5_0, 8_0, "Use NSCalendarUnitYearForWeekOfYear instead") = NSCalendarUnitYearForWeekOfYear,
-	NSCalendarCalendarUnit NS_CALENDAR_ENUM_DEPRECATED(10_7, 10_10, 4_0, 8_0, "Use NSCalendarUnitCalendar instead") = NSCalendarUnitCalendar,
-	NSTimeZoneCalendarUnit NS_CALENDAR_ENUM_DEPRECATED(10_7, 10_10, 4_0, 8_0, "Use NSCalendarUnitTimeZone instead") = NSCalendarUnitTimeZone,
+	NSEraCalendarUnit API_DEPRECATED_WITH_REPLACEMENT("NSCalendarUnitEra", macos(10.4, 10.10), ios(2.0, 8.0), watchos(2.0, 2.0), tvos(9.0, 9.0)) = NSCalendarUnitEra,
+	NSYearCalendarUnit API_DEPRECATED_WITH_REPLACEMENT("NSCalendarUnitYear", macos(10.4, 10.10), ios(2.0, 8.0), watchos(2.0, 2.0), tvos(9.0, 9.0)) = NSCalendarUnitYear,
+	NSMonthCalendarUnit API_DEPRECATED_WITH_REPLACEMENT("NSCalendarUnitMonth", macos(10.4, 10.10), ios(2.0, 8.0), watchos(2.0, 2.0), tvos(9.0, 9.0)) = NSCalendarUnitMonth,
+	NSDayCalendarUnit API_DEPRECATED_WITH_REPLACEMENT("NSCalendarUnitDay", macos(10.4, 10.10), ios(2.0, 8.0), watchos(2.0, 2.0), tvos(9.0, 9.0)) = NSCalendarUnitDay,
+	NSHourCalendarUnit API_DEPRECATED_WITH_REPLACEMENT("NSCalendarUnitHour", macos(10.4, 10.10), ios(2.0, 8.0), watchos(2.0, 2.0), tvos(9.0, 9.0)) = NSCalendarUnitHour,
+	NSMinuteCalendarUnit API_DEPRECATED_WITH_REPLACEMENT("NSCalendarUnitMinute", macos(10.4, 10.10), ios(2.0, 8.0), watchos(2.0, 2.0), tvos(9.0, 9.0)) = NSCalendarUnitMinute,
+	NSSecondCalendarUnit API_DEPRECATED_WITH_REPLACEMENT("NSCalendarUnitSecond", macos(10.4, 10.10), ios(2.0, 8.0), watchos(2.0, 2.0), tvos(9.0, 9.0)) = NSCalendarUnitSecond,
+	NSWeekCalendarUnit API_DEPRECATED("NSCalendarUnitWeekOfMonth or NSCalendarUnitWeekOfYear, depending on which you mean", macos(10.4, 10.10), ios(2.0, 8.0), watchos(2.0, 2.0), tvos(9.0, 9.0)) = kCFCalendarUnitWeek,
+	NSWeekdayCalendarUnit API_DEPRECATED_WITH_REPLACEMENT("NSCalendarUnitWeekday", macos(10.4, 10.10), ios(2.0, 8.0), watchos(2.0, 2.0), tvos(9.0, 9.0)) = NSCalendarUnitWeekday,
+	NSWeekdayOrdinalCalendarUnit API_DEPRECATED_WITH_REPLACEMENT("NSCalendarUnitWeekdayOrdinal", macos(10.4, 10.10), ios(2.0, 8.0), watchos(2.0, 2.0), tvos(9.0, 9.0)) = NSCalendarUnitWeekdayOrdinal,
+	NSQuarterCalendarUnit API_DEPRECATED_WITH_REPLACEMENT("NSCalendarUnitQuarter", macos(10.6, 10.10), ios(4.0, 8.0), watchos(2.0, 2.0), tvos(9.0, 9.0)) = NSCalendarUnitQuarter,
+	NSWeekOfMonthCalendarUnit API_DEPRECATED_WITH_REPLACEMENT("NSCalendarUnitWeekOfMonth", macos(10.7, 10.10), ios(5.0, 8.0), watchos(2.0, 2.0), tvos(9.0, 9.0)) = NSCalendarUnitWeekOfMonth,
+	NSWeekOfYearCalendarUnit API_DEPRECATED_WITH_REPLACEMENT("NSCalendarUnitWeekOfYear", macos(10.7, 10.10), ios(5.0, 8.0), watchos(2.0, 2.0), tvos(9.0, 9.0)) = NSCalendarUnitWeekOfYear,
+	NSYearForWeekOfYearCalendarUnit API_DEPRECATED_WITH_REPLACEMENT("NSCalendarUnitYearForWeekOfYear", macos(10.7, 10.10), ios(5.0, 8.0), watchos(2.0, 2.0), tvos(9.0, 9.0)) = NSCalendarUnitYearForWeekOfYear,
+	NSCalendarCalendarUnit API_DEPRECATED_WITH_REPLACEMENT("NSCalendarUnitCalendar", macos(10.7, 10.10), ios(4.0, 8.0), watchos(2.0, 2.0), tvos(9.0, 9.0)) = NSCalendarUnitCalendar,
+	NSTimeZoneCalendarUnit API_DEPRECATED_WITH_REPLACEMENT("NSCalendarUnitTimeZone", macos(10.7, 10.10), ios(4.0, 8.0), watchos(2.0, 2.0), tvos(9.0, 9.0)) = NSCalendarUnitTimeZone,
 };
     
 typedef NS_OPTIONS(NSUInteger, NSCalendarOptions) {
@@ -97,7 +97,7 @@ typedef NS_OPTIONS(NSUInteger, NSCalendarOptions) {
 };
 
 enum {
-	NSWrapCalendarComponents NS_CALENDAR_ENUM_DEPRECATED(10_4, 10_10, 2_0, 8_0, "Use NSCalendarWrapComponents instead") = NSCalendarWrapComponents,
+	NSWrapCalendarComponents API_DEPRECATED_WITH_REPLACEMENT("NSCalendarWrapComponents", macos(10.4, 10.10), ios(2.0, 8.0), watchos(2.0, 2.0), tvos(9.0, 9.0)) = NSCalendarWrapComponents,
 };
 
 
@@ -112,7 +112,7 @@ enum {
 */
 + (nullable NSCalendar *)calendarWithIdentifier:(NSCalendarIdentifier)calendarIdentifierConstant API_AVAILABLE(macos(10.9), ios(8.0), watchos(2.0), tvos(9.0));
 
-- (instancetype)init NS_UNAVAILABLE;
+- (instancetype)init API_UNAVAILABLE(macos, ios, watchos, tvos);
 
 - (nullable id)initWithCalendarIdentifier:(NSCalendarIdentifier)ident NS_DESIGNATED_INITIALIZER;
 
@@ -410,7 +410,7 @@ FOUNDATION_EXPORT NSNotificationName const NSCalendarDayChangedNotification API_
 NS_ENUM(NSInteger) {
 	NSDateComponentUndefined = NSIntegerMax,
 
-	NSUndefinedDateComponent NS_CALENDAR_ENUM_DEPRECATED(10_4, 10_10, 2_0, 8_0, "Use NSDateComponentUndefined instead") = NSDateComponentUndefined
+	NSUndefinedDateComponent API_DEPRECATED_WITH_REPLACEMENT("NSDateComponentUndefined", macos(10.4, 10.10), ios(2.0, 8.0), watchos(2.0, 2.0), tvos(9.0, 9.0)) = NSDateComponentUndefined
 };
 
 
@@ -435,8 +435,8 @@ NS_ENUM(NSInteger) {
 @property (getter=isLeapMonth) BOOL leapMonth API_AVAILABLE(macos(10.8), ios(6.0), watchos(2.0), tvos(9.0));
 @property (nullable, readonly, copy) NSDate *date API_AVAILABLE(macos(10.7), ios(4.0), watchos(2.0), tvos(9.0));
 
-- (NSInteger)week NS_CALENDAR_DEPRECATED(10_4, 10_9, 2_0, 7_0, "Use weekOfMonth or weekOfYear, depending on which you mean");
-- (void)setWeek:(NSInteger)v NS_CALENDAR_DEPRECATED(10_4, 10_9, 2_0, 7_0, "Use setWeekOfMonth: or setWeekOfYear:, depending on which you mean");
+- (NSInteger)week API_DEPRECATED("Use -weekOfMonth or -weekOfYear, depending on which you mean", macos(10.4, 10.9), ios(2.0, 7.0), watchos(2.0, 2.0), tvos(9.0, 9.0));
+- (void)setWeek:(NSInteger)v API_DEPRECATED("Use -setWeekOfMonth: or -setWeekOfYear:, depending on which you mean", macos(10.4, 10.9), ios(2.0, 7.0), watchos(2.0, 2.0), tvos(9.0, 9.0));
 
 /*
 	This API allows one to set a specific component of NSDateComponents, by enum constant value rather than property name.

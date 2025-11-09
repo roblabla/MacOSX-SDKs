@@ -1430,6 +1430,7 @@ CFN_EXPORT Boolean
 CFNetServiceRegister(CFNetServiceRef theService, CFStreamError * __nullable error) CF_DEPRECATED(10_2, 10_4, NA, NA);
 
 
+
 /*
  *  CFNetServiceResolve()   *** DEPRECATED ***
  *  
@@ -1473,72 +1474,6 @@ CFNetServiceRegister(CFNetServiceRef theService, CFStreamError * __nullable erro
  */
 CFN_EXPORT Boolean 
 CFNetServiceResolve(CFNetServiceRef theService, CFStreamError * __nullable error) CF_DEPRECATED(10_2, 10_4, NA, NA);
-
-
-
-/*
- *  CFNetServiceGetProtocolSpecificInformation()   *** DEPRECATED ***
- *  
- *  Discussion:
- *	Query a Network Service for its protocol specific information.
- *	
- *	
- *	As a result of new, better performing API's in Service Discovery,
- *	users should now call CFNetServiceGetTXTData.  If needing to
- *	monitor TXT record changes, users should use the new
- *	CFNetServiceMonitor object. Using the new calls will allow your
- *	application to perform better on the network.
- *  
- *  Mac OS X threading:
- *	Thread safe
- *	The function gets the data in a thread-safe manner, but the
- *	resulting data is not safe.  Since it is returned as a matter of
- *	a get opposed to a copy, the data is not safe if the service is
- *	being altered from another thread.
- *  
- *  Parameters:
- *	
- *	theService:
- *	  The Network Service to be queried.  Must be non-NULL.
- *  
- *  Result:
- *	Returns NULL if a resolve has not been performed or if
- *	CFNetServiceSetProtocolSpecificInformation has not been called. 
- *	It will return a CFStringRef containing the specific information
- *	if there is some.
- *  
- */
-CFN_EXPORT __nullable CFStringRef
-CFNetServiceGetProtocolSpecificInformation(CFNetServiceRef theService) CF_DEPRECATED(10_2, 10_4, NA, NA);
-
-
-
-/*
- *  CFNetServiceSetProtocolSpecificInformation()   *** DEPRECATED ***
- *  
- *  Discussion:
- *	Set a Network Service's protocol specific information. 
- *	
- *	As a result of new, better performing API's in Service Discovery,
- *	users should now call CFNetServiceSetTXTData.  Using the new
- *	calls will allow your application to perform better on the
- *	network.
- *  
- *  Mac OS X threading:
- *	Thread safe
- *  
- *  Parameters:
- *	
- *	theService:
- *	  The Network Service to be queried.  Must be non-NULL.
- *	
- *	theInfo:
- *	  The protocol specific information to be added.  Pass NULL to
- *	  remove the information from the service.
- *  
- */
-CFN_EXPORT void 
-CFNetServiceSetProtocolSpecificInformation(CFNetServiceRef theService, CFStringRef __nullable theInfo) CF_DEPRECATED(10_2, 10_4, NA, NA);
 
 
 #endif  /* defined(__MACH__) */

@@ -31,6 +31,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /* NCWidgetProviding is an optional protocol for further customizing aspects
    of the widget's behavior. */
+NS_AVAILABLE_MAC(10_10)
 @protocol NCWidgetProviding <NSExtensionRequestHandling>
 
 @optional
@@ -58,7 +59,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-
+NS_AVAILABLE_MAC(10_10)
 @interface NSViewController (NCWidgetProvidingPresentationStyles)
 
 /* Presents the viewController modally within the Notification Center widget.

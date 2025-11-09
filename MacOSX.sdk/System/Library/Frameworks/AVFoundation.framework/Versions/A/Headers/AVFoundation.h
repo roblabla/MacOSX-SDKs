@@ -10,15 +10,7 @@
 */
 
 #import <TargetConditionals.h>
-#if TARGET_OS_WATCH
-#if ! __has_include(<AVFoundation/AVAnimation.h>)
-#define AVF_IS_WATCHOS_SDK 1
-#endif
-#endif
-
 #import <AVFoundation/AVBase.h>
-
-#if ! AVF_IS_WATCHOS_SDK
 #import <AVFoundation/AVAnimation.h>
 #import <AVFoundation/AVAsset.h>
 #import <AVFoundation/AVAssetCache.h>
@@ -59,22 +51,21 @@
 #import <AVFoundation/AVComposition.h>
 #import <AVFoundation/AVCompositionTrack.h>
 #import <AVFoundation/AVCompositionTrackSegment.h>
+#if __has_include(<AVFoundation/AVDepthData.h>)
 #import <AVFoundation/AVDepthData.h>
-#import <AVFoundation/AVPortraitEffectsMatte.h>
-#import <AVFoundation/AVError.h>
 #endif
-
+#import <AVFoundation/AVPortraitEffectsMatte.h>
+#import <AVFoundation/AVSemanticSegmentationMatte.h>
+#import <AVFoundation/AVError.h>
 #import <AVFoundation/AVFAudio.h>
-
-#if ! AVF_IS_WATCHOS_SDK
 #import <AVFoundation/AVMediaFormat.h>
 #import <AVFoundation/AVMediaSelection.h>
 #import <AVFoundation/AVMediaSelectionGroup.h>
 #import <AVFoundation/AVMetadataFormat.h>
-#import <AVFoundation/AVMetadataIdentifiers.h> 
+#import <AVFoundation/AVMetadataIdentifiers.h>
 #import <AVFoundation/AVMetadataItem.h>
 #import <AVFoundation/AVMetadataObject.h>
-#if (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE))
+#if (TARGET_OS_MAC && ! TARGET_OS_TV)
 #import <AVFoundation/AVMovie.h>
 #import <AVFoundation/AVMovieTrack.h>
 #endif
@@ -107,7 +98,6 @@
 #import <AVFoundation/AVVideoCompositing.h>
 #import <AVFoundation/AVVideoComposition.h>
 #import <AVFoundation/AVVideoSettings.h>
-#endif
 #if TARGET_OS_TV
 #import <AVFoundation/AVDisplayCriteria.h>
 #endif

@@ -1,10 +1,9 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: E756BD3C-C54E-3D7D-85C3-90195F4342B5' ]
+uuids:           [ 'x86_64: 71DF7D85-A53C-3E67-964A-F625AEFECFDA' ]
 platform:        macosx
-install-name:    /usr/lib/libpcre.0.dylib
+install-name:    '/usr/lib/libpcre.0.dylib'
 current-version: 1.1
-objc-constraint: none
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _pcre_assign_jit_stack, _pcre_callout, _pcre_compile, _pcre_compile2, 

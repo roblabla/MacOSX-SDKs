@@ -114,26 +114,26 @@ CT_EXPORT const CFStringRef kCTFontMatrixAttribute CT_AVAILABLE(macos(10.5), ios
 CT_EXPORT const CFStringRef kCTFontCascadeListAttribute CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 /*!
     @defined    kCTFontCharacterSetAttribute
-    @abstract   The font unicode character coverage set.
-    @discussion This key is used to specify or obtain the character set for a font reference. This value for this key is a CFCharacterSetRef. If specified this can be used to restrict the font to a subset of its actual character set. If unspecified this attribute is ignored and the actual character set is used.
+    @abstract   The font Unicode character coverage set.
+    @discussion The value for this key is a CFCharacterSetRef. Creating a font with this attribute will restrict the font to a subset of its actual character set.
 */
 CT_EXPORT const CFStringRef kCTFontCharacterSetAttribute CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 /*!
     @defined    kCTFontLanguagesAttribute
     @abstract   The list of supported languages.
-    @discussion This key is used to specify or obtain a list of covered languages for a font reference. The value for this key is a CFArrayRef of CFStringRefs. If specified this restricts the search to matching fonts that support the specified languages. The language identifier string should conform to UTS #35. If unspecified this attribute is ignored.
+    @discussion The value for this key is a CFArrayRef of CFStringRef language identifiers conforming to UTS #35. It can be requested from any font. If present in a descriptor used for matching, only fonts supporting the specified languages will be returned.
 */
 CT_EXPORT const CFStringRef kCTFontLanguagesAttribute CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 /*!
     @defined    kCTFontBaselineAdjustAttribute
     @abstract   The baseline adjustment to apply to font metrics.
-    @discussion This key is used to specify or obtain the baseline adjustment for a font reference. This is primary used when defining font descriptors for a cascade list to keep the baseline of all fonts even. The value associated with this is a float represented as a CFNumberRef.
+    @discussion The value for this key is a floating-point CFNumberRef. This is primarily used when defining font descriptors for a cascade list to keep the baseline of all fonts even.
 */
 CT_EXPORT const CFStringRef kCTFontBaselineAdjustAttribute CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 /*!
     @defined    kCTFontMacintoshEncodingsAttribute
-    @abstract   The macintosh encodings attribute.
-    @discussion This key is used to specify or obtain the Macintosh encodings for a font reference. The value associated with this key is a CFNumberRef containing a bitfield of the script codes in <CoreText/SFNTTypes.h>; bit 0 corresponds to kFontRomanScript, and so on. This attribute is provided for legacy compatibility.
+    @abstract   The Macintosh encodings (legacy script codes).
+    @discussion The value associated with this key is a CFNumberRef containing a bitfield of the script codes in <CoreText/SFNTTypes.h>; bit 0 corresponds to kFontRomanScript, and so on. This attribute is provided for legacy compatibility.
 */
 CT_EXPORT const CFStringRef kCTFontMacintoshEncodingsAttribute CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 /*!
@@ -145,9 +145,9 @@ CT_EXPORT const CFStringRef kCTFontFeaturesAttribute CT_AVAILABLE(macos(10.5), i
 /*!
     @defined    kCTFontFeatureSettingsAttribute
     @abstract   The array of typographic feature settings.
-    @discussion This key is used to specify an array of zero or more feature settings. In the case of duplicate or conflicting settings the last setting in the list will take precedence. In the case of AAT settings, it is the caller's responsibility to handle exclusive and non-exclusive settings as necessary.
+    @discussion This key is used to specify an array of zero or more feature settings. Each setting dictionary indicates which setting should be applied. In the case of duplicate or conflicting settings the last setting in the list will take precedence. In the case of AAT settings, it is the caller's responsibility to handle exclusive and non-exclusive settings as necessary.
                 An AAT setting dictionary contains a tuple of a kCTFontFeatureTypeIdentifierKey key-value pair and a kCTFontFeatureSelectorIdentifierKey key-value pair.
-                An OpenType setting dictionary contains a tuple of a kCTFontOpenTypeFeatureTag key-value pair and a kCTFontOpenTypeFeatureValue key-value pair. Each setting dictionary indicates which setting should be applied. In the case of duplicate or conflicting settings the last setting in the list will take precedence.
+                An OpenType setting dictionary contains a tuple of a kCTFontOpenTypeFeatureTag key-value pair and a kCTFontOpenTypeFeatureValue key-value pair.
 
                 Starting with OS X 10.10 and iOS 8.0, settings are also accepted (but not returned) in the following simplified forms:
                 An OpenType setting can be either an array pair of tag string and value number, or a tag string on its own. For example: @[ @"c2sc", @1 ] or simply @"c2sc". An unspecified value enables the feature and a value of zero disables it.
@@ -158,6 +158,8 @@ CT_EXPORT const CFStringRef kCTFontFeatureSettingsAttribute CT_AVAILABLE(macos(1
     @defined    kCTFontFixedAdvanceAttribute
     @abstract   Specifies advance width.
     @discussion This key is used to specify a constant advance width, which affects the glyph metrics of any font instance created with this key; it overrides font values and the font transformation matrix, if any. The value associated with this key must be a CFNumberRef.
+
+                Starting with macOS 10.14 and iOS 12.0, this only affects glyph advances that have non-zero width when this attribute is not present.
 */
 CT_EXPORT const CFStringRef kCTFontFixedAdvanceAttribute CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 /*!
@@ -498,6 +500,7 @@ typedef bool (^CTFontDescriptorProgressHandler)(CTFontDescriptorMatchingState st
     @param      progressBlock
                 Callback block to indicate the progress.
                 Return true to continue, and return false to cancel the process.
+                This block is called on a private serial queue on OS X 10.15, iOS 13, and later.
      
     @result     false if it couldn't start the work.
 */

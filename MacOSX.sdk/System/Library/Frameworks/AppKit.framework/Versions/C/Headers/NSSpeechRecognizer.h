@@ -1,7 +1,7 @@
 /*
 	NSSpeechRecognizer.h
 	Application Kit
-	Copyright (c) 2003-2018, Apple Inc.
+	Copyright (c) 2003-2019, Apple Inc.
 	All rights reserved.
 */
 
@@ -10,15 +10,13 @@
 #import <Foundation/NSArray.h>
 
 NS_ASSUME_NONNULL_BEGIN
+API_UNAVAILABLE_BEGIN(ios)
 
 @class NSString;
 @protocol NSSpeechRecognizerDelegate;
 
 
-@interface NSSpeechRecognizer : NSObject {
-@private // All instance variables are private
-    id	_privateNSSpeechRecognizerVars APPKIT_IVAR;
-}
+@interface NSSpeechRecognizer : NSObject
 
 - (nullable instancetype)init;
 
@@ -43,5 +41,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+API_UNAVAILABLE_END
 NS_ASSUME_NONNULL_END
 

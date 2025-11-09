@@ -5,7 +5,7 @@
  
      Version:    ATS
  
-     Copyright:  (c)) 1994-2018 by Apple Inc., all rights reserved.
+     Copyright:  (c) 1994-2018 by Apple Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -546,6 +546,8 @@ typedef struct ATSJustWidthDeltaEntryOverride ATSJustWidthDeltaEntryOverride;
 typedef ATSJustWidthDeltaEntryOverride  ATSJustPriorityWidthDeltaOverrides[4];
 /* ---------------------------------------------------------------------------- */
 
+#if ATS_LEGACY_API
+
 /*
  *  ATSULineRef
  *  
@@ -677,6 +679,8 @@ struct ATSULayoutOperationOverrideSpecifier {
 
 };
 typedef struct ATSULayoutOperationOverrideSpecifier ATSULayoutOperationOverrideSpecifier;
+
+#endif // ATS_LEGACY_API
 
 #pragma pack(pop)
 

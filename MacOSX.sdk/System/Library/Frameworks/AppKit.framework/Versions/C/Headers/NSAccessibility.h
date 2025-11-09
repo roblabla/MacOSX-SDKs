@@ -1,7 +1,7 @@
 /*
 	NSAccessibility.h
 	Application Kit
-	Copyright (c) 2001-2018, Apple Inc.
+	Copyright (c) 2001-2019, Apple Inc.
 	All rights reserved.
 */
 
@@ -16,6 +16,7 @@
 #import <AppKit/NSWorkspace.h>
 
 NS_ASSUME_NONNULL_BEGIN
+API_UNAVAILABLE_BEGIN(ios)
 
 @class NSString, NSArray, NSView;
 
@@ -25,25 +26,25 @@ NS_ASSUME_NONNULL_BEGIN
 
 /* Attribute methods
 */
-- (NSArray<NSAccessibilityAttributeName> *)accessibilityAttributeNames NS_DEPRECATED_MAC(10_1, 10_10, "Use the NSAccessibility protocol methods instead (see NSAccessibilityProtocols.h)");
-- (nullable id)accessibilityAttributeValue:(NSAccessibilityAttributeName)attribute NS_DEPRECATED_MAC(10_1, 10_10, "Use the NSAccessibility protocol methods instead (see NSAccessibilityProtocols.h)");
-- (BOOL)accessibilityIsAttributeSettable:(NSAccessibilityAttributeName)attribute NS_DEPRECATED_MAC(10_1, 10_10, "Use the NSAccessibility protocol methods instead (see NSAccessibilityProtocols.h)");
-- (void)accessibilitySetValue:(nullable id)value forAttribute:(NSAccessibilityAttributeName)attribute NS_DEPRECATED_MAC(10_1, 10_10, "Use the NSAccessibility protocol methods instead (see NSAccessibilityProtocols.h)");
+- (NSArray<NSAccessibilityAttributeName> *)accessibilityAttributeNames API_DEPRECATED("Use the NSAccessibility protocol methods instead (see NSAccessibilityProtocols.h)", macos(10.1,10.10));
+- (nullable id)accessibilityAttributeValue:(NSAccessibilityAttributeName)attribute API_DEPRECATED("Use the NSAccessibility protocol methods instead (see NSAccessibilityProtocols.h)", macos(10.1,10.10));
+- (BOOL)accessibilityIsAttributeSettable:(NSAccessibilityAttributeName)attribute API_DEPRECATED("Use the NSAccessibility protocol methods instead (see NSAccessibilityProtocols.h)", macos(10.1,10.10));
+- (void)accessibilitySetValue:(nullable id)value forAttribute:(NSAccessibilityAttributeName)attribute API_DEPRECATED("Use the NSAccessibility protocol methods instead (see NSAccessibilityProtocols.h)", macos(10.1,10.10));
 
 /* Parameterized Attribute methods
 */
-- (NSArray<NSAccessibilityParameterizedAttributeName> *)accessibilityParameterizedAttributeNames NS_DEPRECATED_MAC(10_1, 10_10, "Use the NSAccessibility protocol methods instead (see NSAccessibilityProtocols.h)");
-- (nullable id)accessibilityAttributeValue:(NSAccessibilityParameterizedAttributeName)attribute forParameter:(nullable id)parameter NS_DEPRECATED_MAC(10_1, 10_10, "Use the NSAccessibility protocol methods instead (see NSAccessibilityProtocols.h)");
+- (NSArray<NSAccessibilityParameterizedAttributeName> *)accessibilityParameterizedAttributeNames API_DEPRECATED("Use the NSAccessibility protocol methods instead (see NSAccessibilityProtocols.h)", macos(10.1,10.10));
+- (nullable id)accessibilityAttributeValue:(NSAccessibilityParameterizedAttributeName)attribute forParameter:(nullable id)parameter API_DEPRECATED("Use the NSAccessibility protocol methods instead (see NSAccessibilityProtocols.h)", macos(10.1,10.10));
 
 /* Accessibility action methods
 */
-- (NSArray<NSAccessibilityActionName> *)accessibilityActionNames NS_DEPRECATED_MAC(10_1, 10_10, "Use the NSAccessibility protocol methods instead (see NSAccessibilityProtocols.h)");
-- (nullable NSString *)accessibilityActionDescription:(NSAccessibilityActionName)action NS_DEPRECATED_MAC(10_1, 10_10, "Use the NSAccessibility protocol methods instead (see NSAccessibilityProtocols.h)");
-- (void)accessibilityPerformAction:(NSAccessibilityActionName)action NS_DEPRECATED_MAC(10_1, 10_10, "Use the NSAccessibility protocol methods instead (see NSAccessibilityProtocols.h)");
+- (NSArray<NSAccessibilityActionName> *)accessibilityActionNames API_DEPRECATED("Use the NSAccessibility protocol methods instead (see NSAccessibilityProtocols.h)", macos(10.1,10.10));
+- (nullable NSString *)accessibilityActionDescription:(NSAccessibilityActionName)action API_DEPRECATED("Use the NSAccessibility protocol methods instead (see NSAccessibilityProtocols.h)", macos(10.1,10.10));
+- (void)accessibilityPerformAction:(NSAccessibilityActionName)action API_DEPRECATED("Use the NSAccessibility protocol methods instead (see NSAccessibilityProtocols.h)", macos(10.1,10.10));
 
 /* Return YES if the UIElement doesn't show up to the outside world - i.e. its parent should return the UIElement's children as its own - cutting the UIElement out. E.g. NSControls are ignored when they are single-celled.
 */
-- (BOOL)accessibilityIsIgnored NS_DEPRECATED_MAC(10_1, 10_10, "Use isAccessibilityElement instead");
+- (BOOL)accessibilityIsIgnored API_DEPRECATED("Use isAccessibilityElement instead", macos(10.1,10.10));
 
 /* Returns the deepest descendant of the UIElement hierarchy that contains the point. You can assume the point has already been determined to lie within the receiver. Override this method to do deeper hit testing within a UIElement - e.g. a NSMatrix would test its cells. The point is bottom-left relative screen coordinates.
 */
@@ -80,7 +81,7 @@ NS_ASSUME_NONNULL_BEGIN
  
  - the object must implement -accessibilityNotifiesWhenDestroyed to return YES.
  */
-@property (readonly) BOOL accessibilityNotifiesWhenDestroyed NS_AVAILABLE_MAC(10_9);
+@property (readonly) BOOL accessibilityNotifiesWhenDestroyed API_AVAILABLE(macos(10.9));
 
 @end
 
@@ -88,34 +89,34 @@ NS_ASSUME_NONNULL_BEGIN
 @interface NSWorkspace (NSWorkspaceAccessibilityDisplay)
 
 /* Get the current accessibility display option for high-contrast UI. If this is true, UI should be presented with high contrast such as utilizing a less subtle color palette or bolder lines. You may listen for NSWorkspaceAccessibilityDisplayOptionsDidChangeNotification to be notified when this changes. */
-@property (readonly) BOOL accessibilityDisplayShouldIncreaseContrast NS_AVAILABLE_MAC(10_10);
+@property (readonly) BOOL accessibilityDisplayShouldIncreaseContrast API_AVAILABLE(macos(10.10));
 
 /* Get the current accessibility display option for differentiate without color. If this is true, UI should not convey information using color alone and instead should use shapes or glyphs to convey information. You may listen for NSWorkspaceAccessibilityDisplayOptionsDidChangeNotification to be notified when this changes. */
-@property (readonly) BOOL accessibilityDisplayShouldDifferentiateWithoutColor NS_AVAILABLE_MAC(10_10);
+@property (readonly) BOOL accessibilityDisplayShouldDifferentiateWithoutColor API_AVAILABLE(macos(10.10));
 
 /* Get the current accessibility display option for reduce transparency. If this property's value is true, UI (mainly window) backgrounds should not be semi-transparent; they should be opaque. You may listen for NSWorkspaceAccessibilityDisplayOptionsDidChangeNotification to be notified when this changes. */
-@property (readonly) BOOL accessibilityDisplayShouldReduceTransparency NS_AVAILABLE_MAC(10_10);
+@property (readonly) BOOL accessibilityDisplayShouldReduceTransparency API_AVAILABLE(macos(10.10));
 
 /* Get the current accessibility display option for reduce motion. If this property's value is true, UI should avoid large animations, especially those that simulate the third dimension. You may listen for NSWorkspaceAccessibilityDisplayOptionsDidChangeNotification to be notified when this changes. */
-@property (readonly) BOOL accessibilityDisplayShouldReduceMotion NS_AVAILABLE_MAC(10_12);
+@property (readonly) BOOL accessibilityDisplayShouldReduceMotion API_AVAILABLE(macos(10.12));
 
 /* Get the current accessibility display option for invert colors. If this property's value is true then the display will be inverted. In these cases it may be needed for UI drawing to be adjusted to in order to display optimally when inverted.  You may listen for NSWorkspaceAccessibilityDisplayOptionsDidChangeNotification to be notified when this changes. */
-@property (readonly) BOOL accessibilityDisplayShouldInvertColors NS_AVAILABLE_MAC(10_12);
+@property (readonly) BOOL accessibilityDisplayShouldInvertColors API_AVAILABLE(macos(10.12));
 
 @end
 
 @interface NSWorkspace (NSWorkspaceAccessibility)
 
 /* Indicates if VoiceOver is currently running. This is observable through KVO. */
-@property (readonly, getter=isVoiceOverEnabled) BOOL voiceOverEnabled NS_AVAILABLE_MAC(10_13);
+@property (readonly, getter=isVoiceOverEnabled) BOOL voiceOverEnabled API_AVAILABLE(macos(10.13));
 
 /* Indicates if Switch Control is currently running. This is observable through KVO. */
-@property (readonly, getter=isSwitchControlEnabled) BOOL switchControlEnabled NS_AVAILABLE_MAC(10_13);
+@property (readonly, getter=isSwitchControlEnabled) BOOL switchControlEnabled API_AVAILABLE(macos(10.13));
 
 @end
 
 /* Notification posted to the NSWorkspace notification center when accessibility display options have changed. */
-APPKIT_EXTERN NSNotificationName const NSWorkspaceAccessibilityDisplayOptionsDidChangeNotification NS_AVAILABLE_MAC(10_10);
+APPKIT_EXTERN NSNotificationName const NSWorkspaceAccessibilityDisplayOptionsDidChangeNotification API_AVAILABLE(macos(10.10));
 
 
 /*** Accessibility Related Methods ***/
@@ -124,15 +125,15 @@ APPKIT_EXTERN NSNotificationName const NSWorkspaceAccessibilityDisplayOptionsDid
 
 /* For changing the set of attributes on an instance - as an alternative to sub-classing.
 */
-- (BOOL)accessibilitySetOverrideValue:(nullable id)value forAttribute:(NSAccessibilityAttributeName)attribute NS_DEPRECATED_MAC(10_1, 10_10, "Use the NSAccessibility protocol methods instead (see NSAccessibilityProtocols.h)");
+- (BOOL)accessibilitySetOverrideValue:(nullable id)value forAttribute:(NSAccessibilityAttributeName)attribute API_DEPRECATED("Use the NSAccessibility protocol methods instead (see NSAccessibilityProtocols.h)", macos(10.1,10.10));
 
 @end
 
 // With a NSView and a relative frame, return the frame in screen coordinates for accessibility
-APPKIT_EXTERN NSRect NSAccessibilityFrameInView(NSView *parentView, NSRect frame) NS_AVAILABLE_MAC(10_10);
+APPKIT_EXTERN NSRect NSAccessibilityFrameInView(NSView *parentView, NSRect frame) API_AVAILABLE(macos(10.10));
 
 // With a NSView and a relative point, return the frame in screen coordinates for accessibility
-APPKIT_EXTERN NSPoint NSAccessibilityPointInView(NSView *parentView, NSPoint point) NS_AVAILABLE_MAC(10_10);
+APPKIT_EXTERN NSPoint NSAccessibilityPointInView(NSView *parentView, NSPoint point) API_AVAILABLE(macos(10.10));
 
 
 /* Setting whether the application may have protected content. Protected content is identified by a value of TRUE for the accessibility attribute NSAccessibilityContainsProtectedContentAttribute. If NSAccessibilityMayContainProtectedContent returns NO, then NSAccessibilityContainsProtectedContentAttribute is completely ignored.
@@ -143,20 +144,20 @@ APPKIT_EXTERN BOOL NSAccessibilitySetMayContainProtectedContent(BOOL flag);
 
 /* Getting descriptions for standard roles and actions.
 */
-APPKIT_EXTERN NSString * __nullable NSAccessibilityRoleDescription(NSAccessibilityRole role, NSAccessibilitySubrole __nullable subrole);
-APPKIT_EXTERN NSString * __nullable NSAccessibilityRoleDescriptionForUIElement(id element);
-APPKIT_EXTERN NSString * __nullable NSAccessibilityActionDescription(NSAccessibilityActionName action);
+APPKIT_EXTERN NSString * _Nullable NSAccessibilityRoleDescription(NSAccessibilityRole role, NSAccessibilitySubrole _Nullable subrole);
+APPKIT_EXTERN NSString * _Nullable NSAccessibilityRoleDescriptionForUIElement(id element);
+APPKIT_EXTERN NSString * _Nullable NSAccessibilityActionDescription(NSAccessibilityActionName action);
 
 
 /* Error signaling for bad setter value or bad parameter.
 */
-APPKIT_EXTERN void NSAccessibilityRaiseBadArgumentException(__null_unspecified id element, NSAccessibilityAttributeName __null_unspecified attribute, __null_unspecified id value) NS_DEPRECATED_MAC(10_1, 10_11, "Exceptions are no longer appropriate for indicating errors in accessibility API. Unexpected values should be handled through appropriate type checking.");
+APPKIT_EXTERN void NSAccessibilityRaiseBadArgumentException(_Null_unspecified id element, NSAccessibilityAttributeName _Null_unspecified attribute, _Null_unspecified id value) API_DEPRECATED("Exceptions are no longer appropriate for indicating errors in accessibility API. Unexpected values should be handled through appropriate type checking.", macos(10.1,10.11));
 
 
 /*** Ignored UIElements Utilities ***/
 
-APPKIT_EXTERN __nullable id NSAccessibilityUnignoredAncestor(id element);
-APPKIT_EXTERN __nullable id NSAccessibilityUnignoredDescendant(id element);
+APPKIT_EXTERN _Nullable id NSAccessibilityUnignoredAncestor(id element);
+APPKIT_EXTERN _Nullable id NSAccessibilityUnignoredDescendant(id element);
 APPKIT_EXTERN NSArray *NSAccessibilityUnignoredChildren(NSArray *originalChildren);
 APPKIT_EXTERN NSArray *NSAccessibilityUnignoredChildrenForOnlyChild(id originalChild);
 
@@ -187,5 +188,6 @@ APPKIT_EXTERN void NSAccessibilityPostNotification(id element, NSAccessibilityNo
 typedef struct NSAccessibility { void *_reserved; } NSAccessibility;
 #endif
 
+API_UNAVAILABLE_END
 NS_ASSUME_NONNULL_END
 

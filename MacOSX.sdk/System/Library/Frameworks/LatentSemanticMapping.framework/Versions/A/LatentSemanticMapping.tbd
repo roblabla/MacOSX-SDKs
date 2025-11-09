@@ -1,9 +1,9 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 5B4F4AA1-ADFF-339D-8BD4-1FC70566F569' ]
-platform:        macosx
-install-name:    /System/Library/Frameworks/LatentSemanticMapping.framework/Versions/A/LatentSemanticMapping
-objc-constraint: none
+uuids:           [ 'x86_64: 80625EB2-48A6-3D27-AEF4-60D7EE1194AE', 'x86_64: 80625EB2-48A6-3D27-AEF4-60D7EE1194AE' ]
+platform:        zippered
+install-name:    '/System/Library/Frameworks/LatentSemanticMapping.framework/Versions/A/LatentSemanticMapping'
+current-version: 2.12.5
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _LSMMapAddCategory, _LSMMapAddText, _LSMMapAddTextWithWeight, 

@@ -38,6 +38,7 @@
 #include <MPSNeuralNetwork/MPSNeuralNetworkTypes.h>
 #include <MPSNeuralNetwork/MPSCNNNeuronType.h>
 #include <MPSNeuralNetwork/MPSCNNMath.h>
+#include <MPSNeuralNetwork/MPSCNNTypes.h>
 
 #pragma mark -
 #pragma mark Base Classes
@@ -95,6 +96,30 @@
  *                  }
  *              }
  *              @endcode
+ *
+ *              But what is a handle?  Here MPS is giving you enough rope with which to hang
+ *              yourself. Don't panic! As long as your response is not to start tying nooses,
+ *              you should be fine. It is just rope. More precisely, it is just a pointer to a
+ *              NSObject. MPS doesn't know or care what it is or does, so long as it conforms
+ *              to the MPSHandle protocol. What it does is entirely up to you. We imagine it
+ *              will be an object that describes the data that you intend to pass later to the graph.
+ *              It could be a file reference, or an input to your own software component that wraps
+ *              the graph or even the MPSImage / MPSState that you plan to use.
+ *
+ *                  Do take note of the NSSecureCoding requirement in the MPSHandle protocol, however.
+ *                  This is needed if you attempt to use NSSecureCoding to serialize the MPSNNGraph.
+ *                  Normal MPSImages and MPSStates don't do that part.
+ *
+ *              Your application should be able to use the handle to locate / create the correct
+ *              image / state or batch thereof to pass as input to the graph.  Handles are also
+ *              used to disambiguate graph intermediate images and state outputs. They aren't used
+ *              to disambiguate image results (see -[MPSNNGraph initWithDevice:resultImages:resultsAreNeeded:]
+ *              as you should already know the ordering of outputs there. It is the same as what
+ *              you asked for.
+ *
+ *              Do take note of the NSSecureCoding requirement in the MPSHandle protocol, however.
+ *              This is needed if you attempt to use NSSecureCoding to serialize the MPSNNGraph.
+ *              Normal MPSImages and MPSStates don't do that part.
  */
 @protocol MPSHandle <NSSecureCoding, NSObject>
 
@@ -127,7 +152,7 @@
  *              MPSNNFilterNode.resultImage. Image nodes that are not created by MPS
  *              (i.e. "the graph inputs") must be created by you.
  */
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0))
 @interface MPSNNImageNode : NSObject
 
 -(nonnull instancetype) initWithHandle: (NSObject <MPSHandle> * __nullable) handle NS_DESIGNATED_INITIALIZER;
@@ -180,7 +205,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
 
 /*! @abstract   Set to true to cause the resource to be synchronized with the CPU
  *  @discussion It is not needed on iOS/tvOS devices, where it does nothing.  */
-@property (nonatomic, readwrite) BOOL       synchronizeResource MPS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), tvos(11.3));
+@property (nonatomic, readwrite) BOOL       synchronizeResource MPS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3));
 
 /*! @abstract   Stop training graph automatic creation at this node.
  *  @discussion An inference graph of MPSNNFilterNodes, MPSNNStateNodes and MPSNNImageNodes can be automatically
@@ -190,7 +215,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
  *              nodes from being included in the training graph, set <undesired node>.resultImage.stopGradient = YES.
  *              This will prevent gradient propagation beyond this MPSNNImageNode.
  *              Default: NO */
-@property (nonatomic, readwrite) BOOL       stopGradient     MPS_AVAILABLE_STARTING( macos(10.14), ios(12.0), tvos(112.0));
+@property (nonatomic, readwrite) BOOL       stopGradient     MPS_AVAILABLE_STARTING( macos(10.14), ios(12.0), macCatalyst(13.0), tvos(12.0));
 
 @end
 
@@ -202,7 +227,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
  *              state may be moved into a MPSState object in order to keep the filter itself immutable.
  *              The MPSState object typically encapsulates one or more MTLResource objects.
  */
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0))
 @interface MPSNNStateNode : NSObject
 -(nonnull instancetype) init NS_UNAVAILABLE;    // These are typically obtained using  MPSNNFilterNode.resultState
                                                 // If you do need a state node, make a MPSNNStateNode subclass, instead.
@@ -231,7 +256,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
 
 /*! @abstract   Set to true to cause the resource to be synchronized with the CPU
  *  @discussion Ignored on non-MacOS.   */
-@property (nonatomic, readwrite) BOOL       synchronizeResource MPS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), tvos(11.3));
+@property (nonatomic, readwrite) BOOL       synchronizeResource MPS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3));
 
 @end
 
@@ -247,21 +272,29 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
  *              the necessary extra information like MPSNNGradientState
  *              nodes and inference filter source image nodes to the object as
  *              needed.*/
-MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3))
+MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3))
 @interface MPSNNGradientStateNode : MPSNNStateNode
 @end
 
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), tvos(11.3))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3))
 @interface MPSCNNConvolutionGradientStateNode : MPSNNGradientStateNode
+@end
+
+MPS_CLASS_AVAILABLE_STARTING( macos(10.15), ios(13.0), macCatalyst(13.0), tvos(13.0))
+@interface MPSCNNConvolutionTransposeGradientStateNode : MPSCNNConvolutionGradientStateNode
 @end
 
 /*! @class MPSNNBinaryGradientStateNode
  */
-MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3))
+MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3))
 @interface MPSNNBinaryGradientStateNode : MPSNNStateNode
 @end
 
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), tvos(11.3))
+MPS_CLASS_AVAILABLE_STARTING(macos(10.15), ios(13.0), macCatalyst(13.0), tvos(13.0))
+@interface MPSNNMultiaryGradientStateNode : MPSNNStateNode
+@end
+
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3))
 @interface MPSNNArithmeticGradientStateNode : MPSNNBinaryGradientStateNode
 @end
 
@@ -301,7 +334,7 @@ typedef void (^MPSGradientNodeBlock)( MPSNNFilterNode * __nonnull gradientNode,
  *              MPS neural network filter objects. Make one of those. 
  *              This class defines an polymorphic interface for them.
  */
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0))
 @interface MPSNNFilterNode : NSObject
 
 /* This is a virtual base class. Make MPSNNFilterNode subclass objects instead. */
@@ -396,11 +429,17 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
 
 
 /*! @abstract       Build training graph from inference graph
- *  @discussion     This method will iteratively build the training potion of a graph based
+ *  @discussion     This method will iteratively build the training portion of a graph based
  *                  on an inference graph. Self should be the last node in the
  *                  inference graph. It is typically a loss layer, but can be anything.
  *                  Typically, the "inference graph" used here is the desired inference
  *                  graph with a dropout node and a loss layer node appended.
+ *
+ *                  The nodes that are created will have default properties. In certain cases,
+ *                  these may not be appropriate (e.g. if you want to do CPU based updates
+ *                  of convolution weights instead of default GPU updates.) In such cases, your
+ *                  application should use the nodeHandler to configure the new nodes as they are
+ *                  created.
  *
  *                  BUG: This method can not follow links to regions of the graph that are
  *                  connected to the rest of the graph solely via MPSNNStateNodes. A gradient
@@ -426,7 +465,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
  */
 -(NSArray <MPSNNFilterNode*> * __nullable) trainingGraphWithSourceGradient: (MPSNNImageNode* __nullable ) gradientImage
                                                                nodeHandler: (__nullable MPSGradientNodeBlock) nodeHandler
-        MPS_AVAILABLE_STARTING( macos(10.14), ios(12.0), tvos(12.0));
+        MPS_AVAILABLE_STARTING( macos(10.14), ios(12.0), macCatalyst(13.0), tvos(12.0));
 
 @end
 
@@ -444,7 +483,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
  *              -[MPSNNFilterNode gradientFilterWithSource:] is a simple way to construct
  *              these.
  */
-MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3))
+MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3))
 @interface MPSNNGradientFilterNode : MPSNNFilterNode
 
 -(MPSNNGradientFilterNode*__nonnull) gradientFilterWithSources: (NSArray<MPSNNImageNode*> * __nonnull) sourceGradient NS_UNAVAILABLE;
@@ -462,13 +501,17 @@ MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3))
 @protocol MPSCNNConvolutionDataSource;
 
 /*! @abstract   A MPSNNFilterNode representing a MPSCNNConvolution kernel   */
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
-@interface MPSCNNConvolutionNode : MPSNNFilterNode
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0))
+@interface MPSCNNConvolutionNode : MPSNNFilterNode <MPSNNTrainableNode>
+
+/*! @abstract   The training style of the forward node will be propagated to gradient nodes made from it */
+@property (readwrite, nonatomic)    MPSNNTrainingStyle trainingStyle
+    MPS_AVAILABLE_STARTING( macos(10.15), ios(13.0), macCatalyst(13.0), tvos(13.0));
 
 /*! @abstract   Set the floating-point precision used by the convolution accumulator
  *  @discussion Default:  MPSNNConvolutionAccumulatorPrecisionOptionFloat */
 @property (readwrite, nonatomic) MPSNNConvolutionAccumulatorPrecisionOption accumulatorPrecision
-    MPS_AVAILABLE_STARTING( macos(10.14), ios(12.0), tvos(12.0));
+    MPS_AVAILABLE_STARTING( macos(10.14), ios(12.0), macCatalyst(13.0), tvos(12.0));
 
 /*! @abstract   Init an autoreleased not representing a MPSCNNConvolution kernel
  *  @param      sourceNode              The MPSNNImageNode representing the source MPSImage for the filter
@@ -497,11 +540,11 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
  *               from the convolution transpose matches the size of the image passed in
  *               to this node. */
 @property (nonatomic, readonly, nullable) MPSCNNConvolutionGradientStateNode * convolutionGradientState
-    MPS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3));
+    MPS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3));
 
 @end
 
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0))
 /*! @abstract   A MPSNNFilterNode representing a MPSCNNFullyConnected kernel   */
 @interface MPSCNNFullyConnectedNode : MPSCNNConvolutionNode
 /*! @abstract   Init an autoreleased not representing a MPSCNNFullyConnected kernel
@@ -525,7 +568,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
 
 @end
 
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0))
 /*! @abstract   A MPSNNFilterNode representing a MPSCNNBinaryConvolution kernel   */
 @interface MPSCNNBinaryConvolutionNode : MPSCNNConvolutionNode
 /*! @abstract   Init an autoreleased node representing a MPSCNNBinaryConvolution kernel
@@ -584,7 +627,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
                        inputScaleTerms: (const float * __nullable) inputScaleTerms
                                   type: (MPSCNNBinaryConvolutionType) type
                                  flags: (MPSCNNBinaryConvolutionFlags) flags
-                MPS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), tvos(11.3));
+                MPS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3));
 
 /*! @abstract   Init a node representing a MPSCNNBinaryConvolution kernel
  *  @param      sourceNode              The MPSNNImageNode representing the source MPSImage for the filter
@@ -611,7 +654,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
                        inputScaleTerms: (const float * __nullable) inputScaleTerms
                                   type: (MPSCNNBinaryConvolutionType) type
                                  flags: (MPSCNNBinaryConvolutionFlags) flags
-            MPS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), tvos(11.3));
+            MPS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3));
 
 
 /*! @abstract unavailable */
@@ -619,7 +662,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
 
 @end
 
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0))
 /*! @abstract   A MPSNNFilterNode representing a MPSCNNBinaryFullyConnected kernel   */
 @interface MPSCNNBinaryFullyConnectedNode : MPSCNNBinaryConvolutionNode
 /*! @abstract   Init an autoreleased node representing a MPSCNNBinaryFullyConnected kernel
@@ -677,7 +720,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
                        inputScaleTerms: (const float * __nullable) inputScaleTerms
                                   type: (MPSCNNBinaryConvolutionType) type
                                  flags: (MPSCNNBinaryConvolutionFlags) flags
-            MPS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), tvos(11.3));
+            MPS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3));
 
 /*! @abstract   Init a node representing a MPSCNNBinaryFullyConnected kernel
  *  @param      sourceNode              The MPSNNImageNode representing the source MPSImage for the filter
@@ -704,13 +747,13 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
                        inputScaleTerms: (const float * __nullable) inputScaleTerms
                                   type: (MPSCNNBinaryConvolutionType) type
                                  flags: (MPSCNNBinaryConvolutionFlags) flags
-            MPS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), tvos(11.3));
+            MPS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3));
 
 
 
 @end
 
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0))
 /*! @abstract   A MPSNNFilterNode representing a MPSCNNConvolutionTranspose kernel   */
 @interface MPSCNNConvolutionTransposeNode : MPSCNNConvolutionNode
 /*! @abstract   Init an autoreleased not representing a MPSCNNConvolutionTransposeNode kernel
@@ -727,7 +770,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
 +(nonnull instancetype) nodeWithSource: (MPSNNImageNode * __nonnull) sourceNode
               convolutionGradientState: (MPSCNNConvolutionGradientStateNode * __nullable) convolutionGradientState
                                weights: (nonnull id <MPSCNNConvolutionDataSource>) weights
-        MPS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), tvos(11.3));
+        MPS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3));
 
 /*! @abstract   Init a node representing a MPSCNNConvolutionTransposeNode kernel
  *  @param      sourceNode              The MPSNNImageNode representing the source MPSImage for the filter
@@ -744,13 +787,13 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
 -(nonnull instancetype) initWithSource: (MPSNNImageNode * __nonnull) sourceNode
               convolutionGradientState: (MPSCNNConvolutionGradientStateNode * __nullable) convolutionGradientState
                                weights: (nonnull id <MPSCNNConvolutionDataSource>) weights
-        MPS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), tvos(11.3));
+        MPS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3));
 
 /*! @abstract unavailable */
 @property (nonatomic, readonly, nullable) MPSCNNConvolutionGradientStateNode * convolutionGradientState NS_UNAVAILABLE;
 @end
 
-MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3))
+MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3))
 @interface MPSCNNConvolutionGradientNode : MPSNNGradientFilterNode <MPSNNTrainableNode>
 /*! @abstract   A node to represent the gradient calculation for convolution training.
  *  @param sourceGradient   The input gradient from the 'downstream' gradient filter. Often
@@ -783,6 +826,73 @@ MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3))
                                        weights: (nullable id <MPSCNNConvolutionDataSource>) weights;
 @end
 
+MPS_CLASS_AVAILABLE_STARTING(macos(10.15), ios(13.0), macCatalyst(13.0), tvos(13.0))
+@interface MPSCNNFullyConnectedGradientNode : MPSCNNConvolutionGradientNode
+/*! @abstract   A node to represent the gradient calculation for fully connected training.
+ *  @param sourceGradient   The input gradient from the 'downstream' gradient filter. Often
+ *                          that is a neuron gradient filter node.
+ *  @param sourceImage      The input image from the forward fully connected node
+ *  @param gradientState    The gradient state from the forward fully connected
+ *  @param weights          The data source from the forward fully connected. It may not contain
+ *                          an integrated neuron. Similary, any normalization should be
+ *                          broken out into a separate node. Pass nil to use the weights
+ *                          from the forward fully connected pass.
+ *  @return  A MPSCNNFullyConnectedGradientNode    */
++(nonnull instancetype) nodeWithSourceGradient: (MPSNNImageNode*__nonnull) sourceGradient
+                                   sourceImage: (MPSNNImageNode*__nonnull) sourceImage
+                      convolutionGradientState: (MPSCNNConvolutionGradientStateNode*__nonnull) gradientState
+                                       weights: (nullable id <MPSCNNConvolutionDataSource>) weights;
+
+/*! @abstract   A node to represent the gradient calculation for fully connectd training.
+ *  @param sourceGradient   The input gradient from the 'downstream' gradient filter. Often
+ *                          that is a neuron gradient filter node.
+ *  @param sourceImage      The input image from the forward fully connected node
+ *  @param gradientState    The gradient state from the forward fully connected
+ *  @param weights          The data source from the forward fully connected. It may not contain
+ *                          an integrated neuron. Similary, any normalization should be
+ *                          broken out into a separate node. Pass nil to use the weights
+ *                          from the forward convolution pass.
+ *  @return  A MPSCNNFullyConnectedGradientNode    */
+-(nonnull instancetype) initWithSourceGradient: (MPSNNImageNode*__nonnull) sourceGradient
+                                   sourceImage: (MPSNNImageNode*__nonnull) sourceImage
+                      convolutionGradientState: (MPSCNNConvolutionGradientStateNode*__nonnull) gradientState
+                                       weights: (nullable id <MPSCNNConvolutionDataSource>) weights;
+@end
+
+MPS_CLASS_AVAILABLE_STARTING( macos(10.15), ios(13.0), macCatalyst(13.0), tvos(13.0))
+@interface MPSCNNConvolutionTransposeGradientNode : MPSCNNConvolutionGradientNode
+/*! @abstract   A node to represent the gradient calculation for convolution transpose training.
+ *  @param sourceGradient   The input gradient from the 'downstream' gradient filter. Often
+ *                          that is a neuron gradient filter node.
+ *  @param sourceImage      The input image from the forward convolution transpose node
+ *  @param gradientState    The gradient state from the forward convolution transpose
+ *  @param weights          The data source from the forward convolution transpose. It may not contain
+ *                          an integrated neuron. Similary, any normalization should be
+ *                          broken out into a separate node. Pass nil to use the weights
+ *                          from the forward convolution transpose pass.
+ *  @return  A MPSCNNConvolutionTransposeGradientNode    */
++(nonnull instancetype) nodeWithSourceGradient: (MPSNNImageNode*__nonnull) sourceGradient
+                                   sourceImage: (MPSNNImageNode*__nonnull) sourceImage
+             convolutionTransposeGradientState: (MPSCNNConvolutionTransposeGradientStateNode*__nonnull) gradientState
+                                       weights: (nullable id <MPSCNNConvolutionDataSource>) weights;
+
+/*! @abstract   A node to represent the gradient calculation for convolution transpose training.
+ *  @param sourceGradient   The input gradient from the 'downstream' gradient filter. Often
+ *                          that is a neuron gradient filter node.
+ *  @param sourceImage      The input image from the forward convolution transpose node
+ *  @param gradientState    The gradient state from the forward convolution transpose
+ *  @param weights          The data source from the forward convolution transpose. It may not contain
+ *                          an integrated neuron. Similary, any normalization should be
+ *                          broken out into a separate node. Pass nil to use the weights
+ *                          from the forward convolution transpose pass.
+ *  @return  A MPSCNNConvolutionTransposeGradientNode    */
+-(nonnull instancetype) initWithSourceGradient: (MPSNNImageNode*__nonnull) sourceGradient
+                                   sourceImage: (MPSNNImageNode*__nonnull) sourceImage
+             convolutionTransposeGradientState: (MPSCNNConvolutionTransposeGradientStateNode*__nonnull) gradientState
+                                       weights: (nullable id <MPSCNNConvolutionDataSource>) weights;
+@end
+
+
 #pragma mark -
 #pragma mark Neuron Nodes
 
@@ -804,13 +914,13 @@ MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3))
  *              node reads from the convolution result. The graph -debugDescription
  *              should reveal what happened.
  */
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0))
 @interface MPSCNNNeuronNode : MPSNNFilterNode
 
 /*! @abstract Create a neuron node of the appropriate type with a MPSNNNeuronDescriptor */
 +(nonnull instancetype) nodeWithSource: (MPSNNImageNode* __nonnull) sourceNode
                             descriptor: (MPSNNNeuronDescriptor * __nonnull) descriptor
-    MPS_AVAILABLE_STARTING(macos(10.14), ios(12.0), tvos(12.0));
+    MPS_AVAILABLE_STARTING(macos(10.14), ios(12.0), macCatalyst(13.0), tvos(12.0));
 
 /*! @abstract filter parameter a */
 @property (nonatomic, readonly)  float a;
@@ -826,7 +936,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
 @end
 
 
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0))
 /*! @abstract   A node representing a MPSCNNNeuronAbsolute kernel
  *  @discussion For each pixel, applies the following function:
  *  @code
@@ -840,7 +950,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
 -(nonnull instancetype) initWithSource: (MPSNNImageNode * __nonnull) sourceNode;
 @end
 
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0))
 /*! @abstract   A node representing a MPSCNNNeuronELU kernel
  *  @discussion For each pixel, applies the following function:
  *  @code
@@ -862,7 +972,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
 
 @end
 
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0))
 /*! @abstract   A node representing a MPSCNNNeuronReLUN kernel
  *  @discussion For each pixel, applies the following function:
  *  @code
@@ -886,7 +996,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
 @end
 
 
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0))
 /*! @abstract   A node representing a MPSCNNNeuronLinear kernel
  *  @discussion For each pixel, applies the following function:
  *  @code
@@ -917,7 +1027,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
 
 @end
 
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0))
 /*! @abstract   A node representing a MPSCNNNeuronReLU kernel
  *  @discussion For each pixel, applies the following function:
  *  @code
@@ -940,7 +1050,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
 
 @end
 
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0))
 /*! @abstract   A node representing a MPSCNNNeuronSigmoid kernel
  *  @discussion For each pixel, applies the following function:
  *  @code
@@ -954,7 +1064,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
 -(nonnull instancetype) initWithSource: (MPSNNImageNode * __nonnull) sourceNode;
 @end
 
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0))
 /*! @abstract   A node representing a MPSCNNNeuronHardSigmoid kernel
  *  @discussion For each pixel, applies the following function:
  *  @code
@@ -984,7 +1094,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
 
 @end
 
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0))
 /*! @abstract   A node representing a MPSCNNNeuronSoftPlus kernel
  *  @discussion For each pixel, applies the following function:
  *  @code
@@ -1014,7 +1124,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
 
 @end
 
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0))
 /*! @abstract   A node representing a MPSCNNNeuronSoftSign kernel
  *  @discussion For each pixel, applies the following function:
  *  @code
@@ -1031,7 +1141,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
 
 
 
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0))
 /*! @abstract   A node representing a MPSCNNNeuronTanH kernel
  *  @discussion For each pixel, applies the following function:
  *  @code
@@ -1065,7 +1175,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
 
 @end
 
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0))
 /*! @abstract   A ReLU node with parameter a provided independently for each feature channel
  *  @discussion For each pixel, applies the following function:
  *  @code
@@ -1097,7 +1207,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
 
 @end
 
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), tvos(11.3))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3))
 /*! @abstract   A node representing a MPSCNNNeuronPower kernel
  *  @discussion For each pixel, applies the following function:
  *  @code
@@ -1134,7 +1244,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), tvos(11.3))
 
 @end
 
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), tvos(11.3))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3))
 /*! @abstract   A node representing a MPSCNNNeuronExponential kernel
  *  @discussion For each pixel, applies the following function:
  *  @code
@@ -1171,7 +1281,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), tvos(11.3))
 
 @end
 
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), tvos(11.3))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3))
 /*! @abstract   A node representing a MPSCNNNeuronLogarithm kernel
  *  @discussion For each pixel, applies the following function:
  *  @code
@@ -1208,13 +1318,32 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), tvos(11.3))
 
 @end
 
+MPS_CLASS_AVAILABLE_STARTING( macos(10.15), ios(13.0), macCatalyst(13.0), tvos(13.0))
+/*! @abstract   A node representing a MPSCNNNeuronGeLU kernel
+ *  @discussion For each pixel, applies the following function:
+ */
+@interface MPSCNNNeuronGeLUNode : MPSCNNNeuronNode
+
+/*! @abstract   Init a node representing a MPSCNNNeuronGeLU kernel
+ *  @discussion For each pixel, applies the following function:
+ *  @param      sourceNode              The MPSNNImageNode representing the source MPSImage for the filter
+ *  @return     A new MPSNNFilter node for a MPSCNNNeuronLogarithm kernel.
+ */
+-(nonnull instancetype) initWithSource: (MPSNNImageNode * __nonnull) sourceNode;
+
+
+/*! @abstract Create an autoreleased node */
++(nonnull instancetype) nodeWithSource: (MPSNNImageNode * __nonnull) sourceNode;
+
+@end
+
 #pragma mark -
 #pragma mark Neuron Gradient Nodes
 
 /*! @abstract A node representing a MPSCNNNeuronGradient
  *  @discussion We use one generic neuron gradient node
  *              instead of having dozens of subclasses. */
-MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3))
+MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3))
 @interface MPSCNNNeuronGradientNode : MPSNNGradientFilterNode
 
 /*! @abstract create a new neuron gradient node
@@ -1244,7 +1373,7 @@ MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3))
 #pragma mark -
 #pragma mark Reduction Nodes
 
-MPS_CLASS_AVAILABLE_STARTING( macos(10.14.1), ios(12.1), tvos(12.1))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.14.1), ios(12.1), macCatalyst(13.0), tvos(12.1))
 /*! @abstract  A node for a unary MPSNNReduce node.
  *  @discussion This is an abstract base class that does not correspond with any
  *              particular MPSCNNKernel. Please make one of the MPSNNReduction
@@ -1268,63 +1397,63 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.14.1), ios(12.1), tvos(12.1))
 -(nonnull instancetype) initWithSource: (MPSNNImageNode * __nonnull) sourceNode;
 @end    // MPSNNUnaryReductionNode
 
-MPS_CLASS_AVAILABLE_STARTING( macos(10.14.1), ios(12.1), tvos(12.1))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.14.1), ios(12.1), macCatalyst(13.0), tvos(12.1))
 @interface MPSNNReductionRowMinNode : MPSNNUnaryReductionNode
 @end    // MPSNNReductionRowMinNode
 
-MPS_CLASS_AVAILABLE_STARTING( macos(10.14.1), ios(12.1), tvos(12.1))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.14.1), ios(12.1), macCatalyst(13.0), tvos(12.1))
 @interface MPSNNReductionColumnMinNode : MPSNNUnaryReductionNode
 @end    // MPSNNReductionColumnMinNode
 
-MPS_CLASS_AVAILABLE_STARTING( macos(10.14.1), ios(12.1), tvos(12.1))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.14.1), ios(12.1), macCatalyst(13.0), tvos(12.1))
 @interface MPSNNReductionFeatureChannelsMinNode : MPSNNUnaryReductionNode
 @end    // MPSNNReductionFeatureChannelsMinNode
 
-MPS_CLASS_AVAILABLE_STARTING( macos(10.14.1), ios(12.1), tvos(12.1))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.14.1), ios(12.1), macCatalyst(13.0), tvos(12.1))
 @interface MPSNNReductionFeatureChannelsArgumentMinNode : MPSNNUnaryReductionNode
 @end    // MPSNNReductionFeatureChannelsArgumentMinNode
 
-MPS_CLASS_AVAILABLE_STARTING( macos(10.14.1), ios(12.1), tvos(12.1))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.14.1), ios(12.1), macCatalyst(13.0), tvos(12.1))
 @interface MPSNNReductionRowMaxNode : MPSNNUnaryReductionNode
 @end    // MPSNNReductionRowMaxNode
 
-MPS_CLASS_AVAILABLE_STARTING( macos(10.14.1), ios(12.1), tvos(12.1))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.14.1), ios(12.1), macCatalyst(13.0), tvos(12.1))
 @interface MPSNNReductionColumnMaxNode : MPSNNUnaryReductionNode
 @end    // MPSNNReductionColumnMaxNode
 
-MPS_CLASS_AVAILABLE_STARTING( macos(10.14.1), ios(12.1), tvos(12.1))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.14.1), ios(12.1), macCatalyst(13.0), tvos(12.1))
 @interface MPSNNReductionFeatureChannelsMaxNode : MPSNNUnaryReductionNode
 @end    // MPSNNReductionFeatureChannelsMaxNode
 
-MPS_CLASS_AVAILABLE_STARTING( macos(10.14.1), ios(12.1), tvos(12.1))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.14.1), ios(12.1), macCatalyst(13.0), tvos(12.1))
 @interface MPSNNReductionFeatureChannelsArgumentMaxNode : MPSNNUnaryReductionNode
 @end    // MPSNNReductionFeatureChannelsArgumentMaxNode
 
-MPS_CLASS_AVAILABLE_STARTING( macos(10.14.1), ios(12.1), tvos(12.1))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.14.1), ios(12.1), macCatalyst(13.0), tvos(12.1))
 @interface MPSNNReductionRowMeanNode : MPSNNUnaryReductionNode
 @end    // MPSNNReductionRowMeanNode
 
-MPS_CLASS_AVAILABLE_STARTING( macos(10.14.1), ios(12.1), tvos(12.1))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.14.1), ios(12.1), macCatalyst(13.0), tvos(12.1))
 @interface MPSNNReductionColumnMeanNode : MPSNNUnaryReductionNode
 @end    // MPSNNReductionColumnMeanNode
 
-MPS_CLASS_AVAILABLE_STARTING( macos(10.14.1), ios(12.1), tvos(12.1))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.14.1), ios(12.1), macCatalyst(13.0), tvos(12.1))
 @interface MPSNNReductionFeatureChannelsMeanNode : MPSNNUnaryReductionNode
 @end    // MPSNNReductionFeatureChannelsMeanNode
 
-MPS_CLASS_AVAILABLE_STARTING( macos(10.14.1), ios(12.1), tvos(12.1))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.14.1), ios(12.1), macCatalyst(13.0), tvos(12.1))
 @interface MPSNNReductionSpatialMeanNode : MPSNNUnaryReductionNode
 @end    // MPSNNReductionSpatialMeanNode
 
-MPS_CLASS_AVAILABLE_STARTING( macos(10.14.1), ios(12.1), tvos(12.1))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.14.1), ios(12.1), macCatalyst(13.0), tvos(12.1))
 @interface MPSNNReductionRowSumNode : MPSNNUnaryReductionNode
 @end    // MPSNNReductionRowSumNode
 
-MPS_CLASS_AVAILABLE_STARTING( macos(10.14.1), ios(12.1), tvos(12.1))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.14.1), ios(12.1), macCatalyst(13.0), tvos(12.1))
 @interface MPSNNReductionColumnSumNode : MPSNNUnaryReductionNode
 @end    // MPSNNReductionColumnSumNode
 
-MPS_CLASS_AVAILABLE_STARTING( macos(10.14.1), ios(12.1), tvos(12.1))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.14.1), ios(12.1), macCatalyst(13.0), tvos(12.1))
 @interface MPSNNReductionFeatureChannelsSumNode : MPSNNUnaryReductionNode
 
 /*! @abstract   A scale factor to apply to each feature channel sum.
@@ -1335,16 +1464,16 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.14.1), ios(12.1), tvos(12.1))
 #pragma mark -
 #pragma mark Pooling Nodes
 
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0))
 /*! @abstract  A node for a MPSCNNPooling kernel
  *  @discussion This is an abstract base class that does not correspond with any
  *              particular MPSCNNKernel. Please make one of the MPSCNNPooling
  *              subclasses instead. */
 @interface MPSCNNPoolingNode : MPSNNFilterNode
-@property (readonly, nonatomic)  NSUInteger kernelWidth      MPS_AVAILABLE_STARTING( macos(10.14), ios(12.0), tvos(12.0));
-@property (readonly, nonatomic)  NSUInteger kernelHeight     MPS_AVAILABLE_STARTING( macos(10.14), ios(12.0), tvos(12.0));
-@property (readonly, nonatomic)  NSUInteger strideInPixelsX  MPS_AVAILABLE_STARTING( macos(10.14), ios(12.0), tvos(12.0));
-@property (readonly, nonatomic)  NSUInteger strideInPixelsY  MPS_AVAILABLE_STARTING( macos(10.14), ios(12.0), tvos(12.0));
+@property (readonly, nonatomic)  NSUInteger kernelWidth      MPS_AVAILABLE_STARTING( macos(10.14), ios(12.0), macCatalyst(13.0), tvos(12.0));
+@property (readonly, nonatomic)  NSUInteger kernelHeight     MPS_AVAILABLE_STARTING( macos(10.14), ios(12.0), macCatalyst(13.0), tvos(12.0));
+@property (readonly, nonatomic)  NSUInteger strideInPixelsX  MPS_AVAILABLE_STARTING( macos(10.14), ios(12.0), macCatalyst(13.0), tvos(12.0));
+@property (readonly, nonatomic)  NSUInteger strideInPixelsY  MPS_AVAILABLE_STARTING( macos(10.14), ios(12.0), macCatalyst(13.0), tvos(12.0));
 
 /*! @abstract Convenience initializer for MPSCNNPooling nodes with square non-overlapping kernels
  *  @param      sourceNode      The MPSNNImageNode representing the source MPSImage for the filter
@@ -1399,25 +1528,25 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
 
 @end
 
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0))
 /*! @abstract  A node representing a MPSCNNPoolingAverage kernel
  *  @discussion The default edge mode is MPSImageEdgeModeClamp  */
 @interface MPSCNNPoolingAverageNode : MPSCNNPoolingNode
 @end
 
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0))
 /*! @abstract  A node representing a MPSCNNPoolingL2Norm kernel
  *  @discussion The default edge mode is MPSImageEdgeModeClamp  */
 @interface MPSCNNPoolingL2NormNode : MPSCNNPoolingNode
 @end
 
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0))
 /*! @abstract  A node representing a MPSCNNPoolingMax kernel
  *  @discussion The default edge mode is MPSImageEdgeModeClamp  */
 @interface MPSCNNPoolingMaxNode : MPSCNNPoolingNode
 @end
 
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0))
 /*! @abstract  A node for a MPSCNNDilatedPooling kernel
  *  @discussion This class corresponds to the MPSCNNDilatedPooling class. */
 @interface MPSCNNDilatedPoolingMaxNode : MPSNNFilterNode
@@ -1486,7 +1615,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
 
 @end
 
-MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3))
+MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3))
 @interface MPSCNNPoolingGradientNode : MPSNNGradientFilterNode
 /*! @abstract make a pooling gradient node
  *  @discussion  It would be much easier to use [inferencePoolingNode gradientNodeForSourceGradient:] instead.
@@ -1533,19 +1662,19 @@ MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3))
 
 @end
 
-MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3))
+MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3))
 @interface MPSCNNPoolingMaxGradientNode : MPSCNNPoolingGradientNode
 @end
 
-MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3))
+MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3))
 @interface MPSCNNPoolingAverageGradientNode : MPSCNNPoolingGradientNode
 @end
 
-MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3))
+MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3))
 @interface MPSCNNPoolingL2NormGradientNode : MPSCNNPoolingGradientNode
 @end
 
-MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3))
+MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3))
 @interface MPSCNNDilatedPoolingMaxGradientNode : MPSCNNPoolingGradientNode
 /*! @abstract make a pooling gradient node
  *  @discussion  It would be much easier to use [inferencePoolingNode gradientNodeForSourceGradient:] instead.
@@ -1595,7 +1724,7 @@ MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3))
 #pragma mark - 
 #pragma mark Normalization Nodes
 
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0))
 /*! @abstract virtual base class for CNN normalization nodes */
 @interface MPSCNNNormalizationNode : MPSNNFilterNode
 
@@ -1633,7 +1762,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
  *             kernelHeight = kernelWidth = kernelSize
  *      @endcode
  */
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0))
 @interface MPSCNNSpatialNormalizationNode : MPSCNNNormalizationNode
 
 @property (readwrite, nonatomic) NSUInteger  kernelWidth;
@@ -1648,7 +1777,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
 
 @end
 
-MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3))
+MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3))
 @interface MPSCNNSpatialNormalizationGradientNode : MPSNNGradientFilterNode
 
 @property (readwrite, nonatomic) NSUInteger  kernelWidth;
@@ -1700,7 +1829,7 @@ MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3))
  *             kernelHeight = kernelWidth = kernelSize
  *      @endcode
  */
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0))
 @interface MPSCNNLocalContrastNormalizationNode : MPSCNNNormalizationNode
 
 @property (readwrite, nonatomic) float       pm;
@@ -1718,7 +1847,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
 
 @end
 
-MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3))
+MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3))
 @interface MPSCNNLocalContrastNormalizationGradientNode : MPSNNGradientFilterNode
 +(nonnull instancetype) nodeWithSourceGradient: (MPSNNImageNode*__nonnull) sourceGradient
                                    sourceImage: (MPSNNImageNode*__nonnull) sourceImage
@@ -1790,7 +1919,7 @@ MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3))
  *             kernelHeight = kernelWidth = kernelSize
  *      @endcode
  */
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0))
 @interface MPSCNNCrossChannelNormalizationNode : MPSCNNNormalizationNode
 
 @property (readwrite, nonatomic) NSUInteger  kernelSizeInFeatureChannels;
@@ -1803,7 +1932,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
 -(nonnull instancetype) initWithSource: (MPSNNImageNode * __nonnull) sourceNode NS_DESIGNATED_INITIALIZER;
 @end
 
-MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3))
+MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3))
 @interface MPSCNNCrossChannelNormalizationGradientNode : MPSNNGradientFilterNode
 +(nonnull instancetype) nodeWithSourceGradient: (MPSNNImageNode*__nonnull) sourceGradient
                                    sourceImage: (MPSNNImageNode*__nonnull) sourceImage
@@ -1821,8 +1950,12 @@ MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3))
 
 @protocol MPSCNNInstanceNormalizationDataSource;
 
-MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3))
-@interface MPSCNNInstanceNormalizationNode : MPSNNFilterNode
+MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3))
+@interface MPSCNNInstanceNormalizationNode : MPSNNFilterNode  <MPSNNTrainableNode>
+
+/*! @abstract   The training style of the forward node will be propagated to gradient nodes made from it */
+@property (readwrite, nonatomic)    MPSNNTrainingStyle trainingStyle
+            MPS_AVAILABLE_STARTING( macos(10.15), ios(13.0), macCatalyst(13.0), tvos(13.0));
 
 +(nonnull instancetype) nodeWithSource: (MPSNNImageNode * __nonnull) source
                             dataSource: (nonnull id <MPSCNNInstanceNormalizationDataSource>) dataSource;
@@ -1831,8 +1964,36 @@ MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3))
                             dataSource: (nonnull id <MPSCNNInstanceNormalizationDataSource>) dataSource;
 @end
 
-MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3))
+MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3))
 @interface MPSCNNInstanceNormalizationGradientNode : MPSNNGradientFilterNode <MPSNNTrainableNode>
+
++(nonnull instancetype) nodeWithSourceGradient: (MPSNNImageNode*__nonnull) sourceGradient
+                                   sourceImage: (MPSNNImageNode*__nonnull) sourceImage
+                                 gradientState: (MPSNNGradientStateNode*__nonnull) gradientState;
+
+-(nonnull instancetype) initWithSourceGradient: (MPSNNImageNode*__nonnull) sourceGradient
+                                   sourceImage: (MPSNNImageNode*__nonnull) sourceImage
+                                 gradientState: (MPSNNGradientStateNode*__nonnull) gradientState;
+@end
+
+@protocol MPSCNNGroupNormalizationDataSource;
+
+MPS_CLASS_AVAILABLE_STARTING(macos(10.15.0), ios(13.0), macCatalyst(13.0), tvos(13.0))
+@interface MPSCNNGroupNormalizationNode : MPSNNFilterNode  <MPSNNTrainableNode>
+
+/*! @abstract   The training style of the forward node will be propagated to gradient nodes made from it */
+@property (readwrite, nonatomic)    MPSNNTrainingStyle trainingStyle
+        MPS_AVAILABLE_STARTING( macos(10.15), ios(13.0), macCatalyst(13.0), tvos(13.0));
+
++(nonnull instancetype) nodeWithSource: (MPSNNImageNode * __nonnull) source
+                            dataSource: (nonnull id <MPSCNNGroupNormalizationDataSource>) dataSource;
+
+-(nonnull instancetype) initWithSource: (MPSNNImageNode * __nonnull) source
+                            dataSource: (nonnull id <MPSCNNGroupNormalizationDataSource>) dataSource;
+@end
+
+MPS_CLASS_AVAILABLE_STARTING(macos(10.15.0), ios(13.0), macCatalyst(13.0), tvos(13.0))
+@interface MPSCNNGroupNormalizationGradientNode : MPSNNGradientFilterNode <MPSNNTrainableNode>
 
 +(nonnull instancetype) nodeWithSourceGradient: (MPSNNImageNode*__nonnull) sourceGradient
                                    sourceImage: (MPSNNImageNode*__nonnull) sourceImage
@@ -1868,12 +2029,16 @@ MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3))
  *              allow you to construct an identical sequence of nodes for inference
  *              and training and expect the right thing to happen.
  */
-MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3))
-@interface MPSCNNBatchNormalizationNode : MPSNNFilterNode
+MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3))
+@interface MPSCNNBatchNormalizationNode : MPSNNFilterNode  <MPSNNTrainableNode>
 
 /*! @abstract Options controlling how batch normalization is calculated
  *  @discussion     Default: MPSCNNBatchNormalizationFlagsDefault */
 @property (readwrite, nonatomic)  MPSCNNBatchNormalizationFlags   flags;
+
+/*! @abstract   The training style of the forward node will be propagated to gradient nodes made from it */
+@property (readwrite, nonatomic)    MPSNNTrainingStyle trainingStyle
+        MPS_AVAILABLE_STARTING( macos(10.15), ios(13.0), macCatalyst(13.0), tvos(13.0));
 
 +(nonnull instancetype) nodeWithSource: (MPSNNImageNode * __nonnull) source
                             dataSource: (nonnull id <MPSCNNBatchNormalizationDataSource>) dataSource;
@@ -1890,7 +2055,7 @@ MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3))
  *              node. They will be called in sequence: statistics gradient until the
  *              batch is complete, then batch normalization gradient on the result.
  */
-MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3))
+MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3))
 @interface MPSCNNBatchNormalizationGradientNode : MPSNNGradientFilterNode <MPSNNTrainableNode>
 +(nonnull instancetype) nodeWithSourceGradient: (MPSNNImageNode*__nonnull) sourceGradient
                                    sourceImage: (MPSNNImageNode*__nonnull) sourceImage
@@ -1911,7 +2076,7 @@ MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3))
 /*! @abstract Abstract Node representing a image resampling operation
  *  @discussion  Please make a MPSNNBilinearScale or MPSNNLanczosScale object instead
  */
- MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
+ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0))
 @interface MPSNNScaleNode : MPSNNFilterNode
 /*! @abstract create an autoreleased node to convert a MPSImage to the desired size
  *  @param  sourceNode    A valid MPSNNImageNode
@@ -1948,7 +2113,7 @@ MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3))
  *                    two in any dimension causes loss of information if a
  *                    low pass filter is not run over the image first. Details
  *                    may be omitted.    */
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0))
 @interface MPSNNBilinearScaleNode : MPSNNScaleNode
 @end
 
@@ -1958,7 +2123,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
  *                    could prove distracting to a neural network unused to seeing it.
  *                    You should use the resampling method that was used to train the
  *                    network. */
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0))
 @interface MPSNNLanczosScaleNode : MPSNNScaleNode
 @end
 
@@ -1966,7 +2131,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
 #pragma mark -
 #pragma mark Arithmetic
 
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0))
 /*! @abstract virtual base class for basic arithmetic nodes */
 @interface MPSNNBinaryArithmeticNode : MPSNNFilterNode
 
@@ -1998,7 +2163,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
  *  @discussion Create two new arithmetic gradient nodes - one that computes the gradient for the primary
  *  source image and one that computes the gradient for the secondary sourcefrom the inference pass.
  */
--(NSArray <MPSNNGradientFilterNode*> * __nonnull) gradientFiltersWithSources: (NSArray<MPSNNImageNode*> * __nonnull) gradientImages MPS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), tvos(11.3));
+-(NSArray <MPSNNGradientFilterNode*> * __nonnull) gradientFiltersWithSources: (NSArray<MPSNNImageNode*> * __nonnull) gradientImages MPS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3));
 
 @property (readwrite, nonatomic) float primaryScale;
 @property (readwrite, nonatomic) float secondaryScale;
@@ -2014,27 +2179,27 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
 
 @end
 
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0))
 /*! @abstract returns elementwise sum of left + right */
 @interface MPSNNAdditionNode : MPSNNBinaryArithmeticNode
 @end
 
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0))
 /*! @abstract returns elementwise difference of left - right */
 @interface MPSNNSubtractionNode : MPSNNBinaryArithmeticNode
 @end
 
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0))
 /*! @abstract returns elementwise product of left * right */
 @interface MPSNNMultiplicationNode : MPSNNBinaryArithmeticNode
 @end
 
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0))
 /*! @abstract returns elementwise quotient of left / right */
 @interface MPSNNDivisionNode : MPSNNBinaryArithmeticNode
 @end
 
-MPS_CLASS_AVAILABLE_STARTING( macos(10.14.1), ios(12.1), tvos(12.1))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.14.1), ios(12.1), macCatalyst(13.0), tvos(12.1))
 /*! @abstract returns elementwise comparison of left and right */
 @interface MPSNNComparisonNode : MPSNNBinaryArithmeticNode
 
@@ -2049,7 +2214,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.14.1), ios(12.1), tvos(12.1))
 #pragma mark -
 #pragma mark Arithmetic Gradient
 
-MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3))
+MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3))
 @interface MPSNNArithmeticGradientNode : MPSNNGradientFilterNode
 /*! @abstract create a new arithmetic gradient node
  *  @discussion See also -[MPSCNNNeuronNode gradientFilterNodesWithSources:]
@@ -2101,7 +2266,7 @@ MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3))
 
 @end
 
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), tvos(11.3))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3))
 /*! @abstract returns gradient for either primary or secondary source image from the inference pass.
  *  Use the isSecondarySourceFilter property to indicate whether this filter is computing the gradient
  *  for the primary or secondary source image from the inference pass.
@@ -2109,7 +2274,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), tvos(11.3))
 @interface MPSNNAdditionGradientNode : MPSNNArithmeticGradientNode
 @end
 
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), tvos(11.3))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3))
 /*! @abstract returns gradient for either primary or secondary source image from the inference pass.
  *  Use the isSecondarySourceFilter property to indicate whether this filter is computing the gradient
  *  for the primary or secondary source image from the inference pass.
@@ -2117,7 +2282,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), tvos(11.3))
 @interface MPSNNSubtractionGradientNode : MPSNNArithmeticGradientNode
 @end
 
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), tvos(11.3))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3))
 /*! @abstract returns gradient for either primary or secondary source image from the inference pass.
  *  Use the isSecondarySourceFilter property to indicate whether this filter is computing the gradient
  *  for the primary or secondary source image from the inference pass.
@@ -2128,7 +2293,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), tvos(11.3))
 #pragma mark -
 #pragma mark Dropout
 
-MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3))
+MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3))
 @interface MPSCNNDropoutNode : MPSNNFilterNode
 +(nonnull instancetype) nodeWithSource: (MPSNNImageNode * __nonnull) source;
 -(nonnull instancetype) initWithSource: (MPSNNImageNode * __nonnull) source;
@@ -2155,7 +2320,7 @@ MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3))
 
 @end
 
-MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3))
+MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3))
 @interface MPSCNNDropoutGradientNode : MPSNNGradientFilterNode
 /*! @abstract create a new dropout gradient node
  *  @discussion See also -[MPSCNNNeuronNode gradientFilterNodeWithSources:]
@@ -2196,11 +2361,11 @@ MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3))
  *               that holds the images.  The MPSNNLabelsNode is a place
  *               holder in the graph for these nodes. The MPSNNLabels node
  *               is taken as an input to the Loss node*/
-MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3))
+MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3))
 @interface MPSNNLabelsNode : MPSNNStateNode
 @end
 
-MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3))
+MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3))
 /*! @class MPSCNNLossNode
  *  @discussion  This node calculates loss information during training
  *               typically immediately after the inference portion
@@ -2234,7 +2399,7 @@ MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3))
 
 @class MPSCNNYOLOLossDescriptor;
 
-MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3))
+MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3))
 /*! @class MPSCNNYOLOLossNode
  *  @discussion  This node calculates loss information during training
  *               typically immediately after the inference portion
@@ -2266,7 +2431,7 @@ MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3))
 #pragma mark -
 #pragma mark Other Nodes
 
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0))
 /*! Node representing a the concatenation (in the feature channel dimension) of the results from one or more kernels */
 @interface MPSNNConcatenationNode : MPSNNFilterNode
 /*! @abstract   Init a autoreleased node that concatenates feature channels from multiple images
@@ -2337,7 +2502,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
 
 @end
 
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), tvos(11.3))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3))
 /*! @class MPSNNConcatenationGradientNode
  *  @abstract  A MPSNNSlice filter that operates as the conjugate computation for concatentation operators during training
  *  @discussion As concatenation is formally just a copy and not a computation, there isn't a lot of arithmetic for
@@ -2366,7 +2531,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), tvos(11.3))
 
 @end
 
-MPS_CLASS_AVAILABLE_STARTING( macos(10.14.1), ios(12.1), tvos(12.1))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.14.1), ios(12.1), macCatalyst(13.0), tvos(12.1))
 /*! @abstract  A node for a MPSNNReshape kernel */
 @interface MPSNNReshapeNode : MPSNNFilterNode
 
@@ -2395,7 +2560,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.14.1), ios(12.1), tvos(12.1))
                  resultFeatureChannels: (NSUInteger) resultFeatureChannels;
 @end
 
-MPS_CLASS_AVAILABLE_STARTING(macos(10.14.1), ios(12.1), tvos(12.1))
+MPS_CLASS_AVAILABLE_STARTING(macos(10.14.1), ios(12.1), macCatalyst(13.0), tvos(12.1))
 @interface MPSNNReshapeGradientNode : MPSNNGradientFilterNode
 /*! @abstract   A node to represent the gradient of a reshape node.
  *  @param sourceGradient   The input gradient from the 'downstream' gradient filter.
@@ -2414,7 +2579,7 @@ MPS_CLASS_AVAILABLE_STARTING(macos(10.14.1), ios(12.1), tvos(12.1))
                                  gradientState: (MPSNNGradientStateNode*__nonnull) gradientState;
 @end
 
-MPS_CLASS_AVAILABLE_STARTING(macos(10.14.1), ios(12.1), tvos(12.1))
+MPS_CLASS_AVAILABLE_STARTING(macos(10.14.1), ios(12.1), macCatalyst(13.0), tvos(12.1))
 @interface MPSNNReductionSpatialMeanGradientNode : MPSNNGradientFilterNode
 /*! @abstract   A node to represent the gradient of a spatial mean reduction node.
  *  @param sourceGradient   The input gradient from the 'downstream' gradient filter.
@@ -2434,7 +2599,7 @@ MPS_CLASS_AVAILABLE_STARTING(macos(10.14.1), ios(12.1), tvos(12.1))
 @end
 
 
-MPS_CLASS_AVAILABLE_STARTING( macos(10.14.1), ios(12.1), tvos(12.1))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.14.1), ios(12.1), macCatalyst(13.0), tvos(12.1))
 /*!  @class         MPSNNPadNode
  *   @abstract      A node for a MPSNNPad kernel
  *   @discussion    You should not use this node to zero pad your data in the XY-plane.
@@ -2483,7 +2648,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.14.1), ios(12.1), tvos(12.1))
                               edgeMode: (MPSImageEdgeMode) edgeMode;
 @end
 
-MPS_CLASS_AVAILABLE_STARTING(macos(10.14.1), ios(12.1), tvos(12.1))
+MPS_CLASS_AVAILABLE_STARTING(macos(10.14.1), ios(12.1), macCatalyst(13.0), tvos(12.1))
 @interface MPSNNPadGradientNode : MPSNNGradientFilterNode
 /*! @abstract   A node to represent the gradient of a padding node.
  *  @param      sourceGradient   The input gradient from the 'downstream' gradient filter.
@@ -2506,7 +2671,7 @@ MPS_CLASS_AVAILABLE_STARTING(macos(10.14.1), ios(12.1), tvos(12.1))
 
 
 
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0))
 /*! Node representing a MPSCNNSoftMax kernel */
 @interface MPSCNNSoftMaxNode : MPSNNFilterNode
 /*! @abstract   Init a node representing a autoreleased MPSCNNSoftMax kernel
@@ -2523,7 +2688,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
 
 @end
 
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), tvos(11.3))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3))
 /*! Node representing a MPSCNNSoftMaxGradient kernel */
 @interface MPSCNNSoftMaxGradientNode : MPSNNGradientFilterNode
 +(nonnull instancetype) nodeWithSourceGradient: (MPSNNImageNode*__nonnull) sourceGradient
@@ -2536,7 +2701,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), tvos(11.3))
 
 @end
 
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0))
 /*! Node representing a MPSCNNLogSoftMax kernel */
 @interface MPSCNNLogSoftMaxNode : MPSNNFilterNode
 /*! @abstract   Init a node representing a autoreleased MPSCNNLogSoftMax kernel
@@ -2553,7 +2718,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
 
 @end
 
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), tvos(11.3))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3))
 /*! Node representing a MPSCNNLogSoftMaxGradient kernel */
 @interface MPSCNNLogSoftMaxGradientNode : MPSNNGradientFilterNode
 +(nonnull instancetype) nodeWithSourceGradient: (MPSNNImageNode*__nonnull) sourceGradient
@@ -2566,7 +2731,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), tvos(11.3))
 @end
 
 
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0))
 /*! Node representing a MPSCNNUpsamplingNearest kernel */
 @interface MPSCNNUpsamplingNearestNode : MPSNNFilterNode
 /*! @abstract Convenience initializer for an autoreleased MPSCNNUpsamplingNearest nodes
@@ -2594,7 +2759,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
 
 @end
 
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0))
 /*! Node representing a MPSCNNUpsamplingBilinear kernel */
 @interface MPSCNNUpsamplingBilinearNode : MPSNNFilterNode
 /*! @abstract   Init a autoreleased node representing a MPSCNNUpsamplingBilinear kernel
@@ -2648,7 +2813,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
 
 @end
 
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), tvos(11.3))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3))
 /*! Node representing a MPSCNNUpsamplingNearest kernel */
 @interface MPSCNNUpsamplingNearestGradientNode : MPSNNGradientFilterNode
 
@@ -2686,7 +2851,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), tvos(11.3))
 
 @end
 
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), tvos(11.3))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3))
 /*! Node representing a MPSCNNUpsamplingBilinear kernel */
 @interface MPSCNNUpsamplingBilinearGradientNode : MPSNNGradientFilterNode
 
@@ -2723,6 +2888,304 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), tvos(11.3))
 
 
 @end
+
+/*! @protocol   MPSNNGramMatrixCallback
+ *  @abstract   MPSNNGramMatrixCallback Defines a callback protocol for @ref MPSNNGramMatrixCalculationNode to set the 'alpha'
+ *              scaling value dynamically just before encoding the underlying MPSNNGramMatrixCalculation kernel.
+ *
+ */
+@protocol MPSNNGramMatrixCallback <NSObject, NSSecureCoding, NSCopying>
+
+@required
+/*! @abstract   Returns the desired alpha scaling value.
+ *  @param      sourceImage             One of the source images in the batch given as a reference for the alpha computation.
+ *  @param      destinationImage        One of the destination images in the batch given as a reference for the alpha computation.
+ *  @return     The desired alpha value.
+ */
+-(float) alphaForSourceImage: (MPSImage * __nonnull) sourceImage
+            destinationImage: (MPSImage * __nonnull) destinationImage;
+@end // MPSNNGramMatrixCallback
+
+
+
+MPS_CLASS_AVAILABLE_STARTING( macos(10.15), ios(13.0), macCatalyst(13.0), tvos(13.0))
+/*! Node representing a @ref MPSNNGramMatrixCalculation kernel */
+@interface MPSNNGramMatrixCalculationNode : MPSNNFilterNode
+
+/*! @property   alpha
+ *  @abstract   Scaling factor for the output. Default: 1.0f.
+ */
+@property(readonly, nonatomic) float               alpha;
+
+/*! @property   propertyCallBack
+ *  @abstract   Optional callback option - setting this allows the alpha value to be changed dynamically at encode time.
+ *              Default value: nil.
+ */
+@property (nonatomic, nullable, readwrite, retain) id <MPSNNGramMatrixCallback>   propertyCallBack;
+
+
+/*! @abstract   Init a node representing a autoreleased MPSNNGramMatrixCalculationNode kernel.
+ *  @param      sourceNode              The MPSNNImageNode representing the source MPSImage for the filter.
+ *  @return     A new MPSNNFilter node for a MPSNNGramMatrixCalculationNode kernel.
+ */
++(nonnull instancetype) nodeWithSource: (MPSNNImageNode * __nonnull) sourceNode;
+
+/*! @abstract   Init a node representing a MPSNNGramMatrixCalculationNode kernel.
+ *  @param      sourceNode              The MPSNNImageNode representing the source MPSImage for the filter.
+ *  @return     A new MPSNNFilter node for a MPSNNGramMatrixCalculationNode kernel.
+ */
+-(nonnull instancetype) initWithSource: (MPSNNImageNode * __nonnull) sourceNode;
+
+
+/*! @abstract   Init a node representing a autoreleased MPSNNGramMatrixCalculationNode kernel.
+ *  @param      sourceNode              The MPSNNImageNode representing the source MPSImage for the filter.
+ *  @param      alpha                   Scaling factor for the output.
+ *  @return     A new MPSNNFilter node for a MPSNNGramMatrixCalculationNode kernel.
+ */
++(nonnull instancetype) nodeWithSource: (MPSNNImageNode * __nonnull) sourceNode
+                                 alpha: (float) alpha;
+
+/*! @abstract   Init a node representing a MPSNNGramMatrixCalculationNode kernel.
+ *  @param      sourceNode              The MPSNNImageNode representing the source MPSImage for the filter.
+ *  @param      alpha                   Scaling factor for the output.
+ *  @return     A new MPSNNFilter node for a MPSNNGramMatrixCalculationNode kernel.
+ */
+-(nonnull instancetype) initWithSource: (MPSNNImageNode * __nonnull) sourceNode
+                                 alpha: (float) alpha;
+
+@end
+
+MPS_CLASS_AVAILABLE_STARTING( macos(10.15.0), ios(13.0), macCatalyst(13.0), tvos(13.0))
+/*! Node representing a @ref MPSNNGramMatrixCalculationGradient kernel */
+@interface MPSNNGramMatrixCalculationGradientNode : MPSNNGradientFilterNode
+
+/*! @property   alpha
+ *  @abstract   Scaling factor for the output. Default: 1.0f.
+ */
+@property(readonly, nonatomic) float               alpha;
+
++(nonnull instancetype) nodeWithSourceGradient: (MPSNNImageNode*__nonnull) sourceGradient
+                                   sourceImage: (MPSNNImageNode*__nonnull) sourceImage
+                                 gradientState: (MPSNNGradientStateNode*__nonnull) gradientState;
+
+-(nonnull instancetype) initWithSourceGradient: (MPSNNImageNode*__nonnull) sourceGradient
+                                   sourceImage: (MPSNNImageNode*__nonnull) sourceImage
+                                 gradientState: (MPSNNGradientStateNode*__nonnull) gradientState;
+
++(nonnull instancetype) nodeWithSourceGradient: (MPSNNImageNode*__nonnull) sourceGradient
+                                   sourceImage: (MPSNNImageNode*__nonnull) sourceImage
+                                 gradientState: (MPSNNGradientStateNode*__nonnull) gradientState
+                                         alpha: (float)alpha;
+
+-(nonnull instancetype) initWithSourceGradient: (MPSNNImageNode*__nonnull) sourceGradient
+                                   sourceImage: (MPSNNImageNode*__nonnull) sourceImage
+                                 gradientState: (MPSNNGradientStateNode*__nonnull) gradientState
+                                         alpha: (float)alpha;
+
+@end
+
+
+#pragma mark -
+#pragma mark Loss nodes with separate forward and gradient passes
+
+/*! @protocol   MPSNNLossCallback
+ *  @abstract   MPSNNLossCallback Defines a callback protocol for @ref MPSNNForwardLossNode and @ref MPSNNLossGradientNode
+ *              to set the scalar weight value just before encoding the underlying kernels.
+ */
+@protocol MPSNNLossCallback <NSObject, NSSecureCoding, NSCopying>
+
+@required
+/*! @abstract   Returns the desired loss scaling weight value.
+ *  @param      sourceImage             One of the source images in the batch given as a reference.
+ *  @param      destinationImage        One of the destination images in the batch given as a reference.
+ *  @return     The desired scalar weight value.
+ */
+-(float) scalarWeightForSourceImage: (MPSImage * __nonnull) sourceImage
+                   destinationImage: (MPSImage * __nonnull) destinationImage;
+
+@end // MPSNNLossCallback
+
+
+
+@class MPSNNLossGradientNode;
+
+MPS_CLASS_AVAILABLE_STARTING( macos(10.15), ios(13.0), macCatalyst(13.0), tvos(13.0))
+/*! Node representing a @ref MPSNNForwardLoss kernel */
+@interface MPSNNForwardLossNode : MPSNNFilterNode
+
+@property (readonly, nonatomic) MPSCNNLossType lossType;
+@property (readonly, nonatomic) MPSCNNReductionType reductionType;
+@property (readonly, nonatomic) NSUInteger numberOfClasses;
+
+@property (readonly, nonatomic) float weight;
+@property (readonly, nonatomic) float labelSmoothing;
+@property (readonly, nonatomic) float epsilon;
+@property (readonly, nonatomic) float delta;
+
+/*! @property   propertyCallBack
+ *  @abstract   Optional callback option - setting this allows the scalar weight value to be changed dynamically at encode time.
+ *              Default value: nil.
+ */
+@property (nonatomic, nullable, readwrite, retain) id <MPSNNLossCallback>   propertyCallBack;
+
++(nonnull instancetype) nodeWithSource: (MPSNNImageNode * __nonnull) source
+                                labels: (MPSNNImageNode * __nonnull) labels
+                               weights: (MPSNNImageNode * __nonnull) weights
+                        lossDescriptor: (MPSCNNLossDescriptor * __nonnull) descriptor;
+
++(nonnull instancetype) nodeWithSource: (MPSNNImageNode * __nonnull) source
+                                labels: (MPSNNImageNode * __nonnull) labels
+                        lossDescriptor: (MPSCNNLossDescriptor * __nonnull) descriptor;
+
+/*! @abstract   Init a forward loss node from multiple images
+ *  @param      sourceNodes             The MPSNNImageNode representing the source MPSImages for the filter
+ *                                      Node0: logits, Node1: labels, Node2: weights
+ *  @return     A new MPSNNFilter node.
+ */
++(nonnull instancetype) nodeWithSources: (NSArray <MPSNNImageNode *> * __nonnull) sourceNodes
+                         lossDescriptor: (MPSCNNLossDescriptor * __nonnull) descriptor;
+
+-(nonnull instancetype) initWithSource: (MPSNNImageNode * __nonnull) source
+                                labels: (MPSNNImageNode * __nonnull) labels
+                               weights: (MPSNNImageNode * __nullable) weights
+                        lossDescriptor: (MPSCNNLossDescriptor * __nonnull) descriptor;
+
+-(nonnull instancetype) initWithSource: (MPSNNImageNode * __nonnull) source
+                                labels: (MPSNNImageNode * __nonnull) labels
+                        lossDescriptor: (MPSCNNLossDescriptor * __nonnull) descriptor;
+
+/*! @abstract   Init a forward loss node from multiple images
+ *  @param      sourceNodes             The MPSNNImageNode representing the source MPSImages for the filter
+ *                                      Node0: logits, Node1: labels, Node2: weights
+ *  @return     A new MPSNNFilter node.
+ */
+
+-(nonnull instancetype) initWithSources: (NSArray <MPSNNImageNode *> * __nonnull) sourceNodes
+                         lossDescriptor: (MPSCNNLossDescriptor * __nonnull) descriptor;
+
+
+//! @abstract Returns the gradient filter for predictions, if you want also gradients for labels then use -gradientFiltersWithSource(s):
+-(MPSNNLossGradientNode*__nonnull) gradientFilterWithSources: (NSArray<MPSNNImageNode*> * __nonnull) sourceGradient;
+-(NSArray <MPSNNLossGradientNode*> * __nonnull) gradientFiltersWithSources: (NSArray<MPSNNImageNode*> * __nonnull) sourceGradient;
+
+-(MPSNNLossGradientNode*__nonnull) gradientFilterWithSource: (MPSNNImageNode*__nonnull) sourceGradient;
+-(NSArray <MPSNNLossGradientNode*> * __nonnull) gradientFiltersWithSource: (MPSNNImageNode*__nonnull) sourceGradient;
+
+
+@end
+
+MPS_CLASS_AVAILABLE_STARTING( macos(10.15.0), ios(13.0), macCatalyst(13.0), tvos(13.0))
+/*! Node representing a @ref MPSNNLossGradient kernel */
+@interface MPSNNLossGradientNode : MPSNNGradientFilterNode
+
+@property (readonly, nonatomic) MPSCNNLossType lossType;
+@property (readonly, nonatomic) MPSCNNReductionType reductionType;
+@property (readonly, nonatomic) NSUInteger numberOfClasses;
+
+@property (readonly, nonatomic) float weight;
+@property (readonly, nonatomic) float labelSmoothing;
+@property (readonly, nonatomic) float epsilon;
+@property (readonly, nonatomic) float delta;
+
+@property (readonly, nonatomic) BOOL isLabelsGradientFilter;
+
+/*! @property   propertyCallBack
+ *  @abstract   Optional callback option - setting this allows the scalar weight value to be changed dynamically at encode time.
+ *              Default value: nil.
+ */
+@property (nonatomic, nullable, readwrite, retain) id <MPSNNLossCallback>   propertyCallBack;
+
+
++(nonnull instancetype) nodeWithSourceGradient: (MPSNNImageNode * __nonnull) sourceGradient
+                                   sourceImage: (MPSNNImageNode * __nonnull) sourceImage
+                                        labels: (MPSNNImageNode * __nonnull) labels
+                                       weights: (MPSNNImageNode * __nonnull) weights
+                                 gradientState: (MPSNNGradientStateNode* __nullable) gradientState
+                                lossDescriptor: (MPSCNNLossDescriptor * __nonnull) descriptor
+                        isLabelsGradientFilter: (BOOL) isLabelsGradientFilter;
+
++(nonnull instancetype) nodeWithSourceGradient: (MPSNNImageNode * __nonnull) sourceGradient
+                                   sourceImage: (MPSNNImageNode * __nonnull) sourceImage
+                                        labels: (MPSNNImageNode * __nonnull) labels
+                                 gradientState: (MPSNNGradientStateNode* __nullable) gradientState
+                                lossDescriptor: (MPSCNNLossDescriptor * __nonnull) descriptor
+                        isLabelsGradientFilter: (BOOL) isLabelsGradientFilter;
+
+/*! @abstract   Init a gradient loss node from multiple images
+ *  @param      sourceNodes             The MPSNNImageNode representing the source MPSImages for the filter
+ *                                      Node0: logits, Node1: labels, Node2: weights
+ *  @return     A new MPSNNFilter node.
+ */
++(nonnull instancetype) nodeWithSources: (NSArray <MPSNNImageNode *> * __nonnull) sourceNodes
+                          gradientState: (MPSNNGradientStateNode* __nullable) gradientState
+                         lossDescriptor: (MPSCNNLossDescriptor * __nonnull) descriptor
+                 isLabelsGradientFilter: (BOOL) isLabelsGradientFilter;
+
+
+-(nonnull instancetype) initWithSourceGradient: (MPSNNImageNode * __nonnull) sourceGradient
+                                   sourceImage: (MPSNNImageNode * __nonnull) sourceImage
+                                        labels: (MPSNNImageNode * __nonnull) labels
+                                       weights: (MPSNNImageNode * __nullable) weights
+                                 gradientState: (MPSNNGradientStateNode* __nullable) gradientState
+                                lossDescriptor: (MPSCNNLossDescriptor * __nonnull) descriptor
+                        isLabelsGradientFilter: (BOOL) isLabelsGradientFilter;
+
+
+-(nonnull instancetype) initWithSourceGradient: (MPSNNImageNode * __nonnull) sourceGradient
+                                   sourceImage: (MPSNNImageNode * __nonnull) sourceImage
+                                        labels: (MPSNNImageNode * __nonnull) labels
+                                 gradientState: (MPSNNGradientStateNode* __nullable) gradientState
+                                lossDescriptor: (MPSCNNLossDescriptor * __nonnull) descriptor
+                        isLabelsGradientFilter: (BOOL) isLabelsGradientFilter;
+
+
+/*! @abstract   Init a gradient loss node from multiple images
+ *  @param      sourceNodes             The MPSNNImageNode representing the source MPSImages for the filter
+ *                                      Node0: input gradients, Node1: logits, Node2: labels, Node3: weights
+ *  @return     A new MPSNNFilter node.
+ */
+
+-(nonnull instancetype) initWithSources: (NSArray <MPSNNImageNode *> * __nonnull) sourceNodes
+                          gradientState: (MPSNNGradientStateNode* __nullable) gradientState
+                         lossDescriptor: (MPSCNNLossDescriptor * __nonnull) descriptor
+                 isLabelsGradientFilter: (BOOL) isLabelsGradientFilter;
+
+
+/*! @abstract This is a gradient filter - there is no support gradients of gradients currently. */
+-(MPSNNGradientFilterNode*__nonnull) gradientFilterWithSources: (NSArray<MPSNNImageNode*> * __nonnull) gradientImages NS_UNAVAILABLE;
+
+
+@end
+
+MPS_CLASS_AVAILABLE_STARTING( macos(10.15.0), ios(13.0), macCatalyst(13.0), tvos(13.0))
+/*!  @class         MPSNNInitialGradientNode
+ *   @abstract      A node for a MPSNNInitialGradient kernel
+ *   @discussion    This node can be used to generate a starting point for an arbitrary gradient computation.
+ *                  Simply add this node after the node for which you want to compute gradients and then
+ *                  call the function @ref trainingGraphWithSourceGradient: of this node to automatically
+ *                  generate the nodes needed for gradient computations or add the desired nodes manually.
+ *                  This is generally used with MPSNNLossGradientNode and MPSNNForwardLossNode
+ */
+@interface MPSNNInitialGradientNode : MPSNNFilterNode
+
+/*! @abstract   Init a node representing a MPSNNInitialGradient MPSNNPad kernel
+ *  @param      source                  The MPSNNImageNode representing the source MPSImage for the filter
+ *  @return     A new MPSNNFilter node for a MPSNNInitialGradient kernel.
+ */
++(nonnull instancetype) nodeWithSource: (MPSNNImageNode * __nonnull) source;
+
+/*! @abstract   Init a node representing a MPSNNInitialGradient MPSNNPad kernel
+ *  @param      source                  The MPSNNImageNode representing the source MPSImage for the filter
+ *  @return     A new MPSNNFilter node for a MPSNNInitialGradient kernel.
+ */
+-(nonnull instancetype) initWithSource: (MPSNNImageNode * __nonnull) source;
+
+/*! @abstract The initial gradient filter is a gradient filter and we don't provide support for gradients of gradients currently. */
+-(MPSNNGradientFilterNode*__nonnull) gradientFilterWithSources: (NSArray<MPSNNImageNode*> * __nonnull) gradientImages NS_UNAVAILABLE;
+
+@end
+
+
 
 
 #endif /* MPSNNGraphNodes_h */

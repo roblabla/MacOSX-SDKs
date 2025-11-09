@@ -101,7 +101,7 @@ CF_ASSUME_NONNULL_BEGIN
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
-extern const CFStringRef kLSQuarantineAgentNameKey                   __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
+extern const CFStringRef kLSQuarantineAgentNameKey                   API_AVAILABLE( macos(10.5) ) API_UNAVAILABLE( ios, tvos, watchos );
 /*
  *  kLSQuarantineAgentBundleIdentifierKey
  *  
@@ -110,7 +110,7 @@ extern const CFStringRef kLSQuarantineAgentNameKey                   __OSX_AVAIL
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
-extern const CFStringRef kLSQuarantineAgentBundleIdentifierKey       __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
+extern const CFStringRef kLSQuarantineAgentBundleIdentifierKey       API_AVAILABLE( macos(10.5) ) API_UNAVAILABLE( ios, tvos, watchos );
 /*
  *  kLSQuarantineTimeStampKey
  *  
@@ -119,7 +119,7 @@ extern const CFStringRef kLSQuarantineAgentBundleIdentifierKey       __OSX_AVAIL
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
-extern const CFStringRef kLSQuarantineTimeStampKey                   __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
+extern const CFStringRef kLSQuarantineTimeStampKey                   API_AVAILABLE( macos(10.5) ) API_UNAVAILABLE( ios, tvos, watchos );
 /*
  *  kLSQuarantineTypeKey
  *  
@@ -128,7 +128,7 @@ extern const CFStringRef kLSQuarantineTimeStampKey                   __OSX_AVAIL
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
-extern const CFStringRef kLSQuarantineTypeKey                        __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
+extern const CFStringRef kLSQuarantineTypeKey                        API_AVAILABLE( macos(10.5) ) API_UNAVAILABLE( ios, tvos, watchos );
 /*
  *  kLSQuarantineTypeWebDownload
  *  
@@ -137,7 +137,7 @@ extern const CFStringRef kLSQuarantineTypeKey                        __OSX_AVAIL
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
-extern const CFStringRef kLSQuarantineTypeWebDownload                __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
+extern const CFStringRef kLSQuarantineTypeWebDownload                API_AVAILABLE( macos(10.5) ) API_UNAVAILABLE( ios, tvos, watchos );
 /*
  *  kLSQuarantineTypeOtherDownload
  *  
@@ -146,7 +146,7 @@ extern const CFStringRef kLSQuarantineTypeWebDownload                __OSX_AVAIL
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
-extern const CFStringRef kLSQuarantineTypeOtherDownload              __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
+extern const CFStringRef kLSQuarantineTypeOtherDownload              API_AVAILABLE( macos(10.5) ) API_UNAVAILABLE( ios, tvos, watchos );
 /*
  *  kLSQuarantineTypeEmailAttachment
  *  
@@ -155,7 +155,7 @@ extern const CFStringRef kLSQuarantineTypeOtherDownload              __OSX_AVAIL
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
-extern const CFStringRef kLSQuarantineTypeEmailAttachment            __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
+extern const CFStringRef kLSQuarantineTypeEmailAttachment            API_AVAILABLE( macos(10.5) ) API_UNAVAILABLE( ios, tvos, watchos );
 /*
  *  kLSQuarantineTypeInstantMessageAttachment
  *  
@@ -164,7 +164,7 @@ extern const CFStringRef kLSQuarantineTypeEmailAttachment            __OSX_AVAIL
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
-extern const CFStringRef kLSQuarantineTypeInstantMessageAttachment   __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
+extern const CFStringRef kLSQuarantineTypeInstantMessageAttachment   API_AVAILABLE( macos(10.5) ) API_UNAVAILABLE( ios, tvos, watchos );
 /*
  *  kLSQuarantineTypeCalendarEventAttachment
  *  
@@ -173,7 +173,7 @@ extern const CFStringRef kLSQuarantineTypeInstantMessageAttachment   __OSX_AVAIL
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
-extern const CFStringRef kLSQuarantineTypeCalendarEventAttachment    __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
+extern const CFStringRef kLSQuarantineTypeCalendarEventAttachment    API_AVAILABLE( macos(10.5) ) API_UNAVAILABLE( ios, tvos, watchos );
 /*
  *  kLSQuarantineTypeOtherAttachment
  *  
@@ -182,7 +182,7 @@ extern const CFStringRef kLSQuarantineTypeCalendarEventAttachment    __OSX_AVAIL
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
-extern const CFStringRef kLSQuarantineTypeOtherAttachment            __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
+extern const CFStringRef kLSQuarantineTypeOtherAttachment            API_AVAILABLE( macos(10.5) ) API_UNAVAILABLE( ios, tvos, watchos );
 /*
  *  kLSQuarantineOriginURLKey
  *  
@@ -191,7 +191,7 @@ extern const CFStringRef kLSQuarantineTypeOtherAttachment            __OSX_AVAIL
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
-extern const CFStringRef kLSQuarantineOriginURLKey                   __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
+extern const CFStringRef kLSQuarantineOriginURLKey                   API_AVAILABLE( macos(10.5) ) API_UNAVAILABLE( ios, tvos, watchos );
 /*
  *  kLSQuarantineDataURLKey
  *  
@@ -200,7 +200,7 @@ extern const CFStringRef kLSQuarantineOriginURLKey                   __OSX_AVAIL
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
-extern const CFStringRef kLSQuarantineDataURLKey                     __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
+extern const CFStringRef kLSQuarantineDataURLKey                     API_AVAILABLE( macos(10.5) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 

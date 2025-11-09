@@ -61,6 +61,10 @@ typedef function_table_entry   *function_table_t;
 __BeforeMigServerHeader
 #endif /* __BeforeMigServerHeader */
 
+#ifndef MIG_SERVER_ROUTINE
+#define MIG_SERVER_ROUTINE
+#endif
+
 
 /* Routine check_task_access */
 #ifdef	mig_external
@@ -68,6 +72,7 @@ mig_external
 #else
 extern
 #endif	/* mig_external */
+MIG_SERVER_ROUTINE
 kern_return_t check_task_access
 (
 	mach_port_t task_access_port,
@@ -83,6 +88,7 @@ mig_external
 #else
 extern
 #endif	/* mig_external */
+MIG_SERVER_ROUTINE
 kern_return_t find_code_signature
 (
 	mach_port_t task_access_port,
@@ -124,7 +130,7 @@ extern const struct task_access_subsystem {
 #define __Request__task_access_subsystem__defined
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -134,11 +140,11 @@ extern const struct task_access_subsystem {
 		int32_t target_pid;
 	} __Request__check_task_access_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -146,7 +152,7 @@ extern const struct task_access_subsystem {
 		int32_t new_pid;
 	} __Request__find_code_signature_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 #endif /* !__Request__task_access_subsystem__defined */
 
@@ -166,7 +172,7 @@ union __RequestUnion__task_access_subsystem {
 #define __Reply__task_access_subsystem__defined
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -174,11 +180,11 @@ union __RequestUnion__task_access_subsystem {
 		kern_return_t RetCode;
 	} __Reply__check_task_access_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -186,7 +192,7 @@ union __RequestUnion__task_access_subsystem {
 		kern_return_t RetCode;
 	} __Reply__find_code_signature_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 #endif /* !__Reply__task_access_subsystem__defined */
 
@@ -199,7 +205,7 @@ union __ReplyUnion__task_access_subsystem {
 	__Reply__check_task_access_t Reply_check_task_access;
 	__Reply__find_code_signature_t Reply_find_code_signature;
 };
-#endif /* __RequestUnion__task_access_subsystem__defined */
+#endif /* __ReplyUnion__task_access_subsystem__defined */
 
 #ifndef subsystem_to_name_map_task_access
 #define subsystem_to_name_map_task_access \

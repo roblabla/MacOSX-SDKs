@@ -13,6 +13,7 @@
 #import <Foundation/Foundation.h>
 #import <QuartzCore/CAAnimation.h>
 #import <QuartzCore/CAConstraintLayoutManager.h>
+#import <QuartzCore/CADisplayLink.h>
 #import <QuartzCore/CAMetalLayer.h>
 #import <QuartzCore/CAEmitterCell.h>
 #import <QuartzCore/CAEmitterLayer.h>
@@ -33,6 +34,7 @@
 #import <QuartzCore/CATransform3D.h>
 #import <QuartzCore/CATransformLayer.h>
 #import <QuartzCore/CAValueFunction.h>
+#import <QuartzCore/CAEDRMetadata.h>
 #endif
 
 #endif /* COREANIMATION_H */

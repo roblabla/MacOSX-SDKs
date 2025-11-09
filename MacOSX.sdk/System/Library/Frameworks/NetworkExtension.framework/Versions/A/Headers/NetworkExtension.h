@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014-2015, 2017-2018 Apple Inc.
+ * Copyright (c) 2014-2015, 2017-2019 Apple Inc.
  * All rights reserved.
  */
 
@@ -23,13 +23,17 @@
 #import <NetworkExtension/NEFilterDataProvider.h>
 #import <NetworkExtension/NEFilterFlow.h>
 #import <NetworkExtension/NEFilterManager.h>
+#import <NetworkExtension/NEFilterPacketProvider.h>
 #import <NetworkExtension/NEFilterProvider.h>
 #import <NetworkExtension/NEFilterProviderConfiguration.h>
+#import <NetworkExtension/NEFilterRule.h>
+#import <NetworkExtension/NEFilterSettings.h>
 #import <NetworkExtension/NEFlowMetaData.h>
 #import <NetworkExtension/NEHotspotHelper.h>
 #import <NetworkExtension/NEHotspotConfigurationManager.h>
 #import <NetworkExtension/NEIPv4Settings.h>
 #import <NetworkExtension/NEIPv6Settings.h>
+#import <NetworkExtension/NENetworkRule.h>
 #import <NetworkExtension/NEOnDemandRule.h>
 #import <NetworkExtension/NEPacket.h>
 #import <NetworkExtension/NEPacketTunnelFlow.h>
@@ -37,6 +41,8 @@
 #import <NetworkExtension/NEPacketTunnelProvider.h>
 #import <NetworkExtension/NEProvider.h>
 #import <NetworkExtension/NEProxySettings.h>
+#import <NetworkExtension/NETransparentProxyManager.h>
+#import <NetworkExtension/NETransparentProxyNetworkSettings.h>
 #import <NetworkExtension/NETunnelProvider.h>
 #import <NetworkExtension/NETunnelProviderManager.h>
 #import <NetworkExtension/NETunnelProviderSession.h>

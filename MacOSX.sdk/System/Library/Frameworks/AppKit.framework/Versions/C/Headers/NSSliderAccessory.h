@@ -1,33 +1,30 @@
 /*
     NSSliderAccessory.h
     Application Kit
-    Copyright (c) 2016-2018, Apple Inc.
+    Copyright (c) 2016-2019, Apple Inc.
     All rights reserved.
  */
 
 #import <AppKit/NSAccessibility.h>
 #import <Foundation/Foundation.h>
 
+#if TARGET_OS_IPHONE
+@class UIImage;
+#endif
+
 NS_ASSUME_NONNULL_BEGIN
 
 @class NSSlider, NSSliderAccessoryBehavior, NSImage;
 
-NS_CLASS_AVAILABLE_MAC(10_12)
-@interface NSSliderAccessory : NSObject <NSCoding, NSAccessibility, NSAccessibilityElement> {
-@private
-    id _content APPKIT_IVAR;
-    id _container APPKIT_IVAR;
-    NSSliderAccessoryBehavior *_behavior APPKIT_IVAR;
-    signed char _enabled: 1 APPKIT_IVAR;
-
-#if !__OBJC2__
-    unsigned int _sliderAccessoryReservedFlags: 31 __unused APPKIT_IVAR;
-    void *_sliderAccessoryReserved[3] __unused APPKIT_IVAR;
-#endif /* !__OBJC2__ */
-}
+API_AVAILABLE(macos(10.12), ios(13.0))
+@interface NSSliderAccessory : NSObject <NSCoding>
 
 /// Creates an image-based accessory
+#if !TARGET_OS_IPHONE
 + (NSSliderAccessory *)accessoryWithImage:(NSImage *)image;
+#else
++ (NSSliderAccessory *)accessoryWithImage:(UIImage *)image API_AVAILABLE(ios(13.0));
+#endif
 
 /// The effect on interaction with the accessory. Defaults to `automaticBehavior`
 @property (copy) NSSliderAccessoryBehavior *behavior;
@@ -37,8 +34,12 @@ NS_CLASS_AVAILABLE_MAC(10_12)
 
 @end
 
+#if !TARGET_OS_IPHONE
+@interface NSSliderAccessory () <NSAccessibility, NSAccessibilityElement>
+@end
+#endif
 
-NS_CLASS_AVAILABLE_MAC(10_12)
+API_AVAILABLE(macos(10.12), ios(13.0))
 @interface NSSliderAccessoryBehavior : NSObject <NSCoding, NSCopying>
 
 /// The behavior is automatically picked to be the system standard for the slider's current context, e.g. NSTouchBarItems have `.valueStep` behavior.
@@ -55,7 +56,6 @@ NS_CLASS_AVAILABLE_MAC(10_12)
 
 /// The handler block is invoked on interaction. This variant is not codable and will assert in `-encodeWithCoder:`.
 + (NSSliderAccessoryBehavior *)behaviorWithHandler:(void(^)(NSSliderAccessory *))handler;
-
 
 /// Override point for custom subclasses to handle interaction.
 - (void)handleAction:(NSSliderAccessory *)sender;

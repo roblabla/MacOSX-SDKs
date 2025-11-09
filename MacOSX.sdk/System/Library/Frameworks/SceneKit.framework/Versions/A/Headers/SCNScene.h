@@ -2,7 +2,7 @@
 //  SCNScene.h
 //  SceneKit
 //
-//  Copyright © 2012-2018 Apple Inc. All rights reserved.
+//  Copyright © 2012-2019 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -12,6 +12,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class NSImage;
 @class SCNNode;
 @class SCNPhysicsWorld;
 @protocol SCNSceneExportDelegate;
@@ -188,6 +189,35 @@ SCN_EXPORT
  */
 @property(nonatomic, retain) id fogColor API_AVAILABLE(macos(10.10));
 
+#pragma mark - SSR
+
+/*!
+ @property wantsScreenSpaceReflection
+ @abstract Determines if the scene use screen space reflection.
+ @discussion Defaults to NO.
+ */
+@property(nonatomic) BOOL wantsScreenSpaceReflection API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0), watchos(6.0));
+
+/*!
+ @property screenSpaceReflectionSampleCount
+ @abstract Determines the sample count of the screen space reflection.
+ @discussion Defaults to 64.
+ */
+@property(nonatomic) NSInteger screenSpaceReflectionSampleCount API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0), watchos(6.0));
+
+/*!
+ @property screenSpaceReflectionMaximumDistance
+ @abstract Determines the maximum distance in world units.
+ @discussion Defaults to 1000.
+ */
+@property(nonatomic) CGFloat screenSpaceReflectionMaximumDistance API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0), watchos(6.0));
+
+/*!
+ @property screenSpaceReflectionStride
+ @abstract Raytracing step size in pixel. The lower the better, the higher the faster.
+ @discussion Defaults to 8.
+ */
+@property(nonatomic) CGFloat screenSpaceReflectionStride API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0), watchos(6.0));
 
 #pragma mark - Pause
 
@@ -197,7 +227,6 @@ SCN_EXPORT
  @discussion Pausing a scene will pause animations, actions, particles and physics.
  */
 @property(nonatomic, getter=isPaused) BOOL paused API_AVAILABLE(macos(10.10));
-
 
 @end
 

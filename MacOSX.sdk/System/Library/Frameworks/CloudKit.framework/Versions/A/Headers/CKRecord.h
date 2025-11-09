@@ -72,8 +72,8 @@ API_AVAILABLE(macos(10.10), ios(8.0), watchos(3.0))
  *  Key names roughly match C variable name restrictions. They must begin with an ASCII letter and can contain ASCII letters and numbers and the underscore character.
  *  The maximum key length is 255 characters.
  */
-- (nullable __kindof id <CKRecordValue>)objectForKey:(CKRecordFieldKey)key;
-- (void)setObject:(nullable __kindof id <CKRecordValue>)object forKey:(CKRecordFieldKey)key;
+- (nullable __kindof id<CKRecordValue>)objectForKey:(CKRecordFieldKey)key;
+- (void)setObject:(nullable __kindof id<CKRecordValue>)object forKey:(CKRecordFieldKey)key;
 - (NSArray<CKRecordFieldKey> *)allKeys;
 
 /*! @abstract A special property that returns an array of token generated from all the string field values in the record.
@@ -82,8 +82,8 @@ API_AVAILABLE(macos(10.10), ios(8.0), watchos(3.0))
  */
 - (NSArray<NSString *> *)allTokens;
 
-- (nullable __kindof id <CKRecordValue>)objectForKeyedSubscript:(CKRecordFieldKey)key;
-- (void)setObject:(nullable __kindof id <CKRecordValue>)object forKeyedSubscript:(CKRecordFieldKey)key;
+- (nullable __kindof id<CKRecordValue>)objectForKeyedSubscript:(CKRecordFieldKey)key;
+- (void)setObject:(nullable __kindof id<CKRecordValue>)object forKeyedSubscript:(CKRecordFieldKey)key;
 
 /*! A list of keys that have been modified on the local CKRecord instance */
 - (NSArray<CKRecordFieldKey> *)changedKeys;

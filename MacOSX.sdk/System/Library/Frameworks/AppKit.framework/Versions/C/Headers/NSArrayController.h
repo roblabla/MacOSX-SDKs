@@ -1,7 +1,7 @@
 /*
 	NSArrayController.h
 	Application Kit
-	Copyright (c) 2002-2018, Apple Inc.
+	Copyright (c) 2002-2019, Apple Inc.
 	All rights reserved.
  */
 
@@ -11,48 +11,18 @@
 
 
 NS_ASSUME_NONNULL_BEGIN
+API_UNAVAILABLE_BEGIN(ios)
 
 @class NSIndexSet, NSMutableIndexSet, NSSortDescriptor;
 
-@interface NSArrayController : NSObjectController {
-@private
-#ifndef __OBJC2__
-    void *_reserved4 APPKIT_IVAR;
-#endif
-    id _rearrangementExtensions APPKIT_IVAR;
-    NSMutableArray *_temporaryWorkObjects APPKIT_IVAR;
-    struct __arrayControllerFlags {
-        unsigned int _avoidsEmptySelection:1;
-        unsigned int _preservesSelection:1;
-        unsigned int _selectsInsertedObjects:1;
-        unsigned int _alwaysUsesMultipleValuesMarker:1;
-        unsigned int _refreshesAllModelObjects:1;
-        unsigned int _filterRestrictsInsertion:1;
-        unsigned int _overridesArrangeObjects:1;
-        unsigned int _overridesDidChangeArrangementCriteria:1;
-        unsigned int _explicitlyCannotInsert:1;
-        unsigned int _generatedEmptyArray:1;
-        unsigned int _isObservingKeyPathsThroughArrangedObjects:1;
-        unsigned int _arrangedObjectsIsMutable:1;
-        unsigned int _clearsFilterPredicateOnInsertion:1;
-        unsigned int _skipSortingAfterFetch:1;
-        unsigned int _automaticallyRearrangesObjects:1;
-        unsigned int _reservedArrayController:17;
-    } _arrayControllerFlags APPKIT_IVAR;
-    NSUInteger _observedIndexHint APPKIT_IVAR;
-    NSMutableIndexSet *_selectionIndexes APPKIT_IVAR;
-    NSMutableArray *_objects APPKIT_IVAR;
-    NSIndexSet *_cachedSelectedIndexes APPKIT_IVAR;
-    NSArray *_cachedSelectedObjects APPKIT_IVAR;
-    NSArray *_arrangedObjects APPKIT_IVAR;
-}
+@interface NSArrayController : NSObjectController
 
 - (void)rearrangeObjects;    // triggers rearranging the content objects for the user interface, including sorting and filtering; subclasses can override and invoke this method if any parameter that affects the arranged objects changes
 
-@property BOOL automaticallyRearrangesObjects NS_AVAILABLE_MAC(10_5);   // default: NO
+@property BOOL automaticallyRearrangesObjects API_AVAILABLE(macos(10.5));   // default: NO
 
-@property (nullable, readonly, copy) NSArray<NSString *> *automaticRearrangementKeyPaths NS_AVAILABLE_MAC(10_5);    // computes the array of key paths that trigger automatic rearranging from the sort descriptors and filter predicates; subclasses may override this method to customize the default behavior (for example if additional arrangement criteria are used in custom implementations of -rearrangeObjects)
-- (void)didChangeArrangementCriteria NS_AVAILABLE_MAC(10_5);    // invoked by the controller itself when any criteria for arranging objects change (sort descriptors or filter predicates) to reset the key paths for automatic rearranging; subclasses should invoke this method if additional arrangement criteria are used in custom implementations of -rearrangeObjects and those criteria change
+@property (nullable, readonly, copy) NSArray<NSString *> *automaticRearrangementKeyPaths API_AVAILABLE(macos(10.5));    // computes the array of key paths that trigger automatic rearranging from the sort descriptors and filter predicates; subclasses may override this method to customize the default behavior (for example if additional arrangement criteria are used in custom implementations of -rearrangeObjects)
+- (void)didChangeArrangementCriteria API_AVAILABLE(macos(10.5));    // invoked by the controller itself when any criteria for arranging objects change (sort descriptors or filter predicates) to reset the key paths for automatic rearranging; subclasses should invoke this method if additional arrangement criteria are used in custom implementations of -rearrangeObjects and those criteria change
 
 @property (copy) NSArray<NSSortDescriptor *> *sortDescriptors;
 
@@ -107,5 +77,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+API_UNAVAILABLE_END
 NS_ASSUME_NONNULL_END
 

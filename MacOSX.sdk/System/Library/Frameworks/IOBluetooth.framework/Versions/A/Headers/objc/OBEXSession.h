@@ -45,6 +45,7 @@ typedef struct OpaquePrivOBEXSessionData* PrivOBEXSessionDataRef;
 #pragma mark -
 #pragma mark === OBEXSession Interface ===
 
+API_UNAVAILABLE(ios, watchos, tvos)
 @interface OBEXSession : NSObject
 {	
 	/* All instance variables are private */
@@ -74,7 +75,7 @@ typedef struct OpaquePrivOBEXSessionData* PrivOBEXSessionDataRef;
 	@param		inMaxPacketLength		Maximum packet size you want to support. May be negotiated down, depending on
 										target device.
 	@param		inOptionalHeaders		Can be NULL. Ptr to some data you want to send as your optional headers. Use the
-										provided header contruction kit in OBEX.h and OBEXHeadersToBytes() for convenience.
+										provided header contruction kit in OBEX.h and OBEXHeadersToBytes(void) for convenience.
 	@param		inOptionalHeadersLength	Length of data in ptr passed in above.
 	@param		inSelector				A VALID selector to be called when something interesting happens due to this call.
 										Selector in your target object MUST have the following signature, or it
@@ -104,7 +105,7 @@ typedef struct OpaquePrivOBEXSessionData* PrivOBEXSessionDataRef;
 	@abstract	Send an OBEX Disconnect command to the session's target. THIS DOES NOT necessarily close the underlying transport
 				connection. Deleting the session will ensure that closure.
 	@param		inOptionalHeaders		Can be NULL. Ptr to some data you want to send as your optional headers. Use
-										the provided header contruction kit in OBEX.h and OBEXHeadersToBytes() for convenience.
+										the provided header contruction kit in OBEX.h and OBEXHeadersToBytes(void) for convenience.
 	@param		inOptionalHeadersLength	Length of data in ptr passed in above.
 	@param		inSelector				A VALID selector to be called when something interesting happens due to this call.
 										Selector in your target object MUST have the following signature, or it
@@ -135,7 +136,7 @@ typedef struct OpaquePrivOBEXSessionData* PrivOBEXSessionDataRef;
 	@param		isFinalChunk			Specify if this request is complete in one shot - that all the headers you are
 										supplying will fit in the negotiated max packet length.
 	@param		inHeadersData			Can be NULL. Ptr to some data you want to send as your headers, such as Length,
-										Name, etc. Use the provided header contruction kit in OBEX.h and OBEXHeadersToBytes()
+										Name, etc. Use the provided header contruction kit in OBEX.h and OBEXHeadersToBytes(void)
 										for convenience.
 	@param		inHeadersDataLength		Length of data in ptr passed in above.
 	@param		inBodyData				Can be NULL. Ptr to some data you want to send as your BODY header. Do not construct a
@@ -173,7 +174,7 @@ typedef struct OpaquePrivOBEXSessionData* PrivOBEXSessionDataRef;
 	@param		isFinalChunk			Specify if this request is complete in one shot - that all the headers you are
 										supplying will fit in the negotiated max packet length.
 	@param		inHeadersData			Can be NULL. Ptr to some data you want to send as your headers, such as Length,
-										Name, etc. Use the provided header contruction kit in OBEX.h and OBEXHeadersToBytes()
+										Name, etc. Use the provided header contruction kit in OBEX.h and OBEXHeadersToBytes(void)
 										for your convenience.
 	@param		inHeadersDataLength		Length of data in ptr passed in above.
 	@param		inSelector				A VALID selector to be called when something interesting happens due to this call.
@@ -201,7 +202,7 @@ typedef struct OpaquePrivOBEXSessionData* PrivOBEXSessionDataRef;
 /*!	@method		OBEXAbort
 	@abstract	Send an OBEX Abort command to the session's target.
 	@param		inOptionalHeaders		Can be NULL. Ptr to some data you want to send as your optional headers. Use
-										the provided header contruction kit in OBEX.h and OBEXHeadersToBytes() for convenience.
+										the provided header contruction kit in OBEX.h and OBEXHeadersToBytes(void) for convenience.
 	@param		inOptionalHeadersLength	Length of data in ptr passed in above.
 	@param		inSelector				A VALID selector to be called when something interesting happens due to this call.
 										Selector in your target object MUST have the following signature, or it
@@ -229,7 +230,7 @@ typedef struct OpaquePrivOBEXSessionData* PrivOBEXSessionDataRef;
 	@param		inFlags					OBEX setpath flags. See OBEX.h for possibilities.
 	@param		inConstants				OBEX setpath constants. See OBEX.h for possibilities.
 	@param		inOptionalHeaders		Can be NULL. Ptr to some data you want to send as your optional headers. Use
-										the provided header contruction kit in OBEX.h and OBEXHeadersToBytes() for convenience.
+										the provided header contruction kit in OBEX.h and OBEXHeadersToBytes(void) for convenience.
 	@param		inOptionalHeadersLength	Length of data in ptr passed in above.
 	@param		inSelector				A VALID selector to be called when something interesting happens due to this call.
 										Selector in your target object MUST have the following signature, or it
@@ -267,7 +268,7 @@ typedef struct OpaquePrivOBEXSessionData* PrivOBEXSessionDataRef;
 										lower than the max packet size the client has reported to you in the connect command
 										you received from it.
 	@param		inOptionalHeaders		Can be NULL. Ptr to some data you want to send as your optional headers. Use
-										the provided header contruction kit in OBEX.h and OBEXHeadersToBytes() for convenience.
+										the provided header contruction kit in OBEX.h and OBEXHeadersToBytes(void) for convenience.
 	@param		inOptionalHeadersLength	Length of data in ptr passed in above.
 	@param		inSelector				A VALID selector to be called when something interesting happens due to this call.
 										Selector in your target object MUST have the following signature, or it
@@ -299,7 +300,7 @@ typedef struct OpaquePrivOBEXSessionData* PrivOBEXSessionDataRef;
 										lower than the max packet size the client has reported to you in the connect command
 										you received from it.
 	@param		inOptionalHeaders		Can be NULL. Ptr to some data you want to send as your optional headers. Use
-										the provided header contruction kit in OBEX.h and OBEXHeadersToBytes() for convenience.
+										the provided header contruction kit in OBEX.h and OBEXHeadersToBytes(void) for convenience.
 	@param		inOptionalHeadersLength	Length of data in ptr passed in above.
 	@param		inSelector				A VALID selector to be called when something interesting happens due to this call.
 										Selector in your target object MUST have the following signature, or it
@@ -329,7 +330,7 @@ typedef struct OpaquePrivOBEXSessionData* PrivOBEXSessionDataRef;
 										lower than the max packet size the client has reported to you in the connect command
 										you received from it.
 	@param		inOptionalHeaders		Can be NULL. Ptr to some data you want to send as your optional headers. Use
-										the provided header contruction kit in OBEX.h and OBEXHeadersToBytes() for convenience.
+										the provided header contruction kit in OBEX.h and OBEXHeadersToBytes(void) for convenience.
 	@param		inOptionalHeadersLength	Length of data in ptr passed in above.
 	@param		inSelector				A VALID selector to be called when something interesting happens due to this call.
 										Selector in your target object MUST have the following signature, or it
@@ -359,7 +360,7 @@ typedef struct OpaquePrivOBEXSessionData* PrivOBEXSessionDataRef;
 										lower than the max packet size the client has reported to you in the connect command
 										you received from it.
 	@param		inOptionalHeaders		Can be NULL. Ptr to some data you want to send as your optional headers. Use
-										the provided header contruction kit in OBEX.h and OBEXHeadersToBytes() for convenience.
+										the provided header contruction kit in OBEX.h and OBEXHeadersToBytes(void) for convenience.
 	@param		inOptionalHeadersLength	Length of data in ptr passed in above.
 	@param		inSelector				A VALID selector to be called when something interesting happens due to this call.
 										Selector in your target object MUST have the following signature, or it
@@ -389,7 +390,7 @@ typedef struct OpaquePrivOBEXSessionData* PrivOBEXSessionDataRef;
 										lower than the max packet size the client has reported to you in the connect command
 										you received from it.
 	@param		inOptionalHeaders		Can be NULL. Ptr to some data you want to send as your optional headers. Use
-										the provided header contruction kit in OBEX.h and OBEXHeadersToBytes() for convenience.
+										the provided header contruction kit in OBEX.h and OBEXHeadersToBytes(void) for convenience.
 	@param		inOptionalHeadersLength	Length of data in ptr passed in above.
 	@param		inSelector				A VALID selector to be called when something interesting happens due to this call.
 										Selector in your target object MUST have the following signature, or it
@@ -419,7 +420,7 @@ typedef struct OpaquePrivOBEXSessionData* PrivOBEXSessionDataRef;
 										lower than the max packet size the client has reported to you in the connect command
 										you received from it.
 	@param		inOptionalHeaders		Can be NULL. Ptr to some data you want to send as your optional headers. Use
-										the provided header contruction kit in OBEX.h and OBEXHeadersToBytes() for convenience.
+										the provided header contruction kit in OBEX.h and OBEXHeadersToBytes(void) for convenience.
 	@param		inOptionalHeadersLength	Length of data in ptr passed in above.
 	@param		inSelector				A VALID selector to be called when something interesting happens due to this call.
 										Selector in your target object MUST have the following signature, or it

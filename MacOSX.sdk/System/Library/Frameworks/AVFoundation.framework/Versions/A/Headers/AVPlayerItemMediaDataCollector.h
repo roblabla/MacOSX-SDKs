@@ -25,7 +25,7 @@ NS_ASSUME_NONNULL_BEGIN
 		• addMediaDataCollector:
 		• removeMediaDataCollector:
 */
-NS_CLASS_AVAILABLE(10_11_3, 9_3)
+API_AVAILABLE(macos(10.11.3), ios(9.3), tvos(9.3), watchos(2.3))
 @interface AVPlayerItemMediaDataCollector : NSObject
 {
 @private
@@ -43,7 +43,7 @@ NS_CLASS_AVAILABLE(10_11_3, 9_3)
 	@discussion
 		This class can be used to inform clients of the current set of AVMetadataGroups on an AVPlayerItem, and when new AVMetadataGroups become available - e.g. in a Live HLS stream.
 */
-NS_CLASS_AVAILABLE(10_11_3, 9_3)
+API_AVAILABLE(macos(10.11.3), ios(9.3), tvos(9.3), watchos(2.3))
 @interface AVPlayerItemMetadataCollector : AVPlayerItemMediaDataCollector
 {
 @private

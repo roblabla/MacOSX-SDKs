@@ -18,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 		AVAudioBuffer represents a buffer of audio data and its format.
 */
 
-OS_EXPORT API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0))
+API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0))
 @interface AVAudioBuffer : NSObject <NSCopying, NSMutableCopying> {
 @protected
 	void *_impl;
@@ -63,7 +63,7 @@ OS_EXPORT API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0))
 		AVAudioPCMBuffer provides a number of methods useful for manipulating buffers of
 		audio in PCM format.
 */
-OS_EXPORT API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0))
+API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0))
 @interface AVAudioPCMBuffer : AVAudioBuffer
 
 /*!	@method initWithPCMFormat:frameCapacity:
@@ -152,7 +152,7 @@ OS_EXPORT API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0))
 	@class AVAudioCompressedBuffer
 	@abstract A subclass of AVAudioBuffer for use with compressed audio formats.
 */
-OS_EXPORT API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0))
+API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0))
 @interface AVAudioCompressedBuffer : AVAudioBuffer
 
 /*!	@method initWithFormat:packetCapacity:maximumPacketSize:
@@ -189,8 +189,8 @@ OS_EXPORT API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0))
 /*!	@property packetCount
 	@abstract The current number of compressed packets in the buffer.
 	@discussion
-		You may modify the packet length as part of an operation that modifies its contents.
-		The packet length must be less than or equal to the packetCapacity.
+		You may modify the packetCount as part of an operation that modifies its contents.
+		The packetCount must be less than or equal to the packetCapacity.
 */
 @property (nonatomic) AVAudioPacketCount packetCount;
 

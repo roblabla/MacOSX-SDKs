@@ -14,6 +14,8 @@ extern "C" {
 
 #include <CoreFoundation/CoreFoundation.h>
 #include <AddressBook/ABAddressBookC.h>
+
+#if TARGET_OS_OSX
 #include <Carbon/Carbon.h>
 
 typedef struct OpaqueABPicker*  ABPickerRef;
@@ -153,6 +155,8 @@ extern void ABPickerClearSearchField(ABPickerRef inPicker) AVAILABLE_MAC_OS_X_VE
     // Launch AddressBook and edit the current selection
 extern void ABPickerEditInAddressBook(ABPickerRef inPicker) AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 extern void ABPickerSelectInAddressBook(ABPickerRef inPicker) AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
+#endif // TARGET_OS_OSX
 
 #if defined(__cplusplus)
 }

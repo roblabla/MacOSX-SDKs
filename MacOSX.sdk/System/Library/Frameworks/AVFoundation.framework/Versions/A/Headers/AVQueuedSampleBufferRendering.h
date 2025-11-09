@@ -3,7 +3,7 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2013-2017 Apple Inc. All rights reserved.
+	Copyright 2013-2018 Apple Inc. All rights reserved.
 
 */
 
@@ -24,10 +24,10 @@ NS_ASSUME_NONNULL_BEGIN
 		Indicates that the receiver cannot currently enqueue or render sample buffers because of an error.
  */
 typedef NS_ENUM(NSInteger, AVQueuedSampleBufferRenderingStatus) {
-	AVQueuedSampleBufferRenderingStatusUnknown,
-	AVQueuedSampleBufferRenderingStatusRendering,
-	AVQueuedSampleBufferRenderingStatusFailed
-} API_AVAILABLE(macos(10.10), ios(8.0), tvos(10.2)) __WATCHOS_PROHIBITED;
+	AVQueuedSampleBufferRenderingStatusUnknown = 0,
+	AVQueuedSampleBufferRenderingStatusRendering = 1,
+	AVQueuedSampleBufferRenderingStatusFailed = 2
+} API_AVAILABLE(macos(10.10), ios(8.0), tvos(10.2), watchos(1.0));
 
 /*
 	@protocol		AVQueuedSampleBufferRendering
@@ -35,7 +35,7 @@ typedef NS_ENUM(NSInteger, AVQueuedSampleBufferRenderingStatus) {
 	@discussion
 		AVSampleBufferDisplayLayer and AVSampleBufferAudioRenderer conform to this protocol.  When used in conjunction with an AVSampleBufferRenderSynchronizer, an object conforming to AVQueuedSampleBufferRendering can only be attached to a single synchronizer.
 */
-API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0)) __WATCHOS_PROHIBITED
+API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0))
 @protocol AVQueuedSampleBufferRendering <NSObject>
 
 /*!

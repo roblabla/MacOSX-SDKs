@@ -3,9 +3,9 @@
  
      Contains:   Master include for vecLib framework
  
-     Version:    vecLib-671.220
+     Version:    vecLib-735.0
  
-     Copyright:  Copyright (c) 2000-2018 by Apple Inc. All rights reserved.
+     Copyright:  Copyright (c) 2000-2019 by Apple Inc. All rights reserved.
  
      Bugs:       For bug reports, consult the following page on
                  the World Wide Web:
@@ -87,12 +87,11 @@
 #endif	/* defined _AltiVecPIMLanguageExtensionsAreEnabled */
 
 #elif defined(__i386__) || defined(__x86_64__)
+#include <immintrin.h>
 #ifdef __SSE__
 #if defined(__GNUC__)
-#include <xmmintrin.h>
 typedef float                   vFloat          __attribute__ ((__vector_size__ (16)));
 #else /* not __GNUC__ */
-#include <xmmintrin.h>
 typedef __m128                          vFloat;
 #endif /* __GNUC__ */
 #endif  /* defined(__SSE__) */
@@ -102,7 +101,6 @@ typedef __m128                          vFloat;
     
     #if defined(__GNUC__)
         #if defined(__GNUC_MINOR__) && (((__GNUC__ == 3) && (__GNUC_MINOR__ <= 3)) || (__GNUC__ < 3))
-            #include <xmmintrin.h>
             typedef __m128i vUInt8;
             typedef __m128i vSInt8;
             typedef __m128i vUInt16;
@@ -114,7 +112,6 @@ typedef __m128                          vFloat;
             typedef __m128i vSInt64;
             typedef __m128d vDouble;
         #else /* gcc-3.5 or later */
-            #include <emmintrin.h>
             typedef unsigned char           vUInt8          __attribute__ ((__vector_size__ (16)));
             typedef char                    vSInt8          __attribute__ ((__vector_size__ (16)));
             typedef unsigned short          vUInt16         __attribute__ ((__vector_size__ (16)));
@@ -127,7 +124,6 @@ typedef __m128                          vFloat;
             typedef double                  vDouble         __attribute__ ((__vector_size__ (16)));
         #endif /* __GNUC__ <= 3.3 */
     #else /* not __GNUC__ */
-        #include <emmintrin.h>
         typedef __m128i                         vUInt8;
         typedef __m128i                         vSInt8;
         typedef __m128i                         vUInt16;

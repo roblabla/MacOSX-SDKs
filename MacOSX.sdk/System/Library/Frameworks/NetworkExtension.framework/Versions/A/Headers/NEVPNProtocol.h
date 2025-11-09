@@ -72,6 +72,18 @@ API_AVAILABLE(macos(10.11), ios(8.0)) API_UNAVAILABLE(watchos, tvos)
  */
 @property (copy, nullable) NEProxySettings *proxySettings API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(watchos, tvos);
 
+/*!
+ * @property includeAllNetworks
+ * @discussion If YES, all traffic will be sent over the tunnel, and all traffic will be dropped if the tunnel is down. The default is NO.
+ */
+@property BOOL includeAllNetworks API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, watchos, tvos);
+
+/*!
+ * @property excludeLocalNetworks
+ * @discussion If YES, all traffic destined for local networks will be excluded from the tunnel. The default is NO.
+ */
+@property BOOL excludeLocalNetworks API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, watchos, tvos);
+
 @end
 
 NS_ASSUME_NONNULL_END

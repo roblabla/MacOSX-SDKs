@@ -31,7 +31,7 @@ extern "C" {
  *              While the mask is stored internally, the mask data is accessible by the
  *              user for debugging purposes via an accessor method.
  */
-MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3))
+MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3))
 @interface MPSCNNDropoutGradientState : MPSNNGradientState
 
 /*
@@ -58,7 +58,7 @@ MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3))
 #pragma mark MPSCNNDropoutGradientStateBatch
 
 typedef NSArray<MPSCNNDropoutGradientState*> MPSCNNDropoutGradientStateBatch
-    MPS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3));
+    MPS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3));
 
 #pragma mark -
 #pragma mark MPSCNNDropout
@@ -72,7 +72,7 @@ typedef NSArray<MPSCNNDropoutGradientState*> MPSCNNDropoutGradientStateBatch
  *              outputs 0. Each input element is kept or dropped independently. The scaling
  *              is performed to keep the energy of the output unchanged.
  */
-MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3))
+MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3))
 @interface MPSCNNDropout : MPSCNNKernel
 
 /*! @property   keepProbability
@@ -121,12 +121,28 @@ MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3))
                                   seed: (NSUInteger) seed
                     maskStrideInPixels: (MTLSize) maskStrideInPixels NS_DESIGNATED_INITIALIZER;
 
+-(MPSCNNDropoutGradientState * __nullable) resultStateForSourceImage: (MPSImage *__nonnull) sourceImage
+                                                        sourceStates: (NSArray <MPSState *> *__nullable) sourceStates
+                                                    destinationImage: (MPSImage *__nonnull) destinationImage
+                                                        MPS_SWIFT_NAME( resultState(sourceImage:sourceStates:destinationImage:));
+
+/* To be used with batch encode call. Since same state is used across entire batch, it will return copy of same state in returned NSArray*/
+-(MPSCNNDropoutGradientState * __nullable) resultStateBatchForSourceImage: (MPSImageBatch * __nonnull) sourceImage
+                                                             sourceStates: (NSArray<MPSStateBatch *> * __nullable) sourceStates
+                                                         destinationImage:(MPSImageBatch * _Nonnull)destinationImage
+                                                        MPS_SWIFT_NAME( resultStateBatch(sourceImage:sourceStates:destinationImage:));
+
 -(MPSCNNDropoutGradientState * __nullable) temporaryResultStateForCommandBuffer: (__nonnull id <MTLCommandBuffer>) commandBuffer
                                                                     sourceImage: (MPSImage *__nonnull) sourceImage
                                                                    sourceStates: (NSArray <MPSState *> *__nullable) sourceStates
-                                                               destinationImage: (MPSImage * __nonnull) dest NS_UNAVAILABLE;
+                                                               destinationImage: (MPSImage * __nonnull) destinationImage
+                                                        MPS_SWIFT_NAME( temporaryResultState(commandBuffer:sourceImage:sourceStates:destinationImage:));
 
--(MPSCNNDropoutGradientStateBatch * __nullable) temporaryResultStateBatchForCommandBuffer: (__nonnull id <MTLCommandBuffer>) commandBuffer NS_UNAVAILABLE;
+-(MPSCNNDropoutGradientStateBatch * __nullable) temporaryResultStateBatchForCommandBuffer: (nonnull id <MTLCommandBuffer>) commandBuffer
+                                                                              sourceImage: (MPSImageBatch *__nonnull) sourceImage
+                                                                             sourceStates: (NSArray <MPSStateBatch *> *__nullable) sourceStates
+                                                                         destinationImage: (MPSImageBatch *__nonnull) destinationImage
+                                                        MPS_SWIFT_NAME( temporaryResultStateBatch(commandBuffer:sourceImage:sourceStates:destinationImage:));
 
 @end /* MPSCNNDroput */
 
@@ -144,7 +160,7 @@ MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3))
  *
  *              In this kernel, use the secondaryOffset to apply an offset to the mask data.
  */
-MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3))
+MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3))
 @interface MPSCNNDropoutGradient : MPSCNNGradientKernel
 
 /*! @property   keepProbability

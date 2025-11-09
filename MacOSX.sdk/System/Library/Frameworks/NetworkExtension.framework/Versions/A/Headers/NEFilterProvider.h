@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015-2018 Apple Inc.
+ * Copyright (c) 2015-2019 Apple Inc.
  * All rights reserved.
  */
 
@@ -11,6 +11,7 @@
 #import <NetworkExtension/NEFilterFlow.h>
 
 @class NEFilterProviderConfiguration;
+@class NEFilterReport;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -49,7 +50,7 @@ NEFILTER_EXPORT NSString const *NEFilterProviderRemediationMapRemediationButtonT
  *
  * NEFilterProvider is part of NetworkExtension.framework
  */
-API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, watchos, tvos)
+API_AVAILABLE(macos(10.15), ios(9.0)) API_UNAVAILABLE(watchos, tvos)
 @interface NEFilterProvider : NEProvider
 
 /*!
@@ -60,7 +61,7 @@ API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, watchos, tvos)
  * filter was started successfully, subclass implementations must pass the nil value to this block. If an error occurred
  * while starting the filter, sublcass implementations must pass a non-nil NSError containing more details about the error.
  */
-- (void)startFilterWithCompletionHandler:(void (^)(NSError * __nullable error))completionHandler API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, watchos, tvos);
+- (void)startFilterWithCompletionHandler:(void (^)(NSError * __nullable error))completionHandler API_AVAILABLE(macos(10.15), ios(9.0)) API_UNAVAILABLE(watchos, tvos);
 
 /*!
  * @method stopFilterWithReason:completionHandler:
@@ -70,7 +71,7 @@ API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, watchos, tvos)
  * @param completionHandler A block that must be called when the process of stopping the filter is complete.
  */
 - (void)stopFilterWithReason:(NEProviderStopReason)reason
-		   completionHandler:(void (^)(void))completionHandler API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, watchos, tvos);
+		   completionHandler:(void (^)(void))completionHandler API_AVAILABLE(macos(10.15), ios(9.0)) API_UNAVAILABLE(watchos, tvos);
 
 /*!
  * @property filterConfiguration
@@ -78,7 +79,15 @@ API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, watchos, tvos)
  * property can change during the lifetime of a filter. Filter implementations can use KVO to be notified when the
  * configuration changes.
  */
-@property (readonly) NEFilterProviderConfiguration *filterConfiguration API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, watchos, tvos);
+@property (readonly) NEFilterProviderConfiguration *filterConfiguration API_AVAILABLE(macos(10.15), ios(9.0)) API_UNAVAILABLE(watchos, tvos);
+
+/*!
+ * @method handleReport:
+ * @discussion This function is called by the framework when the data provider extension returns a verdict with the report property set to True.
+ *     Subclass implementations may override this method to handle the flow report.
+ * @param report The report being delivered.
+ */
+- (void)handleReport:(NEFilterReport *)report API_AVAILABLE(macos(10.15), ios(11.0)) API_UNAVAILABLE(watchos, tvos);
 
 @end
 
@@ -89,19 +98,21 @@ API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, watchos, tvos)
  *
  * NEFilterVerdict is part of NetworkExtension.framework
  */
-API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, watchos, tvos)
+API_AVAILABLE(macos(10.15), ios(9.0)) API_UNAVAILABLE(watchos, tvos)
 @interface NEFilterVerdict : NSObject <NSSecureCoding,NSCopying>
 
 /*!
  * @property shouldReport
- * @discussion Whether or not to send a report to the control provider's -[NEFilterControlProvider handleReport:]
- * method when processing this verdict. Since the data provider does not need to wait for a response from the control
- * provider before continuing to process the flow, this is a more efficient way to report a flow to the control provider
- * than returning a "need rules" verdict. If the verdict originates in the control provider, this property has no
- * effect. This property applies when the action taken upon a flow is allow, deny, remediate, or filterData (filterData
- * for new flows only).
+ * @discussion Whether or not to send a report to the control provider's -[NEFilterProvider handleReport:]
+ * method when processing this verdict and when the flow is closed. Since the data provider does not need to wait
+ * for a response from the control provider before continuing to process the flow, this is a more efficient way to
+ * report a flow to the control provider than returning a "need rules" verdict. If the verdict originates in the
+ * control provider, this property has no effect. This property applies when the action taken upon a flow is allow,
+ * deny, remediate, or filterData (filterData for new flows only). Setting this flag on a verdict for a socket
+ * flow will also cause the data provider's -[NEFilterProvider handleReport:] method to be called when the flow
+ * is closed.
  */
-@property BOOL shouldReport API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos, watchos, tvos);
+@property BOOL shouldReport API_AVAILABLE(ios(11.0), macos(10.15)) API_UNAVAILABLE(watchos, tvos);
 
 @end
 
@@ -112,7 +123,7 @@ API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, watchos, tvos)
  *
  * NEFilterNewFlowVerdict is part of NetworkExtension.framework
  */
-API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, watchos, tvos)
+API_AVAILABLE(macos(10.15), ios(9.0)) API_UNAVAILABLE(watchos, tvos)
 @interface NEFilterNewFlowVerdict : NEFilterVerdict <NSSecureCoding,NSCopying>
 
 /*!
@@ -129,14 +140,14 @@ API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, watchos, tvos)
  * @discussion This class method returns a verdict indicating that the flow should be allowed.
  * @return The NEFilterNewFlowVerdict object.
  */
-+ (NEFilterNewFlowVerdict *) allowVerdict API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, watchos, tvos);
++ (NEFilterNewFlowVerdict *) allowVerdict API_AVAILABLE(macos(10.15), ios(9.0)) API_UNAVAILABLE(watchos, tvos);
 
 /*!
  * @method dropVerdict
  * @discussion This class method returns a verdict indicating that the flow should be dropped.
  * @return The NEFilterNewFlowVerdict object.
  */
-+ (NEFilterNewFlowVerdict *) dropVerdict API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, watchos, tvos);
++ (NEFilterNewFlowVerdict *) dropVerdict API_AVAILABLE(macos(10.15), ios(9.0)) API_UNAVAILABLE(watchos, tvos);
 /*!
  * @method remediateVerdictWithRemediationURLMapKey:remediationButtonTextMapKey:
  * @discussion This class method returns a verdict indicating that a "content blocked" page should be displayed to
@@ -170,7 +181,16 @@ API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, watchos, tvos)
 + (NEFilterNewFlowVerdict *)filterDataVerdictWithFilterInbound:(BOOL)filterInbound
 											  peekInboundBytes:(NSUInteger)peekInboundBytes
 												filterOutbound:(BOOL)filterOutbound
-											 peekOutboundBytes:(NSUInteger)peekOutboundBytes API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, watchos, tvos);
+											 peekOutboundBytes:(NSUInteger)peekOutboundBytes API_AVAILABLE(macos(10.15), ios(9.0)) API_UNAVAILABLE(watchos, tvos);
+
+/*!
+ * @method pauseVerdict
+ * @discussion This class method returns a verdict indicating that none of the data provider's handler callbacks shall be called for the flow until after the flow is resumed
+ *     by a call to -[NEFilterDataProvider resumeFlow:withVerdict:]. TCP flows may be paused indefinitely. UDP flows will be dropped if not resumed within 10 seconds of
+ *     being paused. It is invalid to pause a flow that is already paused.
+ * @return The NEFilterNewFlowVerdict object.
+ */
++ (NEFilterNewFlowVerdict *)pauseVerdict API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, watchos, tvos);
 
 @end
 
@@ -220,16 +240,29 @@ API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, watchos, tvos)
  */
 typedef NS_ENUM(NSInteger, NEFilterAction){
 	/*! @const NEFilterActionInvalid Invalid action, represents an error */
-	NEFilterActionInvalid = 0,
+	NEFilterActionInvalid API_AVAILABLE(macos(10.15), ios(11.0)) = 0,
 	/*! @const NEFilterActionAllow Allowing the flow */
-	NEFilterActionAllow = 1,
+	NEFilterActionAllow API_AVAILABLE(macos(10.15), ios(11.0)) = 1,
 	/*! @const NEFilterActionDrop Dropping the flow */
-	NEFilterActionDrop = 2,
+	NEFilterActionDrop API_AVAILABLE(macos(10.15), ios(11.0)) = 2,
 	/*! @const NEFilterActionRemediate Remediating the flow (a "content blocked" page displayed to the user) */
-	NEFilterActionRemediate = 3,
+	NEFilterActionRemediate API_AVAILABLE(ios(11.0)) = 3,
 	/*! @const NEFilterActionFilterData Filtering data on the flow */
-	NEFilterActionFilterData = 4,
-} API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos, watchos, tvos);
+	NEFilterActionFilterData API_AVAILABLE(macos(10.15), ios(11.0)) = 4,
+} API_AVAILABLE(macos(10.15), ios(11.0)) API_UNAVAILABLE(watchos, tvos);
+
+/*!
+ * @typedef NEFilterReportEvent
+ * @abstract A NEFilterReportEvent represents the event that is being reported by the NEFilterReport.
+ */
+typedef NS_ENUM(NSInteger, NEFilterReportEvent) {
+	/*! @const NEFilterReportEventNewFlow The report is reporting a new flow */
+	NEFilterReportEventNewFlow = 1,
+	/*! @const NEFilterReportEventDataDecision The report is reporting a pass/block decision made after analyzing some amount of a flow's data */
+	NEFilterReportEventDataDecision = 2,
+	/*! @const NEFilterReportEventFlowClosed The report is reporting that a flow has been closed */
+	NEFilterReportEventFlowClosed = 3,
+} NS_SWIFT_NAME(NEFilterReport.Event) API_AVAILABLE(macos(10.15), ios(13.0)) API_UNAVAILABLE(watchos, tvos);
 
 /*!
  * @interface NEFilterReport
@@ -238,20 +271,38 @@ typedef NS_ENUM(NSInteger, NEFilterAction){
  *
  * NEFilterReport is part of NetworkExtension.framework
  */
-API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos, watchos, tvos)
+API_AVAILABLE(macos(10.15), ios(11.0)) API_UNAVAILABLE(watchos, tvos)
 @interface NEFilterReport : NSObject <NSSecureCoding,NSCopying>
 
 /*!
  * @property flow
  * @discussion The flow on which the described action was taken.
  */
-@property (readonly, nullable) NEFilterFlow *flow;
+@property (readonly, nullable) NEFilterFlow *flow API_AVAILABLE(macos(10.15), ios(11.0)) API_UNAVAILABLE(watchos, tvos);
 
 /*!
  * @property action
  * @discussion The action taken upon the reported flow.
  */
-@property (readonly) NEFilterAction action;
+@property (readonly) NEFilterAction action API_AVAILABLE(macos(10.15), ios(11.0)) API_UNAVAILABLE(watchos, tvos);
+
+/*!
+ * @property event
+ * @discussion The type of event that the report is reporting.
+ */
+@property (readonly) NEFilterReportEvent event API_AVAILABLE(macos(10.15), ios(13.0)) API_UNAVAILABLE(watchos, tvos);
+
+/*!
+ * @property bytesInboundCount
+ * @discussion The number of inbound bytes received from the flow. This property is only non-zero when the report event is NEFilterReportEventFlowClosed.
+ */
+@property (readonly) NSUInteger bytesInboundCount API_AVAILABLE(macos(10.15), ios(13.0)) API_UNAVAILABLE(watchos, tvos);
+
+/*!
+ * @property bytesOutboundCount
+ * @discussion The number of outbound bytes sent on the flow. This property is only non-zero when the report event is NEFilterReportEventFlowClosed.
+ */
+@property (readonly) NSUInteger bytesOutboundCount API_AVAILABLE(macos(10.15), ios(13.0)) API_UNAVAILABLE(watchos, tvos);
 
 @end
 

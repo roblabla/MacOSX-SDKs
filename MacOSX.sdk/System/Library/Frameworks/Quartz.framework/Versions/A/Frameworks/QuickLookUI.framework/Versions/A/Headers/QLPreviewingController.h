@@ -1,6 +1,6 @@
 //
 //  QLPreviewingController.h
-//  QuickLook
+//  Mobile Quick Look
 //
 //  Copyright 2016 Apple Inc. All rights reserved.
 //
@@ -37,6 +37,19 @@ QL_EXPORT @protocol QLPreviewingController <NSObject>
  */
 - (void)preparePreviewOfSearchableItemWithIdentifier:(NSString *)identifier queryString:(NSString * _Nullable)queryString completionHandler:(void (^)(NSError * _Nullable))handler NS_SWIFT_NAME(preparePreviewOfSearchableItem(identifier:queryString:completionHandler:));
 
+/**
+ @abstract
+ Use this method to prepare the content of the view controller with the given file URL.
+
+ @discussion
+ This method will be called only once. It will be called in the main thread before presenting the view controller.
+ Heavy work potentially blocking the main thread should be avoided in this method.
+ 
+ @param url The URL of the file the user is about to preview.
+ @param handler The completion handler should be called whenever the view is ready to be displayed. A loading spinner will be shown until the handler is called.
+ It can be called asynchronously after the method has returned.
+ */
+- (void)preparePreviewOfFileAtURL:(NSURL *)url completionHandler:(void (^)(NSError * _Nullable))handler NS_SWIFT_NAME(preparePreviewOfFile(at:completionHandler:));
 
 @end
 

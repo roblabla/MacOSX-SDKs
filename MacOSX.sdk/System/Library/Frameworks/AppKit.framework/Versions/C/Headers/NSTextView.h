@@ -1,7 +1,7 @@
 /*
         NSTextView.h
         Application Kit
-        Copyright (c) 1994-2018, Apple Inc.
+        Copyright (c) 1994-2019, Apple Inc.
         All rights reserved.
 */
 
@@ -27,7 +27,13 @@
 #import <AppKit/NSColorPanel.h>
 #import <AppKit/NSMenu.h>
 
+@protocol NSTextViewDelegate;
+@protocol NSTextLayoutOrientationProvider;
+@protocol NSTextAttachmentCell;
+@protocol QLPreviewItem;
+
 NS_ASSUME_NONNULL_BEGIN
+API_UNAVAILABLE_BEGIN(ios)
 
 @class NSTextContainer;
 @class NSTextStorage;
@@ -39,8 +45,7 @@ NS_ASSUME_NONNULL_BEGIN
 @class NSOrthography;
 @class NSSharingServicePicker;
 @class NSValue;
-@protocol NSTextViewDelegate;
-@protocol QLPreviewItem;
+@class NSTextAttachment;
 
 /* Values for NSSelectionGranularity */
 typedef NS_ENUM(NSUInteger, NSSelectionGranularity) {
@@ -58,7 +63,7 @@ typedef NS_ENUM(NSUInteger, NSSelectionAffinity) {
 
 /* A meta locale identifier representing the set of Roman input sources available.  You can specify [NSArray arrayWithObject: NSAllRomanInputSourcesLocaleIdentifier] to restrict allowed input sources to Roman only.
 */
-APPKIT_EXTERN NSString * NSAllRomanInputSourcesLocaleIdentifier NS_AVAILABLE_MAC(10_5);
+APPKIT_EXTERN NSString * NSAllRomanInputSourcesLocaleIdentifier API_AVAILABLE(macos(10.5));
 
 #if MAC_OS_X_VERSION_MIN_REQUIRED < MAC_OS_X_VERSION_10_12
 NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE
@@ -98,7 +103,7 @@ NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE
 
 /************************* Key binding entry-point *************************/
 
-- (void)insertText:(id)insertString NS_DEPRECATED_MAC(10_0, 10_11, "Use -insertText:replacementRange: from NSTextInputClient instead. Since the method is designed to be used solely by the input system, the message should never be sent to a text view from applications. Any content modifications should be via either NSTextStorage or NSText methods.");
+- (void)insertText:(id)insertString API_DEPRECATED("Use -insertText:replacementRange: from NSTextInputClient instead. Since the method is designed to be used solely by the input system, the message should never be sent to a text view from applications. Any content modifications should be via either NSTextStorage or NSText methods.", macos(10.0,10.11));
 
 /*************************** Sizing methods ***************************/
 
@@ -108,8 +113,10 @@ NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE
 /***************** New miscellaneous API above and beyond NSText *****************/
 
 // These two complete the set of range: type set methods. to be equivalent to the set of non-range taking varieties.
+#if !TARGET_OS_IPHONE
 - (void)setAlignment:(NSTextAlignment)alignment range:(NSRange)range;
 - (void)setBaseWritingDirection:(NSWritingDirection)writingDirection range:(NSRange)range;
+#endif
 
 /*************************** New Font menu commands ***************************/
 
@@ -122,7 +129,7 @@ NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE
 - (void)useAllLigatures:(nullable id)sender;
 - (void)raiseBaseline:(nullable id)sender;
 - (void)lowerBaseline:(nullable id)sender;
-- (void)toggleTraditionalCharacterShape:(nullable id)sender NS_DEPRECATED_MAC(10_0, 10_11, "Use the traditional shaped characters encoded in the Unicode standard. Access the characters via the character palette.");
+- (void)toggleTraditionalCharacterShape:(nullable id)sender API_DEPRECATED("Use the traditional shaped characters encoded in the Unicode standard. Access the characters via the character palette.", macos(10.0,10.11));
 - (void)outline:(nullable id)sender;
 
 /*************************** Find menu commands ***************************/
@@ -185,25 +192,32 @@ NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE
 
 /************************* Vertical text support *************************/
 
+#if !TARGET_OS_IPHONE
 // Changes the receiver's layout orientation and invalidates the contents.  Unlike other NSTextView properties, this is not shared by sibling views.  It also rotates the bounds 90 degrees, swaps horizontal and vertical bits of the autoresizing mask, and reconfigures isHorizontallyResizable and isVerticallyResizable properties accordingly.  Also, if -enclosingScrollView returns non-nil, it reconfigures horizontal and vertical ruler views, horizontal and vertical scrollers, and the frame.
-- (void)setLayoutOrientation:(NSTextLayoutOrientation)orientation NS_AVAILABLE_MAC(10_7);
+- (void)setLayoutOrientation:(NSTextLayoutOrientation)orientation API_AVAILABLE(macos(10.7));
+#endif
 
 // An action method that calls -setLayoutOrientation: with the sender's tag as the orientation.
-- (void)changeLayoutOrientation:(nullable id)sender NS_AVAILABLE_MAC(10_7);
+- (void)changeLayoutOrientation:(nullable id)sender API_AVAILABLE(macos(10.7));
 
 /************************* Helper for subclassers *************************/
 
 // Here point is in view coordinates, and the return value is a character index appropriate for placing a zero-length selection for an insertion point associated with the mouse at the given point.  The NSTextInput method characterIndexForPoint: is not suitable for this role.
-- (NSUInteger)characterIndexForInsertionAtPoint:(NSPoint)point NS_AVAILABLE_MAC(10_5);
+- (NSUInteger)characterIndexForInsertionAtPoint:(NSPoint)point API_AVAILABLE(macos(10.5));
 
 /**************************** Ownership policy ****************************/
 // Returns whether instances of the class operate in the object ownership policy introduced with macOS Sierra and later. When YES, the new object owner policy is used. Under the policy, each text view strongly retains its text storage and its text container weakly references the view. Also, the text views are compatible with __weak storage. The default is YES.
-@property (readonly, class) BOOL stronglyReferencesTextStorage NS_AVAILABLE_MAC(10_12);
+@property (readonly, class) BOOL stronglyReferencesTextStorage API_AVAILABLE(macos(10.12));
 
 /*************************** Document Content Access ***************************/
 #pragma mark Document Content Mutation
 // Replaces the contents at the specified range with attributedString. In addition to invoking -[NSTextStorage replaceCharactersInRange:withAttributedString:], this method ensures that the change is validated with -shouldChangeTextInRange:replacementString:/-didChangeText. Returns YES if the change was validated and performed. Upon replacement, each attribute run in attributedString is complemented by the attributes at range.location.
-- (BOOL)performValidatedReplacementInRange:(NSRange)range withAttributedString:(NSAttributedString *)attributedString NS_AVAILABLE_MAC(10_14);
+- (BOOL)performValidatedReplacementInRange:(NSRange)range withAttributedString:(NSAttributedString *)attributedString API_AVAILABLE(macos(10.14));
+
+/*************************** Dark Mode ***************************/
+#pragma mark Dark Mode
+// When YES, enables the adaptive color mapping mode. In this mode under the dark effective appearance, NSTextView maps all colors with NSColorTypeComponentBased by inverting the brightness whenever they are coming in and out of the model object, NSTextStorage. For example, when rendering, interacting with NSColorPanel and NSFontManager, and converting from/to the pasteboard and external formats, the color values are converted between the model and rendering contexts. Note that the color conversion algorithm compresses the brightness range and, therefore, does not retain the round-trip fidelity between the light and dark appearances. It may not be suitable for rich text authoring, so it is a good idea to provide a command or preference for your users to see and edit their docs without this option, or in light mode.
+@property BOOL usesAdaptiveColorMappingForDarkAppearance API_AVAILABLE(macos(10.14));
 @end
 
 @interface NSTextView (NSCompletion)
@@ -316,7 +330,7 @@ NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE
 @property (nullable, copy) NSDictionary<NSAttributedStringKey, id> *linkTextAttributes;
 
 // If set, then text with a link attribute will automatically be treated as if it had an implicit tooltip attribute with the same value as the link attribute.  An explicit tooltip attribute will take precedence over this implicit one.  The textView:willDisplayToolTip:forCharacterAtIndex: delegate method affects these tooltips as it does any other.
-@property BOOL displaysLinkToolTips NS_AVAILABLE_MAC(10_5);
+@property BOOL displaysLinkToolTips API_AVAILABLE(macos(10.5));
 
 /************************* Glyph info support *************************/
 
@@ -326,7 +340,7 @@ NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE
 
 @property BOOL usesRuler;
 
-@property BOOL usesInspectorBar NS_AVAILABLE_MAC(10_7);
+@property BOOL usesInspectorBar API_AVAILABLE(macos(10.7));
 
 @property (getter=isContinuousSpellCheckingEnabled) BOOL continuousSpellCheckingEnabled;
 - (void)toggleContinuousSpellChecking:(nullable id)sender;
@@ -334,11 +348,11 @@ NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE
 @property (readonly) NSInteger spellCheckerDocumentTag;
 
 // If grammar checking is enabled, then it is performed whenever spellchecking is performed, whether continuously or manually.
-@property (getter=isGrammarCheckingEnabled) BOOL grammarCheckingEnabled NS_AVAILABLE_MAC(10_5);
-- (void)toggleGrammarChecking:(nullable id)sender NS_AVAILABLE_MAC(10_5);
+@property (getter=isGrammarCheckingEnabled) BOOL grammarCheckingEnabled API_AVAILABLE(macos(10.5));
+- (void)toggleGrammarChecking:(nullable id)sender API_AVAILABLE(macos(10.5));
 
 // May be called or overridden to control setting of spelling and grammar indicators.  Values are those listed for NSSpellingStateAttributeName.  Calls the delegate method textView:shouldSetSpellingState:range:.
-- (void)setSpellingState:(NSInteger)value range:(NSRange)charRange NS_AVAILABLE_MAC(10_5);
+- (void)setSpellingState:(NSInteger)value range:(NSRange)charRange API_AVAILABLE(macos(10.5));
 
 @property (copy) NSDictionary<NSAttributedStringKey, id> *typingAttributes;
 
@@ -364,16 +378,16 @@ NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE
 // May be called to introduce a break in the coalescing of undo actions for user typing, for example at a save point.
 - (void)breakUndoCoalescing;
 
-@property (getter=isCoalescingUndo, readonly) BOOL coalescingUndo NS_AVAILABLE_MAC(10_6);
+@property (getter=isCoalescingUndo, readonly) BOOL coalescingUndo API_AVAILABLE(macos(10.6));
 
 // Specifies whether image attachments should permit editing of their images, if the text view is editable and the text attachment cell supports image editing.
-@property BOOL allowsImageEditing NS_AVAILABLE_MAC(10_5);
+@property BOOL allowsImageEditing API_AVAILABLE(macos(10.5));
 
 // Applies a temporary highlighting effect, intended to indicate the result of a find operation.  Clients should perform any necessary scrolling before calling this method.  The effect will be removed after a certain time, or when other actions (such as scrolling) take place, but it can be removed immediately by calling this method again with a zero-length range.
-- (void)showFindIndicatorForRange:(NSRange)charRange NS_AVAILABLE_MAC(10_5);
+- (void)showFindIndicatorForRange:(NSRange)charRange API_AVAILABLE(macos(10.5));
 
 // Controls whether to show rollover button for extension service items inside text selection.  It's enabled by default.
-@property BOOL usesRolloverButtonForSelection NS_AVAILABLE_MAC(10_10);
+@property BOOL usesRolloverButtonForSelection API_AVAILABLE(macos(10.10));
 
 
 /*************************** NSText methods ***************************/
@@ -394,7 +408,7 @@ NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE
 /*************************** Input Source support ***************************/
 /* Returns an array of locale identifiers representing keyboard input sources allowed to be enabled when the receiver has the keyboard focus.
  */
-@property (nullable, copy) NSArray<NSString *> *allowedInputSourceLocales NS_AVAILABLE_MAC(10_5);
+@property (nullable, copy) NSArray<NSString *> *allowedInputSourceLocales API_AVAILABLE(macos(10.5));
 @end
 
 @interface NSTextView (NSTextChecking)
@@ -405,42 +419,42 @@ NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE
 - (NSRange)smartDeleteRangeForProposedRange:(NSRange)proposedCharRange;
 - (void)toggleSmartInsertDelete:(nullable id)sender;
 
-- (void)smartInsertForString:(NSString *)pasteString replacingRange:(NSRange)charRangeToReplace beforeString:(NSString * __nullable * __nullable)beforeString afterString:(NSString * __nullable * __nullable)afterString;
+- (void)smartInsertForString:(NSString *)pasteString replacingRange:(NSRange)charRangeToReplace beforeString:(NSString * _Nullable * _Nullable)beforeString afterString:(NSString * _Nullable * _Nullable)afterString;
 - (nullable NSString *)smartInsertBeforeStringForString:(NSString *)pasteString replacingRange:(NSRange)charRangeToReplace;
 - (nullable NSString *)smartInsertAfterStringForString:(NSString *)pasteString replacingRange:(NSRange)charRangeToReplace;
 
-@property (getter=isAutomaticQuoteSubstitutionEnabled) BOOL automaticQuoteSubstitutionEnabled NS_AVAILABLE_MAC(10_5);
-- (void)toggleAutomaticQuoteSubstitution:(nullable id)sender NS_AVAILABLE_MAC(10_5);
-@property (getter=isAutomaticLinkDetectionEnabled) BOOL automaticLinkDetectionEnabled NS_AVAILABLE_MAC(10_5);
-- (void)toggleAutomaticLinkDetection:(nullable id)sender NS_AVAILABLE_MAC(10_5);
+@property (getter=isAutomaticQuoteSubstitutionEnabled) BOOL automaticQuoteSubstitutionEnabled API_AVAILABLE(macos(10.5));
+- (void)toggleAutomaticQuoteSubstitution:(nullable id)sender API_AVAILABLE(macos(10.5));
+@property (getter=isAutomaticLinkDetectionEnabled) BOOL automaticLinkDetectionEnabled API_AVAILABLE(macos(10.5));
+- (void)toggleAutomaticLinkDetection:(nullable id)sender API_AVAILABLE(macos(10.5));
 
-@property (getter=isAutomaticDataDetectionEnabled) BOOL automaticDataDetectionEnabled NS_AVAILABLE_MAC(10_6);
-- (void)toggleAutomaticDataDetection:(nullable id)sender NS_AVAILABLE_MAC(10_6);
-@property (getter=isAutomaticDashSubstitutionEnabled) BOOL automaticDashSubstitutionEnabled NS_AVAILABLE_MAC(10_6);
-- (void)toggleAutomaticDashSubstitution:(nullable id)sender NS_AVAILABLE_MAC(10_6);
-@property (getter=isAutomaticTextReplacementEnabled) BOOL automaticTextReplacementEnabled NS_AVAILABLE_MAC(10_6);
-- (void)toggleAutomaticTextReplacement:(nullable id)sender NS_AVAILABLE_MAC(10_6);
-@property (getter=isAutomaticSpellingCorrectionEnabled) BOOL automaticSpellingCorrectionEnabled NS_AVAILABLE_MAC(10_6);
-- (void)toggleAutomaticSpellingCorrection:(nullable id)sender NS_AVAILABLE_MAC(10_6);
+@property (getter=isAutomaticDataDetectionEnabled) BOOL automaticDataDetectionEnabled API_AVAILABLE(macos(10.6));
+- (void)toggleAutomaticDataDetection:(nullable id)sender API_AVAILABLE(macos(10.6));
+@property (getter=isAutomaticDashSubstitutionEnabled) BOOL automaticDashSubstitutionEnabled API_AVAILABLE(macos(10.6));
+- (void)toggleAutomaticDashSubstitution:(nullable id)sender API_AVAILABLE(macos(10.6));
+@property (getter=isAutomaticTextReplacementEnabled) BOOL automaticTextReplacementEnabled API_AVAILABLE(macos(10.6));
+- (void)toggleAutomaticTextReplacement:(nullable id)sender API_AVAILABLE(macos(10.6));
+@property (getter=isAutomaticSpellingCorrectionEnabled) BOOL automaticSpellingCorrectionEnabled API_AVAILABLE(macos(10.6));
+- (void)toggleAutomaticSpellingCorrection:(nullable id)sender API_AVAILABLE(macos(10.6));
 
 // These two are bulk methods for setting and getting many checking type settings at once.  They will call the individual methods as necessary.
-@property NSTextCheckingTypes enabledTextCheckingTypes NS_AVAILABLE_MAC(10_6);
+@property NSTextCheckingTypes enabledTextCheckingTypes API_AVAILABLE(macos(10.6));
 
 // These two methods usually would not be called directly, since NSTextView itself will call them as needed, but they can be overridden.
-- (void)checkTextInRange:(NSRange)range types:(NSTextCheckingTypes)checkingTypes options:(NSDictionary<NSTextCheckingOptionKey, id> *)options NS_AVAILABLE_MAC(10_6);
-- (void)handleTextCheckingResults:(NSArray<NSTextCheckingResult *> *)results forRange:(NSRange)range types:(NSTextCheckingTypes)checkingTypes options:(NSDictionary<NSTextCheckingOptionKey, id> *)options orthography:(NSOrthography *)orthography wordCount:(NSInteger)wordCount NS_AVAILABLE_MAC(10_6);
+- (void)checkTextInRange:(NSRange)range types:(NSTextCheckingTypes)checkingTypes options:(NSDictionary<NSTextCheckingOptionKey, id> *)options API_AVAILABLE(macos(10.6));
+- (void)handleTextCheckingResults:(NSArray<NSTextCheckingResult *> *)results forRange:(NSRange)range types:(NSTextCheckingTypes)checkingTypes options:(NSDictionary<NSTextCheckingOptionKey, id> *)options orthography:(NSOrthography *)orthography wordCount:(NSInteger)wordCount API_AVAILABLE(macos(10.6));
 
-- (void)orderFrontSubstitutionsPanel:(nullable id)sender NS_AVAILABLE_MAC(10_6);
+- (void)orderFrontSubstitutionsPanel:(nullable id)sender API_AVAILABLE(macos(10.6));
 
 // Ordinarily text checking will occur in the background, and results that replace text will be applied only for text that has been typed in by the user, but these last two methods cause the currently enabled text checking types to be applied immediately to the selection or the document, respectively, with results that replace text applied to all text whatever its origin.
-- (void)checkTextInSelection:(nullable id)sender NS_AVAILABLE_MAC(10_6);
-- (void)checkTextInDocument:(nullable id)sender NS_AVAILABLE_MAC(10_6);
+- (void)checkTextInSelection:(nullable id)sender API_AVAILABLE(macos(10.6));
+- (void)checkTextInDocument:(nullable id)sender API_AVAILABLE(macos(10.6));
 
 @property BOOL usesFindPanel;
 
-@property BOOL usesFindBar NS_AVAILABLE_MAC(10_7);
+@property BOOL usesFindBar API_AVAILABLE(macos(10.7));
 
-@property (getter=isIncrementalSearchingEnabled) BOOL incrementalSearchingEnabled NS_AVAILABLE_MAC(10_7);
+@property (getter=isIncrementalSearchingEnabled) BOOL incrementalSearchingEnabled API_AVAILABLE(macos(10.7));
 
 @end
 
@@ -448,13 +462,13 @@ NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE
 
 /*************************** Quick Look support ***************************/
 // This action message toggles the visibility state of the Quick Look preview panel if the receiver is the current Quick Look controller.
-- (IBAction)toggleQuickLookPreviewPanel:(nullable id)sender NS_AVAILABLE_MAC(10_7);
+- (IBAction)toggleQuickLookPreviewPanel:(nullable id)sender API_AVAILABLE(macos(10.7));
 
 // Returns an array of preview items within the specified character ranges.  Each preview item conforms to the QLPreviewItem protocol.  The NSTextView implementation returns an array of NSURL objects, each url referring to the document URL of a text attachment content if available.
-- (NSArray<id<QLPreviewItem>> *)quickLookPreviewableItemsInRanges:(NSArray<NSValue *> *)ranges NS_AVAILABLE_MAC(10_7);
+- (NSArray<id<QLPreviewItem>> *)quickLookPreviewableItemsInRanges:(NSArray<NSValue *> *)ranges API_AVAILABLE(macos(10.7));
 
 // Notifies QLPreviewPanel for possible status changes with the data source or controller.  Typically invoked from selection changes.
-- (void)updateQuickLookPreviewPanel NS_AVAILABLE_MAC(10_7);
+- (void)updateQuickLookPreviewPanel API_AVAILABLE(macos(10.7));
 
 @end
 
@@ -462,7 +476,7 @@ NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE
 /*************************** NSSharingService support ***************************/
 
 // Creates a new instance of NSSharingServicePicker based on the current selection & shows to the screen. The items passed to the NSSharingServicePicker initializer are determined using -itemsForSharingServiceInRanges:. When the current selection is 0 length, the whole document is passed to the method.
-- (IBAction)orderFrontSharingServicePicker:(nullable id)sender NS_AVAILABLE_MAC(10_8);
+- (IBAction)orderFrontSharingServicePicker:(nullable id)sender API_AVAILABLE(macos(10.8));
 
 @end
 
@@ -473,42 +487,42 @@ NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE
 @interface NSTextView (NSTextView_TouchBar) <NSCandidateListTouchBarItemDelegate, NSTouchBarDelegate>
 
 // Enables the automatic completion NSTouchBarItem. YES by default. When YES, NSTextView displays the candidates for the text selection in its NSCandidateListTouchBarItem returned from -candidateListTouchBarItem. Invokes -updateTouchBarItemIdentifiers.
-@property (getter=isAutomaticTextCompletionEnabled) BOOL automaticTextCompletionEnabled NS_AVAILABLE_MAC(10_12_2);
-- (IBAction)toggleAutomaticTextCompletion:(nullable id)sender NS_AVAILABLE_MAC(10_12_2);
+@property (getter=isAutomaticTextCompletionEnabled) BOOL automaticTextCompletionEnabled API_AVAILABLE(macos(10.12.2));
+- (IBAction)toggleAutomaticTextCompletion:(nullable id)sender API_AVAILABLE(macos(10.12.2));
 
 // When Yes, NSTouchBarItemIdentifierCharacterPicker is included in -[NSTouchBar itemIdentifiers] for the receiver's NSTouchBar. Default is YES. Invokes -updateTouchBarItemIdentifiers.
-@property BOOL allowsCharacterPickerTouchBarItem NS_AVAILABLE_MAC(10_12_2);
+@property BOOL allowsCharacterPickerTouchBarItem API_AVAILABLE(macos(10.12.2));
 
 // This message should be sent whenever a property affecting NSTouchBarItem states is changed. It updates -itemIdentifiers for the receiver's NSTouchBar.
-- (void)updateTouchBarItemIdentifiers NS_AVAILABLE_MAC(10_12_2);
+- (void)updateTouchBarItemIdentifiers API_AVAILABLE(macos(10.12.2));
 
 // Updates state of text formatting NSTouchBarItems such as NSTouchBarItemIdentifierTextStyle and NSTouchBarItemIdentifierTextAlignment for the receiver based on the current selection.
-- (void)updateTextTouchBarItems NS_AVAILABLE_MAC(10_12_2);
+- (void)updateTextTouchBarItems API_AVAILABLE(macos(10.12.2));
 
 // Updates the candidates for -candidateListTouchBarItem.
-- (void)updateCandidates NS_AVAILABLE_MAC(10_12_2);
+- (void)updateCandidates API_AVAILABLE(macos(10.12.2));
 
 // -[NSTextView candidateListTouchBarItem] returns an NSCandidateTouchBarItem instance owned by the receiver. The NSTouchBarItem is instantiated in -[NSTextView touchBar:makeItemForIdentifier:] with NSTouchBarItemIdentifierCandidateList.
-@property (nullable, readonly, strong) NSCandidateListTouchBarItem *candidateListTouchBarItem NS_AVAILABLE_MAC(10_12_2);
+@property (nullable, readonly, strong) NSCandidateListTouchBarItem *candidateListTouchBarItem API_AVAILABLE(macos(10.12.2));
 @end
 
 #pragma mark NSTextView Factory Methods
 @interface NSTextView (NSTextView_Factory)
 // Instantiates a new text view enclosed in a scroll view. As with -[NSTextView init*] methods, the objects created with this factory method is configured suitable for UI elements typically used in inspectors. Access the text view via -[NSScrollView documentView].
-+ (NSScrollView *)scrollableTextView NS_AVAILABLE_MAC(10_14);
++ (NSScrollView *)scrollableTextView API_AVAILABLE(macos(10.14));
 
 // Instantiates a new text view configured as a field editor.
-+ (instancetype)fieldEditor NS_AVAILABLE_MAC(10_14);
++ (instancetype)fieldEditor API_AVAILABLE(macos(10.14));
 
 // Instantiates a new text view configured for displaying the document contents enclosed in a scroll view. Access the text view via -[NSScrollView documentView].
-+ (NSScrollView *)scrollableDocumentContentTextView NS_AVAILABLE_MAC(10_14);
-+ (NSScrollView *)scrollablePlainDocumentContentTextView NS_AVAILABLE_MAC(10_14);
++ (NSScrollView *)scrollableDocumentContentTextView API_AVAILABLE(macos(10.14));
++ (NSScrollView *)scrollablePlainDocumentContentTextView API_AVAILABLE(macos(10.14));
 @end
 
 @interface NSTextView (NSDeprecated)
 
 // toggleBaseWritingDirection: will be deprecated in favor of the new NSResponder methods makeBaseWritingDirectionNatural:, makeBaseWritingDirectionLeftToRight:, and makeBaseWritingDirectionRightToLeft:, which NSTextView now implements.
-- (void)toggleBaseWritingDirection:(nullable id)sender NS_DEPRECATED_MAC(10_3, 10_6, "Use NSResponder's makeBaseWritingDirectionNatural:, makeBaseWritingDirectionLeftToRight:, and makeBaseWritingDirectionRightToLeft: instead");
+- (void)toggleBaseWritingDirection:(nullable id)sender API_DEPRECATED("Use NSResponder's makeBaseWritingDirectionNatural:, makeBaseWritingDirectionLeftToRight:, and makeBaseWritingDirectionRightToLeft: instead", macos(10.3,10.6));
 
 @end
 
@@ -563,44 +577,44 @@ NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE
 - (BOOL)textView:(NSTextView *)textView doCommandBySelector:(SEL)commandSelector;
 
 // Delegate only.  Allows delegate to control the setting of spelling and grammar indicators.  Values are those listed for NSSpellingStateAttributeName.
-- (NSInteger)textView:(NSTextView *)textView shouldSetSpellingState:(NSInteger)value range:(NSRange)affectedCharRange NS_AVAILABLE_MAC(10_5);
+- (NSInteger)textView:(NSTextView *)textView shouldSetSpellingState:(NSInteger)value range:(NSRange)affectedCharRange API_AVAILABLE(macos(10.5));
 
 // Delegate only.  Allows delegate to control the context menu returned by menuForEvent:.  The menu parameter is the context menu NSTextView would otherwise return; charIndex is the index of the character that was right-clicked.
-- (nullable NSMenu *)textView:(NSTextView *)view menu:(NSMenu *)menu forEvent:(NSEvent *)event atIndex:(NSUInteger)charIndex NS_AVAILABLE_MAC(10_5);
+- (nullable NSMenu *)textView:(NSTextView *)view menu:(NSMenu *)menu forEvent:(NSEvent *)event atIndex:(NSUInteger)charIndex API_AVAILABLE(macos(10.5));
 
 // Delegate only.  Called by checkTextInRange:types:options:, this method allows control over text checking options (via the return value) or types (by modifying the flags pointed to by the inout parameter checkingTypes).
-- (NSDictionary<NSTextCheckingOptionKey, id> *)textView:(NSTextView *)view willCheckTextInRange:(NSRange)range options:(NSDictionary<NSTextCheckingOptionKey, id> *)options types:(NSTextCheckingTypes *)checkingTypes NS_AVAILABLE_MAC(10_6);
+- (NSDictionary<NSTextCheckingOptionKey, id> *)textView:(NSTextView *)view willCheckTextInRange:(NSRange)range options:(NSDictionary<NSTextCheckingOptionKey, id> *)options types:(NSTextCheckingTypes *)checkingTypes API_AVAILABLE(macos(10.6));
 
 // Delegate only.  Called by handleTextCheckingResults:forRange:orthography:wordCount:, this method allows observation of text checking, or modification of the results (via the return value).
-- (NSArray<NSTextCheckingResult *> *)textView:(NSTextView *)view didCheckTextInRange:(NSRange)range types:(NSTextCheckingTypes)checkingTypes options:(NSDictionary<NSTextCheckingOptionKey, id> *)options results:(NSArray<NSTextCheckingResult *> *)results orthography:(NSOrthography *)orthography wordCount:(NSInteger)wordCount NS_AVAILABLE_MAC(10_6);
+- (NSArray<NSTextCheckingResult *> *)textView:(NSTextView *)view didCheckTextInRange:(NSRange)range types:(NSTextCheckingTypes)checkingTypes options:(NSDictionary<NSTextCheckingOptionKey, id> *)options results:(NSArray<NSTextCheckingResult *> *)results orthography:(NSOrthography *)orthography wordCount:(NSInteger)wordCount API_AVAILABLE(macos(10.6));
 
 // Returns an URL representing the document contents for textAttachment.  The returned NSURL object is utilized by NSTextView for providing default behaviors involving text attachments such as Quick Look and double-clicking.  -[NSTextView quickLookPreviewableItemsInRanges:] uses this method for mapping text attachments to their corresponding document URLs.  NSTextView invokes -[NSWorkspace openURL:] with the URL returned from this method when the delegate has no -textView:doubleClickedOnCell:inRect:atPoint: implementation.
-- (nullable NSURL *)textView:(NSTextView *)textView URLForContentsOfTextAttachment:(NSTextAttachment *)textAttachment atIndex:(NSUInteger)charIndex NS_AVAILABLE_MAC(10_7);
+- (nullable NSURL *)textView:(NSTextView *)textView URLForContentsOfTextAttachment:(NSTextAttachment *)textAttachment atIndex:(NSUInteger)charIndex API_AVAILABLE(macos(10.7));
 
 // Delegate only. Returns a sharing service picker created for items right before shown to the screen inside -orderFrontSharingServicePicker: method. The delegate specify a delegate for the NSSharingServicePicker instance. Also, it is allowed to return its own NSSharingServicePicker instance instead.
-- (nullable NSSharingServicePicker *)textView:(NSTextView *)textView willShowSharingServicePicker:(NSSharingServicePicker *)servicePicker forItems:(NSArray *)items NS_AVAILABLE_MAC(10_8);
+- (nullable NSSharingServicePicker *)textView:(NSTextView *)textView willShowSharingServicePicker:(NSSharingServicePicker *)servicePicker forItems:(NSArray *)items API_AVAILABLE(macos(10.8));
 
 - (nullable NSUndoManager *)undoManagerForTextView:(NSTextView *)view;
 
 
 // Delegate only. Invoked from -updateTouchBarItemIdentifiers before setting the item identifiers for textView's NSTouchBar.
-- (NSArray<NSTouchBarItemIdentifier> *)textView:(NSTextView *)textView shouldUpdateTouchBarItemIdentifiers:(NSArray<NSTouchBarItemIdentifier> *)identifiers NS_AVAILABLE_MAC(10_12_2);
+- (NSArray<NSTouchBarItemIdentifier> *)textView:(NSTextView *)textView shouldUpdateTouchBarItemIdentifiers:(NSArray<NSTouchBarItemIdentifier> *)identifiers API_AVAILABLE(macos(10.12.2));
 
 // Delegate only. Provides customized list of candidates to textView.candidateListTouchBarItem. Invoked from -updateCandidates. NSTextView uses the candidates returned from this method and suppress its built-in candidate generation. Returning nil from this delegate method allows NSTextView to query candidates from NSSpellChecker.
-- (nullable NSArray *)textView:(NSTextView *)textView candidatesForSelectedRange:(NSRange)selectedRange NS_AVAILABLE_MAC(10_12_2);
+- (nullable NSArray *)textView:(NSTextView *)textView candidatesForSelectedRange:(NSRange)selectedRange API_AVAILABLE(macos(10.12.2));
 
 // Delegate only. Allows customizing the candidate list queried from NSSpellChecker.
-- (NSArray<NSTextCheckingResult *> *)textView:(NSTextView *)textView candidates:(NSArray<NSTextCheckingResult *> *)candidates forSelectedRange:(NSRange)selectedRange NS_AVAILABLE_MAC(10_12_2);
+- (NSArray<NSTextCheckingResult *> *)textView:(NSTextView *)textView candidates:(NSArray<NSTextCheckingResult *> *)candidates forSelectedRange:(NSRange)selectedRange API_AVAILABLE(macos(10.12.2));
 
 // Delegate only. Notifies the delegate that the user selected the candidate at index in -[NSCandidateListTouchBarItem candidates] for textView.candidateListTouchBarItem. When no candidate selected, index is NSNotFound. Returning YES allows textView to insert the candidate into the text storage if it's NSString, NSAttributedString, or NSTextCheckingResult.
-- (BOOL)textView:(NSTextView *)textView shouldSelectCandidateAtIndex:(NSUInteger)index NS_AVAILABLE_MAC(10_12_2);
+- (BOOL)textView:(NSTextView *)textView shouldSelectCandidateAtIndex:(NSUInteger)index API_AVAILABLE(macos(10.12.2));
 
 
 // The following delegate-only methods are deprecated in favor of the more verbose ones above.
-- (BOOL)textView:(NSTextView *)textView clickedOnLink:(null_unspecified id)link NS_DEPRECATED_MAC(10_0, 10_6, "Use -textView:clickedOnLink:atIndex: instead");
-- (void)textView:(NSTextView *)textView clickedOnCell:(null_unspecified id <NSTextAttachmentCell>)cell inRect:(NSRect)cellFrame NS_DEPRECATED_MAC(10_0, 10_6, "Use -textView:clickedOnCell:inRect:atIndex: instead");
-- (void)textView:(NSTextView *)textView doubleClickedOnCell:(null_unspecified id <NSTextAttachmentCell>)cell inRect:(NSRect)cellFrame NS_DEPRECATED_MAC(10_0, 10_6, "Use -textView:doubleClickedOnCell:inRect:atIndex: instead");
-- (void)textView:(NSTextView *)view draggedCell:(null_unspecified id <NSTextAttachmentCell>)cell inRect:(NSRect)rect event:(null_unspecified NSEvent *)event NS_DEPRECATED_MAC(10_0, 10_6, "Use -textView:draggedCell:inRect:event:atIndex: instead");
+- (BOOL)textView:(NSTextView *)textView clickedOnLink:(null_unspecified id)link API_DEPRECATED("Use -textView:clickedOnLink:atIndex: instead", macos(10.0,10.6));
+- (void)textView:(NSTextView *)textView clickedOnCell:(null_unspecified id <NSTextAttachmentCell>)cell inRect:(NSRect)cellFrame API_DEPRECATED("Use -textView:clickedOnCell:inRect:atIndex: instead", macos(10.0,10.6));
+- (void)textView:(NSTextView *)textView doubleClickedOnCell:(null_unspecified id <NSTextAttachmentCell>)cell inRect:(NSRect)cellFrame API_DEPRECATED("Use -textView:doubleClickedOnCell:inRect:atIndex: instead", macos(10.0,10.6));
+- (void)textView:(NSTextView *)view draggedCell:(null_unspecified id <NSTextAttachmentCell>)cell inRect:(NSRect)rect event:(null_unspecified NSEvent *)event API_DEPRECATED("Use -textView:draggedCell:inRect:event:atIndex: instead", macos(10.0,10.6));
 
 @end
 
@@ -608,23 +622,23 @@ NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE
 #pragma mark NSTouchBarItemIdentifiers
 /* Standard NSTouchBarItemIdentifiers */
 // An NSTouchBarItemIdentifier for a control selecting special characters (i.e. Emoji). -[NSTouchBar itemForIdentifier:] recognizes the identifier.
-APPKIT_EXTERN NSTouchBarItemIdentifier const NSTouchBarItemIdentifierCharacterPicker NS_AVAILABLE_MAC(10_12_2);
+APPKIT_EXTERN NSTouchBarItemIdentifier const NSTouchBarItemIdentifierCharacterPicker API_AVAILABLE(macos(10.12.2));
 
 /* Identifiers recognized by -[NSTextView touchBar:makeItemForIdentifier:] */
 // An NSTouchBarItemIdentifier for a control selecting the text color.
-APPKIT_EXTERN NSTouchBarItemIdentifier const NSTouchBarItemIdentifierTextColorPicker NS_AVAILABLE_MAC(10_12_2);
+APPKIT_EXTERN NSTouchBarItemIdentifier const NSTouchBarItemIdentifierTextColorPicker API_AVAILABLE(macos(10.12.2));
 
 // An NSTouchBarItemIdentifier for a control selecting the text style.
-APPKIT_EXTERN NSTouchBarItemIdentifier const NSTouchBarItemIdentifierTextStyle NS_AVAILABLE_MAC(10_12_2);
+APPKIT_EXTERN NSTouchBarItemIdentifier const NSTouchBarItemIdentifierTextStyle API_AVAILABLE(macos(10.12.2));
 
 // An NSTouchBarItemIdentifier for a control selecting the text alignment. -[NSTextView touchBarItemForIdentifier:] returns an NSPopoverTouchBarItem.
-APPKIT_EXTERN NSTouchBarItemIdentifier const NSTouchBarItemIdentifierTextAlignment NS_AVAILABLE_MAC(10_12_2);
+APPKIT_EXTERN NSTouchBarItemIdentifier const NSTouchBarItemIdentifierTextAlignment API_AVAILABLE(macos(10.12.2));
 
 // An NSTouchBarItemIdentifier for a control inserting the text list style. -[NSTextView touchBarItemForIdentifier:] returns an NSPopoverTouchBarItem.
-APPKIT_EXTERN NSTouchBarItemIdentifier const NSTouchBarItemIdentifierTextList NS_AVAILABLE_MAC(10_12_2);
+APPKIT_EXTERN NSTouchBarItemIdentifier const NSTouchBarItemIdentifierTextList API_AVAILABLE(macos(10.12.2));
 
 // An NSTouchBarItemIdentifier for a group of text format controls.
-APPKIT_EXTERN NSTouchBarItemIdentifier const NSTouchBarItemIdentifierTextFormat NS_AVAILABLE_MAC(10_12_2);
+APPKIT_EXTERN NSTouchBarItemIdentifier const NSTouchBarItemIdentifierTextFormat API_AVAILABLE(macos(10.12.2));
 
 
 // NSOldNotifyingTextView -> the old view, NSNewNotifyingTextView -> the new view.  The text view delegate is not automatically registered to receive this notification because the text machinery will automatically switch over the delegate to observe the new first text view as the first text view changes.
@@ -654,11 +668,11 @@ typedef NS_ENUM(NSUInteger, NSFindPanelAction) {
 
 /* Values for NSFindPanel search metadata */
 
-APPKIT_EXTERN NSPasteboardType NSFindPanelSearchOptionsPboardType  NS_AVAILABLE_MAC(10_5);
+APPKIT_EXTERN NSPasteboardType NSFindPanelSearchOptionsPboardType  API_AVAILABLE(macos(10.5));
 
 typedef NSString * NSPasteboardTypeFindPanelSearchOptionKey NS_TYPED_ENUM;
-APPKIT_EXTERN NSPasteboardTypeFindPanelSearchOptionKey NSFindPanelCaseInsensitiveSearch NS_AVAILABLE_MAC(10_5);     // BOOL
-APPKIT_EXTERN NSPasteboardTypeFindPanelSearchOptionKey NSFindPanelSubstringMatch NS_AVAILABLE_MAC(10_5);            // NSNumber containing NSFindPanelSubstringMatchType
+APPKIT_EXTERN NSPasteboardTypeFindPanelSearchOptionKey NSFindPanelCaseInsensitiveSearch API_AVAILABLE(macos(10.5));     // BOOL
+APPKIT_EXTERN NSPasteboardTypeFindPanelSearchOptionKey NSFindPanelSubstringMatch API_AVAILABLE(macos(10.5));            // NSNumber containing NSFindPanelSubstringMatchType
 
 typedef NS_ENUM(NSUInteger, NSFindPanelSubstringMatchType) {
     NSFindPanelSubstringMatchTypeContains = 0,
@@ -667,4 +681,5 @@ typedef NS_ENUM(NSUInteger, NSFindPanelSubstringMatchType) {
     NSFindPanelSubstringMatchTypeEndsWith = 3
 };
 
+API_UNAVAILABLE_END
 NS_ASSUME_NONNULL_END

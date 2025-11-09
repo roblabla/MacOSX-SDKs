@@ -1,12 +1,12 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 8A1829BC-0DE1-3737-9124-03041CCE3024' ]
-platform:        macosx
-install-name:    /System/Library/PrivateFrameworks/AppSupport.framework/Versions/A/AppSupport
+uuids:           [ 'x86_64: 4F51131B-5848-354B-B818-2AE626C1AAE6', 'x86_64: 4F51131B-5848-354B-B818-2AE626C1AAE6' ]
+platform:        zippered
+install-name:    '/System/Library/PrivateFrameworks/AppSupport.framework/Versions/A/AppSupport'
 current-version: 29
 exports:         
   - archs:           [ x86_64 ]
-    re-exports:      [ /System/Library/PrivateFrameworks/CorePhoneNumbers.framework/Versions/A/CorePhoneNumbers ]
+    re-exports:      [ '/System/Library/PrivateFrameworks/CorePhoneNumbers.framework/Versions/A/CorePhoneNumbers' ]
     symbols:         [ _ALCityCountryNameKey, _ALCityCountryOverrideKey, _ALCityIdentifierKey, 
                        _ALCityLatitudeKey, _ALCityLocaleCodeKey, _ALCityLongitudeKey, 
                        _ALCityNameKey, _ALCityPropertiesCount, _ALCityTimeZoneKey, 
@@ -317,4 +317,41 @@ exports:
                        _ReachabilityRequest._isReachable, _ReachabilityRequest._lock, 
                        _ReachabilityRequest._observers, _ReachabilityRequest._reachability, 
                        _ReachabilityRequest._receivedAtLeastOneCallback ]
+--- !tapi-tbd-v3
+archs:           [ x86_64 ]
+uuids:           [ 'x86_64: 20A7A74F-773C-3E0F-8EED-250FEC838561', 'x86_64: 20A7A74F-773C-3E0F-8EED-250FEC838561' ]
+platform:        zippered
+install-name:    '/System/Library/PrivateFrameworks/CorePhoneNumbers.framework/Versions/A/CorePhoneNumbers'
+exports:         
+  - archs:           [ x86_64 ]
+    symbols:         [ _CFPhoneNumberBundleCopyRulesetFileSystemPath, _CFPhoneNumberBundleCopyRulesetURL, 
+                       _CFPhoneNumberBundleGetBundle, _CFPhoneNumberCopyCountryCode, 
+                       _CFPhoneNumberCopyFormattedInternationalRepresentation, _CFPhoneNumberCopyFormattedRepresentation, 
+                       _CFPhoneNumberCopyISOCountryCode, _CFPhoneNumberCopyNumberForInternationalAssist, 
+                       _CFPhoneNumberCopyNumberForLocalAssist, _CFPhoneNumberCopyUnformattedInternationalRepresentation, 
+                       _CFPhoneNumberCopyUnformattedRepresentation, _CFPhoneNumberCreate, 
+                       _CFPhoneNumberCreateCopy, _CFPhoneNumberCreateString, _CFPhoneNumberGetITUCountryCodeForISOCountryCode, 
+                       _CFPhoneNumberGetTypeID, _CFPhoneNumberStringCreateLowercaseCopy, 
+                       _CFPhoneNumberStringIsEncodingASCII, _CFPhoneNumberStringTransformCreateCopy, 
+                       _INIT_DECOMPOSED_PHONE_NUMBER, _PNCopyBestGuessCountryCodeForNumber, 
+                       _PNCopyBestGuessNormalizedNumberForCountry, _PNCopyCompressedFormattedStringWithCountry, 
+                       _PNCopyFormattedStringWithCountry, _PNCreateFormattedStringWithCountry, 
+                       _PNDecomposeForCountry, _PNIsValidPhoneNumberForCountry, _PNPhoneNumbersEqual, 
+                       _PNSetFormatFileHeader, _UIPhoneFormatFileFirstPrefixSectionHeader, 
+                       _UIPhoneFormatFileGetCountryHeader, _UIPhoneFormatFileGetCountryLength, 
+                       _UIPhoneFormatFileNextPrefixSectionHeader, _UIPhoneFormatGetFirstFormatString, 
+                       _UIPhoneFormatGetInternationalAccessCode, _UIPhoneFormatGetNationalAccessCode, 
+                       __PNCopyAreaCodeForCountry, __PNCopyBestGuessNumberForCountry, 
+                       __PNCopyCountryCodeForInternationalCode, __PNCopyFormattedNumberForDigitsWithCountry, 
+                       __PNCopyFormattedNumberForDigitsWithCountryByRemovingAtIndex, 
+                       __PNCopyFormattedNumberSuggestionForDigitsWithCountry, __PNCopyFullyQualifiedNumberForCountry, 
+                       __PNCopyFullyQualifiedNumberForCountryInternal, __PNCopyIndexStringsForAddressBookSearch, 
+                       __PNCopyInternationalCodeForCountry, __PNCopyLastFourDigitsOfLocalNumber, 
+                       __PNCopyNormalized, __PNCopyPrefixForCountry, __PNCopySampleNumberForCountry, 
+                       __PNCopyStrippedNumberWithoutPauses, __PNCreateLocalizedStringWithString, 
+                       __PNCreateStringByAddingPauses, __PNCreateStringByStrippingFormattingAndNotVisiblyAllowable, 
+                       __PNFindFormatRuleForDigitsWithCountry, __PNSetSampleNumberForCountry, 
+                       _cpn_default_log, _decomposedPhoneNumbersEqual, _kCFPhoneNumberBundleIdentifier, 
+                       _kCFPhoneNumberBundleRulesetResourceName, _kCFPhoneNumberBundleRulesetResourceType, 
+                       _kCFPhoneNumberStringTransformNormalize ]
 ...

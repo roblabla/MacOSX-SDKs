@@ -2,7 +2,7 @@
 //  INMediaItem.h
 //  Intents
 //
-//  Copyright (c) 2016-2017 Apple Inc. All rights reserved.
+//  Copyright (c) 2016-2019 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -22,7 +22,13 @@ API_UNAVAILABLE(macosx)
 - (instancetype)initWithIdentifier:(nullable NSString *)identifier
                              title:(nullable NSString *)title
                               type:(INMediaItemType)type
-                           artwork:(nullable INImage *)artwork NS_DESIGNATED_INITIALIZER;
+                           artwork:(nullable INImage *)artwork
+                            artist:(nullable NSString *)artist NS_DESIGNATED_INITIALIZER API_AVAILABLE(ios(13.0), watchos(6.0));
+
+- (instancetype)initWithIdentifier:(nullable NSString *)identifier
+                             title:(nullable NSString *)title
+                              type:(INMediaItemType)type
+                           artwork:(nullable INImage *)artwork;
 
 @property (readonly, copy, nullable, NS_NONATOMIC_IOSONLY) NSString *identifier;
 
@@ -31,6 +37,8 @@ API_UNAVAILABLE(macosx)
 @property (readonly, assign, NS_NONATOMIC_IOSONLY) INMediaItemType type;
 
 @property (readonly, copy, nullable, NS_NONATOMIC_IOSONLY) INImage *artwork;
+
+@property (readonly, copy, nullable, NS_NONATOMIC_IOSONLY) NSString *artist API_AVAILABLE(ios(13.0), watchos(6.0));
 
 @end
 

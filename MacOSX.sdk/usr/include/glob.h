@@ -116,7 +116,12 @@ __BEGIN_DECLS
 int	glob(const char * __restrict, int, int (*)(const char *, int), 
 	     glob_t * __restrict) __DARWIN_INODE64(glob);
 #ifdef __BLOCKS__
-int	glob_b(const char * __restrict, int, int (^)(const char *, int), 
+#if __has_attribute(noescape)
+#define __glob_noescape __attribute__((__noescape__))
+#else
+#define __glob_noescape
+#endif
+int	glob_b(const char * __restrict, int, int (^)(const char *, int) __glob_noescape,
 	     glob_t * __restrict) __DARWIN_INODE64(glob_b) __OSX_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_3_2);
 #endif /* __BLOCKS__ */
 void	globfree(glob_t *);

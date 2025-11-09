@@ -1,11 +1,10 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 1CE77741-2E67-34B6-BB9F-B8E043966FCE' ]
-platform:        macosx
-install-name:    /usr/lib/libxml2.2.dylib
+uuids:           [ 'x86_64: 26E8F246-E4EA-32FB-A6DC-42BD82CCA9F7', 'x86_64: 26E8F246-E4EA-32FB-A6DC-42BD82CCA9F7' ]
+platform:        zippered
+install-name:    '/usr/lib/libxml2.2.dylib'
 current-version: 10.9
 compatibility-version: 10
-objc-constraint: none
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _UTF8ToHtml, _UTF8Toisolat1, ___docbDefaultSAXHandler, ___htmlDefaultSAXHandler, 

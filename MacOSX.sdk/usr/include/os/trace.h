@@ -29,6 +29,12 @@ _os_trace_verify_printf(const char *msg, ...)
 #pragma unused(msg)
 }
 
+#if __has_attribute(uninitialized)
+#define OS_TRACE_UNINITIALIZED __attribute__((uninitialized))
+#else
+#define OS_TRACE_UNINITIALIZED
+#endif
+
 /* Previous OSes must go through older style...
  *
  * Format:
@@ -44,10 +50,10 @@ _os_trace_verify_printf(const char *msg, ...)
         _os_trace_verify_printf(_f, ##__VA_ARGS__); \
         OS_LOG_STRING(TRACE, __f, _f); \
         uint32_t __size = (uint32_t)__builtin_os_log_format_buffer_size(_f, ##__VA_ARGS__); \
-        uint8_t _buf[__size]; \
+        OS_TRACE_UNINITIALIZED uint8_t _buf[__size]; \
         __builtin_os_log_format(_buf, _f, ##__VA_ARGS__); \
         uint32_t tz = 0; \
-        uint8_t tb[__size]; \
+        OS_TRACE_UNINITIALIZED uint8_t tb[__size]; \
         uint8_t *buff = _buf; \
         uint8_t *p = ++buff; \
         uint8_t count = *p++; \

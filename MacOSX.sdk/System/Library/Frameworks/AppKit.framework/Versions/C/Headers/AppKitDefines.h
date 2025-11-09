@@ -1,7 +1,7 @@
 /*
 	AppKitDefines.h
 	Application Kit
-	Copyright (c) 1995-2018, Apple Inc.
+	Copyright (c) 1995-2019, Apple Inc.
 	All rights reserved.
 */
 #ifndef _APPKITDEFINES_H
@@ -21,16 +21,6 @@
 #define AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7 DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER
 #endif
 
-//
-//  Platform specific defs for externs
-//
-
-//
-// For MACH
-//
-
-#if defined(__MACH__)
-
 #ifdef __cplusplus
 #define APPKIT_EXTERN		extern "C"
 #define APPKIT_PRIVATE_EXTERN	__attribute__((visibility("hidden"))) extern "C"
@@ -39,8 +29,6 @@
 #define APPKIT_EXTERN		extern
 #define APPKIT_PRIVATE_EXTERN	__attribute__((visibility("hidden"))) extern
 #define APPKIT_PRIVATE          __attribute__((visibility("hidden")))
-#endif
-
 #endif
 
 #ifndef NS_SWIFT_BRIDGED_TYPEDEF

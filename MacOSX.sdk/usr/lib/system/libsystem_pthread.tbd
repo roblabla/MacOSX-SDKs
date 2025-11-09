@@ -1,10 +1,9 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 4958273C-4273-3501-8137-E44249E10D9C' ]
-platform:        macosx
-install-name:    /usr/lib/system/libsystem_pthread.dylib
-current-version: 330.220.2
-objc-constraint: none
+uuids:           [ 'x86_64: 41C3EC4C-E2BA-31A7-B0A6-13F8B272B9B4', 'x86_64: 41C3EC4C-E2BA-31A7-B0A6-13F8B272B9B4' ]
+platform:        zippered
+install-name:    '/usr/lib/system/libsystem_pthread.dylib'
+current-version: 416.0.6
 parent-umbrella: System
 exports:         
   - archs:           [ x86_64 ]
@@ -45,12 +44,12 @@ exports:
                        _pthread_cond_wait, '_pthread_cond_wait$NOCANCEL', _pthread_condattr_destroy, 
                        _pthread_condattr_getpshared, _pthread_condattr_init, _pthread_condattr_setpshared, 
                        _pthread_create, _pthread_create_from_mach_thread, _pthread_create_suspended_np, 
-                       _pthread_dependency_fulfill_np, _pthread_dependency_init_np, 
-                       _pthread_dependency_wait_np, _pthread_detach, _pthread_equal, 
-                       _pthread_exit, _pthread_fchdir_np, _pthread_from_mach_thread_np, 
-                       _pthread_get_qos_class_np, _pthread_get_stackaddr_np, _pthread_get_stacksize_np, 
-                       _pthread_getconcurrency, _pthread_getname_np, _pthread_getschedparam, 
-                       _pthread_getspecific, _pthread_introspection_hook_install, 
+                       _pthread_current_stack_contains_np, _pthread_dependency_fulfill_np, 
+                       _pthread_dependency_init_np, _pthread_dependency_wait_np, 
+                       _pthread_detach, _pthread_equal, _pthread_exit, _pthread_fchdir_np, 
+                       _pthread_from_mach_thread_np, _pthread_get_qos_class_np, _pthread_get_stackaddr_np, 
+                       _pthread_get_stacksize_np, _pthread_getconcurrency, _pthread_getname_np, 
+                       _pthread_getschedparam, _pthread_getspecific, _pthread_introspection_hook_install, 
                        _pthread_is_threaded_np, _pthread_join, '_pthread_join$NOCANCEL', 
                        _pthread_key_create, _pthread_key_delete, _pthread_key_init_np, 
                        _pthread_kill, _pthread_layout_offsets, _pthread_mach_thread_np, 
@@ -75,8 +74,8 @@ exports:
                        _pthread_setspecific, _pthread_sigmask, _pthread_stack_frame_decode_np, 
                        _pthread_testcancel, _pthread_threadid_np, _pthread_time_constraint_max_parallelism, 
                        _pthread_workqueue_addthreads_np, _pthread_workqueue_setdispatch_np, 
-                       _pthread_workqueue_setdispatchoffset_np, _pthread_yield_np, 
-                       _qos_class_main, _qos_class_self, _sched_get_priority_max, 
+                       _pthread_workqueue_setdispatchoffset_np, _pthread_workqueue_setup, 
+                       _pthread_yield_np, _qos_class_main, _qos_class_self, _sched_get_priority_max, 
                        _sched_get_priority_min, _sched_yield, _sigwait, '_sigwait$NOCANCEL', 
                        _start_wqthread, _thread_chkstk_darwin, _thread_start ]
 ...

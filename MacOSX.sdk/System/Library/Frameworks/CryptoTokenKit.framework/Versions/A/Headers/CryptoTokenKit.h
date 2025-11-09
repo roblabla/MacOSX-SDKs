@@ -8,6 +8,7 @@
 #import <CryptoTokenKit/TKTLVRecord.h>
 
 #import <CryptoTokenKit/TKToken.h>
+#import <CryptoTokenKit/TKTokenConfiguration.h>
 #import <CryptoTokenKit/TKTokenKeychainItem.h>
 #import <CryptoTokenKit/TKSmartCardToken.h>
 

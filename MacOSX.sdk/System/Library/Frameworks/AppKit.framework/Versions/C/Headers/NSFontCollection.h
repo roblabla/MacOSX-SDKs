@@ -1,7 +1,7 @@
 /*
 	NSFontCollection.h
 	Application Kit
-	Copyright (c) 2010-2018, Apple Inc.
+	Copyright (c) 2010-2019, Apple Inc.
 	All rights reserved.
 */
 
@@ -14,6 +14,7 @@
 
 
 NS_ASSUME_NONNULL_BEGIN
+API_UNAVAILABLE_BEGIN(ios)
 
 @class NSFontDescriptor;
 
@@ -37,13 +38,13 @@ typedef NS_OPTIONS(NSUInteger, NSFontCollectionVisibility) {
  */
 typedef NSString * NSFontCollectionMatchingOptionKey NS_TYPED_ENUM;
 // NSNumber BOOL specifying whether disabled fonts should be included in the list of matching descriptors (YES) or not (NO). When unspecified, CoreText assumes NO. This option is intended only for font management applications. This option will make descriptor matching slower.
-APPKIT_EXTERN NSFontCollectionMatchingOptionKey const NSFontCollectionIncludeDisabledFontsOption NS_AVAILABLE_MAC(10_7);
+APPKIT_EXTERN NSFontCollectionMatchingOptionKey const NSFontCollectionIncludeDisabledFontsOption API_AVAILABLE(macos(10.7));
 
 // NSNumber BOOL controlling whether more than one copy of a font with the same PostScript name should be included in the list of matching descriptors
-APPKIT_EXTERN NSFontCollectionMatchingOptionKey const NSFontCollectionRemoveDuplicatesOption NS_AVAILABLE_MAC(10_7);
+APPKIT_EXTERN NSFontCollectionMatchingOptionKey const NSFontCollectionRemoveDuplicatesOption API_AVAILABLE(macos(10.7));
 
 // NSNumber BOOL specifying that auto-activation should not be used to find missing fonts
-APPKIT_EXTERN NSFontCollectionMatchingOptionKey const NSFontCollectionDisallowAutoActivationOption NS_AVAILABLE_MAC(10_7);
+APPKIT_EXTERN NSFontCollectionMatchingOptionKey const NSFontCollectionDisallowAutoActivationOption API_AVAILABLE(macos(10.7));
 
 
 typedef NSString * NSFontCollectionName NS_TYPED_EXTENSIBLE_ENUM;
@@ -51,7 +52,7 @@ typedef NSString * NSFontCollectionName NS_TYPED_EXTENSIBLE_ENUM;
 /*
  NSFontCollection - immutable font list
  */
-NS_CLASS_AVAILABLE(10_7, NA)
+API_AVAILABLE(macos(10.7))
 @interface NSFontCollection : NSObject <NSCopying, NSMutableCopying, NSCoding>
 
 /*
@@ -121,7 +122,7 @@ NS_CLASS_AVAILABLE(10_7, NA)
 /*
  NSMutableFontCollection - mutable font list
  */
-NS_CLASS_AVAILABLE(10_7, NA)
+API_AVAILABLE(macos(10.7))
 @interface NSMutableFontCollection : NSFontCollection
 
 // Return a font collection matching the given descriptors
@@ -157,20 +158,20 @@ NS_CLASS_AVAILABLE(10_7, NA)
  This notification is sent to the local notification center when a named, persistent collection is modified.
  User info key NSFontCollectionNotificationAction describes the nature of the change.
  */
-APPKIT_EXTERN NSNotificationName const NSFontCollectionDidChangeNotification NS_AVAILABLE_MAC(10_7);
+APPKIT_EXTERN NSNotificationName const NSFontCollectionDidChangeNotification API_AVAILABLE(macos(10.7));
 
 // Notification user info dictionary keys
 typedef NSString * NSFontCollectionUserInfoKey NS_TYPED_ENUM;
-APPKIT_EXTERN NSFontCollectionUserInfoKey const NSFontCollectionActionKey NS_AVAILABLE_MAC(10_7);			// NSString: action taken
-APPKIT_EXTERN NSFontCollectionUserInfoKey const NSFontCollectionNameKey NS_AVAILABLE_MAC(10_7);			// NSString: current name of affected collection
-APPKIT_EXTERN NSFontCollectionUserInfoKey const NSFontCollectionOldNameKey NS_AVAILABLE_MAC(10_7);		// NSString: for NSFontCollectionWasRenamed, previous name of affected collection
-APPKIT_EXTERN NSFontCollectionUserInfoKey const NSFontCollectionVisibilityKey NS_AVAILABLE_MAC(10_7);		// NSNumber: visibility of affected collection
+APPKIT_EXTERN NSFontCollectionUserInfoKey const NSFontCollectionActionKey API_AVAILABLE(macos(10.7));			// NSString: action taken
+APPKIT_EXTERN NSFontCollectionUserInfoKey const NSFontCollectionNameKey API_AVAILABLE(macos(10.7));			// NSString: current name of affected collection
+APPKIT_EXTERN NSFontCollectionUserInfoKey const NSFontCollectionOldNameKey API_AVAILABLE(macos(10.7));		// NSString: for NSFontCollectionWasRenamed, previous name of affected collection
+APPKIT_EXTERN NSFontCollectionUserInfoKey const NSFontCollectionVisibilityKey API_AVAILABLE(macos(10.7));		// NSNumber: visibility of affected collection
 
 // Values for NSFontCollectionAction
 typedef NSString * NSFontCollectionActionTypeKey NS_TYPED_ENUM;
-APPKIT_EXTERN NSFontCollectionActionTypeKey const NSFontCollectionWasShown NS_AVAILABLE_MAC(10_7);
-APPKIT_EXTERN NSFontCollectionActionTypeKey const NSFontCollectionWasHidden NS_AVAILABLE_MAC(10_7);
-APPKIT_EXTERN NSFontCollectionActionTypeKey const NSFontCollectionWasRenamed NS_AVAILABLE_MAC(10_7);
+APPKIT_EXTERN NSFontCollectionActionTypeKey const NSFontCollectionWasShown API_AVAILABLE(macos(10.7));
+APPKIT_EXTERN NSFontCollectionActionTypeKey const NSFontCollectionWasHidden API_AVAILABLE(macos(10.7));
+APPKIT_EXTERN NSFontCollectionActionTypeKey const NSFontCollectionWasRenamed API_AVAILABLE(macos(10.7));
 
 /*
  Standard named collections
@@ -178,10 +179,11 @@ APPKIT_EXTERN NSFontCollectionActionTypeKey const NSFontCollectionWasRenamed NS_
  Standard mutable collection names -- these names are included in the list of allFontCollectionNames -- they have special meaning to the
  Cocoa font system and should not be hidden or renamed.
  */
-APPKIT_EXTERN NSFontCollectionName const NSFontCollectionAllFonts NS_AVAILABLE_MAC(10_7);		// All fonts in the system
-APPKIT_EXTERN NSFontCollectionName const NSFontCollectionUser NS_AVAILABLE_MAC(10_7);			// Per-user unmodifiable collection
-APPKIT_EXTERN NSFontCollectionName const NSFontCollectionFavorites NS_AVAILABLE_MAC(10_7);		// Collection of the user's preferred font descriptors
-APPKIT_EXTERN NSFontCollectionName const NSFontCollectionRecentlyUsed NS_AVAILABLE_MAC(10_7);	// Collection automatically maintained by NSFontManager
+APPKIT_EXTERN NSFontCollectionName const NSFontCollectionAllFonts API_AVAILABLE(macos(10.7));		// All fonts in the system
+APPKIT_EXTERN NSFontCollectionName const NSFontCollectionUser API_AVAILABLE(macos(10.7));			// Per-user unmodifiable collection
+APPKIT_EXTERN NSFontCollectionName const NSFontCollectionFavorites API_AVAILABLE(macos(10.7));		// Collection of the user's preferred font descriptors
+APPKIT_EXTERN NSFontCollectionName const NSFontCollectionRecentlyUsed API_AVAILABLE(macos(10.7));	// Collection automatically maintained by NSFontManager
 
+API_UNAVAILABLE_END
 NS_ASSUME_NONNULL_END
 

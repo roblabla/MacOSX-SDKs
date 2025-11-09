@@ -303,7 +303,7 @@ typedef OSStatus (*DRFileProc)(
 extern DRFileRef
 DRFileCreateReal(
 	const FSRef *		fsRef)
-AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+    __OSX_DEPRECATED(10.2, 10.14, "Please use DRFileCreateRealWithURL(const CFURLRef urlRef) instead");
 
 
 /*!

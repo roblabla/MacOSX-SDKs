@@ -1,7 +1,7 @@
 /*
     NSManagedObject.h
     Core Data
-    Copyright (c) 2004-2018, Apple Inc.
+    Copyright (c) 2004-2019, Apple Inc.
     All rights reserved.
 */
 
@@ -29,20 +29,6 @@ typedef NS_OPTIONS(NSUInteger, NSSnapshotEventType) {
 
 API_AVAILABLE(macosx(10.4),ios(3.0)) NS_REQUIRES_PROPERTY_DEFINITIONS
 @interface NSManagedObject : NSObject {
-#if (!__OBJC2__)
-@private
-    int32_t             _cd_rc;
-    uintptr_t           _cd_stateFlags;
-    id                  _cd_rawData;
-    id                  _cd_entity;
-    NSManagedObjectContext* _cd_managedObjectContext;
-    NSManagedObjectID*  _cd_objectID;
-    uintptr_t           _cd_extraFlags;
-    id                  _cd_observationInfo;
-    void*               _cd_extras;
-    uintptr_t           _cd_lockingInfo;
-    id                  _cd_queueReference;
-#endif
 }
 
 /*  Distinguish between changes that should and should not dirty the object for any key unknown to Core Data.  10.5 & earlier default to NO.  10.6 and later default to YES. */

@@ -1,5 +1,5 @@
 /*	NSFileManager.h
-	Copyright (c) 1994-2018, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2019, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -48,7 +48,15 @@ typedef NS_OPTIONS(NSUInteger, NSDirectoryEnumerationOptions) {
     
     /* NSDirectoryEnumerationSkipsHiddenFiles causes the NSDirectoryEnumerator to not enumerate hidden files.
      */
-    NSDirectoryEnumerationSkipsHiddenFiles             = 1UL << 2
+    NSDirectoryEnumerationSkipsHiddenFiles             = 1UL << 2,
+
+    /* NSDirectoryEnumerationIncludesDirectoriesPostOrder causes the NSDirectoryEnumerator to enumerate each directory a second time after all of its contained files have been enumerated. Use NSDirectoryEnumerator.isEnumeratingDirectoryPostOrder to differentiate a post-order enumerated directory from a pre-order one.
+     */
+    NSDirectoryEnumerationIncludesDirectoriesPostOrder API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0)) = 1UL << 3,
+    
+    /* NSDirectoryEnumerationProducesRelativePathURLs causes the NSDirectoryEnumerator to always produce file path URLs relative to the directoryURL. This can reduce the size of each URL object returned during enumeration.
+     */
+    NSDirectoryEnumerationProducesRelativePathURLs API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0)) = 1UL << 4,
 } API_AVAILABLE(macos(10.6), ios(4.0), watchos(2.0), tvos(9.0));
 
 typedef NS_OPTIONS(NSUInteger, NSFileManagerItemReplacementOptions) {
@@ -76,7 +84,7 @@ typedef NS_OPTIONS(NSUInteger, NSFileManagerUnmountOptions) {
     /* Specifies that no UI should accompany the unmount operation. (Otherwise, the unmount UI, if needed, would delay completion of the completionHandler.)
      */
     NSFileManagerUnmountWithoutUI = 1UL << 1,
-} NS_ENUM_AVAILABLE(10_11, NA);
+} API_AVAILABLE(macos(10.11)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /* If unmountVolumeAtURL:options:completionHandler: fails, the process identifier of the dissenter can be found in the  NSError's userInfo dictionary with this key */
 FOUNDATION_EXPORT NSString *const NSFileManagerUnmountDissentingProcessIdentifierErrorKey API_AVAILABLE(macos(10.11)) API_UNAVAILABLE(ios, watchos, tvos); // value is NSNumber containing the process identifier of the dissenter
@@ -216,7 +224,7 @@ extern NSNotificationName const NSUbiquityIdentityDidChangeNotification API_AVAI
 - (BOOL)createSymbolicLinkAtPath:(NSString *)path pathContent:(NSString *)otherpath API_DEPRECATED("Use -createSymbolicLinkAtPath:error: instead", macos(10.0,10.5), ios(2.0,2.0), watchos(2.0,2.0), tvos(9.0,9.0));
 - (BOOL)createDirectoryAtPath:(NSString *)path attributes:(NSDictionary *)attributes API_DEPRECATED("Use -createDirectoryAtPath:withIntermediateDirectories:attributes:error: instead", macos(10.0,10.5), ios(2.0,2.0), watchos(2.0,2.0), tvos(9.0,9.0));
 
-#if (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE)) || TARGET_OS_WIN32
+#if TARGET_OS_OSX || TARGET_OS_MACCATALYST
 - (BOOL)linkPath:(NSString *)src toPath:(NSString *)dest handler:(nullable id)handler API_DEPRECATED("Not supported", macos(10.0,10.5), ios(2.0,2.0), watchos(2.0,2.0), tvos(9.0,9.0));
 - (BOOL)copyPath:(NSString *)src toPath:(NSString *)dest handler:(nullable id)handler API_DEPRECATED("Not supported", macos(10.0,10.5), ios(2.0,2.0), watchos(2.0,2.0), tvos(9.0,9.0));
 - (BOOL)movePath:(NSString *)src toPath:(NSString *)dest handler:(nullable id)handler API_DEPRECATED("Not supported", macos(10.0,10.5), ios(2.0,2.0), watchos(2.0,2.0), tvos(9.0,9.0));
@@ -412,6 +420,10 @@ extern NSNotificationName const NSUbiquityIdentityDidChangeNotification API_AVAI
  */
 @property (nullable, readonly, copy) NSDictionary<NSFileAttributeKey, id> *fileAttributes;
 @property (nullable, readonly, copy) NSDictionary<NSFileAttributeKey, id> *directoryAttributes;
+
+/* For NSDirectoryEnumerators created with -enumeratorAtURL:includingPropertiesForKeys:options:errorHandler: and the NSDirectoryEnumerationIncludesDirectoriesPostOrder option, this property is YES when the current object is a directory that is being enumerated after all of its contents have been enumerated.
+ */
+@property (readonly) BOOL isEnumeratingDirectoryPostOrder API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0));
 
 - (void)skipDescendents;
 

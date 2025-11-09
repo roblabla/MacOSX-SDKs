@@ -156,7 +156,7 @@ __END_DECLS
 #define __Request__lock_set_subsystem__defined
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -164,11 +164,11 @@ __END_DECLS
 		int lock_id;
 	} __Request__lock_acquire_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -176,11 +176,11 @@ __END_DECLS
 		int lock_id;
 	} __Request__lock_release_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -188,11 +188,11 @@ __END_DECLS
 		int lock_id;
 	} __Request__lock_try_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -200,11 +200,11 @@ __END_DECLS
 		int lock_id;
 	} __Request__lock_make_stable_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -212,11 +212,11 @@ __END_DECLS
 		int lock_id;
 	} __Request__lock_handoff_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -224,7 +224,7 @@ __END_DECLS
 		int lock_id;
 	} __Request__lock_handoff_accept_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 #endif /* !__Request__lock_set_subsystem__defined */
 
@@ -247,7 +247,7 @@ union __RequestUnion__lock_set_subsystem {
 #define __Reply__lock_set_subsystem__defined
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -255,11 +255,11 @@ union __RequestUnion__lock_set_subsystem {
 		kern_return_t RetCode;
 	} __Reply__lock_acquire_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -267,11 +267,11 @@ union __RequestUnion__lock_set_subsystem {
 		kern_return_t RetCode;
 	} __Reply__lock_release_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -279,11 +279,11 @@ union __RequestUnion__lock_set_subsystem {
 		kern_return_t RetCode;
 	} __Reply__lock_try_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -291,11 +291,11 @@ union __RequestUnion__lock_set_subsystem {
 		kern_return_t RetCode;
 	} __Reply__lock_make_stable_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -303,11 +303,11 @@ union __RequestUnion__lock_set_subsystem {
 		kern_return_t RetCode;
 	} __Reply__lock_handoff_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -315,7 +315,7 @@ union __RequestUnion__lock_set_subsystem {
 		kern_return_t RetCode;
 	} __Reply__lock_handoff_accept_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 #endif /* !__Reply__lock_set_subsystem__defined */
 

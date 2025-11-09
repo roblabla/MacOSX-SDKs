@@ -1,8 +1,8 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 9D9E9801-E76B-311D-83E2-DC76C0C2C060' ]
+uuids:           [ 'x86_64: 150DE04F-11E8-3FEA-B6CE-CB86AAD05D9D' ]
 platform:        macosx
-install-name:    /System/Library/PrivateFrameworks/Install.framework/Versions/A/Install
+install-name:    '/System/Library/PrivateFrameworks/Install.framework/Versions/A/Install'
 current-version: 1000
 exports:         
   - archs:           [ x86_64 ]
@@ -226,10 +226,9 @@ exports:
                        IFArchive._path, IFCertificateIdentity._private, IFComponent._private, 
                        IFComponentBundle_OnDisk._versionString, IFDCustomization._private, 
                        IFDCustomizationController._private, IFDCustomizationItem._private, 
-                       IFDInstallController._private, IFDJavaScriptEngine._ctx, IFDJavaScriptEngine._script, 
-                       IFDMManager._blockedDisks, IFDMManager._daApprovalSession, 
-                       IFDMManager._daSession, IFDMManager._dmCoreStorage, IFDMManager._dmManager, 
-                       IFDPackageRep._private, IFDTarget._private, IFDTargetController._private, 
+                       IFDJavaScriptEngine._ctx, IFDJavaScriptEngine._script, IFDMManager._blockedDisks, 
+                       IFDMManager._daApprovalSession, IFDMManager._daSession, IFDMManager._dmCoreStorage, 
+                       IFDMManager._dmManager, IFDPackageRep._private, IFDTarget._private, 
                        IFDataDigest._ccHandle, IFDataDigest._digestString, IFDataDigest._type, 
                        IFDependencyChecker._dependencyRegistry, IFDependencyChecker._looseDependencyRegistry, 
                        IFDependencyChecker._nodes, IFDiskObject._cachedAttributes, 
@@ -247,11 +246,12 @@ exports:
                        IFDistXMLDocument._pluginPath, IFDistXMLDocument._requireAllBundles, 
                        IFDistXMLDocument._requiredBundles, IFDistXMLDocument._requiredCLDevice, 
                        IFDistXMLDocument._requiredGLRenderer, IFDistXMLDocument._requiredGigaBytesOfRAM, 
-                       IFDistXMLDocument._requiredHardwareProperties, IFDistXMLDocument._resourceData, 
-                       IFDistXMLDocument._scriptsPaths, IFDistXMLDocument._singleGraphicsDevice, 
-                       IFDistXMLDocument._supportedOSVersions, IFDistXMLDocument._trustRef, 
-                       IFDistXMLDocument._validationError, IFDistXMLDocument._validationResult, 
-                       IFDocument._private, IFDownloadManager.downloadQLock, IFDownloadManager.downloadQueue, 
+                       IFDistXMLDocument._requiredHardwareProperties, IFDistXMLDocument._requiredMetalDevice, 
+                       IFDistXMLDocument._resourceData, IFDistXMLDocument._scriptsPaths, 
+                       IFDistXMLDocument._singleGraphicsDevice, IFDistXMLDocument._supportedOSVersions, 
+                       IFDistXMLDocument._trustRef, IFDistXMLDocument._validationError, 
+                       IFDistXMLDocument._validationResult, IFDocument._private, 
+                       IFDownloadManager.downloadQLock, IFDownloadManager.downloadQueue, 
                        IFDownloadManager.downloadQueuePthread, IFDownloadManager.downloadsDirectory, 
                        IFDownloadManager.runDownloadQueue, IFDownloadManager.runUploadQueue, 
                        IFDownloadManager.uploadQLock, IFDownloadManager.uploadQueue, 
@@ -319,8 +319,8 @@ exports:
                        IFPKGDerivedDocument.rootVolumeOnly, IFPKGDerivedDocument.title, 
                        IFPKGDerivedDocument.uiSelectionCache, IFPKInstallElement._authorizationType, 
                        IFPKInstallElement._destinationPath, IFPKInstallElement._displayName, 
-                       IFPKInstallElement._displayVersion, IFPKInstallElement._isExecuting, 
-                       IFPKInstallElement._isFNI, IFPKInstallElement._minTrust, IFPKInstallElement._osInstall, 
+                       IFPKInstallElement._displayVersion, IFPKInstallElement._isFNI, 
+                       IFPKInstallElement._minTrust, IFPKInstallElement._osInstall, 
                        IFPKInstallElement._packageReps, IFPKInstallElement._pkPackageSpecifiers, 
                        IFPKInstallElement._request, IFPKInstallElement._restartAction, 
                        IFPKInstallElement._sandboxPath, IFPKInstallElement._scriptTargetVolume, 

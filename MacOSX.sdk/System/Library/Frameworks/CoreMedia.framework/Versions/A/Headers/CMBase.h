@@ -14,6 +14,36 @@
 #include <Availability.h>
 #include <AvailabilityMacros.h>
 
+// Pre-10.15, weak import
+#ifndef __AVAILABILITY_INTERNAL__MAC_10_15
+#define __AVAILABILITY_INTERNAL__MAC_10_15 __AVAILABILITY_INTERNAL_WEAK_IMPORT
+#endif
+
+// Pre- iOS 13.0 weak import
+#ifndef __AVAILABILITY_INTERNAL__IPHONE_13_0
+#define __AVAILABILITY_INTERNAL__IPHONE_13_0 __AVAILABILITY_INTERNAL_WEAK_IMPORT
+#endif
+
+// Pre-10.14, weak import
+#ifndef __AVAILABILITY_INTERNAL__MAC_10_14
+#define __AVAILABILITY_INTERNAL__MAC_10_14 __AVAILABILITY_INTERNAL_WEAK_IMPORT
+#endif
+
+// Pre-10.14.4, weak import
+#ifndef __AVAILABILITY_INTERNAL__MAC_10_14_4
+#define __AVAILABILITY_INTERNAL__MAC_10_14_4 __AVAILABILITY_INTERNAL_WEAK_IMPORT
+#endif
+
+// Pre- iOS 12.0 weak import
+#ifndef __AVAILABILITY_INTERNAL__IPHONE_12_0
+#define __AVAILABILITY_INTERNAL__IPHONE_12_0 __AVAILABILITY_INTERNAL_WEAK_IMPORT
+#endif
+
+// Pre- iOS 12.2 weak import
+#ifndef __AVAILABILITY_INTERNAL__IPHONE_12_2
+#define __AVAILABILITY_INTERNAL__IPHONE_12_2 __AVAILABILITY_INTERNAL_WEAK_IMPORT
+#endif
+
 
 // Pre-10.13, weak import
 #ifndef __AVAILABILITY_INTERNAL__MAC_10_13
@@ -120,7 +150,7 @@
 #include <stddef.h>						// size_t
 
 #include <CoreFoundation/CFBase.h>		// OSStatus, Boolean, Float32, Float64, CF_NOESCAPE
-#if ! TARGET_OS_WINDOWS
+#if ! 0
 #include <CoreFoundation/CFAvailability.h>	// CF_EXTENSIBLE_STRING_ENUM
 #endif
 
@@ -142,25 +172,16 @@ extern "C" {
 #define COREMEDIA_TRUE (1 && 1)
 #define COREMEDIA_FALSE (0 && 1)
 
-#if TARGET_OS_MAC
+
 	#define CM_EXPORT extern
 	#define VT_EXPORT extern
 	#define MT_EXPORT extern
-#elif TARGET_OS_WIN32
-	#define CM_EXPORT __declspec( dllimport ) extern
-	#define VT_EXPORT __declspec( dllimport ) extern
-	#define MT_EXPORT __declspec( dllimport ) extern
-#else
-	#error "specify your platform"
-#endif
 
-#if TARGET_OS_WINDOWS && TARGET_CPU_X86_64
-typedef int64_t CMItemCount;
-typedef int64_t CMItemIndex;
-#else
-typedef signed long	CMItemCount;
-typedef signed long	CMItemIndex;
-#endif
+
+// These have 32-bit range in a 32-bit build, and 64-bit range in a 64-bit build.
+typedef CFIndex CMItemCount;
+typedef CFIndex CMItemIndex;
+#define CMITEMCOUNT_MAX INTPTR_MAX
 
 #ifndef COREMEDIA_USE_ALIGNED_CMBASECLASS_VERSION
 #define COREMEDIA_USE_ALIGNED_CMBASECLASS_VERSION COREMEDIA_TRUE
@@ -168,11 +189,14 @@ typedef signed long	CMItemIndex;
 
 #if ! COREMEDIA_USE_ALIGNED_CMBASECLASS_VERSION
 	typedef uint32_t CMBaseClassVersion, CMStructVersion;
+	#define COREMEDIA_CMBASECLASS_VERSION_IS_POINTER_ALIGNED COREMEDIA_FALSE
 #else
-#if (TARGET_OS_OSX || 0 || TARGET_OS_WINDOWS) && TARGET_CPU_X86_64
+#if (TARGET_OS_OSX || TARGET_OS_MACCATALYST || 0) && TARGET_CPU_X86_64
 	typedef uint32_t CMBaseClassVersion, CMStructVersion;
+	#define COREMEDIA_CMBASECLASS_VERSION_IS_POINTER_ALIGNED COREMEDIA_FALSE
 #else
 	typedef uintptr_t CMBaseClassVersion, CMStructVersion;
+	#define COREMEDIA_CMBASECLASS_VERSION_IS_POINTER_ALIGNED COREMEDIA_TRUE
 #endif
 #endif
 
@@ -199,6 +223,10 @@ typedef signed long	CMItemIndex;
 	#define COREMEDIA_DECLARE_RETURNS_RETAINED_ON_PARAMETERS COREMEDIA_TRUE
 	#define COREMEDIA_DECLARE_RETURNS_NOT_RETAINED_ON_PARAMETERS COREMEDIA_TRUE
 #endif
+#if __has_feature(attribute_cf_consumed)
+	#define COREMEDIA_DECLARE_RELEASES_ARGUMENT COREMEDIA_TRUE
+#endif
+
 #endif // (TARGET_OS_IPHONE || TARGET_OS_MAC) && defined(__has_feature)
 
 #ifndef COREMEDIA_DECLARE_NULLABILITY
@@ -223,6 +251,10 @@ typedef signed long	CMItemIndex;
 
 #ifndef COREMEDIA_DECLARE_RETURNS_NOT_RETAINED_ON_PARAMETERS
 #define COREMEDIA_DECLARE_RETURNS_NOT_RETAINED_ON_PARAMETERS COREMEDIA_FALSE
+#endif
+
+#ifndef COREMEDIA_DECLARE_RELEASES_ARGUMENT
+#define COREMEDIA_DECLARE_RELEASES_ARGUMENT COREMEDIA_FALSE
 #endif
 
 #if COREMEDIA_DECLARE_NULLABILITY
@@ -264,7 +296,13 @@ typedef signed long	CMItemIndex;
 #else
 #define CM_RETURNS_NOT_RETAINED_PARAMETER
 #endif
-	
+
+#if COREMEDIA_DECLARE_RELEASES_ARGUMENT	// Marks function arguments which are released by the callee
+	#define CM_RELEASES_ARGUMENT CF_RELEASES_ARGUMENT
+#else
+	#define CM_RELEASES_ARGUMENT
+#endif
+
 typedef int32_t CMPersistentTrackID;
 #if COREMEDIA_USE_DERIVED_ENUMS_FOR_CONSTANTS
 enum : CMPersistentTrackID

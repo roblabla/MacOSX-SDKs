@@ -1,5 +1,5 @@
 /*	NSInvocation.h
-	Copyright (c) 1994-2018, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2019, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -42,7 +42,7 @@ NS_SWIFT_UNAVAILABLE("NSInvocation and related APIs not available")
 @end
 
 
-#if (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE))
+#if TARGET_OS_OSX
 #if MAC_OS_X_VERSION_MAX_ALLOWED <= MAC_OS_X_VERSION_10_5
 
 enum _NSObjCValueType {

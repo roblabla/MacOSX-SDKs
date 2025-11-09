@@ -1,7 +1,7 @@
 /*
 	NSPersistentDocument.h
 	Application Kit
-	Copyright (c) 2004-2018, Apple Inc.
+	Copyright (c) 2004-2019, Apple Inc.
 	All rights reserved.
  */
 
@@ -10,19 +10,11 @@
 #import <AppKit/NSDocument.h>
 
 NS_ASSUME_NONNULL_BEGIN
+API_UNAVAILABLE_BEGIN(ios)
 
 @class NSManagedObjectModel, NSManagedObjectContext;
 
-@interface NSPersistentDocument : NSDocument {
-@private
-    NSManagedObjectModel *_managedObjectModel APPKIT_IVAR;
-    NSManagedObjectContext *_managedObjectContext APPKIT_IVAR;
-    id _store APPKIT_IVAR;
-    uintptr_t _pDocFlags APPKIT_IVAR;
-    id _relatedRequestURLs APPKIT_IVAR;
-    void *_reserved3 __unused APPKIT_IVAR;
-    void *_reserved4 __unused APPKIT_IVAR;
-}
+@interface NSPersistentDocument : NSDocument
 
 // Persistent documents always have a managed context (and a persistent store coordinator through that context).
 @property (nullable, strong) NSManagedObjectContext *managedObjectContext;
@@ -32,7 +24,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 // Configures the persistent store coordinator with the appropriate stores. Subclasses can create the store to save to or load from (invoked from within the other NSDocument methods to read/write files), which gives developers the ability to load/save from/to different persistent store types (default type is XML).
-- (BOOL)configurePersistentStoreCoordinatorForURL:(NSURL *)url ofType:(NSString *)fileType modelConfiguration:(nullable NSString *)configuration storeOptions:(nullable NSDictionary<NSString *, id> *)storeOptions error:(NSError **)error NS_AVAILABLE_MAC(10_5);
+- (BOOL)configurePersistentStoreCoordinatorForURL:(NSURL *)url ofType:(NSString *)fileType modelConfiguration:(nullable NSString *)configuration storeOptions:(nullable NSDictionary<NSString *, id> *)storeOptions error:(NSError **)error API_AVAILABLE(macos(10.5));
 
 
 - (NSString *)persistentStoreTypeForFileType:(NSString *)fileType;  // Returns the name identifying the store type to save to for the given fileType. The default implementation of this method returns information derived from the application's Info.plist. If no store type information is in the Info.plist, the default implementation returns NSXMLStoreType. See NSPersistentStoreCoordinator.h for store type information.
@@ -48,10 +40,11 @@ NS_ASSUME_NONNULL_BEGIN
 @interface NSPersistentDocument (NSDeprecated)
 
 // This method is deprecated. Please use -configurePersistentStoreCoordinatorForURL:ofType:modelConfiguration:storeOptions:error: instead
-- (BOOL)configurePersistentStoreCoordinatorForURL:(null_unspecified NSURL *)url ofType:(null_unspecified NSString *)fileType error:(NSError **)error NS_DEPRECATED_MAC(10_4, 10_5);
+- (BOOL)configurePersistentStoreCoordinatorForURL:(null_unspecified NSURL *)url ofType:(null_unspecified NSString *)fileType error:(NSError **)error API_DEPRECATED("", macos(10.4,10.5));
 
 @end
 
+API_UNAVAILABLE_END
 NS_ASSUME_NONNULL_END
 
 

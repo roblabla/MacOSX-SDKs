@@ -1,10 +1,10 @@
 /*	NSGarbageCollector.h
-	Copyright (c) 2006-2018, Apple Inc. All rights reserved.
+	Copyright (c) 2006-2019, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
 
-NS_CLASS_DEPRECATED(10_5, 10_10, NA, NA, "Building Garbage Collected apps is no longer supported.")
+API_DEPRECATED("Building Garbage Collected apps is no longer supported.", macos(10.5, 10.10)) API_UNAVAILABLE(ios, watchos, tvos)
 NS_AUTOMATED_REFCOUNT_UNAVAILABLE
 
 NS_ASSUME_NONNULL_BEGIN
@@ -14,7 +14,7 @@ NS_SWIFT_UNAVAILABLE("Garbage Collection is not supported")
 
 + (id)defaultCollector;
 
-- (BOOL)isCollecting NS_DEPRECATED(10_0, 10_6, NA, NA);
+- (BOOL)isCollecting API_DEPRECATED("", macos(10.0, 10.6)) API_UNAVAILABLE(ios, watchos, tvos);
 
 - (void)disable;
 - (void)enable;

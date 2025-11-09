@@ -80,7 +80,7 @@ typedef double CLLocationDistance;
  *    to the location service that no minimum movement filter is desired - ie, client will be informed
  *    of any movement.
  */
-extern const CLLocationDistance kCLDistanceFilterNone;
+CL_EXTERN const CLLocationDistance kCLDistanceFilterNone;
 
 /*
  *  kCLLocationAccuracy<x>
@@ -91,12 +91,12 @@ extern const CLLocationDistance kCLDistanceFilterNone;
  *    power performance, be sure to specify an appropriate accuracy for your usage scenario (eg,
  *    use a large accuracy value when only a coarse location is needed).
  */
-extern const CLLocationAccuracy kCLLocationAccuracyBestForNavigation API_AVAILABLE(ios(4.0), macos(10.7));
-extern const CLLocationAccuracy kCLLocationAccuracyBest;
-extern const CLLocationAccuracy kCLLocationAccuracyNearestTenMeters;
-extern const CLLocationAccuracy kCLLocationAccuracyHundredMeters;
-extern const CLLocationAccuracy kCLLocationAccuracyKilometer;
-extern const CLLocationAccuracy kCLLocationAccuracyThreeKilometers;
+CL_EXTERN const CLLocationAccuracy kCLLocationAccuracyBestForNavigation API_AVAILABLE(ios(4.0), macos(10.7));
+CL_EXTERN const CLLocationAccuracy kCLLocationAccuracyBest;
+CL_EXTERN const CLLocationAccuracy kCLLocationAccuracyNearestTenMeters;
+CL_EXTERN const CLLocationAccuracy kCLLocationAccuracyHundredMeters;
+CL_EXTERN const CLLocationAccuracy kCLLocationAccuracyKilometer;
+CL_EXTERN const CLLocationAccuracy kCLLocationAccuracyThreeKilometers;
 
 /*
  *  CLLocationDistanceMax
@@ -104,7 +104,7 @@ extern const CLLocationAccuracy kCLLocationAccuracyThreeKilometers;
  *  Discussion:
  *  	Used to specify the maximum CLLocationDistance
  */
-extern const CLLocationDistance CLLocationDistanceMax API_AVAILABLE(ios(6.0), macos(10.14));
+CL_EXTERN const CLLocationDistance CLLocationDistanceMax API_AVAILABLE(ios(6.0), macos(10.14));
 
 /*
  *  CLTimeIntervalMax
@@ -112,7 +112,7 @@ extern const CLLocationDistance CLLocationDistanceMax API_AVAILABLE(ios(6.0), ma
  *  Discussion:
  *  	Used to specify the maximum NSTimeInterval
  */
-extern const NSTimeInterval CLTimeIntervalMax API_AVAILABLE(ios(6.0), macos(10.14));
+CL_EXTERN const NSTimeInterval CLTimeIntervalMax API_AVAILABLE(ios(6.0), macos(10.14));
 
 /*
  *  kCLLocationCoordinate2DInvalid
@@ -120,7 +120,7 @@ extern const NSTimeInterval CLTimeIntervalMax API_AVAILABLE(ios(6.0), macos(10.1
  *  Discussion:
  *    Used to specify an invalid CLLocationCoordinate2D.
  */
-extern const CLLocationCoordinate2D kCLLocationCoordinate2DInvalid API_AVAILABLE(ios(4.0), macos(10.7));
+CL_EXTERN const CLLocationCoordinate2D kCLLocationCoordinate2DInvalid API_AVAILABLE(ios(4.0), macos(10.7));
 
 #ifdef __cplusplus
 extern "C" {
@@ -132,6 +132,7 @@ extern "C" {
  *  Discussion:
  *    Returns YES if the specified coordinate is valid, NO otherwise.
  */
+CL_EXTERN
 BOOL CLLocationCoordinate2DIsValid(CLLocationCoordinate2D coord) API_AVAILABLE(ios(4.0), macos(10.7));
 
 /*
@@ -140,6 +141,7 @@ BOOL CLLocationCoordinate2DIsValid(CLLocationCoordinate2D coord) API_AVAILABLE(i
  *  Discussion:
  *    Returns a new CLLocationCoordinate2D at the given latitude and longitude
  */
+CL_EXTERN
 CLLocationCoordinate2D CLLocationCoordinate2DMake(CLLocationDegrees latitude, CLLocationDegrees longitude) API_AVAILABLE(ios(4.0), macos(10.7));
 
 #ifdef __cplusplus
@@ -152,7 +154,8 @@ CLLocationCoordinate2D CLLocationCoordinate2DMake(CLLocationDegrees latitude, CL
  *  Discussion:
  *    Encapsulates the information about a floor.
  */
-API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(macos)
+CL_EXTERN
+API_AVAILABLE(ios(8.0), macos(10.15))
 @interface CLFloor : NSObject <NSCopying, NSSecureCoding>
 
 /*
@@ -176,6 +179,7 @@ API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(macos)
  *  Discussion:
  *    Represents a geographical coordinate along with accuracy and timestamp information.
  */
+CL_EXTERN
 API_AVAILABLE(macos(10.6), ios(2.0))
 @interface CLLocation : NSObject <NSCopying, NSSecureCoding>
 {
@@ -259,7 +263,7 @@ API_AVAILABLE(macos(10.6), ios(2.0))
  *  Range:
  *    0.0 - 359.9 degrees, 0 being true North
  */
-@property(readonly, nonatomic) CLLocationDirection course API_AVAILABLE(ios(2.2), macos(10.7)) API_UNAVAILABLE(tvos);
+@property(readonly, nonatomic) CLLocationDirection course API_AVAILABLE(ios(2.2), macos(10.7));
 
 /*
  *  speed
@@ -267,7 +271,7 @@ API_AVAILABLE(macos(10.6), ios(2.0))
  *  Discussion:
  *    Returns the speed of the location in m/s. Negative if speed is invalid.
  */
-@property(readonly, nonatomic) CLLocationSpeed speed API_AVAILABLE(ios(2.2), macos(10.7)) API_UNAVAILABLE(tvos);
+@property(readonly, nonatomic) CLLocationSpeed speed API_AVAILABLE(ios(2.2), macos(10.7));
 
 /*
  *  timestamp
@@ -285,7 +289,7 @@ API_AVAILABLE(macos(10.6), ios(2.0))
  *    in the current building if you are inside a supported venue.
  *    This will be nil if the floor is unavailable.
  */
-@property(readonly, nonatomic, copy, nullable) CLFloor *floor API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(macos);
+@property(readonly, nonatomic, copy, nullable) CLFloor *floor API_AVAILABLE(ios(8.0), macos(10.15));
 
 /*
  *  getDistanceFrom:
@@ -293,7 +297,7 @@ API_AVAILABLE(macos(10.6), ios(2.0))
  *  Discussion:
  *    Deprecated. Use -distanceFromLocation: instead.
  */
-- (CLLocationDistance)getDistanceFrom:(const CLLocation *)location API_DEPRECATED_WITH_REPLACEMENT("-distanceFromLocation:", ios(2.0, 3.2)) API_UNAVAILABLE(macos) API_UNAVAILABLE(watchos, tvos);
+- (CLLocationDistance)getDistanceFrom:(const CLLocation *)location API_DEPRECATED_WITH_REPLACEMENT("-distanceFromLocation:", ios(2.0, 3.2)) API_UNAVAILABLE(macos, macCatalyst) API_UNAVAILABLE(watchos, tvos);
 
 /*
  *  distanceFromLocation:

@@ -1,7 +1,7 @@
 /*
  NSSharingService.h
  Application Kit
- Copyright (c) 2011-2018, Apple Inc.
+ Copyright (c) 2011-2019, Apple Inc.
  All rights reserved.
  */
 
@@ -16,6 +16,7 @@
 @class CKShare, CKContainer;
 
 NS_ASSUME_NONNULL_BEGIN
+API_UNAVAILABLE_BEGIN(ios)
 
 
 /* NSSharing can be used to share items to different kinds of local and remote services. Items are objects which respond to the NSPasteboardWriting protocol, like NSURL, NSImage or NSString. If an NSURL is a file URL (point to a video for example), then the content of the file will be shared. If the URL is remote, then the URL itself will be shared. 
@@ -25,66 +26,64 @@ typedef NSString * NSSharingServiceName NS_TYPED_EXTENSIBLE_ENUM;
 
 /* built-in sharing services
  */
-APPKIT_EXTERN NSSharingServiceName const NSSharingServiceNameComposeEmail NS_AVAILABLE_MAC(10_8);
-APPKIT_EXTERN NSSharingServiceName const NSSharingServiceNameComposeMessage NS_AVAILABLE_MAC(10_8);
-APPKIT_EXTERN NSSharingServiceName const NSSharingServiceNameSendViaAirDrop NS_AVAILABLE_MAC(10_8);
-APPKIT_EXTERN NSSharingServiceName const NSSharingServiceNameAddToSafariReadingList NS_AVAILABLE_MAC(10_8);
-APPKIT_EXTERN NSSharingServiceName const NSSharingServiceNameAddToIPhoto NS_AVAILABLE_MAC(10_8);
-APPKIT_EXTERN NSSharingServiceName const NSSharingServiceNameAddToAperture NS_AVAILABLE_MAC(10_8);
-APPKIT_EXTERN NSSharingServiceName const NSSharingServiceNameUseAsDesktopPicture NS_AVAILABLE_MAC(10_8);
+APPKIT_EXTERN NSSharingServiceName const NSSharingServiceNameComposeEmail API_AVAILABLE(macos(10.8));
+APPKIT_EXTERN NSSharingServiceName const NSSharingServiceNameComposeMessage API_AVAILABLE(macos(10.8));
+APPKIT_EXTERN NSSharingServiceName const NSSharingServiceNameSendViaAirDrop API_AVAILABLE(macos(10.8));
+APPKIT_EXTERN NSSharingServiceName const NSSharingServiceNameAddToSafariReadingList API_AVAILABLE(macos(10.8));
+APPKIT_EXTERN NSSharingServiceName const NSSharingServiceNameAddToIPhoto API_AVAILABLE(macos(10.8));
+APPKIT_EXTERN NSSharingServiceName const NSSharingServiceNameAddToAperture API_AVAILABLE(macos(10.8));
+APPKIT_EXTERN NSSharingServiceName const NSSharingServiceNameUseAsDesktopPicture API_AVAILABLE(macos(10.8));
 
 /* Formerly built-in sharing services. Deprecated as of 10.14
  */
-APPKIT_EXTERN NSSharingServiceName const NSSharingServiceNamePostOnFacebook NS_DEPRECATED_MAC(10_8, 10_14, "This service is no longer included with the system.");
-APPKIT_EXTERN NSSharingServiceName const NSSharingServiceNamePostOnTwitter NS_DEPRECATED_MAC(10_8, 10_14, "This service is no longer included with the system.");
-APPKIT_EXTERN NSSharingServiceName const NSSharingServiceNamePostOnSinaWeibo NS_DEPRECATED_MAC(10_8, 10_14, "This service is no longer included with the system.");
-APPKIT_EXTERN NSSharingServiceName const NSSharingServiceNamePostOnTencentWeibo NS_DEPRECATED_MAC(10_8, 10_14, "This service is no longer included with the system.");
-APPKIT_EXTERN NSSharingServiceName const NSSharingServiceNamePostOnLinkedIn NS_DEPRECATED_MAC(10_8, 10_14, "This service is no longer included with the system.");
-APPKIT_EXTERN NSSharingServiceName const NSSharingServiceNameUseAsTwitterProfileImage NS_DEPRECATED_MAC(10_8, 10_14, "This service is no longer included with the system.");
-APPKIT_EXTERN NSSharingServiceName const NSSharingServiceNameUseAsFacebookProfileImage NS_DEPRECATED_MAC(10_8, 10_14, "This service is no longer included with the system.");
-APPKIT_EXTERN NSSharingServiceName const NSSharingServiceNameUseAsLinkedInProfileImage NS_DEPRECATED_MAC(10_8, 10_14, "This service is no longer included with the system.");
-APPKIT_EXTERN NSSharingServiceName const NSSharingServiceNamePostImageOnFlickr NS_DEPRECATED_MAC(10_8, 10_14, "This service is no longer included with the system.");
-APPKIT_EXTERN NSSharingServiceName const NSSharingServiceNamePostVideoOnVimeo NS_DEPRECATED_MAC(10_8, 10_14, "This service is no longer included with the system.");
-APPKIT_EXTERN NSSharingServiceName const NSSharingServiceNamePostVideoOnYouku NS_DEPRECATED_MAC(10_8, 10_14, "This service is no longer included with the system.");
-APPKIT_EXTERN NSSharingServiceName const NSSharingServiceNamePostVideoOnTudou NS_DEPRECATED_MAC(10_8, 10_14, "This service is no longer included with the system.");
+APPKIT_EXTERN NSSharingServiceName const NSSharingServiceNamePostOnFacebook API_DEPRECATED("This service is no longer included with the system.", macos(10.8,10.14));
+APPKIT_EXTERN NSSharingServiceName const NSSharingServiceNamePostOnTwitter API_DEPRECATED("This service is no longer included with the system.", macos(10.8,10.14));
+APPKIT_EXTERN NSSharingServiceName const NSSharingServiceNamePostOnSinaWeibo API_DEPRECATED("This service is no longer included with the system.", macos(10.8,10.14));
+APPKIT_EXTERN NSSharingServiceName const NSSharingServiceNamePostOnTencentWeibo API_DEPRECATED("This service is no longer included with the system.", macos(10.8,10.14));
+APPKIT_EXTERN NSSharingServiceName const NSSharingServiceNamePostOnLinkedIn API_DEPRECATED("This service is no longer included with the system.", macos(10.8,10.14));
+APPKIT_EXTERN NSSharingServiceName const NSSharingServiceNameUseAsTwitterProfileImage API_DEPRECATED("This service is no longer included with the system.", macos(10.8,10.14));
+APPKIT_EXTERN NSSharingServiceName const NSSharingServiceNameUseAsFacebookProfileImage API_DEPRECATED("This service is no longer included with the system.", macos(10.8,10.14));
+APPKIT_EXTERN NSSharingServiceName const NSSharingServiceNameUseAsLinkedInProfileImage API_DEPRECATED("This service is no longer included with the system.", macos(10.8,10.14));
+APPKIT_EXTERN NSSharingServiceName const NSSharingServiceNamePostImageOnFlickr API_DEPRECATED("This service is no longer included with the system.", macos(10.8,10.14));
+APPKIT_EXTERN NSSharingServiceName const NSSharingServiceNamePostVideoOnVimeo API_DEPRECATED("This service is no longer included with the system.", macos(10.8,10.14));
+APPKIT_EXTERN NSSharingServiceName const NSSharingServiceNamePostVideoOnYouku API_DEPRECATED("This service is no longer included with the system.", macos(10.8,10.14));
+APPKIT_EXTERN NSSharingServiceName const NSSharingServiceNamePostVideoOnTudou API_DEPRECATED("This service is no longer included with the system.", macos(10.8,10.14));
 
 /* This service differs from other NSSharingServices in that it allows the user to establishes a persistent sharing session for the specified items with potentially many participants, instead of sending a copy of the items. You can invoke this service with an NSItemProvider that has registered a CKShare & CKContainer via either -registerCloudKitShare:container: or -registerCloudKitShareWithPreparationHandler:. (Registering other types on the same provider to enable other sharing services is allowed.)
  
 When performed, this service gives the user the opportunity to invite participants and start sharing. If the content is already shared it instead allows the user to view or modify participation or stop sharing. To detect changes the service makes to the CKShare, implement -sharingService:didSaveShare: and -sharingService:didStopSharing:.
  */
-APPKIT_EXTERN NSSharingServiceName const NSSharingServiceNameCloudSharing NS_AVAILABLE_MAC(10_12);
+APPKIT_EXTERN NSSharingServiceName const NSSharingServiceNameCloudSharing API_AVAILABLE(macos(10.12));
 
 
 @protocol NSSharingServiceDelegate;
 
-NS_CLASS_AVAILABLE(10_8, NA)
-@interface NSSharingService : NSObject {
-@private
-    id _reserved APPKIT_IVAR;
-}
+API_AVAILABLE(macos(10.8))
+@interface NSSharingService : NSObject
+
 @property (nullable, weak) id <NSSharingServiceDelegate> delegate;
 @property (readonly, copy) NSString *title;
 @property (readonly, strong) NSImage *image;
 @property (nullable, readonly, strong) NSImage *alternateImage;
 
 /* Title of the service in the Share menu. Can be modified. */
-@property (copy) NSString *menuItemTitle NS_AVAILABLE_MAC(10_9);
+@property (copy) NSString *menuItemTitle API_AVAILABLE(macos(10.9));
 
 /* These properties are used for configuration of the service. They need to be set when the NSSharingService is created or in sharingService:willShareItems:
  */
-@property (nullable, copy) NSArray<NSString *> *recipients NS_AVAILABLE_MAC(10_9);    // NSArray of NSString objects representing handles (example: email adresses)
-@property (nullable, copy) NSString *subject NS_AVAILABLE_MAC(10_9);
+@property (nullable, copy) NSArray<NSString *> *recipients API_AVAILABLE(macos(10.9));    // NSArray of NSString objects representing handles (example: email adresses)
+@property (nullable, copy) NSString *subject API_AVAILABLE(macos(10.9));
 
 /* These read-only properties allow for querying of the shared content:
  */
 // Message body as string
-@property (nullable, readonly, copy) NSString *messageBody NS_AVAILABLE_MAC(10_9);
+@property (nullable, readonly, copy) NSString *messageBody API_AVAILABLE(macos(10.9));
 // URL to access the post on Facebook, Twitter, Sina Weibo, etc. (also known as permalink)
-@property (nullable, readonly, copy) NSURL *permanentLink NS_AVAILABLE_MAC(10_9);
+@property (nullable, readonly, copy) NSURL *permanentLink API_AVAILABLE(macos(10.9));
 // Account name used for sending on Twitter or Sina Weibo
-@property (nullable, readonly, copy) NSString *accountName NS_AVAILABLE_MAC(10_9);
+@property (nullable, readonly, copy) NSString *accountName API_AVAILABLE(macos(10.9));
 // NSArray of NSURL objects representing the files that were shared
-@property (nullable, readonly, copy) NSArray<NSURL *> *attachmentFileURLs NS_AVAILABLE_MAC(10_9);
+@property (nullable, readonly, copy) NSArray<NSURL *> *attachmentFileURLs API_AVAILABLE(macos(10.9));
 
 
 
@@ -132,7 +131,7 @@ typedef NS_ENUM(NSInteger, NSSharingContentScope) {
     NSSharingContentScopeItem,
     NSSharingContentScopePartial,
     NSSharingContentScopeFull
-}  NS_ENUM_AVAILABLE_MAC(10_8);
+}  API_AVAILABLE(macos(10.8));
 
 @protocol NSSharingServiceDelegate <NSObject>
 @optional
@@ -167,7 +166,7 @@ typedef NS_OPTIONS(NSUInteger, NSCloudKitSharingServiceOptions) {
     NSCloudKitSharingServiceAllowReadOnly = 1 << 4, // The user is allowed to grant participants read-only permissions
     NSCloudKitSharingServiceAllowReadWrite = 1 << 5, // The user is allowed to grant participants read/write permissions.
     
-} NS_ENUM_AVAILABLE_MAC(10_12);
+} API_AVAILABLE(macos(10.12));
 
 @protocol NSCloudSharingServiceDelegate <NSSharingServiceDelegate>
 @optional
@@ -176,13 +175,11 @@ typedef NS_OPTIONS(NSUInteger, NSCloudKitSharingServiceOptions) {
  */
 - (void)sharingService:(NSSharingService *)sharingService didCompleteForItems:(NSArray *)items error:(nullable NSError *)error;
 
-#if __OBJC2__
 
 /* The options returned by this method describe how the user is allowed to configure the share: whether the share is public or private, and whether participants have read-only or read/write permissions. If this method is not implemented, NSCloudKitSharingServiceStandard is assumed.
  */
 - (NSCloudKitSharingServiceOptions)optionsForSharingService:(NSSharingService *)cloudKitSharingService shareProvider:(NSItemProvider *)provider;
 
-#endif
 
 /* When an NSSharingServiceNameCloudSharing sharing service successfully saves modifications to the CKShare, it will invoke this method on the delegate with the last-known state of the CKShare on the server.
  */
@@ -195,32 +192,26 @@ typedef NS_OPTIONS(NSUInteger, NSCloudKitSharingServiceOptions) {
 @end
 
 
-#if __OBJC2__
 
 @interface NSItemProvider (NSCloudKitSharing)
 
 /* Use this method when you want to share a collection of CKRecords but don't currently have a CKShare. When the preparationHandler is called, you should create a new CKShare with the appropriate root CKRecord. After ensuring the share and all records have been saved to the server, invoke the preparationCompletionHandler with either the resulting CKShare and its CKContainer, or an NSError if saving failed. Invoking the service with a CKShare registered with this method will prompt the user to start sharing.
  */
-- (void)registerCloudKitShareWithPreparationHandler:(void (^_Nonnull)(void (^ _Nonnull preparationCompletionHandler)(CKShare * _Nullable, CKContainer * _Nullable, NSError * _Nullable)))preparationHandler NS_AVAILABLE_MAC(10_12);
+- (void)registerCloudKitShareWithPreparationHandler:(void (^_Nonnull)(void (^ _Nonnull preparationCompletionHandler)(CKShare * _Nullable, CKContainer * _Nullable, NSError * _Nullable)))preparationHandler API_AVAILABLE(macos(10.12));
 
 /* Use this method when you have a CKShare that is already saved to the server. Invoking the service with a CKShare registerd with this method will allow the owner to make modifications to the share settings, or will allow a participant to view the share settings.
  */
-- (void)registerCloudKitShare:(CKShare *)share container:(CKContainer *)container NS_AVAILABLE_MAC(10_12);
+- (void)registerCloudKitShare:(CKShare *)share container:(CKContainer *)container API_AVAILABLE(macos(10.12));
 
 @end
 
-#endif
 
 
 
 @protocol NSSharingServicePickerDelegate;
 
-NS_CLASS_AVAILABLE(10_8, NA)
+API_AVAILABLE(macos(10.8))
 @interface NSSharingServicePicker : NSObject 
-{
-@private
-    id _reserved APPKIT_IVAR;
-}
 
 @property (nullable, weak) id <NSSharingServicePickerDelegate> delegate;
 
@@ -267,5 +258,6 @@ NS_CLASS_AVAILABLE(10_8, NA)
 
 @end
 
+API_UNAVAILABLE_END
 NS_ASSUME_NONNULL_END
 

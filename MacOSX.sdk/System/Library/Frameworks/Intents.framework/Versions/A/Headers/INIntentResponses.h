@@ -2,11 +2,12 @@
 //  INIntentResponses.h
 //  Intents
 //
-//  Copyright (c) 2016-2017 Apple Inc. All rights reserved.
+//  Copyright (c) 2016-2019 Apple Inc. All rights reserved.
 //
 
 #import <Intents/INSearchCallHistoryIntentResponse.h>
 #import <Intents/INStartAudioCallIntentResponse.h>
+#import <Intents/INStartCallIntentResponse.h>
 #import <Intents/INStartVideoCallIntentResponse.h>
 
 #import <Intents/INActivateCarSignalIntentResponse.h>
@@ -26,7 +27,10 @@
 #import <Intents/INResumeWorkoutIntentResponse.h>
 #import <Intents/INStartWorkoutIntentResponse.h>
 
+#import <Intents/INAddMediaIntentResponse.h>
 #import <Intents/INPlayMediaIntentResponse.h>
+#import <Intents/INSearchForMediaIntentResponse.h>
+#import <Intents/INUpdateMediaAffinityIntentResponse.h>
 
 #import <Intents/INSetRadioStationIntentResponse.h>
 
@@ -38,8 +42,10 @@
 #import <Intents/INAppendToNoteIntentResponse.h>
 #import <Intents/INCreateNoteIntentResponse.h>
 #import <Intents/INCreateTaskListIntentResponse.h>
+#import <Intents/INDeleteTasksIntentResponse.h>
 #import <Intents/INSearchForNotebookItemsIntentResponse.h>
 #import <Intents/INSetTaskAttributeIntentResponse.h>
+#import <Intents/INSnoozeTasksIntentResponse.h>
 
 #import <Intents/INPayBillIntentResponse.h>
 #import <Intents/INRequestPaymentIntentResponse.h>
@@ -50,6 +56,8 @@
 
 #import <Intents/INSearchForPhotosIntentResponse.h>
 #import <Intents/INStartPhotoPlaybackIntentResponse.h>
+
+#import <Intents/INGetReservationDetailsIntentResponse.h>
 
 #import <Intents/INGetRideStatusIntentResponse.h>
 #import <Intents/INListRideOptionsIntentResponse.h>

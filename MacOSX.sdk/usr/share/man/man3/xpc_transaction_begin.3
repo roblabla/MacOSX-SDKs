@@ -103,6 +103,9 @@ which increment and decrement the transaction count respectively. This may be
 necessary for services that send periodic messages to their clients, not in
 direct reply to a received message.
 .Pp
+Beginning a transaction and never ending it is considered an anti-pattern and is
+strongly discouraged.
+.Pp
 If the service has a non-zero transaction count at a time when the system deems
 it necessary to terminate the service, peer connections in the service may
 receive the

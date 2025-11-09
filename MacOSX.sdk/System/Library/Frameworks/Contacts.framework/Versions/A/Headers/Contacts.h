@@ -2,12 +2,16 @@
 //  Contacts.h
 //  Contacts
 //
-//  Copyright (c) 2015 Apple Inc. All rights reserved.
+//  Copyright (c) 2015–2019 Apple Inc. All rights reserved.
 //
 
 #import <Contacts/CNContactStore.h>
 #import <Contacts/CNContactFetchRequest.h>
+#import <Contacts/CNFetchResult.h>
 #import <Contacts/CNSaveRequest.h>
+
+#import <Contacts/CNChangeHistoryFetchRequest.h>
+#import <Contacts/CNChangeHistoryEvent.h>
 
 #import <Contacts/CNContact.h>
 #import <Contacts/CNContact+Predicates.h>

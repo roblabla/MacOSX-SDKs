@@ -1,7 +1,7 @@
 /*
 	NSFilePromiseProvider.h
 	Application Kit
-	Copyright (c) 2015-2018, Apple Inc.
+	Copyright (c) 2015-2019, Apple Inc.
 	All rights reserved.
 */
 
@@ -12,28 +12,13 @@
 #import <AppKit/NSPasteboard.h>
 
 NS_ASSUME_NONNULL_BEGIN
+API_UNAVAILABLE_BEGIN(ios)
 
 @protocol NSFilePromiseProviderDelegate;
 @class NSOperationQueue;
 
-NS_CLASS_AVAILABLE_MAC(10_12)
-@interface NSFilePromiseProvider : NSObject <NSPasteboardWriting> {
-@private
-    NSString *_fileType APPKIT_IVAR;
-    NSArray<NSString *> *_reservedA APPKIT_IVAR;
-    id _reservedB APPKIT_IVAR;
-    __weak id <NSFilePromiseProviderDelegate> _delegate APPKIT_IVAR;
-    id _userInfo APPKIT_IVAR;
-    NSURL *_destinationURL APPKIT_IVAR;
-    NSInteger _dragggingSequenceNumber APPKIT_IVAR;
-    struct {
-        unsigned int valid;
-        unsigned int providedItem:1;
-        unsigned int reserved:30;
-    } _flags APPKIT_IVAR;
-    id _private APPKIT_IVAR;
-}
-
+API_AVAILABLE(macos(10.12))
+@interface NSFilePromiseProvider : NSObject <NSPasteboardWriting>
 /* The UTI of the promised file type. An exception is thrown if the fileType does not conform to kUTTypeData or kUTTypeDirectory */
 @property(copy) NSString *fileType;
 
@@ -57,11 +42,12 @@ NS_CLASS_AVAILABLE_MAC(10_12)
 
 /* Write the contents of this promise item to the provided URL and call completionHandler when done. NSFilePromiseReceiver automatically wraps this message with NSFileCoordinator when the promise destination is an NSFilePromiseReceiver. Always use the supplied URL. Note: This request shall occur on the NSOperationQueue supplied by -promiseOperationQueue.
  */
-- (void)filePromiseProvider:(NSFilePromiseProvider*)filePromiseProvider writePromiseToURL:(NSURL *)url completionHandler:(void (^)(NSError * __nullable errorOrNil))completionHandler;
+- (void)filePromiseProvider:(NSFilePromiseProvider*)filePromiseProvider writePromiseToURL:(NSURL *)url completionHandler:(void (^)(NSError * _Nullable errorOrNil))completionHandler;
 
 @optional
 /* The operation queue that the write request will be issued from. If this method is not implemented, the mainOperationQueue is used. */
 - (NSOperationQueue *)operationQueueForFilePromiseProvider:(NSFilePromiseProvider*)filePromiseProvider;
 @end
 
+API_UNAVAILABLE_END
 NS_ASSUME_NONNULL_END

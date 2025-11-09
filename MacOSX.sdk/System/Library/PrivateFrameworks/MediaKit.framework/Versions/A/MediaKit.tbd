@@ -1,11 +1,10 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 15D4EDA2-AAAC-3CF3-BB2B-3A92AECC932D' ]
+uuids:           [ 'x86_64: 5D52E26E-C5C5-345C-91B1-6CC0700A4AA9' ]
 platform:        macosx
-install-name:    /System/Library/PrivateFrameworks/MediaKit.framework/Versions/A/MediaKit
-current-version: 906
+install-name:    '/System/Library/PrivateFrameworks/MediaKit.framework/Versions/A/MediaKit'
+current-version: 923
 compatibility-version: 302
-objc-constraint: none
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _ApplyToHFSPlusCatalogRecords, _ApplyToHFSPlusExtentRecords, 

@@ -1,114 +1,121 @@
-.\"Copyright (c) 2011 Apple Computer, Inc. All Rights Reserved.
-.Dd December 14, 2011
+.\"Copyright (c) 2019 Apple Inc. All Rights Reserved.
+.Dd June 22, 2019
 .Dt AVCONVERT 1
-.Os "Mac OS X"
+.Os "macOS"
 .Sh NAME
 .Nm avconvert
 .Nd movie conversion tool
 .Sh SYNOPSIS
 .Nm
-.Op Fl hvq
-.Fl \-p Ar <preset_name>
-.Fl \-s Ar <source_media>
-.Fl \-o Ar <output_movie>
+.Op Fl hv
+.Fl s Ar <source_media>
+.Fl o Ar <output_movie>
+.Fl p Ar <preset_name>
 .Sh DESCRIPTION
 .Nm
-can be used to compress video media to different types for sharing on the web or loading onto devices.
-.Bl -tag -width "-p name"
-.It Fl h
-prints usage information and available presets
-.It Fl v
-sets the console output to verbose
-.It Fl q
-sets the console output to quiet
-.It Fl prog
-shows progress during the export (default with -v)
-.It Fl p | \-preset Ar name
-converts the source media to an output file using the specified preset. Use --listPresets to get the full list. Common presets are:
-.Bd -literal
-.Sy PresetAppleM4VCellular
-.Sy PresetAppleM4ViPod
-.Sy PresetAppleM4VWiFi
-.Sy PresetAppleM4VAppleTV
-.Sy PresetAppleM4V480pSD
-.Sy PresetAppleM4V720pHD
-.Sy PresetAppleM4V1080pHD
-.Sy PresetAppleM4A
+is a tool that converts source media files to different file types for sharing on the web or loading onto devices.  The tool will not allow protected content to be converted.  Only one video and one audio track is preserved through the conversion, along with metadata tracks.  The tool will never resize the video higher than the source dimensions.  If the preset internal dimensions are larger than that of the source, the conversion will maintain the source dimensions.  The file extension provided for the output movie will determine the output file type.
+.Bl -tag -width "--disableMetadataFilter"
+.It Fl \-source | s Ar file
+The source media file to be converted.
+.It Fl \-output | o Ar file
+The output movie file to be created.
+.It Fl \-preset | p Ar name
+Use the specified preset for file conversion.  All presets encode using AVC (H.264) encoding unless otherwise specified in the preset name.  Use --help to get the full list.
+.Pp
+.Bl -tag -width "PresetHEVCHighestQualityWithAlpha" -offset indent -compact
+.It Sy Preset640x480
+A 480p Standard Definition preset with H.264 video and AAC audio.
+.It Sy Preset960x540
+A 540p preset with H.264 video and AAC audio.
+.It Sy Preset1280x720
+A 720p High Definition preset with H.264 video and AAC audio.
+.It Sy Preset1920x1080
+A 1080p High Definition preset with H.264 video and AAC audio.
+.It Sy Preset3840x2160
+A 2160p Ultra High Definition preset with H.264 video and AAC audio.
+.It Sy PresetAppleM4A
+An audio-only preset with AAC audio.
+.It Sy PresetAppleM4V480pSD
+A legacy 480p Standard Definition preset with H.264 video and AAC audio suitable for playing on Apple devices.
+.It Sy PresetAppleM4V720pHD
+A legacy 720p High Definition preset with H.264 video and AAC audio suitable for playing on Apple devices.
+.It Sy PresetAppleM4V1080pHD
+A legacy 1080p High Definition preset with H.264 video and AAC audio suitable for playing on Apple devices.
+.It Sy PresetAppleM4VAppleTV
+A legacy preset with H.264 video and AAC audio suitable for playing on older AppleTV models.
+.It Sy PresetAppleM4VCellular
+A legacy, smaller than Standard Definition, preset with H.264 video and AAC audio suitable for playing on Apple devices when streamed over a cellular network.
+.It Sy PresetAppleM4ViPod
+A legacy Standard Definition preset with H.264 video and AAC audio suitable for playing on an iPod.
+.It Sy PresetAppleM4VWiFi
+A legacy, smaller than Standard Definition, preset with H.264 video and AAC audio suitable for playing on Apple devices when streamed over a WiFi network.
+.It Sy PresetAppleProRes422LPCM
+A preset with Apple ProRes 422 video and LPCM audio.
+.It Sy PresetAppleProRes4444LPCM
+A preset with Apple ProRes 4444 video and LPCM audio.
+.It Sy PresetHEVC1920x1080
+A 1080p High Definition preset with HEVC video and AAC audio.
+.It Sy PresetHEVC1920x1080WithAlpha
+A 1080p High Definition preset with HEVC alpha video and AAC audio.  If a non-alpha source is selected, an error will occur.
+.It Sy PresetHEVC3840x2160
+A 2160p Ultra High Definition preset with HEVC video and AAC audio.
+.It Sy PresetHEVC3840x2160WithAlpha
+A 2160p Ultra High Definition preset with HEVC alpha video and AAC audio.  If a non-alpha source is selected, an error will occur.
+.It Sy PresetHEVCHighestQuality
+A high quality preset with HEVC video and AAC audio.
+.It Sy PresetHEVCHighestQualityWithAlpha
+A high quality preset with HEVC alpha video and AAC audio.  If a non-alpha source is selected, an error will occur.
+.It Sy PresetHighestQuality
+A high quality preset with H.264 video and AAC audio.
+.It Sy PresetLowQuality
+A low quality, smaller than Standard Definition, preset with H.264 video and AAC audio.
+.It Sy PresetMediumQuality
+A medium quality, smaller than Standard Definition, preset with H.264 video and AAC audio.
+.It Sy PresetPassthrough
+A preset that passes through the video and audio tracks, without conversion.
 .Ed
-.It Fl s | \-source Ar file
-is the source media file
-.It Fl o | \-output Ar file
-is the output movie file
-.It Fl \-listPresets
-lists all of the presets avconvert supports
-.It Fl \-listTracks
-lists the available tracks in the source media. Must be used with the \-\-source flag
 .El
 .Sh OPTIONS
 .Pp
-Optional flags to configure the audio export settings
-.Bl -tag -width "--preset name"
-.It Fl adr Ar number
-a limit value for the data rate for the audio track in bits per second
-.It Fl af Ar fourCC
-sets the format of the audio output using a fourCC eg. aac
-.It Fl sr Ar number
-configures the sample rate of the output in Hertz. eg. 44100
-.It Fl cc Ar number
-is the channel count of the output eg. 1 (for mono) 2 (stereo) 4 (quad)
-.El
-.Pp
-Optional flags to configure the video export settings
-.Bl -tag -width "--preset name"
-.It Fl vdr Ar number
-a limit value for the video data rate in bits per second
-.It Fl th Ar number
-sets the height of the output video in pixels
-.It Fl tw Ar number
-sets the width of the output video in pixels
-.It Fl vc Ar fourCC
-sets the format of the video output using a fourCC eg. avc1
-.It Fl fr Ar number 
-sets the frame rate of the output video in frames per second
-.It Fl kr Ar number
-specifies how often keyframes appear in the output video
-.It Fl fr Ar yes | Ar no
-sets whether or not to enable frame reordering (b-frames)
-.El
-.Pp
-Optional flags configuring track and metadata output
-.Bl -tag -width "--preset name"
-.It Fl ot Ar name
-omits the listed track type from the exported movie Allowable track types are:
-.Bd -literal
-.Sy videoTrack
-.Sy audioTrack
-.Sy subtitleTrack
-.Sy chapterTrack
-.Sy thumbnailTrack
-.Sy closedcaptionTrack 
-.Sy textTrack 
-.Ed
-.It Fl md Ar file
-sets the file from which the metadata for the export is found if that is different from the source movie
+.Bl -tag -width "--disableMetadataFilter"
+.It Fl \-disableFastStart
+Disable fast-start movie creation.  Reduces disk accesses if fast-start is not required.
+.It Fl \-disableMetadataFilter
+Disable the metadata filter.  Use with caution.  This will allow privacy sensitive source metadata to be preserved in the output file.  This may include information such as the location of the video, time when the video was recorded, video capture device information, etc.  If this option is not specified, the aforementioned source metadata is not present in the output file.
+.It Fl \-duration Ar num
+Trim the output movie to num seconds (decimal allowed).  Default is end of file.
+.It Fl \-help | h
+Print command usage and list available preset names.
+.It Fl \-multiPass
+Perform a higher quality multi-pass encode in the conversion.
+.It Fl \-progress | prog
+Display progress during the conversion (default with -v).
+.It Fl \-replace
+Overwrite the output file, if it already exists.
+.It Fl \-start Ar num
+Skip the first num seconds (decimal allowed) of the source movie.  Default is beginning of file.
+.It Fl \-verbose | v
+Print additional information about the conversion.
 .El
 .Sh EXAMPLES
 .Pp
-	avconvert --listPresets
+Convert the source movie from 4k HEVC to 720p AVC using the 1280x720 encoding preset:
 .Pp
-Lists the available presets that can be used for export
+	avconvert --source 4k_hevc_movie.mov --output 720p_avc_movie.mov --preset Preset1280x720
 .Pp
-	avconvert --preset AppleM4ViPod --source sample_movie.mov --output ipod_movie.m4v
+Convert the source movie from 4k AVC to 4K HEVC using the HEVCHighestQuality encoding preset:
 .Pp
-Exports the source movie "sample_movie.mov" to "ipod_movie.m4v" using the iPod encoding preset
+	avconvert -s 4k_avc_movie.mov -o 4k_hevc_movie.mov -p PresetHEVCHighestQuality
 .Pp
-	avconvert --preset AppleM4VAppleTV --source sample_movie.mov --output appletv_movie.m4v -adr 128000 -sr 441000
+Skip the first 3.5 seconds of the source movie and only convert the next 30 seconds:
 .Pp
-Overrides the AppleTV defaults for audio data rate and sample rate in the output movie
+	avconvert --source source_movie.mov --output trimmed_movie.mov -p PresetMediumQuality --start 3.5 --duration 30
 .Pp
-	avconvert --preset AppleM4VAppleTV --source sample_movie.mov --output appletv_movie.m4v -ot audioTrack
+Convert the source movie from a QuickTime movie file to an MPEG-4 file:
 .Pp
-Omits the audio track from the output file "appletv_movie.m4v"
+	avconvert -s source_movie.mov -o output_movie.mp4 -p PresetLowQuality
 .Sh HISTORY
 .Nm
 command first appeared in Mac OS X 10.7.
+.Pp
+64-bit implementation introduced in Mac OS X 10.15.

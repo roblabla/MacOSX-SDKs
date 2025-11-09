@@ -1,7 +1,7 @@
 /*
     NSMagnificationGestureRecognizer.h
     Application Kit
-    Copyright (c) 2013-2018, Apple Inc.
+    Copyright (c) 2013-2019, Apple Inc.
     All rights reserved.
 */
 
@@ -9,22 +9,14 @@
 #import <AppKit/NSGestureRecognizer.h>
 
 NS_ASSUME_NONNULL_BEGIN
+API_UNAVAILABLE_BEGIN(ios)
 
-NS_CLASS_AVAILABLE(10_10, NA)
-@interface NSMagnificationGestureRecognizer : NSGestureRecognizer {
-@private
-    NSPoint _location APPKIT_IVAR;
-    NSPoint _reserved1 APPKIT_IVAR;
-    NSInteger _mflags __unused APPKIT_IVAR;
-    CGFloat _magnification APPKIT_IVAR;
-    id _reserved2 APPKIT_IVAR;
-#ifndef __OBJC2__
-    NSInteger _reserved3 APPKIT_IVAR;
-#endif
-}
+API_AVAILABLE(macos(10.10))
+@interface NSMagnificationGestureRecognizer : NSGestureRecognizer
 
 @property CGFloat magnification;
 
 @end
 
+API_UNAVAILABLE_END
 NS_ASSUME_NONNULL_END

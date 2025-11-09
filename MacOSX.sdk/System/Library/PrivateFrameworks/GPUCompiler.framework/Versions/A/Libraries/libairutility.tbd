@@ -1,10 +1,9 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 8010E3A1-A75C-34E9-A3C8-0F806D17237C' ]
+uuids:           [ 'x86_64: 71244815-A4AC-3B99-A076-14602A6D4093' ]
 platform:        macosx
-install-name:    /System/Library/PrivateFrameworks/GPUCompiler.framework/Versions/A/Libraries/libairutility.dylib
+install-name:    '/System/Library/PrivateFrameworks/GPUCompiler.framework/Versions/A/Libraries/libairutility.dylib'
 current-version: 0
-objc-constraint: none
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _MTLAddAIRFunctionArgOptPass, _MTLAddAIRMetadataPrunerPass, 

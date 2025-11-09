@@ -48,5 +48,10 @@
   #define CIKL_DEPRECATED(fromM,toM, fromI,toI)  NS_DEPRECATED(fromM,toM, fromI,toI, "Core Image Kernel Language API deprecated. (Define CI_SILENCE_GL_DEPRECATION to silence these warnings)")
 #endif
 
+#if TARGET_OS_MAC || !TARGET_OS_SIMULATOR || defined(__IPHONE_13_0)
+  #define COREIMAGE_SUPPORTS_IOSURFACE 1
+#else
+  #define COREIMAGE_SUPPORTS_IOSURFACE 0
+#endif
 
 #endif /* COREIMAGEDEFINES_H */

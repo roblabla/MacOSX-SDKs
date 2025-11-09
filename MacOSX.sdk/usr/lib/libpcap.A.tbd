@@ -1,36 +1,33 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 5939AB23-B2A9-3C03-B6C1-4F0E5A21D9FC' ]
-platform:        macosx
-install-name:    /usr/lib/libpcap.A.dylib
-objc-constraint: none
+uuids:           [ 'x86_64: ED4D84F8-3AC1-37BA-927A-FEF52A3788EE', 'x86_64: ED4D84F8-3AC1-37BA-927A-FEF52A3788EE' ]
+platform:        zippered
+install-name:    '/usr/lib/libpcap.A.dylib'
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ ___pcap_atodn, ___pcap_atoin, ___pcap_nametodnaddr, _add_addr_to_dev, 
                        _add_addr_to_iflist, _add_or_find_if, _bpf_dump, _bpf_error, 
                        _bpf_filter, _bpf_filter_with_aux_data, _bpf_image, _bpf_optimize, 
-                       _bpf_syntax_error, _bpf_validate, _cap_pktap_v2, _capture_done, 
-                       _dlt_to_linktype, _dump_pktap_v1, _dump_pktap_v2, _eproto_db, 
-                       _filename, _finish_parse, _gen_acode, _gen_and, _gen_arth, 
-                       _gen_atmfield_code, _gen_atmmulti_abbrev, _gen_atmtype_abbrev, 
-                       _gen_broadcast, _gen_byteop, _gen_ecode, _gen_geneve, _gen_greater, 
-                       _gen_inbound, _gen_less, _gen_llc, _gen_llc_i, _gen_llc_s, 
-                       _gen_llc_s_subtype, _gen_llc_u, _gen_llc_u_subtype, _gen_load, 
-                       _gen_loadi, _gen_loadlen, _gen_mcode, _gen_mcode6, _gen_mpls, 
-                       _gen_mtp2type_abbrev, _gen_mtp3field_code, _gen_multicast, 
-                       _gen_ncode, _gen_neg, _gen_not, _gen_or, _gen_p80211_fcdir, 
-                       _gen_p80211_type, _gen_pf_action, _gen_pf_ifname, _gen_pf_reason, 
-                       _gen_pf_rnr, _gen_pf_ruleset, _gen_pf_srnr, _gen_portop, _gen_portop6, 
-                       _gen_portrangeop, _gen_portrangeop6, _gen_pppoed, _gen_pppoes, 
-                       _gen_proto_abbrev, _gen_relation, _gen_scode, _gen_vlan, _get_from_block_data, 
-                       _icode_to_fcode, _if_flags_to_pcap_flags, _ifname, _install_bpf_program, 
+                       _bpf_syntax_error, _bpf_validate, _dlt_to_linktype, _eproto_db, 
+                       _finish_parse, _gen_acode, _gen_and, _gen_arth, _gen_atmfield_code, 
+                       _gen_atmmulti_abbrev, _gen_atmtype_abbrev, _gen_broadcast, 
+                       _gen_byteop, _gen_ecode, _gen_geneve, _gen_greater, _gen_inbound, 
+                       _gen_less, _gen_llc, _gen_llc_i, _gen_llc_s, _gen_llc_s_subtype, 
+                       _gen_llc_u, _gen_llc_u_subtype, _gen_load, _gen_loadi, _gen_loadlen, 
+                       _gen_mcode, _gen_mcode6, _gen_mpls, _gen_mtp2type_abbrev, 
+                       _gen_mtp3field_code, _gen_multicast, _gen_ncode, _gen_neg, 
+                       _gen_not, _gen_or, _gen_p80211_fcdir, _gen_p80211_type, _gen_pf_action, 
+                       _gen_pf_ifname, _gen_pf_reason, _gen_pf_rnr, _gen_pf_ruleset, 
+                       _gen_pf_srnr, _gen_portop, _gen_portop6, _gen_portrangeop, 
+                       _gen_portrangeop6, _gen_pppoed, _gen_pppoes, _gen_proto_abbrev, 
+                       _gen_relation, _gen_scode, _gen_vlan, _get_from_block_data, 
+                       _icode_to_fcode, _if_flags_to_pcap_flags, _install_bpf_program, 
                        _libpcap_AVersionNumber, _libpcap_AVersionString, _linktype_to_dlt, 
-                       _main, _max_count, _max_length, _parse_command_line, _pcap__create_buffer, 
-                       _pcap__delete_buffer, _pcap__flush_buffer, _pcap__scan_buffer, 
-                       _pcap__scan_bytes, _pcap__scan_string, _pcap__switch_to_buffer, 
-                       _pcap_activate, _pcap_add_if, _pcap_add_if_info, _pcap_add_proc_info, 
-                       _pcap_add_proc_info_uuid, _pcap_add_to_pcaps_to_close, _pcap_alloc, 
-                       _pcap_alloc_dumper, _pcap_apple_set_exthdr, _pcap_breakloop, 
+                       _pcap__create_buffer, _pcap__delete_buffer, _pcap__flush_buffer, 
+                       _pcap__scan_buffer, _pcap__scan_bytes, _pcap__scan_string, 
+                       _pcap__switch_to_buffer, _pcap_activate, _pcap_add_if, _pcap_add_if_info, 
+                       _pcap_add_proc_info, _pcap_add_proc_info_uuid, _pcap_add_to_pcaps_to_close, 
+                       _pcap_alloc, _pcap_alloc_dumper, _pcap_apple_set_exthdr, _pcap_breakloop, 
                        _pcap_can_set_rfmon, _pcap_check_activated, _pcap_check_header, 
                        _pcap_cleanup_live_common, _pcap_cleanup_pktap_interface, 
                        _pcap_clear_if_infos, _pcap_clear_proc_infos, _pcap_close, 
@@ -102,7 +99,6 @@ exports:
                        _pcap_tstamp_type_val_to_description, _pcap_tstamp_type_val_to_name, 
                        _pcapng_update_block_length, _pcnapng_block_iterate_name_records, 
                        _pcnapng_block_iterate_options, _pktap_activate, _pktap_cleanup, 
-                       _pktap_create, _sappend, _sdup, _sf_cleanup, _signal_handler, 
-                       _skywalk_create, _snap_len, _swap_pseudo_headers, _truncation, 
-                       _verbosity, _want_pktap ]
+                       _pktap_create, _sappend, _sdup, _sf_cleanup, _skywalk_create, 
+                       _swap_pseudo_headers ]
 ...

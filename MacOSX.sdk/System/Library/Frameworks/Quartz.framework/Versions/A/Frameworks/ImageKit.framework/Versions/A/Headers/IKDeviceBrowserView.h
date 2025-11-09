@@ -40,7 +40,7 @@
 @end
 
 
-typedef NS_ENUM(NSInteger, IKDeviceBrowserViewDisplayMode)
+typedef NS_CLOSED_ENUM(NSInteger, IKDeviceBrowserViewDisplayMode)
 {
     IKDeviceBrowserViewDisplayModeTable,
     IKDeviceBrowserViewDisplayModeOutline,

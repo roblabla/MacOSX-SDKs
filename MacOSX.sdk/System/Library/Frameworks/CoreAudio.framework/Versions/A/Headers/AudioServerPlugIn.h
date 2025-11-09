@@ -93,7 +93,7 @@
 #pragma mark -
 #pragma mark Includes
 
-#include <CoreAudio/CoreAudioTypes.h>
+#include <CoreAudioTypes/CoreAudioTypes.h>
 #include <CoreAudio/AudioHardwareBase.h>
 #include <CoreFoundation/CoreFoundation.h>
 #if COREFOUNDATION_CFPLUGINCOM_SEPARATE

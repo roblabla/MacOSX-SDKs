@@ -62,7 +62,7 @@ typedef NS_ENUM(NSUInteger, MTLPrimitiveTopologyClass) {
     MTLPrimitiveTopologyClassPoint = 1,
     MTLPrimitiveTopologyClassLine = 2,
     MTLPrimitiveTopologyClassTriangle = 3,
-} API_AVAILABLE(macos(10.11)) API_UNAVAILABLE(ios);
+} API_AVAILABLE(macos(10.11), ios(12.0));
 
 typedef NS_ENUM(NSUInteger, MTLTessellationPartitionMode) {
     MTLTessellationPartitionModePow2 = 0,
@@ -156,7 +156,7 @@ MTL_EXPORT API_AVAILABLE(macos(10.11), ios(8.0))
 @property (nonatomic) MTLPixelFormat depthAttachmentPixelFormat;
 @property (nonatomic) MTLPixelFormat stencilAttachmentPixelFormat;
 
-@property (readwrite, nonatomic) MTLPrimitiveTopologyClass inputPrimitiveTopology API_AVAILABLE(macos(10.11)) API_UNAVAILABLE(ios);
+@property (readwrite, nonatomic) MTLPrimitiveTopologyClass inputPrimitiveTopology API_AVAILABLE(macos(10.11), ios(12.0)) API_UNAVAILABLE(tvos);
 
 @property (readwrite, nonatomic) MTLTessellationPartitionMode tessellationPartitionMode API_AVAILABLE(macos(10.12), ios(10.0));
 @property (readwrite, nonatomic) NSUInteger maxTessellationFactor API_AVAILABLE(macos(10.12), ios(10.0));

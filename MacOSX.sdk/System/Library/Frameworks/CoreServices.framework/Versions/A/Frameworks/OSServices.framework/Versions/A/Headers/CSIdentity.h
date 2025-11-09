@@ -20,7 +20,7 @@
 #endif
 
 #ifndef __CSIDENTITYBASE__
-#if TARGET_OS_IPHONE && (TARGET_OS_EMBEDDED || TARGET_OS_SIMULATOR || !0)
+#if TARGET_OS_IPHONE && (TARGET_OS_EMBEDDED || TARGET_OS_SIMULATOR || !TARGET_OS_MACCATALYST)
 #include <CoreServices/CSIdentityBase.h>
 #else
 #include <OSServices/CSIdentityBase.h>
@@ -28,7 +28,7 @@
 #endif
 
 #ifndef __CSIDENTITYAUTHORITY__
-#if TARGET_OS_IPHONE && (TARGET_OS_EMBEDDED || TARGET_OS_SIMULATOR || !0)
+#if TARGET_OS_IPHONE && (TARGET_OS_EMBEDDED || TARGET_OS_SIMULATOR || !TARGET_OS_MACCATALYST)
 #include <CoreServices/CSIdentityAuthority.h>
 #else
 #include <OSServices/CSIdentityAuthority.h>
@@ -116,7 +116,7 @@ typedef struct __CSIdentityQuery*       CSIdentityQueryRef;
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
-extern const CFStringRef kCSIdentityGeneratePosixName                __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_NA);
+extern const CFStringRef kCSIdentityGeneratePosixName                API_AVAILABLE( macos(10.5) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 /*
@@ -182,7 +182,7 @@ typedef CFOptionFlags                   CSIdentityFlags;
  *    Non-Carbon CFM:   not available
  */
 extern CFTypeID 
-CSIdentityGetTypeID(void)                                     __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_5_0);
+CSIdentityGetTypeID(void)                                     API_AVAILABLE( ios(5.0), macos(10.5), tvos(9.0), watchos(1.0) );
 
 
 
@@ -250,7 +250,7 @@ CSIdentityCreate(
   CFStringRef              fullName,
   CFStringRef              posixName,
   CSIdentityFlags          flags,
-  CSIdentityAuthorityRef   authority)                         __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_NA);
+  CSIdentityAuthorityRef   authority)                         API_AVAILABLE( macos(10.5) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 
@@ -283,7 +283,7 @@ CSIdentityCreate(
 extern CSIdentityRef 
 CSIdentityCreateCopy(
   CFAllocatorRef   allocator,
-  CSIdentityRef    identity)                                  __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_5_0);
+  CSIdentityRef    identity)                                  API_AVAILABLE( ios(5.0), macos(10.5), tvos(9.0), watchos(1.0) );
 
 
 
@@ -315,7 +315,7 @@ CSIdentityCreateCopy(
  *    Non-Carbon CFM:   not available
  */
 extern CSIdentityClass 
-CSIdentityGetClass(CSIdentityRef identity)                    __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_5_0);
+CSIdentityGetClass(CSIdentityRef identity)                    API_AVAILABLE( ios(5.0), macos(10.5), tvos(9.0), watchos(1.0) );
 
 
 
@@ -342,7 +342,7 @@ CSIdentityGetClass(CSIdentityRef identity)                    __OSX_AVAILABLE_ST
  *    Non-Carbon CFM:   not available
  */
 extern CSIdentityAuthorityRef 
-CSIdentityGetAuthority(CSIdentityRef identity)                __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_5_0);
+CSIdentityGetAuthority(CSIdentityRef identity)                API_AVAILABLE( ios(5.0), macos(10.5), tvos(9.0), watchos(1.0) );
 
 
 
@@ -370,7 +370,7 @@ CSIdentityGetAuthority(CSIdentityRef identity)                __OSX_AVAILABLE_ST
  *    Non-Carbon CFM:   not available
  */
 extern CFUUIDRef 
-CSIdentityGetUUID(CSIdentityRef identity)                     __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_NA);
+CSIdentityGetUUID(CSIdentityRef identity)                     API_AVAILABLE( macos(10.5) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 
@@ -402,7 +402,7 @@ CSIdentityGetUUID(CSIdentityRef identity)                     __OSX_AVAILABLE_ST
  *    Non-Carbon CFM:   not available
  */
 extern CFStringRef 
-CSIdentityGetFullName(CSIdentityRef identity)                 __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_5_0);
+CSIdentityGetFullName(CSIdentityRef identity)                 API_AVAILABLE( ios(5.0), macos(10.5), tvos(9.0), watchos(1.0) );
 
 
 
@@ -429,7 +429,7 @@ CSIdentityGetFullName(CSIdentityRef identity)                 __OSX_AVAILABLE_ST
  *    Non-Carbon CFM:   not available
  */
 extern id_t 
-CSIdentityGetPosixID(CSIdentityRef identity)                  __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_NA);
+CSIdentityGetPosixID(CSIdentityRef identity)                  API_AVAILABLE( macos(10.5) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 
@@ -462,7 +462,7 @@ CSIdentityGetPosixID(CSIdentityRef identity)                  __OSX_AVAILABLE_ST
  *    Non-Carbon CFM:   not available
  */
 extern CFStringRef 
-CSIdentityGetPosixName(CSIdentityRef identity)                __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_5_0);
+CSIdentityGetPosixName(CSIdentityRef identity)                API_AVAILABLE( ios(5.0), macos(10.5), tvos(9.0), watchos(1.0) );
 
 
 
@@ -491,7 +491,7 @@ CSIdentityGetPosixName(CSIdentityRef identity)                __OSX_AVAILABLE_ST
  *    Non-Carbon CFM:   not available
  */
 extern CFStringRef 
-CSIdentityGetEmailAddress(CSIdentityRef identity)             __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_NA);
+CSIdentityGetEmailAddress(CSIdentityRef identity)             API_AVAILABLE( macos(10.5) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 
@@ -521,7 +521,7 @@ CSIdentityGetEmailAddress(CSIdentityRef identity)             __OSX_AVAILABLE_ST
  *    Non-Carbon CFM:   not available
  */
 extern CFURLRef 
-CSIdentityGetImageURL(CSIdentityRef identity)                 __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_NA);
+CSIdentityGetImageURL(CSIdentityRef identity)                 API_AVAILABLE( macos(10.5) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 
@@ -550,7 +550,7 @@ CSIdentityGetImageURL(CSIdentityRef identity)                 __OSX_AVAILABLE_ST
  *    Non-Carbon CFM:   not available
  */
 extern CFDataRef 
-CSIdentityGetImageData(CSIdentityRef identity)                __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_NA);
+CSIdentityGetImageData(CSIdentityRef identity)                API_AVAILABLE( macos(10.5) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 
@@ -579,7 +579,7 @@ CSIdentityGetImageData(CSIdentityRef identity)                __OSX_AVAILABLE_ST
  *    Non-Carbon CFM:   not available
  */
 extern CFStringRef 
-CSIdentityGetImageDataType(CSIdentityRef identity)            __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_NA);
+CSIdentityGetImageDataType(CSIdentityRef identity)            API_AVAILABLE( macos(10.5) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 
@@ -614,7 +614,7 @@ CSIdentityGetImageDataType(CSIdentityRef identity)            __OSX_AVAILABLE_ST
  *    Non-Carbon CFM:   not available
  */
 extern CFArrayRef 
-CSIdentityGetAliases(CSIdentityRef identity)                  __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_NA);
+CSIdentityGetAliases(CSIdentityRef identity)                  API_AVAILABLE( macos(10.5) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 
@@ -647,7 +647,7 @@ CSIdentityGetAliases(CSIdentityRef identity)                  __OSX_AVAILABLE_ST
 extern Boolean 
 CSIdentityIsMemberOfGroup(
   CSIdentityRef   identity,
-  CSIdentityRef   group)                                      __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_NA);
+  CSIdentityRef   group)                                      API_AVAILABLE( macos(10.5) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 
@@ -674,7 +674,7 @@ CSIdentityIsMemberOfGroup(
  *    Non-Carbon CFM:   not available
  */
 extern Boolean 
-CSIdentityIsHidden(CSIdentityRef identity)                    __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_NA);
+CSIdentityIsHidden(CSIdentityRef identity)                    API_AVAILABLE( macos(10.5) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 
@@ -719,7 +719,7 @@ CSIdentityIsHidden(CSIdentityRef identity)                    __OSX_AVAILABLE_ST
 extern CFDataRef 
 CSIdentityCreatePersistentReference(
   CFAllocatorRef   allocator,
-  CSIdentityRef    identity)                                  __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_5_0);
+  CSIdentityRef    identity)                                  API_AVAILABLE( ios(5.0), macos(10.5), tvos(9.0), watchos(1.0) );
 
 
 
@@ -758,7 +758,7 @@ CSIdentityCreatePersistentReference(
  *    Non-Carbon CFM:   not available
  */
 extern Boolean 
-CSIdentityIsEnabled(CSIdentityRef user)                       __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_NA);
+CSIdentityIsEnabled(CSIdentityRef user)                       API_AVAILABLE( macos(10.5) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 
@@ -790,7 +790,7 @@ CSIdentityIsEnabled(CSIdentityRef user)                       __OSX_AVAILABLE_ST
 extern Boolean 
 CSIdentityAuthenticateUsingPassword(
   CSIdentityRef   user,
-  CFStringRef     password)                                   __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_NA);
+  CFStringRef     password)                                   API_AVAILABLE( macos(10.5) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 
@@ -823,7 +823,7 @@ CSIdentityAuthenticateUsingPassword(
  *    Non-Carbon CFM:   not available
  */
 extern SecCertificateRef 
-CSIdentityGetCertificate(CSIdentityRef user)                  __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_NA);
+CSIdentityGetCertificate(CSIdentityRef user)                  API_AVAILABLE( macos(10.5) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 
@@ -866,7 +866,7 @@ CSIdentityGetCertificate(CSIdentityRef user)                  __OSX_AVAILABLE_ST
 extern CSIdentityQueryRef 
 CSIdentityCreateGroupMembershipQuery(
   CFAllocatorRef   allocator,
-  CSIdentityRef    group)                                     __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_NA);
+  CSIdentityRef    group)                                     API_AVAILABLE( macos(10.5) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 
@@ -904,7 +904,7 @@ CSIdentityCreateGroupMembershipQuery(
 extern void 
 CSIdentitySetFullName(
   CSIdentityRef   identity,
-  CFStringRef     fullName)                                   __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_NA);
+  CFStringRef     fullName)                                   API_AVAILABLE( macos(10.5) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 
@@ -937,7 +937,7 @@ CSIdentitySetFullName(
 extern void 
 CSIdentitySetEmailAddress(
   CSIdentityRef   identity,
-  CFStringRef     emailAddress)       /* can be NULL */       __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_NA);
+  CFStringRef     emailAddress)       /* can be NULL */       API_AVAILABLE( macos(10.5) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 
@@ -970,7 +970,7 @@ CSIdentitySetEmailAddress(
 extern void 
 CSIdentitySetImageURL(
   CSIdentityRef   identity,
-  CFURLRef        url)            /* can be NULL */           __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_NA);
+  CFURLRef        url)            /* can be NULL */           API_AVAILABLE( macos(10.5) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 
@@ -1007,7 +1007,7 @@ extern void
 CSIdentitySetImageData(
   CSIdentityRef   identity,
   CFDataRef       imageData,           /* can be NULL */
-  CFStringRef     imageDataType)       /* can be NULL */      __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_NA);
+  CFStringRef     imageDataType)       /* can be NULL */      API_AVAILABLE( macos(10.5) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 
@@ -1039,7 +1039,7 @@ CSIdentitySetImageData(
 extern void 
 CSIdentityAddAlias(
   CSIdentityRef   identity,
-  CFStringRef     alias)                                      __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_NA);
+  CFStringRef     alias)                                      API_AVAILABLE( macos(10.5) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 
@@ -1071,7 +1071,7 @@ CSIdentityAddAlias(
 extern void 
 CSIdentityRemoveAlias(
   CSIdentityRef   identity,
-  CFStringRef     alias)                                      __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_NA);
+  CFStringRef     alias)                                      API_AVAILABLE( macos(10.5) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 
@@ -1110,7 +1110,7 @@ CSIdentityRemoveAlias(
 extern void 
 CSIdentityAddMember(
   CSIdentityRef   group,
-  CSIdentityRef   member)                                     __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_NA);
+  CSIdentityRef   member)                                     API_AVAILABLE( macos(10.5) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 
@@ -1142,7 +1142,7 @@ CSIdentityAddMember(
 extern void 
 CSIdentityRemoveMember(
   CSIdentityRef   group,
-  CSIdentityRef   member)                                     __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_NA);
+  CSIdentityRef   member)                                     API_AVAILABLE( macos(10.5) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 
@@ -1184,7 +1184,7 @@ CSIdentityRemoveMember(
 extern void 
 CSIdentitySetIsEnabled(
   CSIdentityRef   user,
-  Boolean         isEnabled)                                  __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_NA);
+  Boolean         isEnabled)                                  API_AVAILABLE( macos(10.5) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 
@@ -1220,7 +1220,7 @@ CSIdentitySetIsEnabled(
 extern void 
 CSIdentitySetPassword(
   CSIdentityRef   user,
-  CFStringRef     password)       /* can be NULL */           __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_NA);
+  CFStringRef     password)       /* can be NULL */           API_AVAILABLE( macos(10.5) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 
@@ -1256,7 +1256,7 @@ CSIdentitySetPassword(
 extern void 
 CSIdentitySetCertificate(
   CSIdentityRef       user,
-  SecCertificateRef   certificate)       /* can be NULL */    __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_NA);
+  SecCertificateRef   certificate)       /* can be NULL */    API_AVAILABLE( macos(10.5) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 
@@ -1288,7 +1288,7 @@ CSIdentitySetCertificate(
  *    Non-Carbon CFM:   not available
  */
 extern void 
-CSIdentityDelete(CSIdentityRef identity)                      __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_NA);
+CSIdentityDelete(CSIdentityRef identity)                      API_AVAILABLE( macos(10.5) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 
@@ -1340,7 +1340,7 @@ extern Boolean
 CSIdentityCommit(
   CSIdentityRef      identity,
   AuthorizationRef   authorization,       /* can be NULL */
-  CFErrorRef *       error)               /* can be NULL */   __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_NA);
+  CFErrorRef *       error)               /* can be NULL */   API_AVAILABLE( macos(10.5) ) API_UNAVAILABLE( ios, tvos, watchos );
 	
 #endif // TARGET_OS_OSX
 
@@ -1463,7 +1463,7 @@ CSIdentityCommitAsynchronously(
   const CSIdentityClientContext *  clientContext,
   CFRunLoopRef                     runLoop,
   CFStringRef                      runLoopMode,
-  AuthorizationRef                 authorization)       /* can be NULL */ __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_NA);
+  AuthorizationRef                 authorization)       /* can be NULL */ API_AVAILABLE( macos(10.5) ) API_UNAVAILABLE( ios, tvos, watchos );
 #endif // TARGET_OS_OSX
 
 
@@ -1490,7 +1490,7 @@ CSIdentityCommitAsynchronously(
  *    Non-Carbon CFM:   not available
  */
 extern Boolean 
-CSIdentityIsCommitting(CSIdentityRef identity)                __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_NA);
+CSIdentityIsCommitting(CSIdentityRef identity)                API_AVAILABLE( macos(10.5) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 
@@ -1521,7 +1521,7 @@ CSIdentityIsCommitting(CSIdentityRef identity)                __OSX_AVAILABLE_ST
  *    Non-Carbon CFM:   not available
  */
 extern void 
-CSIdentityRemoveClient(CSIdentityRef identity)                __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_NA);
+CSIdentityRemoveClient(CSIdentityRef identity)                API_AVAILABLE( macos(10.5) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 

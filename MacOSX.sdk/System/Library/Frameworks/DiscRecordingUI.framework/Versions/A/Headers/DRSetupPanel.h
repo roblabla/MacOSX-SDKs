@@ -36,14 +36,18 @@
 @interface DRSetupPanel : NSPanel
 {
     /*All instance variables are private*/
-	IBOutlet NSButton*		_ok;
-	IBOutlet NSButton*		_cancel;
-	IBOutlet NSButton*		_eject;
-	IBOutlet NSTextField*	_userMessage;
-	IBOutlet NSImageView*	_icon;
-	IBOutlet id				_deviceChooser;
-	id						_sp_privateStorage;
-	void*					_reservedSetupPanel[2];
+@private
+    IBOutlet NSButton*      _eject;
+    IBOutlet NSImageView*   _icon;
+    IBOutlet id             _deviceChooser;
+    void*                   _reservedSetupPanel[2];
+    
+    @package
+    IBOutlet NSTextField*   _userMessage;
+    id                      _sp_privateStorage;
+    IBOutlet NSButton*      _ok;
+    IBOutlet NSButton*      _cancel;
+
 }
 
 /* ----------------------------------------------------------------------------- */

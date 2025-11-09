@@ -3,7 +3,7 @@
  
      Contains:   TextEncoding-related types and constants, and prototypes for related functions
  
-     Copyright:  © 1995-2018 Apple Inc. All rights reserved.
+     Copyright:  Â© 1995-2019 Apple Inc. All rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -175,7 +175,8 @@ enum {
   kTextEncodingUnicodeV8_0      = 0x0112, /* Adds LARI SIGN, lowercase Cherokee, emoji modifiers, CJK Ext E, 6 scripts.*/
   kTextEncodingUnicodeV9_0      = 0x0113, /* Adds Tangut and 5 other scripts, 72 emoji.*/
   kTextEncodingUnicodeV10_0     = 0x0114, /* Adds CJK Ext F, Hentaigana, 4 scripts, Bitcoin sign, 56 emoji...*/
-  kTextEncodingUnicodeV11_0     = 0x0115  /* Adds Georgian Mtavruli capitals, 7 scripts, Copyleft, 66 emoji...*/
+  kTextEncodingUnicodeV11_0     = 0x0115, /* Adds Georgian Mtavruli capitals, 7 scripts, Copyleft, 66 emoji...*/
+  kTextEncodingUnicodeV12_1     = 0x0116  /* Adds 4 new scripts, more letters for 5, Marca reg., 61 emoji...*/
 };
 
 /* ISO 8-bit and 7-bit encodings begin at 0x200*/
@@ -1032,9 +1033,9 @@ GetTextEncodingFromScriptInfo(
  *      language code, if the language can be unambiguously derived
  *      from the text encoding specification, for example, Japanese,
  *      and you did not set the parameter to NULL. If you do not
- *      specify NULL on input and the language is ambiguousÑthat is,
+ *      specify NULL on input and the language is ambiguousâ€”that is,
  *      the function cannot accurately derive it from the text encoding
- *      specificationÑthe function returns a value of
+ *      specificationâ€”the function returns a value of
  *      kTextLanguageDontCare.
  *  
  *  Availability:

@@ -33,7 +33,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 	As of OS X 10.10 and iOS 8.0 AVAssetWriterInput can also be used to create tracks that are not self-contained.  Such tracks reference sample data that is located in another file. This is currently supported only for instances of AVAssetWriterInput attached to an instance of AVAssetWriter that writes files of type AVFileTypeQuickTimeMovie.
  */
-NS_CLASS_AVAILABLE(10_7, 4_1)
+API_AVAILABLE(macos(10.7), ios(4.1), tvos(9.0)) API_UNAVAILABLE(watchos)
 @interface AVAssetWriterInput : NSObject
 {
 @private
@@ -83,7 +83,7 @@ AV_INIT_UNAVAILABLE
  
 	An NSInvalidArgumentException will be thrown if the media type of the format description does not match the media type string passed into this method.
  */
-+ (instancetype)assetWriterInputWithMediaType:(AVMediaType)mediaType outputSettings:(nullable NSDictionary<NSString *, id> *)outputSettings sourceFormatHint:(nullable CMFormatDescriptionRef)sourceFormatHint NS_AVAILABLE(10_8, 6_0);
++ (instancetype)assetWriterInputWithMediaType:(AVMediaType)mediaType outputSettings:(nullable NSDictionary<NSString *, id> *)outputSettings sourceFormatHint:(nullable CMFormatDescriptionRef)sourceFormatHint API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 
 /*!
  @method initWithMediaType:outputSettings:
@@ -127,7 +127,7 @@ AV_INIT_UNAVAILABLE
  
 	An NSInvalidArgumentException will be thrown if the media type of the format description does not match the media type string passed into this method.
  */
-- (instancetype)initWithMediaType:(AVMediaType)mediaType outputSettings:(nullable NSDictionary<NSString *, id> *)outputSettings sourceFormatHint:(nullable CMFormatDescriptionRef)sourceFormatHint NS_AVAILABLE(10_8, 6_0) NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithMediaType:(AVMediaType)mediaType outputSettings:(nullable NSDictionary<NSString *, id> *)outputSettings sourceFormatHint:(nullable CMFormatDescriptionRef)sourceFormatHint API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0)) API_UNAVAILABLE(watchos) NS_DESIGNATED_INITIALIZER;
 
 /*!
  @property mediaType
@@ -157,7 +157,7 @@ AV_INIT_UNAVAILABLE
  @discussion
 	AVAssetWriterInput may be able to use this hint to fill in missing output settings or perform more upfront validation.  To guarantee successful file writing, clients who specify a format hint should ensure that subsequently-appended media data are of the specified format.
  */
-@property (nonatomic, readonly, nullable) __attribute__((NSObject)) CMFormatDescriptionRef sourceFormatHint NS_AVAILABLE(10_8, 6_0);
+@property (nonatomic, readonly, nullable) __attribute__((NSObject)) CMFormatDescriptionRef sourceFormatHint API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 
 /*!
  @property metadata
@@ -314,7 +314,7 @@ AV_INIT_UNAVAILABLE
 
 	This property cannot be set after writing on the receiver's AVAssetWriter has started.
  */
-@property (nonatomic, copy, nullable) NSString *languageCode NS_AVAILABLE(10_9, 7_0);
+@property (nonatomic, copy, nullable) NSString *languageCode API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 
 /*!
  @property extendedLanguageTag
@@ -326,7 +326,7 @@ AV_INIT_UNAVAILABLE
 
 	This property cannot be set after writing on the receiver's AVAssetWriter has started.	
  */
-@property (nonatomic, copy, nullable) NSString *extendedLanguageTag NS_AVAILABLE(10_9, 7_0);
+@property (nonatomic, copy, nullable) NSString *extendedLanguageTag API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 
 @end
 
@@ -343,7 +343,7 @@ AV_INIT_UNAVAILABLE
 
 	This property cannot be set after writing on the receiver's AVAssetWriter has started.
 */
-@property (nonatomic) CGSize naturalSize NS_AVAILABLE(10_9, 7_0);
+@property (nonatomic) CGSize naturalSize API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 
 /*!
  @property transform
@@ -372,7 +372,7 @@ AV_INIT_UNAVAILABLE
  
 	This property cannot be set after writing on the receiver's AVAssetWriter has started.
  */
-@property (nonatomic) float preferredVolume NS_AVAILABLE(10_9, 7_0);
+@property (nonatomic) float preferredVolume API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 
 @end
 
@@ -389,7 +389,7 @@ AV_INIT_UNAVAILABLE
 
 	This property cannot be set after writing on the receiver's AVAssetWriter has started.
  */
-@property (nonatomic) BOOL marksOutputTrackAsEnabled NS_AVAILABLE(10_9, 7_0);
+@property (nonatomic) BOOL marksOutputTrackAsEnabled API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 
 /*!
  @property mediaTimeScale
@@ -401,7 +401,7 @@ AV_INIT_UNAVAILABLE
 
 	This property cannot be set after writing has started.
  */
-@property (nonatomic) CMTimeScale mediaTimeScale NS_AVAILABLE(10_7, 4_3);
+@property (nonatomic) CMTimeScale mediaTimeScale API_AVAILABLE(macos(10.7), ios(4.3), tvos(9.0)) API_UNAVAILABLE(watchos);
 
 /*!
  @property preferredMediaChunkDuration
@@ -417,7 +417,7 @@ AV_INIT_UNAVAILABLE
 
 	This property cannot be set after -startWriting has been called on the receiver.
  */
-@property (nonatomic) CMTime preferredMediaChunkDuration NS_AVAILABLE(10_10, 8_0);
+@property (nonatomic) CMTime preferredMediaChunkDuration API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 
 /*!
  @property preferredMediaChunkAlignment
@@ -429,7 +429,7 @@ AV_INIT_UNAVAILABLE
  
 	This property cannot be set after -startWriting has been called on the receiver.
  */
-@property (nonatomic) NSInteger preferredMediaChunkAlignment NS_AVAILABLE(10_10, 8_0);
+@property (nonatomic) NSInteger preferredMediaChunkAlignment API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 
 /*!
  @property sampleReferenceBaseURL
@@ -449,21 +449,21 @@ AV_INIT_UNAVAILABLE
  
 	This property cannot be set after -startWriting has been called on the receiver.
  */
-@property (nonatomic, copy, nullable) NSURL *sampleReferenceBaseURL NS_AVAILABLE(10_10, 8_0);
+@property (nonatomic, copy, nullable) NSURL *sampleReferenceBaseURL API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 
-typedef NSString *AVAssetWriterInputMediaDataLocation NS_STRING_ENUM NS_AVAILABLE(10_13, 11_0);
+typedef NSString *AVAssetWriterInputMediaDataLocation NS_STRING_ENUM API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0)) API_UNAVAILABLE(watchos);
 
 /*!
  @constant AVAssetWriterInputMediaDataLocationInterleavedWithMainMediaData
 	Indicates that the media data should be interleaved with all other media data with this constant.
  */
-AVF_EXPORT AVAssetWriterInputMediaDataLocation const AVAssetWriterInputMediaDataLocationInterleavedWithMainMediaData NS_AVAILABLE(10_13, 11_0);
+AVF_EXPORT AVAssetWriterInputMediaDataLocation const AVAssetWriterInputMediaDataLocationInterleavedWithMainMediaData API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0)) API_UNAVAILABLE(watchos);
 
 /*!
  @constant AVAssetWriterInputMediaDataLocationBeforeMainMediaDataNotInterleaved
 	Indicates that the media data should be laid out before all the media data with AVAssetWriterInputMediaDataLocationInterleavedWithMainMediaData and not be interleaved.
  */
-AVF_EXPORT AVAssetWriterInputMediaDataLocation const AVAssetWriterInputMediaDataLocationBeforeMainMediaDataNotInterleaved NS_AVAILABLE(10_13, 11_0);
+AVF_EXPORT AVAssetWriterInputMediaDataLocation const AVAssetWriterInputMediaDataLocationBeforeMainMediaDataNotInterleaved API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0)) API_UNAVAILABLE(watchos);
 
 /*!
  @property mediaDataLocation
@@ -482,7 +482,7 @@ AVF_EXPORT AVAssetWriterInputMediaDataLocation const AVAssetWriterInputMediaData
 
 	This property cannot be set after -startWriting has been called on the receiver.
  */
-@property (nonatomic, copy) AVAssetWriterInputMediaDataLocation mediaDataLocation NS_AVAILABLE(10_13, 11_0);
+@property (nonatomic, copy) AVAssetWriterInputMediaDataLocation mediaDataLocation API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0)) API_UNAVAILABLE(watchos);
 
 @end
 
@@ -502,7 +502,7 @@ AVF_EXPORT AVAssetWriterInputMediaDataLocation const AVAssetWriterInputMediaData
  @discussion
 	If the type of association requires tracks of specific media types that don't match the media types of the inputs, or if the output file type does not support track associations, -canAddTrackAssociationWithTrackOfInput:type: will return NO.
  */
-- (BOOL)canAddTrackAssociationWithTrackOfInput:(AVAssetWriterInput *)input type:(NSString *)trackAssociationType NS_AVAILABLE(10_9, 7_0);
+- (BOOL)canAddTrackAssociationWithTrackOfInput:(AVAssetWriterInput *)input type:(NSString *)trackAssociationType API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 
 /*!
  @method addTrackAssociationWithTrackOfInput:type:
@@ -519,7 +519,7 @@ AVF_EXPORT AVAssetWriterInputMediaDataLocation const AVAssetWriterInputMediaData
 
 	Track associations cannot be added after writing on the receiver's AVAssetWriter has started.
  */
-- (void)addTrackAssociationWithTrackOfInput:(AVAssetWriterInput *)input type:(NSString *)trackAssociationType NS_AVAILABLE(10_9, 7_0);
+- (void)addTrackAssociationWithTrackOfInput:(AVAssetWriterInput *)input type:(NSString *)trackAssociationType API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 
 @end
 
@@ -546,7 +546,7 @@ AVF_EXPORT AVAssetWriterInputMediaDataLocation const AVAssetWriterInputMediaData
 
 	This property cannot be set after writing on the receiver's AVAssetWriter has started.
  */
-@property (nonatomic) BOOL performsMultiPassEncodingIfSupported NS_AVAILABLE(10_10, 8_0);
+@property (nonatomic) BOOL performsMultiPassEncodingIfSupported API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 
 /*!
  @property canPerformMultiplePasses
@@ -562,7 +562,7 @@ AVF_EXPORT AVAssetWriterInputMediaDataLocation const AVAssetWriterInputMediaData
  
 	This property is key-value observable.
  */
-@property (nonatomic, readonly) BOOL canPerformMultiplePasses NS_AVAILABLE(10_10, 8_0);
+@property (nonatomic, readonly) BOOL canPerformMultiplePasses API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 
 /*!
  @property currentPassDescription
@@ -578,7 +578,7 @@ AVF_EXPORT AVAssetWriterInputMediaDataLocation const AVAssetWriterInputMediaData
  
 	This property is key-value observable.  Observers should not assume that they will be notified of changes on a specific thread.
  */
-@property (readonly, nullable) AVAssetWriterInputPassDescription *currentPassDescription NS_AVAILABLE(10_10, 8_0);
+@property (readonly, nullable) AVAssetWriterInputPassDescription *currentPassDescription API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 
 /*!
  @method respondToEachPassDescriptionOnQueue:usingBlock:
@@ -601,7 +601,7 @@ AVF_EXPORT AVAssetWriterInputMediaDataLocation const AVAssetWriterInputMediaData
  
 	Before calling this method, you must ensure that the receiver is attached to an AVAssetWriter via a prior call to -addInput: and that -startWriting has been called on the asset writer.
  */
-- (void)respondToEachPassDescriptionOnQueue:(dispatch_queue_t)queue usingBlock:(dispatch_block_t)block NS_AVAILABLE(10_10, 8_0);
+- (void)respondToEachPassDescriptionOnQueue:(dispatch_queue_t)queue usingBlock:(dispatch_block_t)block API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 
 /*!
  @method markCurrentPassAsFinished
@@ -621,7 +621,7 @@ AVF_EXPORT AVAssetWriterInputMediaDataLocation const AVAssetWriterInputMediaData
 
 	Before calling this method, you must ensure that the receiver is attached to an AVAssetWriter via a prior call to -addInput: and that -startWriting has been called on the asset writer.
  */
-- (void)markCurrentPassAsFinished NS_AVAILABLE(10_10, 8_0);
+- (void)markCurrentPassAsFinished API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 
 @end
 
@@ -633,7 +633,7 @@ AVF_EXPORT AVAssetWriterInputMediaDataLocation const AVAssetWriterInputMediaData
  @abstract
 	Defines an interface for querying information about the requirements of the current pass, such as the time ranges of media data to append.
  */
-NS_CLASS_AVAILABLE(10_10, 8_0)
+API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 @interface AVAssetWriterInputPassDescription : NSObject
 {
 @private
@@ -664,7 +664,7 @@ AV_INIT_UNAVAILABLE
  @discussion
 	Instances of AVAssetWriterInputPixelBufferAdaptor provide a CVPixelBufferPool that can be used to allocate pixel buffers for writing to the output file.  Using the provided pixel buffer pool for buffer allocation is typically more efficient than appending pixel buffers allocated using a separate pool.
  */
-NS_CLASS_AVAILABLE(10_7, 4_1)
+API_AVAILABLE(macos(10.7), ios(4.1), tvos(9.0)) API_UNAVAILABLE(watchos)
 @interface AVAssetWriterInputPixelBufferAdaptor : NSObject
 {
 @private
@@ -790,7 +790,7 @@ AV_INIT_UNAVAILABLE
 	Defines an interface for writing metadata, packaged as instances of AVTimedMetadataGroup, to a single AVAssetWriterInput object.
  */
 
-NS_CLASS_AVAILABLE(10_10, 8_0)
+API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 @interface AVAssetWriterInputMetadataAdaptor : NSObject {
     AVAssetWriterInputMetadataAdaptorInternal	*_internal;
 }

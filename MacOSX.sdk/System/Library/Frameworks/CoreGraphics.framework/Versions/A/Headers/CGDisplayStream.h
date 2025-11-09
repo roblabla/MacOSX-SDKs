@@ -192,7 +192,7 @@ CG_EXTERN const CFStringRef  kCGDisplayStreamMinimumFrameTime CG_AVAILABLE_START
  @const kCGDisplayStreamShowCursor
  @discussion Controls whether the cursor is embedded within the provided buffers or not.
 */
-CG_EXTERN const CFStringRef  kCGDisplayStreamShowCursor CG_AVAILABLE_STARTING(10.8);  /* CFBoolean - defaults to true */
+CG_EXTERN const CFStringRef  kCGDisplayStreamShowCursor CG_AVAILABLE_STARTING(10.8);  /* CFBoolean - defaults to false */
 
 /*!
  @const kCGDisplayStreamQueueDepth

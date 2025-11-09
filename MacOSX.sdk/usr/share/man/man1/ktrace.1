@@ -1,6 +1,6 @@
-.\" Copyright (c) 2016, Apple Inc.  All rights reserved.
+.\" Copyright (c) 2016-2018, Apple Inc.  All rights reserved.
 .\"
-.Dd 15 April 2016
+.Dd 5 November 2018
 .Dt KTRACE 1
 .Os "Darwin"
 .Sh NAME
@@ -12,14 +12,19 @@
 .It Nm Cm info
 .\"
 .It Nm Cm trace
-.Op Fl NnrSstu
+.
+.de trace-opts
+.Op Fl ANnrSstu
 .Op Fl R Ar path | Fl E
 .Op Fl C Ar codes-path Op Ar ...
 .Op Fl T Ar timeout
 .Op Fl f Ar filter-desc
 .Op Fl b Ar buffer-size-mb
 .Op Fl x Ar pid-or-process-name Oo Ar ... Oc | Fl p Ar pid-or-process-name Oo Ar ... Oc
+.Op Fl Fl json | Fl Fl csv | Fl Fl ndjson | Fl Fl json-64
 .Op Fl c Ar command Op ...
+..
+.trace-opts
 .\"
 .It Nm Cm dump
 .Op Fl E
@@ -45,6 +50,8 @@
 .It Nm Cm remove
 .\"
 .It Nm Cm reset
+.\"
+.It Nm Cm decode Ar debugid Op Ar debugid Op Ar ...
 .\"
 .It Nm Cm emit
 .Ar debugid
@@ -94,7 +101,10 @@ be used in multiple subcommands.
 Print information about the current configuration of kernel trace.
 .Pp
 .\" TRACE
-.It Cm trace Oo Fl ANnrsStu Oc Oo Fl R Ar path | Fl E Oc Oo Fl T Ar timeout Oc Oo Fl C Ar codes-path Op Ar ... Oc Oo Fl b Ar buffer-size-mb Oc Oo Fl f Ar filter-desc Oc Oo Fl x Ar pid-or-process-name Oo Ar ... Oc | Fl p Ar pid-or-process-name Oo Ar ... Oc Oc Oo Fl c Ar command Oo ... Oc Oc
+.It Xo
+.Cm trace
+.trace-opts
+.Xc
 .Pp
 Print events to
 .Xr stdout 4
@@ -173,6 +183,14 @@ exlusive.  Processes that cannot be attached to are always excluded on release
 kernels.  Similarly, events in the Mach scheduling subclass are included,
 regardless of the this option, to allow tools to maintain thread scheduling
 state machines.
+.It Fl Fl json
+Print events as an array of JSON objects.
+.It Fl Fl csv
+Print events as CSV entries.
+.It Fl Fl ndjson
+Print events as a stream of newline-delimited JSON objects.
+.It Fl Fl json-64
+Print events as JSON objects, with 64-bit numbers.
 .It Fl c Ar command Op ...
 Run the command specified by
 .Ar command
@@ -204,6 +222,9 @@ Use an existing configuration, instead of creating a new configuration.
 .It Fl f Ar filter-desc
 Apply a filter description to events written to the file, controlling which
 events are traced.  See
+.Sx FILTER DESCRIPTIONS
+for details on the syntax of a filter.  If no filter description is provided,
+all events will be traced.
 .It Fl p Ar pid-or-process-name
 Only record events that occur for the process identified by
 .Ar pid
@@ -289,6 +310,11 @@ tracing.
 .\" RESET
 .It Cm reset
 Reset tracing and associated subsystems, including kperf, to their default state.
+.Pp
+.\" DECODE
+.It Cm decode Ar debugid Op debugid Op Ar ...
+Print the components that make up the provided
+.Ar debugids .
 .Pp
 .\" EMIT
 .It Cm emit Ar debugid Op arg1 Op arg2 Op arg3 Op arg4
@@ -475,5 +501,4 @@ subcommand.  This prevents background diagnostic tools from making use of trace.
 .Sh SEE ALSO
 .Xr trace 1 ,
 .Xr fs_usage 1 ,
-.Xr ktfile 1 ,
 .Xr ktrace 5

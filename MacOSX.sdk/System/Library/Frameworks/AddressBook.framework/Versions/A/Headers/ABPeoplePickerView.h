@@ -20,7 +20,7 @@ typedef enum {
 
 @class ABRecord, ABPerson, ABGroup;
 
-
+API_AVAILABLE(macos(10.3)) API_UNAVAILABLE(macCatalyst)
 @interface ABPeoplePickerView : NSView {
 @private
     id _reserved1 __unused;

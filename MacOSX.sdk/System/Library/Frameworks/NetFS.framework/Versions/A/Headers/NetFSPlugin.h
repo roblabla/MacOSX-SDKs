@@ -4,20 +4,16 @@
  *  Copyright (c) 2008-2009 Apple Inc. All rights reserved.
  */
 
-#include <CoreFoundation/CoreFoundation.h>
+#include <NetFS/NetFS.h>
 #include <CoreFoundation/CFPlugInCOM.h>
 
-#include <NetFS/NetFS.h>
+API_UNAVAILABLE_BEGIN(ios, tvos, watchos)
 
 /* NetFS Type UUID: 02FE7D14-4E91-481E-946C-CE233C798CC0 */
 #define kNetFSTypeID (CFUUIDGetConstantUUIDWithBytes(NULL, 0x02, 0xfe, 0x7d, 0x14, 0x4e, 0x91, 0x48, 0x1e, 0x94, 0x6c, 0xce, 0x23, 0x3c, 0x79, 0x8c, 0xc0))
 
 /* NetFS Interface UUID: 8F34B6C4-F2E4-4ECD-8625-E5665811DE37 */
 #define kfs_NetFSMountInterfaceID_V1 (CFUUIDGetConstantUUIDWithBytes(NULL, 0x8f, 0x34, 0xb6, 0xc4, 0xf2, 0xe4, 0x4e, 0xcd, 0x86, 0x25, 0xe5, 0x66, 0x58, 0x11, 0xde, 0x37))
-
-#ifdef __cplusplus
-extern "C" {
-#endif
 
 typedef struct NetFSMountInterface_V1 {
     IUNKNOWN_C_GUTS;
@@ -50,13 +46,12 @@ typedef struct {
     UInt32 _refCount;
 } NetFSInterface;
 
-ULONG NetFSInterface_AddRef(void *);
-ULONG NetFSInterface_Release(void *);
-NetFSInterface *NetFS_CreateInterface(CFUUIDRef factoryID, void *interfaceFTbl);
+NETFS_EXPORT ULONG NetFSInterface_AddRef(void *);
+NETFS_EXPORT ULONG NetFSInterface_Release(void *);
+NETFS_EXPORT NetFSInterface *NetFS_CreateInterface(CFUUIDRef factoryID, void *interfaceFTbl);
 
 /* this cannot be called from a plugin! */
-HRESULT NetFSQueryInterface(void *, REFIID iid, LPVOID *ppv);
+NETFS_EXPORT HRESULT NetFSQueryInterface(void *, REFIID iid, LPVOID *ppv);
 
-#ifdef __cplusplus
-}
-#endif
+API_UNAVAILABLE_END
+

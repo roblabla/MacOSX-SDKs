@@ -6,8 +6,8 @@
  *
  */
 
-#ifndef _IOSURFACE_TYPES_H
-#define _IOSURFACE_TYPES_H
+#ifndef IOSURFACE_TYPES_H
+#define IOSURFACE_TYPES_H
 
 #include <IOSurface/IOSurfaceBase.h>
 

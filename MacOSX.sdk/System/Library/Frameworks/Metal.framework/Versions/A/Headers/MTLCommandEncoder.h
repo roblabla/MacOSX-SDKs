@@ -28,7 +28,7 @@ typedef NS_OPTIONS(NSUInteger, MTLBarrierScope)
 {
     MTLBarrierScopeBuffers = 1 << 0,
     MTLBarrierScopeTextures = 1 << 1,
-    MTLBarrierScopeRenderTargets API_AVAILABLE(macos(10.14)) API_UNAVAILABLE(ios) = 1 << 2,
+    MTLBarrierScopeRenderTargets API_AVAILABLE(macos(10.14), macCatalyst(13.0)) API_UNAVAILABLE(ios) = 1 << 2,
 } API_AVAILABLE(macos(10.14), ios(12.0));
 
 /*!

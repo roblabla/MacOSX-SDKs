@@ -12,7 +12,7 @@
 
 #if TARGET_OS_OSX
 #import <IOSurface/IOSurface.h>
-#elif !TARGET_OS_SIMULATOR
+#elif COREIMAGE_SUPPORTS_IOSURFACE
 #import <IOSurface/IOSurfaceRef.h>
 #endif
 
@@ -21,13 +21,14 @@ NS_ASSUME_NONNULL_BEGIN
 @class CIContext, CIFilterShape, CIColor, CIFilter;
 @class AVDepthData;
 @class AVPortraitEffectsMatte;
+@class AVSemanticSegmentationMatte;
 
 @protocol MTLTexture;
 
 NS_CLASS_AVAILABLE(10_4, 5_0)
 @interface CIImage : NSObject <NSSecureCoding, NSCopying>
 {
-#if TARGET_OS_OSX || 0
+#if TARGET_OS_OSX || TARGET_OS_MACCATALYST
     void *_state;
 #endif
 	void *_priv;
@@ -124,12 +125,20 @@ CORE_IMAGE_EXPORT CIImageOption const kCIImageTextureFormat CI_GL_DEPRECATED_MAC
 CORE_IMAGE_EXPORT CIImageOption const kCIImageAuxiliaryDepth NS_AVAILABLE(10_13, 11_0);
 CORE_IMAGE_EXPORT CIImageOption const kCIImageAuxiliaryDisparity NS_AVAILABLE(10_13, 11_0);
 CORE_IMAGE_EXPORT CIImageOption const kCIImageAuxiliaryPortraitEffectsMatte NS_AVAILABLE(10_14, 12_0);
+CORE_IMAGE_EXPORT CIImageOption const kCIImageAuxiliarySemanticSegmentationSkinMatte NS_AVAILABLE(10_15, 13_0);
+CORE_IMAGE_EXPORT CIImageOption const kCIImageAuxiliarySemanticSegmentationHairMatte NS_AVAILABLE(10_15, 13_0);
+CORE_IMAGE_EXPORT CIImageOption const kCIImageAuxiliarySemanticSegmentationTeethMatte NS_AVAILABLE(10_15, 13_0);
 
 
 /* Creates a new image from the contents of 'image'. */
 + (CIImage *)imageWithCGImage:(CGImageRef)image;
 + (CIImage *)imageWithCGImage:(CGImageRef)image
                       options:(nullable NSDictionary<CIImageOption, id> *)options;
+
+/* Creates a new image from the contents of 'source'. */
++ (CIImage *)imageWithCGImageSource:(CGImageSourceRef)source
+                              index:(size_t)index
+                            options:(nullable NSDictionary<CIImageOption, id> *)dict NS_AVAILABLE(10_15, 13_0);
 
 /* Creates a new image from the contents of 'layer'. */
 + (CIImage *)imageWithCGLayer:(CGLayerRef)layer NS_DEPRECATED_MAC(10_4,10_11);
@@ -190,7 +199,7 @@ CORE_IMAGE_EXPORT CIImageOption const kCIImageAuxiliaryPortraitEffectsMatte NS_A
 + (CIImage *)imageWithCVPixelBuffer:(CVPixelBufferRef)pixelBuffer
                             options:(nullable NSDictionary<CIImageOption, id> *)options NS_AVAILABLE(10_11, 5_0);
 
-#if !TARGET_OS_SIMULATOR
+#if COREIMAGE_SUPPORTS_IOSURFACE
 /* Creates a new image from the contents of an IOSurface. */
 + (CIImage *)imageWithIOSurface:(IOSurfaceRef)surface NS_AVAILABLE(10_6, 5_0);
 + (CIImage *)imageWithIOSurface:(IOSurfaceRef)surface
@@ -204,11 +213,27 @@ CORE_IMAGE_EXPORT CIImageOption const kCIImageAuxiliaryPortraitEffectsMatte NS_A
 /* Create an empty Image. */
 + (CIImage *)emptyImage;
 
+/* Convenience constant color CIImages in the sRGB colorspace. */
+@property (class, strong, readonly) CIImage *blackImage   NS_AVAILABLE(10_15, 13_0);
+@property (class, strong, readonly) CIImage *whiteImage   NS_AVAILABLE(10_15, 13_0);
+@property (class, strong, readonly) CIImage *grayImage    NS_AVAILABLE(10_15, 13_0);
+@property (class, strong, readonly) CIImage *redImage     NS_AVAILABLE(10_15, 13_0);
+@property (class, strong, readonly) CIImage *greenImage   NS_AVAILABLE(10_15, 13_0);
+@property (class, strong, readonly) CIImage *blueImage    NS_AVAILABLE(10_15, 13_0);
+@property (class, strong, readonly) CIImage *cyanImage    NS_AVAILABLE(10_15, 13_0);
+@property (class, strong, readonly) CIImage *magentaImage NS_AVAILABLE(10_15, 13_0);
+@property (class, strong, readonly) CIImage *yellowImage  NS_AVAILABLE(10_15, 13_0);
+@property (class, strong, readonly) CIImage *clearImage   NS_AVAILABLE(10_15, 13_0);
+
 /* Initializers. */
 
 - (instancetype)initWithCGImage:(CGImageRef)image;
 - (instancetype)initWithCGImage:(CGImageRef)image
                         options:(nullable NSDictionary<CIImageOption, id> *)options;
+
+- (instancetype) initWithCGImageSource:(CGImageSourceRef)source
+                                 index:(size_t)index
+                               options:(nullable NSDictionary<CIImageOption, id> *)dict NS_AVAILABLE(10_15, 13_0);
 
 - (instancetype)initWithCGLayer:(CGLayerRef)layer
     NS_DEPRECATED_MAC(10_4,10_11,"Use initWithCGImage: instead.");
@@ -244,7 +269,7 @@ CORE_IMAGE_EXPORT CIImageOption const kCIImageAuxiliaryPortraitEffectsMatte NS_A
 - (nullable instancetype)initWithContentsOfURL:(NSURL *)url
                                        options:(nullable NSDictionary<CIImageOption, id> *)options;
 
-#if !TARGET_OS_SIMULATOR
+#if COREIMAGE_SUPPORTS_IOSURFACE
 - (instancetype)initWithIOSurface:(IOSurfaceRef)surface NS_AVAILABLE(10_6, 5_0);
 
 - (instancetype)initWithIOSurface:(IOSurfaceRef)surface
@@ -271,6 +296,10 @@ CORE_IMAGE_EXPORT CIImageOption const kCIImageAuxiliaryPortraitEffectsMatte NS_A
 /* Returns a new image representing the original image with the transform
  * 'matrix' appended to it. */
 - (CIImage *)imageByApplyingTransform:(CGAffineTransform)matrix;
+
+// specifying true or false here will override the context's kCIContextHighQualityDownsample setting.
+- (CIImage *)imageByApplyingTransform:(CGAffineTransform)matrix
+                highQualityDownsample:(BOOL)highQualityDownsample NS_AVAILABLE(10_12, 10_0);
 
 /* Returns a new image representing the original image with a transform applied to it based on an orientation value.
  * CGImagePropertyOrientation enum values from 1 to 8 as defined in the TIFF spec are supported.
@@ -477,5 +506,25 @@ CORE_IMAGE_EXPORT CIImageAutoAdjustmentOption const kCIImageAutoAdjustLevel NS_A
 +(nullable instancetype)imageWithPortaitEffectsMatte:(AVPortraitEffectsMatte *)matte NS_AVAILABLE(10_14, 12_0);
 
 @end
+
+@interface CIImage (AVSemanticSegmentationMatte)
+
+/* Returns a AVSemanticSegmentationMatte if the CIImage was created with [CIImage imageWithData] or [CIImage imageWithContentsOfURL] and.
+ * one the options like kCIImageAuxiliarySemanticSegmentationSkinMatte. */
+@property (nonatomic, readonly, nullable) AVSemanticSegmentationMatte *semanticSegmentationMatte NS_AVAILABLE(10_15, 13_0);
+
+-(nullable instancetype)initWithSemanticSegmentationMatte:(AVSemanticSegmentationMatte *)matte
+                                                  options:(nullable NSDictionary<CIImageOption,id> *)options NS_AVAILABLE(10_15, 13_0);
+
+-(nullable instancetype)initWithSemanticSegmentationMatte:(AVSemanticSegmentationMatte *)matte NS_AVAILABLE(10_15, 13_0);
+
++(nullable instancetype)imageWithSemanticSegmentationMatte:(AVSemanticSegmentationMatte *)matte
+                                                   options:(nullable NSDictionary<CIImageOption,id> *)options NS_AVAILABLE(10_15, 13_0);
+
++(nullable instancetype)imageWithSemanticSegmentationMatte:(AVSemanticSegmentationMatte *)matte NS_AVAILABLE(10_15, 13_0);
+
+
+@end
+
 
 NS_ASSUME_NONNULL_END

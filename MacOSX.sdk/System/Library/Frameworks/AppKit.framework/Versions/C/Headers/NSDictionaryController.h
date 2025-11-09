@@ -1,7 +1,7 @@
 /*
 	NSDictionaryController.h
 	Application Kit
-	Copyright (c) 2002-2018, Apple Inc.
+	Copyright (c) 2002-2019, Apple Inc.
 	All rights reserved.
  */
 
@@ -10,12 +10,13 @@
 #import <AppKit/NSArrayController.h>
 
 NS_ASSUME_NONNULL_BEGIN
+API_UNAVAILABLE_BEGIN(ios)
 
 // NSDictionaryController transforms a dictionary into an array of key-value pairs that is displayed like any other array in an NSArrayController. For each key-value pair, the controller distinguishes between the actual "key" and the "localizedKey" (a user readable version of the key - see setLocalizedKeyDictionary:/-localizedKeyDictionary). If no localizedKeyDictionary is specified, the localized keys default to the keys.
 // In general, the dictionary controller's validation logic will prevent duplicate keys (but developers need to turn on "Validates Immediately" for the value bindings of the controls editing keys to run that validation). For insertions of new entries, the controller will enumerate the key by default (so if the initialKey is "key", the inserted keys will be "key", "key1", "key2", and so on). To customize that behavior, override the -newObject method.
 
 // This key-value pair object allows controls to be bound, for example, to arrangedObjects.localizedKey, arrangedObjects.key, arrangedObjects.value, and arrangedObjects.explicitlyIncluded of the controller. Mutating a key-value-pair object immediately results in the corresponding change in the content dictionary of the controller.
-NS_CLASS_AVAILABLE(10_11, NA)
+API_AVAILABLE(macos(10.11))
 @interface NSDictionaryControllerKeyValuePair : NSObject
 
 - (instancetype)init NS_UNAVAILABLE; // NSDictionaryControllerKeyValuePair instances must be created via -newObject on the NSDictionaryController.
@@ -28,27 +29,8 @@ NS_CLASS_AVAILABLE(10_11, NA)
 
 @end
 
-NS_CLASS_AVAILABLE(10_5, NA)
-@interface NSDictionaryController : NSArrayController {
-@private
-    void *_reserved5 __unused APPKIT_IVAR;
-    void *_reserved6 __unused APPKIT_IVAR;
-    void *_reserved7 __unused APPKIT_IVAR;
-	id _contentDictionary APPKIT_IVAR;
-	NSString *_initialKey APPKIT_IVAR;
-	id _initialValue APPKIT_IVAR;
-	NSUInteger _minimumInsertionKeyIndex APPKIT_IVAR;
-	NSString *_localizedKeyStringsFileName APPKIT_IVAR;
-	NSDictionary *_localizedKeyForKeyDictionary APPKIT_IVAR;
-	NSDictionary *_keyForLocalizedKeyDictionary APPKIT_IVAR;
-	NSArray *_includedKeys APPKIT_IVAR;
-	NSArray *_excludedKeys APPKIT_IVAR;
-    struct __dictionaryControllerFlags {
-        unsigned int _deepCopiesValues:1;
-        unsigned int _suppressBuildingDictionary:1;
-        unsigned int _reservedDictionaryController:30;
-    } _dictionaryControllerFlags APPKIT_IVAR;
-}
+API_AVAILABLE(macos(10.5))
+@interface NSDictionaryController : NSArrayController
 
 - (NSDictionaryControllerKeyValuePair *)newObject;    // overridden from the superclass to create a key-value pair to represent an entry in the content dictionary of the controller; method is invoked for insertions of new key-value pairs as well as transforming existing dictionary entries into key-value pairs for display
 
@@ -66,5 +48,6 @@ NS_CLASS_AVAILABLE(10_5, NA)
 
 @end
 
+API_UNAVAILABLE_END
 NS_ASSUME_NONNULL_END
 

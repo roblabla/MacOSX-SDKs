@@ -1,9 +1,8 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 01824E49-F2EF-3FC1-ABF3-782EFDF6CA17' ]
+uuids:           [ 'x86_64: A58DDB9C-7A7E-3A84-AE20-B5D66CBE2B55' ]
 platform:        macosx
-install-name:    /usr/lib/libauto.dylib
-objc-constraint: none
+install-name:    '/usr/lib/libauto.dylib'
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ ___auto_reference_logger, _auto_assign_weak_reference, _auto_collect, 

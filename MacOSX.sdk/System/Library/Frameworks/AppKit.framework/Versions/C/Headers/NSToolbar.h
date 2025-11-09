@@ -1,7 +1,7 @@
 /*
 	NSToolbar.h
 	Application Kit
-	Copyright (c) 2000-2018, Apple Inc.
+	Copyright (c) 2000-2019, Apple Inc.
 	All rights reserved.
 */
 
@@ -10,8 +10,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-typedef NSString * NSToolbarIdentifier NS_SWIFT_BRIDGED_TYPEDEF;
-typedef NSString * NSToolbarItemIdentifier NS_TYPED_EXTENSIBLE_ENUM;
+typedef NSString * NSToolbarIdentifier NS_SWIFT_BRIDGED_TYPEDEF API_AVAILABLE(ios(13.0));
+typedef NSString * NSToolbarItemIdentifier NS_TYPED_EXTENSIBLE_ENUM API_AVAILABLE(ios(13.0));
 
 @class NSToolbarItem, NSWindow, NSView;
 @protocol NSToolbarDelegate;
@@ -21,7 +21,7 @@ typedef NS_ENUM(NSUInteger, NSToolbarDisplayMode) {
     NSToolbarDisplayModeIconAndLabel,
     NSToolbarDisplayModeIconOnly,
     NSToolbarDisplayModeLabelOnly
-};
+} API_AVAILABLE(ios(13.0));
 
 
 typedef NS_ENUM(NSUInteger, NSToolbarSizeMode) {
@@ -30,70 +30,14 @@ typedef NS_ENUM(NSUInteger, NSToolbarSizeMode) {
     NSToolbarSizeModeSmall
 };
 
-@interface NSToolbar : NSObject {
-@private
-    NSToolbarIdentifier			_toolbarIdentifier APPKIT_IVAR;
-
-    NSMutableArray *		_currentItems APPKIT_IVAR;
-    NSMutableArray *		_currentItemIdentifiers APPKIT_IVAR;
-
-    NSView *_fullScreenAccessoryView APPKIT_IVAR;
-    struct {
-        unsigned int _hideBaselineOverride:1;
-        unsigned int _reserved:31;
-    } _tbFlags2 APPKIT_IVAR;
-    
-    NSToolbarItemIdentifier			_selectedItemIdentifier APPKIT_IVAR;
-    void *		_metrics APPKIT_IVAR;
-
-    __weak id			_delegate APPKIT_IVAR;
-    NSWindow *			_logicalWindow APPKIT_IVAR;
-    id				_configPalette APPKIT_IVAR;
-    id 				_toolbarView APPKIT_IVAR;
-    NSInteger			_syncPostEnabledCount APPKIT_IVAR;
-    
-    struct __tbFlags {
-	unsigned int allowsUserCustomization:1;
-	unsigned int autosavesUsingIdentifier:1;
-	unsigned int initialConfigurationDone:1;
-	unsigned int doesNotAttachToMenuBar:1;
-        unsigned int delegateDefaultItemIdentifiers:1;
-        unsigned int delegateAllowedItemIdentifiers:1;
-        unsigned int delegateItemWithItemIdentifier:1;
-	unsigned int delegateNotificationsEnabled:1;
-        unsigned int prefersToBeShown:1;
-        unsigned int loadItemsImmediately:1;
-        unsigned int currentItemsContainsPlaceholder:1;
-        unsigned int customizationPanelIsRunning:1;
-        unsigned int usesCustomSheetWidth:1;
-        unsigned int clickAndDragPerformsCustomization:1;
-        unsigned int showsNoContextMenu:1;
-        unsigned int currentlyLoadingPlaceholders:1;
-        unsigned int delegateItemWithItemIdentifier2:1;
-        unsigned int inGlobalWindow:1;
-        unsigned int hasOwnedFullscreenViewController:1;
-        unsigned int usesServicesItems:1;
-        unsigned int usingFSMetrics:1;
-        unsigned int keyboardLoopNeedsUpdating:1;
-        unsigned int showHideDuringConfigurationChangeDisabled:1;
-	unsigned int displayMode:2;
-	unsigned int sizeMode:2;
-	unsigned int doNotShowBaselineSeparator:1;
-        unsigned int hideWithoutResizingWindowHint:1;
-        unsigned int autovalidatesItemsDisabled:1;
-        unsigned int inAutovalidation:1;
-	unsigned int loadedMetrics:1;
-    } _tbFlags APPKIT_IVAR;
-
-    NSInteger			_customizationSheetWidth APPKIT_IVAR;
-    id				_tbReserved APPKIT_IVAR;
-}
+API_AVAILABLE(ios(13.0))
+@interface NSToolbar : NSObject
 
 /* The identifier is used to form the toolbar's autosave name.  Also, toolbars with the same identifier are implicitly synchronized so that they maintain the same state. */
 - (instancetype)initWithIdentifier:(NSToolbarIdentifier)identifier NS_DESIGNATED_INITIALIZER;
 
 /* Calls through to -initWithIdentifier: with an empty string identifier.  Customizable toolbars should use -initWithIdentifier: with a unique identifier instead. */
-- (instancetype)init NS_AVAILABLE_MAC(10_13);
+- (instancetype)init API_AVAILABLE(macos(10.13));
 
 /* Primitives for explicitly adding and removing items.  Any change made will be propogated immediately to all other toolbars with the same identifier. */
 - (void)insertItemWithItemIdentifier:(NSToolbarItemIdentifier)itemIdentifier atIndex:(NSInteger)index;
@@ -117,7 +61,7 @@ typedef NS_ENUM(NSUInteger, NSToolbarSizeMode) {
 /* Sets the toolbar's selected item by identifier.  Use this to force an item identifier to be selected.  Toolbar manages selection of image items automatically.  This method can be used to select identifiers of custom view items, or to force a selection change.  (see toolbarSelectableItemIdentifiers: delegate method for more details). */
 @property (nullable, copy) NSToolbarItemIdentifier selectedItemIdentifier;
 
-@property NSToolbarSizeMode sizeMode;
+@property NSToolbarSizeMode sizeMode API_UNAVAILABLE(ios);
 
 /* Use this API to hide the baseline NSToolbar draws between itself and the main window contents.  The default is YES.  This method should only be used before the toolbar is attached to its window (-[NSWindow setToolbar:]).
 */
@@ -143,7 +87,7 @@ typedef NS_ENUM(NSUInteger, NSToolbarSizeMode) {
  
  This property is archived.
  */
-@property (nullable, copy) NSToolbarItemIdentifier centeredItemIdentifier NS_AVAILABLE_MAC(10_14);
+@property (nullable, copy) NSToolbarItemIdentifier centeredItemIdentifier API_AVAILABLE(macos(10.14));
 
 
 // ----- Autosaving The Configuration -----
@@ -152,23 +96,24 @@ typedef NS_ENUM(NSUInteger, NSToolbarSizeMode) {
 @property BOOL autosavesConfiguration;
 
 /* Set and get the current toolbar configuration using a dictionary representation. */
-- (void)setConfigurationFromDictionary:(NSDictionary<NSString *, id> *)configDict;
-@property (readonly, copy) NSDictionary<NSString *, id> *configurationDictionary;
+- (void)setConfigurationFromDictionary:(NSDictionary<NSString *, id> *)configDict API_UNAVAILABLE(ios);
+@property (readonly, copy) NSDictionary<NSString *, id> *configurationDictionary API_UNAVAILABLE(ios);
 
 
 // ----- Validation of the items -----
 
 /* Typically you should not invoke this method.  This method is called on window updates with the purpose of validating 
  each of the visible items.  The toolbar will iterate through the list of visible items, sending each a -validate message. */
-- (void)validateVisibleItems;
+- (void)validateVisibleItems API_UNAVAILABLE(ios);
 
 // ----- Extension toolbar items -----
 /* When YES, the receiver can dynamically create toolbar items for Action extensions in the toolbar configuration panel. To be included, an extension needs to declare NSExtensionServiceAllowsToolbarItem=YES in its Info.plist. The default value is NO.
 */
-@property BOOL allowsExtensionItems NS_AVAILABLE_MAC(10_10);
+@property BOOL allowsExtensionItems API_AVAILABLE(macos(10.10)) API_UNAVAILABLE(ios);
 
 @end
 
+API_AVAILABLE(ios(13.0))
 @protocol NSToolbarDelegate <NSObject>
 
 /*The following three methods are required for toolbars that are not created in Interface Builder.  If the toolbar is created in IB, you may omit them.  If you do implement them, any  items returned by the delegate will be used alongside items created in Interface Builder. */
@@ -199,16 +144,17 @@ typedef NS_ENUM(NSUInteger, NSToolbarSizeMode) {
 @end
 
 /* Notifications */
-APPKIT_EXTERN NSNotificationName NSToolbarWillAddItemNotification;
-APPKIT_EXTERN NSNotificationName NSToolbarDidRemoveItemNotification;
+APPKIT_EXTERN NSNotificationName NSToolbarWillAddItemNotification API_AVAILABLE(ios(13.0));
+APPKIT_EXTERN NSNotificationName NSToolbarDidRemoveItemNotification API_AVAILABLE(ios(13.0));
 
+API_UNAVAILABLE_BEGIN(ios)
 
 @interface NSToolbar(NSDeprecated)
 
 /*
  Sets the toolbar full screen accessory view.  When entering full screen, the accessory view is removed from the window if necessary, and attaches underneath the toolbar.  When leaving full screen, the accessory view is returned to the window, if it was in the window previously. To customize this latter behavior, you can implement the NSWindow delegate method windowWillExitFullScreen:.
  */
-@property (nullable, strong) NSView *fullScreenAccessoryView NS_DEPRECATED_MAC(10_7, 10_13, "Use NSTitlebarAccessoryViewController with NSWindow instead");
+@property (nullable, strong) NSView *fullScreenAccessoryView API_DEPRECATED("Use NSTitlebarAccessoryViewController with NSWindow instead", macos(10.7,10.13));
 
 /*
  The following properties control the minimum and maximum height of the accessory view. The minimum height is used when the menu bar is hidden, and the max height to a fully revealed menu bar. During the reveal, the accessory view's frame is interpolated between its minimum and maximum height.
@@ -217,9 +163,10 @@ APPKIT_EXTERN NSNotificationName NSToolbarDidRemoveItemNotification;
  
  By default, the min height is 0 and the max height gets set to the height of the accessory view's frame when it is set.
  */
-@property CGFloat fullScreenAccessoryViewMinHeight NS_DEPRECATED_MAC(10_7, 10_13, "Use NSTitlebarAccessoryViewController and its fullScreenMinHeight property with NSWindow instead.");
-@property CGFloat fullScreenAccessoryViewMaxHeight NS_DEPRECATED_MAC(10_7, 10_13, "Use NSTitlebarAccessoryViewController with NSWindow instead. The max height of a titlebar accessory is implied by its view's height.");
+@property CGFloat fullScreenAccessoryViewMinHeight API_DEPRECATED("Use NSTitlebarAccessoryViewController and its fullScreenMinHeight property with NSWindow instead.", macos(10.7,10.13));
+@property CGFloat fullScreenAccessoryViewMaxHeight API_DEPRECATED("Use NSTitlebarAccessoryViewController with NSWindow instead. The max height of a titlebar accessory is implied by its view's height.", macos(10.7,10.13));
 
 @end
 
+API_UNAVAILABLE_END
 NS_ASSUME_NONNULL_END

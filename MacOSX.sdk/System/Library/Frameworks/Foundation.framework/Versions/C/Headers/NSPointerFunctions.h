@@ -1,7 +1,7 @@
 /*
  *  NSPointerFunctions.h
  *
- *  Copyright (c) 2005-2018, Apple Inc. All rights reserved.
+ *  Copyright (c) 2005-2019, Apple Inc. All rights reserved.
  *
  */
  
@@ -51,7 +51,7 @@ typedef NS_OPTIONS(NSUInteger, NSPointerFunctionsOptions) {
     NSPointerFunctionsCopyIn API_AVAILABLE(macos(10.5), ios(6.0), watchos(2.0), tvos(9.0)) = (1UL << 16),      // the memory acquire function will be asked to allocate and copy items on input
 };
 
-NS_CLASS_AVAILABLE(10_5, 6_0)
+API_AVAILABLE(macos(10.5), ios(6.0), watchos(2.0), tvos(9.0))
 @interface NSPointerFunctions : NSObject <NSCopying>
 // construction
 - (instancetype)initWithOptions:(NSPointerFunctionsOptions)options NS_DESIGNATED_INITIALIZER;
@@ -123,6 +123,5 @@ NS_ASSUME_NONNULL_END
         }
         return result;
 */
-
-#endif
+#endif // defined __FOUNDATION_NSPOINTERFUNCTIONS__
 

@@ -81,7 +81,7 @@ AV_INIT_UNAVAILABLE
  
     transformedMetadataObjectForMetadataObject:connection: alters the visual properties of the provided metadata object to match the physical rotation / mirroring of the sample buffers provided by the receiver through the indicated connection. I.e., for video data output, adjusted metadata object coordinates are rotated/mirrored. For still image and movie file output, they are not.
  */
-- (nullable AVMetadataObject *)transformedMetadataObjectForMetadataObject:(AVMetadataObject *)metadataObject connection:(AVCaptureConnection *)connection API_AVAILABLE(ios(6.0)) API_UNAVAILABLE(macos);
+- (nullable AVMetadataObject *)transformedMetadataObjectForMetadataObject:(AVMetadataObject *)metadataObject connection:(AVCaptureConnection *)connection API_AVAILABLE(macos(10.15), ios(6.0));
 
 /*!
  @method metadataOutputRectOfInterestForRect:
@@ -96,7 +96,7 @@ AV_INIT_UNAVAILABLE
  @discussion
     AVCaptureMetadataOutput rectOfInterest is expressed as a CGRect where {0,0} represents the top left of the picture area, and {1,1} represents the bottom right on an unrotated picture. This convenience method converts a rectangle in the coordinate space of the receiver to a rectangle of interest in the coordinate space of an AVCaptureMetadataOutput whose AVCaptureDevice is providing input to the receiver. The conversion takes orientation, mirroring, and scaling into consideration. See -transformedMetadataObjectForMetadataObject:connection: for a full discussion of how orientation and mirroring are applied to sample buffers passing through the output.
  */
-- (CGRect)metadataOutputRectOfInterestForRect:(CGRect)rectInOutputCoordinates API_AVAILABLE(ios(7.0)) API_UNAVAILABLE(macos);
+- (CGRect)metadataOutputRectOfInterestForRect:(CGRect)rectInOutputCoordinates API_AVAILABLE(macos(10.15), ios(7.0));
 
 /*!
  @method rectForMetadataOutputRectOfInterest:
@@ -111,7 +111,7 @@ AV_INIT_UNAVAILABLE
  @discussion
     AVCaptureMetadataOutput rectOfInterest is expressed as a CGRect where {0,0} represents the top left of the picture area, and {1,1} represents the bottom right on an unrotated picture. This convenience method converts a rectangle in the coordinate space of an AVCaptureMetadataOutput whose AVCaptureDevice is providing input to the coordinate space of the receiver. The conversion takes orientation, mirroring, and scaling into consideration. See -transformedMetadataObjectForMetadataObject:connection: for a full discussion of how orientation and mirroring are applied to sample buffers passing through the output.
  */
-- (CGRect)rectForMetadataOutputRectOfInterest:(CGRect)rectInMetadataOutputCoordinates API_AVAILABLE(ios(7.0)) API_UNAVAILABLE(macos);
+- (CGRect)rectForMetadataOutputRectOfInterest:(CGRect)rectInMetadataOutputCoordinates API_AVAILABLE(macos(10.15), ios(7.0));
 
 @end
 
@@ -135,6 +135,6 @@ typedef NS_ENUM(NSInteger, AVCaptureOutputDataDroppedReason) {
     AVCaptureOutputDataDroppedReasonLateData      = 1,
     AVCaptureOutputDataDroppedReasonOutOfBuffers  = 2,
     AVCaptureOutputDataDroppedReasonDiscontinuity = 3,
-} API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos) __WATCHOS_PROHIBITED __TVOS_PROHIBITED;
+} API_AVAILABLE(macos(10.15), ios(11.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED;
 
 NS_ASSUME_NONNULL_END

@@ -1,8 +1,8 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 319E8530-D7C2-3E90-A3C0-86E233795449' ]
+uuids:           [ 'x86_64: 76F819C6-F289-3A1E-A725-7C1C31931DE9' ]
 platform:        macosx
-install-name:    /System/Library/PrivateFrameworks/WiFiCloudSyncEngine.framework/Versions/A/WiFiCloudSyncEngine
+install-name:    '/System/Library/PrivateFrameworks/WiFiCloudSyncEngine.framework/Versions/A/WiFiCloudSyncEngine'
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _WiFiCloudSyncEngineAddNetworkToCloud, _WiFiCloudSyncEngineAddNetworkToKnownNetworksList, 
@@ -10,10 +10,11 @@ exports:
                        _WiFiCloudSyncEngineGetCompleteKVStore, _WiFiCloudSyncEngineGetLogCallbackFunction, 
                        _WiFiCloudSyncEngineIsNetworkSyncable, _WiFiCloudSyncEngineIsRunning, 
                        _WiFiCloudSyncEngineLoggerLog, _WiFiCloudSyncEngineMergeKnownNetworksToCloud, 
-                       _WiFiCloudSyncEngineRegisterCallbacks, _WiFiCloudSyncEngineRemoveNetworkFromCloud, 
-                       _WiFiCloudSyncEngineRemoveNetworkFromKnownNetworksList, _WiFiCloudSyncEngineScheduleWithRunLoop, 
-                       _WiFiCloudSyncEngineStartEngine, _WiFiCloudSyncEngineStopEngine, 
-                       _WiFiCloudSyncEngineUnScheduleWithRunLoop, _kKeychainChangedNotificationName ]
+                       _WiFiCloudSyncEnginePruneNetworksInCloud, _WiFiCloudSyncEngineRegisterCallbacks, 
+                       _WiFiCloudSyncEngineRemoveNetworkFromCloud, _WiFiCloudSyncEngineRemoveNetworkFromKnownNetworksList, 
+                       _WiFiCloudSyncEngineScheduleWithRunLoop, _WiFiCloudSyncEngineStartEngine, 
+                       _WiFiCloudSyncEngineStopEngine, _WiFiCloudSyncEngineUnScheduleWithRunLoop, 
+                       _kKeychainChangedNotificationName ]
     objc-classes:    [ WiFiCloudSyncEngineCore, WiFiCloudSyncEngineLogger ]
     objc-ivars:      [ WiFiCloudSyncEngineCore.callback, WiFiCloudSyncEngineCore.clientThread, 
                        WiFiCloudSyncEngineCore.context, WiFiCloudSyncEngineCore.iCloudSyncingEnabled, 

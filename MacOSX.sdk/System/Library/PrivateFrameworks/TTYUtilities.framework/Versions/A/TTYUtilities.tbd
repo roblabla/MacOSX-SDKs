@@ -1,8 +1,8 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 447B9370-9834-34F0-846C-2E03C6F611DF' ]
+uuids:           [ 'x86_64: 0A4547F6-4B96-3024-8FED-C3DE5CFD1A4F' ]
 platform:        macosx
-install-name:    /System/Library/PrivateFrameworks/TTYUtilities.framework/Versions/A/TTYUtilities
+install-name:    '/System/Library/PrivateFrameworks/TTYUtilities.framework/Versions/A/TTYUtilities'
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _AXTTYMessageKeyCallID, _AXTTYMessageKeyContactID, _AXTTYMessageKeyContactPathSearchAction, 
@@ -10,8 +10,11 @@ exports:
                        _AXTTYMessageKeyConversationUpdates, _AXTTYMessageKeyDeleteAction, 
                        _AXTTYMessageKeyReadAction, _AXTTYMessageKeyResult, _AXTTYMessageKeySettingsKey, 
                        _AXTTYMessageKeyUUID, _AXTTYMessageKeyValue, _AXTTYMessageKeyWriteAction, 
-                       _AXTTYPreferredTransportMethodChangedNotification, _TTYUtilitiesVersionNumber, 
-                       _TTYUtilitiesVersionString, _currentProcessIsHeard ]
-    objc-classes:    [ AXTTYSettingsListenerHelper, AXTTYSimulatorSubscriptionContext, 
+                       _AXTTYPreferredTransportMethodChangedNotification, _HAPerformBlockAsynchronouslyOnMainThread, 
+                       _HAPerformBlockOnMainThread, _HAPerformBlockOnMainThreadAfterDelay, 
+                       _HAPerformBlockSynchronouslyOnMainThread, _HAPerformSafeBlock, 
+                       _TTYUtilitiesVersionNumber, _TTYUtilitiesVersionString, _currentProcessIsHeard, 
+                       _propertyContainsProperty ]
+    objc-classes:    [ AXHAUtilities, AXTTYSettingsListenerHelper, AXTTYSimulatorSubscriptionContext, 
                        TTYServer, TTYSettings, TTYTelephonyUtilities ]
 ...

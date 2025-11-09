@@ -43,7 +43,7 @@ extern "C" {
 #if __has_attribute(nonnull)
 #   define VIMAGE_NON_NULL(...)         __attribute__ ((nonnull(__VA_ARGS__)))
 #else
-#   define VIMAGE_NON_NULL(...)         
+#   define VIMAGE_NON_NULL(...)
 #endif
 
 /*!

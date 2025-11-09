@@ -1,28 +1,24 @@
 /*
 	NSEPSImageRep.h
 	Application Kit
-	Copyright (c) 1994-2018, Apple Inc.
+	Copyright (c) 1994-2019, Apple Inc.
 	All rights reserved.
 */
 
 #import <AppKit/NSImageRep.h>
 
 NS_ASSUME_NONNULL_BEGIN
+API_UNAVAILABLE_BEGIN(ios)
 
 @class NSPDFImageRep;
 
-@interface NSEPSImageRep : NSImageRep {
-    /*All instance variables are private*/
-    NSPoint _bBoxOrigin APPKIT_IVAR;
-    NSData *_epsData APPKIT_IVAR;
-    NSPDFImageRep* _pdfImageRep APPKIT_IVAR;
-}
+@interface NSEPSImageRep : NSImageRep
 
 + (nullable instancetype)imageRepWithData:(NSData *)epsData;	/* Convenience of initWithData: */
 - (nullable instancetype)initWithData:(NSData *)epsData;
 
 /* prepareGState is unused */
-- (void)prepareGState NS_DEPRECATED_MAC(10_0, 10_10);
+- (void)prepareGState API_DEPRECATED("", macos(10.0,10.10));
 
 @property (readonly, copy) NSData *EPSRepresentation;
 
@@ -30,5 +26,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+API_UNAVAILABLE_END
 NS_ASSUME_NONNULL_END
 

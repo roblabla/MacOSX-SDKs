@@ -1,7 +1,7 @@
 /*
     NSTableCellView.h
     Application Kit
-    Copyright (c) 2009-2018, Apple Inc.
+    Copyright (c) 2009-2019, Apple Inc.
     All rights reserved.
 */
 
@@ -15,22 +15,14 @@
 #import <AppKit/NSTableView.h>
 
 NS_ASSUME_NONNULL_BEGIN
+API_UNAVAILABLE_BEGIN(ios)
 
 @class NSTextField, NSImageView, NSDraggingImageComponent;
 
 /* View Based NSTableView: The NSTableCellView is a reusable container view shown for a particular cell in the table. See NSTableView.h for more information. 
  */
-NS_CLASS_AVAILABLE(10_7, NA)
-@interface NSTableCellView : NSView {
-@private
-    NSBackgroundStyle _backgroundStyle APPKIT_IVAR;
-    id _objectValue APPKIT_IVAR;
-    id _aux APPKIT_IVAR;
-    NSTableViewRowSizeStyle _rowSizeStyle APPKIT_IVAR;
-
-    __weak NSTextField *_textField APPKIT_IVAR;
-    __weak NSImageView *_imageView APPKIT_IVAR;
-}
+API_AVAILABLE(macos(10.7))
+@interface NSTableCellView : NSView
 
 /* The 'objectValue' is automatically set by the table when using bindings, or the result from the dataSource method -tableView:objectValueForTableColumn:row:. Key Value Observing (KVO) compliant so user interface elements can be bound to the 'objectValue'. 
  */
@@ -55,4 +47,5 @@ NS_CLASS_AVAILABLE(10_7, NA)
 
 @end
 
+API_UNAVAILABLE_END
 NS_ASSUME_NONNULL_END

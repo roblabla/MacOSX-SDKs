@@ -1,7 +1,7 @@
 /*
 	NSDockTile.h
 	Application Kit
-	Copyright (c) 2006-2018, Apple Inc.
+	Copyright (c) 2006-2019, Apple Inc.
 	All rights reserved.
 */
 
@@ -10,30 +10,15 @@
 #import <Foundation/NSString.h>
 #import <AppKit/NSApplication.h>
 
-static const NSAppKitVersion NSAppKitVersionNumberWithDockTilePlugInSupport = 1001.0;
-
 NS_ASSUME_NONNULL_BEGIN
+API_UNAVAILABLE_BEGIN(ios)
+
+static const NSAppKitVersion NSAppKitVersionNumberWithDockTilePlugInSupport = 1001.0;
 
 @class NSView;
 
-NS_CLASS_AVAILABLE(10_5, NA)
-@interface NSDockTile : NSObject {
-    @private
-    __weak id _owner APPKIT_IVAR;
-    void *_dockContextRef APPKIT_IVAR;
-    NSView *_contentView APPKIT_IVAR;
-    NSView *_frameView APPKIT_IVAR;
-    NSView *_backstopView APPKIT_IVAR;
-    NSString *_badgeLabel APPKIT_IVAR;
-    struct {
-        unsigned int showsAppBadge:1;
-        unsigned int reserved:31;
-    } _dFlags APPKIT_IVAR;
-    NSSize _dockTileSize APPKIT_IVAR;
-    id _miniViewController APPKIT_IVAR;
-    id reserved[4] __unused APPKIT_IVAR;
-}
-
+API_AVAILABLE(macos(10.5))
+@interface NSDockTile : NSObject 
 /* get the size of the dock tile, in screen coordinates
 */
 @property (readonly) NSSize size;
@@ -75,5 +60,6 @@ NS_CLASS_AVAILABLE(10_5, NA)
 - (nullable NSMenu*)dockMenu;
 @end
 
+API_UNAVAILABLE_END
 NS_ASSUME_NONNULL_END
 

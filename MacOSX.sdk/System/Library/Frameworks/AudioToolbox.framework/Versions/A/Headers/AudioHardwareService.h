@@ -18,13 +18,16 @@
 #ifndef AudioHardwareService_h
 #define AudioHardwareService_h
 
+#if !TARGET_OS_IPHONE
 #if !defined(__COREAUDIO_USE_FLAT_INCLUDES__)
     #include <Availability.h>
     #include <CoreAudio/AudioHardware.h>
 #else
     #include <AudioHardware.h>
 #endif
+#endif
 
+#if !TARGET_OS_IPHONE
 
 #if defined(__cplusplus)
 extern "C"
@@ -247,5 +250,6 @@ AudioHardwareServiceRemovePropertyListener( AudioObjectID                       
 #if defined(__cplusplus)
 }
 #endif
+#endif //!TARGET_OS_IPHONE
 
 #endif /* AudioHardwareService_h */

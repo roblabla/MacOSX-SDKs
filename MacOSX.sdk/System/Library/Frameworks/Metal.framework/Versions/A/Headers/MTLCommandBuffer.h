@@ -19,7 +19,6 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol MTLDrawable;
 @protocol MTLCommandBuffer;
 @protocol MTLEvent;
-
 @class MTLRenderPassDescriptor;
 
 /*!
@@ -59,7 +58,7 @@ typedef NS_ENUM(NSUInteger, MTLCommandBufferStatus) {
  @abstract An error domain for NSError objects produced by MTLCommandBuffer
  */
 API_AVAILABLE(macos(10.11), ios(8.0))
-MTL_EXTERN NSString *const MTLCommandBufferErrorDomain;
+MTL_EXTERN NSErrorDomain const MTLCommandBufferErrorDomain;
 
 /*!
  @enum MTLCommandBufferError
@@ -103,7 +102,7 @@ typedef NS_ENUM(NSUInteger, MTLCommandBufferError)
     MTLCommandBufferErrorNotPermitted = 7,
     MTLCommandBufferErrorOutOfMemory = 8,
     MTLCommandBufferErrorInvalidResource = 9,
-    MTLCommandBufferErrorMemoryless API_AVAILABLE(ios(10.0)) API_UNAVAILABLE(macos) = 10,
+    MTLCommandBufferErrorMemoryless API_AVAILABLE(ios(10.0)) API_UNAVAILABLE(macos, macCatalyst) = 10,
     MTLCommandBufferErrorDeviceRemoved API_AVAILABLE(macos(10.13)) API_UNAVAILABLE(ios) = 11,
 } API_AVAILABLE(macos(10.11), ios(8.0));
 
@@ -157,19 +156,19 @@ API_AVAILABLE(macos(10.11), ios(8.0))
  */
 @property (nullable, copy, atomic) NSString *label;
 
-@property (readonly) CFTimeInterval kernelStartTime API_AVAILABLE(ios(10.3)) API_UNAVAILABLE(macos);
-@property (readonly) CFTimeInterval kernelEndTime API_AVAILABLE(ios(10.3)) API_UNAVAILABLE(macos);
+@property (readonly) CFTimeInterval kernelStartTime API_AVAILABLE(macos(10.15), macCatalyst(13.0), ios(10.3));
+@property (readonly) CFTimeInterval kernelEndTime API_AVAILABLE(macos(10.15), macCatalyst(13.0), ios(10.3));
 
 /*!
  @property GPUStartTime
  @abstract The host time in seconds that GPU starts executing this command buffer. Returns zero if it has not started. This usually can be called in command buffer completion handler.
  */
-@property (readonly) CFTimeInterval GPUStartTime API_AVAILABLE(ios(10.3)) API_UNAVAILABLE(macos);
+@property (readonly) CFTimeInterval GPUStartTime API_AVAILABLE(macos(10.15), macCatalyst(13.0), ios(10.3));
 /*!
  @property GPUEndTime
  @abstract The host time in seconds that GPU finishes executing this command buffer. Returns zero if CPU has not received completion notification. This usually can be called in command buffer completion handler.
  */
-@property (readonly) CFTimeInterval GPUEndTime API_AVAILABLE(ios(10.3)) API_UNAVAILABLE(macos);
+@property (readonly) CFTimeInterval GPUEndTime API_AVAILABLE(macos(10.15), macCatalyst(13.0), ios(10.3));
 
 /*!
  @method enqueue

@@ -34,7 +34,7 @@
 
 
 
-#include <Availability.h>
+#include <os/availability.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -131,7 +131,7 @@ AEInstallEventHandler(
   AEEventID           theAEEventID,
   AEEventHandlerUPP   handler,
   SRefCon             handlerRefcon,
-  Boolean             isSysHandler)                           __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
+  Boolean             isSysHandler)                           API_AVAILABLE( macos(10.0) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 /*
@@ -150,7 +150,7 @@ AERemoveEventHandler(
   AEEventClass        theAEEventClass,
   AEEventID           theAEEventID,
   AEEventHandlerUPP   handler,
-  Boolean             isSysHandler)                           __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
+  Boolean             isSysHandler)                           API_AVAILABLE( macos(10.0) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 /*
@@ -170,7 +170,7 @@ AEGetEventHandler(
   AEEventID            theAEEventID,
   AEEventHandlerUPP *  handler,
   SRefCon *            handlerRefcon,
-  Boolean              isSysHandler)                          __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
+  Boolean              isSysHandler)                          API_AVAILABLE( macos(10.0) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 
@@ -194,7 +194,7 @@ extern OSErr
 AEInstallSpecialHandler(
   AEKeyword           functionClass,
   AEEventHandlerUPP   handler,
-  Boolean             isSysHandler)                           __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
+  Boolean             isSysHandler)                           API_AVAILABLE( macos(10.0) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 /*
@@ -212,7 +212,7 @@ extern OSErr
 AERemoveSpecialHandler(
   AEKeyword           functionClass,
   AEEventHandlerUPP   handler,
-  Boolean             isSysHandler)                           __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
+  Boolean             isSysHandler)                           API_AVAILABLE( macos(10.0) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 /*
@@ -230,7 +230,7 @@ extern OSErr
 AEGetSpecialHandler(
   AEKeyword            functionClass,
   AEEventHandlerUPP *  handler,
-  Boolean              isSysHandler)                          __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
+  Boolean              isSysHandler)                          API_AVAILABLE( macos(10.0) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 
@@ -254,7 +254,7 @@ AEGetSpecialHandler(
 extern OSErr 
 AEManagerInfo(
   AEKeyword   keyWord,
-  long *      result)                                         __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
+  long *      result)                                         API_AVAILABLE( macos(10.0) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 
@@ -291,7 +291,7 @@ AEManagerInfo(
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
-extern const CFStringRef kAERemoteProcessURLKey                      __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_NA );
+extern const CFStringRef kAERemoteProcessURLKey                      API_AVAILABLE( macos(10.3) ) API_UNAVAILABLE( ios, tvos, watchos );
 /*
  *  kAERemoteProcessNameKey
  *  
@@ -304,7 +304,7 @@ extern const CFStringRef kAERemoteProcessURLKey                      __OSX_AVAIL
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
-extern const CFStringRef kAERemoteProcessNameKey                     __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_NA );
+extern const CFStringRef kAERemoteProcessNameKey                     API_AVAILABLE( macos(10.3) ) API_UNAVAILABLE( ios, tvos, watchos );
 /*
  *  kAERemoteProcessUserIDKey
  *  
@@ -317,7 +317,7 @@ extern const CFStringRef kAERemoteProcessNameKey                     __OSX_AVAIL
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
-extern const CFStringRef kAERemoteProcessUserIDKey                   __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_NA );
+extern const CFStringRef kAERemoteProcessUserIDKey                   API_AVAILABLE( macos(10.3) ) API_UNAVAILABLE( ios, tvos, watchos );
 /*
  *  kAERemoteProcessProcessIDKey
  *  
@@ -330,7 +330,7 @@ extern const CFStringRef kAERemoteProcessUserIDKey                   __OSX_AVAIL
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
-extern const CFStringRef kAERemoteProcessProcessIDKey                __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_NA );
+extern const CFStringRef kAERemoteProcessProcessIDKey                API_AVAILABLE( macos(10.3) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 /*
  *  AERemoteProcessResolverContext
@@ -415,7 +415,7 @@ typedef struct AERemoteProcessResolver*  AERemoteProcessResolverRef;
 extern AERemoteProcessResolverRef 
 AECreateRemoteProcessResolver(
   CFAllocatorRef   allocator,
-  CFURLRef         url)                                       __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_NA );
+  CFURLRef         url)                                       API_AVAILABLE( macos(10.3) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 /*
@@ -440,7 +440,7 @@ AECreateRemoteProcessResolver(
  *    Non-Carbon CFM:   not available
  */
 extern void 
-AEDisposeRemoteProcessResolver(AERemoteProcessResolverRef ref) __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_NA );
+AEDisposeRemoteProcessResolver(AERemoteProcessResolverRef ref) API_AVAILABLE( macos(10.3) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 /*
@@ -483,7 +483,7 @@ AEDisposeRemoteProcessResolver(AERemoteProcessResolverRef ref) __OSX_AVAILABLE_S
 extern CFArrayRef 
 AERemoteProcessResolverGetProcesses(
   AERemoteProcessResolverRef   ref,
-  CFStreamError *              outError)                      __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_NA );
+  CFStreamError *              outError)                      API_AVAILABLE( macos(10.3) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 
@@ -541,7 +541,7 @@ AERemoteProcessResolverScheduleWithRunLoop(
   CFRunLoopRef                            runLoop,
   CFStringRef                             runLoopMode,
   AERemoteProcessResolverCallback         callback,
-  const AERemoteProcessResolverContext *  ctx)               /* can be NULL */ __OSX_AVAILABLE_STARTING( __MAC_10_3, __IPHONE_NA );
+  const AERemoteProcessResolverContext *  ctx)               /* can be NULL */ API_AVAILABLE( macos(10.3) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 /*
  *  AEDeterminePermissionToAutomateTarget()
@@ -594,7 +594,7 @@ AERemoteProcessResolverScheduleWithRunLoop(
  *      a Boolean; if true, and if this application does not yet have permission to send events to the target application, then
  *		prompt the user to obtain permission.  If false, do not prompt the user.
  */
-extern OSStatus AEDeterminePermissionToAutomateTarget( const AEAddressDesc* target, AEEventClass theAEEventClass, AEEventID theAEEventID, Boolean askUserIfNeeded ) __OSX_AVAILABLE_STARTING( __MAC_10_14, __IPHONE_NA );
+extern OSStatus AEDeterminePermissionToAutomateTarget( const AEAddressDesc* target, AEEventClass theAEEventClass, AEEventID theAEEventID, Boolean askUserIfNeeded ) API_AVAILABLE( macos(10.14) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 #if defined(__MAC_10_14) && __MAC_OS_X_VERSION_MIN_REQUIRED >= __MAC_10_14
 	

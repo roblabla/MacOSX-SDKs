@@ -1,3 +1,4 @@
+#if (defined(USE_AUDIOTOOLBOX_PUBLIC_HEADERS) && USE_AUDIOTOOLBOX_PUBLIC_HEADERS) || !__has_include(<AudioToolboxCore/AudioComponent.h>)
 /*!
 	@file		AudioComponent.h
  	@framework	AudioToolbox.framework
@@ -161,15 +162,10 @@
 //=====================================================================================================================
 #pragma mark Overview
 
-
+#include <TargetConditionals.h>
 #include <Availability.h>
-#if !defined(__COREAUDIO_USE_FLAT_INCLUDES__)
-    #include <CoreAudio/CoreAudioTypes.h>
-    #include <CoreFoundation/CoreFoundation.h>
-#else
-    #include <CoreAudioTypes.h>
-    #include <CoreFoundation.h>
-#endif
+#include <CoreAudioTypes/CoreAudioTypes.h>
+#include <CoreFoundation/CoreFoundation.h>
 
 CF_ASSUME_NONNULL_BEGIN
 
@@ -249,15 +245,15 @@ typedef CF_OPTIONS(UInt32, AudioComponentInstantiationOptions) {
 /*!
     @struct         AudioComponentDescription
     @discussion     A structure used to describe the unique and identifying IDs of an audio component 
-    @field          componentType
+    @var            componentType
                         A unique 4-byte code identifying the generic type of an audio component
-    @field          componentSubType
+    @var            componentSubType
                         the particular flavor of this instance
-    @field          componentManufacturer
+    @var            componentManufacturer
                         vendor identification
-    @field          componentFlags
+    @var            componentFlags
                         must be set to zero unless a known specific value is requested
-    @field          componentFlagsMask
+    @var            componentFlagsMask
                         must be set to zero unless a known specific value is requested
 */
 #pragma pack(push, 4)
@@ -303,11 +299,15 @@ typedef struct OpaqueAudioComponent *   AudioComponent;
                     ComponentInstanceRecord *, you should not assume that this will always be
                     compatible and usable with Component Manager calls.
 */
+#if TARGET_OS_IPHONE || (defined(AUDIOCOMPONENT_NOCARBONINSTANCES) && AUDIOCOMPONENT_NOCARBONINSTANCES)
+    typedef struct OpaqueAudioComponentInstance *   AudioComponentInstance;
+#else
     typedef struct ComponentInstanceRecord *        AudioComponentInstance;
+#endif
 
 /*!
     @typedef        AudioComponentMethod
-    @abstract       The broad prototype for an audio plugin method
+    @abstract       Generic prototype for an audio plugin method.
     @discussion     Every audio plugin will implement a collection of methods that match a particular
 					selector. For example, the AudioUnitInitialize API call is implemented by a
 					plugin implementing the kAudioUnitInitializeSelect selector. Any function implementing
@@ -315,19 +315,19 @@ typedef struct OpaqueAudioComponent *   AudioComponent;
 					is a pointer to the plugin instance structure, has 0 or more specific arguments,  
 					and returns an OSStatus.
 */
-typedef OSStatus (*AudioComponentMethod)(void *self,...);
+typedef OSStatus (*AudioComponentMethod)(void *self, ...);
 
 /*!
     @struct         AudioComponentPlugInInterface
     @discussion     A structure used to represent an audio plugin's routines 
-    @field          Open
+    @var            Open
                         the function used to open (or create) an audio plugin instance
-    @field          Close
+    @var            Close
                         the function used to close (or dispose) an audio plugin instance
-    @field          Lookup
+    @var            Lookup
                         this is used to return a function pointer for a given selector, 
 						or NULL if that selector is not implemented
-    @field          reserved
+    @var            reserved
                         must be NULL
 */
 typedef struct AudioComponentPlugInInterface {
@@ -434,7 +434,6 @@ AudioComponentGetDescription(   AudioComponent                  inComponent,
 /*!
     @function       AudioComponentGetVersion
     @abstract       Retrieve an audio component's version.
-    @discussion
     @param          inComponent
                         the audio component (must not be NULL)
     @param          outVersion
@@ -678,3 +677,6 @@ AudioComponentValidate( AudioComponent					inComponent,
 CF_ASSUME_NONNULL_END
 
 #endif // AudioUnit_AudioComponent_h
+#else
+#include <AudioToolboxCore/AudioComponent.h>
+#endif

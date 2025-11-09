@@ -45,7 +45,6 @@ enum {
     kPMInvalidPrintSettings     = -30875,        	/* the printsettings reference is invalid */
     kPMInvalidPageFormat        = -30876,        	/* the pageformat reference is invalid */
     kPMValueOutOfRange          = -30877,         	/* a value passed in is out of range */
-    kPMLockIgnored              = -30878        	/* the lock value was ignored */
 
     kPMInvalidPrintSession      = -30879,          	/* the print session is invalid */
     kPMInvalidPrinter           = -30880,        	/* the printer reference is invalid */

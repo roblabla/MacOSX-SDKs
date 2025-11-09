@@ -15,11 +15,11 @@
 #ifndef __MIDINetworkSession_h__
 #define __MIDINetworkSession_h__
 
-#ifdef __OBJC__
+#if defined(__OBJC__)
 #import <CoreMIDI/MIDIServices.h>
 #import <Foundation/Foundation.h>
 
-#define MIDINETWORKSESSION_AVAILABLE API_AVAILABLE(ios(4.2)) API_UNAVAILABLE(macos, watchos, tvos)
+#define MIDINETWORKSESSION_AVAILABLE API_AVAILABLE(macos(15.0), ios(4.2)) API_UNAVAILABLE(watchos, tvos)
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -124,6 +124,6 @@ OS_EXPORT MIDINETWORKSESSION_AVAILABLE
 
 NS_ASSUME_NONNULL_END
 
-#endif /* __OBJC__ */
+#endif // defined(__OBJC__)
 
 #endif /* __MIDINetworkSession_h__ */

@@ -1,6 +1,6 @@
 /*
 	NSFilePresenter.h
-	Copyright (c) 2010-2018, Apple Inc.
+	Copyright (c) 2010-2019, Apple Inc.
 	All rights reserved.
 */
 

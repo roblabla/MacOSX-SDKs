@@ -1,6 +1,6 @@
 /*
  NSMeasurementFormatter.h
- Copyright (c) 2015-2018, Apple Inc.
+ Copyright (c) 2015-2019, Apple Inc.
  All rights reserved.
  */
 

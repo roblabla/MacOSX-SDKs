@@ -1,7 +1,7 @@
 /*
     NSUserInterfaceItemSearching.h
     Application Kit
-    Copyright (c) 2008-2018, Apple Inc.
+    Copyright (c) 2008-2019, Apple Inc.
     All rights reserved.
 */
 
@@ -10,6 +10,7 @@
 #import <AppKit/NSApplication.h>
 
 NS_ASSUME_NONNULL_BEGIN
+API_UNAVAILABLE_BEGIN(ios)
 
 @protocol NSUserInterfaceItemSearching <NSObject>
 
@@ -42,18 +43,19 @@ NS_ASSUME_NONNULL_BEGIN
 
 /* Register an an object that conforms to NSUserInterfaceItemSearching with the application.  You can register as many as you like.  If you register the same instance more than once the subsequent registrations are ignored
  */
-- (void)registerUserInterfaceItemSearchHandler:(id<NSUserInterfaceItemSearching>)handler NS_AVAILABLE_MAC(10_6);
+- (void)registerUserInterfaceItemSearchHandler:(id<NSUserInterfaceItemSearching>)handler API_AVAILABLE(macos(10.6));
 
 /* Unregister an object that conforms to NSUserInterfaceItemSearching with the application.  If you unregister the same instance more than once the subsequent registrations are ignored. Also, unregistering an instance that was never registered is a NOP.
  */
-- (void)unregisterUserInterfaceItemSearchHandler:(id<NSUserInterfaceItemSearching>)handler NS_AVAILABLE_MAC(10_6);
+- (void)unregisterUserInterfaceItemSearchHandler:(id<NSUserInterfaceItemSearching>)handler API_AVAILABLE(macos(10.6));
 
 /* returns YES if searchString matches the supplied range of stringToBeSearched according to Spotlight for Help default matching rules  
  * if found range is non null then the matching range is returned in it 
  */
-- (BOOL)searchString:(NSString *)searchString inUserInterfaceItemString:(NSString *)stringToSearch searchRange:(NSRange)searchRange foundRange:(nullable NSRange *)foundRange NS_AVAILABLE_MAC(10_6);
+- (BOOL)searchString:(NSString *)searchString inUserInterfaceItemString:(NSString *)stringToSearch searchRange:(NSRange)searchRange foundRange:(nullable NSRange *)foundRange API_AVAILABLE(macos(10.6));
 
 @end
 
+API_UNAVAILABLE_END
 NS_ASSUME_NONNULL_END
 

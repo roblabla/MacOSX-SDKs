@@ -1,5 +1,5 @@
 .\"
-.\" Copyright (c) 1998-2018 Apple Inc. All rights reserved.
+.\" Copyright (c) 1998-2019 Apple Inc. All rights reserved.
 .\"
 .\" This file contains Original Code and/or Modifications of Original Code
 .\" as defined in and that are subject to the Apple Public Source License
@@ -16,7 +16,7 @@
 .\" Please see the License for the specific language governing rights and
 .\" limitations under the License.
 .\"
-.Dd 14 June 2018
+.Dd 1 July 2019
 .Os "macOS"
 .Dt DISKUTIL 8
 .Pp
@@ -364,16 +364,30 @@ Ownership of the affected disk is required; it must be a whole disk and must hav
 .\"             -- resetFusion --
 .It Sy resetFusion
 .br
-For Fusion Drive machine hardware configurations, reset the disk devices in
-the machine to a factory-like state (one empty Fusion volume).
-This command requires the machine to contain exactly one internal solid-state device (SSD)
-and one internal rotational device (HDD); if so, you are prompted, and if you confirm, both
-devices are (re)-partitioned with GPT maps and a Core Storage Fusion Drive volume is created.
+For Fusion Drive machines (two internal disk device hardware configurations), reset the disk devices in
+the machine to the factory-like state of one empty Fusion volume.
+.Pp
+This command will only run on a machine that contains exactly two internal disk devices:
+one solid-state device (SSD) and one rotational device (HDD),
+or, alternatively, two solid-state devices.
+This command must be able to make a positive identification thereof.
+If these requirements are met, you are prompted, and if you confirm, the erase and reset begins.
+.Pp
+Both internal disk devices are (re)-partitioned with GPT maps, and then they are
+turned into (used to create)
+an APFS Fusion Drive Container with one APFS Volume.
+.Pp
+All internal-disk data is lost. This includes any "extra" partitions (e.g. for
+Boot Camp or other "user" purposes).
 No system software is installed and no user data is restored.
-All data on the machine is lost, including any "extra" partitions (e.g. for
-Boot Camp or other "user" purposes). You generally must be booted from the
+After running this command, you should (re)-install macOS on the machine (on the newly-created APFS Volume);
+otherwise, the machine will not be usable (bootable).
+.Pp
+You generally must be booted from the
 Internet Recovery System (CMD-OPT-R) or from an externally-connected macOS boot disk (e.g. a USB
-drive), because you cannot erase a volume with a currently-running macOS.
+drive), because you cannot erase a disk that hosts the currently-running macOS.
+.Pp
+Externally-connected disk(s) are not affected.
 Ownership of the affected disks is required.
 .\"
 .\"             -- eraseDisk --
@@ -428,7 +442,9 @@ specifies whether the disc recording system software should do a full erase or a
 Ownership of the affected disk is required.
 .\"
 .\"             -- zeroDisk --
-.It Sy zeroDisk Op Nm force
+.It Sy zeroDisk
+.Op Nm force
+.Op Nm short
 .Ar device
 .br
 Erase a device, writing zeros to the media.  The device can be a whole-disk or a partition.
@@ -440,16 +456,24 @@ zeroed partitions will need to be (re)formatted with a file system, e.g. by usin
 or
 .Sy eraseVolume
 verbs.
+.Pp
 If you desire a more sophisticated erase algorithm or if you need
 to erase only free space not in use for files, use the
 .Sy secureErase
 verb.
+.Pp
 The
 .Sy force
 parameter causes best-effort, non-error-terminating, forced unmounts and shared-mode writes to be attempted;
 however, this is still no guarantee against drivers which claim the disk exclusively. In such cases, you
 may have to first unmount all overlying logical volumes (e.g. CoreStorage or AppleRAID). If a disk is partially
 damaged in just a certain unlucky way, you might even have to un-install a kext or erase the disk elsewhere.
+.Pp
+The
+.Sy short
+parameter causes only a minimal amount of zeros to be written ("wipefs"); this is quick. You can use this to prevent
+inadvertent identification by software, e.g. as filesystem data.
+.Pp
 Ownership of the affected disk is required.
 .\"
 .\"             -- randomDisk --
@@ -823,6 +847,9 @@ purposes only; it has no storage. It is associated with the AppleAPFSContainerSc
 IO Registry. While APFS Volume device identifiers appear to be of a related form,
 you should never use the Container Reference as a basis to create device identifiers yourself;
 use the listing verbs with their plist options instead.
+.Pp
+An APFS Container has a certain fixed size (capacity) which, via its Physical Store(s), uses
+physical space on a device. An APFS Container can be resized, but this is not a part of normal operation.
 .It
 Physical Store - An APFS Physical Store is a disk which is imported into (that is, which backs,
 indeed defines) an APFS Container. An APFS Container can import more than one Physical Store,
@@ -863,6 +890,11 @@ becomes full first. You can use a
 to enforce accounting or to manage against "unfair" premature filling-up of
 the parent Container due solely to this Volume at the expense of sibling Volumes.
 .Pp
+APFS Volumes can be tagged with zero or more
+.Sy role
+metadata flags which give a hint as to their intended use.
+Not all combinations of flags are valid, and not all flags are allowed to be set or changed by a user.
+.Pp
 Efficient file copy cloning (copy-on-write) is supported (see
 .Sy copyfile
 (3)'s COPYFILE_CLONE).
@@ -894,7 +926,7 @@ You can
 .Sy revert
 the present state of an APFS Volume back to equality with a Snapshot in its history. This is a
 destructive reset/restore operation: Once a Volume is reverted, it cannot be brought forward.
-Any Snaphots between the revert point and the present are lost as well.
+Any Snapshots between the revert point and the present are lost as well.
 .Pp
 You can
 .Sy delete
@@ -914,6 +946,17 @@ See
 (8) and
 .Sy fs_snapshot_create
 (2).
+.It
+Volume Group - Collections of APFS Volumes can be associated with each other via an APFS Volume Group.
+Zero or more APFS Volume Groups may exist on any given APFS Container. The "members" (APFS Volumes)
+of any particular APFS Volume Group must all be on the same APFS Container.
+.Pp
+APFS Volume Groups are identified using their Volume Group ID (a UUID). Assignment of this ID
+may be deferred in some cases.
+.Pp
+A primary use for APFS Volume Groups is realization of macOS installations in which
+"System"-role (for the operating system) and "Data"-role (for user data) APFS Volumes are
+necessarily functionally linked, yet separated for reasons of security, backup, and software update.
 .\" List-End-APFSObjects
 .El
 .Pp
@@ -932,7 +975,7 @@ sub-verbs with their descriptions and individual arguments.
 .It Sy list Op Nm -plist
 .Op Ar containerReferenceDevice
 .br
-Display APFS objects as a tree. AFPS Container(s) are shown with
+Display APFS objects as a tree. APFS Container(s) are shown with
 their imported Physical Store(s) and exported Volume(s).
 .Pp
 All currently-attached APFS Containers in the system are listed unless you specify a
@@ -984,7 +1027,7 @@ Ownership of the affected disks is required.
 .br
 Convenience verb which creates an empty APFS Container and then adds one APFS Volume with the given name.
 The APFS Volume will have default attributes such as no encryption, no capacity reserve nor quota, etc.
-If you specify more than one device, a Fusion Container is created, with the performance roles assigned automatically.
+If you specify more than one device, a Fusion Container is created, with the performance parts assigned automatically.
 This is a combination of the
 .Sy diskutil apfs createContainer
 and
@@ -1003,7 +1046,7 @@ Ownership of the affected disks is required.
 Create an empty APFS Container.
 The device(s) specified become APFS Physical Stores.
 .Pp
-If you specify more than one device, a Fusion Container is created, with the performance roles
+If you specify more than one device, a Fusion Container is created, with the performance parts
 assigned automatically (preferred) unless you use the
 .Sy -main
 and
@@ -1015,7 +1058,7 @@ devices to be secondary.
 .Pp
 You may then add APFS Volumes with the
 .Sy diskutil apfs addVolume
-verb.
+verb; you must do this at least once in order to "use" the new Container.
 .Pp
 Ownership of the affected disks is required.
 .\"
@@ -1118,6 +1161,7 @@ Ownership of the affected disks is required, and all APFS Volumes on the Contain
 .Op Sy -reserve Ar reserve
 .Op Sy -quota Ar quota
 .Op Sy -role Ar roles
+.Op Sy -group[With] | -sibling Ar groupDevice
 .Op Sy -nomount
 .Op Sy -mountpoint Ar mountpoint
 .br
@@ -1151,13 +1195,23 @@ and
 .Ar quota
 simultaneously; however, the reserve is not allowed to be larger than the quota.
 .Pp
-APFS Volumes can carry certain metadata hint flags; you can supply the
-.Ar role
+APFS Volumes can be tagged with certain role metadata flags; you can supply the
+.Ar roles
 parameter with any combination of one or more of the characters
-.Sy BRVI,
+.Sy BRVITSDUNEXHLCYG,
 or
 .Sy 0
-as a no-op for scripting convenience.
+as a no-op for scripting convenience; the meaning of these characters is, respectively:
+B=Preboot (boot loader), R=Recovery, V=VM (swap space), I=Installer (temporary usage), T=Backup (Time Machine), S=System, D=Data, U=User, N=Baseband, E=Update, X=XART (hardware security), H=Hardware, L=Internal, C=Sidecar (Time Machine), Y=Enterprise (data), and G=iDiagnostics (EFI).
+Note that you may be limited to only one role at a time and various other rules.
+.Pp
+If you specify
+.Sy -groupWith ,
+your new APFS Volume will become a member of the same APFS Volume Group as the APFS Volume
+.Ar groupDevice .
+If
+.Ar groupDevice
+is not yet associated with any group, such will be created automatically when appropriate.
 .Pp
 The new APFS Volume is explicitly mounted after creation; you can specify
 .Sy -nomount
@@ -1187,6 +1241,8 @@ Ownership of the affected disks is required.
 |
 .Op Sy -stdinpassphrase
 .Op Sy -passphraseHint Ar passphraseHint
+.Op Sy -role Ar roles
+.Op Sy -group[With] | -sibling Ar groupDevice
 .br
 Erase the contents of an existing APFS Volume; all of its data will be lost.
 Unlike
@@ -1194,13 +1250,19 @@ Unlike
 the APFS Volume is not removed from its APFS Container.
 .Pp
 The "new" APFS Volume will inherit the APFS file system type (Case-sensitive or not) but will not inherit attributes
-such as name, reserve, quota, or encryption status.
+such as name, reserve, quota, role, or encryption status.
 .Pp
-The "new" APFS Volume be unencrypted, unless you supply
+The "new" APFS Volume will be unencrypted, unless you supply
 passphrase options in the same manner as
 .Sy diskutil apfs addVolume
-in which
-case it will be encrypted and initially accessible by the "Disk User".
+in which case it will be encrypted and initially accessible by the "Disk User".
+.Pp
+The
+.Sy -role
+and
+.Sy -groupWith
+options function in the same manner as
+.Sy diskutil apfs addVolume .
 .Pp
 If you need more control, you should delete and (re-)add the Volume instead.
 .Pp
@@ -1211,12 +1273,12 @@ Ownership of the affected disks is required.
 .Ar volumeDevice
 .Ar roles
 .br
-Change the role metadata flag bits of an existing APFS Volume.
+Change the role metadata flags of an existing APFS Volume.
 .Pp
 The
 .Ar roles
 should be any combination of one or more of the characters
-.Sy brviBRVI
+.Sy brvitsdunexhlcygBRVITSDUNEXHLCYG
 in much the same manner as
 .Sy diskutil
 .Sy apfs
@@ -1229,7 +1291,7 @@ Alternatively,
 will remove all flags, or
 .Sy 0
 can be used as a no-op for scripting convenience.
-You should not make any assumptions about the usage or legal combinations of role bits.
+You should not make any assumptions about the usage or legal combinations of role flags.
 .Pp
 Ownership of the affected disks is required.
 .\"
@@ -1404,15 +1466,16 @@ Ownership of the affected disks is required.
 Start decryption of a currently-encrypted APFS Volume ("Disable FileVault").
 Depending on hardware, the operation may be accomplished immediately, or it may proceed "in the background".
 .Pp
-The APFS Volume must be unlocked before beginning this operation.
+The APFS Volume must be in an unlocked state before invoking this operation. Additionally,
+this operation itself requires that you authenticate.
 .Pp
-One (any) of the existing cryptographic user and passphrase pair(s) on the APFS Volume must be satisfied
-(this is not the case prior to macOS 10.13.2).
-You choose that user with
-.Ar existingCryptoUserUUID ;
-if you do not supply it (or supply the word
-.Sy disk )
-then the "Disk User" is assumed.
+Any existing cryptographic user and its passphrase on the APFS Volume can be supplied, using
+.Sy -user
+with either a UUID or the word
+.Sy disk
+to specify the "Disk User". If a "Disk User" exists on the APFS Volume and you omit the
+.Sy -user
+parameter, then the "Disk User" is assumed.
 .Pp
 As an alternative to a passphrase, you can specify
 .Sy -recoverykeychain
@@ -1425,12 +1488,13 @@ If you do not supply a passphrase, yet one is required, you will be prompted int
 Ownership of the affected disks is required.
 .\"
 .\"             -- APFS > listSnapshots --
-.It Sy listSnapshots | list[Volume]Snaps[hots]
+.It Sy listSnapshots | listVolumeSnapshots
 .Op Sy -plist
 .Ar volumeDevice
 .br
-Show all snapshots that are currently associated with the given APFS Volume, each with
-information such as its numeric XID identifier, name, and possibly other fields.
+Show all APFS Snapshots currently associated with the given APFS Volume, each with
+information such as its Snapshot UUID, Snapshot Name, numeric XID identifier, and possibly other fields.
+If applicable, the one snapshot which might be limiting APFS Container resizing is identified.
 .Pp
 If
 .Sy -plist
@@ -1439,14 +1503,29 @@ is specified, then a property list will be emitted instead of the normal user-re
 .\"             -- APFS > deleteSnapshot --
 .It Sy deleteSnapshot
 .Ar volumeDevice
+.Sy -uuid Ar snapshotUUID
+|
 .Sy -xid Ar xid
 |
-.Sy -name Ar name
+.Sy -name Ar snapshotName
 .br
 Remove the given APFS Snapshot from its APFS Volume.
 The ability to restore the state of the APFS Volume back to that point in its evolution will be lost.
 .Pp
 Ownership of the affected disks is required.
+.\"
+.\"             -- APFS > listVolumeGroups --
+.It Sy list[Volume]Groups
+.Op Sy -plist
+.Op Ar containerReferenceDevice
+.br
+Display the relationships among APFS Volumes which are defined by APFS Volume Groups.
+For each currently-attached APFS Container in the system, the Container's APFS Volume Groups are shown;
+for each APFS Volume Group, the Group's membership list of APFS Volumes is shown.
+.Pp
+If
+.Sy -plist
+is specified, then a property list will be emitted instead of the normal user-readable output.
 .\"
 .\"             -- APFS > defragment --
 .It Sy defragment
@@ -1459,9 +1538,56 @@ Ownership of the affected disks is required.
 |
 .Sy disable
 .br
-Manage defragmentation of APFS at the Container or Volume level. The "status" command shows
-whether automatic defragmentation is enabled. You can set this automatic defragmentation behavior
-by specifying "enable" or "disable".
+Manage automatic background defragmentation of user file data at the APFS Container or Volume level.
+Enablement of defragmentation at the APFS Container level means that any future Volumes which are created
+out of that Container will have defragmentation enabled by default.
+.Pp
+Ownership of the affected disks is required.
+.\"
+.\"             -- APFS > updatePreboot --
+.It Sy updatePreboot
+.Ar volumeDevice
+.Op Sy -od Ar openDirectoryPath
+.br
+Examine the given APFS Volume's cryptographic user (unlock) records, correlating against
+matching macOS user metadata (e.g. avatar pictures, password hints, etc) and use
+this information to update the target volume's associated Preboot Volume. The Preboot Volume
+is used at EFI firmware time to present a login user interface and to load and boot macOS.
+.Pp
+MacOS user metadata is sourced from macOS and Open Directory (OD) database files that
+are searched for on the given
+.Ar volumeDevice ,
+which is normally expected to be a macOS installation.
+.Pp
+You can use a different Open Directory
+database by supplying the
+.Sy -od
+option with a full path, e.g.
+"/Volumes/SomeOtherMacOSVolume/var/db/dslocal/nodes/Default", or with
+.Sy /
+to use the currently-running macOS (even if
+.Ar volumeDevice
+is not). Redirecting the database source can lead to loss of
+access; it must never be done unless you have a precise reason.
+.Pp
+If some user cannot log in or login metadata is out of date,
+.Sy diskutil apfs updatePreboot /
+can be used as a repair.
+.Pp
+You should normally never have to use this verb; the Preboot Volume is updated
+automatically when you use Users & Groups in System Preferences.
+.Pp
+Ownership of the affected disks is required.
+.\"
+.\"             -- APFS > syncPatchUsers --
+.It Sy syncPatchUsers
+.Ar volumeDevice
+.br
+Perform a specific, rarely-needed repair of APFS cryptographic user lock records.
+If the target volume is part of an APFS Volume Group, all APFS cryptographic user record
+lock data is copied from the System-role volume, if any, to the Data-role volume, if any.
+.Pp
+You must never use this command unless you know precisely why you are doing so.
 .Pp
 Ownership of the affected disks is required.
 .\"
@@ -2291,7 +2417,7 @@ constructed by software (e.g. an AppleRAID Set, disk image, CoreStorage LV, etc)
 .It
 .Pa C
 is an APFS Container.
-This is a a virtual disk constructed by APFS to represent a collection of APFS Volumes.
+This is a virtual disk constructed by APFS to represent a collection of APFS Volumes.
 .It
 .Pa Q
 is the session and is only included for optical media; it refers to the number of times recording has taken

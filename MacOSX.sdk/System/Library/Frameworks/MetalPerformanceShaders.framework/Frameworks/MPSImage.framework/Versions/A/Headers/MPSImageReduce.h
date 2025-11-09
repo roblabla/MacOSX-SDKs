@@ -25,7 +25,7 @@
  *                   - Reduce row sum
  *                   - Reduce column sum
  */
-MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3))
+MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3))
 @interface  MPSImageReduceUnary : MPSUnaryImageKernel
 
 /*! @property   clipRectSource
@@ -52,7 +52,7 @@ MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3))
  *  @class      MPSImageReduceRowMin
  *  @discussion The MPSImageReduceRowMin performs a reduction operation returning the mininmum value for each row of an image
  */
-MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3))
+MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3))
 @interface  MPSImageReduceRowMin : MPSImageReduceUnary
 
 /*!
@@ -70,7 +70,7 @@ MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3))
  *  @class      MPSImageReduceColumnMin
  *  @discussion The MPSImageReduceColumnMin performs a reduction operation returning the mininmum value for each column of an image
  */
-MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3))
+MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3))
 @interface  MPSImageReduceColumnMin : MPSImageReduceUnary
 
 /*!
@@ -87,7 +87,7 @@ MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3))
  *  @class      MPSImageReduceRowMax
  *  @discussion The MPSImageReduceRowMax performs a reduction operation returning the maximum value for each row of an image
  */
-MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3))
+MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3))
 @interface  MPSImageReduceRowMax : MPSImageReduceUnary
 
 /*!
@@ -104,7 +104,7 @@ MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3))
  *  @class      MPSImageReduceColumnMax
  *  @discussion The MPSImageReduceColumnMax performs a reduction operation returning the maximum value for each column of an image
  */
-MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3))
+MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3))
 @interface  MPSImageReduceColumnMax : MPSImageReduceUnary
 
 /*!
@@ -121,7 +121,7 @@ MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3))
  *  @class      MPSImageReduceRowMean
  *  @discussion The MPSImageReduceRowMean performs a reduction operation returning the mean value for each row of an image
  */
-MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3))
+MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3))
 @interface  MPSImageReduceRowMean : MPSImageReduceUnary
 
 /*!
@@ -138,7 +138,7 @@ MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3))
  *  @class      MPSImageReduceColumnMean
  *  @discussion The MPSImageReduceColumnMean performs a reduction operation returning the mean value for each column of an image
  */
-MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3))
+MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3))
 @interface  MPSImageReduceColumnMean : MPSImageReduceUnary
 
 /*!
@@ -155,7 +155,7 @@ MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3))
  *  @class      MPSImageReduceRowSum
  *  @discussion The MPSImageReduceRowSum performs a reduction operation returning the sum for each row of an image
  */
-MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3))
+MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3))
 @interface  MPSImageReduceRowSum : MPSImageReduceUnary
 
 /*!
@@ -172,7 +172,7 @@ MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3))
  *  @class      MPSImageReduceColumnSum
  *  @discussion The MPSImageReduceColumnSum performs a reduction operation returning the sum for each column of an image
  */
-MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3))
+MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3))
 @interface  MPSImageReduceColumnSum : MPSImageReduceUnary
 
 /*!

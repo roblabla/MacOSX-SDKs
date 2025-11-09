@@ -1,6 +1,7 @@
-/* 
+#if !__has_include(<UIFoundation/NSTypesetter.h>)
+/*
 	NSTypesetter.h
-	Copyright (c) 1994-2018, Apple Inc.  All rights reserved. 
+	Copyright (c) 1994-2019, Apple Inc.  All rights reserved. 
 
 	An abstract class to lay glyphs out in horizontal or vertical boxes	
 */
@@ -13,14 +14,9 @@
 #import <AppKit/NSParagraphStyle.h>
 
 NS_ASSUME_NONNULL_BEGIN
+#if !TARGET_OS_IPHONE
 
-@interface NSTypesetter : NSObject {
-#if __LP64__
-    void *_reserved APPKIT_IVAR;
-#else /* __LP64__ */
-    unsigned _reserved[2] APPKIT_IVAR;
-#endif /* __LP64__ */
-}
+@interface NSTypesetter : NSObject
 
 /* Primitive typesetting methods */
 /* NSLayoutManager attributes */
@@ -106,7 +102,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /* Layouts characters in characterRange for layoutManager. The method returns the actual character range that the receiving NSTypesetter processed. The layout process can be interrupted when the number of line fragments exceeds maxNumLines. Specify NSUIntegerMax for unlimited number of line fragments.
 */
-- (NSRange)layoutCharactersInRange:(NSRange)characterRange forLayoutManager:(NSLayoutManager *)layoutManager maximumNumberOfLineFragments:(NSUInteger)maxNumLines NS_AVAILABLE_MAC(10_5);
+- (NSRange)layoutCharactersInRange:(NSRange)characterRange forLayoutManager:(NSLayoutManager *)layoutManager maximumNumberOfLineFragments:(NSUInteger)maxNumLines API_AVAILABLE(macos(10.5));
 
 /* Returns the offset to be applied to the glyph in question when printing.
 */
@@ -169,15 +165,17 @@ typedef NS_OPTIONS(NSUInteger, NSTypesetterControlCharacterAction) {
 
 @interface NSTypesetter (NSTypesetter_Deprecated)
 - (NSTypesetterControlCharacterAction)actionForControlCharacterAtIndex:(NSUInteger)charIndex; // Deprecated. Use -layoutManager:shouldUseAction:forControlCharacterAtIndex: instead
-- (NSUInteger)getGlyphsInRange:(NSRange)glyphsRange glyphs:(null_unspecified NSGlyph *)glyphBuffer characterIndexes:(null_unspecified NSUInteger *)charIndexBuffer glyphInscriptions:(null_unspecified NSGlyphInscription *)inscribeBuffer elasticBits:(null_unspecified BOOL *)elasticBuffer bidiLevels:(null_unspecified unsigned char *)bidiLevelBuffer NS_DEPRECATED_MAC(10_3, 10_13);
+- (NSUInteger)getGlyphsInRange:(NSRange)glyphsRange glyphs:(null_unspecified NSGlyph *)glyphBuffer characterIndexes:(null_unspecified NSUInteger *)charIndexBuffer glyphInscriptions:(null_unspecified NSGlyphInscription *)inscribeBuffer elasticBits:(null_unspecified BOOL *)elasticBuffer bidiLevels:(null_unspecified unsigned char *)bidiLevelBuffer API_DEPRECATED("", macos(10.3,10.13));
 
-- (void)substituteGlyphsInRange:(NSRange)glyphRange withGlyphs:(null_unspecified NSGlyph *)glyphs  NS_DEPRECATED_MAC(10_3, 10_13);
-- (void)insertGlyph:(NSGlyph)glyph atGlyphIndex:(NSUInteger)glyphIndex characterIndex:(NSUInteger)characterIndex NS_DEPRECATED_MAC(10_3, 10_13);
-- (void)deleteGlyphsInRange:(NSRange)glyphRange NS_DEPRECATED_MAC(10_3, 10_13);
+- (void)substituteGlyphsInRange:(NSRange)glyphRange withGlyphs:(null_unspecified NSGlyph *)glyphs  API_DEPRECATED("", macos(10.3,10.13));
+- (void)insertGlyph:(NSGlyph)glyph atGlyphIndex:(NSUInteger)glyphIndex characterIndex:(NSUInteger)characterIndex API_DEPRECATED("", macos(10.3,10.13));
+- (void)deleteGlyphsInRange:(NSRange)glyphRange API_DEPRECATED("", macos(10.3,10.13));
 @end
 
-NS_ASSUME_NONNULL_END
 
-#if !__LP64__ && MAC_OS_X_VERSION_MIN_REQUIRED <= MAC_OS_X_VERSION_10_4
-#import <AppKit/NSSimpleHorizontalTypesetter.h>
-#endif /* MAC_OS_X_VERSION_MIN_REQUIRED <= MAC_OS_X_VERSION_10_4 */
+
+#endif // !TARGET_OS_IPHONE
+NS_ASSUME_NONNULL_END
+#else
+#import <UIFoundation/NSTypesetter.h>
+#endif

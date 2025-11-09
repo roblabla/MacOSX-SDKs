@@ -345,9 +345,9 @@ enum
                         A procedure to be called when the stream determines when a buffer was output. The procedure and a reference constant are specified by
                         a CMIOStreamScheduledOutputNotificationProcAndRefCon structure.
     @constant       kCMIOStreamPropertyPreferredFormatDescription
-                        A FigFormatDescriptionRef that describes the preferred format for the CMIOStream. When getting this property, the client must release the FigFormatDescriptionRef when
-                        done with it. Either one of the FigFormatDescriptionRefs obtained by getting the kCMIOStreamPropertyFormatDescriptions property can be used, or a new FigFormatDescriptionRef.
-                        FigFormatDescriptionRef can be provided. In the event of the latter, the FigFormatDescriptionEquals() routine will be used to see if the stream can support the provided
+                        A CMFormatDescriptionRef that describes the preferred format for the CMIOStream. When getting this property, the client must release the CMFormatDescriptionRef when
+                        done with it. Either one of the CMFormatDescriptionRefs obtained by getting the kCMIOStreamPropertyFormatDescriptions property can be used, or a new CMFormatDescriptionRef.
+                        CMFormatDescriptionRef can be provided. In the event of the latter, the FigFormatDescriptionEquals() routine will be used to see if the stream can support the provided
                         Setting this property is not a guarantee that the CMIOStream will provide data in this format;  when possible, the CMIOStream will examine all of the values specified by
                         the various clients sharing it, and select the most appropriate configuration. Typically, the value set for this property will only have an effect when the stream is
                         active (unlike kCMIOStreamPropertyFormatDescription, which takes place immediately). Note that if the client is the device master (set using kCMIODevicePropertyDeviceMaster),

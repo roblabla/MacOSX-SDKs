@@ -1,5 +1,5 @@
 /*	NSPersonNameComponentsFormatter.h
-	Copyright (c) 2015-2018, Apple Inc. All rights reserved.
+	Copyright (c) 2015-2019, Apple Inc. All rights reserved.
  */
 
 #import <Foundation/NSPersonNameComponents.h>
@@ -33,7 +33,7 @@ typedef NS_OPTIONS (NSUInteger, NSPersonNameComponentsFormatterOptions) {
 } API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0));
 
 
-NS_CLASS_AVAILABLE(10_11, 9_0)
+API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0))
 @interface NSPersonNameComponentsFormatter : NSFormatter {
 @private
     id _private;

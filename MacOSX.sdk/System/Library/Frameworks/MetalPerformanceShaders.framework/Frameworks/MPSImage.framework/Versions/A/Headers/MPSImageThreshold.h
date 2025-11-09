@@ -20,7 +20,7 @@
  *              The ThresholdBinary function is:
  *                  destinationPixelValue = sourcePixelValue > thresholdValue ? maximumValue : 0
  */
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(9.0), tvos(9.0))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(9.0), macCatalyst(13.0), tvos(9.0))
 @interface  MPSImageThresholdBinary : MPSUnaryImageKernel
 
 /*!
@@ -48,7 +48,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(9.0), tvos(9.0))
  */
 -(nullable instancetype) initWithCoder:(NSCoder * __nonnull)aDecoder
                                 device:(nonnull id <MTLDevice>) device NS_DESIGNATED_INITIALIZER
-                    MPS_AVAILABLE_STARTING(macos(10.13), ios(11.0), tvos(11.0));
+                    MPS_AVAILABLE_STARTING(macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0));
 
 /* You must use initWithDevice:thresholdValue:maximumValue:linearGrayColorTransform: instead */
 -(nonnull instancetype) initWithDevice:(nonnull id<MTLDevice>)device            NS_UNAVAILABLE;
@@ -80,7 +80,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(9.0), tvos(9.0))
  *              The ThresholdBinaryInverse function is:
  *                  destinationPixelValue = sourcePixelValue > thresholdValue ? 0 : maximumValue
  */
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(9.0), tvos(9.0))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(9.0), macCatalyst(13.0), tvos(9.0))
 @interface  MPSImageThresholdBinaryInverse : MPSUnaryImageKernel
 
 /*!
@@ -109,7 +109,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(9.0), tvos(9.0))
  */
 -(nullable instancetype) initWithCoder:(NSCoder * __nonnull)aDecoder
                                 device:(nonnull id <MTLDevice>) device NS_DESIGNATED_INITIALIZER
-                    MPS_AVAILABLE_STARTING(macos(10.13), ios(11.0), tvos(11.0));
+                    MPS_AVAILABLE_STARTING(macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0));
 
 /* You must use initWithDevice:thresholdValue:maximumValue:linearGrayColorTransform: instead */
 -(nonnull instancetype) initWithDevice:(nonnull id<MTLDevice>)device            NS_UNAVAILABLE;
@@ -140,7 +140,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(9.0), tvos(9.0))
  *              The ThresholdTruncate function is:
  *                  destinationPixelValue = sourcePixelValue > thresholdValue ? thresholdValue : sourcePixelValue
  */
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(9.0), tvos(9.0))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(9.0), macCatalyst(13.0), tvos(9.0))
 @interface  MPSImageThresholdTruncate : MPSUnaryImageKernel
 
 /*! 
@@ -166,7 +166,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(9.0), tvos(9.0))
  */
 -(nullable instancetype) initWithCoder:(NSCoder * __nonnull)aDecoder
                                 device:(nonnull id <MTLDevice>) device NS_DESIGNATED_INITIALIZER
-                    MPS_AVAILABLE_STARTING(macos(10.13), ios(11.0), tvos(11.0));
+                    MPS_AVAILABLE_STARTING(macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0));
 
 /* You must use initWithDevice:thresholdValue:linearGrayColorTransform: instead */
 -(nonnull instancetype) initWithDevice:(nonnull id<MTLDevice>)device            NS_UNAVAILABLE;
@@ -193,7 +193,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(9.0), tvos(9.0))
  *              The ThresholdToZero function is:
  *                  destinationPixelValue = sourcePixelValue > thresholdValue ? sourcePixelValue : 0
  */
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(9.0), tvos(9.0))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(9.0), macCatalyst(13.0), tvos(9.0))
 @interface  MPSImageThresholdToZero : MPSUnaryImageKernel
 
 /*!
@@ -222,7 +222,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(9.0), tvos(9.0))
  */
 -(nullable instancetype) initWithCoder:(NSCoder * __nonnull)aDecoder
                                 device:(nonnull id <MTLDevice>) device NS_DESIGNATED_INITIALIZER
-                        MPS_AVAILABLE_STARTING(macos(10.13), ios(11.0), tvos(11.0));
+                        MPS_AVAILABLE_STARTING(macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0));
 
 /*! @property thresholdValue
  *  @discussion The threshold value used to init the threshold filter
@@ -245,7 +245,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(9.0), tvos(9.0))
  *              The ThresholdToZeroINverse function is:
  *                  destinationPixelValue = sourcePixelValue > thresholdValue ? 0 : sourcePixelValue
  */
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(9.0), tvos(9.0))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(9.0), macCatalyst(13.0), tvos(9.0))
 @interface  MPSImageThresholdToZeroInverse : MPSUnaryImageKernel
 
 /*!
@@ -271,7 +271,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(9.0), tvos(9.0))
  */
 -(nullable instancetype) initWithCoder:(NSCoder * __nonnull)aDecoder
                                 device:(nonnull id <MTLDevice>) device NS_DESIGNATED_INITIALIZER
-                    MPS_AVAILABLE_STARTING(macos(10.13), ios(11.0), tvos(11.0));
+                    MPS_AVAILABLE_STARTING(macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0));
 
 /* You must use initWithDevice:thresholdValue:linearGrayColorTransform: instead */
 -(nonnull instancetype) initWithDevice:(nonnull id<MTLDevice>)device            NS_UNAVAILABLE;

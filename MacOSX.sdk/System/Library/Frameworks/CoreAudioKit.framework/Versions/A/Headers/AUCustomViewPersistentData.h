@@ -11,12 +11,13 @@
                      http://developer.apple.com/bugreporter/
 */
 
-#import <Foundation/NSObjCRuntime.h> // NS_ASSUME_NONNULL_BEGIN
+#import <Foundation/NSObjCRuntime.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
 @class NSDictionary;
 
+API_AVAILABLE(macos(10.6)) API_UNAVAILABLE(ios, tvos, watchos)
 @protocol AUCustomViewPersistentData
 
 /*!

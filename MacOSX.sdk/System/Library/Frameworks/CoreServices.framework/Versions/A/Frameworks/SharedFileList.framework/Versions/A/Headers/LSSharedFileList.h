@@ -12,6 +12,8 @@
 
 */
 
+#if TARGET_OS_OSX
+
 #ifndef __LSSHAREDFILELIST__
 #define __LSSHAREDFILELIST__
 
@@ -34,7 +36,7 @@
 
 
 
-#include <Availability.h>
+#include <os/availability.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -63,7 +65,7 @@ typedef struct OpaqueLSSharedFileListItemRef*  LSSharedFileListItemRef;
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
-extern CFStringRef kLSSharedFileListFavoriteVolumes             __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_5, __MAC_10_11, __IPHONE_NA, __IPHONE_NA, "This functionality is no longer supported on OS X.");
+extern CFStringRef kLSSharedFileListFavoriteVolumes             API_DEPRECATED("No longer supported", macos(10.5, 10.11)) API_UNAVAILABLE(ios, tvos, watchos);
 
 
 /*
@@ -74,7 +76,7 @@ extern CFStringRef kLSSharedFileListFavoriteVolumes             __OSX_AVAILABLE_
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
-extern CFStringRef kLSSharedFileListFavoriteItems                    __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_5, __MAC_10_11, __IPHONE_NA, __IPHONE_NA, "This functionality is no longer supported on OS X.");
+extern CFStringRef kLSSharedFileListFavoriteItems                    API_DEPRECATED("No longer supported", macos(10.5, 10.11)) API_UNAVAILABLE(ios, tvos, watchos);
 
 
 /*
@@ -85,7 +87,7 @@ extern CFStringRef kLSSharedFileListFavoriteItems                    __OSX_AVAIL
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
-extern CFStringRef kLSSharedFileListRecentApplicationItems           __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_5, __MAC_10_11, __IPHONE_NA, __IPHONE_NA, "This functionality is no longer supported on OS X.");
+extern CFStringRef kLSSharedFileListRecentApplicationItems           API_DEPRECATED("No longer supported", macos(10.5, 10.11)) API_UNAVAILABLE(ios, tvos, watchos);
 
 
 /*
@@ -96,7 +98,7 @@ extern CFStringRef kLSSharedFileListRecentApplicationItems           __OSX_AVAIL
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
-extern CFStringRef kLSSharedFileListRecentDocumentItems              __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_5, __MAC_10_11, __IPHONE_NA, __IPHONE_NA, "This functionality is no longer supported on OS X.");
+extern CFStringRef kLSSharedFileListRecentDocumentItems              API_DEPRECATED("No longer supported", macos(10.5, 10.11)) API_UNAVAILABLE(ios, tvos, watchos);
 
 
 /*
@@ -107,7 +109,7 @@ extern CFStringRef kLSSharedFileListRecentDocumentItems              __OSX_AVAIL
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
-extern CFStringRef kLSSharedFileListRecentServerItems                __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_5, __MAC_10_11, __IPHONE_NA, __IPHONE_NA, "This functionality is no longer supported on OS X.");
+extern CFStringRef kLSSharedFileListRecentServerItems                API_DEPRECATED("No longer supported", macos(10.5, 10.11)) API_UNAVAILABLE(ios, tvos, watchos);
 
 
 /*
@@ -118,7 +120,7 @@ extern CFStringRef kLSSharedFileListRecentServerItems                __OSX_AVAIL
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
-extern CFStringRef kLSSharedFileListSessionLoginItems                __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_5, __MAC_10_11, __IPHONE_NA, __IPHONE_NA, "Use a LaunchAgent, XPCService or the ServiceManagement APIs instead.");
+extern CFStringRef kLSSharedFileListSessionLoginItems                API_DEPRECATED_WITH_REPLACEMENT("Use a LaunchAgent, XPCService or the ServiceManagement APIs instead.", macos(10.5, 10.11)) API_UNAVAILABLE(ios, tvos, watchos);
 
 
 /*
@@ -132,7 +134,7 @@ extern CFStringRef kLSSharedFileListSessionLoginItems                __OSX_AVAIL
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
-extern CFStringRef kLSSharedFileListGlobalLoginItems                 __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_5, __MAC_10_9, __IPHONE_NA, __IPHONE_NA, "Use a LaunchAgent instead.");
+extern CFStringRef kLSSharedFileListGlobalLoginItems                 API_DEPRECATED_WITH_REPLACEMENT("Use a LaunchAgent instead.", macos(10.5, 10.9)) API_UNAVAILABLE(ios, tvos, watchos);
 
 
 /* LSSharedFileList property keys */
@@ -150,7 +152,7 @@ extern CFStringRef kLSSharedFileListGlobalLoginItems                 __OSX_AVAIL
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
-extern CFStringRef kLSSharedFileListRecentItemsMaxAmount             __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_5, __MAC_10_11, __IPHONE_NA, __IPHONE_NA, "This functionality is no longer supported on OS X.");
+extern CFStringRef kLSSharedFileListRecentItemsMaxAmount             API_DEPRECATED("No longer supported", macos(10.5, 10.11)) API_UNAVAILABLE(ios, tvos, watchos);
 
 /*
  *  kLSSharedFileListVolumesComputerVisible   *** DEPRECATED ***
@@ -164,7 +166,7 @@ extern CFStringRef kLSSharedFileListRecentItemsMaxAmount             __OSX_AVAIL
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
-extern CFStringRef kLSSharedFileListVolumesComputerVisible           __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_5, __MAC_10_11, __IPHONE_NA, __IPHONE_NA, "This functionality is no longer supported on OS X.");
+extern CFStringRef kLSSharedFileListVolumesComputerVisible           API_DEPRECATED("No longer supported", macos(10.5, 10.11)) API_UNAVAILABLE(ios, tvos, watchos);
 
 /*
  *  kLSSharedFileListVolumesIDiskVisible   *** DEPRECATED ***
@@ -181,7 +183,7 @@ extern CFStringRef kLSSharedFileListVolumesComputerVisible           __OSX_AVAIL
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
-extern CFStringRef kLSSharedFileListVolumesIDiskVisible              __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_5, __MAC_10_8, __IPHONE_NA, __IPHONE_NA, "iDisk is no longer available.");
+extern CFStringRef kLSSharedFileListVolumesIDiskVisible              API_DEPRECATED("iDisk is no longer available", macos(10.5, 10.8)) API_UNAVAILABLE(ios, tvos, watchos);
 
 /*
  *  kLSSharedFileListVolumesNetworkVisible   *** DEPRECATED ***
@@ -195,7 +197,7 @@ extern CFStringRef kLSSharedFileListVolumesIDiskVisible              __OSX_AVAIL
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
-extern CFStringRef kLSSharedFileListVolumesNetworkVisible            __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_5, __MAC_10_11, __IPHONE_NA, __IPHONE_NA, "This functionality is no longer supported on OS X.");
+extern CFStringRef kLSSharedFileListVolumesNetworkVisible            API_DEPRECATED("No longer supported", macos(10.5, 10.11)) API_UNAVAILABLE(ios, tvos, watchos);
 
 /* item default positions */
 
@@ -212,7 +214,7 @@ extern CFStringRef kLSSharedFileListVolumesNetworkVisible            __OSX_AVAIL
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
-extern LSSharedFileListItemRef kLSSharedFileListItemBeforeFirst      __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_5, __MAC_10_11, __IPHONE_NA, __IPHONE_NA, "This functionality is no longer supported on OS X.");
+extern LSSharedFileListItemRef kLSSharedFileListItemBeforeFirst      API_DEPRECATED("No longer supported", macos(10.5, 10.11)) API_UNAVAILABLE(ios, tvos, watchos);
 
 /*
  *  kLSSharedFileListItemLast   *** DEPRECATED ***
@@ -226,7 +228,7 @@ extern LSSharedFileListItemRef kLSSharedFileListItemBeforeFirst      __OSX_AVAIL
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
-extern LSSharedFileListItemRef kLSSharedFileListItemLast             __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_5, __MAC_10_11, __IPHONE_NA, __IPHONE_NA, "This functionality is no longer supported on OS X.");
+extern LSSharedFileListItemRef kLSSharedFileListItemLast             API_DEPRECATED("No longer supported", macos(10.5, 10.11)) API_UNAVAILABLE(ios, tvos, watchos);
 
 
 /* LSSharedFileListItem property keys */
@@ -243,7 +245,7 @@ extern LSSharedFileListItemRef kLSSharedFileListItemLast             __OSX_AVAIL
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
-extern CFStringRef kLSSharedFileListItemHidden                       __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_5, __MAC_10_11, __IPHONE_NA, __IPHONE_NA, "This functionality is no longer supported on OS X.");
+extern CFStringRef kLSSharedFileListItemHidden                       API_DEPRECATED("No longer supported", macos(10.5, 10.11)) API_UNAVAILABLE(ios, tvos, watchos);
 /*
  *  kLSSharedFileListLoginItemHidden   *** DEPRECATED ***
  *  
@@ -256,7 +258,7 @@ extern CFStringRef kLSSharedFileListItemHidden                       __OSX_AVAIL
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
-extern CFStringRef kLSSharedFileListLoginItemHidden                  __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_6, __MAC_10_11, __IPHONE_NA, __IPHONE_NA);
+extern CFStringRef kLSSharedFileListLoginItemHidden                  API_DEPRECATED("No longer supported", macos(10.6, 10.11)) API_UNAVAILABLE(ios, tvos, watchos);
 
 /* LSSharedFileListItemCopyResolvedURL flags */
 typedef UInt32 LSSharedFileListResolutionFlags;
@@ -294,7 +296,7 @@ typedef CALLBACK_API_C( void , LSSharedFileListChangedProcPtr )(LSSharedFileList
  *    Non-Carbon CFM:   not available
  */
 extern CFTypeID 
-LSSharedFileListGetTypeID(void)                               __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_5, __MAC_10_11, __IPHONE_NA, __IPHONE_NA, "This functionality is no longer supported on OS X.");
+LSSharedFileListGetTypeID(void)                               API_DEPRECATED("No longer supported", macos(10.5, 10.11)) API_UNAVAILABLE(ios, tvos, watchos);
 
 
 /*
@@ -316,7 +318,7 @@ LSSharedFileListGetTypeID(void)                               __OSX_AVAILABLE_BU
  *    Non-Carbon CFM:   not available
  */
 extern CFTypeID 
-LSSharedFileListItemGetTypeID(void)                           __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_5, __MAC_10_11, __IPHONE_NA, __IPHONE_NA, "This functionality is no longer supported on OS X.");
+LSSharedFileListItemGetTypeID(void)                           API_DEPRECATED("No longer supported", macos(10.5, 10.11)) API_UNAVAILABLE(ios, tvos, watchos);
 
 
 /*
@@ -360,7 +362,7 @@ extern LSSharedFileListRef
 LSSharedFileListCreate(
   CFAllocatorRef   inAllocator,
   CFStringRef      inListType,
-  CFTypeRef        listOptions)                               __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_5, __MAC_10_11, __IPHONE_NA, __IPHONE_NA, "This functionality is no longer supported on OS X.");
+  CFTypeRef        listOptions)                               API_DEPRECATED("No longer supported", macos(10.5, 10.11)) API_UNAVAILABLE(ios, tvos, watchos);
 
 
 /*
@@ -395,7 +397,7 @@ LSSharedFileListCreate(
 extern OSStatus 
 LSSharedFileListSetAuthorization(
   LSSharedFileListRef   inList,
-  AuthorizationRef      inAuthorization)                      __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_5, __MAC_10_11, __IPHONE_NA, __IPHONE_NA, "This functionality is no longer supported on OS X.");
+  AuthorizationRef      inAuthorization)                      API_DEPRECATED("No longer supported", macos(10.5, 10.11)) API_UNAVAILABLE(ios, tvos, watchos);
 
 
 /*
@@ -440,7 +442,7 @@ LSSharedFileListAddObserver(
   CFRunLoopRef                     inRunloop,
   CFStringRef                      inRunloopMode,
   LSSharedFileListChangedProcPtr   callback,
-  void *                           context)                   __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_5, __MAC_10_11, __IPHONE_NA, __IPHONE_NA, "This functionality is no longer supported on OS X.");
+  void *                           context)                   API_DEPRECATED("No longer supported", macos(10.5, 10.11)) API_UNAVAILABLE(ios, tvos, watchos);
 
 
 /*
@@ -483,7 +485,7 @@ LSSharedFileListRemoveObserver(
   CFRunLoopRef                     inRunloop,
   CFStringRef                      inRunloopMode,
   LSSharedFileListChangedProcPtr   callback,
-  void *                           context)                   __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_5, __MAC_10_11, __IPHONE_NA, __IPHONE_NA, "This functionality is no longer supported on OS X.");
+  void *                           context)                   API_DEPRECATED("No longer supported", macos(10.5, 10.11)) API_UNAVAILABLE(ios, tvos, watchos);
 
 
 /*
@@ -509,7 +511,7 @@ LSSharedFileListRemoveObserver(
  *    Non-Carbon CFM:   not available
  */
 extern UInt32 
-LSSharedFileListGetSeedValue(LSSharedFileListRef inList)      __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_5, __MAC_10_11, __IPHONE_NA, __IPHONE_NA, "This functionality is no longer supported on OS X.");
+LSSharedFileListGetSeedValue(LSSharedFileListRef inList)      API_DEPRECATED("No longer supported", macos(10.5, 10.11)) API_UNAVAILABLE(ios, tvos, watchos);
 
 
 /*
@@ -545,7 +547,7 @@ LSSharedFileListGetSeedValue(LSSharedFileListRef inList)      __OSX_AVAILABLE_BU
 extern CFTypeRef 
 LSSharedFileListCopyProperty(
   LSSharedFileListRef   inList,
-  CFStringRef           inPropertyName)                       __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_5, __MAC_10_11, __IPHONE_NA, __IPHONE_NA, "This functionality is no longer supported on OS X.");
+  CFStringRef           inPropertyName)                       API_DEPRECATED("No longer supported", macos(10.5, 10.11)) API_UNAVAILABLE(ios, tvos, watchos);
 
 
 /*
@@ -580,7 +582,7 @@ extern OSStatus
 LSSharedFileListSetProperty(
   LSSharedFileListRef   inList,
   CFStringRef           inPropertyName,
-  CFTypeRef             inPropertyData)                       __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_5, __MAC_10_11, __IPHONE_NA, __IPHONE_NA, "This functionality is no longer supported on OS X.");
+  CFTypeRef             inPropertyData)                       API_DEPRECATED("No longer supported", macos(10.5, 10.11)) API_UNAVAILABLE(ios, tvos, watchos);
 
 
 /*
@@ -616,7 +618,7 @@ LSSharedFileListSetProperty(
 extern CFArrayRef 
 LSSharedFileListCopySnapshot(
   LSSharedFileListRef   inList,
-  UInt32 *              outSnapshotSeed)                      __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_5, __MAC_10_11, __IPHONE_NA, __IPHONE_NA, "This functionality is no longer supported on OS X.");
+  UInt32 *              outSnapshotSeed)                      API_DEPRECATED("No longer supported", macos(10.5, 10.11)) API_UNAVAILABLE(ios, tvos, watchos);
 
 
 /*
@@ -678,7 +680,7 @@ LSSharedFileListInsertItemURL(
   IconRef                   inIconRef,
   CFURLRef                  inURL,
   CFDictionaryRef           inPropertiesToSet,
-  CFArrayRef                inPropertiesToClear)              __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_5, __MAC_10_11, __IPHONE_NA, __IPHONE_NA, "This functionality is no longer supported on OS X.");
+  CFArrayRef                inPropertiesToClear)              API_DEPRECATED("No longer supported", macos(10.5, 10.11)) API_UNAVAILABLE(ios, tvos, watchos);
 
 
 /*
@@ -743,7 +745,7 @@ LSSharedFileListInsertItemFSRef(
   IconRef                   inIconRef,
   const FSRef *             inFSRef,
   CFDictionaryRef           inPropertiesToSet,
-  CFArrayRef                inPropertiesToClear)              __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_5, __MAC_10_10, __IPHONE_NA, __IPHONE_NA, "Use LSSharedFileListInsertItemURL instead.");
+  CFArrayRef                inPropertiesToClear)              API_DEPRECATED_WITH_REPLACEMENT("LSSharedFileListInsertItemURL", macos(10.5, 10.10)) API_UNAVAILABLE(ios, tvos, watchos);
 
 
 /*
@@ -780,7 +782,7 @@ extern OSStatus
 LSSharedFileListItemMove(
   LSSharedFileListRef       inList,
   LSSharedFileListItemRef   inItem,
-  LSSharedFileListItemRef   inMoveAfterItem)                  __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_5, __MAC_10_11, __IPHONE_NA, __IPHONE_NA, "This functionality is no longer supported on OS X.");
+  LSSharedFileListItemRef   inMoveAfterItem)                  API_DEPRECATED("No longer supported", macos(10.5, 10.11)) API_UNAVAILABLE(ios, tvos, watchos);
 
 
 /*
@@ -811,7 +813,7 @@ LSSharedFileListItemMove(
 extern OSStatus 
 LSSharedFileListItemRemove(
   LSSharedFileListRef       inList,
-  LSSharedFileListItemRef   inItem)                           __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_5, __MAC_10_11, __IPHONE_NA, __IPHONE_NA, "This functionality is no longer supported on OS X.");
+  LSSharedFileListItemRef   inItem)                           API_DEPRECATED("No longer supported", macos(10.5, 10.11)) API_UNAVAILABLE(ios, tvos, watchos);
 
 
 /*
@@ -837,7 +839,7 @@ LSSharedFileListItemRemove(
  *    Non-Carbon CFM:   not available
  */
 extern OSStatus 
-LSSharedFileListRemoveAllItems(LSSharedFileListRef inList)    __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_5, __MAC_10_11, __IPHONE_NA, __IPHONE_NA, "This functionality is no longer supported on OS X.");
+LSSharedFileListRemoveAllItems(LSSharedFileListRef inList)    API_DEPRECATED("No longer supported", macos(10.5, 10.11)) API_UNAVAILABLE(ios, tvos, watchos);
 
 
 /*
@@ -858,7 +860,7 @@ LSSharedFileListRemoveAllItems(LSSharedFileListRef inList)    __OSX_AVAILABLE_BU
  *    Non-Carbon CFM:   not available
  */
 extern UInt32 
-LSSharedFileListItemGetID(LSSharedFileListItemRef inItem)     __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_5, __MAC_10_11, __IPHONE_NA, __IPHONE_NA, "This functionality is no longer supported on OS X.");
+LSSharedFileListItemGetID(LSSharedFileListItemRef inItem)     API_DEPRECATED("No longer supported", macos(10.5, 10.11)) API_UNAVAILABLE(ios, tvos, watchos);
 
 
 /*
@@ -883,7 +885,7 @@ LSSharedFileListItemGetID(LSSharedFileListItemRef inItem)     __OSX_AVAILABLE_BU
  *    Non-Carbon CFM:   not available
  */
 extern IconRef 
-LSSharedFileListItemCopyIconRef(LSSharedFileListItemRef inItem) __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_5, __MAC_10_11, __IPHONE_NA, __IPHONE_NA, "This functionality is no longer supported on OS X.");
+LSSharedFileListItemCopyIconRef(LSSharedFileListItemRef inItem) API_DEPRECATED("No longer supported", macos(10.5, 10.11)) API_UNAVAILABLE(ios, tvos, watchos);
 
 
 /*
@@ -905,7 +907,7 @@ LSSharedFileListItemCopyIconRef(LSSharedFileListItemRef inItem) __OSX_AVAILABLE_
  *    Non-Carbon CFM:   not available
  */
 extern CFStringRef 
-LSSharedFileListItemCopyDisplayName(LSSharedFileListItemRef inItem) __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_5, __MAC_10_11, __IPHONE_NA, __IPHONE_NA, "This functionality is no longer supported on OS X.");
+LSSharedFileListItemCopyDisplayName(LSSharedFileListItemRef inItem) API_DEPRECATED("No longer supported", macos(10.5, 10.11)) API_UNAVAILABLE(ios, tvos, watchos);
 
 
 /*
@@ -944,7 +946,7 @@ LSSharedFileListItemResolve(
   LSSharedFileListItemRef           inItem,
   LSSharedFileListResolutionFlags   inFlags,
   CFURLRef *                        outURL,
-  FSRef *                           outRef)                   __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_5, __MAC_10_10, __IPHONE_NA, __IPHONE_NA, "Use LSSharedFileListItemCopyResolvedURL instead.");
+  FSRef *                           outRef)                   API_DEPRECATED_WITH_REPLACEMENT("LSSharedFileListItemCopyResolvedURL", macos(10.5, 10.10)) API_UNAVAILABLE(ios, tvos, watchos);
 
 
 /*
@@ -954,7 +956,11 @@ LSSharedFileListItemResolve(
  *    Resolve the shared file list item and return its URL.
  *  
  *  Discussion:
- *    Resolves the shared file list item and returns its URL.
+ *    Resolves the shared file list item and returns its URL. For backwards
+ *    compatibility, a sandboxed app will receive an extension to its
+ *    sandbox for the URL. It is the responsibility of the caller to
+ *    call -stopAccessingSecurityScopedResource to avoid leaking resources
+ *    when it is no longer needs access.
  *  
  *  Parameters:
  *    
@@ -980,7 +986,7 @@ extern CFURLRef
 LSSharedFileListItemCopyResolvedURL(
   LSSharedFileListItemRef           inItem,
   LSSharedFileListResolutionFlags   inFlags,
-  CFErrorRef *                      outError)                 __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_10, __MAC_10_11, __IPHONE_NA, __IPHONE_NA);
+  CFErrorRef *                      outError)                 API_DEPRECATED("No longer supported", macos(10.10, 10.11)) API_UNAVAILABLE(ios, tvos, watchos);
 
 
 /*
@@ -1004,7 +1010,7 @@ LSSharedFileListItemCopyResolvedURL(
 extern CFTypeRef 
 LSSharedFileListItemCopyProperty(
   LSSharedFileListItemRef   inItem,
-  CFStringRef               inPropertyName)                   __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_5, __MAC_10_11, __IPHONE_NA, __IPHONE_NA, "This functionality is no longer supported on OS X.");
+  CFStringRef               inPropertyName)                   API_DEPRECATED("No longer supported", macos(10.5, 10.11)) API_UNAVAILABLE(ios, tvos, watchos);
 
 
 /*
@@ -1028,7 +1034,7 @@ extern OSStatus
 LSSharedFileListItemSetProperty(
   LSSharedFileListItemRef   inItem,
   CFStringRef               inPropertyName,
-  CFTypeRef                 inPropertyData)                   __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_5, __MAC_10_11, __IPHONE_NA, __IPHONE_NA, "This functionality is no longer supported on OS X.");
+  CFTypeRef                 inPropertyData)                   API_DEPRECATED("No longer supported", macos(10.5, 10.11)) API_UNAVAILABLE(ios, tvos, watchos);
 
 
 
@@ -1038,3 +1044,4 @@ LSSharedFileListItemSetProperty(
 
 #endif /* __LSSHAREDFILELIST__ */
 
+#endif // TARGET_OS_OSX

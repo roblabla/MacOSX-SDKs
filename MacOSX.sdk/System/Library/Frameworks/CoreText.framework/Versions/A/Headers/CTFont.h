@@ -2,7 +2,7 @@
  *  CTFont.h
  *  CoreText
  *
- *  Copyright (c) 2006-2018 Apple Inc. All rights reserved.
+ *  Copyright (c) 2006-2019 Apple Inc. All rights reserved.
  *
  */
 
@@ -475,6 +475,36 @@ CTFontRef CTFontCreateForString(
     CFStringRef     string,
     CFRange         range ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
+/*!
+    @function   CTFontCreateForStringWithLanguage
+    @abstract   Returns a new font reference that can best map the given string range based on the current font and language specified.
+
+    @discussion The current font itself can be returned if it covers the string provided.
+
+    @param      currentFont
+                The current font that contains a valid cascade list.
+
+    @param      string
+                A unicode string containing characters that cannot be encoded by the current font.
+
+    @param      range
+                A CFRange specifying the range of the string that needs to be mapped.
+
+    @param      language
+                Language identifier to select a font for a particular localization. If unspecified, the current system language is used. The format of the language identifier should conform to UTS #35.
+
+    @result     This function returns the best substitute font that can encode the specified string range.
+
+    @seealso    CTFontCopyCharacterSet
+    @seealso    CTFontGetGlyphsForCharacters
+    @seealso    kCTFontCascadeListAttribute
+*/
+CTFontRef CTFontCreateForStringWithLanguage(
+    CTFontRef               currentFont,
+    CFStringRef             string,
+    CFRange                 range,
+    CFStringRef _Nullable   language ) CT_AVAILABLE(macos(10.9), ios(7.0), watchos(2.0), tvos(9.0));
+
 /*! --------------------------------------------------------------------------
     @group Font Accessors
 *///--------------------------------------------------------------------------
@@ -871,7 +901,7 @@ CGRect CTFontGetBoundingRectsForGlyphs(
     CTFontRef           font,
     CTFontOrientation   orientation,
     const CGGlyph       glyphs[_Nonnull],
-    CGRect * __nullable boundingRects,
+    CGRect              boundingRects[_Nullable],
     CFIndex             count ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 /*!
@@ -900,7 +930,7 @@ CGRect CTFontGetBoundingRectsForGlyphs(
 CGRect CTFontGetOpticalBoundsForGlyphs(
     CTFontRef           font,
     const CGGlyph       glyphs[_Nonnull],
-    CGRect * __nullable boundingRects,
+    CGRect              boundingRects[_Nullable],
     CFIndex             count,
     CFOptionFlags       options ) CT_AVAILABLE(macos(10.8), ios(6.0), watchos(2.0), tvos(9.0));
 
@@ -929,7 +959,7 @@ double CTFontGetAdvancesForGlyphs(
     CTFontRef           font,
     CTFontOrientation   orientation,
     const CGGlyph       glyphs[_Nonnull],
-    CGSize * __nullable advances,
+    CGSize              advances[_Nullable],
     CFIndex             count ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 /*!
@@ -1107,6 +1137,18 @@ CT_EXPORT const CFStringRef kCTFontFeatureSelectorDefaultKey CT_AVAILABLE(macos(
     @discussion This key is used with a selector dictionary to get or specify the current setting for the selector. This value is a CFBooleanRef to indicate whether this selector is on or off. If this key is not present, the default setting is used.
 */
 CT_EXPORT const CFStringRef kCTFontFeatureSelectorSettingKey CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
+/*!
+     @defined    kCTFontFeatureSampleTextKey
+     @abstract   Key to get the font feature sample text.
+     @discussion This key can be used with a font feature dictionary to get the localized sample text as a CFStringRef.
+*/
+CT_EXPORT const CFStringRef kCTFontFeatureSampleTextKey CT_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0));
+/*!
+     @defined    kCTFontFeatureTooltipTextKey
+     @abstract   Key to get the font feature tooltip text.
+     @discussion This key can be used with a font feature dictionary to get the localized tooltip text as a CFStringRef.
+*/
+CT_EXPORT const CFStringRef kCTFontFeatureTooltipTextKey CT_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0));
 
 /*!
     @function   CTFontCopyFeatures
@@ -1246,7 +1288,7 @@ CTFontRef CTFontCreateWithQuickdrawInstance(
     ConstStr255Param _Nullable name,
     int16_t             identifier,
     uint8_t             style,
-    CGFloat             size ) CT_AVAILABLE(macos(10.5)) CT_UNAVAILABLE(ios, watchos, tvos);
+    CGFloat             size ) CT_DEPRECATED("Quickdraw font references are deprecated", macos(10.5, 10.15)) CT_UNAVAILABLE(ios, watchos, tvos);
 
 /*! --------------------------------------------------------------------------
     @group Font Tables
@@ -1429,7 +1471,7 @@ void CTFontDrawGlyphs(
 CFIndex CTFontGetLigatureCaretPositions(
     CTFontRef       font,
     CGGlyph         glyph,
-    CGFloat * __nullable positions,
+    CGFloat         positions[_Nullable],
     CFIndex         maxPositions ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 /*! --------------------------------------------------------------------------

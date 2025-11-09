@@ -16,6 +16,10 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+API_UNAVAILABLE_BEGIN(ios, tvos, macCatalyst)
+
+API_AVAILABLE_BEGIN(macos(10.13))
+
 /**
  PHProjectCreationSource is provided as a hint to project extensions of the user context at the time of project creation.
  For example, if a user is viewing a Memory in the Photos app and from that chooses the 'Create Project' option, the
@@ -34,7 +38,7 @@ typedef NS_ENUM(NSInteger, PHProjectCreationSource) {
     PHProjectCreationSourceProjectPrintOrder = 24,
     PHProjectCreationSourceProjectSlideshow = 25,
     PHProjectCreationSourceProjectExtension = 26,
-} NS_SWIFT_NAME(PHProjectInfo.CreationSource) NS_ENUM_AVAILABLE_MAC(10_13);
+} NS_SWIFT_NAME(PHProjectInfo.CreationSource);
 
 
 /**
@@ -43,7 +47,7 @@ typedef NS_ENUM(NSInteger, PHProjectCreationSource) {
  leverage to influence things like project layout, auto-flow, or theme selection. The properties in this class
  are inmutable and the class cannot be instatiated by an extension directly.
  */
-NS_CLASS_AVAILABLE_MAC(10_13)
+OS_EXPORT
 @interface PHProjectInfo : NSObject <NSSecureCoding>
 
 /// Source from which the project was created.
@@ -91,7 +95,7 @@ typedef NS_ENUM(NSInteger, PHProjectSectionType) {
     PHProjectSectionTypeCover = 1,
     PHProjectSectionTypeContent = 2,
     PHProjectSectionTypeAuxiliary = 3,
-} NS_SWIFT_NAME(PHProjectSection.SectionType) NS_ENUM_AVAILABLE_MAC(10_13);
+} NS_SWIFT_NAME(PHProjectSection.SectionType);
 
 
 /**
@@ -103,7 +107,7 @@ typedef NS_ENUM(NSInteger, PHProjectSectionType) {
  - if user creates a project from a single Album, the project info may only contain one section unless the album contains a large quantity of photos in which case, Photos may suggest section breaks based on Moments in the user's library
  - if user creates a project from an existing Apple Book, Card, or Calendar, the sections provided in the project info will exactly match the pagination in that project (e.g., one section per page in a book).
  */
-NS_CLASS_AVAILABLE_MAC(10_13)
+OS_EXPORT
 @interface PHProjectSection : NSObject <NSSecureCoding>
 
 /**
@@ -130,7 +134,7 @@ NS_CLASS_AVAILABLE_MAC(10_13)
  level of curation within a PHProjectSection. A section can provide multiple content objects, but
  only one is intended to be used in a project based on the amount of content detail desired.
  */
-NS_CLASS_AVAILABLE_MAC(10_13)
+OS_EXPORT
 @interface PHProjectSectionContent : NSObject <NSSecureCoding>
 
 /// Array of asset, text, or journal entry elements contained in the content.
@@ -166,7 +170,7 @@ NS_CLASS_AVAILABLE_MAC(10_13)
  PHProjectElement is the superclass for all element objects. It is never directly used, but defines the shared
  properties of any element in an instance of PHProjectSectionContent.
  */
-NS_CLASS_AVAILABLE_MAC(10_13)
+OS_EXPORT
 @interface PHProjectElement : NSObject <NSSecureCoding>
 
 /**
@@ -203,7 +207,7 @@ typedef NSString * PHProjectRegionOfInterestIdentifier NS_SWIFT_NAME(PHProjectRe
  transitions. Regions representing the same person or object across multiple assets are cross-referenced through
  the use of the identifier.
  */
-NS_CLASS_AVAILABLE_MAC(10_13)
+OS_EXPORT
 @interface PHProjectRegionOfInterest : NSObject <NSSecureCoding>
 
 /*
@@ -249,7 +253,7 @@ NS_CLASS_AVAILABLE_MAC(10_13)
  The underlying PHAsset can be accessed by converting the provided cloudAssetIdentifier to a localIdentifier,
  then using the fetchAssetsWithLocalIdentifiers:options: class method defined in PHAsset.h.
  */
-NS_CLASS_AVAILABLE_MAC(10_13)
+OS_EXPORT
 @interface PHProjectAssetElement : PHProjectElement <NSSecureCoding>
 
 /**
@@ -291,14 +295,14 @@ typedef NS_ENUM(NSInteger, PHProjectTextElementType) {
     PHProjectTextElementTypeBody = 0,
     PHProjectTextElementTypeTitle,
     PHProjectTextElementTypeSubtitle,
-} NS_SWIFT_NAME(PHProjectTextElement.ElementType) NS_ENUM_AVAILABLE_MAC(10_13);
+} NS_SWIFT_NAME(PHProjectTextElement.ElementType);
 
 /**
  A PHProjectTextElement object represents formatted, positioned text that should be considered
  for inclusion in a project. In this case of a Memory, this will always be the Title and Subtitle show in the
  Memory header view. For projects created from Apple Book, Card, and Calendar projects, text appearing on any page. 
  */
-NS_CLASS_AVAILABLE_MAC(10_13)
+OS_EXPORT
 @interface PHProjectTextElement : PHProjectElement <NSSecureCoding>
 
 /// Unformatted, raw string for the text element
@@ -317,7 +321,7 @@ NS_CLASS_AVAILABLE_MAC(10_13)
  to include in a project. For example, callouts for specific birthdays or holidays. In general, these will only
  be included for projects created from existing Apple Calendar projects.
  */
-NS_CLASS_AVAILABLE_MAC(10_13)
+OS_EXPORT
 @interface PHProjectJournalEntryElement : PHProjectElement <NSSecureCoding>
 
 /// Date to which the provided asset and/or text pertain
@@ -330,11 +334,14 @@ NS_CLASS_AVAILABLE_MAC(10_13)
 @property (nonatomic, readonly, nullable) PHProjectTextElement *textElement;
 @end
 
+API_AVAILABLE_END // macos(10.13)
+API_AVAILABLE_BEGIN(macos(10.14))
+
 /**
  A PHProjectMapElement object representing a map with annotations.
  In general, these will only be included for projects created from existing Apple Print Product projects.
  */
-API_AVAILABLE(macos(10.14))
+OS_EXPORT
 @interface PHProjectMapElement : PHProjectElement <NSSecureCoding>
 /// The type of the map in the project.
 @property (nonatomic, readonly) MKMapType mapType;
@@ -346,5 +353,9 @@ API_AVAILABLE(macos(10.14))
 
 @property (nonatomic, copy, readonly) NSArray<id<MKAnnotation>> *annotations;
 @end
+
+API_AVAILABLE_END // macos(10.14)
+
+API_UNAVAILABLE_END
 
 NS_ASSUME_NONNULL_END

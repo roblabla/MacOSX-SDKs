@@ -1,8 +1,8 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 062CE5B5-2D55-37EA-B83D-D19E20827485' ]
+uuids:           [ 'x86_64: 84F00636-AD8F-3E1E-96FD-500E188D7997' ]
 platform:        macosx
-install-name:    /System/Library/PrivateFrameworks/Calculate.framework/Versions/A/Calculate
+install-name:    '/System/Library/PrivateFrameworks/Calculate.framework/Versions/A/Calculate'
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _CalculateExpression, _CalculateExpressionError, _CalculateInternationalExpression, 

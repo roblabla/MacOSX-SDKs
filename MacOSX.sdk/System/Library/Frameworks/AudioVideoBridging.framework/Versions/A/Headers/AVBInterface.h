@@ -2,7 +2,7 @@
 //  AVBInterface.h
 //  AudioVideoBridging
 //
-//  Copyright (c) 2010-2015 Apple Inc. All rights reserved.
+//  Copyright (c) 2010-2019 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -28,13 +28,9 @@ NS_ASSUME_NONNULL_BEGIN
 				AVBInterface objects should not be directly created as they cannot provide full functionality, instead a concrete
 				subclass should be instantiated.
  */
-NS_CLASS_AVAILABLE(10_8, NA)
+API_AVAILABLE(macos(10.8))
 @interface AVBInterface : NSObject
 {
-#if AVB_LEGACY_OBJC_RUNTIME
-@private
-	void *_interfaceImpl;
-#endif
 }
 
 /*!
@@ -99,13 +95,6 @@ NS_CLASS_AVAILABLE(10_8, NA)
 	@result		The initialized receiver.
  */
 - (nullable instancetype)initWithInterfaceName:(NSString *)anInterfaceName NS_DESIGNATED_INITIALIZER;
-
-/*!
- @method		myGUID
- @abstract	This method returns the GUID which is used by the built-in controller functionality of Mac OS X. This is either the FireWire GUID or an EUI64 based on the first found ethernet type interface (may be an ethernet port, USB ethernet adapter, PCI Express adapter or the AirPort card).
- @result		The GUID which is used by the OS.
- */
-+ (uint64_t)myGUID NS_DEPRECATED(10_8, 10_10, NA, NA);
 
 /*!
  @method		myEntityID

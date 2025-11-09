@@ -1,5 +1,5 @@
 /*	NSUUID.h
-        Copyright (c) 2011-2018, Apple Inc. All rights reserved.
+        Copyright (c) 2011-2019, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-NS_CLASS_AVAILABLE(10_8, 6_0)
+API_AVAILABLE(macos(10.8), ios(6.0), watchos(2.0), tvos(9.0))
 @interface NSUUID : NSObject <NSCopying, NSSecureCoding>
 
 /* Create a new autoreleased NSUUID with RFC 4122 version 4 random bytes */

@@ -19,6 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 // geocoding handler, CLPlacemarks are provided in order of most confident to least confident
 typedef void (^CLGeocodeCompletionHandler)(NSArray< CLPlacemark *> * __nullable placemarks, NSError * __nullable error);
 
+CL_EXTERN
 API_AVAILABLE(macos(10.8), ios(5.0))
 @interface CLGeocoder : NSObject
 {

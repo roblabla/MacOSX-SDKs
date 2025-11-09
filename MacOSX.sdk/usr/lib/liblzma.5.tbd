@@ -1,11 +1,10 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 3ADDFA63-F37A-3C9C-91E4-58EE3113B9A1' ]
-platform:        macosx
-install-name:    /usr/lib/liblzma.5.dylib
+uuids:           [ 'x86_64: 8E1A25FA-463B-3187-AA31-4C79A31B3662', 'x86_64: 8E1A25FA-463B-3187-AA31-4C79A31B3662' ]
+platform:        zippered
+install-name:    '/usr/lib/liblzma.5.dylib'
 current-version: 6.3
 compatibility-version: 6
-objc-constraint: none
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _lzma_alone_decoder, _lzma_alone_encoder, _lzma_auto_decoder, 

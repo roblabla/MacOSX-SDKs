@@ -39,8 +39,7 @@ typedef const struct CF_BRIDGED_TYPE(id) __DCSDictionary*	DCSDictionaryRef;
 				The result range can be used as an input parameter of DCSCopyTextDefinition()
 				and HIDictionaryWindowShow() in Carbon framework.
 */
-extern CFRange DCSGetTermRangeInString( DCSDictionaryRef __nullable dictionary, CFStringRef textString, CFIndex offset )
- AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+extern CFRange DCSGetTermRangeInString( DCSDictionaryRef __nullable dictionary, CFStringRef textString, CFIndex offset ) API_AVAILABLE(macos(10.5), ios(5.0));
 
 /*!
 	@function	DCSCopyTextDefinition
@@ -53,8 +52,7 @@ extern CFRange DCSGetTermRangeInString( DCSDictionaryRef __nullable dictionary, 
 				Range of the target word or phrase in textString
 	@result		Returns a definition of the specified term in range in plain text
 */
-extern CFStringRef __nullable DCSCopyTextDefinition( DCSDictionaryRef __nullable dictionary, CFStringRef textString, CFRange range )
- AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
+extern CFStringRef __nullable DCSCopyTextDefinition( DCSDictionaryRef __nullable dictionary, CFStringRef textString, CFRange range ) API_AVAILABLE(macos(10.5), ios(5.0));
 
 CF_ASSUME_NONNULL_END
 CF_EXTERN_C_END

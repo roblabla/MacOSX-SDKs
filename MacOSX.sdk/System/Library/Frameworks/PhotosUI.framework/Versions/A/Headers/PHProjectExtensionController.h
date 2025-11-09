@@ -11,8 +11,8 @@
 @class PHProjectExtensionContext;
 
 NS_ASSUME_NONNULL_BEGIN
+API_AVAILABLE_BEGIN(macos(10.13))
 
-NS_CLASS_AVAILABLE_MAC(10_13)
 /**
  The principal view controller for any Photos Project Extension must conform to the PHProjectExtensionController protocol.
  Methods in this protocol define the basic lifecycle of the extension controller as well as optionally allow for
@@ -63,4 +63,5 @@ API_DEPRECATED_WITH_REPLACEMENT("-typeDescriptionDataSourceForCategory:invalidat
 
 @end
 
+API_AVAILABLE_END
 NS_ASSUME_NONNULL_END

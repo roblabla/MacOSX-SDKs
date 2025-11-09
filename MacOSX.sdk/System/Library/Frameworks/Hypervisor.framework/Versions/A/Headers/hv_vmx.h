@@ -52,6 +52,63 @@ extern hv_return_t hv_vmx_vcpu_write_vmcs(hv_vcpuid_t vcpu, uint32_t field,
 	uint64_t value) __HV_10_10;
 
 /*!
+ * @function   hv_vmx_vcpu_read_shadow_vmcs
+ * @abstract   Returns the current value of a shadow VMCS field of a vCPU
+ * @param      vcpu   vCPU ID
+ * @param      field  ID of the shadow VMCS field to be read
+ * @param      value  Pointer to the shadow VMCS field value (written on success)
+ * @result     0 on success or error code
+ * @discussion
+ *             See Documentation for a list of supported shadow VMCS fields
+ *
+ *             Must be called by the owning thread
+ */
+extern hv_return_t hv_vmx_vcpu_read_shadow_vmcs(hv_vcpuid_t vcpu,
+	uint32_t field, uint64_t *value) __HV_10_15;
+
+/*!
+ * @function   hv_vmx_vcpu_write_shadow_vmcs
+ * @abstract   Set the value of a shadow VMCS field of a vCPU
+ * @param      vcpu   vCPU ID
+ * @param      field  ID of the shadow VMCS field to be written
+ * @param      value  Value of the shadow VMCS field to be written
+ * @result     0 on success or error code
+ * @discussion
+ *             See Documentation for a list of supported shadow VMCS fields
+ *
+ *             Must be called by the owning thread
+ */
+extern hv_return_t hv_vmx_vcpu_write_shadow_vmcs(hv_vcpuid_t vcpu,
+	uint32_t field, uint64_t value) __HV_10_15;
+
+/*!
+ * @enum       hv_shadow_flags_t
+ * @abstract   Shadow VMCS permissions for hv_vcpu_vmx_set_shadow_access()
+ */
+enum {
+	HV_SHADOW_VMCS_NONE  = 0,
+	HV_SHADOW_VMCS_READ  = (1ull << 0),
+	HV_SHADOW_VMCS_WRITE = (1ull << 1),
+};
+
+typedef uint64_t hv_shadow_flags_t;
+
+/*!
+ * @function   hv_vmx_vcpu_set_shadow_access
+ * @abstract   Set the access permissions of a shadow VMCS field of a vCPU
+ * @param      vcpu   vCPU ID
+ * @param      field  ID of the shadow VMCS field
+ * @param      flags  New READ, WRITE permissions for the shadow VMCS field
+ * @result     0 on success or error code
+ * @discussion
+ *             See Documentation for a list of supported shadow VMCS fields
+ *
+ *             Must be called by the owning thread
+ */
+extern hv_return_t hv_vmx_vcpu_set_shadow_access(hv_vcpuid_t vcpu,
+	uint32_t field, hv_shadow_flags_t flags) __HV_10_15;
+
+/*!
  * @typedef    hv_vmx_capability_t
  * @abstract   Enum type of VMX cabability fields
  */

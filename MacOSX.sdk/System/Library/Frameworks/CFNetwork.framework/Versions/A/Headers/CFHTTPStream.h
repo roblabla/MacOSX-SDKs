@@ -292,29 +292,6 @@ CFReadStreamCreateForHTTPRequest(CFAllocatorRef __nullable alloc, CFHTTPMessageR
 CFN_EXPORT CFReadStreamRef 
 CFReadStreamCreateForStreamedHTTPRequest(CFAllocatorRef __nullable alloc, CFHTTPMessageRef requestHeaders, CFReadStreamRef requestBody) CF_DEPRECATED(10_2, 10_11, 2_0, 9_0, "Use NSURLSession API for http requests");
 
-
-/*
- *  CFHTTPReadStreamSetRedirectsAutomatically()   *** DEPRECATED ***
- *  
- *  Deprecated:
- *	Use the kCFStreamPropertyHTTPShouldAutoredirect property above
- *	instead.
- *  
- *  Discussion:
- *	Sets the redirection property on the http stream.
- *  
- *  Parameters:
- *	
- *	httpStream:
- *	  A pointer to the CFHTTPStream to be set.
- *	
- *	shouldAutoRedirect:
- *	  A boolean indicating whether to redirect or not.
- *  
- */
-CFN_EXPORT void
-CFHTTPReadStreamSetRedirectsAutomatically(CFReadStreamRef httpStream, Boolean shouldAutoRedirect) CF_DEPRECATED(10_1, 10_3, NA, NA);
-
 #if PRAGMA_ENUM_ALWAYSINT
 	#pragma enumsalwaysint reset
 #endif

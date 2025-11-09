@@ -1,7 +1,7 @@
 /*
 	NSDatePicker.h
 	Application Kit
-	Copyright (c) 2004-2018, Apple Inc.
+	Copyright (c) 2004-2019, Apple Inc.
 	All rights reserved.
 */
 
@@ -10,6 +10,7 @@
 
 
 NS_ASSUME_NONNULL_BEGIN
+API_UNAVAILABLE_BEGIN(ios)
 
 @class NSCalendar, NSLocale, NSTimeZone;
 
@@ -63,5 +64,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+API_UNAVAILABLE_END
 NS_ASSUME_NONNULL_END
 

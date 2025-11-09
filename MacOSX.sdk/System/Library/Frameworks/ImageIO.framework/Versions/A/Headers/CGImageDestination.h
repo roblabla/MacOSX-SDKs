@@ -71,15 +71,17 @@ IMAGEIO_EXTERN CFArrayRef _iio_Nonnull CGImageDestinationCopyTypeIdentifiers(voi
 
 /* Create an image destination writing to the data consumer `consumer'.
  * The parameter `type' specifies the type identifier of the resulting
- * image file.  The parameter `count' specifies number of images (not
- * including thumbnails) that the image file will contain. The `options'
- * dictionary is reserved for future use; currently, you should pass NULL
- * for this parameter. */
+ * image file.  Constants for `type' are found in the LaunchServices framework
+ * header UTCoreTypes.h.  The parameter `count' specifies number of images
+ * (not including thumbnails) that the image file will contain. The `options'
+ * dictionary is reserved for future use; currently, you should pass NULL for
+ * this parameter. */
 
 IMAGEIO_EXTERN CGImageDestinationRef _iio_Nullable CGImageDestinationCreateWithDataConsumer(CGDataConsumerRef _iio_Nonnull consumer, CFStringRef _iio_Nonnull type, size_t count, CFDictionaryRef _iio_Nullable options)  IMAGEIO_AVAILABLE_STARTING(10.4, 4.0);
 
 /* Create an image destination writing to `data'. The parameter `type'
- * specifies the type identifier of the resulting image file.  The
+ * specifies the type identifier of the resulting image file.  Constants for
+ * `type' are found in the LaunchServices framework header UTCoreTypes.h.  The
  * parameter `count' specifies number of images (not including thumbnails)
  * that the image file will contain. The `options' dictionary is reserved
  * for future use; currently, you should pass NULL for this parameter. */
@@ -87,7 +89,8 @@ IMAGEIO_EXTERN CGImageDestinationRef _iio_Nullable CGImageDestinationCreateWithD
 IMAGEIO_EXTERN CGImageDestinationRef _iio_Nullable CGImageDestinationCreateWithData(CFMutableDataRef _iio_Nonnull data, CFStringRef _iio_Nonnull type, size_t count, CFDictionaryRef _iio_Nullable options)  IMAGEIO_AVAILABLE_STARTING(10.4, 4.0);
 
 /* Create an image destination writing to `url'. The parameter `type'
- * specifies the type identifier of the resulting image file.  The
+ * specifies the type identifier of the resulting image file.  Constants for
+ * `type' are found in the LaunchServices framework header UTCoreTypes.h.  The
  * parameter `count' specifies number of images (not including thumbnails)
  * that the image file will contain. The `options' dictionary is reserved
  * for future use; currently, you should pass NULL for this parameter.

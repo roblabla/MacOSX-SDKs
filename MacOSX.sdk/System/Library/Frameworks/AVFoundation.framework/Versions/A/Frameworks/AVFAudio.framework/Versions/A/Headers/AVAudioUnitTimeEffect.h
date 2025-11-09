@@ -17,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
     unit is an example of a time effect unit.
  
 */
-OS_EXPORT API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0)) API_UNAVAILABLE(watchos)
+API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 @interface AVAudioUnitTimeEffect : AVAudioUnit
 
 #if AVAUDIOUNIT_HAVE_AUDIOUNIT
@@ -25,7 +25,7 @@ OS_EXPORT API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0)) API_UNAVAILABLE(watch
     @abstract create an AVAudioUnitTimeEffect object
     
     @param audioComponentDescription
-    @abstract AudioComponentDescription of the audio unit to be initialized
+    AudioComponentDescription of the audio unit to be initialized
     @discussion 
     The componentType must be kAudioUnitType_FormatConverter
 */

@@ -1,37 +1,20 @@
 /*
  NSPopoverTouchBarItem.h
  Application Kit
- Copyright (c) 2015-2018, Apple Inc.
+ Copyright (c) 2015-2019, Apple Inc.
  All rights reserved.
 */
 
 #import <AppKit/NSTouchBarItem.h>
 
+#if TARGET_OS_IPHONE
+@class UIImage;
+#endif
+
 NS_ASSUME_NONNULL_BEGIN
 
-NS_CLASS_AVAILABLE_MAC(10_12_2)
-@interface NSPopoverTouchBarItem : NSTouchBarItem {
-@private
-    NSTouchBar *_popoverTouchBar APPKIT_IVAR;
-    NSTouchBar *_pressAndHoldTouchBar APPKIT_IVAR;
-    
-    id _overlay APPKIT_IVAR;
-    
-    NSString *_customizationLabel APPKIT_IVAR;
-    
-    NSView *_collapsedRepresentation APPKIT_IVAR;
-    
-    NSImage *_collapsedRepresentationImage APPKIT_IVAR;
-    NSString *_collapsedRepresentationLabel APPKIT_IVAR;
-    
-    unsigned _showsCloseButton:1 APPKIT_IVAR;
-    unsigned _showsControlStrip:1 APPKIT_IVAR;
-    unsigned _collapsedRepresentationChevronBehavior:2 APPKIT_IVAR;
-#if !__OBJC2__
-    unsigned _popoverTouchBarItemReservedFlags: 28 __unused APPKIT_IVAR;
-    void *_popoverTouchBarItemReserved[3] __unused APPKIT_IVAR;
-#endif /* !__OBJC2__ */
-}
+API_AVAILABLE(macos(10.12.2), ios(13.0))
+@interface NSPopoverTouchBarItem : NSTouchBarItem
 
 /*
     The NSTouchBar displayed when this item is "popped." By default this is an empty bar that cannot be customized. This property is archived.
@@ -46,12 +29,16 @@ NS_CLASS_AVAILABLE_MAC(10_12_2)
 /*
     The view displayed when the item is in its hosted NSTouchBar. By default, this is an NSButton whose target is this popover item, whose action is showPopover:, and whose image and title are bound to this item's collapsedRepresentationImage and collapsedRepresentationLabel respectively. This property is archived.
 */
-@property (strong) __kindof NSView *collapsedRepresentation;
+@property (strong) __kindof NSView *collapsedRepresentation API_UNAVAILABLE(ios);
 
 /*
     The image displayed by the button used by default for the default collapsed representation. If the collapsedRepresentation button has been replaced by a different view, this property may not have any effect. This property is archived.
 */
+#if !TARGET_OS_IPHONE
 @property (strong, nullable) NSImage *collapsedRepresentationImage;
+#else
+@property (strong, nullable) UIImage *collapsedRepresentationImage API_AVAILABLE(ios(13.0));
+#endif
 
 /*
     The localized string displayed by the button used by default for the default collapsed representation. If the collapsedRepresentation button has been replaced by a different view, this property may not have any effect. This property is archived.
@@ -83,7 +70,7 @@ NS_CLASS_AVAILABLE_MAC(10_12_2)
 /* 
     Returns a new gesture recognizer, already wired up to send this popover -showPopover:. It is the callers responsibility to attach this GR to a custom collapsedRepresentation view 
 */
-- (NSGestureRecognizer *)makeStandardActivatePopoverGestureRecognizer;
+- (NSGestureRecognizer *)makeStandardActivatePopoverGestureRecognizer API_UNAVAILABLE(ios);
 @end
 
 NS_ASSUME_NONNULL_END

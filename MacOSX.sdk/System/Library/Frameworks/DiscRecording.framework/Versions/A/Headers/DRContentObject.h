@@ -124,11 +124,12 @@ AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 	@param		object	The file or folder object to query.
 	@param		fsRef	On success, contains a valid FSRef object.
 */
+
 extern void
 DRFSObjectGetRealFSRef(
 	const DRFSObjectRef			object,
 	FSRef *						fsRef)
-AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+    __OSX_DEPRECATED(10.2, 10.14, "Please use DRFSObjectCopyRealURL( const DRFSObjectRef object) instead");
 
 
 /*!	@function	DRFSObjectCopyRealURL

@@ -3,9 +3,9 @@
  
      Contains:   SearchKit Interfaces.
  
-     Version:    SearchKit-407~38
+     Version:    SearchKit-417.1
  
-     Copyright:  © 2003-2008 by Apple Computer, Inc., all rights reserved
+     Copyright:  2003-2019 by Apple, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -64,7 +64,7 @@ typedef CFTypeRef                       SKDocumentRef;
  *    Non-Carbon CFM:   not available
  */
 extern CFTypeID 
-SKDocumentGetTypeID(void)                                     AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+SKDocumentGetTypeID(void)                                     API_AVAILABLE( macos(10.3) ) API_UNAVAILABLE( macCatalyst );
 
 
 /*
@@ -95,7 +95,7 @@ SKDocumentGetTypeID(void)                                     AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   not available
  */
 extern SKDocumentRef 
-SKDocumentCreateWithURL(CFURLRef inURL)                       AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+SKDocumentCreateWithURL(CFURLRef inURL)                       API_AVAILABLE( macos(10.3) ) API_UNAVAILABLE( macCatalyst );
 
 
 /*
@@ -113,7 +113,7 @@ SKDocumentCreateWithURL(CFURLRef inURL)                       AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   not available
  */
 extern CFURLRef 
-SKDocumentCopyURL(SKDocumentRef inDocument)                   AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+SKDocumentCopyURL(SKDocumentRef inDocument)                   API_AVAILABLE( macos(10.3) ) API_UNAVAILABLE( macCatalyst );
 
 
 /*
@@ -157,7 +157,7 @@ extern SKDocumentRef
 SKDocumentCreate(
   CFStringRef     inScheme,
   SKDocumentRef   inParent,       /* can be NULL */
-  CFStringRef     inName)                                     AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+  CFStringRef     inName)                                     API_AVAILABLE( macos(10.3) ) API_UNAVAILABLE( macCatalyst );
 
 
 /*
@@ -180,7 +180,7 @@ SKDocumentCreate(
  *    Non-Carbon CFM:   not available
  */
 extern CFStringRef 
-SKDocumentGetSchemeName(SKDocumentRef inDocument)             AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+SKDocumentGetSchemeName(SKDocumentRef inDocument)             API_AVAILABLE( macos(10.3) ) API_UNAVAILABLE( macCatalyst );
 
 
 /*
@@ -203,7 +203,7 @@ SKDocumentGetSchemeName(SKDocumentRef inDocument)             AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   not available
  */
 extern CFStringRef 
-SKDocumentGetName(SKDocumentRef inDocument)                   AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+SKDocumentGetName(SKDocumentRef inDocument)                   API_AVAILABLE( macos(10.3) ) API_UNAVAILABLE( macCatalyst );
 
 
 /*
@@ -227,7 +227,7 @@ SKDocumentGetName(SKDocumentRef inDocument)                   AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   not available
  */
 extern SKDocumentRef 
-SKDocumentGetParent(SKDocumentRef inDocument)                 AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+SKDocumentGetParent(SKDocumentRef inDocument)                 API_AVAILABLE( macos(10.3) ) API_UNAVAILABLE( macCatalyst );
 
 
 

@@ -1,7 +1,7 @@
 /*
     NSSavePanel.h
     Application Kit
-    Copyright (c) 1994-2018, Apple Inc.
+    Copyright (c) 1994-2019, Apple Inc.
     All rights reserved.
 */
 
@@ -10,6 +10,7 @@
 #import <AppKit/NSPanel.h>
 
 NS_ASSUME_NONNULL_BEGIN
+API_UNAVAILABLE_BEGIN(ios)
 
 @class NSBox, NSTextField, NSTextView, NSView, NSURL, NSProgressIndicator, NSControl;
 @protocol NSOpenSavePanelDelegate;
@@ -17,88 +18,11 @@ NS_ASSUME_NONNULL_BEGIN
 /* Return codes from the open/save panel.
 */
 enum {
-    NSFileHandlingPanelCancelButton NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSModalResponseCancel", 10_0, 10_13) = NSModalResponseCancel,
-    NSFileHandlingPanelOKButton	NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSModalResponseOK", 10_0, 10_13) = NSModalResponseOK,
+    NSFileHandlingPanelCancelButton API_DEPRECATED_WITH_REPLACEMENT("NSModalResponseCancel", macos(10.0,10.13)) = NSModalResponseCancel,
+    NSFileHandlingPanelOKButton	API_DEPRECATED_WITH_REPLACEMENT("NSModalResponseOK", macos(10.0,10.13)) = NSModalResponseOK,
 };
 
-typedef struct __SPFlags {
-    unsigned int saveMode:1;
-    unsigned int isExpanded:1;
-    unsigned int allowsOtherFileTypes:1;
-    unsigned int canCreateDirectories:1;
-    unsigned int reserved2:2;
-    unsigned int delegate_shouldShowFilename:1;
-    unsigned int delegate_compareFilename:1;
-    unsigned int delegate_shouldEnableURL:1;
-    unsigned int delegate_validateURL:1;
-    unsigned int delegate_didChangeToDirectoryURL:1;
-    unsigned int changingFrameSize:1;
-    unsigned int movingAccessoryView:1;
-    unsigned int userAccessoryViewFrameChange:1;
-    unsigned int canChooseDirectories:1;
-    unsigned int canChooseFiles:1;
-    unsigned int delegate_selectionDidChange:1;
-    unsigned int delegate_didChangeToDirectory:1;
-    unsigned int calledWindowOrderedIn:1;
-    unsigned int appCentric:1;
-    unsigned int bottomControlsDisabled:1;
-    unsigned int okButtonDisabled:1;
-    unsigned int accessoryViewDisclosed:1;
-    unsigned int delegate_isValidFilename:1;
-    unsigned int delegate_userEnteredFilename:1;
-    unsigned int delegate_panel_willExpand:1;
-    unsigned int canResolveUbiquitousConflicts:1;
-    unsigned int reserved:5;
-} _SPFlags;
-
-@class NSSavePanelAuxiliary;
-
-@interface NSSavePanel : NSPanel {
-    // All instance variables should be considered private
-@private
-    id       _reservedID2 APPKIT_IVAR;
-@protected
-    NSView  *_accessoryView APPKIT_IVAR;
-    NSArray *_allowedFileTypes APPKIT_IVAR;
-    NSString *_validatedPosixName APPKIT_IVAR;
-    NSString *_hiddenExtension APPKIT_IVAR;
-        
-    IBOutlet NSTextField  *_messageTextField APPKIT_IVAR;
-    IBOutlet NSView       *_savePane APPKIT_IVAR;
-@private
-    id _reservedID6 APPKIT_IVAR;
-@protected
-    IBOutlet NSView       *_savePaneTopPartsContainer APPKIT_IVAR;
-    IBOutlet NSTextField  *_nameField APPKIT_IVAR;
-    IBOutlet NSTextField  *_nameFieldLabel APPKIT_IVAR;
-@private
-    id _reservedID7 APPKIT_IVAR;
-    id _reservedID3 APPKIT_IVAR;
-    id _reservedID4 APPKIT_IVAR;
-    id _reservedID5 APPKIT_IVAR;
-@protected
-    IBOutlet NSView       *_navViewContainer APPKIT_IVAR;
-    IBOutlet NSView       *_accessoryViewContainer APPKIT_IVAR;
-    IBOutlet NSView       *_bottomControlsContainer APPKIT_IVAR;
-    id                     _reservedRemoved APPKIT_IVAR;
-    IBOutlet NSButton     *_newFolderButton APPKIT_IVAR;
-    IBOutlet NSButton     *_cancelButton APPKIT_IVAR;
-    IBOutlet NSButton     *_okButton APPKIT_IVAR;
-
-    id _filepathInputController APPKIT_IVAR; // Unused
-    id _reservedID APPKIT_IVAR;
-
-    _SPFlags	_spFlags APPKIT_IVAR;
-    
-    NSSavePanelAuxiliary *_spAuxiliaryStorage APPKIT_IVAR;
-    
-@private
-    char _unused:1 __unused APPKIT_IVAR;
-#if !__LP64__
-    char _reserved[4] APPKIT_IVAR;
-#endif
-    IBOutlet NSProgressIndicator *_openProgressIndicator APPKIT_IVAR;
-}
+@interface NSSavePanel : NSPanel
 
 /* Creates a new instance of the NSSavePanel. This class is not a singleton. 
 */
@@ -117,7 +41,7 @@ typedef struct __SPFlags {
 
 /* NSSavePanel/NSOpenPanel: Gets and sets the directoryURL shown. A value of nil indicates that the last directory shown to the user will be used. This method will not block to resolve the URL, and the directory will asyncronously be set, if required.
 */
-@property (nullable, copy) NSURL *directoryURL NS_AVAILABLE_MAC(10_6);
+@property (nullable, copy) NSURL *directoryURL API_AVAILABLE(macos(10.6));
 
 /* 
     NSSavePanel: An array of NSStrings specifying the file types the user can save the file as. The file type can be a common file extension, or a UTI. A nil value indicates that any file type can be used. If the array is not nil and the array contains no items, an exception will be raised. If no extension is given by the user, the first item in the allowedFileTypes will be used as the extension for the save panel. If the user specifies a type not in the array, and 'allowsOtherFileTypes' is YES, they will be presented with another dialog when prompted to save. The default value is 'nil'.
@@ -183,7 +107,7 @@ typedef struct __SPFlags {
 /*  NSSavePanel: Gets and sets the user-editable file name shown in the name field. 'value' must not be nil. NOTE: calling the deprecated methods that take a "name:" parameter will overwrite any values set before the panel was shown. Note that 'value' may have the file extension stripped, if [panel isExtensionHidden] is set to YES.
     NSOpenPanel: Not used.
 */
-@property (copy) NSString *nameFieldStringValue NS_AVAILABLE_MAC(10_6);
+@property (copy) NSString *nameFieldStringValue API_AVAILABLE(macos(10.6));
 
 /*  NSSavePanel/NSOpenPanel: Gets and sets the message shown under title of the panel. 'message' must not be nil.
 */
@@ -198,12 +122,12 @@ typedef struct __SPFlags {
 /*  NSSavePanel: Shows or hides the "Tags" field in the receiver. By passing YES, you become responsible for setting Tag names on the resulting file after saving is complete.
     NSOpenPanel: Should not be used.
 */
-@property BOOL showsTagField NS_AVAILABLE_MAC(10_9);
+@property BOOL showsTagField API_AVAILABLE(macos(10.9));
 
 /*  NSSavePanel: When -showsTagField returns YES, set any initial Tag names to be displayed, if necessary, prior to displaying the receiver. Also, if the user clicks "Save", take the result of -tagNames, and set them on the resulting file after saving is complete. Tag names are NSStrings, arrays of which can be used directly with the NSURLTagNamesKey API for getting and setting tags on files. Passing nil or an empty array to -setTagNames: will result in no initial Tag names appearing in the receiver. When -showsTagField returns YES, -tagNames always returns a non-nil array, and when NO, -tagNames always returns nil.
     NSOpenPanel: Should not be used.
 */
-@property (nullable, copy) NSArray<NSString *> *tagNames NS_AVAILABLE_MAC(10_9);
+@property (nullable, copy) NSArray<NSString *> *tagNames API_AVAILABLE(macos(10.9));
 
 #pragma mark -
 #pragma mark Actions
@@ -216,11 +140,11 @@ typedef struct __SPFlags {
 
 /* NSSavePanel/NSOpenPanel: Presents the panel as a sheet modal to 'window' and returns immediately. Desired properties of the panel should be properly setup before calling this method. The completion handler block will be called after the user has closed the panel, however, the open/save panel sheet may still be on screen. If you require the sheet to be offscreen (for example, to show an alert), first call [savePanel orderOut:nil] to close it. The passed in 'result' will be NSModalResponseOK==1 or NSModalResponseCancel==0.
 */
-- (void)beginSheetModalForWindow:(NSWindow *)window completionHandler:(void (^)(NSModalResponse result))handler NS_AVAILABLE_MAC(10_6);
+- (void)beginSheetModalForWindow:(NSWindow *)window completionHandler:(void (^)(NSModalResponse result))handler API_AVAILABLE(macos(10.6));
 
 /* NSSavePanel/NSOpenPanel: Presents the panel as a modeless window and returns immediately. Desired properties of the panel should be properly setup before calling this method. The completion handler block will be called after the user has closed the panel. The passed in 'result' will be NSModalResponseOK==1 or NSModalResponseCancel==0.
 */
-- (void)beginWithCompletionHandler:(void (^)(NSModalResponse result))handler NS_AVAILABLE_MAC(10_6);
+- (void)beginWithCompletionHandler:(void (^)(NSModalResponse result))handler API_AVAILABLE(macos(10.6));
 
 /* NSSavePanel/NSOpenPanel: Presents the panel as an application modal window. It returns only after the user has closed the panel. The return value is NSModalResponseOK==1 or NSModalResponseCancel==0.
 */
@@ -236,17 +160,17 @@ typedef struct __SPFlags {
     NSOpenPanel: Return YES to allow the 'url' to be enabled in the panel. Delegate implementations should be fast to avoid stalling the UI. Applications linked on Mac OS 10.7 and later should be prepared to handle non-file URL schemes.
     NSSavePanel: This method is not called; all urls are always disabled.
 */
-- (BOOL)panel:(id)sender shouldEnableURL:(NSURL *)url NS_AVAILABLE_MAC(10_6);
+- (BOOL)panel:(id)sender shouldEnableURL:(NSURL *)url API_AVAILABLE(macos(10.6));
 
 /* Optional - URL validation for saving and opening files. 
     NSSavePanel: The method is called once by the save panel when the user chooses the Save button. The user is intending to save a file at 'url'. Return YES if the 'url' is a valid location to save to. Note that an item at 'url' may not physically exist yet, unless the user decided to overwrite an existing item. Return NO and fill in the 'outError' with a user displayable error message for why the 'url' is not valid. If a recovery option is provided by the error, and recovery succeeded, the panel will attempt to close again.
     NSOpenPanel: The method is called once for each selected filename (or directory) when the user chooses the Open button. Return YES if the 'url' is acceptable to open. Return NO and fill in the 'outError' with a user displayable message for why the 'url' is not valid for opening. You would use this method over panel:shouldEnableURL: if the processing of the selected item takes a long time. If a recovery option is provided by the error, and recovery succeeded, the panel will attempt to close again.
 */
-- (BOOL)panel:(id)sender validateURL:(NSURL *)url error:(NSError **)outError NS_AVAILABLE_MAC(10_6);
+- (BOOL)panel:(id)sender validateURL:(NSURL *)url error:(NSError **)outError API_AVAILABLE(macos(10.6));
 
 /* Optional - Sent when the user has changed the selected directory to the directory located at 'url'. 'url' may be nil, if the current directory can't be represented by an NSURL object (ie: the media sidebar directory, or the "Computer").
 */
-- (void)panel:(id)sender didChangeToDirectoryURL:(nullable NSURL *)url NS_AVAILABLE_MAC(10_6);
+- (void)panel:(id)sender didChangeToDirectoryURL:(nullable NSURL *)url API_AVAILABLE(macos(10.6));
 
 /* Optional - Filename customization for the NSSavePanel. Allows the delegate to customize the filename entered by the user, before the extension is appended, and before the user is potentially asked to replace a file.
 */
@@ -264,24 +188,27 @@ typedef struct __SPFlags {
 
 @interface NSObject(NSSavePanelDelegateDeprecated)
 
-- (BOOL)panel:(id)sender isValidFilename:(NSString *)filename NS_DEPRECATED_MAC(10_0, 10_6, "Use -panel:validateURL:error: instead");
-- (void)panel:(id)sender directoryDidChange:(NSString *)path NS_DEPRECATED_MAC(10_3, 10_6, "Use -panel:didChangeToDirectoryURL: instead");
-- (NSComparisonResult)panel:(id)sender compareFilename:(NSString *)name1 with:(NSString *)name2 caseSensitive:(BOOL)caseSensitive NS_DEPRECATED_MAC(10_0, 10_6, "Filenames in the save panel should not have a custom sort. This method is never called on 10.14, and rarely called after 10.6");
-- (BOOL)panel:(id)sender shouldShowFilename:(NSString *)filename NS_DEPRECATED_MAC(10_0, 10_6, "Use -panel:shouldEnableURL: instead");
+- (BOOL)panel:(id)sender isValidFilename:(NSString *)filename API_DEPRECATED("Use -panel:validateURL:error: instead", macos(10.0,10.6));
+- (void)panel:(id)sender directoryDidChange:(NSString *)path API_DEPRECATED("Use -panel:didChangeToDirectoryURL: instead", macos(10.3,10.6));
+- (NSComparisonResult)panel:(id)sender compareFilename:(NSString *)name1 with:(NSString *)name2 caseSensitive:(BOOL)caseSensitive API_DEPRECATED("Filenames in the save panel should not have a custom sort. This method is never called on 10.14, and rarely called after 10.6", macos(10.0,10.6));
+- (BOOL)panel:(id)sender shouldShowFilename:(NSString *)filename API_DEPRECATED("Use -panel:shouldEnableURL: instead", macos(10.0,10.6));
 
 @end
 
 @interface NSSavePanel(NSDeprecated)
 
-- (NSString *)filename NS_DEPRECATED_MAC(10_0, 10_6, "Use -URL instead");
-- (NSString *)directory NS_DEPRECATED_MAC(10_0, 10_6, "Use -directoryURL instead");
-- (void)setDirectory:(nullable NSString *)path NS_DEPRECATED_MAC(10_0, 10_6, "Use -setDirectoryURL: instead");
-- (nullable NSString *)requiredFileType NS_DEPRECATED_MAC(10_0, 10_6, "Use -allowedFileTypes instead");
-- (void)setRequiredFileType:(nullable NSString *)type NS_DEPRECATED_MAC(10_0, 10_6, "Use -setAllowedFileTypes: instead");
-- (void)beginSheetForDirectory:(NSString *)path file:(nullable NSString *)name modalForWindow:(nullable NSWindow *)docWindow modalDelegate:(nullable id)delegate didEndSelector:(nullable SEL)didEndSelector contextInfo:(nullable void *)contextInfo NS_DEPRECATED_MAC(10_0, 10_6, "Use beginSheetModalForWindow:completionHandler: instead. The following parameters are replaced by properties: 'path' is replaced by 'directoryURL' and 'name' by 'nameFieldStringValue'.");
-- (NSInteger)runModalForDirectory:(nullable NSString *)path file:(nullable NSString *)name NS_DEPRECATED_MAC(10_0, 10_6, "Use -runModal instead. The following parameters are replaced by properties: 'path' is replaced by 'directoryURL' and 'name' by 'nameFieldStringValue'.");
-- (IBAction)selectText:(nullable id)sender NS_DEPRECATED_MAC(10_0, 10_3, "Default implementation does nothing.");
+- (NSString *)filename API_DEPRECATED("Use -URL instead", macos(10.0,10.6));
+- (NSString *)directory API_DEPRECATED("Use -directoryURL instead", macos(10.0,10.6));
+- (void)setDirectory:(nullable NSString *)path API_DEPRECATED("Use -setDirectoryURL: instead", macos(10.0,10.6));
+- (nullable NSString *)requiredFileType API_DEPRECATED("Use -allowedFileTypes instead", macos(10.0,10.6));
+- (void)setRequiredFileType:(nullable NSString *)type API_DEPRECATED("Use -setAllowedFileTypes: instead", macos(10.0,10.6));
+- (void)beginSheetForDirectory:(NSString *)path file:(nullable NSString *)name modalForWindow:(nullable NSWindow *)docWindow modalDelegate:(nullable id)delegate didEndSelector:(nullable SEL)didEndSelector contextInfo:(nullable void *)contextInfo API_DEPRECATED("Use beginSheetModalForWindow:completionHandler: instead. The following parameters are replaced by properties: 'path' is replaced by 'directoryURL' and 'name' by 'nameFieldStringValue'.", macos(10.0,10.6));
+- (NSInteger)runModalForDirectory:(nullable NSString *)path file:(nullable NSString *)name API_DEPRECATED("Use -runModal instead. The following parameters are replaced by properties: 'path' is replaced by 'directoryURL' and 'name' by 'nameFieldStringValue'.", macos(10.0,10.6));
+- (IBAction)selectText:(nullable id)sender API_DEPRECATED("Default implementation does nothing.", macos(10.0,10.3));
 
 @end
 
+
+
+API_UNAVAILABLE_END
 NS_ASSUME_NONNULL_END

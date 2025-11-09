@@ -117,7 +117,7 @@ AVF_EXPORT AVCaptureSessionPreset const AVCaptureSessionPreset1280x720 API_AVAIL
  @discussion
     Clients may set an AVCaptureSession instance's sessionPreset to AVCaptureSessionPreset1920x1080 to achieve 1920x1080 output.
  */
-AVF_EXPORT AVCaptureSessionPreset const AVCaptureSessionPreset1920x1080 API_AVAILABLE(ios(5.0)) API_UNAVAILABLE(macos) __WATCHOS_PROHIBITED __TVOS_PROHIBITED;
+AVF_EXPORT AVCaptureSessionPreset const AVCaptureSessionPreset1920x1080 API_AVAILABLE(macos(10.15), ios(5.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED;
 
 /*!
  @constant AVCaptureSessionPreset3840x2160
@@ -127,7 +127,7 @@ AVF_EXPORT AVCaptureSessionPreset const AVCaptureSessionPreset1920x1080 API_AVAI
  @discussion
     Clients may set an AVCaptureSession instance's sessionPreset to AVCaptureSessionPreset3840x2160 to achieve 3840x2160 output.
  */
-AVF_EXPORT AVCaptureSessionPreset const AVCaptureSessionPreset3840x2160 API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos) __WATCHOS_PROHIBITED __TVOS_PROHIBITED;
+AVF_EXPORT AVCaptureSessionPreset const AVCaptureSessionPreset3840x2160 API_AVAILABLE(macos(10.15), ios(9.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED;
 
 /*!
  @constant AVCaptureSessionPresetiFrame960x540

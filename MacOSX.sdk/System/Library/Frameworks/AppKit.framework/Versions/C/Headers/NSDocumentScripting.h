@@ -1,13 +1,14 @@
 /*
         NSDocumentScripting.h
         AppKit Framework
-        Copyright (c) 1997-2018, Apple Inc.
+        Copyright (c) 1997-2019, Apple Inc.
         All rights reserved.
 */
 
 #import <AppKit/NSDocument.h>
 
 NS_ASSUME_NONNULL_BEGIN
+API_UNAVAILABLE_BEGIN(ios)
 
 @class NSCloseCommand;
 @class NSScriptCommand;
@@ -26,4 +27,5 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+API_UNAVAILABLE_END
 NS_ASSUME_NONNULL_END

@@ -1,7 +1,7 @@
 /*
     NSManagedObjectID.h
     Core Data
-    Copyright (c) 2004-2018, Apple Inc.
+    Copyright (c) 2004-2019, Apple Inc.
     All rights reserved.
 */
 

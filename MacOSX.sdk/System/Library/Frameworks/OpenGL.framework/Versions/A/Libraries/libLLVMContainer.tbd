@@ -1,9 +1,8 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 4A205B8E-20C9-327A-8736-688A4D443633' ]
+uuids:           [ 'x86_64: D465ECA6-8E55-3B75-BCDB-FC0C7BF1F4BF' ]
 platform:        macosx
-install-name:    /System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libLLVMContainer.dylib
-objc-constraint: none
+install-name:    '/System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libLLVMContainer.dylib'
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _EnableARMEHABIDescriptors, _EnableBasePointer, _ForceStackAlign, 

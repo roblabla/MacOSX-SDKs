@@ -8,7 +8,7 @@
 .\"man mdoc.samples for a complete listing of options
 .\"man mdoc for the short list of editing options
 .\"/usr/share/misc/mdoc.template
-.Dd Jan 3, 2018              \" DATE
+.Dd Jan 14, 2019              \" DATE
 .Dt assetutil 1      \" Program name and manual section number
 .Os Darwin
 .Sh NAME                 \" Section Header - required - don't modify 
@@ -51,7 +51,7 @@ fallback available.
 .It Fl p
 Keep all assets that have the display gamut that is given on the
 command line, present display gamuts  will not be removed if there is no
-fall back avaliable.
+fall back available.
 .It Fl M                 \"-M flag as a list item
 Keep all assets that have memory class that is given on the command
 line, present memory class will not be removed if there is no fallback available.
@@ -77,6 +77,11 @@ compare thinning attributes
 \'scale=2:idiom=phone:memory=2:graphicsclass=MTL1,2/scale=2:idiom=phone:memory=1:graphicsclass=MTL2,2\'
 will print to stdout if the files was thinned with the above thinning
 attributes, would the same Asset file result in both cases.
+.It Fl n
+given a comma separated list of names, any assets in the car file that
+match one of the given names are preserved. Names are compared case
+insensitivly Name == name, uses the -o --output file to save the
+resulting .car file.
 .El                      \" Ends the list
 .Pp
 .\" .Sh ENVIRONMENT      \" May not be needed

@@ -1,9 +1,8 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 55DC741A-A01A-380C-B2D3-244241DA1F2C' ]
-platform:        macosx
-install-name:    /System/Library/PrivateFrameworks/NetAuth.framework/Versions/A/NetAuth
-objc-constraint: none
+uuids:           [ 'x86_64: 3F206AEF-218A-31A4-BCC5-9F8D05C1B64B', 'x86_64: 3F206AEF-218A-31A4-BCC5-9F8D05C1B64B' ]
+platform:        zippered
+install-name:    '/System/Library/PrivateFrameworks/NetAuth.framework/Versions/A/NetAuth'
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _DictionaryCreateFromBytesAndLength, _GetNetAuthAuthAgentPort, 

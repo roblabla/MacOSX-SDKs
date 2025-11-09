@@ -14,6 +14,7 @@
 
 #import <IOSurface/IOSurface.h>
 
+
 NS_ASSUME_NONNULL_BEGIN
 /*!
  @enum MTLTextureType
@@ -27,14 +28,47 @@ typedef NS_ENUM(NSUInteger, MTLTextureType)
     MTLTextureType2DArray = 3,
     MTLTextureType2DMultisample = 4,
     MTLTextureTypeCube = 5,
-    MTLTextureTypeCubeArray API_AVAILABLE(macos(10.11)) API_UNAVAILABLE(ios) = 6,
+    MTLTextureTypeCubeArray API_AVAILABLE(macos(10.11), ios(11.0)) = 6,
     MTLTextureType3D = 7,
     MTLTextureType2DMultisampleArray API_AVAILABLE(macos(10.14)) API_UNAVAILABLE(ios) = 8,
     MTLTextureTypeTextureBuffer API_AVAILABLE(macos(10.14), ios(12.0)) = 9
 } API_AVAILABLE(macos(10.11), ios(8.0));
 
 
-API_AVAILABLE(macos(10.14)) API_UNAVAILABLE(ios)
+typedef NS_ENUM(uint8_t, MTLTextureSwizzle) {
+    MTLTextureSwizzleZero = 0,
+    MTLTextureSwizzleOne = 1,
+    MTLTextureSwizzleRed = 2,
+    MTLTextureSwizzleGreen = 3,
+    MTLTextureSwizzleBlue = 4,
+    MTLTextureSwizzleAlpha = 5,
+} API_AVAILABLE(macos(10.15), ios(13.0));
+
+typedef struct
+{
+    MTLTextureSwizzle red;
+    MTLTextureSwizzle green;
+    MTLTextureSwizzle blue;
+    MTLTextureSwizzle alpha;
+} MTLTextureSwizzleChannels API_AVAILABLE(macos(10.15), ios(13.0));
+
+API_AVAILABLE(macos(10.15), ios(13.0)) NS_SWIFT_UNAVAILABLE("Use MTLTextureSwizzleChannels.init instead")
+MTL_INLINE MTLTextureSwizzleChannels MTLTextureSwizzleChannelsMake(MTLTextureSwizzle r, MTLTextureSwizzle g, MTLTextureSwizzle b, MTLTextureSwizzle a)
+{
+    MTLTextureSwizzleChannels swizzle;
+    swizzle.red = r;
+    swizzle.green = g;
+    swizzle.blue = b;
+    swizzle.alpha = a;
+    return swizzle;
+}
+
+#define MTLTextureSwizzleChannelsDefault (MTLTextureSwizzleChannelsMake(MTLTextureSwizzleRed, MTLTextureSwizzleGreen, MTLTextureSwizzleBlue, MTLTextureSwizzleAlpha))
+
+
+
+
+MTL_EXPORT API_AVAILABLE(macos(10.14), ios(13.0))
 @interface MTLSharedTextureHandle : NSObject <NSSecureCoding>
 {
     struct MTLSharedTextureHandlePrivate *_priv;
@@ -149,6 +183,7 @@ MTL_EXPORT API_AVAILABLE(macos(10.11), ios(8.0))
 /*!
  @property resourceOptions
  @abstract Options to control memory allocation parameters, etc.
+ @discussion Contains a packed set of the storageMode, cpuCacheMode and hazardTrackingMode properties.
  */
 @property (readwrite, nonatomic) MTLResourceOptions resourceOptions;
 
@@ -164,12 +199,24 @@ MTL_EXPORT API_AVAILABLE(macos(10.11), ios(8.0))
  */
 @property (readwrite, nonatomic) MTLStorageMode storageMode API_AVAILABLE(macos(10.11), ios(9.0));
 
+
+/*!
+ @property hazardTrackingMode
+ @abstract Set hazard tracking mode for the texture. The default value is MTLHazardTrackingModeDefault.
+ @discussion
+ For resources created from the device, MTLHazardTrackingModeDefault is treated as MTLHazardTrackingModeTracked.
+ For resources created on a heap, MTLHazardTrackingModeDefault is treated as the hazardTrackingMode of the heap itself.
+ In either case, it is possible to opt-out of hazard tracking by setting MTLHazardTrackingModeUntracked.
+ It is not possible to opt-in to hazard tracking on a heap that itself is not hazard tracked.
+ For optimal performance, perform hazard tracking manually through MTLFence or MTLEvent instead.
+ */
+@property (readwrite, nonatomic) MTLHazardTrackingMode hazardTrackingMode API_AVAILABLE(macos(10.15), ios(13.0));
+
 /*!
  @property usage
  @abstract Description of texture usage
  */
 @property (readwrite, nonatomic) MTLTextureUsage usage API_AVAILABLE(macos(10.11), ios(9.0));
-
 
 /*!
  @property allowGPUOptimizedContents
@@ -177,6 +224,12 @@ MTL_EXPORT API_AVAILABLE(macos(10.11), ios(8.0))
  @discussion Useful for opting-out of GPU-optimization when implicit optimization (e.g. RT writes) is regressing CPU-read-back performance. See the documentation for optimizeContentsForGPUAccess: and optimizeContentsForCPUAccess: APIs.
  */
 @property (readwrite, nonatomic) BOOL allowGPUOptimizedContents API_AVAILABLE(macos(10.14), ios(12.0));
+
+/*!
+ @property swizzle
+ @abstract Channel swizzle to use when reading or sampling from the texture, the default value is MTLTextureSwizzleChannelsDefault.
+ */
+@property (readwrite, nonatomic) MTLTextureSwizzleChannels swizzle API_AVAILABLE(macos(10.15), ios(13.0));
 
 @end
 
@@ -309,7 +362,7 @@ API_AVAILABLE(macos(10.11), ios(8.0))
  @abstract If YES, this texture can be shared with other processes.
  @discussion Texture can be shared across process addres space boundaries through use of sharedTextureHandle and XPC.
  */
-@property (readonly, getter = isShareable) BOOL shareable;
+@property (readonly, getter = isShareable) BOOL shareable API_AVAILABLE(macos(10.14), ios(13.0));
 
 /*!
  @property framebufferOnly
@@ -366,8 +419,33 @@ API_AVAILABLE(macos(10.11), ios(8.0))
  @method newSharedTextureHandle
  @abstract Create a new texture handle, that can be shared across process addres space boundaries.
  */
-- (nullable MTLSharedTextureHandle *)newSharedTextureHandle API_AVAILABLE(macos(10.14)) API_UNAVAILABLE(ios);
+- (nullable MTLSharedTextureHandle *)newSharedTextureHandle API_AVAILABLE(macos(10.14), ios(13.0));
 
+
+/*!
+ @property remoteStorageTexture
+ @abstract For Metal texture objects that are remote views, this returns the texture associated with the storage on the originating device.
+ */
+@property (nullable, readonly) id<MTLTexture> remoteStorageTexture API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios);
+
+/*!
+ @method newRemoteTextureViewForDevice:
+ @abstract On Metal devices that support peer to peer transfers, this method is used to create a remote texture view on another device
+ within the peer group.  The receiver must use MTLStorageModePrivate or be backed by an IOSurface.
+ */
+- (nullable id <MTLTexture>) newRemoteTextureViewForDevice:(id <MTLDevice>)device API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios);
+
+/*!
+ @property swizzle
+ @abstract The channel swizzle used when reading or sampling from this texture
+ */
+@property (readonly, nonatomic) MTLTextureSwizzleChannels swizzle API_AVAILABLE(macos(10.15), ios(13.0));
+
+/*!
+ @method newTextureViewWithPixelFormat:textureType:levels:slices:swizzle:
+ @abstract Create a new texture which shares the same storage as the source texture, but with a different (but compatible) pixel format, texture type, levels, slices and swizzle. 
+ */
+- (nullable id<MTLTexture>)newTextureViewWithPixelFormat:(MTLPixelFormat)pixelFormat textureType:(MTLTextureType)textureType levels:(NSRange)levelRange slices:(NSRange)sliceRange swizzle:(MTLTextureSwizzleChannels)swizzle API_AVAILABLE(macos(10.15), ios(13.0));
 
 @end
 NS_ASSUME_NONNULL_END

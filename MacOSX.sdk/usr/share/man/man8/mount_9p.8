@@ -1,8 +1,8 @@
-.\" Copyright (c) 2018 Apple Computer, Inc. All rights reserved.
+.\" Copyright (c) 2019 Apple Inc. All rights reserved.
 .\"
 .\"     @(#)mount_9p.8
 .hlm 0
-.Dd May 16, 2018
+.Dd April 18, 2019
 .Dt MOUNT_9P 8
 .Os "Mac OS X"
 .Sh NAME
@@ -13,20 +13,19 @@ volume
 .Sh SYNOPSIS
 .Nm
 .Op Fl r
-.Op Fl h
+.Ar fs_tag
 .Sh DESCRIPTION
 The
 .Nm
-command mounts all the
+command mounts the
 .Tn 9P
-filesystems at /Volumes.
+filesystem associated with
+.Pa fs_tag .
 .Pp
 The options are as follows:
 .Bl -tag -width 12n
 .It Fl r
 Mount filesystem as read-only.
-.It Fl h
-Print help message and exit.
 .El
 .Sh DIAGNOSTICS
 .Ex -std

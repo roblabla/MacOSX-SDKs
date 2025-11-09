@@ -1,14 +1,21 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 8C7550A3-3036-3311-BA9F-3D1349228E2B' ]
-platform:        macosx
-install-name:    /usr/lib/libAudioIssueDetector.dylib
+uuids:           [ 'x86_64: A7FD35DD-7C51-37BB-8965-09BD93371BA3', 'x86_64: A7FD35DD-7C51-37BB-8965-09BD93371BA3' ]
+platform:        zippered
+install-name:    '/usr/lib/libAudioIssueDetector.dylib'
 exports:         
   - archs:           [ x86_64 ]
-    symbols:         [ _AudioIssueDetectorAnalyzeBuffer, _AudioIssueDetectorCreate, 
-                       _AudioIssueDetectorDispose, _AudioIssueDetectorInitialize, 
+    symbols:         [ _AudioDataAnalysisManagerCreate, _AudioDataAnalysisManagerCreateNodeEnvSPL, 
+                       _AudioDataAnalysisManagerCreateNodePCM, _AudioDataAnalysisManagerCreateNodeSPL, 
+                       _AudioDataAnalysisManagerDispose, _AudioDataAnalysisManagerInitialize, 
+                       _AudioDataAnalysisManagerProcessAudio, _AudioDataAnalysisManagerProcessEnvSPL, 
+                       _AudioDataAnalysisManagerProcessSPL, _AudioDataAnalysisManagerRemoveNode, 
+                       _AudioDataAnalysisManagerReset, _AudioDataAnalysisManagerSetDeviceInfo, 
+                       _AudioDataAnalysisManagerUpdateReportingSessions, _AudioIssueDetectorAnalyzeBuffer, 
+                       _AudioIssueDetectorCreate, _AudioIssueDetectorDispose, _AudioIssueDetectorInitialize, 
                        _AudioIssueDetectorRemoveNode, _AudioIssueDetectorReset, _AudioIssueDetectorSetDownlinkVolume, 
                        _AudioIssueDetectorSetNodeFormat, _AudioIssueDetectorSetNodeFormatWithDirection, 
                        _AudioIssueDetectorSetRouteSpecificDownlinkGainAdjustment, 
-                       _AudioIssueDetectorSetUplinkMute, _AudioIssueDetectorUpdateReportingSessions ]
+                       _AudioIssueDetectorSetUplinkMute, _AudioIssueDetectorUpdateReportingSessions, 
+                       _EnvironmentalDosimetryAgentCreate, _EnvironmentalDosimetryAgentDispose ]
 ...

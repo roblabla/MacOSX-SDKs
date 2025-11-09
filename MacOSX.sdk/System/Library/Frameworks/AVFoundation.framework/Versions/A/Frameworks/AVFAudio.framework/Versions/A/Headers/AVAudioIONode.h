@@ -54,7 +54,7 @@ typedef const AudioBufferList * __nullable (^AVAudioIONodeInputBlock)(AVAudioFra
 		In the manual rendering mode, the AVAudioInputNode and AVAudioOutputNode perform the input
 		and output in the engine, in response to client's request.
 */
-OS_EXPORT API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0))
+API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0))
 @interface AVAudioIONode : AVAudioNode
 
 /*!	@property presentationLatency
@@ -76,6 +76,35 @@ OS_EXPORT API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0))
 */
 @property (nonatomic, readonly, nullable) AudioUnit audioUnit;
 #endif
+
+/*! @property voiceProcessingEnabled
+    @abstract
+        Indicates whether voice processing is enabled.
+*/
+@property (nonatomic, readonly, getter=isVoiceProcessingEnabled) BOOL voiceProcessingEnabled API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0));
+
+/*! @method setVoiceProcessingEnabled:error:
+    @abstract
+        Enable or disable voice processing on the IO node.
+    @param outError
+        On exit, if the IO node cannot enable or diable voice processing, a description of the error
+    @return
+        YES for success
+    @discussion
+        If enabled, the input node does signal processing on the incoming audio (taking out any
+        of the audio that is played from the device at a given time from the incoming audio).
+        Disabling this mode on either of the IO nodes automatically disabled it on the other IO node.
+
+        Voice processing requires both input and output nodes to be in the voice processing mode.
+        Enabling this mode on either of the IO nodes automatically enables it on the other IO node.
+        Voice processing is only supported when the engine is rendering to the audio device and not
+        in the manual rendering mode.
+        Voice processing can only be be enabled or disabled when the engine is in a stopped state.
+
+        The output format of the input node and the input format of the output node have to be
+        the same and they can only be changed when the engine is in a stopped state.
+ */
+- (BOOL)setVoiceProcessingEnabled:(BOOL)enabled error:(NSError **)outError API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0));
 
 @end
 
@@ -123,6 +152,32 @@ API_AVAILABLE(macos(10.10), ios(8.0), watchos(4.0), tvos(11.0))
 		and makes this method ineffective.
 */
 - (BOOL)setManualRenderingInputPCMFormat:(AVAudioFormat *)format inputBlock:(AVAudioIONodeInputBlock)block API_AVAILABLE(macos(10.13), ios(11.0), watchos(4.0), tvos(11.0));
+
+/*! @property voiceProcessingBypassed
+    @abstract
+       Bypass all processing done by the voice processing unit.
+    @discussion
+       Querying this property when voice processing is disabled will return false.
+ */
+@property (nonatomic, getter=isVoiceProcessingBypassed) BOOL voiceProcessingBypassed API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0));
+
+/*! @property voiceProcessingAGCEnabled
+    @abstract
+        Enable automatic gain control on the processed microphone/uplink
+        signal. Enabled by default.
+    @discussion
+        Querying this property when voice processing is disabled will return false.
+ */
+@property (nonatomic, getter=isVoiceProcessingAGCEnabled) BOOL voiceProcessingAGCEnabled API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0));
+
+/*! @property voiceProcessingInputMuted
+    @abstract
+        Mutes the input of the voice processing unit.
+    @discussion
+        Querying this property when voice processing is disabled will return false.
+    */
+@property (nonatomic, getter=isVoiceProcessingInputMuted) BOOL voiceProcessingInputMuted API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0));
+
 @end
 
 /*! @class AVAudioOutputNode
@@ -143,7 +198,7 @@ API_AVAILABLE(macos(10.10), ios(8.0), watchos(4.0), tvos(11.0))
 		The format of the input scope is initially the same as that of the
 		output, but you may set it to a different format, in which case the node will convert.
 */
-OS_EXPORT API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0))
+API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0))
 @interface AVAudioOutputNode : AVAudioIONode
 - (instancetype)init NS_UNAVAILABLE; // fetch instance via -[AVAudioEngine outputNode].
 @end

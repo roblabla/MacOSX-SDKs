@@ -1,8 +1,8 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: BB3847E0-16A3-398A-BFFF-5DDD1DA58A1B' ]
+uuids:           [ 'x86_64: 39351CB8-1D65-381B-AD40-8663253FCDC5' ]
 platform:        macosx
-install-name:    /System/Library/PrivateFrameworks/CloudFamilyRestrictionsDaemon.framework/Versions/A/CloudFamilyRestrictionsDaemon
+install-name:    '/System/Library/PrivateFrameworks/CloudFamilyRestrictionsDaemon.framework/Versions/A/CloudFamilyRestrictionsDaemon'
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _CFRAllowedContactEmail, _CFRAllowedContacts, _CFRAppAccessEnabledKey, 

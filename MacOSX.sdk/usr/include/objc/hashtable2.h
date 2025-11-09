@@ -30,10 +30,8 @@
 #define _OBJC_LITTLE_HASHTABLE_H_
 
 #ifndef _OBJC_PRIVATE_H_
-#   define OBJC_HASH_AVAILABILITY                             \
-    __OSX_DEPRECATED(10.0, 10.1, "NXHashTable is deprecated") \
-    __IOS_UNAVAILABLE __TVOS_UNAVAILABLE                      \
-    __WATCHOS_UNAVAILABLE 
+#   define OBJC_HASH_AVAILABILITY \
+    OBJC_OSX_DEPRECATED_OTHERS_UNAVAILABLE(10.0, 10.1, "NXHashTable is deprecated")
 #else
 #   define OBJC_HASH_AVAILABILITY
 #endif
@@ -248,7 +246,7 @@ OBJC_EXPORT const NXHashTablePrototype NXStrStructKeyPrototype
     OBJC_HASH_AVAILABILITY;
 
 
-#if !__OBJC2__  &&  !TARGET_OS_WIN32
+#if !__OBJC2__  &&  !0
 
 /*************************************************************************
  *	Unique strings and buffers

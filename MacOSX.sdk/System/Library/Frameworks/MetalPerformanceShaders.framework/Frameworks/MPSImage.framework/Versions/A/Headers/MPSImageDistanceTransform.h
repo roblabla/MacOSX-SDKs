@@ -16,7 +16,7 @@
  *  @class      MPSImageEuclideanDistanceTransform
  *  @discussion Perform a Euclidean Distance Transform
  */
-MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3))
+MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3))
 @interface  MPSImageEuclideanDistanceTransform : MPSUnaryImageKernel
 
 /*!

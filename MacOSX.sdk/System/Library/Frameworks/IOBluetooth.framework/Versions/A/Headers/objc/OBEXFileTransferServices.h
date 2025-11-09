@@ -23,6 +23,7 @@
 
 @class BluetoothFileReference;
 
+API_UNAVAILABLE(ios, watchos, tvos)
 @interface OBEXFileTransferServices : NSObject
 {
 
@@ -80,7 +81,7 @@
     @abstract		Create a new OBEXFileTransferServices object
     @discussion		This object must be constructed with a valid IOBluetoothOBEXSession. The given 
 					IOBluetoothOBEXSession does not need to be connected to the remote server.  
-					This module can be manually connected through the connect() method. 
+					This module can be manually connected through the connect(void) method. 
 	@param			inOBEXSession A valid IOBluetoothOBEXSession
 	@result			A newly created OBEXFileTransferServices object on success, nil on failure
 */
@@ -313,6 +314,7 @@
 //====================================================================================================================
 //  Delegate Methods
 //====================================================================================================================
+API_UNAVAILABLE(ios, watchos, tvos)
 @interface NSObject (OBEXFileTransferServicesDelegate)
 
 #pragma mark -

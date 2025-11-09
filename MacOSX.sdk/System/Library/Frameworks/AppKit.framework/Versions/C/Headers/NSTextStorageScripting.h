@@ -1,7 +1,7 @@
 /*
         NSTextStorageScripting.h
         AppKit Framework
-        Copyright (c) 1997-2018, Apple Inc.
+        Copyright (c) 1997-2019, Apple Inc.
         All rights reserved.
 */
 
@@ -9,6 +9,7 @@
 #import <AppKit/NSTextStorage.h>
 
 NS_ASSUME_NONNULL_BEGIN
+#if !TARGET_OS_IPHONE
 
 @interface NSTextStorage (Scripting)
 
@@ -25,5 +26,5 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, strong) NSColor *foregroundColor;
 
 @end
-
+#endif // !TARGET_OS_IPHONE
 NS_ASSUME_NONNULL_END

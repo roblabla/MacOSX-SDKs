@@ -1,8 +1,8 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 30AAC34A-E68A-3B95-9369-35E752A20C96' ]
+uuids:           [ 'x86_64: B4518F56-F26A-32C5-9ECA-3AA344C3D52C' ]
 platform:        macosx
-install-name:    /System/Library/PrivateFrameworks/FindMyMac.framework/Versions/A/FindMyMac
+install-name:    '/System/Library/PrivateFrameworks/FindMyMac.framework/Versions/A/FindMyMac'
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _AtLoginWindow, _CopyDataAndBytesAndLengthFromDictionary, 
@@ -11,13 +11,14 @@ exports:
                        _FMMClearAccounts, _FMMCopyBootState, _FMMCopyComputerName, 
                        _FMMCopyDisplayMessage, _FMMCopyGoodSamaritanMessage, _FMMCopyTokenForAccount, 
                        _FMMDaemonTestLaunch, _FMMIsWipeSupported, _FMMLockPinType, 
-                       _FMMLockScreen, _FMMLockSystem, _FMMRestartToOneTimeGuest, 
-                       _FMMSendAsyncMessageToFMMDaemon, _FMMSendAsyncMessageToFMMMessenger, 
-                       _FMMSendSyncMessageToFMMDaemon, _FMMSendSyncMessageToFMMMessenger, 
-                       _FMMSendSyncMessageToHasTRBTool, _FMMSetComputerName, _FMMSetDisplayMessage, 
-                       _FMMSetDisplayMessageWithTitle, _FMMSetGoodSamaritanMessage, 
-                       _FMMSetToWipeWhenSystemLocked, _FMMSetTokenForAccount, _FMMShowDisplayMessage, 
-                       _FMMSystemHasTRB, _FMMUnlockSystem, _FMMWipeStatus, _FMMXPCDaemonServerConnection, 
+                       _FMMLockScreen, _FMMLockSystem, _FMMRestartToActivationLockRecovery, 
+                       _FMMRestartToOneTimeGuest, _FMMSendAsyncMessageToFMMDaemon, 
+                       _FMMSendAsyncMessageToFMMMessenger, _FMMSendSyncMessageToFMMDaemon, 
+                       _FMMSendSyncMessageToFMMMessenger, _FMMSendSyncMessageToHasTRBTool, 
+                       _FMMSetComputerName, _FMMSetDisplayMessage, _FMMSetDisplayMessageWithTitle, 
+                       _FMMSetGoodSamaritanMessage, _FMMSetToWipeWhenSystemLocked, 
+                       _FMMSetTokenForAccount, _FMMShowDisplayMessage, _FMMSystemHasTRB, 
+                       _FMMUnlockSystem, _FMMWipeStatus, _FMMXPCDaemonServerConnection, 
                        _FMMXPCHasTRBServerConnection, _FMMXPCMessengerServerConnection, 
                        _GetPropertyAsBOOL, _GetPropertyAsInteger, _LogCategory_Unspecified, 
                        _RunningInRecoveryOS, _SaveBooleanProperty, _SaveDataProperty, 

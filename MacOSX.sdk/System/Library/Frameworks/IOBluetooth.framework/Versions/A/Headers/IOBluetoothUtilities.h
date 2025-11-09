@@ -30,6 +30,7 @@
 	@discussion	Pass in most types of strings, such as "001122334455" or "00-11-22-33-44-55" and the conversion should be successful. Also, you should have 2 characters per byte for the conversion to work properly.
 */
 
+API_UNAVAILABLE(ios, watchos, tvos)
 extern	IOReturn	IOBluetoothNSStringToDeviceAddress( NSString * inNameString, BluetoothDeviceAddress * outDeviceAddress );
 
 //---------------------------------------------------------------------------------------------------------------------------
@@ -40,6 +41,7 @@ extern	IOReturn	IOBluetoothNSStringToDeviceAddress( NSString * inNameString, Blu
 	@discussion	The resultant string will be in this format: "00-11-22-33-44-55"
 */
 
+API_UNAVAILABLE(ios, watchos, tvos)
 extern	NSString *	IOBluetoothNSStringFromDeviceAddress( const BluetoothDeviceAddress *deviceAddress );
 
 //---------------------------------------------------------------------------------------------------------------------------
@@ -50,6 +52,7 @@ extern	NSString *	IOBluetoothNSStringFromDeviceAddress( const BluetoothDeviceAdd
 @discussion	The resultant string will be in this format: "00:11:22:33:44:55"
 */
 
+API_UNAVAILABLE(ios, watchos, tvos)
 extern  NSString *	IOBluetoothNSStringFromDeviceAddressColon(const BluetoothDeviceAddress *deviceAddress);
         
 #pragma mark -
@@ -63,6 +66,7 @@ extern  NSString *	IOBluetoothNSStringFromDeviceAddressColon(const BluetoothDevi
 	@discussion	Not much to talk about.
 */
 
+API_UNAVAILABLE(ios, watchos, tvos)
 extern	Boolean		IOBluetoothIsFileAppleDesignatedPIMData( NSString* inFileName );
 
 //---------------------------------------------------------------------------------------------------------------------------
@@ -77,13 +81,21 @@ extern	Boolean		IOBluetoothIsFileAppleDesignatedPIMData( NSString* inFileName );
 					If one already exists, you will be returned: &#64"~Documents/TestFile #1.txt".
 */
 
+API_UNAVAILABLE(ios, watchos, tvos)
 extern	NSString*	IOBluetoothGetUniqueFileNameAndPath( NSString* inName, NSString* inPath );
 		
 #else
 
+API_UNAVAILABLE(ios, watchos, tvos)
 extern	IOReturn	IOBluetoothCFStringToDeviceAddress( CFStringRef inNameString, BluetoothDeviceAddress * outDeviceAddress );
+
+API_UNAVAILABLE(ios, watchos, tvos)
 extern	CFStringRef	IOBluetoothCFStringFromDeviceAddress( const BluetoothDeviceAddress *deviceAddress );
+
+API_UNAVAILABLE(ios, watchos, tvos)
 extern	Boolean		IOBluetoothIsFileAppleDesignatedPIMDataAtCFStringPath( CFStringRef inFileName );
+
+API_UNAVAILABLE(ios, watchos, tvos)
 extern	CFStringRef	IOBluetoothGetUniqueFileNameAndWithCFStringPath( CFStringRef inName, CFStringRef inPath );
 		
 #endif /* __OBJC__ */
@@ -148,7 +160,10 @@ extern	CFStringRef	IOBluetoothGetUniqueFileNameAndWithCFStringPath( CFStringRef 
 	</i>
 */
 
+API_UNAVAILABLE(ios, watchos, tvos)
 extern long		IOBluetoothPackData( void *ioBuffer, const char *inFormat, ... );
+
+API_UNAVAILABLE(ios, watchos, tvos)
 extern long		IOBluetoothPackDataList( void *ioBuffer, const char *inFormat, va_list inArgs );
 
 //---------------------------------------------------------------------------------------------------------------------------
@@ -199,7 +214,10 @@ extern long		IOBluetoothPackDataList( void *ioBuffer, const char *inFormat, va_l
 	</pre>
 */
 
+API_UNAVAILABLE(ios, watchos, tvos)
 extern long		IOBluetoothUnpackData( ByteCount inBufferSize, const void *inBuffer, const char *inFormat, ... );
+
+API_UNAVAILABLE(ios, watchos, tvos)
 extern long		IOBluetoothUnpackDataList( ByteCount inBufferSize, const void *inBuffer, const char *inFormat, va_list inArgs );
 
 #pragma mark -
@@ -211,7 +229,8 @@ extern long		IOBluetoothUnpackDataList( ByteCount inBufferSize, const void *inBu
 	@result		Number of HID devices.
 */
 
-extern long IOBluetoothNumberOfAvailableHIDDevices();
+API_UNAVAILABLE(ios, watchos, tvos)
+extern long IOBluetoothNumberOfAvailableHIDDevices(void);
 
 //---------------------------------------------------------------------------------------------------------------------------
 /*!	@function	IOBluetoothNumberOfPointingHIDDevices
@@ -219,7 +238,8 @@ extern long IOBluetoothNumberOfAvailableHIDDevices();
 	@result		Number of HID devices.
 */
 
-extern long IOBluetoothNumberOfPointingHIDDevices();
+API_UNAVAILABLE(ios, watchos, tvos)
+extern long IOBluetoothNumberOfPointingHIDDevices(void);
 
 //---------------------------------------------------------------------------------------------------------------------------
 /*!	@function	IOBluetoothNumberOfKeyboardHIDDevices
@@ -227,7 +247,8 @@ extern long IOBluetoothNumberOfPointingHIDDevices();
 	@result		Number of HID devices.
 */
 
-extern long IOBluetoothNumberOfKeyboardHIDDevices();
+API_UNAVAILABLE(ios, watchos, tvos)
+extern long IOBluetoothNumberOfKeyboardHIDDevices(void);
 
 //---------------------------------------------------------------------------------------------------------------------------
 /*!	@function	IOBluetoothNumberOfTabletHIDDevices
@@ -235,7 +256,8 @@ extern long IOBluetoothNumberOfKeyboardHIDDevices();
 	@result		Number of HID devices.
 */
 
-extern long IOBluetoothNumberOfTabletHIDDevices();
+API_UNAVAILABLE(ios, watchos, tvos)
+extern long IOBluetoothNumberOfTabletHIDDevices(void);
 
 //---------------------------------------------------------------------------------------------------------------------------
 /*!	@function	IOBluetoothFindNumberOfRegistryEntriesOfClassName
@@ -243,6 +265,7 @@ extern long IOBluetoothNumberOfTabletHIDDevices();
 	@result		Number of HID devices.
 */
 
+API_UNAVAILABLE(ios, watchos, tvos)
 extern long IOBluetoothFindNumberOfRegistryEntriesOfClassName( const char *deviceType );
 
 

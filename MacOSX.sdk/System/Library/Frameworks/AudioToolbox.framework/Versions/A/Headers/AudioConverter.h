@@ -1,3 +1,4 @@
+#if (defined(USE_AUDIOTOOLBOX_PUBLIC_HEADERS) && USE_AUDIOTOOLBOX_PUBLIC_HEADERS) || !__has_include(<AudioToolboxCore/AudioConverter.h>)
 /*!
 	@file		AudioConverter.h
 	@framework	AudioToolbox.framework
@@ -21,23 +22,12 @@
 #ifndef AudioToolbox_AudioConverter_h
 #define AudioToolbox_AudioConverter_h
 
-//==================================================================================================
-
-/*!
-    @header     AudioConverter.h
-    
-*/
-
 //=============================================================================
 //  Includes
 //=============================================================================
 
 #include <Availability.h>
-#if !defined(__COREAUDIO_USE_FLAT_INCLUDES__)
-    #include <CoreAudio/CoreAudioTypes.h>
-#else
-    #include <CoreAudioTypes.h>
-#endif
+#include <CoreAudioTypes/CoreAudioTypes.h>
 
 CF_ASSUME_NONNULL_BEGIN
 
@@ -79,11 +69,6 @@ typedef UInt32                          AudioConverterPropertyID;
                     a UInt32 that indicates the size in bytes of the smallest buffer of output
                     data that can be supplied to AudioConverterFillComplexBuffer or as the output to
                     AudioConverterConvertBuffer
-    @constant   kAudioConverterPropertyMaximumInputBufferSize
-                    DEPRECATED. The AudioConverter input proc may be passed any number of packets of data.
-                    If fewer are packets are returned than required, then the input proc will be called again.
-                    If more packets are passed than required, they will remain in the client's buffer and be 
-                    consumed as needed.
     @constant   kAudioConverterPropertyMaximumInputPacketSize
                     a UInt32 that indicates the size in bytes of the largest single packet of
                     data in the input format. This is mostly useful for variable bit rate
@@ -108,8 +93,6 @@ typedef UInt32                          AudioConverterPropertyID;
     @constant   kAudioConverterPropertyOutputCodecParameters
                     The value of this property varies from format to format and is considered
                     private to the format. It is treated as a buffer of untyped data.
-    @constant   kAudioConverterSampleRateConverterAlgorithm
-                    DEPRECATED: please use kAudioConverterSampleRateConverterComplexity instead
     @constant   kAudioConverterSampleRateConverterComplexity
                     An OSType that specifies the sample rate converter algorithm to use (as defined in
                     AudioToolbox/AudioUnitProperties.h)
@@ -209,14 +192,12 @@ CF_ENUM(AudioConverterPropertyID)
 {
     kAudioConverterPropertyMinimumInputBufferSize       = 'mibs',
     kAudioConverterPropertyMinimumOutputBufferSize      = 'mobs',
-    kAudioConverterPropertyMaximumInputBufferSize       = 'xibs',
     kAudioConverterPropertyMaximumInputPacketSize       = 'xips',
     kAudioConverterPropertyMaximumOutputPacketSize      = 'xops',
     kAudioConverterPropertyCalculateInputBufferSize     = 'cibs',
     kAudioConverterPropertyCalculateOutputBufferSize    = 'cobs',
     kAudioConverterPropertyInputCodecParameters         = 'icdp',
     kAudioConverterPropertyOutputCodecParameters        = 'ocdp',
-    kAudioConverterSampleRateConverterAlgorithm         = 'srci',
     kAudioConverterSampleRateConverterComplexity        = 'srca',
     kAudioConverterSampleRateConverterQuality           = 'srcq',
     kAudioConverterSampleRateConverterInitialPhase      = 'srcp',
@@ -242,7 +223,7 @@ CF_ENUM(AudioConverterPropertyID)
     kAudioConverterPropertyFormatList                   = 'flst'
 };
 
-
+#if !TARGET_OS_IPHONE
 //=============================================================================
 //  
 //=============================================================================
@@ -276,6 +257,7 @@ CF_ENUM(UInt32)
 	kDitherAlgorithm_TPDF				= 1,	
 	kDitherAlgorithm_NoiseShaping		= 2 
 };
+#endif
 
 /*!
     @enum       Quality constants
@@ -356,7 +338,7 @@ CF_ENUM(UInt32)
     @struct     AudioConverterPrimeInfo
     @abstract   Specifies priming information.
     
-    @field      leadingFrames
+    @var        leadingFrames
         Specifies the number of leading (previous) input frames, relative to the normal/desired
         start input frame, required by the converter to perform a high quality conversion. If
         using kConverterPrimeMethod_Pre, the client should "pre-seek" the input stream provided
@@ -366,7 +348,7 @@ CF_ENUM(UInt32)
         in the input proc.  Do not "pre-seek" in the default case of
         kConverterPrimeMethod_Normal or when using kConverterPrimeMethod_None.
 
-    @field      trailingFrames
+    @var        trailingFrames
         Specifies the number of trailing input frames (past the normal/expected end input frame)
         required by the converter to perform a high quality conversion.  The client should be
         prepared to provide this number of additional input frames except when using
@@ -432,6 +414,28 @@ CF_ENUM(OSStatus)
     kAudioConverterErr_OutputSampleRateOutOfRange   = '!osr'
 };
 
+#if TARGET_OS_IPHONE
+/*!
+    @enum       AudioConverter errors (iPhone only)
+    @abstract   iPhone-specific OSStatus results for AudioConverter
+    
+    @constant   kAudioConverterErr_HardwareInUse
+                    Returned from AudioConverterFillComplexBuffer if the underlying hardware codec has
+                    become unavailable, probably due to an interruption. In this case, your application
+                    must stop calling AudioConverterFillComplexBuffer. If the converter can resume from an
+                    interruption (see kAudioConverterPropertyCanResumeFromInterruption), you must
+                    wait for an EndInterruption notification from AudioSession, and call AudioSessionSetActive(true)
+                    before resuming.
+    @constant   kAudioConverterErr_NoHardwarePermission
+                    Returned from AudioConverterNew if the new converter would use a hardware codec
+                    which the application does not have permission to use.
+*/  
+CF_ENUM(OSStatus)
+{
+    kAudioConverterErr_HardwareInUse 		= 'hwiu',
+    kAudioConverterErr_NoHardwarePermission = 'perm'
+};
+#endif
 
 //=============================================================================
 //  Routines
@@ -607,84 +611,6 @@ AudioConverterSetProperty(  AudioConverterRef           inAudioConverter,
 
 //-----------------------------------------------------------------------------
 /*!
-    @typedef    AudioConverterInputDataProc
-    @abstract   Callback function for supplying input data to AudioConverterFillBuffer.
-
-    @param      inAudioConverter
-                    The AudioConverter requesting input.
-    @param      ioDataSize
-                    On entry, the minimum number of bytes of audio data the converter
-                    would like in order to fulfill its current FillBuffer request.
-                    On exit, the number of bytes of audio data actually being provided
-                    for input, or 0 if there is no more input.
-    @param      outData
-                    On exit, *outData should point to the audio data being provided
-                    for input.
-    @param      inUserData
-                    The inInputDataProcUserData parameter passed to AudioConverterFillBuffer().
-    @result     An OSStatus result code.
-    
-    @discussion
-                <b>NOTE:</b> This API is now deprecated, 
-                use AudioConverterFillComplexBuffer instead.
-
-                This callback function supplies input to AudioConverterFillBuffer.
-                
-                The AudioConverter requests a minimum amount of data (*ioDataSize). The callback
-                may return any amount of data. If it is less than than the minimum, the callback
-                will simply be called again in the near future.
-
-                The callback supplies a pointer to a buffer of audio data. The callback is
-                responsible for not freeing or altering this buffer until it is called again.
-                
-                If the callback returns an error, it must return zero bytes of data.
-                AudioConverterFillBuffer will stop producing output and return whatever output
-                has already been produced to its caller, along with the error code. This
-                mechanism can be used when an input proc has temporarily run out of data, but
-                has not yet reached end of stream.
-*/
-typedef OSStatus
-(*AudioConverterInputDataProc)( AudioConverterRef           inAudioConverter,
-                                UInt32 *                    ioDataSize,
-                                void * __nonnull * __nonnull outData,
-                                void * __nullable           inUserData);
-
-//-----------------------------------------------------------------------------
-/*!
-    @function   AudioConverterFillBuffer
-    @abstract   Converts data supplied by an input callback function.
-
-    @param      inAudioConverter
-                    The AudioConverter to use.
-    @param      inInputDataProc
-                    A callback function which supplies the input data.
-    @param      inInputDataProcUserData
-                    A value for the use of the callback function.
-    @param      ioOutputDataSize
-                    On entry, the size of the buffer pointed to by outOutputData.
-                    On exit, the number of bytes written to outOutputData
-    @param      outOutputData
-                    The buffer into which the converted data is written.
-    @result     An OSStatus result code.
-    
-    @discussion
-                <b>NOTE:</b> This API is now deprecated, 
-                use AudioConverterFillComplexBuffer instead.
-
-                Produces a buffer of output data from an AudioConverter. The supplied input
-                callback function is called whenever necessary.             
-*/
-extern OSStatus
-AudioConverterFillBuffer(   AudioConverterRef               inAudioConverter,
-                            AudioConverterInputDataProc     inInputDataProc,
-                            void * __nullable               inInputDataProcUserData,
-                            UInt32 *                        ioOutputDataSize,
-                            void *                          outOutputData)
-                            
-                                API_DEPRECATED("no longer supported", macos(10.1, 10.5)) API_UNAVAILABLE(ios, watchos, tvos);
-
-//-----------------------------------------------------------------------------
-/*!
     @function   AudioConverterConvertBuffer
     @abstract   Converts data from an input buffer to an output buffer.
 
@@ -831,6 +757,129 @@ AudioConverterConvertComplexBuffer( AudioConverterRef               inAudioConve
                                     AudioBufferList *               outOutputData)
                                                                                 API_AVAILABLE(macos(10.7), ios(5.0), watchos(2.0), tvos(9.0));
 
+// =================================================================================================
+// DEPRECATED
+// =================================================================================================
+
+/*
+	Deprecated properties:
+	
+    @constant   kAudioConverterPropertyMaximumInputBufferSize
+                    DEPRECATED. The AudioConverter input proc may be passed any number of packets of data.
+                    If fewer are packets are returned than required, then the input proc will be called again.
+                    If more packets are passed than required, they will remain in the client's buffer and be 
+                    consumed as needed.
+    @constant   kAudioConverterSampleRateConverterAlgorithm
+                    DEPRECATED: please use kAudioConverterSampleRateConverterComplexity instead
+	
+*/
+CF_ENUM(AudioConverterPropertyID)
+{
+    kAudioConverterPropertyMaximumInputBufferSize       = 'xibs',
+    kAudioConverterSampleRateConverterAlgorithm         = 'srci',
+};
+
+#if TARGET_OS_IPHONE
+/*!
+    @enum       AudioConverterPropertyID (iOS only)
+    @abstract   iOS-specific properties of an AudioConverter, accessible via AudioConverterGetProperty()
+                and AudioConverterSetProperty().
+ 
+    @constant   kAudioConverterPropertyCanResumeFromInterruption
+                    A read-only UInt32 signifying whether the underlying codec supports resumption following
+                    an interruption. If the property is unimplemented (i.e. AudioConverterGetProperty
+                    returns an error), then the codec is not a hardware codec. If the property's value
+                    is 1, then the codec can resume work following an interruption. If the property's
+                    value is 0, then interruptions destroy the codec's state.
+                    
+                    DEPRECATED: Hardware codecs are no longer supported.
+*/
+CF_ENUM(AudioConverterPropertyID)
+{
+    kAudioConverterPropertyCanResumeFromInterruption    = 'crfi'
+};
+#endif
+
+//-----------------------------------------------------------------------------
+/*!
+    @typedef    AudioConverterInputDataProc
+    @abstract   Callback function for supplying input data to AudioConverterFillBuffer.
+
+    @param      inAudioConverter
+                    The AudioConverter requesting input.
+    @param      ioDataSize
+                    On entry, the minimum number of bytes of audio data the converter
+                    would like in order to fulfill its current FillBuffer request.
+                    On exit, the number of bytes of audio data actually being provided
+                    for input, or 0 if there is no more input.
+    @param      outData
+                    On exit, *outData should point to the audio data being provided
+                    for input.
+    @param      inUserData
+                    The inInputDataProcUserData parameter passed to AudioConverterFillBuffer().
+    @result     An OSStatus result code.
+    
+    @discussion
+                <b>NOTE:</b> This API is now deprecated, 
+                use AudioConverterFillComplexBuffer instead.
+
+                This callback function supplies input to AudioConverterFillBuffer.
+                
+                The AudioConverter requests a minimum amount of data (*ioDataSize). The callback
+                may return any amount of data. If it is less than than the minimum, the callback
+                will simply be called again in the near future.
+
+                The callback supplies a pointer to a buffer of audio data. The callback is
+                responsible for not freeing or altering this buffer until it is called again.
+                
+                If the callback returns an error, it must return zero bytes of data.
+                AudioConverterFillBuffer will stop producing output and return whatever output
+                has already been produced to its caller, along with the error code. This
+                mechanism can be used when an input proc has temporarily run out of data, but
+                has not yet reached end of stream.
+*/
+typedef OSStatus
+(*AudioConverterInputDataProc)( AudioConverterRef           inAudioConverter,
+                                UInt32 *                    ioDataSize,
+                                void * __nonnull * __nonnull outData,
+                                void * __nullable           inUserData);
+
+//-----------------------------------------------------------------------------
+/*!
+    @function   AudioConverterFillBuffer
+    @abstract   Converts data supplied by an input callback function.
+
+    @param      inAudioConverter
+                    The AudioConverter to use.
+    @param      inInputDataProc
+                    A callback function which supplies the input data.
+    @param      inInputDataProcUserData
+                    A value for the use of the callback function.
+    @param      ioOutputDataSize
+                    On entry, the size of the buffer pointed to by outOutputData.
+                    On exit, the number of bytes written to outOutputData
+    @param      outOutputData
+                    The buffer into which the converted data is written.
+    @result     An OSStatus result code.
+    
+    @discussion
+                <b>NOTE:</b> This API is now deprecated, 
+                use AudioConverterFillComplexBuffer instead.
+
+                Produces a buffer of output data from an AudioConverter. The supplied input
+                callback function is called whenever necessary.             
+*/
+#if !TARGET_OS_IPHONE
+extern OSStatus
+AudioConverterFillBuffer(   AudioConverterRef               inAudioConverter,
+                            AudioConverterInputDataProc     inInputDataProc,
+                            void * __nullable               inInputDataProcUserData,
+                            UInt32 *                        ioOutputDataSize,
+                            void *                          outOutputData)
+                            
+                                API_DEPRECATED("no longer supported", macos(10.1, 10.5)) API_UNAVAILABLE(ios, watchos, tvos);
+#endif // !TARGET_OS_IPHONE
+
 #if defined(__cplusplus)
 }
 #endif
@@ -838,3 +887,6 @@ AudioConverterConvertComplexBuffer( AudioConverterRef               inAudioConve
 CF_ASSUME_NONNULL_END
 
 #endif // AudioToolbox_AudioConverter_h
+#else
+#include <AudioToolboxCore/AudioConverter.h>
+#endif

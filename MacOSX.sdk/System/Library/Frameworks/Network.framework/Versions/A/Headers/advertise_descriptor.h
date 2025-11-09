@@ -2,16 +2,22 @@
 //  advertise_descriptor.h
 //  Network
 //
-//  Copyright (c) 2016-2018 Apple Inc. All rights reserved.
+//  Copyright (c) 2016-2019 Apple Inc. All rights reserved.
 //
 
 #ifndef __NW_ADVERTISE_DESCRIPTOR_H__
 #define __NW_ADVERTISE_DESCRIPTOR_H__
 
+#ifndef __NW_INDIRECT__
+#warning "Please include <Network/Network.h> instead of this file directly."
+#endif // __NW_INDIRECT__
+
 #include <Network/nw_object.h>
+#include <Network/txt_record.h>
 
 #include <sys/types.h>
 #include <stdbool.h>
+#include <stdint.h>
 
 NW_ASSUME_NONNULL_BEGIN
 __BEGIN_DECLS
@@ -59,21 +65,25 @@ nw_advertise_descriptor_create_bonjour_service(const char * _Nullable name, cons
  * @function nw_advertise_descriptor_set_txt_record
  *
  * @abstract
- *		Set the TXT record to use when initially registering the service.
+ *		Set the TXT record for the advertise descriptor's service. You must call
+ *      nw_listener_set_advertise_descriptor to update the listener's advertising
+ *      afterwards in order for these changes to take effect.
  *
  * @param advertise_descriptor
- *		The advertise descriptor to modify
+ *		The advertise descriptor to modify.
  *
  * @param txt_record
  *		A pointer to the TXT record.
  *
  * @param txt_length
- *		The length of the TXT record.
+ *		The length of the TXT record. The total size of a typical DNS-SD TXT record
+ *		is intended to be small - 200 bytes or less. Using TXT records larger than
+ *		1300 bytes is not recommended at this time.
  */
 API_AVAILABLE(macos(10.14), ios(12.0), watchos(5.0), tvos(12.0))
 void
 nw_advertise_descriptor_set_txt_record(nw_advertise_descriptor_t advertise_descriptor,
-									   const void *txt_record,
+									   const void * _Nullable txt_record,
 									   size_t txt_length);
 
 /*!
@@ -84,7 +94,7 @@ nw_advertise_descriptor_set_txt_record(nw_advertise_descriptor_t advertise_descr
  *		Auto-rename is enabled by default.
  *
  * @param advertise_descriptor
- *		The advertise descriptor to modify
+ *		The advertise descriptor to modify.
  *
  * @param no_auto_rename
  *		A boolean indicating if auto-rename should be disabled.
@@ -102,13 +112,48 @@ nw_advertise_descriptor_set_no_auto_rename(nw_advertise_descriptor_t advertise_d
  *		registration.
  *
  * @param advertise_descriptor
- *		The advertise descriptor to modify
+ *		The advertise descriptor object.
  *
  * @result A boolean indicating if auto-rename is disabled.
  */
 API_AVAILABLE(macos(10.14), ios(12.0), watchos(5.0), tvos(12.0))
 bool
 nw_advertise_descriptor_get_no_auto_rename(nw_advertise_descriptor_t advertise_descriptor);
+
+/*!
+ * @function nw_advertise_descriptor_set_txt_record_object
+ *
+ * @abstract
+ *		Set the TXT record object on the advertise descriptor.
+ *
+ * @param advertise_descriptor
+ *		The advertise descriptor object.
+ *
+ * @param txt_record
+ *		The TXT record object. If txt_record is NULL, the advertise_descriptor's
+ *		current TXT record object will be removed.
+ */
+API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0))
+void
+nw_advertise_descriptor_set_txt_record_object(nw_advertise_descriptor_t advertise_descriptor,
+											  _Nullable nw_txt_record_t txt_record);
+
+/*!
+* @function nw_advertise_descriptor_copy_txt_record_object
+*
+* @abstract
+*		Copies the TXT record object from the advertise descriptor.
+*
+* @param advertise_descriptor
+*		The advertise descriptor object.
+*
+* @result
+*		A copy of the TXT record object, or NULL if the advertise descriptor
+*		does not have an associated TXT record.
+*/
+API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0))
+NW_RETURNS_RETAINED _Nullable nw_txt_record_t
+nw_advertise_descriptor_copy_txt_record_object(nw_advertise_descriptor_t advertise_descriptor);
 
 __END_DECLS
 NW_ASSUME_NONNULL_END

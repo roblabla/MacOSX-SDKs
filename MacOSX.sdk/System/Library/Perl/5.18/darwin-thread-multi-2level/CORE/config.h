@@ -886,7 +886,7 @@
  *	feature tests from Configure are generally more reliable.
  */
 #define OSNAME "darwin"		/**/
-#define OSVERS "18.0"		/**/
+#define OSVERS "19.0"		/**/
 
 /* USE_CROSS_COMPILE:
  *	This symbol, if defined, indicates that Perl is being cross-compiled.
@@ -4827,7 +4827,7 @@
  *	This is the path to the Updates directory (which comes before
  *	the system perl directory in @INC.
  */
-#define UPDATESLIB		"/Library/Perl/Updates/5.18.2"
+#define UPDATESLIB		"/Library/Perl/Updates/5.18.4"
 
 /* NO_NETWORK_LIBRARY_PERL_FILE:
  *	If this file path exists, the vendor libs (which are the

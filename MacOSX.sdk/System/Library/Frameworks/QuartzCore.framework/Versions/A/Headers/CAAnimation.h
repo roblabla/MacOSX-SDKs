@@ -11,10 +11,10 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-typedef NSString * CAAnimationCalculationMode NS_STRING_ENUM;
-typedef NSString * CAAnimationRotationMode NS_STRING_ENUM;
-typedef NSString * CATransitionType NS_STRING_ENUM;
-typedef NSString * CATransitionSubtype NS_STRING_ENUM;
+typedef NSString * CAAnimationCalculationMode NS_TYPED_ENUM;
+typedef NSString * CAAnimationRotationMode NS_TYPED_ENUM;
+typedef NSString * CATransitionType NS_TYPED_ENUM;
+typedef NSString * CATransitionSubtype NS_TYPED_ENUM;
 
 /** The base animation class. **/
 

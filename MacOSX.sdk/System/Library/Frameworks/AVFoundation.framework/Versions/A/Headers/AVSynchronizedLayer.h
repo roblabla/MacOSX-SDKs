@@ -42,6 +42,8 @@
 */
 
 #import <AVFoundation/AVBase.h>
+
+#if __has_include(<QuartzCore/CoreAnimation.h>)
 #import <QuartzCore/CAAnimation.h>
 
 @class AVPlayerItem;
@@ -49,7 +51,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-NS_CLASS_AVAILABLE(10_7, 4_0)
+API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 @interface AVSynchronizedLayer : CALayer
 {
 @private
@@ -69,3 +71,5 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 @end
 
 NS_ASSUME_NONNULL_END
+
+#endif  // __has_include(<QuartzCore/CoreAnimation.h>)

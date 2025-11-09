@@ -1,6 +1,6 @@
 /*	
     NSHTTPCookie.h
-    Copyright (c) 2003-2018, Apple Inc. All rights reserved.    
+    Copyright (c) 2003-2019, Apple Inc. All rights reserved.    
     
     Public header file.
 */
@@ -15,6 +15,7 @@
 @class NSURL;
 
 typedef NSString * NSHTTPCookiePropertyKey NS_EXTENSIBLE_STRING_ENUM;
+typedef NSString * NSHTTPCookieStringPolicy NS_TYPED_ENUM;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -96,6 +97,23 @@ FOUNDATION_EXPORT NSHTTPCookiePropertyKey const NSHTTPCookieMaximumAge;
 */
 FOUNDATION_EXPORT NSHTTPCookiePropertyKey const NSHTTPCookiePort;
 
+/*!
+ @const NSHTTPCookieSameSitePolicy
+ @discussion Key for cookie same site
+ */
+FOUNDATION_EXPORT NSHTTPCookiePropertyKey const NSHTTPCookieSameSitePolicy API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0));
+
+/*!
+ @const NSHTTPCookieSameSiteLax
+ @discussion String constant "lax" to be used as a value for the property key NSHTTPCookieSameSite
+ */
+FOUNDATION_EXPORT NSHTTPCookieStringPolicy const NSHTTPCookieSameSiteLax API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0));
+
+/*!
+ @const NSHTTPCookieSameSiteStrict
+ @discussion String constant "strict" to be used as a value for the property key NSHTTPCookieSameSite
+ */
+FOUNDATION_EXPORT NSHTTPCookieStringPolicy const NSHTTPCookieSameSiteStrict API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0));
 
 @class NSHTTPCookieInternal;
 
@@ -401,6 +419,18 @@ FOUNDATION_EXPORT NSHTTPCookiePropertyKey const NSHTTPCookiePort;
     port.
 */
 @property (nullable, readonly, copy) NSArray<NSNumber *> *portList;
+
+/*!
+ @abstract Returns the value of the same site attribute on the cookie.
+ @discussion Cookies can be marked with an attribute Strict or Lax.
+ Cookies marked with "strict" (NSHTTPCookieSameSiteStrict) are not sent along with cross-site requests.
+ Cookies marked with "lax" (NSHTTPCookieSameSiteLax) sent along cross-site requests provided the
+ cross-site requests are top-level-requests (one that changes the url in the address bar).
+ The attribute value is canonicalized and stored. Any value other than the default (strict and lax) will be ignored.
+ @result strict or lax. The result could also be nil, in which case the
+ cookie will be sent along with all cross-site requests.
+ */
+@property (nullable, readonly, copy) NSHTTPCookieStringPolicy sameSitePolicy API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0));
 
 @end
 

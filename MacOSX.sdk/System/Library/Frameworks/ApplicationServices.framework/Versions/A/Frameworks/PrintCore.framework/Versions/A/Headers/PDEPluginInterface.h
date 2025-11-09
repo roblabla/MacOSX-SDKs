@@ -29,7 +29,7 @@ NS_ASSUME_NONNULL_BEGIN
 @class NSView;
 
 /*!
- * @protocol	PDEPlugIn
+ * @name	PDEPlugIn
  * @abstract	An instance implementing methods in the PDEPlugIn informal protocol protocol
  *				acts as a factory for PDEPanels. The factory is provided with the type
  *				of printer panel needed (page setup or print dialog) as well as
@@ -78,7 +78,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 /*!
- * @protocol	PDEPanel
+ * @name	PDEPanel
  * @abstract	A print dialog plugin should have an instance implementing methods
  *				from the PDEPanel informal protocol. Each such instance handles a single
  *				print dialog panel.
@@ -287,7 +287,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 /*!
- * @protocol	PDEPlugInCallbackProtocol
+ * @name	PDEPlugInCallbackProtocol
  * @abstract	An informal protocol implemented by the print system so
  *				that printing dialog extensions can obtain information
  *				about the current printer and print job.
@@ -306,7 +306,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @method		printSession
  * @abstract	Return a reference to the current print session.
  */
-- (PMPrintSession) printSession;
+- (nullable PMPrintSession) printSession;
 
 /*!
  * @method		printSettings

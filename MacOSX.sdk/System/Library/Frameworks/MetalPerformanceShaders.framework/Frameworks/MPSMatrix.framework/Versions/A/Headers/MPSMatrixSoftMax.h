@@ -30,7 +30,7 @@
  *              of the matrix as feature channels, that is the sum runs over column indices.
  *
  */
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0))
 @interface MPSMatrixSoftMax : MPSMatrixUnaryKernel
 
 /*! @property   sourceRows
@@ -79,7 +79,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
  */
 -(nonnull instancetype) initWithDevice: (nonnull id<MTLDevice>) device
 NS_DESIGNATED_INITIALIZER
-MPS_AVAILABLE_STARTING(macos(10.13), ios(11.0), tvos(11.0) );
+MPS_AVAILABLE_STARTING(macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0) );
 
 
 /*!
@@ -119,7 +119,7 @@ MPS_SWIFT_NAME(encode(commandBuffer:inputMatrix:resultMatrix:));
  */
 -(nullable instancetype) initWithCoder:(NSCoder * __nonnull)aDecoder
                                 device:(nonnull id <MTLDevice>) device NS_DESIGNATED_INITIALIZER
-MPS_AVAILABLE_STARTING(macos(10.13), ios(11.0), tvos(11.0));
+MPS_AVAILABLE_STARTING(macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0));
 
 /*!
  *  @abstract   Make a copy of this kernel for a new device - @see MPSKernel
@@ -154,7 +154,7 @@ MPS_AVAILABLE_STARTING(macos(10.13), ios(11.0), tvos(11.0));
  *              of the matrix as feature channels, that is the sum runs over column indices.
  *
  */
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0))
 @interface MPSMatrixLogSoftMax : MPSMatrixSoftMax
 
 @end // MPSMatrixLogSoftMax
@@ -176,7 +176,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
  *              gradient of the loss function with respect to Y.
  *
  */
-MPS_CLASS_AVAILABLE_STARTING( macos(10.14), ios(12.0), tvos(12.0))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.14), ios(12.0), macCatalyst(13.0), tvos(12.0))
 @interface MPSMatrixSoftMaxGradient : MPSMatrixBinaryKernel
 
 /*! @property   sourceRows
@@ -287,7 +287,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.14), ios(12.0), tvos(12.0))
  *              the output of the forward MPSMatrixLogSoftMax operation, and dL_dY is the
  *              gradient of the loss function with respect to Y.
  */
-MPS_CLASS_AVAILABLE_STARTING( macos(10.14), ios(12.0), tvos(12.0))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.14), ios(12.0), macCatalyst(13.0), tvos(12.0))
 @interface MPSMatrixLogSoftMaxGradient : MPSMatrixSoftMaxGradient
 
 @end // MPSMatrixLogSoftMaxGradient

@@ -24,10 +24,12 @@
 #if COREVIDEO_USE_IOSURFACEREF
 #if __has_include(<IOSurface/IOSurfaceRef.h>)
 #include <IOSurface/IOSurfaceRef.h>
+#define COREVIDEO_INCLUDED_IOSURFACE_HEADER_FILE 1
 #endif
 #else
 #if __has_include(<IOSurface/IOSurface.h>)
 #include <IOSurface/IOSurface.h>
+#define COREVIDEO_INCLUDED_IOSURFACE_HEADER_FILE 1
 #endif
 #endif
 #endif // COREVIDEO_SUPPORTS_IOSURFACE
@@ -45,11 +47,12 @@ CV_EXPORT const CFStringRef CV_NONNULL kCVPixelBufferIOSurfaceOpenGLFBOCompatibi
 CV_EXPORT const CFStringRef CV_NONNULL kCVPixelBufferIOSurfaceCoreAnimationCompatibilityKey AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;	// CFBoolean
 
 // Ensures that OpenGLES can create a valid texture object from IOSurface-backed CVPixelBuffers.
-CV_EXPORT const CFStringRef CV_NONNULL kCVPixelBufferIOSurfaceOpenGLESTextureCompatibilityKey API_AVAILABLE(ios(5.0), tvos(9.0)) API_UNAVAILABLE(macosx) __WATCHOS_PROHIBITED;	// CFBoolean
+CV_EXPORT const CFStringRef CV_NONNULL kCVPixelBufferIOSurfaceOpenGLESTextureCompatibilityKey API_AVAILABLE(ios(5.0), tvos(9.0)) API_UNAVAILABLE(macosx, macCatalyst) __WATCHOS_PROHIBITED;	// CFBoolean
 // Ensures that OpenGLES can create a valid texture object from IOSurface-backed CVPixelBuffers AND that the resulting texture may be used as a color buffer attachment to a OpenGLES frame buffer object.
-CV_EXPORT const CFStringRef CV_NONNULL kCVPixelBufferIOSurfaceOpenGLESFBOCompatibilityKey API_AVAILABLE(ios(5.0), tvos(9.0)) API_UNAVAILABLE(macosx) __WATCHOS_PROHIBITED;	// CFBoolean
+CV_EXPORT const CFStringRef CV_NONNULL kCVPixelBufferIOSurfaceOpenGLESFBOCompatibilityKey API_AVAILABLE(ios(5.0), tvos(9.0)) API_UNAVAILABLE(macosx, macCatalyst) __WATCHOS_PROHIBITED;	// CFBoolean
     
 #if COREVIDEO_SUPPORTS_IOSURFACE
+#if COREVIDEO_INCLUDED_IOSURFACE_HEADER_FILE
 
 /*!
 	@function   CVPixelBufferGetIOSurface
@@ -79,6 +82,7 @@ CV_EXPORT CVReturn CVPixelBufferCreateWithIOSurface(
 		CFDictionaryRef CV_NULLABLE pixelBufferAttributes,
 		CVPixelBufferRef CV_NULLABLE * CV_NONNULL pixelBufferOut) __OSX_AVAILABLE_STARTING(__MAC_10_6,__IPHONE_4_0);
 
+#endif
 #endif // COREVIDEO_SUPPORTS_IOSURFACE
 
 

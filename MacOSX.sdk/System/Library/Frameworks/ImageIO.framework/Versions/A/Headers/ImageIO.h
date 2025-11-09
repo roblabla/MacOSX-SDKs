@@ -17,5 +17,4 @@
 
 #include <ImageIO/CGImageMetadata.h>
 
-
 #endif  /* __IMAGEIO__ */

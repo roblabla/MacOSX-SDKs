@@ -11,13 +11,13 @@ NS_ASSUME_NONNULL_BEGIN
 /// Although for some encodings tags can have theoretically any length,
 /// this implementation supports tag length only up to 64bits.
 typedef UInt64 TKTLVTag
-__OSX_AVAILABLE(10.12) __IOS_AVAILABLE(10.0) __TVOS_AVAILABLE(11.0) __WATCHOS_AVAILABLE(4.0);
+API_AVAILABLE(macos(10.12), ios(10.0), tvos(11.0), watchos(4.0));
 
 /// Base class representing Tag-Length-Value record.
 /// Every record has its tag and binary value represented as NSData instance.  Allows retrieving record's tag,
 /// value (as NSData object) and binary representation of the record. Existing subclasses implement assorted
 /// encodings - TKBERTLVRecord, TKSimpleTLVRecord and TKCompactTLVRecord.
-__OSX_AVAILABLE(10.12) __IOS_AVAILABLE(10.0) __TVOS_AVAILABLE(11.0) __WATCHOS_AVAILABLE(4.0)
+API_AVAILABLE(macos(10.12), ios(10.0), tvos(11.0), watchos(4.0))
 @interface TKTLVRecord : NSObject
 
 /// Tag value of the record.
@@ -47,7 +47,7 @@ __OSX_AVAILABLE(10.12) __IOS_AVAILABLE(10.0) __TVOS_AVAILABLE(11.0) __WATCHOS_AV
 /// TKBERTLVRecord implements encoding using BER-TLV encoding rules.
 /// It is able to parse BER-encoded data and always produces DER-encoded data.
 /// No interpretation of tag values is made, all values are treated only as NSData irrespective of the tag.
-__OSX_AVAILABLE(10.12) __IOS_AVAILABLE(10.0) __TVOS_AVAILABLE(11.0) __WATCHOS_AVAILABLE(4.0)
+API_AVAILABLE(macos(10.12), ios(10.0), tvos(11.0), watchos(4.0))
 @interface TKBERTLVRecord : TKTLVRecord
 
 /// Encodes tag using BER-TLV tag encoding rules.
@@ -72,7 +72,7 @@ __OSX_AVAILABLE(10.12) __IOS_AVAILABLE(10.0) __TVOS_AVAILABLE(11.0) __WATCHOS_AV
 /// TKSimpleTLVRecord implements Simple-TLV encoding according to ISO7816-4.
 /// Tag is number in range <1..254> encoded as single byte, length is either single byte specifying length 0-254
 /// or 3 bytes encoded as 0xff followed by 2 bytes of big-endian encoded number.
-__OSX_AVAILABLE(10.12) __IOS_AVAILABLE(10.0) __TVOS_AVAILABLE(11.0) __WATCHOS_AVAILABLE(4.0)
+API_AVAILABLE(macos(10.12), ios(10.0), tvos(11.0), watchos(4.0))
 @interface TKSimpleTLVRecord : TKTLVRecord
 
 /// Creates TLV record with specified tag and value.
@@ -86,7 +86,7 @@ __OSX_AVAILABLE(10.12) __IOS_AVAILABLE(10.0) __TVOS_AVAILABLE(11.0) __WATCHOS_AV
 /// TKCompactTLVRecord implements Compact-TLV encoding according to ISO7816-4
 /// Tag is number in range <0..15> encoded as high 4 bits of initial byte, length is number in range <0..15>
 /// encoded as low 4 bits of initial byte.  Value immediatelly follows leading byte.
-__OSX_AVAILABLE(10.12) __IOS_AVAILABLE(10.0) __TVOS_AVAILABLE(11.0) __WATCHOS_AVAILABLE(4.0)
+API_AVAILABLE(macos(10.12), ios(10.0), tvos(11.0), watchos(4.0))
 @interface TKCompactTLVRecord : TKTLVRecord
 
 /// Creates TLV record with specified tag and value.

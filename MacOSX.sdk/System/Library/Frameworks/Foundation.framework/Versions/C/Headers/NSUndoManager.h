@@ -1,5 +1,5 @@
 /*	NSUndoManager.h
-	Copyright (c) 1995-2018, Apple Inc. All rights reserved.
+	Copyright (c) 1995-2019, Apple Inc. All rights reserved.
 */
 
 
@@ -21,7 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
 // used with NSRunLoop's performSelector:target:argument:order:modes:
 static const NSUInteger NSUndoCloseGroupingRunLoopOrdering = 350000;
 
-NS_CLASS_AVAILABLE(10_0, 3_0)
+API_AVAILABLE(macos(10.0), ios(3.0), watchos(2.0), tvos(9.0))
 @interface NSUndoManager : NSObject {
     @private
     id 			_undoStack;

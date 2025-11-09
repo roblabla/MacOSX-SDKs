@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017 Apple Inc. All rights reserved.
+ * Copyright (c) 2017-2019 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  *
@@ -28,6 +28,8 @@
 #ifndef KERN_MONOTONIC_H
 #define KERN_MONOTONIC_H
 
+#if MONOTONIC
+
 #include <stdbool.h>
 #include <stdint.h>
 #include <sys/cdefs.h>
@@ -48,5 +50,7 @@ uint64_t mt_cur_thread_cycles(void);
 
 __END_DECLS
 
+
+#endif /* MONOTONIC */
 
 #endif /* !defined(KERN_MONOTONIC_H) */

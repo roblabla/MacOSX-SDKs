@@ -237,6 +237,19 @@ NS_CLASS_AVAILABLE(10_13, 11_0)
 - (nullable CIImage *)applyWithForeground:(CIImage*)foreground
                                background:(CIImage*)background;
 
+/* Apply the receiver CIBlendKernel to produce a new CIImage object
+ * by blending a foreground and background images in the specifid colorspace.
+ *
+ * The 'extent' of the result image will be determined by the reciver and
+ * the extent of the forground and background images.  For most of the
+ * builtin blend kernels (as well as custom blend kernels) the result image
+ * extent will be the union of the forground and background image
+ * extents.
+ */
+- (nullable CIImage *)applyWithForeground:(CIImage*)foreground
+                               background:(CIImage*)background
+                               colorSpace:(CGColorSpaceRef)colorSpace NS_AVAILABLE(10_15, 13_0);
+
 @end
 
 @interface CIBlendKernel (BuiltIn)

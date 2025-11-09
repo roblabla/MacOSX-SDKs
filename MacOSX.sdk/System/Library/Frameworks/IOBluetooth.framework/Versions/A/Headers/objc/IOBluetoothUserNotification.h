@@ -9,6 +9,7 @@
 				longer be valid.
 */
 
+API_UNAVAILABLE(ios, watchos, tvos)
 @interface IOBluetoothUserNotification : NSObject
 {
 }

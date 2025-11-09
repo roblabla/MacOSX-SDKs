@@ -2,7 +2,7 @@
 //  SCNView.h
 //  SceneKit
 //
-//  Copyright © 2012-2018 Apple Inc. All rights reserved.
+//  Copyright © 2012-2019 Apple Inc. All rights reserved.
 //
 
 #import <AppKit/AppKit.h>
@@ -20,16 +20,16 @@ typedef NSString * SCNViewOption NS_STRING_ENUM;
  @constant SCNViewOptionPreferredRenderingAPI Specifies the preferred rendering API to be used by the renderer.
  @discussion Pass it as the key in the options dictionary given to initWithFrame:options:. The value is a NSNumber wrapping a SCNRenderingAPI. You can also select the preferred rendering API directly from the SCNView inspector in InterfaceBuilder.
  */
-SCN_EXPORT SCNViewOption const SCNPreferredRenderingAPIKey API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(watchos);
+SCN_EXPORT SCNViewOption const SCNPreferredRenderingAPIKey API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(watchos, macCatalyst);
 
 /*!
- @constant SCNViewOptionPreferredDevice Specifies the preferred metal device to be used by the renderer.
+ @constant SCNViewOptionPreferredDevice Specifies the preferred Metal device to be used by the renderer.
  @discussion The value is directly a id <MTLDevice>.
  */
 SCN_EXPORT SCNViewOption const SCNPreferredDeviceKey API_AVAILABLE(macos(10.11), ios(9.0));
 
 /*!
- @constant SCNViewOptionPreferLowPowerDevice Specifies if the renderer should prefer a low power metal device.
+ @constant SCNViewOptionPreferLowPowerDevice Specifies if the renderer should prefer a low power Metal device.
  @discussion The value is a NSNumber wrapping a BOOL. Defaults to NO.
  */
 SCN_EXPORT SCNViewOption const SCNPreferLowPowerDeviceKey API_AVAILABLE(macos(10.11), ios(9.0));
@@ -153,11 +153,23 @@ SCN_EXPORT
 @property(nonatomic) NSInteger preferredFramesPerSecond API_AVAILABLE(macos(10.12));
 
 /*!
+ @property drawableResizesAsynchronously
+ @abstract Specifies whether the drawable is resized asynchonously during a live resize operation. Defaults to YES.
+ @discussion If set to YES, the actual viewport size during a live resize can be retrieved using currentViewport (see SCNSceneRenderer.h)
+ */
+@property BOOL drawableResizesAsynchronously API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0), watchos(6.0));
+
+
+#if SCN_ENABLE_OPENGL
+
+/*!
  @property openGLContext
  @abstract Specifies the OpenGL context associated with the receiver.
  @discussion This property returns nil and has no effect if the current API is Metal.
  */
-@property(nonatomic, retain, nullable) NSOpenGLContext *openGLContext;
+@property(nonatomic, retain, nullable) NSOpenGLContext *openGLContext SCN_GL_DEPRECATED_MAC(10_8, 10_14);
+
+#endif
 
 /*!
  @property antialiasingMode
@@ -171,7 +183,7 @@ SCN_EXPORT
  @abstract Specifies the pixel format of the receiver.
  @discussion This property returns nil and has no effect if the current API is Metal.
  */
-@property(nonatomic, retain, nullable) NSOpenGLPixelFormat *pixelFormat;
+@property(nonatomic, retain, nullable) NSOpenGLPixelFormat *pixelFormat SCN_GL_DEPRECATED_MAC(10_8, 10_14);
 
 @end
 

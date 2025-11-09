@@ -53,7 +53,7 @@ CS_TVOS_UNAVAILABLE
 
 // Call this method on the index to remove any items from the index with the given domain identifiers.
 // The delete is recursive so if domain identifiers are of the form <account-id>.<mailbox-id>, for example,
-// calling delete with <account-id> will delte all the searchable items with that account and any mailbox.
+// calling delete with <account-id> will delete all the searchable items with that account and any mailbox.
 - (void)deleteSearchableItemsWithDomainIdentifiers:(NSArray<NSString *> *)domainIdentifiers completionHandler:(void (^ __nullable)(NSError * __nullable error))completionHandler;
 
 // Call this method to delete all searchable items from the index.
@@ -113,7 +113,6 @@ CS_TVOS_UNAVAILABLE
 //The developer may want to optionally implement these methods to receive notice that indexing is being throttled and react accordingly (e.g. by priortizing indexing of more important content).
 - (void)searchableIndexDidThrottle:(CSSearchableIndex *)searchableIndex;
 - (void)searchableIndexDidFinishThrottle:(CSSearchableIndex *)searchableIndex;
-
 
 // The developer may provided a NSData representation if type was specified in providerDataTypeIdentifiers property.
 - (nullable NSData *)dataForSearchableIndex:(CSSearchableIndex *)searchableIndex itemIdentifier:(NSString *)itemIdentifier typeIdentifier:(NSString *)typeIdentifier error:(out NSError ** __nullable)outError CS_AVAILABLE(10_13, 11_0) CS_TVOS_UNAVAILABLE;

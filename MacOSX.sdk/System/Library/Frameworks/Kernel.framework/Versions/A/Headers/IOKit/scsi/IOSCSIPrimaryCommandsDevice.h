@@ -392,9 +392,9 @@ public:
 	OSDictionary *		GetDeviceCharacteristicsDictionary ( void );	
 	UInt8				GetANSIVersion ( void );
 	bool				GetCMDQUE ( void );
-#if !TARGET_OS_EMBEDDED
+#if !TARGET_OS_IPHONE
     OSString *          MapINQUIRYDataToIconFile ( void );
-#endif /* !TARGET_OS_EMBEDDED */
+#endif /* !TARGET_OS_IPHONE */
 	UInt32				GetRetryCount ( void );
 	
 	// -- SCSI Protocol Interface Methods	--
@@ -477,7 +477,7 @@ public:
 							SCSICmdField1Byte 			ALLOCATION_LENGTH, 
 							SCSICmdField1Byte 			CONTROL );
 
-#if !TARGET_OS_EMBEDDED
+#if !TARGET_OS_IPHONE
 	
 	virtual bool		LOG_SELECT (
 							SCSITaskIdentifier			request,
@@ -499,7 +499,7 @@ public:
 							SCSICmdField2Byte 			ALLOCATION_LENGTH, 
 							SCSICmdField1Byte 			CONTROL );  
 	
-#endif /* !TARGET_OS_EMBEDDED */
+#endif /* !TARGET_OS_IPHONE */
 	
 	virtual bool		MODE_SELECT_6 (
 							SCSITaskIdentifier			request,
@@ -536,7 +536,7 @@ public:
 	   						SCSICmdField2Byte 			ALLOCATION_LENGTH,
 							SCSICmdField1Byte 			CONTROL );
 
-#if !TARGET_OS_EMBEDDED
+#if !TARGET_OS_IPHONE
 	
   	virtual bool		PERSISTENT_RESERVE_IN (
 							SCSITaskIdentifier			request,
@@ -553,14 +553,14 @@ public:
 	   						SCSICmdField4Bit 			TYPE,
 							SCSICmdField1Byte 			CONTROL );
 	
-#endif /* !TARGET_OS_EMBEDDED */
+#endif /* !TARGET_OS_IPHONE */
 
 	virtual bool		PREVENT_ALLOW_MEDIUM_REMOVAL (
 							SCSITaskIdentifier			request,
 		 					SCSICmdField2Bit 			PREVENT, 
 							SCSICmdField1Byte 			CONTROL );
 	
-#if !TARGET_OS_EMBEDDED
+#if !TARGET_OS_IPHONE
 	
 	virtual bool		READ_BUFFER (
 							SCSITaskIdentifier			request,
@@ -598,7 +598,7 @@ public:
 							SCSICmdField2Byte 			PARAMETER_LIST_LENGTH,
 							SCSICmdField1Byte 			CONTROL );
 
-#endif /* !TARGET_OS_EMBEDDED */
+#endif /* !TARGET_OS_IPHONE */
     
 	virtual bool		REPORT_DEVICE_IDENTIFIER ( 
 							SCSITaskIdentifier			request,
@@ -620,7 +620,7 @@ public:
 							SCSICmdField1Byte 			ALLOCATION_LENGTH, 
 							SCSICmdField1Byte 			CONTROL );
  	
-#if !TARGET_OS_EMBEDDED
+#if !TARGET_OS_IPHONE
 	
  	virtual bool		RESERVE_6 (
 							SCSITaskIdentifier			request,
@@ -661,13 +661,13 @@ public:
 							SCSICmdField4Byte 			PARAMETER_LIST_LENGTH,
 							SCSICmdField1Byte 			CONTROL );
 	
-#endif /* !TARGET_OS_EMBEDDED */
+#endif /* !TARGET_OS_IPHONE */
 	
 	virtual bool		TEST_UNIT_READY (
 							SCSITaskIdentifier			request,
 							SCSICmdField1Byte 			CONTROL );
 	
-#if !TARGET_OS_EMBEDDED
+#if !TARGET_OS_IPHONE
  	
 	virtual bool		WRITE_BUFFER (
 							SCSITaskIdentifier			request,
@@ -678,7 +678,7 @@ public:
 							SCSICmdField3Byte 			PARAMETER_LIST_LENGTH,
 							SCSICmdField1Byte 			CONTROL );
 	
-#endif /* !TARGET_OS_EMBEDDED */
+#endif /* !TARGET_OS_IPHONE */
 	
 	// The SPC-3 INQUIRY command as defined in section 6.4.1 of SPC-3.
 	bool				INQUIRY (
@@ -706,7 +706,7 @@ public:
 private:
 	
 	
-#if !TARGET_OS_EMBEDDED
+#if !TARGET_OS_IPHONE
 	// Space reserved for future expansion.
 	OSMetaClassDeclareReservedUnused ( IOSCSIPrimaryCommandsDevice,  3 );
 	OSMetaClassDeclareReservedUnused ( IOSCSIPrimaryCommandsDevice,  4 );
@@ -722,7 +722,7 @@ private:
 	OSMetaClassDeclareReservedUnused ( IOSCSIPrimaryCommandsDevice, 14 );
 	OSMetaClassDeclareReservedUnused ( IOSCSIPrimaryCommandsDevice, 15 );
 	OSMetaClassDeclareReservedUnused ( IOSCSIPrimaryCommandsDevice, 16 );
-#endif /* !TARGET_OS_EMBEDDED */
+#endif /* !TARGET_OS_IPHONE */
 	
 };
 

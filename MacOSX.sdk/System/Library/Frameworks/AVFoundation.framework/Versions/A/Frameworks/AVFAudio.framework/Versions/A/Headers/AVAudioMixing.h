@@ -42,7 +42,7 @@ NS_ASSUME_NONNULL_BEGIN
 		For example, an AVAudioPlayerNode that is being used in a gaming scenario can set up its 
 		3D mixing settings and then move from one environment to another.
 */
-OS_EXPORT API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0))
+API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0))
 @protocol AVAudioMixing <AVAudioStereoMixing, AVAudio3DMixing>
 
 /*! @method destinationForMixer:bus:
@@ -85,7 +85,7 @@ OS_EXPORT API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0))
 /*! @protocol   AVAudioStereoMixing
     @abstract   Protocol that defines stereo mixing properties
 */
-OS_EXPORT API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0))
+API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0))
 @protocol AVAudioStereoMixing <NSObject>
 
 /*! @property pan
@@ -107,8 +107,9 @@ OS_EXPORT API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0))
         AVAudio3DMixingRenderingAlgorithmEqualPowerPanning is the simplest panning algorithm and also 
         the least expensive computationally.
  
-        With the exception of AVAudio3DMixingRenderingAlgorithmSoundField, while the mixer is
-        rendering to multi channel hardware, audio data will only be rendered to channels 1 & 2.
+        When rendering to multi-channel hardware, audio data will only be rendered to channels 1 & 2
+        with all rendering algorithms except AVAudio3DMixingRenderingAlgorithmSoundField and
+        AVAudio3DMixingRenderingAlgorithmAuto.
  
         AVAudio3DMixingRenderingAlgorithmEqualPowerPanning
             EqualPowerPanning merely pans the data of the mixer bus into a stereo field. This 
@@ -137,8 +138,17 @@ OS_EXPORT API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0))
  
         AVAudio3DMixingRenderingAlgorithmStereoPassThrough
             StereoPassThrough should be used when no localization is desired for the source data. 
-            Setting this algorithm tells the mixer to take mono/stereo input and pass it directly to 
-            channels 1 & 2 without localization.
+            Setting this algorithm tells the mixer to pass the input channels to output without
+            localization. If the input and output AudioChannelLayouts differ, mixing is done
+            according to the kAudioFormatProperty_MatrixMixMap property of the layouts.
+ 
+        AVAudio3DMixingRenderingAlgorithmAuto
+            Automatically pick the highest-quality rendering algorithm available for current playback
+            hardware. The algorithm may not be identical to other existing algorithms and may change
+            in the future as new algorithms are developed. When using Manual Rendering modes or
+            wired output, it may be necessary to manually set the AVAudioEnvironmentNode's output
+            type. Multi-channel rendering requires setting a channel layout on the
+            AVAudioEnvironmentNode's output.
  
 */
 typedef NS_ENUM(NSInteger, AVAudio3DMixingRenderingAlgorithm) {
@@ -147,8 +157,68 @@ typedef NS_ENUM(NSInteger, AVAudio3DMixingRenderingAlgorithm) {
     AVAudio3DMixingRenderingAlgorithmHRTF                   = 2,
     AVAudio3DMixingRenderingAlgorithmSoundField             = 3,
     AVAudio3DMixingRenderingAlgorithmStereoPassThrough      = 5,
-    AVAudio3DMixingRenderingAlgorithmHRTFHQ                 = 6
+    AVAudio3DMixingRenderingAlgorithmHRTFHQ                 = 6,
+    AVAudio3DMixingRenderingAlgorithmAuto   API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0)) API_UNAVAILABLE(watchos)     = 7
 } NS_ENUM_AVAILABLE(10_10, 8_0);
+
+
+/*! @enum AVAudio3DMixingSourceMode
+    @abstract   Source types available per input bus of the environment node
+    @discussion
+        The source types differ in how the individual channels of an input bus are distributed
+        in space.
+ 
+        AVAudio3DMixingSourceModeSpatializeIfMono
+            A mono input bus is rendered as a point source at the location of the source node.
+            An input bus with more than one channel is bypassed. This corresponds to legacy
+            behavior and is equivalent to AVAudio3DMixingSourceModePointSource for a mono bus
+            and AVAudio3DMixingSourceModeBypass for a bus with more than one channel.
+ 
+        AVAudio3DMixingSourceModeBypass
+            No spatial rendering. If input and output AudioChannelLayouts are equivalent, all
+            input channels are directly copied to corresponding output channels. If the input and
+            output AudioChannelLayouts differ, mixing is done according to the
+            kAudioFormatProperty_MatrixMixMap property of the layouts. No occlusion, obstruction,
+            or reverb is applied in this mode.
+ 
+        AVAudio3DMixingSourceModePointSource
+            All channels of the bus are rendered as a single source at the location of the source
+            node.
+ 
+        AVAudio3DMixingSourceModeAmbienceBed
+            The input channels are spatialized around the listener as far-field sources anchored to
+            global space. This means that the rendering depends on listener orientation but not on
+            listener position. The directions of the input channels are specified by the
+            AudioChannelLayout of the bus. The rotation of the whole bed in the global space is
+            controlled by the direction of the source node.
+*/
+typedef NS_ENUM(NSInteger, AVAudio3DMixingSourceMode) {
+    AVAudio3DMixingSourceModeSpatializeIfMono   = 0,
+    AVAudio3DMixingSourceModeBypass             = 1,
+    AVAudio3DMixingSourceModePointSource        = 2,
+    AVAudio3DMixingSourceModeAmbienceBed        = 3
+} API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0)) API_UNAVAILABLE(watchos);
+
+
+/*! @enum AVAudio3DMixingPointSourceInHeadMode
+    @abstract In-head modes available for AVAudio3DMixingSourceModePointSource in AVAudio3DMixingRenderingAlgorithmAuto
+    @discussion
+        The in-head modes differ in what happens when a point source moves inside the
+        listener's head while using AVAudio3DMixingRenderingAlgorithmAuto.
+
+        AVAudio3DMixingPointSourceInHeadModeMono
+            A point source remains a single mono source inside the listener's head regardless
+            of the channels it consists of.
+
+        AVAudio3DMixingPointSourceInHeadModeBypass
+            A point source splits into bypass inside the listener's head. This enables transitions
+            between traditional, non-spatialized rendering and spatialized sources outside the
+            listener's head.
+ */
+typedef NS_ENUM(NSInteger, AVAudio3DMixingPointSourceInHeadMode) {
+    AVAudio3DMixingPointSourceInHeadModeMono    = 0,
+    AVAudio3DMixingPointSourceInHeadModeBypass  = 1
+} API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0)) API_UNAVAILABLE(watchos);
 
 
 /*! @protocol   AVAudio3DMixing
@@ -167,6 +237,22 @@ typedef NS_ENUM(NSInteger, AVAudio3DMixingRenderingAlgorithm) {
         Mixer:      AVAudioEnvironmentNode
 */
 @property (nonatomic) AVAudio3DMixingRenderingAlgorithm renderingAlgorithm API_UNAVAILABLE(watchos);
+
+/*! @property sourceMode
+    @abstract Controls how individual channels of an input bus are rendered
+    @discussion
+        Default:    AVAudio3DMixingSourceModeSpatializeIfMono
+        Mixer:      AVAudioEnvironmentNode
+*/
+@property (nonatomic) AVAudio3DMixingSourceMode sourceMode API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0)) API_UNAVAILABLE(watchos) ;
+
+/*! @property pointSourceInHeadMode
+    @abstract In-head rendering choice for AVAudio3DMixingSourceModePointSource in AVAudio3DMixingRenderingAlgorithmAuto
+    @discussion
+        Default:    AVAudio3DMixingPointSourceInHeadModeMono
+        Mixer:      AVAudioEnvironmentNode
+ */
+@property (nonatomic) AVAudio3DMixingPointSourceInHeadMode pointSourceInHeadMode API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0)) API_UNAVAILABLE(watchos) ;
 
 /*! @property rate
     @abstract Changes the playback rate of the input signal
@@ -234,7 +320,7 @@ typedef NS_ENUM(NSInteger, AVAudio3DMixingRenderingAlgorithm) {
 		Only an instance vended by a source node (e.g. AVAudioPlayerNode) can be used
 		(see `AVAudioMixing`).
 */
-OS_EXPORT API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0))
+API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0))
 @interface AVAudioMixingDestination : NSObject <AVAudioMixing> {
 @private
 	void *_impl;

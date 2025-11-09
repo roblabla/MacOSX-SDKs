@@ -35,6 +35,7 @@
 //	IOBluetoothDevicePair
 //===========================================================================================================================
 
+API_UNAVAILABLE(ios, watchos, tvos)
 @interface	IOBluetoothDevicePair : NSObject
 {
 	id							_delegate;
@@ -115,6 +116,7 @@
 //	Delegate methods
 //===========================================================================================================================
 
+API_UNAVAILABLE(ios, watchos, tvos)
 @protocol IOBluetoothDevicePairDelegate <NSObject>
 @optional
 

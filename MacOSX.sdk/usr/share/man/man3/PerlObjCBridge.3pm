@@ -133,7 +133,7 @@
 .\" ========================================================================
 .\"
 .IX Title "PerlObjCBridge 3"
-.TH PerlObjCBridge 3 "2016-11-24" "perl v5.18.2" "User Contributed Perl Documentation"
+.TH PerlObjCBridge 3 "2019-05-17" "perl v5.18.4" "User Contributed Perl Documentation"
 .\" For nroff, turn off justification.  Always turn off hyphenation; it makes
 .\" way too many mistakes in technical documents.
 .if n .ad l
@@ -247,10 +247,10 @@ An AddSystem directory is created with these files:
 \&    MANIFEST
 .Ve
 .PP
-Edit the Makefile.PL \s-1DEFINE\s0 entry to add the \-ObjC flag:
+Edit the Makefile.PL to add the \s-1CCFLAGS\s0 entry with the '\-x objective\-c' flag:
 .PP
 .Vb 1
-\&    \*(AqDEFINE\*(Aq            => \*(Aq\-ObjC\*(Aq, # e.g., \*(Aq\-DHAVE_SOMETHING\*(Aq
+\&    \*(AqCCFLAGS\*(Aq        => \*(Aq\-x objective\-c\*(Aq,
 .Ve
 .PP
 Modify the contents of AddSystem.pm to contain:

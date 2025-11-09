@@ -261,7 +261,7 @@ __END_DECLS
 #define __Request__memory_object_control_subsystem__defined
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -270,11 +270,11 @@ __END_DECLS
 		mach_msg_type_number_t attributesCnt;
 	} __Request__memory_object_get_attributes_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -284,11 +284,11 @@ __END_DECLS
 		int attributes[6];
 	} __Request__memory_object_change_attributes_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -297,11 +297,11 @@ __END_DECLS
 		memory_object_size_t length;
 	} __Request__memory_object_synchronize_completed_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -313,11 +313,11 @@ __END_DECLS
 		vm_prot_t lock_value;
 	} __Request__memory_object_lock_request_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -325,11 +325,11 @@ __END_DECLS
 		kern_return_t reason;
 	} __Request__memory_object_destroy_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -341,11 +341,11 @@ __END_DECLS
 		integer_t tag;
 	} __Request__memory_object_upl_request_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -358,11 +358,11 @@ __END_DECLS
 		integer_t tag;
 	} __Request__memory_object_super_upl_request_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -370,11 +370,11 @@ __END_DECLS
 		memory_object_fault_info_t fault_info;
 	} __Request__memory_object_cluster_size_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -383,11 +383,11 @@ __END_DECLS
 		integer_t ops;
 	} __Request__memory_object_page_op_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -395,11 +395,11 @@ __END_DECLS
 		boolean_t wait_on_terminating;
 	} __Request__memory_object_recover_named_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -407,11 +407,11 @@ __END_DECLS
 		integer_t flags;
 	} __Request__memory_object_release_name_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -421,7 +421,7 @@ __END_DECLS
 		integer_t ops;
 	} __Request__memory_object_range_op_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 #endif /* !__Request__memory_object_control_subsystem__defined */
 
@@ -450,7 +450,7 @@ union __RequestUnion__memory_object_control_subsystem {
 #define __Reply__memory_object_control_subsystem__defined
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -460,11 +460,11 @@ union __RequestUnion__memory_object_control_subsystem {
 		int attributes[6];
 	} __Reply__memory_object_get_attributes_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -472,11 +472,11 @@ union __RequestUnion__memory_object_control_subsystem {
 		kern_return_t RetCode;
 	} __Reply__memory_object_change_attributes_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -484,11 +484,11 @@ union __RequestUnion__memory_object_control_subsystem {
 		kern_return_t RetCode;
 	} __Reply__memory_object_synchronize_completed_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -498,11 +498,11 @@ union __RequestUnion__memory_object_control_subsystem {
 		integer_t io_errno;
 	} __Reply__memory_object_lock_request_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -510,11 +510,11 @@ union __RequestUnion__memory_object_control_subsystem {
 		kern_return_t RetCode;
 	} __Reply__memory_object_destroy_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -527,11 +527,11 @@ union __RequestUnion__memory_object_control_subsystem {
 		upl_page_info_t page_list[256];
 	} __Reply__memory_object_upl_request_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -544,11 +544,11 @@ union __RequestUnion__memory_object_control_subsystem {
 		upl_page_info_t page_list[256];
 	} __Reply__memory_object_super_upl_request_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -559,11 +559,11 @@ union __RequestUnion__memory_object_control_subsystem {
 		uint32_t io_streaming;
 	} __Reply__memory_object_cluster_size_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -573,11 +573,11 @@ union __RequestUnion__memory_object_control_subsystem {
 		integer_t flags;
 	} __Reply__memory_object_page_op_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -585,11 +585,11 @@ union __RequestUnion__memory_object_control_subsystem {
 		kern_return_t RetCode;
 	} __Reply__memory_object_recover_named_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -597,11 +597,11 @@ union __RequestUnion__memory_object_control_subsystem {
 		kern_return_t RetCode;
 	} __Reply__memory_object_release_name_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -610,7 +610,7 @@ union __RequestUnion__memory_object_control_subsystem {
 		integer_t range;
 	} __Reply__memory_object_range_op_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 #endif /* !__Reply__memory_object_control_subsystem__defined */
 

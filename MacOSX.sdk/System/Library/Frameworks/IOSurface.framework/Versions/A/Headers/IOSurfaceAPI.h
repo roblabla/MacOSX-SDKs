@@ -6,8 +6,8 @@
  *
  */
 
-#ifndef _IOSURFACE_API_H
-#define _IOSURFACE_API_H 1
+#ifndef IOSURFACE_API_H
+#define IOSURFACE_API_H 1
 
 /* For legacy reasons, IOSurfaceAPI.h must also include <IOKit/IOKitLib.h> and <xpc/xpc.h> */
 #include <xpc/xpc.h>

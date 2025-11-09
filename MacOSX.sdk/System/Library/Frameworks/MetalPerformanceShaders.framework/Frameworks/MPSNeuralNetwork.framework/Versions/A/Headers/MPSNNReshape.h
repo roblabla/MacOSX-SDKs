@@ -23,7 +23,7 @@ extern "C" {
  *
  */
 
-MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3))
+MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3))
 @interface MPSNNReshape : MPSCNNKernel
 
 /*!
@@ -46,7 +46,7 @@ MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3))
  *              of the forward reshape kernel's source image.
  *
  */
-MPS_CLASS_AVAILABLE_STARTING( macos(10.14.1), ios(12.1), tvos(12.1))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.14.1), ios(12.1), macCatalyst(13.0), tvos(12.1))
 @interface MPSNNReshapeGradient : MPSCNNGradientKernel
 
 /*!
@@ -150,7 +150,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.14.1), ios(12.1), tvos(12.1))
  *
  */
 
-MPS_CLASS_AVAILABLE_STARTING(macos(10.14.1), ios(12.1), tvos(12.1))
+MPS_CLASS_AVAILABLE_STARTING(macos(10.14.1), ios(12.1), macCatalyst(13.0), tvos(12.1))
 @interface MPSNNPad : MPSCNNKernel
 
 /*! @property   paddingSizeBefore
@@ -304,7 +304,7 @@ NS_DESIGNATED_INITIALIZER;
  *              NOTE: In case the forward pass defined a slice operation in feature channels then
  *              the channels not read in the forward pass will be filled with zeros in the gradient pass.
  */
-MPS_CLASS_AVAILABLE_STARTING( macos(10.14.1), ios(12.1), tvos(12.1))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.14.1), ios(12.1), macCatalyst(13.0), tvos(12.1))
 @interface MPSNNPadGradient : MPSCNNGradientKernel
 
 

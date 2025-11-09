@@ -16,7 +16,7 @@
 //  Includes
 
 #include <Availability.h>
-#include <CoreAudio/CoreAudioTypes.h>
+#include <CoreAudioTypes/CoreAudioTypes.h>
 #include <CoreFoundation/CoreFoundation.h>
 
 //==================================================================================================
@@ -327,10 +327,10 @@ AudioHardwareGetPropertyInfo(   AudioHardwarePropertyID inPropertyID,
                     AudioObjectGetPropertyData().
     @param          inPropertyID
                         The AudioHardwarePropertyID of the property to query.
-    @param          ioDataSize
+    @param          ioPropertyDataSize
                         A UInt32 which on entry indicates the size of the buffer pointed to by
                         outData and on exit indicates how much of the buffer was used.
-    @param          outData
+    @param          outPropertyData
                         The buffer into which the AudioSystemObject will put the data for the given
                         property.
     @result         An OSStatus indicating success or failure.
@@ -350,9 +350,9 @@ AudioHardwareGetProperty(   AudioHardwarePropertyID inPropertyID,
                     function AudioObjectGetPropertyData().
     @param          inPropertyID
                         The AudioHardwarePropertyID of the property to change.
-    @param          inDataSize
+    @param          inPropertyDataSize
                         A UInt32 indicating the size of the buffer pointed to by inData.
-    @param          inData
+    @param          inPropertyData
                         The buffer containing the data to be used to change the property's value.
     @result         An OSStatus indicating success or failure.
 */

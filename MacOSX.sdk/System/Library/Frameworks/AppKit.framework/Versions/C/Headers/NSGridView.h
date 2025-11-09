@@ -1,7 +1,7 @@
 /*
 	NSGridView.h
 	Application Kit
-	Copyright (c) 2015-2018, Apple Inc.
+	Copyright (c) 2015-2019, Apple Inc.
 	All rights reserved.
  */
 
@@ -10,6 +10,7 @@
 #import <AppKit/NSLayoutAnchor.h>
 
 NS_ASSUME_NONNULL_BEGIN
+API_UNAVAILABLE_BEGIN(ios)
 
 @class NSLayoutConstraint, NSGridCell, NSGridColumn, NSGridRow;
 
@@ -26,7 +27,7 @@ typedef NS_ENUM(NSInteger, NSGridCellPlacement) {
     NSGridCellPlacementCenter,
     NSGridCellPlacementFill
     
-} NS_ENUM_AVAILABLE_MAC(10_12);
+} API_AVAILABLE(macos(10.12));
 
 
 typedef NS_ENUM(NSInteger, NSGridRowAlignment) {
@@ -34,9 +35,9 @@ typedef NS_ENUM(NSInteger, NSGridRowAlignment) {
     NSGridRowAlignmentNone,
     NSGridRowAlignmentFirstBaseline,
     NSGridRowAlignmentLastBaseline
-} NS_ENUM_AVAILABLE_MAC(10_12);
+} API_AVAILABLE(macos(10.12));
 
-APPKIT_EXTERN const CGFloat NSGridViewSizeForContent NS_AVAILABLE_MAC(10_12); // Default value for row & column size, indicating it should automatically fit the content views.
+APPKIT_EXTERN const CGFloat NSGridViewSizeForContent API_AVAILABLE(macos(10.12)); // Default value for row & column size, indicating it should automatically fit the content views.
 
 
 /*
@@ -45,27 +46,8 @@ APPKIT_EXTERN const CGFloat NSGridViewSizeForContent NS_AVAILABLE_MAC(10_12); //
  NSGridPlacement is used to specify the positioning of the contentView within the cell.  The content placement can be configured separately for the X & Y axes to align the content with either edge or to center it.  Placement properties on rows, columns, and cells default to 'inherited' so that the grid-level properties will effect all cells.  Content placement can be overridden for individual rows, columns, or cells by simply changing the appropriate property to a value other than 'inherited'.
  */
 
-NS_CLASS_AVAILABLE_MAC(10_12)
-@interface NSGridView : NSView {
-@private
-    NSGridCellPlacement _xPlacement APPKIT_IVAR;
-    NSGridCellPlacement _yPlacement APPKIT_IVAR;
-    NSGridRowAlignment _rowAlignment APPKIT_IVAR;
-    CGFloat _rowSpacing APPKIT_IVAR;
-    CGFloat _colSpacing APPKIT_IVAR;
-    NSMutableArray *_columns APPKIT_IVAR;
-    NSMutableArray *_rows APPKIT_IVAR;
-    NSMapTable *_cellTable APPKIT_IVAR;
-    NSInteger _currentConstraintGeneration APPKIT_IVAR;
-    struct {
-        unsigned int isDecoding:1;
-        unsigned int _unused:31;
-    } _flags APPKIT_IVAR;
-#if !__OBJC2__
-    id  _reserved2 __unused APPKIT_IVAR;
-    id  _reserved3 __unused APPKIT_IVAR;
-#endif
-}
+API_AVAILABLE(macos(10.12))
+@interface NSGridView : NSView
 
 - (instancetype)initWithFrame:(NSRect)frameRect NS_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(NSCoder *)coder NS_DESIGNATED_INITIALIZER;
@@ -114,27 +96,8 @@ NS_CLASS_AVAILABLE_MAC(10_12)
 
 
 // NSGridRow represents a row of cells in the grid view, and allows content placement to be specified on a per-row basis.
-NS_CLASS_AVAILABLE_MAC(10_12)
-@interface NSGridRow : NSObject <NSCoding> {
-@private
-    NSGridView *_owningGridView APPKIT_IVAR;
-    NSMutableArray <NSGridCell*> *_cells APPKIT_IVAR;
-    NSLayoutYAxisAnchor* _top APPKIT_IVAR;
-#if !__OBJC2__
-    id  _reserved __unused APPKIT_IVAR;
-    id  _reserved2 __unused APPKIT_IVAR;
-    id  _reserved3 __unused APPKIT_IVAR;
-#endif
-    
-    NSGridCellPlacement _yPlacement APPKIT_IVAR;
-    NSGridRowAlignment _rowAlignment APPKIT_IVAR;
-    NSInteger _hasContentInGeneration APPKIT_IVAR;
-
-    CGFloat _height APPKIT_IVAR;
-    CGFloat _topPadding APPKIT_IVAR;
-    CGFloat _bottomPadding APPKIT_IVAR;
-    BOOL _hidden APPKIT_IVAR;
-}
+API_AVAILABLE(macos(10.12))
+@interface NSGridRow : NSObject <NSCoding>
 
 @property (readonly,weak) NSGridView *gridView;
 @property (readonly) NSInteger numberOfCells;
@@ -156,25 +119,8 @@ NS_CLASS_AVAILABLE_MAC(10_12)
 
 
 // NSGridColumn represents a column of cells in the grid view, and allows content placement to be specified on a per-column basis.
-NS_CLASS_AVAILABLE_MAC(10_12)
-@interface NSGridColumn : NSObject <NSCoding> {
-@private
-    NSGridView *_owningGridView APPKIT_IVAR;
-    NSLayoutXAxisAnchor *_leading APPKIT_IVAR;
-    
-#if !__OBJC2__
-    id  _reserved __unused APPKIT_IVAR;
-    id  _reserved2 __unused APPKIT_IVAR;
-    id  _reserved3 __unused APPKIT_IVAR;
-#endif
-    
-    NSInteger _hasContentInGeneration APPKIT_IVAR;
-    NSGridCellPlacement _xPlacement APPKIT_IVAR;
-    CGFloat _width APPKIT_IVAR;
-    CGFloat _trailingPadding APPKIT_IVAR;
-    CGFloat _leadingPadding APPKIT_IVAR;
-    BOOL _hidden APPKIT_IVAR;
-}
+API_AVAILABLE(macos(10.12))
+@interface NSGridColumn : NSObject <NSCoding>
 
 @property (readonly,weak) NSGridView *gridView;
 @property (readonly) NSInteger numberOfCells;
@@ -193,25 +139,8 @@ NS_CLASS_AVAILABLE_MAC(10_12)
 
 
 // NSGridCell represents a single cell in the grid.  The cell will maintain the necessary constraints for positioning out whichever contentView is set.
-NS_CLASS_AVAILABLE_MAC(10_12)
-@interface NSGridCell : NSObject <NSCoding> {
-@private
-    __weak NSGridRow *_row APPKIT_IVAR;
-    __weak NSGridColumn *_column APPKIT_IVAR;
-    NSView  *_contentView APPKIT_IVAR;
-    NSGridCell *_headOfMergedCell APPKIT_IVAR;
-    NSArray<NSLayoutConstraint*> *_customPlacementConstraints APPKIT_IVAR;
-    
-#if !__OBJC2__
-    id  _reserved __unused APPKIT_IVAR;
-    id  _reserved2 __unused APPKIT_IVAR;
-    id  _reserved3 __unused APPKIT_IVAR;
-#endif
-    
-    NSGridCellPlacement _xPlacement APPKIT_IVAR;
-    NSGridCellPlacement _yPlacement APPKIT_IVAR;
-    NSGridRowAlignment _rowAlignment APPKIT_IVAR;
-}
+API_AVAILABLE(macos(10.12))
+@interface NSGridCell : NSObject <NSCoding>
 
 
 @property (strong,nullable) __kindof NSView *contentView; // The view whose placement will be managed by this cell.
@@ -234,4 +163,5 @@ NS_CLASS_AVAILABLE_MAC(10_12)
 
 
 
+API_UNAVAILABLE_END
 NS_ASSUME_NONNULL_END

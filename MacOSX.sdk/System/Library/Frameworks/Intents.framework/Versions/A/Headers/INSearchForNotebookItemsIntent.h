@@ -2,7 +2,7 @@
 //  INSearchForNotebookItemsIntent.h
 //  Intents
 //
-//  Copyright (c) 2016-2017 Apple Inc. All rights reserved.
+//  Copyright (c) 2016-2019 Apple Inc. All rights reserved.
 //
 
 #import <Intents/INIntent.h>
@@ -11,7 +11,9 @@
 #import <Intents/INDateSearchType.h>
 #import <Intents/INLocationSearchType.h>
 #import <Intents/INNotebookItemType.h>
+#import <Intents/INTaskPriority.h>
 #import <Intents/INTaskStatus.h>
+#import <Intents/INTemporalEventTriggerTypeOptions.h>
 
 @class CLPlacemark;
 @class INDateComponentsRange;
@@ -23,7 +25,9 @@
 @class INSpeakableString;
 @class INSpeakableStringResolutionResult;
 @class INStringResolutionResult;
+@class INTaskPriorityResolutionResult;
 @class INTaskStatusResolutionResult;
+@class INTemporalEventTriggerTypeOptionsResolutionResult;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -39,7 +43,9 @@ API_UNAVAILABLE(macosx)
            locationSearchType:(INLocationSearchType)locationSearchType
                      dateTime:(nullable INDateComponentsRange *)dateTime
                dateSearchType:(INDateSearchType)dateSearchType
-       notebookItemIdentifier:(nullable NSString *)notebookItemIdentifier NS_DESIGNATED_INITIALIZER API_AVAILABLE(ios(11.2), watchos(4.2));
+    temporalEventTriggerTypes:(INTemporalEventTriggerTypeOptions)temporalEventTriggerTypes
+                 taskPriority:(INTaskPriority)taskPriority
+       notebookItemIdentifier:(nullable NSString *)notebookItemIdentifier NS_DESIGNATED_INITIALIZER API_AVAILABLE(ios(13.0), watchos(6.0), macosx(10.15));
 
 @property (readonly, copy, nullable, NS_NONATOMIC_IOSONLY) INSpeakableString *title;
 
@@ -56,6 +62,10 @@ API_UNAVAILABLE(macosx)
 @property (readonly, copy, nullable, NS_NONATOMIC_IOSONLY) INDateComponentsRange *dateTime;
 
 @property (readonly, assign, NS_NONATOMIC_IOSONLY) INDateSearchType dateSearchType;
+
+@property (readonly, assign, NS_NONATOMIC_IOSONLY) INTemporalEventTriggerTypeOptions temporalEventTriggerTypes API_AVAILABLE(ios(13.0), watchos(6.0)) API_UNAVAILABLE(macosx);
+
+@property (readonly, assign, NS_NONATOMIC_IOSONLY) INTaskPriority taskPriority API_AVAILABLE(ios(13.0), watchos(6.0)) API_UNAVAILABLE(macosx);
 
 @property (readonly, copy, nullable, NS_NONATOMIC_IOSONLY) NSString *notebookItemIdentifier API_AVAILABLE(ios(11.2), watchos(4.2));
 
@@ -135,6 +145,12 @@ API_UNAVAILABLE(macosx)
 
 - (void)resolveDateSearchTypeForSearchForNotebookItems:(INSearchForNotebookItemsIntent *)intent
                     withCompletion:(void (^)(INDateSearchTypeResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveDateSearchType(for:with:));
+
+- (void)resolveTemporalEventTriggerTypesForSearchForNotebookItems:(INSearchForNotebookItemsIntent *)intent
+                    withCompletion:(void (^)(INTemporalEventTriggerTypeOptionsResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveTemporalEventTriggerTypes(for:with:)) API_AVAILABLE(ios(13.0), watchos(6.0)) API_UNAVAILABLE(macosx);
+
+- (void)resolveTaskPriorityForSearchForNotebookItems:(INSearchForNotebookItemsIntent *)intent
+                    withCompletion:(void (^)(INTaskPriorityResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveTaskPriority(for:with:)) API_AVAILABLE(ios(13.0), watchos(6.0)) API_UNAVAILABLE(macosx);
 
 @end
 

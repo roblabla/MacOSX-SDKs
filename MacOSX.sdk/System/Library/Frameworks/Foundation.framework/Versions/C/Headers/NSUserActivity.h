@@ -1,5 +1,5 @@
 /*	NSUserActivity.h
-	Copyright (c) 2014-2018, Apple Inc. All rights reserved.
+	Copyright (c) 2014-2019, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -72,6 +72,11 @@ API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0))
 */
 @property (nullable, weak) id<NSUserActivityDelegate> delegate;
 
+/*  A string that identifies the content of this NSUserActivity, for matching against existing documents when re-opening to see if they are the same.
+    Setting this property is optional and does not automatically set .needsSave to YES.
+ */
+@property (nullable, copy) NSString* targetContentIdentifier API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0));
+
 /* Marks the receiver as the activity currently in use by the user, for example, the activity associated with the active window. A newly created activity is eligible for continuation on another device after the first time it becomes current.
 */
 - (void)becomeCurrent;
@@ -98,10 +103,10 @@ API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0))
 
 @property (getter=isEligibleForPrediction) BOOL eligibleForPrediction API_AVAILABLE( ios(12.0), watchos(5.0) ) API_UNAVAILABLE( macos, tvos );
 
-@property (copy, nullable) NSUserActivityPersistentIdentifier persistentIdentifier  API_AVAILABLE( ios(12.0), watchos(5.0) ) API_UNAVAILABLE( macos, tvos );
+@property (copy, nullable) NSUserActivityPersistentIdentifier persistentIdentifier  API_AVAILABLE( macos(15.0), ios(12.0), watchos(5.0) ) API_UNAVAILABLE( tvos );
 
-+(void) deleteSavedUserActivitiesWithPersistentIdentifiers:(NSArray<NSUserActivityPersistentIdentifier>*) persistentIdentifiers completionHandler:(void(^)(void))handler API_AVAILABLE( ios(12.0), watchos(5.0) ) API_UNAVAILABLE( macos, tvos );
-+(void) deleteAllSavedUserActivitiesWithCompletionHandler:(void(^)(void))handler API_AVAILABLE( ios(12.0), watchos(5.0) ) API_UNAVAILABLE( macos, tvos );
++(void) deleteSavedUserActivitiesWithPersistentIdentifiers:(NSArray<NSUserActivityPersistentIdentifier>*) persistentIdentifiers completionHandler:(void(^)(void))handler API_AVAILABLE( macos(15.0), ios(12.0), watchos(5.0) ) API_UNAVAILABLE( tvos );
++(void) deleteAllSavedUserActivitiesWithCompletionHandler:(void(^)(void))handler API_AVAILABLE( macos(15.0), ios(12.0), watchos(5.0) ) API_UNAVAILABLE( tvos );
 
 @end
 

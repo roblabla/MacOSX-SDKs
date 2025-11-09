@@ -2,11 +2,15 @@
 //  ip_options.h
 //  Network
 //
-//  Copyright (c) 2017-2018 Apple. All rights reserved.
+//  Copyright (c) 2017-2019 Apple. All rights reserved.
 //
 
 #ifndef __NW_IP_OPTIONS_H__
 #define __NW_IP_OPTIONS_H__
+
+#ifndef __NW_INDIRECT__
+#warning "Please include <Network/Network.h> instead of this file directly."
+#endif // __NW_INDIRECT__
 
 #include <Network/protocol_options.h>
 #include <Network/parameters.h>
@@ -55,7 +59,7 @@ typedef enum {
  * @abstract
  *		Specify a single version of the Internet Protocol to allow.
  *		Setting this value will constrain which address endpoints can
- *		be used, and will filter DNS results during connection establishement.
+ *		be used, and will filter DNS results during connection establishment.
  *
  * @param options
  *		An IP protocol options object.
@@ -142,6 +146,38 @@ API_AVAILABLE(macos(10.14), ios(12.0), watchos(5.0), tvos(12.0))
 void
 nw_ip_options_set_calculate_receive_time(nw_protocol_options_t options,
 										 bool calculate_receive_time);
+
+/*!
+ * @typedef nw_ip_local_address_preference_t
+ * @abstract
+ *		Preference for local addresses selection.
+ */
+typedef enum {
+	/*! @const nw_ip_local_address_preference_default Use system default for address selection */
+	nw_ip_local_address_preference_default = 0,
+	/*! @const nw_ip_local_address_preference_temporary Prefer temporary (privacy) addresses */
+	nw_ip_local_address_preference_temporary = 1,
+	/*! @const nw_ip_local_address_preference_stable Prefer stable addresses */
+	nw_ip_local_address_preference_stable = 2,
+} nw_ip_local_address_preference_t;
+
+/*!
+ * @function nw_ip_options_set_local_address_preference
+ *
+ * @abstract
+ *		Specify a preference for how to select local addresses for outbound
+ *		connections.
+ *
+ * @param options
+ *		An IP protocol options object.
+ *
+ * @param preference
+ *		Preference for how to select local addresses.
+ */
+API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0))
+void
+nw_ip_options_set_local_address_preference(nw_protocol_options_t options,
+										   nw_ip_local_address_preference_t preference);
 
 #pragma mark - Metadata
 

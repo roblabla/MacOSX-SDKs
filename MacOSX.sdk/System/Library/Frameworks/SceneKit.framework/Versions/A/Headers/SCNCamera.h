@@ -2,7 +2,7 @@
 //  SCNCamera.h
 //  SceneKit
 //
-//  Copyright © 2012-2018 Apple Inc. All rights reserved.
+//  Copyright © 2012-2019 Apple Inc. All rights reserved.
 //
 
 #import <SceneKit/SceneKitTypes.h>
@@ -107,6 +107,7 @@ SCN_EXPORT
 @property(nonatomic) SCNMatrix4 projectionTransform;
 - (SCNMatrix4)projectionTransform;
 - (void)setProjectionTransform:(SCNMatrix4)projectionTransform API_AVAILABLE(macos(10.9));
+- (SCNMatrix4)projectionTransformWithViewportSize:(CGSize)viewportSize API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0), watchos(6.0));
 
 // MARK: Depth of Field
 
@@ -198,7 +199,7 @@ SCN_EXPORT
 
 /*!
  @property exposureOffset
- @abstract Determines the logarithimc exposure biasing, in EV. Defaults to 0.
+ @abstract Determines the logarithmic exposure biasing, in EV. Defaults to 0.
  */
 @property(nonatomic) CGFloat exposureOffset API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0));
 
@@ -251,6 +252,18 @@ SCN_EXPORT
 @property(nonatomic) CGFloat bloomThreshold API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0));
 
 /*!
+ @property bloomIteration
+ @abstract Determines the number of blur iterations. Defaults to 1.
+ */
+@property(nonatomic) NSInteger bloomIterationCount API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0), watchos(6.0));
+
+/*!
+ @property bloomIterationSpread
+ @abstract Determines how the bloom iterations are spread. Defaults to 0.
+ */
+@property(nonatomic) CGFloat bloomIterationSpread API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0), watchos(6.0));
+
+/*!
  @property bloomIntensity
  @abstract Determines the intensity of the bloom effect. Animatable. Defaults to 0 (no effect).
  */
@@ -299,6 +312,36 @@ SCN_EXPORT
 @property(nonatomic) CGFloat contrast API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0));
 
 /*!
+ @property grainIntensity
+ @abstract Controls the intensity of the grain. Defaults to 0 (no effect).
+ */
+@property(nonatomic) CGFloat grainIntensity API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0), watchos(6.0));
+
+/*!
+ @property grainScale
+ @abstract Controls the scale of the grain. Defaults to 1.
+ */
+@property(nonatomic) CGFloat grainScale API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0), watchos(6.0));
+
+/*!
+ @property grainIsColored
+ @abstract Determines if the grain is colored or not. Defaults to NO.
+ */
+@property(nonatomic) BOOL grainIsColored API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0), watchos(6.0));
+
+/*!
+ @property whiteBalanceTemperature
+ @abstract Controls the overall white balance temperature of the scene. Defaults to 0 (no effect).
+ */
+@property(nonatomic) CGFloat whiteBalanceTemperature API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0), watchos(6.0));
+
+/*!
+ @property whiteBalanceTint
+ @abstract Controls the overall white balance tint of the scene. Defaults to 0 (no effect).
+ */
+@property(nonatomic) CGFloat whiteBalanceTint API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0), watchos(6.0));
+
+/*!
  @property colorGrading
  @abstract Specifies a lookup texture to apply color grading. The contents must a 2D image representing `n` slices of a unit color cube texture, arranged in an horizontal row of `n` images. For instance, a color cube of dimension 16x16x16 should be provided as an image of size 256x16.
  */
@@ -309,50 +352,6 @@ SCN_EXPORT
  @abstract Determines the node categories that are visible from the receiver. Defaults to all bits set.
  */
 @property(nonatomic) NSUInteger categoryBitMask API_AVAILABLE(macos(10.10));
-
-// MARK: - Deprecated APIs
-
-/*!
- @property focalBlurRadius
- @abstract Determines the receiver's focal radius. Animatable.
- @discussion Determines the maximum amount of blur for objects out of focus. Defaults to 0.
- */
-@property(nonatomic) CGFloat focalBlurRadius API_DEPRECATED("Use fStop instead", macos(10.8, 10.13), ios(8.0, 11.0), tvos(9.0, 11.0), watchos(3.0, 4.0));
-
-/*!
- @property xFov
- @abstract Determines the receiver's field of view on the X axis (in degree). Animatable.
- @discussion When both xFov and yFov are null an yFov of 60° is used. When both are set, the one that best fits the renderer's aspect ratio is used. When only one is set, it is used. Defaults to 0.
- */
-@property(nonatomic) double xFov API_DEPRECATED("Use -[SCNCamera fieldOfView] or -[SCNCamera focalLength] instead", macos(10.8, 10.13), ios(8.0, 11.0), tvos(9.0, 11.0), watchos(3.0, 4.0));
-
-/*!
- @property yFov
- @abstract Determines the receiver's field of view on the Y axis (in degree). Animatable.
- @discussion When both xFov and yFov are null an yFov of 60° is used. When both are set, the one that best fits the renderer's aspect ratio is used. When only one is set, it is used. Defaults to 0.
- */
-@property(nonatomic) double yFov API_DEPRECATED("Use -[SCNCamera fieldOfView] or -[SCNCamera focalLength] instead", macos(10.8, 10.13), ios(8.0, 11.0), tvos(9.0, 11.0), watchos(3.0, 4.0));
-
-/*!
- @property aperture
- @abstract Determines the receiver's aperture. Animatable.
- @discussion Defaults to 1/8.0.
- */
-@property(nonatomic) CGFloat aperture API_DEPRECATED("Use -[SCNCamera fStop] instead with fStop = sensorHeight / aperture.", macos(10.8, 10.13), ios(8.0, 11.0), tvos(9.0, 11.0), watchos(3.0, 4.0));
-
-/*!
- @property focalSize
- @abstract Determines the receiver's focal size. Animatable.
- @discussion Determines the size of the area around focalDistance where the objects are in focus. Defaults to 0.
- */
-@property(nonatomic) CGFloat focalSize API_DEPRECATED_WITH_REPLACEMENT("-focusDistance", macos(10.9, 10.13), ios(8.0, 11.0), tvos(9.0, 11.0), watchos(3.0, 4.0));
-
-/*!
- @property focalDistance
- @abstract Determines the receiver's focal distance. Animatable.
- @discussion When non zero, the focal distance determines how the camera focuses the objects in the 3d scene. Defaults to 10.0 prior to macOS 10.13, iOS 11, tvOS 11 and watchOS 4. Defaults to 2.5 otherwise.
- */
-@property(nonatomic) CGFloat focalDistance API_DEPRECATED_WITH_REPLACEMENT("-focusDistance", macos(10.9, 10.13), ios(8.0, 11.0), tvos(9.0, 11.0), watchos(3.0, 4.0));
 
 @end
 

@@ -73,6 +73,28 @@ CT_EXPORT const CFStringRef kCTKernAttributeName CT_AVAILABLE(macos(10.5), ios(3
 
 
 /*!
+    @const      kCTTrackingAttributeName
+    @abstract   Applies tracking (letterspacing).
+
+    @discussion Value must be a CFNumber. Default is zero (no tracking).
+                The tracking attribute indicates how much additional space, in
+                points, should be added to each character cluster after layout.
+                The effect of this attribute is similar to kCTKernAttributeName
+                but differs in that the added tracking is treated as trailing
+                whitespace and a non-zero amount disables non-essential ligatures
+                unless overridden by kCTLigatureAttributeName being present.
+                If both kCTKernAttributeName and kCTTrackingAttributeName are
+                present kCTKernAttributeName will be ignored unless zero;
+                kCTTrackingAttributeName will still be honored.
+
+    @seealso    kCTKernAttributeName
+    @seealso    kCTLigatureAttributeName
+*/
+
+CT_EXPORT const CFStringRef kCTTrackingAttributeName CT_AVAILABLE(macos(10.12), ios(10.0), watchos(3.0), tvos(10.0));
+
+
+/*!
     @const      kCTLigatureAttributeName
     @abstract   Controls ligature formation.
 

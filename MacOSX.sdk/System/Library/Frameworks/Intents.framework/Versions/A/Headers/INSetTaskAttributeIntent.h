@@ -2,17 +2,22 @@
 //  INSetTaskAttributeIntent.h
 //  Intents
 //
-//  Copyright (c) 2016-2017 Apple Inc. All rights reserved.
+//  Copyright (c) 2016-2019 Apple Inc. All rights reserved.
 //
 
 #import <Intents/INIntent.h>
 #import <Intents/INIntentResolutionResult.h>
 
+#import <Intents/INTaskPriority.h>
 #import <Intents/INTaskStatus.h>
 
+@class INSetTaskAttributeTemporalEventTriggerResolutionResult;
 @class INSpatialEventTrigger;
 @class INSpatialEventTriggerResolutionResult;
+@class INSpeakableString;
+@class INSpeakableStringResolutionResult;
 @class INTask;
+@class INTaskPriorityResolutionResult;
 @class INTaskResolutionResult;
 @class INTaskStatusResolutionResult;
 @class INTemporalEventTrigger;
@@ -25,13 +30,19 @@ API_UNAVAILABLE(macosx)
 @interface INSetTaskAttributeIntent : INIntent
 
 - (instancetype)initWithTargetTask:(nullable INTask *)targetTask
+                         taskTitle:(nullable INSpeakableString *)taskTitle
                             status:(INTaskStatus)status
+                          priority:(INTaskPriority)priority
                spatialEventTrigger:(nullable INSpatialEventTrigger *)spatialEventTrigger
-              temporalEventTrigger:(nullable INTemporalEventTrigger *)temporalEventTrigger NS_DESIGNATED_INITIALIZER;
+              temporalEventTrigger:(nullable INTemporalEventTrigger *)temporalEventTrigger NS_DESIGNATED_INITIALIZER API_AVAILABLE(ios(13.0), watchos(6.0), macosx(10.15));
 
 @property (readonly, copy, nullable, NS_NONATOMIC_IOSONLY) INTask *targetTask;
 
+@property (readonly, copy, nullable, NS_NONATOMIC_IOSONLY) INSpeakableString *taskTitle API_AVAILABLE(ios(13.0), watchos(6.0)) API_UNAVAILABLE(macosx);
+
 @property (readonly, assign, NS_NONATOMIC_IOSONLY) INTaskStatus status;
+
+@property (readonly, assign, NS_NONATOMIC_IOSONLY) INTaskPriority priority API_AVAILABLE(ios(13.0), watchos(6.0)) API_UNAVAILABLE(macosx);
 
 @property (readonly, copy, nullable, NS_NONATOMIC_IOSONLY) INSpatialEventTrigger *spatialEventTrigger;
 
@@ -93,14 +104,23 @@ API_UNAVAILABLE(macosx)
 - (void)resolveTargetTaskForSetTaskAttribute:(INSetTaskAttributeIntent *)intent
                     withCompletion:(void (^)(INTaskResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveTargetTask(for:with:));
 
+- (void)resolveTaskTitleForSetTaskAttribute:(INSetTaskAttributeIntent *)intent
+                    withCompletion:(void (^)(INSpeakableStringResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveTaskTitle(for:with:)) API_AVAILABLE(ios(13.0), watchos(6.0)) API_UNAVAILABLE(macosx);
+
 - (void)resolveStatusForSetTaskAttribute:(INSetTaskAttributeIntent *)intent
                     withCompletion:(void (^)(INTaskStatusResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveStatus(for:with:));
+
+- (void)resolvePriorityForSetTaskAttribute:(INSetTaskAttributeIntent *)intent
+                    withCompletion:(void (^)(INTaskPriorityResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolvePriority(for:with:)) API_AVAILABLE(ios(13.0), watchos(6.0)) API_UNAVAILABLE(macosx);
 
 - (void)resolveSpatialEventTriggerForSetTaskAttribute:(INSetTaskAttributeIntent *)intent
                     withCompletion:(void (^)(INSpatialEventTriggerResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveSpatialEventTrigger(for:with:));
 
 - (void)resolveTemporalEventTriggerForSetTaskAttribute:(INSetTaskAttributeIntent *)intent
-                    withCompletion:(void (^)(INTemporalEventTriggerResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveTemporalEventTrigger(for:with:));
+                    withCompletion:(void (^)(INTemporalEventTriggerResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveTemporalEventTrigger(for:with:)) API_DEPRECATED("resolveTemporalEventTriggerForSetTaskAttribute:withCompletion: is deprecated. Use resolveTemporalEventTriggerForSetTaskAttribute:completion: instead", ios(11.0, 13.0), watchos(4.0, 6.0));
+
+- (void)resolveTemporalEventTriggerForSetTaskAttribute:(INSetTaskAttributeIntent *)intent
+                    completion:(void (^)(INSetTaskAttributeTemporalEventTriggerResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveTemporalEventTrigger(for:with:)) API_AVAILABLE(ios(13.0), watchos(6.0));
 
 @end
 

@@ -27,13 +27,8 @@
 #define AudioToolbox_AudioQueue_h
 
 #include <Availability.h>
-#if !defined(__COREAUDIO_USE_FLAT_INCLUDES__)
-    #include <CoreAudio/CoreAudioTypes.h>
-    #include <CoreFoundation/CoreFoundation.h>
-#else
-    #include <CoreAudioTypes.h>
-    #include <CoreFoundation.h>
-#endif
+#include <CoreAudioTypes/CoreAudioTypes.h>
+#include <CoreFoundation/CoreFoundation.h>
 
 #if defined(__BLOCKS__)
     #include <dispatch/dispatch.h>
@@ -295,7 +290,88 @@ CF_ENUM(UInt32) {
     kAudioQueueTimePitchAlgorithm_Varispeed     = 'vspd'
 };
 
+#if TARGET_OS_IPHONE && !TARGET_OS_MACCATALYST
+/*!	@enum		Time/Pitch algorithms (iOS only)
+    @constant kAudioQueueTimePitchAlgorithm_LowQualityZeroLatency
+        Low quality, very inexpensive. Suitable for brief fast-forward/rewind effects,
+        low quality voice. Default algorithm on iOS.
+*/
+CF_ENUM(UInt32) {
+    kAudioQueueTimePitchAlgorithm_LowQualityZeroLatency API_DEPRECATED("Low Quality Zero Latency algorithm is now Deprecated. Please choose from other available options", ios(2.0, 13.0), watchos(2.0, 6.0), tvos(9.0, 13.0)) API_UNAVAILABLE(macos)     = 'lqzl',
+};
+#endif
 
+#if TARGET_OS_IPHONE
+/*!
+    @enum Audio Queue Property IDs
+    @abstract Audio Queue Property IDs (iOS 3.0 or greater only)
+    
+    @constant   kAudioQueueProperty_HardwareCodecPolicy
+        A UInt32 describing how the audio queue is to choose between a hardware or
+        software version of the codec required for its audio format. Its value is one of
+        the AudioQueueHardwareCodecPolicy constants below.
+        
+        If the chosen codec is not available, or if a hardware codec is chosen and the 
+        AudioSession category does not permit use of hardware codecs, attempts to Prime or Start
+        the queue will fail.
+
+        Use kAudioFormatProperty_Encoders or kAudioFormatProperty_Decoders to determine
+        whether the codec you are interested in using is available in hardware form,
+        software, or both.
+        
+        Changing this property is not permitted while the queue is primed or running. Changing
+        this property at other times may cause any properties set on the codec to be lost.
+ 
+        DEPRECATED: Hardware codecs are no longer supported.
+*/
+CF_ENUM(AudioQueuePropertyID) {
+    kAudioQueueProperty_HardwareCodecPolicy             = 'aqcp'        // value is UInt32
+};
+
+/*!
+    @enum       AudioQueueHardwareCodecPolicy constants
+    @abstract   Values of kAudioQueueProperty_HardwareCodecPolicy (iOS 3.0 or greater only)
+    
+    @constant kAudioQueueHardwareCodecPolicy_Default
+        If the required codec is available in both hardware and software forms, the audio queue
+        will choose a hardware codec if its AudioSession category permits, software otherwise.
+        If the required codec is only available in one form, that codec is chosen.
+    @constant kAudioQueueHardwareCodecPolicy_UseSoftwareOnly
+        The audio queue will choose a software codec if one is available.
+    @constant kAudioQueueHardwareCodecPolicy_UseHardwareOnly
+        The audio queue will choose a hardware codec if one is available and its use permitted
+        by the AudioSession category.
+    @constant kAudioQueueHardwareCodecPolicy_PreferSoftware
+        The audio queue will choose a software codec if one is available; if not, it will choose a
+        hardware codec if one is available and its use permitted by the AudioSession category.
+    @constant kAudioQueueHardwareCodecPolicy_PreferHardware
+        The audio queue will choose a hardware codec if one is available and its use permitted
+        by the AudioSession category; otherwise, it will choose a software codec if one is available.
+
+	DEPRECATED: Hardware codecs are no longer supported.
+*/
+CF_ENUM(UInt32) {
+    kAudioQueueHardwareCodecPolicy_Default              = 0,
+    kAudioQueueHardwareCodecPolicy_UseSoftwareOnly      = 1,
+    kAudioQueueHardwareCodecPolicy_UseHardwareOnly      = 2,
+    kAudioQueueHardwareCodecPolicy_PreferSoftware       = 3,
+    kAudioQueueHardwareCodecPolicy_PreferHardware       = 4
+};
+#endif // TARGET_OS_IPHONE
+
+/*!
+    @enum Audio Queue Property IDs
+    @abstract Audio Queue Property IDs (iOS 6.0 or greater only)
+
+    @constant   kAudioQueueProperty_ChannelAssignments
+        A write-only property whose value is an array of AudioQueueChannelAssignment. There must be
+        one array element for each channel of the queue's format as specified in the
+        AudioStreamBasicDescription passed to AudioQueueNewOutput or AudioQueueNewInput.
+        (New in iOS 6.0).
+*/
+CF_ENUM(AudioQueuePropertyID) {
+    kAudioQueueProperty_ChannelAssignments      = 'aqca'
+} API_AVAILABLE(ios(9.0), watchos(2.0), tvos(9.0), macos(10.15));
 
 /*!
     @enum       AudioQueueParameterID
@@ -400,24 +476,24 @@ typedef CF_OPTIONS(UInt32, AudioQueueProcessingTapFlags) {
         mPacketDescriptionCapacity, mmPacketDescriptions, and mPacketDescriptionCount
         fields may only be used with buffers allocated with this function.
         
-    @field      mAudioDataBytesCapacity
+    @var        mAudioDataBytesCapacity
         The size of the buffer, in bytes. This size is set when the buffer is allocated and
         cannot be changed.
-    @field      mAudioData
+    @var        mAudioData
        A pointer to the audio data in the buffer. Although you can write data to this buffer,
        you cannot make it point to another address.
-    @field      mAudioDataByteSize
+    @var        mAudioDataByteSize
         The number of bytes of valid audio data in the buffer. You set this value when providing
         data for playback; the audio queue sets this value when recording data from a recording
         queue.
-    @field      mUserData
+    @var        mUserData
         A value you may specify to identify the buffer when it is passed back in recording or
         playback callback functions.
-    @field      mPacketDescriptionCapacity
+    @var        mPacketDescriptionCapacity
         The maximum number of packet descriptions that can be stored in mPacketDescriptions.
-    @field      mPacketDescriptions
+    @var        mPacketDescriptions
         An array of AudioStreamPacketDescriptions associated with the buffer.
-    @field      mPacketDescriptionCount
+    @var        mPacketDescriptionCount
         The number of valid packet descriptions in the buffer. You set this value when providing
         buffers for playback; the audio queue sets this value when returning buffers from
         a recording queue.
@@ -463,9 +539,9 @@ typedef AudioQueueBuffer *AudioQueueBufferRef;
         In Mac OS X v10.5, audio queues have one parameter available: kAudioQueueParam_Volume,
         which controls the queue's playback volume.
         
-    @field      mID
+    @var        mID
         The parameter.
-    @field      mValue
+    @var        mValue
         The value of the specified parameter.
 */
 struct AudioQueueParameterEvent {
@@ -478,10 +554,9 @@ typedef struct AudioQueueParameterEvent AudioQueueParameterEvent;
 /*!
     @struct     AudioQueueLevelMeterState
     @abstract   Specifies the current level metering information for one channel of an audio queue.
-    @discussion
-    @field      mAveragePower
+    @var        mAveragePower
         The audio channel's average RMS power.
-    @field      mPeakPower
+    @var        mPeakPower
         The audio channel's peak RMS power
 */
 typedef struct AudioQueueLevelMeterState {
@@ -495,6 +570,20 @@ typedef struct AudioQueueLevelMeterState {
 */
 typedef struct OpaqueAudioQueueProcessingTap *   AudioQueueProcessingTapRef;
 
+/*!
+    @struct     AudioQueueChannelAssignment
+    @abstract   Specifies an audio device channel to which the queue will play or from which
+                it will record.
+    @var        mDeviceUID
+        On iOS, this is a port UID obtained from AVAudioSession. On OS X, this is the UID
+        obtained from an AudioDeviceID.
+    @var        mChannelNumber
+        The 1-based index of the channel.
+*/
+typedef struct AudioQueueChannelAssignment {
+    CFStringRef     mDeviceUID;
+    UInt32          mChannelNumber;
+} AudioQueueChannelAssignment;
 
 #pragma mark -
 #pragma mark Callbacks
@@ -706,8 +795,6 @@ typedef void (*AudioQueuePropertyListenerProc)(
 
     @param      inClientData
                     the client data pointer passed to AudioQueueProcessingTapNew
-    @param      inAQ
-                    The audio queue that invoked the callback.
     @param      inAQTap
                     The tap for this callback.
     @param      inNumberFrames
@@ -715,7 +802,7 @@ typedef void (*AudioQueuePropertyListenerProc)(
     @param      ioFlags
                     On entry, the flags passed at construction time are provided. On exit,
                     the start/end of stream flags should be set when appropriate.
-    @param      ioAudioTimeStamp
+    @param      ioTimeStamp
                     On an input audio queue, the timestamp must be returned from this function.
                     On an output audio queue, the callback is provided a continuous timestamp.
     @param      outNumberFrames
@@ -792,7 +879,6 @@ AudioQueueNewOutput(                const AudioStreamBasicDescription *inFormat,
     @function   AudioQueueNewInput
     @abstract   Creates a new audio queue for recording audio data.
     @discussion
-        
         Outline of how to use the queue for input:
         
         - create input queue
@@ -870,7 +956,6 @@ AudioQueueNewOutputWithDispatchQueue(AudioQueueRef __nullable * __nonnull outAQ,
     @function   AudioQueueNewInputWithDispatchQueue
     @abstract   Creates a new audio queue for recording audio data.
     @discussion
-        
         Outline of how to use the queue for input:
         
         - create input queue
@@ -1278,7 +1363,6 @@ AudioQueueGetParameter(             AudioQueueRef               inAQ,
 /*!
     @function   AudioQueueSetParameter
     @abstract   Sets an audio queue parameter value.
-    @discussion
     @param      inAQ
         The audio queue whose parameter value you want to set.
     @param      inParamID
@@ -1303,7 +1387,6 @@ AudioQueueSetParameter(             AudioQueueRef               inAQ,
 /*!
     @function   AudioQueueGetProperty
     @abstract   Obtains an audio queue property value.
-    @discussion 
     @param      inAQ
         The audio queue whose property value you want to obtain.
     @param      inID
@@ -1325,7 +1408,6 @@ AudioQueueGetProperty(              AudioQueueRef           inAQ,
 /*!
     @function   AudioQueueSetProperty
     @abstract   Sets an audio queue property value.
-    @discussion 
     @param      inAQ
         The audio queue whose property value you want to set.
     @param      inID
@@ -1348,7 +1430,6 @@ AudioQueueSetProperty(              AudioQueueRef           inAQ,
 /*!
     @function   AudioQueueGetPropertySize
     @abstract   Obtains the size of an audio queue property.
-    @discussion 
     @param      inAQ
         The audio queue containing the property value whose size you want to obtain.
     @param      inID
@@ -1392,7 +1473,6 @@ AudioQueueAddPropertyListener(      AudioQueueRef                   inAQ,
 /*!
     @function   AudioQueueRemovePropertyListener
     @abstract   Removes a listener callback for a property.
-    @discussion 
     @param      inAQ
         The audio queue that owns the property from which you want to remove a listener.
     @param      inID
@@ -1540,7 +1620,6 @@ AudioQueueDeviceTranslateTime(      AudioQueueRef           inAQ,
 /*!
     @function   AudioQueueDeviceGetNearestStartTime
     @abstract   Obtains an audio device's start time that is closest to a requested start time.
-    @discussion
     @param      inAQ
         The audio queue whose device's nearest start time you want to obtain.
     @param      ioRequestedStartTime
@@ -1589,7 +1668,6 @@ AudioQueueSetOfflineRenderFormat(   AudioQueueRef                               
 /*!
     @function   AudioQueueOfflineRender
     @abstract   Obtain a buffer of audio output from a queue in offline rendering mode.
-    @discussion
     @param      inAQ
         The output queue from which to obtain output.
     @param      inTimestamp

@@ -34,10 +34,10 @@ typedef enum MPSMatrixDecompositionStatus
 typedef NS_ENUM( int, MPSMatrixDecompositionStatus)
 #endif
 {
-    MPSMatrixDecompositionStatusSuccess             MPS_ENUM_AVAILABLE_STARTING(macos(10.13), ios(11.0), tvos(11.0))  =   0,
-    MPSMatrixDecompositionStatusFailure             MPS_ENUM_AVAILABLE_STARTING(macos(10.13), ios(11.0), tvos(11.0))  =  -1,
-    MPSMatrixDecompositionStatusSingular            MPS_ENUM_AVAILABLE_STARTING(macos(10.13), ios(11.0), tvos(11.0))  =  -2,
-    MPSMatrixDecompositionStatusNonPositiveDefinite MPS_ENUM_AVAILABLE_STARTING(macos(10.13), ios(11.0), tvos(11.0))  =  -3,
+    MPSMatrixDecompositionStatusSuccess             MPS_ENUM_AVAILABLE_STARTING(macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0))  =   0,
+    MPSMatrixDecompositionStatusFailure             MPS_ENUM_AVAILABLE_STARTING(macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0))  =  -1,
+    MPSMatrixDecompositionStatusSingular            MPS_ENUM_AVAILABLE_STARTING(macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0))  =  -2,
+    MPSMatrixDecompositionStatusNonPositiveDefinite MPS_ENUM_AVAILABLE_STARTING(macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0))  =  -3,
 }
 #ifdef DOXYGEN
     MPSMatrixDecompositionStatus
@@ -60,7 +60,7 @@ typedef NS_ENUM( int, MPSMatrixDecompositionStatus)
  *              L is a unit lower triangular matrix and U is an upper triangular
  *              matrix.  P is a permutation matrix.
  */
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0))
 @interface MPSMatrixDecompositionLU : MPSMatrixUnaryKernel
 
 /*!
@@ -144,7 +144,7 @@ MPS_SWIFT_NAME(encode(commandBuffer:sourceMatrix:resultMatrix:pivotIndices:info:
  *              factorization is to be computed. L and U are lower and upper
  *              triangular matrices respectively.
  */
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0))
 @interface MPSMatrixDecompositionCholesky : MPSMatrixUnaryKernel
 
 /*!

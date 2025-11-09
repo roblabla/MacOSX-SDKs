@@ -2,7 +2,7 @@
 //  ATSDefines.h
 //  ATS
 //
-//  Copyright (c) 2011-2012 Apple Inc. All rights reserved.
+//  Copyright (c) 2011-2019 Apple Inc. All rights reserved.
 //
 
 #ifndef __ATSDEFINES__
@@ -39,5 +39,11 @@
 #if !defined(ATS_DEPRECATED_IN_MAC_OS_X_VERSION)
 # define ATS_DEPRECATED_IN_MAC_OS_X_VERSION(_macDep) DEPRECATED_IN_MAC_OS_X_VERSION_##_macDep##_AND_LATER
 #endif
+
+#if (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE)) || (TARGET_OS_EMBEDDED || TARGET_OS_IPHONE)
+# define ATS_LEGACY_API 1
+#else
+# define ATS_LEGACY_API 0
+#endif // (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE)) || (TARGET_OS_EMBEDDED || TARGET_OS_IPHONE)
 
 #endif //__ATSDEFINES__

@@ -110,7 +110,7 @@ typedef void(^EKEventStoreRequestAccessCompletionHandler)(BOOL granted, NSError 
                 method, that you're interested in.
     @see        initWithSources:
  */
-@property (nonatomic, readonly) NSArray<EKSource *> *delegateSources NS_AVAILABLE(10_11, NA);
+@property (nonatomic, readonly) NSArray<EKSource *> *delegateSources NS_AVAILABLE(10_11, 12_0);
 
 /*!
     @property   sources
@@ -251,7 +251,7 @@ typedef void(^EKEventStoreRequestAccessCompletionHandler)(BOOL granted, NSError 
     @param      span        The span to use (this event, or this and future events).
     @param      error       If an error occurs, this will contain a valid NSError object on exit.
 */
-- (BOOL)saveEvent:(EKEvent *)event span:(EKSpan)span error:(NSError **)error NS_AVAILABLE(NA, 4_0) __WATCHOS_PROHIBITED;
+- (BOOL)saveEvent:(EKEvent *)event span:(EKSpan)span error:(NSError **)error NS_AVAILABLE(10_14, 4_0) __WATCHOS_PROHIBITED;
 
 /*!
     @method     removeEvent:span:error:
@@ -270,7 +270,7 @@ typedef void(^EKEventStoreRequestAccessCompletionHandler)(BOOL granted, NSError 
     @param      span        The span to use (this event, or this and future events).
     @param      error       If an error occurs, this will contain a valid NSError object on exit.
 */
-- (BOOL)removeEvent:(EKEvent *)event span:(EKSpan)span error:(NSError **)error NS_AVAILABLE(NA, 4_0) __WATCHOS_PROHIBITED;
+- (BOOL)removeEvent:(EKEvent *)event span:(EKSpan)span error:(NSError **)error NS_AVAILABLE(10_14, 4_0) __WATCHOS_PROHIBITED;
 
 // These variants of the above allow you to batch changes by passing NO to commit. You can commit
 // all changes later with [EKEventStore commit:]

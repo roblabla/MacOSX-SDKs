@@ -210,39 +210,39 @@ CF_ASSUME_NONNULL_BEGIN
 /*
  *  kUTExportedTypeDeclarationsKey
  */
-extern const CFStringRef kUTExportedTypeDeclarationsKey              __OSX_AVAILABLE_STARTING(__MAC_10_3,__IPHONE_3_0);
+extern const CFStringRef kUTExportedTypeDeclarationsKey              API_AVAILABLE( ios(3.0), macos(10.3), tvos(9.0), watchos(1.0) );
 /*
  *  kUTImportedTypeDeclarationsKey
  */
-extern const CFStringRef kUTImportedTypeDeclarationsKey              __OSX_AVAILABLE_STARTING(__MAC_10_3,__IPHONE_3_0);
+extern const CFStringRef kUTImportedTypeDeclarationsKey              API_AVAILABLE( ios(3.0), macos(10.3), tvos(9.0), watchos(1.0) );
 /*
  *  kUTTypeIdentifierKey
  */
-extern const CFStringRef kUTTypeIdentifierKey                        __OSX_AVAILABLE_STARTING(__MAC_10_3,__IPHONE_3_0);
+extern const CFStringRef kUTTypeIdentifierKey                        API_AVAILABLE( ios(3.0), macos(10.3), tvos(9.0), watchos(1.0) );
 /*
  *  kUTTypeTagSpecificationKey
  */
-extern const CFStringRef kUTTypeTagSpecificationKey                  __OSX_AVAILABLE_STARTING(__MAC_10_3,__IPHONE_3_0);
+extern const CFStringRef kUTTypeTagSpecificationKey                  API_AVAILABLE( ios(3.0), macos(10.3), tvos(9.0), watchos(1.0) );
 /*
  *  kUTTypeConformsToKey
  */
-extern const CFStringRef kUTTypeConformsToKey                        __OSX_AVAILABLE_STARTING(__MAC_10_3,__IPHONE_3_0);
+extern const CFStringRef kUTTypeConformsToKey                        API_AVAILABLE( ios(3.0), macos(10.3), tvos(9.0), watchos(1.0) );
 /*
  *  kUTTypeDescriptionKey
  */
-extern const CFStringRef kUTTypeDescriptionKey                       __OSX_AVAILABLE_STARTING(__MAC_10_3,__IPHONE_3_0);
+extern const CFStringRef kUTTypeDescriptionKey                       API_AVAILABLE( ios(3.0), macos(10.3), tvos(9.0), watchos(1.0) );
 /*
  *  kUTTypeIconFileKey
  */
-extern const CFStringRef kUTTypeIconFileKey                          __OSX_AVAILABLE_STARTING(__MAC_10_3,__IPHONE_3_0);
+extern const CFStringRef kUTTypeIconFileKey                          API_AVAILABLE( ios(3.0), macos(10.3), tvos(9.0), watchos(1.0) );
 /*
  *  kUTTypeReferenceURLKey
  */
-extern const CFStringRef kUTTypeReferenceURLKey                      __OSX_AVAILABLE_STARTING(__MAC_10_3,__IPHONE_3_0);
+extern const CFStringRef kUTTypeReferenceURLKey                      API_AVAILABLE( ios(3.0), macos(10.3), tvos(9.0), watchos(1.0) );
 /*
  *  kUTTypeVersionKey
  */
-extern const CFStringRef kUTTypeVersionKey                           __OSX_AVAILABLE_STARTING(__MAC_10_3,__IPHONE_3_0);
+extern const CFStringRef kUTTypeVersionKey                           API_AVAILABLE( ios(3.0), macos(10.3), tvos(9.0), watchos(1.0) );
 
 
 /*
@@ -255,19 +255,19 @@ extern const CFStringRef kUTTypeVersionKey                           __OSX_AVAIL
 /*
  *  kUTTagClassFilenameExtension
  */
-extern const CFStringRef kUTTagClassFilenameExtension                __OSX_AVAILABLE_STARTING(__MAC_10_3,__IPHONE_3_0);
+extern const CFStringRef kUTTagClassFilenameExtension                API_AVAILABLE( ios(3.0), macos(10.3), tvos(9.0), watchos(1.0) );
 /*
  *  kUTTagClassMIMEType
  */
-extern const CFStringRef kUTTagClassMIMEType                         __OSX_AVAILABLE_STARTING(__MAC_10_3,__IPHONE_3_0);
+extern const CFStringRef kUTTagClassMIMEType                         API_AVAILABLE( ios(3.0), macos(10.3), tvos(9.0), watchos(1.0) );
 /*
  *  kUTTagClassNSPboardType
  */
-extern const CFStringRef kUTTagClassNSPboardType                     __OSX_AVAILABLE_STARTING(__MAC_10_3,__IPHONE_NA);
+extern const CFStringRef kUTTagClassNSPboardType                     API_AVAILABLE( macos(10.3) ) API_UNAVAILABLE( ios, tvos, watchos );
 /*
  *  kUTTagClassOSType
  */
-extern const CFStringRef kUTTagClassOSType                           __OSX_AVAILABLE_STARTING(__MAC_10_3,__IPHONE_NA);
+extern const CFStringRef kUTTagClassOSType                           API_AVAILABLE( macos(10.3) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 /*
  *  UTTypeCreatePreferredIdentifierForTag()
@@ -317,7 +317,7 @@ extern __nullable CFStringRef
 UTTypeCreatePreferredIdentifierForTag(
   CFStringRef              inTagClass,
   CFStringRef              inTag,
-  __nullable CFStringRef   inConformingToUTI)                        __OSX_AVAILABLE_STARTING(__MAC_10_3,__IPHONE_3_0);
+  __nullable CFStringRef   inConformingToUTI)                        API_AVAILABLE( ios(3.0), macos(10.3), tvos(9.0), watchos(1.0) );
 
 
 
@@ -363,7 +363,7 @@ extern __nullable CFArrayRef
 UTTypeCreateAllIdentifiersForTag(
   CFStringRef              inTagClass,
   CFStringRef              inTag,
-  __nullable CFStringRef   inConformingToUTI)                        __OSX_AVAILABLE_STARTING(__MAC_10_3,__IPHONE_3_0);
+  __nullable CFStringRef   inConformingToUTI)                        API_AVAILABLE( ios(3.0), macos(10.3), tvos(9.0), watchos(1.0) );
 
 
 
@@ -394,7 +394,7 @@ UTTypeCreateAllIdentifiersForTag(
 extern __nullable CFStringRef
 UTTypeCopyPreferredTagWithClass(
   CFStringRef   inUTI,
-  CFStringRef   inTagClass)                                          __OSX_AVAILABLE_STARTING(__MAC_10_3,__IPHONE_3_0);
+  CFStringRef   inTagClass)                                          API_AVAILABLE( ios(3.0), macos(10.3), tvos(9.0), watchos(1.0) );
 
 
 
@@ -419,7 +419,7 @@ UTTypeCopyPreferredTagWithClass(
 extern __nullable CFArrayRef
 UTTypeCopyAllTagsWithClass(
   CFStringRef   inUTI,
-  CFStringRef   inTagClass)                                          __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
+  CFStringRef   inTagClass)                                          API_AVAILABLE( ios(8.0), macos(10.10), tvos(9.0), watchos(1.0) );
 
 
 
@@ -445,7 +445,7 @@ UTTypeCopyAllTagsWithClass(
 extern Boolean 
 UTTypeEqual(
   CFStringRef   inUTI1,
-  CFStringRef   inUTI2)                                              __OSX_AVAILABLE_STARTING(__MAC_10_3,__IPHONE_3_0);
+  CFStringRef   inUTI2)                                              API_AVAILABLE( ios(3.0), macos(10.3), tvos(9.0), watchos(1.0) );
 
 
 
@@ -471,7 +471,7 @@ UTTypeEqual(
 extern Boolean 
 UTTypeConformsTo(
   CFStringRef   inUTI,
-  CFStringRef   inConformsToUTI)                                     __OSX_AVAILABLE_STARTING(__MAC_10_3,__IPHONE_3_0);
+  CFStringRef   inConformsToUTI)                                     API_AVAILABLE( ios(3.0), macos(10.3), tvos(9.0), watchos(1.0) );
 
 
 
@@ -493,7 +493,7 @@ UTTypeConformsTo(
  *    a localized string, or NULL of no type description is available
  */
 extern __nullable CFStringRef
-UTTypeCopyDescription(CFStringRef inUTI)                             __OSX_AVAILABLE_STARTING(__MAC_10_3,__IPHONE_3_0);
+UTTypeCopyDescription(CFStringRef inUTI)                             API_AVAILABLE( ios(3.0), macos(10.3), tvos(9.0), watchos(1.0) );
 
 
 
@@ -514,7 +514,7 @@ UTTypeCopyDescription(CFStringRef inUTI)                             __OSX_AVAIL
  *    Whether or not the UTI is registered.
  */
 extern Boolean
-UTTypeIsDeclared(CFStringRef inUTI)                                  __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
+UTTypeIsDeclared(CFStringRef inUTI)                                  API_AVAILABLE( ios(8.0), macos(10.10), tvos(9.0), watchos(1.0) );
 
 
 
@@ -533,7 +533,7 @@ UTTypeIsDeclared(CFStringRef inUTI)                                  __OSX_AVAIL
  *    Whether or not the UTI is dynamic.
  */
 extern Boolean
-UTTypeIsDynamic(CFStringRef inUTI)                                   __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
+UTTypeIsDynamic(CFStringRef inUTI)                                   API_AVAILABLE( ios(8.0), macos(10.10), tvos(9.0), watchos(1.0) );
 
 
 
@@ -558,7 +558,7 @@ UTTypeIsDynamic(CFStringRef inUTI)                                   __OSX_AVAIL
  *    a tag declaration dictionary, or NULL if the type is not declared
  */
 extern __nullable CFDictionaryRef
-UTTypeCopyDeclaration(CFStringRef inUTI)                             __OSX_AVAILABLE_STARTING(__MAC_10_3,__IPHONE_3_0);
+UTTypeCopyDeclaration(CFStringRef inUTI)                             API_AVAILABLE( ios(3.0), macos(10.3), tvos(9.0), watchos(1.0) );
 
 
 
@@ -581,7 +581,7 @@ UTTypeCopyDeclaration(CFStringRef inUTI)                             __OSX_AVAIL
  *    a URL, or NULL if the bundle cannot be located.
  */
 extern __nullable CFURLRef
-UTTypeCopyDeclaringBundleURL(CFStringRef inUTI)                      __OSX_AVAILABLE_STARTING(__MAC_10_3,__IPHONE_3_0);
+UTTypeCopyDeclaringBundleURL(CFStringRef inUTI)                      API_AVAILABLE( ios(3.0), macos(10.3), tvos(9.0), watchos(1.0) );
 
 
 
@@ -604,7 +604,7 @@ UTTypeCopyDeclaringBundleURL(CFStringRef inUTI)                      __OSX_AVAIL
  *    a new CFString representing the OSType
  */
 extern CFStringRef
-UTCreateStringForOSType(OSType inOSType)                             __OSX_AVAILABLE_STARTING(__MAC_10_3,__IPHONE_NA);
+UTCreateStringForOSType(OSType inOSType)                             API_AVAILABLE( macos(10.3) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 
@@ -628,7 +628,7 @@ UTCreateStringForOSType(OSType inOSType)                             __OSX_AVAIL
  *    a valid encoding of an OSType
  */
 extern OSType 
-UTGetOSTypeFromString(CFStringRef inString)                          __OSX_AVAILABLE_STARTING(__MAC_10_3,__IPHONE_NA);
+UTGetOSTypeFromString(CFStringRef inString)                          API_AVAILABLE( macos(10.3) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 

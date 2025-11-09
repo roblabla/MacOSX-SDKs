@@ -7,5 +7,6 @@
 #include <MediaAccessibility/MADefinitions.h>
 #include <MediaAccessibility/MACaptionAppearance.h>
 #include <MediaAccessibility/MAAudibleMedia.h>
+#include <MediaAccessibility/MAImageCaptioning.h>
 
 #endif

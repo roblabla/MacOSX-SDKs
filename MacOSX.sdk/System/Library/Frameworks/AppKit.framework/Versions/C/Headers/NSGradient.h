@@ -1,7 +1,7 @@
 /*
 	NSGradient.h
 	Application Kit
-	Copyright (c) 2006-2018, Apple Inc.
+	Copyright (c) 2006-2019, Apple Inc.
 	All rights reserved.
 */
 
@@ -13,6 +13,7 @@
 
 
 NS_ASSUME_NONNULL_BEGIN
+API_UNAVAILABLE_BEGIN(ios)
 
 @class NSBezierPath, NSColor, NSColorSpace;
 
@@ -47,19 +48,8 @@ An NSGradient has a color space.  When initialized, all colors provided are conv
 
 */
 
-NS_CLASS_AVAILABLE(10_5, NA)
-@interface NSGradient : NSObject <NSCopying, NSSecureCoding> {
-@private
-    NSArray *_colorArray APPKIT_IVAR;
-    NSColorSpace *_colorSpace APPKIT_IVAR;
-    void *_functionRef APPKIT_IVAR;
-    void *_componentArray APPKIT_IVAR;
-    void *_reserved1 __unused APPKIT_IVAR;
-    void *_reserved2 __unused APPKIT_IVAR;
-    void *_reserved3 __unused APPKIT_IVAR;
-}
-
-
+API_AVAILABLE(macos(10.5))
+@interface NSGradient : NSObject <NSCopying, NSSecureCoding>
 /* Initializes a gradient with starting color at location 0.0 and ending color at location 1.0  The color space returned by [NSColorSpace genericRGBColorSpace] is used.
 */
 - (nullable instancetype)initWithStartingColor:(NSColor *)startingColor endingColor:(NSColor *)endingColor;
@@ -83,7 +73,7 @@ NS_CLASS_AVAILABLE(10_5, NA)
 */
 - (nullable instancetype)initWithColors:(NSArray<NSColor *> *)colorArray atLocations:(nullable const CGFloat *)locations colorSpace:(NSColorSpace *)colorSpace NS_DESIGNATED_INITIALIZER;
 
-- (instancetype)initWithCoder:(NSCoder *)decoder NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithCoder:(NSCoder *)coder NS_DESIGNATED_INITIALIZER;
 
 
 /* DRAWING LINEAR GRADIENTS */
@@ -138,7 +128,7 @@ NS_CLASS_AVAILABLE(10_5, NA)
 
 
 /* Returns the color and location at a particular index in the color gradient */
-- (void)getColor:(NSColor * __nonnull * __nullable)color location:(nullable CGFloat *)location atIndex:(NSInteger)index;
+- (void)getColor:(NSColor * _Nonnull * _Nullable)color location:(nullable CGFloat *)location atIndex:(NSInteger)index;
 
 
 /* This method will return the interpolated gradient value at the given location.  For example, in a two color gradient with white at location 0.0 and black at location 1.0, the interpolated color at location 0.5 would be 50% gray.
@@ -150,5 +140,6 @@ You should not need to override this method, it reports the color value of the g
 
 @end
 
+API_UNAVAILABLE_END
 NS_ASSUME_NONNULL_END
 

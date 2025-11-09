@@ -817,491 +817,8 @@ struct OBEXSessionEvent
 
 // C API OBEXSessionEvent callback.
 
+API_UNAVAILABLE(ios, watchos, tvos)
 typedef	void	(*OBEXSessionEventCallback)	( const OBEXSessionEvent * inEvent );
-
-
-#if 0
-#pragma mark -
-#pragma mark ======= Session Destroyers/Accessors =======
-#endif
-
-//===========================================================================================================================
-//	Session Destroyers/Accessors
-//===========================================================================================================================
-
-//---------------------------------------------------------------------------------------------------------------------------
-/*!	@function	OBEXSessionDelete
-	@abstract	Destroy an OBEX session. If connections are open, they will (eventually) be terminated for you.
-	@param		inSessionRef	A valid service reference.
-	@result		An error code value. 0 if successful.
-	@discussion	
-				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
-				***		You should transition your code to Objective-C equivalents.
-				***		This API may be removed any time in the future.
-*/
-
-OBEXError	OBEXSessionDelete( OBEXSessionRef inSessionRef )	DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
-
-//---------------------------------------------------------------------------------------------------------------------------
-/*!	@function	OBEXSessionHasOpenOBEXConnection
-	@abstract	Allows you to test the session for an open OBEX connection for a particular session.
-	@param		inSessionRef	A valid session reference.
-	@param		outIsConnected	A valid ptr to an OBEXSessionRef; will contain the newly created session if return
-								value is kOBEXSuccess.
-	@result		An error code value. 0 if successful.
-	@discussion	This method will return true only if (a) you are transport-connected to another OBEX target and
-				(b) an OBEX Connect command has been issued and received successfully.
-
-				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
-				***		You should transition your code to Objective-C equivalents.
-				***		This API may be removed any time in the future.
-*/
-
-OBEXError	OBEXSessionHasOpenOBEXConnection(	OBEXSessionRef	inSessionRef,
-												Boolean *		outIsConnected )	DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
-
-//---------------------------------------------------------------------------------------------------------------------------
-/*!	@function	OBEXSessionGetMaxPacketLength
-	@abstract	Gets current max packet length.
-	@param		inSessionRef	A valid session reference.
-	@param		outLength		Max packet length.
-	@result		An error code value. 0 if successful.
-	@discussion	This value *could* change before and after a connect command has been sent or a connect
-				command response has been received, since the recipient could negotiate a lower max packet size.
-
-				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
-				***		You should transition your code to Objective-C equivalents.
-				***		This API may be removed any time in the future.
-*/
-
-OBEXError	OBEXSessionGetMaxPacketLength( OBEXSessionRef inSessionRef, OBEXMaxPacketLength * outLength )	DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
-
-//---------------------------------------------------------------------------------------------------------------------------
-/*!	@function	OBEXSessionGetAvailableCommandPayloadLength
-	@abstract	Gets space available for your data for a particular command you are trying to send.
-	@param		inSessionRef	A valid session reference.
-	@param		inOpCode		An opcode of what command you are trying to send.
-	@param		outLength		Space available for your header data in the payload area for a particular command. 
-	@result		An error code value. 0 if successful.
-	@discussion	The OBEXSession takes care of packaging OBEX opcodes and other information into the proper packet format,
-				allowing you to focus on sending the proper OBEX headers in your commands and command responses. This formatting
-				and datas requires a small bit of information that varies depending on what command or response you are
-				sending. Thus, you should call this function to find out how much space will be left for your headers
-				before you send the command, allowing you to properly chop up your headers before sending them. This will
-				guarantee that (a) you use up all the available space in a packet and (b) that you do not get an error
-				trying to send too much information at once.
-
-				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
-				***		You should transition your code to Objective-C equivalents.
-				***		This API may be removed any time in the future.
-*/
-
-OBEXError	OBEXSessionGetAvailableCommandPayloadLength( OBEXSessionRef inSessionRef, OBEXOpCode inOpCode, OBEXMaxPacketLength * outLength )	DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
-
-//---------------------------------------------------------------------------------------------------------------------------
-/*!	@function	OBEXSessionGetAvailableCommandResponsePayloadLength
-	@abstract	Gets space available for your data for a particular command response you are trying to send.
-	@param		inSessionRef	A valid session reference.
-	@param		inOpCode		A command opcode that you are responding to. For example, if you receiving a Put command,
-								and want to send back a "bad request" response, you should still pass in the Put command
-								opcode for that response.
-	@param		outLength		Space available for your header data in the payload area for a particular command. 
-	@result		An error code value. 0 if successful.
-	@discussion	The OBEXSession takes care of packaging OBEX opcodes and other information into the proper packet format,
-				allowing you to focus on sending the proper OBEX headers in your commands and command responses. This formatting
-				and datas requires a small bit of information that varies depending on what command or response you are
-				sending. Thus, you should call this function to find out how much space will be left for your headers
-				before you send the command, allowing you to properly chop up your headers before sending them. This will
-				guarantee that (a) you use up all the available space in a packet and (b) that you do not get an error
-				trying to send too much information at once.
-
-				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
-				***		You should transition your code to Objective-C equivalents.
-				***		This API may be removed any time in the future.
-*/
-
-OBEXError	OBEXSessionGetAvailableCommandResponsePayloadLength( OBEXSessionRef inSessionRef, OBEXOpCode inOpCode, OBEXMaxPacketLength * outLength )	DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
-
-#if 0
-#pragma mark -
-#pragma mark ======= Client Session API =======
-#endif
-
-//===========================================================================================================================
-//	Client Session API
-//===========================================================================================================================
-
-//---------------------------------------------------------------------------------------------------------------------------
-/*!	@function	OBEXSessionConnect
-	@abstract	Establishes an OBEX connection to the target device for the session. If a transport connection is not
-				open yet, it will be opened if possible.
-	@param		inSessionRef			A valid session reference.
-	@param		inFlags					Flags, as defined in the OBEX spec for this command.
-	@param		inMaxPacketLength		Maximum packet length you wish to allow. May be negiotiated with host to be less
-										or more than you specify.
-	@param		inOptionalHeaders		Ptr to optional headers you can supply to the command. DO NOT dispose of this
-										pointer until you callback is called with a success.
-	@param		inOptionalHeadersLength	Size of data at the specified ptr.
-	@param		inCallback				A valid callback. Will be called for progress, errors and completion.
-	@param		inUserRefCon			Optional parameter; can contain anything you wish. Will be returned in your
-										callback just as you passed it.
-	@result		An error code value. 0 if successful.
-	@discussion	As all commands for OBEX sessions, this command is asynchronous only. A NULL callback parameter will
-				result in an error. If you have already established an OBEX connection and you call this again you will
-				get an 'kOBEXSessionAlreadyConnectedError' as a result.
-
-				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
-				***		You should transition your code to Objective-C equivalents.
-				***		This API may be removed any time in the future.
-*/
-
-OBEXError	OBEXSessionConnect(	OBEXSessionRef	inSessionRef,
-								OBEXFlags					inFlags,
-								OBEXMaxPacketLength			inMaxPacketLength,
-								void* 						inOptionalHeaders,
-								size_t						inOptionalHeadersLength,
-								OBEXSessionEventCallback	inCallback,
-								void *						inUserRefCon )	DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
-											
-//---------------------------------------------------------------------------------------------------------------------------
-/*!	@function	OBEXSessionDisconnect
-	@abstract	Send a disconnect command to a remote OBEX server.
-	@param		inSessionRef			A valid session reference.
-	@param		inOptionalHeaders		Ptr to optional headers you can supply to the command. DO NOT dispose of this
-										pointer until you callback is called with a success.
-	@param		inOptionalHeadersLength	Size of data at the specified ptr.
-	@param		inCallback				A valid callback. Will be called for progress, errors and completion.
-	@param		inUserRefCon			Optional parameter; can contain anything you wish. Will be returned in your
-										callback just as you passed it.
-	@result		An error code value. 0 if successful.
-	@discussion	As all commands for OBEX sessions, this command is asynchronous only. A NULL callback paramter will
-				result in an error.
-
-				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
-				***		You should transition your code to Objective-C equivalents.
-				***		This API may be removed any time in the future.
-*/
-
-OBEXError	OBEXSessionDisconnect(	OBEXSessionRef					inSessionRef,
-									void*	 						inOptionalHeaders,
-									size_t							inOptionalHeadersLength,
-									OBEXSessionEventCallback		inCallback,
-									void *							inUserRefCon )	DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
-
-//---------------------------------------------------------------------------------------------------------------------------
-/*!	@function	OBEXSessionPut
-	@abstract	Send a put command to a remote OBEX server.
-	@param		inSessionRef		A valid session reference.
-	@param		inIsFinalChunk		TRUE or FALSE - is this the last chunk of header data for this PUT.
-	@param		inHeadersData		Headers containing data to PUT. Don't include your body header data here.
-	@param		inHeadersDataLength	Size of header data. Don't include your body header data here.
-	@param		inBodyData			Data for the BODY header to PUT. DO NOT package your data in an actual BODY header,
-									this will be done for you, based on the finalChunk flag you pass in above (since based on
-									this flag the header ID will be either a BODY or ENDOFBODY header).
-	@param		inBodyDataLength	Size of Data for the BODY header to PUT.
-	@param		inCallback			A valid callback. Will be called for progress, errors and completion.
-	@param		inUserRefCon		Optional parameter; can contain anything you wish. Will be returned in your callback
-									just as you passed it.
-	@result		An error code value. 0 if successful.
-	@discussion	As all commands for OBEX sessions, this command is asynchronous only. A NULL callback paramter will
-				result in an error.
-
-				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
-				***		You should transition your code to Objective-C equivalents.
-				***		This API may be removed any time in the future.
-*/
-
-OBEXError	OBEXSessionPut(	OBEXSessionRef					inSessionRef,
-							Boolean							inIsFinalChunk,
-							void* 							inHeadersData,
-							size_t							inHeadersDataLength,
-							void* 							inBodyData,
-							size_t							inBodyDataLength,
-							OBEXSessionEventCallback		inCallback,
-							void *							inUserRefCon )	DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
-										
-//---------------------------------------------------------------------------------------------------------------------------
-/*!	@function	OBEXSessionGet
-	@abstract	Send a get command to a remote OBEX server.
-	@param		inSessionRef		A valid session reference.
-	@param		inIsFinalChunk		TRUE or FALSE - is this the last chunk of header data for this GET.
-	@param		inHeadersData		Headers containing data to GET.
-	@param		inHeadersDataLength	Size of header data.
-	@param		inCallback			A valid callback. Will be called for progress, errors and completion.
-	@param		inUserRefCon		Optional parameter; can contain anything you wish. Will be returned in your callback
-								just as you passed it.
-	@result		An error code value. 0 if successful.
-	@discussion	As all commands for OBEX sessions, this command is asynchronous only. A NULL callback paramter will
-				result in an error.
-
-				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
-				***		You should transition your code to Objective-C equivalents.
-				***		This API may be removed any time in the future.
-*/
-
-OBEXError	OBEXSessionGet(	OBEXSessionRef				inSessionRef,
-							Boolean						inIsFinalChunk,
-							void* 						inHeadersData,
-							size_t						inHeadersDataLength,
-							OBEXSessionEventCallback	inCallback,
-							void*						inUserRefCon )	DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
-										
-//---------------------------------------------------------------------------------------------------------------------------
-/*!	@function	OBEXSessionAbort
-	@abstract	Send an abort command to a remote OBEX server.
-	@param		inSessionRef			A valid session reference.
-	@param		inOptionalHeaders		Ptr to optional headers you can supply to the command. DO NOT dispose of this
-										pointer until you callback is called with a success.
-	@param		inOptionalHeadersLength	Size of data at the specified ptr.
-	@param		inCallback				A valid callback. Will be called for progress, errors and completion.
-	@param		inUserRefCon			Optional parameter; can contain anything you wish. Will be returned in your
-										callback just as you passed it.
-	@result		An error code value. 0 if successful.
-	@discussion	As all commands for OBEX sessions, this command is asynchronous only. A NULL callback paramter will
-				result in an error.
-
-				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
-				***		You should transition your code to Objective-C equivalents.
-				***		This API may be removed any time in the future.
-*/
-
-OBEXError	OBEXSessionAbort(	OBEXSessionRef				inSessionRef,
-								void* 						inOptionalHeaders,
-								size_t						inOptionalHeadersLength,
-								OBEXSessionEventCallback	inCallback,
-								void *						inUserRefCon )	DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
-											
-//---------------------------------------------------------------------------------------------------------------------------
-/*!	@function	OBEXSessionSetPath
-	@abstract	Send a set path command to a remote OBEX server.
-	@param		inSessionRef			A valid session reference.
-	@param		inFlags					Flags, as defined in the OBEX spec for this command.
-	@param		inConstants				Constants, as defined in the OBEX spec for this command.
-	@param		inOptionalHeaders		Ptr to optional headers you can supply to the command. DO NOT dispose of this
-										pointer until you callback is called with a success.
-	@param		inOptionalHeadersLength	Size of data at the specified ptr.
-	@param		inCallback				A valid callback. Will be called for progress, errors and completion.
-	@param		inUserRefCon			Optional parameter; can contain anything you wish. Will be returned in your
-										callback just as you passed it.
-	@result		An error code value. 0 if successful.
-	@discussion	As all commands for OBEX sessions, this command is asynchronous only. A NULL callback paramter will
-				result in an error.
-
-				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
-				***		You should transition your code to Objective-C equivalents.
-				***		This API may be removed any time in the future.
-*/
-
-OBEXError	OBEXSessionSetPath(	OBEXSessionRef				inSessionRef,
-								OBEXFlags					inFlags,
-								OBEXConstants				inConstants,
-								void* 						inOptionalHeaders,
-								size_t						inOptionalHeadersLength,
-								OBEXSessionEventCallback	inCallback,
-								void*						inUserRefCon )	DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
-
-#if 0
-#pragma mark -
-#pragma mark ======= Server Session API =======
-#endif
-
-//===========================================================================================================================
-//	Server Session API
-//===========================================================================================================================
-
-//---------------------------------------------------------------------------------------------------------------------------
-/*!	@function	OBEXSessionConnectResponse
-	@abstract	Send a response to a connect command to the remote client.
-	@param		inSessionRef			A valid session reference.
-	@param		inResponseOpCode		What response code you want to send to the remote client.
-	@param		inFlags					Flags, as defined in the OBEX spec for this command.
-	@param		inMaxPacketLength		Max packet length you want to support. Must be smaller or equal to the max packet
-										length specified by the remote client. 
-	@param		inOptionalHeaders		Ptr to optional headers you can supply to the command. DO NOT dispose of this
-										pointer until you callback is called with a success.
-	@param		inOptionalHeadersLength	Size of data at the specified ptr.
-	@param		inCallback				A valid callback. Will be called for progress, errors and completion.
-	@param		inUserRefCon			Optional parameter; can contain anything you wish. Will be returned in your
-										callback just as you passed it.
-	@result		An error code value. 0 if successful.
-	@discussion	As all commands for OBEX sessions, this command is asynchronous only. A NULL callback paramter will
-				result in an error.
-
-				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
-				***		You should transition your code to Objective-C equivalents.
-				***		This API may be removed any time in the future.
-*/
-
-OBEXError	OBEXSessionConnectResponse(	OBEXSessionRef						inSessionRef,
-										OBEXOpCode							inResponseOpCode,
-										OBEXFlags							inFlags,
-										OBEXMaxPacketLength					inMaxPacketLength,
-										void* 								inOptionalHeaders,
-										size_t								inOptionalHeadersLength,
-										OBEXSessionEventCallback			inCallback,
-										void *								inUserRefCon )	DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
-
-//---------------------------------------------------------------------------------------------------------------------------
-/*!	@function	OBEXSessionDisconnectResponse
-	@abstract	Send a response to a disconnect command to the remote client.
-	@param		inSessionRef			A valid session reference.
-	@param		inResponseOpCode		What response code you want to send to the remote client.
-	@param		inOptionalHeaders		Ptr to optional headers you can supply to the command. DO NOT dispose of this
-										pointer until you callback is called with a success.
-	@param		inOptionalHeadersLength	Size of data at the specified ptr.
-	@param		inCallback				A valid callback. Will be called for progress, errors and completion.
-	@param		inUserRefCon			Optional parameter; can contain anything you wish. Will be returned in your
-										callback just as you passed it.
-	@result		An error code value. 0 if successful.
-	@discussion	As all commands for OBEX sessions, this command is asynchronous only. A NULL callback paramter will
-				result in an error.
-
-				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
-				***		You should transition your code to Objective-C equivalents.
-				***		This API may be removed any time in the future.
-*/
-										
-OBEXError	OBEXSessionDisconnectResponse(	OBEXSessionRef							inSessionRef,
-											OBEXOpCode								inResponseOpCode,
-											void* 									inOptionalHeaders,
-											size_t									inOptionalHeadersLength,
-											OBEXSessionEventCallback				inCallback,
-											void *									inUserRefCon )	DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
-											
-//---------------------------------------------------------------------------------------------------------------------------
-/*!	@function	OBEXSessionGetResponse
-	@abstract	Send a response to a get command to the remote client.
-	@param		inSessionRef			A valid session reference.
-	@param		inResponseOpCode		What response code you want to send to the remote client.
-	@param		inOptionalHeaders		Ptr to optional headers you can supply to the command. DO NOT dispose of this
-										pointer until you callback is called with a success.
-	@param		inOptionalHeadersLength	Size of data at the specified ptr.
-	@param		inCallback				A valid callback. Will be called for progress, errors and completion.
-	@param		inUserRefCon			Optional parameter; can contain anything you wish. Will be returned in your
-										callback just as you passed it.
-	@result		An error code value. 0 if successful.
-	@discussion	As all commands for OBEX sessions, this command is asynchronous only. A NULL callback paramter will
-				result in an error.
-
-				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
-				***		You should transition your code to Objective-C equivalents.
-				***		This API may be removed any time in the future.
-*/
-	
-OBEXError	OBEXSessionGetResponse(	OBEXSessionRef						inSessionRef,
-									OBEXOpCode							inResponseOpCode,
-									void* 								inOptionalHeaders,
-									size_t								inOptionalHeadersLength,
-									OBEXSessionEventCallback			inCallback,
-									void *								inUserRefCon )	DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
-
-//---------------------------------------------------------------------------------------------------------------------------
-/*!	@function	OBEXSessionPutResponse
-	@abstract	Send a response to a put command to the remote client.
-	@param		inSessionRef			A valid session reference.
-	@param		inResponseOpCode		What response code you want to send to the remote client.
-	@param		inOptionalHeaders		Ptr to optional headers you can supply to the command. DO NOT dispose of this
-										pointer until you callback is called with a success.
-	@param		inOptionalHeadersLength	Size of data at the specified ptr.
-	@param		inCallback				A valid callback. Will be called for progress, errors and completion.
-	@param		inUserRefCon			Optional parameter; can contain anything you wish. Will be returned in your
-										callback just as you passed it.
-	@result		An error code value. 0 if successful.
-	@discussion	As all commands for OBEX sessions, this command is asynchronous only. A NULL callback paramter will
-				result in an error.
-
-				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
-				***		You should transition your code to Objective-C equivalents.
-				***		This API may be removed any time in the future.
-*/
-	
-OBEXError	OBEXSessionPutResponse(	OBEXSessionRef						inSessionRef,
-									OBEXOpCode							inResponseOpCode,
-									void* 								inOptionalHeaders,
-									size_t								inOptionalHeadersLength,
-									OBEXSessionEventCallback			inCallback,
-									void *								inUserRefCon )	DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
-
-//---------------------------------------------------------------------------------------------------------------------------
-/*!	@function	OBEXSessionAbortResponse
-	@abstract	Send a response to a abort command to the remote client.
-	@param		inSessionRef			A valid session reference.
-	@param		inResponseOpCode		What response code you want to send to the remote client.
-	@param		inOptionalHeaders		Ptr to optional headers you can supply to the command. DO NOT dispose of this
-										pointer until you callback is called with a success.
-	@param		inOptionalHeadersLength	Size of data at the specified ptr.
-	@param		inCallback				A valid callback. Will be called for progress, errors and completion.
-	@param		inUserRefCon			Optional parameter; can contain anything you wish. Will be returned in your
-										callback just as you passed it.
-	@result		An error code value. 0 if successful.
-	@discussion	As all commands for OBEX sessions, this command is asynchronous only. A NULL callback paramter will
-				result in an error.
-
-				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
-				***		You should transition your code to Objective-C equivalents.
-				***		This API may be removed any time in the future.
-*/
-
-OBEXError	OBEXSessionAbortResponse(	OBEXSessionRef						inSessionRef,
-										OBEXOpCode							inResponseOpCode,
-										void* 								inOptionalHeaders,
-										size_t								inOptionalHeadersLength,
-										OBEXSessionEventCallback			inCallback,
-										void *								inUserRefCon )	DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;		
-
-//---------------------------------------------------------------------------------------------------------------------------
-/*!	@function	OBEXSessionSetPathResponse
-	@abstract	Send a response to a set path command to the remote client.
-	@param		inSessionRef			A valid session reference.
-	@param		inResponseOpCode		What response code you want to send to the remote client.
-	@param		inOptionalHeaders		Ptr to optional headers you can supply to the command. DO NOT dispose of this
-										pointer until you callback is called with a success.
-	@param		inOptionalHeadersLength	Size of data at the specified ptr.
-	@param		inCallback				A valid callback. Will be called for progress, errors and completion.
-	@param		inUserRefCon			Optional parameter; can contain anything you wish. Will be returned in your
-										callback just as you passed it.
-	@result		An error code value. 0 if successful.
-	@discussion	As all commands for OBEX sessions, this command is asynchronous only. A NULL callback paramter will
-				result in an error.
-
-				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
-				***		You should transition your code to Objective-C equivalents.
-				***		This API may be removed any time in the future.
-*/
-
-OBEXError	OBEXSessionSetPathResponse(	OBEXSessionRef						inSessionRef,
-										OBEXOpCode							inResponseOpCode,
-										void* 								inOptionalHeaders,
-										size_t								inOptionalHeadersLength,
-										OBEXSessionEventCallback			inCallback,
-										void *								inUserRefCon )	DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
-
-//---------------------------------------------------------------------------------------------------------------------------
-/*!	@function	OBEXSessionSetServerCallback
-	@param		inSessionRef			A valid session reference.
-	@param		inCallback				A valid callback. Will be called for progress, errors and completion by server
-										sessions only.
-	@param		inUserRefCon			Optional parameter; can contain anything you wish. Will be returned in your
-										callback just as you passed it.
-	@result		An error code value. 0 if successful.
-	@discussion	Sets callback to be used when an event occurs on an OBEXSession. This is important for OBEX servers, as you
-				will need a way to be called back when the first command is sent to you. So, be sure to set yourself
-				up to listen for events when you are ready to receive them.
-
-				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
-				***		You should transition your code to Objective-C equivalents.
-				***		This API may be removed any time in the future.
-*/
-
-OBEXError	OBEXSessionSetServerCallback(	OBEXSessionRef						inSessionRef,
-											OBEXSessionEventCallback			inCallback,
-											void *								inUserRefCon	)	DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
-
-
-#if 0
-#pragma mark -
-#pragma mark ======= Utilities API =======
-#endif
 
 // vCard charsets
 
@@ -1314,128 +831,6 @@ OBEXError	OBEXSessionSetServerCallback(	OBEXSessionRef						inSessionRef,
 #define		kEncodingStringBase64			"BASE-64"
 #define		kEncodingString8Bit				"8BIT"
 
-//---------------------------------------------------------------------------------------------------------------------------
-/*!	@function	OBEXCreateVCard
-	@abstract	Creates a formatted vCard, ready to be sent over OBEX or whatever.
-	@param		inNameCharset					A pointer to the charset data used for the name. Pass in a #defined charset
-												for ease of use.
-	@param		inNameCharsetLength				Length of name charset assed in above.
-	@param		inFirstName						Pointer to data with Person's first name.
-	@param		inFirstNameLength				Length of Person's first name passed in above.
-	@param		inLastName						Pointer to data with Person's last name.
-	@param		inLastNameLength				Length of Person's last name passed in above.
-	@param		inFriendlyName					Pointer to data with Person's Friendly name.
-	@param		inFriendlyNameLength			Length of Person's Friendly name passed in above.
-	@param		inHomePhone						Pointer to data with Person's Home phone number.
-	@param		inHomePhoneLength				Length of Person's Home phone number passed in above.
-	@param		inWorkPhone						Work phone number.
-	@param		inWorkPhoneLength				Length of Person's Work phone number passed in above.
-	@param		inCellPhone						Cell phone number.
-	@param		inCellPhoneLength				Length of Person's Cell phone number passed in above.
-	@param		inFaxPhone						Fax phone number.
-	@param		inFaxPhoneLength				Length of Person's Fax phone number passed in above.
-	@param		inEMailAddress					EMailAddress of person.
-	@param		inEMailAddressLength			Length of Person's EMailAddress passed in above.
-	@param		inEMailAddressCharset			Charset of EMailAddress of person.
-	@param		inEMailAddressCharsetLength		Length of Person's EMailAddress charset passed in above.
-	@param		inOrganization					Pointer to Organization/business data.
-	@param		inOrganizationLength			Length of Organization/business data.
-	@param		inOrganizationCharset			Pointer to the charset the Organization/business is in.
-	@param		inOrganizationCharsetLength		Length of data for the Organization/business charset.
-	@param		inTitle							Pointer to data with Title of person in biz/org.
-	@param		inTitleLength					Length of Title of person in biz/org.
-	@param		inOrganizationCharset			Pointer to the charset the Title is in.
-	@param		inOrganizationCharsetLength		Length of data for the Title charset.
-	@result		An CFDataRef containing the compiled data. nil if we failed.
-	@discussion	All parameters are optional. The CFDataRef returned to you is NOT retained. Retain it if you want to keep it.
-
-				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
-				***		You should transition your code to Objective-C equivalents.
-				***		This API may be removed any time in the future.
-*/
-
-CFDataRef	OBEXCreateVCard(	const void *	inFirstName,
-							uint32_t		inFirstNameLength,
-							const void *	inLastName,
-							uint32_t		inLastNameLength,
-							const void *	inFriendlyName,
-							uint32_t		inFriendlyNameLength,
-							const void *	inNameCharset,
-							uint32_t		inNameCharsetLength,
-							const void *	inHomePhone,
-							uint32_t		inHomePhoneLength,
-							const void *	inWorkPhone,
-							uint32_t		inWorkPhoneLength,
-							const void *	inCellPhone,
-							uint32_t		inCellPhoneLength,
-							const void *	inFaxPhone,
-							uint32_t		inFaxPhoneLength,
-							const void *	inEMailAddress,
-							uint32_t		inEMailAddressLength,
-							const void *	inEMailAddressCharset,
-							uint32_t		inEMailAddressCharsetLength,
-							const void *	inOrganization,
-							uint32_t		inOrganizationLength,
-							const void *	inOrganizationCharset,
-							uint32_t		inOrganizationCharsetLength,
-							const void *	inTitle,
-							uint32_t		inTitleLength,
-							const void *	inTitleCharset,
-							uint32_t		inTitleCharsetLength	)	DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
-
-//---------------------------------------------------------------------------------------------------------------------------
-/*!	@function	OBEXCreateVEvent
-	@abstract	Creates a formatted vEvent, ready to be sent over OBEX or whatever. You probably will embed the output
-				in a vCalendar event.
-	@param		inCharset			The Charset the passed data is in. Pass in a #defined charset for ease of use.
-	@param		inCharsetLength		The length of the Charset passed data.
-	@param		inEncoding			The encoding of the summary and location fields.
-	@param		inCharsetLength		The length of the Charset passed data.
-	@param		inEventStartDate	Start of event date, in the (ISO8601) format: YYYYMMDDTHHMMSS. e.g. 19960415T083000 = 8:30 am on April 15, 1996. All time values should be in LOCAL time.
-	@param		inCharsetLength		The length of the Charset passed data.
-	@param		inEventEndDate		End of event date.
-	@param		inCharsetLength		The length of the Charset passed data.
-	@param		inAlarmDate			Date of Alarm for event, in the format: YYYYMMDDTHHMMSS.
-	@param		inCharsetLength		The length of the Charset passed data.
-	@param		inCategory			Category of event, such as "MEETING" or "PHONE CALL".
-	@param		inCharsetLength		The length of the Charset passed data.
-	@param		inSummary			Summary of event. Max length is 36 bytes. Longer will result in a bad argument error.
-	@param		inCharsetLength		The length of the Charset passed data.
-	@param		inLocation			Summary of event. Max length is 20 bytes. Longer will result in a bad argument error.
-	@param		inCharsetLength		The length of the Charset passed data.
-	@param		inXIRMCLUID			The IRMC Local Unique Identifier Label, max length 12 bytes. Longer will result in
-									a bad argument error.
-	@param		inCharsetLength		The length of the Charset passed data.
-	@result		A valid CFDataRef - nil if we failed.
-	@discussion	All parameters are optional. The CFDataRef returned to you is NOT retained. Retain it if you want to keep it.
-				Be aware that certain devices such as Ericsson phones MUST have certain fields, such as a start and end date.
-
-				***		DEPRECATED IN BLUETOOTH 2.2 (Mac OS X 10.6)
-				***		You should transition your code to Objective-C equivalents.
-				***		This API may be removed any time in the future.
-*/
-
-CFDataRef		OBEXCreateVEvent(	const char *	inCharset,
-								uint32_t		inCharsetLength,
-								const char *	inEncoding,
-								uint32_t		inEncodingLength,
-								const char *	inEventStartDate,
-								uint32_t		inEventStartDateLength,
-								const char *	inEventEndDate,
-								uint32_t		inEventEndDateLength,
-								const char *	inAlarmDate,
-								uint32_t		inAlarmDateLength,
-								const char *	inCategory,
-								uint32_t		inCategoryLength,
-								const char *	inSummary,
-								uint32_t		inSummaryLength,
-								const char *	inLocation,
-								uint32_t		inLocationLength,
-								const char *	inXIRMCLUID,
-								uint32_t		inXIRMCLUIDLength			)	DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
-
-
-
 #pragma mark -
 #pragma mark ======= Header Contruction Kit =======
 
@@ -1446,13 +841,13 @@ CFDataRef		OBEXCreateVEvent(	const char *	inCharset,
 	Generally, the strategy is either you will have a ptr to some data full of headers, and you
 	can use OBEXGetHeaders to get you a easily-accessed CFDictionary (or NSDictionary) full of headers and
 	use the keys below to obtain the actual header values. Conversely, you can create a CFDictionary full
-	of headers using the OBEXAddXXXXXHeader() functions, and then pass this to an OBEX command using the
+	of headers using the OBEXAddXXXXXHeader(void) functions, and then pass this to an OBEX command using the
 	OBEXHeadersToBytes( headerDictionary ) function to get the raw bytes.
 */
 
 //---------------------------------------------------------------------------------------------------------------------------
 /*
-	These are defined keys to assist in locating headers in the dictionary of headers returned from the OBEXGetHeaders()
+	These are defined keys to assist in locating headers in the dictionary of headers returned from the OBEXGetHeaders(void)
 	function, described below.
 */
 
@@ -1524,6 +919,7 @@ extern CFStringRef	kOBEXHeaderIDKeyUserDefined;
 	</pre>
 */
 
+API_UNAVAILABLE(ios, watchos, tvos)
 CFDictionaryRef OBEXGetHeaders( const void* inData, size_t inDataSize ) CF_RETURNS_RETAINED;
 
 //---------------------------------------------------------------------------------------------------------------------------
@@ -1560,6 +956,7 @@ CFDictionaryRef OBEXGetHeaders( const void* inData, size_t inDataSize ) CF_RETUR
 					
 */
 
+API_UNAVAILABLE(ios, watchos, tvos)
 CFMutableDataRef OBEXHeadersToBytes( CFDictionaryRef dictionaryOfHeaders );
 
 #pragma mark -
@@ -1573,6 +970,7 @@ CFMutableDataRef OBEXHeadersToBytes( CFDictionaryRef dictionaryOfHeaders );
 	@discussion		Name header - OBEX Spec, 2.2.2: (2-byte) Null terminated unicode string.
 */
 
+API_UNAVAILABLE(ios, watchos, tvos)
 OBEXError OBEXAddNameHeader(	CFStringRef				name,
 								CFMutableDictionaryRef	dictRef );
 							
@@ -1585,6 +983,7 @@ OBEXError OBEXAddNameHeader(	CFStringRef				name,
 	@discussion		Description header - OBEX Spec, 2.2.6: (2-byte) Null terminated unicode string.
 */
 
+API_UNAVAILABLE(ios, watchos, tvos)
 OBEXError OBEXAddDescriptionHeader(	CFStringRef				description,
 									CFMutableDictionaryRef	dictRef );
 									
@@ -1597,6 +996,7 @@ OBEXError OBEXAddDescriptionHeader(	CFStringRef				description,
 	@discussion		Count header - OBEX Spec, 2.2.1: 4 byte unsigned integer
 */
 
+API_UNAVAILABLE(ios, watchos, tvos)
 OBEXError OBEXAddCountHeader(	uint32_t				count,
 								CFMutableDictionaryRef	dictRef );
 
@@ -1609,6 +1009,7 @@ OBEXError OBEXAddCountHeader(	uint32_t				count,
 	@discussion		Time4Byte headers - OBEX Spec, 2.2.5: 4 Bytes
 */
 
+API_UNAVAILABLE(ios, watchos, tvos)
 OBEXError OBEXAddTime4ByteHeader(	uint32_t				time4Byte,
 									CFMutableDictionaryRef	dictRef );
 
@@ -1621,6 +1022,7 @@ OBEXError OBEXAddTime4ByteHeader(	uint32_t				time4Byte,
 	@discussion		Length header - OBEX Spec, 2.2.4: 4 byte unsigned integer
 */
 
+API_UNAVAILABLE(ios, watchos, tvos)
 OBEXError OBEXAddLengthHeader(	uint32_t				length,
 								CFMutableDictionaryRef	dictRef );
 								
@@ -1633,6 +1035,7 @@ OBEXError OBEXAddLengthHeader(	uint32_t				length,
 	@discussion		Type header - OBEX Spec, 2.2.3: 1-byte Null terminated ascii string.
 */
 
+API_UNAVAILABLE(ios, watchos, tvos)
 OBEXError OBEXAddTypeHeader(	CFStringRef				type,
 								CFMutableDictionaryRef	dictRef );
 							
@@ -1645,6 +1048,7 @@ OBEXError OBEXAddTypeHeader(	CFStringRef				type,
 	@discussion		TimeISO header - OBEX Spec, 2.2.5: Byte Sequence
 */
 
+API_UNAVAILABLE(ios, watchos, tvos)
 OBEXError OBEXAddTimeISOHeader(	const void*				inHeaderData,
 								uint32_t				inHeaderDataLength,
 								CFMutableDictionaryRef	dictRef );
@@ -1659,6 +1063,7 @@ OBEXError OBEXAddTimeISOHeader(	const void*				inHeaderData,
 	@discussion		Target header - OBEX Spec, 2.2.7: Byte Sequence
 */
 
+API_UNAVAILABLE(ios, watchos, tvos)
 OBEXError OBEXAddTargetHeader(	const void*				inHeaderData,
 								uint32_t				inHeaderDataLength,
 								CFMutableDictionaryRef	dictRef );
@@ -1673,6 +1078,7 @@ OBEXError OBEXAddTargetHeader(	const void*				inHeaderData,
 	@discussion		HTTP header - OBEX Spec, 2.2.8: Byte Sequence
 */
 
+API_UNAVAILABLE(ios, watchos, tvos)
 OBEXError OBEXAddHTTPHeader(	const void*				inHeaderData,
 								uint32_t				inHeaderDataLength,
 								CFMutableDictionaryRef	dictRef );
@@ -1687,7 +1093,8 @@ OBEXError OBEXAddHTTPHeader(	const void*				inHeaderData,
 	@result			Error code, kOBEXSuccess (0) if success.
 	@discussion		Body,EndOfBody headers - OBEX Spec, 2.2.9: Byte Sequence
 */
-							
+			
+API_UNAVAILABLE(ios, watchos, tvos)
 OBEXError OBEXAddBodyHeader(	const void*				inHeaderData,
 								uint32_t				inHeaderDataLength,
 								Boolean					isEndOfBody,
@@ -1703,6 +1110,7 @@ OBEXError OBEXAddBodyHeader(	const void*				inHeaderData,
 	@discussion		Who headers - OBEX Spec, 2.2.10: Byte Sequence
 */
 
+API_UNAVAILABLE(ios, watchos, tvos)
 OBEXError OBEXAddWhoHeader(	const void*				inHeaderData,
 							uint32_t				inHeaderDataLength,
 							CFMutableDictionaryRef	dictRef );
@@ -1721,6 +1129,7 @@ OBEXError OBEXAddWhoHeader(	const void*				inHeaderData,
 										passed is not 4, a kOBEXBadArgumentError error will be returned. ***
 */
 
+API_UNAVAILABLE(ios, watchos, tvos)
 OBEXError OBEXAddConnectionIDHeader(	const void*				inHeaderData,
 										uint32_t				inHeaderDataLength,
 										CFMutableDictionaryRef	dictRef );
@@ -1735,6 +1144,7 @@ OBEXError OBEXAddConnectionIDHeader(	const void*				inHeaderData,
 	@discussion		Application Request/Response Parameter headers - OBEX Spec, 2.2.11: Byte Sequence
 */
 
+API_UNAVAILABLE(ios, watchos, tvos)
 OBEXError OBEXAddApplicationParameterHeader(	const void*				inHeaderData,
 												uint32_t				inHeaderDataLength,
 												CFMutableDictionaryRef	dictRef );
@@ -1754,6 +1164,7 @@ OBEXError OBEXAddApplicationParameterHeader(	const void*				inHeaderData,
 					Be careful here to not mess up these values, as it could adversely affect the ability of the remote-device's headers parser.
 */
 
+API_UNAVAILABLE(ios, watchos, tvos)
 OBEXError OBEXAddByteSequenceHeader(	const void*				inHeaderData,
 										uint32_t				inHeaderDataLength,
 										CFMutableDictionaryRef	dictRef );
@@ -1768,6 +1179,7 @@ OBEXError OBEXAddByteSequenceHeader(	const void*				inHeaderData,
 	@discussion		Object Class header - OBEX Spec, 2.2.15: Byte sequence.
 */
 
+API_UNAVAILABLE(ios, watchos, tvos)
 OBEXError OBEXAddObjectClassHeader(	const void*				inHeaderData,
 									uint32_t				inHeaderDataLength,
 									CFMutableDictionaryRef	dictRef );
@@ -1782,6 +1194,7 @@ OBEXError OBEXAddObjectClassHeader(	const void*				inHeaderData,
 	@discussion		Authorization Challenge header - OBEX Spec, 2.2.13: Authorization Challenge.
 */
 
+API_UNAVAILABLE(ios, watchos, tvos)
 OBEXError OBEXAddAuthorizationChallengeHeader(	const void*				inHeaderData,
 												uint32_t				inHeaderDataLength,
 												CFMutableDictionaryRef	dictRef );
@@ -1796,6 +1209,7 @@ OBEXError OBEXAddAuthorizationChallengeHeader(	const void*				inHeaderData,
 	@discussion		Authorization Response header - OBEX Spec, 2.2.14: Authorization Response.
 */
 
+API_UNAVAILABLE(ios, watchos, tvos)
 OBEXError OBEXAddAuthorizationResponseHeader(	const void*				inHeaderData,
 												uint32_t				inHeaderDataLength,
 												CFMutableDictionaryRef	dictRef );
@@ -1810,6 +1224,7 @@ OBEXError OBEXAddAuthorizationResponseHeader(	const void*				inHeaderData,
 	@discussion		User Defined header - OBEX Spec, 2.2.20: User Defined Headers.
 */
 
+API_UNAVAILABLE(ios, watchos, tvos)
 OBEXError OBEXAddUserDefinedHeader(	const void*				inHeaderData,
 									uint32_t				inHeaderDataLength,
 									CFMutableDictionaryRef	dictRef );

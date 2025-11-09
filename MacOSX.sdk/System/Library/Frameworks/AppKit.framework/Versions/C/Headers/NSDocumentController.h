@@ -1,7 +1,7 @@
 /*
 	NSDocumentController.h
 	Application Kit
-	Copyright (c) 1997-2018, Apple Inc.
+	Copyright (c) 1997-2019, Apple Inc.
 	All rights reserved.
 */
 
@@ -12,17 +12,11 @@
 #import <Foundation/NSDate.h>
 
 NS_ASSUME_NONNULL_BEGIN
+API_UNAVAILABLE_BEGIN(ios)
 
 @class NSDocument, NSError, NSMenuItem, NSMutableDictionary, NSOpenPanel, NSURL, NSWindow;
 
-@interface NSDocumentController : NSObject<NSCoding, NSMenuItemValidation, NSUserInterfaceValidations> {
-    @private
-    id _documents APPKIT_IVAR;
-    id _moreVars APPKIT_IVAR;
-    NSArray *_cachedTypeDescriptions APPKIT_IVAR;
-    NSMutableDictionary *_recents APPKIT_IVAR;
-    int _recentsLimit APPKIT_IVAR;
-}
+@interface NSDocumentController : NSObject<NSCoding, NSMenuItemValidation, NSUserInterfaceValidations>
 
 #pragma mark *** The Shared Document Controller ***
 
@@ -104,13 +98,13 @@ For backward binary compatibility with Mac OS 10.3 and earlier, the default impl
 
 If you override -[NSDocumentController openDocument:], you would typically want to invoke this method instead of -beginOpenPanel:forTypes:completionHandler: or -URLsFromRunningOpenPanel directly. You typically would not override this method without calling super.
 */
-- (void)beginOpenPanelWithCompletionHandler:(void (^)(NSArray<NSURL *> * __nullable))completionHandler NS_AVAILABLE_MAC(10_8);
+- (void)beginOpenPanelWithCompletionHandler:(void (^)(NSArray<NSURL *> * _Nullable))completionHandler API_AVAILABLE(macos(10.8));
 
 /* Present an open panel, which will always be non-modal, to the user, specifying a list of UTIs for openable files. Invoke the completion handler with NSOKButton or NSCancelButton depending on how the user dismisses the panel.
 
 You typically would not invoke this method directly. You can override it though if you need to customize the open panel before it gets displayed.
 */
-- (void)beginOpenPanel:(NSOpenPanel *)openPanel forTypes:(nullable NSArray<NSString *> *)inTypes completionHandler:(void (^)(NSInteger result))completionHandler NS_AVAILABLE_MAC(10_8);
+- (void)beginOpenPanel:(NSOpenPanel *)openPanel forTypes:(nullable NSArray<NSString *> *)inTypes completionHandler:(void (^)(NSInteger result))completionHandler API_AVAILABLE(macos(10.8));
 
 /* Open a document located by a URL, present its user interface if displayDocument is YES, and invoke the passed-in completion handler at some point in the future, perhaps after the method invocation has returned. The completion handler must be invoked on the main thread. If successful, pass the document to the completion handler, and also whether the document was already open or being opened before this method was invoked. If not successful, pass a nil document and an NSError that encapsulates the reason why the document could not be opened.
  
@@ -124,7 +118,7 @@ You can of course invoke this method to open a document.
 
 For backward binary compatibility with Mac OS 10.6 and earlier, the default implementation of this method invokes [self openDocumentWithContentsOfURL:url display:displayDocument error:&anError] if that method or the even older -openDocumentWithContentsOfFile:display: method is overridden and this one is not, instead of invoking -makeDocumentWithContentsOfURL:ofType:error: and all the rest.
 */
-- (void)openDocumentWithContentsOfURL:(NSURL *)url display:(BOOL)displayDocument completionHandler:(void (^)(NSDocument * __nullable document, BOOL documentWasAlreadyOpen, NSError * __nullable error))completionHandler NS_AVAILABLE_MAC(10_7);
+- (void)openDocumentWithContentsOfURL:(NSURL *)url display:(BOOL)displayDocument completionHandler:(void (^)(NSDocument * _Nullable document, BOOL documentWasAlreadyOpen, NSError * _Nullable error))completionHandler API_AVAILABLE(macos(10.7));
 
 /* Instantiate a document located by a URL, of a specified type, and return it if successful. If not successful, return nil after setting *outError to an NSError that encapsulates the reason why the document could not be instantiated. The default implementation of this method invokes -documentClassForType: to find out the class of document to instantiate, allocates a document object, and initializes it by sending it an -initWithContentsOfURL:ofType:error: message.
 
@@ -144,7 +138,7 @@ We don't anticipate any uses for an application to invoke this method directly, 
 
 For backward binary compatibility with Mac OS 10.6 and earlier, the default implementation of this method invokes [self reopenDocumentForURL:url withContentsOfURLcontentsURL error:&anError] if that method is overridden and this one is not, instead of invoking -makeDocumentForURL:withContentsOfURL:ofType:error: and all the rest.
 */
-- (void)reopenDocumentForURL:(nullable NSURL *)urlOrNil withContentsOfURL:(NSURL *)contentsURL display:(BOOL)displayDocument completionHandler:(void (^)(NSDocument * __nullable document, BOOL documentWasAlreadyOpen, NSError * __nullable error))completionHandler NS_AVAILABLE_MAC(10_7);
+- (void)reopenDocumentForURL:(nullable NSURL *)urlOrNil withContentsOfURL:(NSURL *)contentsURL display:(BOOL)displayDocument completionHandler:(void (^)(NSDocument * _Nullable document, BOOL documentWasAlreadyOpen, NSError * _Nullable error))completionHandler API_AVAILABLE(macos(10.7));
 
 /* Instantiate a document, perhaps located by a URL, perhaps not, by reading the contents for the document from another URL, which may or may not be a different URL, and return it if successful. If not successful, return nil after setting *outError to an NSError that encapsulates the reason why the document could not be instantiated. The default implementation of this method invokes -documentClassForType: to find out the class of document to instantiate, allocates a document object, and initializes it by sending it an -initForURL:withContentsOfURL:ofType:error: message.
 */
@@ -192,7 +186,7 @@ You can override this method to customize how documents are duplicated. It is in
  
 We don't anticipate any uses for your application to invoke this method directly, but you may discover one.
 */
-- (nullable __kindof NSDocument *)duplicateDocumentWithContentsOfURL:(NSURL *)url copying:(BOOL)duplicateByCopying displayName:(nullable NSString *)displayNameOrNil error:(NSError **)outError NS_AVAILABLE_MAC(10_7);
+- (nullable __kindof NSDocument *)duplicateDocumentWithContentsOfURL:(NSURL *)url copying:(BOOL)duplicateByCopying displayName:(nullable NSString *)displayNameOrNil error:(NSError **)outError API_AVAILABLE(macos(10.7));
 
 #pragma mark *** Document Sharing ***
 
@@ -202,11 +196,11 @@ We don't anticipate any uses for your application to invoke this method directly
  
  Be aware that even if allowsAutomaticShareMenu is YES, NSDocumentController may choose not to insert the Share menu if it detects that the application already has a Share menu.
  */
-@property (readonly) BOOL allowsAutomaticShareMenu NS_AVAILABLE_MAC(10_13);
+@property (readonly) BOOL allowsAutomaticShareMenu API_AVAILABLE(macos(10.13));
 
 /* A menu item that can be used for sharing the current document. You would typically only use this if you make your NSDocument subclass return NO for allowsAutomaticShareMenu to do custom placement of the Share menu.
  */
-- (NSMenuItem *)standardShareMenuItem NS_AVAILABLE_MAC(10_13);
+- (NSMenuItem *)standardShareMenuItem API_AVAILABLE(macos(10.13));
 
 #pragma mark *** Error Presentation ***
 
@@ -282,27 +276,28 @@ For backward binary compatibility with Mac OS 10.4 and earlier, the default impl
 
 /* Methods that were deprecated in Mac OS 10.7. See the comments above for information about when your overrides of them are still invoked, for backward binary compatibility.
 */
-- (nullable id)openDocumentWithContentsOfURL:(NSURL *)url display:(BOOL)displayDocument error:(NSError **)outError NS_DEPRECATED_MAC(10_4, 10_7, "Use -openDocumentWithContentsOfURL:display:completionHandler: instead");
-- (BOOL)reopenDocumentForURL:(nullable NSURL *)url withContentsOfURL:(NSURL *)contentsURL error:(NSError **)outError NS_DEPRECATED_MAC(10_4, 10_7, "Use -reopenDocumentForURL:withContentsOfURL:display:completionHandler: instead");
+- (nullable id)openDocumentWithContentsOfURL:(NSURL *)url display:(BOOL)displayDocument error:(NSError **)outError API_DEPRECATED("Use -openDocumentWithContentsOfURL:display:completionHandler: instead", macos(10.4,10.7));
+- (BOOL)reopenDocumentForURL:(nullable NSURL *)url withContentsOfURL:(NSURL *)contentsURL error:(NSError **)outError API_DEPRECATED("Use -reopenDocumentForURL:withContentsOfURL:display:completionHandler: instead", macos(10.4,10.7));
 
 /* Methods that were deprecated in Mac OS 10.5, and don't work well in applications whose document types are declared with UTIs. In general, if each of the application's CFBundleDocumentTypes Info.plist entries has a valid LSItemContentTypes subentry, and the application doesn't invoke deprecated methods like -fileNamesFromRunningOpenPanel, then these methods will never be invoked from within Cocoa.
 */
-- (nullable NSArray *)fileExtensionsFromType:(NSString *)typeName NS_DEPRECATED_MAC(10_0, 10_5);
-- (nullable NSString *)typeFromFileExtension:(NSString *)fileNameExtensionOrHFSFileType NS_DEPRECATED_MAC(10_0, 10_5);
+- (nullable NSArray *)fileExtensionsFromType:(NSString *)typeName API_DEPRECATED("", macos(10.0,10.5));
+- (nullable NSString *)typeFromFileExtension:(NSString *)fileNameExtensionOrHFSFileType API_DEPRECATED("", macos(10.0,10.5));
 
 /* Methods that were deprecated in Mac OS 10.4. See the comments above for information about when your overrides of them are still invoked, for backward binary compatibility.
 */
-- (nullable id)documentForFileName:(NSString *)fileName NS_DEPRECATED_MAC(10_0, 10_4);
-- (nullable NSArray *)fileNamesFromRunningOpenPanel NS_DEPRECATED_MAC(10_0, 10_4);
-- (nullable id)makeDocumentWithContentsOfFile:(NSString *)fileName ofType:(NSString *)type NS_DEPRECATED_MAC(10_0, 10_4);
-- (nullable id)makeDocumentWithContentsOfURL:(NSURL *)url ofType:(null_unspecified NSString *)type NS_DEPRECATED_MAC(10_0, 10_4);
-- (nullable id)makeUntitledDocumentOfType:(NSString *)type NS_DEPRECATED_MAC(10_0, 10_4);
-- (nullable id)openDocumentWithContentsOfFile:(NSString *)fileName display:(BOOL)display NS_DEPRECATED_MAC(10_0, 10_4);
-- (nullable id)openDocumentWithContentsOfURL:(NSURL *)url display:(BOOL)display NS_DEPRECATED_MAC(10_0, 10_4);
-- (nullable id)openUntitledDocumentOfType:(NSString*)type display:(BOOL)display NS_DEPRECATED_MAC(10_0, 10_4);
-- (void)setShouldCreateUI:(BOOL)flag NS_DEPRECATED_MAC(10_0, 10_4);
-- (BOOL)shouldCreateUI NS_DEPRECATED_MAC(10_0, 10_4);
+- (nullable id)documentForFileName:(NSString *)fileName API_DEPRECATED("", macos(10.0,10.4));
+- (nullable NSArray *)fileNamesFromRunningOpenPanel API_DEPRECATED("", macos(10.0,10.4));
+- (nullable id)makeDocumentWithContentsOfFile:(NSString *)fileName ofType:(NSString *)type API_DEPRECATED("", macos(10.0,10.4));
+- (nullable id)makeDocumentWithContentsOfURL:(NSURL *)url ofType:(null_unspecified NSString *)type API_DEPRECATED("", macos(10.0,10.4));
+- (nullable id)makeUntitledDocumentOfType:(NSString *)type API_DEPRECATED("", macos(10.0,10.4));
+- (nullable id)openDocumentWithContentsOfFile:(NSString *)fileName display:(BOOL)display API_DEPRECATED("", macos(10.0,10.4));
+- (nullable id)openDocumentWithContentsOfURL:(NSURL *)url display:(BOOL)display API_DEPRECATED("", macos(10.0,10.4));
+- (nullable id)openUntitledDocumentOfType:(NSString*)type display:(BOOL)display API_DEPRECATED("", macos(10.0,10.4));
+- (void)setShouldCreateUI:(BOOL)flag API_DEPRECATED("", macos(10.0,10.4));
+- (BOOL)shouldCreateUI API_DEPRECATED("", macos(10.0,10.4));
 
 @end
 
+API_UNAVAILABLE_END
 NS_ASSUME_NONNULL_END

@@ -1,5 +1,5 @@
 /*	NSLock.h
-	Copyright (c) 1994-2018, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2019, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -60,7 +60,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 
-NS_CLASS_AVAILABLE(10_5, 2_0)
+API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0))
 @interface NSCondition : NSObject <NSLocking> {
 @private
     void *_priv;

@@ -18,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
  @interface TKTokenKeychainItem
  @brief Base interface for propagation token's items into the keychain.
  */
-__OSX_AVAILABLE(10.12) __IOS_AVAILABLE(10.0) __TVOS_AVAILABLE(11.0) __WATCHOS_AVAILABLE(4.0)
+API_AVAILABLE(macos(10.12), ios(10.0), tvos(11.0), watchos(4.0))
 @interface TKTokenKeychainItem : NSObject
 
 /*! @brief Initializes item with objectID. */
@@ -44,7 +44,7 @@ __OSX_AVAILABLE(10.12) __IOS_AVAILABLE(10.0) __TVOS_AVAILABLE(11.0) __WATCHOS_AV
  @interface TKTokenKeychainCertificate
  @brief Interface for propagation token's certificates into the keychain.
  */
-__OSX_AVAILABLE(10.12) __IOS_AVAILABLE(10.0) __TVOS_AVAILABLE(11.0) __WATCHOS_AVAILABLE(4.0)
+API_AVAILABLE(macos(10.12), ios(10.0), tvos(11.0), watchos(4.0))
 @interface TKTokenKeychainCertificate : TKTokenKeychainItem
 
 /*!
@@ -64,7 +64,7 @@ __OSX_AVAILABLE(10.12) __IOS_AVAILABLE(10.0) __TVOS_AVAILABLE(11.0) __WATCHOS_AV
  @interface TKTokenKeychainKey
  @brief Interface for propagation token's keys into the keychain.
  */
-__OSX_AVAILABLE(10.12) __IOS_AVAILABLE(10.0) __TVOS_AVAILABLE(11.0) __WATCHOS_AVAILABLE(4.0)
+API_AVAILABLE(macos(10.12), ios(10.0), tvos(11.0), watchos(4.0))
 @interface TKTokenKeychainKey : TKTokenKeychainItem
 
 /*!
@@ -123,7 +123,7 @@ __OSX_AVAILABLE(10.12) __IOS_AVAILABLE(10.0) __TVOS_AVAILABLE(11.0) __WATCHOS_AV
 /*!
  @discussion Contains TKTokenKeychainItem instances (keys and certificates) which represent keychain state (i.e. set of items) of specific token.
  */
-__OSX_AVAILABLE(10.12) __IOS_AVAILABLE(10.0) __TVOS_AVAILABLE(11.0) __WATCHOS_AVAILABLE(4.0)
+API_AVAILABLE(macos(10.12), ios(10.0), tvos(11.0), watchos(4.0))
 @interface TKTokenKeychainContents : NSObject
 
 /*!

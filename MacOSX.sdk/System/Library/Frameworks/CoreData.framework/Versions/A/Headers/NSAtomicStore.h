@@ -1,7 +1,7 @@
 /*
     NSAtomicStore.h
     Core Data
-    Copyright (c) 2004-2018, Apple Inc.
+    Copyright (c) 2004-2019, Apple Inc.
     All rights reserved.
 */
 
@@ -23,15 +23,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 API_AVAILABLE(macosx(10.5),ios(3.0))
 @interface NSAtomicStore : NSPersistentStore {
-#if (!__OBJC2__)
-	@private
-    NSMutableDictionary *_nodeCache;
-    NSMutableDictionary *_entityCache;
-    NSMutableDictionary *_storeMetadata;
-    NSInteger _nextReference;
-	void *_reserved4;
-	void *_reserved5;
-#endif
 }
 
 // API method that may be overriden by subclasses for custom initialization

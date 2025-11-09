@@ -5,7 +5,7 @@
  
      Version:    ATS
  
-     Copyright:  � 2000-2012 by Apple Inc., all rights reserved.
+     Copyright:  (c) 2000-2019 by Apple Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -123,7 +123,9 @@ struct ATSFontFilter {
     ATSFontFamilyRef    fontFamilyFilter;
     ATSFontFamilyApplierFunction  fontFamilyApplierFunctionFilter;
     ATSFontApplierFunction  fontApplierFunctionFilter;
+#if ATS_LEGACY_API
     const FSRef *       fontFileRefFilter;
+#endif // ATS_LEGACY_API
   }                       filter;
 };
 typedef struct ATSFontFilter            ATSFontFilter;
@@ -289,6 +291,7 @@ ATSFontActivateFromFileSpecification(
 
 #endif  /* !__LP64__ */
 
+#if ATS_LEGACY_API
 /*
  *  ATSFontActivateFromFileReference()
  *  
@@ -342,6 +345,7 @@ ATSFontActivateFromFileReference(
   void *                 iRefCon,
   ATSOptionFlags         iOptions,
   ATSFontContainerRef *  oContainer) ATS_AVAILABLE_BUT_DEPRECATED_WITH_ADVICE(10_5, 10_8, "Use CTFontManagerRegisterFontsForURL() or CTFontManagerRegisterFontsForURLs()");
+#endif // ATS_LEGACY_API
 
 
 /*
@@ -384,6 +388,7 @@ ATSFontDeactivate(
   ATSOptionFlags        iOptions) ATS_AVAILABLE_BUT_DEPRECATED_WITH_ADVICE(10_0, 10_8, "Use CTFontManagerUnregisterFontsForURL() or CTFontManagerUnregisterFontsForURLs()");
 
 
+#if ATS_LEGACY_API
 /*
  *  ATSFontGetContainerFromFileReference()
  *  
@@ -434,6 +439,7 @@ ATSFontGetContainerFromFileReference(
   ATSFontContext         iContext,
   ATSOptionFlags         iOptions,
   ATSFontContainerRef *  oContainer) ATS_AVAILABLE_BUT_DEPRECATED_WITH_ADVICE(10_5, 10_8, "Use CTFontCopyAttribute() with kCTFontURLAttribute.");
+#endif // ATS_LEGACY_API
 
 
 /*
@@ -680,6 +686,7 @@ ATSFontFamilyGetName(
   CFStringRef *      oName) ATS_AVAILABLE_BUT_DEPRECATED_WITH_ADVICE(10_0, 10_8, "Use CTFontCopyFamilyName()");
 
 
+#if ATS_LEGACY_API
 /*
  *  ATSFontFamilyGetEncoding()
  *  
@@ -694,6 +701,7 @@ ATSFontFamilyGetName(
 extern TextEncoding 
 ATSFontFamilyGetEncoding(ATSFontFamilyRef iFamily) ATS_AVAILABLE_BUT_DEPRECATED_WITH_ADVICE(10_0, 10_8, "Use CTFontGetStringEncoding()");
 
+#endif // ATS_LEGACY_API
 
 /* ----------------------------------------------------------------------------------------- */
 /* Font                                                                                      */
@@ -1044,6 +1052,7 @@ ATSFontGetFileSpecification(
 
 #endif  /* !__LP64__ */
 
+#if ATS_LEGACY_API
 /*
  *  ATSFontGetFileReference()
  *  
@@ -1076,6 +1085,7 @@ extern OSStatus
 ATSFontGetFileReference(
   ATSFontRef   iFont,
   FSRef *      oFile) ATS_AVAILABLE_BUT_DEPRECATED_WITH_ADVICE(10_0, 10_8, "Use CTFontCopyAttribute() with kCTFontURLAttribute.");
+#endif // ATS_LEGACY_API
 
 
 

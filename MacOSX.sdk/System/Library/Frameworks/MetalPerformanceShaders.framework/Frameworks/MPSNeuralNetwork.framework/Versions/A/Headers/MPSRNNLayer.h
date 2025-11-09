@@ -29,9 +29,9 @@ typedef NS_ENUM(NSUInteger, MPSRNNSequenceDirection)
 #endif
 {
     /*! The input sequence is processed from index zero to array length minus one */
-    MPSRNNSequenceDirectionForward    MPS_ENUM_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0)) MPS_SWIFT_NAME(forward)  = 0,
+    MPSRNNSequenceDirectionForward    MPS_ENUM_AVAILABLE_STARTING( macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0)) MPS_SWIFT_NAME(forward)  = 0,
     /*! The input sequence is processed from index array length minus one to zero */
-    MPSRNNSequenceDirectionBackward  MPS_ENUM_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0)),
+    MPSRNNSequenceDirectionBackward  MPS_ENUM_AVAILABLE_STARTING( macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0)),
 }
 #if defined(DOXYGEN)
 MPSRNNSequenceDirection
@@ -49,11 +49,11 @@ typedef NS_ENUM(NSUInteger, MPSRNNBidirectionalCombineMode)
 #endif
 {
     /*! The two sequences are kept separate */
-    MPSRNNBidirectionalCombineModeNone    MPS_ENUM_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0)) MPS_SWIFT_NAME(none)  = 0,
+    MPSRNNBidirectionalCombineModeNone    MPS_ENUM_AVAILABLE_STARTING( macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0)) MPS_SWIFT_NAME(none)  = 0,
     /*! The two sequences are summed together to form a single output */
-    MPSRNNBidirectionalCombineModeAdd  MPS_ENUM_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0)),
+    MPSRNNBidirectionalCombineModeAdd  MPS_ENUM_AVAILABLE_STARTING( macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0)),
     /*! The two sequences are concatenated together along the feature channels to form a single output */
-    MPSRNNBidirectionalCombineModeConcatenate  MPS_ENUM_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0)),
+    MPSRNNBidirectionalCombineModeConcatenate  MPS_ENUM_AVAILABLE_STARTING( macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0)),
 }
 #if defined(DOXYGEN)
 MPSRNNBidirectionalCombineMode
@@ -72,7 +72,7 @@ MPSRNNBidirectionalCombineMode
  *  @discussion The MPSRNNDescriptor specifies a Recursive neural network block/layer descriptor.
  *
  */
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0))
 @interface MPSRNNDescriptor : NSObject
 
 
@@ -157,7 +157,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
  *
  *
  */
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0))
 @interface MPSRNNSingleGateDescriptor : MPSRNNDescriptor
 
 
@@ -182,7 +182,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
  */
 +(nonnull instancetype) createRNNSingleGateDescriptorWithInputFeatureChannels: (NSUInteger) inputFeatureChannels
                                                         outputFeatureChannels: (NSUInteger) outputFeatureChannels
-MPS_AVAILABLE_STARTING(macos(10.13), ios(11.0), tvos(11.0) );
+MPS_AVAILABLE_STARTING(macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0) );
 
 @end    /* MPSRNNSingleGateDescriptor */
 
@@ -242,7 +242,7 @@ MPS_AVAILABLE_STARTING(macos(10.13), ios(11.0), tvos(11.0) );
  *
  *
  */
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0))
 @interface MPSGRUDescriptor : MPSRNNDescriptor
 
 
@@ -317,7 +317,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
  */
 +(nonnull instancetype) createGRUDescriptorWithInputFeatureChannels: (NSUInteger) inputFeatureChannels
                                               outputFeatureChannels: (NSUInteger) outputFeatureChannels
-MPS_AVAILABLE_STARTING(macos(10.13), ios(11.0), tvos(11.0) );
+MPS_AVAILABLE_STARTING(macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0) );
 
 @end    /* MPSGRUDescriptor */
 
@@ -382,7 +382,7 @@ MPS_AVAILABLE_STARTING(macos(10.13), ios(11.0), tvos(11.0) );
  *
  *
  */
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0))
 @interface MPSLSTMDescriptor : MPSRNNDescriptor
 
 
@@ -517,7 +517,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
  */
 +(nonnull instancetype) createLSTMDescriptorWithInputFeatureChannels: (NSUInteger) inputFeatureChannels
                                                outputFeatureChannels: (NSUInteger) outputFeatureChannels
-MPS_AVAILABLE_STARTING(macos(10.13), ios(11.0), tvos(11.0) );
+MPS_AVAILABLE_STARTING(macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0) );
 
 @end    /* MPSNNLSTMDescriptor */
 
@@ -531,7 +531,7 @@ MPS_AVAILABLE_STARTING(macos(10.13), ios(11.0), tvos(11.0) );
  *  @discussion This class holds all the data that is passed from one sequence iteration of the image-based RNN layer (stack) to the next.
  */
 
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0))
 @interface  MPSRNNRecurrentImageState : MPSState
 
 /*!
@@ -575,7 +575,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
  *              and ultimately combining the two result sequences as desired with auxiliary functions.
  *
  */
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0))
 @interface  MPSRNNImageInferenceLayer : MPSCNNKernel
 
 
@@ -631,7 +631,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
 -(nonnull instancetype) initWithDevice: (nonnull id <MTLDevice>) device
                          rnnDescriptor: (nonnull const MPSRNNDescriptor*) rnnDescriptor
 NS_DESIGNATED_INITIALIZER
-MPS_AVAILABLE_STARTING(macos(10.13), ios(11.0), tvos(11.0));
+MPS_AVAILABLE_STARTING(macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0));
 
 /*!
  *  @abstract   Initializes a kernel that implements a stack of convolutional RNN layers
@@ -644,7 +644,7 @@ MPS_AVAILABLE_STARTING(macos(10.13), ios(11.0), tvos(11.0));
 -(nonnull instancetype) initWithDevice: (nonnull id <MTLDevice>) device
                         rnnDescriptors: (NSArray<const MPSRNNDescriptor*>  * __nonnull) rnnDescriptors
 NS_DESIGNATED_INITIALIZER
-MPS_AVAILABLE_STARTING(macos(10.13), ios(11.0), tvos(11.0));
+MPS_AVAILABLE_STARTING(macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0));
 
 
 /*
@@ -747,7 +747,7 @@ MPS_SWIFT_NAME( encodeBidirectionalSequence(commandBuffer:sourceSequence:destina
  */
 -(nullable instancetype) initWithCoder:(NSCoder * __nonnull)aDecoder
                                 device:(nonnull id <MTLDevice>) device NS_DESIGNATED_INITIALIZER
-MPS_AVAILABLE_STARTING(macos(10.13), ios(11.0), tvos(11.0));
+MPS_AVAILABLE_STARTING(macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0));
 
 
 /*!
@@ -775,7 +775,7 @@ MPS_AVAILABLE_STARTING(macos(10.13), ios(11.0), tvos(11.0));
  *  @dependency This depends on Metal.framework
  *  @discussion This class holds all the data that is passed from one sequence iteration of the matrix-based RNN layer to the next.
  */
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0))
 @interface  MPSRNNRecurrentMatrixState : MPSState
 /*!
  *  @abstract   Access the stored recurrent matrix data.
@@ -839,7 +839,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
  *              the input vectors as rows, y is the matrix containing the output vectors as rows and W is the weight matrix.
  *
  */
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0))
 @interface  MPSRNNMatrixInferenceLayer : MPSKernel
 
 
@@ -893,7 +893,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
 -(nonnull instancetype) initWithDevice: (nonnull id <MTLDevice>) device
                          rnnDescriptor: (nonnull const MPSRNNDescriptor*) rnnDescriptor
 NS_DESIGNATED_INITIALIZER
-MPS_AVAILABLE_STARTING(macos(10.13), ios(11.0), tvos(11.0));
+MPS_AVAILABLE_STARTING(macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0));
 
 /*!
  *  @abstract   Initializes a kernel that implements a stack of linear (fully connected) RNN layers
@@ -906,7 +906,7 @@ MPS_AVAILABLE_STARTING(macos(10.13), ios(11.0), tvos(11.0));
 -(nonnull instancetype) initWithDevice: (nonnull id <MTLDevice>) device
                         rnnDescriptors: (NSArray<const MPSRNNDescriptor*>  * __nonnull) rnnDescriptors
 NS_DESIGNATED_INITIALIZER
-MPS_AVAILABLE_STARTING(macos(10.13), ios(11.0), tvos(11.0));
+MPS_AVAILABLE_STARTING(macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0));
 
 
 /*
@@ -974,7 +974,7 @@ MPS_AVAILABLE_STARTING(macos(10.13), ios(11.0), tvos(11.0));
                      recurrentInputState:(MPSRNNRecurrentMatrixState * __nullable)recurrentInputState
                    recurrentOutputStates:(NSMutableArray<MPSRNNRecurrentMatrixState*>  * __nullable)recurrentOutputStates
 MPS_SWIFT_NAME( encodeSequence(commandBuffer:sourceMatrices:sourceOffsets:destinationMatrices:destinationOffsets:recurrentInputState:recurrentOutputStates:))
-MPS_AVAILABLE_STARTING(macos(10.14), ios(12.0), tvos(12.0));
+MPS_AVAILABLE_STARTING(macos(10.14), ios(12.0), macCatalyst(13.0), tvos(12.0));
 
 
 -( void )  encodeSequenceToCommandBuffer:(nonnull id<MTLCommandBuffer>)commandBuffer
@@ -1026,7 +1026,7 @@ MPS_SWIFT_NAME( encodeBidirectionalSequence(commandBuffer:sourceSequence:destina
  */
 -(nullable instancetype) initWithCoder:(NSCoder * __nonnull)aDecoder
                                 device:(nonnull id <MTLDevice>) device NS_DESIGNATED_INITIALIZER
-MPS_AVAILABLE_STARTING(macos(10.13), ios(11.0), tvos(11.0));
+MPS_AVAILABLE_STARTING(macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0));
 
 
 /*!
@@ -1053,7 +1053,7 @@ MPS_AVAILABLE_STARTING(macos(10.13), ios(11.0), tvos(11.0));
  *  @discussion This class holds the data that is passed from the forward pass needed in the backward pass.
  *
  */
-MPS_CLASS_AVAILABLE_STARTING( macos(10.14), ios(12.0), tvos(12.0))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.14), ios(12.0), macCatalyst(13.0), tvos(12.0))
 @interface  MPSRNNMatrixTrainingState : MPSState
 @end
 
@@ -1071,44 +1071,44 @@ typedef enum MPSRNNMatrixId
 typedef NS_ENUM(NSUInteger, MPSRNNMatrixId)
 #endif
 {
-    MPSRNNMatrixIdSingleGateInputWeights            MPS_ENUM_AVAILABLE_STARTING( macos(10.14), ios(12.0), tvos(12.0)) MPS_SWIFT_NAME(SingleGateInputWeights)  = 0,
-    MPSRNNMatrixIdSingleGateRecurrentWeights        MPS_ENUM_AVAILABLE_STARTING( macos(10.14), ios(12.0), tvos(12.0)),
-    MPSRNNMatrixIdSingleGateBiasTerms               MPS_ENUM_AVAILABLE_STARTING( macos(10.14), ios(12.0), tvos(12.0)),
+    MPSRNNMatrixIdSingleGateInputWeights            MPS_ENUM_AVAILABLE_STARTING( macos(10.14), ios(12.0), macCatalyst(13.0), tvos(12.0)) MPS_SWIFT_NAME(SingleGateInputWeights)  = 0,
+    MPSRNNMatrixIdSingleGateRecurrentWeights        MPS_ENUM_AVAILABLE_STARTING( macos(10.14), ios(12.0), macCatalyst(13.0), tvos(12.0)),
+    MPSRNNMatrixIdSingleGateBiasTerms               MPS_ENUM_AVAILABLE_STARTING( macos(10.14), ios(12.0), macCatalyst(13.0), tvos(12.0)),
 
 
-    MPSRNNMatrixIdLSTMInputGateInputWeights         MPS_ENUM_AVAILABLE_STARTING( macos(10.14), ios(12.0), tvos(12.0)),
-    MPSRNNMatrixIdLSTMInputGateRecurrentWeights     MPS_ENUM_AVAILABLE_STARTING( macos(10.14), ios(12.0), tvos(12.0)),
-    MPSRNNMatrixIdLSTMInputGateMemoryWeights        MPS_ENUM_AVAILABLE_STARTING( macos(10.14), ios(12.0), tvos(12.0)),
-    MPSRNNMatrixIdLSTMInputGateBiasTerms            MPS_ENUM_AVAILABLE_STARTING( macos(10.14), ios(12.0), tvos(12.0)),
+    MPSRNNMatrixIdLSTMInputGateInputWeights         MPS_ENUM_AVAILABLE_STARTING( macos(10.14), ios(12.0), macCatalyst(13.0), tvos(12.0)),
+    MPSRNNMatrixIdLSTMInputGateRecurrentWeights     MPS_ENUM_AVAILABLE_STARTING( macos(10.14), ios(12.0), macCatalyst(13.0), tvos(12.0)),
+    MPSRNNMatrixIdLSTMInputGateMemoryWeights        MPS_ENUM_AVAILABLE_STARTING( macos(10.14), ios(12.0), macCatalyst(13.0), tvos(12.0)),
+    MPSRNNMatrixIdLSTMInputGateBiasTerms            MPS_ENUM_AVAILABLE_STARTING( macos(10.14), ios(12.0), macCatalyst(13.0), tvos(12.0)),
 
-    MPSRNNMatrixIdLSTMForgetGateInputWeights         MPS_ENUM_AVAILABLE_STARTING( macos(10.14), ios(12.0), tvos(12.0)),
-    MPSRNNMatrixIdLSTMForgetGateRecurrentWeights     MPS_ENUM_AVAILABLE_STARTING( macos(10.14), ios(12.0), tvos(12.0)),
-    MPSRNNMatrixIdLSTMForgetGateMemoryWeights        MPS_ENUM_AVAILABLE_STARTING( macos(10.14), ios(12.0), tvos(12.0)),
-    MPSRNNMatrixIdLSTMForgetGateBiasTerms            MPS_ENUM_AVAILABLE_STARTING( macos(10.14), ios(12.0), tvos(12.0)),
+    MPSRNNMatrixIdLSTMForgetGateInputWeights         MPS_ENUM_AVAILABLE_STARTING( macos(10.14), ios(12.0), macCatalyst(13.0), tvos(12.0)),
+    MPSRNNMatrixIdLSTMForgetGateRecurrentWeights     MPS_ENUM_AVAILABLE_STARTING( macos(10.14), ios(12.0), macCatalyst(13.0), tvos(12.0)),
+    MPSRNNMatrixIdLSTMForgetGateMemoryWeights        MPS_ENUM_AVAILABLE_STARTING( macos(10.14), ios(12.0), macCatalyst(13.0), tvos(12.0)),
+    MPSRNNMatrixIdLSTMForgetGateBiasTerms            MPS_ENUM_AVAILABLE_STARTING( macos(10.14), ios(12.0), macCatalyst(13.0), tvos(12.0)),
 
-    MPSRNNMatrixIdLSTMMemoryGateInputWeights         MPS_ENUM_AVAILABLE_STARTING( macos(10.14), ios(12.0), tvos(12.0)),
-    MPSRNNMatrixIdLSTMMemoryGateRecurrentWeights     MPS_ENUM_AVAILABLE_STARTING( macos(10.14), ios(12.0), tvos(12.0)),
-    MPSRNNMatrixIdLSTMMemoryGateMemoryWeights        MPS_ENUM_AVAILABLE_STARTING( macos(10.14), ios(12.0), tvos(12.0)),
-    MPSRNNMatrixIdLSTMMemoryGateBiasTerms            MPS_ENUM_AVAILABLE_STARTING( macos(10.14), ios(12.0), tvos(12.0)),
+    MPSRNNMatrixIdLSTMMemoryGateInputWeights         MPS_ENUM_AVAILABLE_STARTING( macos(10.14), ios(12.0), macCatalyst(13.0), tvos(12.0)),
+    MPSRNNMatrixIdLSTMMemoryGateRecurrentWeights     MPS_ENUM_AVAILABLE_STARTING( macos(10.14), ios(12.0), macCatalyst(13.0), tvos(12.0)),
+    MPSRNNMatrixIdLSTMMemoryGateMemoryWeights        MPS_ENUM_AVAILABLE_STARTING( macos(10.14), ios(12.0), macCatalyst(13.0), tvos(12.0)),
+    MPSRNNMatrixIdLSTMMemoryGateBiasTerms            MPS_ENUM_AVAILABLE_STARTING( macos(10.14), ios(12.0), macCatalyst(13.0), tvos(12.0)),
 
-    MPSRNNMatrixIdLSTMOutputGateInputWeights         MPS_ENUM_AVAILABLE_STARTING( macos(10.14), ios(12.0), tvos(12.0)),
-    MPSRNNMatrixIdLSTMOutputGateRecurrentWeights     MPS_ENUM_AVAILABLE_STARTING( macos(10.14), ios(12.0), tvos(12.0)),
-    MPSRNNMatrixIdLSTMOutputGateMemoryWeights        MPS_ENUM_AVAILABLE_STARTING( macos(10.14), ios(12.0), tvos(12.0)),
-    MPSRNNMatrixIdLSTMOutputGateBiasTerms            MPS_ENUM_AVAILABLE_STARTING( macos(10.14), ios(12.0), tvos(12.0)),
+    MPSRNNMatrixIdLSTMOutputGateInputWeights         MPS_ENUM_AVAILABLE_STARTING( macos(10.14), ios(12.0), macCatalyst(13.0), tvos(12.0)),
+    MPSRNNMatrixIdLSTMOutputGateRecurrentWeights     MPS_ENUM_AVAILABLE_STARTING( macos(10.14), ios(12.0), macCatalyst(13.0), tvos(12.0)),
+    MPSRNNMatrixIdLSTMOutputGateMemoryWeights        MPS_ENUM_AVAILABLE_STARTING( macos(10.14), ios(12.0), macCatalyst(13.0), tvos(12.0)),
+    MPSRNNMatrixIdLSTMOutputGateBiasTerms            MPS_ENUM_AVAILABLE_STARTING( macos(10.14), ios(12.0), macCatalyst(13.0), tvos(12.0)),
 
 
-    MPSRNNMatrixIdGRUInputGateInputWeights            MPS_ENUM_AVAILABLE_STARTING( macos(10.14), ios(12.0), tvos(12.0)),
-    MPSRNNMatrixIdGRUInputGateRecurrentWeights        MPS_ENUM_AVAILABLE_STARTING( macos(10.14), ios(12.0), tvos(12.0)),
-    MPSRNNMatrixIdGRUInputGateBiasTerms               MPS_ENUM_AVAILABLE_STARTING( macos(10.14), ios(12.0), tvos(12.0)),
+    MPSRNNMatrixIdGRUInputGateInputWeights            MPS_ENUM_AVAILABLE_STARTING( macos(10.14), ios(12.0), macCatalyst(13.0), tvos(12.0)),
+    MPSRNNMatrixIdGRUInputGateRecurrentWeights        MPS_ENUM_AVAILABLE_STARTING( macos(10.14), ios(12.0), macCatalyst(13.0), tvos(12.0)),
+    MPSRNNMatrixIdGRUInputGateBiasTerms               MPS_ENUM_AVAILABLE_STARTING( macos(10.14), ios(12.0), macCatalyst(13.0), tvos(12.0)),
 
-    MPSRNNMatrixIdGRURecurrentGateInputWeights        MPS_ENUM_AVAILABLE_STARTING( macos(10.14), ios(12.0), tvos(12.0)),
-    MPSRNNMatrixIdGRURecurrentGateRecurrentWeights    MPS_ENUM_AVAILABLE_STARTING( macos(10.14), ios(12.0), tvos(12.0)),
-    MPSRNNMatrixIdGRURecurrentGateBiasTerms           MPS_ENUM_AVAILABLE_STARTING( macos(10.14), ios(12.0), tvos(12.0)),
+    MPSRNNMatrixIdGRURecurrentGateInputWeights        MPS_ENUM_AVAILABLE_STARTING( macos(10.14), ios(12.0), macCatalyst(13.0), tvos(12.0)),
+    MPSRNNMatrixIdGRURecurrentGateRecurrentWeights    MPS_ENUM_AVAILABLE_STARTING( macos(10.14), ios(12.0), macCatalyst(13.0), tvos(12.0)),
+    MPSRNNMatrixIdGRURecurrentGateBiasTerms           MPS_ENUM_AVAILABLE_STARTING( macos(10.14), ios(12.0), macCatalyst(13.0), tvos(12.0)),
 
-    MPSRNNMatrixIdGRUOutputGateInputWeights            MPS_ENUM_AVAILABLE_STARTING( macos(10.14), ios(12.0), tvos(12.0)),
-    MPSRNNMatrixIdGRUOutputGateRecurrentWeights        MPS_ENUM_AVAILABLE_STARTING( macos(10.14), ios(12.0), tvos(12.0)),
-    MPSRNNMatrixIdGRUOutputGateInputGateWeights        MPS_ENUM_AVAILABLE_STARTING( macos(10.14), ios(12.0), tvos(12.0)),
-    MPSRNNMatrixIdGRUOutputGateBiasTerms               MPS_ENUM_AVAILABLE_STARTING( macos(10.14), ios(12.0), tvos(12.0)),
+    MPSRNNMatrixIdGRUOutputGateInputWeights            MPS_ENUM_AVAILABLE_STARTING( macos(10.14), ios(12.0), macCatalyst(13.0), tvos(12.0)),
+    MPSRNNMatrixIdGRUOutputGateRecurrentWeights        MPS_ENUM_AVAILABLE_STARTING( macos(10.14), ios(12.0), macCatalyst(13.0), tvos(12.0)),
+    MPSRNNMatrixIdGRUOutputGateInputGateWeights        MPS_ENUM_AVAILABLE_STARTING( macos(10.14), ios(12.0), macCatalyst(13.0), tvos(12.0)),
+    MPSRNNMatrixIdGRUOutputGateBiasTerms               MPS_ENUM_AVAILABLE_STARTING( macos(10.14), ios(12.0), macCatalyst(13.0), tvos(12.0)),
 
     MPSRNNMatrixId_count // Do not use - auxiliary enum value that gives number of ids.
 
@@ -1155,7 +1155,7 @@ MPSRNNMatrixId
  *              the input vectors as rows, y is the matrix containing the output vectors as rows and W is the weight matrix.
  *
  */
-MPS_CLASS_AVAILABLE_STARTING( macos(10.14), ios(12.0), tvos(12.0))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.14), ios(12.0), macCatalyst(13.0), tvos(12.0))
 @interface  MPSRNNMatrixTrainingLayer : MPSKernel
 
 
@@ -1219,7 +1219,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.14), ios(12.0), tvos(12.0))
                          rnnDescriptor: (nonnull const MPSRNNDescriptor*) rnnDescriptor
                       trainableWeights: (NSMutableArray<MPSMatrix*>  * __nonnull)trainableWeights
 NS_DESIGNATED_INITIALIZER
-MPS_AVAILABLE_STARTING(macos(10.14), ios(12.0), tvos(12.0));
+MPS_AVAILABLE_STARTING(macos(10.14), ios(12.0), macCatalyst(13.0), tvos(12.0));
 
 
 /*!
@@ -1233,7 +1233,7 @@ MPS_AVAILABLE_STARTING(macos(10.14), ios(12.0), tvos(12.0));
  */
 -(void) createWeightGradientMatrices: (NSMutableArray<MPSMatrix*>  * __nonnull) matricesOut
                             dataType: (MPSDataType) dataType
-MPS_AVAILABLE_STARTING(macos(10.14), ios(12.0), tvos(12.0));
+MPS_AVAILABLE_STARTING(macos(10.14), ios(12.0), macCatalyst(13.0), tvos(12.0));
 
 /*!
  *  @abstract   As @ref createWeightGradientMatrices, but the matrices will be temporary with readCount = 1, which means that they
@@ -1246,7 +1246,7 @@ MPS_AVAILABLE_STARTING(macos(10.14), ios(12.0), tvos(12.0));
 -(void) createTemporaryWeightGradientMatrices: (NSMutableArray<MPSMatrix*>  * __nonnull) matricesOut
                                      dataType: (MPSDataType) dataType
                                 commandBuffer: (nonnull id<MTLCommandBuffer>) commandBuffer
-MPS_AVAILABLE_STARTING(macos(10.14), ios(12.0), tvos(12.0));
+MPS_AVAILABLE_STARTING(macos(10.14), ios(12.0), macCatalyst(13.0), tvos(12.0));
 
 
 /*!
@@ -1256,7 +1256,7 @@ MPS_AVAILABLE_STARTING(macos(10.14), ios(12.0), tvos(12.0));
  *  @param      matricesOut                 An array where the newly created matrices will be stored, will be initialized to zero.
  */
 -(void) createWeightMatrices: (NSMutableArray<MPSMatrix*>  * __nonnull) matricesOut
-MPS_AVAILABLE_STARTING(macos(10.14), ios(12.0), tvos(12.0));
+MPS_AVAILABLE_STARTING(macos(10.14), ios(12.0), macCatalyst(13.0), tvos(12.0));
 
 
 /*
@@ -1435,7 +1435,7 @@ MPS_SWIFT_NAME( encodeGradientSequence(commandBuffer:forwardSources:sourceGradie
  */
 -(nullable instancetype) initWithCoder:(NSCoder * __nonnull)aDecoder
                                 device:(nonnull id <MTLDevice>) device NS_DESIGNATED_INITIALIZER
-MPS_AVAILABLE_STARTING(macos(10.13), ios(11.0), tvos(11.0));
+MPS_AVAILABLE_STARTING(macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0));
 
 
 /*!

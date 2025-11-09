@@ -46,7 +46,7 @@ typedef NS_ENUM(NSUInteger, AVAudioCommonFormat) {
 	
 		Instances of this class are immutable.
 */
-OS_EXPORT API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0))
+API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0))
 @interface AVAudioFormat : NSObject <NSSecureCoding> {
 @private
 	AudioStreamBasicDescription _asbd;

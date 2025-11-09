@@ -1,12 +1,11 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: F15D0996-F620-30B8-A5DF-D2FEDCD80A63' ]
+uuids:           [ 'x86_64: 1B9E7C50-2E49-3C58-8D8E-F4EF31332E71' ]
 platform:        macosx
-install-name:    /System/Library/Frameworks/PreferencePanes.framework/Versions/A/PreferencePanes
-objc-constraint: none
+install-name:    '/System/Library/Frameworks/PreferencePanes.framework/Versions/A/PreferencePanes'
 exports:         
   - archs:           [ x86_64 ]
-    symbols:         [ _NSPrefPaneHelpMenuAnchorKey, _NSPrefPaneHelpMenuInfoPListKey, 
+    symbols:         [ _LegacyPreferencePaneMain, _NSPrefPaneHelpMenuAnchorKey, _NSPrefPaneHelpMenuInfoPListKey, 
                        _NSPrefPaneHelpMenuTitleKey, _NSPrefPaneSupportsAutoLayout, 
                        _NSPreferencePaneCancelUnselectNotification, _NSPreferencePaneDidCrashNotification, 
                        _NSPreferencePaneDidFinishBackgroundTaskNotification, _NSPreferencePaneDidStartBackgroundTaskNotification, 
@@ -23,7 +22,8 @@ exports:
                        NSPrefCrossFadeWindow, NSPrefCrossFadeWindowMoveHelper, NSPrefPaneAnchor, 
                        NSPrefPaneBundle, NSPrefPaneSearchCenter, NSPrefPaneUtils, 
                        NSPrefPanesCenter, NSPrefRemoteViewService, NSPrefTabsController, 
-                       NSPreference, NSPreferencePane, NSProxyPreferencePane, PreferencePaneDispatch, 
+                       NSPreference, NSPreferencePane, NSProxyLegacyPreferencePane, 
+                       NSProxyPreferencePane, NSVBProxyPreferencePane, PreferencePaneDispatch, 
                        PreferencePaneListenerDelegate, _NSPrefCrossFadeWindowPlaceHolder ]
     objc-ivars:      [ AddRemoveView.mActionPopupCell, AddRemoveView.mAddAction, 
                        AddRemoveView.mAddRemoveControl, AddRemoveView.mDeleteAction, 
@@ -63,6 +63,6 @@ exports:
                        NSPrefTabsController.parentLayout, NSPrefTabsController.tabView, 
                        NSPreference._isDirty, NSPreference._isEditable, NSPreference._prefTabsController, 
                        NSPreference._prefs, NSPreference._relevantDomains, PreferencePaneDispatch._connection, 
-                       PreferencePaneDispatch._prefPaneObject, PreferencePaneDispatch._replyToShouldUnselectBlock, 
-                       PreferencePaneDispatch._savedReplyToShouldUnselect ]
+                       PreferencePaneDispatch._legacyPreferencePanePath, PreferencePaneDispatch._prefPaneObject, 
+                       PreferencePaneDispatch._replyToShouldUnselectBlock, PreferencePaneDispatch._savedReplyToShouldUnselect ]
 ...

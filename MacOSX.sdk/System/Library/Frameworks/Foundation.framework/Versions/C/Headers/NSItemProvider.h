@@ -1,5 +1,5 @@
 /*	NSItemProvider.h
-        Copyright (c) 2013-2018, Apple Inc. All rights reserved.
+        Copyright (c) 2013-2019, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSArray.h>
@@ -71,7 +71,7 @@ typedef void (^NSItemProviderLoadHandler)(__null_unspecified NSItemProviderCompl
 
 
 // An NSItemProvider is a high level abstraction for an item supporting multiple representations.
-NS_CLASS_AVAILABLE(10_10, 8_0)
+API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0))
 @interface NSItemProvider : NSObject <NSCopying>
 
 #pragma mark - Binary interface

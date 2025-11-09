@@ -3,7 +3,7 @@
  
 	Framework:  AVFoundation
  
-	Copyright 2010-2015 Apple Inc. All rights reserved.
+	Copyright 2010-2018 Apple Inc. All rights reserved.
  
  */
 
@@ -30,13 +30,13 @@ NS_ASSUME_NONNULL_BEGIN
  whether the content is authorized before proceeding.
  */
 typedef NS_ENUM(NSInteger, AVContentAuthorizationStatus){
-	AVContentAuthorizationUnknown,
-	AVContentAuthorizationCompleted,
-	AVContentAuthorizationCancelled,
-	AVContentAuthorizationTimedOut,
-	AVContentAuthorizationBusy,
-	AVContentAuthorizationNotAvailable,
-	AVContentAuthorizationNotPossible,
+	AVContentAuthorizationUnknown = 0,
+	AVContentAuthorizationCompleted = 1,
+	AVContentAuthorizationCancelled = 2,
+	AVContentAuthorizationTimedOut = 3,
+	AVContentAuthorizationBusy = 4,
+	AVContentAuthorizationNotAvailable = 5,
+	AVContentAuthorizationNotPossible = 6,
 };
 
 #endif // (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE))
@@ -54,7 +54,7 @@ typedef NS_ENUM(NSInteger, AVContentAuthorizationStatus){
  This property reports whether or not authorization is required for the receiver's content to be played.  If it does not require authorization, then none of the other
  methods or properties in the AVPlayerItemProtectedContent category apply (though they will return sensible values where possible). This value is NOT key-value observable.
  */
-@property (nonatomic, readonly, getter=isAuthorizationRequiredForPlayback) BOOL authorizationRequiredForPlayback NS_AVAILABLE(10_7, 4_2);
+@property (nonatomic, readonly, getter=isAuthorizationRequiredForPlayback) BOOL authorizationRequiredForPlayback API_AVAILABLE(macos(10.7), ios(4.2), tvos(9.0)) API_UNAVAILABLE(watchos);
 
 /*!
  @property		applicationAuthorizedForPlayback
@@ -65,7 +65,7 @@ typedef NS_ENUM(NSInteger, AVContentAuthorizationStatus){
  Also, unlike content authorization, application authorization is not dependent on user credentials (i.e. if applicationAuthorizedForPlayback is NO, there are no means to obtain authorization).
  This value is NOT key-value observable.
  */
-@property (nonatomic, readonly, getter=isApplicationAuthorizedForPlayback) BOOL applicationAuthorizedForPlayback NS_AVAILABLE(10_7, 4_2);
+@property (nonatomic, readonly, getter=isApplicationAuthorizedForPlayback) BOOL applicationAuthorizedForPlayback API_AVAILABLE(macos(10.7), ios(4.2), tvos(9.0)) API_UNAVAILABLE(watchos);
 
 /*!
  @property		contentAuthorizedForPlayback
@@ -75,7 +75,7 @@ typedef NS_ENUM(NSInteger, AVContentAuthorizationStatus){
  Note that content authorization is independent of application authorization (see applicationAuthorizedForPlayback) and that both must be 
  granted in order for an application to be allowed to play protected content. This value is NOT key-value observable.
  */
-@property (nonatomic, readonly, getter=isContentAuthorizedForPlayback) BOOL contentAuthorizedForPlayback NS_AVAILABLE(10_7, 4_2);
+@property (nonatomic, readonly, getter=isContentAuthorizedForPlayback) BOOL contentAuthorizedForPlayback API_AVAILABLE(macos(10.7), ios(4.2), tvos(9.0)) API_UNAVAILABLE(watchos);
 
 #if (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE))
 
@@ -92,7 +92,7 @@ typedef NS_ENUM(NSInteger, AVContentAuthorizationStatus){
  @param			timoutInterval	The maximum amount of time to wait for the user to authorize the content in seconds before calling the handler block with a timeout result.
  @param			handler			Block to be called upon completion.
  */
-- (void)requestContentAuthorizationAsynchronouslyWithTimeoutInterval:(NSTimeInterval)timeoutInterval completionHandler:(void (^)(void))handler NS_AVAILABLE(10_7, NA);
+- (void)requestContentAuthorizationAsynchronouslyWithTimeoutInterval:(NSTimeInterval)timeoutInterval completionHandler:(void (^)(void))handler API_AVAILABLE(macos(10.7)) API_UNAVAILABLE(ios, tvos, watchos);
 
 /*!
  @method		cancelContentAuthorizationRequest
@@ -101,7 +101,7 @@ typedef NS_ENUM(NSInteger, AVContentAuthorizationStatus){
  Calling this method while a content authorization request is pending will cause that request to be cancelled and its completion handler to be invoked
  with a status of AVContentAuthorizationCancelled.  This call does not block.
  */
-- (void)cancelContentAuthorizationRequest NS_AVAILABLE(10_7, NA);
+- (void)cancelContentAuthorizationRequest API_AVAILABLE(macos(10.7)) API_UNAVAILABLE(ios, tvos, watchos);
 
 /*!
  @property		contentAuthorizationRequestStatus
@@ -111,7 +111,7 @@ typedef NS_ENUM(NSInteger, AVContentAuthorizationStatus){
  The value will be AVContentAuthorizationUnknown before the first call and between the time a request call is made and just prior to the completion handler being executed
  (i.e. it is safe to query this property from the completion handler). This value is NOT key-value observable.
  */
-@property (nonatomic, readonly) AVContentAuthorizationStatus contentAuthorizationRequestStatus NS_AVAILABLE(10_7, NA);
+@property (nonatomic, readonly) AVContentAuthorizationStatus contentAuthorizationRequestStatus API_AVAILABLE(macos(10.7)) API_UNAVAILABLE(ios, tvos, watchos);
 
 #endif // (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE))
 

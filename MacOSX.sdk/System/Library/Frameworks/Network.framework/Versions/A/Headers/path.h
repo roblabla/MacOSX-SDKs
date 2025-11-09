@@ -2,11 +2,15 @@
 //  path.h
 //  Network
 //
-//  Copyright (c) 2017-2018 Apple Inc. All rights reserved.
+//  Copyright (c) 2017-2019 Apple Inc. All rights reserved.
 //
 
 #ifndef __NW_PATH_H__
 #define __NW_PATH_H__
+
+#ifndef __NW_INDIRECT__
+#warning "Please include <Network/Network.h> instead of this file directly."
+#endif // __NW_INDIRECT__
 
 #include <Network/endpoint.h>
 #include <Network/interface.h>
@@ -137,6 +141,24 @@ bool
 nw_path_is_expensive(nw_path_t path);
 
 /*!
+ * @function nw_path_is_constrained
+ *
+ * @abstract
+ *		Checks if the path uses any network interfaces that are considered constrained
+ *		to the user.
+ *
+ * @param path
+ *		The path object to check.
+ *
+ * @result
+ *		Returns true if the path uses any network interface that is considered constrained,
+ *		false otherwise.
+ */
+API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0))
+bool
+nw_path_is_constrained(nw_path_t path);
+
+/*!
  * @function nw_path_has_ipv4
  *
  * @abstract
@@ -242,6 +264,31 @@ nw_path_copy_effective_local_endpoint(nw_path_t path);
 API_AVAILABLE(macos(10.14), ios(12.0), watchos(5.0), tvos(12.0))
 NW_RETURNS_RETAINED _Nullable nw_endpoint_t
 nw_path_copy_effective_remote_endpoint(nw_path_t path);
+
+#ifdef __BLOCKS__
+
+typedef bool (^nw_path_enumerate_gateways_block_t)(nw_endpoint_t gateway);
+
+/*!
+ * @function nw_path_enumerate_gateways
+ *
+ * @abstract
+ *		List the IP addresses of the routers acting as the gateways for the path.
+ *
+ * @param path
+ *		The path object to check.
+ *
+ * @param enumerate_block
+ *		A block that will return the gateways associated with the path. Returning
+ *		true from the block will continue to enumerate, and returning false will stop
+ *		enumerating.
+ */
+API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0))
+void
+nw_path_enumerate_gateways(nw_path_t path,
+						   NW_NOESCAPE nw_path_enumerate_gateways_block_t enumerate_block);
+
+#endif // __BLOCKS__
 
 NW_ASSUME_NONNULL_END
 

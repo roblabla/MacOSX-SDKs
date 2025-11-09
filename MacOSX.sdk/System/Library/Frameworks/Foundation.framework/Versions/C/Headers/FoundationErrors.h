@@ -1,5 +1,5 @@
 /*	FoundationErrors.h
-	Copyright (c) 2004-2018, Apple Inc. All rights reserved.
+	Copyright (c) 2004-2019, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -30,8 +30,8 @@ NS_ERROR_ENUM(NSCocoaErrorDomain) {
     NSFileWriteVolumeReadOnlyError API_AVAILABLE(macos(10.6), ios(4.0), watchos(2.0), tvos(9.0)) = 642,      // Write error (readonly volume)
 
     // NSFileManager unmount errors
-    NSFileManagerUnmountUnknownError NS_ENUM_AVAILABLE(10_11, NA) = 768,    // The volume could not be unmounted (reason unknown)
-    NSFileManagerUnmountBusyError NS_ENUM_AVAILABLE(10_11, NA) = 769,       // The volume could not be unmounted because it is in use
+    NSFileManagerUnmountUnknownError API_AVAILABLE(macos(10.11)) API_UNAVAILABLE(ios, watchos, tvos) = 768,    // The volume could not be unmounted (reason unknown)
+    NSFileManagerUnmountBusyError API_AVAILABLE(macos(10.11)) API_UNAVAILABLE(ios, watchos, tvos) = 769,       // The volume could not be unmounted because it is in use
 
     // Other errors
     NSKeyValueValidationError = 1024,                                       // KVC validation error
@@ -99,9 +99,9 @@ NS_ERROR_ENUM(NSCocoaErrorDomain) {
     NSBundleErrorMinimum API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0)) = 4992,
     NSBundleErrorMaximum API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0)) = 5119,
     
-    NSBundleOnDemandResourceOutOfSpaceError NS_ENUM_AVAILABLE(NA, 9_0) = 4992, // There was not enough space available to download the requested On Demand Resources.
-    NSBundleOnDemandResourceExceededMaximumSizeError NS_ENUM_AVAILABLE(NA, 9_0) = 4993, // The application exceeded the amount of On Demand Resources content in use at one time
-    NSBundleOnDemandResourceInvalidTagError NS_ENUM_AVAILABLE(NA, 9_0) = 4994, // The application specified a tag which the system could not find in the application tag manifest
+    NSBundleOnDemandResourceOutOfSpaceError API_AVAILABLE(ios(9.0), watchos(2.0), tvos(9.0)) API_UNAVAILABLE(macos) = 4992, // There was not enough space available to download the requested On Demand Resources.
+    NSBundleOnDemandResourceExceededMaximumSizeError API_AVAILABLE(ios(9.0), watchos(2.0), tvos(9.0)) API_UNAVAILABLE(macos) = 4993, // The application exceeded the amount of On Demand Resources content in use at one time
+    NSBundleOnDemandResourceInvalidTagError API_AVAILABLE(ios(9.0), watchos(2.0), tvos(9.0)) API_UNAVAILABLE(macos) = 4994, // The application specified a tag which the system could not find in the application tag manifest
     
     NSCloudSharingNetworkFailureError API_AVAILABLE(macosx(10.12), ios(10.0)) API_UNAVAILABLE(watchos, tvos) = 5120,        // Sharing failed due to a network failure.
     NSCloudSharingQuotaExceededError API_AVAILABLE(macosx(10.12), ios(10.0)) API_UNAVAILABLE(watchos, tvos) = 5121,         // The user doesn't have enough storage space available to share the requested items.
@@ -112,6 +112,12 @@ NS_ERROR_ENUM(NSCocoaErrorDomain) {
     
     NSCloudSharingErrorMinimum API_AVAILABLE(macosx(10.12), ios(10.0)) API_UNAVAILABLE(watchos, tvos) = 5120,
     NSCloudSharingErrorMaximum API_AVAILABLE(macosx(10.12), ios(10.0)) API_UNAVAILABLE(watchos, tvos) = 5375,
+    
+    NSCompressionFailedError API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0)) = 5376,
+    NSDecompressionFailedError API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0)) = 5377,
+    
+    NSCompressionErrorMinimum API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0)) = 5376,
+    NSCompressionErrorMaximum API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0)) = 5503,
 
 };
 

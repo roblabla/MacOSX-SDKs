@@ -49,6 +49,7 @@ CF_ASSUME_NONNULL_BEGIN
 /* ======================================================================================================== */
 
 CF_ENUM(OSStatus) {
+  kLSNo32BitEnvironmentErr      = -10386, /* i386 is no longer supported*/
   kLSAppInTrashErr              = -10660, /* The app cannot be run when inside a Trash folder*/
   kLSExecutableIncorrectFormat  = -10661, /* No compatible executable was found*/
   kLSAttributeNotFoundErr       = -10662, /* An item attribute value could not be found with the specified name*/
@@ -142,7 +143,7 @@ extern __nullable CFURLRef
 LSCopyDefaultApplicationURLForURL(
   CFURLRef                           inURL,
   LSRolesMask                        inRoleMask,
-  __nullable CFErrorRef *__nullable  outError)                       __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_NA);
+  __nullable CFErrorRef *__nullable  outError)                       API_AVAILABLE( macos(10.10) ) API_UNAVAILABLE( ios, tvos, watchos );
 	
 	
 	
@@ -183,7 +184,7 @@ extern __nullable CFURLRef
 LSCopyDefaultApplicationURLForContentType(
   CFStringRef                        inContentType,
   LSRolesMask                        inRoleMask,
-  __nullable CFErrorRef *__nullable  outError)                       __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_NA);
+  __nullable CFErrorRef *__nullable  outError)                       API_AVAILABLE( macos(10.10) ) API_UNAVAILABLE( ios, tvos, watchos );
 	
 	
 	
@@ -220,7 +221,7 @@ LSCopyDefaultApplicationURLForContentType(
 extern __nullable CFArrayRef
 LSCopyApplicationURLsForBundleIdentifier(
   CFStringRef                        inBundleIdentifier,
-  __nullable CFErrorRef *__nullable  outError)                       __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_NA);
+  __nullable CFErrorRef *__nullable  outError)                       API_AVAILABLE( macos(10.10) ) API_UNAVAILABLE( ios, tvos, watchos );
 	
 	
 	
@@ -266,7 +267,7 @@ LSCopyApplicationURLsForBundleIdentifier(
 extern __nullable CFArrayRef
 LSCopyApplicationURLsForURL(
   CFURLRef      inURL,
-  LSRolesMask   inRoleMask)                                          __OSX_AVAILABLE_STARTING(__MAC_10_3, __IPHONE_NA);
+  LSRolesMask   inRoleMask)                                          API_AVAILABLE( macos(10.3) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 	
 	
@@ -314,7 +315,7 @@ LSCanURLAcceptURL(
   CFURLRef            inTargetURL,
   LSRolesMask         inRoleMask,
   LSAcceptanceFlags   inFlags,
-  Boolean *           outAcceptsItem)                                __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  Boolean *           outAcceptsItem)                                API_AVAILABLE( macos(10.0) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 
@@ -354,7 +355,7 @@ LSCanURLAcceptURL(
 extern OSStatus 
 LSRegisterURL(
   CFURLRef   inURL,
-  Boolean    inUpdate)                                               __OSX_AVAILABLE_STARTING(__MAC_10_3, __IPHONE_4_0);
+  Boolean    inUpdate)                                               API_AVAILABLE( ios(4.0), macos(10.3), tvos(9.0), watchos(1.0) );
 
 
 
@@ -384,7 +385,7 @@ LSRegisterURL(
 extern __nullable CFStringRef
 LSCopyDefaultRoleHandlerForContentType(
   CFStringRef   inContentType,
-  LSRolesMask   inRole)                                              __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+  LSRolesMask   inRole)                                              API_AVAILABLE( ios(4.0), macos(10.4), tvos(9.0), watchos(1.0) );
 
 
 
@@ -412,7 +413,7 @@ LSCopyDefaultRoleHandlerForContentType(
 extern __nullable CFArrayRef
 LSCopyAllRoleHandlersForContentType(
   CFStringRef   inContentType,
-  LSRolesMask   inRole)                                              __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
+  LSRolesMask   inRole)                                              API_AVAILABLE( macos(10.4) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 
@@ -439,7 +440,7 @@ extern OSStatus
 LSSetDefaultRoleHandlerForContentType(
   CFStringRef   inContentType,
   LSRolesMask   inRole,
-  CFStringRef   inHandlerBundleID)                                   __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+  CFStringRef   inHandlerBundleID)                                   API_AVAILABLE( ios(4.0), macos(10.4), tvos(9.0), watchos(1.0) );
 
 
 
@@ -462,7 +463,7 @@ LSSetDefaultRoleHandlerForContentType(
  *    Non-Carbon CFM:   not available
  */
 extern __nullable CFStringRef
-LSCopyDefaultHandlerForURLScheme(CFStringRef inURLScheme)            __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+LSCopyDefaultHandlerForURLScheme(CFStringRef inURLScheme)            API_DEPRECATED("Use LSCopyDefaultApplicationURLForURL() instead.", macos(10.4, 10.15)) API_UNAVAILABLE(ios, watchos, tvos);
 
 
 
@@ -487,7 +488,7 @@ LSCopyDefaultHandlerForURLScheme(CFStringRef inURLScheme)            __OSX_AVAIL
  *    Non-Carbon CFM:   not available
  */
 extern __nullable CFArrayRef
-LSCopyAllHandlersForURLScheme(CFStringRef inURLScheme)               __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+LSCopyAllHandlersForURLScheme(CFStringRef inURLScheme)               API_DEPRECATED("Use LSCopyApplicationURLsForURL() instead.", macos(10.4, 10.15)) API_UNAVAILABLE(ios, watchos, tvos);
 
 
 
@@ -512,7 +513,7 @@ LSCopyAllHandlersForURLScheme(CFStringRef inURLScheme)               __OSX_AVAIL
 extern OSStatus 
 LSSetDefaultHandlerForURLScheme(
   CFStringRef   inURLScheme,
-  CFStringRef   inHandlerBundleID)                            __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+  CFStringRef   inHandlerBundleID)                            API_AVAILABLE( ios(4.0), macos(10.4), tvos(9.0), watchos(1.0) );
 
 
 

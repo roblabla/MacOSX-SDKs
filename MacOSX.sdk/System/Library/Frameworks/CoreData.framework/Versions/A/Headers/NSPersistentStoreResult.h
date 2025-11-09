@@ -1,7 +1,7 @@
 /*
     NSPersistentStoreResult.h
     Core Data
-    Copyright (c) 2004-2018, Apple Inc.
+    Copyright (c) 2004-2019, Apple Inc.
     All rights reserved.
 */
 
@@ -17,6 +17,12 @@ NS_ASSUME_NONNULL_BEGIN
 @class NSPersistentStoreAsynchronousResult;
 @class NSAsynchronousFetchResult;
 @class NSAsynchronousFetchRequest;
+
+typedef NS_ENUM(NSUInteger, NSBatchInsertRequestResultType) {
+    NSBatchInsertRequestResultTypeStatusOnly = 0x0,            // Return a status boolean
+    NSBatchInsertRequestResultTypeObjectIDs = 0x1,             // Return the object IDs of the rows that were inserted/updated
+    NSBatchInsertRequestResultTypeCount = 0x2                  // Return the number of rows that were inserted/updated
+} API_AVAILABLE(macosx(10.15),ios(13.0),tvos(13.0),watchos(6.0));
 
 typedef NS_ENUM(NSUInteger, NSBatchUpdateRequestResultType) {
     NSStatusOnlyResultType = 0x0,            // Return a status boolean
@@ -49,14 +55,6 @@ API_AVAILABLE(macosx(10.10),ios(8.0))
 
 API_AVAILABLE(macosx(10.10),ios(8.0))
 @interface NSPersistentStoreAsynchronousResult : NSPersistentStoreResult {
-#if (!__OBJC2__)
-@private
-    NSProgress* _requestProgress;
-    NSError* _requestError;
-    NSManagedObjectContext* _requestContext;
-    id _requestCompletionBlock;
-    int32_t _flags;
-#endif
 }
 
 @property (strong, readonly) NSManagedObjectContext* managedObjectContext;
@@ -69,12 +67,6 @@ API_AVAILABLE(macosx(10.10),ios(8.0))
 
 API_AVAILABLE(macosx(10.10),ios(8.0))
 @interface NSAsynchronousFetchResult<ResultType:id<NSFetchRequestResult>> : NSPersistentStoreAsynchronousResult {
-#if (!__OBJC2__)
-@private
-    NSAsynchronousFetchRequest* _fetchRequest;
-    NSArray* _finalResult;
-    id _intermediateResultCallback;
-#endif
 }
 
 @property (strong, readonly) NSAsynchronousFetchRequest<ResultType> * fetchRequest;
@@ -82,14 +74,20 @@ API_AVAILABLE(macosx(10.10),ios(8.0))
 
 @end
 
+// The result returned when executing an NSBatchInsertRequest
+API_AVAILABLE(macosx(10.15),ios(13.0),tvos(13.0),watchos(6.0))
+@interface NSBatchInsertResult : NSPersistentStoreResult {
+}
+
+// Return the result. See NSBatchInsertRequestResultType for options
+@property (nullable, strong, readonly) id result;
+@property (readonly) NSBatchInsertRequestResultType resultType;
+
+@end
+
 // The result returned when executing an NSBatchUpdateRequest
 API_AVAILABLE(macosx(10.10),ios(8.0))
 @interface NSBatchUpdateResult : NSPersistentStoreResult {
-#if (!__OBJC2__)
-@private
-    id _aggregatedResult;
-    NSBatchUpdateRequestResultType _resultType;
-#endif
 }
 
 // Return the result. See NSBatchUpdateRequestResultType for options
@@ -102,11 +100,6 @@ API_AVAILABLE(macosx(10.10),ios(8.0))
 // The result returned when executing an NSBatchDeleteRequest
 API_AVAILABLE(macosx(10.11),ios(9.0))
 @interface NSBatchDeleteResult : NSPersistentStoreResult {
-#if (!__OBJC2__)
-@private
-    id _aggregatedResult;
-    NSBatchDeleteRequestResultType _resultType;
-#endif
 }
 
 // Return the result. See NSBatchDeleteRequestResultType for options
@@ -119,11 +112,6 @@ API_AVAILABLE(macosx(10.11),ios(9.0))
 // The result returned when executing an NSPersistentHistoryChangeRequest
 API_AVAILABLE(macosx(10.13),ios(11.0),tvos(11.0),watchos(4.0))
 @interface NSPersistentHistoryResult : NSPersistentStoreResult {
-#if (!__OBJC2__)
-@private
-    id _aggregatedResult;
-    NSPersistentHistoryResultType _resultType;
-#endif
 }
 
 // Return the result. See NSPersistentHistoryResultType for options

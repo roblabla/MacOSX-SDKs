@@ -1,7 +1,7 @@
 /*
         NSProgressIndicator.h
         Application Kit
-        Copyright (c) 1997-2018, Apple Inc.
+        Copyright (c) 1997-2019, Apple Inc.
         All rights reserved.
 */
 
@@ -10,42 +10,14 @@
 #import <Foundation/NSDate.h>
 
 NS_ASSUME_NONNULL_BEGIN
+API_UNAVAILABLE_BEGIN(ios)
 
 typedef NS_ENUM(NSUInteger, NSProgressIndicatorStyle) {
     NSProgressIndicatorStyleBar = 0,
     NSProgressIndicatorStyleSpinning = 1
 };
 
-@interface NSProgressIndicator : NSView <NSAccessibilityProgressIndicator> {
-@private
-    BOOL _isBezeled APPKIT_IVAR;
-    BOOL _isIndeterminate APPKIT_IVAR;
-    BOOL _threadedAnimation APPKIT_IVAR;
-    double _minimum APPKIT_IVAR;
-    double _maximum APPKIT_IVAR;
-    double _value APPKIT_IVAR;
-    unsigned int _animationIndex APPKIT_IVAR;
-    NSTimeInterval _animationDelay APPKIT_IVAR;
-    id<NSObject> _windowOcclusionChangedNotificationToken APPKIT_IVAR;
-    CGFloat _drawingWidth APPKIT_IVAR;
-    id _roundColor APPKIT_IVAR;
-    id<NSObject> _systemColorsChangedNotificationToken APPKIT_IVAR;
-    struct {
-        unsigned int isSpinning:1;
-        unsigned int isVector:1;
-        unsigned int controlTint:3;
-        unsigned int spinningTint:2;
-        unsigned int controlSize:2;
-        unsigned int style:1;
-        unsigned int delayedStartup:1;
-        unsigned int hideWhenStopped:1;
-        unsigned int isHidden:1;
-        unsigned int isHeartBeatInstalled:1;
-        unsigned int customRenderer:1;
-        unsigned int RESERVED:17;
-    } _progressIndicatorFlags APPKIT_IVAR;
-    id _NSProgressIndicatorReserved1 __unused APPKIT_IVAR;
-}
+@interface NSProgressIndicator : NSView <NSAccessibilityProgressIndicator>
 
 #pragma mark Options
 
@@ -96,17 +68,18 @@ typedef NS_ENUM(NSUInteger, NSProgressIndicatorThickness) {
     NSProgressIndicatorPreferredSmallThickness = 10,
     NSProgressIndicatorPreferredLargeThickness = 18,
     NSProgressIndicatorPreferredAquaThickness  = 12
-} NS_DEPRECATED_MAC(10_0, 10_14);
+} API_DEPRECATED("", macos(10.0,10.14));
 
 /* Please instead use the more modern versions of these constants.
  */
-static const NSProgressIndicatorStyle NSProgressIndicatorBarStyle NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSProgressIndicatorStyleBar", 10_2, 10_14) = NSProgressIndicatorStyleBar;
-static const NSProgressIndicatorStyle NSProgressIndicatorSpinningStyle NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSProgressIndicatorStyleSpinning", 10_2, 10_14) = NSProgressIndicatorStyleSpinning;
+static const NSProgressIndicatorStyle NSProgressIndicatorBarStyle API_DEPRECATED_WITH_REPLACEMENT("NSProgressIndicatorStyleBar", macos(10.2,10.14)) = NSProgressIndicatorStyleBar;
+static const NSProgressIndicatorStyle NSProgressIndicatorSpinningStyle API_DEPRECATED_WITH_REPLACEMENT("NSProgressIndicatorStyleSpinning", macos(10.2,10.14)) = NSProgressIndicatorStyleSpinning;
 
 @interface NSProgressIndicator (NSProgressIndicatorDeprecated)
-- (NSTimeInterval)animationDelay NS_DEPRECATED_MAC(10_0, 10_6);
-- (void)setAnimationDelay:(NSTimeInterval)delay NS_DEPRECATED_MAC(10_0, 10_6);
-- (void)animate:(nullable id)sender NS_DEPRECATED_MAC(10_0, 10_6);
+- (NSTimeInterval)animationDelay API_DEPRECATED("", macos(10.0,10.6));
+- (void)setAnimationDelay:(NSTimeInterval)delay API_DEPRECATED("", macos(10.0,10.6));
+- (void)animate:(nullable id)sender API_DEPRECATED("", macos(10.0,10.6));
 @end
 
+API_UNAVAILABLE_END
 NS_ASSUME_NONNULL_END

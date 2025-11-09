@@ -28,14 +28,7 @@
 #ifndef AudioToolbox_AUGraph_h
 #define AudioToolbox_AUGraph_h
 
-#include <Availability.h>
-#if !defined(__COREAUDIO_USE_FLAT_INCLUDES__)
-	#include <CoreAudio/CoreAudioTypes.h>
-	#include <AudioToolbox/AudioUnit.h>
-#else
-	#include <CoreAudioTypes.h>
-	#include <AUComponent.h>
-#endif
+#include <AudioToolbox/AudioUnit.h>
 
 CF_ASSUME_NONNULL_BEGIN
 
@@ -184,6 +177,7 @@ AUGraphNodeInfo(	AUGraph									inGraph,
 					AudioUnit __nullable * __nullable		outAudioUnit)		AUGRAPH_DEPRECATED(10.5);
 			
 
+#if !TARGET_OS_IPHONE
 #pragma mark -
 #pragma mark Sub Graphs
 /*! 
@@ -231,6 +225,7 @@ AUGraphIsNodeSubGraph(		const AUGraph		inGraph,
 							AUNode				inNode,
 							Boolean *			outFlag)		API_DEPRECATED("no longer supported", macos(10.2, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(ios, watchos, tvos);
 
+#endif // !TARGET_OS_IPHONE
 
 #pragma mark -
 #pragma mark Node Interactions
@@ -256,10 +251,10 @@ CF_ENUM(UInt32) {
 /*! 
 	@struct		AudioUnitNodeConnection
 	@abstract	A connection between two nodes
-	@field		sourceNode
-	@field		sourceOutputNumber
-	@field		destNode
-	@field		destInputNumber
+	@var  		sourceNode
+	@var  		sourceOutputNumber
+	@var  		destNode
+	@var  		destInputNumber
 */
 struct AudioUnitNodeConnection
 {
@@ -276,9 +271,9 @@ typedef struct AudioUnitNodeConnection AUNodeConnection;
 	@abstract	A callback used to provide input to an audio unit
 	@discussion	Used to contain information when a callback is used
 				to provide input to the specific node's specified input
-	@field		destNode
-	@field		destInputNumber
-	@field		cback
+	@var  		destNode
+	@var  		destInputNumber
+	@var  		cback
 */
 struct AUNodeRenderCallback 
 {
@@ -305,8 +300,8 @@ typedef struct AUNodeRenderCallback AUNodeRenderCallback;
 				Arrays of these structs can be returned, the addition of new members to the
 				nodeInteraction union will NOT change the size of this structure
 				
-	@field		nodeInteractionType		the interaction type
-	@field		nodeInteraction			a union providing information about the specified interaction
+	@var  		nodeInteractionType		the interaction type
+	@var  		nodeInteraction			a union providing information about the specified interaction
 */
 struct AUNodeInteraction
 {
@@ -335,9 +330,6 @@ AUGraphConnectNodeInput(	AUGraph			inGraph,
 /*! 
 	@function	AUGraphSetNodeInputCallback
 	@abstract	Set a callback for the specified node's specified input.
-	@param		inGraph
-	@param		inDestNode
-	@param		inDestInputNumber
 	@param		inInputCallback		The callback that will provide input data to the node
 */
 extern OSStatus
@@ -352,9 +344,6 @@ AUGraphSetNodeInputCallback (AUGraph						inGraph,
 	@abstract	disconnect a node's input
 	@discussion	This can be used to disconnect either a connection or callback interaction
 				to the specified node input
-	@param		inGraph
-	@param		inDestNode
-	@param		inDestInputNumber
 */
 extern OSStatus
 AUGraphDisconnectNodeInput(	AUGraph			inGraph,
@@ -365,7 +354,6 @@ AUGraphDisconnectNodeInput(	AUGraph			inGraph,
 	@function	AUGraphClearConnections
 	@abstract	clear all of the interactions in a graph
 	@discussion	This will clear all connections and callback interactions of the nodes of a graph
-	@param		inGraph
 */
 extern OSStatus
 AUGraphClearConnections(	AUGraph			inGraph)				AUGRAPH_DEPRECATED(10.0);
@@ -374,8 +362,6 @@ AUGraphClearConnections(	AUGraph			inGraph)				AUGRAPH_DEPRECATED(10.0);
 	@function	AUGraphGetNumberOfInteractions
 	@abstract	Retrieve the number of interactions of a graph
 	@discussion	The number of node interactions currently being managed by the graph
-	@param		inGraph
-	@param		outNumInteractions
 */
 extern OSStatus
 AUGraphGetNumberOfInteractions(	AUGraph				inGraph,
@@ -390,8 +376,6 @@ AUGraphGetNumberOfInteractions(	AUGraph				inGraph,
 				
 				An app can iterate through the interactions (as with the nodes) of a graph by retrieving
 				the number of interactions, and then iterating an index from 0 < numInteractions
-	@param		inGraph
-	@param		inInteractionIndex
 	@param		outInteraction		the interaction information at the specified index
 */
 extern OSStatus
@@ -403,9 +387,6 @@ AUGraphGetInteractionInfo(	AUGraph					inGraph,
 	@function	AUGraphCountNodeInteractions
 	@abstract	Retrieve the number of interactions of a graph's node
 	@discussion	The number of node interactions currently being managed by the graph for the specified node
-	@param		inGraph
-	@param		inNode
-	@param		outNumInteractions
 */
 extern OSStatus
 AUGraphCountNodeInteractions(	AUGraph				inGraph,
@@ -416,8 +397,6 @@ AUGraphCountNodeInteractions(	AUGraph				inGraph,
 	@function	AUGraphGetNodeInteractions
 	@abstract	Retrieve information about the interactions in a graph for a given node
 	@discussion	Retrieve information about the interactions in a graph for a given node 
-	@param		inGraph
-	@param		inNode
 	@param		ioNumInteractions	
 					on input, specifies the number of interactions that can be returned
 					on output, specifies the number of interactions returned.
@@ -473,7 +452,6 @@ AUGraphGetNodeInteractions(	AUGraph					inGraph,
 	this decision is left up to you. The same applies to the "cant do" error - you have
 	to explicitly call AUGraphUpdate again to have the processing of the events occur.
 
-	@param		inGraph
 	@param		outIsUpdated	if specified returns true if all of the edits were applied to the graph
 */
 extern OSStatus
@@ -489,7 +467,6 @@ AUGraphUpdate(		AUGraph					inGraph,
 	@function	AUGraphOpen
 	@abstract	Open a graph
 	@discussion AudioUnits are open but not initialized (no resource allocation occurs here)
-	@param		inGraph
 */
 extern OSStatus
 AUGraphOpen(			AUGraph		inGraph)						AUGRAPH_DEPRECATED(10.0);
@@ -498,7 +475,6 @@ AUGraphOpen(			AUGraph		inGraph)						AUGRAPH_DEPRECATED(10.0);
 	@function	AUGraphClose
 	@abstract	Close a graph
 	@discussion all AudioUnits are closed - leaving only its nodal representation
-	@param		inGraph
 */
 extern OSStatus
 AUGraphClose(			AUGraph		inGraph)						AUGRAPH_DEPRECATED(10.0);
@@ -512,7 +488,6 @@ AUGraphClose(			AUGraph		inGraph)						AUGRAPH_DEPRECATED(10.0);
 				after it becomes involved in an interaction.
 				
 				A graph must be opened before it can be initialised.
-	@param		inGraph
 */
 extern OSStatus
 AUGraphInitialize(		AUGraph		inGraph)						AUGRAPH_DEPRECATED(10.0);
@@ -521,7 +496,6 @@ AUGraphInitialize(		AUGraph		inGraph)						AUGRAPH_DEPRECATED(10.0);
 	@function	AUGraphUninitialize
 	@abstract	Uninitialise a graph
 	@discussion The member of the graph are uninitialised 
-	@param		inGraph
 */
 extern OSStatus
 AUGraphUninitialize(	AUGraph		inGraph)						AUGRAPH_DEPRECATED(10.0);
@@ -532,7 +506,6 @@ AUGraphUninitialize(	AUGraph		inGraph)						AUGRAPH_DEPRECATED(10.0);
 	@discussion Start() is called on the "head" node(s) of the AUGraph	(now rendering starts) 
 				
 				The graph must be initialised before it can be started
-	@param		inGraph
 */
 extern OSStatus
 AUGraphStart(			AUGraph		inGraph)						AUGRAPH_DEPRECATED(10.0);
@@ -621,6 +594,7 @@ AUGraphRemoveRenderNotify(		AUGraph					inGraph,
 #pragma mark -
 #pragma mark Deprecated
 
+#if !TARGET_OS_IPHONE
 struct ComponentDescription;
 /*!
 	@function			AUGraphNewNode
@@ -688,6 +662,7 @@ AUGraphGetNodeConnections(		AUGraph						inGraph,
 								UInt32						*ioNumConnections)	
 																	API_DEPRECATED("no longer supported", macos(10.3, 10.5)) API_UNAVAILABLE(ios, watchos, tvos);
 
+#endif //!TARGET_OS_IPHONE
 	
 #if defined(__cplusplus)
 }

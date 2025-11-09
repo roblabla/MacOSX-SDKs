@@ -37,13 +37,13 @@ QL_EXPORT CGImageRef QLThumbnailImageCreate(CFAllocatorRef allocator, CFURLRef u
  *      @constant kQLThumbnailOptionIconModeKey
  *      @abstract If kCFBooleanTrue, QL will produce an icon (ie a thumbnail and all the icon decor, like shadows, curled corner, etc.).
  */
-QL_EXPORT const CFStringRef kQLThumbnailOptionIconModeKey;
+__attribute__((weak_import)) QL_EXPORT const CFStringRef kQLThumbnailOptionIconModeKey;
 
 /*!
  *      @constant kQLThumbnailOptionScaleFactorKey
  *      @abstract This is the user scale factor (as a CFNumber). If absent, default value is 1.0
  */
-QL_EXPORT const CFStringRef kQLThumbnailOptionScaleFactorKey;
+__attribute__((weak_import)) QL_EXPORT const CFStringRef kQLThumbnailOptionScaleFactorKey;
 
 QL_EXTERN_C_END
 

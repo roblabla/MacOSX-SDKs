@@ -1,7 +1,8 @@
+#if (defined(USE_AUDIOTOOLBOX_PUBLIC_HEADERS) && USE_AUDIOTOOLBOX_PUBLIC_HEADERS) || !__has_include(<AudioToolboxCore/AudioUnitProperties.h>)
 /*!
 	@file		AudioUnitProperties.h
  	@framework	AudioToolbox.framework
- 	@copyright	(c) 2000-2015 Apple, Inc. All rights reserved.
+ 	@copyright	(c) 2000-2018 Apple, Inc. All rights reserved.
 	@abstract	Property ID's and accompanying structs used by Apple audio units.
 
 	@discussion
@@ -50,15 +51,7 @@
 #ifndef AudioToolbox_AudioUnitProperties_h
 #define AudioToolbox_AudioUnitProperties_h
 
-#if !defined(__COREAUDIO_USE_FLAT_INCLUDES__)
-	#include <AudioToolbox/AUComponent.h>
-	#include <CoreAudio/CoreAudioTypes.h>
-	#include <CoreFoundation/CoreFoundation.h>
-#else
-	#include <AUComponent.h>
-	#include <CoreAudioTypes.h>
-	#include <CoreFoundation.h>
-#endif
+#include <AudioToolbox/AUComponent.h>
 
 CF_ASSUME_NONNULL_BEGIN
 
@@ -805,17 +798,58 @@ CF_ENUM(AudioUnitPropertyID)
 	kAudioUnitProperty_ParametersForOverview		= 57,
 	kAudioUnitProperty_SupportsMPE					= 58,
 
+#if !TARGET_OS_IPHONE
 	kAudioUnitProperty_FastDispatch					= 5,
 	kAudioUnitProperty_SetExternalBuffer			= 15,
 	kAudioUnitProperty_GetUIComponentList			= 18,
 	kAudioUnitProperty_CocoaUI						= 31,
 	kAudioUnitProperty_IconLocation					= 39,
 	kAudioUnitProperty_AUHostIdentifier				= 46,
+#endif
 
 	kAudioUnitProperty_MIDIOutputCallbackInfo       = 47,
 	kAudioUnitProperty_MIDIOutputCallback           = 48,
 };
 
+#if AU_SUPPORT_INTERAPP_AUDIO
+/*
+    @enum           Inter-App Audio Property IDs
+    @abstract       Properties used in inter-app audio.
+
+	@constant		kAudioUnitProperty_RemoteControlEventListener
+	@discussion			Scope:			Global
+						Value Type:		AudioUnitRemoteControlEventListener
+						Access:			read/write
+						
+					Provides a way for a host to receive AudioUnitRemoteControlEvents from a remote "node"
+					audio unit. The supplied listener block is called when the audio unit sends a remote
+					control event.
+
+	@constant		kAudioUnitProperty_IsInterAppConnected
+	@discussion			Scope: Global
+						Value Type: UInt32 (0-1)
+						Access: read-only
+					
+					Both host and node apps can query and listen to this property to determine when
+					the audio unit has been connected to another app.
+
+	@constant		kAudioUnitProperty_PeerURL
+	@discussion			Scope: Global
+						Value Type: CFURLRef
+						Access: read-only
+					
+					Both host and node apps can query this property to obtain a URL which, when
+					opened, will activate the other app.
+					
+					N.B. This URL is only valid while the host has an open connection to the node.
+*/
+CF_ENUM(AudioUnitPropertyID)
+{
+	kAudioUnitProperty_RemoteControlEventListener	= 100,
+	kAudioUnitProperty_IsInterAppConnected			= 101,
+	kAudioUnitProperty_PeerURL						= 102
+};
+#endif // AU_SUPPORT_INTERAPP_AUDIO
 
 
 
@@ -831,11 +865,13 @@ CF_ENUM(AudioUnitPropertyID)
 #define kAUPresetManufacturerKey	"manufacturer"
 #define kAUPresetDataKey			"data"
 #define kAUPresetNameKey			"name"
+#define kAUPresetNumberKey			"preset-number"
 #define kAUPresetRenderQualityKey	"render-quality"
 #define kAUPresetCPULoadKey			"cpu-load"
 #define kAUPresetElementNameKey		"element-name"
 #define kAUPresetExternalFileRefs	"file-references"
 
+#if !TARGET_OS_IPHONE
 	// these are keys to use when a preset contains data from other plugin formats
 	// vstdata is used to signify VST state from a vst "bank"
 	#define kAUPresetVSTDataKey			"vstdata"
@@ -843,6 +879,7 @@ CF_ENUM(AudioUnitPropertyID)
 	#define kAUPresetVSTPresetKey		"vstpreset"
 
 	#define kAUPresetMASDataKey			"masdata"
+#endif
 
 /*!
     @define         kAUPresetPartKey
@@ -858,11 +895,11 @@ CF_ENUM(AudioUnitPropertyID)
     @abstract       This structure contains the information needed to make a connection between a source
 					and destination audio unit.
 	@discussion		The structure is set on the destination audio unit's input element
-    @field          sourceAudioUnit
+    @var            sourceAudioUnit
 						The audio unit that is the source for the connection
-    @field          sourceOutputNumber
+    @var            sourceOutputNumber
 						The source audio unit's output element to be used in the connection
-    @field          destInputNumber
+    @var            destInputNumber
 						The destination audio unit's input element to be used in the connection						
 */
 typedef struct AudioUnitConnection {
@@ -901,10 +938,10 @@ typedef struct AURenderCallbackStruct {
 /*!
 	@struct			AUPreset
 	@abstract		Used to publish and set factory presets on an audio unit
-	@field			presetNumber
+	@var  			presetNumber
 						If < 0, then preset is a user preset
 						If >= 0, then this field is used to select the factory preset
-	@field			presetName
+	@var  			presetName
 						If a factory preset, the name of the specified factory preset
 */
 typedef struct AUPreset {
@@ -1091,12 +1128,13 @@ typedef struct AUDependentParameter {
 } AUDependentParameter;
 
 
+#if !TARGET_OS_IPHONE
 /*!
 	@struct			AudioUnitCocoaViewInfo
 	@abstract		The location and class name of one or more view factory objects an Audio Unit publishes
-	@field			mCocoaAUViewBundleLocation
+	@var  			mCocoaAUViewBundleLocation
 						Contains the location of the bundle which the host app can then use to locate the bundle
-	@field			mCocoaAUViewClass
+	@var  			mCocoaAUViewClass
 						Contains the names of the classes that implements the required protocol (AUCocoaUIBase). This class is a view factory that creates the NSView object that is the AudioUnit view.
 */
 typedef struct AudioUnitCocoaViewInfo {
@@ -1112,6 +1150,7 @@ typedef struct AUHostVersionIdentifier {
 	CFStringRef 		hostName;	
 	UInt32				hostVersion;
 } AUHostVersionIdentifier;
+#endif //!TARGET_OS_IPHONE
 
 /*!
 	@struct			MIDIPacketList
@@ -1154,9 +1193,9 @@ typedef struct AUInputSamplesInOutputCallbackStruct {
 	@struct			AudioUnitParameterHistoryInfo
 	@abstract		This structure contains the suggested update rate and history duration for parameters which have the kAudioUnitParameterFlag_PlotHistory flag set.
 					The structure is filled out by getting kAudioUnitProperty_ParameterHistoryInfo.
-	@field			updatesPerSecond
+	@var  			updatesPerSecond
 						This is the number of times per second that it is suggested that the host get the value of this parameter.
-	@field			historyDurationInSeconds
+	@var  			historyDurationInSeconds
 						This is the duration in seconds of history that should be plotted.
 */
 typedef struct AudioUnitParameterHistoryInfo
@@ -1275,12 +1314,29 @@ typedef CF_ENUM(UInt32, AudioUnitParameterUnit)
 	@constant		kAudioUnitParameterFlag_ValuesHaveStrings
 	@constant		kAudioUnitParameterFlag_DisplayLogarithmic		
 	@constant		kAudioUnitParameterFlag_IsHighResolution
+		This flag provides a hint to a host that this parameter should be controlled through the
+		highest resolution if the host has limitations on the control resolution of parameter
+		values. Generally this means that controlling this parameter with a single MIDI Control
+		message (i.e. 128 values) is too course a grain for that parameter, and a finer control
+		resolution should be used if possible. If this flag is not set, then a host can assume that
+		a 7-bit control quantization is acceptable. Ideally, parameters should be controlled in the
+		fullest resolution that they are published with.
 	@constant		kAudioUnitParameterFlag_NonRealTime
+		Changing the parameter in real-time will cause a glitch or otherwise undesirable effect.
 	@constant		kAudioUnitParameterFlag_CanRamp
+		If set, the parameter can be ramped.
 	@constant		kAudioUnitParameterFlag_ExpertMode
+		If set, the parameter is obscure (hint to UI to only display in expert mode).
 	@constant		kAudioUnitParameterFlag_HasCFNameString
+		In the original ParameterInfo a C string only was specified. With MacOS 10.2 and later, the
+		last four bytes of this string are reserved for a CFStringRef, which gives the ability to
+		used Unicode encoding, necessary for providing a name in languages using non-ASCII
+		characters. If this flag bit is set, the CFStringRef is valid.
 	@constant		kAudioUnitParameterFlag_IsGlobalMeta
+		If set, changing this parameter may change any number of others in the AudioUnit.
 	@constant		kAudioUnitParameterFlag_IsElementMeta
+		If set, changing this parameter may change others in the same element as the current
+		parameter.
 	@constant		kAudioUnitParameterFlag_IsReadable
 	@constant		kAudioUnitParameterFlag_IsWritable
 */
@@ -1318,22 +1374,22 @@ typedef CF_OPTIONS(UInt32, AudioUnitParameterOptions)
 
 /*!
 	@struct			AudioUnitParameterInfo
-	@field			name
+	@var  			name
 						UNUSED - set to zero - UTF8 encoded C string (originally). 
-	@field			unitName
+	@var  			unitName
 						only valid if kAudioUnitParameterUnit_CustomUnit is set. If kAudioUnitParameterUnit_CustomUnit
 						is set, this field must contain a valid CFString.
-	@field			clumpID
+	@var  			clumpID
 						only valid if kAudioUnitParameterFlag_HasClump
-	@field			cfNameString
+	@var  			cfNameString
 						only valid if kAudioUnitParameterFlag_HasCFNameString
-	@field			unit				
+	@var  			unit				
 						if the "unit" field contains a value not in the enum above, then assume 
 						kAudioUnitParameterUnit_Generic
-	@field			minValue
-	@field			maxValue
-	@field			defaultValue
-	@field			flags
+	@var  			minValue
+	@var  			maxValue
+	@var  			defaultValue
+	@var  			flags
 						Due to some vagaries about the ways in which Parameter's CFNames have been described, it was
 						necessary to add a flag: kAudioUnitParameterFlag_CFNameRelease
 						In normal usage a parameter name is essentially a static object, but sometimes an audio unit will 
@@ -1457,6 +1513,22 @@ typedef struct AudioUnitParameterValueFromString {
 } AudioUnitParameterValueFromString;
 
 
+#if AU_SUPPORT_INTERAPP_AUDIO
+/*!
+	@enum			AudioUnitRemoteControlEvent
+	@abstract		In inter-app audio, messages to control the host's transport state.
+*/
+typedef CF_ENUM(UInt32, AudioUnitRemoteControlEvent) {
+	kAudioUnitRemoteControlEvent_TogglePlayPause	= 1,
+	kAudioUnitRemoteControlEvent_ToggleRecord		= 2,
+	kAudioUnitRemoteControlEvent_Rewind				= 3
+};
+
+/*!	@typedef		AudioUnitRemoteControlEventListener
+	@abstract		Block called to receive a remote control event.
+*/
+typedef void (^AudioUnitRemoteControlEventListener)(AudioUnitRemoteControlEvent event);
+#endif // AU_SUPPORT_INTERAPP_AUDIO
 
 //=====================================================================================================================
 #pragma mark - Configuration Info Keys
@@ -1539,6 +1611,7 @@ CF_ENUM(AudioUnitPropertyID) {
 #pragma mark -
 #pragma mark OS X Availability
 
+#if !TARGET_OS_IPHONE
 
 //=====================================================================================================================
 #pragma mark - Music Effects and Instruments
@@ -1999,18 +2072,17 @@ CF_ENUM(UInt32) {
 
 /*!
 	@struct			AudioUnitOtherPluginDesc
-	@discussion
 
-	@field			format
-	@discussion			One of the OtherPluginFormat values
+	@var			format
+					One of the OtherPluginFormat values
 						
-	@field			plugin
-	@discussion			struct AudioClassDescription {
+	@var			plugin
+						struct AudioClassDescription {
 							OSType mType;
 							OSType mSubType;
 							OSType mManufacturer;
 						};
-						is defined in <CoreAudio/CoreAudioTypes.h>
+						is defined in <CoreAudioTypes/CoreAudioTypes.h>
 
 					mType specifies a generic, plug-in format defined descriptor
 							mSubType is usually left to the manufacturer to use at their discretion
@@ -2064,6 +2136,7 @@ typedef struct AudioUnitPresetMAS_Settings
 	AudioUnitPresetMAS_SettingData 	settings[1];
 } AudioUnitPresetMAS_Settings;
 
+#endif // !TARGET_OS_IPHONE
 
 //=====================================================================================================================
 #pragma mark -
@@ -2154,7 +2227,7 @@ CF_ENUM(UInt32) {
 						Value Type: UInt32
 						Access:
 							See kAudioOutputUnitProperty_EnableIO
-							Property value is 1 if input or output is enabled on the specified element.
+							Property value is 1 if there are any valid hardware streams on the specified element.
 
 	@constant		kAudioOutputUnitProperty_StartTimestampsAtZero
 	@discussion			Scope: Global
@@ -2180,6 +2253,74 @@ CF_ENUM(AudioUnitPropertyID) {
 	kAudioOutputUnitProperty_StartTimestampsAtZero  = 2007	// this will also work with AUConverter
 };
 
+#if AU_SUPPORT_INTERAPP_AUDIO
+/*!
+    @enum           Apple Inter-App Output Property IDs
+    @abstract       The collection of property IDs for Apple output units with inter-app audio on iOS.
+	
+	@constant		kAudioOutputUnitProperty_MIDICallbacks
+	@discussion			Scope: Global
+						Value Type: AudioOutputUnitMIDICallbacks
+						Access: read/write
+
+					When an output unit is published as a remote instrument or music effect, this
+					property must be set on the unit in order to receive MIDI events from the
+					host. The specified callbacks will be called at render time, immediately
+					prior to the request to render a buffer.
+
+	@constant		kAudioOutputUnitProperty_HostReceivesRemoteControlEvents
+	@discussion			Scope: Global
+						Value Type: UInt32
+						Access: read-only
+					Indicates whether the connected host app (if any) receives remote control events.
+
+	@constant		kAudioOutputUnitProperty_RemoteControlToHost
+	@discussion			Scope: Global
+						Value Type: AudioUnitRemoteControlEvent
+						Access: write-only
+					A node app can set this property on its output unit in order to send a remote
+					control event to the host app.
+
+	@constant		kAudioOutputUnitProperty_HostTransportState
+	@discussion			Scope: Global
+						Value Type: UInt32 (dummy, always 0)
+						Access: listener only
+					Indicates that the host's record or play transport state has changed and that any
+					UI reflecting it should be updated. The actual state must be fetched from the
+					HostCallbacks.
+
+	@constant		kAudioOutputUnitProperty_NodeComponentDescription
+	@discussion			Scope: Global
+						Value Type: AudioComponentDescription
+						Access: read-only
+					If a single output unit is published with multiple component descriptions, the
+					node app needs to know which component description the host used to connect.
+					This property returns that component description.
+*/
+CF_ENUM(AudioUnitPropertyID) {
+	kAudioOutputUnitProperty_MIDICallbacks			= 2010,
+	kAudioOutputUnitProperty_HostReceivesRemoteControlEvents
+													= 2011,
+	kAudioOutputUnitProperty_RemoteControlToHost	= 2012,
+	kAudioOutputUnitProperty_HostTransportState		= 2013,
+	kAudioOutputUnitProperty_NodeComponentDescription = 2014
+};
+
+/*!
+	@struct AudioOutputUnitMIDICallbacks
+	@abstract For inter-app audio, callbacks for receiving MIDI messages.
+	@discussion
+		The supplied callback functions are called from the realtime rendering thread, before each
+		render cycle, to provide any incoming MIDI messages.
+*/
+typedef struct {
+	void * __nullable userData;
+	
+	// see MusicDeviceMIDIEvent, MusicDeviceSysEx
+	void (*MIDIEventProc)(void * __nullable userData, UInt32 inStatus, UInt32 inData1, UInt32 inData2, UInt32 inOffsetSampleFrame);
+	void (*MIDISysExProc)(void * __nullable userData, const UInt8 *inData, UInt32 inLength);
+} AudioOutputUnitMIDICallbacks;
+#endif // AU_SUPPORT_INTERAPP_AUDIO
 
 /*!
 	@struct			AudioOutputUnitStartAtTimeParams
@@ -2227,6 +2368,25 @@ CF_ENUM(AudioUnitPropertyID) {
 
 #pragma mark - AUVoiceProcessing unit deprecated properties
 
+#if TARGET_OS_IPHONE
+/*!
+ @enum			Deprecated Apple Voice Processing Property ID (iOS only)
+ @constant		kAUVoiceIOProperty_DuckNonVoiceAudio
+ @discussion			Scope: Global
+                        Value Type: UInt32
+                        Access: read/write
+                 DEPRECATED. Enable ducking of the non voice audio signal. Since
+                 music signals are typically louder than voice, ducking the music signal 
+                 can increase the intelligibility of voice chats. Note that the amount of
+                 ducking is dependent on the audio route. Set to 0 to turn off or 1 to 
+                 turn on. On by default. Deprecation note: What is being deprecated is the
+                 ability to turn off this feature via this property. In the future, ducking
+                 will always be on.
+*/
+CF_ENUM(AudioUnitPropertyID) {
+	kAUVoiceIOProperty_DuckNonVoiceAudio			= 2102
+} API_DEPRECATED("not longer supported", ios(3.0, 7.0)) API_UNAVAILABLE(macos) __WATCHOS_PROHIBITED __TVOS_PROHIBITED;
+#endif
 
 /*!
  @enum           Apple Voice Processing Property IDs that are being deprecated
@@ -2274,6 +2434,7 @@ CF_ENUM(AudioUnitPropertyID) {
 	kAUNBandEQProperty_BiquadCoefficients		= 2203
 };
 
+#if !TARGET_OS_IPHONE
 
 /*!
  @enum         Apple Voice Processing AudioUnit Error IDs
@@ -2287,6 +2448,7 @@ CF_ENUM(OSStatus) {
     kAUVoiceIOErr_UnexpectedNumberOfInputChannels     = -66784,
 };
 
+#endif
 
 //=====================================================================================================================
 #pragma mark - Mixers
@@ -2373,12 +2535,12 @@ CF_ENUM(AudioUnitPropertyID) {
 /*!
 	@struct			AudioUnitMeterClipping
 	
-	@field			peakValueSinceLastCall; 
-	@discussion			The maximum value seen on the channel since the last time the property was retrieved.
-	@field			sawInfinity;
-	@discussion			TRUE if there was an infinite value on this channel.
-	@field			sawNotANumber
-	@discussion			TRUE if there was a floating point Not-A-Number value on this channel.
+	@var  			peakValueSinceLastCall; 
+						The maximum value seen on the channel since the last time the property was retrieved.
+	@var  			sawInfinity;
+						TRUE if there was an infinite value on this channel.
+	@var  			sawNotANumber
+						TRUE if there was a floating point Not-A-Number value on this channel.
 */
 typedef struct AudioUnitMeterClipping
 {
@@ -2394,36 +2556,36 @@ typedef struct AudioUnitMeterClipping
     @abstract       The collection of property IDs for AUSpatialMixer
     
     @constant		kAudioUnitProperty_ReverbRoomType
-	@discussion			Scope:			Global
+						Scope:			Global
 						Value Type:		UInt32
 						Access:			Read / Write
 						
 	@constant		kAudioUnitProperty_UsesInternalReverb
-	@discussion			Scope:			Global
+						Scope:			Global
 						Value Type:		UInt32
 						Access:			Read / Write
 						
 	@constant		kAudioUnitProperty_SpatializationAlgorithm
-	@discussion			Scope:			Input
+						Scope:			Input
 						Value Type:		UInt32
 						Access:			Read / Write
 						
 						Used to set the spatialisation algorithm used by an input of AUSpatialMixer. See kSpatializationAlgorithm_
 						
 	@constant		kAudioUnitProperty_SpatialMixerRenderingFlags
-	@discussion			Scope:			Input
+						Scope:			Input
 						Value Type:		UInt32
 						Access:			Read / Write
 
 						Used to enable various rendering operations on a given input for the 3DMixer. See k3DMixerRenderingFlags_
 						
 	@constant		kAudioUnitProperty_SpatialMixerAttenuationCurve
-	@discussion			Scope:			Input
+						Scope:			Input
 						Value Type:		UInt32
 						Access:			Read / Write
 
 	@constant		kAudioUnitProperty_SpatialMixerDistanceParams
-	@discussion			Scope:			Input
+						Scope:			Input
 						Value Type:		MixerDistanceParams
 						Access:			Read / Write
 */
@@ -2699,19 +2861,19 @@ CF_ENUM(AudioUnitPropertyID) {
     @abstract           bits in ScheduledAudioSlice.mFlags
 
     @constant       kScheduledAudioSliceFlag_Complete
-    @abstract           Set if the unit is done with this slice
+    		            Set if the unit is done with this slice
     @constant       kScheduledAudioSliceFlag_BeganToRender
-    @abstract           Set if any portion of the buffer has been played
+    		            Set if any portion of the buffer has been played
     @constant       kScheduledAudioSliceFlag_BeganToRenderLate
-    @abstract           Set if any portion of the buffer was not played because it was scheduled late
+    		            Set if any portion of the buffer was not played because it was scheduled late
     @constant       kScheduledAudioSliceFlag_Loop
-    @abstract           specifies that the buffer should loop indefinitely
+    		            specifies that the buffer should loop indefinitely
     @constant       kScheduledAudioSliceFlag_Interrupt
-    @abstract           specifies that the buffer should interrupt any previously scheduled buffer
+    		            specifies that the buffer should interrupt any previously scheduled buffer
                         (by default, buffers following a playing buffer are not played until the
                         playing buffer has completed).
     @constant       kScheduledAudioSliceFlag_InterruptAtLoop
-    @abstract           specifies that the buffer should interrupt any previously scheduled buffer,
+    		            specifies that the buffer should interrupt any previously scheduled buffer,
                         but only at a loop point in that buffer.
 
 */
@@ -2733,18 +2895,18 @@ typedef void (*ScheduledAudioSliceCompletionProc)(void * __nullable userData, Sc
 
 /*
 	@struct				ScheduledAudioSlice
-	@field				mTimeStamp
-	@field				mCompletionProc
+	@var  				mTimeStamp
+	@var  				mCompletionProc
 							May be null
-	@field				mCompletionProcUserData
-	@field				mFlags
-	@field				mReserved
+	@var  				mCompletionProcUserData
+	@var  				mFlags
+	@var  				mReserved
 							Must be 0
-	@field				mReserved2
+	@var  				mReserved2
 							For internal use
-	@field				mNumberFrames
+	@var  				mNumberFrames
 							Must be consistent with byte count of mBufferList
-	@field				mBufferList
+	@var  				mBufferList
 							Must contain deinterleaved Float32
 */
 struct ScheduledAudioSlice {
@@ -2900,18 +3062,18 @@ typedef void (*ScheduledAudioFileRegionCompletionProc)(void * __nullable userDat
 
 /*!
 	@struct			ScheduledAudioFileRegion
-	@field			mTimeStamp
-	@field			mCompletionProc
+	@var  			mTimeStamp
+	@var  			mCompletionProc
 						may be NULL
-	@field			mCompletionProcUserData
-	@field			mAudioFile
+	@var  			mCompletionProcUserData
+	@var  			mAudioFile
 						must be a valid and open AudioFileID
 						defined in AudioToolbox/AudioFile.h: typedef	struct OpaqueAudioFileID	*AudioFileID;
-	@field			mLoopCount
+	@var  			mLoopCount
 						0 = don't loop
-	@field			mStartFrame
+	@var  			mStartFrame
 						offset into file
-	@field			mFramesToPlay
+	@var  			mFramesToPlay
 						number of frames to play
 	
 */
@@ -2925,6 +3087,7 @@ struct ScheduledAudioFileRegion {
 	UInt32												mFramesToPlay;
 };
 
+#if !TARGET_OS_IPHONE
 
 //=====================================================================================================================
 #pragma mark - OS X-specific Music Device Properties used by DLSMusicDevice
@@ -2956,6 +3119,7 @@ CF_ENUM(AudioUnitPropertyID) {
 	kMusicDeviceProperty_SoundBankFSRef				= 1012
 };
 
+#endif	// TARGET_OS_IPHONE
 
 //=====================================================================================================================
 #pragma mark - Music Device Properties used by DLSMusicDevice
@@ -3086,19 +3250,19 @@ CF_ENUM(AudioUnitPropertyID) {
  					percussion banks per the GM2 specification (GM-compatible DLS or Soundfont banks).  For custom
  					non-GM-compatible DLS and Soundfont banks, use the actual MSB/LSB values associated with the desired preset.
 
-	@field			fileURL
+	@var  			fileURL
 						The URL of the path to the bank or instrument file.   Caller is responsible for releasing the
  						provided CFURLRef.
-	@field			instrumentType
+	@var  			instrumentType
 						The type of instrument being loaded or created.  For example, use kInstrumentType_DLSPreset to load an
  						instrument from a DLS bank file.
-	@field			bankMSB
+	@var  			bankMSB
 						For the preset instruments, the most significant byte value for a particular bank variation within that
  						file.  Range is 0 to 127.  Use kAUSampler_DefaultMelodicBankMSB by default.
-	@field			bankLSB
+	@var  			bankLSB
 						For the preset instruments, the least significant byte value for a particular bank variation within that
  						file.  Range is 0 to 127.  Use kAUSampler_DefaultBankLSB by default.
-	@field			presetID
+	@var  			presetID
 						For the preset instruments, the numeric ID of a particular preset within that bank to load.
  						Range is 0 to 127.
  */
@@ -3204,6 +3368,7 @@ CF_ENUM(AudioUnitPropertyID) {
 	kAudioUnitProperty_DeferredRendererWaitFrames   = 3322
 };
 
+#if !TARGET_OS_IPHONE
 
 //=====================================================================================================================
 #pragma mark - AUNetReceive
@@ -3343,11 +3508,13 @@ CF_ENUM(AudioUnitPropertyID) {
 	kAUNetSendNumPresetFormats				= 18
 };
 
+#endif // _TARGET_OS_IPHONE for Apple Specific audio units
 
 //=====================================================================================================================
 #pragma mark -
 #pragma mark Deprecated Properties
 
+#if !TARGET_OS_IPHONE
 
 // NumVersion is no longer used (originally from MacTypes.h)
 #if TARGET_RT_BIG_ENDIAN
@@ -3449,6 +3616,7 @@ enum {
 	kSpeakerConfiguration_5_1				 		= kSpeakerConfiguration_5_0
 };
 
+#endif // !TARGET_OS_IPHONE
 
 // Deprecated in favor of the newer AUSamplerInstrumentData
 // structure and its supporting property.
@@ -3469,3 +3637,6 @@ CF_ENUM(AudioUnitPropertyID) {
 CF_ASSUME_NONNULL_END
 
 #endif // AudioToolbox_AudioUnitProperties_h
+#else
+#include <AudioToolboxCore/AudioUnitProperties.h>
+#endif

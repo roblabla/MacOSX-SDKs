@@ -1,6 +1,7 @@
-/*	MDSchema.h
-	Copyright (c) 2003-2004, Apple Inc. All rights reserved.
-*/
+/*
+ *       MDSchema.h
+ *       Copyright (c) 2003-2019, Apple Inc. All rights reserved.
+ */
 
 /*!
 	@header MDSchema
@@ -13,9 +14,10 @@
 #if !defined(__MDSCHEMA__)
 #define __MDSCHEMA__ 1
 
+#include <CoreFoundation/CoreFoundation.h>
+
 #if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
-#include <CoreFoundation/CFString.h>
-#include <CoreFoundation/CFDictionary.h>
+
 #include <Metadata/MDItem.h>
 
 CF_IMPLICIT_BRIDGING_ENABLED
@@ -92,6 +94,7 @@ MD_EXPORT const CFStringRef  kMDAttributeMultiValued MD_AVAIL;    /* Value == if
 
 MD_END_C_DECLS
 CF_IMPLICIT_BRIDGING_DISABLED
-#endif /* MAC_OS_X_VERSION_MAX_ALLOWED */
-#endif /* __MDSCHEMA__ */
 
+#endif /* MAC_OS_X_VERSION_MAX_ALLOWED */
+
+#endif /* __MDSCHEMA__ */

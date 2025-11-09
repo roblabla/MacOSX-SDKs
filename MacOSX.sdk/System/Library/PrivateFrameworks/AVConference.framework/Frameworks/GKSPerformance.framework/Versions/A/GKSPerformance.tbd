@@ -1,11 +1,10 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 36C282DE-5AD3-3C19-A863-7E963F831EF8' ]
-platform:        macosx
-install-name:    /System/Library/PrivateFrameworks/AVConference.framework/Frameworks/GKSPerformance.framework/Versions/A/GKSPerformance
+uuids:           [ 'x86_64: 4C5E3AA9-1A22-371D-801A-B8C9D22CADD2', 'x86_64: 4C5E3AA9-1A22-371D-801A-B8C9D22CADD2' ]
+platform:        zippered
+install-name:    '/System/Library/PrivateFrameworks/AVConference.framework/Frameworks/GKSPerformance.framework/Versions/A/GKSPerformance'
 exports:         
   - archs:           [ x86_64 ]
-    symbols:         [ _AWDGCKSubmitLinkStatusMetric, _GKSSubmitAWDMetricsFromGameD ]
     objc-classes:    [ AWDAdaptor, AWDStats ]
     objc-ivars:      [ AWDAdaptor._RTStatsReceived, AWDAdaptor._awdstat, AWDAdaptor._callStarted, 
                        AWDAdaptor._frameErasureRateArray, AWDAdaptor._jitterBufferResidencyTimeArray, 

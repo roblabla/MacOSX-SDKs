@@ -1,9 +1,8 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: D034DF08-8B5C-30CC-9D4E-5C81A00A4145' ]
+uuids:           [ 'x86_64: 311A6D44-D75A-3BA4-A766-54132C910B07' ]
 platform:        macosx
-install-name:    /System/Library/Frameworks/BusinessChat.framework/Versions/A/BusinessChat
-objc-constraint: none
+install-name:    '/System/Library/Frameworks/BusinessChat.framework/Versions/A/BusinessChat'
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _BCAuthenticationResponseStatusAuthenticated, _BCAuthenticationResponseStatusFailed, 

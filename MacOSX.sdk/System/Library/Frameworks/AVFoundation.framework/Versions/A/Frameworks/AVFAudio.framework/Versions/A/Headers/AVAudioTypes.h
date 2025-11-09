@@ -9,7 +9,6 @@
 #define __AVAudioTypes_h__
 
 #import <Foundation/Foundation.h>
-#import <AVFoundation/AVBase.h>
 #import <CoreAudio/CoreAudioTypes.h>
 
 /*! @typedef AVAudioFramePosition
@@ -60,7 +59,7 @@ typedef void (^AVAudioNodeCompletionHandler)(void);
 /*!	@typedef AVAudioNodeBus
 	@abstract The index of a bus on an AVAudioNode.
 	@discussion
-		@link AVAudioNode @/link objects potentially have multiple input and/or output busses.
+		AVAudioNode objects potentially have multiple input and/or output busses.
 		AVAudioNodeBus represents a bus as a zero-based index.
 */
 typedef NSUInteger AVAudioNodeBus;
@@ -81,8 +80,7 @@ struct AVAudio3DPoint {
 };
 typedef struct AVAudio3DPoint AVAudio3DPoint;
 
-/*!	@method AVAudioMake3DPoint
-    @abstract Creates and returns an AVAudio3DPoint object
+/*! @abstract Creates and returns an AVAudio3DPoint object
 */
 NS_INLINE AVAudio3DPoint AVAudioMake3DPoint(float x, float y, float z) {
     AVAudio3DPoint p;
@@ -100,8 +98,7 @@ NS_INLINE AVAudio3DPoint AVAudioMake3DPoint(float x, float y, float z) {
 */
 typedef struct AVAudio3DPoint AVAudio3DVector;
 
-/*!	@method AVAudio3DVector
-    @abstract Creates and returns an AVAudio3DVector object
+/*! @abstract Creates and returns an AVAudio3DVector object
 */
 NS_INLINE AVAudio3DVector AVAudioMake3DVector(float x, float y, float z) {
     AVAudio3DVector v;
@@ -124,8 +121,7 @@ struct AVAudio3DVectorOrientation {
 };
 typedef struct AVAudio3DVectorOrientation AVAudio3DVectorOrientation;
 
-/*!	@method AVAudioMake3DVectorOrientation
-    @abstract Creates and returns an AVAudio3DVectorOrientation object
+/*! @abstract Creates and returns an AVAudio3DVectorOrientation object
 */
 NS_INLINE AVAudio3DVectorOrientation AVAudioMake3DVectorOrientation(AVAudio3DVector forward, AVAudio3DVector up) {
     AVAudio3DVectorOrientation o;
@@ -163,8 +159,7 @@ struct AVAudio3DAngularOrientation {
 };
 typedef struct AVAudio3DAngularOrientation AVAudio3DAngularOrientation;
 
-/*!	@method AVAudioMake3DAngularOrientation
-    @abstract Creates and returns an AVAudio3DAngularOrientation object
+/*! @abstract Creates and returns an AVAudio3DAngularOrientation object
 */
 NS_INLINE AVAudio3DAngularOrientation AVAudioMake3DAngularOrientation(float yaw, float pitch, float roll) {
     AVAudio3DAngularOrientation o;

@@ -1,5 +1,5 @@
 /*	NSCoder.h
-	Copyright (c) 1993-2018, Apple Inc. All rights reserved.
+	Copyright (c) 1993-2019, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -46,7 +46,7 @@ typedef NS_ENUM(NSInteger, NSDecodingFailurePolicy) {
 - (void)decodeArrayOfObjCType:(const char *)itemType count:(NSUInteger)count at:(void *)array;
 - (nullable void *)decodeBytesWithReturnedLength:(NSUInteger *)lengthp NS_RETURNS_INNER_POINTER;
 
-#if (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE))
+#if TARGET_OS_OSX
 - (void)encodePropertyList:(id)aPropertyList;
 - (nullable id)decodePropertyList;
 #endif
@@ -87,7 +87,7 @@ typedef NS_ENUM(NSInteger, NSDecodingFailurePolicy) {
 
 // Specify what the expected class of the allocated object is. If the coder responds YES to -requiresSecureCoding, then an exception will be thrown if the class to be decoded does not implement NSSecureCoding or is not isKindOfClass: of the argument. If the coder responds NO to -requiresSecureCoding, then the class argument is ignored and no check of the class of the decoded object is performed, exactly as if decodeObjectForKey: had been called.
 - (nullable id)decodeObjectOfClass:(Class)aClass forKey:(NSString *)key API_AVAILABLE(macos(10.8), ios(6.0), watchos(2.0), tvos(9.0));
-- (nullable id)decodeTopLevelObjectOfClass:(Class)aClass forKey:(NSString *)key error:(NSError **)error API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0)) NS_SWIFT_UNAVAILABLE("Use 'decodeTopLevelObjectOfClass(_:,forKey:) throws instead");
+- (nullable id)decodeTopLevelObjectOfClass:(Class)aClass forKey:(NSString *)key error:(NSError **)error API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0)) NS_SWIFT_UNAVAILABLE("Use 'decodeTopLevelObjectOfClass(_:,forKey:) throws' instead");
 
 // The class of the object may be any class in the provided NSSet, or a subclass of any class in the set. Otherwise, the behavior is the same as -decodeObjectOfClass:forKey:.
 - (nullable id)decodeObjectOfClasses:(nullable NSSet<Class> *)classes forKey:(NSString *)key API_AVAILABLE(macos(10.8), ios(6.0), watchos(2.0), tvos(9.0)) NS_REFINED_FOR_SWIFT;
@@ -154,7 +154,7 @@ typedef NS_ENUM(NSInteger, NSDecodingFailurePolicy) {
 
 @end
 
-#if (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE))
+#if TARGET_OS_OSX
 FOUNDATION_EXPORT NSObject * _Nullable NXReadNSObjectFromCoder(NSCoder *decoder) API_DEPRECATED("Not supported", macos(10.0,10.5), ios(2.0,2.0), watchos(2.0,2.0), tvos(9.0,9.0));
 /* Given an NSCoder, returns an object previously written with
    NXWriteNSObject(). The returned object is autoreleased. */
@@ -184,7 +184,7 @@ FOUNDATION_EXPORT NSObject * _Nullable NXReadNSObjectFromCoder(NSCoder *decoder)
 @interface NSCoder(NSDeprecated)
 /* This method is unsafe because it could potentially cause buffer overruns. You should use -decodeValueOfObjCType:at:size: instead.
  */
-- (void)decodeValueOfObjCType:(const char *)type at:(void *)data;
+- (void)decodeValueOfObjCType:(const char *)type at:(void *)data API_DEPRECATED_WITH_REPLACEMENT("decodeValueOfObjCType:at:size:", macos(10.0, API_TO_BE_DEPRECATED), ios(2.0, API_TO_BE_DEPRECATED), watchos(2.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED));
 
 @end
 

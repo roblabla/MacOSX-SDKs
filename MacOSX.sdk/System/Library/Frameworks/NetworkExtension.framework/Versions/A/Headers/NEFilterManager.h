@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2013-2015, 2018 Apple Inc.
+ * Copyright (c) 2013-2015, 2018, 2019 Apple Inc.
  * All rights reserved.
  */
 
@@ -27,7 +27,7 @@ NS_ASSUME_NONNULL_BEGIN
 @class NEFilterProviderConfiguration;
 
 /*!
- * @typedef NEFilterError
+ * @typedef NEFilterManagerError
  * @abstract Filter error codes
  */
 typedef NS_ENUM(NSInteger, NEFilterManagerError) {
@@ -39,6 +39,10 @@ typedef NS_ENUM(NSInteger, NEFilterManagerError) {
 	NEFilterManagerErrorConfigurationStale = 3,
 	/*! @const NEFilterManagerErrorConfigurationCannotBeRemoved The filter configuration cannot be removed. */
 	NEFilterManagerErrorConfigurationCannotBeRemoved = 4,
+	/*! @const NEFilterManagerErrorConfigurationPermissionDenied Operation permission denied. */
+	NEFilterManagerErrorConfigurationPermissionDenied API_AVAILABLE(macos(10.15), ios(13.0)) API_UNAVAILABLE(watchos, tvos) = 5,
+	/*! @const NEFilterManagerErrorConfigurationInternalError An internal configuration error occurred. */
+	NEFilterManagerErrorConfigurationInternalError API_AVAILABLE(macos(10.15), ios(13.0)) API_UNAVAILABLE(watchos, tvos) = 6,
 } API_AVAILABLE(macos(10.11), ios(8.0)) API_UNAVAILABLE(watchos, tvos);
 
 /*! @const NEFilterErrorDomain The filter error domain */
@@ -46,6 +50,17 @@ NEFILTER_EXPORT NSString * const NEFilterErrorDomain API_AVAILABLE(macos(10.11),
 
 /*! @const NEFilterConfigurationDidChangeNotification Name of the NSNotification that is posted when the filter configuration changes. */
 NEFILTER_EXPORT NSString * const NEFilterConfigurationDidChangeNotification API_AVAILABLE(macos(10.11), ios(8.0)) API_UNAVAILABLE(watchos, tvos);
+
+/*!
+ * @typedef NEFilterManagerGrade
+ * @abstract Filter grade
+ */
+typedef NS_ENUM(NSInteger, NEFilterManagerGrade) {
+	/*! @const NEFilterManagerGradeFirewall The filter acts as a firewall, blocking some network traffic. Firewall grade filters see network traffic before other filter grades. */
+	NEFilterManagerGradeFirewall = 1,
+	/*! @const NEFilterManagerGradeInspector The filter acts as an inspector of network traffic. Inspector grade filters see network traffic after firewall grade filters. */
+	NEFilterManagerGradeInspector = 2,
+} NS_SWIFT_NAME(NEFilterManager.Grade) API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*!
  * @interface NEFilterManager
@@ -99,9 +114,16 @@ API_AVAILABLE(macos(10.11), ios(8.0)) API_UNAVAILABLE(watchos, tvos)
 
 /*!
  * @property enabled
- * @discussion Toggles the enabled status of the filter. Setting this property will disable filter configurations of other apps. This property will be set to NO when other filter configurations are enabled.
+ * @discussion Toggles the enabled status of the filter. On iOS, setting this property will disable filter configurations of other apps, and this property will be set to NO when other filter configurations are enabled.
+ *     On macOS, up to 4 filter configurations of the same grade can be enabled simultaneously.
  */
 @property (getter=isEnabled) BOOL enabled API_AVAILABLE(macos(10.11), ios(8.0)) API_UNAVAILABLE(watchos, tvos);
+
+/*!
+ * @property grade
+ * @discussion The grade of the filter. The default grade is NEFilterManagerGradeFirewall.
+ */
+@property NEFilterManagerGrade grade API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, watchos, tvos);
 
 @end
 

@@ -1,18 +1,19 @@
 /*
  NSScrubberLayout.h
  Application Kit
- Copyright (c) 2016-2018, Apple Inc.
+ Copyright (c) 2016-2019, Apple Inc.
  All rights reserved.
  */
 
 #import <Foundation/NSGeometry.h>
 #import <AppKit/AppKitDefines.h>
 
-NS_ASSUME_NONNULL_BEGIN
-
-@class NSScrubber, NSScrubberFlowLayout, NSIndexSet;
 @protocol NSScrubberDelegate;
 
+NS_ASSUME_NONNULL_BEGIN
+API_UNAVAILABLE_BEGIN(ios)
+
+@class NSScrubber, NSScrubberFlowLayout, NSIndexSet;
 #pragma mark - Layout Attributes
 
 /*!
@@ -20,18 +21,8 @@ NS_ASSUME_NONNULL_BEGIN
  @abstract @c NSScrubberLayoutAttributes describes the layout of a single @c NSScrubber item.
  @discussion @c NSScrubberLayout objects transact in terms of @c NSScrubberLayoutAttributes. @c NSScrubberLayoutAttributes can be subclassed if a layout object wants to include more layout information than the base implementation provides. Subclasses of @c NSScrubberLayoutAttributes must implement @c isEqual:, @c hash, and the @c NSCopying protocol.
  */
-NS_CLASS_AVAILABLE_MAC(10_12_2)
-@interface NSScrubberLayoutAttributes : NSObject <NSCopying> {
-@private
-    NSInteger _itemIndex APPKIT_IVAR;
-    NSRect _frame APPKIT_IVAR;
-    CGFloat _alpha APPKIT_IVAR;
-    unsigned int _escapes:1 APPKIT_IVAR;
-    unsigned int _reservedLayoutAttributeFlags:31 __unused APPKIT_IVAR;
-#ifndef __OBJC2__
-    id _reserved[2] __unused APPKIT_IVAR;
-#endif
-}
+API_AVAILABLE(macos(10.12.2))
+@interface NSScrubberLayoutAttributes : NSObject <NSCopying>
 
 @property NSInteger itemIndex;
 @property NSRect frame;
@@ -47,13 +38,8 @@ NS_CLASS_AVAILABLE_MAC(10_12_2)
  @class NSScrubberLayout
  @abstract @c NSScrubberLayout is an abstract class that describes the layout of items within a @c NSScrubber control.
  */
-NS_CLASS_AVAILABLE_MAC(10_12_2)
-@interface NSScrubberLayout : NSObject <NSCoding> {
-@private
-    __weak id _private APPKIT_IVAR;
-    unsigned int _dirty:1 APPKIT_IVAR;
-    unsigned int _reservedFlags:31 __unused APPKIT_IVAR;
-}
+API_AVAILABLE(macos(10.12.2))
+@interface NSScrubberLayout : NSObject <NSCoding>
 
 #pragma mark Base Implementation
 /* 
@@ -118,13 +104,8 @@ NS_CLASS_AVAILABLE_MAC(10_12_2)
  @abstract @c NSScrubberFlowLayout is a concrete layout object that arranges items end-to-end in a linear strip. It supports a fixed inter-item spacing and both fixed- and variable-sized items.
  @discussion If the associated scrubber's @c delegate conforms to @c NSScrubberFlowLayoutDelegate, and it implements the @c scrubber:layout:sizeForItemAtIndex: method, @c NSScrubberFlowLayout will obtain the item size from the delegate. If the delegate does not implement that method, or if the method returns @c NSZeroSize, it will fall back to using the layout's @c itemSize property. By default, NSScrubberFlowLayout does not invalidate its layout on selection change, highlight change, or visible rectangle change.
  */
-NS_CLASS_AVAILABLE_MAC(10_12_2)
-@interface NSScrubberFlowLayout : NSScrubberLayout {
-@private
-    id _support APPKIT_IVAR;
-    CGFloat _itemSpacing APPKIT_IVAR;
-    NSSize _itemSize APPKIT_IVAR;
-}
+API_AVAILABLE(macos(10.12.2))
+@interface NSScrubberFlowLayout : NSScrubberLayout
 
 /// The amount of horizontal spacing between items in points. The default value is 0.0.
 @property CGFloat itemSpacing;
@@ -142,18 +123,16 @@ NS_CLASS_AVAILABLE_MAC(10_12_2)
  @class NSScrubberProportionalLayout
  @abstract @c NSScrubberProportionalLayout is a concrete layout object that sizes each item to some fraction of the scrubber's visible size.
  */
-NS_CLASS_AVAILABLE_MAC(10_12_2)
-@interface NSScrubberProportionalLayout : NSScrubberLayout {
-@private
-    NSInteger _numberOfVisibleItems APPKIT_IVAR;
-}
+API_AVAILABLE(macos(10.12.2))
+@interface NSScrubberProportionalLayout : NSScrubberLayout
 
 /// The number of items that should fit within the scrubber's viewport at once.
 @property NSInteger numberOfVisibleItems;
 
 - (instancetype)initWithNumberOfVisibleItems:(NSInteger)numberOfVisibleItems NS_DESIGNATED_INITIALIZER;
-- (instancetype)initWithCoder:(NSCoder *)aDecoder NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithCoder:(NSCoder *)coder NS_DESIGNATED_INITIALIZER;
 
 @end
 
+API_UNAVAILABLE_END
 NS_ASSUME_NONNULL_END

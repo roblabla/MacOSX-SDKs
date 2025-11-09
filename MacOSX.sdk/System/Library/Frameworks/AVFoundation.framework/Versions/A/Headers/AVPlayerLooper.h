@@ -3,7 +3,7 @@
 
 	Framework:  AVFoundation
 
-	Copyright 2016 Apple Inc. All rights reserved.
+	Copyright 2016-2018 Apple Inc. All rights reserved.
 
  */
 
@@ -61,13 +61,13 @@ NS_ASSUME_NONNULL_BEGIN
     Indicates that the looper is no longer looping because -disableLooping was invoked.
  */
 typedef NS_ENUM(NSInteger, AVPlayerLooperStatus) {
-    AVPlayerLooperStatusUnknown,
-    AVPlayerLooperStatusReady,
-    AVPlayerLooperStatusFailed,
-    AVPlayerLooperStatusCancelled
+    AVPlayerLooperStatusUnknown = 0,
+    AVPlayerLooperStatusReady = 1,
+    AVPlayerLooperStatusFailed = 2,
+    AVPlayerLooperStatusCancelled = 3
 };
 
-NS_CLASS_AVAILABLE(10_12, 10_0)
+API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0)) API_UNAVAILABLE(watchos)
 @interface AVPlayerLooper : NSObject
 {
 @private

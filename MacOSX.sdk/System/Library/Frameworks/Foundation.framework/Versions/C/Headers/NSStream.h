@@ -1,5 +1,5 @@
 /*	NSStream.h
-        Copyright (c) 2003-2018, Apple Inc. All rights reserved
+        Copyright (c) 2003-2019, Apple Inc. All rights reserved
 */
 
 #import <Foundation/NSObject.h>
@@ -86,9 +86,9 @@ typedef NS_OPTIONS(NSUInteger, NSStreamEvent) {
 
 @interface NSStream (NSSocketStreamCreationExtensions)
 
-+ (void)getStreamsToHostWithName:(NSString *)hostname port:(NSInteger)port inputStream:(NSInputStream * _Nullable * _Nullable)inputStream outputStream:(NSOutputStream * _Nullable * _Nullable)outputStream API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0)) __WATCHOS_PROHIBITED;
++ (void)getStreamsToHostWithName:(NSString *)hostname port:(NSInteger)port inputStream:(NSInputStream * _Nullable * _Nullable)inputStream outputStream:(NSOutputStream * _Nullable * _Nullable)outputStream API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 
-#if (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE))
+#if TARGET_OS_OSX
 + (void)getStreamsToHost:(NSHost *)host port:(NSInteger)port inputStream:(NSInputStream * _Nullable * _Nullable)inputStream outputStream:(NSOutputStream * _Nullable * _Nullable)outputStream API_DEPRECATED("Please use getStreamsToHostWithName:port:inputStream:outputStream: instead", macos(10.3,10.10)) API_UNAVAILABLE(ios, watchos, tvos);
 #endif
 

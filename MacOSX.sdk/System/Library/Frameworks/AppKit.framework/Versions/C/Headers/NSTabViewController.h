@@ -1,7 +1,7 @@
 /*
     NSTabViewController.h
     Application Kit
-    Copyright (c) 2014-2018, Apple Inc.
+    Copyright (c) 2014-2019, Apple Inc.
     All rights reserved.
 */
 
@@ -12,6 +12,7 @@
 #import <AppKit/NSToolbar.h>
 
 NS_ASSUME_NONNULL_BEGIN
+API_UNAVAILABLE_BEGIN(ios)
 
 typedef NS_ENUM(NSInteger, NSTabViewControllerTabStyle) {
     /// Uses an NSSegmentedControl to show the UI for the tabs. The control is on the top of the view.
@@ -25,7 +26,7 @@ typedef NS_ENUM(NSInteger, NSTabViewControllerTabStyle) {
     
     /// NSTabViewController will not provide any of its own tab control UI. Separate UI, such as a NSSegmentedControl or NSPopupButton, can be easily bound to the TabViewController. Or \c tabView.tabViewType can be changed for the TabView itself to draw the UI.
     NSTabViewControllerTabStyleUnspecified = -1,
-} NS_ENUM_AVAILABLE_MAC(10_10);
+} API_AVAILABLE(macos(10.10));
 
 /*!
  * NSTabViewController is a container view controller that displays a single child view controller at a time from its \c childViewControllers.
@@ -34,19 +35,8 @@ typedef NS_ENUM(NSInteger, NSTabViewControllerTabStyle) {
  * The NSTabViewController is set as the delegate of its managed NSTabView. Any overrides of NSTabViewDelegate methods must call super. Properties of the TabView such as the tabStyle can be directly manipulated, but calling methods that add and remove tabViewItems or changing the delegate is not allowed.
  * NSViewController's methods \c -addChildViewController:, \c -insertViewController:atIndex:, and \c -removeChildViewControllerAtIndex: can all be used as convience methods to add children; default TabViewItems will be appropriately created or destroyed. The default NSTabViewItem created with with +[NSTabViewItem tabViewItemForViewController:].
  */
-NS_CLASS_AVAILABLE_MAC(10_10)
-@interface NSTabViewController : NSViewController <NSTabViewDelegate, NSToolbarDelegate> {
-@private
-    NSTabView *_tabView APPKIT_IVAR;
-    id _tabViewControllerPrivateData APPKIT_IVAR;
-    
-    struct {
-        unsigned int _changingSelection:1;
-        unsigned int _addingInitialTabViewItems:1;
-        unsigned int _tabBarIsDrivingTabMove:1;
-        unsigned int __extra:29;
-    } _tabViewControllerFlags APPKIT_IVAR;
-}
+API_AVAILABLE(macos(10.10))
+@interface NSTabViewController : NSViewController <NSTabViewDelegate, NSToolbarDelegate>
 
 /// The style that this NSTabViewController displays its UI as. Defaults to \c NSTabViewControllerTabStyleSegmentedControlOnTop.
 @property NSTabViewControllerTabStyle tabStyle;
@@ -114,4 +104,5 @@ NS_CLASS_AVAILABLE_MAC(10_10)
 
 @end
 
+API_UNAVAILABLE_END
 NS_ASSUME_NONNULL_END

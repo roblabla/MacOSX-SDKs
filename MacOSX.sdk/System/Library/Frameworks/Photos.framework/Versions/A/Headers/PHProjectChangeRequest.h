@@ -2,18 +2,28 @@
 //  PHProjectChangeRequest.h
 //  Photos
 //
-//  Copyright © 2017 Apple, Inc. All rights reserved.
+//  Copyright © 2018 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
+#import <Photos/PHChangeRequest.h>
 
-@class PHProject;
-@class PHAsset;
+#if TARGET_OS_IPHONE || TARGET_OS_MACCATALYST
+@class UIImage;
+#else
 @class NSImage;
-NS_ASSUME_NONNULL_BEGIN
+#endif
+@class PHAsset;
+@class PHProject;
 
-NS_CLASS_AVAILABLE(10_13, NA)
-@interface PHProjectChangeRequest : NSObject
+NS_ASSUME_NONNULL_BEGIN
+API_AVAILABLE_BEGIN(macos(10.13))
+
+API_UNAVAILABLE_BEGIN(ios, tvos, macCatalyst)
+
+
+OS_EXPORT
+@interface PHProjectChangeRequest : PHChangeRequest
 
 - (instancetype)initWithProject:(PHProject *)project;
 
@@ -31,24 +41,33 @@ NS_CLASS_AVAILABLE(10_13, NA)
  Sets the key asset representing the project.
  Deprecated in macOS 10.14, please use -[PHProjectChangeRequest setProjectPreviewImage:] to provide a rendered preview instead.
  */
-- (void)setKeyAsset:(PHAsset * _Nullable)keyAsset API_DEPRECATED_WITH_REPLACEMENT("-setProjectPreviewImage:", macos(10.13, 10.14));
+- (void)setKeyAsset:(nullable PHAsset *)keyAsset API_DEPRECATED_WITH_REPLACEMENT("-setProjectPreviewImage:", macos(10.13, 10.14)) API_UNAVAILABLE(ios, macCatalyst, tvos);
 
 /**
  Use this method to update the project preview visible in Photos.
  Extensions are expected to set a project preview:
-    - In or after -[id<PHProjectExtensionController> beginProjectWithExtensionContext:projectInfo:].
-    - In or after -[id<PHProjectExtensionController> resumeProjectWithExtensionContext:projectInfo:]
-      if -[PHProject hasProjectPreview] returns NO.
-    - Whenever the project changes in a way that a new preview is needed.
+ - In or after -[id<PHProjectExtensionController> beginProjectWithExtensionContext:projectInfo:].
+ - In or after -[id<PHProjectExtensionController> resumeProjectWithExtensionContext:projectInfo:]
+ if -[PHProject hasProjectPreview] returns NO.
+ - Whenever the project changes in a way that a new preview is needed.
  @param previewImage A rendered project preview, expected dimensions are 1024x1024.
  */
+#if TARGET_OS_IPHONE || TARGET_OS_MACCATALYST
+- (void)setProjectPreviewImage:(UIImage *)previewImage;
+#else
 - (void)setProjectPreviewImage:(NSImage *)previewImage API_AVAILABLE(macos(10.14));
+#endif
 
 /**
  Removes the specified assets from the project.
  @param assets A collection of PHAsset objects to be removed from the project.
  */
 - (void)removeAssets:(id<NSFastEnumeration>)assets API_AVAILABLE(macos(10.14)) NS_REFINED_FOR_SWIFT;
+
 @end
 
+
+API_UNAVAILABLE_END
+
+API_AVAILABLE_END
 NS_ASSUME_NONNULL_END

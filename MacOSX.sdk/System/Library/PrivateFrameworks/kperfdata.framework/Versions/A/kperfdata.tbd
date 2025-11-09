@@ -1,9 +1,8 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: DFFC9EE1-71AE-3FB1-B396-91AF7B875993' ]
-platform:        macosx
-install-name:    /System/Library/PrivateFrameworks/kperfdata.framework/Versions/A/kperfdata
-objc-constraint: none
+uuids:           [ 'x86_64: CCC259B8-2A10-34D0-B593-14E4578BBFDE', 'x86_64: CCC259B8-2A10-34D0-B593-14E4578BBFDE' ]
+platform:        zippered
+install-name:    '/System/Library/PrivateFrameworks/kperfdata.framework/Versions/A/kperfdata'
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _kpdecode_cursor_clearchunk, _kpdecode_cursor_create, _kpdecode_cursor_flush, 

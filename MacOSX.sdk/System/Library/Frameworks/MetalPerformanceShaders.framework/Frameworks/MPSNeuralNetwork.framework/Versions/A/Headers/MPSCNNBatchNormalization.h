@@ -31,7 +31,7 @@ extern "C" {
  *              underlying resources.  Use [MPSCNNBatchNormalizationStatistics resultStateForSourceImages:]
  *              or [MPSCNNBatchNormalizationStatistics temporaryResultStateForCommandBuffer:sourceImages:].
  */
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), tvos(11.3))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3))
 @interface MPSCNNBatchNormalizationState : MPSNNGradientState
 
 @property (readonly, nonnull, retain, nonatomic) MPSCNNBatchNormalization * batchNormalization;
@@ -99,7 +99,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), tvos(11.3))
  *  @description A state which contains mean and variance terms used to apply a
  *               normalization in a MPSCNNBatchNormalization operation.
  */
-MPS_CLASS_AVAILABLE_STARTING(macos(10.14), ios(12.0), tvos(12.0))
+MPS_CLASS_AVAILABLE_STARTING(macos(10.14), ios(12.0), macCatalyst(13.0), tvos(12.0))
 @interface MPSCNNNormalizationMeanAndVarianceState : MPSState
 
 /*! @property   mean
@@ -147,7 +147,7 @@ MPS_CLASS_AVAILABLE_STARTING(macos(10.14), ios(12.0), tvos(12.0))
  *              instance of MPSCNNBatchNormalizationState uses to initialize the
  *              scale factors, bias terms, and batch statistics.
  */
-MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3))
+MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3))
 @protocol MPSCNNBatchNormalizationDataSource <NSObject, NSCopying>
 
 @required
@@ -226,7 +226,7 @@ MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3))
      */
     -(MPSCNNNormalizationMeanAndVarianceState * __nullable) updateMeanAndVarianceWithCommandBuffer: (nonnull id<MTLCommandBuffer>) commandBuffer
                                                                             batchNormalizationState: (MPSCNNBatchNormalizationState* __nonnull) batchNormalizationState
-    MPS_AVAILABLE_STARTING(macos(10.14), ios(12.0), tvos(12.0));
+    MPS_AVAILABLE_STARTING(macos(10.14), ios(12.0), macCatalyst(13.0), tvos(12.0));
     
     /*! @abstract       Compute new gamma and beta values using current values and gradients contained within a
      *                  MPSCNNBatchNormalizationState.  Perform the update using the CPU.
@@ -246,7 +246,7 @@ MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3))
      *  @return         A boolean value indicating if the update was performed.
      */
     -(BOOL) updateMeanAndVarianceWithBatchNormalizationState: (MPSCNNBatchNormalizationState* __nonnull) batchNormalizationState
-    MPS_AVAILABLE_STARTING(macos(10.14), ios(12.0), tvos(12.0));
+    MPS_AVAILABLE_STARTING(macos(10.14), ios(12.0), macCatalyst(13.0), tvos(12.0));
     
     /*! @abstract       An optional tiny number to use to maintain numerical stability.
      *  @discussion     output_image = (input_image - mean[c]) * gamma[c] / sqrt(variance[c] + epsilon) + beta[c];
@@ -274,7 +274,7 @@ MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3))
      *  @result     A pointer to a copy of this data source.
      */
     - (nonnull instancetype) copyWithZone:(nullable NSZone *)zone
-                                   device:(nullable id <MTLDevice>) device MPS_AVAILABLE_STARTING(macos(10.14), ios(12.0), tvos(12.0));
+                                   device:(nullable id <MTLDevice>) device MPS_AVAILABLE_STARTING(macos(10.14), ios(12.0), macCatalyst(13.0), tvos(12.0));
     
 @end    // MPSCNNBatchNormalizationDataSource
     
@@ -291,7 +291,7 @@ MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3))
  *                  out(:,:,c,:) = output_image;
  *              }
  */
-MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3))
+MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3))
 @interface  MPSCNNBatchNormalization : MPSCNNKernel
 
 /*! @property   numberOfFeatureChannels
@@ -334,7 +334,7 @@ MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3))
 -(nonnull instancetype) initWithDevice: (nonnull id <MTLDevice>) device
                             dataSource: (nonnull id <MPSCNNBatchNormalizationDataSource>) dataSource
                  fusedNeuronDescriptor: (MPSNNNeuronDescriptor* __nullable) fusedNeuronDescriptor NS_DESIGNATED_INITIALIZER
-MPS_AVAILABLE_STARTING(macos(10.14), ios(12.0), tvos(12.0));
+MPS_AVAILABLE_STARTING(macos(10.14), ios(12.0), macCatalyst(13.0), tvos(12.0));
 
 /*!
  * Use initWithDevice:dataSource instead
@@ -443,17 +443,17 @@ MPS_AVAILABLE_STARTING(macos(10.14), ios(12.0), tvos(12.0));
  */
 -(void) reloadDataSource: (__nonnull id<MPSCNNBatchNormalizationDataSource>) dataSource
 MPS_AVAILABLE_STARTING_BUT_DEPRECATED( "Please use -reloadGammaAndBetaFromDataSource and/or -relaodMeanAndVarianceFromDataSource instead.",
-                                      macos(10.13.4, 10.14), ios(11.3,12.0), tvos(11.3, 12.0));
+                                      macos(10.13.4, 10.14), ios(11.3,12.0), tvos(11.3, 12.0))  MPS_UNAVAILABLE(macCatalyst);
 
 /*!
  *  @abstract   Reinitialize the filter's gamma and beta values using the data source provided at kernel initialization.
  */
--(void) reloadGammaAndBetaFromDataSource MPS_AVAILABLE_STARTING(macos(10.14), ios(12.0), tvos(12.0));
+-(void) reloadGammaAndBetaFromDataSource MPS_AVAILABLE_STARTING(macos(10.14), ios(12.0), macCatalyst(13.0), tvos(12.0));
 
 /*!
  *  @abstract   Reinitialize the filter's mean and variance values using the data source provided at kernel initialization.
  */
--(void) reloadMeanAndVarianceFromDataSource MPS_AVAILABLE_STARTING(macos(10.14), ios(12.0), tvos(12.0));
+-(void) reloadMeanAndVarianceFromDataSource MPS_AVAILABLE_STARTING(macos(10.14), ios(12.0), macCatalyst(13.0), tvos(12.0));
 
 /*!
  *  @abstract   Reload data using new gamma and beta terms contained within an
@@ -478,7 +478,7 @@ MPS_AVAILABLE_STARTING_BUT_DEPRECATED( "Please use -reloadGammaAndBetaFromDataSo
  */
 -(void) reloadMeanAndVarianceWithCommandBuffer: (__nonnull id<MTLCommandBuffer>) commandBuffer
                           meanAndVarianceState: (MPSCNNNormalizationMeanAndVarianceState* __nonnull) meanAndVarianceState
- MPS_AVAILABLE_STARTING(macos(10.14), ios(12.0), tvos(12.0));
+ MPS_AVAILABLE_STARTING(macos(10.14), ios(12.0), macCatalyst(13.0), tvos(12.0));
 @end    // MPSCNNBatchNormalization
     
 /*!
@@ -490,7 +490,7 @@ MPS_AVAILABLE_STARTING_BUT_DEPRECATED( "Please use -reloadGammaAndBetaFromDataSo
  *              multiple images to accumulate all the statistics necessary to perform
  *              a batch normalization as described in  https://arxiv.org/pdf/1502.03167v3.pdf.
  */
-MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3))
+MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3))
 @interface  MPSCNNBatchNormalizationStatistics : MPSCNNKernel
 
 /*!
@@ -566,7 +566,7 @@ MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3))
  *              terms used to compute the batch normalization.
  *
  */
-MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3))
+MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3))
 @interface  MPSCNNBatchNormalizationGradient : MPSCNNGradientKernel
 /*!
  *  @abstract   Initializes a batch normalization gradient kernel using a device and neuron descriptor.
@@ -581,7 +581,7 @@ MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3))
  */
 -(nonnull instancetype) initWithDevice: (nonnull id <MTLDevice>) device
                  fusedNeuronDescriptor: (MPSNNNeuronDescriptor* __nullable) fusedNeuronDescriptor NS_DESIGNATED_INITIALIZER
-MPS_AVAILABLE_STARTING(macos(10.14), ios(12.0), tvos(12.0));
+MPS_AVAILABLE_STARTING(macos(10.14), ios(12.0), macCatalyst(13.0), tvos(12.0));
 
 /*! @abstract NSSecureCoding compatability
  *  @discussion While the standard NSSecureCoding/NSCoding method
@@ -688,7 +688,7 @@ MPS_AVAILABLE_STARTING(macos(10.14), ios(12.0), tvos(12.0));
  *              with the gradient of the loss function with respect to the batch statistics and
  *              batch normalization weights used to perform a batch normalization.
  */
-MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3))
+MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3))
 @interface  MPSCNNBatchNormalizationStatisticsGradient : MPSCNNGradientKernel
 /*!
  *  @abstract   Initializes a batch normalization statistics gradient kernel using a device and neuron descriptor.
@@ -702,7 +702,7 @@ MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3))
  */
 -(nonnull instancetype) initWithDevice: (nonnull id <MTLDevice>) device
                  fusedNeuronDescriptor: (MPSNNNeuronDescriptor* __nullable) fusedNeuronDescriptor NS_DESIGNATED_INITIALIZER
-MPS_AVAILABLE_STARTING(macos(10.14), ios(12.0), tvos(12.0));
+MPS_AVAILABLE_STARTING(macos(10.14), ios(12.0), macCatalyst(13.0), tvos(12.0));
 
 /*! @abstract NSSecureCoding compatability
  *  @discussion While the standard NSSecureCoding/NSCoding method

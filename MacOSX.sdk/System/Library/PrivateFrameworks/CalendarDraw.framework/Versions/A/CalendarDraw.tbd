@@ -1,9 +1,9 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: EF39743C-951D-3BDE-8F5E-97639F8E535A' ]
+uuids:           [ 'x86_64: E8BE7153-B6DA-3816-A2DF-56F7C07A24E1' ]
 platform:        macosx
-install-name:    /System/Library/PrivateFrameworks/CalendarDraw.framework/Versions/A/CalendarDraw
-current-version: 1875
+install-name:    '/System/Library/PrivateFrameworks/CalendarDraw.framework/Versions/A/CalendarDraw'
+current-version: 2377
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _BirthdayCalendarColor, _BirthdayMonthCalendarColor, _CalCGColorConvertToRGBCopy, 
@@ -15,7 +15,7 @@ exports:
                        _CalendarTileGetTentativeDotColor, _CalendarUIBundle, _CreateBackgroundImage, 
                        _CreateCalendarDotImageInContext, _CreateCalendarForegroundColorForCGColor, 
                        _CreateCalendarTileImageInContext, _GetRGBAComponents, __CalCGColorLoadConstantColor, 
-                       _colorNeedsTransform, _fontWithProportionalNumbers, _kCalCGColorBlue, 
+                       _colorNeedsTransform, _displayColorForSymbolicName, _kCalCGColorBlue, 
                        _kCalCGColorBrown, _kCalCGColorGreen, _kCalCGColorOrange, 
                        _kCalCGColorPurple, _kCalCGColorRed, _kCalCGColorYellow ]
     objc-classes:    [ CalDrawAllDayListOccurrence, CalDrawColorKey, CalDrawColorUtils, 

@@ -1,6 +1,6 @@
 /*
 	NSScriptClassDescription.h
-	Copyright (c) 1997-2018, Apple Inc.
+	Copyright (c) 1997-2019, Apple Inc.
 	All rights reserved.
 */
 
@@ -97,7 +97,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /* A method that was deprecated in Mac OS 10.5. You should use -hasWritablePropertyForKey: instead.
 */
-- (BOOL)isReadOnlyKey:(NSString *)key NS_DEPRECATED(10_0, 10_5, NA, NA);
+- (BOOL)isReadOnlyKey:(NSString *)key API_DEPRECATED_WITH_REPLACEMENT("-hasWritablePropertyForKey:", macos(10.0, 10.5)) API_UNAVAILABLE(ios, watchos, tvos);
 
 @end
 

@@ -23,7 +23,7 @@
 #include <TargetConditionals.h>
 
 #if TARGET_OS_OSX
-# define CA_OSX_VERSION(v) ((v) > 0 && MAC_OS_X_VERSION_MIN_REQUIRED >= (v))
+# define CA_OSX_VERSION(v) ((v) > 0 && __MAC_OS_X_VERSION_MAX_ALLOWED >= (v))
 #else
 # define CA_OSX_VERSION(v) (0)
 #endif
@@ -83,14 +83,6 @@
 # else
 #  define CA_HIDDEN /* no hidden */
 # endif
-#endif
-
-#ifdef CA_BUILD_TESTABLE
-#  define CA_TESTABLE CA_EXTERN
-#  define CA_TESTABLE_CLASS __attribute__((visibility("default")))
-#else
-#  define CA_TESTABLE CA_HIDDEN
-#  define CA_TESTABLE_CLASS CA_HIDDEN
 #endif
 
 #ifndef CA_PURE

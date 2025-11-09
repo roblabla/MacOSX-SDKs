@@ -118,7 +118,7 @@ __END_DECLS
 #define __Request__host_security_subsystem__defined
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -135,11 +135,11 @@ __END_DECLS
 		boolean_t inherit_memory;
 	} __Request__host_security_create_task_token_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -153,7 +153,7 @@ __END_DECLS
 		audit_token_t audit_token;
 	} __Request__host_security_set_task_token_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 #endif /* !__Request__host_security_subsystem__defined */
 
@@ -172,7 +172,7 @@ union __RequestUnion__host_security_subsystem {
 #define __Reply__host_security_subsystem__defined
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -182,11 +182,11 @@ union __RequestUnion__host_security_subsystem {
 		/* end of the kernel processed data */
 	} __Reply__host_security_create_task_token_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -194,7 +194,7 @@ union __RequestUnion__host_security_subsystem {
 		kern_return_t RetCode;
 	} __Reply__host_security_set_task_token_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 #endif /* !__Reply__host_security_subsystem__defined */
 

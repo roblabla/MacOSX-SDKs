@@ -1,7 +1,7 @@
 /*
     CoreData.h
     Core Data
-    Copyright (c) 2004-2018, Apple Inc.
+    Copyright (c) 2004-2019, Apple Inc.
     All rights reserved.
 */
 
@@ -11,6 +11,7 @@
 #import <CoreData/CoreDataErrors.h>
 
 #import <CoreData/NSAttributeDescription.h>
+#import <CoreData/NSDerivedAttributeDescription.h>
 #import <CoreData/NSEntityDescription.h>
 #import <CoreData/NSFetchedPropertyDescription.h>
 #import <CoreData/NSPropertyDescription.h>
@@ -45,6 +46,7 @@
 #import <CoreData/NSSaveChangesRequest.h>
 #import <CoreData/NSBatchUpdateRequest.h>
 #import <CoreData/NSBatchDeleteRequest.h>
+#import <CoreData/NSBatchInsertRequest.h>
 
 #import <CoreData/NSMergePolicy.h>
 
@@ -59,5 +61,7 @@
 #import <CoreData/NSPersistentHistoryChangeRequest.h>
 #import <CoreData/NSPersistentHistoryToken.h>
 #import <CoreData/NSPersistentHistoryTransaction.h>
+#import <CoreData/NSPersistentCloudKitContainer.h>
+#import <CoreData/NSPersistentCloudKitContainerOptions.h>
 
 #import <CoreData/NSCoreDataCoreSpotlightDelegate.h>

@@ -3,7 +3,7 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2010-2018 Apple Inc. All rights reserved.
+	Copyright 2010-2019 Apple Inc. All rights reserved.
 
 */
 
@@ -11,11 +11,13 @@
 #import <AVFoundation/AVAssetTrack.h>
 #import <CoreMedia/CMTime.h>
 #import <CoreMedia/CMTimeRange.h>
+#import <CoreMedia/CMFormatDescription.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
 @class AVAsset;
 @class AVComposition;
+@class AVCompositionTrackFormatDescriptionReplacement;
 
 /*!
     @class          AVCompositionTrack
@@ -26,7 +28,7 @@ NS_ASSUME_NONNULL_BEGIN
 @class AVCompositionTrackInternal;
 @class AVCompositionTrackSegment;
 
-NS_CLASS_AVAILABLE(10_7, 4_0)
+API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0))
 @interface AVCompositionTrack : AVAssetTrack
 {
 @private
@@ -52,6 +54,13 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
  */
 - (nullable AVCompositionTrackSegment *)segmentForTrackTime:(CMTime)trackTime;
 
+/*!
+	@property		formatDescriptionReplacements
+	@abstract		An array of AVCompositionTrackFormatDescriptionReplacement objects indicating original format descriptions and their replacements.
+	@discussion     The value of this property is an array of AVCompositionTrackFormatDescriptionReplacement objects, each of which specifies an original format description together with its replacement format description (as specified by a previous call to -replaceFormatDescription:withFormatDescription:). Only format descriptions that are to be replaced will occur as the originalFormatDescription elements in the AVCompositionTrackFormatDescriptionReplacement objects in this array.
+*/
+@property (readonly) NSArray <AVCompositionTrackFormatDescriptionReplacement *> *formatDescriptionReplacements API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0), watchos(6.0));
+
 @end
 
 
@@ -63,12 +72,18 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 
 @class AVMutableCompositionTrackInternal;
 
-NS_CLASS_AVAILABLE(10_7, 4_0)
+API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0))
 @interface AVMutableCompositionTrack : AVCompositionTrack
 {
 @private
     AVMutableCompositionTrackInternal    *_mutablePriv __attribute__((unused));
 }
+
+/*!
+ @property       enabled
+ @abstract       Specifies whether the track is enabled or disabled.  Default is YES.
+ */
+@property (nonatomic, getter=isEnabled) BOOL enabled API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0)) API_UNAVAILABLE(watchos);
 
 /*!
     @property       naturalTimeScale
@@ -154,7 +169,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
     @discussion
       This method is equivalent to (but more efficient than) calling -insertTimeRange:ofTrack:atTime:error: for each timeRange/track pair. If this method returns an error, none of the time ranges will be inserted into the composition track. To specify an empty time range, pass NSNull for the track and a time range of starting at kCMTimeInvalid with a duration of the desired empty edit.
 */
-- (BOOL)insertTimeRanges:(NSArray<NSValue *> *)timeRanges ofTracks:(NSArray<AVAssetTrack *> *)tracks atTime:(CMTime)startTime error:(NSError * _Nullable * _Nullable)outError NS_AVAILABLE(10_8, 5_0);
+- (BOOL)insertTimeRanges:(NSArray<NSValue *> *)timeRanges ofTracks:(NSArray<AVAssetTrack *> *)tracks atTime:(CMTime)startTime error:(NSError * _Nullable * _Nullable)outError API_AVAILABLE(macos(10.8), ios(5.0), tvos(9.0), watchos(1.0));
 
 /*!
     @method         insertEmptyTimeRange:
@@ -222,6 +237,37 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 					The type of track association to remove between the receiver and the specified compositionTrack (for instance, AVTrackAssociationTypeChapterList).
 */
 - (void)removeTrackAssociationToTrack:(AVCompositionTrack *)compositionTrack type:(AVTrackAssociationType)trackAssociationType API_AVAILABLE(macos(10.14), ios(12.0), tvos(12.0), watchos(5.0));
+
+@end
+
+API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0), watchos(6.0))
+@interface AVCompositionTrackFormatDescriptionReplacement : NSObject <NSSecureCoding>
+
+/*!
+    @property       originalFormatDescription
+    @abstract       The original format description.
+*/
+@property (readonly) CMFormatDescriptionRef originalFormatDescription;
+
+/*!
+    @property       replacementFormatDescription
+    @abstract       The replacement format description.
+*/
+@property (readonly) CMFormatDescriptionRef replacementFormatDescription;
+
+@end
+
+@interface AVMutableCompositionTrack (AVMutableCompositionTrackFormatDescriptionReplacement)
+/*!
+	@method			replaceFormatDescription:withFormatDescription:
+	@abstract		Replaces one of the receiver's format descriptions with another format description or cancels a previous replacement.
+	@param			originalFormatDescription
+					A CMFormatDescription occurring in the underlying asset track.
+	@param			replacementFormatDescription
+					A CMFormatDescription to replace the specified format description or NULL to indicate that a previous replacement of originalFormatDescription should be cancelled.
+	@discussion     You can use this method to make surgical changes to a track's format descriptions, such as adding format description extensions to a format description or changing the audio channel layout of an audio track. You should note that a format description can have extensions of type kCMFormatDescriptionExtension_VerbatimSampleDescription and kCMFormatDescriptionExtension_VerbatimISOSampleEntry; if you modify a copy of a format description, you should delete those extensions from the copy or your changes might be ignored. Also note that format description replacements are not transferred when performing editing operations on AVMutableCompositionTrack objects; for instance, inserting a range of a composition track into another composition track does not transfer any replacement format descriptions.
+*/
+- (void)replaceFormatDescription:(CMFormatDescriptionRef)originalFormatDescription withFormatDescription:(nullable CMFormatDescriptionRef)replacementFormatDescription API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0), watchos(6.0));
 
 @end
 

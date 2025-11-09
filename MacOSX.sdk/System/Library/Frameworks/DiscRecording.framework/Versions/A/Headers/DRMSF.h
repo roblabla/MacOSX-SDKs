@@ -39,7 +39,8 @@
 */
 @interface DRMSF : NSNumber
 {
-	UInt32	 _value;
+@private
+    NSInteger _value;
 }
 
 /*!

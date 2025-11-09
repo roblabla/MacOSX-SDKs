@@ -1,7 +1,7 @@
 /*
  NSPageController.h
  Application Kit
- Copyright (c) 2011-2018, Apple Inc.
+ Copyright (c) 2011-2019, Apple Inc.
  All rights reserved.
  */
 
@@ -12,6 +12,7 @@
 #import <AppKit/NSAnimation.h>
 
 NS_ASSUME_NONNULL_BEGIN
+API_UNAVAILABLE_BEGIN(ios)
 
 @class NSMutableDictionary, NSView;
 @protocol NSPageControllerDelegate;
@@ -22,47 +23,10 @@ typedef NS_ENUM(NSInteger, NSPageControllerTransitionStyle) {
     NSPageControllerTransitionStyleStackHistory, // Pages are stacked on top of each other. Pages animate out to the right to reveal the previous page. Next pages animate in from the right. (See Safari as an example)
     NSPageControllerTransitionStyleStackBook,	 // Pages are stacked on top of each other. Pages animate out to the left to reveal the next page. Previous pages animate in from the left. (See Preview as an example)
     NSPageControllerTransitionStyleHorizontalStrip // Each page is laid out next to each other in one long horizontal strip
-} NS_ENUM_AVAILABLE(10_8, NA);
+} API_AVAILABLE(macos(10.8));
 
-NS_CLASS_AVAILABLE(10_8, NA)
-@interface NSPageController : NSViewController <NSAnimatablePropertyContainer, NSCoding> {
-@private
-    NSView *_contentView APPKIT_IVAR;
-    NSViewController *_selectedViewController APPKIT_IVAR;
-    NSPageControllerObjectIdentifier _currentIdentifier APPKIT_IVAR;
-    NSPageControllerTransitionStyle _transitionStyle APPKIT_IVAR;
-    __weak id<NSPageControllerDelegate> _delegate APPKIT_IVAR;
-    NSInteger _selectedIndex APPKIT_IVAR;
-    NSMutableArray *_arrangedObjects APPKIT_IVAR;
-    NSMutableArray *_snapshots APPKIT_IVAR;
-    struct __pcDelegateFlags {
-        unsigned int delegateRespondsToIdentifierForRepresentedObject:1;
-        unsigned int delegateRespondsToViewControllerForIdentifier:1;
-        unsigned int delegateRespondsToFrameForRepresentedObject:1;
-        unsigned int delegateRespondsToPrepareView:1;
-        unsigned int delegateRespondsToDidTransition:1;
-        unsigned int delegateRespondsToWillLiveTransition:1;
-        unsigned int delegateRespondsToDidLiveTransition:1;
-        unsigned int delegateRespondsToReserved1:1;
-        unsigned int reserved:24;
-    }_pcDelegateFlags APPKIT_IVAR;
-    struct __pcFlags {
-        unsigned int templateCacheIsInvalid:1;
-        unsigned int private1:1;
-        unsigned int private2:1;
-        unsigned int inSwipeGesture:1;
-        unsigned int reserved:28;
-    }_pcFlags APPKIT_IVAR;
-    BOOL *_cancelAnimation APPKIT_IVAR;
-    NSMutableDictionary *_reusueQueue APPKIT_IVAR;
-    NSMutableDictionary *_templateCache APPKIT_IVAR;
-    NSView *_transitionView APPKIT_IVAR;
-    
-    __weak id _animator APPKIT_IVAR;
-    NSDictionary *_animationsDictionary APPKIT_IVAR;
-    
-    id _private APPKIT_IVAR;
-}
+API_AVAILABLE(macos(10.8))
+@interface NSPageController : NSViewController <NSAnimatablePropertyContainer, NSCoding>
 
 @property (nullable, weak) IBOutlet id<NSPageControllerDelegate> delegate;
 
@@ -141,4 +105,5 @@ NS_CLASS_AVAILABLE(10_8, NA)
 
 @end
 
+API_UNAVAILABLE_END
 NS_ASSUME_NONNULL_END

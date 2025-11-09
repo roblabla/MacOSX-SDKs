@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 /*!
  @discussion Context of a SmartCard PIN authentication operation.
  */
-__OSX_AVAILABLE(10.12) __IOS_AVAILABLE(10.0) __TVOS_AVAILABLE(11.0) __WATCHOS_AVAILABLE(4.0)
+API_AVAILABLE(macos(10.12), ios(10.0), tvos(11.0), watchos(4.0))
 @interface TKTokenSmartCardPINAuthOperation : TKTokenAuthOperation
 
 /*!
@@ -51,7 +51,7 @@ __OSX_AVAILABLE(10.12) __IOS_AVAILABLE(10.0) __TVOS_AVAILABLE(11.0) __WATCHOS_AV
  @abstract TKSmartCardTokenSession represents token session based on SmartCard token.
  @discussion When implementing SmartCard token extension, subclass TKSmartCardTokenSession and implement TKTokenSessionDelegate on it.  Use #token property to get access and send APDUs to the underlying SmartCard.
  */
-__OSX_AVAILABLE(10.12) __IOS_AVAILABLE(10.0) __TVOS_AVAILABLE(11.0) __WATCHOS_AVAILABLE(4.0)
+API_AVAILABLE(macos(10.12), ios(10.0), tvos(11.0), watchos(4.0))
 @interface TKSmartCardTokenSession : TKTokenSession
 
 /*!
@@ -68,7 +68,7 @@ __OSX_AVAILABLE(10.12) __IOS_AVAILABLE(10.0) __TVOS_AVAILABLE(11.0) __WATCHOS_AV
  @abstract TKSmartCardToken base class for implementing SmartCard based token.
  @discussion When implementing SmartCard token extension, subclass TKSmartCardToken and implement TKTokenDelegate on it.
  */
-__OSX_AVAILABLE(10.12) __IOS_AVAILABLE(10.0) __TVOS_AVAILABLE(11.0) __WATCHOS_AVAILABLE(4.0)
+API_AVAILABLE(macos(10.12), ios(10.0), tvos(11.0), watchos(4.0))
 @interface TKSmartCardToken : TKToken
 
 /*!
@@ -92,7 +92,7 @@ __OSX_AVAILABLE(10.12) __IOS_AVAILABLE(10.0) __TVOS_AVAILABLE(11.0) __WATCHOS_AV
 /*!
  @abstract TKSmartCardTokenDriver represents driver for specific SmartCard type.
  */
-__OSX_AVAILABLE(10.12) __IOS_AVAILABLE(10.0) __TVOS_AVAILABLE(11.0) __WATCHOS_AVAILABLE(4.0)
+API_AVAILABLE(macos(10.12), ios(10.0), tvos(11.0), watchos(4.0))
 @interface TKSmartCardTokenDriver : TKTokenDriver
 
 @end

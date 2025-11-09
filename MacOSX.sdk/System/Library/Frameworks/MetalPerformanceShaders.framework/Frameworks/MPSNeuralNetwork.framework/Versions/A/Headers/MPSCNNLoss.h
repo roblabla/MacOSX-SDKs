@@ -27,7 +27,7 @@ extern "C" {
  *              The same descriptor can be used to initialize both the
  *              labels and the optional weights data.
  */
-MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3))
+MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3))
 @interface MPSCNNLossDataDescriptor : NSObject <NSCopying>
 
 /*! @property   layout
@@ -83,11 +83,11 @@ MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3))
  *  @class      MPSCNNLossLabels
  *  @dependency This depends on Metal.framework.
  *  @discussion The MPSCNNLossLabels is used to hold the per-element weights buffer
- *              used by both MPSCNNLoss forward filter and MPSCNNLossGradient backward filter.
+ *              used by both MPSCNNLoss forward filter and MPSNNLossGradient backward filter.
  *              The MPSCNNLoss forward filter populates the MPSCNNLossLabels object
- *              and the MPSCNNLossGradient backward filter consumes the state object.
+ *              and the MPSNNLossGradient backward filter consumes the state object.
  */
-MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3))
+MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3))
 @interface MPSCNNLossLabels : MPSState
 
 /*!
@@ -144,13 +144,37 @@ MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3))
                       labelsDescriptor: (MPSCNNLossDataDescriptor* _Nonnull) labelsDescriptor
                      weightsDescriptor: (MPSCNNLossDataDescriptor* _Nullable) weightsDescriptor NS_DESIGNATED_INITIALIZER;
 
+
+/*!
+ *  @abstract   Set labels (aka targets, ground truth) and weights for the MPSCNNLossLabels object.
+ *              Weights are optional.
+ *  @discussion The labels and weights images are retained - it is the users responsibility to make sure that they contain
+ *              the right data when the loss filter is run on the device.
+ *  @param      device                  Device the state resources will be created on.
+ *  @param      lossImageSize           The size of the resulting loss image: { width, height, featureChannels }.
+ *                                      The computed loss can either be a scalar value (in batch mode, a single
+ *                                      value per image in a batch) or it can be one value per feature channel.
+ *                                      Thus, the size of the loss image must either match the size of the input
+ *                                      source image or be {1, 1, 1}, which results in a scalar value.
+ *  @param      labelsImage             Describes the labels data.
+ *  @param      weightsImage            Describes the weights data.
+ *                                      This parameter is optional. If you are using a single weight, please use the
+ *                                      weight property of the MPSCNNLossDescriptor object.
+ */
+-(nonnull instancetype) initWithDevice: (nonnull id<MTLDevice>)device
+                         lossImageSize: (MTLSize) lossImageSize
+                           labelsImage: (MPSImage* _Nonnull) labelsImage
+                          weightsImage: (MPSImage* _Nullable) weightsImage
+MPS_AVAILABLE_STARTING(macos(10.15.0), ios(13.0), macCatalyst(13.0), tvos(13.0))
+NS_DESIGNATED_INITIALIZER;
+
 /*!
  *  @abstract   Loss image accessor method.
  *  @return     An autoreleased MPSImage object, containing the loss data.
  *              The loss data is populated in the -encode call, thus the contents
  *              are undefined until you -encode the filter.
  *
- *              In order to gaurantee that the image is correctly synchronized for CPU side access,
+ *              In order to guarantee that the image is correctly synchronized for CPU side access,
  *              it is the application's responsibility to call the [gradientState synchronizeOnCommandBuffer:]
  *              method before accessing the data in the image.
  */
@@ -161,7 +185,7 @@ MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3))
  *  @return     An autoreleased MPSImage object, containing the labels data.
  *              The labels data is populated in the -initWithDevice call.
  *
- *              In order to gaurantee that the image is correctly synchronized for CPU side access,
+ *              In order to guarantee that the image is correctly synchronized for CPU side access,
  *              it is the application's responsibility to call the [gradientState synchronizeOnCommandBuffer:]
  *              method before accessing the data in the image.
  */
@@ -172,7 +196,7 @@ MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3))
  *  @return     An autoreleased MPSImage object, containing the weights data.
  *              The weights data is populated in the -initWithDevice call.
  *
- *              In order to gaurantee that the image is correctly synchronized for CPU side access,
+ *              In order to guarantee that the image is correctly synchronized for CPU side access,
  *              it is the application's responsibility to call the [gradientState synchronizeOnCommandBuffer:]
  *              method before accessing the data in the image.
  */
@@ -181,7 +205,7 @@ MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3))
 @end /* MPSCNNLossLabels */
     
 
-typedef NSArray <MPSCNNLossLabels*>  MPSCNNLossLabelsBatch MPS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3));
+typedef NSArray <MPSCNNLossLabels*>  MPSCNNLossLabelsBatch MPS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3));
 
 #pragma mark -
 #pragma mark MPSCNNLossDescriptor
@@ -191,9 +215,9 @@ typedef NSArray <MPSCNNLossLabels*>  MPSCNNLossLabelsBatch MPS_AVAILABLE_STARTIN
  *  @dependency This depends on Metal.framework.
  *  @discussion The MPSCNNLossDescriptor specifies a loss filter descriptor.
  *              The same descriptor can be used to initialize both the
- *              MPSCNNLoss and the MPSCNNLossGradient filters.
+ *              MPSCNNLoss and the MPSNNLossGradient filters.
  */
-MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3))
+MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3))
 @interface MPSCNNLossDescriptor : NSObject <NSCopying>
 
 /*! @property   lossType
@@ -270,10 +294,10 @@ MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3))
 -(nonnull instancetype) init NS_UNAVAILABLE;
 
 /*!
- *  @abstract   Make a descriptor for a MPSCNNLoss or MPSCNNLossGradient object.
+ *  @abstract   Make a descriptor for a MPSCNNLoss or MPSNNLossGradient object.
  *  @param      lossType                    The type of a loss filter.
  *  @param      reductionType               The type of a reduction operation to apply.
- *                                          This argument is ignored in the MPSCNNLossGradient filter.
+ *                                          This argument is ignored in the MPSNNLossGradient filter.
  *  @return     A valid MPSCNNLossDescriptor object or nil, if failure.
  */
 +(nonnull MPSCNNLossDescriptor*) cnnLossDescriptorWithType:(MPSCNNLossType) lossType
@@ -308,7 +332,7 @@ MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3))
  *              objects, which are in turn used to initialize the MPSCNNLossLabels object.
  *
  *              If the specified reduction operation is MPSCNNReductionTypeNone, the destinationImage should be
- *              at least as large as the specified clipRect. The detinationImage will then contain per-element
+ *              at least as large as the specified clipRect. The destinationImage will then contain per-element
  *              losses. Otherse, a reduction operation will be performed, according to the specified reduction
  *              type, and the filter will return a scalar value containing the overall loss. For more information
  *              on the available reduction types, see MPSCNNTypes.h. Also see MPSCNNLossDescriptor for the
@@ -336,7 +360,7 @@ MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3))
  *                                                                    labels: labels
  *                                                          destinationImage: lossGradientsImage];
  *
- *              // In order to gaurantee that the loss image data is correctly synchronized for CPU side access,
+ *              // In order to guarantee that the loss image data is correctly synchronized for CPU side access,
  *              // it is the application's responsibility to call the [labels synchronizeOnCommandBuffer:]
  *              // method before accessing the loss image data.
  *              [labels synchronizeOnCommandBuffer:commandBuffer];
@@ -476,7 +500,7 @@ MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3))
  *              The number of output feature channels remains the same as the number of input feature
  *              channels.
  */
-MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3))
+MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3))
 @interface MPSCNNLoss : MPSCNNKernel
 
 /*!
@@ -594,7 +618,7 @@ MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3))
  *
  *              For details on how to set up the label values and anchorboxes see https://arxiv.org/abs/1612.08242
  */
-MPS_CLASS_AVAILABLE_STARTING(macos(10.14), ios(12), tvos(12))
+MPS_CLASS_AVAILABLE_STARTING(macos(10.14), ios(12), macCatalyst(13.0), tvos(12))
 @interface MPSCNNYOLOLossDescriptor : NSObject <NSCopying>
 
 /*! @property   XYLossDescriptor
@@ -722,7 +746,7 @@ MPS_CLASS_AVAILABLE_STARTING(macos(10.14), ios(12), tvos(12))
 @end /* MPSCNNYOLOLossDescriptor */
 
 
-MPS_CLASS_AVAILABLE_STARTING(macos(10.14), ios(12.0), tvos(12.0))
+MPS_CLASS_AVAILABLE_STARTING(macos(10.14), ios(12.0), macCatalyst(13.0), tvos(12.0))
 @interface MPSCNNYOLOLoss : MPSCNNKernel
 
 /*! @property   lossXY
@@ -821,6 +845,249 @@ MPS_SWIFT_NAME( encode(commandBuffer:sourceImages:labels:destinationImages:));
 MPS_SWIFT_NAME( encode(commandBuffer:sourceImages:labels:));
 
 @end /* MPSCNNYOLOLoss */
+
+
+
+#pragma mark -
+#pragma mark MPSNNForwardLoss
+
+/*!
+ *  @class      MPSNNForwardLoss
+ *  @dependency This depends on Metal.framework.
+ *  @discussion The MPSNNForwardLoss filter specifies a version of the loss filter which separates the forward
+ *              computation from the gradient computation. In order to compute gradients for the loss filter
+ *              use @ref MPSNNLossGradient filter and in order to start the gradient computation of an arbitrary
+ *              image use the @ref MPSNNInitialGradient filter.
+ *              NOTE: This filter does not support non-default offset or cliprects and setting them to other
+ *              than default values will result in undefined results.
+ */
+MPS_CLASS_AVAILABLE_STARTING(macos(10.15.0), ios(13.0), macCatalyst(13.0), tvos(13.0))
+@interface MPSNNForwardLoss : MPSCNNKernel
+
+/*!
+ * See MPSCNNLossDescriptor for information about the following properties.
+ */
+@property (readonly, nonatomic) MPSCNNLossType lossType;
+@property (readonly, nonatomic) MPSCNNReductionType reductionType;
+@property (readonly, nonatomic) NSUInteger numberOfClasses;
+
+// Dynamically adjustable parameters
+@property (readwrite, nonatomic) float weight;
+@property (readwrite, nonatomic) float labelSmoothing;
+@property (readwrite, nonatomic) float epsilon;
+@property (readwrite, nonatomic) float delta;
+
+/*
+ * You must use initWithDevice:lossDescriptor instead.
+ */
+-(nonnull instancetype) initWithDevice: (nonnull id <MTLDevice>) device NS_UNAVAILABLE;
+
+/*!
+ *  @abstract   Initialize the loss forward pass filter with a loss descriptor.
+ *  @param      device                   The device the filter will run on.
+ *  @param      lossDescriptor           The loss descriptor.
+ *  @return     A valid MPSNNForwardLoss object or nil, if failure.
+ */
+-(nonnull instancetype) initWithDevice: (nonnull id <MTLDevice>) device
+                        lossDescriptor: (MPSCNNLossDescriptor*_Nonnull) lossDescriptor NS_DESIGNATED_INITIALIZER;
+
+/*! @abstract <NSSecureCoding> support */
+-(nullable instancetype) initWithCoder:(NSCoder * __nonnull)aDecoder device:(nonnull id <MTLDevice>) device NS_DESIGNATED_INITIALIZER;
+
+
+
+/*! @abstract   Encode a MPSNNForwardLoss filter and return the result in the destinationImage.
+ *
+ *  @param      commandBuffer       The MTLCommandBuffer on which to encode.
+ *  @param      sourceImages        The source images that contains the network prediction (logits).
+ *  @param      labels              The source images that contains the labels (targets).
+ *  @param      weights             The object containing weights for the labels. Optional.
+ *  @param      destinationStates   Optional gradient state - carries dynamical property values to the gradient pass
+ *                                  (weight, labelSmoothing, epsilon, delta). Create state using resultStateBatchForSourceImage: or
+ *                                  temporaryResultStateBatchForCommandBuffer:.
+ *  @param      destinationImages   The MPSImages into which to write the loss results.
+ */
+
+-(void) encodeBatchToCommandBuffer: (nonnull id <MTLCommandBuffer>) commandBuffer
+                      sourceImages: (MPSImageBatch * __nonnull) sourceImages
+                            labels: (MPSImageBatch * __nonnull) labels
+                           weights: (MPSImageBatch * __nullable) weights
+                 destinationStates: (MPSStateBatch * __nullable) destinationStates
+                 destinationImages: (MPSImageBatch * __nonnull) destinationImages
+MPS_SWIFT_NAME( encodeBatch(commandBuffer:sourceImages:labels:weights:destinationStates:destinationImages:));
+
+
+/*! @abstract   Encode a MPSNNForwardLoss filter and return the loss result image(s).
+ *  @discussion This -encode call is similar to the encodeBatchToCommandBuffer:sourceImages:labels:destinationImages: above,
+ *              except that it creates and returns the MPSImages with the loss result.
+ *
+ *  @param      commandBuffer       The MTLCommandBuffer on which to encode.
+ *  @param      sourceImages        The source images that contains the network prediction (logits).
+ *  @param      labels              The source images that contains the labels (targets).
+ *  @param      weights             The object containing weights for the labels. Optional.
+ *  @param      outStates           Optional gradient state - carries dynamical property values to the gradient pass
+ *                                  (weight, labelSmoothing, epsilon, delta).
+ *  @param      isTemporary         Whether the returned state (if any) should be temporary or not.
+ *  @return     The MPSImages containing the loss computation results.
+ */
+
+-(MPSImageBatch * __nonnull) encodeBatchToCommandBuffer: (nonnull id <MTLCommandBuffer>) commandBuffer
+                                           sourceImages: (MPSImageBatch * __nonnull) sourceImages
+                                                 labels: (MPSImageBatch * __nonnull) labels
+                                                weights: (MPSImageBatch * __nullable) weights
+                                      destinationStates: (__autoreleasing MPSStateBatch * __nullable * __nullable) outStates
+                            destinationStateIsTemporary: (BOOL) isTemporary
+MPS_SWIFT_NAME( encodeBatch(commandBuffer:sourceImages:labels:weights:outStates:isTemporary:));
+
+@end /* MPSNNForwardLoss */
+
+
+#pragma mark -
+#pragma mark MPSNNLossGradient
+
+/*!
+ *  @class      MPSNNLossGradient
+ *  @dependency This depends on Metal.framework.
+ *  @discussion The MPSNNLossGradient filter specifies the gradient filter for @ref MPSNNForwardLoss.
+ */
+MPS_CLASS_AVAILABLE_STARTING(macos(10.15.0), ios(13.0), macCatalyst(13.0), tvos(13.0))
+@interface MPSNNLossGradient : MPSCNNBinaryKernel
+
+/*!
+ * See MPSCNNLossDescriptor for information about the following properties.
+ */
+@property (readonly, nonatomic) MPSCNNLossType lossType;
+@property (readonly, nonatomic) MPSCNNReductionType reductionType;
+@property (readonly, nonatomic) NSUInteger numberOfClasses;
+
+@property (readwrite, nonatomic) float weight;
+@property (readwrite, nonatomic) float labelSmoothing;
+@property (readwrite, nonatomic) float epsilon;
+@property (readwrite, nonatomic) float delta;
+
+/*! @property   computeLabelGradients
+ *  @abstract   The computeLabelGradients property is used to control whether the loss gradient
+ *              filter computes gradients for the primary (predictions) or secondary (labels) source image from the forward pass.
+ *              Default: NO.
+ */
+@property (readwrite, nonatomic) BOOL            computeLabelGradients;
+
+
+
+/*
+ * You must use initWithDevice:lossDescriptor instead.
+ */
+-(nonnull instancetype) initWithDevice: (nonnull id <MTLDevice>) device NS_UNAVAILABLE;
+
+/*!
+ *  @abstract   Initialize the loss gradient filter with a loss descriptor.
+ *  @param      device                   The device the filter will run on.
+ *  @param      lossDescriptor           The loss descriptor.
+ *  @return     A valid MPSNNLossGradient object or nil, if failure.
+ */
+-(nonnull instancetype) initWithDevice: (nonnull id <MTLDevice>) device
+                        lossDescriptor: (MPSCNNLossDescriptor*_Nonnull) lossDescriptor NS_DESIGNATED_INITIALIZER;
+
+/*! @abstract <NSSecureCoding> support */
+-(nullable instancetype) initWithCoder:(NSCoder * __nonnull)aDecoder device:(nonnull id <MTLDevice>) device NS_DESIGNATED_INITIALIZER;
+
+
+
+/*! @abstract   Encode the loss gradient filter and return a gradient
+ *  @param      commandBuffer    The MTLCommandBuffer on which to encode
+ *  @param      sourceGradients  The gradient images from the "next" filter in the graph
+ *  @param      sourceImages     The images used as source image from the forward pass
+ *  @param      labels           The source images that contains the labels (targets).
+ *  @param      weights          The object containing weights for the labels. Optional.
+ *  @param      sourceStates     Optional gradient state - carries dynamical property values from the forward pass
+ *                                  (weight, labelSmoothing, epsilon, delta).
+ */
+-(MPSImageBatch*__nonnull) encodeBatchToCommandBuffer: (__nonnull id <MTLCommandBuffer>) commandBuffer
+                                      sourceGradients: (MPSImageBatch * __nonnull ) sourceGradients        // a.k.a. primaryImage
+                                         sourceImages: (MPSImageBatch * __nonnull ) sourceImages           // prediction source images from forward pass
+                                               labels: (MPSImageBatch * __nonnull ) labels                 // label images from forward pass
+                                              weights: (MPSImageBatch * __nullable) weights
+                                         sourceStates: (MPSStateBatch * __nullable) sourceStates
+MPS_SWIFT_NAME( encodeBatch(commandBuffer:sourceGradients:sourceImages:labels:weights:sourceStates:));
+
+/*! @abstract   Encode the loss gradient filter and return a gradient
+ *  @param      commandBuffer    The MTLCommandBuffer on which to encode
+ *  @param      sourceGradients  The gradient images from the "next" filter in the graph
+ *  @param      sourceImages     The image used as source images from the forward pass
+ *  @param      labels           The source images that contains the labels (targets).
+ *  @param      weights          The object containing weights for the labels. Optional.
+ *  @param      sourceStates     Optional gradient state - carries dynamical property values from the forward pass
+ *                                  (weight, labelSmoothing, epsilon, delta).
+ *  @param      destinationGradients  The MPSImages into which to write the filter result */
+-(void) encodeBatchToCommandBuffer: (__nonnull id <MTLCommandBuffer>) commandBuffer
+                   sourceGradients: (MPSImageBatch * __nonnull ) sourceGradients        // a.k.a. primaryImage
+                      sourceImages: (MPSImageBatch * __nonnull ) sourceImages           // source Image from forward pass, a.k.a. secondaryImage
+                            labels: (MPSImageBatch * __nonnull ) labels                 // label images from forward pass
+                           weights: (MPSImageBatch * __nullable) weights
+                      sourceStates: (MPSStateBatch * __nullable) sourceStates
+              destinationGradients: (MPSImageBatch * __nonnull ) destinationGradients
+MPS_SWIFT_NAME( encodeBatch(commandBuffer:sourceGradients:sourceImages:labels:weights:sourceStates:destinationGradients:));
+
+@end /* MPSNNLossGradient */
+
+
+#pragma mark -
+#pragma mark MPSNNInitialGradient
+
+/*!
+ *  @class      MPSNNInitialGradient
+ *  @dependency This depends on Metal.framework
+ *  @discussion The MPSCNNInitialGradient filter specifies a layer which computes the initial gradient for
+ *              an aribitrary input image. The operation itself is extremely simple: it computes the gradient of the input image
+ *              with itself, resulting in an output image which is filled with '1's for all the inputs that were used.
+ *              This serves as the starting point for the computation of gradients between arbitrary images in a network.
+ *              Example:
+ *                  Suppose that we want to compute gradients for a function that multiplies together two losses:
+ *                      f = f(L1, L2) = L1 * L2
+ *                  The losses themselves are computed from some inputs x1,x2:
+ *                      L1 = L1(x1),
+ *                      L2 = L2(x2)
+ *                  The filters to compute f, L1, L2 are:
+ *                      f = MPSCNNMultiply(L1, L2), where
+ *                      L1 = MPSNNForwardLoss1(x1) and
+ *                      L2 = MPSNNForwardLoss1(x2)
+ *
+ *                  To compute df/dx1 we apply the chain rule:
+ *
+ *                      df/dx1 = d(L1 * L2)/dx1 = d(L1 * L2)/dL1 * dL1/dx1 + d(L1 * L2)/dL2 * dL2/dx1
+ *                             = d(L1 * L2)/dL1 * dL1/dx1 = L2 * dL1/dx1
+ *
+ *                  The MPSCNNMultiplyGradient filter computes for f = L1 * L2 forward op:
+ *                      dL/dL1 = dL/df * df/dL1 = dL/df * L2 and
+ *                      dL/dL2 = dL/df * df/dL2 = dL/df * L1 where
+ *                  dL/df is the input gradient of the chain rule / backpropagation algorithm.
+ *                  But in our case we want MPSCNNMultiplyGradient to compute the gradient:
+ *                      df/dL1 = d(L1 * L2)/dL1 = L2,
+ *                  which shows that
+ *                      L = f, which means that dL/dL1 = df/df * df/dL1 = 1 * L2, which
+ *                  shows that we get the correct gradient by providing unit input as input gradient to
+ *                  the MPSCNNMultiplyGradient.
+ */
+
+MPS_CLASS_AVAILABLE_STARTING( macos(10.15), ios(13.0), macCatalyst(13.0), tvos(13.0))
+@interface  MPSNNInitialGradient : MPSCNNKernel
+
+
+/*!
+ *  @abstract   Initializes a MPSNNInitialGradient kernel.
+ *
+ *  @param      device      The MTLDevice on which this MPSNNInitialGradient filter will be used.
+ *  @return     A valid MPSNNInitialGradient object or nil, if failure.
+ */
+-(nonnull instancetype) initWithDevice: (nonnull id <MTLDevice>) device;
+
+/*!
+ * NOTE:    The encodeToCommandBuffer API in MPSCNNKernel can be used to encode this kernel to a MTLCommandBuffer.
+ */
+
+@end    /* MPSNNInitialGradient */
+
+
 
 
 #ifdef __cplusplus

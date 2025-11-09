@@ -3,7 +3,7 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2011-2017 Apple Inc. All rights reserved.
+	Copyright 2011-2018 Apple Inc. All rights reserved.
 
 */
 
@@ -16,6 +16,8 @@
 #import <AVFoundation/AVBase.h>
 #import <AVFoundation/AVAnimation.h>
 #import <AVFoundation/AVQueuedSampleBufferRendering.h>
+
+#if __has_include(<QuartzCore/CoreAnimation.h>)
 #import <QuartzCore/CoreAnimation.h>
 #import <CoreMedia/CMSync.h>
 #import <CoreMedia/CMSampleBuffer.h>
@@ -24,10 +26,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class AVSampleBufferDisplayLayerInternal;
 
-AVF_EXPORT NSString *const AVSampleBufferDisplayLayerFailedToDecodeNotification API_AVAILABLE(macos(10.10), ios(8.0), tvos(10.2)) __WATCHOS_PROHIBITED; // decode failed, see NSError in notification payload
-AVF_EXPORT NSString *const AVSampleBufferDisplayLayerFailedToDecodeNotificationErrorKey API_AVAILABLE(macos(10.10), ios(8.0), tvos(10.2)) __WATCHOS_PROHIBITED; // NSError
+AVF_EXPORT NSString *const AVSampleBufferDisplayLayerFailedToDecodeNotification API_AVAILABLE(macos(10.10), ios(8.0), tvos(10.2)) API_UNAVAILABLE(watchos); // decode failed, see NSError in notification payload
+AVF_EXPORT NSString *const AVSampleBufferDisplayLayerFailedToDecodeNotificationErrorKey API_AVAILABLE(macos(10.10), ios(8.0), tvos(10.2)) API_UNAVAILABLE(watchos); // NSError
 
-API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2)) __WATCHOS_PROHIBITED
+API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2)) API_UNAVAILABLE(watchos)
 @interface AVSampleBufferDisplayLayer : CALayer
 {
 @private
@@ -74,14 +76,14 @@ API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2)) __WATCHOS_PROHIBITED
 		
 					This property is key value observable.
  */
-@property (nonatomic, readonly) AVQueuedSampleBufferRenderingStatus status API_AVAILABLE(macos(10.10), ios(8.0), tvos(10.2)) __WATCHOS_PROHIBITED;
+@property (nonatomic, readonly) AVQueuedSampleBufferRenderingStatus status API_AVAILABLE(macos(10.10), ios(8.0), tvos(10.2)) API_UNAVAILABLE(watchos);
 
 /*!
 	@property		error
 	@abstract		If the display layer's status is AVQueuedSampleBufferRenderingStatusFailed, this describes the error that caused the failure.
 	@discussion		The value of this property is an NSError that describes what caused the display layer to no longer be able to enqueue sample buffers. If the status is not AVQueuedSampleBufferRenderingStatusFailed, the value of this property is nil.
  */
-@property (nonatomic, readonly, nullable) NSError *error API_AVAILABLE(macos(10.10), ios(8.0), tvos(10.2)) __WATCHOS_PROHIBITED;
+@property (nonatomic, readonly, nullable) NSError *error API_AVAILABLE(macos(10.10), ios(8.0), tvos(10.2)) API_UNAVAILABLE(watchos);
 
 /*!
 	@method			enqueueSampleBuffer:
@@ -179,4 +181,30 @@ API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2)) __WATCHOS_PROHIBITED
 
 @end
 
+@interface AVSampleBufferDisplayLayer (AVSampleBufferDisplayLayerImageProtection)
+
+/*!
+ @property		preventsCapture
+ @abstract		Indicates that image data should be protected from capture.
+ */
+@property (nonatomic) BOOL preventsCapture API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0)) API_UNAVAILABLE(watchos);
+
+@end
+
+@interface AVSampleBufferDisplayLayer (AVSampleBufferDisplayLayerVideoDisplaySleepPrevention)
+
+/*!
+ @property   preventsDisplaySleepDuringVideoPlayback
+ @abstract   Indicates whether video playback prevents display and device sleep.
+ @discussion
+ Default is YES on iOS.  Default is NO on macOS.
+ Setting this property to NO does not force the display to sleep, it simply stops preventing display sleep.  Other apps or frameworks within your app may still be preventing display sleep for various reasons.
+ Note: If sample buffers are being enqueued for playback at the user's request, you should ensure that the value of this property is set to YES. If video is not being displayed as part of the user's primary focus, you should ensure that the value of this property is set to NO.
+ */
+@property (nonatomic) BOOL preventsDisplaySleepDuringVideoPlayback API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0)) API_UNAVAILABLE(watchos);
+
+@end
+
 NS_ASSUME_NONNULL_END
+
+#endif  // __has_include(<QuartzCore/CoreAnimation.h>)

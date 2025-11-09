@@ -1,10 +1,9 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 7599E619-EE21-3EB7-875B-AE3B8D3E13BB' ]
-platform:        macosx
-install-name:    /System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/ATS.framework/Versions/A/ATS
+uuids:           [ 'x86_64: BEBCC736-639C-32A7-9A69-5B322A4F6FF4', 'x86_64: BEBCC736-639C-32A7-9A69-5B322A4F6FF4' ]
+platform:        zippered
+install-name:    '/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/ATS.framework/Versions/A/ATS'
 current-version: 236
-objc-constraint: none
 parent-umbrella: ApplicationServices
 exports:         
   - archs:           [ x86_64 ]
@@ -15,27 +14,27 @@ exports:
                        _AGPrepare, _AGSetTag, _AGSetType, _ATSAlloc, _ATSCleanupClient, 
                        _ATSCopyFontForAutoActivationIfNecessary, _ATSCopySpecifiedSetting, 
                        _ATSCreateFontQueryRunLoopSource, _ATSCreateUnicodeCharacterCoverage, 
-                       _ATSDebugAssert, _ATSDebugMsg, _ATSDisposeAllocator, _ATSDuplicate, 
-                       _ATSEnableURLs, _ATSFixedDivide, _ATSFixedMultiply, _ATSFontAcquireStrikeDescription, 
-                       _ATSFontAcquireStrikeDescriptionWithVariations, _ATSFontActivateFromFileReference, 
-                       _ATSFontActivateFromMemory, _ATSFontActivateFromPath, _ATSFontApplyFunction, 
-                       _ATSFontCanBeAutoActivated, _ATSFontConvertFromQuickDrawFont, 
-                       _ATSFontConvertToQuickDrawFont, _ATSFontCopyAutoActivationConfirmDialogResult, 
-                       _ATSFontCopyLWFNsFromSuitcase, _ATSFontCopyMDQueryResult, 
-                       _ATSFontCopyPostSriptNameAndFindSuitcaseFromLWFN, _ATSFontCopySuitcaseFromLWFN, 
-                       _ATSFontCreateFPFont, _ATSFontCreateFontName, _ATSFontCreateLocalizedFontName, 
-                       _ATSFontDeactivate, _ATSFontFamilyApplyFunction, _ATSFontFamilyFindFromName, 
-                       _ATSFontFamilyFindFromQuickDrawName, _ATSFontFamilyGetEncoding, 
-                       _ATSFontFamilyGetGeneration, _ATSFontFamilyGetName, _ATSFontFamilyGetQuickDrawName, 
-                       _ATSFontFamilyIteratorCreate, _ATSFontFamilyIteratorNext, 
-                       _ATSFontFamilyIteratorRelease, _ATSFontFamilyIteratorReset, 
-                       _ATSFontFindFontFor, _ATSFontFindFromContainer, _ATSFontFindFromFontIdentifier, 
-                       _ATSFontFindFromName, _ATSFontFindFromPostScriptName, _ATSFontFindSuitcaseFromLWFN, 
-                       _ATSFontFindVariationFromPostScriptName, _ATSFontFindWithROS, 
-                       _ATSFontGetAutoActivationSettingForApplication, _ATSFontGetContainer, 
-                       _ATSFontGetContainerFromFileReference, _ATSFontGetContainerFromPath, 
-                       _ATSFontGetContainerInfo, _ATSFontGetEncoding, _ATSFontGetFilePath, 
-                       _ATSFontGetFileReference, _ATSFontGetFileReferenceForXType, 
+                       _ATSDebugAssert, _ATSDebugMsg, _ATSDebugStr, _ATSDisposeAllocator, 
+                       _ATSDuplicate, _ATSEnableURLs, _ATSFixedDivide, _ATSFixedMultiply, 
+                       _ATSFontAcquireStrikeDescription, _ATSFontAcquireStrikeDescriptionWithVariations, 
+                       _ATSFontActivateFromFileReference, _ATSFontActivateFromMemory, 
+                       _ATSFontActivateFromPath, _ATSFontApplyFunction, _ATSFontCanBeAutoActivated, 
+                       _ATSFontConvertFromQuickDrawFont, _ATSFontConvertToQuickDrawFont, 
+                       _ATSFontCopyAutoActivationConfirmDialogResult, _ATSFontCopyLWFNsFromSuitcase, 
+                       _ATSFontCopyMDQueryResult, _ATSFontCopyPostSriptNameAndFindSuitcaseFromLWFN, 
+                       _ATSFontCopySuitcaseFromLWFN, _ATSFontCreateFPFont, _ATSFontCreateFontName, 
+                       _ATSFontCreateLocalizedFontName, _ATSFontDeactivate, _ATSFontFamilyApplyFunction, 
+                       _ATSFontFamilyFindFromName, _ATSFontFamilyFindFromQuickDrawName, 
+                       _ATSFontFamilyGetEncoding, _ATSFontFamilyGetGeneration, _ATSFontFamilyGetName, 
+                       _ATSFontFamilyGetQuickDrawName, _ATSFontFamilyIteratorCreate, 
+                       _ATSFontFamilyIteratorNext, _ATSFontFamilyIteratorRelease, 
+                       _ATSFontFamilyIteratorReset, _ATSFontFindFontFor, _ATSFontFindFromContainer, 
+                       _ATSFontFindFromFontIdentifier, _ATSFontFindFromName, _ATSFontFindFromPostScriptName, 
+                       _ATSFontFindSuitcaseFromLWFN, _ATSFontFindVariationFromPostScriptName, 
+                       _ATSFontFindWithROS, _ATSFontGetAutoActivationSettingForApplication, 
+                       _ATSFontGetContainer, _ATSFontGetContainerFromFileReference, 
+                       _ATSFontGetContainerFromPath, _ATSFontGetContainerInfo, _ATSFontGetEncoding, 
+                       _ATSFontGetFilePath, _ATSFontGetFileReference, _ATSFontGetFileReferenceForXType, 
                        _ATSFontGetFontFamilyResource, _ATSFontGetFontIdentifier, 
                        _ATSFontGetFormat, _ATSFontGetGeneration, _ATSFontGetGlobalAutoActivationSetting, 
                        _ATSFontGetGlyphCount, _ATSFontGetGlyphIDsForGlyphNames, _ATSFontGetHorizontalMetrics, 

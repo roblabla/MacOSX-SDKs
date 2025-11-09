@@ -28,7 +28,7 @@ extern "C" {
  *              ensure that the state captures all information necessary to
  *              execute the corresponding gradient pass.
  */
-MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3))
+MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3))
 @interface MPSCNNInstanceNormalizationGradientState : MPSNNGradientState
 
 /*! @abstract The MPSCNNInstanceNormalization object that created this state object. */
@@ -81,14 +81,14 @@ MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3))
 @end    /* MPSCNNInstanceNormalizationGradientState */
     
 typedef NSArray<MPSCNNInstanceNormalizationGradientState*>  MPSCNNInstanceNormalizationGradientStateBatch
-    MPS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3));
+    MPS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3));
     
 /*! @protocol   MPSCNNInstanceNormalizationDataSource
  *  @abstract   The MPSCNNInstanceNormalizationDataSource protocol declares the methods that an
  *              instance of MPSCNNInstanceNormalization uses to initialize the
  *              scale factors (gamma) and bias terms (beta).
  */
-MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3))
+MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3))
 @protocol MPSCNNInstanceNormalizationDataSource <NSObject, NSCopying>
 
 @required
@@ -172,7 +172,17 @@ MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3))
      *  @result     A pointer to a copy of this data source.
      */
     - (nonnull instancetype) copyWithZone:(nullable NSZone *)zone
-                                   device:(nullable id <MTLDevice>) device MPS_AVAILABLE_STARTING(macos(10.14), ios(12.0), tvos(12.0));
+                                   device:(nullable id <MTLDevice>) device MPS_AVAILABLE_STARTING(macos(10.14), ios(12.0), macCatalyst(13.0), tvos(12.0));
+    
+    /*! @abstract   Alerts the data source that the data will be needed soon
+     *  @return     Returns YES on success.  If NO is returned, expect MPS
+     *              object construction to fail.
+     */
+    -(BOOL) load MPS_AVAILABLE_STARTING(macos(10.15), ios(13), macCatalyst(13), tvos(13));
+    
+    /*! @abstract   Alerts the data source that the data is no longer needed
+     */
+    -(void) purge MPS_AVAILABLE_STARTING(macos(10.15), ios(13), macCatalyst(13), tvos(13));
 @end    // MPSCNNInstanceNormalizationDataSource
     
 /*!
@@ -185,7 +195,7 @@ MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3))
  *                  for each channel:
  *                      y = (x - mean) * gamma / sqrt(variance + epsilon) + beta;
  */
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), tvos(11.3))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3))
 @interface MPSCNNInstanceNormalization : MPSCNNKernel
 /*! @property   epsilon
  *  @abstract   The epsilon value used to bias the variance when normalizing.
@@ -229,12 +239,12 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), tvos(11.3))
  */
 -(void) reloadDataSource: (__nonnull id<MPSCNNInstanceNormalizationDataSource>) dataSource
 MPS_AVAILABLE_STARTING_BUT_DEPRECATED( "Please use -reloadGammaAndBetaFromDataSource instead.",
-                                      macos(10.13.4, 10.14), ios(11.3,12.0), tvos(11.3, 12.0));
+                                      macos(10.13.4, 10.14), ios(11.3,12.0), tvos(11.3, 12.0))  MPS_UNAVAILABLE(macCatalyst);
 
 /*!
  *  @abstract   Reinitialize the filter using the data source provided at kernel initialization.
  */
--(void) reloadGammaAndBetaFromDataSource MPS_AVAILABLE_STARTING(macos(10.14), ios(12.0), tvos(12.0));
+-(void) reloadGammaAndBetaFromDataSource MPS_AVAILABLE_STARTING(macos(10.14), ios(12.0), macCatalyst(13.0), tvos(12.0));
 
 /*!
  *  @abstract   Reload data using new gamma and beta terms contained within an
@@ -271,7 +281,7 @@ MPS_AVAILABLE_STARTING_BUT_DEPRECATED( "Please use -reloadGammaAndBetaFromDataSo
  *  @discussion This kernel executes a gradient pass corresponding to MPSCNNInstanceNormalization.
  *
  */
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), tvos(11.3))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3))
 @interface MPSCNNInstanceNormalizationGradient : MPSCNNGradientKernel
 
 @end    /* MPSCNNInstanceNormalizationGradient */

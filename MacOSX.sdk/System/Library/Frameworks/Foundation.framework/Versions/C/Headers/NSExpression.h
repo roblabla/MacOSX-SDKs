@@ -1,5 +1,5 @@
 /*	NSExpression.h
-	Copyright (c) 2004-2018, Apple Inc. All rights reserved.
+	Copyright (c) 2004-2019, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -30,7 +30,7 @@ typedef NS_ENUM(NSUInteger, NSExpressionType) {
 
 };
 
-NS_CLASS_AVAILABLE(10_4, 3_0)
+API_AVAILABLE(macos(10.4), ios(3.0), watchos(2.0), tvos(9.0))
 @interface NSExpression : NSObject <NSSecureCoding, NSCopying> {
     @package
     struct _expressionFlags {
@@ -78,8 +78,9 @@ NS_CLASS_AVAILABLE(10_4, 3_0)
     // abs:              one NSExpression instance representing a number	NSNumber
     // trunc:            one NSExpression instance representing a number	NSNumber
     // uppercase:	 one NSExpression instance representing a string	NSString
-    // lowercase:	 one NSExpression instance representing a string	NSString
-    // random            none							NSNumber (integer) 
+    // lowercase:        one NSExpression instance representing a string    NSString
+    // canonical:        one NSExpression instance representing a string    NSString
+    // random            none							NSNumber (integer)
     // randomn:          one NSExpression instance representing a number	NSNumber (integer) such that 0 <= rand < param
     // now               none							[NSDate now]
     // bitwiseAnd:with:	 two NSExpression instances representing numbers	NSNumber    (numbers will be treated as NSInteger)

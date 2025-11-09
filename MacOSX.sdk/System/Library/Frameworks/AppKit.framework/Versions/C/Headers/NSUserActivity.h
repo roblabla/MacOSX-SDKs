@@ -1,7 +1,7 @@
 /*
     NSUserActivity.h
     Application Kit
-    Copyright (c) 2014-2018, Apple Inc.
+    Copyright (c) 2014-2019, Apple Inc.
     All rights reserved.
 */
 
@@ -10,20 +10,18 @@
 #import <AppKit/NSResponder.h>
 #import <AppKit/NSDocument.h>
 
-
 #if __OBJC2__
 #define NS_USER_ACTIVITY_SUPPORTED 1
-#else
-#define NS_USER_ACTIVITY_SUPPORTED 0
 #endif
 
 #if NS_USER_ACTIVITY_SUPPORTED
 
 NS_ASSUME_NONNULL_BEGIN
+API_UNAVAILABLE_BEGIN(ios)
 
 @protocol NSUserActivityRestoring <NSObject>
 /* This method exists to be overridden and will be called from the main thread. It will be called on any objects passed to the restorationHandler given to application:continueUserActivity:restorationHandler: below. You should use the state in the userInfo to restore the object. On OS X, activities managed by NSDocument can be restored automatically, if NO is returned from application:continueActivity:restorationHandler: (or it is unimplemented). In this situation, the document will be opened via -[NSDocumentController openDocumentWithContentsOfURL:display:completionHandler:], and will have restoreUserActivityState: called on it. */
-- (void)restoreUserActivityState:(NSUserActivity *)userActivity NS_AVAILABLE_MAC(10_10);
+- (void)restoreUserActivityState:(NSUserActivity *)userActivity API_AVAILABLE(macos(10.10));
 @end
 
 @interface NSResponder (NSUserActivity) <NSUserActivityRestoring>
@@ -39,10 +37,10 @@ NS_ASSUME_NONNULL_BEGIN
  
  This property is KVO observable.
  */
-@property (nullable, strong) NSUserActivity *userActivity NS_AVAILABLE_MAC(10_10);
+@property (nullable, strong) NSUserActivity *userActivity API_AVAILABLE(macos(10.10));
 
 /* This method exists to be overridden and will be called from the main thread. You should save any state representing the user's activity into the NSUserActivity's userInfo via its -addUserInfoEntriesFromDictionary method. When the state is out of date, you should mark the userActivity as needing to save via the needsSave property, and your override will be invoked again at an appropriate time. */
-- (void)updateUserActivityState:(NSUserActivity *)userActivity NS_AVAILABLE_MAC(10_10);
+- (void)updateUserActivityState:(NSUserActivity *)userActivity API_AVAILABLE(macos(10.10));
 
 @end
 
@@ -55,17 +53,18 @@ NS_ASSUME_NONNULL_BEGIN
 
  If there is a CFBundleDocumentTypes entry for the document's type with a NSUbiquitousDocumentUserActivityType key, AppKit/UIKIt will automatically create an NSUserActivity with the given activityType when the document is ubiquitous. When it is non-ubiquitous, the userActivity will be nil. Note that userActivity is KVO observable, in case the userActivity is being shared with other objects that need to be kept in sync as the document moves into and out of iCloud.
  */
-@property (nullable, strong) NSUserActivity *userActivity NS_AVAILABLE_MAC(10_10);
+@property (nullable, strong) NSUserActivity *userActivity API_AVAILABLE(macos(10.10));
 
 /* On OS X, The default implementation of this will put the fileURL into the userInfo with the NSUserActivityDocumentURLKey. NSDocument will automatically call needsSave on the userActivity when the fileURL changes. */
-- (void)updateUserActivityState:(NSUserActivity *)activity NS_AVAILABLE_MAC(10_10);
+- (void)updateUserActivityState:(NSUserActivity *)activity API_AVAILABLE(macos(10.10));
 
 @end
 
 
 /* When NSUbiquitousDocumentUserActivityType is present in a CFBundleDocumentTypes entry, AppKit will automatically create an NSUserActivity for documents in iCloud, using the given activityType. */
-APPKIT_EXTERN NSString * const NSUserActivityDocumentURLKey NS_AVAILABLE_MAC(10_10);
+APPKIT_EXTERN NSString * const NSUserActivityDocumentURLKey API_AVAILABLE(macos(10.10));
 
+API_UNAVAILABLE_END
 NS_ASSUME_NONNULL_END
 
 #endif

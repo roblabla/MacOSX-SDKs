@@ -115,17 +115,6 @@ Enables or disables the service in the requested domain. Once a service is
 disabled, it cannot be loaded in the specified domain until it is once again
 enabled. This state persists across boots of the device. This subcommand may
 only target services within the system domain or user and user-login domains.
-.It Xo Ar uncache Ar service-name
-.Xc
-This subcommand instructs
-.Nm launchd
-to bypass its service cache for the named service and instead read the service's
-configuration file directly from disk.
-.Nm launchd
-maintains an in-memory cache of XPC service configuration files to minimize the
-disk I/O. This subcommand will remove a cached entry so that developers may more
-rapidly iterate on a service's configuration. It should not ever be used as part
-of production workflow.
 .It Xo Ar kickstart Op Fl kp
 .Ar service-target
 .Xc
@@ -620,14 +609,6 @@ Get the resource utilization statistics for
 or the children of
 .Nm launchd .
 This subcommand is not implemented.
-.It Xo Ar log
-.Op Ar level loglevel
-.Op Ar only | mask loglevels...
-.Xc
-Get and set the
-.Xr syslog 3
-log level mask. The available log levels are: debug, info, notice, warning,
-error, critical, alert and emergency. This subcommand is not implemented.
 .It Xo Ar limit
 .Op Ar cpu | filesize | data | stack | core | rss | memlock | maxproc | maxfiles
 .Op Ar both Op Ar soft | hard

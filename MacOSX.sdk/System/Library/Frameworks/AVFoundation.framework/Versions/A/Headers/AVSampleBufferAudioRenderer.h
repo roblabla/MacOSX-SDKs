@@ -20,7 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 	@discussion
 		An instance of AVSampleBufferAudioRenderer must be added to an AVSampleBufferRenderSynchronizer before the first sample buffer is enqueued.
 */
-API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0)) __WATCHOS_PROHIBITED
+API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0))
 @interface AVSampleBufferAudioRenderer : NSObject <AVQueuedSampleBufferRendering>
 {
 @private
@@ -129,7 +129,7 @@ API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0)) __WATCHOS_PROHIBITED
  
 		This notification is delivered on an arbitrary thread.  If sample buffers are being enqueued with the renderer concurrently with the receipt of this notification, it is possible that one or more sample buffers will remain enqueued in the renderer.  This is generally undesirable, because the sample buffers that remain will likely have timestamps far ahead of the timebase's current time and so won't be rendered for some time.  The best practice is to invoke the -flush method, in a manner that is serialized with enqueueing sample buffers, after receiving this notification and before resuming the enqueueing of sample buffers.
  */
-AVF_EXPORT NSNotificationName const AVSampleBufferAudioRendererWasFlushedAutomaticallyNotification API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0)) __WATCHOS_PROHIBITED;
+AVF_EXPORT NSNotificationName const AVSampleBufferAudioRendererWasFlushedAutomaticallyNotification API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0));
 
 	/*!
 		@constant		AVSampleBufferAudioRendererFlushTimeKey
@@ -137,7 +137,7 @@ AVF_EXPORT NSNotificationName const AVSampleBufferAudioRendererWasFlushedAutomat
 		@discussion
 			The value of this key is an NSValue wrapping a CMTime.
 	 */
-	AVF_EXPORT NSString * const AVSampleBufferAudioRendererFlushTimeKey API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0)) __WATCHOS_PROHIBITED;
+	AVF_EXPORT NSString * const AVSampleBufferAudioRendererFlushTimeKey API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0));
 
 @end
 

@@ -1,7 +1,7 @@
 /*
 	NSNibConnector.h
 	Application Kit
-	Copyright (c) 1994-2018, Apple Inc.
+	Copyright (c) 1994-2019, Apple Inc.
 	All rights reserved.
 */
 
@@ -9,14 +9,9 @@
 #import <AppKit/AppKitDefines.h>
 
 NS_ASSUME_NONNULL_BEGIN
+API_UNAVAILABLE_BEGIN(ios)
 
 @interface NSNibConnector : NSObject <NSCoding>
-{
-    @private
-    id _source APPKIT_IVAR;		/* The source of the connection. */
-    id _destination APPKIT_IVAR;	/* The destination of the connection. */
-    NSString *_label APPKIT_IVAR;	/* The label of the connection. */
-}
 @property (nullable, assign) id source;
 @property (nullable, assign) id destination;
 @property (copy) NSString *label;
@@ -24,4 +19,5 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)establishConnection;
 @end
 
+API_UNAVAILABLE_END
 NS_ASSUME_NONNULL_END

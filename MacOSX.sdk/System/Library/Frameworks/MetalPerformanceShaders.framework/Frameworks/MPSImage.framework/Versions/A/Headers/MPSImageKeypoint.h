@@ -38,7 +38,7 @@ typedef struct
  *              The pixel format of the source image must be MTLPixelFormatR8Unorm.
  *
  */
-MPS_CLASS_AVAILABLE_STARTING(macos(10.13), ios(11.0), tvos(11.0))
+MPS_CLASS_AVAILABLE_STARTING(macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0))
 @interface  MPSImageFindKeypoints : MPSKernel
 
 /*! @property   keypointRangeInfo

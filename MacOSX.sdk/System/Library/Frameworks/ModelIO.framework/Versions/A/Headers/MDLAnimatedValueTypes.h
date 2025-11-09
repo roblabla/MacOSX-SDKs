@@ -184,6 +184,25 @@ MDL_EXPORT
 @end
 
 
+API_AVAILABLE(macos(10.14), ios(12.0), tvos(12.0))
+MDL_EXPORT
+@interface MDLAnimatedQuaternion : MDLAnimatedValue
+
+-(void)setFloatQuaternion:(simd_quatf)value atTime:(NSTimeInterval)time;
+-(void)setDoubleQuaternion:(simd_quatd)value atTime:(NSTimeInterval)time;
+
+-(simd_quatf)floatQuaternionAtTime:(NSTimeInterval)time;
+-(simd_quatd)doubleQuaternionAtTime:(NSTimeInterval)time;
+
+-(void)resetWithFloatQuaternionArray:(const simd_quatf *)valuesArray atTimes:(const NSTimeInterval *)timesArray count:(NSUInteger)count NS_REFINED_FOR_SWIFT;
+-(void)resetWithDoubleQuaternionArray:(const simd_quatd *)valuesArray atTimes:(const NSTimeInterval *)timesArray count:(NSUInteger)count NS_REFINED_FOR_SWIFT;
+
+-(NSUInteger)getFloatQuaternionArray:(simd_quatf *)valuesArray maxCount:(NSUInteger)maxCount NS_REFINED_FOR_SWIFT;
+-(NSUInteger)getDoubleQuaternionArray:(simd_quatd *)valuesArray maxCount:(NSUInteger)maxCount NS_REFINED_FOR_SWIFT;
+
+@end
+
+
 API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0))
 MDL_EXPORT
 @interface MDLAnimatedMatrix4x4 : MDLAnimatedValue

@@ -18,10 +18,11 @@
 */
 
 /* Notification names */
-extern NSString* const QCViewDidStartRenderingNotification;
-extern NSString* const QCViewDidStopRenderingNotification;
+extern NSString* const QCViewDidStartRenderingNotification QC_DEPRECATED_MAC(10_15);
+extern NSString* const QCViewDidStopRenderingNotification QC_DEPRECATED_MAC(10_15);
 
 /* Quartz Composer Composition View */
+QC_CLASS_DEPRECATED_MAC(10_15)
 @interface QCView : NSView <QCCompositionRenderer>
 {
 @private

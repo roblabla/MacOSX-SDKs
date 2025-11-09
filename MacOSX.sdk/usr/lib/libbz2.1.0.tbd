@@ -1,10 +1,9 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 4EE3C5E8-BEF3-3910-A231-B1AE2B437E01' ]
-platform:        macosx
-install-name:    /usr/lib/libbz2.1.0.dylib
+uuids:           [ 'x86_64: 1BDC6A20-4134-309A-856E-5F9F4766B37A', 'x86_64: 1BDC6A20-4134-309A-856E-5F9F4766B37A' ]
+platform:        zippered
+install-name:    '/usr/lib/libbz2.1.0.dylib'
 current-version: 1.0.5
-objc-constraint: none
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _BZ2_bzBuffToBuffCompress, _BZ2_bzBuffToBuffDecompress, _BZ2_bzCompress, 

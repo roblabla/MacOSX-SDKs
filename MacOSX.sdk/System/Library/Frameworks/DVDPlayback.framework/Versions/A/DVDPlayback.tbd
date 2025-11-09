@@ -1,11 +1,10 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 78130A18-C05B-394C-8CDC-60EFC4673542' ]
+uuids:           [ 'x86_64: B9539219-C0BA-3D53-9423-FBFCDABF7E71' ]
 platform:        macosx
-install-name:    /System/Library/Frameworks/DVDPlayback.framework/Versions/A/DVDPlayback
+install-name:    '/System/Library/Frameworks/DVDPlayback.framework/Versions/A/DVDPlayback'
 current-version: 5960
 compatibility-version: 5000
-objc-constraint: none
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _DVDClearLastPlayBookmark, _DVDCloseMediaFile, _DVDCloseMediaVolume, 

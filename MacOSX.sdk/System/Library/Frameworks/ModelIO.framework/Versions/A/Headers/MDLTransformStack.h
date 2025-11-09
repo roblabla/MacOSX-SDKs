@@ -79,6 +79,13 @@ MDL_EXPORT
 @property (nonatomic, readonly) MDLAnimatedMatrix4x4* animatedValue;
 @end
 
+API_AVAILABLE(macos(10.14), ios(12.0), tvos(12.0))
+MDL_EXPORT
+@interface MDLTransformOrientOp : NSObject<MDLTransformOp>
+@property (nonatomic, readonly) NSString* name;
+@property (nonatomic, readonly) MDLAnimatedQuaternion* animatedValue;
+@end
+
 API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0))
 MDL_EXPORT
 @interface MDLTransformStack : NSObject<NSCopying, MDLTransformComponent>
@@ -105,6 +112,9 @@ MDL_EXPORT
                            inverse:(bool)inverse;
 
 -(MDLTransformMatrixOp*) addMatrixOp:(NSString*)animatedValueName
+                             inverse:(bool)inverse;
+
+-(MDLTransformOrientOp*) addOrientOp:(NSString*)animatedValueName
                              inverse:(bool)inverse;
 
 -(MDLAnimatedValue*) animatedValueWithName:(NSString*) name;

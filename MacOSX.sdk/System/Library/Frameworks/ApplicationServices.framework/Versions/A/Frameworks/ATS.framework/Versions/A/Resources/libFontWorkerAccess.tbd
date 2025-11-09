@@ -1,12 +1,12 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 161D4C04-0914-36C2-90F2-6817B7B0D01C' ]
-platform:        macosx
-install-name:    /System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/ATS.framework/Versions/A/Resources/libFontWorkerAccess.dylib
+uuids:           [ 'x86_64: DF79958E-8E0B-328D-95F7-4CBE13888957', 'x86_64: DF79958E-8E0B-328D-95F7-4CBE13888957' ]
+platform:        zippered
+install-name:    '/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/ATS.framework/Versions/A/Resources/libFontWorkerAccess.dylib'
 exports:         
   - archs:           [ x86_64 ]
-    symbols:         [ _AskATSIfReadyForXType, _AskATSToShutdown, _CreateBaseSystemFontFilePaths, 
-                       _DoNotifyATS, _GetFontWorkerVT, _IsOnBaseSystem, _XTDataStreamAppendBytes, 
+    symbols:         [ _AskATSIfReadyForXType, _AskATSToShutdown, _DoNotifyATS, _GetFontWorkerVT, 
+                       _XTConsumeSandboxExtension, _XTConsumeSandboxExtensions, _XTDataStreamAppendBytes, 
                        _XTDataStreamAppendCString, _XTDataStreamAppendDouble, _XTDataStreamAppendEmptySegments, 
                        _XTDataStreamAppendEmptyStrings, _XTDataStreamAppendString, 
                        _XTDataStreamAppendUInt32, _XTDataStreamBytesLeftToRead, _XTDataStreamBytesLeftToReadInCurrentSegment, 
@@ -18,28 +18,26 @@ exports:
                        _XTDataStreamReadBytes, _XTDataStreamReadCString, _XTDataStreamReadDouble, 
                        _XTDataStreamReadString, _XTDataStreamReadUInt32, _XTDataStreamResetReadSegment, 
                        _XTDataStreamResetStream, _XTDataStreamShow, _XTDataStreamSkipReadSegment, 
-                       _XTDataStreamWithData, __Z15AppendExtensioniPK7__CFURLRjR13TCFMutableSetRP8__CFData, 
-                       __Z15BeginSandboxingPKc, __Z19utf8CopyDescriptionPKv, __Z23XTIssueSandboxExtensionPK7__CFURLP8__CFData, 
-                       __Z25XTConsumeSandboxExtensionPKhjb, __Z26XTConsumeSandboxExtensionsPKhjb, 
-                       __Z29TFontWorkerProtocolSetClassesP14NSXPCInterface, __Z31XTIssueSandboxExtensionsForURLsiPK9__CFArrayPP8__CFDatab, 
-                       __Z5MergePK9__CFArrayS1_R14TCFSortedArray, __Z8utf8HashPKv, 
-                       __Z9utf8EqualPKvS0_, __ZN10TCFTypeRef15GetBooleanValueEPKv, 
+                       _XTDataStreamWithData, _XTIssueSandboxExtensionsForURLs, __Z15BeginSandboxingPKc, 
+                       __Z19utf8CopyDescriptionPKv, __Z23XTIssueSandboxExtension13audit_token_tPKcP8__CFData, 
+                       __Z29TFontWorkerProtocolSetClassesP14NSXPCInterface, __Z5MergePK9__CFArrayS1_R14TCFSortedArray, 
+                       __Z8utf8HashPKv, __Z9utf8EqualPKvS0_, __ZN10TCFTypeRef15GetBooleanValueEPKv, 
                        __ZN11TCFBookmark16InitBookmarkDataEPK7__CFURLPK9__CFArraym, 
                        __ZN11TCFBookmark18sDefaultPropertiesE, __ZN11TCFBookmark20GetDefaultPropertiesEv, 
                        __ZN11TCFBookmark23CreateDefaultPropertiesEv, __ZN11TCFBookmark28CopyPropertyFromBookmarkDataEPK8__CFDataPK10__CFString, 
                        __ZN11TCFBookmark30CopyPropertiesFromBookmarkDataEPK8__CFDataPK9__CFArray, 
                        __ZN11TCFBookmark32CreateURLByResolvingBookmarkDataEPK8__CFDataPhPK9__CFArrayPK7__CFURLmPP9__CFError, 
                        __ZN11TFontWorker19GetFontWorkerClientEv, __ZN11TFontWorker5sLockE, 
-                       __ZN12CFDictionary19GetValueForLanguageEPK14__CFDictionaryPK10__CFString, 
                        __ZN14TATSFontWorker22GetATSFontWorkerClientEv, __ZN14TATSFontWorker5sLockE, 
                        __ZN14TCFSortedArray12InsertUniqueEPKv, __ZN15TCoreFontWorkerC1EP17TFontWorkerClient, 
                        __ZN15TCoreFontWorkerC2EP17TFontWorkerClient, __ZN15TCoreFontWorkerD0Ev, 
                        __ZN15TCoreFontWorkerD1Ev, __ZN15TCoreFontWorkerD2Ev, __ZN15TSessionManager11SetSafeModeEb, 
                        __ZN15TSessionManager15sSessionManagerE, __ZN15TSessionManager17GetSessionManagerEv, 
                        __ZN15TSessionManager18ResolveServiceNameEPcmPKc, __ZN15TSessionManager20CreateSessionManagerEv, 
-                       __ZN15TSessionManager20IsCJKLanguageEnabledEb, __ZN15TSessionManager22IsInstallerEnvironmentEv, 
-                       __ZN15TSessionManager22sEnableSessionRegistryE, __ZN15TSessionManager23CopyStandardFontSetURLsEv, 
-                       __ZN15TSessionManager25GetFontAssetDirectoryPathEv, __ZN15TSessionManager29GetInstallationKindForFontURLEPK7__CFURL, 
+                       __ZN15TSessionManager20IsCJKLanguageEnabledEb, __ZN15TSessionManager22IsIndicLanguageEnabledEb, 
+                       __ZN15TSessionManager22IsInstallerEnvironmentEv, __ZN15TSessionManager22sEnableSessionRegistryE, 
+                       __ZN15TSessionManager23CopyStandardFontSetURLsEv, __ZN15TSessionManager25GetFontAssetDirectoryPathEv, 
+                       __ZN15TSessionManager29GetInstallationKindForFontURLEPK7__CFURL, 
                        __ZN15TSessionManager31IsFontConflictProtectionEnabledEv, 
                        __ZN15TSessionManagerC1Ev, __ZN15TSessionManagerC2Ev, __ZN16TCFStringUniquer14sStringUniquerE, 
                        __ZN16TCFStringUniquer16GetStringUniquerEv, __ZN16TCFStringUniquer19CreateStringUniquerEPv, 
@@ -128,14 +126,14 @@ exports:
                        __ZNK20TCFMutableDictionary14AddMultiValuesEPKvPK9__CFArray, 
                        __ZNK20TCFMutableDictionary8SetPairsEPK14__CFDictionary, __ZNK20TFontProviderManager21CopyProviderEndpointsEv, 
                        __ZNK6TCFStr15GetUniqueStringEv, __ZNK6TCFURL13ConformsToUTIEPK10__CFString, 
-                       __ZNK6TCFURL23CreateComponentPathURLsEv, __ZNK7TCFDict29CreateDictionaryFilteredByKeyEPK7__CFSet, 
-                       __ZTI15TCoreFontWorker, __ZTI17TCFFlattenContext, __ZTI19TCFResurrectContext, 
-                       __ZTS15TCoreFontWorker, __ZTS17TCFFlattenContext, __ZTS19TCFResurrectContext, 
-                       __ZTV15TCoreFontWorker, __ZTV17TCFFlattenContext, __ZTV19TCFResurrectContext, 
+                       __ZNK6TCFURL23CreateComponentPathURLsEv, __ZNK7TCFDict21GetPreferredLanguagesEPK9__CFArray, 
+                       __ZNK7TCFDict29CreateDictionaryFilteredByKeyEPK7__CFSet, __ZTI15TCoreFontWorker, 
+                       __ZTI17TCFFlattenContext, __ZTI19TCFResurrectContext, __ZTS15TCoreFontWorker, 
+                       __ZTS17TCFFlattenContext, __ZTS19TCFResurrectContext, __ZTV15TCoreFontWorker, 
+                       __ZTV17TCFFlattenContext, __ZTV19TCFResurrectContext, __fConnectionInterrupted, 
                        _indexOfSegment, _kAdopted, _kEscapeString, _kFWFailureMarker, 
                        _kFWNonExistentMarker, _kIsDirectory, _kIsFile, _parentOfSegment, 
                        _readStack, _segmentAtPosition, _writeSegmentAtPosition, _writeStack ]
     objc-classes:    [ TFontWorkerClient ]
-    objc-ivars:      [ TFontWorkerClient._fConnection ]
     weak-def-symbols: [ __ZTI14TATSFontWorker, __ZTS14TATSFontWorker ]
 ...

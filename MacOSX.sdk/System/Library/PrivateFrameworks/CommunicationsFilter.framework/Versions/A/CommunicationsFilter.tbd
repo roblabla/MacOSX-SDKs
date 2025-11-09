@@ -1,8 +1,8 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: ADFC6A6C-C82A-3574-B549-E52A99FC109A' ]
-platform:        macosx
-install-name:    /System/Library/PrivateFrameworks/CommunicationsFilter.framework/Versions/A/CommunicationsFilter
+uuids:           [ 'x86_64: DB1EEA5F-0BBE-31F2-8EEE-7C9159F4433F', 'x86_64: DB1EEA5F-0BBE-31F2-8EEE-7C9159F4433F' ]
+platform:        zippered
+install-name:    '/System/Library/PrivateFrameworks/CommunicationsFilter.framework/Versions/A/CommunicationsFilter'
 current-version: 800
 exports:         
   - archs:           [ x86_64 ]

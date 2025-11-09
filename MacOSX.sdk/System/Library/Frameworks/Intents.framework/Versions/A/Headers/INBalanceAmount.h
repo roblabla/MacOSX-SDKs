@@ -2,7 +2,7 @@
 //  INBalanceAmount.h
 //  Intents
 //
-//  Copyright (c) 2017 Apple Inc. All rights reserved.
+//  Copyright (c) 2016-2019 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>

@@ -1,7 +1,7 @@
 /*
 	NSSegmentedControl.h
 	Application Kit
-	Copyright (c) 2003-2018, Apple Inc.
+	Copyright (c) 2003-2019, Apple Inc.
 	All rights reserved.
 */
 
@@ -10,6 +10,7 @@
 #import <AppKit/NSUserInterfaceCompression.h>
 
 NS_ASSUME_NONNULL_BEGIN
+API_UNAVAILABLE_BEGIN(ios)
 
 @class NSImage;
 
@@ -17,7 +18,7 @@ typedef NS_ENUM(NSUInteger, NSSegmentSwitchTracking) {
     NSSegmentSwitchTrackingSelectOne = 0,  // only one button can be selected
     NSSegmentSwitchTrackingSelectAny = 1,  // any button can be selected
     NSSegmentSwitchTrackingMomentary = 2,  // only selected while tracking
-    NSSegmentSwitchTrackingMomentaryAccelerator NS_ENUM_AVAILABLE_MAC(10_10_3) = 3, // accelerator behavior, only selected while tracking
+    NSSegmentSwitchTrackingMomentaryAccelerator API_AVAILABLE(macos(10.10.3)) = 3, // accelerator behavior, only selected while tracking
 };
 
 typedef NS_ENUM(NSInteger, NSSegmentStyle) {
@@ -26,12 +27,12 @@ typedef NS_ENUM(NSInteger, NSSegmentStyle) {
     NSSegmentStyleRoundRect = 3,
     NSSegmentStyleTexturedSquare = 4,
     NSSegmentStyleSmallSquare = 6,
-    NSSegmentStyleSeparated NS_ENUM_AVAILABLE_MAC(10_10) = 8,
+    NSSegmentStyleSeparated API_AVAILABLE(macos(10.10)) = 8,
     
     /* In Mac OS X 10.10 and later, the following styles have identical artwork */
-    NSSegmentStyleTexturedRounded NS_ENUM_AVAILABLE_MAC(10_5) = 2,
-    NSSegmentStyleCapsule NS_ENUM_AVAILABLE_MAC(10_5) = 5
-} NS_ENUM_AVAILABLE_MAC(10_5);
+    NSSegmentStyleTexturedRounded API_AVAILABLE(macos(10.5)) = 2,
+    NSSegmentStyleCapsule API_AVAILABLE(macos(10.5)) = 5
+} API_AVAILABLE(macos(10.5));
 
 typedef NS_ENUM(NSInteger, NSSegmentDistribution) {
     /// Dynamically sized segments will be sized to fit their contents, any remaining space will be left blank. This style is equivalent to the way segments were distributed on older systems.
@@ -46,15 +47,9 @@ typedef NS_ENUM(NSInteger, NSSegmentDistribution) {
     /// Dynamically sized segments will be sized to fill the available space, and kept proportional to their fitting size.
     NSSegmentDistributionFillProportionally,
     
-} NS_ENUM_AVAILABLE_MAC(10_13);
+} API_AVAILABLE(macos(10.13));
 
-@interface NSSegmentedControl : NSControl <NSUserInterfaceCompression> {
-  @private
-    NSInteger _reserved1 APPKIT_IVAR;
-    NSInteger _reserved2 APPKIT_IVAR;
-    NSInteger _reserved3 APPKIT_IVAR;
-    id        _scAux APPKIT_IVAR;
-}
+@interface NSSegmentedControl : NSControl <NSUserInterfaceCompression>
 
 @property NSInteger segmentCount;
 
@@ -68,8 +63,8 @@ typedef NS_ENUM(NSInteger, NSSegmentDistribution) {
 - (void)setImage:(nullable NSImage *)image forSegment:(NSInteger)segment;
 - (nullable NSImage *)imageForSegment:(NSInteger)segment;
 
-- (void)setImageScaling:(NSImageScaling)scaling forSegment:(NSInteger)segment NS_AVAILABLE_MAC(10_5);
-- (NSImageScaling)imageScalingForSegment:(NSInteger)segment NS_AVAILABLE_MAC(10_5);
+- (void)setImageScaling:(NSImageScaling)scaling forSegment:(NSInteger)segment API_AVAILABLE(macos(10.5));
+- (NSImageScaling)imageScalingForSegment:(NSInteger)segment API_AVAILABLE(macos(10.5));
 
 - (void)setLabel:(NSString *)label forSegment:(NSInteger)segment;
 - (nullable NSString *)labelForSegment:(NSInteger)segment;
@@ -83,37 +78,39 @@ typedef NS_ENUM(NSInteger, NSSegmentDistribution) {
 - (void)setEnabled:(BOOL)enabled forSegment:(NSInteger)segment;
 - (BOOL)isEnabledForSegment:(NSInteger)segment;
 
-- (void)setToolTip:(nullable NSString *)toolTip forSegment:(NSInteger)segment NS_AVAILABLE_MAC(10_13);
-- (nullable NSString *)toolTipForSegment:(NSInteger)segment NS_AVAILABLE_MAC(10_13);
+- (void)setToolTip:(nullable NSString *)toolTip forSegment:(NSInteger)segment API_AVAILABLE(macos(10.13));
+- (nullable NSString *)toolTipForSegment:(NSInteger)segment API_AVAILABLE(macos(10.13));
 
-- (void)setTag:(NSInteger)tag forSegment:(NSInteger)segment NS_AVAILABLE_MAC(10_13);
-- (NSInteger)tagForSegment:(NSInteger)segment NS_AVAILABLE_MAC(10_13);
+- (void)setTag:(NSInteger)tag forSegment:(NSInteger)segment API_AVAILABLE(macos(10.13));
+- (NSInteger)tagForSegment:(NSInteger)segment API_AVAILABLE(macos(10.13));
 
-- (void)setShowsMenuIndicator:(BOOL)showsMenuIndicator forSegment:(NSInteger)segment NS_AVAILABLE_MAC(10_13);
-- (BOOL)showsMenuIndicatorForSegment:(NSInteger)segment NS_AVAILABLE_MAC(10_13);
+- (void)setShowsMenuIndicator:(BOOL)showsMenuIndicator forSegment:(NSInteger)segment API_AVAILABLE(macos(10.13));
+- (BOOL)showsMenuIndicatorForSegment:(NSInteger)segment API_AVAILABLE(macos(10.13));
 
-@property NSSegmentStyle segmentStyle NS_AVAILABLE_MAC(10_5);
+@property NSSegmentStyle segmentStyle API_AVAILABLE(macos(10.5));
 
-@property (getter=isSpringLoaded) BOOL springLoaded NS_AVAILABLE_MAC(10_10_3); // sends action on deep-press or extended hover while dragging. Defaults to NO.
+@property (getter=isSpringLoaded) BOOL springLoaded API_AVAILABLE(macos(10.10.3)); // sends action on deep-press or extended hover while dragging. Defaults to NO.
 
-@property NSSegmentSwitchTracking trackingMode NS_AVAILABLE_MAC(10_10_3);
+@property NSSegmentSwitchTracking trackingMode API_AVAILABLE(macos(10.10.3));
 
 /*  This message is valid only for trackingMode=NSSegmentSwitchTrackingMomentaryAccelerator and provides the double value for the selected segment.
  */
-@property (readonly) double doubleValueForSelectedSegment NS_AVAILABLE_MAC(10_10_3);
+@property (readonly) double doubleValueForSelectedSegment API_AVAILABLE(macos(10.10.3));
 
-@property (nullable, copy) NSColor *selectedSegmentBezelColor NS_AVAILABLE_MAC(10_12_2); // The color of the selected segment's bevel, in appearances that support it
+@property (nullable, copy) NSColor *selectedSegmentBezelColor API_AVAILABLE(macos(10.12.2)); // The color of the selected segment's bevel, in appearances that support it
 
-@property (readonly) NSInteger indexOfSelectedItem NS_AVAILABLE_MAC(10_4); // same as selectedSegment, but useful for connecting a segmented control to -[NSTabView takeSelectedTabViewItemFromSender:]
+@property (readonly) NSInteger indexOfSelectedItem API_AVAILABLE(macos(10.4)); // same as selectedSegment, but useful for connecting a segmented control to -[NSTabView takeSelectedTabViewItemFromSender:]
 
-- (void)setAlignment:(NSTextAlignment)alignment forSegment:(NSInteger)segment NS_AVAILABLE_MAC(10_13); // Controls the content alignment of the specified segment. Defaults to NSTextAlignmentCenter and results in the standard centered cluster of content
-- (NSTextAlignment)alignmentForSegment:(NSInteger)segment NS_AVAILABLE_MAC(10_13);
+#if !TARGET_OS_IPHONE
+- (void)setAlignment:(NSTextAlignment)alignment forSegment:(NSInteger)segment API_AVAILABLE(macos(10.13)); // Controls the content alignment of the specified segment. Defaults to NSTextAlignmentCenter and results in the standard centered cluster of content
+- (NSTextAlignment)alignmentForSegment:(NSInteger)segment API_AVAILABLE(macos(10.13));
+#endif
 
-@property NSSegmentDistribution segmentDistribution NS_AVAILABLE_MAC(10_13); // Defaults to NSSegmentDistributionFill on 10.13, older systems will continue to behave similarly to NSSegmentDistributionFit
+@property NSSegmentDistribution segmentDistribution API_AVAILABLE(macos(10.13)); // Defaults to NSSegmentDistributionFill on 10.13, older systems will continue to behave similarly to NSSegmentDistributionFit
 
-- (void)compressWithPrioritizedCompressionOptions:(NSArray<NSUserInterfaceCompressionOptions *> *)prioritizedOptions NS_AVAILABLE_MAC(10_13);
-- (NSSize)minimumSizeWithPrioritizedCompressionOptions:(NSArray<NSUserInterfaceCompressionOptions *> *)prioritizedOptions NS_AVAILABLE_MAC(10_13);
-@property (readonly, copy) NSUserInterfaceCompressionOptions *activeCompressionOptions NS_AVAILABLE_MAC(10_13);
+- (void)compressWithPrioritizedCompressionOptions:(NSArray<NSUserInterfaceCompressionOptions *> *)prioritizedOptions API_AVAILABLE(macos(10.13));
+- (NSSize)minimumSizeWithPrioritizedCompressionOptions:(NSArray<NSUserInterfaceCompressionOptions *> *)prioritizedOptions API_AVAILABLE(macos(10.13));
+@property (readonly, copy) NSUserInterfaceCompressionOptions *activeCompressionOptions API_AVAILABLE(macos(10.13));
 
 @end
 
@@ -127,7 +124,7 @@ typedef NS_ENUM(NSInteger, NSSegmentDistribution) {
  @param action The action message sent by the control.
  @return An initialized segmented control.
  */
-+ (instancetype)segmentedControlWithLabels:(NSArray<NSString *> *)labels trackingMode:(NSSegmentSwitchTracking)trackingMode target:(nullable id)target action:(nullable SEL)action NS_AVAILABLE_MAC(10_12);
++ (instancetype)segmentedControlWithLabels:(NSArray<NSString *> *)labels trackingMode:(NSSegmentSwitchTracking)trackingMode target:(nullable id)target action:(nullable SEL)action API_AVAILABLE(macos(10.12));
 
 /*!
  Creates a standard segmented control containing one segment for each of the provided images. To ensure accessibility for this control, set the accessibilityDescription property on each of the provided images.
@@ -137,8 +134,9 @@ typedef NS_ENUM(NSInteger, NSSegmentDistribution) {
  @param action The action message sent by the control.
  @return An initialized segmented control.
  */
-+ (instancetype)segmentedControlWithImages:(NSArray<NSImage *> *)images trackingMode:(NSSegmentSwitchTracking)trackingMode target:(nullable id)target action:(nullable SEL)action NS_AVAILABLE_MAC(10_12);
++ (instancetype)segmentedControlWithImages:(NSArray<NSImage *> *)images trackingMode:(NSSegmentSwitchTracking)trackingMode target:(nullable id)target action:(nullable SEL)action API_AVAILABLE(macos(10.12));
 
 @end
 
+API_UNAVAILABLE_END
 NS_ASSUME_NONNULL_END

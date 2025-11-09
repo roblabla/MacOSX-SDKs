@@ -6,15 +6,15 @@
 #include <stddef.h>
 #include <stdint.h>
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 // Availability
 #if __has_include( <Availability.h> )
 #include <Availability.h>
 #else
 #define __API_AVAILABLE(...)
+#endif
+
+#ifdef __cplusplus
+extern "C" {
 #endif
 
 // Nullability

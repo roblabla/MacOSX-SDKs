@@ -14,7 +14,7 @@
 #include <TargetConditionals.h>
 #if TARGET_OS_OSX
 #include <Availability.h>
-#include <CoreAudio/CoreAudioTypes.h>
+#include <CoreAudioTypes/CoreAudioTypes.h>
 #include <AudioToolbox/MusicPlayer.h>
 
 CF_ASSUME_NONNULL_BEGIN
@@ -159,7 +159,7 @@ typedef CF_ENUM(UInt32, CAClockSyncMode) {
 					whether it is drop frame.
 	@discussion		
 					The possible values of a CAClockSMPTEFormat are found in
-					<code>&lt;CoreAudio/CoreAudioTypes.h&gt;</code>. Values include
+					<code>&lt;CoreAudioTypes/CoreAudioTypes.h&gt;</code>. Values include
 					kSMPTETimeType30, kSMPTETimeType30Drop, etc. Note that formats with more
 					than 30 fps are not usable with MIDI Time Code.
 */
@@ -297,11 +297,11 @@ typedef void (*CAClockListenerProc)(void *userData, CAClockMessage message, cons
 	
 	@abstract	Represents a time value using one of several possible units.
 	
-	@field	format
+	@var  	format
 				Specifies the time's format and units.
-	@field	reserved
+	@var  	reserved
 				Must be 0.
-	@field	time
+	@var  	time
 				The time value. Use the member of the union appropriate to the format (see the
 				description of CAClockTimeFormat).
 */
@@ -322,9 +322,9 @@ typedef struct CAClockTime CAClockTime;
 	@struct 	CATempoMapEntry
 	@abstract	A tempo change event.
 	
-	@field	beats
+	@var  	beats
 				The beat time at which the tempo changes.
-	@field	tempoBPM
+	@var  	tempoBPM
 				The new tempo as of that time.
 	
 	@discussion
@@ -341,11 +341,11 @@ typedef struct CATempoMapEntry CATempoMapEntry;
 	@struct		CAMeterTrackEntry
 	@abstract	A time signature change event.
 	
-	@field	beats
+	@var  	beats
 				The beat time at which the time signature (meter) changes.
-	@field	meterNumer
+	@var  	meterNumer
 				The numerator of the new time signature.
-	@field	meterDenom
+	@var  	meterDenom
 				The denominator of the new time signature (1, 2, 4, 8, etc.).
 
 	@discussion
@@ -370,8 +370,6 @@ extern "C" {
 	@function		CAClockNew
 	
 	@abstract		Create a new clock object.
-
-	@discussion		
 	
 	@param			inReservedFlags
 						Must be 0.
@@ -390,9 +388,7 @@ CAClockNew(	UInt32					 				inReservedFlags,
 	@function		CAClockDispose
 	
 	@abstract		Dispose a clock object.
-
-	@discussion		
-	
+		
 	@param			inCAClock
 						The clock object to be disposed.
 	
@@ -406,9 +402,7 @@ CAClockDispose(				CAClockRef 			inCAClock)					API_AVAILABLE(macos(10.4)) API_U
 	@function		CAClockGetPropertyInfo
 	
 	@abstract		Gets information about a clock's property.
-
-	@discussion		
-	
+		
 	@param			inCAClock
 						The clock object.
 	
@@ -436,8 +430,6 @@ CAClockGetPropertyInfo(		CAClockRef				inCAClock,
 	@function		CAClockGetProperty
 	
 	@abstract		Gets the current value of a clock's property.
-
-	@discussion		
 	
 	@param			inCAClock
 						The clock object.
@@ -468,8 +460,6 @@ CAClockGetProperty(			CAClockRef			inCAClock,
 	@function		CAClockSetProperty
 	
 	@abstract		Changes the value of a clock's property.
-
-	@discussion		
 	
 	@param			inCAClock
 						The clock object.
@@ -498,7 +488,6 @@ CAClockSetProperty(			CAClockRef			inCAClock,
 	@abstract		Adds a callback function to receive notifications of changes to the clock's
 					state.
 
-	@discussion		
 					Note: The CAClockListenerProc may be called on a realtime thread internal to
 					the clock object.
 						
@@ -524,8 +513,6 @@ CAClockAddListener(			CAClockRef			inCAClock,
 	@function		CAClockRemoveListener
 	
 	@abstract		Removes a listener callback function.
-
-	@discussion		
 	
 	@param			inCAClock
 						The clock object.
@@ -574,8 +561,6 @@ CAClockSetCurrentTime(		CAClockRef			inCAClock,
 	@function		CAClockGetCurrentTime
 
 	@abstract		Obtain the clock's current position on the media timeline.
-
-	@discussion		
 	
 	@param			inCAClock
 						The clock object.
@@ -599,8 +584,6 @@ CAClockGetCurrentTime(		CAClockRef			inCAClock,
 	
 	@abstract		Obtain the position on the media timeline where playback will start,
 					or has already started.
-
-	@discussion		
 	
 	@param			inCAClock
 						The clock object.
@@ -623,8 +606,6 @@ CAClockGetStartTime(		CAClockRef			inCAClock,
 	@function		CAClockTranslateTime
 	
 	@abstract		Convert between time units.
-
-	@discussion		
 	
 	@param			inCAClock
 						The clock object.
@@ -652,8 +633,6 @@ CAClockTranslateTime(		CAClockRef			inCAClock,
 	@function		CAClockStart
 	
 	@abstract		Begin advancing the clock on its media timeline.
-
-	@discussion		
 	
 	@param			inCAClock
 						The clock object.
@@ -668,8 +647,6 @@ CAClockStart(				CAClockRef			inCAClock)					API_AVAILABLE(macos(10.4)) API_UNAV
 	@function		CAClockStop
 	
 	@abstract		Stop advancing the clock on its media timeline.
-
-	@discussion		
 	
 	@param			inCAClock
 						The clock object.
@@ -706,8 +683,6 @@ CAClockArm(					CAClockRef			inCAClock)					API_AVAILABLE(macos(10.4)) API_UNAVA
 	@function		CAClockDisarm
 	
 	@abstract		Disallow received sync messages from starting the clock.
-
-	@discussion		
 	
 	@param			inCAClock
 						The clock object.

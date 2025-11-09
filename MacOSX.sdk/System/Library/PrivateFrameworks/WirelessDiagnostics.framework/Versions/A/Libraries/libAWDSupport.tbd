@@ -1,9 +1,8 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 3673A2F4-7A31-3B86-9220-42974CEE989B' ]
-platform:        macosx
-install-name:    /System/Library/PrivateFrameworks/WirelessDiagnostics.framework/Versions/A/Libraries/libAWDSupport.dylib
-objc-constraint: none
+uuids:           [ 'x86_64: 2DF5C5D9-155A-3938-A644-BC578691948B', 'x86_64: 2DF5C5D9-155A-3938-A644-BC578691948B' ]
+platform:        zippered
+install-name:    '/System/Library/PrivateFrameworks/WirelessDiagnostics.framework/Versions/A/Libraries/libAWDSupport.dylib'
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ __Z14sDumpMetricLogNSt3__110shared_ptrI17AwdMetadataLoaderEEPKvm10DumpFormat, 
@@ -15,12 +14,15 @@ exports:
                        __Z21sConvertTriggerToJsonRKNSt3__110shared_ptrI17AwdMetadataLoaderEEPKhm, 
                        __Z24sDumpDeviceConfigurationNSt3__110shared_ptrI17AwdMetadataLoaderEEPKvm10DumpFormat, 
                        __Z39sCreateBestChoiceMetadataLoaderDelegatev, __Z40sCreateAwdMetadataLoaderForXpcConversionv, 
-                       __Z41sCreateAwdMetadataLoaderForJsonConversionv, __ZN14MetadataHelperC1ERKNSt3__110shared_ptrI17AwdMetadataLoaderEE, 
+                       __Z41sCreateAwdMetadataLoaderForJsonConversionv, __Z44sCreateLazyAwdMetadataLoaderForXpcConversionv, 
+                       __ZN14MetadataHelperC1ERKNSt3__110shared_ptrI17AwdMetadataLoaderEE, 
                        __ZN14MetadataHelperC2ERKNSt3__110shared_ptrI17AwdMetadataLoaderEE, 
                        __ZN17AwdMetadataLoader21loadComponentMetadataEj, __ZN17AwdMetadataLoader22loadMetricFileMetadataEv, 
                        __ZN17AwdMetadataLoader24loadDeviceConfigMetadataEv, __ZN17AwdMetadataLoaderC1E21ComponentMetadataKindNSt3__110unique_ptrI25AwdMetadataLoaderDelegateNS1_14default_deleteIS3_EEEE, 
                        __ZN17AwdMetadataLoaderC2E21ComponentMetadataKindNSt3__110unique_ptrI25AwdMetadataLoaderDelegateNS1_14default_deleteIS3_EEEE, 
-                       __ZN24MetricFileMetadataHelper23setupMetricFileSentinelEv, 
+                       __ZN18LazyMetadataLoader15setBaseMetadataEPv, __ZN18LazyMetadataLoader19baseMetadataIsValidEv, 
+                       __ZN18LazyMetadataLoader21shouldRequestMetadataEy, __ZN18LazyMetadataLoader23hasMetadataForComponentEj, 
+                       __ZN18LazyMetadataLoader23setMetadataForComponentEPvj, __ZN24MetricFileMetadataHelper23setupMetricFileSentinelEv, 
                        __ZN24MetricFileMetadataHelperC1E16MetricScopeTag_tRKNSt3__110shared_ptrI17AwdMetadataLoaderEEj, 
                        __ZN24MetricFileMetadataHelperC1E19MetricLogScopeTag_tRKNSt3__110shared_ptrI17AwdMetadataLoaderEE, 
                        __ZN24MetricFileMetadataHelperC1E20MetricFileScopeTag_tRKNSt3__110shared_ptrI17AwdMetadataLoaderEE, 
@@ -48,9 +50,9 @@ exports:
                        __ZN3awd15getAWDTimestampEv, __ZN3awd15serializeMetricERKN20wireless_diagnostics6google8protobuf11MessageLiteEj, 
                        __ZN3awd15serializeMetricERKN2PB4BaseEj, __ZN3awd18timevalToTimestampER7timeval, 
                        __ZN3awd20createTagForProtobufEjm, __ZN3awd21tagSerializedProtobufEjRNSt3__16vectorIhNS0_9allocatorIhEEEE, 
-                       __ZN3awd23getComponentForMetricIdEj, __ZN3awd27AwddStartedNotificationNameE, 
-                       __ZN3awd29AwddStartedNotificationObjectE, __ZN3awd7reflect13getPackedTypeENS0_4TypeE, 
-                       __ZN3awd7reflect15getDecodingTypeENS0_4TypeENS0_8WireTypeE, 
+                       __ZN3awd23getComponentForMetricIdEj, __ZN3awd25getCoreAnalyticsEventNameEj, 
+                       __ZN3awd27AwddStartedNotificationNameE, __ZN3awd29AwddStartedNotificationObjectE, 
+                       __ZN3awd7reflect13getPackedTypeENS0_4TypeE, __ZN3awd7reflect15getDecodingTypeENS0_4TypeENS0_8WireTypeE, 
                        __ZN3awd7reflect15getUnpackedTypeENS0_4TypeE, __ZN3awd7reflect18getWireTypeForTypeENS0_4TypeE, 
                        __ZN3awd7reflect9decodeTagEj, __ZN3awd7reflect9encodeTagENS0_8WireTypeEj, 
                        __ZN3awd8asStringENS_15DiagnosticsModeE, __ZN3awd8asStringERKNS_7TriggerE, 
@@ -80,8 +82,12 @@ exports:
                        __ZTS25AwdMetadataLoaderDelegate, __ZTS32BestChoiceMetadataLoaderDelegate, 
                        __ZTV25AwdMetadataLoaderDelegate, __ZTV32BestChoiceMetadataLoaderDelegate, 
                        _createDescriptionForMetriclogFile, _setupAWDConnection, _teardownAWDConnection ]
-    weak-def-symbols: [ __ZTINSt3__115basic_stringbufIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
+    weak-def-symbols: [ __ZTI17AwdMetadataLoader, __ZTIN5boost6system14error_category12std_categoryE, 
+                        __ZTINSt3__115basic_stringbufIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
                         __ZTINSt3__118basic_stringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
+                        __ZTINSt3__119basic_ostringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
+                        __ZTS17AwdMetadataLoader, __ZTSN5boost6system14error_category12std_categoryE, 
                         __ZTSNSt3__115basic_stringbufIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                        __ZTSNSt3__118basic_stringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE ]
+                        __ZTSNSt3__118basic_stringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
+                        __ZTSNSt3__119basic_ostringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE ]
 ...

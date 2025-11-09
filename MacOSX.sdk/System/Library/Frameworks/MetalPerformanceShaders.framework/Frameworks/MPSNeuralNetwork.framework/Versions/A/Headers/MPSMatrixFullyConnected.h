@@ -37,7 +37,7 @@ extern "C" {
  *              neuron() is a pointwise function applied to the intermediate result.
  *
  */
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0))
 @interface MPSMatrixFullyConnected : MPSMatrixBinaryKernel
 /*! @property   sourceNumberOfFeatureVectors
  *
@@ -208,7 +208,7 @@ MPS_SWIFT_NAME(encode(commandBuffer:inputMatrix:weightMatrix:biasVector:resultMa
  *              and MPSMatrixNeuron if a gradient is to be computed.
  *
  */
-MPS_CLASS_AVAILABLE_STARTING( macos(10.14), ios(12.0), tvos(12.0))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.14), ios(12.0), macCatalyst(13.0), tvos(12.0))
 @interface MPSMatrixFullyConnectedGradient : MPSMatrixBinaryKernel
 /*! @property   sourceNumberOfFeatureVectors
  *

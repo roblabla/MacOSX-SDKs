@@ -5,7 +5,7 @@
  
      Version:    Quickdraw-291~1
  
-     Copyright:  © 2003-2008 by Apple Inc. all rights reserved.
+     Copyright:  ï¿½ 2003-2019 by Apple Inc. all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -14,11 +14,8 @@
  
 */
 #ifndef __ATSUNICODEDRAWING__
-#define __ATSUNICODEDRAWING__
 
-#ifndef __ATSUNICODETYPES__
-#include <QD/ATSUnicodeTypes.h>
-#endif
+#include <ATSUI/ATSUnicodeDrawing.h>
 
 #endif /* __ATSUNICODEDRAWING__ */
 

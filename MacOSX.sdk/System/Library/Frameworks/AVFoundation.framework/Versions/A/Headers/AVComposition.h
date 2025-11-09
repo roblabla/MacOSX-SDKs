@@ -55,7 +55,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class AVCompositionInternal;
 
-NS_CLASS_AVAILABLE(10_7, 4_0)
+API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0))
 @interface AVComposition : AVAsset <NSMutableCopying>
 {
 @private
@@ -81,7 +81,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
       AVCompositions create AVURLAssets internally for URLs specified by AVCompositionTrackSegments of AVCompositionTracks, as needed, whenever AVCompositionTrackSegments were originally added to a track via -[AVMutableCompositionTrack setSegments:] rather than by inserting timeranges of already existing AVAssets or AVAssetTracks.
       The value of URLAssetInitializationOptions can be specified at the time an AVMutableComposition is created via +compositionWithURLAssetInitializationOptions:.
  */
-@property (nonatomic, readonly, copy) NSDictionary<NSString *, id> *URLAssetInitializationOptions NS_AVAILABLE(10_11, 9_0);
+@property (nonatomic, readonly, copy) NSDictionary<NSString *, id> *URLAssetInitializationOptions API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(2.0));
 
 @end
 
@@ -125,7 +125,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 
 @class AVMutableCompositionInternal;
 
-NS_CLASS_AVAILABLE(10_7, 4_0)
+API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0))
 @interface AVMutableComposition : AVComposition
 {
 @private
@@ -160,7 +160,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
     @discussion
       AVMutableCompositions create AVURLAssets internally for URLs specified by AVCompositionTrackSegments of AVMutableCompositionTracks, as needed, whenever AVCompositionTrackSegments are added to tracks via -[AVMutableCompositionTrack setSegments:] rather than by inserting timeranges of already existing AVAssets or AVAssetTracks.
  */
-+ (instancetype)compositionWithURLAssetInitializationOptions:(nullable NSDictionary<NSString *, id> *)URLAssetInitializationOptions NS_AVAILABLE(10_11, 9_0);
++ (instancetype)compositionWithURLAssetInitializationOptions:(nullable NSDictionary<NSString *, id> *)URLAssetInitializationOptions API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(2.0));
 
 @end
 

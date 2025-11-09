@@ -1,7 +1,7 @@
 /*
         NSTreeNode.h
 	AppKit
-	Copyright (c) 2007-2018, Apple Inc.
+	Copyright (c) 2007-2019, Apple Inc.
 	All rights reserved.
  */
 
@@ -10,22 +10,12 @@
 #import <AppKit/AppKitDefines.h>
 
 NS_ASSUME_NONNULL_BEGIN
+API_UNAVAILABLE_BEGIN(ios)
 
 @class NSIndexPath, NSSortDescriptor, NSTreeController;
 
-NS_CLASS_AVAILABLE(10_5, NA)
-@interface NSTreeNode : NSObject {
-    id _childNodesProxy APPKIT_IVAR;
-    id _representedObject APPKIT_IVAR;
-    void *_observationInfo APPKIT_IVAR;
-    id _reserved2 APPKIT_IVAR;
-    NSMutableArray *_childNodes APPKIT_IVAR;
-    __weak NSTreeNode *_parentNode APPKIT_IVAR;
-    struct __NSTreeNodeFlags {
-	unsigned int ignoreObserving:1;
-	unsigned int reserved:31;
-    } _NSTreeNodeFlags APPKIT_IVAR;
-}
+API_AVAILABLE(macos(10.5))
+@interface NSTreeNode : NSObject
 
 + (instancetype)treeNodeWithRepresentedObject:(nullable id)modelObject;
 - (instancetype)initWithRepresentedObject:(nullable id)modelObject;
@@ -46,5 +36,6 @@ NS_CLASS_AVAILABLE(10_5, NA)
 
 @end
 
+API_UNAVAILABLE_END
 NS_ASSUME_NONNULL_END
 

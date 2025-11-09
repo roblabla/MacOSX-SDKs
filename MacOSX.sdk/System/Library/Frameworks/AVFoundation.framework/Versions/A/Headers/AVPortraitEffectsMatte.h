@@ -70,7 +70,7 @@ AV_INIT_UNAVAILABLE
     Returns an AVPortraitEffectsMatte instance wrapping the replacement pixel buffer.
  
  @param pixelBuffer
-    A pixel buffer containing a portrait effects matting image, represented as kCVPixelFormatType_OneComponent8 with kCVImageBufferColorPrimaries_ITU_R_709_2 color primaries and a kCVImageBufferTransferFunction_Linear transfer function.
+    A pixel buffer containing a portrait effects matting image, represented as kCVPixelFormatType_OneComponent8 with a kCVImageBufferTransferFunction_Linear transfer function.
  @param outError
     On return, if the AVPortraitEffectsMatte cannot be created, points to an NSError describing the problem.
  @result

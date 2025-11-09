@@ -24,10 +24,6 @@
 #include <CoreGraphics/CoreGraphics.h>
 #endif
 
-#ifndef __MIXEDMODE__
-#include <CarbonCore/MixedMode.h>
-#endif
-
 
 
 #include <AvailabilityMacros.h>

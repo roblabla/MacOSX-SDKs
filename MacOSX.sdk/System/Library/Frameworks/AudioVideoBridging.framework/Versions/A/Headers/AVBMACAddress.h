@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 	@class		AVBMACAddress
 	@abstract	AVBMACAddress is a class for holding and representing an Ethernet MAC Address.
  */
-NS_CLASS_AVAILABLE(10_8, NA)
+API_AVAILABLE(macos(10.8))
 @interface AVBMACAddress : NSObject <NSCopying>
 {
 	@private

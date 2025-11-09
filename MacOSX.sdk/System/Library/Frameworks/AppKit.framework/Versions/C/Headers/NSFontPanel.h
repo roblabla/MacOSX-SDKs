@@ -1,13 +1,14 @@
 /*
 	NSFontPanel.h
 	Application Kit
-	Copyright (c) 1994-2018, Apple Inc.
+	Copyright (c) 1994-2019, Apple Inc.
 	All rights reserved.
 */
 
 #import <AppKit/NSPanel.h>
 
 NS_ASSUME_NONNULL_BEGIN
+API_UNAVAILABLE_BEGIN(ios)
 
 @class NSFontPanel, NSMutableDictionary, NSFontManager, NSMutableArray, NSTableView, NSFontDescriptor, NSFont;
 
@@ -37,91 +38,11 @@ typedef NS_OPTIONS(NSUInteger, NSFontPanelModeMask) {
 
 #if __swift__ < 40200
 @interface NSObject (NSFontPanelValidationAdditions)
-- (NSFontPanelModeMask)validModesForFontPanel:(NSFontPanel *)fontPanel NS_DEPRECATED_MAC(10_0, API_TO_BE_DEPRECATED, "This is now an optional method of the NSFontChanging protocol.");
+- (NSFontPanelModeMask)validModesForFontPanel:(NSFontPanel *)fontPanel API_DEPRECATED("This is now an optional method of the NSFontChanging protocol.", macos(10.0,API_TO_BE_DEPRECATED));
 @end
 #endif
 
-
-NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE
-@interface NSFontPanel : NSPanel {
-    /*All instance variables are private*/
-    NSFontManager *_manager APPKIT_IVAR;
-    NSArray *_collectionNames APPKIT_IVAR;
-    id _selection APPKIT_IVAR;
-    void *_carbonNotification APPKIT_IVAR;
-    id _targetObject APPKIT_IVAR;
-
-    id			_familyList APPKIT_IVAR;
-    id                  _faceList APPKIT_IVAR;
-    id                  _sizeList APPKIT_IVAR;
-    id                  _mainCollectionList APPKIT_IVAR;
-    id			_sizeField APPKIT_IVAR;
-    id                  _sizeSlider APPKIT_IVAR;
-    id                  _sizeSliderBox APPKIT_IVAR;
-    id			_preview APPKIT_IVAR;
-    id			_previewContainer APPKIT_IVAR;
-    id                  _mainSplitView APPKIT_IVAR;
-    id			_mmCollectionList APPKIT_IVAR;
-    id			_mmFamilyList APPKIT_IVAR;
-    id                  _mmFaceList APPKIT_IVAR;
-    id                  _mmSizeList APPKIT_IVAR;
-    id			_fullSizeHeightConstraint APPKIT_IVAR;
-    id                  _searchField APPKIT_IVAR;
-    id			_fixedListButton APPKIT_IVAR;
-    id		        _sliderButton APPKIT_IVAR;
-    id		        _accessoryView APPKIT_IVAR;
-    struct __fpFlags {
-	unsigned int	    setFontChange:1;
-	unsigned int	    setFontAttributeChange:1;
-	unsigned int	    _delRespFamily:1;
-	unsigned int	    _delRespFace:1;
-	unsigned int	    _delRespSize:1;
-	unsigned int	    _delRespColl:1;
-	unsigned int	    _collectionDisabled:1; // used by validate font panel modes. 
-	unsigned int	    _sizeDisabled:1; // used by validate font panel modes. 
-	unsigned int	    _faceDisabled:1; // used by validate font panel modes. 
-        unsigned int        showEffects:1;
-        unsigned int        _uiMode:8;
-        unsigned int        _miniMode:1;
-        unsigned int _reserved:13;
-    } _fpFlags APPKIT_IVAR;
-
-    id			_regularModeBox APPKIT_IVAR;
-    id			_miniModeBox APPKIT_IVAR;
-    id			_sizeBox APPKIT_IVAR;
-    id			_collectionLabel APPKIT_IVAR;
-    id			_sizeLabel APPKIT_IVAR;
-    id                  _faceDivider APPKIT_IVAR;
-    id                  _familyLabel APPKIT_IVAR;
-    id			_sizeStyleButton APPKIT_IVAR;
-    id			_newSizeField APPKIT_IVAR;
-    id			_editSizeList APPKIT_IVAR;
-    id			_editSizeListBox APPKIT_IVAR;
-    id			_editSizeSliderBox APPKIT_IVAR;
-    id			_editSizeSliderMaxField APPKIT_IVAR;
-    id			_editSizeSliderMinField APPKIT_IVAR;
-    id			_sizeEditWindow APPKIT_IVAR;
-    id			_availableSizes APPKIT_IVAR;
-
-    id _addCollectionButton APPKIT_IVAR;
-    id _removeCollectionButton APPKIT_IVAR;
-
-    CGFloat _fontPanelPreviewHeight APPKIT_IVAR;
-    id _typographyPanel APPKIT_IVAR;
-    id _actionButton APPKIT_IVAR;
-    id _fontEffectsBox APPKIT_IVAR;
-    int _sizeStyle APPKIT_IVAR;
-
-    id _fontPanelToolbar APPKIT_IVAR;
-    id _fontPanelContentView APPKIT_IVAR;
-
-#if !__LP64__
-    id _fpUnused[69] APPKIT_IVAR;
-#endif /* !__LP64__ */
-
-@private
-    id _familyToFaceConstraint APPKIT_IVAR;
-}
+@interface NSFontPanel : NSPanel
 
 @property (class, readonly, strong) NSFontPanel *sharedFontPanel;
 @property (class, readonly) BOOL sharedFontPanelExists;
@@ -165,6 +86,7 @@ enum {
     NSFPSizeField			= 129,
     NSFPSizeTitle			= 133,
     NSFPCurrentField			= 134
-} NS_ENUM_DEPRECATED_MAC(10_0, 10_0);
+} API_DEPRECATED("", macos(10.0,10.0));
 
+API_UNAVAILABLE_END
 NS_ASSUME_NONNULL_END

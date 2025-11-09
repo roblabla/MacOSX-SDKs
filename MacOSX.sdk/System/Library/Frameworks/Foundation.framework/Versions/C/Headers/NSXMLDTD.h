@@ -1,5 +1,5 @@
 /*	NSXMLDTD.h
-	Copyright (c) 2004-2018, Apple Inc. All rights reserved.
+	Copyright (c) 2004-2019, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSXMLNode.h>
@@ -35,7 +35,7 @@ NS_ASSUME_NONNULL_BEGIN
 #endif
 
 - (instancetype)init NS_DESIGNATED_INITIALIZER;
-- (instancetype)initWithKind:(NSXMLNodeKind)kind options:(NSXMLNodeOptions)options NS_UNAVAILABLE;
+- (instancetype)initWithKind:(NSXMLNodeKind)kind options:(NSXMLNodeOptions)options API_UNAVAILABLE(macos, ios, watchos, tvos);
 - (nullable instancetype)initWithContentsOfURL:(NSURL *)url options:(NSXMLNodeOptions)mask error:(NSError **)error;
 - (nullable instancetype)initWithData:(NSData *)data options:(NSXMLNodeOptions)mask error:(NSError **)error NS_DESIGNATED_INITIALIZER; //primitive
 

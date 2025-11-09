@@ -1,8 +1,8 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 8D2D970B-0DFC-3006-B4C0-51A2EAE9ED71' ]
-platform:        macosx
-install-name:    /System/Library/PrivateFrameworks/DifferentialPrivacy.framework/Versions/A/DifferentialPrivacy
+uuids:           [ 'x86_64: FB1B0A1F-2034-348A-B65B-C9E0B445D07F', 'x86_64: FB1B0A1F-2034-348A-B65B-C9E0B445D07F' ]
+platform:        zippered
+install-name:    '/System/Library/PrivateFrameworks/DifferentialPrivacy.framework/Versions/A/DifferentialPrivacy'
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _DifferentialPrivacyVersionNumber, _DifferentialPrivacyVersionString, 
@@ -35,9 +35,9 @@ exports:
                        _DPBitValueRecordMO, _DPBitValueRecorder, _DPBlacklist, _DPBlacklistManager, 
                        _DPCMSRandomizer, _DPCMSRecord, _DPCMSRecordMO, _DPCMSRecordMOConverter, 
                        _DPCMSSample, _DPCMSSequenceMO, _DPCMSSequenceRecord, _DPCMSWordMO, 
-                       _DPCMSWordRecord, _DPCoreDataStorage, _DPDaemonConnection, 
-                       _DPDataProtectionMaster, _DPDataProtectionStateMonitor, _DPDataRecorder, 
-                       _DPDatabaseRecorder, _DPDeviceInfo, _DPDiagnosticDataReporter, 
+                       _DPCMSWordRecord, _DPCoreAnalyticsCollector, _DPCoreDataStorage, 
+                       _DPDaemonConnection, _DPDataProtectionMaster, _DPDataProtectionStateMonitor, 
+                       _DPDataRecorder, _DPDatabaseRecorder, _DPDeviceInfo, _DPDiagnosticDataReporter, 
                        _DPErrorUtilities, _DPHCMSRandomizer, _DPHCMSSample, _DPHCMSSequenceMO, 
                        _DPHCMSSequenceRecord, _DPHCMSWordMO, _DPHCMSWordRecord, _DPInputHelper, 
                        _DPJSONOutputHelper, _DPJSONSegment, _DPKeyNames, _DPKeyProperties, 
@@ -45,13 +45,15 @@ exports:
                        _DPModelInfoRecordMOConverter, _DPNumberRandomizer, _DPNumericDataRecord, 
                        _DPNumericDataRecordMO, _DPNumericDataRecordMOConverter, _DPNumericDataRecorder, 
                        _DPOBHRandomizer, _DPOBHRecord, _DPOBHRecordMO, _DPOBHRecordMOConverter, 
-                       _DPOBHSequenceMO, _DPOBHSequenceRecord, _DPPeriodicTask, _DPPeriodicTaskManager, 
-                       _DPPrivacyBudget, _DPPrivacyBudgetManager, _DPPrivacyBudgetProperties, 
-                       _DPPrivacyBudgetRecord, _DPPrivacyBudgetRecordMO, _DPPrivacyBudgetRecordMOConverter, 
-                       _DPPuzzleBox, _DPRandomBitPositionGenerator, _DPRandomizedBit, 
-                       _DPRecordQueryPredicates, _DPReportFileManager, _DPReportFilesMaintainer, 
-                       _DPReportGenerator, _DPServer, _DPStorage, _DPStringRandomizer, 
-                       _DPStringRecorder, _DPStrings, _DPSubmissionRateLimiter, _DPToolArguments, 
-                       _DPToolCommand, _DPUniformNoiseGenerator, _DPUploadHelper, 
-                       _DPValueRange, _DPWordRecord, _DPWordRecorder, _DPXPCRecorder ]
+                       _DPOBHSequenceMO, _DPOBHSequenceRecord, _DPPCCRecord, _DPPCCRecordMO, 
+                       _DPPCCRecordMOConverter, _DPPCCValueRandomizer, _DPPeriodicTask, 
+                       _DPPeriodicTaskManager, _DPPrivacyBudget, _DPPrivacyBudgetManager, 
+                       _DPPrivacyBudgetProperties, _DPPrivacyBudgetRecord, _DPPrivacyBudgetRecordMO, 
+                       _DPPrivacyBudgetRecordMOConverter, _DPPuzzleBox, _DPRandomBitPositionGenerator, 
+                       _DPRandomizedBit, _DPRecordQueryPredicates, _DPReportFileManager, 
+                       _DPReportFilesMaintainer, _DPReportGenerator, _DPServer, _DPStorage, 
+                       _DPStringRandomizer, _DPStringRecorder, _DPStrings, _DPSubmissionRateLimiter, 
+                       _DPToolArguments, _DPToolCommand, _DPUniformNoiseGenerator, 
+                       _DPUploadHelper, _DPValueRange, _DPWordRecord, _DPWordRecorder, 
+                       _DPXPCRecorder ]
 ...

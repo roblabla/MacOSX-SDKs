@@ -148,7 +148,7 @@ typedef void (^AVAudioPlayerNodeCompletionHandler)(AVAudioPlayerNodeCompletionCa
 		`outputPresentationLatency`) can be used to track how much data the player has rendered and
 		how much more data is left to render.
 */
-OS_EXPORT API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0))
+API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0))
 @interface AVAudioPlayerNode : AVAudioNode <AVAudioMixing>
 
 - (instancetype)init NS_DESIGNATED_INITIALIZER;
@@ -297,7 +297,6 @@ OS_EXPORT API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0))
 	@abstract Prepares previously scheduled file regions or buffers for playback.
 	@param frameCount
 		The number of sample frames of data to be prepared before returning.
-	@discussion
 */		
 - (void)prepareWithFrameCount:(AVAudioFrameCount)frameCount;
 
@@ -316,7 +315,10 @@ OS_EXPORT API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0))
 		This node is initially paused. Requests to play buffers or file segments are enqueued, and
 		any necessary decoding begins immediately. Playback does not begin, however, until the player
 		has started playing, via this method.
- 
+
+ 		Note that providing an AVAudioTime which is past (before lastRenderTime) will cause the
+ 		player to begin playback immediately.
+
 		E.g. To start a player X seconds in future:
 <pre>
 // start engine and player

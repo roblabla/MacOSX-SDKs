@@ -15,26 +15,26 @@ typedef NS_ENUM(NSInteger, CKSubscriptionType) {
     CKSubscriptionTypeQuery                                     = 1,
     CKSubscriptionTypeRecordZone                                = 2,
     CKSubscriptionTypeDatabase API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0), watchos(3.0))   = 3,
-} API_AVAILABLE(macos(10.10), ios(8.0)) __WATCHOS_PROHIBITED;
+} API_AVAILABLE(macos(10.10), ios(8.0), watchos(6.0));
 
 @class CKNotificationInfo, CKRecordZoneID;
 
 typedef NSString *CKSubscriptionID;
 
-API_AVAILABLE(macos(10.10), ios(8.0)) __WATCHOS_PROHIBITED
+API_AVAILABLE(macos(10.10), ios(8.0), watchos(3.0))
 @interface CKSubscription : NSObject <NSSecureCoding, NSCopying>
 
 - (instancetype)init NS_UNAVAILABLE;
 + (instancetype)new NS_UNAVAILABLE;
 
-@property (nonatomic, readonly, copy) CKSubscriptionID subscriptionID;
-@property (nonatomic, readonly, assign) CKSubscriptionType subscriptionType;
+@property (nonatomic, readonly, copy) CKSubscriptionID subscriptionID API_AVAILABLE(watchos(6.0));
+@property (nonatomic, readonly, assign) CKSubscriptionType subscriptionType API_AVAILABLE(watchos(6.0));
 
 /*! @abstract Describes the notification that will be sent when the subscription fires.
  *
  *  @discussion This property must be set to a non-nil value before saving the `CKSubscription`.
  */
-@property (nonatomic, copy, nullable) CKNotificationInfo *notificationInfo;
+@property (nonatomic, copy, nullable) CKNotificationInfo *notificationInfo API_AVAILABLE(watchos(6.0));
 
 @end
 
@@ -44,7 +44,7 @@ typedef NS_OPTIONS(NSUInteger, CKQuerySubscriptionOptions) {
     CKQuerySubscriptionOptionsFiresOnRecordUpdate       = 1 << 1,
     CKQuerySubscriptionOptionsFiresOnRecordDeletion     = 1 << 2,
     CKQuerySubscriptionOptionsFiresOnce                 = 1 << 3,
-} API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0)) __WATCHOS_PROHIBITED;
+} API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0), watchos(6.0));
 
 /*! @class CKQuerySubscription
  *
@@ -52,7 +52,7 @@ typedef NS_OPTIONS(NSUInteger, CKQuerySubscriptionOptions) {
  *
  *  @discussion `CKQuerySubscriptions` are not supported in a `sharedCloudDatabase`
  */
-API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0)) __WATCHOS_PROHIBITED
+API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0), watchos(6.0))
 @interface CKQuerySubscription : CKSubscription <NSSecureCoding, NSCopying>
 
 - (instancetype)initWithRecordType:(CKRecordType)recordType predicate:(NSPredicate *)predicate options:(CKQuerySubscriptionOptions)querySubscriptionOptions;
@@ -86,7 +86,7 @@ API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0)) __WATCHOS_PROHIBITED
  *  @discussion The RecordZone must have the capability `CKRecordZoneCapabilityFetchChanges`
  *  `CKRecordZoneSubscriptions` are not supported in a `sharedCloudDatabase`
  */
-API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0)) __WATCHOS_PROHIBITED
+API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0), watchos(6.0))
 @interface CKRecordZoneSubscription : CKSubscription <NSSecureCoding, NSCopying>
 
 - (instancetype)initWithZoneID:(CKRecordZoneID *)zoneID;
@@ -106,7 +106,7 @@ API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0)) __WATCHOS_PROHIBITED
  *
  *  @discussion `CKDatabaseSubscription` is only supported in the Private and Shared databases.
  */
-API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0)) __WATCHOS_PROHIBITED
+API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0), watchos(6.0))
 @interface CKDatabaseSubscription : CKSubscription <NSSecureCoding, NSCopying>
 
 - (instancetype)init;
@@ -126,7 +126,7 @@ API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0)) __WATCHOS_PROHIBITED
  *  Use `+[CKNotification notificationFromRemoteNotificationDictionary:]` to parse that payload.
  *  On tvOS, alerts, badges, sounds, and categories are not handled in push notifications. However, CKSubscriptions remain available to help you avoid polling the server.
  */
-API_AVAILABLE(macos(10.10), ios(8.0)) __WATCHOS_PROHIBITED
+API_AVAILABLE(macos(10.10), ios(8.0), watchos(6.0))
 @interface CKNotificationInfo : NSObject <NSSecureCoding, NSCopying>
 
 /*! Optional alert string to display in a push notification. */
@@ -220,21 +220,21 @@ typedef NS_OPTIONS(NSUInteger, CKSubscriptionOptions) {
 
 @interface CKSubscription (CKSubscriptionDeprecated)
 
-- (instancetype)initWithCoder:(NSCoder *)aDecoder API_DEPRECATED("Init the appropriate CKSubscription subclass", macos(10.10, 10.12), ios(8.0, 10.0), tvos(9.0, 10.0), watchos(3.0, 3.0));
+- (instancetype)initWithCoder:(NSCoder *)aDecoder API_DEPRECATED("Init the appropriate CKSubscription subclass", macos(10.10, 10.12), ios(8.0, 10.0), tvos(9.0, 10.0)) __WATCHOS_PROHIBITED;
 
 /*! Replaced with CKQuerySubscription */
-- (instancetype)initWithRecordType:(CKRecordType)recordType predicate:(NSPredicate *)predicate options:(CKSubscriptionOptions)subscriptionOptions API_DEPRECATED("Use CKQuerySubscription instead", macos(10.10, 10.12), ios(8.0, 10.0), tvos(9.0, 10.0), watchos(3.0, 3.0));
-- (instancetype)initWithRecordType:(CKRecordType)recordType predicate:(NSPredicate *)predicate subscriptionID:(CKSubscriptionID)subscriptionID options:(CKSubscriptionOptions)subscriptionOptions API_DEPRECATED("Use CKQuerySubscription instead", macos(10.10, 10.12), ios(8.0, 10.0), tvos(9.0, 10.0), watchos(3.0, 3.0));
-@property (nonatomic, readonly, copy, nullable) CKRecordType recordType API_DEPRECATED("Use CKQuerySubscription instead", macos(10.10, 10.12), ios(8.0, 10.0), tvos(9.0, 10.0), watchos(3.0, 3.0));
-@property (nonatomic, readonly, copy, nullable) NSPredicate *predicate API_DEPRECATED("Use CKQuerySubscription instead", macos(10.10, 10.12), ios(8.0, 10.0), tvos(9.0, 10.0), watchos(3.0, 3.0));
+- (instancetype)initWithRecordType:(CKRecordType)recordType predicate:(NSPredicate *)predicate options:(CKSubscriptionOptions)subscriptionOptions API_DEPRECATED("Use CKQuerySubscription instead", macos(10.10, 10.12), ios(8.0, 10.0), tvos(9.0, 10.0)) __WATCHOS_PROHIBITED;
+- (instancetype)initWithRecordType:(CKRecordType)recordType predicate:(NSPredicate *)predicate subscriptionID:(CKSubscriptionID)subscriptionID options:(CKSubscriptionOptions)subscriptionOptions API_DEPRECATED("Use CKQuerySubscription instead", macos(10.10, 10.12), ios(8.0, 10.0), tvos(9.0, 10.0)) __WATCHOS_PROHIBITED;
+@property (nonatomic, readonly, copy, nullable) CKRecordType recordType API_DEPRECATED("Use CKQuerySubscription instead", macos(10.10, 10.12), ios(8.0, 10.0), tvos(9.0, 10.0), watchos(6.0, 6.0));
+@property (nonatomic, readonly, copy, nullable) NSPredicate *predicate API_DEPRECATED("Use CKQuerySubscription instead", macos(10.10, 10.12), ios(8.0, 10.0), tvos(9.0, 10.0)) __WATCHOS_PROHIBITED;
 
 /*! Replaced with CKQuerySubscriptionOptions */
-@property (nonatomic, readonly, assign) CKSubscriptionOptions subscriptionOptions API_DEPRECATED("Use CKQuerySubscriptionOptions instead", macos(10.10, 10.12), ios(8.0, 10.0), tvos(9.0, 10.0), watchos(3.0, 3.0));
+@property (nonatomic, readonly, assign) CKSubscriptionOptions subscriptionOptions API_DEPRECATED("Use CKQuerySubscriptionOptions instead", macos(10.10, 10.12), ios(8.0, 10.0), tvos(9.0, 10.0)) __WATCHOS_PROHIBITED;
 
 /*! Replaced with CKRecordZoneSubscription */
-- (instancetype)initWithZoneID:(CKRecordZoneID *)zoneID options:(CKSubscriptionOptions)subscriptionOptions API_DEPRECATED("Use CKRecordZoneSubscription instead", macos(10.10, 10.12), ios(8.0, 10.0), tvos(9.0, 10.0), watchos(3.0, 3.0));
-- (instancetype)initWithZoneID:(CKRecordZoneID *)zoneID subscriptionID:(CKSubscriptionID)subscriptionID options:(CKSubscriptionOptions)subscriptionOptions API_DEPRECATED("Use CKRecordZoneSubscription instead", macos(10.10, 10.12), ios(8.0, 10.0), tvos(9.0, 10.0), watchos(3.0, 3.0));
-@property (nonatomic, copy, nullable) CKRecordZoneID *zoneID API_DEPRECATED("Use CKRecordZoneSubscription instead", macos(10.10, 10.12), ios(8.0, 10.0), tvos(9.0, 10.0), watchos(3.0, 3.0));
+- (instancetype)initWithZoneID:(CKRecordZoneID *)zoneID options:(CKSubscriptionOptions)subscriptionOptions API_DEPRECATED("Use CKRecordZoneSubscription instead", macos(10.10, 10.12), ios(8.0, 10.0), tvos(9.0, 10.0)) __WATCHOS_PROHIBITED;
+- (instancetype)initWithZoneID:(CKRecordZoneID *)zoneID subscriptionID:(CKSubscriptionID)subscriptionID options:(CKSubscriptionOptions)subscriptionOptions API_DEPRECATED("Use CKRecordZoneSubscription instead", macos(10.10, 10.12), ios(8.0, 10.0), tvos(9.0, 10.0)) __WATCHOS_PROHIBITED;
+@property (nonatomic, copy, nullable) CKRecordZoneID *zoneID API_DEPRECATED("Use CKRecordZoneSubscription instead", macos(10.10, 10.12), ios(8.0, 10.0), tvos(9.0, 10.0)) __WATCHOS_PROHIBITED;
 
 @end
 

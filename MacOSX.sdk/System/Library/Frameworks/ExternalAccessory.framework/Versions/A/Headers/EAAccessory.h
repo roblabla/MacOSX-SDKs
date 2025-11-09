@@ -37,7 +37,7 @@ __OSX_AVAILABLE_STARTING(__MAC_10_13,__IPHONE_3_0) @interface EAAccessory : NSOb
 @property(nonatomic, readonly) NSString *serialNumber __OSX_AVAILABLE_STARTING(__MAC_10_13,__IPHONE_3_0) __TVOS_AVAILABLE(10.0);
 @property(nonatomic, readonly) NSString *firmwareRevision __OSX_AVAILABLE_STARTING(__MAC_10_13,__IPHONE_3_0) __TVOS_AVAILABLE(10.0);
 @property(nonatomic, readonly) NSString *hardwareRevision __OSX_AVAILABLE_STARTING(__MAC_10_13,__IPHONE_3_0) __TVOS_AVAILABLE(10.0);
-@property(nonatomic, readonly) NSString *dockType __OSX_AVAILABLE_STARTING(__MAC_10_13,__IPHONE_9_0);
+@property(nonatomic, readonly) NSString *dockType API_DEPRECATED("Not supported", ios(9.3, 13.0), tvos(9.2, 13.0), macos(10.13, 10.14));
 
 // array of strings representing the protocols supported by the accessory
 @property(nonatomic, readonly) NSArray<NSString *> *protocolStrings __OSX_AVAILABLE_STARTING(__MAC_10_13,__IPHONE_3_0) __TVOS_AVAILABLE(10.0);

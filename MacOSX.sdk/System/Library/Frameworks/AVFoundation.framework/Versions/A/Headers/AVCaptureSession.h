@@ -3,7 +3,7 @@
  
     Framework:  AVFoundation
  
-    Copyright 2010-2017 Apple Inc. All rights reserved.
+    Copyright 2010-2019 Apple Inc. All rights reserved.
 */
 
 #import <AVFoundation/AVBase.h>
@@ -322,6 +322,16 @@ API_AVAILABLE(macos(10.7), ios(4.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED
 - (void)addOutputWithNoConnections:(AVCaptureOutput *)output API_AVAILABLE(ios(8.0));
 
 /*!
+ @property connections
+ @abstract
+    An NSArray of AVCaptureConnections currently added to the receiver.
+ 
+ @discussion
+    The value of this property is an NSArray of AVCaptureConnections currently added to the receiver. Connections are formed implicitly by the receiver when a client calls -addInput: or -addOutput:. Connections are formed explicitly when a client calls -addConnection:.
+ */
+@property(nonatomic, readonly) NSArray<AVCaptureConnection *> *connections API_AVAILABLE(macos(10.15), ios(13.0)) API_UNAVAILABLE(tvos, watchos);
+
+/*!
  @method canAddConnection:
  @abstract
     Returns whether the proposed connection can be added to the receiver.
@@ -472,6 +482,61 @@ API_AVAILABLE(macos(10.7), ios(4.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED
 @end
 
 
+#pragma mark - AVCaptureMultiCamSession
+
+
+/*!
+ @class AVCaptureMultiCamSession
+ @abstract
+    A subclass of AVCaptureSession which supports simultaneous capture from multiple inputs of the same media type.
+ 
+ @discussion
+    AVCaptureMultiCamSession's sessionPreset is always AVCaptureSessionPresetInputPriority and may not be set to any other value. Each input's device.activeFormat must be set manually to achieve the desired quality of service.
+ 
+    AVCaptureMultiCamSession supports dynamic enabling and disabling of individual camera inputs without interrupting preview. In order to stop an individual camera input, set the enabled property on all of its connections or connected ports to NO. When the last active connection or port is disabled, the source camera stops streaming to save power and bandwidth. Other inputs streaming data through the session are unaffected.
+ */
+API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(tvos, watchos)
+@interface AVCaptureMultiCamSession : AVCaptureSession
+
+/*!
+ @property multiCamSupported
+    Indicates whether multicam session is supported on this platform.
+ 
+ @discussion
+    AVCaptureMultiCamSession is intended to be used with multiple cameras and is only supported on platforms with sufficient hardware bandwidth, system memory, and thermal performance. For single-camera use cases, AVCaptureSession should be used instead.
+ */
+@property(class, nonatomic, readonly, getter=isMultiCamSupported) BOOL multiCamSupported;
+
+/*!
+ @property hardwareCost
+ @abstract
+    Indicates the percentage of the session's available hardware budget currently in use.
+ 
+ @discussion
+    The value of this property is a float from 0.0 => 1.0 indicating how much of the session's available hardware is in use as a percentage, given the currently connected inputs and outputs and the features for which you've opted in. When your hardwareCost is greater than 1.0, the capture session cannot run your desired configuration due to hardware constraints, so you receive an AVCaptureSessionRuntimeErrorNotification when attempting to start it running. Default value is 0.
+ 
+    Contributors to hardwareCost include:
+        - Whether the source devices' active formats use the full sensor (4:3) or a crop (16:9). Cropped formats require lower hardware bandwidth, and therefore lower the cost.
+        - The max frame rate supported by the source devices' active formats. The higher the max frame rate, the higher the cost.
+        - Whether the source devices' active formats are binned or not. Binned formats require substantially less hardware bandwidth, and therefore result in a lower cost.
+        - The number of sources configured to deliver streaming disparity / depth via AVCaptureDepthDataOutput. The higher the number of cameras configured to produce depth, the higher the cost.
+    In order to reduce hardwareCost, consider picking a sensor-cropped activeFormat, or a binned format. You may also use AVCaptureDeviceInput's videoMinFrameDurationOverride property to artificially limit the max frame rate (which is the reciprocal of the min frame duration) of a source device to a lower value. By doing so, you only pay the hardware cost for the max frame rate you intend to use.
+ */
+@property(nonatomic, readonly) float hardwareCost;
+
+/*!
+ @property systemPressureCost
+ @abstract
+    Indicates the system pressure cost of your current configuration.
+ 
+ @discussion
+    The value of this property is a float whose nominal range is 0.0 => 1.0 indicating the system pressure cost of your current configuration. When your systemPressureCost is greater than 1.0, the capture session cannot run sustainably. It may be able to run for a brief period before needing to stop due to high system pressure. While running in an unsustainable configuration, you may monitor the session's systemPressureState and reduce pressure by reducing the frame rate, throttling your use of the GPU, etc. When the session reaches critical system pressure state, it must temporarily shut down, and you receive an AVCaptureSessionWasInterruptedNotification indicating the reason your session needed to stop. When system pressure alleviates, the session interruption ends.
+ */
+@property(nonatomic, readonly) float systemPressureCost;
+
+@end
+
+
 /*!
  @enum AVVideoFieldMode
  @abstract
@@ -519,6 +584,8 @@ API_AVAILABLE(macos(10.7), ios(4.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED
 @private
     AVCaptureConnectionInternal *_internal;
 }
+
+AV_INIT_UNAVAILABLE
 
 /*!
  @method connectionWithInputPorts:output:
@@ -607,7 +674,7 @@ API_AVAILABLE(macos(10.7), ios(4.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED
  @discussion
     An AVCaptureConnection may involve one or more AVCaptureInputPorts producing data to the connection's AVCaptureOutput. This property is read-only. An AVCaptureConnection's output remains static for the life of the object. Note that a connection can either be to an output or a video preview layer, but never to both.
  */
-@property(nonatomic, readonly) AVCaptureOutput *output;
+@property(nonatomic, readonly, nullable) AVCaptureOutput *output;
 
 /*!
  @property videoPreviewLayer
@@ -617,7 +684,7 @@ API_AVAILABLE(macos(10.7), ios(4.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED
  @discussion
     An AVCaptureConnection may involve one AVCaptureInputPort producing data to an AVCaptureVideoPreviewLayer object. This property is read-only. An AVCaptureConnection's videoPreviewLayer remains static for the life of the object. Note that a connection can either be to an output or a video preview layer, but never to both.
  */
-@property(nonatomic, readonly) AVCaptureVideoPreviewLayer *videoPreviewLayer API_AVAILABLE(ios(6.0));
+@property(nonatomic, readonly, nullable) AVCaptureVideoPreviewLayer *videoPreviewLayer API_AVAILABLE(ios(6.0));
 
 /*!
  @property enabled
@@ -830,7 +897,7 @@ API_AVAILABLE(macos(10.7), ios(4.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED
  @discussion
     This property is only applicable to AVCaptureConnection instances involving video. On devices where the video stabilization feature is supported, only a subset of available source formats and resolutions may be available for stabilization. The videoStabilizationEnabled property returns YES if video stabilization is currently in use. This property is key-value observable. This property is deprecated. Use activeVideoStabilizationMode instead.
  */
-@property(nonatomic, readonly, getter=isVideoStabilizationEnabled) BOOL videoStabilizationEnabled API_DEPRECATED("Use activeVideoStabilizationMode instead.", ios(6.0, 8.0)) API_UNAVAILABLE(macos);
+@property(nonatomic, readonly, getter=isVideoStabilizationEnabled) BOOL videoStabilizationEnabled API_DEPRECATED("Use activeVideoStabilizationMode instead.", ios(6.0, 8.0)) API_UNAVAILABLE(macos, macCatalyst);
 
 /*!
  @property enablesVideoStabilizationWhenAvailable
@@ -840,7 +907,7 @@ API_AVAILABLE(macos(10.7), ios(4.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED
  @discussion
     This property is only applicable to AVCaptureConnection instances involving video. On devices where the video stabilization feature is supported, only a subset of available source formats and resolutions may be available for stabilization. By setting the enablesVideoStabilizationWhenAvailable property to YES, video flowing through the receiver is stabilized when available. Enabling video stabilization may introduce additional latency into the video capture pipeline. Clients may key-value observe the videoStabilizationEnabled property to know when stabilization is in use or not. The default value is NO. For apps linked before iOS 6.0, the default value is YES for a video connection attached to an AVCaptureMovieFileOutput instance. For apps linked on or after iOS 6.0, the default value is always NO. This property is deprecated. Use preferredVideoStabilizationMode instead.
  */
-@property(nonatomic) BOOL enablesVideoStabilizationWhenAvailable API_DEPRECATED("Use preferredVideoStabilizationMode instead.", ios(6.0, 8.0)) API_UNAVAILABLE(macos);
+@property(nonatomic) BOOL enablesVideoStabilizationWhenAvailable API_DEPRECATED("Use preferredVideoStabilizationMode instead.", ios(6.0, 8.0)) API_UNAVAILABLE(macos, macCatalyst);
 
 /*!
  @property cameraIntrinsicMatrixDeliverySupported
@@ -848,7 +915,7 @@ API_AVAILABLE(macos(10.7), ios(4.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED
     Indicates whether the connection supports camera intrinsic matrix delivery.
  
  @discussion
-    This property is only applicable to AVCaptureConnection instances involving video. In such connections, the cameraIntrinsicMatrixDeliveryEnabled property may only be set to YES if - isCameraIntrinsicMatrixDeliverySupported returns YES. This property returns YES if both the connection's input device format and the connection's output support camera intrinsic matrix delivery. In iOS 11, only the AVCaptureVideoDataOutput's connection supports this property.
+    This property is only applicable to AVCaptureConnection instances involving video. In such connections, the cameraIntrinsicMatrixDeliveryEnabled property may only be set to YES if - isCameraIntrinsicMatrixDeliverySupported returns YES. This property returns YES if both the connection's input device format and the connection's output support camera intrinsic matrix delivery. Only the AVCaptureVideoDataOutput's connection supports this property. Note that if video stabilization is enabled (preferredVideoStabilizationMode is set to something other than AVCaptureVideoStabilizationModeOff), camera intrinsic matrix delivery is not supported. When streaming video data from a virtual camera with geometricDistortionCorrectionEnabled, camera intrinsics are only delivered with video buffers on which distortion correction is not applied. You may query the virtual camera's constituentDevices property to discover which of them support geometric distortion correction.
  */
 @property(nonatomic, readonly, getter=isCameraIntrinsicMatrixDeliverySupported) BOOL cameraIntrinsicMatrixDeliverySupported API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos);
 
@@ -883,6 +950,8 @@ API_AVAILABLE(macos(10.7), ios(4.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED
 @private
     AVCaptureAudioChannelInternal *_internal;
 }
+
+AV_INIT_UNAVAILABLE
 
 /*!
  @property averagePowerLevel

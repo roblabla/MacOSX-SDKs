@@ -49,7 +49,7 @@ typedef void (^MPSNNGraphCompletionHandler)( MPSImage * __nullable result,
  *              graph, including some information on why certain optimizations were not
  *              made.
  */
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0))
 @interface MPSNNGraph : MPSKernel <NSCopying, NSSecureCoding>
 
 /*! @abstract   Initialize a MPSNNGraph object on a device starting with resultImage working backward
@@ -97,23 +97,23 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
 -(nullable instancetype)  initWithDevice: (nonnull id <MTLDevice>) device
                             resultImages: (NSArray <MPSNNImageNode *> * __nonnull) resultImages
                         resultsAreNeeded: (BOOL * __nullable) areResultsNeeded NS_DESIGNATED_INITIALIZER
-MPS_AVAILABLE_STARTING(macos(10.15), ios(13.0), tvos(13.0));
+MPS_AVAILABLE_STARTING(macos(10.15), ios(13.0), macCatalyst(13.0), tvos(13.0));
 
 +(nullable instancetype)  graphWithDevice: (nonnull id <MTLDevice>) device
                              resultImages: (NSArray <MPSNNImageNode *> * __nonnull) resultImages
                          resultsAreNeeded: (BOOL * __nullable) areResultsNeeded
-MPS_AVAILABLE_STARTING(macos(10.15), ios(13.0), tvos(13.0));
+MPS_AVAILABLE_STARTING(macos(10.15), ios(13.0), macCatalyst(13.0), tvos(13.0));
 
 
 -(nullable instancetype)  initWithDevice: (nonnull id <MTLDevice>) device
                              resultImage: (MPSNNImageNode * __nonnull) resultImage
 MPS_AVAILABLE_STARTING_BUT_DEPRECATED( "Please use -initWithDevice:resultImage:resultIsNeeded: instead. Without this information, too much or too little work may occur. Results may be undefined.",
-                                      macos(10.13, 10.13.4), ios(11.0, 11.3), tvos(11.0,11.3));
+                                      macos(10.13, 10.13.4), ios(11.0, 11.3), tvos(11.0,11.3))  MPS_UNAVAILABLE(macCatalyst);
 
 +(nullable instancetype) graphWithDevice: (nonnull id <MTLDevice>) device
                              resultImage: (MPSNNImageNode * __nonnull) resultImage
 MPS_AVAILABLE_STARTING_BUT_DEPRECATED( "Please use +graphWithDevice:resultImage:resultIsNeeded: instead. Without this information, too much or too little work may occur. Results may be undefined.",
-                                      macos(10.13, 10.13.4), ios(11.0, 11.3), tvos(11.0,11.3));
+                                      macos(10.13, 10.13.4), ios(11.0, 11.3), tvos(11.0,11.3))  MPS_UNAVAILABLE(macCatalyst);
 
 /*! @abstract NSSecureCoding compatability
  *  @discussion While the standard NSSecureCoding/NSCoding method
@@ -197,7 +197,9 @@ MPS_AVAILABLE_STARTING_BUT_DEPRECATED( "Please use +graphWithDevice:resultImage:
 -(void) reloadFromDataSources;
 
 /*! @abstract       Encode the graph to a MTLCommandBuffer
- *  @param          commandBuffer       The command buffer
+ *  @param          commandBuffer       The command buffer. If the command buffer is a MPSCommandBuffer,
+ *                                      the work will be committed to Metal in small pieces so that
+ *                                      the CPU-side latency is much reduced.
  *  @param          sourceImages        A list of MPSImages to use as the source images for the graph.
  *                                      These should be in the same order as the list returned from MPSNNGraph.sourceImageHandles.
  *                                      The images may be image arrays. Typically, this is only one or two images
@@ -213,7 +215,10 @@ MPS_AVAILABLE_STARTING_BUT_DEPRECATED( "Please use +graphWithDevice:resultImage:
  *                                      These are only the images that were tagged with MPSNNImageNode.exportFromGraph = YES. The 
  *                                      identity of the states is given by -resultStateHandles.  If temporary, each intermediateImage 
  *                                      will have a readCount of 1.  If the result was tagged exportFromGraph = YES, it will be here
- *                                      too, with a readCount of 2.
+ *                                      too, with a readCount of 2. To be able to access the images from outside the graph on the CPU,
+ *                                      your application must also set MPSNNImageNode.synchronizeResource = YES,
+ *                                      and MPSNNImageNode.imageAllocator = [MPSImage defaultAllocator]; The defaultAllocator creates
+ *                                      a permanent image that can be read with readBytes.
  *  @param      destinationStates       An optional NSMutableArray to receive any MPSState objects created as part of its operation.
  *                                      The identity of the states is given by -resultStateHandles.
  *  @result     A MPSImage or MPSTemporaryImage allocated per the destinationImageAllocator containing the output of the graph.
@@ -228,7 +233,9 @@ MPS_AVAILABLE_STARTING_BUT_DEPRECATED( "Please use +graphWithDevice:resultImage:
 /*! @abstract       Encode the graph to a MTLCommandBuffer
  *  @discussion     This interface is like the other except that it operates on a batch of images all
  *                  at once.  In addition, you may specify whether the result is needed.
- *  @param          commandBuffer       The command buffer
+ *  @param          commandBuffer       The command buffer. If the command buffer is a MPSCommandBuffer,
+ *                                      the work will be committed to Metal in small pieces so that
+ *                                      the CPU-side latency is much reduced.
  *  @param          sourceImages        A list of MPSImages to use as the source images for the graph.
  *                                      These should be in the same order as the list returned from MPSNNGraph.sourceImageHandles.
  *                                      The images may be image arrays. Typically, this is only one or two images
@@ -244,7 +251,10 @@ MPS_AVAILABLE_STARTING_BUT_DEPRECATED( "Please use +graphWithDevice:resultImage:
  *                                      These are only the images that were tagged with MPSNNImageNode.exportFromGraph = YES. The
  *                                      identity of the states is given by -resultStateHandles.  If temporary, each intermediateImage
  *                                      will have a readCount of 1.  If the result was tagged exportFromGraph = YES, it will be here
- *                                      too, with a readCount of 2.
+ *                                      too, with a readCount of 2. To be able to access the images from outside the graph on the CPU,
+ *                                      your application must also set MPSNNImageNode.synchronizeResource = YES,
+ *                                      and MPSNNImageNode.imageAllocator = [MPSImage defaultAllocator]; The defaultAllocator creates
+ *                                      a permanent image that can be read with readBytes.
  *  @param      destinationStates       An optional NSMutableArray to receive any MPSState objects created as part of its operation.
  *                                      The identity of the states is given by -resultStateHandles.
  *  @result     A MPSImageBatch or MPSTemporaryImageBatch allocated per the destinationImageAllocator containing the output of the graph.
@@ -256,7 +266,7 @@ MPS_AVAILABLE_STARTING_BUT_DEPRECATED( "Please use +graphWithDevice:resultImage:
                                             sourceStates: (NSArray<MPSStateBatch*> * __nullable) sourceStates
                                       intermediateImages: (NSMutableArray <MPSImageBatch*> * __nullable) intermediateImages
                                        destinationStates: (NSMutableArray <MPSStateBatch *> * __nullable) destinationStates
-                                MPS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), tvos(11.3));
+                                MPS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3));
 
 /*! @abstract       Encode the graph to a MTLCommandBuffer
  *
@@ -274,7 +284,9 @@ MPS_AVAILABLE_STARTING_BUT_DEPRECATED( "Please use +graphWithDevice:resultImage:
  *                  to schedule CPU and GPU work concurrently. Regrattably, it is probable that every performance
  *                  benchmark you see on the net will be based on [MTLCommandBuffer waitUntilCompleted].
  *
- *  @param          commandBuffer       The command buffer
+ *  @param          commandBuffer       The command buffer. If the command buffer is a MPSCommandBuffer,
+ *                                      the work will be committed to Metal in small pieces so that
+ *                                      the CPU-side latency is much reduced.
  *  @param          sourceImages        A list of MPSImages to use as the source images for the graph.
  *                                      These should be in the same order as the list returned from MPSNNGraph.sourceImageHandles.
  *  @result     A MPSImage or MPSTemporaryImage allocated per the destinationImageAllocator containing the output of the graph.
@@ -324,8 +336,9 @@ MPS_AVAILABLE_STARTING_BUT_DEPRECATED( "Please use +graphWithDevice:resultImage:
  *                          input images are required to generate a single graph result.
  *                          That is, the graph itself has multiple inputs.  If you need to
  *                          execute the graph multiple times, then call this API multiple
- *                          times, or better yet use [encodeToCommandBuffer:sourceImages:]
- *                          multiple times. (See discussion)
+ *                          times, or (faster) make use of MPSImageBatches using
+ *                          -executeBatchToCommandBuffer:sourceImages:sourceStates:...
+ *                          (See discussion)
  *
  *  @param  handler         A block to receive any errors generated. This block may run
  *                          on any thread and may be called before this method returns.
@@ -348,7 +361,7 @@ MPS_AVAILABLE_STARTING_BUT_DEPRECATED( "Please use +graphWithDevice:resultImage:
  *              when the graph is finished encoding. The readcount of the image(s) must be at least
  *              this value when it is passed into the -encode... method. */
 -(NSUInteger) readCountForSourceImageAtIndex: (NSUInteger) index
-    MPS_AVAILABLE_STARTING( macos(10.14.1), ios(12.1), tvos(12.1));
+    MPS_AVAILABLE_STARTING( macos(10.14.1), ios(12.1), macCatalyst(13.0), tvos(12.1));
 
 /*! @abstract   Find the number of times a state will be read by the graph *
  *  @discussion From the set of state (or state batches) passed in to the graph, find
@@ -360,7 +373,7 @@ MPS_AVAILABLE_STARTING_BUT_DEPRECATED( "Please use +graphWithDevice:resultImage:
  *              when the graph is finished encoding. The read count of the state(s) must be at least
  *              this value when it is passed into the -encode... method. */
 -(NSUInteger) readCountForSourceStateAtIndex: (NSUInteger) index
-    MPS_AVAILABLE_STARTING( macos(10.14.1), ios(12.1), tvos(12.1));
+    MPS_AVAILABLE_STARTING( macos(10.14.1), ios(12.1), macCatalyst(13.0), tvos(12.1));
 
 @end
 

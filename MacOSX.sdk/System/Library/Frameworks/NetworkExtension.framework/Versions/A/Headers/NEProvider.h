@@ -53,6 +53,10 @@ typedef NS_ENUM(NSInteger, NEProviderStopReason) {
 	NEProviderStopReasonUserSwitch = 13,
 	/*! @const NEProviderStopReasonConnectionFailed Failed to establish connection. */
 	NEProviderStopReasonConnectionFailed = 14,
+	/*! @const NEProviderStopReasonSleep The device went to sleep and disconnectOnSleep is enabled in the configuration */
+	NEProviderStopReasonSleep API_AVAILABLE(macos(10.15), ios(13.0)) = 15,
+	/*! @const NEProviderStopReasonAppUpdate The NEProvider is being updated */
+	NEProviderStopReasonAppUpdate API_AVAILABLE(macos(10.15), ios(13.0)) = 16,
 } API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(watchos, tvos);
 
 /*!
@@ -113,6 +117,34 @@ API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(watchos, tvos)
  * @param completionHandler A block that is executed when the user acknowledges the message. If this method is called on a NEFilterDataProvider instance or the message cannot be displayed, then the completion handler block will be executed immediately with success parameter set to NO. If the message was successfully displayed to the user, then the completion handler block is executed with the success parameter set to YES when the user dismisses the message.
  */
 - (void)displayMessage:(NSString *)message completionHandler:(void (^)(BOOL success))completionHandler API_DEPRECATED_WITH_REPLACEMENT("UILocalNotification", macos(10.12, 10.14), ios(10.0, 12.0)) API_UNAVAILABLE(watchos, tvos);
+
+/*!
+ * @method startSystemExtensionMode
+ * @discussion Start the Network Extension machinery in a system extension (.system bundle). This class method will cause the calling system extension to start handling
+ *    requests from nesessionmanager to instantiate appropriate NEProvider sub-class instances. The system extension must declare a mapping of Network Extension extension points to
+ *    NEProvider sub-class instances in its Info.plist:
+ *        Key: NetworkExtension
+ *        Type: Dictionary containing information about the NetworkExtension capabilities of the system extension.
+ *
+ *            Key: NEProviderClasses
+ *            Type: Dictionary mapping NetworkExtension extension point identifiers to NEProvider sub-classes
+ *
+ *    Example:
+ *
+ *        <key>NetworkExtension</key>
+ *        <dict>
+ *            <key>NEProviderClasses</key>
+ *            <dict>
+ *                <key>com.apple.networkextension.app-proxy</key>
+ *                <string>$(PRODUCT_MODULE_NAME).AppProxyProvider</string>
+ *                <key>com.apple.networkextension.filter-data</key>
+ *                <string>$(PRODUCT_MODULE_NAME).FilterDataProvider</string>
+ *            </dict>
+ *        </dict>
+ *
+ *    This method should be called as early as possible after the system extension starts.
+ */
++ (void)startSystemExtensionMode API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*!
  * @property defaultPath

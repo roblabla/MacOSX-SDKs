@@ -37,19 +37,19 @@ extern "C" {
     typedef NS_ENUM(NSUInteger, MPSNNRegularizationType)
 #endif
     {
-        MPSNNRegularizationTypeNone MPS_ENUM_AVAILABLE_STARTING( macos(10.14), ios(12.0), tvos(12.0)) MPS_SWIFT_NAME(None) = 0,
+        MPSNNRegularizationTypeNone MPS_ENUM_AVAILABLE_STARTING( macos(10.14), ios(12.0), macCatalyst(13.0), tvos(12.0)) MPS_SWIFT_NAME(None) = 0,
         /*!
          *  Apply L1 regularization. L1 norm of weights, will be considered to be added to the loss to be minimized.
          *  the gradient of the regularization loss turns to be 1 scaled with regularizationScale,
          *  so we add that to the incoming gradient of value.
          */
-        MPSNNRegularizationTypeL1 MPS_ENUM_AVAILABLE_STARTING( macos(10.14), ios(12.0), tvos(12.0)) = 1,
+        MPSNNRegularizationTypeL1 MPS_ENUM_AVAILABLE_STARTING( macos(10.14), ios(12.0), macCatalyst(13.0), tvos(12.0)) = 1,
         /*!
          *  Apply L2 regularization. L2 norm of weights, will be considered to be added to the loss to be minimized.
          *  the gradient of the regularization loss turns to be the original value scaled with regularizationScale,
          *  so we add that to the incoming gradient of value.
          */
-        MPSNNRegularizationTypeL2 MPS_ENUM_AVAILABLE_STARTING( macos(10.14), ios(12.0), tvos(12.0)) = 2,
+        MPSNNRegularizationTypeL2 MPS_ENUM_AVAILABLE_STARTING( macos(10.14), ios(12.0), macCatalyst(13.0), tvos(12.0)) = 2,
     } NS_ENUM_AVAILABLE(10_14, 12_0)
 #if defined(DOXYGEN)
     MPSNNRegularizationType
@@ -66,7 +66,7 @@ extern "C" {
  *              If regularization is chosen the appropriate regularization loss gradient is added to the value gradient.
  *
  */
-MPS_CLASS_AVAILABLE_STARTING(macos(10.14), ios(12.0), tvos(12.0))
+MPS_CLASS_AVAILABLE_STARTING(macos(10.14), ios(12.0), macCatalyst(13.0), tvos(12.0))
 @interface  MPSNNOptimizerDescriptor : NSObject
 
 /*! @property   learningRate
@@ -199,7 +199,7 @@ MPS_CLASS_AVAILABLE_STARTING(macos(10.14), ios(12.0), tvos(12.0))
  *
  *
  */
-MPS_CLASS_AVAILABLE_STARTING(macos(10.14), ios(12.0), tvos(12.0))
+MPS_CLASS_AVAILABLE_STARTING(macos(10.14), ios(12.0), macCatalyst(13.0), tvos(12.0))
 @interface  MPSNNOptimizer : MPSKernel
 
 /*! @property   learningRate
@@ -278,7 +278,7 @@ MPS_CLASS_AVAILABLE_STARTING(macos(10.14), ios(12.0), tvos(12.0))
  *                m[t] is momentum of gradients it is a state we keep updating every update iteration
  *
  */
-MPS_CLASS_AVAILABLE_STARTING(macos(10.14), ios(12.0), tvos(12.0))
+MPS_CLASS_AVAILABLE_STARTING(macos(10.14), ios(12.0), macCatalyst(13.0), tvos(12.0))
 @interface  MPSNNOptimizerStochasticGradientDescent : MPSNNOptimizer
 
 
@@ -367,6 +367,15 @@ MPS_CLASS_AVAILABLE_STARTING(macos(10.14), ios(12.0), tvos(12.0))
           inputMomentumVector: (nullable MPSVector *) inputMomentumVector
            resultValuesVector: (nonnull MPSVector *) resultValuesVector
 MPS_SWIFT_NAME(encode(commandBuffer:inputGradientVector:inputValuesVector:inputMomentumVector:resultValuesVector:));
+
+-(void) encodeToCommandBuffer: (nonnull id <MTLCommandBuffer>)  commandBuffer
+          inputGradientMatrix: (nonnull MPSMatrix *) inputGradientMatrix
+            inputValuesMatrix: (nonnull MPSMatrix *) inputValuesMatrix
+          inputMomentumMatrix: (nullable MPSMatrix *) inputMomentumMatrix
+           resultValuesMatrix: (nonnull MPSMatrix *) resultValuesMatrix
+MPS_AVAILABLE_STARTING(macos(10.15), ios(13.0), macCatalyst(13.0), tvos(13.0))
+MPS_SWIFT_NAME(encode(commandBuffer:inputGradientMatrix:inputValuesMatrix:inputMomentumMatrix:resultValuesMatrix:));
+
 
 /*!
  *  @abstract   Encode an MPSNNOptimizerStochasticGradientDescent object to a command buffer to perform out of place update
@@ -512,7 +521,7 @@ MPS_SWIFT_NAME(encode(commandBuffer:batchNormalizationGradientState:batchNormali
  *                s[t] is weighted sum of squares of gradients
  *
  */
-MPS_CLASS_AVAILABLE_STARTING(macos(10.14), ios(12.0), tvos(12.0))
+MPS_CLASS_AVAILABLE_STARTING(macos(10.14), ios(12.0), macCatalyst(13.0), tvos(12.0))
 @interface  MPSNNOptimizerRMSProp : MPSNNOptimizer
 
 
@@ -593,6 +602,15 @@ MPS_CLASS_AVAILABLE_STARTING(macos(10.14), ios(12.0), tvos(12.0))
       inputSumOfSquaresVector: (nonnull MPSVector *) inputSumOfSquaresVector
            resultValuesVector: (nonnull MPSVector *) resultValuesVector
 MPS_SWIFT_NAME(encode(commandBuffer:inputGradientVector:inputValuesVector:inputSumOfSquaresVector:resultValuesVector:));
+
+-(void) encodeToCommandBuffer: (nonnull id <MTLCommandBuffer>)  commandBuffer
+          inputGradientMatrix: (nonnull MPSMatrix *) inputGradientMatrix
+            inputValuesMatrix: (nonnull MPSMatrix *) inputValuesMatrix
+      inputSumOfSquaresMatrix: (nonnull MPSMatrix *) inputSumOfSquaresMatrix
+           resultValuesMatrix: (nonnull MPSMatrix *) resultValuesMatrix
+MPS_AVAILABLE_STARTING(macos(10.15), ios(13.0), macCatalyst(13.0), tvos(13.0))
+MPS_SWIFT_NAME(encode(commandBuffer:inputGradientMatrix:inputValuesMatrix:inputSumOfSquaresMatrix:resultValuesMatrix:));
+
 
 
 /*!
@@ -724,7 +742,7 @@ MPS_SWIFT_NAME(encode(commandBuffer:batchNormalizationGradientState:batchNormali
  *                m[t] is momentum
  *
  */
-MPS_CLASS_AVAILABLE_STARTING(macos(10.14), ios(12.0), tvos(12.0))
+MPS_CLASS_AVAILABLE_STARTING(macos(10.14), ios(12.0), macCatalyst(13.0), tvos(12.0))
 @interface  MPSNNOptimizerAdam : MPSNNOptimizer
 
 /*! @property   beta1
@@ -824,6 +842,62 @@ MPS_CLASS_AVAILABLE_STARTING(macos(10.14), ios(12.0), tvos(12.0))
            resultValuesVector: (nonnull MPSVector *) resultValuesVector
 MPS_SWIFT_NAME(encode(commandBuffer:inputGradientVector:inputValuesVector:inputMomentumVector:inputVelocityVector:resultValuesVector:));
 
+-(void) encodeToCommandBuffer: (nonnull id <MTLCommandBuffer>)  commandBuffer
+          inputGradientMatrix: (nonnull MPSMatrix *) inputGradientMatrix
+            inputValuesMatrix: (nonnull MPSMatrix *) inputValuesMatrix
+          inputMomentumMatrix: (nonnull MPSMatrix *) inputMomentumMatrix
+          inputVelocityMatrix: (nonnull MPSMatrix *) inputVelocityMatrix
+           resultValuesMatrix: (nonnull MPSMatrix *) resultValuesMatrix
+MPS_AVAILABLE_STARTING(macos(10.15), ios(13.0), macCatalyst(13.0), tvos(13.0))
+MPS_SWIFT_NAME(encode(commandBuffer:inputGradientMatrix:inputValuesMatrix:inputMomentumMatrix:inputVelocityMatrix:resultValuesMatrix:));
+
+
+/*!
+ *  @abstract   Encode an AMSGrad variant of MPSNNOptimizerAdam object to a command buffer to perform out of place update
+ *  @param      commandBuffer          A valid MTLCommandBuffer to receive the encoded kernel.
+ *  @param      inputGradientVector    A valid MPSVector object which specifies the input vector of gradients for this update.
+ *  @param      inputValuesVector      A valid MPSVector object which specifies the input vector of values to be updated.
+ *  @param      inputMomentumVector    A valid MPSVector object which specifies the gradient momentum vector which will
+ *                                     be updated and overwritten.
+ *  @param      inputVelocityVector    A valid MPSVector object which specifies the gradient velocity vector which will
+ *                                     be updated and overwritten.
+ *  @param      maximumVelocityVector  A valid MPSVector object which specifies the maximum velocity vector which will
+ *                                     be updated and overwritten. May be nil, if nil then normal Adam optimizer behaviour is followed.
+ *  @param      resultValuesVector     A valid MPSCNNConvolutionWeightsAndBiasesState object which specifies the resultValues state which will
+ *                                     be updated and overwritten.
+ *
+ *  @discussion The following operations would be applied
+ *              At update time:
+ *              t = t + 1
+ *              lr[t] = learningRate * sqrt(1 - beta2^t) / (1 - beta1^t)
+ *
+ *              m[t]     = beta1 * m[t-1] + (1 - beta1) * g
+ *              v[t]     = beta2 * v[t-1] + (1 - beta2) * (g ^ 2)
+ *              maxVel[t] = max(maxVel[t-1],v[t])
+ *              variable = variable - lr[t] * m[t] / (sqrt(maxVel[t]) + epsilon)
+ *
+ */
+-(void) encodeToCommandBuffer: (nonnull id <MTLCommandBuffer>)  commandBuffer
+          inputGradientVector: (nonnull MPSVector *) inputGradientVector
+            inputValuesVector: (nonnull MPSVector *) inputValuesVector
+          inputMomentumVector: (nonnull MPSVector *) inputMomentumVector
+          inputVelocityVector: (nonnull MPSVector *) inputVelocityVector
+        maximumVelocityVector: (nullable MPSVector *) maximumVelocityVector
+           resultValuesVector: (nonnull MPSVector *) resultValuesVector
+MPS_AVAILABLE_STARTING(macos(10.15), ios(13.0), macCatalyst(13.0), tvos(13.0))
+MPS_SWIFT_NAME(encode(commandBuffer:inputGradientVector:inputValuesVector:inputMomentumVector:inputVelocityVector:maximumVelocityVector:resultValuesVector:));
+
+-(void) encodeToCommandBuffer: (nonnull id <MTLCommandBuffer>)  commandBuffer
+          inputGradientMatrix: (nonnull MPSMatrix *) inputGradientMatrix
+            inputValuesMatrix: (nonnull MPSMatrix *) inputValuesMatrix
+          inputMomentumMatrix: (nonnull MPSMatrix *) inputMomentumMatrix
+          inputVelocityMatrix: (nonnull MPSMatrix *) inputVelocityMatrix
+        maximumVelocityMatrix: (nullable MPSMatrix *) maximumVelocityMatrix
+           resultValuesMatrix: (nonnull MPSMatrix *) resultValuesMatrix
+MPS_AVAILABLE_STARTING(macos(10.15), ios(13.0), macCatalyst(13.0), tvos(13.0))
+MPS_SWIFT_NAME(encode(commandBuffer:inputGradientMatrix:inputValuesMatrix:inputMomentumMatrix:inputVelocityMatrix:maximumVelocityMatrix:resultValuesMatrix:));
+
+
 /*!
  *  @abstract   Encode an MPSNNOptimizerAdam object to a command buffer to perform out of place update
  *
@@ -860,6 +934,47 @@ MPS_SWIFT_NAME(encode(commandBuffer:inputGradientVector:inputValuesVector:inputM
 MPS_SWIFT_NAME(encode(commandBuffer:convolutionGradientState:convolutionSourceState:inputMomentumVectors:inputVelocityVectors:resultState:));
 
 /*!
+ *  @abstract   Encode an AMSGrad variant of MPSNNOptimizerAdam object to a command buffer to perform out of place update
+ *
+ *  @param      commandBuffer              A valid MTLCommandBuffer to receive the encoded kernel.
+ *  @param      convolutionGradientState   A valid MPSCNNConvolutionGradientState object which specifies the input state with gradients for this update.
+ *  @param      convolutionSourceState     A valid MPSCNNConvolutionWeightsAndBiasesState object which specifies the input state with values to be updated.
+ *  @param      inputMomentumVectors       An array MPSVector object which specifies the gradient momentum vectors which will
+ *                                         be updated and overwritten. The index 0 corresponds to weights, index 1 corresponds to biases, array can be of
+ *                                         size 1 in which case biases won't be updated
+ *  @param      inputVelocityVectors       An array MPSVector object which specifies the gradient velocity vectors which will
+ *                                         be updated and overwritten. The index 0 corresponds to weights, index 1 corresponds to biases, array can be of
+ *                                         size 1 in which case biases won't be updated
+ *  @param      maximumVelocityVectors     An array MPSVector object which specifies the maximum velocity vectors which will
+ *                                         be updated and overwritten. The index 0 corresponds to weights, index 1 corresponds to biases, array can be of
+ *                                         size 1 in which case biases won't be updated. May be nil, if nil then normal Adam optimizer behaviour is followed.
+ *  @param      resultState                A valid MPSCNNConvolutionWeightsAndBiasesState object which specifies the resultValues state which will
+ *                                         be updated and overwritten.
+ *
+ *  @discussion The following operations would be applied
+ *              At update time:
+ *              t = t + 1
+ *              lr[t] = learningRate * sqrt(1 - beta2^t) / (1 - beta1^t)
+ *
+ *              m[t]     = beta1 * m[t-1] + (1 - beta1) * g
+ *              v[t]     = beta2 * v[t-1] + (1 - beta2) * (g ^ 2)
+ *              maxVel[t] = max(maxVel[t-1],v[t])
+ *              variable = variable - lr[t] * m[t] / (sqrt(maxVel[t]) + epsilon)
+ *
+ */
+
+-(void) encodeToCommandBuffer: (__nonnull id<MTLCommandBuffer>) commandBuffer
+     convolutionGradientState: (MPSCNNConvolutionGradientState* __nonnull) convolutionGradientState
+       convolutionSourceState: (MPSCNNConvolutionWeightsAndBiasesState* __nonnull) convolutionSourceState
+         inputMomentumVectors: (nonnull NSArray<MPSVector *>*) inputMomentumVectors
+         inputVelocityVectors: (nonnull NSArray<MPSVector *>*) inputVelocityVectors
+       maximumVelocityVectors: (nullable NSArray<MPSVector *>*) maximumVelocityVectors
+                  resultState: (nonnull MPSCNNConvolutionWeightsAndBiasesState *) resultState
+MPS_AVAILABLE_STARTING(macos(10.15), ios(13.0), macCatalyst(13.0), tvos(13.0))
+MPS_SWIFT_NAME(encode(commandBuffer:convolutionGradientState:convolutionSourceState:inputMomentumVectors:inputVelocityVectors:maximumVelocityVectors:resultState:));
+
+
+/*!
  *  @abstract   Encode an MPSNNOptimizerAdam object to a command buffer to perform out of place update
  *
  *  @param      commandBuffer                              A valid MTLCommandBuffer to receive the encoded kernel.
@@ -891,6 +1006,44 @@ MPS_SWIFT_NAME(encode(commandBuffer:convolutionGradientState:convolutionSourceSt
          inputVelocityVectors: (nullable NSArray<MPSVector *>*) inputVelocityVectors
                   resultState: (nonnull MPSCNNNormalizationGammaAndBetaState *) resultState
 MPS_SWIFT_NAME(encode(commandBuffer:batchNormalizationState:inputMomentumVectors:inputVelocityVectors:resultState:));
+
+/*!
+ *  @abstract   Encode an AMSGrad variant of  MPSNNOptimizerAdam object to a command buffer to perform out of place update
+ *
+ *  @param      commandBuffer                              A valid MTLCommandBuffer to receive the encoded kernel.
+ *  @param      batchNormalizationState                    A valid MPSCNNBatchNormalizationState object which specifies the input state with gradients and original gamma/beta for this update.
+ *  @param      inputMomentumVectors                       An array MPSVector object which specifies the gradient momentum vectors which will
+ *                                                         be updated and overwritten. The index 0 corresponds to gamma, index 1 corresponds to beta, array can be of
+ *                                                         size 1 in which case beta won't be updated
+ *  @param      inputVelocityVectors                       An array MPSVector object which specifies the gradient velocity vectors which will
+ *                                                         be updated and overwritten. The index 0 corresponds to gamma, index 1 corresponds to beta, array can be of
+ *                                                         size 1 in which case beta won't be updated
+ *  @param      maximumVelocityVectors                     An array MPSVector object which specifies the maximum velocity vectors which will
+ *                                                         be updated and overwritten. The index 0 corresponds to weights, index 1 corresponds to biases, array can be of
+ *                                                         size 1 in which case biases won't be updated. May be nil, if nil then normal Adam optimizer behaviour is followed.
+ *  @param      resultState                                A valid MPSCNNNormalizationGammaAndBetaState object which specifies the resultValues state which will
+ *                                                         be updated and overwritten.
+ *
+ *
+ *  @discussion The following operations would be applied
+ *              At update time:
+ *              t = t + 1
+ *              lr[t] = learningRate * sqrt(1 - beta2^t) / (1 - beta1^t)
+ *
+ *              m[t]     = beta1 * m[t-1] + (1 - beta1) * g
+ *              v[t]     = beta2 * v[t-1] + (1 - beta2) * (g ^ 2)
+ *              maxVel[t] = max(maxVel[t-1],v[t])
+ *              variable = variable - lr[t] * m[t] / (sqrt(maxVel[t]) + epsilon)
+ */
+
+-(void) encodeToCommandBuffer: (__nonnull id<MTLCommandBuffer>) commandBuffer
+      batchNormalizationState: (MPSCNNBatchNormalizationState* __nonnull) batchNormalizationState
+         inputMomentumVectors: (nonnull NSArray<MPSVector *>*) inputMomentumVectors
+         inputVelocityVectors: (nonnull NSArray<MPSVector *>*) inputVelocityVectors
+       maximumVelocityVectors: (nullable NSArray<MPSVector *>*) maximumVelocityVectors
+                  resultState: (nonnull MPSCNNNormalizationGammaAndBetaState *) resultState
+MPS_AVAILABLE_STARTING(macos(10.15), ios(13.0), macCatalyst(13.0), tvos(13.0))
+MPS_SWIFT_NAME(encode(commandBuffer:batchNormalizationState:inputMomentumVectors:inputVelocityVectors:maximumVelocityVectors:resultState:));
 
 /*!
  *  @abstract   Encode an MPSNNOptimizerAdam object to a command buffer to perform out of place update
@@ -926,6 +1079,48 @@ MPS_SWIFT_NAME(encode(commandBuffer:batchNormalizationState:inputMomentumVectors
                      inputVelocityVectors: (nullable NSArray<MPSVector *>*) inputVelocityVectors
                               resultState: (nonnull MPSCNNNormalizationGammaAndBetaState *) resultState
 MPS_SWIFT_NAME(encode(commandBuffer:batchNormalizationGradientState:batchNormalizationSourceState:inputMomentumVectors:inputVelocityVectors:resultState:));
+
+/*!
+ *  @abstract   Encode an AMSGrad variant of MPSNNOptimizerAdam object to a command buffer to perform out of place update
+ *
+ *  @param      commandBuffer                              A valid MTLCommandBuffer to receive the encoded kernel.
+ *  @param      batchNormalizationGradientState            A valid MPSCNNBatchNormalizationState object which specifies the input state with gradients for this update.
+ *  @param      batchNormalizationSourceState              A valid MPSCNNBatchNormalizationState object which specifies the input state with original gamma/beta for this update.
+ *  @param      inputMomentumVectors                       An array MPSVector object which specifies the gradient momentum vectors which will
+ *                                                         be updated and overwritten. The index 0 corresponds to gamma, index 1 corresponds to beta, array can be of
+ *                                                         size 1 in which case beta won't be updated
+ *  @param      inputVelocityVectors                       An array MPSVector object which specifies the gradient velocity vectors which will
+ *                                                         be updated and overwritten. The index 0 corresponds to gamma, index 1 corresponds to beta, array can be of
+ *                                                         size 1 in which case beta won't be updated
+ *  @param      maximumVelocityVectors                     An array MPSVector object which specifies the maximum velocity vectors which will
+ *                                                         be updated and overwritten. The index 0 corresponds to weights, index 1 corresponds to biases, array can be of
+ *                                                         size 1 in which case biases won't be updated. May be nil, if nil then normal Adam optimizer behaviour is followed.
+ *  @param      resultState                                A valid MPSCNNNormalizationGammaAndBetaState object which specifies the resultValues state which will
+ *                                                         be updated and overwritten.
+ *
+ *
+ *  @discussion The following operations would be applied
+ *              At update time:
+ *              t = t + 1
+ *              lr[t] = learningRate * sqrt(1 - beta2^t) / (1 - beta1^t)
+ *
+ *              m[t]     = beta1 * m[t-1] + (1 - beta1) * g
+ *              v[t]     = beta2 * v[t-1] + (1 - beta2) * (g ^ 2)
+ *              maxVel[t] = max(maxVel[t-1],v[t])
+ *              variable = variable - lr[t] * m[t] / (sqrt(maxVel[t]) + epsilon)
+ *
+ */
+
+-(void)             encodeToCommandBuffer: (__nonnull id<MTLCommandBuffer>) commandBuffer
+          batchNormalizationGradientState: (MPSCNNBatchNormalizationState* __nonnull) batchNormalizationGradientState
+            batchNormalizationSourceState: (MPSCNNBatchNormalizationState* __nonnull) batchNormalizationSourceState
+                     inputMomentumVectors: (nonnull NSArray<MPSVector *>*) inputMomentumVectors
+                     inputVelocityVectors: (nonnull NSArray<MPSVector *>*) inputVelocityVectors
+                   maximumVelocityVectors: (nullable NSArray<MPSVector *>*) maximumVelocityVectors
+                              resultState: (nonnull MPSCNNNormalizationGammaAndBetaState *) resultState
+MPS_AVAILABLE_STARTING(macos(10.15), ios(13.0), macCatalyst(13.0), tvos(13.0))
+MPS_SWIFT_NAME(encode(commandBuffer:batchNormalizationGradientState:batchNormalizationSourceState:inputMomentumVectors:inputVelocityVectors:maximumVelocityVectors:resultState:));
+
 
 @end  /* MPSNNOptimizerAdam */
 

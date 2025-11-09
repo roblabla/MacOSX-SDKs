@@ -52,7 +52,7 @@ NS_CLASS_AVAILABLE_MAC(10_10)
 
 @end
 
-
+NS_AVAILABLE_MAC(10_10)
 @protocol NCWidgetListViewDelegate <NSObject>
 
 /* Required delegate method to create new content view controllers. */

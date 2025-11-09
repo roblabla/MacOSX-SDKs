@@ -11,8 +11,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-typedef NSString * CATextLayerTruncationMode NS_STRING_ENUM;
-typedef NSString * CATextLayerAlignmentMode NS_STRING_ENUM;
+typedef NSString * CATextLayerTruncationMode NS_TYPED_ENUM;
+typedef NSString * CATextLayerAlignmentMode NS_TYPED_ENUM;
 
 API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0))
 @interface CATextLayer : CALayer

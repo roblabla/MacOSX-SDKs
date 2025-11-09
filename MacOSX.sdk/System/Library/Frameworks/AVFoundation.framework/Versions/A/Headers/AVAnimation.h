@@ -17,7 +17,7 @@
 							The constant is a small, non-zero, positive value which avoids CoreAnimation
 							from replacing 0.0 with CACurrentMediaTime().
 */
-AVF_EXPORT const CFTimeInterval AVCoreAnimationBeginTimeAtZero NS_AVAILABLE(10_7, 4_0);
+AVF_EXPORT const CFTimeInterval AVCoreAnimationBeginTimeAtZero API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 
 typedef NSString * AVLayerVideoGravity NS_STRING_ENUM;
 
@@ -27,7 +27,7 @@ typedef NSString * AVLayerVideoGravity NS_STRING_ENUM;
 	@discussion		AVLayerVideoGravityResizeAspect may be used when setting the videoGravity
                     property of an AVPlayerLayer or AVCaptureVideoPreviewLayer instance.
  */
-AVF_EXPORT AVLayerVideoGravity const AVLayerVideoGravityResizeAspect NS_AVAILABLE(10_7, 4_0);
+AVF_EXPORT AVLayerVideoGravity const AVLayerVideoGravityResizeAspect API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 
 
 /*!
@@ -36,7 +36,7 @@ AVF_EXPORT AVLayerVideoGravity const AVLayerVideoGravityResizeAspect NS_AVAILABL
     @discussion     AVLayerVideoGravityResizeAspectFill may be used when setting the videoGravity
                     property of an AVPlayerLayer or AVCaptureVideoPreviewLayer instance.
  */
-AVF_EXPORT AVLayerVideoGravity const AVLayerVideoGravityResizeAspectFill NS_AVAILABLE(10_7, 4_0);
+AVF_EXPORT AVLayerVideoGravity const AVLayerVideoGravityResizeAspectFill API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 
 /*!
 	@constant		AVLayerVideoGravityResize
@@ -44,4 +44,4 @@ AVF_EXPORT AVLayerVideoGravity const AVLayerVideoGravityResizeAspectFill NS_AVAI
     @discussion     AVLayerVideoGravityResize may be used when setting the videoGravity
                     property of an AVPlayerLayer or AVCaptureVideoPreviewLayer instance.
  */
-AVF_EXPORT AVLayerVideoGravity const AVLayerVideoGravityResize NS_AVAILABLE(10_7, 4_0);
+AVF_EXPORT AVLayerVideoGravity const AVLayerVideoGravityResize API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0)) API_UNAVAILABLE(watchos);

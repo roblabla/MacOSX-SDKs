@@ -2,11 +2,15 @@
 //  parameters.h
 //  Network
 //
-//  Copyright (c) 2014-2018 Apple Inc. All rights reserved.
+//  Copyright (c) 2014-2019 Apple Inc. All rights reserved.
 //
 
 #ifndef __NW_PARAMETERS_H__
 #define __NW_PARAMETERS_H__
+
+#ifndef __NW_INDIRECT__
+#warning "Please include <Network/Network.h> instead of this file directly."
+#endif // __NW_INDIRECT__
 
 #include <Network/protocol_options.h>
 #include <Network/interface.h>
@@ -85,13 +89,13 @@ NW_PARAMETERS_CONFIGURE_PROTOCOL_TYPE_DECL(disable);
  * @param configure_tls
  *		A block to configure TLS. To use the default TLS configuration, pass
  *		NW_PARAMETERS_DEFAULT_CONFIGURATION. To configure specific options, pass a custom
- *		block and operate on the the nw_protocol_options_t object. To disable TLS, pass
+ *		block and operate on the nw_protocol_options_t object. To disable TLS, pass
  *		NW_PARAMETERS_DISABLE_PROTOCOL.
  *
  * @param configure_tcp
  *		A block to configure TCP. To use the default TCP configuration, pass
  *		NW_PARAMETERS_DEFAULT_CONFIGURATION. To configure specific options, pass a custom
- *		block and operate on the the nw_protocol_options_t object. It is invalid to try
+ *		block and operate on the nw_protocol_options_t object. It is invalid to try
  *		to disable TCP using NW_PARAMETERS_DISABLE_PROTOCOL.
  *
  * @result
@@ -116,13 +120,13 @@ nw_parameters_create_secure_tcp(nw_parameters_configure_protocol_block_t configu
  * @param configure_dtls
  *		A block to configure DTLS. To use the default DTLS configuration, pass
  *		NW_PARAMETERS_DEFAULT_CONFIGURATION. To configure specific options, pass a custom
- *		block and operate on the the nw_protocol_options_t object. To disable DTLS, pass
+ *		block and operate on the nw_protocol_options_t object. To disable DTLS, pass
  *		NW_PARAMETERS_DISABLE_PROTOCOL.
  *
  * @param configure_udp
  *		A block to configure UDP. To use the default UDP configuration, pass
  *		NW_PARAMETERS_DEFAULT_CONFIGURATION. To configure specific options, pass a custom
- *		block and operate on the the nw_protocol_options_t object. It is invalid to try
+ *		block and operate on the nw_protocol_options_t object. It is invalid to try
  *		to disable UDP using NW_PARAMETERS_DISABLE_PROTOCOL.
  *
  * @result
@@ -135,6 +139,40 @@ API_AVAILABLE(macos(10.14), ios(12.0), watchos(5.0), tvos(12.0))
 NW_RETURNS_RETAINED nw_parameters_t
 nw_parameters_create_secure_udp(nw_parameters_configure_protocol_block_t configure_dtls,
 								nw_parameters_configure_protocol_block_t configure_udp);
+
+/*!
+ * @function nw_parameters_create_custom_ip
+ *
+ * @abstract
+ *		Creates a parameters object that is configured for a custom IP protocol.
+ *		This allows the caller to create connections and listeners that send
+ *		and receive IP datagrams where the protocol header contained by the IP
+ *		datagram is identified by the provided protocol number. Protocols already
+ *		registered by the system, such as TCP and UDP, will not be allowed.
+ *
+ *		Calling processes must hold the "com.apple.developer.networking.custom-protocol"
+ *		entitlement.
+ *
+ * @param custom_ip_protocol_number
+ *		The protocol number identifying a protocol carried by IP, as defined
+ *		in RFC 5237.
+ *
+ * @param configure_ip
+ *		A block to configure IP. To use the default IP configuration, pass
+ *		NW_PARAMETERS_DEFAULT_CONFIGURATION. To configure specific options, pass a custom
+ *		block and operate on the nw_protocol_options_t object. It is invalid to try
+ *		to disable IP using NW_PARAMETERS_DISABLE_PROTOCOL.
+ *
+ * @result
+ *		Returns an allocated nw_parameters_t object on success.
+ *		Callers are responsible for deallocating using nw_release(obj) or [obj release].
+ *		These objects support ARC.
+ *		Returns NULL on failure. Fails due to invalid parameters.
+ */
+API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, watchos, tvos)
+NW_RETURNS_RETAINED nw_parameters_t
+nw_parameters_create_custom_ip(uint8_t custom_ip_protocol_number,
+							   nw_parameters_configure_protocol_block_t configure_ip);
 
 #endif // __BLOCKS__
 
@@ -396,6 +434,42 @@ nw_parameters_set_prohibit_expensive(nw_parameters_t parameters,
 API_AVAILABLE(macos(10.14), ios(12.0), watchos(5.0), tvos(12.0))
 bool
 nw_parameters_get_prohibit_expensive(nw_parameters_t parameters);
+
+/*!
+ * @function nw_parameters_set_prohibit_constrained
+ *
+ * @abstract
+ *		Prohibit any connections or listeners using these parameters from using
+ *		a network interface that is considered constrained by the system.
+ *
+ * @param parameters
+ *		The parameters object to configure
+ *
+ * @param prohibit_constrained
+ *		If true, prohibit the use of any constrained interfaces. If false,
+ *		allow constrained interfaces. Defaults to false.
+ */
+API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0))
+void
+nw_parameters_set_prohibit_constrained(nw_parameters_t parameters,
+									   bool prohibit_constrained);
+
+/*!
+ * @function nw_parameters_get_prohibit_constrained
+ *
+ * @abstract
+ *		Check if the parameters prohibit constrained interfaces.
+ *
+ * @param parameters
+ *		The parameters object to check
+ *
+ * @result
+ *		Returns true if constrained interfaces are prohibited, or
+ *		false otherwise.
+ */
+API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0))
+bool
+nw_parameters_get_prohibit_constrained(nw_parameters_t parameters);
 
 /*!
  * @function nw_parameters_set_reuse_local_address
@@ -826,6 +900,8 @@ API_AVAILABLE(macos(10.14), ios(12.0), watchos(5.0), tvos(12.0))
 bool
 nw_parameters_get_local_only(nw_parameters_t parameters);
 
+#pragma mark - Proxy Options
+
 /*!
  * @function nw_parameters_set_prefer_no_proxy
  *
@@ -860,6 +936,8 @@ nw_parameters_set_prefer_no_proxy(nw_parameters_t parameters, bool prefer_no_pro
 API_AVAILABLE(macos(10.14), ios(12.0), watchos(5.0), tvos(12.0))
 bool
 nw_parameters_get_prefer_no_proxy(nw_parameters_t parameters);
+
+#pragma mark - Resolution Options
 
 /*!
  * @typedef nw_parameters_expired_dns_behavior_t

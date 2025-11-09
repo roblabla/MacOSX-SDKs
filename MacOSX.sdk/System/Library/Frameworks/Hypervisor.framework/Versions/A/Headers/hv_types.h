@@ -2,7 +2,7 @@
  *  hv_types.h
  *  Hypervisor Framework
  *
- *  Copyright (c) 2013 Apple Inc. All rights reserved.
+ *  Copyright (c) 2013-2019 Apple Inc. All rights reserved.
  */
 
 #ifndef __HYPERVISOR_HV_TYPES__
@@ -13,6 +13,27 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+
+/*!
+ * @enum       hv_capability_t
+ * @abstract   Capability IDs
+ */
+enum {
+	HV_CAP_VCPUMAX,
+	HV_CAP_ADDRSPACEMAX
+};
+
+typedef uint64_t hv_capability_t;
+
+/*!
+ * @typedef    hv_vm_space_t
+ * @abstract   Type of a guest address space
+ */
+enum {
+	HV_VM_SPACE_DEFAULT = (0ull)
+};
+
+typedef unsigned hv_vm_space_t;
 
 /*!
  * @enum       hv_vm_options_t

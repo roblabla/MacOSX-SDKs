@@ -2,7 +2,7 @@
 //  SCNSceneRenderer.h
 //  SceneKit
 //
-//  Copyright © 2012-2018 Apple Inc. All rights reserved.
+//  Copyright © 2012-2019 Apple Inc. All rights reserved.
 //
 
 #import <SceneKit/SceneKitTypes.h>
@@ -168,12 +168,18 @@ typedef NS_OPTIONS(NSUInteger, SCNDebugOptions) {
  */
 @property(nonatomic) BOOL autoenablesDefaultLighting;
 
-/*! 
+/*!
  @property jitteringEnabled
- @abstract Specifies whether the receiver should jitter the rendered scene to reduce aliasing artifacts. 
+ @abstract Specifies whether the receiver should jitter the rendered scene to reduce aliasing artifacts.
  @discussion When enabled, the jittering is performed asynchronously and automatically by SCNView and SCNLayer. It is done synchronously by SCNRenderer.
  */
 @property(nonatomic, getter=isJitteringEnabled) BOOL jitteringEnabled;
+
+/*!
+ @property temporalAntialiasingEnabled
+ @abstract Specifies whether the receiver should reduce aliasing artifacts in real time based on temporal coherency.
+ */
+@property(nonatomic, getter=isTemporalAntialiasingEnabled) BOOL temporalAntialiasingEnabled API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0), watchos(6.0));;
 
 /*!
  @method prepareObject:shouldAbortBlock:
@@ -219,11 +225,15 @@ typedef NS_OPTIONS(NSUInteger, SCNDebugOptions) {
  */
 @property(nonatomic, readonly) SCNRenderingAPI renderingAPI API_AVAILABLE(macos(10.11), ios(9.0));
 
+#if SCN_ENABLE_OPENGL
+
 /*!
  @property context
  @abstract A Core OpenGL render context that is used as the render target (a CGLContextObj on macOS, an EAGLContext on iOS).
  */
 @property(nonatomic, readonly, nullable) void *context;
+
+#endif
 
 #if SCN_ENABLE_METAL
 
@@ -284,6 +294,12 @@ typedef NS_OPTIONS(NSUInteger, SCNDebugOptions) {
  */
 @property(nonatomic, retain, nullable) SCNNode *audioListener API_AVAILABLE(macos(10.11), ios(9.0));
 
+/*!
+ @property currentViewport
+ @abstract Returns the current viewport for this renderer, can be used to get the actual viewport from within the delegate callback during a live resize.
+ */
+@property(nonatomic, readonly) CGRect currentViewport API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0), watchos(6.0));
+
 
 #pragma mark Deprecated
 
@@ -292,11 +308,16 @@ typedef NS_OPTIONS(NSUInteger, SCNDebugOptions) {
  @abstract Specifies the current time to display the scene.
  @discussion Deprecated, use "sceneTime" instead.
  */
-@property(nonatomic) NSTimeInterval currentTime API_DEPRECATED_WITH_REPLACEMENT("sceneTime", macos(10.8, 10.10)) API_UNAVAILABLE(ios, tvos, watchos);
+@property(nonatomic) NSTimeInterval currentTime API_DEPRECATED_WITH_REPLACEMENT("sceneTime", macos(10.8, 10.10)) API_UNAVAILABLE(ios, tvos, watchos, macCatalyst);
+
+/*!
+ @property usesReverseZ
+ @abstract Specifies if the renderer should use the reverse Z technique. Defaults to YES.
+ @discussion This property is only valid on a renderer created with a Metal device.
+ */
+@property (nonatomic) BOOL usesReverseZ API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0), watchos(6.0));
 
 @end
-
-
 
 /*!
  @protocol SCNSceneRendererDelegate

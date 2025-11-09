@@ -177,7 +177,6 @@ typedef union {
 #endif // C
 
 od_object_t _od_object_alloc(const void *vtable, size_t size);
-void _od_object_xref_dispose(od_object_t obj);
 void _od_object_dispose(od_object_t obj);
 void _od_release(od_object_t obj);
 

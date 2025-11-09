@@ -14,8 +14,10 @@
 #import <MPSCore/MPSCoreTypes.h>
 #import <MPSCore/MPSImage.h>
 #import <MPSCore/MPSKernel.h>
+#import <MPSCore/MPSMatrix.h>
 #import <MPSCore/MPSState.h>
 #import <MPSCore/MPSKernelTypes.h>
 #import <MPSCore/MPSKeyedUnarchiver.h>
+#import <MPSCore/MPSNDArray.h>
 
 #endif /* MPSCore_h */

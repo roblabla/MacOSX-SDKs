@@ -7,6 +7,8 @@
 
 #import <Foundation/Foundation.h>
 
+// NOTE: MediaLibrary.framework is deprecated as of macOS 10.15 and will be removed in a future OS version
+
 #import <MediaLibrary/MLMediaTypes.h>
 #import <MediaLibrary/MLMediaLibrary.h>
 #import <MediaLibrary/MLMediaSource.h>

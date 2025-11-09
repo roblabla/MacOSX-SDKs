@@ -1,17 +1,18 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: E8376D82-03D8-32A8-936F-737953225DF8' ]
+uuids:           [ 'x86_64: AB5EC981-0EC9-369C-888C-F6492E37D849' ]
 platform:        macosx
-install-name:    /System/Library/PrivateFrameworks/CloudDocsDaemon.framework/Versions/A/CloudDocsDaemon
-current-version: 575.120
+install-name:    '/System/Library/PrivateFrameworks/CloudDocsDaemon.framework/Versions/A/CloudDocsDaemon'
+current-version: 672.1
 compatibility-version: 0
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _BRCBundleIDForProcessIdentifier, _BRCCopyQuarantineInfo, 
                        _BRCExecutableNameForProcessIdentifier, _BRCExtensionErrorPayloadReadFrom, 
-                       _BRCFSSchedulerBaseDidUpdateHasWorkNotification, _BRCItemFieldsPrettyPrint, 
-                       _BRCItemIDDocuments, _BRCItemIDZoneRoot, _BRCPrettyPrintBitmapWithContext, 
-                       _BRCPrettyPrintEnumWithContext, _BRCSharingNoOverrideString, 
+                       _BRCFSSchedulerBaseDidUpdateHasWorkNotification, _BRCGenerationCountFromData, 
+                       _BRCItemFieldsPrettyPrint, _BRCItemIDDocuments, _BRCItemIDZoneRoot, 
+                       _BRCPrettyPrintBitmapWithContext, _BRCPrettyPrintEnumWithContext, 
+                       _BRCRecursivelyChangeOwnerAndGroupToMobile, _BRCSharingNoOverrideString, 
                        _BRCSizeInfoCompletedUnitCountKey, _BRCSizeInfoTotalUnitCountKey, 
                        _BRCSyncContextDidBecomeBackground, _BRCSyncContextDidBecomeForeground, 
                        _BRFieldCKInfoReadFrom, _BRFieldFinderTagsReadFrom, _BRFieldPkgHeaderReadFrom, 
@@ -43,7 +44,8 @@ exports:
                        _kBRRecordKeyTrashPutBackPath, _kBRRecordKeyXattr, _kBRRecordTypeContent, 
                        _kBRRecordTypeStructure, _prettyprintFSEventFlags ]
     objc-classes:    [ BRCAccountHandler, BRCAccountSession, BRCBackupSession, BRCContainerScheduler, 
-                       BRCDaemon, BRCDocumentItem, BRCDumpContext, BRCDumper, BRCExtensionErrorPayload, 
+                       BRCDaemon, BRCDatabaseBackupManager, BRCDatabaseRestoreManager, 
+                       BRCDocumentItem, BRCDumpContext, BRCDumper, BRCExtensionErrorPayload, 
                        BRCFSEventsMonitor, BRCFSReader, BRCFSWriter, BRCFileCoordinator, 
                        BRCGenerationID, BRCItemID, BRCItemToPathLookup, BRCLocalItem, 
                        BRCMinHeap, BRCPackageChecksummer, BRCPackageItem, BRCPackageManifestReader, 

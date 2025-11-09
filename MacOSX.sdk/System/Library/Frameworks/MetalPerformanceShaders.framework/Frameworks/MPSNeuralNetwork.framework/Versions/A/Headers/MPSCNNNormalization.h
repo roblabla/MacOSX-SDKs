@@ -32,7 +32,7 @@ extern "C" {
  *              parameters delta and alpha does not result in a situation where the denominator
  *              becomes zero - in such situations the resulting pixel-value is undefined.
  */
-MPS_CLASS_AVAILABLE_STARTING( macos(10.12), ios(10.0), tvos(10.0))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.12), ios(10.0), macCatalyst(13.0), tvos(10.0))
 @interface MPSCNNSpatialNormalization : MPSCNNKernel
 
 /*! @property   alpha
@@ -75,7 +75,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.12), ios(10.0), tvos(10.0))
  */
 -(nullable instancetype) initWithCoder:(NSCoder * __nonnull)aDecoder
                                 device:(nonnull id <MTLDevice>) device NS_DESIGNATED_INITIALIZER
-                    MPS_AVAILABLE_STARTING(macos(10.13), ios(11.0), tvos(11.0));
+                    MPS_AVAILABLE_STARTING(macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0));
 
 /*
  * Use initWithDevice:kernelWidth:kernelHeight instead
@@ -112,7 +112,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.12), ios(10.0), tvos(10.0))
  *              For correct gradient computation all parameters must be the same as the original normalization filter.
  */
 
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), tvos(11.3))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3))
 @interface MPSCNNSpatialNormalizationGradient : MPSCNNGradientKernel
 
 /*! @property   alpha
@@ -188,7 +188,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), tvos(11.3))
  *              against tiny variances is to regulate the expression with a small value for delta, for example
  *              delta = 1/1024 = 0.0009765625.
  */
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(10.0), tvos(10.0))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(10.0), macCatalyst(13.0), tvos(10.0))
 @interface MPSCNNLocalContrastNormalization : MPSCNNKernel
 
 /*! @property   alpha
@@ -252,7 +252,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(10.0), tvos(10.0))
  */
 -(nullable instancetype) initWithCoder:(NSCoder * __nonnull)aDecoder
                                 device:(nonnull id <MTLDevice>) device NS_DESIGNATED_INITIALIZER
-                    MPS_AVAILABLE_STARTING(macos(10.13), ios(11.0), tvos(11.0));
+                    MPS_AVAILABLE_STARTING(macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0));
 
 /*
  * Use initWithDevice:kernelWidth:kernelHeight instead
@@ -299,7 +299,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(10.0), tvos(10.0))
  *
  *              For correct gradient computation all parameters must be the same as the original normalization filter.
  */
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), tvos(11.3))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3))
 @interface MPSCNNLocalContrastNormalizationGradient : MPSCNNGradientKernel
 
 /*! @property   alpha
@@ -389,7 +389,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), tvos(11.3))
  *              parameters delta and alpha does not result in a situation where the denominator
  *              becomes zero - in such situations the resulting pixel-value is undefined.
  */
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(10.0), tvos(10.0))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(10.0), macCatalyst(13.0), tvos(10.0))
 @interface MPSCNNCrossChannelNormalization : MPSCNNKernel
 
 /*! @property   alpha
@@ -435,7 +435,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(10.0), tvos(10.0))
  */
 -(nullable instancetype) initWithCoder:(NSCoder * __nonnull)aDecoder
                                 device:(nonnull id <MTLDevice>) device NS_DESIGNATED_INITIALIZER
-                    MPS_AVAILABLE_STARTING(macos(10.13), ios(11.0), tvos(11.0));
+                    MPS_AVAILABLE_STARTING(macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0));
 
 
 /*
@@ -473,7 +473,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(10.0), tvos(10.0))
  *
  *              For correct gradient computation all parameters must be the same as the original normalization filter.
  */
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), tvos(11.3))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3))
 @interface MPSCNNCrossChannelNormalizationGradient : MPSCNNGradientKernel
 
 /*! @property   alpha

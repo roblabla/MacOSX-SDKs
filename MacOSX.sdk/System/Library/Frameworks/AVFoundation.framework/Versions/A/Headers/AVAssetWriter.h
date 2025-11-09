@@ -3,7 +3,7 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2010-2016 Apple Inc. All rights reserved.
+	Copyright 2010-2018 Apple Inc. All rights reserved.
 
 */
 
@@ -38,10 +38,10 @@ NS_ASSUME_NONNULL_BEGIN
  */
 typedef NS_ENUM(NSInteger, AVAssetWriterStatus) {
 	AVAssetWriterStatusUnknown = 0,
-	AVAssetWriterStatusWriting,
-	AVAssetWriterStatusCompleted,
-	AVAssetWriterStatusFailed,
-	AVAssetWriterStatusCancelled
+	AVAssetWriterStatusWriting = 1,
+	AVAssetWriterStatusCompleted = 2,
+	AVAssetWriterStatusFailed = 3,
+	AVAssetWriterStatusCancelled = 4
 };
 
 @class AVAssetWriterInternal;
@@ -58,7 +58,7 @@ typedef NS_ENUM(NSInteger, AVAssetWriterStatus) {
  
 	A single instance of AVAssetWriter can be used once to write to a single file. Clients that wish to write to files multiple times must use a new instance of AVAssetWriter each time.
  */
-NS_CLASS_AVAILABLE(10_7, 4_1)
+API_AVAILABLE(macos(10.7), ios(4.1), tvos(9.0)) API_UNAVAILABLE(watchos)
 @interface AVAssetWriter : NSObject
 {
 @private
@@ -190,7 +190,7 @@ AV_INIT_UNAVAILABLE
 	
 	This property cannot be set after writing has started.  The asset writer will fail if a file cannot be created in this directory (for example, due to insufficient permissions).
  */
-@property (nonatomic, copy, nullable) NSURL *directoryForTemporaryFiles NS_AVAILABLE(10_10, 8_0);
+@property (nonatomic, copy, nullable) NSURL *directoryForTemporaryFiles API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 
 /*!
  @property inputs
@@ -340,7 +340,7 @@ AV_INIT_UNAVAILABLE
 	
 	This method should not be called concurrently with -[AVAssetWriterInput appendSampleBuffer:] or -[AVAssetWriterInputPixelBufferAdaptor appendPixelBuffer:withPresentationTime:].
 */
-- (BOOL)finishWriting NS_DEPRECATED(10_7, 10_9, 4_1, 6_0);
+- (BOOL)finishWriting API_DEPRECATED("No longer supported", macos(10.7, 10.9), ios(4.1, 6.0), tvos(9.0, 9.0)) API_UNAVAILABLE(watchos);
 
 /*!
  @method finishWritingWithCompletionHandler:
@@ -354,7 +354,7 @@ AV_INIT_UNAVAILABLE
 	
 	To guarantee that all sample buffers are successfully written, ensure all calls to -[AVAssetWriterInput appendSampleBuffer:] or -[AVAssetWriterInputPixelBufferAdaptor appendPixelBuffer:withPresentationTime:] have returned before invoking this method.
 */
-- (void)finishWritingWithCompletionHandler:(void (^)(void))handler NS_AVAILABLE(10_9, 6_0);
+- (void)finishWritingWithCompletionHandler:(void (^)(void))handler API_AVAILABLE(macos(10.9), ios(6.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 
 @end
 
@@ -397,7 +397,7 @@ AV_INIT_UNAVAILABLE
  
 	This property cannot be set after writing has started.
  */
-@property (nonatomic) CMTimeScale movieTimeScale NS_AVAILABLE(10_7, 4_3);
+@property (nonatomic) CMTimeScale movieTimeScale API_AVAILABLE(macos(10.7), ios(4.3), tvos(9.0)) API_UNAVAILABLE(watchos);
 
 @end
 
@@ -419,7 +419,7 @@ AV_INIT_UNAVAILABLE
  @discussion
 	If outputFileType specifies a container format that does not support mutually exclusive relationships among tracks, or if the specified instance of AVAssetWriterInputGroup contains inputs with media types that cannot be related, the group cannot be added to the AVAssetWriter.
  */
-- (BOOL)canAddInputGroup:(AVAssetWriterInputGroup *)inputGroup NS_AVAILABLE(10_9, 7_0);
+- (BOOL)canAddInputGroup:(AVAssetWriterInputGroup *)inputGroup API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 
 /*
  @method addInputGroup:
@@ -434,7 +434,7 @@ AV_INIT_UNAVAILABLE
 
 	Input groups cannot be added after writing has started.
  */
-- (void)addInputGroup:(AVAssetWriterInputGroup *)inputGroup NS_AVAILABLE(10_9, 7_0);
+- (void)addInputGroup:(AVAssetWriterInputGroup *)inputGroup API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 
 /*!
  @property inputGroups
@@ -444,7 +444,7 @@ AV_INIT_UNAVAILABLE
  @discussion
 	The value of this property is an NSArray containing concrete instances of AVAssetWriterInputGroup.  Input groups can be added to the receiver using the addInputGroup: method.
  */
-@property (nonatomic, readonly) NSArray<AVAssetWriterInputGroup *> *inputGroups NS_AVAILABLE(10_9, 7_0);
+@property (nonatomic, readonly) NSArray<AVAssetWriterInputGroup *> *inputGroups API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 
 @end
 
@@ -461,7 +461,7 @@ AV_INIT_UNAVAILABLE
 	Note that because AVAssetWriterInputGroup is a subclass of AVMediaSelectionGroup, clients can examine the media selection options that will be available on the output asset before the asset is written.  Best results for examining the options of the AVAssetWriterInputGroup will be obtained after associating the AVAssetWriterInputs of the AVAsset as appropriate via -[AVAssetWriterInput addTrackAssociationWithTrackOfInput:type:] and by initializing each AVAssetWriterInput with a source format hint, where appropriate.
  */
 
-NS_CLASS_AVAILABLE(10_9, 7_0)
+API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 @interface AVAssetWriterInputGroup : AVMediaSelectionGroup
 {
 @private

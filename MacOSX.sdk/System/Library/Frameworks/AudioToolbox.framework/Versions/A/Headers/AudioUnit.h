@@ -1,3 +1,4 @@
+#if (defined(USE_AUDIOTOOLBOX_PUBLIC_HEADERS) && USE_AUDIOTOOLBOX_PUBLIC_HEADERS) || !__has_include(<AudioToolboxCore/AudioUnit.h>)
 /*!
 	@file		AudioUnit.h
  	@framework	AudioToolbox.framework
@@ -10,32 +11,28 @@
 #define _AudioToolbox_AudioUnit_h
 
 #include <TargetConditionals.h>
+#ifndef AUDIO_UNIT_VERSION
 #define AUDIO_UNIT_VERSION 1070
+#endif
 
-#if !defined(__COREAUDIO_USE_FLAT_INCLUDES__)
-	#include <AudioToolbox/AudioComponent.h>
-	#include <AudioToolbox/AUComponent.h>
-	#include <AudioToolbox/AudioOutputUnit.h>
-	#include <AudioToolbox/AudioUnitProperties.h>
-	#include <AudioToolbox/AudioUnitParameters.h>
-	#include <AudioToolbox/MusicDevice.h>
+#include <AudioToolbox/AudioComponent.h>
+#include <AudioToolbox/AUComponent.h>
+#include <AudioToolbox/AudioOutputUnit.h>
+#include <AudioToolbox/AudioUnitProperties.h>
+#include <AudioToolbox/AudioUnitParameters.h>
+#include <AudioToolbox/MusicDevice.h>
 
-	#ifdef __OBJC2__
-		#import <AudioToolbox/AUAudioUnit.h>
-		#import <AudioToolbox/AUAudioUnitImplementation.h>
-		#import <AudioToolbox/AUParameters.h>
-	#endif
+#ifdef __OBJC2__
+	#import <AudioToolbox/AUAudioUnit.h>
+	#import <AudioToolbox/AUAudioUnitImplementation.h>
+	#import <AudioToolbox/AUParameters.h>
+#endif
 
-		#include <AudioToolbox/AudioCodec.h>
-
-#else
-	#include <AudioComponent.h>
-	#include <AUComponent.h>
-	#include <AudioOutputUnit.h>
-	#include <AudioUnitProperties.h>
-	#include <AudioUnitParameters.h>
-	#include <AudioCodec.h>
-	#include <MusicDevice.h>
+#if !TARGET_OS_IPHONE
+	#include <AudioToolbox/AudioCodec.h>
 #endif
 
 #endif /* _AudioToolbox_AudioUnit_h */
+#else
+#include <AudioToolboxCore/AudioUnit.h>
+#endif

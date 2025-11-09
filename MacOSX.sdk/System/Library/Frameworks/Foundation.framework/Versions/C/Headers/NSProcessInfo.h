@@ -1,5 +1,5 @@
 /*	NSProcessInfo.h
-	Copyright (c) 1994-2018, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2019, Apple Inc. All rights reserved.
  */
 
 #import <Foundation/NSObject.h>
@@ -230,5 +230,11 @@ FOUNDATION_EXTERN NSNotificationName const NSProcessInfoThermalStateDidChangeNot
  This notification is posted on the global dispatch queue. Register for it using the default notification center. The object associated with the notification is NSProcessInfo.processInfo.
  */
 FOUNDATION_EXTERN NSNotificationName const NSProcessInfoPowerStateDidChangeNotification API_AVAILABLE(ios(9.0), watchos(2.0), tvos(9.0)) API_UNAVAILABLE(macos);
+
+@interface NSProcessInfo (NSProcessInfoPlatform)
+
+@property (readonly, getter=isMacCatalystApp) BOOL macCatalystApp API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0));
+
+@end
 
 NS_ASSUME_NONNULL_END

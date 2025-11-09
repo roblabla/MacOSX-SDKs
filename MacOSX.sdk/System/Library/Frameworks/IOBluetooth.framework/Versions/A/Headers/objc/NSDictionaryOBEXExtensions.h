@@ -12,6 +12,7 @@
 //	NSMutableDictionary
 //===========================================================================================================================
 
+API_UNAVAILABLE(ios, watchos, tvos)
 @interface NSMutableDictionary (NSDictionaryOBEXExtensions)
 
 /* creation */
@@ -47,7 +48,8 @@
 -(OBEXError)addImageHandleHeader:(NSString*)type;
 -(OBEXError)addImageDescriptorHeader:(const void*)inHeaderData	length:(uint32_t)inHeaderDataLength;
 
-+(instancetype)withOBEXHeadersData:(const void*)inHeadersData headersDataSize:(size_t)inDataSize DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
+
++(instancetype)withOBEXHeadersData:(const void*)inHeadersData headersDataSize:(size_t)inDataSize API_DEPRECATED("No longer supported", macos(10.2, 10.7)) API_UNAVAILABLE(ios, watchos, tvos);
 
 
 @end

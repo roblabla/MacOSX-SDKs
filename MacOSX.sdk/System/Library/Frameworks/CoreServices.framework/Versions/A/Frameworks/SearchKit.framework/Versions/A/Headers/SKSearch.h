@@ -3,9 +3,9 @@
  
      Contains:   SearchKit Interfaces.
  
-     Version:    SearchKit-407~38
+     Version:    SearchKit-417.1
  
-     Copyright:  © 2003-2008 by Apple Computer, Inc., all rights reserved
+     Copyright:  2003-2019 by Apple, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -76,7 +76,7 @@ typedef struct __SKSearch*              SKSearchRef;
  *    Non-Carbon CFM:   not available
  */
 extern CFTypeID 
-SKSearchGetTypeID(void)                                       AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+SKSearchGetTypeID(void)                                       API_AVAILABLE( macos(10.4) ) API_UNAVAILABLE( macCatalyst );
 
 
 
@@ -129,7 +129,7 @@ extern SKSearchRef
 SKSearchCreate(
   SKIndexRef        inIndex,
   CFStringRef       inQuery,
-  SKSearchOptions   inSearchOptions)                          AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  SKSearchOptions   inSearchOptions)                          API_AVAILABLE( macos(10.4) ) API_UNAVAILABLE( macCatalyst );
 
 
 /*
@@ -144,7 +144,7 @@ SKSearchCreate(
  *    Non-Carbon CFM:   not available
  */
 extern void 
-SKSearchCancel(SKSearchRef inSearch)                          AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+SKSearchCancel(SKSearchRef inSearch)                          API_AVAILABLE( macos(10.4) ) API_UNAVAILABLE( macCatalyst );
 
 
 /*
@@ -198,7 +198,7 @@ SKSearchFindMatches(
   SKDocumentID *   outDocumentIDsArray,
   float *          outScoresArray,
   CFTimeInterval   maximumTime,
-  CFIndex *        outFoundCount)                             AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  CFIndex *        outFoundCount)                             API_AVAILABLE( macos(10.4) ) API_UNAVAILABLE( macCatalyst );
 
 
 /*
@@ -238,7 +238,7 @@ SKIndexCopyInfoForDocumentIDs(
   CFIndex         inCount,
   SKDocumentID *  inDocumentIDsArray,
   CFStringRef *   outNamesArray,
-  SKDocumentID *  outParentIDsArray)                          AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  SKDocumentID *  outParentIDsArray)                          API_AVAILABLE( macos(10.4) ) API_UNAVAILABLE( macCatalyst );
 
 
 /*
@@ -271,7 +271,7 @@ SKIndexCopyDocumentRefsForDocumentIDs(
   SKIndexRef       inIndex,
   CFIndex          inCount,
   SKDocumentID *   inDocumentIDsArray,
-  SKDocumentRef *  outDocumentRefsArray)                      AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  SKDocumentRef *  outDocumentRefsArray)                      API_AVAILABLE( macos(10.4) ) API_UNAVAILABLE( macCatalyst );
 
 
 /*
@@ -304,7 +304,7 @@ SKIndexCopyDocumentURLsForDocumentIDs(
   SKIndexRef      inIndex,
   CFIndex         inCount,
   SKDocumentID *  inDocumentIDsArray,
-  CFURLRef *      outDocumentURLsArray)                       AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
+  CFURLRef *      outDocumentURLsArray)                       API_AVAILABLE( macos(10.4) ) API_UNAVAILABLE( macCatalyst );
 
 
 /*
@@ -333,7 +333,7 @@ typedef struct __SKSearchGroup*         SKSearchGroupRef;
  *    Non-Carbon CFM:   not available
  */
 extern CFTypeID 
-SKSearchGroupGetTypeID(void)                                  AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+SKSearchGroupGetTypeID(void)                                  API_DEPRECATED("No longer supported", macos(10.3, 10.4)) API_UNAVAILABLE( macCatalyst );
 
 
 
@@ -356,7 +356,7 @@ typedef struct __SKSearchResults*       SKSearchResultsRef;
  *    Non-Carbon CFM:   not available
  */
 extern CFTypeID 
-SKSearchResultsGetTypeID(void)                                AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+SKSearchResultsGetTypeID(void)                                API_DEPRECATED("No longer supported", macos(10.3, 10.4)) API_UNAVAILABLE( macCatalyst );
 
 
 
@@ -432,7 +432,7 @@ typedef CALLBACK_API_C( Boolean , SKSearchResultsFilterCallBack )(SKIndexRef inI
  *    Non-Carbon CFM:   not available
  */
 extern SKSearchGroupRef 
-SKSearchGroupCreate(CFArrayRef inArrayOfInIndexes)            AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+SKSearchGroupCreate(CFArrayRef inArrayOfInIndexes)            API_DEPRECATED("No longer supported", macos(10.3, 10.4)) API_UNAVAILABLE( macCatalyst );
 
 
 /*
@@ -450,7 +450,7 @@ SKSearchGroupCreate(CFArrayRef inArrayOfInIndexes)            AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   not available
  */
 extern CFArrayRef 
-SKSearchGroupCopyIndexes(SKSearchGroupRef inSearchGroup)      AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+SKSearchGroupCopyIndexes(SKSearchGroupRef inSearchGroup)      API_DEPRECATED("No longer supported", macos(10.3, 10.4)) API_UNAVAILABLE( macCatalyst );
 
 
 /*
@@ -502,7 +502,7 @@ SKSearchResultsCreateWithQuery(
   SKSearchType                    inSearchType,
   CFIndex                         inMaxFoundDocuments,
   void *                          inContext,
-  SKSearchResultsFilterCallBack   inFilterCallBack)           AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  SKSearchResultsFilterCallBack   inFilterCallBack)           API_DEPRECATED("No longer supported", macos(10.3, 10.4)) API_UNAVAILABLE( macCatalyst );
 
 
 /*
@@ -551,7 +551,7 @@ SKSearchResultsCreateWithDocuments(
   CFArrayRef                      inExampleDocuments,
   CFIndex                         inMaxFoundDocuments,
   void *                          inContext,
-  SKSearchResultsFilterCallBack   inFilterCallBack)           AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  SKSearchResultsFilterCallBack   inFilterCallBack)           API_DEPRECATED("No longer supported", macos(10.3, 10.4)) API_UNAVAILABLE( macCatalyst );
 
 
 /*
@@ -566,7 +566,7 @@ SKSearchResultsCreateWithDocuments(
  *    Non-Carbon CFM:   not available
  */
 extern CFIndex 
-SKSearchResultsGetCount(SKSearchResultsRef inSearchResults)   AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+SKSearchResultsGetCount(SKSearchResultsRef inSearchResults)   API_DEPRECATED("No longer supported", macos(10.3, 10.4)) API_UNAVAILABLE( macCatalyst );
 
 
 /*
@@ -620,7 +620,7 @@ SKSearchResultsGetInfoInRange(
   CFRange              inRange,
   SKDocumentRef *      outDocumentsArray,
   SKIndexRef *         outIndexesArray,
-  float *              outScoresArray)                        AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  float *              outScoresArray)                        API_DEPRECATED("No longer supported", macos(10.3, 10.4)) API_UNAVAILABLE( macCatalyst );
 
 
 /*
@@ -649,7 +649,7 @@ SKSearchResultsGetInfoInRange(
 extern CFArrayRef 
 SKSearchResultsCopyMatchingTerms(
   SKSearchResultsRef   inSearchResults,
-  CFIndex              inItem)                                AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_4;
+  CFIndex              inItem)                                API_DEPRECATED("No longer supported", macos(10.3, 10.4)) API_UNAVAILABLE( macCatalyst );
 
 
 

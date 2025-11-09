@@ -5,7 +5,7 @@
  
      Version:    Carbon-~1
  
-     Copyright:  © 2000-2008 by Apple Computer, Inc., all rights reserved.
+     Copyright:  ï¿½ 2000-2008 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -27,10 +27,6 @@
 
 #ifndef __HITOOLBOX_R__
 #include <HIToolbox/HIToolbox.r>
-#endif
-
-#ifndef __CARBONSOUND_R__
-#include <CarbonSound/CarbonSound.r>
 #endif
 
 #ifndef __OPENSCRIPTING_R__

@@ -86,7 +86,7 @@ Possible keywords may include:
 .It Va addr               Ta "- + -"  Ta ""       Ta "DNS name or IP address of server"
 .It Va nbtimeout          Ta "+ + -"  Ta "1s"     Ta "Timeout for resolving a NetBIOS name"
 .It Va minauth            Ta "+ + -"  Ta "NTLMv2" Ta "Minimum authentication level allowed"
-.It Va port445            Ta "+ + -"  Ta "normal" Ta "How to use SMB TCP/UDP ports"
+.It Va port445            Ta "+ + -"  Ta "both"   Ta "How to use SMB TCP/UDP ports"
 .It Va streams            Ta "+ + +"  Ta "yes"    Ta "Use NTFS Streams if server supported"
 .It Va soft               Ta "+ + +"  Ta ""       Ta "Make the mount soft"
 .It Va notify_off         Ta "+ + +"  Ta "no"     Ta "Turn off using notifications"
@@ -133,7 +133,7 @@ plain-text passwords are used. Required for servers that don't support extended 
 .Pp
 "How to use SMB TCP/UDP ports" can be one of:
 .Bl -tag -width ".Li netbios_only"
-.It Li normal
+.It Li both
 Attempt to connect via port 445. If that is
 unsuccessful, try to connect via NetBIOS.
 .It Li netbios_only

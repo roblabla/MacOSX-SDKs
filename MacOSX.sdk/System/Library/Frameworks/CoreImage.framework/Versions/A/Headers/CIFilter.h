@@ -249,6 +249,19 @@ NS_CLASS_AVAILABLE(10_4, 5_0)
 @end
 
 
+@protocol CIFilter
+
+    @property (readonly, nonatomic, nullable) CIImage *outputImage;
+
+    @optional
+
+    // CIFilter subclasses can implement 'customAttributes' to return a dictionary
+    // containing key/value pairs describing the filter. (see description of keys below)
+    + (nullable NSDictionary<NSString *,id>*) customAttributes;
+
+@end
+
+
 /** Methods to register a filter and get access to the list of registered filters
  Use these methods to create filters and find filters. */
 @interface CIFilter (CIFilterRegistry)

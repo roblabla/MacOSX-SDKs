@@ -1,10 +1,9 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: B75B04AD-69FE-3ADE-84D2-C17972FC8F49' ]
-platform:        macosx
-install-name:    /usr/lib/system/libsystem_platform.dylib
-current-version: 177.200.16
-objc-constraint: none
+uuids:           [ 'x86_64: 160B2E8C-48AE-35FD-86B5-6D058B93CCF5', 'x86_64: 160B2E8C-48AE-35FD-86B5-6D058B93CCF5' ]
+platform:        zippered
+install-name:    '/usr/lib/system/libsystem_platform.dylib'
+current-version: 220
 parent-umbrella: System
 exports:         
   - archs:           [ x86_64 ]
@@ -50,10 +49,11 @@ exports:
                        _os_unfair_lock_lock_with_options, _os_unfair_lock_lock_with_options_4Libc, 
                        _os_unfair_lock_trylock, _os_unfair_lock_unlock, _os_unfair_lock_unlock_4Libc, 
                        _os_unfair_lock_unlock_no_tsd_4libpthread, _os_unfair_recursive_lock_lock_with_options, 
-                       _os_unfair_recursive_lock_trylock, _os_unfair_recursive_lock_tryunlock4objc, 
-                       _os_unfair_recursive_lock_unlock, _platform_task_attach, _platform_task_copy_next_thread, 
-                       _platform_task_detach, _platform_task_is_64_bit, _platform_task_perform, 
-                       _platform_task_resume_threads, _platform_task_suspend_threads, 
+                       _os_unfair_recursive_lock_owned, _os_unfair_recursive_lock_trylock, 
+                       _os_unfair_recursive_lock_tryunlock4objc, _os_unfair_recursive_lock_unlock, 
+                       _os_unfair_recursive_lock_unlock_forked_child, _platform_task_attach, 
+                       _platform_task_copy_next_thread, _platform_task_detach, _platform_task_is_64_bit, 
+                       _platform_task_perform, _platform_task_resume_threads, _platform_task_suspend_threads, 
                        _platform_task_update_threads, _platform_thread_abort_safely, 
                        _platform_thread_get_pthread, _platform_thread_get_state, 
                        _platform_thread_get_unique_id, _platform_thread_info, _platform_thread_perform, 

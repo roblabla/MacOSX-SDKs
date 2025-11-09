@@ -146,7 +146,7 @@ typedef AVAudioEngineManualRenderingStatus (^AVAudioEngineManualRenderingBlock)(
 		audio device and rendering in response to requests from the client, normally at or
 		faster than realtime rate.
 */
-OS_EXPORT API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0))
+API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0))
 @interface AVAudioEngine : NSObject {
 @private
 	void *_impl;
@@ -493,6 +493,12 @@ _player = [[AVAudioPlayerNode alloc] init];
 */
 @property (nonatomic, getter=isAutoShutdownEnabled) BOOL autoShutdownEnabled API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0)) API_UNAVAILABLE(watchos);
 
+/*! @property attachedNodes
+	@abstract
+		Set of all nodes attached to the engine.
+ */
+@property (readonly, copy) NSSet<AVAudioNode *> *attachedNodes API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0));
+
 #pragma mark -
 #pragma mark Manual Rendering Mode
 
@@ -500,7 +506,7 @@ _player = [[AVAudioPlayerNode alloc] init];
 	@abstract
 		Set the engine to operate in manual rendering mode with the specified render format and
 		maximum frame count.
-	@param format
+	@param pcmFormat
 		The format of the output PCM audio data from the engine
 	@param maximumFrameCount
 		The maximum number of PCM sample frames the engine will be asked to produce in any single
@@ -783,7 +789,6 @@ _player = [[AVAudioPlayerNode alloc] init];
 		because the callback happens on an internal dispatch queue and can deadlock while trying to 
 		synchronously teardown the engine.
 */
-AVF_EXPORT
-NSString *const AVAudioEngineConfigurationChangeNotification API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0));
+extern NSString *const AVAudioEngineConfigurationChangeNotification API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0));
 
 NS_ASSUME_NONNULL_END

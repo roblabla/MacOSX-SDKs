@@ -1,5 +1,5 @@
 /*	NSTextCheckingResult.h
-	Copyright (c) 2008-2018, Apple Inc. All rights reserved.
+	Copyright (c) 2008-2019, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -37,7 +37,7 @@ NS_ENUM(NSTextCheckingTypes) {
 
 typedef NSString *NSTextCheckingKey NS_EXTENSIBLE_STRING_ENUM;
 
-NS_CLASS_AVAILABLE(10_6, 4_0)
+API_AVAILABLE(macos(10.6), ios(4.0), watchos(2.0), tvos(9.0))
 @interface NSTextCheckingResult : NSObject <NSCopying, NSSecureCoding>
 
 /* Mandatory properties, used with all types of results. */

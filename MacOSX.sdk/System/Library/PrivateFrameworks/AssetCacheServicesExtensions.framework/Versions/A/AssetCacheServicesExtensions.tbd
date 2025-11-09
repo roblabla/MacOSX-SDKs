@@ -1,9 +1,9 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 3F108A91-2FEE-3E8E-A560-B3CA4B10A100' ]
-platform:        macosx
-install-name:    /System/Library/PrivateFrameworks/AssetCacheServicesExtensions.framework/Versions/A/AssetCacheServicesExtensions
-current-version: 83.3
+uuids:           [ 'x86_64: 23266607-840F-3013-A59E-F5BBED1E297F', 'x86_64: 23266607-840F-3013-A59E-F5BBED1E297F' ]
+platform:        zippered
+install-name:    '/System/Library/PrivateFrameworks/AssetCacheServicesExtensions.framework/Versions/A/AssetCacheServicesExtensions'
+current-version: 106
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _AssetCacheServicesExtensionsVersionNumber, _AssetCacheServicesExtensionsVersionString, 
@@ -29,8 +29,8 @@ exports:
                        _kACMetricsRepliesFromPeerToChild, _kACMetricsRepliesFromPeerToClient, 
                        _kACMetricsRequestsFromChild, _kACMetricsRequestsFromClient, 
                        _kACMetricsRequestsFromPeer, _kACMetricsRequestsRejectedForNoSpace, 
-                       _kACSEAllServersKey, _kACSECurrentUserKey, _kACSEMightHaveKey, 
-                       _kACSEPersonalCachingAndImportKey, _kACSEPersonalCachingKey, 
+                       _kACSEAllServersKey, _kACSECurrentUserKey, _kACSEFavoredServerRangesKey, 
+                       _kACSEMightHaveKey, _kACSEPersonalCachingAndImportKey, _kACSEPersonalCachingKey, 
                        _kACSEPublicIPAddressKey, _kACSEPublicIPAddressRangesKey, 
                        _kACSEReachabilityKey, _kACSERefreshedServersKey, _kACSESavedServersKey, 
                        _kACSESharedCachingKey, _kACSESystemKey, _kACSMCacheStatusLowSpace, 
@@ -50,26 +50,28 @@ exports:
                        _kACSMPeerHealthyKey, _kACSMPeerPortKey, _kACSMPeerVersionKey, 
                        _kACSMRangeFirstKey, _kACSMRangeLastKey, _kACSMRangeTypeIPv4, 
                        _kACSMRangeTypeIPv6, _kACSMRangeTypeKey, _kACSMRecordNameKey, 
-                       _kACSMRecordValueKey, _kACSMSettingsAllowPersonalCachingKey, 
+                       _kACSMRecordValueKey, _kACSMSettingsAllowCacheDeleteKey, _kACSMSettingsAllowPersonalCachingKey, 
                        _kACSMSettingsAllowSharedCachingKey, _kACSMSettingsAllowTetheredCachingKey, 
-                       _kACSMSettingsCacheLimitKey, _kACSMSettingsDataPathKey, _kACSMSettingsListenRangesKey, 
+                       _kACSMSettingsCacheLimitKey, _kACSMSettingsDataPathKey, _kACSMSettingsDisplayAlertsKey, 
+                       _kACSMSettingsKeepAwakeKey, _kACSMSettingsListenRangesKey, 
                        _kACSMSettingsListenRangesOnlyKey, _kACSMSettingsLocalSubnetsOnlyKey, 
                        _kACSMSettingsParentSelectionPolicyKey, _kACSMSettingsParentsKey, 
                        _kACSMSettingsPeerFilterRangesKey, _kACSMSettingsPeerListenRangesKey, 
                        _kACSMSettingsPeerLocalSubnetsOnlyKey, _kACSMSettingsPersonalCacheLimitKey, 
                        _kACSMSettingsPublicRangesKey, _kACSMStartupStatusFailed, 
                        _kACSMStartupStatusMigratingData, _kACSMStartupStatusOK, _kACSMStartupStatusPending, 
-                       _kACSMStatusActivatedKey, _kACSMStatusActiveKey, _kACSMStatusAlertsForPeerFilterRangesKey, 
-                       _kACSMStatusAlertsKey, _kACSMStatusCacheDetailsKey, _kACSMStatusCacheFreeKey, 
-                       _kACSMStatusCacheLimitKey, _kACSMStatusCacheStatusKey, _kACSMStatusCacheUsedKey, 
-                       _kACSMStatusDataMigrationCompletedKey, _kACSMStatusDataMigrationErrorKey, 
-                       _kACSMStatusDataMigrationProgressKey, _kACSMStatusParentsKey, 
-                       _kACSMStatusPeersKey, _kACSMStatusPersonalCacheFreeKey, _kACSMStatusPersonalCacheLimitKey, 
-                       _kACSMStatusPersonalCacheUsedKey, _kACSMStatusPortKey, _kACSMStatusPrivateAddressesKey, 
-                       _kACSMStatusPublicAddressKey, _kACSMStatusRegistrationErrorKey, 
-                       _kACSMStatusRegistrationResponseCodeKey, _kACSMStatusRegistrationStartedKey, 
-                       _kACSMStatusRegistrationStatusKey, _kACSMStatusRestrictedMediaKey, 
-                       _kACSMStatusServerGUIDKey, _kACSMStatusStartupStatusKey, _kACSMStatusTotalBytesAreSinceKey, 
+                       _kACSMStatusActivatedKey, _kACSMStatusActiveKey, _kACSMStatusActualCacheUsedKey, 
+                       _kACSMStatusAlertsForPeerFilterRangesKey, _kACSMStatusAlertsKey, 
+                       _kACSMStatusCacheDetailsKey, _kACSMStatusCacheFreeKey, _kACSMStatusCacheLimitKey, 
+                       _kACSMStatusCacheStatusKey, _kACSMStatusCacheUsedKey, _kACSMStatusDataMigrationCompletedKey, 
+                       _kACSMStatusDataMigrationErrorKey, _kACSMStatusDataMigrationProgressKey, 
+                       _kACSMStatusParentsKey, _kACSMStatusPeersKey, _kACSMStatusPersonalCacheFreeKey, 
+                       _kACSMStatusPersonalCacheLimitKey, _kACSMStatusPersonalCacheUsedKey, 
+                       _kACSMStatusPortKey, _kACSMStatusPrivateAddressesKey, _kACSMStatusPublicAddressKey, 
+                       _kACSMStatusRegistrationErrorKey, _kACSMStatusRegistrationResponseCodeKey, 
+                       _kACSMStatusRegistrationStartedKey, _kACSMStatusRegistrationStatusKey, 
+                       _kACSMStatusRestrictedMediaKey, _kACSMStatusServerGUIDKey, 
+                       _kACSMStatusStartupStatusKey, _kACSMStatusTotalBytesAreSinceKey, 
                        _kACSMStatusTotalBytesDroppedKey, _kACSMStatusTotalBytesImportedKey, 
                        _kACSMStatusTotalBytesReturnedToChildrenKey, _kACSMStatusTotalBytesReturnedToClientsKey, 
                        _kACSMStatusTotalBytesReturnedToPeersKey, _kACSMStatusTotalBytesStoredFromOriginKey, 

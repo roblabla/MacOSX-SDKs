@@ -12,7 +12,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-typedef NSString * CAGradientLayerType NS_STRING_ENUM;
+typedef NSString * CAGradientLayerType NS_TYPED_ENUM;
 
 API_AVAILABLE(macos(10.6), ios(3.0), watchos(2.0), tvos(9.0))
 @interface CAGradientLayer : CALayer

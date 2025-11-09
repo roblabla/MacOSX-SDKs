@@ -2,7 +2,7 @@
 //  INPlayMediaIntentResponse.h
 //  Intents
 //
-//  Copyright (c) 2016-2017 Apple Inc. All rights reserved.
+//  Copyright (c) 2016-2019 Apple Inc. All rights reserved.
 //
 
 #import <Intents/INIntentResponse.h>
@@ -36,7 +36,7 @@ API_UNAVAILABLE(macosx)
 
 @property (readonly, NS_NONATOMIC_IOSONLY) INPlayMediaIntentResponseCode code;
 
-// This dictionary should be populated using the keys from MPNowPlayingInfoCenter
+// This dictionary should be populated using the keys from MPNowPlayingInfoCenter.
 @property (readwrite, copy, nullable, NS_NONATOMIC_IOSONLY) NSDictionary<NSString *, id> *nowPlayingInfo;
 
 @end

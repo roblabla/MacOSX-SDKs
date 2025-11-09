@@ -1,16 +1,15 @@
 /*
         NSTableHeaderCell.h
         Application Kit
-        Copyright (c) 1995-2018, Apple Inc.
+        Copyright (c) 1995-2019, Apple Inc.
         All rights reserved.
 */
 #import <AppKit/NSTextFieldCell.h>
 
 NS_ASSUME_NONNULL_BEGIN
+API_UNAVAILABLE_BEGIN(ios)
 
-@interface NSTableHeaderCell : NSTextFieldCell {
-
-}
+@interface NSTableHeaderCell : NSTextFieldCell
 
 /* Draws a sorting indicator given a cellFrame. If priority is 0, this is the primary sort indicator. If ascending is YES, a "^" indicator will be drawn.  Override this routine to customimze the sorting UI.
 */
@@ -22,4 +21,5 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+API_UNAVAILABLE_END
 NS_ASSUME_NONNULL_END

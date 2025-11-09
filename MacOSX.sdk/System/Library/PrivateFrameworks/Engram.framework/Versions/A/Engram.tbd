@@ -1,8 +1,8 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: A7A2BA5D-34D9-30DB-BEC5-DCCBBC98BE60' ]
-platform:        macosx
-install-name:    /System/Library/PrivateFrameworks/Engram.framework/Versions/A/Engram
+uuids:           [ 'x86_64: 41D68976-995A-3B67-A31F-7FE2F5BD875B', 'x86_64: 41D68976-995A-3B67-A31F-7FE2F5BD875B' ]
+platform:        zippered
+install-name:    '/System/Library/PrivateFrameworks/Engram.framework/Versions/A/Engram'
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _ENCypherErrorDomain, _ENGroupContextErrorDomain, _ENGroupContextErrorItemKey, 

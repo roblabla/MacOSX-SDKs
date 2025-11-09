@@ -79,7 +79,7 @@
 
 
 
-typedef NS_ENUM(NSInteger, IKScannerDeviceViewTransferMode)
+typedef NS_CLOSED_ENUM(NSInteger, IKScannerDeviceViewTransferMode)
 {
     IKScannerDeviceViewTransferModeFileBased = 0,
     IKScannerDeviceViewTransferModeMemoryBased
@@ -87,8 +87,9 @@ typedef NS_ENUM(NSInteger, IKScannerDeviceViewTransferMode)
 
 
 
-typedef NS_ENUM(NSInteger, IKScannerDeviceViewDisplayMode)
+typedef NS_CLOSED_ENUM(NSInteger, IKScannerDeviceViewDisplayMode)
 {
+    IKScannerDeviceViewDisplayModeNone = -1,
     IKScannerDeviceViewDisplayModeSimple,
     IKScannerDeviceViewDisplayModeAdvanced
 };

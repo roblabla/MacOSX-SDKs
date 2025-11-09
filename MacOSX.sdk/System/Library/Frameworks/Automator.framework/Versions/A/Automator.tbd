@@ -1,8 +1,8 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 057A27EA-4C47-31B3-94A2-E4E2FE202464' ]
+uuids:           [ 'x86_64: 1A3729E5-3B25-3FE1-84AB-87F64F2B279B' ]
 platform:        macosx
-install-name:    /System/Library/Frameworks/Automator.framework/Versions/A/Automator
+install-name:    '/System/Library/Frameworks/Automator.framework/Versions/A/Automator'
 current-version: 0
 exports:         
   - archs:           [ x86_64 ]
@@ -17,10 +17,10 @@ exports:
                        _AMContainerKey, _AMContainerValueList, _AMDocumentExtensionApp, 
                        _AMDocumentExtensionWorkflow, _AMDocumentTypeApplication, 
                        _AMDocumentTypeWorkflow, _AMErrorWithInfo, _AMErrorWithMessage, 
-                       _AMFileUTIWorkflow, _AMLocalizedStringWithTemplate, _AMPathFromAliasDescriptor, 
-                       _AMPlainTextFromAttributedString, _AMQuarantineErrorDomain, 
-                       _AMRectFromPoints, _AMRoundedRectPath, _AMRunActionPanel, 
-                       _AMSBObjectFromObjectDescriptor, _AMSecAssessIsURLSignedByApple, 
+                       _AMFFeedParserErrorDomain, _AMFileUTIWorkflow, _AMLocalizedStringWithTemplate, 
+                       _AMPathFromAliasDescriptor, _AMPlainTextFromAttributedString, 
+                       _AMQuarantineErrorDomain, _AMRectFromPoints, _AMRoundedRectPath, 
+                       _AMRunActionPanel, _AMSBObjectFromObjectDescriptor, _AMSecAssessIsURLSignedByApple, 
                        _AMSecurityHelperThirdPartyActionsAllowedChangedNotification, 
                        _AMServicesControllerErrorDomain, _AMStringObjectWithArray, 
                        _AMTokenFieldFormatterKey, _AMTypeCategoryFilesAndFolders, 
@@ -100,6 +100,7 @@ exports:
                        _kAMAddressBookItemsRowTemplateFactoryMiddleNameKey, _kAMAddressBookItemsRowTemplateFactoryModificationDateKey, 
                        _kAMAddressBookItemsRowTemplateFactoryNoteKey, _kAMAddressBookItemsRowTemplateFactoryStateKey, 
                        _kAMAddressBookItemsRowTemplateFactoryURLKey, _kAMAddressBookItemsRowTemplateFactoryZipCodeKey, 
+                       _kAMFFeedControllerErrorDomain, _kAMFFeedFinderErrorDomain, 
                        _kAMFinderItemsRowTemplateFactoryAnyKeywordKey, _kAMFinderItemsRowTemplateFactoryCreateDateKey, 
                        _kAMFinderItemsRowTemplateFactoryFileExtensionKey, _kAMFinderItemsRowTemplateFactoryLastUsedDateKey, 
                        _kAMFinderItemsRowTemplateFactoryModifiedDateKey, _kAMRowTemplateFactoryAcceptsTypesKey, 
@@ -148,8 +149,11 @@ exports:
                        AMDescriptionViewController, AMDescriptionViewItem, AMDictationCommandWorkflowMetaData, 
                        AMDictationCommandWorkflowPersonality, AMDictationServicesSoftLinking, 
                        AMDiskBasedCacheLocationEntry, AMDotMacSyncSoftLinking, AMEventKitCalendarItemXPCToken, 
-                       AMEventKitCalendarXPCToken, AMEventKitSoftLinking, AMFilterItemsAction, 
-                       AMFindItemsAction, AMFolderActionWorkflowMetaData, AMFolderActionWorkflowPersonality, 
+                       AMEventKitCalendarXPCToken, AMEventKitSoftLinking, AMFCompletionFeedParserDelegate, 
+                       AMFFeed, AMFFeedContent, AMFFeedController, AMFFeedElement, 
+                       AMFFeedEnclosure, AMFFeedEntry, AMFFeedFinder, AMFFeedMetadata, 
+                       AMFFeedParser, AMFFeedPerson, AMFilterItemsAction, AMFindItemsAction, 
+                       AMFolderActionWorkflowMetaData, AMFolderActionWorkflowPersonality, 
                        AMFolderActionsKitSoftLinking, AMGeneralWorkflowPersonality, 
                        AMGenericAction, AMGenericActionLoader, AMGetItemsAction, 
                        AMGetItemsPanelController, AMGetItemsTableView, AMGlossyStatusView, 
@@ -165,9 +169,9 @@ exports:
                        AMPluginHeaderViewController, AMPluginInstallerController, 
                        AMPopUpButton, AMPrintWorkflowPersonality, AMProxyAction, 
                        AMRelativeDateRowTemplate, AMRemoteRunnerController, AMRemoteRunnerXPCDelegate, 
-                       AMResultsItem, AMResultsTableView, AMResultsViewController, 
-                       AMResultsViewOverlayView, AMRunActionAsyncOperation, AMRunActionOperation, 
-                       AMSBObjectToAliasConversionAction, AMSBObjectToSBObjectConversionAction, 
+                       AMRemoveQuarantineRecoveryAttempter, AMResultsItem, AMResultsTableView, 
+                       AMResultsViewController, AMResultsViewOverlayView, AMRunActionAsyncOperation, 
+                       AMRunActionOperation, AMSBObjectToAliasConversionAction, AMSBObjectToSBObjectConversionAction, 
                        AMScriptMenuWorkflowPersonality, AMScriptingBridgeAppRegistry, 
                        AMScriptingBridgeConversionAction, AMSecurityHelperWindowController, 
                        AMSecurityHelperWindowControllerRecoveryAttempter, AMSendProc, 
@@ -323,7 +327,8 @@ exports:
                        AMCacheLocationEntry._firstKeyInPlistData, AMCacheLocationEntry._regularActionsByBundleIdentifier, 
                        AMCacheLocationEntry._rootDirectoryLocationURL, AMCacheLocationEntry._rootDirectoryModificationDate, 
                        AMMediaPanel._mediaBrowserView, AMMediaPanel._observers, AMMediaPanel._segmentedControl, 
-                       AMOpenAutomatorRecoveryAttempter.__recoveryOptionIndex, AMUnknownXPCToken._classDescription, 
+                       AMOpenAutomatorRecoveryAttempter.__recoveryOptionIndex, AMRemoveQuarantineRecoveryAttempter.__recoveryOptionIndex, 
+                       AMRemoveQuarantineRecoveryAttempter.__url, AMUnknownXPCToken._classDescription, 
                        AMUnknownXPCToken._objectDescription, AMValidatedCacheLocationEntry._actionBundleIDListsByActionType, 
                        AMValidatedCacheLocationEntry._plistKeyPathMutableString, 
                        AMValidatedCacheLocationEntry._propertyListData, AMWorkflowController.workflowView, 

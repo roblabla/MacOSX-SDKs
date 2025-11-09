@@ -1,6 +1,6 @@
 /*
     File:		IOBluetoothSDPServiceAttribute.h
-    Copyright:	© 2002 by Apple Computer, Inc. All rights reserved.
+    Copyright:	ï¿½ 2002 by Apple Computer, Inc. All rights reserved.
 */
 
 #import <Foundation/Foundation.h>
@@ -15,6 +15,7 @@
     @discussion A service attribute contains two components: an attribute ID and a data element.
 */
 
+API_UNAVAILABLE(ios, watchos, tvos)
 @interface IOBluetoothSDPServiceAttribute : NSObject <NSCoding, NSSecureCoding> {
     BluetoothSDPServiceAttributeID	mAttributeID;
     IOBluetoothSDPDataElement		*mAttributeDataElement;

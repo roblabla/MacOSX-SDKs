@@ -166,7 +166,7 @@ size_t	 fwrite(const void * __restrict __ptr, size_t __size, size_t __nitems, FI
 int	 getc(FILE *);
 int	 getchar(void);
 char	*gets(char *);
-void	 perror(const char *);
+void	 perror(const char *) __cold;
 int	 printf(const char * __restrict, ...) __printflike(1, 2);
 int	 putc(int, FILE *);
 int	 putchar(int);
@@ -202,11 +202,7 @@ __END_DECLS
 #define	L_ctermid	1024	/* size for ctermid(); PATH_MAX */
 
 __BEGIN_DECLS
-#ifndef __CTERMID_DEFINED
-/* Multiply defined in stdio.h and unistd.h by SUS */
-#define __CTERMID_DEFINED 1
-char	*ctermid(char *);
-#endif
+#include <_ctermid.h>
 
 #if defined(_DARWIN_UNLIMITED_STREAMS) || defined(_DARWIN_C_SOURCE)
 FILE	*fdopen(int, const char *) __DARWIN_ALIAS_STARTING(__MAC_10_6, __IPHONE_3_2, __DARWIN_EXTSN(fdopen));

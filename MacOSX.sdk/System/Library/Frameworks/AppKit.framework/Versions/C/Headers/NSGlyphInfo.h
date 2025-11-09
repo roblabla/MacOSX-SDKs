@@ -1,6 +1,7 @@
+#if !__has_include(<UIFoundation/NSGlyphInfo.h>)
 /*
 	NSGlyphInfo.h
-	Copyright (c) 2002-2018, Apple Inc.
+	Copyright (c) 2002-2019, Apple Inc.
 	All rights reserved.
 */
 
@@ -8,11 +9,9 @@
 #import <AppKit/NSFont.h>
 
 NS_ASSUME_NONNULL_BEGIN
+#if !TARGET_OS_IPHONE
 
-@interface NSGlyphInfo : NSObject <NSCopying, NSSecureCoding> {
-    @package
-    NSString *_baseString APPKIT_IVAR;
-}
+@interface NSGlyphInfo : NSObject <NSCopying, NSSecureCoding>
 
 + (nullable NSGlyphInfo *)glyphInfoWithCGGlyph:(CGGlyph)glyph forFont:(NSFont *)font baseString:(NSString *)string API_AVAILABLE(macos(10.13), ios(11.0), watchos(4.0), tvos(11.0));
 
@@ -40,4 +39,11 @@ typedef NS_ENUM(NSUInteger, NSCharacterCollection) {
 @property (readonly) NSCharacterCollection characterCollection;
 @end
 
+
+
+#endif // !TARGET_OS_IPHONE
 NS_ASSUME_NONNULL_END
+#else
+#import <UIFoundation/NSGlyphInfo.h>
+#endif
+

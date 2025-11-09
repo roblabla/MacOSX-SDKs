@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1999-2017 Apple Inc. All rights reserved.
+ * Copyright (c) 1999-2019 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  *
@@ -26,5 +26,5 @@
  * @APPLE_OSREFERENCE_LICENSE_HEADER_END@
  */
 #ifndef DLIL_H
-#define	DLIL_H
+#define DLIL_H
 #endif /* DLIL_H */

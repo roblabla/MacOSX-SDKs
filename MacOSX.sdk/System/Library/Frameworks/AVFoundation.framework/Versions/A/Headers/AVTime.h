@@ -24,14 +24,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface NSValue (NSValueAVFoundationExtensions)
 
-+ (NSValue *)valueWithCMTime:(CMTime)time NS_AVAILABLE(10_7, 4_0);
-@property (readonly) CMTime CMTimeValue NS_AVAILABLE(10_7, 4_0);
++ (NSValue *)valueWithCMTime:(CMTime)time API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0));
+@property (readonly) CMTime CMTimeValue API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0));
 
-+ (NSValue *)valueWithCMTimeRange:(CMTimeRange)timeRange NS_AVAILABLE(10_7, 4_0);
-@property (readonly) CMTimeRange CMTimeRangeValue NS_AVAILABLE(10_7, 4_0);
++ (NSValue *)valueWithCMTimeRange:(CMTimeRange)timeRange API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0));
+@property (readonly) CMTimeRange CMTimeRangeValue API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0));
 
-+ (NSValue *)valueWithCMTimeMapping:(CMTimeMapping)timeMapping NS_AVAILABLE(10_7, 4_0);
-@property (readonly) CMTimeMapping CMTimeMappingValue NS_AVAILABLE(10_7, 4_0);
++ (NSValue *)valueWithCMTimeMapping:(CMTimeMapping)timeMapping API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0));
+@property (readonly) CMTimeMapping CMTimeMappingValue API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0));
 
 @end
 
@@ -39,14 +39,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface NSCoder (AVTimeCoding)
 
-- (void)encodeCMTime:(CMTime)time forKey:(NSString *)key NS_AVAILABLE(10_7, 4_0);
-- (CMTime)decodeCMTimeForKey:(NSString *)key NS_AVAILABLE(10_7, 4_0);
+- (void)encodeCMTime:(CMTime)time forKey:(NSString *)key API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0));
+- (CMTime)decodeCMTimeForKey:(NSString *)key API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0));
 
-- (void)encodeCMTimeRange:(CMTimeRange)timeRange forKey:(NSString *)key NS_AVAILABLE(10_7, 4_0);
-- (CMTimeRange)decodeCMTimeRangeForKey:(NSString *)key NS_AVAILABLE(10_7, 4_0);
+- (void)encodeCMTimeRange:(CMTimeRange)timeRange forKey:(NSString *)key API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0));
+- (CMTimeRange)decodeCMTimeRangeForKey:(NSString *)key API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0));
 
-- (void)encodeCMTimeMapping:(CMTimeMapping)timeMapping forKey:(NSString *)key NS_AVAILABLE(10_7, 4_0);
-- (CMTimeMapping)decodeCMTimeMappingForKey:(NSString *)key NS_AVAILABLE(10_7, 4_0);
+- (void)encodeCMTimeMapping:(CMTimeMapping)timeMapping forKey:(NSString *)key API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0));
+- (CMTimeMapping)decodeCMTimeMappingForKey:(NSString *)key API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0));
 
 @end
 

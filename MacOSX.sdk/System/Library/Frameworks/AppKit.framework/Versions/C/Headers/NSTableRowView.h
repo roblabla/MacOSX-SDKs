@@ -1,7 +1,7 @@
 /*
     NSTableRowView.h
     Application Kit
-    Copyright (c) 2008-2018, Apple Inc.
+    Copyright (c) 2008-2019, Apple Inc.
     All rights reserved.
 */
 
@@ -14,51 +14,12 @@
 /* View Based TableView: The NSTableRowView is the view shown for a row in the table. It is responsible for drawing things associated with the row, including the selection highlight, and group row look. Properties can be changed on a row-by-row basis by using the table delegate method -tableView:didAddRowView:forRow:. Modifications of the properties are NOT reflected by the NSTableView instance; the NSTableRowView is simply a representation of the state. In other words, setting rowView.selected will NOT change the -selectedRowIndexes in NSTableView.
  */
 NS_ASSUME_NONNULL_BEGIN
+API_UNAVAILABLE_BEGIN(ios)
 
 @class NSLayoutConstraint;
 
-NS_CLASS_AVAILABLE(10_7, NA)
-@interface NSTableRowView : NSView <NSAccessibilityRow> {
-@private
-    __unsafe_unretained NSView **_columnViews APPKIT_IVAR;
-    NSInteger _columnCount APPKIT_IVAR;
-    
-    NSTableViewSelectionHighlightStyle _selectionHighlightStyle APPKIT_IVAR;
-    NSTableViewDraggingDestinationFeedbackStyle _draggingDestinationFeedbackStyle APPKIT_IVAR;
-    
-    CGFloat _dropOperationIndentation APPKIT_IVAR;
-
-    NSColor *_backgroundColor APPKIT_IVAR;
-    NSMutableDictionary<NSNumber *, NSArray<NSLayoutConstraint *> *> *_columnConstraints APPKIT_IVAR;
-
-    unsigned int _targetForDropOperation:1 APPKIT_IVAR;
-    unsigned int _groupRowStyle:2 APPKIT_IVAR;
-    unsigned int _priorRowSelected:1 APPKIT_IVAR;
-    unsigned int _nextRowSelected:1 APPKIT_IVAR;
-    unsigned int _selected:1 APPKIT_IVAR;
-    unsigned int _emphasized:1 APPKIT_IVAR;
-    unsigned int _hasAssociatedViews:1 APPKIT_IVAR;
-    unsigned int _backgroundStylesDirty:1 APPKIT_IVAR;
-    unsigned int _isFloating:1 APPKIT_IVAR;
-    unsigned int _hasCustomGridColor:1 APPKIT_IVAR;
-    unsigned int _usingCachedImageOnly:1 APPKIT_IVAR;
-    unsigned int _gridStyleMask:4 APPKIT_IVAR;
-    unsigned int _updatingBackgroundStyle:1 APPKIT_IVAR;
-    unsigned int _locationNeedsUpdating:1 APPKIT_IVAR;
-    unsigned int _isStatic:1 APPKIT_IVAR;
-    unsigned int _hasSelectedBackgroundView:1 APPKIT_IVAR;
-    unsigned int _selectionBlendingMode:1 APPKIT_IVAR;
-    unsigned int _checkingFontRefColor:1 APPKIT_IVAR;
-    unsigned int _forDeletion:1 APPKIT_IVAR;
-    unsigned int _emphasizedForDropOperation:1 APPKIT_IVAR;
-    unsigned int _keyViewLoopIsDirty:1 APPKIT_IVAR;
-    unsigned int _hasSelectionAlpha:1 APPKIT_IVAR;
-    unsigned int _hasLayoutChangedListener:1 APPKIT_IVAR;
-    unsigned int _canUseSelectionMaterialWithRegularHighlights:1 APPKIT_IVAR;
-#if !__LP64__    
-    unsigned int _reserved2:3 __unused APPKIT_IVAR;
-#endif
-}
+API_AVAILABLE(macos(10.7))
+@interface NSTableRowView : NSView <NSAccessibilityRow>
 
 /* The tableView sets the selectionHighlightStyle based on its current value. 
  */
@@ -78,7 +39,7 @@ NS_CLASS_AVAILABLE(10_7, NA)
 
 /* Next and previous row selection state. Allows subclassers to draw selection differently based on the previous next row being selected. State is automatically updated by NSTableView, however, the changing of the state does not invalidate the row view. If a row view depends on this state, it should override the particular setter and call [self setNeedsDisplay:YES] before or after calling super.
  */
-@property(getter=isPreviousRowSelected) BOOL previousRowSelected NS_AVAILABLE_MAC(10_10);
+@property(getter=isPreviousRowSelected) BOOL previousRowSelected API_AVAILABLE(macos(10.10));
 @property(getter=isNextRowSelected) BOOL nextRowSelected;
 
 /* Floating is a temporary attribute that is set when a particular group row is actually floating above other rows. The state may change dynamically based on the position of the group row. Drawing may be different for rows that are currently 'floating'. The TableView's delegate must implement tableView:isGroupRow: (or outlineView:isGroupItem:) to enable floating group rows.
@@ -147,4 +108,5 @@ NS_CLASS_AVAILABLE(10_7, NA)
 
 @end
 
+API_UNAVAILABLE_END
 NS_ASSUME_NONNULL_END

@@ -5,6 +5,9 @@
  *  Copyright (c) 2004-2014 Apple Inc. All rights reserved.
  
  $ManualLog$
+	16aug2018 mito
+	[43359877] In C language, a function prototype declaration should use void for empty arguments <jdecoodt>
+
 	13jan2017 aballow
 	[28840287] Added CoreVideo Support for TiledCompressed IOSurfaces. <jsam>
  *
@@ -36,7 +39,7 @@ extern "C" {
                 may be used interchangeably.
     @result     The current host time.
 */
-CV_EXPORT uint64_t CVGetCurrentHostTime() __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);
+CV_EXPORT uint64_t CVGetCurrentHostTime(void) __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);
 
 /*!
     @function   CVGetHostClockFrequency
@@ -45,14 +48,14 @@ CV_EXPORT uint64_t CVGetCurrentHostTime() __OSX_AVAILABLE_STARTING(__MAC_10_4,__
                 may be used interchangeably.
     @result     The current host frequency.
 */
-CV_EXPORT double   CVGetHostClockFrequency() __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);
+CV_EXPORT double   CVGetHostClockFrequency(void) __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);
 
 /*!
     @function   CVGetHostClockMinimumTimeDelta
     @abstract   Retrieve the smallest possible increment in the host time base.
     @result     The smallest valid increment in the host time base.
 */
-CV_EXPORT uint32_t CVGetHostClockMinimumTimeDelta() __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);
+CV_EXPORT uint32_t CVGetHostClockMinimumTimeDelta(void) __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);
 
 #if defined(__cplusplus)
 }

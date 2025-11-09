@@ -1844,7 +1844,8 @@ static SIMD_OVERLOAD simd_double8 __tg_promote(simd_double8);
 
 /*  Apple extensions to <math.h>, added in macOS 10.9 and iOS 7.0             */
 #if __MAC_OS_X_VERSION_MIN_REQUIRED >= __MAC_10_9   || \
-    __IPHONE_OS_VERSION_MIN_REQUIRED >= __IPHONE_7_0
+    __IPHONE_OS_VERSION_MIN_REQUIRED >= __IPHONE_7_0 || \
+    __DRIVERKIT_VERSION_MIN_REQUIRED >= __DRIVERKIT_19_0
 static inline SIMD_CFUNC float __tg_cospi(float x) { return __cospif(x); }
 static inline SIMD_CFUNC double __tg_cospi(double x) { return __cospi(x); }
 #undef cospi

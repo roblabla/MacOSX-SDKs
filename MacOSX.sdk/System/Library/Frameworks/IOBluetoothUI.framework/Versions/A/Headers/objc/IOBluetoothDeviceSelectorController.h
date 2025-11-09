@@ -40,20 +40,6 @@
 */
 + (IOBluetoothDeviceSelectorController *)deviceSelector;
 
-/*!	@method	withDeviceSelectorControllerRef:
-	@abstract	Method call to convert an IOBluetoothDeviceSelectorControllerRef into an IOBluetoothDeviceSelectorController *.
-        @param	deviceSelectorControllerRef IOBluetoothDeviceSelectorControllerRef for which an IOBluetoothDeviceSelectorController * is desired.
-	@result		Returns the IOBluetoothDeviceSelectorController * for the given IOBluetoothDeviceSelectorControllerRef.
-*/
-+ (IOBluetoothDeviceSelectorController *)withDeviceSelectorControllerRef:(IOBluetoothDeviceSelectorControllerRef)deviceSelectorControllerRef DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
-
-/*!	@method	getDeviceSelectorControllerRef
-	@abstract	Returns an IOBluetoothDeviceSelectorControllerRef representation of the target IOBluetoothDeviceSelectorController object.
-	@result		Returns an IOBluetoothDeviceSelectorControllerRef representation of the target IOBluetoothDeviceSelectorController object.
-*/
-- (IOBluetoothDeviceSelectorControllerRef)getDeviceSelectorControllerRef DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
-
-
 /*!
     @method		runModal
 	@abstract	Runs the device selector panel in a modal session to allow the user to select a Bluetooth device.

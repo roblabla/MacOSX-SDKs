@@ -1,7 +1,7 @@
 /*
 	NSComboBox.h
 	Application Kit
-	Copyright (c) 1996-2018, Apple Inc.
+	Copyright (c) 1996-2019, Apple Inc.
 	All rights reserved.
 */
 
@@ -9,6 +9,7 @@
 #import <AppKit/NSTextField.h>
 
 NS_ASSUME_NONNULL_BEGIN
+API_UNAVAILABLE_BEGIN(ios)
 
 APPKIT_EXTERN NSNotificationName NSComboBoxWillPopUpNotification;
 APPKIT_EXTERN NSNotificationName NSComboBoxWillDismissNotification;
@@ -38,10 +39,7 @@ APPKIT_EXTERN NSNotificationName NSComboBoxSelectionIsChangingNotification;
 
 @end
 
-@interface NSComboBox : NSTextField {
-    /*All instance variables are private*/
-    id _dataSource APPKIT_IVAR;
-}
+@interface NSComboBox : NSTextField
 
 @property BOOL hasVerticalScroller;
 @property NSSize intercellSpacing;
@@ -85,4 +83,5 @@ APPKIT_EXTERN NSNotificationName NSComboBoxSelectionIsChangingNotification;
 
 @end
 
+API_UNAVAILABLE_END
 NS_ASSUME_NONNULL_END

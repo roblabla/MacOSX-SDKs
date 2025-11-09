@@ -18,7 +18,7 @@ JNF_EXPORT NSString *JNFRunLoopDidStartNotification;
 + (NSString *)javaRunLoopMode;
 + (void)performOnMainThread:(SEL)aSelector on:(id)target withObject:(id)arg waitUntilDone:(BOOL)wait;
 #if __BLOCKS__
-+ (void)performOnMainThreadWaiting:(BOOL)waitUntilDone withBlock:(void (^)())block;
++ (void)performOnMainThreadWaiting:(BOOL)waitUntilDone withBlock:(void (^)(void))block;
 #endif
 
 @end

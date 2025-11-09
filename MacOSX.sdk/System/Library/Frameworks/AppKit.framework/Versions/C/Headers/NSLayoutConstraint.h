@@ -1,7 +1,7 @@
 /*
 	NSLayoutConstraint.h
 	Application Kit
-	Copyright (c) 2009-2018, Apple Inc.
+	Copyright (c) 2009-2019, Apple Inc.
 	All rights reserved.
 */
 
@@ -15,9 +15,33 @@
 #import <Foundation/NSDictionary.h>
 #import <AppKit/NSLayoutAnchor.h>
 
-
-
 NS_ASSUME_NONNULL_BEGIN
+#if !TARGET_OS_IPHONE
+
+/* Where AppKit's use of priority levels interacts with the user's use, we must define the priority levels involved.  Note that most of the time there is no interaction.  The use of priority levels is likely to be local to one sub-area of the window that is under the control of one author.  
+ */
+
+typedef float NSLayoutPriority NS_TYPED_EXTENSIBLE_ENUM API_AVAILABLE(macos(10.7));
+
+static const NSLayoutPriority NSLayoutPriorityRequired API_AVAILABLE(macos(10.7)) = 1000; // a required constraint.  Do not exceed this.
+static const NSLayoutPriority NSLayoutPriorityDefaultHigh API_AVAILABLE(macos(10.7)) = 750; // this is the priority level with which a button resists compressing its content.  Note that it is higher than NSLayoutPriorityWindowSizeStayPut.  Thus dragging to resize a window will not make buttons clip.  Rather the window frame is constrained.
+static const NSLayoutPriority NSLayoutPriorityDragThatCanResizeWindow API_AVAILABLE(macos(10.7)) = 510; // This is the appropriate priority level for a drag that may end up resizing the window.  This needn't be a drag whose explicit purpose is to resize the window. The user might be dragging around window contents, and it might be desirable that the window get bigger to accommodate.
+static const NSLayoutPriority NSLayoutPriorityWindowSizeStayPut API_AVAILABLE(macos(10.7)) = 500; // This is the priority level at which the window prefers to stay the same size.  It's generally not appropriate to make a constraint at exactly this priority. You want to be higher or lower.
+static const NSLayoutPriority NSLayoutPriorityDragThatCannotResizeWindow API_AVAILABLE(macos(10.7)) = 490; // This is the priority level at which a split view divider, say, is dragged.  It won't resize the window.
+static const NSLayoutPriority NSLayoutPriorityDefaultLow API_AVAILABLE(macos(10.7)) = 250; // this is the priority level at which a button hugs its contents horizontally.
+static const NSLayoutPriority NSLayoutPriorityFittingSizeCompression API_AVAILABLE(macos(10.7)) = 50; // When you issue -[NSView fittingSize], the smallest size that is large enough for the view's contents is computed.  This is the priority level with which the view wants to be as small as possible in that computation.  It's quite low.  It is generally not appropriate to make a constraint at exactly this priority.  You want to be higher or lower.
+
+typedef NS_ENUM(NSInteger, NSLayoutConstraintOrientation) {
+    NSLayoutConstraintOrientationHorizontal = 0,
+    NSLayoutConstraintOrientationVertical = 1
+};
+
+
+#if __cplusplus
+#define NSLAYOUTCONSTRAINT_EXTERN extern "C" __attribute((visibility("default")))
+#else
+#define NSLAYOUTCONSTRAINT_EXTERN extern __attribute((visibility("default")))
+#endif
 
 typedef NS_ENUM(NSInteger, NSLayoutRelation) {
     NSLayoutRelationLessThanOrEqual = -1,
@@ -37,14 +61,28 @@ typedef NS_ENUM(NSInteger, NSLayoutAttribute) {
     NSLayoutAttributeCenterX,
     NSLayoutAttributeCenterY,
     NSLayoutAttributeLastBaseline,
+#if TARGET_OS_IPHONE
+    NSLayoutAttributeBaseline NS_SWIFT_UNAVAILABLE("Use 'lastBaseline' instead") = NSLayoutAttributeLastBaseline,
+#else
     NSLayoutAttributeBaseline = NSLayoutAttributeLastBaseline,
-    NSLayoutAttributeFirstBaseline NS_ENUM_AVAILABLE_MAC(10_11),
+#endif
+    NSLayoutAttributeFirstBaseline API_AVAILABLE(macos(10.11), ios(8.0)),
+
+#if TARGET_OS_IPHONE
+    NSLayoutAttributeLeftMargin API_AVAILABLE(ios(8.0)),
+    NSLayoutAttributeRightMargin API_AVAILABLE(ios(8.0)),
+    NSLayoutAttributeTopMargin API_AVAILABLE(ios(8.0)),
+    NSLayoutAttributeBottomMargin API_AVAILABLE(ios(8.0)),
+    NSLayoutAttributeLeadingMargin API_AVAILABLE(ios(8.0)),
+    NSLayoutAttributeTrailingMargin API_AVAILABLE(ios(8.0)),
+    NSLayoutAttributeCenterXWithinMargins API_AVAILABLE(ios(8.0)),
+    NSLayoutAttributeCenterYWithinMargins API_AVAILABLE(ios(8.0)),
+#endif
     
     NSLayoutAttributeNotAnAttribute = 0
 };
 
-
-typedef NS_OPTIONS(NSUInteger, NSLayoutFormatOptions) {        
+typedef NS_OPTIONS(NSUInteger, NSLayoutFormatOptions) {
     NSLayoutFormatAlignAllLeft = (1 << NSLayoutAttributeLeft),
     NSLayoutFormatAlignAllRight = (1 << NSLayoutAttributeRight),
     NSLayoutFormatAlignAllTop = (1 << NSLayoutAttributeTop),
@@ -53,9 +91,13 @@ typedef NS_OPTIONS(NSUInteger, NSLayoutFormatOptions) {
     NSLayoutFormatAlignAllTrailing = (1 << NSLayoutAttributeTrailing),
     NSLayoutFormatAlignAllCenterX = (1 << NSLayoutAttributeCenterX),
     NSLayoutFormatAlignAllCenterY = (1 << NSLayoutAttributeCenterY),
-    NSLayoutFormatAlignAllBaseline = (1 << NSLayoutAttributeBaseline),
-    NSLayoutFormatAlignAllLastBaseline = NSLayoutFormatAlignAllBaseline,
-    NSLayoutFormatAlignAllFirstBaseline NS_ENUM_AVAILABLE_MAC(10_11) = (1 << NSLayoutAttributeFirstBaseline),
+    NSLayoutFormatAlignAllLastBaseline = (1 << NSLayoutAttributeLastBaseline),
+    NSLayoutFormatAlignAllFirstBaseline API_AVAILABLE(macos(10.11), ios(8.0)) = (1 << NSLayoutAttributeFirstBaseline),
+#if TARGET_OS_IPHONE
+    NSLayoutFormatAlignAllBaseline NS_SWIFT_UNAVAILABLE("Use 'alignAllLastBaseline' instead") = NSLayoutFormatAlignAllLastBaseline,
+#else
+    NSLayoutFormatAlignAllBaseline = NSLayoutFormatAlignAllLastBaseline,
+#endif
     
     NSLayoutFormatAlignmentMask = 0xFFFF,
     
@@ -63,76 +105,58 @@ typedef NS_OPTIONS(NSUInteger, NSLayoutFormatOptions) {
      */
     NSLayoutFormatDirectionLeadingToTrailing = 0 << 16, // default
     NSLayoutFormatDirectionLeftToRight = 1 << 16,
-    NSLayoutFormatDirectionRightToLeft = 2 << 16,  
+    NSLayoutFormatDirectionRightToLeft = 2 << 16,
     
-    NSLayoutFormatDirectionMask = 0x3 << 16,  
-};
+    NSLayoutFormatDirectionMask = 0x3 << 16,
 
-typedef NS_ENUM(NSInteger, NSLayoutConstraintOrientation) {
-    NSLayoutConstraintOrientationHorizontal = 0,
-    NSLayoutConstraintOrientationVertical = 1
-};
-
-/* Where AppKit's use of priority levels interacts with the user's use, we must define the priority levels involved.  Note that most of the time there is no interaction.  The use of priority levels is likely to be local to one sub-area of the window that is under the control of one author.  
- */
-typedef float NSLayoutPriority NS_TYPED_EXTENSIBLE_ENUM NS_AVAILABLE_MAC(10_7);
-
-static const NSLayoutPriority NSLayoutPriorityRequired NS_AVAILABLE_MAC(10_7) = 1000; // a required constraint.  Do not exceed this.
-static const NSLayoutPriority NSLayoutPriorityDefaultHigh NS_AVAILABLE_MAC(10_7) = 750; // this is the priority level with which a button resists compressing its content.  Note that it is higher than NSLayoutPriorityWindowSizeStayPut.  Thus dragging to resize a window will not make buttons clip.  Rather the window frame is constrained.
-static const NSLayoutPriority NSLayoutPriorityDragThatCanResizeWindow NS_AVAILABLE_MAC(10_7) = 510; // This is the appropriate priority level for a drag that may end up resizing the window.  This needn't be a drag whose explicit purpose is to resize the window. The user might be dragging around window contents, and it might be desirable that the window get bigger to accommodate.
-static const NSLayoutPriority NSLayoutPriorityWindowSizeStayPut NS_AVAILABLE_MAC(10_7) = 500; // This is the priority level at which the window prefers to stay the same size.  It's generally not appropriate to make a constraint at exactly this priority. You want to be higher or lower.
-static const NSLayoutPriority NSLayoutPriorityDragThatCannotResizeWindow NS_AVAILABLE_MAC(10_7) = 490; // This is the priority level at which a split view divider, say, is dragged.  It won't resize the window.
-static const NSLayoutPriority NSLayoutPriorityDefaultLow NS_AVAILABLE_MAC(10_7) = 250; // this is the priority level at which a button hugs its contents horizontally.
-static const NSLayoutPriority NSLayoutPriorityFittingSizeCompression NS_AVAILABLE_MAC(10_7) = 50; // When you issue -[NSView fittingSize], the smallest size that is large enough for the view's contents is computed.  This is the priority level with which the view wants to be as small as possible in that computation.  It's quite low.  It is generally not appropriate to make a constraint at exactly this priority.  You want to be higher or lower.
-
-
-NS_CLASS_AVAILABLE(10_7, NA)
-@interface NSLayoutConstraint : NSObject <NSAnimatablePropertyContainer>
-{
-    @private
-    id _container APPKIT_IVAR;
-    __weak id _firstItem APPKIT_IVAR;
-    __weak id _secondItem APPKIT_IVAR;
-    CGFloat _constant APPKIT_IVAR;
-    CGFloat _loweredConstant APPKIT_IVAR;
-    id _markerAndPositiveExtraVar APPKIT_IVAR;
-    id _negativeExtraVar APPKIT_IVAR;
-#if __OBJC2__
-    uint64_t _layoutConstraintFlags APPKIT_IVAR;
-    float _coefficient APPKIT_IVAR;
-    NSLayoutPriority _priority APPKIT_IVAR;
-#else
-    float _coefficient APPKIT_IVAR;
-    NSLayoutPriority _priority APPKIT_IVAR;
-    uint64_t _layoutConstraintFlags APPKIT_IVAR;
-    id _flange APPKIT_IVAR;
+#if TARGET_OS_IPHONE
+    /* choose only one spacing format
+     */
+    NSLayoutFormatSpacingEdgeToEdge API_AVAILABLE(ios(11.0),tvos(11.0)) = 0 << 19, // default
+    
+    /* Valid only for vertical layouts. Between views with text content the value
+     will be used to determine the distance from the last baseline of the view above
+     to the first baseline of the view below. For views without text content the top
+     or bottom edge will be used in lieu of the baseline position.
+     The default spacing "]-[" will be determined from the line heights of the fonts
+     involved in views with text content, when present.
+     */
+    NSLayoutFormatSpacingBaselineToBaseline API_AVAILABLE(ios(11.0),tvos(11.0)) = 1 << 19,
+    
+    NSLayoutFormatSpacingMask API_AVAILABLE(ios(11.0),tvos(11.0)) = 0x1 << 19,
 #endif
-}
+};
 
-/* Create an array of constraints using an ASCII art-like visual format string.
+NSLAYOUTCONSTRAINT_EXTERN API_AVAILABLE(macos(10.7), ios(6.0), tvos(9.0))
+@interface NSLayoutConstraint : NSObject
+
+/* Create an array of constraints using an ASCII-art-like visual format string.  The values of the `metrics` dictionary should be NSNumber (or some other type that responds to -doubleValue and returns a double).
  */
-+ (NSArray<NSLayoutConstraint *> *)constraintsWithVisualFormat:(NSString *)format options:(NSLayoutFormatOptions)opts metrics:(nullable NSDictionary<NSString *, NSNumber *> *)metrics views:(NSDictionary<NSString *, id> *)views;
++ (NSArray<NSLayoutConstraint *> *)constraintsWithVisualFormat:(NSString *)format options:(NSLayoutFormatOptions)opts metrics:(nullable NSDictionary<NSString *, id> *)metrics views:(NSDictionary<NSString *, id> *)views API_AVAILABLE(macos(10.7), ios(6.0), tvos(9.0));
 
-/* This macro is a helper for making view dictionaries for +constraintsWithVisualFormat:options:metrics:views:.  
+/* This macro is a helper for making view dictionaries for +constraintsWithVisualFormat:options:metrics:views:.
  NSDictionaryOfVariableBindings(v1, v2, v3) is equivalent to [NSDictionary dictionaryWithObjectsAndKeys:v1, @"v1", v2, @"v2", v3, @"v3", nil];
  */
 #define NSDictionaryOfVariableBindings(...) _NSDictionaryOfVariableBindings(@"" # __VA_ARGS__, __VA_ARGS__, nil)
-APPKIT_EXTERN NSDictionary<NSString *, id> * _NSDictionaryOfVariableBindings(NSString * commaSeparatedKeysString, id firstValue, ...); // not for direct use
+NSLAYOUTCONSTRAINT_EXTERN NSDictionary<NSString *, id> *_NSDictionaryOfVariableBindings(NSString *commaSeparatedKeysString, __nullable id firstValue, ...) API_AVAILABLE(macos(10.7), ios(6.0)); // not for direct use
 
-
-/* Create constraints explicitly.  Constraints are of the form "view1.attr1 = view2.attr2 * multiplier + constant" 
+/* Create constraints explicitly.  Constraints are of the form "view1.attr1 = view2.attr2 * multiplier + constant"
  If your equation does not have a second view and attribute, use nil and NSLayoutAttributeNotAnAttribute.
  Use of this method is not recommended. Constraints should be created using anchor objects on views and layout guides.
  */
-+ (instancetype)constraintWithItem:(id)view1 attribute:(NSLayoutAttribute)attr1 relatedBy:(NSLayoutRelation)relation toItem:(nullable id)view2 attribute:(NSLayoutAttribute)attr2 multiplier:(CGFloat)multiplier constant:(CGFloat)c;
++ (instancetype)constraintWithItem:(id)view1 attribute:(NSLayoutAttribute)attr1 relatedBy:(NSLayoutRelation)relation toItem:(nullable id)view2 attribute:(NSLayoutAttribute)attr2 multiplier:(CGFloat)multiplier constant:(CGFloat)c API_AVAILABLE(macos(10.7), ios(6.0), tvos(9.0));
 
-/* If a constraint's priority level is less than NSLayoutPriorityRequired, then it is optional.  Higher priority constraints are met before lower priority constraints.
+/* If a constraint's priority level is less than required, then it is optional.  Higher priority constraints are met before lower priority constraints.
  Constraint satisfaction is not all or nothing.  If a constraint 'a == b' is optional, that means we will attempt to minimize 'abs(a-b)'.
  This property may only be modified as part of initial set up or when optional.  After a constraint has been added to a view, an exception will be thrown if the priority is changed from/to NSLayoutPriorityRequired.
  */
+#if TARGET_OS_IPHONE
+@property UILayoutPriority priority;
+#else
 @property NSLayoutPriority priority;
+#endif
 
-/* When a view is archived, it archives some but not all constraints in its -constraints array.  The value of shouldBeArchived informs NSView if a particular constraint should be archived by NSView.
+/* When a view is archived, it archives some but not all constraints in its -constraints array.  The value of shouldBeArchived informs the view if a particular constraint should be archived by the view.
  If a constraint is created at runtime in response to the state of the object, it isn't appropriate to archive the constraint - rather you archive the state that gives rise to the constraint.  Since the majority of constraints that should be archived are created in Interface Builder (which is smart enough to set this prop to YES), the default value for this property is NO.
  */
 @property BOOL shouldBeArchived;
@@ -141,16 +165,16 @@ APPKIT_EXTERN NSDictionary<NSString *, id> * _NSDictionaryOfVariableBindings(NSS
  firstItem.firstAttribute {==,<=,>=} secondItem.secondAttribute * multiplier + constant
  Access to these properties is not recommended. Use the `firstAnchor` and `secondAnchor` properties instead.
  */
-@property (readonly, nullable, weak) id firstItem;
+@property (nullable, readonly, assign) id firstItem;
+@property (nullable, readonly, assign) id secondItem;
 @property (readonly) NSLayoutAttribute firstAttribute;
-@property (readonly, nullable, weak) id secondItem;
 @property (readonly) NSLayoutAttribute secondAttribute;
 
 /* accessors
  firstAnchor{==,<=,>=} secondAnchor * multiplier + constant
  */
-@property (readonly, copy) NSLayoutAnchor *firstAnchor NS_AVAILABLE(10_12, 10_0);
-@property (readonly, copy, nullable) NSLayoutAnchor *secondAnchor NS_AVAILABLE(10_12, 10_0);
+@property (readonly, copy) NSLayoutAnchor *firstAnchor API_AVAILABLE(macos(10.12), ios(10.0));
+@property (readonly, copy, nullable) NSLayoutAnchor *secondAnchor API_AVAILABLE(macos(10.12), ios(10.0));
 @property (readonly) NSLayoutRelation relation;
 @property (readonly) CGFloat multiplier;
 
@@ -159,27 +183,27 @@ APPKIT_EXTERN NSDictionary<NSString *, id> * _NSDictionaryOfVariableBindings(NSS
 @property CGFloat constant;
 
 /* The receiver may be activated or deactivated by manipulating this property.  Only active constraints affect the calculated layout.  Attempting to activate a constraint whose items have no common ancestor will cause an exception to be thrown.  Defaults to NO for newly created constraints. */
-@property (getter=isActive) BOOL active NS_AVAILABLE(10_10, 8_0);
+@property (getter=isActive) BOOL active API_AVAILABLE(macos(10.10), ios(8.0));
 
 /* Convenience method that activates each constraint in the contained array, in the same manner as setting active=YES. This is often more efficient than activating each constraint individually. */
-+ (void)activateConstraints:(NSArray<NSLayoutConstraint *> *)constraints NS_AVAILABLE(10_10, 8_0);
++ (void)activateConstraints:(NSArray<NSLayoutConstraint *> *)constraints API_AVAILABLE(macos(10.10), ios(8.0));
 
 /* Convenience method that deactivates each constraint in the contained array, in the same manner as setting active=NO. This is often more efficient than deactivating each constraint individually. */
-+ (void)deactivateConstraints:(NSArray<NSLayoutConstraint *> *)constraints NS_AVAILABLE(10_10, 8_0);
++ (void)deactivateConstraints:(NSArray<NSLayoutConstraint *> *)constraints API_AVAILABLE(macos(10.10), ios(8.0));
 
 @end
 
 @interface NSLayoutConstraint (NSIdentifier)
 
-/* Name a constraint by setting its identifier. The identifier is output in the constraint's description. Identifiers starting with NS are reserved by the system.
+/* For ease in debugging, name a constraint by setting its identifier, which will be printed in the constraint's description.
+   Identifiers starting with NS or UI are reserved by the system.
  */
-@property (nullable, copy) NSString * identifier;
+@property (nullable, copy) NSString *identifier API_AVAILABLE(macos(10.7), ios(7.0));
 
 @end
 
-
-
-
+@interface NSLayoutConstraint () <NSAnimatablePropertyContainer>
+@end
 
 #pragma mark Installing Constraints
 
@@ -194,25 +218,25 @@ APPKIT_EXTERN NSDictionary<NSString *, id> * _NSDictionaryOfVariableBindings(NSS
  
  See NSLayoutAnchor.h for more details.
  */
-@property (readonly, strong) NSLayoutXAxisAnchor *leadingAnchor NS_AVAILABLE(10_11, 9_0);
-@property (readonly, strong) NSLayoutXAxisAnchor *trailingAnchor NS_AVAILABLE(10_11, 9_0);
-@property (readonly, strong) NSLayoutXAxisAnchor *leftAnchor NS_AVAILABLE(10_11, 9_0);
-@property (readonly, strong) NSLayoutXAxisAnchor *rightAnchor NS_AVAILABLE(10_11, 9_0);
-@property (readonly, strong) NSLayoutYAxisAnchor *topAnchor NS_AVAILABLE(10_11, 9_0);
-@property (readonly, strong) NSLayoutYAxisAnchor *bottomAnchor NS_AVAILABLE(10_11, 9_0);
-@property (readonly, strong) NSLayoutDimension *widthAnchor NS_AVAILABLE(10_11, 9_0);
-@property (readonly, strong) NSLayoutDimension *heightAnchor NS_AVAILABLE(10_11, 9_0);
-@property (readonly, strong) NSLayoutXAxisAnchor *centerXAnchor NS_AVAILABLE(10_11, 9_0);
-@property (readonly, strong) NSLayoutYAxisAnchor *centerYAnchor NS_AVAILABLE(10_11, 9_0);
-@property (readonly, strong) NSLayoutYAxisAnchor *firstBaselineAnchor NS_AVAILABLE(10_11, 9_0);
-@property (readonly, strong) NSLayoutYAxisAnchor *lastBaselineAnchor NS_AVAILABLE(10_11, 9_0);
+@property (readonly, strong) NSLayoutXAxisAnchor *leadingAnchor API_AVAILABLE(macos(10.11));
+@property (readonly, strong) NSLayoutXAxisAnchor *trailingAnchor API_AVAILABLE(macos(10.11));
+@property (readonly, strong) NSLayoutXAxisAnchor *leftAnchor API_AVAILABLE(macos(10.11));
+@property (readonly, strong) NSLayoutXAxisAnchor *rightAnchor API_AVAILABLE(macos(10.11));
+@property (readonly, strong) NSLayoutYAxisAnchor *topAnchor API_AVAILABLE(macos(10.11));
+@property (readonly, strong) NSLayoutYAxisAnchor *bottomAnchor API_AVAILABLE(macos(10.11));
+@property (readonly, strong) NSLayoutDimension *widthAnchor API_AVAILABLE(macos(10.11));
+@property (readonly, strong) NSLayoutDimension *heightAnchor API_AVAILABLE(macos(10.11));
+@property (readonly, strong) NSLayoutXAxisAnchor *centerXAnchor API_AVAILABLE(macos(10.11));
+@property (readonly, strong) NSLayoutYAxisAnchor *centerYAnchor API_AVAILABLE(macos(10.11));
+@property (readonly, strong) NSLayoutYAxisAnchor *firstBaselineAnchor API_AVAILABLE(macos(10.11));
+@property (readonly, strong) NSLayoutYAxisAnchor *lastBaselineAnchor API_AVAILABLE(macos(10.11));
 
-@property (readonly, copy) NSArray<NSLayoutConstraint *> *constraints NS_AVAILABLE_MAC(10_7);	// This property is deprecated and should be avoided.  Instead, create IB outlets or otherwise maintain references to constraints you need to reference directly.
+@property (readonly, copy) NSArray<NSLayoutConstraint *> *constraints API_AVAILABLE(macos(10.7));	// This property is deprecated and should be avoided.  Instead, create IB outlets or otherwise maintain references to constraints you need to reference directly.
 
-- (void)addConstraint:(NSLayoutConstraint *)constraint NS_AVAILABLE_MAC(10_7);	// This method is deprecated and should be avoided.  Instead, set NSLayoutConstraint's active property to YES.
-- (void)addConstraints:(NSArray<NSLayoutConstraint *> *)constraints NS_AVAILABLE_MAC(10_7);	// This method is deprecated and should be avoided.  Instead use +[NSLayoutConstraint activateConstraints:].
-- (void)removeConstraint:(NSLayoutConstraint *)constraint NS_AVAILABLE_MAC(10_7);	// This method is deprecated and should be avoided.  Instead set NSLayoutConstraint's active property to NO.
-- (void)removeConstraints:(NSArray<NSLayoutConstraint *> *)constraints NS_AVAILABLE_MAC(10_7);	// This method is deprecated and should be avoided.  Instead use +[NSLayoutConstraint deactivateConstraints:].
+- (void)addConstraint:(NSLayoutConstraint *)constraint API_AVAILABLE(macos(10.7));	// This method is deprecated and should be avoided.  Instead, set NSLayoutConstraint's active property to YES.
+- (void)addConstraints:(NSArray<NSLayoutConstraint *> *)constraints API_AVAILABLE(macos(10.7));	// This method is deprecated and should be avoided.  Instead use +[NSLayoutConstraint activateConstraints:].
+- (void)removeConstraint:(NSLayoutConstraint *)constraint API_AVAILABLE(macos(10.7));	// This method is deprecated and should be avoided.  Instead set NSLayoutConstraint's active property to NO.
+- (void)removeConstraints:(NSArray<NSLayoutConstraint *> *)constraints API_AVAILABLE(macos(10.7));	// This method is deprecated and should be avoided.  Instead use +[NSLayoutConstraint deactivateConstraints:].
 
 @end
 
@@ -228,18 +252,14 @@ APPKIT_EXTERN NSDictionary<NSString *, id> * _NSDictionaryOfVariableBindings(NSS
  */
 
 @interface NSWindow (NSConstraintBasedLayoutCoreMethods)
-- (void)updateConstraintsIfNeeded NS_AVAILABLE_MAC(10_7);
-- (void)layoutIfNeeded NS_AVAILABLE_MAC(10_7);
+- (void)updateConstraintsIfNeeded API_AVAILABLE(macos(10.7));
+- (void)layoutIfNeeded API_AVAILABLE(macos(10.7));
 @end
 
 @interface NSView (NSConstraintBasedLayoutCoreMethods) 
-- (void)updateConstraintsForSubtreeIfNeeded NS_AVAILABLE_MAC(10_7);
-- (void)updateConstraints NS_AVAILABLE_MAC(10_7) NS_REQUIRES_SUPER;
-@property BOOL needsUpdateConstraints NS_AVAILABLE_MAC(10_7);
-
-- (void)layoutSubtreeIfNeeded NS_AVAILABLE_MAC(10_7);
-- (void)layout NS_AVAILABLE_MAC(10_7);
-@property BOOL needsLayout NS_AVAILABLE_MAC(10_7);
+- (void)updateConstraintsForSubtreeIfNeeded API_AVAILABLE(macos(10.7));
+- (void)updateConstraints API_AVAILABLE(macos(10.7)) NS_REQUIRES_SUPER;
+@property BOOL needsUpdateConstraints API_AVAILABLE(macos(10.7));
 @end
 
 #pragma mark Compatibility and Adoption
@@ -248,11 +268,11 @@ APPKIT_EXTERN NSDictionary<NSString *, id> * _NSDictionaryOfVariableBindings(NSS
 
 /* by default, the autoresizing mask on a view gives rise to constraints that fully determine the view's position.  To do anything interesting with constraints, you need to turn that off. IB will turn it off.
  */
-@property BOOL translatesAutoresizingMaskIntoConstraints NS_AVAILABLE_MAC(10_7);
+@property BOOL translatesAutoresizingMaskIntoConstraints API_AVAILABLE(macos(10.7));
 
 /* constraint based layout engages lazily when someone tries to use it.  If you do all of your constraint set up in -updateConstraints, you might never even receive updateConstraints if no one makes a constraint.  To fix this chicken and egg problem, override this method to return YES if your view needs the window to use constraint based layout.  
  */
-@property (class, readonly) BOOL requiresConstraintBasedLayout NS_AVAILABLE_MAC(10_7);
+@property (class, readonly) BOOL requiresConstraintBasedLayout API_AVAILABLE(macos(10.7));
 
 @end
 
@@ -269,22 +289,22 @@ APPKIT_EXTERN NSDictionary<NSString *, id> * _NSDictionaryOfVariableBindings(NSS
  A view that displayed an image with some ornament would typically override these, because the ornamental part of an image would scale up with the size of the frame.  
  Set the NSUserDefault NSShowAlignmentRects to YES to see alignment rects drawn.
  */
-- (NSRect)alignmentRectForFrame:(NSRect)frame NS_AVAILABLE_MAC(10_7);
-- (NSRect)frameForAlignmentRect:(NSRect)alignmentRect NS_AVAILABLE_MAC(10_7);
+- (NSRect)alignmentRectForFrame:(NSRect)frame API_AVAILABLE(macos(10.7));
+- (NSRect)frameForAlignmentRect:(NSRect)alignmentRect API_AVAILABLE(macos(10.7));
 
 /* override this if the alignment rect is obtained from the frame by insetting each edge by a fixed amount.  This is only called by alignmentRectForFrame: and frameForAlignmentRect:.
  */
-@property (readonly) NSEdgeInsets alignmentRectInsets NS_AVAILABLE_MAC(10_7);
+@property (readonly) NSEdgeInsets alignmentRectInsets API_AVAILABLE(macos(10.7));
 
 /* override this to provide the distance between NSLayoutAttributeTop and NSLayoutAttributeFirstBaseline.  NSView's implementation returns zero.
  */
-@property (readonly) CGFloat firstBaselineOffsetFromTop NS_AVAILABLE_MAC(10_11);
+@property (readonly) CGFloat firstBaselineOffsetFromTop API_AVAILABLE(macos(10.11));
 
 /* override this to provide the distance between NSLayoutAttributeBottom and NSLayoutAttributeLastBaseline (or NSLayoutAttributeBaseline).  NSView's implementation returns zero.
  */
-@property (readonly) CGFloat lastBaselineOffsetFromBottom NS_AVAILABLE_MAC(10_11);
+@property (readonly) CGFloat lastBaselineOffsetFromBottom API_AVAILABLE(macos(10.11));
 
-@property (readonly) CGFloat baselineOffsetFromBottom NS_AVAILABLE_MAC(10_7); // Deprecated. Override lastBaselineOffsetFromBottom instead.
+@property (readonly) CGFloat baselineOffsetFromBottom API_AVAILABLE(macos(10.7)); // Deprecated. Override lastBaselineOffsetFromBottom instead.
 
 
 /* Override this method to tell the layout system that there is something it doesn't natively understand in this view, and this is how large it intrinsically is.  A typical example would be a single line text field.  The layout system does not understand text - it must just be told that there's something in the view, and that that something will take a certain amount of space if not clipped.  
@@ -302,23 +322,30 @@ APPKIT_EXTERN NSDictionary<NSString *, id> * _NSDictionaryOfVariableBindings(NSS
  
  Note that not all views have an intrinsicContentSize.  A horizontal slider has an intrinsic height, but no intrinsic width - the slider artwork has no intrinsic best width.  A horizontal NSSlider returns (NSViewNoIntrinsicMetric, <slider height>) for intrinsicContentSize.  An NSBox returns (NSViewNoIntrinsicMetric, NSViewNoIntrinsicMetric).  The _intrinsic_ content size is concerned only with data that is in the view itself, not in other views.
  */
-APPKIT_EXTERN const CGFloat NSViewNoInstrinsicMetric NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSViewNoIntrinsicMetric", 10_7, 10_14);
-APPKIT_EXTERN const CGFloat NSViewNoIntrinsicMetric NS_AVAILABLE_MAC(10_11); // -1
+APPKIT_EXTERN const CGFloat NSViewNoInstrinsicMetric API_DEPRECATED_WITH_REPLACEMENT("NSViewNoIntrinsicMetric", macos(10.7,10.14));
+APPKIT_EXTERN const CGFloat NSViewNoIntrinsicMetric API_AVAILABLE(macos(10.11)); // -1
 
-@property (readonly) NSSize intrinsicContentSize NS_AVAILABLE_MAC(10_7);
-- (void)invalidateIntrinsicContentSize NS_AVAILABLE_MAC(10_7); // call this when something changes that affects the intrinsicContentSize.  Otherwise AppKit won't notice that it changed.  
+@property (readonly) NSSize intrinsicContentSize API_AVAILABLE(macos(10.7));
+- (void)invalidateIntrinsicContentSize API_AVAILABLE(macos(10.7)); // call this when something changes that affects the intrinsicContentSize.  Otherwise AppKit won't notice that it changed.  
 
-- (NSLayoutPriority)contentHuggingPriorityForOrientation:(NSLayoutConstraintOrientation)orientation NS_AVAILABLE_MAC(10_7);
-- (void)setContentHuggingPriority:(NSLayoutPriority)priority forOrientation:(NSLayoutConstraintOrientation)orientation NS_AVAILABLE_MAC(10_7);
+- (NSLayoutPriority)contentHuggingPriorityForOrientation:(NSLayoutConstraintOrientation)orientation API_AVAILABLE(macos(10.7));
+- (void)setContentHuggingPriority:(NSLayoutPriority)priority forOrientation:(NSLayoutConstraintOrientation)orientation API_AVAILABLE(macos(10.7));
 
-- (NSLayoutPriority)contentCompressionResistancePriorityForOrientation:(NSLayoutConstraintOrientation)orientation NS_AVAILABLE_MAC(10_7);
-- (void)setContentCompressionResistancePriority:(NSLayoutPriority)priority forOrientation:(NSLayoutConstraintOrientation)orientation NS_AVAILABLE_MAC(10_7);
+- (NSLayoutPriority)contentCompressionResistancePriorityForOrientation:(NSLayoutConstraintOrientation)orientation API_AVAILABLE(macos(10.7));
+- (void)setContentCompressionResistancePriority:(NSLayoutPriority)priority forOrientation:(NSLayoutConstraintOrientation)orientation API_AVAILABLE(macos(10.7));
+
+// A boolean value that controls whether the receiver's horizontal content size constraint is active.  As an optimization, if the constraint is inactive, Auto Layout may avoid measuring the view's intrinsic content size.  Defaults to YES.
+@property (getter=isHorizontalContentSizeConstraintActive) BOOL horizontalContentSizeConstraintActive API_AVAILABLE(macos(10.15));
+
+// A boolean value that controls whether the receiver's vertical content size constraint is active.  As an optimization, if the constraint is inactive, Auto Layout may avoid measuring the view's intrinsic content size.  Defaults to YES.
+@property (getter=isVerticalContentSizeConstraintActive) BOOL verticalContentSizeConstraintActive API_AVAILABLE(macos(10.15));
+
 @end
 
 @interface NSControl (NSConstraintBasedLayoutLayering)
 /* should be called by a cell on its -controlView
  */
-- (void)invalidateIntrinsicContentSizeForCell:(NSCell *)cell NS_AVAILABLE_MAC(10_7);
+- (void)invalidateIntrinsicContentSizeForCell:(NSCell *)cell API_AVAILABLE(macos(10.7));
 @end
 
 #pragma mark Window anchoring
@@ -334,7 +361,7 @@ APPKIT_EXTERN const CGFloat NSViewNoIntrinsicMetric NS_AVAILABLE_MAC(10_11); // 
 @interface NSView (NSConstraintBasedLayoutFittingSize)
 /* like sizeToFit, but for arbitrary views, and returns the size rather than changing the view's frame.  This considers everything in the receiver's subtree.
  */
-@property (readonly) NSSize fittingSize NS_AVAILABLE_MAC(10_7);
+@property (readonly) NSSize fittingSize API_AVAILABLE(macos(10.7));
 @end
 
 #pragma mark Debugging
@@ -350,21 +377,24 @@ APPKIT_EXTERN const CGFloat NSViewNoIntrinsicMetric NS_AVAILABLE_MAC(10_11); // 
 /* This returns a list of all the constraints that are affecting the current location of the receiver.  The constraints do not necessarily involve the receiver, they may affect the frame indirectly.
  Pass NSLayoutConstraintOrientationHorizontal for the constraints affecting NSMinX([self frame]) and NSWidth([self frame]), or NSLayoutConstraintOrientationVertical for the constraints affecting NSMinY([self frame]) and NSHeight([self frame]).
  */
-- (NSArray<NSLayoutConstraint *> *)constraintsAffectingLayoutForOrientation:(NSLayoutConstraintOrientation)orientation NS_AVAILABLE_MAC(10_7);
+- (NSArray<NSLayoutConstraint *> *)constraintsAffectingLayoutForOrientation:(NSLayoutConstraintOrientation)orientation API_AVAILABLE(macos(10.7));
 
 /* If there aren't enough constraints in the system to uniquely determine layout, we say the layout is ambiguous.  For example, if the only constraint in the system was x = y + 100, then there are lots of different possible values for x and y.  This situation is not automatically detected by AppKit, due to performance considerations and details of the algorithm used for layout.  
  The symptom of ambiguity is that views sometimes jump from place to place, or possibly are just in the wrong place.
  -hasAmbiguousLayout runs a check for whether there is any other frame the receiver could have that could also satisfy the constraints.
  -exerciseAmbiguousLayout does more.  It randomly changes the frames of views in your window to another of their valid possible layouts.  Making the UI jump back and forth can be helpful for figuring out where you're missing a constraint.  
  */
-@property (readonly) BOOL hasAmbiguousLayout NS_AVAILABLE_MAC(10_7);
-- (void)exerciseAmbiguityInLayout NS_AVAILABLE_MAC(10_7); 
+@property (readonly) BOOL hasAmbiguousLayout API_AVAILABLE(macos(10.7));
+- (void)exerciseAmbiguityInLayout API_AVAILABLE(macos(10.7)); 
 @end
 
 @interface NSWindow (NSConstraintBasedLayoutDebugging)
 /* This draws a visual representation of the given constraints in the receiver window.  It's a nice way to understand exactly what a collection of constraints specifies.  
  */
-- (void)visualizeConstraints:(nullable NSArray<NSLayoutConstraint *> *)constraints NS_AVAILABLE_MAC(10_7);
+- (void)visualizeConstraints:(nullable NSArray<NSLayoutConstraint *> *)constraints API_AVAILABLE(macos(10.7));
 @end
+
+
+#endif // !TARGET_OS_IPHONE
 
 NS_ASSUME_NONNULL_END

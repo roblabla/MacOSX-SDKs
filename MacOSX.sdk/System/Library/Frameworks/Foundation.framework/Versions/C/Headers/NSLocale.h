@@ -1,5 +1,5 @@
 /*	NSLocale.h
-	Copyright (c) 2003-2018, Apple Inc. All rights reserved.
+	Copyright (c) 2003-2019, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -24,7 +24,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (instancetype)initWithLocaleIdentifier:(NSString *)string NS_DESIGNATED_INITIALIZER;
 
-- (nullable instancetype)initWithCoder:(NSCoder *)aDecoder NS_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithCoder:(NSCoder *)coder NS_DESIGNATED_INITIALIZER;
 
 @end
 
@@ -86,7 +86,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (instancetype)localeWithLocaleIdentifier:(NSString *)ident API_AVAILABLE(macos(10.6), ios(4.0), watchos(2.0), tvos(9.0));
 
-- (instancetype)init NS_UNAVAILABLE;     /* do not invoke; not a valid initializer for this class */
+- (instancetype)init API_UNAVAILABLE(macos, ios, watchos, tvos);     /* do not invoke; not a valid initializer for this class */
 
 @end
 
@@ -160,16 +160,16 @@ FOUNDATION_EXPORT NSLocaleKey const NSLocaleAlternateQuotationEndDelimiterKey AP
 #endif
 
 // Values for NSCalendar identifiers (not the NSLocaleCalendar property key)
-FOUNDATION_EXPORT NSString * const NSGregorianCalendar NS_CALENDAR_DEPRECATED(10_4, 10_10, 2_0, 8_0, "Use NSCalendarIdentifierGregorian instead");
-FOUNDATION_EXPORT NSString * const NSBuddhistCalendar NS_CALENDAR_DEPRECATED(10_4, 10_10, 2_0, 8_0, "Use NSCalendarIdentifierBuddhist instead");
-FOUNDATION_EXPORT NSString * const NSChineseCalendar NS_CALENDAR_DEPRECATED(10_4, 10_10, 2_0, 8_0, "Use NSCalendarIdentifierChinese instead");
-FOUNDATION_EXPORT NSString * const NSHebrewCalendar NS_CALENDAR_DEPRECATED(10_4, 10_10, 2_0, 8_0, "Use NSCalendarIdentifierHebrew instead");
-FOUNDATION_EXPORT NSString * const NSIslamicCalendar NS_CALENDAR_DEPRECATED(10_4, 10_10, 2_0, 8_0, "Use NSCalendarIdentifierIslamic instead");
-FOUNDATION_EXPORT NSString * const NSIslamicCivilCalendar NS_CALENDAR_DEPRECATED(10_4, 10_10, 2_0, 8_0, "Use NSCalendarIdentifierIslamicCivil instead");
-FOUNDATION_EXPORT NSString * const NSJapaneseCalendar NS_CALENDAR_DEPRECATED(10_4, 10_10, 2_0, 8_0, "Use NSCalendarIdentifierJapanese instead");
-FOUNDATION_EXPORT NSString * const NSRepublicOfChinaCalendar NS_CALENDAR_DEPRECATED(10_6, 10_10, 4_0, 8_0, "Use NSCalendarIdentifierRepublicOfChina instead");
-FOUNDATION_EXPORT NSString * const NSPersianCalendar NS_CALENDAR_DEPRECATED(10_6, 10_10, 4_0, 8_0, "Use NSCalendarIdentifierPersian instead");
-FOUNDATION_EXPORT NSString * const NSIndianCalendar NS_CALENDAR_DEPRECATED(10_6, 10_10, 4_0, 8_0, "Use NSCalendarIdentifierIndian instead");
-FOUNDATION_EXPORT NSString * const NSISO8601Calendar NS_CALENDAR_DEPRECATED(10_6, 10_10, 4_0, 8_0, "Use NSCalendarIdentifierISO8601 instead");
+FOUNDATION_EXPORT NSString * const NSGregorianCalendar API_DEPRECATED_WITH_REPLACEMENT("NSCalendarIdentifierGregorian", macos(10.4, 10.10), ios(2.0, 8.0), watchos(2.0, 2.0), tvos(9.0, 9.0));
+FOUNDATION_EXPORT NSString * const NSBuddhistCalendar API_DEPRECATED_WITH_REPLACEMENT("NSCalendarIdentifierBuddhist", macos(10.4, 10.10), ios(2.0, 8.0), watchos(2.0, 2.0), tvos(9.0, 9.0));
+FOUNDATION_EXPORT NSString * const NSChineseCalendar API_DEPRECATED_WITH_REPLACEMENT("NSCalendarIdentifierChinese", macos(10.4, 10.10), ios(2.0, 8.0), watchos(2.0, 2.0), tvos(9.0, 9.0));
+FOUNDATION_EXPORT NSString * const NSHebrewCalendar API_DEPRECATED_WITH_REPLACEMENT("NSCalendarIdentifierHebrew", macos(10.4, 10.10), ios(2.0, 8.0), watchos(2.0, 2.0), tvos(9.0, 9.0));
+FOUNDATION_EXPORT NSString * const NSIslamicCalendar API_DEPRECATED_WITH_REPLACEMENT("NSCalendarIdentifierIslamic", macos(10.4, 10.10), ios(2.0, 8.0), watchos(2.0, 2.0), tvos(9.0, 9.0));
+FOUNDATION_EXPORT NSString * const NSIslamicCivilCalendar API_DEPRECATED_WITH_REPLACEMENT("NSCalendarIdentifierIslamicCivil", macos(10.4, 10.10), ios(2.0, 8.0), watchos(2.0, 2.0), tvos(9.0, 9.0));
+FOUNDATION_EXPORT NSString * const NSJapaneseCalendar API_DEPRECATED_WITH_REPLACEMENT("NSCalendarIdentifierJapanese", macos(10.4, 10.10), ios(2.0, 8.0), watchos(2.0, 2.0), tvos(9.0, 9.0));
+FOUNDATION_EXPORT NSString * const NSRepublicOfChinaCalendar API_DEPRECATED_WITH_REPLACEMENT("NSCalendarIdentifierRepublicOfChina", macos(10.6, 10.10), ios(4.0, 8.0), watchos(2.0, 2.0), tvos(9.0, 9.0));
+FOUNDATION_EXPORT NSString * const NSPersianCalendar API_DEPRECATED_WITH_REPLACEMENT("NSCalendarIdentifierPersian", macos(10.6, 10.10), ios(4.0, 8.0), watchos(2.0, 2.0), tvos(9.0, 9.0));
+FOUNDATION_EXPORT NSString * const NSIndianCalendar API_DEPRECATED_WITH_REPLACEMENT("NSCalendarIdentifierIndian", macos(10.6, 10.10), ios(4.0, 8.0), watchos(2.0, 2.0), tvos(9.0, 9.0));
+FOUNDATION_EXPORT NSString * const NSISO8601Calendar API_DEPRECATED_WITH_REPLACEMENT("NSCalendarIdentifierISO8601", macos(10.6, 10.10), ios(4.0, 8.0), watchos(2.0, 2.0), tvos(9.0, 9.0));
 
 NS_ASSUME_NONNULL_END

@@ -23,7 +23,7 @@ CK_EXTERN NSString * const CKRecordChangedErrorAncestorRecordKey API_AVAILABLE(m
 CK_EXTERN NSString * const CKRecordChangedErrorServerRecordKey API_AVAILABLE(macos(10.10), ios(8.0), watchos(3.0));
 CK_EXTERN NSString * const CKRecordChangedErrorClientRecordKey API_AVAILABLE(macos(10.10), ios(8.0), watchos(3.0));
 
-/*! On `CKErrorServiceUnavailable` or `CKErrorRequestRateLimited` errors the userInfo dictionary may contain a NSNumber instance that specifies the period of time in seconds after which the client may retry the request.
+/*! On some errors, the userInfo dictionary may contain a NSNumber instance that specifies the period of time in seconds after which the client may retry the request. For example, this key will be on `CKErrorServiceUnavailable`, `CKErrorRequestRateLimited`, and other errors for which the recommended resolution is to retry after a delay.
  */
 CK_EXTERN NSString * const CKErrorRetryAfterKey API_AVAILABLE(macos(10.10), ios(8.0), watchos(3.0));
 

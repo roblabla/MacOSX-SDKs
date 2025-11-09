@@ -6,6 +6,7 @@
  *
  */
 
+#import <CoreLocation/CLAvailability.h>
 #import <Foundation/Foundation.h>
 
 NS_ASSUME_NONNULL_BEGIN
@@ -18,6 +19,6 @@ NS_ASSUME_NONNULL_BEGIN
  *
  *  The file CLError.h defines constants for the errors in kCLErrorDomain.
  */
-extern NSString *const kCLErrorDomain;
+CL_EXTERN NSString *const kCLErrorDomain;
 
 NS_ASSUME_NONNULL_END

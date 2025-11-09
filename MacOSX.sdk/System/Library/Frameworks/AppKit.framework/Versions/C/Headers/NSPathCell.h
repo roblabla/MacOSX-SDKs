@@ -1,7 +1,7 @@
 /*
     NSPathCell.h
     Application Kit
-    Copyright (c) 2005-2018, Apple Inc.
+    Copyright (c) 2005-2019, Apple Inc.
     All rights reserved.
 */
 
@@ -12,6 +12,7 @@
 #import <AppKit/NSMenu.h>
 
 NS_ASSUME_NONNULL_BEGIN
+API_UNAVAILABLE_BEGIN(ios)
 
 @class NSString, NSImage, NSAnimation, NSPathComponentCell, NSURL, NSPopUpButtonCell, NSNotification, NSOpenPanel;
 @protocol NSPathCellDelegate;
@@ -45,32 +46,12 @@ typedef NS_ENUM(NSInteger, NSPathStyle) {
     
 /* This style is deprecated as of Mac OS X 10.7. Please use one of the other NSPathStyle values.
  */
-    NSPathStyleNavigationBar NS_ENUM_DEPRECATED_MAC(10_5, 10_7)= 1
+    NSPathStyleNavigationBar API_DEPRECATED("", macos(10.5,10.7))= 1
 };
 
 
-NS_CLASS_AVAILABLE(10_5, NA)
-@interface NSPathCell : NSActionCell <NSMenuItemValidation, NSOpenSavePanelDelegate> {
-@private
-    NSColor *_backgroundColor APPKIT_IVAR;
-    NSMutableArray *_borderColors APPKIT_IVAR;
-    NSMutableArray *_cells APPKIT_IVAR;
-    NSPathComponentCell *_clickedCell APPKIT_IVAR;
-    NSPathComponentCell *_hoveredCell APPKIT_IVAR;
-    NSPopUpButtonCell *_popUpButtonCell APPKIT_IVAR;
-    NSRect _currentRect APPKIT_IVAR;
-    NSAnimation *_animation APPKIT_IVAR;
-    NSArray *_allowedTypes APPKIT_IVAR;
-    SEL _doubleAction APPKIT_IVAR;
-    __weak id<NSPathCellDelegate> _delegate APPKIT_IVAR;
-    struct {
-        unsigned int cbs:4;
-        unsigned int reserved:28;
-    } _piFlags APPKIT_IVAR;
-    NSPathStyle _pathStyle APPKIT_IVAR;
-    id _aux APPKIT_IVAR;
-}
-
+API_AVAILABLE(macos(10.5))
+@interface NSPathCell : NSActionCell <NSMenuItemValidation, NSOpenSavePanelDelegate>
 /* See NSPathControl for documentation on all the properties listed below. The NSPathControl directly calls the cell's methods.
  */
 @property NSPathStyle pathStyle;
@@ -138,6 +119,7 @@ NS_CLASS_AVAILABLE(10_5, NA)
 
 @end
 
+API_UNAVAILABLE_END
 NS_ASSUME_NONNULL_END
 
 

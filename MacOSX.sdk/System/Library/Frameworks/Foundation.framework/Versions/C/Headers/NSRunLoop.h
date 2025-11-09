@@ -1,5 +1,5 @@
 /*	NSRunLoop.h
-	Copyright (c) 1994-2018, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2019, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -46,7 +46,7 @@ FOUNDATION_EXPORT NSRunLoopMode const NSRunLoopCommonModes API_AVAILABLE(macos(1
 - (void)runUntilDate:(NSDate *)limitDate;
 - (BOOL)runMode:(NSRunLoopMode)mode beforeDate:(NSDate *)limitDate;
 
-#if (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE))
+#if TARGET_OS_OSX
 - (void)configureAsServer API_DEPRECATED("Not supported", macos(10.0,10.5), ios(2.0,2.0), watchos(2.0,2.0), tvos(9.0,9.0));
 #endif
 

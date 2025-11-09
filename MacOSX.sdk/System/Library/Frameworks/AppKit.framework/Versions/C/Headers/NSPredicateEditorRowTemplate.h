@@ -1,7 +1,7 @@
 /*
         NSPredicateEditorRowTemplate.h
 	Application Kit
-	Copyright (c) 2006-2018, Apple Inc.
+	Copyright (c) 2006-2019, Apple Inc.
 	All rights reserved.
 */
 
@@ -12,27 +12,12 @@
 #import <AppKit/AppKitDefines.h>
 
 NS_ASSUME_NONNULL_BEGIN
+API_UNAVAILABLE_BEGIN(ios)
 
 @class NSPredicate, NSEntityDescription, NSView;
 
-NS_CLASS_AVAILABLE(10_5, NA)
-@interface NSPredicateEditorRowTemplate : NSObject <NSCoding, NSCopying> {
-    @private
-    NSInteger _templateType APPKIT_IVAR;
-    NSUInteger _predicateOptions APPKIT_IVAR;
-    NSUInteger _predicateModifier APPKIT_IVAR;
-    NSUInteger _leftAttributeType APPKIT_IVAR;
-    NSUInteger _rightAttributeType APPKIT_IVAR;
-    NSArray *_views APPKIT_IVAR;
-    
-    struct {
-	unsigned leftIsWildcard:1;
-	unsigned rightIsWildcard:1;
-	unsigned reserved:30;
-    } _ptFlags APPKIT_IVAR;
-    
-    id _patternReserved __unused APPKIT_IVAR;
-}
+API_AVAILABLE(macos(10.5))
+@interface NSPredicateEditorRowTemplate : NSObject <NSCoding, NSCopying>
 
 /* returns a positive number if the template can represent the predicate, and zero if it cannot.  The highest match determines which template is responsible for displaying the predicate.  Developers can override this to determine which predicates their custom template handles.  By default, this returns values in the range [0., 1.]
 */
@@ -81,5 +66,6 @@ NS_CLASS_AVAILABLE(10_5, NA)
 
 @end
 
+API_UNAVAILABLE_END
 NS_ASSUME_NONNULL_END
 

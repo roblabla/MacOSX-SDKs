@@ -166,11 +166,12 @@ API_AVAILABLE(macos(10.11), ios(8.0))
 
 typedef NS_ENUM(NSUInteger, MTLLanguageVersion) {
 
-    MTLLanguageVersion1_0 API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos) = (1 << 16),
+    MTLLanguageVersion1_0 API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, macCatalyst) = (1 << 16),
     MTLLanguageVersion1_1 API_AVAILABLE(macos(10.11), ios(9.0)) = (1 << 16) + 1,
     MTLLanguageVersion1_2 API_AVAILABLE(macos(10.12), ios(10.0)) = (1 << 16) + 2,
     MTLLanguageVersion2_0 API_AVAILABLE(macos(10.13), ios(11.0)) = (2 << 16),
     MTLLanguageVersion2_1 API_AVAILABLE(macos(10.14), ios(12.0)) = (2 << 16) + 1,
+    MTLLanguageVersion2_2 API_AVAILABLE(macos(10.15), ios(13.0)) = (2 << 16) + 2,
 } API_AVAILABLE(macos(10.11), ios(9.0));
 
 MTL_EXPORT API_AVAILABLE(macos(10.11), ios(8.0))
@@ -206,7 +207,7 @@ MTL_EXPORT API_AVAILABLE(macos(10.11), ios(8.0))
  @abstract NSErrors raised when creating a library.
  */
 API_AVAILABLE(macos(10.11), ios(8.0))
-MTL_EXTERN NSString *const MTLLibraryErrorDomain;
+MTL_EXTERN NSErrorDomain const MTLLibraryErrorDomain;
 
 /*!
  @enum MTLLibraryError
@@ -258,7 +259,7 @@ API_AVAILABLE(macos(10.11), ios(8.0))
  @discussion This method is asynchronous since it is will call the compiler.
  */
 - (void) newFunctionWithName:(NSString *)name constantValues:(MTLFunctionConstantValues *)constantValues
-			completionHandler:(void (^)(id<MTLFunction> __nullable function, NSError* error))completionHandler API_AVAILABLE(macos(10.12), ios(10.0));
+			completionHandler:(void (^)(id<MTLFunction> __nullable function, NSError* __nullable error))completionHandler API_AVAILABLE(macos(10.12), ios(10.0));
 
 /*!
  @property functionNames

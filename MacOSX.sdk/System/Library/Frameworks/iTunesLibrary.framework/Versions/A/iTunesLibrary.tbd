@@ -1,9 +1,8 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 2E93DA04-8A16-3124-B8C1-67451CE2E90E' ]
+uuids:           [ 'x86_64: F4227547-2A16-38F1-AC6B-149119B99D03' ]
 platform:        macosx
-install-name:    /System/Library/Frameworks/iTunesLibrary.framework/Versions/A/iTunesLibrary
-objc-constraint: none
+install-name:    '/System/Library/Frameworks/iTunesLibrary.framework/Versions/A/iTunesLibrary'
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ '$ld$install_name$os10.10$/Library/Frameworks/iTunesLibrary.framework/iTunesLibrary', 
@@ -17,30 +16,36 @@ exports:
                        _ITLibMediaEntityPropertyPersistentID, _ITLibMediaItemPropertyAddedDate, 
                        _ITLibMediaItemPropertyAlbumArtist, _ITLibMediaItemPropertyAlbumDiscCount, 
                        _ITLibMediaItemPropertyAlbumDiscNumber, _ITLibMediaItemPropertyAlbumIsCompilation, 
-                       _ITLibMediaItemPropertyAlbumIsGapless, _ITLibMediaItemPropertyAlbumRating, 
-                       _ITLibMediaItemPropertyAlbumRatingComputed, _ITLibMediaItemPropertyAlbumTitle, 
-                       _ITLibMediaItemPropertyAlbumTrackCount, _ITLibMediaItemPropertyArtistName, 
+                       _ITLibMediaItemPropertyAlbumIsGapless, _ITLibMediaItemPropertyAlbumPersistentID, 
+                       _ITLibMediaItemPropertyAlbumRating, _ITLibMediaItemPropertyAlbumRatingComputed, 
+                       _ITLibMediaItemPropertyAlbumTitle, _ITLibMediaItemPropertyAlbumTrackCount, 
+                       _ITLibMediaItemPropertyArtistName, _ITLibMediaItemPropertyArtistPersistentID, 
                        _ITLibMediaItemPropertyArtwork, _ITLibMediaItemPropertyBeatsPerMinute, 
-                       _ITLibMediaItemPropertyBitRate, _ITLibMediaItemPropertyCategory, 
-                       _ITLibMediaItemPropertyComments, _ITLibMediaItemPropertyComposer, 
-                       _ITLibMediaItemPropertyContentRating, _ITLibMediaItemPropertyDescription, 
-                       _ITLibMediaItemPropertyFileSize, _ITLibMediaItemPropertyFileType, 
-                       _ITLibMediaItemPropertyGenre, _ITLibMediaItemPropertyGrouping, 
-                       _ITLibMediaItemPropertyHasArtwork, _ITLibMediaItemPropertyIsDRMProtected, 
+                       _ITLibMediaItemPropertyBitRate, _ITLibMediaItemPropertyBookmarkTime, 
+                       _ITLibMediaItemPropertyCategory, _ITLibMediaItemPropertyComments, 
+                       _ITLibMediaItemPropertyComposer, _ITLibMediaItemPropertyContentRating, 
+                       _ITLibMediaItemPropertyDescription, _ITLibMediaItemPropertyFileSize, 
+                       _ITLibMediaItemPropertyFileType, _ITLibMediaItemPropertyGenre, 
+                       _ITLibMediaItemPropertyGrouping, _ITLibMediaItemPropertyHasArtwork, 
+                       _ITLibMediaItemPropertyIsCloud, _ITLibMediaItemPropertyIsDRMProtected, 
                        _ITLibMediaItemPropertyIsPurchased, _ITLibMediaItemPropertyIsUserDisabled, 
                        _ITLibMediaItemPropertyIsVideo, _ITLibMediaItemPropertyKind, 
                        _ITLibMediaItemPropertyLastPlayDate, _ITLibMediaItemPropertyLocation, 
-                       _ITLibMediaItemPropertyLocationType, _ITLibMediaItemPropertyLyricsContentRating, 
-                       _ITLibMediaItemPropertyMediaKind, _ITLibMediaItemPropertyModifiedDate, 
-                       _ITLibMediaItemPropertyMovementCount, _ITLibMediaItemPropertyMovementName, 
-                       _ITLibMediaItemPropertyMovementNumber, _ITLibMediaItemPropertyPlayCount, 
-                       _ITLibMediaItemPropertyPlayStatus, _ITLibMediaItemPropertyRating, 
+                       _ITLibMediaItemPropertyLocationType, _ITLibMediaItemPropertyLongDescription, 
+                       _ITLibMediaItemPropertyLyricsContentRating, _ITLibMediaItemPropertyMediaKind, 
+                       _ITLibMediaItemPropertyModifiedDate, _ITLibMediaItemPropertyMovementCount, 
+                       _ITLibMediaItemPropertyMovementName, _ITLibMediaItemPropertyMovementNumber, 
+                       _ITLibMediaItemPropertyPlayCount, _ITLibMediaItemPropertyPlayStatus, 
+                       _ITLibMediaItemPropertyPodcastChannelID, _ITLibMediaItemPropertyPodcastDoNotAutoDelete, 
+                       _ITLibMediaItemPropertyPodcastEpisodeGUID, _ITLibMediaItemPropertyPodcastFeedURL, 
+                       _ITLibMediaItemPropertyPurchaseDate, _ITLibMediaItemPropertyRating, 
                        _ITLibMediaItemPropertyRatingComputed, _ITLibMediaItemPropertyReleaseDate, 
                        _ITLibMediaItemPropertySampleRate, _ITLibMediaItemPropertySize, 
                        _ITLibMediaItemPropertySkipDate, _ITLibMediaItemPropertySortAlbumArtist, 
                        _ITLibMediaItemPropertySortAlbumTitle, _ITLibMediaItemPropertySortArtistName, 
                        _ITLibMediaItemPropertySortComposer, _ITLibMediaItemPropertySortTitle, 
                        _ITLibMediaItemPropertyStartTime, _ITLibMediaItemPropertyStopTime, 
+                       _ITLibMediaItemPropertyStoreItemID, _ITLibMediaItemPropertyStorePlaylistID, 
                        _ITLibMediaItemPropertyTitle, _ITLibMediaItemPropertyTotalTime, 
                        _ITLibMediaItemPropertyTrackNumber, _ITLibMediaItemPropertyUserSkipCount, 
                        _ITLibMediaItemPropertyVideoEpisode, _ITLibMediaItemPropertyVideoEpisodeOrder, 
@@ -49,9 +54,9 @@ exports:
                        _ITLibMediaItemPropertyVideoSortSeries, _ITLibMediaItemPropertyVideoWidth, 
                        _ITLibMediaItemPropertyVoiceOverLanguage, _ITLibMediaItemPropertyVolumeAdjustment, 
                        _ITLibMediaItemPropertyVolumeNormalizationEnergy, _ITLibMediaItemPropertyWork, 
-                       _ITLibMediaItemPropertyYear, _ITLibPlaylistPropertyAllItemsPlaylist, 
-                       _ITLibPlaylistPropertyDistinguisedKind, _ITLibPlaylistPropertyItems, 
-                       _ITLibPlaylistPropertyKind, _ITLibPlaylistPropertyMaster, 
+                       _ITLibMediaItemPropertyYear, _ITLibPlaylistPropertyAddedDate, 
+                       _ITLibPlaylistPropertyAllItemsPlaylist, _ITLibPlaylistPropertyDistinguisedKind, 
+                       _ITLibPlaylistPropertyItems, _ITLibPlaylistPropertyKind, _ITLibPlaylistPropertyMaster, 
                        _ITLibPlaylistPropertyName, _ITLibPlaylistPropertyParentPersistentID, 
                        _ITLibPlaylistPropertyVisible, _kITLibraryRestrictionAppsLimit, 
                        _kITLibraryRestrictionDisableAppleMusic, _kITLibraryRestrictionDisableArtistConnect, 
@@ -62,7 +67,8 @@ exports:
                        _kITLibraryRestrictionRestrictApps, _kITLibraryRestrictionRestrictMovies, 
                        _kITLibraryRestrictionRestrictTVShows, _kITLibraryRestrictionTVShowsLimit ]
     objc-classes:    [ ITLibAlbum, ITLibArtist, ITLibArtwork, ITLibMediaEntity, ITLibMediaItem, 
-                       ITLibMediaItemVideoInfo, ITLibPlaylist, ITLibrary ]
+                       ITLibMediaItemVideoInfo, ITLibPlaylist, ITLibPodcastFeed, 
+                       ITLibrary ]
     objc-ivars:      [ ITLibAlbum._albumArtist, ITLibAlbum._compilation, ITLibAlbum._discCount, 
                        ITLibAlbum._discNumber, ITLibAlbum._gapless, ITLibAlbum._persistentID, 
                        ITLibAlbum._rating, ITLibAlbum._ratingComputed, ITLibAlbum._sortAlbumArtist, 
@@ -73,6 +79,5 @@ exports:
                        ITLibMediaItemVideoInfo._episodeOrder, ITLibMediaItemVideoInfo._hd, 
                        ITLibMediaItemVideoInfo._season, ITLibMediaItemVideoInfo._series, 
                        ITLibMediaItemVideoInfo._sortSeries, ITLibMediaItemVideoInfo._videoHeight, 
-                       ITLibMediaItemVideoInfo._videoWidth, ITLibPlaylist._items, 
-                       ITLibrary._impl ]
+                       ITLibMediaItemVideoInfo._videoWidth, ITLibPlaylist._items ]
 ...

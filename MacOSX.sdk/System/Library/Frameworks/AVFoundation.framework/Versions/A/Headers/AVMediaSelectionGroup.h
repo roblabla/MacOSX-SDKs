@@ -3,7 +3,7 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2011-2018 Apple Inc. All rights reserved.
+	Copyright 2011-2017 Apple Inc. All rights reserved.
 
 */
 
@@ -23,7 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
 @class AVMediaSelectionOption;
 @class AVMediaSelectionGroupInternal;
 
-NS_CLASS_AVAILABLE(10_8, 5_0)
+API_AVAILABLE(macos(10.8), ios(5.0), tvos(9.0), watchos(1.0))
 @interface AVMediaSelectionGroup : NSObject <NSCopying> {
 @private
 	AVMediaSelectionGroupInternal	*_mediaSelectionGroup;
@@ -42,7 +42,7 @@ NS_CLASS_AVAILABLE(10_8, 5_0)
  @discussion
 	Can be nil, indicating that without a specific end-user selection or preference, no option in the group is intended to be selected.
 */
-@property (nonatomic, readonly, nullable) AVMediaSelectionOption *defaultOption NS_AVAILABLE(10_10, 8_0);
+@property (nonatomic, readonly, nullable) AVMediaSelectionOption *defaultOption API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(1.0));
 
 /*!
  @property		allowsEmptySelection
@@ -93,7 +93,7 @@ NS_CLASS_AVAILABLE(10_8, 5_0)
 				An array of language identifiers in order of preference, each of which is an IETF BCP 47 (RFC 4646) language identifier. Use +[NSLocale preferredLanguages] to obtain the user's list of preferred languages.
  @result		An instance of NSArray containing media selection options of the specified NSArray that match a preferred language, sorted according to the order of preference of the language each matches.
 */
-+ (NSArray<AVMediaSelectionOption *> *)mediaSelectionOptionsFromArray:(NSArray<AVMediaSelectionOption *> *)mediaSelectionOptions filteredAndSortedAccordingToPreferredLanguages:(NSArray<NSString *> *)preferredLanguages NS_AVAILABLE(10_8, 6_0);
++ (NSArray<AVMediaSelectionOption *> *)mediaSelectionOptionsFromArray:(NSArray<AVMediaSelectionOption *> *)mediaSelectionOptions filteredAndSortedAccordingToPreferredLanguages:(NSArray<NSString *> *)preferredLanguages API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(1.0));
 
 /*!
   @method		mediaSelectionOptionsFromArray:withLocale:
@@ -143,7 +143,7 @@ NS_CLASS_AVAILABLE(10_8, 5_0)
 @class AVMediaSelectionOptionInternal;
 @class AVMetadataItem;
 
-NS_CLASS_AVAILABLE(10_8, 5_0)
+API_AVAILABLE(macos(10.8), ios(5.0), tvos(9.0), watchos(1.0))
 @interface AVMediaSelectionOption : NSObject <NSCopying> {
 @private
 	AVMediaSelectionOptionInternal	*_mediaSelectionOption;
@@ -186,7 +186,7 @@ NS_CLASS_AVAILABLE(10_8, 5_0)
  @property		extendedLanguageTag
  @abstract		Indicates the RFC 4646 language tag associated with the option. May be nil.
  */
-@property (nonatomic, readonly, nullable) NSString *extendedLanguageTag NS_AVAILABLE(10_9, 7_0);
+@property (nonatomic, readonly, nullable) NSString *extendedLanguageTag API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(1.0));
 
 /*!
  @property		locale
@@ -268,7 +268,7 @@ NS_CLASS_AVAILABLE(10_8, 5_0)
   @discussion
    May use this option's common metadata, media characteristics and locale properties in addition to the provided locale to formulate an NSString intended for display. Will only consider common metadata with the specified locale.
 */
-- (NSString *)displayNameWithLocale:(NSLocale *)locale NS_AVAILABLE(10_9, 7_0);
+- (NSString *)displayNameWithLocale:(NSLocale *)locale API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(1.0));
 
 /*!
   @property		displayName
@@ -278,7 +278,7 @@ NS_CLASS_AVAILABLE(10_8, 5_0)
    In the event that common metadata is not available in the specified locale, displayName will fall back to considering locales with the multilingual ("mul") then undetermined ("und") locale identifiers.
    For a display name strictly with the specified locale use displayNameWithLocale: instead.
 */
-@property (nonatomic, readonly) NSString *displayName NS_AVAILABLE(10_9, 7_0);
+@property (nonatomic, readonly) NSString *displayName API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(1.0));
 
 @end
 

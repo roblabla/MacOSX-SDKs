@@ -1,9 +1,8 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 480D472D-C8FB-321D-86EC-2EA6927A97AD' ]
-platform:        macosx
-install-name:    /System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/ATS.framework/Versions/A/Resources/libFontRegistry.dylib
-objc-constraint: none
+uuids:           [ 'x86_64: 8A30DA90-EDE1-3C1C-BFB1-FC9F5E2DB4BC', 'x86_64: 8A30DA90-EDE1-3C1C-BFB1-FC9F5E2DB4BC' ]
+platform:        zippered
+install-name:    '/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/ATS.framework/Versions/A/Resources/libFontRegistry.dylib'
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _XTAuthenticateAsAdminFromExternalAuthorization, _XTCopyAutoActivatedFontURLs, 
@@ -41,11 +40,11 @@ exports:
                        _XTSetAutoActivationSetting, _XTSetFrameworkFontChangedCallback, 
                        _XTSetPropertiesForFonts, _XTUnregisterDataFont, _XTUnregisterFont, 
                        _XTUnregisterFont2, _XTUnregisterFontDirectory, _XTUnregisterFonts, 
-                       _XTUnregisterFonts2, _kXTFontPropertyBookmark, _kXTFontPropertyCharacterSet, 
-                       _kXTFontPropertyCopyrightName, _kXTFontPropertyDesignLanguages, 
-                       _kXTFontPropertyDesignerName, _kXTFontPropertyDirectory, _kXTFontPropertyDomain, 
-                       _kXTFontPropertyDuplicateRanking, _kXTFontPropertyEnabled, 
-                       _kXTFontPropertyFamilyName, _kXTFontPropertyFamilyNameAliases, 
+                       _XTUnregisterFonts2, _kXTFontAssetType, _kXTFontPropertyBookmark, 
+                       _kXTFontPropertyCharacterSet, _kXTFontPropertyCopyrightName, 
+                       _kXTFontPropertyDesignLanguages, _kXTFontPropertyDesignerName, 
+                       _kXTFontPropertyDirectory, _kXTFontPropertyDomain, _kXTFontPropertyDuplicateRanking, 
+                       _kXTFontPropertyEnabled, _kXTFontPropertyFamilyName, _kXTFontPropertyFamilyNameAliases, 
                        _kXTFontPropertyFlags, _kXTFontPropertyFontRef, _kXTFontPropertyForFontsLanguageMap, 
                        _kXTFontPropertyFormat, _kXTFontPropertyFullName, _kXTFontPropertyGlyphCount, 
                        _kXTFontPropertyIgnoreScriptAnalysis, _kXTFontPropertyInstallationKind, 

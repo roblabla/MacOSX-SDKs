@@ -1,11 +1,11 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: CF5D53D4-FA42-3AC8-B051-718ECCF74E05' ]
+uuids:           [ 'x86_64: A5749979-9866-3E91-9F5E-F1861FFEBAD2' ]
 platform:        macosx
-install-name:    /System/Library/PrivateFrameworks/VCXMPP.framework/Versions/A/Frameworks/Pear.framework/Versions/A/Pear
+install-name:    '/System/Library/PrivateFrameworks/VCXMPP.framework/Versions/A/Frameworks/Pear.framework/Versions/A/Pear'
 exports:         
   - archs:           [ x86_64 ]
-    re-exports:      [ /usr/lib/libxml2.2.dylib ]
+    re-exports:      [ '/usr/lib/libxml2.2.dylib' ]
     symbols:         [ _LibXML2NodeListCreateFromPearCodecInfoList, _PearCodecInfoCopyLibXML2Node, 
                        _PearCodecInfoCopySDPString, _PearCodecInfoCreateAudioCodec, 
                        _PearCodecInfoCreateVideoCodec, _PearCodecInfoCreateWithLibXML2Node, 

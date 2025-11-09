@@ -1,12 +1,17 @@
 //
-//  Copyright © 2016 Apple, Inc. All rights reserved.
+//  PHLivePhotoEditingContext.h
+//  Photos
+//
+//  Copyright (c) 2016 Apple Inc. All rights reserved.
 //
 
 #import <Photos/PHLivePhoto.h>
 #import <CoreImage/CIImage.h>
 #import <CoreMedia/CMTime.h>
+#import <ImageIO/CGImageProperties.h>
 
 NS_ASSUME_NONNULL_BEGIN
+API_AVAILABLE_BEGIN(macos(10.12), ios(10), tvos(10))
 
 @protocol PHLivePhotoFrame;
 @class PHContentEditingInput;
@@ -17,7 +22,8 @@ typedef CIImage * _Nullable (^PHLivePhotoFrameProcessingBlock)(id <PHLivePhotoFr
 
 typedef NSString * const PHLivePhotoEditingOption NS_STRING_ENUM;
 
-NS_CLASS_AVAILABLE(10_12, 10_0) @interface PHLivePhotoEditingContext : NSObject
+OS_EXPORT
+@interface PHLivePhotoEditingContext : NSObject
 
 /// Initializer from the specified live photo input
 /// Return nil if the specified input is not for a live photo
@@ -37,9 +43,6 @@ NS_CLASS_AVAILABLE(10_12, 10_0) @interface PHLivePhotoEditingContext : NSObject
 /// The time of the still image within the live photo
 @property (readonly) CMTime photoTime;
 
-// The orientation of the live photo
-@property (readonly) CGImagePropertyOrientation orientation;
-
 // ------------------------------------------------------------------------
 // Editable properties
 // ------------------------------------------------------------------------
@@ -48,10 +51,13 @@ NS_CLASS_AVAILABLE(10_12, 10_0) @interface PHLivePhotoEditingContext : NSObject
 /// Note that the context uses a copy of the processor block during processing
 @property (nullable, copy) PHLivePhotoFrameProcessingBlock frameProcessor;
 
-/// Specify the volume gain of the live photo
+/// Specify the audio volume of the edited live photo
 /// Must be between 0.0 and 1.0
 /// Default to 1.0
 @property float audioVolume;
+
+// The orientation of the live photo
+@property (readonly) CGImagePropertyOrientation orientation;
 
 // ------------------------------------------------------------------------
 // Processing
@@ -67,23 +73,22 @@ NS_CLASS_AVAILABLE(10_12, 10_0) @interface PHLivePhotoEditingContext : NSObject
 
 /// Cancel the current asynchronous operation
 /// This is implicitly called whenever prepare or save is called
-/// A canceled operation will call its completion handler with an appropriate error code of PHLivePhotoEditingErrorCodeAborted
+/// A canceled operation will call its completion handler with an appropriate error code
 - (void)cancel;
 
 @end
 
-/// Type of frames in a Live Photo
-typedef NS_ENUM(NSInteger, PHLivePhotoFrameType)
-{
-    /// Indicate the still image
+/// The type of frame in the Live Photo
+typedef NS_ENUM(NSInteger, PHLivePhotoFrameType) {
+    /// Indicates the still image
     PHLivePhotoFrameTypePhoto,
     
-    /// Indicate a video frame
+    /// Indicates a video frame
     PHLivePhotoFrameTypeVideo,
-} NS_ENUM_AVAILABLE(10_12, 10_0);
+};
 
 /// Protocol that describes a single frame of a live photo
-NS_CLASS_AVAILABLE(10_12, 10_0) @protocol PHLivePhotoFrame <NSObject>
+@protocol PHLivePhotoFrame
 
 /// Input image for the frame
 @property (readonly) CIImage *image;
@@ -91,7 +96,7 @@ NS_CLASS_AVAILABLE(10_12, 10_0) @protocol PHLivePhotoFrame <NSObject>
 /// The time of the frame relative to the beginning of the live photo
 @property (readonly) CMTime time;
 
-/// The type of frame (photo or video)
+/// The type of frame
 @property (nonatomic, readonly) PHLivePhotoFrameType type;
 
 /// The scale of the frame relative to the full-size image
@@ -107,20 +112,20 @@ NS_CLASS_AVAILABLE(10_12, 10_0) @protocol PHLivePhotoFrame <NSObject>
 /// If set to NO (the default) the live photo will always be rendered before playback
 /// If set to YES, the editing context might still choose to render first for performance reasons
 /// This option is ignored by the saveLivePhotoToOutput method
-extern PHLivePhotoEditingOption PHLivePhotoShouldRenderAtPlaybackTime NS_AVAILABLE(10_12, 10_0);
+extern PHLivePhotoEditingOption PHLivePhotoShouldRenderAtPlaybackTime API_AVAILABLE(ios(11), tvos(11));
 
 // ------------------------------------------------------------------------
 // Errors
 // ------------------------------------------------------------------------
 
-/// The error domain for all Live Photo Editing errors
-extern NSString * const PHLivePhotoEditingErrorDomain NS_AVAILABLE(10_12, 10_0);
+/// The error domain for all Live Photo Editing errors (Deprecated).
+extern NSString * const PHLivePhotoEditingErrorDomain API_DEPRECATED_WITH_REPLACEMENT("PHPhotosErrorDomain", macos(10.12, 10.15)) API_UNAVAILABLE(ios, tvos, macCatalyst);
 
-/// Error code for Live Photo Editing errors
-typedef NS_ENUM(NSInteger, PHLivePhotoEditingErrorCode)
-{
-    PHLivePhotoEditingErrorCodeUnknown,
-    PHLivePhotoEditingErrorCodeAborted,
-} NS_AVAILABLE(10_12, 10_0);
+/// Error code for Live Photo Editing errors (Deprecated)
+typedef NS_ENUM(NSInteger, PHLivePhotoEditingErrorCode) {
+    PHLivePhotoEditingErrorCodeUnknown API_DEPRECATED_WITH_REPLACEMENT("PHPhotosErrorInvalid", macos(10.12, 10.15)),
+    PHLivePhotoEditingErrorCodeAborted API_DEPRECATED_WITH_REPLACEMENT("PHPhotosErrorUserCancelled", macos(10.12, 10.15)),
+} API_UNAVAILABLE(ios, tvos, macCatalyst);
 
+API_AVAILABLE_END
 NS_ASSUME_NONNULL_END

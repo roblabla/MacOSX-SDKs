@@ -30,7 +30,7 @@ NS_ASSUME_NONNULL_BEGIN
 		clients must serialize their access with the associated AVPlayer's notification queue. In the common case, such serialization
 		is naturally achieved by invoking AVPlayerItemTrack's various methods on the main thread or queue.
 */
-NS_CLASS_AVAILABLE(10_7, 4_0)
+API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0))
 @interface AVPlayerItemTrack : NSObject
 {
 @private
@@ -57,7 +57,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
  @abstract		If the media type of the assetTrack is AVMediaTypeVideo, indicates the current frame rate of the track as it plays, in units of frames per second. If the item is not playing, or if the media type of the track is not video, the value of this property is 0.
  @discussion	This property is not observable.
 */
-@property (nonatomic, readonly) float currentVideoFrameRate NS_AVAILABLE(10_9, 7_0);
+@property (nonatomic, readonly) float currentVideoFrameRate API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 
 #if (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE))
 
@@ -65,7 +65,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
  @constant		AVPlayerItemTrackVideoFieldModeDeinterlaceFields
  @abstract		Use with videoFieldMode property to request deinterlacing of video fields.
 */
-AVF_EXPORT NSString *const AVPlayerItemTrackVideoFieldModeDeinterlaceFields NS_AVAILABLE_MAC(10_10);
+AVF_EXPORT NSString *const AVPlayerItemTrackVideoFieldModeDeinterlaceFields API_AVAILABLE(macos(10.10)) API_UNAVAILABLE(ios, tvos, watchos);
 
 /*!
  @property		videoFieldMode
@@ -73,7 +73,7 @@ AVF_EXPORT NSString *const AVPlayerItemTrackVideoFieldModeDeinterlaceFields NS_A
  @discussion	A value of nil indicates default processing of video frames. If you want video fields to be deinterlaced, set videoFieldMode to AVPlayerItemTrackVideoFieldModeDeinterlaceFields.
  				You can test whether video being played has multiple fields by examining the underlying AVAssetTrack's format descriptions. See -[AVAssetTrack formatDescriptions] and, for video format descriptions, kCMFormatDescriptionExtension_FieldCount.
 */
-@property (nonatomic, copy, nullable) NSString *videoFieldMode NS_AVAILABLE_MAC(10_10);
+@property (nonatomic, copy, nullable) NSString *videoFieldMode API_AVAILABLE(macos(10.10)) API_UNAVAILABLE(ios, tvos, watchos);
 
 #endif
 

@@ -29,8 +29,6 @@ typedef struct {
 	uint32_t  stageInSize[3];
 } MTLStageInRegionIndirectArguments API_AVAILABLE(macos(10.14), ios(12.0));
 
-
-
 /*!
  @protocol MTLComputeCommandEncoder
  @abstract A command encoder that writes data parallel compute commands.
@@ -154,7 +152,7 @@ API_AVAILABLE(macos(10.11), ios(8.0))
  @abstract Enqueue a compute function dispatch using an arbitrarily-sized grid.
  @discussion threadsPerGrid does not have to be a multiple of the  threadGroup size
  */
-- (void)dispatchThreads:(MTLSize)threadsPerGrid threadsPerThreadgroup:(MTLSize)threadsPerThreadgroup API_AVAILABLE(macos(10.13), ios(11.0));
+- (void)dispatchThreads:(MTLSize)threadsPerGrid threadsPerThreadgroup:(MTLSize)threadsPerThreadgroup API_AVAILABLE(macos(10.13), ios(11.0)) API_UNAVAILABLE(tvos);
 
 /*!
  @method updateFence:
@@ -176,28 +174,33 @@ API_AVAILABLE(macos(10.11), ios(8.0))
 /*!
  * @method useResource:usage:
  * @abstract Declare that a resource may be accessed by the command encoder through an argument buffer
- * @discussion This method does not protect against data hazards; these hazards must be addressed using an MTLFence. This method must be called before encoding any dispatch commands which may access the resource through an argument buffer.
+ * 
+ * @discussion For tracked MTLResources, this method protects against data hazards. This method must be called before encoding any dispatch commands which may access the resource through an argument buffer.
+ * @warning Prior to iOS 13, macOS 10.15, this method does not protect against data hazards. If you are deploying to older versions of macOS or iOS, use fences to ensure data hazards are resolved.
  */
 - (void)useResource:(id <MTLResource>)resource usage:(MTLResourceUsage)usage API_AVAILABLE(macos(10.13), ios(11.0));
 
 /*!
  * @method useResources:count:usage:
  * @abstract Declare that an array of resources may be accessed through an argument buffer by the command encoder
- * @discussion This method does not protect against data hazards; these hazards must be addressed using an MTLFence. This method must be called before encoding any dispatch commands which may access the resources through an argument buffer.
+ * @discussion For tracked MTL Resources, this method protects against data hazards. This method must be called before encoding any dispatch commands which may access the resources through an argument buffer.
+ * @warning Prior to iOS 13, macOS 10.15, this method does not protect against data hazards. If you are deploying to older versions of macOS or iOS, use fences to ensure data hazards are resolved.
  */
 - (void)useResources:(const id <MTLResource> __nonnull[__nonnull])resources count:(NSUInteger)count usage:(MTLResourceUsage)usage API_AVAILABLE(macos(10.13), ios(11.0));
 
 /*!
  * @method useHeap:
- * @abstract Declare that the resources allocated from a heap may be accessed by the render pass through an argument buffer
- * @discussion This method does not protect against data hazards; these hazards must be addressed using an MTLFence. This method must be called before encoding any dispatch commands which may access the resources allocated from the heap through an argument buffer. This method may cause all of the color attachments allocated from the heap to become decompressed. Therefore, it is recommended that the useResource:usage: or useResources:count:usage: methods be used for color attachments instead, with a minimal (i.e. read-only) usage.
+ * @abstract Declare that the resources allocated from a heap may be accessed as readonly by the render pass through an argument buffer
+ * @discussion For tracked MTLHeaps, this method protects against data hazards. This method must be called before encoding any dispatch commands which may access the resources allocated from the heap through an argument buffer. This method may cause all of the color attachments allocated from the heap to become decompressed. Therefore, it is recommended that the useResource:usage: or useResources:count:usage: methods be used for color attachments instead, with a minimal (i.e. read-only) usage.
+ * @warning Prior to iOS 13, macOS 10.15, this method does not protect against data hazards. If you are deploying to older versions of macOS or iOS, use fences to ensure data hazards are resolved.
  */
 - (void)useHeap:(id <MTLHeap>)heap API_AVAILABLE(macos(10.13), ios(11.0));
 
 /*!
  * @method useHeaps:count:
- * @abstract Declare that the resources allocated from an array of heaps may be accessed by the render pass through an argument buffer
- * @discussion This method does not protect against data hazards; these hazards must be addressed using an MTLFence. This method must be called before encoding any dispatch commands which may access the resources allocated from the heaps through an argument buffer. This method may cause all of the color attachments allocated from the heaps to become decompressed. Therefore, it is recommended that the useResource:usage: or useResources:count:usage: methods be used for color attachments instead, with a minimal (i.e. read-only) usage.
+ * @abstract Declare that the resources allocated from an array of heaps may be accessed as readonly by the render pass through an argument buffer
+ * @discussion For tracked MTLHeaps, this method protects against data hazards. This method must be called before encoding any dispatch commands which may access the resources allocated from the heaps through an argument buffer. This method may cause all of the color attachments allocated from the heaps to become decompressed. Therefore, it is recommended that the useResource:usage: or useResources:count:usage: methods be used for color attachments instead, with a minimal (i.e. read-only) usage.
+ * @warning Prior to iOS 13, macOS 10.15, this method does not protect against data hazards. If you are deploying to older versions of macOS or iOS, use fences to ensure data hazards are resolved.
  */
 - (void)useHeaps:(const id <MTLHeap> __nonnull[__nonnull])heaps count:(NSUInteger)count API_AVAILABLE(macos(10.13), ios(11.0));
     
@@ -219,7 +222,24 @@ API_AVAILABLE(macos(10.11), ios(8.0))
  */
 - (void)memoryBarrierWithResources:(const id<MTLResource> __nonnull [__nonnull])resources count:(NSUInteger)count API_AVAILABLE(macos(10.14), ios(12.0));
 
-
+/*!
+ @method sampleCountersInBuffer:atSampleIndex:withBarrier:
+ @abstract Sample hardware counters at this point in the compute encoder and
+ store the counter sample into the sample buffer at the specified index.
+ @param sampleBuffer The sample buffer to sample into
+ @param sampleIndex The index into the counter buffer to write the sample
+ @param barrier Insert a barrier before taking the sample.  Passing
+ YES will ensure that all work encoded before this operation in the encoder is
+ complete but does not isolate the work with respect to other encoders.  Passing
+ NO will allow the sample to be taken concurrently with other operations in this
+ encoder.
+ In general, passing YES will lead to more repeatable counter results but
+ may negatively impact performance.  Passing NO will generally be higher performance
+ but counter results may not be repeatable.
+ */
+-(void)sampleCountersInBuffer:(id<MTLCounterSampleBuffer>)sampleBuffer
+                atSampleIndex:(NSUInteger)sampleIndex
+                  withBarrier:(BOOL)barrier API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios);
 
 @end
 NS_ASSUME_NONNULL_END

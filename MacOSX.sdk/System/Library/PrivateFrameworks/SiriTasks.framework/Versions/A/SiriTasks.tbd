@@ -1,8 +1,8 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: C2A090EE-8898-35EE-851D-8F8FC3A4490B' ]
-platform:        macosx
-install-name:    /System/Library/PrivateFrameworks/SiriTasks.framework/Versions/A/SiriTasks
+uuids:           [ 'x86_64: 6AEBE101-B674-3A85-8BD0-8744A700D128', 'x86_64: 6AEBE101-B674-3A85-8BD0-8744A700D128' ]
+platform:        zippered
+install-name:    '/System/Library/PrivateFrameworks/SiriTasks.framework/Versions/A/SiriTasks'
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _STStringFromGenericIntentResponseCode, _STWorkoutErrorDomain ]
@@ -20,8 +20,9 @@ exports:
                        STShowStockOverviewRequest, STShowWeatherConditionsRequest, 
                        STShowWeatherCurrentConditionsRequest, STShowWeatherForecastRequest, 
                        STStartNavigationRequest, STStartWorkoutRequest, STStopNavigationRequest, 
-                       STStopwatchShowAndPerformStopwatchAction, STTemperature, STTimerShowTimerAndPerformAction, 
-                       STUpdateAlarmAction, STUpdateWatchListRequest, STWatchFace, 
-                       STWeatherAttributes, STWeatherCurrentConditions, STWeatherHourlyForecast, 
-                       STWeatherUnits, STWorkoutSetStateRequest ]
+                       STStopwatchShowAndPerformStopwatchAction, STSurfPaymentAction, 
+                       STTemperature, STTimerShowTimerAndPerformAction, STUpdateAlarmAction, 
+                       STUpdateWatchListRequest, STWatchFace, STWeatherAttributes, 
+                       STWeatherCurrentConditions, STWeatherHourlyForecast, STWeatherUnits, 
+                       STWorkoutSetStateRequest ]
 ...

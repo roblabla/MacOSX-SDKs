@@ -32,7 +32,11 @@
 #ifndef WebDownload_h
 #define WebDownload_h
 
+#if (defined TARGET_OS_MACCATALYST && TARGET_OS_MACCATALYST) || (defined(TARGET_OS_WATCH) && TARGET_OS_WATCH)
+#import <CFNetwork/CFNSURLConnection.h>
+#else
 #import <Foundation/NSURLDownload.h>
+#endif
 
 @class NSWindow;
 @class WebDownloadInternal;

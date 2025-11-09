@@ -1,8 +1,8 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 98AB9E24-B72B-3A3B-834F-8335E004D019' ]
-platform:        macosx
-install-name:    /System/Library/PrivateFrameworks/IDSHashPersistence.framework/Versions/A/IDSHashPersistence
+uuids:           [ 'x86_64: F0C7EA25-E1BB-3E10-8F29-5856DCC667E3', 'x86_64: F0C7EA25-E1BB-3E10-8F29-5856DCC667E3' ]
+platform:        zippered
+install-name:    '/System/Library/PrivateFrameworks/IDSHashPersistence.framework/Versions/A/IDSHashPersistence'
 current-version: 800
 exports:         
   - archs:           [ x86_64 ]

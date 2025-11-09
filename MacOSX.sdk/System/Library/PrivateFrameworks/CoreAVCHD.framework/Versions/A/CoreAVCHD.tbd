@@ -1,11 +1,10 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 507AC58B-4527-353B-99CB-67FF183BD4D5' ]
-platform:        macosx
-install-name:    /System/Library/PrivateFrameworks/CoreAVCHD.framework/Versions/A/CoreAVCHD
-current-version: 6000
+uuids:           [ 'x86_64: 0FDFFCBB-8574-3CFA-8F16-C02CC81D7984', 'x86_64: 0FDFFCBB-8574-3CFA-8F16-C02CC81D7984' ]
+platform:        zippered
+install-name:    '/System/Library/PrivateFrameworks/CoreAVCHD.framework/Versions/A/CoreAVCHD'
+current-version: 6100
 compatibility-version: 5600
-objc-constraint: none
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _CAVCHCreateMediaContainer, _CAVCHDCopyClipInfoDictionary, 

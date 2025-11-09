@@ -1,37 +1,31 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: F9F2A6D3-79EB-3DFE-9197-1EA780767CC5' ]
-platform:        macosx
-install-name:    /System/Library/PrivateFrameworks/PowerLog.framework/Versions/A/PowerLog
+uuids:           [ 'x86_64: F550E48F-C5BE-36BD-83F6-0E74C655E6FF', 'x86_64: F550E48F-C5BE-36BD-83F6-0E74C655E6FF' ]
+platform:        zippered
+install-name:    '/System/Library/PrivateFrameworks/PowerLog.framework/Versions/A/PowerLog'
 exports:         
   - archs:           [ x86_64 ]
-    symbols:         [ _PLABCUIQuery, _PLADClientAddValueForScalarKey, _PLADClientBatchKeys, 
-                       _PLADClientPushValueForDistributionKey, _PLADClientSetValueForScalarKey, 
-                       _PLADMonotonicTimeGetCurrent, _PLADPushTimeIntervalForDistributionKeySinceStartTime, 
-                       _PLBatchDropMessages, _PLBatteryGaugeGetSnapshot, _PLBatteryGaugePauseTracing, 
-                       _PLBatteryGaugePauseTracingForBundleId, _PLBatteryGaugePauseTracingForPid, 
-                       _PLBatteryGaugePauseTracingForProcessName, _PLBatteryGaugeResumeTracing, 
+    symbols:         [ _PLBatchDropMessages, _PLBatteryGaugeGetSnapshot, _PLBatteryGaugePauseTracingForBundleId, 
+                       _PLBatteryGaugePauseTracingForPid, _PLBatteryGaugePauseTracingForProcessName, 
                        _PLBatteryGaugeResumeTracingForBundleId, _PLBatteryGaugeResumeTracingForPid, 
-                       _PLBatteryGaugeResumeTracingForProcessName, _PLBatteryGaugeStartTracing, 
-                       _PLBatteryGaugeStartTracingForBundleId, _PLBatteryGaugeStartTracingForPid, 
-                       _PLBatteryGaugeStartTracingForProcessName, _PLBatteryGaugeStopTracing, 
+                       _PLBatteryGaugeResumeTracingForProcessName, _PLBatteryGaugeStartTracingForBundleId, 
+                       _PLBatteryGaugeStartTracingForPid, _PLBatteryGaugeStartTracingForProcessName, 
                        _PLBatteryGaugeStopTracingForBundleId, _PLBatteryGaugeStopTracingForPid, 
                        _PLBatteryGaugeStopTracingForProcessName, _PLBatteryGaugeVersion, 
-                       _PLBatteryLifeMonitorGenericDuetQuery, _PLBatteryLifeMonitorLogCoreDuetAdmissionEvent, 
-                       _PLBatteryLifeMonitorLogCoreDuetEvent, _PLBatteryLifeMonitorLogCoreDuetEventsAggregate, 
-                       _PLBatteryLifeMonitorLogCoreDuetPredictionEvents, _PLBatteryLifeMonitorLogDuetEvent, 
-                       _PLBatteryLifeMonitorReportBatteryCapacityForCoreDuet, _PLBatteryLifeMonitorReportCumulativeTotalDiscretionaryEnergyCoreDuet, 
+                       _PLBatteryLifeMonitorLogCoreDuetAdmissionEvent, _PLBatteryLifeMonitorLogCoreDuetEvent, 
+                       _PLBatteryLifeMonitorLogCoreDuetEventsAggregate, _PLBatteryLifeMonitorLogCoreDuetPredictionEvents, 
+                       _PLBatteryLifeMonitorLogDuetEvent, _PLBatteryLifeMonitorReportBatteryCapacityForCoreDuet, 
+                       _PLBatteryLifeMonitorReportCumulativeTotalDiscretionaryEnergyCoreDuet, 
                        _PLBatteryLifeMonitorReportDiscretionaryBudgetForDuet, _PLBatteryLifeMonitorReportEnergyCoreDuet, 
                        _PLBatteryLifeMonitorReportEnergyDuet, _PLBatteryLifeMonitorStopAllDuetEvents, 
                        _PLBatteryUsageUIQuery, _PLBuildEnergyBucket, _PLBuildEnergyBucketTillNow, 
-                       _PLBuildUsageSnapshot, _PLCopyPowerlog, _PLCopyPowerlogHybrid, 
-                       _PLFDefaultsValueForKey, _PLForceBatching, _PLLogEvent, _PLLogRegisteredAggregateEvent, 
-                       _PLLogRegisteredEvent, _PLLogTimeSensitiveRegisteredEvent, 
-                       _PLMovePowerlogsToCR, _PLQuery, _PLQueryRegistered, _PLShouldLogEvent, 
-                       _PLShouldLogRegisteredEvent, _PLSysdiagnoseCopyPowerlog, _PLTalkToPowerlogHelper, 
-                       _containerPath, _dateFormatter, _getContainerPath, _nanoSecondsFromMachTime, 
-                       _queryPowerlog, _shortUUIDString ]
-    objc-classes:    [ PLClientLogAggregator, PLClientLogger, PLCoreDuetEvent, PLCoreDuetEventInterval, 
-                       PLDuetActivitySchedulerUsageSnapshot, PLEnergyBucket, PLModelingUtilities, 
-                       PLNetworkEnergyModel, PLUsageSnapshot ]
+                       _PLBuildUsageSnapshot, _PLCopyPowerlog, _PLCrashMoverCopyPowerlog, 
+                       _PLForceBatching, _PLLogEvent, _PLLogRegisteredAggregateEvent, 
+                       _PLLogRegisteredEvent, _PLLogRegisteredEventFilterByInterval, 
+                       _PLLogTimeSensitiveRegisteredEvent, _PLMovePowerlogsToCR, 
+                       _PLQuery, _PLQueryRegistered, _PLShouldLogEvent, _PLShouldLogRegisteredEvent, 
+                       _PLSysdiagnoseCopyPowerlog, _PLTalkToPowerlogHelper ]
+    objc-classes:    [ PLCoreDuetEvent, PLCoreDuetEventInterval, PLDuetActivitySchedulerUsageSnapshot, 
+                       PLEnergyBucket, PLModelingUtilities, PLNetworkEnergyModel, 
+                       PLUsageSnapshot ]
 ...

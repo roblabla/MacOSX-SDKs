@@ -1,7 +1,7 @@
 /*
         NSRuleEditor.h
 	Application Kit
-	Copyright (c) 2006-2018, Apple Inc.
+	Copyright (c) 2006-2019, Apple Inc.
 	All rights reserved.
 */
 
@@ -37,6 +37,7 @@ NSRuleEditor exposes one binding, "rows."  The "rows" binding may be bound to an
 */
 
 NS_ASSUME_NONNULL_BEGIN
+API_UNAVAILABLE_BEGIN(ios)
 
 @class NSIndexSet, NSView, NSPredicate, NSString, NSViewAnimation;
 @protocol NSRuleEditorDelegate;
@@ -65,51 +66,7 @@ typedef NS_ENUM(NSUInteger, NSRuleEditorRowType) {
 };
 
 
-@interface NSRuleEditor : NSControl {
-    @private
-    id _ruleDataSource APPKIT_IVAR;
-    __weak id _ruleDelegate APPKIT_IVAR;
-    NSIndexSet *_draggingRows APPKIT_IVAR;
-    NSMutableArray *_rowCache APPKIT_IVAR;
-    NSView *_slicesHolder APPKIT_IVAR;
-    NSMutableArray *_slices APPKIT_IVAR;
-    CGFloat _sliceHeight APPKIT_IVAR;
-    CGFloat _alignmentGridWidth APPKIT_IVAR;
-    NSInteger _subviewIndexOfDropLine APPKIT_IVAR;
-    id _dropLineView APPKIT_IVAR;
-    NSViewAnimation *_currentAnimation APPKIT_IVAR;
-    id _unused1 __unused APPKIT_IVAR;
-    NSString *_stringsFileName APPKIT_IVAR;
-    id _standardLocalizer APPKIT_IVAR;
-    id _headerLocalizer APPKIT_IVAR;
-    NSPredicate *_predicate APPKIT_IVAR;
-    NSInteger _nestingMode APPKIT_IVAR;
-    struct {
-	unsigned elideUpdating:1;
-	unsigned lastAlternateKeyValue:1;
-	unsigned extendedDelegateCalls:1;
-	unsigned editable:1;
-	unsigned settingSize:1;
-	unsigned suppressKeyDown:1;
-	unsigned dropWasSuccessful:1;
-	unsigned delegateWantsValidation:1;
-	unsigned disallowEmpty:1;
-	unsigned lastDrewWithFRAppearance:1;
-	unsigned allowsEmptyCompoundRows:1;
-	unsigned dropChangedRowCount:1;
-	unsigned reserved:20;
-    } _ruleEditorFlags APPKIT_IVAR;
-    NSString *_typeKeyPath APPKIT_IVAR;
-    NSString *_itemsKeyPath APPKIT_IVAR;
-    NSString *_valuesKeyPath APPKIT_IVAR;
-    NSString *_subrowsArrayKeyPath APPKIT_IVAR;
-    Class _rowClass APPKIT_IVAR;
-    id _boundArrayOwner APPKIT_IVAR;
-    NSString *_boundArrayKeyPath APPKIT_IVAR;
-    id _ruleReserved1 __unused APPKIT_IVAR;
-    NSInteger _lastRow APPKIT_IVAR;
-    id _ruleReserved2 __unused APPKIT_IVAR;
-}
+@interface NSRuleEditor : NSControl
 
 /* -- Configuring NSRuleEditor -- */
 
@@ -247,5 +204,6 @@ typedef NS_ENUM(NSUInteger, NSRuleEditorRowType) {
  * The object is the NSRuleEditor; there is no userInfo */
 APPKIT_EXTERN NSNotificationName const NSRuleEditorRowsDidChangeNotification;
 
+API_UNAVAILABLE_END
 NS_ASSUME_NONNULL_END
 

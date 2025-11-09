@@ -1,8 +1,8 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: BDE14D25-4D82-3EBC-8EF2-D1F6BC957B07' ]
+uuids:           [ 'x86_64: 04163CFC-5F1E-385C-8F85-9202F683DE2A' ]
 platform:        macosx
-install-name:    /System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/OpenScripting.framework/Versions/A/OpenScripting
+install-name:    '/System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/OpenScripting.framework/Versions/A/OpenScripting'
 parent-umbrella: Carbon
 exports:         
   - archs:           [ x86_64 ]
@@ -44,5 +44,7 @@ exports:
                        _OSASetResumeDispatchProc, _OSASetScriptInfo, _OSASetSendProc, 
                        _OSAStartRecording, _OSAStopRecording, _OSAStore, _OSAStoreFile, 
                        _OSAStoreScriptDataToFile, _OSAStoreScriptDataToNewFile, __HandleGDUT, 
-                       __OSACopyDisplayString, __OSACopySourceString ]
+                       __OSACopyDisplayString, __OSACopyScriptingDefinitionFromFile, 
+                       __OSACopySourceString, __OSACreateURL, __OSADoScriptURL, __OSALoadExecuteURL, 
+                       __OSALoadURL, __OSAStoreScriptDataToURL, __OSAStoreURL ]
 ...

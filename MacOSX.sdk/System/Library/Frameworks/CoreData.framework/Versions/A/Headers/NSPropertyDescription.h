@@ -1,7 +1,7 @@
 /*
     NSPropertyDescription.h
     Core Data
-    Copyright (c) 2004-2018, Apple Inc.
+    Copyright (c) 2004-2019, Apple Inc.
     All rights reserved.
 */
 
@@ -17,39 +17,6 @@ NS_ASSUME_NONNULL_BEGIN
 // Properties describe values within a managed object. There are different types of properties, each of them represented by a subclass which encapsulates the specific property behavior.
 API_AVAILABLE(macosx(10.4),ios(3.0))
 @interface NSPropertyDescription : NSObject <NSCoding, NSCopying> {
-#if (!__OBJC2__)
-@private
-	NSString *_versionHashModifier;
-	id _underlyingProperty2;
-	NSData *_versionHash;
-    NSEntityDescription *_entity;
-    NSString *_name;
-    NSArray *_validationPredicates;
-    NSArray *_validationWarnings;
-    __strong void *_extraIvars;
-    NSMutableDictionary *_userInfo;
-    struct __propertyDescriptionFlags {
-        unsigned int _isReadOnly:1;
-        unsigned int _isTransient:1;
-        unsigned int _isOptional:1;
-        unsigned int _isIndexed:1;
-        unsigned int _skipValidation:1;
-        unsigned int _isIndexedBySpotlight:1;
-        unsigned int _isStoredInExternalRecord:1;
-		unsigned int _extraIvarsAreInDataBlob:1;
-        unsigned int _isOrdered:1;
-        
-        unsigned int _hasMaxValueInExtraIvars:1;
-        unsigned int _hasMinValueInExtraIvars:1;
-        unsigned int _storeBinaryDataExternally:1;
-        unsigned int _preserveValueOnDelete:1;
-        unsigned int _isTriggerBacked:1;
-        unsigned int _isFileBackedFuture:1;
-        
-        unsigned int _reservedPropertyDescription:17;
-    } _propertyDescriptionFlags;    
-	long _entitysReferenceIDForProperty;
-#endif
 }
 
 @property (nonatomic, readonly, assign) NSEntityDescription *entity;

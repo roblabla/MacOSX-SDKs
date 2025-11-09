@@ -190,7 +190,7 @@ Enable, disable or list disabled smartcard tokens.
 .It Nm list-smartcards
 Display available smartcards.
 .It Nm export-smartcard
-Export items from a smartcard.
+Export/display items from a smartcard.
 .It Nm error
 Display a descriptive message for the given error code(s).
 .El
@@ -463,6 +463,8 @@ Specify an application which may access this item (multiple
 \& options are allowed)
 .It Fl U
 Update item if it already exists (if omitted, the item cannot already exist)
+.It Fl X Ar password
+Specify password data to be added as a hexadecimal string
 .El
 .It
 .Bl -item
@@ -517,6 +519,8 @@ Specify an application which may access this item (multiple
 \& options are allowed)
 .It Fl U
 Update item if it already exists (if omitted, the item cannot already exist)
+.It Fl X Ar password
+Specify password data to be added as a hexadecimal string
 .El
 .It
 .Bl -item
@@ -869,7 +873,7 @@ Show the email addresses in the certificate
 .It Fl p
 Output certificate in pem format.  Default is to dump the attributes and keychain the cert is in.
 .It Fl Z
-Print SHA-1 hash of the certificate
+Print SHA-256 (and SHA-1) hash of the certificate
 .El
 .It
 .Sy Examples
@@ -879,8 +883,8 @@ Exports all certificates from all keychains into a pem file called allcerts.pem.
 .It security> find-certificate -a -e me@foo.com -p > certs.pem
 Exports all certificates from all keychains with the email address
 me@foo.com into a pem file called certs.pem.
-.It security> find-certificate -a -c MyName -Z login.keychain | grep ^SHA-1
-Print the SHA-1 hash of every certificate in 'login.keychain' whose common name includes 'MyName'
+.It security> find-certificate -a -c MyName -Z login.keychain | grep ^SHA-256
+Print the SHA-256 hash of every certificate in 'login.keychain' whose common name includes 'MyName'
 .El
 .El
 .It
@@ -939,13 +943,13 @@ Delete a certificate from a keychain.  If no
 .It Fl c Ar name
 Specify certificate to delete by its common name
 .It Fl Z Ar hash
-Specify certificate to delete by its SHA-1 hash
+Specify certificate to delete by its SHA-256 (or SHA-1) hash
 .It Fl t
 Also delete user trust settings for this certificate
 .El
 .It
 The certificate to be deleted must be uniquely specified either by a
-string found in its common name, or by its SHA-1 hash.
+string found in its common name, or by its SHA-256 (or SHA-1) hash.
 .El
 .It
 .Nm delete-identity
@@ -963,13 +967,13 @@ Delete a certificate and its private key from a keychain.  If no
 .It Fl c Ar name
 Specify certificate to delete by its common name
 .It Fl Z Ar hash
-Specify certificate to delete by its SHA-1 hash
+Specify certificate to delete by its SHA-256 (or SHA-1) hash
 .It Fl t
 Also delete user trust settings for this identity certificate
 .El
 .It
 The identity to be deleted must be uniquely specified either by a
-string found in its common name, or by its SHA-1 hash.
+string found in its common name, or by its SHA-256 (or SHA-1) hash.
 .El
 .It
 .Nm set-identity-preference
@@ -993,13 +997,13 @@ Specify service (may be a URL, RFC822 email address, DNS host, or other name) fo
 .It Fl u Ar keyUsage
 Specify key usage (optional)
 .It Fl Z Ar hash
-Specify identity by SHA-1 hash of certificate (optional)
+Specify identity by SHA-256 (or SHA-1) hash of certificate (optional)
 .El
 .It
 The identity is located by searching the specified keychain(s) for a certificate whose common name contains
 the given identity string. If no keychains are specified to search, the default search list is used. Different
 identity preferences can be set for individual key usages. You can differentiate between two identities which contain
-the same string by providing a SHA-1 hash of the certificate (in addition to, or instead of, the name.)
+the same string by providing a SHA-256 (or SHA-1) hash of the certificate in addition to, or instead of, the name.
 .It
 .Sy PARTIAL PATHS AND WILDCARDS
 .It
@@ -1055,7 +1059,7 @@ Output identity certificate in pem format
 .It Fl c
 Print common name of the preferred identity certificate
 .It Fl Z
-Print SHA-1 hash of the preferred identity certificate
+Print SHA-256 (and SHA-1) hash of the preferred identity certificate
 .El
 .El
 .It
@@ -1274,7 +1278,7 @@ Cert usage codes:
 .It
 .Nm install-mds
 .Bl -item -offset -indent
-Install (or re-install) the Module Directory Services (MDS) database. This is a system tool which is not normally used by users. There are no options. 
+Install (or re-install) the Module Directory Services (MDS) database. This is a system tool which is not normally used by users. There are no options.
 .El
 .It
 .Nm add-trusted-cert
@@ -1292,18 +1296,16 @@ certFile
 .Bl -item -offset -indent
 Add certificate (in DER or PEM format) from  
 .Ar certFile Ns
-\& to per-user or local Admin Trust Settings. When modifying per-user Trust Settings, user authentication is required via an authentication dialog. When modifying admin Trust Settings, the process must be running as root, or admin authentication is required. 
+\& to per-user or local Admin Trust Settings. When modifying per-user Trust Settings, user authentication is required via an authentication dialog. When modifying admin Trust Settings, the process must be running as root, or admin authentication is required.
 .It
 Options:
 .Bl -tag -compact -width -indent-indent
 .It Fl d
-Add to admin cert store; default is user. 
+Add to admin cert store; default is user.
 .It Fl r Ar resultType
 resultType = trustRoot|trustAsRoot|deny|unspecified; default is trustRoot.
 .It Fl p Ar policy
 Specify policy constraint (ssl, smime, codeSign, IPSec, basic, swUpdate, pkgSign, eap, macappstore, appleID, timestamping).
-.It Fl r Ar resultType
-resultType = trustRoot|trustAsRoot|deny|unspecified; default is trustRoot.
 .It Fl a Ar appPath
 Specify application constraint.
 .It Fl s Ar policyString
@@ -1431,15 +1433,19 @@ Import admin Trust Settings; default is user.
 .Op Fl s Ar sslHost
 .Op Fl q
 .Op Fl R Ar revCheckOption
+.Op Fl P
+.Op Fl t
+.Op Fl v
+.Op Ar url
 .Bl -item -offset -indent
-Verify one or more certificates. 
+Verify one or more certificates. If a direct URL argument is provided, a TLS connection is attempted and the certificate presented by that server is evaluated according to standard SSL server policy; other certificates or policy options will be ignored in this case.
 .It
 Options:
 .Bl -tag -compact -width -indent-indent
 .It Fl c Ar certFile
 Certificate to verify, in DER or PEM format. Can be specified more than once; leaf certificate has to be specified first.
 .It Fl r Ar rootCertFile
-Root certificate, in DER or PEM format. Can be specified more than once. If not specified, the system anchor certificates are used. If one root certificate is specified, and zero (non-root) certificates are specified, the root certificate is verified against itself. 
+Root certificate, in DER or PEM format. Can be specified more than once. If not specified, the system anchor certificates are used. If one root certificate is specified, and zero (non-root) certificates are specified, the root certificate is verified against itself.
 .It Fl p Ar policy
 Specify verification policy (ssl, smime, codeSign, IPSec, basic, swUpdate, pkgSign, eap, appleID, macappstore, timestamping). Default is basic.
 .It Fl C
@@ -1464,12 +1470,19 @@ Specify SSL host name for the ssl policy. (This option is deprecated; use -n ins
 Quiet, no stdout or stderr.
 .It Fl R Ar revCheckOption
 Specify a revocation checking option for this evaluation (ocsp, crl, require, offline). Can be specified multiple times; e.g. to enable revocation checking via either OCSP or CRL methods and require a positive response, use "-R ocsp -R crl -R require". The offline option will consult previously cached responses, but will not make a request to a revocation server.
+.It Fl P
+Output the constructed certificate chain in PEM format.
+.It Fl t
+Output certificate contents as text.
+.It Fl v
+Specify verbose output, including per-certificate trust results.
 .El
 .It
 .Sy Examples
 .Bl -tag -width -indent
 .It security> verify-cert -c applestore0.cer -c applestore1.cer -p ssl -n store.apple.com
 .It security> verify-cert -r serverbasic.crt
+.It security> verify-cert -v https://www.apple.com
 .El
 .\"marker.
 .El
@@ -1611,23 +1624,28 @@ s of available smartcards.
 .Ar token
 .Op Fl i Ar id
 .Op Fl t Ar certs Ns | Ns Ar privKeys Ns | Ns Ar identities Ns | Ns Ar all
+.Op Fl e Ar exportPath
 .Bl -item -offset -indent
-Export items from a smartcard. If
+Export/display items from a smartcard. If
 .Ar id
-isn't provided, items from all smartcards will be exported.
+isn't provided, items from all smartcards will be displayed.
 .It
 Options:
 .Bl -tag -compact -width -indent-indent
 .It Fl i Ar id
-Export items from token specified by token
+Export/display items from token specified by token
 .Ar id Ns
 , available
 .Ar id Ns
 s can be listed by list-smartcards command.
 .It Fl t Ar certs Ns | Ns Ar privKeys Ns | Ns Ar identities Ns | Ns Ar all
-Export items of the specified type (Default:
+Display items of the specified type (Default:
 .Ar all Ns
 )
+.It Fl e Ar exportPath
+Specify path to export certificates and public keys. If
+.Ar exportPath Ns
+ is specified screen output is suppressed. This option cannot be combined with -t option.
 .El
 .El
 .It

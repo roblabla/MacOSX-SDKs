@@ -11,9 +11,15 @@
 #import <CoreGraphics/CoreGraphics.h>
 #import <EventKit/EKTypes.h>
 
+
+
 NS_ASSUME_NONNULL_BEGIN
 
-@class EKEventStore, EKSource, NSColor;
+@class EKEventStore, EKSource;
+#if TARGET_OS_OSX
+@class NSColor;
+#endif
+
 
 /*!
     @class       EKCalendar
@@ -89,20 +95,20 @@ NS_CLASS_AVAILABLE(10_8, 4_0)
 */
 @property(nonatomic, readonly, getter=isImmutable) BOOL immutable NS_AVAILABLE(10_8, 5_0);
 
-#if TARGET_OS_IPHONE
 /*!
     @property   color
     @abstract   Returns the calendar color as a CGColorRef.
     @discussion This will be nil for new calendars until you set it.
 */
-@property(null_unspecified, nonatomic) CGColorRef CGColor;
-#else
+@property(null_unspecified, nonatomic) CGColorRef CGColor API_AVAILABLE(ios(4.0), macos(10.15), watchos(2.0));
+
+#if TARGET_OS_OSX
 /*!
-    @property   color
-    @abstract   Returns the calendar color as a NSColor.
-    @discussion This will be nil for new calendars until you set it.
-*/
-@property(null_unspecified, nonatomic, copy) NSColor *color;
+ @property   color
+ @abstract   Returns the calendar color as a NSColor.
+ @discussion This will be nil for new calendars until you set it.
+ */
+@property(null_unspecified, nonatomic, copy) NSColor *color API_AVAILABLE(macos(10.8));
 #endif
 
 /*!

@@ -1,8 +1,8 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: F200299E-F1F8-3699-BEA0-61FE2895DE77' ]
+uuids:           [ 'x86_64: C444FBE4-A362-3FBE-AD9C-43C6CE346FC8' ]
 platform:        macosx
-install-name:    /System/Library/PrivateFrameworks/GeoKit.framework/Versions/A/GeoKit
+install-name:    '/System/Library/PrivateFrameworks/GeoKit.framework/Versions/A/GeoKit'
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _GEOAlignCGPointToUserSpace, _GEOAlignCGRectToUserSpace, _GEOAlignPointToUserSpace, 

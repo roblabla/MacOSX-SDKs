@@ -1,4 +1,4 @@
-.\" Copyright (c) 2015-2017 Apple Inc. All rights reserved.
+.\" Copyright (c) 2015-2018 Apple Inc. All rights reserved.
 .\" 
 .\" The contents of this file constitute Original Code as defined in and
 .\" are subject to the Apple Public Source License Version 1.1 (the
@@ -31,7 +31,7 @@ volume
 .Op Fl b Ar block-size
 .Op Fl s Ar volume-size | Fl q Ar volume-quota Fl r Ar volume-reserve
 .Op Fl v Ar volume-name
-.Op Fl E | Fl P
+.Op Fl E
 .Op Fl R Ar role
 .Ar special
 .Nm
@@ -46,7 +46,7 @@ volume
 .Op Fl i
 .Op Fl s Ar volume-size | Fl q Ar volume-quota Fl r Ar volume-reserve
 .Op Fl v Ar volume-name
-.Op Fl E | Fl P
+.Op Fl E
 .Op Fl R Ar role
 .Ar special
 .Nm
@@ -54,7 +54,7 @@ volume
 .Op Fl i
 .Op Fl s Ar volume-size | Fl q Ar volume-quota Fl r Ar volume-reserve
 .Op Fl v Ar volume-name
-.Op Fl E | Fl P
+.Op Fl E
 .Op Fl R Ar role
 .Ar special
 .Sh DESCRIPTION
@@ -134,6 +134,12 @@ may be used later to format volumes inside that container.
 .It Fl E
 Enable volume encryption.
 The volume metadata is also encrypted.
+.It Fl S Ar password
+Key used for volume encryption. If the
+.Ar password
+option is omitted for an encrypted volume, a prompt will request a password for the new volume.
+This option is unsecure because other non-privileged users (on multi-user systems) have means to see command-line arguments, including passwords, and is therefore not recommended for use
+(use the prompt instead).
 .It Fl F Ar special
 Format as a Fusion device (with the secondary device specified here).
 .It Fl R Ar role
@@ -144,7 +150,7 @@ of the volume within the container.  The
 may be one of the following characters:
 .Bl -tag -width "  " -offset "  " -compact
 .It Sy b
-PreBoot - will contain information used to help boot System volumes
+Preboot - will contain information used to help boot System volumes
 .It Sy r
 Recovery - will contain the RecoveryOS
 .It Sy v

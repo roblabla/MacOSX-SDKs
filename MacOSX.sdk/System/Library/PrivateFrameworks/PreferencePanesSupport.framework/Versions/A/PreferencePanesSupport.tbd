@@ -1,25 +1,34 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 88C1666C-04C6-3897-8096-D1B5D90423D8' ]
+uuids:           [ 'x86_64: 3628DBC6-D044-3876-AF40-60E9CE30BAE4' ]
 platform:        macosx
-install-name:    /System/Library/PrivateFrameworks/PreferencePanesSupport.framework/Versions/A/PreferencePanesSupport
+install-name:    '/System/Library/PrivateFrameworks/PreferencePanesSupport.framework/Versions/A/PreferencePanesSupport'
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _SetSymbolicHotKeyButtonValue, _SetSymbolicHotKeyEnabled, 
                        _SetSymbolicHotKeyValue, _SetSymbolicHotModifierValue, _closeIOCOnnection, 
-                       _copyPerHostValueForKey, _copySymbolicHotKeyPreferences, _getHotKeyEntry, 
-                       _ioSetBoolProperty, _ioSetBoolPropertyWithNotification, _ioSetIntProperty, 
-                       _ioSetIntPropertyWithNotification, _logASLMessage, _openIOCOnnection, 
-                       _perHostBooleanForKey, _perHostBooleanForKeyWithDefaultValue, 
+                       _copyAlertCautionIconImage, _copyPerHostValueForKey, _copySymbolicHotKeyPreferences, 
+                       _getHotKeyEntry, _ioSetBoolProperty, _ioSetBoolPropertyWithNotification, 
+                       _ioSetIntProperty, _ioSetIntPropertyWithNotification, _logASLMessage, 
+                       _openIOCOnnection, _perHostBooleanForKey, _perHostBooleanForKeyWithDefaultValue, 
                        _perHostIntegerForKey, _perHostIntegerForKeyWithDefaultValue, 
                        _setSwipeScrollDirection, _swipeScrollDirection ]
     objc-classes:    [ AccountsPrefFormatter, BTPointingDevicePairController, IOServiceObserver, 
                        IndicatorImageView, IndicatorSecureTextField, IndicatorTextField, 
                        InputDeviceController, InputDeviceNibController, MTMouseGesturesBackEnd, 
                        MTTGestureBackEnd, MultitouchDeviceObserver, NSTickLabelsView, 
-                       NSUpActionSlider, PPGesture, PPGestureChoicesPopupCell, PPGestureMovieView, 
-                       PPGestureRow, PPGestureView, PPGestureViewController, PPSGestureRow, 
-                       PPSGestureRowView, ValidSubrangeSlider, ValidSubrangeSliderCell ]
+                       NSUpActionSlider, PPFlexibleSpaceSpecifier, PPGesture, PPGestureChoicesPopupCell, 
+                       PPGestureMovieView, PPGestureRow, PPGestureView, PPGestureViewController, 
+                       PPProgressSpecifier, PPSGestureRow, PPSGestureRowView, PPSecPrivacyExtension, 
+                       PPSecPrivacyExtensionContext, PPSecPrivacyExtensionManager, 
+                       PPSecPrivacyHostExtensionContext, PPSecPrivacyViewController, 
+                       PPSharingServiceExtension, PPSharingServiceExtensionContext, 
+                       PPSharingServiceExtensionManager, PPSharingServiceHostExtensionContext, 
+                       PPSharingServiceViewController, PPSpecifier, PPSpecifierExtension, 
+                       PPSpecifierExtensionContext, PPSpecifierExtensionHostManager, 
+                       PPSpecifierExtensionItem, PPSpecifierExtensionManager, PPSpecifierHostExtensionContext, 
+                       PPSpecifierScrollView, PPSpecifierTableCellView, PPSpecifierTableViewController, 
+                       PPSpecifierViewController, ValidSubrangeSlider, ValidSubrangeSliderCell ]
     objc-ivars:      [ AccountsPrefFormatter._characterSet, AccountsPrefFormatter._maxLength, 
                        BTPointingDevicePairController.mBTAlertIconImage, BTPointingDevicePairController.mBTIsAvailable, 
                        BTPointingDevicePairController.mBTKeyboardList, BTPointingDevicePairController.mBTPowerIsOn, 

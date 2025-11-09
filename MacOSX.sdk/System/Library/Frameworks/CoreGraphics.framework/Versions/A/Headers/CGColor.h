@@ -43,6 +43,15 @@ CG_EXTERN CGColorRef  CGColorCreateGenericCMYK(CGFloat cyan, CGFloat magenta,
   CGFloat yellow, CGFloat black, CGFloat alpha)
   CG_AVAILABLE_STARTING(10.5) CG_UNAVAILABLE_EMBEDDED;
 
+/* Create a color in the "Generic Gray Gamma 2.2 color space. */
+
+CG_EXTERN CGColorRef  CGColorCreateGenericGrayGamma2_2(CGFloat gray, CGFloat alpha) CG_AVAILABLE_STARTING(10.15, 13.0);
+
+/* Create a color in sRGB color space. */
+
+CG_EXTERN CGColorRef  CGColorCreateSRGB(CGFloat red, CGFloat green,
+                                        CGFloat blue, CGFloat alpha) CG_AVAILABLE_STARTING(10.15, 13.0);
+
 /* Return a constant color. As `CGColorGetConstantColor' is not a "Copy" or
    "Create" function, it does not necessarily return a new reference each
    time it's called. As a consequence, you should not release the returned

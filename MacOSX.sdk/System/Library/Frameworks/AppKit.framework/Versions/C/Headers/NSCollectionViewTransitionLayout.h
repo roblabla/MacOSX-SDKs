@@ -1,42 +1,19 @@
 /*
     NSCollectionViewTransitionLayout.h
     Application Kit
-    Copyright (c) 2015-2018, Apple Inc.
+    Copyright (c) 2015-2019, Apple Inc.
     All rights reserved.
 */
 
 #import <AppKit/NSCollectionViewLayout.h>
 
 NS_ASSUME_NONNULL_BEGIN
+API_UNAVAILABLE_BEGIN(ios)
 
 typedef NSString * NSCollectionViewTransitionLayoutAnimatedKey NS_SWIFT_BRIDGED_TYPEDEF;
 
-NS_CLASS_AVAILABLE_MAC(10_11)
+API_AVAILABLE(macos(10.11))
 @interface NSCollectionViewTransitionLayout : NSCollectionViewLayout
-#ifndef __OBJC2__
-{
-@private
-    NSCollectionViewLayout *_fromLayout APPKIT_IVAR;
-    NSCollectionViewLayout *_toLayout APPKIT_IVAR;
-    
-    CGRect _fromVisibleBounds APPKIT_IVAR;
-    CGRect _toVisibleBounds APPKIT_IVAR;
-    NSSize _contentSize APPKIT_IVAR;
-    
-    BOOL _haveValidInfos APPKIT_IVAR;
-    CGFloat _transitionProgress APPKIT_IVAR;
-    
-    NSMutableDictionary *_transitionInformationsDict APPKIT_IVAR;
-    NSMutableDictionary *_currentLayoutInfos APPKIT_IVAR;
-    
-    BOOL _layoutIsValid APPKIT_IVAR;
-    
-    NSMutableArray *_disappearingLayoutAttributes APPKIT_IVAR;
-    NSMutableArray *_appearingLayoutAttributes APPKIT_IVAR;
-    
-    CGFloat _accuracy APPKIT_IVAR;
-}
-#endif
 
 @property (assign) CGFloat transitionProgress;
 @property (readonly) NSCollectionViewLayout *currentLayout;
@@ -50,4 +27,5 @@ NS_CLASS_AVAILABLE_MAC(10_11)
 
 @end
 
+API_UNAVAILABLE_END
 NS_ASSUME_NONNULL_END

@@ -1,7 +1,7 @@
 /*
 	NSDragging.h
 	Application Kit
-	Copyright (c) 1994-2018, Apple Inc.
+	Copyright (c) 1994-2019, Apple Inc.
 	All rights reserved.
 */
 
@@ -14,12 +14,13 @@
 
 #import <AppKit/NSPasteboard.h>
 
+@protocol NSPasteboardWriting;
+
 NS_ASSUME_NONNULL_BEGIN
+API_UNAVAILABLE_BEGIN(ios)
 
 @class NSDraggingItem, NSDraggingSession, NSImage, NSPasteboard, NSView, NSWindow;
 @class NSURL;
-@protocol NSPasteboardWriting;
-
 
 typedef NS_OPTIONS(NSUInteger, NSDragOperation) {
     NSDragOperationNone		= 0,
@@ -31,8 +32,8 @@ typedef NS_OPTIONS(NSUInteger, NSDragOperation) {
     NSDragOperationDelete	= 32,
     NSDragOperationEvery	= NSUIntegerMax,
     
-    NSDragOperationAll_Obsolete	NS_ENUM_DEPRECATED_MAC(10_0, 10_10) = 15, // Use NSDragOperationEvery
-    NSDragOperationAll NS_ENUM_DEPRECATED_MAC(10_0, 10_10) = NSDragOperationAll_Obsolete, // Use NSDragOperationEvery
+    NSDragOperationAll_Obsolete	API_DEPRECATED("", macos(10.0,10.10)) = 15, // Use NSDragOperationEvery
+    NSDragOperationAll API_DEPRECATED("", macos(10.0,10.10)) = NSDragOperationAll_Obsolete, // Use NSDragOperationEvery
 };
 
 typedef NS_ENUM(NSInteger, NSDraggingFormation) {
@@ -41,25 +42,25 @@ typedef NS_ENUM(NSInteger, NSDraggingFormation) {
     NSDraggingFormationPile,  // Drag images are placed on top of each other with random rotations
     NSDraggingFormationList,  // Drag images are laid out vertically, non-overlapping with the left edges aligned
     NSDraggingFormationStack // Drag images are laid out overlapping diagonally
-} NS_ENUM_AVAILABLE_MAC(10_7);
+} API_AVAILABLE(macos(10.7));
 
 typedef NS_ENUM(NSInteger, NSDraggingContext) {
     NSDraggingContextOutsideApplication = 0,
     NSDraggingContextWithinApplication
-} NS_ENUM_AVAILABLE_MAC(10_7);
+} API_AVAILABLE(macos(10.7));
 
 typedef NS_OPTIONS(NSUInteger, NSDraggingItemEnumerationOptions) {
     NSDraggingItemEnumerationConcurrent			= NSEnumerationConcurrent,
     /* When the following option is set, AppKit will automatically set the imageComponentProvider to nil for all dragging items that do not meet the classes/searchOptions criteria. Effectively, this hides the drag image for non valid items for this destination. */
     NSDraggingItemEnumerationClearNonenumeratedImages 	= (1UL << 16),
-} NS_ENUM_AVAILABLE_MAC(10_7);
+} API_AVAILABLE(macos(10.7));
 
 /* The spring loading highlight styles roughly correlate to {None: NotSpringLoadable, Light: SpringLoadable, Dark: SpringLoadingEngaged}. However, this not not strictly true as Drag & Drop may switch between highlight styles as an animated signal to the user. */
 typedef NS_ENUM(NSInteger, NSSpringLoadingHighlight) {
     NSSpringLoadingHighlightNone = 0,
     NSSpringLoadingHighlightStandard,
     NSSpringLoadingHighlightEmphasized
-} NS_ENUM_AVAILABLE_MAC(10_11);
+} API_AVAILABLE(macos(10.11));
 
 /* protocol for the sender argument of the messages sent to a drag destination.  The view or
    window that registered dragging types sends these messages as dragging is
@@ -74,23 +75,23 @@ typedef NS_ENUM(NSInteger, NSSpringLoadingHighlight) {
 /* Returns the current location of the current composited dragging image’s origin in NSDraggingFormationNone translated to the base coordinate system of the destination object’s window
 */
 @property (readonly) NSPoint draggedImageLocation;
-@property (nullable, readonly) NSImage *draggedImage NS_DEPRECATED_MAC(10_0, API_TO_BE_DEPRECATED, "Use NSDraggingItem objects instead");
+@property (nullable, readonly) NSImage *draggedImage API_DEPRECATED("Use NSDraggingItem objects instead", macos(10.0,API_TO_BE_DEPRECATED));
 @property (readonly) NSPasteboard *draggingPasteboard;
 @property (nullable, readonly) id draggingSource;
 @property (readonly) NSInteger draggingSequenceNumber;
 - (void)slideDraggedImageTo:(NSPoint)screenPoint;
-- (nullable NSArray<NSString *> *)namesOfPromisedFilesDroppedAtDestination:(NSURL *)dropDestination NS_DEPRECATED_MAC(10_0, 10_13, "Use NSFilePromiseReceiver objects instead");
+- (nullable NSArray<NSString *> *)namesOfPromisedFilesDroppedAtDestination:(NSURL *)dropDestination API_DEPRECATED("Use NSFilePromiseReceiver objects instead", macos(10.0,10.13));
 
 /* Controls the dragging formation while the drag is over this destination. The default value is the current drag formation. */
-@property NSDraggingFormation draggingFormation NS_AVAILABLE_MAC(10_7);
+@property NSDraggingFormation draggingFormation API_AVAILABLE(macos(10.7));
 
 /* During the conclusion of an accepted drag, if this property is set to YES, the drag manager will animate each dragging image to their NSDraggingFormationNone locations. Otherwise, the drag images are removed without any animation. Note: This property is inspected between -prepareForDragOperation: and -performDragOperation:. If the final destination frames do not match the current NSDraggingFormationNone frames, then enumerate through the draggingItems during -performDragOperation: to set thier NSDraggingFormationNone frames to the correct destinations.
  */
-@property BOOL animatesToDestination NS_AVAILABLE_MAC(10_7);
+@property BOOL animatesToDestination API_AVAILABLE(macos(10.7));
 
 /* During draggingEntered: or draggingUpdated:, you are responsible for returning the drag operation. In some cases, you may accept some, but not all items on the dragging pasteboard. (For example, you only accept image files.) If you only accept some of the items, you should set this property so the drag manager can update the drag count badge. When -updateItems: is called, you should set the image of non valid dragging items to nil. If none of the drag items are valid then do not call this method. Simply return NSDragOperationNone from draggingEntered: and/or draggingUpdated: and do not modify any drag item properties.
  */
-@property NSInteger numberOfValidItemsForDrop NS_AVAILABLE_MAC(10_7);
+@property NSInteger numberOfValidItemsForDrop API_AVAILABLE(macos(10.7));
 
 /* Use the following enumerate method to modify the properties of each dragging item. For example, change the drag image and size.
    Note: All changes made here are only in effect while the drag is over the destination. When the drag exits the destination all properties return to the values last set by the dragging session.
@@ -98,12 +99,12 @@ typedef NS_ENUM(NSInteger, NSSpringLoadingHighlight) {
 
 /* Enumerate through each dragging item. Any changes made to the properties of the draggingItem are reflected in the drag and are automatically removed when the drag exits. Classes in the provided array must implement the NSPasteboardReading protocol. Cocoa classes that implement this protocol include NSImage, NSString, NSURL, NSColor, NSAttributedString, and NSPasteboardItem. For every item on the pasteboard, each class in the provided array will be queried for the types it can read using -readableTypesForPasteboard:. An instance will be created of the first class found in the provided array whose readable types match a conforming type contained in that pasteboard item. If an Instance is created from the pasteboard item data, it is placed into an NSDraggingItem along with the dragging properties of that item such as the dragging image. The NSDraggingItem is then passed as a parameter to the provided block. Additional search options, such as restricting the search to file URLs with particular content types, can be specified with a search options dictionary.  See the comments for the Pasteboard Reading Options keys in NSPasteboard.h for a full description. Note: all coordinate properties in the NSDraggingItem are in the coordinate system of view. If view is nil, the screen coordinate space is used.
 */
-- (void)enumerateDraggingItemsWithOptions:(NSDraggingItemEnumerationOptions)enumOpts forView:(nullable  NSView *)view classes:(NSArray<Class> *)classArray searchOptions:(NSDictionary<NSPasteboardReadingOptionKey, id> *)searchOptions usingBlock:(void (^)(NSDraggingItem *draggingItem, NSInteger idx, BOOL *stop))block NS_AVAILABLE_MAC(10_7);
+- (void)enumerateDraggingItemsWithOptions:(NSDraggingItemEnumerationOptions)enumOpts forView:(nullable  NSView *)view classes:(NSArray<Class> *)classArray searchOptions:(NSDictionary<NSPasteboardReadingOptionKey, id> *)searchOptions usingBlock:(void (^)(NSDraggingItem *draggingItem, NSInteger idx, BOOL *stop))block API_AVAILABLE(macos(10.7));
 
-@property (readonly) NSSpringLoadingHighlight springLoadingHighlight NS_AVAILABLE_MAC(10_11);
+@property (readonly) NSSpringLoadingHighlight springLoadingHighlight API_AVAILABLE(macos(10.11));
 
 /* Used when the drag crosses two distinct but valid spring loading regions within the same destination. The hover timer is reset and if the user is currently in a force click, they must release and re-force click to highlight the new region. */
-- (void)resetSpringLoading NS_AVAILABLE_MAC(10_11);
+- (void)resetSpringLoading API_AVAILABLE(macos(10.11));
 
 @end
 
@@ -127,7 +128,7 @@ typedef NS_ENUM(NSInteger, NSSpringLoadingHighlight) {
 
 /* While a destination may change the dragging images at any time, it is recommended to wait until this method is called before updating the dragging image. This allows the system to delay changing the dragging images until it is likely that the user will drop on this destination. Otherwise, the dragging images will change too often during the drag which would be distracting to the user. The destination may update the dragging images by calling one of the -enumerateDraggingItems methods on the sender.
 */
-- (void)updateDraggingItemsForDrag:(nullable id <NSDraggingInfo>)sender NS_AVAILABLE_MAC(10_7);
+- (void)updateDraggingItemsForDrag:(nullable id <NSDraggingInfo>)sender API_AVAILABLE(macos(10.7));
 @end
 
 
@@ -169,43 +170,44 @@ typedef NS_OPTIONS(NSUInteger, NSSpringLoadingOptions) {
     
     /* Disable spring loading activation via hover. This option should be used sparingly, but there are some rare cases where spring loading via hover results in too many false positives, but is otherwise very useful with a Force Click. These are generally cases when the destination view is very large, such as a canvas. */
     NSSpringLoadingNoHover 	= 1UL << 3
-} NS_ENUM_AVAILABLE_MAC(10_11);
+} API_AVAILABLE(macos(10.11));
 
 @protocol NSSpringLoadingDestination <NSObject>
 @required
-/* Perform the spring loading action (For example, the button's action, or select the tab). Normally, spring loading is a discreet action that only activates after the user completes the spring loading input. When the NSSpringLoadingContinuousActivation option set, spring loading become a continuous action that activates (YES) when the user starts spring loading and then deactivates (NO) when the user releases spring loading. See NSSpringLoadingContinuousActivation for more information.
+/* Perform the spring loading action (For example, the button's action, or select the tab). Normally, spring loading is a discrete action that only activates after the user completes the spring loading input. When the NSSpringLoadingContinuousActivation option set, spring loading become a continuous action that activates (YES) when the user starts spring loading and then deactivates (NO) when the user releases spring loading. See NSSpringLoadingContinuousActivation for more information.
  */
-- (void)springLoadingActivated:(BOOL)activated draggingInfo:(id <NSDraggingInfo>)draggingInfo NS_AVAILABLE_MAC(10_11);
+- (void)springLoadingActivated:(BOOL)activated draggingInfo:(id <NSDraggingInfo>)draggingInfo API_AVAILABLE(macos(10.11));
 
 /* Called when the spring loading highlight changes */
-- (void)springLoadingHighlightChanged:(id <NSDraggingInfo>)draggingInfo NS_AVAILABLE_MAC(10_11);
+- (void)springLoadingHighlightChanged:(id <NSDraggingInfo>)draggingInfo API_AVAILABLE(macos(10.11));
 
 /* Note: You must also implement either -springLoadingEntered: or -springLoadingUpdated: */
 
 @optional
 /* Called when a drag enters the spring loading destination. Return NSSpringLoadingEnabled to enable spring loading. A view is not considered valid spring loading drag destination if neither this method nor springLoadingUpdated: is implemented */
-- (NSSpringLoadingOptions)springLoadingEntered:(id <NSDraggingInfo>)draggingInfo NS_AVAILABLE_MAC(10_11);
+- (NSSpringLoadingOptions)springLoadingEntered:(id <NSDraggingInfo>)draggingInfo API_AVAILABLE(macos(10.11));
 
 /* Called when a drag moves or the drag info changes. If this method is not implemented, then the value from -springLoadingEntered: is used. */
-- (NSSpringLoadingOptions)springLoadingUpdated:(id <NSDraggingInfo>)draggingInfo NS_AVAILABLE_MAC(10_11);
+- (NSSpringLoadingOptions)springLoadingUpdated:(id <NSDraggingInfo>)draggingInfo API_AVAILABLE(macos(10.11));
 
 /* Called when a drag exits the spring loading destination */
-- (void)springLoadingExited:(id <NSDraggingInfo>)draggingInfo NS_AVAILABLE_MAC(10_11);
+- (void)springLoadingExited:(id <NSDraggingInfo>)draggingInfo API_AVAILABLE(macos(10.11));
 
 /* The drag & drop operation has ended. Un-spring if needed. Note: If this obejct is both an NSSpringLoadingDestination and NSDraggingDestination, draggingEnded: will only be called once. */
-- (void)draggingEnded:(id <NSDraggingInfo>)draggingInfo NS_AVAILABLE_MAC(10_11);
+- (void)draggingEnded:(id <NSDraggingInfo>)draggingInfo API_AVAILABLE(macos(10.11));
 @end
 
 
 @interface NSObject(NSDraggingSourceDeprecated)
-- (nullable NSArray<NSString *> *)namesOfPromisedFilesDroppedAtDestination:(NSURL *)dropDestination NS_DEPRECATED_MAC(10_0, 10_13, "Use NSFilePromiseProvider objects instead");
-- (NSDragOperation)draggingSourceOperationMaskForLocal:(BOOL)flag NS_DEPRECATED_MAC(10_0, 10_7, "Use -draggingSession:sourceOperationMaskForDraggingContext: instead");
-- (void)draggedImage:(null_unspecified NSImage *)image beganAt:(NSPoint)screenPoint NS_DEPRECATED_MAC(10_0, 10_7, "Use -draggingSession:willBeginAtPoint: instead");
-- (void)draggedImage:(null_unspecified NSImage *)image endedAt:(NSPoint)screenPoint operation:(NSDragOperation)operation NS_DEPRECATED_MAC(10_0, 10_7, "Use -draggingSession:endedAtPoint:operation: instead");
-- (void)draggedImage:(null_unspecified NSImage *)image movedTo:(NSPoint)screenPoint NS_DEPRECATED_MAC(10_0, 10_7, "Use -draggingSession:movedToPoint: instead");
-- (BOOL)ignoreModifierKeysWhileDragging NS_DEPRECATED_MAC(10_0, 10_7, "Use -ignoreModifierKeysForDraggingSession: instead");
+- (nullable NSArray<NSString *> *)namesOfPromisedFilesDroppedAtDestination:(NSURL *)dropDestination API_DEPRECATED("Use NSFilePromiseProvider objects instead", macos(10.0,10.13));
+- (NSDragOperation)draggingSourceOperationMaskForLocal:(BOOL)flag API_DEPRECATED("Use -draggingSession:sourceOperationMaskForDraggingContext: instead", macos(10.0,10.7));
+- (void)draggedImage:(null_unspecified NSImage *)image beganAt:(NSPoint)screenPoint API_DEPRECATED("Use -draggingSession:willBeginAtPoint: instead", macos(10.0,10.7));
+- (void)draggedImage:(null_unspecified NSImage *)image endedAt:(NSPoint)screenPoint operation:(NSDragOperation)operation API_DEPRECATED("Use -draggingSession:endedAtPoint:operation: instead", macos(10.0,10.7));
+- (void)draggedImage:(null_unspecified NSImage *)image movedTo:(NSPoint)screenPoint API_DEPRECATED("Use -draggingSession:movedToPoint: instead", macos(10.0,10.7));
+- (BOOL)ignoreModifierKeysWhileDragging API_DEPRECATED("Use -ignoreModifierKeysForDraggingSession: instead", macos(10.0,10.7));
 
 - (void)draggedImage:(null_unspecified NSImage *)image endedAt:(NSPoint)screenPoint deposited:(BOOL)flag DEPRECATED_IN_MAC_OS_X_VERSION_10_1_AND_LATER;
 @end
 
+API_UNAVAILABLE_END
 NS_ASSUME_NONNULL_END

@@ -1,9 +1,9 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 0F29003A-33B2-3B76-A030-EB42C409F663' ]
+uuids:           [ 'x86_64: 8BD6FC75-E828-3A77-AE99-D6C0703CE599' ]
 platform:        macosx
-install-name:    /System/Library/PrivateFrameworks/CharacterPicker.framework/Versions/A/CharacterPicker
-current-version: 128.20.2
+install-name:    '/System/Library/PrivateFrameworks/CharacterPicker.framework/Versions/A/CharacterPicker'
+current-version: 159
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _CPKCategoryTitleFavorites, _CPKCategoryTitleMore, _CPKCategoryTitleRecents, 
@@ -11,8 +11,8 @@ exports:
                        _CPKCategoryTitleSeparator, _CPKCategoryTitleSpace, _CPKCharacterPickerRecentsChangedNotification, 
                        _CPKCharacterPickerWindowWillOpenNotification, _CPKCharacterViewerWindowRevertToPickerNotification, 
                        _CPKCharacterViewerWindowWillOpenNotification, _CPKCharactersViewDidChangedLayoutNotification, 
-                       _CPKEmojiFoundationPrefsChangedNotification, _CPKLogTypeSessionEvents, 
-                       _CPKLogTypeStartupPerformance, _CPKSearchFieldDidGetFocusNotification ]
+                       _CPKEmojiFoundationPrefsChangedNotification, _CPKGetRawCategoryData, 
+                       _CPKLogTypeSessionEvents, _CPKLogTypeStartupPerformance, _CPKSearchFieldDidGetFocusNotification ]
     objc-classes:    [ CPKCharactersView, CPKDefaultDataSource, CPKEmojiDataSource, 
                        CPKEmojiIMDataSource, CPKEmojiIMViewController, CPKFont, CPKPopover, 
                        CPKSearchField, CPKStandardCharacterEntity, CPKWindow ]

@@ -1,5 +1,5 @@
 /*	NSMetadataAttributes.h
-        Copyright (c) 2004-2018, Apple Inc. All rights reserved.
+        Copyright (c) 2004-2019, Apple Inc. All rights reserved.
  */
 
 #import <Foundation/NSObject.h>
@@ -40,21 +40,21 @@ FOUNDATION_EXPORT NSString * const NSMetadataUbiquitousItemIsExternalDocumentKey
 FOUNDATION_EXPORT NSString * const NSMetadataUbiquitousItemContainerDisplayNameKey API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0)); // NSString
 FOUNDATION_EXPORT NSString * const NSMetadataUbiquitousItemURLInLocalContainerKey API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0)); // NSURL
 
-FOUNDATION_EXPORT NSString * const NSMetadataUbiquitousItemIsSharedKey API_AVAILABLE(macosx(10.12), ios(10.0)) __TVOS_PROHIBITED __WATCHOS_PROHIBITED; // true if the ubiquitous item is shared. (value type boolean NSNumber)
-FOUNDATION_EXPORT NSString * const NSMetadataUbiquitousSharedItemCurrentUserRoleKey API_AVAILABLE(macosx(10.12), ios(10.0)) __TVOS_PROHIBITED __WATCHOS_PROHIBITED; // returns the current user's role for this shared item, or nil if not shared. (value type NSString). Possible values below.
-FOUNDATION_EXPORT NSString * const NSMetadataUbiquitousSharedItemCurrentUserPermissionsKey API_AVAILABLE(macosx(10.12), ios(10.0)) __TVOS_PROHIBITED __WATCHOS_PROHIBITED; // returns the permissions for the current user, or nil if not shared. (value type NSString). Possible values below.
-FOUNDATION_EXPORT NSString * const NSMetadataUbiquitousSharedItemOwnerNameComponentsKey API_AVAILABLE(macosx(10.12), ios(10.0)) __TVOS_PROHIBITED __WATCHOS_PROHIBITED; // returns a NSPersonNameComponents, or nil if the current user. (value type NSPersonNameComponents)
-FOUNDATION_EXPORT NSString * const NSMetadataUbiquitousSharedItemMostRecentEditorNameComponentsKey API_AVAILABLE(macosx(10.12), ios(10.0)) __TVOS_PROHIBITED __WATCHOS_PROHIBITED; // returns a NSPersonNameComponents for the most recent editor of the document, or nil if it is the current user. (Read-only, value type NSPersonNameComponents)
+FOUNDATION_EXPORT NSString * const NSMetadataUbiquitousItemIsSharedKey API_AVAILABLE(macosx(10.12), ios(10.0)) API_UNAVAILABLE(watchos, tvos); // true if the ubiquitous item is shared. (value type boolean NSNumber)
+FOUNDATION_EXPORT NSString * const NSMetadataUbiquitousSharedItemCurrentUserRoleKey API_AVAILABLE(macosx(10.12), ios(10.0)) API_UNAVAILABLE(watchos, tvos); // returns the current user's role for this shared item, or nil if not shared. (value type NSString). Possible values below.
+FOUNDATION_EXPORT NSString * const NSMetadataUbiquitousSharedItemCurrentUserPermissionsKey API_AVAILABLE(macosx(10.12), ios(10.0)) API_UNAVAILABLE(watchos, tvos); // returns the permissions for the current user, or nil if not shared. (value type NSString). Possible values below.
+FOUNDATION_EXPORT NSString * const NSMetadataUbiquitousSharedItemOwnerNameComponentsKey API_AVAILABLE(macosx(10.12), ios(10.0)) API_UNAVAILABLE(watchos, tvos); // returns a NSPersonNameComponents, or nil if the current user. (value type NSPersonNameComponents)
+FOUNDATION_EXPORT NSString * const NSMetadataUbiquitousSharedItemMostRecentEditorNameComponentsKey API_AVAILABLE(macosx(10.12), ios(10.0)) API_UNAVAILABLE(watchos, tvos); // returns a NSPersonNameComponents for the most recent editor of the document, or nil if it is the current user. (Read-only, value type NSPersonNameComponents)
 
 /* The values returned for the NSMetadataUbiquitousSharedItemCurrentUserRoleKey
  */
-FOUNDATION_EXPORT NSString * const NSMetadataUbiquitousSharedItemRoleOwner API_AVAILABLE(macosx(10.12), ios(10.0)) __TVOS_PROHIBITED __WATCHOS_PROHIBITED; // the current user is the owner of this shared item.
-FOUNDATION_EXPORT NSString * const NSMetadataUbiquitousSharedItemRoleParticipant API_AVAILABLE(macosx(10.12), ios(10.0)) __TVOS_PROHIBITED __WATCHOS_PROHIBITED; // the current user is a participant of this shared item.
+FOUNDATION_EXPORT NSString * const NSMetadataUbiquitousSharedItemRoleOwner API_AVAILABLE(macosx(10.12), ios(10.0)) API_UNAVAILABLE(watchos, tvos); // the current user is the owner of this shared item.
+FOUNDATION_EXPORT NSString * const NSMetadataUbiquitousSharedItemRoleParticipant API_AVAILABLE(macosx(10.12), ios(10.0)) API_UNAVAILABLE(watchos, tvos); // the current user is a participant of this shared item.
 
 /* The values returned for the NSMetadataUbiquitousSharedItemCurrentUserPermissionsKey
  */
-FOUNDATION_EXPORT NSString * const NSMetadataUbiquitousSharedItemPermissionsReadOnly API_AVAILABLE(macosx(10.12), ios(10.0)) __TVOS_PROHIBITED __WATCHOS_PROHIBITED; // the current user is only allowed to read this item
-FOUNDATION_EXPORT NSString * const NSMetadataUbiquitousSharedItemPermissionsReadWrite API_AVAILABLE(macosx(10.12), ios(10.0)) __TVOS_PROHIBITED __WATCHOS_PROHIBITED; // the current user is allowed to both read and write this item
+FOUNDATION_EXPORT NSString * const NSMetadataUbiquitousSharedItemPermissionsReadOnly API_AVAILABLE(macosx(10.12), ios(10.0)) API_UNAVAILABLE(watchos, tvos); // the current user is only allowed to read this item
+FOUNDATION_EXPORT NSString * const NSMetadataUbiquitousSharedItemPermissionsReadWrite API_AVAILABLE(macosx(10.12), ios(10.0)) API_UNAVAILABLE(watchos, tvos); // the current user is allowed to both read and write this item
 
 
 // The following NSMetadataItem attributes are available on Mac OS for non-ubiquitious items only. The constants are equal to the corresponding ones in <Metadata/MDItem.h>.

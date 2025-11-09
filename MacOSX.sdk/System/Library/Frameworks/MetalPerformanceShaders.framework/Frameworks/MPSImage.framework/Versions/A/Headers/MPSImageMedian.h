@@ -22,7 +22,7 @@
  *              NOTE: The MPSImageMedian filter currently only supports images with <= 8 bits/channel.
  *
  */
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(9.0), tvos(9.0))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(9.0), macCatalyst(13.0), tvos(9.0))
 @interface  MPSImageMedian : MPSUnaryImageKernel
 
 /*! @property   kernelDiameter
@@ -55,7 +55,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(9.0), tvos(9.0))
  */
 -(nullable instancetype) initWithCoder:(NSCoder * __nonnull)aDecoder
                                 device:(nonnull id <MTLDevice>) device NS_DESIGNATED_INITIALIZER
-                        MPS_AVAILABLE_STARTING(macos(10.13), ios(11.0), tvos(11.0));
+                        MPS_AVAILABLE_STARTING(macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0));
 
 
 /* You must use initWithDevice:kernelDiameter: instead. */

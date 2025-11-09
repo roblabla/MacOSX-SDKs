@@ -44,9 +44,10 @@
 @interface DREraseSetupPanel : DRSetupPanel
 {
     /*All instance variables are private*/
-	IBOutlet NSMatrix*		_eraseTypes;
-	void*					_reservedEraseSetupPanel[2];
-	void*					_esp_privateStorage;
+@private
+    IBOutlet NSMatrix*        _eraseTypes;
+    void*                    _reservedEraseSetupPanel[2];
+    void*                    _esp_privateStorage;
 }
 
 /* --------------------------------------------------------------------------- */

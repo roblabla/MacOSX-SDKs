@@ -19,7 +19,7 @@ extern "C" {
 @class MPSKernel;
 @class MPSImageDescriptor;
     
-MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3))
+MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3))
 @interface MPSStateResourceList : NSObject
 /*! @abstract Init an empty autoreleased resource list */
 +(nonnull instancetype) resourceList;
@@ -62,9 +62,9 @@ typedef struct MPSStateTextureInfo
     typedef NS_ENUM(NSUInteger, MPSStateResourceType)
 #endif
     {
-        MPSStateResourceTypeNone            MPS_ENUM_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3)) MPS_SWIFT_NAME(none)  = 0,
-        MPSStateResourceTypeBuffer          MPS_ENUM_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3))  = 1,
-        MPSStateResourceTypeTexture         MPS_ENUM_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3))  = 2,
+        MPSStateResourceTypeNone            MPS_ENUM_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3)) MPS_SWIFT_NAME(none)  = 0,
+        MPSStateResourceTypeBuffer          MPS_ENUM_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3))  = 1,
+        MPSStateResourceTypeTexture         MPS_ENUM_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3))  = 2,
     }
 #if defined(DOXYGEN)
     MPSStateResourceType
@@ -137,7 +137,7 @@ typedef struct MPSStateTextureInfo
  *                  blit encoder, -synchronizeResource: can not encounter this problem because temporary
  *                  images and states live in GPU private memory and can not be read by the CPU.
  */
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0))
 @interface MPSState : NSObject
 
 /******************************
@@ -180,13 +180,13 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
  *  @param          resourceList The list of resources to create. */
 -(nonnull instancetype) initWithDevice: (__nonnull id <MTLDevice>) device
                           resourceList: (MPSStateResourceList * __nonnull) resourceList
-        MPS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), tvos(11.3));
+        MPS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3));
 
 /*! @abstract       Initialize a temporary state to hold a number of textures and buffers
  *  @discussion     The textures occur first in sequence*/
  +(nonnull instancetype) temporaryStateWithCommandBuffer: (__nonnull id <MTLCommandBuffer>) commandBuffer
                                             resourceList: (MPSStateResourceList * __nonnull) resourceList
-        MPS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), tvos(11.3));
+        MPS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3));
  
 /*! @abstract Create a state object with a list of MTLResources
  *  @discussion     Because MPS prefers deferred allocation of resources
@@ -318,7 +318,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
  *              resources (these are all MTLStorageModePrivate), nothing is done.
  *  @param      commandBuffer       The commandbuffer on which to synchronize   */
 -(void) synchronizeOnCommandBuffer: (__nonnull id <MTLCommandBuffer>) commandBuffer
-            MPS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), tvos(11.3));
+            MPS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3));
 
 /*! @abstract       Get the number of bytes used to allocate underyling MTLResources
  *  @discussion     This is the size of the backing store of underlying MTLResources.
@@ -341,7 +341,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
  *                  which case 0 will be returned.
  */
 -(NSUInteger)  resourceSize
-        MPS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), tvos(11.3));
+        MPS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3));
 
 
 /*! @abstract       Determine padding and sizing of result images
@@ -455,7 +455,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
  */
 @property (readonly, nonatomic, retain, nullable) id <MTLResource> resource
     MPS_AVAILABLE_STARTING_BUT_DEPRECATED( "Please use -resourceAtIndex:allocateMemory: instead",
-        macos(10.13, 10.13.4), ios(11.0,12.0), tvos(11.0, 12.0));
+        macos(10.13, 10.13.4), ios(11.0,12.0), tvos(11.0, 12.0))  MPS_UNAVAILABLE(macCatalyst);
 
 
 @end
@@ -478,15 +478,15 @@ typedef NSArray<MPSState*>  MPSStateBatch;
  *  @return  The number of different objects in the batch
  */
 NSUInteger MPSStateBatchIncrementReadCount( MPSStateBatch * __nullable batch, NSInteger amount )
-     MPS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), tvos(11.3));
+     MPS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3));
     
 /*! @abstract Call [MTLBlitEncoder synchronizeResource:] on unique resources */
 void MPSStateBatchSynchronize( MPSStateBatch * __nonnull batch, __nonnull id <MTLCommandBuffer> cmdBuf )
-    MPS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), tvos(11.3));
+    MPS_AVAILABLE_STARTING( macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3));
 
 /*! @abstract Call [MTLBlitEncoder resourceSize] on unique resources */
 NSUInteger MPSStateBatchResourceSize( MPSStateBatch * __nullable batch )
-    MPS_AVAILABLE_STARTING( macos(10.14.0), ios(12.0), tvos(12.0));
+    MPS_AVAILABLE_STARTING( macos(10.14.0), ios(12.0), macCatalyst(13.0), tvos(12.0));
 
 #ifdef __cplusplus
 }

@@ -1,5 +1,5 @@
 /*  NSIndexPath.h
-    Copyright (c) 2003-2018, Apple Inc. All rights reserved.
+    Copyright (c) 2003-2019, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -47,7 +47,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface NSIndexPath (NSDeprecated)
 /// This method is unsafe because it could potentially cause buffer overruns. You should use -getIndexes:range: instead. 
-- (void)getIndexes:(NSUInteger *)indexes; // use -getIndexes:range: instead
+- (void)getIndexes:(NSUInteger *)indexes API_DEPRECATED_WITH_REPLACEMENT("getIndexes:range:", macos(10.0, API_TO_BE_DEPRECATED), ios(2.0, API_TO_BE_DEPRECATED), watchos(2.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED)); // use -getIndexes:range: instead
 @end
 
 NS_ASSUME_NONNULL_END

@@ -1,8 +1,8 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: E4232CD3-EC34-3163-9A9E-D519299C0364' ]
-platform:        macosx
-install-name:    /System/Library/PrivateFrameworks/PersistentConnection.framework/Versions/A/PersistentConnection
+uuids:           [ 'x86_64: DBD9FD74-9F17-358B-A7E9-58B965A6E16C', 'x86_64: DBD9FD74-9F17-358B-A7E9-58B965A6E16C' ]
+platform:        zippered
+install-name:    '/System/Library/PrivateFrameworks/PersistentConnection.framework/Versions/A/PersistentConnection'
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _PCForceDemoMaxKeepAliveIntervalKey, _PCForceMinKeepAliveIntervalKey, 
@@ -50,8 +50,8 @@ exports:
                        PCConnectionManager._reconnectWakeTimer, PCConnectionManager._reconnectWithKeepAliveDelay, 
                        PCConnectionManager._serviceIdentifier, PCConnectionManager._timerGuidance, 
                        PCConnectionManager._timerGuidanceToken, PCConnectionManager._wifiGrowthAlgorithm, 
-                       PCConnectionManager._wwanGrowthAlgorithm, PCPersistentInterfaceManager._WWANContextIdentifier, 
-                       PCPersistentInterfaceManager._WWANInterfaceName, PCPersistentInterfaceManager._WiFiAutoAssociationDelegates, 
+                       PCConnectionManager._wwanGrowthAlgorithm, PCPersistentInterfaceManager._WWANInterfaceName, 
+                       PCPersistentInterfaceManager._WiFiAutoAssociationDelegates, 
                        PCPersistentInterfaceManager._WiFiAutoAssociationDisableTimer, 
                        PCPersistentInterfaceManager._ctClient, PCPersistentInterfaceManager._ctIsWWANInHomeCountry, 
                        PCPersistentInterfaceManager._ctServerConnection, PCPersistentInterfaceManager._currentDataSimContext, 
@@ -63,7 +63,6 @@ exports:
                        PCPersistentInterfaceManager._isWWANInterfaceSuspended, PCPersistentInterfaceManager._isWWANInterfaceUp, 
                        PCPersistentInterfaceManager._isWakeOnWiFiEnabled, PCPersistentInterfaceManager._isWakeOnWiFiSupported, 
                        PCPersistentInterfaceManager._lastActivationTime, PCPersistentInterfaceManager._lock, 
-                       PCPersistentInterfaceManager._shouldOverrideOnCallBehavior, 
                        PCPersistentInterfaceManager._wakeOnWiFiDelegates, PCPersistentInterfaceManager._wakeOnWiFiDisableTimer, 
                        PCPersistentTimer._disableSystemWaking, PCPersistentTimer._earlyFireConstantInterval, 
                        PCPersistentTimer._fireTime, PCPersistentTimer._guidancePriority, 

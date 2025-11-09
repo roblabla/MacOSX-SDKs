@@ -150,7 +150,7 @@ NS_CLASS_AVAILABLE(10_12, 10_0)
 // This memory must not be modified by the block.
 @property (readonly, nonatomic) const void *baseAddress NS_RETURNS_INNER_POINTER;
 
-#if !TARGET_OS_SIMULATOR
+#if COREIMAGE_SUPPORTS_IOSURFACE
 // An input IOSurface that the processor block can read from.
 // This surface must not be modified by the block.
 @property (nonatomic, readonly) IOSurfaceRef surface;
@@ -184,7 +184,7 @@ NS_CLASS_AVAILABLE(10_12, 10_0)
 // The base address of the output buffer that the processor block can write output pixels to.
 @property (readonly, nonatomic) void *baseAddress NS_RETURNS_INNER_POINTER;
 
-#if !TARGET_OS_SIMULATOR
+#if COREIMAGE_SUPPORTS_IOSURFACE
 // An output IOSurface that the processor block can write to.
 @property (nonatomic, readonly) IOSurfaceRef surface;
 #endif

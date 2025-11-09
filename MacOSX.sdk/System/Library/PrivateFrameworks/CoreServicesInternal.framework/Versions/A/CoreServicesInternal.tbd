@@ -1,10 +1,9 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 2D012EB3-83BF-3E51-A2BE-41AF26F2DDF0' ]
-platform:        macosx
-install-name:    /System/Library/PrivateFrameworks/CoreServicesInternal.framework/Versions/A/CoreServicesInternal
-current-version: 357
-objc-constraint: none
+uuids:           [ 'x86_64: 97592E6F-B81E-372D-AAD9-B67E8E362977', 'x86_64: 97592E6F-B81E-372D-AAD9-B67E8E362977' ]
+platform:        zippered
+install-name:    '/System/Library/PrivateFrameworks/CoreServicesInternal.framework/Versions/A/CoreServicesInternal'
+current-version: 444
 exports:         
   - archs:           [ x86_64 ]
     allowable-clients: [ CoreFoundation ]

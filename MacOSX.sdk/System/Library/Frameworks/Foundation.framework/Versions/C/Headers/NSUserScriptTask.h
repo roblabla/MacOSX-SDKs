@@ -1,6 +1,6 @@
 /*
 	NSUserScriptTask.h
-	Copyright (c) 2012-2018, Apple Inc. All rights reserved.
+	Copyright (c) 2012-2019, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -17,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /* NSUserScriptTask: An abstract "user script".
 */
-NS_CLASS_AVAILABLE(10_8, NA)
+API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos)
 @interface NSUserScriptTask : NSObject {
     @protected
     NSURL *_scriptURL;
@@ -43,7 +43,7 @@ typedef void (^NSUserScriptTaskCompletionHandler)(NSError * _Nullable error);
 
 /* NSUserUnixTask: a Unix executable file, typically a shell script.
 */
-NS_CLASS_AVAILABLE(10_8, NA)
+API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos)
 @interface NSUserUnixTask : NSUserScriptTask
 
 // Standard I/O streams.  Setting them to nil (the default) will bind them to /dev/null.
@@ -60,7 +60,7 @@ typedef void (^NSUserUnixTaskCompletionHandler)(NSError *_Nullable error);
 
 /* NSUserAppleScriptTask: an AppleScript script.
 */
-NS_CLASS_AVAILABLE(10_8, NA)
+API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos)
 @interface NSUserAppleScriptTask : NSUserScriptTask {
     @private
     BOOL _isParentDefaultTarget;
@@ -75,7 +75,7 @@ typedef void (^NSUserAppleScriptTaskCompletionHandler)(NSAppleEventDescriptor * 
 
 /* NSUserAutomatorTask: an Automator workflow.
 */
-NS_CLASS_AVAILABLE(10_8, NA)
+API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos)
 @interface NSUserAutomatorTask : NSUserScriptTask {
     @private
     NSDictionary *_variables;

@@ -21,7 +21,7 @@
  *                  - max value is written at pixel location (1, 0)
  *              
  */
-MPS_CLASS_AVAILABLE_STARTING(macos(10.13), ios(11.0), tvos(11.0))
+MPS_CLASS_AVAILABLE_STARTING(macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0))
 @interface  MPSImageStatisticsMinAndMax : MPSUnaryImageKernel
 
 /*! @property   clipRectSource
@@ -69,7 +69,7 @@ MPS_CLASS_AVAILABLE_STARTING(macos(10.13), ios(11.0), tvos(11.0))
  *                  - variance value is written at pixel location (1, 0)
  *
  */
-MPS_CLASS_AVAILABLE_STARTING(macos(10.13), ios(11.0), tvos(11.0))
+MPS_CLASS_AVAILABLE_STARTING(macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0))
 @interface  MPSImageStatisticsMeanAndVariance : MPSUnaryImageKernel
 
 /*! @property   clipRectSource
@@ -114,7 +114,7 @@ MPS_CLASS_AVAILABLE_STARTING(macos(10.13), ios(11.0), tvos(11.0))
  *  @discussion The MPSImageStatisticsMean computes the mean for a given region of an image.
  *
  */
-MPS_CLASS_AVAILABLE_STARTING(macos(10.13), ios(11.0), tvos(11.0))
+MPS_CLASS_AVAILABLE_STARTING(macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0))
 @interface  MPSImageStatisticsMean : MPSUnaryImageKernel
 
 /*! @property   clipRectSource

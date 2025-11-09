@@ -10,7 +10,7 @@
 #import <CloudKit/CKSubscription.h>
 
 NS_ASSUME_NONNULL_BEGIN
-API_AVAILABLE(macos(10.10), ios(8.0)) __WATCHOS_PROHIBITED
+API_AVAILABLE(macos(10.10), ios(8.0), watchos(6.0))
 @interface CKFetchSubscriptionsOperation : CKDatabaseOperation
 
 + (instancetype)fetchAllSubscriptionsOperation;

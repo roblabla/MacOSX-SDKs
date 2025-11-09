@@ -1,6 +1,6 @@
 /*	
     NSURLError.h
-    Copyright (c) 2003-2018, Apple Inc. All rights reserved.
+    Copyright (c) 2003-2019, Apple Inc. All rights reserved.
     
     Public header file.
 */
@@ -11,8 +11,6 @@
 #if __has_include(<CFNetwork/CFNetwork.h>)
 #import <CFNetwork/CFNetwork.h>
 #endif
-#elif TARGET_OS_WIN32
-#import <CFNetwork/CFNetwork.h>
 #else
 #import <CoreServices/CoreServices.h>
 #endif
@@ -75,6 +73,25 @@ NS_ENUM(NSInteger)
     NSURLErrorCancelledReasonInsufficientSystemResources API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0)) = 2,
     
 } API_AVAILABLE(macos(10.10), ios(7.0), watchos(2.0), tvos(9.0));
+
+/*!
+    @const NSURLErrorNetworkUnavailableReasonKey
+    @abstract The NSErrorUserInfoKey used to store and retrieve the NSNumber object corresponding to the reason why the network is unavailable when the task failed due to unsatisfiable network constraints.  See the NSURLErrorNetworkUnavailableReason enum for details.
+*/
+FOUNDATION_EXPORT NSErrorUserInfoKey const NSURLErrorNetworkUnavailableReasonKey API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0));
+
+/*!
+    @enum Codes associated with NSURLErrorNetworkUnavailableReasonKey
+    @abstract Constants used by NSError to indicate that a URLSessionTask failed because of unsatisfiable network constraints.
+    @discussion For example if the URLSessionConfiguration property allowsExpensiveNetworkAccess was set to NO and the only interfaces available were marked as expensive then the task would fail with a NSURLErrorNotConnectedToInternet error and the userInfo dictionary would contain the value NSURLErrorNetworkUnavailableReasonExpensive for the key NSURLErrorNetworkUnavailableReason.
+*/
+
+typedef NS_ENUM(NSInteger, NSURLErrorNetworkUnavailableReason)
+{
+    NSURLErrorNetworkUnavailableReasonCellular =    0,
+    NSURLErrorNetworkUnavailableReasonExpensive =   1,
+    NSURLErrorNetworkUnavailableReasonConstrained = 2,
+} API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0));
 
 /*!
     @enum NSURL-related Error Codes

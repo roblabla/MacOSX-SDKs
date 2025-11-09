@@ -1,7 +1,7 @@
 /*
     NSBatchDeleteRequest.h
     Core Data
-    Copyright (c) 2015-2018, Apple Inc.
+    Copyright (c) 2015-2019, Apple Inc.
     All rights reserved.
 */
 
@@ -25,12 +25,6 @@ NS_ASSUME_NONNULL_BEGIN
 //  delete rules (for example, minimum relationship counts).
 API_AVAILABLE(macosx(10.11),ios(9.0))
 @interface NSBatchDeleteRequest : NSPersistentStoreRequest {
-#if (!__OBJC2__)
-    @private
-    NSBatchDeleteRequestResultType _resultType;
-    NSFetchRequest *_deleteTarget;
-    intptr_t _flags;
-#endif
 }
 
 - (instancetype)init NS_UNAVAILABLE;

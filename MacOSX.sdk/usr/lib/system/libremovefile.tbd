@@ -1,10 +1,9 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: D74A307B-3DC7-3992-B16C-DACB8207BE13' ]
-platform:        macosx
-install-name:    /usr/lib/system/libremovefile.dylib
-current-version: 45.200.2
-objc-constraint: none
+uuids:           [ 'x86_64: 9FD6BC06-83ED-3FB2-858F-742960BF0881', 'x86_64: 9FD6BC06-83ED-3FB2-858F-742960BF0881' ]
+platform:        zippered
+install-name:    '/usr/lib/system/libremovefile.dylib'
+current-version: 48
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ ___removefile_init_random, ___removefile_random_char, ___removefile_randomize_buffer, 

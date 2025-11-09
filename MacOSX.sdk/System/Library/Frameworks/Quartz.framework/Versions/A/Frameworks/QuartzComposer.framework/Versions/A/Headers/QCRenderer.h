@@ -19,13 +19,14 @@
 */
 
 /* Keys for optional arguments passed to the renderer */
-extern NSString* const QCRendererEventKey;
-extern NSString* const QCRendererMouseLocationKey;
+extern NSString* const QCRendererEventKey QC_DEPRECATED_MAC(10_15);
+extern NSString* const QCRendererMouseLocationKey QC_DEPRECATED_MAC(10_15);
 
 /* Defined in AppKit */
 @class NSOpenGLContext, NSOpenGLPixelFormat, NSImage;
 
 /* Protocol for Quartz Composer composition renderers */
+QC_CLASS_DEPRECATED_MAC(10_15)
 @protocol QCCompositionRenderer
 
 /*
@@ -125,6 +126,7 @@ This mutable dictionary is the same as the one available on the plug-in executio
 @end
 
 /* Quartz Composer Composition Renderer */
+QC_CLASS_DEPRECATED_MAC(10_15)
 @interface QCRenderer : NSObject <QCCompositionRenderer>
 {
 @private

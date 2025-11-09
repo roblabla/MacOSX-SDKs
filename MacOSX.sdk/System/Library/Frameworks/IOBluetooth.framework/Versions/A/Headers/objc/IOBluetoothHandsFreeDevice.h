@@ -17,7 +17,7 @@
  @abstract	APIs for managing a hands free device
  @copyright	(c) 2010 by Apple Inc. All rights reserved.
  */
-NS_CLASS_AVAILABLE(10_7, NA)
+API_AVAILABLE(macos(10.7)) API_UNAVAILABLE(ios, watchos, tvos)
 @interface IOBluetoothHandsFreeDevice : IOBluetoothHandsFree {
 	BOOL									_rejectSCOConnection;
 	int										_ringAttempt;
@@ -198,6 +198,7 @@ NS_CLASS_AVAILABLE(10_7, NA)
 
 @end
 
+API_UNAVAILABLE(ios, watchos, tvos)
 @protocol IOBluetoothHandsFreeDeviceDelegate <IOBluetoothHandsFreeDelegate>
 @optional
 

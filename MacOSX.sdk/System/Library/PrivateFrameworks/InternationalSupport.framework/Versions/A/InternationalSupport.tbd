@@ -1,9 +1,9 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: F0E300AD-1E67-3D57-B179-C2212F7CD00C' ]
-platform:        macosx
-install-name:    /System/Library/PrivateFrameworks/InternationalSupport.framework/Versions/A/InternationalSupport
-current-version: 10.15.6
+uuids:           [ 'x86_64: 74C461AE-6E8E-38C0-BB98-EBD33D9B82D2', 'x86_64: 74C461AE-6E8E-38C0-BB98-EBD33D9B82D2' ]
+platform:        zippered
+install-name:    '/System/Library/PrivateFrameworks/InternationalSupport.framework/Versions/A/InternationalSupport'
+current-version: 44
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _InternationalSupportVersionNumber, _InternationalSupportVersionString ]

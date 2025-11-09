@@ -125,7 +125,7 @@ typedef DRTrackRef DRAudioTrackRef;
 extern DRAudioTrackRef
 DRAudioTrackCreate(
 	const FSRef*		audioFile)
-AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+    __OSX_DEPRECATED(10.2, 10.14, "Please use DRAudioTrackCreateWithURL(CFURLRef audioFileURL) instead");
 
 /*!
 	@function	DRAudioTrackCreateWithURL

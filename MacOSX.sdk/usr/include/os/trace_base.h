@@ -19,30 +19,34 @@
 
 #define OS_LOG_FORMATLIKE(x, y)  __attribute__((format(os_log, x, y)))
 
-#if     (defined(__IPHONE_OS_VERSION_MIN_REQUIRED) && __IPHONE_OS_VERSION_MIN_REQUIRED >= __IPHONE_12_0) \
-     || (defined(__WATCH_OS_VERSION_MIN_REQUIRED) &&  __WATCH_OS_VERSION_MIN_REQUIRED >= __WATCHOS_5_0) \
-     || (defined(__TV_OS_VERSION_MIN_REQUIRED) && __TV_OS_VERSION_MIN_REQUIRED >= __TVOS_12_0) \
-     || (defined(__MAC_OS_X_VERSION_MIN_REQUIRED) && __MAC_OS_X_VERSION_MIN_REQUIRED >= __MAC_10_14)
+#define __OS_LOG_OS_FEATURES_AT_LEAST(macos, ios, tvos, watchos) \
+        (  (defined(__MAC_OS_X_VERSION_MIN_REQUIRED) && __MAC_OS_X_VERSION_MIN_REQUIRED >= __MAC_##macos) \
+        || (defined(__IPHONE_OS_VERSION_MIN_REQUIRED) && __IPHONE_OS_VERSION_MIN_REQUIRED >= __IPHONE_##ios) \
+        || (defined(__TV_OS_VERSION_MIN_REQUIRED) && __TV_OS_VERSION_MIN_REQUIRED >= __TVOS_##tvos) \
+        || (defined(__WATCH_OS_VERSION_MIN_REQUIRED) && __WATCH_OS_VERSION_MIN_REQUIRED >= __WATCHOS_##watchos) \
+        )
+
+#if __OS_LOG_OS_FEATURES_AT_LEAST(10_15, 13_0, 13_0, 6_0)
+#define OS_LOG_TARGET_HAS_10_15_FEATURES 1
+#else
+#define OS_LOG_TARGET_HAS_10_15_FEATURES 0
+#endif
+
+#if __OS_LOG_OS_FEATURES_AT_LEAST(10_14, 12_0, 12_0, 5_0)
 #define OS_LOG_TARGET_HAS_10_14_FEATURES 1
-#define OS_LOG_TARGET_HAS_10_13_FEATURES 1
-#define OS_LOG_TARGET_HAS_10_12_FEATURES 1
-#elif     (defined(__IPHONE_OS_VERSION_MIN_REQUIRED) && __IPHONE_OS_VERSION_MIN_REQUIRED >= __IPHONE_11_0) \
-     || (defined(__WATCH_OS_VERSION_MIN_REQUIRED) &&  __WATCH_OS_VERSION_MIN_REQUIRED >= __WATCHOS_4_0) \
-     || (defined(__TV_OS_VERSION_MIN_REQUIRED) && __TV_OS_VERSION_MIN_REQUIRED >= __TVOS_11_0) \
-     || (defined(__MAC_OS_X_VERSION_MIN_REQUIRED) && __MAC_OS_X_VERSION_MIN_REQUIRED >= __MAC_10_13)
-#define OS_LOG_TARGET_HAS_10_14_FEATURES 0
-#define OS_LOG_TARGET_HAS_10_13_FEATURES 1
-#define OS_LOG_TARGET_HAS_10_12_FEATURES 1
-#elif     (defined(__IPHONE_OS_VERSION_MIN_REQUIRED) && __IPHONE_OS_VERSION_MIN_REQUIRED >= __IPHONE_10_0) \
-     || (defined(__WATCH_OS_VERSION_MIN_REQUIRED) &&  __WATCH_OS_VERSION_MIN_REQUIRED >= __WATCHOS_3_0) \
-     || (defined(__TV_OS_VERSION_MIN_REQUIRED) && __TV_OS_VERSION_MIN_REQUIRED >= __TVOS_10_0) \
-     || (defined(__MAC_OS_X_VERSION_MIN_REQUIRED) && __MAC_OS_X_VERSION_MIN_REQUIRED >= __MAC_10_12)
-#define OS_LOG_TARGET_HAS_10_14_FEATURES 0
-#define OS_LOG_TARGET_HAS_10_13_FEATURES 0
-#define OS_LOG_TARGET_HAS_10_12_FEATURES 1
 #else
 #define OS_LOG_TARGET_HAS_10_14_FEATURES 0
+#endif
+
+#if __OS_LOG_OS_FEATURES_AT_LEAST(10_13, 11_0, 11_0, 4_0)
+#define OS_LOG_TARGET_HAS_10_13_FEATURES 1
+#else
 #define OS_LOG_TARGET_HAS_10_13_FEATURES 0
+#endif
+
+#if __OS_LOG_OS_FEATURES_AT_LEAST(10_12, 10_0, 10_0, 3_0)
+#define OS_LOG_TARGET_HAS_10_12_FEATURES 1
+#else
 #define OS_LOG_TARGET_HAS_10_12_FEATURES 0
 #endif
 
@@ -64,6 +68,12 @@
 
 #define OS_LOG_PRAGMA_POP  _Pragma("clang diagnostic pop")
 
+#if __has_attribute(uninitialized)
+#define OS_LOG_UNINITIALIZED __attribute__((uninitialized))
+#else
+#define OS_LOG_UNINITIALIZED
+#endif
+
 #define OS_LOG_STRING(_ns, _var, _str) \
         _Static_assert(__builtin_constant_p(_str), \
                 "format/label/description argument must be a string constant"); \
@@ -75,7 +85,7 @@
 
 #define OS_LOG_CALL_WITH_FORMAT(fun, fun_args, fmt, ...) __extension__({ \
         OS_LOG_PRAGMA_PUSH OS_LOG_STRING(LOG, _os_fmt_str, fmt); \
-        uint8_t _Alignas(16) _os_fmt_buf[__builtin_os_log_format_buffer_size(fmt, ##__VA_ARGS__)]; \
+        uint8_t _Alignas(16) OS_LOG_UNINITIALIZED _os_fmt_buf[__builtin_os_log_format_buffer_size(fmt, ##__VA_ARGS__)]; \
         fun(OS_LOG_REMOVE_PARENS fun_args, _os_fmt_str, \
                 (uint8_t *)__builtin_os_log_format(_os_fmt_buf, fmt, ##__VA_ARGS__), \
                 (uint32_t)sizeof(_os_fmt_buf)) OS_LOG_PRAGMA_POP; \
@@ -84,7 +94,7 @@
 #define OS_LOG_CALL_WITH_FORMAT_NAME(fun, fun_args, name, fmt, ...) __extension__({ \
         OS_LOG_PRAGMA_PUSH OS_LOG_STRING(LOG, _os_fmt_str, fmt); \
         OS_LOG_STRING(LOG, _os_name_str, name); \
-        uint8_t _Alignas(16) _os_fmt_buf[__builtin_os_log_format_buffer_size(fmt, ##__VA_ARGS__)]; \
+        uint8_t _Alignas(16) OS_LOG_UNINITIALIZED _os_fmt_buf[__builtin_os_log_format_buffer_size(fmt, ##__VA_ARGS__)]; \
         fun(OS_LOG_REMOVE_PARENS fun_args, _os_name_str, _os_fmt_str, \
                 (uint8_t *)__builtin_os_log_format(_os_fmt_buf, fmt, ##__VA_ARGS__), \
                 (uint32_t)sizeof(_os_fmt_buf)) OS_LOG_PRAGMA_POP; \

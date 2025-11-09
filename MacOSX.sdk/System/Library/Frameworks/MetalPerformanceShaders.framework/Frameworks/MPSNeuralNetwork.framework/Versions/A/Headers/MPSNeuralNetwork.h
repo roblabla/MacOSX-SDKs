@@ -16,9 +16,11 @@
 #import <MPSNeuralNetwork/MPSCNNUpsampling.h>
 #import <MPSNeuralNetwork/MPSCNNBatchNormalization.h>
 #import <MPSNeuralNetwork/MPSCNNInstanceNormalization.h>
+#import <MPSNeuralNetwork/MPSCNNGroupNormalization.h>
 #import <MPSNeuralNetwork/MPSCNNDropout.h>
 #import <MPSNeuralNetwork/MPSRNNLayer.h>
 #import <MPSNeuralNetwork/MPSMatrixLayer.h>
+#import <MPSNeuralNetwork/MPSNNGridSample.h>
 #import <MPSNeuralNetwork/MPSNNOptimizers.h>
 #import <MPSNeuralNetwork/MPSNNReduce.h>
 #import <MPSNeuralNetwork/MPSNNReshape.h>

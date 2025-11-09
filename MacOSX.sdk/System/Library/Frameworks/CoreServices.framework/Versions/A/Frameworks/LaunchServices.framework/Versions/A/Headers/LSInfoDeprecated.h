@@ -55,31 +55,15 @@ typedef CF_OPTIONS(OptionBits, LSItemInfoFlags) {
   kLSItemInfoExtensionIsHidden		__OS_AVAILABILITY_MSG(macosx, deprecated=10.11, "Use the URL resource property kCFURLHasHiddenExtensionKey or NSURLHasHiddenExtensionKey instead.") = 0x00100000 /* Item has a hidden extension*/
 };
 
-
-
-#if !__LP64__
-typedef UInt32 LSKindID __OS_AVAILABILITY_MSG(macosx, deprecated=10.11, "Use the URL resource property kCFURLTypeIdentifierKey or NSURLTypeIdentifierKey instead.");
-enum {
-  kLSUnknownKindID __OS_AVAILABILITY_MSG(macosx, deprecated=10.11, "Use the URL resource property kCFURLTypeIdentifierKey or NSURLTypeIdentifierKey instead.") = 0
-};
-#endif
-
-
+	
+#define kLSInvalidExtensionIndex ULONG_MAX      // Index returned from LSGetExtensionInfo when name has no extension
+	
 
 typedef struct LSItemInfoRecord {
   LSItemInfoFlags flags;
   OSType filetype;
   OSType creator;
   CFStringRef extension;              /* release when finished*/
-
-#if !__LP64__
-  CFStringRef iconFileName;           /* not for general use*/
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-  LSKindID kindID;                 /* not for general use*/
-#pragma clang diagnostic pop
-#endif
-
 } LSItemInfoRecord __OS_AVAILABILITY_MSG(macosx, deprecated=10.11, "Use CFURLCopyResourcePropertiesForKeys or -[NSURL resourceValuesForKeys:error:] instead.");
 
 
@@ -119,7 +103,7 @@ extern OSStatus
 LSCopyItemInfoForURL(
   CFURLRef            inURL,
   LSRequestedInfo     inWhichInfo,
-  LSItemInfoRecord *  outItemInfo)                            __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_0, __MAC_10_11, __IPHONE_NA, __IPHONE_NA, "Use URL resource properties instead.");
+  LSItemInfoRecord *  outItemInfo)                            API_DEPRECATED("Use URL resource properties instead.", macos(10.0,10.11) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 
@@ -159,13 +143,7 @@ extern OSStatus
 LSCopyItemInfoForRef(
   const FSRef *       inItemRef,
   LSRequestedInfo     inWhichInfo,
-  LSItemInfoRecord *  outItemInfo)                            __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_0, __MAC_10_10, __IPHONE_NA, __IPHONE_NA, "Use URL resource properties instead.");
-
-
-
-#define kLSInvalidExtensionIndex ULONG_MAX      // Index returned from LSGetExtensionInfo when name has no extension
-
-
+  LSItemInfoRecord *  outItemInfo)                            API_DEPRECATED("Use URL resource properties instead.", macos(10.0,10.10) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 /*
  *  LSGetExtensionInfo()   *** DEPRECATED ***
@@ -206,7 +184,7 @@ extern OSStatus
 LSGetExtensionInfo(
   UniCharCount    inNameLen,
   const UniChar   inNameBuffer[],
-  UniCharCount *  outExtStartIndex)                           __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_1, __MAC_10_11, __IPHONE_NA, __IPHONE_NA, "Use CFURLCopyPathExtension(), -[NSURL pathExtension], or -[NSString pathExtension] instead.");
+  UniCharCount *  outExtStartIndex)                           API_DEPRECATED("Use CFURLCopyPathExtension(), -[NSURL pathExtension], or -[NSString pathExtension] instead.", macos(10.1,10.11) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 
@@ -243,7 +221,7 @@ LSGetExtensionInfo(
 extern OSStatus 
 LSCopyDisplayNameForRef(
   const FSRef *  inRef,
-  CFStringRef *  outDisplayName)                              __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_1, __MAC_10_10, __IPHONE_NA, __IPHONE_NA, "Use the URL resource property kCFURLLocalizedNameKey or NSURLLocalizedNameKey instead.");
+  CFStringRef *  outDisplayName)                              API_DEPRECATED("Use the URL resource property kCFURLLocalizedNameKey or NSURLLocalizedNameKey instead.", macos(10.1,10.10) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 
@@ -280,7 +258,7 @@ LSCopyDisplayNameForRef(
 extern OSStatus 
 LSCopyDisplayNameForURL(
   CFURLRef       inURL,
-  CFStringRef *  outDisplayName)                              __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_1, __MAC_10_11, __IPHONE_NA, __IPHONE_NA, "Use the URL resource property kCFURLLocalizedNameKey or NSURLLocalizedNameKey instead.");
+  CFStringRef *  outDisplayName)                              API_DEPRECATED("Use the URL resource property kCFURLLocalizedNameKey or NSURLLocalizedNameKey instead.", macos(10.1,10.11) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 
@@ -318,7 +296,7 @@ LSCopyDisplayNameForURL(
 extern OSStatus 
 LSSetExtensionHiddenForRef(
   const FSRef *  inRef,
-  Boolean        inHide)                                      __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_1, __MAC_10_10, __IPHONE_NA, __IPHONE_NA, "Use the URL resource property kCFURLHasHiddenExtensionKey or NSURLHasHiddenExtensionKey instead.");
+  Boolean        inHide)                                      API_DEPRECATED("Use the URL resource property kCFURLHasHiddenExtensionKey or NSURLHasHiddenExtensionKey instead.", macos(10.1,10.10) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 
@@ -356,7 +334,7 @@ LSSetExtensionHiddenForRef(
 extern OSStatus 
 LSSetExtensionHiddenForURL(
   CFURLRef   inURL,
-  Boolean    inHide)                                          __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_1, __MAC_10_11, __IPHONE_NA, __IPHONE_NA, "Use the URL resource property kCFURLHasHiddenExtensionKey or NSURLHasHiddenExtensionKey instead.");
+  Boolean    inHide)                                          API_DEPRECATED("Use the URL resource property kCFURLHasHiddenExtensionKey or NSURLHasHiddenExtensionKey instead.", macos(10.1,10.11) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 
@@ -393,7 +371,7 @@ LSSetExtensionHiddenForURL(
 extern OSStatus 
 LSCopyKindStringForRef(
   const FSRef *  inFSRef,
-  CFStringRef *  outKindString)                               __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_0, __MAC_10_10, __IPHONE_NA, __IPHONE_NA, "Use the URL resource property kCFURLLocalizedTypeDescriptionKey or NSURLLocalizedTypeDescriptionKey instead.");
+  CFStringRef *  outKindString)                               API_DEPRECATED("Use the URL resource property kCFURLLocalizedTypeDescriptionKey or NSURLLocalizedTypeDescriptionKey instead.", macos(10.0,10.10) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 
@@ -430,7 +408,7 @@ LSCopyKindStringForRef(
 extern OSStatus 
 LSCopyKindStringForURL(
   CFURLRef       inURL,
-  CFStringRef *  outKindString)                               __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_0, __MAC_10_11, __IPHONE_NA, __IPHONE_NA, "Use the URL resource property kCFURLLocalizedTypeDescriptionKey or NSURLLocalizedTypeDescriptionKey instead.");
+  CFStringRef *  outKindString)                               API_DEPRECATED("Use the URL resource property kCFURLLocalizedTypeDescriptionKey or NSURLLocalizedTypeDescriptionKey instead.", macos(10.0,10.11) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 
@@ -486,7 +464,7 @@ LSCopyKindStringForTypeInfo(
   OSType         inType,
   OSType         inCreator,
   CFStringRef    inExtension,         /* can be NULL */
-  CFStringRef *  outKindString)                               __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_2, __MAC_10_10, __IPHONE_NA, __IPHONE_NA, "Use UTTypeCopyDescription instead.");
+  CFStringRef *  outKindString)                               API_DEPRECATED("Use UTTypeCopyDescription instead.", macos(10.2,10.10) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 
@@ -523,7 +501,7 @@ LSCopyKindStringForTypeInfo(
 extern OSStatus 
 LSCopyKindStringForMIMEType(
   CFStringRef    inMIMEType,
-  CFStringRef *  outKindString)                               __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_2, __MAC_10_10, __IPHONE_NA, __IPHONE_NA, "Use UTTypeCopyDescription instead.");
+  CFStringRef *  outKindString)                               API_DEPRECATED("Use UTTypeCopyDescription instead.", macos(10.2,10.10) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 /*
@@ -574,7 +552,7 @@ LSGetApplicationForItem(
   const FSRef *  inItemRef,
   LSRolesMask    inRoleMask,
   FSRef *        outAppRef,        /* can be NULL */
-  CFURLRef *     outAppURL)        /* can be NULL */          __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_0, __MAC_10_10, __IPHONE_NA, __IPHONE_NA, "Use LSCopyDefaultApplicationURLForURL instead.");
+  CFURLRef *     outAppURL)        /* can be NULL */          API_DEPRECATED("Use LSCopyDefaultApplicationURLForURL instead.", macos(10.0,10.10) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 	
@@ -636,7 +614,7 @@ LSGetApplicationForInfo(
   CFStringRef   inExtension,       /* can be NULL */
   LSRolesMask   inRoleMask,
   FSRef *       outAppRef,         /* can be NULL */
-  CFURLRef *    outAppURL)         /* can be NULL */          __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_0, __MAC_10_10, __IPHONE_NA, __IPHONE_NA, "Use LSCopyDefaultApplicationURLForContentType instead.");
+  CFURLRef *    outAppURL)         /* can be NULL */          API_DEPRECATED("Use LSCopyDefaultApplicationURLForContentType instead.", macos(10.0,10.10) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 
@@ -682,7 +660,7 @@ extern OSStatus
 LSCopyApplicationForMIMEType(
   CFStringRef   inMIMEType,
   LSRolesMask   inRoleMask,
-  CFURLRef *    outAppURL)                                    __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_2, __MAC_10_10, __IPHONE_NA, __IPHONE_NA, "Use LSCopyDefaultApplicationURLForContentType instead.");
+  CFURLRef *    outAppURL)                                    API_DEPRECATED("Use LSCopyDefaultApplicationURLForContentType instead.", macos(10.2,10.10) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 
@@ -734,7 +712,7 @@ LSGetApplicationForURL(
   CFURLRef      inURL,
   LSRolesMask   inRoleMask,
   FSRef *       outAppRef,        /* can be NULL */
-  CFURLRef *    outAppURL)        /* can be NULL */           __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_0, __MAC_10_10, __IPHONE_NA, __IPHONE_NA, "Use LSCopyDefaultApplicationURLForURL instead.");
+  CFURLRef *    outAppURL)        /* can be NULL */           API_DEPRECATED("Use LSCopyDefaultApplicationURLForURL instead.", macos(10.0,10.10) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 
@@ -789,7 +767,7 @@ LSFindApplicationForInfo(
   CFStringRef   inBundleID,       /* can be NULL */
   CFStringRef   inName,           /* can be NULL */
   FSRef *       outAppRef,        /* can be NULL */
-  CFURLRef *    outAppURL)        /* can be NULL */           __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_0, __MAC_10_10, __IPHONE_NA, __IPHONE_NA, "Use LSCopyApplicationURLsForBundleIdentifier instead.");
+  CFURLRef *    outAppURL)        /* can be NULL */           API_DEPRECATED("Use LSCopyApplicationURLsForBundleIdentifier instead.", macos(10.0,10.10) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 
@@ -840,7 +818,7 @@ LSCanRefAcceptItem(
   const FSRef *       inTargetRef,
   LSRolesMask         inRoleMask,
   LSAcceptanceFlags   inFlags,
-  Boolean *           outAcceptsItem)                         __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_0, __MAC_10_10, __IPHONE_NA, __IPHONE_NA, "Use LSCanURLAcceptURL instead.");
+  Boolean *           outAcceptsItem)                         API_DEPRECATED("Use LSCanURLAcceptURL instead.", macos(10.0,10.10) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 
@@ -883,7 +861,7 @@ LSCanRefAcceptItem(
 extern OSStatus 
 LSRegisterFSRef(
   const FSRef *  inRef,
-  Boolean        inUpdate)                                    __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_3, __MAC_10_10, __IPHONE_NA, __IPHONE_NA, "Use LSRegisterURL instead.");
+  Boolean        inUpdate)                                    API_DEPRECATED("Use LSRegisterURL instead.", macos(10.3,10.10) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 	
 #endif // TARGET_OS_OSX
@@ -970,7 +948,7 @@ LSRegisterFSRef(
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
-extern const CFStringRef kLSItemContentType                          __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_4, __MAC_10_10, __IPHONE_4_0, __IPHONE_8_0, "Use the URL resource property kCFURLTypeIdentifierKey or NSURLTypeIdentifierKey instead.");
+extern const CFStringRef kLSItemContentType                          API_DEPRECATED("Use the URL resource property kCFURLTypeIdentifierKey or NSURLTypeIdentifierKey instead.", ios(4.0,8.0), macos(10.4,10.10), tvos(9.0,9.0), watchos(4.0,4.0) );
 /*
  *  kLSItemFileType   *** DEPRECATED ***
  *
@@ -982,7 +960,7 @@ extern const CFStringRef kLSItemContentType                          __OSX_AVAIL
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
-extern const CFStringRef kLSItemFileType                             __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_4, __MAC_10_10, __IPHONE_4_0, __IPHONE_8_0, "Use the URL resource property kCFURLTypeIdentifierKey or NSURLTypeIdentifierKey to get the file's UTI instead.");
+extern const CFStringRef kLSItemFileType                             API_DEPRECATED("Use the URL resource property kCFURLTypeIdentifierKey or NSURLTypeIdentifierKey to get the file's UTI instead.", ios(4.0,8.0), macos(10.4,10.10), tvos(9.0,9.0), watchos(4.0,4.0) );
 /*
  *  kLSItemFileCreator   *** DEPRECATED ***
  *  
@@ -994,7 +972,7 @@ extern const CFStringRef kLSItemFileType                             __OSX_AVAIL
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
-extern const CFStringRef kLSItemFileCreator                          __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_4, __MAC_10_10, __IPHONE_4_0, __IPHONE_8_0, "Use the URL resource property kCFURLTypeIdentifierKey or NSURLTypeIdentifierKey to get the file's UTI instead.");
+extern const CFStringRef kLSItemFileCreator                          API_DEPRECATED("Use the URL resource property kCFURLTypeIdentifierKey or NSURLTypeIdentifierKey to get the file's UTI instead.", ios(4.0,8.0), macos(10.4,10.10), tvos(9.0,9.0), watchos(4.0,4.0) );
 /*
  *  kLSItemExtension   *** DEPRECATED ***
  *  
@@ -1006,7 +984,7 @@ extern const CFStringRef kLSItemFileCreator                          __OSX_AVAIL
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
-extern const CFStringRef kLSItemExtension                            __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_4, __MAC_10_10, __IPHONE_4_0, __IPHONE_8_0, "Use CFURLCopyPathExtension or -[NSURL pathExtension] instead.");
+extern const CFStringRef kLSItemExtension                            API_DEPRECATED("Use CFURLCopyPathExtension or -[NSURL pathExtension] instead.", ios(4.0,8.0), macos(10.4,10.10), tvos(9.0,9.0), watchos(4.0,4.0) );
 /*
  *  kLSItemDisplayName   *** DEPRECATED ***
  *  
@@ -1018,7 +996,7 @@ extern const CFStringRef kLSItemExtension                            __OSX_AVAIL
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
-extern const CFStringRef kLSItemDisplayName                          __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_4, __MAC_10_10, __IPHONE_4_0, __IPHONE_8_0, "Use the URL resource property kCFURLLocalizedNameKey or NSURLLocalizedNameKey instead.");
+extern const CFStringRef kLSItemDisplayName                          API_DEPRECATED("Use the URL resource property kCFURLLocalizedNameKey or NSURLLocalizedNameKey instead.", ios(4.0,8.0), macos(10.4,10.10), tvos(9.0,9.0), watchos(4.0,4.0) );
 /*
  *  kLSItemDisplayKind   *** DEPRECATED ***
  *  
@@ -1030,7 +1008,7 @@ extern const CFStringRef kLSItemDisplayName                          __OSX_AVAIL
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
-extern const CFStringRef kLSItemDisplayKind                          __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_4, __MAC_10_10, __IPHONE_4_0, __IPHONE_8_0, "Use the URL resource property kCFURLLocalizedTypeDescriptionKey or NSURLLocalizedTypeDescriptionKey instead.");
+extern const CFStringRef kLSItemDisplayKind                          API_DEPRECATED("Use the URL resource property kCFURLLocalizedTypeDescriptionKey or NSURLLocalizedTypeDescriptionKey instead.", ios(4.0,8.0), macos(10.4,10.10), tvos(9.0,9.0), watchos(4.0,4.0) );
 /*
  *  kLSItemRoleHandlerDisplayName   *** DEPRECATED ***
  *  
@@ -1043,7 +1021,7 @@ extern const CFStringRef kLSItemDisplayKind                          __OSX_AVAIL
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
-extern const CFStringRef kLSItemRoleHandlerDisplayName               __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_4, __MAC_10_10, __IPHONE_4_0, __IPHONE_8_0, "Instead, resolve the desired role handler for the file, then use the URL resource property kCFURLLocalizedNameKey or NSURLLocalizedNameKey on the role handler's URL.");
+extern const CFStringRef kLSItemRoleHandlerDisplayName               API_DEPRECATED("Instead, resolve the desired role handler for the file, then use the URL resource property kCFURLLocalizedNameKey or NSURLLocalizedNameKey on the role handler's URL.", ios(4.0,8.0), macos(10.4,10.10), tvos(9.0,9.0), watchos(4.0,4.0) );
 /*
  *  kLSItemIsInvisible   *** DEPRECATED ***
  *  
@@ -1055,7 +1033,7 @@ extern const CFStringRef kLSItemRoleHandlerDisplayName               __OSX_AVAIL
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
-extern const CFStringRef kLSItemIsInvisible                          __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_4, __MAC_10_10, __IPHONE_4_0, __IPHONE_8_0, "Use the URL resource property kCFURLIsHiddenKey or NSURLIsHiddenKey instead.");
+extern const CFStringRef kLSItemIsInvisible                          API_DEPRECATED("Use the URL resource property kCFURLIsHiddenKey or NSURLIsHiddenKey instead.", ios(4.0,8.0), macos(10.4,10.10), tvos(9.0,9.0), watchos(4.0,4.0) );
 /*
  *  kLSItemExtensionIsHidden   *** DEPRECATED ***
  *  
@@ -1067,7 +1045,7 @@ extern const CFStringRef kLSItemIsInvisible                          __OSX_AVAIL
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
-extern const CFStringRef kLSItemExtensionIsHidden                    __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_4, __MAC_10_10, __IPHONE_4_0, __IPHONE_8_0, "Use the URL resource property kCFURLHasHiddenExtensionKey or NSURLHasHiddenExtensionKey instead.");
+extern const CFStringRef kLSItemExtensionIsHidden                    API_DEPRECATED("Use the URL resource property kCFURLHasHiddenExtensionKey or NSURLHasHiddenExtensionKey instead.", ios(4.0,8.0), macos(10.4,10.10), tvos(9.0,9.0), watchos(4.0,4.0) );
 /*
  *  kLSItemQuarantineProperties   *** DEPRECATED ***
  *  
@@ -1079,7 +1057,7 @@ extern const CFStringRef kLSItemExtensionIsHidden                    __OSX_AVAIL
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
-extern const CFStringRef kLSItemQuarantineProperties                 __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_5, __MAC_10_10, __IPHONE_4_0, __IPHONE_8_0, "Use the URL resource property kCFURLQuarantinePropertiesKey or NSURLQuarantinePropertiesKey instead.");
+extern const CFStringRef kLSItemQuarantineProperties                 API_DEPRECATED("Use the URL resource property kCFURLQuarantinePropertiesKey or NSURLQuarantinePropertiesKey instead.", ios(4.0,8.0), macos(10.5,10.10), tvos(9.0,9.0), watchos(4.0,4.0) );
 
 #if TARGET_OS_OSX
 /*
@@ -1126,7 +1104,7 @@ LSCopyItemAttribute(
   const FSRef *  inItem,
   LSRolesMask    inRoles,
   CFStringRef    inAttributeName,
-  CFTypeRef *    outValue)                                    __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_4, __MAC_10_10, __IPHONE_NA, __IPHONE_NA, "Use CFURLCopyResourcePropertyForKey or -[NSURL getResourceValue:forKey:error:] instead.");
+  CFTypeRef *    outValue)                                    API_DEPRECATED("Use CFURLCopyResourcePropertyForKey or -[NSURL getResourceValue:forKey:error:] instead.", macos(10.4,10.10) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 
@@ -1177,7 +1155,7 @@ LSCopyItemAttributes(
   const FSRef *      inItem,
   LSRolesMask        inRoles,
   CFArrayRef         inAttributeNames,
-  CFDictionaryRef *  outValues)                               __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_4, __MAC_10_10, __IPHONE_NA, __IPHONE_NA, "Use CFURLCopyResourcePropertiesForKeys or -[NSURL resourceValuesForKeys:error:] instead.");
+  CFDictionaryRef *  outValues)                               API_DEPRECATED("Use CFURLCopyResourcePropertiesForKeys or -[NSURL resourceValuesForKeys:error:] instead.", macos(10.4,10.10) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 
@@ -1224,7 +1202,7 @@ LSSetItemAttribute(
   const FSRef *  inItem,
   LSRolesMask    inRoles,
   CFStringRef    inAttributeName,
-  CFTypeRef      inValue)               /* can be NULL */     __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_5, __MAC_10_10, __IPHONE_NA, __IPHONE_NA, "Use CFURLSetResourcePropertyForKey or -[NSURL setResourceValue:forKey:error:] instead.");
+  CFTypeRef      inValue)               /* can be NULL */     API_DEPRECATED("Use CFURLSetResourcePropertyForKey or -[NSURL setResourceValue:forKey:error:] instead.", macos(10.5,10.10) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 #endif // TARGET_OS_OSX
 
@@ -1244,8 +1222,8 @@ LSSetItemAttribute(
  *
  */
 typedef CF_OPTIONS(OptionBits, LSHandlerOptions) {
-  kLSHandlerOptionsDefault       __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_4, __MAC_10_11, __IPHONE_4_0, __IPHONE_9_0, "Creator codes are deprecated on OS X.") = 0,
-  kLSHandlerOptionsIgnoreCreator __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_4, __MAC_10_11, __IPHONE_4_0, __IPHONE_9_0, "Creator codes are deprecated on OS X.") = 1
+  kLSHandlerOptionsDefault       API_DEPRECATED("Creator codes are deprecated on OS X.", ios(4.0,9.0), macos(10.4,10.11), tvos(9.0,9.0), watchos(4.0,4.0) ) = 0,
+  kLSHandlerOptionsIgnoreCreator API_DEPRECATED("Creator codes are deprecated on OS X.", ios(4.0,9.0), macos(10.4,10.11), tvos(9.0,9.0), watchos(4.0,4.0) ) = 1
 };
 
 
@@ -1266,7 +1244,7 @@ typedef CF_OPTIONS(OptionBits, LSHandlerOptions) {
  *    Non-Carbon CFM:   not available
  */
 extern LSHandlerOptions 
-LSGetHandlerOptionsForContentType(CFStringRef inContentType)  __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_4, __MAC_10_11, __IPHONE_4_0, __IPHONE_9_0, "Creator codes are deprecated on OS X.");
+LSGetHandlerOptionsForContentType(CFStringRef inContentType)  API_DEPRECATED("Creator codes are deprecated on OS X.", ios(4.0,9.0), macos(10.4,10.11), tvos(9.0,9.0), watchos(4.0,4.0) );
 
 
 
@@ -1289,7 +1267,7 @@ LSGetHandlerOptionsForContentType(CFStringRef inContentType)  __OSX_AVAILABLE_BU
 extern OSStatus 
 LSSetHandlerOptionsForContentType(
   CFStringRef        inContentType,
-  LSHandlerOptions   inOptions)                               __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_4, __MAC_10_11, __IPHONE_4_0, __IPHONE_9_0, "Creator codes are deprecated on OS X.");
+  LSHandlerOptions   inOptions)                               API_DEPRECATED("Creator codes are deprecated on OS X.", ios(4.0,9.0), macos(10.4,10.11), tvos(9.0,9.0), watchos(4.0,4.0) );
 
 
 

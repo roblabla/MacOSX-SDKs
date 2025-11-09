@@ -112,7 +112,7 @@ __END_DECLS
 #define __Request__mach_voucher_attr_control_subsystem__defined
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -124,11 +124,11 @@ __END_DECLS
 		mach_msg_type_number_t value_handlesCnt;
 	} __Request__mach_voucher_attr_control_get_values_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -137,7 +137,7 @@ __END_DECLS
 		uint8_t recipes[5120];
 	} __Request__mach_voucher_attr_control_create_mach_voucher_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 #endif /* !__Request__mach_voucher_attr_control_subsystem__defined */
 
@@ -156,7 +156,7 @@ union __RequestUnion__mach_voucher_attr_control_subsystem {
 #define __Reply__mach_voucher_attr_control_subsystem__defined
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -166,11 +166,11 @@ union __RequestUnion__mach_voucher_attr_control_subsystem {
 		mach_voucher_attr_value_handle_t value_handles[4];
 	} __Reply__mach_voucher_attr_control_get_values_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -180,7 +180,7 @@ union __RequestUnion__mach_voucher_attr_control_subsystem {
 		/* end of the kernel processed data */
 	} __Reply__mach_voucher_attr_control_create_mach_voucher_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 #endif /* !__Reply__mach_voucher_attr_control_subsystem__defined */
 

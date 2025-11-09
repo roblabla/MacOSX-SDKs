@@ -67,6 +67,5 @@
 #define kOpenIconVariant 				'open'
 #define kOpenDropIconVariant 			'odrp'
 
-
 #endif /* __ICONSTORAGE_R__ */
 

@@ -1,7 +1,7 @@
 /*
  NSMenu.h
  Application Kit
- Copyright (c) 1996-2018, Apple Inc.
+ Copyright (c) 1996-2019, Apple Inc.
  All rights reserved.
 */
 
@@ -12,49 +12,18 @@
 #import <AppKit/NSMenuItem.h>
 
 NS_ASSUME_NONNULL_BEGIN
+API_UNAVAILABLE_BEGIN(ios)
 
 @class NSEvent, NSView, NSFont;
 @class NSMenu;
 @protocol NSMenuDelegate;
 
 @interface NSMenu : NSObject <NSCopying, NSCoding, NSUserInterfaceItemIdentification, NSAccessibilityElement, NSAccessibility>
-{
-    /*All instance variables are private*/
-    @private
-    NSMenu *_supermenu APPKIT_IVAR;
-    NSString *_title APPKIT_IVAR;
-    id _itemArray APPKIT_IVAR;
-    id _extra APPKIT_IVAR;
-    struct __mFlags {
-        unsigned int noAutoenable:1;
-        unsigned int inMain:1;
-        unsigned int internalPerformAction:1;
-        unsigned int condenseSeparators:1;
-        unsigned int disabled:1;
-        unsigned int ownedByPopUp:1;
-	unsigned int delegateNeedsUpdate:1;
-	unsigned int delegateUpdateItem:1;
-	unsigned int delegateHasKeyEquiv:1;
-	unsigned int delegateHasAltKeyEquiv:1;
-	unsigned int excludeMarkColumn:1;
-	unsigned int isContextualMenu:1;
-        unsigned int cmPluginMode:2;
-        unsigned int invertedCMPluginTypes:2;
-        unsigned int allowsDifferentSelection:1;
-        unsigned int noTopPadding:1;
-        unsigned int noBottomPadding:1;
-	unsigned int hasNCStyle:1;
-	unsigned int delegateIsUnsafeUnretained:1;
-        unsigned int avoidUsingCache:1;
-        unsigned int RESERVED:10;
-    } _mFlags APPKIT_IVAR;
-    NSString *_uiid APPKIT_IVAR;
-}
 
 /* Designated initializer.  If this menu is used as a submenu of an item in the application's main menu, then the title is what appears in the menu bar.  Otherwise, the title is ignored.  Do not pass nil (an exception will result), but you may pass an empty string.
  */
 - (instancetype)initWithTitle:(NSString *)title NS_DESIGNATED_INITIALIZER;
-- (instancetype)initWithCoder:(NSCoder *)decoder NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithCoder:(NSCoder *)coder NS_DESIGNATED_INITIALIZER;
 
 /* Set and get the menu's title.  The titles of the submenus of the application's main menu items appear in the menu bar. */
 @property (copy) NSString *title;
@@ -71,7 +40,7 @@ NS_ASSUME_NONNULL_BEGIN
  
    This method determines whether to use the top left or right corner by calling userInterfaceLayoutDirection on the view or its cell (if implemented).  If not implemented, or if the view is nil, it inspects the userInterfaceLayoutDirection of the NSApplication.
 */
-- (BOOL)popUpMenuPositioningItem:(nullable NSMenuItem *)item atLocation:(NSPoint)location inView:(nullable NSView *)view NS_AVAILABLE_MAC(10_6);
+- (BOOL)popUpMenuPositioningItem:(nullable NSMenuItem *)item atLocation:(NSPoint)location inView:(nullable NSView *)view API_AVAILABLE(macos(10.6));
 
 /* Determines whether the menu bar is visible for this application.  Users cannot access the menu bar unless it is visible.  It is visible by default. */
 + (void)setMenuBarVisible:(BOOL)visible;
@@ -105,7 +74,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /* Removes all items.  This is more efficient than removing items one by one.  This does not post NSMenuDidRemoveItemNotification, for efficiency.
 */
-- (void)removeAllItems NS_AVAILABLE_MAC(10_6);
+- (void)removeAllItems API_AVAILABLE(macos(10.6));
 
 /* Returns an array containing the receiver's menu items. This property is settable in macOS 10.14 and later. */
 @property (copy) NSArray<NSMenuItem *> *itemArray;
@@ -156,35 +125,35 @@ NS_ASSUME_NONNULL_BEGIN
 @property (readonly) CGFloat menuBarHeight;
 
 /* Dismisses the menu and ends all menu tracking */
-- (void)cancelTracking NS_AVAILABLE_MAC(10_5);
+- (void)cancelTracking API_AVAILABLE(macos(10.5));
 
 /* Dismisses the menu immediately, without any fade or other effect, and ends all menu tracking */
-- (void)cancelTrackingWithoutAnimation NS_AVAILABLE_MAC(10_6);
+- (void)cancelTrackingWithoutAnimation API_AVAILABLE(macos(10.6));
 
 /* Returns the highlighted item in the menu, or nil if no item in the menu is highlighted */
-@property (nullable, readonly, strong) NSMenuItem *highlightedItem NS_AVAILABLE_MAC(10_5);
+@property (nullable, readonly, strong) NSMenuItem *highlightedItem API_AVAILABLE(macos(10.5));
 
 /* Set the minimum width of the menu, in screen coordinates. The menu will prefer to not draw smaller than its minimum width, but may draw larger if it needs more space. The default value is 0.
 */
-@property CGFloat minimumWidth NS_AVAILABLE_MAC(10_6);
+@property CGFloat minimumWidth API_AVAILABLE(macos(10.6));
 
 /* Returns the size of the menu, in screen coordinates.  The menu may draw at a smaller size when shown, depending on its positioning and display configuration.
 */
-@property (readonly) NSSize size NS_AVAILABLE_MAC(10_6);
+@property (readonly) NSSize size API_AVAILABLE(macos(10.6));
 
 /* Sets the font for the menu.  This also affects the font of all submenus that do not have their own font.
 */
-@property (null_resettable, strong) NSFont *font NS_AVAILABLE_MAC(10_6);
+@property (null_resettable, strong) NSFont *font API_AVAILABLE(macos(10.6));
 
 /* Determines whether contextual menu plugins may be appended to the menu, if used as a context menu. The default is YES.
 */
-@property BOOL allowsContextMenuPlugIns NS_AVAILABLE_MAC(10_6);
+@property BOOL allowsContextMenuPlugIns API_AVAILABLE(macos(10.6));
 
 /* Determines whether the menu contains a column for the state image.  The default is YES. */
-@property BOOL showsStateColumn NS_AVAILABLE_MAC(10_5);
+@property BOOL showsStateColumn API_AVAILABLE(macos(10.5));
 
 /* Determines the layout direction for menu items in the menu. If no layout direction is explicitly set, the menu will default to the value of [NSApp userInterfaceLayoutDirection]. */
-@property NSUserInterfaceLayoutDirection userInterfaceLayoutDirection NS_AVAILABLE_MAC(10_11);
+@property NSUserInterfaceLayoutDirection userInterfaceLayoutDirection API_AVAILABLE(macos(10.11));
 
 @end
 
@@ -198,7 +167,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 #if __swift__ < 40200
 @interface NSObject (NSMenuValidation)
-- (BOOL)validateMenuItem:(NSMenuItem *)menuItem NS_DEPRECATED_MAC(10_0, API_TO_BE_DEPRECATED, "This is now a method of the NSMenuItemValidation protocol.");
+- (BOOL)validateMenuItem:(NSMenuItem *)menuItem API_DEPRECATED("This is now a method of the NSMenuItemValidation protocol.", macos(10.0,API_TO_BE_DEPRECATED));
 @end
 #endif
 
@@ -209,20 +178,20 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSInteger)numberOfItemsInMenu:(NSMenu*)menu;
 - (BOOL)menu:(NSMenu*)menu updateItem:(NSMenuItem*)item atIndex:(NSInteger)index shouldCancel:(BOOL)shouldCancel;
     // implement either the first one or the next two to populate the menu
-- (BOOL)menuHasKeyEquivalent:(NSMenu*)menu forEvent:(NSEvent*)event target:(__nullable id* __nonnull)target action:(__nullable SEL* __nonnull)action;
+- (BOOL)menuHasKeyEquivalent:(NSMenu*)menu forEvent:(NSEvent*)event target:(_Nullable id* _Nonnull)target action:(_Nullable SEL* _Nonnull)action;
     // bypasses populating the menu for checking for key equivalents. set target and action on return
 
 /* indicates that the menu is being opened (displayed) or closed (hidden).  Do not modify the structure of the menu or the menu items from within these callbacks. */
-- (void)menuWillOpen:(NSMenu *)menu NS_AVAILABLE_MAC(10_5);
-- (void)menuDidClose:(NSMenu *)menu NS_AVAILABLE_MAC(10_5);
+- (void)menuWillOpen:(NSMenu *)menu API_AVAILABLE(macos(10.5));
+- (void)menuDidClose:(NSMenu *)menu API_AVAILABLE(macos(10.5));
 
 /* Indicates that menu is about to highlight item.  Only one item per menu can be highlighted at a time.  If item is nil, it means all items in the menu are about to be unhighlighted. */
-- (void)menu:(NSMenu *)menu willHighlightItem:(nullable NSMenuItem *)item NS_AVAILABLE_MAC(10_5);
+- (void)menu:(NSMenu *)menu willHighlightItem:(nullable NSMenuItem *)item API_AVAILABLE(macos(10.5));
 
 
 /* Given a menu that is about to be opened on the given screen, return a rect, in screen coordinates, within which the menu will be positioned.  If you return NSZeroRect, or if the delegate does not implement this method, the menu will be confined to the bounds appropriate for the given screen.  The returned rect may not be honored in all cases, such as if it would force the menu to be too small.
 */
-- (NSRect)confinementRectForMenu:(NSMenu *)menu onScreen:(nullable NSScreen *)screen NS_AVAILABLE_MAC(10_6);
+- (NSRect)confinementRectForMenu:(NSMenu *)menu onScreen:(nullable NSScreen *)screen API_AVAILABLE(macos(10.6));
 
 @end
 
@@ -242,7 +211,7 @@ typedef NS_OPTIONS(NSUInteger, NSMenuProperties) {
  This may be called from the menu delegate method -menuNeedsUpdate:.  Calling this at other times will raise an exception.
  */
 @interface NSMenu (NSMenuPropertiesToUpdate)
-@property (readonly) NSMenuProperties propertiesToUpdate NS_AVAILABLE_MAC(10_6);
+@property (readonly) NSMenuProperties propertiesToUpdate API_AVAILABLE(macos(10.6));
 @end
 
 APPKIT_EXTERN NSNotificationName NSMenuWillSendActionNotification;
@@ -259,29 +228,30 @@ APPKIT_EXTERN NSNotificationName NSMenuDidEndTrackingNotification;
 // The remainder of this file contains deprecated methods
 @interface NSMenu (NSDeprecated)
 
-- (void)setMenuRepresentation:(null_unspecified id)menuRep NS_DEPRECATED_MAC(10_0, 10_2);
-- (null_unspecified id)menuRepresentation NS_DEPRECATED_MAC(10_0, 10_2);
+- (void)setMenuRepresentation:(null_unspecified id)menuRep API_DEPRECATED("", macos(10.0,10.2));
+- (null_unspecified id)menuRepresentation API_DEPRECATED("", macos(10.0,10.2));
 
-- (void)setContextMenuRepresentation:(null_unspecified id)menuRep NS_DEPRECATED_MAC(10_0, 10_2);
-- (null_unspecified id)contextMenuRepresentation NS_DEPRECATED_MAC(10_0, 10_2);
+- (void)setContextMenuRepresentation:(null_unspecified id)menuRep API_DEPRECATED("", macos(10.0,10.2));
+- (null_unspecified id)contextMenuRepresentation API_DEPRECATED("", macos(10.0,10.2));
 
-- (void)setTearOffMenuRepresentation:(null_unspecified id)menuRep NS_DEPRECATED_MAC(10_0, 10_2);
-- (null_unspecified id)tearOffMenuRepresentation NS_DEPRECATED_MAC(10_0, 10_2);
+- (void)setTearOffMenuRepresentation:(null_unspecified id)menuRep API_DEPRECATED("", macos(10.0,10.2));
+- (null_unspecified id)tearOffMenuRepresentation API_DEPRECATED("", macos(10.0,10.2));
 
 /* Returns the zone used to allocate NSMenu objects.  This is left in for compatibility and has returned NSDefaultMallocZone() since OS X 10.2.  It is not necessary to use this - menus can be allocated the usual way. */
-+ (null_unspecified NSZone *)menuZone NS_DEPRECATED_MAC(10_0, 10_11);
-+ (void)setMenuZone:(null_unspecified NSZone *)zone NS_DEPRECATED_MAC(10_0, 10_2);
++ (null_unspecified NSZone *)menuZone API_DEPRECATED("", macos(10.0,10.11));
++ (void)setMenuZone:(null_unspecified NSZone *)zone API_DEPRECATED("", macos(10.0,10.2));
 
-- (null_unspecified NSMenu *)attachedMenu NS_DEPRECATED_MAC(10_0, 10_2);
-- (BOOL)isAttached NS_DEPRECATED_MAC(10_0, 10_2);
-- (void)sizeToFit NS_DEPRECATED_MAC(10_0, 10_2);
-- (NSPoint)locationForSubmenu:(null_unspecified NSMenu *)submenu NS_DEPRECATED_MAC(10_0, 10_2);
+- (null_unspecified NSMenu *)attachedMenu API_DEPRECATED("", macos(10.0,10.2));
+- (BOOL)isAttached API_DEPRECATED("", macos(10.0,10.2));
+- (void)sizeToFit API_DEPRECATED("", macos(10.0,10.2));
+- (NSPoint)locationForSubmenu:(null_unspecified NSMenu *)submenu API_DEPRECATED("", macos(10.0,10.2));
 
 /* In OS X 10.6 and later, the following methods no longer do anything useful. */
-@property BOOL menuChangedMessagesEnabled NS_DEPRECATED_MAC(10_0, 10_11);
-- (void)helpRequested:(NSEvent *)eventPtr NS_DEPRECATED_MAC(10_0, 10_11);
-@property (getter=isTornOff, readonly) BOOL tornOff NS_DEPRECATED_MAC(10_0, 10_11);
+@property BOOL menuChangedMessagesEnabled API_DEPRECATED("", macos(10.0,10.11));
+- (void)helpRequested:(NSEvent *)eventPtr API_DEPRECATED("", macos(10.0,10.11));
+@property (getter=isTornOff, readonly) BOOL tornOff API_DEPRECATED("", macos(10.0,10.11));
 
 @end
 
+API_UNAVAILABLE_END
 NS_ASSUME_NONNULL_END

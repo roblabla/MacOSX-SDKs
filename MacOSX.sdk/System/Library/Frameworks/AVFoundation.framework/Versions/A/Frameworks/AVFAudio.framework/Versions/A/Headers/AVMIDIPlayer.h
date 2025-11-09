@@ -5,8 +5,6 @@
  	Copyright (c) 2014-2015 Apple Inc. All Rights Reserved.
 */
 
-#if !0
-
 #import <Foundation/Foundation.h>
 
 NS_ASSUME_NONNULL_BEGIN
@@ -21,7 +19,7 @@ typedef void (^AVMIDIPlayerCompletionHandler)(void);
 /*! @class AVMIDIPlayer
 	@abstract A player for music file formats (MIDI, iMelody).
  */
-OS_EXPORT API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0)) API_UNAVAILABLE(watchos)
+API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 @interface AVMIDIPlayer : NSObject {
 @protected
 	void *_impl;
@@ -94,5 +92,3 @@ OS_EXPORT API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0)) API_UNAVAILABLE(watch
 @end
 
 NS_ASSUME_NONNULL_END
-
-#endif // !TARGET_OS_BRIDGE

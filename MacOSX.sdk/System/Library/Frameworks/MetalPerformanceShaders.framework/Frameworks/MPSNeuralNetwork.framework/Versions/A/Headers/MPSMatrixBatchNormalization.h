@@ -38,7 +38,7 @@ extern "C" {
  *              Optionally a neuron activation function may be applied to the result.
  *
  */
-MPS_CLASS_AVAILABLE_STARTING( macos(10.14), ios(12.0), tvos(12.0))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.14), ios(12.0), macCatalyst(13.0), tvos(12.0))
 @interface MPSMatrixBatchNormalization : MPSMatrixUnaryKernel
 
 /*! @property   sourceNumberOfFeatureVectors
@@ -211,7 +211,7 @@ MPS_SWIFT_NAME(encode(commandBuffer:inputMatrix:meanVector:varianceVector:gammaV
  *
  *
  */
-MPS_CLASS_AVAILABLE_STARTING( macos(10.14), ios(12.0), tvos(12.0))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.14), ios(12.0), macCatalyst(13.0), tvos(12.0))
 @interface MPSMatrixBatchNormalizationGradient : MPSMatrixBinaryKernel
 
 /*! @property   sourceNumberOfFeatureVectors

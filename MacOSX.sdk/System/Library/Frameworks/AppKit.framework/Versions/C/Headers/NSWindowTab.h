@@ -1,7 +1,7 @@
 /*
     NSWindowTab.h
     Application Kit
-    Copyright (c) 2016-2018, Apple Inc.
+    Copyright (c) 2016-2019, Apple Inc.
     All rights reserved.
 */
 
@@ -9,26 +9,14 @@
 #import <AppKit/AppKitDefines.h>
 
 NS_ASSUME_NONNULL_BEGIN
+API_UNAVAILABLE_BEGIN(ios)
 
-@class NSWindow, NSView, NSTabBarItem, NSImage;
+@class NSWindow, NSView, NSImage;
 
 /* This class encapsulates all the state and properties for a window when it exists in a tabbed window environment. See [NSWindow allowsAutomaticWindowTabbing] and [NSWindow tabbingIdentifier]. These properties can be set at anytime, but will only take effect when the window is shown in a tab.
  */
-NS_CLASS_AVAILABLE_MAC(10_13)
-@interface NSWindowTab : NSObject {
-@private
-    NSString *_title APPKIT_IVAR;
-    NSAttributedString *_attributedTitle APPKIT_IVAR;
-    NSString *_toolTip APPKIT_IVAR;
-    NSImage *_image APPKIT_IVAR;
-    NSView *_accessoryView APPKIT_IVAR;
-    NSTabBarItem *_tabBarItem APPKIT_IVAR;
-    __weak NSWindow *_window APPKIT_IVAR;
-
-#if !__OBJC2__
-    void *_extraReserved[2] __unused APPKIT_IVAR;
-#endif
-}
+API_AVAILABLE(macos(10.13))
+@interface NSWindowTab : NSObject
 
 /* The tab title for this window when in a tab. By default it follows the window.title. You can override this by explicitly setting it to something custom. Setting it to nil will make it follow the window.title again. */
 @property (copy, null_resettable) NSString *title;
@@ -47,4 +35,5 @@ NS_CLASS_AVAILABLE_MAC(10_13)
 @end
 
 
+API_UNAVAILABLE_END
 NS_ASSUME_NONNULL_END

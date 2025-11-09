@@ -1,7 +1,7 @@
 /*
     NSPersistentStoreCoordinator.h
     Core Data
-    Copyright (c) 2004-2018, Apple Inc.
+    Copyright (c) 2004-2019, Apple Inc.
     All rights reserved.
 */
 
@@ -22,6 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
 @class NSPersistentStore;
 @class NSPersistentStoreRequest;
 @class NSPersistentStoreDescription;
+@class NSPersistentHistoryToken;
 
 // Persistent store types supported by Core Data:
 COREDATA_EXTERN NSString * const NSSQLiteStoreType API_AVAILABLE(macosx(10.4),ios(3.0));
@@ -173,25 +174,22 @@ COREDATA_EXTERN NSString * const NSBinaryStoreSecureDecodingClasses API_AVAILABL
  */
 COREDATA_EXTERN NSString * const NSBinaryStoreInsecureDecodingCompatibilityOption API_AVAILABLE(macosx(10.13),ios(11.0),tvos(11.0),watchos(4.0));
 
+/* When NSPersistentStoreRemoteChangeNotificationPostOptionKey is set to YES, a NSPersistentStoreRemoteChangeNotification is posted for every
+ write to the store, this includes writes that are done by other processes
+ */
+COREDATA_EXTERN NSString * const NSPersistentStoreRemoteChangeNotificationPostOptionKey API_AVAILABLE(macosx(10.15),ios(13.0),tvos(13.0),watchos(6.0));
+
+/* NSPersistentStoreRemoteChangeNotification is posted for all cross process writes to the store
+ The payload is the store UUID (NSStoreUUIDKey), store URL (NSPersistentStoreURLKey), and NSPersistentHistoryToken for the transaction (if NSPersistentHistoryTrackingKey was also set)
+ */
+COREDATA_EXTERN NSString * const NSPersistentStoreRemoteChangeNotification API_AVAILABLE(macosx(10.14),ios(12.0),tvos(12.0),watchos(5.0));
+
+/* Keys found in the UserInfo for a NSPersistentStoreRemoteChangeNotification */
+COREDATA_EXTERN NSString * const NSPersistentStoreURLKey API_AVAILABLE(macosx(10.14),ios(12.0),tvos(12.0),watchos(5.0));
+COREDATA_EXTERN NSString * const NSPersistentHistoryTokenKey API_AVAILABLE(macosx(10.14),ios(12.0),tvos(12.0),watchos(5.0));
+
 API_AVAILABLE(macosx(10.4),ios(3.0))
 @interface NSPersistentStoreCoordinator : NSObject <NSLocking> {
-#if (!__OBJC2__)
-@private
-    volatile id _queueOwner;
-    void *_dispatchQueue;
-    struct _persistentStoreCoordinatorFlags {
-        unsigned int _isRegistered:1;
-        unsigned int _canUseDirectDispatch:1;
-        unsigned int _reservedFlags:30;
-    } _flags;
-#ifdef __LP64__
-	uint32_t _reserved32;
-#endif
-    long _miniLock;
-    id *_additionalPrivateIvars;
-    NSManagedObjectModel *_managedObjectModel;
-    NSArray *_persistentStores;
-#endif
 }
 
 - (instancetype)initWithManagedObjectModel:(NSManagedObjectModel *)model NS_DESIGNATED_INITIALIZER;
@@ -243,7 +241,7 @@ API_AVAILABLE(macosx(10.4),ios(3.0))
 
 /* Registers the specified NSPersistentStore subclass for the specified store type string.  This method must be invoked before a custom subclass of NSPersistentStore can be loaded into a persistent store coordinator.  Passing nil for the store class argument will unregister the specified store type.
 */
-+ (void)registerStoreClass:(Class _Nullable)storeClass forStoreType:(NSString *)storeType API_AVAILABLE(macosx(10.5),ios(3.0));
++ (void)registerStoreClass:(nullable Class)storeClass forStoreType:(NSString *)storeType API_AVAILABLE(macosx(10.5),ios(3.0));
 
 /* Allows to access the metadata stored in a persistent store without warming up a CoreData stack; the guaranteed keys in this dictionary are NSStoreTypeKey and NSStoreUUIDKey. If storeType is nil, Core Data will guess which store class should be used to get/set the store file's metadata. 
  */
@@ -283,6 +281,9 @@ API_AVAILABLE(macosx(10.4),ios(3.0))
 
 /* synchronously performs the block on the coordinator's queue.  May safely be called reentrantly. Encapsulates an autorelease pool. */
 - (void)performBlockAndWait:(void (NS_NOESCAPE ^)(void))block  API_AVAILABLE(macosx(10.10),ios(8.0));
+
+/* Constructs a combined NSPersistentHistoryToken given an array of persistent stores. If stores is nil or an empty array, the NSPersistentHistoryToken will be constructed with all of the persistent stores in the coordinator. */
+- (nullable NSPersistentHistoryToken *)currentPersistentHistoryTokenFromStores:(nullable NSArray*)stores API_AVAILABLE(macosx(10.14),ios(12.0),tvos(12.0),watchos(5.0));
 
  /*
   *   DEPRECATED

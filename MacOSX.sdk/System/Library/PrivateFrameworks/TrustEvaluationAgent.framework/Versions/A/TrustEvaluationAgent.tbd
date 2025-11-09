@@ -1,10 +1,9 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: BD0BE410-E172-3585-82B2-869A1FE43092' ]
+uuids:           [ 'x86_64: A5CD3296-A811-37B2-861A-9E7D636FAD7A' ]
 platform:        macosx
-install-name:    /System/Library/PrivateFrameworks/TrustEvaluationAgent.framework/Versions/A/TrustEvaluationAgent
-current-version: 31.200.1
-objc-constraint: none
+install-name:    '/System/Library/PrivateFrameworks/TrustEvaluationAgent.framework/Versions/A/TrustEvaluationAgent'
+current-version: 33
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _TEACertificateChainAddCert, _TEACertificateChainCreate, _TEACertificateChainCreateWithData, 

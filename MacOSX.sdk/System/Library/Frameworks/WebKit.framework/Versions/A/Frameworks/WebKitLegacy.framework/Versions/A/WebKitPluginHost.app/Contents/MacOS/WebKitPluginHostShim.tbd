@@ -1,8 +1,8 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 01514A97-F0CB-3DA4-8F8F-78186F59B195' ]
+uuids:           [ 'x86_64: 283C02B2-52BB-33AF-A84B-E43BFC092BE0' ]
 platform:        macosx
-install-name:    /usr/local/lib/WebKitPluginHostShim.dylib
+install-name:    '/usr/local/lib/WebKitPluginHostShim.dylib'
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _WebKitPluginHostShimInitialize ]

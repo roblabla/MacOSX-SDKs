@@ -1,3 +1,4 @@
+#if (defined(USE_AUDIOTOOLBOX_PUBLIC_HEADERS) && USE_AUDIOTOOLBOX_PUBLIC_HEADERS) || !__has_include(<AudioToolboxCore/CAFFile.h>)
 /*!
 	@file		CAFFile.h
 	@framework	AudioToolbox.framework
@@ -8,18 +9,11 @@
 #ifndef AudioToolbox_CAFFile_h
 #define AudioToolbox_CAFFile_h
 
-#if !defined(__COREAUDIO_USE_FLAT_INCLUDES__)
-	#include <CoreAudio/CoreAudioTypes.h>
-#else
-	#include <CoreAudioTypes.h>
-#endif
+#include <CoreAudioTypes/CoreAudioTypes.h>
 
-#if TARGET_OS_WIN32
-#define ATTRIBUTE_PACKED
-#pragma pack(push, 1)
-#else
+
 #define ATTRIBUTE_PACKED __attribute__((__packed__))
-#endif
+
 
 // In a CAF File all of these types' byte order is big endian.
 // When reading or writing these values the program will need to flip byte order to native endian
@@ -82,7 +76,7 @@ typedef struct CAF_UUID_ChunkHeader CAF_UUID_ChunkHeader;
 
 
 // these are the flags if the format ID is 'lpcm'
-// <CoreAudio/CoreAudioTypes.h> declares some of the format constants 
+// <CoreAudioTypes/CoreAudioTypes.h> declares some of the format constants 
 // that can be used as Data Formats in a CAF file
 typedef CF_OPTIONS(UInt32, CAFFormatFlags)
 {
@@ -360,9 +354,10 @@ struct CAFUMIDChunk
 } ATTRIBUTE_PACKED;
 typedef struct CAFUMIDChunk CAFUMIDChunk;
 
-#if TARGET_OS_WIN32
-#pragma pack(pop)
-#endif
+
 ////////////////////////////////////////////////////////////////////////////////////////////////
 
 #endif // AudioToolbox_CAFFile_h
+#else
+#include <AudioToolboxCore/CAFFile.h>
+#endif

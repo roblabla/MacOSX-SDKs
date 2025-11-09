@@ -2,7 +2,7 @@
 //  INSendRideFeedbackIntent.h
 //  Intents
 //
-//  Copyright (c) 2017 Apple Inc. All rights reserved.
+//  Copyright (c) 2016-2019 Apple Inc. All rights reserved.
 //
 
 #import <Intents/INIntent.h>
@@ -17,7 +17,7 @@ API_UNAVAILABLE(watchos, macos)
 
 - (id)init NS_UNAVAILABLE;
 
-- (instancetype)initWithRideIdentifier:(NSString *)rideIdentifier NS_DESIGNATED_INITIALIZER NS_REFINED_FOR_SWIFT;
+- (instancetype)initWithRideIdentifier:(NSString *)rideIdentifier NS_DESIGNATED_INITIALIZER;
 
 @property (readonly, copy, NS_NONATOMIC_IOSONLY) NSString *rideIdentifier; // Specifies the identifier of the ride to send feedback for.
 @property (readwrite, copy, nullable, NS_NONATOMIC_IOSONLY) NSNumber *rating; // Will be between 0 and 10 inclusive.

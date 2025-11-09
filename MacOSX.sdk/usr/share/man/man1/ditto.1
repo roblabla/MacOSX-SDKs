@@ -109,19 +109,15 @@ will preserve resource forks and HFS meta-data information
 when copying unless instructed otherwise using
 .Fl Fl norsrc
 \&.
-Similarly,
-.Nm
-will preserve extended attributes and Access Control Lists (ACLs) unless
-.Fl Fl noextattr
-or
-.Fl Fl noacl
-is passed.
-.Ev DITTONORSRC
+.Fl Fl norsrc 
+will disable copy of resource forks, extended attributes, Access Control Lists (ACLs), as well as quarantine bits.
+.Ev DITTONORSRC 
 can be set in the environment as an alias to
 .Fl Fl norsrc 
 .Fl Fl noextattr 
 .Fl Fl noacl
-on the command line.
+.Fl Fl noqtn 
+on the command line. However, each option can be individually turned on or off, see the OPTIONS section for more details.
 .Sh OPTIONS
 .Bl -tag -width "XXkeepParent"
 .It Fl h

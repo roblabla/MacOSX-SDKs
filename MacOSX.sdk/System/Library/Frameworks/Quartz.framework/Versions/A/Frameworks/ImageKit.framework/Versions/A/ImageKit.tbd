@@ -1,9 +1,8 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: A43B90AB-8FCB-35BF-996A-CEB28B67EEB5' ]
+uuids:           [ 'x86_64: 61BDFA69-D8F3-3474-AF4B-99D6C479D224' ]
 platform:        macosx
-install-name:    /System/Library/Frameworks/Quartz.framework/Versions/A/Frameworks/ImageKit.framework/Versions/A/ImageKit
-objc-constraint: none
+install-name:    '/System/Library/Frameworks/Quartz.framework/Versions/A/Frameworks/ImageKit.framework/Versions/A/ImageKit'
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _IKAnimationDelayKey, _IKAnimationDurationKey, _IKAnimationFrameRateKey, 
@@ -51,9 +50,9 @@ exports:
                        _IKImageBrowserSelectionColorKey, _IKImageBrowserZoomValueBinding, 
                        _IKImageCompletedInitialLoadingNotification, _IKImageCompletedTileLoadNotification, 
                        _IKImageFlowSubtitleAttributesKey, _IKImageFlowTitleAttributesKey, 
-                       _IKNSBitmapImageRepFromNSImage, _IKNSImageFromCGBitmapContextRef, 
-                       _IKNSImageFromCGImage, _IKNSImageFromCGImageSourceRef, _IKNSImageFromCIImage, 
-                       _IKNSImageFromCIImageWithSize, _IKNSImageFromNSBitmapImageRep, 
+                       _IKImageViewLoadingDidFailNotification, _IKNSBitmapImageRepFromNSImage, 
+                       _IKNSImageFromCGBitmapContextRef, _IKNSImageFromCGImage, _IKNSImageFromCGImageSourceRef, 
+                       _IKNSImageFromCIImage, _IKNSImageFromCIImageWithSize, _IKNSImageFromNSBitmapImageRep, 
                        _IKOverlayTypeBackground, _IKOverlayTypeImage, _IKPictureTakerAllowsEditingKey, 
                        _IKPictureTakerAllowsFileChoosingKey, _IKPictureTakerAllowsVideoCaptureKey, 
                        _IKPictureTakerCropAreaSizeKey, _IKPictureTakerCustomSourcesKey, 

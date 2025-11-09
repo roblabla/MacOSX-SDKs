@@ -1,7 +1,8 @@
+#if !__has_include(<UIFoundation/NSTextAlternatives.h>)
 /*
 	NSTextAlternatives.h
 	Application Kit
-	Copyright (c) 2011-2018, Apple Inc.
+	Copyright (c) 2011-2019, Apple Inc.
 	All rights reserved.
 */
 
@@ -11,16 +12,12 @@
 #import <AppKit/AppKitDefines.h>
 
 NS_ASSUME_NONNULL_BEGIN
+#if !TARGET_OS_IPHONE
 
 @class NSString;
 
-NS_CLASS_AVAILABLE(10_8, NA)
-@interface NSTextAlternatives : NSObject {
-@private
-    NSString *_primaryString APPKIT_IVAR;
-    NSArray *_alternativeStrings APPKIT_IVAR;
-    id _internal APPKIT_IVAR;
-}
+API_AVAILABLE(macos(10.8))
+@interface NSTextAlternatives : NSObject <NSSecureCoding>
 
 - (instancetype)initWithPrimaryString:(NSString *)primaryString alternativeStrings:(NSArray<NSString *> *)alternativeStrings;
 
@@ -31,6 +28,12 @@ NS_CLASS_AVAILABLE(10_8, NA)
 
 @end
 
-APPKIT_EXTERN NSNotificationName NSTextAlternativesSelectedAlternativeStringNotification NS_AVAILABLE_MAC(10_8); // @"NSAlternativeString"
+APPKIT_EXTERN NSNotificationName NSTextAlternativesSelectedAlternativeStringNotification API_AVAILABLE(macos(10.8)); // @"NSAlternativeString"
 
+
+
+#endif // !TARGET_OS_IPHONE
 NS_ASSUME_NONNULL_END
+#else
+#import <UIFoundation/NSTextAlternatives.h>
+#endif

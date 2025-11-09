@@ -26,7 +26,7 @@
 
 
 
-#include <Availability.h>
+#include <os/availability.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -172,7 +172,7 @@ typedef STACK_UPP_TYPE(OSLAdjustMarksProcPtr)                   OSLAdjustMarksUP
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern OSLAccessorUPP
-NewOSLAccessorUPP(OSLAccessorProcPtr userRoutine)             __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
+NewOSLAccessorUPP(OSLAccessorProcPtr userRoutine)             API_AVAILABLE( macos(10.0) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 /*
  *  NewOSLCompareUPP()
@@ -183,7 +183,7 @@ NewOSLAccessorUPP(OSLAccessorProcPtr userRoutine)             __OSX_AVAILABLE_ST
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern OSLCompareUPP
-NewOSLCompareUPP(OSLCompareProcPtr userRoutine)               __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
+NewOSLCompareUPP(OSLCompareProcPtr userRoutine)               API_AVAILABLE( macos(10.0) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 /*
  *  NewOSLCountUPP()
@@ -194,7 +194,7 @@ NewOSLCompareUPP(OSLCompareProcPtr userRoutine)               __OSX_AVAILABLE_ST
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern OSLCountUPP
-NewOSLCountUPP(OSLCountProcPtr userRoutine)                   __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
+NewOSLCountUPP(OSLCountProcPtr userRoutine)                   API_AVAILABLE( macos(10.0) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 /*
  *  NewOSLDisposeTokenUPP()
@@ -205,7 +205,7 @@ NewOSLCountUPP(OSLCountProcPtr userRoutine)                   __OSX_AVAILABLE_ST
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern OSLDisposeTokenUPP
-NewOSLDisposeTokenUPP(OSLDisposeTokenProcPtr userRoutine)     __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
+NewOSLDisposeTokenUPP(OSLDisposeTokenProcPtr userRoutine)     API_AVAILABLE( macos(10.0) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 /*
  *  NewOSLGetMarkTokenUPP()
@@ -216,7 +216,7 @@ NewOSLDisposeTokenUPP(OSLDisposeTokenProcPtr userRoutine)     __OSX_AVAILABLE_ST
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern OSLGetMarkTokenUPP
-NewOSLGetMarkTokenUPP(OSLGetMarkTokenProcPtr userRoutine)     __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
+NewOSLGetMarkTokenUPP(OSLGetMarkTokenProcPtr userRoutine)     API_AVAILABLE( macos(10.0) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 /*
  *  NewOSLGetErrDescUPP()
@@ -227,7 +227,7 @@ NewOSLGetMarkTokenUPP(OSLGetMarkTokenProcPtr userRoutine)     __OSX_AVAILABLE_ST
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern OSLGetErrDescUPP
-NewOSLGetErrDescUPP(OSLGetErrDescProcPtr userRoutine)         __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
+NewOSLGetErrDescUPP(OSLGetErrDescProcPtr userRoutine)         API_AVAILABLE( macos(10.0) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 /*
  *  NewOSLMarkUPP()
@@ -238,7 +238,7 @@ NewOSLGetErrDescUPP(OSLGetErrDescProcPtr userRoutine)         __OSX_AVAILABLE_ST
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern OSLMarkUPP
-NewOSLMarkUPP(OSLMarkProcPtr userRoutine)                     __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
+NewOSLMarkUPP(OSLMarkProcPtr userRoutine)                     API_AVAILABLE( macos(10.0) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 /*
  *  NewOSLAdjustMarksUPP()
@@ -249,7 +249,7 @@ NewOSLMarkUPP(OSLMarkProcPtr userRoutine)                     __OSX_AVAILABLE_ST
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern OSLAdjustMarksUPP
-NewOSLAdjustMarksUPP(OSLAdjustMarksProcPtr userRoutine)       __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
+NewOSLAdjustMarksUPP(OSLAdjustMarksProcPtr userRoutine)       API_AVAILABLE( macos(10.0) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 /*
  *  DisposeOSLAccessorUPP()
@@ -260,7 +260,7 @@ NewOSLAdjustMarksUPP(OSLAdjustMarksProcPtr userRoutine)       __OSX_AVAILABLE_ST
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeOSLAccessorUPP(OSLAccessorUPP userUPP)                 __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
+DisposeOSLAccessorUPP(OSLAccessorUPP userUPP)                 API_AVAILABLE( macos(10.0) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 /*
  *  DisposeOSLCompareUPP()
@@ -271,7 +271,7 @@ DisposeOSLAccessorUPP(OSLAccessorUPP userUPP)                 __OSX_AVAILABLE_ST
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeOSLCompareUPP(OSLCompareUPP userUPP)                   __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
+DisposeOSLCompareUPP(OSLCompareUPP userUPP)                   API_AVAILABLE( macos(10.0) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 /*
  *  DisposeOSLCountUPP()
@@ -282,7 +282,7 @@ DisposeOSLCompareUPP(OSLCompareUPP userUPP)                   __OSX_AVAILABLE_ST
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeOSLCountUPP(OSLCountUPP userUPP)                       __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
+DisposeOSLCountUPP(OSLCountUPP userUPP)                       API_AVAILABLE( macos(10.0) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 /*
  *  DisposeOSLDisposeTokenUPP()
@@ -293,7 +293,7 @@ DisposeOSLCountUPP(OSLCountUPP userUPP)                       __OSX_AVAILABLE_ST
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeOSLDisposeTokenUPP(OSLDisposeTokenUPP userUPP)         __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
+DisposeOSLDisposeTokenUPP(OSLDisposeTokenUPP userUPP)         API_AVAILABLE( macos(10.0) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 /*
  *  DisposeOSLGetMarkTokenUPP()
@@ -304,7 +304,7 @@ DisposeOSLDisposeTokenUPP(OSLDisposeTokenUPP userUPP)         __OSX_AVAILABLE_ST
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeOSLGetMarkTokenUPP(OSLGetMarkTokenUPP userUPP)         __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
+DisposeOSLGetMarkTokenUPP(OSLGetMarkTokenUPP userUPP)         API_AVAILABLE( macos(10.0) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 /*
  *  DisposeOSLGetErrDescUPP()
@@ -315,7 +315,7 @@ DisposeOSLGetMarkTokenUPP(OSLGetMarkTokenUPP userUPP)         __OSX_AVAILABLE_ST
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeOSLGetErrDescUPP(OSLGetErrDescUPP userUPP)             __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
+DisposeOSLGetErrDescUPP(OSLGetErrDescUPP userUPP)             API_AVAILABLE( macos(10.0) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 /*
  *  DisposeOSLMarkUPP()
@@ -326,7 +326,7 @@ DisposeOSLGetErrDescUPP(OSLGetErrDescUPP userUPP)             __OSX_AVAILABLE_ST
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeOSLMarkUPP(OSLMarkUPP userUPP)                         __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
+DisposeOSLMarkUPP(OSLMarkUPP userUPP)                         API_AVAILABLE( macos(10.0) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 /*
  *  DisposeOSLAdjustMarksUPP()
@@ -337,7 +337,7 @@ DisposeOSLMarkUPP(OSLMarkUPP userUPP)                         __OSX_AVAILABLE_ST
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeOSLAdjustMarksUPP(OSLAdjustMarksUPP userUPP)           __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
+DisposeOSLAdjustMarksUPP(OSLAdjustMarksUPP userUPP)           API_AVAILABLE( macos(10.0) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 /*
  *  InvokeOSLAccessorUPP()
@@ -356,7 +356,7 @@ InvokeOSLAccessorUPP(
   const AEDesc *  selectionData,
   AEDesc *        value,
   SRefCon         accessorRefcon,
-  OSLAccessorUPP  userUPP)                                    __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
+  OSLAccessorUPP  userUPP)                                    API_AVAILABLE( macos(10.0) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 /*
  *  InvokeOSLCompareUPP()
@@ -372,7 +372,7 @@ InvokeOSLCompareUPP(
   const AEDesc *  obj1,
   const AEDesc *  obj2,
   Boolean *       result,
-  OSLCompareUPP   userUPP)                                    __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
+  OSLCompareUPP   userUPP)                                    API_AVAILABLE( macos(10.0) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 /*
  *  InvokeOSLCountUPP()
@@ -388,7 +388,7 @@ InvokeOSLCountUPP(
   DescType        containerClass,
   const AEDesc *  container,
   long *          result,
-  OSLCountUPP     userUPP)                                    __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
+  OSLCountUPP     userUPP)                                    API_AVAILABLE( macos(10.0) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 /*
  *  InvokeOSLDisposeTokenUPP()
@@ -401,7 +401,7 @@ InvokeOSLCountUPP(
 extern OSErr
 InvokeOSLDisposeTokenUPP(
   AEDesc *            unneededToken,
-  OSLDisposeTokenUPP  userUPP)                                __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
+  OSLDisposeTokenUPP  userUPP)                                API_AVAILABLE( macos(10.0) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 /*
  *  InvokeOSLGetMarkTokenUPP()
@@ -416,7 +416,7 @@ InvokeOSLGetMarkTokenUPP(
   const AEDesc *      dContainerToken,
   DescType            containerClass,
   AEDesc *            result,
-  OSLGetMarkTokenUPP  userUPP)                                __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
+  OSLGetMarkTokenUPP  userUPP)                                API_AVAILABLE( macos(10.0) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 /*
  *  InvokeOSLGetErrDescUPP()
@@ -429,7 +429,7 @@ InvokeOSLGetMarkTokenUPP(
 extern OSErr
 InvokeOSLGetErrDescUPP(
   AEDesc **         appDescPtr,
-  OSLGetErrDescUPP  userUPP)                                  __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
+  OSLGetErrDescUPP  userUPP)                                  API_AVAILABLE( macos(10.0) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 /*
  *  InvokeOSLMarkUPP()
@@ -444,7 +444,7 @@ InvokeOSLMarkUPP(
   const AEDesc *  dToken,
   const AEDesc *  markToken,
   long            index,
-  OSLMarkUPP      userUPP)                                    __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
+  OSLMarkUPP      userUPP)                                    API_AVAILABLE( macos(10.0) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 /*
  *  InvokeOSLAdjustMarksUPP()
@@ -459,7 +459,7 @@ InvokeOSLAdjustMarksUPP(
   long               newStart,
   long               newStop,
   const AEDesc *     markToken,
-  OSLAdjustMarksUPP  userUPP)                                 __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
+  OSLAdjustMarksUPP  userUPP)                                 API_AVAILABLE( macos(10.0) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 #if __MACH__
   #ifdef __cplusplus
@@ -530,7 +530,7 @@ InvokeOSLAdjustMarksUPP(
  *    Non-Carbon CFM:   in ObjectSupportLib 1.0 and later
  */
 extern OSErr 
-AEObjectInit(void)                                            __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
+AEObjectInit(void)                                            API_AVAILABLE( macos(10.0) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 /* Not done by inline, but by direct linking into code.  It sets up the pack
@@ -554,7 +554,7 @@ AESetObjectCallbacks(
   OSLGetMarkTokenUPP   myGetMarkTokenProc,
   OSLMarkUPP           myMarkProc,
   OSLAdjustMarksUPP    myAdjustMarksProc,
-  OSLGetErrDescUPP     myGetErrDescProcPtr)                   __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
+  OSLGetErrDescUPP     myGetErrDescProcPtr)                   API_AVAILABLE( macos(10.0) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 /*
@@ -572,7 +572,7 @@ extern OSErr
 AEResolve(
   const AEDesc *  objectSpecifier,
   short           callbackFlags,
-  AEDesc *        theToken)                                   __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
+  AEDesc *        theToken)                                   API_AVAILABLE( macos(10.0) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 /*
@@ -592,7 +592,7 @@ AEInstallObjectAccessor(
   DescType         containerType,
   OSLAccessorUPP   theAccessor,
   SRefCon          accessorRefcon,
-  Boolean          isSysHandler)                              __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
+  Boolean          isSysHandler)                              API_AVAILABLE( macos(10.0) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 /*
@@ -611,7 +611,7 @@ AERemoveObjectAccessor(
   DescType         desiredClass,
   DescType         containerType,
   OSLAccessorUPP   theAccessor,
-  Boolean          isSysHandler)                              __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
+  Boolean          isSysHandler)                              API_AVAILABLE( macos(10.0) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 /*
@@ -631,7 +631,7 @@ AEGetObjectAccessor(
   DescType          containerType,
   OSLAccessorUPP *  accessor,
   SRefCon *         accessorRefcon,
-  Boolean           isSysHandler)                             __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
+  Boolean           isSysHandler)                             API_AVAILABLE( macos(10.0) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 /*
@@ -646,7 +646,7 @@ AEGetObjectAccessor(
  *    Non-Carbon CFM:   in ObjectSupportLib 1.0 and later
  */
 extern OSErr 
-AEDisposeToken(AEDesc * theToken)                             __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
+AEDisposeToken(AEDesc * theToken)                             API_AVAILABLE( macos(10.0) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 /*
@@ -667,7 +667,7 @@ AECallObjectAccessor(
   DescType        containerClass,
   DescType        keyForm,
   const AEDesc *  keyData,
-  AEDesc *        token)                                      __OSX_AVAILABLE_STARTING( __MAC_10_0, __IPHONE_NA );
+  AEDesc *        token)                                      API_AVAILABLE( macos(10.0) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 

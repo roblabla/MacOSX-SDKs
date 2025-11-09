@@ -24,7 +24,7 @@ extern "C" {
  *              rectangles (overlapping or non-overlapping) and, for each such sub-region, outputs a value.
  *              The pooling operation is used in computer vision to reduce the dimensionality of intermediate representations.
  */
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(10.0), tvos(10.0))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(10.0), macCatalyst(13.0), tvos(10.0))
 @interface  MPSCNNPooling : MPSCNNKernel
 
 
@@ -64,7 +64,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(10.0), tvos(10.0))
  */
 -(nullable instancetype) initWithCoder:(NSCoder * __nonnull)aDecoder
                                 device:(nonnull id <MTLDevice>) device NS_DESIGNATED_INITIALIZER
-MPS_AVAILABLE_STARTING(macos(10.13), ios(11.0), tvos(11.0));
+MPS_AVAILABLE_STARTING(macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0));
 
 
 
@@ -198,7 +198,7 @@ MPS_AVAILABLE_STARTING(macos(10.13), ios(11.0), tvos(11.0));
  *  @discussion Specifies the max pooling filter.  For each pixel, returns the maximum value of pixels
  *              in the kernelWidth x kernelHeight filter region.
  */
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(10.0), tvos(10.0))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(10.0), macCatalyst(13.0), tvos(10.0))
 @interface  MPSCNNPoolingMax : MPSCNNPooling
 
 /*!
@@ -225,7 +225,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(10.0), tvos(10.0))
  */
 -(nullable instancetype) initWithCoder:(NSCoder * __nonnull)aDecoder
                                 device:(nonnull id <MTLDevice>) device NS_DESIGNATED_INITIALIZER
-MPS_AVAILABLE_STARTING(macos(10.13), ios(11.0), tvos(11.0));
+MPS_AVAILABLE_STARTING(macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0));
 
 @end    /* MPSCNNPoolingMax */
 
@@ -241,7 +241,7 @@ MPS_AVAILABLE_STARTING(macos(10.13), ios(11.0), tvos(11.0));
  *              average. In case the filtering window is entirely outside the source image border the
  *              outputted value will be zero.
  */
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(10.0), tvos(10.0))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(10.0), macCatalyst(13.0), tvos(10.0))
 @interface  MPSCNNPoolingAverage : MPSCNNPooling
 
 
@@ -291,7 +291,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(10.0), tvos(10.0))
  */
 -(nullable instancetype) initWithCoder:(NSCoder * __nonnull)aDecoder
                                 device:(nonnull id <MTLDevice>) device NS_DESIGNATED_INITIALIZER
-MPS_AVAILABLE_STARTING(macos(10.13), ios(11.0), tvos(11.0));
+MPS_AVAILABLE_STARTING(macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0));
 
 @end    /* MPSCNNPoolingAverage */
 
@@ -303,7 +303,7 @@ MPS_AVAILABLE_STARTING(macos(10.13), ios(11.0), tvos(11.0));
  *              in the kernelWidth x kernelHeight filter region.
  *                  out[c,x,y] = sqrt ( sum_{dx,dy} in[c,x+dx,y+dy] * in[c,x+dx,y+dy] ).
  */
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0))
 @interface  MPSCNNPoolingL2Norm : MPSCNNPooling
 
 /*!
@@ -339,7 +339,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
  *  @discussion Specifies the dilated max pooling filter.  For each pixel, returns the maximum value of pixels
  *              in the kernelWidth x kernelHeight filter region by step size dilationRateX x dilationRateY.
  */
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0) )
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0) )
 @interface  MPSCNNDilatedPoolingMax : MPSCNNPooling
 
 /*! @property   dilationRateX
@@ -445,7 +445,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0) )
  *              The actual value of d out(x) / d in(y) depends on the pooling operation and these are defined in the
  *              subclasses of MPSCNNPoolingGradient.
  */
-MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3))
+MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3))
 @interface  MPSCNNPoolingGradient : MPSCNNGradientKernel
 
 /*! @property   sourceSize
@@ -542,7 +542,7 @@ MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3))
  *              recommended to use a temporary image of correct size (see MPSTemporaryImage) for the
  *              secondary source image parameter.
  */
-MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3))
+MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3))
 @interface  MPSCNNPoolingAverageGradient : MPSCNNPoolingGradient
 
 
@@ -638,7 +638,7 @@ MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3))
  *              Later we may add encode calls to MPSCNNPoolingMax that produce a state that contains the
  *              coordinates of the maximal values to be consumed by the gradient filters.
  */
-MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3))
+MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3))
 @interface  MPSCNNPoolingMaxGradient : MPSCNNPoolingGradient
 
 
@@ -694,7 +694,7 @@ MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3))
  *                                 {  0, otherwise,
  *              and out(x) is the L2-norm pooling value at point 'x' defined above.
  */
-MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3))
+MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3))
 @interface  MPSCNNPoolingL2NormGradient : MPSCNNPoolingGradient
 
 
@@ -734,7 +734,7 @@ MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3))
  *  @discussion Specifies the filter for computing the gradient of the dilated max pooling filter.
  *              For details see comments on MPSCNNPoolingMaxGradient.
  */
-MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), tvos(11.3))
+MPS_CLASS_AVAILABLE_STARTING(macos(10.13.4), ios(11.3), macCatalyst(13.0), tvos(11.3))
 @interface  MPSCNNDilatedPoolingMaxGradient : MPSCNNPoolingGradient
 
 /*!

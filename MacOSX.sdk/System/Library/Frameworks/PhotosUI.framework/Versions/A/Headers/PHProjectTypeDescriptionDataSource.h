@@ -8,7 +8,8 @@
 #import <PhotosUI/PHProjectTypeDescription.h>
 
 NS_ASSUME_NONNULL_BEGIN
-API_AVAILABLE(macos(10.14))
+API_AVAILABLE_BEGIN(macos(10.14))
+
 @protocol PHProjectTypeDescriptionDataSource <NSObject>
 @required
 /**
@@ -45,7 +46,7 @@ API_AVAILABLE(macos(10.14))
 
 @end
 
-API_AVAILABLE(macos(10.14))
+
 @protocol PHProjectTypeDescriptionInvalidator <NSObject>
 @required
 
@@ -65,4 +66,5 @@ API_AVAILABLE(macos(10.14))
 - (void)invalidateFooterTextForSubtypesOfProjectType:(PHProjectType)projectType;
 @end
 
+API_AVAILABLE_END
 NS_ASSUME_NONNULL_END

@@ -57,9 +57,9 @@ typedef enum MPSAlphaType
 typedef NS_ENUM( NSUInteger, MPSAlphaType )
 #endif
 {
-    MPSAlphaTypeNonPremultiplied   MPS_ENUM_AVAILABLE_STARTING(macos(10.13), ios(10.0), tvos(10.0)) MPS_SWIFT_NAME(nonPremultiplied)  = 0,
-    MPSAlphaTypeAlphaIsOne         MPS_ENUM_AVAILABLE_STARTING(macos(10.13), ios(10.0), tvos(10.0))  = 1,
-    MPSAlphaTypePremultiplied      MPS_ENUM_AVAILABLE_STARTING(macos(10.13), ios(10.0), tvos(10.0))  = 2
+    MPSAlphaTypeNonPremultiplied   MPS_ENUM_AVAILABLE_STARTING(macos(10.13), ios(10.0), macCatalyst(13.0), tvos(10.0)) MPS_SWIFT_NAME(nonPremultiplied)  = 0,
+    MPSAlphaTypeAlphaIsOne         MPS_ENUM_AVAILABLE_STARTING(macos(10.13), ios(10.0), macCatalyst(13.0), tvos(10.0))  = 1,
+    MPSAlphaTypePremultiplied      MPS_ENUM_AVAILABLE_STARTING(macos(10.13), ios(10.0), macCatalyst(13.0), tvos(10.0))  = 2
 }
 #if defined(DOXYGEN)
     MPSAlphaType

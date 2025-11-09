@@ -3,7 +3,7 @@
 
 	Framework:		AVFoundation
  
-	Copyright 2009-2018 Apple Inc. All rights reserved.
+	Copyright 2009-2019 Apple Inc. All rights reserved.
 
 */
 
@@ -27,7 +27,7 @@ NS_ASSUME_NONNULL_BEGIN
 @class AVMetadataItem;
 
 #pragma mark --- AVMovieTrack ---
-NS_CLASS_AVAILABLE_MAC(10_10)
+API_AVAILABLE(macos(10.10), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos)
 @interface AVMovieTrack : AVAssetTrack {
 @private
     AVMovieTrackInternal    *_movieTrackInternal __attribute__((unused));
@@ -37,13 +37,13 @@ NS_CLASS_AVAILABLE_MAC(10_10)
 	@property       mediaPresentationTimeRange
 	@abstract       A CMTimeRange indicating the range of presentation times for the track's media.
 */
-@property (nonatomic, readonly) CMTimeRange mediaPresentationTimeRange NS_AVAILABLE_MAC(10_11);
+@property (nonatomic, readonly) CMTimeRange mediaPresentationTimeRange API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos);
 
 /*!
 	@property       mediaDecodeTimeRange
 	@abstract       A CMTimeRange indicating the range of decode times for the track's media.
 */
-@property (nonatomic, readonly) CMTimeRange mediaDecodeTimeRange NS_AVAILABLE_MAC(10_11);
+@property (nonatomic, readonly) CMTimeRange mediaDecodeTimeRange API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos);
 
 /*!
 	@property       alternateGroupID
@@ -51,7 +51,7 @@ NS_CLASS_AVAILABLE_MAC(10_10)
 */
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wavailability"
-@property (nonatomic, readonly) NSInteger alternateGroupID NS_AVAILABLE_MAC(10_11);
+@property (nonatomic, readonly) NSInteger alternateGroupID API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos);
 #pragma clang diagnostic pop
 
 @end
@@ -63,7 +63,7 @@ NS_CLASS_AVAILABLE_MAC(10_10)
 	@abstract       The storage container for media data added to a track.
 	@discussion     The value of this property is an AVMediaDataStorage object that indicates the location at which media data inserted or appended to the track will be written.
 */
-@property (nonatomic, readonly, copy, nullable) AVMediaDataStorage *mediaDataStorage NS_AVAILABLE_MAC(10_11);
+@property (nonatomic, readonly, copy, nullable) AVMediaDataStorage *mediaDataStorage API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos);
 
 @end
 
@@ -77,7 +77,7 @@ NS_CLASS_AVAILABLE_MAC(10_10)
 @class AVMutableMovieTrackInternal;
 
 #pragma mark --- AVMutableMovieTrack ---
-NS_CLASS_AVAILABLE_MAC(10_11)
+API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos)
 @interface AVMutableMovieTrack : AVMovieTrack {
 @private
     AVMutableMovieTrackInternal    *_mutableMovieTrackInternal;
@@ -358,7 +358,7 @@ NS_CLASS_AVAILABLE_MAC(10_11)
  
 					An NSInvalidArgumentException will be thrown if the media type of the new format description does not match the media type of the receiver.
 */
-- (void)replaceFormatDescription:(CMFormatDescriptionRef)formatDescription withFormatDescription:(CMFormatDescriptionRef)newFormatDescription API_AVAILABLE(macos(10.13)) API_UNAVAILABLE(ios, watchos, tvos);
+- (void)replaceFormatDescription:(CMFormatDescriptionRef)formatDescription withFormatDescription:(CMFormatDescriptionRef)newFormatDescription API_AVAILABLE(macos(10.13), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos);
 
 @end
 
@@ -396,7 +396,7 @@ NS_CLASS_AVAILABLE_MAC(10_11)
 
                     It's safe for multiple threads to call this method on different tracks at once.
 */
-- (BOOL)appendSampleBuffer:(CMSampleBufferRef)sampleBuffer decodeTime:(nullable CMTime *)outDecodeTime presentationTime:(nullable CMTime *)outPresentationTime error:(NSError * _Nullable * _Nullable)outError NS_AVAILABLE_MAC(10_12);
+- (BOOL)appendSampleBuffer:(CMSampleBufferRef)sampleBuffer decodeTime:(nullable CMTime *)outDecodeTime presentationTime:(nullable CMTime *)outPresentationTime error:(NSError * _Nullable * _Nullable)outError API_AVAILABLE(macos(10.12), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos);
 
 /*!
 	@method			insertMediaTimeRange:intoTimeRange:
@@ -414,7 +414,7 @@ NS_CLASS_AVAILABLE_MAC(10_11)
                     
                     Pass kCMTimeInvalid for trackTimeRange.start to indicate that the segment should be appended to the end of the track.
 */
-- (BOOL)insertMediaTimeRange:(CMTimeRange)mediaTimeRange intoTimeRange:(CMTimeRange)trackTimeRange NS_AVAILABLE_MAC(10_12);
+- (BOOL)insertMediaTimeRange:(CMTimeRange)mediaTimeRange intoTimeRange:(CMTimeRange)trackTimeRange API_AVAILABLE(macos(10.12), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos);
 
 @end
 
@@ -429,23 +429,23 @@ NS_CLASS_AVAILABLE_MAC(10_11)
  @constant       AVFragmentedMovieTrackTimeRangeDidChangeNotification
  @abstract       Posted when the timeRange of an AVFragmentedMovieTrack changes while the associated instance of AVFragmentedMovie is being minded by an AVFragmentedMovieMinder, but only for changes that occur after the status of the value of @"timeRange" has reached AVKeyValueStatusLoaded.
 */
-AVF_EXPORT NSString *const AVFragmentedMovieTrackTimeRangeDidChangeNotification NS_AVAILABLE_MAC(10_10);
+AVF_EXPORT NSString *const AVFragmentedMovieTrackTimeRangeDidChangeNotification API_AVAILABLE(macos(10.10), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos);
 
 /*!
  @constant       AVFragmentedMovieTrackSegmentsDidChangeNotification
  @abstract       Posted when the array of segments of an AVFragmentedMovieTrack changes while the associated instance of AVFragmentedMovie is being minded by an AVFragmentedMovieMinder, but only for changes that occur after the status of the value of @"segments" has reached AVKeyValueStatusLoaded.
 */
-AVF_EXPORT NSString *const AVFragmentedMovieTrackSegmentsDidChangeNotification NS_AVAILABLE_MAC(10_10);
+AVF_EXPORT NSString *const AVFragmentedMovieTrackSegmentsDidChangeNotification API_AVAILABLE(macos(10.10), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos);
 
 /*!
  @constant       AVFragmentedMovieTrackTotalSampleDataLengthDidChangeNotification
  @discussion     This notification name has been deprecated. Use either AVFragmentedMovieTrackTimeRangeDidChangeNotification or AVFragmentedMovieTrackSegmentsDidChangeNotification instead; in either case, you can assume that timing changes to fragmented tracks result in changes to the total length of the sample data used by the track.
 */
-AVF_EXPORT NSString *const AVFragmentedMovieTrackTotalSampleDataLengthDidChangeNotification NS_DEPRECATED_MAC(10_10, 10_11, "Upon receipt of either AVFragmentedMovieTrackTimeRangeDidChangeNotification or AVFragmentedMovieTrackSegmentsDidChangeNotification, you can assume that the sender's totalSampleDataLength has changed.");
+AVF_EXPORT NSString *const AVFragmentedMovieTrackTotalSampleDataLengthDidChangeNotification API_DEPRECATED("Upon receipt of either AVFragmentedMovieTrackTimeRangeDidChangeNotification or AVFragmentedMovieTrackSegmentsDidChangeNotification, you can assume that the sender's totalSampleDataLength has changed.", macos(10.10, 10.11)) API_UNAVAILABLE(ios, tvos, watchos);
 
 @class AVFragmentedMovieTrackInternal;
 
-NS_CLASS_AVAILABLE_MAC(10_10)
+API_AVAILABLE(macos(10.10), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos)
 @interface AVFragmentedMovieTrack : AVMovieTrack
 {
 @private

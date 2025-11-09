@@ -9,7 +9,7 @@
 #define __QD_AVAILIBILITY__
 
 #ifndef __OS_AVAILABILITY__
-#include <os/availibility.h>
+#include <os/availability.h>
 #endif
 
 // The "_R" variation of the macros is for "retroactive"

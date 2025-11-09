@@ -61,6 +61,10 @@ typedef function_table_entry   *function_table_t;
 __BeforeMigServerHeader
 #endif /* __BeforeMigServerHeader */
 
+#ifndef MIG_SERVER_ROUTINE
+#define MIG_SERVER_ROUTINE
+#endif
+
 
 /* Routine memory_object_create */
 #ifdef	mig_external
@@ -68,6 +72,7 @@ mig_external
 #else
 extern
 #endif	/* mig_external */
+MIG_SERVER_ROUTINE
 kern_return_t memory_object_create
 (
 	memory_object_default_t default_memory_manager,
@@ -110,7 +115,7 @@ extern const struct memory_object_default_subsystem {
 #define __Request__memory_object_default_subsystem__defined
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -118,7 +123,7 @@ extern const struct memory_object_default_subsystem {
 		vm_size_t new_memory_object_size;
 	} __Request__memory_object_create_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 #endif /* !__Request__memory_object_default_subsystem__defined */
 
@@ -137,7 +142,7 @@ union __RequestUnion__memory_object_default_subsystem {
 #define __Reply__memory_object_default_subsystem__defined
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -147,7 +152,7 @@ union __RequestUnion__memory_object_default_subsystem {
 		/* end of the kernel processed data */
 	} __Reply__memory_object_create_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 #endif /* !__Reply__memory_object_default_subsystem__defined */
 
@@ -159,7 +164,7 @@ union __RequestUnion__memory_object_default_subsystem {
 union __ReplyUnion__memory_object_default_subsystem {
 	__Reply__memory_object_create_t Reply_memory_object_create;
 };
-#endif /* __RequestUnion__memory_object_default_subsystem__defined */
+#endif /* __ReplyUnion__memory_object_default_subsystem__defined */
 
 #ifndef subsystem_to_name_map_memory_object_default
 #define subsystem_to_name_map_memory_object_default \

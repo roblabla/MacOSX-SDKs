@@ -20,6 +20,7 @@
 #import <CoreLocation/CLRegion.h>
 #import <CoreLocation/CLCircularRegion.h>
 #import <CoreLocation/CLBeaconRegion.h>
+#import <CoreLocation/CLBeaconIdentityConstraint.h>
 #import <CoreLocation/CLHeading.h>
 #import <CoreLocation/CLLocation.h>
 #import <CoreLocation/CLLocationManager.h>

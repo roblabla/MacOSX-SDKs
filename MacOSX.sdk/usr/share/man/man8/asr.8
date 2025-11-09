@@ -86,12 +86,16 @@ disk image being multicast is used. When specifying
 has to be a UDIF disk image. Restoring from a multicast stream is accomplished by passing a asr:// url as
 .Ar source .
 .Pp
-When run in its first form above, the
-.Fl -erase
-option must always be used, as
+When restoring APFS volumes,
 .Nm
-no longer supports file copying.  Such functionality is done better by 
-.Xr ditto 1 .
+supports restoring snapshots from the source volume, as well as restoring snapshot deltas.  See the
+.Sy RESTORING WITH APFS SNAPSHOTS
+section below.
+.Pp
+.Nm
+supports restoring systems with a Read-Only System Volume (ROSV).  For more information, see the
+.Sy RESTORING WITH READ-ONLY SYSTEM VOLUMES
+section below.
 .Pp
 .Nm
 needs to be run as root (see
@@ -236,16 +240,58 @@ with the
 verb.  See the section
 .Sy RESTORING WITH APFS FILESYSTEMS
 below for when this option is necessary.
+.It Fl -useReplication
+forces
+.Nm
+to use replication for restoring APFS volumes (see the section
+.Sy REPLICATION AND THE INVERTER
+below).  This is the default, but there may be a preference setting to use the inverter instead.  This
+would override that preference setting.
+.It Fl -useInverter
+forces
+.Nm
+to use the inverter for restoring APFS volumes (see the section
+.Sy REPLICATION AND THE INVERTER
+below).  This overrides any preference setting.
+.It Fl -toSnapshot
+specifies the snapshot on the
+.Ar source
+APFS volume to restore to the
+.Ar target
+APFS volume.  The argument must be either the name or UUID of a snapshot on
+.Ar source.
+See the
+.Sy RESTORING WITH APFS SNAPSHOTS
+section below for more details.
+.It Fl -fromSnapshot
+names a snapshot on the
+.Ar source
+APFS volume to use in combination with
+.Fl -toSnapshot
+to specify a snapshot delta to restore to the
+.Ar target
+APFS volume.  The argument must be either the name or UUID of a snapshot on both
+.Ar source
+and
+.Ar target.
+See the
+.Sy RESTORING WITH APFS SNAPSHOTS
+section below for more details.
 .El
 .It Sy restoreexact
 performs the same operation as
 .Sy restore ,
-taking all the same options, but with the following difference:  the target partition is resized
-to exactly match the size of the source partition/volume, if such a resize can be done.  If the
-target partition needs to grow and there is not enough space, then the operation will fail.  If it
-needs to shrink, then it should always be able to do so, possibly leaving free space in the target
-disk's partition map.  Because the target exactly matches the source in size, all volume structures
-should be identical in source and target upon completion of the restore.
+taking all the same options, but with the following difference:  for an HFS Plus volume,
+the target partition is resized to exactly match the size of the source partition/volume, if such a
+resize can be done.  If the target partition needs to grow and there is not enough space, then the
+operation will fail.  If it needs to shrink, then it should always be able to do so, possibly leaving
+free space in the target disk's partition map.  Because the target exactly matches the source in size,
+all volume structures should be identical in source and target upon completion of the restore.
+.Pp
+.Sy restoreexact
+is not allowed with APFS volumes (see the section
+.Sy RESTORING WITH APFS FILESYSTEMS
+below), so its use is deprecated.
 .It Sy server
 multicasts
 .Ar source
@@ -425,6 +471,104 @@ as with the previous section.
 See the
 .Sy EXAMPLES
 section below for some command lines that show these operations.
+.Sh REPLICATION AND THE INVERTER
+As of macOS Catalina, the standard mechanism for restoring APFS volumes is to use the internal
+APFS replication capability.  While this should be sufficient for most needs,
+.Nm
+does provide the ability to use a legacy restore mechanism, which involves running the apfs_invert
+program.  Restoring with the inverter has some limitations (e.g. all volumes in the target container
+must be unmounted, the source volume can't have any snapshots in it, etc),
+so using the default APFS replication is usually the better choice.  However, in the event that
+invert restores are desired, that option can be selected.
+The logic
+.Nm
+uses for this is as follows, from lowest to highest priority:
+.Pp
+- By default, use replication.
+.Pp
+- Look for a preference in the domain com.apple.asr with key "ForceInvert" and a Boolean value.
+.Pp
+- Look for a
+.Fl -useReplication
+or
+.Fl -useInverter
+option on the command line.
+.Pp
+.Sh RESTORING WITH APFS SNAPSHOTS
+APFS volumes may contain snapshots, which are point-in-time captures of all volume state
+(including directory hierarchy, file existence and file content).  To distinguish between
+a snapshot and the current state of a volume, we will here refer to that current state as
+the "live volume."  Snapshots can be identified by name or UUID.  Names are unique within a
+single volume, but two volumes can have snapshots with the same name that are unrelated in content.
+By contrast, snapshot UUIDs are unique, in the sense that two snapshots on different
+volumes that have the same UUID must refer to identical content, a situation that will typically
+arise by restoring a snapshot, as described in this section.
+.Pp
+In addition to restoring a live volume (either currently known to the system or from an image),
+.Nm
+also supports restoring a snapshot from the source volume.  The result of such a restore is that
+the target volume ends up looking like the source volume at the time of the given snapshot, rather
+than like the live source volume.  Additionally, the target volume will contain that state as a
+snapshot of its own, with the same name and UUID as the restored snapshot in the source.
+See the
+.Sy EXAMPLES
+section below for some command lines that show snapshot restores.
+.Pp
+.Nm
+also supports restoring the difference between two snapshots, referred to as a "snapshot delta."  In this
+case there must be both a "from" snapshot and a "to" snapshot on the source volume, the target volume
+must not be erased, and the target volume must already contain a snapshot which is identical to the
+source's "from" snapshot.  The result of a snapshot delta restore is that the target ends up looking like
+the source's "to" snapshot, similar to a regular snapshot restore as described above.  But the restore only
+needs to copy over the difference between the two snapshots, so it may save considerable time and/or network
+or bus resources.  Again, see the
+.Sy EXAMPLES
+section below for some command line examples of snapshot delta restores.
+.Pp
+Note that restoring with snapshots and snapshot deltas is only allowed when using replication (see the
+.Sy REPLICATION AND THE INVERTER
+section above).
+.Sh RESTORING WITH READ-ONLY SYSTEM VOLUMES
+macOS Catalina supports a Read-Only System Volume (ROSV) configuration, in which the standard macOS system
+install is split across two volumes.  The two are referred to as the System and Data volumes, that is
+how their corresponding APFS roles are set (see
+.Ns Xr diskutil 1
+for more on APFS roles), they are combined into a volume group, and the System volume gets mounted read-only.
+.Pp
+.Nm
+has support for restoring ROSV volume groups.  If the source is a disk image containing an ROSV volume group, or
+an existing volume that is part of a volume group, then both volumes will be restored to the target, and the
+target volumes will be combined as appropriate into a new group on the target.  Since the source and the target
+may each be part of a group or not, there are several cases to consider:
+.Bl -tag -width "1234"
+.It Creating New Volumes
+If the specified
+.Ar target
+is a container rather than a volume, then new volumes will always be created, whether the source is a single
+volume or part of a group.
+.It Source is Group, Target is Single
+The specified
+.Ar target
+will be erased and replaced with the System-role volume in the source group, and a new volume will be created
+for the Data-role volume.
+.It Source is Group, Target is Group
+Both of the volumes in the
+.Ar target
+group will be replaced by the corresponding volumes in the
+.Ar source
+group.
+.It Source is Single, Target is Group
+The System-role volume in the
+.Ar target
+is replaced by the
+.Ar source
+volume, and the Data-role volume in the
+.Ar target
+is deleted.
+.El
+.Pp
+Any snapshots which are specified must be relative to the System-role volume.  There is currently no mechanism for
+restoring snapshots in the Data-role volume.
 .Sh BUFFERING
 The following options control how
 .Nm
@@ -504,11 +648,13 @@ attempts to start a restore. The server will continue to multicast the image unt
 .Pp
 .Em Multicast client restoring to a file
 .D1 sudo asr restore --source asr://<hostname> --file <file> --erase
+.Pp
 Will receive the multicast stream from <hostname> and save it to a file. If <file> is a directory, the image of the streamed
 disk image will be used the save the file. --erase causes any existing file with the same name to be overwritten.
 .Pp
 .Em Restoring a single APFS volume
 .D1 sudo asr restore -s <APFS image> -t /Volumes/MyAPFSVolume --erase
+.Pp
 In this case the contents of MyAPFSVolume will be replaced by the contents of the source container's single APFS volume,
 possibly including any associated data for the Preboot and Recovery volumes, if the source is a
 .Sy valid system .
@@ -516,6 +662,7 @@ If the source has more than one non-special volume, this is an error.  No other 
 .Pp
 .Em Restoring one of many APFS volumes
 .D1 sudo asr restore -s <APFS image> --sourcevolumename SourceVolume -t /Volumes/MyAPFSVolume --erase
+.Pp
 This tells
 .Nm
 to select the volume named "SourceVolume" from the given APFS image.  If there is no volume with that name, or if
@@ -525,6 +672,7 @@ verb to see the volume names and UUIDs for an image.  No other volumes in the ta
 .Pp
 .Em Creating a new APFS volume on the fly
 .D1 sudo asr restore -s <APFS image> --sourcevolumename SourceVolume -t /dev/disk2
+.Pp
 Here we get the same effect as the last example, except that
 .Nm
 will create a new volume on the target APFS container disk, given by /dev/disk2, and use that newly created volume as
@@ -532,11 +680,13 @@ the target.  Any volumes which already existed in the container will still be th
 .Pp
 .Em Overwriting the existing container
 .D1 sudo asr restore -s <APFS image> --sourcevolumename SourceVolume -t /dev/disk2 --erase
+.Pp
 Like the last example, we restore to a new volume on the target APFS container disk.  However
 in this case we are erasing the target, so any volumes which already existed are destroyed.
 .Pp
 .Em Looking at an image's volume names/UUIDs
 .D1 asr info -s <APFS image>
+.Pp
 Assuming this image has been previously scanned (using the
 .Sy imagescan
 verb), this will display the volumes' names and UUIDs so they can be used with the
@@ -544,6 +694,27 @@ verb), this will display the volumes' names and UUIDs so they can be used with t
 or
 .Fl -sourcevolumeUUID
 options.
+.Pp
+.Em Restoring a snapshot
+.D1 sudo asr restore -s <APFS image> -t /dev/disk2 --toSnapshot Snap1
+.Pp
+This assumes that the image volume has a snapshot named Snap1.  During the restore,
+.Nm
+will create a new volume in the container at /dev/disk2 and use that volume as the target
+of the restore.  The resulting target volume will have the same contents as Snap1 on the source
+volume, and it will also have a snapshot with the same name (Snap1) and UUID as Snap1 on the source.
+This snapshot will match the live target volume right after the restore; the live
+volume can subsequently change, but the snapshot will remain the same.
+.Pp
+.Em Restoring a snapshot delta
+.D1 sudo asr restore -s <APFS image> -t /Volumes/Target --erase --fromSnapshot Snap1 --toSnapshot Snap2
+.Pp
+This assumes that the image volume has a snapshot named Snap1 and another snapshot named Snap2.  Furthermore
+the target volume (mounted here at "/Volumes/Target") must also contain Snap1, with the same UUID and content.
+The result of the restore will be that the target volume will have the same contents as Snap2 on the source
+volume, and it will also gain a snapshot with the same name (Snap2) and UUID as Snap2 on the source.
+The restore will only need to copy the difference between the two snapshots, rather than the entire
+contents of Snap2.
 .Sh HOW TO USE ASR
 .Nm
 requires a properly created disk image for most efficient operation.

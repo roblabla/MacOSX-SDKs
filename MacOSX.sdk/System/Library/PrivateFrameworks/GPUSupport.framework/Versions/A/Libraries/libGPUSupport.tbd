@@ -1,9 +1,8 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 324E06C6-1191-3E1C-9703-2E9F0986A8F5' ]
-platform:        macosx
-install-name:    /System/Library/PrivateFrameworks/GPUSupport.framework/Versions/A/Libraries/libGPUSupport.dylib
-objc-constraint: none
+uuids:           [ 'x86_64: DF1B11FA-D67C-3ED3-81B1-373B414BA720', 'x86_64: DF1B11FA-D67C-3ED3-81B1-373B414BA720' ]
+platform:        zippered
+install-name:    '/System/Library/PrivateFrameworks/GPUSupport.framework/Versions/A/Libraries/libGPUSupport.dylib'
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _gldAttachDrawable, _gldBufferSubData, _gldClearFence, _gldCopyBufferSubData, 

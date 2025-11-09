@@ -1,3 +1,4 @@
+#if (defined(USE_AUDIOTOOLBOX_PUBLIC_HEADERS) && USE_AUDIOTOOLBOX_PUBLIC_HEADERS) || !__has_include(<AudioToolboxCore/AudioUnitParameters.h>)
 /*!
 	@file		AudioUnitParameters.h
  	@framework	AudioToolbox.framework
@@ -8,14 +9,7 @@
 #ifndef AudioUnit_AudioUnitParameters_h
 #define AudioUnit_AudioUnitParameters_h
 
-#include <Availability.h>
-#if !defined(__COREAUDIO_USE_FLAT_INCLUDES__)
-	#include <CoreAudio/CoreAudioTypes.h>
-	#include <AudioToolbox/AUComponent.h>
-#else
-	#include <CoreAudioTypes.h>
-	#include <AUComponent.h>
-#endif
+#include <AudioToolbox/AUComponent.h>
 
 #pragma mark General Declarations
 
@@ -78,6 +72,7 @@ When displaying to the user information about a parameter, a host application sh
 get the parameter information from the audio unit itself.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 
+#if !TARGET_OS_IPHONE
 // Parameters for all Panner AudioUnits
 CF_ENUM(AudioUnitParameterID) {
         // Global, Linear, 0->1, 1
@@ -96,6 +91,7 @@ CF_ENUM(AudioUnitParameterID) {
         // Global, Meters, 0.01->1000, 1
 	kPannerParam_RefDistance = 5,	
 };
+#endif // !TARGET_OS_IPHONE
 
 
 
@@ -115,35 +111,35 @@ CF_ENUM(AudioUnitParameterID) {
     // Input/Output, dB, -120->20, 0
     kSpatialMixerParam_Gain			= 3,
 	
-    // Input, rate scaler	0.5 -> 2.0
+    // Input, rate scaler	0.5 -> 2.0, 1.0
     kSpatialMixerParam_PlaybackRate	= 4,
     
-    // bus enable : 0.0 or 1.0
+    // bus enable : 0 or 1, 1
     kSpatialMixerParam_Enable       = 5,
     
-    // Minimum input gain constraint : 0.0 -> 1.0
+    // Minimum input gain constraint : 0.0 -> 10.0, 0.0
     kSpatialMixerParam_MinGain      = 6,
     
-    // Maximum input gain constraint : 0.0 -> 1.0
+    // Maximum input gain constraint : 0.0 -> 10.0, 10.0
     kSpatialMixerParam_MaxGain      = 7,
 	
-    // Input, Dry/Wet equal-power blend, %	  0.0 -> 100.0
+    // Input, Dry/Wet equal-power blend, %	  0.0 -> 100.0, 30.0
     kSpatialMixerParam_ReverbBlend		= 8,
     
-    // Global, dB,		-40.0 -> +40.0
+    // Global, dB,		-40.0 -> +40.0, 0.0
     kSpatialMixerParam_GlobalReverbGain	= 9,
 	
-    // Input, Lowpass filter attenuation at 5KHz :		decibels -100.0dB -> 0.0dB
+    // Input, Lowpass filter attenuation at 5KHz :		decibels -100.0dB -> 0.0dB, 0.0dB
     // smaller values make both direct and reverb sound more muffled; a value of 0.0 indicates no filtering
     // Occlusion is a filter applied to the sound prior to the reverb send
     kSpatialMixerParam_OcclusionAttenuation	= 10,
 	
-    // Input, Lowpass filter attenuation at 5KHz :		decibels -100.0dB -> 0.0dB
+    // Input, Lowpass filter attenuation at 5KHz :		decibels -100.0dB -> 0.0dB, 0.0dB
     // smaller values make direct sound more muffled; a value of 0.0 indicates no filtering
     // Obstruction is a filter applied to the "direct" part of the sound (so is post reverb send)
     kSpatialMixerParam_ObstructionAttenuation = 11
 };
-
+    
 // Reverb parameters applicable to AUSpatialMixer
 CF_ENUM(AudioUnitParameterID) {
     // Global, Hertz, 10.0 -> 20000.0, 800.0
@@ -179,41 +175,98 @@ CF_ENUM(AudioUnitParameterID) {
 	
 		// Input, rate scaler	0.5 -> 2.0
     k3DMixerParam_PlaybackRate	= 4,
-	
-		// Desktop specific 3D mixer parameters
+    
+    // bus enable : 0.0 or 1.0
+    k3DMixerParam_BusEnable API_AVAILABLE(macos(10.15), ios(13.0), tvos(9.0), watchos(6.0)) = 20,
+    
+    // Input/Output, dB, -120->20, 0
+    k3DMixerParam_MinGainInDecibels API_AVAILABLE(macos(10.15), ios(13.0), tvos(9.0), watchos(6.0)) = 21,
+    
+    // Input/Output, dB, -120->20, 0
+    k3DMixerParam_MaxGainInDecibels API_AVAILABLE(macos(10.15), ios(13.0), tvos(9.0), watchos(6.0)) = 22,
 
+    // Input, Dry/Wet equal-power blend, %      0.0 -> 100.0
+    k3DMixerParam_DryWetReverbBlend API_AVAILABLE(macos(10.15), ios(13.0), tvos(9.0), watchos(6.0)) = 23,
+    
+    // Global, dB,        -40.0 -> +40.0
+    k3DMixerParam_GlobalReverbGainInDecibels API_AVAILABLE(macos(10.15), ios(13.0), tvos(9.0), watchos(6.0)) = 24,
+    
+    // Input, Lowpass filter attenuation at 5KHz :        decibels -100.0dB -> 0.0dB
+    // smaller values make both direct and reverb sound more muffled; a value of 0.0 indicates no filtering
+    // Occlusion is a filter applied to the sound prior to the reverb send
+    k3DMixerParam_OcclusionAttenuationInDecibels API_AVAILABLE(macos(10.15), ios(13.0), tvos(9.0), watchos(6.0)) = 25,
+    
+    // Input, Lowpass filter attenuation at 5KHz :        decibels -100.0dB -> 0.0dB
+    // smaller values make direct sound more muffled; a value of 0.0 indicates no filtering
+    // Obstruction is a filter applied to the "direct" part of the sound (so is post reverb send)
+    k3DMixerParam_ObstructionAttenuationInDecibels API_AVAILABLE(macos(10.15), ios(13.0), tvos(9.0), watchos(6.0)) = 26,
+    
+#if TARGET_OS_IPHONE && !TARGET_OS_MACCATALYST
+		// iPhone specific 3D mixer parameters -- deprecated
+
+		// bus enable : 0.0 or 1.0
+    k3DMixerParam_Enable    API_DEPRECATED_WITH_REPLACEMENT("k3DMixerParam_BusEnable", ios(2.0, API_TO_BE_DEPRECATED), watchos(2.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(macos)   = 5,
+
+		// Minimum input gain constraint : 0.0 -> 1.0 (available on iphone only)
+    k3DMixerParam_MinGain   API_DEPRECATED_WITH_REPLACEMENT("k3DMixerParam_MinGainInDecibels", ios(2.0, API_TO_BE_DEPRECATED), watchos(2.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(macos)   = 6,
+
+		// Maximum input gain constraint : 0.0 -> 1.0 (available on iphone only)
+    k3DMixerParam_MaxGain   API_DEPRECATED_WITH_REPLACEMENT("k3DMixerParam_MaxGainInDecibels", ios(2.0, API_TO_BE_DEPRECATED), watchos(2.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(macos)   = 7,
+	
 		// Input, Dry/Wet equal-power blend, %	  0.0 -> 100.0
-    k3DMixerParam_ReverbBlend		= 5,
+    k3DMixerParam_ReverbBlend   API_DEPRECATED_WITH_REPLACEMENT("k3DMixerParam_DryWetReverbBlend", ios(2.0, API_TO_BE_DEPRECATED), watchos(2.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(macos)   = 8,
 
 		// Global, dB,		-40.0 -> +40.0
-    k3DMixerParam_GlobalReverbGain	= 6,
+    k3DMixerParam_GlobalReverbGain  API_DEPRECATED_WITH_REPLACEMENT("k3DMixerParam_GlobalReverbGainInDecibels", ios(2.0, API_TO_BE_DEPRECATED), watchos(2.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(macos) = 9,
 	
 		// Input, Lowpass filter attenuation at 5KHz :		decibels -100.0dB -> 0.0dB
 		// smaller values make both direct and reverb sound more muffled; a value of 0.0 indicates no filtering
 		// Occlusion is a filter applied to the sound prior to the reverb send
-    k3DMixerParam_OcclusionAttenuation	= 7,
+    k3DMixerParam_OcclusionAttenuation  API_DEPRECATED_WITH_REPLACEMENT("k3DMixerParam_OcclusionAttenuationInDecibels", ios(2.0, API_TO_BE_DEPRECATED), watchos(2.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(macos)  = 10,
 	
 		// Input, Lowpass filter attenuation at 5KHz :		decibels -100.0dB -> 0.0dB
 		// smaller values make direct sound more muffled; a value of 0.0 indicates no filtering
 		// Obstruction is a filter applied to the "direct" part of the sound (so is post reverb send)
-    k3DMixerParam_ObstructionAttenuation = 8,
+    k3DMixerParam_ObstructionAttenuation    API_DEPRECATED_WITH_REPLACEMENT("k3DMixerParam_ObstructionAttenuationInDecibels", ios(2.0, API_TO_BE_DEPRECATED), watchos(2.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(macos) = 11,
+#endif
+
+#if TARGET_OS_OSX
+		// Desktop specific 3D mixer parameters -- deprecated
+    
+		// Input, Dry/Wet equal-power blend, %	  0.0 -> 100.0
+    k3DMixerParam_ReverbBlend   API_DEPRECATED_WITH_REPLACEMENT("k3DMixerParam_DryWetReverbBlend", macos(10.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(ios, watchos, tvos) = 5,
+
+		// Global, dB,		-40.0 -> +40.0
+    k3DMixerParam_GlobalReverbGain  API_DEPRECATED_WITH_REPLACEMENT("k3DMixerParam_GlobalReverbGainInDecibels", macos(10.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(ios, watchos, tvos) = 6,
+	
+		// Input, Lowpass filter attenuation at 5KHz :		decibels -100.0dB -> 0.0dB
+		// smaller values make both direct and reverb sound more muffled; a value of 0.0 indicates no filtering
+		// Occlusion is a filter applied to the sound prior to the reverb send
+    k3DMixerParam_OcclusionAttenuation  API_DEPRECATED_WITH_REPLACEMENT("k3DMixerParam_OcclusionAttenuationInDecibels", macos(10.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(ios, watchos, tvos) = 7,
+	
+		// Input, Lowpass filter attenuation at 5KHz :		decibels -100.0dB -> 0.0dB
+		// smaller values make direct sound more muffled; a value of 0.0 indicates no filtering
+		// Obstruction is a filter applied to the "direct" part of the sound (so is post reverb send)
+    k3DMixerParam_ObstructionAttenuation  API_DEPRECATED_WITH_REPLACEMENT("k3DMixerParam_ObstructionAttenuationInDecibels", macos(10.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(ios, watchos, tvos) = 8,
 
 		// Input/Output, dB, -120->20, 0
-    k3DMixerParam_MinGain		= 9,
+    k3DMixerParam_MinGain  API_DEPRECATED_WITH_REPLACEMENT("k3DMixerParam_MinGainInDecibels", macos(10.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(ios, watchos, tvos) = 9,
 	
 		// Input/Output, dB, -120->20, 0
-    k3DMixerParam_MaxGain		= 10,
-
-		// read-only
-		//
-		// For each of the following, use the parameter ID plus the channel number
-		// to get the specific parameter ID for a given channel.
-		// For example, k3DMixerParam_PostAveragePower indicates the left channel
-		// while k3DMixerParam_PostAveragePower + 1 indicates the right channel.
-	k3DMixerParam_PreAveragePower	= 1000,
-	k3DMixerParam_PrePeakHoldLevel	= 2000,
-	k3DMixerParam_PostAveragePower	= 3000,
-	k3DMixerParam_PostPeakHoldLevel	= 4000
+    k3DMixerParam_MaxGain  API_DEPRECATED_WITH_REPLACEMENT("k3DMixerParam_MaxGainInDecibels", macos(10.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(ios, watchos, tvos) = 10,
+		
+#endif
+    
+    // read-only
+    //
+    // For each of the following, use the parameter ID plus the channel number
+    // to get the specific parameter ID for a given channel.
+    // For example, k3DMixerParam_PostAveragePower indicates the left channel
+    // while k3DMixerParam_PostAveragePower + 1 indicates the right channel.
+    k3DMixerParam_PreAveragePower    = 1000,
+    k3DMixerParam_PrePeakHoldLevel    = 2000,
+    k3DMixerParam_PostAveragePower    = 3000,
+    k3DMixerParam_PostPeakHoldLevel    = 4000
 };
 
 
@@ -268,8 +321,10 @@ CF_ENUM(AudioUnitParameterID) {
 // Parameters for the AUTimePitch, AUTimePitch (offline), AUPitch units
 CF_ENUM(AudioUnitParameterID) {
 	kTimePitchParam_Rate						= 0,
+#if !TARGET_OS_IPHONE
 	kTimePitchParam_Pitch						= 1,
 	kTimePitchParam_EffectBlend					= 2		// only for the AUPitch unit
+#endif
 };
 
 // Parameters for AUNewTimePitch
@@ -617,13 +672,16 @@ CF_ENUM(AudioUnitParameterID) {
 	kRoundTripAACParam_RateOrQuality = 2,
 
 		// These are deprecated:
+#if !TARGET_OS_IPHONE
 	kRoundTripAACParam_BitRate				= 1,
 	kRoundTripAACParam_Quality 				= 2,
 	kRoundTripAACParam_CompressedFormatSampleRate = 3
+#endif
 };
 
 #pragma mark Apple Specific - Desktop
 
+#if !TARGET_OS_IPHONE
 
 // Some parameters for the AUGraphicEQ unit
 CF_ENUM(AudioUnitParameterID) {
@@ -888,6 +946,7 @@ CF_ENUM(AudioUnitParameterID) {
 // See the MusicDevice.h header file for more about using the extended control semantics 
 // of this API.	
 
+#endif // !TARGET_OS_IPHONE
 
 // `Analog' AudioUnits
 
@@ -923,3 +982,6 @@ CF_ENUM(AudioUnitParameterID) {
 };
 
 #endif //AudioUnit_AudioUnitParameters_h
+#else
+#include <AudioToolboxCore/AudioUnitParameters.h>
+#endif

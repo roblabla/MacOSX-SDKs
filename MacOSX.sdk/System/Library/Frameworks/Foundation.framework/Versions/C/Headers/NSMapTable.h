@@ -1,5 +1,5 @@
 /*	NSMapTable.h
-	Copyright (c) 1994-2018, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2019, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSPointerFunctions.h>
@@ -27,7 +27,7 @@ static const NSPointerFunctionsOptions NSMapTableWeakMemory API_AVAILABLE(macos(
 
 typedef NSUInteger NSMapTableOptions;
 
-NS_CLASS_AVAILABLE(10_5, 6_0)
+API_AVAILABLE(macos(10.5), ios(6.0), watchos(2.0), tvos(9.0))
 @interface NSMapTable<KeyType, ObjectType> : NSObject <NSCopying, NSSecureCoding, NSFastEnumeration>
 
 - (instancetype)initWithKeyOptions:(NSPointerFunctionsOptions)keyOptions valueOptions:(NSPointerFunctionsOptions)valueOptions capacity:(NSUInteger)initialCapacity NS_DESIGNATED_INITIALIZER;

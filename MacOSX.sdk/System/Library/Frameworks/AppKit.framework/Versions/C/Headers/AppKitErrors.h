@@ -1,12 +1,13 @@
 /*
 	AppKitErrors.h
 	Application Kit
-	Copyright (c) 2004-2018, Apple Inc.
+	Copyright (c) 2004-2019, Apple Inc.
 	All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
 
+API_UNAVAILABLE_BEGIN(ios)
 
 /* NSError codes for AppKit added errors in NSCocoaErrorDomain.  Foundation error codes can be found in <Foundation/FoundationErrors.h>; CoreData error codes in <CoreData/CoreDataErrors.h>.
 */
@@ -19,9 +20,9 @@ enum {
     NSTextReadWriteErrorMaximum = 66303,
 
     // Font error codes
-    NSFontAssetDownloadError NS_ENUM_AVAILABLE_MAC(10_13) = 66304,  // Generic code when font asset download error occurs.
-    NSFontErrorMinimum NS_ENUM_AVAILABLE_MAC(10_13) = 66304,
-    NSFontErrorMaximum NS_ENUM_AVAILABLE_MAC(10_13) = 66335,
+    NSFontAssetDownloadError API_AVAILABLE(macos(10.13)) = 66304,  // Generic code when font asset download error occurs.
+    NSFontErrorMinimum API_AVAILABLE(macos(10.13)) = 66304,
+    NSFontErrorMaximum API_AVAILABLE(macos(10.13)) = 66335,
     
     // Service error codes
     NSServiceApplicationNotFoundError = 66560,			// The service provider could not be found.
@@ -44,10 +45,10 @@ enum {
     NSSharingServiceErrorMaximum = 67327,
 
     // NSWorkspaceAuthorization
-    NSWorkspaceAuthorizationInvalidError NS_AVAILABLE_MAC(10_14) = 67328,
-    NSWorkspaceErrorMinimum NS_AVAILABLE_MAC(10_14) = 67328,
-    NSWorkspaceErrorMaximum NS_AVAILABLE_MAC(10_14) = 67455,
+    NSWorkspaceAuthorizationInvalidError API_AVAILABLE(macos(10.14)) = 67328,
+    NSWorkspaceErrorMinimum API_AVAILABLE(macos(10.14)) = 67328,
+    NSWorkspaceErrorMaximum API_AVAILABLE(macos(10.14)) = 67455,
 };
 
-
+API_UNAVAILABLE_END
 

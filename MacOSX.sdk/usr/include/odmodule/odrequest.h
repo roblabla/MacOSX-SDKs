@@ -24,8 +24,6 @@
 #if !defined(__ODREQUEST_H)
 #define __ODREQUEST_H
 
-#include <os/activity.h>
-
 typedef bool (^od_result_validation_block_t)(od_request_t request, CFArrayRef values, CFDictionaryRef result);
 
 __BEGIN_DECLS

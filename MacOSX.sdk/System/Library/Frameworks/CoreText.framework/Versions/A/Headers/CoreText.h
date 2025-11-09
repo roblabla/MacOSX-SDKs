@@ -2,7 +2,7 @@
  *  CoreText.h
  *  CoreText
  *
- *  Copyright (c) 2006-2018 Apple Inc. All rights reserved.
+ *  Copyright (c) 2006-2019 Apple Inc. All rights reserved.
  *
  */
 
@@ -72,6 +72,7 @@ uint32_t CTGetCoreTextVersion( void ) CT_AVAILABLE(macos(10.5), ios(3.2), watcho
 #define kCTVersionNumber10_12 0x00090000
 #define kCTVersionNumber10_13 0x000A0000
 #define kCTVersionNumber10_14 0x000B0000
+#define kCTVersionNumber10_15 0x000C0000
 
 CF_EXTERN_C_END
 

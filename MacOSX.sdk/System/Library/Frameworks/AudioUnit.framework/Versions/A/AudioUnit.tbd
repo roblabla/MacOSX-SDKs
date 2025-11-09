@@ -1,9 +1,8 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: B0F229C4-E8AF-3EB3-8241-7576A115D69F' ]
-platform:        macosx
-install-name:    /System/Library/Frameworks/AudioUnit.framework/Versions/A/AudioUnit
-objc-constraint: none
+uuids:           [ 'x86_64: C6644EE2-7001-3380-9EA5-0A2005768DF9', 'x86_64: C6644EE2-7001-3380-9EA5-0A2005768DF9' ]
+platform:        zippered
+install-name:    '/System/Library/Frameworks/AudioUnit.framework/Versions/A/AudioUnit'
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ '$ld$add$os10.10$_AudioCodecAppendInputBufferList', '$ld$add$os10.10$_AudioCodecAppendInputData', 
@@ -165,5 +164,5 @@ exports:
                        _AudioUnitScheduleParameters, _AudioUnitSetParameter, _AudioUnitSetProperty, 
                        _AudioUnitUninitialize, _MusicDeviceMIDIEvent, _MusicDevicePrepareInstrument, 
                        _MusicDeviceReleaseInstrument, _MusicDeviceStartNote, _MusicDeviceStopNote, 
-                       _MusicDeviceSysEx, __Z5dummyv ]
+                       _MusicDeviceSysEx ]
 ...

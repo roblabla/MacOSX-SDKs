@@ -1,7 +1,7 @@
 /*
 	NSImage.h
 	Application Kit
-	Copyright (c) 1994-2018, Apple Inc.
+	Copyright (c) 1994-2019, Apple Inc.
 	All rights reserved.
 */
 
@@ -17,15 +17,16 @@
 #import <ApplicationServices/ApplicationServices.h>
 
 NS_ASSUME_NONNULL_BEGIN
+API_UNAVAILABLE_BEGIN(ios)
 
 @class NSColor, NSImageRep, NSGraphicsContext, NSURL;
 @protocol NSImageDelegate;
 
-typedef NSString * NSImageName NS_SWIFT_BRIDGED_TYPEDEF;
+typedef NSString * NSImageName NS_SWIFT_BRIDGED_TYPEDEF API_AVAILABLE(ios(13.0));
 
-APPKIT_EXTERN NSImageHintKey const NSImageHintCTM NS_AVAILABLE_MAC(10_6); // value is NSAffineTransform
-APPKIT_EXTERN NSImageHintKey const NSImageHintInterpolation NS_AVAILABLE_MAC(10_6); // value is NSNumber with NSImageInterpolation enum value
-APPKIT_EXTERN NSImageHintKey const NSImageHintUserInterfaceLayoutDirection NS_AVAILABLE_MAC(10_12); // value is NSNumber with NSUserInterfaceLayoutDirection enum value
+APPKIT_EXTERN NSImageHintKey const NSImageHintCTM API_AVAILABLE(macos(10.6)); // value is NSAffineTransform
+APPKIT_EXTERN NSImageHintKey const NSImageHintInterpolation API_AVAILABLE(macos(10.6)); // value is NSNumber with NSImageInterpolation enum value
+APPKIT_EXTERN NSImageHintKey const NSImageHintUserInterfaceLayoutDirection API_AVAILABLE(macos(10.12)); // value is NSNumber with NSUserInterfaceLayoutDirection enum value
 
 typedef NS_ENUM(NSUInteger, NSImageLoadStatus) {
     NSImageLoadStatusCompleted,
@@ -43,45 +44,27 @@ typedef NS_ENUM(NSUInteger, NSImageCacheMode) {
 };
 
 typedef NS_ENUM(NSInteger, NSImageResizingMode) {
-    NSImageResizingModeStretch,
-    NSImageResizingModeTile
-} NS_AVAILABLE_MAC(10_10);
+#if !TARGET_ABI_USES_IOS_VALUES
+    NSImageResizingModeStretch = 0,
+    NSImageResizingModeTile = 1,
+#else /* !TARGET_ABI_USES_IOS_VALUES */
+    NSImageResizingModeTile = 0,
+    NSImageResizingModeStretch = 1,
+#endif /* !TARGET_ABI_USES_IOS_VALUES */
+} API_AVAILABLE(macos(10.10));
 
+API_AVAILABLE(ios(13.0))
+#if TARGET_OS_IPHONE
+__attribute__((objc_subclassing_restricted))
+#endif /* TARGET_OS_IPHONE */
+@interface NSImage : NSObject
 
-@class _NSImageAuxiliary;
-
-@interface NSImage : NSObject <NSCopying, NSSecureCoding, NSPasteboardReading, NSPasteboardWriting>
-{
-    /*All instance variables are private*/
-    NSImageName _name APPKIT_IVAR;
-    NSSize _size APPKIT_IVAR;
-    struct __imageFlags {
-	unsigned int scalable:1;
-	unsigned int dataRetained:1;
-	unsigned int uniqueWindow:1;
-	unsigned int sizeWasExplicitlySet:1;
-	unsigned int builtIn:1;
-	unsigned int needsToExpand:1;
-	unsigned int useEPSOnResolutionMismatch:1;
-	unsigned int matchesOnlyOnBestFittingAxis:1;
-	unsigned int colorMatchPreferred:1;
-	unsigned int multipleResolutionMatching:1;
-	unsigned int focusedWhilePrinting:1;
-	unsigned int archiveByName:1;
-	unsigned int unboundedCacheDepth:1;
-        unsigned int flipped:1;
-        unsigned int aliased:1;
-	unsigned int dirtied:1;
-        unsigned int cacheMode:2;
-        unsigned int sampleMode:3;
-        unsigned int resMatchPreferred:1;
-        unsigned int isTemplate:1;
-        unsigned int failedToExpand:1;
-        unsigned int reserved1:8;
-    } _flags APPKIT_IVAR;
-    volatile id _reps APPKIT_IVAR;
-    _NSImageAuxiliary *_imageAuxiliary APPKIT_IVAR;
-}
+#if TARGET_OS_IPHONE
+- (instancetype)init API_UNAVAILABLE(ios);
++ (instancetype)new API_UNAVAILABLE(ios);
++ (instancetype)allocWithZone:(nullable NSZone *)zone API_UNAVAILABLE(ios);
++ (instancetype)alloc API_UNAVAILABLE(ios);
+#endif /* TARGET_OS_IPHONE */
 
 + (nullable NSImage *)imageNamed:(NSImageName)name;	/* If this finds & creates the image, only name is saved when archived */
 
@@ -93,14 +76,13 @@ typedef NS_ENUM(NSInteger, NSImageResizingMode) {
 - (nullable instancetype)initWithContentsOfURL:(NSURL *)url;               /* When archived, saves contents */
 - (nullable instancetype)initByReferencingFile:(NSString *)fileName;	/* When archived, saves fileName */
 - (instancetype)initByReferencingURL:(NSURL *)url;		/* When archived, saves url, supports progressive loading */
-- (instancetype)initWithIconRef:(IconRef)iconRef NS_AVAILABLE_MAC(10_5);
 - (nullable instancetype)initWithPasteboard:(NSPasteboard *)pasteboard;
 
 // not for general use, but useful for compatibility with old NSImage behavior.  Ignore exif orientation tags in JPEG and such.  See AppKit release notes.
-- (nullable instancetype)initWithDataIgnoringOrientation:(NSData *)data NS_AVAILABLE_MAC(10_6);
+- (nullable instancetype)initWithDataIgnoringOrientation:(NSData *)data API_AVAILABLE(macos(10.6));
 
 // Note that the block passed to the below method may be invoked whenever and on whatever thread the image itself is drawn on. Care should be taken to ensure that all state accessed within the drawingHandler block is done so in a thread safe manner.
-+ (instancetype)imageWithSize:(NSSize)size flipped:(BOOL)drawingHandlerShouldBeCalledWithFlippedContext drawingHandler:(BOOL (^)(NSRect dstRect))drawingHandler NS_AVAILABLE_MAC(10_8);
++ (instancetype)imageWithSize:(NSSize)size flipped:(BOOL)drawingHandlerShouldBeCalledWithFlippedContext drawingHandler:(BOOL (^)(NSRect dstRect))drawingHandler API_AVAILABLE(macos(10.8));
 
 @property NSSize size;
 - (BOOL)setName:(nullable NSImageName)string;
@@ -109,16 +91,16 @@ typedef NS_ENUM(NSInteger, NSImageResizingMode) {
 @property BOOL usesEPSOnResolutionMismatch;
 @property BOOL prefersColorMatch;
 @property BOOL matchesOnMultipleResolution;
-@property BOOL matchesOnlyOnBestFittingAxis NS_AVAILABLE_MAC(10_7); // Available in MacOSX 10.7.4 // Available in MacOSX 10.7.4
+@property BOOL matchesOnlyOnBestFittingAxis API_AVAILABLE(macos(10.7)); // Available in MacOSX 10.7.4 // Available in MacOSX 10.7.4
 
 - (void)drawAtPoint:(NSPoint)point fromRect:(NSRect)fromRect operation:(NSCompositingOperation)op fraction:(CGFloat)delta;
 - (void)drawInRect:(NSRect)rect fromRect:(NSRect)fromRect operation:(NSCompositingOperation)op fraction:(CGFloat)delta;
-- (void)drawInRect:(NSRect)dstSpacePortionRect fromRect:(NSRect)srcSpacePortionRect operation:(NSCompositingOperation)op fraction:(CGFloat)requestedAlpha respectFlipped:(BOOL)respectContextIsFlipped hints:(nullable NSDictionary<NSImageHintKey, id> *)hints NS_AVAILABLE_MAC(10_6);
+- (void)drawInRect:(NSRect)dstSpacePortionRect fromRect:(NSRect)srcSpacePortionRect operation:(NSCompositingOperation)op fraction:(CGFloat)requestedAlpha respectFlipped:(BOOL)respectContextIsFlipped hints:(nullable NSDictionary<NSImageHintKey, id> *)hints API_AVAILABLE(macos(10.6));
 - (BOOL)drawRepresentation:(NSImageRep *)imageRep inRect:(NSRect)rect;
 
 /* This is exactly equivalent to calling -[image drawInRect:rect fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1 respectFlipped:YES hints:nil].
  */
-- (void)drawInRect:(NSRect)rect NS_AVAILABLE_MAC(10_9);
+- (void)drawInRect:(NSRect)rect API_AVAILABLE(macos(10.9));
 
 - (void)recache;
 @property (nullable, readonly, strong) NSData *TIFFRepresentation;
@@ -131,23 +113,13 @@ typedef NS_ENUM(NSInteger, NSImageResizingMode) {
 
 @property (getter=isValid, readonly) BOOL valid;
 - (void)lockFocus;
-- (void)lockFocusFlipped:(BOOL)flipped NS_AVAILABLE_MAC(10_6);
+- (void)lockFocusFlipped:(BOOL)flipped API_AVAILABLE(macos(10.6));
 - (void)unlockFocus;
-
-// use -[NSImage bestRepresentationForRect:context:hints:] instead.  Any deviceDescription dictionary is also a valid hints dictionary.
-- (null_unspecified NSImageRep *)bestRepresentationForDevice:(null_unspecified NSDictionary *)deviceDescription NS_DEPRECATED_MAC(10_0, 10_6);
 
 @property (nullable, weak) id<NSImageDelegate> delegate;
 
-/* These return union of all the types registered with NSImageRep.
-*/
-+ (NSArray<NSString *> *)imageUnfilteredFileTypes NS_DEPRECATED_MAC(10_0, 10_10, "Use +imageUnfilteredTypes instead");
-+ (NSArray<NSPasteboardType> *)imageUnfilteredPasteboardTypes NS_DEPRECATED_MAC(10_0, 10_10, "Use +imageUnfilteredTypes instead");
-+ (NSArray<NSString *> *)imageFileTypes NS_DEPRECATED_MAC(10_0, 10_10, "Use +imageTypes instead");
-+ (NSArray<NSPasteboardType> *)imagePasteboardTypes NS_DEPRECATED_MAC(10_0, 10_10, "Use +imageTypes instead");
-
-@property (class, readonly, copy) NSArray<NSString *> *imageTypes NS_AVAILABLE_MAC(10_5);
-@property (class, readonly, copy) NSArray<NSString *> *imageUnfilteredTypes NS_AVAILABLE_MAC(10_5);
+@property (class, readonly, copy) NSArray<NSString *> *imageTypes API_AVAILABLE(macos(10.5));
+@property (class, readonly, copy) NSArray<NSString *> *imageUnfilteredTypes API_AVAILABLE(macos(10.5));
 
 + (BOOL)canInitWithPasteboard:(NSPasteboard *)pasteboard;
 
@@ -163,23 +135,23 @@ typedef NS_ENUM(NSInteger, NSImageResizingMode) {
  
  The default alignmentRect of an image is {{0,0},imageSize}. The rect is adjusted when setSize: is called. 
  */
-@property NSRect alignmentRect NS_AVAILABLE_MAC(10_5);
+@property NSRect alignmentRect API_AVAILABLE(macos(10.5));
 
 /* The 'template' property is metadata that allows clients to be smarter about image processing.  An image should be marked as a template if it is basic glpyh-like black and white art that is intended to be processed into derived images for use on screen.
  
  NSButtonCell applies effects to images based on the state of the button.  For example, images are shaded darker when the button is pressed.  If a template image is set on a cell, the cell can apply more sophisticated effects.  For example, it may be processed into an image that looks engraved when drawn into a cell whose interiorBackgroundStyle is NSBackgroundStyleRaised, like on a textured button.
  */
 #if defined(__cplusplus)
-- (BOOL)isTemplate NS_AVAILABLE_MAC(10_5);
-- (void)setTemplate:(BOOL)isTemplate NS_AVAILABLE_MAC(10_5);
+- (BOOL)isTemplate API_AVAILABLE(macos(10.5));
+- (void)setTemplate:(BOOL)isTemplate API_AVAILABLE(macos(10.5));
 #else
-@property (getter=isTemplate) BOOL template NS_AVAILABLE_MAC(10_5);
+@property (getter=isTemplate) BOOL template API_AVAILABLE(macos(10.5));
 #endif
 
 
 /* An accessibility description can be set on an image.  This description will be used automatically by interface elements that display images.  Like all accessibility descriptions, the string should be a short localized string that does not include the name of the interface element.  For instance, "delete" rather than "delete button". 
 */
-@property (nullable, copy) NSString *accessibilityDescription NS_AVAILABLE_MAC(10_6);
+@property (nullable, copy) NSString *accessibilityDescription API_AVAILABLE(macos(10.6));
 
 /* Make an NSImage referencing a CGImage.  The client should not assume anything about the image, other than that drawing it is equivalent to drawing the CGImage.
  
@@ -189,7 +161,7 @@ typedef NS_ENUM(NSInteger, NSImageResizingMode) {
  
  Size of an NSImage is distinct from pixel dimensions.  If an NSImage is placed in an NSButton, it will be drawn in a rect with the provided size in the ambient coordinate system.
  */
-- (instancetype)initWithCGImage:(CGImageRef)cgImage size:(NSSize)size NS_AVAILABLE_MAC(10_6);
+- (instancetype)initWithCGImage:(CGImageRef)cgImage size:(NSSize)size API_AVAILABLE(macos(10.6));
 
 /* Returns a CGImage capturing the drawing of the receiver.  This method returns an existing CGImage if one is available, or creates one if not.  It behaves the same as drawing the image with respect to caching and related behaviors.  This method is typically called, not overridden.  
  
@@ -209,23 +181,28 @@ typedef NS_ENUM(NSInteger, NSImageResizingMode) {
  
  The CGImageRef returned is guaranteed to live as long as the current autorelease pool.  The caller should not release the CGImage.  This is the standard Cocoa convention, but people may not realize that it applies to CFTypes.
  */
-- (nullable CGImageRef)CGImageForProposedRect:(nullable NSRect *)proposedDestRect context:(nullable NSGraphicsContext *)referenceContext hints:(nullable NSDictionary<NSImageHintKey, id> *)hints NS_AVAILABLE_MAC(10_6) CF_RETURNS_NOT_RETAINED;
+- (nullable CGImageRef)CGImageForProposedRect:(nullable NSRect *)proposedDestRect context:(nullable NSGraphicsContext *)referenceContext hints:(nullable NSDictionary<NSImageHintKey, id> *)hints API_AVAILABLE(macos(10.6)) CF_RETURNS_NOT_RETAINED;
 
 /* Select best representation.  The parameters have the same meaning and behavior as in -CGImageForProposedRect:context:hints:.
  */
-- (nullable NSImageRep *)bestRepresentationForRect:(NSRect)rect context:(nullable NSGraphicsContext *)referenceContext hints:(nullable NSDictionary<NSImageHintKey, id> *)hints NS_AVAILABLE_MAC(10_6);
+- (nullable NSImageRep *)bestRepresentationForRect:(NSRect)rect context:(nullable NSGraphicsContext *)referenceContext hints:(nullable NSDictionary<NSImageHintKey, id> *)hints API_AVAILABLE(macos(10.6));
 
 /* Answers the question, "If you were to draw the image in the passed destination rect in the passed context respecting the passed flippedness with the passed hints, would the test rect in the context intersect a non-transparent portion of the image?"
  */
-- (BOOL)hitTestRect:(NSRect)testRectDestSpace withImageDestinationRect:(NSRect)imageRectDestSpace context:(nullable NSGraphicsContext *)context hints:(nullable NSDictionary<NSImageHintKey, id> *)hints flipped:(BOOL)flipped NS_AVAILABLE_MAC(10_6);
+- (BOOL)hitTestRect:(NSRect)testRectDestSpace withImageDestinationRect:(NSRect)imageRectDestSpace context:(nullable NSGraphicsContext *)context hints:(nullable NSDictionary<NSImageHintKey, id> *)hints flipped:(BOOL)flipped API_AVAILABLE(macos(10.6));
 
-- (CGFloat)recommendedLayerContentsScale:(CGFloat)preferredContentsScale NS_AVAILABLE_MAC(10_7);
-- (id)layerContentsForContentsScale:(CGFloat)layerContentsScale NS_AVAILABLE_MAC(10_7);
+- (CGFloat)recommendedLayerContentsScale:(CGFloat)preferredContentsScale API_AVAILABLE(macos(10.7));
+- (id)layerContentsForContentsScale:(CGFloat)layerContentsScale API_AVAILABLE(macos(10.7));
 
-@property NSEdgeInsets capInsets NS_AVAILABLE_MAC(10_10);
-@property NSImageResizingMode resizingMode NS_AVAILABLE_MAC(10_10);
+@property NSEdgeInsets capInsets API_AVAILABLE(macos(10.10));
+@property NSImageResizingMode resizingMode API_AVAILABLE(macos(10.10));
 
 @end
+
+#if !TARGET_OS_IPHONE
+@interface NSImage () <NSCopying, NSSecureCoding, NSPasteboardReading, NSPasteboardWriting>
+@end
+#endif /* !TARGET_OS_IPHONE */
 
 @protocol NSImageDelegate <NSObject>
 @optional
@@ -239,46 +216,59 @@ typedef NS_ENUM(NSInteger, NSImageResizingMode) {
 @end
 
 @interface NSBundle(NSBundleImageExtension)
-- (nullable NSImage *)imageForResource:(NSImageName)name NS_AVAILABLE_MAC(10_7); /* May return nil if no file found */
+- (nullable NSImage *)imageForResource:(NSImageName)name API_AVAILABLE(macos(10.7)); /* May return nil if no file found */
 
 /* Neither of the following methods can return images with multiple representations in different files (for example, MyImage.png and MyImage@2x.png.) The above method is generally prefered.
  */
 - (nullable NSString *)pathForImageResource:(NSImageName)name;	/* May return nil if no file found */
-- (nullable NSURL *)URLForImageResource:(NSImageName)name NS_AVAILABLE_MAC(10_6); /* May return nil if no file found */
+- (nullable NSURL *)URLForImageResource:(NSImageName)name API_AVAILABLE(macos(10.6)); /* May return nil if no file found */
 @end
 
-@interface NSImage (NSDeprecated)
+#pragma mark - Deprecated declarations
 
-// the concept of flippedness for NSImage is deprecated.  Please see the AppKit 10.6 release notes for a discussion of why, and for how to replace existing usage.
-- (void)setFlipped:(BOOL)flag NS_DEPRECATED_MAC(10_0, 10_6);
-- (BOOL)isFlipped NS_DEPRECATED_MAC(10_0, 10_6);
+@interface NSImage ()
 
-// these methods have surprising semantics.  Prefer to use the 'draw' methods (and note the new draw method taking respectContextIsFlipped as a parameter).  Please see the AppKit 10.6 release notes for exactly what's going on.
-- (void)dissolveToPoint:(NSPoint)point fraction:(CGFloat)fraction NS_DEPRECATED_MAC(10_0, 10_6, "Use -drawAtPoint:... or -drawInRect:... methods instead");
-- (void)dissolveToPoint:(NSPoint)point fromRect:(NSRect)rect fraction:(CGFloat)fraction NS_DEPRECATED_MAC(10_0, 10_6, "Use -drawAtPoint:... or -drawInRect:... methods instead");
-- (void)compositeToPoint:(NSPoint)point operation:(NSCompositingOperation)op NS_DEPRECATED_MAC(10_0, 10_6, "Use -drawAtPoint:... or -drawInRect:... methods instead");
-- (void)compositeToPoint:(NSPoint)point fromRect:(NSRect)rect operation:(NSCompositingOperation)op NS_DEPRECATED_MAC(10_0, 10_6, "Use -drawAtPoint:... or -drawInRect:... methods instead");
-- (void)compositeToPoint:(NSPoint)point operation:(NSCompositingOperation)op fraction:(CGFloat)delta NS_DEPRECATED_MAC(10_0, 10_6, "Use -drawAtPoint:... or -drawInRect:... methods instead");
-- (void)compositeToPoint:(NSPoint)point fromRect:(NSRect)rect operation:(NSCompositingOperation)op fraction:(CGFloat)delta NS_DEPRECATED_MAC(10_0, 10_6, "Use -drawAtPoint:... or -drawInRect:... methods instead");
+- (null_unspecified NSImageRep *)bestRepresentationForDevice:(null_unspecified NSDictionary *)deviceDescription API_DEPRECATED("Use -[NSImage bestRepresentationForRect:context:hints:] instead.  Any deviceDescription dictionary is also a valid hints dictionary.", macos(10.0,10.6));
 
-// this method doesn't do what people expect.  See AppKit 10.6 release notes.  Briefly, you can replace invocation of this method with code that locks focus on the image and then draws the rep in the image.
-- (void)lockFocusOnRepresentation:(null_unspecified NSImageRep *)imageRepresentation NS_DEPRECATED_MAC(10_0, 10_6, "Use -lockFocus followed by -[NSImageRep drawInRect:] instead. See documentation for more info.");
+/* These return union of all the types registered with NSImageRep.
+ */
++ (NSArray<NSString *> *)imageUnfilteredFileTypes API_DEPRECATED("Use +imageUnfilteredTypes instead", macos(10.0,10.10));
++ (NSArray<NSPasteboardType> *)imageUnfilteredPasteboardTypes API_DEPRECATED("Use +imageUnfilteredTypes instead", macos(10.0,10.10));
++ (NSArray<NSString *> *)imageFileTypes API_DEPRECATED("Use +imageTypes instead", macos(10.0,10.10));
++ (NSArray<NSPasteboardType> *)imagePasteboardTypes API_DEPRECATED("Use +imageTypes instead", macos(10.0,10.10));
 
-// these methods have to do with NSImage's caching behavior.  You should be able to remove use of these methods without any replacement.  See 10.6 AppKit release notes for details.
-- (void)setScalesWhenResized:(BOOL)flag NS_DEPRECATED_MAC(10_0, 10_6);
-- (BOOL)scalesWhenResized NS_DEPRECATED_MAC(10_0, 10_6);
-- (void)setDataRetained:(BOOL)flag NS_DEPRECATED_MAC(10_0, 10_6);
-- (BOOL)isDataRetained NS_DEPRECATED_MAC(10_0, 10_6);
-- (void)setCachedSeparately:(BOOL)flag NS_DEPRECATED_MAC(10_0, 10_6);
-- (BOOL)isCachedSeparately NS_DEPRECATED_MAC(10_0, 10_6);
-- (void)setCacheDepthMatchesImageDepth:(BOOL)flag NS_DEPRECATED_MAC(10_0, 10_6);
-- (BOOL)cacheDepthMatchesImageDepth NS_DEPRECATED_MAC(10_0, 10_6);
+#if TARGET_OS_OSX
+- (instancetype)initWithIconRef:(IconRef)iconRef API_DEPRECATED("Use -[NSWorkspace iconForFile:], -[NSWorkspace iconForFiles:], -[NSWorkspace iconForFileType:], or +[NSImage imageNamed:] instead.", macos(10.5, API_TO_BE_DEPRECATED));
+#endif // TARGET_OS_OSX
+
+- (void)setFlipped:(BOOL)flag API_DEPRECATED("The concept of flippedness for NSImage is deprecated.  Please see the AppKit 10.6 release notes for a discussion of why and for how to replace existing usage.", macos(10.0,10.6));
+- (BOOL)isFlipped API_DEPRECATED("The concept of flippedness for NSImage is deprecated.  Please see the AppKit 10.6 release notes for a discussion of why and for how to replace existing usage.", macos(10.0,10.6));
+
+// These methods have surprising semantics.  Prefer to use the 'draw' methods (and note the new draw method taking respectContextIsFlipped as a parameter).  Please see the AppKit 10.6 release notes for exactly what's going on.
+- (void)dissolveToPoint:(NSPoint)point fraction:(CGFloat)fraction API_DEPRECATED("Use -drawAtPoint:... or -drawInRect:... methods instead", macos(10.0,10.6));
+- (void)dissolveToPoint:(NSPoint)point fromRect:(NSRect)rect fraction:(CGFloat)fraction API_DEPRECATED("Use -drawAtPoint:... or -drawInRect:... methods instead", macos(10.0,10.6));
+- (void)compositeToPoint:(NSPoint)point operation:(NSCompositingOperation)op API_DEPRECATED("Use -drawAtPoint:... or -drawInRect:... methods instead", macos(10.0,10.6));
+- (void)compositeToPoint:(NSPoint)point fromRect:(NSRect)rect operation:(NSCompositingOperation)op API_DEPRECATED("Use -drawAtPoint:... or -drawInRect:... methods instead", macos(10.0,10.6));
+- (void)compositeToPoint:(NSPoint)point operation:(NSCompositingOperation)op fraction:(CGFloat)delta API_DEPRECATED("Use -drawAtPoint:... or -drawInRect:... methods instead", macos(10.0,10.6));
+- (void)compositeToPoint:(NSPoint)point fromRect:(NSRect)rect operation:(NSCompositingOperation)op fraction:(CGFloat)delta API_DEPRECATED("Use -drawAtPoint:... or -drawInRect:... methods instead", macos(10.0,10.6));
+
+// This method doesn't do what people expect.  See AppKit 10.6 release notes.  Briefly, you can replace invocation of this method with code that locks focus on the image and then draws the rep in the image.
+- (void)lockFocusOnRepresentation:(null_unspecified NSImageRep *)imageRepresentation API_DEPRECATED("Use -lockFocus followed by -[NSImageRep drawInRect:] instead. See documentation for more info.", macos(10.0,10.6));
+
+- (void)setScalesWhenResized:(BOOL)flag API_DEPRECATED("You should be able to remove use of this method without any replacement.  See 10.6 AppKit release notes for details.", macos(10.0,10.6));
+- (BOOL)scalesWhenResized API_DEPRECATED("You should be able to remove use of this method without any replacement.  See 10.6 AppKit release notes for details.", macos(10.0,10.6));
+- (void)setDataRetained:(BOOL)flag API_DEPRECATED("You should be able to remove use of this method without any replacement.  See 10.6 AppKit release notes for details.", macos(10.0,10.6));
+- (BOOL)isDataRetained API_DEPRECATED("You should be able to remove use of this method without any replacement.  See 10.6 AppKit release notes for details.", macos(10.0,10.6));
+- (void)setCachedSeparately:(BOOL)flag API_DEPRECATED("You should be able to remove use of this method without any replacement.  See 10.6 AppKit release notes for details.", macos(10.0,10.6));
+- (BOOL)isCachedSeparately API_DEPRECATED("You should be able to remove use of this method without any replacement.  See 10.6 AppKit release notes for details.", macos(10.0,10.6));
+- (void)setCacheDepthMatchesImageDepth:(BOOL)flag API_DEPRECATED("You should be able to remove use of this method without any replacement.  See 10.6 AppKit release notes for details.", macos(10.0,10.6));
+- (BOOL)cacheDepthMatchesImageDepth API_DEPRECATED("You should be able to remove use of this method without any replacement.  See 10.6 AppKit release notes for details.", macos(10.0,10.6));
 
 @end
 
 #pragma mark - Standard images
 
-/* Standard images.  
+/* Standard images.
  
  Most images are named by a specific function or situation where they are intended to be used.  In some cases, the artwork may be more generic than the name.  For example, the image for NSImageNameInvalidDataFreestandingTemplate is an arrow in 10.5.  Please do not use an image outside of the function for which it is intended - the artwork can change between releases.  The invalid data image could change to a yellow exclamation-point-in-triangle icon.  If there is no image available for the situation you're interested in, please file a bug report, and use your own custom art in the meantime.
  
@@ -291,197 +281,198 @@ typedef NS_ENUM(NSInteger, NSImageResizingMode) {
  The string value of each symbol is typically the same as the constant name without the "ImageName" part.  For example, NSImageNameBonjour is @"NSBonjour".  This is documented so that images can be used by name in Interface Builder.
  */
 
-APPKIT_EXTERN NSImageName const NSImageNameAddTemplate NS_AVAILABLE_MAC(10_5);
-APPKIT_EXTERN NSImageName const NSImageNameBluetoothTemplate NS_AVAILABLE_MAC(10_5);
-APPKIT_EXTERN NSImageName const NSImageNameBonjour NS_AVAILABLE_MAC(10_5);
-APPKIT_EXTERN NSImageName const NSImageNameBookmarksTemplate NS_AVAILABLE_MAC(10_6);
-APPKIT_EXTERN NSImageName const NSImageNameCaution NS_AVAILABLE_MAC(10_6);
-APPKIT_EXTERN NSImageName const NSImageNameComputer NS_AVAILABLE_MAC(10_5);
-APPKIT_EXTERN NSImageName const NSImageNameEnterFullScreenTemplate NS_AVAILABLE_MAC(10_5);
-APPKIT_EXTERN NSImageName const NSImageNameExitFullScreenTemplate NS_AVAILABLE_MAC(10_5);
-APPKIT_EXTERN NSImageName const NSImageNameFolder NS_AVAILABLE_MAC(10_6);
-APPKIT_EXTERN NSImageName const NSImageNameFolderBurnable NS_AVAILABLE_MAC(10_5);
-APPKIT_EXTERN NSImageName const NSImageNameFolderSmart NS_AVAILABLE_MAC(10_5);
-APPKIT_EXTERN NSImageName const NSImageNameFollowLinkFreestandingTemplate NS_AVAILABLE_MAC(10_5);
-APPKIT_EXTERN NSImageName const NSImageNameHomeTemplate NS_AVAILABLE_MAC(10_6);
-APPKIT_EXTERN NSImageName const NSImageNameIChatTheaterTemplate NS_AVAILABLE_MAC(10_5);
-APPKIT_EXTERN NSImageName const NSImageNameLockLockedTemplate NS_AVAILABLE_MAC(10_5);
-APPKIT_EXTERN NSImageName const NSImageNameLockUnlockedTemplate NS_AVAILABLE_MAC(10_5);
-APPKIT_EXTERN NSImageName const NSImageNameNetwork NS_AVAILABLE_MAC(10_5);
-APPKIT_EXTERN NSImageName const NSImageNamePathTemplate NS_AVAILABLE_MAC(10_5);
-APPKIT_EXTERN NSImageName const NSImageNameQuickLookTemplate NS_AVAILABLE_MAC(10_5);
-APPKIT_EXTERN NSImageName const NSImageNameRefreshFreestandingTemplate NS_AVAILABLE_MAC(10_5);
-APPKIT_EXTERN NSImageName const NSImageNameRefreshTemplate NS_AVAILABLE_MAC(10_5);
-APPKIT_EXTERN NSImageName const NSImageNameRemoveTemplate NS_AVAILABLE_MAC(10_5);
-APPKIT_EXTERN NSImageName const NSImageNameRevealFreestandingTemplate NS_AVAILABLE_MAC(10_5);
-APPKIT_EXTERN NSImageName const NSImageNameShareTemplate NS_AVAILABLE_MAC(10_8);
-APPKIT_EXTERN NSImageName const NSImageNameSlideshowTemplate NS_AVAILABLE_MAC(10_5);
-APPKIT_EXTERN NSImageName const NSImageNameStatusAvailable NS_AVAILABLE_MAC(10_6);
-APPKIT_EXTERN NSImageName const NSImageNameStatusNone NS_AVAILABLE_MAC(10_6);
-APPKIT_EXTERN NSImageName const NSImageNameStatusPartiallyAvailable NS_AVAILABLE_MAC(10_6);
-APPKIT_EXTERN NSImageName const NSImageNameStatusUnavailable NS_AVAILABLE_MAC(10_6);
-APPKIT_EXTERN NSImageName const NSImageNameStopProgressFreestandingTemplate NS_AVAILABLE_MAC(10_5);
-APPKIT_EXTERN NSImageName const NSImageNameStopProgressTemplate NS_AVAILABLE_MAC(10_5);
-APPKIT_EXTERN NSImageName const NSImageNameTrashEmpty NS_AVAILABLE_MAC(10_6);
-APPKIT_EXTERN NSImageName const NSImageNameTrashFull NS_AVAILABLE_MAC(10_6);
+APPKIT_EXTERN NSImageName const NSImageNameAddTemplate API_AVAILABLE(macos(10.5), ios(13.0));
+APPKIT_EXTERN NSImageName const NSImageNameBluetoothTemplate API_AVAILABLE(macos(10.5), ios(13.0));
+APPKIT_EXTERN NSImageName const NSImageNameBonjour API_AVAILABLE(macos(10.5));
+APPKIT_EXTERN NSImageName const NSImageNameBookmarksTemplate API_AVAILABLE(macos(10.6), ios(13.0));
+APPKIT_EXTERN NSImageName const NSImageNameCaution API_AVAILABLE(macos(10.6));
+APPKIT_EXTERN NSImageName const NSImageNameComputer API_AVAILABLE(macos(10.5));
+APPKIT_EXTERN NSImageName const NSImageNameEnterFullScreenTemplate API_AVAILABLE(macos(10.5));
+APPKIT_EXTERN NSImageName const NSImageNameExitFullScreenTemplate API_AVAILABLE(macos(10.5));
+APPKIT_EXTERN NSImageName const NSImageNameFolder API_AVAILABLE(macos(10.6));
+APPKIT_EXTERN NSImageName const NSImageNameFolderBurnable API_AVAILABLE(macos(10.5));
+APPKIT_EXTERN NSImageName const NSImageNameFolderSmart API_AVAILABLE(macos(10.5));
+APPKIT_EXTERN NSImageName const NSImageNameFollowLinkFreestandingTemplate API_AVAILABLE(macos(10.5));
+APPKIT_EXTERN NSImageName const NSImageNameHomeTemplate API_AVAILABLE(macos(10.6), ios(13.0));
+APPKIT_EXTERN NSImageName const NSImageNameIChatTheaterTemplate API_AVAILABLE(macos(10.5));
+APPKIT_EXTERN NSImageName const NSImageNameLockLockedTemplate API_AVAILABLE(macos(10.5), ios(13.0));
+APPKIT_EXTERN NSImageName const NSImageNameLockUnlockedTemplate API_AVAILABLE(macos(10.5), ios(13.0));
+APPKIT_EXTERN NSImageName const NSImageNameNetwork API_AVAILABLE(macos(10.5));
+APPKIT_EXTERN NSImageName const NSImageNamePathTemplate API_AVAILABLE(macos(10.5), ios(13.0));
+APPKIT_EXTERN NSImageName const NSImageNameQuickLookTemplate API_AVAILABLE(macos(10.5), ios(13.0));
+APPKIT_EXTERN NSImageName const NSImageNameRefreshFreestandingTemplate API_AVAILABLE(macos(10.5));
+APPKIT_EXTERN NSImageName const NSImageNameRefreshTemplate API_AVAILABLE(macos(10.5), ios(13.0));
+APPKIT_EXTERN NSImageName const NSImageNameRemoveTemplate API_AVAILABLE(macos(10.5), ios(13.0));
+APPKIT_EXTERN NSImageName const NSImageNameRevealFreestandingTemplate API_AVAILABLE(macos(10.5));
+APPKIT_EXTERN NSImageName const NSImageNameShareTemplate API_AVAILABLE(macos(10.8), ios(13.0));
+APPKIT_EXTERN NSImageName const NSImageNameSlideshowTemplate API_AVAILABLE(macos(10.5), ios(13.0));
+APPKIT_EXTERN NSImageName const NSImageNameStatusAvailable API_AVAILABLE(macos(10.6));
+APPKIT_EXTERN NSImageName const NSImageNameStatusNone API_AVAILABLE(macos(10.6));
+APPKIT_EXTERN NSImageName const NSImageNameStatusPartiallyAvailable API_AVAILABLE(macos(10.6));
+APPKIT_EXTERN NSImageName const NSImageNameStatusUnavailable API_AVAILABLE(macos(10.6));
+APPKIT_EXTERN NSImageName const NSImageNameStopProgressFreestandingTemplate API_AVAILABLE(macos(10.5));
+APPKIT_EXTERN NSImageName const NSImageNameStopProgressTemplate API_AVAILABLE(macos(10.5), ios(13.0));
+APPKIT_EXTERN NSImageName const NSImageNameTrashEmpty API_AVAILABLE(macos(10.6));
+APPKIT_EXTERN NSImageName const NSImageNameTrashFull API_AVAILABLE(macos(10.6));
 
 /* This image is appropriate on an 'action' button.  An action button is a popup that has the same contents as the contextual menu for a related control.
  */
-APPKIT_EXTERN NSImageName const NSImageNameActionTemplate NS_AVAILABLE_MAC(10_5); 
+APPKIT_EXTERN NSImageName const NSImageNameActionTemplate API_AVAILABLE(macos(10.5), ios(13.0));
 
 /* This image can be used as a badge for a 'smart' item.  In 10.5, this and the 'action' image are both gears.  Please avoid using a gear for other situations, and if you do, use custom art.
  */
-APPKIT_EXTERN NSImageName const NSImageNameSmartBadgeTemplate NS_AVAILABLE_MAC(10_5);
+APPKIT_EXTERN NSImageName const NSImageNameSmartBadgeTemplate API_AVAILABLE(macos(10.5));
 
 /* These images are intended for use in a segmented control for switching view interfaces for another part of the window.
  */
-APPKIT_EXTERN NSImageName const NSImageNameIconViewTemplate NS_AVAILABLE_MAC(10_5);
-APPKIT_EXTERN NSImageName const NSImageNameListViewTemplate NS_AVAILABLE_MAC(10_5);
-APPKIT_EXTERN NSImageName const NSImageNameColumnViewTemplate NS_AVAILABLE_MAC(10_5);
-APPKIT_EXTERN NSImageName const NSImageNameFlowViewTemplate NS_AVAILABLE_MAC(10_5);
+APPKIT_EXTERN NSImageName const NSImageNameIconViewTemplate API_AVAILABLE(macos(10.5), ios(13.0));
+APPKIT_EXTERN NSImageName const NSImageNameListViewTemplate API_AVAILABLE(macos(10.5), ios(13.0));
+APPKIT_EXTERN NSImageName const NSImageNameColumnViewTemplate API_AVAILABLE(macos(10.5), ios(13.0));
+APPKIT_EXTERN NSImageName const NSImageNameFlowViewTemplate API_AVAILABLE(macos(10.5));
 
 /* Place this image to the right of invalid data.  For example, use it if the user tries to commit a form when it's missing a required name field.
  */
-APPKIT_EXTERN NSImageName const NSImageNameInvalidDataFreestandingTemplate NS_AVAILABLE_MAC(10_5);
+APPKIT_EXTERN NSImageName const NSImageNameInvalidDataFreestandingTemplate API_AVAILABLE(macos(10.5));
 
 /* Use these images for "go forward" or "go back" functions, as seen in Safari's toolbar.  These images will automatically mirror when the user interface layout direction is right to left.
  */
-APPKIT_EXTERN NSImageName const NSImageNameGoForwardTemplate NS_AVAILABLE_MAC(10_12);
-APPKIT_EXTERN NSImageName const NSImageNameGoBackTemplate NS_AVAILABLE_MAC(10_12);
+APPKIT_EXTERN NSImageName const NSImageNameGoForwardTemplate API_AVAILABLE(macos(10.12), ios(13.0));
+APPKIT_EXTERN NSImageName const NSImageNameGoBackTemplate API_AVAILABLE(macos(10.12), ios(13.0));
 
 /* These images are like GoForward and GoBack except that they always point in the specified direction regardless of layout direction.  See also the right and left facing triangle images.
  */
-APPKIT_EXTERN NSImageName const NSImageNameGoRightTemplate NS_AVAILABLE_MAC(10_5);
-APPKIT_EXTERN NSImageName const NSImageNameGoLeftTemplate NS_AVAILABLE_MAC(10_5);
+APPKIT_EXTERN NSImageName const NSImageNameGoRightTemplate API_AVAILABLE(macos(10.5), ios(13.0));
+APPKIT_EXTERN NSImageName const NSImageNameGoLeftTemplate API_AVAILABLE(macos(10.5), ios(13.0));
 
 /* Prefer the GoForward and GoBack or GoLeft and GoRight images for situations where they apply.  These generic triangles aren't endorsed for any particular use, but you can use them if you don't have any better art.
  */
-APPKIT_EXTERN NSImageName const NSImageNameRightFacingTriangleTemplate NS_AVAILABLE_MAC(10_5);
-APPKIT_EXTERN NSImageName const NSImageNameLeftFacingTriangleTemplate NS_AVAILABLE_MAC(10_5);
+APPKIT_EXTERN NSImageName const NSImageNameRightFacingTriangleTemplate API_AVAILABLE(macos(10.5));
+APPKIT_EXTERN NSImageName const NSImageNameLeftFacingTriangleTemplate API_AVAILABLE(macos(10.5));
 
 /* NSImageNameDotMac will continue to work for the forseeable future, and will return the same image as NSImageNameMobileMe.
  */
-APPKIT_EXTERN NSImageName const NSImageNameDotMac NS_DEPRECATED_MAC(10_5, 10_7);
-APPKIT_EXTERN NSImageName const NSImageNameMobileMe NS_AVAILABLE_MAC(10_6);
+APPKIT_EXTERN NSImageName const NSImageNameDotMac API_DEPRECATED_WITH_REPLACEMENT("NSImageNameMobileMe", macos(10.5,10.7));
+APPKIT_EXTERN NSImageName const NSImageNameMobileMe API_AVAILABLE(macos(10.6));
 
 /* This image is appropriate as a drag image for multiple items.
  */
-APPKIT_EXTERN NSImageName const NSImageNameMultipleDocuments NS_AVAILABLE_MAC(10_5);
+APPKIT_EXTERN NSImageName const NSImageNameMultipleDocuments API_AVAILABLE(macos(10.5));
 
 /* These images are intended for use in toolbars in preference windows.
  */
-APPKIT_EXTERN NSImageName const NSImageNameUserAccounts NS_AVAILABLE_MAC(10_5);
-APPKIT_EXTERN NSImageName const NSImageNamePreferencesGeneral NS_AVAILABLE_MAC(10_5);
-APPKIT_EXTERN NSImageName const NSImageNameAdvanced NS_AVAILABLE_MAC(10_5);
+APPKIT_EXTERN NSImageName const NSImageNameUserAccounts API_AVAILABLE(macos(10.5));
+APPKIT_EXTERN NSImageName const NSImageNamePreferencesGeneral API_AVAILABLE(macos(10.5));
+APPKIT_EXTERN NSImageName const NSImageNameAdvanced API_AVAILABLE(macos(10.5));
 
 /* These images are intended for use in other toolbars.
  */
-APPKIT_EXTERN NSImageName const NSImageNameInfo NS_AVAILABLE_MAC(10_5);
-APPKIT_EXTERN NSImageName const NSImageNameFontPanel NS_AVAILABLE_MAC(10_5);
-APPKIT_EXTERN NSImageName const NSImageNameColorPanel NS_AVAILABLE_MAC(10_5);
+APPKIT_EXTERN NSImageName const NSImageNameInfo API_AVAILABLE(macos(10.5));
+APPKIT_EXTERN NSImageName const NSImageNameFontPanel API_AVAILABLE(macos(10.5));
+APPKIT_EXTERN NSImageName const NSImageNameColorPanel API_AVAILABLE(macos(10.5));
 
 /* These images are appropriate for use in sharing or permissions interfaces.
  */
-APPKIT_EXTERN NSImageName const NSImageNameUser NS_AVAILABLE_MAC(10_5);
-APPKIT_EXTERN NSImageName const NSImageNameUserGroup NS_AVAILABLE_MAC(10_5);
-APPKIT_EXTERN NSImageName const NSImageNameEveryone NS_AVAILABLE_MAC(10_5);  
-APPKIT_EXTERN NSImageName const NSImageNameUserGuest NS_AVAILABLE_MAC(10_6);
+APPKIT_EXTERN NSImageName const NSImageNameUser API_AVAILABLE(macos(10.5));
+APPKIT_EXTERN NSImageName const NSImageNameUserGroup API_AVAILABLE(macos(10.5));
+APPKIT_EXTERN NSImageName const NSImageNameEveryone API_AVAILABLE(macos(10.5));  
+APPKIT_EXTERN NSImageName const NSImageNameUserGuest API_AVAILABLE(macos(10.6));
 
 /* These images are the default state images used by NSMenuItem.  Drawing these outside of menus is discouraged.
 */
-APPKIT_EXTERN NSImageName const NSImageNameMenuOnStateTemplate NS_AVAILABLE_MAC(10_6);
-APPKIT_EXTERN NSImageName const NSImageNameMenuMixedStateTemplate NS_AVAILABLE_MAC(10_6);
+APPKIT_EXTERN NSImageName const NSImageNameMenuOnStateTemplate API_AVAILABLE(macos(10.6));
+APPKIT_EXTERN NSImageName const NSImageNameMenuMixedStateTemplate API_AVAILABLE(macos(10.6));
 
 /* The name @"NSApplicationIcon" has been available since Mac OS X 10.0.  The symbol NSImageNameApplicationIcon is new in 10.6.
  */
-APPKIT_EXTERN NSImageName const NSImageNameApplicationIcon NS_AVAILABLE_MAC(10_6);
+APPKIT_EXTERN NSImageName const NSImageNameApplicationIcon API_AVAILABLE(macos(10.6));
 
 #pragma mark - NSTouchBar images
 
 /* These images are appropriate for use only in NSTouchBar.
  */
-APPKIT_EXTERN NSImageName const NSImageNameTouchBarAddDetailTemplate NS_AVAILABLE_MAC(10_12_2);
-APPKIT_EXTERN NSImageName const NSImageNameTouchBarAddTemplate NS_AVAILABLE_MAC(10_12_2);
-APPKIT_EXTERN NSImageName const NSImageNameTouchBarAlarmTemplate NS_AVAILABLE_MAC(10_12_2);
-APPKIT_EXTERN NSImageName const NSImageNameTouchBarAudioInputMuteTemplate NS_AVAILABLE_MAC(10_12_2);
-APPKIT_EXTERN NSImageName const NSImageNameTouchBarAudioInputTemplate NS_AVAILABLE_MAC(10_12_2);
-APPKIT_EXTERN NSImageName const NSImageNameTouchBarAudioOutputMuteTemplate NS_AVAILABLE_MAC(10_12_2);
-APPKIT_EXTERN NSImageName const NSImageNameTouchBarAudioOutputVolumeHighTemplate NS_AVAILABLE_MAC(10_12_2);
-APPKIT_EXTERN NSImageName const NSImageNameTouchBarAudioOutputVolumeLowTemplate NS_AVAILABLE_MAC(10_12_2);
-APPKIT_EXTERN NSImageName const NSImageNameTouchBarAudioOutputVolumeMediumTemplate NS_AVAILABLE_MAC(10_12_2);
-APPKIT_EXTERN NSImageName const NSImageNameTouchBarAudioOutputVolumeOffTemplate NS_AVAILABLE_MAC(10_12_2);
-APPKIT_EXTERN NSImageName const NSImageNameTouchBarBookmarksTemplate NS_AVAILABLE_MAC(10_12_2);
-APPKIT_EXTERN NSImageName const NSImageNameTouchBarColorPickerFill NS_AVAILABLE_MAC(10_12_2);
-APPKIT_EXTERN NSImageName const NSImageNameTouchBarColorPickerFont NS_AVAILABLE_MAC(10_12_2);
-APPKIT_EXTERN NSImageName const NSImageNameTouchBarColorPickerStroke NS_AVAILABLE_MAC(10_12_2);
-APPKIT_EXTERN NSImageName const NSImageNameTouchBarCommunicationAudioTemplate NS_AVAILABLE_MAC(10_12_2);
-APPKIT_EXTERN NSImageName const NSImageNameTouchBarCommunicationVideoTemplate NS_AVAILABLE_MAC(10_12_2);
-APPKIT_EXTERN NSImageName const NSImageNameTouchBarComposeTemplate NS_AVAILABLE_MAC(10_12_2);
-APPKIT_EXTERN NSImageName const NSImageNameTouchBarDeleteTemplate NS_AVAILABLE_MAC(10_12_2);
-APPKIT_EXTERN NSImageName const NSImageNameTouchBarDownloadTemplate NS_AVAILABLE_MAC(10_12_2);
-APPKIT_EXTERN NSImageName const NSImageNameTouchBarEnterFullScreenTemplate NS_AVAILABLE_MAC(10_12_2);
-APPKIT_EXTERN NSImageName const NSImageNameTouchBarExitFullScreenTemplate NS_AVAILABLE_MAC(10_12_2);
-APPKIT_EXTERN NSImageName const NSImageNameTouchBarFastForwardTemplate NS_AVAILABLE_MAC(10_12_2);
-APPKIT_EXTERN NSImageName const NSImageNameTouchBarFolderCopyToTemplate NS_AVAILABLE_MAC(10_12_2);
-APPKIT_EXTERN NSImageName const NSImageNameTouchBarFolderMoveToTemplate NS_AVAILABLE_MAC(10_12_2);
-APPKIT_EXTERN NSImageName const NSImageNameTouchBarFolderTemplate NS_AVAILABLE_MAC(10_12_2);
-APPKIT_EXTERN NSImageName const NSImageNameTouchBarGetInfoTemplate NS_AVAILABLE_MAC(10_12_2);
-APPKIT_EXTERN NSImageName const NSImageNameTouchBarGoBackTemplate NS_AVAILABLE_MAC(10_12_2);
-APPKIT_EXTERN NSImageName const NSImageNameTouchBarGoDownTemplate NS_AVAILABLE_MAC(10_12_2);
-APPKIT_EXTERN NSImageName const NSImageNameTouchBarGoForwardTemplate NS_AVAILABLE_MAC(10_12_2);
-APPKIT_EXTERN NSImageName const NSImageNameTouchBarGoUpTemplate NS_AVAILABLE_MAC(10_12_2);
-APPKIT_EXTERN NSImageName const NSImageNameTouchBarHistoryTemplate NS_AVAILABLE_MAC(10_12_2);
-APPKIT_EXTERN NSImageName const NSImageNameTouchBarIconViewTemplate NS_AVAILABLE_MAC(10_12_2);
-APPKIT_EXTERN NSImageName const NSImageNameTouchBarListViewTemplate NS_AVAILABLE_MAC(10_12_2);
-APPKIT_EXTERN NSImageName const NSImageNameTouchBarMailTemplate NS_AVAILABLE_MAC(10_12_2);
-APPKIT_EXTERN NSImageName const NSImageNameTouchBarNewFolderTemplate NS_AVAILABLE_MAC(10_12_2);
-APPKIT_EXTERN NSImageName const NSImageNameTouchBarNewMessageTemplate NS_AVAILABLE_MAC(10_12_2);
-APPKIT_EXTERN NSImageName const NSImageNameTouchBarOpenInBrowserTemplate NS_AVAILABLE_MAC(10_12_2);
-APPKIT_EXTERN NSImageName const NSImageNameTouchBarPauseTemplate NS_AVAILABLE_MAC(10_12_2);
-APPKIT_EXTERN NSImageName const NSImageNameTouchBarPlayPauseTemplate NS_AVAILABLE_MAC(10_12_2);
-APPKIT_EXTERN NSImageName const NSImageNameTouchBarPlayTemplate NS_AVAILABLE_MAC(10_12_2);
-APPKIT_EXTERN NSImageName const NSImageNameTouchBarQuickLookTemplate NS_AVAILABLE_MAC(10_12_2);
-APPKIT_EXTERN NSImageName const NSImageNameTouchBarRecordStartTemplate NS_AVAILABLE_MAC(10_12_2);
-APPKIT_EXTERN NSImageName const NSImageNameTouchBarRecordStopTemplate NS_AVAILABLE_MAC(10_12_2);
-APPKIT_EXTERN NSImageName const NSImageNameTouchBarRefreshTemplate NS_AVAILABLE_MAC(10_12_2);
-APPKIT_EXTERN NSImageName const NSImageNameTouchBarRemoveTemplate NS_AVAILABLE_MAC(10_13);
-APPKIT_EXTERN NSImageName const NSImageNameTouchBarRewindTemplate NS_AVAILABLE_MAC(10_12_2);
-APPKIT_EXTERN NSImageName const NSImageNameTouchBarRotateLeftTemplate NS_AVAILABLE_MAC(10_12_2);
-APPKIT_EXTERN NSImageName const NSImageNameTouchBarRotateRightTemplate NS_AVAILABLE_MAC(10_12_2);
-APPKIT_EXTERN NSImageName const NSImageNameTouchBarSearchTemplate NS_AVAILABLE_MAC(10_12_2);
-APPKIT_EXTERN NSImageName const NSImageNameTouchBarShareTemplate NS_AVAILABLE_MAC(10_12_2);
-APPKIT_EXTERN NSImageName const NSImageNameTouchBarSidebarTemplate NS_AVAILABLE_MAC(10_12_2);
-APPKIT_EXTERN NSImageName const NSImageNameTouchBarSkipAhead15SecondsTemplate NS_AVAILABLE_MAC(10_12_2);
-APPKIT_EXTERN NSImageName const NSImageNameTouchBarSkipAhead30SecondsTemplate NS_AVAILABLE_MAC(10_12_2);
-APPKIT_EXTERN NSImageName const NSImageNameTouchBarSkipAheadTemplate NS_AVAILABLE_MAC(10_12_2);
-APPKIT_EXTERN NSImageName const NSImageNameTouchBarSkipBack15SecondsTemplate NS_AVAILABLE_MAC(10_12_2);
-APPKIT_EXTERN NSImageName const NSImageNameTouchBarSkipBack30SecondsTemplate NS_AVAILABLE_MAC(10_12_2);
-APPKIT_EXTERN NSImageName const NSImageNameTouchBarSkipBackTemplate NS_AVAILABLE_MAC(10_12_2);
-APPKIT_EXTERN NSImageName const NSImageNameTouchBarSkipToEndTemplate NS_AVAILABLE_MAC(10_12_2);
-APPKIT_EXTERN NSImageName const NSImageNameTouchBarSkipToStartTemplate NS_AVAILABLE_MAC(10_12_2);
-APPKIT_EXTERN NSImageName const NSImageNameTouchBarSlideshowTemplate NS_AVAILABLE_MAC(10_12_2);
-APPKIT_EXTERN NSImageName const NSImageNameTouchBarTagIconTemplate NS_AVAILABLE_MAC(10_12_2);
-APPKIT_EXTERN NSImageName const NSImageNameTouchBarTextBoldTemplate NS_AVAILABLE_MAC(10_12_2);
-APPKIT_EXTERN NSImageName const NSImageNameTouchBarTextBoxTemplate NS_AVAILABLE_MAC(10_12_2);
-APPKIT_EXTERN NSImageName const NSImageNameTouchBarTextCenterAlignTemplate NS_AVAILABLE_MAC(10_12_2);
-APPKIT_EXTERN NSImageName const NSImageNameTouchBarTextItalicTemplate NS_AVAILABLE_MAC(10_12_2);
-APPKIT_EXTERN NSImageName const NSImageNameTouchBarTextJustifiedAlignTemplate NS_AVAILABLE_MAC(10_12_2);
-APPKIT_EXTERN NSImageName const NSImageNameTouchBarTextLeftAlignTemplate NS_AVAILABLE_MAC(10_12_2);
-APPKIT_EXTERN NSImageName const NSImageNameTouchBarTextListTemplate NS_AVAILABLE_MAC(10_12_2);
-APPKIT_EXTERN NSImageName const NSImageNameTouchBarTextRightAlignTemplate NS_AVAILABLE_MAC(10_12_2);
-APPKIT_EXTERN NSImageName const NSImageNameTouchBarTextStrikethroughTemplate NS_AVAILABLE_MAC(10_12_2);
-APPKIT_EXTERN NSImageName const NSImageNameTouchBarTextUnderlineTemplate NS_AVAILABLE_MAC(10_12_2);
-APPKIT_EXTERN NSImageName const NSImageNameTouchBarUserAddTemplate NS_AVAILABLE_MAC(10_12_2);
-APPKIT_EXTERN NSImageName const NSImageNameTouchBarUserGroupTemplate NS_AVAILABLE_MAC(10_12_2);
-APPKIT_EXTERN NSImageName const NSImageNameTouchBarUserTemplate NS_AVAILABLE_MAC(10_12_2);
+APPKIT_EXTERN NSImageName const NSImageNameTouchBarAddDetailTemplate API_AVAILABLE(macos(10.12.2), ios(13.0));
+APPKIT_EXTERN NSImageName const NSImageNameTouchBarAddTemplate API_AVAILABLE(macos(10.12.2), ios(13.0));
+APPKIT_EXTERN NSImageName const NSImageNameTouchBarAlarmTemplate API_AVAILABLE(macos(10.12.2), ios(13.0));
+APPKIT_EXTERN NSImageName const NSImageNameTouchBarAudioInputMuteTemplate API_AVAILABLE(macos(10.12.2), ios(13.0));
+APPKIT_EXTERN NSImageName const NSImageNameTouchBarAudioInputTemplate API_AVAILABLE(macos(10.12.2), ios(13.0));
+APPKIT_EXTERN NSImageName const NSImageNameTouchBarAudioOutputMuteTemplate API_AVAILABLE(macos(10.12.2), ios(13.0));
+APPKIT_EXTERN NSImageName const NSImageNameTouchBarAudioOutputVolumeHighTemplate API_AVAILABLE(macos(10.12.2), ios(13.0));
+APPKIT_EXTERN NSImageName const NSImageNameTouchBarAudioOutputVolumeLowTemplate API_AVAILABLE(macos(10.12.2), ios(13.0));
+APPKIT_EXTERN NSImageName const NSImageNameTouchBarAudioOutputVolumeMediumTemplate API_AVAILABLE(macos(10.12.2), ios(13.0));
+APPKIT_EXTERN NSImageName const NSImageNameTouchBarAudioOutputVolumeOffTemplate API_AVAILABLE(macos(10.12.2), ios(13.0));
+APPKIT_EXTERN NSImageName const NSImageNameTouchBarBookmarksTemplate API_AVAILABLE(macos(10.12.2), ios(13.0));
+APPKIT_EXTERN NSImageName const NSImageNameTouchBarColorPickerFill API_AVAILABLE(macos(10.12.2), ios(13.0));
+APPKIT_EXTERN NSImageName const NSImageNameTouchBarColorPickerFont API_AVAILABLE(macos(10.12.2), ios(13.0));
+APPKIT_EXTERN NSImageName const NSImageNameTouchBarColorPickerStroke API_AVAILABLE(macos(10.12.2), ios(13.0));
+APPKIT_EXTERN NSImageName const NSImageNameTouchBarCommunicationAudioTemplate API_AVAILABLE(macos(10.12.2), ios(13.0));
+APPKIT_EXTERN NSImageName const NSImageNameTouchBarCommunicationVideoTemplate API_AVAILABLE(macos(10.12.2), ios(13.0));
+APPKIT_EXTERN NSImageName const NSImageNameTouchBarComposeTemplate API_AVAILABLE(macos(10.12.2), ios(13.0));
+APPKIT_EXTERN NSImageName const NSImageNameTouchBarDeleteTemplate API_AVAILABLE(macos(10.12.2), ios(13.0));
+APPKIT_EXTERN NSImageName const NSImageNameTouchBarDownloadTemplate API_AVAILABLE(macos(10.12.2), ios(13.0));
+APPKIT_EXTERN NSImageName const NSImageNameTouchBarEnterFullScreenTemplate API_AVAILABLE(macos(10.12.2), ios(13.0));
+APPKIT_EXTERN NSImageName const NSImageNameTouchBarExitFullScreenTemplate API_AVAILABLE(macos(10.12.2), ios(13.0));
+APPKIT_EXTERN NSImageName const NSImageNameTouchBarFastForwardTemplate API_AVAILABLE(macos(10.12.2), ios(13.0));
+APPKIT_EXTERN NSImageName const NSImageNameTouchBarFolderCopyToTemplate API_AVAILABLE(macos(10.12.2), ios(13.0));
+APPKIT_EXTERN NSImageName const NSImageNameTouchBarFolderMoveToTemplate API_AVAILABLE(macos(10.12.2), ios(13.0));
+APPKIT_EXTERN NSImageName const NSImageNameTouchBarFolderTemplate API_AVAILABLE(macos(10.12.2), ios(13.0));
+APPKIT_EXTERN NSImageName const NSImageNameTouchBarGetInfoTemplate API_AVAILABLE(macos(10.12.2), ios(13.0));
+APPKIT_EXTERN NSImageName const NSImageNameTouchBarGoBackTemplate API_AVAILABLE(macos(10.12.2), ios(13.0));
+APPKIT_EXTERN NSImageName const NSImageNameTouchBarGoDownTemplate API_AVAILABLE(macos(10.12.2), ios(13.0));
+APPKIT_EXTERN NSImageName const NSImageNameTouchBarGoForwardTemplate API_AVAILABLE(macos(10.12.2), ios(13.0));
+APPKIT_EXTERN NSImageName const NSImageNameTouchBarGoUpTemplate API_AVAILABLE(macos(10.12.2), ios(13.0));
+APPKIT_EXTERN NSImageName const NSImageNameTouchBarHistoryTemplate API_AVAILABLE(macos(10.12.2), ios(13.0));
+APPKIT_EXTERN NSImageName const NSImageNameTouchBarIconViewTemplate API_AVAILABLE(macos(10.12.2), ios(13.0));
+APPKIT_EXTERN NSImageName const NSImageNameTouchBarListViewTemplate API_AVAILABLE(macos(10.12.2), ios(13.0));
+APPKIT_EXTERN NSImageName const NSImageNameTouchBarMailTemplate API_AVAILABLE(macos(10.12.2), ios(13.0));
+APPKIT_EXTERN NSImageName const NSImageNameTouchBarNewFolderTemplate API_AVAILABLE(macos(10.12.2), ios(13.0));
+APPKIT_EXTERN NSImageName const NSImageNameTouchBarNewMessageTemplate API_AVAILABLE(macos(10.12.2), ios(13.0));
+APPKIT_EXTERN NSImageName const NSImageNameTouchBarOpenInBrowserTemplate API_AVAILABLE(macos(10.12.2), ios(13.0));
+APPKIT_EXTERN NSImageName const NSImageNameTouchBarPauseTemplate API_AVAILABLE(macos(10.12.2), ios(13.0));
+APPKIT_EXTERN NSImageName const NSImageNameTouchBarPlayPauseTemplate API_AVAILABLE(macos(10.12.2), ios(13.0));
+APPKIT_EXTERN NSImageName const NSImageNameTouchBarPlayTemplate API_AVAILABLE(macos(10.12.2), ios(13.0));
+APPKIT_EXTERN NSImageName const NSImageNameTouchBarQuickLookTemplate API_AVAILABLE(macos(10.12.2), ios(13.0));
+APPKIT_EXTERN NSImageName const NSImageNameTouchBarRecordStartTemplate API_AVAILABLE(macos(10.12.2), ios(13.0));
+APPKIT_EXTERN NSImageName const NSImageNameTouchBarRecordStopTemplate API_AVAILABLE(macos(10.12.2), ios(13.0));
+APPKIT_EXTERN NSImageName const NSImageNameTouchBarRefreshTemplate API_AVAILABLE(macos(10.12.2), ios(13.0));
+APPKIT_EXTERN NSImageName const NSImageNameTouchBarRemoveTemplate API_AVAILABLE(macos(10.13), ios(13.0));
+APPKIT_EXTERN NSImageName const NSImageNameTouchBarRewindTemplate API_AVAILABLE(macos(10.12.2), ios(13.0));
+APPKIT_EXTERN NSImageName const NSImageNameTouchBarRotateLeftTemplate API_AVAILABLE(macos(10.12.2), ios(13.0));
+APPKIT_EXTERN NSImageName const NSImageNameTouchBarRotateRightTemplate API_AVAILABLE(macos(10.12.2), ios(13.0));
+APPKIT_EXTERN NSImageName const NSImageNameTouchBarSearchTemplate API_AVAILABLE(macos(10.12.2), ios(13.0));
+APPKIT_EXTERN NSImageName const NSImageNameTouchBarShareTemplate API_AVAILABLE(macos(10.12.2), ios(13.0));
+APPKIT_EXTERN NSImageName const NSImageNameTouchBarSidebarTemplate API_AVAILABLE(macos(10.12.2), ios(13.0));
+APPKIT_EXTERN NSImageName const NSImageNameTouchBarSkipAhead15SecondsTemplate API_AVAILABLE(macos(10.12.2), ios(13.0));
+APPKIT_EXTERN NSImageName const NSImageNameTouchBarSkipAhead30SecondsTemplate API_AVAILABLE(macos(10.12.2), ios(13.0));
+APPKIT_EXTERN NSImageName const NSImageNameTouchBarSkipAheadTemplate API_AVAILABLE(macos(10.12.2), ios(13.0));
+APPKIT_EXTERN NSImageName const NSImageNameTouchBarSkipBack15SecondsTemplate API_AVAILABLE(macos(10.12.2), ios(13.0));
+APPKIT_EXTERN NSImageName const NSImageNameTouchBarSkipBack30SecondsTemplate API_AVAILABLE(macos(10.12.2), ios(13.0));
+APPKIT_EXTERN NSImageName const NSImageNameTouchBarSkipBackTemplate API_AVAILABLE(macos(10.12.2), ios(13.0));
+APPKIT_EXTERN NSImageName const NSImageNameTouchBarSkipToEndTemplate API_AVAILABLE(macos(10.12.2), ios(13.0));
+APPKIT_EXTERN NSImageName const NSImageNameTouchBarSkipToStartTemplate API_AVAILABLE(macos(10.12.2), ios(13.0));
+APPKIT_EXTERN NSImageName const NSImageNameTouchBarSlideshowTemplate API_AVAILABLE(macos(10.12.2), ios(13.0));
+APPKIT_EXTERN NSImageName const NSImageNameTouchBarTagIconTemplate API_AVAILABLE(macos(10.12.2), ios(13.0));
+APPKIT_EXTERN NSImageName const NSImageNameTouchBarTextBoldTemplate API_AVAILABLE(macos(10.12.2), ios(13.0));
+APPKIT_EXTERN NSImageName const NSImageNameTouchBarTextBoxTemplate API_AVAILABLE(macos(10.12.2), ios(13.0));
+APPKIT_EXTERN NSImageName const NSImageNameTouchBarTextCenterAlignTemplate API_AVAILABLE(macos(10.12.2), ios(13.0));
+APPKIT_EXTERN NSImageName const NSImageNameTouchBarTextItalicTemplate API_AVAILABLE(macos(10.12.2), ios(13.0));
+APPKIT_EXTERN NSImageName const NSImageNameTouchBarTextJustifiedAlignTemplate API_AVAILABLE(macos(10.12.2), ios(13.0));
+APPKIT_EXTERN NSImageName const NSImageNameTouchBarTextLeftAlignTemplate API_AVAILABLE(macos(10.12.2), ios(13.0));
+APPKIT_EXTERN NSImageName const NSImageNameTouchBarTextListTemplate API_AVAILABLE(macos(10.12.2), ios(13.0));
+APPKIT_EXTERN NSImageName const NSImageNameTouchBarTextRightAlignTemplate API_AVAILABLE(macos(10.12.2), ios(13.0));
+APPKIT_EXTERN NSImageName const NSImageNameTouchBarTextStrikethroughTemplate API_AVAILABLE(macos(10.12.2), ios(13.0));
+APPKIT_EXTERN NSImageName const NSImageNameTouchBarTextUnderlineTemplate API_AVAILABLE(macos(10.12.2), ios(13.0));
+APPKIT_EXTERN NSImageName const NSImageNameTouchBarUserAddTemplate API_AVAILABLE(macos(10.12.2), ios(13.0));
+APPKIT_EXTERN NSImageName const NSImageNameTouchBarUserGroupTemplate API_AVAILABLE(macos(10.12.2), ios(13.0));
+APPKIT_EXTERN NSImageName const NSImageNameTouchBarUserTemplate API_AVAILABLE(macos(10.12.2), ios(13.0));
 
 /* If you have a volume indicator, use NSImageNameTouchBarAudioOutputVolume{Off,Low,Medium,High}Template, which align the speaker correctly.  For volume controls, use NSImageNameTouchBarVolume{Down,Up}Template.
  */
-APPKIT_EXTERN NSImageName const NSImageNameTouchBarVolumeDownTemplate NS_AVAILABLE_MAC(10_12_2);
-APPKIT_EXTERN NSImageName const NSImageNameTouchBarVolumeUpTemplate NS_AVAILABLE_MAC(10_12_2);
+APPKIT_EXTERN NSImageName const NSImageNameTouchBarVolumeDownTemplate API_AVAILABLE(macos(10.12.2), ios(13.0));
+APPKIT_EXTERN NSImageName const NSImageNameTouchBarVolumeUpTemplate API_AVAILABLE(macos(10.12.2), ios(13.0));
 
 /* If you have an NSTouchBarItem with a seekable media control, NSImageNameTouchBarPlayheadTemplate is suitable for use in displaying the playhead.
  */
-APPKIT_EXTERN NSImageName const NSImageNameTouchBarPlayheadTemplate NS_AVAILABLE_MAC(10_12_2);
+APPKIT_EXTERN NSImageName const NSImageNameTouchBarPlayheadTemplate API_AVAILABLE(macos(10.12.2));
 
+API_UNAVAILABLE_END
 NS_ASSUME_NONNULL_END

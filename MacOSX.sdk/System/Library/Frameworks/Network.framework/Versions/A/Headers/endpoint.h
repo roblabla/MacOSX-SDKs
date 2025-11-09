@@ -2,13 +2,19 @@
 //  endpoint.h
 //  Network
 //
-//  Copyright (c) 2014-2018 Apple Inc. All rights reserved.
+//  Copyright (c) 2014-2019 Apple Inc. All rights reserved.
 //
 
 #ifndef __NW_ENDPOINT_H__
 #define __NW_ENDPOINT_H__
 
+#ifndef __NW_INDIRECT__
+#warning "Please include <Network/Network.h> instead of this file directly."
+#endif // __NW_INDIRECT__
+
 #include <Network/nw_object.h>
+#include <Network/interface.h>
+#include <Network/txt_record.h>
 
 #include <stdint.h>
 #include <sys/socket.h>
@@ -36,18 +42,20 @@ NW_OBJECT_DECL(nw_endpoint);
  * @typedef nw_endpoint_type_t
  * @abstract
  *		Endpoint types represent a well-known form of endpoint. Values may be
- *		added to this enumeration, and some custom endpoint types may used
+ *		added to this enumeration, and some custom endpoint types may use
  *		values not defined in this enumeration.
  */
 typedef enum {
 	/*! @const nw_endpoint_type_invalid An invalid endpoint */
 	nw_endpoint_type_invalid = 0,
-	/*! @const nw_endpoint_type_invalid An IP Address + Port */
+	/*! @const nw_endpoint_type_address An IP Address + Port */
 	nw_endpoint_type_address = 1,
-	/*! @const nw_endpoint_type_invalid A Hostname + Port */
+	/*! @const nw_endpoint_type_host A Hostname + Port */
 	nw_endpoint_type_host = 2,
-	/*! @const nw_endpoint_type_invalid A Bonjour Service Name + Type + Domain */
+	/*! @const nw_endpoint_type_bonjour_service A Bonjour Service Name + Type + Domain */
 	nw_endpoint_type_bonjour_service = 3,
+	/*! @const nw_endpoint_type_url A URL endpoint */
+	nw_endpoint_type_url = 4,
 } nw_endpoint_type_t;
 
 /*!
@@ -100,7 +108,7 @@ nw_endpoint_create_host(const char *hostname, const char *port);
  *
  * @abstract
  *		Retrieves the hostname string for a network endpoint with
- *		the type nw_endpoint_type_host.
+ *		the type nw_endpoint_type_host or nw_endpoint_type_url.
  *
  * @param endpoint
  *		The endpoint object.
@@ -136,8 +144,8 @@ nw_endpoint_copy_port_string(nw_endpoint_t endpoint);
  * @function nw_endpoint_get_port
  *
  * @abstract
- *		Retrieves the port for a network endpoint with
- *		the type nw_endpoint_type_host or nw_endpoint_type_address.
+ *		Retrieves the port for a network endpoint with the type
+ *		nw_endpoint_type_url, nw_endpoint_type_host, or nw_endpoint_type_address.
  *		The port will be returned in Host Byte Order.
  *
  * @param endpoint
@@ -292,6 +300,46 @@ nw_endpoint_get_bonjour_service_type(nw_endpoint_t endpoint);
 API_AVAILABLE(macos(10.14), ios(12.0), watchos(5.0), tvos(12.0))
 const char *
 nw_endpoint_get_bonjour_service_domain(nw_endpoint_t endpoint);
+
+#pragma mark - URL Endpoints
+
+/*!
+ * @function nw_endpoint_create_url
+ *
+ * @abstract
+ *		Creates a network endpoint with a URL. The endpoint will have the type
+ *		nw_endpoint_type_url.
+ *
+ * @param url
+ *		The URL string.
+ *
+ * @result
+ *		Returns an allocated nw_endpoint_t object on success.
+ *		Callers are responsible for deallocating using nw_release(obj) or [obj release].
+ *		These objects support ARC.
+ *		Returns NULL on failure. Fails due to invalid parameters, or due to URL parsing failure.
+ */
+API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0))
+NW_RETURNS_RETAINED nw_endpoint_t
+nw_endpoint_create_url(const char *url);
+
+/*!
+ * @function nw_endpoint_get_url
+ *
+ * @abstract
+ *		Retrieves the URL string from a network endpoint of type
+ *		nw_endpoint_type_url.
+ *
+ * @param endpoint
+ *		The endpoint object.
+ *
+ * @result
+ *		The URL string, or NULL if the endpoint is not of type
+ *		nw_endpoint_type_url.
+ */
+API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0))
+const char *
+nw_endpoint_get_url(nw_endpoint_t endpoint);
 
 __END_DECLS
 

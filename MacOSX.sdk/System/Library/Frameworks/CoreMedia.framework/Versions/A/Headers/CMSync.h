@@ -3,7 +3,7 @@
  
 	Framework:  CoreMedia
  
-	Copyright © 2006-2018 Apple Inc. All rights reserved.
+	Copyright © 2006-2019 Apple Inc. All rights reserved.
  
 */
 
@@ -37,7 +37,7 @@ CF_IMPLICIT_BRIDGING_ENABLED
 		Additionally, the CMSync infrastructure monitors relative drift between CMClocks.
 */
 
-typedef struct CM_BRIDGED_TYPE(id) OpaqueCMClock* CMClockRef; // a CF type; use CFRetain and CFRelease
+typedef struct CM_BRIDGED_TYPE(id) OpaqueCMClock* CMClockRef API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0)); // a CF type; use CFRetain and CFRelease
 
 /*!
 	@typedef	CMTimebase
@@ -57,9 +57,9 @@ typedef struct CM_BRIDGED_TYPE(id) OpaqueCMClock* CMClockRef; // a CF type; use 
 		the timebase's time changes relative to the ultimate master clock.
 */
 
-typedef struct CM_BRIDGED_TYPE(id) OpaqueCMTimebase* CMTimebaseRef; // a CF type; use CFRetain and CFRelease
+typedef struct CM_BRIDGED_TYPE(id) OpaqueCMTimebase* CMTimebaseRef API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0)); // a CF type; use CFRetain and CFRelease
 
-typedef CM_BRIDGED_TYPE(id) CFTypeRef CMClockOrTimebaseRef; // used in argument lists and function results to indicate that either may be passed
+typedef CM_BRIDGED_TYPE(id) CFTypeRef CMClockOrTimebaseRef API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0)); // used in argument lists and function results to indicate that either may be passed
 
 
 // CMClock error codes
@@ -73,7 +73,7 @@ enum
 	kCMClockError_InvalidParameter			= -12746,
 	kCMClockError_AllocationFailed			= -12747,
 	kCMClockError_UnsupportedOperation		= -12756,
-};
+} API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0));
 
 // CMTimebase error codes
 #if COREMEDIA_USE_DERIVED_ENUMS_FOR_CONSTANTS
@@ -87,7 +87,7 @@ enum
 	kCMTimebaseError_AllocationFailed			= -12750,
 	kCMTimebaseError_TimerIntervalTooShort		= -12751,
 	kCMTimebaseError_ReadOnly					= -12757,
-};
+} API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0));
 
 // CMSync error codes
 #if COREMEDIA_USE_DERIVED_ENUMS_FOR_CONSTANTS
@@ -100,7 +100,7 @@ enum
 	kCMSyncError_InvalidParameter			= -12753,
 	kCMSyncError_AllocationFailed			= -12754,
 	kCMSyncError_RateMustBeNonZero			= -12755,
-};
+} API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0));
 
 /*!
 	@function	CMClockGetTypeID
@@ -108,7 +108,7 @@ enum
 */
 CM_EXPORT CFTypeID
 CMClockGetTypeID( void )
-	__OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_6_0);
+	API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0));
 
 /*!
 	@function	CMClockGetHostTimeClock
@@ -119,7 +119,7 @@ CMClockGetTypeID( void )
 */
 CM_EXPORT CMClockRef CM_NONNULL
 CMClockGetHostTimeClock( void )
-	__OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_6_0);
+	API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0));
 
 /*!
 	@function	CMClockConvertHostTimeToSystemUnits
@@ -132,7 +132,7 @@ CMClockGetHostTimeClock( void )
 */
 CM_EXPORT uint64_t
 CMClockConvertHostTimeToSystemUnits( CMTime hostTime )
-	__OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_6_0);
+	API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0));
 
 /*!
 	@function	CMClockMakeHostTimeFromSystemUnits
@@ -145,7 +145,7 @@ CMClockConvertHostTimeToSystemUnits( CMTime hostTime )
 */
 CM_EXPORT CMTime
 CMClockMakeHostTimeFromSystemUnits( uint64_t hostTime )
-	__OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_6_0);
+	API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0));
 		
 /*!
 	@function	CMClockGetTime
@@ -154,7 +154,7 @@ CMClockMakeHostTimeFromSystemUnits( uint64_t hostTime )
 CM_EXPORT CMTime
 CMClockGetTime( 
 		CMClockRef CM_NONNULL clock )
-	__OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_6_0);
+	API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0));
 
 /*!
 	@function	CMClockGetAnchorTime
@@ -166,7 +166,7 @@ CMClockGetAnchorTime(
 		CMClockRef CM_NONNULL clock,
 		CMTime * CM_NONNULL clockTimeOut,
 		CMTime * CM_NONNULL referenceClockTimeOut )
-			__OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_6_0);
+			API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0));
 
 /*!
 	@function	CMClockMightDrift
@@ -176,7 +176,7 @@ CM_EXPORT Boolean
 CMClockMightDrift(
 		CMClockRef CM_NONNULL clock,
 		CMClockRef CM_NONNULL otherClock )
-			__OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_6_0);
+			API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0));
 
 /*!
 	@function	CMClockInvalidate
@@ -189,7 +189,7 @@ CMClockMightDrift(
 CM_EXPORT void
 CMClockInvalidate(
 		CMClockRef CM_NONNULL clock )
-			__OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_6_0);
+			API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0));
 		
 
 /*!
@@ -198,7 +198,7 @@ CMClockInvalidate(
 */
 CM_EXPORT CFTypeID
 CMTimebaseGetTypeID( void )
-	__OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_6_0);
+	API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0));
 
 CF_IMPLICIT_BRIDGING_DISABLED
 
@@ -214,7 +214,7 @@ CMTimebaseCreateWithMasterClock(
 		CFAllocatorRef CM_NULLABLE allocator,
 		CMClockRef CM_NONNULL masterClock,
 		CM_RETURNS_RETAINED_PARAMETER CMTimebaseRef CM_NULLABLE * CM_NONNULL timebaseOut )
-			__OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_6_0);
+			API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0));
 
 /*!
 	@function	CMTimebaseCreateWithMasterTimebase
@@ -227,7 +227,7 @@ CMTimebaseCreateWithMasterTimebase(
 		CFAllocatorRef CM_NULLABLE allocator,
 		CMTimebaseRef CM_NONNULL masterTimebase,
 		CM_RETURNS_RETAINED_PARAMETER CMTimebaseRef CM_NULLABLE * CM_NONNULL timebaseOut )
-			__OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_6_0);
+			API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0));
 
 CF_IMPLICIT_BRIDGING_ENABLED
 
@@ -240,7 +240,7 @@ CF_IMPLICIT_BRIDGING_ENABLED
 CM_EXPORT CMTimebaseRef CM_NULLABLE
 CMTimebaseCopyMasterTimebase(
 		CMTimebaseRef CM_NONNULL timebase )
-			__OSX_AVAILABLE_STARTING(__MAC_10_11, __IPHONE_9_0);
+			API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(6.0));
 
 /*!
 	@function	CMTimebaseCopyMasterClock
@@ -251,7 +251,7 @@ CMTimebaseCopyMasterTimebase(
 CM_EXPORT CMClockRef CM_NULLABLE
 CMTimebaseCopyMasterClock(
 		CMTimebaseRef CM_NONNULL timebase )
-			__OSX_AVAILABLE_STARTING(__MAC_10_11, __IPHONE_9_0);
+			API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(6.0));
 
 /*!
 	@function	CMTimebaseCopyMaster
@@ -262,7 +262,7 @@ CMTimebaseCopyMasterClock(
 CM_EXPORT CMClockOrTimebaseRef CM_NONNULL
 CMTimebaseCopyMaster(
 		CMTimebaseRef CM_NONNULL timebase )
-			__OSX_AVAILABLE_STARTING(__MAC_10_11, __IPHONE_9_0);
+			API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(6.0));
 
 /*!
 	@function	CMTimebaseCopyUltimateMasterClock
@@ -271,7 +271,7 @@ CMTimebaseCopyMaster(
 CM_EXPORT CMClockRef CM_NONNULL
 CMTimebaseCopyUltimateMasterClock(
 		CMTimebaseRef CM_NONNULL timebase )
-			__OSX_AVAILABLE_STARTING(__MAC_10_11, __IPHONE_9_0);
+			API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(6.0));
 		
 /*!
 	@function	CMTimebaseGetMasterTimebase
@@ -283,7 +283,7 @@ CMTimebaseCopyUltimateMasterClock(
 CM_EXPORT CMTimebaseRef CM_NULLABLE
 CMTimebaseGetMasterTimebase(
 		CMTimebaseRef CM_NONNULL timebase )
-			API_DEPRECATED_WITH_REPLACEMENT("CMTimebaseCopyMasterTimebase", macosx(10.8, 10.11), ios(6.0, 9.0));
+			API_DEPRECATED_WITH_REPLACEMENT("CMTimebaseCopyMasterTimebase", macos(10.8, 10.11), ios(6.0, 9.0), tvos(9.0, 9.0)) API_UNAVAILABLE(watchos);
 
 /*!
 	@function	CMTimebaseGetMasterClock
@@ -295,7 +295,7 @@ CMTimebaseGetMasterTimebase(
 CM_EXPORT CMClockRef CM_NULLABLE
 CMTimebaseGetMasterClock(
 		CMTimebaseRef CM_NONNULL timebase )
-			API_DEPRECATED_WITH_REPLACEMENT("CMTimebaseCopyMasterClock", macosx(10.8, 10.11), ios(6.0, 9.0));
+			API_DEPRECATED_WITH_REPLACEMENT("CMTimebaseCopyMasterClock", macos(10.8, 10.11), ios(6.0, 9.0), tvos(9.0, 9.0)) API_UNAVAILABLE(watchos);
 
 /*!
 	@function	CMTimebaseGetMaster
@@ -308,7 +308,7 @@ CMTimebaseGetMasterClock(
 CM_EXPORT CMClockOrTimebaseRef CM_NULLABLE
 CMTimebaseGetMaster(
 		CMTimebaseRef CM_NONNULL timebase )
-			API_DEPRECATED_WITH_REPLACEMENT("CMTimebaseCopyMaster", macosx(10.8, 10.11), ios(6.0, 9.0));
+			API_DEPRECATED_WITH_REPLACEMENT("CMTimebaseCopyMaster", macos(10.8, 10.11), ios(6.0, 9.0), tvos(9.0, 9.0)) API_UNAVAILABLE(watchos);
 
 /*!
 	@function	CMTimebaseGetUltimateMasterClock
@@ -319,8 +319,42 @@ CMTimebaseGetMaster(
 CM_EXPORT CMClockRef CM_NULLABLE
 CMTimebaseGetUltimateMasterClock(
 		CMTimebaseRef CM_NONNULL timebase )
-			API_DEPRECATED_WITH_REPLACEMENT("CMTimebaseCopyUltimateMasterClock", macosx(10.8, 10.11), ios(6.0, 9.0));
-		
+			API_DEPRECATED_WITH_REPLACEMENT("CMTimebaseCopyUltimateMasterClock", macos(10.8, 10.11), ios(6.0, 9.0), tvos(9.0, 9.0)) API_UNAVAILABLE(watchos);
+
+/*!
+	@function	0
+	@abstract
+		Sets the master clock of a timebase.
+	@discussion
+		The timebase will stop being mastered by its current master clock or master
+		timebase, and will change to be mastered by the new master clock.  Prior to
+		the change a kCMTimebaseNotification_MasterWillChange will be posted.  When
+		the change has completed, a kCMTimebaseNotification_MasterDidChange notification
+		will be posted.  The current master clock or master timebase of the timebase
+		being modified will be released.
+*/
+CM_EXPORT OSStatus CMTimebaseSetMasterClock(
+		CMTimebaseRef CM_NONNULL timebase,
+		CMClockRef CM_NONNULL newMasterClock)
+			API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0));
+
+/*!
+	@function	CMTimebaseSetMasterTimebase
+	@abstract
+		Sets the master timebase of a timebase.
+	@discussion
+		The timebase will stop being mastered by its current master clock or master
+		timebase, and will change to be mastered by the new master timebase.  Prior to
+		the change a kCMTimebaseNotification_MasterWillChange will be posted.  When
+		the change has completed, a kCMTimebaseNotification_MasterDidChange notification
+		will be posted.  The current master clock or master timebase of the timebase
+		being modified will be released.
+*/
+CM_EXPORT OSStatus CMTimebaseSetMasterTimebase(
+		CMTimebaseRef CM_NONNULL timebase,
+		CMTimebaseRef CM_NONNULL newMasterTimebase)
+			API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0));
+
 /*!
 	@function	CMTimebaseGetTime
 	@abstract	Retrieves the current time from a timebase.
@@ -328,7 +362,7 @@ CMTimebaseGetUltimateMasterClock(
 CM_EXPORT CMTime
 CMTimebaseGetTime( 
 		CMTimebaseRef CM_NONNULL timebase )
-			__OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_6_0);
+			API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0));
 
 /*!
 	@function	CMTimebaseGetTimeWithTimeScale
@@ -339,7 +373,7 @@ CMTimebaseGetTimeWithTimeScale(
 		CMTimebaseRef CM_NONNULL timebase,
 		CMTimeScale timescale,
 		CMTimeRoundingMethod method)
-			__OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_6_0);
+			API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0));
 
 /*!
 	@function	CMTimebaseSetTime
@@ -349,7 +383,7 @@ CM_EXPORT OSStatus
 CMTimebaseSetTime( 
 		CMTimebaseRef CM_NONNULL timebase,
 		CMTime time )
-			__OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_6_0);
+			API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0));
 
 /*!
 	@function	CMTimebaseSetAnchorTime
@@ -366,7 +400,7 @@ CMTimebaseSetAnchorTime(
 		CMTimebaseRef CM_NONNULL timebase,
 		CMTime timebaseTime,
 		CMTime immediateMasterTime)
-			__OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_6_0);
+			API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0));
 
 /*!
 	@function	CMTimebaseGetRate
@@ -378,7 +412,7 @@ CMTimebaseSetAnchorTime(
 CM_EXPORT Float64 
 CMTimebaseGetRate( 
 		CMTimebaseRef CM_NONNULL timebase )
-			__OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_6_0);
+			API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0));
 
 /*!
 	@function	CMTimebaseGetTimeAndRate
@@ -392,7 +426,7 @@ CMTimebaseGetTimeAndRate(
 		CMTimebaseRef CM_NONNULL timebase,
 		CMTime * CM_NULLABLE timeOut,
 		Float64 * CM_NULLABLE rateOut )
-			__OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_6_0);
+			API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0));
 
 /*!
 	@function	CMTimebaseSetRate
@@ -402,7 +436,7 @@ CM_EXPORT OSStatus
 CMTimebaseSetRate( 
 		CMTimebaseRef CM_NONNULL timebase,
 		Float64 rate )
-			__OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_6_0);
+			API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0));
 		
 /*!
 	@function	CMTimebaseSetRateAndAnchorTime
@@ -423,7 +457,7 @@ CMTimebaseSetRateAndAnchorTime(
 		Float64 rate,
 		CMTime timebaseTime,
 		CMTime immediateMasterTime)
-			__OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_6_0);
+			API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0));
 
 /*!
 	@function	CMTimebaseGetEffectiveRate
@@ -437,7 +471,7 @@ CMTimebaseSetRateAndAnchorTime(
 CM_EXPORT Float64
 CMTimebaseGetEffectiveRate(
 		CMTimebaseRef CM_NONNULL timebase )
-			__OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_6_0);
+			API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0));
 
 /*!
 	@function	CMTimebaseAddTimer
@@ -458,7 +492,7 @@ CMTimebaseAddTimer(
 		CMTimebaseRef CM_NONNULL timebase,
 		CFRunLoopTimerRef CM_NONNULL timer,
 		CFRunLoopRef CM_NONNULL runloop )
-			__OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_6_0);
+			API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0));
 
 #define kCMTimebaseVeryLongCFTimeInterval	(CFTimeInterval)(256.0 * 365.0 * 24.0 * 60.0 * 60.0)	// quite a while
 #define kCMTimebaseFarFutureCFAbsoluteTime	((CFAbsoluteTime)kCMTimebaseVeryLongCFTimeInterval)		// quite a while from 2001
@@ -476,7 +510,7 @@ CM_EXPORT OSStatus
 CMTimebaseRemoveTimer( 
 		CMTimebaseRef CM_NONNULL timebase,
 		CFRunLoopTimerRef CM_NONNULL timer )
-			__OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_6_0);
+			API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0));
 
 /*!
 	@function	CMTimebaseSetTimerNextFireTime
@@ -503,7 +537,7 @@ CMTimebaseSetTimerNextFireTime(
 		CFRunLoopTimerRef CM_NONNULL timer,
 		CMTime fireTime,
 		uint32_t flags ) // reserved, pass zero
-			__OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_6_0);
+			API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0));
 
 /*!
 	@function	CMTimebaseSetTimerToFireImmediately
@@ -519,7 +553,7 @@ CM_EXPORT OSStatus
 CMTimebaseSetTimerToFireImmediately( 
 		CMTimebaseRef CM_NONNULL timebase,
 		CFRunLoopTimerRef CM_NONNULL timer )
-			__OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_6_0);
+			API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0));
 
 
 /*!
@@ -544,7 +578,7 @@ CM_EXPORT OSStatus
 CMTimebaseAddTimerDispatchSource( 
 		CMTimebaseRef CM_NONNULL timebase,
 		dispatch_source_t CM_NONNULL timerSource )
-			__OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_6_0);
+			API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0));
 
 
 /*!
@@ -560,7 +594,7 @@ CM_EXPORT OSStatus
 CMTimebaseRemoveTimerDispatchSource( 
 		CMTimebaseRef CM_NONNULL timebase,
 		dispatch_source_t CM_NONNULL timerSource )
-			__OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_6_0);
+			API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0));
 
 /*!
 	@function	CMTimebaseSetTimerDispatchSourceNextFireTime
@@ -587,7 +621,7 @@ CMTimebaseSetTimerDispatchSourceNextFireTime(
 		dispatch_source_t CM_NONNULL timerSource,
 		CMTime fireTime,
 		uint32_t flags ) // reserved, pass zero
-			__OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_6_0);
+			API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0));
 
 /*!
 	@function	CMTimebaseSetTimerDispatchSourceToFireImmediately
@@ -604,7 +638,7 @@ CM_EXPORT OSStatus
 CMTimebaseSetTimerDispatchSourceToFireImmediately( 
 		CMTimebaseRef CM_NONNULL timebase,
 		dispatch_source_t CM_NONNULL timerSource )
-			__OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_6_0);
+			API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0));
 
 
 
@@ -626,7 +660,7 @@ CM_EXPORT Float64
 CMSyncGetRelativeRate( 
 		CMClockOrTimebaseRef CM_NONNULL ofClockOrTimebase,
 		CMClockOrTimebaseRef CM_NONNULL relativeToClockOrTimebase )
-			__OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_6_0);
+			API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0));
 		
 /*!
 	@function	CMSyncGetRelativeRateAndAnchorTime
@@ -645,7 +679,7 @@ CMSyncGetRelativeRateAndAnchorTime(
 		Float64* CM_NULLABLE outRelativeRate,
 		CMTime* CM_NULLABLE outOfClockOrTimebaseAnchorTime,
 		CMTime* CM_NULLABLE outRelativeToClockOrTimebaseAnchorTime)
-			__OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_6_0);
+			API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0));
 
 /*!
 	@function	CMSyncConvertTime
@@ -662,7 +696,7 @@ CMSyncConvertTime(
 		CMTime time, 
 		CMClockOrTimebaseRef CM_NONNULL fromClockOrTimebase,
 		CMClockOrTimebaseRef CM_NONNULL toClockOrTimebase )
-			__OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_6_0);
+			API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0));
 
 /*!
 	@function	CMSyncMightDrift
@@ -675,7 +709,7 @@ CM_EXPORT Boolean
 CMSyncMightDrift(
 		CMClockOrTimebaseRef CM_NONNULL clockOrTimebase1,
 		CMClockOrTimebaseRef CM_NONNULL clockOrTimebase2 )
-			__OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_6_0);
+			API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0));
 		
 /*!
 	@function	CMSyncGetTime
@@ -690,28 +724,28 @@ CMSyncMightDrift(
 CM_EXPORT CMTime
 CMSyncGetTime(
 		CMClockOrTimebaseRef CM_NONNULL clockOrTimebase )
-			__OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_6_0);
+			API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0));
 
 /*!
 	@function	CMTimebaseNotificationBarrier
 	@abstract	Requests that the timebase wait until it is not posting any notifications.
 */
 CM_EXPORT OSStatus	CMTimebaseNotificationBarrier(CMTimebaseRef CM_NONNULL timebase )
-						__OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_6_0);
+						API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0));
 	
 CM_ASSUME_NONNULL_BEGIN
 
 // Posted by a timebase after a change in effective rate.  
 CM_EXPORT const CFStringRef kCMTimebaseNotification_EffectiveRateChanged
-								__OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_6_0);
+								API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0));
 
 // Posted by a timebase after a discontinuous time jump.
 CM_EXPORT const CFStringRef kCMTimebaseNotification_TimeJumped
-								__OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_6_0);
+								API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0));
 
 // Payload key for the time at which a change in effective rate or a discontinuous time jump occurred.
 CM_EXPORT const CFStringRef kCMTimebaseNotificationKey_EventTime
-								__OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_7_0);
+								API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(6.0));
 
 CM_ASSUME_NONNULL_END
 CF_IMPLICIT_BRIDGING_DISABLED

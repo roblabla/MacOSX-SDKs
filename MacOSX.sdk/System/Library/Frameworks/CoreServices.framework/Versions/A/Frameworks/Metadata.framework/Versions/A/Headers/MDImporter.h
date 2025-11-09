@@ -1,8 +1,6 @@
-/**
- *      filename: MDImporter.h
- *      created : Thu Apr  8 13:33:00 2004
- *      LastEditDate Was "Thu Jul  7 14:09:31 2005"
- *
+/*
+ *       MDImporter.h
+ *       Copyright (c) 2004-2019, Apple Inc. All rights reserved.
  */
 
 /*!
@@ -16,9 +14,10 @@
 #if !defined(__MDIMPORTER__)
 #define __MDIMPORTER__ 1
 
+#include <CoreFoundation/CoreFoundation.h>
+
 #if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
 
-#include <CoreFoundation/CoreFoundation.h>
 #include <Metadata/MDItem.h>
 
 #if defined(__cplusplus)
@@ -136,5 +135,6 @@ typedef struct {
 }
 #endif
 
-#endif
-#endif
+#endif /* MAC_OS_X_VERSION_MAX_ALLOWED */
+
+#endif /* __MDIMPORTER__ */

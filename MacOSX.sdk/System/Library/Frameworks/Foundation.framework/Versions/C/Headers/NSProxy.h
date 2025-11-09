@@ -1,5 +1,5 @@
 /*	NSProxy.h
-	Copyright (c) 1994-2018, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2019, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -25,8 +25,8 @@ NS_ROOT_CLASS
 @property (readonly, copy) NSString *debugDescription;
 + (BOOL)respondsToSelector:(SEL)aSelector;
 
-- (BOOL)allowsWeakReference NS_UNAVAILABLE;
-- (BOOL)retainWeakReference NS_UNAVAILABLE;
+- (BOOL)allowsWeakReference API_UNAVAILABLE(macos, ios, watchos, tvos);
+- (BOOL)retainWeakReference API_UNAVAILABLE(macos, ios, watchos, tvos);
 
 // - (id)forwardingTargetForSelector:(SEL)aSelector;
 

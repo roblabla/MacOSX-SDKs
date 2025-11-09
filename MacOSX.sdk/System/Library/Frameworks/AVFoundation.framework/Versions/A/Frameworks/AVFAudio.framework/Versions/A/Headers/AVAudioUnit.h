@@ -24,7 +24,7 @@ NS_ASSUME_NONNULL_BEGIN
         An AVAudioUnit is an AVAudioNode implemented by an audio unit. Depending on the type of
         the audio unit, audio is processed either in real-time or non real-time.
 */
-OS_EXPORT API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0)) API_UNAVAILABLE(watchos)
+API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 @interface AVAudioUnit : AVAudioNode
 
 #if AVAUDIOUNIT_HAVE_AUDIOUNIT
@@ -54,6 +54,7 @@ OS_EXPORT API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0)) API_UNAVAILABLE(watch
     @param url
         NSURL of the .aupreset file.
 	@param outError
+        A pointer to a NSError object
     @discussion
         If the .aupreset file cannot be successfully loaded, an error is returned.
 */

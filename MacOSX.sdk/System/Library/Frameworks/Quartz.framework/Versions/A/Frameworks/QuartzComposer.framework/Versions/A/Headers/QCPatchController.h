@@ -2,6 +2,7 @@
 	Copyright:	(c) 2003-2010 by Apple Inc.  All rights reserved.
 */
 
+#import <QuartzComposer/QuartzComposerDefines.h>
 #import <AppKit/AppKit.h>
 
 /* NOTES:
@@ -10,6 +11,7 @@
  - UI elements may be bound to the controller using the keys of published input/output ports to control the parameters of the composition.
 */
 
+QC_CLASS_DEPRECATED_MAC(10_15)
 @interface QCPatchController : NSController
 {
 @private

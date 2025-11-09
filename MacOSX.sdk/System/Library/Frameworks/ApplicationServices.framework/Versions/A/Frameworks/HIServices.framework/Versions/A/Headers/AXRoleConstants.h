@@ -415,6 +415,7 @@
 #define kAXSystemDialogSubrole				CFSTR("AXSystemDialog")
 #define kAXFloatingWindowSubrole			CFSTR("AXFloatingWindow")
 #define kAXSystemFloatingWindowSubrole		CFSTR("AXSystemFloatingWindow")
+#define kAXDecorativeSubrole				CFSTR("AXDecorative")
 #define kAXIncrementArrowSubrole			CFSTR("AXIncrementArrow")
 #define kAXDecrementArrowSubrole			CFSTR("AXDecrementArrow")
 #define kAXIncrementPageSubrole				CFSTR("AXIncrementPage")

@@ -1,17 +1,18 @@
 /*
 	NSForm.h
 	Application Kit
-	Copyright (c) 1994-2018, Apple Inc.
+	Copyright (c) 1994-2019, Apple Inc.
 	All rights reserved.
 */
 
 #import <AppKit/NSMatrix.h>
 
 NS_ASSUME_NONNULL_BEGIN
+API_UNAVAILABLE_BEGIN(ios)
 
 @class NSFormCell;
 
-NS_CLASS_DEPRECATED_MAC(10_0, 10_10, "Use NSTextField directly instead, and consider NSStackView for layout assistance")
+API_DEPRECATED("Use NSTextField directly instead, and consider NSStackView for layout assistance", macos(10.0,10.10))
 @interface  NSForm : NSMatrix
 
 - (NSInteger)indexOfSelectedItem;
@@ -19,8 +20,10 @@ NS_CLASS_DEPRECATED_MAC(10_0, 10_10, "Use NSTextField directly instead, and cons
 - (void)setInterlineSpacing:(CGFloat)spacing;
 - (void)setBordered:(BOOL)flag;
 - (void)setBezeled:(BOOL)flag;
+#if !TARGET_OS_IPHONE
 - (void)setTitleAlignment:(NSTextAlignment)mode;
 - (void)setTextAlignment:(NSTextAlignment)mode;
+#endif
 - (void)setTitleFont:(NSFont *)fontObj;
 - (void)setTextFont:(NSFont *)fontObj;
 - (null_unspecified id)cellAtIndex:(NSInteger)index;
@@ -31,8 +34,10 @@ NS_CLASS_DEPRECATED_MAC(10_0, 10_10, "Use NSTextField directly instead, and cons
 - (NSInteger)indexOfCellWithTag:(NSInteger)tag;
 - (void)selectTextAtIndex:(NSInteger)index;
 - (void)setFrameSize:(NSSize)newSize;
+#if !TARGET_OS_IPHONE
 - (void)setTitleBaseWritingDirection:(NSWritingDirection)writingDirection;
 - (void)setTextBaseWritingDirection:(NSWritingDirection)writingDirection;
+#endif
 
 /* Determine the preferred width of the text field portion of the receiver's cells. The preferred width is reflected in the cell's cellSize, which will be large enough to accommodate the title, bezel, and a text field of width preferredTextWidth. It is also reflected in the intrinsicContentSize of the NSForm. That is, under autolayout, the NSForm will try to size itself so that the text field cell is the given width, according to the usual content size constraint priorities.
  
@@ -40,9 +45,10 @@ NS_CLASS_DEPRECATED_MAC(10_0, 10_10, "Use NSTextField directly instead, and cons
 
  This method can aid migration to autolayout, and is sufficient for simple cases. However, for new apps, prefer to use NSTextFields directly instead of NSForm.
 */
-- (void)setPreferredTextFieldWidth:(CGFloat)preferredWidth NS_AVAILABLE_MAC(10_8);
-- (CGFloat)preferredTextFieldWidth NS_AVAILABLE_MAC(10_8);
+- (void)setPreferredTextFieldWidth:(CGFloat)preferredWidth API_AVAILABLE(macos(10.8));
+- (CGFloat)preferredTextFieldWidth API_AVAILABLE(macos(10.8));
 
 @end
 
+API_UNAVAILABLE_END
 NS_ASSUME_NONNULL_END

@@ -1,6 +1,6 @@
 /*
     File:		IOBluetoothSDPServiceRecord.h
-    Copyright:	© 2002 by Apple Computer, Inc. All rights reserved.
+    Copyright:	ï¿½ 2002 by Apple Computer, Inc. All rights reserved.
 	Writers:	Eric Brown
 */
 
@@ -20,6 +20,7 @@
                 dictionary is keyed off of the attribute ID of each attribute represented as an NSNumber.
 */
 
+API_UNAVAILABLE(ios, watchos, tvos)
 @interface IOBluetoothSDPServiceRecord : NSObject <NSCoding, NSSecureCoding> {
     NSDictionary		*mAttributeDictionary;
     IOBluetoothDevice	*mDeviceForService;
@@ -53,9 +54,9 @@
  The "Persistent" local attribute must be either a boolean or number representing whether the service
  should be persistent.  A persistent service will be saved off and restored any time the Bluetooth
  hardware is present.  It will persist through reboots and can only be removed by calling
- IOBluetoothRemoveServiceWithRecordHandle().  This attribute is optional.  By default, if no
+ IOBluetoothRemoveServiceWithRecordHandle(void).  This attribute is optional.  By default, if no
  "Persistent" local property is present,	the service will only exist temporarily.  It will
- be removed either when IOBluetoothRemoveServiceWithRecordHandle() is called or when the client
+ be removed either when IOBluetoothRemoveServiceWithRecordHandle(void) is called or when the client
  application exits.
  
  The "TargetApplication" local attribute is used to specify an application to be launched when a
@@ -129,7 +130,6 @@
 */
 
 @property(readonly, retain) IOBluetoothDevice *device;
-- (IOBluetoothDevice *)getDevice DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 /*!
     @method		attributes
@@ -141,7 +141,6 @@
 */
 
 @property(readonly, copy) NSDictionary *attributes;
-- (NSDictionary *)getAttributes DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 /*!
     @method		getAttributeDataElement:

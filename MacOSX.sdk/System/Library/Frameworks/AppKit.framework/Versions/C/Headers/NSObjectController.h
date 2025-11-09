@@ -1,7 +1,7 @@
 /*
 	NSObjectController.h
 	Application Kit
-	Copyright (c) 2002-2018, Apple Inc.
+	Copyright (c) 2002-2019, Apple Inc.
 	All rights reserved.
  */
 
@@ -11,31 +11,11 @@
 
 
 NS_ASSUME_NONNULL_BEGIN
+API_UNAVAILABLE_BEGIN(ios)
 
 @class NSPredicate, NSManagedObjectContext, NSFetchRequest, NSError;
 
-@interface NSObjectController : NSController {
-@private
-    void *_reserved3 __unused APPKIT_IVAR;
-    id _managedProxy APPKIT_IVAR;
-    struct __objectControllerFlags {
-        unsigned int _editable:1;
-        unsigned int _automaticallyPreparesContent:1;
-        unsigned int _hasLoadedData:1;
-        unsigned int _explicitlyCannotAdd:1;
-        unsigned int _explicitlyCannotRemove:1;
-        unsigned int _isUsingManagedProxy:1;
-        unsigned int _hasFetched:1;
-        unsigned int _batches:1;
-        unsigned int _reservedObjectController:24;
-    } _objectControllerFlags APPKIT_IVAR;
-    NSString *_objectClassName APPKIT_IVAR;
-    Class _objectClass APPKIT_IVAR;
-    NSArray *_contentObjectArray APPKIT_IVAR;
-@protected    // all instance variables are private
-    id _content APPKIT_IVAR;
-    id _objectHandler APPKIT_IVAR;
-}
+@interface NSObjectController : NSController
 
 - (instancetype)initWithContent:(nullable id)content NS_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(NSCoder *)coder NS_DESIGNATED_INITIALIZER;
@@ -73,13 +53,14 @@ NS_ASSUME_NONNULL_BEGIN
 - (IBAction)fetch:(nullable id)sender;
 
 
-@property BOOL usesLazyFetching NS_AVAILABLE_MAC(10_5); // defaults to NO. 
+@property BOOL usesLazyFetching API_AVAILABLE(macos(10.5)); // defaults to NO. 
 
-- (NSFetchRequest *)defaultFetchRequest NS_AVAILABLE_MAC(10_5);
+- (NSFetchRequest *)defaultFetchRequest API_AVAILABLE(macos(10.5));
 
 
 @end
 
+API_UNAVAILABLE_END
 NS_ASSUME_NONNULL_END
 
 

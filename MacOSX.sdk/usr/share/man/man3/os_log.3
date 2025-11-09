@@ -22,12 +22,12 @@
 .Ft void
 .Fn os_log_fault "os_log_t log" "const char *format" ...
 .Sh DESCRIPTION
-.Pp
 The unified logging system provides a single, efficient, high performance set of APIs for capturing log messages across all levels of the system.
 This unified system centralizes the storage of log data in memory and in a data store on disk.
 The system implements global settings that govern logging behavior and persistence, while at the same time providing fine-grained control during debugging via the
 .Xr log 1
-command-line tool and through the use of custom logging configuration profiles.
+command-line tool and through the use of custom logging configuration profiles (see
+.Xr os_log 5 ) .
 Log messages are viewed using the Console app in /Applications/Utilities/ and the
 .Xr log 1
 command-line tool.
@@ -77,10 +77,12 @@ Generally, use the OS_LOG_DEFAULT constant to perform logging using the system d
 Create a custom log object when you want to tag messages with a specific subsystem and category for the purpose of filtering, or to customize the logging behavior of your subsystem with a profile for debugging purposes.
 .Pp
 .Nm os_log
-is a "default" type of log message that always captured in memory or on disk from system.  Limit use to messages that would help diagnose a failure, crash, etc. for production installations.
+is a "default" type of log message that is always captured in memory and on disk.  Limit use to messages that would help diagnose a failure, crash, etc. for production installations.
 .Pp
 .Nm os_log_info
-is an "info" type of log message used for additional information.  Depending on configuration these messages may be enabled and only captured in memory.  They can be optionally configured to persist to disk using a profile or via tools.
+is an "info" type of log message used for additional information.  Depending on configuration these messages may be enabled and only captured in memory.  They can be optionally configured to persist to disk using a profile or via the
+.Xr log 1
+command-line tool.
 .Pp
 .Nm os_log_debug
 is a "debug" type of log message that is only recorded when it is specifically requested by tools or configured as such.  Debug messages should be used for development use, i.e., additional information that is typically only useful during code development.
@@ -118,5 +120,6 @@ int main(int argc, const char * argv[])
 .Pp
 .Sh SEE ALSO
 .Xr log 1 ,
+.Xr os_activity_initiate 3 ,
 .Xr os_log_create 3 ,
-.Xr os_activity_initiate 3
+.Xr os_log 5

@@ -109,13 +109,13 @@ API_AVAILABLE(macos(10.13), ios(11.0))
  * @method setRenderPipelineState:atIndex
  * @brief Sets a render pipeline state at a given bind point index
  */
-- (void)setRenderPipelineState:(nullable id <MTLRenderPipelineState>)pipeline atIndex:(NSUInteger)index API_AVAILABLE(macos(10.14)) API_UNAVAILABLE(ios);
+- (void)setRenderPipelineState:(nullable id <MTLRenderPipelineState>)pipeline atIndex:(NSUInteger)index API_AVAILABLE(macos(10.14), macCatalyst(13.0)) API_UNAVAILABLE(ios);
 
 /*!
  * @method setRenderPipelineStates:withRange
  * @brief Set an array of render pipeline states at a given bind point index range
  */
-- (void)setRenderPipelineStates:(const id <MTLRenderPipelineState> __nullable [__nonnull])pipelines withRange:(NSRange)range API_AVAILABLE(macos(10.14)) API_UNAVAILABLE(ios);
+- (void)setRenderPipelineStates:(const id <MTLRenderPipelineState> __nullable [__nonnull])pipelines withRange:(NSRange)range API_AVAILABLE(macos(10.14), macCatalyst(13.0)) API_UNAVAILABLE(ios);
 
 
 /*!
@@ -136,7 +136,7 @@ API_AVAILABLE(macos(10.13), ios(11.0))
  * in the buffer associated with a given index.
  * Returns nil if the resource at the given index is not an argument buffer.
  */
-- (nullable id<MTLArgumentEncoder>)newArgumentEncoderForBufferAtIndex:(NSUInteger)index API_AVAILABLE(macos(10.13)) API_UNAVAILABLE(ios);
+- (nullable id<MTLArgumentEncoder>)newArgumentEncoderForBufferAtIndex:(NSUInteger)index API_AVAILABLE(macos(10.13), ios(11.0));
 
 @end
 

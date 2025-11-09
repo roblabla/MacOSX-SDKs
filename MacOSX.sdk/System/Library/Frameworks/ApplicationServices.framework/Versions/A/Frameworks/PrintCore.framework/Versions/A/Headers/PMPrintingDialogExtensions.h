@@ -62,6 +62,7 @@ Define the Kind IDs for Universal and Standard Printing Dialog Extensions.
 /* Unimplemented Standard */
 #define kPMColorPDEKindID               CFSTR("com.apple.print.pde.ColorKind")
 #define kPMMediaQualityPDEKindID        CFSTR("com.apple.print.pde.MediaQualityPDEKind")
+#define kPMWatermarkPDEKindID           CFSTR("com.apple.print.pde.WatermarkPDEKind")
 
 /* Key to represent information about display order for Cocoa summary info */
 #define	SUMMARY_DISPLAY_ORDER		CFSTR("Summary Display Order")

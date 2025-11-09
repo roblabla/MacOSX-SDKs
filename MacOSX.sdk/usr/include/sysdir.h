@@ -56,7 +56,7 @@ OS_ENUM(sysdir_search_path_directory, unsigned int,
 );
 
 // Available OSX 10.12, iOS 10.0, WatchOS 3.0 and TVOS 10.0. Not all enum identifiers are useful on all platforms.
-OS_ENUM(sysdir_search_path_domain_mask, unsigned int,
+OS_OPTIONS(sysdir_search_path_domain_mask, unsigned int,
     SYSDIR_DOMAIN_MASK_USER                 = ( 1UL << 0 ), // user's home directory --- place to install user's personal items (~)
     SYSDIR_DOMAIN_MASK_LOCAL                = ( 1UL << 1 ), // local to the current machine --- place to install items available to everyone on this machine
     SYSDIR_DOMAIN_MASK_NETWORK              = ( 1UL << 2 ), // publically available location in the local area network --- place to install items available on the network (/Network)

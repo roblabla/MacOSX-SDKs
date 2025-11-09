@@ -2,7 +2,7 @@
 //  CNContactStore.h
 //  Contacts
 //
-//  Copyright (c) 2015 Apple Inc. All rights reserved.
+//  Copyright (c) 2015–2019 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -11,7 +11,14 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class CNContact, CNGroup, CNContainer, CNContactFetchRequest, CNSaveRequest;
+@class CNContact;
+@class CNGroup;
+@class CNContainer;
+@class CNChangeHistoryEvent;
+@class CNContactFetchRequest;
+@class CNChangeHistoryFetchRequest;
+@class CNFetchResult<ValueType>;
+@class CNSaveRequest;
 
 /*!
  * @abstract The entities the user can grant access to.
@@ -91,7 +98,7 @@ NS_CLASS_AVAILABLE(10_11, 9_0)
  * @param error If an error occurs, contains error information.
  * @return An array of CNContact objects matching the predicate. If no matches are found, an empty array is returned. If an error occurs, nil is returned.
  */
-- (nullable NSArray<CNContact*> *)unifiedContactsMatchingPredicate:(NSPredicate *)predicate keysToFetch:(NSArray<id<CNKeyDescriptor>> *)keys error:(NSError *__nullable *__nullable)error;
+- (nullable NSArray<CNContact*> *)unifiedContactsMatchingPredicate:(NSPredicate *)predicate keysToFetch:(NSArray<id<CNKeyDescriptor>> *)keys error:(NSError **)error;
 
 /*!
  * @abstract Fetch a unified contact with a given identifier.
@@ -103,7 +110,7 @@ NS_CLASS_AVAILABLE(10_11, 9_0)
  * @param error If an error occurs, contains error information.
  * @return The unified contact matching or linked to the identifier. If no contact with the given identifier is found, nil is returned and error is set to CNErrorCodeRecordDoesNotExist.
  */
-- (nullable CNContact *)unifiedContactWithIdentifier:(NSString *)identifier keysToFetch:(NSArray<id<CNKeyDescriptor>> *)keys error:(NSError *__nullable *__nullable)error;
+- (nullable CNContact *)unifiedContactWithIdentifier:(NSString *)identifier keysToFetch:(NSArray<id<CNKeyDescriptor>> *)keys error:(NSError **)error;
 
 /*!
  * @abstract Fetch the unified contact that is the "me" card.
@@ -114,22 +121,59 @@ NS_CLASS_AVAILABLE(10_11, 9_0)
  * @param error If an error occurs, contains error information.
  * @return The unified contact that is the "me" card. If no "me" card is set, nil is returned.
  */
-- (nullable CNContact *)unifiedMeContactWithKeysToFetch:(NSArray<id<CNKeyDescriptor>> *)keys error:(NSError *__nullable *__nullable)error NS_AVAILABLE(10_11, NA) __WATCHOS_PROHIBITED;
+- (nullable CNContact *)unifiedMeContactWithKeysToFetch:(NSArray<id<CNKeyDescriptor>> *)keys error:(NSError **)error NS_AVAILABLE(10_11, NA) __WATCHOS_PROHIBITED;
 
 
 #pragma mark - Fetch and Save
 
 /*!
+ * @abstract    Enumerate a contact fetch request.
+ *
+ * @discussion  Executes the given fetch request and returns an enumerator for the results.
+ *              This may prevent all records from being loaded into memory at once.
+ *
+ *              An exception may be thrown if an error occurs during enumeration.
+ *
+ * @param       request
+ *              A description of the records to fetch.
+ *
+ * @param       error
+ *              If the fetch fails, contains an @c NSError object with more information.
+ *
+ * @return      An enumerator of the records matching the result, or @c nil if there was an error.
+ */
+- (nullable CNFetchResult<NSEnumerator<CNContact *> *> *)enumeratorForContactFetchRequest:(CNContactFetchRequest *)request error:(NSError **)error API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0)) NS_SWIFT_UNAVAILABLE("");
+
+/*!
+ * @abstract    Enumerate a change history fetch request.
+ *
+ * @discussion  Executes the given fetch request and returns an enumerator for the results.
+ *              This may prevent all events from being loaded into memory at once.
+ *
+ *              An exception may be thrown if an error occurs during enumeration.
+ *
+ * @param       request
+ *              A description of the events to fetch.
+ *
+ * @param       error
+ *              If the fetch fails, contains an @c NSError object with more information.
+ *
+ * @return      An enumerator of the events matching the result, or @c nil if there was an error.
+ */
+- (nullable CNFetchResult<NSEnumerator<CNChangeHistoryEvent *> *> *)enumeratorForChangeHistoryFetchRequest:(CNChangeHistoryFetchRequest *)request error:(NSError **)error API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0)) NS_SWIFT_UNAVAILABLE("");
+
+
+/*!
  * @abstract Enumerates all contacts matching a contact fetch request.
  *
- * @discussion This method will wait until the enumeration is finished. If there are no results the block is not called and YES is returned.
+ * @discussion This method will wait until the enumeration is finished. If there are no results, the block is not called and YES is returned.
  *
  * @param fetchRequest The contact fetch request that specifies the search criteria.
  * @param error If an error occurs, contains error information.
  * @param block Called for each matching contact. Set *stop to YES to stop the enumeration.
  * @return YES if successful, otherwise NO.
  */
-- (BOOL)enumerateContactsWithFetchRequest:(CNContactFetchRequest *)fetchRequest error:(NSError *__nullable *__nullable)error usingBlock:(void (^)(CNContact *contact, BOOL *stop))block;
+- (BOOL)enumerateContactsWithFetchRequest:(CNContactFetchRequest *)fetchRequest error:(NSError **)error usingBlock:(void (^)(CNContact *contact, BOOL *stop))block;
 
 /*!
  * @abstract Fetch all groups matching a given predicate.
@@ -140,7 +184,7 @@ NS_CLASS_AVAILABLE(10_11, 9_0)
  * @param error If an error occurs, contains error information.
  * @return An array of CNGroup objects matching the predicate. If no matches are found, an empty array is returned. If an error occurs, nil is returned.
  */
-- (nullable NSArray<CNGroup*> *)groupsMatchingPredicate:(nullable NSPredicate *)predicate error:(NSError *__nullable *__nullable)error;
+- (nullable NSArray<CNGroup*> *)groupsMatchingPredicate:(nullable NSPredicate *)predicate error:(NSError **)error;
 
 /*!
  * @abstract Fetch all containers matching a given predicate.
@@ -151,7 +195,7 @@ NS_CLASS_AVAILABLE(10_11, 9_0)
  * @param error If an error occurs, contains error information.
  * @return An array of CNContainer objects matching the predicate. If no matches are found, an empty array is returned. If an error occurs, nil is returned.
  */
-- (nullable NSArray<CNContainer*> *)containersMatchingPredicate:(nullable NSPredicate *)predicate error:(NSError *__nullable *__nullable)error;
+- (nullable NSArray<CNContainer*> *)containersMatchingPredicate:(nullable NSPredicate *)predicate error:(NSError **)error;
 
 /*!
  * @abstract Executes a save request.
@@ -162,10 +206,17 @@ NS_CLASS_AVAILABLE(10_11, 9_0)
  * @param error If an error occurs, contains error information.
  * @return YES if successful, otherwise NO.
  */
-- (BOOL)executeSaveRequest:(CNSaveRequest *)saveRequest error:(NSError *__nullable *__nullable)error __WATCHOS_PROHIBITED;
+- (BOOL)executeSaveRequest:(CNSaveRequest *)saveRequest error:(NSError **)error __WATCHOS_PROHIBITED;
 
 
 #pragma mark - Miscellaneous
+
+/*!
+ *  @abstract The current history token.
+ *
+ *  @discussion Retrieve the current history token. If you are fetching contacts or change history events, you should use the token on the @c CNFetchResult instead.
+ */
+@property (nonatomic, readonly, copy) NSData * currentHistoryToken API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0));
 
 /*!
  *  @abstract The identifier of the default container.

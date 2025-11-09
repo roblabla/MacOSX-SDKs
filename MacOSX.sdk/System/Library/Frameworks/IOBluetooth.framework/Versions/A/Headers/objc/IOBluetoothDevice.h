@@ -49,6 +49,7 @@
 //	Async callbacks informal protocol
 //====================================================================================================================
 
+API_UNAVAILABLE(ios, watchos, tvos)
 @protocol IOBluetoothDeviceAsyncCallbacks
 
 - (void)remoteNameRequestComplete:(IOBluetoothDevice *)device status:(IOReturn)status;
@@ -71,6 +72,7 @@
 //	IOBluetoothDevice
 //====================================================================================================================
 
+API_UNAVAILABLE(ios, watchos, tvos)
 @interface IOBluetoothDevice : IOBluetoothObject <NSCoding, NSSecureCoding>
 {
     id									mServerDevice;
@@ -157,7 +159,6 @@
 */
 
 + (instancetype)deviceWithAddress:(const BluetoothDeviceAddress *)address;
-+ (instancetype)withAddress:(const BluetoothDeviceAddress *)address DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 /*!
  @property	deviceWithAddressString:
@@ -169,25 +170,6 @@
  */
 
 + (instancetype)deviceWithAddressString:(NSString *)address ;
-
-/*!
-    @property	withDeviceRef:
-	@abstract	Method call to convert an IOBluetoothDeviceRef into an IOBluetoothDevice *.
-	@discussion	IOBluetoothDeviceRef and it's API are deprecated.  An IOBluetoothDeviceRef can be cast to a IOBluetoothDevice *
-	@param		deviceRef IOBluetoothDeviceRef for which an IOBluetoothDevice * is desired.
-	@result		Returns the IOBluetoothDevice * for the given IOBluetoothDeviceRef.
-*/
-
-+ (instancetype)withDeviceRef:(IOBluetoothDeviceRef)deviceRef DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
-
-/*!
-    @property	getDeviceRef
-	@abstract	Returns an IOBluetoothDeviceRef representation of the target IOBluetoothDevice object.
-	@discussion	IOBluetoothDeviceRef and it's API are deprecated.  An IOBluetoothDeviceRef can be cast to a IOBluetoothDevice *
-	@result		Returns an IOBluetoothDeviceRef representation of the target IOBluetoothDevice object.
-*/
-
-- (IOBluetoothDeviceRef)getDeviceRef DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 // L2CAP channel.
 
@@ -283,23 +265,6 @@
 - (IOReturn)sendL2CAPEchoRequest:(void *)data length:(UInt16)length;
 
 /*!
-    @property	openRFCOMMChannel:channel:
-	@abstract	Opens a new RFCOMM channel to the target device. Returns only once the channel is open or failed to open.
-	@discussion	This method will begin the process of opening a new RFCOMM channel to the target device.  
-                The baseband connection to the device will be opened if it is not open already.  The RFCOMM
-                channel open process will not complete until the client has registered an incoming data 
-                listener on the new channel.
-	@param		channelID		The RFCOMM channel ID for the new channel.
-	@param		rfcommChannel	A pointer to an IOBluetoothRFCOMMChannel object to receive the RFCOMM channel 
-                                requested to be opened.  The rfcommChannel pointer will only be set if 
-                                kIOReturnSuccess is returned.
-	@result		Returns kIOReturnSuccess if the open process was successfully started (or if an existing
-                RFCOMM channel was found). 
-*/
-
-- (IOReturn)openRFCOMMChannel:(BluetoothRFCOMMChannelID)channelID channel:(IOBluetoothRFCOMMChannel **)rfcommChannel DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
-
-/*!
     @property	openRFCOMMChannelSync:withChannelID:delegate:
 	@abstract	Opens a new RFCOMM channel to the target device.  Returns only once the channel is open or failed to open.
 	@discussion	This method will begin the process of opening a new RFCOMM channel to the target device.  
@@ -383,7 +348,6 @@
 */
 
 @property(readonly) BluetoothClassOfDevice classOfDevice;
-- (BluetoothClassOfDevice)getClassOfDevice DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 /*!
     @property	getServiceClassMajor
@@ -395,7 +359,6 @@
 */
 
 @property(readonly) BluetoothServiceClassMajor serviceClassMajor;
-- (BluetoothServiceClassMajor)getServiceClassMajor DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 /*!
     @property	getDeviceClassMajor
@@ -407,7 +370,6 @@
 */
 
 @property(readonly) BluetoothDeviceClassMajor deviceClassMajor;
-- (BluetoothDeviceClassMajor)getDeviceClassMajor DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 /*!
     @property	getDeviceClassMinor
@@ -419,7 +381,6 @@
 */
 
 @property(readonly) BluetoothDeviceClassMinor deviceClassMinor;
-- (BluetoothDeviceClassMinor)getDeviceClassMinor DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 /*!
     @property	getName
@@ -433,7 +394,6 @@
 */
 
 @property(readonly, copy) NSString *name;
-- (NSString *)getName DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 /*!
     @property	getNameOrAddress
@@ -445,7 +405,6 @@
 */
 
 @property(readonly) NSString *nameOrAddress;
-- (NSString *)getNameOrAddress DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 /*!
     @property	getLastNameUpdate
@@ -455,7 +414,6 @@
 */
 
 @property(readonly, retain) NSDate *lastNameUpdate;
-- (NSDate *)getLastNameUpdate DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 /*!
     @property	getAddress
@@ -468,13 +426,12 @@
 /*!
     @property	getAddressString
 	@abstract	Get a string representation of the Bluetooth device address for the target device.  The
-				format of the string is the same as returned by IOBluetoothNSStringFromDeviceAddress().
+				format of the string is the same as returned by IOBluetoothNSStringFromDeviceAddress(void).
 	@discussion	NOTE: This method is only available in Mac OS X 10.2.4 (Bluetooth v1.1) or later.
 	@result		Returns an NSString containing the Bluetooth device address of the target device.
 */
 
 @property(readonly) NSString *addressString;
-- (NSString *)getAddressString DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 // Connecting to the device.
 
@@ -685,7 +642,6 @@
 */
 
 @property(readonly, assign) BluetoothConnectionHandle connectionHandle;
-- (BluetoothConnectionHandle)getConnectionHandle DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 /*!
     @property	isIncoming
@@ -770,7 +726,6 @@
 */
 
 @property(readonly, retain) NSArray *services;
-- (NSArray *)getServices DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 /*!
     @property	getLastServicesUpdate

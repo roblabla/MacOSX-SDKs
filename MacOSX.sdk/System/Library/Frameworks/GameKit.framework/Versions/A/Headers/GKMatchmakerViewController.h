@@ -2,7 +2,7 @@
 //  GKMatchmakerViewController.h
 //  Game Center
 //
-//  Copyright 2010-2018 Apple Inc. All rights reserved.
+//  Copyright 2010-2019 Apple Inc. All rights reserved.
 //
 
 @class GKMatchRequest, GKInvite, GKMatch, GKPlayer;
@@ -37,7 +37,7 @@ NS_CLASS_AVAILABLE(10_8, 4_1)
 
 #endif
 @property(nonatomic, nullable, assign) id<GKMatchmakerViewControllerDelegate>     matchmakerDelegate;
-@property(nonatomic, readonly, retain) GKMatchRequest                   *matchRequest;
+@property(nonatomic, readonly, strong) GKMatchRequest                   *matchRequest;
 @property(nonatomic, assign, getter=isHosted) BOOL                      hosted;  // set to YES to receive hosted (eg. not peer-to-peer) match results. Will cause the controller to return an array of players instead of a match.
 
 // Initialize with a matchmaking request, allowing the user to send invites and/or start matchmaking

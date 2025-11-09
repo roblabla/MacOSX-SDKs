@@ -98,6 +98,12 @@ extern "C" {
  *    does not affect any other input source. Input methods that
  *    provide associated input palettes may programmatically deselect
  *    the palette when the input method is deselected, for example.
+ *
+ *
+ *    Mac OS X threading:
+ *    TextInputSources API is not thread safe. If you are a UI application, you must call TextInputSources API on the main thread.
+ *    If you are a non-UI application (such as a cmd-line tool or a launchagent that does not run an event loop), you must not call TextInputSources API from multiple
+ *    threads concurrently.
  */
 /*
 *===============================================================================

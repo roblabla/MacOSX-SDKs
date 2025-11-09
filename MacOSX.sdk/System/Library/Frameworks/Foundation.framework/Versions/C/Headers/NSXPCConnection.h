@@ -1,5 +1,5 @@
 /*	NSXPCConnection.h
-        Copyright (c) 2011-2018, Apple Inc. All rights reserved.
+        Copyright (c) 2011-2019, Apple Inc. All rights reserved.
  */
 
 #import <dispatch/dispatch.h>
@@ -9,6 +9,10 @@
 #import <Foundation/NSCoder.h>
 
 #import <CoreFoundation/CFDictionary.h>
+
+#if __has_include(<xpc/xpc.h>)
+#include <xpc/xpc.h>
+#endif
 
 @class NSMutableDictionary, NSString, NSOperationQueue, NSSet<ObjectType>, NSLock, NSError;
 @class NSXPCConnection, NSXPCListener, NSXPCInterface, NSXPCListenerEndpoint;
@@ -41,7 +45,7 @@ typedef NS_OPTIONS(NSUInteger, NSXPCConnectionOptions) {
 } API_AVAILABLE(macos(10.8), ios(6.0), watchos(2.0), tvos(9.0));
 
 // This object is the main configuration mechanism for the communication between two processes. Each NSXPCConnection instance has a private serial queue. This queue is used when sending messages to reply handlers, interruption handlers, and invalidation handlers.
-NS_CLASS_AVAILABLE(10_8, 6_0)
+API_AVAILABLE(macos(10.8), ios(6.0), watchos(2.0), tvos(9.0))
 @interface NSXPCConnection : NSObject <NSXPCProxyCreating> {
 @private
     void *_xconnection;
@@ -49,14 +53,13 @@ NS_CLASS_AVAILABLE(10_8, 6_0)
     dispatch_queue_t _userQueue;
     uint32_t _state;
     uint32_t _state2;
-    void (^_interruptionHandler)();
-    void (^_invalidationHandler)();
+    void (^_interruptionHandler)(void);
+    void (^_invalidationHandler)(void);
     id _exportInfo;
     id _repliesRequested;
     id _importInfo;
     id <NSObject> _otherInfo;
     id _reserved1;
-    id _lock;
     NSXPCInterface *_remoteObjectInterface;
     NSString *_serviceName;
     NSXPCListenerEndpoint *_endpoint;
@@ -65,11 +68,11 @@ NS_CLASS_AVAILABLE(10_8, 6_0)
 }
 
 // Initialize an NSXPCConnection that will connect to the specified service name. Note: Receiving a non-nil result from this init method does not mean the service name is valid or the service has been launched. The init method simply constructs the local object.
-- (instancetype)initWithServiceName:(NSString *)serviceName __IOS_PROHIBITED __WATCHOS_PROHIBITED __TVOS_PROHIBITED;
+- (instancetype)initWithServiceName:(NSString *)serviceName API_UNAVAILABLE(ios, watchos, tvos);
 @property (nullable, readonly, copy) NSString *serviceName;
 
 // Use this if looking up a name advertised in a launchd.plist. For example, an agent with a launchd.plist in ~/Library/LaunchAgents. If the connection is being made to something in a privileged Mach bootstrap (for example, a daemon with a launchd.plist in /Library/LaunchDaemons), then use the NSXPCConnectionPrivileged option. Note: Receiving a non-nil result from this init method does not mean the service name is valid or the service has been launched. The init method simply constructs the local object.
-- (instancetype)initWithMachServiceName:(NSString *)name options:(NSXPCConnectionOptions)options __IOS_PROHIBITED __WATCHOS_PROHIBITED __TVOS_PROHIBITED;
+- (instancetype)initWithMachServiceName:(NSString *)name options:(NSXPCConnectionOptions)options API_UNAVAILABLE(ios, watchos, tvos);
 
 // Initialize an NSXPCConnection that will connect to an NSXPCListener (identified by its NSXPCListenerEndpoint).
 - (instancetype)initWithListenerEndpoint:(NSXPCListenerEndpoint *)endpoint;
@@ -116,17 +119,23 @@ NS_CLASS_AVAILABLE(10_8, 6_0)
 @property (readonly) uid_t effectiveUserIdentifier;
 @property (readonly) gid_t effectiveGroupIdentifier;
 
+// Get the current connection, in the context of a call to a method on your exported object. Useful for determining 'who called this'.
++ (nullable NSXPCConnection *)currentConnection API_AVAILABLE(macos(10.8), ios(6.0), watchos(2.0), tvos(9.0));
+
+// Add a barrier block to be executed on the connection. This barrier block will run after any outstanding sends have completed. Note: This does not guarantee that messages will be received by the remote process by the time the block is invoked. If you need to ensure receipt of a message by the remote process, waiting for a reply to come back is the best option.
+- (void)scheduleSendBarrierBlock:(void (^)(void))block API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0));
+
 @end
 
 
 // Each NSXPCListener instance has a private serial queue. This queue is used when sending the delegate messages.
-NS_CLASS_AVAILABLE(10_8, 6_0)
+API_AVAILABLE(macos(10.8), ios(6.0), watchos(2.0), tvos(9.0))
 @interface NSXPCListener : NSObject {
 @private
     void *_xconnection;
     dispatch_queue_t _userQueue;
     void *reserved0;
-    id <NSXPCListenerDelegate> _delegate;
+    id _delegate;
     NSString *_serviceName;
     uint64_t _state;
     id _reserved1;
@@ -140,10 +149,10 @@ NS_CLASS_AVAILABLE(10_8, 6_0)
 + (NSXPCListener *)anonymousListener;
 
 // Use this if listening on name advertised in a launchd.plist For example, an agent with a launchd.plist in ~/Library/LaunchAgents, or a daemon with a launchd.plist in /Library/LaunchDaemons.
-- (instancetype)initWithMachServiceName:(NSString *)name NS_DESIGNATED_INITIALIZER __IOS_PROHIBITED __WATCHOS_PROHIBITED __TVOS_PROHIBITED;
+- (instancetype)initWithMachServiceName:(NSString *)name NS_DESIGNATED_INITIALIZER API_UNAVAILABLE(ios, watchos, tvos);
 
 // The delegate for the connection listener. If no delegate is set, all new connections will be rejected. See the protocol for more information on how to implement it.
-@property (nullable, assign) id <NSXPCListenerDelegate> delegate;
+@property (nullable, weak) id <NSXPCListenerDelegate> delegate;
 
 // Get an endpoint object which may be sent over an existing connection. This allows the receiver of the endpoint to create a new connection to this NSXPCListener. The NSXPCListenerEndpoint uniquely names this listener object across connections.
 @property (readonly, retain) NSXPCListenerEndpoint *endpoint;
@@ -169,7 +178,7 @@ NS_CLASS_AVAILABLE(10_8, 6_0)
 // ----------------------------------
 
 // This object holds all information about the interface of an exported or imported object. This includes: what messages are allowed, what kinds of objects are allowed as arguments, what the signature of any reply blocks are, and any information about additional proxy objects.
-NS_CLASS_AVAILABLE(10_8, 6_0)
+API_AVAILABLE(macos(10.8), ios(6.0), watchos(2.0), tvos(9.0))
 @interface NSXPCInterface : NSObject {
 @private
     Protocol *_protocol;
@@ -192,16 +201,45 @@ NS_CLASS_AVAILABLE(10_8, 6_0)
 - (void)setInterface:(NSXPCInterface *)ifc forSelector:(SEL)sel argumentIndex:(NSUInteger)arg ofReply:(BOOL)ofReply;
 - (nullable NSXPCInterface *)interfaceForSelector:(SEL)sel argumentIndex:(NSUInteger)arg ofReply:(BOOL)ofReply;
 
+#if __has_include(<xpc/xpc.h>)
+- (void)setXPCType:(xpc_type_t)type forSelector:(SEL)sel argumentIndex:(NSUInteger)arg ofReply:(BOOL)ofReply API_AVAILABLE(macos(10.14), ios(12.0), watchos(5.0), tvos(12.0));
+- (nullable xpc_type_t)XPCTypeForSelector:(SEL)sel argumentIndex:(NSUInteger)arg ofReply:(BOOL)ofReply API_AVAILABLE(macos(10.14), ios(12.0), watchos(5.0), tvos(12.0));
+#endif
+
 @end
 
 // ----------------------------------
 
 // An instance of this class is a reference to an NSXPCListener that may be encoded and sent over a connection. The receiver may use the object to create a new connection to the listener that supplied the NSXPCListenerEndpoint object.
-NS_CLASS_AVAILABLE(10_8, 6_0)
+API_AVAILABLE(macos(10.8), ios(6.0), watchos(2.0), tvos(9.0))
 @interface NSXPCListenerEndpoint : NSObject <NSSecureCoding> {
 @private
     void *_internal;
 }
+@end
+
+// ----------------------------------
+
+// An NSXPCCoder is used to encode or decode objects sent over an NSXPCConnection. If you want to encode or decode objects differently when sent over an NSXPCConnection, you may use isKindOfClass: to check that the coder is a kind of NSXPCCoder.
+API_AVAILABLE(macos(10.8), ios(6.0), watchos(2.0), tvos(9.0))
+@interface NSXPCCoder : NSCoder {
+@private
+    id <NSObject> _userInfo;
+    id _reserved1;
+}
+
+#if __has_include(<xpc/xpc.h>)
+- (void)encodeXPCObject:(xpc_object_t)xpcObject forKey:(NSString *)key;
+
+// This validates the type of the decoded object matches the type passed in. If they do not match, an exception is thrown (just like the rest of Secure Coding behaves). Note: This can return NULL, but calling an xpc function with NULL will crash. So make sure to do the right thing if you get back a NULL result.
+- (nullable xpc_object_t)decodeXPCObjectOfType:(xpc_type_t)type forKey:(NSString *)key API_AVAILABLE(macos(10.9), ios(7.0), watchos(2.0), tvos(9.0));
+#endif
+
+@property (nullable, retain) id <NSObject> userInfo;
+
+// The current NSXPCConnection that is encoding or decoding.
+@property (nullable, readonly, strong) NSXPCConnection *connection API_AVAILABLE(macosx(10.12), ios(10.0), watchos(3.0), tvos(10.0));
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -1,7 +1,7 @@
 /*
     NSIncrementalStore.h
     Core Data
-    Copyright (c) 2004-2018, Apple Inc.
+    Copyright (c) 2004-2019, Apple Inc.
     All rights reserved.
 */
 
@@ -23,13 +23,6 @@ NS_ASSUME_NONNULL_BEGIN
 // data incrementally, allowing for the management of large and/or shared datasets.
 API_AVAILABLE(macosx(10.7),ios(5.0))
 @interface NSIncrementalStore : NSPersistentStore {
-#if (!__OBJC2__)
-@private
-	NSDictionary *_storeMetadata;
-	uint64_t _lastIdentifier;
-	void* _reserveda;
-	void* _reservedb;
-#endif
 }
 
 // CoreData expects loadMetadata: to validate that the URL used to create the store is usable

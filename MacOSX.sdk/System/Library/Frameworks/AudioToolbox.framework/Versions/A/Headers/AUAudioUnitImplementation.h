@@ -1,3 +1,4 @@
+#if (defined(USE_AUDIOTOOLBOX_PUBLIC_HEADERS) && USE_AUDIOTOOLBOX_PUBLIC_HEADERS) || !__has_include(<AudioToolboxCore/AUAudioUnitImplementation.h>)
 /*!
 	@file		AUAudioUnitImplementation.h
  	@framework	AudioToolbox.framework
@@ -96,7 +97,9 @@ registration "wins", though if an app attempts to open it synchronously, with
 AudioComponentInstanceNew, then the system will fall back to the version 2 implementation.
 */
 
-#if __OBJC2__
+#ifndef AudioToolbox_AUAudioUnitImplementation_h
+#define AudioToolbox_AUAudioUnitImplementation_h
+#ifdef __OBJC2__
 
 #import <AudioToolbox/AUAudioUnit.h>
 
@@ -396,7 +399,7 @@ typedef NSString *__nonnull (^AUImplementorDisplayNameWithLengthCallback)(AUPara
 		Hosts should not access this class; it will be instantiated when needed when creating an
 		AUAudioUnit.
 */
-OS_EXPORT API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0))
+API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0))
 @interface AUAudioUnitV2Bridge : AUAudioUnit
 @end
 
@@ -429,3 +432,7 @@ OS_EXPORT API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0))
 NS_ASSUME_NONNULL_END
 
 #endif // __OBJC2__
+#endif // AudioToolbox_AUAudioUnitImplementation_h
+#else
+#include <AudioToolboxCore/AUAudioUnitImplementation.h>
+#endif

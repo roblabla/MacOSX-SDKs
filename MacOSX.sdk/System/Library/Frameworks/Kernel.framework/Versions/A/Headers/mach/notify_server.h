@@ -59,6 +59,10 @@ typedef function_table_entry   *function_table_t;
 __BeforeMigServerHeader
 #endif /* __BeforeMigServerHeader */
 
+#ifndef MIG_SERVER_ROUTINE
+#define MIG_SERVER_ROUTINE
+#endif
+
 
 /* SimpleRoutine mach_notify_port_deleted */
 #ifdef	mig_external
@@ -66,6 +70,7 @@ mig_external
 #else
 extern
 #endif	/* mig_external */
+MIG_SERVER_ROUTINE
 kern_return_t do_mach_notify_port_deleted
 (
 	mach_port_t notify,
@@ -78,6 +83,7 @@ mig_external
 #else
 extern
 #endif	/* mig_external */
+MIG_SERVER_ROUTINE
 kern_return_t do_mach_notify_port_destroyed
 (
 	mach_port_t notify,
@@ -90,6 +96,7 @@ mig_external
 #else
 extern
 #endif	/* mig_external */
+MIG_SERVER_ROUTINE
 kern_return_t do_mach_notify_no_senders
 (
 	mach_port_t notify,
@@ -102,6 +109,7 @@ mig_external
 #else
 extern
 #endif	/* mig_external */
+MIG_SERVER_ROUTINE
 kern_return_t do_mach_notify_send_once
 (
 	mach_port_t notify
@@ -113,6 +121,7 @@ mig_external
 #else
 extern
 #endif	/* mig_external */
+MIG_SERVER_ROUTINE
 kern_return_t do_mach_notify_dead_name
 (
 	mach_port_t notify,
@@ -154,7 +163,7 @@ extern const struct do_notify_subsystem {
 #define __Request__notify_subsystem__defined
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -162,11 +171,11 @@ extern const struct do_notify_subsystem {
 		mach_port_name_t name;
 	} __Request__mach_notify_port_deleted_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -176,11 +185,11 @@ extern const struct do_notify_subsystem {
 		/* end of the kernel processed data */
 	} __Request__mach_notify_port_destroyed_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -188,21 +197,21 @@ extern const struct do_notify_subsystem {
 		mach_port_mscount_t mscount;
 	} __Request__mach_notify_no_senders_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
 	} __Request__mach_notify_send_once_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -210,7 +219,7 @@ extern const struct do_notify_subsystem {
 		mach_port_name_t name;
 	} __Request__mach_notify_dead_name_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 #endif /* !__Request__notify_subsystem__defined */
 
@@ -233,7 +242,7 @@ union __RequestUnion__do_notify_subsystem {
 #define __Reply__notify_subsystem__defined
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -241,11 +250,11 @@ union __RequestUnion__do_notify_subsystem {
 		kern_return_t RetCode;
 	} __Reply__mach_notify_port_deleted_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -253,11 +262,11 @@ union __RequestUnion__do_notify_subsystem {
 		kern_return_t RetCode;
 	} __Reply__mach_notify_port_destroyed_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -265,11 +274,11 @@ union __RequestUnion__do_notify_subsystem {
 		kern_return_t RetCode;
 	} __Reply__mach_notify_no_senders_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -277,11 +286,11 @@ union __RequestUnion__do_notify_subsystem {
 		kern_return_t RetCode;
 	} __Reply__mach_notify_send_once_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -289,7 +298,7 @@ union __RequestUnion__do_notify_subsystem {
 		kern_return_t RetCode;
 	} __Reply__mach_notify_dead_name_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 #endif /* !__Reply__notify_subsystem__defined */
 
@@ -305,7 +314,7 @@ union __ReplyUnion__do_notify_subsystem {
 	__Reply__mach_notify_send_once_t Reply_mach_notify_send_once;
 	__Reply__mach_notify_dead_name_t Reply_mach_notify_dead_name;
 };
-#endif /* __RequestUnion__do_notify_subsystem__defined */
+#endif /* __ReplyUnion__do_notify_subsystem__defined */
 
 #ifndef subsystem_to_name_map_notify
 #define subsystem_to_name_map_notify \

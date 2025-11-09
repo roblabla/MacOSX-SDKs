@@ -1,7 +1,7 @@
 /*
 	NSComboBoxCell.h
 	Application Kit
-	Copyright (c) 1996-2018, Apple Inc.
+	Copyright (c) 1996-2019, Apple Inc.
 	All rights reserved.
 */
 
@@ -9,33 +9,12 @@
 #import <AppKit/NSTextFieldCell.h>
 
 NS_ASSUME_NONNULL_BEGIN
+API_UNAVAILABLE_BEGIN(ios)
 
 @class NSButtonCell, NSTableView;
 @protocol NSComboBoxCellDataSource;
 
-@interface NSComboBoxCell : NSTextFieldCell   {
-    /*All instance variables are private*/
-    id _delegate APPKIT_IVAR;
-    id _dataSource APPKIT_IVAR;
-    struct __cbcFlags {
-        unsigned int usesDataSource:1;
-        unsigned int completes:1;
-	unsigned int buttonBordered:1;
-        unsigned int popUpIsUp:1;
-	unsigned int filteringEvents:1;
-        unsigned int drawing:1;
-        unsigned int synchronizingSelection:1;
-        unsigned int reserved:9;
-	unsigned int visibleItems:16;
-    } _cbcFlags APPKIT_IVAR;
-    NSButtonCell *_buttonCell APPKIT_IVAR;
-    NSTableView *_tableView APPKIT_IVAR;
-    NSScrollView *_scrollView APPKIT_IVAR;
-    NSWindow *_popUp APPKIT_IVAR;
-    NSMutableArray *_popUpList APPKIT_IVAR;
-    NSRect *_cellFrame APPKIT_IVAR;
-    void *_reserved APPKIT_IVAR;
- }
+@interface NSComboBoxCell : NSTextFieldCell
 
 @property BOOL hasVerticalScroller;
 @property NSSize intercellSpacing; 
@@ -88,4 +67,5 @@ NS_ASSUME_NONNULL_BEGIN
 - (nullable NSString *)comboBoxCell:(NSComboBoxCell *)comboBoxCell completedString:(NSString *)uncompletedString; 
 @end
 
+API_UNAVAILABLE_END
 NS_ASSUME_NONNULL_END

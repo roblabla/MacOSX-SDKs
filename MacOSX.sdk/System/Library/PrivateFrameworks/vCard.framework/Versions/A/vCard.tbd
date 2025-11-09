@@ -1,8 +1,8 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: FE9F0A13-7FB7-334B-97C1-5730E388C84D' ]
-platform:        macosx
-install-name:    /System/Library/PrivateFrameworks/vCard.framework/Versions/A/vCard
+uuids:           [ 'x86_64: DA28C82C-BB33-309F-8D59-D20DE320B457', 'x86_64: DA28C82C-BB33-309F-8D59-D20DE320B457' ]
+platform:        zippered
+install-name:    '/System/Library/PrivateFrameworks/vCard.framework/Versions/A/vCard'
 current-version: 0
 compatibility-version: 0
 exports:         
@@ -19,7 +19,7 @@ exports:
                        _CNVCardAlternateBirthdayComponentsKey, _CNVCardBirthdayComponentsKey, 
                        _CNVCardCalendarURIsKey, _CNVCardCardDAVUIDKey, _CNVCardDepartmentNameKey, 
                        _CNVCardEmailKey, _CNVCardFirstNameKey, _CNVCardFormattedNameKey, 
-                       _CNVCardHomeLabel, _CNVCardInstantMessageBundleIdentifiersKey, 
+                       _CNVCardGuardianWhitelistedKey, _CNVCardHomeLabel, _CNVCardInstantMessageBundleIdentifiersKey, 
                        _CNVCardInstantMessageKey, _CNVCardInstantMessageServiceAIM, 
                        _CNVCardInstantMessageServiceFacebook, _CNVCardInstantMessageServiceGaduGadu, 
                        _CNVCardInstantMessageServiceGoogleTalk, _CNVCardInstantMessageServiceICQ, 
@@ -78,14 +78,16 @@ exports:
                        CNVCardPHOTOParser, CNVCardParameter, CNVCardParameterDecoder, 
                        CNVCardParameterEncoder, CNVCardParsedDictionaryResultBuilder, 
                        CNVCardParsedLine, CNVCardParsedParameter, CNVCardParsedResultBuilderFactory, 
-                       CNVCardParser, CNVCardPerson, CNVCardPhoneLineGenerator, CNVCardProdIdString, 
-                       CNVCardPropertyItem, CNVCardRangeFinder, CNVCardReading, CNVCardReadingOptions, 
+                       CNVCardParser, CNVCardParsingConcurrencyStrategy, CNVCardPerson, 
+                       CNVCardPhoneLineGenerator, CNVCardProdIdString, CNVCardPropertyItem, 
+                       CNVCardRangeFinder, CNVCardReading, CNVCardReadingOptions, 
                        CNVCardSelectorMap, CNVCardSerializationStorage, CNVCardSocialProfileLineGenerator, 
                        CNVCardStreetAddressLineGenerator, CNVCardStringStorage, CNVCardTesting, 
                        CNVCardURLParser, CNVCardUnknownPropertyDescription, CNVCardUserDefaults, 
                        CNVCardValueEncoder, CNVCardVersionPlaceholderLine, CNVCardWriting, 
                        CNVCardWritingOptions, CNVCardXABPHOTOParser, CNVCardXACTIVITYALERTParser, 
-                       CNVCardXSOCIALPROFILEParser, _CNVCardParsedResultBuilderBlockFactory ]
+                       CNVCardXSOCIALPROFILEParser, _CNVCardParsedResultBuilderBlockFactory, 
+                       _CNVCardParsingConcurrentStrategy, _CNVCardParsingSerialStrategy ]
     objc-ivars:      [ CNVCard30PHOTOHelper._maxBytes, CNVCard30PHOTOHelper._options, 
                        CNVCard30PHOTOHelper._person, CNVCardActivityAlertScanner._position, 
                        CNVCardActivityAlertScanner._string, CNVCardDataStorage._data, 
@@ -136,12 +138,13 @@ exports:
                        CNVCardParser._unknowns, CNVCardParser._urls, CNVCardPerson._activityAlerts, 
                        CNVCardPerson._alternateBirthdayComponents, CNVCardPerson._birthdayComponents, 
                        CNVCardPerson._calendarURIs, CNVCardPerson._cardDAVUID, CNVCardPerson._department, 
-                       CNVCardPerson._emailAddresses, CNVCardPerson._firstName, CNVCardPerson._imageCropRects, 
-                       CNVCardPerson._imageData, CNVCardPerson._imageReferences, 
-                       CNVCardPerson._instantMessagingAddresses, CNVCardPerson._isCompany, 
-                       CNVCardPerson._isMe, CNVCardPerson._jobTitle, CNVCardPerson._largeImageCropRects, 
-                       CNVCardPerson._largeImageData, CNVCardPerson._lastName, CNVCardPerson._maidenName, 
-                       CNVCardPerson._middleName, CNVCardPerson._nameOrder, CNVCardPerson._namesOfParentGroups, 
+                       CNVCardPerson._downtimeWhitelist, CNVCardPerson._emailAddresses, 
+                       CNVCardPerson._firstName, CNVCardPerson._imageCropRects, CNVCardPerson._imageData, 
+                       CNVCardPerson._imageReferences, CNVCardPerson._instantMessagingAddresses, 
+                       CNVCardPerson._isCompany, CNVCardPerson._isMe, CNVCardPerson._jobTitle, 
+                       CNVCardPerson._largeImageCropRects, CNVCardPerson._largeImageData, 
+                       CNVCardPerson._lastName, CNVCardPerson._maidenName, CNVCardPerson._middleName, 
+                       CNVCardPerson._nameOrder, CNVCardPerson._namesOfParentGroups, 
                        CNVCardPerson._nickname, CNVCardPerson._note, CNVCardPerson._organization, 
                        CNVCardPerson._otherDateComponents, CNVCardPerson._phoneNumbers, 
                        CNVCardPerson._phonemeData, CNVCardPerson._phoneticFirstName, 

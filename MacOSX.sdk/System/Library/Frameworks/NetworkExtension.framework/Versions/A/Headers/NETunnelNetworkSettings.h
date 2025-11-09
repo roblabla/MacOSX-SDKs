@@ -19,7 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @interface NETunnelNetworkSettings
  * @discussion The NETunnelNetworkSettings class declares the programmatic interface for an object that contains network settings.
  *
- * NETunnelNetworkSettings is used by NETunnelProviders to communicate the desired network settings for tunnel to the framework. The framework takes care of applying the contained settings to the system.
+ * NETunnelNetworkSettings is used by NETunnelProviders to communicate the desired network settings for the tunnel to the framework. The framework takes care of applying the contained settings to the system.
  *
  * Instances of this class are thread safe.
  */

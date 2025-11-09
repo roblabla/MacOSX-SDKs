@@ -1,3 +1,4 @@
+#if (defined(USE_AUDIOTOOLBOX_PUBLIC_HEADERS) && USE_AUDIOTOOLBOX_PUBLIC_HEADERS) || !__has_include(<AudioToolboxCore/AudioFileComponent.h>)
 /*!
 	@file		AudioFileComponent.h
 	@framework	AudioToolbox.framework
@@ -27,14 +28,8 @@
 #include <Availability.h>
 #include <TargetConditionals.h>
 
-#if !defined(__COREAUDIO_USE_FLAT_INCLUDES__)
-	#include <AudioToolbox/AudioComponent.h>
-	#include <AudioToolbox/AudioFile.h>
-#else
-	#include "AudioComponent.h"
-	#include "CoreAudioTypes.h"
-	#include "AudioFile.h"
-#endif
+#include <AudioToolbox/AudioComponent.h>
+#include <AudioToolbox/AudioFile.h>
 
 CF_ASSUME_NONNULL_BEGIN
 
@@ -763,13 +758,14 @@ typedef struct AudioFileFDFTableExtended
 	ReadPacketDataFDF	mReadPacketDataFDF;
 } AudioFileFDFTableExtended API_DEPRECATED("no longer supported", macos(10.4, 10.7)) API_UNAVAILABLE(ios, watchos, tvos);
 
+struct FSRef;
+
 /*!
 	@functiongroup Deprecated AFComponent
 	@discussion		These API calls are no longer called on Snow Leopard, instead the URL versions are used.
 					They can be provided by the file component for compatibility with Leopard and Tiger systems
 */
 
-struct FSRef;
 /*!
     @function	AudioFileComponentCreate
     @abstract   implements AudioFileCreate
@@ -830,6 +826,7 @@ AudioFileComponentOpenFile(
 }
 #endif
 
+#if !TARGET_OS_IPHONE
 //=====================================================================================================================
 
 typedef	OSStatus	(*AudioFileComponentCreateURLProc)(
@@ -989,8 +986,12 @@ typedef	OSStatus	(*AudioFileComponentGetGlobalInfoProc)(
 								const void * __nullable			inSpecifier,
 								UInt32							*ioPropertyDataSize,
 								void							*outPropertyData);
+#endif
 
 CF_ASSUME_NONNULL_END
 
 #endif // AudioToolbox_AudioFileComponent_h
 
+#else
+#include <AudioToolboxCore/AudioFileComponent.h>
+#endif

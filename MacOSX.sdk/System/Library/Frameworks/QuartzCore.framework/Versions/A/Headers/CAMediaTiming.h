@@ -27,7 +27,7 @@
 
 @class NSString;
 
-typedef NSString * CAMediaTimingFillMode NS_STRING_ENUM;
+typedef NSString * CAMediaTimingFillMode NS_TYPED_ENUM;
 
 NS_ASSUME_NONNULL_BEGIN
 

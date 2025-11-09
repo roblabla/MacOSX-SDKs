@@ -1,6 +1,6 @@
 /*
 	NSKeyValueCoding.h
-	Copyright (c) 1994-2018, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2019, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSArray.h>
@@ -200,7 +200,7 @@ Performance note: the repetitive -set<Key>: messages implied by step 2's descrip
 
 @end
 
-#if (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE))
+#if TARGET_OS_OSX
 
 @interface NSObject(NSDeprecatedKeyValueCoding)
 

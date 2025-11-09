@@ -7,7 +7,7 @@
 
 
 /* Define if building universal (internal helper macro) */
-#define AC_APPLE_UNIVERSAL_BUILD 1
+/* #undef AC_APPLE_UNIVERSAL_BUILD */
 
 /* Define for AIX if your compiler is a genuine IBM xlC/xlC_r and you want
    support for AIX C++ shared extension modules. */
@@ -119,6 +119,9 @@
 /* Define to 1 if you have the `clock' function. */
 #define HAVE_CLOCK 1
 
+/* Define if the C compiler supports computed gotos. */
+#define HAVE_COMPUTED_GOTOS 1
+
 /* Define to 1 if you have the `confstr' function. */
 #define HAVE_CONFSTR 1
 
@@ -128,14 +131,29 @@
 /* Define to 1 if you have the `copysign' function. */
 #define HAVE_COPYSIGN 1
 
+/* Define to 1 if you have the <crypt.h> header file. */
+/* #undef HAVE_CRYPT_H */
+
 /* Define to 1 if you have the `ctermid' function. */
 #define HAVE_CTERMID 1
 
 /* Define if you have the 'ctermid_r' function. */
 #define HAVE_CTERMID_R 1
 
+/* Define if you have the 'filter' function. */
+#define HAVE_CURSES_FILTER 1
+
 /* Define to 1 if you have the <curses.h> header file. */
 #define HAVE_CURSES_H 1
+
+/* Define if you have the 'has_key' function. */
+#define HAVE_CURSES_HAS_KEY 1
+
+/* Define if you have the 'immedok' function. */
+#define HAVE_CURSES_IMMEDOK 1
+
+/* Define if you have the 'is_pad' function or macro. */
+/* #undef HAVE_CURSES_IS_PAD */
 
 /* Define if you have the 'is_term_resized' function. */
 #define HAVE_CURSES_IS_TERM_RESIZED 1
@@ -145,6 +163,18 @@
 
 /* Define if you have the 'resize_term' function. */
 #define HAVE_CURSES_RESIZE_TERM 1
+
+/* Define if you have the 'syncok' function. */
+#define HAVE_CURSES_SYNCOK 1
+
+/* Define if you have the 'typeahead' function. */
+#define HAVE_CURSES_TYPEAHEAD 1
+
+/* Define if you have the 'use_env' function. */
+#define HAVE_CURSES_USE_ENV 1
+
+/* Define if you have the 'wchgat' function. */
+#define HAVE_CURSES_WCHGAT 1
 
 /* Define to 1 if you have the declaration of `isfinite', and to 0 if you
    don't. */
@@ -552,9 +582,6 @@
 /* Define to 1 if you have the `putenv' function. */
 #define HAVE_PUTENV 1
 
-/* Define if the libcrypto has RAND_egd */
-/* #undef HAVE_RAND_EGD */
-
 /* Define to 1 if you have the `readlink' function. */
 #define HAVE_READLINK 1
 
@@ -581,6 +608,9 @@
 
 /* Define if you have readline 4.0 */
 #define HAVE_RL_PRE_INPUT_HOOK 1
+
+/* Define if you have readline 4.0 */
+/* #undef HAVE_RL_RESIZE_TERMINAL */
 
 /* Define to 1 if you have the `round' function. */
 #define HAVE_ROUND 1
@@ -733,10 +763,6 @@
 /* Define to 1 if `tm_zone' is a member of `struct tm'. */
 #define HAVE_STRUCT_TM_TM_ZONE 1
 
-/* Define to 1 if your `struct stat' has `st_blocks'. Deprecated, use
-   `HAVE_STRUCT_STAT_ST_BLOCKS' instead. */
-#define HAVE_ST_BLOCKS 1
-
 /* Define if you have the 'symlink' function. */
 #define HAVE_SYMLINK 1
 
@@ -787,6 +813,9 @@
 /* Define to 1 if you have the <sys/poll.h> header file. */
 #define HAVE_SYS_POLL_H 1
 
+/* Define to 1 if you have the <sys/random.h> header file. */
+#define HAVE_SYS_RANDOM_H 1
+
 /* Define to 1 if you have the <sys/resource.h> header file. */
 #define HAVE_SYS_RESOURCE_H 1
 
@@ -801,6 +830,9 @@
 
 /* Define to 1 if you have the <sys/stat.h> header file. */
 #define HAVE_SYS_STAT_H 1
+
+/* Define to 1 if you have the <sys/sysmacros.h> header file. */
+/* #undef HAVE_SYS_SYSMACROS_H */
 
 /* Define to 1 if you have the <sys/termio.h> header file. */
 /* #undef HAVE_SYS_TERMIO_H */
@@ -1098,6 +1130,9 @@
 /* Define to 1 if your <sys/time.h> declares `struct tm'. */
 /* #undef TM_IN_SYS_TIME */
 
+/* Define if you want to use computed gotos in ceval.c. */
+/* #undef USE_COMPUTED_GOTOS */
+
 /* Enable extensions on AIX 3, Interix.  */
 #ifndef _ALL_SOURCE
 # define _ALL_SOURCE 1
@@ -1134,7 +1169,7 @@
 /* #undef WANT_WCTYPE_FUNCTIONS */
 
 /* Define if WINDOW in curses.h offers a field _flags. */
-/* #undef WINDOW_HAS_FLAGS */
+#define WINDOW_HAS_FLAGS 1
 
 /* Define if you want documentation strings in extension modules */
 #define WITH_DOC_STRINGS 1

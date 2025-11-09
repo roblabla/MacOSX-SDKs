@@ -1,7 +1,7 @@
 /*
     NSWindowController.h
     Application Kit
-    Copyright (c) 1997-2018, Apple Inc.
+    Copyright (c) 1997-2019, Apple Inc.
     All rights reserved.
 */
 
@@ -12,30 +12,11 @@
 #import <AppKit/NSWindow.h>
 
 NS_ASSUME_NONNULL_BEGIN
+API_UNAVAILABLE_BEGIN(ios)
 
 @class NSArray, NSDocument, NSStoryboard, NSViewController, NSWindow;
 
-@interface NSWindowController : NSResponder <NSSeguePerforming> {
-@private
-    NSWindow *_window APPKIT_IVAR;
-    NSNibName _windowNibName APPKIT_IVAR;
-    NSDocument *_document APPKIT_IVAR;
-    NSArray *_topLevelObjects APPKIT_IVAR;
-    __weak id _owner APPKIT_IVAR;
-    struct __wcFlags {
-        unsigned int shouldCloseDocument:1;
-        unsigned int shouldCascade:1;
-        unsigned int nibIsLoaded:1;
-        unsigned int nibNameIsPath:1;
-        unsigned int settingWindowsContentViewController:1;
-        unsigned int didInitWithCoder:1;
-        unsigned int nibIsMakingConnections:1;
-        unsigned int sentWindowWillLoad:1;
-        unsigned int RESERVED:24;
-    } _wcFlags APPKIT_IVAR;
-    NSString *_frameAutosaveName APPKIT_IVAR;
-    id _moreVars APPKIT_IVAR;
-}
+@interface NSWindowController : NSResponder <NSSeguePerforming>
 
 /* Designated Initializer.  window can be nil.  All other -init... methods call this, and then possibly do other setup.
  */
@@ -105,7 +86,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /* The view controller for the window's contentView. Tracks the window property of the same name.
  */
-@property (nullable, strong) NSViewController *contentViewController NS_AVAILABLE_MAC(10_10);
+@property (nullable, strong) NSViewController *contentViewController API_AVAILABLE(macos(10.10));
 
 /* The window getter will load the nib file (if there is one and it has not yet been loaded) and then return the window.  If it has to load the window, it will first call -windowWillLoad, then -loadWindow, then -windowDidLoad.  To affect nib loading or do something before or after it happens, you should always override those other methods.
  
@@ -143,7 +124,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /* The Storyboard the WindowController was loaded from. Returns nil if the WindowController was not loaded from a Storyboard.
  */
-@property(nullable, readonly, strong) NSStoryboard *storyboard NS_AVAILABLE_MAC(10_10);
+@property(nullable, readonly, strong) NSStoryboard *storyboard API_AVAILABLE(macos(10.10));
 
 @end
 
@@ -151,10 +132,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 /* Dismisses the WindowController.  Does nothing if the receiver is not currently presented.
  */
-- (IBAction)dismissController:(nullable id)sender NS_AVAILABLE_MAC(10_10);
+- (IBAction)dismissController:(nullable id)sender API_AVAILABLE(macos(10.10));
 
 @end
 
+API_UNAVAILABLE_END
 NS_ASSUME_NONNULL_END
 
 

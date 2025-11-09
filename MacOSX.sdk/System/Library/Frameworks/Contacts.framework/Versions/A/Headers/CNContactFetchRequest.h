@@ -2,10 +2,11 @@
 //  CNContactFetchRequest.h
 //  Contacts
 //
-//  Copyright (c) 2015 Apple Inc. All rights reserved.
+//  Copyright (c) 2015–2019 Apple Inc. All rights reserved.
 //
 
 #import <Contacts/CNContact.h>
+#import <Contacts/CNFetchRequest.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -16,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @discussion Used with [CNContactStore enumerateContactsWithFetchRequest:error:usingBlock:]. Can combine any of these options to create a contact fetch request.
  */
 NS_CLASS_AVAILABLE(10_11, 9_0)
-@interface CNContactFetchRequest : NSObject <NSSecureCoding>
+@interface CNContactFetchRequest : CNFetchRequest <NSSecureCoding>
 
 - (instancetype)init NS_UNAVAILABLE;
 + (instancetype)new  NS_UNAVAILABLE;

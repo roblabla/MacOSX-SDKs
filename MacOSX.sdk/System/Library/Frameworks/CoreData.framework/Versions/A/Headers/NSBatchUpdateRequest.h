@@ -1,7 +1,7 @@
 /*
     NSBatchUpdateRequest.h
     Core Data
-    Copyright (c) 2004-2018, Apple Inc.
+    Copyright (c) 2004-2019, Apple Inc.
     All rights reserved.
 */
 
@@ -22,19 +22,6 @@ NS_ASSUME_NONNULL_BEGIN
 //  the underlying store do not violate any validation rules specified in the model.
 API_AVAILABLE(macosx(10.10),ios(8.0))
 @interface NSBatchUpdateRequest : NSPersistentStoreRequest {
-#if (!__OBJC2__)
-    @private
-    id _entity;
-    NSPredicate *_predicate;
-    struct _requestFlags {
-        unsigned int includesSubentities:1;
-        unsigned int resultType:2;
-        unsigned int entityIsName:1;
-        unsigned int secureOperation:1;
-        unsigned int _RESERVED:27;
-    } _flags;
-    NSDictionary *_columnsToUpdate;
-#endif
 }
 
 + (instancetype)batchUpdateRequestWithEntityName:(NSString*)entityName;

@@ -57,6 +57,12 @@ NS_CLASS_AVAILABLE_MAC(10_6)
  *
  * @discussion
  * Returns a UTF-8 string using hexadecimal characters formatted as XX:XX:XX:XX:XX:XX.
+ *
+ * @note
+ * BSSID information is not available unless Location Services is enabled and the user has authorized the calling app to use location services.
+ *
+ * @seealso
+ * CLLocationManager
  */
 @property(readonly, nullable) NSString *bssid NS_AVAILABLE_MAC(10_6);
 
@@ -66,7 +72,7 @@ NS_CLASS_AVAILABLE_MAC(10_6)
  * @abstract 
  * The operating channel of the Wi-Fi device.
  */
-@property(readonly, nullable) CWChannel *wlanChannel NS_AVAILABLE_MAC(10_7);
+@property(nullable, readonly) CWChannel *wlanChannel NS_AVAILABLE_MAC(10_7);
 
 /*!
  * @property

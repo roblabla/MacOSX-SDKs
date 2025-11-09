@@ -95,13 +95,13 @@ __END_DECLS
 #define __Request__ktrace_background_subsystem__defined
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
 	} __Request__ktrace_background_available_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 #endif /* !__Request__ktrace_background_subsystem__defined */
 
@@ -119,7 +119,7 @@ union __RequestUnion__send_ktrace_background_subsystem {
 #define __Reply__ktrace_background_subsystem__defined
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -127,7 +127,7 @@ union __RequestUnion__send_ktrace_background_subsystem {
 		kern_return_t RetCode;
 	} __Reply__ktrace_background_available_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 #endif /* !__Reply__ktrace_background_subsystem__defined */
 

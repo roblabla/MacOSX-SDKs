@@ -1,5 +1,5 @@
 /*	NSValue.h
-	Copyright (c) 1994-2018, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2019, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (readonly) const char *objCType NS_RETURNS_INNER_POINTER;
 
 - (instancetype)initWithBytes:(const void *)value objCType:(const char *)type NS_DESIGNATED_INITIALIZER;
-- (nullable instancetype)initWithCoder:(NSCoder *)aDecoder NS_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithCoder:(NSCoder *)coder NS_DESIGNATED_INITIALIZER;
 
 @end
 
@@ -40,7 +40,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface NSNumber : NSValue
 
-- (nullable instancetype)initWithCoder:(NSCoder *)aDecoder NS_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithCoder:(NSCoder *)coder NS_DESIGNATED_INITIALIZER;
 - (NSNumber *)initWithChar:(char)value NS_DESIGNATED_INITIALIZER;
 - (NSNumber *)initWithUnsignedChar:(unsigned char)value NS_DESIGNATED_INITIALIZER;
 - (NSNumber *)initWithShort:(short)value NS_DESIGNATED_INITIALIZER;
@@ -106,7 +106,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface NSValue (NSDeprecated)
 /* This method is unsafe because it could potentially cause buffer overruns. You should use -getValue:size: instead.
  */
-- (void)getValue:(void *)value; // This method will likely be deprecated in a future release
+- (void)getValue:(void *)value API_DEPRECATED_WITH_REPLACEMENT("getValue:size:", macos(10.0, API_TO_BE_DEPRECATED), ios(2.0, API_TO_BE_DEPRECATED), watchos(2.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED));
 @end
 
 NS_ASSUME_NONNULL_END

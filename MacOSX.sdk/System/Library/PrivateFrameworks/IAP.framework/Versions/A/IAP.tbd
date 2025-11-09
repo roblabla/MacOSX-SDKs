@@ -1,8 +1,8 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: D1C28E52-B1B0-378A-B771-A98C6B71CC71' ]
-platform:        macosx
-install-name:    /System/Library/PrivateFrameworks/IAP.framework/Versions/A/IAP
+uuids:           [ 'x86_64: 79823602-750C-35BC-AA93-DE262295066F', 'x86_64: 79823602-750C-35BC-AA93-DE262295066F' ]
+platform:        zippered
+install-name:    '/System/Library/PrivateFrameworks/IAP.framework/Versions/A/IAP'
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _Generate32BitConnectionID, _GetConnectionToIAP2Daemon, _GetConnectionToIAPDaemon, 
@@ -57,11 +57,29 @@ exports:
                        _IAPAppRegisterClient, _IAPAppRequestAccessoryWiFiCredentials, 
                        _IAPAppSendAccessibilityResponse, _IAPAppSendDebugCommand, 
                        _IAPAppSendDeviceIdentifierNotification, _IAPAppSendPointOfInterestInformation, 
+                       _IAPAppSendXPCMessageReplyWithTimeout, _IAPAppSendXPCMessageWithTimeout, 
                        _IAPAppStartAccessibility, _IAPAppStopAccessibility, _IAPAppToAppFifoPath, 
-                       _IAPAppToAppSocketPath, _IAPBluetoothDeviceAccessoryAttach, 
-                       _IAPBluetoothDeviceAccessoryDetach, _IAPBluetoothDeviceAllocAccessoryPairingInfo, 
-                       _IAPBluetoothDeviceGetAccessoryConnectNotification, _IAPBluetoothDeviceMode, 
-                       _IAPBluetoothDevicePairingData, _IAPBluetoothDevicePairingInfoUpdate, 
+                       _IAPAppToAppSocketPath, _IAPAudioCopyDeviceStates, _IAPAudioDeviceStateChangedNotification, 
+                       _IAPAudioDisableVoiceSignalProcessing, _IAPAudioEnableVoiceSignalProcessing, 
+                       _IAPAudioGetVolume, _IAPAudioGetVolumeForTransport, _IAPAudioIsVoiceSignalProcessingEnabled, 
+                       _IAPAudioIsVolumeControlSupported, _IAPAudioIsVolumeControlSupportedForTransport, 
+                       _IAPAudioNotifyOfPlaybackStateChanged, _IAPAudioPlaybackStateChangedNotification, 
+                       _IAPAudioRegisterDeviceStateChangedCallback, _IAPAudioRegisterShouldPauseAudioOnHeadsetDisconnectChangedCallback, 
+                       _IAPAudioRegisterVolumeChangedCallback, _IAPAudioRegisterVolumeControlSupportChangedCallback, 
+                       _IAPAudioSetVolume, _IAPAudioSetVolumeForTransport, _IAPAudioShouldPauseAudioOnHeadsetDisconnect, 
+                       _IAPAudioShouldPauseOnHeadphoneDisconnectChangedNotification, 
+                       _IAPAudioStartPlayback, _IAPAudioStartPlaybackForTransport, 
+                       _IAPAudioStartRecording, _IAPAudioStartRecordingForTransport, 
+                       _IAPAudioStopPlayback, _IAPAudioStopPlaybackForTransport, 
+                       _IAPAudioStopRecording, _IAPAudioStopRecordingForTransport, 
+                       _IAPAudioTransportLineinStateKey, _IAPAudioTransportLineoutStateKey, 
+                       _IAPAudioTransportNameKey, _IAPAudioTransportUSBAudioStateKey, 
+                       _IAPAudioUnregisterDeviceStateChangedCallback, _IAPAudioUnregisterShouldPauseAudioOnHeadsetDisconnectChangedCallback, 
+                       _IAPAudioUnregisterVolumeChangedCallback, _IAPAudioUnregisterVolumeControlSupportChangedCallback, 
+                       _IAPAudioVolumeChangedNotification, _IAPAudioVolumeControlSupportChangedNotification, 
+                       _IAPBluetoothDeviceAccessoryAttach, _IAPBluetoothDeviceAccessoryDetach, 
+                       _IAPBluetoothDeviceAllocAccessoryPairingInfo, _IAPBluetoothDeviceGetAccessoryConnectNotification, 
+                       _IAPBluetoothDeviceMode, _IAPBluetoothDevicePairingData, _IAPBluetoothDevicePairingInfoUpdate, 
                        _IAPBluetoothDeviceStartBLEUpdates, _IAPBluetoothDeviceStateUpdate, 
                        _IAPBluetoothDeviceStopBLEUpdates, _IAPCameraInfoUpdated, 
                        _IAPCameraSendCameraControlMessage, _IAPCameraSendSetCameraProperties, 
@@ -99,14 +117,16 @@ exports:
                        _IsDataAggregationEnabled, _IsExistAppMusic, _IsExistAppPodcasts, 
                        _IsExistAppiBooks, _IsExistAppiTunesU, _IsIAP2DaemonConnection, 
                        _IsIAPDaemonConnection, _SendDisplayPortStatusToAccessory, 
-                       _ShouldAccessoryBeHidden, __Z21GetIAPConnectionQueuev, __Z22GetIAPDaemonConnectionv, 
-                       __Z23GetIAP2DaemonConnectionv, __Z31GetIAPTransportDaemonConnectionv, 
-                       ___instance_ref_IAPNavigation, _iaptransportdHasLaunched, 
-                       _kBTHIDPriorityDefault, _kBTHIDPriorityHigh, _kEAPipePath, 
-                       _kIAP2AvailableNotification, _kIAP2DXPCServiceName, _kIAP2ServerDiedNotification, 
-                       _kIAP2ServerLaunchedNotification, _kIAPAvailableNotification, 
-                       _kIAPDXPCServiceName, _kIAPFrameworkBundleID, _kIAPMinAccPowerDelayInMs, 
-                       _kIAPNavigation_ManeuverInfoUpdate_AfterManeuverRoadName_ParamID, 
+                       _ShouldAccessoryBeHidden, __IAPSendXPCMessageReplyWithTimeout, 
+                       __IAPSendXPCMessageWithTimeout, __Z21GetIAPConnectionQueuev, 
+                       __Z22GetIAPDaemonConnectionv, __Z23GetIAP2DaemonConnectionv, 
+                       __Z24__IAPConnectionMutexLockv, __Z26__IAPConnectionMutexUnlockv, 
+                       __Z31GetIAPTransportDaemonConnectionv, ___instance_ref_IAPNavigation, 
+                       _iaptransportdHasLaunched, _kBTHIDPriorityDefault, _kBTHIDPriorityHigh, 
+                       _kEAPipePath, _kIAP2AvailableNotification, _kIAP2DXPCServiceName, 
+                       _kIAP2ServerDiedNotification, _kIAP2ServerLaunchedNotification, 
+                       _kIAPAvailableNotification, _kIAPDXPCServiceName, _kIAPFrameworkBundleID, 
+                       _kIAPMinAccPowerDelayInMs, _kIAPNavigation_ManeuverInfoUpdate_AfterManeuverRoadName_ParamID, 
                        _kIAPNavigation_ManeuverInfoUpdate_DistanceBetweenManeuverDisplayString_ParamID, 
                        _kIAPNavigation_ManeuverInfoUpdate_DistanceBetweenManeuverDisplayUnits_ParamID, 
                        _kIAPNavigation_ManeuverInfoUpdate_DistanceBetweenManeuver_ParamID, 
@@ -265,6 +285,6 @@ exports:
                        _kXPCUSBHostHIDComponentInfoStr, _kXPCUUIDDStr, _kXPCUserInfoStr, 
                        _kXPCVehicleStatusDictionaryStr, _kXPCVehicleStatusGetDataStr, 
                        _kXPCVoiceOverStr, _kXPCWaitSendDoneStr ]
-    objc-classes:    [ IAPClientPort, IAPClientPortManager, IAPNavigation, IAPNavigationAccessory, 
-                       IAPNavigationAccessoryComponent ]
+    objc-classes:    [ IAPAudioCallbackInfo, IAPClientPort, IAPClientPortManager, 
+                       IAPNavigation, IAPNavigationAccessory, IAPNavigationAccessoryComponent ]
 ...

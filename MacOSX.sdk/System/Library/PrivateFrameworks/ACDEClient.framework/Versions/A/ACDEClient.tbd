@@ -1,8 +1,8 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: E8CD7890-C0B4-38E8-8FAF-0062DE198356' ]
+uuids:           [ 'x86_64: 0E1B02D0-1DAB-3198-A587-082A5A3E8539' ]
 platform:        macosx
-install-name:    /System/Library/PrivateFrameworks/ACDEClient.framework/Versions/A/ACDEClient
+install-name:    '/System/Library/PrivateFrameworks/ACDEClient.framework/Versions/A/ACDEClient'
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _ACDEClientVersionNumber, _ACDEClientVersionString, _ACFErrorCreateWithNotifyStatus, 

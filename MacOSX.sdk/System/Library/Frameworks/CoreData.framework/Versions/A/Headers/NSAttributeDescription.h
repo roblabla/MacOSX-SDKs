@@ -1,7 +1,7 @@
 /*
     NSAttributeDescription.h
     Core Data
-    Copyright (c) 2004-2018, Apple Inc.
+    Copyright (c) 2004-2019, Apple Inc.
     All rights reserved.
 */
 
@@ -36,21 +36,6 @@ typedef NS_ENUM(NSUInteger, NSAttributeType) {
 // Attributes represent individual values like strings, numbers, dates, etc.
 API_AVAILABLE(macosx(10.4),ios(3.0))
 @interface NSAttributeDescription : NSPropertyDescription {
-#if (!__OBJC2__)
-@private
-	Class _attributeValueClass;
-	NSString *_valueTransformerName;
-    NSAttributeType _type;
-    NSString *_attributeValueClassName;
-    struct __attributeDescriptionFlags {
-		unsigned int _hasMaxValueInExtraIvars:1;
-		unsigned int _hasMinValueInExtraIvars:1;
-		unsigned int _storeBinaryDataExternally:1;
-        unsigned int _isTriggerBacked:1;
-        unsigned int _reservedAttributeDescription:28;
-    } _attributeDescriptionFlags;
-    id _defaultValue;
-#endif
 }
 
 // NSUndefinedAttributeType is valid for transient properties - Core Data will still track the property as an id value and register undo/redo actions, etc. NSUndefinedAttributeType is illegal for non-transient properties.
@@ -67,6 +52,9 @@ API_AVAILABLE(macosx(10.4),ios(3.0))
 @property (nullable, copy) NSString *valueTransformerName API_AVAILABLE(macosx(10.5),ios(3.0));
 
 @property () BOOL allowsExternalBinaryDataStorage API_AVAILABLE(macosx(10.7),ios(5.0));
+
+/* Indicates if the value of the attribute should be captured on delete when Persistent History is enabled */
+@property () BOOL preservesValueInHistoryOnDeletion API_AVAILABLE(macosx(10.15),ios(13.0),tvos(13.0),watchos(6.0));
 
 @end
 

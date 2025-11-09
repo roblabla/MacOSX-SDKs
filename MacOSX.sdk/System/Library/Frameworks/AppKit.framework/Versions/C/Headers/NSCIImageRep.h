@@ -1,7 +1,7 @@
 /*
         NSCIImageRep.h
         Application Kit
-        Copyright (c) 2003-2018, Apple Inc.
+        Copyright (c) 2003-2019, Apple Inc.
         All rights reserved.
 */
 
@@ -11,13 +11,11 @@
 
 
 NS_ASSUME_NONNULL_BEGIN
+API_UNAVAILABLE_BEGIN(ios)
 
 @class NSBitmapImageRep;
 
 @interface NSCIImageRep : NSImageRep
-{
-    CIImage *_ciImage APPKIT_IVAR;
-}
 + (instancetype)imageRepWithCIImage:(CIImage *)image;
 - (instancetype)initWithCIImage:(CIImage *)image;
 @property (readonly, strong) CIImage *CIImage;
@@ -30,5 +28,6 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)drawAtPoint:(NSPoint)point fromRect:(NSRect)fromRect operation:(NSCompositingOperation)op fraction:(CGFloat)delta;
 @end
 
+API_UNAVAILABLE_END
 NS_ASSUME_NONNULL_END
 

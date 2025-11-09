@@ -17,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// Specifies which information the app wants to obtain about the subscriber's account.
 /// You should only request the information you need to fulfill your contractual obligations.
-VS_EXPORT API_AVAILABLE(ios(10.0), tvos(10.0))
+VS_EXPORT API_AVAILABLE(ios(10.0), tvos(10.0)) API_UNAVAILABLE(macCatalyst)
 @interface VSAccountMetadataRequest : NSObject
 
 /// Identifies who is making the request.
@@ -59,6 +59,10 @@ API_AVAILABLE(ios(11.0), tvos(11.0));
 /// Defaults to SAML.
 @property (nonatomic, copy) NSArray<VSAccountProviderAuthenticationScheme> *supportedAuthenticationSchemes
 API_AVAILABLE(ios(10.2), tvos(10.1));
+
+/// A value that an account provider application may set to pass an existing authentication session.
+/// For use by TV Provider applications only.
+@property (nonatomic, copy, nullable) NSString *accountProviderAuthenticationToken API_AVAILABLE(ios(13.0), tvos(13.0));
 
 @end
 

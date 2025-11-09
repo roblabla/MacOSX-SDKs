@@ -1,7 +1,7 @@
 /*
     NSPathControl.h
     Application Kit
-    Copyright (c) 2005-2018, Apple Inc.
+    Copyright (c) 2005-2019, Apple Inc.
     All rights reserved.
 */
 
@@ -14,6 +14,7 @@
 #import <AppKit/NSDragging.h>
 
 NS_ASSUME_NONNULL_BEGIN
+API_UNAVAILABLE_BEGIN(ios)
 
 @class NSPathComponentCell, NSOpenPanel, NSPathControlItem;
 @protocol NSPathControlDelegate;
@@ -38,27 +39,20 @@ NS_ASSUME_NONNULL_BEGIN
  If the control isEditable and has the pathStyle set to NSPathStylePopUp, an additional choice in the pop up menu will allow selecting another location. By default, an NSOpenPanel will be configured based on the allowedTypes. The NSOpenPanel that is used can be customized with a delegate method.
 
  */
-NS_CLASS_AVAILABLE(10_5, NA)
-@interface NSPathControl : NSControl {
-@private
-    NSDragOperation _draggingSourceOperationMaskForLocal APPKIT_IVAR;
-    NSDragOperation _draggingSourceOperationMaskForNonLocal APPKIT_IVAR;
-    NSInteger _reserved __unused APPKIT_IVAR;
-    id _delegate APPKIT_IVAR;
-    id _pathAux APPKIT_IVAR;
-}
+API_AVAILABLE(macos(10.5))
+@interface NSPathControl : NSControl
 
-@property(getter=isEditable) BOOL editable NS_AVAILABLE_MAC(10_10);
+@property(getter=isEditable) BOOL editable API_AVAILABLE(macos(10.10));
 
 /* Specifies the allowed types when the control isEditable. The allowedTypes can contain a file extension (without the period that begins the extension) or UTI (Uniform Type Identifier). To allow folders, include the UTI 'public.folder'. To allow all types, use 'nil'. If allowedTypes is an empty array, nothing will be allowed. The default value is 'nil', allowing all types.
  */
-@property(nullable, copy) NSArray<NSString *> *allowedTypes NS_AVAILABLE_MAC(10_10);
+@property(nullable, copy) NSArray<NSString *> *allowedTypes API_AVAILABLE(macos(10.10));
 
 
 /* If there are no components in the path, the placeholder is drawn instead (if non-nil).  We first try to draw the placeholderAttributedString. If it's nil, then the placeholderString will be drawn with correct default attributes.
  */
-@property(nullable, copy) NSString *placeholderString NS_AVAILABLE_MAC(10_10);
-@property(nullable, copy) NSAttributedString *placeholderAttributedString NS_AVAILABLE_MAC(10_10);
+@property(nullable, copy) NSString *placeholderString API_AVAILABLE(macos(10.10));
+@property(nullable, copy) NSAttributedString *placeholderAttributedString API_AVAILABLE(macos(10.10));
 
 /* Gets and sets the path value displayed. When setting, an array of NSPathControlItems will automatically be set based on the path in the 'url'. If the 'url' is a file URL (returns YES from isFileURL), the images will automatically be filled up with file icons, if the path exists.  The URL value itself is stored in the objectValue of the control.
  */
@@ -74,12 +68,12 @@ NS_CLASS_AVAILABLE(10_5, NA)
 
 /* The clicked NSPathControlItem, or nil, if no item has been clicked. The clickedPathItem is generally only valid while the action or doubleAction is being sent.
  */
-@property (nullable, readonly) NSPathControlItem *clickedPathItem NS_AVAILABLE_MAC(10_10);
+@property (nullable, readonly) NSPathControlItem *clickedPathItem API_AVAILABLE(macos(10.10));
 
 /* The array of NSPathControlItems currently being displayed.
     Each item must be an NSPathControlItem.  Do not subclass NSPathControlItem. You cannot set this value to nil, but should instead set it to an empty array.
  */
-@property (copy) NSArray<NSPathControlItem *> *pathItems NS_AVAILABLE_MAC(10_10);
+@property (copy) NSArray<NSPathControlItem *> *pathItems API_AVAILABLE(macos(10.10));
 
 /* The background color to be drawn.  By default, it will be set to a light blue color for NSPathStyleStandard, and nil for everything else. You can use [NSColor clearColor] to make the background transparent.
  */
@@ -135,10 +129,11 @@ NS_CLASS_AVAILABLE(10_5, NA)
 
 @interface NSPathControl (NSDeprecated)
 
-- (nullable NSPathComponentCell *)clickedPathComponentCell NS_DEPRECATED_MAC(10_0, 10_14, "Use -clickedPathItem instead");
-- (NSArray<NSPathComponentCell *> *)pathComponentCells NS_DEPRECATED_MAC(10_0, 10_14, "Use -pathItems instead");
-- (void)setPathComponentCells:(NSArray<NSPathComponentCell *> *)cells NS_DEPRECATED_MAC(10_0, 10_14, "Use -setPathItems: instead");
+- (nullable NSPathComponentCell *)clickedPathComponentCell API_DEPRECATED("Use -clickedPathItem instead", macos(10.0,10.14));
+- (NSArray<NSPathComponentCell *> *)pathComponentCells API_DEPRECATED("Use -pathItems instead", macos(10.0,10.14));
+- (void)setPathComponentCells:(NSArray<NSPathComponentCell *> *)cells API_DEPRECATED("Use -setPathItems: instead", macos(10.0,10.14));
 
 @end
 
+API_UNAVAILABLE_END
 NS_ASSUME_NONNULL_END

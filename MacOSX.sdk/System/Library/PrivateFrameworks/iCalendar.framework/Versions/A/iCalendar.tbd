@@ -1,23 +1,24 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 7F8DB8E6-9AE2-3DC9-A876-33197BF1F8F5' ]
-platform:        macosx
-install-name:    /System/Library/PrivateFrameworks/iCalendar.framework/Versions/A/iCalendar
-current-version: 287
+uuids:           [ 'x86_64: 649A7D80-1B77-38AA-AE1C-9AB8D4431458', 'x86_64: 649A7D80-1B77-38AA-AE1C-9AB8D4431458' ]
+platform:        zippered
+install-name:    '/System/Library/PrivateFrameworks/iCalendar.framework/Versions/A/iCalendar'
+current-version: 800
 exports:         
   - archs:           [ x86_64 ]
-    symbols:         [ _ICSDecodeBase64, _ICSEncodeBase64, _ICSObscuritySalt, _ICSTravelAdvisoryBehavior_Automatic, 
-                       _ICSTravelAdvisoryBehavior_Disabled, _ICSTravelAdvisoryBehavior_Enabled, 
-                       _ICSiCalendarErrorDomain, _SHA256StringOfString, __uniqueSaltForThisMachine, 
-                       _iCalendarAppendStringToStringWithOptions, _iCalendarRepresentationForCALDay, 
-                       _kCALSTR_XAPPLE_inviter_name_param, _kCALSTR_XAPPLE_self_invited_param, 
-                       _kCALSTR_XAPPLE_telephone_param, _kICSSTR_XAPPLE_acknowledged_param, 
-                       _kICSSTR_XAPPLE_activity_prop, _kICSSTR_XAPPLE_app_link_data_prop, 
-                       _kICSSTR_XAPPLE_auto_refresh_prop, _kICSSTR_XAPPLE_autoarchived_param, 
-                       _kICSSTR_XAPPLE_bookmark, _kICSSTR_XAPPLE_calendar_color_prop, 
-                       _kICSSTR_XAPPLE_contact_identifiers, _kICSSTR_XAPPLE_default_alarm, 
-                       _kICSSTR_XAPPLE_dontschedule_prop, _kICSSTR_XAPPLE_dropbox_prop, 
-                       _kICSSTR_XAPPLE_end_location, _kICSSTR_XAPPLE_etag, _kICSSTR_XAPPLE_ews_attachmentid_param, 
+    symbols:         [ _ICSAppendEmoji, _ICSDecodeBase64, _ICSEncodeBase64, _ICSRedactString, 
+                       _ICSTravelAdvisoryBehavior_Automatic, _ICSTravelAdvisoryBehavior_Disabled, 
+                       _ICSTravelAdvisoryBehavior_Enabled, _ICSiCalendarErrorDomain, 
+                       __pictureForByte, _iCalendarAppendStringToStringWithOptions, 
+                       _iCalendarRepresentationForCALDay, _kCALSTR_XAPPLE_inviter_name_param, 
+                       _kCALSTR_XAPPLE_self_invited_param, _kCALSTR_XAPPLE_telephone_param, 
+                       _kICSSTR_XAPPLE_acknowledged_param, _kICSSTR_XAPPLE_activity_prop, 
+                       _kICSSTR_XAPPLE_app_link_data_prop, _kICSSTR_XAPPLE_auto_refresh_prop, 
+                       _kICSSTR_XAPPLE_autoarchived_param, _kICSSTR_XAPPLE_bookmark, 
+                       _kICSSTR_XAPPLE_calendar_color_prop, _kICSSTR_XAPPLE_contact_identifiers, 
+                       _kICSSTR_XAPPLE_default_alarm, _kICSSTR_XAPPLE_dontschedule_prop, 
+                       _kICSSTR_XAPPLE_dropbox_prop, _kICSSTR_XAPPLE_end_location, 
+                       _kICSSTR_XAPPLE_etag, _kICSSTR_XAPPLE_ews_attachmentid_param, 
                        _kICSSTR_XAPPLE_ews_busystatus_prop, _kICSSTR_XAPPLE_ews_changekey_prop, 
                        _kICSSTR_XAPPLE_ews_itemid_prop, _kICSSTR_XAPPLE_ews_needsserverconfirmation_prop, 
                        _kICSSTR_XAPPLE_ews_permission_prop, _kICSSTR_XAPPLE_filename_param, 

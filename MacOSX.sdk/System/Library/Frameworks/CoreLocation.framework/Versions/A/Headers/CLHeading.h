@@ -29,7 +29,7 @@ typedef double CLHeadingComponentValue;
  *    to the heading service that no minimum movement filter is desired - ie, client will be informed
  *    of any movement.
  */
-extern const CLLocationDegrees kCLHeadingFilterNone;
+CL_EXTERN const CLLocationDegrees kCLHeadingFilterNone;
 
 /*
  *  CLHeading
@@ -37,6 +37,7 @@ extern const CLLocationDegrees kCLHeadingFilterNone;
  *  Discussion:
  *    Represents a vector pointing to magnetic North constructed from axis component values x, y, and z. An accuracy of the heading calculation is also provided along with timestamp information.
  */
+CL_EXTERN
 API_AVAILABLE(macos(10.7), ios(3.0)) API_UNAVAILABLE(watchos, tvos)
 @interface CLHeading : NSObject <NSCopying, NSSecureCoding>
 {

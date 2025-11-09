@@ -470,11 +470,13 @@ to list snapshot creation dates from a specific volume.
 .Pp
 Listed dates are formatted YYYY-MM-DD-HHMMSS.
 .It Sy deletelocalsnapshots
-.Ar date
+.Ar {mountPoint | date}
 .br
-Delete all local Time Machine snapshots for the specified
+If a date is specified, delete all local Time Machine snapshots on all mounted disks for the specified
 .Ar date
 (formatted YYYY-MM-DD-HHMMSS).
+If a disk is specified, delete all local Time Machine snapshots on the specified
+.Ar disk
 .It Sy thinlocalsnapshots
 .Ar mount_point
 .Op Ar purge_amount

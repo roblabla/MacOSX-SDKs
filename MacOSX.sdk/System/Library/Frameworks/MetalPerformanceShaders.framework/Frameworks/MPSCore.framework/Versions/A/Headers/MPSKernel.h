@@ -11,6 +11,7 @@
 #define MPSKernel_h
 
 #include <MPSCore/MPSCoreTypes.h>
+#include <MPSCore/MPSCommandBuffer.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -77,7 +78,7 @@ extern "C" {
  *              to add this method.
  */
 
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(9.0), tvos(9.0))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(9.0), macCatalyst(13.0), tvos(9.0))
 @interface MPSKernel  : NSObject <NSCopying, NSSecureCoding>
 
 /****************
@@ -160,7 +161,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(9.0), tvos(9.0))
  */
 -(nullable instancetype) initWithCoder:(NSCoder * __nonnull)aDecoder
                                 device:(nonnull id <MTLDevice>) device NS_DESIGNATED_INITIALIZER
-                        MPS_AVAILABLE_STARTING(macos(10.13), ios(11.0), tvos(11.0));
+                        MPS_AVAILABLE_STARTING(macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0));
 
 
 @end

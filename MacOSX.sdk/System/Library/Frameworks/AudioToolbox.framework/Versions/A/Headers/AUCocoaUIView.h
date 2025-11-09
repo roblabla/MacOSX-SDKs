@@ -1,3 +1,4 @@
+#if (defined(USE_AUDIOTOOLBOX_PUBLIC_HEADERS) && USE_AUDIOTOOLBOX_PUBLIC_HEADERS) || !__has_include(<AudioToolboxCore/AUCocoaUIView.h>)
 /*!
 	@file		AUCocoaUIView.h
  	@framework	AudioToolbox.framework
@@ -8,18 +9,22 @@
 	Audio unit hosts can call these methods to retrieve views for audio units.
 */
 
+#ifndef AudioToolbox_AUCocoaUIView_h
+#define AudioToolbox_AUCocoaUIView_h
+
 #include <TargetConditionals.h>
 #if defined(__OBJC__) && TARGET_OS_OSX
 
-#import <Cocoa/Cocoa.h>
+#import <Foundation/Foundation.h>
 #import <AudioToolbox/AUComponent.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class NSView;
 @protocol AUCocoaUIBase
 
 /*!
-	@function	interfaceVersion
+	@method		interfaceVersion
 	@abstract	Return the version of the interface you are implementing.
 	@result		An unsigned value.
 	@discussion For MacOS X 10.3 or later, you should return the current version which is 0.
@@ -35,7 +40,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (unsigned)interfaceVersion;
 
 /*!
-	@function	uiViewForAudioUnit:withSize:
+	@method		uiViewForAudioUnit:withSize:
 	@abstract	Return the NSView responsible for displaying the interface for the provided AudioUnit.
 	@param		inAudioUnit
 					The Audio Unit the view is associated with.
@@ -55,3 +60,7 @@ NS_ASSUME_NONNULL_BEGIN
 NS_ASSUME_NONNULL_END
 
 #endif // defined(__OBJC__) && TARGET_OS_OSX
+#endif // AudioToolbox_AUCocoaUIView_h
+#else
+#include <AudioToolboxCore/AUCocoaUIView.h>
+#endif

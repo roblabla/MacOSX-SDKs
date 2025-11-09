@@ -1,6 +1,6 @@
 /*
     File:		IOBluetoothSDPDataElement.h
-    Copyright:	© 2002 by Apple Computer, Inc. All rights reserved.
+    Copyright:	ï¿½ 2002 by Apple Computer, Inc. All rights reserved.
 	Writers:	Eric Brown
 */
 
@@ -67,6 +67,7 @@
                 must contain sub-elements that will be parsed out individually.
 */
 
+API_UNAVAILABLE(ios, watchos, tvos)
 @interface IOBluetoothSDPDataElement : NSObject <NSCoding, NSSecureCoding>  {
     BluetoothSDPDataElementTypeDescriptor	mTypeDescriptor;
     BluetoothSDPDataElementSizeDescriptor	mSizeDescriptor;

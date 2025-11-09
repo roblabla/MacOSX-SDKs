@@ -53,13 +53,13 @@ extern "C" {
     kWSMethodInvocationResult will always return the correct
     parameter.  (This won't work for multi-value returns, however.)
 */
-extern CFStringRef kWSMethodInvocationResult                         __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2,__MAC_10_8,__IPHONE_NA,__IPHONE_NA);
+extern CFStringRef kWSMethodInvocationResult                         API_DEPRECATED("No longer supported", macos(10.2,10.8) ) API_UNAVAILABLE( ios, tvos, watchos );
 /*
     Dictionary entries if the result is a fault
 */
-extern CFStringRef kWSFaultString  /* a CFString */                  __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2,__MAC_10_8,__IPHONE_NA,__IPHONE_NA);
-extern CFStringRef kWSFaultCode    /* a CFNumber */                  __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2,__MAC_10_8,__IPHONE_NA,__IPHONE_NA);
-extern CFStringRef kWSFaultExtra   /* a CFString or CFDictionary, or NULL */   __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2,__MAC_10_8,__IPHONE_NA,__IPHONE_NA);
+extern CFStringRef kWSFaultString  /* a CFString */                  API_DEPRECATED("No longer supported", macos(10.2,10.8) ) API_UNAVAILABLE( ios, tvos, watchos );
+extern CFStringRef kWSFaultCode    /* a CFNumber */                  API_DEPRECATED("No longer supported", macos(10.2,10.8) ) API_UNAVAILABLE( ios, tvos, watchos );
+extern CFStringRef kWSFaultExtra   /* a CFString or CFDictionary, or NULL */   API_DEPRECATED("No longer supported", macos(10.2,10.8) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 /*
     If the result is a fault, and if the value of kWSFaultString in
@@ -69,10 +69,10 @@ extern CFStringRef kWSFaultExtra   /* a CFString or CFDictionary, or NULL */   _
     <CoreFoundation/CFStream.h> for details on what the domain and
     error numbers mean.
 */
-extern CFStringRef kWSNetworkStreamFaultString                       __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2,__MAC_10_8,__IPHONE_NA,__IPHONE_NA);
-extern CFStringRef kWSStreamErrorMessage   /* A CFString (for debug purposes only) */ __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2,__MAC_10_8,__IPHONE_NA,__IPHONE_NA);
-extern CFStringRef kWSStreamErrorDomain    /* A CFNumberRef */       __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2,__MAC_10_8,__IPHONE_NA,__IPHONE_NA);
-extern CFStringRef kWSStreamErrorError     /* A CFNumberRef */       __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2,__MAC_10_8,__IPHONE_NA,__IPHONE_NA);
+extern CFStringRef kWSNetworkStreamFaultString                       API_DEPRECATED("No longer supported", macos(10.2,10.8) ) API_UNAVAILABLE( ios, tvos, watchos );
+extern CFStringRef kWSStreamErrorMessage   /* A CFString (for debug purposes only) */ API_DEPRECATED("No longer supported", macos(10.2,10.8) ) API_UNAVAILABLE( ios, tvos, watchos );
+extern CFStringRef kWSStreamErrorDomain    /* A CFNumberRef */       API_DEPRECATED("No longer supported", macos(10.2,10.8) ) API_UNAVAILABLE( ios, tvos, watchos );
+extern CFStringRef kWSStreamErrorError     /* A CFNumberRef */       API_DEPRECATED("No longer supported", macos(10.2,10.8) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 /* 
     For HTTP[S] based invocations, you can specify a CFHTTPMessageRef
@@ -89,17 +89,17 @@ extern CFStringRef kWSStreamErrorError     /* A CFNumberRef */       __OSX_AVAIL
    
     See: <CFNetwork/CFHTTPMessage.h> for more information.
 */
-extern CFStringRef kWSHTTPMessage           /* CFHTTPMessageRef */   __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2,__MAC_10_8,__IPHONE_NA,__IPHONE_NA);
-extern CFStringRef kWSHTTPResponseMessage   /* CFHTTPMessageRef */   __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2,__MAC_10_8,__IPHONE_NA,__IPHONE_NA);
+extern CFStringRef kWSHTTPMessage           /* CFHTTPMessageRef */   API_DEPRECATED("No longer supported", macos(10.2,10.8) ) API_UNAVAILABLE( ios, tvos, watchos );
+extern CFStringRef kWSHTTPResponseMessage   /* CFHTTPMessageRef */   API_DEPRECATED("No longer supported", macos(10.2,10.8) ) API_UNAVAILABLE( ios, tvos, watchos );
 /*
     To avoid having to create an entire CFHTTPMessageRef, these properties are
     individually settable.  If they are set, they will override any CFHTTPMessageRef
     previously specified.
 */
-extern CFStringRef kWSHTTPExtraHeaders       /* a CFDictionary of { key (CFString), val (CFString) } pairs */ __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2,__MAC_10_8,__IPHONE_NA,__IPHONE_NA);
-extern CFStringRef kWSHTTPVersion            /* "http/1.1" */        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2,__MAC_10_8,__IPHONE_NA,__IPHONE_NA);
-extern CFStringRef kWSHTTPProxy              /* CFURLRef */          __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2,__MAC_10_8,__IPHONE_NA,__IPHONE_NA);
-extern CFStringRef kWSHTTPFollowsRedirects   /* kCFBooleanFalse */   __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2,__MAC_10_8,__IPHONE_NA,__IPHONE_NA);
+extern CFStringRef kWSHTTPExtraHeaders       /* a CFDictionary of { key (CFString), val (CFString) } pairs */ API_DEPRECATED("No longer supported", macos(10.2,10.8) ) API_UNAVAILABLE( ios, tvos, watchos );
+extern CFStringRef kWSHTTPVersion            /* "http/1.1" */        API_DEPRECATED("No longer supported", macos(10.2,10.8) ) API_UNAVAILABLE( ios, tvos, watchos );
+extern CFStringRef kWSHTTPProxy              /* CFURLRef */          API_DEPRECATED("No longer supported", macos(10.2,10.8) ) API_UNAVAILABLE( ios, tvos, watchos );
+extern CFStringRef kWSHTTPFollowsRedirects   /* kCFBooleanFalse */   API_DEPRECATED("No longer supported", macos(10.2,10.8) ) API_UNAVAILABLE( ios, tvos, watchos );
 /* 
     SOCKS proxy support.  WSMethodInvocation uses the same flags as
     CFSocketStream.h in configuring SOCKS proxy support.  You can set
@@ -113,19 +113,19 @@ extern CFStringRef kWSHTTPFollowsRedirects   /* kCFBooleanFalse */   __OSX_AVAIL
     name of the flag is the same as the the field in the result
     dictionary.
 */
-extern CFStringRef kWSDebugOutgoingHeaders   /* kCFBooleanFalse */   __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2,__MAC_10_8,__IPHONE_NA,__IPHONE_NA);
-extern CFStringRef kWSDebugOutgoingBody      /* kCFBooleanFalse */   __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2,__MAC_10_8,__IPHONE_NA,__IPHONE_NA);
-extern CFStringRef kWSDebugIncomingHeaders   /* kCFBooleanFalse */   __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2,__MAC_10_8,__IPHONE_NA,__IPHONE_NA);
-extern CFStringRef kWSDebugIncomingBody      /* kCFBooleanFalse */   __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2,__MAC_10_8,__IPHONE_NA,__IPHONE_NA);
+extern CFStringRef kWSDebugOutgoingHeaders   /* kCFBooleanFalse */   API_DEPRECATED("No longer supported", macos(10.2,10.8) ) API_UNAVAILABLE( ios, tvos, watchos );
+extern CFStringRef kWSDebugOutgoingBody      /* kCFBooleanFalse */   API_DEPRECATED("No longer supported", macos(10.2,10.8) ) API_UNAVAILABLE( ios, tvos, watchos );
+extern CFStringRef kWSDebugIncomingHeaders   /* kCFBooleanFalse */   API_DEPRECATED("No longer supported", macos(10.2,10.8) ) API_UNAVAILABLE( ios, tvos, watchos );
+extern CFStringRef kWSDebugIncomingBody      /* kCFBooleanFalse */   API_DEPRECATED("No longer supported", macos(10.2,10.8) ) API_UNAVAILABLE( ios, tvos, watchos );
 /*
     Extra properties for SOAP messages.  These apply to the message
     namespace and format itself.  Individual message elements can
     be modified using the kWSRecord constants below.
 */
-extern CFStringRef kWSSOAPBodyEncodingStyle   /* CFStringRef { kWSSOAPStyleDoc, kWSSOAPStyleRPC } */ __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2,__MAC_10_8,__IPHONE_NA,__IPHONE_NA);
-extern CFStringRef kWSSOAPMethodNamespaceURI  /* CFStringRef */      __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2,__MAC_10_8,__IPHONE_NA,__IPHONE_NA);
-extern CFStringRef kWSSOAPStyleDoc                                   __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2,__MAC_10_8,__IPHONE_NA,__IPHONE_NA);
-extern CFStringRef kWSSOAPStyleRPC                                   __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2,__MAC_10_8,__IPHONE_NA,__IPHONE_NA);
+extern CFStringRef kWSSOAPBodyEncodingStyle   /* CFStringRef { kWSSOAPStyleDoc, kWSSOAPStyleRPC } */ API_DEPRECATED("No longer supported", macos(10.2,10.8) ) API_UNAVAILABLE( ios, tvos, watchos );
+extern CFStringRef kWSSOAPMethodNamespaceURI  /* CFStringRef */      API_DEPRECATED("No longer supported", macos(10.2,10.8) ) API_UNAVAILABLE( ios, tvos, watchos );
+extern CFStringRef kWSSOAPStyleDoc                                   API_DEPRECATED("No longer supported", macos(10.2,10.8) ) API_UNAVAILABLE( ios, tvos, watchos );
+extern CFStringRef kWSSOAPStyleRPC                                   API_DEPRECATED("No longer supported", macos(10.2,10.8) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 /*
     For SOAP messages, this is an array of CFStringRefs which
@@ -133,28 +133,28 @@ extern CFStringRef kWSSOAPStyleRPC                                   __OSX_AVAIL
     message.  These are only applicable to the Header of a SOAP
     message.
 */
-extern CFStringRef kWSSOAPMessageHeaders        /* CFArrayRef */     __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2,__MAC_10_8,__IPHONE_NA,__IPHONE_NA);
+extern CFStringRef kWSSOAPMessageHeaders        /* CFArrayRef */     API_DEPRECATED("No longer supported", macos(10.2,10.8) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 /* 
     When serializing a record (dictionary) these keys present in
     the dictionary can modify the behavior of the serialization.
 */
-extern CFStringRef kWSRecordParameterOrder      /* CFArrayRef of CFStringRef */ __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2,__MAC_10_8,__IPHONE_NA,__IPHONE_NA);
-extern CFStringRef kWSRecordNamespaceURI        /* CFStringRef */    __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2,__MAC_10_8,__IPHONE_NA,__IPHONE_NA);
-extern CFStringRef kWSRecordType                /* CFStringRef */    __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2,__MAC_10_8,__IPHONE_NA,__IPHONE_NA);
+extern CFStringRef kWSRecordParameterOrder      /* CFArrayRef of CFStringRef */ API_DEPRECATED("No longer supported", macos(10.2,10.8) ) API_UNAVAILABLE( ios, tvos, watchos );
+extern CFStringRef kWSRecordNamespaceURI        /* CFStringRef */    API_DEPRECATED("No longer supported", macos(10.2,10.8) ) API_UNAVAILABLE( ios, tvos, watchos );
+extern CFStringRef kWSRecordType                /* CFStringRef */    API_DEPRECATED("No longer supported", macos(10.2,10.8) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 /*
     Specifies that the result parameter will be found as this name.  This
     forces the deserializer to alias the named output parameter to kWSMethodInvocationResult
 */
-extern CFStringRef kWSMethodInvocationResultParameterName            __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2,__MAC_10_8,__IPHONE_NA,__IPHONE_NA);
+extern CFStringRef kWSMethodInvocationResultParameterName            API_DEPRECATED("No longer supported", macos(10.2,10.8) ) API_UNAVAILABLE( ios, tvos, watchos );
 /* 
     Specifies a timeout (as CFNumber) which specifies in seconds the
     amount of time to wait for the invocation to complete.  If the
     invocation times out before the server results are returned, 
     a fault will be returned with the error code errWSTimeoutError.  
 */
-extern CFStringRef kWSMethodInvocationTimeoutValue                   __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2,__MAC_10_8,__IPHONE_NA,__IPHONE_NA);
+extern CFStringRef kWSMethodInvocationTimeoutValue                   API_DEPRECATED("No longer supported", macos(10.2,10.8) ) API_UNAVAILABLE( ios, tvos, watchos );
 #ifdef __cplusplus
 }
 #endif
@@ -199,7 +199,7 @@ typedef struct OpaqueWSMethodInvocationRef*  WSMethodInvocationRef;
  *    Non-Carbon CFM:   not available
  */
 extern CFTypeID 
-WSMethodInvocationGetTypeID(void)                             __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2,__MAC_10_8,__IPHONE_NA,__IPHONE_NA);
+WSMethodInvocationGetTypeID(void)                             API_DEPRECATED("No longer supported", macos(10.2,10.8) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 
@@ -239,7 +239,7 @@ extern WSMethodInvocationRef
 WSMethodInvocationCreate(
   CFURLRef      url,
   CFStringRef   methodName,
-  CFStringRef   protocol)                                     __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2,__MAC_10_8,__IPHONE_NA,__IPHONE_NA);
+  CFStringRef   protocol)                                     API_DEPRECATED("No longer supported", macos(10.2,10.8) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 
@@ -268,7 +268,7 @@ WSMethodInvocationCreate(
  *    Non-Carbon CFM:   not available
  */
 extern WSMethodInvocationRef 
-WSMethodInvocationCreateFromSerialization(CFDataRef contract) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2,__MAC_10_8,__IPHONE_NA,__IPHONE_NA);
+WSMethodInvocationCreateFromSerialization(CFDataRef contract) API_DEPRECATED("No longer supported", macos(10.2,10.8) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 
@@ -296,7 +296,7 @@ WSMethodInvocationCreateFromSerialization(CFDataRef contract) __OSX_AVAILABLE_BU
  *    Non-Carbon CFM:   not available
  */
 extern CFDataRef 
-WSMethodInvocationCopySerialization(WSMethodInvocationRef invocation) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2,__MAC_10_8,__IPHONE_NA,__IPHONE_NA);
+WSMethodInvocationCopySerialization(WSMethodInvocationRef invocation) API_DEPRECATED("No longer supported", macos(10.2,10.8) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 
@@ -335,7 +335,7 @@ extern void
 WSMethodInvocationSetParameters(
   WSMethodInvocationRef   invocation,
   CFDictionaryRef         parameters,
-  CFArrayRef              parameterOrder)  /* can be NULL */  __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2,__MAC_10_8,__IPHONE_NA,__IPHONE_NA);
+  CFArrayRef              parameterOrder)  /* can be NULL */  API_DEPRECATED("No longer supported", macos(10.2,10.8) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 /*
@@ -371,7 +371,7 @@ WSMethodInvocationSetParameters(
 extern CFDictionaryRef 
 WSMethodInvocationCopyParameters(
   WSMethodInvocationRef   invocation,
-  CFArrayRef *            parameterOrder)  /* can be NULL */  __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2,__MAC_10_8,__IPHONE_NA,__IPHONE_NA);
+  CFArrayRef *            parameterOrder)  /* can be NULL */  API_DEPRECATED("No longer supported", macos(10.2,10.8) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 /*
@@ -412,7 +412,7 @@ extern void
 WSMethodInvocationSetProperty(
   WSMethodInvocationRef   invocation,
   CFStringRef             propertyName,
-  CFTypeRef               propertyValue)                      __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2,__MAC_10_8,__IPHONE_NA,__IPHONE_NA);
+  CFTypeRef               propertyValue)                      API_DEPRECATED("No longer supported", macos(10.2,10.8) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 
@@ -447,7 +447,7 @@ WSMethodInvocationSetProperty(
 extern CFTypeRef 
 WSMethodInvocationCopyProperty(
   WSMethodInvocationRef   invocation,
-  CFStringRef             propertyName)                       __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2,__MAC_10_8,__IPHONE_NA,__IPHONE_NA);
+  CFStringRef             propertyName)                       API_DEPRECATED("No longer supported", macos(10.2,10.8) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 
@@ -479,7 +479,7 @@ WSMethodInvocationCopyProperty(
  *    Non-Carbon CFM:   not available
  */
 extern CF_RETURNS_RETAINED CFDictionaryRef 
-WSMethodInvocationInvoke(WSMethodInvocationRef invocation)    __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2,__MAC_10_8,__IPHONE_NA,__IPHONE_NA);
+WSMethodInvocationInvoke(WSMethodInvocationRef invocation)    API_DEPRECATED("No longer supported", macos(10.2,10.8) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 
@@ -533,7 +533,7 @@ WSMethodInvocationInvoke(WSMethodInvocationRef invocation)    __OSX_AVAILABLE_BU
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
-typedef void(*WSMethodInvocationCallBackProcPtr)(WSMethodInvocationRef invocation, void *info, CFDictionaryRef outRef) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2,__MAC_10_8,__IPHONE_NA,__IPHONE_NA);
+typedef void(*WSMethodInvocationCallBackProcPtr)(WSMethodInvocationRef invocation, void *info, CFDictionaryRef outRef) API_DEPRECATED("No longer supported", macos(10.2,10.8) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 	
 	
@@ -568,7 +568,7 @@ extern void
 WSMethodInvocationSetCallBack(
   WSMethodInvocationRef               invocation,
   WSMethodInvocationCallBackProcPtr   clientCB,
-  WSClientContext *                   context)                __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2,__MAC_10_8,__IPHONE_NA,__IPHONE_NA);
+  WSClientContext *                   context)                API_DEPRECATED("No longer supported", macos(10.2,10.8) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 
@@ -601,7 +601,7 @@ extern void
 WSMethodInvocationScheduleWithRunLoop(
   WSMethodInvocationRef   invocation,
   CFRunLoopRef            runLoop,
-  CFStringRef             runLoopMode)                        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2,__MAC_10_8,__IPHONE_NA,__IPHONE_NA);
+  CFStringRef             runLoopMode)                        API_DEPRECATED("No longer supported", macos(10.2,10.8) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 
@@ -636,7 +636,7 @@ extern void
 WSMethodInvocationUnscheduleFromRunLoop(
   WSMethodInvocationRef   invocation,
   CFRunLoopRef            runLoop,
-  CFStringRef             runLoopMode)                        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2,__MAC_10_8,__IPHONE_NA,__IPHONE_NA);
+  CFStringRef             runLoopMode)                        API_DEPRECATED("No longer supported", macos(10.2,10.8) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 
@@ -672,7 +672,7 @@ WSMethodInvocationUnscheduleFromRunLoop(
  *    Non-Carbon CFM:   not available
  */
 extern Boolean 
-WSMethodResultIsFault(CFDictionaryRef methodResult)           __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2,__MAC_10_8,__IPHONE_NA,__IPHONE_NA);
+WSMethodResultIsFault(CFDictionaryRef methodResult)           API_DEPRECATED("No longer supported", macos(10.2,10.8) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 
@@ -715,7 +715,7 @@ WSMethodResultIsFault(CFDictionaryRef methodResult)           __OSX_AVAILABLE_BU
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
-typedef CFStringRef(*WSMethodInvocationSerializationProcPtr)(WSMethodInvocationRef invocation, CFTypeRef obj, void *info) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2,__MAC_10_8,__IPHONE_NA,__IPHONE_NA);
+typedef CFStringRef(*WSMethodInvocationSerializationProcPtr)(WSMethodInvocationRef invocation, CFTypeRef obj, void *info) API_DEPRECATED("No longer supported", macos(10.2,10.8) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 	
 	
@@ -756,7 +756,7 @@ WSMethodInvocationAddSerializationOverride(
   WSMethodInvocationRef                    invocation,
   CFTypeID                                 objType,
   WSMethodInvocationSerializationProcPtr   serializationProc,
-  WSClientContext *                        context)           __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2,__MAC_10_8,__IPHONE_NA,__IPHONE_NA);
+  WSClientContext *                        context)           API_DEPRECATED("No longer supported", macos(10.2,10.8) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 
@@ -795,7 +795,7 @@ WSMethodInvocationAddSerializationOverride(
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
-typedef CFTypeRef(*WSMethodInvocationDeserializationProcPtr)(WSMethodInvocationRef invocation, CFXMLTreeRef msgRoot, CFXMLTreeRef deserializeRoot, void *info) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2,__MAC_10_8,__IPHONE_NA,__IPHONE_NA);
+typedef CFTypeRef(*WSMethodInvocationDeserializationProcPtr)(WSMethodInvocationRef invocation, CFXMLTreeRef msgRoot, CFXMLTreeRef deserializeRoot, void *info) API_DEPRECATED("No longer supported", macos(10.2,10.8) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 	
 	
@@ -841,7 +841,7 @@ WSMethodInvocationAddDeserializationOverride(
   CFStringRef                                typeNamespace,
   CFStringRef                                typeName,
   WSMethodInvocationDeserializationProcPtr   deserializationProc,
-  WSClientContext *                          context)         __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_2,__MAC_10_8,__IPHONE_NA,__IPHONE_NA);
+  WSClientContext *                          context)         API_DEPRECATED("No longer supported", macos(10.2,10.8) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 

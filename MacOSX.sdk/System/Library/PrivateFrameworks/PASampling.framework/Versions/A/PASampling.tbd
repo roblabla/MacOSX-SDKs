@@ -1,23 +1,22 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 2EF55F38-B856-33FB-938F-E7C367C8AA49' ]
+uuids:           [ 'x86_64: BE674467-CBAF-3C24-B719-EE3DC3C4763A' ]
 platform:        macosx
-install-name:    /System/Library/PrivateFrameworks/PASampling.framework/Versions/A/PASampling
-current-version: 217
+install-name:    '/System/Library/PrivateFrameworks/PASampling.framework/Versions/A/PASampling'
+current-version: 242
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _CopyDonatingUniqueIds, _CopyMountStatusData, _CountedStateForSampleThread, 
                        _CreateDsymSymbolOwnerForUUID, _CreatePAImageInfoArrayFromDyldImageInfos, 
                        _CreateSymbolOwnerForUUIDAtPath, _CreateSymbolicatorForLiveProcess, 
                        _DescriptionForKCDataType, _EventTypeString, _FreeMountStatusData, 
-                       _KPerfReadAheadTaskLevelInfo, _MachToNano, _PACFBundleCopyStringForKey, 
-                       _PACommonAverageFromArray, _PACommonStandardDeviationFromArray, 
+                       _KPerfReadAheadTaskLevelInfo, _PACFBundleCopyStringForKey, 
                        _PAIsAppResponsive, _PAMachTimeForMachAbsTime, _PAMachTimeForMachAbsTimeWithTimebase, 
                        _PAMachTimeForNSNumberOfMachAbsTime, _PAMachTimeGetCurrent, 
                        _PAMachTimeToMachAbsTimeWithTimebase, _PAMessageUserAgent, 
                        _PAMessageUserAgentWithReply, _PAMessageUserAgentWithReplyAsync, 
-                       _PANSDictionaryCopyStringForKey, _PAOrderAddedListKey, _PASamplingVersionNumber, 
-                       _PASamplingVersionString, _PASerializableAddInstanceToSerializationDictionaryWithClassKey, 
+                       _PAOrderAddedListKey, _PASamplingVersionNumber, _PASamplingVersionString, 
+                       _PASerializableAddInstanceToSerializationDictionaryWithClassKey, 
                        _PASerializableFillSerializedIndicesWithCollectionOfSerializableInstances, 
                        _PASerializableFillSerializedIndicesWithDictionaryOfSerializableArrays, 
                        _PASerializableFillSerializedIndicesWithDictionaryOfSerializableInstances, 
@@ -51,21 +50,19 @@ exports:
                        _TaskDisplayName, _TracePointString, _UNKNOWN_STRING, __AvoidSuspendingPid, 
                        __CheckAppleInternal, __CopyStringForTime, __CreateSanitizedCopy, 
                        __IsTimerCoalesced, __IsTimerLimited, __IsTimerNormal, __PALogTimestamp, 
-                       __PAPrintToMutableData, __PASerializableIndexForPointer, __PASerializableInstanceForIndex, 
+                       __PASerializableIndexForPointer, __PASerializableInstanceForIndex, 
                        __TimerTier, __addInstanceToDeserializationDictionaryWithClassKey, 
                        __addPointerToIndexDictionaryForClass, __copy_commerce_info_strings, 
                        __getIndexRangeForTimestamps, __indexToInstanceDictionaryFromDeserializationDictionary, 
                        __is_alive, __newDataBufferFromPointerToIndexDictionary, __newMutableCollectionFromIndexList, 
                        __newNumberForPointer, __newPointerToIndexDictionary, __paos_printf_frame_base, 
                        __paos_printf_frame_state, __paos_printf_frame_timerange, 
-                       __pidsForName, __pointerInBufferForIndexWithClass, _formattedAddress, 
-                       _formattedBytes, _formattedBytesDouble, _formattedSignedBytes, 
-                       _kPABinaryLocatorBuildNumberKey, _kPABinaryLocatorDatabaseDirectory, 
+                       __pidsForName, __pointerInBufferForIndexWithClass, _formattedBytes, 
+                       _formattedSignedBytes, _kPABinaryLocatorBuildNumberKey, _kPABinaryLocatorDatabaseDirectory, 
                        _kPABinaryLocatorDatabaseLocation, _kPAErrorIndex, _kPANullIndex, 
-                       _kPAWSUpdateNoSuchIndex, _levelFormattedString, _nameForProcInfo, 
-                       _newProcessStructures, _pa_tailspin_parse_stackshot_chunk, 
-                       _pagesToBytes, _pagesToBytesDefault, _printHeaderSpacingToStream, 
-                       _uuidForBytes, _uuidForString, _uuid_string ]
+                       _kPAWSUpdateNoSuchIndex, _pa_tailspin_parse_stackshot_chunk, 
+                       _printHeaderSpacingToStream, _uuidForBytes, _uuidForString, 
+                       _uuid_string ]
     objc-classes:    [ PAAggregatedDispatchQueue, PAAggregatedExecutable, PAAggregatedInstruction, 
                        PAAggregatedKernelInstruction, PAAggregatedMainThread, PAAggregatedProcessInstance, 
                        PAAggregatedTask, PAAggregatedThread, PAAggregatedThreadAndDispatchQueue, 

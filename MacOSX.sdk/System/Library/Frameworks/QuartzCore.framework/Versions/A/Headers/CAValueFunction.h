@@ -6,7 +6,7 @@
 #import <QuartzCore/CABase.h>
 #import <Foundation/NSObject.h>
 
-typedef NSString * CAValueFunctionName NS_STRING_ENUM;
+typedef NSString * CAValueFunctionName NS_TYPED_ENUM;
 
 NS_ASSUME_NONNULL_BEGIN
 

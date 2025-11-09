@@ -1,7 +1,7 @@
 /*
     NSDrawer.h
     Application Kit
-    Copyright (c) 1999-2018, Apple Inc.
+    Copyright (c) 1999-2019, Apple Inc.
     All rights reserved.
 */
 
@@ -15,6 +15,7 @@
 #import <AppKit/NSWindow.h>
 
 NS_ASSUME_NONNULL_BEGIN
+API_UNAVAILABLE_BEGIN(ios)
 
 @class NSLock;
 @class NSView;
@@ -23,38 +24,14 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol NSDrawerDelegate;
 
 typedef NS_ENUM(NSUInteger, NSDrawerState) {
-    NSDrawerClosedState NS_DEPRECATED_MAC(10_0, 10_13, "Drawers are deprecated; consider using NSSplitViewController") = 0,
-    NSDrawerOpeningState NS_DEPRECATED_MAC(10_0, 10_13, "Drawers are deprecated; consider using NSSplitViewController") = 1,
-    NSDrawerOpenState NS_DEPRECATED_MAC(10_0, 10_13, "Drawers are deprecated; consider using NSSplitViewController") = 2,
-    NSDrawerClosingState NS_DEPRECATED_MAC(10_0, 10_13, "Drawers are deprecated; consider using NSSplitViewController") = 3
+    NSDrawerClosedState API_DEPRECATED("Drawers are deprecated; consider using NSSplitViewController", macos(10.0,10.13)) = 0,
+    NSDrawerOpeningState API_DEPRECATED("Drawers are deprecated; consider using NSSplitViewController", macos(10.0,10.13)) = 1,
+    NSDrawerOpenState API_DEPRECATED("Drawers are deprecated; consider using NSSplitViewController", macos(10.0,10.13)) = 2,
+    NSDrawerClosingState API_DEPRECATED("Drawers are deprecated; consider using NSSplitViewController", macos(10.0,10.13)) = 3
 };
 
-NS_CLASS_DEPRECATED_MAC(10_0, 10_13, "Drawers are deprecated; consider using NSSplitViewController")
+API_DEPRECATED("Drawers are deprecated; consider using NSSplitViewController", macos(10.0,10.13))
 @interface NSDrawer : NSResponder <NSAccessibilityElement, NSAccessibility>
-{
-    /* All instance variables are private */
-    NSDrawerState 	_drawerState APPKIT_IVAR;
-    NSDrawerState	_drawerNextState APPKIT_IVAR;
-    NSRectEdge 		_drawerEdge APPKIT_IVAR;
-    NSRectEdge 		_drawerNextEdge APPKIT_IVAR;
-    NSRectEdge 		_drawerPreferredEdge APPKIT_IVAR;
-    float 		_drawerPercent APPKIT_IVAR;
-    float 		_drawerPercentSaved APPKIT_IVAR;
-    CGFloat		_drawerLeadingOffset APPKIT_IVAR;
-    CGFloat		_drawerTrailingOffset APPKIT_IVAR;
-    NSLock 		*_drawerLock APPKIT_IVAR;
-    NSWindow		*_drawerWindow APPKIT_IVAR;
-    NSWindow 		*_drawerParentWindow APPKIT_IVAR;
-    NSWindow		*_drawerNextParentWindow APPKIT_IVAR;
-    NSString		*_drawerSaveName APPKIT_IVAR;
-    CFAbsoluteTime 	_drawerStartTime APPKIT_IVAR;
-    CFTimeInterval 	_drawerTotalTime APPKIT_IVAR;
-    CFRunLoopRef 	_drawerLoop APPKIT_IVAR;
-    CFRunLoopTimerRef 	_drawerTimer APPKIT_IVAR;
-    id 			_drawerDelegate APPKIT_IVAR;
-    unsigned int	_drawerFlags APPKIT_IVAR;
-    CFRunLoopObserverRef _drawerObserver APPKIT_IVAR;
-}
 
 - (instancetype)initWithContentSize:(NSSize)contentSize preferredEdge:(NSRectEdge)edge;
 
@@ -85,27 +62,28 @@ NS_CLASS_DEPRECATED_MAC(10_0, 10_13, "Drawers are deprecated; consider using NSS
 
 @interface NSWindow(NSDrawers)
 
-@property (nullable, readonly, copy) NSArray<NSDrawer *> *drawers NS_DEPRECATED_MAC(10_0, 10_13, "Drawers are deprecated; consider using NSSplitViewController");
+@property (nullable, readonly, copy) NSArray<NSDrawer *> *drawers API_DEPRECATED("Drawers are deprecated; consider using NSSplitViewController", macos(10.0,10.13));
 
 @end
 
 @protocol NSDrawerDelegate <NSObject>
 @optional
-- (BOOL)drawerShouldOpen:(NSDrawer *)sender NS_DEPRECATED_MAC(10_0, 10_13, "Drawers are deprecated; consider using NSSplitViewController");
-- (BOOL)drawerShouldClose:(NSDrawer *)sender NS_DEPRECATED_MAC(10_0, 10_13, "Drawers are deprecated; consider using NSSplitViewController");
-- (NSSize)drawerWillResizeContents:(NSDrawer *)sender toSize:(NSSize)contentSize NS_DEPRECATED_MAC(10_0, 10_13, "Drawers are deprecated; consider using NSSplitViewController");
+- (BOOL)drawerShouldOpen:(NSDrawer *)sender API_DEPRECATED("Drawers are deprecated; consider using NSSplitViewController", macos(10.0,10.13));
+- (BOOL)drawerShouldClose:(NSDrawer *)sender API_DEPRECATED("Drawers are deprecated; consider using NSSplitViewController", macos(10.0,10.13));
+- (NSSize)drawerWillResizeContents:(NSDrawer *)sender toSize:(NSSize)contentSize API_DEPRECATED("Drawers are deprecated; consider using NSSplitViewController", macos(10.0,10.13));
 
-- (void)drawerWillOpen:(NSNotification *)notification NS_DEPRECATED_MAC(10_0, 10_13, "Drawers are deprecated; consider using NSSplitViewController");
-- (void)drawerDidOpen:(NSNotification *)notification NS_DEPRECATED_MAC(10_0, 10_13, "Drawers are deprecated; consider using NSSplitViewController");
-- (void)drawerWillClose:(NSNotification *)notification NS_DEPRECATED_MAC(10_0, 10_13, "Drawers are deprecated; consider using NSSplitViewController");
-- (void)drawerDidClose:(NSNotification *)notification NS_DEPRECATED_MAC(10_0, 10_13, "Drawers are deprecated; consider using NSSplitViewController");
+- (void)drawerWillOpen:(NSNotification *)notification API_DEPRECATED("Drawers are deprecated; consider using NSSplitViewController", macos(10.0,10.13));
+- (void)drawerDidOpen:(NSNotification *)notification API_DEPRECATED("Drawers are deprecated; consider using NSSplitViewController", macos(10.0,10.13));
+- (void)drawerWillClose:(NSNotification *)notification API_DEPRECATED("Drawers are deprecated; consider using NSSplitViewController", macos(10.0,10.13));
+- (void)drawerDidClose:(NSNotification *)notification API_DEPRECATED("Drawers are deprecated; consider using NSSplitViewController", macos(10.0,10.13));
 
 @end
 
-APPKIT_EXTERN NSNotificationName NSDrawerWillOpenNotification NS_DEPRECATED_MAC(10_0, 10_13, "Drawers are deprecated; consider using NSSplitViewController");
-APPKIT_EXTERN NSNotificationName NSDrawerDidOpenNotification NS_DEPRECATED_MAC(10_0, 10_13, "Drawers are deprecated; consider using NSSplitViewController");
-APPKIT_EXTERN NSNotificationName NSDrawerWillCloseNotification NS_DEPRECATED_MAC(10_0, 10_13, "Drawers are deprecated; consider using NSSplitViewController");
-APPKIT_EXTERN NSNotificationName NSDrawerDidCloseNotification NS_DEPRECATED_MAC(10_0, 10_13, "Drawers are deprecated; consider using NSSplitViewController");
+APPKIT_EXTERN NSNotificationName NSDrawerWillOpenNotification API_DEPRECATED("Drawers are deprecated; consider using NSSplitViewController", macos(10.0,10.13));
+APPKIT_EXTERN NSNotificationName NSDrawerDidOpenNotification API_DEPRECATED("Drawers are deprecated; consider using NSSplitViewController", macos(10.0,10.13));
+APPKIT_EXTERN NSNotificationName NSDrawerWillCloseNotification API_DEPRECATED("Drawers are deprecated; consider using NSSplitViewController", macos(10.0,10.13));
+APPKIT_EXTERN NSNotificationName NSDrawerDidCloseNotification API_DEPRECATED("Drawers are deprecated; consider using NSSplitViewController", macos(10.0,10.13));
 
+API_UNAVAILABLE_END
 NS_ASSUME_NONNULL_END
 

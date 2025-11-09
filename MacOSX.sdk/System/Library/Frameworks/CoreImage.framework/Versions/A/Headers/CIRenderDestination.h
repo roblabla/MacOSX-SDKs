@@ -12,7 +12,7 @@
 #import <CoreImage/CIContext.h>
 #import <CoreImage/CIKernel.h>
 #import <CoreVideo/CoreVideo.h>
-#if !TARGET_OS_SIMULATOR
+#if COREIMAGE_SUPPORTS_IOSURFACE
 #import <IOSurface/IOSurfaceObjC.h>
 #endif
 #import <Metal/MTLPixelFormat.h>
@@ -44,7 +44,7 @@ NS_CLASS_AVAILABLE(10_13, 11_0)
 
 // MARK: Surface destinations
 
-#if !TARGET_OS_SIMULATOR
+#if COREIMAGE_SUPPORTS_IOSURFACE
 // Create a CIRenderDestination based on an IOSurface object.
 //
 // The destination's 'colorspace' property will default a CGColorSpace created by,
@@ -59,6 +59,9 @@ NS_CLASS_AVAILABLE(10_13, 11_0)
 // The texture must have a MTLTextureType of MTLTextureType2D
 //
 // An optional MTLCommandBuffer can be specified, with which to use for rendering to the MTLTexture.
+// NOTE: Rendering to a texture initialized with a commandBuffer requires encoding all the commands to render an image into the specified buffer.
+// This may impact system responsiveness and may result in higher memory usage if the image requires many passes to render.
+// To avoid this impact, it is recommended to create a context using [CIContext contextWithMTLCommandQueue:] and create the CIRenderDestination without specifying a buffer.
 //
 // The destination's 'colorspace' property will default a CGColorSpace created with kCGColorSpaceSRGB,
 // kCGColorSpaceExtendedSRGB, or kCGColorSpaceGenericGrayGamma2_2.
@@ -145,7 +148,7 @@ typedef NS_ENUM(NSUInteger, CIRenderDestinationAlphaMode) {
 // pixel centered on the logical coordinate (0.5,0.5)
 //
 // If 'flipped' is true, then the base address of the backing stores the
-// pixel centered on the logical coordinate (pixelsWide-0.5,0.5)
+// pixel centered on the logical coordinate (0.5,height-0.5)
 //
 @property (getter=isFlipped) BOOL flipped;
 

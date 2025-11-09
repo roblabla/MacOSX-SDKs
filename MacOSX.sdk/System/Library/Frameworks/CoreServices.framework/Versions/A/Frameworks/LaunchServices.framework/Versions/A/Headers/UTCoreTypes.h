@@ -95,13 +95,13 @@ CF_ASSUME_NONNULL_BEGIN
  *    UTI: public.disk-image
  *
  */
-extern const CFStringRef kUTTypeItem                                 __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_3_0);
-extern const CFStringRef kUTTypeContent                              __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_3_0);
-extern const CFStringRef kUTTypeCompositeContent                     __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_3_0);
-extern const CFStringRef kUTTypeMessage                              __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_3_0);
-extern const CFStringRef kUTTypeContact                              __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_3_0);
-extern const CFStringRef kUTTypeArchive                              __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_3_0);
-extern const CFStringRef kUTTypeDiskImage                            __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_3_0);
+extern const CFStringRef kUTTypeItem                                 API_AVAILABLE( ios(3.0), macos(10.4), tvos(9.0), watchos(1.0) );
+extern const CFStringRef kUTTypeContent                              API_AVAILABLE( ios(3.0), macos(10.4), tvos(9.0), watchos(1.0) );
+extern const CFStringRef kUTTypeCompositeContent                     API_AVAILABLE( ios(3.0), macos(10.4), tvos(9.0), watchos(1.0) );
+extern const CFStringRef kUTTypeMessage                              API_AVAILABLE( ios(3.0), macos(10.4), tvos(9.0), watchos(1.0) );
+extern const CFStringRef kUTTypeContact                              API_AVAILABLE( ios(3.0), macos(10.4), tvos(9.0), watchos(1.0) );
+extern const CFStringRef kUTTypeArchive                              API_AVAILABLE( ios(3.0), macos(10.4), tvos(9.0), watchos(1.0) );
+extern const CFStringRef kUTTypeDiskImage                            API_AVAILABLE( ios(3.0), macos(10.4), tvos(9.0), watchos(1.0) );
 
 #pragma mark - Concrete base types
 /*
@@ -177,15 +177,15 @@ extern const CFStringRef kUTTypeDiskImage                            __OSX_AVAIL
  *    conforms to: public.data, com.apple.resolvable
  *
  */
-extern const CFStringRef kUTTypeData                                 __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_3_0);
-extern const CFStringRef kUTTypeDirectory                            __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_3_0);
-extern const CFStringRef kUTTypeResolvable                           __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_3_0);
-extern const CFStringRef kUTTypeSymLink                              __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_3_0);
-extern const CFStringRef kUTTypeExecutable                           __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_8_0);
-extern const CFStringRef kUTTypeMountPoint                           __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_3_0);
-extern const CFStringRef kUTTypeAliasFile                            __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_3_0);
-extern const CFStringRef kUTTypeAliasRecord                          __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_3_0);
-extern const CFStringRef kUTTypeURLBookmarkData                      __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
+extern const CFStringRef kUTTypeData                                 API_AVAILABLE( ios(3.0), macos(10.4), tvos(9.0), watchos(1.0) );
+extern const CFStringRef kUTTypeDirectory                            API_AVAILABLE( ios(3.0), macos(10.4), tvos(9.0), watchos(1.0) );
+extern const CFStringRef kUTTypeResolvable                           API_AVAILABLE( ios(3.0), macos(10.4), tvos(9.0), watchos(1.0) );
+extern const CFStringRef kUTTypeSymLink                              API_AVAILABLE( ios(3.0), macos(10.4), tvos(9.0), watchos(1.0) );
+extern const CFStringRef kUTTypeExecutable                           API_AVAILABLE( ios(8.0), macos(10.5), tvos(9.0), watchos(1.0) );
+extern const CFStringRef kUTTypeMountPoint                           API_AVAILABLE( ios(3.0), macos(10.4), tvos(9.0), watchos(1.0) );
+extern const CFStringRef kUTTypeAliasFile                            API_AVAILABLE( ios(3.0), macos(10.4), tvos(9.0), watchos(1.0) );
+extern const CFStringRef kUTTypeAliasRecord                          API_AVAILABLE( ios(3.0), macos(10.4), tvos(9.0), watchos(1.0) );
+extern const CFStringRef kUTTypeURLBookmarkData                      API_AVAILABLE( ios(8.0), macos(10.10), tvos(9.0), watchos(1.0) );
 
 #pragma mark - URL types
 /*
@@ -207,8 +207,8 @@ extern const CFStringRef kUTTypeURLBookmarkData                      __OSX_AVAIL
  *    conforms to: public.url
  *
  */
-extern const CFStringRef kUTTypeURL                                  __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_3_0);
-extern const CFStringRef kUTTypeFileURL                              __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_3_0);
+extern const CFStringRef kUTTypeURL                                  API_AVAILABLE( ios(3.0), macos(10.4), tvos(9.0), watchos(1.0) );
+extern const CFStringRef kUTTypeFileURL                              API_AVAILABLE( ios(3.0), macos(10.4), tvos(9.0), watchos(1.0) );
 
 #pragma mark - Text types
 /*
@@ -298,16 +298,16 @@ extern const CFStringRef kUTTypeFileURL                              __OSX_AVAIL
  *    conforms to: public.text
  *
  */
-extern const CFStringRef kUTTypeText                                 __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_3_0);
-extern const CFStringRef kUTTypePlainText                            __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_3_0);
-extern const CFStringRef kUTTypeUTF8PlainText                        __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_3_0);
-extern const CFStringRef kUTTypeUTF16ExternalPlainText               __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_3_0);
-extern const CFStringRef kUTTypeUTF16PlainText                       __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_3_0);
-extern const CFStringRef kUTTypeDelimitedText                        __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
-extern const CFStringRef kUTTypeCommaSeparatedText                   __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
-extern const CFStringRef kUTTypeTabSeparatedText                     __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
-extern const CFStringRef kUTTypeUTF8TabSeparatedText                 __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
-extern const CFStringRef kUTTypeRTF                                  __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_3_0);
+extern const CFStringRef kUTTypeText                                 API_AVAILABLE( ios(3.0), macos(10.4), tvos(9.0), watchos(1.0) );
+extern const CFStringRef kUTTypePlainText                            API_AVAILABLE( ios(3.0), macos(10.4), tvos(9.0), watchos(1.0) );
+extern const CFStringRef kUTTypeUTF8PlainText                        API_AVAILABLE( ios(3.0), macos(10.4), tvos(9.0), watchos(1.0) );
+extern const CFStringRef kUTTypeUTF16ExternalPlainText               API_AVAILABLE( ios(3.0), macos(10.4), tvos(9.0), watchos(1.0) );
+extern const CFStringRef kUTTypeUTF16PlainText                       API_AVAILABLE( ios(3.0), macos(10.4), tvos(9.0), watchos(1.0) );
+extern const CFStringRef kUTTypeDelimitedText                        API_AVAILABLE( ios(8.0), macos(10.10), tvos(9.0), watchos(1.0) );
+extern const CFStringRef kUTTypeCommaSeparatedText                   API_AVAILABLE( ios(8.0), macos(10.10), tvos(9.0), watchos(1.0) );
+extern const CFStringRef kUTTypeTabSeparatedText                     API_AVAILABLE( ios(8.0), macos(10.10), tvos(9.0), watchos(1.0) );
+extern const CFStringRef kUTTypeUTF8TabSeparatedText                 API_AVAILABLE( ios(8.0), macos(10.10), tvos(9.0), watchos(1.0) );
+extern const CFStringRef kUTTypeRTF                                  API_AVAILABLE( ios(3.0), macos(10.4), tvos(9.0), watchos(1.0) );
 
 #pragma mark - Markup languages
 /*
@@ -327,8 +327,8 @@ extern const CFStringRef kUTTypeRTF                                  __OSX_AVAIL
  *    conforms to: public.text
  *
  */
-extern const CFStringRef kUTTypeHTML                                 __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_3_0);
-extern const CFStringRef kUTTypeXML                                  __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_3_0);
+extern const CFStringRef kUTTypeHTML                                 API_AVAILABLE( ios(3.0), macos(10.4), tvos(9.0), watchos(1.0) );
+extern const CFStringRef kUTTypeXML                                  API_AVAILABLE( ios(3.0), macos(10.4), tvos(9.0), watchos(1.0) );
 
 #pragma mark - Programming languages
 /*
@@ -412,16 +412,16 @@ extern const CFStringRef kUTTypeXML                                  __OSX_AVAIL
  *    conforms to: public.source-code
  *
  */
-extern const CFStringRef kUTTypeSourceCode                           __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_3_0);
-extern const CFStringRef kUTTypeAssemblyLanguageSource               __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
-extern const CFStringRef kUTTypeCSource                              __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_3_0);
-extern const CFStringRef kUTTypeObjectiveCSource                     __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_3_0);
-extern const CFStringRef kUTTypeSwiftSource                          __OSX_AVAILABLE_STARTING(__MAC_10_11,__IPHONE_9_0);
-extern const CFStringRef kUTTypeCPlusPlusSource                      __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_3_0);
-extern const CFStringRef kUTTypeObjectiveCPlusPlusSource             __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_3_0);
-extern const CFStringRef kUTTypeCHeader                              __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_3_0);
-extern const CFStringRef kUTTypeCPlusPlusHeader                      __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_3_0);
-extern const CFStringRef kUTTypeJavaSource                           __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_3_0);
+extern const CFStringRef kUTTypeSourceCode                           API_AVAILABLE( ios(3.0), macos(10.4), tvos(9.0), watchos(1.0) );
+extern const CFStringRef kUTTypeAssemblyLanguageSource               API_AVAILABLE( ios(8.0), macos(10.10), tvos(9.0), watchos(1.0) );
+extern const CFStringRef kUTTypeCSource                              API_AVAILABLE( ios(3.0), macos(10.4), tvos(9.0), watchos(1.0) );
+extern const CFStringRef kUTTypeObjectiveCSource                     API_AVAILABLE( ios(3.0), macos(10.4), tvos(9.0), watchos(1.0) );
+extern const CFStringRef kUTTypeSwiftSource                          API_AVAILABLE( ios(9.0), macos(10.11), tvos(9.0), watchos(2.0) );
+extern const CFStringRef kUTTypeCPlusPlusSource                      API_AVAILABLE( ios(3.0), macos(10.4), tvos(9.0), watchos(1.0) );
+extern const CFStringRef kUTTypeObjectiveCPlusPlusSource             API_AVAILABLE( ios(3.0), macos(10.4), tvos(9.0), watchos(1.0) );
+extern const CFStringRef kUTTypeCHeader                              API_AVAILABLE( ios(3.0), macos(10.4), tvos(9.0), watchos(1.0) );
+extern const CFStringRef kUTTypeCPlusPlusHeader                      API_AVAILABLE( ios(3.0), macos(10.4), tvos(9.0), watchos(1.0) );
+extern const CFStringRef kUTTypeJavaSource                           API_AVAILABLE( ios(3.0), macos(10.4), tvos(9.0), watchos(1.0) );
 
 #pragma mark - Scripting languages
 /*
@@ -505,16 +505,16 @@ extern const CFStringRef kUTTypeJavaSource                           __OSX_AVAIL
  *    conforms to: public.shell-script
  *
  */
-extern const CFStringRef kUTTypeScript                               __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
-extern const CFStringRef kUTTypeAppleScript                          __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
-extern const CFStringRef kUTTypeOSAScript                            __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
-extern const CFStringRef kUTTypeOSAScriptBundle                      __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
-extern const CFStringRef kUTTypeJavaScript                           __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
-extern const CFStringRef kUTTypeShellScript                          __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
-extern const CFStringRef kUTTypePerlScript                           __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
-extern const CFStringRef kUTTypePythonScript                         __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
-extern const CFStringRef kUTTypeRubyScript                           __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
-extern const CFStringRef kUTTypePHPScript                            __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
+extern const CFStringRef kUTTypeScript                               API_AVAILABLE( ios(8.0), macos(10.10), tvos(9.0), watchos(1.0) );
+extern const CFStringRef kUTTypeAppleScript                          API_AVAILABLE( ios(8.0), macos(10.10), tvos(9.0), watchos(1.0) );
+extern const CFStringRef kUTTypeOSAScript                            API_AVAILABLE( ios(8.0), macos(10.10), tvos(9.0), watchos(1.0) );
+extern const CFStringRef kUTTypeOSAScriptBundle                      API_AVAILABLE( ios(8.0), macos(10.10), tvos(9.0), watchos(1.0) );
+extern const CFStringRef kUTTypeJavaScript                           API_AVAILABLE( ios(8.0), macos(10.10), tvos(9.0), watchos(1.0) );
+extern const CFStringRef kUTTypeShellScript                          API_AVAILABLE( ios(8.0), macos(10.10), tvos(9.0), watchos(1.0) );
+extern const CFStringRef kUTTypePerlScript                           API_AVAILABLE( ios(8.0), macos(10.10), tvos(9.0), watchos(1.0) );
+extern const CFStringRef kUTTypePythonScript                         API_AVAILABLE( ios(8.0), macos(10.10), tvos(9.0), watchos(1.0) );
+extern const CFStringRef kUTTypeRubyScript                           API_AVAILABLE( ios(8.0), macos(10.10), tvos(9.0), watchos(1.0) );
+extern const CFStringRef kUTTypePHPScript                            API_AVAILABLE( ios(8.0), macos(10.10), tvos(9.0), watchos(1.0) );
 
 #pragma mark - Serialized data types
 /*
@@ -552,10 +552,10 @@ extern const CFStringRef kUTTypePHPScript                            __OSX_AVAIL
  *    conforms to: com.apple.property-list
  *
  */
-extern const CFStringRef kUTTypeJSON                                 __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
-extern const CFStringRef kUTTypePropertyList                         __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
-extern const CFStringRef kUTTypeXMLPropertyList                      __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
-extern const CFStringRef kUTTypeBinaryPropertyList                   __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
+extern const CFStringRef kUTTypeJSON                                 API_AVAILABLE( ios(8.0), macos(10.10), tvos(9.0), watchos(1.0) );
+extern const CFStringRef kUTTypePropertyList                         API_AVAILABLE( ios(8.0), macos(10.10), tvos(9.0), watchos(1.0) );
+extern const CFStringRef kUTTypeXMLPropertyList                      API_AVAILABLE( ios(8.0), macos(10.10), tvos(9.0), watchos(1.0) );
+extern const CFStringRef kUTTypeBinaryPropertyList                   API_AVAILABLE( ios(8.0), macos(10.10), tvos(9.0), watchos(1.0) );
 
 #pragma mark - Composite content types
 /*
@@ -600,11 +600,11 @@ extern const CFStringRef kUTTypeBinaryPropertyList                   __OSX_AVAIL
  *    UTI: com.apple.webarchive
  *    conforms to: public.data, public.composite-content
  */
-extern const CFStringRef kUTTypePDF                                  __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_3_0);
-extern const CFStringRef kUTTypeRTFD                                 __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_3_0);
-extern const CFStringRef kUTTypeFlatRTFD                             __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_3_0);
-extern const CFStringRef kUTTypeTXNTextAndMultimediaData             __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_3_0);
-extern const CFStringRef kUTTypeWebArchive                           __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_3_0);
+extern const CFStringRef kUTTypePDF                                  API_AVAILABLE( ios(3.0), macos(10.4), tvos(9.0), watchos(1.0) );
+extern const CFStringRef kUTTypeRTFD                                 API_AVAILABLE( ios(3.0), macos(10.4), tvos(9.0), watchos(1.0) );
+extern const CFStringRef kUTTypeFlatRTFD                             API_AVAILABLE( ios(3.0), macos(10.4), tvos(9.0), watchos(1.0) );
+extern const CFStringRef kUTTypeTXNTextAndMultimediaData             API_AVAILABLE( ios(3.0), macos(10.4), tvos(9.0), watchos(1.0) );
+extern const CFStringRef kUTTypeWebArchive                           API_AVAILABLE( ios(3.0), macos(10.4), tvos(9.0), watchos(1.0) );
 
 
 #pragma mark - Image content types
@@ -720,20 +720,20 @@ extern const CFStringRef kUTTypeWebArchive                           __OSX_AVAIL
  *
  *
  */
-extern const CFStringRef kUTTypeImage                                __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_3_0);
-extern const CFStringRef kUTTypeJPEG                                 __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_3_0);
-extern const CFStringRef kUTTypeJPEG2000                             __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_3_0);
-extern const CFStringRef kUTTypeTIFF                                 __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_3_0);
-extern const CFStringRef kUTTypePICT                                 __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_3_0);
-extern const CFStringRef kUTTypeGIF                                  __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_3_0);
-extern const CFStringRef kUTTypePNG                                  __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_3_0);
-extern const CFStringRef kUTTypeQuickTimeImage                       __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_3_0);
-extern const CFStringRef kUTTypeAppleICNS                            __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_3_0);
-extern const CFStringRef kUTTypeBMP                                  __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_3_0);
-extern const CFStringRef kUTTypeICO                                  __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_3_0);
-extern const CFStringRef kUTTypeRawImage                             __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
-extern const CFStringRef kUTTypeScalableVectorGraphics               __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
-extern const CFStringRef kUTTypeLivePhoto                            __OSX_AVAILABLE_STARTING(__MAC_10_12,__IPHONE_9_1);
+extern const CFStringRef kUTTypeImage                                API_AVAILABLE( ios(3.0), macos(10.4), tvos(9.0), watchos(1.0) );
+extern const CFStringRef kUTTypeJPEG                                 API_AVAILABLE( ios(3.0), macos(10.4), tvos(9.0), watchos(1.0) );
+extern const CFStringRef kUTTypeJPEG2000                             API_AVAILABLE( ios(3.0), macos(10.4), tvos(9.0), watchos(1.0) );
+extern const CFStringRef kUTTypeTIFF                                 API_AVAILABLE( ios(3.0), macos(10.4), tvos(9.0), watchos(1.0) );
+extern const CFStringRef kUTTypePICT                                 API_AVAILABLE( ios(3.0), macos(10.4), tvos(9.0), watchos(1.0) );
+extern const CFStringRef kUTTypeGIF                                  API_AVAILABLE( ios(3.0), macos(10.4), tvos(9.0), watchos(1.0) );
+extern const CFStringRef kUTTypePNG                                  API_AVAILABLE( ios(3.0), macos(10.4), tvos(9.0), watchos(1.0) );
+extern const CFStringRef kUTTypeQuickTimeImage                       API_AVAILABLE( ios(3.0), macos(10.4), tvos(9.0), watchos(1.0) );
+extern const CFStringRef kUTTypeAppleICNS                            API_AVAILABLE( ios(3.0), macos(10.4), tvos(9.0), watchos(1.0) );
+extern const CFStringRef kUTTypeBMP                                  API_AVAILABLE( ios(3.0), macos(10.4), tvos(9.0), watchos(1.0) );
+extern const CFStringRef kUTTypeICO                                  API_AVAILABLE( ios(3.0), macos(10.4), tvos(9.0), watchos(1.0) );
+extern const CFStringRef kUTTypeRawImage                             API_AVAILABLE( ios(8.0), macos(10.10), tvos(9.0), watchos(1.0) );
+extern const CFStringRef kUTTypeScalableVectorGraphics               API_AVAILABLE( ios(8.0), macos(10.10), tvos(9.0), watchos(1.0) );
+extern const CFStringRef kUTTypeLivePhoto                            API_AVAILABLE( ios(9.1), macos(10.12), tvos(9.0), watchos(2.1) );
 
 #pragma mark - Audiovisual content types
 /*
@@ -876,23 +876,23 @@ extern const CFStringRef kUTTypeLivePhoto                            __OSX_AVAIL
  *
  *
  */
-extern const CFStringRef kUTTypeAudiovisualContent                   __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_3_0);
-extern const CFStringRef kUTTypeMovie                                __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_3_0);
-extern const CFStringRef kUTTypeVideo                                __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_3_0);
-extern const CFStringRef kUTTypeAudio                                __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_3_0);
-extern const CFStringRef kUTTypeQuickTimeMovie                       __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_3_0);
-extern const CFStringRef kUTTypeMPEG                                 __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_3_0);
-extern const CFStringRef kUTTypeMPEG2Video                           __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
-extern const CFStringRef kUTTypeMPEG2TransportStream                 __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
-extern const CFStringRef kUTTypeMP3                                  __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_3_0);
-extern const CFStringRef kUTTypeMPEG4                                __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_3_0);
-extern const CFStringRef kUTTypeMPEG4Audio                           __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_3_0);
-extern const CFStringRef kUTTypeAppleProtectedMPEG4Audio             __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_3_0);
-extern const CFStringRef kUTTypeAppleProtectedMPEG4Video             __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
-extern const CFStringRef kUTTypeAVIMovie                             __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
-extern const CFStringRef kUTTypeAudioInterchangeFileFormat           __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
-extern const CFStringRef kUTTypeWaveformAudio                        __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
-extern const CFStringRef kUTTypeMIDIAudio                            __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
+extern const CFStringRef kUTTypeAudiovisualContent                   API_AVAILABLE( ios(3.0), macos(10.4), tvos(9.0), watchos(1.0) );
+extern const CFStringRef kUTTypeMovie                                API_AVAILABLE( ios(3.0), macos(10.4), tvos(9.0), watchos(1.0) );
+extern const CFStringRef kUTTypeVideo                                API_AVAILABLE( ios(3.0), macos(10.4), tvos(9.0), watchos(1.0) );
+extern const CFStringRef kUTTypeAudio                                API_AVAILABLE( ios(3.0), macos(10.4), tvos(9.0), watchos(1.0) );
+extern const CFStringRef kUTTypeQuickTimeMovie                       API_AVAILABLE( ios(3.0), macos(10.4), tvos(9.0), watchos(1.0) );
+extern const CFStringRef kUTTypeMPEG                                 API_AVAILABLE( ios(3.0), macos(10.4), tvos(9.0), watchos(1.0) );
+extern const CFStringRef kUTTypeMPEG2Video                           API_AVAILABLE( ios(8.0), macos(10.10), tvos(9.0), watchos(1.0) );
+extern const CFStringRef kUTTypeMPEG2TransportStream                 API_AVAILABLE( ios(8.0), macos(10.10), tvos(9.0), watchos(1.0) );
+extern const CFStringRef kUTTypeMP3                                  API_AVAILABLE( ios(3.0), macos(10.4), tvos(9.0), watchos(1.0) );
+extern const CFStringRef kUTTypeMPEG4                                API_AVAILABLE( ios(3.0), macos(10.4), tvos(9.0), watchos(1.0) );
+extern const CFStringRef kUTTypeMPEG4Audio                           API_AVAILABLE( ios(3.0), macos(10.4), tvos(9.0), watchos(1.0) );
+extern const CFStringRef kUTTypeAppleProtectedMPEG4Audio             API_AVAILABLE( ios(3.0), macos(10.4), tvos(9.0), watchos(1.0) );
+extern const CFStringRef kUTTypeAppleProtectedMPEG4Video             API_AVAILABLE( ios(8.0), macos(10.10), tvos(9.0), watchos(1.0) );
+extern const CFStringRef kUTTypeAVIMovie                             API_AVAILABLE( ios(8.0), macos(10.10), tvos(9.0), watchos(1.0) );
+extern const CFStringRef kUTTypeAudioInterchangeFileFormat           API_AVAILABLE( ios(8.0), macos(10.10), tvos(9.0), watchos(1.0) );
+extern const CFStringRef kUTTypeWaveformAudio                        API_AVAILABLE( ios(8.0), macos(10.10), tvos(9.0), watchos(1.0) );
+extern const CFStringRef kUTTypeMIDIAudio                            API_AVAILABLE( ios(8.0), macos(10.10), tvos(9.0), watchos(1.0) );
 
 /*
  *  kUTTypePlaylist
@@ -910,8 +910,8 @@ extern const CFStringRef kUTTypeMIDIAudio                            __OSX_AVAIL
  *    conforms to: public.text, public.playlist
  *
  */
-extern const CFStringRef kUTTypePlaylist                             __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
-extern const CFStringRef kUTTypeM3UPlaylist                          __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
+extern const CFStringRef kUTTypePlaylist                             API_AVAILABLE( ios(8.0), macos(10.10), tvos(9.0), watchos(1.0) );
+extern const CFStringRef kUTTypeM3UPlaylist                          API_AVAILABLE( ios(8.0), macos(10.10), tvos(9.0), watchos(1.0) );
 
 #pragma mark - Directory types
 /*
@@ -987,15 +987,15 @@ extern const CFStringRef kUTTypeM3UPlaylist                          __OSX_AVAIL
  *    conforms to: com.apple.bundle
  *
  */
-extern const CFStringRef kUTTypeFolder                               __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_3_0);
-extern const CFStringRef kUTTypeVolume                               __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_3_0);
-extern const CFStringRef kUTTypePackage                              __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_3_0);
-extern const CFStringRef kUTTypeBundle                               __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_3_0);
-extern const CFStringRef kUTTypePluginBundle                         __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
-extern const CFStringRef kUTTypeSpotlightImporter                    __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
-extern const CFStringRef kUTTypeQuickLookGenerator                   __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
-extern const CFStringRef kUTTypeXPCService                           __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
-extern const CFStringRef kUTTypeFramework                            __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_3_0);
+extern const CFStringRef kUTTypeFolder                               API_AVAILABLE( ios(3.0), macos(10.4), tvos(9.0), watchos(1.0) );
+extern const CFStringRef kUTTypeVolume                               API_AVAILABLE( ios(3.0), macos(10.4), tvos(9.0), watchos(1.0) );
+extern const CFStringRef kUTTypePackage                              API_AVAILABLE( ios(3.0), macos(10.4), tvos(9.0), watchos(1.0) );
+extern const CFStringRef kUTTypeBundle                               API_AVAILABLE( ios(3.0), macos(10.4), tvos(9.0), watchos(1.0) );
+extern const CFStringRef kUTTypePluginBundle                         API_AVAILABLE( ios(8.0), macos(10.10), tvos(9.0), watchos(1.0) );
+extern const CFStringRef kUTTypeSpotlightImporter                    API_AVAILABLE( ios(8.0), macos(10.10), tvos(9.0), watchos(1.0) );
+extern const CFStringRef kUTTypeQuickLookGenerator                   API_AVAILABLE( ios(8.0), macos(10.10), tvos(9.0), watchos(1.0) );
+extern const CFStringRef kUTTypeXPCService                           API_AVAILABLE( ios(8.0), macos(10.10), tvos(9.0), watchos(1.0) );
+extern const CFStringRef kUTTypeFramework                            API_AVAILABLE( ios(3.0), macos(10.4), tvos(9.0), watchos(1.0) );
 
 
 #pragma mark - Application and executable types
@@ -1065,18 +1065,18 @@ extern const CFStringRef kUTTypeFramework                            __OSX_AVAIL
  *
  */
 // Abstract executable types
-extern const CFStringRef kUTTypeApplication                          __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_3_0);
-extern const CFStringRef kUTTypeApplicationBundle                    __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_3_0);
-extern const CFStringRef kUTTypeApplicationFile                      __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_3_0);
-extern const CFStringRef kUTTypeUnixExecutable                       __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
+extern const CFStringRef kUTTypeApplication                          API_AVAILABLE( ios(3.0), macos(10.4), tvos(9.0), watchos(1.0) );
+extern const CFStringRef kUTTypeApplicationBundle                    API_AVAILABLE( ios(3.0), macos(10.4), tvos(9.0), watchos(1.0) );
+extern const CFStringRef kUTTypeApplicationFile                      API_AVAILABLE( ios(3.0), macos(10.4), tvos(9.0), watchos(1.0) );
+extern const CFStringRef kUTTypeUnixExecutable                       API_AVAILABLE( ios(8.0), macos(10.10), tvos(9.0), watchos(1.0) );
 
 // Other platform binaries
-extern const CFStringRef kUTTypeWindowsExecutable                    __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
-extern const CFStringRef kUTTypeJavaClass                            __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
-extern const CFStringRef kUTTypeJavaArchive                          __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
+extern const CFStringRef kUTTypeWindowsExecutable                    API_AVAILABLE( ios(8.0), macos(10.10), tvos(9.0), watchos(1.0) );
+extern const CFStringRef kUTTypeJavaClass                            API_AVAILABLE( ios(8.0), macos(10.10), tvos(9.0), watchos(1.0) );
+extern const CFStringRef kUTTypeJavaArchive                          API_AVAILABLE( ios(8.0), macos(10.10), tvos(9.0), watchos(1.0) );
 
 // Misc. binaries
-extern const CFStringRef kUTTypeSystemPreferencesPane                __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
+extern const CFStringRef kUTTypeSystemPreferencesPane                API_AVAILABLE( ios(8.0), macos(10.10), tvos(9.0), watchos(1.0) );
 
 #pragma mark - Archival and compression types
 /*
@@ -1104,9 +1104,9 @@ extern const CFStringRef kUTTypeSystemPreferencesPane                __OSX_AVAIL
  *    conforms to: com.pkware.zip-archive
  *
  */
-extern const CFStringRef kUTTypeGNUZipArchive                        __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
-extern const CFStringRef kUTTypeBzip2Archive                         __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
-extern const CFStringRef kUTTypeZipArchive                           __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
+extern const CFStringRef kUTTypeGNUZipArchive                        API_AVAILABLE( ios(8.0), macos(10.10), tvos(9.0), watchos(1.0) );
+extern const CFStringRef kUTTypeBzip2Archive                         API_AVAILABLE( ios(8.0), macos(10.10), tvos(9.0), watchos(1.0) );
+extern const CFStringRef kUTTypeZipArchive                           API_AVAILABLE( ios(8.0), macos(10.10), tvos(9.0), watchos(1.0) );
 
 
 #pragma mark - Document types
@@ -1134,9 +1134,9 @@ extern const CFStringRef kUTTypeZipArchive                           __OSX_AVAIL
  *    UTI: public.database
  *
  */
-extern const CFStringRef kUTTypeSpreadsheet                          __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
-extern const CFStringRef kUTTypePresentation                         __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
-extern const CFStringRef kUTTypeDatabase                             __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_8_0);
+extern const CFStringRef kUTTypeSpreadsheet                          API_AVAILABLE( ios(8.0), macos(10.10), tvos(9.0), watchos(1.0) );
+extern const CFStringRef kUTTypePresentation                         API_AVAILABLE( ios(8.0), macos(10.10), tvos(9.0), watchos(1.0) );
+extern const CFStringRef kUTTypeDatabase                             API_AVAILABLE( ios(8.0), macos(10.4), tvos(9.0), watchos(1.0) );
 
 
 #pragma mark - Messages, contacts, and calendar types
@@ -1171,10 +1171,10 @@ extern const CFStringRef kUTTypeDatabase                             __OSX_AVAIL
  *    conforms to: public.message
  *
  */
-extern const CFStringRef kUTTypeVCard                                __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_3_0);
-extern const CFStringRef kUTTypeToDoItem                             __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
-extern const CFStringRef kUTTypeCalendarEvent                        __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
-extern const CFStringRef kUTTypeEmailMessage                         __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
+extern const CFStringRef kUTTypeVCard                                API_AVAILABLE( ios(3.0), macos(10.4), tvos(9.0), watchos(1.0) );
+extern const CFStringRef kUTTypeToDoItem                             API_AVAILABLE( ios(8.0), macos(10.10), tvos(9.0), watchos(1.0) );
+extern const CFStringRef kUTTypeCalendarEvent                        API_AVAILABLE( ios(8.0), macos(10.10), tvos(9.0), watchos(1.0) );
+extern const CFStringRef kUTTypeEmailMessage                         API_AVAILABLE( ios(8.0), macos(10.10), tvos(9.0), watchos(1.0) );
 
 #pragma mark - Internet locations
 /*
@@ -1186,7 +1186,7 @@ extern const CFStringRef kUTTypeEmailMessage                         __OSX_AVAIL
  *    conforms to: public.data
  *
  */
-extern const CFStringRef kUTTypeInternetLocation                     __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
+extern const CFStringRef kUTTypeInternetLocation                     API_AVAILABLE( ios(8.0), macos(10.10), tvos(9.0), watchos(1.0) );
 
 
 #pragma mark - Miscellaneous types
@@ -1252,14 +1252,14 @@ extern const CFStringRef kUTTypeInternetLocation                     __OSX_AVAIL
  *    UTI: public.log
  *
  */
-extern const CFStringRef kUTTypeInkText                              __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_3_0);
-extern const CFStringRef kUTTypeFont                                 __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
-extern const CFStringRef kUTTypeBookmark                             __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
-extern const CFStringRef kUTType3DContent                            __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
-extern const CFStringRef kUTTypePKCS12                               __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
-extern const CFStringRef kUTTypeX509Certificate                      __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
-extern const CFStringRef kUTTypeElectronicPublication                __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
-extern const CFStringRef kUTTypeLog                                  __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
+extern const CFStringRef kUTTypeInkText                              API_AVAILABLE( ios(3.0), macos(10.4), tvos(9.0), watchos(1.0) );
+extern const CFStringRef kUTTypeFont                                 API_AVAILABLE( ios(8.0), macos(10.10), tvos(9.0), watchos(1.0) );
+extern const CFStringRef kUTTypeBookmark                             API_AVAILABLE( ios(8.0), macos(10.10), tvos(9.0), watchos(1.0) );
+extern const CFStringRef kUTType3DContent                            API_AVAILABLE( ios(8.0), macos(10.10), tvos(9.0), watchos(1.0) );
+extern const CFStringRef kUTTypePKCS12                               API_AVAILABLE( ios(8.0), macos(10.10), tvos(9.0), watchos(1.0) );
+extern const CFStringRef kUTTypeX509Certificate                      API_AVAILABLE( ios(8.0), macos(10.10), tvos(9.0), watchos(1.0) );
+extern const CFStringRef kUTTypeElectronicPublication                API_AVAILABLE( ios(8.0), macos(10.10), tvos(9.0), watchos(1.0) );
+extern const CFStringRef kUTTypeLog                                  API_AVAILABLE( ios(8.0), macos(10.10), tvos(9.0), watchos(1.0) );
 
 
 

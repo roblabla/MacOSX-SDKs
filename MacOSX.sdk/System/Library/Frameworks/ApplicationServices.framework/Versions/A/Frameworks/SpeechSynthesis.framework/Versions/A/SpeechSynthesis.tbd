@@ -1,9 +1,8 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 823830AC-62A6-36CC-A659-6BC10F2AC6F5' ]
+uuids:           [ 'x86_64: E294C2A6-8DFF-314D-B1C0-FD338445686D' ]
 platform:        macosx
-install-name:    /System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/SpeechSynthesis.framework/Versions/A/SpeechSynthesis
-objc-constraint: none
+install-name:    '/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/SpeechSynthesis.framework/Versions/A/SpeechSynthesis'
 parent-umbrella: ApplicationServices
 exports:         
   - archs:           [ x86_64 ]

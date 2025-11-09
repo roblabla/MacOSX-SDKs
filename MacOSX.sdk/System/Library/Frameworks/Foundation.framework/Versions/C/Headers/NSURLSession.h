@@ -1,5 +1,5 @@
 /*	NSURLSession.h
-	Copyright (c) 2013-2018, Apple Inc. All rights reserved.
+	Copyright (c) 2013-2019, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -89,6 +89,11 @@
  use of the pipelining option of NSURLSessionConfiguration.  See RFC
  2817 and RFC 6455 for information about the Upgrade: header, and
  comments below on turning data tasks into stream tasks.
+
+ An NSURLSessionWebSocketTask is a task that allows clients to connect to servers supporting
+ WebSocket. The task will perform the HTTP handshake to upgrade the connection
+ and once the WebSocket handshake is successful, the client can read and write
+ messages that will be framed using the WebSocket protocol by the framework.
  */
 
 @class NSURLSession;
@@ -96,6 +101,8 @@
 @class NSURLSessionUploadTask;              /* UploadTask objects receive periodic progress updates but do not return a body */
 @class NSURLSessionDownloadTask;            /* DownloadTask objects represent an active download to disk.  They can provide resume data when canceled. */
 @class NSURLSessionStreamTask;              /* StreamTask objects may be used to create NSInput and NSOutputStreams, or used directly in reading and writing. */
+@class NSURLSessionWebSocketTask;           /* WebSocket objects perform a WebSocket handshake with the server and can be used to send and receive WebSocket messages */
+
 @class NSURLSessionConfiguration;
 @protocol NSURLSessionDelegate;
 
@@ -104,22 +111,11 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-/*
-
- NSURLSession is not available for i386 targets before Mac OS X 10.10.
-
- */
-
-#if __OBJC2__
 #define NSURLSESSION_AVAILABLE	10_9
-#else
-#define NSURLSESSION_AVAILABLE	10_10
-#endif
 
+FOUNDATION_EXPORT const int64_t NSURLSessionTransferSizeUnknown API_AVAILABLE(macos(10.9), ios(7.0), watchos(2.0), tvos(9.0));    /* -1LL */
 
-FOUNDATION_EXPORT const int64_t NSURLSessionTransferSizeUnknown NS_AVAILABLE(NSURLSESSION_AVAILABLE, 7_0);    /* -1LL */
-
-NS_CLASS_AVAILABLE(NSURLSESSION_AVAILABLE, 7_0)
+API_AVAILABLE(macos(10.9), ios(7.0), watchos(2.0), tvos(9.0))
 @interface NSURLSession : NSObject
 
 /*
@@ -207,12 +203,32 @@ NS_CLASS_AVAILABLE(NSURLSESSION_AVAILABLE, 7_0)
 
 /* Creates a bidirectional stream task to a given host and port.
  */
-- (NSURLSessionStreamTask *)streamTaskWithHostName:(NSString *)hostname port:(NSInteger)port API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0)) __WATCHOS_PROHIBITED;
+- (NSURLSessionStreamTask *)streamTaskWithHostName:(NSString *)hostname port:(NSInteger)port API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0));
 
 /* Creates a bidirectional stream task with an NSNetService to identify the endpoint.
  * The NSNetService will be resolved before any IO completes.
  */
-- (NSURLSessionStreamTask *)streamTaskWithNetService:(NSNetService *)service API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0)) __WATCHOS_PROHIBITED;
+- (NSURLSessionStreamTask *)streamTaskWithNetService:(NSNetService *)service API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0)) API_UNAVAILABLE(watchos);
+
+/* Creates a WebSocket task given the url. The given url must have a ws or wss scheme.
+ */
+- (NSURLSessionWebSocketTask *)webSocketTaskWithURL:(NSURL *)url API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0));
+
+/* Creates a WebSocket task given the url and an array of protocols. The protocols will be used in the WebSocket handshake to
+ * negotiate a prefered protocol with the server
+ * Note - The protocol will not affect the WebSocket framing. More details on the protocol can be found by reading the WebSocket RFC
+ */
+- (NSURLSessionWebSocketTask *)webSocketTaskWithURL:(NSURL *)url protocols:(NSArray<NSString *>*)protocols API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0));
+
+/* Creates a WebSocket task given the request. The request properties can be modified and will be used by the task during the HTTP handshake phase.
+ * Clients who want to add custom protocols can do so by directly adding headers with the key Sec-WebSocket-Protocol
+ * and a comma separated list of protocols they wish to negotiate with the server. The custom HTTP headers provided by the client will remain unchanged for the handshake with the server.
+ */
+- (NSURLSessionWebSocketTask *)webSocketTaskWithRequest:(NSURLRequest *)request API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0));
+
+
+- (instancetype)init API_DEPRECATED("Please use +[NSURLSession sessionWithConfiguration:] or other class methods to create instances", macos(10.9,10.15), ios(7.0,13.0), watchos(2.0,6.0), tvos(9.0,13.0));
++ (instancetype)new API_DEPRECATED("Please use +[NSURLSession sessionWithConfiguration:] or other class methods to create instances", macos(10.9,10.15), ios(7.0,13.0), watchos(2.0,6.0), tvos(9.0,13.0));
 
 @end
 
@@ -260,13 +276,13 @@ typedef NS_ENUM(NSInteger, NSURLSessionTaskState) {
     NSURLSessionTaskStateSuspended = 1,
     NSURLSessionTaskStateCanceling = 2,                   /* The task has been told to cancel.  The session will receive a URLSession:task:didCompleteWithError: message. */
     NSURLSessionTaskStateCompleted = 3,                   /* The task has completed and the session will receive no more delegate notifications */
-} NS_ENUM_AVAILABLE(NSURLSESSION_AVAILABLE, 7_0);
+} API_AVAILABLE(macos(10.9), ios(7.0), watchos(2.0), tvos(9.0));
 
 /*
  * NSURLSessionTask - a cancelable object that refers to the lifetime
  * of processing a given request.
  */
-NS_CLASS_AVAILABLE(NSURLSESSION_AVAILABLE, 7_0)
+API_AVAILABLE(macos(10.9), ios(7.0), watchos(2.0), tvos(9.0))
 @interface NSURLSessionTask : NSObject <NSCopying, NSProgressReporting>
 
 @property (readonly)                 NSUInteger    taskIdentifier;    /* an identifier for this task, assigned by and unique to the owning session */
@@ -369,6 +385,10 @@ NS_CLASS_AVAILABLE(NSURLSESSION_AVAILABLE, 7_0)
  */
 @property float priority API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0));
 
+
+- (instancetype)init API_DEPRECATED("Not supported", macos(10.9,10.15), ios(7.0,13.0), watchos(2.0,6.0), tvos(9.0,13.0));
++ (instancetype)new API_DEPRECATED("Not supported", macos(10.9,10.15), ios(7.0,13.0), watchos(2.0,6.0), tvos(9.0,13.0));
+
 @end
 
 FOUNDATION_EXPORT const float NSURLSessionTaskPriorityDefault API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0));
@@ -381,6 +401,10 @@ FOUNDATION_EXPORT const float NSURLSessionTaskPriorityHigh API_AVAILABLE(macos(1
  * to provide lexical differentiation from download and upload tasks.
  */
 @interface NSURLSessionDataTask : NSURLSessionTask
+
+- (instancetype)init API_DEPRECATED("Please use -[NSURLSession dataTaskWithRequest:] or other NSURLSession methods to create instances", macos(10.9,10.15), ios(7.0,13.0), watchos(2.0,6.0), tvos(9.0,13.0));
++ (instancetype)new API_DEPRECATED("Please use -[NSURLSession dataTaskWithRequest:] or other NSURLSession methods to create instances", macos(10.9,10.15), ios(7.0,13.0), watchos(2.0,6.0), tvos(9.0,13.0));
+
 @end
 
 /*
@@ -390,6 +414,10 @@ FOUNDATION_EXPORT const float NSURLSessionTaskPriorityHigh API_AVAILABLE(macos(1
  * to NSURLSessionUploadTasks.
  */
 @interface NSURLSessionUploadTask : NSURLSessionDataTask
+
+- (instancetype)init API_DEPRECATED("Please use -[NSURLSession uploadTaskWithStreamedRequest:] or other NSURLSession methods to create instances", macos(10.9,10.15), ios(7.0,13.0), watchos(2.0,6.0), tvos(9.0,13.0));
++ (instancetype)new API_DEPRECATED("Please use -[NSURLSession uploadTaskWithStreamedRequest:] or other NSURLSession methods to create instances", macos(10.9,10.15), ios(7.0,13.0), watchos(2.0,6.0), tvos(9.0,13.0));
+
 @end
 
 /*
@@ -406,6 +434,10 @@ FOUNDATION_EXPORT const float NSURLSessionTaskPriorityHigh API_AVAILABLE(macos(1
  * called with nil resumeData.
  */
 - (void)cancelByProducingResumeData:(void (^)(NSData * _Nullable resumeData))completionHandler;
+
+
+- (instancetype)init API_DEPRECATED("Please use -[NSURLSession downloadTaskWithRequest:] or other NSURLSession methods to create instances", macos(10.9,10.15), ios(7.0,13.0), watchos(2.0,6.0), tvos(9.0,13.0));
++ (instancetype)new API_DEPRECATED("Please use -[NSURLSession downloadTaskWithRequest:] or other NSURLSession methods to create instances", macos(10.9,10.15), ios(7.0,13.0), watchos(2.0,6.0), tvos(9.0,13.0));
 
 @end
 
@@ -432,7 +464,7 @@ FOUNDATION_EXPORT const float NSURLSessionTaskPriorityHigh API_AVAILABLE(macos(1
  * disassociated from the underlying session.
  */
 
-NS_CLASS_AVAILABLE(10_11, 9_0)
+API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0))
 @interface NSURLSessionStreamTask : NSURLSessionTask
 
 /* Read minBytes, or at most maxBytes bytes and invoke the completion
@@ -481,8 +513,111 @@ NS_CLASS_AVAILABLE(10_11, 9_0)
 /*
  * Cleanly close a secure connection after all pending secure IO has 
  * completed.
+ *
+ * @warning This API is non-functional.
  */
-- (void)stopSecureConnection;
+- (void)stopSecureConnection API_DEPRECATED("TLS cannot be disabled once it is enabled", macos(10.9,10.15), ios(7.0,13.0), watchos(2.0,6.0), tvos(9.0,13.0));
+
+
+- (instancetype)init API_DEPRECATED("Please use -[NSURLSession streamTaskWithHostName:port:] or other NSURLSession methods to create instances", macos(10.9,10.15), ios(7.0,13.0), watchos(2.0,6.0), tvos(9.0,13.0));
++ (instancetype)new API_DEPRECATED("Please use -[NSURLSession streamTaskWithHostName:port:] or other NSURLSession methods to create instances", macos(10.9,10.15), ios(7.0,13.0), watchos(2.0,6.0), tvos(9.0,13.0));
+
+@end
+
+typedef NS_ENUM(NSInteger, NSURLSessionWebSocketMessageType) {
+    NSURLSessionWebSocketMessageTypeData = 0,
+    NSURLSessionWebSocketMessageTypeString = 1,
+} API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0));
+
+/* The client can create a WebSocket message object that will be passed to the send calls
+ * and will be delivered from the receive calls. The message can be initialized with data or string.
+ * If initialized with data, the string property will be nil and vice versa.
+ */
+API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0))
+@interface NSURLSessionWebSocketMessage : NSObject
+
+/* Create a message with data type
+ */
+- (instancetype)initWithData:(NSData *)data NS_DESIGNATED_INITIALIZER;
+
+/* Create a message with string type
+ */
+- (instancetype)initWithString:(NSString *)string NS_DESIGNATED_INITIALIZER;
+
+@property (readonly) NSURLSessionWebSocketMessageType type;
+@property (nullable, readonly, copy) NSData *data;
+@property (nullable, readonly, copy) NSString *string;
+
+
+- (instancetype)init NS_UNAVAILABLE;
++ (instancetype)new NS_UNAVAILABLE;
+
+@end
+
+/* The WebSocket close codes follow the close codes given in the RFC
+ */
+typedef NS_ENUM(NSInteger, NSURLSessionWebSocketCloseCode)
+{
+    NSURLSessionWebSocketCloseCodeInvalid =                             0,
+    NSURLSessionWebSocketCloseCodeNormalClosure =                    1000,
+    NSURLSessionWebSocketCloseCodeGoingAway =                        1001,
+    NSURLSessionWebSocketCloseCodeProtocolError =                    1002,
+    NSURLSessionWebSocketCloseCodeUnsupportedData =                  1003,
+    NSURLSessionWebSocketCloseCodeNoStatusReceived =                 1005,
+    NSURLSessionWebSocketCloseCodeAbnormalClosure =                  1006,
+    NSURLSessionWebSocketCloseCodeInvalidFramePayloadData =          1007,
+    NSURLSessionWebSocketCloseCodePolicyViolation =                  1008,
+    NSURLSessionWebSocketCloseCodeMessageTooBig =                    1009,
+    NSURLSessionWebSocketCloseCodeMandatoryExtensionMissing =        1010,
+    NSURLSessionWebSocketCloseCodeInternalServerError =              1011,
+    NSURLSessionWebSocketCloseCodeTLSHandshakeFailure =              1015,
+} API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0));
+
+/*
+ * A WebSocket task can be created with a ws or wss url. A client can also provide
+ * a list of protocols it wishes to advertise during the WebSocket handshake phase.
+ * Once the handshake is successfully completed the client will be notified through an optional delegate.
+ * All reads and writes enqueued before the completion of the handshake will be queued up and
+ * executed once the hanshake succeeds. Before the handshake completes, the client can be called to handle
+ * redirection or authentication using the same delegates as NSURLSessionTask. WebSocket task will also provide
+ * support for cookies and will store cookies to the cookie storage on the session and will attach cookies to
+ * outgoing HTTP handshake requests.
+ */
+API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0))
+@interface NSURLSessionWebSocketTask : NSURLSessionTask
+
+/* Sends a WebSocket message. If an error occurs, any outstanding work will also fail.
+ * Note that invocation of the completion handler does not
+ * guarantee that the remote side has received all the bytes, only
+ * that they have been written to the kernel.
+ */
+- (void)sendMessage:(NSURLSessionWebSocketMessage *)message completionHandler:(void (^)(NSError * _Nullable error))completionHandler;
+
+/* Reads a WebSocket message once all the frames of the message are available.
+ * If the maximumMessage size is hit while buffering the frames, the receiveMessage call will error out
+ * and all outstanding work will also fail resulting in the end of the task.
+ */
+- (void)receiveMessageWithCompletionHandler:(void (^)(NSURLSessionWebSocketMessage* _Nullable message, NSError * _Nullable error))completionHandler;
+
+/* Sends a ping frame from the client side. The pongReceiveHandler is invoked when the client
+ * receives a pong from the server endpoint. If a connection is lost or an error occurs before receiving
+ * the pong from the endpoint, the pongReceiveHandler block will be invoked with an error.
+ * Note - the pongReceiveHandler will always be called in the order in which the pings were sent.
+ */
+- (void)sendPingWithPongReceiveHandler:(void (^)(NSError* _Nullable error))pongReceiveHandler;
+
+/* Sends a close frame with the given closeCode. An optional reason can be provided while sending the close frame.
+ * Simply calling cancel on the task will result in a cancellation frame being sent without any reason.
+ */
+- (void)cancelWithCloseCode:(NSURLSessionWebSocketCloseCode)closeCode reason:(NSData * _Nullable)reason;
+
+@property NSInteger maximumMessageSize; /* The maximum number of bytes to be buffered before erroring out. This includes the sum of all bytes from continuation frames. Recieve calls will error out if this value is reached */
+@property (readonly) NSURLSessionWebSocketCloseCode closeCode; /* A task can be queried for it's close code at any point. When the task is not closed, it will be set to NSURLSessionWebSocketCloseCodeInvalid */
+@property (nullable, readonly, copy) NSData *closeReason; /* A task can be queried for it's close reason at any point. A nil value indicates no closeReason or that the task is still running */
+
+
+- (instancetype)init NS_UNAVAILABLE;
++ (instancetype)new NS_UNAVAILABLE;
 
 @end
 
@@ -532,7 +667,7 @@ typedef NS_ENUM(NSInteger, NSURLSessionMultipathServiceType)
  * A background session can be used to perform networking operations
  * on behalf of a suspended application, within certain constraints.
  */
-NS_CLASS_AVAILABLE(NSURLSESSION_AVAILABLE, 7_0)
+API_AVAILABLE(macos(10.9), ios(7.0), watchos(2.0), tvos(9.0))
 @interface NSURLSessionConfiguration : NSObject <NSCopying>
 
 @property (class, readonly, strong) NSURLSessionConfiguration *defaultSessionConfiguration;
@@ -557,6 +692,12 @@ NS_CLASS_AVAILABLE(NSURLSESSION_AVAILABLE, 7_0)
 
 /* allow request to route over cellular. */
 @property BOOL allowsCellularAccess;
+
+/* allow request to route over expensive networks.  Defaults to YES. */
+@property BOOL allowsExpensiveNetworkAccess API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0));
+
+/* allow request to route over networks in constrained mode. Defaults to YES. */
+@property BOOL allowsConstrainedNetworkAccess API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0));
 
 /*
  * Causes tasks to wait for network connectivity to become available, rather
@@ -594,10 +735,16 @@ NS_CLASS_AVAILABLE(NSURLSESSION_AVAILABLE, 7_0)
 @property (nullable, copy) NSDictionary *connectionProxyDictionary;
 
 /* The minimum allowable versions of the TLS protocol, from <Security/SecureTransport.h> */
-@property SSLProtocol TLSMinimumSupportedProtocol;
+@property SSLProtocol TLSMinimumSupportedProtocol API_DEPRECATED_WITH_REPLACEMENT("TLSMinimumSupportedProtocolVersion", macos(10.9, API_TO_BE_DEPRECATED), ios(7.0, API_TO_BE_DEPRECATED), watchos(2.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED));
 
 /* The maximum allowable versions of the TLS protocol, from <Security/SecureTransport.h> */
-@property SSLProtocol TLSMaximumSupportedProtocol;
+@property SSLProtocol TLSMaximumSupportedProtocol API_DEPRECATED_WITH_REPLACEMENT("TLSMaximumSupportedProtocolVersion", macos(10.9, API_TO_BE_DEPRECATED), ios(7.0, API_TO_BE_DEPRECATED), watchos(2.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED));
+
+/* The minimum allowable versions of the TLS protocol, from <Security/SecProtocolTypes.h> */
+@property tls_protocol_version_t TLSMinimumSupportedProtocolVersion API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0));
+
+/* The maximum allowable versions of the TLS protocol, from <Security/SecProtocolTypes.h> */
+@property tls_protocol_version_t TLSMaximumSupportedProtocolVersion API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0));
 
 /* Allow the use of HTTP pipelining */
 @property BOOL HTTPShouldUsePipelining;
@@ -643,6 +790,10 @@ NS_CLASS_AVAILABLE(NSURLSESSION_AVAILABLE, 7_0)
 /* multipath service type to use for connections.  The default is NSURLSessionMultipathServiceTypeNone */
 @property NSURLSessionMultipathServiceType multipathServiceType API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos, watchos, tvos);
 
+
+- (instancetype)init API_DEPRECATED("Please use NSURLSessionConfiguration.defaultSessionConfiguration or other class methods to create instances", macos(10.9,10.15), ios(7.0,13.0), watchos(2.0,6.0), tvos(9.0,13.0));
++ (instancetype)new API_DEPRECATED("Please use NSURLSessionConfiguration.defaultSessionConfiguration or other class methods to create instances", macos(10.9,10.15), ios(7.0,13.0), watchos(2.0,6.0), tvos(9.0,13.0));
+
 @end
 
 /*
@@ -659,7 +810,7 @@ typedef NS_ENUM(NSInteger, NSURLSessionAuthChallengeDisposition) {
     NSURLSessionAuthChallengePerformDefaultHandling = 1,                              /* Default handling for the challenge - as if this delegate were not implemented; the credential parameter is ignored. */
     NSURLSessionAuthChallengeCancelAuthenticationChallenge = 2,                       /* The entire request will be canceled; the credential parameter is ignored. */
     NSURLSessionAuthChallengeRejectProtectionSpace = 3,                               /* This challenge is rejected and the next authentication protection space should be tried; the credential parameter is ignored. */
-} NS_ENUM_AVAILABLE(NSURLSESSION_AVAILABLE, 7_0);
+} API_AVAILABLE(macos(10.9), ios(7.0), watchos(2.0), tvos(9.0));
 
 
 typedef NS_ENUM(NSInteger, NSURLSessionResponseDisposition) {
@@ -667,7 +818,7 @@ typedef NS_ENUM(NSInteger, NSURLSessionResponseDisposition) {
     NSURLSessionResponseAllow = 1,                                       /* Allow the load to continue */
     NSURLSessionResponseBecomeDownload = 2,                              /* Turn this request into a download */
     NSURLSessionResponseBecomeStream API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0)) = 3,  /* Turn this task into a stream task */
-} NS_ENUM_AVAILABLE(NSURLSESSION_AVAILABLE, 7_0);
+} API_AVAILABLE(macos(10.9), ios(7.0), watchos(2.0), tvos(9.0));
 
 /*
  * NSURLSessionDelegate specifies the methods that a session delegate
@@ -730,8 +881,9 @@ typedef NS_ENUM(NSInteger, NSURLSessionResponseDisposition) {
  * earliestBeginDate property set may become stale and require alteration prior
  * to starting the network load.
  *
- * If a new request is specified, the allowsCellularAccess property from the
- * new request will not be used; the allowsCellularAccess property from the
+ * If a new request is specified, the allowsExpensiveNetworkAccess,
+ * allowsContrainedNetworkAccess, and allowsCellularAccess properties
+ * from the new request will not be used; the properties from the
  * original request will continue to be used.
  *
  * Canceling the task is equivalent to calling the task's cancel method; the
@@ -941,11 +1093,28 @@ typedef NS_ENUM(NSInteger, NSURLSessionResponseDisposition) {
 
 @end
 
+API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0))
+@protocol NSURLSessionWebSocketDelegate <NSURLSessionTaskDelegate>
+@optional
+
+/* Indicates that the WebSocket handshake was successful and the connection has been upgraded to webSockets.
+ * It will also provide the protocol that is picked in the handshake. If the handshake fails, this delegate will not be invoked.
+ */
+- (void)URLSession:(NSURLSession *)session webSocketTask:(NSURLSessionWebSocketTask *)webSocketTask didOpenWithProtocol:(NSString * _Nullable) protocol;
+
+/* Indicates that the WebSocket has received a close frame from the server endpoint.
+ * The close code and the close reason may be provided by the delegate if the server elects to send
+ * this information in the close frame
+ */
+- (void)URLSession:(NSURLSession *)session webSocketTask:(NSURLSessionWebSocketTask *)webSocketTask didCloseWithCode:(NSURLSessionWebSocketCloseCode)closeCode reason:(NSData * _Nullable)reason;
+
+@end
+
 /* Key in the userInfo dictionary of an NSError received during a failed download. */
-FOUNDATION_EXPORT NSString * const NSURLSessionDownloadTaskResumeData NS_AVAILABLE(NSURLSESSION_AVAILABLE, 7_0);
+FOUNDATION_EXPORT NSString * const NSURLSessionDownloadTaskResumeData API_AVAILABLE(macos(10.9), ios(7.0), watchos(2.0), tvos(9.0));
 
 @interface NSURLSessionConfiguration (NSURLSessionDeprecated)
-+ (NSURLSessionConfiguration *)backgroundSessionConfiguration:(NSString *)identifier NS_DEPRECATED(NSURLSESSION_AVAILABLE, 10_10, 7_0, 8_0, "Please use backgroundSessionConfigurationWithIdentifier: instead");
++ (NSURLSessionConfiguration *)backgroundSessionConfiguration:(NSString *)identifier API_DEPRECATED_WITH_REPLACEMENT("-backgroundSessionConfigurationWithIdentifier:", macos(10.9, 10.10), ios(7.0, 8.0), watchos(2.0, 2.0), tvos(9.0, 9.0));
 @end
 
 /*
@@ -1086,9 +1255,117 @@ API_AVAILABLE(macosx(10.12), ios(10.0), watchos(3.0), tvos(10.0))
  */
 @property (assign, readonly) NSURLSessionTaskMetricsResourceFetchType resourceFetchType;
 
+/*
+ * countOfRequestHeaderBytesSent is the number of bytes transferred for request header.
+ */
+@property (readonly) int64_t countOfRequestHeaderBytesSent API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0));
 
--(instancetype)init;
+/*
+ * countOfRequestBodyBytesSent is the number of bytes transferred for request body.
+ * It includes protocol-specific framing, transfer encoding, and content encoding.
+ */
+@property (readonly) int64_t countOfRequestBodyBytesSent API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0));
 
+/*
+ * countOfRequestBodyBytesBeforeEncoding is the size of upload body data, file, or stream.
+ */
+@property (readonly) int64_t countOfRequestBodyBytesBeforeEncoding API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0));
+
+/*
+ * countOfResponseHeaderBytesReceived is the number of bytes transferred for response header.
+ */
+@property (readonly) int64_t countOfResponseHeaderBytesReceived API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0));
+
+/*
+ * countOfResponseBodyBytesReceived is the number of bytes transferred for response header.
+ * It includes protocol-specific framing, transfer encoding, and content encoding.
+ */
+@property (readonly) int64_t countOfResponseBodyBytesReceived API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0));
+
+/*
+ * countOfResponseBodyBytesAfterDecoding is the size of data delivered to your delegate or completion handler.
+ */
+@property (readonly) int64_t countOfResponseBodyBytesAfterDecoding API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0));
+
+/*
+ * localAddress is the IP address string of the local interface for the connection.
+ *
+ * For multipath protocols, this is the local address of the initial flow.
+ *
+ * If a connection was not used, this attribute is set to nil.
+ */
+@property (nullable, copy, readonly) NSString *localAddress API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0));
+
+/*
+ * localPort is the port number of the local interface for the connection.
+ *
+ * For multipath protocols, this is the local port of the initial flow.
+ *
+ * If a connection was not used, this attribute is set to nil.
+ */
+@property (nullable, copy, readonly) NSNumber *localPort API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0));
+
+/*
+ * remoteAddress is the IP address string of the remote interface for the connection.
+ *
+ * For multipath protocols, this is the remote address of the initial flow.
+ *
+ * If a connection was not used, this attribute is set to nil.
+ */
+@property (nullable, copy, readonly) NSString *remoteAddress API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0));
+
+/*
+ * remotePort is the port number of the remote interface for the connection.
+ *
+ * For multipath protocols, this is the remote port of the initial flow.
+ *
+ * If a connection was not used, this attribute is set to nil.
+ */
+@property (nullable, copy, readonly) NSNumber *remotePort API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0));
+
+/*
+ * negotiatedTLSProtocolVersion is the TLS protocol version negotiated for the connection.
+ * It is a 2-byte sequence in host byte order.
+ *
+ * Please refer to tls_protocol_version_t enum in Security/SecProtocolTypes.h
+ *
+ * If an encrypted connection was not used, this attribute is set to nil.
+ */
+@property (nullable, copy, readonly) NSNumber *negotiatedTLSProtocolVersion API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0));
+
+/*
+ * negotiatedTLSCipherSuite is the TLS cipher suite negotiated for the connection.
+ * It is a 2-byte sequence in host byte order.
+ *
+ * Please refer to tls_ciphersuite_t enum in Security/SecProtocolTypes.h
+ *
+ * If an encrypted connection was not used, this attribute is set to nil.
+ */
+@property (nullable, copy, readonly) NSNumber *negotiatedTLSCipherSuite API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0));
+
+/*
+ * Whether the connection is established over a cellular interface.
+ */
+@property (readonly, getter=isCellular) BOOL cellular API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0));
+
+/*
+ * Whether the connection is established over an expensive interface.
+ */
+@property (readonly, getter=isExpensive) BOOL expensive API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0));
+
+/*
+ * Whether the connection is established over a constrained interface.
+ */
+@property (readonly, getter=isConstrained) BOOL constrained API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0));
+
+/*
+ * Whether a multipath protocol is successfully negotiated for the connection.
+ */
+@property (readonly, getter=isMultipath) BOOL multipath API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0));
+
+
+- (instancetype)init API_DEPRECATED("Not supported", macos(10.12,10.15), ios(10.0,13.0), watchos(3.0,6.0), tvos(10.0,13.0));
++ (instancetype)new API_DEPRECATED("Not supported", macos(10.12,10.15), ios(10.0,13.0), watchos(3.0,6.0), tvos(10.0,13.0));
 
 @end
 
@@ -1113,7 +1390,9 @@ API_AVAILABLE(macosx(10.12), ios(10.0), watchos(3.0), tvos(10.0))
  */
 @property (assign, readonly) NSUInteger redirectCount;
 
--(instancetype)init;
+
+- (instancetype)init API_DEPRECATED("Not supported", macos(10.12,10.15), ios(10.0,13.0), watchos(3.0,6.0), tvos(10.0,13.0));
++ (instancetype)new API_DEPRECATED("Not supported", macos(10.12,10.15), ios(10.0,13.0), watchos(3.0,6.0), tvos(10.0,13.0));
 
 @end
 

@@ -7,9 +7,9 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-typedef NSString * CAShapeLayerFillRule NS_STRING_ENUM;
-typedef NSString * CAShapeLayerLineJoin NS_STRING_ENUM;
-typedef NSString * CAShapeLayerLineCap NS_STRING_ENUM;
+typedef NSString * CAShapeLayerFillRule NS_TYPED_ENUM;
+typedef NSString * CAShapeLayerLineJoin NS_TYPED_ENUM;
+typedef NSString * CAShapeLayerLineCap NS_TYPED_ENUM;
 
 /* The shape layer draws a cubic Bezier spline in its coordinate space.
  *

@@ -20,7 +20,7 @@
 /**
  * @brief A block of code invoked when an operation on an MPSAccelerationStructure is completed
  */
-MPS_AVAILABLE_STARTING(macos(10.14), ios(12.0), tvos(12.0))
+MPS_AVAILABLE_STARTING(macos(10.14), ios(12.0), macCatalyst(13.0), tvos(12.0))
 typedef void (^MPSAccelerationStructureCompletionHandler)(MPSAccelerationStructure * _Nullable);
 
 /**
@@ -48,7 +48,23 @@ typedef NS_OPTIONS(NSUInteger, MPSAccelerationStructureUsage) {
      * is interactively editing a live view of the scene.
      */
     MPSAccelerationStructureUsageFrequentRebuild = 2,
-} MPS_ENUM_AVAILABLE_STARTING(macos(10.14), ios(12.0), tvos(12.0));
+
+    /**
+     * @brief Prefer building the acceleration structure on the GPU. By default, the acceleration
+     * structure will be built on the GPU when possible. However, in some cases such as very small
+     * triangle counts, the acceleration structure may be built on the CPU. This option will force
+     * the acceleration structure to be always be built on the GPU whenever possible.
+     */
+    MPSAccelerationStructureUsagePreferGPUBuild MPS_ENUM_AVAILABLE_STARTING(macos(10.15), ios(13.0), macCatalyst(13.0), tvos(13.0)) = 4,
+
+    /**
+     * @brief Prefer building the acceleration structure on the CPU. By default, the acceleration
+     * structure will be built on the GPU when possible, which is typically much faster than
+     * building on the CPU. However, in some cases it may be preferable to build on the CPU such as
+     * to avoid framerate hitches when the GPU is rendering the user interface.
+     */
+    MPSAccelerationStructureUsagePreferCPUBuild  MPS_ENUM_AVAILABLE_STARTING(macos(10.15), ios(13.0), macCatalyst(13.0), tvos(13.0)) = 8,
+} MPS_ENUM_AVAILABLE_STARTING(macos(10.14), ios(12.0), macCatalyst(13.0), tvos(12.0));
 
 /**
  * @brief Possible values of the acceleration structure status property
@@ -63,10 +79,10 @@ typedef NS_ENUM(NSUInteger, MPSAccelerationStructureStatus) {
      * @brief The acceleration structure has finished building
      */
     MPSAccelerationStructureStatusBuilt = 1
-} MPS_ENUM_AVAILABLE_STARTING(macos(10.14), ios(12.0), tvos(12.0));
+} MPS_ENUM_AVAILABLE_STARTING(macos(10.14), ios(12.0), macCatalyst(13.0), tvos(12.0));
 
 /**
- * @brief A data structure built over geometry used to acceleration ray tracing
+ * @brief A data structure built over geometry used to accelerate ray tracing
  *
  * @discussion Do not use this base class directly. Use one of the derived classes instead.
  * The general pattern for creating an acceleration structure is as follows. First, create the
@@ -290,12 +306,20 @@ typedef NS_ENUM(NSUInteger, MPSAccelerationStructureStatus) {
  *     - When running in Xcode, disable "Enable Backtrace Recording" in your scheme settings.
  *       Enabling this setting can significantly increase acceleration structure build time.
  *
+ *     - Consider using quadrilaterals instead of triangles to represent your geometry.
+ *       The cost of intersecting a quadrilateral is typically less than the cost of intersecting
+ *       two triangles, so quadrilaterals can improve performance. Quadrilaterals also typically
+ *       require 30-40% less memory than triangles including vertex data and internal buffers
+ *       allocated by the acceleration structure. Whether quadrilaterals improve or hurt
+ *       performance can depend on the geometry and ray distribution, so you should choose
+ *       whichever performs better for your application.
+ *
  * Thread Safety: MPSAccelerationStructures are generally not thread safe. Changing properties
  * and rebuilding acceleration structures from multiple threads result in undefined behavior.
  * However, it is safe to encode intersection tests with a single acceleration structure
  * from multiple threads as long as each thread uses its own MPSRayIntersector.
  */
-MPS_CLASS_AVAILABLE_STARTING(macos(10.14), ios(12.0), tvos(12.0))
+MPS_CLASS_AVAILABLE_STARTING(macos(10.14), ios(12.0), macCatalyst(13.0), tvos(12.0))
 @interface MPSAccelerationStructure : MPSKernel <NSSecureCoding, NSCopying>
 
 /**
@@ -406,7 +430,7 @@ MPS_CLASS_AVAILABLE_STARTING(macos(10.14), ios(12.0), tvos(12.0))
  *
  * Until the command buffer has completed, the acceleration structure cannot be copied,
  * encoded with NSSecureCoding, or rebuilt. Changes to properties such as the triangle count or
- * instance might not be reflected. These changes require that the acceleration structure be
+ * instance count might not be reflected. These changes require that the acceleration structure be
  * rebuilt instead. The acceleration structure must be rebuilt at least once before this method can
  * be called.
  */
@@ -418,7 +442,7 @@ MPS_CLASS_AVAILABLE_STARTING(macos(10.14), ios(12.0), tvos(12.0))
  *
  * @discussion The acceleration structure may be copied to a different Metal device. Buffer
  * properties of the acceleration structure such as the vertex buffer, instance, buffer, etc. are
- * set to nil. Copy these buffers to new Metal device and assign them to the new acceleration
+ * set to nil. Copy these buffers to the new Metal device and assign them to the new acceleration
  * structure instead. Do not copy the acceleration structure until any prior refit or rebuild
  * operations have completed.
  *

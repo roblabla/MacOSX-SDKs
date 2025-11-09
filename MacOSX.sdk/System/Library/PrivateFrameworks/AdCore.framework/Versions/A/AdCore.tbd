@@ -1,23 +1,24 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 0D549E7A-825A-3963-B139-52428A358AA4' ]
-platform:        macosx
-install-name:    /System/Library/PrivateFrameworks/AdCore.framework/Versions/A/AdCore
+uuids:           [ 'x86_64: 9A20DD7E-9BDB-372A-958F-2E819CDEF57E', 'x86_64: 9A20DD7E-9BDB-372A-958F-2E819CDEF57E' ]
+platform:        zippered
+install-name:    '/System/Library/PrivateFrameworks/AdCore.framework/Versions/A/AdCore'
 exports:         
   - archs:           [ x86_64 ]
-    symbols:         [ _ADAdConnectionGetStringForValue, _ADAdsOptions, _ADAnalyticsEventReadFrom, 
-                       _ADAttributionRequestReadFrom, _ADAttributionResponseReadFrom, 
-                       _ADClientSettingsRequestReadFrom, _ADClientSettingsResponseReadFrom, 
-                       _ADConfigurationReadFrom, _ADConfigurationRequestReadFrom, 
-                       _ADConfigurationResponseReadFrom, _ADConfigurationsKeychainKey, 
-                       _ADCopyDataFromKeychain, _ADCoreDefaultsBundleID, _ADCoreIdentifier, 
-                       _ADDefaultsBundleID, _ADEncryptString, _ADErrorDomain, _ADJingleAccountStatusToString, 
-                       _ADKeyedParameterListReadFrom, _ADLimitAdTrackingStatusToString, 
-                       _ADLogAnalyticsRequestReadFrom, _ADLogAnalyticsResponseReadFrom, 
-                       _ADLogBarrier, _ADMakeMutableSecQuery, _ADOptOutRequestReadFrom, 
-                       _ADOptOutResponseReadFrom, _ADParameterReadFrom, _ADPrivacyDaemonIdentifier, 
-                       _ADRoutingInfoMessageReadFrom, _ADSegmentUpdateRequestReadFrom, 
-                       _ADSegmentUpdateResponseReadFrom, _ADSimulateCrash, _ADSimulatedCrashKillCode_InternalWatchdog, 
+    symbols:         [ _ADAdConnectionGetStringForValue, _ADAdVectorReadFrom, _ADAdsOptions, 
+                       _ADAnalyticsEventReadFrom, _ADAttributionRequestReadFrom, 
+                       _ADAttributionResponseReadFrom, _ADClientSettingsRequestReadFrom, 
+                       _ADClientSettingsResponseReadFrom, _ADConfigurationReadFrom, 
+                       _ADConfigurationRequestReadFrom, _ADConfigurationResponseReadFrom, 
+                       _ADConfigurationsKeychainKey, _ADCopyDataFromKeychain, _ADCoreDefaultsBundleID, 
+                       _ADCoreIdentifier, _ADDefaultsBundleID, _ADEncryptString, 
+                       _ADErrorDomain, _ADJingleAccountStatusToString, _ADKeyedParameterListReadFrom, 
+                       _ADLimitAdTrackingStatusToString, _ADLogAnalyticsRequestReadFrom, 
+                       _ADLogAnalyticsResponseReadFrom, _ADLogBarrier, _ADMakeMutableSecQuery, 
+                       _ADOdmlResponseReadFrom, _ADOptOutRequestReadFrom, _ADOptOutResponseReadFrom, 
+                       _ADParameterReadFrom, _ADPrivacyDaemonIdentifier, _ADRoutingInfoMessageReadFrom, 
+                       _ADSegmentUpdateRequestReadFrom, _ADSegmentUpdateResponseReadFrom, 
+                       _ADSimulateCrash, _ADSimulatedCrashKillCode_InternalWatchdog, 
                        _ADSponsoredSearchRequestReadFrom, _ADTrackingIDManagerMachServiceName, 
                        _ADTransparencyDetailsReadFrom, _ADUserTargetingPropertiesReadFrom, 
                        _ADUserTransparencyRequestReadFrom, _ADUserTransparencyResponseReadFrom, 
@@ -27,21 +28,23 @@ exports:
                        _ClientTypeToString, _GetKeychainPropertyListForKey, _NewsWidgetDefaultsBundleID, 
                        _PreferencesDefaultsBundleID, _PreferencesMacDefaultsBundleID, 
                        _RequestRetryDelay, _SetKeychainPropertyListForKey, _StringIsUUID, 
-                       _StringIsZeroUUID, _StringMatch, __ADLog, _dumpObject, _releaseXPCTransaction, 
-                       _takeXPCTransaction, _xpcTransactionLock ]
-    objc-classes:    [ ADAnalyticsEvent, ADAttributionRequest, ADAttributionResponse, 
+                       _StringIsZeroUUID, _StringMatch, __ADLog, _dumpObject, _kBagPropertyJingleRequest_OptInBagKey, 
+                       _kBagPropertyJingleRequest_OptOutBagKey, _kBagPropertyJingleRequest_SegmentBagKey, 
+                       _releaseXPCTransaction, _takeXPCTransaction ]
+    objc-classes:    [ ADAdVector, ADAnalyticsEvent, ADAttributionRequest, ADAttributionResponse, 
                        ADBackgroundTaskRequest, ADBackgroundTaskScheduler, ADCapData, 
                        ADClientSettingsRequest, ADClientSettingsResponse, ADConfiguration, 
                        ADConfigurationRequest, ADConfigurationResponse, ADCoreDefaults, 
-                       ADCoreSettings, ADDeviceDiagnostics, ADFlags, ADFrequencyCap, 
-                       ADIDManager, ADIDRecord, ADKeyedParameterList, ADLogAnalyticsRequest, 
-                       ADLogAnalyticsResponse, ADNetworkController, ADOptOutRequest, 
-                       ADOptOutResponse, ADParameter, ADRoutingInfoMessage, ADSegmentUpdateRequest, 
-                       ADSegmentUpdateResponse, ADServer, ADSingleton, ADSponsoredSearchRequest, 
-                       ADTransparencyDetails, ADUserTargetingProperties, ADUserTransparencyRequest, 
-                       ADUserTransparencyResponse, ADWatchDog, ADWatchDogManager, 
-                       DSIDRecord ]
-    objc-ivars:      [ ADAnalyticsEvent._event, ADAnalyticsEvent._timestamp, ADAttributionRequest._adMetadata, 
+                       ADCoreSettings, ADDESRecordContents, ADDESRecordHandler, ADDESRecordManager, 
+                       ADFlags, ADFrequencyCap, ADIDManager, ADIDRecord, ADKeyedParameterList, 
+                       ADLogAnalyticsRequest, ADLogAnalyticsResponse, ADNetworkController, 
+                       ADOdmlResponse, ADOptOutRequest, ADOptOutResponse, ADParameter, 
+                       ADRoutingInfoMessage, ADSegmentUpdateRequest, ADSegmentUpdateResponse, 
+                       ADServer, ADSingleton, ADSponsoredSearchRequest, ADTransparencyDetails, 
+                       ADUserTargetingProperties, ADUserTransparencyRequest, ADUserTransparencyResponse, 
+                       ADWatchDog, ADWatchDogManager, DSIDRecord ]
+    objc-ivars:      [ ADAdVector._vectors, ADAdVector._version, ADAnalyticsEvent._event, 
+                       ADAnalyticsEvent._timestamp, ADAttributionRequest._adMetadata, 
                        ADAttributionRequest._anonymousDemandiAdID, ADAttributionRequest._attributedByiTunes, 
                        ADAttributionRequest._bundleID, ADAttributionRequest._dPID, 
                        ADAttributionRequest._downloadClickTimestamp, ADAttributionRequest._downloadType, 
@@ -64,8 +67,9 @@ exports:
                        ADLogAnalyticsRequest._dPID, ADLogAnalyticsRequest._events, 
                        ADLogAnalyticsRequest._iAdID, ADNetworkController._networkType, 
                        ADNetworkController._notificationTimer, ADNetworkController._store, 
-                       ADOptOutRequest._dPID, ADOptOutRequest._has, ADOptOutRequest._iAdID, 
-                       ADOptOutRequest._optedOutStatus, ADOptOutRequest._statusChangeTimestamp, 
+                       ADOdmlResponse._adVector, ADOdmlResponse._has, ADOdmlResponse._obfuscatedpTTR, 
+                       ADOdmlResponse._obfuscationID, ADOptOutRequest._dPID, ADOptOutRequest._has, 
+                       ADOptOutRequest._iAdID, ADOptOutRequest._optedOutStatus, ADOptOutRequest._statusChangeTimestamp, 
                        ADOptOutRequest._timezone, ADOptOutRequest._transmitTimestamp, 
                        ADParameter._key, ADParameter._value, ADRoutingInfoMessage._environmentURL, 
                        ADRoutingInfoMessage._protoVersion, ADRoutingInfoMessage._searchType, 

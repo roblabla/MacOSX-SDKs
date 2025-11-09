@@ -30,6 +30,7 @@
 
 #include <IOKit/usb/IOUSBHostInterface.h>
 #include <IOKit/usb/StandardUSB.h>
+#include <IOKit/usb/USBSpec.h>
 #include <IOKit/usb/IOUSBHostFamily.h>
 #include <IOKit/IOTimerEventSource.h>
 
@@ -38,32 +39,6 @@
 
 enum
 {
-    kUSBHIDDesc                         = 0x21,
-    kUSBReportDesc                      = 0x22,
-
-    kHIDNoInterfaceProtocol       = 0,
-    kHIDKeyboardInterfaceProtocol = 1,
-    kHIDMouseInterfaceProtocol    = 2,
-    kUSBVendorSpecificProtocol    = 0xff,
-    
-    kUSBHIDClass          = 3,
-    kUSBHIDInterfaceClass = 3,
-    kUSBHIDBootInterfaceSubClass = 0x01,
-    
-    kHIDBootProtocolValue   = 0,
-    kHIDReportProtocolValue = 1,
-    
-    kHIDRqGetReport   = 1,
-    kHIDRqGetIdle     = 2,
-    kHIDRqGetProtocol = 3,
-    kHIDRqSetReport   = 9,
-    kHIDRqSetIdle     = 10,
-    kHIDRqSetProtocol = 11,
-    
-    kHIDRtInputReport   = 1,
-    kHIDRtOutputReport  = 2,
-    kHIDRtFeatureReport = 3,
-
     kInterruptRetries      = 10,
     kErrorRecoveryInterval = 50     // Milliseconds
 };

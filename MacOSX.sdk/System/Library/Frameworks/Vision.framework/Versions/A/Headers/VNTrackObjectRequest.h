@@ -37,14 +37,17 @@ API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0))
  */
 - (instancetype) initWithDetectedObjectObservation:(VNDetectedObjectObservation *)observation completionHandler:(nullable VNRequestCompletionHandler)completionHandler;
 
-- (instancetype) init   NS_UNAVAILABLE;
-- (instancetype) initWithCompletionHandler:(nullable VNRequestCompletionHandler)completionHandler   NS_UNAVAILABLE;
+- (instancetype) init NS_UNAVAILABLE;
+- (instancetype) initWithCompletionHandler:(nullable VNRequestCompletionHandler)completionHandler NS_UNAVAILABLE;
 
 @end
 
 
 API_AVAILABLE(macos(10.14), ios(12.0), tvos(12.0))
 static const NSUInteger VNTrackObjectRequestRevision1 = 1;
+
+API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0))
+static const NSUInteger VNTrackObjectRequestRevision2 = 2;
 
 
 NS_ASSUME_NONNULL_END

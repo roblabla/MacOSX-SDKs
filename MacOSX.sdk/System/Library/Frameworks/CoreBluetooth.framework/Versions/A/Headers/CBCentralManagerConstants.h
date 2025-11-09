@@ -112,6 +112,26 @@ CB_EXTERN NSString * const CBConnectPeripheralOptionNotifyOnNotificationKey NS_A
 CB_EXTERN NSString * const CBConnectPeripheralOptionStartDelayKey NS_AVAILABLE(10_13, 6_0);
 
 /*!
+ *  @const CBConnectPeripheralOptionEnableTransportBridgingKey
+ *
+ *  @discussion An NSNumber (Boolean) indicating that the system will bring up classic transport profiles when low energy transport for peripheral is connected.
+ *
+ *  @see        connectPeripheral:
+ *
+ */
+CB_EXTERN NSString * const CBConnectPeripheralOptionEnableTransportBridgingKey NS_AVAILABLE_IOS(13_0);
+
+/*!
+ *  @const CBConnectPeripheralOptionRequiresANCS
+ *
+ *  @discussion An NSNumber (Boolean) indicating that the ANCS (Apple Notification Center Service) is required for the peripheral is connected.
+ *
+ *  @see        connectPeripheral:
+ *
+ */
+CB_EXTERN NSString * const CBConnectPeripheralOptionRequiresANCS NS_AVAILABLE_IOS(13_0);
+
+/*!
  *  @const  CBCentralManagerRestoredStatePeripheralsKey
  *
  *  @discussion An NSArray of <code>CBPeripheral</code> objects containing all peripherals that were connected or pending connection at the time the
@@ -145,5 +165,33 @@ CB_EXTERN NSString * const CBCentralManagerRestoredStateScanServicesKey NS_AVAIL
  *
  */
 CB_EXTERN NSString * const CBCentralManagerRestoredStateScanOptionsKey NS_AVAILABLE(10_13, 7_0);
+
+
+typedef NSString * CBConnectionEventMatchingOption NS_TYPED_ENUM;
+
+/*!
+ *  @const  CBConnectionEventMatchingOptionServiceUUIDs
+ *
+ *  @discussion An NSArray of <code>CBUUID</code> objects respresenting service UUIDs. A connected peer with any matching service UUIDs will result
+ *         		in a call to {@link centralManager:connectionEventDidOccur:}.
+ *              A maximum of 4 services can be registered.
+ *
+ *  @see		centralManager:connectionEventDidOccur:forPeripheral:
+ *	@seealso	registerForConnectionEventsWithOptions:
+ *
+ */
+CB_EXTERN CBConnectionEventMatchingOption const CBConnectionEventMatchingOptionServiceUUIDs NS_AVAILABLE_IOS(13_0);
+
+/*!
+ *  @const  CBConnectionEventMatchingOptionPeripheralUUIDs
+ *
+ *  @discussion An NSArray of <code>NSUUID</code> objects respresenting <i>peripheral</i> identifiers. A connected peer with any matching identifier(s) will result
+ *         		in a call to {@link centralManager:connectionEventDidOccur:}.
+ *
+ *  @see		centralManager:connectionEventDidOccur:forPeripheral:
+ *	@seealso	registerForConnectionEventsWithOptions:
+ *
+ */
+CB_EXTERN CBConnectionEventMatchingOption const CBConnectionEventMatchingOptionPeripheralUUIDs NS_AVAILABLE_IOS(13_0);
 
 NS_ASSUME_NONNULL_END

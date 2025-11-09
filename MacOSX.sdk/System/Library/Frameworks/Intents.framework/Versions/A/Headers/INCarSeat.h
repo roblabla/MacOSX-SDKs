@@ -2,7 +2,7 @@
 //  INCarSeat.h
 //  Intents
 //
-//  Copyright (c) 2016-2017 Apple Inc. All rights reserved.
+//  Copyright (c) 2016-2019 Apple Inc. All rights reserved.
 //
 
 #ifndef INCarSeat_h

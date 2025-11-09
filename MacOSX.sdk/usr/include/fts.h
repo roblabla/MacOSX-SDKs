@@ -172,8 +172,14 @@ int	 fts_close(FTS *) __DARWIN_INODE64(fts_close);
 FTS	*fts_open(char * const *, int,
 	    int (*)(const FTSENT **, const FTSENT **)) __DARWIN_INODE64(fts_open);
 #ifdef __BLOCKS__
+#if __has_attribute(noescape)
+#define __fts_noescape __attribute__((__noescape__))
+#else
+#define __fts_noescape
+#endif
 FTS	*fts_open_b(char * const *, int,
-	    int (^)(const FTSENT **, const FTSENT **)) __DARWIN_INODE64(fts_open_b) __OSX_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_3_2);
+	    int (^)(const FTSENT **, const FTSENT **) __fts_noescape)
+	    __DARWIN_INODE64(fts_open_b) __OSX_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_3_2);
 #endif /* __BLOCKS__ */
 FTSENT	*fts_read(FTS *) __DARWIN_INODE64(fts_read);
 int	 fts_set(FTS *, FTSENT *, int) __DARWIN_INODE64(fts_set);

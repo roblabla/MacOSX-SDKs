@@ -74,7 +74,7 @@ typedef struct OpaqueWSProtocolHandlerRef*  WSProtocolHandlerRef;
  *    Non-Carbon CFM:   not available
  */
 extern CFTypeID 
-WSProtocolHandlerGetTypeID(void)                              __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_3,__MAC_10_8,__IPHONE_NA,__IPHONE_NA);
+WSProtocolHandlerGetTypeID(void)                              API_DEPRECATED("No longer supported", macos(10.3,10.8) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 /*
@@ -108,7 +108,7 @@ WSProtocolHandlerGetTypeID(void)                              __OSX_AVAILABLE_BU
 extern WSProtocolHandlerRef 
 WSProtocolHandlerCreate(
   CFAllocatorRef   allocator,
-  CFStringRef      protocol)                                  __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_3,__MAC_10_8,__IPHONE_NA,__IPHONE_NA);
+  CFStringRef      protocol)                                  API_DEPRECATED("No longer supported", macos(10.3,10.8) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 
@@ -150,7 +150,7 @@ WSProtocolHandlerCreate(
 extern CFDictionaryRef 
 WSProtocolHandlerCopyRequestDictionary(
   WSProtocolHandlerRef   ref,
-  CFDataRef              data)                                __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_3,__MAC_10_8,__IPHONE_NA,__IPHONE_NA);
+  CFDataRef              data)                                API_DEPRECATED("No longer supported", macos(10.3,10.8) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 
@@ -191,7 +191,7 @@ extern CFDictionaryRef
 WSProtocolHandlerCopyReplyDictionary(
   WSProtocolHandlerRef   ref,
   CFStringRef            methodName,
-  CFDataRef              data)                                __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_3,__MAC_10_8,__IPHONE_NA,__IPHONE_NA);
+  CFDataRef              data)                                API_DEPRECATED("No longer supported", macos(10.3,10.8) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 /*
@@ -229,7 +229,7 @@ extern CFDataRef
 WSProtocolHandlerCopyReplyDocument(
   WSProtocolHandlerRef   ref,
   CFDictionaryRef        methodContext,
-  CFTypeRef              resultValue)                         __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_3,__MAC_10_8,__IPHONE_NA,__IPHONE_NA);
+  CFTypeRef              resultValue)                         API_DEPRECATED("No longer supported", macos(10.3,10.8) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 /*
@@ -267,7 +267,7 @@ extern CFDataRef
 WSProtocolHandlerCopyFaultDocument(
   WSProtocolHandlerRef   ref,
   CFDictionaryRef        methodContext,
-  CFDictionaryRef        faultDict)                           __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_3,__MAC_10_8,__IPHONE_NA,__IPHONE_NA);
+  CFDictionaryRef        faultDict)                           API_DEPRECATED("No longer supported", macos(10.3,10.8) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 /*
@@ -313,7 +313,7 @@ WSProtocolHandlerCopyRequestDocument(
   CFStringRef            methodName,
   CFDictionaryRef        methodParams,
   CFArrayRef             methodParamOrder,
-  CFDictionaryRef        methodExtras)                        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_3,__MAC_10_8,__IPHONE_NA,__IPHONE_NA);
+  CFDictionaryRef        methodExtras)                        API_DEPRECATED("No longer supported", macos(10.3,10.8) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 
@@ -348,7 +348,7 @@ WSProtocolHandlerCopyRequestDocument(
 extern CFTypeRef 
 WSProtocolHandlerCopyProperty(
   WSProtocolHandlerRef   ref,
-  CFStringRef            propertyName)                        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_3,__MAC_10_8,__IPHONE_NA,__IPHONE_NA);
+  CFStringRef            propertyName)                        API_DEPRECATED("No longer supported", macos(10.3,10.8) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 /*
@@ -380,7 +380,7 @@ extern void
 WSProtocolHandlerSetProperty(
   WSProtocolHandlerRef   ref,
   CFStringRef            propertyName,
-  CFTypeRef              propertyValue)                       __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_3,__MAC_10_8,__IPHONE_NA,__IPHONE_NA);
+  CFTypeRef              propertyValue)                       API_DEPRECATED("No longer supported", macos(10.3,10.8) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 /*
@@ -424,7 +424,7 @@ WSProtocolHandlerSetProperty(
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
-typedef CFStringRef(*WSProtocolHandlerSerializationProcPtr)(WSProtocolHandlerRef protocol, CFTypeRef obj, void *info)__OSX_AVAILABLE_STARTING(__MAC_10_3,__IPHONE_NA);
+typedef CFStringRef(*WSProtocolHandlerSerializationProcPtr)(WSProtocolHandlerRef protocol, CFTypeRef obj, void *info)API_AVAILABLE( macos(10.3) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 	
 	
@@ -465,7 +465,7 @@ WSProtocolHandlerSetSerializationOverride(
   WSProtocolHandlerRef                    protocol,
   CFTypeID                                objType,
   WSProtocolHandlerSerializationProcPtr   serializationProc,
-  WSClientContext *                       context)            __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_3,__MAC_10_8,__IPHONE_NA,__IPHONE_NA);
+  WSClientContext *                       context)            API_DEPRECATED("No longer supported", macos(10.3,10.8) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 
@@ -505,7 +505,7 @@ WSProtocolHandlerSetSerializationOverride(
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
-typedef CFTypeRef(*WSProtocolHandlerDeserializationProcPtr)(WSProtocolHandlerRef protocol, CFXMLTreeRef msgRoot, CFXMLTreeRef deserializeRoot, void *info)__OSX_AVAILABLE_STARTING(__MAC_10_3, __IPHONE_NA);
+typedef CFTypeRef(*WSProtocolHandlerDeserializationProcPtr)(WSProtocolHandlerRef protocol, CFXMLTreeRef msgRoot, CFXMLTreeRef deserializeRoot, void *info)API_AVAILABLE( macos(10.3) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 	
 	
@@ -551,7 +551,7 @@ WSProtocolHandlerSetDeserializationOverride(
   CFStringRef                               typeNamespace,
   CFStringRef                               typeName,
   WSProtocolHandlerDeserializationProcPtr   deserializationProc,
-  WSClientContext *                         context)          __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_3,__MAC_10_8,__IPHONE_NA,__IPHONE_NA);
+  WSClientContext *                         context)          API_DEPRECATED("No longer supported", macos(10.3,10.8) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 

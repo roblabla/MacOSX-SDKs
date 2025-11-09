@@ -1,5 +1,5 @@
 /*	NSException.h
-	Copyright (c) 1994-2018, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2019, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -32,12 +32,14 @@ FOUNDATION_EXPORT NSExceptionName const NSPortReceiveException;
 
 FOUNDATION_EXPORT NSExceptionName const NSOldStyleException;
 
+FOUNDATION_EXPORT NSExceptionName const NSInconsistentArchiveException;
+
 /***************	Exception object	***************/
 
 #if __OBJC2__
 __attribute__((__objc_exception__))
 #endif
-@interface NSException : NSObject <NSCopying, NSCoding> {
+@interface NSException : NSObject <NSCopying, NSSecureCoding> {
     @private
     NSString		*name;
     NSString		*reason;

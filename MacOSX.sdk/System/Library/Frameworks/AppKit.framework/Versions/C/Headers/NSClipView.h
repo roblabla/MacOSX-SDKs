@@ -1,53 +1,18 @@
 /*
 	NSClipView.h
 	Application Kit
-	Copyright (c) 1994-2018, Apple Inc.
+	Copyright (c) 1994-2019, Apple Inc.
 	All rights reserved.
 */
 
 #import <AppKit/NSView.h>
 
 NS_ASSUME_NONNULL_BEGIN
+API_UNAVAILABLE_BEGIN(ios)
 
 @class NSColor, NSNotification;
 
 @interface NSClipView : NSView
-{
-    /*All instance variables are private*/
-    NSColor             *_backgroundColor APPKIT_IVAR;
-    NSView              *_docView APPKIT_IVAR;
-    NSRect              _docRect APPKIT_IVAR;
-    NSRect              _oldDocFrame APPKIT_IVAR;
-    NSCursor            *_cursor APPKIT_IVAR;
-    id                  _scrollAnimationHelper APPKIT_IVAR;
-    struct {
-        unsigned int        unused:1;
-        unsigned int        onlyUncovered:1;
-        unsigned int        reflectScroll:1;
-        unsigned int        usedByCell:1;
-        unsigned int	    scrollClipTo:1;
-        unsigned int	    noCopyOnScroll:1;
-        unsigned int        drawsBackground:1;
-        unsigned int        scrollInProgress:1;
-        unsigned int        skipRemoveSuperviewCheck:1;
-        unsigned int        animateCurrentScroll:1;
-        unsigned int        canAnimateScrolls:1;
-        unsigned int	    nextScrollRelativeToCurrentPosition:1;
-        unsigned int        viewBoundsChangedOverridden:1;
-        unsigned int        viewFrameChangedOverridden:1;
-        unsigned int        documentViewAlignment:4;
-        unsigned int        redrawnWhileScrolling:1;
-        unsigned int        dontConstrainScroll:1;
-        unsigned int        lastAtEdgesState:4;
-        unsigned int        showOverlayScrollersForScrollStep:1;
-        unsigned int        scrollerKnobFlashSpecifier:2;
-        unsigned int        drawsContentShadow:1;
-        unsigned int        dontConstrainBoundsChange:1;
-        unsigned int        isScrollDueToUserAction:1;
-        unsigned int        hasOverlappingViews:1;
-        unsigned int        automaticallyCalculateContentSize:1;
-    } _cvFlags APPKIT_IVAR;
-}
 
 @property (copy) NSColor *backgroundColor;
 @property BOOL drawsBackground;
@@ -57,35 +22,39 @@ NS_ASSUME_NONNULL_BEGIN
 @property (readonly) NSRect documentVisibleRect;
 - (void)viewFrameChanged:(NSNotification *)notification;
 - (void)viewBoundsChanged:(NSNotification *)notification;
-@property BOOL copiesOnScroll;
 - (BOOL)autoscroll:(NSEvent *)event;
 - (void)scrollToPoint:(NSPoint)newOrigin;
 
-/* This is used to constrain the bounds of the clip view under magnification and scrolling. This also comes with the deprecation of -constrainScrollPoint:. The logic of an existing -constrainScrollPoint: can be moved to -constrainBoundsRect: by adjusting the proposedBound's origin (as opposed to 'newOrigin').
+/* This is used to constrain the bounds of the clip view under magnification and scrolling. This also comes with the deprecation of -constrainScrollPoint:. The logic of an existing -constrainScrollPoint: can be moved to -constrainBoundsRect: by adjusting the proposedBounds origin (as opposed to 'newOrigin').
  
- To preserve compatibility, if a subclass overrides -constrainScrollPoint:, the default behavior of -constrainBoundsRect: will be to use that -constrainScrollPoint: to adjust the proposedBound's origin, and to not change the size.
+ To preserve compatibility, if a subclass overrides -constrainScrollPoint:, the default behavior of -constrainBoundsRect: will be to use that -constrainScrollPoint: to adjust the proposedBounds origin, and to not change the size.
  */
-- (NSRect)constrainBoundsRect:(NSRect)proposedBounds NS_AVAILABLE_MAC(10_9);
+- (NSRect)constrainBoundsRect:(NSRect)proposedBounds API_AVAILABLE(macos(10.9));
 
 /* The distance that the content view is inset from the enclosing scroll view.
    Note: animate with [self animator]
 */
-@property NSEdgeInsets contentInsets NS_AVAILABLE_MAC(10_10);
+@property NSEdgeInsets contentInsets API_AVAILABLE(macos(10.10));
 
 /* When YES, and used as the contentView of an NSScrollView, the clip view will automatically account for other scroll view subviews such as rulers and headers. Defaults to YES.
 */
-@property BOOL automaticallyAdjustsContentInsets NS_AVAILABLE_MAC(10_10);
+@property BOOL automaticallyAdjustsContentInsets API_AVAILABLE(macos(10.10));
 
 @end
 
-@interface NSView(NSClipViewSuperview)
+@interface NSView (NSClipViewSuperview)
 - (void)reflectScrolledClipView:(NSClipView *)clipView;
 - (void)scrollClipView:(NSClipView *)clipView toPoint:(NSPoint)point;
 @end
 
+#pragma mark Deprecated declarations
 
-@interface NSClipView(NSDeprecated)
-- (NSPoint)constrainScrollPoint:(NSPoint)newOrigin NS_DEPRECATED_MAC(10_0, 10_10, "Use -constrainBoundsRect: instead");
+@interface NSClipView ()
+- (NSPoint)constrainScrollPoint:(NSPoint)newOrigin API_DEPRECATED("Use -constrainBoundsRect: instead.", macos(10.0,10.10));
+@property BOOL copiesOnScroll API_DEPRECATED("NSClipView will always minimize the area of the document view that is invalidated.  To force invalidation of the document view, use -[NSView setNeedsDisplayInRect:].", macos(10.0, API_TO_BE_DEPRECATED));
 @end
 
+
+
+API_UNAVAILABLE_END
 NS_ASSUME_NONNULL_END

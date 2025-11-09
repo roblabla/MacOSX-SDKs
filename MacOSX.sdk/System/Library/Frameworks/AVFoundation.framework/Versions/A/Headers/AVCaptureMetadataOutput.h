@@ -101,6 +101,8 @@ API_AVAILABLE(ios(6.0)) API_UNAVAILABLE(macos) __WATCHOS_PROHIBITED __TVOS_PROHI
  
  @discussion
     The value of this property is a CGRect that determines the receiver's rectangle of interest for each frame of video. The rectangle's origin is top left and is relative to the coordinate space of the device providing the metadata. Specifying a rectOfInterest may improve detection performance for certain types of metadata. The default value of this property is the value CGRectMake(0, 0, 1, 1). Metadata objects whose bounds do not intersect with the rectOfInterest will not be returned.
+ 
+    As of iOS 13, this property can be set without requiring a lengthy rebuild of the session in which video preview is disrupted.
  */
 @property(nonatomic) CGRect rectOfInterest API_AVAILABLE(ios(7.0));
 

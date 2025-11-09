@@ -128,7 +128,7 @@ extern int __mb_cur_max;
 #include <malloc/_malloc.h>
 
 __BEGIN_DECLS
-void	 abort(void) __dead2;
+void	 abort(void) __cold __dead2;
 int	 abs(int) __pure2;
 int	 atexit(void (* _Nonnull)(void));
 double	 atof(const char *);
@@ -257,7 +257,6 @@ void	 unsetenv(const char *);
 
 #if !defined(_ANSI_SOURCE) && (!defined(_POSIX_C_SOURCE) || defined(_DARWIN_C_SOURCE))
 #include <machine/types.h>
-
 #include <sys/_types/_dev_t.h>
 #include <sys/_types/_mode_t.h>
 #include <_types/_uint32_t.h>
@@ -297,36 +296,52 @@ char	*getbsize(int *, long *);
 int	 getloadavg(double [], int);
 const char
 	*getprogname(void);
+void	 setprogname(const char *);
+
+#ifdef __BLOCKS__
+#if __has_attribute(noescape)
+#define __sort_noescape __attribute__((__noescape__))
+#else
+#define __sort_noescape
+#endif
+#endif /* __BLOCKS__ */
 
 int	 heapsort(void *__base, size_t __nel, size_t __width,
 	    int (* _Nonnull __compar)(const void *, const void *));
 #ifdef __BLOCKS__
 int	 heapsort_b(void *__base, size_t __nel, size_t __width,
-	    int (^ _Nonnull __compar)(const void *, const void *)) __OSX_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_3_2);
+	    int (^ _Nonnull __compar)(const void *, const void *) __sort_noescape)
+	    __OSX_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_3_2);
 #endif /* __BLOCKS__ */
 int	 mergesort(void *__base, size_t __nel, size_t __width,
 	    int (* _Nonnull __compar)(const void *, const void *));
 #ifdef __BLOCKS__
 int	 mergesort_b(void *__base, size_t __nel, size_t __width,
-	    int (^ _Nonnull __compar)(const void *, const void *)) __OSX_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_3_2);
+	    int (^ _Nonnull __compar)(const void *, const void *) __sort_noescape)
+	    __OSX_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_3_2);
 #endif /* __BLOCKS__ */
 void	 psort(void *__base, size_t __nel, size_t __width,
-	    int (* _Nonnull __compar)(const void *, const void *)) __OSX_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_3_2);
+	    int (* _Nonnull __compar)(const void *, const void *))
+	    __OSX_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_3_2);
 #ifdef __BLOCKS__
 void	 psort_b(void *__base, size_t __nel, size_t __width,
-	    int (^ _Nonnull __compar)(const void *, const void *)) __OSX_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_3_2);
+	    int (^ _Nonnull __compar)(const void *, const void *) __sort_noescape)
+	    __OSX_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_3_2);
 #endif /* __BLOCKS__ */
 void	 psort_r(void *__base, size_t __nel, size_t __width, void *,
-	    int (* _Nonnull __compar)(void *, const void *, const void *))  __OSX_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_3_2);
+	    int (* _Nonnull __compar)(void *, const void *, const void *))
+	    __OSX_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_3_2);
 #ifdef __BLOCKS__
 void	 qsort_b(void *__base, size_t __nel, size_t __width,
-	    int (^ _Nonnull __compar)(const void *, const void *)) __OSX_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_3_2);
+	    int (^ _Nonnull __compar)(const void *, const void *) __sort_noescape)
+	    __OSX_AVAILABLE_STARTING(__MAC_10_6, __IPHONE_3_2);
 #endif /* __BLOCKS__ */
 void	 qsort_r(void *__base, size_t __nel, size_t __width, void *,
 	    int (* _Nonnull __compar)(void *, const void *, const void *));
 int	 radixsort(const unsigned char **__base, int __nel, const unsigned char *__table,
 	    unsigned __endbyte);
-void	 setprogname(const char *);
+int	rpmatch(const char *)
+	__API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0), watchos(6.0));
 int	 sradixsort(const unsigned char **__base, int __nel, const unsigned char *__table,
 	    unsigned __endbyte);
 void	 sranddev(void);

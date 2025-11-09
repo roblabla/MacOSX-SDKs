@@ -1,9 +1,8 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 0A92AD27-3AD3-3B4C-9852-32FC13C3D437' ]
-platform:        macosx
-install-name:    /System/Library/Frameworks/ExternalAccessory.framework/ExternalAccessory
-objc-constraint: none
+uuids:           [ 'x86_64: 84984EE7-8A1E-3B80-B7A5-D53ECD3E1D0F', 'x86_64: 84984EE7-8A1E-3B80-B7A5-D53ECD3E1D0F' ]
+platform:        zippered
+install-name:    '/System/Library/Frameworks/ExternalAccessory.framework/ExternalAccessory'
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _EAAccessoryAccessibilityActionKey, _EAAccessoryAccessibilityContextKey, 
@@ -32,13 +31,14 @@ exports:
                        _EAAccessoryIsReconnecting, _EAAccessoryKey, _EAAccessoryNMEASentenceFilteringSupportChangedNotification, 
                        _EAAccessoryPointOfInterestBufferIDKey, _EAAccessoryPointOfInterestIntentKey, 
                        _EAAccessoryPointOfInterestKey, _EAAccessoryPortPropertyChangedNotification, 
-                       _EAAccessorySpeakerMenuEQIndexKey, _EAAccessorySpeakerMenuEQNamesKey, 
-                       _EAAccessoryTimeSyncInfoUpdateNotification, _EAAccessoryUpdateNotification, 
-                       _EAAccessoryVehicleDataUpdateNotification, _EABluetoothAccessoryPickerErrorDomain, 
-                       _EACameraActiveImageCaptureFormatIndex, _EACameraActiveLivePreviewFormatIndex, 
-                       _EACameraBitDepth, _EACameraCodec, _EACameraExposureAreaOfInterest, 
-                       _EACameraExposureMode, _EACameraFocusAreaOfInterest, _EACameraFocusMode, 
-                       _EACameraHeight, _EACameraHorizontalOrigin, _EACameraHorizontalResolution, 
+                       _EAAccessorySelectedKey, _EAAccessorySpeakerMenuEQIndexKey, 
+                       _EAAccessorySpeakerMenuEQNamesKey, _EAAccessoryTimeSyncInfoUpdateNotification, 
+                       _EAAccessoryUpdateNotification, _EAAccessoryVehicleDataUpdateNotification, 
+                       _EABluetoothAccessoryPickerErrorDomain, _EACameraActiveImageCaptureFormatIndex, 
+                       _EACameraActiveLivePreviewFormatIndex, _EACameraBitDepth, 
+                       _EACameraCodec, _EACameraExposureAreaOfInterest, _EACameraExposureMode, 
+                       _EACameraFocusAreaOfInterest, _EACameraFocusMode, _EACameraHeight, 
+                       _EACameraHorizontalOrigin, _EACameraHorizontalResolution, 
                        _EACameraISO, _EACameraIdentifier, _EACameraInfoCameraCapabilities, 
                        _EACameraInfoCameraProperties, _EACameraLensPosition, _EACameraMaximumISO, 
                        _EACameraMinimumISO, _EACameraName, _EACameraSupportedImageCaptureFormat, 
@@ -49,6 +49,8 @@ exports:
                        _EAElectricVehicleChargingInfoMinimumVoltageKey, _EAElectricVehicleChargingInfoPowerTypeKey, 
                        _EAIPAccessoryAvailableNotification, _EAIPAccessoryConnectionCompleteNotification, 
                        _EAIPAccessoryDisconnectedNotification, _EAIPAccessoryNotAvailableNotification, 
+                       _EAProtocolEndpointUUIDKey, _EAProtocolFirmwareVersionActiveKey, 
+                       _EAProtocolFirmwareVersionPendingKey, _EAProtocolIndexKey, 
                        _EASessionOpenCompletedNotification, _EATimeSyncInfoMeasurementInterval, 
                        _EATimeSyncInfoOffsetEstimate, _EATimeSyncInfoOffsetUncertainty, 
                        _EATimeSyncInfoUncertaintyThreshold, _EATimeSyncOffsetMeasurementInterval, 
@@ -71,5 +73,6 @@ exports:
                        _kCFAccessoryPortPropertySupportedSampleRatesInHz, _kCFAccessoryPortPropertyVolumeControlIsSupported, 
                        _kCFAccessoryPortPropertyVolumeScalar, _kCFAccessoryPortUSBIn, 
                        _kCFAccessoryPortUSBOut ]
-    objc-classes:    [ EAAccessory, EAAccessoryManager, EASession ]
+    objc-classes:    [ EAAccessory, EAAccessoryManager, EASession, EAWiFiUnconfiguredAccessory, 
+                       EAWiFiUnconfiguredAccessoryBrowser ]
 ...

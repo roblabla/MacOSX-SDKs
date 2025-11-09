@@ -15,7 +15,7 @@
 .\"
 .Dd April 19, 2007
 .Dt INSTALLER 8          
-.Os "Mac OS X"
+.Os "macOS"
 .Sh NAME                  
 .Nm installer
 .Nd system software and package installer tool.
@@ -39,13 +39,13 @@
 .Op Fl file Ar <pathToFile>
 .Op Fl lang Ar <ISOLanguageCode>
 .Op Fl listiso
-.Fl package Ar <pathToPackage>
+.Fl pkg Ar <pathToPackage>
 .Fl target Ar device
 .\"																				DESCRIPTION 
 .Sh DESCRIPTION
 The 
 .Nm 
-command is used to install Mac OS X installer packages to a specified domain
+command is used to install macOS installer packages to a specified domain
 or volume.
 The 
 .Nm 
@@ -66,11 +66,6 @@ is accepted as a synonym).
 It must already be mounted when the
 .Nm 
 command is invoked.
-.Pp
-For system software installs, the target volume must be a different volume than the one currently running the booted system.
-See 
-.Ar systemsetup
-(only available on Mac OS X Server) to set the boot volume.
 .Pp
 The 
 .Nm 

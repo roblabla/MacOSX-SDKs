@@ -23,10 +23,10 @@ extern "C" {
 CF_IMPLICIT_BRIDGING_ENABLED
 
 /* A CMAttachmentBearer is a CF-based object that supports the suite of key/value/mode attachment APIs defined in this header file.  Since plain C has no type subclassing, we use CFType as the basis for the CMAttachmentBearer type.  (Not all CFTypes support CMAttachmentBearer methods; if a CMAttachmentBearer method is called on a CF object that does not support it, it will fail.) */
-typedef CM_BRIDGED_TYPE(id) CFTypeRef CMAttachmentBearerRef;
+typedef CM_BRIDGED_TYPE(id) CFTypeRef CMAttachmentBearerRef API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
 
 // The attachment modes are the same as those defined in CVBuffer.h.
-typedef uint32_t CMAttachmentMode;
+typedef uint32_t CMAttachmentMode API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
 #if COREMEDIA_USE_DERIVED_ENUMS_FOR_CONSTANTS
 enum : CMAttachmentMode
 #else
@@ -35,7 +35,7 @@ enum
 {
 	kCMAttachmentMode_ShouldNotPropagate    = 0,
 	kCMAttachmentMode_ShouldPropagate       = 1
-};
+} API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
 
 /*!
     @function   CMSetAttachment
@@ -47,7 +47,7 @@ enum
     @param      attachmentMode	Specifies which attachment mode is desired for this attachment.   A particular attachment key may only exist in
                                 a single mode at a time.
 */
-CM_EXPORT void	CMSetAttachment(CMAttachmentBearerRef CM_NONNULL target, CFStringRef CM_NONNULL key, CFTypeRef CM_NULLABLE value, CMAttachmentMode attachmentMode) __OSX_AVAILABLE_STARTING( __MAC_10_7, __IPHONE_4_0 );
+CM_EXPORT void	CMSetAttachment(CMAttachmentBearerRef CM_NONNULL target, CFStringRef CM_NONNULL key, CFTypeRef CM_NULLABLE value, CMAttachmentMode attachmentMode) API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
 
 
 /*!
@@ -56,10 +56,10 @@ CM_EXPORT void	CMSetAttachment(CMAttachmentBearerRef CM_NONNULL target, CFString
     @discussion You can attach any CF object to a CMAttachmentBearer to store additional information. CMGetAttachment retrieves an attachment identified by a key.  Given a CVBufferRef, CMGetAttachment is equivalent to CVBufferGetAttachment.
     @param      target  Target CMAttachmentBearer.
     @param      key	Key in form of a CFString identifying the desired attachment.
-    @param      attachmentModeOut.  Returns the mode of the attachment, if desired.  May be NULL.
+    @param      attachmentModeOut  Returns the mode of the attachment, if desired.  May be NULL.
     @result     If found the attachment object; else NULL.
 */
-CM_EXPORT CFTypeRef CM_NULLABLE CMGetAttachment(CMAttachmentBearerRef CM_NONNULL target, CFStringRef CM_NONNULL key, CMAttachmentMode * CM_NULLABLE attachmentModeOut) __OSX_AVAILABLE_STARTING( __MAC_10_7, __IPHONE_4_0 );
+CM_EXPORT CFTypeRef CM_NULLABLE CMGetAttachment(CMAttachmentBearerRef CM_NONNULL target, CFStringRef CM_NONNULL key, CMAttachmentMode * CM_NULLABLE attachmentModeOut) API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
 
 /*!
     @function   CMRemoveAttachment
@@ -68,7 +68,7 @@ CM_EXPORT CFTypeRef CM_NULLABLE CMGetAttachment(CMAttachmentBearerRef CM_NONNULL
     @param      target  Target CMAttachmentBearer.
     @param      key	Key in form of a CFString identifying the desired attachment.
 */
-CM_EXPORT void	CMRemoveAttachment(CMAttachmentBearerRef CM_NONNULL target, CFStringRef CM_NONNULL key) __OSX_AVAILABLE_STARTING( __MAC_10_7, __IPHONE_4_0 );
+CM_EXPORT void	CMRemoveAttachment(CMAttachmentBearerRef CM_NONNULL target, CFStringRef CM_NONNULL key) API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
 
 /*!
     @function   CMRemoveAllAttachments
@@ -76,7 +76,7 @@ CM_EXPORT void	CMRemoveAttachment(CMAttachmentBearerRef CM_NONNULL target, CFStr
     @discussion While CMRemoveAttachment removes a specific attachment identified by a key CMRemoveAllAttachments removes all attachments of a buffer and decrements their retain counts.  Given a CVBufferRef, CMRemoveAllAttachments is equivalent to CVBufferRemoveAllAttachments.
     @param      target  Target CMAttachmentBearer.
 */
-CM_EXPORT void	CMRemoveAllAttachments(CMAttachmentBearerRef CM_NONNULL target) __OSX_AVAILABLE_STARTING( __MAC_10_7, __IPHONE_4_0 );
+CM_EXPORT void	CMRemoveAllAttachments(CMAttachmentBearerRef CM_NONNULL target) API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
 
 /*!
     @function   CMCopyDictionaryOfAttachments
@@ -87,7 +87,7 @@ CM_EXPORT void	CMRemoveAllAttachments(CMAttachmentBearerRef CM_NONNULL target) _
     @result     A CFDictionary with all buffer attachments identified by there keys. If no attachment is present, NULL is returned.  Returns NULL
 		for invalid attachment mode.
 */
-CM_EXPORT CFDictionaryRef CM_NULLABLE CMCopyDictionaryOfAttachments(CFAllocatorRef CM_NULLABLE allocator, CMAttachmentBearerRef CM_NONNULL target, CMAttachmentMode attachmentMode) __OSX_AVAILABLE_STARTING( __MAC_10_7, __IPHONE_4_0 );
+CM_EXPORT CFDictionaryRef CM_NULLABLE CMCopyDictionaryOfAttachments(CFAllocatorRef CM_NULLABLE allocator, CMAttachmentBearerRef CM_NONNULL target, CMAttachmentMode attachmentMode) API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
 
 /*!
     @function   CMSetAttachments
@@ -95,7 +95,7 @@ CM_EXPORT CFDictionaryRef CM_NULLABLE CMCopyDictionaryOfAttachments(CFAllocatorR
     @discussion CMSetAttachments is a convenience call that in turn calls CMSetAttachment for each key and value in the given dictionary. All key value pairs must be in the root level of the dictionary.  Given a CVBufferRef, CMSetAttachments is equivalent to CVBufferSetAttachments.
     @param      target  Target CMAttachmentBearer.
 */
-CM_EXPORT void CMSetAttachments(CMAttachmentBearerRef CM_NONNULL target, CFDictionaryRef CM_NONNULL theAttachments, CMAttachmentMode attachmentMode) __OSX_AVAILABLE_STARTING( __MAC_10_7, __IPHONE_4_0 );
+CM_EXPORT void CMSetAttachments(CMAttachmentBearerRef CM_NONNULL target, CFDictionaryRef CM_NONNULL theAttachments, CMAttachmentMode attachmentMode) API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
 
 /*!
     @function   CMPropagateAttachments
@@ -105,7 +105,7 @@ CM_EXPORT void CMSetAttachments(CMAttachmentBearerRef CM_NONNULL target, CFDicti
     @param      source  CMAttachmentBearer to copy attachments from.
     @param      destination  CMAttachmentBearer to copy attachments to.
 */
-CM_EXPORT void  CMPropagateAttachments(CMAttachmentBearerRef CM_NONNULL source, CMAttachmentBearerRef CM_NONNULL destination) __OSX_AVAILABLE_STARTING( __MAC_10_7, __IPHONE_4_0 );
+CM_EXPORT void  CMPropagateAttachments(CMAttachmentBearerRef CM_NONNULL source, CMAttachmentBearerRef CM_NONNULL destination) API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
 	
 CF_IMPLICIT_BRIDGING_DISABLED
 

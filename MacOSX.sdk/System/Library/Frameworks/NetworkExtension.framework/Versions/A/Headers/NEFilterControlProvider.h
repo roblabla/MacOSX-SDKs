@@ -66,7 +66,7 @@ API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, watchos, tvos)
  * @param flow An NEFilterFlow object containing details about the flow that requires a rules update.
  * @param completionHandler A block that must be called when the NEFilterControlProvider is ready for the NEFilterDataProvider to re-process the new flow. NEFilterControlVerdict stores the verdict through which the control provider determines if a flow needs to be dropped or allowed. The verdict also indicates if the control plugin wants the data plugin to update its rules and handle the verdict.
  */
-- (void)handleNewFlow:(NEFilterFlow *)flow completionHandler:(void (^)(NEFilterControlVerdict *))completionHandler API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, watchos, tvos);
+- (void)handleNewFlow:(NEFilterFlow *)flow completionHandler:(void (^)(NEFilterControlVerdict *))completionHandler API_AVAILABLE(macos(10.15), ios(9.0)) API_UNAVAILABLE(watchos, tvos);
 
 /*!
  * @method notifyRulesChanged
@@ -74,12 +74,6 @@ API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, watchos, tvos)
  */
 - (void)notifyRulesChanged API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, watchos, tvos);
 
-/*!
- * @method handleReport:
- * @discussion This function is called by the framework when the data provider extension returns a verdict with the report property set to True. Subclass implementations may override this method to handle the flow report.
- * @param report The report being delivered
- */
-- (void)handleReport:(NEFilterReport *)report API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos, watchos, tvos);
 @end
 
 NS_ASSUME_NONNULL_END

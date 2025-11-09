@@ -1,13 +1,12 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 236BACD7-163F-3F35-B710-2C62988AA251' ]
-platform:        macosx
-install-name:    /System/Library/Frameworks/SecurityFoundation.framework/Versions/A/SecurityFoundation
-current-version: 55185.200.14
-objc-constraint: none
+uuids:           [ 'x86_64: BB7032BE-58C8-3EBB-A76F-B1FF3729AF9A', 'x86_64: BB7032BE-58C8-3EBB-A76F-B1FF3729AF9A' ]
+platform:        zippered
+install-name:    '/System/Library/Frameworks/SecurityFoundation.framework/Versions/A/SecurityFoundation'
+current-version: 55236
 exports:         
   - archs:           [ x86_64 ]
-    re-exports:      [ /System/Library/Frameworks/Security.framework/Versions/A/Security ]
+    re-exports:      [ '/System/Library/Frameworks/Security.framework/Versions/A/Security' ]
     symbols:         [ _SFAccessibilityMakeWithMode, _SFCertificateAuthorityInputParmKeyDestinationKeychain, 
                        _SFCertificateAuthorityInputParmKeySignerKeychain, _SFCryptoServicesErrorDecryptionFailed, 
                        _SFCryptoServicesErrorDeserializationFailed, _SFCryptoServicesErrorDigest, 
@@ -21,7 +20,8 @@ exports:
                        _SFKeychainErrorInvalidKeyData, _SFKeychainErrorInvalidParameter, 
                        _SFKeychainErrorInvalidPersistentIdentifier, _SFKeychainErrorItemDecryptionFailed, 
                        _SFKeychainErrorItemNotFound, _SFKeychainErrorKeyType, _SFKeychainErrorMissingAccessGroup, 
-                       _SFKeychainErrorRNGFailure, _SFKeychainErrorSaveFailed, _SFKeychainErrorSecureDecodeFailed, 
+                       _SFKeychainErrorOutOfDateChangeToken, _SFKeychainErrorRNGFailure, 
+                       _SFKeychainErrorSaveFailed, _SFKeychainErrorSecureDecodeFailed, 
                        _SFKeychainErrorUnknownKeyType, _SFKeychainServerXPCInterface, 
                        _SFPWACStringInDictionary, _SFPWAContextCreate, _SFPWAContextCreateWithDefaults, 
                        _SFPWAContextLoadDictionaries, _SFPWAContextRelease, _SFPWAPasswordEvaluator, 
@@ -37,9 +37,9 @@ exports:
                        __Z17SecVerifySHA1HMACPK10__CFStringPK8__CFDataS4_, __Z26SFPWAStdStringInDictionarylNSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
                        __ZN10CertParser10initFieldsEv, __ZN10CertParser11fieldForOidERK9cssm_dataj, 
                        __ZN10CertParser12initWithDataERK9cssm_data, __ZN10CertParser14initWithCFDataEPK8__CFData, 
-                       __ZN10CertParser15extensionForOidERK9cssm_data, __ZN10CertParser15initWithSecCertEP23OpaqueSecCertificateRef, 
-                       __ZN10CertParserC1EP23OpaqueSecCertificateRef, __ZN10CertParserC1El, 
-                       __ZN10CertParserC1ElRK9cssm_data, __ZN10CertParserC1Ev, __ZN10CertParserC2EP23OpaqueSecCertificateRef, 
+                       __ZN10CertParser15extensionForOidERK9cssm_data, __ZN10CertParser15initWithSecCertEP16__SecCertificate, 
+                       __ZN10CertParserC1EP16__SecCertificate, __ZN10CertParserC1El, 
+                       __ZN10CertParserC1ElRK9cssm_data, __ZN10CertParserC1Ev, __ZN10CertParserC2EP16__SecCertificate, 
                        __ZN10CertParserC2El, __ZN10CertParserC2ElRK9cssm_data, __ZN10CertParserC2Ev, 
                        __ZN10CertParserD1Ev, __ZN10CertParserD2Ev, __copyIdentityForCMSDecoder, 
                        _caBasicConstraintsPresentBindingKey, _caCAAdminEmailAddrBindingKey, 

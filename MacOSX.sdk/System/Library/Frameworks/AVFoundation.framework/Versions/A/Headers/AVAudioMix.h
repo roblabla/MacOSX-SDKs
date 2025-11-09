@@ -13,7 +13,12 @@
 #import <CoreMedia/CMBase.h>
 #import <CoreMedia/CMTime.h>
 #import <CoreMedia/CMTimeRange.h>
+
+#define AVF_AUDIO_PROCESSING_TAP_AVAILABLE (__has_include(<MediaToolbox/MTAudioProcessingTap.h>))
+
+#if AVF_AUDIO_PROCESSING_TAP_AVAILABLE
 #import <MediaToolbox/MTAudioProcessingTap.h>
+#endif
 
 /*!
  
@@ -28,7 +33,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-NS_CLASS_AVAILABLE(10_7, 4_0)
+API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0))
 @interface AVAudioMix : NSObject <NSCopying, NSMutableCopying> {
 @private
     AVAudioMixInternal    *_audioMix;
@@ -42,7 +47,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 
 @class AVMutableAudioMixInternal;
 
-NS_CLASS_AVAILABLE(10_7, 4_0)
+API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0))
 @interface AVMutableAudioMix : AVAudioMix {
 @private
     AVMutableAudioMixInternal    *_mutableAudioMix __attribute__((unused));
@@ -86,7 +91,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 
 @class AVAudioMixInputParametersInternal;
 
-NS_CLASS_AVAILABLE(10_7, 4_0)
+API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0))
 @interface AVAudioMixInputParameters : NSObject <NSCopying, NSMutableCopying> {
 @private
     AVAudioMixInputParametersInternal    *_inputParameters;
@@ -105,13 +110,18 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
    Constants for various time pitch algorithms, e.g. AVAudioTimePitchSpectral, are defined in AVAudioProcessingSettings.h.
    Can be nil, in which case the audioTimePitchAlgorithm set on the AVPlayerItem, AVAssetExportSession, or AVAssetReaderAudioMixOutput on which the AVAudioMix is set will be used for the associated track.
 */
-@property (nonatomic, readonly, copy, nullable) AVAudioTimePitchAlgorithm audioTimePitchAlgorithm NS_AVAILABLE(10_10, 7_0);
+@property (nonatomic, readonly, copy, nullable) AVAudioTimePitchAlgorithm audioTimePitchAlgorithm API_AVAILABLE(macos(10.10), ios(7.0), tvos(9.0), watchos(1.0));
+
+
+#if AVF_AUDIO_PROCESSING_TAP_AVAILABLE
 
 /*!
  @property		audioTapProcessor
  @abstract		Indicates the audio processing tap that will be used for the audio track.
 */
-@property (nonatomic, readonly, retain, nullable) __attribute__((NSObject)) MTAudioProcessingTapRef audioTapProcessor NS_AVAILABLE(10_9, 6_0);
+@property (nonatomic, readonly, retain, nullable) __attribute__((NSObject)) MTAudioProcessingTapRef audioTapProcessor API_AVAILABLE(macos(10.9), ios(6.0), tvos(9.0)) API_UNAVAILABLE(watchos);
+
+#endif
 
 /*  
  @method		getVolumeRampForTime:startVolume:endVolume:timeRange:
@@ -137,7 +147,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 @class AVPlayerItemTrack;
 @class AVMutableAudioMixInputParametersInternal;
 
-NS_CLASS_AVAILABLE(10_7, 4_0)
+API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0))
 @interface AVMutableAudioMixInputParameters : AVAudioMixInputParameters {
 @private
     AVMutableAudioMixInputParametersInternal    *_mutableInputParameters __attribute__((unused));
@@ -170,13 +180,17 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
    Constants for various time pitch algorithms, e.g. AVAudioTimePitchSpectral, are defined in AVAudioProcessingSettings.h.
    Can be nil, in which case the audioTimePitchAlgorithm set on the AVPlayerItem, AVAssetExportSession, or AVAssetReaderAudioMixOutput on which the AVAudioMix is set will be used for the associated track.
 */
-@property (nonatomic, copy, nullable) AVAudioTimePitchAlgorithm audioTimePitchAlgorithm NS_AVAILABLE(10_10, 7_0);
+@property (nonatomic, copy, nullable) AVAudioTimePitchAlgorithm audioTimePitchAlgorithm API_AVAILABLE(macos(10.10), ios(7.0), tvos(9.0), watchos(1.0));
+
+#if AVF_AUDIO_PROCESSING_TAP_AVAILABLE
 
 /*!
  @property		audioTapProcessor
  @abstract		Indicates the audio processing tap that will be used for the audio track.
 */
-@property (nonatomic, retain, nullable) __attribute__((NSObject)) MTAudioProcessingTapRef audioTapProcessor NS_AVAILABLE(10_9, 6_0);
+@property (nonatomic, retain, nullable) __attribute__((NSObject)) MTAudioProcessingTapRef audioTapProcessor API_AVAILABLE(macos(10.9), ios(6.0), tvos(9.0)) API_UNAVAILABLE(watchos);
+
+#endif
 
 /*  
  @method		setVolumeRampFromStartVolume:toEndVolume:timeRange:

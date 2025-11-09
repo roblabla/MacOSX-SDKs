@@ -39,7 +39,7 @@ extern "C" {
  *                      unit weight matrix.
  *
  */
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0))
 @interface MPSMatrixNeuron : MPSMatrixUnaryKernel
 
 /*! @property   sourceNumberOfFeatureVectors
@@ -213,7 +213,7 @@ MPS_SWIFT_NAME(encode(commandBuffer:inputMatrix:biasVector:resultMatrix:));
  *
  *
  */
-MPS_CLASS_AVAILABLE_STARTING( macos(10.14), ios(12.0), tvos(12.0))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.14), ios(12.0), macCatalyst(13.0), tvos(12.0))
 @interface MPSMatrixNeuronGradient : MPSMatrixBinaryKernel
 
 /*! @property   sourceNumberOfFeatureVectors

@@ -1,25 +1,22 @@
 /*
         NSSecureTextField.h
         Application Kit
-        Copyright (c) 1995-2018, Apple Inc.
+        Copyright (c) 1995-2019, Apple Inc.
         All rights reserved.
 */
 
 #import <AppKit/NSTextField.h>
 #import <AppKit/NSTextFieldCell.h>
 
-@interface NSSecureTextField : NSTextField {
-/*All instance variables are private*/
-}
+API_UNAVAILABLE_BEGIN(ios)
+
+@interface NSSecureTextField : NSTextField
 @end
 
-@interface NSSecureTextFieldCell : NSTextFieldCell {
-/*All instance variables are private*/
-    @private
-    BOOL _echosBullets APPKIT_IVAR;
-    BOOL _csMode __unused APPKIT_IVAR;
-}
+@interface NSSecureTextFieldCell : NSTextFieldCell
 
 @property BOOL echosBullets;
 
 @end
+
+API_UNAVAILABLE_END

@@ -154,9 +154,8 @@ typedef AVAudioBuffer * __nullable (^AVAudioConverterInputBlock)(AVAudioPacketCo
 	@class AVAudioConverter
 	@abstract
 		AVAudioConverter converts streams of audio between various formats.
-	@discussion
 */
-OS_EXPORT API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0))
+API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0))
 @interface AVAudioConverter : NSObject {
 @private
 	void *_impl;

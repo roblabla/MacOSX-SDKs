@@ -1,9 +1,8 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: A9CC940A-9E7C-35A4-A1E6-DADD66200378' ]
-platform:        macosx
-install-name:    /System/Library/Frameworks/CoreMediaIO.framework/Versions/A/CoreMediaIO
-objc-constraint: none
+uuids:           [ 'x86_64: CF4BFC58-3CB1-37AA-861E-02AA1F74AB61', 'x86_64: CF4BFC58-3CB1-37AA-861E-02AA1F74AB61' ]
+platform:        zippered
+install-name:    '/System/Library/Frameworks/CoreMediaIO.framework/Versions/A/CoreMediaIO'
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _CMIOAddAtExitListener, _CMIODeviceProcessAVCCommand, _CMIODeviceProcessRS422Command, 
@@ -24,8 +23,7 @@ exports:
                        _CMIOFileWritingControlTokenUnitCanStartWriting, _CMIOFileWritingControlTokenUnitIsPaused, 
                        _CMIOFileWritingControlTokenUnitIsWriting, _CMIOFormatDescriptionGetManufacturerCode, 
                        _CMIOFormatDescriptionGetOnlyHasIFrames, _CMIOFormatDescriptionSignifiesDiscontinuity, 
-                       _CMIOGetUnitRegistry, _CMIOGlobalDTraceFireProbe, _CMIOGlobalDTraceProbeIsEnabled, 
-                       _CMIOGraphAddPropertyListener, _CMIOGraphAddRenderNotify, 
+                       _CMIOGetUnitRegistry, _CMIOGraphAddPropertyListener, _CMIOGraphAddRenderNotify, 
                        _CMIOGraphClearConnections, _CMIOGraphConnectNodeInput, _CMIOGraphCountNodeConnections, 
                        _CMIOGraphCreate, _CMIOGraphCreateAndConfigureForUnits, _CMIOGraphCreateNode, 
                        _CMIOGraphDictionaryRepresentation, _CMIOGraphDisconnectNodeInput, 

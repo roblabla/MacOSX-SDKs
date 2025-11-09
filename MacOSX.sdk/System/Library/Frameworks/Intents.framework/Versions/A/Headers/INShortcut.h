@@ -2,7 +2,7 @@
 //  INShortcut.h
 //  Intents
 //
-//  Copyright © 2018 Apple. All rights reserved.
+//  Copyright (c) 2016-2019 Apple Inc. All rights reserved.
 //
 
 #import <Intents/INIntent.h>
@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 /*!
  @abstract A shortcut is an action that can be suggested by the system or added to Siri.
  */
-API_AVAILABLE(ios(12.0), watchos(5.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(macosx)
+API_AVAILABLE(ios(12.0), watchos(5.0)) API_UNAVAILABLE(macosx, tvos)
 @interface INShortcut : NSObject <NSSecureCoding, NSCopying>
 
 /*!
@@ -39,7 +39,7 @@ API_AVAILABLE(ios(12.0), watchos(5.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(mac
 
 /*!
  @abstract Creates a shortcut with the given intent.
- @param intent Must have a title and have valid shortcut types.
+ @param intent Unless user configurable, must have a title and have valid shortcut types.
  @return Will return @c nil (and log an error) if the intent isn't valid.
  */
 - (nullable instancetype)initWithIntent:(INIntent *)intent;

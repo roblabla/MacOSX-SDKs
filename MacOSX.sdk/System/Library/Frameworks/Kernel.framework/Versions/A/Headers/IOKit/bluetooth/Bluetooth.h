@@ -76,7 +76,9 @@ enum
 	kBluetoothKeyTypeDebugCombination				= 0x03,
 	kBluetoothKeyTypeUnauthenticatedCombination		= 0x04,
 	kBluetoothKeyTypeAuthenticatedCombination		= 0x05,
-	kBluetoothKeyTypeChangedCombination				= 0x06
+	kBluetoothKeyTypeChangedCombination				= 0x06,
+    kBluetoothKeyTypeUnauthenticatedCombinationP256 = 0x07,
+    kBluetoothKeyTypeAuthenticatedCombinationP256   = 0x08
 };
 
 // Packet types (Bluetooth spec section 7.1.5 - Create Connection)
@@ -361,13 +363,16 @@ enum
 	kBluetoothL2CAPChannelAttributeProtocol		= 0x0004,
 	kBluetoothL2CAPChannelLESignalling			= 0x0005,
 	kBluetoothL2CAPChannelSecurityManager		= 0x0006,
-	// Range 0x0003 to 0x003F reserved for future use.
-	kBluetoothL2CAPChannelReservedStart			= 0x0007,
+    kBluetoothL2CAPChannelBREDRSecurityManager  = 0x0007,
+	// Range 0x0008 to 0x003E reserved for future use.
+	kBluetoothL2CAPChannelReservedStart			= 0x0008,
     kBluetoothL2CAPChannelLEAP					= 0x002A,
     kBluetoothL2CAPChannelLEAS					= 0x002B,
     kBluetoothL2CAPChannelMagicPairing			= 0x0030,
 	kBluetoothL2CAPChannelMagnet				= 0x003A,
-    kBluetoothL2CAPChannelReservedEnd			= 0x003F,
+    kBluetoothL2CAPChannelReservedEnd			= 0x003E,
+    
+    kBluetoothL2CAPChannelAMPTestManager        = 0x003F,
     
     // Range 0x0040 to 0xFFFF are dynamically allocated.
     kBluetoothL2CAPChannelDynamicStart			= 0x0040,
@@ -1112,6 +1117,32 @@ enum
         kBluetoothHCICommandLESetPhy                                        = 0x0032,
 		kBluetoothHCICommandLEEnhancedReceiverTest							= 0x0033,
 		kBluetoothHCICommandLEEnhancedTransmitterTest						= 0x0034,
+		kBluetoothHCICommandLESetAdvertisingSetRandomAddress				= 0x0035,
+		kBluetoothHCICommandLESetExtendedAdvertisingParameters				= 0x0036,
+		kBluetoothHCICommandLESetExtendedAdvertisingData					= 0x0037,
+		kBluetoothHCICommandLESetExtendedScanResponseData					= 0x0038,
+		kBluetoothHCICommandLESetExtendedAdvertisingEnableCommand			= 0x0039,
+		kBluetoothHCICommandLEReadMaximumAdvertisingDataLength				= 0x003A,
+		kBluetoothHCICommandLEReadNumberofSupportedAdvertisingSets			= 0x003B,
+		kBluetoothHCICommandLERemoveAdvertisingSet							= 0x003C,
+		kBluetoothHCICommandLEClearAdvertisingSets							= 0x003D,
+		kBluetoothHCICommandLESetPeriodicAdvertisingParameters				= 0x003E,
+		kBluetoothHCICommandLESetPeriodicAdvertisingData					= 0x003F,
+		kBluetoothHCICommandLESetPeriodicAdvertisingEnable					= 0x0040,
+		kBluetoothHCICommandLESetExtendedScanParameters						= 0x0041,
+		kBluetoothHCICommandLESetExtendedScanEnable							= 0x0042,
+		kBluetoothHCICommandLEExtendedCreateConnection						= 0x0043,
+		kBluetoothHCICommandLEPeriodicAdvertisingCreateSync					= 0x0044,
+		kBluetoothHCICommandLEPeriodicAdvertisingCreateSyncCancel			= 0x0045,
+		kBluetoothHCICommandLEPeriodicAdvertisingTerminateSync				= 0x0046,
+		kBluetoothHCICommandLEAddDeviceToPeriodicAdvertiserList				= 0x0047,
+		kBluetoothHCICommandLERemoveDeviceFromPeriodicAdvertiserList		= 0x0048,
+		kBluetoothHCICommandLEClearPeriodicAdvertiserList					= 0x0049,
+		kBluetoothHCICommandLEReadPeriodicAdvertiserListSize				= 0x004A,
+		kBluetoothHCICommandLEReadTransmitPower								= 0x004B,
+		kBluetoothHCICommandLEReadRFPathCompensation						= 0x004C,
+		kBluetoothHCICommandLEWriteRFPathCompensation						= 0x004D,
+		kBluetoothHCICommandLESetPrivacyMode								= 0x004E,
 
 	// Command Group: Logo Testing (no commands yet)
 	
@@ -1276,9 +1307,20 @@ enum BluetoothFeatureBits
 	kBluetoothFeatureInquiryTransmissionPowerLevel		= (1 << 1L),
 	kBluetoothFeatureExtendedFeatures					= (1 << 7L),
 	
-	// Byte 8 of the support features data structure (extended)
+	// Byte 8 of the support features data structure (extended) page 1
 
-	kBluetoothFeatureSimpleSecurePairingHostMode		= (1 << 0L),
+	kBluetoothExtendedFeatureSimpleSecurePairingHostMode		= (1 << 0L),
+    kBluetoothExtendedFeatureLESupportedHostMode                = (1 << 1L),
+    kBluetoothExtendedFeatureLEAndBREDRToSameDeviceHostMode     = (1 << 2L),
+    KBluetoothExtendedFeatureSecureConnectionsHostMode          = (1 << 3L),
+    
+    // Byte 16 of supported features data structure (extended) page 2
+    
+    kBluetoothExtendedFeatureSecureConnectionsControllerSupport  = (1 << 0L),
+    kBluetoothExtendedFeaturePing                                = (1 << 1L),
+    kBluetoothExtendedFeatureReserved                            = (1 << 2L),
+    kBluetoothExtendedFeatureTrainNudging                        = (1 << 3L),
+    kBluetoothExtendedFeatureSlotAvailabilityMask                = (1 << 4L),
 
 };
 
@@ -1312,6 +1354,14 @@ struct BluetoothHCILinkQualityInfo
 	BluetoothHCILinkQuality			qualityValue;
 };
 
+typedef	uint8_t										        BluetoothHCIEncryptionKeySize;
+typedef struct BluetoothHCIEncryptionKeySizeInfo			BluetoothHCIEncryptionKeySizeInfo;
+struct BluetoothHCIEncryptionKeySizeInfo
+{
+	BluetoothConnectionHandle		        handle;
+	BluetoothHCIEncryptionKeySize			keySize;
+};
+        
 typedef uint8_t	BluetoothHCIRole;
 typedef struct	BluetoothHCIRoleInfo					BluetoothHCIRoleInfo;
 struct BluetoothHCIRoleInfo
@@ -1705,7 +1755,8 @@ enum BluetoothTransportTypes
 	kBluetoothTransportTypeUSB		= 0x01,
 	kBluetoothTransportTypePCCard	= 0x02,
 	kBluetoothTransportTypePCICard	= 0x03,
-	kBluetoothTransportTypeUART		= 0x04
+	kBluetoothTransportTypeUART		= 0x04,
+    kBluetoothTransportTypePCIe     = 0x05
 };
 
 // Inquiries
@@ -2355,7 +2406,22 @@ struct			BluetoothHCIEventLEConnectionCompleteResults
 	uint16_t									connLatency;
 	uint16_t									supervisionTimeout;
 	uint8_t										masterClockAccuracy;
-} __attribute__((packed));		
+} __attribute__((packed));
+        
+typedef struct    BluetoothHCIEventLEEnhancedConnectionCompleteResults        BluetoothHCIEventLEEnhancedConnectionCompleteResults;
+struct            BluetoothHCIEventLEEnhancedConnectionCompleteResults
+{
+    BluetoothConnectionHandle                  connectionHandle;
+    uint8_t                                    role;
+    uint8_t                                    peerAddressType;
+    BluetoothDeviceAddress                     peerAddress;
+    BluetoothDeviceAddress                     localResolvablePrivateAddress;
+    BluetoothDeviceAddress                     peerResolvablePrivateAddress;
+    uint16_t                                   connInterval;
+    uint16_t                                   connLatency;
+    uint16_t                                   supervisionTimeout;
+    uint8_t                                    masterClockAccuracy;
+} __attribute__((packed));
 	
 typedef struct	BluetoothHCIEventLEConnectionUpdateCompleteResults		BluetoothHCIEventLEConnectionUpdateCompleteResults;
 struct			BluetoothHCIEventLEConnectionUpdateCompleteResults

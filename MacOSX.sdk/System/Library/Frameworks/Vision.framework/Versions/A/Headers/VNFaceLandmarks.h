@@ -11,6 +11,7 @@
 #import <Vision/VNTypes.h>
 #import <simd/simd.h>
 
+#import <Vision/VNRequestRevisionProviding.h>
 
 
 NS_ASSUME_NONNULL_BEGIN
@@ -22,14 +23,14 @@ NS_ASSUME_NONNULL_BEGIN
  */
 
 API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0))
-@interface VNFaceLandmarkRegion : NSObject
+@interface VNFaceLandmarkRegion : NSObject<NSCopying, NSSecureCoding, VNRequestRevisionProviding>
 
 - (instancetype) init NS_UNAVAILABLE;
 
 /*!
  @brief pointCount returns the amount of points in a given region. This can be zero if no points for a region could be found.
  */
-@property (readonly) NSUInteger  pointCount;
+@property (readonly) NSUInteger pointCount;
 
 @end
 
@@ -64,6 +65,18 @@ API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0))
 - (const CGPoint*) pointsInImageOfSize:(CGSize)imageSize NS_RETURNS_INNER_POINTER;
 
 
+/*!
+ @brief    Obtains the array of accuracy placement estimates per landmark point.
+ 
+ @discussion    Provides the NSArray object containing landmarks accuracy placement estimates per landmark point. This property is only
+                populated when VNDetectFaceLandmarksRequest object is configured with VNRequestFaceLandmarksConstellation76Points. It is
+                set to nil for other constellations
+ 
+ @return NSArray object of NSNumber(s) initialized to floating point values.
+ */
+@property (readonly, nullable) NSArray<NSNumber*>* precisionEstimatesPerPoint API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0));
+
+
 @end
 
 
@@ -74,7 +87,7 @@ API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0))
  
  */
 API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0))
-@interface VNFaceLandmarks : NSObject
+@interface VNFaceLandmarks : NSObject<NSCopying, NSSecureCoding, VNRequestRevisionProviding>
 
 - (instancetype) init NS_UNAVAILABLE;
 

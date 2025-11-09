@@ -27,8 +27,6 @@ NS_CLASS_AVAILABLE_MAC(10_6)
     @private
 	
         NSDictionary    *_info;
-
-    @protected
 	
         NSOrderedSet<CWNetworkProfile *>    *_networkProfiles;
     

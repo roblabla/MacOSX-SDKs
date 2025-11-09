@@ -1,3 +1,4 @@
+#if (defined(USE_AUDIOTOOLBOX_PUBLIC_HEADERS) && USE_AUDIOTOOLBOX_PUBLIC_HEADERS) || !__has_include(<AudioToolboxCore/AudioFileStream.h>)
 /*!
 	@file		AudioFileStream.h
 	@framework	AudioToolbox.framework
@@ -33,13 +34,8 @@
 //=============================================================================
 
 #include <Availability.h>
-#if !defined(__COREAUDIO_USE_FLAT_INCLUDES__)
-	#include <CoreAudio/CoreAudioTypes.h>
-	#include <AudioToolbox/AudioFile.h>
-#else
-	#include <CoreAudioTypes.h>
-	#include <AudioFile.h>
-#endif
+#include <CoreAudioTypes/CoreAudioTypes.h>
+#include <AudioToolbox/AudioFile.h>
 
 CF_ASSUME_NONNULL_BEGIN
 
@@ -210,6 +206,49 @@ CF_ENUM(OSStatus)
     @constant   kAudioFileStreamProperty_FrameToPacket 
 					pass a AudioFramePacketTranslation with mFrame filled out and get mPacket and 
 					mFrameOffsetInPacket back.
+    @constant   kAudioFileStreamProperty_RestrictsRandomAccess
+					A UInt32 indicating whether an Audio File contains packets that cannot be used as random
+					access points.
+					A value of 0 indicates that any packet can be used as a random access point, i.e. that a
+					decoder can start decoding with any packet.
+					A value of 1 indicates that some packets cannot be used as random access points, i.e.
+					that either kAudioFileStreamProperty_PacketToRollDistance or
+					kAudioFileStreamProperty_PacketToDependencyInfo must be employed in order to identify an
+					appropriate initial packet for decoding.
+	@constant	kAudioFileStreamProperty_PacketToRollDistance
+					Pass an AudioPacketRollDistanceTranslation with mPacket filled out and get mRollDistance
+					back.
+					See AudioFile.h for the declaration of AudioPacketRollDistanceTranslation.
+					The roll distance indicates the count of packets that must be decoded prior to the
+					packet with the specified number in order to achieve full refresh of the decoder at that
+					packet.
+					For file formats that do not carry comprehensive information regarding independently
+					decodable packets, accurate roll distances may be available only for the range of
+					packets either currently or most recently provided to your packets proc.
+	@constant   kAudioFileStreamProperty_PreviousIndependentPacket
+	@constant	kAudioFileStreamProperty_NextIndependentPacket
+					Pass an AudioIndependentPacketTranslation with mPacket filled out and get
+					mIndependentlyDecodablePacket back. A value of -1 means that no independent packet is
+					present in the stream in the direction of interest. Otherwise, for
+					kAudioFileStreamProperty_PreviousIndependentPacket, mIndependentlyDecodablePacket will be
+					less than mPacket, and for kAudioFileStreamProperty_NextIndependentPacket,
+					mIndependentlyDecodablePacket will be greater than mPacket.
+					For file formats that do not carry comprehensive information regarding independently
+					decodable packets, independent packets may be identifiable only within the range of
+					packets either currently or most recently provided to your packets proc.
+	@constant	kAudioFileStreamProperty_PacketToDependencyInfo
+					Pass an AudioPacketDependencyInfoTranslation with mPacket filled out and get
+					mIsIndependentlyDecodable and mPrerollPacketCount back.
+					A value of 0 for mIsIndependentlyDecodable indicates that the specified packet is not
+					independently decodable.
+					A value of 1 for mIsIndependentlyDecodable indicates that the specified packet is
+					independently decodable.
+					For independently decodable packets, mPrerollPacketCount indicates the count of packets
+					that must be decoded after the packet with the specified number in order to refresh the
+					decoder.
+					For file formats that do not carry comprehensive information regarding packet
+					dependencies, accurate dependency info may be available only for the range of
+					packets either currently or most recently provided to your packets proc.
 	@constant	kAudioFileStreamProperty_PacketToByte
 					pass an AudioBytePacketTranslation struct with mPacket filled out and get mByte back.
 					mByteOffsetInPacket is ignored. If the mByte value is an estimate then 
@@ -246,13 +285,18 @@ CF_ENUM(AudioFileStreamPropertyID)
 	kAudioFileStreamProperty_ChannelLayout					=	'cmap',
 	kAudioFileStreamProperty_PacketToFrame					=	'pkfr',
 	kAudioFileStreamProperty_FrameToPacket					=	'frpk',
+	kAudioFileStreamProperty_RestrictsRandomAccess          =   'rrap',
+	kAudioFileStreamProperty_PacketToRollDistance           =   'pkrl',
+	kAudioFileStreamProperty_PreviousIndependentPacket      =   'pind',
+	kAudioFileStreamProperty_NextIndependentPacket          =   'nind',
+	kAudioFileStreamProperty_PacketToDependencyInfo         =   'pkdp',
 	kAudioFileStreamProperty_PacketToByte					=	'pkby',
 	kAudioFileStreamProperty_ByteToPacket					=	'bypk',
 	kAudioFileStreamProperty_PacketTableInfo				=	'pnfo',
 	kAudioFileStreamProperty_PacketSizeUpperBound  			=	'pkub',
 	kAudioFileStreamProperty_AverageBytesPerPacket			=	'abpp',
 	kAudioFileStreamProperty_BitRate						=	'brat',
-    kAudioFileStreamProperty_InfoDictionary                 =   'info'
+	kAudioFileStreamProperty_InfoDictionary                 = 	'info'
 };
 
 //=============================================================================
@@ -452,3 +496,6 @@ CF_ASSUME_NONNULL_END
 
 #endif // AudioToolbox_AudioFileStream_h
 
+#else
+#include <AudioToolboxCore/AudioFileStream.h>
+#endif

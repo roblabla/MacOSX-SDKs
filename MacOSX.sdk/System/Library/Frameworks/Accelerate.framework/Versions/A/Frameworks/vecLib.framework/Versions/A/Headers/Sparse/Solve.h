@@ -249,10 +249,33 @@
 # include <cblas.h>
 #endif
 
-#if __has_include(<os/object.h>)
-# include <os/object.h>
+// Due to changes in the implementation of OS_ENUM that would break ABI,
+// we now define our own SPARSE_ENUM instead.
+// Note that as specifying an enum_extensibility attribute causes Swift to import things
+// differently compared to previous versions of Sparse, we disable it here to avoid
+// breaking backwards compatability.
+#if __has_attribute(enum_extensibility) && !defined(__swift__)
+#  define __SPARSE_ENUM_ATTR __attribute__((enum_extensibility(open)))
+#  define __SPARSE_ENUM_ATTR_CLOSED __attribute__((enum_extensibility(closed)))
 #else
-# define OS_ENUM(_name, _type, ...) enum { __VA_ARGS__ }; typedef _type _name##_t
+#  define __SPARSE_ENUM_ATTR
+#  define __SPARSE_ENUM_ATTR_CLOSED
+#endif // __has_attribute(enum_extensibility)
+
+#if __has_feature(objc_fixed_enum) || __has_extension(cxx_strong_enums)
+# define SPARSE_ENUM(_name, _type, ...) \
+         typedef enum : _type { __VA_ARGS__ } _name##_t
+# define SPARSE_CLOSED_ENUM(_name, _type, ...) \
+         typedef enum : _type { __VA_ARGS__ } \
+             __SPARSE_ENUM_ATTR_CLOSED _name##_t
+#else
+# define __SPARSE_ENUM_C_FALLBACK(_name, _type, ...) \
+         typedef _type _name##_t; enum _name { __VA_ARGS__ }
+# define SPARSE_ENUM(_name, _type, ...) \
+         typedef _type _name##_t; enum { __VA_ARGS__ }
+# define SPARSE_CLOSED_ENUM(_name, _type, ...) \
+         __SPARSE_ENUM_C_FALLBACK(_name, _type, ## __VA_ARGS__) \
+         __SPARSE_ENUM_ATTR_CLOSED
 #endif
 
 #if __has_include(<os/availability.h>)
@@ -287,7 +310,7 @@
  *  @constant SparseSymmetric A symmetric sparse matrix.  The SparseTriangle_t
  *    field indicates which triangle (upper or lower) is used to represent
  *    the matrix.                                                             */
-OS_ENUM(SparseKind, unsigned int,
+SPARSE_ENUM(SparseKind, unsigned int,
   SparseOrdinary       = 0,
   SparseTriangular     = 1,
   SparseUnitTriangular = 2,
@@ -308,7 +331,7 @@ OS_ENUM(SparseKind, unsigned int,
  *            be used, and the upper triangle is implicitly zero.
  *            For symmetric matrices, indicates that the lower triangle is to
  *            be used; the upper triangle is implicitly defined by reflection.*/
-OS_ENUM(SparseTriangle, unsigned char,
+SPARSE_CLOSED_ENUM(SparseTriangle, unsigned char,
   SparseUpperTriangle = 0,
   SparseLowerTriangle = 1
 );
@@ -717,7 +740,7 @@ typedef struct {
  *  @constant SparseParameterError        Error in user-supplied parameter.
  *  @constant SparseStatusReleased        Factorization object has been freed.
  */
-OS_ENUM(SparseStatus, int,
+SPARSE_ENUM(SparseStatus, int,
   SparseStatusOK            =  0,
   SparseFactorizationFailed = -1,
   SparseMatrixIsSingular    = -2,
@@ -743,7 +766,7 @@ OS_ENUM(SparseStatus, int,
  *  @constant SparseFactorizationCholeskyAtA
  *              QR factorization without storing Q (equivalent to A^TA = R^T R).
  */
-OS_ENUM(SparseFactorization, uint8_t,
+SPARSE_ENUM(SparseFactorization, uint8_t,
   SparseFactorizationCholesky = 0,
   SparseFactorizationLDLT = 1,
   SparseFactorizationLDLTUnpivoted = 2,
@@ -757,7 +780,7 @@ OS_ENUM(SparseFactorization, uint8_t,
  *
  *  @constant SparseDefaultControl  Use default values.
  */
-OS_ENUM(SparseControl, uint32_t,
+SPARSE_ENUM(SparseControl, uint32_t,
   SparseDefaultControl = 0
 );
 
@@ -795,7 +818,7 @@ OS_ENUM(SparseControl, uint32_t,
  *  @constant SparseOrderCOLAMD
  *              Column AMD ordering for A^T A. Not valid for symmetric
  *              factorizations (use AMD instead).                             */
-OS_ENUM(SparseOrder, uint8_t,
+SPARSE_ENUM(SparseOrder, uint8_t,
   SparseOrderDefault = 0,
   SparseOrderUser = 1,
   SparseOrderAMD = 2,
@@ -813,7 +836,7 @@ OS_ENUM(SparseOrder, uint8_t,
  *              scaling.
  *  @constant SparseScalingEquilibriationInf
  *              Norm equilibriation scaling using inf norm.                   */
-OS_ENUM(SparseScaling, uint8_t,
+SPARSE_ENUM(SparseScaling, uint8_t,
   SparseScalingDefault = 0,
   SparseScalingUser = 1,
   SparseScalingEquilibriationInf = 2,
@@ -1144,7 +1167,7 @@ typedef struct {
  *    R factor subfactor, valid for QR and CholeskyAtA only.
  *  @constant SparseSubfactorRP
  *    Half-solve subfactor, valid for QR and CholeskyAtA only.                   */
-OS_ENUM(SparseSubfactor, uint8_t,
+SPARSE_ENUM(SparseSubfactor, uint8_t,
         SparseSubfactorInvalid = 0,
         SparseSubfactorP = 1,
         SparseSubfactorS = 2,
@@ -2987,7 +3010,7 @@ void SparseMultiply(SparseOpaqueSubfactor_Float Subfactor, DenseVector_Float x,
  *    Diagonal scaling preconditioner D_ii = 1.0 / || A_i ||_2, where A_i is
  *    i-th column of A.
  */
-OS_ENUM(SparsePreconditioner, int,
+SPARSE_ENUM(SparsePreconditioner, int,
   SparsePreconditionerNone = 0,
   SparsePreconditionerUser = 1,
   SparsePreconditionerDiagonal = 2,
@@ -3093,7 +3116,7 @@ SparseOpaquePreconditioner_Float SparseCreatePreconditioner(
  *    unlikely.
  *  @const SparseIterativeInternalError
  *    Some internal failure occured (e.g. memory allocation failed).          */
-OS_ENUM(SparseIterativeStatus, int,
+SPARSE_ENUM(SparseIterativeStatus, int,
   SparseIterativeConverged = 0,
   SparseIterativeMaxIterations = 1,
   SparseIterativeParameterError = -1,
@@ -3198,7 +3221,7 @@ typedef struct {
  *    Use standard restarted GMRES. This method is not flexible.
  *  @const SparseVariantFGMRES
  *    Use Flexible GMRES. This method is flexible.                            */
-OS_ENUM(SparseGMRESVariant, uint8_t,
+SPARSE_ENUM(SparseGMRESVariant, uint8_t,
   SparseVariantDQGMRES = 0,
   SparseVariantGMRES = 1,
   SparseVariantFGMRES = 2
@@ -3275,11 +3298,11 @@ typedef struct {
  *      || A^Tb - A^TAx ||_2 < rtol * || A^Tb - A^TAx_0 ||_2 + atol.
  *
  *  @const SparseLSMRCTFongSaunders
- *    Use the convergence test of Fond and Saunders:
+ *    Use the convergence test of Fong and Saunders:
  *      Either || b-Ax ||_2 < btol * || b ||_2 + atol * || A ||_2 || x ||_2
  *      or     || A^T (b-Ax) ||_2 < atol * || A ||_2 * || A-bx ||_2
  *      or     Estimated condition of matrix >= conditionLimit                */
-OS_ENUM(SparseLSMRConvergenceTest, int,
+SPARSE_ENUM(SparseLSMRConvergenceTest, int,
   SparseLSMRCTDefault = 0,
   SparseLSMRCTFongSaunders = 1,
 );
@@ -3301,7 +3324,7 @@ OS_ENUM(SparseLSMRConvergenceTest, int,
  *  For square, full rank unsymmetric or indefinite equations, use GMRES instead.
  *
  *  LSMR is described in the following paper:
- *  [1] D.C.-L. Fond and M.A. Saunders (2011), "LSMR: An iterative algoirthm for
+ *  [1] D.C.-L. Fong and M.A. Saunders (2011), "LSMR: An iterative algoirthm for
  *      sparse least-squares problems", SIAM J. Scientific Computing 33(5),
  *      pp 2950--2971.
  *

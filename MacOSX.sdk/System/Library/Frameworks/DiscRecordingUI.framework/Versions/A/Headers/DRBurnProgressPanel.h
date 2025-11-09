@@ -82,19 +82,20 @@ AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 @interface DRBurnProgressPanel : NSPanel
 {
     /*All instance variables are private*/
-	IBOutlet NSTextField*			_status;
-	IBOutlet NSTextField*			_taskDescription;
-	IBOutlet NSProgressIndicator*	_progress;
-	IBOutlet NSImageView*			_icon;
-	IBOutlet NSButton*				_stopButton;
-	
-	id						_owner;
-	DRBurn*					_burnObject;
-	NSSound*				_successSound;
-	NSSound*				_failureSound;
-	NSString*				_description;
- 	BOOL					_verbose;
-	NSString*				_curState;
+@private
+    IBOutlet NSTextField*            _status;
+    IBOutlet NSTextField*            _taskDescription;
+    IBOutlet NSProgressIndicator*    _progress;
+    IBOutlet NSImageView*            _icon;
+    IBOutlet NSButton*                _stopButton;
+    
+    id                        _owner;
+    DRBurn*                    _burnObject;
+    NSSound*                _successSound;
+    NSSound*                _failureSound;
+    NSString*                _description;
+    BOOL                    _verbose;
+    NSString*                _curState;
 }
 
 /*! 

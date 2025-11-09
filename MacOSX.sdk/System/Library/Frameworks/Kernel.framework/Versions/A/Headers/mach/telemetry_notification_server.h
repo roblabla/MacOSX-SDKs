@@ -61,6 +61,10 @@ typedef function_table_entry   *function_table_t;
 __BeforeMigServerHeader
 #endif /* __BeforeMigServerHeader */
 
+#ifndef MIG_SERVER_ROUTINE
+#define MIG_SERVER_ROUTINE
+#endif
+
 
 /* SimpleRoutine telemetry_notification */
 #ifdef	mig_external
@@ -68,6 +72,7 @@ mig_external
 #else
 extern
 #endif	/* mig_external */
+MIG_SERVER_ROUTINE
 kern_return_t telemetry_notification
 (
 	mach_port_t telemetry_port,
@@ -109,7 +114,7 @@ extern const struct telemetry_notification_subsystem {
 #define __Request__telemetry_notification_subsystem__defined
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -117,7 +122,7 @@ extern const struct telemetry_notification_subsystem {
 		uint32_t flags;
 	} __Request__telemetry_notification_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 #endif /* !__Request__telemetry_notification_subsystem__defined */
 
@@ -136,7 +141,7 @@ union __RequestUnion__telemetry_notification_subsystem {
 #define __Reply__telemetry_notification_subsystem__defined
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -144,7 +149,7 @@ union __RequestUnion__telemetry_notification_subsystem {
 		kern_return_t RetCode;
 	} __Reply__telemetry_notification_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 #endif /* !__Reply__telemetry_notification_subsystem__defined */
 
@@ -156,7 +161,7 @@ union __RequestUnion__telemetry_notification_subsystem {
 union __ReplyUnion__telemetry_notification_subsystem {
 	__Reply__telemetry_notification_t Reply_telemetry_notification;
 };
-#endif /* __RequestUnion__telemetry_notification_subsystem__defined */
+#endif /* __ReplyUnion__telemetry_notification_subsystem__defined */
 
 #ifndef subsystem_to_name_map_telemetry_notification
 #define subsystem_to_name_map_telemetry_notification \

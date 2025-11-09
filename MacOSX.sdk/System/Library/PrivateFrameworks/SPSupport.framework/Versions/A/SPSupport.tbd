@@ -1,8 +1,8 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 77678B76-0C31-34B3-88D4-85A4F1284B69' ]
+uuids:           [ 'x86_64: 535DC455-D145-392A-BF8B-0191EDFE36E0' ]
 platform:        macosx
-install-name:    /System/Library/PrivateFrameworks/SPSupport.framework/Versions/A/SPSupport
+install-name:    '/System/Library/PrivateFrameworks/SPSupport.framework/Versions/A/SPSupport'
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ __comparePropertyOrders ]

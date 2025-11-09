@@ -1,5 +1,5 @@
 /*	NSPortNameServer.h
-	Copyright (c) 1993-2018, Apple Inc. All rights reserved.
+	Copyright (c) 1993-2019, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -23,7 +23,7 @@ NS_SWIFT_UNAVAILABLE("Use NSXPCConnection instead")
 
 @end
 
-#if (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE)) || (TARGET_OS_EMBEDDED || TARGET_OS_IPHONE)
+#if TARGET_OS_OSX || TARGET_OS_IPHONE
 
 API_DEPRECATED("Use NSXPCConnection instead", macosx(10.0, 10.13), ios(2.0,11.0), watchos(2.0,4.0), tvos(9.0,11.0))
 NS_SWIFT_UNAVAILABLE("Use NSXPCConnection instead")
@@ -45,7 +45,7 @@ NS_SWIFT_UNAVAILABLE("Use NSXPCConnection instead")
 // you have to destroy the port (invalidate the NSMachPort
 // given to registerPort:name:).
 
-- (nullable NSPort *)servicePortWithName:(NSString *)name NS_AVAILABLE(10_5, 2_0);
+- (nullable NSPort *)servicePortWithName:(NSString *)name API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
 
 @end
 
@@ -71,7 +71,7 @@ NS_SWIFT_UNAVAILABLE("Use NSXPCConnection instead")
 
 @end
 
-#if (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE)) || (TARGET_OS_WIN32)
+#if TARGET_OS_OSX
 
 API_DEPRECATED("Use NSXPCConnection instead", macosx(10.0, 10.13), ios(2.0,11.0), watchos(2.0,4.0), tvos(9.0,11.0))
 NS_SWIFT_UNAVAILABLE("Use NSXPCConnection instead")

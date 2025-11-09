@@ -1,5 +1,5 @@
 /*
- * Copyright © 2017-2018 Apple Inc.
+ * Copyright © 2017-2019 Apple Inc.
  * All rights reserved.
  */
 
@@ -23,6 +23,12 @@
 #import <Foundation/Foundation.h>
 
 NS_ASSUME_NONNULL_BEGIN
+
+#if defined(__cplusplus)
+#define NEHSCFG_EXPORT extern "C"
+#else
+#define NEHSCFG_EXPORT extern
+#endif
 
 /*!
  * @typedef NEHotspotConfigurationEAPType
@@ -245,6 +251,12 @@ API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos, watchos, tvos)
 @property (readonly) NSString * SSID API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos, watchos, tvos);
 
 /*!
+ * @property SSIDPrefix
+ * @discussion Prefix string of SSID of the Wi-Fi Network.
+ */
+@property (readonly) NSString * SSIDPrefix API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(macos, watchos, tvos);
+
+/*!
  * @property joinOnce
  * @discussion if set to YES the configuration will not be persisted. Default is NO.
  */
@@ -258,6 +270,12 @@ API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos, watchos, tvos)
  *   This property does not apply to Enterprise and HS2.0 networks.
  */
 @property (copy) NSNumber * lifeTimeInDays API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos, watchos, tvos);
+
+/*!
+ * @property hidden
+ * @discussion if set to YES the system will perform active scan of the SSID. Default is NO.
+ */
+@property BOOL hidden API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(macos, watchos, tvos);
 
 /*!
  * @method initWithSSID:
@@ -310,8 +328,38 @@ API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos, watchos, tvos)
 - (instancetype)initWithHS20Settings:(NEHotspotHS20Settings *)hs20Settings
 						eapSettings:(NEHotspotEAPSettings *)eapSettings API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos, watchos, tvos);
 
+/*!
+ * @method initWithSSIDPrefix:
+ * @discussion
+ *   A designated initializer to instantiate a new NEHotspotConfiguration object.
+ *   This initializer is used to configure open Wi-Fi Networks.
+ *
+ * @param SSIDPrefix The prefix string of SSID of the Open Wi-Fi Network.
+ *   Length of SSIDPrefix must be between 3 and 32 characters.
+ */
+- (instancetype)initWithSSIDPrefix:(NSString *)SSIDPrefix API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(macos, watchos, tvos);
+
+/*!
+ * @method initWithSSIDPrefix:passphrase:isWEP
+ * @discussion
+ *   A designated initializer to instantiate a new NEHotspotConfiguration object.
+ *   This initializer is used configure either WEP or WPA/WPA2 Personal Wi-Fi Networks.
+ *
+ * @param SSIDPrefix The prefix string of SSID of the WEP or WPA/WPA2 Personal Wi-Fi Network.
+ * 	Length of SSIDPrefix must be between 3 and 32 characters.
+ * @param passphrase The passphrase credential.
+ *   For WPA/WPA2 Personal networks: between 8 and 63 characters.
+ *   For Static WEP(64bit)  : 10 Hex Digits
+ *   For Static WEP(128bit) : 26 Hex Digits
+ * @param isWEP YES specifies WEP Wi-Fi Network else WPA/WPA2 Personal Wi-Fi Network
+ */
+- (instancetype)initWithSSIDPrefix:(NSString *)SSIDPrefix
+				  passphrase:(NSString *)passphrase isWEP:(BOOL)isWEP API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(macos, watchos, tvos);
 
 @end
+
+/*! @const NEHotspotConfigurationErrorDomain The Hotspot Configuration error domain */
+NEHSCFG_EXPORT NSString * const NEHotspotConfigurationErrorDomain API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos, watchos, tvos);
 
 /*!
  * @typedef NEHotspotConfigurationError
@@ -331,6 +379,7 @@ API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos, watchos, tvos)
  * @const NEHotspotConfigurationErrorJoinOnceNotSupported JoinOnce option is not support for EAP configuration.
  * @const NEHotspotConfigurationErrorAlreadyAssociated Wi-Fi is already associated.
  * @const NEHotspotConfigurationErrorApplicationIsNotInForeground The application is not in the foreground.
+ * @const NEHotspotConfigurationErrorInvalidSSIDPrefix The given SSID Prefix string is invalid.
  */
 typedef NS_ENUM(NSInteger, NEHotspotConfigurationError) {
 	NEHotspotConfigurationErrorInvalid 				= 0,
@@ -347,7 +396,8 @@ typedef NS_ENUM(NSInteger, NEHotspotConfigurationError) {
 	NEHotspotConfigurationErrorUnknown 				= 11,
 	NEHotspotConfigurationErrorJoinOnceNotSupported 		= 12,
 	NEHotspotConfigurationErrorAlreadyAssociated 			= 13,
-	NEHotspotConfigurationErrorApplicationIsNotInForeground 	= 14
+	NEHotspotConfigurationErrorApplicationIsNotInForeground 	= 14,
+	NEHotspotConfigurationErrorInvalidSSIDPrefix 				= 15
 } API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos, watchos, tvos);
 
 /*!

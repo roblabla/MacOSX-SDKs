@@ -26,22 +26,28 @@
 .\" SUCH DAMAGE.
 .\"
 .\"
-.Dd August 5, 2014
+.Dd May 13, 2019
 .Dt SmartCardServices-legacy 7
-.Os "Mac OS X"
+.Os "Apple Computer, Inc."
 .Sh NAME
 .Nm SmartCardServices-legacy
 .Nd overview of legacy SmartCard support
 .Sh DESCRIPTION
 .Nm
-is a set of components which add native support for SmartCards to OS X based on Tokend modules. Since OS X 10.12, there is  SmartCard support which is described in 
+is a set of deprecated components which add support for SmartCards to macOS based on Tokend modules. Since OS X 10.12, there is SmartCard support which is described in 
 .Xr SmartCardServices 7
+In macOS 10.15 this support is disabled by default.
 .Pp
-Supported SmartCards appear as separate keychains.  A Tokend module for each SmartCard
-you wish to use must be installed in
+Supported SmartCards appear as separate keychains. A Tokend module for each SmartCard must be installed in
 .Pa /Library/Security/tokend
+.Sh EBABLING LEGACY SMART CARD SUPPORT
+It is possible to turn on the legacy tokends by setting the global preference:
+.Pp
+.Li "sudo defaults write /Library/Preferences/com.apple.security.smartcard Legacy -bool true"
+.Pp
+The system will ask the user for confirmation before enabling the legacy support. This configuration change will also require reboot.
 .Sh USB SMART CARD READER DRIVERS
-OS X has built-in support for USB CCID class-compliant SmartCard readers.
+macOS has built-in support for USB CCID class-compliant SmartCard readers.
 For other readers, install the reader driver in
 .Pa /usr/local/libexec/SmartCardServices/drivers .
 Each driver is a bundle.  The bundle contains an XML file Info.plist which contains
@@ -65,19 +71,17 @@ This includes unplugging and replugging the same reader.
 It is possible to turn of the new tokens by setting the global preference:
 .Pp
 .Li "sudo defaults write /Library/Preferences/com.apple.security.smartcard DisabledTokens -array com.apple.CryptoTokenKit.pivtoken"
-.Pp
 .Sh DISABLING SHEET AUTHORIZATION IN PREFERENCES
-When using tokend-based SmartCards, according to your configuration you may not be able to use SmartCards for authorization in System Preferences sheets. In such case, you 
-can disable sheets using following command:
+When using tokend-based SmartCards, according to your configuration you may not be able to use SmartCards for authorization in System Preferences sheets. In such case, you can disable sheets using following command:
 .Pp
 .Li defaults write com.apple.Preferences UseSheets -bool FALSE
-.Pp 
+.Pp
 System Preferences will then use the original dialog-based authorization.
 .Sh ENTITLEMENT
 Sandboxed PCSC clients require 'com.apple.security.smartcard=YES' entitlement. Non-sandboxed PCSC clients do not require such entitlement (in order to keep backward compatibility with macOS < 10.10).
 .Sh SEE ALSO
-.Xr SmartCardServices 7 ,
-.Xr sc_auth 8 ,
 .Xr defaults 1 ,
 .Xr asl.conf 5 ,
+.Xr SmartCardServices 7 ,
+.Xr sc_auth 8 ,
 .Xr ssh-keychain 8

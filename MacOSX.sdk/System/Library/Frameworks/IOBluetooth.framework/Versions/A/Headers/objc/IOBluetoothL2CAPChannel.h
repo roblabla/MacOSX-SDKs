@@ -70,6 +70,7 @@ typedef void (*IOBluetoothL2CAPChannelIncomingEventListener)(IOBluetoothL2CAPCha
                 on the IOBluetoothDevice object.
 */
 
+API_UNAVAILABLE(ios, watchos, tvos)
 @interface IOBluetoothL2CAPChannel : IOBluetoothObject <NSPortDelegate>
 {
     NSPort										*mDataAvailablePort;
@@ -78,8 +79,6 @@ typedef void (*IOBluetoothL2CAPChannelIncomingEventListener)(IOBluetoothL2CAPCha
     
 	BOOL										mIncomingChannel;
 	
-	id											mL2CAPChannelConnectionHandler;
-
     IOBluetoothL2CAPChannelIncomingDataListener	mIncomingDataListener;
     void										*mIncomingDataListenerRefCon;
 
@@ -93,8 +92,6 @@ typedef void (*IOBluetoothL2CAPChannelIncomingEventListener)(IOBluetoothL2CAPCha
     
 	BOOL										mIsClosed;
     IOBluetoothObjectID							mObjectID;
-    
-    id                                          _mReserved;
 }
 
 /*!
@@ -166,7 +163,6 @@ typedef void (*IOBluetoothL2CAPChannelIncomingEventListener)(IOBluetoothL2CAPCha
 */
 
 @property(readonly) BluetoothL2CAPMTU outgoingMTU;
-- (BluetoothL2CAPMTU)getOutgoingMTU DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 /*!
     @method		getIncomingMTU
@@ -176,7 +172,6 @@ typedef void (*IOBluetoothL2CAPChannelIncomingEventListener)(IOBluetoothL2CAPCha
 */
 
 @property(readonly) BluetoothL2CAPMTU incomingMTU;
-- (BluetoothL2CAPMTU)getIncomingMTU DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 /*!
     @method		requestRemoteMTU:
@@ -293,7 +288,6 @@ typedef void (*IOBluetoothL2CAPChannelIncomingEventListener)(IOBluetoothL2CAPCha
 */
 
 @property(readonly, retain) IOBluetoothDevice *device;
-- (IOBluetoothDevice *)getDevice DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 /*!
     @method		getObjectID
@@ -304,7 +298,6 @@ typedef void (*IOBluetoothL2CAPChannelIncomingEventListener)(IOBluetoothL2CAPCha
 */
 
 @property(readonly, assign) IOBluetoothObjectID objectID;
-- (IOBluetoothObjectID)getObjectID DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 /*!
     @method		getPSM
@@ -313,7 +306,6 @@ typedef void (*IOBluetoothL2CAPChannelIncomingEventListener)(IOBluetoothL2CAPCha
 */
 
 @property(readonly, assign) BluetoothL2CAPPSM PSM;
-- (BluetoothL2CAPPSM)getPSM DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 /*!
     @method		getLocalChannelID
@@ -322,7 +314,6 @@ typedef void (*IOBluetoothL2CAPChannelIncomingEventListener)(IOBluetoothL2CAPCha
 */
 
 @property(readonly, assign) BluetoothL2CAPChannelID localChannelID;
-- (BluetoothL2CAPChannelID)getLocalChannelID DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 /*!
     @method		getRemoteChannelID
@@ -331,7 +322,6 @@ typedef void (*IOBluetoothL2CAPChannelIncomingEventListener)(IOBluetoothL2CAPCha
 */
 
 @property(readonly, assign) BluetoothL2CAPChannelID remoteChannelID;
-- (BluetoothL2CAPChannelID)getRemoteChannelID DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 /*!
     @method		isIncoming
@@ -362,6 +352,7 @@ typedef void (*IOBluetoothL2CAPChannelIncomingEventListener)(IOBluetoothL2CAPCha
 // If the developer wishes to take advantage of the asynchronous API in Objective C
 // these are the methods that may be implemented:
 
+API_UNAVAILABLE(ios, watchos, tvos)
 @protocol IOBluetoothL2CAPChannelDelegate
 @optional
 - (void)l2capChannelData:(IOBluetoothL2CAPChannel*)l2capChannel data:(void *)dataPointer length:(size_t)dataLength;
@@ -374,14 +365,3 @@ typedef void (*IOBluetoothL2CAPChannelIncomingEventListener)(IOBluetoothL2CAPCha
 
 extern NSString * const IOBluetoothL2CAPChannelPublishedNotification;
 extern NSString * const IOBluetoothL2CAPChannelTerminatedNotification;
-
-/* Deprecated API */
-
-@interface NSObject( IOBluetoothL2CAPChannelDeprecated )
-
-- (IOReturn)registerIncomingDataListener:(IOBluetoothL2CAPChannelIncomingDataListener)listener refCon:(void *)refCon DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
-- (IOReturn)write:(void *)data length:(UInt16)length DEPRECATED_IN_MAC_OS_X_VERSION_10_5_AND_LATER;
-+ (IOBluetoothL2CAPChannel *)withL2CAPChannelRef:(IOBluetoothL2CAPChannelRef)l2capChannelRef DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
-- (IOBluetoothL2CAPChannelRef)getL2CAPChannelRef DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
-
-@end

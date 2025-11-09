@@ -1,7 +1,7 @@
 /*
     NSMigrationManager.h
     Core Data
-    Copyright (c) 2004-2018, Apple Inc.
+    Copyright (c) 2004-2019, Apple Inc.
     All rights reserved.
 */
 
@@ -21,29 +21,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 API_AVAILABLE(macosx(10.5),ios(3.0))
 @interface NSMigrationManager : NSObject {
-#if (!__OBJC2__)
-    @private
-    NSManagedObjectModel *_sourceModel;
-    NSDictionary *_sourceEntitiesByVersionHash;
-    NSManagedObjectModel *_destinationModel;
-    NSDictionary *_destinationEntitiesByVersionHash;
-    NSMappingModel *_mappingModel;
-    NSManagedObjectContext *_sourceManagedObjectContext;
-    NSManagedObjectContext *_destinationManagedObjectContext;
-    NSMigrationContext *_migrationContext;
-    NSDictionary *_userInfo;
-    struct _migrationManagerFlags {
-        unsigned int _migrationWasCancelled:1;
-        unsigned int _usesStoreSpecificMigrationManager:1;
-        unsigned int _migrationWasInPlace:1;
-        unsigned int _reservedMigrationManager:29;
-    } _migrationManagerFlags;
-	NSError *_migrationCancellationError;
-	id _reserved1;
-	id _reserved2;
-	id _reserved3;
-	id _reserved4;
-#endif
 }
 
 /* Creates a migration manager instance with the corresponding source and destination models.  (All validation of the arguments is performed during migrateStoreFromURL:toURL:)  As with the NSPersistentStoreCoordinator, once models are added to the migration manager they are immutable and cannot be altered.*/

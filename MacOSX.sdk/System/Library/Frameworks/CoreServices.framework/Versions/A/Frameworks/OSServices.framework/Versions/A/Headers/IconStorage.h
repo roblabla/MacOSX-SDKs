@@ -107,7 +107,6 @@ enum {
     kIconFamilyType               = 'icns'
 };
 
-
 struct IconFamilyElement {
 	OSType              elementType;            /* 'ICN#', 'icl8', etc...*/
 	SInt32              elementSize;            /* Size of this element*/
@@ -123,6 +122,7 @@ struct IconFamilyResource {
 typedef struct IconFamilyResource       IconFamilyResource;
 typedef IconFamilyResource*             IconFamilyPtr;
 typedef IconFamilyPtr*                  IconFamilyHandle;
+
 /*  Icon Variants */
 /* These can be used as an element of an 'icns' icon family */
 /* or as a parameter to GetIconRefVariant */
@@ -136,7 +136,6 @@ enum {
 
 
 #pragma pack(pop)
-
 
 #endif /* __ICONSTORAGE__ */
 

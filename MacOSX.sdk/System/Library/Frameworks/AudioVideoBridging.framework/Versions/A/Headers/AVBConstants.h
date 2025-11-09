@@ -2,7 +2,7 @@
 //  AVBConstants.h
 //  AudioVideoBridging
 //
-//  Copyright (c) 2011-2015 Apple Inc. All rights reserved.
+//  Copyright (c) 2011-2019 Apple Inc. All rights reserved.
 //
 
 #ifndef AudioVideoBridging_AVBConstants_h
@@ -11,19 +11,6 @@
 #include <Foundation/NSObjCRuntime.h>
 
 NS_ASSUME_NONNULL_BEGIN
-
-#if !defined(_LP64)
-
-#define AVB_LEGACY_OBJC_RUNTIME	1
-#define AVB_MODERN_OBJC_RUNTIME	0
-
-#else
-
-#define AVB_LEGACY_OBJC_RUNTIME	0
-#define AVB_MODERN_OBJC_RUNTIME	1
-
-#endif
-
 
 #define AVBMACAddressSize												6
 
@@ -42,7 +29,7 @@ typedef NS_ENUM(uint32_t, AVB17221ADPEntityCapabilities)
 		@constant	AVB17221ADPEntityCapabilitiesEFUMode
 		@abstract	The IEEE Std 1722.1™-2013 entity supports firmware upgrade mode.
 	 */
-	AVB17221ADPEntityCapabilitiesEFUMode NS_ENUM_AVAILABLE(10_9, NA)						= 0x00000001,
+	AVB17221ADPEntityCapabilitiesEFUMode API_AVAILABLE(macos(10.9))						= 0x00000001,
 	/*!
 		@constant	AVB17221ADPEntityCapabilitiesAddressAccessSupported
 		@abstract	The IEEE Std 1722.1™-2013 entity supports using address access commands and responses.
@@ -97,43 +84,43 @@ typedef NS_ENUM(uint32_t, AVB17221ADPEntityCapabilities)
 		@constant	AVB17221ADPEntityCapabilitiesGPTPSupported
 		@abstract	The IEEE Std 1722.1™-2013 entity supports IEEE Std 802.1AS-2011.
 	 */
-	AVB17221ADPEntityCapabilitiesGPTPSupported NS_ENUM_AVAILABLE(10_9, NA)					= 0x00000400,
+	AVB17221ADPEntityCapabilitiesGPTPSupported API_AVAILABLE(macos(10.9))					= 0x00000400,
 	/*!
 		 @constant	AVB17221ADPEntityCapabilitiesAEMAuthenticationSupported
 		 @abstract	The IEEE Std 1722.1™-2013 entity supports using AEM authentication.
 	 */
-	AVB17221ADPEntityCapabilitiesAEMAuthenticationSupported NS_ENUM_AVAILABLE(10_9, NA)		= 0x00000800,
+	AVB17221ADPEntityCapabilitiesAEMAuthenticationSupported API_AVAILABLE(macos(10.9))		= 0x00000800,
 	/*!
 		 @constant	AVB17221ADPEntityCapabilitiesAEMAuthenticationRequired
 		 @abstract	The IEEE Std 1722.1™-2013 entity requires a controller to authenticate.
 	 */
-	AVB17221ADPEntityCapabilitiesAEMAuthenticationRequired NS_ENUM_AVAILABLE(10_9, NA)		= 0x00001000,
+	AVB17221ADPEntityCapabilitiesAEMAuthenticationRequired API_AVAILABLE(macos(10.9))		= 0x00001000,
 	/*!
 		 @constant	AVB17221ADPEntityCapabilitiesAEMPersistentAcquireSupported
 		 @abstract	The IEEE Std 1722.1™-2013 entity supports being persistentlty aquired.
 	 */
-	AVB17221ADPEntityCapabilitiesAEMPersistentAcquireSupported NS_ENUM_AVAILABLE(10_9, NA)	= 0x00002000,
+	AVB17221ADPEntityCapabilitiesAEMPersistentAcquireSupported API_AVAILABLE(macos(10.9))	= 0x00002000,
 	/*!
 		 @constant	AVB17221ADPEntityCapabilitiesAEMIdenitifyControlIndexValid
 		 @abstract	The IEEE Std 1722.1™-2013 entity has an idenitfy control and the identify_control_index field contains a valid index.
 	 */
-	AVB17221ADPEntityCapabilitiesAEMIdenitifyControlIndexValid NS_ENUM_AVAILABLE(10_9, NA)	= 0x00004000,
+	AVB17221ADPEntityCapabilitiesAEMIdenitifyControlIndexValid API_AVAILABLE(macos(10.9))	= 0x00004000,
 	/*!
 		 @constant	AVB17221ADPEntityCapabilitiesAEMInterfaceIndexValid
 		 @abstract	The IEEE Std 1722.1™-2013 entity has the interface_index field set to a valid index.
 	 */
-	AVB17221ADPEntityCapabilitiesAEMInterfaceIndexValid NS_ENUM_AVAILABLE(10_9, NA)			= 0x00008000,
+	AVB17221ADPEntityCapabilitiesAEMInterfaceIndexValid API_AVAILABLE(macos(10.9))			= 0x00008000,
 	/*!
 		 @constant	AVB17221ADPEntityCapabilitiesGeneralControllerIgnore
 		 @abstract	The IEEE Std 1722.1™-2013 entity should be ignored by general controllers.
 	 */
-	AVB17221ADPEntityCapabilitiesGeneralControllerIgnore NS_ENUM_AVAILABLE(10_9, NA)		= 0x00010000,
+	AVB17221ADPEntityCapabilitiesGeneralControllerIgnore API_AVAILABLE(macos(10.9))		= 0x00010000,
 	/*!
 		 @constant	AVB17221ADPEntityCapabilitiesEntityNotReady
 		 @abstract	The IEEE Std 1722.1™-2013 entity is not ready to be enumerated or connected by a controller.
 	 */
-	AVB17221ADPEntityCapabilitiesEntityNotReady NS_ENUM_AVAILABLE(10_9, NA)					= 0x00020000,
-} NS_ENUM_AVAILABLE(10_8, NA);
+	AVB17221ADPEntityCapabilitiesEntityNotReady API_AVAILABLE(macos(10.9))					= 0x00020000,
+} API_AVAILABLE(macos(10.8));
 
 //Talker Specific Capabilities
 typedef NS_OPTIONS(uint16_t, AVB17221ADPTalkerCapabilities)
@@ -178,7 +165,7 @@ typedef NS_OPTIONS(uint16_t, AVB17221ADPTalkerCapabilities)
 		@abstract	The IEEE Std 1722.1™-2013 entity has stream sources which source a stream with video data (and optionally embedded audio data).
 	 */
 	AVB17221ADPTalkerCapabilitiesHasVideoSource							= 0x8000,
-} NS_ENUM_AVAILABLE(10_8, NA);
+} API_AVAILABLE(macos(10.8));
 
 //Listener Specific Capabilities
 typedef NS_OPTIONS(uint16_t, AVB17221ADPListenerCapabilities)
@@ -223,7 +210,7 @@ typedef NS_OPTIONS(uint16_t, AVB17221ADPListenerCapabilities)
 		@abstract	The IEEE Std 1722.1™-2013 entity has stream sinks which sink a stream with video data (and optionally embedded audio data).
 	 */
 	AVB17221ADPListenerCapabilitiesHasVideoSink							= 0x8000,
-} NS_ENUM_AVAILABLE(10_8, NA);
+} API_AVAILABLE(macos(10.8));
 
 //Controller Specific Capabilities
 typedef NS_OPTIONS(uint32_t, AVB17221ADPControllerCapabilities)
@@ -238,7 +225,7 @@ typedef NS_OPTIONS(uint32_t, AVB17221ADPControllerCapabilities)
 		@abstract	The IEEE Std 1722.1™-2013 entity has a layer 3 to layer 2 proxy implementation.
 	 */
 	AVB17221ADPControllerCapabilitiesHasLayer3Proxy						= 0x00000002,
-} NS_ENUM_AVAILABLE(10_8, NA);
+} API_AVAILABLE(macos(10.8));
 
 typedef NS_ENUM(uint8_t, AVB17221AECPMessageType)
 {
@@ -282,7 +269,7 @@ typedef NS_ENUM(uint8_t, AVB17221AECPMessageType)
 		@abstract	The IEEE Std 1722.1™-2013 AECP vendor unique response message.
 	 */
 	AVB17221AECPMessageTypeVendorUniqueResponse							= 0x7,
-} NS_ENUM_AVAILABLE(10_8, NA);
+} API_AVAILABLE(macos(10.8));
 
 typedef NS_ENUM(uint8_t, AVB17221AECPStatusCode)
 {
@@ -389,7 +376,7 @@ typedef NS_ENUM(uint8_t, AVB17221AECPStatusCode)
 		@abstract	The IEEE Std 1722.1™-2013 AECP AVC FAILURE status code.
 	 */
 	AVB17221AECPStatusAVCFailure										= 0x02,
-} NS_ENUM_AVAILABLE(10_8, NA);
+} API_AVAILABLE(macos(10.8));
 
 typedef NS_ENUM(uint8_t, AVB17221ACMPMessageType)
 {
@@ -463,7 +450,7 @@ typedef NS_ENUM(uint8_t, AVB17221ACMPMessageType)
 		@abstract	The IEEE Std 1722.1™-2013 ACMP GET_TX_CONNECTION_RESPONSE message type.
 	 */
 	AVB17221ACMPMessageTypeGetTXConnectionResponse						= 0xD,
-} NS_ENUM_AVAILABLE(10_8, NA);
+} API_AVAILABLE(macos(10.8));
 
 typedef NS_ENUM(uint8_t, AVB17221ACMPStatusCode)
 {
@@ -562,7 +549,7 @@ typedef NS_ENUM(uint8_t, AVB17221ACMPStatusCode)
 		@abstract	The IEEE Std 1722.1™-2013 ACMP NOT_SUPPORTED status code.
 	 */
 	AVB17221ACMPStatusNotSupported										= 0x1f,
-} NS_ENUM_AVAILABLE(10_8, NA);
+} API_AVAILABLE(macos(10.8));
 
 typedef NS_OPTIONS(uint16_t, AVB17221ACMPFlags)
 {
@@ -606,7 +593,7 @@ typedef NS_OPTIONS(uint16_t, AVB17221ACMPFlags)
 	 @abstract	The IEEE Std 1722.1™-2013 ACMP TALKER_FAILED flag.
 	 */
 	AVB17221ACMPFlagsStreamingTalkerFailed								= 0x0040,
-} NS_ENUM_AVAILABLE(10_8, NA);
+} API_AVAILABLE(macos(10.8));
 
 typedef NS_ENUM(uint16_t, AVB17221AEMCommandType)
 {
@@ -985,7 +972,7 @@ typedef NS_ENUM(uint16_t, AVB17221AEMCommandType)
 		@abstract	The command code for the IEEE Std 1722.1™-2013 AEM GET_STREAM_BACKUP command.
 	 */
 	AVB17221AEMCommandTypeGetStreamBackup								= 0x004a,
-} NS_ENUM_AVAILABLE(10_8, NA);
+} API_AVAILABLE(macos(10.8));
 
 
 typedef NS_ENUM(uint8_t, AVB17221AECPAddressAccessTLVMode)
@@ -1005,7 +992,7 @@ typedef NS_ENUM(uint8_t, AVB17221AECPAddressAccessTLVMode)
 	 @abstract	The IEEE Std 1722.1™-2013 ACMP TALKER_UNKNOWN_ID status code.
 	 */
 	AVB17221AECPAddressAccessTLVModeExecute									= 0x02,
-} NS_ENUM_AVAILABLE(10_9, NA);
+} API_AVAILABLE(macos(10.9));
 
 /*!
 	@constant	AVBErrorDomain

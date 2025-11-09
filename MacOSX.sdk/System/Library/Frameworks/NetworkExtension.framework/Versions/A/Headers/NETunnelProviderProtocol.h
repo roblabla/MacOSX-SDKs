@@ -42,4 +42,3 @@ API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(watchos, tvos)
 @end
 
 NS_ASSUME_NONNULL_END
-

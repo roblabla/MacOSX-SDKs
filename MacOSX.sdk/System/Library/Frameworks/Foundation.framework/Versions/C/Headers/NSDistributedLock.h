@@ -1,5 +1,5 @@
 /*	NSDistributedLock.h
-	Copyright (c) 1995-2018, Apple Inc. All rights reserved.
+	Copyright (c) 1995-2019, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (nullable NSDistributedLock *)lockWithPath:(NSString *)path;  
 
-- (instancetype)init NS_UNAVAILABLE;
+- (instancetype)init API_UNAVAILABLE(macos, ios, watchos, tvos);
 - (nullable instancetype)initWithPath:(NSString *)path NS_DESIGNATED_INITIALIZER;
 
 - (BOOL)tryLock;

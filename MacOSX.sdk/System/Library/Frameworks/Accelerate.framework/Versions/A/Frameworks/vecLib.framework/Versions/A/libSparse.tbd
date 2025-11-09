@@ -1,14 +1,14 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 0D7E71A4-10D2-3979-B386-D2426ADAF6D7' ]
-platform:        macosx
-install-name:    /System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/libSparse.dylib
-objc-constraint: none
+uuids:           [ 'x86_64: 524FE053-F651-3EE0-A894-909DBF95300C', 'x86_64: 524FE053-F651-3EE0-A894-909DBF95300C' ]
+platform:        zippered
+install-name:    '/System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/libSparse.dylib'
 exports:         
   - archs:           [ x86_64 ]
     allowable-clients: [ vecLib ]
-    symbols:         [ __SparseCGIterate_Double, __SparseCGIterate_Float, __SparseCGSolve_Double, 
-                       __SparseCGSolve_Float, __SparseConvertFromCoordinate_Double, 
+    symbols:         [ __SparseAMD, __SparseAMDWorkspaceSize, __SparseCGIterate_Double, 
+                       __SparseCGIterate_Float, __SparseCGSolve_Double, __SparseCGSolve_Float, 
+                       __SparseCOLAMD, __SparseCOLAMDWorkspaceSize, __SparseConvertFromCoordinate_Double, 
                        __SparseConvertFromCoordinate_Float, __SparseConvertFromOpaque_Double, 
                        __SparseConvertFromOpaque_Float, __SparseCreatePreconditioner_Double, 
                        __SparseCreatePreconditioner_Float, __SparseDestroyOpaqueNumeric_Double, 
@@ -144,14 +144,16 @@ exports:
                        __Z17SparseMultiplyAddd19SparseMatrix_Double18DenseVector_DoubleS0_, 
                        __Z17SparseMultiplyAddf18SparseMatrix_Float17DenseMatrix_FloatS0_, 
                        __Z17SparseMultiplyAddf18SparseMatrix_Float17DenseVector_FloatS0_, 
+                       __Z17SparseWriteMatrixP7__sFILEjPKc18SparseMatrix_Float, __Z17SparseWriteMatrixP7__sFILEjPKc19SparseMatrix_Double, 
                        __Z18SparseGetTranspose18SparseMatrix_Float, __Z18SparseGetTranspose19SparseMatrix_Double, 
                        __Z18SparseGetTranspose27SparseOpaqueSubfactor_Float, __Z18SparseGetTranspose28SparseOpaqueSubfactor_Double, 
                        __Z18SparseGetTranspose31SparseOpaqueFactorization_Float, 
                        __Z18SparseGetTranspose32SparseOpaqueFactorization_Double, 
                        __Z21SparseCreateSubfactorh31SparseOpaqueFactorization_Float, 
                        __Z21SparseCreateSubfactorh32SparseOpaqueFactorization_Double, 
-                       __Z23SparseConjugateGradient15SparseCGOptions, __Z23SparseConjugateGradientv, 
-                       __Z23SparseConvertFromOpaqueP14sparse_m_float, __Z23SparseConvertFromOpaqueP15sparse_m_double, 
+                       __Z22SparseReadMatrix_FloatP7__sFILEjmPc, __Z23SparseConjugateGradient15SparseCGOptions, 
+                       __Z23SparseConjugateGradientv, __Z23SparseConvertFromOpaqueP14sparse_m_float, 
+                       __Z23SparseConvertFromOpaqueP15sparse_m_double, __Z23SparseReadMatrix_DoubleP7__sFILEjmPc, 
                        __Z24SparseGetStateSize_Float21SparseIterativeMethodbiii, 
                        __Z25SparseGetStateSize_Double21SparseIterativeMethodbiii, 
                        __Z26SparseCreatePreconditioneri18SparseMatrix_Float, __Z26SparseCreatePreconditioneri19SparseMatrix_Double, 

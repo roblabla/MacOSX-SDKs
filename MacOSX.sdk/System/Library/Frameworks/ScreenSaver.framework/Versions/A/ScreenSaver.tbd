@@ -1,8 +1,8 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 17D80BA2-C229-368A-82B7-8B6326AF3D12' ]
+uuids:           [ 'x86_64: FF4E4D0B-DE1C-3DAC-980E-55DA2A7551ED' ]
 platform:        macosx
-install-name:    /System/Library/Frameworks/ScreenSaver.framework/Versions/A/ScreenSaver
+install-name:    '/System/Library/Frameworks/ScreenSaver.framework/Versions/A/ScreenSaver'
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _OSLogForCategory, _SSCenterRectInRect, _SSDBackground, _SSDBlackSaver, 
@@ -18,11 +18,14 @@ exports:
                        _SSSetCrashReporterSignature, _SSShouldUseAlernateDefault, 
                        _SSSystemScreenSaversPath, _gCurrentMessage, _gMessageList, 
                        _gScreenSaverEngine ]
-    objc-classes:    [ ScreenSaverClockView, ScreenSaverClockWindow, ScreenSaverController, 
-                       ScreenSaverDefaults, ScreenSaverDefaultsManager, ScreenSaverEngine, 
-                       ScreenSaverMessage, ScreenSaverMessageTracerLogger, ScreenSaverModule, 
-                       ScreenSaverModules, ScreenSaverPhotoChooser, ScreenSaverView, 
-                       ScreenSaverWindow ]
+    objc-classes:    [ LegacyScreenSaverExtensionModule, LegacyScreenSaverModule, 
+                       ScreenSaverClockView, ScreenSaverClockWindow, ScreenSaverConfigurationViewController, 
+                       ScreenSaverController, ScreenSaverDefaults, ScreenSaverDefaultsManager, 
+                       ScreenSaverEngine, ScreenSaverExtension, ScreenSaverExtensionContext, 
+                       ScreenSaverExtensionManager, ScreenSaverExtensionModule, ScreenSaverExtensionView, 
+                       ScreenSaverHostExtensionContext, ScreenSaverMessage, ScreenSaverMessageTracerLogger, 
+                       ScreenSaverModule, ScreenSaverModules, ScreenSaverPhotoChooser, 
+                       ScreenSaverView, ScreenSaverViewController, ScreenSaverWindow ]
     objc-ivars:      [ ScreenSaverClockView._alignment, ScreenSaverClockWindow._clockDelegate, 
                        ScreenSaverClockWindow._clockPath, ScreenSaverClockWindow._clockView, 
                        ScreenSaverClockWindow._corner, ScreenSaverClockWindow._lastMinute, 
@@ -46,18 +49,18 @@ exports:
                        ScreenSaverMessage._startTime, ScreenSaverMessage._textField, 
                        ScreenSaverModule._archCompatible, ScreenSaverModule._bundle, 
                        ScreenSaverModule._displayName, ScreenSaverModule._enabled, 
-                       ScreenSaverModule._moduleName, ScreenSaverModule._path, ScreenSaverModule._representedObject, 
+                       ScreenSaverModule._hasConfigureSheet, ScreenSaverModule._moduleName, 
+                       ScreenSaverModule._path, ScreenSaverModule._representedObject, 
                        ScreenSaverModule._requiresGraphicsAcceleration, ScreenSaverModule._type, 
-                       ScreenSaverModules._modules, ScreenSaverModules._searchDomains, 
-                       ScreenSaverModules._times, ScreenSaverPhotoChooser._apertureMediaManager, 
-                       ScreenSaverPhotoChooser._blocksToCallOnceFinishedLoading, 
-                       ScreenSaverPhotoChooser._currentPhotoChooserSource, ScreenSaverPhotoChooser._defaultCollections, 
+                       ScreenSaverModules._modules, ScreenSaverModules._times, ScreenSaverPhotoChooser._blocksToCallOnceFinishedLoading, 
+                       ScreenSaverPhotoChooser._currentPhotoChooserSource, ScreenSaverPhotoChooser._customControlsView, 
+                       ScreenSaverPhotoChooser._customControlsViewTLOArray, ScreenSaverPhotoChooser._defaultCollections, 
                        ScreenSaverPhotoChooser._defaults, ScreenSaverPhotoChooser._folderMediaManager, 
-                       ScreenSaverPhotoChooser._iLifeLockedAndLoaded, ScreenSaverPhotoChooser._iPhotoMediaManager, 
-                       ScreenSaverPhotoChooser._latestApertureProjects, ScreenSaverPhotoChooser._latestPhotosEvents, 
-                       ScreenSaverPhotoChooser._latestPhotosProjects, ScreenSaverPhotoChooser._latestiPhotoEvents, 
-                       ScreenSaverPhotoChooser._mediaBrowserView, ScreenSaverPhotoChooser._mediaBrowserViewTLOArray, 
-                       ScreenSaverPhotoChooser._mediaChooserWindow, ScreenSaverPhotoChooser._photoStreamDetected, 
-                       ScreenSaverPhotoChooser._photosMediaManager, ScreenSaverPhotoChooser._selectedMediaGroupID, 
-                       ScreenSaverPhotoChooser._sourceMenuLoadedBlock, ScreenSaverWindow._trectTags ]
+                       ScreenSaverPhotoChooser._iLifeLockedAndLoaded, ScreenSaverPhotoChooser._latestPhotosEvents, 
+                       ScreenSaverPhotoChooser._latestPhotosProjects, ScreenSaverPhotoChooser._mediaBrowserView, 
+                       ScreenSaverPhotoChooser._mediaBrowserViewTLOArray, ScreenSaverPhotoChooser._mediaChooserWindow, 
+                       ScreenSaverPhotoChooser._photoStreamDetected, ScreenSaverPhotoChooser._photosMediaManager, 
+                       ScreenSaverPhotoChooser._selectedMediaGroupID, ScreenSaverPhotoChooser._sourceLabelField, 
+                       ScreenSaverPhotoChooser._sourceMenuLoadedBlock, ScreenSaverPhotoChooser._sourcePopUpButton, 
+                       ScreenSaverPhotoChooser._sourceShuffleButton, ScreenSaverWindow._trectTags ]
 ...

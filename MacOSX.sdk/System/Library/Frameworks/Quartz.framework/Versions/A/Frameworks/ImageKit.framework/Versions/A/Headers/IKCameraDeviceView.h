@@ -46,14 +46,15 @@
 
 
 
-typedef NS_ENUM(NSInteger, IKCameraDeviceViewDisplayMode)
+typedef NS_CLOSED_ENUM(NSInteger, IKCameraDeviceViewDisplayMode)
 {
+    IKCameraDeviceViewDisplayModeNone = -1,
     IKCameraDeviceViewDisplayModeTable = 0,
     IKCameraDeviceViewDisplayModeIcon
     
 };
 
-typedef NS_ENUM(NSInteger, IKCameraDeviceViewTransferMode)
+typedef NS_CLOSED_ENUM(NSInteger, IKCameraDeviceViewTransferMode)
 {
     IKCameraDeviceViewTransferModeFileBased = 0,
     IKCameraDeviceViewTransferModeMemoryBased

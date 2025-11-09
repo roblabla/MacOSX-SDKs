@@ -14,7 +14,6 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreVideo/CVPixelBuffer.h>
-#import <CoreImage/CoreImage.h>
 #import <ImageIO/ImageIO.h>
 
 #import <Vision/VNDefines.h>
@@ -23,6 +22,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class CIImage;
 
 /*!
  @brief Options keys passed into the VNImageRequestHandler creations or requests that take an auxiliary image. These are options that either describe specific properties of an image like the VNImageOptionCameraIntrinsics or how an image needs to be handled like the VNImageOptionCIContext.

@@ -2,11 +2,15 @@
 //  nw_object.h
 //  Network
 //
-//  Copyright (c) 2016-2018 Apple Inc. All rights reserved.
+//  Copyright (c) 2016-2019 Apple Inc. All rights reserved.
 //
 
-#ifndef nw_object_h
-#define nw_object_h
+#ifndef __NW_OBJECT_H__
+#define __NW_OBJECT_H__
+
+#ifndef __NW_INDIRECT__
+#warning "Please include <Network/Network.h> instead of this file directly."
+#endif // __NW_INDIRECT__
 
 #include <sys/cdefs.h>
 #include <os/object.h>
@@ -49,11 +53,7 @@
 #endif // !__has_attribute
 
 #ifndef NW_RETURNS_RETAINED
-#  if defined(__OBJC__) && __has_attribute(ns_returns_retained)
-#    define NW_RETURNS_RETAINED __attribute__((__ns_returns_retained__))
-#  else // __OBJC__ && ns_returns_retained
-#    define NW_RETURNS_RETAINED
-#  endif // __OBJC__ && ns_returns_retained
+#  define NW_RETURNS_RETAINED OS_OBJECT_RETURNS_RETAINED
 #endif // !NW_RETURNS_RETAINED
 
 #if defined(__OBJC__) && __has_feature(attribute_ns_returns_not_retained)
@@ -135,4 +135,4 @@ __END_DECLS
 
 NW_OBJECT_DECL(nw_object);
 
-#endif // nw_object_h
+#endif // __NW_OBJECT_H__

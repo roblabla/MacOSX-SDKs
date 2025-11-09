@@ -1,21 +1,16 @@
 /*
 	NSColorPicker.h
 	Application Kit
-	Copyright (c) 1994-2018, Apple Inc.
+	Copyright (c) 1994-2019, Apple Inc.
 	All rights reserved.
 */
 
 #import <AppKit/NSColorPicking.h>
 
 NS_ASSUME_NONNULL_BEGIN
+API_UNAVAILABLE_BEGIN(ios)
 
 @interface NSColorPicker : NSObject <NSColorPickingDefault>
-{
-    /*All instance variables are private*/
-    id _imageObject APPKIT_IVAR;
-    NSColorPanel *_colorPanel APPKIT_IVAR;
-    NSString *_buttonToolTip APPKIT_IVAR;
-}
 - (nullable instancetype)initWithPickerMask:(NSUInteger)mask colorPanel:(NSColorPanel *)owningColorPanel;
 @property (readonly, strong) NSColorPanel *colorPanel;
 @property (readonly, strong) NSImage *provideNewButtonImage;
@@ -30,4 +25,5 @@ NS_ASSUME_NONNULL_BEGIN
 @property (readonly) NSSize minContentSize;
 @end
 
+API_UNAVAILABLE_END
 NS_ASSUME_NONNULL_END

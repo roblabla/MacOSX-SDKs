@@ -1,7 +1,7 @@
 /*
 	NSPrintOperation.h
 	Application Kit
-	Copyright (c) 1994-2018, Apple Inc.
+	Copyright (c) 1994-2019, Apple Inc.
 	All rights reserved.
 */
 
@@ -10,6 +10,7 @@
 #import <AppKit/AppKitDefines.h>
 
 NS_ASSUME_NONNULL_BEGIN
+API_UNAVAILABLE_BEGIN(ios)
 
 @class NSMutableData, NSGraphicsContext, NSPDFPanel, NSPrintPanel, NSPrintInfo, NSView, NSWindow;
 
@@ -31,7 +32,7 @@ typedef NS_ENUM(NSInteger, NSPrintRenderingQuality) {
        Note: Only do this after establishing that best quality rendering does indeed make the user interface unresponsive.
     */
     NSPrintRenderingQualityResponsive
-} NS_ENUM_AVAILABLE_MAC(10_7);
+} API_AVAILABLE(macos(10.7));
 
 /* An exception that may be thrown by the factory methods described below.
 */
@@ -64,11 +65,11 @@ APPKIT_EXTERN NSExceptionName NSPrintOperationExistsException;
 
 /* If the print sheet is unresponsive or sluggish due to the time is takes you to fully render a page, you can check this method in drawRect and other printing methods such as beginDocument and knowsPageRage: to determine if the print operation prefers speed over fidelity. Please see the comments for NSPrintRenderingQuality. Most applications render each page fast enough and do not need to call this method.
 */
-@property (readonly) NSPrintRenderingQuality preferredRenderingQuality NS_AVAILABLE_MAC(10_7);
+@property (readonly) NSPrintRenderingQuality preferredRenderingQuality API_AVAILABLE(macos(10.7));
 
 /* The title of the print job. If a job title is set it overrides anything that might be gotten by sending the printed view an [NSView(NSPrinting) printJobTitle] message.
 */
-@property (nullable, copy) NSString *jobTitle NS_AVAILABLE_MAC(10_5);
+@property (nullable, copy) NSString *jobTitle API_AVAILABLE(macos(10.5));
 
 
 
@@ -84,7 +85,7 @@ APPKIT_EXTERN NSExceptionName NSPrintOperationExistsException;
 
 /* The panel to be presented by the operation when it is run, if [[self printInfo] jobDisposition] is NSPrintSaveJob and [[[self printInfo] dictionary] objectForKey:NSPrintJobSavingURL] is nil. -PDFPanel will create a new NSPDFPanel if one hasn't been set yet. NSPrintOperation will throw an exception if panel.options contains NSPDFPanelRequestsParentDirectory when it attempts to display the panel.
 */
-@property (strong) NSPDFPanel *PDFPanel NS_AVAILABLE_MAC(10_9);
+@property (strong) NSPDFPanel *PDFPanel API_AVAILABLE(macos(10.9));
 
 /* Whether the print operation should spawn a separate thread in which to run itself.
 */
@@ -120,7 +121,7 @@ This can only be invoked once. Create a new NSPrintOperation instance for each o
 
 /* The first through last one-based page numbers of the operation as it's being previewed or printed. The first page number might not be 1, and the page count might be NSIntegerMax to indicate that the number of pages is not known, depending on what the printed view returned when sent an [NSView(NSPrinting) knowsPageRange:] message.
 */
-@property (readonly) NSRange pageRange NS_AVAILABLE_MAC(10_5);
+@property (readonly) NSRange pageRange API_AVAILABLE(macos(10.5));
 
 
 /* The current one-based page number of the operation as it's being previewed or printed.
@@ -138,15 +139,16 @@ This can only be invoked once. Create a new NSPrintOperation instance for each o
 
 @interface NSPrintOperation(NSDeprecated)
 
-- (void)setAccessoryView:(nullable NSView *)view NS_DEPRECATED_MAC(10_0, 10_5, "Use -[NSPrintPanel addAccessoryController:] and -[NSPrintPanel removeAccessoryController:] instead");
-- (nullable NSView *)accessoryView NS_DEPRECATED_MAC(10_0, 10_5, "Use -[NSPrintPanel accessoryControllers] instead");
+- (void)setAccessoryView:(nullable NSView *)view API_DEPRECATED("Use -[NSPrintPanel addAccessoryController:] and -[NSPrintPanel removeAccessoryController:] instead", macos(10.0,10.5));
+- (nullable NSView *)accessoryView API_DEPRECATED("Use -[NSPrintPanel accessoryControllers] instead", macos(10.0,10.5));
 
-- (void)setJobStyleHint:(nullable NSString *)hint NS_DEPRECATED_MAC(10_2, 10_5);
-- (nullable NSString *)jobStyleHint NS_DEPRECATED_MAC(10_2, 10_5);
+- (void)setJobStyleHint:(nullable NSString *)hint API_DEPRECATED("", macos(10.2,10.5));
+- (nullable NSString *)jobStyleHint API_DEPRECATED("", macos(10.2,10.5));
 
-- (void)setShowPanels:(BOOL)flag NS_DEPRECATED_MAC(10_0, 10_4, "Use -setShowsPrintPanel: and -setShowsProgressPanel: instead");
-- (BOOL)showPanels NS_DEPRECATED_MAC(10_0, 10_4, "Use -showsPrintPanel and -showsProgressPanel instead");
+- (void)setShowPanels:(BOOL)flag API_DEPRECATED("Use -setShowsPrintPanel: and -setShowsProgressPanel: instead", macos(10.0,10.4));
+- (BOOL)showPanels API_DEPRECATED("Use -showsPrintPanel and -showsProgressPanel instead", macos(10.0,10.4));
 
 @end
 
+API_UNAVAILABLE_END
 NS_ASSUME_NONNULL_END

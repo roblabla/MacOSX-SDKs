@@ -16,9 +16,9 @@
 
 #import <QuartzCore/CALayer.h>
 
-typedef NSString * CAEmitterLayerEmitterShape NS_STRING_ENUM;
-typedef NSString * CAEmitterLayerEmitterMode NS_STRING_ENUM;
-typedef NSString * CAEmitterLayerRenderMode NS_STRING_ENUM;
+typedef NSString * CAEmitterLayerEmitterShape NS_TYPED_ENUM;
+typedef NSString * CAEmitterLayerEmitterMode NS_TYPED_ENUM;
+typedef NSString * CAEmitterLayerRenderMode NS_TYPED_ENUM;
 
 @class CAEmitterCell;
 

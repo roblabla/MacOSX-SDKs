@@ -1,7 +1,7 @@
 /*
     NSColorPicking.h
     Application Kit
-    Copyright (c) 1994-2018, Apple Inc.
+    Copyright (c) 1994-2019, Apple Inc.
     All rights reserved.
 */
 
@@ -10,6 +10,7 @@
 #import <AppKit/NSColorPanel.h>
 
 NS_ASSUME_NONNULL_BEGIN
+API_UNAVAILABLE_BEGIN(ios)
 
 @class NSButtonCell, NSColor, NSColorPanel, NSColorList, NSImage, NSView;
 
@@ -46,11 +47,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 /* The tooltip to be used for the tool bar button.
 */
-- (NSString *)buttonToolTip NS_AVAILABLE_MAC(10_5);
+- (NSString *)buttonToolTip API_AVAILABLE(macos(10.5));
 
 /* The minimum content size for your picker. The NSColorPanel will not allow resizing smaller than this size. By default, you will not have to do anything if you properly setup the Autosizing attributes in IB for your view. 
 */
-- (NSSize)minContentSize NS_AVAILABLE_MAC(10_5);
+- (NSSize)minContentSize API_AVAILABLE(macos(10.5));
 
 
 @end
@@ -76,5 +77,6 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)setColor:(NSColor *)newColor;
 @end
 
+API_UNAVAILABLE_END
 NS_ASSUME_NONNULL_END
 

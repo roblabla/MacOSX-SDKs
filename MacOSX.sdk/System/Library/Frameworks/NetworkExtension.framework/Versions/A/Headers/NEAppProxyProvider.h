@@ -12,6 +12,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @class NEAppProxyFlow;
+@class NEAppProxyUDPFlow;
+@class NWEndpoint;
 
 /*!
  * @file NEAppProxyProvider
@@ -57,6 +59,19 @@ API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(watchos, tvos)
  * @return YES if the proxy implementation has retained the flow and intends to handle the flow data. NO if the proxy implementation has not retained the flow and will not handle the flow data. In this case the flow is terminated.
  */
 - (BOOL)handleNewFlow:(NEAppProxyFlow *)flow API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(watchos, tvos);
+
+/*!
+ * @method handleNewUDPFlow:initialRemoteEndpoint:
+ * @discussion This function is called by the framework to deliver a new UDP data flow to the proxy provider implementation. Subclasses can override this method to perform whatever steps are necessary to ready the proxy to receive
+ *     data from the flow. The proxy provider implementation indicates that the proxy is ready to handle flow data by calling -[NEAppProxyFlow openWithLocalEndpoint:completionHandler:] on the flow. If the proxy implementation decides
+ *     to not handle the flow and instead terminate it, the subclass implementation of this method should return NO. If the proxy implementation decides to handle the flow, the subclass implementation of this method should return YES.
+ *     In this case the proxy implementation is responsible for retaining the NEAppProxyUDPFlow object.
+ *     The default implementation of this method calls -[NEAppProxyProvider handleNewFlow:] and returns its result.
+ * @param flow The new UDP flow
+ * @param remoteEndpoint The initial remote endpoint provided by the proxied app when the flow was opened.
+ * @return YES if the proxy implementation has retained the flow and intends to handle the flow data. NO if the proxy implementation has not retained the flow and will not handle the flow data. In this case the flow is terminated.
+ */
+- (BOOL)handleNewUDPFlow:(NEAppProxyUDPFlow *)flow initialRemoteEndpoint:(NWEndpoint *)remoteEndpoint API_AVAILABLE(macos(10.15), ios(13.0)) API_UNAVAILABLE(watchos, tvos);
 
 @end
 

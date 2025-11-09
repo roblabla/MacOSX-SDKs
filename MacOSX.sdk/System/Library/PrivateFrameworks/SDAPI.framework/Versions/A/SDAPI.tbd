@@ -1,9 +1,8 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: B1F6F5B2-9FEB-3191-9F0F-2FC76FA3B0EE' ]
-platform:        macosx
-install-name:    /System/Library/PrivateFrameworks/SDAPI.framework/Versions/A/SDAPI
-objc-constraint: none
+uuids:           [ 'x86_64: D61799BD-61F1-3D2E-8A8E-65A0D4269A35', 'x86_64: D61799BD-61F1-3D2E-8A8E-65A0D4269A35' ]
+platform:        zippered
+install-name:    '/System/Library/PrivateFrameworks/SDAPI.framework/Versions/A/SDAPI'
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _SDApi_HasErrored, _SDApi_Initialize, _SDParamSetHolder_Delete, 

@@ -302,6 +302,165 @@ CG_EXTERN const CFStringRef  kCGPDFContextAccessPermissions
 CG_EXTERN void CGPDFContextSetOutline(CGContextRef context, __nullable CFDictionaryRef outline)
   CG_AVAILABLE_STARTING(10.13, 11.0);
 
+/* Tagged PDF Authoring */
+
+/* Tagged PDF Authoring is based on the Marked Content and Tagged PDF features defined
+   in the Adobe Portable Document Format Version 1.7 November 2006. Link:
+   http://www.adobe.com/content/dam/Adobe/en/devnet/acrobat/pdfs/pdf_reference_1-7.pdf
+ 
+   These features are described in Chapter 10, "Document Interchange", starting on page 841.
+ 
+ - Marked-content operators (Section 10.5) identify portions of a content streams with
+   additional properties, typically a tagged structure declaring accessibility information.
+ 
+ - Logical structure facilities (Section 10.6) declares a hierarchical organization of the
+   tags used by marked-content operators. This reflects the logical structure that tags
+   should be read by an application presenting a PDF document.
+ 
+ - Tagged PDF (Section 10.7) defines the properties of tags, and focuses on the accessibility
+   features they provide. */
+
+/* All CGPDFTagType reflect official "Role Types" defined in the Adobe Portable Document
+   Format Version 1.7 November 2006. The enums below are defined between pages 899 to 912. */
+typedef CF_ENUM (int32_t, CGPDFTagType) {
+    
+    /* Page 899 - 901, TABLE 10.20 Standard structure types for grouping elements */
+    CGPDFTagTypeDocument = 100,
+    CGPDFTagTypePart,
+    CGPDFTagTypeArt,
+    CGPDFTagTypeSection,
+    CGPDFTagTypeDiv,
+    CGPDFTagTypeBlockQuote,
+    CGPDFTagTypeCaption,
+    CGPDFTagTypeTOC,
+    CGPDFTagTypeTOCI,
+    CGPDFTagTypeIndex,
+    CGPDFTagTypeNonStructure,
+    CGPDFTagTypePrivate,
+    
+    /* Page 901, TABLE 10.21 Block-level structure elements. Long form descriptions on page 902 - 903 */
+    
+    /* Paragraph like elements */
+    CGPDFTagTypeParagraph = 200,
+    CGPDFTagTypeHeader,
+    CGPDFTagTypeHeader1,
+    CGPDFTagTypeHeader2,
+    CGPDFTagTypeHeader3,
+    CGPDFTagTypeHeader4,
+    CGPDFTagTypeHeader5,
+    CGPDFTagTypeHeader6,
+    
+    /* List elements */
+    CGPDFTagTypeList = 300,
+    CGPDFTagTypeListItem,
+    CGPDFTagTypeLabel,
+    CGPDFTagTypeListBody,
+    
+    /* Table element */
+    CGPDFTagTypeTable = 400,
+    CGPDFTagTypeTableRow,
+    CGPDFTagTypeTableHeaderCell,
+    CGPDFTagTypeTableDataCell,
+    CGPDFTagTypeTableHeader,
+    CGPDFTagTypeTableBody,
+    CGPDFTagTypeTableFooter,
+    
+    /* Page 905, TABLE 10.25 Standard structure types for inline-level structure elements */
+    CGPDFTagTypeSpan = 500,
+    CGPDFTagTypeQuote,
+    CGPDFTagTypeNote,
+    CGPDFTagTypeReference,
+    CGPDFTagTypeBibliography,
+    CGPDFTagTypeCode,
+    CGPDFTagTypeLink,
+    CGPDFTagTypeAnnotation,
+    
+    /* Page 911, TABLE 10.26 Standard structure types for Ruby and Warichu elements (PDF 1.5) */
+    CGPDFTagTypeRuby = 600,
+    CGPDFTagTypeRubyBaseText,
+    CGPDFTagTypeRubyAnnotationText,
+    CGPDFTagTypeRubyPunctuation,
+    CGPDFTagTypeWarichu,
+    CGPDFTagTypeWarichuText,
+    CGPDFTagTypeWarichuPunctiation,
+    
+    /* Page 912, TABLE 10.27 Standard structure types for illustration elements */
+    CGPDFTagTypeFigure = 700,
+    CGPDFTagTypeFormula,
+    CGPDFTagTypeForm,
+} CG_AVAILABLE_STARTING(10.15, 13.0);
+
+/* For a given CGPDFTagType, return a C-string that matches the names defined in section 10.7.3: Standard Structure Types.
+   These are defined on pages 899 - 912. Returns NULL for an unknown value. */
+CG_EXTERN const char* cg_nullable CGPDFTagTypeGetName(CGPDFTagType tagType) CG_AVAILABLE_STARTING(10.15, 13.0);
+
+/* The following CGPDFTagProperty keys are to be paired with CFStringRef values in
+   CGPDFContextBeginTag(...)'s optional tagProperties dictionary. These key-value pairs
+   encode accessibility information for the defined tag. */
+
+typedef CFStringRef CGPDFTagProperty CF_TYPED_ENUM;
+
+/* Actual text, defined on page 860:
+   "Text that is an exact replacement for the structure element and its children..."
+   "...useful when extracting the document’s contents in support of accessibility..."
+   This can be used to more precisely control what string is extracted by a user when
+   they copy and paste from a document. */
+CG_EXTERN const CGPDFTagProperty _Nonnull kCGPDFTagPropertyActualText
+  CG_AVAILABLE_STARTING(10.15, 13.0);
+
+/* Alternative text, defined on page 860:
+   "An alternate description of the structure element and its children in human-readable form".
+   This is typically used for graphical content, like an image. */
+CG_EXTERN const CGPDFTagProperty _Nonnull kCGPDFTagPropertyAlternativeText
+  CG_AVAILABLE_STARTING(10.15, 13.0);
+
+/* Title, defined on page 859:
+   Title of the node in a human-readable form. This should *not* be used for accessibility,
+   but can be useful when presenting the structure of a tagged node tree. */
+CG_EXTERN const CGPDFTagProperty _Nonnull kCGPDFTagPropertyTitleText
+  CG_AVAILABLE_STARTING(10.15, 13.0);
+
+/* Language of text content, defined on page 860:
+   Typically you should use the document's catalog to get its language, but if a section
+   of text is not the same language as the document, this may be set and allow you to
+   look at what language it is hinting at. */
+CG_EXTERN const CGPDFTagProperty _Nonnull kCGPDFTagPropertyLanguageText
+  CG_AVAILABLE_STARTING(10.15, 13.0);
+
+/* General usage of CGPDFContextBeginTag(...) and CGPDFContextEndTag(...):
+ 
+ - Create a CG PDF context using CGPDFContextCreate(...).
+ - Begin and end pages as you normally would, through CGPDFContextBeginPage(...), CGPDFContextEndPage(...).
+ - When drawing content for a page, you may tag any series of draw commands with balanced series of push / pops,
+   which will mark your content with the given tag type and optional tag properties.
+ 
+ - Pushing a tag saves the current tag to a tag-stack, assigning the given tag as the "current tag".
+ - Popping removes the top-most element of the tag-stack. The remaining top-most element becomes the "current tag".
+ - Any pushed tag is a child of the "current tag". This allows you to push children to parent-tags, and to build
+   a tag structure tree.
+ 
+ - When saving the context to a file, the file will be authored with marked content sequences in the page's content-
+   stream, as well as the implicitly built tagged structure three.
+ - If you would like to associate an annotation with a node, add the annotation to a page as you normally would via
+   CGPDFPageAddAnnotation(...), but within the appropriate push / pop tag call. NOTE: CGPDFPageAddAnnotation is SPI, so
+   we cannot support this publicly. */
+
+/* Sets the current tag to the given tagType with an associated tagProperties dictionary. The previous tag will be pushed
+   to a tag-stack. The previous tag can be restored through CGPDFContextEndTag(...). This new tag will record any future
+   drawing commands to the given context as part of itself, unless another tag is pushed or the tag is popped. When the
+   PDF context is serialized to a PDF file, these tags will create marked content sequences around the associated draw commands
+   around the page's content stream. Note that tagProperties is an optional dictionary that allows you to specificy additional
+   properties of the marked content: content may want to re-declare how text should be extracted, any alt text for figures,
+   or explicitly declare what language the text is in. All child-tags (tags pushed on top of other tags) will inherit their
+   parent tag's properties. */
+CG_EXTERN void CGPDFContextBeginTag(CGContextRef _Nonnull context, CGPDFTagType tagType, CFDictionaryRef cg_nullable tagProperties)
+  CG_AVAILABLE_STARTING(10.15, 13.0);
+
+/* Pop the current tag. Sets the current tag to the previous tag on the tag-stack. If there was no previous tag, then the
+   current tag will be set to the root document tag (of type CGPDFTagTypeDocument). */
+CG_EXTERN void CGPDFContextEndTag(CGContextRef _Nonnull context)
+  CG_AVAILABLE_STARTING(10.15, 13.0);
+
 CF_ASSUME_NONNULL_END
 
 CF_IMPLICIT_BRIDGING_DISABLED

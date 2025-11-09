@@ -1,6 +1,6 @@
 /*
 	NSProgress.h
-	Copyright (c) 2011-2018, Apple Inc.
+	Copyright (c) 2011-2019, Apple Inc.
 	All rights reserved.
 */
 
@@ -33,29 +33,8 @@ NS_ASSUME_NONNULL_BEGIN
  The localizedDescription and localizedAdditionalDescription properties are meant to be observed as well as set. So are the cancellable and pausable properties. totalUnitCount and completedUnitCount on the other hand are often not the best properties to observe when presenting progress to the user. For example, you should observe fractionCompleted instead of observing totalUnitCount and completedUnitCount and doing your own calculation. NSProgress' default implementation of fractionCompleted does fairly sophisticated things like taking child NSProgresses into account.
  */
 
-NS_CLASS_AVAILABLE(10_9, 7_0)
-@interface NSProgress : NSObject {
-@private
-    NSProgress *__weak _parent;
-    int64_t _reserved4;
-    id _values;
-    void (^ _resumingHandler)(void);
-    void (^ _cancellationHandler)(void);
-    void (^ _pausingHandler)(void);
-    void (^ _prioritizationHandler)(void);
-    uint64_t _flags;
-    id _userInfoProxy;
-    NSString *_publisherID;
-    id _reserved5;
-    NSInteger _reserved6;
-    NSInteger _reserved7;
-    NSInteger _reserved8;
-    NSMutableDictionary *_acknowledgementHandlersByLowercaseBundleID;
-    NSMutableDictionary *_lastNotificationTimesByKey;
-    NSMutableDictionary *_userInfoLastNotificationTimesByKey;
-    NSLock *_lock;
-    NSMutableSet *_children;
-}
+API_AVAILABLE(macos(10.9), ios(7.0), watchos(2.0), tvos(9.0))
+@interface NSProgress : NSObject
 
 /* The instance of NSProgress associated with the current thread by a previous invocation of -becomeCurrentWithPendingUnitCount:, if any. The purpose of this per-thread value is to allow code that does work to usefully report progress even when it is widely separated from the code that actually presents progress to the user, without requiring layers of intervening code to pass the instance of NSProgress through. Using the result of invoking this directly will often not be the right thing to do, because the invoking code will often not even know what units of work the current progress object deals in. Invoking +progressWithTotalUnitCount: to create a child NSProgress object and then using that to report progress makes more sense in that situation.
 */
@@ -69,11 +48,11 @@ You can invoke this method on one thread and then message the returned NSProgres
 
 /* Return an instance of NSProgress that has been initialized with -initWithParent:userInfo:. The initializer is passed nil for the parent, resulting in a progress object that is not part of an existing progress tree. The value of the totalUnitCount property is also set.
  */
-+ (NSProgress *)discreteProgressWithTotalUnitCount:(int64_t)unitCount NS_AVAILABLE(10_11, 9_0);
++ (NSProgress *)discreteProgressWithTotalUnitCount:(int64_t)unitCount API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0));
 
 /* Return an instance of NSProgress that has been attached to a parent progress with the given pending unit count.
  */
-+ (NSProgress *)progressWithTotalUnitCount:(int64_t)unitCount parent:(NSProgress *)parent pendingUnitCount:(int64_t)portionOfParentTotalUnitCount NS_AVAILABLE(10_11, 9_0);
++ (NSProgress *)progressWithTotalUnitCount:(int64_t)unitCount parent:(NSProgress *)parent pendingUnitCount:(int64_t)portionOfParentTotalUnitCount API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0));
 
 /* The designated initializer. If a parent NSProgress object is passed then progress reporting and cancellation checking done by the receiver will notify or consult the parent. The only valid arguments to the first argument of this method are nil (indicating no parent) or [NSProgress currentProgress]. Any other value will throw an exception.
 */
@@ -95,7 +74,7 @@ You can invoke this method on one thread and then message the returned NSProgres
 
 /* Directly add a child progress to the receiver, assigning it a portion of the receiver's total unit count.
  */
-- (void)addChild:(NSProgress *)child withPendingUnitCount:(int64_t)inUnitCount NS_AVAILABLE(10_11, 9_0);
+- (void)addChild:(NSProgress *)child withPendingUnitCount:(int64_t)inUnitCount API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0));
 
 #pragma mark *** Reporting Progress ***
 
@@ -147,7 +126,7 @@ You can invoke this method on one thread and then message the returned NSProgres
 
 /* A block to be invoked when resume is invoked. The block will be invoked even when the method is invoked on an ancestor of the receiver, or an instance of NSProgress in another process that resulted from publishing the receiver or an ancestor of the receiver. Your block won't be invoked on any particular queue. If it must do work on a specific queue then it should schedule that work on that queue.
  */
-@property (nullable, copy) void (^resumingHandler)(void) NS_AVAILABLE(10_11, 9_0);
+@property (nullable, copy) void (^resumingHandler)(void) API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0));
 
 /* Set a value in the dictionary returned by invocations of -userInfo, with appropriate KVO notification for properties whose values can depend on values in the user info dictionary, like localizedDescription. If a nil value is passed then the dictionary entry is removed.
 */
@@ -178,7 +157,7 @@ You can invoke this method on one thread and then message the returned NSProgres
 
 /* Invoke the block registered with the resumingHandler property, if there is one, and set the paused property to NO. Do this for the receiver, any descendants of the receiver, the instance of NSProgress that was published in another process to make the receiver if that's the case, and any descendants of such a published instance of NSProgress.
 */
-- (void)resume NS_AVAILABLE(10_11, 9_0);
+- (void)resume API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0));
 
 /* Arbitrary values associated with the receiver. Returns a KVO-compliant dictionary that changes as -setUserInfoObject:forKey: is sent to the receiver. The dictionary will send all of its KVO notifications on the thread which updates the property. The result will never be nil, but may be an empty dictionary. Some entries have meanings that are recognized by the NSProgress class itself. See the NSProgress...Key string constants listed below.
 */
@@ -273,37 +252,37 @@ Note that there is no reliable definition of "before" in this case, which involv
 
 /* How much time is probably left in the operation, as an NSNumber containing a number of seconds.
 */
-FOUNDATION_EXPORT NSProgressUserInfoKey const NSProgressEstimatedTimeRemainingKey NS_AVAILABLE(10_9, 7_0);
+FOUNDATION_EXPORT NSProgressUserInfoKey const NSProgressEstimatedTimeRemainingKey API_AVAILABLE(macos(10.9), ios(7.0), watchos(2.0), tvos(9.0));
 
 /* How fast data is being processed, as an NSNumber containing bytes per second.
 */
-FOUNDATION_EXPORT NSProgressUserInfoKey const NSProgressThroughputKey NS_AVAILABLE(10_9, 7_0);
+FOUNDATION_EXPORT NSProgressUserInfoKey const NSProgressThroughputKey API_AVAILABLE(macos(10.9), ios(7.0), watchos(2.0), tvos(9.0));
 
 #pragma mark *** Details of File Progress ***
 
 /* The value for the kind property that indicates that the work being done is one of the kind of file operations listed below. NSProgress of this kind is assumed to use bytes as the unit of work being done and the default implementation of -localizedDescription takes advantage of that to return more specific text than it could otherwise. The NSProgressFileTotalCountKey and NSProgressFileCompletedCountKey keys in the userInfo dictionary are used for the overall count of files.
 */
-FOUNDATION_EXPORT NSProgressKind const NSProgressKindFile NS_AVAILABLE(10_9, 7_0);
+FOUNDATION_EXPORT NSProgressKind const NSProgressKindFile API_AVAILABLE(macos(10.9), ios(7.0), watchos(2.0), tvos(9.0));
 
 /* A user info dictionary key, for an entry that is required when the value for the kind property is NSProgressKindFile. The value must be one of the strings listed in the next section. The default implementations of of -localizedDescription and -localizedItemDescription use this value to determine the text that they return.
 */
-FOUNDATION_EXPORT NSProgressUserInfoKey const NSProgressFileOperationKindKey NS_AVAILABLE(10_9, 7_0);
+FOUNDATION_EXPORT NSProgressUserInfoKey const NSProgressFileOperationKindKey API_AVAILABLE(macos(10.9), ios(7.0), watchos(2.0), tvos(9.0));
 
 /* Possible values for NSProgressFileOperationKindKey entries.
 */
-FOUNDATION_EXPORT NSProgressFileOperationKind const NSProgressFileOperationKindDownloading NS_AVAILABLE(10_9, 7_0);
-FOUNDATION_EXPORT NSProgressFileOperationKind const NSProgressFileOperationKindDecompressingAfterDownloading NS_AVAILABLE(10_9, 7_0);
-FOUNDATION_EXPORT NSProgressFileOperationKind const NSProgressFileOperationKindReceiving NS_AVAILABLE(10_9, 7_0);
-FOUNDATION_EXPORT NSProgressFileOperationKind const NSProgressFileOperationKindCopying NS_AVAILABLE(10_9, 7_0);
+FOUNDATION_EXPORT NSProgressFileOperationKind const NSProgressFileOperationKindDownloading API_AVAILABLE(macos(10.9), ios(7.0), watchos(2.0), tvos(9.0));
+FOUNDATION_EXPORT NSProgressFileOperationKind const NSProgressFileOperationKindDecompressingAfterDownloading API_AVAILABLE(macos(10.9), ios(7.0), watchos(2.0), tvos(9.0));
+FOUNDATION_EXPORT NSProgressFileOperationKind const NSProgressFileOperationKindReceiving API_AVAILABLE(macos(10.9), ios(7.0), watchos(2.0), tvos(9.0));
+FOUNDATION_EXPORT NSProgressFileOperationKind const NSProgressFileOperationKindCopying API_AVAILABLE(macos(10.9), ios(7.0), watchos(2.0), tvos(9.0));
 
 /* A user info dictionary key. The value must be an NSURL identifying the item on which progress is being made. This is required for any NSProgress that is published using -publish to be reported to subscribers registered with +addSubscriberForFileURL:withPublishingHandler:.
 */
-FOUNDATION_EXPORT NSProgressUserInfoKey const NSProgressFileURLKey NS_AVAILABLE(10_9, 7_0);
+FOUNDATION_EXPORT NSProgressUserInfoKey const NSProgressFileURLKey API_AVAILABLE(macos(10.9), ios(7.0), watchos(2.0), tvos(9.0));
 
 /* User info dictionary keys. The values must be NSNumbers containing integers. These entries are optional but if they are both present then the default implementation of -localizedAdditionalDescription uses them to determine the text that it returns.
 */
-FOUNDATION_EXPORT NSProgressUserInfoKey const NSProgressFileTotalCountKey NS_AVAILABLE(10_9, 7_0);
-FOUNDATION_EXPORT NSProgressUserInfoKey const NSProgressFileCompletedCountKey NS_AVAILABLE(10_9, 7_0);
+FOUNDATION_EXPORT NSProgressUserInfoKey const NSProgressFileTotalCountKey API_AVAILABLE(macos(10.9), ios(7.0), watchos(2.0), tvos(9.0));
+FOUNDATION_EXPORT NSProgressUserInfoKey const NSProgressFileCompletedCountKey API_AVAILABLE(macos(10.9), ios(7.0), watchos(2.0), tvos(9.0));
 
 /* User info dictionary keys. The value for the first entry must be an NSImage, typically an icon. The value for the second entry must be an NSValue containing an NSRect, in screen coordinates, locating the image where it initially appears on the screen.
 */

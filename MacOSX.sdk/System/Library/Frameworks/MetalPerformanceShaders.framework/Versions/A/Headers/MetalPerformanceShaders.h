@@ -5,11 +5,15 @@
  *  @copyright Copyright (c) 2015 Apple Inc. All rights reserved.
  */
 
+#ifndef MetalPerformanceShaders_h
+#define MetalPerformanceShaders_h 1
+
 #ifndef __METAL_VERSION__
 #import <MPSCore/MPSCore.h>
 #import <MPSImage/MPSImage.h>
 #import <MPSMatrix/MPSMatrix.h>
 #import <MPSNeuralNetwork/MPSNeuralNetwork.h>
+#import <MPSNDArray/MPSNDArray.h>
 #endif
 #import <MPSRayIntersector/MPSRayIntersector.h>
 
@@ -26,7 +30,7 @@ extern "C" {
  *  @return     YES             The device is supported.
  *              NO              The device is not supported
  */
-BOOL    MPSSupportsMTLDevice( __nullable id <MTLDevice> device )  MPS_AVAILABLE_STARTING( macos(10.13), ios(9.0), tvos(9.0));
+BOOL    MPSSupportsMTLDevice( __nullable id <MTLDevice> device )  MPS_AVAILABLE_STARTING( macos(10.13), ios(9.0), macCatalyst(13.0), tvos(9.0));
 
     
 /*! @abstract Hint to MPS how much memory your application expects to need for the command buffer
@@ -103,6 +107,47 @@ void    MPSHintTemporaryMemoryHighWaterMark( __nonnull id <MTLCommandBuffer> cmd
 void    MPSSetHeapCacheDuration( __nonnull id <MTLCommandBuffer> cmdBuf,
                                  double seconds );
 
+#if defined(DOXYGEN)
+    typedef enum MPSDeviceOptions
+#else
+    typedef NS_OPTIONS( NSUInteger, MPSDeviceOptions )
+#endif
+{
+    /*! Use default options */
+    MPSDeviceOptionsDefault         MPS_ENUM_AVAILABLE_STARTING( macos(10.14.4), ios(12.2), macCatalyst(13.0), tvos(12.2)) MPS_SWIFT_NAME(Default) = 0UL,
+
+    /*! Prefer a low power device */
+    MPSDeviceOptionsLowPower        MPS_ENUM_AVAILABLE_STARTING( macos(10.14.4), ios(12.2), macCatalyst(13.0), tvos(12.2)) = 1,
+
+    /*! Skip removable devices */
+    MPSDeviceOptionsSkipRemovable   MPS_ENUM_AVAILABLE_STARTING( macos(10.14.4), ios(12.2), macCatalyst(13.0), tvos(12.2)) = 2,
+};
+    
+/*! @abstract   Identify the preferred device for MPS computation
+ *  @discussion This method identifies a suitable device for MPS operation. By
+ *              default, it prefers a headless high performance GPU. Your application
+ *              may use the options parameter to adjust this behavior.  If your application
+ *              needs a particular device, for example one attached to the display on
+ *              which a view resides, then please see:
+ *
+ *                  https://developer.apple.com/documentation/metal/choosing_gpus_on_mac/device_selection_and_fallback_for_graphics_rendering
+ *
+ *              ...for preferred methods to get that device.
+ *
+ *              The choice made by MPSGetPreferredDevice can be overridden by setting the
+ *              MPS_PREFERED_DEVICE environment variable to the index of the desired device.
+ *              Expprt MPS_PREFERRED_DEVICE=-1 to print a list of devices to stderr.
+ *
+ *              Your application is welcome to use any MTLDevice with MPS so long as
+ *              MPSSupportsMTLDevice(device) returns YES. This convenience function is provided
+ *              to simplify device selection for common cases.
+ *
+ *  @param      options Customimze the display selection
+ *                      If a matching device can not be found, another device will be returned, if available.
+ *  @return     A valid MTLDevice supported by MPS or nil if none are available. */
+__nullable id <MTLDevice> MPSGetPreferredDevice( MPSDeviceOptions options ) MPS_AVAILABLE_STARTING(macos(10.14.4), ios(12.2), macCatalyst(13.0), tvos(12.2));
+
+    
 //
 //  These headers contain doxygen formatted documentation. They are human readable as is,
 //  but can be processed as such to make something a bit nicer looking.  Our version of
@@ -1243,6 +1288,93 @@ void    MPSSetHeapCacheDuration( __nonnull id <MTLCommandBuffer> cmdBuf,
  *  [MPSNNFilterNode gradientFilterWithSources:], so it is recommended that when possible,
  *  you use that instead to help make sure everything is wired up correctly.
  *
+ *  @section troubleshooting    Troubleshooting FAQ
+ *  Q: My application memory size quickly grows huge, but leaks shows no leaks. What is wrong?
+ *  A: Make sure there is a autoreleasepool bracketing the MTLCommandBuffer lifespan. If there isn't one
+ *     or it doesn't get drained often enough then the MTLCommandBuffer doesn't get released and consequently
+ *     the MPS heap associated with each MTLCommandBuffer doesn't get released.  This will happen even
+ *     when ARC is enabled. Usually, the autoreleasepool should be popped or drained after each command
+ *     buffer completes.
+ *
+ *  Q: I'm getting unexpected results out of the MPSNNGraph. How do I debug?
+ *  A: (1) You can look at the intermediate results node by node by turning on MPSNNImageNode.exportFromGraph
+ *         for each node in turn. Perhaps one layer is misconfigured. Note: exporting all nodes at the same
+ *         time might cause a memory usage to grow become high, and typically should be avoided. Also, turning
+ *         MPSNNImageNode.exportFromGraph on may change how the graph optimizes its structure. Intermediate
+ *         images that normally would be folded away by node fusion can't be folded away if MPSNNImageNode.exportFromGraph
+ *         is turned on for the image. When this option is on, impact on graph internal structure should be examined.
+ *     (2) You can cause the MPSNNGraph to show the internal graph representation and what optimizations it
+ *         has done by exporting the MPS_LOG_INFO environment variable. This will cause each graph to emit quite
+ *         a lot of information, but may be well worth wading through.
+ *     (3) MPSNNGraph.debugDescription (or po <graphPtr> in lldb) will emit *even more* information down to the
+ *         finest detail about every filter in the graph.
+ *
+ *  Q: My code is asserting because some readCount isn't right?
+ *  A: Generally speaking, if a MPSKernel reads from a temporary MPSImage, MPSVector, MPSState or MPSMatrix
+ *     it will decrement the read count. This may include some filters that do not seem like they would read
+ *     from it, or may read from it more than once (e.g. the batch normalization cluster of kernels which are
+ *     used to implement the batch normalization node, which may read more than once depending on whether
+ *     training is enabled or statistics calculations are turned on).  Some states are both read from and
+ *     written to by the kernel.  Your own custom kernels should operate in the same way. Individual filters
+ *     should only decrement the readcount once, even if they touch the data in multiple passes. Some graph
+ *     nodes are implemented using multiple MPSKernels and may decrement more than once.
+ *
+ *     Use [MPSNNGraph readCountForSourceImageAtIndex:] and [MPSNNGraph readCountForSourceStateAtIndex:] to
+ *     find out how much the readCount property on each image and state passed into the graph will be decremented.
+ *
+ *     When the readCount reaches 0, the data storage backing the object is returned to the MPS heap for reuse,
+ *     even if the object that used to own it is still alive. The memory can not be reclaimed by that object. If
+ *     the Metal debug layer is on, it should assert when a MPS resource object is released with a non-zero
+ *     readcount or is used with a 0 readCount.
+ *
+ *     BUG: We have forgotten to decrement the readCount on one or two MPSKernels previously. These were fixed
+ *          in a later OS revision. Applications that support older operating systems may need to work around
+ *          these cases if they are encountered.
+ *
+ *  Q: Why does my MPS workload take longer the first time I run it?
+ *  A: Frequently, many GPU kernels need to be compiled first before they can be used. Compilers can be expensive.
+ *     Metal keeps a cache of compiled kernels for the lifetime of your application, so this penalty should
+ *     disappear with continued use.
+ *
+ *     In addition, MPS may allocate a heap on your behalf. Sometimes these heaps can be quite large, a gigabyte
+ *     or more! There is a caching mechanism at work in MPS to recycle the heaps between command buffers so that the
+ *     cost does not have to paid for every time. By default, cached heaps no longer in use are freed after a few
+ *     seconds.
+ *
+ *  Q: Why am I not getting the expected performance?
+ *  A: Often this comes down to energy saving optimizations on the GPU, CPU or both.  When either processing unit
+ *     is not in use, the clock speed may be reduced to save energy and reduce heat production. When the procesing
+ *     unit is needed again, its clock speed will ramp up again. This is not an instantaneous process. If your
+ *     work units are small enough, the CPU and/or GPU may never reach peak clock speed before they run out of
+ *     work and clock down again.  Workloads that bounce back and forth between the GPU and CPU, each leaving the
+ *     other idle, commonly encounter this behavior.  Typically, the solution is to double buffer the work load such
+ *     that the CPU can be encoding the next batch of work while the GPU is working on the previous batch of work.
+ *     The command buffer containing the next batch of work should be committed to the GPU before the GPU finishes
+ *     the previous batch so that the GPU can start working on it immediately upon completion of the previous batch.
+ *     This will keep the GPU busy and thereby avoid problems with the GPU clock slowing down.  This effect is frequently
+ *     large, a factor of 2-4 in performance.
+ *
+ *     MPS tunes its CPU code to keep the CPU cost quite low. This will help keep the GPU busy. If the CPU is busy
+ *     all the time, you may need to do some CPU side tuning to make sure that the CPU is able to keep the GPU properly
+ *     fed.
+ *
+ *  Q: There are too many MPS neural networking kernels. How can I reduce the amount of code I write?
+ *  A: Please look at MPSNNGraph.h and MPSNNGraphNodes.h for a higher level interface into the neural networking
+ *     stack. The MPSNNGraph will handle a number of difficult details for you like image concatenation, node fusion,
+ *     heap size estimation, coordinating read counts, padding computation, and more. The MPSNNGraph is intended
+ *     to be used in a similar amount of code to programming with popular python based neural networking frameworks.
+ *     It can also autogenerate a training graph for you once you have constructed the graph representation for
+ *     the inference passes.
+ *
+ *  Q: Unexpected behavior / crashing is occurring
+ *  A: Make sure the Metal Debug layer is on. That may allow some MPS debug code to identify the problem early for you.
+ *      Edit the application scheme in Xcode. Enable Run : Options : Metal API Validation
+ *
+ *     You may also try turning on the usual debugging tools such as Malloc Scribble, Malloc Guard Edges, NSZombies
+ *     and various compiler sanitizers. Try also exporting the MPS_LOG_INFO environment variable.
+ *
+ *     If all else fails, a bug report with a reproducible test case attached should reach the MPS team in a day or two.
+ *
  *  @section release_notes   MPS Release Notes
  *  @subsection macosX_13_4    macOS X.13.4  iOS/tvOS 11.3
  *  A preview for neural network training support is provided in macOS X.13.4.
@@ -1308,3 +1440,5 @@ void    MPSSetHeapCacheDuration( __nonnull id <MTLCommandBuffer> cmdBuf,
 }
 #endif
 
+
+#endif  /* MetalPerformanceShaders_h*/

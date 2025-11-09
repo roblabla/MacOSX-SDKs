@@ -1,8 +1,8 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: CFF20BD1-45D3-33ED-B600-DA0D0EB26EAD' ]
+uuids:           [ 'x86_64: AFE8B921-D081-342C-B54D-296B0D267EE2' ]
 platform:        macosx
-install-name:    /System/Library/PrivateFrameworks/BioKitAggD.framework/Versions/A/BioKitAggD
+install-name:    '/System/Library/PrivateFrameworks/BioKitAggD.framework/Versions/A/BioKitAggD'
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _BKADClientAddValueForScalarKey, _BKADClientClearDistributionKey, 

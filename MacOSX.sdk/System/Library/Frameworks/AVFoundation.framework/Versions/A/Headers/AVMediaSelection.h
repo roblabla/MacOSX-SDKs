@@ -17,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 @class AVMediaSelectionInternal;
 @class AVMutableMediaSelectionInternal;
 
-NS_CLASS_AVAILABLE(10_11, 9_0)
+API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(2.0))
 @interface AVMediaSelection : NSObject <NSCopying, NSMutableCopying>
 {
 @private
@@ -53,7 +53,7 @@ NS_CLASS_AVAILABLE(10_11, 9_0)
 
 @end
 
-NS_CLASS_AVAILABLE(10_11, 9_0)
+API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(2.0))
 @interface AVMutableMediaSelection : AVMediaSelection
 /*!
  @method		selectMediaOption:inMediaSelectionGroup:

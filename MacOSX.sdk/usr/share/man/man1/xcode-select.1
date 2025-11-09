@@ -1,6 +1,6 @@
 .\" Man page generated from reStructuredText.
 .
-.TH "XCODE-SELECT" "1" "March 08, 2016" "Mac OS X" "BSD General Commands Manual"
+.TH "XCODE-SELECT" "1" "Jun 24, 2019" "Mac OS X" "BSD General Commands Manual"
 .SH NAME
 xcode-select \- Manages the active developer directory for Xcode and BSD tools.
 .
@@ -37,9 +37,9 @@ level margin: \\n[rst2man-indent\\n[rst2man-indent-level]]
 .SH DESCRIPTION
 .sp
 \fBxcode\-select\fP controls the location of the developer directory used by
-\fIxcrun(1)\fP, \fIxcodebuild(1)\fP, \fIcc(1)\fP, and other Xcode
+\fBxcrun(1)\fP, \fBxcodebuild(1)\fP, \fBcc(1)\fP, and other Xcode
 and BSD development tools. This also controls the locations that are searched
-for by \fIman(1)\fP for developer tool manpages.
+for by \fBman(1)\fP for developer tool manpages.
 .sp
 This allows you to easily switch between different versions of the Xcode tools
 and can be used to update the path to the Xcode if it is moved after
@@ -55,7 +55,7 @@ command line developer tools.
 After setting a developer directory, all of the \fBxcode\-select\fP provided
 developer tool shims (see \fI\%FILES\fP) will automatically invoke the version of
 the tool inside the selected developer directory. Your own scripts, makefiles,
-and other tools can also use \fIxcrun(1)\fP to easily lookup tools inside
+and other tools can also use \fBxcrun(1)\fP to easily lookup tools inside
 the active developer directory, making it easy to switch them between different
 versions of the Xcode tools and allowing them to function properly on systems
 where the Xcode application has been installed to a non\-default location.
@@ -70,7 +70,7 @@ Prints the usage message.
 .B \-s <path>, \-\-switch <path>
 Sets the active developer directory to the given path, for example
 \fB/Applications/Xcode\-beta.app\fP\&. This command must be run with superuser
-permissions (see \fIsudo(8)\fP), and will affect all users on the
+permissions (see \fBsudo(8)\fP), and will affect all users on the
 system. To set the path without superuser permissions or only for the current
 shell session, use the DEVELOPER_DIR environment variable instead (see
 \fI\%ENVIRONMENT\fP).
@@ -79,7 +79,7 @@ shell session, use the DEVELOPER_DIR environment variable instead (see
 .TP
 .B \-p, \-\-print\-path
 Prints the path to the currently selected developer directory. This is useful
-for inspection, but scripts and other tools should use \fIxcrun(1)\fP to
+for inspection, but scripts and other tools should use \fBxcrun(1)\fP to
 locate tool inside the active developer directory.
 .UNINDENT
 .INDENT 0.0
@@ -87,7 +87,7 @@ locate tool inside the active developer directory.
 .B \-r, \-\-reset
 Unsets any user\-specified developer directory, so that the developer directory
 will be found via the default search mechanism. This command must be run with
-superuser permissions (see \fIsudo(8)\fP), and will affect all users on
+superuser permissions (see \fBsudo(8)\fP), and will affect all users on
 the system.
 .UNINDENT
 .INDENT 0.0
@@ -164,7 +164,7 @@ Execute \fBxcodebuild\fP using an alternate developer directory.
 .INDENT 0.0
 .INDENT 3.5
 Used to find or run arbitrary commands from the active developer directory. See
-\fIxcrun(1)\fP for more information.
+\fBxcrun(1)\fP for more information.
 .UNINDENT
 .UNINDENT
 .sp
@@ -177,10 +177,14 @@ Used to find or run arbitrary commands from the active developer directory. See
 \fB/usr/bin/instruments\fP
 \fB/usr/bin/iprofiler\fP
 \fB/usr/bin/opendiff\fP
+\fB/usr/bin/pip3\fP
+\fB/usr/bin/python3\fP
 \fB/usr/bin/sdef\fP
 \fB/usr/bin/sdp\fP
 \fB/usr/bin/stapler\fP
 \fB/usr/bin/xcodebuild\fP
+\fB/usr/bin/xcscontrol\fP
+\fB/usr/bin/xcsdiagnose\fP
 \fB/usr/bin/xed\fP
 .INDENT 0.0
 .INDENT 3.5
@@ -222,7 +226,6 @@ Runs the matching Xcode tool from with the active developer directory.
 \fB/usr/bin/gatherheaderdoc\fP
 \fB/usr/bin/gcc\fP
 \fB/usr/bin/gcov\fP
-\fB/usr/bin/git\-cvsserver\fP
 \fB/usr/bin/git\-receive\-pack\fP
 \fB/usr/bin/git\-shell\fP
 \fB/usr/bin/git\-upload\-archive\fP
@@ -245,8 +248,6 @@ Runs the matching Xcode tool from with the active developer directory.
 \fB/usr/bin/make\fP
 \fB/usr/bin/mig\fP
 \fB/usr/bin/mkdep\fP
-\fB/usr/bin/nasm\fP
-\fB/usr/bin/ndisasm\fP
 \fB/usr/bin/nm\fP
 \fB/usr/bin/nmedit\fP
 \fB/usr/bin/objdump\fP
@@ -262,16 +263,12 @@ Runs the matching Xcode tool from with the active developer directory.
 \fB/usr/bin/strings\fP
 \fB/usr/bin/strip\fP
 \fB/usr/bin/svn\fP
-\fB/usr/bin/svnadmin\fP
-\fB/usr/bin/svndumpfilter\fP
 \fB/usr/bin/svnlook\fP
-\fB/usr/bin/svnserve\fP
-\fB/usr/bin/svnsync\fP
-\fB/usr/bin/svnversion\fP
 \fB/usr/bin/swift\fP
 \fB/usr/bin/swiftc\fP
 \fB/usr/bin/unifdef\fP
 \fB/usr/bin/unifdefall\fP
+\fB/usr/bin/vtool\fP
 \fB/usr/bin/xml2man\fP
 \fB/usr/bin/yacc\fP
 .INDENT 0.0
@@ -281,7 +278,7 @@ Runs the matching BSD tool from with the active developer directory.
 .UNINDENT
 .SH SEE ALSO
 .sp
-\fIxcrun(1)\fP, \fIxcodebuild(1)\fP
+\fBxcrun(1)\fP, \fBxcodebuild(1)\fP
 .SH HISTORY
 .sp
 The \fBxcode\-select\fP command first appeared in Xcode 3.0.

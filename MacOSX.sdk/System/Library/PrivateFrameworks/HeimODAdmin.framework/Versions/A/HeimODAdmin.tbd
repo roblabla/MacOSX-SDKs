@@ -1,9 +1,8 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: BA224EB7-8FE3-341D-B070-D911323D8071' ]
-platform:        macosx
-install-name:    /System/Library/PrivateFrameworks/HeimODAdmin.framework/Versions/A/HeimODAdmin
-objc-constraint: none
+uuids:           [ 'x86_64: 557886C8-E629-3366-B4E9-CFB6FA408053', 'x86_64: 557886C8-E629-3366-B4E9-CFB6FA408053' ]
+platform:        zippered
+install-name:    '/System/Library/PrivateFrameworks/HeimODAdmin.framework/Versions/A/HeimODAdmin'
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _HeimODAddAppleIDAlias, _HeimODAddCertificate, _HeimODAddCertificateSubjectAndTrustAnchor, 

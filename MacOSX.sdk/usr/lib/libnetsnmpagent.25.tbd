@@ -1,11 +1,10 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: E834872F-6191-39BD-860A-2AD2F2AF0B33' ]
+uuids:           [ 'x86_64: 2D5C2070-03D9-3304-A65A-DF21C461192E' ]
 platform:        macosx
-install-name:    /usr/lib/libnetsnmpagent.25.dylib
+install-name:    '/usr/lib/libnetsnmpagent.25.dylib'
 current-version: 26.2
 compatibility-version: 26
-objc-constraint: none
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ __init_default_iquery_session, __netsnmp_stash_cache_free, 
@@ -31,12 +30,12 @@ exports:
                        _agentx_remove_agentcaps, _agentx_send_ping, _agentx_synch_input, 
                        _agentx_synch_response, _agentx_unregister, _agentx_unregister_callbacks, 
                        _agentx_unregister_config_handler, _agentx_unregister_index, 
-                       _allocate_idx_list, _build_new_oid, _callback_master_num, 
+                       _allocate_idx_list, _append_snmp_oid, _build_new_oid, _callback_master_num, 
                        _callback_master_sess, _check_access, _check_acm, _check_delayed_request, 
                        _check_getnext_results, _clear_context, _clear_lookup_cache, 
                        _clear_nsap_list, _clear_subtree, _close_agentx_session, _cold_start_oid, 
                        _community_oid, _community_oid_len, _context_subtrees, _convert_v1pdu_to_v2, 
-                       _convert_v2pdu_to_v1, _count_indexes, _create_trap_session, 
+                       _convert_v2pdu_to_v1, _count_indexes, _crMessage, _create_trap_session, 
                        _dump_idx_registry, _dump_registry, _dump_sess_list, _enterprisetrap_len, 
                        _external_signal_handler, _external_signal_scheduled, _find_agentx_session, 
                        _free_agent_snmp_session, _free_set_vars, _getNextSessID, 

@@ -1,25 +1,16 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 54A830F4-3239-3E40-81F1-9BE844CB149E' ]
+uuids:           [ 'x86_64: 19E3D3AC-73E9-39EB-9C3D-44E1315F9488' ]
 platform:        macosx
-install-name:    /System/Library/Frameworks/AppleScriptKit.framework/Versions/A/AppleScriptKit
-current-version: 83
+install-name:    '/System/Library/Frameworks/AppleScriptKit.framework/Versions/A/AppleScriptKit'
+current-version: 87
 exports:         
   - archs:           [ x86_64 ]
-    symbols:         [ _ASKActiveProc, _ASKAppleScriptKitVersionNumber, _ASKAppleScriptKitVersionString, 
-                       _ASKErrorDomain, _ASKInitialize, _ASKMapTableWithWeakOrRetainedToStrongObjects, 
-                       _ASKMethodSwizzle, _ASKWindowClosedNotification, _ASKWindowOpenedNotification, 
-                       _ASKWindowShouldCloseNotification, _ASKWindowShouldZoomNotification, 
-                       _ASKWindowWillOpenNotification, _ASKWindowWillResizeNotification, 
-                       _ASKWindowZoomedNotification, _NSRightMouseDownNotification, 
-                       _NSRightMouseDraggedNotification, _NSRightMouseUpNotification, 
-                       _NSScrollWheelNotification, __ASKDocumentInitialize, __ASKImageViewInitialize, 
-                       __ASKTableViewInitialize, __ASKTextFieldInitialize, __ASKTextViewInitialize, 
-                       __ASKViewInitialize, __ASKWindowInitialize, __browserCellMap, 
-                       __browserMap, __documentDelegateMap, __documentEventMap, __dragDelegateMap, 
-                       __eventHandlerMap, __menuEventTargetMap, __objectIDMap, __objectNameMap, 
-                       __pasteboardMap, __responderMouseTrackerMap, __scriptControllerMap, 
-                       _createDataSourcesArray ]
+    symbols:         [ _ASKErrorDomain, _ASKInitialize, _ASKMapTableWithWeakOrRetainedToStrongObjects, 
+                       _ASKMethodSwizzle, _NSRightMouseDownNotification, _NSRightMouseDraggedNotification, 
+                       _NSRightMouseUpNotification, _NSScrollWheelNotification, __ASKDocumentInitialize, 
+                       __ASKImageViewInitialize, __ASKTableViewInitialize, __ASKTextFieldInitialize, 
+                       __ASKTextViewInitialize, __ASKViewInitialize, __ASKWindowInitialize ]
     objc-classes:    [ ASKActionEventHandler, ASKActiveProcSupport, ASKAlertEndedEventHandler, 
                        ASKAlertReply, ASKApplicationEventHandler, ASKApplicationEventHandlerDelegate, 
                        ASKApplicationIdleEventHandler, ASKApplicationOpenEventHandler, 
@@ -45,16 +36,15 @@ exports:
                        ASKNotificationEventHandlerImplementor, ASKOutlineViewEventHandler, 
                        ASKOutlineViewEventHandlerDataSource, ASKOutlineViewEventHandlerDelegate, 
                        ASKPanelEndedEventHandler, ASKPanelEventHandler, ASKPerformActionScriptCommand, 
-                       ASKPluginEventHandler, ASKPluginLoader, ASKPluginObject, ASKScript, 
-                       ASKScriptCache, ASKScriptCommand, ASKScriptConnection, ASKScriptController, 
-                       ASKScriptParser, ASKStartupController, ASKTabViewEventHandler, 
-                       ASKTabViewEventHandlerDelegate, ASKTableViewColumnDidMoveEventHandler, 
-                       ASKTableViewColumnDidResizeEventHandler, ASKTableViewEventHandler, 
-                       ASKTableViewEventHandlerDataSource, ASKTableViewEventHandlerDelegate, 
-                       ASKTargetActionEventHandlerImplementor, ASKTextEventHandler, 
-                       ASKTextEventHandlerDelegate, ASKToolbarDelegate, ASKTranslator, 
-                       ASKUpdateMenuItemEventHandler, ASKUtilities, ASKViewEventHandler, 
-                       ASKWindowEventHandler, ASKWindowEventHandlerDelegate ]
+                       ASKPluginEventHandler, ASKPluginObject, ASKScript, ASKScriptCache, 
+                       ASKScriptCommand, ASKScriptConnection, ASKScriptController, 
+                       ASKScriptParser, ASKTabViewEventHandler, ASKTabViewEventHandlerDelegate, 
+                       ASKTableViewColumnDidMoveEventHandler, ASKTableViewColumnDidResizeEventHandler, 
+                       ASKTableViewEventHandler, ASKTableViewEventHandlerDataSource, 
+                       ASKTableViewEventHandlerDelegate, ASKTargetActionEventHandlerImplementor, 
+                       ASKTextEventHandler, ASKTextEventHandlerDelegate, ASKToolbarDelegate, 
+                       ASKTranslator, ASKUpdateMenuItemEventHandler, ASKUtilities, 
+                       ASKViewEventHandler, ASKWindowEventHandler, ASKWindowEventHandlerDelegate ]
     objc-ivars:      [ ASKActiveProcSupport._activeProc, ASKActiveProcSupport._oldActiveProc, 
                        ASKAlertReply._buttonReturned, ASKApplicationIdleEventHandler._applicationFinishedLaunching, 
                        ASKApplicationIdleEventHandler._idleTimer, ASKApplicationOpenEventHandler._oldHandlerRefCon, 
@@ -100,7 +90,6 @@ exports:
                        ASKMouseTracker._view, ASKNibObjectInfo._ID, ASKNibObjectInfo._eventHandlerNames, 
                        ASKNibObjectInfo._name, ASKNibObjectInfo._scope, ASKNibObjectInfo._scriptName, 
                        ASKNibObjectInfoManager._bundleIdentifier, ASKNibObjectInfoManager._connectors, 
-                       ASKPluginLoader._pluginBundle, ASKPluginLoader._topLevelObjects, 
                        ASKScriptCache._hasLoadedAllScripts, ASKScriptCache._scriptPaths, 
                        ASKScriptCache._scripts, ASKScriptConnection._eventHandlers, 
                        ASKScriptConnection._responder, ASKScriptConnection._scriptController, 

@@ -1,9 +1,8 @@
 --- !tapi-tbd-v3
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 65E8F1F1-665A-381E-8932-D7CBA451991B' ]
+uuids:           [ 'x86_64: 33866700-25DC-374A-93B5-E7972FC050EA' ]
 platform:        macosx
-install-name:    /usr/lib/libcsfde.dylib
-objc-constraint: none
+install-name:    '/usr/lib/libcsfde.dylib'
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _CSFDEActivateRecoveryAgentAsNeeded, _CSFDEAddExternalKeyUserEntry, 

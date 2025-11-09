@@ -1,5 +1,5 @@
 /*	NSNetServices.h
-        Copyright (c) 2002-2018, Apple Inc. All rights reserved.
+        Copyright (c) 2002-2019, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -79,7 +79,7 @@ typedef NS_OPTIONS(NSUInteger, NSNetServiceOptions) {
 
 #pragma mark -
 
-__WATCHOS_PROHIBITED
+API_UNAVAILABLE(watchos)
 @interface NSNetService : NSObject {
 @private
     id _netService;
@@ -192,7 +192,7 @@ If publish: is called on an NSNetService instance initialized with this method, 
 
 #pragma mark -
 
-__WATCHOS_PROHIBITED
+API_UNAVAILABLE(watchos)
 @interface NSNetServiceBrowser : NSObject {
 @private
     id _netServiceBrowser;
@@ -235,7 +235,7 @@ __WATCHOS_PROHIBITED
 
 #pragma mark -
 
-__WATCHOS_PROHIBITED
+API_UNAVAILABLE(watchos)
 @protocol NSNetServiceDelegate <NSObject>
 @optional
 
@@ -288,7 +288,7 @@ __WATCHOS_PROHIBITED
 
 #pragma mark -
 
-__WATCHOS_PROHIBITED
+API_UNAVAILABLE(watchos)
 @protocol NSNetServiceBrowserDelegate <NSObject>
 @optional
 

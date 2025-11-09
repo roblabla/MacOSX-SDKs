@@ -1,7 +1,7 @@
 /*
         NSPDFInfo.h
         Application Kit
-        Copyright (c) 2013-2018, Apple Inc.
+        Copyright (c) 2013-2019, Apple Inc.
         All rights reserved.
 */
 
@@ -12,18 +12,12 @@
 #import <AppKit/NSPrintInfo.h>
 
 NS_ASSUME_NONNULL_BEGIN
+API_UNAVAILABLE_BEGIN(ios)
 
 @class NSURL;
 
-NS_CLASS_AVAILABLE_MAC(10_9)
-@interface NSPDFInfo : NSObject <NSCopying, NSCoding> {
-    NSURL *_URL APPKIT_IVAR;
-    NSArray *_tagNames APPKIT_IVAR;
-    NSPaperOrientation _orientation APPKIT_IVAR;
-    NSSize _paperSize APPKIT_IVAR;
-    NSMutableDictionary *_attributes APPKIT_IVAR;
-    BOOL _fileExtensionHidden APPKIT_IVAR;
-};
+API_AVAILABLE(macos(10.9))
+@interface NSPDFInfo : NSObject <NSCopying, NSCoding>
 
 @property (copy, nullable) NSURL *URL;
 @property (getter=isFileExtensionHidden) BOOL fileExtensionHidden;
@@ -34,4 +28,5 @@ NS_CLASS_AVAILABLE_MAC(10_9)
 
 @end
 
+API_UNAVAILABLE_END
 NS_ASSUME_NONNULL_END

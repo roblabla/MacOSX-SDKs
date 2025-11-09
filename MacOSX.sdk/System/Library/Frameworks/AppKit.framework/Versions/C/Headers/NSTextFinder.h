@@ -1,7 +1,7 @@
 /*
         NSTextFinder.h
         Application Kit
-        Copyright (c) 2003-2018, Apple Inc.
+        Copyright (c) 2003-2019, Apple Inc.
         All rights reserved.
 */
 
@@ -13,6 +13,7 @@
 #import <AppKit/AppKitDefines.h>
 
 NS_ASSUME_NONNULL_BEGIN
+API_UNAVAILABLE_BEGIN(ios)
 
 @class NSView, NSOperationQueue;
 @protocol NSTextFinderClient, NSTextFinderBarContainer;
@@ -31,38 +32,28 @@ typedef NS_ENUM(NSInteger, NSTextFinderAction) {
     NSTextFinderActionHideFindInterface = 11,
     NSTextFinderActionShowReplaceInterface = 12,
     NSTextFinderActionHideReplaceInterface = 13
-} NS_ENUM_AVAILABLE_MAC(10_7);
+} API_AVAILABLE(macos(10.7));
 
 
 /* Values for communicating NSTextFinder search options via pasteboard. Use the NSPasteboardTypeTextFinderOptions type.
 */
 typedef NSString * NSPasteboardTypeTextFinderOptionKey NS_TYPED_ENUM;
-APPKIT_EXTERN NSPasteboardTypeTextFinderOptionKey const NSTextFinderCaseInsensitiveKey NS_AVAILABLE_MAC(10_7);       // BOOL
-APPKIT_EXTERN NSPasteboardTypeTextFinderOptionKey const NSTextFinderMatchingTypeKey NS_AVAILABLE_MAC(10_7);          // NSNumber containing NSTextFinderMatchingType
+APPKIT_EXTERN NSPasteboardTypeTextFinderOptionKey const NSTextFinderCaseInsensitiveKey API_AVAILABLE(macos(10.7));       // BOOL
+APPKIT_EXTERN NSPasteboardTypeTextFinderOptionKey const NSTextFinderMatchingTypeKey API_AVAILABLE(macos(10.7));          // NSNumber containing NSTextFinderMatchingType
 
 typedef NS_ENUM(NSInteger, NSTextFinderMatchingType) {
     NSTextFinderMatchingTypeContains = 0,
     NSTextFinderMatchingTypeStartsWith = 1,
     NSTextFinderMatchingTypeFullWord = 2,
     NSTextFinderMatchingTypeEndsWith = 3
-} NS_ENUM_AVAILABLE_MAC(10_7);
+} API_AVAILABLE(macos(10.7));
 
 
-NS_CLASS_AVAILABLE(10_7, NA)
-@interface NSTextFinder : NSObject <NSCoding> {
-@private
-    id _client APPKIT_IVAR;
-    id _content APPKIT_IVAR;
-    id <NSTextFinderBarContainer> _container APPKIT_IVAR;
-    NSUInteger _style APPKIT_IVAR;
-    BOOL _incrementalEnabled APPKIT_IVAR;
-    BOOL _shouldDim APPKIT_IVAR;
-    
-    id _private __unused APPKIT_IVAR;
-}
+API_AVAILABLE(macos(10.7))
+@interface NSTextFinder : NSObject <NSCoding>
 
 - (instancetype)init NS_DESIGNATED_INITIALIZER;
-- (instancetype)initWithCoder:(NSCoder *)decoder NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithCoder:(NSCoder *)coder NS_DESIGNATED_INITIALIZER;
 
 /* A text finder must be associated with an object which implements the NSTextFinderClient protocol for it to function. The client is responsible for providing the string to be searched, the location for the find bar, and methods which control feedback to the user about the search results. */
 @property (nullable, assign) IBOutlet id <NSTextFinderClient> client;
@@ -128,7 +119,7 @@ NS_CLASS_AVAILABLE(10_7, NA)
 /*
  If the client cannot logically or efficiently flatten itself into a single string, then the following two methods should be used instead. These methods require the client to conceptually map its content to a single string, which is composed of a concatenation of all its substrings.
  
- The first method asks for the string that contains the given characer index, which the client should return. This client should also return, by reference, the "effective range" of that substring in the full conceptually concatenated string. Finally, the client should return whether the substring ends with a "search boundary", meaning that NSTextFinder should not attempt to find any matches that overlap this boundary.
+ The first method asks for the string that contains the given character index, which the client should return. This client should also return, by reference, the "effective range" of that substring in the full conceptually concatenated string. Finally, the client should return whether the substring ends with a "search boundary", meaning that NSTextFinder should not attempt to find any matches that overlap this boundary.
  
  The client should report the full length of the conceptually concatenated string in the second model -- the sum of the lengths of all of its substrings.
 */
@@ -188,4 +179,5 @@ NS_CLASS_AVAILABLE(10_7, NA)
 
 @end
 
+API_UNAVAILABLE_END
 NS_ASSUME_NONNULL_END

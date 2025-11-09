@@ -103,26 +103,12 @@ Globals:
   SwiftName: YCbYCr8f
 - Name: kCIFormatCbYCrY8f
   SwiftName: CbYCrY8f
-- Name: kCIFormat444f601
-  SwiftName: 444f601
-- Name: kCIFormat444f709
-  SwiftName: 444f709
-- Name: kCIFormat444v601
-  SwiftName: 444v601
-- Name: kCIFormat444v709
-  SwiftName: 444v709
-- Name: kCIFormat420f601
-  SwiftName: 420f601
-- Name: kCIFormat420f709
-  SwiftName: 420f709
-- Name: kCIFormat420v601
-  SwiftName: 420v601
-- Name: kCIFormat420v709
-  SwiftName: 420v709
 - Name: kCIFormatRGBA14
   SwiftName: RGBA14
 - Name: kCIFormatRGB10WideGamut
   SwiftName: RGB10WideGamut
+- Name: kCIFormatARGB10WideGamut
+  SwiftName: ARGB10WideGamut
 - Name: kCIFormatA2RGB10
   SwiftName: A2RGB10
 - Name: kCIFormatA2BGR10
@@ -147,6 +133,12 @@ Globals:
   SwiftName: auxiliaryDisparity
 - Name: kCIImageAuxiliaryPortraitEffectsMatte
   SwiftName: auxiliaryPortraitEffectsMatte
+- Name: kCIImageAuxiliarySemanticSegmentationSkinMatte
+  SwiftName: auxiliarySemanticSegmentationSkinMatte
+- Name: kCIImageAuxiliarySemanticSegmentationHairMatte
+  SwiftName: auxiliarySemanticSegmentationHairMatte
+- Name: kCIImageAuxiliarySemanticSegmentationTeethMatte
+  SwiftName: auxiliarySemanticSegmentationTeethMatte
 
 # CIImageOptions - Private
 - Name: kCIImageFlipped
@@ -205,6 +197,8 @@ Globals:
   SwiftName: useSoftwareRenderer
 - Name: kCIContextPriorityRequestLow
   SwiftName: priorityRequestLow
+- Name: kCIContextAllowLowPower
+  SwiftName: allowLowPower
 
 # CIContextOption - Private
 - Name: kCIContextDisableSoftwareFallback
@@ -225,8 +219,6 @@ Globals:
   SwiftName: enableBlending
 - Name: kCIContextUseMetalRenderer
   SwiftName: useMetalRenderer
-- Name: kCIContextAllowLowPower
-  SwiftName: allowLowPower
 - Name: kCIContextAllowClampToAlpha
   SwiftName: allowClampToAlpha
 - Name: kCIContextIntermediateMemoryTarget
@@ -343,10 +335,44 @@ Classes:
     PropertyKind: Class
     SwiftName: clear
 - Name: CIImage
+  Properties:
+  - Name: blackImage
+    PropertyKind: Class
+    SwiftName: black
+  - Name: whiteImage
+    PropertyKind: Class
+    SwiftName: white
+  - Name: grayImage
+    PropertyKind: Class
+    SwiftName: gray
+  - Name: redImage
+    PropertyKind: Class
+    SwiftName: red
+  - Name: greenImage
+    PropertyKind: Class
+    SwiftName: green
+  - Name: blueImage
+    PropertyKind: Class
+    SwiftName: blue
+  - Name: cyanImage
+    PropertyKind: Class
+    SwiftName: cyan
+  - Name: magentaImage
+    PropertyKind: Class
+    SwiftName: magenta
+  - Name: yellowImage
+    PropertyKind: Class
+    SwiftName: yellow
+  - Name: clearImage
+    PropertyKind: Class
+    SwiftName: clear
   Methods:
   - Selector: "imageByApplyingTransform:"
     MethodKind: Instance
     SwiftName: "transformed(by:)"    
+  - Selector: "imageByApplyingTransform:highQualityDownsample:"
+    MethodKind: Instance
+    SwiftName: "transformed(by:highQualityDownsample:)"    
   - Selector: "imageByApplyingOrientation:"
     MethodKind: Instance
     SwiftName: "oriented(forExifOrientation:)"
@@ -442,6 +468,9 @@ Classes:
   - Selector: "applyWithForeground:background:"
     MethodKind: Instance
     SwiftName: "apply(foreground:background:)"
+  - Selector: "applyWithForeground:background:colorSpace:"
+    MethodKind: Instance
+    SwiftName: "apply(foreground:background:colorSpace:)"
 - Name: CIFilter
   Methods:
   - Selector: "filterWithName:withInputParameters:" 
@@ -560,6 +589,9 @@ SwiftVersions:
     - Selector: "applyWithForeground:background:"
       MethodKind: Instance
       SwiftName: "apply(withForeground:background:)"
+    - Selector: "applyWithForeground:background:colorSpace:"
+      MethodKind: Instance
+      SwiftName: "apply(foreground:background:colorSpace:)"
 
 #---------------------------------- Swift 4 -----------------------------------#
 
@@ -681,26 +713,12 @@ SwiftVersions:
     SwiftName: kCIFormatYCbYCr8f
   - Name: kCIFormatCbYCrY8f
     SwiftName: kCIFormatCbYCrY8f
-  - Name: kCIFormat444f601
-    SwiftName: kCIFormat444f601
-  - Name: kCIFormat444f709
-    SwiftName: kCIFormat444f709
-  - Name: kCIFormat444v601
-    SwiftName: kCIFormat444v601
-  - Name: kCIFormat444v709
-    SwiftName: kCIFormat444v709
-  - Name: kCIFormat420f601
-    SwiftName: kCIFormat420f601
-  - Name: kCIFormat420f709
-    SwiftName: kCIFormat420f709
-  - Name: kCIFormat420v601
-    SwiftName: kCIFormat420v601
-  - Name: kCIFormat420v709
-    SwiftName: kCIFormat420v709
   - Name: kCIFormatRGBA14
     SwiftName: kCIFormatRGBA14
   - Name: kCIFormatRGB10WideGamut
     SwiftName: kCIFormatRGB10WideGamut
+  - Name: kCIFormatARGB10WideGamut
+    SwiftName: kCIFormatARGB10WideGamut
   - Name: kCIFormatA2RGB10
     SwiftName: kCIFormatA2RGB10
   - Name: kCIFormatA2BGR10

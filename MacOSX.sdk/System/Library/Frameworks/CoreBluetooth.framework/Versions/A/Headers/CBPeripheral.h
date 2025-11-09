@@ -94,11 +94,20 @@ CB_EXTERN_CLASS @interface CBPeripheral : CBPeer
 /*!
  *  @property canSendWriteWithoutResponse
  *
- *  @discussion YES if the remote device has space to send a write without response.  If this value is NO,
+ *  @discussion YES if the remote device has space to send a write without response. If this value is NO,
  *				the value will be set to YES after the current writes have been flushed, and
  *				<link>peripheralIsReadyToSendWriteWithoutResponse:</link> will be called.
  */
-@property(readonly) BOOL canSendWriteWithoutResponse;
+@property(readonly) BOOL canSendWriteWithoutResponse NS_AVAILABLE(10_13, 11_0);
+
+/*!
+ *  @property ancsAuthorized
+ *
+ *  @discussion YES if the remote device has been authorized to receive data over ANCS (Apple Notification Service Center) protocol.  If this value is NO,
+ *                the value will be set to YES after a user authorization occurs and
+ *                <link>didUpdateANCSAuthorizationForPeripheral:</link> will be called.
+ */
+@property(readonly) BOOL ancsAuthorized NS_AVAILABLE_IOS(13_0);
 
 /*!
  *  @method readRSSI

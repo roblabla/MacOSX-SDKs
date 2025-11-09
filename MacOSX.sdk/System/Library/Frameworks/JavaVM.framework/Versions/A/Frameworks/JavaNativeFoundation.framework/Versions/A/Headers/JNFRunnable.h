@@ -14,6 +14,6 @@
 @interface JNFRunnable : NSObject { }
 + (NSInvocation *) invocationWithRunnable:(jobject)runnable withEnv:(JNIEnv *)env;
 #if __BLOCKS__
-+ (void(^)()) blockWithRunnable:(jobject)runnable withEnv:(JNIEnv *)env;
++ (void(^)(void)) blockWithRunnable:(jobject)runnable withEnv:(JNIEnv *)env;
 #endif
 @end

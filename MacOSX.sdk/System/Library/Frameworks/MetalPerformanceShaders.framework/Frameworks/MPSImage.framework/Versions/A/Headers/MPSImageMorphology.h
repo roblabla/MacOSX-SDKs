@@ -18,7 +18,7 @@
  *              in the source image. If there are multiple channels in the source image, each channel is processed independently.
  *              The edgeMode property is assumed to always be MPSImageEdgeModeClamp for this filter.
  */
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(9.0), tvos(9.0))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(9.0), macCatalyst(13.0), tvos(9.0))
 @interface  MPSImageAreaMax : MPSUnaryImageKernel
 
 /*! @property kernelHeight
@@ -54,7 +54,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(9.0), tvos(9.0))
  */
 -(nullable instancetype) initWithCoder:(NSCoder * __nonnull)aDecoder
                                 device:(nonnull id <MTLDevice>) device NS_DESIGNATED_INITIALIZER
-                    MPS_AVAILABLE_STARTING(macos(10.13), ios(11.0), tvos(11.0));
+                    MPS_AVAILABLE_STARTING(macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0));
 
 /* You must use initWithDevice:kernelWidth:kernelHeight: instead. */
 -(nonnull instancetype) initWithDevice:(nonnull id<MTLDevice>)device        NS_UNAVAILABLE;
@@ -68,7 +68,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(9.0), tvos(9.0))
  *               It has the same methods as MPSImageAreaMax
  *               The edgeMode property is assumed to always be MPSImageEdgeModeClamp for this filter.
  */
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(9.0), tvos(9.0))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(9.0), macCatalyst(13.0), tvos(9.0))
 @interface  MPSImageAreaMin : MPSImageAreaMax
 
 @end  /* MPSImageAreaMin */
@@ -92,7 +92,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(9.0), tvos(9.0))
  *
  *              The edgeMode property is assumed to always be MPSImageEdgeModeClamp for this filter.
  */
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(9.0), tvos(9.0))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(9.0), macCatalyst(13.0), tvos(9.0))
 @interface  MPSImageDilate : MPSUnaryImageKernel
 /*! @property kernelHeight
  *  @abstract  The height of the filter window. Must be an odd number.
@@ -143,7 +143,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(9.0), tvos(9.0))
  */
 -(nullable instancetype) initWithCoder:(NSCoder * __nonnull)aDecoder
                                 device:(nonnull id <MTLDevice>) device NS_DESIGNATED_INITIALIZER
-                        MPS_AVAILABLE_STARTING(macos(10.13), ios(11.0), tvos(11.0));
+                        MPS_AVAILABLE_STARTING(macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0));
 
 
 @end  /* MPSImageDilate */
@@ -170,7 +170,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(9.0), tvos(9.0))
  *              This allows MPSImageDilate and MPSImageErode to use the same filter, making open and close operators easier to write.
  *              The edgeMode property is assumed to always be MPSImageEdgeModeClamp for this filter.
  */
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(9.0), tvos(9.0))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(9.0), macCatalyst(13.0), tvos(9.0))
 @interface  MPSImageErode : MPSImageDilate
 @end
 

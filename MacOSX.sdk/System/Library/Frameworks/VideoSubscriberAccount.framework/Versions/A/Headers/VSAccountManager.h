@@ -21,6 +21,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @protocol VSAccountManagerDelegate;
 
+// The URL string used to deep link to the system TV Provider settings.
+VS_EXTERN NSString * const VSOpenTVProviderSettingsURLString API_AVAILABLE(ios(13.0), tvos(13.0)) API_UNAVAILABLE(macos, macCatalyst);
+
 /// Represents the current state of the application's access to the user's subscription information.
 typedef NS_ENUM(NSInteger, VSAccountAccessStatus)
 {
@@ -29,18 +32,18 @@ typedef NS_ENUM(NSInteger, VSAccountAccessStatus)
     VSAccountAccessStatusDenied = 2, // The user has explicitly decided to not allow the app to access subscription information.
     VSAccountAccessStatusGranted = 3, // The user has currently decided to allow the app to access subscription information.
 }
-API_AVAILABLE(ios(10.0), tvos(10.0));
+API_AVAILABLE(ios(10.0), tvos(10.0)) API_UNAVAILABLE(macCatalyst);
 
 /// Options that may be provided when checking access status.
 typedef NSString * VSCheckAccessOption NS_STRING_ENUM
-API_AVAILABLE(ios(10.0), tvos(10.0));
+API_AVAILABLE(ios(10.0), tvos(10.0)) API_UNAVAILABLE(macCatalyst);
 
 /// A boolean indicating whether the user may be prompted to grant access.
 VS_EXTERN VSCheckAccessOption const VSCheckAccessOptionPrompt
-API_AVAILABLE(ios(10.0), tvos(10.0));
+API_AVAILABLE(ios(10.0), tvos(10.0)) API_UNAVAILABLE(macCatalyst);
 
 /// A VSAccountManager instance coordinates access to a subscriber's account.
-VS_EXPORT API_AVAILABLE(ios(10.0), tvos(10.0))
+VS_EXPORT API_AVAILABLE(ios(10.0), tvos(10.0)) API_UNAVAILABLE(macCatalyst)
 @interface VSAccountManager : NSObject
 
 /// An object that can help the account manager by presenting and dismissing view controllers when needed, and deciding whether to allow authentication with the selected provider.
@@ -52,7 +55,7 @@ VS_EXPORT API_AVAILABLE(ios(10.0), tvos(10.0))
 /// @param completionHandler A block to be called when the request finishes.  It will always be called exactly once.  It may be called before the method call returns.  It may be called on any queue.
 /// @param accessStatus The current state the application's access to the user's subscription information.
 /// @param error If the user did not grant access to the app, this will contain an error describing the result of the operation.
-- (void)checkAccessStatusWithOptions:(NSDictionary<VSCheckAccessOption, id> *)options completionHandler:(void (^)(VSAccountAccessStatus accessStatus, NSError * _Nullable error))completionHandler  API_UNAVAILABLE(macos);
+- (void)checkAccessStatusWithOptions:(NSDictionary<VSCheckAccessOption, id> *)options completionHandler:(void (^)(VSAccountAccessStatus accessStatus, NSError * _Nullable error))completionHandler  API_UNAVAILABLE(macos, macCatalyst);
 
 /// Begins requesting information about the subscriber's account.
 /// @param request This identifies what specific information the app wants to know.
@@ -60,13 +63,13 @@ VS_EXPORT API_AVAILABLE(ios(10.0), tvos(10.0))
 /// @param metadata If the request finished successfully, this will contain information about the subscriber's account.
 /// @param error If the request did not finish successfully, this will contain an error describing the result of the operation.
 /// @returns A result object that may be used to cancel the in-flight request.  Cancellation is advisory, and does not guarantee that the request will finish immediately.
-- (VSAccountManagerResult *)enqueueAccountMetadataRequest:(VSAccountMetadataRequest *)request completionHandler:(void (^)(VSAccountMetadata * _Nullable metadata, NSError * _Nullable error))completionHandler  API_UNAVAILABLE(macos);
+- (VSAccountManagerResult *)enqueueAccountMetadataRequest:(VSAccountMetadataRequest *)request completionHandler:(void (^)(VSAccountMetadata * _Nullable metadata, NSError * _Nullable error))completionHandler  API_UNAVAILABLE(macos, macCatalyst);
 
 @end
 
 
 /// A VSAccountManager instance coordinates access to a subscriber's account.
-API_AVAILABLE(ios(10.0), tvos(10.0))
+API_AVAILABLE(ios(10.0), tvos(10.0)) API_UNAVAILABLE(macCatalyst)
 @protocol VSAccountManagerDelegate <NSObject>
 
 @required

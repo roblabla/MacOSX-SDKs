@@ -34,7 +34,7 @@
 #include <IOKit/graphics/IOFramebufferShared.h>
 
 
-#define IOFRAMEBUFFER_REV           6
+#define IOFRAMEBUFFER_REV           7
 
 
 class IOFramebuffer;
@@ -131,6 +131,12 @@ enum {
     kIOFBNotifyWillChangeSpeed  = 9,
     kIOFBNotifyDidChangeSpeed   = 10,
 
+    kIOFBNotifyHDACodecWillPowerOn  = 11,   // since IOGRAPHICSTYPES_REV 68
+    kIOFBNotifyHDACodecDidPowerOn   = 12,   // since IOGRAPHICSTYPES_REV 68
+
+    kIOFBNotifyHDACodecWillPowerOff = 13,   // since IOGRAPHICSTYPES_REV 68
+    kIOFBNotifyHDACodecDidPowerOff  = 14,   // since IOGRAPHICSTYPES_REV 68
+
     kIOFBNotifyClamshellChange  = 20,
 
     kIOFBNotifyCaptureChange    = 30,
@@ -192,8 +198,10 @@ enum {
     kIOFBNotifyEvent_Notify                 = (1ULL << 10), // kIOFBNotifyWillNotify & kIOFBNotifyDidNotify
     kIOFBNotifyEvent_WSAADefer              = (1ULL << 11),
     kIOFBNotifyEvent_Terminated             = (1ULL << 12),
+    kIOFBNotifyEvent_HDACodecPowerOnOff     = (1ULL << 13), // since IOFRAMEBUFFER_REV 7
 
-    kIOFBNotifyEvent_All                    = 0x1FFF
+    kIOFBNotifyEvent_Last                   = (1ULL << 14),
+    kIOFBNotifyEvent_All                    = (kIOFBNotifyEvent_Last - 1)
 };
 
 enum {
@@ -249,6 +257,17 @@ enum {
 #define kIOFBDependentIDKey     "IOFBDependentID"
 #define kIOFBDependentIndexKey  "IOFBDependentIndex"
 
+#ifndef _OPEN_SOURCE_
+// GTrace V2 support for AGDC markers
+#define HAS_AGDCGTRACETOKEN 1
+extern void agdcGTraceToken(
+        const IOFramebuffer* fb, const uint16_t line, const bool useController,
+        const uint16_t fnID, const uint8_t fnType,
+        const uint16_t tag1, const uint64_t arg1,
+        const uint16_t tag2, const uint64_t arg2,
+        const uint16_t tag3, const uint64_t arg3);
+#endif // !_OPEN_SOURCE_
+
 struct StdFBShmem_t;
 class IOFramebufferUserClient;
 class IODisplay;
@@ -269,8 +288,14 @@ class IOFramebuffer : public IOGraphicsDevice
     friend class IOFramebufferDiagnosticUserClient;
     friend class IOFramebufferParameterHandler;
     friend class IODisplay;
+#ifndef _OPEN_SOURCE_
+    friend void agdcGTraceToken(
+            const IOFramebuffer*, const uint16_t, const bool, const uint16_t,
+            const uint8_t, const uint16_t, const uint64_t, const uint16_t,
+            const uint64_t, const uint16_t, const uint64_t);
+#endif // !_OPEN_SOURCE_
 
-    OSDeclareDefaultStructors(IOFramebuffer)
+    OSDeclareDefaultStructors(IOFramebuffer);
 
 protected:
 /*! @struct ExpansionData
@@ -435,6 +460,7 @@ private:
 
 
 public:
+    // IOKit overrides
     static void initialize();
 
     virtual bool attach( IOService * provider ) APPLE_KEXT_OVERRIDE;
@@ -446,6 +472,9 @@ public:
     virtual bool didTerminate( IOService * provider, IOOptionBits options, bool * defer ) APPLE_KEXT_OVERRIDE;
     virtual void free() APPLE_KEXT_OVERRIDE;
     virtual IOWorkLoop * getWorkLoop() const APPLE_KEXT_OVERRIDE;
+#ifndef _OPEN_SOURCE_
+    virtual IOReturn setProperties(OSObject* properties) APPLE_KEXT_OVERRIDE;
+#endif
 
     IOWorkLoop * getGraphicsSystemWorkLoop() const;
     IOWorkLoop * getControllerWorkLoop() const;

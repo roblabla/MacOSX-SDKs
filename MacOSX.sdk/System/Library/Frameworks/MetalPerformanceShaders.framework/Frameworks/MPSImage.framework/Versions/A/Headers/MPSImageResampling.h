@@ -26,7 +26,7 @@
  *                    Lanczos
  *
  */
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0))
 @interface  MPSImageScale : MPSUnaryImageKernel
 
 /*
@@ -36,8 +36,8 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
 
 /*! @property   scaleTransform
  *  @abstract   An optional transform that describes how to scale and translate the source image
- *  @discussion If the scaleTransform is NULL, then the MPSImageLanczosScale filter will
- *              rescale the image so that the source image fits exactly into the destination
+ *  @discussion If the scaleTransform is NULL, then any image scaling factor such as MPSImageLanczosScale
+ *              will rescale the image so that the source image fits exactly into the destination
  *              texture.  If the transform is not NULL, then the transform is used for determining
  *              how to map the source image to the destination. Default: NULL
  *
@@ -80,7 +80,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
  *              One would typically use non-zero translations to do tiling, or provide a resized
  *              view into a internal segment of an image.
  *
- *              Changing the Lanczos scale factor may trigger recalculation of signficant state internal
+ *              NOTE:  Changing the Lanczos scale factor may trigger recalculation of signficant state internal
  *              to the object when the filter is encoded to the command buffer. The scale factor is
  *              scaleTransform->scaleX,Y, or the ratio of source and destination image sizes if
  *              scaleTransform is NULL. Reuse a MPSImageLanczosScale object for frequently used scalings
@@ -101,7 +101,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
  */
 -(nullable instancetype) initWithCoder:(NSCoder * __nonnull)aDecoder
                                 device:(nonnull id <MTLDevice>) device NS_DESIGNATED_INITIALIZER
-MPS_AVAILABLE_STARTING(macos(10.13), ios(11.0), tvos(11.0));
+MPS_AVAILABLE_STARTING(macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0));
 
 @end
 
@@ -119,7 +119,7 @@ MPS_AVAILABLE_STARTING(macos(10.13), ios(11.0), tvos(11.0));
  *              Because the resampling function has negative lobes, Lanczos can result 
  *              in ringing near sharp edges, making it less suitable for vector art.
  */
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(9.0), tvos(9.0))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(9.0), macCatalyst(13.0), tvos(9.0))
 @interface  MPSImageLanczosScale : MPSImageScale
 
 -(nonnull instancetype) initWithDevice: (nonnull id<MTLDevice>)device NS_DESIGNATED_INITIALIZER;
@@ -136,7 +136,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(9.0), tvos(9.0))
  */
 -(nullable instancetype) initWithCoder:(NSCoder * __nonnull)aDecoder
                                 device:(nonnull id <MTLDevice>) device NS_DESIGNATED_INITIALIZER
-                    MPS_AVAILABLE_STARTING(macos(10.13), ios(11.0), tvos(11.0));
+                    MPS_AVAILABLE_STARTING(macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0));
 
 @end
 
@@ -147,7 +147,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(9.0), tvos(9.0))
  *  @discussion The MPSImageBilinearScale filter can be used to resample an existing image
  *              using a bilinear filter. This is typically used to reduce the size of an image.
  */
-MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
+MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0))
 @interface  MPSImageBilinearScale : MPSImageScale
 
 -(nonnull instancetype) initWithDevice: (nonnull id<MTLDevice>)device NS_DESIGNATED_INITIALIZER;
@@ -164,7 +164,7 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.13), ios(11.0), tvos(11.0))
  */
 -(nullable instancetype) initWithCoder:(NSCoder * __nonnull)aDecoder
                                 device:(nonnull id <MTLDevice>) device NS_DESIGNATED_INITIALIZER
-MPS_AVAILABLE_STARTING(macos(10.13), ios(11.0), tvos(11.0));
+MPS_AVAILABLE_STARTING(macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0));
 
 @end
 
