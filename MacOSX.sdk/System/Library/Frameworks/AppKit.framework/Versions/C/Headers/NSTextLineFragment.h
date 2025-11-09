@@ -6,7 +6,7 @@
 //  NSTextLineFragment.h
 //  Text Kit
 //
-//  Copyright (c) 2017-2023, Apple Inc. All rights reserved.
+//  Copyright (c) 2017-2024, Apple Inc. All rights reserved.
 //
 
 #import <Foundation/NSArray.h>
@@ -17,7 +17,7 @@ NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 #pragma mark NSTextLineFragment
 // NSTextLineFragment represents a single textual layout and rendering unit inside NSTextLayoutFragment.
-API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos)
+API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), visionos(1.0)) API_UNAVAILABLE(watchos)
 @interface NSTextLineFragment : NSObject <NSSecureCoding>
 #pragma mark Initialization
 - (instancetype)initWithAttributedString:(NSAttributedString *)attributedString range:(NSRange)range NS_DESIGNATED_INITIALIZER;
@@ -42,7 +42,7 @@ API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos)
 // Rendering origin for the left most glyph in the line fragment coordinate system
 @property (readonly) CGPoint glyphOrigin;
 
-// Renders the line fragment contents at the rendering origin. The origin can be specified as (NSMinX(typographicBounds) + glyphOrigin.x, NSMinY(typographicBounds) + glyphOrigin.y) relative to the line fragment group coordinate system
+// Renders the line fragment contents at the rendering origin. The origin can be specified as (CGRectGetMinX(typographicBounds), CGRectGetMinY(typographicBounds)) relative to the parent layout fragment coordinate system.
 - (void)drawAtPoint:(CGPoint)point inContext:(CGContextRef)context;
 
 #pragma mark Character and point mappings

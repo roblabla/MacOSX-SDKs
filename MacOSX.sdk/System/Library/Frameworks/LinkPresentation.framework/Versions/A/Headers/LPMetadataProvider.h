@@ -48,7 +48,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// For more information about handling errors, see
 /// ``LinkPresentation/LPError``.
-LP_EXTERN API_AVAILABLE(macos(10.15), ios(13.0), watchos(9.0)) API_UNAVAILABLE(tvos)
+LP_EXTERN API_AVAILABLE(macos(10.15), ios(13.0), watchos(9.0), tvos(18.0))
 @interface LPMetadataProvider : NSObject
 
 /// Fetches metadata for the given URL.

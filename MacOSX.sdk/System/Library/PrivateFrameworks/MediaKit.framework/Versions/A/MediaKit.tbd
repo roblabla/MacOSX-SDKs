@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/MediaKit.framework/Versions/A/MediaKit'
-current-version: 936
+current-version: 938
 compatibility-version: 302
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

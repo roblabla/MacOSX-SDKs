@@ -1,6 +1,6 @@
 /* -*- Mode: C; tab-width: 4 -*-
  *
- * Copyright (c) 2003-2023 Apple Inc. All rights reserved.
+ * Copyright (c) 2003-2024 Apple Inc. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -66,7 +66,7 @@
  */
 
 #ifndef _DNS_SD_H
-#define _DNS_SD_H 2200120024
+#define _DNS_SD_H 2559001001
 
 /* DNS-SD API version strings are of the form x[.y[.z]].
  * Version strings less than or equal to 1661 are encoded as (x * 10000) + (y * 100) + z, where 0 ≤ y,z ≤ 99.
@@ -786,8 +786,8 @@ enum
     kDNSServiceErr_Timeout                   = -65568,
     kDNSServiceErr_DefunctConnection         = -65569,  /* Connection to daemon returned a SO_ISDEFUNCT error result */
     kDNSServiceErr_PolicyDenied              = -65570,
-    kDNSServiceErr_NotPermitted              = -65571
-
+    kDNSServiceErr_NotPermitted              = -65571,
+    kDNSServiceErr_StaleData                 = -65572
 
                                                /* mDNS Error codes are in the range
                                                 * FFFE FF00 (-65792) to FFFE FFFF (-65537) */
@@ -967,10 +967,11 @@ enum
  */
 
 #define kDNSServiceInterfaceIndexAny 0
-#define kDNSServiceInterfaceIndexLocalOnly ((uint32_t)-1)
-#define kDNSServiceInterfaceIndexUnicast   ((uint32_t)-2)
-#define kDNSServiceInterfaceIndexP2P       ((uint32_t)-3)
-#define kDNSServiceInterfaceIndexBLE       ((uint32_t)-4)
+#define kDNSServiceInterfaceIndexLocalOnly ((uint32_t)0xffffffffU)
+#define kDNSServiceInterfaceIndexUnicast   ((uint32_t)0xfffffffeU)
+#define kDNSServiceInterfaceIndexP2P       ((uint32_t)0xfffffffdU)
+#define kDNSServiceInterfaceIndexBLE       ((uint32_t)0xfffffffcU)
+#define kDNSServiceInterfaceIndexInfra     ((uint32_t)0xfffffffbU) // Reserved, not used by DNSService API
 
 typedef uint32_t DNSServiceFlags;
 typedef uint32_t DNSServiceProtocol;
@@ -3184,6 +3185,7 @@ DNSServiceErrorType DNSSD_API DNSServiceAttributeSetAAAAPolicy
 /*!
  *  @brief
  *                  Set the timestamp value in attr.
+ *                  The host key hash must also be set in attr.
  *
  *  @param attr
  *                  DNSServiceAttribute pointer.
@@ -3202,6 +3204,29 @@ DNSServiceErrorType DNSSD_API DNSServiceAttributeSetTimestamp
 (
     DNSServiceAttributeRef DNS_SD_NONNULL attr,
     uint32_t timestamp
+);
+
+/*!
+ *  @brief
+ *                  Set the host key hash value in attr.
+ *                  The timestamp attribute must also be set in attr.
+ *
+ *  @param attr
+ *                  DNSServiceAttribute pointer.
+ *  @param hostkeyhash
+ *                  A 32-bit host key hash value.
+ *  @result
+ *                  Returns kDNSServiceErr_NoError on success.
+ */
+#ifndef __OPEN_SOURCE__
+DNS_SD_API_AVAILABLE(macos(15.0), ios(18.0), tvos(18.0), watchos(11.0))
+#else
+DNSSD_EXPORT
+#endif
+DNSServiceErrorType DNSSD_API DNSServiceAttributeSetHostKeyHash
+(
+    DNSServiceAttributeRef DNS_SD_NONNULL attr,
+    uint32_t hostkeyhash
 );
 
 /*!

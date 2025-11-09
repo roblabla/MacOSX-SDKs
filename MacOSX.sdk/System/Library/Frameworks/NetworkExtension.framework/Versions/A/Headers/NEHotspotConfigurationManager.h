@@ -1,5 +1,5 @@
 /*
- * Copyright © 2017-2020 Apple Inc.
+ * Copyright © 2017-2020, 2024 Apple Inc.
  * All rights reserved.
  */
 
@@ -10,7 +10,7 @@
  *   The NEHotspotConfigurationManager interface allows an application to
  *   configure Wi-Fi networks.
  *   An application can use NEHotspotConfiguration API to configure
- *   Open, WEP, WPA/WPA2 Personal, WPA/WPA2 Enterprise and Hotspot 2.0 Wi-Fi networks.
+ *   open, WEP, WPA/WPA2 Personal, WPA/WPA2 Enterprise and Hotspot 2.0 Wi-Fi networks.
  *
  *   An application that needs access to the NEHotspotConfiguration API must have
  *   the “com.apple.developer.networking.HotspotConfiguration” entitlement.
@@ -29,6 +29,8 @@ NS_ASSUME_NONNULL_BEGIN
 #else
 #define NEHSCFG_EXPORT extern
 #endif
+
+@class ASAccessory;
 
 /*!
  * @typedef NEHotspotConfigurationEAPType
@@ -283,7 +285,7 @@ API_AVAILABLE(ios(11.0), watchos(7.0)) API_UNAVAILABLE(macos, tvos)
  *   A designated initializer to instantiate a new NEHotspotConfiguration object.
  *   This initializer is used to configure open Wi-Fi Networks.
  *
- * @param SSID The SSID of the Open Wi-Fi Network.
+ * @param SSID The SSID of the open Wi-Fi Network.
  *   Length of SSID must be between 1 and 32 characters.
  */
 - (instancetype)initWithSSID:(NSString *)SSID API_AVAILABLE(ios(11.0), watchos(7.0)) API_UNAVAILABLE(macos, tvos);
@@ -334,7 +336,7 @@ API_AVAILABLE(ios(11.0), watchos(7.0)) API_UNAVAILABLE(macos, tvos)
  *   A designated initializer to instantiate a new NEHotspotConfiguration object.
  *   This initializer is used to configure open Wi-Fi Networks.
  *
- * @param SSIDPrefix The prefix string of SSID of the Open Wi-Fi Network.
+ * @param SSIDPrefix The prefix string of SSID of the open Wi-Fi Network.
  *   Length of SSIDPrefix must be between 3 and 32 characters.
  */
 - (instancetype)initWithSSIDPrefix:(NSString *)SSIDPrefix API_AVAILABLE(ios(13.0), watchos(7.0)) API_UNAVAILABLE(macos, tvos);
@@ -380,6 +382,8 @@ NEHSCFG_EXPORT NSString * const NEHotspotConfigurationErrorDomain API_AVAILABLE(
  * @const NEHotspotConfigurationErrorAlreadyAssociated Wi-Fi is already associated.
  * @const NEHotspotConfigurationErrorApplicationIsNotInForeground The application is not in the foreground.
  * @const NEHotspotConfigurationErrorInvalidSSIDPrefix The given SSID Prefix string is invalid.
+ * @const NEHotspotConfigurationErrorUserUnauthorized The accessory is unauthorized by the user.
+ * @const NEHotspotConfigurationErrorSystemDenied System denied configuration of accessory network.
  */
 typedef NS_ENUM(NSInteger, NEHotspotConfigurationError) {
 	NEHotspotConfigurationErrorInvalid 				= 0,
@@ -397,7 +401,9 @@ typedef NS_ENUM(NSInteger, NEHotspotConfigurationError) {
 	NEHotspotConfigurationErrorJoinOnceNotSupported 		= 12,
 	NEHotspotConfigurationErrorAlreadyAssociated 			= 13,
 	NEHotspotConfigurationErrorApplicationIsNotInForeground 	= 14,
-	NEHotspotConfigurationErrorInvalidSSIDPrefix 				= 15
+	NEHotspotConfigurationErrorInvalidSSIDPrefix 				= 15,
+	NEHotspotConfigurationErrorUserUnauthorized 				= 16,
+	NEHotspotConfigurationErrorSystemDenied 				= 17
 } API_AVAILABLE(ios(11.0), watchos(7.0)) API_UNAVAILABLE(macos, tvos);
 
 /*!
@@ -416,7 +422,7 @@ API_AVAILABLE(ios(11.0), watchos(7.0)) API_UNAVAILABLE(macos, tvos)
  * @discussion This function adds or updates a Wi-Fi network configuration.
  * @param configuration NEHotspotConfiguration object containing the Wi-Fi network configuration.
  * @param completionHandler A block that will be called when add/update operation is completed.
- *   This could be nil if application does not intend to receive the result.
+ *   Pass nil if application does not intend to receive the result.
  *   The NSError passed to this block will be nil if the configuration is successfully stored, non-nil otherwise.
  *   If the configuration is found invalid or API encounters some other error then completionHandler is called
  *   with instance of NSError containing appropriate error code. This API attempts to join the Wi-Fi network
@@ -442,13 +448,45 @@ API_AVAILABLE(ios(11.0), watchos(7.0)) API_UNAVAILABLE(macos, tvos)
  */
 - (void)removeConfigurationForHS20DomainName:(NSString *)domainName API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos, watchos, tvos);
 
-
 /*!
  * @method getConfiguredSSIDsWithCompletionHandler:
  * @discussion This function returns array of SSIDs and HS2.0 Domain Names that the calling application has configured.
  *   It returns nil if there are no networks configurred by the calling application.
  */
 - (void)getConfiguredSSIDsWithCompletionHandler:(void (^)(NSArray<NSString *> *))completionHandler API_AVAILABLE(ios(11.0), watchos(7.0)) API_UNAVAILABLE(macos, tvos);
+
+/*!
+ * @method joinAccessoryHotspot:
+ * @discussion This function performs a one-time join of a Wi-Fi network configuration defined by an ASAccessory.
+ *   This function implicitly sets joinOnce to YES. The network must support WPA/WPA2/WPA3 Personal security type.
+ * @param accessory Object of type ASAccessory class.
+ *   This parameter is required to specify the Accessory Wi-Fi network.
+ * @param passphrase The required passphrase credential.
+ *   The passphrase with a length between 8 and 63 characters to join WPA/WPA2/WPA3 Personal networks.
+ * @param completionHandler A block that will be called when join operation is completed.
+ *   Pass nil if application does not intend to receive the result.
+ *   The NSError passed to this block will be nil if the hotspot is successfully joined, non-nil otherwise.
+ *   If the configuration is found to be invalid or some other error is encountered then the completionHandler
+ *   block is executed with with an instance of NSError containing an appropriate error code.
+ */
+- (void)joinAccessoryHotspot:(nonnull ASAccessory *)accessory
+				passphrase:(nonnull NSString *)passphrase
+				completionHandler:(void (^ __nullable)(NSError * __nullable error))completionHandler API_AVAILABLE(ios(18.0)) API_UNAVAILABLE(macos, watchos, tvos);
+
+/*!
+ * @method joinAccessoryHotspotWithoutSecurity:
+ * @discussion This function performs a one-time join of an open Wi-Fi network configuration defined by an ASAccessory.
+ *   This function implicitly sets joinOnce to YES.
+ * @param accessory Object of type ASAccessory class.
+ *   This parameter is required to specify the Accessory Wi-Fi network.
+ * @param completionHandler A block that will be called when join operation is completed.
+ *   Pass nil if application does not intend to receive the result.
+ *   The NSError passed to this block will be nil if the hotspot is successfully joined, non-nil otherwise.
+ *   If the configuration is found to be invalid or some other error is encountered then the completionHandler
+ *   block is executed with with an instance of NSError containing an appropriate error code.
+ */
+- (void)joinAccessoryHotspotWithoutSecurity:(nonnull ASAccessory *)accessory
+				completionHandler:(void (^ __nullable)(NSError * __nullable error))completionHandler API_AVAILABLE(ios(18.0)) API_UNAVAILABLE(macos, watchos, tvos);
 
 @end
 

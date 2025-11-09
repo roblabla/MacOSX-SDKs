@@ -5,7 +5,6 @@
 //  Copyright © 2019-2023 Apple Inc. All rights reserved.
 //
 
-
 #import <Cocoa/Cocoa.h>
 #import <Virtualization/VZDefines.h>
 
@@ -36,13 +35,13 @@ VZ_EXPORT API_AVAILABLE(macos(12.0))
 /*!
  @abstract Automatically reconfigures the graphics display associated with this view with respect to view changes. Defaults to NO.
  @discussion
-   Automatically resize or reconfigure this graphics display when the view properties update.
-   For example, resizing the display when the view has a live resize operation. When enabled,
-   the graphics display will automatically be reconfigured to match the host display environment.
+    Automatically resize or reconfigure this graphics display when the view properties update.
+    For example, resizing the display when the view has a live resize operation. When enabled,
+    the graphics display will automatically be reconfigured to match the host display environment.
 
-   This property can only be set on a single VZVirtualMachineView targeting a particular VZGraphicsDisplay
-   at a time. If multiple VZVirtualMachineViews targeting the same VZGraphicsDisplay enable this property,
-   only one view will respect the property, and the other view will have had the property disabled.
+    This property can only be set on a single VZVirtualMachineView targeting a particular VZGraphicsDisplay
+    at a time. If multiple VZVirtualMachineViews targeting the same VZGraphicsDisplay enable this property,
+    only one view will respect the property, and the other view will have had the property disabled.
  */
 @property BOOL automaticallyReconfiguresDisplay API_AVAILABLE(macos(14.0));
 

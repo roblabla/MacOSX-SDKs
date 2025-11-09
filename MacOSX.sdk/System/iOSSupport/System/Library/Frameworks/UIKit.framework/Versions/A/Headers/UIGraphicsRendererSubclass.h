@@ -10,7 +10,7 @@
 
 NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
-typedef void (^UIGraphicsDrawingActions)(__kindof UIGraphicsRendererContext *rendererContext) API_AVAILABLE(ios(10.0));
+typedef void (^UIGraphicsDrawingActions)(__kindof UIGraphicsRendererContext *rendererContext) API_AVAILABLE(ios(10.0)) API_UNAVAILABLE(watchos);
 
 /*
  To create a subclass of UIGraphicsRenderer, you must include this header in your implementation and override at least the following methods:

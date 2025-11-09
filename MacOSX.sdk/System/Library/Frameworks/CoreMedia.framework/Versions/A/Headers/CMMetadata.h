@@ -3,7 +3,7 @@
 	
 	Framework:  CoreMedia
  
-    Copyright © 2013-2015 Apple Inc. All rights reserved.
+    Copyright © 2013-2023 Apple Inc. All rights reserved.
  
 */
 
@@ -74,7 +74,7 @@ enum
 	kCMMetadataIdentifierError_BadKeySpace					= -16306,
 	kCMMetadataIdentifierError_BadIdentifier				= -16307,
 	kCMMetadataIdentifierError_NoKeyValueAvailable			= -16308,
-} API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0));
+} API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
 	@enum CMMetadata DataType Registry Errors
@@ -99,7 +99,7 @@ enum
 	kCMMetadataDataTypeRegistryError_DataTypeAlreadyRegistered		= -16313,
 	kCMMetadataDataTypeRegistryError_RequiresConformingBaseType		= -16314,
 	kCMMetadataDataTypeRegistryError_MultipleConformingBaseTypes	= -16315,
-} API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0));
+} API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 
 /*!
@@ -125,19 +125,19 @@ enum
 CM_ASSUME_NONNULL_BEGIN
 
 CM_EXPORT const CFStringRef kCMMetadataKeySpace_QuickTimeUserData
-								API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0));
+								API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0), visionos(1.0));
 CM_EXPORT const CFStringRef kCMMetadataKeySpace_ISOUserData
-								API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0));
+								API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0), visionos(1.0));
 CM_EXPORT const CFStringRef kCMMetadataKeySpace_QuickTimeMetadata
-								API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0));
+								API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0), visionos(1.0));
 CM_EXPORT const CFStringRef kCMMetadataKeySpace_iTunes
-								API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0));
+								API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0), visionos(1.0));
 CM_EXPORT const CFStringRef kCMMetadataKeySpace_ID3
-								API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0));
+								API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0), visionos(1.0));
 CM_EXPORT const CFStringRef kCMMetadataKeySpace_Icy
-								API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0));
+								API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0), visionos(1.0));
 CM_EXPORT const CFStringRef kCMMetadataKeySpace_HLSDateRange
-								API_AVAILABLE(macos(10.11.3), ios(9.3), tvos(9.3), watchos(6.0));
+								API_AVAILABLE(macos(10.11.3), ios(9.3), tvos(9.3), watchos(6.0), visionos(1.0));
 
 /*!
 	@const kCMMetadataIdentifier_QuickTimeMetadataLocation_ISO6709
@@ -146,9 +146,9 @@ CM_EXPORT const CFStringRef kCMMetadataKeySpace_HLSDateRange
 		Direction the observer is facing.
 */
 CM_EXPORT const CFStringRef kCMMetadataIdentifier_QuickTimeMetadataLocation_ISO6709
-								API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0));
+								API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0), visionos(1.0));
 CM_EXPORT const CFStringRef kCMMetadataIdentifier_QuickTimeMetadataDirection_Facing
-								API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0));
+								API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
 	@const kCMMetadataIdentifier_QuickTimeMetadataPreferredAffineTransform
@@ -159,7 +159,7 @@ CM_EXPORT const CFStringRef kCMMetadataIdentifier_QuickTimeMetadataDirection_Fac
 		will allow a player to adjust its rendering at the time the rotation occurred.
 */
 CM_EXPORT const CFStringRef kCMMetadataIdentifier_QuickTimeMetadataPreferredAffineTransform
-								API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0));
+								API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
 	@const kCMMetadataIdentifier_QuickTimeMetadataVideoOrientation
@@ -167,7 +167,7 @@ CM_EXPORT const CFStringRef kCMMetadataIdentifier_QuickTimeMetadataPreferredAffi
 		(see <ImageIO/CGImageProperties.h>).
 */
 CM_EXPORT const CFStringRef kCMMetadataIdentifier_QuickTimeMetadataVideoOrientation
-								API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(6.0));
+								API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(6.0), visionos(1.0));
 	
 /*!
 	@const kCMMetadataIdentifier_QuickTimeMetadataLivePhotoStillImageTransform
@@ -175,7 +175,7 @@ CM_EXPORT const CFStringRef kCMMetadataIdentifier_QuickTimeMetadataVideoOrientat
 		Expected data type is kCMMetadataBaseDataType_PerspectiveTransformF64.
 */
 CM_EXPORT const CFStringRef kCMMetadataIdentifier_QuickTimeMetadataLivePhotoStillImageTransform
-								API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0), watchos(6.0));
+								API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0), watchos(6.0), visionos(1.0));
 
 /*!
 	@const kCMMetadataIdentifier_QuickTimeMetadataLivePhotoStillImageTransformReferenceDimensions
@@ -183,8 +183,23 @@ CM_EXPORT const CFStringRef kCMMetadataIdentifier_QuickTimeMetadataLivePhotoStil
 		Expected data type is kCMMetadataBaseDataType_DimensionsF32.
 */
 CM_EXPORT const CFStringRef kCMMetadataIdentifier_QuickTimeMetadataLivePhotoStillImageTransformReferenceDimensions
-								API_AVAILABLE(macos(10.15.1), ios(13.2), tvos(13.2), watchos(6.1));
+								API_AVAILABLE(macos(10.15.1), ios(13.2), tvos(13.2), watchos(6.1), visionos(1.0));
 
+/*!
+	@const kCMMetadataIdentifier_QuickTimeMetadataSegmentIdentifier
+		A segment identifier, used to support movies where pause/resume has been used.
+		Expected data type is kCMMetadataDataType_QuickTimeMetadataUUID.
+*/
+CM_EXPORT const CFStringRef kCMMetadataIdentifier_QuickTimeMetadataSegmentIdentifier
+								API_AVAILABLE(macos(15.0), ios(18.0), tvos(18.0), watchos(11.0), visionos(2.0));
+
+/*!
+	@const kCMMetadataIdentifier_QuickTimeMetadataSceneIlluminance
+		Scene illuminance measured in units of Lux.
+		Expected data type is kCMMetadataDataType_QuickTimeMetadataMilliLux.
+*/
+CM_EXPORT const CFStringRef kCMMetadataIdentifier_QuickTimeMetadataSceneIlluminance
+								API_AVAILABLE(macos(15.0), ios(18.0), tvos(18.0), watchos(11.0), visionos(2.0));
 	
 CM_ASSUME_NONNULL_END
 
@@ -252,7 +267,7 @@ OSStatus CMMetadataCreateIdentifierForKeyAndKeySpace(
 																ASCII characters. */
 	CM_RETURNS_RETAINED_PARAMETER CFStringRef CM_NULLABLE * CM_NONNULL identifierOut)		/*! @param identifierOut
 																The created identifier. */
-							API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0));
+							API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
 	@function	CMMetadataCreateKeyFromIdentifier
@@ -276,7 +291,7 @@ OSStatus CMMetadataCreateKeyFromIdentifier(
 										Identifier being inspected. */
 	CM_RETURNS_RETAINED_PARAMETER CFTypeRef CM_NULLABLE * CM_NONNULL keyOut)				/*! @param keyOut
 										The key data that was used create the identifier. */
-							API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0));
+							API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
 	@function	CMMetadataCreateKeyFromIdentifierAsCFData
@@ -291,7 +306,7 @@ OSStatus CMMetadataCreateKeyFromIdentifierAsCFData(
 													Identifier being inspected. */
 	CM_RETURNS_RETAINED_PARAMETER CFDataRef CM_NULLABLE * CM_NONNULL keyOut)	/*! @param keyOut
 													The key data that was used create the identifier, as a CFData. */
-							API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0));
+							API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
 	@function	CMMetadataCreateKeySpaceFromIdentifier
@@ -305,7 +320,7 @@ OSStatus CMMetadataCreateKeySpaceFromIdentifier(
 															Identifier being inspected. */
 	CM_RETURNS_RETAINED_PARAMETER CFStringRef CM_NULLABLE * CM_NONNULL keySpaceOut)	/*! @param keySpaceOut
 															The key space that was used to create the identifier. */
-							API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0));
+							API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0), visionos(1.0));
 	
 CF_IMPLICIT_BRIDGING_ENABLED
 
@@ -370,55 +385,55 @@ CF_IMPLICIT_BRIDGING_ENABLED
 CM_ASSUME_NONNULL_BEGIN
 
 CM_EXPORT const CFStringRef kCMMetadataBaseDataType_RawData
-								API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0));
+								API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0), visionos(1.0));
 CM_EXPORT const CFStringRef kCMMetadataBaseDataType_UTF8
-								API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0));
+								API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0), visionos(1.0));
 CM_EXPORT const CFStringRef kCMMetadataBaseDataType_UTF16
-								API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0));
+								API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0), visionos(1.0));
 CM_EXPORT const CFStringRef kCMMetadataBaseDataType_GIF
-								API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0));
+								API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0), visionos(1.0));
 CM_EXPORT const CFStringRef kCMMetadataBaseDataType_JPEG
-								API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0));
+								API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0), visionos(1.0));
 CM_EXPORT const CFStringRef kCMMetadataBaseDataType_PNG
-								API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0));
+								API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0), visionos(1.0));
 CM_EXPORT const CFStringRef kCMMetadataBaseDataType_BMP
-								API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0));
+								API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0), visionos(1.0));
 CM_EXPORT const CFStringRef kCMMetadataBaseDataType_Float32
-								API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0));
+								API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0), visionos(1.0));
 CM_EXPORT const CFStringRef kCMMetadataBaseDataType_Float64
-								API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0));
+								API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0), visionos(1.0));
 CM_EXPORT const CFStringRef kCMMetadataBaseDataType_SInt8
-								API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0));
+								API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0), visionos(1.0));
 CM_EXPORT const CFStringRef kCMMetadataBaseDataType_SInt16
-								API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0));
+								API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0), visionos(1.0));
 CM_EXPORT const CFStringRef kCMMetadataBaseDataType_SInt32
-								API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0));
+								API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0), visionos(1.0));
 CM_EXPORT const CFStringRef kCMMetadataBaseDataType_SInt64
-								API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0));
+								API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0), visionos(1.0));
 CM_EXPORT const CFStringRef kCMMetadataBaseDataType_UInt8
-								API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0));
+								API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0), visionos(1.0));
 CM_EXPORT const CFStringRef kCMMetadataBaseDataType_UInt16
-								API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0));
+								API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0), visionos(1.0));
 CM_EXPORT const CFStringRef kCMMetadataBaseDataType_UInt32
-								API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0));
+								API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0), visionos(1.0));
 CM_EXPORT const CFStringRef kCMMetadataBaseDataType_UInt64
-								API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0));
+								API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0), visionos(1.0));
 CM_EXPORT const CFStringRef kCMMetadataBaseDataType_PointF32
-								API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0));
+								API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0), visionos(1.0));
 CM_EXPORT const CFStringRef kCMMetadataBaseDataType_DimensionsF32
-								API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0));
+								API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0), visionos(1.0));
 CM_EXPORT const CFStringRef kCMMetadataBaseDataType_RectF32
-								API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0));
+								API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0), visionos(1.0));
 CM_EXPORT const CFStringRef kCMMetadataBaseDataType_AffineTransformF64
-								API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0));
+								API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0), visionos(1.0));
 CM_EXPORT const CFStringRef kCMMetadataBaseDataType_PolygonF32
-								API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(6.0));
+								API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(6.0), visionos(1.0));
 CM_EXPORT const CFStringRef kCMMetadataBaseDataType_PolylineF32
-								API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(6.0));
+								API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(6.0), visionos(1.0));
 CM_EXPORT const CFStringRef kCMMetadataBaseDataType_JSON
-								API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(6.0));
+								API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(6.0), visionos(1.0));
 CM_EXPORT const CFStringRef kCMMetadataBaseDataType_PerspectiveTransformF64
-								API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0), watchos(6.0));
+								API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0), watchos(6.0), visionos(1.0));
 
 /*!
 	@const kCMMetadataDataType_Location_ISO6709
@@ -429,9 +444,25 @@ CM_EXPORT const CFStringRef kCMMetadataBaseDataType_PerspectiveTransformF64
 		kCMMetadataBaseDataType_UTF8.
 */
 CM_EXPORT const CFStringRef kCMMetadataDataType_QuickTimeMetadataLocation_ISO6709
-								API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0));
+								API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0), visionos(1.0));
 CM_EXPORT const CFStringRef kCMMetadataDataType_QuickTimeMetadataDirection
-								API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0));
+								API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0), visionos(1.0));
+
+/*!
+	@const kCMMetadataDataType_QuickTimeMetadataUUID
+		A string supplying a universally unique identifier.  Conforms to
+		kCMMetadataBaseDataType_UTF8.
+*/
+CM_EXPORT const CFStringRef kCMMetadataDataType_QuickTimeMetadataUUID
+								API_AVAILABLE(macos(15.0), ios(18.0), tvos(18.0), watchos(11.0), visionos(2.0));
+
+/*!
+	@const kCMMetadataDataType_QuickTimeMetadataMilliLux
+		1/1000 of a Lux.  An unsigned value between 0 - 100,000,000.  Conforms to
+		kCMMetadataBaseDataType_UInt32.
+*/
+CM_EXPORT const CFStringRef kCMMetadataDataType_QuickTimeMetadataMilliLux
+								API_AVAILABLE(macos(15.0), ios(18.0), tvos(18.0), watchos(11.0), visionos(2.0));
 
 CM_ASSUME_NONNULL_END
 
@@ -458,7 +489,7 @@ OSStatus CMMetadataDataTypeRegistryRegisterDataType(
 																(for aiding debugging operations) */
 	CFArrayRef CM_NONNULL conformingDataTypes)				/*! @param conformingDataTypes
 																Data types that this data type conforms to. */
-							API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0));
+							API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
 	@function	CMMetadataDataTypeRegistryDataTypeIsRegistered
@@ -468,7 +499,7 @@ CM_EXPORT
 Boolean CMMetadataDataTypeRegistryDataTypeIsRegistered(
 	CFStringRef CM_NONNULL dataType)						/*! @param dataType
 																Identifier of data type being checked. */
-							API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0));
+							API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
 	@function	CMMetadataDataTypeRegistryGetDataTypeDescription
@@ -478,7 +509,7 @@ CM_EXPORT
 CFStringRef CM_NONNULL CMMetadataDataTypeRegistryGetDataTypeDescription(
 	CFStringRef CM_NONNULL dataType)						/*! @param dataType
 																Identifier of data type being interrogated. */
-							API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0));
+							API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
 	@function	CMMetadataDataTypeRegistryGetConformingDataTypes
@@ -491,7 +522,7 @@ CM_EXPORT
 CFArrayRef CM_NONNULL CMMetadataDataTypeRegistryGetConformingDataTypes(
 	CFStringRef CM_NONNULL dataType)						/*! @param dataType
 																Identifier of data type being interrogated. */
-							API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0));
+							API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
 	@function	CMMetadataDataTypeRegistryDataTypeConformsToDataType
@@ -512,7 +543,7 @@ Boolean CMMetadataDataTypeRegistryDataTypeConformsToDataType(
 	CFStringRef CM_NONNULL conformsToDataType)				/*! @param conformsToDataType
 																Identifier of data type being checked as as
 																conforming data type. */
-							API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0));
+							API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
 	@function	CMMetadataDataTypeRegistryGetBaseDataTypes
@@ -523,7 +554,7 @@ Boolean CMMetadataDataTypeRegistryDataTypeConformsToDataType(
 */
 CM_EXPORT
 CFArrayRef CM_NULLABLE CMMetadataDataTypeRegistryGetBaseDataTypes(void)
-							API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0));
+							API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
 	@function	CMMetadataDataTypeRegistryDataTypeIsBaseDataType
@@ -536,7 +567,7 @@ CM_EXPORT
 Boolean CMMetadataDataTypeRegistryDataTypeIsBaseDataType(
 	CFStringRef CM_NONNULL dataType)						/*! @param dataType
 																Identifier of data type being checked. */
-							API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0));
+							API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
 	@function	CMMetadataDataTypeRegistryGetBaseDataTypeForConformingDataType
@@ -550,7 +581,7 @@ CM_EXPORT
 CFStringRef CM_NONNULL CMMetadataDataTypeRegistryGetBaseDataTypeForConformingDataType(
 	CFStringRef CM_NONNULL dataType)								/*! @param dataType
 																		Identifier of data type being interrogated. */
-							API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0));
+							API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0), visionos(1.0));
 	
 CF_IMPLICIT_BRIDGING_DISABLED
 

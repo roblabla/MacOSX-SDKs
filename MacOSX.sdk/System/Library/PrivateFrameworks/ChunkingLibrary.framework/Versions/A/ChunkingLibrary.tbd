@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/ChunkingLibrary.framework/Versions/A/ChunkingLibrary'
-current-version: 2150.13.1
+current-version: 2200.114.1
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -47,6 +47,7 @@ exports:
                        _CKFileDigestArgumentsFileKey, _CKFileDigestArgumentsFileScheme, 
                        _CKFileDigestArgumentsFileSchemeByte, _CKFileDigestArgumentsGetClass, 
                        _CKFileDigestArgumentsV1WithFileCreate, _CKFileDigestArgumentsV1WithPackageCreate, 
+                       _CKFileDigestArgumentsV2ForPackageWithBoundaryKeyCreate, _CKFileDigestArgumentsV2ForPackageWithVerificationKeyCreate, 
                        _CKFileDigestArgumentsV2WithBoundaryKeyCreate, _CKFileDigestArgumentsV2WithFileKeyCreate, 
                        _CKFileDigestResultsCreate, _CKFileDigestResultsEqual, _CKFileDigestResultsFileLength, 
                        _CKFileDigestResultsFileSignature, _CKFileDigestResultsFileVerificationKey, 

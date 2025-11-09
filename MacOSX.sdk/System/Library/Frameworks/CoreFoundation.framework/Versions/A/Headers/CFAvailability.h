@@ -180,19 +180,11 @@ CF_ENUM(CFIndex) {
 #define _CF_TYPED_EXTENSIBLE_ENUM
 #endif
 
-#if DEPLOYMENT_RUNTIME_SWIFT
-#define CF_STRING_ENUM
-#define CF_EXTENSIBLE_STRING_ENUM
-
-#define CF_TYPED_ENUM
-#define CF_TYPED_EXTENSIBLE_ENUM
-#else
 #define CF_STRING_ENUM _CF_TYPED_ENUM
 #define CF_EXTENSIBLE_STRING_ENUM _CF_TYPED_EXTENSIBLE_ENUM
 
 #define CF_TYPED_ENUM _CF_TYPED_ENUM
 #define CF_TYPED_EXTENSIBLE_ENUM _CF_TYPED_EXTENSIBLE_ENUM
-#endif
 
 #define __CF_ERROR_ENUM_GET_MACRO(_1, _2, NAME, ...) NAME
 #if ((__cplusplus && __cplusplus >= 201103L && (__has_extension(cxx_strong_enums) || __has_feature(objc_fixed_enum))) || (!__cplusplus && __has_feature(objc_fixed_enum))) && __has_attribute(ns_error_domain)

@@ -14,27 +14,25 @@
 #warning "Metal version 2.3 is required for surface shaders"
 #endif
 
-#if RK_BUILD_TIME_LINKING
-
-// Temporary flags during experimentation or development on older OS'es. In this
-// mode, the shader is linked at compile-time.
-#define RK_API extern
-#define RK_INLINE inline __attribute__((__always_inline__))
-
-#else
-
-#if __HAVE_VISIBLE_FUNCTIONS__
 #define RK_API [[visible]]
-#else
-#define RK_API
-#endif
 
 #define RK_INLINE inline __attribute__((__always_inline__))
 
-#endif
+#ifndef RK_INTERNAL_STRIP_OUT_AVAILABILITY
 
+#define RK_AVAILABILITY_IOS_18 __attribute__((availability(ios, introduced=18.0, strict)))
+#define RK_AVAILABILITY_MACOS_15  __attribute__((availability(macos, introduced=15.0, strict)))
+
+#else
+
+#define RK_AVAILABILITY_IOS_18
+#define RK_AVAILABILITY_MACOS_15
+
+#endif
 namespace realitykit
 {
+
+struct hover_state_t;
 
 namespace geometry_modifier
 {

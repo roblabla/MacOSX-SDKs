@@ -22,9 +22,9 @@ typedef NS_ENUM(NSInteger, CPInformationTemplateLayout) {
      A layout that will split each item into two columns.
      */
     CPInformationTemplateLayoutTwoColumn,
-} API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(macos, watchos, tvos);
+} API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(macos, watchos);
 
-API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(macos, watchos, tvos)
+API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(macos, watchos)
 @interface CPInformationTemplate : CPTemplate <CPBarButtonProviding>
 
 /**

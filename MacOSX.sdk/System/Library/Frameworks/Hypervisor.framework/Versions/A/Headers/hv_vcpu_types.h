@@ -2,7 +2,7 @@
 //  hv_vcpu_types.h
 //  Hypervisor
 //
-//  Copyright © 2018-2023 Apple Inc. All rights reserved.
+//  Copyright © 2018-2024 Apple Inc. All rights reserved.
 //
 
 #pragma once
@@ -19,10 +19,7 @@ OS_ASSUME_NONNULL_BEGIN
 __BEGIN_DECLS
 
 /*!
-* @typedef hv_vcpu_config_t
-*
-* @abstract
-* Configuration for hv_vcpu_create().
+ @abstract Configuration for hv_vcpu_create().
 */
 #if OS_OBJECT_USE_OBJC
 OS_OBJECT_DECL(hv_vcpu_config);
@@ -31,53 +28,48 @@ typedef struct hv_vcpu_config_s *hv_vcpu_config_t;
 #endif // OS_OBJECT_USE_OBJC
 
 /*!
- * @typedef    hv_vcpu_t
- * @abstract   Type of a vcpu instance ID
+ @abstract Type of a vcpu instance ID
  */
 typedef uint64_t hv_vcpu_t;
 
 /*!
- * @enum     hv_exit_reason_t
- * @abstract Events that can trigger a guest exit to the VMM
+ @abstract Events that can trigger a guest exit to the VMM
  */
 OS_ENUM(hv_exit_reason, uint32_t,
     /*! asynchronous exit requested explicitly by hv_vcpus_exit() call */
     HV_EXIT_REASON_CANCELED,
-    /*! synchronous exception to EL2 triggered by the guest */
+    /*! synchronous exception to a higher EL triggered by the guest */
     HV_EXIT_REASON_EXCEPTION,
     /*!
-     * ARM Generic VTimer became pending since the last hv_vcpu_run() call
-     * returned. The caller is expected to make the interrupt corresponding to
-     * the VTimer pending in the guest's interrupt controller.
-     *
-     * This exit automatically sets the VTimer mask.
-     * The VCPU will not exit with this status again until after the mask is cleared
-     * with hv_vcpu_set_vtimer_mask(), which should be called during a trap of
-     * the EOI for the guest's VTimer interrupt handler.
+     ARM Generic VTimer became pending since the last hv_vcpu_run() call
+     returned. The caller is expected to make the interrupt corresponding to
+     the VTimer pending in the guest's interrupt controller.
+
+     This exit automatically sets the VTimer mask.
+     The VCPU will not exit with this status again until after the mask is cleared
+     with hv_vcpu_set_vtimer_mask(), which should be called during a trap of
+     the EOI for the guest's VTimer interrupt handler.
      */
     HV_EXIT_REASON_VTIMER_ACTIVATED,
     /*!
-     * Unable to determine exit reason: this should not happen under normal
-     * operation.
+     Unable to determine exit reason: this should not happen under normal
+     operation.
      */
     HV_EXIT_REASON_UNKNOWN
 );
 
 /*!
- * @typedef    hv_exception_syndrome_t
- * @abstract   Type of a vcpu exception syndrome (Corresponds to ESR_EL2).
+ @abstract Type of a vcpu exception syndrome (Corresponds to ESR_ELx).
  */
 typedef uint64_t hv_exception_syndrome_t;
 
 /*!
- * @typedef    hv_exception_address_t
- * @abstract   Type of a vcpu exception virtual address. (Corresponds to FAR_EL2).
+ @abstract Type of a vcpu exception virtual address. (Corresponds to FAR_ELx).
  */
 typedef uint64_t hv_exception_address_t;
 
 /*!
- * @typedef    hv_vcpu_exit_exception_t
- * @abstract   Contains details of a vcpu exception.
+ @abstract Contains details of a vcpu exception.
  */
 typedef struct {
     hv_exception_syndrome_t syndrome;
@@ -86,8 +78,7 @@ typedef struct {
 } hv_vcpu_exit_exception_t;
 
 /*!
- * @typedef    hv_vcpu_exit_t
- * @abstract   Contains information about an exit from the vcpu to the host.
+ @abstract Contains information about an exit from the vcpu to the host.
  */
 typedef struct {
     hv_exit_reason_t reason;
@@ -95,17 +86,15 @@ typedef struct {
 } hv_vcpu_exit_t;
 
 /*!
- * @typedef    hv_simd_fp_uchar16_t
- * @abstract   Value of an ARM SIMD&FP register.
+ @abstract Value of an ARM SIMD&FP register.
  */
 typedef __attribute__((ext_vector_type(16))) uint8_t hv_simd_fp_uchar16_t;
 
 /*!
- @enum       hv_reg_t
- @abstract   Type of an ARM register.
+ @abstract Type of an ARM register.
  @discussion
-             Represents the X0-X30 GPRs, the Program Counter (PC), the Floating-point Control
-             and Status registers (FPCR and FPSR), and the Current Program Status Register (CPSR).
+    Represents the X0-X30 GPRs, the Program Counter (PC), the Floating-point Control
+    and Status registers (FPCR and FPSR), and the Current Program Status Register (CPSR).
  */
 OS_ENUM(hv_reg, uint32_t,
     HV_REG_X0,
@@ -148,8 +137,7 @@ OS_ENUM(hv_reg, uint32_t,
 );
 
 /*!
- @enum        hv_simd_fp_reg_t
- @abstract    Type of an ARM SIMD&FP register.
+ @abstract Type of an ARM SIMD&FP register.
  */
 OS_ENUM(hv_simd_fp_reg, uint32_t,
     HV_SIMD_FP_REG_Q0,
@@ -186,9 +174,9 @@ OS_ENUM(hv_simd_fp_reg, uint32_t,
     HV_SIMD_FP_REG_Q31,
 );
 
+
 /*!
- @enum        hv_sys_reg_t
- @abstract    Type of an ARM system register.
+ @abstract Type of an ARM system register.
 */
 OS_ENUM(hv_sys_reg, uint16_t,
     HV_SYS_REG_DBGBVR0_EL1 = 0x8004,
@@ -269,6 +257,15 @@ OS_ENUM(hv_sys_reg, uint16_t,
     HV_SYS_REG_ID_AA64MMFR1_EL1 = 0xc039,
     HV_SYS_REG_ID_AA64MMFR2_EL1 = 0xc03a,
     HV_SYS_REG_SCTLR_EL1 = 0xc080,
+
+    /*!
+     @abstract The ACTLR_EL1 register
+     @discussion
+        This only allows getting / setting of the ACTLR_EL1.EnTSO bit (index 1). Setting this bit to 1
+        will cause the vcpu to use a TSO memory model, whereas clearing it will cause the vcpu to use
+        the default ARM64 memory model (weakly ordered loads / stores).
+    */
+    HV_SYS_REG_ACTLR_EL1 API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, tvos) = 0xc081,
     HV_SYS_REG_CPACR_EL1 = 0xc082,
     HV_SYS_REG_TTBR0_EL1 = 0xc100,
     HV_SYS_REG_TTBR1_EL1 = 0xc101,
@@ -303,13 +300,46 @@ OS_ENUM(hv_sys_reg, uint16_t,
     HV_SYS_REG_CNTV_CTL_EL0 = 0xdf19,
     HV_SYS_REG_CNTV_CVAL_EL0 = 0xdf1a,
     HV_SYS_REG_SP_EL1 = 0xe208,
+
+    // Physical timer registers.
+    // These registers are only available if the VM was created with a GIC device (hv_gic_create).
+    HV_SYS_REG_CNTP_CTL_EL0 API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, tvos) = 0xdf11,
+    HV_SYS_REG_CNTP_CVAL_EL0 API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, tvos) = 0xdf12,
+    HV_SYS_REG_CNTP_TVAL_EL0 API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, tvos) = 0xdf10,
+
+    // Exception Level 2 (EL2) registers.
+    // These registers are only available if EL2 was enabled in the VM configuration.
+    HV_SYS_REG_CNTHCTL_EL2 API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, tvos) = 0xe708,
+    HV_SYS_REG_CNTHP_CTL_EL2 API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, tvos) = 0xe711,
+    HV_SYS_REG_CNTHP_CVAL_EL2 API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, tvos) = 0xe712,
+    HV_SYS_REG_CNTHP_TVAL_EL2 API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, tvos) = 0xe710,
+    HV_SYS_REG_CNTVOFF_EL2 API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, tvos) = 0xe703,
+    HV_SYS_REG_CPTR_EL2 API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, tvos) = 0xe08a,
+    HV_SYS_REG_ELR_EL2 API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, tvos) = 0xe201,
+    HV_SYS_REG_ESR_EL2 API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, tvos) = 0xe290,
+    HV_SYS_REG_FAR_EL2 API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, tvos) = 0xe300,
+    HV_SYS_REG_HCR_EL2 API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, tvos) = 0xe088,
+    HV_SYS_REG_HPFAR_EL2 API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, tvos) = 0xe304,
+    HV_SYS_REG_MAIR_EL2 API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, tvos) = 0xe510,
+    HV_SYS_REG_MDCR_EL2 API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, tvos) = 0xe019,
+    HV_SYS_REG_SCTLR_EL2 API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, tvos) = 0xe080,
+    HV_SYS_REG_SPSR_EL2 API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, tvos) = 0xe200,
+    HV_SYS_REG_SP_EL2 API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, tvos) = 0xf208,
+    HV_SYS_REG_TCR_EL2 API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, tvos) = 0xe102,
+    HV_SYS_REG_TPIDR_EL2 API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, tvos) = 0xe682,
+    HV_SYS_REG_TTBR0_EL2 API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, tvos) = 0xe100,
+    HV_SYS_REG_TTBR1_EL2 API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, tvos) = 0xe101,
+    HV_SYS_REG_VBAR_EL2 API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, tvos) = 0xe600,
+    HV_SYS_REG_VMPIDR_EL2 API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, tvos) = 0xe005,
+    HV_SYS_REG_VPIDR_EL2 API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, tvos) = 0xe000,
+    HV_SYS_REG_VTCR_EL2 API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, tvos) = 0xe10a,
+    HV_SYS_REG_VTTBR_EL2 API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, tvos) = 0xe108,
 );
 
 /*!
- @enum        hv_interrupt_type_t
- @abstract    Injected interrupt type.
- @discussion  Passed to hv_vcpu_get_interrupt_level and hv_vcpu_set_interrupt_level to get
-              and set virtual interrupt levels.
+ @abstract Injected interrupt type.
+ @discussion Passed to hv_vcpu_get_interrupt_level and hv_vcpu_set_interrupt_level to get
+    and set virtual interrupt levels.
 */
 OS_ENUM(hv_interrupt_type, uint32_t,
     /*! Corresponds to an ARM IRQ .*/
@@ -320,8 +350,7 @@ OS_ENUM(hv_interrupt_type, uint32_t,
 );
 
 /*!
- @enum        hv_cache_type_t
- @abstract    Cache type.
+ @abstract Cache type.
 */
 OS_ENUM(hv_cache_type, uint32_t,
     /*! Data or unified cache */

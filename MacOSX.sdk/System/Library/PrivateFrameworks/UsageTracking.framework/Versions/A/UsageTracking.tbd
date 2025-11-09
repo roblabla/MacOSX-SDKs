@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/UsageTracking.framework/Versions/A/UsageTracking'
-current-version: 346
+current-version: 376.1
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -19,7 +19,7 @@ allowable-clients:
                        ScreenTimeUI, ScreenTimeUICoreTestApp, ScreenTimeUICoreUIUnitTests, 
                        ScreenTimeUITests, ScreenTimeUnitTests, ScreenTimeWebExtension, 
                        ScreenTimeWidgetExtensionFunctionalTests, UsageTrackingAgent, 
-                       UsageTrackingFunctionalTests, dmd, iCloudSubscriptionOptimizerCore, 
+                       UsageTrackingFunctionalTests, contextstored, dmd, iCloudSubscriptionOptimizerCore, 
                        iCloudSubscriptionOptimizerDaemon, momentsd, remotemanagementd, 
                        smart-health, usagetool ]
 exports:
@@ -27,10 +27,11 @@ exports:
                        arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _USBundleIdentifierQuickLookUIServiceEmbedded, _USBundleIdentifierQuickLookUIServiceMacOS, 
                        _USBundleIdentifierSafariEmbedded, _USBundleIdentifierSafariViewService, 
-                       _USDeviceActivityMonitorExtensionTimeoutInSeconds, _USDeviceActivityMonitorExtensionTimeoutLeewayInSeconds, 
-                       _USDidCancelDeviceActivityMonitorExtensionRequest, _USDuetClientNameUsageTracking, 
-                       _USErrorDomain, _USMachServiceNameUsageTracking, _USMachServiceNameUsageTrackingPrivate, 
-                       _USNotificationReceivedValue, _USUsageTrackingPrivateEntitlement, 
+                       _USDeletionPolicyWebHistory, _USDeviceActivityMonitorExtensionTimeoutInSeconds, 
+                       _USDeviceActivityMonitorExtensionTimeoutLeewayInSeconds, _USDidCancelDeviceActivityMonitorExtensionRequest, 
+                       _USDuetClientNameUsageTracking, _USErrorDomain, _USMachServiceNameUsageTracking, 
+                       _USMachServiceNameUsageTrackingPrivate, _USNotificationReceivedValue, 
+                       _USStandByIdentifier, _USUsageTrackingPrivateEntitlement, 
                        _USUsageTrackingVersionNumber, _USUsageTrackingVersionString, 
                        _USVideoMetadataKeyAudioElementWithUserGesture, _USVideoMetadataKeyCanShowControlsManager, 
                        _USVideoMetadataKeyCanShowNowPlayingControls, _USVideoMetadataKeyHasEverNotifiedAboutPlaying, 
@@ -49,11 +50,11 @@ exports:
                        _USVideoMetadataKeyRenderer, _USVideoMetadataKeyRequiresFullscreenForVideoPlaybackAndFullscreenNotPermitted, 
                        _USVideoMetadataKeyRequiresPlaybackAndIsNotPlaying, _USVideoMetadataKeyUserHasPlayedAudioBefore, 
                        _usageContextContainsPlayingQuickLookVideo ]
-    objc-classes:    [ USApplicationUsageReport, USBudget, USCategoryUsageReport, 
-                       USDeviceActivityEvent, USDeviceActivityMonitorExtensionProxy, 
+    objc-classes:    [ USApplicationUsageMonitor, USApplicationUsageReport, USBudget, 
+                       USCategoryUsageReport, USDeviceActivityEvent, USDeviceActivityMonitorExtensionProxy, 
                        USDeviceActivitySchedule, USDomainNormalization, USTrackingAgentConnection, 
-                       USTrackingAgentPrivateConnection, USTrustIdentifier, USUsageMonitor, 
-                       USUsageQuerying, USUsageReport, USUsageReporter, USUsageTrackingBundle, 
-                       USUsageTrust, USVideoUsage, USWebHistory, USWebUsageReport, 
-                       USWebpageUsage, USXPCRemoteObjectProxy ]
+                       USTrackingAgentPrivateConnection, USTrustIdentifier, USUsageAccumulator, 
+                       USUsageMonitor, USUsageQuerying, USUsageReport, USUsageReporter, 
+                       USUsageTrackingBundle, USUsageTrust, USVideoUsage, USWebHistory, 
+                       USWebUsageReport, USWebpageUsage, USXPCRemoteObjectProxy ]
 ...

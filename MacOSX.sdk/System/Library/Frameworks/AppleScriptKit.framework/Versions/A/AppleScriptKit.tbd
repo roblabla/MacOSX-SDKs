@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/Frameworks/AppleScriptKit.framework/Versions/A/AppleScriptKit'
-current-version: 88
+current-version: 88.3
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _ASKErrorDomain, _ASKInitialize, _ASKMapTableWithWeakOrRetainedToStrongObjects, 

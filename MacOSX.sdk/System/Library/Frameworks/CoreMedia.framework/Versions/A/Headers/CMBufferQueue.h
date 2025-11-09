@@ -124,14 +124,14 @@ enum
 	kCMBufferQueueError_InvalidTriggerCondition					= -12767,
 	kCMBufferQueueError_InvalidTriggerToken						= -12768,
 	kCMBufferQueueError_InvalidBuffer							= -12769,
-} API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
+} API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
 	@typedef	CMBufferQueueRef
 	@abstract	A reference to a CMBufferQueue, a CF object that implements a queue of timed buffers.
 		
 */
-typedef struct CM_BRIDGED_TYPE(id) opaqueCMBufferQueue *CMBufferQueueRef API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0)) CM_SWIFT_NONSENDABLE;
+typedef struct CM_BRIDGED_TYPE(id) opaqueCMBufferQueue *CMBufferQueueRef API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0), visionos(1.0)) CM_SWIFT_NONSENDABLE;
 
 /*!
 	@typedef	CMBufferRef
@@ -139,7 +139,7 @@ typedef struct CM_BRIDGED_TYPE(id) opaqueCMBufferQueue *CMBufferQueueRef API_AVA
 	@discussion	A CMBuffer can be any CFTypeRef, as long as a getDuration callback can be provided.  Commonly used
 				types are CMSampleBufferRef and CVPixelBufferRef.
 */
-typedef CM_BRIDGED_TYPE(id) CFTypeRef CMBufferRef API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0)) CM_SWIFT_NONSENDABLE;
+typedef CM_BRIDGED_TYPE(id) CFTypeRef CMBufferRef API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0), visionos(1.0)) CM_SWIFT_NONSENDABLE;
 
 /*!
 	@typedef	CMBufferGetTimeCallback
@@ -150,7 +150,7 @@ typedef CM_BRIDGED_TYPE(id) CFTypeRef CMBufferRef API_AVAILABLE(macos(10.7), ios
 typedef CMTime (*CMBufferGetTimeCallback)(
 	CMBufferRef CM_NONNULL buf,		/*! @param buf Buffer being interrogated. */
 	void * CM_NULLABLE refcon)		/*! @param refcon Client refcon. Can be NULL. */
-	API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
+	API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 #if __BLOCKS__
 /*!
@@ -161,7 +161,7 @@ typedef CMTime (*CMBufferGetTimeCallback)(
 */
 typedef CMTime (^CMBufferGetTimeHandler)(
 	CMBufferRef CM_NONNULL buf)		/*! @param buf Buffer being interrogated. */
-	API_AVAILABLE(macos(10.14.4), ios(12.2), tvos(12.2), watchos(6.0));
+	API_AVAILABLE(macos(10.14.4), ios(12.2), tvos(12.2), watchos(6.0), visionos(1.0));
 #endif // __BLOCKS__
 
 /*!
@@ -172,7 +172,7 @@ typedef CMTime (^CMBufferGetTimeHandler)(
 typedef Boolean (*CMBufferGetBooleanCallback)(
 	CMBufferRef CM_NONNULL buf,		/*! @param buf Buffer being interrogated. */
 	void * CM_NULLABLE refcon)		/*! @param refcon Client refcon. Can be NULL. */
-	API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
+	API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 #if __BLOCKS__
 /*!
@@ -182,7 +182,7 @@ typedef Boolean (*CMBufferGetBooleanCallback)(
 */
 typedef Boolean (^CMBufferGetBooleanHandler)(
 	CMBufferRef CM_NONNULL buf)		/*! @param buf Buffer being interrogated. */
-	API_AVAILABLE(macos(10.14.4), ios(12.2), tvos(12.2), watchos(6.0));
+	API_AVAILABLE(macos(10.14.4), ios(12.2), tvos(12.2), watchos(6.0), visionos(1.0));
 #endif // __BLOCKS__
 
 /*!
@@ -194,7 +194,7 @@ typedef CFComparisonResult (*CMBufferCompareCallback)(
 	CMBufferRef CM_NONNULL buf1,	/*! @param buf Buffer being compared. */
 	CMBufferRef CM_NONNULL buf2,	/*! @param buf Other buffer being compared. */
 	void * CM_NULLABLE refcon)		/*! @param refcon Client refcon. Can be NULL. */
-	API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
+	API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 #if __BLOCKS__
 /*!
@@ -204,7 +204,7 @@ typedef CFComparisonResult (*CMBufferCompareCallback)(
 typedef CFComparisonResult (^CMBufferCompareHandler)(
 	CMBufferRef CM_NONNULL buf1,	/*! @param buf Buffer being compared. */
 	CMBufferRef CM_NONNULL buf2)	/*! @param buf Other buffer being compared. */
-	API_AVAILABLE(macos(10.14.4), ios(12.2), tvos(12.2), watchos(6.0));
+	API_AVAILABLE(macos(10.14.4), ios(12.2), tvos(12.2), watchos(6.0), visionos(1.0));
 #endif // __BLOCKS__
 
 /*!
@@ -215,7 +215,7 @@ typedef CFComparisonResult (^CMBufferCompareHandler)(
 typedef size_t (*CMBufferGetSizeCallback)(
 	CMBufferRef CM_NONNULL buf,		/*! @param buf Buffer being interrogated. */
 	void * CM_NULLABLE refcon)		/*! @param refcon Client refcon. Can be NULL. */
-	API_AVAILABLE(macos(10.10), ios(7.1), tvos(9.0), watchos(6.0));
+	API_AVAILABLE(macos(10.10), ios(7.1), tvos(9.0), watchos(6.0), visionos(1.0));
 
 #if __BLOCKS__
 /*!
@@ -225,7 +225,7 @@ typedef size_t (*CMBufferGetSizeCallback)(
  */
 typedef size_t (^CMBufferGetSizeHandler)(
 	CMBufferRef CM_NONNULL buf)		/*! @param buf Buffer being interrogated. */
-	API_AVAILABLE(macos(10.14.4), ios(12.2), tvos(12.2), watchos(6.0));
+	API_AVAILABLE(macos(10.14.4), ios(12.2), tvos(12.2), watchos(6.0), visionos(1.0));
 #endif // __BLOCKS__
 	
 /*!
@@ -265,7 +265,7 @@ typedef struct {
 																	Can be NULL (then the queue won't listen for it). */
 	CMBufferGetSizeCallback CM_NULLABLE getSize;				/*!< This callback is called (once) during enqueue and dequeue operation to
 																	update the total size of the queue. Can be NULL.  Ignored if version < 1. */
-} CMBufferCallbacks API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0)) CM_SWIFT_NONSENDABLE;
+} CMBufferCallbacks API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0), visionos(1.0)) CM_SWIFT_NONSENDABLE;
 
 #if __BLOCKS__
 #pragma pack(push)
@@ -297,7 +297,7 @@ typedef struct {
 																	Can be NULL (then the queue won't listen for it). */
 	CMBufferGetSizeHandler CM_NULLABLE getSize;					/*!< This block is called (once) during enqueue and dequeue operation to
 																	update the total size of the queue. Can be NULL. */
-} CMBufferHandlers API_AVAILABLE(macos(10.14.4), ios(12.2), tvos(12.2), watchos(6.0));
+} CMBufferHandlers API_AVAILABLE(macos(10.14.4), ios(12.2), tvos(12.2), watchos(6.0), visionos(1.0));
 #pragma pack(pop)
 #endif // __BLOCKS__
 
@@ -306,14 +306,14 @@ typedef struct {
 	@abstract	Returns a pointer to a callback struct for unsorted CMSampleBuffers, provided as a convenience.
 */
 CM_EXPORT const CMBufferCallbacks * CM_NONNULL CMBufferQueueGetCallbacksForUnsortedSampleBuffers(void)
-							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
+							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
 	 @function	CMBufferQueueGetCallbacksForOutputPTSSortedSampleBuffers
 	 @abstract	Returns a pointer to a callback struct for CMSampleBuffers sorted by output presentation timestamp, provided as a convenience.
  */
 CM_EXPORT const CMBufferCallbacks * CM_NONNULL CMBufferQueueGetCallbacksForSampleBuffersSortedByOutputPTS(void)
-							API_AVAILABLE(macos(10.7), ios(4.3), tvos(9.0), watchos(6.0));
+							API_AVAILABLE(macos(10.7), ios(4.3), tvos(9.0), watchos(6.0), visionos(1.0));
 	
 CF_IMPLICIT_BRIDGING_DISABLED
 
@@ -335,7 +335,7 @@ CM_EXPORT OSStatus CMBufferQueueCreate(
 												to a temporary struct on the stack. */
 	CM_RETURNS_RETAINED_PARAMETER CMBufferQueueRef CM_NULLABLE * CM_NONNULL queueOut)	/*! @param queueOut
 												Returned newly created CMBufferQueue. */
-							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
+							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 #if __BLOCKS__
 /*!
@@ -356,7 +356,7 @@ CM_EXPORT OSStatus CMBufferQueueCreateWithHandlers(
 												to a temporary struct on the stack. */
 	CM_RETURNS_RETAINED_PARAMETER CMBufferQueueRef CM_NULLABLE * CM_NONNULL queueOut)	/*! @param queueOut
 												Returned newly created CMBufferQueue. */
-							API_AVAILABLE(macos(10.14.4), ios(12.2), tvos(12.2), watchos(6.0));
+							API_AVAILABLE(macos(10.14.4), ios(12.2), tvos(12.2), watchos(6.0), visionos(1.0));
 #endif // __BLOCKS__
 	
 CF_IMPLICIT_BRIDGING_ENABLED
@@ -368,7 +368,7 @@ CF_IMPLICIT_BRIDGING_ENABLED
 	@result		CFTypeID of CMBufferQueue objects.
 */
 CM_EXPORT CFTypeID CMBufferQueueGetTypeID(void)
-							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
+							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
     @function   CMBufferQueueEnqueue
@@ -383,7 +383,7 @@ CM_EXPORT OSStatus CMBufferQueueEnqueue(
 											The CMBufferQueue on which to enqueue the buffer. */
 	CMBufferRef CM_NONNULL buf)			/*! @param buf
 											The buffer to enqueue. */
-							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
+							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
     @function   CMBufferQueueDequeueAndRetain
@@ -396,7 +396,7 @@ CM_EXPORT OSStatus CMBufferQueueEnqueue(
 CM_EXPORT CMBufferRef CM_RETURNS_RETAINED CM_NULLABLE CMBufferQueueDequeueAndRetain(
 	CMBufferQueueRef CM_NONNULL queue)		/*! @param queue
 												The CMBufferQueue from which to dequeue a buffer. */
-							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
+							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
     @function   CMBufferQueueDequeueIfDataReadyAndRetain
@@ -409,7 +409,7 @@ CM_EXPORT CMBufferRef CM_RETURNS_RETAINED CM_NULLABLE CMBufferQueueDequeueAndRet
 CM_EXPORT CMBufferRef CM_RETURNS_RETAINED CM_NULLABLE CMBufferQueueDequeueIfDataReadyAndRetain(
 	CMBufferQueueRef CM_NONNULL queue)		/*! @param queue
 												The CMBufferQueue from which to dequeue a buffer (if the buffer is ready). */
-							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
+							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
     @function   CMBufferQueueGetHead
@@ -425,7 +425,7 @@ CM_EXPORT CMBufferRef CM_RETURNS_RETAINED CM_NULLABLE CMBufferQueueDequeueIfData
 CM_EXPORT CMBufferRef CM_NULLABLE CMBufferQueueGetHead(
 	CMBufferQueueRef CM_NONNULL queue)		/*! @param queue
 												The CMBufferQueue from which to retrieve a buffer. */
-							API_DEPRECATED_WITH_REPLACEMENT("CMBufferQueueCopyHead", macos(10.7, API_TO_BE_DEPRECATED), ios(4.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(6.0, API_TO_BE_DEPRECATED));
+							API_DEPRECATED_WITH_REPLACEMENT("CMBufferQueueCopyHead", macos(10.7, 15.0), ios(4.0, 18.0), tvos(9.0, 18.0), watchos(6.0, 11.0), visionos(1.0, 2.0));
 
 /*!
 	@function   CMBufferQueueCopyHead
@@ -438,7 +438,7 @@ CM_EXPORT CMBufferRef CM_NULLABLE CMBufferQueueGetHead(
 CM_EXPORT CM_RETURNS_RETAINED CMBufferRef CM_NULLABLE CMBufferQueueCopyHead(
 	CMBufferQueueRef CM_NONNULL queue)		/*! @param queue
 												The CMBufferQueue from which to retrieve a buffer. */
-							API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0));
+							API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0), visionos(1.0));
 
 /*!
 	@function	CMBufferQueueIsEmpty
@@ -448,7 +448,7 @@ CM_EXPORT CM_RETURNS_RETAINED CMBufferRef CM_NULLABLE CMBufferQueueCopyHead(
 CM_EXPORT Boolean CMBufferQueueIsEmpty(
 	CMBufferQueueRef CM_NONNULL queue)		/*! @param queue
 												The CMBufferQueue being interrogated. */
-							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
+							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
 	@function	CMBufferQueueMarkEndOfData
@@ -459,7 +459,7 @@ CM_EXPORT Boolean CMBufferQueueIsEmpty(
 CM_EXPORT OSStatus CMBufferQueueMarkEndOfData(
 	CMBufferQueueRef CM_NONNULL queue)		/*! @param queue
 												The CMBufferQueue being marked. */
-							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
+							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
 	@function	CMBufferQueueContainsEndOfData
@@ -471,7 +471,7 @@ CM_EXPORT OSStatus CMBufferQueueMarkEndOfData(
 CM_EXPORT Boolean CMBufferQueueContainsEndOfData(
 	CMBufferQueueRef CM_NONNULL queue)		/*! @param queue
 												The CMBufferQueue being interrogated. */
-							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
+							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
 	@function	CMBufferQueueIsAtEndOfData
@@ -483,7 +483,7 @@ CM_EXPORT Boolean CMBufferQueueContainsEndOfData(
 CM_EXPORT Boolean CMBufferQueueIsAtEndOfData(
 	CMBufferQueueRef CM_NONNULL queue)		/*! @param queue
 												The CMBufferQueue being interrogated. */
-							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
+							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
 	@function	CMBufferQueueReset
@@ -494,7 +494,7 @@ CM_EXPORT Boolean CMBufferQueueIsAtEndOfData(
 CM_EXPORT OSStatus CMBufferQueueReset(
 	CMBufferQueueRef CM_NONNULL queue)		/*! @param queue
 												The CMBufferQueue being reset. */
-							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
+							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
 	@function	CMBufferQueueResetWithCallback
@@ -510,7 +510,7 @@ CMBufferQueueResetWithCallback(
 											The callback should not make other calls to the buffer queue. */
 	void * CM_NULLABLE refcon )			/*! @param refcon
 											Refcon to be passed to the callback function. */
-							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
+							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
 	@function	CMBufferQueueGetBufferCount
@@ -519,7 +519,7 @@ CMBufferQueueResetWithCallback(
 CM_EXPORT CMItemCount CMBufferQueueGetBufferCount(
 	CMBufferQueueRef CM_NONNULL queue)		/*! @param queue
 												CMBufferQueue being interrogated. */
-							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
+							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
 	@function	CMBufferQueueGetDuration
@@ -532,7 +532,7 @@ CM_EXPORT CMItemCount CMBufferQueueGetBufferCount(
 CM_EXPORT CMTime CMBufferQueueGetDuration(
 	CMBufferQueueRef CM_NONNULL queue)		/*! @param queue
 												CMBufferQueue being interrogated. */
-							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
+							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
 	@function	CMBufferQueueGetMinDecodeTimeStamp
@@ -545,7 +545,7 @@ CM_EXPORT CMTime CMBufferQueueGetDuration(
 CM_EXPORT CMTime CMBufferQueueGetMinDecodeTimeStamp(
 	CMBufferQueueRef CM_NONNULL queue)		/*! @param queue
 												CMBufferQueue being interrogated. */
-							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
+							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
 	@function	CMBufferQueueGetFirstDecodeTimeStamp
@@ -558,7 +558,7 @@ CM_EXPORT CMTime CMBufferQueueGetMinDecodeTimeStamp(
 CM_EXPORT CMTime CMBufferQueueGetFirstDecodeTimeStamp(
 	CMBufferQueueRef CM_NONNULL queue)		/*! @param queue
 												CMBufferQueue being interrogated. */
-							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
+							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
 	@function	CMBufferQueueGetMinPresentationTimeStamp
@@ -572,7 +572,7 @@ CM_EXPORT CMTime CMBufferQueueGetFirstDecodeTimeStamp(
 CM_EXPORT CMTime CMBufferQueueGetMinPresentationTimeStamp(
 	CMBufferQueueRef CM_NONNULL queue)		/*! @param queue
 												CMBufferQueue being interrogated. */
-							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
+							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
 	@function	CMBufferQueueGetFirstPresentationTimeStamp
@@ -585,7 +585,7 @@ CM_EXPORT CMTime CMBufferQueueGetMinPresentationTimeStamp(
 CM_EXPORT CMTime CMBufferQueueGetFirstPresentationTimeStamp(
 	CMBufferQueueRef CM_NONNULL queue)		/*! @param queue
 												CMBufferQueue being interrogated. */
-							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
+							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 
 /*!
@@ -597,7 +597,7 @@ CM_EXPORT CMTime CMBufferQueueGetFirstPresentationTimeStamp(
 CM_EXPORT CMTime CMBufferQueueGetMaxPresentationTimeStamp(
 	CMBufferQueueRef CM_NONNULL queue)		/*! @param queue
 												CMBufferQueue being interrogated. */
-							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
+							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
 	@function	CMBufferQueueGetEndPresentationTimeStamp
@@ -609,7 +609,7 @@ CM_EXPORT CMTime CMBufferQueueGetMaxPresentationTimeStamp(
 CM_EXPORT CMTime CMBufferQueueGetEndPresentationTimeStamp(
 	CMBufferQueueRef CM_NONNULL queue)		/*! @param queue
 												CMBufferQueue being interrogated. */
-							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
+							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 	
 /*!
@@ -623,7 +623,7 @@ CM_EXPORT CMTime CMBufferQueueGetEndPresentationTimeStamp(
 CM_EXPORT size_t CMBufferQueueGetTotalSize(
 	CMBufferQueueRef CM_NONNULL queue)		/*! @param queue
 												CMBufferQueue being interrogated. */
-							API_AVAILABLE(macos(10.10), ios(7.1), tvos(9.0), watchos(6.0));
+							API_AVAILABLE(macos(10.10), ios(7.1), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
 	@typedef	CMBufferQueueTriggerToken
@@ -649,7 +649,7 @@ CM_EXPORT size_t CMBufferQueueGetTotalSize(
 				when the queue is finalized since other modules may retain it.  To address this concern, modules
 				should remove their triggers before they themselves are finalized.
 */
-typedef struct opaqueCMBufferQueueTriggerToken *CMBufferQueueTriggerToken API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
+typedef struct opaqueCMBufferQueueTriggerToken *CMBufferQueueTriggerToken API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
 	@typedef	CMBufferQueueTriggerCallback
@@ -658,11 +658,11 @@ typedef struct opaqueCMBufferQueueTriggerToken *CMBufferQueueTriggerToken API_AV
 typedef void (*CMBufferQueueTriggerCallback)(
 	void * CM_NULLABLE triggerRefcon,						/*! @param triggerRefcon Refcon for trigger callback.  */
 	CMBufferQueueTriggerToken CM_NONNULL triggerToken )		/*! @param triggerToken Trigger whose condition became true. */
-	API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
+	API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0), visionos(1.0));
 #if __BLOCKS__
 typedef void (^CMBufferQueueTriggerHandler)(
 	CMBufferQueueTriggerToken CM_NONNULL triggerToken )		/*! @param triggerToken Trigger whose condition became true. */
-	API_AVAILABLE(macos(10.14.4), ios(12.2), tvos(12.2), watchos(6.0));
+	API_AVAILABLE(macos(10.14.4), ios(12.2), tvos(12.2), watchos(6.0), visionos(1.0));
 #endif // __BLOCKS__
 /*!
 	@enum		CMBufferQueueTriggerCondition
@@ -680,7 +680,7 @@ typedef void (^CMBufferQueueTriggerHandler)(
 	@constant	kCMBufferQueueTrigger_WhenBufferCountBecomesGreaterThan			Trigger fires when buffer count becomes > the specified threshold number.
 	@constant	kCMBufferQueueTrigger_WhenDurationBecomesGreaterThanOrEqualToAndBufferCountBecomesGreaterThan	Trigger fires when queue duration becomes >= the specified duration and buffer count becomes > the specified threshold number.
 */
-typedef int32_t CMBufferQueueTriggerCondition API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
+typedef int32_t CMBufferQueueTriggerCondition API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0), visionos(1.0));
 #if COREMEDIA_USE_DERIVED_ENUMS_FOR_CONSTANTS
 enum : CMBufferQueueTriggerCondition
 #else
@@ -699,7 +699,7 @@ enum
 	kCMBufferQueueTrigger_WhenBufferCountBecomesLessThan = 10,
 	kCMBufferQueueTrigger_WhenBufferCountBecomesGreaterThan = 11,
 	kCMBufferQueueTrigger_WhenDurationBecomesGreaterThanOrEqualToAndBufferCountBecomesGreaterThan = 12,
-} API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
+} API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
 	@function	CMBufferQueueInstallTrigger
@@ -736,7 +736,7 @@ CM_EXPORT OSStatus CMBufferQueueInstallTrigger(
 															Can be NULL, if client has no need to explicitly test
 															or remove the trigger. Cannot be NULL if triggerCallback
 															is NULL, since then the trigger would be meaningless. */
-							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
+							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
 	@function	CMBufferQueueInstallTriggerWithIntegerThreshold
@@ -766,7 +766,7 @@ CM_EXPORT OSStatus CMBufferQueueInstallTriggerWithIntegerThreshold(
 																				Can be NULL, if client has no need to explicitly test
 																				or remove the trigger. Cannot be NULL if triggerCallback
 																				is NULL, since then the trigger would be meaningless. */
-							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
+							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 #if __BLOCKS__
 /**
@@ -800,7 +800,7 @@ CM_EXPORT OSStatus CMBufferQueueInstallTriggerHandler(
 															Can be NULL, if client intends only to explicitly test the
 															condition.  Cannot be NULL if triggerTokenOut is NULL,
 															since then the trigger would be meaningless. */
-							API_AVAILABLE(macos(10.14.4), ios(12.2), tvos(12.2), watchos(6.0));
+							API_AVAILABLE(macos(10.14.4), ios(12.2), tvos(12.2), watchos(6.0), visionos(1.0));
 
 /*!
 	@function	CMBufferQueueInstallTriggerHandlerWithIntegerThreshold
@@ -826,7 +826,7 @@ CM_EXPORT OSStatus CMBufferQueueInstallTriggerHandlerWithIntegerThreshold(
 																				Can be NULL, if client intends only to explicitly test the
 																				condition.  Cannot be NULL if triggerTokenOut is NULL,
 																				since then the trigger would be meaningless. */
-							API_AVAILABLE(macos(10.14.4), ios(12.2), tvos(12.2), watchos(6.0));
+							API_AVAILABLE(macos(10.14.4), ios(12.2), tvos(12.2), watchos(6.0), visionos(1.0));
 #endif // __BLOCKS__
 
 /*!
@@ -842,7 +842,7 @@ CM_EXPORT OSStatus CMBufferQueueRemoveTrigger(
 															CMBufferQueue from which the trigger is to be removed. */
 	CMBufferQueueTriggerToken CM_NONNULL triggerToken )	/*! @param triggerToken
 															Trigger to remove from the queue. */
-							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
+							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
 	@function	CMBufferQueueTestTrigger
@@ -856,7 +856,7 @@ CM_EXPORT Boolean CMBufferQueueTestTrigger(
 															CMBufferQueue on which the trigger is to be tested. */
 	CMBufferQueueTriggerToken CM_NONNULL triggerToken )	/*! @param triggerToken
 															Trigger to test. */
-							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
+							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
 	@function	CMBufferQueueCallForEachBuffer
@@ -876,7 +876,7 @@ CMBufferQueueCallForEachBuffer(
 												The callback should not make other calls to the buffer queue. */
 	void * CM_NULLABLE refcon )				/*! @param refcon
 												Refcon to be passed to the callback function. */
-							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
+							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
 	@typedef	CMBufferValidationCallback
@@ -888,7 +888,7 @@ CMBufferQueueCallForEachBuffer(
 		CMBufferQueueEnqueue will return this error to the caller.
 		If you do not have a more descriptive error code, use kCMBufferQueueError_InvalidBuffer.
 */
-typedef OSStatus (*CMBufferValidationCallback)(CMBufferQueueRef CM_NONNULL queue, CMBufferRef CM_NONNULL buf, void * CM_NULLABLE validationRefCon ) API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
+typedef OSStatus (*CMBufferValidationCallback)(CMBufferQueueRef CM_NONNULL queue, CMBufferRef CM_NONNULL buf, void * CM_NULLABLE validationRefCon ) API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 #if __BLOCKS__
 /*!
@@ -901,7 +901,7 @@ typedef OSStatus (*CMBufferValidationCallback)(CMBufferQueueRef CM_NONNULL queue
 		CMBufferQueueEnqueue will return this error to the caller.
 		If you do not have a more descriptive error code, use kCMBufferQueueError_InvalidBuffer.
 */
-typedef OSStatus (^CMBufferValidationHandler)(CMBufferQueueRef CM_NONNULL queue, CMBufferRef CM_NONNULL buf) API_AVAILABLE(macos(10.14.4), ios(12.2), tvos(12.2), watchos(6.0));
+typedef OSStatus (^CMBufferValidationHandler)(CMBufferQueueRef CM_NONNULL queue, CMBufferRef CM_NONNULL buf) API_AVAILABLE(macos(10.14.4), ios(12.2), tvos(12.2), watchos(6.0), visionos(1.0));
 #endif // __BLOCKS__
 
 /*!
@@ -915,7 +915,7 @@ CM_EXPORT OSStatus CMBufferQueueSetValidationCallback(
 																	Callback that will validate each buffer enqueued. */
 		void * CM_NULLABLE refcon )							/*! @param refcon
 																	Context refcon for validation callback. */
-							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
+							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 #if __BLOCKS__
 /*!
@@ -931,7 +931,7 @@ CM_EXPORT OSStatus CMBufferQueueSetValidationHandler(
 																	CMBufferQueue that will use the validation callback. */
 		CMBufferValidationHandler CM_NONNULL handler)		/*! @param handler
 																	Handler that will validate each buffer enqueued. */
-							API_AVAILABLE(macos(10.14.4), ios(12.2), tvos(12.2), watchos(6.0));
+							API_AVAILABLE(macos(10.14.4), ios(12.2), tvos(12.2), watchos(6.0), visionos(1.0));
 #endif // __BLOCKS__
 
 CF_IMPLICIT_BRIDGING_DISABLED

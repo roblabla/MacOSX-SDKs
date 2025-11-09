@@ -388,6 +388,7 @@ exports:
                        '_$s20WorkoutAnnouncements29VoiceFeedbackAnnouncementFlowVMa', 
                        '_$s20WorkoutAnnouncements29VoiceFeedbackAnnouncementFlowVMn', 
                        '_$s20WorkoutAnnouncements29VoiceFeedbackAnnouncementFlowVN', 
-                       '_$sSE20WorkoutAnnouncementsE12asDictionarySDySSypGyKF', _WorkoutAnnouncementsVersionNumber, 
-                       _WorkoutAnnouncementsVersionString ]
+                       '_$sSE20WorkoutAnnouncementsE12asDictionarySDySSypGyKF', '_$sSo21AFSiriWorkoutReminderC0B13AnnouncementsE08tryInferB20ActivityLocationTypeSo09HKWorkoutgI0V_So0j7SessionhI0VSo0j8SwimminghI0VtyF', 
+                       '_$sSo21AFSiriWorkoutReminderC0B13AnnouncementsE08tryInferB4TypeSo09AFWorkoutG0VyF', 
+                       _WorkoutAnnouncementsVersionNumber, _WorkoutAnnouncementsVersionString ]
 ...

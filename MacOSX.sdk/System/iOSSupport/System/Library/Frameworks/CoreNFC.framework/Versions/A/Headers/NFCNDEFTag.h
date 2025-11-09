@@ -21,11 +21,11 @@ NS_ASSUME_NONNULL_BEGIN
  * @constant NFCNDEFStatusReadWrite     Tag is NDEF read and writable.
  * @constant NFCNDEFStatusReadOnly      Tag is NDEF read-only; NDEF writing is disallowed.
  */
-API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos)
+API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos)
 typedef NS_ENUM(NSUInteger, NFCNDEFStatus) {
-    NFCNDEFStatusNotSupported API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos)  = 1,
-    NFCNDEFStatusReadWrite API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos)     = 2,
-    NFCNDEFStatusReadOnly API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos)      = 3,
+    NFCNDEFStatusNotSupported API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos)  = 1,
+    NFCNDEFStatusReadWrite API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos)     = 2,
+    NFCNDEFStatusReadOnly API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos)      = 3,
 };
 
 /*!
@@ -34,7 +34,7 @@ typedef NS_ENUM(NSUInteger, NFCNDEFStatus) {
  * @discussion Operations on a NDEF formatted tag.  Unless it is specified all block completion handlers are dispatched on the session work queue that is associated with the tag.
  *
  */
-API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos)
+API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos)
 @protocol NFCNDEFTag <NSObject, NSSecureCoding, NSCopying>
 
 /*!
@@ -45,7 +45,7 @@ API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos)
  *
  * @discussion  Check whether a detected NDEF tag is available.
  */
-@property (nonatomic, getter=isAvailable, readonly) BOOL available API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos);
+@property (nonatomic, getter=isAvailable, readonly) BOOL available API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos);
 
 /*!
  * @method queryNDEFStatusWithCompletionHandler:
@@ -55,7 +55,7 @@ API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos)
  *
  * @discussion Query the NDEF support status of the tag.
  */
-- (void)queryNDEFStatusWithCompletionHandler:(void(^)(NFCNDEFStatus status, NSUInteger capacity, NSError * _Nullable error))completionHandler API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos);
+- (void)queryNDEFStatusWithCompletionHandler:(void(^)(NFCNDEFStatus status, NSUInteger capacity, NSError * _Nullable error))completionHandler API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos);
 
 /*!
  * @method readNDEFWithCompletionHandler:
@@ -65,7 +65,7 @@ API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos)
  *
  * @discussion Reads NDEF message from the tag.
  */
-- (void)readNDEFWithCompletionHandler:(void(^)(NFCNDEFMessage * _Nullable, NSError * _Nullable))completionHandler API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos);
+- (void)readNDEFWithCompletionHandler:(void(^)(NFCNDEFMessage * _Nullable, NSError * _Nullable))completionHandler API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos);
 
 /*!
  * @method writeNDEF:completionHandler:
@@ -74,17 +74,17 @@ API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos)
  *
  * @discussion Writes a NDEF message to the tag.
  */
-- (void)writeNDEF:(NFCNDEFMessage *)ndefMessage completionHandler:(void(^)(NSError * _Nullable))completionHandler API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos);
+- (void)writeNDEF:(NFCNDEFMessage *)ndefMessage completionHandler:(void(^)(NSError * _Nullable))completionHandler API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos);
 
 /*!
  * @method writeLockWithCompletionHandler:
  *
  * @param completionHandler Returns operation status. A nil NSError object indicates a successful lock operation.
  *
- * @discussion Locks the NDEF tag to read-only state; tag can no longer be written afterward.  This is a permanent operation.  A successful lock operaiton via this method
+ * @discussion Locks the NDEF tag to read-only state; tag can no longer be written afterward.  This is a permanent operation.  A successful lock operation via this method
  *             will change the NFCNDEFStatus value of the tag to @link NFCNDEFStatusReadOnly @link/.
  */
-- (void)writeLockWithCompletionHandler:(void(^)(NSError * _Nullable))completionHandler API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos);
+- (void)writeLockWithCompletionHandler:(void(^)(NSError * _Nullable))completionHandler API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos);
 
 @end
 

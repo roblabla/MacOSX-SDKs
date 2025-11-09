@@ -47,6 +47,7 @@ CB_EXTERN NSString * const CBCentralManagerOptionRestoreIdentifierKey NS_AVAILAB
  */
 CB_EXTERN NSString * const CBCentralManagerOptionDeviceAccessForMedia NS_AVAILABLE_IOS(16_0);
 
+
 /*!
  *  @const CBCentralManagerScanOptionAllowDuplicatesKey
  *

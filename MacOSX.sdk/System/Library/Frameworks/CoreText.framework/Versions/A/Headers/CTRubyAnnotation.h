@@ -38,6 +38,7 @@ typedef const struct CF_BRIDGED_TYPE(id) __CTRubyAnnotation * CTRubyAnnotationRe
     @abstract	Returns the CFType of the ruby annotation object
 */
 
+CT_EXPORT
 CFTypeID CTRubyAnnotationGetTypeID( void ) CT_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0));
 
 
@@ -169,6 +170,7 @@ typedef CF_ENUM(uint8_t, CTRubyPosition) {
     @result     This function will return a reference to a CTRubyAnnotation object.
 */
 
+CT_EXPORT
 CTRubyAnnotationRef CTRubyAnnotationCreate(
     CTRubyAlignment alignment,
     CTRubyOverhang overhang,
@@ -224,6 +226,7 @@ CT_EXPORT const CFStringRef kCTRubyAnnotationScaleToFitAttributeName CT_AVAILABL
     @result     This function will return a reference to a CTRubyAnnotation object.
 */
 
+CT_EXPORT
 CTRubyAnnotationRef CTRubyAnnotationCreateWithAttributes(
     CTRubyAlignment alignment,
     CTRubyOverhang overhang,
@@ -244,6 +247,7 @@ CTRubyAnnotationRef CTRubyAnnotationCreateWithAttributes(
                 "rubyAnnotation".
 */
 
+CT_EXPORT
 CTRubyAnnotationRef CTRubyAnnotationCreateCopy(
     CTRubyAnnotationRef rubyAnnotation ) CT_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0));
 
@@ -259,6 +263,7 @@ CTRubyAnnotationRef CTRubyAnnotationCreateCopy(
                 function will return its alignment. Otherwise it will return kCTRubyAlignmentInvalid.
 */
 
+CT_EXPORT
 CTRubyAlignment CTRubyAnnotationGetAlignment(
     CTRubyAnnotationRef rubyAnnotation ) CT_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0));
 
@@ -274,6 +279,7 @@ CTRubyAlignment CTRubyAnnotationGetAlignment(
                 function will return its overhang value. Otherwise it will return kCTRubyOverhangInvalid.
 */
 
+CT_EXPORT
 CTRubyOverhang CTRubyAnnotationGetOverhang(
     CTRubyAnnotationRef rubyAnnotation ) CT_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0));
 
@@ -288,6 +294,7 @@ CTRubyOverhang CTRubyAnnotationGetOverhang(
                 function will return its sizeFactor. Otherwise it will return 0.
 */
 
+CT_EXPORT
 CGFloat CTRubyAnnotationGetSizeFactor(
     CTRubyAnnotationRef rubyAnnotation ) CT_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0));
 
@@ -306,6 +313,7 @@ CGFloat CTRubyAnnotationGetSizeFactor(
                 function will return a CFStringRef for the text. Otherwise it will return NULL.
 */
 
+CT_EXPORT
 CFStringRef _Nullable CTRubyAnnotationGetTextForPosition(
     CTRubyAnnotationRef rubyAnnotation,
     CTRubyPosition position ) CT_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0));

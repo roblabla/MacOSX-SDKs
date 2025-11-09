@@ -64,7 +64,7 @@ enum
 	kCMSimpleQueueError_RequiredParameterMissing			= -12771,
 	kCMSimpleQueueError_ParameterOutOfRange					= -12772,
 	kCMSimpleQueueError_QueueIsFull							= -12773,
-} API_AVAILABLE(macos(10.7), ios(5.0), tvos(9.0), watchos(6.0));
+} API_AVAILABLE(macos(10.7), ios(5.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 //=============================================================================
 //	Types
@@ -75,7 +75,7 @@ enum
 	@abstract	A reference to a CMSimpleQueue, a CF object that implements a simple lockless queue of (void *) elements.
 		
 */
-typedef struct CM_BRIDGED_TYPE(id) opaqueCMSimpleQueue *CMSimpleQueueRef API_AVAILABLE(macos(10.7), ios(5.0), tvos(9.0), watchos(6.0)) CM_SWIFT_NONSENDABLE;
+typedef struct CM_BRIDGED_TYPE(id) opaqueCMSimpleQueue *CMSimpleQueueRef API_AVAILABLE(macos(10.7), ios(5.0), tvos(9.0), watchos(6.0), visionos(1.0)) CM_SWIFT_NONSENDABLE;
 
 //=============================================================================
 
@@ -88,7 +88,7 @@ typedef struct CM_BRIDGED_TYPE(id) opaqueCMSimpleQueue *CMSimpleQueueRef API_AVA
 */
 CM_EXPORT
 CFTypeID CMSimpleQueueGetTypeID(void)
-			API_AVAILABLE(macos(10.7), ios(5.0), tvos(9.0), watchos(6.0));
+			API_AVAILABLE(macos(10.7), ios(5.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
 	@function	CMSimpleQueueCreate
@@ -106,7 +106,7 @@ OSStatus CMSimpleQueueCreate(
 																given time).  Required (must not be 0).  Must be a positive value. */
 	CM_RETURNS_RETAINED_PARAMETER CMSimpleQueueRef CM_NULLABLE * CM_NONNULL queueOut)		/*! @param queueOut Returned newly created queue is written to this address.
 																Must not be NULL. */
-		API_AVAILABLE(macos(10.7), ios(5.0), tvos(9.0), watchos(6.0));
+		API_AVAILABLE(macos(10.7), ios(5.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
 	@function	CMSimpleQueueEnqueue
@@ -121,7 +121,7 @@ OSStatus CMSimpleQueueEnqueue(
 	const void * CM_NONNULL element)		/*! @param element
 												Element to enqueue. Must not be NULL (NULL is returned from Dequeue
 												to indicate an empty queue). */
-		API_AVAILABLE(macos(10.7), ios(5.0), tvos(9.0), watchos(6.0));
+		API_AVAILABLE(macos(10.7), ios(5.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
 	@function	CMSimpleQueueDequeue
@@ -133,7 +133,7 @@ CM_EXPORT
 const void * CM_NULLABLE CMSimpleQueueDequeue(
 	CMSimpleQueueRef CM_NONNULL queue) 	/*! @param queue
 											The queue from which to dequeue an element. Must not be NULL. */
-		API_AVAILABLE(macos(10.7), ios(5.0), tvos(9.0), watchos(6.0));
+		API_AVAILABLE(macos(10.7), ios(5.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
 	@function	CMSimpleQueueGetHead
@@ -145,7 +145,7 @@ CM_EXPORT
 const void * CM_NULLABLE CMSimpleQueueGetHead(
 	CMSimpleQueueRef CM_NONNULL queue) 	/*! @param queue
 											The queue from which to get the head element. Must not be NULL. */
-		API_AVAILABLE(macos(10.7), ios(5.0), tvos(9.0), watchos(6.0));
+		API_AVAILABLE(macos(10.7), ios(5.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
 	@function	CMSimpleQueueReset
@@ -160,7 +160,7 @@ CM_EXPORT
 OSStatus CMSimpleQueueReset(
 	CMSimpleQueueRef CM_NONNULL queue) 	/*! @param queue
 											The queue to reset. Must not be NULL. */
-		API_AVAILABLE(macos(10.7), ios(5.0), tvos(9.0), watchos(6.0));
+		API_AVAILABLE(macos(10.7), ios(5.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
 	@function	CMSimpleQueueGetCapacity
@@ -172,7 +172,7 @@ CM_EXPORT
 int32_t CMSimpleQueueGetCapacity(
 	CMSimpleQueueRef CM_NONNULL queue) 	/*! @param queue
 											The queue being interrogated. Must not be NULL. */
-		API_AVAILABLE(macos(10.7), ios(5.0), tvos(9.0), watchos(6.0));
+		API_AVAILABLE(macos(10.7), ios(5.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
 	@function	CMSimpleQueueGetCount
@@ -183,7 +183,7 @@ CM_EXPORT
 int32_t CMSimpleQueueGetCount(
 	CMSimpleQueueRef CM_NONNULL queue) 	/*! @param queue
 											The queue being interrogated. Must not be NULL. */
-		API_AVAILABLE(macos(10.7), ios(5.0), tvos(9.0), watchos(6.0));
+		API_AVAILABLE(macos(10.7), ios(5.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
 	@define		CMSimpleQueueGetFullness

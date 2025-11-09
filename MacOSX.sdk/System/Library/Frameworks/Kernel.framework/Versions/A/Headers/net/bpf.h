@@ -1340,7 +1340,7 @@ extern errno_t  bpf_attach(ifnet_t interface, u_int32_t data_link_type,
  *       @param header_len If the header was specified, the length of the header.
  */
 extern void bpf_tap_in(ifnet_t interface, u_int32_t dlt, mbuf_t packet,
-    void *header, size_t header_len);
+    void *__sized_by(header_len) header, size_t header_len);
 
 /*!
  *       @function bpf_tap_out
@@ -1354,7 +1354,7 @@ extern void bpf_tap_in(ifnet_t interface, u_int32_t dlt, mbuf_t packet,
  *       @param header_len If the header was specified, the length of the header.
  */
 extern void bpf_tap_out(ifnet_t interface, u_int32_t dlt, mbuf_t packet,
-    void *header, size_t header_len);
+    void *__sized_by(header_len) header, size_t header_len);
 
 #if SKYWALK
 /*!
@@ -1369,7 +1369,7 @@ extern void bpf_tap_out(ifnet_t interface, u_int32_t dlt, mbuf_t packet,
  *       @param header_len If the header was specified, the length of the header.
  */
 extern void bpf_tap_packet_in(ifnet_t interface, u_int32_t dlt,
-    kern_packet_t packet, void *header, size_t header_len);
+    kern_packet_t packet, void *__sized_by(header_len) header, size_t header_len);
 
 /*!
  *       @function bpf_tap_packet_out
@@ -1383,7 +1383,7 @@ extern void bpf_tap_packet_in(ifnet_t interface, u_int32_t dlt,
  *       @param header_len If the header was specified, the length of the header.
  */
 extern void bpf_tap_packet_out(ifnet_t interface, u_int32_t dlt,
-    kern_packet_t packet, void *header, size_t header_len);
+    kern_packet_t packet, void *__sized_by(header_len) header, size_t header_len);
 
 #endif /* SKYWALK */
 

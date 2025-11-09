@@ -2,12 +2,14 @@
 //  HKCategoryValues.h
 //  HealthKit
 //
-//  Copyright © 2022-2023 Apple, Inc. All rights reserved.
+//  Copyright © 2022-2024 Apple, Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 
 #import <HealthKit/HKDefines.h>
+
+
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -147,8 +149,8 @@ typedef NS_ENUM(NSInteger, HKCategoryValueMenstrualFlow) {
     HKCategoryValueMenstrualFlowLight = 2,
     HKCategoryValueMenstrualFlowMedium = 3,
     HKCategoryValueMenstrualFlowHeavy = 4,
-    HKCategoryValueMenstrualFlowNone API_AVAILABLE(ios(12.0), watchos(5.0), macCatalyst(13.0), macos(13.0)) = 5,
-} API_AVAILABLE(ios(9.0), watchos(2.0), macCatalyst(13.0), macos(13.0));
+    HKCategoryValueMenstrualFlowNone API_DEPRECATED_WITH_REPLACEMENT("HKCategoryValueVaginalBleeding", ios(12.0, 18.0), watchos(5.0, 11.0), macCatalyst(13.0, 18.0), macos(13.0, 15.0), visionos(1.0, 2.0)) = 5,
+} API_DEPRECATED_WITH_REPLACEMENT("HKCategoryValueVaginalBleeding", ios(9.0, 18.0), watchos(2.0, 11.0), macCatalyst(13.0, 18.0), macos(13.0, 15.0), visionos(1.0, 2.0));
 
 /*!
  @enum          HKCategoryValueOvulationTestResult
@@ -240,6 +242,18 @@ typedef NS_ENUM(NSInteger, HKCategoryValueSleepAnalysis) {
     HKCategoryValueSleepAnalysisAsleepDeep API_AVAILABLE(ios(16.0), watchos(9.0), macCatalyst(16.0), macos(13.0)) = 4,
     HKCategoryValueSleepAnalysisAsleepREM API_AVAILABLE(ios(16.0), watchos(9.0), macCatalyst(16.0), macos(13.0)) = 5,
 } API_AVAILABLE(ios(8.0), watchos(2.0), macCatalyst(13.0), macos(13.0));
+
+/*!
+ @enum          HKCategoryValueVaginalBleeding
+ @abstract      Set of values to indicate the type of bleeding.
+ */
+typedef NS_ENUM(NSInteger, HKCategoryValueVaginalBleeding) {
+    HKCategoryValueVaginalBleedingUnspecified = 1,
+    HKCategoryValueVaginalBleedingLight = 2,
+    HKCategoryValueVaginalBleedingMedium = 3,
+    HKCategoryValueVaginalBleedingHeavy = 4,
+    HKCategoryValueVaginalBleedingNone = 5,
+} API_AVAILABLE(ios(18.0), watchos(11.0), macCatalyst(18.0), macos(15.0), visionos(2.0));
 
 // MARK: Deprecated
 

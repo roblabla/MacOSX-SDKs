@@ -15,7 +15,7 @@
     Subclasses must implement conformance for NSCopying and NSCoding. */
 NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
-UIKIT_EXTERN API_AVAILABLE(ios(7.0)) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(7.0)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @interface UIMotionEffect : NSObject <NSCopying, NSCoding>
 
 - (instancetype)init NS_DESIGNATED_INITIALIZER;
@@ -53,14 +53,14 @@ typedef NS_ENUM(NSInteger, UIInterpolatingMotionEffectType) {
         relative values maps to the device being tilted all the way down, the maximum
         all the way up. */
     UIInterpolatingMotionEffectTypeTiltAlongVerticalAxis
-};
+} API_UNAVAILABLE(watchos);
 
 /*! This motion effect maps movement of a particular type (e.g. left/right tilt) to an
     interpolated output between two relative values provided by the client. Uses Core
     Animation's implementation of interpolation for all the standard types.
  
     `keyPath` should be expressed relative to the effect's target view. */
-UIKIT_EXTERN API_AVAILABLE(ios(7.0)) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(7.0)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @interface UIInterpolatingMotionEffect : UIMotionEffect
 
 - (instancetype)initWithKeyPath:(NSString *)keyPath type:(UIInterpolatingMotionEffectType)type NS_DESIGNATED_INITIALIZER;
@@ -77,7 +77,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(7.0)) NS_SWIFT_UI_ACTOR
 
 /*! Behaves like CAAnimationGroup. Merges key/value pairs of constituent
     using Core Animation's implementations of addition for all the standard types. */
-UIKIT_EXTERN API_AVAILABLE(ios(7.0)) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(7.0)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @interface UIMotionEffectGroup : UIMotionEffect
 @property (nullable, copy, nonatomic) NSArray<__kindof UIMotionEffect *> *motionEffects;
 @end

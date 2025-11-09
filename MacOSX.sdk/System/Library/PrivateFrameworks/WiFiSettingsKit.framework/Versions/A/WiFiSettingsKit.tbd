@@ -367,6 +367,5 @@ exports:
                        '_$s15WiFiSettingsKit23PasswordSharingListenerP4stopyyFTq', 
                        '_$s15WiFiSettingsKit23PasswordSharingListenerP5startyyFTj', 
                        '_$s15WiFiSettingsKit23PasswordSharingListenerP5startyyFTq', 
-                       '_$s15WiFiSettingsKit23PasswordSharingListenerTL', _WiFiSettingsKitVersionNumber, 
-                       _WiFiSettingsKitVersionString ]
+                       '_$s15WiFiSettingsKit23PasswordSharingListenerTL' ]
 ...

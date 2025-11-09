@@ -28,14 +28,14 @@ CF_ASSUME_NONNULL_BEGIN
 
 CG_EXTERN CGPDFDictionaryRef __nullable CGPDFStreamGetDictionary(
     CGPDFStreamRef cg_nullable stream)
-    CG_AVAILABLE_STARTING(10.3, 2.0);
+    API_AVAILABLE(macos(10.3), ios(2.0));
 
 /* Return the data of `stream'. */
 
 CG_EXTERN CFDataRef __nullable CGPDFStreamCopyData(
     CGPDFStreamRef cg_nullable stream,
     CGPDFDataFormat * cg_nullable format)
-    CG_AVAILABLE_STARTING(10.3, 2.0);
+    API_AVAILABLE(macos(10.3), ios(2.0));
 
 CF_ASSUME_NONNULL_END
 

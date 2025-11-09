@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/ProactiveHarvesting.framework/Versions/A/ProactiveHarvesting'
-current-version: 1226.5.2
+current-version: 1259.1
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -16,11 +16,12 @@ allowable-clients:
                        ProactiveExperiments, ProactiveExperimentsInternals, ProactiveExperimentsTests, 
                        ProactiveHarvestingTests, ProactiveInputPredictions, ProactiveInputPredictionsInternals, 
                        ProactiveInputPredictionsTests, ProactiveML, ProactiveMLPerfTests, 
-                       ProactiveMLTests, ProactivePPTSuite, SGReverseTemplateStrings, 
-                       Selfportrait, SiriIntelligenceSettingsSync, SuggestionsInternalSettings, 
-                       SuggestionsSpotlightMetrics, SuggestionsSpotlightMetricsTests, 
-                       hvtool, portrait, ppppttool, pptool, pretool, psgtool, reversetemplated, 
-                       suggest_tool, suggestbench, suggestd ]
+                       ProactiveMLTests, ProactivePPTSuite, ProactiveSummarization, 
+                       SGReverseTemplateStrings, Selfportrait, SiriIntelligenceSettingsSync, 
+                       SuggestionsInternalSettings, SuggestionsSpotlightMetrics, 
+                       SuggestionsSpotlightMetricsTests, hvtool, portrait, ppppttool, 
+                       pptool, pretool, psgtool, reversetemplated, suggest_tool, 
+                       suggestbench, suggestd ]
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -51,8 +52,8 @@ exports:
                        _kHVBundleIdPhone, _kHVBundleIdPhotos, _kHVBundleIdPodcasts, 
                        _kHVBundleIdReminders, _kHVBundleIdSafari, _kHVBundleIdSiri, 
                        _kHVBundleIdSiriAssistantService, _kHVBundleIdSpringBoard, 
-                       _kHVBundleIdTVApp, _kHVBundleIdTVRemote, _kHVBundleIdWallet, 
-                       _kHVConsumerErrorDomain, _kHVContentAdmissionBlocklistKey, 
+                       _kHVBundleIdTVApp, _kHVBundleIdTVRemote, _kHVBundleIdUserNotifications, 
+                       _kHVBundleIdWallet, _kHVConsumerErrorDomain, _kHVContentAdmissionBlocklistKey, 
                        _kHVContentAdmissionSuggestionsShouldShowPastEventsKey, _kHVContentAdmissionSuite, 
                        _kHVFindToShowMigrationKey, _kHVHarvestBudgetCPUTimeSeconds, 
                        _kHVHarvestBudgetDisabled, _kHVHarvestBudgetNumberOfOperations, 
@@ -68,17 +69,19 @@ exports:
                        _kHVQueuesMemoryNoLimit, _kHVQueuesMemorySmallLimit, _kHVQueuesMemoryUnsetLimit, 
                        _kHVSafariNonReaderTextSourceString, _kHVSafariReaderTextSourceString, 
                        _kHVSignpostSubsystem, _kHVSpotlightToCanLearnMigrationKey, 
-                       _kHVThrottlingStateExtraOpsLeftKey, _kHVThrottlingStateNsecLeftKey, 
-                       _kHVThrottlingStateOpsLeftKey, _kHVUserDefaultsSuite, _kHVXPCInternalEntitlement, 
-                       _kHVXPCInternalServiceName, _kHVXPCSysdiagnoseEntitlement, 
-                       _kHVXPCSysdiagnoseServiceName, _petInstanceOverrideForTesting ]
+                       _kHVSpotlightUserNotificationStacksDomain, _kHVThrottlingStateExtraOpsLeftKey, 
+                       _kHVThrottlingStateNsecLeftKey, _kHVThrottlingStateOpsLeftKey, 
+                       _kHVUserDefaultsSuite, _kHVXPCInternalEntitlement, _kHVXPCInternalServiceName, 
+                       _kHVXPCSysdiagnoseEntitlement, _kHVXPCSysdiagnoseServiceName, 
+                       _petInstanceOverrideForTesting ]
     objc-classes:    [ HVBiomeConversions, HVBudget, HVConsumerCoordinator, HVConsumerCoordinatorGuardedData, 
                        HVConsumerReply, HVConsumerState, HVConsumptionContext, HVContentAdmission, 
                        HVContentAdmissionGuardedData, HVContentAdmissionKVOObserver, 
                        HVContentState, HVDataSourceContentState, HVDonationReceiver, 
                        HVEligibilityCheckResult, HVFileErrorCode, HVHarvestEligibility, 
                        HVHtmlParser, HVHtmlParserHyperlink, HVImmutableContentState, 
-                       HVInteraction, HVMutableContentState, HVNotifications, HVPBContentState, 
+                       HVInteraction, HVMutableContentState, HVNotificationStacksContentStream, 
+                       HVNotifications, HVNotificationsContentStream, HVPBContentState, 
                        HVPBContentStateEntry, HVPBDataSourceContentState, HVPBDeprecatedContentStateEntry, 
                        HVPaths, HVPathsBase, HVPowerBudget, HVPowerBudgetThrottlingState, 
                        HVProactiveHarvestingSystem, HVQueue, HVQueueBookmark, HVQueueGuardedData, 
@@ -90,6 +93,7 @@ exports:
     objc-ivars:      [ HVConsumerCoordinatorGuardedData._budget, HVConsumerCoordinatorGuardedData._interactionConsumers, 
                        HVConsumerCoordinatorGuardedData._mailConsumers, HVConsumerCoordinatorGuardedData._messagesConsumers, 
                        HVConsumerCoordinatorGuardedData._newsConsumers, HVConsumerCoordinatorGuardedData._notesConsumers, 
+                       HVConsumerCoordinatorGuardedData._notificationsConsumers, 
                        HVConsumerCoordinatorGuardedData._parsecConsumers, HVConsumerCoordinatorGuardedData._photosConsumers, 
                        HVConsumerCoordinatorGuardedData._remindersConsumers, HVConsumerCoordinatorGuardedData._safariConsumers, 
                        HVConsumerCoordinatorGuardedData._siriConsumers, HVConsumerCoordinatorGuardedData._thirdPartyAppConsumers, 

@@ -16,18 +16,18 @@ NS_ASSUME_NONNULL_BEGIN
  *
  * A collection of models managed as part of Core ML Model Deployment.
  */
-API_DEPRECATED("Use Background Assets or NSURLSession instead.", macos(11.0, 14.4), ios(14.0, 17.4))API_UNAVAILABLE(tvos, watchos)
+MODELCOLLECTION_SUNSET("Use Background Assets or NSURLSession instead.", macos(11.0, 14.4), ios(14.0, 17.4))API_UNAVAILABLE(tvos, watchos)
 ML_EXPORT
 @interface MLModelCollection : NSObject
 
 /// The identifier of the model collection you want to access, as configured in the Core ML Model Deployment dashboard.
-@property (readonly, nonatomic, copy) NSString *identifier  API_DEPRECATED("Use Background Assets or NSURLSession instead.", macos(11.0, 14.4), ios(14.0, 17.4));
+@property (readonly, nonatomic, copy) NSString *identifier  MODELCOLLECTION_SUNSET("Use Background Assets or NSURLSession instead.", macos(11.0, 14.4), ios(14.0, 17.4));
 
 /// Information about the models downloaded in the collection, or an empty dictionary if the collection has not been downloaded.
-@property (readonly, nonatomic, copy) NSDictionary<NSString *, MLModelCollectionEntry *> *entries API_DEPRECATED("Use Background Assets or NSURLSession instead.", macos(11.0, 14.4), ios(14.0, 17.4));
+@property (readonly, nonatomic, copy) NSDictionary<NSString *, MLModelCollectionEntry *> *entries MODELCOLLECTION_SUNSET("Use Background Assets or NSURLSession instead.", macos(11.0, 14.4), ios(14.0, 17.4));
 
 /// The identifier for the currently downloaded deployment, corresponding to a recent deployment on the Core ML Model Deployment dashboard.
-@property (readonly, nonatomic, copy) NSString *deploymentID API_DEPRECATED("Use Background Assets or NSURLSession instead.", macos(11.0, 14.4), ios(14.0, 17.4));
+@property (readonly, nonatomic, copy) NSString *deploymentID MODELCOLLECTION_SUNSET("Use Background Assets or NSURLSession instead.", macos(11.0, 14.4), ios(14.0, 17.4));
 
 /*!
   Request access to a model collection. If the collection is not downloaded on the device, it is requested
@@ -42,7 +42,7 @@ ML_EXPORT
 */
 + (NSProgress *)beginAccessingModelCollectionWithIdentifier:(NSString *)identifier
                                           completionHandler:(void (^)(MLModelCollection *_Nullable modelCollection, NSError *_Nullable error))completionHandler NS_REFINED_FOR_SWIFT
-                                          API_DEPRECATED("Use Background Assets or NSURLSession instead.", macos(11.0, 14.4), ios(14.0, 17.4));
+                                          MODELCOLLECTION_SUNSET("Use Background Assets or NSURLSession instead.", macos(11.0, 14.4), ios(14.0, 17.4));
 
 /*!
   End access to a model collection. This informs the system you have finished accessing the models within the collection.
@@ -54,7 +54,7 @@ ML_EXPORT
 */
 + (void)endAccessingModelCollectionWithIdentifier:(NSString *)identifier
                                 completionHandler:(void (^)(BOOL success, NSError *_Nullable error))completionHandler NS_REFINED_FOR_SWIFT NS_SWIFT_ASYNC_NAME(endAccessing(identifier:))
-                                API_DEPRECATED("Use Background Assets or NSURLSession instead.", macos(11.0, 14.4), ios(14.0, 17.4));
+                                MODELCOLLECTION_SUNSET("Use Background Assets or NSURLSession instead.", macos(11.0, 14.4), ios(14.0, 17.4));
 
 - (instancetype)init NS_UNAVAILABLE;
 
@@ -63,9 +63,8 @@ ML_EXPORT
 @end
 
 /// Notification posted when the model collection has changed.
-API_DEPRECATED("Use Background Assets or NSURLSession instead.", macos(11.0, 14.4), ios(14.0, 17.4))API_UNAVAILABLE(tvos, watchos)
-API_UNAVAILABLE(tvos, watchos)
+MODELCOLLECTION_SUNSET("Use Background Assets or NSURLSession instead.", macos(11.0, 14.4), ios(14.0, 17.4))API_UNAVAILABLE(tvos, watchos)
 ML_EXPORT
-NSNotificationName const MLModelCollectionDidChangeNotification API_DEPRECATED("Use Background Assets or NSURLSession instead.", macos(11.0, 14.4), ios(14.0, 17.4));
+NSNotificationName const MLModelCollectionDidChangeNotification MODELCOLLECTION_SUNSET("Use Background Assets or NSURLSession instead.", macos(11.0, 14.4), ios(14.0, 17.4));
 
 NS_ASSUME_NONNULL_END

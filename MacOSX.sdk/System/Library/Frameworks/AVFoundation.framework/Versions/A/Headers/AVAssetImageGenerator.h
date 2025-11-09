@@ -4,7 +4,7 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2010-2022 Apple Inc. All rights reserved.
+	Copyright 2010-2024 Apple Inc. All rights reserved.
 
 */
 
@@ -37,7 +37,7 @@ NS_ASSUME_NONNULL_BEGIN
  @abstract
     The type of an aperture mode.
 */
-typedef NSString * AVAssetImageGeneratorApertureMode NS_STRING_ENUM API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0)) API_UNAVAILABLE(watchos);
+typedef NSString * AVAssetImageGeneratorApertureMode NS_STRING_ENUM API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 /*!
 	@constant		AVAssetImageGeneratorApertureModeCleanAperture
@@ -45,7 +45,7 @@ typedef NSString * AVAssetImageGeneratorApertureMode NS_STRING_ENUM API_AVAILABL
 	@discussion
 		An image's clean aperture is a region of video free from transition artifacts caused by the encoding of the signal.
 */
-AVF_EXPORT AVAssetImageGeneratorApertureMode const AVAssetImageGeneratorApertureModeCleanAperture API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0)) API_UNAVAILABLE(watchos);
+AVF_EXPORT AVAssetImageGeneratorApertureMode const AVAssetImageGeneratorApertureModeCleanAperture API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 /*!
 	@constant		AVAssetImageGeneratorApertureModeProductionAperture
@@ -53,7 +53,7 @@ AVF_EXPORT AVAssetImageGeneratorApertureMode const AVAssetImageGeneratorAperture
 	@discussion
 		The image is not cropped to the clean aperture region, but it is scaled according to the pixel aspect ratio. Use this option when you want to see all the pixels in your video, including the edges.
 */
-AVF_EXPORT AVAssetImageGeneratorApertureMode const AVAssetImageGeneratorApertureModeProductionAperture API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0)) API_UNAVAILABLE(watchos);
+AVF_EXPORT AVAssetImageGeneratorApertureMode const AVAssetImageGeneratorApertureModeProductionAperture API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 /*!
 	@constant		AVAssetImageGeneratorApertureModeEncodedPixels
@@ -61,7 +61,20 @@ AVF_EXPORT AVAssetImageGeneratorApertureMode const AVAssetImageGeneratorAperture
 	@discussion
 		The image is not cropped to the clean aperture region and is not scaled according to the pixel aspect ratio. The encoded dimensions of the image description are displayed.
 */
-AVF_EXPORT AVAssetImageGeneratorApertureMode const AVAssetImageGeneratorApertureModeEncodedPixels API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0)) API_UNAVAILABLE(watchos);
+AVF_EXPORT AVAssetImageGeneratorApertureMode const AVAssetImageGeneratorApertureModeEncodedPixels API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(watchos);
+
+/*!
+	@enum			AVAssetImageGeneratorDynamicRangePolicy
+	@abstract		Configures the video dynamic range for the output CGImage
+	@constant		AVAssetImageGeneratorDynamicRangePolicyForceSDR
+					Default.  Force standard dynamic range by converting PQ or HLG transfer functions to 709, while maintaining color primaries and matrix.
+	@constant		AVAssetImageGeneratorDynamicRangePolicyMatchSource
+					SDR movies will vend SDR CGImages matching the source color parameters.  HDR movies will vend HDR CGImages matching the source color parameters.
+					HTTP Live Streaming assets will currently vend only SDR CGImages.
+*/
+typedef NSString *AVAssetImageGeneratorDynamicRangePolicy NS_TYPED_ENUM	API_AVAILABLE(macos(15.0), ios(18.0), tvos(18.0), visionos(2.0))  API_UNAVAILABLE(watchos);
+	AVF_EXPORT AVAssetImageGeneratorDynamicRangePolicy const AVAssetImageGeneratorDynamicRangePolicyForceSDR		API_AVAILABLE(macos(15.0), ios(18.0), tvos(18.0), visionos(2.0)) API_UNAVAILABLE(watchos);
+	AVF_EXPORT AVAssetImageGeneratorDynamicRangePolicy const AVAssetImageGeneratorDynamicRangePolicyMatchSource		API_AVAILABLE(macos(15.0), ios(18.0), tvos(18.0), visionos(2.0)) API_UNAVAILABLE(watchos);
 
 typedef NS_ENUM(NSInteger, AVAssetImageGeneratorResult)
 {
@@ -70,7 +83,7 @@ typedef NS_ENUM(NSInteger, AVAssetImageGeneratorResult)
 	AVAssetImageGeneratorCancelled = 2,
 };
 
-API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0)) API_UNAVAILABLE(watchos)
+API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(watchos)
 @interface AVAssetImageGenerator : NSObject
 {
 @private
@@ -79,7 +92,7 @@ API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 AV_INIT_UNAVAILABLE
 
 /* Indicates the instance of AVAsset with which the AVAssetImageGenerator was initialized  */ 
-@property (nonatomic, readonly) AVAsset *asset API_AVAILABLE(macos(10.9), ios(6.0), tvos(9.0)) API_UNAVAILABLE(watchos);
+@property (nonatomic, readonly) AVAsset *asset API_AVAILABLE(macos(10.9), ios(6.0), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 /* Specifies whether or not to apply the track's preferredTransform (see -[AVAssetTrack preferredTransform]) when extracting an image from the asset.
    Default is NO.  Only rotation by 90, 180, or 270 degrees is supported. */
@@ -92,6 +105,13 @@ AV_INIT_UNAVAILABLE
 
 /* Specifies the aperture mode for the generated image.  Default is AVAssetImageGeneratorApertureModeCleanAperture. */
 @property (nonatomic, copy, nullable) AVAssetImageGeneratorApertureMode apertureMode;
+
+/*!
+ @property		dynamicRangePolicy
+ @abstract		Configures the video dynamic range for the output CGImage
+ @discussion	Default is AVAssetImageGeneratorDynamicRangePolicyForceSDR
+*/
+@property (nonatomic, copy) AVAssetImageGeneratorDynamicRangePolicy dynamicRangePolicy	API_AVAILABLE(macos(15.0), ios(18.0), tvos(18.0), visionos(2.0)) API_UNAVAILABLE(watchos);
 
 /*!
  @property		videoComposition
@@ -107,13 +127,13 @@ AV_INIT_UNAVAILABLE
 @property (nonatomic, copy, nullable) AVVideoComposition *videoComposition;
 
 /* Indicates the custom video compositor instance used, if any */
-@property (nonatomic, readonly, nullable) id <AVVideoCompositing> customVideoCompositor API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0)) API_UNAVAILABLE(watchos);
+@property (nonatomic, readonly, nullable) id <AVVideoCompositing> customVideoCompositor API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 /* The actual time of the generated images will be within the range [requestedTime-toleranceBefore, requestedTime+toleranceAfter] and may differ from the requested time for efficiency.
    Pass kCMTimeZero for both toleranceBefore and toleranceAfter to request frame-accurate image generation; this may incur additional decoding delay.
    Default is kCMTimePositiveInfinity. */
-@property (nonatomic) CMTime requestedTimeToleranceBefore API_AVAILABLE(macos(10.7), ios(5.0), tvos(9.0)) API_UNAVAILABLE(watchos);
-@property (nonatomic) CMTime requestedTimeToleranceAfter API_AVAILABLE(macos(10.7), ios(5.0), tvos(9.0)) API_UNAVAILABLE(watchos);
+@property (nonatomic) CMTime requestedTimeToleranceBefore API_AVAILABLE(macos(10.7), ios(5.0), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(watchos);
+@property (nonatomic) CMTime requestedTimeToleranceAfter API_AVAILABLE(macos(10.7), ios(5.0), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 /*!
 	@method			assetImageGeneratorWithAsset:
@@ -173,10 +193,10 @@ AV_INIT_UNAVAILABLE
  
 		On iOS and tvOS, it is particularly important to avoid blocking.  To preserve responsiveness, a synchronous request that blocks for too long (eg, a request to generate an image from an asset on a slow HTTP server) may lead to media services being reset.
 */
-- (nullable CGImageRef)copyCGImageAtTime:(CMTime)requestedTime actualTime:(nullable CMTime *)actualTime error:(NSError * _Nullable * _Nullable)outError CF_RETURNS_RETAINED API_DEPRECATED_WITH_REPLACEMENT("generateCGImageAsynchronouslyForTime:completionHandler:", macos(10.7, API_TO_BE_DEPRECATED), ios(4.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(watchos, visionos);
+- (nullable CGImageRef)copyCGImageAtTime:(CMTime)requestedTime actualTime:(nullable CMTime *)actualTime error:(NSError * _Nullable * _Nullable)outError CF_RETURNS_RETAINED API_DEPRECATED("Use generateCGImageAsynchronouslyForTime:completionHandler: instead", macos(10.7, 15.0), ios(4.0, 18.0), tvos(9.0, 18.0)) API_UNAVAILABLE(watchos, visionos);
 
 /* error object indicates the reason for failure if the result is AVAssetImageGeneratorFailed */
-typedef void (^AVAssetImageGeneratorCompletionHandler)(CMTime requestedTime, CGImageRef _Nullable image, CMTime actualTime, AVAssetImageGeneratorResult result, NSError * _Nullable error);
+typedef void (^ NS_SWIFT_SENDABLE AVAssetImageGeneratorCompletionHandler)(CMTime requestedTime, CGImageRef _Nullable image, CMTime actualTime, AVAssetImageGeneratorResult result, NSError * _Nullable error);
 
 /*!
 	@method			generateCGImagesAsynchronouslyForTimes:completionHandler:
@@ -204,7 +224,7 @@ typedef void (^AVAssetImageGeneratorCompletionHandler)(CMTime requestedTime, CGI
 					The generated image is not retained.  Clients should retain the image if they wish it to persist after the completion handler returns.
 					If image generation succeeds, the `image` parameter to the completion handler will be non-NULL and the `error` parameter will be nil.  If image generation fails or was cancelled, the `image` parameter will be NULL and the `error` parameter will describe what went wrong.  For cancelled images, the returned error will be AVErrorOperationCancelled.
 */
-- (void)generateCGImageAsynchronouslyForTime:(CMTime)requestedTime completionHandler:(void (^)(CGImageRef _Nullable image, CMTime actualTime, NSError * _Nullable error))handler NS_REFINED_FOR_SWIFT_ASYNC(2) API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0)) API_UNAVAILABLE(watchos);
+- (void)generateCGImageAsynchronouslyForTime:(CMTime)requestedTime completionHandler:(void (^ NS_SWIFT_SENDABLE)(CGImageRef _Nullable image, CMTime actualTime, NSError * _Nullable error))handler NS_REFINED_FOR_SWIFT_ASYNC(2) API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 /*!
 	@method			cancelAllCGImageGeneration

@@ -19,7 +19,7 @@ NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 //     locationInView:         location of the tap, from the first tap in the sequence if numberOfTapsRequired > 1. this is the centroid if numberOfTouchesRequired > 1
 //     locationOfTouch:inView: location of a particular touch, from the first tap in the sequence if numberOfTapsRequired > 1
 
-UIKIT_EXTERN API_AVAILABLE(ios(3.2)) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(3.2)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @interface UITapGestureRecognizer : UIGestureRecognizer
 
 @property (nonatomic) NSUInteger  numberOfTapsRequired;       // Default is 1. The number of taps required to match

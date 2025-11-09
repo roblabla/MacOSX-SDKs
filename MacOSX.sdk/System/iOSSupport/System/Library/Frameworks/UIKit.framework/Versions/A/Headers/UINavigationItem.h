@@ -25,7 +25,7 @@ typedef NS_ENUM(NSInteger, UINavigationItemLargeTitleDisplayMode) {
     UINavigationItemLargeTitleDisplayModeNever,
     /// Always use a large title when this item is topmost. If there is a back button present, this will revert to `Always`. Leading & center items will move to the overflow menu if present.
     UINavigationItemLargeTitleDisplayModeInline API_AVAILABLE(ios(17.0)) API_UNAVAILABLE(tvos, watchos),
-} NS_SWIFT_NAME(UINavigationItem.LargeTitleDisplayMode);
+} NS_SWIFT_NAME(UINavigationItem.LargeTitleDisplayMode) API_UNAVAILABLE(watchos);
 
 typedef NS_ENUM(NSInteger, UINavigationItemBackButtonDisplayMode) {
     /// Default mode, uses an appropriate title, followed by a generic title (typically 'Back'), then no title.
@@ -34,7 +34,7 @@ typedef NS_ENUM(NSInteger, UINavigationItemBackButtonDisplayMode) {
     UINavigationItemBackButtonDisplayModeGeneric = 1,
     /// Don't use a title, just the back button indicator image.
     UINavigationItemBackButtonDisplayModeMinimal = 2,
-} NS_SWIFT_NAME(UINavigationItem.BackButtonDisplayMode);
+} NS_SWIFT_NAME(UINavigationItem.BackButtonDisplayMode) API_UNAVAILABLE(watchos);
 
 typedef NS_ENUM(NSInteger, UINavigationItemSearchBarPlacement) {
     /// The navigation bar will choose a placement for the search bar that is appropriate for the current layout
@@ -79,7 +79,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(tvos, watchos) NS_SWIFT_UI
 @end
 
 
-UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(2.0)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @interface UINavigationItem : NSObject <NSCoding>
 
 - (instancetype)initWithTitle:(NSString *)title NS_DESIGNATED_INITIALIZER;
@@ -95,12 +95,12 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
 /// Bar button item to use for the back button when this item is the navigation bar's backItem.
 @property (nonatomic, readwrite, strong, nullable) UIBarButtonItem *backBarButtonItem API_UNAVAILABLE(tvos);
 /// Title to use when this item is the navigation bar's backItem. Default is nil. backBarButtonItem takes precedence if both are specified.
-@property (nonatomic, readwrite, copy, nullable) NSString *backButtonTitle API_AVAILABLE(ios(11.0));
+@property (nonatomic, readwrite, copy, nullable) NSString *backButtonTitle API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos);
 /// If YES, this navigation item will hide the back button when it's on top of the stack.
 @property (nonatomic, readwrite, assign) BOOL hidesBackButton API_UNAVAILABLE(tvos);
 - (void)setHidesBackButton:(BOOL)hidesBackButton animated:(BOOL)animated API_UNAVAILABLE(tvos);
 /// Controls how the back button sources its title.
-@property (nonatomic, readwrite, assign) UINavigationItemBackButtonDisplayMode backButtonDisplayMode API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(tvos);
+@property (nonatomic, readwrite, assign) UINavigationItemBackButtonDisplayMode backButtonDisplayMode API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(tvos, watchos);
 
 /// Replaces the back action for the navigation bar. if a back button is naturally present, this replaces only its action, otherwise a back button will be synthesized with the image or title from the action.
 @property (nonatomic, readwrite, copy, nullable) UIAction *backAction API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(tvos, watchos);
@@ -165,17 +165,17 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
 @property (nonatomic, readonly, strong, nullable) id<UIPopoverPresentationControllerSourceItem> overflowPresentationSource API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(tvos, watchos);
 
 /// When UINavigationBar.prefersLargeTitles=YES, this property controls when the larger out-of-line title is displayed. If prefersLargeTitles=NO, this property has no effect. The default value is Automatic.
-@property (nonatomic, readwrite, assign) UINavigationItemLargeTitleDisplayMode largeTitleDisplayMode API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(tvos);
+@property (nonatomic, readwrite, assign) UINavigationItemLargeTitleDisplayMode largeTitleDisplayMode API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos) API_UNAVAILABLE(tvos);
 
 /// Controls how content defined by this item is laid out in the navigation bar.
 @property (nonatomic, readwrite, assign) UINavigationItemStyle style API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(tvos, watchos);
 
 /// A view controller that will be shown inside of a navigation controller can assign a UISearchController to this property to display the search controller’s search bar in its containing navigation controller’s navigation bar.
-@property (nonatomic, readwrite, strong, nullable) UISearchController *searchController API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(tvos);
+@property (nonatomic, readwrite, strong, nullable) UISearchController *searchController API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos) API_UNAVAILABLE(tvos);
 
 /// If this property is true (the default), the searchController’s search bar will hide as the user scrolls in the top view controller’s scroll view. If false, the search bar will remain visible and pinned underneath the navigation bar.
 /// Not appicable and ignored for UINavigationItemSearchBarPlacementInline
-@property (nonatomic, readwrite, assign) BOOL hidesSearchBarWhenScrolling API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(tvos);
+@property (nonatomic, readwrite, assign) BOOL hidesSearchBarWhenScrolling API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos) API_UNAVAILABLE(tvos);
 
 /// The preferred search bar placement, when a search controller is assigned to this item.
 @property (nonatomic, readwrite, assign) UINavigationItemSearchBarPlacement preferredSearchBarPlacement API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(tvos, watchos);
@@ -184,13 +184,13 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
 @property (nonatomic, readonly, assign)  UINavigationItemSearchBarPlacement searchBarPlacement API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(tvos, watchos);
 
 ///  When set and this item is topmost, overrides the hosting navigation bar's standardAppearance. See UINavigationBar.standardAppearance for further details.
-@property (nonatomic, readwrite, copy, nullable) UINavigationBarAppearance *standardAppearance API_AVAILABLE(ios(13.0), tvos(13.0));
+@property (nonatomic, readwrite, copy, nullable) UINavigationBarAppearance *standardAppearance API_AVAILABLE(ios(13.0), tvos(13.0)) API_UNAVAILABLE(watchos);
 ///  When set and this item is topmost, overrides the hosting navigation bar's compactAppearance. See UINavigationBar.compactAppearance for further details.
-@property (nonatomic, readwrite, copy, nullable) UINavigationBarAppearance *compactAppearance API_AVAILABLE(ios(13.0));
+@property (nonatomic, readwrite, copy, nullable) UINavigationBarAppearance *compactAppearance API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos);
 ///  When set and this item is topmost, overrides the hosting navigation bar's scrollEdgeAppearance. See UINavigationBar.scrollEdgeAppearance for further details.
-@property (nonatomic, readwrite, copy, nullable) UINavigationBarAppearance *scrollEdgeAppearance API_AVAILABLE(ios(13.0));
+@property (nonatomic, readwrite, copy, nullable) UINavigationBarAppearance *scrollEdgeAppearance API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos);
 ///  When set and this item is topmost, overrides the hosting navigation bar's compactScrollEdgeAppearance. See UINavigationBar.h for further details.
-@property (nonatomic, readwrite, copy, nullable) UINavigationBarAppearance *compactScrollEdgeAppearance API_AVAILABLE(ios(15.0));
+@property (nonatomic, readwrite, copy, nullable) UINavigationBarAppearance *compactScrollEdgeAppearance API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(watchos);
 @end
 
 NS_HEADER_AUDIT_END(nullability, sendability)

@@ -337,6 +337,10 @@ FOUNDATION_EXPORT NSAttributedStringKey const NSInflectionAlternativeAttributeNa
     NS_SWIFT_NAME(inflectionAlternative)
     API_AVAILABLE(macos(12.0), ios(15.0), watchos(8.0), tvos(15.0));
 
+FOUNDATION_EXPORT NSAttributedStringKey const NSLocalizedNumberFormatAttributeName
+    NS_SWIFT_NAME(localizedNumberFormat)
+    API_AVAILABLE(macos(15.0), ios(18.0), watchos(11.0), tvos(18.0));
+
 FOUNDATION_EXTERN
 const NSAttributedStringKey NSPresentationIntentAttributeName API_AVAILABLE(macos(12.0), ios(15.0), watchos(8.0), tvos(15.0));
 

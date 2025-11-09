@@ -72,6 +72,7 @@ WK_EXTERN NSString * const WKWebsiteDataTypeMediaKeys API_AVAILABLE(macos(14.0),
 WK_EXTERN NSString * const WKWebsiteDataTypeHashSalt API_AVAILABLE(macos(14.0), ios(17.0));
 
 /*! A WKWebsiteDataRecord represents website data, grouped by domain name using the public suffix list. */
+WK_SWIFT_UI_ACTOR
 WK_EXTERN API_AVAILABLE(macos(10.11), ios(9.0))
 @interface WKWebsiteDataRecord : NSObject
 

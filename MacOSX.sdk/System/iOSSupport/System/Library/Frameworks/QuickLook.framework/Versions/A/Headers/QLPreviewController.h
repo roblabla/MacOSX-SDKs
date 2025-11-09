@@ -69,7 +69,7 @@ NS_CLASS_AVAILABLE_IOS(4_0) QL_EXPORT
 /*!
  * @abstract The QLPreviewControllerDataSource protocol declares the methods that the Preview Controller uses to access the contents of its data source object.
  */
-QL_EXPORT @protocol QLPreviewControllerDataSource
+QL_EXPORT NS_SWIFT_UI_ACTOR @protocol QLPreviewControllerDataSource
 
 @required
 

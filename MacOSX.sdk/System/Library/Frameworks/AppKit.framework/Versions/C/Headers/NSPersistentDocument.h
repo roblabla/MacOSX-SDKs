@@ -1,8 +1,8 @@
 /*
-	NSPersistentDocument.h
-	Application Kit
-	Copyright (c) 2004-2023, Apple Inc.
-	All rights reserved.
+    NSPersistentDocument.h
+    Application Kit
+    Copyright (c) 2004-2024, Apple Inc.
+    All rights reserved.
  */
 
 
@@ -47,5 +47,3 @@ APPKIT_API_UNAVAILABLE_BEGIN_MACCATALYST
 
 API_UNAVAILABLE_END
 NS_HEADER_AUDIT_END(nullability, sendability)
-
-

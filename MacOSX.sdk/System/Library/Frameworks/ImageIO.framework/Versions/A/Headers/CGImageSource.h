@@ -230,6 +230,7 @@ IMAGEIO_EXTERN size_t CGImageSourceGetPrimaryImageIndex(CGImageSourceRef _iio_No
  *   - the depth data (CFDataRef) - (kCGImageAuxiliaryDataInfoData),
  *   - the depth data description (CFDictionary) - (kCGImageAuxiliaryDataInfoDataDescription)
  *   - metadata (CGImageMetadataRef) - (kCGImageAuxiliaryDataInfoMetadata)
+ *   - optional color space (CGColorSpaceRef) - (kCGImageAuxiliaryDataInfoColorSpace)
  * CGImageSourceCopyAuxiliaryDataInfoAtIndex returns nil if the image did not contain ‘auxiliaryImageDataType’ data.
  */
 IMAGEIO_EXTERN CFDictionaryRef _iio_Nullable CGImageSourceCopyAuxiliaryDataInfoAtIndex(CGImageSourceRef _iio_Nonnull isrc, size_t index, CFStringRef _iio_Nonnull auxiliaryImageDataType ) IMAGEIO_AVAILABLE_STARTING(10.13, 11.0);
@@ -243,6 +244,10 @@ IMAGEIO_EXTERN const CFStringRef kCGImageSourceDecodeRequest    IMAGEIO_AVAILABL
 
 IMAGEIO_EXTERN const CFStringRef kCGImageSourceDecodeToHDR      IMAGEIO_AVAILABLE_STARTING(14.0, 17.0, 17.0, 10.0);
 IMAGEIO_EXTERN const CFStringRef kCGImageSourceDecodeToSDR      IMAGEIO_AVAILABLE_STARTING(14.0, 17.0, 17.0, 10.0);
+
+/* kCGImageSourceGenerateImageSpecificLumaScaling - generate a global tone mapping function based on the gain map. Dafault value is "YES" (kCFBooleanTrue)
+ */
+IMAGEIO_EXTERN const CFStringRef kCGImageSourceGenerateImageSpecificLumaScaling      IMAGEIO_AVAILABLE_STARTING(15.0, 18.0, 18.0, 11.0);
 
 /* kCGImageSourceDecodeRequestOptions - CFDictionaryRef to specify additional options
  */

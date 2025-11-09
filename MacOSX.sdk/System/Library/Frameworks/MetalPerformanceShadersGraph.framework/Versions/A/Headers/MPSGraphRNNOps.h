@@ -29,17 +29,16 @@ typedef NS_ENUM(NSUInteger, MPSGraphRNNActivation)
     MPSGraphRNNActivationHardSigmoid    MPS_ENUM_AVAILABLE_STARTING(macos(12.3), ios(15.4), tvos(15.4)),
 };
 
-/// This class defines parameters for a single gate (vanilla) RNN operation.
+/// The class that defines the parameters for a single gate RNN operation.
 ///
 /// Use this descriptor with the following ``MPSGraph`` methods:
-/// - ``MPSGraph/singleGateRNNWithSourceTensor:recurrentWeight:initState:descriptor:name:``,
-/// - ``MPSGraph/singleGateRNNWithSourceTensor:recurrentWeight:inputWeight:bias:initState:descriptor:name:``,
-/// - ``MPSGraph/singleGateRNNWithSourceTensor:recurrentWeight:inputWeight:bias:initState:mask:descriptor:name:``,
-/// - ``MPSGraph/singleGateRNNGradientsWithSourceTensor:recurrentWeight:sourceGradient:zState:initState:descriptor:name:``,
-/// - ``MPSGraph/singleGateRNNGradientsWithSourceTensor:recurrentWeight:sourceGradient:zState:inputWeight:bias:initState:descriptor:name:``,
-/// - ``MPSGraph/singleGateRNNGradientsWithSourceTensor:recurrentWeight:sourceGradient:zState:inputWeight:bias:initState:mask:descriptor:name:``,
-/// and
-/// - ``MPSGraph/singleGateRNNGradientsWithSourceTensor:recurrentWeight:sourceGradient:zState:stateGradient:inputWeight:bias:initState:mask:descriptor:name:``.
+/// - ``MPSGraph/singleGateRNNWithSourceTensor:recurrentWeight:initState:descriptor:name:``
+/// - ``MPSGraph/singleGateRNNWithSourceTensor:recurrentWeight:inputWeight:bias:initState:descriptor:name:``
+/// - ``MPSGraph/singleGateRNNWithSourceTensor:recurrentWeight:inputWeight:bias:initState:mask:descriptor:name:``
+/// - ``MPSGraph/singleGateRNNGradientsWithSourceTensor:recurrentWeight:sourceGradient:zState:initState:descriptor:name:``
+/// - ``MPSGraph/singleGateRNNGradientsWithSourceTensor:recurrentWeight:sourceGradient:zState:inputWeight:bias:initState:descriptor:name:``
+/// - ``MPSGraph/singleGateRNNGradientsWithSourceTensor:recurrentWeight:sourceGradient:zState:inputWeight:bias:initState:mask:descriptor:name:``
+/// - ``MPSGraph/singleGateRNNGradientsWithSourceTensor:recurrentWeight:sourceGradient:zState:stateGradient:inputWeight:bias:initState:mask:descriptor:name:``
 MPS_CLASS_AVAILABLE_STARTING(macos(12.3), ios(15.4), tvos(15.4))
 @interface MPSGraphSingleGateRNNDescriptor : MPSGraphObject<NSCopying>
 
@@ -63,7 +62,8 @@ MPS_CLASS_AVAILABLE_STARTING(macos(12.3), ios(15.4), tvos(15.4))
 /// Default value: `NO`.
 @property (readwrite, nonatomic) BOOL training;
 
-/// A parameter which defines the activation function to use with the RNN operation.
+/// A parameter that defines the activation function to use with the RNN operation.
+/// 
 /// Default value: `MPSGraphRNNActivationRelu`.
 @property (readwrite, nonatomic) MPSGraphRNNActivation activation;
 
@@ -72,16 +72,16 @@ MPS_CLASS_AVAILABLE_STARTING(macos(12.3), ios(15.4), tvos(15.4))
 
 @end
 
-/// This class defines parameters for a Long Short Term Memory (LSTM) operation.
+/// The class that defines the parameters for a long short-term memory (LSTM) operation.
 ///
 /// Use this descriptor with the following ``MPSGraph`` methods:
-/// - ``MPSGraph/LSTMWithSourceTensor:recurrentWeight:initState:initCell:descriptor:name:``,
-/// - ``MPSGraph/LSTMWithSourceTensor:recurrentWeight:inputWeight:bias:initState:initCell:descriptor:name:``,
-/// - ``MPSGraph/LSTMWithSourceTensor:recurrentWeight:inputWeight:bias:initState:initCell:mask:peephole:descriptor:name:``,
-/// - ``MPSGraph/LSTMGradientsWithSourceTensor:recurrentWeight:sourceGradient:zState:cellOutputFwd:descriptor:name:``,
-/// - ``MPSGraph/LSTMGradientsWithSourceTensor:recurrentWeight:sourceGradient:zState:cellOutputFwd:inputWeight:bias:initState:initCell:descriptor:name:``,
-/// - ``MPSGraph/LSTMGradientsWithSourceTensor:recurrentWeight:sourceGradient:zState:cellOutputFwd:inputWeight:bias:initState:initCell:mask:descriptor:name:`` and
-/// - ``MPSGraph/LSTMGradientsWithSourceTensor:recurrentWeight:sourceGradient:zState:cellOutputFwd:stateGradient:cellGradient:inputWeight:bias:initState:initCell:mask:peephole:descriptor:name:``.
+/// - ``MPSGraph/LSTMWithSourceTensor:recurrentWeight:initState:initCell:descriptor:name:``
+/// - ``MPSGraph/LSTMWithSourceTensor:recurrentWeight:inputWeight:bias:initState:initCell:descriptor:name:``
+/// - ``MPSGraph/LSTMWithSourceTensor:recurrentWeight:inputWeight:bias:initState:initCell:mask:peephole:descriptor:name:``
+/// - ``MPSGraph/LSTMGradientsWithSourceTensor:recurrentWeight:sourceGradient:zState:cellOutputFwd:descriptor:name:``
+/// - ``MPSGraph/LSTMGradientsWithSourceTensor:recurrentWeight:sourceGradient:zState:cellOutputFwd:inputWeight:bias:initState:initCell:descriptor:name:``
+/// - ``MPSGraph/LSTMGradientsWithSourceTensor:recurrentWeight:sourceGradient:zState:cellOutputFwd:inputWeight:bias:initState:initCell:mask:descriptor:name:``
+/// - ``MPSGraph/LSTMGradientsWithSourceTensor:recurrentWeight:sourceGradient:zState:cellOutputFwd:stateGradient:cellGradient:inputWeight:bias:initState:initCell:mask:peephole:descriptor:name:``
 MPS_CLASS_AVAILABLE_STARTING(macos(12.3), ios(15.4), tvos(15.4))
 @interface MPSGraphLSTMDescriptor : MPSGraphObject<NSCopying>
 
@@ -105,7 +105,7 @@ MPS_CLASS_AVAILABLE_STARTING(macos(12.3), ios(15.4), tvos(15.4))
 /// Default value: `NO`.
 @property (readwrite, nonatomic) BOOL produceCell;
 
-/// A parameter that makes the LSTM layer support training.
+/// A parameter that enables the LSTM layer to support training.
 ///
 /// If set to `YES` then the layer will produce training state tensor as a secondary output.
 /// Default value: `NO`.
@@ -117,23 +117,28 @@ MPS_CLASS_AVAILABLE_STARTING(macos(12.3), ios(15.4), tvos(15.4))
 /// Default value: `NO`
 @property (readwrite, nonatomic) BOOL forgetGateLast;
 
-/// A parameter which defines the activation function used with the input gate of the LSTM operation.
+/// A parameter that defines the activation function used with the input gate of the LSTM operation.
+/// 
 /// Default value: `MPSGraphRNNActivationSigmoid`.
 @property (readwrite, nonatomic) MPSGraphRNNActivation inputGateActivation;
 
-/// A parameter which defines the activation function used with the forget gate of the LSTM operation.
+/// A parameter that defines the activation function used with the forget gate of the LSTM operation.
+/// 
 /// Default value: `MPSGraphRNNActivationSigmoid`.
 @property (readwrite, nonatomic) MPSGraphRNNActivation forgetGateActivation;
 
-/// A parameter which defines the activation function used with the cell gate of the LSTM operation.
+/// A parameter that defines the activation function used with the cell gate of the LSTM operation.
+/// 
 /// Default value: `MPSGraphRNNActivationTanh`.
 @property (readwrite, nonatomic) MPSGraphRNNActivation cellGateActivation;
 
-/// A parameter which defines the activation function used with the output gate of the LSTM operation.
+/// A parameter that defines the activation function used with the output gate of the LSTM operation.
+/// 
 /// Default value: `MPSGraphRNNActivationSigmoid`.
 @property (readwrite, nonatomic) MPSGraphRNNActivation outputGateActivation;
 
-/// A parameter which defines the activation function used with the current cell value of the LSTM operation.
+/// A parameter that defines the activation function used with the current cell value of the LSTM operation.
+/// 
 /// Default value: `MPSGraphRNNActivationTanh`.
 @property (readwrite, nonatomic) MPSGraphRNNActivation activation;
 
@@ -142,19 +147,19 @@ MPS_CLASS_AVAILABLE_STARTING(macos(12.3), ios(15.4), tvos(15.4))
 
 @end
 
-/// This class defines parameters for a Gated Recurrent Unit (GRU) operation.
+/// The class that defines the parameters for a gated recurrent unit (GRU) operation.
 ///
 /// Use this descriptor with the following ``MPSGraph`` methods:
-/// - ``MPSGraph/GRUWithSourceTensor:recurrentWeight:inputWeight:bias:descriptor:name:``,
-/// - ``MPSGraph/GRUWithSourceTensor:recurrentWeight:inputWeight:bias:initState:descriptor:name:``,
-/// - ``MPSGraph/GRUWithSourceTensor:recurrentWeight:inputWeight:bias:initState:mask:secondaryBias:descriptor:name:``,
-/// - ``MPSGraph/GRUGradientsWithSourceTensor:recurrentWeight:sourceGradient:zState:outputFwd:inputWeight:bias:descriptor:name:``,
-/// - ``MPSGraph/GRUGradientsWithSourceTensor:recurrentWeight:sourceGradient:zState:outputFwd:inputWeight:bias:initState:descriptor:name:`` and
-/// - ``MPSGraph/GRUGradientsWithSourceTensor:recurrentWeight:sourceGradient:zState:outputFwd:stateGradient:inputWeight:bias:initState:mask:secondaryBias:descriptor:name:``.
+/// - ``MPSGraph/GRUWithSourceTensor:recurrentWeight:inputWeight:bias:descriptor:name:``
+/// - ``MPSGraph/GRUWithSourceTensor:recurrentWeight:inputWeight:bias:initState:descriptor:name:``
+/// - ``MPSGraph/GRUWithSourceTensor:recurrentWeight:inputWeight:bias:initState:mask:secondaryBias:descriptor:name:``
+/// - ``MPSGraph/GRUGradientsWithSourceTensor:recurrentWeight:sourceGradient:zState:outputFwd:inputWeight:bias:descriptor:name:``
+/// - ``MPSGraph/GRUGradientsWithSourceTensor:recurrentWeight:sourceGradient:zState:outputFwd:inputWeight:bias:initState:descriptor:name:``
+/// - ``MPSGraph/GRUGradientsWithSourceTensor:recurrentWeight:sourceGradient:zState:outputFwd:stateGradient:inputWeight:bias:initState:mask:secondaryBias:descriptor:name:``
 MPS_CLASS_AVAILABLE_STARTING(macos(13.0), ios(16.0), tvos(16.0))
 @interface MPSGraphGRUDescriptor : MPSGraphObject<NSCopying>
 
-/// A parameter that defines time direction of the input sequence.
+/// A parameter that defines the time direction of the input sequence.
 ///
 /// If set to `YES` then the input sequence is passed in reverse time order to the layer.
 /// Note: Ignored when `bidirectional = YES`.
@@ -168,7 +173,7 @@ MPS_CLASS_AVAILABLE_STARTING(macos(13.0), ios(16.0), tvos(16.0))
 /// Default value: `NO`.
 @property (readwrite, nonatomic) BOOL bidirectional;
 
-/// A parameter that makes the GRU layer support training.
+/// A parameter that enables the GRU layer to support training.
 ///
 /// If set to `YES` then the layer will produce training state tensor as a secondary output.
 /// Default value: `NO`.
@@ -194,15 +199,18 @@ MPS_CLASS_AVAILABLE_STARTING(macos(13.0), ios(16.0), tvos(16.0))
 /// Default value: `NO`.
 @property (readwrite, nonatomic) BOOL flipZ;
 
-/// A parameter which defines the activation function to use with the z-gate of the GRU op.
+/// A parameter that defines the activation function to use with the update-gate of the GRU operation.
+///
 /// Default value: `MPSGraphRNNActivationSigmoid`.
 @property (readwrite, nonatomic) MPSGraphRNNActivation updateGateActivation;
 
-/// A parameter which defines the activation function to use with the r-gate of the GRU op.
+/// A parameter that defines the activation function to use with the reset-gate of the GRU operation.
+///
 /// Default value: `MPSGraphRNNActivationSigmoid`.
 @property (readwrite, nonatomic) MPSGraphRNNActivation resetGateActivation;
 
-/// A parameter which defines the activation function to use with the o-gate of the GRU op.
+/// A parameter that defines the activation function to use with the output-gate of the GRU operation.
+///
 /// Default value: `MPSGraphRNNActivationTanh`.
 @property (readwrite, nonatomic) MPSGraphRNNActivation outputGateActivation;
 
@@ -250,7 +258,7 @@ MPS_CLASS_AVAILABLE_STARTING(macos(12.3), ios(15.4), tvos(15.4))
 MPS_SWIFT_NAME( singleGateRNN(_:recurrentWeight:inputWeight:bias:initState:mask:descriptor:name:))
 MPS_AVAILABLE_STARTING(macos(12.3), ios(15.4), tvos(15.4));
 
-/// Creates a single-gate RNN operation and returns the value and optionally training state tensor.
+/// Creates a single-gate RNN operation and returns the value and optionally the training state tensor.
 ///
 /// This operation returns tensors `h` and optionally `z` that are defined recursively as follows:
 /// ```md
@@ -284,7 +292,7 @@ MPS_AVAILABLE_STARTING(macos(12.3), ios(15.4), tvos(15.4));
 MPS_SWIFT_NAME( singleGateRNN(_:recurrentWeight:inputWeight:bias:initState:descriptor:name:))
 MPS_AVAILABLE_STARTING(macos(12.3), ios(15.4), tvos(15.4));
 
-/// Creates a single-gate RNN operation and returns the value and optionally training state tensor.
+/// Creates a single-gate RNN operation and returns the value and optionally the training state tensor.
 ///
 /// This operation returns tensors `h` and optionally `z` that are defined recursively as follows:
 /// ```md
@@ -458,7 +466,7 @@ MPS_AVAILABLE_STARTING(macos(12.3), ios(15.4), tvos(15.4));
 MPS_SWIFT_NAME( singleGateRNNGradients(_:recurrentWeight:sourceGradient:zState:initState:descriptor:name:))
 MPS_AVAILABLE_STARTING(macos(12.3), ios(15.4), tvos(15.4));
 
-/// Creates an LSTM operation and returns the value tensor and optionally the cell state tensor and optionally the training state tensor.
+/// Creates an LSTM operation and returns the value tensor and optionally the cell state tensor and  the training state tensor.
 ///
 /// This operation returns tensors `h` and optionally `c` and optionally `z` that are defined recursively as follows: 
 /// ```md
@@ -502,7 +510,7 @@ MPS_AVAILABLE_STARTING(macos(12.3), ios(15.4), tvos(15.4));
 MPS_SWIFT_NAME( LSTM(_:recurrentWeight:inputWeight:bias:initState:initCell:mask:peephole:descriptor:name:))
 MPS_AVAILABLE_STARTING(macos(12.3), ios(15.4), tvos(15.4));
 
-/// Creates an LSTM operation and returns the value tensor and optionally the cell state tensor and optionally the training state tensor.
+/// Creates an LSTM operation and returns the value tensor and optionally the cell state tensor and  the training state tensor.
 ///
 /// This operation returns tensors `h` and optionally `c` and optionally `z` that are defined recursively as follows:
 /// ```md
@@ -542,7 +550,7 @@ MPS_AVAILABLE_STARTING(macos(12.3), ios(15.4), tvos(15.4));
 MPS_SWIFT_NAME( LSTM(_:recurrentWeight:inputWeight:bias:initState:initCell:descriptor:name:))
 MPS_AVAILABLE_STARTING(macos(12.3), ios(15.4), tvos(15.4));
 
-/// Creates an LSTM operation and returns the value tensor and optionally the cell state tensor and optionally the training state tensor.
+/// Creates an LSTM operation and returns the value tensor and optionally the cell state tensor and  the training state tensor.
 ///
 /// This operation returns tensors `h` and optionally `c` and optionally `z` that are defined recursively as follows:
 /// ```md

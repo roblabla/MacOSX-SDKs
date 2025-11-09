@@ -1,7 +1,7 @@
 #if !__has_include(<UIFoundation/NSTextTable.h>)
 /*
         NSTextTable.h
-        Copyright (c) 2004-2023, Apple Inc.
+        Copyright (c) 2004-2024, Apple Inc.
         All rights reserved.
 
         Classes to represent text tables and other text blocks.

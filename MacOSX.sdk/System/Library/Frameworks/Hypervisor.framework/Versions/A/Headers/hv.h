@@ -54,7 +54,7 @@ extern hv_return_t hv_vm_destroy(void) __HV_10_10;
 /*!
  * @function   hv_vm_space_create
  * @abstract   Creates an additional guest address space for the current task
- * @param      asid  Pointer to the addresss space ID (written on success)
+ * @param      asid  Pointer to the address space ID (written on success)
  * @result     0 on success or error code
  */
 extern hv_return_t hv_vm_space_create(hv_vm_space_t *asid) __HV_10_15;

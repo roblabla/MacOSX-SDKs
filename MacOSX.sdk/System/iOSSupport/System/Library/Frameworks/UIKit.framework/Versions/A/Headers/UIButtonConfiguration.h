@@ -16,14 +16,14 @@
 
 NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
-typedef NSDictionary<NSAttributedStringKey, id> *_Nonnull (^/*NS_SWIFT_SENDABLE*/ UIConfigurationTextAttributesTransformer)(NSDictionary<NSAttributedStringKey, id> *textAttributes) API_AVAILABLE(ios(15.0), tvos(15.0), watchos(8.0));
+typedef NSDictionary<NSAttributedStringKey, id> *_Nonnull (^/*NS_SWIFT_SENDABLE*/ UIConfigurationTextAttributesTransformer)(NSDictionary<NSAttributedStringKey, id> *textAttributes) API_AVAILABLE(ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos);
 
 typedef NS_ENUM(NSInteger, UIButtonConfigurationSize) {
     UIButtonConfigurationSizeMedium,
     UIButtonConfigurationSizeSmall,
     UIButtonConfigurationSizeMini,
     UIButtonConfigurationSizeLarge,
-} API_AVAILABLE(ios(15.0));
+} API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(watchos);
 
 typedef NS_ENUM(NSInteger, UIButtonConfigurationTitleAlignment) {
     /// Align title & subtitle automatically
@@ -34,7 +34,7 @@ typedef NS_ENUM(NSInteger, UIButtonConfigurationTitleAlignment) {
     UIButtonConfigurationTitleAlignmentCenter,
     /// Align title & subtitle along their trailing edges
     UIButtonConfigurationTitleAlignmentTrailing,
-} API_AVAILABLE(ios(15.0));
+} API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(watchos);
 
 typedef NS_ENUM(NSInteger, UIButtonConfigurationCornerStyle) {
     /// The corner radius provided by the background style will be used as is, without adjusting for dynamic type
@@ -49,7 +49,7 @@ typedef NS_ENUM(NSInteger, UIButtonConfigurationCornerStyle) {
     UIButtonConfigurationCornerStyleLarge,
     /// Ignore the corner radius provided by the background style and always set the corner radius to generate a capsule.
     UIButtonConfigurationCornerStyleCapsule,
-} API_AVAILABLE(ios(15.0));
+} API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(watchos);
 
 typedef NS_ENUM(NSInteger, UIButtonConfigurationMacIdiomStyle) {
     /// Automatically select the style to use
@@ -60,7 +60,7 @@ typedef NS_ENUM(NSInteger, UIButtonConfigurationMacIdiomStyle) {
     UIButtonConfigurationMacIdiomStyleBorderless,
     /// Always use a tinted, borderless style button
     UIButtonConfigurationMacIdiomStyleBorderlessTinted,
-} API_AVAILABLE(ios(15.0));
+} API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(watchos);
 
 typedef NS_ENUM(NSInteger, UIButtonConfigurationIndicator) {
     /// Automatically determine an indicator based on the button's properties.
@@ -69,9 +69,9 @@ typedef NS_ENUM(NSInteger, UIButtonConfigurationIndicator) {
     UIButtonConfigurationIndicatorNone,
     /// Show an indicator appropriate for a popup-style button
     UIButtonConfigurationIndicatorPopup,
-} API_AVAILABLE(ios(16.0));
+} API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(watchos);
 
-UIKIT_EXTERN API_AVAILABLE(ios(15.0), tvos(15.0), watchos(8.0)) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @interface UIButtonConfiguration : NSObject <NSCopying, NSSecureCoding>
 
 + (instancetype)plainButtonConfiguration;

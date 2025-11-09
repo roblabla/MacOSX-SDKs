@@ -16,7 +16,8 @@ NS_ASSUME_NONNULL_BEGIN
 MPS_CLASS_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))
 @interface MPSGraph(MPSGraphOptimizerOps)
 
-/// The StochasticGradientDescent performs a gradient descent 
+/// The Stochastic gradient descent performs a gradient descent.
+///
 /// `variable = variable - (learningRate * g)`
 /// where, 
 /// `g` is gradient of error wrt variable
@@ -33,7 +34,7 @@ MPS_CLASS_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))
                                                                name:(NSString * _Nullable) name
 MPS_SWIFT_NAME( stochasticGradientDescent(learningRate:values:gradient:name:) );
 
-/// The StochasticGradientDescent performs a gradient descent
+/// The Stochastic gradient descent performs a gradient descent
 /// `variable = variable - (learningRate * g)`
 /// where,
 /// `g` is gradient of error wrt variable
@@ -51,7 +52,7 @@ MPS_SWIFT_NAME( stochasticGradientDescent(learningRate:values:gradient:name:) );
                                                                        name:(NSString * _Nullable) name
 MPS_SWIFT_NAME( applyStochasticGradientDescent(learningRate:variable:gradient:name:) );
 
-/// Adam
+/// Creates operations to apply Adam optimization.
 ///
 /// The adam update ops are added 
 /// current learning rate:
@@ -90,7 +91,7 @@ MPS_SWIFT_NAME( applyStochasticGradientDescent(learningRate:variable:gradient:na
 MPS_SWIFT_NAME( adam(learningRate:beta1:beta2:epsilon:beta1Power:beta2Power:values:momentum:velocity:maximumVelocity:gradient:name:) );
 
 
-/// Adam
+/// Creates operations to apply Adam optimization.
 ///
 /// The adam update ops are added
 /// ```md

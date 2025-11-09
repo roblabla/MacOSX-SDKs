@@ -17,7 +17,7 @@
 #ifndef _AGLMACRO_H
 #define _AGLMACRO_H
 
-#include "aglContext.h"
+#include <AGL/aglContext.h>
 
 /* Macro context name (AGLContext) */
 #if !defined(AGL_MACRO_CONTEXT)

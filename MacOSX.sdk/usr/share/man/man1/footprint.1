@@ -173,7 +173,7 @@ Most other types of memory can be tagged with a name that indicates what subsyst
 .Xr mmap 2
 for more information). For instance, Foundation.framework may allocate memory and tag it with VM_MEMORY_FOUNDATION, which appears in
 .Nm footprint Ap s
-output as 'Foundation'. Processes are able to allocate memory with their own tags by using an appropriate tag in the range VM_MEMORY_APPLICATION_SPECIFIC_1-VM_MEMORY_APPLICATION_SPECIFIC_16. Memory which does not fall into one of the previous categories and has not been explicitly tagged will be marked 'untagged ("VM_ALLOCATE")'.
+output as 'Foundation'. Processes are able to allocate memory with their own tags by using an appropriate tag in the range VM_MEMORY_APPLICATION_SPECIFIC_1-VM_MEMORY_APPLICATION_SPECIFIC_16. Memory which does not fall into one of the previous categories and has not been explicitly tagged will be marked 'untagged (VM_ALLOCATE)'.
 .It Kernel memory
 In the special case of analyzing kernel_task,
 .Nm footprint Ap s

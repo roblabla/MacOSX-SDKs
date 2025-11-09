@@ -2310,6 +2310,8 @@ extern relop  relationl(long double x, long double y);
 #if TYPE_LONGDOUBLE_IS_DOUBLE
   #ifdef __cplusplus
     inline relop relationl(long double x, long double y) { return relation((double)(x), (double)(y)); }
+  #elif defined(__STDC__) && defined(__STDC_VERSION__) && __STDC_VERSION__ >= 199901L
+	inline relop relationl(long double x, long double y) { return relation((double)(x), (double)(y)); }
   #else
     #define relationl(x, y) (relation((double)(x), (double)(y)))
   #endif
@@ -2328,6 +2330,8 @@ extern relop  relationl(long double x, long double y);
 extern void  num2decl(const decform *f, long double x, decimal *d);
 #if TYPE_LONGDOUBLE_IS_DOUBLE
   #ifdef __cplusplus
+    inline void num2decl(const decform *f, long double x, decimal *d) { num2dec((f), (double)(x), (d)); }
+  #elif defined(__STDC__) && defined(__STDC_VERSION__) && __STDC_VERSION__ >= 199901L
     inline void num2decl(const decform *f, long double x, decimal *d) { num2dec((f), (double)(x), (d)); }
   #else
     #define num2decl(f, x, d) (num2dec((f), (double)(x), (d)))
@@ -2348,6 +2352,8 @@ extern long double  dec2numl(const decimal * d);
 #if TYPE_LONGDOUBLE_IS_DOUBLE
   #ifdef __cplusplus
     inline long double dec2numl(const decimal *d) { return (long double) dec2num(d); }
+  #elif defined(__STDC__) && defined(__STDC_VERSION__) && __STDC_VERSION__ >= 199901L
+	inline long double dec2numl(const decimal *d) { return (long double) dec2num(d); }
   #else
     #define dec2numl(d) ((long double) dec2num(d))
   #endif

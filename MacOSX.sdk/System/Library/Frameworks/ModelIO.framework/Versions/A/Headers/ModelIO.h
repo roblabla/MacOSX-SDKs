@@ -23,3 +23,4 @@
 #import <ModelIO/MDLVertexDescriptor.h>
 #import <ModelIO/MDLVoxelArray.h>
 #import <ModelIO/MDLAnimation.h>
+#import <ModelIO/MDLUtility.h>

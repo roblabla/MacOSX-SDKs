@@ -742,7 +742,7 @@ exports:
                        '_$s12_Backtracing9BacktraceV12addressWidthSivg', '_$s12_Backtracing9BacktraceV12addressWidthSivpMV', 
                        '_$s12_Backtracing9BacktraceV12addressWidthSivs', '_$s12_Backtracing9BacktraceV12architectureSSvM', 
                        '_$s12_Backtracing9BacktraceV12architectureSSvg', '_$s12_Backtracing9BacktraceV12architectureSSvpMV', 
-                       '_$s12_Backtracing9BacktraceV12architectureSSvs', '_$s12_Backtracing9BacktraceV12symbolicated4with15sharedCacheInfo16showInlineFrames09useSymbolF0AA012SymbolicatedB0VSgSayAC5ImageVGSg_AC06SharedfG0VSgS2btF', 
+                       '_$s12_Backtracing9BacktraceV12architectureSSvs', '_$s12_Backtracing9BacktraceV12symbolicated4with15sharedCacheInfo16showInlineFrames0H15SourceLocations09useSymbolF0AA012SymbolicatedB0VSgSayAC5ImageVGSg_AC06SharedfG0VSgS3btF', 
                        '_$s12_Backtracing9BacktraceV13captureImages3forSayAC5ImageVGyp_tFZ', 
                        '_$s12_Backtracing9BacktraceV13captureImagesSayAC5ImageVGyFZ', 
                        '_$s12_Backtracing9BacktraceV13formatAddress_6prefixSSs6UInt64V_SbtF', 

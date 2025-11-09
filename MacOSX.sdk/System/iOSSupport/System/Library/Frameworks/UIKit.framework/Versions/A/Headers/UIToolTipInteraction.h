@@ -13,7 +13,7 @@ NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 @protocol UIToolTipInteractionDelegate;
                            
-UIKIT_EXTERN API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(watchos, tvos)
+UIKIT_EXTERN API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(watchos, tvos) NS_SWIFT_UI_ACTOR
 @interface UIToolTipInteraction : NSObject <UIInteraction>
 
 /// The interaction's delegate.
@@ -34,7 +34,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(watchos, tvos)
 @end
 
 
-UIKIT_EXTERN API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(watchos, tvos)
+UIKIT_EXTERN API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(watchos, tvos) NS_SWIFT_UI_ACTOR
 @interface UIToolTipConfiguration : NSObject
 
 /// The string to annotate the contents at a given point.
@@ -55,7 +55,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(watchos, tvos)
 @end
 
 
-UIKIT_EXTERN API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(watchos, tvos)
+UIKIT_EXTERN API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(watchos, tvos) NS_SWIFT_UI_ACTOR
 @protocol UIToolTipInteractionDelegate <NSObject>
 
 @optional

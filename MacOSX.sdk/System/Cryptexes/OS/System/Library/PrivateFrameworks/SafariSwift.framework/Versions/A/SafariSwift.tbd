@@ -44,7 +44,24 @@ exports:
                        '_$s11SafariSwift15TipsCoordinatorCfD', '_$s11SafariSwift19SiriLinkCoordinatorCACycfC', 
                        '_$s11SafariSwift19SiriLinkCoordinatorCACycfc', '_$s11SafariSwift19SiriLinkCoordinatorCMa', 
                        '_$s11SafariSwift19SiriLinkCoordinatorCMn', '_$s11SafariSwift19SiriLinkCoordinatorCMo', 
-                       '_$s11SafariSwift19SiriLinkCoordinatorCN', '_$s11SafariSwift19SiriLinkCoordinatorCfD' ]
-    objc-classes:    [ SiriLinkCoordinator, TipsCoordinator, _SiriLinkCoordinator, 
-                       _TipsCoordinator ]
+                       '_$s11SafariSwift19SiriLinkCoordinatorCN', '_$s11SafariSwift19SiriLinkCoordinatorCfD', 
+                       '_$s11SafariSwift21OnDeviceSummarizationC05checkE12AvailabilitySbyYaFZ', 
+                       '_$s11SafariSwift21OnDeviceSummarizationC05checkE12AvailabilitySbyYaFZTu', 
+                       '_$s11SafariSwift21OnDeviceSummarizationC12isRestrictedSbvMZ', 
+                       '_$s11SafariSwift21OnDeviceSummarizationC12isRestrictedSbvgZ', 
+                       '_$s11SafariSwift21OnDeviceSummarizationC12isRestrictedSbvsZ', 
+                       '_$s11SafariSwift21OnDeviceSummarizationC23requestSummaryForStringyySSF', 
+                       '_$s11SafariSwift21OnDeviceSummarizationC6isSafeSbvg', '_$s11SafariSwift21OnDeviceSummarizationC6isSafeSbvpMV', 
+                       '_$s11SafariSwift21OnDeviceSummarizationC7summarySSSgvg', 
+                       '_$s11SafariSwift21OnDeviceSummarizationC7summarySSSgvpMV', 
+                       '_$s11SafariSwift21OnDeviceSummarizationC8delegateAA0cdE8Delegate_pSgvM', 
+                       '_$s11SafariSwift21OnDeviceSummarizationC8delegateAA0cdE8Delegate_pSgvg', 
+                       '_$s11SafariSwift21OnDeviceSummarizationC8delegateAA0cdE8Delegate_pSgvpMV', 
+                       '_$s11SafariSwift21OnDeviceSummarizationC8delegateAA0cdE8Delegate_pSgvs', 
+                       '_$s11SafariSwift21OnDeviceSummarizationCACycfC', '_$s11SafariSwift21OnDeviceSummarizationCACycfc', 
+                       '_$s11SafariSwift21OnDeviceSummarizationCMa', '_$s11SafariSwift21OnDeviceSummarizationCMn', 
+                       '_$s11SafariSwift21OnDeviceSummarizationCMo', '_$s11SafariSwift21OnDeviceSummarizationCN', 
+                       '_$s11SafariSwift21OnDeviceSummarizationCfD' ]
+    objc-classes:    [ OnDeviceSummarization, SiriLinkCoordinator, TipsCoordinator, 
+                       _OnDeviceSummarization, _SiriLinkCoordinator, _TipsCoordinator ]
 ...

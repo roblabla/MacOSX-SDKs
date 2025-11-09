@@ -10,7 +10,7 @@
 
 NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
-API_AVAILABLE(ios(11.0), watchos(5.0), tvos(13.0)) NS_SWIFT_UI_ACTOR
+API_AVAILABLE(ios(11.0), tvos(13.0)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @protocol UIInteraction <NSObject>
 
 @property (nonatomic, nullable, weak, readonly) __kindof UIView *view;
@@ -23,10 +23,10 @@ API_AVAILABLE(ios(11.0), watchos(5.0), tvos(13.0)) NS_SWIFT_UI_ACTOR
 
 @interface UIView (Interactions)
 
-- (void)addInteraction:(id<UIInteraction>)interaction API_AVAILABLE(ios(11.0), watchos(5.0), tvos(13.0));
-- (void)removeInteraction:(id<UIInteraction>)interaction API_AVAILABLE(ios(11.0), watchos(5.0), tvos(13.0));
+- (void)addInteraction:(id<UIInteraction>)interaction API_AVAILABLE(ios(11.0), tvos(13.0)) API_UNAVAILABLE(watchos);
+- (void)removeInteraction:(id<UIInteraction>)interaction API_AVAILABLE(ios(11.0), tvos(13.0)) API_UNAVAILABLE(watchos);
 
-@property (nonatomic, copy) NSArray<id<UIInteraction>> *interactions API_AVAILABLE(ios(11.0), watchos(5.0), tvos(13.0));
+@property (nonatomic, copy) NSArray<id<UIInteraction>> *interactions API_AVAILABLE(ios(11.0), tvos(13.0)) API_UNAVAILABLE(watchos);
 
 @end
 

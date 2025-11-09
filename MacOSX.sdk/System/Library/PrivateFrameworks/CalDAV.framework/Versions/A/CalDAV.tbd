@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/CalDAV.framework/Versions/A/CalDAV'
-current-version: 1141.2.1
+current-version: 1148
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -11,14 +11,14 @@ exports:
                        _CalDAVComplianceClass_CalendarAvailability, _CalDAVComplianceClass_CalendarHomeSync, 
                        _CalDAVComplianceClass_CalendarManagedAttachments, _CalDAVComplianceClass_CalendarNoTimezone, 
                        _CalDAVComplianceClass_CalendarQueryExtended, _CalDAVComplianceClass_CalendarRecurrenceSplit, 
-                       _CalDAVComplianceClass_CalendarRole, _CalDAVComplianceClass_DefaultAlarms, 
-                       _CalDAVComplianceClass_InboxAvailability, _CalDAVComplianceClass_LikenessPropagation, 
-                       _CalDAVComplianceClass_ManagedSubscriptionCalendars, _CalDAVComplianceClass_PrincipalPropertySearch, 
-                       _CalDAVComplianceClass_PrivateComments, _CalDAVComplianceClass_PrivateEvents, 
-                       _CalDAVComplianceClass_Proxy, _CalDAVComplianceClass_Sharing, 
-                       _CalDAVComplianceClass_SharingNoScheduling, _CalDAVComplianceClass_SubscriptionCalendars, 
-                       _CalDAVComplianceClass_SubscriptionMirroring, _CalDAVComplianceClass_Telephone, 
-                       _CalDAVErrorDomain, _CalDAVHTTPHeader_IfScheduleTagMatch, 
+                       _CalDAVComplianceClass_CalendarRole, _CalDAVComplianceClass_ClearingPrivateComments, 
+                       _CalDAVComplianceClass_DefaultAlarms, _CalDAVComplianceClass_InboxAvailability, 
+                       _CalDAVComplianceClass_LikenessPropagation, _CalDAVComplianceClass_ManagedSubscriptionCalendars, 
+                       _CalDAVComplianceClass_PrincipalPropertySearch, _CalDAVComplianceClass_PrivateComments, 
+                       _CalDAVComplianceClass_PrivateEvents, _CalDAVComplianceClass_Proxy, 
+                       _CalDAVComplianceClass_Sharing, _CalDAVComplianceClass_SharingNoScheduling, 
+                       _CalDAVComplianceClass_SubscriptionCalendars, _CalDAVComplianceClass_SubscriptionMirroring, 
+                       _CalDAVComplianceClass_Telephone, _CalDAVErrorDomain, _CalDAVHTTPHeader_IfScheduleTagMatch, 
                        _CalDAVHTTPHeader_ScheduleReply, _CalDAVHTTPHeader_ScheduleTag, 
                        _CalDAVPrincipalRecordType_Groups, _CalDAVPrincipalRecordType_Locations, 
                        _CalDAVPrincipalRecordType_Resources, _CalDAVPrincipalRecordType_Users, 

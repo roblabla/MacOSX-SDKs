@@ -240,7 +240,7 @@ typedef CF_OPTIONS(UInt32, AudioComponentFlags) {
 */
 typedef CF_OPTIONS(UInt32, AudioComponentInstantiationOptions) {
     kAudioComponentInstantiation_LoadOutOfProcess   CF_ENUM_AVAILABLE(10_11,  9_0) = 1,
-    kAudioComponentInstantiation_LoadInProcess      CF_ENUM_AVAILABLE(10_11,  NA)  = 2,
+    kAudioComponentInstantiation_LoadInProcess      API_AVAILABLE(macos(10.11)) API_UNAVAILABLE(ios)  = 2,
     kAudioComponentInstantiation_LoadedRemotely     API_UNAVAILABLE(macos)    = 1u << 31,
 };
 
@@ -306,7 +306,7 @@ typedef struct OpaqueAudioComponent *   AudioComponent;
                     ComponentInstanceRecord *, you should not assume that this will always be
                     compatible and usable with Component Manager calls.
 */
-#if TARGET_OS_IPHONE || (0 && 0) || (defined(AUDIOCOMPONENT_NOCARBONINSTANCES) && AUDIOCOMPONENT_NOCARBONINSTANCES)
+#if TARGET_OS_IPHONE || (0 && 0) || TARGET_OS_LINUX || (defined(AUDIOCOMPONENT_NOCARBONINSTANCES) && AUDIOCOMPONENT_NOCARBONINSTANCES)
     typedef struct OpaqueAudioComponentInstance *   AudioComponentInstance;
 #else
     typedef struct ComponentInstanceRecord *        AudioComponentInstance;

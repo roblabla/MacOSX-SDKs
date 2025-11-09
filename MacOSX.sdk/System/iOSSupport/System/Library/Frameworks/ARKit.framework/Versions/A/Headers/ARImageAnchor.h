@@ -18,6 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
  An anchor representing an image in the world.
  */
 API_AVAILABLE(ios(11.3))
+NS_SWIFT_SENDABLE
 @interface ARImageAnchor : ARAnchor AR_IMAGE_ANCHOR_PROTOCOLS
 
 /**

@@ -50,6 +50,10 @@
 #import <AVFoundation/AVAudioSessionRoute.h>
 #import <AVFoundation/AVAudioSessionTypes.h>
 
-#if TARGET_OS_OSX
+#if TARGET_OS_OSX || TARGET_OS_MACCATALYST
 #import <AVFoundation/AVAudioRoutingArbiter.h>
-#endif
+#endif // TARGET_OS_OSX || TARGET_OS_MACCATALYST
+
+#if TARGET_OS_EMBEDDED || TARGET_OS_SIMULATOR
+#import <AVFoundation/AVSpeechSynthesis.h>
+#endif // TARGET_OS_IPHONE

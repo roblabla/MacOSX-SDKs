@@ -43,7 +43,7 @@ CF_IMPLICIT_BRIDGING_ENABLED
 
 typedef struct CM_BRIDGED_TYPE(id) OpaqueVTFrameSilo *VTFrameSiloRef CM_SWIFT_NONSENDABLE; // a CF type, call CFRetain and CFRelease
 
-VT_EXPORT CFTypeID VTFrameSiloGetTypeID(void) API_AVAILABLE(macosx(10.10), ios(8.0), tvos(10.2));
+VT_EXPORT CFTypeID VTFrameSiloGetTypeID(void) API_AVAILABLE(macos(10.10), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 CF_IMPLICIT_BRIDGING_DISABLED
 /*!
@@ -68,7 +68,7 @@ VTFrameSiloCreate(
 	CM_NULLABLE CFURLRef					fileURL,
 	CMTimeRange								timeRange, /* can be kCMTimeRangeInvalid */
 	CM_NULLABLE CFDictionaryRef				options,
-	CM_RETURNS_RETAINED_PARAMETER CM_NULLABLE VTFrameSiloRef * CM_NONNULL frameSiloOut ) API_AVAILABLE(macosx(10.10), ios(8.0), tvos(10.2));
+	CM_RETURNS_RETAINED_PARAMETER CM_NULLABLE VTFrameSiloRef * CM_NONNULL frameSiloOut ) API_AVAILABLE(macos(10.10), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 CF_IMPLICIT_BRIDGING_ENABLED
 
@@ -87,7 +87,7 @@ CF_IMPLICIT_BRIDGING_ENABLED
 VT_EXPORT OSStatus
 VTFrameSiloAddSampleBuffer( 
 	CM_NONNULL VTFrameSiloRef			silo,
-	CM_NONNULL CMSampleBufferRef		sampleBuffer ) API_AVAILABLE(macosx(10.10), ios(8.0), tvos(10.2));
+	CM_NONNULL CMSampleBufferRef		sampleBuffer ) API_AVAILABLE(macos(10.10), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 /*!
 	@function	VTFrameSiloSetTimeRangesForNextPass
@@ -102,7 +102,7 @@ VT_EXPORT OSStatus
 VTFrameSiloSetTimeRangesForNextPass( 
 	CM_NONNULL VTFrameSiloRef		silo,
 	CMItemCount						timeRangeCount,
-	const CMTimeRange * CM_NONNULL	timeRangeArray ) API_AVAILABLE(macosx(10.10), ios(8.0), tvos(10.2));
+	const CMTimeRange * CM_NONNULL	timeRangeArray ) API_AVAILABLE(macos(10.10), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 /*!
 	@function	VTFrameSiloGetProgressOfCurrentPass
@@ -115,7 +115,7 @@ VTFrameSiloSetTimeRangesForNextPass(
 VT_EXPORT OSStatus
 VTFrameSiloGetProgressOfCurrentPass(
 	CM_NONNULL VTFrameSiloRef	silo,
-	Float32 * CM_NONNULL		progressOut ) API_AVAILABLE(macosx(10.10), ios(8.0), tvos(10.2));
+	Float32 * CM_NONNULL		progressOut ) API_AVAILABLE(macos(10.10), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 /*!
 	@function	VTFrameSiloCallFunctionForEachSampleBuffer
@@ -139,7 +139,7 @@ VTFrameSiloCallFunctionForEachSampleBuffer(
 	CM_NONNULL VTFrameSiloRef	silo,
 	CMTimeRange					timeRange,
 	void * CM_NULLABLE			refcon,
-	OSStatus	(* CM_NONNULL CF_NOESCAPE callback)( void * CM_NULLABLE refcon, CM_NONNULL CMSampleBufferRef sampleBuffer ) ) API_AVAILABLE(macosx(10.10), ios(8.0), tvos(10.2)); // return nonzero to abort iteration
+	OSStatus	(* CM_NONNULL CF_NOESCAPE callback)( void * CM_NULLABLE refcon, CM_NONNULL CMSampleBufferRef sampleBuffer ) ) API_AVAILABLE(macos(10.10), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos); // return nonzero to abort iteration
 
 #if __BLOCKS__
 /*!
@@ -163,7 +163,7 @@ VT_EXPORT OSStatus
 VTFrameSiloCallBlockForEachSampleBuffer( 
 	CM_NONNULL VTFrameSiloRef			silo,
 	CMTimeRange							timeRange,
-	OSStatus (^ CM_NONNULL CF_NOESCAPE handler)( CM_NONNULL CMSampleBufferRef sampleBuffer ) ) API_AVAILABLE(macosx(10.10), ios(8.0), tvos(10.2)); // return nonzero to abort iteration
+	OSStatus (^ CM_NONNULL CF_NOESCAPE handler)( CM_NONNULL CMSampleBufferRef sampleBuffer ) ) API_AVAILABLE(macos(10.10), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos); // return nonzero to abort iteration
 #endif // __BLOCKS__
 
 CF_IMPLICIT_BRIDGING_DISABLED

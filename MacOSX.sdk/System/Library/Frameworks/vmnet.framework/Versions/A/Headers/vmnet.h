@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2013-2021 Apple Inc. All rights reserved.
+ * Copyright (c) 2013-2024 Apple Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  *
@@ -29,6 +29,7 @@
 #include <objc/objc-api.h>
 #include <os/availability.h>
 #include <sys/cdefs.h>
+#include <netinet/in.h>
 
 __BEGIN_DECLS
 
@@ -58,7 +59,9 @@ _Pragma("clang assume_nonnull begin")
  * @ignorefuncmacro OBJC_ENUM
  * @ignorefuncmacro OBJC_OPTIONS
  * @ignorefuncmacro API_AVAILABLE
+ * @ignorefuncmacro API_UNAVAILABLE
  * @ignorefuncmacro API_DEPRECATED
+ * @ignorefuncmacro SPI_AVAILABLE
  */
 
 /*!
@@ -92,7 +95,7 @@ _Pragma("clang assume_nonnull begin")
 typedef OBJC_ENUM(uint32_t, operating_modes_t) {
 	VMNET_HOST_MODE					= 1000,
 	VMNET_SHARED_MODE				= 1001,
-	VMNET_BRIDGED_MODE API_AVAILABLE(macos(10.15))	= 1002
+	VMNET_BRIDGED_MODE API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, watchos, tvos)	= 1002
 };
 
 /*!
@@ -129,7 +132,7 @@ typedef OBJC_OPTIONS(uint32_t, interface_event_t) {
  * @constant VMNET_BUFFER_EXHAUSTED	Buffers exhausted in kernel.
  * @constant VMNET_TOO_MANY_PACKETS 	Packet count exceeds limit.
  * @constant VMNET_SHARING_SERVICE_BUSY	Vmnet Interface cannot be started as conflicting sharing service is in use.
- * @constant VMNET_NOT_AUTHORIZED    The operation could not be completed due to missing authorization.
+ * @constant VMNET_NOT_AUTHORIZED	The operation could not be completed due to missing authorization.
 */
 typedef OBJC_ENUM(uint32_t, vmnet_return_t) {
 	VMNET_SUCCESS				= 1000,
@@ -142,7 +145,7 @@ typedef OBJC_ENUM(uint32_t, vmnet_return_t) {
 	VMNET_BUFFER_EXHAUSTED			= 1007,
 	VMNET_TOO_MANY_PACKETS			= 1008,
 	VMNET_SHARING_SERVICE_BUSY		= 1009,
-    VMNET_NOT_AUTHORIZED            = 1010,
+	VMNET_NOT_AUTHORIZED			= 1010,
 };
 
 /*!
@@ -186,7 +189,7 @@ typedef struct vmnet_interface *interface_ref;
  * The property is specified in the interface_desc dictionary.
  */
 extern const char *
-vmnet_operation_mode_key API_AVAILABLE(macos(10.10));
+vmnet_operation_mode_key API_AVAILABLE(macos(10.10)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*!
  * @constant vmnet_shared_interface_name_key
@@ -195,7 +198,7 @@ vmnet_operation_mode_key API_AVAILABLE(macos(10.10));
  * interface_desc dictionary.
  */
 extern const char *
-vmnet_shared_interface_name_key API_AVAILABLE(macos(10.15));
+vmnet_shared_interface_name_key API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*!
  * @constant vmnet_mac_address_key
@@ -203,7 +206,7 @@ vmnet_shared_interface_name_key API_AVAILABLE(macos(10.15));
  * traffic on the vmnet interface. Supplied in the interface_param dictionary.
  */
 extern const char *
-vmnet_mac_address_key API_AVAILABLE(macos(10.10));
+vmnet_mac_address_key API_AVAILABLE(macos(10.10)) API_UNAVAILABLE(ios, watchos, tvos);
 
 
 /*!
@@ -212,7 +215,7 @@ vmnet_mac_address_key API_AVAILABLE(macos(10.10));
  * If set to false, no MAC address will be generated.
  */
 extern const char *
-vmnet_allocate_mac_address_key API_AVAILABLE(macos(10.15));
+vmnet_allocate_mac_address_key API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*!
  * @constant vmnet_mtu_key
@@ -224,7 +227,7 @@ vmnet_allocate_mac_address_key API_AVAILABLE(macos(10.15));
  * dictionary results in an error.
  */
 extern const char *
-vmnet_mtu_key API_AVAILABLE(macos(10.10));
+vmnet_mtu_key API_AVAILABLE(macos(10.10)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*!
  * @constant vmnet_max_packet_size_key
@@ -232,7 +235,7 @@ vmnet_mtu_key API_AVAILABLE(macos(10.10));
  * interface_param dictionary.
  */
 extern const char *
-vmnet_max_packet_size_key API_AVAILABLE(macos(10.10));
+vmnet_max_packet_size_key API_AVAILABLE(macos(10.10)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*!
  * @constant vmnet_interface_id_key
@@ -240,7 +243,7 @@ vmnet_max_packet_size_key API_AVAILABLE(macos(10.10));
  * Supplied in the interface_desc and interface_param dictionaries.
  */
 extern const char *
-vmnet_interface_id_key API_AVAILABLE(macos(10.10));
+vmnet_interface_id_key API_AVAILABLE(macos(10.10)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*!
  * @constant vmnet_start_address_key
@@ -261,7 +264,7 @@ vmnet_interface_id_key API_AVAILABLE(macos(10.10));
  * May be present in the interface_desc and interface_param dictionaries.
  */
 extern const char *
-vmnet_start_address_key API_AVAILABLE(macos(10.15));
+vmnet_start_address_key API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*!
  * @constant vmnet_end_address_key
@@ -277,7 +280,7 @@ vmnet_start_address_key API_AVAILABLE(macos(10.15));
  * May be present in the interface_desc and interface_param dictionaries.
  */
 extern const char *
-vmnet_end_address_key API_AVAILABLE(macos(10.15));
+vmnet_end_address_key API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*!
  * @constant vmnet_subnet_mask_key
@@ -291,7 +294,7 @@ vmnet_end_address_key API_AVAILABLE(macos(10.15));
  * Supplied in the interface_desc and interface_param dictionaries.
  */
 extern const char *
-vmnet_subnet_mask_key API_AVAILABLE(macos(10.15));
+vmnet_subnet_mask_key API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*!
  * @constant vmnet_nat66_prefix_key
@@ -299,7 +302,7 @@ vmnet_subnet_mask_key API_AVAILABLE(macos(10.15));
  * The prefix must be a ULA i.e. start with fd00::/8.
  */
 extern const char *
-vmnet_nat66_prefix_key API_AVAILABLE(macos(10.15));
+vmnet_nat66_prefix_key API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*!
  * @constant vmnet_nat66_prefix_length_key
@@ -308,8 +311,7 @@ vmnet_nat66_prefix_key API_AVAILABLE(macos(10.15));
  * deprecated.
  */
 extern const char *
-vmnet_nat66_prefix_length_key API_DEPRECATED("No longer supported",
-					       macos(10.15, 11.0));
+vmnet_nat66_prefix_length_key API_DEPRECATED("No longer supported", macos(10.15, 11.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*!
  * @constant vmnet_estimated_packets_available_key
@@ -317,7 +319,7 @@ vmnet_nat66_prefix_length_key API_DEPRECATED("No longer supported",
  * event dictionary when the event_mask includes VMNET_PACKET_AVAILABLE.
  */
 extern const char *
-vmnet_estimated_packets_available_key API_AVAILABLE(macos(10.10));
+vmnet_estimated_packets_available_key API_AVAILABLE(macos(10.10)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*!
  * @constant vmnet_network_identifier_key
@@ -332,7 +334,7 @@ vmnet_estimated_packets_available_key API_AVAILABLE(macos(10.10));
  * No DHCP service is provided on this network.
  */
 extern const char *
-vmnet_network_identifier_key API_AVAILABLE(macos(11.0));
+vmnet_network_identifier_key API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*!
  * @constant vmnet_host_ip_address_key
@@ -342,7 +344,7 @@ vmnet_network_identifier_key API_AVAILABLE(macos(11.0));
  * is also specified.
  */
 extern const char *
-vmnet_host_ip_address_key API_AVAILABLE(macos(11.0));
+vmnet_host_ip_address_key API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*!
  * @constant vmnet_host_subnet_mask_key
@@ -351,7 +353,7 @@ vmnet_host_ip_address_key API_AVAILABLE(macos(11.0));
  * Must be specified with vmnet_host_ip_address_key.
  */
 extern const char *
-vmnet_host_subnet_mask_key API_AVAILABLE(macos(11.0));
+vmnet_host_subnet_mask_key API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*!
  * @constant vmnet_host_ipv6_address_key
@@ -361,7 +363,7 @@ vmnet_host_subnet_mask_key API_AVAILABLE(macos(11.0));
  * is also specified.
  */
 extern const char *
-vmnet_host_ipv6_address_key API_AVAILABLE(macos(11.0));
+vmnet_host_ipv6_address_key API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*!
  * @constant vmnet_enable_tso_key
@@ -370,7 +372,7 @@ vmnet_host_ipv6_address_key API_AVAILABLE(macos(11.0));
  * be prepared to accept large TCP frames as well.
  */
 extern const char *
-vmnet_enable_tso_key API_AVAILABLE(macos(11.0));
+vmnet_enable_tso_key API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*!
  * @constant vmnet_enable_isolation_key
@@ -379,7 +381,7 @@ vmnet_enable_tso_key API_AVAILABLE(macos(11.0));
  * not possible.
  */
 extern const char *
-vmnet_enable_isolation_key API_AVAILABLE(macos(11.0));
+vmnet_enable_isolation_key API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*!
  * @constant vmnet_enable_checksum_offload_key
@@ -403,7 +405,21 @@ vmnet_enable_isolation_key API_AVAILABLE(macos(11.0));
  * must handle UDP and TCP checksums on fragmented packets itself.
  */
 extern const char *
-vmnet_enable_checksum_offload_key API_AVAILABLE(macos(12.0));
+vmnet_enable_checksum_offload_key API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, watchos, tvos);
+
+/*!
+ * @constant vmnet_read_max_packets_key
+ * The maximum value that *pktcnt may have in the call to vmnet_read().
+ */
+extern const char *
+vmnet_read_max_packets_key API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, watchos, tvos);
+
+/*!
+ * @constant vmnet_write_max_packets_key
+ * The maximum value that *pktcnt may have in the call to vmnet_write().
+ */
+extern const char *
+vmnet_write_max_packets_key API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*!
  *  @typedef vmnet_start_interface_completion_handler_t
@@ -448,7 +464,7 @@ typedef void (^vmnet_start_interface_completion_handler_t)
 interface_ref __nullable
 vmnet_start_interface(xpc_object_t interface_desc, dispatch_queue_t queue,
     vmnet_start_interface_completion_handler_t handler)
-    API_AVAILABLE(macos(10.10));
+	API_AVAILABLE(macos(10.10)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*!
  * @typedef vmnet_interface_event_callback_t
@@ -495,7 +511,7 @@ vmnet_return_t
 vmnet_interface_set_event_callback(interface_ref interface,
     interface_event_t event_mask, dispatch_queue_t __nullable queue,
     __nullable vmnet_interface_event_callback_t callback)
-    API_AVAILABLE(macos(10.10));
+	API_UNAVAILABLE(ios, watchos, tvos);
 
 
 /*!
@@ -516,7 +532,7 @@ vmnet_interface_set_event_callback(interface_ref interface,
  * The array of packets to write.
  *
  * @param pktcnt
- * On input, *pkcnt specifies the number of packets to write.
+ * On input, *pktcnt specifies the number of packets to write.
  * On output, *pktcnt holds the number of packets written.
  *
  * @result
@@ -524,7 +540,7 @@ vmnet_interface_set_event_callback(interface_ref interface,
  */
 vmnet_return_t
 vmnet_write(interface_ref interface, struct vmpktdesc *packets, int *pktcnt)
-    API_AVAILABLE(macos(10.10));
+	API_AVAILABLE(macos(10.10)) API_UNAVAILABLE(ios, watchos, tvos);
 
 
 
@@ -547,7 +563,7 @@ vmnet_write(interface_ref interface, struct vmpktdesc *packets, int *pktcnt)
  *
  * @param pktcnt
  * On input, *pktcnt is set to the size of the packets array.
- * On output, *pkcnt contains the actual number of packets read, which may
+ * On output, *pktcnt contains the actual number of packets read, which may
  * be zero if no packets are available.
  *
  * @result
@@ -555,7 +571,7 @@ vmnet_write(interface_ref interface, struct vmpktdesc *packets, int *pktcnt)
  */
 vmnet_return_t
 vmnet_read(interface_ref interface, struct vmpktdesc *packets, int *pktcnt)
-    API_AVAILABLE(macos(10.10));
+	API_AVAILABLE(macos(10.10)) API_UNAVAILABLE(ios, watchos, tvos);
 
 
 /*!
@@ -600,7 +616,7 @@ typedef void (^vmnet_interface_completion_handler_t)
 vmnet_return_t
 vmnet_stop_interface(interface_ref interface, dispatch_queue_t queue,
     vmnet_interface_completion_handler_t handler)
-    API_AVAILABLE(macos(10.10));
+	API_AVAILABLE(macos(10.10)) API_UNAVAILABLE(ios, watchos, tvos);
 
 
 /*!
@@ -646,7 +662,8 @@ vmnet_interface_add_port_forwarding_rule(interface_ref interface,
     struct in_addr internal_address,
     uint16_t internal_port,
     __nullable vmnet_interface_completion_handler_t handler)
-	API_DEPRECATED("replaced by vmnet_interface_add_ip_port_forwarding_rule", macos(10.15, 12.0));
+	API_DEPRECATED("replaced by vmnet_interface_add_ip_port_forwarding_rule", macos(10.15, 12.0))
+	API_UNAVAILABLE(ios, watchos, tvos);
 
 /*!
  * @function vmnet_interface_remove_port_forwarding_rule
@@ -681,7 +698,8 @@ vmnet_interface_remove_port_forwarding_rule(interface_ref interface,
     uint8_t protocol,
     uint16_t external_port,
     __nullable vmnet_interface_completion_handler_t handler)
-	API_DEPRECATED("replaced by vmnet_interface_remove_ip_port_forwarding_rule", macos(10.15, 12.0));
+	API_DEPRECATED("replaced by vmnet_interface_remove_ip_port_forwarding_rule", macos(10.15, 12.0))
+	API_UNAVAILABLE(ios, watchos, tvos);
 
 /*!
  * @typedef vmnet_interface_get_port_forwarding_rules_handler_t
@@ -729,7 +747,8 @@ vmnet_port_forwarding_rule_get_details(xpc_object_t rule,
 				       uint16_t * external_port,
 				       struct in_addr * internal_address,
 				       uint16_t * internal_port)
-	API_DEPRECATED("replaced by vmnet_ip_port_forwarding_rule_get_details", macos(10.15, 12.0));
+	API_DEPRECATED("replaced by vmnet_ip_port_forwarding_rule_get_details", macos(10.15, 12.0))
+	API_UNAVAILABLE(ios, watchos, tvos);
 
 /*!
  * @function vmnet_interface_get_port_forwarding_rules
@@ -754,7 +773,8 @@ vmnet_port_forwarding_rule_get_details(xpc_object_t rule,
 vmnet_return_t
 vmnet_interface_get_port_forwarding_rules(interface_ref interface,
     vmnet_interface_get_port_forwarding_rules_handler_t handler)
-	API_DEPRECATED("replaced by vmnet_interface_get_ip_port_forwarding_rules", macos(10.15, 12.0));
+	API_DEPRECATED("replaced by vmnet_interface_get_ip_port_forwarding_rules", macos(10.15, 12.0))
+	API_UNAVAILABLE(ios, watchos, tvos);
 
 /*!
  * @function vmnet_interface_add_ip_port_forwarding_rule
@@ -805,7 +825,8 @@ vmnet_interface_add_ip_port_forwarding_rule(interface_ref interface,
     const void * internal_address,
     uint16_t internal_port,
     __nullable vmnet_interface_completion_handler_t handler)
-    API_AVAILABLE(macos(11.0));
+    API_AVAILABLE(macos(11.0))
+    API_UNAVAILABLE(ios, watchos, tvos);
 
 /*!
  * @function vmnet_interface_remove_ip_port_forwarding_rule
@@ -844,7 +865,8 @@ vmnet_interface_remove_ip_port_forwarding_rule(interface_ref interface,
     uint16_t external_port,
     uint8_t address_family,
     __nullable vmnet_interface_completion_handler_t handler)
-    API_AVAILABLE(macos(11.0));
+    API_AVAILABLE(macos(11.0))
+    API_UNAVAILABLE(ios, watchos, tvos);
 
 /*!
  * @typedef vmnet_interface_get_ip_port_forwarding_rules_handler_t
@@ -904,7 +926,8 @@ vmnet_ip_port_forwarding_rule_get_details(xpc_object_t rule,
     uint8_t address_family,
     void * internal_address,
     uint16_t * internal_port)
-    API_AVAILABLE(macos(11.0));
+    API_AVAILABLE(macos(11.0))
+    API_UNAVAILABLE(ios, watchos, tvos);
 
 /*!
  * @function vmnet_interface_get_ip_port_forwarding_rules
@@ -919,7 +942,7 @@ vmnet_ip_port_forwarding_rule_get_details(xpc_object_t rule,
  * @param interface
  * The vmnet interface instance to use.
  *
- * &param address_family
+ * @param address_family
  * Address family (AF_INET or AF_INET6).
  *
  * @param handler
@@ -933,7 +956,8 @@ vmnet_return_t
 vmnet_interface_get_ip_port_forwarding_rules(interface_ref interface,
     u_int8_t address_family,
     vmnet_interface_get_ip_port_forwarding_rules_handler_t handler)
-    API_AVAILABLE(macos(11.0));
+    API_AVAILABLE(macos(11.0))
+    API_UNAVAILABLE(ios, watchos, tvos);
 
 /*!
  * @function vmnet_copy_shared_interface_list
@@ -951,7 +975,8 @@ vmnet_interface_get_ip_port_forwarding_rules(interface_ref interface,
 XPC_RETURNS_RETAINED
 xpc_object_t __nullable
 vmnet_copy_shared_interface_list(void)
-    API_AVAILABLE(macos(10.15));
+    API_AVAILABLE(macos(10.15))
+    API_UNAVAILABLE(ios, watchos, tvos);
 
 
 #if __has_feature(assume_nonnull)

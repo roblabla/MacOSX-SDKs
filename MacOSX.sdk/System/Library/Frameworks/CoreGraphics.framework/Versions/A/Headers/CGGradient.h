@@ -37,7 +37,7 @@ CF_ASSUME_NONNULL_BEGIN
 /* Return the CFTypeID for CGGradients. */
 
 CG_EXTERN CFTypeID CGGradientGetTypeID(void)
-    CG_AVAILABLE_STARTING(10.5, 2.0);
+    API_AVAILABLE(macos(10.5), ios(2.0));
 
 /* Creates a gradient by pairing the color components provided in
    `components' with locations provided in `locations'. If `locations' is
@@ -55,7 +55,7 @@ CG_EXTERN CFTypeID CGGradientGetTypeID(void)
 CG_EXTERN CGGradientRef __nullable CGGradientCreateWithColorComponents(
     CGColorSpaceRef cg_nullable space, const CGFloat * cg_nullable components,
     const CGFloat * __nullable locations, size_t count)
-    CG_AVAILABLE_STARTING(10.5, 2.0);
+    API_AVAILABLE(macos(10.5), ios(2.0));
 
 /* Creates a gradient by pairing the colors provided in `colors' with the
    locations provided in `locations'. `colors' should be a non-empty array
@@ -77,20 +77,20 @@ CG_EXTERN CGGradientRef __nullable CGGradientCreateWithColorComponents(
 CG_EXTERN CGGradientRef __nullable CGGradientCreateWithColors(
     CGColorSpaceRef __nullable space, CFArrayRef cg_nullable colors,
     const CGFloat * __nullable locations)
-    CG_AVAILABLE_STARTING(10.5, 2.0);
+    API_AVAILABLE(macos(10.5), ios(2.0));
 
 /* Equivalent to `CFRetain' except that it doesn't crash (as `CFRetain'
    does) if `gradient' is NULL. */
 
 CG_EXTERN CGGradientRef cg_nullable CGGradientRetain(
     CGGradientRef cg_nullable gradient)
-    CG_AVAILABLE_STARTING(10.5, 2.0);
+    API_AVAILABLE(macos(10.5), ios(2.0));
 
 /* Equivalent to `CFRelease' except that it doesn't crash (as `CFRelease'
    does) if `gradient' is NULL. */
 
 CG_EXTERN void CGGradientRelease(CGGradientRef cg_nullable gradient)
-    CG_AVAILABLE_STARTING(10.5, 2.0);
+    API_AVAILABLE(macos(10.5), ios(2.0));
 
 CF_ASSUME_NONNULL_END
 

@@ -34,7 +34,7 @@ typedef NS_ENUM(NSInteger, UICollectionViewCellDragState) {
     UICollectionViewCellDragStateDragging
 } API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(tvos, watchos);
 
-UIKIT_EXTERN API_AVAILABLE(ios(6.0)) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(6.0)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @interface UICollectionReusableView : UIView
 
 @property (nonatomic, readonly, copy, nullable) NSString *reuseIdentifier;
@@ -59,35 +59,35 @@ UIKIT_EXTERN API_AVAILABLE(ios(6.0)) NS_SWIFT_UI_ACTOR
 @end
 
 
-typedef void (^UICollectionViewCellConfigurationUpdateHandler)(__kindof UICollectionViewCell *cell, UICellConfigurationState *state) API_AVAILABLE(ios(15.0), tvos(15.0), watchos(8.0));
+typedef void (^UICollectionViewCellConfigurationUpdateHandler)(__kindof UICollectionViewCell *cell, UICellConfigurationState *state) API_AVAILABLE(ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos);
 
-UIKIT_EXTERN API_AVAILABLE(ios(6.0)) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(6.0)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @interface UICollectionViewCell : UICollectionReusableView
 
 /// Returns the current configuration state for the cell.
 /// To add your own custom state(s), override the getter and call super to obtain an instance with the
 /// system properties set, then set your own custom states as desired.
-@property (nonatomic, readonly) UICellConfigurationState *configurationState API_AVAILABLE(ios(14.0), tvos(14.0), watchos(7.0));
+@property (nonatomic, readonly) UICellConfigurationState *configurationState API_AVAILABLE(ios(14.0), tvos(14.0)) API_UNAVAILABLE(watchos);
 
 /// Requests the cell update its configuration for its current state. This method is called automatically
 /// when the cell's `configurationState` may have changed, as well as in other circumstances where an
 /// update may be required. Multiple requests may be coalesced into a single update at the appropriate time.
-- (void)setNeedsUpdateConfiguration API_AVAILABLE(ios(14.0), tvos(14.0), watchos(7.0));
+- (void)setNeedsUpdateConfiguration API_AVAILABLE(ios(14.0), tvos(14.0)) API_UNAVAILABLE(watchos);
 
 /// Subclasses should override this method and update the cell's configuration using the state provided.
 /// This method should not be called directly, use `setNeedsUpdateConfiguration` to request an update.
-- (void)updateConfigurationUsingState:(UICellConfigurationState *)state API_AVAILABLE(ios(14.0), tvos(14.0), watchos(7.0));
+- (void)updateConfigurationUsingState:(UICellConfigurationState *)state API_AVAILABLE(ios(14.0), tvos(14.0)) API_UNAVAILABLE(watchos);
 /// Optional block-based alternative to overriding `-updateConfigurationUsingState:` in a subclass. This handler
 /// is called after `-updateConfigurationUsingState:`. Setting a new handler triggers `setNeedsUpdateConfiguration`.
-@property (nonatomic, copy, nullable) UICollectionViewCellConfigurationUpdateHandler configurationUpdateHandler API_AVAILABLE(ios(15.0), tvos(15.0), watchos(8.0));
+@property (nonatomic, copy, nullable) UICollectionViewCellConfigurationUpdateHandler configurationUpdateHandler API_AVAILABLE(ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos);
 
 /// Setting a content configuration replaces the existing contentView of the cell with a new content view instance from the configuration,
 /// or directly applies the configuration to the existing content view if the configuration is compatible with the existing content view type.
 /// The default value is nil. After a configuration has been set, setting this property to nil will replace the current content view with a new content view.
-@property (nonatomic, copy, nullable) id<UIContentConfiguration> contentConfiguration API_AVAILABLE(ios(14.0), tvos(14.0), watchos(7.0));
+@property (nonatomic, copy, nullable) id<UIContentConfiguration> contentConfiguration API_AVAILABLE(ios(14.0), tvos(14.0)) API_UNAVAILABLE(watchos);
 /// When YES, the cell will automatically call -updatedConfigurationForState: on its `contentConfiguration` when the cell's
 /// configuration state changes, and apply the updated configuration back to the cell. The default value is YES.
-@property (nonatomic) BOOL automaticallyUpdatesContentConfiguration API_AVAILABLE(ios(14.0), tvos(14.0), watchos(7.0));
+@property (nonatomic) BOOL automaticallyUpdatesContentConfiguration API_AVAILABLE(ios(14.0), tvos(14.0)) API_UNAVAILABLE(watchos);
 
 @property (nonatomic, readonly) UIView *contentView; // add custom subviews to the cell's contentView
 
@@ -107,13 +107,13 @@ UIKIT_EXTERN API_AVAILABLE(ios(6.0)) NS_SWIFT_UI_ACTOR
 
 /// Returns a default background configuration for the cell's style.
 /// This background configuration represents the default appearance that the cell will use.
-- (UIBackgroundConfiguration *)defaultBackgroundConfiguration API_AVAILABLE(ios(16.0), tvos(16.0), watchos(9.0));
+- (UIBackgroundConfiguration *)defaultBackgroundConfiguration API_AVAILABLE(ios(16.0), tvos(16.0)) API_UNAVAILABLE(watchos);
 
 /// Setting a background configuration supersedes the cell's backgroundView and selectedBackgroundView. The default value is nil.
-@property (nonatomic, copy, nullable) UIBackgroundConfiguration *backgroundConfiguration API_AVAILABLE(ios(14.0), tvos(14.0), watchos(7.0));
+@property (nonatomic, copy, nullable) UIBackgroundConfiguration *backgroundConfiguration API_AVAILABLE(ios(14.0), tvos(14.0)) API_UNAVAILABLE(watchos);
 /// When YES, the cell will automatically call -updatedConfigurationForState: on its `backgroundConfiguration` when the cell's
 /// configuration state changes, and apply the updated configuration back to the cell. The default value is YES.
-@property (nonatomic) BOOL automaticallyUpdatesBackgroundConfiguration API_AVAILABLE(ios(14.0), tvos(14.0), watchos(7.0));
+@property (nonatomic) BOOL automaticallyUpdatesBackgroundConfiguration API_AVAILABLE(ios(14.0), tvos(14.0)) API_UNAVAILABLE(watchos);
 
 // These properties are always nil when a non-nil `backgroundConfiguration` is set.
 // The background view is a subview behind all other views.

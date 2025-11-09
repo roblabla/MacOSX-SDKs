@@ -15,13 +15,19 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class PDFPage, PDFSelectionPrivate;
+@class PDFPage;
+
+// Enum used to determine the granularity at which text selections are created. Mirrors CGPDFSelectionType.
+PDFKIT_ENUM_AVAILABLE(15_0, 18_0)
+typedef NS_ENUM(NSUInteger, PDFSelectionGranularity) {
+    PDFSelectionGranularityCharacter,
+    PDFSelectionGranularityWord,
+    PDFSelectionGranularityLine,
+};
 
 PDFKIT_CLASS_AVAILABLE(10_4, 11_0)
 @interface PDFSelection : NSObject <NSCopying>
 {
-@private
-    PDFSelectionPrivate *_private;
 }
 
 

@@ -10,9 +10,9 @@
 
 @class NSArray, NSString;
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
-typedef NSString * CAMediaTimingFunctionName NS_TYPED_ENUM;
+typedef NSString * CAMediaTimingFunctionName NS_TYPED_ENUM API_AVAILABLE(macos(10.5), ios(2.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 
 /* Represents one segment of a function describing a timing curve. The
  * function maps an input time normalized to the range [0,1] to an
@@ -20,7 +20,7 @@ typedef NSString * CAMediaTimingFunctionName NS_TYPED_ENUM;
  * to define the pacing of an animation over its duration (or over the
  * duration of one keyframe). */
 
-API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0))
+API_AVAILABLE(macos(10.5), ios(2.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 @interface CAMediaTimingFunction : NSObject <NSSecureCoding>
 {
 @private
@@ -52,16 +52,16 @@ API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0))
 /** Timing function names. **/
 
 CA_EXTERN CAMediaTimingFunctionName const kCAMediaTimingFunctionLinear
-    API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
+    API_AVAILABLE(macos(10.5), ios(2.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 CA_EXTERN CAMediaTimingFunctionName const kCAMediaTimingFunctionEaseIn
-    API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
+    API_AVAILABLE(macos(10.5), ios(2.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 CA_EXTERN CAMediaTimingFunctionName const kCAMediaTimingFunctionEaseOut
-    API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
+    API_AVAILABLE(macos(10.5), ios(2.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 CA_EXTERN CAMediaTimingFunctionName const kCAMediaTimingFunctionEaseInEaseOut
-    API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
+    API_AVAILABLE(macos(10.5), ios(2.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 CA_EXTERN CAMediaTimingFunctionName const kCAMediaTimingFunctionDefault
-    API_AVAILABLE(macos(10.6), ios(3.0), watchos(2.0), tvos(9.0));
+    API_AVAILABLE(macos(10.6), ios(3.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)
 
 #endif

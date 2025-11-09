@@ -102,7 +102,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(tvos, watchos) NS_SWIFT_UI
 // Whether the sheet sizes itself for readable content.
 // When YES, this maps to the behavior of UIModalPresentationPageSheet, where the sheet width follows the readable width.
 // When NO, this maps to the behavior of UIModalPresentationFormSheet, where the sheet size follows the presented view controller's `preferredContentSize`.
-// Default: YES
+// Default: NO on iOS 18.0 and later, YES on earlier releases
 @property (nonatomic) BOOL prefersPageSizing API_AVAILABLE(ios(17.0)) API_UNAVAILABLE(tvos, watchos);
 
 // Set to YES to cause the sheet to layout with an edge-attached appearance in compact height instead of full screen.

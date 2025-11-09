@@ -12,30 +12,6 @@
 // MARK: - Creating a size
 
 /*!
- @abstract Creates a size structure with the specified dimensions.
- 
- @param width The width.
- @param height The height.
- @param depth The depth.
- @returns A new size stucture.
-*/
-SPATIAL_INLINE
-SPATIAL_OVERLOADABLE
-SPSize3D SPSize3DMake(double width, double height, double depth)
-__API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0), tvos(16.0));
-
-/*!
- @abstract Creates a size structure with dimensions specified as a 3-element SIMD vector.
- 
- @param xyz The source vector.
- @returns A new size stucture.
-*/
-SPATIAL_INLINE
-SPATIAL_OVERLOADABLE
-SPSize3D SPSize3DMakeWithVector(simd_double3 xyz)
-__API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0), tvos(16.0));
-
-/*!
  @abstract Creates a size structure with dimensions specified as a Spatial vector.
  
  @param xyz The source vector.
@@ -205,7 +181,7 @@ __API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0), tvos(16.0));
  
  When the shear axis is @p y , @p shearFactor0 is the @p x  shear factor and @p shearFactor0 is the @p z shear factor.
  
- When the shear axis is @p z , @p shearFactor0 is the @p x  shear factor and @p shearFactor0 is the @p y shear factor..
+ When the shear axis is @p z , @p shearFactor0 is the @p x  shear factor and @p shearFactor0 is the @p y shear factor.
 */
 SPATIAL_INLINE
 SPATIAL_OVERLOADABLE
@@ -287,26 +263,14 @@ __API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0), tvos(16.0));
 
 SPATIAL_REFINED_FOR_SWIFT
 SPATIAL_OVERLOADABLE
-SPSize3D SPSize3DMake(double width, double height, double depth) {
-    return (SPSize3D){ .width = width, .height = height, .depth = depth };
-}
-
-SPATIAL_REFINED_FOR_SWIFT
-SPATIAL_OVERLOADABLE
-SPSize3D SPSize3DMakeWithVector(simd_double3 xyz) {
-    return (SPSize3D){ .vector = xyz };
-}
-
-SPATIAL_REFINED_FOR_SWIFT
-SPATIAL_OVERLOADABLE
 SPSize3D SPSize3DMakeWithVector(SPVector3D xyz) {
-    return (SPSize3D){ .vector = xyz.vector };
+    return SPSize3DMake(xyz.vector.x, xyz.vector.y, xyz.vector.z);
 }
 
 SPATIAL_REFINED_FOR_SWIFT
 SPATIAL_OVERLOADABLE
 SPSize3D SPSize3DMakeWithPoint(SPPoint3D point) {
-    return (SPSize3D){ .vector = point.vector };
+    return SPSize3DMake(point.vector.x, point.vector.y, point.vector.z);
 }
 
 // MARK: - Querying size properties
@@ -328,21 +292,21 @@ SPATIAL_REFINED_FOR_SWIFT
 SPATIAL_OVERLOADABLE
 SPSize3D SPSize3DScaleBy(SPSize3D size, double x, double y, double z) {
     
-    return (SPSize3D){ .vector = size.vector * simd_make_double3(x, y, z)};
+    return SPSize3DMakeWithVector(size.vector * simd_make_double3(x, y, z));
 }
 
 SPATIAL_SWIFT_NAME(Size3D.scaled(self:by:))
 SPATIAL_OVERLOADABLE
 SPSize3D SPSize3DScaleBySize(SPSize3D size, SPSize3D scale) {
     
-    return (SPSize3D){ .vector = size.vector * scale.vector };
+    return SPSize3DMakeWithVector(size.vector * scale.vector);
 }
 
 SPATIAL_SWIFT_NAME(Size3D.uniformlyScaled(self:by:))
 SPATIAL_OVERLOADABLE
 SPSize3D SPSize3DScaleUniform(SPSize3D size, double scale) {
     
-    return (SPSize3D){ .vector = size.vector * scale };
+    return SPSize3DMakeWithVector(size.vector * scale);
 }
 
 SPATIAL_SWIFT_NAME(Size3D.rotated(self:by:))
@@ -371,7 +335,7 @@ SPSize3D SPSize3DApplyAffineTransform(SPSize3D size, SPAffineTransform3D transfo
     
     simd_double3 transformed = simd_mul(transform.matrix, rhs).xyz;
     
-    return (SPSize3D){ .vector = transformed };
+    return SPSize3DMakeWithVector(transformed);
 }
 
 SPATIAL_SWIFT_NAME(Size3D.applying(self:_:))
@@ -382,7 +346,7 @@ SPSize3D SPSize3DApplyProjectiveTransform(SPSize3D size, SPProjectiveTransform3D
     
     simd_double3 transformed = simd_mul(transform.matrix, rhs).xyz;
     
-    return (SPSize3D){ .vector = transformed };
+    return SPSize3DMakeWithVector(transformed);
 }
 
 SPATIAL_REFINED_FOR_SWIFT
@@ -516,14 +480,60 @@ SPATIAL_OVERLOADABLE
 SPSize3D SPSize3DUnapplyPose(SPSize3D size,
                              SPPose3D pose) {
     
-    simd_double4 v = simd_make_double4(size.vector, 0);
-    simd_double4x4 m = simd_matrix4x4(pose.rotation.quaternion);
-    m.columns[3].xyz = pose.position.vector;
-    m = simd_inverse(m);
+    return SPSize3DRotate(size, SPRotation3DInverse(pose.rotation));
+}
+
+// MARK: - Transform by Scaled Pose
+
+/*!
+ @abstract Returns a size that's transformed by the specified scaled pose.
+ 
+ @param size The source size.
+ @param pose The scaled pose that the function applies to the size.
+ @returns The transformed size.
+ */
+SPATIAL_INLINE
+SPATIAL_OVERLOADABLE
+SPSize3D SPSize3DApplyScaledPose(SPSize3D size,
+                                 SPScaledPose3D pose)
+__API_AVAILABLE(macos(15.0), ios(18.0), watchos(11.0), tvos(18.0));
+
+SPATIAL_REFINED_FOR_SWIFT
+SPATIAL_OVERLOADABLE
+SPSize3D SPSize3DApplyScaledPose(SPSize3D size,
+                                 SPScaledPose3D pose) {
     
-    simd_double3 transformed = simd_mul(m, v).xyz;
+    simd_double3 v = size.vector * pose.scale;
+    v = simd_act(pose.rotation.quaternion, v);
     
-    return (SPSize3D){ .vector = transformed };
+    return SPSize3DMakeWithVector(v);
+}
+
+/*!
+ @abstract Returns a size that's transformed by the inverse of the specified scaled pose.
+ 
+ @param size The source size.
+ @param pose The pose that the function unapplies to the size.
+ @returns The transformed vector.
+ */
+SPATIAL_INLINE
+SPATIAL_OVERLOADABLE
+SPSize3D SPSize3DUnapplyScaledPose(SPSize3D size,
+                                   SPScaledPose3D pose)
+__API_AVAILABLE(macos(15.0), ios(18.0), watchos(11.0), tvos(18.0));
+
+SPATIAL_REFINED_FOR_SWIFT
+SPATIAL_OVERLOADABLE
+SPSize3D SPSize3DUnapplyScaledPose(SPSize3D size,
+                                   SPScaledPose3D pose) {
+    
+    simd_quatd invPoseRot = simd_inverse(pose.rotation.quaternion);
+    simd_double3 invPosePos = simd_act(invPoseRot, -pose.position.vector);
+    
+    simd_double3 v = simd_act(invPoseRot, size.vector);
+    v /= pose.scale;
+    
+    return SPSize3DMakeWithVector(v);
 }
 
 #endif /* Spatial_SPSize3D_h */

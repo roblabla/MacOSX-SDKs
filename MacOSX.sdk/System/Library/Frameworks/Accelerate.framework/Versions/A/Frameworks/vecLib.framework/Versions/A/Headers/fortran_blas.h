@@ -14,6 +14,10 @@
 extern "C" {
 #endif
 
+
+int xerbla_(char *srname, int *info)
+API_DEPRECATED("An updated BLAS interface supporting ILP64 is available.  Please compile with -DACCELERATE_NEW_LAPACK to access the new headers and -DACCELERATE_LAPACK_ILP64 for ILP64 support.", macos(10.2,13.3), ios(4.0,16.4), watchos(1.0,9.4), tvos(4.0,16.4));
+
 /*
  * =====================================
  * Prototypes for level 1 BLAS functions

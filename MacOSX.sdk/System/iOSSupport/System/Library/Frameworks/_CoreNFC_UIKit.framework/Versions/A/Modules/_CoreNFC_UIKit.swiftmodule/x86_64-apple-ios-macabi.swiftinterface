@@ -1,6 +1,6 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.10 (swiftlang-5.10.0.12.5 clang-1500.3.9.1.1)
-// swift-module-flags: -target x86_64-apple-ios17.4-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-bare-slash-regex -user-module-version 345.7 -module-name _CoreNFC_UIKit
+// swift-compiler-version: Apple Swift version 6.0 effective-5.10 (swiftlang-6.0.0.7.24 clang-1600.0.25.1)
+// swift-module-flags: -target x86_64-apple-ios17.4-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-bare-slash-regex -user-module-version 350.33.1 -module-name _CoreNFC_UIKit
 @_exported import CoreNFC
 import Swift
 import UIKit
@@ -39,7 +39,7 @@ public protocol NFCWindowSceneDelegate {
 @available(macOS, unavailable)
 @available(visionOS, unavailable)
 extension UIKit.UIScene.ConnectionOptions {
-  @_Concurrency.MainActor(unsafe) public var nfcEvent: _CoreNFC_UIKit.NFCWindowSceneEvent? {
+  @_Concurrency.MainActor @preconcurrency public var nfcEvent: _CoreNFC_UIKit.NFCWindowSceneEvent? {
     get
   }
 }

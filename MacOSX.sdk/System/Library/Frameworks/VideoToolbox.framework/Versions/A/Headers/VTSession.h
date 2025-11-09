@@ -51,24 +51,24 @@ typedef CM_BRIDGED_TYPE(id) CFTypeRef  VTSessionRef;
 VT_EXPORT OSStatus 
 VTSessionCopySupportedPropertyDictionary(
   CM_NONNULL VTSessionRef					session,
-  CM_RETURNS_RETAINED_PARAMETER CM_NULLABLE CFDictionaryRef * CM_NONNULL supportedPropertyDictionaryOut ) API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2));
+  CM_RETURNS_RETAINED_PARAMETER CM_NULLABLE CFDictionaryRef * CM_NONNULL supportedPropertyDictionaryOut ) API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 CF_IMPLICIT_BRIDGING_ENABLED
 
 CM_ASSUME_NONNULL_BEGIN
 	
-VT_EXPORT const CFStringRef kVTPropertyTypeKey API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2)); // value is CFStringRef, one of the following:
-	VT_EXPORT const CFStringRef kVTPropertyType_Enumeration API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2)); // value is one of a list of CFStrings
-	VT_EXPORT const CFStringRef kVTPropertyType_Boolean API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2)); // value is a CFBoolean
-	VT_EXPORT const CFStringRef kVTPropertyType_Number API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2)); // value is a CFNumber
-VT_EXPORT const CFStringRef kVTPropertyReadWriteStatusKey API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2));
-	VT_EXPORT const CFStringRef kVTPropertyReadWriteStatus_ReadOnly API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2));
-	VT_EXPORT const CFStringRef kVTPropertyReadWriteStatus_ReadWrite API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2));
-VT_EXPORT const CFStringRef kVTPropertyShouldBeSerializedKey API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2)); // CFBoolean, false by default
-VT_EXPORT const CFStringRef kVTPropertySupportedValueMinimumKey API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2)); // CFNumber
-VT_EXPORT const CFStringRef kVTPropertySupportedValueMaximumKey API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2)); // CFNumber
-VT_EXPORT const CFStringRef kVTPropertySupportedValueListKey API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2)); // CFArray of appropriate values
-VT_EXPORT const CFStringRef kVTPropertyDocumentationKey API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2)); // a CFString for developer eyes only
+VT_EXPORT const CFStringRef kVTPropertyTypeKey API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos); // value is CFStringRef, one of the following:
+	VT_EXPORT const CFStringRef kVTPropertyType_Enumeration API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos); // value is one of a list of CFStrings
+	VT_EXPORT const CFStringRef kVTPropertyType_Boolean API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos); // value is a CFBoolean
+	VT_EXPORT const CFStringRef kVTPropertyType_Number API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos); // value is a CFNumber
+VT_EXPORT const CFStringRef kVTPropertyReadWriteStatusKey API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos);
+	VT_EXPORT const CFStringRef kVTPropertyReadWriteStatus_ReadOnly API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos);
+	VT_EXPORT const CFStringRef kVTPropertyReadWriteStatus_ReadWrite API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos);
+VT_EXPORT const CFStringRef kVTPropertyShouldBeSerializedKey API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos); // CFBoolean, false by default
+VT_EXPORT const CFStringRef kVTPropertySupportedValueMinimumKey API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos); // CFNumber
+VT_EXPORT const CFStringRef kVTPropertySupportedValueMaximumKey API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos); // CFNumber
+VT_EXPORT const CFStringRef kVTPropertySupportedValueListKey API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos); // CFArray of appropriate values
+VT_EXPORT const CFStringRef kVTPropertyDocumentationKey API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos); // a CFString for developer eyes only
 
 CM_ASSUME_NONNULL_END
 
@@ -82,7 +82,7 @@ VT_EXPORT OSStatus
 VTSessionSetProperty(
   CM_NONNULL VTSessionRef       session,
   CM_NONNULL CFStringRef        propertyKey,
-  CM_NULLABLE CFTypeRef         propertyValue ) API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2));
+  CM_NULLABLE CFTypeRef         propertyValue ) API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos);
 	
 CF_IMPLICIT_BRIDGING_DISABLED
 
@@ -113,7 +113,7 @@ VTSessionCopyProperty(
   CM_NONNULL VTSessionRef		session,
   CM_NONNULL CFStringRef		propertyKey,
   CM_NULLABLE CFAllocatorRef	allocator,
-  void * CM_NULLABLE			propertyValueOut ) API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2));
+  void * CM_NULLABLE			propertyValueOut ) API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 CF_IMPLICIT_BRIDGING_ENABLED
 /*!
@@ -125,7 +125,7 @@ CF_IMPLICIT_BRIDGING_ENABLED
 VT_EXPORT OSStatus 
 VTSessionSetProperties(
   CM_NONNULL VTSessionRef		session,
-  CM_NONNULL CFDictionaryRef	propertyDictionary ) API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2));
+  CM_NONNULL CFDictionaryRef	propertyDictionary ) API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos);
 	
 CF_IMPLICIT_BRIDGING_DISABLED
 
@@ -140,7 +140,7 @@ VT_EXPORT OSStatus
 VTSessionCopySerializableProperties(
   CM_NONNULL VTSessionRef					session,
   CM_NULLABLE CFAllocatorRef				allocator,
-  CM_RETURNS_RETAINED_PARAMETER CM_NULLABLE CFDictionaryRef * CM_NONNULL	dictionaryOut ) API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2));
+  CM_RETURNS_RETAINED_PARAMETER CM_NULLABLE CFDictionaryRef * CM_NONNULL	dictionaryOut ) API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 #pragma pack(pop)
     

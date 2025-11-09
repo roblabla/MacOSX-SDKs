@@ -52,6 +52,20 @@ QLT_EXPORT @interface QLThumbnailGenerator : NSObject
  The file saved at fileURL has to be deleted when it is not used anymore.
  This is primarily intended for file provider extensions which need to upload thumbnails and have a small memory limit.
 
+ @param contentType An image content type to save the thumbnail as, supported by CGImageDestination, such as UTTypePNG or UTTypeJPEG
+ @param completionHandler
+ Always called when the thumbnail generation is over. Will contain an error if the thumbnail could not be successfully saved to disk at fileURL.
+ */
+- (void)saveBestRepresentationForRequest:(QLThumbnailGenerationRequest *)request
+                             toFileAtURL:(NSURL*)fileURL
+                           asContentType:(UTType*)contentType
+                       completionHandler:(void (^)(NSError * _Nullable error))completionHandler NS_SWIFT_NAME(saveBestRepresentation(for:to:as:completion:));
+
+/**
+ Saves a thumbnail for the request on disk at fileURL.
+ The file saved at fileURL has to be deleted when it is not used anymore.
+ This is primarily intended for file provider extensions which need to upload thumbnails and have a small memory limit.
+
  @param contentType An image content type to save the thumbnail as, supported by CGImageDestination, such as kUTTypePNG or kUTTypeJPEG
  @param completionHandler
  Always called when the thumbnail generation is over. Will contain an error if the thumbnail could not be successfully saved to disk at fileURL.
@@ -59,7 +73,7 @@ QLT_EXPORT @interface QLThumbnailGenerator : NSObject
 - (void)saveBestRepresentationForRequest:(QLThumbnailGenerationRequest *)request
                              toFileAtURL:(NSURL*)fileURL
                          withContentType:(NSString*)contentType
-                       completionHandler:(void (^)(NSError * _Nullable error))completionHandler NS_SWIFT_NAME(saveBestRepresentation(for:to:contentType:completion:));
+                       completionHandler:(void (^)(NSError * _Nullable error))completionHandler NS_SWIFT_NAME(saveBestRepresentation(for:to:contentType:completion:)) API_DEPRECATED_WITH_REPLACEMENT("saveBestRepresentationForRequest:toFileAtURL:asContentType:completionHandler:",macos(11.0, 15.0), ios(14.0, 18.0));
 
 @end
 

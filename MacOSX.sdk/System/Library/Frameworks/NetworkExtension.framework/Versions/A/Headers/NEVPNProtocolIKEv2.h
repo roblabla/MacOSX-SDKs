@@ -171,6 +171,44 @@ API_AVAILABLE(macos(10.11), ios(8.0), tvos(17.0)) API_UNAVAILABLE(watchos)
 @end
 
 /*!
+ * @interface NEVPNIKEv2PPKConfiguration
+ * @discussion The NEVPNIKEv2PPKConfiguration class declares the programmatic interface of an object that manages parameters for a Post-quantum Pre-shared Key (PPK)
+ *
+ * Instances of this class conform to RFC 8784.
+ * Instances of this class are thread safe.
+ */
+API_AVAILABLE(macos(15.0), ios(18.0), tvos(18.0), visionos(2.0)) API_UNAVAILABLE(watchos)
+@interface NEVPNIKEv2PPKConfiguration : NSObject<NSCopying>
+
+/*!
+ * @method initWithIdentifier:keychainReference:
+ * @discussion Initialize a newly-allocated NEVPNIKEv2PPKConfiguration object.
+ * @param identifier The identifier for the PPK.
+ * @param keychainReference A persistent reference to a keychain item of class kSecClassGenericPassword containing the PPK.
+ */
+- (instancetype)initWithIdentifier:(NSString *)identifier keychainReference:(NSData *)keychainReference;
+
+/*!
+ * @property identifier
+ * @discussion The identifer for the PPK.
+ */
+@property (readonly, copy) NSString *identifier;
+
+/*!
+ * @property keychainReference
+ * @discussion A persistent reference to a keychain item of class kSecClassGenericPassword containing the PPK.
+ */
+@property (readonly, copy) NSData *keychainReference;
+
+/*!
+ * @property isMandatory
+ * @discussion Boolean indicating whether use of the PPK is mandatory or not. Default is YES.
+ */
+@property BOOL isMandatory;
+
+@end
+
+/*!
  * @interface NEVPNProtocolIKEv2
  * @discussion The NEVPNProtocolIKEv2 class declares the programmatic interface of an object that manages the IKEv2-specific portion of a VPN configuration.
  *
@@ -278,6 +316,12 @@ API_AVAILABLE(macos(10.11), ios(8.0), tvos(17.0)) API_UNAVAILABLE(watchos)
  * @discussion Maximum Transmission Unit (MTU) size in bytes to assign to the tunnel interface.
  */
 @property NSUInteger mtu API_AVAILABLE(macos(11.0), ios(14.0), tvos(17.0)) API_UNAVAILABLE(watchos);
+
+/*!
+ * @property ppkConfiguration
+ * @discussion Configuration for the use of a Post-quantum Pre-shared Key (PPK).
+ */
+@property (copy, nullable) NEVPNIKEv2PPKConfiguration *ppkConfiguration API_AVAILABLE(macos(15.0), ios(18.0), tvos(18.0), visionos(2.0)) API_UNAVAILABLE(watchos);
 
 @end
 

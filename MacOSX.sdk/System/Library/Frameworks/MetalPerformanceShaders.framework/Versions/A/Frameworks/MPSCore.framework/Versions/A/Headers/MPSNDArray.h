@@ -35,6 +35,12 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.15), ios(13.0), macCatalyst(13.0), tvos(1
  *              Undefined dimensions are implicitly length 1. */
 @property (readwrite, nonatomic)  NSUInteger numberOfDimensions;
 
+/*! @property   preferPackedRows
+ *  @abstract   If YES, then new NDArrays created with this descriptor will pack the rows. Default: NO.
+ */
+@property (readwrite, nonatomic) BOOL preferPackedRows
+MPS_AVAILABLE_STARTING(macos(15.0), ios(18.0), macCatalyst(18.0), tvos(18.0), xros(2.0));
+
 /*! @abstract   The number of elements of type dataType in the indicated dimension.
  *  @discussion If dimensionIndex >= numberOfDimensions, 1 will be returned.
  *  @param      dimensionIndex  dimension the MPSNDArray for which to return the length
@@ -67,12 +73,29 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.15), ios(13.0), macCatalyst(13.0), tvos(1
 -(void)     transposeDimension: (NSUInteger) dimensionIndex
                  withDimension: (NSUInteger) dimensionIndex2;
 
+/*! @abstract   Permutes the dimensions of the current descriptor
+ *  @param      dimensionOrder      A permutation of the dimensions of the NDArray.
+ *                               dimensionOrder[i] must contain the new postion of dimenson i.
+ *                               Size of the array must be equal to the original number of dimensions in the descriptor.
+ *                               Must have all the indices in [0, numberOfDimensions) present uniquely.
+ *
+ *  @discussion This permutation is applied on top of whatever transpostions/permutations that may have been performed on the descriptor before.
+ *
+ */
+-(void) permuteWithDimensionOrder: (NSUInteger*__nonnull) dimensionOrder
+MPS_AVAILABLE_STARTING(macos(15.0), ios(18.0), macCatalyst(18.0), tvos(18.0), xros(2.0));
+
 /*! @abstract    The new ordering of dimensions
  *  @discussion  If a transpose is applied, it will change the order
  *               of dimensions in the MPSNDArray. The default ordering is
  *               {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15}.  After a transpose
  *               of dimensions 0 and 1, it will be: {1,0,2,3,4,5,6,7,8,9,10,11,12,13,14,15}     */
 -(vector_uchar16)   dimensionOrder;
+
+/*! @abstract    Returns the shape of the NDArray as MPSShape
+ *  @discussion  The length of the array is the number of dimensions and the size of the fastest running dimension is the last element in the array.   */
+-(NSArray<NSNumber *> * _Nonnull) getShape
+MPS_AVAILABLE_STARTING(macos(15.0), ios(18.0), macCatalyst(18.0), tvos(18.0), xros(2.0));
 
 /*! @abstract   Create an MPSNDArrayDescriptor object for a given size of dimensions.
  *  @discussion Sample code:
@@ -270,6 +293,24 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.15), ios(13.0), macCatalyst(13.0), tvos(1
 -(nonnull instancetype) initWithDevice:(id<MTLDevice> _Nonnull) device
                                 scalar:(double) value;
 
+/*! @abstract   Initialize an MPSNDArray object from a Metal Buffer with a given descriptor and offset in bytes.
+ *
+ *   @param      buffer          The buffer used for initializing. The NDArray will alias to this buffer at the given offset.
+ *   @param      offset          Offset in bytes to the buffer.
+ *   @param      descriptor  The MPSNDArrayDescriptor used for initializing the the NDArray.
+ *
+ *   @return     A valid MPSNDArray object or nil, if failure. */
+
+-(nonnull instancetype) initWithBuffer:(id<MTLBuffer> _Nonnull) buffer
+                                offset:(NSUInteger) offset
+                            descriptor:(MPSNDArrayDescriptor * _Nonnull) descriptor
+MPS_AVAILABLE_STARTING(macos(15.0), ios(18.0), macCatalyst(18.0), tvos(18.0), xros(2.0));
+
+/*! @abstract   Returns the user buffer in case the NDArray was initialized with an MTLBuffer.
+ *   @return    The user-provided MTLBuffer that was used to initialize this MPSNDArray or nil, in case it was not.. */
+-(__nullable id <MTLBuffer>) userBuffer
+MPS_AVAILABLE_STARTING(macos(15.0), ios(18.0), macCatalyst(18.0), tvos(18.0), xros(2.0));
+
 /*! @abstract       Get the number of bytes used to allocate underyling MTLResources
  *  @discussion     This is the size of the backing store of underlying MTLResources.
  *                  It does not include all storage used by the object, for example
@@ -303,6 +344,41 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.15), ios(13.0), macCatalyst(13.0), tvos(1
 -(MPSNDArray * __nullable)     arrayViewWithCommandBuffer: (__nonnull id <MTLCommandBuffer>) cmdBuf
                                                descriptor: (MPSNDArrayDescriptor * _Nonnull) descriptor
                                                  aliasing: (MPSAliasingStrategy) aliasing;
+
+/*! @abstract   Make a new representation of a MPSNDArray with a slice, transpose or other change in property, trying to alias to result.
+ *  @discussion The same as `arrayViewWithCommandBuffer`, except that tries to always alias, and therefore does not require a commanbuffer.
+ *              If aliasing is not possible nil is returned.
+ *              This method is useful in making aliasing transposes and slices, that are guaranteed to be able to alias. For reshapes it is recommended
+ *              to use the `MPSNDArrayIdentity` methods.
+ *  @param      descriptor  A MPSNDArrayDescriptor describing the shape of the new view of the data
+ *  @return     A new MPSNDArray, if it is possible to make one. Otherwise nil is returned. The MPSNDArray is autoreleased. */
+-(MPSNDArray * __nullable)     arrayViewWithDescriptor: (MPSNDArrayDescriptor * _Nonnull) descriptor
+MPS_AVAILABLE_STARTING(macos(15.0), ios(18.0), macCatalyst(18.0), tvos(18.0), xros(2.0));
+
+/*! @abstract   Make a new representation of a MPSNDArray with given strides and a new shape.
+ *  @discussion This operation always returns a new view of the same underlying MTLBuffer, but works only with contiguous buffers.
+ *
+ *  @param      shape             The new shape for the NDArray. Fastest running dimension last. If nil then current shape is used.
+ *  @param      strides           The strides for each dimension. Must be at least length of new shape. Last number must be one. Must be non-increasing.
+ *
+ *  @return     A new MPSNDArray, if it is possible to make one. Otherwise nil is returned. The MPSNDArray is autoreleased. */
+-(MPSNDArray * __nullable)     arrayViewWithShape:(MPSShape * _Nullable) shape
+                                          strides:(MPSShape * _Nonnull)  strides
+MPS_AVAILABLE_STARTING(macos(15.0), ios(18.0), macCatalyst(18.0), tvos(18.0), xros(2.0));
+
+/*! @abstract   Make a new representation of a MPSNDArray with given strides and a new shape.
+ *  @discussion This operation always returns a new view of the same underlying MTLBuffer, but works only with contiguous buffers.
+ *
+ *  @param      numberOfDimensions          Number of dimensions in the new view.
+ *  @param      dimensionSizes              Size of each new dimension. Fastest running dimension first. Must be of length numberOfDimensions.
+ *  @param      dimStrides                  The strides for each dimension. First number must be one. Must be non-decreasing.  Must be of length numberOfDimensions.
+ *
+ *  @return     A new MPSNDArray, if it is possible to make one. Otherwise nil is returned. The MPSNDArray is autoreleased. */
+-(MPSNDArray * __nullable)     arrayViewWithDimensionCount:(NSUInteger) numberOfDimensions
+                                            dimensionSizes:(const NSUInteger * _Nonnull) dimensionSizes
+                                                   strides:(const NSUInteger * _Nonnull) dimStrides
+MPS_AVAILABLE_STARTING(macos(15.0), ios(18.0), macCatalyst(18.0), tvos(18.0), xros(2.0));
+
 
 /*! @abstract   The parent MPSNDArray that this object aliases
  *  @discussion If the MPSNDArray was createrd as a array view of another MPSNDArray object, and aliases content

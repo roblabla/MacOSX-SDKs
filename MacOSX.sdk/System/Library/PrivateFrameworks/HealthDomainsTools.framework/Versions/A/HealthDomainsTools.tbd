@@ -119,7 +119,7 @@ exports:
                        '_$s18HealthDomainsTools10OutputFlowV7execute10completionyy07SiriKitE015ExecuteResponseVc_tF', 
                        '_$s18HealthDomainsTools10OutputFlowVMa', '_$s18HealthDomainsTools10OutputFlowVMn', 
                        '_$s18HealthDomainsTools10OutputFlowVN', '_$s18HealthDomainsTools11FlowFindingMp', 
-                       '_$s18HealthDomainsTools11FlowFindingTL', '_$s18HealthDomainsTools11GuardedFlowV04mainE06guardsAC07SiriKitE00E0_p_SayAF06CommonE5GuardVGtcfC', 
+                       '_$s18HealthDomainsTools11FlowFindingTL', '_$s18HealthDomainsTools11GuardedFlowV04mainE06guards016enforceProtectedA3AppAC07SiriKitE00E0_p_SayAG06CommonE5GuardVGSbtcfC', 
                        '_$s18HealthDomainsTools11GuardedFlowV07SiriKitE00E0AAMc', 
                        '_$s18HealthDomainsTools11GuardedFlowV2on5inputSb07SiriKitE05InputV_tF', 
                        '_$s18HealthDomainsTools11GuardedFlowV7execute07SiriKitE015ExecuteResponseVyYaF', 

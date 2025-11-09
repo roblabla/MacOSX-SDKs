@@ -13,18 +13,18 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-/// The distributions supported by MPSGraphRandom ops.
+/// The distributions supported by random operations.
 typedef NS_ENUM(uint64_t, MPSGraphRandomDistribution)
 {
     /// The uniform distribution, with samples drawn uniformly from [min, max) for float types, and [min, max] for integer types.
     MPSGraphRandomDistributionUniform            MPS_ENUM_AVAILABLE_STARTING(macos(12.3), ios(15.4), tvos(15.4)) MPS_SWIFT_NAME(uniform) =   0,
-    /// The normal distribution defined by mean and standardDeviation.
+    /// The normal distribution defined by mean and standard deviation.
     MPSGraphRandomDistributionNormal         MPS_ENUM_AVAILABLE_STARTING(macos(12.3), ios(15.4), tvos(15.4))                        =   1L,
-    /// The normal distribution defined by mean and standardDeviation, truncated to the range [min, max)
+    /// The normal distribution defined by mean and standard deviation, truncated to the range [min, max)
     MPSGraphRandomDistributionTruncatedNormal         MPS_ENUM_AVAILABLE_STARTING(macos(12.3), ios(15.4), tvos(15.4))                        =   2L,
 };
 
-/// Specify what sampling method to use when generating values in the normal distribution.
+/// The sampling method to use when generating values in the normal distribution.
 typedef NS_ENUM(uint64_t, MPSGraphRandomNormalSamplingMethod)
 {
     /// Use inverse erf to convert uniform values to values in the normal distribution
@@ -33,6 +33,7 @@ typedef NS_ENUM(uint64_t, MPSGraphRandomNormalSamplingMethod)
     MPSGraphRandomNormalSamplingBoxMuller         MPS_ENUM_AVAILABLE_STARTING(macos(12.3), ios(15.4), tvos(15.4))                        =   1L,
 };
 
+/// A class that describes the random operation.
 @interface MPSGraphRandomOpDescriptor : MPSGraphObject<NSCopying>
 
 /// The type of distribution to draw samples from. See MPSGraphRandomDistribution. 
@@ -40,51 +41,67 @@ typedef NS_ENUM(uint64_t, MPSGraphRandomNormalSamplingMethod)
 @property (readwrite, nonatomic) MPSGraphRandomDistribution distribution;
 
 /// The data type of the generated result values. 
-/// When sampling from the uniform distribution, valid types are MPSDataTypeFloat16, 
-/// MPSDataTypeFloat32, and MPSDataTypeInt32. 
+/// 
+/// When sampling from the uniform distribution, valid types are MPSDataTypeFloat16,
+/// MPSDataTypeFloat32, and MPSDataTypeInt32.
 /// When sampling from the normal or truncated normal distribution, valid types are 
 /// MPSDataTypeFloat16 and MPSDataTypeFloat32. 
 ///
 @property (readwrite, nonatomic) MPSDataType dataType;
 
-/// The lower range of the distribution. This value is used for Uniform distributions with float data types and Truncated Normal disributions. 
-/// Defaults to 0 for uniform distributions and -2 for normal distributions. 
+/// The lower range of the distribution. 
+///
+/// This value is used for Uniform distributions with float data types and Truncated Normal disributions.
+/// Defaults to 0 for uniform distributions and -2 for normal distributions.
 ///
 @property (readwrite, nonatomic) float min;
 
-/// The upper range of the distribution. This value is used for Uniform distributions with float data types and Truncated Normal disributions. 
-/// Defaults to 1 for uniform distributions and 2 for normal distributions. 
+/// The upper range of the distribution. 
+///
+/// This value is used for Uniform distributions with float data types and Truncated Normal disributions.
+/// Defaults to 1 for uniform distributions and 2 for normal distributions.
 ///
 @property (readwrite, nonatomic) float max;
 
-/// The lower range of the distribution. This value is used for Uniform with integer data types 
-/// Defaults to 0. 
+/// The lower range of the distribution. 
+///
+/// This value is used for Uniform with integer data types
+/// Defaults to 0.
 ///
 @property (readwrite, nonatomic) NSInteger minInteger;
 
-/// The upper range of the distribution. This value is used for Uniform with integer data types 
-/// Defaults to INT32_MAX for uniform distributions and 0 for normal distributions. 
+/// The upper range of the distribution. 
+///
+/// This value is used for Uniform with integer data types
+/// Defaults to INT32_MAX for uniform distributions and 0 for normal distributions.
 ///
 @property (readwrite, nonatomic) NSInteger maxInteger;
 
-/// The mean of the distribution. This value is used for Normal and Truncated Normal disributions. 
-/// Defaults to 0. 
+/// The mean of the distribution. 
+///
+/// This value is used for Normal and Truncated Normal disributions.
+/// Defaults to 0.
 ///
 @property (readwrite, nonatomic) float mean;
 
-/// The standardDeviation of the distribution. This value is used for Normal and Truncated Normal disributions. 
-/// For Truncated Normal distribution this defines the standard deviation parameter of the underlying Normal distribution, that is the width 
+/// The standard deviation of the distribution.
+///
+/// This value is used for Normal and Truncated Normal disributions.
+/// For Truncated Normal distribution this defines the standard deviation parameter of the underlying Normal distribution, that is the width
 /// of the Gaussian, not the true standard deviation of the truncated distribution which typically differs from the standard deviation of the 
 /// original Normal distribution. 
 /// Defaults to 0 for uniform distributions and 1 for normal distributions. 
 ///
 @property (readwrite, nonatomic) float standardDeviation;
 
-/// The sampling method of the distribution. This value is used for Normal and Truncated Normal disributions. See MPSGraphRandomNormalSamplingMethod. 
-/// Defaults to MPSGraphRandomNormalSamplingInvCDF. 
+/// The sampling method of the distribution. 
+///
+/// This value is used for Normal and Truncated Normal disributions. See MPSGraphRandomNormalSamplingMethod.
+/// Defaults to MPSGraphRandomNormalSamplingInvCDF.
 ///
 @property (readwrite, nonatomic) MPSGraphRandomNormalSamplingMethod samplingMethod;
 
+/// Class method to initialize a distribution descriptor.
 +(nullable instancetype) descriptorWithDistribution:(MPSGraphRandomDistribution) distribution
                                            dataType:(MPSDataType) dataType;
 
@@ -93,7 +110,7 @@ typedef NS_ENUM(uint64_t, MPSGraphRandomNormalSamplingMethod)
 MPS_CLASS_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))
 @interface MPSGraph(MPSGraphRandomOps)
 
-/// Creates an MPSGraphTensor representing state using the Philox algorithm with given counter and key values.
+/// Creates a tensor representing state using the Philox algorithm with given counter and key values.
 ///
 /// Generates random numbers using the Philox counter-based algorithm, for further details see: 
 /// John K. Salmon, Mark A. Moraes, Ron O. Dror, and David E. Shaw. Parallel Random Numbers: As Easy as 1, 2, 3. 
@@ -117,7 +134,7 @@ MPS_CLASS_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))
 - (MPSGraphTensor *) randomPhiloxStateTensorWithSeed:(NSUInteger) seed
                                                 name:(NSString * _Nullable) name;
 
-/// Creates an MPSGraphTensor representing state using the Philox algorithm with given counter and key values.
+/// Creates a tensor representing state using the Philox algorithm with given counter and key values.
 ///
 /// See randomPhiloxStateTensorWithSeed.
 ///
@@ -132,7 +149,7 @@ MPS_CLASS_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))
                                                        key:(NSUInteger) key
                                                       name:(NSString * _Nullable) name;
 
-/// Create Random op of type matching distribution in descriptor and return random values
+/// Creates a Random op of type matching distribution in descriptor and returns random values.
 ///
 /// Returns a tensor of provided shape of random values in the distribution specified. Uses a random seed value
 /// to initalize state. No state is preserved, and subsequent calls are not guaranteed to result in a unique stream of 
@@ -141,12 +158,13 @@ MPS_CLASS_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))
 /// - Parameters:
 ///   - shape: The shape of the tensor generated
 ///   - descriptor: The descriptor of the distribution. See MPSGraphRandomOpDescriptor.
-///   - name: The name for the operation
+///   - name: The name for the operation.
 /// - Returns: An MPSGraphTensor of shape containing random values in the defined range.
 - (MPSGraphTensor *) randomTensorWithShape:(MPSShape *) shape
                                 descriptor:(MPSGraphRandomOpDescriptor *) descriptor
                                       name:(NSString * _Nullable) name;
-/// Create Random op of type matching distribution in descriptor and return random values
+
+/// Creates a Random op of type matching distribution in descriptor and returns random values.
 ///
 /// Returns a tensor of provided shape of random values in the distribution specified. Uses a random seed value
 /// to initalize state. No state is preserved, and subsequent calls are not guaranteed to result in a unique stream of
@@ -155,13 +173,13 @@ MPS_CLASS_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))
 /// - Parameters:
 ///   - shapeTensor: 1D Int32 or Int64 tensor. The shape of the tensor generated
 ///   - descriptor: The descriptor of the distribution. See MPSGraphRandomOpDescriptor.
-///   - name: The name for the operation
+///   - name: The name for the operation.
 /// - Returns: An MPSGraphTensor of shape containing random values in the defined range.
 - (MPSGraphTensor *) randomTensorWithShapeTensor:(MPSGraphTensor *) shapeTensor
                                       descriptor:(MPSGraphRandomOpDescriptor *) descriptor
                                             name:(NSString * _Nullable) name;
 
-/// Create Random op of type matching distribution in descriptor and return random values
+/// Creates a Random op of type matching distribution in descriptor and returns random values.
 ///
 /// Returns a tensor of provided shape of random values in the distribution specified. Uses the provided seed value
 /// to initalize state. No state is preserved, and all calls with equal seed yield an identical stream of random values.
@@ -170,13 +188,14 @@ MPS_CLASS_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))
 ///   - shape: The shape of the tensor generated
 ///   - descriptor: The descriptor of the distribution. See MPSGraphRandomOpDescriptor.
 ///   - seed: The seed to use to initialize state. All calls with equal seed yield an identical stream of random values.
-///   - name: The name for the operation
+///   - name: The name for the operation.
 /// - Returns: An MPSGraphTensor of shape containing random values in the defined range.
 - (MPSGraphTensor *) randomTensorWithShape:(MPSShape *) shape
                                 descriptor:(MPSGraphRandomOpDescriptor *) descriptor
                                       seed:(NSUInteger) seed
                                       name:(NSString * _Nullable) name;
-/// Create Random op of type matching distribution in descriptor and return random values
+
+/// Creates a Random op of type matching distribution in descriptor and returns random values.
 ///
 /// Returns a tensor of provided shape of random values in the distribution specified. Uses the provided seed value
 /// to initalize state. No state is preserved, and all calls with equal seed yield an identical stream of random values.
@@ -185,14 +204,14 @@ MPS_CLASS_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))
 ///   - shapeTensor: 1D Int32 or Int64 tensor. The shape of the tensor generated
 ///   - descriptor: The descriptor of the distribution. See MPSGraphRandomOpDescriptor.
 ///   - seed: The seed to use to initialize state. All calls with equal seed yield an identical stream of random values.
-///   - name: The name for the operation
+///   - name: The name for the operation.
 /// - Returns: An MPSGraphTensor of shape containing random values in the defined range.
 - (MPSGraphTensor *) randomTensorWithShapeTensor:(MPSGraphTensor *) shapeTensor
                                       descriptor:(MPSGraphRandomOpDescriptor *) descriptor
                                             seed:(NSUInteger) seed
                                             name:(NSString * _Nullable) name;
 
-/// Create Random op of type matching distribution in descriptor, and return random values and updated state
+/// Creates a Random op of type matching distribution in descriptor, and returns random values and updated state.
 ///
 /// Returns an array of 2 tensors, where the first is of provided shape of random values in the distribution specified,
 /// and the second is the updated state tensor.
@@ -205,14 +224,14 @@ MPS_CLASS_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))
 ///   - shape: The shape of the tensor generated
 ///   - descriptor: The descriptor of the distribution. See MPSGraphRandomOpDescriptor.
 ///   - state: The state to define a stream of random values. All calls with equal state yield an identical stream of random values.
-///   - name: The name for the operation
+///   - name: The name for the operation.
 /// - Returns: An array of MPSGraphTensor of size 2. The first MPSGraphTensor is of shape containing random values in the defined range. 
 /// The second MPSGraphTensor is the updated state tensor.
 - (NSArray<MPSGraphTensor *> *) randomTensorWithShape:(MPSShape *) shape
                                            descriptor:(MPSGraphRandomOpDescriptor *) descriptor
                                           stateTensor:(MPSGraphTensor *) state
                                                  name:(NSString * _Nullable) name;
-/// Create Random op of type matching distribution in descriptor, and return random values and updated state
+/// Creates a Random op of type matching distribution in descriptor, and returns random values and updated state.
 ///
 /// Returns an array of 2 tensors, where the first is of provided shape of random values in the distribution specified,
 /// and the second is the updated state tensor.
@@ -222,10 +241,10 @@ MPS_CLASS_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))
 /// random calls to continue sampling from the stream.
 ///
 /// - Parameters:
-///   - shapeTensor: 1D Int32 or Int64 tensor. The shape of the tensor generated
+///   - shapeTensor: 1D Int32 or Int64 tensor. The shape of the tensor generated.
 ///   - descriptor: The descriptor of the distribution. See MPSGraphRandomOpDescriptor.
 ///   - state: The state to define a stream of random values. All calls with equal state yield an identical stream of random values.
-///   - name: The name for the operation
+///   - name: The name for the operation.
 /// - Returns: An array of MPSGraphTensor of size 2. The first MPSGraphTensor is of shape containing random values in the defined range.
 /// The second MPSGraphTensor is the updated state tensor.
 - (NSArray<MPSGraphTensor *> *) randomTensorWithShapeTensor:(MPSGraphTensor *) shapeTensor
@@ -233,7 +252,7 @@ MPS_CLASS_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))
                                                 stateTensor:(MPSGraphTensor *) state
                                                        name:(NSString * _Nullable) name;
 
-/// Create RandomUniform op and return random uniform values
+/// Creates a RandomUniform operation and returns random uniform values
 ///
 /// Returns a tensor of provided shape of random uniform values in the range [0.0, 1.0). Uses a random seed value
 /// to initalize state. No state is preserved, and subsequent calls are not guaranteed to result in a unique stream of 
@@ -241,11 +260,11 @@ MPS_CLASS_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))
 ///
 /// - Parameters:
 ///   - shape: The shape of the tensor generated
-///   - name: The name for the operation
+///   - name: The name for the operation.
 /// - Returns: An MPSGraphTensor of shape containing random values in the defined range.
 - (MPSGraphTensor *) randomUniformTensorWithShape:(MPSShape *) shape
                                              name:(NSString * _Nullable) name;
-/// Create RandomUniform op and return random uniform values
+/// Creates a RandomUniform operation and returns random uniform values
 ///
 /// Returns a tensor of provided shape of random uniform values in the range [0.0, 1.0). Uses a random seed value
 /// to initalize state. No state is preserved, and subsequent calls are not guaranteed to result in a unique stream of
@@ -253,12 +272,12 @@ MPS_CLASS_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))
 ///
 /// - Parameters:
 ///   - shapeTensor: 1D Int32 or Int64 tensor. The shape of the tensor generated
-///   - name: The name for the operation
+///   - name: The name for the operation.
 /// - Returns: An MPSGraphTensor of shape containing random values in the defined range.
 - (MPSGraphTensor *) randomUniformTensorWithShapeTensor:(MPSGraphTensor *) shapeTensor
                                                    name:(NSString * _Nullable) name;
 
-/// Create RandomUniform op and return random uniform values
+/// Creates a RandomUniform operation and returns random uniform values
 ///
 /// Returns a tensor of provided shape of random uniform values in the range [0.0, 1.0). Uses the provided seed value
 /// to initalize state. No state is preserved, and all calls with equal seed yield an identical stream of random values.
@@ -266,12 +285,12 @@ MPS_CLASS_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))
 /// - Parameters:
 ///   - shape: The shape of the tensor generated
 ///   - seed: The seed to use to initialize state. All calls with equal seed yield an identical stream of random values.
-///   - name: The name for the operation
+///   - name: The name for the operation.
 /// - Returns: An MPSGraphTensor of shape containing random values in the defined range.
 - (MPSGraphTensor *) randomUniformTensorWithShape:(MPSShape *) shape
                                              seed:(NSUInteger) seed
                                              name:(NSString * _Nullable) name;
-/// Create RandomUniform op and return random uniform values
+/// Creates a RandomUniform operation and returns random uniform values
 ///
 /// Returns a tensor of provided shape of random uniform values in the range [0.0, 1.0). Uses the provided seed value
 /// to initalize state. No state is preserved, and all calls with equal seed yield an identical stream of random values.
@@ -279,13 +298,13 @@ MPS_CLASS_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))
 /// - Parameters:
 ///   - shapeTensor: 1D Int32 or Int64 tensor. The shape of the tensor generated
 ///   - seed: The seed to use to initialize state. All calls with equal seed yield an identical stream of random values.
-///   - name: The name for the operation
+///   - name: The name for the operation.
 /// - Returns: An MPSGraphTensor of shape containing random values in the defined range.
 - (MPSGraphTensor *) randomUniformTensorWithShapeTensor:(MPSGraphTensor *) shapeTensor
                                                    seed:(NSUInteger) seed
                                                    name:(NSString * _Nullable) name;
 
-/// Create RandomUniform op and return random uniform values and updated state
+/// Creates a RandomUniform operation and returns random uniform values and updated state
 ///
 /// Returns an array of 2 tensors, where the first is a tensor of provided shape of random uniform values in the range 
 /// [0.0, 1.0), and the second is the updated state tensor.
@@ -297,13 +316,13 @@ MPS_CLASS_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))
 /// - Parameters:
 ///   - shape: The shape of the tensor generated
 ///   - state: The state to define a stream of random values. All calls with equal state yield an identical stream of random values.
-///   - name: The name for the operation
+///   - name: The name for the operation.
 /// - Returns: An array of MPSGraphTensor of size 2. The first MPSGraphTensor is of shape containing random values in the defined range. 
 /// The second MPSGraphTensor is the updated state tensor.
 - (NSArray<MPSGraphTensor *> *) randomUniformTensorWithShape:(MPSShape *) shape
                                                  stateTensor:(MPSGraphTensor *) state
                                                         name:(NSString * _Nullable) name;
-/// Create RandomUniform op and return random uniform values and updated state
+/// Creates a RandomUniform operation and returns random uniform values and updated state
 ///
 /// Returns an array of 2 tensors, where the first is a tensor of provided shape of random uniform values in the range
 /// [0.0, 1.0), and the second is the updated state tensor.
@@ -315,35 +334,35 @@ MPS_CLASS_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))
 /// - Parameters:
 ///   - shapeTensor: 1D Int32 or Int64 tensor. The shape of the tensor generated
 ///   - state: The state to define a stream of random values. All calls with equal state yield an identical stream of random values.
-///   - name: The name for the operation
+///   - name: The name for the operation.
 /// - Returns: An array of MPSGraphTensor of size 2. The first MPSGraphTensor is of shape containing random values in the defined range.
 /// The second MPSGraphTensor is the updated state tensor.
 - (NSArray<MPSGraphTensor *> *) randomUniformTensorWithShapeTensor:(MPSGraphTensor *) shapeTensor
                                                        stateTensor:(MPSGraphTensor *) state
                                                               name:(NSString * _Nullable) name;
 
-/// Creates a dropout op and return the result
+/// Creates a dropout operation and returns the result
 ///
 /// Removes values in the `tensor` with a percentage chance equal to `rate`. Removed values are set to 0
 ///
 /// - Parameters:
 ///   - tensor: Input tensor
 ///   - rate: The rate of values to be set to 0
-///   - name: The name for the operation
+///   - name: The name for the operation.
 /// - Returns: A valid MPSGraphTensor object
 - (MPSGraphTensor *) dropoutTensor:(MPSGraphTensor *) tensor
                               rate:(double) rate
                               name:(NSString * _Nullable) name
 MPS_SWIFT_NAME( dropout(_:rate:name:) );
 
-/// Creates a dropout op and return the result
+/// Creates a dropout operation and returns the result
 ///
 /// Removes values in the `tensor` with a percentage chance equal to `rate`. Removed values are set to 0
 ///
 /// - Parameters:
 ///   - tensor: Input tensor
 ///   - rate: The rate of values to be set to 0
-///   - name: The name for the operation
+///   - name: The name for the operation.
 /// - Returns: A valid MPSGraphTensor object
 - (MPSGraphTensor *) dropoutTensor:(MPSGraphTensor *) tensor
                         rateTensor:(MPSGraphTensor *) rate

@@ -16,7 +16,7 @@ NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 @class UISceneSession, UISceneConnectionOptions, UIOpenURLContext, UISceneOpenExternalURLOptions, UISceneActivationConditions;
 @protocol UISceneDelegate;
 
-UIKIT_EXTERN API_AVAILABLE(ios(13.0)) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @interface UIScene : UIResponder
 + (instancetype)new NS_UNAVAILABLE;
 - (instancetype)init NS_UNAVAILABLE;
@@ -50,14 +50,14 @@ UIKIT_EXTERN API_AVAILABLE(ios(13.0)) NS_SWIFT_UI_ACTOR
 
 // A subtitle that may be displayed adjacent to or below the primary title on supported platforms.
 // If set to an empty string, the system will not display a subtitle.
-@property (nonatomic, copy) NSString *subtitle API_AVAILABLE(ios(15.0));
+@property (nonatomic, copy) NSString *subtitle API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(watchos);
 
 // use the activation conditions to influence which scene is activated for banner taps, URLs, etc.
 @property (nonatomic, strong) UISceneActivationConditions *activationConditions;
 
 @end
 
-API_AVAILABLE(ios(13.0)) NS_SWIFT_UI_ACTOR
+API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @protocol UISceneDelegate <NSObject>
 @optional
 #pragma mark Lifecycle State Transitioning
@@ -100,12 +100,12 @@ API_AVAILABLE(ios(13.0)) NS_SWIFT_UI_ACTOR
 @end
 
 #pragma mark - Lifecycle Notification Names
-UIKIT_EXTERN NSNotificationName const UISceneWillConnectNotification API_AVAILABLE(ios(13.0));
-UIKIT_EXTERN NSNotificationName const UISceneDidDisconnectNotification API_AVAILABLE(ios(13.0));
-UIKIT_EXTERN NSNotificationName const UISceneDidActivateNotification API_AVAILABLE(ios(13.0));
-UIKIT_EXTERN NSNotificationName const UISceneWillDeactivateNotification API_AVAILABLE(ios(13.0));
-UIKIT_EXTERN NSNotificationName const UISceneWillEnterForegroundNotification API_AVAILABLE(ios(13.0));
-UIKIT_EXTERN NSNotificationName const UISceneDidEnterBackgroundNotification API_AVAILABLE(ios(13.0));
+UIKIT_EXTERN NSNotificationName const UISceneWillConnectNotification API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos) NS_SWIFT_NONISOLATED;
+UIKIT_EXTERN NSNotificationName const UISceneDidDisconnectNotification API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos) NS_SWIFT_NONISOLATED;
+UIKIT_EXTERN NSNotificationName const UISceneDidActivateNotification API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos) NS_SWIFT_NONISOLATED;
+UIKIT_EXTERN NSNotificationName const UISceneWillDeactivateNotification API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos) NS_SWIFT_NONISOLATED;
+UIKIT_EXTERN NSNotificationName const UISceneWillEnterForegroundNotification API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos) NS_SWIFT_NONISOLATED;
+UIKIT_EXTERN NSNotificationName const UISceneDidEnterBackgroundNotification API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos) NS_SWIFT_NONISOLATED;
 
 #pragma mark - Session Roles
 

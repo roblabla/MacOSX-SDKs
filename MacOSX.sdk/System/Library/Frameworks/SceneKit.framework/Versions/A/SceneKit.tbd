@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/Frameworks/SceneKit.framework/Versions/A/SceneKit'
-current-version: 599.255
+current-version: 602.2
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _C3DGetFileDecryptionCallbacks, _C3DIOCreateCStringFromCFString, 
@@ -132,18 +132,19 @@ exports:
     objc-classes:    [ SCNAccelerationConstraint, SCNAction, SCNActionGroup, SCNActionReference, 
                        SCNAnimation, SCNAnimationEvent, SCNAnimationPlayer, SCNAnimationReference, 
                        SCNAssetCatalog, SCNAudioPlayer, SCNAudioSource, SCNAuthoringEnvironment, 
-                       SCNAuthoringEnvironment2, SCNAvoidOccluderConstraint, SCNBillboardConstraint, 
-                       SCNBox, SCNCamera, SCNCameraControlEventHandler, SCNCameraController, 
-                       SCNCameraNavigationController, SCNCapsule, SCNCone, SCNConstantScaleConstraint, 
-                       SCNConstraint, SCNCylinder, SCNDistanceConstraint, SCNEffect, 
-                       SCNEventHandler, SCNExportOperation, SCNFloor, SCNGeometry, 
-                       SCNGeometryDeformer, SCNGeometryElement, SCNGeometrySource, 
-                       SCNGeometryTessellator, SCNGeometryVDMCDeformer, SCNGeometryVariableTopologySampleDeformer, 
-                       SCNGeometryWrapDeformer, SCNGeometryWrapDeformerParameters, 
-                       SCNHitTestResult, SCNIKConstraint, SCNImageSource, SCNKeyedArchiver, 
-                       SCNKeyedUnarchiver, SCNLayer, SCNLevelOfDetail, SCNLight, 
-                       SCNLookAtConstraint, SCNManipulableItem, SCNManipulator, SCNMaterial, 
-                       SCNMaterialProperty, SCNMetalLayer, SCNMorpher, SCNNode, SCNNodeReference, 
+                       SCNAuthoringEnvironment2, SCNAvoidOccluderConstraint, SCNBezierCurveGeometry, 
+                       SCNBillboardConstraint, SCNBox, SCNCamera, SCNCameraControlEventHandler, 
+                       SCNCameraController, SCNCameraNavigationController, SCNCapsule, 
+                       SCNCone, SCNConstantScaleConstraint, SCNConstraint, SCNCylinder, 
+                       SCNDistanceConstraint, SCNEventHandler, SCNExportOperation, 
+                       SCNFloor, SCNGeometry, SCNGeometryDeformer, SCNGeometryElement, 
+                       SCNGeometrySource, SCNGeometryTessellator, SCNGeometryVDMCDeformer, 
+                       SCNGeometryVariableTopologySampleDeformer, SCNGeometryWrapDeformer, 
+                       SCNGeometryWrapDeformerParameters, SCNHitTestResult, SCNIKConstraint, 
+                       SCNImageSource, SCNKeyedArchiver, SCNKeyedUnarchiver, SCNLayer, 
+                       SCNLevelOfDetail, SCNLight, SCNLookAtConstraint, SCNManipulableItem, 
+                       SCNManipulator, SCNMaterial, SCNMaterialProperty, SCNMetalLayer, 
+                       SCNMetalLibraryProvider, SCNMorpher, SCNNode, SCNNodeReference, 
                        SCNOffscreenRenderer, SCNParticlePropertyController, SCNParticleSystem, 
                        SCNPass, SCNPassContext, SCNPhysicsBallSocketJoint, SCNPhysicsBehavior, 
                        SCNPhysicsBody, SCNPhysicsCharacter, SCNPhysicsConeTwistJoint, 

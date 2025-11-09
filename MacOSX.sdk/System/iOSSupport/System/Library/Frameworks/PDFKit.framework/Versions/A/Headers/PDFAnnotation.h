@@ -117,13 +117,11 @@ PDFKIT_EXTERN PDFAnnotationKey PDFAnnotationKeyWidgetRolloverCaption PDFKIT_AVAI
 PDFKIT_EXTERN PDFAnnotationKey PDFAnnotationKeyWidgetTextLabelUI PDFKIT_AVAILABLE(10_13, 11_0);                 // "/TU": String
 PDFKIT_EXTERN PDFAnnotationKey PDFAnnotationKeyWidgetValue PDFKIT_AVAILABLE(10_13, 11_0);                       // "/V": (various)
 
-@class PDFAction, PDFBorder, PDFPage, PDFAnnotationPopup, PDFAnnotationPrivateVars;
+@class PDFAction, PDFBorder, PDFPage, PDFAnnotationPopup;
 
 PDFKIT_CLASS_AVAILABLE(10_4, 11_0)
 @interface PDFAnnotation : NSObject <NSCopying, NSCoding>
 {
-@private
-    PDFAnnotationPrivateVars *_private;
 }
 
 // This is the base class for all annotations. A PDFAnnotation object by itself is not useful, only subclasses (like 

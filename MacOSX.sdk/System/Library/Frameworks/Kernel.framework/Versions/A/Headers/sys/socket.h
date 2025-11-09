@@ -79,8 +79,6 @@
 #include <net/net_kev.h>
 
 
-
-
 /*
  * Definitions related to sockets: types, address families, options.
  */
@@ -188,6 +186,7 @@
 
 #define SO_RESOLVER_SIGNATURE      0x1131  /* A signed data blob from the system resolver */
 
+#define SO_BINDTODEVICE            0x1134  /* bind socket to a network device (max valid option length IFNAMSIZ) */
 
 /* When adding new socket-options, you need to make sure MPTCP supports these as well! */
 
@@ -343,7 +342,6 @@ struct so_np_extensions {
 };
 
 #define SONPX_SETOPTSHUT        0x000000001     /* flag for allowing setsockopt after shutdown */
-
 
 
 #endif
@@ -525,10 +523,7 @@ __CCT_DECLARE_CONSTRAINED_PTR_TYPES(struct sockaddr_storage, sockaddr_storage);
  */
 #if !defined(_POSIX_C_SOURCE) || defined(_DARWIN_C_SOURCE)
 #define NET_MAXID       AF_MAX
-#endif /* (_POSIX_C_SOURCE && !_DARWIN_C_SOURCE) */
 
-
-#if !defined(_POSIX_C_SOURCE) || defined(_DARWIN_C_SOURCE)
 /*
  * PF_ROUTE - Routing table
  *
@@ -552,9 +547,6 @@ __CCT_DECLARE_CONSTRAINED_PTR_TYPES(struct sockaddr_storage, sockaddr_storage);
 #define NET_RT_MAXID            11
 #endif /* (_POSIX_C_SOURCE && !_DARWIN_C_SOURCE) */
 
-
-
-
 /*
  * Maximum queue length specifiable by listen.
  */
@@ -565,16 +557,14 @@ __CCT_DECLARE_CONSTRAINED_PTR_TYPES(struct sockaddr_storage, sockaddr_storage);
  * Used value-result for recvmsg, value only for sendmsg.
  */
 struct msghdr {
-	void            *msg_name;      /* [XSI] optional address */
+	void            *__sized_by(msg_namelen) msg_name; /* [XSI] optional address */
 	socklen_t       msg_namelen;    /* [XSI] size of address */
 	struct          iovec *msg_iov; /* [XSI] scatter/gather array */
 	int             msg_iovlen;     /* [XSI] # elements in msg_iov */
-	void            *msg_control;   /* [XSI] ancillary data, see below */
+	void            *__sized_by(msg_controllen) msg_control; /* [XSI] ancillary data, see below */
 	socklen_t       msg_controllen; /* [XSI] ancillary data buffer len */
 	int             msg_flags;      /* [XSI] flags on received message */
 };
-
-
 
 #define MSG_OOB         0x1             /* process out-of-band data */
 #define MSG_PEEK        0x2             /* peek at incoming message */
@@ -691,7 +681,6 @@ struct cmsgcred {
 #define SCM_CREDS                       0x03    /* process creds (struct cmsgcred) */
 #define SCM_TIMESTAMP_MONOTONIC         0x04    /* timestamp (uint64_t) */
 
-
 #endif  /* (!_POSIX_C_SOURCE || _DARWIN_C_SOURCE) */
 
 /*
@@ -741,7 +730,7 @@ struct user32_sf_hdtr {
 #endif  /* (!_POSIX_C_SOURCE || _DARWIN_C_SOURCE) */
 
 
-
 #include <sys/kpi_socket.h>
+
 
 #endif /* !_SYS_SOCKET_H_ */

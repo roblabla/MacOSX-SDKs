@@ -23,7 +23,7 @@ extern CGSize const CPMaximumListSectionImageSize;
 /**
  @c CPListSection models a single section of items appearing in a @c CPListTemplate.
  */
-API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(macos, watchos, tvos)
+API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(macos, watchos)
 @interface CPListSection : NSObject <NSSecureCoding>
 
 /**

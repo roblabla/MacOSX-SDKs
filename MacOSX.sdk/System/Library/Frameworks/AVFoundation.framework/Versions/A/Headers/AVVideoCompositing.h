@@ -49,7 +49,7 @@ typedef struct {
  @discussion    Subclasses of this type that are used from Swift must fulfill the requirements of a Sendable type.
 */
 NS_SWIFT_SENDABLE
-API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0)) API_UNAVAILABLE(watchos)
+API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(watchos)
 @interface AVVideoCompositionRenderContext : NSObject {
 @private
 	AVVideoCompositionRenderContextInternal	*_internal;
@@ -98,7 +98,7 @@ API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 @class AVVideoCompositionRenderHintInternal;
 
 NS_SWIFT_SENDABLE
-API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0)) API_UNAVAILABLE(watchos)
+API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0), visionos(1.0)) API_UNAVAILABLE(watchos)
 @interface AVVideoCompositionRenderHint : NSObject {
 @private
 	AVVideoCompositionRenderHintInternal *_internal;
@@ -122,7 +122,8 @@ API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0)) API_UNAVAILABLE(watchos)
 
 		Custom video compositor instances will then be retained by the AVFoundation object for as long as the value of its videoComposition property indicates that an instance of the same custom video compositor class should be used, even if the value is changed from one instance of AVVideoComposition to another instance that's associated with the same custom video compositor class.
 */
-API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0)) API_UNAVAILABLE(watchos)
+NS_SWIFT_SENDABLE
+API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(watchos)
 @protocol AVVideoCompositing<NSObject>
 
 @required
@@ -137,7 +138,7 @@ API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0)) API_UNAVAILABLE(watchos)
    This property is queried once before any composition request is sent to the compositor. Changing
    source buffer attributes afterwards is not supported.
 */
-@property (nonatomic, readonly, nullable) NSDictionary<NSString *, id> *sourcePixelBufferAttributes;
+@property (nonatomic, readonly, nullable) NSDictionary<NSString *, id> NS_SWIFT_SENDABLE *sourcePixelBufferAttributes;
 
 /* Indicates the pixel buffer attributes required by the video compositor for new buffers that it creates
  for processing. The property is required to provide kCVPixelBufferPixelFormatTypeKey along with attributes for which the compositor needs specific values to work properly. Omitted attributes will be supplied by the composition engine to allow for the best performance. If the attribute kCVPixelBufferPixelFormatTypeKey is missing an exception will be raised.
@@ -147,7 +148,7 @@ API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0)) API_UNAVAILABLE(watchos)
  This property is queried once before any composition request is sent to the compositor. Changing
  required buffer attributes afterwards is not supported.
  */
-@property (nonatomic, readonly) NSDictionary<NSString *, id> *requiredPixelBufferAttributesForRenderContext;
+@property (nonatomic, readonly) NSDictionary<NSString *, id> NS_SWIFT_SENDABLE *requiredPixelBufferAttributesForRenderContext;
 
 /*!
     @method			renderContextChanged:
@@ -200,7 +201,7 @@ API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0)) API_UNAVAILABLE(watchos)
  @discussion 
 	Controls whether the client will receive frames that contain wide color information. Care should be taken to avoid clamping.
  */
-@property (nonatomic, readonly) BOOL supportsWideColorSourceFrames API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0)) API_UNAVAILABLE(watchos);
+@property (nonatomic, readonly) BOOL supportsWideColorSourceFrames API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 /*!
  @property supportsHDRSourceFrames
@@ -212,7 +213,7 @@ API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 	If this field is omitted or set to NO, the framework will convert HDR frames to standard dynamic range (SDR) with BT.709 transfer function before sending to the client.
 	If this field is set to YES, the value of supportsWideColorSourceFrames will be ignored and assumed to be YES.
  */
-@property (nonatomic, readonly) BOOL supportsHDRSourceFrames API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0)) API_UNAVAILABLE(watchos);
+@property (nonatomic, readonly) BOOL supportsHDRSourceFrames API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 /*!
  @property canConformColorOfSourceFrames
@@ -234,7 +235,7 @@ API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0)) API_UNAVAILABLE(watchos)
  */
 
 @optional
-@property (nonatomic, readonly) BOOL canConformColorOfSourceFrames API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0));
+@property (nonatomic, readonly) BOOL canConformColorOfSourceFrames API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0), visionos(1.0));
 
 /*!
 	@method			anticipateRenderingUsingHint:
@@ -252,7 +253,7 @@ API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 
 		The method is synchronous. The implementation should return quickly because otherwise the playback would stall and cause frame drops.
 */
-- (void)anticipateRenderingUsingHint:(AVVideoCompositionRenderHint *)renderHint API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0)) API_UNAVAILABLE(watchos);
+- (void)anticipateRenderingUsingHint:(AVVideoCompositionRenderHint *)renderHint API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 /*!
 	@method			prerollForRenderingUsingHint:
@@ -268,7 +269,7 @@ API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 
 		The method is synchronous. The prerolling won't finish until the method returns.
 */
--(void)prerollForRenderingUsingHint:(AVVideoCompositionRenderHint *)renderHint API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0)) API_UNAVAILABLE(watchos);
+-(void)prerollForRenderingUsingHint:(AVVideoCompositionRenderHint *)renderHint API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 @end
 
@@ -280,7 +281,7 @@ API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 
 @class AVAsynchronousVideoCompositionRequestInternal;
 
-API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0)) API_UNAVAILABLE(watchos)
+API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(watchos)
 @interface AVAsynchronousVideoCompositionRequest : NSObject <NSCopying> {
 @private
 	AVAsynchronousVideoCompositionRequestInternal *_internal;
@@ -296,7 +297,7 @@ API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 @property (nonatomic, readonly) NSArray<NSNumber *> *sourceTrackIDs;
 
 /* Track IDs of all the source sample data buffers that are available to compose the frame.*/
-@property (nonatomic, readonly) NSArray<NSNumber *> *sourceSampleDataTrackIDs API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos);
+@property (nonatomic, readonly) NSArray<NSNumber *> *sourceSampleDataTrackIDs API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 /* The AVVideoCompositionInstruction to use to compose the frame. */
 @property (nonatomic, readonly) id<AVVideoCompositionInstruction> videoCompositionInstruction;
@@ -315,7 +316,7 @@ API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 	@param			trackID
 					The track ID for the requested source sample buffer
 */
-- (nullable CMSampleBufferRef)sourceSampleBufferByTrackID:(CMPersistentTrackID)trackID CF_RETURNS_NOT_RETAINED API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos);
+- (nullable CMSampleBufferRef)sourceSampleBufferByTrackID:(CMPersistentTrackID)trackID CF_RETURNS_NOT_RETAINED API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 /*!
 	@method			sourceTimedMetadataByTrackID:
@@ -323,7 +324,7 @@ API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 	@param			trackID
 					The track ID for the requested source timed metadata group.
 */
-- (nullable AVTimedMetadataGroup *)sourceTimedMetadataByTrackID:(CMPersistentTrackID)trackID API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos);
+- (nullable AVTimedMetadataGroup *)sourceTimedMetadataByTrackID:(CMPersistentTrackID)trackID API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 /*!
 	@method			finishWithComposedVideoFrame:
@@ -351,7 +352,7 @@ API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 @class CIImage;
 @class CIContext;
 
-API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0)) API_UNAVAILABLE(watchos)
+API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(watchos)
 @interface AVAsynchronousCIImageFilteringRequest : NSObject <NSCopying> {
 @private
 	AVAsynchronousCIImageFilteringRequestInternal *_internal;
@@ -384,7 +385,7 @@ It is safe to pass in the sourceImage in which case the filter will appear to ha
  
 	@abstract	The AVVideoCompositionInstruction protocol is implemented by objects to represent operations to be performed by a compositor.
 */
-API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0)) API_UNAVAILABLE(watchos)
+API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(watchos)
 @protocol AVVideoCompositionInstruction<NSObject>
 
 @required
@@ -414,7 +415,7 @@ API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 @optional
 
 /* List of sample data track IDs required to compose frames for this instruction.  An empty array indicates that no sample data is required for this instruction. */
-@property (nonatomic, readonly) NSArray<NSNumber *> *requiredSourceSampleDataTrackIDs API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos);
+@property (nonatomic, readonly) NSArray<NSNumber *> *requiredSourceSampleDataTrackIDs API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 
 @end

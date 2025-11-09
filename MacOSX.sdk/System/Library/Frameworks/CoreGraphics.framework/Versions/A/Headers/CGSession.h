@@ -21,7 +21,7 @@ CF_ASSUME_NONNULL_BEGIN
    should release the dictionary when you are finished using it. */
 
 CG_EXTERN CFDictionaryRef __nullable CGSessionCopyCurrentDictionary(void)
-  CG_AVAILABLE_STARTING(10.3);
+  API_AVAILABLE(macos(10.3));
 
 /* Keys for window server session dictionaries. */
 

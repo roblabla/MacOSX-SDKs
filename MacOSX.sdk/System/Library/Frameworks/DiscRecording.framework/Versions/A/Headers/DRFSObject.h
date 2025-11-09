@@ -245,6 +245,10 @@
 				is guaranteed to have a correct path on <b>all</b> filesystems is to create a virtual symlink
 				using @link //apple_ref/occ/clm/DRFSObject/symLinkPointingTo:inFilesystem: symLinkPointingTo:inFilesystem: @/link.  
 */
+
+#ifndef DISC_RECORDING_FS_OBJECT
+#define DISC_RECORDING_FS_OBJECT
+
 @class DRFolder;
 
 /*!
@@ -1075,3 +1079,4 @@ extern NSString* const DRUDFRealTimeFile					AVAILABLE_MAC_OS_X_VERSION_10_4_AND
 */
 extern NSString* const DRUDFExtendedFilePermissions			AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 
+#endif // DISC_RECORDING_FS_OBJECT

@@ -10,13 +10,14 @@ exports:
                        __MSExtensionItemHostViewBoundsKey, __MSExtensionItemWantsLiveViewKey, 
                        __MSMessageMediaPayloadDecodeErrorCode, __kAppearanceWantsInsetsForGrabberDisabled, 
                        _ms_defaultLog, _ms_traceLog ]
-    objc-classes:    [ MSConversation, MSMessage, MSMessageLayout, MSMessageLiveLayout, 
-                       MSMessageRichLinkLayout, MSMessageTemplateLayout, MSMessagesAppViewController, 
-                       MSRichLink, MSSession, MSSticker, MSStickerBrowserView, MSStickerBrowserViewController, 
-                       MSStickerView, _MSConversationState, _MSMessageAppBundleContext, 
-                       _MSMessageAppBundleHostContext, _MSMessageAppContext, _MSMessageAppExtensionContext, 
-                       _MSMessageAppExtensionHostContext, _MSMessageExtensionRemoteViewController, 
-                       _MSMessageMediaPayload, _MSPresentationState, _MSStickerDragPreviewContainerView, 
+    objc-classes:    [ MSConversation, MSConversationContextItem, MSMessage, MSMessageLayout, 
+                       MSMessageLiveLayout, MSMessageRichLinkLayout, MSMessageTemplateLayout, 
+                       MSMessagesAppViewController, MSRichLink, MSSession, MSSticker, 
+                       MSStickerBrowserView, MSStickerBrowserViewController, MSStickerView, 
+                       _MSConversationState, _MSMessageAppBundleContext, _MSMessageAppBundleHostContext, 
+                       _MSMessageAppContext, _MSMessageAppExtensionContext, _MSMessageAppExtensionHostContext, 
+                       _MSMessageExtensionRemoteViewController, _MSMessageMediaPayload, 
+                       _MSPresentationState, _MSStickerDragPreviewContainerView, 
                        _MSStickerPackCollectionViewDataSource, _MSStickerSendManager, 
                        _MSTempFileManager, _MSTempURL ]
 ...

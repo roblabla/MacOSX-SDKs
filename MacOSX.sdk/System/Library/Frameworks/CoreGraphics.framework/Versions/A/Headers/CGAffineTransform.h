@@ -53,85 +53,85 @@ typedef struct CGAffineTransformComponents
 /* The identity transform: [ 1 0 0 1 0 0 ]. */
 
 CG_EXTERN const CGAffineTransform CGAffineTransformIdentity
-  CG_AVAILABLE_STARTING(10.0, 2.0);
+  API_AVAILABLE(macos(10.0), ios(2.0));
 
 /* Return the transform [ a b c d tx ty ]. */
 
 CG_EXTERN CGAffineTransform CG_PURE CGAffineTransformMake(CGFloat a, CGFloat b,
   CGFloat c, CGFloat d, CGFloat tx, CGFloat ty)
-  CG_AVAILABLE_STARTING(10.0, 2.0);
+  API_AVAILABLE(macos(10.0), ios(2.0));
 
 /* Return a transform which translates by `(tx, ty)':
      t' = [ 1 0 0 1 tx ty ] */
 
 CG_EXTERN CGAffineTransform CG_PURE CGAffineTransformMakeTranslation(CGFloat tx,
-  CGFloat ty) CG_AVAILABLE_STARTING(10.0, 2.0);
+  CGFloat ty) API_AVAILABLE(macos(10.0), ios(2.0));
 
 /* Return a transform which scales by `(sx, sy)':
      t' = [ sx 0 0 sy 0 0 ] */
 
 CG_EXTERN CGAffineTransform CG_PURE CGAffineTransformMakeScale(CGFloat sx, CGFloat sy)
-  CG_AVAILABLE_STARTING(10.0, 2.0);
+  API_AVAILABLE(macos(10.0), ios(2.0));
 
 /* Return a transform which rotates by `angle' radians:
      t' = [ cos(angle) sin(angle) -sin(angle) cos(angle) 0 0 ] */
 
 CG_EXTERN CGAffineTransform CG_PURE CGAffineTransformMakeRotation(CGFloat angle)
-  CG_AVAILABLE_STARTING(10.0, 2.0);
+  API_AVAILABLE(macos(10.0), ios(2.0));
 
 /* Return true if `t' is the identity transform, false otherwise. */
 
 CG_EXTERN bool CG_PURE CGAffineTransformIsIdentity(CGAffineTransform t)
-  CG_AVAILABLE_STARTING(10.4, 2.0);
+  API_AVAILABLE(macos(10.4), ios(2.0));
 
 /* Translate `t' by `(tx, ty)' and return the result:
      t' = [ 1 0 0 1 tx ty ] * t */
 
 CG_EXTERN CGAffineTransform CG_PURE CGAffineTransformTranslate(CGAffineTransform t,
-  CGFloat tx, CGFloat ty) CG_AVAILABLE_STARTING(10.0, 2.0);
+  CGFloat tx, CGFloat ty) API_AVAILABLE(macos(10.0), ios(2.0));
 
 /* Scale `t' by `(sx, sy)' and return the result:
      t' = [ sx 0 0 sy 0 0 ] * t */
 
 CG_EXTERN CGAffineTransform CG_PURE CGAffineTransformScale(CGAffineTransform t,
-  CGFloat sx, CGFloat sy) CG_AVAILABLE_STARTING(10.0, 2.0);
+  CGFloat sx, CGFloat sy) API_AVAILABLE(macos(10.0), ios(2.0));
 
 /* Rotate `t' by `angle' radians and return the result:
      t' =  [ cos(angle) sin(angle) -sin(angle) cos(angle) 0 0 ] * t */
 
 CG_EXTERN CGAffineTransform CG_PURE CGAffineTransformRotate(CGAffineTransform t,
-  CGFloat angle) CG_AVAILABLE_STARTING(10.0, 2.0);
+  CGFloat angle) API_AVAILABLE(macos(10.0), ios(2.0));
 
 /* Invert `t' and return the result. If `t' has zero determinant, then `t'
    is returned unchanged. */
 
 CG_EXTERN CGAffineTransform CG_PURE CGAffineTransformInvert(CGAffineTransform t)
-  CG_AVAILABLE_STARTING(10.0, 2.0);
+  API_AVAILABLE(macos(10.0), ios(2.0));
 
 /* Concatenate `t2' to `t1' and return the result:
      t' = t1 * t2 */
 
 CG_EXTERN CGAffineTransform CG_PURE CGAffineTransformConcat(CGAffineTransform t1,
-  CGAffineTransform t2) CG_AVAILABLE_STARTING(10.0, 2.0);
+  CGAffineTransform t2) API_AVAILABLE(macos(10.0), ios(2.0));
 
 /* Return true if `t1' and `t2' are equal, false otherwise. */
 
 CG_EXTERN bool CG_PURE CGAffineTransformEqualToTransform(CGAffineTransform t1,
-  CGAffineTransform t2) CG_AVAILABLE_STARTING(10.4, 2.0);
+  CGAffineTransform t2) API_AVAILABLE(macos(10.4), ios(2.0));
 
 /* Transform `point' by `t' and return the result:
      p' = p * t
    where p = [ x y 1 ]. */
 
 CG_EXTERN CGPoint CG_PURE CGPointApplyAffineTransform(CGPoint point,
-  CGAffineTransform t) CG_AVAILABLE_STARTING(10.0, 2.0);
+  CGAffineTransform t) API_AVAILABLE(macos(10.0), ios(2.0));
 
 /* Transform `size' by `t' and return the result:
      s' = s * t
    where s = [ width height 0 ]. */
 
 CG_EXTERN CGSize CG_PURE CGSizeApplyAffineTransform(CGSize size, CGAffineTransform t)
-  CG_AVAILABLE_STARTING(10.0, 2.0);
+  API_AVAILABLE(macos(10.0), ios(2.0));
 
 /* Transform `rect' by `t' and return the result. Since affine transforms do
    not preserve rectangles in general, this function returns the smallest
@@ -141,7 +141,7 @@ CG_EXTERN CGSize CG_PURE CGSizeApplyAffineTransform(CGSize size, CGAffineTransfo
    transformed corners. */
 
 CG_EXTERN CGRect CG_PURE CGRectApplyAffineTransform(CGRect rect, CGAffineTransform t)
-  CG_AVAILABLE_STARTING(10.4, 2.0);
+  API_AVAILABLE(macos(10.4), ios(2.0));
 
 /*! @abstract Decompose a CGAffineTransform into a scale * shear * rotation * translation
  *  @discussion This decomposition method may be used to provide insight into what a
@@ -158,14 +158,14 @@ CG_EXTERN CGRect CG_PURE CGRectApplyAffineTransform(CGRect rect, CGAffineTransfo
  *  @return A decomposed set of geometric operations, the product of which is the CGAffineTransform.  */
 CG_EXTERN
  CGAffineTransformComponents CG_PURE CGAffineTransformDecompose( CGAffineTransform transform )
-CF_REFINED_FOR_SWIFT CG_AVAILABLE_STARTING( 13.0, 16.0 );
+CF_REFINED_FOR_SWIFT API_AVAILABLE(macos(13.0), ios(16.0));
 
 /*! @abstract Create CGAffineTransform from scale * shear * rotation * translation CGAffineTransformComponents
  *  @param components        The set of CGAffineTransformComponents to use to create a new CGAffineTransform
  *  @return A new CGAffineTransform built from the provided components  */
 CG_EXTERN
  CGAffineTransform CG_PURE CGAffineTransformMakeWithComponents( CGAffineTransformComponents components )
-CF_REFINED_FOR_SWIFT CG_AVAILABLE_STARTING( 13.0, 16.0 );
+CF_REFINED_FOR_SWIFT API_AVAILABLE(macos(13.0), ios(16.0));
 
 /*** Definitions of inline functions. ***/
 

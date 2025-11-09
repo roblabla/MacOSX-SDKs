@@ -22,17 +22,18 @@ extern "C"
 
 /*!
 	@function	VTRegisterProfessionalVideoWorkflowVideoDecoders
-	@abstract	Allows the client to use decoders appropriate for professional video workflows.
-	@discussion
-		Loads the video decoders within "/Library/Video/Professional Video Workflow Plug-Ins/", if any are present.
+	@abstract	Allows the client to use video decoders appropriate for professional video workflows.
+	@discussion	By calling this function, a client indicates to VideoToolbox that it wishes to support Media Extension video decoders. Any associated Video RAW Processors will also be supported as well. Note that this functionality is intended for applications supporting professional video workflows. It is not recommended for network-facing applications such as web browsers, messaging clients, mail clients, etc.
 */
-VT_EXPORT void VTRegisterProfessionalVideoWorkflowVideoDecoders( void ) VT_AVAILABLE_STARTING(10_9);
+VT_EXPORT void VTRegisterProfessionalVideoWorkflowVideoDecoders( void )
+	API_AVAILABLE(macos(10.9)) API_UNAVAILABLE(ios, tvos, watchos, visionos);
 
 /*!
 	@function	VTRegisterProfessionalVideoWorkflowVideoEncoders
 	@abstract	Allows the client to use encoders appropriate for professional video workflows.
 */
-VT_EXPORT void VTRegisterProfessionalVideoWorkflowVideoEncoders( void ) VT_AVAILABLE_STARTING(10_10);
+VT_EXPORT void VTRegisterProfessionalVideoWorkflowVideoEncoders( void )
+	API_AVAILABLE(macos(10.10)) API_UNAVAILABLE(ios, tvos, watchos, visionos);
 
 #pragma pack(pop)
 

@@ -23,9 +23,9 @@ NS_ASSUME_NONNULL_BEGIN
  *
  * NOTE:
  * Only one NFCReaderSession can be active at any time in the system. Subsequent opened sessions will get queued up and processed by the system in FIFO order.
- * The NFCISO15693 tag object returned by this session will only respond to the legacy APIs that are introducted in iOS11.  
+ * The NFCISO15693 tag object returned by this session will only respond to the legacy APIs that are introduced in iOS11.
  */
-API_UNAVAILABLE(watchos, macos, tvos)
+API_UNAVAILABLE(watchos, macos, tvos, visionos)
 API_DEPRECATED_WITH_REPLACEMENT("NFCTagReaderSession", ios(11.0, 17.0))
 @interface NFCISO15693ReaderSession : NFCReaderSession
 

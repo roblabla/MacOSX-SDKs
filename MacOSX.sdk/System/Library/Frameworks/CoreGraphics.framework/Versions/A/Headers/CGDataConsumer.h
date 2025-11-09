@@ -44,37 +44,37 @@ typedef struct CGDataConsumerCallbacks CGDataConsumerCallbacks;
 /* Return the CFTypeID for CGDataConsumerRefs. */
 
 CG_EXTERN CFTypeID CGDataConsumerGetTypeID(void)
-    CG_AVAILABLE_STARTING(10.2, 2.0);
+    API_AVAILABLE(macos(10.2), ios(2.0));
 
 /* Create a data consumer using `callbacks' to handle the data. `info' is
    passed to each of the callback functions. */
 
 CG_EXTERN CGDataConsumerRef __nullable CGDataConsumerCreate(
     void * __nullable info, const CGDataConsumerCallbacks * cg_nullable cbks)
-    CG_AVAILABLE_STARTING(10.0, 2.0);
+    API_AVAILABLE(macos(10.0), ios(2.0));
 
 /* Create a data consumer which writes data to `url'. */
 
 CG_EXTERN CGDataConsumerRef __nullable CGDataConsumerCreateWithURL(
     CFURLRef cg_nullable url)
-    CG_AVAILABLE_STARTING(10.0, 2.0);
+    API_AVAILABLE(macos(10.0), ios(2.0));
 
 /* Create a data consumer which writes to `data'. */
 
 CG_EXTERN CGDataConsumerRef __nullable CGDataConsumerCreateWithCFData(
     CFMutableDataRef cg_nullable data)
-    CG_AVAILABLE_STARTING(10.4, 2.0);
+    API_AVAILABLE(macos(10.4), ios(2.0));
 
 /* Equivalent to `CFRetain(consumer)'. */
 
 CG_EXTERN CGDataConsumerRef cg_nullable CGDataConsumerRetain(
     CGDataConsumerRef cg_nullable consumer)
-    CG_AVAILABLE_STARTING(10.0, 2.0);
+    API_AVAILABLE(macos(10.0), ios(2.0));
 
 /* Equivalent to `CFRelease(consumer)'. */
 
 CG_EXTERN void CGDataConsumerRelease(cg_nullable CGDataConsumerRef consumer)
-    CG_AVAILABLE_STARTING(10.0, 2.0);
+    API_AVAILABLE(macos(10.0), ios(2.0));
 
 CF_ASSUME_NONNULL_END
 

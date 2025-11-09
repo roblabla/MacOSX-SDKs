@@ -156,7 +156,7 @@ SPATIAL_REFINED_FOR_SWIFT
 SPATIAL_OVERLOADABLE
 SPRotation3D SPRotation3DMakeLookAt(SPPoint3D target, SPVector3D up) {
  
-    SPPoint3D position = (SPPoint3D){ .x = 0, .y = 0, .z = 0 };
+    SPPoint3D position = SPPoint3DZero;
     
     return SPRotation3DMakeLookAt(position, target, up);
 }
@@ -178,9 +178,9 @@ SPATIAL_SWIFT_NAME(Rotation3D.init(forward:up:))
 SPATIAL_OVERLOADABLE
 SPRotation3D SPRotation3DMakeLookAt(SPVector3D forward, SPVector3D up) {
  
-    SPPoint3D position = (SPPoint3D){ .x = 0, .y = 0, .z = 0 };
+    SPPoint3D position = SPPoint3DZero;
     
-    SPPoint3D target = (SPPoint3D) { .vector = forward.vector };
+    SPPoint3D target = SPPoint3DMakeWithVector(forward.vector);
     
     return SPRotation3DMakeLookAt(position, target, up);
 }
@@ -346,7 +346,7 @@ SPRotation3D SPRotation3DMakeWithEulerAngles(SPEulerAngles eulerAngles) {
             v = (simd_double4){
                 cr * sp * cy + sr * cp * sy,
                 cr * cp * sy - sr * sp * cy,
-                sr * cpcy - cr * spsy, 
+                sr * cpcy - cr * spsy,
                 cr * cpcy + sr * spsy
             };
             
@@ -551,6 +551,7 @@ bool SPRotation3DIsIdentity(SPRotation3D rotation) {
  
  @param from The starting rotation.
  @param to The ending rotation.
+ @param t The value, between @p 0 and @p 1, that the function interpolates at.
  
  @returns A new rotation. When @p t=0, the result is the @p from rotation. When @p t=1.0, the result
  is the @p to rotation. For any other value of @p t, the result is a spherical linear interpolation between the
@@ -575,6 +576,7 @@ SPRotation3D SPRotation3DSlerp(SPRotation3D from, SPRotation3D to, double t) {
  
  @param from The starting rotation.
  @param to The ending rotation.
+ @param t The value, between @p 0 and @p 1, that the function interpolates at.
  
  @returns A new rotation. When @p t=0, the result is the @p from rotation. When @p t=1.0, the result
  is the @p to rotation. For any other value of @p t, the result is a spherical linear interpolation between the
@@ -590,6 +592,36 @@ SPATIAL_OVERLOADABLE
 SPRotation3D SPRotation3DSlerpLongest(SPRotation3D from, SPRotation3D to, double t) {
 
     simd_quatd q = simd_slerp_longest(from.quaternion, to.quaternion, t);
+    
+    return SPRotation3DMakeWithQuaternion(q);
+}
+
+/*!
+ @abstract Returns an interpolated value between two rotations along a spherical cubic spline.
+ 
+ @param r0 The left endpoint of the previous interval.
+ @param r1 The starting rotation.
+ @param r2 The ending rotation.
+ @param r3 The right endpoint of the next interval.
+ @param t The value, between @p 0 and @p 1, that the function interpolates at.
+ 
+ @discussion The function interpolates between @p r1 and @p r2. @p r0 is the left
+ endpoint of the previous interval, and @p r3 is the right endpoint of the next
+ interval. Use this function to smoothly interpolate between a sequence of
+ rotations.
+ 
+ @returns A new rotation that's the interpolated value between the two rotations along a spherical cubic spline.
+ */
+SPATIAL_INLINE
+SPATIAL_OVERLOADABLE
+SPRotation3D SPRotation3DSpline(SPRotation3D r0, SPRotation3D r1, SPRotation3D r2, SPRotation3D r3, double t)
+__API_AVAILABLE(macos(15.0), ios(18.0), watchos(11.0), tvos(18.0));
+
+SPATIAL_REFINED_FOR_SWIFT
+SPATIAL_OVERLOADABLE
+SPRotation3D SPRotation3DSpline(SPRotation3D r0, SPRotation3D r1, SPRotation3D r2, SPRotation3D r3, double t) {
+
+    simd_quatd q = simd_spline(r0.quaternion, r1.quaternion, r2.quaternion, r3.quaternion, t);
     
     return SPRotation3DMakeWithQuaternion(q);
 }
@@ -658,5 +690,58 @@ SPRotation3D SPRotation3DSwing(SPRotation3D rotation, SPRotationAxis3D twistAxis
     
     return SPRotation3DMakeWithQuaternion(simd_normalize(swing));
 }
+
+// MARK: - Almost Equal
+
+/*!
+ @abstract Returns a Boolean value that indicates whether the two rotations are equal within the specified absolute tolerance.
+ 
+ @param r1 The first rotation.
+ @param r2 The first rotation.
+ @returns A Boolean value that indicates whether the two rotations are equal within the specified absolute tolerance.
+ @note The Spatial default tolerance is @p sqrt(__DBL_EPSILON__) .
+ */
+SPATIAL_INLINE
+SPATIAL_OVERLOADABLE
+bool SPRotation3DAlmostEqualToRotation(SPRotation3D r1,
+                                       SPRotation3D r2,
+                                       double tolerance)
+__API_AVAILABLE(macos(15.0), ios(18.0), watchos(11.0), tvos(18.0));
+
+SPATIAL_OVERLOADABLE
+SPATIAL_REFINED_FOR_SWIFT
+bool SPRotation3DAlmostEqualToRotation(SPRotation3D r1,
+                                       SPRotation3D r2,
+                                       double tolerance) {
+    
+    return _sp_almost_equal_tolerance(r1.quaternion.vector.x, r2.quaternion.vector.x, tolerance) &&
+        _sp_almost_equal_tolerance(r1.quaternion.vector.y, r2.quaternion.vector.y, tolerance) &&
+        _sp_almost_equal_tolerance(r1.quaternion.vector.z, r2.quaternion.vector.z, tolerance) &&
+        _sp_almost_equal_tolerance(r1.quaternion.vector.w, r2.quaternion.vector.w, tolerance);
+}
+
+/*!
+ @abstract Returns a Boolean value that indicates whether the two rotations are equal within the Spatial default absolute tolerance.
+ 
+ @param r1 The first rotation.
+ @param r2 The first rotation.
+ @returns A Boolean value that indicates whether the two rotations are equal within the Spatial default absolute tolerance.
+ @note The Spatial default tolerance is @p sqrt(__DBL_EPSILON__) .
+ */
+SPATIAL_INLINE
+SPATIAL_OVERLOADABLE
+bool SPRotation3DAlmostEqualToRotation(SPRotation3D r1,
+                                       SPRotation3D r2)
+__API_AVAILABLE(macos(15.0), ios(18.0), watchos(11.0), tvos(18.0));
+
+SPATIAL_OVERLOADABLE
+SPATIAL_REFINED_FOR_SWIFT
+bool SPRotation3DAlmostEqualToRotation(SPRotation3D r1,
+                                       SPRotation3D r2) {
+    
+    return SPRotation3DAlmostEqualToRotation(r1, r2, SPDefaultTolerance);
+}
+
+
 
 #endif /* Spatial_SPRotation3D_h */

@@ -48,6 +48,7 @@ typedef NS_ENUM(NSInteger, PHProjectCreationSource) {
  are inmutable and the class cannot be instatiated by an extension directly.
  */
 OS_EXPORT
+NS_SWIFT_SENDABLE
 @interface PHProjectInfo : NSObject <NSSecureCoding>
 
 /// Source from which the project was created.
@@ -95,7 +96,7 @@ typedef NS_ENUM(NSInteger, PHProjectSectionType) {
     PHProjectSectionTypeCover = 1,
     PHProjectSectionTypeContent = 2,
     PHProjectSectionTypeAuxiliary = 3,
-} NS_SWIFT_NAME(PHProjectSection.SectionType);
+} NS_SWIFT_SENDABLE NS_SWIFT_NAME(PHProjectSection.SectionType);
 
 
 /**
@@ -108,6 +109,7 @@ typedef NS_ENUM(NSInteger, PHProjectSectionType) {
  - if user creates a project from an existing Apple Book, Card, or Calendar, the sections provided in the project info will exactly match the pagination in that project (e.g., one section per page in a book).
  */
 OS_EXPORT
+NS_SWIFT_SENDABLE
 @interface PHProjectSection : NSObject <NSSecureCoding>
 
 /**
@@ -135,6 +137,7 @@ OS_EXPORT
  only one is intended to be used in a project based on the amount of content detail desired.
  */
 OS_EXPORT
+NS_SWIFT_SENDABLE
 @interface PHProjectSectionContent : NSObject <NSSecureCoding>
 
 /// Array of asset, text, or journal entry elements contained in the content.
@@ -171,6 +174,7 @@ OS_EXPORT
  properties of any element in an instance of PHProjectSectionContent.
  */
 OS_EXPORT
+NS_SWIFT_SENDABLE
 @interface PHProjectElement : NSObject <NSSecureCoding>
 
 /**
@@ -254,6 +258,7 @@ OS_EXPORT
  then using the fetchAssetsWithLocalIdentifiers:options: class method defined in PHAsset.h.
  */
 OS_EXPORT
+NS_SWIFT_SENDABLE
 @interface PHProjectAssetElement : PHProjectElement <NSSecureCoding>
 
 /**
@@ -295,7 +300,7 @@ typedef NS_ENUM(NSInteger, PHProjectTextElementType) {
     PHProjectTextElementTypeBody = 0,
     PHProjectTextElementTypeTitle,
     PHProjectTextElementTypeSubtitle,
-} NS_SWIFT_NAME(PHProjectTextElement.ElementType);
+} NS_SWIFT_SENDABLE NS_SWIFT_NAME(PHProjectTextElement.ElementType);
 
 /**
  A PHProjectTextElement object represents formatted, positioned text that should be considered
@@ -303,6 +308,7 @@ typedef NS_ENUM(NSInteger, PHProjectTextElementType) {
  Memory header view. For projects created from Apple Book, Card, and Calendar projects, text appearing on any page. 
  */
 OS_EXPORT
+NS_SWIFT_SENDABLE
 @interface PHProjectTextElement : PHProjectElement <NSSecureCoding>
 
 /// Unformatted, raw string for the text element
@@ -322,6 +328,7 @@ OS_EXPORT
  be included for projects created from existing Apple Calendar projects.
  */
 OS_EXPORT
+NS_SWIFT_SENDABLE
 @interface PHProjectJournalEntryElement : PHProjectElement <NSSecureCoding>
 
 /// Date to which the provided asset and/or text pertain
@@ -342,6 +349,7 @@ API_AVAILABLE_BEGIN(macos(10.14))
  In general, these will only be included for projects created from existing Apple Print Product projects.
  */
 OS_EXPORT
+NS_SWIFT_SENDABLE
 @interface PHProjectMapElement : PHProjectElement <NSSecureCoding>
 /// The type of the map in the project.
 @property (nonatomic, readonly) MKMapType mapType;

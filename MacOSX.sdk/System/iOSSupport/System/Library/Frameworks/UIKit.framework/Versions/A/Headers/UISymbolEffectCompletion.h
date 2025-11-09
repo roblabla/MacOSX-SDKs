@@ -16,12 +16,12 @@ NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 @class UISymbolEffectCompletionContext;
 
 /// Completion handler for adding and removing symbol effects/content transitions.
-typedef void(^UISymbolEffectCompletion)(UISymbolEffectCompletionContext *context);
+typedef void(^UISymbolEffectCompletion)(UISymbolEffectCompletionContext *context) API_UNAVAILABLE(watchos);
 
 /// Represents information about a symbol effect's completion.
 /// You don't create one of these. Instead, UIKit creates one and passes it into the completion handler
 /// of a symbol effect or symbol content transition.
-UIKIT_EXTERN API_AVAILABLE(ios(17.0),tvos(17.0),watchos(10.0)) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(17.0), tvos(17.0)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @interface UISymbolEffectCompletionContext : NSObject
 
 /// Whether or not the symbol effect was completely finished.

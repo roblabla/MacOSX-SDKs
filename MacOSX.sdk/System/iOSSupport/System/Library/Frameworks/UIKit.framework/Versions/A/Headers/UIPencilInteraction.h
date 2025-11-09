@@ -32,7 +32,7 @@ typedef NS_ENUM(NSInteger, UIPencilPreferredAction) {
     UIPencilPreferredActionShowColorPalette,
     
     /// Show the ink attributes palette
-    UIPencilPreferredActionShowInkAttributes API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(tvos, watchos),
+    UIPencilPreferredActionShowInkAttributes API_AVAILABLE(ios(16.0)),
 
     /// Show a contextual palette of markup tools, or undo/redo options if tools are not available
     UIPencilPreferredActionShowContextualPalette API_AVAILABLE(ios(17.5)) API_UNAVAILABLE(visionos),

@@ -37,7 +37,7 @@ CF_IMPLICIT_BRIDGING_ENABLED
 		Additionally, the CMSync infrastructure monitors relative drift between CMClocks.
 */
 
-typedef struct CM_BRIDGED_TYPE(id) OpaqueCMClock* CMClockRef API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0)) CM_SWIFT_SENDABLE; // a CF type; use CFRetain and CFRelease
+typedef struct CM_BRIDGED_TYPE(id) OpaqueCMClock* CMClockRef API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0), visionos(1.0)) CM_SWIFT_SENDABLE; // a CF type; use CFRetain and CFRelease
 
 /*!
 	@typedef	CMTimebase
@@ -57,9 +57,9 @@ typedef struct CM_BRIDGED_TYPE(id) OpaqueCMClock* CMClockRef API_AVAILABLE(macos
 		the timebase's time changes relative to the ultimate source clock.
 */
 
-typedef struct CM_BRIDGED_TYPE(id) OpaqueCMTimebase* CMTimebaseRef API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0)) CM_SWIFT_SENDABLE; // a CF type; use CFRetain and CFRelease
+typedef struct CM_BRIDGED_TYPE(id) OpaqueCMTimebase* CMTimebaseRef API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0), visionos(1.0)) CM_SWIFT_SENDABLE; // a CF type; use CFRetain and CFRelease
 
-typedef CM_BRIDGED_TYPE(id) CFTypeRef CMClockOrTimebaseRef API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0)) CM_SWIFT_SENDABLE; // used in argument lists and function results to indicate that either may be passed
+typedef CM_BRIDGED_TYPE(id) CFTypeRef CMClockOrTimebaseRef API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0), visionos(1.0)) CM_SWIFT_SENDABLE; // used in argument lists and function results to indicate that either may be passed
 
 #ifndef CMTIMEBASE_USE_SOURCE_TERMINOLOGY
 #if (__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ >= __MAC_12_0) || (__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ >= __IPHONE_15_0) || (__ENVIRONMENT_TV_OS_VERSION_MIN_REQUIRED__ >= __TVOS_15_0) || (__ENVIRONMENT_WATCH_OS_VERSION_MIN_REQUIRED__ >= __WATCHOS_8_0) || 0
@@ -81,7 +81,7 @@ enum
 	kCMClockError_InvalidParameter			= -12746,
 	kCMClockError_AllocationFailed			= -12747,
 	kCMClockError_UnsupportedOperation		= -12756,
-} API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0));
+} API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 // CMTimebase error codes
 #if COREMEDIA_USE_DERIVED_ENUMS_FOR_CONSTANTS
@@ -95,7 +95,7 @@ enum
 	kCMTimebaseError_AllocationFailed			= -12750,
 	kCMTimebaseError_TimerIntervalTooShort		= -12751,
 	kCMTimebaseError_ReadOnly					= -12757,
-} API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0));
+} API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 // CMSync error codes
 #if COREMEDIA_USE_DERIVED_ENUMS_FOR_CONSTANTS
@@ -108,7 +108,7 @@ enum
 	kCMSyncError_InvalidParameter			= -12753,
 	kCMSyncError_AllocationFailed			= -12754,
 	kCMSyncError_RateMustBeNonZero			= -12755,
-} API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0));
+} API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
 	@function	CMClockGetTypeID
@@ -116,7 +116,7 @@ enum
 */
 CM_EXPORT CFTypeID
 CMClockGetTypeID( void )
-	API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0));
+	API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
 	@function	CMClockGetHostTimeClock
@@ -127,7 +127,7 @@ CMClockGetTypeID( void )
 */
 CM_EXPORT CMClockRef CM_NONNULL
 CMClockGetHostTimeClock( void )
-	API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0));
+	API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
 	@function	CMClockConvertHostTimeToSystemUnits
@@ -140,7 +140,7 @@ CMClockGetHostTimeClock( void )
 */
 CM_EXPORT uint64_t
 CMClockConvertHostTimeToSystemUnits( CMTime hostTime )
-	API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0));
+	API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
 	@function	CMClockMakeHostTimeFromSystemUnits
@@ -153,7 +153,7 @@ CMClockConvertHostTimeToSystemUnits( CMTime hostTime )
 */
 CM_EXPORT CMTime
 CMClockMakeHostTimeFromSystemUnits( uint64_t hostTime )
-	API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0));
+	API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0), visionos(1.0));
 		
 /*!
 	@function	CMClockGetTime
@@ -162,7 +162,7 @@ CMClockMakeHostTimeFromSystemUnits( uint64_t hostTime )
 CM_EXPORT CMTime
 CMClockGetTime(
 		CMClockRef CM_NONNULL clock )
-	API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0));
+	API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
 	@function	CMClockGetAnchorTime
@@ -174,7 +174,7 @@ CMClockGetAnchorTime(
 		CMClockRef CM_NONNULL clock,
 		CMTime * CM_NONNULL clockTimeOut,
 		CMTime * CM_NONNULL referenceClockTimeOut )
-			API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0));
+			API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
 	@function	CMClockMightDrift
@@ -184,7 +184,7 @@ CM_EXPORT Boolean
 CMClockMightDrift(
 		CMClockRef CM_NONNULL clock,
 		CMClockRef CM_NONNULL otherClock )
-			API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0));
+			API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
 	@function	CMClockInvalidate
@@ -197,7 +197,7 @@ CMClockMightDrift(
 CM_EXPORT void
 CMClockInvalidate(
 		CMClockRef CM_NONNULL clock )
-			API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0));
+			API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0), visionos(1.0));
 		
 
 /*!
@@ -206,7 +206,7 @@ CMClockInvalidate(
 */
 CM_EXPORT CFTypeID
 CMTimebaseGetTypeID( void )
-	API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0));
+	API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 CF_IMPLICIT_BRIDGING_DISABLED
 
@@ -223,14 +223,14 @@ CMTimebaseCreateWithSourceClock(
 		CFAllocatorRef CM_NULLABLE allocator,
 		CMClockRef CM_NONNULL sourceClock,
 		CM_RETURNS_RETAINED_PARAMETER CMTimebaseRef CM_NULLABLE * CM_NONNULL timebaseOut )
-			API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0));
+			API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 static inline OSStatus
 CMTimebaseCreateWithMasterClock(
 		CFAllocatorRef CM_NULLABLE allocator,
 		CMClockRef CM_NONNULL masterClock,
 		CM_RETURNS_RETAINED_PARAMETER CMTimebaseRef CM_NULLABLE * CM_NONNULL timebaseOut )
-			API_DEPRECATED_WITH_REPLACEMENT("CMTimebaseCreateWithSourceClock", macos(10.8,10.10), ios(6.0,8.0), tvos(9.0,9.0), watchos(6.0,6.0))
+			API_DEPRECATED_WITH_REPLACEMENT("CMTimebaseCreateWithSourceClock", macos(10.8,10.10), ios(6.0,8.0), tvos(9.0,9.0), watchos(6.0,6.0), visionos(1.0, 1.0))
 {
 	return CMTimebaseCreateWithSourceClock(allocator, masterClock, timebaseOut);
 }
@@ -240,13 +240,13 @@ CMTimebaseCreateWithMasterClock(
 		CFAllocatorRef CM_NULLABLE allocator,
 		CMClockRef CM_NONNULL masterClock,
 		CM_RETURNS_RETAINED_PARAMETER CMTimebaseRef CM_NULLABLE * CM_NONNULL timebaseOut )
-			API_DEPRECATED_WITH_REPLACEMENT("CMTimebaseCreateWithSourceClock", macos(10.8,10.10), ios(6.0,8.0), tvos(9.0,9.0), watchos(6.0,6.0));
+			API_DEPRECATED_WITH_REPLACEMENT("CMTimebaseCreateWithSourceClock", macos(10.8,10.10), ios(6.0,8.0), tvos(9.0,9.0), watchos(6.0,6.0), visionos(1.0,1.0));
 static inline OSStatus
 CMTimebaseCreateWithSourceClock(
 		CFAllocatorRef CM_NULLABLE allocator,
 		CMClockRef CM_NONNULL sourceClock,
 		CM_RETURNS_RETAINED_PARAMETER CMTimebaseRef CM_NULLABLE * CM_NONNULL timebaseOut )
-			API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0))
+			API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0), visionos(1.0))
 {
 	return CMTimebaseCreateWithMasterClock(allocator, sourceClock, timebaseOut);
 }
@@ -264,14 +264,14 @@ CMTimebaseCreateWithSourceTimebase(
 		CFAllocatorRef CM_NULLABLE allocator,
 		CMTimebaseRef CM_NONNULL sourceTimebase,
 		CM_RETURNS_RETAINED_PARAMETER CMTimebaseRef CM_NULLABLE * CM_NONNULL timebaseOut )
-			API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0));
+			API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 static inline OSStatus
 CMTimebaseCreateWithMasterTimebase(
 		CFAllocatorRef CM_NULLABLE allocator,
 		CMTimebaseRef CM_NONNULL masterTimebase,
 		CM_RETURNS_RETAINED_PARAMETER CMTimebaseRef CM_NULLABLE * CM_NONNULL timebaseOut )
-			API_DEPRECATED_WITH_REPLACEMENT("CMTimebaseCreateWithSourceTimebase", macos(10.8,10.10), ios(6.0,8.0), tvos(9.0,9.0), watchos(6.0,6.0))
+			API_DEPRECATED_WITH_REPLACEMENT("CMTimebaseCreateWithSourceTimebase", macos(10.8,10.10), ios(6.0,8.0), tvos(9.0,9.0), watchos(6.0,6.0), visionos(1.0,1.0))
 {
 	return CMTimebaseCreateWithSourceTimebase(allocator, masterTimebase, timebaseOut);
 }
@@ -281,13 +281,13 @@ CMTimebaseCreateWithMasterTimebase(
 		CFAllocatorRef CM_NULLABLE allocator,
 		CMTimebaseRef CM_NONNULL masterTimebase,
 		CM_RETURNS_RETAINED_PARAMETER CMTimebaseRef CM_NULLABLE * CM_NONNULL timebaseOut )
-			API_DEPRECATED_WITH_REPLACEMENT("CMTimebaseCreateWithSourceTimebase", macos(10.8,10.10), ios(6.0,8.0), tvos(9.0,9.0), watchos(6.0,6.0));
+			API_DEPRECATED_WITH_REPLACEMENT("CMTimebaseCreateWithSourceTimebase", macos(10.8,10.10), ios(6.0,8.0), tvos(9.0,9.0), watchos(6.0,6.0), visionos(1.0,1.0));
 static inline OSStatus
 CMTimebaseCreateWithSourceTimebase(
 		CFAllocatorRef CM_NULLABLE allocator,
 		CMTimebaseRef CM_NONNULL sourceTimebase,
 		CM_RETURNS_RETAINED_PARAMETER CMTimebaseRef CM_NULLABLE * CM_NONNULL timebaseOut )
-			API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0))
+			API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0), visionos(1.0))
 {
 	return CMTimebaseCreateWithMasterTimebase(allocator, sourceTimebase, timebaseOut);
 }
@@ -305,11 +305,11 @@ CF_IMPLICIT_BRIDGING_ENABLED
 CM_EXPORT CMTimebaseRef CM_NULLABLE
 CMTimebaseCopySourceTimebase(
 		CMTimebaseRef CM_NONNULL timebase )
-			API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(6.0));
+			API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(6.0), visionos(1.0));
 static inline CMTimebaseRef CM_NULLABLE
 CMTimebaseCopyMasterTimebase(
 		CMTimebaseRef CM_NONNULL timebase )
-			API_DEPRECATED_WITH_REPLACEMENT("CMTimebaseCopySourceTimebase", macos(10.11,10.11), ios(9.0,9.0), tvos(9.0,9.0), watchos(6.0,6.0))
+			API_DEPRECATED_WITH_REPLACEMENT("CMTimebaseCopySourceTimebase", macos(10.11,10.11), ios(9.0,9.0), tvos(9.0,9.0), watchos(6.0,6.0), visionos(1.0,1.0))
 {
 	return CMTimebaseCopySourceTimebase(timebase);
 }
@@ -317,11 +317,11 @@ CMTimebaseCopyMasterTimebase(
 CM_EXPORT CMTimebaseRef CM_NULLABLE
 CMTimebaseCopyMasterTimebase(
 		CMTimebaseRef CM_NONNULL timebase )
-			API_DEPRECATED_WITH_REPLACEMENT("CMTimebaseCopySourceTimebase", macos(10.11,10.11), ios(9.0,9.0), tvos(9.0,9.0), watchos(6.0,6.0));
+			API_DEPRECATED_WITH_REPLACEMENT("CMTimebaseCopySourceTimebase", macos(10.11,10.11), ios(9.0,9.0), tvos(9.0,9.0), watchos(6.0,6.0), visionos(1.0,1.0));
 static inline CMTimebaseRef CM_NULLABLE
 CMTimebaseCopySourceTimebase(
 		CMTimebaseRef CM_NONNULL timebase )
-			API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(6.0))
+			API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(6.0), visionos(1.0))
 {
 	return CMTimebaseCopyMasterTimebase(timebase);
 }
@@ -337,11 +337,11 @@ CMTimebaseCopySourceTimebase(
 CM_EXPORT CMClockRef CM_NULLABLE
 CMTimebaseCopySourceClock(
 		CMTimebaseRef CM_NONNULL timebase )
-			API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(6.0));
+			API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(6.0), visionos(1.0));
 static inline CMClockRef CM_NULLABLE
 CMTimebaseCopyMasterClock(
 		CMTimebaseRef CM_NONNULL timebase )
-			API_DEPRECATED_WITH_REPLACEMENT("CMTimebaseCopySourceClock", macos(10.11,10.11), ios(9.0,9.0), tvos(9.0,9.0), watchos(6.0,6.0))
+			API_DEPRECATED_WITH_REPLACEMENT("CMTimebaseCopySourceClock", macos(10.11,10.11), ios(9.0,9.0), tvos(9.0,9.0), watchos(6.0,6.0), visionos(1.0,1.0))
 {
 	return CMTimebaseCopySourceClock(timebase);
 }
@@ -349,11 +349,11 @@ CMTimebaseCopyMasterClock(
 CM_EXPORT CMClockRef CM_NULLABLE
 CMTimebaseCopyMasterClock(
 		CMTimebaseRef CM_NONNULL timebase )
-			API_DEPRECATED_WITH_REPLACEMENT("CMTimebaseCopySourceClock", macos(10.11,10.11), ios(9.0,9.0), tvos(9.0,9.0), watchos(6.0,6.0));
+			API_DEPRECATED_WITH_REPLACEMENT("CMTimebaseCopySourceClock", macos(10.11,10.11), ios(9.0,9.0), tvos(9.0,9.0), watchos(6.0,6.0), visionos(1.0,1.0));
 static inline CMClockRef CM_NULLABLE
 CMTimebaseCopySourceClock(
 		CMTimebaseRef CM_NONNULL timebase )
-			API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(6.0))
+			API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(6.0), visionos(1.0))
 {
 	return CMTimebaseCopyMasterClock(timebase);
 }
@@ -369,11 +369,11 @@ CMTimebaseCopySourceClock(
 CM_EXPORT CMClockOrTimebaseRef CM_NONNULL
 CMTimebaseCopySource(
 		CMTimebaseRef CM_NONNULL timebase )
-			API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(6.0));
+			API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(6.0), visionos(1.0));
 static inline CMClockOrTimebaseRef CM_NONNULL
 CMTimebaseCopyMaster(
 		CMTimebaseRef CM_NONNULL timebase )
-			API_DEPRECATED_WITH_REPLACEMENT("CMTimebaseCopySource", macos(10.11,10.11), ios(9.0,9.0), tvos(9.0,9.0), watchos(6.0,6.0))
+			API_DEPRECATED_WITH_REPLACEMENT("CMTimebaseCopySource", macos(10.11,10.11), ios(9.0,9.0), tvos(9.0,9.0), watchos(6.0,6.0), visionos(1.0,1.0))
 {
 	return CMTimebaseCopySource(timebase);
 }
@@ -381,11 +381,11 @@ CMTimebaseCopyMaster(
 CM_EXPORT CMClockOrTimebaseRef CM_NONNULL
 CMTimebaseCopyMaster(
 		CMTimebaseRef CM_NONNULL timebase )
-			API_DEPRECATED_WITH_REPLACEMENT("CMTimebaseCopySource", macos(10.11,10.11), ios(9.0,9.0), tvos(9.0,9.0), watchos(6.0,6.0));
+			API_DEPRECATED_WITH_REPLACEMENT("CMTimebaseCopySource", macos(10.11,10.11), ios(9.0,9.0), tvos(9.0,9.0), watchos(6.0,6.0), visionos(1.0,1.0));
 static inline CMClockOrTimebaseRef CM_NONNULL
 CMTimebaseCopySource(
 		CMTimebaseRef CM_NONNULL timebase )
-			API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(6.0))
+			API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(6.0), visionos(1.0))
 {
 	return CMTimebaseCopyMaster(timebase);
 }
@@ -399,11 +399,11 @@ CMTimebaseCopySource(
 CM_EXPORT CMClockRef CM_NONNULL
 CMTimebaseCopyUltimateSourceClock(
 		CMTimebaseRef CM_NONNULL timebase )
-			API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(6.0));
+			API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(6.0), visionos(1.0));
 static inline CMClockRef CM_NONNULL
 CMTimebaseCopyUltimateMasterClock(
 		CMTimebaseRef CM_NONNULL timebase )
-			API_DEPRECATED_WITH_REPLACEMENT("CMTimebaseCopyUltimateSourceClock", macos(10.11,10.11), ios(9.0,9.0), tvos(9.0,9.0), watchos(6.0,6.0))
+			API_DEPRECATED_WITH_REPLACEMENT("CMTimebaseCopyUltimateSourceClock", macos(10.11,10.11), ios(9.0,9.0), tvos(9.0,9.0), watchos(6.0,6.0), visionos(1.0,1.0))
 {
 	return CMTimebaseCopyUltimateSourceClock(timebase);
 }
@@ -411,11 +411,11 @@ CMTimebaseCopyUltimateMasterClock(
 CM_EXPORT CMClockRef CM_NONNULL
 CMTimebaseCopyUltimateMasterClock(
 		CMTimebaseRef CM_NONNULL timebase )
-			API_DEPRECATED_WITH_REPLACEMENT("CMTimebaseCopyUltimateSourceClock", macos(10.11,10.11), ios(9.0,9.0), tvos(9.0,9.0), watchos(6.0,6.0));
+			API_DEPRECATED_WITH_REPLACEMENT("CMTimebaseCopyUltimateSourceClock", macos(10.11,10.11), ios(9.0,9.0), tvos(9.0,9.0), watchos(6.0,6.0), visionos(1.0,1.0));
 static inline CMClockRef CM_NONNULL
 CMTimebaseCopyUltimateSourceClock(
 		CMTimebaseRef CM_NONNULL timebase )
-			API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(6.0))
+			API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(6.0), visionos(1.0))
 {
 	return CMTimebaseCopyUltimateMasterClock(timebase);
 }
@@ -431,7 +431,7 @@ CMTimebaseCopyUltimateSourceClock(
 CM_EXPORT CMTimebaseRef CM_NULLABLE
 CMTimebaseGetMasterTimebase(
 		CMTimebaseRef CM_NONNULL timebase )
-			API_DEPRECATED_WITH_REPLACEMENT("CMTimebaseCopySourceTimebase", macos(10.8, 10.11), ios(6.0, 9.0), tvos(9.0, 9.0)) API_UNAVAILABLE(watchos);
+			API_DEPRECATED_WITH_REPLACEMENT("CMTimebaseCopySourceTimebase", macos(10.8, 10.11), ios(6.0, 9.0), tvos(9.0, 9.0), visionos(1.0, 1.0)) API_UNAVAILABLE(watchos);
 
 /*!
 	@function	CMTimebaseGetMasterClock
@@ -443,7 +443,7 @@ CMTimebaseGetMasterTimebase(
 CM_EXPORT CMClockRef CM_NULLABLE
 CMTimebaseGetMasterClock(
 		CMTimebaseRef CM_NONNULL timebase )
-			API_DEPRECATED_WITH_REPLACEMENT("CMTimebaseCopySourceClock", macos(10.8, 10.11), ios(6.0, 9.0), tvos(9.0, 9.0)) API_UNAVAILABLE(watchos);
+			API_DEPRECATED_WITH_REPLACEMENT("CMTimebaseCopySourceClock", macos(10.8, 10.11), ios(6.0, 9.0), tvos(9.0, 9.0), visionos(1.0, 1.0)) API_UNAVAILABLE(watchos);
 
 /*!
 	@function	CMTimebaseGetMaster
@@ -456,7 +456,7 @@ CMTimebaseGetMasterClock(
 CM_EXPORT CMClockOrTimebaseRef CM_NULLABLE
 CMTimebaseGetMaster(
 		CMTimebaseRef CM_NONNULL timebase )
-			API_DEPRECATED_WITH_REPLACEMENT("CMTimebaseCopySource", macos(10.8, 10.11), ios(6.0, 9.0), tvos(9.0, 9.0)) API_UNAVAILABLE(watchos);
+			API_DEPRECATED_WITH_REPLACEMENT("CMTimebaseCopySource", macos(10.8, 10.11), ios(6.0, 9.0), tvos(9.0, 9.0), visionos(1.0, 1.0)) API_UNAVAILABLE(watchos);
 
 /*!
 	@function	CMTimebaseGetUltimateMasterClock
@@ -467,7 +467,7 @@ CMTimebaseGetMaster(
 CM_EXPORT CMClockRef CM_NULLABLE
 CMTimebaseGetUltimateMasterClock(
 		CMTimebaseRef CM_NONNULL timebase )
-			API_DEPRECATED_WITH_REPLACEMENT("CMTimebaseCopyUltimateSourceClock", macos(10.8, 10.11), ios(6.0, 9.0), tvos(9.0, 9.0)) API_UNAVAILABLE(watchos);
+			API_DEPRECATED_WITH_REPLACEMENT("CMTimebaseCopyUltimateSourceClock", macos(10.8, 10.11), ios(6.0, 9.0), tvos(9.0, 9.0), visionos(1.0, 1.0)) API_UNAVAILABLE(watchos);
 
 /*!
 	@function	CMTimebaseSetSourceClock
@@ -484,11 +484,11 @@ CMTimebaseGetUltimateMasterClock(
 CM_EXPORT OSStatus CMTimebaseSetSourceClock(
 		CMTimebaseRef CM_NONNULL timebase,
 		CMClockRef CM_NONNULL newSourceClock)
-			API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0));
+			API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0), visionos(1.0));
 static inline OSStatus CMTimebaseSetMasterClock(
 		CMTimebaseRef CM_NONNULL timebase,
 		CMClockRef CM_NONNULL newMasterClock)
-			API_DEPRECATED_WITH_REPLACEMENT("CMTimebaseSetSourceClock", macos(10.8,10.10), ios(6.0,8.0), tvos(9.0,9.0), watchos(6.0,6.0))
+			API_DEPRECATED_WITH_REPLACEMENT("CMTimebaseSetSourceClock", macos(10.8,10.10), ios(6.0,8.0), tvos(9.0,9.0), watchos(6.0,6.0), visionos(1.0,1.0))
 {
 	return CMTimebaseSetSourceClock(timebase, newMasterClock);
 }
@@ -496,11 +496,11 @@ static inline OSStatus CMTimebaseSetMasterClock(
 CM_EXPORT OSStatus CMTimebaseSetMasterClock(
 		CMTimebaseRef CM_NONNULL timebase,
 		CMClockRef CM_NONNULL newMasterClock)
-			API_DEPRECATED_WITH_REPLACEMENT("CMTimebaseSetSourceClock", macos(10.8,10.10), ios(6.0,8.0), tvos(9.0,9.0), watchos(6.0,6.0));
+			API_DEPRECATED_WITH_REPLACEMENT("CMTimebaseSetSourceClock", macos(10.8,10.10), ios(6.0,8.0), tvos(9.0,9.0), watchos(6.0,6.0), visionos(1.0,1.0));
 static inline OSStatus CMTimebaseSetSourceClock(
 		CMTimebaseRef CM_NONNULL timebase,
 		CMClockRef CM_NONNULL newSourceClock)
-			API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0))
+			API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0), visionos(1.0))
 {
 	return CMTimebaseSetMasterClock(timebase, newSourceClock);
 }
@@ -521,11 +521,11 @@ static inline OSStatus CMTimebaseSetSourceClock(
 CM_EXPORT OSStatus CMTimebaseSetSourceTimebase(
 		CMTimebaseRef CM_NONNULL timebase,
 		CMTimebaseRef CM_NONNULL newSourceTimebase)
-			API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0));
+			API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0), visionos(1.0));
 static inline OSStatus CMTimebaseSetMasterTimebase(
 		CMTimebaseRef CM_NONNULL timebase,
 		CMTimebaseRef CM_NONNULL newMasterTimebase)
-			API_DEPRECATED_WITH_REPLACEMENT("CMTimebaseSetSourceTimebase", macos(10.8,10.10), ios(6.0,8.0), tvos(9.0,9.0), watchos(6.0,6.0))
+			API_DEPRECATED_WITH_REPLACEMENT("CMTimebaseSetSourceTimebase", macos(10.8,10.10), ios(6.0,8.0), tvos(9.0,9.0), watchos(6.0,6.0), visionos(1.0,1.0))
 {
 	return CMTimebaseSetSourceTimebase(timebase, newMasterTimebase);
 }
@@ -533,11 +533,11 @@ static inline OSStatus CMTimebaseSetMasterTimebase(
 CM_EXPORT OSStatus CMTimebaseSetMasterTimebase(
 		CMTimebaseRef CM_NONNULL timebase,
 		CMTimebaseRef CM_NONNULL newMasterTimebase)
-			API_DEPRECATED_WITH_REPLACEMENT("CMTimebaseSetSourceTimebase", macos(10.8,10.10), ios(6.0,8.0), tvos(9.0,9.0), watchos(6.0,6.0));
+			API_DEPRECATED_WITH_REPLACEMENT("CMTimebaseSetSourceTimebase", macos(10.8,10.10), ios(6.0,8.0), tvos(9.0,9.0), watchos(6.0,6.0), visionos(1.0,1.0));
 static inline OSStatus CMTimebaseSetSourceTimebase(
 		CMTimebaseRef CM_NONNULL timebase,
 		CMTimebaseRef CM_NONNULL newSourceTimebase)
-			API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0))
+			API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0), visionos(1.0))
 {
 	return CMTimebaseSetMasterTimebase(timebase, newSourceTimebase);
 }
@@ -550,7 +550,7 @@ static inline OSStatus CMTimebaseSetSourceTimebase(
 CM_EXPORT CMTime
 CMTimebaseGetTime(
 		CMTimebaseRef CM_NONNULL timebase )
-			API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0));
+			API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
 	@function	CMTimebaseGetTimeWithTimeScale
@@ -561,7 +561,7 @@ CMTimebaseGetTimeWithTimeScale(
 		CMTimebaseRef CM_NONNULL timebase,
 		CMTimeScale timescale,
 		CMTimeRoundingMethod method)
-			API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0));
+			API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
 	@function	CMTimebaseSetTime
@@ -571,7 +571,7 @@ CM_EXPORT OSStatus
 CMTimebaseSetTime( 
 		CMTimebaseRef CM_NONNULL timebase,
 		CMTime time )
-			API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0));
+			API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
 	@function	CMTimebaseSetAnchorTime
@@ -588,7 +588,7 @@ CMTimebaseSetAnchorTime(
 		CMTimebaseRef CM_NONNULL timebase,
 		CMTime timebaseTime,
 		CMTime immediateSourceTime)
-			API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0));
+			API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
 	@function	CMTimebaseGetRate
@@ -600,7 +600,7 @@ CMTimebaseSetAnchorTime(
 CM_EXPORT Float64 
 CMTimebaseGetRate( 
 		CMTimebaseRef CM_NONNULL timebase )
-			API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0));
+			API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
 	@function	CMTimebaseGetTimeAndRate
@@ -614,7 +614,7 @@ CMTimebaseGetTimeAndRate(
 		CMTimebaseRef CM_NONNULL timebase,
 		CMTime * CM_NULLABLE timeOut,
 		Float64 * CM_NULLABLE rateOut )
-			API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0));
+			API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
 	@function	CMTimebaseSetRate
@@ -624,7 +624,7 @@ CM_EXPORT OSStatus
 CMTimebaseSetRate( 
 		CMTimebaseRef CM_NONNULL timebase,
 		Float64 rate )
-			API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0));
+			API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0), visionos(1.0));
 		
 /*!
 	@function	CMTimebaseSetRateAndAnchorTime
@@ -645,7 +645,7 @@ CMTimebaseSetRateAndAnchorTime(
 		Float64 rate,
 		CMTime timebaseTime,
 		CMTime immediateSourceTime)
-			API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0));
+			API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
 	@function	CMTimebaseGetEffectiveRate
@@ -659,7 +659,7 @@ CMTimebaseSetRateAndAnchorTime(
 CM_EXPORT Float64
 CMTimebaseGetEffectiveRate(
 		CMTimebaseRef CM_NONNULL timebase )
-			API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0));
+			API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
 	@function	CMTimebaseAddTimer
@@ -680,7 +680,7 @@ CMTimebaseAddTimer(
 		CMTimebaseRef CM_NONNULL timebase,
 		CFRunLoopTimerRef CM_NONNULL timer,
 		CFRunLoopRef CM_NONNULL runloop )
-			API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0));
+			API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 #define kCMTimebaseVeryLongCFTimeInterval	(CFTimeInterval)(256.0 * 365.0 * 24.0 * 60.0 * 60.0)	// quite a while
 #define kCMTimebaseFarFutureCFAbsoluteTime	((CFAbsoluteTime)kCMTimebaseVeryLongCFTimeInterval)		// quite a while from 2001
@@ -698,7 +698,7 @@ CM_EXPORT OSStatus
 CMTimebaseRemoveTimer( 
 		CMTimebaseRef CM_NONNULL timebase,
 		CFRunLoopTimerRef CM_NONNULL timer )
-			API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0));
+			API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
 	@function	CMTimebaseSetTimerNextFireTime
@@ -725,7 +725,7 @@ CMTimebaseSetTimerNextFireTime(
 		CFRunLoopTimerRef CM_NONNULL timer,
 		CMTime fireTime,
 		uint32_t flags ) // reserved, pass zero
-			API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0));
+			API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
 	@function	CMTimebaseSetTimerToFireImmediately
@@ -741,7 +741,7 @@ CM_EXPORT OSStatus
 CMTimebaseSetTimerToFireImmediately( 
 		CMTimebaseRef CM_NONNULL timebase,
 		CFRunLoopTimerRef CM_NONNULL timer )
-			API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0));
+			API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 
 /*!
@@ -766,7 +766,7 @@ CM_EXPORT OSStatus
 CMTimebaseAddTimerDispatchSource( 
 		CMTimebaseRef CM_NONNULL timebase,
 		dispatch_source_t CM_NONNULL timerSource )
-			API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0));
+			API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 
 /*!
@@ -782,7 +782,7 @@ CM_EXPORT OSStatus
 CMTimebaseRemoveTimerDispatchSource( 
 		CMTimebaseRef CM_NONNULL timebase,
 		dispatch_source_t CM_NONNULL timerSource )
-			API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0));
+			API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
 	@function	CMTimebaseSetTimerDispatchSourceNextFireTime
@@ -809,7 +809,7 @@ CMTimebaseSetTimerDispatchSourceNextFireTime(
 		dispatch_source_t CM_NONNULL timerSource,
 		CMTime fireTime,
 		uint32_t flags ) // reserved, pass zero
-			API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0));
+			API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
 	@function	CMTimebaseSetTimerDispatchSourceToFireImmediately
@@ -826,7 +826,7 @@ CM_EXPORT OSStatus
 CMTimebaseSetTimerDispatchSourceToFireImmediately( 
 		CMTimebaseRef CM_NONNULL timebase,
 		dispatch_source_t CM_NONNULL timerSource )
-			API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0));
+			API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 
 
@@ -848,7 +848,7 @@ CM_EXPORT Float64
 CMSyncGetRelativeRate( 
 		CMClockOrTimebaseRef CM_NONNULL ofClockOrTimebase,
 		CMClockOrTimebaseRef CM_NONNULL relativeToClockOrTimebase )
-			API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0));
+			API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0), visionos(1.0));
 		
 /*!
 	@function	CMSyncGetRelativeRateAndAnchorTime
@@ -867,7 +867,7 @@ CMSyncGetRelativeRateAndAnchorTime(
 		Float64* CM_NULLABLE outRelativeRate,
 		CMTime* CM_NULLABLE outOfClockOrTimebaseAnchorTime,
 		CMTime* CM_NULLABLE outRelativeToClockOrTimebaseAnchorTime)
-			API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0));
+			API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
 	@function	CMSyncConvertTime
@@ -884,7 +884,7 @@ CMSyncConvertTime(
 		CMTime time, 
 		CMClockOrTimebaseRef CM_NONNULL fromClockOrTimebase,
 		CMClockOrTimebaseRef CM_NONNULL toClockOrTimebase )
-			API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0));
+			API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
 	@function	CMSyncMightDrift
@@ -897,7 +897,7 @@ CM_EXPORT Boolean
 CMSyncMightDrift(
 		CMClockOrTimebaseRef CM_NONNULL clockOrTimebase1,
 		CMClockOrTimebaseRef CM_NONNULL clockOrTimebase2 )
-			API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0));
+			API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0), visionos(1.0));
 		
 /*!
 	@function	CMSyncGetTime
@@ -912,28 +912,28 @@ CMSyncMightDrift(
 CM_EXPORT CMTime
 CMSyncGetTime(
 		CMClockOrTimebaseRef CM_NONNULL clockOrTimebase )
-			API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0));
+			API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
 	@function	CMTimebaseNotificationBarrier
 	@abstract	Requests that the timebase wait until it is not posting any notifications.
 */
 CM_EXPORT OSStatus	CMTimebaseNotificationBarrier(CMTimebaseRef CM_NONNULL timebase )
-						API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0));
+						API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0), visionos(1.0));
 	
 CM_ASSUME_NONNULL_BEGIN
 
 // Posted by a timebase after a change in effective rate.  
 CM_EXPORT const CFStringRef kCMTimebaseNotification_EffectiveRateChanged
-								API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0));
+								API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 // Posted by a timebase after a discontinuous time jump.
 CM_EXPORT const CFStringRef kCMTimebaseNotification_TimeJumped
-								API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0));
+								API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 // Payload key for the time at which a change in effective rate or a discontinuous time jump occurred.
 CM_EXPORT const CFStringRef kCMTimebaseNotificationKey_EventTime
-								API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(6.0));
+								API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 CM_ASSUME_NONNULL_END
 CF_IMPLICIT_BRIDGING_DISABLED

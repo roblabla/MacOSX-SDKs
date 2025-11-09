@@ -10,7 +10,7 @@
 #define __CTDEFINES__
 
 #include <TargetConditionals.h>
-#include <Availability.h>
+#include <os/availability.h>
 
 #ifndef __has_feature
 # define __has_feature(x) 0
@@ -77,16 +77,16 @@
 #define CF_ASSUME_NONNULL_END
 
 # if defined(CT_BUILDING_CoreText) && defined(__cplusplus)
-#  define CT_EXPORT extern "C" __declspec(dllexport)
+#  define CT_EXPORT extern "C" __declspec(dllexport) __attribute__((visibility ("default")))
 # elif defined(CT_BUILDING_CoreText) && !defined(__cplusplus)
-#  define CT_EXPORT extern __declspec(dllexport)
+#  define CT_EXPORT extern __declspec(dllexport) __attribute__((visibility ("default")))
 # elif defined(__cplusplus)
-#  define CT_EXPORT extern "C" __declspec(dllimport)
+#  define CT_EXPORT extern "C" __declspec(dllimport) __attribute__((visibility ("default")))
 # else
-#  define CT_EXPORT extern __declspec(dllimport)
+#  define CT_EXPORT extern __declspec(dllimport) __attribute__((visibility ("default")))
 # endif
 #else
-# define CT_EXPORT extern
+# define CT_EXPORT extern __attribute__((visibility ("default")))
 #endif
 
 #endif

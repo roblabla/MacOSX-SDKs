@@ -9,7 +9,7 @@
 #import <CoreVideo/CVBase.h>
 #import <OpenGL/OpenGL.h>
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 #ifndef GL_SILENCE_DEPRECATION
 API_DEPRECATED("OpenGL is deprecated", macos(10.5, 10.14))
@@ -89,6 +89,6 @@ API_AVAILABLE(macos(10.5))
 
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)
 
 #endif

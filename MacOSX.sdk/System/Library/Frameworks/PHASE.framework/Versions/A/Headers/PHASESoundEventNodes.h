@@ -64,7 +64,7 @@ typedef NS_ENUM(NSInteger, PHASEPushStreamCompletionCallbackCondition) {
     @abstract The base class for a sound event node definition.
     @discussion
         Sound event nodes are a hierarchical collection of objects that either generate or control playback of audio content in PHASE.
-        Generator nodes produce audio. They are always leaf nodes in a node hierarchy. These include samplers and push stream nodes.
+        Generator nodes produce audio. They are always leaf nodes in a node hierarchy. These include samplers and stream nodes.
         Control nodes set the logic for how generator nodes are selected, mixed and parameterized before downstream mixer processing.
         Control nodes are always parent nodes, and can be organized into hierarchies for complex sound design scenarios.
  */
@@ -536,6 +536,45 @@ OS_EXPORT API_AVAILABLE(macos(12.0), ios(15.0), tvos(17.0)) API_UNAVAILABLE(watc
 
 @end
 
+#pragma mark - PHASEStreamNode
+
+/****************************************************************************************************/
+/*!
+    @interface PHASEStreamNode
+    @abstract The base class for stream nodes, exposing common elements.
+ */
+OS_EXPORT API_AVAILABLE(macos(15.0), ios(18.0), tvos(18.0), visionos(2.0)) API_UNAVAILABLE(watchos)
+@interface PHASEStreamNode : NSObject
+
+- (instancetype)init NS_UNAVAILABLE;
++ (instancetype)new NS_UNAVAILABLE;
+
+/*!
+    @property gainMetaParameter
+    @abstract If specified during construction, the metaparameter for controlling gain will be available here
+*/
+@property(nonatomic, strong, nullable, readonly) PHASENumberMetaParameter* gainMetaParameter;
+
+/*!
+    @property rateMetaParameter
+    @abstract If specified during construction, the metaparameter for controlling rate/pitch will be available here
+*/
+@property(nonatomic, strong, nullable, readonly) PHASENumberMetaParameter* rateMetaParameter;
+
+/*!
+    @property mixer
+    @abstract The readonly property that returns the PHASEMixer this stream was created with and assigned to.
+*/
+@property(nonatomic, strong, readonly) PHASEMixer* mixer;
+
+/*!
+    @property format
+    @abstract The readonly property that returns the AVAudioFormat that this stream was initialized with.
+*/
+@property(nonatomic, strong, readonly) AVAudioFormat* format;
+
+@end
+
 #pragma mark - PHASEPushStreamNodeDefinition
 
 /****************************************************************************************************/
@@ -556,6 +595,7 @@ OS_EXPORT API_AVAILABLE(macos(12.0), ios(15.0), tvos(17.0)) API_UNAVAILABLE(watc
         The mixer definition this stream will be assigned to
     @param format
         The AVAudioFormat object that will define the attributes of the audio this node will accept.
+        Only Core Audio's standard deinterleaved 32-bit floating-point formats are supported.
     @param identifier
         An optional custom identifier to give to this object
     @return
@@ -570,6 +610,7 @@ OS_EXPORT API_AVAILABLE(macos(12.0), ios(15.0), tvos(17.0)) API_UNAVAILABLE(watc
         The mixer definition this stream will be assigned to
     @param format
         The AVAudioFormat object that will define the attributes of the audio this node will accept.
+        Only Core Audio's standard deinterleaved 32-bit floating-point formats are supported.
     @return
         A new PHASEPushStreamNodeDefinition object
 */
@@ -585,7 +626,7 @@ OS_EXPORT API_AVAILABLE(macos(12.0), ios(15.0), tvos(17.0)) API_UNAVAILABLE(watc
     @property normalize
     @abstract Determines whether or not the engine should normalize the stream. The default value is NO.
     @discussion
-        In general, client's are advised to normalize the input. Normalization is required to properly calibrate the output level.
+        In general, clients are advised to normalize the input. Normalization is required to properly calibrate the output level.
         If you set this value to NO, it's advised that you do custom normalization of the audio data prior to passing the buffers to PHASE.
 */
 @property(nonatomic) BOOL normalize;
@@ -600,7 +641,7 @@ OS_EXPORT API_AVAILABLE(macos(12.0), ios(15.0), tvos(17.0)) API_UNAVAILABLE(watc
     @abstract An object for addessing an instance of a stream in an executing sound event
  */
 OS_EXPORT API_AVAILABLE(macos(12.0), ios(15.0), tvos(17.0)) API_UNAVAILABLE(watchos)
-@interface PHASEPushStreamNode : NSObject
+@interface PHASEPushStreamNode : PHASEStreamNode
 
 - (instancetype)init NS_UNAVAILABLE;
 + (instancetype)new NS_UNAVAILABLE;
@@ -619,7 +660,7 @@ OS_EXPORT API_AVAILABLE(macos(12.0), ios(15.0), tvos(17.0)) API_UNAVAILABLE(watc
 
 /*!
     @property mixer
-    @abstract The readonly property that returns the PHASEMixer this sampler was created with and assigned to.
+    @abstract The readonly property that returns the PHASEMixer this stream was created with and assigned to.
 */
 @property(nonatomic, strong, readonly) PHASEMixer* mixer;
 
@@ -667,7 +708,7 @@ NS_SWIFT_NAME(scheduleBuffer(buffer:completionCallbackType:completionHandler:));
     @param buffer
         The buffer with PCM audio data.
     @param when
-        The time at which to play the buffer. see the discussion of timestamps, above.
+        The time at which to play the buffer.
     @param options
         Options for looping, interrupting other buffers, etc.
 */
@@ -682,7 +723,7 @@ NS_SWIFT_NAME(scheduleBuffer(buffer:time:options:));
     @param buffer
         The buffer with PCM audio data.
     @param when
-        The time at which to play the buffer. see the discussion of timestamps, above.
+        The time at which to play the buffer.
     @param options
         Options for looping, interrupting other buffers, etc.
     @param completionCallbackType
@@ -697,6 +738,115 @@ NS_SWIFT_NAME(scheduleBuffer(buffer:time:options:));
 completionCallbackType:(PHASEPushStreamCompletionCallbackCondition)completionCallbackType
      completionHandler:(void (^)(PHASEPushStreamCompletionCallbackCondition callbackType))completionHandler
 NS_SWIFT_NAME(scheduleBuffer(buffer:time:options:completionCallbackType:completionHandler:));
+
+@end
+
+#pragma mark - PHASEPullStreamNodeDefinition
+
+/*! @typedef PHASEPullStreamRenderBlock
+    @abstract Block to supply audio data to PHASEPullStreamNode
+    @param isSilence
+        The client may use this flag to indicate that the buffer it vends contains only silence.
+        The receiver of the buffer can then use the flag as a hint as to whether the buffer needs
+        to be processed or not.
+        Note that because the flag is only a hint, when setting the silence flag, the originator of
+        a buffer must also ensure that it contains silence (zeroes).
+    @param timestamp
+        The HAL time at which the audio data will be rendered. If there is a sample rate conversion
+        or time compression/expansion downstream, the sample time will not be valid.
+    @param frameCount
+        The number of sample frames of audio data requested.
+    @param outputData
+        The output data.
+
+        The caller must supply valid buffers in outputData's mBuffers' mData and mDataByteSize.
+        mDataByteSize must be consistent with frameCount. This block may provide output in those
+        specified buffers, or it may replace the mData pointers with pointers to memory which it
+        owns and guarantees will remain valid until the next render cycle.
+    @return
+        An OSStatus result code. If an error is returned, the audio data should be assumed to be
+        invalid.
+ */
+NS_SWIFT_NAME(PHASEPullStreamRenderHandler)
+typedef OSStatus (^PHASEPullStreamRenderBlock)(BOOL *isSilence, const AudioTimeStamp *timestamp, AVAudioFrameCount frameCount, AudioBufferList *outputData);
+
+/****************************************************************************************************/
+/*!
+    @interface PHASEPullStreamNodeDefinition
+    @abstract An object for defining a pull stream sound event node when building a sound event.
+ */
+OS_EXPORT API_AVAILABLE(macos(15.0), ios(18.0), tvos(18.0), visionos(2.0)) API_UNAVAILABLE(watchos)
+@interface PHASEPullStreamNodeDefinition : PHASEGeneratorNodeDefinition
+
+- (instancetype)init NS_UNAVAILABLE;
++ (instancetype)new NS_UNAVAILABLE;
+
+/*!
+    @method initWithMixerDefinition:format:identifier
+    @abstract Create a pull stream node definition
+    @param mixerDefinition
+        The mixer definition this stream will be assigned to
+    @param format
+        The AVAudioFormat object that will define the attributes of the audio this node will accept.
+        Only Core Audio's standard deinterleaved 32-bit floating-point formats are supported.
+    @param identifier
+        An optional custom identifier to give to this object
+    @return
+        A new PHASEPullStreamNodeDefinition object
+*/
+- (instancetype)initWithMixerDefinition:(PHASEMixerDefinition*)mixerDefinition format:(AVAudioFormat*)format identifier:(NSString*)identifier;
+
+/*!
+    @method initWithMixerDefinition:format
+    @abstract Create a pull stream node definition
+    @param mixerDefinition
+        The mixer definition this stream will be assigned to
+    @param format
+        The AVAudioFormat object that will define the attributes of the audio this node will accept.
+        Only Core Audio's standard deinterleaved 32-bit floating-point formats are supported.
+    @return
+        A new PHASEPullStreamNodeDefinition object
+*/
+- (instancetype)initWithMixerDefinition:(PHASEMixerDefinition*)mixerDefinition format:(AVAudioFormat*)format NS_DESIGNATED_INITIALIZER;
+
+/*!
+    @property format
+    @abstract The readonly property that returns the AVAudioFormat that this stream was initialized with
+*/
+@property(nonatomic, strong, readonly) AVAudioFormat* format;
+
+/*!
+    @property normalize
+    @abstract Determines whether or not the engine should normalize the stream. The default value is NO.
+    @discussion
+        In general, clients are advised to normalize the input. Normalization is required to properly calibrate the output level.
+        If you set this value to NO, it's advised that you do custom normalization of the audio data prior to passing the buffers to PHASE.
+*/
+@property(nonatomic) BOOL normalize;
+
+@end
+
+#pragma mark - PHASEPullStreamNode
+
+/****************************************************************************************************/
+/*!
+    @interface PHASEPullStreamNode
+    @abstract An object for addessing an instance of a stream in an executing sound event
+ */
+OS_EXPORT API_AVAILABLE(macos(15.0), ios(18.0), tvos(18.0), visionos(2.0)) API_UNAVAILABLE(watchos)
+@interface PHASEPullStreamNode : PHASEStreamNode
+
+- (instancetype)init NS_UNAVAILABLE;
++ (instancetype)new NS_UNAVAILABLE;
+
+/*!
+    @property renderBlock
+    @abstract A property to set the render block callback that will render the samplesIW
+    @discussion
+        The renderBlock must be set before the PHASESoundEvent is prepared or started.  The callback will be called from a high priority realtime thread.
+        Your implementation must be performant and not perform any realtime unsafe operations such as lock mutexes or allocate memory.
+*/
+@property(nonatomic, strong) PHASEPullStreamRenderBlock renderBlock NS_SWIFT_NAME(renderHandler);
 
 @end
 

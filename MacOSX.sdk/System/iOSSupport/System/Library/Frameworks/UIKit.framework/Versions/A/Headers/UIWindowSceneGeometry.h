@@ -26,7 +26,7 @@ typedef NS_ENUM(NSInteger, UIWindowSceneResizingRestrictions) {
     UIWindowSceneResizingRestrictionsFreeform
 } API_AVAILABLE(visionos(1.0)) API_UNAVAILABLE(ios, tvos, macos, watchos);
 
-UIKIT_EXTERN API_AVAILABLE(ios(16.0))
+UIKIT_EXTERN API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(watchos)
 @interface UIWindowSceneGeometry : NSObject <NSCopying>
 
 /// Geometry objects are readonly and should only be created by the framework. To set a window scene's geometry, see UIWindowSceneGeometryPreferences and -[UIWindowScene requestGeometryUpdateWithPreferences:].

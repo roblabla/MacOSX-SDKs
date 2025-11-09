@@ -32,9 +32,10 @@ __BEGIN_DECLS
  *       risking watchdog timeout panics.
  */
 OS_EXPORT
-API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, tvos, watchos)
-es_return_t
-es_subscribe(es_client_t * _Nonnull client, const es_event_type_t * _Nonnull events, uint32_t event_count);
+API_AVAILABLE(macos(10.15))
+API_UNAVAILABLE(ios)
+API_UNAVAILABLE(tvos, watchos)
+es_return_t es_subscribe(es_client_t *_Nonnull client, const es_event_type_t *_Nonnull events, uint32_t event_count);
 
 /**
  * Unsubscribe from some set of events
@@ -45,9 +46,10 @@ es_subscribe(es_client_t * _Nonnull client, const es_event_type_t * _Nonnull eve
  * @note Events not included in the given `events` array that were previously subscribed to will continue to be subscribed to
  */
 OS_EXPORT
-API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, tvos, watchos)
-es_return_t
-es_unsubscribe(es_client_t * _Nonnull client, const es_event_type_t * _Nonnull events, uint32_t event_count);
+API_AVAILABLE(macos(10.15))
+API_UNAVAILABLE(ios)
+API_UNAVAILABLE(tvos, watchos)
+es_return_t es_unsubscribe(es_client_t *_Nonnull client, const es_event_type_t *_Nonnull events, uint32_t event_count);
 
 /**
  * Unsubscribe from all events
@@ -55,9 +57,8 @@ es_unsubscribe(es_client_t * _Nonnull client, const es_event_type_t * _Nonnull e
  * @return es_return_t indicating success or error
  */
 OS_EXPORT
-API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, tvos, watchos)
-es_return_t
-es_unsubscribe_all(es_client_t * _Nonnull client);
+API_AVAILABLE(macos(10.15))
+API_UNAVAILABLE(ios) API_UNAVAILABLE(tvos, watchos) es_return_t es_unsubscribe_all(es_client_t *_Nonnull client);
 
 /**
  * List subscriptions
@@ -68,10 +69,11 @@ es_unsubscribe_all(es_client_t * _Nonnull client);
  * @brief The caller takes ownership of the memory at `*subscriptions` and must free it
  */
 OS_EXPORT
-API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, tvos, watchos)
+API_AVAILABLE(macos(10.15))
+API_UNAVAILABLE(ios)
+API_UNAVAILABLE(tvos, watchos)
 es_return_t
-es_subscriptions(es_client_t * _Nonnull client, size_t * _Nonnull count,
-		es_event_type_t * _Nonnull * _Nullable subscriptions);
+es_subscriptions(es_client_t *_Nonnull client, size_t *_Nonnull count, es_event_type_t *_Nonnull *_Nullable subscriptions);
 
 /**
  * Respond to an auth event that requires an es_auth_result_t response
@@ -85,12 +87,15 @@ es_subscriptions(es_client_t * _Nonnull client, size_t * _Nonnull count,
  *        while still producing a NOTIFY event normally.
  *        The cache argument is ignored for events that do not support caching.
  * @return es_respond_result_t indicating success or an error
- * @brief Some events must be responded to with `es_respond_flags_result`. Responding to flags events with this function will fail.
+ * @brief Some events must be responded to with `es_respond_flags_result`. Responding to flags events with this function will
+ * fail.
  */
 OS_EXPORT
-API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, tvos, watchos)
+API_AVAILABLE(macos(10.15))
+API_UNAVAILABLE(ios)
+API_UNAVAILABLE(tvos, watchos)
 es_respond_result_t
-es_respond_auth_result(es_client_t * _Nonnull client, const es_message_t * _Nonnull message, es_auth_result_t result, bool cache);
+es_respond_auth_result(es_client_t *_Nonnull client, const es_message_t *_Nonnull message, es_auth_result_t result, bool cache);
 
 /**
  * Respond to an auth event that requires an uint32_t flags response
@@ -118,9 +123,12 @@ es_respond_auth_result(es_client_t * _Nonnull client, const es_message_t * _Nonn
  *       that were not set in the cached authorized_flags.
  */
 OS_EXPORT
-API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, tvos, watchos)
-es_respond_result_t
-es_respond_flags_result(es_client_t * _Nonnull client, const es_message_t * _Nonnull message, uint32_t authorized_flags, bool cache);
+API_AVAILABLE(macos(10.15))
+API_UNAVAILABLE(ios)
+API_UNAVAILABLE(tvos, watchos)
+es_respond_result_t es_respond_flags_result(
+	es_client_t *_Nonnull client, const es_message_t *_Nonnull message, uint32_t authorized_flags, bool cache
+);
 
 /**
  * @brief Suppress all events from the process described by the given `audit_token`
@@ -133,9 +141,10 @@ es_respond_flags_result(es_client_t * _Nonnull client, const es_message_t * _Non
  * @see es_mute_process_events
  */
 OS_EXPORT
-API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, tvos, watchos)
-es_return_t
-es_mute_process(es_client_t * _Nonnull client, const audit_token_t * _Nonnull audit_token);
+API_AVAILABLE(macos(10.15))
+API_UNAVAILABLE(ios)
+API_UNAVAILABLE(tvos, watchos)
+es_return_t es_mute_process(es_client_t *_Nonnull client, const audit_token_t *_Nonnull audit_token);
 
 /**
  * @brief Suppress a subset of events from the process described by the given `audit_token`
@@ -150,9 +159,15 @@ es_mute_process(es_client_t * _Nonnull client, const audit_token_t * _Nonnull au
  * @see es_mute_process
  */
 OS_EXPORT
-API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, tvos, watchos)
-es_return_t
-es_mute_process_events(es_client_t * _Nonnull client, const audit_token_t * _Nonnull audit_token, const es_event_type_t * _Nonnull events, size_t event_count);
+API_AVAILABLE(macos(12.0))
+API_UNAVAILABLE(ios)
+API_UNAVAILABLE(tvos, watchos)
+es_return_t es_mute_process_events(
+	es_client_t *_Nonnull client,
+	const audit_token_t *_Nonnull audit_token,
+	const es_event_type_t *_Nonnull events,
+	size_t event_count
+);
 
 /**
  * @brief Unmute a process for all event types
@@ -165,9 +180,10 @@ es_mute_process_events(es_client_t * _Nonnull client, const audit_token_t * _Non
  * @see es_unmute_process_events
  */
 OS_EXPORT
-API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, tvos, watchos)
-es_return_t
-es_unmute_process(es_client_t * _Nonnull client, const audit_token_t *_Nonnull audit_token);
+API_AVAILABLE(macos(10.15))
+API_UNAVAILABLE(ios)
+API_UNAVAILABLE(tvos, watchos)
+es_return_t es_unmute_process(es_client_t *_Nonnull client, const audit_token_t *_Nonnull audit_token);
 
 /**
  * @brief Unmute a process for a subset of event types.
@@ -182,9 +198,15 @@ es_unmute_process(es_client_t * _Nonnull client, const audit_token_t *_Nonnull a
  * @see es_unmute_path
  */
 OS_EXPORT
-API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, tvos, watchos)
-es_return_t
-es_unmute_process_events(es_client_t * _Nonnull client, const audit_token_t * _Nonnull audit_token, const es_event_type_t * _Nonnull events, size_t event_count);
+API_AVAILABLE(macos(12.0))
+API_UNAVAILABLE(ios)
+API_UNAVAILABLE(tvos, watchos)
+es_return_t es_unmute_process_events(
+	es_client_t *_Nonnull client,
+	const audit_token_t *_Nonnull audit_token,
+	const es_event_type_t *_Nonnull events,
+	size_t event_count
+);
 
 /**
  * List muted processes
@@ -203,7 +225,7 @@ OS_EXPORT
 API_DEPRECATED("Please use es_muted_processes_events.", macos(10.15, 12.0))
 API_UNAVAILABLE(ios, tvos, watchos)
 es_return_t
-es_muted_processes(es_client_t * _Nonnull client, size_t * _Nonnull count, audit_token_t * _Nonnull * _Nullable audit_tokens);
+es_muted_processes(es_client_t *_Nonnull client, size_t *_Nonnull count, audit_token_t *_Nonnull *_Nullable audit_tokens);
 
 /**
  * @brief Retrieve a list of all muted processes.
@@ -218,9 +240,10 @@ es_muted_processes(es_client_t * _Nonnull client, size_t * _Nonnull count, audit
  * @see es_release_muted_processes
  */
 OS_EXPORT
-API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, tvos, watchos)
-es_return_t
-es_muted_processes_events(es_client_t * _Nonnull client, es_muted_processes_t * _Nullable * _Nonnull muted_processes);
+API_AVAILABLE(macos(12.0))
+API_UNAVAILABLE(ios)
+API_UNAVAILABLE(tvos, watchos)
+es_return_t es_muted_processes_events(es_client_t *_Nonnull client, es_muted_processes_t *_Nullable *_Nonnull muted_processes);
 
 /**
  * @brief Delete a set of muted processes obtained from `es_muted_processes_events`, freeing resources.
@@ -230,9 +253,11 @@ es_muted_processes_events(es_client_t * _Nonnull client, es_muted_processes_t * 
  * @see es_muted_processes_all_events
  */
 OS_EXPORT
-API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, tvos, watchos)
-void
-es_release_muted_processes(es_muted_processes_t * _Nonnull muted_processes);
+API_AVAILABLE(macos(12.0))
+API_UNAVAILABLE(ios)
+API_UNAVAILABLE(tvos, watchos)
+
+void es_release_muted_processes(es_muted_processes_t *_Nonnull muted_processes);
 
 /**
  * @brief Suppress all events matching a path.
@@ -253,13 +278,12 @@ es_release_muted_processes(es_muted_processes_t * _Nonnull muted_processes);
  *       paths you are observing.
  *
  * @see es_mute_path_events
- * @discussion When using the path types ES_MUTE_PATH_TYPE_TARGET_PREFIX and ES_MUTE_PATH_TYPE_TARGET_LITERAL Not all events are supported.
- * Furthermore the interpretation of target path is contextual.
- * For events with more than one target path (such as exchangedata) the behavior depends on the mute inversion state
- *   Under normal muting the event is suppressed only if ALL paths are muted
- *   When target path muting is inverted the event is selected if ANY target path is muted
- * For example a rename will be suppressed if and only if both the source path and destination path are muted.
- * Supported events are listed below. For each event the target path is defined as:
+ * @discussion When using the path types ES_MUTE_PATH_TYPE_TARGET_PREFIX and ES_MUTE_PATH_TYPE_TARGET_LITERAL Not all events are
+ * supported. Furthermore the interpretation of target path is contextual. For events with more than one target path (such as
+ * exchangedata) the behavior depends on the mute inversion state Under normal muting the event is suppressed only if ALL paths
+ * are muted When target path muting is inverted the event is selected if ANY target path is muted For example a rename will be
+ * suppressed if and only if both the source path and destination path are muted. Supported events are listed below. For each
+ * event the target path is defined as:
  *
  * EXEC: The file being executed
  * OPEN: The file being opened
@@ -307,9 +331,10 @@ es_release_muted_processes(es_muted_processes_t * _Nonnull muted_processes);
  * COPYFILE: The path to the source file and the path to either the new file to be created or the existing file to be overwritten
  */
 OS_EXPORT
-API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, tvos, watchos)
-es_return_t
-es_mute_path(es_client_t * _Nonnull client, const char * _Nonnull path, es_mute_path_type_t type);
+API_AVAILABLE(macos(12.0))
+API_UNAVAILABLE(ios)
+API_UNAVAILABLE(tvos, watchos)
+es_return_t es_mute_path(es_client_t *_Nonnull client, const char *_Nonnull path, es_mute_path_type_t type);
 
 /**
  * @brief Suppress a subset of events matching a path.
@@ -330,9 +355,16 @@ es_mute_path(es_client_t * _Nonnull client, const char * _Nonnull path, es_mute_
  * See es_mute_path for the list of events that support target path muting.
  */
 OS_EXPORT
-API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, tvos, watchos)
-es_return_t
-es_mute_path_events(es_client_t * _Nonnull client, const char * _Nonnull path, es_mute_path_type_t type, const es_event_type_t * _Nonnull events, size_t event_count);
+API_AVAILABLE(macos(12.0))
+API_UNAVAILABLE(ios)
+API_UNAVAILABLE(tvos, watchos)
+es_return_t es_mute_path_events(
+	es_client_t *_Nonnull client,
+	const char *_Nonnull path,
+	es_mute_path_type_t type,
+	const es_event_type_t *_Nonnull events,
+	size_t event_count
+);
 
 /**
  * Suppress events matching a path prefix
@@ -346,8 +378,7 @@ es_mute_path_events(es_client_t * _Nonnull client, const char * _Nonnull path, e
 OS_EXPORT
 API_DEPRECATED("Please use es_mute_path or es_mute_path_events.", macos(10.15, 12.0))
 API_UNAVAILABLE(ios, tvos, watchos)
-es_return_t
-es_mute_path_prefix(es_client_t * _Nonnull client, const char * _Nonnull path_prefix);
+es_return_t es_mute_path_prefix(es_client_t *_Nonnull client, const char *_Nonnull path_prefix);
 
 /**
  * Suppress events matching a path literal
@@ -364,8 +395,7 @@ es_mute_path_prefix(es_client_t * _Nonnull client, const char * _Nonnull path_pr
 OS_EXPORT
 API_DEPRECATED("Please use es_mute_path or es_mute_path_events.", macos(10.15, 12.0))
 API_UNAVAILABLE(ios, tvos, watchos)
-es_return_t
-es_mute_path_literal(es_client_t * _Nonnull client, const char * _Nonnull path_literal);
+es_return_t es_mute_path_literal(es_client_t *_Nonnull client, const char *_Nonnull path_literal);
 
 /**
  * Unmute all paths
@@ -375,9 +405,8 @@ es_mute_path_literal(es_client_t * _Nonnull client, const char * _Nonnull path_l
  * @note Only unmutes executable paths. To unmute target paths see: `es_unmute_all_target_paths`.
  */
 OS_EXPORT
-API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, tvos, watchos)
-es_return_t
-es_unmute_all_paths(es_client_t * _Nonnull client);
+API_AVAILABLE(macos(10.15))
+API_UNAVAILABLE(ios) API_UNAVAILABLE(tvos, watchos) es_return_t es_unmute_all_paths(es_client_t *_Nonnull client);
 
 /**
  * Unmute all target paths
@@ -385,9 +414,8 @@ es_unmute_all_paths(es_client_t * _Nonnull client);
  * @return es_return_t indicating success or error
  */
 OS_EXPORT
-API_AVAILABLE(macos(13.0)) API_UNAVAILABLE(ios, tvos, watchos)
-es_return_t
-es_unmute_all_target_paths(es_client_t * _Nonnull client);
+API_AVAILABLE(macos(13.0))
+API_UNAVAILABLE(ios) API_UNAVAILABLE(tvos, watchos) es_return_t es_unmute_all_target_paths(es_client_t *_Nonnull client);
 
 /**
  * @brief Unmute a path for all event types.
@@ -408,9 +436,10 @@ es_unmute_all_target_paths(es_client_t * _Nonnull client);
  * @see es_unmute_path_events
  */
 OS_EXPORT
-API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, tvos, watchos)
-es_return_t
-es_unmute_path(es_client_t * _Nonnull client, const char * _Nonnull path, es_mute_path_type_t type);
+API_AVAILABLE(macos(12.0))
+API_UNAVAILABLE(ios)
+API_UNAVAILABLE(tvos, watchos)
+es_return_t es_unmute_path(es_client_t *_Nonnull client, const char *_Nonnull path, es_mute_path_type_t type);
 
 /**
  * @brief Unmute a path for a subset of event types.
@@ -426,10 +455,16 @@ es_unmute_path(es_client_t * _Nonnull client, const char * _Nonnull path, es_mut
  * @see es_unmute_path
  */
 OS_EXPORT
-API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, tvos, watchos)
-es_return_t
-es_unmute_path_events(es_client_t * _Nonnull client, const char * _Nonnull path, es_mute_path_type_t type,
-		const es_event_type_t * _Nonnull events, size_t event_count);
+API_AVAILABLE(macos(12.0))
+API_UNAVAILABLE(ios)
+API_UNAVAILABLE(tvos, watchos)
+es_return_t es_unmute_path_events(
+	es_client_t *_Nonnull client,
+	const char *_Nonnull path,
+	es_mute_path_type_t type,
+	const es_event_type_t *_Nonnull events,
+	size_t event_count
+);
 
 /**
  * @brief Retrieve a list of all muted paths.
@@ -443,9 +478,10 @@ es_unmute_path_events(es_client_t * _Nonnull client, const char * _Nonnull path,
  * @see es_release_muted_paths
  */
 OS_EXPORT
-API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, tvos, watchos)
-es_return_t
-es_muted_paths_events(es_client_t * _Nonnull client, es_muted_paths_t * _Nonnull * _Nullable muted_paths);
+API_AVAILABLE(macos(12.0))
+API_UNAVAILABLE(ios)
+API_UNAVAILABLE(tvos, watchos)
+es_return_t es_muted_paths_events(es_client_t *_Nonnull client, es_muted_paths_t *_Nonnull *_Nullable muted_paths);
 
 /**
  * @brief Delete a set of muted paths obtained from `es_muted_paths_events`, freeing resources.
@@ -455,9 +491,8 @@ es_muted_paths_events(es_client_t * _Nonnull client, es_muted_paths_t * _Nonnull
  * @see es_muted_paths_events
  */
 OS_EXPORT
-API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, tvos, watchos)
-void
-es_release_muted_paths(es_muted_paths_t * _Nonnull muted_paths);
+API_AVAILABLE(macos(12.0))
+API_UNAVAILABLE(ios) API_UNAVAILABLE(tvos, watchos) void es_release_muted_paths(es_muted_paths_t *_Nonnull muted_paths);
 
 /*
  * @brief Invert the mute state of a given mute dimension
@@ -544,18 +579,17 @@ es_release_muted_paths(es_muted_paths_t * _Nonnull muted_paths);
  * When a new `es_client_t` is created certain paths are muted by default.
  * This is known as "the default mute set".
  * The default mute set exists to protect ES clients from deadlocks, and to prevent watchdog timeout panics.
- * Creating a new client and calling `es_invert_muting(c, ES_MUTE_INVERSION_TYPE_PATH)` will result in the default mute set being selected rather than muted.
- * In most cases this is unintended.
-   * Consider calling `es_unmute_all_paths` before inverting process path muting.
-	 * Consider calling `es_unmute_all_target_paths` before inverting target path muting.
- * Make sure the client has no auth subscriptions before doing so.
- * If desired the default mute set can be saved using `es_muted_paths_events` and then restored after inverting again.
+ * Creating a new client and calling `es_invert_muting(c, ES_MUTE_INVERSION_TYPE_PATH)` will result in the default mute set being
+ * selected rather than muted. In most cases this is unintended. Consider calling `es_unmute_all_paths` before inverting process
+ * path muting. Consider calling `es_unmute_all_target_paths` before inverting target path muting. Make sure the client has no
+ * auth subscriptions before doing so. If desired the default mute set can be saved using `es_muted_paths_events` and then
+ * restored after inverting again.
  *
  */
 OS_EXPORT
-API_AVAILABLE(macos(13.0)) API_UNAVAILABLE(ios, tvos, watchos)
-es_return_t
-es_invert_muting(es_client_t * _Nonnull client, es_mute_inversion_type_t mute_type);
+API_AVAILABLE(macos(13.0))
+API_UNAVAILABLE(ios)
+API_UNAVAILABLE(tvos, watchos) es_return_t es_invert_muting(es_client_t *_Nonnull client, es_mute_inversion_type_t mute_type);
 
 /*
  * @brief Query mute inversion state
@@ -566,9 +600,10 @@ es_invert_muting(es_client_t * _Nonnull client, es_mute_inversion_type_t mute_ty
  * @return es_mute_inverted_return_t Indicates if muting was inverted, not inverted, or if an error occurred.
  */
 OS_EXPORT
-API_AVAILABLE(macos(13.0)) API_UNAVAILABLE(ios, tvos, watchos)
-es_mute_inverted_return_t
-es_muting_inverted(es_client_t * _Nonnull client, es_mute_inversion_type_t mute_type);
+API_AVAILABLE(macos(13.0))
+API_UNAVAILABLE(ios)
+API_UNAVAILABLE(tvos, watchos)
+es_mute_inverted_return_t es_muting_inverted(es_client_t *_Nonnull client, es_mute_inversion_type_t mute_type);
 
 /**
  * Clear all cached results for all clients.
@@ -579,16 +614,16 @@ es_muting_inverted(es_client_t * _Nonnull client, es_mute_inversion_type_t mute_
  *             It is permissible to pass any valid es_client_t object created by `es_new_client`
  */
 OS_EXPORT
-API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, tvos, watchos)
-es_clear_cache_result_t
-es_clear_cache(es_client_t * _Nonnull client);
+API_AVAILABLE(macos(10.15))
+API_UNAVAILABLE(ios)
+API_UNAVAILABLE(tvos, watchos) es_clear_cache_result_t es_clear_cache(es_client_t *_Nonnull client);
 
 /**
  * es_handler_block_t The type of block that will be invoked to handled messages from the ES subsystem
  * The es_client_t is a handle to the client being sent the event. It must be passed to any "respond" functions
  * The es_message_t is the message that must be handled
  */
-typedef void (^es_handler_block_t)(es_client_t * _Nonnull, const es_message_t * _Nonnull);
+typedef void (^es_handler_block_t)(es_client_t *_Nonnull, const es_message_t *_Nonnull);
 
 /**
  * Initialise a new es_client_t and connect to the ES subsystem
@@ -632,9 +667,10 @@ typedef void (^es_handler_block_t)(es_client_t * _Nonnull, const es_message_t * 
  * @see es_unmute_path_events
  */
 OS_EXPORT
-API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, tvos, watchos)
-es_new_client_result_t
-es_new_client(es_client_t * _Nullable * _Nonnull client, es_handler_block_t _Nonnull handler);
+API_AVAILABLE(macos(10.15))
+API_UNAVAILABLE(ios)
+API_UNAVAILABLE(tvos, watchos)
+es_new_client_result_t es_new_client(es_client_t *_Nullable *_Nonnull client, es_handler_block_t _Nonnull handler);
 
 /**
  * Destroy an es_client_t, freeing resources and disconnecting from the ES subsystem
@@ -644,9 +680,8 @@ es_new_client(es_client_t * _Nullable * _Nonnull client, es_handler_block_t _Non
  * @note Must be called from the same thread that originally called `es_new_client`.
  */
 OS_EXPORT
-API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, tvos, watchos)
-es_return_t
-es_delete_client(es_client_t * _Nullable client);
+API_AVAILABLE(macos(10.15))
+API_UNAVAILABLE(ios) API_UNAVAILABLE(tvos, watchos) es_return_t es_delete_client(es_client_t *_Nullable client);
 
 __END_DECLS;
 

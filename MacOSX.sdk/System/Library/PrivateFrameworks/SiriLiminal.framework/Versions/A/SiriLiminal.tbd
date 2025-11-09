@@ -18,13 +18,14 @@ exports:
                        _kInvocationTokenHS, _kInvocationTokenJS, _kInvocationTokenMagus, 
                        _kSLAssetVersion, _kSLAudioSourceOption, _kSLInvocationType, 
                        _kSLLanguageCode, _kSLLoggingContextFramework, _kSLNumAsrRecords, 
-                       _kSLNumTokensTopPath, _kSLThresholdUsed, _kSLTrailingSilenceDuration, 
-                       _kSLVoiceTriggerEventInfo ]
+                       _kSLNumTokensTopPath, _kSLSpeakerIDThresholdUsed, _kSLThresholdUsed, 
+                       _kSLTrailingSilenceDuration, _kSLVoiceTriggerEventInfo ]
     objc-classes:    [ SLASRFeatureExtractor, SLASRFeatures, SLBertClassifier, SLBertClassifierResult, 
                        SLLRNNFeatures, SLODLDClassifierV1, SLODLDConfigDecoder, SLODLDInputContext, 
                        SLODLDInputTokenParams, SLODLDProcessor, SLODLDProcessorResult, 
                        SLProgressiveCheckerAnalyzer, SLProgressiveCheckerContext, 
                        SLProgressiveCheckerResult, SLRegexMatcher, SLSentencePieceModule, 
-                       SLUresMitigator, SLUresMitigatorConfigDecoder, SLUresMitigatorIpFeats, 
-                       SLUresMitigatorResult, SLUtils ]
+                       SLUEStatisticsCohortTypeEncoding, SLUEStatisticsModule, SLUEStatisticsModuleIpFeatures, 
+                       SLUEStatisticsModuleResult, SLUresMitigator, SLUresMitigatorConfigDecoder, 
+                       SLUresMitigatorIpFeats, SLUresMitigatorResult, SLUtils ]
 ...

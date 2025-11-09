@@ -126,7 +126,7 @@ SPATIAL_OVERLOADABLE
 SPRay3D SPRay3DTranslate(SPRay3D ray, SPSize3D offset) {
     return SPRay3DTranslate(
                             ray,
-                            (SPVector3D){ .vector = offset.vector }
+                            SPVector3DMakeWithVector(offset.vector)
                             );
 }
 
@@ -177,6 +177,8 @@ SPRay3D SPRay3DRotateByQuaternion(SPRay3D ray, simd_quatd quaternion) {
     return SPRay3DRotate(ray, r);
 }
 
+// MARK: - Transform by Pose
+
 /*!
  @abstract Returns a ray that's transformed by the specified pose.
  
@@ -198,9 +200,118 @@ SPRay3D SPRay3DApplyPose(SPRay3D ray,
                                SPPose3D pose) {
     
     ray = SPRay3DRotate(ray, pose.rotation);
-    ray = SPRay3DTranslate(ray, (SPVector3D){ .vector = pose.position.vector});
+    ray = SPRay3DTranslate(ray,
+                           SPVector3DMakeWithVector(pose.position.vector));
     
     return ray;
+}
+
+/*!
+ @abstract Returns a ray that's transformed by the inverse of the specified pose.
+ 
+ @param ray The source ray.
+ @param pose The pose that the function unapplies to the ray.
+ @returns The transformed ray.
+ @note This function rotates the ray's direction by the pose's rotation and offsets the ray's origin
+ by the pose's position.
+ */
+SPATIAL_INLINE
+SPATIAL_OVERLOADABLE
+SPRay3D SPRay3DUnapplyPose(SPRay3D ray,
+                           SPPose3D pose)
+__API_AVAILABLE(macos(14.0), ios(17.0), watchos(10.0), tvos(17.0));
+
+SPATIAL_REFINED_FOR_SWIFT
+SPATIAL_OVERLOADABLE
+SPRay3D SPRay3DUnapplyPose(SPRay3D ray,
+                           SPPose3D pose) {
+    
+    return SPRay3DMake(SPPoint3DUnapplyPose(ray.origin, pose),
+                       SPVector3DUnapplyPose(ray.direction, pose));
+    
+}
+
+// MARK: - Transform by Scaled Pose
+
+/*!
+ @abstract Returns a ray that's transformed by the specified scaled pose.
+ 
+ @param ray The source ray.
+ @param pose The scaled pose that the function applies to the ray.
+ @returns The transformed ray.
+ @note This function rotates the ray's direction by the pose's rotation and offsets the ray's origin
+ by the pose's position.
+ */
+SPATIAL_INLINE
+SPATIAL_OVERLOADABLE
+SPRay3D SPRay3DApplyScaledPose(SPRay3D ray,
+                               SPScaledPose3D pose)
+__API_AVAILABLE(macos(15.0), ios(18.0), watchos(11.0), tvos(18.0));
+
+SPATIAL_REFINED_FOR_SWIFT
+SPATIAL_OVERLOADABLE
+SPRay3D SPRay3DApplyScaledPose(SPRay3D ray,
+                               SPScaledPose3D pose) {
+    
+    ray = SPRay3DRotate(ray, pose.rotation);
+    ray.origin = SPPoint3DMakeWithVector(ray.origin.vector * pose.scale);
+    ray = SPRay3DTranslate(ray,
+                           SPVector3DMakeWithVector(pose.position.vector));
+    
+    return ray;
+}
+
+/*!
+ @abstract Returns a ray that's transformed by the inverse of the specified scaled pose.
+ 
+ @param ray The source ray.
+ @param pose The scaled pose that the function unapplies to the ray.
+ @returns The transformed ray.
+ @note This function rotates the ray's direction by the pose's rotation and offsets the ray's origin
+ by the pose's position.
+ */
+SPATIAL_INLINE
+SPATIAL_OVERLOADABLE
+SPRay3D SPRay3DUnapplyScaledPose(SPRay3D ray,
+                                 SPScaledPose3D pose)
+__API_AVAILABLE(macos(15.0), ios(18.0), watchos(11.0), tvos(18.0));
+
+SPATIAL_REFINED_FOR_SWIFT
+SPATIAL_OVERLOADABLE
+SPRay3D SPRay3DUnapplyScaledPose(SPRay3D ray,
+                                 SPScaledPose3D pose) {
+    
+    return SPRay3DMake(SPPoint3DUnapplyScaledPose(ray.origin, pose),
+                       SPVector3DUnapplyScaledPose(ray.direction, pose));
+    
+}
+
+// MARK: - Test for intersection with sphere
+
+/*!
+ @abstract Returns a Boolean value that indicates whether the ray intersects a specified sphere.
+
+ @param ray The ray.
+ @param sphereOrigin A point structure that defines the center of the sphere.
+ @param sphereRadius The radius of the sphere.
+ @returns A  Boolean value that indicates whether the ray intersects the sphere.
+ */
+SPATIAL_INLINE
+SPATIAL_OVERLOADABLE
+bool SPRay3DIntersectsSphere(SPRay3D ray, SPPoint3D sphereOrigin, double sphereRadius)
+__API_AVAILABLE(macos(15.0), ios(18.0), watchos(11.0), tvos(18.0));
+
+SPATIAL_SWIFT_NAME(Ray3D.intersects(self:sphereOrigin:sphereRadius:))
+SPATIAL_OVERLOADABLE
+bool SPRay3DIntersectsSphere(SPRay3D ray, SPPoint3D sphereOrigin, double sphereRadius) {
+    
+    simd_double3 x = ray.origin.vector - sphereOrigin.vector;
+    double y = 4.0 * simd_dot(ray.direction.vector, ray.direction.vector);
+    double z = 2.0 * simd_dot(x, ray.direction.vector);
+    z *= z;
+    double w = simd_dot(x, x) - sphereRadius * sphereRadius;
+    
+    return (z - y * w) > 0.0;
 }
 
 // MARK: - Test for intersection with rectangle
@@ -338,31 +449,6 @@ SPRay3D SPRay3DUnapplyProjectiveTransform(SPRay3D ray,
 
     return SPRay3DMake(SPPoint3DUnapplyProjectiveTransform(ray.origin, transform),
                        SPVector3DUnapplyProjectiveTransform(ray.direction, transform));
-}
-
-/*!
- @abstract Returns a ray that's transformed by the inverse of the specified pose.
- 
- @param ray The source ray.
- @param pose The pose that the function unapplies to the ray.
- @returns The transformed ray.
- @note This function rotates the ray's direction by the pose's rotation and offsets the ray's origin
- by the pose's position.
- */
-SPATIAL_INLINE
-SPATIAL_OVERLOADABLE
-SPRay3D SPRay3DUnapplyPose(SPRay3D ray,
-                           SPPose3D pose)
-__API_AVAILABLE(macos(14.0), ios(17.0), watchos(10.0), tvos(17.0));
-
-SPATIAL_REFINED_FOR_SWIFT
-SPATIAL_OVERLOADABLE
-SPRay3D SPRay3DUnapplyPose(SPRay3D ray,
-                           SPPose3D pose) {
-    
-    return SPRay3DMake(SPPoint3DUnapplyPose(ray.origin, pose),
-                       SPVector3DUnapplyPose(ray.direction, pose));
-
 }
 
 /*!

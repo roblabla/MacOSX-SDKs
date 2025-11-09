@@ -20,15 +20,15 @@ typedef NS_ENUM(NSInteger, UIListSeparatorVisibility) {
     UIListSeparatorVisibilityAutomatic,
     UIListSeparatorVisibilityVisible,
     UIListSeparatorVisibilityHidden
-};
+} API_UNAVAILABLE(watchos);
 
 /// Use the values from the edges in this constant to indicate to the consumer of a UIListSeparatorConfiguration that the value for that
 /// edge should be replaced with an appropriate inset.
-UIKIT_EXTERN const NSDirectionalEdgeInsets UIListSeparatorAutomaticInsets API_AVAILABLE(ios(14.5), watchos(7.4)) API_UNAVAILABLE(tvos);
+UIKIT_EXTERN const NSDirectionalEdgeInsets UIListSeparatorAutomaticInsets API_AVAILABLE(ios(14.5)) API_UNAVAILABLE(watchos) API_UNAVAILABLE(tvos);
 
 /// This configuration allows for fine grained control of separator appearance in a UICollectionView List section.
 /// @see UICollectionLayoutListConfiguration.separatorConfiguration
-UIKIT_EXTERN API_AVAILABLE(ios(14.5), watchos(7.4)) API_UNAVAILABLE(tvos) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(14.5)) API_UNAVAILABLE(watchos) API_UNAVAILABLE(tvos) NS_SWIFT_UI_ACTOR
 @interface UIListSeparatorConfiguration : NSObject <NSCopying, NSSecureCoding>
 
 - (instancetype)init NS_UNAVAILABLE;
@@ -57,7 +57,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(14.5), watchos(7.4)) API_UNAVAILABLE(tvos) NS_SWI
 @property (nonatomic, strong) UIColor *multipleSelectionColor;
 
 /// The visual effect to use for the separators of the item this configuration is applied to.
-@property (nonatomic, copy, nullable) UIVisualEffect *visualEffect API_AVAILABLE(ios(15.0), watchos(8.0)) API_UNAVAILABLE(tvos);
+@property (nonatomic, copy, nullable) UIVisualEffect *visualEffect API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(watchos) API_UNAVAILABLE(tvos);
 
 @end
 

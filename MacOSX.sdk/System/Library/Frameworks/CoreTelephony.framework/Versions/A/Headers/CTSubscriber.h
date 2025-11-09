@@ -39,12 +39,31 @@ CORETELEPHONY_CLASS_AVAILABLE(7_0) API_UNAVAILABLE(macCatalyst, watchos) API_UNA
  * carrierToken
  *
  * Description:
+ *     This method is only available to carrier apps with suitable entitlements.
  *     A data blob containing authorization information about the subscriber.
- *     This API is deprecated without replacement. Starting in iOS 11.3, this API returns nil.
  */
 @property (nonatomic, readonly, retain, nullable) NSData* carrierToken
-API_UNAVAILABLE(macos, watchos, tvos)
-API_DEPRECATED("Deprecated; returns nil starting in iOS 11.3.", ios(7.0, 11.0))
+API_UNAVAILABLE(macos, tvos, visionos)
+API_AVAILABLE(ios(7.0), watchos(12.0))
+;
+
+/*
+ * refreshCarrierToken
+ *
+ * Description:
+ *     This method is only available to carrier apps with suitable entitlements.
+ *     If the carrier token does exist but is declined by the server, then the token
+ *     may be updated using this method. As a general rule, retrieve the carrierToken first.
+ *     A refresh should only be done when that information is known to be incorrect.
+ *
+ *     If the refresh will be performed, this function will return YES and the
+ *     subscriberTokenRefreshed(_:) delegate method will be called.
+ *     If the request to refresh fails due to invalid argument (bad carrier descriptors or invalid service descriptor)
+ *     or subscriber does not support the authentication action, this function will return NO.
+ */
+- (BOOL)refreshCarrierToken
+API_UNAVAILABLE(macos, tvos, visionos)
+API_AVAILABLE(ios(6.0),watchos(12.0))
 ;
 
 /*
@@ -61,6 +80,18 @@ API_DEPRECATED("Deprecated; returns nil starting in iOS 11.3.", ios(7.0, 11.0))
 API_UNAVAILABLE(macos, tvos)
 API_AVAILABLE(ios(12.1))
 API_UNAVAILABLE(macCatalyst, watchos)
+;
+
+/*
+ * SIMInserted
+ *
+ * Description
+ *     Returns whether or not the SIM matching the Info.plist carrier information (MCC / MNC / GIDs) is currently inserted in the associated descriptor
+*/
+@property(readonly, getter=isSIMInserted) BOOL SIMInserted
+API_UNAVAILABLE(macos, tvos, visionos)
+API_AVAILABLE(ios(18.0), watchos(11.0))
+API_UNAVAILABLE(macCatalyst)
 ;
 
 @property (nonatomic, weak) id<CTSubscriberDelegate> delegate

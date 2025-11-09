@@ -20,7 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
  *
  * @discussion Tag reader session delegate
  */
-API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos)
+API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos)
 @protocol NFCTagReaderSessionDelegate <NSObject>
 @required
 
@@ -33,7 +33,7 @@ API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos)
  * @discussion      Gets called when a session becomes invalid.  At this point the client is expected to discard
  *                  the returned session object.
  */
-- (void)tagReaderSession:(NFCTagReaderSession *)session didInvalidateWithError:(NSError *)error API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos);
+- (void)tagReaderSession:(NFCTagReaderSession *)session didInvalidateWithError:(NSError *)error API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos);
 
 @optional
 
@@ -45,7 +45,7 @@ API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos)
  * @discussion      Gets called when the NFC reader session has become active. RF is enabled and reader is scanning for tags.
  *                  The @link readerSession:didDetectTags: @link/ will be called when a tag is detected.
  */
-- (void)tagReaderSessionDidBecomeActive:(NFCTagReaderSession *)session API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos);
+- (void)tagReaderSessionDidBecomeActive:(NFCTagReaderSession *)session API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos);
 
 /*!
  * @method tagReaderSession:didDetectTags:
@@ -55,7 +55,7 @@ API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos)
  *
  * @discussion      Gets called when the reader detects NFC tag(s) in the polling sequence.
  */
-- (void)tagReaderSession:(NFCTagReaderSession *)session didDetectTags:(NSArray<__kindof id<NFCTag>> *)tags API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos);
+- (void)tagReaderSession:(NFCTagReaderSession *)session didDetectTags:(NSArray<__kindof id<NFCTag>> *)tags API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos);
 
 @end
 
@@ -77,13 +77,13 @@ API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos)
  *   will return a tag instance conform to the @link NFCISO7816Tag @link/ protocol.
  * - Use of @link NFCPollingPACE @link/ requires "PACE" to be added into the "com.apple.developer.nfc.readersession.formats" entitlement.
  */
-API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos)
+API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos)
 @interface NFCTagReaderSession : NFCReaderSession
 
 /*!
  *  @property connectedTag  Current connected tag object; nil if no tag is connected in the session.
  */
-@property (nonatomic, readonly, retain, nullable) id<NFCTag> connectedTag API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos);
+@property (nonatomic, readonly, retain, nullable) id<NFCTag> connectedTag API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos);
 
 /*!
  * @enum NFCPollingOption
@@ -95,10 +95,10 @@ API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos)
  *                                  This is an exclusive value that cannot be combine with other NFCPollingOption values; this will override all other combinations.
  */
 typedef NS_OPTIONS(NSInteger, NFCPollingOption) {
-    NFCPollingISO14443 API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos)     = 0x1,
-    NFCPollingISO15693 API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos)     = 0x2,
-    NFCPollingISO18092 API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos)     = 0x4,
-    NFCPollingPACE API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(watchos, macos, tvos)         = 0x8,
+    NFCPollingISO14443 API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos)     = 0x1,
+    NFCPollingISO15693 API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos)     = 0x2,
+    NFCPollingISO18092 API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos)     = 0x4,
+    NFCPollingPACE API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos)         = 0x8,
 };
 
 - (instancetype)init NS_UNAVAILABLE;
@@ -115,7 +115,7 @@ typedef NS_OPTIONS(NSInteger, NFCPollingOption) {
  */
 - (instancetype)initWithPollingOption:(NFCPollingOption)pollingOption
                              delegate:(id<NFCTagReaderSessionDelegate>)delegate
-                                queue:(nullable dispatch_queue_t)queue API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos) NS_EXTENSION_UNAVAILABLE("Not available to extensions") ;
+                                queue:(nullable dispatch_queue_t)queue API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos) NS_EXTENSION_UNAVAILABLE("Not available to extensions") ;
 
 /*!
  * @method restartPolling
@@ -125,7 +125,7 @@ typedef NS_OPTIONS(NSInteger, NFCPollingOption) {
  *             and all references to these tags shall be removed to properly release the resources.  Calling this method on an invalidated session
  *             will have no effect; a new reader session is required to restart the reader.
  */
-- (void)restartPolling API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos);
+- (void)restartPolling API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos);
 
 /*!
  * @method connectToTag:completionHandler:
@@ -139,7 +139,7 @@ typedef NS_OPTIONS(NSInteger, NFCPollingOption) {
  *              Connecting to a different tag will automatically terminate the previous tag connection and put it into the halt state.  Tag stays in the
  *              connected state until another tag is connected or the polling is restarted.
  */
-- (void)connectToTag:(id<NFCTag>)tag completionHandler:(void(^)(NSError * _Nullable error))completionHandler API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos);
+- (void)connectToTag:(id<NFCTag>)tag completionHandler:(void(^)(NSError * _Nullable error))completionHandler API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos);
 @end
 
 NS_ASSUME_NONNULL_END

@@ -5,11 +5,11 @@ install-name:    '/System/Library/PrivateFrameworks/AccessibilityBundles.framewo
 current-version: 12
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-    symbols:         [ _AXBApplyBestTitleUIElementToAllSubviews, _AXBBundleManagerLoadAXBundles, 
-                       _AXBBundleManagerLoadAXBundlesWithClientToken, _AXBBundleManagerLoadRequiredAXBundlesWithClientToken, 
-                       _AXBComponentsJoinedByComma, _AXBEnumerateChildrenUsingBlock, 
-                       _AXBEnumerateSubviewsUsingBlock, _AXBFindViewControllerMatchingPredicate, 
-                       _AXBFindViewControllerWithMaxSearchCountMatchingPredicate, 
+    symbols:         [ _AXBApplyBestTitleUIElementToAllSubviews, _AXBBackgroundLabel, 
+                       _AXBBundleManagerLoadAXBundles, _AXBBundleManagerLoadAXBundlesWithClientToken, 
+                       _AXBBundleManagerLoadRequiredAXBundlesWithClientToken, _AXBComponentsJoinedByComma, 
+                       _AXBEnumerateChildrenUsingBlock, _AXBEnumerateSubviewsUsingBlock, 
+                       _AXBFindViewControllerMatchingPredicate, _AXBFindViewControllerWithMaxSearchCountMatchingPredicate, 
                        _AXBFormatFloat, _AXBFormatFloatWithPercentage, _AXBFormatInteger, 
                        _AXBFormatNumber, _AXBFormatNumberWithOptions, _AXBSafeCategoryInstall, 
                        _AXBStarRatingStringForRating, _AXBSubviewsMatchingCriteria, 
@@ -21,7 +21,8 @@ exports:
                        __AXBStringForVariables ]
     objc-classes:    [ AXBBundleManager, AXBNSBundleAccessibility, AXBSafeCategory, 
                        AXBSafeCategory__NSObject, AXBWeakReferenceContainer, __AXBNSBundleAccessibility_super ]
-    objc-ivars:      [ AXBBundleManager._blacklistedBundles, AXBBundleManager._bundlesWithoutAXBundles, 
+    objc-ivars:      [ AXBBundleManager._bundlesWithoutAXBundles, AXBBundleManager._denylistedBundles, 
+                       AXBBundleManager._eyeCandyIdentifiers, AXBBundleManager._loadedAdditions, 
                        AXBBundleManager._loadedBundlePaths, AXBBundleManager._loadedBundles, 
                        AXBBundleManager._lock, AXBBundleManager._requiredBundles, 
                        AXBWeakReferenceContainer._weakReference ]

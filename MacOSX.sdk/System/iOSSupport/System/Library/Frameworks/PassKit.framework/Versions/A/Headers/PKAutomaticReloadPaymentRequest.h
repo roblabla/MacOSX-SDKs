@@ -5,7 +5,6 @@
 //  Copyright © 2021 Apple, Inc. All rights reserved.
 //
 
-
 #ifndef PKAutomaticReloadPaymentRequest_h
 #define PKAutomaticReloadPaymentRequest_h
 
@@ -49,7 +48,6 @@ API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(watchos)
 NS_ASSUME_NONNULL_END
 
 #endif /* PKAutomaticReloadPaymentRequest_h */
-
 
 #else
 #import <TargetConditionals.h>

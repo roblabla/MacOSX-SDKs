@@ -79,6 +79,7 @@ FOUNDATION_EXTERN ARBlendShapeLocation const ARBlendShapeLocationTongueOut      
  An anchor representing a face and its geometry.
  */
 API_AVAILABLE(ios(11.0))
+NS_SWIFT_SENDABLE
 @interface ARFaceAnchor : ARAnchor AR_FACE_ANCHOR_PROTOCOLS
 
 /**

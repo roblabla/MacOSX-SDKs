@@ -12,8 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 @class VZNetworkDevice;
 @class VZVirtualMachine;
 
-/*! @abstract A class conforming to the VZVirtualMachineDelegate protocol can provide
- methods for tracking the virtual machine state.
+/*!
+ @abstract A class conforming to the VZVirtualMachineDelegate protocol can provide methods for tracking the virtual machine state.
  */
 VZ_EXPORT API_AVAILABLE(macos(11.0))
 @protocol VZVirtualMachineDelegate <NSObject>

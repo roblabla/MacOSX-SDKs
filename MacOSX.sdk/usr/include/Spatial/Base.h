@@ -6,6 +6,9 @@
 // Returns `true` if `x` and `y` are equal within `SPDefaultTolerance`
 #define _sp_almost_equal(x, y) (fabs((x) - (y)) < SPDefaultTolerance)
 
+// Returns `true` if `x` and `y` are equal within specified tolerance
+#define _sp_almost_equal_tolerance(x, y, tolerance) (fabs((x) - (y)) < tolerance)
+
 // Returns `true` if the square matrix `x` is orthogonal.
 #define _sp_is_orthogonal(x, identity) simd_almost_equal_elements(simd_mul((x), simd_transpose((x))), (identity), SPDefaultTolerance)
 
@@ -75,6 +78,18 @@
 #define _sp_simd_asin ::__tg_asin
 #else
 #define _sp_simd_asin asin
+#endif
+
+#ifdef __cplusplus
+#define _sp_simd_atan ::__tg_atan
+#else
+#define _sp_simd_atan atan
+#endif
+
+#ifdef __cplusplus
+#define _sp_simd_acos ::__tg_acos
+#else
+#define _sp_simd_acos acos
 #endif
 
 #endif /* Spatial_Base_h */

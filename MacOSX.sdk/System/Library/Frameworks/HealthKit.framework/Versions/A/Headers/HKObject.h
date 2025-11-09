@@ -2,11 +2,11 @@
 //  HKObject.h
 //  HealthKit
 //
-//  Copyright (c) 2014 Apple Inc. All rights reserved.
+//  Copyright (c) 2014-2024 Apple Inc. All rights reserved.
 //
 
-#import <HealthKit/HKDefines.h>
 #import <Foundation/Foundation.h>
+#import <HealthKit/HKDefines.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -57,5 +57,6 @@ HK_EXTERN NSString * const HKPredicateKeyPathCorrelation API_AVAILABLE(ios(8.0),
 HK_EXTERN NSString * const HKPredicateKeyPathWorkout API_AVAILABLE(ios(8.0), watchos(2.0), macCatalyst(13.0), macos(13.0));
 HK_EXTERN NSString * const HKPredicateKeyPathDevice API_AVAILABLE(ios(9.0), watchos(2.0), macCatalyst(13.0), macos(13.0));
 HK_EXTERN NSString * const HKPredicateKeyPathSourceRevision API_AVAILABLE(ios(9.0), watchos(2.0), macCatalyst(13.0), macos(13.0));
+HK_EXTERN NSString * const HKPredicateKeyPathWorkoutEffortRelationship API_AVAILABLE(ios(18.0), watchos(11.0), macCatalyst(18.0), macos(15.0), visionos(2.0));
 
 NS_ASSUME_NONNULL_END

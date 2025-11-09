@@ -2,7 +2,7 @@
 //  HKWorkout.h
 //  HealthKit
 //
-//  Copyright (c) 2014-2022 Apple Inc. All rights reserved.
+//  Copyright (c) 2014-2024 Apple Inc. All rights reserved.
 //
 
 #import <HealthKit/HKSample.h>
@@ -210,7 +210,7 @@ HK_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0), macCatalyst(13.0), macos(13.0))
  @discussion    This metric should represent the total active energy burned during the course of the workout. It should be a
                 quantity with a unit representing energy.
  */
-@property (readonly, strong, nullable) HKQuantity *totalEnergyBurned API_DEPRECATED("Use statisticsForType: passing the HKQuantityType for HKQuantityTypeIdentifierActiveEnergyBurned", ios(8.0, API_TO_BE_DEPRECATED), watchos(2.0, API_TO_BE_DEPRECATED), macCatalyst(13.0, API_TO_BE_DEPRECATED), macos(13.0, API_TO_BE_DEPRECATED));
+@property (readonly, strong, nullable) HKQuantity *totalEnergyBurned API_DEPRECATED("Use statisticsForType: passing the HKQuantityType for HKQuantityTypeIdentifierActiveEnergyBurned", ios(8.0, 18.0), watchos(2.0, 11.0), macCatalyst(13.0, 18.0), macos(13.0, 15.0));
 /*!
  @property      totalDistance
  @abstract      The total distance that was traveled during a workout
@@ -225,7 +225,7 @@ HK_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0), macCatalyst(13.0), macos(13.0))
  @discussion    This metric should represent the total count of swimming strokes accumulated during the course of the
                 workout. It should be a quantity with a unit representing count.
  */
-@property (readonly, strong, nullable) HKQuantity *totalSwimmingStrokeCount API_DEPRECATED("Use statisticsForType: passing the HKQuantityType for HKQuantityTypeIdentifierSwimmingStrokeCount", ios(10.0, API_TO_BE_DEPRECATED), watchos(3.0, API_TO_BE_DEPRECATED), macCatalyst(13.0, API_TO_BE_DEPRECATED), macos(13.0, API_TO_BE_DEPRECATED));
+@property (readonly, strong, nullable) HKQuantity *totalSwimmingStrokeCount API_DEPRECATED("Use statisticsForType: passing the HKQuantityType for HKQuantityTypeIdentifierSwimmingStrokeCount", ios(10.0, 18.0), watchos(3.0, 11.0), macCatalyst(13.0, 18.0), macos(13.0, 15.0));
 
 /*!
  @property      totalFlightsClimbed
@@ -233,7 +233,7 @@ HK_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0), macCatalyst(13.0), macos(13.0))
  @discussion    This metric should represent the total count of flights accumulated during the course of the
                 workout. It should be a quantity with a unit representing count.
  */
-@property (readonly, strong, nullable) HKQuantity *totalFlightsClimbed API_DEPRECATED("Use statisticsForType: passing the HKQuantityType for HKQuantityTypeIdentifierFlightClimbed", ios(11.0, API_TO_BE_DEPRECATED), watchos(4.0, API_TO_BE_DEPRECATED), macCatalyst(13.0, API_TO_BE_DEPRECATED), macos(13.0, API_TO_BE_DEPRECATED));
+@property (readonly, strong, nullable) HKQuantity *totalFlightsClimbed API_DEPRECATED("Use statisticsForType: passing the HKQuantityType for HKQuantityTypeIdentifierFlightClimbed", ios(11.0, 18.0), watchos(4.0, 11.0), macCatalyst(13.0, 18.0), macos(13.0, 15.0));
 
 /*!
  @property      allStatistics
@@ -406,11 +406,11 @@ HK_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0), macCatalyst(13.0), macos(13.0))
 
 // Predicate Key Paths
 HK_EXTERN NSString * const HKPredicateKeyPathWorkoutDuration API_AVAILABLE(ios(8.0), watchos(2.0), macCatalyst(13.0), macos(13.0));
-HK_EXTERN NSString * const HKPredicateKeyPathWorkoutTotalDistance API_AVAILABLE(ios(8.0), watchos(2.0), macCatalyst(13.0), macos(13.0));
-HK_EXTERN NSString * const HKPredicateKeyPathWorkoutTotalEnergyBurned API_AVAILABLE(ios(8.0), watchos(2.0), macCatalyst(13.0), macos(13.0));
+HK_EXTERN NSString * const HKPredicateKeyPathWorkoutTotalDistance API_DEPRECATED("Use predicateForWorkoutActivitiesWithOperatorType:quantityType:sumQuantity: passing the HKQuantityType for the desired distance type", ios(8.0, API_TO_BE_DEPRECATED), watchos(2.0, API_TO_BE_DEPRECATED), macCatalyst(13.0, API_TO_BE_DEPRECATED), macos(13.0, API_TO_BE_DEPRECATED));
+HK_EXTERN NSString * const HKPredicateKeyPathWorkoutTotalEnergyBurned API_DEPRECATED("Use predicateForWorkoutActivitiesWithOperatorType:quantityType:sumQuantity: passing the HKQuantityType for HKQuantityTypeIdentifierActiveEnergyBurned", ios(8.0, 18.0), watchos(2.0, 11.0), macCatalyst(13.0, 18.0), macos(13.0, 15.0));
 HK_EXTERN NSString * const HKPredicateKeyPathWorkoutType API_AVAILABLE(ios(8.0), watchos(2.0), macCatalyst(13.0), macos(13.0));
-HK_EXTERN NSString * const HKPredicateKeyPathWorkoutTotalSwimmingStrokeCount API_AVAILABLE(ios(10.0), watchos(3.0), macCatalyst(13.0), macos(13.0));
-HK_EXTERN NSString * const HKPredicateKeyPathWorkoutTotalFlightsClimbed API_AVAILABLE(ios(11.0), watchos(4.0), macCatalyst(13.0), macos(13.0));
+HK_EXTERN NSString * const HKPredicateKeyPathWorkoutTotalSwimmingStrokeCount API_DEPRECATED("Use predicateForWorkoutActivitiesWithOperatorType:quantityType:sumQuantity: passing the HKQuantityType for HKQuantityTypeIdentifierSwimmingStrokeCount", ios(10.0, 18.0), watchos(3.0, 11.0), macCatalyst(13.0, 18.0), macos(13.0, 15.0));
+HK_EXTERN NSString * const HKPredicateKeyPathWorkoutTotalFlightsClimbed API_DEPRECATED("Use predicateForWorkoutActivitiesWithOperatorType:quantityType:sumQuantity: passing the HKQuantityType for HKQuantityTypeIdentifierFlightsClimbed", ios(11.0, 18.0), watchos(4.0, 11.0), macCatalyst(13.0, 18.0), macos(13.0, 15.0));
 HK_EXTERN NSString * const HKPredicateKeyPathWorkoutSumQuantity API_AVAILABLE(ios(16.0), watchos(9.0), macCatalyst(16.0), macos(13.0));
 HK_EXTERN NSString * const HKPredicateKeyPathWorkoutMinimumQuantity API_AVAILABLE(ios(16.0), watchos(9.0), macCatalyst(16.0), macos(13.0));
 HK_EXTERN NSString * const HKPredicateKeyPathWorkoutMaximumQuantity API_AVAILABLE(ios(16.0), watchos(9.0), macCatalyst(16.0), macos(13.0));

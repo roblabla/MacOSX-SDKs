@@ -12,7 +12,7 @@
 
 NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
-UIKIT_EXTERN API_AVAILABLE(ios(9.0)) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @interface UIBarButtonItemGroup : NSObject<NSCoding>
 
 /// Create a new bar button item group with the given items. When bar button item layout is done, either the group's barButtonItems or its representativeItem is displayed (if it exists).

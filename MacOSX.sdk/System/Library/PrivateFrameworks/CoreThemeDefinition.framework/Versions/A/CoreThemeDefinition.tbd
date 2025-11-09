@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/CoreThemeDefinition.framework/Versions/A/CoreThemeDefinition'
-current-version: 582.1
+current-version: 609
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _AbortDistillKey, _CSIDataKey, _CoreThemeArtworkFormatCAAR, 
@@ -40,15 +40,16 @@ exports:
                        TDMultisizeImageSetSizeIndex, TDNamedArtworkProduction, TDNamedAssetImportInfo, 
                        TDNamedColorProduction, TDNamedColorRenditionSpec, TDNamedEffectProduction, 
                        TDNamedElement, TDNamedTextureProduction, TDNamedVectorGlyphProduction, 
-                       TDPNGAsset, TDPackedRenditionSpec, TDPacker, TDPhotoshopAsset, 
-                       TDPhotoshopElementProduction, TDPhotoshopLayer, TDPhotoshopRenditionSpec, 
-                       TDProMergeableCommonAssetStorage, TDProperty, TDRadiosityImageRenditionSpec, 
-                       TDRecognitionObjectProduction, TDRecognitionObjectRenditionSpec, 
-                       TDRenditionKeySpec, TDRenditionSpec, TDRenditionSubtype, TDRenditionType, 
-                       TDRenditionsDistiller, TDResolvedLayerReference, TDSchemaCategory, 
-                       TDSchemaDefinition, TDSchemaEffectDefinition, TDSchemaElementDefinition, 
-                       TDSchemaElementProduction, TDSchemaMaterialDefinition, TDSchemaPartDefinition, 
-                       TDSchemaRenditionSpec, TDSimpleArtworkElementProduction, TDSimpleArtworkRenditionSpec, 
+                       TDPNGAsset, TDPackedRenditionSpec, TDPacker, TDPersistentDocument, 
+                       TDPhotoshopAsset, TDPhotoshopElementProduction, TDPhotoshopLayer, 
+                       TDPhotoshopRenditionSpec, TDProMergeableCommonAssetStorage, 
+                       TDProperty, TDRadiosityImageRenditionSpec, TDRecognitionObjectProduction, 
+                       TDRecognitionObjectRenditionSpec, TDRenditionKeySpec, TDRenditionSpec, 
+                       TDRenditionSubtype, TDRenditionType, TDRenditionsDistiller, 
+                       TDResolvedLayerReference, TDSchemaCategory, TDSchemaDefinition, 
+                       TDSchemaEffectDefinition, TDSchemaElementDefinition, TDSchemaElementProduction, 
+                       TDSchemaMaterialDefinition, TDSchemaPartDefinition, TDSchemaRenditionSpec, 
+                       TDSimpleArtworkElementProduction, TDSimpleArtworkRenditionSpec, 
                        TDSlice, TDStringProperty, TDTag, TDTemplateRenderingMode, 
                        TDTextStyleProduction, TDTextStyleRenditionSpec, TDTextureAsset, 
                        TDTextureAssetInfo, TDTextureFace, TDTextureImageRenditionSpec, 

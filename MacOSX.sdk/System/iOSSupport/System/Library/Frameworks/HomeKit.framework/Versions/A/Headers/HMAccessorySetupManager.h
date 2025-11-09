@@ -18,8 +18,14 @@ NS_HEADER_AUDIT_BEGIN(nullability, sendability)
  *              of adding one or more accessories to a particular home and follow up with additional setup.
  *              These APIs do not require that the current app has home data authorization
  */
-HM_EXTERN NS_SWIFT_SENDABLE API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(watchos, tvos, visionos) API_UNAVAILABLE(macos, macCatalyst)
-    @interface HMAccessorySetupManager : NSObject
+HM_EXTERN
+NS_SWIFT_SENDABLE
+API_AVAILABLE(ios(15.0))
+API_UNAVAILABLE(watchos, tvos, visionos)
+API_UNAVAILABLE(macos, macCatalyst)
+@interface HMAccessorySetupManager : NSObject
+
+- (instancetype)init;
 
 /*!
  *  @abstract   Launch system UI to perform the process of setting up accessories with the given request.

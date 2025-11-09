@@ -89,6 +89,7 @@ RK_API metal::texture2d<half> ambient_occlusion(thread texture_data_t &data);
 RK_API metal::texture2d<half> specular(thread texture_data_t &data);
 RK_API metal::texture2d<half> clearcoat(thread texture_data_t &data);
 RK_API metal::texture2d<half> clearcoat_roughness(thread texture_data_t &data);
+RK_API metal::texture2d<half> clearcoat_normal(thread texture_data_t &data);
 RK_API metal::texture2d<half> custom(thread texture_data_t &data);
 } // namespace api
 
@@ -201,6 +202,15 @@ struct textures
     RK_INLINE metal::texture2d<half> clearcoat_roughness() const thread
     {
         return texture::api::clearcoat_roughness(data);
+    }
+
+    /// Returns any clearcoat normal texture assigned to the model.
+    ///
+    /// If no texture is assigned, returns a texture containing a blue color,
+    /// representing a default clearcoat normal.
+    RK_INLINE metal::texture2d<half> clearcoat_normal() const thread
+    {
+        return texture::api::clearcoat_normal(data);
     }
 
     /// Returns a custom texture you have previously set on the CustomMaterial. You can use

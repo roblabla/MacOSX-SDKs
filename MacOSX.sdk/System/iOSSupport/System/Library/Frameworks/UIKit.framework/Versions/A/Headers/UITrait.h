@@ -13,7 +13,7 @@
 NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 
-API_AVAILABLE(ios(17.0), tvos(17.0), watchos(10.0)) NS_SWIFT_UI_ACTOR
+API_AVAILABLE(ios(17.0), tvos(17.0)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @protocol UITraitDefinition
 
 @optional
@@ -31,63 +31,63 @@ API_AVAILABLE(ios(17.0), tvos(17.0), watchos(10.0)) NS_SWIFT_UI_ACTOR
 @property (nonatomic, class, readonly) BOOL affectsColorAppearance;
 
 @end
-typedef Class<UITraitDefinition> UITrait API_AVAILABLE(ios(17.0), tvos(17.0), watchos(10.0));
+typedef Class<UITraitDefinition> UITrait API_AVAILABLE(ios(17.0), tvos(17.0)) API_UNAVAILABLE(watchos);
 
-API_AVAILABLE(ios(17.0), tvos(17.0), watchos(10.0)) NS_SWIFT_UI_ACTOR
+API_AVAILABLE(ios(17.0), tvos(17.0)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @protocol UICGFloatTraitDefinition <UITraitDefinition>
 /// The default value for this trait in a trait collection when no value has been set.
 @property (nonatomic, class, readonly) CGFloat defaultValue;
 @end
-typedef Class<UICGFloatTraitDefinition> UICGFloatTrait API_AVAILABLE(ios(17.0), tvos(17.0), watchos(10.0));
+typedef Class<UICGFloatTraitDefinition> UICGFloatTrait API_AVAILABLE(ios(17.0), tvos(17.0)) API_UNAVAILABLE(watchos);
 
-API_AVAILABLE(ios(17.0), tvos(17.0), watchos(10.0)) NS_SWIFT_UI_ACTOR
+API_AVAILABLE(ios(17.0), tvos(17.0)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @protocol UINSIntegerTraitDefinition <UITraitDefinition>
 /// The default value for this trait in a trait collection when no value has been set.
 @property (nonatomic, class, readonly) NSInteger defaultValue;
 @end
-typedef Class<UINSIntegerTraitDefinition> UINSIntegerTrait API_AVAILABLE(ios(17.0), tvos(17.0), watchos(10.0));
+typedef Class<UINSIntegerTraitDefinition> UINSIntegerTrait API_AVAILABLE(ios(17.0), tvos(17.0)) API_UNAVAILABLE(watchos);
 
-API_AVAILABLE(ios(17.0), tvos(17.0), watchos(10.0)) NS_SWIFT_UI_ACTOR
+API_AVAILABLE(ios(17.0), tvos(17.0)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @protocol UIObjectTraitDefinition <UITraitDefinition>
 /// The default value for this trait in a trait collection when no value has been set.
 @property (nonatomic, class, readonly, nullable) __kindof id<NSObject> defaultValue;
 @end
-typedef Class<UIObjectTraitDefinition> UIObjectTrait API_AVAILABLE(ios(17.0), tvos(17.0), watchos(10.0));
+typedef Class<UIObjectTraitDefinition> UIObjectTrait API_AVAILABLE(ios(17.0), tvos(17.0)) API_UNAVAILABLE(watchos);
 
 
-UIKIT_EXTERN API_AVAILABLE(ios(17.0), tvos(17.0), watchos(10.0))
+UIKIT_EXTERN API_AVAILABLE(ios(17.0), tvos(17.0)) API_UNAVAILABLE(watchos)
 @interface UITraitUserInterfaceIdiom : NSObject <UINSIntegerTraitDefinition> // UIUserInterfaceIdiom
 @end
 
-UIKIT_EXTERN API_AVAILABLE(ios(17.0), tvos(17.0), watchos(10.0))
+UIKIT_EXTERN API_AVAILABLE(ios(17.0), tvos(17.0)) API_UNAVAILABLE(watchos)
 @interface UITraitUserInterfaceStyle : NSObject <UINSIntegerTraitDefinition> // UIUserInterfaceStyle
 @end
 
-UIKIT_EXTERN API_AVAILABLE(ios(17.0), tvos(17.0), watchos(10.0))
+UIKIT_EXTERN API_AVAILABLE(ios(17.0), tvos(17.0)) API_UNAVAILABLE(watchos)
 @interface UITraitLayoutDirection : NSObject <UINSIntegerTraitDefinition> // UITraitEnvironmentLayoutDirection
 @end
 
-UIKIT_EXTERN API_AVAILABLE(ios(17.0), tvos(17.0), watchos(10.0))
+UIKIT_EXTERN API_AVAILABLE(ios(17.0), tvos(17.0)) API_UNAVAILABLE(watchos)
 @interface UITraitDisplayScale : NSObject <UICGFloatTraitDefinition> // CGFloat
 @end
 
-UIKIT_EXTERN API_AVAILABLE(ios(17.0), tvos(17.0), watchos(10.0))
+UIKIT_EXTERN API_AVAILABLE(ios(17.0), tvos(17.0)) API_UNAVAILABLE(watchos)
 @interface UITraitHorizontalSizeClass : NSObject <UINSIntegerTraitDefinition> // UIUserInterfaceSizeClass
 @end
 
-UIKIT_EXTERN API_AVAILABLE(ios(17.0), tvos(17.0), watchos(10.0))
+UIKIT_EXTERN API_AVAILABLE(ios(17.0), tvos(17.0)) API_UNAVAILABLE(watchos)
 @interface UITraitVerticalSizeClass : NSObject <UINSIntegerTraitDefinition> // UIUserInterfaceSizeClass
 @end
 
-UIKIT_EXTERN API_AVAILABLE(ios(17.0), tvos(17.0), watchos(10.0))
+UIKIT_EXTERN API_AVAILABLE(ios(17.0), tvos(17.0)) API_UNAVAILABLE(watchos)
 @interface UITraitForceTouchCapability : NSObject <UINSIntegerTraitDefinition> // UIForceTouchCapability
 @end
 
-UIKIT_EXTERN API_AVAILABLE(ios(17.0), tvos(17.0), watchos(10.0))
+UIKIT_EXTERN API_AVAILABLE(ios(17.0), tvos(17.0)) API_UNAVAILABLE(watchos)
 @interface UITraitPreferredContentSizeCategory : NSObject <UIObjectTraitDefinition> // UIContentSizeCategory (NSString *)
 @end
 
-UIKIT_EXTERN API_AVAILABLE(ios(17.0), tvos(17.0), watchos(10.0))
+UIKIT_EXTERN API_AVAILABLE(ios(17.0), tvos(17.0)) API_UNAVAILABLE(watchos)
 @interface UITraitDisplayGamut : NSObject <UINSIntegerTraitDefinition> // UIDisplayGamut
 @end
 
@@ -99,27 +99,27 @@ UIKIT_EXTERN API_AVAILABLE(ios(17.0), tvos(17.0)) API_UNAVAILABLE(watchos)
 @interface UITraitUserInterfaceLevel : NSObject <UINSIntegerTraitDefinition> // UIUserInterfaceLevel
 @end
 
-UIKIT_EXTERN API_AVAILABLE(ios(17.0), tvos(17.0), watchos(10.0))
+UIKIT_EXTERN API_AVAILABLE(ios(17.0), tvos(17.0)) API_UNAVAILABLE(watchos)
 @interface UITraitLegibilityWeight : NSObject <UINSIntegerTraitDefinition> // UILegibilityWeight
 @end
 
-UIKIT_EXTERN API_AVAILABLE(ios(17.0), tvos(17.0), watchos(10.0))
+UIKIT_EXTERN API_AVAILABLE(ios(17.0), tvos(17.0)) API_UNAVAILABLE(watchos)
 @interface UITraitActiveAppearance : NSObject <UINSIntegerTraitDefinition> // UIUserInterfaceActiveAppearance
 @end
 
-UIKIT_EXTERN API_AVAILABLE(ios(17.0), tvos(17.0), watchos(10.0))
+UIKIT_EXTERN API_AVAILABLE(ios(17.0), tvos(17.0)) API_UNAVAILABLE(watchos)
 @interface UITraitToolbarItemPresentationSize : NSObject <UINSIntegerTraitDefinition> // UINSToolbarItemPresentationSize
 @end
 
-UIKIT_EXTERN API_AVAILABLE(ios(17.0), tvos(17.0), watchos(10.0))
+UIKIT_EXTERN API_AVAILABLE(ios(17.0), tvos(17.0)) API_UNAVAILABLE(watchos)
 @interface UITraitImageDynamicRange : NSObject <UINSIntegerTraitDefinition> // UIImageDynamicRange
 @end
 
-UIKIT_EXTERN API_AVAILABLE(ios(17.0), tvos(17.0), watchos(10.0))
+UIKIT_EXTERN API_AVAILABLE(ios(17.0), tvos(17.0)) API_UNAVAILABLE(watchos)
 @interface UITraitTypesettingLanguage : NSObject <UIObjectTraitDefinition> // NSString
 @end
 
-UIKIT_EXTERN API_AVAILABLE(ios(17.0), tvos(17.0), visionos(1.0)) NS_REFINED_FOR_SWIFT
+UIKIT_EXTERN API_AVAILABLE(ios(17.0), tvos(17.0), visionos(1.0)) API_UNAVAILABLE(watchos) NS_REFINED_FOR_SWIFT
 @interface UITraitSceneCaptureState : NSObject <UINSIntegerTraitDefinition> // UISceneCaptureState
 @end
 

@@ -207,6 +207,7 @@ struct  ifreq {
 #define IFRTYPE_SUBFAMILY_MANAGEMENT    12
 		} ifru_type;
 		u_int32_t ifru_functional_type;
+		u_int32_t ifru_peer_egress_functional_type;
 #define IFRTYPE_FUNCTIONAL_UNKNOWN              0
 #define IFRTYPE_FUNCTIONAL_LOOPBACK             1
 #define IFRTYPE_FUNCTIONAL_WIRED                2
@@ -255,6 +256,8 @@ struct  ifreq {
 		} ifru_radio_details;
 		uint64_t ifru_creation_generation_id;
 		u_int8_t ifru_is_directlink;
+		u_int8_t ifru_is_vpn;
+		uint32_t ifru_delay_wake_pkt_event;
 	} ifr_ifru;
 #define ifr_addr        ifr_ifru.ifru_addr      /* address */
 #define ifr_dstaddr     ifr_ifru.ifru_dstaddr   /* other end of p-to-p link */
@@ -287,6 +290,7 @@ struct  ifreq {
 #define ifr_constrained   ifr_ifru.ifru_constrained
 #define ifr_type        ifr_ifru.ifru_type      /* interface type */
 #define ifr_functional_type     ifr_ifru.ifru_functional_type
+#define ifr_peer_egress_functional_type ifr_ifru.ifru_peer_egress_functional_type
 #define ifr_2kcl        ifr_ifru.ifru_2kcl
 #define ifr_start_delay_qlen    ifr_ifru.ifru_start_delay.qlen
 #define ifr_start_delay_timeout ifr_ifru.ifru_start_delay.timeout
@@ -307,6 +311,8 @@ struct  ifreq {
 #define ifr_radio_details       ifr_ifru.ifru_radio_details
 #define ifr_creation_generation_id       ifr_ifru.ifru_creation_generation_id
 #define ifr_is_directlink       ifr_ifru.ifru_is_directlink
+#define ifr_is_vpn              ifr_ifru.ifru_is_vpn
+#define ifr_delay_wake_pkt_event         ifr_ifru.ifru_delay_wake_pkt_event
 };
 
 #define _SIZEOF_ADDR_IFREQ(ifr) \
@@ -629,7 +635,6 @@ struct if_protolistreq {
 };
 
 
-
 /*
  * Entitlement to send/receive data on an INTCOPROC interface
  */
@@ -646,6 +651,11 @@ struct if_protolistreq {
  * Entitlement to make change to a management interface
  */
 #define MANAGEMENT_CONTROL_ENTITLEMENT "com.apple.private.network.management.control"
+
+/*
+ * Entitlement to allow socket access on ultra-constrained interfaces
+ */
+#define ULTRA_CONSTRAINED_ENTITLEMENT "com.apple.private.network.ultraconstrained"
 
 #endif /* (_POSIX_C_SOURCE && !_DARWIN_C_SOURCE) */
 

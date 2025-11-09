@@ -60,6 +60,12 @@ CB_EXTERN NSString * const CBUUIDCharacteristicAggregateFormatString;
 CB_EXTERN NSString * const CBUUIDCharacteristicValidRangeString;
 
 /*!
+ *  @const CBUUIDCharacteristicObservationScheduleString
+ *  @discussion Data representing the observation schedule for a characteristic.
+ */
+CB_EXTERN NSString * const CBUUIDCharacteristicObservationScheduleString;
+
+/*!
  *  @const CBUUIDL2CAPPSMCharacteristicString
  *  @discussion The PSM (a little endian uint16_t) of an L2CAP Channel associated with the GATT service
  *				containing this characteristic.  Servers can publish this characteristic with the UUID

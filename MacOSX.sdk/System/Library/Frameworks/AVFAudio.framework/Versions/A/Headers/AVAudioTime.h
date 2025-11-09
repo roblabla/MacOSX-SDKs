@@ -30,7 +30,7 @@ Rationale for using host time:
 	least not be cluttered by ugly multiplications and divisions by the host clock frequency.
 */
 
-API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0))
+NS_SWIFT_SENDABLE API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0))
 @interface AVAudioTime : NSObject {
 @private
 	AudioTimeStamp _ats;

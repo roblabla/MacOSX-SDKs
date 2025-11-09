@@ -14,7 +14,7 @@
 /// @discussion For custom text view implementations that implement drag and drop functionality, use this animator providing either your own UITextCursorView
 ///             implementation or a concrete implementation to indicate at which point in your document the dropped item will be inserted. Using this animator provides
 ///             you with all of the default system animations for how the text cursor would behave.
-UIKIT_EXTERN API_AVAILABLE(ios(17.4)) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(17.4)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @interface UITextCursorDropPositionAnimator : NSObject
 
 /// The cursor view to be animated.

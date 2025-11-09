@@ -1,6 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.10 (swiftlang-5.10.0.12.5 clang-1500.3.9.1.1)
-// swift-module-flags: -target x86_64-apple-ios17.5-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature ExtensionMacros -enable-bare-slash-regex -user-module-version 21.40.2 -module-name DeveloperToolsSupport
+// swift-compiler-version: Apple Swift version 6.0 effective-5.10 (swiftlang-6.0.0.7.24 clang-1600.0.25.1)
+// swift-module-flags: -target x86_64-apple-ios18.0-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature ExtensionMacros -enable-bare-slash-regex -user-module-version 22.0.17 -module-name DeveloperToolsSupport
+import CoreGraphics
 @_exported import DeveloperToolsSupport
 import Foundation
 import Swift
@@ -12,12 +13,12 @@ public protocol PreviewRegistry {
   static var fileID: Swift.String { get }
   static var line: Swift.Int { get }
   static var column: Swift.Int { get }
-  static func makePreview() throws -> DeveloperToolsSupport.Preview
+  @_Concurrency.MainActor static func makePreview() throws -> DeveloperToolsSupport.Preview
+  @available(*, deprecated, message: "This method is not called. Please implement makePreview() instead.")
   static var preview: DeveloperToolsSupport.Preview { get }
 }
 @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 extension DeveloperToolsSupport.PreviewRegistry {
-  public static func makePreview() throws -> DeveloperToolsSupport.Preview
   public static var preview: DeveloperToolsSupport.Preview {
     get
   }
@@ -93,11 +94,42 @@ public struct PreviewCamera : Swift.Sendable {
   public static func buildPartialBlock(accumulated: [DeveloperToolsSupport.PreviewCamera], next: [DeveloperToolsSupport.PreviewCamera]) -> [DeveloperToolsSupport.PreviewCamera]
   public static func buildArray(_ components: [[DeveloperToolsSupport.PreviewCamera]]) -> [DeveloperToolsSupport.PreviewCamera]
 }
-@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
-public struct Preview {
+@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+@_functionBuilder public struct PreviewBodyBuilder<Content> {
+  public static func buildBlock(_ content: Content) -> Content
+  @available(*, unavailable, message: "This builder requires exactly one content expression")
+  public static func buildBlock(_: Content...) -> Content
+  @available(*, unavailable, message: "This builder does not support control flow statements")
+  public static func buildOptional(_: Content?) -> Content
+  @available(*, unavailable, message: "This builder does not support control flow statements")
+  public static func buildEither(first: Content) -> Content
+  @available(*, unavailable, message: "This builder does not support control flow statements")
+  public static func buildEither(second: Content) -> Content
+  @available(*, unavailable, message: "This builder does not support control flow statements")
+  public static func buildLimitedAvailability(_: Content) -> Content
 }
 @available(*, unavailable)
-extension DeveloperToolsSupport.Preview : Swift.Sendable {
+extension DeveloperToolsSupport.PreviewBodyBuilder : Swift.Sendable {
+}
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, visionOS 1.0, *)
+@_functionBuilder public struct PreviewMacroBodyBuilder<Content> {
+  public static func buildBlock(_: Content) -> Content
+  @available(*, unavailable, message: "This builder requires exactly one content expression")
+  public static func buildBlock(_: Content...) -> Content
+  @available(*, unavailable, message: "This builder does not support control flow statements")
+  public static func buildOptional(_: Content?) -> Content
+  @available(*, unavailable, message: "This builder does not support control flow statements")
+  public static func buildEither(first: Content) -> Content
+  @available(*, unavailable, message: "This builder does not support control flow statements")
+  public static func buildEither(second: Content) -> Content
+  @available(*, unavailable, message: "This builder does not support control flow statements")
+  public static func buildLimitedAvailability(_: Content) -> Content
+}
+@available(*, unavailable)
+extension DeveloperToolsSupport.PreviewMacroBodyBuilder : Swift.Sendable {
+}
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
+@_Concurrency.MainActor public struct Preview {
 }
 @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 extension DeveloperToolsSupport.Preview {
@@ -107,40 +139,39 @@ extension DeveloperToolsSupport.Preview {
 }
 @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 extension DeveloperToolsSupport.PreviewTrait where T == DeveloperToolsSupport.Preview.ViewTraits {
-  public static var defaultLayout: DeveloperToolsSupport.PreviewTrait<DeveloperToolsSupport.Preview.ViewTraits> {
+  @_Concurrency.MainActor public static var defaultLayout: DeveloperToolsSupport.PreviewTrait<DeveloperToolsSupport.Preview.ViewTraits> {
     get
   }
-  public static var sizeThatFitsLayout: DeveloperToolsSupport.PreviewTrait<DeveloperToolsSupport.Preview.ViewTraits> {
+  @_Concurrency.MainActor public static var sizeThatFitsLayout: DeveloperToolsSupport.PreviewTrait<DeveloperToolsSupport.Preview.ViewTraits> {
     get
   }
-  public static func fixedLayout(width: CoreFoundation.CGFloat, height: CoreFoundation.CGFloat) -> DeveloperToolsSupport.PreviewTrait<T>
+  @_Concurrency.MainActor public static func fixedLayout(width: CoreFoundation.CGFloat, height: CoreFoundation.CGFloat) -> DeveloperToolsSupport.PreviewTrait<T>
   @available(visionOS 1.0, *)
   @available(iOS, unavailable)
   @available(macOS, unavailable)
   @available(watchOS, unavailable)
   @available(tvOS, unavailable)
-  public static func fixedLayout(width: CoreFoundation.CGFloat, height: CoreFoundation.CGFloat, depth: CoreFoundation.CGFloat) -> DeveloperToolsSupport.PreviewTrait<T>
+  @_Concurrency.MainActor public static func fixedLayout(width: CoreFoundation.CGFloat, height: CoreFoundation.CGFloat, depth: CoreFoundation.CGFloat) -> DeveloperToolsSupport.PreviewTrait<T>
 }
 @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 extension DeveloperToolsSupport.PreviewTrait where T == DeveloperToolsSupport.Preview.ViewTraits {
-  public static var portrait: DeveloperToolsSupport.PreviewTrait<DeveloperToolsSupport.Preview.ViewTraits> {
+  @_Concurrency.MainActor public static var portrait: DeveloperToolsSupport.PreviewTrait<DeveloperToolsSupport.Preview.ViewTraits> {
     get
   }
-  public static var landscapeLeft: DeveloperToolsSupport.PreviewTrait<DeveloperToolsSupport.Preview.ViewTraits> {
+  @_Concurrency.MainActor public static var landscapeLeft: DeveloperToolsSupport.PreviewTrait<DeveloperToolsSupport.Preview.ViewTraits> {
     get
   }
-  public static var landscapeRight: DeveloperToolsSupport.PreviewTrait<DeveloperToolsSupport.Preview.ViewTraits> {
+  @_Concurrency.MainActor public static var landscapeRight: DeveloperToolsSupport.PreviewTrait<DeveloperToolsSupport.Preview.ViewTraits> {
     get
   }
-  public static var portraitUpsideDown: DeveloperToolsSupport.PreviewTrait<DeveloperToolsSupport.Preview.ViewTraits> {
+  @_Concurrency.MainActor public static var portraitUpsideDown: DeveloperToolsSupport.PreviewTrait<DeveloperToolsSupport.Preview.ViewTraits> {
     get
   }
 }
 @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
-public struct PreviewTrait<T> {
-}
-@available(*, unavailable)
-extension DeveloperToolsSupport.PreviewTrait : Swift.Sendable {
+@_Concurrency.MainActor public struct PreviewTrait<T> {
+  @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+  @_Concurrency.MainActor public init(_ traits: DeveloperToolsSupport.PreviewTrait<T>...)
 }
 @available(iOS 13.0, macCatalyst 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 @_originallyDefinedIn(module: "SwiftUI", iOS 17.0)
@@ -159,3 +190,7 @@ public enum PreviewLayout : Swift.Sendable {
   @available(tvOS, unavailable)
   case fixed3D(width: CoreFoundation.CGFloat, height: CoreFoundation.CGFloat, depth: CoreFoundation.CGFloat)
 }
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
+extension DeveloperToolsSupport.Preview : Swift.Sendable {}
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
+extension DeveloperToolsSupport.PreviewTrait : Swift.Sendable {}

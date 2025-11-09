@@ -53,7 +53,7 @@ typedef CF_ENUM(OSStatus, CMTagCollectionError)
 	kCMTagCollectionError_InvalidTagCollectionDataVersion 	= -15747,
 	kCMTagCollectionError_ExhaustedBufferSize 				= -15748,
 	kCMTagCollectionError_NotYetImplemented					= -15749
-} CF_SWIFT_UNAVAILABLE("Unavailable in Swift") API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0));
+} CF_SWIFT_UNAVAILABLE("Unavailable in Swift") API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0), visionos(1.0));
 
 #pragma mark - CMTagCollectionRef
 
@@ -61,9 +61,9 @@ typedef CF_ENUM(OSStatus, CMTagCollectionError)
 	@typedef CMTagCollectionRef
 	@discussion	A reference to a CMTagCollection, a CF object that adheres to retain/release semantics. This value type represents an unordered collection of zero or more CMTags. This type is roughly analogous to CFSetRef in that it is unordered and has operations for Boolean set math. It is however optimized for the storage of CMTag structures.
 */
-typedef const struct CM_BRIDGED_TYPE(id) OpaqueCMTagCollection * CMTagCollectionRef CF_REFINED_FOR_SWIFT API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0));
+typedef const struct CM_BRIDGED_TYPE(id) OpaqueCMTagCollection * CMTagCollectionRef CF_REFINED_FOR_SWIFT API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0), visionos(1.0));
 
-typedef struct CM_BRIDGED_TYPE(id) OpaqueCMTagCollection * CMMutableTagCollectionRef CF_SWIFT_UNAVAILABLE("Unavailable in Swift") API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0));
+typedef struct CM_BRIDGED_TYPE(id) OpaqueCMTagCollection * CMMutableTagCollectionRef CF_SWIFT_UNAVAILABLE("Unavailable in Swift") API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0), visionos(1.0));
 
 /*!
 	@function	CMTagCollectionGetTypeID
@@ -71,7 +71,7 @@ typedef struct CM_BRIDGED_TYPE(id) OpaqueCMTagCollection * CMMutableTagCollectio
 	@discussion	Obtains the CoreFoundation type ID for the CMTagCollection type.
 	@result	Returns the CFTypeID corresponding to CMTagCollection.
 */
-CM_EXPORT CFTypeID CMTagCollectionGetTypeID(void) CF_SWIFT_UNAVAILABLE("Unavailable in Swift") API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0));
+CM_EXPORT CFTypeID CMTagCollectionGetTypeID(void) CF_SWIFT_UNAVAILABLE("Unavailable in Swift") API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0), visionos(1.0));
 
 #pragma mark - Tag collection related struct constants
 
@@ -81,7 +81,7 @@ CM_EXPORT CFTypeID CMTagCollectionGetTypeID(void) CF_SWIFT_UNAVAILABLE("Unavaila
 	@param tag The CMTag to evaluate.
 	@param context A valid pointer or NULL used by the callback implementation.
 */
-typedef void (*CMTagCollectionApplierFunction)(CMTag tag, void * CM_NULLABLE context) CF_SWIFT_UNAVAILABLE("Unavailable in Swift") API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0));
+typedef void (*CMTagCollectionApplierFunction)(CMTag tag, void * CM_NULLABLE context) CF_SWIFT_UNAVAILABLE("Unavailable in Swift") API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0), visionos(1.0));
 
 /*!
 	@typedef CMTagCollectionTagFilterFunction
@@ -90,7 +90,7 @@ typedef void (*CMTagCollectionApplierFunction)(CMTag tag, void * CM_NULLABLE con
 	@param context A valid pointer or NULL used by the callback implementation.
 	@result A Boolean indicating if the tag passed the callback test.
 */
-typedef Boolean (*CMTagCollectionTagFilterFunction)(CMTag tag, void * CM_NULLABLE context) CF_SWIFT_UNAVAILABLE("Unavailable in Swift") API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0));
+typedef Boolean (*CMTagCollectionTagFilterFunction)(CMTag tag, void * CM_NULLABLE context) CF_SWIFT_UNAVAILABLE("Unavailable in Swift") API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0), visionos(1.0));
 
 #pragma mark - Tag collection creation
 
@@ -108,7 +108,7 @@ CM_EXPORT OSStatus CMTagCollectionCreate( CFAllocatorRef CM_NULLABLE allocator,
 				const CMTag * CM_NULLABLE tags,
 				CMItemCount tagCount,
 				CM_RETURNS_RETAINED_PARAMETER CMTagCollectionRef CM_NULLABLE * CM_NONNULL newCollectionOut ) CF_REFINED_FOR_SWIFT
-				API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0));
+				API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0), visionos(1.0));
 
 /*!
 	@function	CMTagCollectionCreateMutable
@@ -123,7 +123,7 @@ CM_EXPORT OSStatus CMTagCollectionCreate( CFAllocatorRef CM_NULLABLE allocator,
 CM_EXPORT OSStatus CMTagCollectionCreateMutable( CFAllocatorRef CM_NULLABLE allocator,
 				CFIndex capacity,
 				CM_RETURNS_RETAINED_PARAMETER CMMutableTagCollectionRef CM_NULLABLE * CM_NONNULL newMutableCollectionOut ) CF_REFINED_FOR_SWIFT
-				API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0));
+				API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0), visionos(1.0));
 /*!
 	@function	CMTagCollectionCreateCopy
 	@abstract   Creates a duplicate CMTagCollectionRef.
@@ -136,7 +136,7 @@ CM_EXPORT OSStatus CMTagCollectionCreateMutable( CFAllocatorRef CM_NULLABLE allo
 CM_EXPORT OSStatus CMTagCollectionCreateCopy( CMTagCollectionRef CM_NONNULL tagCollection,
 				CFAllocatorRef CM_NULLABLE allocator,
 				CM_RETURNS_RETAINED_PARAMETER CMTagCollectionRef CM_NULLABLE * CM_NONNULL newCollectionCopyOut ) CF_REFINED_FOR_SWIFT
-				API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0));
+				API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0), visionos(1.0));
 
 /*!
 	@function	CMTagCollectionCreateMutableCopy
@@ -150,7 +150,7 @@ CM_EXPORT OSStatus CMTagCollectionCreateCopy( CMTagCollectionRef CM_NONNULL tagC
 CM_EXPORT OSStatus CMTagCollectionCreateMutableCopy( CMTagCollectionRef CM_NONNULL tagCollection,
 				CFAllocatorRef CM_NULLABLE allocator,
 				CM_RETURNS_RETAINED_PARAMETER CMMutableTagCollectionRef CM_NULLABLE * CM_NONNULL newMutableCollectionCopyOut ) CF_REFINED_FOR_SWIFT
-				API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0));
+				API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0), visionos(1.0));
 
 #pragma mark - Tag collection accessors
 
@@ -165,7 +165,7 @@ CM_EXPORT OSStatus CMTagCollectionCreateMutableCopy( CMTagCollectionRef CM_NONNU
 CM_EXPORT CM_RETURNS_RETAINED CFStringRef CM_NULLABLE CMTagCollectionCopyDescription(
 			CFAllocatorRef CM_NULLABLE allocator,
 			CMTagCollectionRef CM_NULLABLE tagCollection) CF_REFINED_FOR_SWIFT
-			API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0));
+			API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0), visionos(1.0));
 
 /*!
 	@function	CMTagCollectionGetCount
@@ -173,7 +173,7 @@ CM_EXPORT CM_RETURNS_RETAINED CFStringRef CM_NULLABLE CMTagCollectionCopyDescrip
 	@param tagCollection	CMTagCollectionRef to evaluate for the tag count.
 	@result     CMItemCount holding the count.
 */
-CM_EXPORT CMItemCount CMTagCollectionGetCount( CMTagCollectionRef CM_NONNULL tagCollection ) CF_REFINED_FOR_SWIFT API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0));
+CM_EXPORT CMItemCount CMTagCollectionGetCount( CMTagCollectionRef CM_NONNULL tagCollection ) CF_REFINED_FOR_SWIFT API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0), visionos(1.0));
 
 /*!
 	@function	CMTagCollectionContainsTag
@@ -182,7 +182,7 @@ CM_EXPORT CMItemCount CMTagCollectionGetCount( CMTagCollectionRef CM_NONNULL tag
 	@param tag	CMTag to find.
 	@result     Returns true if the indicated CMTag is contained within the CMTagCollection, false otherwise.
 */
-CM_EXPORT Boolean CMTagCollectionContainsTag( CMTagCollectionRef CM_NONNULL tagCollection, CMTag tag ) CF_REFINED_FOR_SWIFT API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0));
+CM_EXPORT Boolean CMTagCollectionContainsTag( CMTagCollectionRef CM_NONNULL tagCollection, CMTag tag ) CF_REFINED_FOR_SWIFT API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0), visionos(1.0));
 
 /*!
 	@function	CMTagCollectionContainsTagsOfCollection
@@ -194,7 +194,7 @@ CM_EXPORT Boolean CMTagCollectionContainsTag( CMTagCollectionRef CM_NONNULL tagC
 */
 CM_EXPORT Boolean CMTagCollectionContainsTagsOfCollection( CMTagCollectionRef CM_NONNULL tagCollection,
 					CMTagCollectionRef CM_NONNULL containedTagCollection ) CF_REFINED_FOR_SWIFT
-					API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0));
+					API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0), visionos(1.0));
 
 /*!
 	@function	CMTagCollectionContainsSpecifiedTags
@@ -207,7 +207,7 @@ CM_EXPORT Boolean CMTagCollectionContainsTagsOfCollection( CMTagCollectionRef CM
 */
 CM_EXPORT Boolean CMTagCollectionContainsSpecifiedTags( CMTagCollectionRef CM_NONNULL tagCollection,
 					const CMTag * CM_NONNULL containedTags, CMItemCount containedTagCount ) CF_REFINED_FOR_SWIFT
-					API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0));
+					API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0), visionos(1.0));
 
 /*!
 	@function	CMTagCollectionContainsCategory
@@ -216,7 +216,7 @@ CM_EXPORT Boolean CMTagCollectionContainsSpecifiedTags( CMTagCollectionRef CM_NO
 	@param category	CMTagCategory whose value should be checked for containment in tagCollection.
 	@result     Returns true if tagCollection contains at least one CMTag with the specified category, false otherwise.
 */
-CM_EXPORT Boolean CMTagCollectionContainsCategory( CMTagCollectionRef CM_NONNULL tagCollection, CMTagCategory category ) CF_REFINED_FOR_SWIFT API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0));
+CM_EXPORT Boolean CMTagCollectionContainsCategory( CMTagCollectionRef CM_NONNULL tagCollection, CMTagCategory category ) CF_REFINED_FOR_SWIFT API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0), visionos(1.0));
 
 /*!
  @function CMTagCollectionGetCountOfCategory
@@ -226,7 +226,7 @@ CM_EXPORT Boolean CMTagCollectionContainsCategory( CMTagCollectionRef CM_NONNULL
  @param category CMTagCategory to check for.
  @result Returns the count of tags having the specified category.
 */
-CM_EXPORT CMItemCount CMTagCollectionGetCountOfCategory( CMTagCollectionRef CM_NONNULL tagCollection, CMTagCategory category ) CF_REFINED_FOR_SWIFT API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0));
+CM_EXPORT CMItemCount CMTagCollectionGetCountOfCategory( CMTagCollectionRef CM_NONNULL tagCollection, CMTagCategory category ) CF_REFINED_FOR_SWIFT API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0), visionos(1.0));
 
 /*!
  @function CMTagCollectionGetTags
@@ -238,7 +238,7 @@ CM_EXPORT CMItemCount CMTagCollectionGetCountOfCategory( CMTagCollectionRef CM_N
  @param numberOfTagsCopied The address of a CMItemCount that is filled with the number of tags retrieved, may be NULL.
  @result OSStatus with an error or noErr if successful.
 */
-CM_EXPORT OSStatus CMTagCollectionGetTags( CMTagCollectionRef CM_NONNULL tagCollection, CMTag * CM_NONNULL tagBuffer, CMItemCount tagBufferCount, CMItemCount * CM_NULLABLE numberOfTagsCopied ) CF_REFINED_FOR_SWIFT API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0));
+CM_EXPORT OSStatus CMTagCollectionGetTags( CMTagCollectionRef CM_NONNULL tagCollection, CMTag * CM_NONNULL tagBuffer, CMItemCount tagBufferCount, CMItemCount * CM_NULLABLE numberOfTagsCopied ) CF_REFINED_FOR_SWIFT API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0), visionos(1.0));
 
 /*!
  @function CMTagCollectionGetTagsWithCategory
@@ -251,7 +251,7 @@ CM_EXPORT OSStatus CMTagCollectionGetTags( CMTagCollectionRef CM_NONNULL tagColl
  @param numberOfTagsCopied The address of a CMItemCount that is filled with the number of tags retrieved, may be NULL.
  @result OSStatus with an error or noErr if successful.
 */
-CM_EXPORT OSStatus CMTagCollectionGetTagsWithCategory( CMTagCollectionRef CM_NONNULL tagCollection, CMTagCategory category, CMTag * CM_NONNULL tagBuffer, CMItemCount tagBufferCount, CMItemCount * CM_NULLABLE numberOfTagsCopied ) CF_REFINED_FOR_SWIFT API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0));
+CM_EXPORT OSStatus CMTagCollectionGetTagsWithCategory( CMTagCollectionRef CM_NONNULL tagCollection, CMTagCategory category, CMTag * CM_NONNULL tagBuffer, CMItemCount tagBufferCount, CMItemCount * CM_NULLABLE numberOfTagsCopied ) CF_REFINED_FOR_SWIFT API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0), visionos(1.0));
 
 /*!
  @function CMTagCollectionCountTagsWithFilterFunction
@@ -262,7 +262,7 @@ CM_EXPORT OSStatus CMTagCollectionGetTagsWithCategory( CMTagCollectionRef CM_NON
  @param context A void * or NULL to pass to applier.
  @result CMItemCount indicating the number of CMTags satisfying 'filterApplier'.
 */
-CM_EXPORT CMItemCount CMTagCollectionCountTagsWithFilterFunction( CMTagCollectionRef CM_NONNULL tagCollection, CMTagCollectionTagFilterFunction CM_NONNULL filterApplier, void * CM_NULLABLE context ) CF_SWIFT_UNAVAILABLE("Unavailable in Swift") API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0));
+CM_EXPORT CMItemCount CMTagCollectionCountTagsWithFilterFunction( CMTagCollectionRef CM_NONNULL tagCollection, CMTagCollectionTagFilterFunction CM_NONNULL filterApplier, void * CM_NULLABLE context ) CF_SWIFT_UNAVAILABLE("Unavailable in Swift") API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0), visionos(1.0));
 
 /*!
  @function CMTagCollectionGetTagsWithFilterFunction
@@ -276,7 +276,7 @@ CM_EXPORT CMItemCount CMTagCollectionCountTagsWithFilterFunction( CMTagCollectio
  @param context A void * or NULL to pass to filter.
  @result OSStatus with an error or noErr if successful.
 */
-CM_EXPORT OSStatus CMTagCollectionGetTagsWithFilterFunction( CMTagCollectionRef CM_NONNULL tagCollection, CMTag * CM_NONNULL tagBuffer, CMItemCount tagBufferCount, CMItemCount * CM_NULLABLE numberOfTagsCopied, CMTagCollectionTagFilterFunction CM_NONNULL filter, void * CM_NULLABLE context ) CF_SWIFT_UNAVAILABLE("Unavailable in Swift") API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0));
+CM_EXPORT OSStatus CMTagCollectionGetTagsWithFilterFunction( CMTagCollectionRef CM_NONNULL tagCollection, CMTag * CM_NONNULL tagBuffer, CMItemCount tagBufferCount, CMItemCount * CM_NULLABLE numberOfTagsCopied, CMTagCollectionTagFilterFunction CM_NONNULL filter, void * CM_NULLABLE context ) CF_SWIFT_UNAVAILABLE("Unavailable in Swift") API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0), visionos(1.0));
 
 /*!
  @function CMTagCollectionCopyTagsOfCategories
@@ -295,7 +295,7 @@ CM_EXPORT OSStatus CMTagCollectionCopyTagsOfCategories(
 				const CMTagCategory * CM_NONNULL categories,
 				CMItemCount categoriesCount,
 				CM_RETURNS_RETAINED_PARAMETER CMTagCollectionRef CM_NULLABLE * CM_NONNULL collectionWithTagsOfCategories ) CF_SWIFT_UNAVAILABLE("Unavailable in Swift")
-				API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0));
+				API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0), visionos(1.0));
 
 #pragma mark - Tag collection iteration
 
@@ -310,7 +310,7 @@ CM_EXPORT OSStatus CMTagCollectionCopyTagsOfCategories(
 CM_EXPORT void CMTagCollectionApply( CMTagCollectionRef CM_NONNULL tagCollection,
 				CMTagCollectionApplierFunction CM_NONNULL applier,
 				void * CM_NULLABLE context ) CF_SWIFT_UNAVAILABLE("Unavailable in Swift")
-				API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0));
+				API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0), visionos(1.0));
 
 /*!
  @function CMTagCollectionApplyUntil
@@ -324,7 +324,7 @@ CM_EXPORT void CMTagCollectionApply( CMTagCollectionRef CM_NONNULL tagCollection
 CM_EXPORT CMTag CMTagCollectionApplyUntil( CMTagCollectionRef CM_NONNULL tagCollection,
 				CMTagCollectionTagFilterFunction CM_NONNULL applier,
 				void * CM_NULLABLE context ) CF_SWIFT_UNAVAILABLE("Unavailable in Swift")
-				API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0));
+				API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0), visionos(1.0));
 
 #pragma mark - Tag collection set like operations
 
@@ -335,7 +335,7 @@ CM_EXPORT CMTag CMTagCollectionApplyUntil( CMTagCollectionRef CM_NONNULL tagColl
  @param tagCollection CMTagCollectionRef to iterate.
  @result True if there are no tags, false otherwise.
 */
-CM_EXPORT Boolean CMTagCollectionIsEmpty( CMTagCollectionRef CM_NONNULL tagCollection ) CF_SWIFT_UNAVAILABLE("Use isEmpty") API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0));
+CM_EXPORT Boolean CMTagCollectionIsEmpty( CMTagCollectionRef CM_NONNULL tagCollection ) CF_SWIFT_UNAVAILABLE("Use isEmpty") API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0), visionos(1.0));
 
 /*!
  @function CMTagCollectionCreateIntersection
@@ -350,7 +350,7 @@ CM_EXPORT OSStatus CMTagCollectionCreateIntersection(
 			CMTagCollectionRef CM_NULLABLE tagCollection1,
 			CMTagCollectionRef CM_NULLABLE tagCollection2,
 			CM_RETURNS_RETAINED_PARAMETER CMTagCollectionRef CM_NULLABLE * CM_NONNULL tagCollectionOut ) CF_SWIFT_UNAVAILABLE("Unavailable in Swift")
-			API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0));
+			API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0), visionos(1.0));
 
 /*!
  @function CMTagCollectionCreateUnion
@@ -365,7 +365,7 @@ CM_EXPORT OSStatus CMTagCollectionCreateUnion(
 			CMTagCollectionRef CM_NULLABLE tagCollection1,
 			CMTagCollectionRef CM_NULLABLE tagCollection2,
 			CM_RETURNS_RETAINED_PARAMETER CMTagCollectionRef CM_NULLABLE * CM_NONNULL tagCollectionOut ) CF_SWIFT_UNAVAILABLE("Unavailable in Swift")
-			API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0));
+			API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0), visionos(1.0));
 
 /*!
  @function CMTagCollectionCreateDifference
@@ -381,7 +381,7 @@ OSStatus CMTagCollectionCreateDifference(
 			CMTagCollectionRef CM_NULLABLE tagCollectionMinuend,
 			CMTagCollectionRef CM_NULLABLE tagCollectionSubtrahend,
 			CM_RETURNS_RETAINED_PARAMETER CMTagCollectionRef CM_NULLABLE * CM_NONNULL tagCollectionOut ) CF_SWIFT_UNAVAILABLE("Unavailable in Swift")
-			API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0));
+			API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0), visionos(1.0));
 
 /*!
  @function CMTagCollectionCreateExclusiveOr
@@ -396,7 +396,7 @@ CM_EXPORT OSStatus CMTagCollectionCreateExclusiveOr(
 			CMTagCollectionRef CM_NULLABLE tagCollection1,
 			CMTagCollectionRef CM_NULLABLE tagCollection2,
 			CM_RETURNS_RETAINED_PARAMETER CMTagCollectionRef CM_NULLABLE * CM_NONNULL tagCollectionOut ) CF_SWIFT_UNAVAILABLE("Unavailable in Swift")
-			API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0));
+			API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0), visionos(1.0));
 
 #pragma mark - CMMutableTagCollection routines
 
@@ -411,7 +411,7 @@ CM_EXPORT OSStatus CMTagCollectionCreateExclusiveOr(
 CM_EXPORT OSStatus CMTagCollectionAddTag(
 				CMMutableTagCollectionRef CM_NONNULL tagCollection,
 				CMTag tagToAdd ) CF_SWIFT_UNAVAILABLE("Unavailable in Swift")
-				API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0));
+				API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0), visionos(1.0));
 
 /*!
  @function CMTagCollectionRemoveTag
@@ -424,7 +424,7 @@ CM_EXPORT OSStatus CMTagCollectionAddTag(
 CM_EXPORT OSStatus CMTagCollectionRemoveTag(
 				CMMutableTagCollectionRef CM_NONNULL tagCollection,
 				CMTag tagToRemove ) CF_SWIFT_UNAVAILABLE("Unavailable in Swift")
-				API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0));
+				API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0), visionos(1.0));
 
 /*!
  @function CMTagCollectionRemoveAllTags
@@ -433,7 +433,7 @@ CM_EXPORT OSStatus CMTagCollectionRemoveTag(
  @param tagCollection CMMutableTagCollectionRef from which to remove all tags.
  @result OSStatus indicating if the operation succeeded.
 */
-CM_EXPORT OSStatus CMTagCollectionRemoveAllTags( CMMutableTagCollectionRef CM_NONNULL tagCollection ) CF_SWIFT_UNAVAILABLE("Unavailable in Swift") API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0));
+CM_EXPORT OSStatus CMTagCollectionRemoveAllTags( CMMutableTagCollectionRef CM_NONNULL tagCollection ) CF_SWIFT_UNAVAILABLE("Unavailable in Swift") API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0), visionos(1.0));
 
 /*!
  @function CMTagCollectionRemoveAllTagsOfCategory
@@ -446,7 +446,7 @@ CM_EXPORT OSStatus CMTagCollectionRemoveAllTags( CMMutableTagCollectionRef CM_NO
 CM_EXPORT OSStatus CMTagCollectionRemoveAllTagsOfCategory(
 				CMMutableTagCollectionRef CM_NONNULL tagCollection,
 				CMTagCategory category ) CF_SWIFT_UNAVAILABLE("Unavailable in Swift")
-				API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0));
+				API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0), visionos(1.0));
 
 /*!
  @function CMTagCollectionAddTagsFromCollection
@@ -458,7 +458,7 @@ CM_EXPORT OSStatus CMTagCollectionRemoveAllTagsOfCategory(
 CM_EXPORT OSStatus CMTagCollectionAddTagsFromCollection(
 				CMMutableTagCollectionRef CM_NONNULL tagCollection,
 				CMTagCollectionRef CM_NONNULL collectionWithTagsToAdd ) CF_SWIFT_UNAVAILABLE("Unavailable in Swift")
-				API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0));
+				API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0), visionos(1.0));
 
 /*!
  @function CMTagCollectionAddTagsFromArray
@@ -472,7 +472,7 @@ CM_EXPORT OSStatus CMTagCollectionAddTagsFromArray(
 				CMMutableTagCollectionRef CM_NONNULL tagCollection,
 				CMTag * CM_NONNULL tags,
 				CMItemCount tagCount ) CF_SWIFT_UNAVAILABLE("Unavailable in Swift")
-				API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0));
+				API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0), visionos(1.0));
 
 #pragma mark - CMTagCollection dictionary serialization
 
@@ -487,7 +487,7 @@ CM_EXPORT OSStatus CMTagCollectionAddTagsFromArray(
 CM_EXPORT CM_RETURNS_RETAINED CFDictionaryRef CM_NULLABLE CMTagCollectionCopyAsDictionary(
 				CMTagCollectionRef CM_NONNULL tagCollection,
 				CFAllocatorRef CM_NULLABLE  allocator ) CF_SWIFT_UNAVAILABLE("Unavailable in Swift")
-				API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0));
+				API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0), visionos(1.0));
 
 /*!
 	@function	CMTagCollectionCreateFromDictionary
@@ -502,7 +502,7 @@ CM_EXPORT OSStatus CMTagCollectionCreateFromDictionary(
 				CFDictionaryRef CM_NONNULL dict,
 				CFAllocatorRef CM_NULLABLE allocator,
 				CM_RETURNS_RETAINED_PARAMETER CMTagCollectionRef CM_NULLABLE * CM_NONNULL newCollectionOut ) CF_SWIFT_UNAVAILABLE("Unavailable in Swift")
-				API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0));
+				API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0), visionos(1.0));
 
 #pragma mark - CMTagCollection data serialization
 
@@ -521,7 +521,7 @@ CM_EXPORT OSStatus CMTagCollectionCreateFromDictionary(
 CM_EXPORT CM_RETURNS_RETAINED CFDataRef CM_NULLABLE CMTagCollectionCopyAsData(
 				CMTagCollectionRef CM_NONNULL tagCollection,
 				CFAllocatorRef CM_NULLABLE  allocator ) CF_SWIFT_UNAVAILABLE("Unavailable in Swift")
-				API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0));
+				API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0), visionos(1.0));
 
 /*!
 	@function	CMTagCollectionCreateFromData
@@ -537,7 +537,7 @@ CM_EXPORT OSStatus CMTagCollectionCreateFromData(
 				CFDataRef CM_NONNULL data,
 				CFAllocatorRef CM_NULLABLE allocator,
 				CM_RETURNS_RETAINED_PARAMETER CMTagCollectionRef CM_NULLABLE * CM_NONNULL newCollectionOut) CF_SWIFT_UNAVAILABLE("Unavailable in Swift")
-				API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0));
+				API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0), visionos(1.0));
 
 #pragma mark - Serialization Dictionary Keys
 
@@ -545,7 +545,7 @@ CM_EXPORT OSStatus CMTagCollectionCreateFromData(
 	@constant kCMTagCollectionTagsArrayKey
 	@discussion CFDictionary key for a CFArray of serialized CMTag dictionaries of a CMTagCollection as used with CMTagCollectionCopyAsDictionary
  */
-CM_EXPORT const CFStringRef kCMTagCollectionTagsArrayKey CF_SWIFT_UNAVAILABLE("Unavailable in Swift") API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0));
+CM_EXPORT const CFStringRef kCMTagCollectionTagsArrayKey CF_SWIFT_UNAVAILABLE("Unavailable in Swift") API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0), visionos(1.0));
 
 #pragma pack(pop)
 

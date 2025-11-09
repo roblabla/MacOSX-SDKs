@@ -13,7 +13,7 @@ NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 UIKIT_SWIFT_FORWARD_DECLARE(@class NSUserActivity)
 
-API_AVAILABLE(ios(8.0)) NS_SWIFT_UI_ACTOR
+API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @protocol UIUserActivityRestoring <NSObject>
 
 - (void)restoreUserActivityState:(NSUserActivity *)userActivity;

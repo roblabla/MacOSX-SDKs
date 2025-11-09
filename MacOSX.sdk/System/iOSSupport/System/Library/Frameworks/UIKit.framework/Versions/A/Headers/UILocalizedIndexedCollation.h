@@ -11,7 +11,7 @@
 
 NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
-UIKIT_EXTERN API_AVAILABLE(ios(3.0)) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(3.0)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @interface UILocalizedIndexedCollation : NSObject
 
 + (instancetype)currentCollation;

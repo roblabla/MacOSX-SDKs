@@ -155,14 +155,8 @@ typedef union {
 /* H12 e-Core (ARMv8 architecture) */
 #define CPU_PART_THUNDER            0x13
 
-/*
- * Whilst this is a Thunder-based SoC, it
- * hasn't been released and should remain
- * hidden in 2020 seeds.
- */
 /* M10 e-Core (ARMv8 architecture) */
 #define CPU_PART_THUNDER_M10        0x26
-
 
 /* H13 e-Core */
 #define CPU_PART_ICESTORM           0x20
@@ -176,7 +170,6 @@ typedef union {
 /* H13G p-Core */
 #define CPU_PART_FIRESTORM_TONGA    0x23
 
-
 /* H13J e-Core */
 #define CPU_PART_ICESTORM_JADE_CHOP    0x24
 #define CPU_PART_ICESTORM_JADE_DIE     0x28
@@ -185,23 +178,17 @@ typedef union {
 #define CPU_PART_FIRESTORM_JADE_CHOP   0x25
 #define CPU_PART_FIRESTORM_JADE_DIE    0x29
 
-
-
 /* H14 e-Core */
 #define CPU_PART_BLIZZARD           0x30
 
 /* H14 p-Core */
 #define CPU_PART_AVALANCHE          0x31
 
-
-
 /* H14G e-Core */
 #define CPU_PART_BLIZZARD_STATEN    0x32
 
 /* H14G p-Core */
 #define CPU_PART_AVALANCHE_STATEN   0x33
-
-
 
 /* H14S e-Core */
 #define CPU_PART_BLIZZARD_RHODES_CHOP   0x34
@@ -215,14 +202,11 @@ typedef union {
 /* H14C p-Core */
 #define CPU_PART_AVALANCHE_RHODES_DIE   0x39
 
-
-
 /* H15 e-Core */
 #define CPU_PART_SAWTOOTH           0x40
 
 /* H15 p-Core */
 #define CPU_PART_EVEREST            0x41
-
 
 /* H15 Ibiza e-Core */
 #define CPU_PART_ECORE_IBIZA        0x42
@@ -230,15 +214,11 @@ typedef union {
 /* H15 Ibiza p-Core */
 #define CPU_PART_PCORE_IBIZA        0x43
 
-
-
 /* H15 Palma e-Core. */
 #define CPU_PART_ECORE_PALMA 0x48
 
 /* H15 Palma p-Core. */
 #define CPU_PART_PCORE_PALMA 0x49
-
-
 
 /* H15 Coll e-Core. */
 #define CPU_PART_ECORE_COLL    0x50
@@ -246,20 +226,14 @@ typedef union {
 /* H15 Coll p-Core. */
 #define CPU_PART_PCORE_COLL    0x51
 
-
-
 /* H15 Lobos e-Core. */
 #define CPU_PART_ECORE_LOBOS 0x44
 
 /* H15 Lobos p-Core. */
 #define CPU_PART_PCORE_LOBOS 0x45
 
-
 /* M11 e-Core */
 #define CPU_PART_SAWTOOTH_M11       0x46
-
-
-
 
 /* H16G Donan e-Core. */
 #define CPU_PART_ECORE_DONAN 0x52
@@ -268,6 +242,20 @@ typedef union {
 #define CPU_PART_PCORE_DONAN 0x53
 
 
+
+/* H17P Tahiti e-Core. */
+#define CPU_PART_ECORE_TAHITI 0x60
+
+/* H17P Tahiti p-Core. */
+#define CPU_PART_PCORE_TAHITI 0x61
+
+
+
+/* H17A Tupai e-Core. */
+#define CPU_PART_ECORE_TUPAI 0x6a
+
+/* H17A Tupai p-Core. */
+#define CPU_PART_PCORE_TUPAI 0x6b
 
 
 

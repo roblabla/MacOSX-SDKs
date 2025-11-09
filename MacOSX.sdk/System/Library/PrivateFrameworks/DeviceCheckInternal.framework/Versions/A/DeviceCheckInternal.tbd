@@ -6,6 +6,7 @@ install-name:    '/System/Library/PrivateFrameworks/DeviceCheckInternal.framewor
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
-    objc-classes:    [ DCBAASigningController, DCCryptoProxyImpl, DCDDeviceMetadata, 
-                       DCXPCActivityController ]
+    symbols:         [ _DCBAASignerErrorDomain, _DCErrorDomain, _kBGSRefreshTaskID ]
+    objc-classes:    [ DCBAASigningController, DCBGSTask, DCBGSTaskController, DCContext, 
+                       DCCryptoProxyImpl, DCDDeviceMetadata, DCTaskCreator ]
 ...

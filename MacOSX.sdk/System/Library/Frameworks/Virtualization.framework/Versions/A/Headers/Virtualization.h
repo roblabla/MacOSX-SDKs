@@ -2,7 +2,7 @@
 //  Virtualization.h
 //  Virtualization
 //
-//  Copyright © 2019-2023 Apple Inc. All rights reserved.
+//  Copyright © 2019-2024 Apple Inc. All rights reserved.
 //
 
 #import <Virtualization/VZAudioDeviceConfiguration.h>
@@ -76,9 +76,15 @@
 #import <Virtualization/VZSocketDevice.h>
 #import <Virtualization/VZSocketDeviceConfiguration.h>
 #import <Virtualization/VZSpiceAgentPortAttachment.h>
+#import <Virtualization/VZStorageDevice.h>
 #import <Virtualization/VZStorageDeviceAttachment.h>
 #import <Virtualization/VZStorageDeviceConfiguration.h>
+#import <Virtualization/VZUSBController.h>
+#import <Virtualization/VZUSBControllerConfiguration.h>
+#import <Virtualization/VZUSBDevice.h>
+#import <Virtualization/VZUSBDeviceConfiguration.h>
 #import <Virtualization/VZUSBKeyboardConfiguration.h>
+#import <Virtualization/VZUSBMassStorageDevice.h>
 #import <Virtualization/VZUSBMassStorageDeviceConfiguration.h>
 #import <Virtualization/VZUSBScreenCoordinatePointingDeviceConfiguration.h>
 #import <Virtualization/VZVirtioBlockDeviceConfiguration.h>
@@ -112,3 +118,5 @@
 #import <Virtualization/VZVirtualMachineDelegate.h>
 #import <Virtualization/VZVirtualMachineStartOptions.h>
 #import <Virtualization/VZVirtualMachineView.h>
+#import <Virtualization/VZXHCIController.h>
+#import <Virtualization/VZXHCIControllerConfiguration.h>

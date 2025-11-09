@@ -53,7 +53,7 @@ extern "C" {
  JSContextGroup's run loop once it has been created.
 @result The created JSContextGroup.
 */
-JS_EXPORT JSContextGroupRef JSContextGroupCreate(void) JSC_API_AVAILABLE(macos(10.6), ios(7.0));
+JS_EXPORT JSContextGroupRef JSContextGroupCreate(void) API_AVAILABLE(macos(10.6), ios(7.0));
 
 /*!
 @function
@@ -61,14 +61,14 @@ JS_EXPORT JSContextGroupRef JSContextGroupCreate(void) JSC_API_AVAILABLE(macos(1
 @param group The JSContextGroup to retain.
 @result A JSContextGroup that is the same as group.
 */
-JS_EXPORT JSContextGroupRef JSContextGroupRetain(JSContextGroupRef group) JSC_API_AVAILABLE(macos(10.6), ios(7.0));
+JS_EXPORT JSContextGroupRef JSContextGroupRetain(JSContextGroupRef group) API_AVAILABLE(macos(10.6), ios(7.0));
 
 /*!
 @function
 @abstract Releases a JavaScript context group.
 @param group The JSContextGroup to release.
 */
-JS_EXPORT void JSContextGroupRelease(JSContextGroupRef group) JSC_API_AVAILABLE(macos(10.6), ios(7.0));
+JS_EXPORT void JSContextGroupRelease(JSContextGroupRef group) API_AVAILABLE(macos(10.6), ios(7.0));
 
 /*!
 @function
@@ -83,7 +83,7 @@ JS_EXPORT void JSContextGroupRelease(JSContextGroupRef group) JSC_API_AVAILABLE(
  NULL to use the default object class.
 @result A JSGlobalContext with a global object of class globalObjectClass.
 */
-JS_EXPORT JSGlobalContextRef JSGlobalContextCreate(JSClassRef globalObjectClass) JSC_API_AVAILABLE(macos(10.5), ios(7.0));
+JS_EXPORT JSGlobalContextRef JSGlobalContextCreate(JSClassRef globalObjectClass) API_AVAILABLE(macos(10.5), ios(7.0));
 
 /*!
 @function
@@ -97,7 +97,7 @@ JS_EXPORT JSGlobalContextRef JSGlobalContextCreate(JSClassRef globalObjectClass)
 @result A JSGlobalContext with a global object of class globalObjectClass and a context
  group equal to group.
 */
-JS_EXPORT JSGlobalContextRef JSGlobalContextCreateInGroup(JSContextGroupRef group, JSClassRef globalObjectClass) JSC_API_AVAILABLE(macos(10.6), ios(7.0));
+JS_EXPORT JSGlobalContextRef JSGlobalContextCreateInGroup(JSContextGroupRef group, JSClassRef globalObjectClass) API_AVAILABLE(macos(10.6), ios(7.0));
 
 /*!
 @function
@@ -128,7 +128,7 @@ JS_EXPORT JSObjectRef JSContextGetGlobalObject(JSContextRef ctx);
 @param ctx The JSContext whose group you want to get.
 @result ctx's group.
 */
-JS_EXPORT JSContextGroupRef JSContextGetGroup(JSContextRef ctx) JSC_API_AVAILABLE(macos(10.6), ios(7.0));
+JS_EXPORT JSContextGroupRef JSContextGetGroup(JSContextRef ctx) API_AVAILABLE(macos(10.6), ios(7.0));
 
 /*!
 @function
@@ -136,7 +136,7 @@ JS_EXPORT JSContextGroupRef JSContextGetGroup(JSContextRef ctx) JSC_API_AVAILABL
 @param ctx The JSContext whose global context you want to get.
 @result ctx's global context.
 */
-JS_EXPORT JSGlobalContextRef JSContextGetGlobalContext(JSContextRef ctx) JSC_API_AVAILABLE(macos(10.7), ios(7.0));
+JS_EXPORT JSGlobalContextRef JSContextGetGlobalContext(JSContextRef ctx) API_AVAILABLE(macos(10.7), ios(7.0));
 
 /*!
 @function
@@ -145,7 +145,7 @@ JS_EXPORT JSGlobalContextRef JSContextGetGlobalContext(JSContextRef ctx) JSC_API
 @result The name for ctx.
 @discussion A JSGlobalContext's name is exposed when inspecting the context to make it easier to identify the context you would like to inspect.
 */
-JS_EXPORT JSStringRef JSGlobalContextCopyName(JSGlobalContextRef ctx) JSC_API_AVAILABLE(macos(10.10), ios(8.0));
+JS_EXPORT JSStringRef JSGlobalContextCopyName(JSGlobalContextRef ctx) API_AVAILABLE(macos(10.10), ios(8.0));
 
 /*!
 @function
@@ -153,7 +153,7 @@ JS_EXPORT JSStringRef JSGlobalContextCopyName(JSGlobalContextRef ctx) JSC_API_AV
 @param ctx The JSGlobalContext that you want to name.
 @param name The name to set on the context.
 */
-JS_EXPORT void JSGlobalContextSetName(JSGlobalContextRef ctx, JSStringRef name) JSC_API_AVAILABLE(macos(10.10), ios(8.0));
+JS_EXPORT void JSGlobalContextSetName(JSGlobalContextRef ctx, JSStringRef name) API_AVAILABLE(macos(10.10), ios(8.0));
 
 /*!
 @function
@@ -161,7 +161,7 @@ JS_EXPORT void JSGlobalContextSetName(JSGlobalContextRef ctx, JSStringRef name) 
 @param ctx The JSGlobalContext that you want to change the inspectability of.
 @result Whether the context is inspectable in Web Inspector.
 */
-JS_EXPORT bool JSGlobalContextIsInspectable(JSGlobalContextRef ctx) JSC_API_AVAILABLE(macos(13.3), ios(16.4));
+JS_EXPORT bool JSGlobalContextIsInspectable(JSGlobalContextRef ctx) API_AVAILABLE(macos(13.3), ios(16.4));
 
 /*!
 @function
@@ -169,7 +169,7 @@ JS_EXPORT bool JSGlobalContextIsInspectable(JSGlobalContextRef ctx) JSC_API_AVAI
 @param ctx The JSGlobalContext that you want to change the inspectability of.
 @param inspectable YES to allow Web Inspector to connect to the context, otherwise NO.
 */
-JS_EXPORT void JSGlobalContextSetInspectable(JSGlobalContextRef ctx, bool inspectable) JSC_API_AVAILABLE(macos(13.3), ios(16.4));
+JS_EXPORT void JSGlobalContextSetInspectable(JSGlobalContextRef ctx, bool inspectable) API_AVAILABLE(macos(13.3), ios(16.4));
 
 #ifdef __cplusplus
 }

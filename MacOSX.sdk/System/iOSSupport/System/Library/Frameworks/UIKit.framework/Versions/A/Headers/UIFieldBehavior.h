@@ -14,7 +14,7 @@ NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 @class UIRegion;
 
-UIKIT_EXTERN API_AVAILABLE(ios(9.0)) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @interface UIFieldBehavior : UIDynamicBehavior
 
 - (instancetype)init NS_UNAVAILABLE; // Use one of the convenience initializers

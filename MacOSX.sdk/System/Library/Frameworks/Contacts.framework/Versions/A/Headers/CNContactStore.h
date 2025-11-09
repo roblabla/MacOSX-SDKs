@@ -42,7 +42,9 @@ typedef NS_ENUM(NSInteger, CNAuthorizationStatus)
     /*! The user explicitly denied access to contact data for the application. */
     CNAuthorizationStatusDenied,
     /*! The application is authorized to access contact data. */
-    CNAuthorizationStatusAuthorized
+    CNAuthorizationStatusAuthorized,
+    /*! This application is authorized to access some contact data. */
+    CNAuthorizationStatusLimited NS_ENUM_AVAILABLE_IOS(18_0),
 } NS_ENUM_AVAILABLE(10_11, 9_0);
 
 

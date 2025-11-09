@@ -21,7 +21,7 @@ API_AVAILABLE(visionos(1.0)) API_UNAVAILABLE(ios, watchos, tvos, macos)
 // session is only non-nil for scene types that might have implicitly
 // associated audio objects. It is recommended clients access and
 // interact with this audio session not from a main actor.
-- (void)getDefaultAudioSessionWithCompletionHandler:(void(^_Nonnull)(AVAudioSession * _Nullable))handler NS_SWIFT_ASYNC_NAME(getter:defaultAudioSession()) NS_SWIFT_NONISOLATED;
+- (void)getDefaultAudioSessionWithCompletionHandler:(void(^_Nonnull)(AVAudioSession * _Nullable))handler NS_SWIFT_ASYNC_NAME(getter:defaultAudioSession()) NS_SWIFT_NONISOLATED API_UNAVAILABLE(watchos);
 
 @end
 

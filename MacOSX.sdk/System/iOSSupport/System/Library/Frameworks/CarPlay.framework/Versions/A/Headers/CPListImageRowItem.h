@@ -17,7 +17,7 @@ extern NSUInteger const CPMaximumNumberOfGridImages;
 
 NS_ASSUME_NONNULL_BEGIN
 
-API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(macos, watchos, tvos)
+API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(macos, watchos)
 @interface CPListImageRowItem : NSObject <CPSelectableListItem>
 
 /**
@@ -78,7 +78,7 @@ API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(macos, watchos, tvos)
  An optional action block, fired when the user selects this item in a list template.
  */
 @property (nullable, nonatomic, copy) void (^handler) (id <CPSelectableListItem> item,
-                                                       dispatch_block_t completionBlock) API_AVAILABLE(ios(14.0));
+                                                       dispatch_block_t completionBlock) API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(tvos);
 
 /**
  A Boolean value indicating whether the list item is enabled.

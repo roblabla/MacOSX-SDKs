@@ -44,7 +44,7 @@ __API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0), tvos(16.0));
 typedef
 union {
     struct {
-        /// The underlying vector of the quaternion..
+        /// The underlying vector of the quaternion.
         simd_double4 vector;
     };
     simd_quatd quaternion;
@@ -67,6 +67,11 @@ union {
         
         /// The z-coordinate of the point.
         double z;
+        
+#if !defined __swift__
+        /// The explicit padding
+        double _padding;
+#endif
     };
     simd_double3 vector;
 } SPPoint3D
@@ -88,6 +93,11 @@ union {
         
         /// The third element of the vector.
         double z;
+        
+#if !defined __swift__
+        /// The explicit padding
+        double _padding;
+#endif
     };
     simd_double3 vector;
 } SPVector3D
@@ -109,6 +119,11 @@ union {
         
         /// The depth of the size.
         double depth;
+        
+#if !defined __swift__
+        /// The explicit padding
+        double _padding;
+#endif
     };
     simd_double3 vector;
 } SPSize3D
@@ -155,6 +170,22 @@ typedef struct {
 SPATIAL_SWIFT_NAME(Pose3D)
 __API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0), tvos(16.0));
 
+// MARK: - 3D Scaled Pose Structure
+
+/// A structure that contains a position, rotation, and scale.
+typedef struct {
+    /// The position
+    SPPoint3D position;
+    
+    /// The rotation
+    SPRotation3D rotation;
+
+    /// The uniform scale
+    double scale;
+} SPScaledPose3D
+SPATIAL_SWIFT_NAME(ScaledPose3D);
+__API_AVAILABLE(macos(15.0), ios(18.0), watchos(11.0), tvos(18.0));
+
 // MARK: - 3D Affine Transform Structure
 
 /*!
@@ -168,6 +199,142 @@ typedef struct {
 SPATIAL_SWIFT_NAME(AffineTransform3D)
 __API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0), tvos(16.0));
 
+// MARK: - Fundamental make functions for SPPoint3D
+
+/*!
+ @abstract Creates a point with the specified coordinates.
+ 
+ @param x The x coordinate.
+ @param y The y coordinate.
+ @param z The z coordinate.
+ @returns A new point.
+*/
+SPATIAL_INLINE
+SPATIAL_OVERLOADABLE
+SPPoint3D SPPoint3DMake(double x, double y, double z)
+__API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0), tvos(16.0));
+
+SPATIAL_REFINED_FOR_SWIFT
+SPATIAL_OVERLOADABLE
+SPPoint3D SPPoint3DMake(double x, double y, double z) {
+    return (SPPoint3D) {
+        x,
+        y,
+        z,
+#if !defined __swift__
+        1.0
+#endif
+    };
+}
+
+/*!
+ @abstract Creates a point with coordinates specified as a 3-element SIMD vector.
+ 
+ @param xyz The source vector.
+ @returns A new point.
+*/
+SPATIAL_INLINE
+SPATIAL_OVERLOADABLE
+SPPoint3D SPPoint3DMakeWithVector(simd_double3 xyz)
+__API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0), tvos(16.0));
+
+SPATIAL_REFINED_FOR_SWIFT
+SPATIAL_OVERLOADABLE
+SPPoint3D SPPoint3DMakeWithVector(simd_double3 xyz) {
+    return SPPoint3DMake(xyz.x, xyz.y, xyz.z);
+}
+
+
+// MARK: - Fundamental make functions for SPVector3D
+
+/*!
+ @abstract Creates a vector with the specified coordinates.
+ 
+ @param x The first element of the vector.
+ @param y The second element of the vector.
+ @param z The third element of the vector.
+ @returns A new vector.
+ */
+SPATIAL_INLINE
+SPATIAL_OVERLOADABLE
+SPVector3D SPVector3DMake(double x, double y, double z)
+__API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0), tvos(16.0));
+
+SPATIAL_REFINED_FOR_SWIFT
+SPATIAL_OVERLOADABLE
+SPVector3D SPVector3DMake(double x, double y, double z) {
+    return (SPVector3D) {
+        x,
+        y,
+        z,
+#if !defined __swift__
+        0.0
+#endif
+    };
+}
+
+/*!
+ @abstract Creates a vector with elements specified as a 3-element SIMD vector.
+ 
+ @param xyz The source simd vector.
+ @returns A new vector.
+ */
+SPATIAL_INLINE
+SPATIAL_OVERLOADABLE
+SPVector3D SPVector3DMakeWithVector(simd_double3 xyz)
+__API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0), tvos(16.0));
+
+SPATIAL_REFINED_FOR_SWIFT
+SPATIAL_OVERLOADABLE
+SPVector3D SPVector3DMakeWithVector(simd_double3 xyz) {
+    return SPVector3DMake(xyz.x, xyz.y, xyz.z);
+}
+
+// MARK: - Fundamental make functions for SPSize3D
+
+/*!
+ @abstract Creates a size structure with the specified dimensions.
+ 
+ @param width The width.
+ @param height The height.
+ @param depth The depth.
+ @returns A new size stucture.
+*/
+SPATIAL_INLINE
+SPATIAL_OVERLOADABLE
+SPSize3D SPSize3DMake(double width, double height, double depth)
+__API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0), tvos(16.0));
+
+SPATIAL_REFINED_FOR_SWIFT
+SPATIAL_OVERLOADABLE
+SPSize3D SPSize3DMake(double width, double height, double depth) {
+    return (SPSize3D){
+        width,
+        height,
+        depth,
+#if !defined __swift__
+        0.0
+#endif
+    };
+}
+
+/*!
+ @abstract Creates a size structure with dimensions specified as a 3-element SIMD vector.
+ 
+ @param xyz The source vector.
+ @returns A new size stucture.
+*/
+SPATIAL_INLINE
+SPATIAL_OVERLOADABLE
+SPSize3D SPSize3DMakeWithVector(simd_double3 xyz)
+__API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0), tvos(16.0));
+
+SPATIAL_REFINED_FOR_SWIFT
+SPATIAL_OVERLOADABLE
+SPSize3D SPSize3DMakeWithVector(simd_double3 xyz) {
+    return SPSize3DMake(xyz.x, xyz.y, xyz.z);
+}
+
 // MARK: - 3D Projective Transform Structure
 
 /// A 3D projective transformation matrix.
@@ -176,6 +343,53 @@ typedef struct {
 } SPProjectiveTransform3D
 SPATIAL_SWIFT_NAME(ProjectiveTransform3D)
 __API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0), tvos(16.0));
+
+// MARK: - Spherical coordinates structure
+
+/// A structure that defines spherical coordinates in radial, inclination, azimuthal order.
+typedef
+union {
+    struct {
+        /// The distance to the origin.
+        double radius;
+        
+        /// The inclination angle, in radians.
+        SPAngle inclination;
+        
+        /// The azimuthal angle, in radians.
+        SPAngle azimuth;
+        
+        /// The explicit padding.
+        double _padding;
+    };
+    simd_double3 vector;
+} SPSphericalCoordinates3D
+__attribute__((__aligned__(16)))
+SPATIAL_SWIFT_NAME(SphericalCoordinates3D)
+__API_AVAILABLE(macos(15.0), ios(18.0), watchos(11.0), tvos(18.0));
+
+/*!
+ @abstract Creates a spherical coordinates structure.
+ 
+ @param radius The distance to the origin.
+ @param inclination The inclination angle.
+ @param azimuth The azimuthal angle.
+ @returns A new point.
+*/
+SPATIAL_INLINE
+SPATIAL_OVERLOADABLE
+SPSphericalCoordinates3D SPSphericalCoordinates3DMake(double radius, SPAngle inclination, SPAngle azimuth)
+__API_AVAILABLE(macos(15.0), ios(18.0), watchos(11.0), tvos(18.0));
+
+SPATIAL_SWIFT_NAME(SphericalCoordinates3D.init(radius:inclination:azimuth:))
+SPATIAL_OVERLOADABLE
+SPSphericalCoordinates3D SPSphericalCoordinates3DMake(double radius, SPAngle inclination, SPAngle azimuth) {
+    return (SPSphericalCoordinates3D) {
+        radius,
+        inclination,
+        azimuth,
+        1.0 };
+}
 
 // MARK: - Shear enumeration
 
@@ -237,25 +451,52 @@ static const SPPose3D SPPose3DInvalid = {
     .rotation = (SPRotation3D){ .vector = {INFINITY, INFINITY, INFINITY, INFINITY }}
 };
 
+/// A pose that represents an invalid scaled pose.
+__API_AVAILABLE(macos(15.0), ios(18.0), watchos(11.0), tvos(18.0));
+SPATIAL_REFINED_FOR_SWIFT
+static const SPScaledPose3D SPScaledPose3DInvalid = {
+    .position = {INFINITY, INFINITY, INFINITY},
+    .rotation = (SPRotation3D){ .vector = {INFINITY, INFINITY, INFINITY, INFINITY }},
+    .scale = INFINITY
+};
+
 /// The point with the value zero.
 __API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0), tvos(16.0))
 SPATIAL_SWIFT_NAME(Point3D.zero)
-static const SPPoint3D SPPoint3DZero = { 0, 0, 0 };
+static const SPPoint3D SPPoint3DZero = { 0,
+    0,
+    0,
+#if !defined __swift__
+        1.0
+#endif
+};
 
 /// The point with location @p (infinity,infinity,infinity) .
 __API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0), tvos(16.0))
 SPATIAL_SWIFT_NAME(Point3D.infinity)
-static const SPPoint3D SPPoint3DInfinity = { INFINITY, INFINITY, INFINITY };
+static const SPPoint3D SPPoint3DInfinity = { INFINITY,
+    INFINITY,
+    INFINITY,
+#if !defined __swift__
+        1.0
+#endif
+};
 
 /// The vector with the value zero.
 __API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0), tvos(16.0))
 SPATIAL_SWIFT_NAME(Vector3D.zero)
-static const SPVector3D SPVector3DZero = { 0, 0, 0 };
+static const SPVector3D SPVector3DZero = { 0 };
 
 /// The vector with values @p (infinity,infinity,infinity) .
 __API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0), tvos(16.0))
 SPATIAL_SWIFT_NAME(Vector3D.infinity)
-static const SPVector3D SPVectorInfinity = { INFINITY, INFINITY, INFINITY };
+static const SPVector3D SPVectorInfinity = { INFINITY,
+    INFINITY,
+    INFINITY,
+#if !defined __swift__
+        0.0
+#endif
+};
 
 /// The size with the value zero.
 __API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0), tvos(16.0))
@@ -265,13 +506,24 @@ static const SPSize3D SPSize3DZero = { 0 };
 /// The size with dimensions @p (infinity,infinity,infinity) .
 __API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0), tvos(16.0))
 SPATIAL_SWIFT_NAME(Size3D.infinity)
-static const SPSize3D SPSize3DInfinity = { INFINITY, INFINITY, INFINITY };
+static const SPSize3D SPSize3DInfinity = { INFINITY,
+    INFINITY,
+    INFINITY,
+#if !defined __swift__
+        0.0
+#endif
+};
 
 /// A size that represents an invalid size.
 __API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0), tvos(16.0))
 SPATIAL_REFINED_FOR_SWIFT
 static const SPSize3D SPSize3DInvalid = {
-    INFINITY, INFINITY, INFINITY
+    INFINITY,
+    INFINITY,
+    INFINITY,
+#if !defined __swift__
+        0.0
+#endif
 };
 
 /// The rect with the value zero.
@@ -283,15 +535,36 @@ static const SPRect3D SPRect3DZero = { 0 };
 __API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0), tvos(16.0))
 SPATIAL_SWIFT_NAME(Rect3D.infinity)
 static const SPRect3D SPRect3DInfinity = {
-    .origin = { INFINITY, INFINITY, INFINITY },
-    .size = { INFINITY, INFINITY, INFINITY }
+    .origin = {
+        INFINITY,
+        INFINITY,
+        INFINITY,
+#if !defined __swift__
+        1.0
+#endif
+    },
+    .size = {
+        INFINITY,
+        INFINITY,
+        INFINITY,
+#if !defined __swift__
+            0.0
+#endif
+        }
 };
 
 /// The null rectangle, representing an invalid value.
 __API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0), tvos(16.0))
 SPATIAL_REFINED_FOR_SWIFT
 static const SPRect3D SPRect3DNull = {
-    .origin = { INFINITY, INFINITY, INFINITY },
+    .origin = {
+        INFINITY,
+        INFINITY,
+        INFINITY,
+#if !defined __swift__
+        1.0
+#endif
+    },
     .size = { 0 }
 };
 
@@ -566,7 +839,7 @@ bool SPRotation3DIsValid(SPRotation3D rotation) {
  @abstract Returns a Boolean value that indicates whether a pose structure represents a valid pose.
  
  @param pose The source pose.
- @returns A Boolean value that indicates whether a size structure represents a valid size.
+ @returns A Boolean value that indicates whether a pose structure represents a valid size.
 */
 SPATIAL_INLINE
 bool SPPose3DIsValid(SPPose3D pose)
@@ -575,6 +848,21 @@ __API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0), tvos(16.0));
 SPATIAL_REFINED_FOR_SWIFT
 bool SPPose3DIsValid(SPPose3D pose) {
     return SPRotation3DIsValid(pose.rotation) && SPPoint3DIsFinite(pose.position);
+}
+
+/*!
+ @abstract Returns a Boolean value that indicates whether a scaled pose structure represents a valid scaled pose.
+ 
+ @param pose The source pose.
+ @returns A Boolean value that indicates whether a scaled pose structure represents a valid size.
+*/
+SPATIAL_INLINE
+bool SPScaledPose3DIsValid(SPScaledPose3D pose)
+__API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0), tvos(16.0));
+
+SPATIAL_REFINED_FOR_SWIFT
+bool SPScaledPose3DIsValid(SPScaledPose3D pose) {
+    return SPRotation3DIsValid(pose.rotation) && SPPoint3DIsFinite(pose.position) && isnormal(pose.scale);
 }
 
 /*!

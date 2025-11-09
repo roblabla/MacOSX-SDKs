@@ -86,7 +86,7 @@ typedef struct CGPSConverterCallbacks CGPSConverterCallbacks;
 CG_EXTERN CGPSConverterRef __nullable CGPSConverterCreate(void * __nullable info,
     const CGPSConverterCallbacks *  callbacks,
     CFDictionaryRef __nullable options)
-    CG_AVAILABLE_STARTING(10.3);
+    API_AVAILABLE(macos(10.3));
 
 /* Use `converter' to convert PostScript data to PDF data. The PostScript
    data is supplied by `provider'; the resulting PDF is written to
@@ -95,23 +95,23 @@ CG_EXTERN CGPSConverterRef __nullable CGPSConverterCreate(void * __nullable info
 CG_EXTERN bool CGPSConverterConvert(CGPSConverterRef  converter,
     CGDataProviderRef  provider, CGDataConsumerRef  consumer,
     CFDictionaryRef __nullable options)
-    CG_AVAILABLE_STARTING(10.3);
+    API_AVAILABLE(macos(10.3));
 
 /* Tell the `converter' to abort conversion at the next possible
    opportunity. */
 
 CG_EXTERN bool CGPSConverterAbort(CGPSConverterRef  converter)
-    CG_AVAILABLE_STARTING(10.3);
+    API_AVAILABLE(macos(10.3));
 
 /* Return true if `converter' is currently converting data. */
 
 CG_EXTERN bool CGPSConverterIsConverting(CGPSConverterRef  converter)
-    CG_AVAILABLE_STARTING(10.3);
+    API_AVAILABLE(macos(10.3));
 
 /* Return the CFTypeID of the CGPSConverter class. */
 
 CG_EXTERN CFTypeID CGPSConverterGetTypeID(void)
-  CG_AVAILABLE_STARTING(10.3);
+  API_AVAILABLE(macos(10.3));
 
 CF_ASSUME_NONNULL_END
 

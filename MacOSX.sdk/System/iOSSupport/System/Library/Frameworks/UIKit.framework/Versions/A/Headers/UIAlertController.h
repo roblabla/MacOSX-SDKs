@@ -16,19 +16,19 @@ typedef NS_ENUM(NSInteger, UIAlertActionStyle) {
     UIAlertActionStyleDefault = 0,
     UIAlertActionStyleCancel,
     UIAlertActionStyleDestructive
-} API_AVAILABLE(ios(8.0));
+} API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(watchos);
 
 typedef NS_ENUM(NSInteger, UIAlertControllerStyle) {
     UIAlertControllerStyleActionSheet = 0,
     UIAlertControllerStyleAlert
-} API_AVAILABLE(ios(8.0));
+} API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(watchos);
 
 typedef NS_ENUM(NSInteger, UIAlertControllerSeverity) {
     UIAlertControllerSeverityDefault = 0,
     UIAlertControllerSeverityCritical
-} API_AVAILABLE(ios(16.0));
+} API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(watchos);
 
-UIKIT_EXTERN API_AVAILABLE(ios(8.0)) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @interface UIAlertAction : NSObject <NSCopying>
 
 + (instancetype)actionWithTitle:(nullable NSString *)title style:(UIAlertActionStyle)style handler:(void (^ __nullable)(UIAlertAction *action))handler;
@@ -39,7 +39,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(8.0)) NS_SWIFT_UI_ACTOR
 
 @end
 
-UIKIT_EXTERN API_AVAILABLE(ios(8.0)) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @interface UIAlertController : UIViewController
 
 + (instancetype)alertControllerWithTitle:(nullable NSString *)title message:(nullable NSString *)message preferredStyle:(UIAlertControllerStyle)preferredStyle;
@@ -57,7 +57,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(8.0)) NS_SWIFT_UI_ACTOR
 
 @property (nonatomic, readonly) UIAlertControllerStyle preferredStyle;
 
-@property (nonatomic) UIAlertControllerSeverity severity API_AVAILABLE(ios(16.0));
+@property (nonatomic) UIAlertControllerSeverity severity API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(watchos);
 
 @end
 

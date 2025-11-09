@@ -14,7 +14,7 @@ NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 @class UIButton, UIImageView;
 
-UIKIT_EXTERN API_AVAILABLE(ios(5.0)) API_UNAVAILABLE(tvos) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(5.0)) API_UNAVAILABLE(tvos, watchos) NS_SWIFT_UI_ACTOR
 @interface UIStepper : UIControl
 
 @property(nonatomic,getter=isContinuous) BOOL continuous; // if YES, value change events are sent any time the value changes during interaction. default = YES

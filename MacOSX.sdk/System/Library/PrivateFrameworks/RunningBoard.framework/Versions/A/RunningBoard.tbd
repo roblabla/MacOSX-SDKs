@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/RunningBoard.framework/Versions/A/RunningBoard'
-current-version: 874.121.1
+current-version: 945.1.1
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _RBAttributePrimitiveEntitlement, _RBBackBoardClientEntitlement, 
@@ -27,10 +27,10 @@ exports:
                        RBAssertionStateResolver, RBAssertionTransientState, RBAttributeContext, 
                        RBAttributeFactory, RBBundleProperties, RBBundlePropertiesBSXPCProvider, 
                        RBBundlePropertiesLSProvider, RBBundlePropertiesManager, RBClientInheritanceManager, 
-                       RBConcreteTarget, RBContainerManager, RBDaemon, RBDomainAttributeManager, 
-                       RBDomainAttributeManagerDataProvider, RBDomainRestriction, 
-                       RBEntitlementManager, RBEntitlementPredicate, RBEntitlements, 
-                       RBEventQueue, RBEventQueueEvent, RBExtensionDataProvider, 
+                       RBCoalition, RBCoalitionManager, RBConcreteTarget, RBContainerManager, 
+                       RBDaemon, RBDomainAttributeManager, RBDomainAttributeManagerDataProvider, 
+                       RBDomainRestriction, RBEntitlementManager, RBEntitlementPredicate, 
+                       RBEntitlements, RBEventQueue, RBEventQueueEvent, RBExtensionDataProvider, 
                        RBHistoricalStatistics, RBIgnoreAllEntitlementsManager, RBInheritanceCollection, 
                        RBJetsamPropertyManager, RBLSBundleProperties, RBLaunchManager, 
                        RBLaunchTracker, RBLaunchdInterface, RBLaunchdJobManager, 
@@ -44,18 +44,17 @@ exports:
                        RBRequestManager, RBStateCaptureManager, RBSystemState, RBThermalResponseManager, 
                        RBThrottleBestEffortNetworkingManager, RBTimeProvider, RBXNUWrapper, 
                        RBXPCBundleProperties ]
-    objc-ivars:      [ RBLaunchdProperties._disableFreezing, RBLaunchdProperties._doesOverrideHasBackoff, 
-                       RBLaunchdProperties._doesOverrideManagement, RBLaunchdProperties._executablePath, 
-                       RBLaunchdProperties._explicitAngelFlag, RBLaunchdProperties._hostPid, 
-                       RBLaunchdProperties._jobLabel, RBLaunchdProperties._multiInstance, 
-                       RBLaunchdProperties._overrideManageFlags, RBLaunchdProperties._path, 
-                       RBLaunchdProperties._specifiedIdentity, RBLaunchdProperties._type, 
-                       RBLaunchdProperties._underlyingAssertion, RBLaunchdProperties._variableEUID, 
-                       RBProcessAppNapState._enabled, RBProcessAppNapState._pid, 
-                       RBProcessAppNapState._policy, RBProcessAppNapState._taskPort, 
-                       RBProcessState._appNapState, RBProcessState._endowmentInfos, 
-                       RBProcessState._explicitJetsamBand, RBProcessState._flags, 
-                       RBProcessState._gpuRole, RBProcessState._guaranteedRunning, 
+    objc-ivars:      [ RBLaunchdProperties._doesOverrideHasBackoff, RBLaunchdProperties._doesOverrideManagement, 
+                       RBLaunchdProperties._executablePath, RBLaunchdProperties._explicitAngelFlag, 
+                       RBLaunchdProperties._hostPid, RBLaunchdProperties._jobLabel, 
+                       RBLaunchdProperties._multiInstance, RBLaunchdProperties._overrideManageFlags, 
+                       RBLaunchdProperties._path, RBLaunchdProperties._specifiedIdentity, 
+                       RBLaunchdProperties._type, RBLaunchdProperties._underlyingAssertion, 
+                       RBLaunchdProperties._variableEUID, RBProcessAppNapState._enabled, 
+                       RBProcessAppNapState._pid, RBProcessAppNapState._policy, RBProcessAppNapState._taskPort, 
+                       RBProcessState._appNapState, RBProcessState._coalitionLevel, 
+                       RBProcessState._endowmentInfos, RBProcessState._explicitJetsamBand, 
+                       RBProcessState._flags, RBProcessState._gpuRole, RBProcessState._guaranteedRunning, 
                        RBProcessState._identity, RBProcessState._inheritances, RBProcessState._jetsamLenientModeByRole, 
                        RBProcessState._legacyAssertions, RBProcessState._legacyFinishTaskReason, 
                        RBProcessState._maxCPULimitsByRole, RBProcessState._memoryLimit, 

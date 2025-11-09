@@ -39,6 +39,15 @@ API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(macos, watchos, tvos)
 
 @end
 
+/// Used to request information from a user's national id card (or equivalent document).
+API_AVAILABLE(ios(18.0)) API_UNAVAILABLE(macos, watchos, tvos)
+@interface PKIdentityNationalIDCardDescriptor: NSObject <PKIdentityDocumentDescriptor>
+
+/// Alpha-2 country code, as defined in ISO 3166-1, of the issuing authority’s country or territory
+@property (nonatomic, copy, nullable) NSString *regionCode NS_REFINED_FOR_SWIFT;
+
+@end
+
 NS_ASSUME_NONNULL_END
 
 

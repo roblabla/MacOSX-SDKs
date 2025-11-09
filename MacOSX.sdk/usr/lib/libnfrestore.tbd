@@ -4,8 +4,7 @@ targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/usr/lib/libnfrestore.dylib'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-    symbols:         [ _NfJcopUpdateFileClose, _NfJcopUpdateFileLogDescription, _NfJcopUpdateFileOpenWithFilePath, 
-                       _NfRestore, _NfRestoreBundleCreate, _NfRestoreCopyUniqueFDRKey, 
+    symbols:         [ _NfRestore, _NfRestoreBundleCreate, _NfRestoreCopyUniqueFDRKey, 
                        _NfRestoreDumpUART, _NfRestoreOpenWithSE, _NfRestoreOpenWithSEAndResult, 
                        _NfRestoreReturnError, _NfRestoreSEClose, _NfRestoreSEEnumerate, 
                        _NfRestoreSEList, _NfRestoreSEOpen, _NfRestoreSEOpenWithError, 

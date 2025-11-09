@@ -1,12 +1,12 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.10 (swiftlang-5.10.0.12.5 clang-1500.3.9.1.1)
-// swift-module-flags: -disable-objc-attr-requires-foundation-module -target x86_64-apple-ios14.5-macabi -enable-objc-interop -enable-library-evolution -module-link-name swiftDistributed -parse-stdlib -swift-version 5 -O -library-level api -enforce-exclusivity=unchecked -target-min-inlining-version min -user-module-version 5.10.0.12.5 -module-name Distributed
-// swift-module-flags-ignorable: -enable-lexical-lifetimes=false
+// swift-compiler-version: Apple Swift version 6.0 effective-5.10 (swiftlang-6.0.0.7.24 clang-1600.0.25.1)
+// swift-module-flags: -disable-objc-attr-requires-foundation-module -target x86_64-apple-ios14.5-macabi -enable-objc-interop -enable-library-evolution -module-link-name swiftDistributed -parse-stdlib -swift-version 5 -O -library-level api -enforce-exclusivity=unchecked -target-min-inlining-version min -enable-experimental-feature NoncopyableGenerics2 -enable-experimental-feature SuppressedAssociatedTypes -enable-experimental-feature ExtensionImportVisiblity -user-module-version 6.0.0.7.24 -module-name Distributed
+// swift-module-flags-ignorable: -enable-ossa-modules -enable-lexical-lifetimes=false
 import Darwin
 import Swift
 import _Concurrency
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
-public protocol DistributedActor : Swift.Hashable, Swift.Identifiable, _Concurrency.AnyActor {
+public protocol DistributedActor : AnyObject, Swift.Hashable, Swift.Identifiable, Swift.Sendable {
   associatedtype ActorSystem : Distributed.DistributedActorSystem where Self.ID == Self.ActorSystem.ActorID
   associatedtype SerializationRequirement where Self.SerializationRequirement == Self.ActorSystem.SerializationRequirement
   nonisolated override var id: Self.ID { get }
@@ -34,13 +34,73 @@ extension Distributed.DistributedActor where Self.ID : Swift.Encodable {
 }
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 extension Distributed.DistributedActor {
-  #if compiler(>=5.3) && $AsyncAwait && $Sendable
-  nonisolated public func whenLocal<T>(_ body: @Sendable (isolated Self) async throws -> T) async rethrows -> T? where T : Swift.Sendable
+  #if compiler(>=5.3) && $TypedThrows
+  @_silgen_name("$s11Distributed0A5ActorPAAE20whenLocalTypedThrowsyqd__Sgqd__xYiYaYbqd_0_YKXEYaqd_0_YKs8SendableRd__s5ErrorRd_0_r0_lF")
+  @_alwaysEmitIntoClient nonisolated public func whenLocal<T, E>(_ body: @Sendable (isolated Self) async throws(E) -> T) async throws(E) -> T? where T : Swift.Sendable, E : Swift.Error {
+    if __isLocalActor(self) {
+       _local let localSelf = self
+       return try await body(localSelf)
+    } else {
+      return nil
+    }
+  }
   #endif
+  #if compiler(>=5.3) && $TypedThrows
+  @usableFromInline
+  @_silgen_name("$s11Distributed0A5ActorPAAE9whenLocalyqd__Sgqd__xYiYaYbqd_0_YKXEYaqd_0_YKs8SendableRd__s5ErrorRd_0_r0_lF")
+  nonisolated internal func __abi_whenLocal<T, E>(_ body: @Sendable (isolated Self) async throws(E) -> T) async throws(E) -> T? where T : Swift.Sendable, E : Swift.Error
+  #endif
+  @_silgen_name("$s11Distributed0A5ActorPAAE9whenLocalyqd__Sgqd__xYiYaYbKXEYaKs8SendableRd__lF")
+  @usableFromInline
+  nonisolated internal func __abi_whenLocal<T>(_ body: @Sendable (isolated Self) async throws -> T) async rethrows -> T? where T : Swift.Sendable
+}
+@available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
+extension Distributed.DistributedActor {
+  @_alwaysEmitIntoClient @_implements(_Concurrency.Actor, unownedExecutor) nonisolated public var __actorUnownedExecutor: _Concurrency.UnownedSerialExecutor {
+    get {
+    if #available(macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0, *) {
+      return unownedExecutor
+    } else {
+       
+      return UnownedSerialExecutor(Builtin.buildDefaultActorExecutorRef(self))
+    }
+  }
+  }
+  @backDeployed(before: macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0)
+  public var asLocalActor: any _Concurrency.Actor {
+    get {
+    Builtin.distributedActorAsAnyActor(self)
+  }
+  }
 }
 @_silgen_name("swift_distributed_actor_is_remote")
 public func __isRemoteActor(_ actor: Swift.AnyObject) -> Swift.Bool
 public func __isLocalActor(_ actor: Swift.AnyObject) -> Swift.Bool
+@available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+public protocol _DistributedActorStub : Distributed.DistributedActor {
+}
+@available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+public func _distributedStubFatalError(function: Swift.String = #function) -> Swift.Never
+#if compiler(>=5.3) && $PrimaryAssociatedTypes2
+@available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
+public protocol DistributedActorSystem<SerializationRequirement> : Swift.Sendable {
+  associatedtype ActorID : Swift.Hashable, Swift.Sendable
+  associatedtype InvocationEncoder : Distributed.DistributedTargetInvocationEncoder where Self.InvocationEncoder.SerializationRequirement == Self.ResultHandler.SerializationRequirement
+  associatedtype InvocationDecoder : Distributed.DistributedTargetInvocationDecoder where Self.InvocationDecoder.SerializationRequirement == Self.InvocationEncoder.SerializationRequirement
+  associatedtype ResultHandler : Distributed.DistributedTargetInvocationResultHandler
+  associatedtype SerializationRequirement where Self.SerializationRequirement == Self.InvocationDecoder.SerializationRequirement
+  func resolve<Act>(id: Self.ActorID, as actorType: Act.Type) throws -> Act? where Act : Distributed.DistributedActor, Self.ActorID == Act.ID
+  func assignID<Act>(_ actorType: Act.Type) -> Self.ActorID where Act : Distributed.DistributedActor, Self.ActorID == Act.ID
+  func actorReady<Act>(_ actor: Act) where Act : Distributed.DistributedActor, Self.ActorID == Act.ID
+  func resignID(_ id: Self.ActorID)
+  func makeInvocationEncoder() -> Self.InvocationEncoder
+  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+  func remoteCall<Act, Err, Res>(on actor: Act, target: Distributed.RemoteCallTarget, invocation: inout Self.InvocationEncoder, throwing: Err.Type, returning: Res.Type) async throws -> Res where Act : Distributed.DistributedActor, Err : Swift.Error, Self.ActorID == Act.ID
+  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+  func remoteCallVoid<Act, Err>(on actor: Act, target: Distributed.RemoteCallTarget, invocation: inout Self.InvocationEncoder, throwing: Err.Type) async throws where Act : Distributed.DistributedActor, Err : Swift.Error, Self.ActorID == Act.ID
+  func invokeHandlerOnReturn(handler: Self.ResultHandler, resultBuffer: Swift.UnsafeRawPointer, metatype: any Any.Type) async throws
+}
+#else
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 public protocol DistributedActorSystem : Swift.Sendable {
   associatedtype ActorID : Swift.Hashable, Swift.Sendable
@@ -53,15 +113,16 @@ public protocol DistributedActorSystem : Swift.Sendable {
   func actorReady<Act>(_ actor: Act) where Act : Distributed.DistributedActor, Self.ActorID == Act.ID
   func resignID(_ id: Self.ActorID)
   func makeInvocationEncoder() -> Self.InvocationEncoder
-  #if compiler(>=5.3) && $AsyncAwait
+  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+  func remoteCall<Act, Err, Res>(on actor: Act, target: Distributed.RemoteCallTarget, invocation: inout Self.InvocationEncoder, throwing: Err.Type, returning: Res.Type) async throws -> Res where Act : Distributed.DistributedActor, Err : Swift.Error, Self.ActorID == Act.ID
+  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+  func remoteCallVoid<Act, Err>(on actor: Act, target: Distributed.RemoteCallTarget, invocation: inout Self.InvocationEncoder, throwing: Err.Type) async throws where Act : Distributed.DistributedActor, Err : Swift.Error, Self.ActorID == Act.ID
   func invokeHandlerOnReturn(handler: Self.ResultHandler, resultBuffer: Swift.UnsafeRawPointer, metatype: any Any.Type) async throws
-  #endif
 }
+#endif
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 extension Distributed.DistributedActorSystem {
-  #if compiler(>=5.3) && $AsyncAwait
   public func executeDistributedTarget<Act>(on actor: Act, target: Distributed.RemoteCallTarget, invocationDecoder: inout Self.InvocationDecoder, handler: Self.ResultHandler) async throws where Act : Distributed.DistributedActor
-  #endif
 }
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 public struct RemoteCallTarget : Swift.CustomStringConvertible, Swift.Hashable {
@@ -78,13 +139,31 @@ public struct RemoteCallTarget : Swift.CustomStringConvertible, Swift.Hashable {
     get
   }
 }
+#if compiler(>=5.3) && $PrimaryAssociatedTypes2
+@available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
+public protocol DistributedTargetInvocationEncoder<SerializationRequirement> {
+  associatedtype SerializationRequirement
+  mutating func recordGenericSubstitution<T>(_ type: T.Type) throws
+  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+  mutating func recordArgument<Value>(_ argument: Distributed.RemoteCallArgument<Value>) throws
+  mutating func recordErrorType<E>(_ type: E.Type) throws where E : Swift.Error
+  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+  mutating func recordReturnType<R>(_ type: R.Type) throws
+  mutating func doneRecording() throws
+}
+#else
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 public protocol DistributedTargetInvocationEncoder {
   associatedtype SerializationRequirement
   mutating func recordGenericSubstitution<T>(_ type: T.Type) throws
+  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+  mutating func recordArgument<Value>(_ argument: Distributed.RemoteCallArgument<Value>) throws
   mutating func recordErrorType<E>(_ type: E.Type) throws where E : Swift.Error
+  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+  mutating func recordReturnType<R>(_ type: R.Type) throws
   mutating func doneRecording() throws
 }
+#endif
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 public struct RemoteCallArgument<Value> {
   public let label: Swift.String?
@@ -95,23 +174,46 @@ public struct RemoteCallArgument<Value> {
   public let value: Value
   public init(label: Swift.String?, name: Swift.String, value: Value)
 }
+#if compiler(>=5.3) && $PrimaryAssociatedTypes2
+@available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
+public protocol DistributedTargetInvocationDecoder<SerializationRequirement> {
+  associatedtype SerializationRequirement
+  mutating func decodeGenericSubstitutions() throws -> [any Any.Type]
+  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+  mutating func decodeNextArgument<Argument>() throws -> Argument
+  mutating func decodeErrorType() throws -> (any Any.Type)?
+  mutating func decodeReturnType() throws -> (any Any.Type)?
+}
+#else
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 public protocol DistributedTargetInvocationDecoder {
   associatedtype SerializationRequirement
   mutating func decodeGenericSubstitutions() throws -> [any Any.Type]
+  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+  mutating func decodeNextArgument<Argument>() throws -> Argument
   mutating func decodeErrorType() throws -> (any Any.Type)?
   mutating func decodeReturnType() throws -> (any Any.Type)?
 }
+#endif
+#if compiler(>=5.3) && $PrimaryAssociatedTypes2
+@available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
+public protocol DistributedTargetInvocationResultHandler<SerializationRequirement> {
+  associatedtype SerializationRequirement
+  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+  func onReturn<Success>(value: Success) async throws
+  func onReturnVoid() async throws
+  func onThrow<Err>(error: Err) async throws where Err : Swift.Error
+}
+#else
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 public protocol DistributedTargetInvocationResultHandler {
   associatedtype SerializationRequirement
-  #if compiler(>=5.3) && $AsyncAwait
+  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+  func onReturn<Success>(value: Success) async throws
   func onReturnVoid() async throws
-  #endif
-  #if compiler(>=5.3) && $AsyncAwait
   func onThrow<Err>(error: Err) async throws where Err : Swift.Error
-  #endif
 }
+#endif
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 public protocol DistributedActorSystemError : Swift.Error {
 }
@@ -141,6 +243,8 @@ public struct DistributedActorCodingError : Distributed.DistributedActorSystemEr
   public init(message: Swift.String)
   public static func missingActorSystemUserInfo<Act>(_ actorType: Act.Type) -> Distributed.DistributedActorCodingError where Act : Distributed.DistributedActor
 }
+@available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+public func _diagnoseDistributedStubMethodCalled(className: Swift.StaticString, funcName: Swift.StaticString = #function, file: Swift.StaticString = #file, line: Swift.UInt = #line, column: Swift.UInt = #column) -> Swift.Never
 @available(macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0, *)
 extension Distributed.DistributedActor {
   @available(macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0, *)
@@ -156,31 +260,50 @@ extension Distributed.DistributedActor {
 
     let unownedExecutor = self.unownedExecutor
     guard _taskIsCurrentExecutor(unownedExecutor._executor) else {
-      // TODO: offer information which executor we actually got
-      // TODO: figure out a way to get the typed repr out of the unowned executor
       let msg = "Incorrect actor executor assumption; Expected '\(unownedExecutor)' executor. \(message())"
-      /// TODO: implement the logic in-place perhaps rather than delegating to precondition()?
-      assertionFailure(msg, file: file, line: line) // short-cut so we get the exact same failure reporting semantics
+       
+      assertionFailure(msg, file: file, line: line)  
       return
     }
   }
 }
 @available(macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0, *)
 extension Distributed.DistributedActor {
-  #if compiler(>=5.3) && $UnavailableFromAsync
   @available(macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0, *)
-  @_unavailableFromAsync(message: "express the closure as an explicit function declared on the specified 'distributed actor' instead") nonisolated public func assumeIsolated<T>(_ operation: (isolated Self) throws -> T, file: Swift.StaticString = #fileID, line: Swift.UInt = #line) rethrows -> T
-  #else
+  @_unavailableFromAsync(message: "express the closure as an explicit function declared on the specified 'distributed actor' instead") @_alwaysEmitIntoClient nonisolated public func assumeIsolated<T>(_ operation: (isolated Self) throws -> T, file: Swift.StaticString = #fileID, line: Swift.UInt = #line) rethrows -> T where T : Swift.Sendable {
+    typealias YesActor = (isolated Self) throws -> T
+    typealias NoActor = (Self) throws -> T
+
+    guard __isLocalActor(self) else {
+      fatalError("Cannot assume to be 'isolated \(Self.self)' since distributed actor '\(self)' is a remote actor reference.")
+    }
+
+    let unownedExecutor = self.unownedExecutor
+    guard _taskIsCurrentExecutor(unownedExecutor._executor) else {
+       
+      fatalError("Incorrect actor executor assumption; Expected same executor as \(self).", file: file, line: line)
+    }
+
+    #if $TypedThrows
+     
+    return try withoutActuallyEscaping(operation) {
+      (_ fn: @escaping YesActor) throws -> T in
+      let rawFn = unsafeBitCast(fn, to: NoActor.self)
+      return try rawFn(self)
+    }
+    #else
+    fatalError("unsupported compiler")
+    #endif
+  }
   @available(macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0, *)
-  nonisolated public func assumeIsolated<T>(_ operation: (isolated Self) throws -> T, file: Swift.StaticString = #fileID, line: Swift.UInt = #line) rethrows -> T
-  #endif
+  @usableFromInline
+  @_silgen_name("$s11Distributed0A5ActorPAAE14assumeIsolated_4file4lineqd__qd__xYiKXE_s12StaticStringVSutKlF")
+  nonisolated internal func __abi__assumeIsolated<T>(_ operation: (isolated Self) throws -> T, _ file: Swift.StaticString, _ line: Swift.UInt) rethrows -> T where T : Swift.Sendable
 }
-#if compiler(>=5.3) && $BuiltinExecutor
 @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
 @usableFromInline
 @_silgen_name("swift_task_isCurrentExecutor")
 internal func _taskIsCurrentExecutor(_ executor: Builtin.Executor) -> Swift.Bool
-#endif
 @_hasMissingDesignatedInitializers @available(macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0, *)
 @usableFromInline
 final internal class DistributedRemoteActorReferenceExecutor : _Concurrency.SerialExecutor {
@@ -196,6 +319,13 @@ final internal class DistributedRemoteActorReferenceExecutor : _Concurrency.Seri
 }
 @available(macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0, *)
 public func buildDefaultDistributedRemoteActorExecutor<Act>(_ actor: Act) -> _Concurrency.UnownedSerialExecutor where Act : Distributed.DistributedActor
+#if compiler(>=5.3) && $Macros && $AttachedMacros && $ExtensionMacros
+#if compiler(>=5.3) && $ExtensionMacroAttr
+@attached(peer, names: prefixed(`$`)) @attached(extension, names: arbitrary) public macro Resolvable() = #externalMacro(module: "SwiftMacros", type: "DistributedResolvableMacro")
+#else
+@attached(peer, names: prefixed(`$`))  public macro Resolvable() = #externalMacro(module: "SwiftMacros", type: "DistributedResolvableMacro")
+#endif
+#endif
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 public func _getParameterCount(mangledMethodName name: Swift.String) -> Swift.Int32
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
@@ -207,6 +337,7 @@ public func _getParameterTypeInfo(mangledMethodName name: Swift.String, genericE
 @_silgen_name("swift_func_getParameterTypeInfo")
 public func __getParameterTypeInfo(_ typeNameStart: Swift.UnsafePointer<Swift.UInt8>, _ typeNameLength: Swift.UInt, _ genericEnv: Swift.UnsafeRawPointer?, _ genericArguments: Swift.UnsafeRawPointer?, _ types: Builtin.RawPointer, _ typesLength: Swift.Int) -> Swift.Int32
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
+@available(*, deprecated, message: "Use `__getReturnTypeInfo(_:_:_:_:)` directly")
 public func _getReturnTypeInfo(mangledMethodName name: Swift.String, genericEnv: Swift.UnsafeRawPointer?, genericArguments: Swift.UnsafeRawPointer?) -> (any Any.Type)?
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 @_silgen_name("swift_func_getReturnTypeInfo")
@@ -230,16 +361,10 @@ final public class LocalTestingDistributedActorSystem : Distributed.DistributedA
   final public func actorReady<Act>(_ actor: Act) where Act : Distributed.DistributedActor, Act.ID == Distributed.LocalTestingActorID
   final public func resignID(_ id: Distributed.LocalTestingDistributedActorSystem.ActorID)
   final public func makeInvocationEncoder() -> Distributed.LocalTestingDistributedActorSystem.InvocationEncoder
-  #if compiler(>=5.3) && $AsyncAwait
   final public func remoteCall<Act, Err, Res>(on actor: Act, target: Distributed.RemoteCallTarget, invocation: inout Distributed.LocalTestingDistributedActorSystem.InvocationEncoder, throwing errorType: Err.Type, returning returnType: Res.Type) async throws -> Res where Act : Distributed.DistributedActor, Err : Swift.Error, Res : Swift.Decodable, Res : Swift.Encodable, Act.ID == Distributed.LocalTestingActorID
-  #endif
-  #if compiler(>=5.3) && $AsyncAwait
   final public func remoteCallVoid<Act, Err>(on actor: Act, target: Distributed.RemoteCallTarget, invocation: inout Distributed.LocalTestingDistributedActorSystem.InvocationEncoder, throwing errorType: Err.Type) async throws where Act : Distributed.DistributedActor, Err : Swift.Error, Act.ID == Distributed.LocalTestingActorID
-  #endif
   @objc deinit
-  #if compiler(>=5.3) && $AsyncAwait
   final public func invokeHandlerOnReturn(handler: Distributed.LocalTestingDistributedActorSystem.ResultHandler, resultBuffer: Swift.UnsafeRawPointer, metatype: any Any.Type) async throws
-  #endif
 }
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 @available(*, deprecated, renamed: "LocalTestingActorID")
@@ -283,15 +408,9 @@ final public class LocalTestingInvocationDecoder : Distributed.DistributedTarget
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 public struct LocalTestingInvocationResultHandler : Distributed.DistributedTargetInvocationResultHandler {
   public typealias SerializationRequirement = Swift.Codable
-  #if compiler(>=5.3) && $AsyncAwait
   public func onReturn<Success>(value: Success) async throws where Success : Swift.Decodable, Success : Swift.Encodable
-  #endif
-  #if compiler(>=5.3) && $AsyncAwait
   public func onReturnVoid() async throws
-  #endif
-  #if compiler(>=5.3) && $AsyncAwait
   public func onThrow<Err>(error: Err) async throws where Err : Swift.Error
-  #endif
 }
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 public struct LocalTestingDistributedActorSystemError : Distributed.DistributedActorSystemError {

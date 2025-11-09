@@ -14,8 +14,9 @@ exports:
                        __Z9_radToDegd, __ZN13HYDQuaternion13FromAxisAngleERK7HYDVec3d, 
                        __ZN13HYDQuaternion15FromEulerAnglesERK7HYDVec3b, __ZNK13HYDQuaternion10GetInverseEv, 
                        __ZNK13HYDQuaternion13GetNormalizedEv, __ZNK13HYDQuaternion9TransformERK7HYDVec3, 
-                       __ZNK13HYDQuaternionmlERKS_ ]
-    objc-classes:    [ HYDAxisAlignedBounds, HYDBlitter, HYDCamera, HYDExporter, 
-                       HYDLoadingProgressRenderer, HYDPrimNode, HYDRenderParams, 
-                       HYDRenderer, HYDRenderingServiceProxy, HYDSceneNode, HYDStageInfo ]
+                       __ZNK13HYDQuaternionmlERKS_, __domain ]
+    objc-classes:    [ HYDAxisAlignedBounds, HYDBlitter, HYDCamera, HYDExportParams, 
+                       HYDExporter, HYDLoadingProgressRenderer, HYDPrimNode, HYDRenderParams, 
+                       HYDRenderer, HYDRenderingServiceProxy, HYDSceneNode, HYDStageInfo, 
+                       HYDStageTransformParams, HYDUSDAppIntents ]
 ...

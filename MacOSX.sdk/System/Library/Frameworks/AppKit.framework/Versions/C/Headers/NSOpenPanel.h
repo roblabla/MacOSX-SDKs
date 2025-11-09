@@ -1,7 +1,7 @@
 /*
     NSOpenPanel.h
     Application Kit
-    Copyright (c) 1994-2023, Apple Inc.
+    Copyright (c) 1994-2024, Apple Inc.
     All rights reserved.
 */
 
@@ -47,6 +47,12 @@ To provide the ideal user experience, you should set this property to NO and dow
 /* Gets and sets the disclosure state of an accessory view in an NSOpenPanel. If hiding / disclosing an accessory view is not applicable this property will behave like a read only property. */
 
 @property (getter=isAccessoryViewDisclosed) BOOL accessoryViewDisclosed API_AVAILABLE(macos(10.11));
+
+@end
+
+@interface NSOpenPanel (InheritedAndUnavailable)
+
+@property BOOL showsContentTypes NS_UNAVAILABLE;
 
 @end
 

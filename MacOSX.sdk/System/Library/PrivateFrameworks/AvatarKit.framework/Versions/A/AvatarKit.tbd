@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/AvatarKit.framework/Versions/A/AvatarKit'
-current-version: 342.255
+current-version: 346
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _AVTAnimojiThumbnailCameraKey, _AVTAnimojiThumbnailLargeSizeKey, 
@@ -51,5 +51,5 @@ exports:
                        AVTPresentationConfiguration, AVTPreset, AVTRecordView, AVTRenderer, 
                        AVTSnapshotBuilder, AVTStickerConfiguration, AVTStickerGenerator, 
                        AVTStickerGeneratorOptions, AVTStickerGeneratorPosterOptions, 
-                       AVTVariantBatchSnapshotter, AVTView ]
+                       AVTView ]
 ...

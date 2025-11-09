@@ -2,10 +2,9 @@
 //  PKEraserTool.h
 //  PencilKit
 //
-//  Copyright © 2019 Apple. All rights reserved.
+//  Copyright © 2019 Apple Inc. All rights reserved.
 //
 
-#import <PencilKit/PencilKit.h>
 #import <PencilKit/PKTool.h>
 
 NS_ASSUME_NONNULL_BEGIN

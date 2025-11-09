@@ -52,6 +52,7 @@ exports:
                        _NLTransliteratorAcceptCandidate, _NLTransliteratorAssetsAvailable, 
                        _NLTransliteratorCopyCandidates, _NLTransliteratorCreate, 
                        _NLTransliteratorFlushDynamicLanguageModel, _NLTransliteratorResetDynamicLanguageModel, 
+                       '_OBJC_CLASS_$_NLParsecDataManager', '_OBJC_CLASS_$_NLSearchParserManager', 
                        _kNLEmojiPredictionLocaleKey, _kNLEmojiPredictionResourceDirectoryKey, 
                        _kNLMessageIntentAttributeKeywordsKey, _kNLMessageIntentRecognizerCustomModelPathKey, 
                        _kNLMessageIntentRecognizerLocaleKey, _kNLMorphologicalAnalyzerLocaleKey, 
@@ -71,5 +72,4 @@ exports:
                        _kNLTransliteratorBundleURLKey, _kNLTransliteratorCandidateMetadataLMScoreKey, 
                        _kNLTransliteratorCandidateMetadataSeq2SeqScoreKey, _kNLTransliteratorCandidateMetadataTotalScoreKey, 
                        _kNLTransliteratorTargetLocaleKey ]
-    objc-classes:    [ NLParsecDataManager, NLSearchParserManager ]
 ...

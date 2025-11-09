@@ -13,7 +13,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-/// Sparse Storage options in MPSGraph.
+/// The sparse storage options in the Metal Performance Shaders Graph framework.
 typedef NS_ENUM(uint64_t, MPSGraphSparseStorageType) {
     /// COO Storage
     MPSGraphSparseStorageCOO MPS_ENUM_AVAILABLE_STARTING(macos(12.0), ios(15.0), tvos(15.0)) MPS_SWIFT_NAME(COO) = 0,
@@ -23,20 +23,21 @@ typedef NS_ENUM(uint64_t, MPSGraphSparseStorageType) {
     MPSGraphSparseStorageCSR MPS_ENUM_AVAILABLE_STARTING(macos(12.0), ios(15.0), tvos(15.0)) = 2L,
 };
 
+/// A class that describes the properties of a create sparse operation.
 MPS_CLASS_AVAILABLE_STARTING(macos(12.0), ios(15.0), tvos(15.0))
 @interface MPSGraphCreateSparseOpDescriptor : MPSGraphObject <NSCopying>
 
-/// Defines storage format of sparse tensor.
+/// Defines the storage format of the sparse tensor.
 @property(readwrite, nonatomic) MPSGraphSparseStorageType sparseStorageType;
 
-/// Defines datatype of sparse tensor.
+/// Defines the datatype of the sparse tensor.
 @property(readwrite, nonatomic) MPSDataType dataType;
 
 /// Creates a descriptor for a sparse tensor.
 ///
 /// - Parameters:
 ///   - sparseStorageType: A sparseStorageType.
-///   - dataType: A dataType of sparse tensor.
+///   - dataType: A dataType of the sparse tensor.
 /// - Returns: The descriptor.
 + (nullable instancetype)descriptorWithStorageType:(MPSGraphSparseStorageType)sparseStorageType
                                           dataType:(MPSDataType)dataType
@@ -46,7 +47,7 @@ MPS_CLASS_AVAILABLE_STARTING(macos(12.0), ios(15.0), tvos(15.0))
 
 @interface MPSGraph (MPSGraphSparseOps)
 
-/// Creates a sparseTensor representation.
+/// Creates a sparse tensor representation.
 ///
 /// sparseVals corresponds to non zero values in matrix. 
 /// indexTensor0 and indexTensor1 are indices used for indexing into sparse data structure. 
@@ -70,7 +71,7 @@ MPS_CLASS_AVAILABLE_STARTING(macos(12.0), ios(15.0), tvos(15.0))
     MPS_AVAILABLE_STARTING(macos(12.0), ios(15.0), tvos(15.0))
     MPS_SWIFT_NAME(sparseTensor(sparseTensorWithType:tensors:shape:dataType:name:));
 
-/// Creates a sparseTensor representation.
+/// Creates a sparse tensor representation.
 ///
 /// sparseVals corresponds to non zero values in matrix. 
 /// indexTensor0 and indexTensor1 are indices used for indexing into sparse data structure. 

@@ -19,7 +19,7 @@ NS_CLASS_AVAILABLE(10_9, 7_0) __TVOS_AVAILABLE(9_2) API_UNAVAILABLE(watchos)
 
 - (instancetype)initWithOptions:(MKMapSnapshotOptions *)options NS_DESIGNATED_INITIALIZER;
 
-- (void)startWithCompletionHandler:(MKMapSnapshotCompletionHandler)completionHandler; // defaults to the main queue
+- (void)startWithCompletionHandler:(NS_SWIFT_UI_ACTOR MKMapSnapshotCompletionHandler)completionHandler; // defaults to the main queue
 - (void)startWithQueue:(dispatch_queue_t)queue completionHandler:(MKMapSnapshotCompletionHandler)completionHandler;
 - (void)cancel;
 

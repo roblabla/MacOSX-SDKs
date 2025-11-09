@@ -15,7 +15,7 @@ NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 /* UIVibrancyEffect amplifies and adjusts the color of content layered behind the view, allowing content placed inside the contentView to become more vivid. It is intended to be placed over, or as a subview of, a UIVisualEffectView that has been configured with a UIBlurEffect. This effect only affects content added to the contentView. Because the vibrancy effect is color dependent, subviews added to the contentView need to be tintColorDidChange aware and must be prepared to update themselves accordingly. UIImageView will need its image to have a rendering mode of UIImageRenderingModeAlwaysTemplate to receive the proper effect.
  */
-UIKIT_EXTERN API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(8.0), tvos(9.0)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @interface UIVibrancyEffect : UIVisualEffect
 
 + (UIVibrancyEffect *)effectForBlurEffect:(UIBlurEffect *)blurEffect;
@@ -46,11 +46,11 @@ typedef NS_ENUM(NSInteger, UIVibrancyEffectStyle) {
      */
     UIVibrancyEffectStyleSeparator,
 
-} API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos) API_UNAVAILABLE(tvos);
+} API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, tvos);
 
 @interface UIVibrancyEffect (AdditionalStyles)
 
-+ (UIVibrancyEffect *)effectForBlurEffect:(UIBlurEffect *)blurEffect style:(UIVibrancyEffectStyle)style API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos) API_UNAVAILABLE(tvos);
++ (UIVibrancyEffect *)effectForBlurEffect:(UIBlurEffect *)blurEffect style:(UIVibrancyEffectStyle)style API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, tvos);
 
 @end
 

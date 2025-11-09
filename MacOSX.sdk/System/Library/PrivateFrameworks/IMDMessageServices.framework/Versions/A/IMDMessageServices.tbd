@@ -8,6 +8,7 @@ exports:
     symbols:         [ _IMDMessageServicesCallbackIntervalKey, _IMDMessageServicesExpireStateDictionaryKey, 
                        _IMDMessageServicesExpireStateKey, _IMDMessageServicesExpireStateShouldDeleteKey, 
                        _IMDMessageServicesFlagsKey, _IMDMessageServicesRoutingDictionaryKey, 
+                       _IMDMessageServicesScheduledDateKey, _IMDMessageServicesScheduledMessagesDictionaryKey, 
                        _IMDMessageServicesServiceKey, _IMDMessageServicesUpdateDowngradePropertiesKey, 
                        _IMDMessageServicesWatchdogDictionaryKey, _IMDMessageServicesWatchdogShouldFailSendKey ]
     objc-classes:    [ IMDMessageServicesCenter ]

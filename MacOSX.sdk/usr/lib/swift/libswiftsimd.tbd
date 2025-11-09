@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/usr/lib/swift/libswiftsimd.dylib'
-current-version: 18
+current-version: 21
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -848,4 +848,35 @@ exports:
                        '_$ss5SIMD3V4simdE19_descriptionAsArraySSvg', '_$ss5SIMD3V4simdE19_descriptionAsArraySSvpMV', 
                        '_$ss5SIMD4V4simdE19_descriptionAsArraySSvg', '_$ss5SIMD4V4simdE19_descriptionAsArraySSvpMV', 
                        '__swift_FORCE_LOAD_$_swiftsimd' ]
+  - targets:         [ arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
+    symbols:         [ '_$s4simd3absys5SIMD2Vys7Float16VGAGF', '_$s4simd3absys5SIMD3Vys7Float16VGAGF', 
+                       '_$s4simd3absys5SIMD4Vys7Float16VGAGF', '_$s4simd3absys5SIMD8Vys7Float16VGAGF', 
+                       '_$s4simd3absys6SIMD16Vys7Float16VGAGF', '_$s4simd3absys6SIMD32Vys7Float16VGAGF', 
+                       '_$s4simd3maxys5SIMD2Vys7Float16VGAG_AFtF', '_$s4simd3maxys5SIMD2Vys7Float16VGAG_AGtF', 
+                       '_$s4simd3maxys5SIMD3Vys7Float16VGAG_AFtF', '_$s4simd3maxys5SIMD3Vys7Float16VGAG_AGtF', 
+                       '_$s4simd3maxys5SIMD4Vys7Float16VGAG_AFtF', '_$s4simd3maxys5SIMD4Vys7Float16VGAG_AGtF', 
+                       '_$s4simd3maxys5SIMD8Vys7Float16VGAG_AFtF', '_$s4simd3maxys5SIMD8Vys7Float16VGAG_AGtF', 
+                       '_$s4simd3maxys6SIMD16Vys7Float16VGAG_AFtF', '_$s4simd3maxys6SIMD16Vys7Float16VGAG_AGtF', 
+                       '_$s4simd3maxys6SIMD32Vys7Float16VGAG_AFtF', '_$s4simd3maxys6SIMD32Vys7Float16VGAG_AGtF', 
+                       '_$s4simd3minys5SIMD2Vys7Float16VGAG_AFtF', '_$s4simd3minys5SIMD2Vys7Float16VGAG_AGtF', 
+                       '_$s4simd3minys5SIMD3Vys7Float16VGAG_AFtF', '_$s4simd3minys5SIMD3Vys7Float16VGAG_AGtF', 
+                       '_$s4simd3minys5SIMD4Vys7Float16VGAG_AFtF', '_$s4simd3minys5SIMD4Vys7Float16VGAG_AGtF', 
+                       '_$s4simd3minys5SIMD8Vys7Float16VGAG_AFtF', '_$s4simd3minys5SIMD8Vys7Float16VGAG_AGtF', 
+                       '_$s4simd3minys6SIMD16Vys7Float16VGAG_AFtF', '_$s4simd3minys6SIMD16Vys7Float16VGAG_AGtF', 
+                       '_$s4simd3minys6SIMD32Vys7Float16VGAG_AFtF', '_$s4simd3minys6SIMD32Vys7Float16VGAG_AGtF', 
+                       '_$s4simd4ceilys5SIMD2Vys7Float16VGAGF', '_$s4simd4ceilys5SIMD3Vys7Float16VGAGF', 
+                       '_$s4simd4ceilys5SIMD4Vys7Float16VGAGF', '_$s4simd4ceilys5SIMD8Vys7Float16VGAGF', 
+                       '_$s4simd4ceilys6SIMD16Vys7Float16VGAGF', '_$s4simd4ceilys6SIMD32Vys7Float16VGAGF', 
+                       '_$s4simd4rintys5SIMD2Vys7Float16VGAGF', '_$s4simd4rintys5SIMD3Vys7Float16VGAGF', 
+                       '_$s4simd4rintys5SIMD4Vys7Float16VGAGF', '_$s4simd4rintys5SIMD8Vys7Float16VGAGF', 
+                       '_$s4simd4rintys6SIMD16Vys7Float16VGAGF', '_$s4simd4rintys6SIMD32Vys7Float16VGAGF', 
+                       '_$s4simd4sqrtys5SIMD2Vys7Float16VGAGF', '_$s4simd4sqrtys5SIMD3Vys7Float16VGAGF', 
+                       '_$s4simd4sqrtys5SIMD4Vys7Float16VGAGF', '_$s4simd4sqrtys5SIMD8Vys7Float16VGAGF', 
+                       '_$s4simd4sqrtys6SIMD16Vys7Float16VGAGF', '_$s4simd4sqrtys6SIMD32Vys7Float16VGAGF', 
+                       '_$s4simd5floorys5SIMD2Vys7Float16VGAGF', '_$s4simd5floorys5SIMD3Vys7Float16VGAGF', 
+                       '_$s4simd5floorys5SIMD4Vys7Float16VGAGF', '_$s4simd5floorys5SIMD8Vys7Float16VGAGF', 
+                       '_$s4simd5floorys6SIMD16Vys7Float16VGAGF', '_$s4simd5floorys6SIMD32Vys7Float16VGAGF', 
+                       '_$s4simd5truncys5SIMD2Vys7Float16VGAGF', '_$s4simd5truncys5SIMD3Vys7Float16VGAGF', 
+                       '_$s4simd5truncys5SIMD4Vys7Float16VGAGF', '_$s4simd5truncys5SIMD8Vys7Float16VGAGF', 
+                       '_$s4simd5truncys6SIMD16Vys7Float16VGAGF', '_$s4simd5truncys6SIMD32Vys7Float16VGAGF' ]
 ...

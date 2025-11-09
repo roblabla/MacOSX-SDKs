@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/LocationSupport.framework/Versions/A/LocationSupport'
-current-version: 2890.16.16
+current-version: 2946.0.37
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -44,9 +44,11 @@ exports:
                        __ZN18CLConnectionServer11handleEventEPU24objcproto13OS_xpc_object8NSObject, 
                        __ZN18CLConnectionServer13handleMessageEP12CLConnectionNSt3__110shared_ptrI19CLConnectionMessageEE, 
                        __ZN18CLConnectionServer16handleConnectionEPU24objcproto13OS_xpc_object8NSObject, 
-                       __ZN18CLConnectionServer19handleDisconnectionEP12CLConnection, 
+                       __ZN18CLConnectionServer17initializeServiceEv, __ZN18CLConnectionServer19handleDisconnectionEP12CLConnection, 
                        __ZN18CLConnectionServerC1ENSt3__112basic_stringIcNS0_11char_traitsIcEENS0_9allocatorIcEEEEPU28objcproto17OS_dispatch_queue8NSObjectU13block_pointerFvNS0_10unique_ptrI12CLConnection19CLConnectionDeleterEENS0_10shared_ptrI19CLConnectionMessageEEE, 
+                       __ZN18CLConnectionServerC1EPU24objcproto13OS_xpc_object8NSObjectPU28objcproto17OS_dispatch_queueS0_U13block_pointerFvNSt3__110unique_ptrI12CLConnection19CLConnectionDeleterEENS5_10shared_ptrI19CLConnectionMessageEEE, 
                        __ZN18CLConnectionServerC2ENSt3__112basic_stringIcNS0_11char_traitsIcEENS0_9allocatorIcEEEEPU28objcproto17OS_dispatch_queue8NSObjectU13block_pointerFvNS0_10unique_ptrI12CLConnection19CLConnectionDeleterEENS0_10shared_ptrI19CLConnectionMessageEEE, 
+                       __ZN18CLConnectionServerC2EPU24objcproto13OS_xpc_object8NSObjectPU28objcproto17OS_dispatch_queueS0_U13block_pointerFvNSt3__110unique_ptrI12CLConnection19CLConnectionDeleterEENS5_10shared_ptrI19CLConnectionMessageEEE, 
                        __ZN18CLConnectionServerD1Ev, __ZN18CLConnectionServerD2Ev, 
                        __ZN19CLConnectionMessage10isEntitledERKNSt3__112basic_stringIcNS0_11char_traitsIcEENS0_9allocatorIcEEEE, 
                        __ZN19CLConnectionMessage10isReplyingEv, __ZN19CLConnectionMessage15createXPCObjectEPU25objcproto14NSSecureCoding11objc_object, 

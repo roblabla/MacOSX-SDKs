@@ -17,7 +17,7 @@ NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 typedef NS_ENUM (NSInteger, UITextInteractionMode) {
     UITextInteractionModeEditable,
     UITextInteractionModeNonEditable,
-};
+} API_UNAVAILABLE(watchos);
 
 UIKIT_EXTERN API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(tvos, watchos) NS_SWIFT_UI_ACTOR
 @protocol UITextInteractionDelegate <NSObject>

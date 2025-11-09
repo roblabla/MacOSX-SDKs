@@ -21,13 +21,12 @@ typedef NS_ENUM(NSInteger, VSSubscriptionAccessLevel)
     VSSubscriptionAccessLevelUnknown, /// The default access level. Setting a subscription with this level will raise an exception.
     VSSubscriptionAccessLevelFreeWithAccount, /// The customer has access to content that is offered for free to users with a valid account.  This value corresponds content in your availability feed with the "account" offering type.
     VSSubscriptionAccessLevelPaid, /// The customer also has access to content that is offered as part of a paid subscription.  The value corresponds content in your availability feed with the "subscription" offering type.
-}
-API_AVAILABLE(ios(11.0), tvos(11.0)) API_UNAVAILABLE(macCatalyst);
+} API_DEPRECATED_WITH_REPLACEMENT("VSUserAccountType", ios(11.0, 18.0), tvos(11.0, 18.0), visionos(1.0, 2.0)) API_UNAVAILABLE(macCatalyst);
 
 /// A VSSubscription instance describes the extent to which a subscriber has
 /// access to content.
-VS_EXPORT API_AVAILABLE(ios(11.0), tvos(11.0)) API_UNAVAILABLE(macCatalyst)
-@interface VSSubscription : NSObject
+VS_EXPORT API_DEPRECATED_WITH_REPLACEMENT("VSUserAccount", ios(11.0, 18.0), tvos(11.0, 18.0), visionos(1.0, 2.0)) API_UNAVAILABLE(macCatalyst)
+    @interface VSSubscription : NSObject
 
 /// After this point in time, the subscription will be considered inactive.
 ///

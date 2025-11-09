@@ -22,7 +22,7 @@ HM_EXTERN NS_SWIFT_SENDABLE API_AVAILABLE(ios(11.0), watchos(4.0), tvos(11.0), m
  *
  * @param significantEvent The significant event for the trigger.
  *
- * @param offset An offset from the time of the signficant event. To specify an offset before the significant event, the
+ * @param offset An offset from the time of the significant event. To specify an offset before the significant event, the
  *               properties of the NSDateComponents must be negative value. e.g. To specify 30 mins before sunset, the
  *               'minute' property must be set to -30.
  *
@@ -58,7 +58,7 @@ HM_EXTERN NS_SWIFT_SENDABLE API_AVAILABLE(ios(11.0), watchos(4.0), tvos(11.0), m
 @property (readwrite, strong, nonatomic) HMSignificantEvent significantEvent;
 
 /*!
- * @brief offset An offset from the time of the signficant event. To specify an offset before the significant event, the
+ * @brief offset An offset from the time of the significant event. To specify an offset before the significant event, the
  *               properties of the NSDateComponents must be negative value. e.g. To specify 30 mins before sunset, the
  *               'minute' property must be set to -30.
  */

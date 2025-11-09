@@ -9,5 +9,5 @@ exports:
                        arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s27LiveExecutionResultsRuntime19__builtin_send_datayyyXlF', 
                        _LiveExecutionResultsRuntimeVersionNumber, _LiveExecutionResultsRuntimeVersionString, 
-                       __ler_send_log_data ]
+                       __ler_print_hook, __ler_send_log_data ]
 ...

@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/CoreSVG.framework/Versions/A/CoreSVG'
-current-version: 329
+current-version: 336
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -106,8 +106,9 @@ exports:
                        _CGSVGRootNodeGetSize, _CGSVGRootNodeGetViewbox, _CGSVGRootNodeSetAspectRatio, 
                        _CGSVGRootNodeSetAspectRatioMeetOrSlice, _CGSVGRootNodeSetSize, 
                        _CGSVGRootNodeSetViewbox, _CGSVGShapeNodeCopyText, _CGSVGShapeNodeCreate, 
-                       _CGSVGShapeNodeGetCircleGeometry, _CGSVGShapeNodeGetEllipseGeometry, 
-                       _CGSVGShapeNodeGetFloatCount, _CGSVGShapeNodeGetFloats, _CGSVGShapeNodeGetLineGeometry, 
+                       _CGSVGShapeNodeCreateCGPath, _CGSVGShapeNodeGetCircleGeometry, 
+                       _CGSVGShapeNodeGetEllipseGeometry, _CGSVGShapeNodeGetFloatCount, 
+                       _CGSVGShapeNodeGetFloats, _CGSVGShapeNodeGetLineGeometry, 
                        _CGSVGShapeNodeGetPath, _CGSVGShapeNodeGetPrimitive, _CGSVGShapeNodeGetRectGeometry, 
                        _CGSVGShapeNodeSetCircleGeometry, _CGSVGShapeNodeSetEllipseGeometry, 
                        _CGSVGShapeNodeSetFloats, _CGSVGShapeNodeSetLineGeometry, 

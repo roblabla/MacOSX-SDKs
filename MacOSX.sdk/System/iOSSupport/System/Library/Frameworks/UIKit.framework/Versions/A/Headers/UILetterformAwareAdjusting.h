@@ -27,9 +27,9 @@ typedef NS_ENUM(NSInteger, UILetterformAwareSizingRule) {
     
     /// `UILetterformAwareSizingRuleOversize`: `-sizeThatFits:` and `-intrinsicContentSize` results will account for extreme ascenders or descenders in tall scripts, but in such cases might not work well for typographic alignment of top and bottom edges and vertical centers of the view frames
     UILetterformAwareSizingRuleOversize,
-} API_AVAILABLE(ios(17.0),tvos(17.0),watchos(10.0));
+} API_AVAILABLE(ios(17.0), tvos(17.0)) API_UNAVAILABLE(watchos);
 
-UIKIT_EXTERN API_AVAILABLE(ios(17.0),tvos(17.0),watchos(10.0)) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(17.0), tvos(17.0)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @protocol UILetterformAwareAdjusting <NSObject>
 
 /// `sizingRule` defaults to `UILetterformAwareSizingRuleTypographic` and determines what rule is used during the calculation of `-sizeThatFits:` and `-intrinsicContentSize`

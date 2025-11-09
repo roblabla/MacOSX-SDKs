@@ -9,7 +9,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-SA_EXTERN NSErrorDomain SAErrorDomain API_AVAILABLE(ios(16.0), macos(13.0), watchos(9.0)) API_UNAVAILABLE(tvos);
+SA_EXTERN NSErrorDomain SAErrorDomain API_AVAILABLE(ios(16.0), macos(13.0), watchos(10.1)) API_UNAVAILABLE(tvos);
 
 /*!
  @enum      SAErrorCode
@@ -24,6 +24,6 @@ typedef NS_ERROR_ENUM(SAErrorDomain, SAErrorCode) {
     SAErrorNotAllowed,
     SAErrorInvalidArgument,
     SAErrorOperationFailed,
-} API_AVAILABLE(ios(16.0), macos(13.0), watchos(9.0)) API_UNAVAILABLE(tvos);
+} API_AVAILABLE(ios(16.0), macos(13.0), watchos(10.1)) API_UNAVAILABLE(tvos);
 
 NS_ASSUME_NONNULL_END

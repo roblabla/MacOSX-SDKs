@@ -27,12 +27,12 @@ typedef NS_ENUM(NSInteger, UIContextMenuConfigurationElementOrder) {
  * @param suggestedActions  An array of suggested actions gathered from the UIResponder chain. You may choose to include
  *                          some of these actions in the hierarchy returned from this block to display them in the resulting menu.
  */
-typedef UIMenu * _Nullable (^UIContextMenuActionProvider)(NSArray<UIMenuElement *> *suggestedActions);
+typedef UIMenu * _Nullable (^UIContextMenuActionProvider)(NSArray<UIMenuElement *> *suggestedActions) API_UNAVAILABLE(watchos);
 
 /*!
  * @abstract Return a UIViewController to be displayed as this menu's preview component.
  */
-typedef UIViewController * _Nullable (^UIContextMenuContentPreviewProvider)(void);
+typedef UIViewController * _Nullable (^UIContextMenuContentPreviewProvider)(void) API_UNAVAILABLE(watchos);
 
 
 UIKIT_EXTERN API_AVAILABLE(ios(13.0), tvos(17.0)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR

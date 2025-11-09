@@ -2,7 +2,7 @@
 //  VZDefines.h
 //  Virtualization
 //
-//  Copyright © 2019 Apple Inc. All rights reserved.
+//  Copyright © 2019-2023 Apple Inc. All rights reserved.
 //
 
 #import <Availability.h>
@@ -14,3 +14,4 @@
 #else
 #define VZ_EXPORT extern __attribute__((visibility ("default")))
 #endif
+

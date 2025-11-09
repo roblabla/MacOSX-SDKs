@@ -35,4 +35,9 @@ typedef NS_ENUM(NSInteger, MKFeatureVisibility) {
     MKFeatureVisibilityVisible
 } API_AVAILABLE(ios(11.0), tvos(11.0), macos(11.0)) API_UNAVAILABLE(watchos);
 
+typedef NS_ENUM(NSInteger, MKLocalSearchRegionPriority) {
+    MKLocalSearchRegionPriorityDefault = 0,
+    MKLocalSearchRegionPriorityRequired
+} API_AVAILABLE(ios(18.0), visionos(2.0), tvos(18.0), macos(15.0)) API_UNAVAILABLE(watchos);
+
 NS_ASSUME_NONNULL_END

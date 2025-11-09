@@ -14,6 +14,12 @@
 #ifndef __NWEndpoint_h_
 #define __NWEndpoint_h_
 
+/**
+ * DEPRECATION NOTICE
+ *
+ * NW object wrappers are hidden in Swift 6. To continue accessing them, you
+ * can prepend double underscores to the symbol name.
+ */
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -21,7 +27,8 @@ NS_ASSUME_NONNULL_BEGIN
  * @interface NWEndpoint
  * @discussion NWEndpoint is a generic class to represent network endpoints, such as a port on a remote server.
  */
-API_AVAILABLE(macos(10.11), ios(9.0), tvos(17.0)) API_UNAVAILABLE(watchos)
+API_DEPRECATED("Use nw_endpoint_t in Network framework instead, see deprecation notice in <NetworkExtension/NWEndpoint.h>", macos(10.11, 15.0), ios(9.0, 18.0), tvos(17.0, 18.0), visionos(1.0, 2.0))
+API_UNAVAILABLE(watchos)
 @interface NWEndpoint : NSObject <NSSecureCoding, NSCopying>
 
 @end

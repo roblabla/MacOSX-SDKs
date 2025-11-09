@@ -29,6 +29,7 @@
 
 
 #include <Availability.h>
+#include <ConditionalMacros.h>
 
 #if PRAGMA_ONCE
 #pragma once

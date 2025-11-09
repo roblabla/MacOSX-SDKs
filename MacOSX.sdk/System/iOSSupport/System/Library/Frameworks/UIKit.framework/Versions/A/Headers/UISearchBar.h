@@ -22,13 +22,13 @@ typedef NS_ENUM(NSInteger, UISearchBarIcon) {
     UISearchBarIconClear API_UNAVAILABLE(tvos), // The circle with an x in it
     UISearchBarIconBookmark API_UNAVAILABLE(tvos), // The open book icon
     UISearchBarIconResultsList API_UNAVAILABLE(tvos), // The list lozenge icon
-};
+} API_UNAVAILABLE(watchos);
 
 typedef NS_ENUM(NSUInteger, UISearchBarStyle) {
     UISearchBarStyleDefault,    // currently UISearchBarStyleProminent
     UISearchBarStyleProminent,  // used my Mail, Messages and Contacts
     UISearchBarStyleMinimal     // used by Calendar, Notes and Music
-} API_AVAILABLE(ios(7.0));
+} API_AVAILABLE(ios(7.0)) API_UNAVAILABLE(watchos);
 
 @protocol UISearchBarDelegate;
 @class UITextField, UILabel, UIButton, UIColor, UISearchTextField;
@@ -37,12 +37,12 @@ typedef NS_ENUM(NSUInteger, UISearchBarStyle) {
  UISearchBar officially conformed to UITextInputTraits in iOS 8.0 and privately conformed in iOS 7.0. Prior to 7.0, UISearchBar only implemented these four traits: autocapitalizationType, autocorrectionType, spellCheckingType and keyboardType. If your deployment target is <7.0 and you are using any trait other than one of the four mentioned, you must check its availability with respondsToSelector:
  */
 
-@protocol UILookToDictateCapable <NSObject>
+API_UNAVAILABLE(watchos) @protocol UILookToDictateCapable <NSObject>
 /// Enable or disable 'Look To Dictate' on the receiver.
 @property (nonatomic, getter=isLookToDictateEnabled) BOOL lookToDictateEnabled API_AVAILABLE(visionos(1.0), ios(17.0)) API_UNAVAILABLE(tvos, watchos, macos);
 @end
 
-UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(2.0)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @interface UISearchBar : UIView <UIBarPositioning, UITextInputTraits, UILookToDictateCapable>
 
 - (instancetype)init API_UNAVAILABLE(tvos);
@@ -71,7 +71,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
 /// Use this method to modify the contents of the Unified Content Bar, shown on top of the keyboard when search is engaged.
 /// You may modify the returned inputAssistantItem to add to or replace the existing items on the bar.
 /// Modifications made to the returned UITextInputAssistantItem are reflected automatically.
-@property (nonatomic, readonly, strong) UITextInputAssistantItem *inputAssistantItem API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos) API_UNAVAILABLE(visionos);
+@property (nonatomic, readonly, strong) UITextInputAssistantItem *inputAssistantItem API_AVAILABLE(ios(9.0), visionos(2.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos);
 
 /*
  The behavior of tintColor for bars has changed on iOS 7.0. It no longer affects the bar's background
@@ -107,7 +107,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
  On iOS 16.0, UISearchController's scopeBarActivation is set to UISearchControllerScopeBarActivationManual
  */
 @property(nonatomic)      BOOL       showsScopeBar            API_AVAILABLE(ios(3.0)); // default is NO. if YES, shows the scope bar. call sizeToFit: to update frame
-- (void)setShowsScopeBar:(BOOL)show animated:(BOOL)animate API_AVAILABLE(ios(13.0));
+- (void)setShowsScopeBar:(BOOL)show animated:(BOOL)animate API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos);
 
 /* Allow placement of an input accessory view to the keyboard for the search bar
  */
@@ -116,7 +116,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
 /// When set to false, user interaction will be prevented and the search bar will take on a disabled appearance
 /// If the search bar is associated with a UINavigationItem with `UINavigationItemSearchBarPlacementInline`,
 /// then the minimized (icon-only) UISearchBar will not grow to the text field while `enabled` is false.
-@property (nonatomic, getter=isEnabled) BOOL enabled API_AVAILABLE(ios(16.4),tvos(16.4)); // Default YES
+@property (nonatomic, getter=isEnabled) BOOL enabled API_AVAILABLE(ios(16.4), tvos(16.4)) API_UNAVAILABLE(watchos); // Default YES
 
 // 1pt wide images and resizable images will be scaled or tiled according to the resizable area, otherwise the image will be tiled
 @property(nullable, nonatomic,strong) UIImage *backgroundImage API_AVAILABLE(ios(5.0)) UI_APPEARANCE_SELECTOR;
@@ -172,7 +172,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
 @property (nonatomic, getter=isLookToDictateEnabled) BOOL lookToDictateEnabled API_AVAILABLE(visionos(1.0), ios(17.0)) API_UNAVAILABLE(tvos, watchos, macos);
 @end
 
-NS_SWIFT_UI_ACTOR
+API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @protocol UISearchBarDelegate <UIBarPositioningDelegate>
 
 @optional

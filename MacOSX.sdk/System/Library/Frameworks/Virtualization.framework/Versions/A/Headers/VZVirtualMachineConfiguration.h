@@ -2,7 +2,7 @@
 //  VZVirtualMachineConfiguration.h
 //  Virtualization
 //
-//  Copyright © 2019-2023 Apple Inc. All rights reserved.
+//  Copyright © 2019-2024 Apple Inc. All rights reserved.
 //
 
 #import <Virtualization/VZDefines.h>
@@ -23,6 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
 @class VZSerialPortConfiguration;
 @class VZSocketDeviceConfiguration;
 @class VZStorageDeviceConfiguration;
+@class VZUSBControllerConfiguration;
 
 /*!
  @abstract Virtual machine configuration.
@@ -47,17 +48,17 @@ NS_ASSUME_NONNULL_BEGIN
     ## Configuring a virtual machine to run macOS
 
     To configure a virtual machine running macOS:
-    - Set up a platform configuration of type VZMacPlatformConfiguration and set it on the “platform” property.
-    - Set up a VZMacOSBootLoader on the “bootLoader” property.
+    - Set up a platform configuration of type VZMacPlatformConfiguration and set it on the `platform` property.
+    - Set up a VZMacOSBootLoader on the `bootLoader` property.
     - Set the CPUCount and memorySize based on the guest's VZMacOSConfigurationRequirements.
-    - Set up the main storage device as first device on “storageDevices”. Additional storage devices can be set up after the main storage.
-    - Set up the “keyboards”, “pointingDevices” and “graphicsDevices” devices.
+    - Set up the main storage device as first device on `storageDevices`. Additional storage devices can be set up after the main storage.
+    - Set up the `keyboards`, `pointingDevices` and `graphicsDevices` devices.
     - Set up any additional device as needed.
 
     ## Configuring a virtual machine to run Linux
 
     To configure a virtual machine running Linux:
-    - Set up a VZLinuxBootLoader on the “bootLoader” property.
+    - Set up a VZLinuxBootLoader on the `bootLoader` property.
     - Set the CPUCount and memorySize.
     - Set up any additional device as needed.
 
@@ -101,6 +102,10 @@ VZ_EXPORT API_AVAILABLE(macos(11.0))
  @abstract The hardware platform to use.
  @discussion
     Can be an instance of a VZGenericPlatformConfiguration or VZMacPlatformConfiguration. Defaults to VZGenericPlatformConfiguration.
+    When restoring from saved state you must ensure your configuration matches that of the saved virtual machine.
+
+ @see VZGenericPlatformConfiguration
+ @see VZMacPlatformConfiguration
  */
 @property (strong) VZPlatformConfiguration *platform API_AVAILABLE(macos(12.0));
 
@@ -179,6 +184,15 @@ VZ_EXPORT API_AVAILABLE(macos(11.0))
  @see VZMacGraphicsDeviceConfiguration
  */
 @property (copy) NSArray<VZGraphicsDeviceConfiguration *> *graphicsDevices API_AVAILABLE(macos(12.0));
+
+/*!
+ @abstract List of USB Controllers. Empty by default.
+ @discussion
+    This list represents a set of USB controllers that the virtual machine will start with.
+    For each entry in this list, there will be a corresponding runtime object created in VZVirtualMachine.usbControllers property.
+ @see VZUSBControllerConfiguration
+ */
+@property (readwrite, copy) NSArray<VZUSBControllerConfiguration *> *usbControllers API_AVAILABLE(macos(15.0));
 
 @end
 

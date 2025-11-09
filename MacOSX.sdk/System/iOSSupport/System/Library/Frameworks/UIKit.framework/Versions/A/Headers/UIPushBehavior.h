@@ -16,9 +16,9 @@ NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 typedef NS_ENUM(NSInteger, UIPushBehaviorMode) {
     UIPushBehaviorModeContinuous,
     UIPushBehaviorModeInstantaneous
-} API_AVAILABLE(ios(7.0));
+} API_AVAILABLE(ios(7.0)) API_UNAVAILABLE(watchos);
 
-UIKIT_EXTERN API_AVAILABLE(ios(7.0)) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(7.0)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @interface UIPushBehavior : UIDynamicBehavior
 
 - (instancetype)initWithItems:(NSArray<id <UIDynamicItem>> *)items mode:(UIPushBehaviorMode)mode NS_DESIGNATED_INITIALIZER;

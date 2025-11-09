@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 flags:           [ not_app_extension_safe ]
 install-name:    '/System/Library/PrivateFrameworks/CoreFP.framework/CoreFP'
-current-version: 4.5
+current-version: 4.8
 compatibility-version: 2.2.19
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

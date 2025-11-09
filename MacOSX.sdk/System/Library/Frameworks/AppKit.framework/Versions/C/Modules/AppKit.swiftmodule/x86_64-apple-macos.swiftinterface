@@ -1,13 +1,15 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.10 (swiftlang-5.10.0.12.5 clang-1500.3.9.1.1)
-// swift-module-flags: -target x86_64-apple-macos14.5 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-bare-slash-regex -user-module-version 2487.60.105 -module-name AppKit
+// swift-compiler-version: Apple Swift version 6.0 effective-5.10 (swiftlang-6.0.0.7.24 clang-1600.0.25.1)
+// swift-module-flags: -target x86_64-apple-macos15.0 -target-variant x86_64-apple-ios18.0-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-bare-slash-regex -user-module-version 2566 -module-name AppKit
 @_exported import Accessibility
 @_exported import AppKit
 import Cocoa
 @_exported import CoreGraphics
+import CoreText
 import CoreTransferable
 @_exported import DeveloperToolsSupport
 import Foundation
+import OSLog
 import OpenGL
 import Swift
 import Symbols
@@ -15,6 +17,94 @@ import UniformTypeIdentifiers
 @_exported import _Concurrency
 import _StringProcessing
 import _SwiftConcurrencyShims
+@available(macCatalyst 18.0, macOS 15.0, *)
+@frozen public enum NSHorizontalDirection : Swift.Int8, Swift.CaseIterable, Swift.Codable {
+  case left
+  case right
+  @frozen public struct Set : Swift.OptionSet, Swift.Equatable, Swift.Hashable {
+    public typealias Element = AppKit.NSHorizontalDirection.Set
+    public typealias RawValue = Swift.Int8
+    public let rawValue: AppKit.NSHorizontalDirection.Set.RawValue
+    public init(rawValue: AppKit.NSHorizontalDirection.Set.RawValue)
+    public static let left: AppKit.NSHorizontalDirection.Set
+    public static let right: AppKit.NSHorizontalDirection.Set
+    public static let all: AppKit.NSHorizontalDirection.Set
+    public init(_ direction: AppKit.NSHorizontalDirection)
+    @available(macOS 15.0, macCatalyst 18.0, *)
+    public typealias ArrayLiteralElement = AppKit.NSHorizontalDirection.Set.Element
+  }
+  public init?(rawValue: Swift.Int8)
+  @available(macOS 15.0, macCatalyst 18.0, *)
+  public typealias AllCases = [AppKit.NSHorizontalDirection]
+  @available(macOS 15.0, macCatalyst 18.0, *)
+  public typealias RawValue = Swift.Int8
+  nonisolated public static var allCases: [AppKit.NSHorizontalDirection] {
+    get
+  }
+  public var rawValue: Swift.Int8 {
+    get
+  }
+}
+extension AppKit.NSHorizontalDirection.Set {
+  @available(macCatalyst 18.0, macOS 15.0, *)
+  public func contains(_ member: AppKit.NSHorizontalDirection) -> Swift.Bool
+  @available(macCatalyst 18.0, macOS 15.0, *)
+  @discardableResult
+  public mutating func insert(_ newMember: __owned AppKit.NSHorizontalDirection) -> (inserted: Swift.Bool, memberAfterInsert: AppKit.NSHorizontalDirection)
+  @available(macCatalyst 18.0, macOS 15.0, *)
+  @discardableResult
+  public mutating func remove(_ member: AppKit.NSHorizontalDirection) -> AppKit.NSHorizontalDirection?
+  @available(macCatalyst 18.0, macOS 15.0, *)
+  @discardableResult
+  public mutating func update(with newMember: __owned AppKit.NSHorizontalDirection) -> AppKit.NSHorizontalDirection?
+}
+extension AppKit.NSHorizontalDirection {
+  @available(macOS 15.0, *)
+  public static func leading(relativeTo layoutDirection: AppKit.NSUserInterfaceLayoutDirection) -> AppKit.NSHorizontalDirection
+  @available(macOS 15.0, *)
+  public static func trailing(relativeTo layoutDirection: AppKit.NSUserInterfaceLayoutDirection) -> AppKit.NSHorizontalDirection
+}
+@available(macCatalyst 18.0, macOS 15.0, *)
+@frozen public enum NSVerticalDirection : Swift.Int8, Swift.CaseIterable, Swift.Codable {
+  case up
+  case down
+  @frozen public struct Set : Swift.OptionSet, Swift.Equatable, Swift.Hashable {
+    public typealias Element = AppKit.NSVerticalDirection.Set
+    public typealias RawValue = Swift.Int8
+    public let rawValue: AppKit.NSVerticalDirection.Set.RawValue
+    public init(rawValue: AppKit.NSVerticalDirection.Set.RawValue)
+    public static let up: AppKit.NSVerticalDirection.Set
+    public static let down: AppKit.NSVerticalDirection.Set
+    public static let all: AppKit.NSVerticalDirection.Set
+    public init(_ direction: AppKit.NSVerticalDirection)
+    @available(macOS 15.0, macCatalyst 18.0, *)
+    public typealias ArrayLiteralElement = AppKit.NSVerticalDirection.Set.Element
+  }
+  public init?(rawValue: Swift.Int8)
+  @available(macOS 15.0, macCatalyst 18.0, *)
+  public typealias AllCases = [AppKit.NSVerticalDirection]
+  @available(macOS 15.0, macCatalyst 18.0, *)
+  public typealias RawValue = Swift.Int8
+  nonisolated public static var allCases: [AppKit.NSVerticalDirection] {
+    get
+  }
+  public var rawValue: Swift.Int8 {
+    get
+  }
+}
+extension AppKit.NSVerticalDirection.Set {
+  @available(macCatalyst 18.0, macOS 15.0, *)
+  public func contains(_ member: AppKit.NSVerticalDirection) -> Swift.Bool
+  @available(macCatalyst 18.0, macOS 15.0, *)
+  @discardableResult
+  public mutating func insert(_ newMember: __owned AppKit.NSVerticalDirection) -> (inserted: Swift.Bool, memberAfterInsert: AppKit.NSVerticalDirection)
+  @available(macCatalyst 18.0, macOS 15.0, *)
+  @discardableResult
+  public mutating func remove(_ member: AppKit.NSVerticalDirection) -> AppKit.NSVerticalDirection?
+  @available(macCatalyst 18.0, macOS 15.0, *)
+  @discardableResult
+  public mutating func update(with newMember: __owned AppKit.NSVerticalDirection) -> AppKit.NSVerticalDirection?
+}
 @available(macOS 14.0, *)
 extension AppKit.NSShadow : @unchecked Swift.Sendable {
 }
@@ -137,6 +227,91 @@ extension AppKit.NSView.Invalidations.RestorableState : Swift.Sendable {
 @available(*, unavailable)
 extension AppKit.NSView.Invalidations.Tuple : Swift.Sendable {
 }
+extension AppKit.NSPopUpButton {
+  @available(macOS 10.10, *)
+  @_alwaysEmitIntoClient @_Concurrency.MainActor @preconcurrency internal func _configurePullDown(title: Swift.String?, image: AppKit.NSImage?, pullDownMenu: AppKit.NSMenu) {
+        pullsDown = true
+
+        if #available(macOS 14.0, *) {
+            bezelStyle = .automatic
+        } else {
+            bezelStyle = .push
+        }
+
+        switch (title, image) {
+        case (.some, .some):
+            if #available(macOS 10.12, *) {
+                imagePosition = .imageLeading
+            } else {
+                imagePosition = NSApp.userInterfaceLayoutDirection == .rightToLeft ? .imageRight : .imageLeft
+            }
+        case (nil, .some):
+            imagePosition = .imageOnly
+        default:
+            imagePosition = .noImage
+        }
+
+        imageScaling = .scaleProportionallyDown
+        lineBreakMode = .byTruncatingTail
+        setButtonType(.momentaryPushIn)
+        font = .systemFont(ofSize: 0.0)
+
+        let popupCell = cell as? NSPopUpButtonCell
+        popupCell?.usesItemFromMenu = false
+        menu = pullDownMenu
+        if pullDownMenu.numberOfItems > 0 {
+            pullDownMenu.item(at: 0)?.isHidden = false
+        }
+
+        let displayItem = NSMenuItem()
+        displayItem.title = title ?? ""
+        displayItem.image = image
+        popupCell?.menuItem = displayItem
+    }
+  @available(macOS 10.10, *)
+  @backDeployed(before: macOS 15.0)
+  @_Concurrency.MainActor @preconcurrency convenience public init(title: Swift.String, image: AppKit.NSImage? = nil, pullDownMenu: AppKit.NSMenu) {
+        self.init(frame: .zero)
+        _configurePullDown(title: title, image: image, pullDownMenu: pullDownMenu)
+        sizeToFit()
+    }
+  @available(macOS 10.10, *)
+  @backDeployed(before: macOS 15.0)
+  @_Concurrency.MainActor @preconcurrency convenience public init(image: AppKit.NSImage, pullDownMenu: AppKit.NSMenu) {
+        self.init(frame: .zero)
+        _configurePullDown(title: nil, image: image, pullDownMenu: pullDownMenu)
+        sizeToFit()
+    }
+  @available(macOS 10.10, *)
+  @backDeployed(before: macOS 15.0)
+  @_Concurrency.MainActor @preconcurrency convenience public init(popUpMenu: AppKit.NSMenu, target: Swift.AnyObject?, action: ObjectiveC.Selector?) {
+        self.init(frame: .zero)
+        
+        if #available(macOS 14.0, *) {
+            bezelStyle = .automatic
+        } else {
+            bezelStyle = .push
+        }
+
+        if #available(macOS 10.12, *) {
+            imagePosition = .imageLeading
+        } else {
+            imagePosition = NSApp.userInterfaceLayoutDirection == .rightToLeft ? .imageRight : .imageLeft
+        }
+
+        imageScaling = .scaleProportionallyDown
+        setButtonType(.momentaryPushIn)
+        lineBreakMode = .byTruncatingTail
+        font = .systemFont(ofSize: 0.0)
+
+        menu = popUpMenu
+        selectItem(at: 0)
+
+        self.target = target
+        self.action = action
+        sizeToFit()
+    }
+}
 @available(macOS 10.15.1, *)
 public struct NSDiffableDataSourceSnapshot<SectionIdentifierType, ItemIdentifierType> where SectionIdentifierType : Swift.Hashable, ItemIdentifierType : Swift.Hashable {
   public init()
@@ -179,19 +354,20 @@ extension AppKit.NSDiffableDataSourceSnapshot : Swift._ObjectiveCBridgeable {
   public static func _forceBridgeFromObjectiveC(_ input: AppKit.NSDiffableDataSourceSnapshotReference, result: inout AppKit.NSDiffableDataSourceSnapshot<SectionIdentifierType, ItemIdentifierType>?)
   public static func _conditionallyBridgeFromObjectiveC(_ input: AppKit.NSDiffableDataSourceSnapshotReference, result: inout AppKit.NSDiffableDataSourceSnapshot<SectionIdentifierType, ItemIdentifierType>?) -> Swift.Bool
   @_effects(readonly) public static func _unconditionallyBridgeFromObjectiveC(_ snapshot: AppKit.NSDiffableDataSourceSnapshotReference?) -> AppKit.NSDiffableDataSourceSnapshot<SectionIdentifierType, ItemIdentifierType>
+  @available(macOS 10.15.1, *)
   public typealias _ObjectiveCType = AppKit.NSDiffableDataSourceSnapshotReference
 }
 @available(macOS 10.9, *)
 public func NSApplicationMain(_ argc: Swift.Int32, _ argv: Swift.UnsafeMutablePointer<Swift.UnsafeMutablePointer<Swift.CChar>?>) -> Swift.Int32
 extension AppKit.NSApplicationDelegate {
   @_alwaysEmitIntoClient public static func main() {
-    exit(NSApplicationMain(CommandLine.argc, CommandLine.unsafeArgv))
-  }
+        exit(NSApplicationMain(CommandLine.argc, CommandLine.unsafeArgv))
+    }
 }
 extension AppKit.NSApplication {
   @available(swift 4)
   @available(macOS 10.9, *)
-  @_Concurrency.MainActor(unsafe) public static func loadApplication()
+  @_Concurrency.MainActor @preconcurrency public static func loadApplication()
 }
 @available(macOS 10.9, *)
 extension AppKit.NSAppKitVersion {
@@ -239,7 +415,7 @@ open class NSTableViewDiffableDataSource<SectionIdentifierType, ItemIdentifierTy
   public func row(forItemIdentifier identifier: ItemIdentifierType) -> Swift.Int?
   public func sectionIdentifier(forRow row: Swift.Int) -> SectionIdentifierType?
   public func row(forSectionIdentifier identifier: SectionIdentifierType) -> Swift.Int?
-  @_Concurrency.MainActor(unsafe) @objc public func numberOfRows(in tableView: AppKit.NSTableView) -> Swift.Int
+  @_Concurrency.MainActor @preconcurrency @objc public func numberOfRows(in tableView: AppKit.NSTableView) -> Swift.Int
   @objc deinit
 }
 @available(macOS 14.0, *)
@@ -255,6 +431,30 @@ public typealias _ImageLiteralType = AppKit.NSImage
 extension AppKit.NSMenuItemBadge {
   @objc dynamic public var stringValue: Swift.String? {
     @objc get
+  }
+}
+@available(macOS 15.0, *)
+extension AppKit.NSMenuItemBadge : Swift.Codable {
+  required convenience public init(from decoder: any Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+}
+@available(macOS 15.0, *)
+public struct NSSuggestionItemSection<SuggestionItemType> {
+  public typealias Item = AppKit.NSSuggestionItem<SuggestionItemType>
+  public var title: Swift.String?
+  public var items: [AppKit.NSSuggestionItemSection<SuggestionItemType>.Item]
+  public init(title: Swift.String?, items: [AppKit.NSSuggestionItemSection<SuggestionItemType>.Item])
+  public init(items: [AppKit.NSSuggestionItemSection<SuggestionItemType>.Item])
+}
+@available(macOS 15.0, *)
+extension AppKit.NSSuggestionItemSection : Swift.Equatable where SuggestionItemType : Swift.Equatable {
+  public static func == (a: AppKit.NSSuggestionItemSection<SuggestionItemType>, b: AppKit.NSSuggestionItemSection<SuggestionItemType>) -> Swift.Bool
+}
+@available(macOS 15.0, *)
+extension AppKit.NSSuggestionItemSection : Swift.Hashable where SuggestionItemType : Swift.Hashable {
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
   }
 }
 @available(macOS 12, *)
@@ -290,9 +490,13 @@ extension Foundation.AttributeScopes {
     public let textAlternatives: Foundation.AttributeScopes.AppKitAttributes.TextAlternativesAttribute
     public let glyphInfo: Foundation.AttributeScopes.AppKitAttributes.GlyphInfoAttribute
     public let cursor: Foundation.AttributeScopes.AppKitAttributes.CursorAttribute
+    @available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+    public let adaptiveImageGlyph: Foundation.AttributeScopes.AppKitAttributes.AdaptiveImageGlyphAttribute
     public let accessibility: Foundation.AttributeScopes.AccessibilityAttributes
     public let foundation: Foundation.AttributeScopes.FoundationAttributes
+    @available(iOS 15, tvOS 15, watchOS 8, macOS 12, *)
     public typealias DecodingConfiguration = Foundation.AttributeScopeCodableConfiguration
+    @available(iOS 15, tvOS 15, watchOS 8, macOS 12, *)
     public typealias EncodingConfiguration = Foundation.AttributeScopeCodableConfiguration
   }
 }
@@ -419,6 +623,30 @@ extension Foundation.AttributeScopes.AppKitAttributes {
     public static let name: Swift.String
   }
 }
+@available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+extension Foundation.AttributedString.AdaptiveImageGlyph {
+  public init(_ nsAdaptiveImageGlyph: AppKit.NSAdaptiveImageGlyph)
+}
+@available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+extension AppKit.NSAdaptiveImageGlyph {
+  convenience public init(_ adaptiveImageGlypth: Foundation.AttributedString.AdaptiveImageGlyph)
+}
+@available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+extension Foundation.AttributeScopes.AppKitAttributes {
+  @frozen public enum AdaptiveImageGlyphAttribute : Foundation.CodableAttributedStringKey, Foundation.ObjectiveCConvertibleAttributedStringKey, Swift.Sendable {
+    public typealias Value = Foundation.AttributedString.AdaptiveImageGlyph
+    public typealias ObjectiveCValue = AppKit.NSAdaptiveImageGlyph
+    public static let name: Swift.String
+    public static var inheritedByAddedText: Swift.Bool
+    public static var runBoundaries: Foundation.AttributedString.AttributeRunBoundaries? {
+      get
+    }
+    public static func objectiveCValue(for value: Foundation.AttributedString.AdaptiveImageGlyph) throws -> AppKit.NSAdaptiveImageGlyph
+    public static func value(for object: AppKit.NSAdaptiveImageGlyph) throws -> Foundation.AttributedString.AdaptiveImageGlyph
+    public static func encode(_ value: Foundation.AttributedString.AdaptiveImageGlyph, to encoder: any Swift.Encoder) throws
+    public static func decode(from decoder: any Swift.Decoder) throws -> Foundation.AttributedString.AdaptiveImageGlyph
+  }
+}
 @available(macOS 14.0, *)
 extension AppKit.NSColor {
   convenience public init(resource: DeveloperToolsSupport.ColorResource)
@@ -442,7 +670,7 @@ extension Foundation.IndexPath {
 }
 @available(macOS 10.9, *)
 extension Foundation.URLResourceValues {
-  @available(macOS 10.10, *)
+  @available(macOS, introduced: 10.10, deprecated: 12.0, message: "Use the QuickLookThumbnailing framework and extension point instead")
   public var thumbnail: AppKit.NSImage? {
     get
   }
@@ -455,7 +683,7 @@ extension Foundation.URLResourceValues {
   public var customIcon: AppKit.NSImage? {
     get
   }
-  @available(macOS 10.10, *)
+  @available(macOS, introduced: 10.10, deprecated: 12.0, message: "Use the QuickLookThumbnailing framework and extension point instead")
   public var thumbnailDictionary: [Foundation.URLThumbnailDictionaryItem : AppKit.NSImage]? {
     get
   }
@@ -470,22 +698,30 @@ extension AppKit.NSScreen {
     get
   }
 }
-@available(macOS 14.0, *)
 extension AppKit.NSImageView {
-  @_Concurrency.MainActor(unsafe) public func addSymbolEffect(_ effect: some SymbolEffect & DiscreteSymbolEffect, options: Symbols.SymbolEffectOptions = .default, animated: Swift.Bool = true)
-  @_Concurrency.MainActor(unsafe) public func addSymbolEffect(_ effect: some Symbols.SymbolEffect & Symbols.IndefiniteSymbolEffect, options: Symbols.SymbolEffectOptions = .default, animated: Swift.Bool = true)
-  @_Concurrency.MainActor(unsafe) public func addSymbolEffect(_ effect: some Symbols.SymbolEffect & Symbols.IndefiniteSymbolEffect & Symbols.DiscreteSymbolEffect, options: Symbols.SymbolEffectOptions = .default, animated: Swift.Bool = true)
-  @_Concurrency.MainActor(unsafe) public func removeSymbolEffect(ofType effect: some Symbols.SymbolEffect & Symbols.DiscreteSymbolEffect, options: Symbols.SymbolEffectOptions = .default, animated: Swift.Bool = true)
-  @_Concurrency.MainActor(unsafe) public func removeSymbolEffect(ofType effect: some Symbols.SymbolEffect & Symbols.IndefiniteSymbolEffect, options: Symbols.SymbolEffectOptions = .default, animated: Swift.Bool = true)
-  @_Concurrency.MainActor(unsafe) public func removeSymbolEffect(ofType effect: some Symbols.SymbolEffect & Symbols.DiscreteSymbolEffect & Symbols.IndefiniteSymbolEffect, options: Symbols.SymbolEffectOptions = .default, animated: Swift.Bool = true)
-  @_Concurrency.MainActor(unsafe) public func removeAllSymbolEffects(options: Symbols.SymbolEffectOptions = .default, animated: Swift.Bool = true)
-  @_Concurrency.MainActor(unsafe) public func setSymbolImage(_ image: AppKit.NSImage, contentTransition: some Symbols.SymbolEffect & Symbols.ContentTransitionSymbolEffect, options: Symbols.SymbolEffectOptions = .default)
+  @available(macOS 14.0, *)
+  @_Concurrency.MainActor @preconcurrency public func addSymbolEffect(_ effect: some SymbolEffect & DiscreteSymbolEffect, options: Symbols.SymbolEffectOptions = .default, animated: Swift.Bool = true)
+  @available(macOS 14.0, *)
+  @_Concurrency.MainActor @preconcurrency public func addSymbolEffect(_ effect: some Symbols.SymbolEffect & Symbols.IndefiniteSymbolEffect, options: Symbols.SymbolEffectOptions = .default, animated: Swift.Bool = true)
+  @available(macOS 14.0, *)
+  @_Concurrency.MainActor @preconcurrency public func addSymbolEffect(_ effect: some Symbols.SymbolEffect & Symbols.IndefiniteSymbolEffect & Symbols.DiscreteSymbolEffect, options: Symbols.SymbolEffectOptions = .default, animated: Swift.Bool = true)
+  @available(macOS 14.0, *)
+  @_Concurrency.MainActor @preconcurrency public func removeSymbolEffect(ofType effect: some Symbols.SymbolEffect & Symbols.DiscreteSymbolEffect, options: Symbols.SymbolEffectOptions = .default, animated: Swift.Bool = true)
+  @available(macOS 14.0, *)
+  @_Concurrency.MainActor @preconcurrency public func removeSymbolEffect(ofType effect: some Symbols.SymbolEffect & Symbols.IndefiniteSymbolEffect, options: Symbols.SymbolEffectOptions = .default, animated: Swift.Bool = true)
+  @available(macOS 14.0, *)
+  @_Concurrency.MainActor @preconcurrency public func removeSymbolEffect(ofType effect: some Symbols.SymbolEffect & Symbols.DiscreteSymbolEffect & Symbols.IndefiniteSymbolEffect, options: Symbols.SymbolEffectOptions = .default, animated: Swift.Bool = true)
+  @available(macOS 14.0, *)
+  @_Concurrency.MainActor @preconcurrency public func removeAllSymbolEffects(options: Symbols.SymbolEffectOptions = .default, animated: Swift.Bool = true)
+  @available(macOS 14.0, *)
+  @_Concurrency.MainActor @preconcurrency public func setSymbolImage(_ image: AppKit.NSImage, contentTransition: some Symbols.SymbolEffect & Symbols.ContentTransitionSymbolEffect, options: Symbols.SymbolEffectOptions = .default)
 }
 @available(macOS 14.0, *)
 extension AppKit.NSImage : CoreTransferable.Transferable {
   public static var transferRepresentation: some CoreTransferable.TransferRepresentation {
     get
   }
+  @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 14.0, *)
   public typealias Representation = @_opaqueReturnTypeOf("$sSo7NSImageC6AppKitE22transferRepresentationQrvpZ", 0) __
 }
 @available(macOS 14.0, *)
@@ -493,7 +729,15 @@ extension AppKit.NSSound : CoreTransferable.Transferable {
   public static var transferRepresentation: some CoreTransferable.TransferRepresentation {
     get
   }
+  @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 14.0, *)
   public typealias Representation = @_opaqueReturnTypeOf("$sSo7NSSoundC6AppKitE22transferRepresentationQrvpZ", 0) __
+}
+extension AppKit.NSTextField {
+  @available(macOS 15.0, *)
+  @_Concurrency.MainActor @preconcurrency weak public var suggestionsDelegate: (any AppKit.NSTextSuggestionsDelegate)? {
+    get
+    set
+  }
 }
 @available(macOS 10.15.1, *)
 open class NSCollectionViewDiffableDataSource<SectionIdentifierType, ItemIdentifierType> : ObjectiveC.NSObject, AppKit.NSCollectionViewDataSource where SectionIdentifierType : Swift.Hashable, ItemIdentifierType : Swift.Hashable {
@@ -508,12 +752,52 @@ open class NSCollectionViewDiffableDataSource<SectionIdentifierType, ItemIdentif
   open func snapshot() -> AppKit.NSDiffableDataSourceSnapshot<SectionIdentifierType, ItemIdentifierType>
   open func itemIdentifier(for indexPath: Foundation.IndexPath) -> ItemIdentifierType?
   open func indexPath(for itemIdentifier: ItemIdentifierType) -> Foundation.IndexPath?
-  @_Concurrency.MainActor(unsafe) @objc open func numberOfSections(in collectionView: AppKit.NSCollectionView) -> Swift.Int
-  @_Concurrency.MainActor(unsafe) @objc open func collectionView(_ collectionView: AppKit.NSCollectionView, numberOfItemsInSection section: Swift.Int) -> Swift.Int
-  @_Concurrency.MainActor(unsafe) @objc open func collectionView(_ collectionView: AppKit.NSCollectionView, itemForRepresentedObjectAt indexPath: Foundation.IndexPath) -> AppKit.NSCollectionViewItem
-  @_Concurrency.MainActor(unsafe) @objc open func collectionView(_ collectionView: AppKit.NSCollectionView, viewForSupplementaryElementOfKind kind: AppKit.NSCollectionView.SupplementaryElementKind, at indexPath: Foundation.IndexPath) -> AppKit.NSView
+  @_Concurrency.MainActor @preconcurrency @objc open func numberOfSections(in collectionView: AppKit.NSCollectionView) -> Swift.Int
+  @_Concurrency.MainActor @preconcurrency @objc open func collectionView(_ collectionView: AppKit.NSCollectionView, numberOfItemsInSection section: Swift.Int) -> Swift.Int
+  @_Concurrency.MainActor @preconcurrency @objc open func collectionView(_ collectionView: AppKit.NSCollectionView, itemForRepresentedObjectAt indexPath: Foundation.IndexPath) -> AppKit.NSCollectionViewItem
+  @_Concurrency.MainActor @preconcurrency @objc open func collectionView(_ collectionView: AppKit.NSCollectionView, viewForSupplementaryElementOfKind kind: AppKit.NSCollectionView.SupplementaryElementKind, at indexPath: Foundation.IndexPath) -> AppKit.NSView
   public func description() -> Swift.String
   @objc deinit
+}
+@available(macOS 15.0, *)
+public struct NSSuggestionItemResponse<SuggestionItemType> {
+  public typealias Item = AppKit.NSSuggestionItem<SuggestionItemType>
+  public typealias ItemSection = AppKit.NSSuggestionItemSection<SuggestionItemType>
+  public var itemSections: [AppKit.NSSuggestionItemResponse<SuggestionItemType>.ItemSection]
+  public enum Phase : Swift.Equatable, Swift.Hashable {
+    case intermediate
+    case final
+    public static func == (a: AppKit.NSSuggestionItemResponse<SuggestionItemType>.Phase, b: AppKit.NSSuggestionItemResponse<SuggestionItemType>.Phase) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
+    public var hashValue: Swift.Int {
+      get
+    }
+  }
+  public var phase: AppKit.NSSuggestionItemResponse<SuggestionItemType>.Phase
+  public enum Highlight : Swift.Equatable, Swift.Hashable {
+    case automatic
+    case firstSelectableItem
+    public static func == (a: AppKit.NSSuggestionItemResponse<SuggestionItemType>.Highlight, b: AppKit.NSSuggestionItemResponse<SuggestionItemType>.Highlight) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
+    public var hashValue: Swift.Int {
+      get
+    }
+  }
+  public var preferredHighlight: AppKit.NSSuggestionItemResponse<SuggestionItemType>.Highlight
+  public init(itemSections: [AppKit.NSSuggestionItemResponse<SuggestionItemType>.ItemSection])
+  public init(items: [AppKit.NSSuggestionItemResponse<SuggestionItemType>.Item])
+  public init()
+}
+@available(macOS 15.0, *)
+extension AppKit.NSSuggestionItemResponse : Swift.Equatable where SuggestionItemType : Swift.Equatable {
+  public static func == (a: AppKit.NSSuggestionItemResponse<SuggestionItemType>, b: AppKit.NSSuggestionItemResponse<SuggestionItemType>) -> Swift.Bool
+}
+@available(macOS 15.0, *)
+extension AppKit.NSSuggestionItemResponse : Swift.Hashable where SuggestionItemType : Swift.Hashable {
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
 }
 @available(macOS 10.9, *)
 extension CoreFoundation.CGRect {
@@ -563,23 +847,58 @@ extension AppKit.NSSound {
 @available(macOS 10.9, *)
 extension AppKit.NSView : Swift.__DefaultCustomPlaygroundQuickLookable {
   @available(*, deprecated, message: "NSView._defaultCustomPlaygroundQuickLook will be removed in a future Swift version")
-  @_Concurrency.MainActor(unsafe) public var _defaultCustomPlaygroundQuickLook: Swift.PlaygroundQuickLook {
+  @_Concurrency.MainActor @preconcurrency public var _defaultCustomPlaygroundQuickLook: Swift.PlaygroundQuickLook {
     get
   }
 }
 @available(macOS 14.0, *)
 extension DeveloperToolsSupport.Preview {
-  public init(_ name: Swift.String? = nil, traits: DeveloperToolsSupport.PreviewTrait<DeveloperToolsSupport.Preview.ViewTraits>..., body: @escaping @_Concurrency.MainActor () -> AppKit.NSView)
-  public init(_ name: Swift.String? = nil, traits: DeveloperToolsSupport.PreviewTrait<DeveloperToolsSupport.Preview.ViewTraits>..., body: @escaping @_Concurrency.MainActor () -> AppKit.NSViewController)
+  @_Concurrency.MainActor public init(_ name: Swift.String? = nil, traits: DeveloperToolsSupport.PreviewTrait<DeveloperToolsSupport.Preview.ViewTraits>..., body: @escaping @_Concurrency.MainActor () -> AppKit.NSView)
+  @_Concurrency.MainActor public init(_ name: Swift.String? = nil, traits: DeveloperToolsSupport.PreviewTrait<DeveloperToolsSupport.Preview.ViewTraits>..., body: @escaping @_Concurrency.MainActor () -> AppKit.NSViewController)
 }
 #if compiler(>=5.3) && $Macros && $FreestandingMacros
 @available(macOS 14.0, *)
-@freestanding(declaration) public macro Preview(_ name: Swift.String? = nil, traits: DeveloperToolsSupport.PreviewTrait<DeveloperToolsSupport.Preview.ViewTraits>..., body: @escaping @_Concurrency.MainActor () -> AppKit.NSView) = #externalMacro(module: "PreviewsMacros", type: "Common")
+@freestanding(declaration) public macro Preview(_ name: Swift.String? = nil, traits: DeveloperToolsSupport.PreviewTrait<DeveloperToolsSupport.Preview.ViewTraits>..., @DeveloperToolsSupport.PreviewMacroBodyBuilder<AppKit.NSView> body: @escaping @_Concurrency.MainActor () -> AppKit.NSView) = #externalMacro(module: "PreviewsMacros", type: "KitViewMacro")
 #endif
 #if compiler(>=5.3) && $Macros && $FreestandingMacros
 @available(macOS 14.0, *)
-@freestanding(declaration) public macro Preview(_ name: Swift.String? = nil, traits: DeveloperToolsSupport.PreviewTrait<DeveloperToolsSupport.Preview.ViewTraits>..., body: @escaping @_Concurrency.MainActor () -> AppKit.NSViewController) = #externalMacro(module: "PreviewsMacros", type: "Common")
+@freestanding(declaration) public macro Preview(_ name: Swift.String? = nil, traits: DeveloperToolsSupport.PreviewTrait<DeveloperToolsSupport.Preview.ViewTraits>..., @DeveloperToolsSupport.PreviewMacroBodyBuilder<AppKit.NSViewController> body: @escaping @_Concurrency.MainActor () -> AppKit.NSViewController) = #externalMacro(module: "PreviewsMacros", type: "KitViewMacro")
 #endif
+@available(macOS 15.0, *)
+public struct NSSuggestionItem<SuggestionItemType> {
+  public var representedValue: SuggestionItemType
+  public var title: Swift.String {
+    get
+    set
+  }
+  public var attributedTitle: Foundation.AttributedString {
+    get
+    set
+  }
+  public var secondaryTitle: Swift.String? {
+    get
+    set
+  }
+  public var attributedSecondaryTitle: Foundation.AttributedString? {
+    get
+    set
+  }
+  public var toolTip: Swift.String?
+  public var image: AppKit.NSImage?
+  public init(representedValue: SuggestionItemType, title: Swift.String)
+  public init(representedValue: SuggestionItemType, attributedTitle: Foundation.AttributedString)
+}
+@available(macOS 15.0, *)
+extension AppKit.NSSuggestionItem : Swift.Equatable where SuggestionItemType : Swift.Equatable {
+  public static func == (lhs: AppKit.NSSuggestionItem<SuggestionItemType>, rhs: AppKit.NSSuggestionItem<SuggestionItemType>) -> Swift.Bool
+}
+@available(macOS 15.0, *)
+extension AppKit.NSSuggestionItem : Swift.Hashable where SuggestionItemType : Swift.Hashable {
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
 @available(macOS, introduced: 10.9, deprecated: 10.14, message: "Please use Metal or MetalKit.")
 extension AppKit.NSOpenGLGlobalOption {
   @available(swift 4)
@@ -644,21 +963,73 @@ extension AppKit.NSStoryboard {
   @available(macOS 10.15, *)
   public func instantiateController<Controller>(identifier: AppKit.NSStoryboard.SceneIdentifier, creator: ((Foundation.NSCoder) -> Controller?)? = nil) -> Controller where Controller : AppKit.NSWindowController
 }
-extension Swift.Sequence {
-  @available(macOS 14.0, *)
-  @inlinable internal func isSorted(by areInIncreasingOrder: (Self.Element, Self.Element) throws -> Swift.Bool) rethrows -> Swift.Bool {
-        return try self.adjacentPairs().allSatisfy({
-            // Since two equal-value elements are allowed to be contiguous, test that _none_ of the elements in reverse order are in increasing order.
-            // `areInIncreasingOrder($0.0, $0.1)` is to `<` as `!areInIncreasingOrder($0.1, $0.0)` is to `<=`.
-            return try !areInIncreasingOrder($0.1, $0.0)
-        })
+@available(macCatalyst 18.0, macOS 15.0, *)
+extension AppKit.NSCursor {
+  public class func columnResize(directions: AppKit.NSHorizontalDirection.Set) -> AppKit.NSCursor
+  public class func rowResize(directions: AppKit.NSVerticalDirection.Set) -> AppKit.NSCursor
+  public enum FrameResizeDirection : Swift.Int8, Swift.CaseIterable {
+    case inward
+    case outward
+    public struct Set : Swift.OptionSet, Swift.Equatable, Swift.Hashable {
+      public typealias Element = AppKit.NSCursor.FrameResizeDirection.Set
+      public typealias RawValue = Swift.Int8
+      public let rawValue: AppKit.NSCursor.FrameResizeDirection.Set.RawValue
+      public init(rawValue: AppKit.NSCursor.FrameResizeDirection.Set.RawValue)
+      public static let inward: AppKit.NSCursor.FrameResizeDirection.Set
+      public static let outward: AppKit.NSCursor.FrameResizeDirection.Set
+      public static let all: AppKit.NSCursor.FrameResizeDirection.Set
+      public init(_ direction: AppKit.NSCursor.FrameResizeDirection)
+      @available(macOS 15.0, macCatalyst 18.0, *)
+      public typealias ArrayLiteralElement = AppKit.NSCursor.FrameResizeDirection.Set.Element
     }
+    public init?(rawValue: Swift.Int8)
+    @available(macOS 15.0, macCatalyst 18.0, *)
+    public typealias AllCases = [AppKit.NSCursor.FrameResizeDirection]
+    @available(macOS 15.0, macCatalyst 18.0, *)
+    public typealias RawValue = Swift.Int8
+    nonisolated public static var allCases: [AppKit.NSCursor.FrameResizeDirection] {
+      get
+    }
+    public var rawValue: Swift.Int8 {
+      get
+    }
+  }
+  public class func frameResize(position: AppKit.NSCursor.FrameResizePosition, directions: AppKit.NSCursor.FrameResizeDirection.Set) -> AppKit.NSCursor
 }
-extension Swift.Sequence where Self.Element : Swift.Comparable {
-  @available(macOS 14.0, *)
-  @inlinable internal func isSorted() -> Swift.Bool {
-        return self.isSorted(by: <)
-    }
+extension AppKit.NSCursor.FrameResizeDirection.Set {
+  @available(macCatalyst 18.0, macOS 15.0, *)
+  public func contains(_ member: AppKit.NSCursor.FrameResizeDirection) -> Swift.Bool
+  @available(macCatalyst 18.0, macOS 15.0, *)
+  @discardableResult
+  public mutating func insert(_ newMember: __owned AppKit.NSCursor.FrameResizeDirection) -> (inserted: Swift.Bool, memberAfterInsert: AppKit.NSCursor.FrameResizeDirection)
+  @available(macCatalyst 18.0, macOS 15.0, *)
+  @discardableResult
+  public mutating func remove(_ member: AppKit.NSCursor.FrameResizeDirection) -> AppKit.NSCursor.FrameResizeDirection?
+  @available(macCatalyst 18.0, macOS 15.0, *)
+  @discardableResult
+  public mutating func update(with newMember: __owned AppKit.NSCursor.FrameResizeDirection) -> AppKit.NSCursor.FrameResizeDirection?
+}
+@available(macCatalyst 18.0, macOS 15.0, *)
+extension AppKit.NSCursor.FrameResizePosition : Swift.CaseIterable {
+  public static var allCases: [AppKit.NSCursor.FrameResizePosition] {
+    get
+  }
+  @available(macOS 15.0, macCatalyst 18.0, *)
+  public typealias AllCases = [AppKit.NSCursor.FrameResizePosition]
+}
+extension AppKit.NSCursor.FrameResizePosition {
+  @available(macOS 15.0, *)
+  public static func leading(relativeTo layoutDirection: AppKit.NSUserInterfaceLayoutDirection) -> AppKit.NSCursor.FrameResizePosition
+  @available(macOS 15.0, *)
+  public static func trailing(relativeTo layoutDirection: AppKit.NSUserInterfaceLayoutDirection) -> AppKit.NSCursor.FrameResizePosition
+  @available(macOS 15.0, *)
+  public static func topLeading(relativeTo layoutDirection: AppKit.NSUserInterfaceLayoutDirection) -> AppKit.NSCursor.FrameResizePosition
+  @available(macOS 15.0, *)
+  public static func topTrailing(relativeTo layoutDirection: AppKit.NSUserInterfaceLayoutDirection) -> AppKit.NSCursor.FrameResizePosition
+  @available(macOS 15.0, *)
+  public static func bottomLeading(relativeTo layoutDirection: AppKit.NSUserInterfaceLayoutDirection) -> AppKit.NSCursor.FrameResizePosition
+  @available(macOS 15.0, *)
+  public static func bottomTrailing(relativeTo layoutDirection: AppKit.NSUserInterfaceLayoutDirection) -> AppKit.NSCursor.FrameResizePosition
 }
 @available(macOS 10.9, *)
 extension AppKit.NSCursor : Swift.__DefaultCustomPlaygroundQuickLookable {
@@ -675,6 +1046,7 @@ extension AppKit.NSEvent {
     public var unicodeScalar: Swift.Unicode.Scalar {
       get
     }
+    @available(macOS 10.9, *)
     public typealias RawValue = Swift.Int
   }
   public var specialKey: AppKit.NSEvent.SpecialKey? {
@@ -766,74 +1138,34 @@ extension AppKit.NSEvent.SpecialKey {
   public static let lineSeparator: AppKit.NSEvent.SpecialKey
   public static let paragraphSeparator: AppKit.NSEvent.SpecialKey
 }
-extension Swift.Sequence {
-  @available(macOS 14.0, *)
-  @inlinable internal func adjacentPairs() -> AppKit.AdjacentPairsSequence<Self> {
-        return AdjacentPairsSequence(base: self)
-    }
+#if compiler(>=5.3) && $PrimaryAssociatedTypes2
+@available(macOS 15.0, *)
+@_Concurrency.MainActor public protocol NSTextSuggestionsDelegate<SuggestionItemType> : AnyObject {
+  associatedtype SuggestionItemType
+  typealias Item = AppKit.NSSuggestionItem<Self.SuggestionItemType>
+  typealias ItemSection = AppKit.NSSuggestionItemSection<Self.SuggestionItemType>
+  typealias ItemResponse = AppKit.NSSuggestionItemResponse<Self.SuggestionItemType>
+  @_Concurrency.MainActor func textField(_ textField: AppKit.NSTextField, provideUpdatedSuggestions responseHandler: @escaping ((Self.ItemResponse) -> Swift.Void))
+  @_Concurrency.MainActor func textField(_ textField: AppKit.NSTextField, textCompletionFor item: Self.Item) -> Swift.String?
+  @_Concurrency.MainActor func textField(_ textField: AppKit.NSTextField, didSelect item: Self.Item)
 }
-@available(macOS 14.0, *)
-@usableFromInline
-internal struct AdjacentPairsSequence<Base> where Base : Swift.Sequence {
-  @usableFromInline
-  internal let base: Base
-  @usableFromInline
-  internal init(base: Base)
+#else
+@available(macOS 15.0, *)
+@_Concurrency.MainActor public protocol NSTextSuggestionsDelegate : AnyObject {
+  associatedtype SuggestionItemType
+  typealias Item = AppKit.NSSuggestionItem<Self.SuggestionItemType>
+  typealias ItemSection = AppKit.NSSuggestionItemSection<Self.SuggestionItemType>
+  typealias ItemResponse = AppKit.NSSuggestionItemResponse<Self.SuggestionItemType>
+  @_Concurrency.MainActor func textField(_ textField: AppKit.NSTextField, provideUpdatedSuggestions responseHandler: @escaping ((Self.ItemResponse) -> Swift.Void))
+  @_Concurrency.MainActor func textField(_ textField: AppKit.NSTextField, textCompletionFor item: Self.Item) -> Swift.String?
+  @_Concurrency.MainActor func textField(_ textField: AppKit.NSTextField, didSelect item: Self.Item)
 }
-extension AppKit.AdjacentPairsSequence {
-  @available(macOS 14.0, *)
-  @usableFromInline
-  internal struct Iterator {
-    @usableFromInline
-    internal var base: Base.Iterator
-    @usableFromInline
-    internal var previous: Base.Element?
-    @usableFromInline
-    internal init(base: Base.Iterator)
-  }
-}
-extension AppKit.AdjacentPairsSequence.Iterator : Swift.IteratorProtocol {
-  @usableFromInline
-  internal typealias Element = (Base.Element, Base.Element)
-  @available(macOS 14.0, *)
-  @inlinable internal mutating func next() -> AppKit.AdjacentPairsSequence<Base>.Iterator.Element? {
-        if self.previous == nil {
-            self.previous = self.base.next()
-        }
-        
-        guard let previous = self.previous,
-              let next = self.base.next()
-        else {
-            return nil
-        }
-        
-        self.previous = next
-        return (previous, next)
-    }
-}
-extension AppKit.AdjacentPairsSequence : Swift.Sequence {
-  @available(macOS 14.0, *)
-  @inlinable internal func makeIterator() -> AppKit.AdjacentPairsSequence<Base>.Iterator {
-        return Iterator(base: self.base.makeIterator())
-    }
-  @available(macOS 14.0, *)
-  @inlinable internal var underestimatedCount: Swift.Int {
-    get {
-        let baseUnderestimatedCount = self.base.underestimatedCount
-        guard baseUnderestimatedCount > 0 else {
-            return 0
-        }
-        
-        // Since there are pairs, there is 1 fewer element in this sequence than its base.
-        return (baseUnderestimatedCount - 1)
-    }
-  }
-  @usableFromInline
-  internal typealias Element = AppKit.AdjacentPairsSequence<Base>.Iterator.Element
-}
-extension AppKit.AdjacentPairsSequence : Swift.LazySequenceProtocol where Base : Swift.LazySequenceProtocol {
-  @usableFromInline
-  internal typealias Elements = AppKit.AdjacentPairsSequence<Base>
+#endif
+extension AppKit.NSTextSuggestionsDelegate {
+  @available(macOS 15.0, *)
+  @_Concurrency.MainActor public func textField(_ textField: AppKit.NSTextField, textCompletionFor item: Self.Item) -> Swift.String?
+  @available(macOS 15.0, *)
+  @_Concurrency.MainActor public func textField(_ textField: AppKit.NSTextField, didSelect item: Self.Item)
 }
 @available(macOS 10.9, *)
 extension Foundation.CocoaError.Code {
@@ -1081,6 +1413,14 @@ extension AppKit.NSMenuItem {
   public static func sectionHeader(withTitle title: Swift.String) -> AppKit.NSMenuItem
   public static func sectionHeader(title: Swift.String) -> AppKit.NSMenuItem
 }
+extension AppKit.NSTextSuggestionsDelegate where Self.SuggestionItemType : Swift.Hashable {
+  @available(macOS 15.0, *)
+  @_Concurrency.MainActor public func appending(_ other: (some NSTextSuggestionsDelegate<SuggestionItemType>)) -> some AppKit.NSTextSuggestionsDelegate<Self.SuggestionItemType>
+  
+  @available(macOS 15.0, *)
+  @_disfavoredOverload @_Concurrency.MainActor public func appending<T>(_ other: (some NSTextSuggestionsDelegate<T>)) -> some AppKit.NSTextSuggestionsDelegate<Swift.AnyHashable> where T : Swift.Hashable
+  
+}
 @available(macOS 14.0, *)
 extension AppKit.NSMenu {
   public static func palette(colors: [AppKit.NSColor], titles: [Swift.String] = [], template: AppKit.NSImage? = nil, onSelectionChange: ((AppKit.NSMenu) -> Swift.Void)? = nil) -> AppKit.NSMenu
@@ -1088,14 +1428,14 @@ extension AppKit.NSMenu {
 @available(macOS 10.12.2, *)
 extension AppKit.NSTouchBar : Swift.__DefaultCustomPlaygroundQuickLookable {
   @available(swift, deprecated: 4.2, message: "PlaygroundQuickLook will be removed in a future Swift version. For customizing how types are presented in playgrounds, use CustomPlaygroundDisplayConvertible instead.")
-  @_Concurrency.MainActor(unsafe) public var _defaultCustomPlaygroundQuickLook: Swift.PlaygroundQuickLook {
+  @_Concurrency.MainActor @preconcurrency public var _defaultCustomPlaygroundQuickLook: Swift.PlaygroundQuickLook {
     get
   }
 }
 @available(macOS 10.12.2, *)
 extension AppKit.NSTouchBarItem : Swift.__DefaultCustomPlaygroundQuickLookable {
   @available(swift, deprecated: 4.2, message: "PlaygroundQuickLook will be removed in a future Swift version. For customizing how types are presented in playgrounds, use CustomPlaygroundDisplayConvertible instead.")
-  @_Concurrency.MainActor(unsafe) public var _defaultCustomPlaygroundQuickLook: Swift.PlaygroundQuickLook {
+  @_Concurrency.MainActor @preconcurrency public var _defaultCustomPlaygroundQuickLook: Swift.PlaygroundQuickLook {
     get
   }
 }
@@ -1151,55 +1491,142 @@ extension AppKit.NSColor : CoreTransferable.Transferable {
   public static var transferRepresentation: some CoreTransferable.TransferRepresentation {
     get
   }
+  @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 14.0, *)
   public typealias Representation = @_opaqueReturnTypeOf("$sSo7NSColorC6AppKitE22transferRepresentationQrvpZ", 0) __
 }
+@available(macCatalyst 18.0, macOS 15.0, *)
+extension AppKit.NSHorizontalDirection : Swift.Equatable {}
+@available(macCatalyst 18.0, macOS 15.0, *)
+extension AppKit.NSHorizontalDirection : Swift.Hashable {}
+@available(macCatalyst 18.0, macOS 15.0, *)
+extension AppKit.NSHorizontalDirection : Swift.RawRepresentable {}
+@available(macCatalyst 18.0, macOS 15.0, *)
+extension AppKit.NSHorizontalDirection : Swift.Sendable {}
+@available(macCatalyst 18.0, macOS 15.0, *)
+extension AppKit.NSHorizontalDirection : Swift.BitwiseCopyable {}
+@available(macCatalyst 18.0, macOS 15.0, *)
+extension AppKit.NSHorizontalDirection.Set : Swift.Sendable {}
+@available(macCatalyst 18.0, macOS 15.0, *)
+extension AppKit.NSHorizontalDirection.Set : Swift.BitwiseCopyable {}
+@available(macCatalyst 18.0, macOS 15.0, *)
+extension AppKit.NSVerticalDirection : Swift.Equatable {}
+@available(macCatalyst 18.0, macOS 15.0, *)
+extension AppKit.NSVerticalDirection : Swift.Hashable {}
+@available(macCatalyst 18.0, macOS 15.0, *)
+extension AppKit.NSVerticalDirection : Swift.RawRepresentable {}
+@available(macCatalyst 18.0, macOS 15.0, *)
+extension AppKit.NSVerticalDirection : Swift.Sendable {}
+@available(macCatalyst 18.0, macOS 15.0, *)
+extension AppKit.NSVerticalDirection : Swift.BitwiseCopyable {}
+@available(macCatalyst 18.0, macOS 15.0, *)
+extension AppKit.NSVerticalDirection.Set : Swift.Sendable {}
+@available(macCatalyst 18.0, macOS 15.0, *)
+extension AppKit.NSVerticalDirection.Set : Swift.BitwiseCopyable {}
 @available(macOS 12, *)
 extension Foundation.AttributeScopes.AppKitAttributes.FontAttribute : Swift.Sendable {}
 @available(macOS 12, *)
+extension Foundation.AttributeScopes.AppKitAttributes.FontAttribute : Swift.BitwiseCopyable {}
+@available(macOS 12, *)
 extension Foundation.AttributeScopes.AppKitAttributes.ParagraphStyleAttribute : Swift.Sendable {}
+@available(macOS 12, *)
+extension Foundation.AttributeScopes.AppKitAttributes.ParagraphStyleAttribute : Swift.BitwiseCopyable {}
 @available(macOS 12, *)
 extension Foundation.AttributeScopes.AppKitAttributes.ForegroundColorAttribute : Swift.Sendable {}
 @available(macOS 12, *)
+extension Foundation.AttributeScopes.AppKitAttributes.ForegroundColorAttribute : Swift.BitwiseCopyable {}
+@available(macOS 12, *)
 extension Foundation.AttributeScopes.AppKitAttributes.BackgroundColorAttribute : Swift.Sendable {}
+@available(macOS 12, *)
+extension Foundation.AttributeScopes.AppKitAttributes.BackgroundColorAttribute : Swift.BitwiseCopyable {}
 @available(macOS 12, *)
 extension Foundation.AttributeScopes.AppKitAttributes.LigatureAttribute : Swift.Sendable {}
 @available(macOS 12, *)
+extension Foundation.AttributeScopes.AppKitAttributes.LigatureAttribute : Swift.BitwiseCopyable {}
+@available(macOS 12, *)
 extension Foundation.AttributeScopes.AppKitAttributes.KernAttribute : Swift.Sendable {}
+@available(macOS 12, *)
+extension Foundation.AttributeScopes.AppKitAttributes.KernAttribute : Swift.BitwiseCopyable {}
 @available(macOS 12, *)
 extension Foundation.AttributeScopes.AppKitAttributes.TrackingAttribute : Swift.Sendable {}
 @available(macOS 12, *)
+extension Foundation.AttributeScopes.AppKitAttributes.TrackingAttribute : Swift.BitwiseCopyable {}
+@available(macOS 12, *)
 extension Foundation.AttributeScopes.AppKitAttributes.StrikethroughStyleAttribute : Swift.Sendable {}
+@available(macOS 12, *)
+extension Foundation.AttributeScopes.AppKitAttributes.StrikethroughStyleAttribute : Swift.BitwiseCopyable {}
 @available(macOS 12, *)
 extension Foundation.AttributeScopes.AppKitAttributes.UnderlineStyleAttribute : Swift.Sendable {}
 @available(macOS 12, *)
+extension Foundation.AttributeScopes.AppKitAttributes.UnderlineStyleAttribute : Swift.BitwiseCopyable {}
+@available(macOS 12, *)
 extension Foundation.AttributeScopes.AppKitAttributes.StrokeColorAttribute : Swift.Sendable {}
+@available(macOS 12, *)
+extension Foundation.AttributeScopes.AppKitAttributes.StrokeColorAttribute : Swift.BitwiseCopyable {}
 @available(macOS 12, *)
 extension Foundation.AttributeScopes.AppKitAttributes.StrokeWidthAttribute : Swift.Sendable {}
 @available(macOS 12, *)
+extension Foundation.AttributeScopes.AppKitAttributes.StrokeWidthAttribute : Swift.BitwiseCopyable {}
+@available(macOS 12, *)
 extension Foundation.AttributeScopes.AppKitAttributes.ShadowAttribute : Swift.Sendable {}
+@available(macOS 12, *)
+extension Foundation.AttributeScopes.AppKitAttributes.ShadowAttribute : Swift.BitwiseCopyable {}
 @available(macOS 12, *)
 extension Foundation.AttributeScopes.AppKitAttributes.TextEffectAttribute : Swift.Sendable {}
 @available(macOS 12, *)
+extension Foundation.AttributeScopes.AppKitAttributes.TextEffectAttribute : Swift.BitwiseCopyable {}
+@available(macOS 12, *)
 extension Foundation.AttributeScopes.AppKitAttributes.AttachmentAttribute : Swift.Sendable {}
+@available(macOS 12, *)
+extension Foundation.AttributeScopes.AppKitAttributes.AttachmentAttribute : Swift.BitwiseCopyable {}
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
 extension Foundation.AttributeScopes.AppKitAttributes.BaselineOffsetAttribute : Swift.Sendable {}
+@available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
+extension Foundation.AttributeScopes.AppKitAttributes.BaselineOffsetAttribute : Swift.BitwiseCopyable {}
 @available(macOS 12, *)
 extension Foundation.AttributeScopes.AppKitAttributes.UnderlineColorAttribute : Swift.Sendable {}
 @available(macOS 12, *)
+extension Foundation.AttributeScopes.AppKitAttributes.UnderlineColorAttribute : Swift.BitwiseCopyable {}
+@available(macOS 12, *)
 extension Foundation.AttributeScopes.AppKitAttributes.StrikethroughColorAttribute : Swift.Sendable {}
+@available(macOS 12, *)
+extension Foundation.AttributeScopes.AppKitAttributes.StrikethroughColorAttribute : Swift.BitwiseCopyable {}
 @available(macOS, introduced: 12.0, deprecated: 100000.0, message: "This attribute is not supported with TextKit 2")
 extension Foundation.AttributeScopes.AppKitAttributes.ObliquenessAttribute : Swift.Sendable {}
 @available(macOS, introduced: 12.0, deprecated: 100000.0, message: "This attribute is not supported with TextKit 2")
+extension Foundation.AttributeScopes.AppKitAttributes.ObliquenessAttribute : Swift.BitwiseCopyable {}
+@available(macOS, introduced: 12.0, deprecated: 100000.0, message: "This attribute is not supported with TextKit 2")
 extension Foundation.AttributeScopes.AppKitAttributes.ExpansionAttribute : Swift.Sendable {}
+@available(macOS, introduced: 12.0, deprecated: 100000.0, message: "This attribute is not supported with TextKit 2")
+extension Foundation.AttributeScopes.AppKitAttributes.ExpansionAttribute : Swift.BitwiseCopyable {}
 @available(macOS 12, *)
 extension Foundation.AttributeScopes.AppKitAttributes.ToolTipAttribute : Swift.Sendable {}
 @available(macOS 12, *)
+extension Foundation.AttributeScopes.AppKitAttributes.ToolTipAttribute : Swift.BitwiseCopyable {}
+@available(macOS 12, *)
 extension Foundation.AttributeScopes.AppKitAttributes.MarkedClauseSegmentAttribute : Swift.Sendable {}
+@available(macOS 12, *)
+extension Foundation.AttributeScopes.AppKitAttributes.MarkedClauseSegmentAttribute : Swift.BitwiseCopyable {}
 @available(macOS 12, *)
 extension Foundation.AttributeScopes.AppKitAttributes.SuperscriptAttribute : Swift.Sendable {}
 @available(macOS 12, *)
+extension Foundation.AttributeScopes.AppKitAttributes.SuperscriptAttribute : Swift.BitwiseCopyable {}
+@available(macOS 12, *)
 extension Foundation.AttributeScopes.AppKitAttributes.TextAlternativesAttribute : Swift.Sendable {}
+@available(macOS 12, *)
+extension Foundation.AttributeScopes.AppKitAttributes.TextAlternativesAttribute : Swift.BitwiseCopyable {}
 @available(macOS 12, *)
 extension Foundation.AttributeScopes.AppKitAttributes.GlyphInfoAttribute : Swift.Sendable {}
 @available(macOS 12, *)
+extension Foundation.AttributeScopes.AppKitAttributes.GlyphInfoAttribute : Swift.BitwiseCopyable {}
+@available(macOS 12, *)
 extension Foundation.AttributeScopes.AppKitAttributes.CursorAttribute : Swift.Sendable {}
+@available(macOS 12, *)
+extension Foundation.AttributeScopes.AppKitAttributes.CursorAttribute : Swift.BitwiseCopyable {}
+@available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+extension Foundation.AttributeScopes.AppKitAttributes.AdaptiveImageGlyphAttribute : Swift.BitwiseCopyable {}
+@available(macCatalyst 18.0, macOS 15.0, *)
+extension AppKit.NSCursor.FrameResizeDirection : Swift.Equatable {}
+@available(macCatalyst 18.0, macOS 15.0, *)
+extension AppKit.NSCursor.FrameResizeDirection : Swift.Hashable {}
+@available(macCatalyst 18.0, macOS 15.0, *)
+extension AppKit.NSCursor.FrameResizeDirection : Swift.RawRepresentable {}

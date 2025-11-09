@@ -78,6 +78,7 @@ typedef NS_ENUM(NSInteger, AVAudioConverterPrimeMethod) {
         (because, for example, the desired end frame is at the end of an audio file), then zero
         (silent) trailing frames will be synthesized for the client.
 */
+NS_SWIFT_SENDABLE
 typedef struct AVAudioConverterPrimeInfo {
     AVAudioFrameCount      leadingFrames;
     AVAudioFrameCount      trailingFrames;

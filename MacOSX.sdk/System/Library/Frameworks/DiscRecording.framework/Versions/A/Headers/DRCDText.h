@@ -114,6 +114,8 @@
 #include <AvailabilityMacros.h>
 
 
+#ifndef DISC_RECORDING_CD_TEXT
+#define DISC_RECORDING_CD_TEXT
 
 @class DRCDTextBlock;
 /* ----------------------------------- */
@@ -560,3 +562,4 @@ extern NSString* const DRCDTextTOC2Key						AVAILABLE_MAC_OS_X_VERSION_10_4_AND_
 */
 extern NSString* const DRCDTextSizeKey						AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
 
+#endif

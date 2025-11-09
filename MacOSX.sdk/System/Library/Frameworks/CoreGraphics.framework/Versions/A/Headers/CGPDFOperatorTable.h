@@ -23,26 +23,26 @@ typedef void (*CGPDFOperatorCallback)(CGPDFScannerRef  scanner,
 /* Return an empty operator table. */
 
 CG_EXTERN CGPDFOperatorTableRef __nullable CGPDFOperatorTableCreate(void)
-    CG_AVAILABLE_STARTING(10.4, 2.0);
+    API_AVAILABLE(macos(10.4), ios(2.0));
 
 /* Increment the retain count of `table'. */
 
 CG_EXTERN CGPDFOperatorTableRef cg_nullable CGPDFOperatorTableRetain(
     CGPDFOperatorTableRef cg_nullable table)
-    CG_AVAILABLE_STARTING(10.4, 2.0);
+    API_AVAILABLE(macos(10.4), ios(2.0));
 
 /* Decrement the retain count of `table'. */
 
 CG_EXTERN void CGPDFOperatorTableRelease(
     CGPDFOperatorTableRef cg_nullable table)
-    CG_AVAILABLE_STARTING(10.4, 2.0);
+    API_AVAILABLE(macos(10.4), ios(2.0));
 
 /* Set the callback for the operator named `name' to `callback' */
 
 CG_EXTERN void CGPDFOperatorTableSetCallback(
     CGPDFOperatorTableRef cg_nullable table,
     const char * cg_nullable name, CGPDFOperatorCallback cg_nullable callback)
-    CG_AVAILABLE_STARTING(10.4, 2.0);
+    API_AVAILABLE(macos(10.4), ios(2.0));
 
 CF_ASSUME_NONNULL_END
 

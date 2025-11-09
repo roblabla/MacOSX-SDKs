@@ -14,10 +14,11 @@ exports:
                        _AWDLTrafficRegistrationServiceEnsemble, _AWDLTrafficRegistrationServiceFaceTime, 
                        _AWDLTrafficRegistrationServiceMPRemoteCamera, _AWDLTrafficRegistrationServiceRangingInitiator, 
                        _AWDLTrafficRegistrationServiceRangingResponder, _AWDLTrafficRegistrationServiceRealTimeMode, 
-                       _AWDLTrafficRegistrationServiceRemoteCamera, _AWDLTrafficRegistrationServiceSidecar, 
-                       _AWDLTrafficRegistrationServiceTVRemoteCamera, _AWDLTrafficRegistrationServiceTimeSync, 
-                       _AWDLTrafficRegistrationServiceTimesync, _AWDLTrafficRegistrationServiceUniversalControl, 
-                       _WiFiP2PErrorDomain, _beginTransaction, _endTransaction ]
+                       _AWDLTrafficRegistrationServiceRemoteCamera, _AWDLTrafficRegistrationServiceRemoteScreen, 
+                       _AWDLTrafficRegistrationServiceSidecar, _AWDLTrafficRegistrationServiceTVRemoteCamera, 
+                       _AWDLTrafficRegistrationServiceTimeSync, _AWDLTrafficRegistrationServiceTimesync, 
+                       _AWDLTrafficRegistrationServiceUniversalControl, _WiFiP2PErrorDomain, 
+                       _beginTransaction, _endTransaction ]
     objc-classes:    [ AWDLServiceDiscoveryConfiguration, AWDLServiceDiscoveryManager, 
                        AWDLTrafficRegistrationConfiguration, WiFiAwareDataSession, 
                        WiFiAwareDataSessionIssueReport, WiFiAwareDataSessionStatisticsHistogramBin, 

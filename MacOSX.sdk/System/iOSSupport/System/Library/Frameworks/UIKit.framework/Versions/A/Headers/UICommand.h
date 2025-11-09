@@ -19,7 +19,7 @@ typedef NS_OPTIONS(NSInteger, UIKeyModifierFlags) {
     UIKeyModifierAlternate      = 1 << 19,
     UIKeyModifierCommand        = 1 << 20,
     UIKeyModifierNumericPad     = 1 << 21,
-} API_AVAILABLE(ios(7.0));
+} API_AVAILABLE(ios(7.0)) API_UNAVAILABLE(watchos);
 
 @class UICommand;
 @class UIImage;
@@ -29,7 +29,7 @@ NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 /// Represents an alternate action to take for a command.
 ///
 /// Two alternates are equal iff their modifierFlags are equal.
-UIKIT_EXTERN API_AVAILABLE(ios(13.0)) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @interface UICommandAlternate : NSObject <NSCopying, NSSecureCoding>
 
 /// Short display title.
@@ -59,7 +59,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(13.0)) NS_SWIFT_UI_ACTOR
 @end
 
 /// Represents an action to take.
-UIKIT_EXTERN API_AVAILABLE(ios(13.0)) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @interface UICommand : UIMenuElement <UIMenuLeaf>
 
 /// Short display title.
@@ -122,7 +122,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(13.0)) NS_SWIFT_UI_ACTOR
 @end
 
 // UICommand.propertyList value to indicate that a command is a Sharing menu item. Such an item automatically receives a standard Share submenu.
-UIKIT_EXTERN NSString *const UICommandTagShare API_AVAILABLE(ios(13.0));
+UIKIT_EXTERN NSString *const UICommandTagShare API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos);
 
 NS_HEADER_AUDIT_END(nullability, sendability)
 

@@ -41,10 +41,10 @@ VZ_EXPORT API_AVAILABLE(macos(14.0))
  @param error If not nil, assigned with an error describing why the new size is not valid.
  @return YES if the resize is successful, NO otherwise.
  @discussion
-   If successful, the new size will be passed to the guest but the guest may or may
-   not respond to the new size. The guest not using the size does not return an error.
+    If successful, the new size will be passed to the guest but the guest may or may
+    not respond to the new size. The guest not using the size does not return an error.
 
-   Reconfiguration triggers a display state change which can be tracked by VZGraphicsDisplayObservers.
+    Reconfiguration triggers a display state change which can be tracked by VZGraphicsDisplayObservers.
 */
 - (BOOL)reconfigureWithSizeInPixels:(CGSize)sizeInPixels error:(NSError **)error NS_SWIFT_NAME(reconfigure(sizeInPixels:));
 
@@ -54,13 +54,13 @@ VZ_EXPORT API_AVAILABLE(macos(14.0))
  @param error If not nil, assigned with an error describing why the new configuration is not valid.
  @return YES if the reconfiguration is successful, NO otherwise.
  @discussion
-   The type of the configuration must match the corresponding type that caused this display to be created.
+    The type of the configuration must match the corresponding type that caused this display to be created.
 
-   If successful, the new configuration will be passed to the guest but the guest may or may
-   not respond to parts of the configuration. The guest not using the new configuration does not
-   return an error.
+    If successful, the new configuration will be passed to the guest but the guest may or may
+    not respond to parts of the configuration. The guest not using the new configuration does not
+    return an error.
 
-   Reconfiguration triggers a display state change which can be tracked by VZGraphicsDisplayObservers.
+    Reconfiguration triggers a display state change which can be tracked by VZGraphicsDisplayObservers.
 */
 - (BOOL)reconfigureWithConfiguration:(VZGraphicsDisplayConfiguration *)configuration error:(NSError **)error NS_SWIFT_NAME(reconfigure(configuration:));
 
@@ -88,8 +88,8 @@ VZ_EXPORT API_AVAILABLE(macos(14.0))
 /*!
  @abstract A reconfiguration operation has begun.
  @discussion
-   A configuration change, such as a resize, has been issued and new frames are expected with a new size or configuration.
-   This method will be invoked on the virtual machine's queue.
+    A configuration change, such as a resize, has been issued and new frames are expected with a new size or configuration.
+    This method will be invoked on the virtual machine's queue.
  @param display The display whose state is changing.
 */
 - (void)displayDidBeginReconfiguration:(VZGraphicsDisplay *)display;
@@ -97,8 +97,8 @@ VZ_EXPORT API_AVAILABLE(macos(14.0))
 /*!
  @abstract A reconfiguration operation has ended.
  @discussion
-   Frame updates have arrived at the most recently requested display size and configuration.
-   This method will be invoked on the virtual machine's queue.
+    Frame updates have arrived at the most recently requested display size and configuration.
+    This method will be invoked on the virtual machine's queue.
  @param display The display whose state is changing.
 */
 - (void)displayDidEndReconfiguration:(VZGraphicsDisplay *)display;

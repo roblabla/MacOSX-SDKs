@@ -344,6 +344,7 @@ private:
                                 uint32_t *  cnt, uint32_t * len);
     void            notifyDriver( uint32_t type, void * data );
     static void     handleNetworkInputEvent(thread_call_param_t param0, thread_call_param_t param1);
+    void            fetchDriverOutputStats( uint32_t * outErrors, uint32_t * outPackets );
 
 public:
 

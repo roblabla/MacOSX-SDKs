@@ -1,7 +1,7 @@
 /*
 	NSPageLayout.h
 	Application Kit
-	Copyright (c) 1994-2023, Apple Inc.
+	Copyright (c) 1994-2024, Apple Inc.
 	All rights reserved.
 */
 

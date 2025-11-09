@@ -6,11 +6,12 @@ swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ '_$s30FaceTimeNotificationViewBridge0dE20ServiceConfigurationV0abC4Core010XPCServiceG0AAMc', 
-                       '_$s30FaceTimeNotificationViewBridge0dE20ServiceConfigurationV0abC4Core010XPCServiceG0AAWP', 
                        '_$s30FaceTimeNotificationViewBridge0dE20ServiceConfigurationV11serviceNameSSvg', 
                        '_$s30FaceTimeNotificationViewBridge0dE20ServiceConfigurationV11serviceNameSSvpMV', 
                        '_$s30FaceTimeNotificationViewBridge0dE20ServiceConfigurationV14makeConnectionSo15NSXPCConnectionCyYaKF', 
                        '_$s30FaceTimeNotificationViewBridge0dE20ServiceConfigurationV14makeConnectionSo15NSXPCConnectionCyYaKFTu', 
+                       '_$s30FaceTimeNotificationViewBridge0dE20ServiceConfigurationV6ConfigO3appyA2EmFWC', 
+                       '_$s30FaceTimeNotificationViewBridge0dE20ServiceConfigurationV6ConfigO4testyA2EmFWC', 
                        '_$s30FaceTimeNotificationViewBridge0dE20ServiceConfigurationV6ConfigO8rawValueAESgSS_tcfC', 
                        '_$s30FaceTimeNotificationViewBridge0dE20ServiceConfigurationV6ConfigO8rawValueSSvg', 
                        '_$s30FaceTimeNotificationViewBridge0dE20ServiceConfigurationV6ConfigO8rawValueSSvpMV', 

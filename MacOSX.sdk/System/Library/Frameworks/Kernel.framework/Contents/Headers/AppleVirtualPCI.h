@@ -22,7 +22,7 @@ enum VirtualPCIRequest {
     kVirtualPCIRequestCount
 };
 
-enum VirtualPCITargetMemory {
+enum VirtualPCITargetMemory : uint32_t {
     kVirtualPCIBar0,
     kVirtualPCIBar1,
     kVirtualPCIBar2,

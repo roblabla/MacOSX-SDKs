@@ -90,13 +90,13 @@ typedef void (*VTDecompressionOutputCallback)(
 		VTDecodeInfoFlags infoFlags,
 		CM_NULLABLE CVImageBufferRef imageBuffer,
 		CMTime presentationTimeStamp, 
-		CMTime presentationDuration );
+		CMTime presentationDuration ) API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2), visionos(1.0));
 
 struct VTDecompressionOutputCallbackRecord {
 	CM_NULLABLE VTDecompressionOutputCallback  decompressionOutputCallback;
 	void * CM_NULLABLE                         decompressionOutputRefCon;
-} CM_SWIFT_NONSENDABLE;
-typedef struct VTDecompressionOutputCallbackRecord VTDecompressionOutputCallbackRecord CM_SWIFT_NONSENDABLE;
+} CM_SWIFT_NONSENDABLE API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2), visionos(1.0));
+typedef struct VTDecompressionOutputCallbackRecord VTDecompressionOutputCallbackRecord CM_SWIFT_NONSENDABLE API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 /*!
 	@function	VTDecompressionSessionCreate
@@ -127,7 +127,7 @@ VTDecompressionSessionCreate(
 	CM_NULLABLE CFDictionaryRef								videoDecoderSpecification,
 	CM_NULLABLE CFDictionaryRef                             destinationImageBufferAttributes,
 	const VTDecompressionOutputCallbackRecord * CM_NULLABLE outputCallback,
-	CM_RETURNS_RETAINED_PARAMETER CM_NULLABLE VTDecompressionSessionRef * CM_NONNULL decompressionSessionOut) API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2));
+	CM_RETURNS_RETAINED_PARAMETER CM_NULLABLE VTDecompressionSessionRef * CM_NONNULL decompressionSessionOut) API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 CF_IMPLICIT_BRIDGING_ENABLED
 	
@@ -142,14 +142,14 @@ CF_IMPLICIT_BRIDGING_ENABLED
     	Calling VTDecompressionSessionInvalidate ensures a deterministic, orderly teardown.
 */
 VT_EXPORT void 
-VTDecompressionSessionInvalidate( CM_NONNULL VTDecompressionSessionRef session ) API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2));
+VTDecompressionSessionInvalidate( CM_NONNULL VTDecompressionSessionRef session ) API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 /*!
 	@function VTDecompressionSessionGetTypeID
 	@abstract Returns the CFTypeID for decompression sessions.  
 */
 VT_EXPORT CFTypeID 
-VTDecompressionSessionGetTypeID(void) API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2));
+VTDecompressionSessionGetTypeID(void) API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 /*!
 	@function	VTDecompressionSessionDecodeFrame
@@ -187,7 +187,7 @@ VTDecompressionSessionDecodeFrame(
 	CM_NONNULL CMSampleBufferRef			sampleBuffer,
 	VTDecodeFrameFlags						decodeFlags, // bit 0 is enableAsynchronousDecompression
 	void * CM_NULLABLE						sourceFrameRefCon,
-	VTDecodeInfoFlags * CM_NULLABLE 		infoFlagsOut) API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2));
+	VTDecodeInfoFlags * CM_NULLABLE 		infoFlagsOut) API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos);
 	
 #if __BLOCKS__
 /*!
@@ -220,7 +220,7 @@ typedef void (^VTDecompressionOutputHandler)(
 	VTDecodeInfoFlags infoFlags,
 	CM_NULLABLE CVImageBufferRef imageBuffer,
 	CMTime presentationTimeStamp,
-	CMTime presentationDuration ) CM_SWIFT_SENDABLE;
+	CMTime presentationDuration ) CM_SWIFT_SENDABLE API_AVAILABLE(macos(10.11), ios(9.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos);
 	
 /*!
 	@function	VTDecompressionSessionDecodeFrameWithOutputHandler
@@ -258,7 +258,7 @@ VTDecompressionSessionDecodeFrameWithOutputHandler(
 	CM_NONNULL CMSampleBufferRef			sampleBuffer,
 	VTDecodeFrameFlags						decodeFlags, // bit 0 is enableAsynchronousDecompression
 	VTDecodeInfoFlags * CM_NULLABLE			infoFlagsOut,
-	CM_NONNULL VTDecompressionOutputHandler	outputHandler ) API_AVAILABLE(macosx(10.11), ios(9.0), tvos(10.2));
+	CM_NONNULL VTDecompressionOutputHandler	outputHandler ) API_AVAILABLE(macos(10.11), ios(9.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos);
 #endif // __BLOCKS__
 
 /*!
@@ -273,7 +273,7 @@ VTDecompressionSessionDecodeFrameWithOutputHandler(
 */
 VT_EXPORT OSStatus
 VTDecompressionSessionFinishDelayedFrames(
-	CM_NONNULL VTDecompressionSessionRef		session) API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2));
+	CM_NONNULL VTDecompressionSessionRef		session) API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 /*!
 	@function VTDecompressionSessionCanAcceptFormatDescription
@@ -286,7 +286,7 @@ VTDecompressionSessionFinishDelayedFrames(
 VT_EXPORT Boolean 
 VTDecompressionSessionCanAcceptFormatDescription( 
 	CM_NONNULL VTDecompressionSessionRef		session,
-	CM_NONNULL CMFormatDescriptionRef			newFormatDesc ) API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2));
+	CM_NONNULL CMFormatDescriptionRef			newFormatDesc ) API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 /*!
 	@function VTDecompressionSessionWaitForAsynchronousFrames
@@ -297,7 +297,7 @@ VTDecompressionSessionCanAcceptFormatDescription(
 */
 VT_EXPORT OSStatus
 VTDecompressionSessionWaitForAsynchronousFrames(
-	CM_NONNULL VTDecompressionSessionRef       session) API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2));
+	CM_NONNULL VTDecompressionSessionRef       session) API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 CF_IMPLICIT_BRIDGING_DISABLED
 	
@@ -315,7 +315,7 @@ CF_IMPLICIT_BRIDGING_DISABLED
 VT_EXPORT OSStatus
 VTDecompressionSessionCopyBlackPixelBuffer(
    CM_NONNULL VTDecompressionSessionRef			session,
-   CM_RETURNS_RETAINED_PARAMETER CM_NULLABLE CVPixelBufferRef * CM_NONNULL pixelBufferOut ) API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2));
+   CM_RETURNS_RETAINED_PARAMETER CM_NULLABLE CVPixelBufferRef * CM_NONNULL pixelBufferOut ) API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos);
 	
 /*!
 	@function VTIsHardwareDecodeSupported
@@ -328,7 +328,7 @@ VTDecompressionSessionCopyBlackPixelBuffer(
 		available at all times.
  */
 VT_EXPORT Boolean
-VTIsHardwareDecodeSupported( CMVideoCodecType codecType ) API_AVAILABLE(macosx(10.13), ios(11.0), tvos(11.0));
+VTIsHardwareDecodeSupported( CMVideoCodecType codecType ) API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 	
 // See VTSession.h for property access APIs on VTDecompressionSessions.
 // See VTDecompressionProperties.h for standard property keys and values for decompression sessions.
@@ -341,7 +341,7 @@ VTIsHardwareDecodeSupported( CMVideoCodecType codecType ) API_AVAILABLE(macosx(1
  	@discussion   This call returning true does not guarantee that decode resources will be available at all times.
  */
 VT_EXPORT Boolean
-VTIsStereoMVHEVCDecodeSupported( void ) API_AVAILABLE(macos(14.0), ios(17.0));
+VTIsStereoMVHEVCDecodeSupported( void ) API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 /*!
 	@typedef	VTDecompressionOutputMultiImageCallback
@@ -382,7 +382,7 @@ typedef void (*VTDecompressionOutputMultiImageCallback)(
 		VTDecodeInfoFlags infoFlags,
 		CM_NULLABLE CMTaggedBufferGroupRef taggedBufferGroup,
 		CMTime presentationTimeStamp,
-		CMTime presentationDuration );
+		CMTime presentationDuration ) API_AVAILABLE(macos(14.0), ios(17.0), visionos(1.0)) API_UNAVAILABLE(tvos, watchos);
 
 /*!
 	@function	VTDecompressionSessionSetMultiImageCallback
@@ -397,7 +397,7 @@ VT_EXPORT OSStatus
 VTDecompressionSessionSetMultiImageCallback(
 	CM_NONNULL VTDecompressionSessionRef				decompressionSession,
 	CM_NONNULL VTDecompressionOutputMultiImageCallback	outputMultiImageCallback,
-	void * CM_NULLABLE									outputMultiImageRefcon) API_AVAILABLE(macosx(14.0), ios(17.0)) API_UNAVAILABLE(tvos) CF_SWIFT_UNAVAILABLE("Unavailable in Swift");
+	void * CM_NULLABLE									outputMultiImageRefcon) API_AVAILABLE(macos(14.0), ios(17.0), visionos(1.0)) API_UNAVAILABLE(tvos, watchos) CF_SWIFT_UNAVAILABLE("Unavailable in Swift");
 
 #if __BLOCKS__
 /*!
@@ -438,7 +438,7 @@ typedef void (^VTDecompressionMultiImageCapableOutputHandler)(
 	CM_NULLABLE CVImageBufferRef imageBuffer,
 	CM_NULLABLE CMTaggedBufferGroupRef taggedBufferGroup,
 	CMTime presentationTimeStamp,
-	CMTime presentationDuration ) CM_SWIFT_SENDABLE;
+	CMTime presentationDuration ) CM_SWIFT_SENDABLE API_AVAILABLE(macos(14.0), ios(17.0), visionos(1.0)) API_UNAVAILABLE(tvos, watchos);
 
 /*!
 	@function	VTDecompressionSessionDecodeFrameWithMultiImageCapableOutputHandler
@@ -477,7 +477,7 @@ VTDecompressionSessionDecodeFrameWithMultiImageCapableOutputHandler(
 	CM_NONNULL CMSampleBufferRef				sampleBuffer,
 	VTDecodeFrameFlags							decodeFlags, // bit 0 is enableAsynchronousDecompression
 	VTDecodeInfoFlags * CM_NULLABLE				infoFlagsOut,
-	CM_NONNULL VTDecompressionMultiImageCapableOutputHandler	multiImageCapableOutputHandler )  API_AVAILABLE(macosx(14.0), ios(17.0)) API_UNAVAILABLE(tvos) CF_REFINED_FOR_SWIFT;
+	CM_NONNULL VTDecompressionMultiImageCapableOutputHandler	multiImageCapableOutputHandler )  API_AVAILABLE(macos(14.0), ios(17.0), visionos(1.0)) API_UNAVAILABLE(tvos, watchos) CF_REFINED_FOR_SWIFT;
 #endif // __BLOCKS__
 
 #pragma pack(pop)

@@ -17,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class UIImage, UIView, UIPopoverController;
 
-API_AVAILABLE(ios(3.2)) __TVOS_PROHIBITED @interface UIDocumentInteractionController : NSObject <UIActionSheetDelegate>
+API_AVAILABLE(ios(3.2)) API_UNAVAILABLE(watchos) __TVOS_PROHIBITED @interface UIDocumentInteractionController : NSObject <UIActionSheetDelegate>
 
 + (UIDocumentInteractionController *)interactionControllerWithURL:(NSURL *)url; // use file to determine UTI. assumes file is complete
 
@@ -59,14 +59,14 @@ API_AVAILABLE(ios(3.2)) __TVOS_PROHIBITED @interface UIDocumentInteractionContro
 
 @end
 
-API_AVAILABLE(ios(3.2)) __TVOS_PROHIBITED @protocol UIDocumentInteractionControllerDelegate <NSObject>
+API_AVAILABLE(ios(3.2)) API_UNAVAILABLE(watchos) __TVOS_PROHIBITED @protocol UIDocumentInteractionControllerDelegate <NSObject>
 
 @optional
 
 // If preview is supported, this provides the view controller on which the preview will be presented.
 // This method is required if preview is supported.
 // If presenting atop a navigation stack, provide the navigation controller in order to animate in a manner consistent with the rest of the platform.
-- (UIViewController *)documentInteractionControllerViewControllerForPreview:(UIDocumentInteractionController *)controller;
+- (UIViewController *)documentInteractionControllerViewControllerForPreview:(UIDocumentInteractionController *)controller NS_SWIFT_UI_ACTOR;
 
 // If preview is supported, these provide the view and rect that will be used as the starting point for the animation to the full screen preview.
 // The actual animation that is performed depends upon the platform and other factors.

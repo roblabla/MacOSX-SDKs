@@ -86,7 +86,28 @@ SPProjectiveTransform3D SPProjectiveTransform3DMakeWithRightHandPerspective(doub
                                                                             double aspectRatio,
                                                                             double nearZ,
                                                                             double farZ)
-__API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0), tvos(16.0));
+__API_DEPRECATED("Use `SPAngle` variant of `SPProjectiveTransform3DMakeWithRightHandPerspective`.",
+                 macos(13.0, 15.0),
+                 ios(16.0, 18.0),
+                 watchos(9.0, 11.0),
+                 tvos(16.0, 18.0));
+
+/*!
+ @abstract Returns a projective transform with right-hand side perspective.
+ 
+ @param fovY The field of view angle on the @p y axis.
+ @param aspectRatio The aspect ratio.
+ @param nearZ The near @p z .
+ @param farZ The far @p z .
+ @returns A projective transform with right-hand side perspective.
+ */
+SPATIAL_INLINE
+SPATIAL_OVERLOADABLE
+SPProjectiveTransform3D SPProjectiveTransform3DMakeWithRightHandPerspective(SPAngle fovY,
+                                                                            double aspectRatio,
+                                                                            double nearZ,
+                                                                            double farZ)
+__API_AVAILABLE(macos(15.0), ios(18.0), watchos(11.0), tvos(18.0));
 
 /*!
  @abstract Returns a projective transform with right-hand side perspective.
@@ -128,7 +149,30 @@ SPProjectiveTransform3D SPProjectiveTransform3DMakeWithRightHandPerspective(doub
                                                                             double nearZ,
                                                                             double farZ,
                                                                             bool reverseZ)
-__API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0), tvos(16.0));
+__API_DEPRECATED("Use `SPAngle` variant of `SPProjectiveTransform3DMakeWithRightHandPerspective`.",
+                 macos(13.0, 15.0),
+                 ios(16.0, 18.0),
+                 watchos(9.0, 11.0),
+                 tvos(16.0, 18.0));
+
+/*!
+ @abstract Returns a projective transform with right-hand side perspective.
+ 
+ @param fovY The field of view angle on the @p y axis.
+ @param aspectRatio The aspect ratio.
+ @param nearZ The near @p z .
+ @param farZ The far @p z .
+ @param reverseZ A Boolean value that specifies whether the matrix should use reverse z.
+ @returns A projective transform with right-hand side perspective.
+ */
+SPATIAL_INLINE
+SPATIAL_OVERLOADABLE
+SPProjectiveTransform3D SPProjectiveTransform3DMakeWithRightHandPerspective(SPAngle fovY,
+                                                                            double aspectRatio,
+                                                                            double nearZ,
+                                                                            double farZ,
+                                                                            bool reverseZ)
+__API_AVAILABLE(macos(15.0), ios(18.0), watchos(11.0), tvos(18.0));
 
 /*!
  @abstract Returns a projective transform from tangents for each side of its frustum.
@@ -641,7 +685,7 @@ SPATIAL_REFINED_FOR_SWIFT
 SPATIAL_OVERLOADABLE
 SPProjectiveTransform3D SPProjectiveTransform3DMakeTranslation(SPSize3D translation) {
     
-    SPVector3D v = (SPVector3D){ .vector = translation.vector };
+    SPVector3D v = SPVector3DMakeWithVector(translation.vector);
     
     return SPProjectiveTransform3DMakeTranslation(v);
 }
@@ -670,7 +714,7 @@ SPProjectiveTransform3D SPProjectiveTransform3DMake(SPSize3D scale,
                                                     SPRotation3D rotation,
                                                     SPSize3D translation) {
     
-    SPVector3D v = (SPVector3D){ .vector = translation.vector };
+    SPVector3D v = SPVector3DMakeWithVector(translation.vector);
     
     return SPProjectiveTransform3DMake(scale, rotation, v);
 }
@@ -736,6 +780,16 @@ SPProjectiveTransform3D SPProjectiveTransform3DMakeWithRightHandPerspective(doub
     return SPProjectiveTransform3DMakeWithRightHandPerspective(fovyRadians, aspectRatio, nearZ, farZ, false);
 }
 
+SPATIAL_SWIFT_NAME(ProjectiveTransform3D.init(fovY:aspectRatio:nearZ:farZ:))
+SPATIAL_OVERLOADABLE
+SPProjectiveTransform3D SPProjectiveTransform3DMakeWithRightHandPerspective(SPAngle fovY,
+                                                                            double aspectRatio,
+                                                                            double nearZ,
+                                                                            double farZ) SPATIAL_OVERLOADABLE {
+    
+    return SPProjectiveTransform3DMakeWithRightHandPerspective(fovY.radians, aspectRatio, nearZ, farZ, false);
+}
+
 SPATIAL_SWIFT_NAME(ProjectiveTransform3D.init(fovyRadians:aspectRatio:nearZ:farZ:reverseZ:))
 SPATIAL_OVERLOADABLE
 SPProjectiveTransform3D SPProjectiveTransform3DMakeWithRightHandPerspective(double fovyRadians,
@@ -771,6 +825,16 @@ SPProjectiveTransform3D SPProjectiveTransform3DMakeWithRightHandPerspective(doub
     SPProjectiveTransform3D transform = { .matrix = m };
     
     return transform;
+}
+
+SPATIAL_SWIFT_NAME(ProjectiveTransform3D.init(fovY:aspectRatio:nearZ:farZ:reverseZ:))
+SPATIAL_OVERLOADABLE
+SPProjectiveTransform3D SPProjectiveTransform3DMakeWithRightHandPerspective(SPAngle fovY,
+                                                                            double aspectRatio,
+                                                                            double nearZ,
+                                                                            double farZ,
+                                                                            bool reverseZ) SPATIAL_OVERLOADABLE {
+    return SPProjectiveTransform3DMakeWithRightHandPerspective(fovY.radians, aspectRatio, nearZ, farZ, reverseZ);
 }
 
 SPATIAL_SWIFT_NAME(ProjectiveTransform3D.init(leftTangent:rightTangent:topTangent:bottomTangent:nearZ:farZ:reverseZ:))
@@ -1034,7 +1098,7 @@ SPVector3D SPProjectiveTransform3DGetTranslation(SPProjectiveTransform3D transfo
     
     simd_double3 translation = transform.matrix.columns[3].xyz;
     
-    return (SPVector3D){ .vector = translation };
+    return SPVector3DMakeWithVector(translation);
 }
 
 SPATIAL_REFINED_FOR_SWIFT
@@ -1043,7 +1107,7 @@ SPVector3D SPProjectiveTransform3DGetOffset(SPProjectiveTransform3D transform) {
     
     simd_double3 translation = transform.matrix.columns[3].xyz;
     
-    return (SPVector3D){ .vector = translation };
+    return SPVector3DMakeWithVector(translation);
 }
 
 SPATIAL_REFINED_FOR_SWIFT
@@ -1082,7 +1146,7 @@ SPATIAL_OVERLOADABLE
 SPProjectiveTransform3D SPProjectiveTransform3DScaleBy(SPProjectiveTransform3D transform,
                                                        double x, double y, double z) {
     
-    SPSize3D scale = (SPSize3D){x, y, z};
+    SPSize3D scale = SPSize3DMake(x, y, z);
     SPProjectiveTransform3D scaleTransform = SPProjectiveTransform3DMakeScale(scale);
     
     return SPProjectiveTransform3DConcatenation(transform, scaleTransform);
@@ -1101,7 +1165,7 @@ SPATIAL_SWIFT_NAME(ProjectiveTransform3D.uniformlyScaled(self:by:))
 SPATIAL_OVERLOADABLE
 SPProjectiveTransform3D SPProjectiveTransform3DScaleUniform(SPProjectiveTransform3D transform,
                                                             double scale) {
-    SPSize3D scaleSize = (SPSize3D){scale, scale, scale};
+    SPSize3D scaleSize = SPSize3DMake(scale, scale, scale);
     SPProjectiveTransform3D scaleTransform = SPProjectiveTransform3DMakeScale(scaleSize);
     
     return SPProjectiveTransform3DConcatenation(transform, scaleTransform);
@@ -1174,10 +1238,30 @@ SPProjectiveTransform3D SPProjectiveTransform3DFlip(SPProjectiveTransform3D tran
 // MARK: - make from pose
 
 /*!
+ @abstract Returns a new projective transform structure from the specified scaled pose structure.
+ 
+ @param pose The source scaled pose.
+ @returns A new projective transform structure.
+ */
+SPATIAL_INLINE
+SPATIAL_OVERLOADABLE
+SPProjectiveTransform3D SPProjectiveTransform3DMakeWithScaledPose(SPScaledPose3D pose)
+__API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0), tvos(16.0));
+
+SPATIAL_REFINED_FOR_SWIFT
+SPATIAL_OVERLOADABLE
+SPProjectiveTransform3D SPProjectiveTransform3DMakeWithScaledPose(SPScaledPose3D pose) {
+    
+    return SPProjectiveTransform3DMake(SPSize3DMake(pose.scale, pose.scale, pose.scale),
+                                       pose.rotation,
+                                       SPVector3DMakeWithVector(pose.position.vector));
+}
+
+/*!
  @abstract Returns a new projective transform structure from the specified pose structure.
 
  @param pose The source pose.
- @returns A new projective
+ @returns A new projective transform structure.
  */
 SPATIAL_INLINE
 SPATIAL_OVERLOADABLE
@@ -1187,11 +1271,13 @@ __API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0), tvos(16.0));
 SPATIAL_REFINED_FOR_SWIFT
 SPATIAL_OVERLOADABLE
 SPProjectiveTransform3D SPProjectiveTransform3DMakeWithPose(SPPose3D pose) {
-
-    return SPProjectiveTransform3DMake((SPSize3D){ 1, 1, 1},
-                                   pose.rotation,
-                                   (SPVector3D){ .vector = pose.position.vector });
-
+    
+    SPVector3D v = SPVector3DMakeWithVector(pose.position.vector);
+    
+    return SPProjectiveTransform3DMake(SPSize3DMake(1, 1, 1),
+                                       pose.rotation,
+                                       v);
+    
 }
 
 #endif /* Spatial_SPProjectiveTransform3D_h */

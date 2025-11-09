@@ -1,12 +1,14 @@
 #if (defined(USE_UIKIT_PUBLIC_HEADERS) && USE_UIKIT_PUBLIC_HEADERS) || !__has_include(<UIKitCore/UIDocumentViewController.h>)
 //
-//  _UIDocumentViewController.h
+//  UIDocumentViewController.h
 //  UIKit
 //
 //  Copyright © 2022 Apple Inc. All rights reserved.
 //
 
 #import <UIKit/UIKitCore.h>
+
+@class UIDocumentViewControllerLaunchOptions;
 
 NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
@@ -17,10 +19,13 @@ UIKIT_EXTERN API_AVAILABLE(ios(17.0)) API_UNAVAILABLE(tvos, watchos)
 
 @property (nonatomic, strong, nullable) UIDocument *document;
 
+/// Properties to configure the view controller when no document is open.
+@property (nonatomic, strong) UIDocumentViewControllerLaunchOptions *launchOptions API_AVAILABLE(ios(18.0));
+
 /// When this view controller updates its navigation item, this method will be called, allowing subclasses to apply any kind of customization you might want.
 - (void)navigationItemDidUpdate;
 
-/// opens the current document.
+/// Opens the current document.
 /// This method is optional. If the document is not opened by the time the view controller becomes visible, the view controller will take care of opening the document.
 /// If the document is already opened, the completion handler will be called as if opening the document succeeded.
 - (void)openDocumentWithCompletionHandler:(void(^)(BOOL success))completionHandler;

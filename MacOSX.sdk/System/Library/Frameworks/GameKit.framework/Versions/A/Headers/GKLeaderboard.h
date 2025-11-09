@@ -61,6 +61,7 @@ NS_CLASS_AVAILABLE(10_8, 4_1) __WATCHOS_AVAILABLE(3_0)
 /// Duration from startDate during which this leaderboard instance accepts score submissions (only applicable to recurring leaderboards)
 @property (readonly, nonatomic) NSTimeInterval duration API_AVAILABLE(ios(14.0), macos(11.0), tvos(14.0), watchos(7.0));
 
+
 /// Loads classic and recurring leaderboards associated with the supplied App Store Connect leaderboard IDs.
 /// If leaderboardIDs is nil, this loads all classic and recurring leaderboards for this game.
 + (void)loadLeaderboardsWithIDs:(NSArray<NSString *> * _Nullable)leaderboardIDs

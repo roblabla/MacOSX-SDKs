@@ -28,7 +28,7 @@ NS_ASSUME_NONNULL_BEGIN
  @discussion
     The notification object is an AVCaptureDevice instance representing the device that became available.
  */
-AVF_EXPORT NSString *const AVCaptureDeviceWasConnectedNotification API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0), tvos(17.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(watchos);
+AVF_EXPORT NSNotificationName const AVCaptureDeviceWasConnectedNotification NS_SWIFT_NAME(AVCaptureDevice.wasConnectedNotification) API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0), tvos(17.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(watchos);
 
 /*!
  @constant AVCaptureDeviceWasDisconnectedNotification
@@ -38,7 +38,7 @@ AVF_EXPORT NSString *const AVCaptureDeviceWasConnectedNotification API_AVAILABLE
  @discussion
     The notification object is an AVCaptureDevice instance representing the device that became unavailable.
  */
-AVF_EXPORT NSString *const AVCaptureDeviceWasDisconnectedNotification API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0), tvos(17.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(watchos);
+AVF_EXPORT NSNotificationName const AVCaptureDeviceWasDisconnectedNotification NS_SWIFT_NAME(AVCaptureDevice.wasDisconnectedNotification) API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0), tvos(17.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(watchos);
 
 /*!
  @constant AVCaptureDeviceSubjectAreaDidChangeNotification
@@ -48,7 +48,7 @@ AVF_EXPORT NSString *const AVCaptureDeviceWasDisconnectedNotification API_AVAILA
  @discussion
     Clients may observe the AVCaptureDeviceSubjectAreaDidChangeNotification to know when an instance of AVCaptureDevice has detected a substantial change to the video subject area. This notification is only sent if you first set subjectAreaChangeMonitoringEnabled to YES.
   */
-AVF_EXPORT NSString *const AVCaptureDeviceSubjectAreaDidChangeNotification API_AVAILABLE(ios(5.0), macCatalyst(14.0), tvos(17.0)) API_UNAVAILABLE(macos, visionos) API_UNAVAILABLE(watchos);
+AVF_EXPORT NSNotificationName const AVCaptureDeviceSubjectAreaDidChangeNotification NS_SWIFT_NAME(AVCaptureDevice.subjectAreaDidChangeNotification) API_AVAILABLE(ios(5.0), macCatalyst(14.0), tvos(17.0)) API_UNAVAILABLE(macos, visionos) API_UNAVAILABLE(watchos);
 
 
 #pragma mark - AVCaptureDevice
@@ -342,6 +342,8 @@ AV_INIT_UNAVAILABLE
         - The receiver's AVCaptureDeviceInput is added to a session
  
     When exposureMode is AVCaptureExposureModeCustom, setting the activeVideoMinFrameDuration affects max frame rate, but not exposureDuration. You may use setExposureModeCustomWithDuration:ISO:completionHandler: to set a shorter exposureDuration than your activeVideoMinFrameDuration, if desired.
+
+    When autoVideoFrameRateEnabled is true, setting activeVideoMinFrameDuration throws an NSInvalidArgumentException.
  */
 @property(nonatomic) CMTime activeVideoMinFrameDuration API_AVAILABLE(ios(7.0), macCatalyst(14.0), tvos(17.0), visionos(1.0));
 
@@ -365,8 +367,24 @@ AV_INIT_UNAVAILABLE
         - The receiver's AVCaptureDeviceInput is added to a session
  
     When exposureMode is AVCaptureExposureModeCustom, frame rate and exposure duration are interrelated. If you call setExposureModeCustomWithDuration:ISO:completionHandler: with an exposureDuration longer than the current activeVideoMaxFrameDuration, the activeVideoMaxFrameDuration will be lengthened to accommodate the longer exposure time. Setting a shorter exposure duration does not automatically change the activeVideoMinFrameDuration or activeVideoMaxFrameDuration. To explicitly increase the frame rate in custom exposure mode, you must set the activeVideoMaxFrameDuration to a shorter value. If your new max frame duration is shorter than the current exposureDuration, the exposureDuration will shorten as well to accommodate the new frame rate.
+
+    When autoVideoFrameRateEnabled is true, setting activeVideoMaxFrameDuration throws an NSInvalidArgumentException.
  */
 @property(nonatomic) CMTime activeVideoMaxFrameDuration API_AVAILABLE(macos(10.9), ios(7.0), macCatalyst(14.0), tvos(17.0), visionos(1.0));
+
+/*!
+ @property autoVideoFrameRateEnabled
+ @abstract
+    Indicates whether the receiver should enable auto video frame rate.
+
+@discussion
+    When enabled the receiver automatically adjusts the active frame rate, depending on light level. Under low light conditions, frame rate is decreased to properly expose the scene. For formats with a maximum frame rate of 30 fps, the frame rate switches between 30 - 24. For formats with a maximum frame rate of 60 fps, the frame rate switches between 60 - 30 - 24.
+
+    Setting this property throws an NSInvalidArgumentException if the active format's -isAutoVideoFrameRateSupported returns NO. Changing the device's active format resets isAutoVideoFrameRateEnabled to its default value of NO.
+
+    When autoVideoFrameRateEnabled is true, setting activeVideoMinFrameDuration or activeVideoMaxFrameDuration throws an NSInvalidArgumentException.
+ */
+@property(nonatomic, getter=isAutoVideoFrameRateEnabled) BOOL autoVideoFrameRateEnabled API_AVAILABLE(macos(15.0), ios(18.0), macCatalyst(18.0), tvos(18.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(watchos);
 
 /*!
  @property inputSources
@@ -442,7 +460,7 @@ typedef NSString *AVCaptureDeviceType NS_TYPED_ENUM API_AVAILABLE(macos(10.15), 
     Starting in Mac Catalyst 17.0, apps may opt in for using AVCaptureDeviceTypeExternal by adding the following key to their Info.plist:
         <key>NSCameraUseExternalDeviceType</key>
         <true/>
- 
+
     Otherwise, external cameras on Mac Catalyst report that their device type is AVCaptureDeviceTypeBuiltInWideAngleCamera.
  */
 AVF_EXPORT AVCaptureDeviceType const AVCaptureDeviceTypeExternal API_AVAILABLE(macos(14.0), ios(17.0), macCatalyst(17.0), tvos(17.0)) API_UNAVAILABLE(watchos) API_UNAVAILABLE(visionos);
@@ -1842,7 +1860,7 @@ API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0), tvos(17.0)) API_UNAVAILA
  @discussion
     In some system user interfaces, like the macOS Video Effects Menu, the video zoom factor value is displayed in a way most appropriate for visual representation and might differ from the videoZoomFactor property value on the receiver by a fixed ratio. For example, if the videoZoomFactor property value is 1.0 and the displayVideoZoomFactorMultiplier property value is 0.5, then multiplying 1.0 and 0.5 produces 0.5 which can be displayed in the UI. Client applications can key value observe this property to update the display video zoom factor values in their UI to stay consistent with Apple's system UIs.
   */
-@property(nonatomic, readonly) CGFloat displayVideoZoomFactorMultiplier API_AVAILABLE(macos(14.0), macCatalyst(14.0), tvos(17.0)) API_UNAVAILABLE(ios, watchos, visionos);
+@property(nonatomic, readonly) CGFloat displayVideoZoomFactorMultiplier API_AVAILABLE(macos(14.0), ios(18.0), macCatalyst(14.0), tvos(17.0)) API_UNAVAILABLE(watchos, visionos);
 
 @end
 
@@ -2367,6 +2385,29 @@ API_AVAILABLE(macos(14.0), ios(17.0), macCatalyst(17.0), tvos(17.0)) API_UNAVAIL
 @end
 
 
+API_AVAILABLE(macos(15.0), ios(18.0), macCatalyst(18.0), tvos(18.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(watchos)
+@interface AVCaptureDevice (AVCaptureDeviceBackgroundReplacement)
+
+/*!
+ @property backgroundReplacementEnabled
+ @abstract
+    A class property indicating whether the user has enabled the Background Replacement feature for this application.
+ */
+@property(class, readonly, getter=isBackgroundReplacementEnabled) BOOL backgroundReplacementEnabled API_AVAILABLE(macos(15.0), ios(18.0), macCatalyst(18.0), tvos(18.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(watchos);
+
+/*!
+ @property backgroundReplacementActive
+ @abstract
+    Indicates whether Background Replacement is currently active on a particular AVCaptureDevice.
+ 
+ @discussion
+    This property is key-value observable.
+ */
+@property(nonatomic, readonly, getter=isBackgroundReplacementActive) BOOL backgroundReplacementActive API_AVAILABLE(macos(15.0), ios(18.0), macCatalyst(18.0), tvos(18.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(watchos);
+
+@end
+
+
 API_AVAILABLE(macos(13.0), ios(16.0), macCatalyst(16.0), tvos(17.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(watchos)
 @interface AVCaptureDevice (AVCaptureDeviceContinuityCamera)
 
@@ -2474,6 +2515,41 @@ typedef NS_ENUM(NSInteger, AVCaptureSystemUserInterface) {
  */
 + (void)showSystemUserInterface:(AVCaptureSystemUserInterface)systemUserInterface NS_SWIFT_NAME(showSystemUserInterface(_:)) API_AVAILABLE(macos(12.0), ios(15.0), macCatalyst(15.0), tvos(17.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(watchos);
 
+@end
+
+
+/*!
+ @group AVSpatialCaptureDiscomfortReason string constants
+
+ @discussion
+    The AVSpatialCaptureDiscomfortReason string constants are used to report the applicability of the current scene to create a comfortable viewing experience.
+ */
+typedef NSString *AVSpatialCaptureDiscomfortReason NS_TYPED_ENUM API_AVAILABLE(macos(15.0), ios(18.0), macCatalyst(18.0), tvos(18.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(watchos);
+
+/*!
+ @constant AVSpatialCaptureDiscomfortReasonNotEnoughLight
+    The lighting of the current scene is not bright enough; the playback experience will likely be uncomfortable due to noise differences between the two cameras.
+ */
+AVF_EXPORT AVSpatialCaptureDiscomfortReason const AVSpatialCaptureDiscomfortReasonNotEnoughLight API_AVAILABLE(macos(15.0), ios(18.0), macCatalyst(18.0), tvos(18.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(watchos);
+
+/*!
+ @constant AVSpatialCaptureDiscomfortReasonSubjectTooClose
+    The focus point of the current scene is too close; the playback experience will likely be uncomfortable due to the subject being closer than the minimum focus distance of one or both of the lenses.
+ */
+AVF_EXPORT AVSpatialCaptureDiscomfortReason const AVSpatialCaptureDiscomfortReasonSubjectTooClose API_AVAILABLE(macos(15.0), ios(18.0), macCatalyst(18.0), tvos(18.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(watchos);
+
+
+@interface AVCaptureDevice (AVCaptureDeviceSpatialCapture)
+
+/*!
+ @property spatialCaptureDiscomfortReasons
+ @abstract
+    Indicates whether or not the current environmental conditions are amenable to a spatial capture that is comfortable to view.
+ 
+ @discussion
+    This property can be monitored in order to determine the presentation of U/I elements to inform the user that they should reframe their scene for a more pleasing spatial capture ("subject is too close", "scene is too dark").
+ */
+@property(nonatomic, readonly) NSSet<AVSpatialCaptureDiscomfortReason> *spatialCaptureDiscomfortReasons API_AVAILABLE(macos(15.0), ios(18.0), macCatalyst(18.0), tvos(18.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(watchos);
 @end
 
 
@@ -2610,6 +2686,52 @@ AV_INIT_UNAVAILABLE
 @end
 
 
+#pragma mark - AVExposureBiasRange
+
+/*!
+ @class AVExposureBiasRange
+ @abstract
+    An AVExposureBiasRange expresses an inclusive range of supported exposure bias values, in EV units.
+ 
+ @discussion
+    This is used by AVCaptureSystemExposureBiasSlider for the range the slider uses.
+ */
+API_AVAILABLE(macos(15.0), ios(18.0), macCatalyst(18.0), tvos(18.0), visionos(2.0)) API_UNAVAILABLE(watchos) NS_REFINED_FOR_SWIFT
+@interface AVExposureBiasRange : NSObject
+
+AV_INIT_UNAVAILABLE
+
+/*!
+ @property minExposureBias
+ @abstract
+    A float indicating the minimum exposure bias in EV units supported by this range.
+ */
+@property(nonatomic, readonly) float minExposureBias;
+
+/*!
+ @property maxExposureBias
+ @abstract
+    A float indicating the maximum exposure bias in EV units supported by this range.
+ */
+@property(nonatomic, readonly) float maxExposureBias;
+
+/*!
+ @method containsExposureBias:
+ @abstract
+    Tests if a given exposure bias in EV units is within the exposure bias range.
+ 
+ @param exposureBias
+    The exposure bias to test.
+ @result
+    Returns YES if the given exposure bias is within the exposure bias, NO otherwise.
+ 
+ @discussion
+    Note that the exposure bias ranges are inclusive.
+ */
+- (BOOL)containsExposureBias:(float)exposureBias;
+
+@end
+
 #pragma mark - AVFrameRateRange
 
 @class AVFrameRateRangeInternal;
@@ -2736,6 +2858,8 @@ AV_INIT_UNAVAILABLE
     Indicates that the video should be stabilized using the extended cinematic stabilization algorithm. Enabling extended cinematic stabilization introduces longer latency into the video capture pipeline compared to the AVCaptureVideoStabilizationModeCinematic and consumes more memory, but yields improved stability. It is recommended to use identical or similar min and max frame durations in conjunction with this mode.
  @constant AVCaptureVideoStabilizationModePreviewOptimized
     Indicates that video should be stabilized using the preview optimized stabilization algorithm. Preview stabilization is a low latency and low power algorithm which is supported only on connections which either have an associated preview layer or have a preview-sized VideoDataOutput.
+ @constant AVCaptureVideoStabilizationModeCinematicExtendedEnhanced
+    Indicates that the video should be stabilized using the enhanced extended cinematic stabilization algorithm. Enhanced extended cinematic has a reduced field of view compared to extended cinematic, without any noticeable increase in latency, and it yields improved stability. It is recommended to use identical or similar min and max frame durations in conjunction with this mode.
  @constant AVCaptureVideoStabilizationModeAuto
     Indicates that the most appropriate video stabilization mode for the device and format should be chosen.
  */
@@ -2745,6 +2869,7 @@ typedef NS_ENUM(NSInteger, AVCaptureVideoStabilizationMode) {
     AVCaptureVideoStabilizationModeCinematic = 2,
     AVCaptureVideoStabilizationModeCinematicExtended API_AVAILABLE(ios(13.0), macCatalyst(14.0), tvos(17.0)) API_UNAVAILABLE(visionos) = 3,
     AVCaptureVideoStabilizationModePreviewOptimized API_AVAILABLE(ios(17.0), macCatalyst(17.0), tvos(17.0)) API_UNAVAILABLE(macos, visionos) = 4,
+    AVCaptureVideoStabilizationModeCinematicExtendedEnhanced API_AVAILABLE(ios(18.0), macCatalyst(18.0), tvos(18.0)) API_UNAVAILABLE(macos, visionos) = 5,
     AVCaptureVideoStabilizationModeAuto      = -1,
 } API_AVAILABLE(ios(8.0), macCatalyst(14.0), tvos(17.0)) API_UNAVAILABLE(macos, visionos) API_UNAVAILABLE(watchos);
 
@@ -2883,6 +3008,18 @@ AV_INIT_UNAVAILABLE
 @property(nonatomic, readonly) CGFloat videoZoomFactorUpscaleThreshold API_UNAVAILABLE(macos, visionos);
 
 /*!
+ @property systemRecommendedVideoZoomRange
+ @abstract
+    Indicates the system's recommended zoom range for this device format.
+ 
+ @discussion
+    This property can be used to create a slider in your app's user interface to control the device's zoom with a system-recommended video zoom range. When a recommendation is not available, this property returns nil. Clients can key value observe AVCaptureDevice's minAvailableVideoZoomFactor and maxAvailableVideoZoomFactor properties to know when a device's supported zoom is restricted within the recommended zoom range.
+ 
+    The value of this property is also used for the AVCaptureSystemZoomSlider's range.
+ */
+@property(nonatomic, readonly, nullable) AVZoomRange *systemRecommendedVideoZoomRange API_AVAILABLE(macos(15.0), ios(18.0), macCatalyst(18.0), tvos(18.0)) API_UNAVAILABLE(visionos) NS_REFINED_FOR_SWIFT;
+
+/*!
  @property minExposureDuration
  @abstract
     A CMTime indicating the minimum supported exposure duration.
@@ -2901,6 +3038,18 @@ AV_INIT_UNAVAILABLE
     This read-only property indicates the maximum supported exposure duration.
  */
 @property(nonatomic, readonly) CMTime maxExposureDuration API_AVAILABLE(ios(8.0), macCatalyst(14.0), tvos(17.0)) API_UNAVAILABLE(macos, visionos);
+
+/*!
+ @property systemRecommendedExposureBiasRange
+ @abstract
+    Indicates the system's recommended exposure bias range for this device format.
+ 
+ @discussion
+    This property can be used to create a slider in your app's user interface to control the device's exposure bias with a system-recommended exposure bias range. When a recommendation is not available, this property returns nil.
+ 
+    The value of this property is also used for the AVCaptureSystemExposureBiasSlider's range.
+ */
+@property(nonatomic, readonly, nullable) AVExposureBiasRange *systemRecommendedExposureBiasRange API_AVAILABLE(macos(15.0), ios(18.0), macCatalyst(18.0), tvos(18.0)) API_UNAVAILABLE(visionos) NS_REFINED_FOR_SWIFT;
 
 /*!
  @property minISO
@@ -3089,6 +3238,16 @@ AV_INIT_UNAVAILABLE
  */
 @property(nonatomic, readonly) NSArray<NSNumber *> *secondaryNativeResolutionZoomFactors API_AVAILABLE(ios(16.0), macos(13.0), macCatalyst(16.0), tvos(17.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(watchos) NS_REFINED_FOR_SWIFT;
 
+/*!
+ @property autoVideoFrameRateSupported
+ @abstract
+    Indicates whether the device format supports auto video frame rate.
+
+ @discussion
+    See -[AVCaptureDevice autoVideoFrameRateEnabled] (above) for a detailed description of the feature.
+ */
+@property(nonatomic, readonly, getter=isAutoVideoFrameRateSupported) BOOL autoVideoFrameRateSupported API_AVAILABLE(macos(15.0), ios(18.0), macCatalyst(18.0), tvos(18.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(watchos);
+
 @end
 
 
@@ -3120,6 +3279,19 @@ API_AVAILABLE(macos(10.7), ios(7.0), macCatalyst(14.0), tvos(17.0)) API_UNAVAILA
    When using an AVCaptureSession (single camera capture), any of the formats in the device's -formats array may be set as the -activeFormat. However, when used with an AVCaptureMultiCamSession, the device's -activeFormat may only be set to one of the formats for which multiCamSupported answers YES. This limited subset of capture formats are known to run sustainably in a multi camera capture scenario.
  */
 @property(nonatomic, readonly, getter=isMultiCamSupported) BOOL multiCamSupported API_AVAILABLE(ios(13.0), macCatalyst(14.0), tvos(17.0)) API_UNAVAILABLE(macos, visionos) API_UNAVAILABLE(watchos);
+
+@end
+
+
+API_AVAILABLE(macos(15.0), ios(18.0), macCatalyst(18.0), tvos(18.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(watchos)
+@interface AVCaptureDeviceFormat (AVCaptureDeviceFormatSpatialVideoCapture)
+
+/*!
+ @property spatialVideoCaptureSupported
+ @abstract
+    Returns whether or not the format supports capturing spatial video to a file.
+ */
+@property(nonatomic, readonly, getter=isSpatialVideoCaptureSupported) BOOL spatialVideoCaptureSupported;
 
 @end
 
@@ -3287,6 +3459,32 @@ API_AVAILABLE(macos(14.0), ios(17.0), macCatalyst(17.0), tvos(17.0)) API_UNAVAIL
     Unlike the other video effects, enabling reaction effects does not limit the stream's frame rate because most of the time no rendering is being performed. The frame rate will only ramp down when a reaction is actually being rendered on the stream (see AVCaptureDevice.reactionEffectsInProgress)
  */
 @property(nonatomic, readonly, nullable) AVFrameRateRange *videoFrameRateRangeForReactionEffectsInProgress API_AVAILABLE(macos(14.0), ios(17.0), macCatalyst(17.0), tvos(17.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(watchos);
+
+@end
+
+
+API_AVAILABLE(macos(15.0), ios(18.0), macCatalyst(18.0), tvos(18.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(watchos)
+@interface AVCaptureDeviceFormat (AVCaptureDeviceFormatBackgroundReplacement)
+
+/*!
+ @property backgroundReplacementSupported
+ @abstract
+    Indicates whether the format supports the Background Replacement feature.
+ 
+ @discussion
+    This property returns YES if the format supports Background Replacement background replacement. See +AVCaptureDevice.backgroundReplacementEnabled.
+ */
+@property(nonatomic, readonly, getter=isBackgroundReplacementSupported) BOOL backgroundReplacementSupported API_AVAILABLE(macos(15.0), ios(18.0), macCatalyst(18.0), tvos(18.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(watchos);
+
+/*!
+ @property videoFrameRateRangeForBackgroundReplacement
+ @abstract
+    Indicates the minimum / maximum frame rates available when background replacement is active.
+ 
+ @discussion
+    Devices may support a limited frame rate range when Background Replacement is active. If this device format does not support Background Replacement, this property returns nil.
+ */
+@property(nonatomic, readonly, nullable) AVFrameRateRange *videoFrameRateRangeForBackgroundReplacement API_AVAILABLE(macos(15.0), ios(18.0), macCatalyst(18.0), tvos(18.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(watchos);
 
 @end
 

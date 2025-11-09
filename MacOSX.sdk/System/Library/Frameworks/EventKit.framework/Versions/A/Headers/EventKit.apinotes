@@ -5,6 +5,12 @@ Tags:
   NSErrorDomain: EKErrorDomain
 - Name: EKWeekday
   EnumKind: NSClosedEnum
+Classes:
+- Name: EKVirtualConferenceProvider
+  Methods:
+  - Selector:     'fetchVirtualConferenceForIdentifier:completionHandler:'
+    MethodKind:   Instance
+    SwiftName:    'fetchVirtualConference(identifier:completionHandler:)'
 SwiftVersions:
 - Version: 3
   Classes:
@@ -64,10 +70,3 @@ SwiftVersions:
     - Name:         title
       PropertyKind: Instance
       Nullability:  N
-- Version: 5
-  Classes:
-  - Name: EKVirtualConferenceProvider
-    Methods:
-    - Selector:     'fetchVirtualConferenceForIdentifier:completionHandler:'
-      MethodKind:   Instance
-      SwiftName:    'fetchVirtualConference(identifier:completionHandler:)'

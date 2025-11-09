@@ -112,6 +112,10 @@
 				closed (@link //apple_ref/occ/instm/DRDevice/closeTray closeTray @/link) and media 
 				can be ejected (@link //apple_ref/occ/instm/DRDevice/ejectMedia ejectMedia @/link).
 */
+
+#ifndef DISC_RECORDING_DR_DEVICE
+#define DISC_RECORDING_DR_DEVICE
+
 @interface DRDevice : NSObject 
 { 
 @private
@@ -1350,3 +1354,4 @@ extern NSString* const DRDeviceMediaTypeHDDVDRWDualLayer		AVAILABLE_MAC_OS_X_VER
 */
 extern NSString* const DRDeviceMediaTypeUnknown					AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
+#endif // DISC_RECORDING_DR_DEVICE

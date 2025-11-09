@@ -6,9 +6,9 @@ install-name:    '/usr/lib/libsandbox.1.dylib'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
-    symbols:         [ _SANDBOX_BUILD_ID, ___crashreporter_info__, _sandbox_apply, 
-                       _sandbox_apply_container, _sandbox_compile_entitlements, _sandbox_compile_file, 
-                       _sandbox_compile_named, _sandbox_compile_string, _sandbox_container_paths_iterate_items, 
+    symbols:         [ _SANDBOX_BUILD_ID, _sandbox_apply, _sandbox_apply_container, 
+                       _sandbox_compile_entitlements, _sandbox_compile_file, _sandbox_compile_named, 
+                       _sandbox_compile_string, _sandbox_container_paths_iterate_items, 
                        _sandbox_create_params, _sandbox_exempt_from_network_approval_policy, 
                        _sandbox_free_params, _sandbox_free_profile, _sandbox_inspect_pid, 
                        _sandbox_inspect_smemory, _sandbox_prepare_user_home_mount, 

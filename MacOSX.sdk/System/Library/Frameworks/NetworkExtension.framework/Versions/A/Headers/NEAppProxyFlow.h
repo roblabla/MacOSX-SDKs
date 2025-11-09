@@ -67,12 +67,20 @@ API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(watchos, tvos)
 @interface NEAppProxyFlow : NSObject
 
 /*!
- * @method openWithLocalEndpoint:completionHandler:
+ * @method openWithLocalFlowEndpoint:completionHandler:
  * @discussion This function is used by an NEProvider implementation to indicate that it is ready to handle flow data.
- * @param localEndpoint The address and port that should be used as the local endpoint of the socket associated with this flow. If the source application already specifed a local endpoint by binding the socket then this parameter is ignored.
+ * @param localEndpoint The address and port that should be used as the local endpoint of the socket associated with this flow. If the source application already specified a local endpoint by binding the socket then this parameter is ignored.
  * @param completionHandler A block that is called when the process of opening flow is complete. A nil value passed to this block indicates that the flow was opened successfully. A non-nil NSError value indicates that the flow failed to open successfully.
  */
-- (void)openWithLocalEndpoint:(nullable NWHostEndpoint *)localEndpoint completionHandler:(void (^)(NSError *__nullable error))completionHandler API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(watchos, tvos);
+- (void)openWithLocalFlowEndpoint:(nullable nw_endpoint_t)localEndpoint completionHandler:(void (^)(NSError *__nullable error))completionHandler API_AVAILABLE(macos(15.0), ios(18.0), visionos(2.0)) API_UNAVAILABLE(watchos, tvos);
+
+/*!
+ * @method openWithLocalEndpoint:completionHandler:
+ * @discussion This function is used by an NEProvider implementation to indicate that it is ready to handle flow data.
+ * @param localEndpoint The address and port that should be used as the local endpoint of the socket associated with this flow. If the source application already specified a local endpoint by binding the socket then this parameter is ignored.
+ * @param completionHandler A block that is called when the process of opening flow is complete. A nil value passed to this block indicates that the flow was opened successfully. A non-nil NSError value indicates that the flow failed to open successfully.
+ */
+- (void)openWithLocalEndpoint:(nullable NWHostEndpoint *)localEndpoint completionHandler:(void (^)(NSError *__nullable error))completionHandler API_DEPRECATED_WITH_REPLACEMENT("openWithLocalFlowEndpoint:completionHandler:", macos(10.11, 15.0), ios(9.0, 18.0), visionos(1.0, 2.0)) API_UNAVAILABLE(watchos, tvos);
 
 /*!
  * @method closeReadWithError:

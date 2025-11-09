@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.10 (swiftlang-5.10.0.12.5 clang-1500.3.9.1.1)
-// swift-module-flags: -target arm64e-apple-macosx14.5 -enable-objc-interop -enable-library-evolution -module-link-name swift_StringProcessing -swift-version 5 -O -library-level api -enforce-exclusivity=unchecked -target-min-inlining-version min -user-module-version 5.10.0.12.5 -module-name _StringProcessing
-// swift-module-flags-ignorable: -enable-lexical-lifetimes=false
+// swift-compiler-version: Apple Swift version 6.0 effective-5.10 (swiftlang-6.0.0.7.24 clang-1600.0.25.1)
+// swift-module-flags: -target arm64e-apple-macosx15.0 -target-variant arm64e-apple-ios14.5-macabi -enable-objc-interop -enable-library-evolution -module-link-name swift_StringProcessing -swift-version 5 -O -library-level api -enforce-exclusivity=unchecked -target-min-inlining-version min -enable-experimental-feature NoncopyableGenerics2 -enable-experimental-feature SuppressedAssociatedTypes -enable-experimental-feature ExtensionImportVisiblity -user-module-version 6.0.0.7.24 -module-name _StringProcessing
+// swift-module-flags-ignorable: -enable-ossa-modules -enable-lexical-lifetimes=false
 import Swift
 extension Swift.Collection where Self.Element : Swift.Equatable {
   @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
@@ -114,6 +114,13 @@ extension Swift.BidirectionalCollection where Self.SubSequence == Swift.Substrin
   public func matches<Output>(of r: some RegexComponent<Output>) -> [_StringProcessing.Regex<Output>.Match]
 }
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
+extension _StringProcessing.Regex {
+  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+  public var _literalPattern: Swift.String? {
+    get
+  }
+}
+@available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 public struct AnyRegexOutput {
 }
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
@@ -154,9 +161,13 @@ extension _StringProcessing.AnyRegexOutput : Swift.RandomAccessCollection {
   public subscript(position: Swift.Int) -> _StringProcessing.AnyRegexOutput.Element {
     get
   }
+  @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
   public typealias Index = Swift.Int
+  @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
   public typealias Indices = Swift.Range<Swift.Int>
+  @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
   public typealias Iterator = Swift.IndexingIterator<_StringProcessing.AnyRegexOutput>
+  @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
   public typealias SubSequence = Swift.Slice<_StringProcessing.AnyRegexOutput>
 }
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
@@ -218,6 +229,7 @@ public struct Regex<Output> : _StringProcessing.RegexComponent {
   public var regex: _StringProcessing.Regex<Output> {
     get
   }
+  @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
   public typealias RegexOutput = Output
 }
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)

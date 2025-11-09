@@ -58,7 +58,7 @@ BG_EXTERN API_AVAILABLE(ios(13.0), tvos(13.0)) API_UNAVAILABLE(macos, watchos)
 @property (nullable, strong) void (^expirationHandler)(void);
 
 - (instancetype)init NS_UNAVAILABLE; // Subclasses of this abstract type are created by the system and cannot be directly instantiated
-- (instancetype)new NS_UNAVAILABLE; // Subclasses of this abstract type are created by the system and cannot be directly instantiated
++ (instancetype)new NS_UNAVAILABLE; // Subclasses of this abstract type are created by the system and cannot be directly instantiated
 
 /*!
  @abstract Marks this task as complete.
@@ -110,7 +110,7 @@ BG_EXTERN API_AVAILABLE(ios(13.0), tvos(13.0)) API_UNAVAILABLE(macos, watchos)
 /*!
  @abstract A potentially time-consuming task that is required to process data essential to a health research study.
  */
-BG_EXTERN API_AVAILABLE(ios(17.0), tvos(17.0)) API_UNAVAILABLE(macos, watchos, tvos)
+BG_EXTERN API_AVAILABLE(ios(17.0), tvos(25.0)) API_UNAVAILABLE(macos, watchos, tvos)
 /// A task meant to perform processing on behalf of health research studies.
 ///
 /// Health research tasks may only be used by applications entitled to perform

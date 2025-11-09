@@ -100,6 +100,24 @@ API_AVAILABLE(macos(11.0), ios(14.0))
 - (BOOL) addTileRenderPipelineFunctionsWithDescriptor:(MTLTileRenderPipelineDescriptor*)descriptor error:(NSError**)error API_AVAILABLE(tvos(14.5));
 
 /*!
+ @method addMeshRenderPipelineFunctionsWithDescriptor:error:
+ @abstract Add the function(s) from a mesh render pipeline state to the archive.
+ @param descriptor The descriptor from which function(s) will be added.
+ @param error If the function fails, this will be set to describe the failure. This can be (but is not required to be) an error from the MTLBinaryArchiveDomain domain.
+ @return Whether or not the addition succeeded. Functions referenced multiple times are silently accepted.
+ */
+- (BOOL) addMeshRenderPipelineFunctionsWithDescriptor:(MTLMeshRenderPipelineDescriptor*)descriptor error:(NSError**)error API_AVAILABLE(macos(15.0), ios(18.0));
+
+
+/*!
+ @method addLibraryWithDescriptor:error:
+ @abstract Add the function(s) from a stitched library to the archive.
+ @param descriptor The stitched library descriptor from which function(s) will be added.
+ @param error If the function fails, this will be set to describe the failure. This can be (but is not required to be) an error from the MTLBinaryArchiveDomain domain.
+ @return Whether or not the addition succeeded. Functions referenced multiple times are silently accepted.
+ */
+- (BOOL) addLibraryWithDescriptor:(MTLStitchedLibraryDescriptor *)descriptor error:(NSError **)error API_AVAILABLE(macos(15.0), ios(18.0));
+/*!
  @method serializeToURL:error:
  @abstract Write the contents of a MTLBinaryArchive to a file.
  @discussion Persisting the archive to a file allows opening the archive on a subsequent instance of the app, making available the contents without recompiling.

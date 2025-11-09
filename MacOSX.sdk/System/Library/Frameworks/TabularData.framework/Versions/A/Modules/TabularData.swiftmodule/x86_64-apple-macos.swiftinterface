@@ -1,6 +1,6 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.10 (swiftlang-5.10.0.12.5 clang-1500.3.9.1.1)
-// swift-module-flags: -target x86_64-apple-macos14.5 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-bare-slash-regex -user-module-version 41 -module-name TabularData
+// swift-compiler-version: Apple Swift version 6.0 (swiftlang-6.0.0.7.24 clang-1600.0.25.1)
+// swift-module-flags: -target x86_64-apple-macos15.0 -target-variant x86_64-apple-ios17.0-macabi -enable-objc-interop -enable-library-evolution -swift-version 6 -enforce-exclusivity=checked -O -library-level api -user-module-version 43 -module-name TabularData
 import Combine
 import Dispatch
 import Foundation
@@ -115,6 +115,7 @@ extension TabularData.DataFrame {
   public func filter(_ isIncluded: (TabularData.DataFrame.Row) throws -> Swift.Bool) rethrows -> TabularData.DataFrame.Slice
   public func selecting<S>(columnNames: S) -> TabularData.DataFrame where S : Swift.Sequence, S.Element == Swift.String
   public func selecting(columnNames: Swift.String...) -> TabularData.DataFrame
+  @available(iOS 15, tvOS 15, watchOS 8, macOS 12, *)
   public typealias ColumnType = TabularData.AnyColumn
 }
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
@@ -169,7 +170,9 @@ extension TabularData.DataFrame : Swift.Hashable {
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
 extension TabularData.DataFrame : Swift.ExpressibleByDictionaryLiteral {
   public init(dictionaryLiteral elements: (Swift.String, [Any?])...)
+  @available(iOS 15, tvOS 15, watchOS 8, macOS 12, *)
   public typealias Key = Swift.String
+  @available(iOS 15, tvOS 15, watchOS 8, macOS 12, *)
   public typealias Value = [Any?]
 }
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
@@ -348,6 +351,7 @@ extension TabularData.DataFrame {
     public var shape: (rows: Swift.Int, columns: Swift.Int) {
       get
     }
+    @available(iOS 15, tvOS 15, watchOS 8, macOS 12, *)
     public typealias ColumnType = TabularData.AnyColumnSlice
   }
 }
@@ -424,10 +428,10 @@ public struct Column<WrappedElement> : TabularData.OptionalColumnProtocol {
   public mutating func transform(_ transform: (WrappedElement) throws -> WrappedElement) rethrows
   public func filter(_ isIncluded: (TabularData.Column<WrappedElement>.Element) throws -> Swift.Bool) rethrows -> TabularData.DiscontiguousColumnSlice<WrappedElement>
   public func eraseToAnyColumn() -> TabularData.AnyColumn
-  public typealias Index = Swift.Int
-  public typealias Indices = Swift.Range<Swift.Int>
+  @available(iOS 15, tvOS 15, watchOS 8, macOS 12, *)
+  public typealias Indices = Swift.Range<TabularData.Column<WrappedElement>.Index>
+  @available(iOS 15, tvOS 15, watchOS 8, macOS 12, *)
   public typealias Iterator = Swift.IndexingIterator<TabularData.Column<WrappedElement>>
-  public typealias SubSequence = TabularData.ColumnSlice<WrappedElement>
 }
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
 extension TabularData.Column : Swift.RandomAccessCollection, Swift.MutableCollection {
@@ -466,6 +470,10 @@ extension TabularData.Column : Swift.RandomAccessCollection, Swift.MutableCollec
   public func withContiguousStorageIfAvailable<R>(_ body: (Swift.UnsafeBufferPointer<WrappedElement>) throws -> R) rethrows -> R?
   @available(macOS 13, iOS 16, tvOS 16, watchOS 9, *)
   public mutating func withContiguousMutableStorageIfAvailable<R>(_ body: (inout Swift.UnsafeMutableBufferPointer<WrappedElement>) throws -> R) rethrows -> R?
+  @available(iOS 15, tvOS 15, watchOS 8, macOS 12, *)
+  public typealias Index = Swift.Int
+  @available(iOS 15, tvOS 15, watchOS 8, macOS 12, *)
+  public typealias SubSequence = TabularData.ColumnSlice<WrappedElement>
 }
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
 extension TabularData.Column : Swift.Equatable where WrappedElement : Swift.Equatable {
@@ -537,8 +545,11 @@ public struct ColumnSlice<WrappedElement> : TabularData.OptionalColumnProtocol {
     }
   public func filter(_ isIncluded: (TabularData.ColumnSlice<WrappedElement>.Element) throws -> Swift.Bool) rethrows -> TabularData.DiscontiguousColumnSlice<WrappedElement>
   public func eraseToAnyColumn() -> TabularData.AnyColumnSlice
+  @available(iOS 15, tvOS 15, watchOS 8, macOS 12, *)
   public typealias Indices = Swift.Range<TabularData.ColumnSlice<WrappedElement>.Index>
+  @available(iOS 15, tvOS 15, watchOS 8, macOS 12, *)
   public typealias Iterator = Swift.IndexingIterator<TabularData.ColumnSlice<WrappedElement>>
+  @available(iOS 15, tvOS 15, watchOS 8, macOS 12, *)
   public typealias SubSequence = TabularData.ColumnSlice<WrappedElement>
 }
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
@@ -765,7 +776,7 @@ internal struct PackedOptionalsBuffer<Element> {
             (elements + i).moveInitialize(from: otherElements + i, count: 1)
         }
 
-        // Leave the other buffer in a consisten state
+         
         other.nilBitmapBuffer.update(repeating: 0)
         other.nilCount = count
     }
@@ -907,12 +918,16 @@ extension TabularData.PackedOptionalsBuffer : Swift.MutableCollection, Swift.Ran
             }
         }
   }
+  @available(iOS 15, tvOS 15, watchOS 8, macOS 12, *)
   @usableFromInline
   internal typealias Index = Swift.Int
+  @available(iOS 15, tvOS 15, watchOS 8, macOS 12, *)
   @usableFromInline
-  internal typealias Indices = Swift.Range<Swift.Int>
+  internal typealias Indices = Swift.Range<TabularData.PackedOptionalsBuffer<Element>.Index>
+  @available(iOS 15, tvOS 15, watchOS 8, macOS 12, *)
   @usableFromInline
   internal typealias Iterator = Swift.IndexingIterator<TabularData.PackedOptionalsBuffer<Element>>
+  @available(iOS 15, tvOS 15, watchOS 8, macOS 12, *)
   @usableFromInline
   internal typealias SubSequence = Swift.Slice<TabularData.PackedOptionalsBuffer<Element>>
 }
@@ -934,26 +949,26 @@ extension TabularData.PackedOptionalsBuffer : Swift.RangeReplaceableCollection {
 
         if growth > 0 {
             resize(by: growth)
-            // Slide the tail part of the buffer forwards, in reverse order
-            // so as not to self-clobber.
+             
+             
             for i in (oldTailIndex ..< oldCount).reversed() {
                 swapAt(i, i + growth)
             }
 
-            // Assign over the original subrange
+             
             var i = newValues.startIndex
             for j in subrange {
                 self[j] = newValues[i]
                 newValues.formIndex(after: &i)
             }
-            // Initialize the hole left by sliding the tail forward
+             
             for j in oldTailIndex ..< newTailIndex {
                 self[j] = newValues[i]
                 newValues.formIndex(after: &i)
             }
             assert(i == newValues.endIndex, "invalid Collection: count differed in successive traversals")
-        } else { // The buffer is not growing.
-            // Assign all the new elements into the start of the subrange
+        } else {  
+             
             var i = subrange.lowerBound
             var j = newValues.startIndex
             for _ in 0 ..< newCount {
@@ -963,25 +978,25 @@ extension TabularData.PackedOptionalsBuffer : Swift.RangeReplaceableCollection {
             }
             assert(j == newValues.endIndex, "invalid Collection: count differed in successive traversals")
 
-            // Exit the method if the size didn't change.
+             
             if growth == 0 {
                 return
             }
 
-            // Move the tail backward to cover the shrinkage.
+             
             let shrinkage = -growth
-            if tailCount > shrinkage { // If the tail length exceeds the shrinkage
-                // Assign over the rest of the replaced range with the first part of the tail.
+            if tailCount > shrinkage {  
+                 
                 for i in oldTailIndex ..< oldTailIndex + shrinkage {
                     move(from: i, to: i + growth)
                 }
 
-                // Slide the rest of the tail back
+                 
                 for i in oldTailIndex + shrinkage ..< oldTailIndex + tailCount {
                     move(from: i, to: i - shrinkage)
                 }
-            } else { // Tail fits within erased elements
-                // Assign over the start of the replaced range with the tail
+            } else {  
+                 
                 for i in oldTailIndex ..< oldTailIndex + tailCount {
                     move(from: i, to: i + growth)
                 }
@@ -1394,8 +1409,11 @@ extension TabularData.DiscontiguousColumnSlice : Swift.BidirectionalCollection, 
             self[startIndex...] = newValue
         }
   }
+  @available(iOS 15, tvOS 15, watchOS 8, macOS 12, *)
   public typealias Indices = Swift.DefaultIndices<TabularData.DiscontiguousColumnSlice<WrappedElement>>
+  @available(iOS 15, tvOS 15, watchOS 8, macOS 12, *)
   public typealias Iterator = Swift.IndexingIterator<TabularData.DiscontiguousColumnSlice<WrappedElement>>
+  @available(iOS 15, tvOS 15, watchOS 8, macOS 12, *)
   public typealias SubSequence = TabularData.DiscontiguousColumnSlice<WrappedElement>
 }
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
@@ -1520,10 +1538,15 @@ extension TabularData.AnyColumnSlice : Swift.RandomAccessCollection, Swift.Mutab
   }
   public static func == (lhs: TabularData.AnyColumnSlice, rhs: TabularData.AnyColumnSlice) -> Swift.Bool
   public func hash(into hasher: inout Swift.Hasher)
+  @available(iOS 15, tvOS 15, watchOS 8, macOS 12, *)
   public typealias Element = Any?
+  @available(iOS 15, tvOS 15, watchOS 8, macOS 12, *)
   public typealias Index = Swift.Int
+  @available(iOS 15, tvOS 15, watchOS 8, macOS 12, *)
   public typealias Indices = Swift.Range<Swift.Int>
+  @available(iOS 15, tvOS 15, watchOS 8, macOS 12, *)
   public typealias Iterator = Swift.IndexingIterator<TabularData.AnyColumnSlice>
+  @available(iOS 15, tvOS 15, watchOS 8, macOS 12, *)
   public typealias SubSequence = TabularData.AnyColumnSlice
 }
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
@@ -1595,7 +1618,7 @@ public enum Order : Swift.Sendable {
 extension TabularData.FilledColumn where Base.WrappedElement : Swift.Comparable {
   public func min() -> TabularData.FilledColumn<Base>.Element?
   public func max() -> TabularData.FilledColumn<Base>.Element?
-  public func argmin() -> TabularData.FilledColumn<Base>.Index?
+  public func argmin() -> Base.Index?
   public func argmax() -> TabularData.FilledColumn<Base>.Index?
 }
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
@@ -1639,9 +1662,13 @@ public struct FilledColumn<Base> : TabularData.ColumnProtocol where Base : Tabul
         base[position] ?? defaultValue
     }
   }
+  @available(iOS 15, tvOS 15, watchOS 8, macOS 12, *)
   public typealias Index = Base.Index
+  @available(iOS 15, tvOS 15, watchOS 8, macOS 12, *)
   public typealias Indices = Swift.DefaultIndices<TabularData.FilledColumn<Base>>
+  @available(iOS 15, tvOS 15, watchOS 8, macOS 12, *)
   public typealias Iterator = Swift.IndexingIterator<TabularData.FilledColumn<Base>>
+  @available(iOS 15, tvOS 15, watchOS 8, macOS 12, *)
   public typealias SubSequence = Swift.Slice<TabularData.FilledColumn<Base>>
 }
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
@@ -1687,10 +1714,10 @@ public struct CSVWritingOptions {
   public var newline: Swift.String
   public var delimiter: Swift.Character
   @_alwaysEmitIntoClient public init() {
-        // Unfortunately the only initializer available on the first version of TabularData is the deprecated one. We
-        // need to use it here to ensure that this default initializer works on all versions. Using
-        // `@_alwaysEmitIntoClient` means that this initializer can be used even with original version of the
-        // framework.
+         
+         
+         
+         
         self.init(
             includesHeader: true,
             dateFormat: nil,
@@ -1768,10 +1795,15 @@ extension TabularData.RowGrouping : Swift.RandomAccessCollection {
   public subscript(position: Swift.Int) -> (key: GroupingKey?, group: TabularData.DataFrame.Slice) {
     get
   }
+  @available(iOS 15, tvOS 15, watchOS 8, macOS 12, *)
   public typealias Element = (key: GroupingKey?, group: TabularData.DataFrame.Slice)
+  @available(iOS 15, tvOS 15, watchOS 8, macOS 12, *)
   public typealias Index = Swift.Int
+  @available(iOS 15, tvOS 15, watchOS 8, macOS 12, *)
   public typealias Indices = Swift.Range<Swift.Int>
+  @available(iOS 15, tvOS 15, watchOS 8, macOS 12, *)
   public typealias Iterator = Swift.IndexingIterator<TabularData.RowGrouping<GroupingKey>>
+  @available(iOS 15, tvOS 15, watchOS 8, macOS 12, *)
   public typealias SubSequence = Swift.Slice<TabularData.RowGrouping<GroupingKey>>
 }
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
@@ -1849,10 +1881,15 @@ extension TabularData.DataFrame {
       get
       set
     }
+    @available(iOS 15, tvOS 15, watchOS 8, macOS 12, *)
     public typealias Element = TabularData.DataFrame.Row
+    @available(iOS 15, tvOS 15, watchOS 8, macOS 12, *)
     public typealias Index = Swift.Int
+    @available(iOS 15, tvOS 15, watchOS 8, macOS 12, *)
     public typealias Indices = Swift.DefaultIndices<TabularData.DataFrame.Rows>
+    @available(iOS 15, tvOS 15, watchOS 8, macOS 12, *)
     public typealias Iterator = Swift.IndexingIterator<TabularData.DataFrame.Rows>
+    @available(iOS 15, tvOS 15, watchOS 8, macOS 12, *)
     public typealias SubSequence = TabularData.DataFrame.Rows
   }
 }
@@ -1877,10 +1914,15 @@ extension TabularData.DataFrame.Row : Swift.RandomAccessCollection, Swift.Mutabl
     get
     set
   }
+  @available(iOS 15, tvOS 15, watchOS 8, macOS 12, *)
   public typealias Element = Any?
+  @available(iOS 15, tvOS 15, watchOS 8, macOS 12, *)
   public typealias Index = Swift.Int
+  @available(iOS 15, tvOS 15, watchOS 8, macOS 12, *)
   public typealias Indices = Swift.Range<Swift.Int>
+  @available(iOS 15, tvOS 15, watchOS 8, macOS 12, *)
   public typealias Iterator = Swift.IndexingIterator<TabularData.DataFrame.Row>
+  @available(iOS 15, tvOS 15, watchOS 8, macOS 12, *)
   public typealias SubSequence = Swift.Slice<TabularData.DataFrame.Row>
 }
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
@@ -2167,10 +2209,15 @@ extension TabularData.AnyColumn : Swift.RandomAccessCollection, Swift.MutableCol
   }
   public static func == (lhs: TabularData.AnyColumn, rhs: TabularData.AnyColumn) -> Swift.Bool
   public func hash(into hasher: inout Swift.Hasher)
+  @available(iOS 15, tvOS 15, watchOS 8, macOS 12, *)
   public typealias Element = Any?
+  @available(iOS 15, tvOS 15, watchOS 8, macOS 12, *)
   public typealias Index = Swift.Int
+  @available(iOS 15, tvOS 15, watchOS 8, macOS 12, *)
   public typealias Indices = Swift.Range<Swift.Int>
+  @available(iOS 15, tvOS 15, watchOS 8, macOS 12, *)
   public typealias Iterator = Swift.IndexingIterator<TabularData.AnyColumn>
+  @available(iOS 15, tvOS 15, watchOS 8, macOS 12, *)
   public typealias SubSequence = TabularData.AnyColumnSlice
 }
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)

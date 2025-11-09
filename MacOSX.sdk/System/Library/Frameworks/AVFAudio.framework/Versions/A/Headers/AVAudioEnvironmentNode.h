@@ -301,6 +301,11 @@ API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 */
 @property (nonatomic, readonly) NSArray<NSNumber *> *applicableRenderingAlgorithms;
 
+/*! @property listenerHeadTrackingEnabled
+    @abstract On capable devices, listener orientation will be automatically rotated based on user's head-orientation if enabled.
+*/
+@property (nonatomic, getter=isListenerHeadTrackingEnabled) BOOL listenerHeadTrackingEnabled API_AVAILABLE(macos(15.0), ios(18.0), tvos(18.0)) API_UNAVAILABLE( watchos, visionos);
+
 @end
 
 NS_ASSUME_NONNULL_END

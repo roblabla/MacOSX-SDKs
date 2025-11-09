@@ -96,7 +96,7 @@ UIKIT_CLASS_AVAILABLE_IOS_ONLY(13.0) NS_SWIFT_UI_ACTOR
 @property (strong, nullable, nonatomic) id representedObject;
 @end
 
-NS_SWIFT_UI_ACTOR
+API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @protocol UISearchTextFieldDelegate <UITextFieldDelegate>
 @optional
 
@@ -108,13 +108,13 @@ NS_SWIFT_UI_ACTOR
 - (NSItemProvider *)searchTextField:(UISearchTextField *)searchTextField itemProviderForCopyingToken:(UISearchToken *)token;
 
 /// searchSuggestions property will be set to nil after sending this message
-- (void)searchTextField:(UISearchTextField *)searchTextField didSelectSuggestion:(id <UISearchSuggestion>)suggestion API_AVAILABLE(ios(16.0));
+- (void)searchTextField:(UISearchTextField *)searchTextField didSelectSuggestion:(id <UISearchSuggestion>)suggestion API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(watchos);
 @end
 
 /// A protocol that refines UITextPasteItem to support pasting of tokens.
 ///
 /// Paste items vended by UISearchTextField conform to this protocol.
-NS_SWIFT_UI_ACTOR
+API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @protocol UISearchTextFieldPasteItem <UITextPasteItem>
 
 /// Transforms this paste item into a token at the end of the search text field’s token array.

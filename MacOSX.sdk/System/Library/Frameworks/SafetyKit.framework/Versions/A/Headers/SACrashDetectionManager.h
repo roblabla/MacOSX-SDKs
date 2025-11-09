@@ -24,7 +24,7 @@ NS_ASSUME_NONNULL_BEGIN
  *
  * SACrashDetectionManager requires an entitlement from Apple. To apply for the entitlement, see Crash Detection Entitlement Request.
  */
-SA_EXTERN API_AVAILABLE(ios(16.0), macos(13.0), watchos(9.0)) API_UNAVAILABLE(tvos)
+SA_EXTERN API_AVAILABLE(ios(16.0), macos(13.0), watchos(10.1)) API_UNAVAILABLE(tvos)
 @interface SACrashDetectionManager : NSObject
 
 /**
@@ -69,7 +69,7 @@ SA_EXTERN API_AVAILABLE(ios(16.0), macos(13.0), watchos(9.0)) API_UNAVAILABLE(tv
  *
  *  @sa SACrashDetectionManager
  */
-SA_EXTERN API_AVAILABLE(ios(16.0), macos(13.0), watchos(9.0)) API_UNAVAILABLE(tvos)
+SA_EXTERN API_AVAILABLE(ios(16.0), macos(13.0), watchos(10.1)) API_UNAVAILABLE(tvos)
 @protocol SACrashDetectionDelegate <NSObject>
 @optional
 

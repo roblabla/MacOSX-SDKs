@@ -7,10 +7,10 @@ exports:
     symbols:         [ _ASLogDefault, _ASLogInit, _ASWriteReviewConfigurationIconSize, 
                        _AppStoreUIVersionNumber, _AppStoreUIVersionString, _CGRectWithAppLayoutDirectionRelativeToRect, 
                        _CGRectWithFlippedOriginRelativeToBoundingRect ]
-    objc-classes:    [ ASBackgroundAssetConsentViewController, ASMaxLengthFormatter, 
-                       ASRateViewController, ASRatingControl, ASReviewViewController, 
-                       ASTextField, ASThanksViewController, ASTransitionViewController, 
-                       ASWriteReviewBodyView, ASWriteReviewConfiguration, ASWriteReviewController, 
-                       ASWriteReviewDialogView, ASWriteReviewRateView, ASWriteReviewThanksView, 
-                       ASWriteReviewWindowController ]
+    objc-classes:    [ ASAlertPresentation, ASBackgroundAssetConsentViewController, 
+                       ASMaxLengthFormatter, ASRateViewController, ASRatingControl, 
+                       ASReviewViewController, ASTextField, ASThanksViewController, 
+                       ASTransitionViewController, ASWriteReviewBodyView, ASWriteReviewConfiguration, 
+                       ASWriteReviewController, ASWriteReviewDialogView, ASWriteReviewRateView, 
+                       ASWriteReviewThanksView, ASWriteReviewWindowController ]
 ...

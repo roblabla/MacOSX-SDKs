@@ -38,7 +38,7 @@ MPS_CLASS_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))
 -(MPSGraphTensor *) exponentWithTensor:(MPSGraphTensor *) tensor
                                   name:(NSString * _Nullable) name;
 
-/// Applies an exponent with base two to the input tensor elements.
+/// Applies an exponent with base 2 to the input tensor elements.
 ///
 /// - Parameters:
 ///   - tensor: The input tensor.
@@ -47,7 +47,7 @@ MPS_CLASS_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))
 -(MPSGraphTensor *) exponentBase2WithTensor:(MPSGraphTensor *) tensor
                                        name:(NSString * _Nullable) name;
 
-/// Applies an exponent with base ten to the input tensor elements.
+/// Applies an exponent with base 10 to the input tensor elements.
 ///
 /// - Parameters:
 ///   - tensor: The input tensor.
@@ -65,7 +65,7 @@ MPS_CLASS_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))
 -(MPSGraphTensor *) logarithmWithTensor:(MPSGraphTensor *) tensor
                                    name:(NSString * _Nullable) name;
 
-/// Computes the logarithm with base two to the input tensor elements.
+/// Computes the logarithm with base 2 to the input tensor elements.
 ///
 /// - Parameters:
 ///   - tensor: The input tensor.
@@ -74,7 +74,7 @@ MPS_CLASS_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))
 -(MPSGraphTensor *) logarithmBase2WithTensor:(MPSGraphTensor *) tensor
                                         name:(NSString * _Nullable) name;
 
-/// Computes the logarithm with base ten to the input tensor elements.
+/// Computes the logarithm with base 10 to the input tensor elements.
 ///
 /// - Parameters:
 ///   - tensor: The input tensor.
@@ -101,6 +101,17 @@ MPS_CLASS_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))
 -(MPSGraphTensor *) squareRootWithTensor:(MPSGraphTensor *) tensor
                                     name:(NSString * _Nullable) name;
 
+/// Applies the reciprocal square root operation to the input tensor elements.
+///
+/// - Parameters:
+///   - tensor: The input tensor.
+///   - name: An optional string which serves as an identifier for the operation.
+/// - Returns: A valid `MPSGraphTensor` object containing the elementwise result of the applied operation.
+-(MPSGraphTensor *) reciprocalSquareRootWithTensor:(MPSGraphTensor *) tensor
+                                              name:(NSString * _Nullable) name
+MPS_SWIFT_NAME( reciprocalSquareRoot(_:name:) )
+MPS_AVAILABLE_STARTING(macos(15.0), ios(18.0), macCatalyst(18.0), tvos(18.0), xros(2.0));
+
 /// Applies the reverse square root operation to the input tensor elements.
 ///
 /// The reverse square root operation is the reciprocal of the square root.
@@ -110,7 +121,9 @@ MPS_CLASS_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))
 ///   - name: An optional string which serves as an identifier for the operation.
 /// - Returns: A valid `MPSGraphTensor` object containing the elementwise result of the applied operation.
 -(MPSGraphTensor *) reverseSquareRootWithTensor:(MPSGraphTensor *) tensor
-                                           name:(NSString * _Nullable) name;
+                                           name:(NSString * _Nullable) name
+MPS_AVAILABLE_STARTING_BUT_DEPRECATED("reciprocalSquareRootWithTensor",
+                                      macos(11.0, 15.0), ios(14.0, 18.0), tvos(14.0, 18.0), xros(1.0, 2.0));
 
 /// Applies the reciprocal operation to the input tensor elements.
 ///
@@ -133,7 +146,7 @@ MPS_CLASS_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))
 /// Returns the absolute square of the input tensor elements.
 ///
 /// - Parameters:
-///   - tensor: The input tensor..
+///   - tensor: The input tensor.
 ///   - name: An optional string which serves as an identifier for the operation..
 /// - Returns: A valid `MPSGraphTensor` object containing the elementwise result of the applied operation.
 -(MPSGraphTensor *) absoluteSquareWithTensor:(MPSGraphTensor *) tensor
@@ -202,7 +215,7 @@ MPS_SWIFT_NAME( absoluteSquare(tensor:name:) );
 -(MPSGraphTensor *) roundWithTensor:(MPSGraphTensor *) tensor
                                name:(NSString * _Nullable) name;
 
-/// Rounds the input tensor elements using "round to nearest even" rounding mode.
+/// Rounds the input tensor elements by rounding to nearest even.
 ///
 /// - Parameters:
 ///   - tensor: The input tensor.
@@ -319,7 +332,7 @@ MPS_SWIFT_NAME( absoluteSquare(tensor:name:) );
 -(MPSGraphTensor *) atanhWithTensor:(MPSGraphTensor *) tensor
                                name:(NSString * _Nullable) name;
 
-/// Applies the logical not operation to the input tensor elements.
+/// Applies the logical NOT operation to the input tensor elements.
 ///
 /// - Parameters:
 ///   - tensor: The input tensor.
@@ -383,7 +396,7 @@ MPS_SWIFT_NAME( absoluteSquare(tensor:name:) );
 MPS_SWIFT_NAME( truncate(_:name:) )
 MPS_AVAILABLE_STARTING(macos(13.0), ios(16.0), tvos(16.0));
 
-/// Applies the bitwise not operation to the input tensor element.
+/// Applies the bitwise NOT operation to the input tensor element.
 ///
 ///  This operation only accepts integer tensors.
 ///
@@ -424,7 +437,7 @@ MPS_SWIFT_NAME( conjugate(tensor:name:) );
 
 /// Adds two input tensors.
 ///
-/// This operation creates an add op and returns the result tensor. It supports broadcasting as well. 
+/// This operation creates an add operation and returns the result tensor. It supports broadcasting as well. 
 /// ```md 
 /// resultTensor = primaryTensor + secondaryTensor 
 /// ```
@@ -443,7 +456,7 @@ MPS_SWIFT_NAME( addition(_:_:name:) );
 
 /// Subtracts the second input tensor from the first.
 ///
-/// This operation creates a subtract op and returns the result tensor. It supports broadcasting as well. 
+/// This operation creates a subtract operation and returns the result tensor. It supports broadcasting as well. 
 /// ```md 
 /// resultTensor = primaryTensor - secondaryTensor 
 /// ```
@@ -462,7 +475,7 @@ MPS_SWIFT_NAME( subtraction(_:_:name:) );
 
 /// Multiplies two input tensors.
 ///
-/// This operation creates a multiply op and returns the result tensor. It supports broadcasting as well. 
+/// This operation creates a multiply operation and returns the result tensor. It supports broadcasting as well. 
 /// ```md 
 /// resultTensor = primaryTensor * secondaryTensor 
 /// ```
@@ -479,7 +492,7 @@ MPS_SWIFT_NAME( multiplication(_:_:name:) );
 
 /// Divides the first input tensor by the second.
 ///
-/// This operation creates a divide op and returns the result tensor. It supports broadcasting as well. 
+/// This operation creates a divide operation and returns the result tensor. It supports broadcasting as well. 
 /// ```md 
 /// resultTensor = primaryTensor / secondaryTensor 
 /// ```
@@ -497,7 +510,7 @@ MPS_SWIFT_NAME( division(_:_:name:) );
 
 /// Returns the remainder obtained by dividing the first input tensor by the second.
 ///
-/// This operation creates a modulo op and returns the result tensor. It supports broadcasting as well. 
+/// This operation creates a modulo operation and returns the result tensor. It supports broadcasting as well. 
 /// ```md
 /// resultTensor = primaryTensor % secondaryTensor
 /// ```
@@ -515,7 +528,7 @@ MPS_SWIFT_NAME( modulo(_:_:name:) );
 
 /// Returns the elementwise result of raising the first tensor to the power of the second tensor.
 ///
-/// This operation creates a power op and returns the result tensor. It supports broadcasting as well. 
+/// This operation creates a power operation and returns the result tensor. It supports broadcasting as well. 
 /// ```md
 /// resultTensor = pow(primaryTensor, secondaryTensor)
 /// ```
@@ -533,7 +546,7 @@ MPS_SWIFT_NAME( power(_:_:name:) );
 
 /// Returns the elementwise minimum of the input tensors.
 ///
-/// This operation creates a minimum op and returns the result tensor. It supports broadcasting as well. 
+/// This operation creates a minimum operation and returns the result tensor. It supports broadcasting as well. 
 /// ```md
 /// resultTensor = min(primaryTensor, secondaryTensor)
 /// ```
@@ -551,7 +564,7 @@ MPS_SWIFT_NAME( minimum(_:_:name:) );
 
 /// Returns the elementwise maximum of the input tensors.
 ///
-/// This operation creates a maximum op and returns the result tensor. It supports broadcasting as well. 
+/// This operation creates a maximum operation and returns the result tensor. It supports broadcasting as well. 
 /// ```md
 /// resultTensor = max(primaryTensor, secondaryTensor)
 /// ```
@@ -568,7 +581,7 @@ MPS_SWIFT_NAME( maximum(_:_:name:) );
 
 /// Returns the elementwise minimum of the input tensors, while propagating `NaN` values.
 ///
-/// This operation creates a minimum with `NaN` propagation op and returns the result tensor. This means that
+/// This operation creates a minimum with `NaN` propagation operation and returns the result tensor. This means that
 /// if any of the elementwise operands is `NaN`, the result is `NaN`.
 /// It supports broadcasting as well. 
 /// ```md 
@@ -588,7 +601,7 @@ MPS_SWIFT_NAME( maximum(_:_:name:) );
 
 /// Returns the elementwise maximum of the input tensors, while propagating `NaN` values.
 ///
-/// This operation creates a maximum with `NaN` propagation op and returns the result tensor. This means that
+/// This operation creates a maximum with `NaN` propagation operation and returns the result tensor. This means that
 /// if any of the elementwise operands is `NaN`, the result is `NaN`.
 /// It supports broadcasting as well. 
 /// ```md 
@@ -608,7 +621,7 @@ MPS_SWIFT_NAME( maximum(_:_:name:) );
 
 /// Returns the elementwise equality check of the input tensors.
 ///
-/// This operation creates a equal op and returns the result tensor. It supports broadcasting as well. 
+/// This operation creates a equal operation and returns the result tensor. It supports broadcasting as well. 
 /// ```md
 /// resultTensor = primaryTensor == secondaryTensor
 /// ```
@@ -626,7 +639,7 @@ MPS_SWIFT_NAME( equal(_:_:name:) );
 
 /// Returns the elementwise inequality check of the input tensors.
 ///
-/// This operation creates a not equal op and returns the result tensor. It supports broadcasting as well. 
+/// This operation creates a not equal operation and returns the result tensor. It supports broadcasting as well. 
 /// ```md
 /// resultTensor = primaryTensor != secondaryTensor
 /// ```
@@ -644,7 +657,7 @@ MPS_SWIFT_NAME( notEqual(_:_:name:) );
 
 /// Checks in an elementwise manner if the first input tensor is less than the second.
 ///
-/// This operation creates a `lessThan` op and returns the result tensor. It supports broadcasting as well. 
+/// This operation creates a `lessThan` operation and returns the result tensor. It supports broadcasting as well. 
 /// ```md
 /// resultTensor = primaryTensor < secondaryTensor
 /// ```
@@ -661,7 +674,7 @@ MPS_SWIFT_NAME( lessThan(_:_:name:) );
 
 /// Checks in an elementwise manner if the first input tensor is less than or equal to the second.
 ///
-/// This operation creates a `lessThanOrEqualTo` op and returns the result tensor. It supports broadcasting as well. 
+/// This operation creates a `lessThanOrEqualTo` operation and returns the result tensor. It supports broadcasting as well. 
 /// ```md
 /// resultTensor = primaryTensor <= secondaryTensor
 /// ```
@@ -679,7 +692,7 @@ MPS_SWIFT_NAME( lessThanOrEqualTo(_:_:name:) );
 
 /// Checks in an elementwise manner if the first input tensor is greater than the second.
 ///
-/// This operation creates a `greaterThan` op and returns the result tensor. It supports broadcasting as well. 
+/// This operation creates a `greaterThan` operation and returns the result tensor. It supports broadcasting as well. 
 /// ```md
 /// resultTensor = primaryTensor > secondaryTensor
 /// ```
@@ -696,7 +709,7 @@ MPS_SWIFT_NAME( greaterThan(_:_:name:) );
 
 /// Checks in an elementwise manner if the first input tensor is greater than or equal to the second.
 ///
-/// This operation creates a `greaterThanOrEqual` op and returns the result tensor. It supports broadcasting as well. 
+/// This operation creates a `greaterThanOrEqual` operation and returns the result tensor. It supports broadcasting as well. 
 /// ```md
 /// resultTensor = primaryTensor < secondaryTensor
 /// ```
@@ -713,7 +726,7 @@ MPS_SWIFT_NAME( greaterThanOrEqualTo(_:_:name:) );
 
 /// Returns the elementwise logical AND of the input tensors.
 ///
-/// This operation creates a logical AND op and returns the result tensor. It supports broadcasting as well. 
+/// This operation creates a logical AND operation and returns the result tensor. It supports broadcasting as well. 
 /// ```md
 /// resultTensor = primaryTensor && secondaryTensor
 /// ```
@@ -731,7 +744,7 @@ MPS_SWIFT_NAME( logicalAND(_:_:name:) );
 
 /// Returns the elementwise logical OR of the input tensors.
 ///
-/// This operation creates a logical OR op and returns the result tensor. It supports broadcasting as well. 
+/// This operation creates a logical OR operation and returns the result tensor. It supports broadcasting as well. 
 /// ```md
 /// resultTensor = primaryTensor || secondaryTensor
 /// ```
@@ -749,7 +762,7 @@ MPS_SWIFT_NAME( logicalOR(_:_:name:) );
 
 /// Returns the elementwise logical NAND of the input tensors.
 ///
-/// This operation creates a logical NAND op and returns the result tensor. It supports broadcasting as well. 
+/// This operation creates a logical NAND operation and returns the result tensor. It supports broadcasting as well. 
 /// ```md
 /// resultTensor = !(primaryTensor && secondaryTensor)
 /// ```
@@ -767,7 +780,7 @@ MPS_SWIFT_NAME( logicalNAND(_:_:name:) );
 
 /// Returns the elementwise logical NOR of the input tensors.
 ///
-/// This operation creates a logical NOR op and returns the result tensor. It supports broadcasting as well. 
+/// This operation creates a logical NOR operation and returns the result tensor. It supports broadcasting as well. 
 /// ```md
 /// resultTensor = !(primaryTensor || secondaryTensor)
 /// ```
@@ -785,7 +798,7 @@ MPS_SWIFT_NAME( logicalNOR(_:_:name:) );
 
 /// Returns the elementwise logical XOR of the input tensors.
 ///
-/// This operation creates a logical XOR op and returns the result tensor. It supports broadcasting as well. 
+/// This operation creates a logical XOR operation and returns the result tensor. It supports broadcasting as well. 
 /// ```md
 /// resultTensor = XOR(primaryTensor, secondaryTensor)
 /// ```
@@ -803,7 +816,7 @@ MPS_SWIFT_NAME( logicalXOR(_:_:name:) );
 
 /// Returns the elementwise logical XNOR of the input tensors.
 ///
-/// This operation creates a logical XNOR op and returns the result tensor. It supports broadcasting as well. 
+/// This operation creates a logical XNOR operation and returns the result tensor. It supports broadcasting as well. 
 /// ```md
 /// resultTensor = XNOR(primaryTensor, secondaryTensor)
 /// ```
@@ -818,9 +831,9 @@ MPS_SWIFT_NAME( logicalXOR(_:_:name:) );
                                             name:(NSString * _Nullable) name
 MPS_SWIFT_NAME( logicalXNOR(_:_:name:) );
 
-/// Returns the elementwise 2-argument arctangent of the input tensors.
+/// Returns the elementwise two-argument arctangent of the input tensors.
 ///
-/// This operation creates a `atan2` op and returns the result tensor. It supports broadcasting as well. 
+/// This operation creates a `atan2` operation and returns the result tensor. It supports broadcasting as well. 
 /// Graph computes arc tangent of primaryTensor over secondaryTensor.
 /// ```md
 /// resultTensor = atan2(primaryTensor, secondaryTensor)
@@ -874,7 +887,7 @@ MPS_AVAILABLE_STARTING(macos(13.0), ios(16.1), tvos(16.1));
 MPS_SWIFT_NAME( bitwiseXOR(_:_:name:) )
 MPS_AVAILABLE_STARTING(macos(13.0), ios(16.1), tvos(16.1));
 
-/// Returns the elementwise left shifted binary representations of the primary integer by the secondary tensor amount.
+/// Returns the elementwise left-shifted binary representations of the primary integer by the secondary tensor amount.
 ///
 /// - Parameters:
 ///   - primaryTensor: The primary input tensor, must be of integer type.
@@ -887,7 +900,7 @@ MPS_AVAILABLE_STARTING(macos(13.0), ios(16.1), tvos(16.1));
 MPS_SWIFT_NAME( bitwiseLeftShift(_:_:name:) )
 MPS_AVAILABLE_STARTING(macos(13.0), ios(16.1), tvos(16.1));
 
-/// Returns the elementwise right shifted binary representations of the primary integer by the secondary tensor amount.
+/// Returns the elementwise right-shifted binary representations of the primary integer by the secondary tensor amount.
 ///
 /// - Parameters:
 ///   - primaryTensor: The primary input tensor, must be of integer type.
@@ -905,7 +918,7 @@ MPS_AVAILABLE_STARTING(macos(13.0), ios(16.1), tvos(16.1));
 
 /// Selects values from either the true or false predicate tensor, depending on the values in the first input.
 ///
-/// This operation creates a select op and returns the result tensor. It supports broadcasting as well. 
+/// This operation creates a select operation and returns the result tensor. It supports broadcasting as well. 
 /// ```md
 /// resultTensor = select(predicateTensor, truePredicateTensor, falseSelectTensor)
 /// ```
@@ -922,9 +935,9 @@ MPS_AVAILABLE_STARTING(macos(13.0), ios(16.1), tvos(16.1));
                                          name:(NSString * _Nullable) name
 MPS_SWIFT_NAME( select(predicate:trueTensor:falseTensor:name:) );
 
-/// Clamps the values in the first tensor between the corresponding values in the min and max value tensor.
+/// Clamps the values in the first tensor between the corresponding values in the minimum and maximum value tensor.
 ///
-/// This operation creates a clamp op and returns the result tensor. It supports broadcasting as well. 
+/// This operation creates a clamp operation and returns the result tensor. It supports broadcasting as well. 
 /// ```md
 /// resultTensor = clamp(tensor, minValueTensor, maxValueTensor)
 /// ```
@@ -961,7 +974,8 @@ MPS_SWIFT_NAME( clamp(_:min:max:name:) );
 MPS_SWIFT_NAME( divisionNoNaN(_:_:name:) );
 
 /// Returns the remainder of floor divison between the primary and secondary tensor.
-/// Create floorModulo op and return the result tensor, it supports broadcasting as well, returns 0 if divisor is 0
+/// 
+/// Creates a floorModulo operation and returns the result tensor, it supports broadcasting as well, returns 0 if divisor is 0.
 /// ```md
 /// resultTensor = primaryTensor - (floor(primaryTensor / secondaryTensor) * secondaryTensor)
 /// ```

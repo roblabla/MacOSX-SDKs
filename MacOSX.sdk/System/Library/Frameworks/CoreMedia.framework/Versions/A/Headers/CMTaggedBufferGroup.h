@@ -47,15 +47,15 @@ typedef CF_ENUM(OSStatus, CMTaggedBufferGroupError)
 	kCMTaggedBufferGroupError_ParamErr = -15780,
 	kCMTaggedBufferGroupError_AllocationFailed = -15781,
 	kCMTaggedBufferGroupError_InternalError = -15782,
-} CF_SWIFT_UNAVAILABLE("Unavailable in Swift") API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0));
+} CF_SWIFT_UNAVAILABLE("Unavailable in Swift") API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0), visionos(1.0));
 
 /*!
 	@typedef	CMTaggedBufferGroup
 	@abstract	An object gathering zero or more buffers (CMSampleBuffer, CVPixelBuffer) each with a CMTagCollection.
 */
-typedef struct CM_BRIDGED_TYPE(id) OpaqueCMTaggedBufferGroup *CMTaggedBufferGroupRef CF_REFINED_FOR_SWIFT API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0));
+typedef struct CM_BRIDGED_TYPE(id) OpaqueCMTaggedBufferGroup *CMTaggedBufferGroupRef CF_REFINED_FOR_SWIFT API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0), visionos(1.0));
 
-CM_EXPORT CFTypeID CMTaggedBufferGroupGetTypeID(void) CF_SWIFT_UNAVAILABLE("Unavailable in Swift") API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0));
+CM_EXPORT CFTypeID CMTaggedBufferGroupGetTypeID(void) CF_SWIFT_UNAVAILABLE("Unavailable in Swift") API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0), visionos(1.0));
 
 /*!
 	@function   CMTaggedBufferGroupCreate
@@ -72,7 +72,7 @@ CM_EXPORT OSStatus CMTaggedBufferGroupCreate(
 	CFArrayRef CM_NONNULL tagCollections,
 	CFArrayRef CM_NONNULL buffers,
 	CM_RETURNS_RETAINED_PARAMETER CMTaggedBufferGroupRef CM_NULLABLE * CM_NONNULL groupOut ) CF_REFINED_FOR_SWIFT
-	API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0));
+	API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0), visionos(1.0));
 
 /*!
 	@function   CMTaggedBufferGroupCreateCombined
@@ -86,7 +86,7 @@ CM_EXPORT OSStatus CMTaggedBufferGroupCreateCombined(
 	CFAllocatorRef CM_NULLABLE allocator,
 	CFArrayRef CM_NONNULL taggedBufferGroups,
 	CM_RETURNS_RETAINED_PARAMETER CMTaggedBufferGroupRef CM_NULLABLE * CM_NONNULL groupOut ) CF_REFINED_FOR_SWIFT
-	API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0));
+	API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0), visionos(1.0));
 
 /*!
 	@function   CMTaggedBufferGroupGetCount
@@ -94,7 +94,7 @@ CM_EXPORT OSStatus CMTaggedBufferGroupCreateCombined(
 	@param      group  The CMTaggedBufferGroupRef to retrieve the count from.
 	@result     Returns the number of buffers, or 0 on failure or if the group is empty.
 */
-CM_EXPORT CMItemCount CMTaggedBufferGroupGetCount( CMTaggedBufferGroupRef CM_NONNULL group ) CF_REFINED_FOR_SWIFT API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0));
+CM_EXPORT CMItemCount CMTaggedBufferGroupGetCount( CMTaggedBufferGroupRef CM_NONNULL group ) CF_REFINED_FOR_SWIFT API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0), visionos(1.0));
 
 /*!
 	@function   CMTaggedBufferGroupGetTagCollectionAtIndex
@@ -103,7 +103,7 @@ CM_EXPORT CMItemCount CMTaggedBufferGroupGetCount( CMTaggedBufferGroupRef CM_NON
 	@param      index   An index from 0 to count-1.
 	@result     Returns the tag collection, or NULL on failure.
 */
-CM_EXPORT CMTagCollectionRef CF_RETURNS_NOT_RETAINED CM_NULLABLE CMTaggedBufferGroupGetTagCollectionAtIndex( CMTaggedBufferGroupRef CM_NONNULL group, CFIndex index ) CF_REFINED_FOR_SWIFT API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0));
+CM_EXPORT CMTagCollectionRef CF_RETURNS_NOT_RETAINED CM_NULLABLE CMTaggedBufferGroupGetTagCollectionAtIndex( CMTaggedBufferGroupRef CM_NONNULL group, CFIndex index ) CF_REFINED_FOR_SWIFT API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0), visionos(1.0));
 
 /*!
 	@function   CMTaggedBufferGroupGetCVPixelBufferAtIndex
@@ -112,7 +112,7 @@ CM_EXPORT CMTagCollectionRef CF_RETURNS_NOT_RETAINED CM_NULLABLE CMTaggedBufferG
 	@param      index   An index from 0 to count-1.
 	@result     Returns the CVPixelBuffer, or NULL on failure (including if the buffer at this index is not a CVPixelBuffer).
 */
-CM_EXPORT CVPixelBufferRef CF_RETURNS_NOT_RETAINED CM_NULLABLE CMTaggedBufferGroupGetCVPixelBufferAtIndex( CMTaggedBufferGroupRef CM_NONNULL group, CFIndex index ) CF_REFINED_FOR_SWIFT API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0));
+CM_EXPORT CVPixelBufferRef CF_RETURNS_NOT_RETAINED CM_NULLABLE CMTaggedBufferGroupGetCVPixelBufferAtIndex( CMTaggedBufferGroupRef CM_NONNULL group, CFIndex index ) CF_REFINED_FOR_SWIFT API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0), visionos(1.0));
 
 /*!
 	@function   CMTaggedBufferGroupGetCVPixelBufferForTag
@@ -122,7 +122,7 @@ CM_EXPORT CVPixelBufferRef CF_RETURNS_NOT_RETAINED CM_NULLABLE CMTaggedBufferGro
 	@param		indexOut 	On success, index of the returned CVPixelBuffer.  May be NULL.
 	@result     Returns the CVPixelBuffer, or NULL on failure (including if the buffer at this index is not a CVPixelBuffer).
 */
-CM_EXPORT CVPixelBufferRef CF_RETURNS_NOT_RETAINED CM_NULLABLE CMTaggedBufferGroupGetCVPixelBufferForTag( CMTaggedBufferGroupRef CM_NONNULL group, CMTag tag, CFIndex * CM_NULLABLE indexOut ) CF_SWIFT_UNAVAILABLE("Unavailable in Swift") API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0));
+CM_EXPORT CVPixelBufferRef CF_RETURNS_NOT_RETAINED CM_NULLABLE CMTaggedBufferGroupGetCVPixelBufferForTag( CMTaggedBufferGroupRef CM_NONNULL group, CMTag tag, CFIndex * CM_NULLABLE indexOut ) CF_SWIFT_UNAVAILABLE("Unavailable in Swift") API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0), visionos(1.0));
 
 /*!
 	@function   CMTaggedBufferGroupGetCVPixelBufferForTagCollection
@@ -132,7 +132,7 @@ CM_EXPORT CVPixelBufferRef CF_RETURNS_NOT_RETAINED CM_NULLABLE CMTaggedBufferGro
 	@param		indexOut 		On success, index of the returned CVPixelBuffer.  May be NULL.
 	@result     Returns the CVPixelBuffer, or NULL on failure (including if the buffer at this index is not a CVPixelBuffer).
 */
-CM_EXPORT CVPixelBufferRef CF_RETURNS_NOT_RETAINED CM_NULLABLE CMTaggedBufferGroupGetCVPixelBufferForTagCollection( CMTaggedBufferGroupRef CM_NONNULL group, CMTagCollectionRef CM_NONNULL tagCollection, CFIndex * CM_NULLABLE indexOut ) CF_SWIFT_UNAVAILABLE("Unavailable in Swift") API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0));
+CM_EXPORT CVPixelBufferRef CF_RETURNS_NOT_RETAINED CM_NULLABLE CMTaggedBufferGroupGetCVPixelBufferForTagCollection( CMTaggedBufferGroupRef CM_NONNULL group, CMTagCollectionRef CM_NONNULL tagCollection, CFIndex * CM_NULLABLE indexOut ) CF_SWIFT_UNAVAILABLE("Unavailable in Swift") API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0), visionos(1.0));
 
 /*!
 	@function   CMTaggedBufferGroupGetCMSampleBufferAtIndex
@@ -141,7 +141,7 @@ CM_EXPORT CVPixelBufferRef CF_RETURNS_NOT_RETAINED CM_NULLABLE CMTaggedBufferGro
 	@param      index   An index from 0 to count-1.
 	@result     Returns the CMSampleBuffer, or NULL on failure (including if the buffer at this index is not a CMSampleBuffer).
 */
-CM_EXPORT CMSampleBufferRef CF_RETURNS_NOT_RETAINED CM_NULLABLE CMTaggedBufferGroupGetCMSampleBufferAtIndex( CMTaggedBufferGroupRef CM_NONNULL group, CFIndex index ) CF_REFINED_FOR_SWIFT API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0));
+CM_EXPORT CMSampleBufferRef CF_RETURNS_NOT_RETAINED CM_NULLABLE CMTaggedBufferGroupGetCMSampleBufferAtIndex( CMTaggedBufferGroupRef CM_NONNULL group, CFIndex index ) CF_REFINED_FOR_SWIFT API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0), visionos(1.0));
 
 /*!
 	@function   CMTaggedBufferGroupGetCMSampleBufferForTag
@@ -151,7 +151,7 @@ CM_EXPORT CMSampleBufferRef CF_RETURNS_NOT_RETAINED CM_NULLABLE CMTaggedBufferGr
 	@param		indexOut 	On success, index of the returned CMSampleBuffer.  May be NULL.
 	@result     Returns the CMSampleBuffer, or NULL on failure (including if the buffer at this index is not a CMSampleBuffer).
 */
-CM_EXPORT CMSampleBufferRef CF_RETURNS_NOT_RETAINED CM_NULLABLE CMTaggedBufferGroupGetCMSampleBufferForTag( CMTaggedBufferGroupRef CM_NONNULL group, CMTag tag, CFIndex * CM_NULLABLE indexOut ) CF_SWIFT_UNAVAILABLE("Unavailable in Swift") API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0));
+CM_EXPORT CMSampleBufferRef CF_RETURNS_NOT_RETAINED CM_NULLABLE CMTaggedBufferGroupGetCMSampleBufferForTag( CMTaggedBufferGroupRef CM_NONNULL group, CMTag tag, CFIndex * CM_NULLABLE indexOut ) CF_SWIFT_UNAVAILABLE("Unavailable in Swift") API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0), visionos(1.0));
 
 /*!
 	@function   CMTaggedBufferGroupGetCMSampleBufferForTagCollection
@@ -161,7 +161,7 @@ CM_EXPORT CMSampleBufferRef CF_RETURNS_NOT_RETAINED CM_NULLABLE CMTaggedBufferGr
 	@param		indexOut 		On success, index of the returned CMSampleBuffer.  May be NULL.
 	@result     Returns the CMSampleBuffer, or NULL on failure (including if the buffer at this index is not a CMSampleBuffer).
 */
-CM_EXPORT CMSampleBufferRef CF_RETURNS_NOT_RETAINED CM_NULLABLE CMTaggedBufferGroupGetCMSampleBufferForTagCollection( CMTaggedBufferGroupRef CM_NONNULL group, CMTagCollectionRef CM_NONNULL tagCollection, CFIndex * CM_NULLABLE indexOut ) CF_SWIFT_UNAVAILABLE("Unavailable in Swift") API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0));
+CM_EXPORT CMSampleBufferRef CF_RETURNS_NOT_RETAINED CM_NULLABLE CMTaggedBufferGroupGetCMSampleBufferForTagCollection( CMTaggedBufferGroupRef CM_NONNULL group, CMTagCollectionRef CM_NONNULL tagCollection, CFIndex * CM_NULLABLE indexOut ) CF_SWIFT_UNAVAILABLE("Unavailable in Swift") API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0), visionos(1.0));
 
 /*!
 	@function   CMTaggedBufferGroupGetNumberOfMatchesForTagCollection
@@ -171,7 +171,7 @@ CM_EXPORT CMSampleBufferRef CF_RETURNS_NOT_RETAINED CM_NULLABLE CMTaggedBufferGr
 	@param      tagCollection   The tag collection to look up.
 	@result     Returns the number of entries in the CMTaggedBufferGroup that match tagCollection.
 */
-CM_EXPORT CMItemCount CMTaggedBufferGroupGetNumberOfMatchesForTagCollection( CMTaggedBufferGroupRef CM_NONNULL group, CMTagCollectionRef CM_NONNULL tagCollection ) CF_SWIFT_UNAVAILABLE("Unavailable in Swift") API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0));
+CM_EXPORT CMItemCount CMTaggedBufferGroupGetNumberOfMatchesForTagCollection( CMTaggedBufferGroupRef CM_NONNULL group, CMTagCollectionRef CM_NONNULL tagCollection ) CF_SWIFT_UNAVAILABLE("Unavailable in Swift") API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0), visionos(1.0));
 
 #pragma mark Carriage in CMSampleBuffer
 
@@ -196,7 +196,7 @@ CM_EXPORT
 OSStatus CMTaggedBufferGroupFormatDescriptionCreateForTaggedBufferGroup(
 	CFAllocatorRef CM_NULLABLE allocator,
 	CMTaggedBufferGroupRef CM_NONNULL taggedBufferGroup,
-	CM_RETURNS_RETAINED_PARAMETER CMTaggedBufferGroupFormatDescriptionRef CM_NULLABLE * CM_NONNULL formatDescriptionOut) CF_REFINED_FOR_SWIFT API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0));
+	CM_RETURNS_RETAINED_PARAMETER CMTaggedBufferGroupFormatDescriptionRef CM_NULLABLE * CM_NONNULL formatDescriptionOut) CF_REFINED_FOR_SWIFT API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0), visionos(1.0));
 
 /*!
 	@function	CMTaggedBufferGroupFormatDescriptionMatchesTaggedBufferGroup
@@ -212,7 +212,7 @@ OSStatus CMTaggedBufferGroupFormatDescriptionCreateForTaggedBufferGroup(
 CM_EXPORT
 Boolean CMTaggedBufferGroupFormatDescriptionMatchesTaggedBufferGroup(
 	CMTaggedBufferGroupFormatDescriptionRef CM_NONNULL desc,
-	CMTaggedBufferGroupRef CM_NONNULL taggedBufferGroup) CF_REFINED_FOR_SWIFT API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0));
+	CMTaggedBufferGroupRef CM_NONNULL taggedBufferGroup) CF_REFINED_FOR_SWIFT API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0), visionos(1.0));
 
 /*!
 	@function    CMSampleBufferCreateForTaggedBufferGroup
@@ -244,7 +244,7 @@ CM_EXPORT OSStatus CMSampleBufferCreateForTaggedBufferGroup(
 	CMTime sbufDuration,
 	CMTaggedBufferGroupFormatDescriptionRef CM_NONNULL formatDescription,
 	CM_RETURNS_RETAINED_PARAMETER CMSampleBufferRef CM_NULLABLE * CM_NONNULL sBufOut)
-	CF_REFINED_FOR_SWIFT API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0));
+	CF_REFINED_FOR_SWIFT API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0), visionos(1.0));
 
 /*!
 	@function    CMSampleBufferGetTaggedBufferGroup
@@ -253,7 +253,7 @@ CM_EXPORT OSStatus CMSampleBufferCreateForTaggedBufferGroup(
 	@discussion  The caller does not own the returned CMTaggedBufferGroup, and must retain it explicitly if the caller needs to maintain a reference to it.
 	@result      CMTaggedBufferGroup of media data. The result will be NULL if the CMSampleBuffer does not contain a CMTaggedBufferGroup, or if there is some other error.
  */
-CM_EXPORT CMTaggedBufferGroupRef CM_NULLABLE CMSampleBufferGetTaggedBufferGroup(CMSampleBufferRef CM_NONNULL sbuf) CF_REFINED_FOR_SWIFT API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0));
+CM_EXPORT CMTaggedBufferGroupRef CM_NULLABLE CMSampleBufferGetTaggedBufferGroup(CMSampleBufferRef CM_NONNULL sbuf) CF_REFINED_FOR_SWIFT API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0), visionos(1.0));
 
 CF_IMPLICIT_BRIDGING_DISABLED
 

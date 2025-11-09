@@ -15,7 +15,7 @@
 NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 /// UIFocusDebugger provides a collection of runtime utilities for debugging issues related to focus interaction.
-UIKIT_EXTERN API_AVAILABLE(ios(11.0)) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @interface UIFocusDebugger : NSObject
 
 /// Outputs an overview of all supported debugging utilities and other relevant information.
@@ -33,7 +33,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(11.0)) NS_SWIFT_UI_ACTOR
 ///   - To use in Objective-C, enter `po [UIFocusDebugger checkFocusabilityForItem:<item reference>]` when paused in lldb.
 + (id<UIFocusDebuggerOutput>)checkFocusabilityForItem:(id<UIFocusItem>)item;
 
-/// Simulates a fake focus update requested by the specified environment (e.g. `[environment setNeedsFocusUpdate]`), outlining each step of the process for determining the next focused item.
+/// Simulates a fake focus update requested by the specified environment (e.g. `[focusSystem requestFocusUpdateToEnvironment:environment]`), outlining each step of the process for determining the next focused item.
 ///   - To use in Swift, enter `po UIFocusDebugger.simulateFocusUpdateRequest(from: <environment reference>)` when paused in lldb.
 ///   - To use in Objective-C, enter `po [UIFocusDebugger simulateFocusUpdateRequestFromEnvironment:<environment reference>]` when paused in lldb.
 + (id<UIFocusDebuggerOutput>)simulateFocusUpdateRequestFromEnvironment:(id<UIFocusEnvironment>)environment;
@@ -51,7 +51,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(11.0)) NS_SWIFT_UI_ACTOR
 
 @end
 
-UIKIT_EXTERN API_AVAILABLE(ios(11.0)) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @protocol UIFocusDebuggerOutput <NSObject>
 @end
 

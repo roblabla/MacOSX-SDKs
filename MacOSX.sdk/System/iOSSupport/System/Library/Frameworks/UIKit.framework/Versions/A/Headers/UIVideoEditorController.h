@@ -15,7 +15,7 @@ NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 @protocol UIVideoEditorControllerDelegate;
 
-UIKIT_EXTERN API_AVAILABLE(ios(3.1)) API_UNAVAILABLE(tvos) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(3.1)) API_UNAVAILABLE(tvos, watchos) NS_SWIFT_UI_ACTOR
 @interface UIVideoEditorController : UINavigationController
 
 + (BOOL)canEditVideoAtPath:(NSString *)videoPath API_AVAILABLE(ios(3.1));
@@ -28,7 +28,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(3.1)) API_UNAVAILABLE(tvos) NS_SWIFT_UI_ACTOR
 
 @end
 
-API_UNAVAILABLE(tvos) NS_SWIFT_UI_ACTOR
+API_UNAVAILABLE(tvos, watchos) NS_SWIFT_UI_ACTOR
 @protocol UIVideoEditorControllerDelegate<NSObject>
 @optional
 // The editor does not dismiss itself; the client dismisses it in these callbacks.

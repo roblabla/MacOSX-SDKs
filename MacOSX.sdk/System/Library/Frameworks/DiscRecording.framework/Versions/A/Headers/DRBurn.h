@@ -57,6 +57,10 @@
 
 					For examples of how to use this class see the on-disk sample code projects at /Developer/Examples/DiscRecording/ObjectiveC/. 
 */
+
+#ifndef DISC_RECORDING_BURN
+#define DISC_RECORDING_BURN
+
 @interface DRBurn : NSObject 
 { 
 @private
@@ -499,3 +503,4 @@ extern NSString* const DRBurnStrategyBDDAO			AVAILABLE_MAC_OS_X_VERSION_10_5_AND
 */
 extern NSString* const DRBurnStatusChangedNotification	AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
+#endif // DISC_RECORDING_BURN

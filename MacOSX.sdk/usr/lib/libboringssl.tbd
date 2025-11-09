@@ -65,10 +65,10 @@ exports:
                        _EVP_parse_private_key, _EVP_parse_public_key, _EVP_sha1, 
                        _EVP_sha224, _EVP_sha256, _EVP_sha384, _EVP_sha512, _HMAC, 
                        _HMAC_CTX_cleanup, _HMAC_CTX_copy_ex, _HMAC_CTX_init, _HMAC_Final, 
-                       _HMAC_Init_ex, _HMAC_Update, _METHOD_ref, _METHOD_unref, _OBJ_obj2nid, 
-                       _OPENSSL_cleanse, _OPENSSL_free, _OPENSSL_malloc, _PKCS5_PBKDF2_HMAC, 
-                       _PKCS5_PBKDF2_HMAC_SHA1, _RAND_bytes, _RSA_check_key, _RSA_decrypt, 
-                       _RSA_encrypt, _RSA_free, _RSA_padding_add_PKCS1_PSS_mgf1, 
+                       _HMAC_Init_ex, _HMAC_Update, _METHOD_ref, _METHOD_unref, '_OBJC_CLASS_$_boringssl_concrete_nw_protocol_boringssl', 
+                       _OBJ_obj2nid, _OPENSSL_cleanse, _OPENSSL_free, _OPENSSL_malloc, 
+                       _PKCS5_PBKDF2_HMAC, _PKCS5_PBKDF2_HMAC_SHA1, _RAND_bytes, 
+                       _RSA_check_key, _RSA_decrypt, _RSA_encrypt, _RSA_free, _RSA_padding_add_PKCS1_PSS_mgf1, 
                        _RSA_padding_add_PKCS1_type_1, _RSA_padding_add_none, _RSA_padding_check_PKCS1_type_1, 
                        _RSA_private_key_from_bytes, _RSA_private_key_to_bytes, _RSA_public_key_to_bytes, 
                        _RSA_size, _RSA_verify_PKCS1_PSS_mgf1, _SHA256, _SHA256_Final, 
@@ -167,7 +167,6 @@ exports:
                        _rsa_default_size, _sk_deep_copy, _sk_free, _sk_new_null, 
                        _sk_num, _sk_pop, _sk_pop_free, _sk_pop_free_ex, _sk_push, 
                        _sk_set, _sk_shift, _sk_value ]
-    objc-classes:    [ boringssl_concrete_nw_protocol_boringssl ]
     objc-ivars:      [ boringssl_concrete_boringssl_ctx.boringssl_handle, boringssl_concrete_boringssl_ctx.handshake_timer_fires, 
                        boringssl_concrete_boringssl_ctx.max_allowed_dtls_version, 
                        boringssl_concrete_boringssl_ctx.max_allowed_tls_version, 

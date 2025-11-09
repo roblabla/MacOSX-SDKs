@@ -21,7 +21,7 @@
 extern "C" {
 #endif
 
-/* This document is influenced by Ice Floe #19: http://developer.apple.com/quicktime/icefloe/dispatch019.html */
+/* This document is influenced by Ice Floe #19: https://developer.apple.com/library/archive/technotes/tn2162/_index.html */
 
 /* The canonical name for the format.  This should be the same as the codec name you'd use in QT */
 CV_EXPORT const CFStringRef CV_NONNULL kCVPixelFormatName __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);
@@ -64,7 +64,7 @@ CV_EXPORT const CFStringRef CV_NONNULL kCVPixelFormatComponentRange_WideRange __
    level dictionary. */
 CV_EXPORT const CFStringRef CV_NONNULL kCVPixelFormatPlanes __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);
 
-/* The following keys describe the requirements/layout of a a single image plane. */
+/* The following keys describe the requirements/layout of a single image plane. */
 
 /* Used to assist with allocating memory for pixel formats that don't have an integer value for
    bytes per pixel */
@@ -85,7 +85,10 @@ CV_EXPORT const CFStringRef CV_NONNULL kCVPixelFormatBlockHeight __OSX_AVAILABLE
    bitsPerPixel value. */
 CV_EXPORT const CFStringRef CV_NONNULL kCVPixelFormatBitsPerBlock __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);
 
-/* Used to state requirements on block multiples.  v210 would be '8' here for the horizontal case, 
+/* Indicates, if available, the logical bit depth of each component of the plane. */
+CV_EXPORT const CFStringRef CV_NONNULL kCVPixelFormatBitsPerComponent API_AVAILABLE(macos(15.0), ios(18.0), tvos(18.0), watchos(11.0), visionos(2.0));
+
+/* Used to state requirements on block multiples.  v210 would be '8' here for the horizontal case,
    to match the standard v210 row alignment value of 48.
    These may be assumed as 1 if not present. */
 CV_EXPORT const CFStringRef CV_NONNULL kCVPixelFormatBlockHorizontalAlignment __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);

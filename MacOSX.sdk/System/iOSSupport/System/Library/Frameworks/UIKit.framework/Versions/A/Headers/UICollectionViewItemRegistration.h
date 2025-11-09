@@ -11,11 +11,11 @@
 
 NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
-typedef void(^UICollectionViewCellRegistrationConfigurationHandler)(__kindof UICollectionViewCell * _Nonnull cell, NSIndexPath * _Nonnull indexPath, id _Nonnull item);
+typedef void(^UICollectionViewCellRegistrationConfigurationHandler)(__kindof UICollectionViewCell * _Nonnull cell, NSIndexPath * _Nonnull indexPath, id _Nonnull item) API_UNAVAILABLE(watchos);
 
 // Cell Registration
 
-UIKIT_EXTERN API_AVAILABLE(ios(14.0),tvos(14.0)) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(14.0), tvos(14.0)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @interface UICollectionViewCellRegistration : NSObject
 
 + (instancetype)registrationWithCellClass:(Class)cellClass configurationHandler:(UICollectionViewCellRegistrationConfigurationHandler)configurationHandler;
@@ -29,9 +29,9 @@ UIKIT_EXTERN API_AVAILABLE(ios(14.0),tvos(14.0)) NS_SWIFT_UI_ACTOR
 
 // Supplementary Registration
 
-typedef void(^UICollectionViewSupplementaryRegistrationConfigurationHandler)(__kindof UICollectionReusableView * _Nonnull supplementaryView, NSString * _Nonnull elementKind, NSIndexPath * _Nonnull indexPath);
+typedef void(^UICollectionViewSupplementaryRegistrationConfigurationHandler)(__kindof UICollectionReusableView * _Nonnull supplementaryView, NSString * _Nonnull elementKind, NSIndexPath * _Nonnull indexPath) API_UNAVAILABLE(watchos);
 
-UIKIT_EXTERN API_AVAILABLE(ios(14.0),tvos(14.0)) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(14.0), tvos(14.0)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @interface UICollectionViewSupplementaryRegistration : NSObject
 
 + (instancetype)registrationWithSupplementaryClass:(Class)supplementaryClass elementKind:(NSString*)elementKind  configurationHandler:(UICollectionViewSupplementaryRegistrationConfigurationHandler)configurationHandler;

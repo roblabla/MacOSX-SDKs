@@ -35,7 +35,7 @@ extern "C" {
 		Points to a CMClockRef to receive the newly created clock.
 		The caller is responsible for calling CFRelease to release this clock.
 */
-CM_EXPORT OSStatus CMAudioClockCreate(CM_NULLABLE CFAllocatorRef allocator, CM_RETURNS_RETAINED_PARAMETER CM_NULLABLE CMClockRef * CM_NONNULL clockOut) API_AVAILABLE(ios(6.0), tvos(9.0), watchos(6.0), macCatalyst(13.0)) API_UNAVAILABLE(macos);
+CM_EXPORT OSStatus CMAudioClockCreate(CM_NULLABLE CFAllocatorRef allocator, CM_RETURNS_RETAINED_PARAMETER CM_NULLABLE CMClockRef * CM_NONNULL clockOut) API_AVAILABLE(ios(6.0), tvos(9.0), watchos(6.0), macCatalyst(13.0), visionos(1.0)) API_UNAVAILABLE(macos);
 
 #pragma pack(pop)
     

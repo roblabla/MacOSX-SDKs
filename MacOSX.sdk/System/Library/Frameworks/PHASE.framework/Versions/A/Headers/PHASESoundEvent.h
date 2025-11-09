@@ -20,6 +20,7 @@
 @class PHASESoundEventNodeDefinition;
 @class PHASEMetaParameter;
 @class PHASEPushStreamNode;
+@class PHASEPullStreamNode;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -153,6 +154,13 @@ NS_SWIFT_NAME(seek(to:completion:));
     @abstract A Dictionary containing the push stream nodes associated with this sound event, for pushing buffers to.
 */
 @property(readonly, copy) NSDictionary<NSString*, PHASEPushStreamNode*>* pushStreamNodes;
+
+/*!
+    @property pullStreamNodes
+    @abstract A Dictionary containing the pull stream nodes associated with this sound event, for setting renderBlocks on.
+*/
+@property(readonly, copy) NSDictionary<NSString*, PHASEPullStreamNode*>* pullStreamNodes
+API_AVAILABLE(macos(15.0), ios(18.0), tvos(18.0), visionos(2.0)) API_UNAVAILABLE(watchos);
 
 /*!
     @property indefinite

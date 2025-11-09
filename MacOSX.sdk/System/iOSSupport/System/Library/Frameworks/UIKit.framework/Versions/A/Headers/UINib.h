@@ -12,7 +12,7 @@
 
 NS_HEADER_AUDIT_BEGIN(nullability, sendability)
     
-UIKIT_EXTERN API_AVAILABLE(ios(4.0)) NS_SWIFT_UI_ACTOR API_DEPRECATED("Loading Interface Builder products will not be supported in a future version of visionOS.", visionos(1.0, 1.0))
+UIKIT_EXTERN API_AVAILABLE(ios(4.0)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR API_DEPRECATED("Loading Interface Builder products will not be supported in a future version of visionOS.", visionos(1.0, 1.0))
 @interface UINib : NSObject
 
 // If the bundle parameter is nil, the main bundle is used.

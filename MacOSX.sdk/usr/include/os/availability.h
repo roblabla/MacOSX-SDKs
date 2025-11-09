@@ -74,6 +74,10 @@
 #endif /* __OPEN_SOURCE__ */
 
 #include <AvailabilityInternal.h>
+#include <AvailabilityInternalLegacy.h>
+#if __has_include(<AvailabilityInternalPrivate.h>)
+  #include <AvailabilityInternalPrivate.h>
+#endif
 
 
 

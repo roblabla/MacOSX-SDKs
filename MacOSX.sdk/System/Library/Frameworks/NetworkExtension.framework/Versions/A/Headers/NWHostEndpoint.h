@@ -14,6 +14,12 @@
 #ifndef __NWHostEndpoint_h_
 #define __NWHostEndpoint_h_
 
+/**
+ * DEPRECATION NOTICE
+ *
+ * NW object wrappers are hidden in Swift 6. To continue accessing them, you
+ * can prepend double underscores to the symbol name.
+ */
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -22,7 +28,8 @@ NS_ASSUME_NONNULL_BEGIN
  * @discussion NWHostEndpoint is a subclass of NWEndpoint. It represents an endpoint backed by a
  *		hostname and port. Note that a hostname string may be an IP or IPv6 address.
  */
-API_AVAILABLE(macos(10.11), ios(9.0), tvos(17.0)) API_UNAVAILABLE(watchos)
+API_DEPRECATED("Use `nw_endpoint_t` in Network framework instead, see deprecation notice in <NetworkExtension/NWHostEndpoint.h>", macos(10.11, 15.0), ios(9.0, 18.0), tvos(17.0, 18.0), visionos(1.0, 2.0))
+API_UNAVAILABLE(watchos)
 @interface NWHostEndpoint : NWEndpoint
 
 /*!
@@ -32,19 +39,25 @@ API_AVAILABLE(macos(10.11), ios(9.0), tvos(17.0)) API_UNAVAILABLE(watchos)
  * @return An initialized NWHostEndpoint object.
  */
 + (instancetype)endpointWithHostname:(NSString *)hostname
-								port:(NSString *)port API_AVAILABLE(macos(10.11), ios(9.0), tvos(17.0)) API_UNAVAILABLE(watchos);
+								port:(NSString *)port
+API_DEPRECATED("Use `nw_endpoint_create_host` in Network framework instead, see deprecation notice in <NetworkExtension/NWHostEndpoint.h>", macos(10.11, 15.0), ios(9.0, 18.0), tvos(17.0, 18.0), visionos(1.0, 2.0))
+API_UNAVAILABLE(watchos);
 
 /*!
  * @property hostname
  * @discussion The endpoint's hostname.
  */
-@property (nonatomic, readonly) NSString *hostname API_AVAILABLE(macos(10.11), ios(9.0), tvos(17.0)) API_UNAVAILABLE(watchos);
+@property (nonatomic, readonly) NSString *hostname
+API_DEPRECATED("Use `nw_endpoint_get_hostname` in Network framework instead, see deprecation notice in <NetworkExtension/NWHostEndpoint.h>", macos(10.11, 15.0), ios(9.0, 18.0), tvos(17.0, 18.0), visionos(1.0, 2.0))
+API_UNAVAILABLE(watchos);
 
 /*!
  * @property port
  * @discussion The endpoint's port.
  */
-@property (nonatomic, readonly) NSString *port API_AVAILABLE(macos(10.11), ios(9.0), tvos(17.0)) API_UNAVAILABLE(watchos);
+@property (nonatomic, readonly) NSString *port
+API_DEPRECATED("Use `nw_endpoint_get_port` in Network framework instead, see deprecation notice in <NetworkExtension/NWHostEndpoint.h>", macos(10.11, 15.0), ios(9.0, 18.0), tvos(17.0, 18.0), visionos(1.0, 2.0))
+API_UNAVAILABLE(watchos);
 
 @end
 

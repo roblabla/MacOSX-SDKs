@@ -2,6 +2,7 @@
 #import <metal_stdlib>
 
 typedef metal::packed_float3 MTLPackedFloat3;
+typedef metal::packed_float4 MTLPackedFloatQuaternion;
 #else
 #include <math.h>
 #import <Metal/MTLDefines.h>
@@ -44,6 +45,47 @@ MTL_INLINE MTLPackedFloat3 MTLPackedFloat3Make(float x, float y, float z)
     packedFloat3.y = y;
     packedFloat3.z = z;
     return packedFloat3;
+}
+
+typedef struct MTLPackedFloatQuaternion {
+    float x;
+    float y;
+    float z;
+    float w;
+
+#ifdef __cplusplus
+    MTLPackedFloatQuaternion()
+        : x(0.0f), y(0.0f), z(0.0f), w(1.0f)
+    {
+    }
+
+    MTLPackedFloatQuaternion(float x, float y, float z, float w)
+        : x(x), y(y), z(z), w(w)
+    {
+    }
+
+    float & operator[](int idx) {
+        float *elements = &x;
+
+        return elements[idx];
+    }
+
+    const float & operator[](int idx) const {
+        const float *elements = &x;
+
+        return elements[idx];
+    }
+#endif
+} MTLPackedFloatQuaternion;
+
+MTL_INLINE MTLPackedFloatQuaternion MTLPackedFloatQuaternionMake(float x, float y, float z, float w)
+{
+    MTLPackedFloatQuaternion packedQuaternion;
+    packedQuaternion.x = x;
+    packedQuaternion.y = y;
+    packedQuaternion.z = z;
+    packedQuaternion.w = w;
+    return packedQuaternion;
 }
 
 #endif
@@ -137,3 +179,38 @@ typedef struct _MTLAxisAlignedBoundingBox {
     }
 #endif
 } MTLAxisAlignedBoundingBox;
+
+/**
+ * @brief A transformation represented by individual components such as translation and
+ * rotation. The rotation is represented by a quaternion, allowing for correct motion
+ * interpolation.
+ */
+typedef struct {
+    /**
+     * @brief The scale of the instance applied before rotation alongside shear and pivot
+     */
+    MTLPackedFloat3 scale;
+    
+    /**
+     * @brief The shear of the instance applied before rotation alongside scale and pivot
+     */
+    MTLPackedFloat3 shear;
+    
+    /**
+     * @brief Translation applied before rotation alongside scale and shear. Allows
+     * rotation to pivot around a point.
+     */
+    MTLPackedFloat3 pivot;
+    
+    /**
+     * @brief The rotation of the instance as a normalized quaternion. Applied after scale,
+     * shear, and pivot and before translation
+     */
+    MTLPackedFloatQuaternion rotation;
+
+    /**
+     * @brief The translation of the instance. Applied after rotation. Typically contains
+     * the composition of object translation and the inverse of the pivot translation.
+     */
+    MTLPackedFloat3 translation;
+} MTLComponentTransform;

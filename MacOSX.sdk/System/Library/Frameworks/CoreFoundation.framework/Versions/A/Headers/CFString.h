@@ -154,52 +154,10 @@ since it is the default choice with Mac OS X developer tools.
 #endif
 #endif
 
-#if DEPLOYMENT_RUNTIME_SWIFT
-    #if TARGET_OS_MAC
-        #define _CF_CONSTANT_STRING_SWIFT_CLASS $s15SwiftFoundation19_NSCFConstantStringCN
-    #else
-        #define _CF_CONSTANT_STRING_SWIFT_CLASS $s10Foundation19_NSCFConstantStringCN
-    #endif
-
-CF_EXPORT void *_CF_CONSTANT_STRING_SWIFT_CLASS[];
-#endif
-
-#if DEPLOYMENT_RUNTIME_SWIFT && TARGET_OS_MAC
-
-struct __CFConstStr {
-    struct {
-        __ptrauth_cf_objc_isa_pointer uintptr_t _cfisa;
-        uintptr_t _swift_rc;
-        uint64_t _cfinfoa;
-    } _base;
-    uint8_t *_ptr;
-#if TARGET_RT_64_BIT && defined(__BIG_ENDIAN__)
-    uint64_t _length;
-#else // 32-bit:
-    uint32_t _length;
-#endif // TARGET_RT_64_BIT && defined(__BIG_ENDIAN__)
-};
-
-#if __BIG_ENDIAN__
-#define CFSTR(cStr)  ({ \
-    static struct __CFConstStr str = {{(uintptr_t)&_CF_CONSTANT_STRING_SWIFT_CLASS, _CF_CONSTANT_OBJECT_STRONG_RC, 0x00000000C8070000}, (uint8_t *)(cStr), sizeof(cStr) - 1}; \
-    (CFStringRef)&str; \
-})
-#else // Little endian:
-#define CFSTR(cStr)  ({ \
-    static struct __CFConstStr str = {{(uintptr_t)&_CF_CONSTANT_STRING_SWIFT_CLASS, _CF_CONSTANT_OBJECT_STRONG_RC, 0x07C8}, (uint8_t *)(cStr), sizeof(cStr) - 1}; \
-    (CFStringRef)&str; \
-})
-#endif // __BIG_ENDIAN__
-
-#else
-
 #ifdef __CONSTANT_CFSTRINGS__
 #define CFSTR(cStr)  ((CFStringRef) __builtin___CFStringMakeConstantString ("" cStr ""))
 #else
 #define CFSTR(cStr)  __CFStringMakeConstantString("" cStr "")
-#endif
-
 #endif
 
 #if defined(__GNUC__) && (__GNUC__*10+__GNUC_MINOR__ >= 42) && defined(__APPLE_CC__) && (__APPLE_CC__ > 1) && !defined(__INTEL_COMPILER) && TARGET_OS_MAC

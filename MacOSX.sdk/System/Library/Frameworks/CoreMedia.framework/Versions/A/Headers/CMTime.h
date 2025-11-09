@@ -42,7 +42,7 @@ CF_IMPLICIT_BRIDGING_ENABLED
 	@typedef	CMTimeValue
 	@abstract	Numerator of rational CMTime.
 */
-typedef int64_t CMTimeValue API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
+typedef int64_t CMTimeValue API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
 	@typedef	CMTimeScale
@@ -51,14 +51,14 @@ typedef int64_t CMTimeValue API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watc
 				Note: kCMTimeMaxTimescale is NOT a good choice of timescale for movie files.  
 				(Recommended timescales for movie files range from 600 to 90000.)
 */
-typedef int32_t CMTimeScale API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
+typedef int32_t CMTimeScale API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0), visionos(1.0));
 #define kCMTimeMaxTimescale 0x7fffffffL
 
 /*!
 	@typedef	CMTimeEpoch
 	@abstract	Epoch (eg, loop number) to which a CMTime refers.
 */
-typedef int64_t CMTimeEpoch API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
+typedef int64_t CMTimeEpoch API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
 	@enum		CMTimeFlags
@@ -80,7 +80,7 @@ typedef CF_OPTIONS( uint32_t, CMTimeFlags ) {
 	kCMTimeFlags_NegativeInfinity = 1UL<<3,
 	kCMTimeFlags_Indefinite = 1UL<<4,
 	kCMTimeFlags_ImpliedValueFlagsMask = kCMTimeFlags_PositiveInfinity | kCMTimeFlags_NegativeInfinity | kCMTimeFlags_Indefinite
-} API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
+} API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
 	@typedef	CMTime
@@ -96,7 +96,7 @@ typedef struct
 								Will be used during comparison: greater epochs happen after lesser ones.
 								Additions/subtraction is only possible within a single epoch,
 								however, since epoch length may be unknown/variable */
-} CMTime API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
+} CMTime API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
 	@function	CMTIME_IS_VALID
@@ -164,31 +164,31 @@ CM_EXPORT const CMTime kCMTimeInvalid			/*! @constant kCMTimeInvalid
 													Do not test against this using (time == kCMTimeInvalid), there are many
 													CMTimes other than this that are also invalid.
 													Use !CMTIME_IS_VALID(time) instead. */
-							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
+							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0), visionos(1.0));
 CM_EXPORT const CMTime kCMTimeIndefinite		/*! @constant kCMTimeIndefinite
 													Use this constant to initialize an indefinite CMTime (eg. duration of a live
 													broadcast).  Do not test against this using (time == kCMTimeIndefinite),
 													there are many CMTimes other than this that are also indefinite.
 													Use CMTIME_IS_INDEFINITE(time) instead. */
-							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
+							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0), visionos(1.0));
 CM_EXPORT const CMTime kCMTimePositiveInfinity	/*! @constant kCMTimePositiveInfinity 
 													Use this constant to initialize a CMTime to +infinity.
 													Do not test against this using (time == kCMTimePositiveInfinity),
 													there are many CMTimes other than this that are also +infinity.
 													Use CMTIME_IS_POSITIVEINFINITY(time) instead. */
-							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
+							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0), visionos(1.0));
 CM_EXPORT const CMTime kCMTimeNegativeInfinity	/*! @constant kCMTimeNegativeInfinity 
 													Use this constant to initialize a CMTime to -infinity.
 													Do not test against this using (time == kCMTimeNegativeInfinity),
 													there are many CMTimes other than this that are also -infinity.
 													Use CMTIME_IS_NEGATIVEINFINITY(time) instead. */
-							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
+							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0), visionos(1.0));
 CM_EXPORT const CMTime kCMTimeZero				/*! @constant kCMTimeZero 
 													Use this constant to initialize a CMTime to 0.
 													Do not test against this using (time == kCMTimeZero),
 													there are many CMTimes other than this that are also 0.
 													Use CMTimeCompare(time, kCMTimeZero) instead. */
-							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
+							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
 	@function	CMTimeMake
@@ -199,7 +199,7 @@ CM_EXPORT
 CMTime CMTimeMake(
 				int64_t value,		/*! @param value		Initializes the value field of the resulting CMTime. */
 				int32_t timescale)	/*! @param timescale	Initializes the timescale field of the resulting CMTime. */
-							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
+							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
 	@function	CMTimeMakeWithEpoch
@@ -211,7 +211,7 @@ CMTime CMTimeMakeWithEpoch(
 				int64_t value,		/*! @param value Initializes the value field of the resulting CMTime. */
 				int32_t timescale,	/*! @param timescale Initializes the scale field of the resulting CMTime. */
 				int64_t epoch)		/*! @param epoch Initializes the epoch field of the resulting CMTime. */
-							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
+							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0), visionos(1.0));
 				
 
 /*!
@@ -229,7 +229,7 @@ CM_EXPORT
 CMTime CMTimeMakeWithSeconds(
 				Float64 seconds,
 				int32_t preferredTimescale)
-							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
+							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
 	@function	CMTimeGetSeconds
@@ -242,7 +242,7 @@ CMTime CMTimeMakeWithSeconds(
 CM_EXPORT 
 Float64 CMTimeGetSeconds(
 				CMTime time)
-							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
+							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
 	@enum CMTimeRoundingMethod
@@ -272,7 +272,7 @@ typedef CF_ENUM( uint32_t, CMTimeRoundingMethod ) {
 	kCMTimeRoundingMethod_RoundTowardNegativeInfinity = 6,
 	
 	kCMTimeRoundingMethod_Default = kCMTimeRoundingMethod_RoundHalfAwayFromZero
-} API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
+} API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
 	@function	CMTimeConvertScale
@@ -287,7 +287,7 @@ CMTime CMTimeConvertScale(
 				CMTime time,					/*! @param time		Source CMTime. */
 				int32_t newTimescale,			/*! @param newTimescale	The requested timescale for the converted result CMTime. */
 				CMTimeRoundingMethod method)	/*! @param method	The requested rounding method. */
-							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
+							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
 	@function	CMTimeAdd
@@ -332,7 +332,7 @@ CM_EXPORT
 CMTime CMTimeAdd(
 				CMTime lhs,				/*! @param lhs			A CMTime to be added. */
 				CMTime rhs)				/*! @param rhs			Another CMTime to be added. */
-							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
+							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 
 /*!
@@ -378,7 +378,7 @@ CM_EXPORT
 CMTime CMTimeSubtract(
 				CMTime lhs,		/*! @param lhs		The CMTime from which the rhs will be subtracted. */
 				CMTime rhs)		/*! @param rhs		The CMTime that will be subtracted from the lhs. */
-							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
+							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 
 /*!
@@ -406,7 +406,7 @@ CM_EXPORT
 CMTime CMTimeMultiply(
 				CMTime time,			/*! @param time			The CMTime that will be multiplied. */
 				int32_t multiplier)		/*! @param multiplier	The integer it will be multiplied by. */
-							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
+							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
 	@function	CMTimeMultiplyByFloat64
@@ -435,7 +435,7 @@ CM_EXPORT
 CMTime CMTimeMultiplyByFloat64(
 				CMTime time,			/*! @param time			The CMTime that will be multiplied. */
 				Float64 multiplier)		/*! @param multiplier	The Float64 it will be multiplied by. */
-							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
+							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
 	@function	CMTimeMultiplyByRatio
@@ -463,7 +463,7 @@ CMTime CMTimeMultiplyByRatio(
 				CMTime time,			/*! @param time			The CMTime to be multiplied then divided. */
 				int32_t multiplier,		/*! @param multiplier	The value by which to multiply. */
 				int32_t divisor)		/*! @param divisor	The value by which to divide. */
-							API_AVAILABLE(macos(10.10), ios(7.1), tvos(9.0), watchos(6.0));
+							API_AVAILABLE(macos(10.10), ios(7.1), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
 	@function	CMTimeCompare
@@ -493,7 +493,7 @@ CM_EXPORT
 int32_t CMTimeCompare(
 				CMTime time1,		/*! @param time1 First CMTime in comparison. */
 				CMTime time2)		/*! @param time2 Second CMTime in comparison. */
-							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
+							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
 	@function	CMTIME_COMPARE_INLINE
@@ -517,7 +517,7 @@ CM_EXPORT
 CMTime CMTimeMinimum(
 				CMTime time1,	/*! @param time1 A CMTime */
 				CMTime time2)	/*! @param time2 Another CMTime */
-							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
+							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
 	@function	CMTimeMaximum
@@ -528,7 +528,7 @@ CM_EXPORT
 CMTime CMTimeMaximum(
 				CMTime time1,	/*! @param time1 A CMTime */
 				CMTime time2)	/*! @param time2 Another CMTime */
-							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
+							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
 	@function	CMTimeAbsoluteValue
@@ -538,7 +538,7 @@ CMTime CMTimeMaximum(
 CM_EXPORT 
 CMTime CMTimeAbsoluteValue(
 				CMTime time)	/*! @param time A CMTime */
-							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
+							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
 	@function	CMTimeCopyAsDictionary
@@ -552,7 +552,7 @@ CFDictionaryRef CM_NULLABLE CMTimeCopyAsDictionary(
 					CFAllocatorRef CM_NULLABLE allocator)	/*! @param allocator	CFAllocator with which to create dictionary.
 																					Pass kCFAllocatorDefault to use the default
 																					allocator. */
-							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
+							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0), visionos(1.0));
 /*!
 	@function	CMTimeMakeFromDictionary
     @abstract   Reconstitutes a CMTime struct from a CFDictionary previously created by CMTimeCopyAsDictionary.
@@ -563,7 +563,7 @@ CFDictionaryRef CM_NULLABLE CMTimeCopyAsDictionary(
 CM_EXPORT 
 CMTime CMTimeMakeFromDictionary(
 				CFDictionaryRef CM_NULLABLE dictionaryRepresentation)	/*! @param dictionaryRepresentation CFDictionary from which to create CMTime. */
-							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
+							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 CM_ASSUME_NONNULL_BEGIN
 
@@ -572,28 +572,28 @@ CM_ASSUME_NONNULL_BEGIN
 	@discussion CFDictionary key for value field of CMTime (CFNumber containing int64_t)
 */
 CM_EXPORT const CFStringRef kCMTimeValueKey
-							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
+							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
 	@constant kCMTimeScaleKey
 	@discussion CFDictionary key for timescale field of CMTime (CFNumber containing int32_t)
 */
 CM_EXPORT const CFStringRef kCMTimeScaleKey
-							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
+							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
 	@constant kCMTimeEpochKey
 	@discussion CFDictionary key for epoch field of CMTime (CFNumber containing int64_t)
 */
 CM_EXPORT const CFStringRef kCMTimeEpochKey
-							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
+							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
 	@constant kCMTimeFlagsKey
 	@discussion CFDictionary key for flags field of CMTime (CFNumber containing uint32_t)
 */
 CM_EXPORT const CFStringRef kCMTimeFlagsKey
-							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
+							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 CM_ASSUME_NONNULL_END
 
@@ -610,7 +610,7 @@ CFStringRef CM_NULLABLE CMTimeCopyDescription(
 	CFAllocatorRef CM_NULLABLE allocator,				/*! @param allocator	CFAllocator with which to create description. Pass
 															kCFAllocatorDefault to use the default allocator. */
 	CMTime time)										/*! @param time			CMTime to describe. */
-							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
+							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
 	@function	CMTimeShow
@@ -620,7 +620,7 @@ CFStringRef CM_NULLABLE CMTimeCopyDescription(
 CM_EXPORT 
 void CMTimeShow(
 	CMTime time)					/*! @param time			CMTime to show. */
-							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
+							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 CF_IMPLICIT_BRIDGING_DISABLED
 

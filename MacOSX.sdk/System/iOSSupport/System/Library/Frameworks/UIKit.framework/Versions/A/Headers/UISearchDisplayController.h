@@ -18,7 +18,7 @@ NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 @class UISearchBar, UITableView, UIViewController, UIPopoverController;
 @protocol UITableViewDataSource, UITableViewDelegate, UISearchDisplayDelegate;
 
-UIKIT_EXTERN API_DEPRECATED("UISearchDisplayController has been replaced with UISearchController", ios(3.0, 8.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_DEPRECATED("UISearchDisplayController has been replaced with UISearchController", ios(3.0, 8.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(visionos, watchos) NS_SWIFT_UI_ACTOR
 @interface UISearchDisplayController : NSObject
 
 - (instancetype)initWithSearchBar:(UISearchBar *)searchBar contentsController:(UIViewController *)viewController;
@@ -41,30 +41,30 @@ UIKIT_EXTERN API_DEPRECATED("UISearchDisplayController has been replaced with UI
 
 @end
 
-API_UNAVAILABLE(tvos) API_UNAVAILABLE(visionos) NS_SWIFT_UI_ACTOR
+API_UNAVAILABLE(tvos, visionos, watchos) NS_SWIFT_UI_ACTOR
 @protocol UISearchDisplayDelegate <NSObject>
 
 @optional
 
 // when we start/end showing the search UI
-- (void) searchDisplayControllerWillBeginSearch:(UISearchDisplayController *)controller API_DEPRECATED("", ios(3.0, 8.0));
-- (void) searchDisplayControllerDidBeginSearch:(UISearchDisplayController *)controller API_DEPRECATED("", ios(3.0, 8.0));
-- (void) searchDisplayControllerWillEndSearch:(UISearchDisplayController *)controller API_DEPRECATED("", ios(3.0, 8.0));
-- (void) searchDisplayControllerDidEndSearch:(UISearchDisplayController *)controller API_DEPRECATED("", ios(3.0, 8.0));
+- (void) searchDisplayControllerWillBeginSearch:(UISearchDisplayController *)controller API_DEPRECATED("", ios(3.0, 8.0)) API_UNAVAILABLE(watchos);
+- (void) searchDisplayControllerDidBeginSearch:(UISearchDisplayController *)controller API_DEPRECATED("", ios(3.0, 8.0)) API_UNAVAILABLE(watchos);
+- (void) searchDisplayControllerWillEndSearch:(UISearchDisplayController *)controller API_DEPRECATED("", ios(3.0, 8.0)) API_UNAVAILABLE(watchos);
+- (void) searchDisplayControllerDidEndSearch:(UISearchDisplayController *)controller API_DEPRECATED("", ios(3.0, 8.0)) API_UNAVAILABLE(watchos);
 
 // called when the table is created destroyed, shown or hidden. configure as necessary.
-- (void)searchDisplayController:(UISearchDisplayController *)controller didLoadSearchResultsTableView:(UITableView *)tableView API_DEPRECATED("", ios(3.0, 8.0));
-- (void)searchDisplayController:(UISearchDisplayController *)controller willUnloadSearchResultsTableView:(UITableView *)tableView API_DEPRECATED("", ios(3.0, 8.0));
+- (void)searchDisplayController:(UISearchDisplayController *)controller didLoadSearchResultsTableView:(UITableView *)tableView API_DEPRECATED("", ios(3.0, 8.0)) API_UNAVAILABLE(watchos);
+- (void)searchDisplayController:(UISearchDisplayController *)controller willUnloadSearchResultsTableView:(UITableView *)tableView API_DEPRECATED("", ios(3.0, 8.0)) API_UNAVAILABLE(watchos);
 
 // called when table is shown/hidden
-- (void)searchDisplayController:(UISearchDisplayController *)controller willShowSearchResultsTableView:(UITableView *)tableView API_DEPRECATED("", ios(3.0, 8.0));
-- (void)searchDisplayController:(UISearchDisplayController *)controller didShowSearchResultsTableView:(UITableView *)tableView API_DEPRECATED("", ios(3.0, 8.0));
-- (void)searchDisplayController:(UISearchDisplayController *)controller willHideSearchResultsTableView:(UITableView *)tableView API_DEPRECATED("", ios(3.0, 8.0));
-- (void)searchDisplayController:(UISearchDisplayController *)controller didHideSearchResultsTableView:(UITableView *)tableView API_DEPRECATED("", ios(3.0, 8.0));
+- (void)searchDisplayController:(UISearchDisplayController *)controller willShowSearchResultsTableView:(UITableView *)tableView API_DEPRECATED("", ios(3.0, 8.0)) API_UNAVAILABLE(watchos);
+- (void)searchDisplayController:(UISearchDisplayController *)controller didShowSearchResultsTableView:(UITableView *)tableView API_DEPRECATED("", ios(3.0, 8.0)) API_UNAVAILABLE(watchos);
+- (void)searchDisplayController:(UISearchDisplayController *)controller willHideSearchResultsTableView:(UITableView *)tableView API_DEPRECATED("", ios(3.0, 8.0)) API_UNAVAILABLE(watchos);
+- (void)searchDisplayController:(UISearchDisplayController *)controller didHideSearchResultsTableView:(UITableView *)tableView API_DEPRECATED("", ios(3.0, 8.0)) API_UNAVAILABLE(watchos);
 
 // return YES to reload table. called when search string/option changes. convenience methods on top UISearchBar delegate methods
-- (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(nullable NSString *)searchString API_DEPRECATED("", ios(3.0, 8.0));
-- (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchScope:(NSInteger)searchOption API_DEPRECATED("", ios(3.0, 8.0));
+- (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(nullable NSString *)searchString API_DEPRECATED("", ios(3.0, 8.0)) API_UNAVAILABLE(watchos);
+- (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchScope:(NSInteger)searchOption API_DEPRECATED("", ios(3.0, 8.0)) API_UNAVAILABLE(watchos);
 
 @end
 

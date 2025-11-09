@@ -3,7 +3,7 @@
 //  NSTextContentManager.h
 //  Text Kit
 //
-//  Copyright (c) 2018-2021, Apple Inc. All rights reserved.
+//  Copyright (c) 2018-2024, Apple Inc. All rights reserved.
 //
 
 #import <Foundation/NSArray.h>
@@ -26,10 +26,10 @@ NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 typedef NS_OPTIONS(NSUInteger, NSTextContentManagerEnumerationOptions) {
     NSTextContentManagerEnumerationOptionsNone = 0,
     NSTextContentManagerEnumerationOptionsReverse = (1 << 0)
-} API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos);
+} API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 // NSTextElementProvider is a protocol conformed by NSTextContentManager and its concrete subclasses. It defines the base interface for interacting with a custom text document content type.
-API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos)
+API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), visionos(1.0)) API_UNAVAILABLE(watchos)
 @protocol NSTextElementProvider <NSObject>
 // Declares the starting and ending locations for the document. The subclass could use its own implementation of a location object conforming to NSTextRange.
 @property (strong, readonly) NSTextRange *documentRange;
@@ -56,7 +56,7 @@ API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos)
 
 #pragma mark NSTextContentManager
 // NSTextContentManager is an abstract class defining the interface for managing the text document contents and the default implementation. The concrete subclass overrides NSTextElementProvider for managing the content backing store. It is the root object strongly referencing the rest of objects in the TextKit network via an array of NSTextLayoutManager. Also, it manages the editing transaction by tracking the active NSTextLayoutManager focused to be editing.
-API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos)
+API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), visionos(1.0)) API_UNAVAILABLE(watchos)
 @interface NSTextContentManager : NSObject <NSTextElementProvider, NSSecureCoding>
 #pragma mark Initialization
 - (instancetype)init NS_DESIGNATED_INITIALIZER;
@@ -100,7 +100,7 @@ API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos)
 @end
 
 #pragma mark NSTextContentManagerDelegate
-API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos)
+API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), visionos(1.0)) API_UNAVAILABLE(watchos)
 @protocol NSTextContentManagerDelegate <NSObject>
 @optional
 // Returns a custom element for location. When non-nil, textContentManager uses the element instead of creating based on its standard mapping logic.
@@ -111,7 +111,7 @@ API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos)
 @end
 
 #pragma mark NSTextContentStorageDelegate
-API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos)
+API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), visionos(1.0)) API_UNAVAILABLE(watchos)
 @protocol NSTextContentStorageDelegate <NSTextContentManagerDelegate>
 @optional
 // Returns a custom NSTextParagraph for range in NSTextContentStorage.attributedString. When non-nil, textContentStorage uses the text paragraph instead of creating the standard NSTextParagraph with the attributed substring in range. The attributed string for a custom text paragraph must have range.length.
@@ -120,7 +120,7 @@ API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos)
 
 #pragma mark NSTextContentStorage
 // NSTextContentStorage is a concrete subclass of NSTextContentManager providing support for NSAttributedString backing-store. It also implements NSTextStorageObserving participating as a client of NSTextStorage. The facility only supports a single NSTextContentStorage associated with a text storage. When -textStorage!=nil, -attributedString is ignored. By default, NSTextContentStorage is initialized with NSTextStorage as the backing-store.
-API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos)
+API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), visionos(1.0)) API_UNAVAILABLE(watchos)
 @interface NSTextContentStorage : NSTextContentManager <NSTextStorageObserving>
 #pragma mark Basic properties
 @property (weak, nullable) id <NSTextContentStorageDelegate> delegate;
@@ -148,7 +148,7 @@ API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos)
 @end
 
 // Posted by NSTextContentStorage when a text attribute unsupported by NSTextContentStorage is added to the underlying text storage.
-UIKIT_EXTERN NSNotificationName NSTextContentStorageUnsupportedAttributeAddedNotification API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos);
+UIKIT_EXTERN NSNotificationName NSTextContentStorageUnsupportedAttributeAddedNotification API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 NS_HEADER_AUDIT_END(nullability, sendability)
 #else

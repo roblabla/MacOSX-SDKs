@@ -28,7 +28,7 @@ typedef NS_ENUM(NSInteger, AVQueuedSampleBufferRenderingStatus) {
 	AVQueuedSampleBufferRenderingStatusUnknown = 0,
 	AVQueuedSampleBufferRenderingStatusRendering = 1,
 	AVQueuedSampleBufferRenderingStatusFailed = 2
-} API_AVAILABLE(macos(10.10), ios(8.0), tvos(10.2), watchos(1.0));
+} API_AVAILABLE(macos(10.10), ios(8.0), tvos(10.2), watchos(1.0), visionos(1.0));
 
 /*
 	@protocol		AVQueuedSampleBufferRendering
@@ -36,7 +36,7 @@ typedef NS_ENUM(NSInteger, AVQueuedSampleBufferRenderingStatus) {
 	@discussion
 		AVSampleBufferDisplayLayer and AVSampleBufferAudioRenderer conform to this protocol.  When used in conjunction with an AVSampleBufferRenderSynchronizer, an object conforming to AVQueuedSampleBufferRendering can only be attached to a single synchronizer.
 */
-API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0))
+API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0), visionos(1.0))
 @protocol AVQueuedSampleBufferRendering <NSObject>
 
 /*!
@@ -120,7 +120,7 @@ API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0))
     @abstract	Indicates whether the enqueued media data meets the renderer's preroll level.
     @discussion	Clients should fetch the value of this property to learn if the renderer has had enough media data enqueued to start playback reliably. Starting playback when this property is NO may prevent smooth playback following an immediate start.
  */
-@property (nonatomic, readonly) BOOL hasSufficientMediaDataForReliablePlaybackStart API_AVAILABLE(macos(11.3), ios(14.5), tvos(14.5), watchos(7.4));
+@property (nonatomic, readonly) BOOL hasSufficientMediaDataForReliablePlaybackStart API_AVAILABLE(macos(11.3), ios(14.5), tvos(14.5), watchos(7.4), visionos(1.0));
 
 @end
 

@@ -13,17 +13,19 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-/// This class defines parameters for a stencil operation.
+/// The class that defines the parameters for a stencil operation.
 ///
-/// Use this descriptor with the following ``MPSGraph`` methods:
-/// - ``MPSGraph/stencilWithSourceTensor:weightsTensor:descriptor:name:``.
+/// Use this descriptor with the following ``MPSGraph`` method:
+/// - ``MPSGraph/stencilWithSourceTensor:weightsTensor:descriptor:name:``
 MPS_CLASS_AVAILABLE_STARTING(macos(12.0), ios(15.0), tvos(15.0))
 @interface MPSGraphStencilOpDescriptor : MPSGraphObject<NSCopying>
 
-/// The reduction mode to use within the stecil window. Default value: `MPSGraphReductionModeSum`.
+/// The reduction mode to use within the stencil window.
+///
+/// Default value: `MPSGraphReductionModeSum`.
 @property (readwrite, nonatomic) MPSGraphReductionMode reductionMode;
 
-/// An array of length four that determines from which offset to start reading the `input` tensor.
+/// An array of length four that determines from which offset to start reading the input tensor.
 ///
 /// Only used when `paddingStyle` is `MPSGraphPaddingStyleExplicitOffset`.
 /// For example zero offset means that the first stencil window will align its top-left corner (in 4 dimensions) to the top-left corner of the input tensor.
@@ -53,14 +55,17 @@ MPS_CLASS_AVAILABLE_STARTING(macos(12.0), ios(15.0), tvos(15.0))
 @property (readwrite, nonatomic, copy) MPSShape * explicitPadding;
 
 /// The property that determines which values to use for padding the input tensor.
+/// 
 /// Default value: `MPSGraphPaddingModeZero`.
 @property (readwrite, nonatomic) MPSGraphPaddingMode boundaryMode;
 
 /// The property that defines what kind of padding to apply to the stencil operation.
+/// 
 /// Default value: `MPSGraphPaddingStyleExplicit`.
 @property (readwrite, nonatomic) MPSGraphPaddingStyle paddingStyle;
 
 /// The padding value for `boundaryMode = MPSGraphPaddingModeConstant`.
+/// 
 /// Default value: 0.
 @property (readwrite, nonatomic) float paddingConstant;
 

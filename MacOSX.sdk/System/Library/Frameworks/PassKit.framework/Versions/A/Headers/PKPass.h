@@ -14,7 +14,7 @@
 
 @class PKPaymentPass;
 @class PKSecureElementPass;
-@class PKPassRelevancyDates;
+@class PKPassRelevantDate;
 
 #if TARGET_OS_IPHONE
 @class UIImage;
@@ -41,7 +41,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy, readonly) NSString               *localizedName; // e.g. "Boarding Pass"
 @property (nonatomic, copy, readonly) NSString               *localizedDescription; // e.g. "SFO -> LHR"
 @property (nonatomic, copy, readonly) NSString               *organizationName; // e.g. "Great Airways"
-@property (nonatomic, copy, readonly, nullable) NSDate       *relevantDate; // may be useful for sorting
+@property (nonatomic, copy, readonly, nullable) NSDate       *relevantDate API_DEPRECATED("Use relevantDates", macos(11.0, 15.0), ios(6.0, 18.0), watchos(2.0, 11.0));
+@property (nonatomic, copy, readonly) NSArray<PKPassRelevantDate *> *relevantDates API_AVAILABLE(macos(15.0), ios(18.0), watchos(11.0));
 @property (nonatomic, copy, readonly, nullable) NSDictionary *userInfo API_AVAILABLE(macos(11.0), ios(7.0), watchos(3.0));
 
 @property (nonatomic, copy, readonly, nullable) NSURL *passURL; // open to view pass in Wallet app

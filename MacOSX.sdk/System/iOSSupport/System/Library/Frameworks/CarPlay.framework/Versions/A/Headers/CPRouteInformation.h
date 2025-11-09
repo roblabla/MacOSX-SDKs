@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  CPRouteInformation describes information pertaining to a route that is necessary for rerouting.
  */
-API_AVAILABLE(ios(17.4)) NS_SWIFT_SENDABLE
+API_AVAILABLE(ios(17.4)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(macos, watchos) NS_SWIFT_SENDABLE
 @interface CPRouteInformation : NSObject
 
 /**

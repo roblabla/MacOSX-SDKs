@@ -15,7 +15,7 @@ NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 #pragma mark - UISceneConnectionOptions
 // This object is vended to your application by UIKit when a UIScene connects to a session
-UIKIT_EXTERN API_AVAILABLE(ios(13.0)) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @interface UISceneConnectionOptions : NSObject
 + (instancetype)new NS_UNAVAILABLE;
 - (instancetype)init NS_UNAVAILABLE;
@@ -49,7 +49,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(13.0)) NS_SWIFT_UI_ACTOR
 
 #pragma mark - UISceneOpenURLOptions
 // This object is vended to your application's UISceneDelegate when it is asked to open a URL
-UIKIT_EXTERN API_AVAILABLE(ios(13.0)) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @interface UISceneOpenURLOptions : NSObject
 + (instancetype)new NS_UNAVAILABLE;
 - (instancetype)init NS_UNAVAILABLE;
@@ -70,7 +70,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(13.0)) NS_SWIFT_UI_ACTOR
 
 #pragma mark - UISceneOpenExternalURLOptions
 // This object is created by your application and passed into a UIScene's openURL method.
-UIKIT_EXTERN API_AVAILABLE(ios(13.0)) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @interface UISceneOpenExternalURLOptions : NSObject
 // URLs must be universal links and have an app configured to open them.
 @property (nonatomic, readwrite) BOOL universalLinksOnly;
@@ -88,7 +88,7 @@ typedef NS_ENUM(NSInteger, UISceneCollectionJoinBehavior) {
     UISceneCollectionJoinBehaviorPreferredWithoutActivating, // If requestingScene is set, add the new scene without deactivating the requestingScene. Otherwise behaves the same as preferred. For example, in Catalyst this could be used to open a link in a new tab in the background.
 }  API_AVAILABLE(macCatalyst(14.0)) API_UNAVAILABLE(ios, watchos, tvos, visionos);
 
-UIKIT_EXTERN API_AVAILABLE(ios(13.0)) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @interface UISceneActivationRequestOptions : NSObject
 // Informs the system the interface instance the user interacted with to create the new interface for the purposes of system navigation.
 @property (nullable, nonatomic, readwrite, strong) UIScene *requestingScene;
@@ -99,7 +99,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(13.0)) NS_SWIFT_UI_ACTOR
 
 #pragma mark - UISceneDestructionRequestOptions
 // This object is created by your application and passed with a UISceneSession destruction request
-UIKIT_EXTERN API_AVAILABLE(ios(13.0)) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @interface UISceneDestructionRequestOptions : NSObject
 @end
 

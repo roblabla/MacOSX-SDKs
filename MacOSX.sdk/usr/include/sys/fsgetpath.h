@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2008-2017 Apple Inc. All rights reserved.
+ * Copyright (c) 2008-2017, 2023 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  *
@@ -37,7 +37,6 @@
 #include <_types/_uint64_t.h>
 #include <Availability.h>
 
-
 __BEGIN_DECLS
 
 /*
@@ -45,8 +44,8 @@ __BEGIN_DECLS
  */
 ssize_t fsgetpath(char *, size_t, fsid_t *, uint64_t) __OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11.0) __TVOS_AVAILABLE(11.0) __WATCHOS_AVAILABLE(4.0);
 
-
 __END_DECLS
+
 
 
 #endif /* !_FSGETPATH_H_ */

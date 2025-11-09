@@ -11,7 +11,7 @@
 
 NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
-UIKIT_EXTERN API_AVAILABLE(ios(13.0), tvos(13.0)) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(13.0), tvos(13.0)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @interface UITabBarItemStateAppearance : NSObject
 
 - (instancetype)init NS_UNAVAILABLE;
@@ -44,9 +44,9 @@ typedef NS_ENUM(NSInteger, UITabBarItemAppearanceStyle) {
     UITabBarItemAppearanceStyleStacked,
     UITabBarItemAppearanceStyleInline,
     UITabBarItemAppearanceStyleCompactInline,
-};
+} API_UNAVAILABLE(watchos);
 
-UIKIT_EXTERN API_AVAILABLE(ios(13.0), tvos(13.0)) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(13.0), tvos(13.0)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @interface UITabBarItemAppearance : NSObject<NSCopying, NSSecureCoding>
 
 /// Construct an appearance with default values for the stacked layout.
@@ -76,7 +76,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(13.0), tvos(13.0)) NS_SWIFT_UI_ACTOR
 
 @end
 
-UIKIT_EXTERN API_AVAILABLE(ios(13.0), tvos(13.0)) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(13.0), tvos(13.0)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @interface UITabBarAppearance : UIBarAppearance
 
 /// The appearance for the stacked tab bar item layout

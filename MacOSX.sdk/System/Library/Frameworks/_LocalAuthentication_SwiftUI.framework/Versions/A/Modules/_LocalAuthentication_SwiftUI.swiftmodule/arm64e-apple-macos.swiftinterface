@@ -1,7 +1,6 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.10 (swiftlang-5.10.0.12.5 clang-1500.3.9.1.1)
-// swift-module-flags: -target arm64e-apple-macos14.5 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-bare-slash-regex -user-module-version 1394.120.27 -module-name _LocalAuthentication_SwiftUI
-import Combine
+// swift-compiler-version: Apple Swift version 6.0 effective-5.10 (swiftlang-6.0.0.7.24 clang-1600.0.25.1)
+// swift-module-flags: -target arm64e-apple-macos15.0 -target-variant arm64e-apple-ios18.0-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-bare-slash-regex -user-module-version 1656.0.99 -module-name _LocalAuthentication_SwiftUI
 @_exported import LocalAuthentication
 import LocalAuthenticationEmbeddedUI
 import Swift
@@ -14,17 +13,22 @@ import _SwiftConcurrencyShims
 @available(iOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
-public struct LocalAuthenticationView<Label> : SwiftUI.View where Label : SwiftUI.View {
-  public init(context: LocalAuthentication.LAContext, @SwiftUI.ViewBuilder label: () -> Label)
-  public init(_ titleKey: SwiftUI.LocalizedStringKey, context: LocalAuthentication.LAContext) where Label == SwiftUI.Text
-  @_disfavoredOverload public init<S>(_ title: S, context: LocalAuthentication.LAContext) where Label == SwiftUI.Text, S : Swift.StringProtocol
-  public init(reason: SwiftUI.Text, context: LocalAuthentication.LAContext? = nil, result: @escaping ((Swift.Result<Swift.Void, any Swift.Error>) -> Swift.Void), @SwiftUI.ViewBuilder label: () -> Label)
-  public init(_ title: SwiftUI.Text, reason: SwiftUI.Text, context: LocalAuthentication.LAContext? = nil, result: @escaping ((Swift.Result<Swift.Void, any Swift.Error>) -> Swift.Void)) where Label == SwiftUI.Text
-  public init(_ titleKey: SwiftUI.LocalizedStringKey, reason: SwiftUI.Text, context: LocalAuthentication.LAContext? = nil, result: @escaping ((Swift.Result<Swift.Void, any Swift.Error>) -> Swift.Void)) where Label == SwiftUI.Text
-  @_disfavoredOverload public init<S>(_ title: S, reason: SwiftUI.Text, context: LocalAuthentication.LAContext? = nil, result: @escaping ((Swift.Result<Swift.Void, any Swift.Error>) -> Swift.Void)) where Label == SwiftUI.Text, S : Swift.StringProtocol
-  @_Concurrency.MainActor(unsafe) public var body: some SwiftUI.View {
+@_Concurrency.MainActor @preconcurrency public struct LocalAuthenticationView<Label> : SwiftUICore.View where Label : SwiftUICore.View {
+  @_Concurrency.MainActor @preconcurrency public init(context: LocalAuthentication.LAContext, @SwiftUICore.ViewBuilder label: () -> Label)
+  @_Concurrency.MainActor @preconcurrency public init(_ titleKey: SwiftUICore.LocalizedStringKey, context: LocalAuthentication.LAContext) where Label == SwiftUICore.Text
+  @_disfavoredOverload @_Concurrency.MainActor @preconcurrency public init<S>(_ title: S, context: LocalAuthentication.LAContext) where Label == SwiftUICore.Text, S : Swift.StringProtocol
+  @_Concurrency.MainActor @preconcurrency public init(reason: SwiftUICore.Text, context: LocalAuthentication.LAContext? = nil, result: @escaping ((Swift.Result<Swift.Void, any Swift.Error>) -> Swift.Void), @SwiftUICore.ViewBuilder label: () -> Label)
+  @_Concurrency.MainActor @preconcurrency public init(_ title: SwiftUICore.Text, reason: SwiftUICore.Text, context: LocalAuthentication.LAContext? = nil, result: @escaping ((Swift.Result<Swift.Void, any Swift.Error>) -> Swift.Void)) where Label == SwiftUICore.Text
+  @_Concurrency.MainActor @preconcurrency public init(_ titleKey: SwiftUICore.LocalizedStringKey, reason: SwiftUICore.Text, context: LocalAuthentication.LAContext? = nil, result: @escaping ((Swift.Result<Swift.Void, any Swift.Error>) -> Swift.Void)) where Label == SwiftUICore.Text
+  @_disfavoredOverload @_Concurrency.MainActor @preconcurrency public init<S>(_ title: S, reason: SwiftUICore.Text, context: LocalAuthentication.LAContext? = nil, result: @escaping ((Swift.Result<Swift.Void, any Swift.Error>) -> Swift.Void)) where Label == SwiftUICore.Text, S : Swift.StringProtocol
+  @_Concurrency.MainActor @preconcurrency public var body: some SwiftUICore.View {
     get
   }
+  @available(macOS 13.0, *)
+  @available(iOS, unavailable, introduced: 13.0)
+  @available(tvOS, unavailable, introduced: 13.0)
+  @available(watchOS, unavailable, introduced: 6.0)
+  @available(macCatalyst, unavailable)
   public typealias Body = @_opaqueReturnTypeOf("$s28_LocalAuthentication_SwiftUI0aB4ViewV4bodyQrvp", 0) __<Label>
 }
 @available(macOS 13.0, *)
@@ -32,6 +36,4 @@ public struct LocalAuthenticationView<Label> : SwiftUI.View where Label : SwiftU
 @available(iOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
-extension LocalAuthentication.LAContext : Combine.ObservableObject {
-  public typealias ObjectWillChangePublisher = Combine.ObservableObjectPublisher
-}
+extension _LocalAuthentication_SwiftUI.LocalAuthenticationView : Swift.Sendable {}

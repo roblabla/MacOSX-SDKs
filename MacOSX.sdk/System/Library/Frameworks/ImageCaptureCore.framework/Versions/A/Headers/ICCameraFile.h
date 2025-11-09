@@ -170,6 +170,20 @@ IC_AVAILABLE(macos(10.4), ios(13.0))
  */
 @property (nonatomic, readonly, nullable) NSDate* exifModificationDate IC_AVAILABLE(macos(10.4), ios(13.0));
 
+/*!
+ @property fingerprint
+ @abstract A fingerprint generated from the camera file data
+ date, or nil.
+ */
+@property (nonatomic, readonly, nullable) NSString* fingerprint;
+
+/*!
+ @property fingerprintForFileAtURL
+ @abstract Generates a fingerprint given a URL
+ date, or nil.
+ */
++ (NSString* _Nullable)fingerprintForFileAtURL:(NSURL*)url;
+
 #pragma mark - Block API
 
 /*!
@@ -232,6 +246,14 @@ IC_AVAILABLE(macos(10.4), ios(13.0))
    @note The completion block will execute on an any available queue, often this will not be the main queue.
  */
 - (void)requestSecurityScopedURLWithCompletion:(void (^)(NSURL* _Nullable, NSError* _Nullable))completion IC_AVAILABLE(macos(14.0), ios(17.0));
+
+/*!
+   @method requestFingerprintWithCompletion
+   @abstract ￼Requests a fingerprint be generated for camera file.
+   @param completion Completion block called with an NSString*, and an NSError* for status.
+   @note The completion block will execute on an any available queue, often this will not be the main queue.
+ */
+- (void)requestFingerprintWithCompletion:(void (^)(NSString* _Nullable, NSError* _Nullable))completion IC_AVAILABLE(macos(15.0), ios(18.0));
 
 @end
 

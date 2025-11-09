@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos ]
 install-name:    '/System/Library/Frameworks/JavaNativeFoundation.framework/Versions/A/JavaNativeFoundation'
-current-version: 84
+current-version: 86
 exports:
   - targets:         [ x86_64-macos ]
     symbols:         [ '$ld$previous$/System/Library/Frameworks/JavaVM.framework/Versions/A/Frameworks/JavaNativeFoundation.framework/Versions/A/JavaNativeFoundation$$1$10.0$10.16$$', 

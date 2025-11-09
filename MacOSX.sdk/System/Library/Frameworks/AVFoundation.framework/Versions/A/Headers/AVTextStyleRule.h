@@ -22,7 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
 @class AVTextStyleRuleInternal;
 
 NS_SWIFT_NONSENDABLE
-API_AVAILABLE(macos(10.9), ios(6.0), tvos(9.0)) API_UNAVAILABLE(watchos)
+API_AVAILABLE(macos(10.9), ios(6.0), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(watchos)
 @interface AVTextStyleRule : NSObject <NSCopying> {
 @private
 	AVTextStyleRuleInternal *_textStyleRule;

@@ -1,15 +1,26 @@
-.Dd February 7, 2019
-.Dt sysextd 8
+.\" Copyright (c) 2019-2023 Apple Inc. All rights reserved.
+.Dd October 30, 2023
+.Dt SYSEXTD 8
 .Os Darwin
 .Sh NAME
 .Nm sysextd
-.Nd System Extension daemon
+.Nd system extension manager
 .Sh DESCRIPTION
 .Nm
-is a daemon that provides services to manage System Extensions on this machine.
-.Pp
-There are no configuration options to
-.Nm .
-Users should not run
+is a daemon that helps manage system extensions.
+It works in coordination with other daemons, with system extensions' host applications, and with the system extensions themselves.
+Users should not manually run
+.Nm ;
+the daemon is automatically started when its services are needed.
+.Sh FILES
+.Bl -tag
+.It Pa /Library/SystemExtensions
+System extensions and data managed by the daemon.
+.El
+.Sh EXIT STATUS
+.Ex -std
+.Sh SEE ALSO
+.Xr systemextensionsctl 8
+.Sh HISTORY
 .Nm
-manually.
+was introduced in macOS Catalina 10.15.

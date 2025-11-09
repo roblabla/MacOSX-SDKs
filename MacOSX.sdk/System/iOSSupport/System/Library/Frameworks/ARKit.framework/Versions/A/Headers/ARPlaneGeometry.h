@@ -6,11 +6,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <SceneKit/SCNGeometry.h>
 #import <simd/simd.h>
-#if __has_include(<ARKit/ARSCNPlaneGeometry.h>)
-#import <ARKit/ARSCNPlaneGeometry.h>
-#endif
 
 @protocol MTLDevice;
 
@@ -22,6 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
  and vertices updated from frame to frame.
  */
 API_AVAILABLE(ios(11.3))
+NS_SWIFT_SENDABLE
 @interface ARPlaneGeometry : NSObject<NSSecureCoding>
 
 /**

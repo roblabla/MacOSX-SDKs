@@ -76,13 +76,13 @@ typedef NS_ENUM(NSUInteger, GKMatchType) {
 @property(retain, nullable) NSArray<NSString *> *playersToInvite API_DEPRECATED_WITH_REPLACEMENT("-recipients:", ios(4.1,8.0), macos(10.8,10.10)) API_UNAVAILABLE(tvos); // Array of player IDs to invite, or nil if none
 
 /// The name of the queue, if rule-based matchmaking is used.
-@property(copy, nullable) NSString *queueName API_AVAILABLE(ios(17.2), macos(14.2), watchos(10.2), tvos(17.2));
+@property(copy, nullable) NSString *queueName API_AVAILABLE(ios(17.2), macos(14.2), watchos(10.2), tvos(17.2), visionos(1.1));
 
 /// The match properties, if rule-based matchmaking is used.
-@property(copy, nullable) GKMatchProperties *properties API_AVAILABLE(ios(17.2), macos(14.2), watchos(10.2), tvos(17.2));
+@property(copy, nullable) GKMatchProperties *properties API_AVAILABLE(ios(17.2), macos(14.2), watchos(10.2), tvos(17.2), visionos(1.1));
 
 /// The recipient specific match properties, if rule-based matchmaking is used when inviting players.
-@property(copy, nullable) NSDictionary<GKPlayer *, GKMatchProperties *> *recipientProperties API_AVAILABLE(ios(17.2), macos(14.2), watchos(10.2), tvos(17.2));
+@property(copy, nullable) NSDictionary<GKPlayer *, GKMatchProperties *> *recipientProperties API_AVAILABLE(ios(17.2), macos(14.2), watchos(10.2), tvos(17.2), visionos(1.1));
 
 @end
 
@@ -116,7 +116,7 @@ NS_CLASS_AVAILABLE(10_8, 4_1) __WATCHOS_PROHIBITED
 - (void)player:(GKPlayer *)player didRequestMatchWithPlayers:(NSArray<NSString *> *)playerIDsToInvite API_DEPRECATED_WITH_REPLACEMENT("-player:didRequestMatchWithRecipients:", ios(7.0,8.0), macos(10.9,10.10)) API_UNAVAILABLE(tvos);
 @end
 
-API_AVAILABLE_BEGIN(ios(17.2), macos(14.2), tvos(17.2)) __WATCHOS_PROHIBITED
+API_AVAILABLE_BEGIN(ios(17.2), macos(14.2), tvos(17.2), visionos(1.1)) __WATCHOS_PROHIBITED
 @interface GKMatchedPlayers : NSObject
 
 @property(nonatomic, nullable, readonly) GKMatchProperties *properties;
@@ -156,7 +156,7 @@ NS_CLASS_AVAILABLE(10_8, 4_1) __WATCHOS_PROHIBITED
 - (void)findPlayersForHostedRequest:(GKMatchRequest *)request withCompletionHandler:(void(^__nullable)(NSArray<GKPlayer *> * __nullable players, NSError * __nullable error))completionHandler NS_AVAILABLE(10_10, 8_0);
 
 /// Automatching or invites for host-client rule-based match request.
-- (void)findMatchedPlayers:(GKMatchRequest *)request withCompletionHandler:(void(^)(GKMatchedPlayers * __nullable matchedPlayers, NSError * __nullable error))completionHandler API_AVAILABLE(ios(17.2), macos(14.2), tvos(17.2));
+- (void)findMatchedPlayers:(GKMatchRequest *)request withCompletionHandler:(void(^)(GKMatchedPlayers * __nullable matchedPlayers, NSError * __nullable error))completionHandler API_AVAILABLE(ios(17.2), macos(14.2), tvos(17.2), visionos(1.1));
 
 /// Automatching or invites to add additional players to a peer-to-peer match for the specified request. Error will be nil on success:
 /// Possible reasons for error:
@@ -184,7 +184,7 @@ NS_CLASS_AVAILABLE(10_8, 4_1) __WATCHOS_PROHIBITED
 - (void)queryActivityWithCompletionHandler:(void(^__nullable)(NSInteger activity, NSError * __nullable error))completionHandler;
 
 ///  Query the server for recent activity for the specified queue.
-- (void)queryQueueActivity:(NSString *)queueName withCompletionHandler:(void(^__nullable)(NSInteger activity, NSError * __nullable error))completionHandler API_AVAILABLE(ios(17.2), macos(14.2), tvos(17.2));
+- (void)queryQueueActivity:(NSString *)queueName withCompletionHandler:(void(^__nullable)(NSInteger activity, NSError * __nullable error))completionHandler API_AVAILABLE(ios(17.2), macos(14.2), tvos(17.2), visionos(1.1));
 
 /// Start browsing for nearby players that can be invited to a match. The reachableHandler will be called for each player found with a compatible game. It may be called more than once for the same player if that player ever becomes unreachable (e.g. moves out of range). You should call stopBrowsingForNearbyPlayers when finished browsing.
 - (void)startBrowsingForNearbyPlayersWithHandler:(void(^__nullable)(GKPlayer *player, BOOL reachable))reachableHandler NS_AVAILABLE(10_10, 8_0);

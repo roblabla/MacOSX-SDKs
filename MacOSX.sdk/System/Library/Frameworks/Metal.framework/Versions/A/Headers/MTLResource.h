@@ -7,6 +7,7 @@
 
 #import <Foundation/Foundation.h>
 #import <Metal/MTLDefines.h>
+#import <Metal/MTLAllocation.h>
 #import <mach/mach.h>
 
 NS_ASSUME_NONNULL_BEGIN
@@ -195,7 +196,7 @@ typedef NS_OPTIONS(NSUInteger, MTLResourceOptions)
  @abstract Common APIs available for MTLBuffer and MTLTexture instances
  */
 API_AVAILABLE(macos(10.11), ios(8.0))
-@protocol MTLResource <NSObject>
+@protocol MTLResource <MTLAllocation>
 
 /*!
  @property label

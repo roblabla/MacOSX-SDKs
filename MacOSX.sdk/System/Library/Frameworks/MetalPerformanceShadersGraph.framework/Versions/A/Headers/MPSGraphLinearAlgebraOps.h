@@ -38,7 +38,7 @@ MPS_CLASS_AVAILABLE_STARTING(macos(12.3), ios(15.4), tvos(15.4))
                                   name:(NSString * _Nullable) name
 MPS_SWIFT_NAME( bandPart(_:numLower:numUpper:name:) );
 
-/// Creates band part op and return the result.
+/// Creates the band part operation and returns the result.
 ///
 /// See above discussion of bandPartWithTensor: numLower: numUpper: name:
 ///

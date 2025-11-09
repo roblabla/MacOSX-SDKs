@@ -35,6 +35,11 @@ HM_EXTERN NSString * const HMCharacteristicPropertyWritable API_AVAILABLE(ios(8.
 HM_EXTERN NSString * const HMCharacteristicPropertyHidden API_AVAILABLE(ios(9.3), watchos(2.2), tvos(10.0), macCatalyst(14.0)) API_UNAVAILABLE(macos);
 
 /*!
+ * @brief This constant specifies that the characteristic requires authorization data for a write.
+ */
+HM_EXTERN NSString * const HMCharacteristicPropertyRequiresAuthorizationData API_AVAILABLE(ios(18.0), watchos(11.0), tvos(18.0), visionos(2.0)) API_UNAVAILABLE(macos);
+
+/*!
  * @group Accessory Service Characteristic Types
  *
  * @brief These constants define the characteristic types supported by the HomeKit Accessory Profile for HomeKit based accessories.
@@ -432,6 +437,16 @@ HM_EXTERN NSString * const HMCharacteristicTypeRemainingDuration API_AVAILABLE(i
  */
 HM_EXTERN NSString * const HMCharacteristicTypeValveType API_AVAILABLE(ios(11.2), watchos(4.2), tvos(11.2), macCatalyst(14.0)) API_UNAVAILABLE(macos);
 
+/*!
+ * @brief Characteristic type for volume control type. The value of the characteristic is one of the values defined for HMCharacteristicValueVolumeControlType.
+ */
+HM_EXTERN NSString * const HMCharacteristicTypeVolumeControlType API_AVAILABLE(ios(18.0), watchos(11.0), tvos(18.0), visionos(2.0)) API_UNAVAILABLE(macos);
+
+/*!
+ * @brief Characteristic type for volume selector. The value of the characteristic is one of the values defined for HMCharacteristicValueVolumeSelector.
+ */
+HM_EXTERN NSString * const HMCharacteristicTypeVolumeSelector API_AVAILABLE(ios(18.0), watchos(11.0), tvos(18.0), visionos(2.0)) API_UNAVAILABLE(macos);
+
 
 /*!
  * @brief Characteristic type for brightness. The value of the characteristic is an int value in percent.
@@ -674,6 +689,56 @@ HM_EXTERN NSString * const HMCharacteristicTypeColorTemperature API_AVAILABLE(io
 HM_EXTERN NSString * const HMCharacteristicTypeIsConfigured API_AVAILABLE(ios(11.2), watchos(4.2), tvos(11.2), macCatalyst(14.0)) API_UNAVAILABLE(macos);
 
 /*!
+ * @brief Characteristic type for input source type. The value of the characteristic is one of the values defined for HMCharacteristicValueInputSourceType.
+ */
+HM_EXTERN NSString * const HMCharacteristicTypeInputSourceType API_AVAILABLE(ios(18.0), watchos(11.0), tvos(18.0), visionos(2.0)) API_UNAVAILABLE(macos);
+
+/*!
+ * @brief Characteristic type for input device type. The value of the characteristic is one of the values defined for HMCharacteristicValueInputDeviceType.
+ */
+HM_EXTERN NSString * const HMCharacteristicTypeInputDeviceType API_AVAILABLE(ios(18.0), watchos(11.0), tvos(18.0), visionos(2.0)) API_UNAVAILABLE(macos);
+
+/*!
+ * @brief Characteristic type for closed captions. The value of the characteristic is one of the values defined for HMCharacteristicValueClosedCaptions.
+ */
+HM_EXTERN NSString * const HMCharacteristicTypeClosedCaptions API_AVAILABLE(ios(18.0), watchos(11.0), tvos(18.0), visionos(2.0)) API_UNAVAILABLE(macos);
+
+/*!
+ * @brief Characteristic type for power mode selection. The value of the characteristic is one of the values defined for HMCharacteristicValuePowerModeSelection.
+ */
+HM_EXTERN NSString * const HMCharacteristicTypePowerModeSelection API_AVAILABLE(ios(18.0), watchos(11.0), tvos(18.0), visionos(2.0)) API_UNAVAILABLE(macos);
+
+/*!
+ * @brief Characteristic type for current media state. The value of the characteristic is one of the values defined for HMCharacteristicValueCurrentMediaState.
+ */
+HM_EXTERN NSString * const HMCharacteristicTypeCurrentMediaState API_AVAILABLE(ios(18.0), watchos(11.0), tvos(18.0), visionos(2.0)) API_UNAVAILABLE(macos);
+
+/*!
+ * @brief Characteristic type for remote key. The value of the characteristic is one of the values defined for HMCharacteristicValueRemoteKey.
+ */
+HM_EXTERN NSString * const HMCharacteristicTypeRemoteKey API_AVAILABLE(ios(18.0), watchos(11.0), tvos(18.0), visionos(2.0)) API_UNAVAILABLE(macos);
+
+/*!
+ * @brief Characteristic type for picture mode. The value of the characteristic is one of the values defined for HMCharacteristicValuePictureMode.
+ */
+HM_EXTERN NSString * const HMCharacteristicTypePictureMode API_AVAILABLE(ios(18.0), watchos(11.0), tvos(18.0), visionos(2.0)) API_UNAVAILABLE(macos);
+
+/*!
+ * @brief Characteristic type for configured name. The value of the characteristic is a string.
+ */
+HM_EXTERN NSString * const HMCharacteristicTypeConfiguredName API_AVAILABLE(ios(18.0), watchos(11.0), tvos(18.0), visionos(2.0)) API_UNAVAILABLE(macos);
+
+/*!
+ * @brief Characteristic type for identifier. The value of the characteristic is a uint32.
+ */
+HM_EXTERN NSString * const HMCharacteristicTypeIdentifier API_AVAILABLE(ios(18.0), watchos(11.0), tvos(18.0), visionos(2.0)) API_UNAVAILABLE(macos);
+
+/*!
+ * @brief Characteristic type for active identifier. The value of the characteristic is a uint32.
+ */
+HM_EXTERN NSString * const HMCharacteristicTypeActiveIdentifier API_AVAILABLE(ios(18.0), watchos(11.0), tvos(18.0), visionos(2.0)) API_UNAVAILABLE(macos);
+
+/*!
  * @brief Characteristic type for supported audio stream configuration. The value of the characteristic is TLV8 encoded data.
  */
 HM_EXTERN NSString * const HMCharacteristicTypeSupportedAudioStreamConfiguration API_AVAILABLE(ios(10.0), watchos(3.0), tvos(10.0), macCatalyst(14.0)) API_UNAVAILABLE(macos);
@@ -692,5 +757,35 @@ HM_EXTERN NSString * const HMCharacteristicTypeMute API_AVAILABLE(ios(10.0), wat
  * @brief Characteristic type for night vision. The value of the characteristic is a boolean.
  */
 HM_EXTERN NSString * const HMCharacteristicTypeNightVision API_AVAILABLE(ios(10.0), watchos(3.0), tvos(10.0), macCatalyst(14.0)) API_UNAVAILABLE(macos);
+
+/*!
+ * @brief Characteristic type for target visibility state. The value of the characteristic is one of the values defined for HMCharacteristicValueTargetVisibilityState.
+ */
+HM_EXTERN NSString * const HMCharacteristicTypeTargetVisibilityState API_AVAILABLE(ios(18.0), watchos(11.0), tvos(18.0), visionos(2.0)) API_UNAVAILABLE(macos);
+
+/*!
+ * @brief Characteristic type for current visibility state. The value of the characteristic is one of the values defined for HMCharacteristicValueCurrentVisibilityState.
+ */
+HM_EXTERN NSString * const HMCharacteristicTypeCurrentVisibilityState API_AVAILABLE(ios(18.0), watchos(11.0), tvos(18.0), visionos(2.0)) API_UNAVAILABLE(macos);
+
+/*!
+ * @brief Characteristic type for target media state. The value of the characteristic is one of the values defined for HMCharacteristicValueTargetMediaState.
+ */
+HM_EXTERN NSString * const HMCharacteristicTypeTargetMediaState API_AVAILABLE(ios(18.0), watchos(11.0), tvos(18.0), visionos(2.0)) API_UNAVAILABLE(macos);
+
+/*!
+ * @brief Characteristic type for router status. The value of the characteristic is one of the values defined for HMCharacteristicValueRouterStatus.
+ */
+HM_EXTERN NSString * const HMCharacteristicTypeRouterStatus API_AVAILABLE(ios(18.0), watchos(11.0), tvos(18.0), visionos(2.0)) API_UNAVAILABLE(macos);
+
+/*!
+ * @brief Characteristic type for wan status list. The value of the characteristic is TLV8 encoded data.
+ */
+HM_EXTERN NSString * const HMCharacteristicTypeWANStatusList API_AVAILABLE(ios(18.0), watchos(11.0), tvos(18.0), visionos(2.0)) API_UNAVAILABLE(macos);
+
+/*!
+ * @brief Characteristic type for Wi-Fi satellite status. The value of the characteristic is one of the values defined for HMCharacteristicValueWiFiSatelliteStatus.
+ */
+HM_EXTERN NSString * const HMCharacteristicTypeWiFiSatelliteStatus API_AVAILABLE(ios(18.0), watchos(11.0), tvos(18.0), visionos(2.0)) API_UNAVAILABLE(macos);
 
 NS_ASSUME_NONNULL_END

@@ -17,7 +17,7 @@ typedef NS_ENUM(NSInteger, UIDeviceBatteryState) {
     UIDeviceBatteryStateUnplugged,   // on battery, discharging
     UIDeviceBatteryStateCharging,    // plugged in, less than 100%
     UIDeviceBatteryStateFull,        // plugged in, at 100%
-} API_UNAVAILABLE(tvos);              // available in iPhone 3.0
+} API_UNAVAILABLE(tvos, watchos);              // available in iPhone 3.0
 
 typedef NS_ENUM(NSInteger, UIUserInterfaceIdiom) {
     UIUserInterfaceIdiomUnspecified = -1,
@@ -25,13 +25,13 @@ typedef NS_ENUM(NSInteger, UIUserInterfaceIdiom) {
     UIUserInterfaceIdiomPad API_AVAILABLE(ios(3.2)), // iPad style UI
     UIUserInterfaceIdiomTV API_AVAILABLE(ios(9.0)), // Apple TV style UI
     UIUserInterfaceIdiomCarPlay API_AVAILABLE(ios(9.0)), // CarPlay style UI
-    UIUserInterfaceIdiomMac API_AVAILABLE(ios(14.0)) = 5, // Optimized for Mac UI
-    UIUserInterfaceIdiomVision API_AVAILABLE(ios(17.0)) = 6, // Vision UI
-};
+    UIUserInterfaceIdiomMac API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos) = 5, // Optimized for Mac UI
+    UIUserInterfaceIdiomVision API_AVAILABLE(ios(17.0)) API_UNAVAILABLE(watchos) = 6, // Vision UI
+} API_UNAVAILABLE(watchos);
 
 
 
-UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(2.0)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @interface UIDevice : NSObject
 
 @property(class, nonatomic, readonly) UIDevice *currentDevice;
@@ -64,7 +64,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
 
 @end
 
-NS_SWIFT_UI_ACTOR
+API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @protocol UIInputViewAudioFeedback <NSObject>
 @optional
 
@@ -74,16 +74,16 @@ NS_SWIFT_UI_ACTOR
 
 /* The UI_USER_INTERFACE_IDIOM() function is provided for use when deploying to a version of the iOS less than 3.2. If the earliest version of iPhone/iOS that you will be deploying for is 3.2 or greater, you may use -[UIDevice userInterfaceIdiom] directly.
  */
-static inline UIUserInterfaceIdiom UI_USER_INTERFACE_IDIOM(void) API_DEPRECATED("Use -[UIDevice userInterfaceIdiom] directly.", ios(2.0, 13.0), tvos(9.0, 11.0)) API_UNAVAILABLE(visionos) {
+static inline UIUserInterfaceIdiom UI_USER_INTERFACE_IDIOM(void) API_DEPRECATED("Use -[UIDevice userInterfaceIdiom] directly.", ios(2.0, 13.0), tvos(9.0, 11.0)) API_UNAVAILABLE(visionos, watchos) {
     return ([[UIDevice currentDevice] respondsToSelector:@selector(userInterfaceIdiom)] ?
             [[UIDevice currentDevice] userInterfaceIdiom] :
             UIUserInterfaceIdiomPhone);
 }
 
-UIKIT_EXTERN NSNotificationName const UIDeviceOrientationDidChangeNotification API_UNAVAILABLE(tvos, visionos);
-UIKIT_EXTERN NSNotificationName const UIDeviceBatteryStateDidChangeNotification   API_AVAILABLE(ios(3.0)) API_UNAVAILABLE(tvos);
-UIKIT_EXTERN NSNotificationName const UIDeviceBatteryLevelDidChangeNotification   API_AVAILABLE(ios(3.0)) API_UNAVAILABLE(tvos);
-UIKIT_EXTERN NSNotificationName const UIDeviceProximityStateDidChangeNotification API_AVAILABLE(ios(3.0));
+UIKIT_EXTERN NSNotificationName const UIDeviceOrientationDidChangeNotification API_UNAVAILABLE(tvos, visionos, watchos) NS_SWIFT_NONISOLATED;
+UIKIT_EXTERN NSNotificationName const UIDeviceBatteryStateDidChangeNotification   API_AVAILABLE(ios(3.0)) API_UNAVAILABLE(tvos, watchos) NS_SWIFT_NONISOLATED;
+UIKIT_EXTERN NSNotificationName const UIDeviceBatteryLevelDidChangeNotification   API_AVAILABLE(ios(3.0)) API_UNAVAILABLE(tvos, watchos) NS_SWIFT_NONISOLATED;
+UIKIT_EXTERN NSNotificationName const UIDeviceProximityStateDidChangeNotification API_AVAILABLE(ios(3.0)) API_UNAVAILABLE(watchos) NS_SWIFT_NONISOLATED;
 
 NS_HEADER_AUDIT_END(nullability, sendability)
 

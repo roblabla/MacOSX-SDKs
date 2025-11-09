@@ -5,9 +5,12 @@ install-name:    '/System/Library/PrivateFrameworks/BackgroundSystemTasks.framew
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _BGSystemTaskCustomCheckpointMax, _BGSystemTaskCustomCheckpointMin, 
-                       _BGSystemTaskSchedulerErrorDomain ]
-    objc-classes:    [ BGNonRepeatingSystemTask, BGNonRepeatingSystemTaskRequest, 
-                       BGRepeatingSystemTask, BGRepeatingSystemTaskRequest, BGSystemTask, 
-                       BGSystemTaskCheckpoints, BGSystemTaskRequest, BGSystemTaskScheduler, 
-                       BGSystemTaskStatus, BGSystemTaskWorkload ]
+                       _BGSystemTaskSchedulerErrorDomain, __BGSTPECRateLimitConfigurationName, 
+                       _kBGSTKeyFeatureCode, _kBGSTKeyInvolvedProcesses, _kBGSTKeyPaused, 
+                       _kBGSTKeyTaskName ]
+    objc-classes:    [ BGFastPassSystemTask, BGFastPassSystemTaskRequest, BGNonRepeatingSystemTask, 
+                       BGNonRepeatingSystemTaskRequest, BGRepeatingSystemTask, BGRepeatingSystemTaskRequest, 
+                       BGSystemTask, BGSystemTaskCheckpoints, BGSystemTaskCompletionDependency, 
+                       BGSystemTaskRequest, BGSystemTaskResult, BGSystemTaskResultDependency, 
+                       BGSystemTaskScheduler, BGSystemTaskStatus, BGSystemTaskWorkload ]
 ...

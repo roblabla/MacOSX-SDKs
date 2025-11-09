@@ -30,6 +30,7 @@ typedef NS_ENUM(NSInteger, ARAppClipCodeURLDecodingState) {
  An anchor representing an app clip code in the world.
  */
 API_AVAILABLE(ios(14.3))
+NS_SWIFT_SENDABLE
 @interface ARAppClipCodeAnchor : ARAnchor AR_APPCLIPCODE_ANCHOR_PROTOCOLS
 
 
@@ -55,3 +56,4 @@ The estimated radius of the app clip code in meters.
 @end
 
 NS_ASSUME_NONNULL_END
+

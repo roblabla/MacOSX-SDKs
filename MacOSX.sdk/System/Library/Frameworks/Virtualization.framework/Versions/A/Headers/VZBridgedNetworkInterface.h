@@ -19,9 +19,9 @@ NS_ASSUME_NONNULL_BEGIN
 
     The VZBridgedNetworkInterface can be used with a VZBridgedNetworkDeviceAttachment to set up a network device VZNetworkDeviceConfiguration.
 
-    @seealso VZBridgedNetworkDeviceAttachment
-    @seealso VZNATNetworkDeviceAttachment
-    @seealso VZNetworkDeviceConfiguration
+ @seealso VZBridgedNetworkDeviceAttachment
+ @seealso VZNATNetworkDeviceAttachment
+ @seealso VZNetworkDeviceConfiguration
  */
 VZ_EXPORT API_AVAILABLE(macos(11.0))
 @interface VZBridgedNetworkInterface : NSObject

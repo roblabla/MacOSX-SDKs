@@ -1,7 +1,7 @@
 /*
         NSMenuItem.h
         Application Kit
-        Copyright (c) 1996-2023, Apple Inc.
+        Copyright (c) 1996-2024, Apple Inc.
         All rights reserved.
 */
 
@@ -45,6 +45,13 @@ APPKIT_API_UNAVAILABLE_BEGIN_MACCATALYST
 
 @property (copy) NSString *title;
 @property (nullable, copy) NSAttributedString *attributedTitle;
+
+/*!
+    @abstract       Used to specify a standard subtitle for the menu item.
+    @discussion     The subtitle is displayed below the standard title.
+    @note           On macOS 14, a menu item with an attributed title does not show the subtitle. The subtitle is shown on macOS 15 and later.
+*/
+@property (copy, nullable) NSString *subtitle API_AVAILABLE(macos(14.4));
 
 @property (getter=isSeparatorItem, readonly) BOOL separatorItem;
 

@@ -8,7 +8,8 @@ exports:
                        _SetSymbolicHotKeyValue, _SetSymbolicHotModifierValue, _closeIOCOnnection, 
                        _copyAlertCautionIconImage, _copyPerHostValueForKey, _copySymbolicHotKeyPreferences, 
                        _getHotKeyEntry, _ioSetBoolProperty, _ioSetBoolPropertyWithNotification, 
-                       _ioSetIntProperty, _ioSetIntPropertyWithNotification, _openIOCOnnection, 
+                       _ioSetIntProperty, _ioSetIntPropertyWithNotification, _kTrackpadType_AnyT101, 
+                       _kTrackpadType_AppleBluetooth, _kTrackpadType_T101, _openIOCOnnection, 
                        _perHostBooleanForKey, _perHostBooleanForKeyWithDefaultValue, 
                        _perHostIntegerForKey, _perHostIntegerForKeyWithDefaultValue, 
                        _setSwipeScrollDirection, _swipeScrollDirection ]

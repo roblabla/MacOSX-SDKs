@@ -56,7 +56,7 @@ struct material_parameters
         return material::api::base_color_tint(data);
     }
 
-    /// Returns the value of baseColor.tint.alpha set on the model's material.
+    /// Returns the value of (baseColor.tint.alpha * opacityScale) set on the model's material.
     RK_INLINE float opacity_scale() const thread
     {
         return material::api::opacity_scale(data);

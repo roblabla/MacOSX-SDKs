@@ -9,12 +9,13 @@ exports:
                        arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _RDClearCacheData, _RDForceCacheRecompute, _RDKickstartDaemon, 
                        _RDSetCacheLockState, _RDTriggerUpdateToEligibilityEngine, 
-                       _RDUpdateCountryCodeFromLocation, _RDUpdateCountryCodeFromMCC, 
-                       _RDUpdateCountryCodeFromPeer, _RDUpdateCountryCodeFromPeerData, 
-                       _RDUpdateCountryCodeFromWiFiAPs, _RDUpdateCountryCodesFromLocation, 
-                       _RDUpdateCountryCodesFromNearbyCells, _RDUpdateCountryCodesFromPeer, 
-                       _RDUpdateCountryCodesFromServingCell, _RDUpdateCountryCodesFromWiFiAPs, 
-                       _kRDPriorityNearbyCellsMCC, _kRDPriorityServingCellMCC, _kRDPrioritySingleLocation, 
-                       _kRDPriorityWiFiAP, _kRegulatoryDomainUpdateNotification ]
+                       _RDUpdateCountryCodeFromMCC, _RDUpdateCountryCodeFromPeer, 
+                       _RDUpdateCountryCodeFromPeerData, _RDUpdateCountryCodeFromPeerInfo, 
+                       _RDUpdateCountryCodeFromWiFiAPs, _RDUpdateCountryCodeInfoFromLocation, 
+                       _RDUpdateCountryCodesFromLocation, _RDUpdateCountryCodesFromNearbyCells, 
+                       _RDUpdateCountryCodesFromPeer, _RDUpdateCountryCodesFromServingCell, 
+                       _RDUpdateCountryCodesFromWiFiAPs, _kRDPriorityNearbyCellsMCC, 
+                       _kRDPriorityServingCellMCC, _kRDPrioritySingleLocation, _kRDPriorityWiFiAP, 
+                       _kRDUpdateKeyCountryCodes, _kRDUpdateKeyInDisputedArea, _kRegulatoryDomainUpdateNotification ]
     objc-classes:    [ RDCachedData, RDEstimate, RDStatusShareWrapper ]
 ...

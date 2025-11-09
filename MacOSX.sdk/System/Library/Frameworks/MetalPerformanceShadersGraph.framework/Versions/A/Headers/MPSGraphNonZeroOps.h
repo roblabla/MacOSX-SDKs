@@ -16,10 +16,10 @@ NS_ASSUME_NONNULL_BEGIN
 MPS_CLASS_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))
 @interface MPSGraph(NonZeroOps)
 
-/// Compute the indices of the non-zero elements of the input tensor. The indices are
-/// returned as a two-dimensional tensor of size `[number_of_nonzeros, input_rank]`.
-/// Each row in the result contains indices of a nonzero elements in input.
+/// Computes the indices of the non-zero elements of the input tensor. 
 ///
+/// The indices are returned as a two-dimensional tensor of size `[number_of_nonzeros, input_rank]`.
+/// Each row in the result contains indices of a nonzero elements in input.
 /// For example:
 /// ```md
 /// tensor = [[ 1,  0, 3],

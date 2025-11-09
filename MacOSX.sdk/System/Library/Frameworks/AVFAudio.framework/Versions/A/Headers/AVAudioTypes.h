@@ -69,6 +69,7 @@ typedef double AVMusicTimeStamp;
         This struct is used by classes dealing with 3D audio such as `AVAudioMixing`
         and `AVAudioEnvironmentNode` and represents a point in 3D space.
 */
+NS_SWIFT_SENDABLE
 struct AVAudio3DPoint {
     float x;
     float y;
@@ -92,6 +93,7 @@ NS_INLINE AVAudio3DPoint AVAudioMake3DPoint(float x, float y, float z) {
         This struct is used by classes dealing with 3D audio such as `AVAudioMixing`
         and `AVAudioEnvironmentNode`.
 */
+NS_SWIFT_SENDABLE
 typedef struct AVAudio3DPoint AVAudio3DVector;
 
 /*! @abstract Creates and returns an AVAudio3DVector object
@@ -111,6 +113,7 @@ NS_INLINE AVAudio3DVector AVAudioMake3DVector(float x, float y, float z) {
         vector points in the direction that the listener is facing. The up vector is orthogonal
         to the forward vector and points upwards from the listener's head.
 */
+NS_SWIFT_SENDABLE
 struct AVAudio3DVectorOrientation {
     AVAudio3DVector forward;
     AVAudio3DVector up;
@@ -148,6 +151,7 @@ NS_INLINE AVAudio3DVectorOrientation AVAudioMake3DVectorOrientation(AVAudio3DVec
         listener's head and is directed towards the listener's nose. A positive roll is to the right 
         going from 0 to 180 degrees. A negative roll is to the left going from 0 to -180 degrees.
 */
+NS_SWIFT_SENDABLE
 struct AVAudio3DAngularOrientation {
     float yaw;
     float pitch;

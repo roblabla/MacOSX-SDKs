@@ -19,6 +19,7 @@ API_AVAILABLE_BEGIN(macos(10.11), ios(8), macCatalyst(14))
 @class PHAdjustmentData, PHContentEditingInput, PHContentEditingOutput;
 
 // Protocol to which the principal view controller of the extension must conform.
+NS_SWIFT_UI_ACTOR
 @protocol PHContentEditingController <NSObject>
 @required
 

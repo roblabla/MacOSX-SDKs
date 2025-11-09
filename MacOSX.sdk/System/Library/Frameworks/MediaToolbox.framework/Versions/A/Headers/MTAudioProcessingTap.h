@@ -23,7 +23,7 @@ extern "C"
 
 typedef const struct CM_BRIDGED_TYPE(id) opaqueMTAudioProcessingTap *MTAudioProcessingTapRef CM_SWIFT_NONSENDABLE; // CFType, retain/release please
 
-MT_EXPORT CFTypeID MTAudioProcessingTapGetTypeID(void) __OSX_AVAILABLE_STARTING(__MAC_10_9,__IPHONE_6_0);
+MT_EXPORT CFTypeID MTAudioProcessingTapGetTypeID(void) API_AVAILABLE(macos(10.9), ios(6.0), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 /*!
 	@enum		MTAudioProcessingTapCreationFlags
@@ -293,7 +293,7 @@ typedef struct {
 	MTAudioProcessingTapPrepareCallback CM_NULLABLE prepare;
 	MTAudioProcessingTapUnprepareCallback CM_NULLABLE unprepare;
 	MTAudioProcessingTapProcessCallback CM_NONNULL process;
-} MTAudioProcessingTapCallbacks CM_SWIFT_NONSENDABLE;
+} MTAudioProcessingTapCallbacks API_AVAILABLE(macos(10.9), ios(6.0), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(watchos) CM_SWIFT_NONSENDABLE;
 
 /*!
 	@function	MTAudioProcessingTapCreate
@@ -323,7 +323,7 @@ MT_EXPORT OSStatus MTAudioProcessingTapCreate(
 		CFAllocatorRef CM_NULLABLE allocator,
 		const MTAudioProcessingTapCallbacks * CM_NONNULL callbacks,
 		MTAudioProcessingTapCreationFlags flags,
-		MTAudioProcessingTapRef CM_NULLABLE * CM_NONNULL tapOut) __OSX_AVAILABLE_STARTING(__MAC_10_9,__IPHONE_6_0);
+		MTAudioProcessingTapRef CM_NULLABLE * CM_NONNULL tapOut) API_AVAILABLE(macos(10.9), ios(6.0), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 /*!
 	@function	MTAudioProcessingTapGetStorage
@@ -334,7 +334,7 @@ MT_EXPORT OSStatus MTAudioProcessingTapCreate(
 
 	@result		The tapStorage returned by the init callback.
 */
-MT_EXPORT void* CM_NONNULL MTAudioProcessingTapGetStorage(CM_NONNULL MTAudioProcessingTapRef tap) __OSX_AVAILABLE_STARTING(__MAC_10_9,__IPHONE_6_0);
+MT_EXPORT void* CM_NONNULL MTAudioProcessingTapGetStorage(CM_NONNULL MTAudioProcessingTapRef tap) API_AVAILABLE(macos(10.9), ios(6.0), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 /*!
 	@function	MTAudioProcessingTapGetSourceAudio
@@ -369,7 +369,7 @@ MT_EXPORT OSStatus MTAudioProcessingTapGetSourceAudio(
 		AudioBufferList * CM_NONNULL bufferListInOut,
 		MTAudioProcessingTapFlags * CM_NULLABLE flagsOut,
 		CMTimeRange * CM_NULLABLE timeRangeOut,
-		CMItemCount * CM_NULLABLE numberFramesOut) __OSX_AVAILABLE_STARTING(__MAC_10_9,__IPHONE_6_0);
+		CMItemCount * CM_NULLABLE numberFramesOut) API_AVAILABLE(macos(10.9), ios(6.0), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 #pragma pack(pop)
 

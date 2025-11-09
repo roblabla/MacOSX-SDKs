@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class MKMapItem;
 
-API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(macos, watchos, tvos)
+API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(macos, watchos)
 @interface CPPointOfInterest : NSObject <NSSecureCoding>
 
 /**
@@ -46,7 +46,7 @@ API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(macos, watchos, tvos)
                   detailSubtitle:(nullable NSString *)detailSubtitle
                    detailSummary:(nullable NSString *)detailSummary
                         pinImage:(nullable UIImage *)pinImage
-                selectedPinImage:(nullable UIImage *)selectedPinImage NS_DESIGNATED_INITIALIZER API_AVAILABLE(ios(16.0));
+                selectedPinImage:(nullable UIImage *)selectedPinImage NS_DESIGNATED_INITIALIZER API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(tvos);
 /**
  Initializes a point of interest to be used with @c CPPointOfInterestTemplate.
 
@@ -80,12 +80,12 @@ API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(macos, watchos, tvos)
 /**
  If you provide a custom image for this point of interest, the unselected image must be this size. Any image larger than this size will be resized.
 */
-@property (nonatomic, class, readonly) CGSize pinImageSize API_AVAILABLE(ios(16.0));
+@property (nonatomic, class, readonly) CGSize pinImageSize API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(tvos);
 
 /**
   If you provide a custom image for this point of interest, the selected image must be this size. Any image larger than this size will be resized.
 */
-@property (nonatomic, class, readonly) CGSize selectedPinImageSize API_AVAILABLE(ios(16.0));
+@property (nonatomic, class, readonly) CGSize selectedPinImageSize API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(tvos);
 
 /**
  Location associated with this point of interest.
@@ -140,7 +140,7 @@ API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(macos, watchos, tvos)
  
  @discussion To properly size your pin image, your app should size them to the display scale of the car screen. See -[CPInterfaceController carTraitCollection].
  */
-@property (nonatomic, strong, nullable) UIImage *selectedPinImage API_AVAILABLE(ios(16.0));
+@property (nonatomic, strong, nullable) UIImage *selectedPinImage API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(tvos);
 
 /**
 Point of Interest detail card buttons.

@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
  @c CPListTemplateItem describes common properties of list items that can be displayed
  in a @c CPListTemplate.
  */
-API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(macos, watchos, tvos)
+API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(macos, watchos)
 @protocol CPListTemplateItem <NSObject>
 
 /**
@@ -31,7 +31,7 @@ API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(macos, watchos, tvos)
 
  @discussion Set the value of this property to @c YES to enable the button or @c NO to disable it. The default value of this property is @c YES.
  */
-@property (nonatomic, assign, getter=isEnabled) BOOL enabled API_AVAILABLE(ios(15.0));
+@property (nonatomic, assign, getter=isEnabled) BOOL enabled API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(tvos);
 
 @end
 
@@ -39,7 +39,7 @@ API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(macos, watchos, tvos)
  @c CPListSelectable describes list items that accept a list item handler, called when
  the user selects this list item.
  */
-API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(macos, watchos, tvos)
+API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(macos, watchos)
 @protocol CPSelectableListItem <CPListTemplateItem>
 
 /**

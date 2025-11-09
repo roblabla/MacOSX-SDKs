@@ -37,7 +37,7 @@ CF_IMPLICIT_BRIDGING_ENABLED
 */
 typedef struct CM_BRIDGED_TYPE(id) OpaqueVTMultiPassStorage*  VTMultiPassStorageRef CM_SWIFT_NONSENDABLE; // a CF type, call CFRetain and CFRelease
 
-VT_EXPORT CFTypeID VTMultiPassStorageGetTypeID(void) API_AVAILABLE(macosx(10.10), ios(8.0), tvos(10.2));
+VT_EXPORT CFTypeID VTMultiPassStorageGetTypeID(void) API_AVAILABLE(macos(10.10), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos);
 	
 CF_IMPLICIT_BRIDGING_DISABLED
 
@@ -63,13 +63,13 @@ VTMultiPassStorageCreate(
 	CM_NULLABLE CFURLRef							fileURL,
 	CMTimeRange										timeRange,				   /* can be kCMTimeRangeInvalid */
 	CM_NULLABLE CFDictionaryRef						options,
-	CM_RETURNS_RETAINED_PARAMETER CM_NULLABLE VTMultiPassStorageRef * CM_NONNULL multiPassStorageOut) API_AVAILABLE(macosx(10.10), ios(8.0), tvos(10.2));
+	CM_RETURNS_RETAINED_PARAMETER CM_NULLABLE VTMultiPassStorageRef * CM_NONNULL multiPassStorageOut) API_AVAILABLE(macos(10.10), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos);
 	
 CF_IMPLICIT_BRIDGING_ENABLED
 	
 CM_ASSUME_NONNULL_BEGIN
 
-VT_EXPORT const CFStringRef kVTMultiPassStorageCreationOption_DoNotDelete; // CFBoolean, false by default.  Provided for use when debugging video encoders.
+VT_EXPORT const CFStringRef kVTMultiPassStorageCreationOption_DoNotDelete API_AVAILABLE(macos(10.10), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos); // CFBoolean, false by default.  Provided for use when debugging video encoders.
 	
 CM_ASSUME_NONNULL_END
 
@@ -83,7 +83,7 @@ CM_ASSUME_NONNULL_END
 */
 VT_EXPORT OSStatus 
 VTMultiPassStorageClose(
-	CM_NONNULL VTMultiPassStorageRef	multiPassStorage ) API_AVAILABLE(macosx(10.10), ios(8.0), tvos(10.2));
+	CM_NONNULL VTMultiPassStorageRef	multiPassStorage ) API_AVAILABLE(macos(10.10), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos);
 	
 CF_IMPLICIT_BRIDGING_DISABLED
 

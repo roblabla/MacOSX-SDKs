@@ -18,27 +18,27 @@ CF_ASSUME_NONNULL_BEGIN
 /* Return the type identifier for the opaque type `CGEventRef'. */
 
 CG_EXTERN CFTypeID CGEventGetTypeID(void)
-    CG_AVAILABLE_STARTING(10.4);
+    API_AVAILABLE(macos(10.4));
 
 /* Return a new event using the event source `source'. If `source' is NULL,
    the default source is used. */
 
 CG_EXTERN CGEventRef __nullable CGEventCreate(CGEventSourceRef __nullable source)
-    CG_AVAILABLE_STARTING(10.4);
+    API_AVAILABLE(macos(10.4));
 
 /* Return a "flattened" data representation of an event. */
 
 CG_EXTERN CFDataRef __nullable CGEventCreateData(
     CFAllocatorRef __nullable allocator,
     CGEventRef __nullable event)
-    CG_AVAILABLE_STARTING(10.4);
+    API_AVAILABLE(macos(10.4));
 
 /* Return an event created from a "flattened" data representation of the
    event. */
 
 CG_EXTERN CGEventRef __nullable CGEventCreateFromData(
     CFAllocatorRef __nullable allocator, CFDataRef __nullable data)
-    CG_AVAILABLE_STARTING(10.4);
+    API_AVAILABLE(macos(10.4));
 
 /* Return a new mouse event.
 
@@ -58,7 +58,7 @@ CG_EXTERN CGEventRef __nullable CGEventCreateMouseEvent(
     CGEventSourceRef __nullable source,
     CGEventType mouseType, CGPoint mouseCursorPosition,
     CGMouseButton mouseButton)
-    CG_AVAILABLE_STARTING(10.4);
+    API_AVAILABLE(macos(10.4));
 
 /* Return a new keyboard event.
 
@@ -79,7 +79,7 @@ CG_EXTERN CGEventRef __nullable CGEventCreateMouseEvent(
 CG_EXTERN CGEventRef __nullable CGEventCreateKeyboardEvent(
     CGEventSourceRef __nullable source,
     CGKeyCode virtualKey, bool keyDown)
-    CG_AVAILABLE_STARTING(10.4);
+    API_AVAILABLE(macos(10.4));
                                                  
 /* Return a new scrollwheel event.
 
@@ -100,19 +100,19 @@ CG_EXTERN CGEventRef __nullable CGEventCreateKeyboardEvent(
 CG_EXTERN CGEventRef __nullable CGEventCreateScrollWheelEvent(
     CGEventSourceRef __nullable source,
     CGScrollEventUnit units, uint32_t wheelCount, int32_t wheel1, ...)
-    CG_AVAILABLE_STARTING(10.5);
+    API_AVAILABLE(macos(10.5));
 
 /* A non-variadic variant version of SLEventCreateScrollWheelEvent. */
 
 CG_EXTERN CGEventRef __nullable CGEventCreateScrollWheelEvent2(
     CGEventSourceRef __nullable source,
     CGScrollEventUnit units, uint32_t wheelCount, int32_t wheel1, int32_t wheel2, int32_t wheel3)
-    CG_AVAILABLE_STARTING(10.13);
+    API_AVAILABLE(macos(10.13));
 
 /* Return a copy of `event'. */
 
 CG_EXTERN CGEventRef __nullable CGEventCreateCopy(CGEventRef __nullable event)
-    CG_AVAILABLE_STARTING(10.4);
+    API_AVAILABLE(macos(10.4));
 
 /* Return an event source created from an existing event.
 
@@ -125,62 +125,62 @@ CG_EXTERN CGEventRef __nullable CGEventCreateCopy(CGEventRef __nullable event)
 
 CG_EXTERN CGEventSourceRef __nullable CGEventCreateSourceFromEvent(
     CGEventRef __nullable event)
-    CG_AVAILABLE_STARTING(10.4);
+    API_AVAILABLE(macos(10.4));
 
 /* Set the event source of an event. */
 
 CG_EXTERN void CGEventSetSource(CGEventRef __nullable event,
     CGEventSourceRef __nullable source)
-    CG_AVAILABLE_STARTING(10.4);
+    API_AVAILABLE(macos(10.4));
 
 /* Return the event type of an event (left mouse down, for example). */
 
 CG_EXTERN CGEventType CGEventGetType(CGEventRef __nullable event)
-    CG_AVAILABLE_STARTING(10.4);
+    API_AVAILABLE(macos(10.4));
 
 /* Set the event type of an event. */
 
 CG_EXTERN void CGEventSetType(CGEventRef __nullable event, CGEventType type)
-    CG_AVAILABLE_STARTING(10.4);
+    API_AVAILABLE(macos(10.4));
 
 /* Return the timestamp of an event. */
 
 CG_EXTERN CGEventTimestamp CGEventGetTimestamp(CGEventRef __nullable event)
-    CG_AVAILABLE_STARTING(10.4);
+    API_AVAILABLE(macos(10.4));
 
 /* Set the timestamp of an event. */
 
 CG_EXTERN void CGEventSetTimestamp(CGEventRef __nullable event,
     CGEventTimestamp timestamp)
-    CG_AVAILABLE_STARTING(10.4);
+    API_AVAILABLE(macos(10.4));
 
 /* Return the location of an event in global display coordinates.
    CGPointZero is returned if event is not a valid CGEventRef. */
 
 CG_EXTERN CGPoint CGEventGetLocation(CGEventRef __nullable event)
-    CG_AVAILABLE_STARTING(10.4);
+    API_AVAILABLE(macos(10.4));
 
 /* Return the location of an event relative to the lower-left corner of the
    main display. CGPointZero is returned if event is not a valid CGEventRef. */
 
 CG_EXTERN CGPoint CGEventGetUnflippedLocation(CGEventRef __nullable event)
-    CG_AVAILABLE_STARTING(10.5);
+    API_AVAILABLE(macos(10.5));
 
 /* Set the location of an event in global display coordinates. */
 
 CG_EXTERN void CGEventSetLocation(CGEventRef __nullable event, CGPoint location)
-    CG_AVAILABLE_STARTING(10.4);
+    API_AVAILABLE(macos(10.4));
 
 /* Return the event flags of an event. (CGEventFlags)0 if event is not a valid 
    CGEventRef. */
 
 CG_EXTERN CGEventFlags CGEventGetFlags(CGEventRef __nullable event)
-    CG_AVAILABLE_STARTING(10.4);
+    API_AVAILABLE(macos(10.4));
 
 /* Set the event flags of an event. */
 
 CG_EXTERN void CGEventSetFlags(CGEventRef __nullable event, CGEventFlags flags)
-    CG_AVAILABLE_STARTING(10.4);
+    API_AVAILABLE(macos(10.4));
 
 /* Return the Unicode string associated with a keyboard event.
 
@@ -191,7 +191,7 @@ CG_EXTERN void CGEventSetFlags(CGEventRef __nullable event, CGEventFlags flags)
 CG_EXTERN void CGEventKeyboardGetUnicodeString(CGEventRef __nullable event,
     UniCharCount maxStringLength, UniCharCount *__nullable actualStringLength,
     UniChar * __nullable unicodeString)
-    CG_AVAILABLE_STARTING(10.4);
+    API_AVAILABLE(macos(10.4));
 
 /* Set the Unicode string associated with a keyboard event.
 
@@ -204,13 +204,13 @@ CG_EXTERN void CGEventKeyboardGetUnicodeString(CGEventRef __nullable event,
 
 CG_EXTERN void CGEventKeyboardSetUnicodeString(CGEventRef __nullable event,
     UniCharCount stringLength, const UniChar * __nullable unicodeString)
-    CG_AVAILABLE_STARTING(10.4);
+    API_AVAILABLE(macos(10.4));
 
 /* Return the integer value of a field in an event. */
 
 CG_EXTERN int64_t CGEventGetIntegerValueField(CGEventRef __nullable event,
     CGEventField field)
-    CG_AVAILABLE_STARTING(10.4);
+    API_AVAILABLE(macos(10.4));
 
 /* Set the integer value of a field in an event.
 
@@ -225,7 +225,7 @@ CG_EXTERN int64_t CGEventGetIntegerValueField(CGEventRef __nullable event,
 
 CG_EXTERN void CGEventSetIntegerValueField(CGEventRef __nullable event,
     CGEventField field, int64_t value)
-    CG_AVAILABLE_STARTING(10.4);
+    API_AVAILABLE(macos(10.4));
 
 /* Return the floating-point value of a field in an event.
 
@@ -235,7 +235,7 @@ CG_EXTERN void CGEventSetIntegerValueField(CGEventRef __nullable event,
 
 CG_EXTERN double CGEventGetDoubleValueField(CGEventRef __nullable event,
     CGEventField field)
-    CG_AVAILABLE_STARTING(10.4);
+    API_AVAILABLE(macos(10.4));
 
 /* Set the floating-point value of a field in an event.
 
@@ -249,7 +249,7 @@ CG_EXTERN double CGEventGetDoubleValueField(CGEventRef __nullable event,
 
 CG_EXTERN void CGEventSetDoubleValueField(CGEventRef __nullable event,
     CGEventField field, double value)
-    CG_AVAILABLE_STARTING(10.4);
+    API_AVAILABLE(macos(10.4));
 
 /* Event taps.
 
@@ -297,7 +297,7 @@ CG_EXTERN CFMachPortRef __nullable CGEventTapCreate(CGEventTapLocation tap,
     CGEventTapPlacement place, CGEventTapOptions options,
     CGEventMask eventsOfInterest, CGEventTapCallBack callback,
     void * __nullable userInfo)
-    CG_AVAILABLE_STARTING(10.4);
+    API_AVAILABLE(macos(10.4));
 
 /* Create an event tap for a specified process.
 
@@ -310,12 +310,12 @@ CG_EXTERN CFMachPortRef __nullable CGEventTapCreateForPSN(
     CGEventTapPlacement place, CGEventTapOptions options,
     CGEventMask eventsOfInterest, CGEventTapCallBack callback,
     void *__nullable userInfo)
-    CG_AVAILABLE_STARTING(10.4);
+    API_AVAILABLE(macos(10.4));
 
 CG_EXTERN CFMachPortRef __nullable CGEventTapCreateForPid(pid_t pid,
   CGEventTapPlacement place, CGEventTapOptions options,
   CGEventMask eventsOfInterest, CGEventTapCallBack callback,
-  void * __nullable userInfo) CG_AVAILABLE_STARTING(10.11);
+  void * __nullable userInfo) API_AVAILABLE(macos(10.11));
 
 /* Enable or disable an event tap.
 
@@ -325,12 +325,12 @@ CG_EXTERN CFMachPortRef __nullable CGEventTapCreateForPid(pid_t pid,
    tap may be re-enabled by calling this function. */
 
 CG_EXTERN void CGEventTapEnable(CFMachPortRef  tap, bool enable)
-    CG_AVAILABLE_STARTING(10.4);
+    API_AVAILABLE(macos(10.4));
 
 /* Return true if `tap' is enabled; false otherwise. */
 
 CG_EXTERN bool CGEventTapIsEnabled(CFMachPortRef  tap)
-    CG_AVAILABLE_STARTING(10.4);
+    API_AVAILABLE(macos(10.4));
 
 /* Post an event from an event tap into the event stream.
 
@@ -342,7 +342,7 @@ CG_EXTERN bool CGEventTapIsEnabled(CFMachPortRef  tap)
 
 CG_EXTERN void CGEventTapPostEvent(CGEventTapProxy __nullable proxy,
     CGEventRef __nullable event)
-    CG_AVAILABLE_STARTING(10.4);
+    API_AVAILABLE(macos(10.4));
 
 /* Post an event into the event stream at a specified location.
 
@@ -351,7 +351,7 @@ CG_EXTERN void CGEventTapPostEvent(CGEventTapProxy __nullable proxy,
    taps. */
 
 CG_EXTERN void CGEventPost(CGEventTapLocation tap, CGEventRef __nullable event)
-    CG_AVAILABLE_STARTING(10.4);
+    API_AVAILABLE(macos(10.4));
 
 /* Post an event into the event stream for a specific application.
 
@@ -367,11 +367,11 @@ CG_EXTERN void CGEventPost(CGEventTapLocation tap, CGEventRef __nullable event)
 /* DEPRECATED; use CGEventPostToPid instead. */
 CG_EXTERN void CGEventPostToPSN(void * __nullable processSerialNumber,
     CGEventRef __nullable event)
-    CG_AVAILABLE_STARTING(10.4);
+    API_AVAILABLE(macos(10.4));
 
 CG_EXTERN void CGEventPostToPid( pid_t pid,
     CGEventRef __nullable event)
-    CG_AVAILABLE_STARTING(10.11);
+    API_AVAILABLE(macos(10.11));
 
 /* Gets a list of currently installed event taps.
 
@@ -393,19 +393,19 @@ CG_EXTERN void CGEventPostToPid( pid_t pid,
 CG_EXTERN CGError CGGetEventTapList(uint32_t maxNumberOfTaps,
     CGEventTapInformation * __nullable tapList,
     uint32_t * __nullable eventTapCount)
-    CG_AVAILABLE_STARTING(10.4);
+    API_AVAILABLE(macos(10.4));
 
 /* Checks whether the current process already has event listening access */
-CG_EXTERN bool CGPreflightListenEventAccess(void) CG_AVAILABLE_STARTING(10.15);
+CG_EXTERN bool CGPreflightListenEventAccess(void) API_AVAILABLE(macos(10.15));
 
 /* Requests event listening access if absent, potentially prompting */
-CG_EXTERN bool CGRequestListenEventAccess(void) CG_AVAILABLE_STARTING(10.15);
+CG_EXTERN bool CGRequestListenEventAccess(void) API_AVAILABLE(macos(10.15));
 
 /* Checks whether the current process already has event synthesizing access */
-CG_EXTERN bool CGPreflightPostEventAccess(void) CG_AVAILABLE_STARTING(10.15);
+CG_EXTERN bool CGPreflightPostEventAccess(void) API_AVAILABLE(macos(10.15));
 
 /* Requests event synthesizing access if absent, potentially prompting */
-CG_EXTERN bool CGRequestPostEventAccess(void) CG_AVAILABLE_STARTING(10.15);
+CG_EXTERN bool CGRequestPostEventAccess(void) API_AVAILABLE(macos(10.15));
 
 CF_ASSUME_NONNULL_END
 

@@ -2675,7 +2675,7 @@ xpc_dictionary_copy_mach_send(xpc_object_t xdict, const char *key);
  * @param handler
  * The handler with which to accept new connections.
  */
-API_AVAILABLE(macos(10.7))
+API_AVAILABLE(macos(10.7), macCatalyst(5.0))
 API_UNAVAILABLE(ios)
 XPC_EXPORT XPC_NORETURN XPC_NONNULL1
 void

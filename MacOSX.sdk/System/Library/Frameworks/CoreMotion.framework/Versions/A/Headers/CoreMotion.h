@@ -39,5 +39,6 @@
 #import <CoreMotion/CMOdometer.h>
 #import <CoreMotion/CMWaterSubmersionManager.h>
 #import <CoreMotion/CMBatchedSensorManager.h>
+#import <CoreMotion/CMHeadphoneActivityManager.h>
 
 #endif /* __COREMOTION__ */

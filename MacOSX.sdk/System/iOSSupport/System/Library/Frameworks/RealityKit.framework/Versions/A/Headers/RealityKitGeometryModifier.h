@@ -77,8 +77,35 @@ RK_API void set_uv0(float2 value, thread geometry_data_t &data);
 RK_API float2 uv1(thread geometry_data_t &data);
 RK_API void set_uv1(float2 value, thread geometry_data_t &data);
 
+RK_API float4 uv2(thread geometry_data_t &data) RK_AVAILABILITY_IOS_18 RK_AVAILABILITY_MACOS_15;
+RK_API float4 uv3(thread geometry_data_t &data) RK_AVAILABILITY_IOS_18 RK_AVAILABILITY_MACOS_15;
+RK_API float4 uv4(thread geometry_data_t &data) RK_AVAILABILITY_IOS_18 RK_AVAILABILITY_MACOS_15;
+RK_API float4 uv5(thread geometry_data_t &data) RK_AVAILABILITY_IOS_18 RK_AVAILABILITY_MACOS_15;
+RK_API float4 uv6(thread geometry_data_t &data) RK_AVAILABILITY_IOS_18 RK_AVAILABILITY_MACOS_15;
+RK_API float4 uv7(thread geometry_data_t &data) RK_AVAILABILITY_IOS_18 RK_AVAILABILITY_MACOS_15;
+
+RK_API void set_uv2(float4 value, thread geometry_data_t &data) RK_AVAILABILITY_IOS_18 RK_AVAILABILITY_MACOS_15;
+RK_API void set_uv3(float4 value, thread geometry_data_t &data) RK_AVAILABILITY_IOS_18 RK_AVAILABILITY_MACOS_15;
+RK_API void set_uv4(float4 value, thread geometry_data_t &data) RK_AVAILABILITY_IOS_18 RK_AVAILABILITY_MACOS_15;
+RK_API void set_uv5(float4 value, thread geometry_data_t &data) RK_AVAILABILITY_IOS_18 RK_AVAILABILITY_MACOS_15;
+RK_API void set_uv6(float4 value, thread geometry_data_t &data) RK_AVAILABILITY_IOS_18 RK_AVAILABILITY_MACOS_15;
+RK_API void set_uv7(float4 value, thread geometry_data_t &data) RK_AVAILABILITY_IOS_18 RK_AVAILABILITY_MACOS_15;
+
 RK_API float4 custom_attribute(thread geometry_data_t &data);
 RK_API void set_custom_attribute(float4 value, thread geometry_data_t &data);
+
+RK_API thread hover_state_t &hover_state(thread geometry_data_t &data);
+
+// Hover State
+
+RK_API float hover_intensity(thread hover_state_t &) RK_AVAILABILITY_IOS_18 RK_AVAILABILITY_MACOS_15;
+
+RK_API float3 hover_position(thread hover_state_t &) RK_AVAILABILITY_IOS_18 RK_AVAILABILITY_MACOS_15;
+
+RK_API float time_since_hover_start(thread hover_state_t &) RK_AVAILABILITY_IOS_18 RK_AVAILABILITY_MACOS_15;
+
+RK_API bool is_active(thread hover_state_t &) RK_AVAILABILITY_IOS_18 RK_AVAILABILITY_MACOS_15;
+
 }
 
 // MARK: - Uniforms
@@ -214,6 +241,35 @@ private:
     thread geometry_data_t &data;
 };
 
+// MARK: - Hover State
+
+struct hover_state
+{
+    RK_INLINE hover_state(thread hover_state_t &_data)
+    : data(_data)
+    {
+    }
+
+    RK_INLINE float hover_intensity() thread RK_AVAILABILITY_IOS_18 RK_AVAILABILITY_MACOS_15 {
+        return api::hover_intensity(data);
+    }
+
+    RK_INLINE float3 hover_position() thread RK_AVAILABILITY_IOS_18 RK_AVAILABILITY_MACOS_15 {
+        return api::hover_position(data);
+    }
+
+    RK_INLINE float time_since_hover_start() thread RK_AVAILABILITY_IOS_18 RK_AVAILABILITY_MACOS_15 {
+        return api::time_since_hover_start(data);
+    }
+
+    RK_INLINE bool is_active() thread RK_AVAILABILITY_IOS_18 RK_AVAILABILITY_MACOS_15 {
+        return api::is_active(data);
+    }
+
+private:
+    thread hover_state_t &data;
+};
+
 // MARK: - Geometry
 
 /// Geometry gives you access to values contained on each vertex within a model,
@@ -347,6 +403,78 @@ struct geometry
         geometry_modifier::api::set_uv1(value, data);
     }
 
+    /// Returns uv2 for the current vertex, if any.
+    RK_INLINE float4 uv2() const thread RK_AVAILABILITY_IOS_18 RK_AVAILABILITY_MACOS_15
+    {
+        return geometry_modifier::api::uv2(data);
+    }
+
+    /// Sets uv2 for the current vertex.
+    RK_INLINE void set_uv2(float4 value) thread RK_AVAILABILITY_IOS_18 RK_AVAILABILITY_MACOS_15
+    {
+        geometry_modifier::api::set_uv2(value, data);
+    }
+
+    /// Returns uv3 for the current vertex, if any.
+    RK_INLINE float4 uv3() const thread RK_AVAILABILITY_IOS_18 RK_AVAILABILITY_MACOS_15
+    {
+        return geometry_modifier::api::uv3(data);
+    }
+
+    /// Sets uv3 for the current vertex.
+    RK_INLINE void set_uv3(float4 value) thread RK_AVAILABILITY_IOS_18 RK_AVAILABILITY_MACOS_15
+    {
+        geometry_modifier::api::set_uv3(value, data);
+    }
+
+    /// Returns uv4 for the current vertex, if any.
+    RK_INLINE float4 uv4() const thread RK_AVAILABILITY_IOS_18 RK_AVAILABILITY_MACOS_15
+    {
+        return geometry_modifier::api::uv4(data);
+    }
+
+    /// Sets uv4 for the current vertex.
+    RK_INLINE void set_uv4(float4 value) thread RK_AVAILABILITY_IOS_18 RK_AVAILABILITY_MACOS_15
+    {
+        geometry_modifier::api::set_uv4(value, data);
+    }
+
+    /// Returns uv5 for the current vertex, if any.
+    RK_INLINE float4 uv5() const thread RK_AVAILABILITY_IOS_18 RK_AVAILABILITY_MACOS_15
+    {
+        return geometry_modifier::api::uv5(data);
+    }
+
+    /// Sets uv5 for the current vertex.
+    RK_INLINE void set_uv5(float4 value) thread RK_AVAILABILITY_IOS_18 RK_AVAILABILITY_MACOS_15
+    {
+        geometry_modifier::api::set_uv5(value, data);
+    }
+
+    /// Returns uv6 for the current vertex, if any.
+    RK_INLINE float4 uv6() const thread RK_AVAILABILITY_IOS_18 RK_AVAILABILITY_MACOS_15
+    {
+        return geometry_modifier::api::uv6(data);
+    }
+
+    /// Sets uv6 for the current vertex.
+    RK_INLINE void set_uv6(float4 value) thread RK_AVAILABILITY_IOS_18 RK_AVAILABILITY_MACOS_15
+    {
+        geometry_modifier::api::set_uv6(value, data);
+    }
+
+    /// Returns uv7 for the current vertex, if any.
+    RK_INLINE float4 uv7() const thread RK_AVAILABILITY_IOS_18 RK_AVAILABILITY_MACOS_15
+    {
+        return geometry_modifier::api::uv7(data);
+    }
+
+    /// Sets uv7 for the current vertex.
+    RK_INLINE void set_uv7(float4 value) thread RK_AVAILABILITY_IOS_18 RK_AVAILABILITY_MACOS_15
+    {
+        geometry_modifier::api::set_uv7(value, data);
+    }
+
     /// Returns any user-specified attribute on the current vertex.
     ///
     /// Defaults to `(0,0,0,0)` unless previously set via set_custom_attribute.
@@ -359,6 +487,12 @@ struct geometry
     RK_INLINE void set_custom_attribute(float4 value) thread
     {
         geometry_modifier::api::set_custom_attribute(value, data);
+    }
+
+    RK_INLINE hover_state hover_state() const thread RK_AVAILABILITY_IOS_18 RK_AVAILABILITY_MACOS_15
+
+    {
+        return geometry_modifier::api::hover_state(data);
     }
 
 private:

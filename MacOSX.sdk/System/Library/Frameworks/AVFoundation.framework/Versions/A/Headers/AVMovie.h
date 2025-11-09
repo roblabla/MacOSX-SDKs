@@ -46,14 +46,14 @@ NS_ASSUME_NONNULL_BEGIN
   @discussion
 	Some movies can contain references to media data stored outside the movie's container, for example in another file. This key can be used to specify a policy to use when these references are encountered. If a movie contains one or more references of a type that is forbidden by the reference restrictions, loading of movie properties will fail. In addition, such a movie cannot be used with other AVFoundation modules, such as AVPlayerItem or AVAssetExportSession.
 */
-AVF_EXPORT NSString *const AVMovieReferenceRestrictionsKey API_AVAILABLE(macos(10.10), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos);
+AVF_EXPORT NSString *const AVMovieReferenceRestrictionsKey API_AVAILABLE(macos(10.10), ios(13.0), watchos(6.0), visionos(1.0)) API_UNAVAILABLE(tvos);
 
 @class AVMovieInternal;
 @class AVMediaDataStorage;
 @class AVMetadataItem;
 
 #pragma mark --- AVMovie ---
-API_AVAILABLE(macos(10.10), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos)
+API_AVAILABLE(macos(10.10), ios(13.0), watchos(6.0), visionos(1.0)) API_UNAVAILABLE(tvos)
 @interface AVMovie : AVAsset <NSCopying, NSMutableCopying>
 {
 @private
@@ -106,7 +106,7 @@ API_AVAILABLE(macos(10.10), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos)
 	@discussion     You can use this method to operate on movie headers that are not stored in files; this might include movie headers on the pasteboard (which do not contain media data). In general you should avoid loading an entire movie file with its media data into an instance of NSData! By default, the defaultMediaDataStorage property will be nil and each associated AVMovieTrack's mediaDataStorage property will be nil.
                     If you want to create an AVMutableMovie from an NSData object and then append sample buffers to any of its tracks, you must first set one of these properties to indicate where the sample data should be written.
 */
-+ (instancetype)movieWithData:(NSData *)data options:(nullable NSDictionary<NSString *, id> *)options API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos);
++ (instancetype)movieWithData:(NSData *)data options:(nullable NSDictionary<NSString *, id> *)options API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0), visionos(1.0)) API_UNAVAILABLE(tvos);
 
 /*!
 	@method			initWithData:options:
@@ -120,7 +120,7 @@ API_AVAILABLE(macos(10.10), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos)
  
                     By default, the defaultMediaDataStorage property will be nil and each associated AVMovieTrack's mediaDataStorage property will be nil. If you want to create an AVMutableMovie from an NSData object and then append sample buffers to any of its tracks, you must first set one of these properties to indicate where the sample data should be written.
 */
-- (instancetype)initWithData:(NSData *)data options:(nullable NSDictionary<NSString *, id> *)options NS_DESIGNATED_INITIALIZER API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos);
+- (instancetype)initWithData:(NSData *)data options:(nullable NSDictionary<NSString *, id> *)options NS_DESIGNATED_INITIALIZER API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0), visionos(1.0)) API_UNAVAILABLE(tvos);
 
 #pragma mark --- Keys for initialization options dictionary ---
 /*!
@@ -133,7 +133,7 @@ API_AVAILABLE(macos(10.10), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos)
  
 	For more details about alias resolution, consult documentation of the bookmark-related interfaces of NSURL.
 */
-AVF_EXPORT NSString *const AVMovieShouldSupportAliasDataReferencesKey API_AVAILABLE(macos(10.12), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos);
+AVF_EXPORT NSString *const AVMovieShouldSupportAliasDataReferencesKey API_AVAILABLE(macos(10.12), ios(13.0), watchos(6.0), visionos(1.0)) API_UNAVAILABLE(tvos);
 
 /*!
 	@property       URL
@@ -145,14 +145,14 @@ AVF_EXPORT NSString *const AVMovieShouldSupportAliasDataReferencesKey API_AVAILA
 	@property       data
 	@abstract       The data block with which the instance of AVMovie was initialized; may be nil.
 */
-@property (nonatomic, readonly, nullable) NSData *data API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos);
+@property (nonatomic, readonly, nullable) NSData *data API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0), visionos(1.0)) API_UNAVAILABLE(tvos);
 
 /*!
 	@property       defaultMediaDataStorage
 	@abstract       The default storage container for media data added to a movie.
 	@discussion     The value of this property is an AVMediaDataStorage object that indicates where sample data that is added to a movie should be written by default.
 */
-@property (nonatomic, readonly, nullable) AVMediaDataStorage *defaultMediaDataStorage API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos);
+@property (nonatomic, readonly, nullable) AVMediaDataStorage *defaultMediaDataStorage API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0), visionos(1.0)) API_UNAVAILABLE(tvos);
 
 /*!
 	@property       tracks
@@ -173,7 +173,7 @@ AVF_EXPORT NSString *const AVMovieShouldSupportAliasDataReferencesKey API_AVAILA
 	@abstract       Indicates whether the movie file is extended by at least one movie fragment.
 	@discussion     The value of this property is YES if canContainMovieFragments is YES and at least one 'moof' box is present after the 'moov' box.
 */
-@property (nonatomic, readonly) BOOL containsMovieFragments API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos);
+@property (nonatomic, readonly) BOOL containsMovieFragments API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0), visionos(1.0)) API_UNAVAILABLE(tvos);
 
 @end
 
@@ -189,9 +189,9 @@ AVF_EXPORT NSString *const AVMovieShouldSupportAliasDataReferencesKey API_AVAILA
 typedef NS_OPTIONS(NSUInteger, AVMovieWritingOptions) {
 	AVMovieWritingAddMovieHeaderToDestination =					0,
 	AVMovieWritingTruncateDestinationToMovieHeaderOnly =		(1UL << 0)
-} API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos);
+} API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0), visionos(1.0)) API_UNAVAILABLE(tvos);
 
-API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos)
+API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0), visionos(1.0)) API_UNAVAILABLE(tvos)
 @interface AVMovie (AVMovieMovieHeaderSupport)
 
 /*!
@@ -204,7 +204,7 @@ API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos)
 	@result			An NSData object.
 	@discussion     The movie header will be a pure reference movie, with no base URL, suitable for use on the pasteboard.
 */
-- (nullable NSData *)movieHeaderWithFileType:(AVFileType)fileType error:(NSError * _Nullable * _Nullable)outError API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos);
+- (nullable NSData *)movieHeaderWithFileType:(AVFileType)fileType error:(NSError * _Nullable * _Nullable)outError API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0), visionos(1.0)) API_UNAVAILABLE(tvos);
 
 /*!
 	@method			writeMovieHeaderToURL:fileType:options:error:
@@ -219,7 +219,7 @@ API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos)
 					If an error occurs writing the movie header, describes the nature of the failure.
 	@discussion		Note that modifications to instances of AVMutableMovie, to their constituent AVMutableMovieTracks, or to their collections of metadata are committed to storage when their movie headers are written.
 */
-- (BOOL)writeMovieHeaderToURL:(NSURL *)URL fileType:(AVFileType)fileType options:(AVMovieWritingOptions)options error:(NSError * _Nullable * _Nullable)outError API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos);
+- (BOOL)writeMovieHeaderToURL:(NSURL *)URL fileType:(AVFileType)fileType options:(AVMovieWritingOptions)options error:(NSError * _Nullable * _Nullable)outError API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0), visionos(1.0)) API_UNAVAILABLE(tvos);
 
 /*!
 	@method			isCompatibleWithFileType:
@@ -228,11 +228,11 @@ API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos)
 					A UTI indicating a movie file format (e.g. AVFileTypeQuickTimeMovie for a QuickTime movie).
 	@discussion     This method returns a BOOL that indicates whether a movie header of the specified type can be created for the receiver. For example, this method returns NO if the movie contains tracks whose media types or media subtypes are not allowed by the specified file type.
 */
-- (BOOL)isCompatibleWithFileType:(AVFileType)fileType API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos);
+- (BOOL)isCompatibleWithFileType:(AVFileType)fileType API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0), visionos(1.0)) API_UNAVAILABLE(tvos);
 
 @end
 
-API_AVAILABLE(macos(10.10), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos)
+API_AVAILABLE(macos(10.10), ios(13.0), watchos(6.0), visionos(1.0)) API_UNAVAILABLE(tvos)
 @interface AVMovie (AVMovieTrackInspection)
 
 /*!
@@ -247,7 +247,7 @@ API_AVAILABLE(macos(10.10), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos)
 #if __swift__
 API_DEPRECATED("Use loadTrack(withTrackID:) instead", macos(10.7, 13.0), ios(4.0, 16.0), tvos(9.0, 16.0), watchos(1.0, 9.0)) API_UNAVAILABLE(visionos);
 #else
-API_DEPRECATED_WITH_REPLACEMENT("loadTrackWithTrackID:completionHandler:", macos(10.7, API_TO_BE_DEPRECATED), ios(4.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(visionos);
+API_DEPRECATED("Use loadTrackWithTrackID:completionHandler: instead", macos(10.7, 15.0), ios(4.0, 18.0), tvos(9.0, 18.0), watchos(1.0, 11.0)) API_UNAVAILABLE(visionos);
 #endif
 
 /*!
@@ -258,7 +258,7 @@ API_DEPRECATED_WITH_REPLACEMENT("loadTrackWithTrackID:completionHandler:", macos
 	@param		completionHandler
 				A block that is called when the loading is finished, with either the loaded track (which may be nil if no track of the specified trackID is available) or an error.
 */
-- (void)loadTrackWithTrackID:(CMPersistentTrackID)trackID completionHandler:(void (^)(AVMovieTrack * _Nullable_result, NSError * _Nullable))completionHandler API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0));
+- (void)loadTrackWithTrackID:(CMPersistentTrackID)trackID completionHandler:(void (^ NS_SWIFT_SENDABLE)(AVMovieTrack * _Nullable_result, NSError * _Nullable))completionHandler API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0), visionos(1.0));
 
 /*!
   @method		tracksWithMediaType:
@@ -272,7 +272,7 @@ API_DEPRECATED_WITH_REPLACEMENT("loadTrackWithTrackID:completionHandler:", macos
 #if __swift__
 API_DEPRECATED("Use loadTracks(withMediaType:) instead", macos(10.7, 13.0), ios(4.0, 16.0), tvos(9.0, 16.0), watchos(1.0, 9.0)) API_UNAVAILABLE(visionos);
 #else
-API_DEPRECATED_WITH_REPLACEMENT("loadTracksWithMediaType:completionHandler:", macos(10.7, API_TO_BE_DEPRECATED), ios(4.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(visionos);
+API_DEPRECATED("Use loadTracksWithMediaType:completionHandler: instead", macos(10.7, 15.0), ios(4.0, 18.0), tvos(9.0, 18.0), watchos(1.0, 11.0)) API_UNAVAILABLE(visionos);
 #endif
 
 /*!
@@ -283,7 +283,7 @@ API_DEPRECATED_WITH_REPLACEMENT("loadTracksWithMediaType:completionHandler:", ma
 	@param		completionHandler
 				A block that is called when the loading is finished, with either the loaded tracks (which may be empty if no tracks of the specified media type are available) or an error.
 */
-- (void)loadTracksWithMediaType:(AVMediaType)mediaType completionHandler:(void (^)(NSArray<AVMovieTrack *> * _Nullable, NSError * _Nullable))completionHandler API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0));
+- (void)loadTracksWithMediaType:(AVMediaType)mediaType completionHandler:(void (^ NS_SWIFT_SENDABLE)(NSArray<AVMovieTrack *> * _Nullable, NSError * _Nullable))completionHandler API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0), visionos(1.0));
 
 /*!
   @method		tracksWithMediaCharacteristic:
@@ -297,7 +297,7 @@ API_DEPRECATED_WITH_REPLACEMENT("loadTracksWithMediaType:completionHandler:", ma
 #if __swift__
 API_DEPRECATED("Use loadTracks(withMediaCharacteristic:) instead", macos(10.7, 13.0), ios(4.0, 16.0), tvos(9.0, 16.0), watchos(1.0, 9.0)) API_UNAVAILABLE(visionos);
 #else
-API_DEPRECATED_WITH_REPLACEMENT("loadTracksWithMediaCharacteristic:completionHandler:", macos(10.7, API_TO_BE_DEPRECATED), ios(4.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(visionos);
+API_DEPRECATED("Use loadTracksWithMediaCharacteristic:completionHandler: instead", macos(10.7, 15.0), ios(4.0, 18.0), tvos(9.0, 18.0), watchos(1.0, 11.0)) API_UNAVAILABLE(visionos);
 #endif
 
 /*!
@@ -308,7 +308,7 @@ API_DEPRECATED_WITH_REPLACEMENT("loadTracksWithMediaCharacteristic:completionHan
 	@param		completionHandler
 				A block that is called when the loading is finished, with either the loaded tracks (which may be empty if no tracks with the specified characteristic are available) or an error.
 */
-- (void)loadTracksWithMediaCharacteristic:(AVMediaCharacteristic)mediaCharacteristic completionHandler:(void (^)(NSArray<AVMovieTrack *> * _Nullable, NSError * _Nullable))completionHandler API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0));
+- (void)loadTracksWithMediaCharacteristic:(AVMediaCharacteristic)mediaCharacteristic completionHandler:(void (^ NS_SWIFT_SENDABLE)(NSArray<AVMovieTrack *> * _Nullable, NSError * _Nullable))completionHandler API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0), visionos(1.0));
 
 @end
 
@@ -327,7 +327,8 @@ API_DEPRECATED_WITH_REPLACEMENT("loadTracksWithMediaCharacteristic:completionHan
 	@discussion     By default, after creating an AVMutableMovie the defaultMediaDataStorage property will be nil and each associated AVMutableMovieTrack's mediaDataStorage property will be nil. If you want to create an AVMutableMovie from a file and then append sample buffers to any of its tracks, you must first set one of these properties to indicate where the sample data should be written.
 */
 
-API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos)
+NS_SWIFT_NONSENDABLE
+API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0), visionos(1.0)) API_UNAVAILABLE(tvos)
 @interface AVMutableMovie : AVMovie
 {
 @private
@@ -380,7 +381,7 @@ API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos)
  
                     By default, the defaultMediaDataStorage property will be nil and each associated AVMutableMovieTrack's mediaDataStorage property will be nil. If you want to create an AVMutableMovie from an NSData object and then append sample buffers to any of its tracks, you must first set one of these properties to indicate where the sample data should be written.
 */
-+ (nullable instancetype)movieWithData:(NSData *)data options:(nullable NSDictionary<NSString *, id> *)options error:(NSError * _Nullable * _Nullable)outError API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos);
++ (nullable instancetype)movieWithData:(NSData *)data options:(nullable NSDictionary<NSString *, id> *)options error:(NSError * _Nullable * _Nullable)outError API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0), visionos(1.0)) API_UNAVAILABLE(tvos);
 
 /*!
 	@method			initWithData:options:error:
@@ -467,7 +468,7 @@ API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos)
 
 @end
 
-API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos)
+API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0), visionos(1.0)) API_UNAVAILABLE(tvos)
 @interface AVMutableMovie (AVMutableMovieMovieLevelEditing)
 
 /*!
@@ -545,7 +546,7 @@ API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos)
 @end
 
 
-API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos)
+API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0), visionos(1.0)) API_UNAVAILABLE(tvos)
 @interface AVMutableMovie (AVMutableMovieTrackLevelEditing)
 
 /*!
@@ -605,7 +606,7 @@ API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos)
 @end
 
 
-API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos)
+API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0), visionos(1.0)) API_UNAVAILABLE(tvos)
 @interface AVMutableMovie (AVMutableMovieMetadataEditing)
 
 /*!
@@ -617,7 +618,7 @@ API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos)
 
 @end
 
-API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos)
+API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0), visionos(1.0)) API_UNAVAILABLE(tvos)
 @interface AVMutableMovie (AVMutableMovieTrackInspection)
 
 /*!
@@ -638,7 +639,7 @@ API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos)
 	@param		completionHandler
 				A block that is called when the loading is finished, with either the loaded track (which may be nil if no track of the specified trackID is available) or an error.
 */
-- (void)loadTrackWithTrackID:(CMPersistentTrackID)trackID completionHandler:(void (^)(AVMutableMovieTrack * _Nullable_result, NSError * _Nullable))completionHandler API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0));
+- (void)loadTrackWithTrackID:(CMPersistentTrackID)trackID completionHandler:(void (^ NS_SWIFT_SENDABLE)(AVMutableMovieTrack * _Nullable_result, NSError * _Nullable))completionHandler API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0), visionos(1.0));
 
 /*!
   @method		tracksWithMediaType:
@@ -658,7 +659,7 @@ API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos)
 	@param		completionHandler
 				A block that is called when the loading is finished, with either the loaded tracks (which may be empty if no tracks of the specified media type are available) or an error.
 */
-- (void)loadTracksWithMediaType:(AVMediaType)mediaType completionHandler:(void (^)(NSArray<AVMutableMovieTrack *> * _Nullable, NSError * _Nullable))completionHandler API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0));
+- (void)loadTracksWithMediaType:(AVMediaType)mediaType completionHandler:(void ( NS_SWIFT_SENDABLE^)(NSArray<AVMutableMovieTrack *> * _Nullable, NSError * _Nullable))completionHandler API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0), visionos(1.0));
 
 /*!
   @method		tracksWithMediaCharacteristic:
@@ -678,7 +679,7 @@ API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos)
 	@param		completionHandler
 				A block that is called when the loading is finished, with either the loaded tracks (which may be empty if no tracks with the specified characteristic are available) or an error.
 */
-- (void)loadTracksWithMediaCharacteristic:(AVMediaCharacteristic)mediaCharacteristic completionHandler:(void (^)(NSArray<AVMutableMovieTrack *> * _Nullable, NSError * _Nullable))completionHandler API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0));
+- (void)loadTracksWithMediaCharacteristic:(AVMediaCharacteristic)mediaCharacteristic completionHandler:(void (^ NS_SWIFT_SENDABLE)(NSArray<AVMutableMovieTrack *> * _Nullable, NSError * _Nullable))completionHandler API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0), visionos(1.0));
 
 @end
 
@@ -692,7 +693,7 @@ API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos)
  @discussion    Subclasses of this type that are used from Swift must fulfill the requirements of a Sendable type.
 */
 NS_SWIFT_SENDABLE
-API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos)
+API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0), visionos(1.0)) API_UNAVAILABLE(tvos)
 @interface AVMediaDataStorage : NSObject {
 @private
 	AVMediaDataStorageInternal			*_mediaDataStorageInternal;
@@ -724,29 +725,32 @@ AV_INIT_UNAVAILABLE
 	@class			AVFragmentedMovie
  
 	@abstract		A subclass of AVMovie for handling fragmented movie files. An AVFragmentedMovie is capable of changing the values of certain of its properties and those of its tracks, if it's associated with an instance of AVFragmentedMovieMinder when one or more movie fragments are appended to the movie file.
+ 
+	@discussion		Subclasses of this type that are used from Swift must fulfill the requirements of a Sendable type.
 */
 
 /*!
  @constant       AVFragmentedMovieContainsMovieFragmentsDidChangeNotification
  @abstract       Posted after the value of @"containsMovieFragments" has already been loaded and the AVFragmentedMovie is added to an AVFragmentedMovieMinder, either when 1) movie fragments are detected in the movie file on disk after it had previously contained none or when 2) no movie fragments are detected in the movie file on disk after it had previously contained one or more.
 */
-AVF_EXPORT NSString *const AVFragmentedMovieContainsMovieFragmentsDidChangeNotification API_AVAILABLE(macos(10.10), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos);
+AVF_EXPORT NSString *const AVFragmentedMovieContainsMovieFragmentsDidChangeNotification API_AVAILABLE(macos(10.10), ios(13.0), watchos(6.0), visionos(1.0)) API_UNAVAILABLE(tvos);
 
 /*!
  @constant       AVFragmentedMovieDurationDidChangeNotification
  @abstract       Posted when the duration of an AVFragmentedMovie changes while it's being minded by an AVFragmentedMovieMinder, but only for changes that occur after the status of the value of @"duration" has reached AVKeyValueStatusLoaded.
 */
-AVF_EXPORT NSString *const AVFragmentedMovieDurationDidChangeNotification API_AVAILABLE(macos(10.10), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos);
+AVF_EXPORT NSString *const AVFragmentedMovieDurationDidChangeNotification API_AVAILABLE(macos(10.10), ios(13.0), watchos(6.0), visionos(1.0)) API_UNAVAILABLE(tvos);
 
 /*!
  @constant       AVFragmentedMovieWasDefragmentedNotification
  @abstract       Posted when the movie file on disk is defragmented while an AVFragmentedMovie is being minded by an AVFragmentedMovieMinder, but only if the defragmentation occurs after the status of the value of @"canContainMovieFragments" has reached AVKeyValueStatusLoaded.
 */
-AVF_EXPORT NSString *const AVFragmentedMovieWasDefragmentedNotification API_AVAILABLE(macos(10.10), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos);
+AVF_EXPORT NSString *const AVFragmentedMovieWasDefragmentedNotification API_AVAILABLE(macos(10.10), ios(13.0), watchos(6.0), visionos(1.0)) API_UNAVAILABLE(tvos);
 
 @class AVFragmentedMovieInternal;
 
-API_AVAILABLE(macos(10.10), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos)
+NS_SWIFT_SENDABLE
+API_AVAILABLE(macos(10.10), ios(13.0), watchos(6.0), visionos(1.0)) API_UNAVAILABLE(tvos)
 @interface AVFragmentedMovie : AVMovie <AVFragmentMinding>
 {
 @private
@@ -761,7 +765,7 @@ API_AVAILABLE(macos(10.10), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos)
 
 @end
 
-API_AVAILABLE(macos(10.10), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos)
+API_AVAILABLE(macos(10.10), ios(13.0), watchos(6.0), visionos(1.0)) API_UNAVAILABLE(tvos)
 @interface AVFragmentedMovie (AVFragmentedMovieTrackInspection)
 
 /*!
@@ -776,7 +780,7 @@ API_AVAILABLE(macos(10.10), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos)
 #if __swift__
 API_DEPRECATED("Use loadTrack(withTrackID:) instead", macos(10.7, 13.0), ios(4.0, 16.0), tvos(9.0, 16.0), watchos(1.0, 9.0)) API_UNAVAILABLE(visionos);
 #else
-API_DEPRECATED_WITH_REPLACEMENT("loadTrackWithTrackID:completionHandler:", macos(10.7, API_TO_BE_DEPRECATED), ios(4.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(visionos);
+API_DEPRECATED("Use loadTrackWithTrackID:completionHandler: instead", macos(10.7, 15.0), ios(4.0, 18.0), tvos(9.0, 18.0), watchos(1.0, 11.0)) API_UNAVAILABLE(visionos);
 #endif
 
 /*!
@@ -787,7 +791,7 @@ API_DEPRECATED_WITH_REPLACEMENT("loadTrackWithTrackID:completionHandler:", macos
 	@param		completionHandler
 				A block that is called when the loading is finished, with either the loaded track (which may be nil if no track of the specified trackID is available) or an error.
 */
-- (void)loadTrackWithTrackID:(CMPersistentTrackID)trackID completionHandler:(void (^)(AVFragmentedMovieTrack * _Nullable_result, NSError * _Nullable))completionHandler API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0));
+- (void)loadTrackWithTrackID:(CMPersistentTrackID)trackID completionHandler:(void (^ NS_SWIFT_SENDABLE)(AVFragmentedMovieTrack * _Nullable_result, NSError * _Nullable))completionHandler API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0), visionos(1.0));
 
 /*!
   @method		tracksWithMediaType:
@@ -801,7 +805,7 @@ API_DEPRECATED_WITH_REPLACEMENT("loadTrackWithTrackID:completionHandler:", macos
 #if __swift__
 API_DEPRECATED("Use loadTracks(withMediaType:) instead", macos(10.7, 13.0), ios(4.0, 16.0), tvos(9.0, 16.0), watchos(1.0, 9.0)) API_UNAVAILABLE(visionos);
 #else
-API_DEPRECATED_WITH_REPLACEMENT("loadTracksWithMediaType:completionHandler:", macos(10.7, API_TO_BE_DEPRECATED), ios(4.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(visionos);
+API_DEPRECATED("Use loadTracksWithMediaType:completionHandler: instead", macos(10.7, 15.0), ios(4.0, 18.0), tvos(9.0, 18.0), watchos(1.0, 11.0)) API_UNAVAILABLE(visionos);
 #endif
 
 /*!
@@ -812,7 +816,7 @@ API_DEPRECATED_WITH_REPLACEMENT("loadTracksWithMediaType:completionHandler:", ma
 	@param		completionHandler
 				A block that is called when the loading is finished, with either the loaded tracks (which may be empty if no tracks of the specified media type are available) or an error.
 */
-- (void)loadTracksWithMediaType:(AVMediaType)mediaType completionHandler:(void (^)(NSArray<AVFragmentedMovieTrack *> * _Nullable, NSError * _Nullable))completionHandler API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0));
+- (void)loadTracksWithMediaType:(AVMediaType)mediaType completionHandler:(void (^ NS_SWIFT_SENDABLE)(NSArray<AVFragmentedMovieTrack *> * _Nullable, NSError * _Nullable))completionHandler API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0), visionos(1.0));
 
 /*!
   @method		tracksWithMediaCharacteristic:
@@ -826,7 +830,7 @@ API_DEPRECATED_WITH_REPLACEMENT("loadTracksWithMediaType:completionHandler:", ma
 #if __swift__
 API_DEPRECATED("Use loadTracks(withMediaCharacteristic:) instead", macos(10.7, 13.0), ios(4.0, 16.0), tvos(9.0, 16.0), watchos(1.0, 9.0)) API_UNAVAILABLE(visionos);
 #else
-API_DEPRECATED("loadTracksWithMediaCharacteristic:completionHandler:", macos(10.7, API_TO_BE_DEPRECATED), ios(4.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(visionos);
+API_DEPRECATED("loadTracksWithMediaCharacteristic:completionHandler:", macos(10.7, 15.0), ios(4.0, 18.0), tvos(9.0, 18.0), watchos(1.0, 11.0)) API_UNAVAILABLE(visionos);
 #endif
 
 /*!
@@ -837,7 +841,7 @@ API_DEPRECATED("loadTracksWithMediaCharacteristic:completionHandler:", macos(10.
 	@param		completionHandler
 				A block that is called when the loading is finished, with either the loaded tracks (which may be empty if no tracks with the specified characteristic are available) or an error.
 */
-- (void)loadTracksWithMediaCharacteristic:(AVMediaCharacteristic)mediaCharacteristic completionHandler:(void (^)(NSArray<AVFragmentedMovieTrack *> * _Nullable, NSError * _Nullable))completionHandler API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0));
+- (void)loadTracksWithMediaCharacteristic:(AVMediaCharacteristic)mediaCharacteristic completionHandler:(void (^ NS_SWIFT_SENDABLE)(NSArray<AVFragmentedMovieTrack *> * _Nullable, NSError * _Nullable))completionHandler API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0), visionos(1.0));
 
 @end
 
@@ -848,7 +852,7 @@ API_DEPRECATED("loadTracksWithMediaCharacteristic:completionHandler:", macos(10.
 	@discussion		AVFragmentedMovieMinder is identical to AVFragmentedAssetMinder except that it's capable of minding only assets of class AVFragmentedMovie.
 */
 NS_SWIFT_NONSENDABLE
-API_AVAILABLE(macos(10.10), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos)
+API_AVAILABLE(macos(10.10), ios(13.0), watchos(6.0), visionos(1.0)) API_UNAVAILABLE(tvos)
 @interface AVFragmentedMovieMinder : AVFragmentedAssetMinder
 
 /*!
@@ -909,7 +913,7 @@ API_AVAILABLE(macos(10.10), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos)
  @discussion
 	See AVAsset's interface for more information about these interfaces.
  */
-API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos)
+API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0), visionos(1.0)) API_UNAVAILABLE(tvos)
 @interface AVMutableMovie (SynchronousAssetInterface)
 
 - (NSArray<AVMetadataItem *> *)metadataForFormat:(AVMetadataFormat)format;
@@ -920,27 +924,27 @@ API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos)
 
 #if __swift__
 @property (nonatomic, readonly) CMTime duration;
-@property (nonatomic, readonly) CMTime minimumTimeOffsetFromLive API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0), watchos(6.0));
+@property (nonatomic, readonly) CMTime minimumTimeOffsetFromLive API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0), watchos(6.0), visionos(1.0));
 @property (nonatomic, readonly) BOOL providesPreciseDurationAndTiming;
-@property (nonatomic, readonly) NSArray<AVAssetTrackGroup *> *trackGroups API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(1.0));
-@property (nonatomic, readonly, nullable) AVMetadataItem *creationDate API_AVAILABLE(macos(10.8), ios(5.0), tvos(9.0), watchos(1.0));
+@property (nonatomic, readonly) NSArray<AVAssetTrackGroup *> *trackGroups API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(1.0), visionos(1.0));
+@property (nonatomic, readonly, nullable) AVMetadataItem *creationDate API_AVAILABLE(macos(10.8), ios(5.0), tvos(9.0), watchos(1.0), visionos(1.0));
 @property (nonatomic, readonly, nullable) NSString *lyrics;
 @property (nonatomic, readonly) NSArray<AVMetadataItem *> *commonMetadata;
 @property (nonatomic, readonly) NSArray<AVMetadataFormat> *availableMetadataFormats;
-@property (readonly) NSArray<NSLocale *> *availableChapterLocales API_AVAILABLE(macos(10.7), ios(4.3), tvos(9.0), watchos(1.0));
-@property (nonatomic, readonly) NSArray<AVMediaCharacteristic> *availableMediaCharacteristicsWithMediaSelectionOptions API_AVAILABLE(macos(10.8), ios(5.0), tvos(9.0), watchos(1.0));;
-@property (nonatomic, readonly) AVMediaSelection *preferredMediaSelection API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(2.0));
-@property (nonatomic, readonly) NSArray<AVMediaSelection *> *allMediaSelections API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0));
-@property (nonatomic, readonly) BOOL hasProtectedContent API_AVAILABLE(macos(10.7), ios(4.2), tvos(9.0)) API_UNAVAILABLE(watchos);
-@property (nonatomic, readonly) BOOL canContainFragments API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0)) API_UNAVAILABLE(watchos);
-@property (nonatomic, readonly) BOOL containsFragments API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0)) API_UNAVAILABLE(watchos);
-@property (nonatomic, readonly) CMTime overallDurationHint API_AVAILABLE(macos(10.12.2), ios(10.2), tvos(10.2), watchos(3.2));
-@property (nonatomic, readonly, getter=isPlayable) BOOL playable API_AVAILABLE(macos(10.7), ios(4.3), tvos(9.0), watchos(1.0));
-@property (nonatomic, readonly, getter=isExportable) BOOL exportable API_AVAILABLE(macos(10.7), ios(4.3), tvos(9.0)) API_UNAVAILABLE(watchos);
-@property (nonatomic, readonly, getter=isReadable) BOOL readable API_AVAILABLE(macos(10.7), ios(4.3), tvos(9.0)) API_UNAVAILABLE(watchos);
-@property (nonatomic, readonly, getter=isComposable) BOOL composable API_AVAILABLE(macos(10.7), ios(4.3), tvos(9.0), watchos(1.0));
-@property (nonatomic, readonly, getter=isCompatibleWithSavedPhotosAlbum) BOOL compatibleWithSavedPhotosAlbum API_AVAILABLE(ios(5.0), tvos(9.0)) API_UNAVAILABLE(macos, watchos);
-@property (nonatomic, readonly, getter=isCompatibleWithAirPlayVideo) BOOL compatibleWithAirPlayVideo API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0)) API_UNAVAILABLE(watchos);
+@property (readonly) NSArray<NSLocale *> *availableChapterLocales API_AVAILABLE(macos(10.7), ios(4.3), tvos(9.0), watchos(1.0), visionos(1.0));
+@property (nonatomic, readonly) NSArray<AVMediaCharacteristic> *availableMediaCharacteristicsWithMediaSelectionOptions API_AVAILABLE(macos(10.8), ios(5.0), tvos(9.0), watchos(1.0), visionos(1.0));;
+@property (nonatomic, readonly) AVMediaSelection *preferredMediaSelection API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(2.0), visionos(1.0));
+@property (nonatomic, readonly) NSArray<AVMediaSelection *> *allMediaSelections API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0), visionos(1.0));
+@property (nonatomic, readonly) BOOL hasProtectedContent API_AVAILABLE(macos(10.7), ios(4.2), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(watchos);
+@property (nonatomic, readonly) BOOL canContainFragments API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(watchos);
+@property (nonatomic, readonly) BOOL containsFragments API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(watchos);
+@property (nonatomic, readonly) CMTime overallDurationHint API_AVAILABLE(macos(10.12.2), ios(10.2), tvos(10.2), watchos(3.2), visionos(1.0));
+@property (nonatomic, readonly, getter=isPlayable) BOOL playable API_AVAILABLE(macos(10.7), ios(4.3), tvos(9.0), watchos(1.0), visionos(1.0));
+@property (nonatomic, readonly, getter=isExportable) BOOL exportable API_AVAILABLE(macos(10.7), ios(4.3), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(watchos);
+@property (nonatomic, readonly, getter=isReadable) BOOL readable API_AVAILABLE(macos(10.7), ios(4.3), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(watchos);
+@property (nonatomic, readonly, getter=isComposable) BOOL composable API_AVAILABLE(macos(10.7), ios(4.3), tvos(9.0), watchos(1.0), visionos(1.0));
+@property (nonatomic, readonly, getter=isCompatibleWithSavedPhotosAlbum) BOOL compatibleWithSavedPhotosAlbum API_AVAILABLE(ios(5.0), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(macos, watchos);
+@property (nonatomic, readonly, getter=isCompatibleWithAirPlayVideo) BOOL compatibleWithAirPlayVideo API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 #endif // __swift__
 
 @end

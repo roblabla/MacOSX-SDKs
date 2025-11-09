@@ -21,8 +21,9 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class PDFDestination, PDFOutline, PDFPage, PDFSelection, PDFDocumentPrivate;
+@class PDFDestination, PDFOutline, PDFPage, PDFSelection;
 @protocol PDFDocumentDelegate;
+typedef NS_ENUM(NSUInteger, PDFSelectionGranularity);
 
 #if defined(PDFKIT_PLATFORM_OSX)
 
@@ -128,8 +129,6 @@ typedef NS_ENUM(NSUInteger, PDFAccessPermissions) {
 PDFKIT_CLASS_AVAILABLE(10_4, 11_0)
 @interface PDFDocument : NSObject <NSCopying>
 {
-@private
-    PDFDocumentPrivate* _private;
 }
 
 // -------- init
@@ -299,6 +298,8 @@ PDFKIT_CLASS_AVAILABLE(10_4, 11_0)
 // that page. Points are in page-space and relative to their respective pages.  Start and end page can be the same 
 // (and are then equivalent to calling -[PDFPage selectionFromPoint: toPoint:]).
 - (nullable PDFSelection *)selectionFromPage:(PDFPage *)startPage atPoint:(PDFPoint)startPoint toPage:(PDFPage *)endPage atPoint:(PDFPoint)endPoint;
+
+- (nullable PDFSelection *)selectionFromPage:(PDFPage *)startPage atPoint:(PDFPoint)startPoint toPage:(PDFPage *)endPage atPoint:(PDFPoint)endPoint withGranularity:(PDFSelectionGranularity)granularity PDFKIT_AVAILABLE(15_0, 18_0);
 
 // Similar to the above method but allows you to specify a character index for the start and end pages.
 - (nullable PDFSelection *)selectionFromPage:(PDFPage *)startPage atCharacterIndex:(NSUInteger)startCharacter toPage:(PDFPage *)endPage atCharacterIndex:(NSUInteger)endCharacter;

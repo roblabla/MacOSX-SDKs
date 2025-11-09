@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 		This object is a thin wrapper for the AudioChannelLayout structure, described
 		in <CoreAudio/CoreAudioTypes.h>.
 */
-API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0))
+NS_SWIFT_SENDABLE API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0))
 @interface AVAudioChannelLayout : NSObject <NSSecureCoding> {
 @private
 	AudioChannelLayoutTag _layoutTag;

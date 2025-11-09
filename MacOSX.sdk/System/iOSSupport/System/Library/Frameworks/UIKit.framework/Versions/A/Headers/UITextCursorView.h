@@ -13,7 +13,7 @@ NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 /// @protocol   UITextCursorView
 /// @abstract   A view that displays a flashing cursor (aka "caret") view.
 /// @discussion When a selection is not ranged (or has a zero-length), a cursor view is displayed.
-UIKIT_EXTERN API_AVAILABLE(ios(17.0)) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(17.0)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @protocol UITextCursorView <UICoordinateSpace>
 
 /// Enables the blink animation. Disabled by default.

@@ -35,8 +35,8 @@ UIKIT_EXTERN API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(tvos, watchos) NS_SWIFT_UI
  * @abstract A notification that is posted when UIPointerLockState.locked changes values for a scene.
  * It contains the related UIScene in the user info dictionary of the notification.
  */
-UIKIT_EXTERN NSNotificationName const UIPointerLockStateDidChangeNotification NS_SWIFT_NAME(UIPointerLockState.didChangeNotification) API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(tvos, watchos);
-UIKIT_EXTERN NSString *const UIPointerLockStateSceneUserInfoKey NS_SWIFT_NAME(UIPointerLockState.sceneUserInfoKey)API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(tvos, watchos);
+UIKIT_EXTERN NSNotificationName const UIPointerLockStateDidChangeNotification NS_SWIFT_NAME(UIPointerLockState.didChangeNotification) API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(tvos, watchos) NS_SWIFT_NONISOLATED;
+UIKIT_EXTERN NSString *const UIPointerLockStateSceneUserInfoKey NS_SWIFT_NAME(UIPointerLockState.sceneUserInfoKey)API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(tvos, watchos) NS_SWIFT_NONISOLATED;
 
 NS_HEADER_AUDIT_END(nullability, sendability)
 

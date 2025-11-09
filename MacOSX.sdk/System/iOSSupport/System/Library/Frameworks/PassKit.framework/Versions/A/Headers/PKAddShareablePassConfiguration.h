@@ -7,31 +7,23 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <CoreGraphics/CGImage.h>
 
 #import <PassKit/PKAddSecureElementPassConfiguration.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
 API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(watchos, tvos) NS_SWIFT_NAME(PKShareablePassMetadata.Preview)
-@interface PKShareablePassMetadataPreview : NSObject
+@interface PKShareablePassMetadataPreview : PKAddPassMetadataPreview
 
-- (null_unspecified instancetype)init NS_UNAVAILABLE;
-+ (null_unspecified instancetype)new NS_UNAVAILABLE;
-
-- (instancetype)initWithPassThumbnail:(CGImageRef)passThumbnail localizedDescription:(NSString *)description;
 - (instancetype)initWithTemplateIdentifier:(NSString *)templateIdentifier;
 
-+ (PKShareablePassMetadataPreview *)previewWithPassThumbnail:(CGImageRef)passThumbnail localizedDescription:(NSString *)description;
-+ (PKShareablePassMetadataPreview *)previewWithTemplateIdentifier:(NSString *)templateIdentifier;
++ (instancetype)previewWithTemplateIdentifier:(NSString *)templateIdentifier;
 
-@property (nonatomic, assign, readonly, nullable) CGImageRef passThumbnailImage CF_RETURNS_NOT_RETAINED;
-@property (nonatomic, strong, readonly, nullable) NSString *localizedDescription;
 @property (nonatomic, strong, nullable) NSString *ownerDisplayName;
-
 @property (nonatomic, strong, readonly, nullable) NSString *provisioningTemplateIdentifier;
 
 @end
+
 
 API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos, tvos)
 @interface PKShareablePassMetadata : NSObject
@@ -84,7 +76,7 @@ API_UNAVAILABLE(watchos, tvos);
 // This is primarily used when provisioning a pass that uses an ISO18013-5 payload.
 @property (nonatomic, assign) BOOL requiresUnifiedAccessCapableDevice API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(watchos, tvos);
 
-// Identifer referencing the target server environment Apple Pay servers should reach
+// Identifier referencing the target server environment Apple Pay servers should reach
 // out to to provision this pass.
 @property (nonatomic, strong) NSString *serverEnvironmentIdentifier API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(watchos, tvos);
 
@@ -104,6 +96,7 @@ API_UNAVAILABLE(watchos, tvos);
 @property (nonatomic, strong) NSString *relyingPartyIdentifier API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(watchos, tvos);
 
 @end
+
 
 typedef NS_ENUM(NSUInteger, PKAddShareablePassConfigurationPrimaryAction) {
     PKAddShareablePassConfigurationPrimaryActionAdd,

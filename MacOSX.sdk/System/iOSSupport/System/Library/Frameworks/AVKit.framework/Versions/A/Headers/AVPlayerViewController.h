@@ -3,7 +3,7 @@
 	
 	Framework:  AVKit
 	
-	Copyright © 2013-2023 Apple Inc. All rights reserved.
+	Copyright © 2013-2024 Apple Inc. All rights reserved.
 	
 	To report bugs, go to:  http://developer.apple.com/bugreporter/
 
@@ -34,6 +34,7 @@ typedef NS_ENUM(NSInteger, AVPlayerViewControllerSkippingBehavior) {
 
 
 @class AVContentProposal;
+@class AVGroupExperienceCoordinator;
 @class AVInterstitialTimeRange;
 @class AVPlaybackSpeed;
 
@@ -104,20 +105,20 @@ API_AVAILABLE(ios(8.0), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(watchos) API_U
 	@property	allowsVideoFrameAnalysis
 	@abstract	When set to YES, the AVPlayerViewController will try to find objects, text and people while the media is paused. When an object is found, the user will be able to interact with it using long press to present a context menu. Default is YES.
 */
-@property (nonatomic) BOOL allowsVideoFrameAnalysis API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(tvos, watchos, macCatalyst, visionos);
+@property (nonatomic) BOOL allowsVideoFrameAnalysis API_AVAILABLE(ios(16.0), macCatalyst(18.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos, watchos);
 
 /*!
 	@property 	videoFrameAnalysisTypes
 	@abstract	The types of analysis AVPlayerViewController will perform on a paused video frame. The default value is AVVideoFrameAnalysisDefault.
  */
-@property (nonatomic) AVVideoFrameAnalysisType videoFrameAnalysisTypes API_AVAILABLE(ios(17.0)) API_UNAVAILABLE(tvos, watchos, macCatalyst, visionos);
+@property (nonatomic) AVVideoFrameAnalysisType videoFrameAnalysisTypes API_AVAILABLE(ios(17.0), macCatalyst(18.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos, watchos);
 
 /*!
 	@property 	toggleLookupAction
 	@abstract 	A UIAction used for enabling the visual lookup interface.
 	@discussion	Use this action to toggle visual lookup UI. This action's attributes will be set to disabled when there is no visual lookup data available or when the media is playing. Make sure to 	update your user interface to reflect this change. When the lookup UI is toggled, the state property is set to UIMenuElementStateOn; otherwise it will be set to UIMenuElementStateOff.
  */
-@property (nonatomic, readonly) UIAction *toggleLookupAction API_AVAILABLE(ios(17.0)) API_UNAVAILABLE(tvos, watchos, macCatalyst, visionos);
+@property (nonatomic, readonly) UIAction *toggleLookupAction API_AVAILABLE(ios(17.0), macCatalyst(18.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos, watchos);
 
 /*!
 	@property	canStartPictureInPictureAutomaticallyFromInline
@@ -309,6 +310,16 @@ API_AVAILABLE(ios(8.0), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(watchos) API_U
 @property (nonatomic, nullable, copy) UIImage *contextualActionsPreviewImage API_AVAILABLE(visionos(1.0)) API_UNAVAILABLE(ios, tvos, watchos, macCatalyst);
 
 
+// MARK: - Group Experiences
+
+/*!
+	@property	groupExperienceCoordinator
+	@abstract	Retrieve the group experience coordinator for this view controller.
+	@discussion	Use this property to coordinate a group experience among participating view controllers.
+ */
+@property (nonatomic, readonly) AVGroupExperienceCoordinator *groupExperienceCoordinator API_AVAILABLE(visionos(2.0)) API_UNAVAILABLE(ios, tvos, watchos, macCatalyst);
+
+
 // MARK: - Info Panel Customization
 
 /*!
@@ -378,7 +389,7 @@ API_AVAILABLE(ios(9.0), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(watchos) API_U
 	@param		coordinator
 				An object conforming to UIViewControllerTransitionCoordinator.
 	@abstract	Informs the delegate that AVPlayerViewController is about to stop displaying its contents full screen.
-	@discussion	See the discussion of -[AVPlayerViewControllerDelegatePrivate playerViewController:willBeginFullScreenPresentationWithAnimationCoordinator:].
+	@discussion	See the discussion of -[AVPlayerViewControllerDelegate playerViewController:willBeginFullScreenPresentationWithAnimationCoordinator:].
  */
 - (void)playerViewController:(AVPlayerViewController *)playerViewController willEndFullScreenPresentationWithAnimationCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator API_AVAILABLE(ios(12.0), visionos(1.0)) API_UNAVAILABLE(tvos, watchos);
 

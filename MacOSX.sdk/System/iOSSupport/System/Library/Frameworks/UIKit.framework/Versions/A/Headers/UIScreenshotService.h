@@ -15,7 +15,7 @@ NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 /*!
  @abstract This class allows your application to produce a higher fidelity, PDF screenshot to the user. Set the delegate so that when a screenshot is taken, screenshots can show the full document content from the application.
  */
-UIKIT_EXTERN API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(visionos) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(visionos, watchos) NS_SWIFT_UI_ACTOR
 @interface UIScreenshotService : NSObject
 - (instancetype)init NS_UNAVAILABLE;
 + (instancetype)new NS_UNAVAILABLE;
@@ -43,7 +43,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(visionos) @interface UIWin
 @end
 
 
-API_UNAVAILABLE(visionos) NS_SWIFT_UI_ACTOR
+API_UNAVAILABLE(visionos, watchos) NS_SWIFT_UI_ACTOR
 @protocol UIScreenshotServiceDelegate <NSObject>
 
 @optional

@@ -31,7 +31,7 @@ NS_ASSUME_NONNULL_BEGIN
 @class AVSampleCursorInternal;
 
 NS_SWIFT_SENDABLE
-API_AVAILABLE(macos(10.10), ios(16.0), tvos(16.0), watchos(9.0))
+API_AVAILABLE(macos(10.10), ios(16.0), tvos(16.0), watchos(9.0), visionos(1.0))
 @interface AVSampleCursor : NSObject <NSCopying> {
 @private
 	AVSampleCursorInternal	*_sampleCursor;
@@ -81,7 +81,7 @@ AV_INIT_UNAVAILABLE
 @end
 
 
-API_AVAILABLE(macos(10.10), ios(16.0), tvos(16.0), watchos(9.0))
+API_AVAILABLE(macos(10.10), ios(16.0), tvos(16.0), watchos(9.0), visionos(1.0))
 @interface AVSampleCursor (AVSampleCursorTemporalPosition)
 
 /*!
@@ -128,7 +128,7 @@ API_AVAILABLE(macos(10.10), ios(16.0), tvos(16.0), watchos(9.0))
 
 @end
 
-API_AVAILABLE(macos(10.10), ios(16.0), tvos(16.0), watchos(9.0))
+API_AVAILABLE(macos(10.10), ios(16.0), tvos(16.0), watchos(9.0), visionos(1.0))
 @interface AVSampleCursor (AVSampleCursorCurrentSampleInfo)
 
 /*!
@@ -201,7 +201,7 @@ typedef struct {
        @property               currentSampleDependencyAttachments
        @abstract               Provides a dictionary containing dependency related sample buffer attachments, if known.  See kCMSampleAttachmentKey_... in CoreMedia/CMSampleBuffer.h.
 */
-@property (nonatomic, readonly, nullable) NSDictionary *currentSampleDependencyAttachments API_AVAILABLE(macos(12.0), ios(16.0), tvos(16.0), watchos(9.0));
+@property (nonatomic, readonly, nullable) NSDictionary *currentSampleDependencyAttachments API_AVAILABLE(macos(12.0), ios(16.0), tvos(16.0), watchos(9.0), visionos(1.0));
 
 /*!
 	@struct		AVSampleCursorAudioDependencyInfo
@@ -224,7 +224,7 @@ typedef struct {
  				the number of steps back you have taken.  This implies that if the current sample (before this walk) is independently decodable, with an
  				audioSampleRefreshCount of zero, no walk is required.
 */
-@property (nonatomic, readonly) AVSampleCursorAudioDependencyInfo currentSampleAudioDependencyInfo API_AVAILABLE(macos(10.15), ios(16.0), tvos(16.0), watchos(9.0));
+@property (nonatomic, readonly) AVSampleCursorAudioDependencyInfo currentSampleAudioDependencyInfo API_AVAILABLE(macos(10.15), ios(16.0), tvos(16.0), watchos(9.0), visionos(1.0));
 
 /*!
 	@property		samplesRequiredForDecoderRefresh
@@ -242,11 +242,11 @@ typedef struct {
 			// in order to decode the sample at the position of mySampleCursor in full
 			
 */
-@property (nonatomic, readonly) NSInteger samplesRequiredForDecoderRefresh API_AVAILABLE(macos(10.11), ios(16.0), tvos(16.0), watchos(9.0));
+@property (nonatomic, readonly) NSInteger samplesRequiredForDecoderRefresh API_AVAILABLE(macos(10.11), ios(16.0), tvos(16.0), watchos(9.0), visionos(1.0));
 
 @end
 
-API_AVAILABLE(macos(10.10), ios(16.0), tvos(16.0), watchos(9.0))
+API_AVAILABLE(macos(10.10), ios(16.0), tvos(16.0), watchos(9.0), visionos(1.0))
 @interface AVSampleCursor (AVSampleCursorSampleStorageInfo)
 
 /*!

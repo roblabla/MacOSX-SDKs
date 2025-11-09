@@ -28,20 +28,20 @@ API_AVAILABLE_BEGIN(macos(10.12))
 typedef NS_OPTIONS(NSUInteger, PHLivePhotoBadgeOptions) {
     PHLivePhotoBadgeOptionsOverContent  = 1 << 0,               ///< Include treatments so this image can be shown directly over the content of the Live Photo
     PHLivePhotoBadgeOptionsLiveOff      = 1 << 1,               ///< To indicate that the Live Photo aspect is turned off and it will be treated as a still (e.g. for sharing)
-};
+} NS_SWIFT_SENDABLE;
 #endif
 
 typedef NS_ENUM(NSInteger, PHLivePhotoViewPlaybackStyle) {
     PHLivePhotoViewPlaybackStyleUndefined = 0,
     PHLivePhotoViewPlaybackStyleFull,
     PHLivePhotoViewPlaybackStyleHint,
-};
+} NS_SWIFT_SENDABLE;
 
 #if TARGET_OS_OSX
 typedef NS_ENUM(NSInteger, PHLivePhotoViewContentMode) {
     PHLivePhotoViewContentModeAspectFit,
     PHLivePhotoViewContentModeAspectFill,
-};
+} NS_SWIFT_SENDABLE;
 #endif
 
 OS_EXPORT
@@ -97,6 +97,7 @@ OS_EXPORT
 
 
 OS_EXPORT
+NS_SWIFT_UI_ACTOR
 @protocol PHLivePhotoViewDelegate <NSObject>
 @optional
 

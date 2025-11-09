@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/MailCore.framework/Versions/A/MailCore'
-current-version: 3774.255.62
+current-version: 3818.100.11
 allowable-clients:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     clients:         [ CoreSuggestionsTests, DebugBundle, EmailAuthenticationPlugin, 
@@ -11,8 +11,9 @@ allowable-clients:
                        MailCoreTests, MailFrameworkTests, MailMigratorPlugin, MailNotificationContentExtension, 
                        MailQuickLookExtension, MailService, MailShareExtension, MailStorageManagement, 
                        MailTests, MailUI, MailUIWebBundle, MailWebPlugIn, MessageIMAPTests, 
-                       Rot13Encryption, TestSuggestions, WebDocumentViewTestApp, 
-                       com.apple.MailServiceAgent, maild, migrationhelper ]
+                       ProactiveSummarization, Rot13Encryption, TestSuggestions, 
+                       WebDocumentViewTestApp, com.apple.MailServiceAgent, maild, 
+                       migrationhelper ]
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _DefaultsKeyUserOptedIntoAttachmentSending, _ECMessageHeaderKeyReceivedSpf, 
@@ -88,8 +89,7 @@ exports:
                        _MCProgressUserInfoKeyUserInitiated, _MCProgressUserInfoKeyUserSearching, 
                        _MCQuoteIndent, _MCQuoteLevelAttributeName, _MCSharedPreferencesDidChangeNotification, 
                        _MCSignatureAttributeName, _MCSnippetCalculationThreshold, 
-                       _MCSocketRunLoopMode, _MCSpotlightAttributeAttachmentSpecificTypes, 
-                       _MCSpotlightAttributeDateSent, _MCSpotlightAttributeIsRemoteAttachment, 
+                       _MCSocketRunLoopMode, _MCSpotlightAttributeIsRemoteAttachment, 
                        _MCStringKeyActivityCanceledStatus, _MCStringKeyAuthNotSupportedFormat, 
                        _MCStringKeyConnectingToServerFormat, _MCStringKeyConnectionRefused, 
                        _MCStringKeyConnectionRefusedDefaultPorts, _MCStringKeyConnectionTimedOut, 

@@ -52,7 +52,7 @@ CF_ASSUME_NONNULL_BEGIN
    kCGColorSpaceGenericGray. */
 
 CG_EXTERN const CFStringRef kCGColorSpaceGenericGray
-  CG_AVAILABLE_STARTING(10.4, 9.0);
+  API_AVAILABLE(macos(10.4), ios(9.0));
 
 /* The name of the "Generic" RGB color space. It is a legacy
    color space so use it only if you definitely know that you
@@ -61,28 +61,28 @@ CG_EXTERN const CFStringRef kCGColorSpaceGenericGray
    instead of kCGColorSpaceGenericRGB. */
 
 CG_EXTERN const CFStringRef kCGColorSpaceGenericRGB
-  CG_AVAILABLE_STARTING(10.4, 9.0);
+  API_AVAILABLE(macos(10.4), ios(9.0));
 
 /* The name of the "Generic" CMYK color space. */
 
 CG_EXTERN const CFStringRef kCGColorSpaceGenericCMYK
-  CG_AVAILABLE_STARTING(10.4, 9.0);
+  API_AVAILABLE(macos(10.4), ios(9.0));
   
 CG_EXTERN const CFStringRef kCGColorSpaceDisplayP3
-  CG_AVAILABLE_STARTING(10.11.2, 9.3);
+  API_AVAILABLE(macos(10.11.2), ios(9.3));
 
 /* The name of the "Generic" linear RGB color space. This is the same as
    `kCGColorSpaceGenericRGB' but with a 1.0 gamma. */
 
 CG_EXTERN const CFStringRef kCGColorSpaceGenericRGBLinear
-  CG_AVAILABLE_STARTING(10.5, 9.0);
+  API_AVAILABLE(macos(10.5), ios(9.0));
 
 /* The name of the Adobe RGB (1998) color space. For more information, see
   "Adobe RGB (1998) Color Image Encoding", Version 2005-05, Adobe Systems
   Inc. (http://www.adobe.com). */
 
 CG_EXTERN const CFStringRef kCGColorSpaceAdobeRGB1998
-  CG_AVAILABLE_STARTING(10.5, 9.0);
+  API_AVAILABLE(macos(10.5), ios(9.0));
 
 /* The name of the sRGB color space. The capitalization in the name, while
    strictly inaccurate, avoids interpretational ambiguity. For more
@@ -91,15 +91,15 @@ CG_EXTERN const CFStringRef kCGColorSpaceAdobeRGB1998
    management - Default RGB colour space - sRGB". */
 
 CG_EXTERN const CFStringRef kCGColorSpaceSRGB
-  CG_AVAILABLE_STARTING(10.5, 9.0);
+  API_AVAILABLE(macos(10.5), ios(9.0));
 
 /* The "Generic" gray color space with γ = 2.2. */
 
 CG_EXTERN const CFStringRef kCGColorSpaceGenericGrayGamma2_2
-  CG_AVAILABLE_STARTING(10.6, 9.0);
+  API_AVAILABLE(macos(10.6), ios(9.0));
 
 CG_EXTERN const CFStringRef kCGColorSpaceGenericXYZ
-  CG_AVAILABLE_STARTING(10.11, 9.0);
+  API_AVAILABLE(macos(10.11), ios(9.0));
 
 /* The name of the "Generic" L*a*b* color space. This is the same as
  L*a*b* colorspace created by `CGColorSpaceCreateLab' with
@@ -107,73 +107,73 @@ CG_EXTERN const CFStringRef kCGColorSpaceGenericXYZ
  and range [-128, 128, -128, 128]. */
 
 CG_EXTERN const CFStringRef kCGColorSpaceGenericLab
-CG_AVAILABLE_STARTING(10.13, 11.0);
+API_AVAILABLE(macos(10.13), ios(11.0));
 
 CG_EXTERN const CFStringRef kCGColorSpaceACESCGLinear
-CG_AVAILABLE_STARTING(10.11, 9.0);
+API_AVAILABLE(macos(10.11), ios(9.0));
 
 CG_EXTERN const CFStringRef kCGColorSpaceITUR_709
-CG_AVAILABLE_STARTING(10.11, 9.0);
+API_AVAILABLE(macos(10.11), ios(9.0));
 
 CG_EXTERN const CFStringRef kCGColorSpaceITUR_709_PQ
-CG_AVAILABLE_STARTING(12.0, 15.1);
+API_AVAILABLE(macos(12.0), ios(15.1));
 
 CG_EXTERN const CFStringRef kCGColorSpaceITUR_709_HLG
-CG_AVAILABLE_STARTING(12.0, 15.1);
+API_AVAILABLE(macos(12.0), ios(15.1));
 
 CG_EXTERN const CFStringRef kCGColorSpaceITUR_2020
-CG_AVAILABLE_STARTING(10.11, 9.0);
+API_AVAILABLE(macos(10.11), ios(9.0));
 
 CG_EXTERN const CFStringRef kCGColorSpaceITUR_2020_sRGBGamma
-CG_AVAILABLE_STARTING(12.0, 15.1);
+API_AVAILABLE(macos(12.0), ios(15.1));
 
 CG_EXTERN const CFStringRef kCGColorSpaceROMMRGB
-CG_AVAILABLE_STARTING(10.11, 9.0);
+API_AVAILABLE(macos(10.11), ios(9.0));
 
 CG_EXTERN const CFStringRef kCGColorSpaceDCIP3
-CG_AVAILABLE_STARTING(10.11, 9.0);
+API_AVAILABLE(macos(10.11), ios(9.0));
 
 CG_EXTERN const CFStringRef kCGColorSpaceLinearITUR_2020
-CG_AVAILABLE_STARTING(12.0, 15.0);
+API_AVAILABLE(macos(12.0), ios(15.0));
 
 CG_EXTERN const CFStringRef kCGColorSpaceExtendedITUR_2020
-CG_AVAILABLE_STARTING(11.0, 14.0);
+API_AVAILABLE(macos(11.0), ios(14.0));
 
 CG_EXTERN const CFStringRef kCGColorSpaceExtendedLinearITUR_2020
-CG_AVAILABLE_STARTING(10.14.3, 12.3);
+API_AVAILABLE(macos(10.14.3), ios(12.3));
 
 CG_EXTERN const CFStringRef kCGColorSpaceLinearDisplayP3
-CG_AVAILABLE_STARTING(12.0, 15.0);
+API_AVAILABLE(macos(12.0), ios(15.0));
 
 CG_EXTERN const CFStringRef kCGColorSpaceExtendedDisplayP3
-CG_AVAILABLE_STARTING(11.0, 14.0);
+API_AVAILABLE(macos(11.0), ios(14.0));
 
 CG_EXTERN const CFStringRef kCGColorSpaceExtendedLinearDisplayP3
-CG_AVAILABLE_STARTING(10.14.3, 12.3);
+API_AVAILABLE(macos(10.14.3), ios(12.3));
 
 CG_EXTERN const CFStringRef kCGColorSpaceITUR_2100_PQ
-CG_AVAILABLE_STARTING(11.0, 14.0);
+API_AVAILABLE(macos(11.0), ios(14.0));
 
 CG_EXTERN const CFStringRef kCGColorSpaceITUR_2100_HLG
-CG_AVAILABLE_STARTING(11.0, 14.0);
+API_AVAILABLE(macos(11.0), ios(14.0));
 
 CG_EXTERN const CFStringRef kCGColorSpaceDisplayP3_PQ
-CG_AVAILABLE_STARTING(10.15.4, 13.4);
+API_AVAILABLE(macos(10.15.4), ios(13.4));
 
 CG_EXTERN const CFStringRef kCGColorSpaceDisplayP3_HLG
-CG_AVAILABLE_STARTING(10.14.6, 12.6);
+API_AVAILABLE(macos(10.14.6), ios(12.6));
 
 CG_EXTERN const CFStringRef kCGColorSpaceITUR_2020_PQ
-CG_AVAILABLE_BUT_DEPRECATED(10.15.4, 11.0, 13.4, 14.0);   // Use kCGColorSpaceITUR_2100_PQ.
+API_DEPRECATED("No longer supported", macos(10.15.4,11.0), ios(13.4,14.0));   // Use kCGColorSpaceITUR_2100_PQ.
 
 CG_EXTERN const CFStringRef kCGColorSpaceITUR_2020_HLG
-CG_AVAILABLE_BUT_DEPRECATED(10.15.6, 11.0, 12.6, 14.0);   // Use kCGColorSpaceITUR_2100_HLG.
+API_DEPRECATED("No longer supported", macos(10.15.6,11.0), ios(12.6,14.0));   // Use kCGColorSpaceITUR_2100_HLG.
 
 CG_EXTERN const CFStringRef kCGColorSpaceDisplayP3_PQ_EOTF
-CG_AVAILABLE_BUT_DEPRECATED(10.14.6, 10.15.4, 12.6, 13.4);
+API_DEPRECATED("No longer supported", macos(10.14.6,10.15.4), ios(12.6,13.4));
 
 CG_EXTERN const CFStringRef kCGColorSpaceITUR_2020_PQ_EOTF
-CG_AVAILABLE_BUT_DEPRECATED(10.14.6, 10.15.4, 12.6, 13.4); // Use kCGColorSpaceITUR_2100_PQ.
+API_DEPRECATED("No longer supported", macos(10.14.6,10.15.4), ios(12.6,13.4)); // Use kCGColorSpaceITUR_2100_PQ.
 
 /*  The name of the extended sRGB color space.
     The extended sRGB color space allows to specify colors beyond the range of [0.0, 1.0],
@@ -183,49 +183,52 @@ CG_AVAILABLE_BUT_DEPRECATED(10.14.6, 10.15.4, 12.6, 13.4); // Use kCGColorSpaceI
     The capitalization in the name is for avoiding interpretational ambiguity.  */
 
 CG_EXTERN const CFStringRef kCGColorSpaceExtendedSRGB
-CG_AVAILABLE_STARTING(10.12, 10.0);
+API_AVAILABLE(macos(10.12), ios(10.0));
 
 /*  The name of the sRGB color space variant with linear gamma */
 
 CG_EXTERN const CFStringRef kCGColorSpaceLinearSRGB
-CG_AVAILABLE_STARTING(10.12, 10.0);
+API_AVAILABLE(macos(10.12), ios(10.0));
 
 /*  The name of the extended sRGB color space variant with linear gamma */
 
 CG_EXTERN const CFStringRef kCGColorSpaceExtendedLinearSRGB
-CG_AVAILABLE_STARTING(10.12, 10.0);
+API_AVAILABLE(macos(10.12), ios(10.0));
 
 /*  The name of the extended Gray color space. This color space has the same colorimetry as Generic Gray 2.2.
     The negative values will be encoded as the signed reflection of original encoding functions,
     i.e. y(x) = sign(x)*f(abs(x)) where f(x) represents the encoding function. */
 
 CG_EXTERN const CFStringRef kCGColorSpaceExtendedGray
-CG_AVAILABLE_STARTING(10.12, 10.0);
+API_AVAILABLE(macos(10.12), ios(10.0));
 
 /*  The name of the Generic Gray 2.2 color space variant with linear gamma */
 
 CG_EXTERN const CFStringRef kCGColorSpaceLinearGray
-CG_AVAILABLE_STARTING(10.12, 10.0);
+API_AVAILABLE(macos(10.12), ios(10.0));
 
 /*  The name of the extended Generic Gray 2.2 color space variant with linear gamma */
 
 CG_EXTERN const CFStringRef kCGColorSpaceExtendedLinearGray
-CG_AVAILABLE_STARTING(10.12, 10.0);
+API_AVAILABLE(macos(10.12), ios(10.0));
+
+CG_EXTERN const CFStringRef kCGColorSpaceCoreMedia709
+API_AVAILABLE(macos(15.0), ios(18.0));
 
 /* Create a DeviceGray color space. */
 
 CG_EXTERN CGColorSpaceRef cg_nullable CGColorSpaceCreateDeviceGray(void)
-  CG_AVAILABLE_STARTING(10.0, 2.0);
+  API_AVAILABLE(macos(10.0), ios(2.0));
 
 /* Create a DeviceRGB color space. */
 
 CG_EXTERN CGColorSpaceRef cg_nullable CGColorSpaceCreateDeviceRGB(void)
-  CG_AVAILABLE_STARTING(10.0, 2.0);
+  API_AVAILABLE(macos(10.0), ios(2.0));
 
 /* Create a DeviceCMYK color space. */
 
 CG_EXTERN CGColorSpaceRef cg_nullable CGColorSpaceCreateDeviceCMYK(void)
-  CG_AVAILABLE_STARTING(10.0, 2.0);
+  API_AVAILABLE(macos(10.0), ios(2.0));
 
 /* Create a calibrated gray color space. `whitePoint' is an array of 3
    numbers specifying the tristimulus value, in the CIE 1931 XYZ-space, of
@@ -237,7 +240,7 @@ CG_EXTERN CGColorSpaceRef cg_nullable CGColorSpaceCreateDeviceCMYK(void)
 
 CG_EXTERN CGColorSpaceRef __nullable CGColorSpaceCreateCalibratedGray(const CGFloat
   whitePoint[CG_NONNULL_ARRAY 3], const CGFloat blackPoint[__nullable 3], CGFloat gamma)
-  CG_AVAILABLE_STARTING(10.0, 2.0);
+  API_AVAILABLE(macos(10.0), ios(2.0));
 
 /* Create a calibrated RGB color space. `whitePoint' is an array of 3
    numbers specifying the tristimulus value, in the CIE 1931 XYZ-space, of
@@ -254,7 +257,7 @@ CG_EXTERN CGColorSpaceRef __nullable CGColorSpaceCreateCalibratedGray(const CGFl
 CG_EXTERN CGColorSpaceRef __nullable CGColorSpaceCreateCalibratedRGB(const CGFloat
   whitePoint[CG_NONNULL_ARRAY 3], const CGFloat blackPoint[__nullable 3],
   const CGFloat gamma[__nullable 3], const CGFloat matrix[__nullable 9])
-  CG_AVAILABLE_STARTING(10.0, 2.0);
+  API_AVAILABLE(macos(10.0), ios(2.0));
     
 /* Create an L*a*b* color space. `whitePoint' is an array of 3 numbers
    specifying the tristimulus value, in the CIE 1931 XYZ-space, of the
@@ -267,13 +270,13 @@ CG_EXTERN CGColorSpaceRef __nullable CGColorSpaceCreateCalibratedRGB(const CGFlo
 
 CG_EXTERN CGColorSpaceRef __nullable CGColorSpaceCreateLab(const CGFloat whitePoint[CG_NONNULL_ARRAY 3],
   const CGFloat blackPoint[__nullable 3], const CGFloat range[__nullable 4])
-  CG_AVAILABLE_STARTING(10.0, 2.0);
+  API_AVAILABLE(macos(10.0), ios(2.0));
 
 /* Create an ICC-based color space using the ICC profile raw data specified by
    `data' which can be either CFDataRef or CGDataProviderRef */
 
 CG_EXTERN CGColorSpaceRef __nullable CGColorSpaceCreateWithICCData(CFTypeRef cg_nullable data)
-  CG_AVAILABLE_STARTING(10.12, 10.0);
+  API_AVAILABLE(macos(10.12), ios(10.0));
 
 /* Create an ICC-based color space. `nComponents' specifies the number of
    color components in the color space defined by the ICC profile data. This
@@ -291,7 +294,7 @@ CG_EXTERN CGColorSpaceRef __nullable CGColorSpaceCreateWithICCData(CFTypeRef cg_
 CG_EXTERN CGColorSpaceRef __nullable CGColorSpaceCreateICCBased(size_t nComponents,
   const CGFloat * __nullable range, CGDataProviderRef cg_nullable profile,
   CGColorSpaceRef __nullable alternate)
-  CG_AVAILABLE_STARTING(10.0, 2.0);
+  API_AVAILABLE(macos(10.0), ios(2.0));
 
 /* Create an indexed color space. A sample value in an indexed color space
    is treated as an index into the color table of the color space. `base'
@@ -305,7 +308,7 @@ CG_EXTERN CGColorSpaceRef __nullable CGColorSpaceCreateICCBased(size_t nComponen
 
 CG_EXTERN CGColorSpaceRef __nullable CGColorSpaceCreateIndexed(CGColorSpaceRef cg_nullable baseSpace,
   size_t lastIndex, const unsigned char * cg_nullable colorTable)
-  CG_AVAILABLE_STARTING(10.0, 2.0);
+  API_AVAILABLE(macos(10.0), ios(2.0));
 
 /* Create a pattern color space. `baseSpace' is the underlying color space
    of the pattern color space. For colored patterns, `baseSpace' should be
@@ -313,7 +316,7 @@ CG_EXTERN CGColorSpaceRef __nullable CGColorSpaceCreateIndexed(CGColorSpaceRef c
    colors which will be painted through the pattern. */
 
 CG_EXTERN CGColorSpaceRef __nullable CGColorSpaceCreatePattern(CGColorSpaceRef __nullable baseSpace)
-  CG_AVAILABLE_STARTING(10.0, 2.0);
+  API_AVAILABLE(macos(10.0), ios(2.0));
 
 typedef const struct CF_BRIDGED_TYPE(id) ColorSyncProfile* ColorSyncProfileRef;
 
@@ -324,25 +327,25 @@ CG_EXTERN const CFStringRef kCGColorSpaceExtendedRange;
    key/value pair in `options' dictionary. */
 
 CG_EXTERN CGColorSpaceRef __nullable CGColorSpaceCreateWithColorSyncProfile(ColorSyncProfileRef __nullable, CFDictionaryRef __nullable options)
-CG_AVAILABLE_STARTING(12.0, 15.0);
+API_AVAILABLE(macos(12.0), ios(15.0));
 
 /* Create a color space using `name' as the identifier for the color
    space. */
 
 CG_EXTERN CGColorSpaceRef __nullable CGColorSpaceCreateWithName(CFStringRef cg_nullable name)
-  CG_AVAILABLE_STARTING(10.2, 2.0);
+  API_AVAILABLE(macos(10.2), ios(2.0));
 
 /* Equivalent to `CFRetain(space)', except it doesn't crash (as CFRetain
    does) if `space' is NULL. */
 
 CG_EXTERN CGColorSpaceRef cg_nullable CGColorSpaceRetain(CGColorSpaceRef cg_nullable space)
-  CG_AVAILABLE_STARTING(10.0, 2.0);
+  API_AVAILABLE(macos(10.0), ios(2.0));
 
 /* Equivalent to `CFRelease(space)', except it doesn't crash (as CFRelease
    does) if `space' is NULL. */
 
-CG_EXTERN void CGColorSpaceRelease(CGColorSpaceRef cg_nullable space)
-  CG_AVAILABLE_STARTING(10.0, 2.0);
+CG_EXTERN void CGColorSpaceRelease(CGColorSpaceRef cg_nullable CF_RELEASES_ARGUMENT space)
+  API_AVAILABLE(macos(10.0), ios(2.0));
 
 /* Return the system name of the color space. This applies to all color spaces
    created using `CGColorSpaceCreateWithName' as well as to ICC-based colorspaces
@@ -359,40 +362,50 @@ CG_EXTERN void CGColorSpaceRelease(CGColorSpaceRef cg_nullable space)
  */
 
 CG_EXTERN CFStringRef __nullable CGColorSpaceGetName(CGColorSpaceRef cg_nullable space)
-  CG_AVAILABLE_STARTING(10.13, 11.0);
+  API_AVAILABLE(macos(10.13), ios(11.0));
 
 /* Same as `CGColorSpaceGetName' but with ownership released to the caller. */
 CG_EXTERN CFStringRef __nullable CGColorSpaceCopyName(CGColorSpaceRef cg_nullable space)
-  CG_AVAILABLE_STARTING(10.6, 10.0);
+  API_AVAILABLE(macos(10.6), ios(10.0));
 
 /* Return the CFTypeID for CGColorSpaces. */
 
 CG_EXTERN CFTypeID CGColorSpaceGetTypeID(void)
-  CG_AVAILABLE_STARTING(10.2, 2.0);
+  API_AVAILABLE(macos(10.2), ios(2.0));
 
 /* Return the number of color components in the color space `space'. */
 
 CG_EXTERN size_t CGColorSpaceGetNumberOfComponents(CGColorSpaceRef cg_nullable space)
-  CG_AVAILABLE_STARTING(10.0, 2.0);
+  API_AVAILABLE(macos(10.0), ios(2.0));
 
 /* Return the color space model of `space'. */
 
 CG_EXTERN CGColorSpaceModel CGColorSpaceGetModel(CGColorSpaceRef cg_nullable space)
-  CG_AVAILABLE_STARTING(10.5, 2.0);
+  API_AVAILABLE(macos(10.5), ios(2.0));
 
 /* Return the base color space of `space' if `space' is a pattern or indexed
    color space; otherwise, return NULL. To determine whether a color space
    is an indexed or pattern color space, use `CGColorSpaceGetModel'. */
 
 CG_EXTERN CGColorSpaceRef __nullable CGColorSpaceGetBaseColorSpace(CGColorSpaceRef cg_nullable space)
-  CG_AVAILABLE_STARTING(10.5, 2.0);
+  API_AVAILABLE(macos(10.5), ios(2.0));
+
+/* Similar to 'CGColorSpaceGetBaseColorSpace' if `space' is a pattern or indexed
+   color space, in which case the retained base color space is returned.
+   In the case of a color space containing image specific metadata associated with
+   the gain map, a new color space without the metadata will be returned.
+   For all other color spaces this function will return NULL.
+*/
+
+CG_EXTERN CGColorSpaceRef CGColorSpaceCopyBaseColorSpace(CGColorSpaceRef space)
+API_AVAILABLE(macos(15.0), ios(18.0), tvos(18.0), watchos(11.0));
 
 /* Return the number of entries in the color table of `space' if `space' is
    an indexed color space; otherwise, return 0. To determine whether a color
    space is an indexed color space, use `CGColorSpaceGetModel'. */
 
 CG_EXTERN size_t CGColorSpaceGetColorTableCount(CGColorSpaceRef cg_nullable space)
-  CG_AVAILABLE_STARTING(10.5, 2.0);
+  API_AVAILABLE(macos(10.5), ios(2.0));
 
 /* Copy the entries in the color table of `space' to `table' if `space' is
    an indexed color space; otherwise, do nothing. The array pointed to by
@@ -402,92 +415,92 @@ CG_EXTERN size_t CGColorSpaceGetColorTableCount(CGColorSpaceRef cg_nullable spac
    indexed color space, use `CGColorSpaceGetModel'. */
 
 CG_EXTERN void CGColorSpaceGetColorTable(CGColorSpaceRef cg_nullable space,
-  uint8_t * cg_nullable table) CG_AVAILABLE_STARTING(10.5, 2.0);
+  uint8_t * cg_nullable table) API_AVAILABLE(macos(10.5), ios(2.0));
 
 /* Return a copy of the ICC profile data of `space', or NULL if the color space
    doesn't have an ICC profile. */
 
 CG_EXTERN CFDataRef __nullable CGColorSpaceCopyICCData(CGColorSpaceRef cg_nullable space)
-CG_AVAILABLE_STARTING(10.12, 10.0);
+API_AVAILABLE(macos(10.12), ios(10.0));
 
 /* Return true if gamut of the RGB color space is greater than 85% of NTSC gamut */
 
 CG_EXTERN bool CGColorSpaceIsWideGamutRGB(CGColorSpaceRef)
-CG_AVAILABLE_STARTING(10.12, 10.0);
+API_AVAILABLE(macos(10.12), ios(10.0));
 
 /* Return true if color space uses transfer functions defined in ITU Rec.2100
    Please use CGColorSpaceUsesITUR_2100TF instead */
 
 CG_EXTERN bool CGColorSpaceIsHDR(CGColorSpaceRef)
-CG_AVAILABLE_BUT_DEPRECATED(10.15, 10.15.4, 13.0, 13.4);
+API_AVAILABLE(macos(10.15), ios(13.0));
 
 /* Return true if color space uses transfer functions defined in ITU Rec.2100 */
 
 CG_EXTERN bool CGColorSpaceUsesITUR_2100TF(CGColorSpaceRef)
-CG_AVAILABLE_STARTING(11.0, 14.0);
+API_AVAILABLE(macos(11.0), ios(14.0));
 
 CG_EXTERN bool CGColorSpaceIsPQBased(CGColorSpaceRef s)
-CG_AVAILABLE_STARTING(12.0, 15.0);
+API_AVAILABLE(macos(12.0), ios(15.0));
 
 CG_EXTERN bool CGColorSpaceIsHLGBased(CGColorSpaceRef s)
-CG_AVAILABLE_STARTING(12.0, 15.0);
+API_AVAILABLE(macos(12.0), ios(15.0));
 
 
 /* Return true if `space' can be used as a destination color space; false
  otherwise. */
 
 CG_EXTERN bool CGColorSpaceSupportsOutput(CGColorSpaceRef space)
-CG_AVAILABLE_STARTING(10.12, 10.0);
+API_AVAILABLE(macos(10.12), ios(10.0));
 
 /*  CGColorSpaceCopyPropertyList will return NULL for special color spaces
     (e.g. kCGColorSpaceDeviceN or kCGColorSpacePattern), except Indexed Color Space */
 CG_EXTERN CFPropertyListRef __nullable
 CGColorSpaceCopyPropertyList(CGColorSpaceRef space)
-CG_AVAILABLE_STARTING(10.12, 10.0);
+API_AVAILABLE(macos(10.12), ios(10.0));
 
 CG_EXTERN CGColorSpaceRef __nullable
 CGColorSpaceCreateWithPropertyList(CFPropertyListRef plist)
-CG_AVAILABLE_STARTING(10.12, 10.0);
+API_AVAILABLE(macos(10.12), ios(10.0));
 
 /* Return true if `space' uses extended range [-Inf, +Inf]; false
  otherwise. */
 
 CG_EXTERN bool CGColorSpaceUsesExtendedRange(CGColorSpaceRef space)
-CG_AVAILABLE_STARTING(10.12, 10.0);
+API_AVAILABLE(macos(10.12), ios(10.0));
 
 /* Create a linearized copy of the color space if the color space is matrix based.
    Return NULL if otherwise */
 CG_EXTERN CGColorSpaceRef  __nullable CGColorSpaceCreateLinearized(CGColorSpaceRef space)
-CG_AVAILABLE_STARTING(11.0, 14.0);
+API_AVAILABLE(macos(11.0), ios(14.0));
 
 /* Create a copy of the color space which uses extended range [-Inf, +Inf] if the color space is
    matrix based. Return NULL if otherwise */
 CG_EXTERN CGColorSpaceRef  __nullable CGColorSpaceCreateExtended(CGColorSpaceRef space)
-CG_AVAILABLE_STARTING(11.0, 14.0);
+API_AVAILABLE(macos(11.0), ios(14.0));
 
 /* Create a linearized copy of the color space which uses extended range [-Inf, +Inf]
    if the color space is matrix based. Return NULL if otherwise */
 CG_EXTERN CGColorSpaceRef  __nullable CGColorSpaceCreateExtendedLinearized(CGColorSpaceRef space)
-CG_AVAILABLE_STARTING(11.0, 14.0);
+API_AVAILABLE(macos(11.0), ios(14.0));
 
 /* Create a copy of the color space which uses standard range [0.0, 1.0]. */
 CG_EXTERN CGColorSpaceRef CGColorSpaceCreateCopyWithStandardRange(CGColorSpaceRef s)
-CG_AVAILABLE_STARTING(13.0, 16.0);
+API_AVAILABLE(macos(13.0), ios(16.0));
 
 /* Deprecated functions */
 
 /* Please use `CGColorSpaceCreateWithICCData' */
 CG_EXTERN CGColorSpaceRef __nullable CGColorSpaceCreateWithICCProfile(CFDataRef cg_nullable data)
-  CG_AVAILABLE_BUT_DEPRECATED(10.5, 10.13, 2.0, 11.0);
+  API_DEPRECATED("No longer supported", macos(10.5,10.13), ios(2.0,11.0));
 
 /* Please use `CGColorSpaceCopyICCData' */
 CG_EXTERN CFDataRef __nullable CGColorSpaceCopyICCProfile(CGColorSpaceRef cg_nullable space)
-  CG_AVAILABLE_BUT_DEPRECATED(10.5, 10.13, 2.0, 11.0);
+  API_DEPRECATED("No longer supported", macos(10.5,10.13), ios(2.0,11.0));
 
 /* Please use `CGColorSpaceCreateWithColorSyncProfile' */
 CG_EXTERN CGColorSpaceRef __nullable
   CGColorSpaceCreateWithPlatformColorSpace(const void * cg_nullable ref)
-  CG_AVAILABLE_BUT_DEPRECATED(10.0, 12.0, 9.0, 15.0);
+  API_DEPRECATED("No longer supported", macos(10.0,12.0), ios(9.0,15.0));
 
 
 CF_ASSUME_NONNULL_END

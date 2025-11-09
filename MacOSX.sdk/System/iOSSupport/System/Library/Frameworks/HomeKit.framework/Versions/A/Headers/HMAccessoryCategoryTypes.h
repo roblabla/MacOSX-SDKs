@@ -8,6 +8,7 @@
 #import <Foundation/Foundation.h>
 #import <HomeKit/HMDefines.h>
 
+NS_ASSUME_NONNULL_BEGIN
 /*!
  * @group Accessory Category Types
  *
@@ -143,3 +144,40 @@ HM_EXTERN NSString *const HMAccessoryCategoryTypeFaucet API_AVAILABLE(ios(11.2),
  * @brief Category type for Shower Head.
  */
 HM_EXTERN NSString *const HMAccessoryCategoryTypeShowerHead API_AVAILABLE(ios(11.2), watchos(4.2), tvos(11.2), macCatalyst(14.0)) API_UNAVAILABLE(macos);
+
+/*!
+ * @brief Category type for Television.
+ */
+HM_EXTERN NSString *const HMAccessoryCategoryTypeTelevision API_AVAILABLE(ios(18.0), watchos(11.0), tvos(18.0), visionos(2.0)) API_UNAVAILABLE(macos);
+
+/*!
+ * @brief Category type for Television Set Top Box.
+ */
+HM_EXTERN NSString *const HMAccessoryCategoryTypeTelevisionSetTopBox API_AVAILABLE(ios(18.0), watchos(11.0), tvos(18.0), visionos(2.0)) API_UNAVAILABLE(macos);
+
+/*!
+ * @brief Category type for Television Streaming Stick.
+ */
+HM_EXTERN NSString *const HMAccessoryCategoryTypeTelevisionStreamingStick API_AVAILABLE(ios(18.0), watchos(11.0), tvos(18.0), visionos(2.0)) API_UNAVAILABLE(macos);
+
+/*!
+ * @brief Category type for Wi-Fi Router.
+ */
+HM_EXTERN NSString *const HMAccessoryCategoryTypeWiFiRouter API_AVAILABLE(ios(18.0), watchos(11.0), tvos(18.0), visionos(2.0)) API_UNAVAILABLE(macos);
+
+/*!
+ * @brief Category type for Speakers.
+ */
+HM_EXTERN NSString *const HMAccessoryCategoryTypeSpeaker API_AVAILABLE(ios(18.0), watchos(11.0), tvos(18.0), visionos(2.0)) API_UNAVAILABLE(macos);
+
+/*!
+ * @brief Category type for an audio receiver that supports HAP and AirPlay2.
+ */
+HM_EXTERN NSString *const HMAccessoryCategoryTypeAudioReceiver API_AVAILABLE(ios(18.0), watchos(11.0), tvos(18.0), visionos(2.0)) API_UNAVAILABLE(macos);
+
+/*!
+ * @brief Category type for AirPort accessories.
+ */
+HM_EXTERN NSString *const HMAccessoryCategoryTypeAirPort API_AVAILABLE(ios(18.0), watchos(11.0), tvos(18.0), visionos(2.0)) API_UNAVAILABLE(macos);
+
+NS_ASSUME_NONNULL_END

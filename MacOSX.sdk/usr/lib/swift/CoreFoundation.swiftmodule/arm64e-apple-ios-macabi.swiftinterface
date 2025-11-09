@@ -1,6 +1,6 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.10 (swiftlang-5.10.0.12.5 clang-1500.3.9.1.1)
-// swift-module-flags: -target arm64e-apple-ios17.5-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftCoreFoundation -swift-version 5 -enforce-exclusivity=unchecked -O -library-level api -enable-experimental-concurrency -enable-bare-slash-regex -user-module-version 2401 -module-name CoreFoundation
+// swift-compiler-version: Apple Swift version 6.0 effective-5.10 (swiftlang-6.0.0.7.24 clang-1600.0.25.1)
+// swift-module-flags: -target arm64e-apple-ios18.0-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftCoreFoundation -swift-version 5 -enforce-exclusivity=unchecked -O -library-level api -enable-experimental-concurrency -enable-bare-slash-regex -user-module-version 2401 -module-name CoreFoundation
 @_exported import CoreFoundation
 import Swift
 import _Concurrency
@@ -47,7 +47,9 @@ extension CoreFoundation.CGFloat : Swift.SignedNumeric {
     return CGFloat(native.magnitude)
   }
   }
+  @available(iOS 2.0, tvOS 9.0, watchOS 1.0, macOS 10.0, macCatalyst 13.0, *)
   public typealias IntegerLiteralType = Swift.Int
+  @available(iOS 2.0, tvOS 9.0, watchOS 1.0, macOS 10.0, macCatalyst 13.0, *)
   public typealias Magnitude = CoreFoundation.CGFloat
 }
 @available(macOS 10.0, macCatalyst 13.0, iOS 2.0, watchOS 1.0, tvOS 9.0, *)
@@ -268,7 +270,9 @@ extension CoreFoundation.CGFloat : Swift.BinaryFloatingPoint {
   @_transparent public init(integerLiteral value: Swift.Int) {
     native = NativeType(value)
   }
+  @available(iOS 2.0, tvOS 9.0, watchOS 1.0, macOS 10.0, macCatalyst 13.0, *)
   public typealias FloatLiteralType = CoreFoundation.CGFloat.NativeType
+  @available(iOS 2.0, tvOS 9.0, watchOS 1.0, macOS 10.0, macCatalyst 13.0, *)
   public typealias RawExponent = Swift.UInt
 }
 @available(macOS 10.0, macCatalyst 13.0, iOS 2.0, watchOS 1.0, tvOS 9.0, *)
@@ -487,6 +491,7 @@ extension CoreFoundation.CGFloat : Swift.Strideable {
   @_transparent public func advanced(by amount: CoreFoundation.CGFloat) -> CoreFoundation.CGFloat {
     return CGFloat(self.native + amount.native)
   }
+  @available(iOS 2.0, tvOS 9.0, watchOS 1.0, macOS 10.0, macCatalyst 13.0, *)
   public typealias Stride = CoreFoundation.CGFloat
 }
 @available(macOS 10.0, macCatalyst 13.0, iOS 2.0, watchOS 1.0, tvOS 9.0, *)
@@ -519,9 +524,9 @@ extension CoreFoundation.CGFloat : Swift.Codable {
     do {
       self.native = try container.decode(NativeType.self)
     } catch DecodingError.dataCorrupted(let context) {
-      // We may have encoded as a different type on a different platform. A
-      // strict fixed-format decoder may disallow a conversion, so let's try the
-      // other type.
+       
+       
+       
       do {
         if NativeType.self == Float.self {
           self.native = NativeType(try container.decode(Double.self))
@@ -529,9 +534,9 @@ extension CoreFoundation.CGFloat : Swift.Codable {
           self.native = NativeType(try container.decode(Float.self))
         }
       } catch {
-        // Failed to decode as the other type, too. This is neither a Float nor
-        // a Double. Throw the old error; we don't want to clobber the original
-        // info.
+         
+         
+         
         throw DecodingError.dataCorrupted(context)
       }
     }
@@ -557,3 +562,10 @@ extension CoreFoundation._CFObject {
 @_originallyDefinedIn(module: "CoreGraphics", watchOS 1.0)
 @_originallyDefinedIn(module: "CoreGraphics", tvOS 9.0)
 extension CoreFoundation.CGFloat : Swift.Sendable {}
+@available(macOS 10.0, macCatalyst 13.0, iOS 2.0, watchOS 1.0, tvOS 9.0, *)
+@_originallyDefinedIn(module: "CoreGraphics", macOS 10.0)
+@_originallyDefinedIn(module: "CoreGraphics", macCatalyst 13.0)
+@_originallyDefinedIn(module: "CoreGraphics", iOS 2.0)
+@_originallyDefinedIn(module: "CoreGraphics", watchOS 1.0)
+@_originallyDefinedIn(module: "CoreGraphics", tvOS 9.0)
+extension CoreFoundation.CGFloat : Swift.BitwiseCopyable {}

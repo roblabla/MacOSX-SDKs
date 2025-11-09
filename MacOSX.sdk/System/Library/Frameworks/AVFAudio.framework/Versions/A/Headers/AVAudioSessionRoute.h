@@ -47,6 +47,7 @@ OS_EXPORT AVAudioSessionPolarPattern const AVAudioSessionPolarPatternStereo			AP
 	AudioQueue, AURemoteIO and AUVoiceIO instances can be assigned to communicate with specific
 	hardware channels by setting an array of <port UID, channel index> pairs.
 */
+NS_SWIFT_SENDABLE
 API_AVAILABLE(ios(6.0), watchos(2.0), tvos(9.0)) API_UNAVAILABLE(macos) 
 @interface AVAudioSessionChannelDescription : NSObject {
 @private
@@ -68,6 +69,7 @@ API_AVAILABLE(ios(6.0), watchos(2.0), tvos(9.0)) API_UNAVAILABLE(macos)
 @end
 
 /// Information about one of potentially multiple data sources associated with a port.
+NS_SWIFT_SENDABLE
 API_AVAILABLE(ios(6.0), watchos(2.0), tvos(9.0)) API_UNAVAILABLE(macos) 
 @interface AVAudioSessionDataSourceDescription : NSObject {
 @private
@@ -124,6 +126,7 @@ API_AVAILABLE(ios(6.0), watchos(2.0), tvos(9.0)) API_UNAVAILABLE(macos)
 @end // AVAudioSessionDataSourceDescription
 
 /// Information about a port, a physical connector or audio device.
+NS_SWIFT_SENDABLE
 API_AVAILABLE(ios(6.0), watchos(2.0), tvos(9.0)) API_UNAVAILABLE(macos) 
 @interface AVAudioSessionPortDescription : NSObject {
 @private
@@ -195,6 +198,7 @@ API_AVAILABLE(ios(6.0), watchos(2.0), tvos(9.0)) API_UNAVAILABLE(macos)
 @end // AVAudioSessionPortDescription
 
 /// A description of the input and output ports which comprise a route.
+NS_SWIFT_SENDABLE
 API_AVAILABLE(ios(6.0), watchos(2.0), tvos(9.0)) API_UNAVAILABLE(macos) 
 @interface AVAudioSessionRouteDescription : NSObject {
 @private

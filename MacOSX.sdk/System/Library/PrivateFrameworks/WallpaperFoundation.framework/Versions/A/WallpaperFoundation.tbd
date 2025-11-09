@@ -2,12 +2,14 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/WallpaperFoundation.framework/Versions/A/WallpaperFoundation'
-current-version: 95.201
+current-version: 147.0.1
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ '_$s10Foundation3URLV09WallpaperA0E06darwinB03dirACs5Int32V_tFZ', 
                        '_$s10Foundation3URLV09WallpaperA0E20darwinCacheDirectoryACvgZ', 
+                       '_$s10Foundation3URLV09WallpaperA0E28uncontainerizedHomeDirectoryACvgZ', 
+                       '_$s10Foundation3URLV09WallpaperA0E42uncontainerizedApplicationSupportDirectoryACvgZ', 
                        '_$s10Foundation4UUIDV09WallpaperA0E4dataAA4DataVvg', '_$s10Foundation4UUIDV09WallpaperA0E4dataAA4DataVvpMV', 
                        '_$s10Foundation4UUIDV09WallpaperA0E4fromACSgAA4DataV_tcfC', 
                        '_$s10Foundation4UUIDV09WallpaperA0E4nullACvgZ', '_$s10Foundation4UUIDV09WallpaperA0E5labelSSvg', 
@@ -483,6 +485,9 @@ exports:
                        '_$s2os6LoggerV19WallpaperFoundationE20wallpaperSignpostingACvgZ', 
                        '_$s2os6LoggerV19WallpaperFoundationE23beginSignpostedActivity6public8logLevelAD06LoggedG0Cs12StaticStringV_So0a1_I7_type_tatF', 
                        '_$s2os6LoggerV19WallpaperFoundationE5error6publicAEySSSgyXK_s5Error_pyXKtF', 
+                       '_$sSS19WallpaperFoundationE41expandingTildeInPathToUncontainerizedHomeSSvg', 
+                       '_$sSS19WallpaperFoundationE41expandingTildeInPathToUncontainerizedHomeSSvpMV', 
+                       '_$sSS19WallpaperFoundationE41expandingTildeInPathToUncontainerizedHomeyS2SFZ', 
                        '_$sST19WallpaperFoundationE11asyncFilterySay7ElementQzGSbADYaKXEYaKF', 
                        '_$sST19WallpaperFoundationE11asyncFilterySay7ElementQzGSbADYaKXEYaKFTu', 
                        '_$sST19WallpaperFoundationE12asyncFlatMapySayqd__GAC7ElementQzYaKXEYaKlF', 
@@ -511,11 +516,13 @@ exports:
                        '_$sSo13CATransactionC19WallpaperFoundationE9AssertionOSQACMc', 
                        '_$sSo13CATransactionC19WallpaperFoundationE9AssertionOs23CustomStringConvertibleACMc', 
                        '_$sSo13NSProcessInfoC19WallpaperFoundationE12setQOSPolicy7latency10throughputySo05task_G4_qosV_So0i1_h1_J0VtKFZ', 
-                       '_$sSo13NSProcessInfoC19WallpaperFoundationE17setThreadPriorityyySiKFZ', 
+                       '_$sSo13NSProcessInfoC19WallpaperFoundationE12setThreadQoSyySo11qos_class_taKFZ', 
                        '_$sSo20DesktopPictureChangeV19WallpaperFoundationE11stringValueABSgSSSg_tcfC', 
                        '_$sSo20DesktopPictureChangeV19WallpaperFoundationE11stringValueSSSgvg', 
                        '_$sSo20DesktopPictureChangeV19WallpaperFoundationE11stringValueSSSgvpMV', 
                        '_$sSo20OS_dispatch_workloopC19WallpaperFoundationE0C05label8priority8qosClassABSS_SiSo0H8_class_tatFZ', 
+                       '_$sSo21NSSearchPathDirectoryV19WallpaperFoundationE04homeC0ABvgZ', 
+                       '_$sSo22NSSearchPathDomainMaskV19WallpaperFoundationE010sharedUsercD0ABvgZ', 
                        '_$sSo23DesktopPicturePlacementV19WallpaperFoundationE11stringValueABSS_tcfC', 
                        '_$sSo23DesktopPicturePlacementV19WallpaperFoundationE11stringValueSSvg', 
                        '_$sSo23DesktopPicturePlacementV19WallpaperFoundationE11stringValueSSvpMV', 

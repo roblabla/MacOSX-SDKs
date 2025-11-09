@@ -4,7 +4,8 @@ targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/QuickLookNonBaseSystem.framework/Versions/A/QuickLookNonBaseSystem'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-    symbols:         [ _QLInitMarkupLogging, _QuickLookNonBaseSystemVersionNumber, 
+    symbols:         [ _QLEditOperationSupportedForURLWithType, _QLEditOperationSupportsType, 
+                       _QLInitMarkupLogging, _QuickLookNonBaseSystemVersionNumber, 
                        _QuickLookNonBaseSystemVersionString, _qlMarkupLogHandle ]
-    objc-classes:    [ QLMarkupController, QLMarkupViewController ]
+    objc-classes:    [ QLEditingUtils, QLMarkupController, QLMarkupViewController ]
 ...

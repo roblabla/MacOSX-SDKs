@@ -26,6 +26,7 @@ typedef struct NS_SWIFT_SENDABLE {
 
 @class NSArray<ObjectType>, NSString, NSDictionary<KeyType, ObjectType>;
 
+NS_SWIFT_SENDABLE
 @interface NSProcessInfo : NSObject {
 @private
     NSDictionary	*environment;

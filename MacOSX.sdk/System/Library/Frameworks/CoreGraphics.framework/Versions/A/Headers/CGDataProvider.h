@@ -115,7 +115,7 @@ typedef struct CGDataProviderDirectCallbacks CGDataProviderDirectCallbacks;
 /* Return the CFTypeID for CGDataProviderRefs. */
 
 CG_EXTERN CFTypeID CGDataProviderGetTypeID(void)
-    CG_AVAILABLE_STARTING(10.2, 2.0);
+    API_AVAILABLE(macos(10.2), ios(2.0));
 
 /* Create a sequential-access data provider using `callbacks' to provide the
    data. `info' is passed to each of the callback functions. */
@@ -123,7 +123,7 @@ CG_EXTERN CFTypeID CGDataProviderGetTypeID(void)
 CG_EXTERN CGDataProviderRef __nullable CGDataProviderCreateSequential(
     void * __nullable info,
     const CGDataProviderSequentialCallbacks * cg_nullable callbacks)
-    CG_AVAILABLE_STARTING(10.5, 2.0);
+    API_AVAILABLE(macos(10.5), ios(2.0));
 
 /* Create a direct-access data provider using `callbacks' to supply `size'
    bytes of data. `info' is passed to each of the callback functions.
@@ -132,7 +132,7 @@ CG_EXTERN CGDataProviderRef __nullable CGDataProviderCreateSequential(
 CG_EXTERN CGDataProviderRef __nullable CGDataProviderCreateDirect(
     void * __nullable info, off_t size,
     const CGDataProviderDirectCallbacks * cg_nullable callbacks)
-    CG_AVAILABLE_STARTING(10.5, 2.0);
+    API_AVAILABLE(macos(10.5), ios(2.0));
 
 /* The callback used by `CGDataProviderCreateWithData'. */
 
@@ -146,38 +146,38 @@ typedef void (*CGDataProviderReleaseDataCallback)(void * __nullable info,
 CG_EXTERN CGDataProviderRef __nullable CGDataProviderCreateWithData(
     void * __nullable info, const void * cg_nullable data, size_t size,
     CGDataProviderReleaseDataCallback cg_nullable releaseData)
-    CG_AVAILABLE_STARTING(10.0, 2.0);
+    API_AVAILABLE(macos(10.0), ios(2.0));
 
 /* Create a direct-access data provider which reads from `data'. */
 
 CG_EXTERN CGDataProviderRef __nullable CGDataProviderCreateWithCFData(
     CFDataRef cg_nullable data)
-    CG_AVAILABLE_STARTING(10.4, 2.0);
+    API_AVAILABLE(macos(10.4), ios(2.0));
 
 /* Create a data provider reading from `url'. */
 
 CG_EXTERN CGDataProviderRef __nullable CGDataProviderCreateWithURL(
     CFURLRef cg_nullable url)
-    CG_AVAILABLE_STARTING(10.0, 2.0);
+    API_AVAILABLE(macos(10.0), ios(2.0));
 
 /* Create a data provider reading from `filename'. */
 
 CG_EXTERN CGDataProviderRef __nullable CGDataProviderCreateWithFilename(
     const char * cg_nullable filename)
-    CG_AVAILABLE_STARTING(10.0, 2.0);
+    API_AVAILABLE(macos(10.0), ios(2.0));
 
 /* Equivalent to `CFRetain(provider)', but doesn't crash (as CFRetain does)
    if `provider' is NULL. */
 
 CG_EXTERN CGDataProviderRef __nullable CGDataProviderRetain(
     CGDataProviderRef cg_nullable provider)
-    CG_AVAILABLE_STARTING(10.0, 2.0);
+    API_AVAILABLE(macos(10.0), ios(2.0));
 
 /* Equivalent to `CFRelease(provider)', but doesn't crash (as CFRelease
    does) if `provider' is NULL. */
 
 CG_EXTERN void CGDataProviderRelease(CGDataProviderRef cg_nullable provider)
-    CG_AVAILABLE_STARTING(10.0, 2.0);
+    API_AVAILABLE(macos(10.0), ios(2.0));
 
 /* Return a copy of the data specified by provider. Returns NULL if a
    complete copy of the data can't be obtained (for example, if the
@@ -185,10 +185,10 @@ CG_EXTERN void CGDataProviderRelease(CGDataProviderRef cg_nullable provider)
 
 CG_EXTERN CFDataRef __nullable CGDataProviderCopyData(
     CGDataProviderRef cg_nullable provider)
-    CG_AVAILABLE_STARTING(10.3, 2.0);
+    API_AVAILABLE(macos(10.3), ios(2.0));
 
 CG_EXTERN void* __nullable CGDataProviderGetInfo(CGDataProviderRef cg_nullable provider)
-    CG_AVAILABLE_STARTING(10.13, 11.0);
+    API_AVAILABLE(macos(10.13), ios(11.0));
 
 CF_ASSUME_NONNULL_END
 

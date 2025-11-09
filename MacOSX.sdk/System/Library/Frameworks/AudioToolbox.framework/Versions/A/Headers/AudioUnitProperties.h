@@ -2070,9 +2070,11 @@ typedef struct AUParameterMIDIMapping AUParameterMIDIMapping;
     @abstract       The collection of Instrument Unit Property IDs
 
 	@constant		kMusicDeviceProperty_MIDIXMLNames
-	@discussion			Scope:
-						Value Type:
-						Access:
+	@discussion			Scope:              Global
+						Value Type:         CFURLRef
+						Access:             read
+ 
+                        This property's value specifies a URL to a local file containg the XML Instrument description.
 
 	@constant		kMusicDeviceProperty_PartGroup
 	@discussion			Scope:				Part
@@ -3002,9 +3004,9 @@ CF_ENUM(AudioUnitPropertyID) {
 	kAudioUnitProperty_SpatialMixerAttenuationCurve			= 3013,
 	kAudioUnitProperty_SpatialMixerOutputType				= 3100,
 	kAudioUnitProperty_SpatialMixerPointSourceInHeadMode	= 3103,
-    kAudioUnitProperty_SpatialMixerEnableHeadTracking API_AVAILABLE(macos(12.3)) API_UNAVAILABLE(ios, tvos) API_UNAVAILABLE(watchos) = 3111,
-    kAudioUnitProperty_SpatialMixerPersonalizedHRTFMode API_AVAILABLE(macos(13.0)) API_UNAVAILABLE(ios, tvos) API_UNAVAILABLE(watchos) = 3113,
-    kAudioUnitProperty_SpatialMixerAnyInputIsUsingPersonalizedHRTF API_AVAILABLE(macos(14.0)) API_UNAVAILABLE(ios, tvos) API_UNAVAILABLE(watchos) = 3116
+    kAudioUnitProperty_SpatialMixerEnableHeadTracking API_AVAILABLE(macos(12.3), ios(18.0), tvos(18.0)) API_UNAVAILABLE(watchos, visionos) = 3111,
+    kAudioUnitProperty_SpatialMixerPersonalizedHRTFMode API_AVAILABLE(macos(13.0), ios(18.0), tvos(18.0)) API_UNAVAILABLE(watchos) = 3113,
+    kAudioUnitProperty_SpatialMixerAnyInputIsUsingPersonalizedHRTF API_AVAILABLE(macos(14.0), ios(18.0), tvos(18.0)) API_UNAVAILABLE(watchos) = 3116
 };
 
 /*!
@@ -3120,9 +3122,9 @@ typedef CF_OPTIONS(UInt32, AUSpatialMixerRenderingFlags) {
                      head-related transfer function (HRTF).
 */
 typedef CF_ENUM(UInt32, AUSpatialMixerPersonalizedHRTFMode) {
-    kSpatialMixerPersonalizedHRTFMode_Off CF_SWIFT_NAME(off) API_AVAILABLE(macos(13.0)) API_UNAVAILABLE(ios, tvos) API_UNAVAILABLE(watchos) = 0,
-    kSpatialMixerPersonalizedHRTFMode_On CF_SWIFT_NAME(on) API_AVAILABLE(macos(13.0)) API_UNAVAILABLE(ios, tvos) API_UNAVAILABLE(watchos) = 1,
-    kSpatialMixerPersonalizedHRTFMode_Auto CF_SWIFT_NAME(auto) API_AVAILABLE(macos(13.0)) API_UNAVAILABLE(ios, tvos) API_UNAVAILABLE(watchos) = 2
+    kSpatialMixerPersonalizedHRTFMode_Off CF_SWIFT_NAME(off) API_AVAILABLE(macos(13.0), ios(18.0), tvos(18.0)) API_UNAVAILABLE(watchos) = 0,
+    kSpatialMixerPersonalizedHRTFMode_On CF_SWIFT_NAME(on) API_AVAILABLE(macos(13.0), ios(18.0), tvos(18.0)) API_UNAVAILABLE(watchos) = 1,
+    kSpatialMixerPersonalizedHRTFMode_Auto CF_SWIFT_NAME(auto) API_AVAILABLE(macos(13.0), ios(18.0), tvos(18.0)) API_UNAVAILABLE(watchos) = 2
 };
 
 /*!

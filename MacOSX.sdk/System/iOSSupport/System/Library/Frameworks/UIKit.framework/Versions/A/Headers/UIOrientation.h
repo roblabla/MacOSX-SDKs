@@ -18,21 +18,21 @@ typedef NS_ENUM(NSInteger, UIDeviceOrientation) {
     UIDeviceOrientationLandscapeRight,      // Device oriented horizontally, home button on the left
     UIDeviceOrientationFaceUp,              // Device oriented flat, face up
     UIDeviceOrientationFaceDown             // Device oriented flat, face down
-} API_UNAVAILABLE(tvos);
+} API_UNAVAILABLE(tvos, watchos);
 
-static inline BOOL UIDeviceOrientationIsPortrait(UIDeviceOrientation orientation)  API_UNAVAILABLE(tvos, visionos) {
+static inline BOOL UIDeviceOrientationIsPortrait(UIDeviceOrientation orientation)  API_UNAVAILABLE(tvos, visionos, watchos) {
     return ((orientation) == UIDeviceOrientationPortrait || (orientation) == UIDeviceOrientationPortraitUpsideDown);
 }
 
-static inline BOOL UIDeviceOrientationIsLandscape(UIDeviceOrientation orientation)  API_UNAVAILABLE(tvos, visionos) {
+static inline BOOL UIDeviceOrientationIsLandscape(UIDeviceOrientation orientation)  API_UNAVAILABLE(tvos, visionos, watchos) {
     return ((orientation) == UIDeviceOrientationLandscapeLeft || (orientation) == UIDeviceOrientationLandscapeRight);
 }
 
-static inline __attribute__((always_inline)) BOOL UIDeviceOrientationIsFlat(UIDeviceOrientation orientation)  API_UNAVAILABLE(tvos, visionos) {
+static inline __attribute__((always_inline)) BOOL UIDeviceOrientationIsFlat(UIDeviceOrientation orientation)  API_UNAVAILABLE(tvos, visionos, watchos) {
     return ((orientation) == UIDeviceOrientationFaceUp || (orientation) == UIDeviceOrientationFaceDown);
 }
 
-static inline __attribute__((always_inline)) BOOL UIDeviceOrientationIsValidInterfaceOrientation(UIDeviceOrientation orientation)  API_UNAVAILABLE(tvos, visionos) {
+static inline __attribute__((always_inline)) BOOL UIDeviceOrientationIsValidInterfaceOrientation(UIDeviceOrientation orientation)  API_UNAVAILABLE(tvos, visionos, watchos) {
     return ((orientation) == UIDeviceOrientationPortrait || (orientation) == UIDeviceOrientationPortraitUpsideDown || (orientation) == UIDeviceOrientationLandscapeLeft || (orientation) == UIDeviceOrientationLandscapeRight);
 }
 
@@ -44,7 +44,7 @@ typedef NS_ENUM(NSInteger, UIInterfaceOrientation) {
     UIInterfaceOrientationPortraitUpsideDown = UIDeviceOrientationPortraitUpsideDown,
     UIInterfaceOrientationLandscapeLeft      = UIDeviceOrientationLandscapeRight,
     UIInterfaceOrientationLandscapeRight     = UIDeviceOrientationLandscapeLeft
-} API_UNAVAILABLE(tvos);
+} API_UNAVAILABLE(tvos, watchos);
 
 typedef NS_OPTIONS(NSUInteger, UIInterfaceOrientationMask) {
     UIInterfaceOrientationMaskPortrait = (1 << UIInterfaceOrientationPortrait),
@@ -54,13 +54,13 @@ typedef NS_OPTIONS(NSUInteger, UIInterfaceOrientationMask) {
     UIInterfaceOrientationMaskLandscape = (UIInterfaceOrientationMaskLandscapeLeft | UIInterfaceOrientationMaskLandscapeRight),
     UIInterfaceOrientationMaskAll = (UIInterfaceOrientationMaskPortrait | UIInterfaceOrientationMaskLandscapeLeft | UIInterfaceOrientationMaskLandscapeRight | UIInterfaceOrientationMaskPortraitUpsideDown),
     UIInterfaceOrientationMaskAllButUpsideDown = (UIInterfaceOrientationMaskPortrait | UIInterfaceOrientationMaskLandscapeLeft | UIInterfaceOrientationMaskLandscapeRight),
-} API_UNAVAILABLE(tvos);
+} API_UNAVAILABLE(tvos, watchos);
 
-static inline BOOL UIInterfaceOrientationIsPortrait(UIInterfaceOrientation orientation) API_UNAVAILABLE(tvos) {
+static inline BOOL UIInterfaceOrientationIsPortrait(UIInterfaceOrientation orientation) API_UNAVAILABLE(tvos, watchos) {
     return ((orientation) == UIInterfaceOrientationPortrait || (orientation) == UIInterfaceOrientationPortraitUpsideDown);
 }
 
-static inline BOOL UIInterfaceOrientationIsLandscape(UIInterfaceOrientation orientation) API_UNAVAILABLE(tvos) {
+static inline BOOL UIInterfaceOrientationIsLandscape(UIInterfaceOrientation orientation) API_UNAVAILABLE(tvos, watchos) {
     return ((orientation) == UIInterfaceOrientationLandscapeLeft || (orientation) == UIInterfaceOrientationLandscapeRight);
 }
 

@@ -21,7 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
 	@discussion
 		An instance of AVSampleBufferAudioRenderer must be added to an AVSampleBufferRenderSynchronizer before the first sample buffer is enqueued.
 */
-API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0))
+API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0), visionos(1.0))
 @interface AVSampleBufferAudioRenderer : NSObject <AVQueuedSampleBufferRendering>
 {
 @private
@@ -64,7 +64,7 @@ API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0))
  
 		If multiple AVSampleBufferAudioRenderers with different values for audioOutputDeviceUniqueID are attached to the same AVSampleBufferRenderSynchronizer, audio may not stay in sync during playback.  To avoid this, ensure that all synchronized AVSampleBufferAudioRenderers are using the same audio output device.
 */
-@property (nonatomic, copy, nullable) NSString *audioOutputDeviceUniqueID API_AVAILABLE(macos(10.13)) API_UNAVAILABLE(ios, tvos, watchos);
+@property (nonatomic, copy, nullable) NSString *audioOutputDeviceUniqueID API_AVAILABLE(macos(10.13)) API_UNAVAILABLE(ios, tvos, watchos, visionos);
 
 /*!
 	@property		audioTimePitchAlgorithm
@@ -87,7 +87,7 @@ API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0))
 	@discussion
 		Spatialization uses psychoacoustic methods to create a more immersive audio rendering when the content is played on specialized headphones and speaker arrangements. When an  AVSampleBufferAudioRenderer's allowedAudioSpatializationFormats property is set to AVAudioSpatializationFormatMonoAndStereo the  AVSampleBufferAudioRenderer will attempt to spatialize content tagged with a stereo channel layout, two-channel content with no layout specified as well as mono. It is considered incorrect to render a binaural recording with spatialization. A binaural recording is captured using two carefully placed microphones at each ear where the intent, when played on headphones, is to reproduce a naturally occurring spatial effect. Content tagged with a binaural channel layout will ignore this property value. When an  AVSampleBufferAudioRenderer's allowedAudioSpatializationFormats property is set to AVAudioSpatializationFormatMultichannel the  AVSampleBufferAudioRenderer will attempt to spatialize any decodable multichannel layout. Setting this property to AVAudioSpatializationFormatMonoStereoAndMultichannel indicates that the sender allows the  AVSampleBufferAudioRenderer to spatialize any decodable mono, stereo or multichannel layout. This property is not observable. The default value for this property is AVAudioSpatializationFormatMultichannel.
  */
-@property (nonatomic, assign) AVAudioSpatializationFormats allowedAudioSpatializationFormats API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos);
+@property (nonatomic, assign) AVAudioSpatializationFormats allowedAudioSpatializationFormats API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 @end
 
@@ -127,7 +127,7 @@ API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0))
  
 		If NO is provided to the completion handler, the flush did not succeed and the set of enqueued sample buffers remains unchanged.  A flush can fail becuse the source time was too close to (or earlier than) the current time or because the current configuration of the receiver does not support flushing at a particular time.  In these cases, the caller can choose to flush all enqueued media data by invoking the -flush method.
  */
-- (void)flushFromSourceTime:(CMTime)time completionHandler:(void (^)(BOOL flushSucceeded))completionHandler;
+- (void)flushFromSourceTime:(CMTime)time completionHandler:(void (^ NS_SWIFT_SENDABLE)(BOOL flushSucceeded))completionHandler;
 
 /*!
 	@constant		AVSampleBufferAudioRendererWasFlushedAutomaticallyNotification
@@ -139,7 +139,7 @@ API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0))
  
 		This notification is delivered on an arbitrary thread.  If sample buffers are being enqueued with the renderer concurrently with the receipt of this notification, it is possible that one or more sample buffers will remain enqueued in the renderer.  This is generally undesirable, because the sample buffers that remain will likely have timestamps far ahead of the timebase's current time and so won't be rendered for some time.  The best practice is to invoke the -flush method, in a manner that is serialized with enqueueing sample buffers, after receiving this notification and before resuming the enqueueing of sample buffers.
  */
-AVF_EXPORT NSNotificationName const AVSampleBufferAudioRendererWasFlushedAutomaticallyNotification API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0));
+AVF_EXPORT NSNotificationName const AVSampleBufferAudioRendererWasFlushedAutomaticallyNotification API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0), visionos(1.0));
 
 /*!
 	@constant		AVSampleBufferAudioRendererOutputConfigurationDidChangeNotification
@@ -147,7 +147,7 @@ AVF_EXPORT NSNotificationName const AVSampleBufferAudioRendererWasFlushedAutomat
 	@discussion
 		The output configuration of the playback hardware might change during the playback session if other clients play content with different format. In such cases, if the media content format does not match the hardware configuration it would produce suboptimal rendering of the enqueued media data. When the framework detects such mismatch it will issue this notification, so the client can flush the renderer and re-enqueue the sample buffers from the current media playhead, which will configure the hardware based on the format of newly enqueued sample buffers.
  */
-AVF_EXPORT NSNotificationName const AVSampleBufferAudioRendererOutputConfigurationDidChangeNotification API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0));
+AVF_EXPORT NSNotificationName const AVSampleBufferAudioRendererOutputConfigurationDidChangeNotification API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0), visionos(1.0));
 
 	/*!
 		@constant		AVSampleBufferAudioRendererFlushTimeKey
@@ -155,7 +155,7 @@ AVF_EXPORT NSNotificationName const AVSampleBufferAudioRendererOutputConfigurati
 		@discussion
 			The value of this key is an NSValue wrapping a CMTime.
 	 */
-	AVF_EXPORT NSString * const AVSampleBufferAudioRendererFlushTimeKey API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0));
+	AVF_EXPORT NSString * const AVSampleBufferAudioRendererFlushTimeKey API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0), visionos(1.0));
 
 @end
 

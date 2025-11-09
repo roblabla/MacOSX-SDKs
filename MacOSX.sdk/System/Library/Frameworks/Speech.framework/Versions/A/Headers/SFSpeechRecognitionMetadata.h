@@ -10,7 +10,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class SFVoiceAnalytics;
 
-API_AVAILABLE(ios(14.5), macos(11.3))
+API_AVAILABLE(ios(14.5), macos(11.3), tvos(18))
 @interface SFSpeechRecognitionMetadata : NSObject <NSCopying, NSSecureCoding>
 
 // Measures the number of words spoken per minute

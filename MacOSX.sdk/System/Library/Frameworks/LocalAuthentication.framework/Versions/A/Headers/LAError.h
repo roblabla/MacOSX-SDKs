@@ -64,8 +64,11 @@ typedef NS_ENUM(NSInteger, LAError)
     LAErrorNotInteractive API_AVAILABLE(macos(10.10), ios(8.0), watchos(3.0)) API_UNAVAILABLE(tvos) = kLAErrorNotInteractive,
     
     /// Authentication could not start because there was no paired watch device nearby.
-    LAErrorWatchNotAvailable API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, watchos, tvos) = kLAErrorWatchNotAvailable,
+    LAErrorWatchNotAvailable API_DEPRECATED_WITH_REPLACEMENT("LAErrorCompanionNotAvailable", macos(10.15, 15.0)) API_UNAVAILABLE(ios, watchos, tvos) = kLAErrorWatchNotAvailable,
     
+    /// Authentication could not start because there was no paired companion device nearby.
+    LAErrorCompanionNotAvailable API_AVAILABLE(macos(15.0), ios(18.0)) API_UNAVAILABLE(watchos, tvos, visionos) = kLAErrorCompanionNotAvailable,
+
     /// Authentication could not start because this device supports biometry only via removable accessories and no accessory has been paired.
     LAErrorBiometryNotPaired API_AVAILABLE(macos(11.2)) API_UNAVAILABLE(ios, watchos, tvos) = kLAErrorBiometryNotPaired,
 

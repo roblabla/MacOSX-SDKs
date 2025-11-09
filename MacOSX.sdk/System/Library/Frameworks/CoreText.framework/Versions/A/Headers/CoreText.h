@@ -58,6 +58,7 @@ CF_EXTERN_C_BEGIN
                 kCTVersionNumber11_0.
 */
 
+CT_EXPORT
 uint32_t CTGetCoreTextVersion( void ) CT_DEPRECATED("Use -[NSProcessInfo operatingSystemVersion]", macos(10.5, 11.0), ios(3.2, 14.0), watchos(2.0, 7.0), tvos(9.0, 14.0));
 
 #define kCTVersionNumber10_5 0x00020000

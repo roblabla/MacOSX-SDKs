@@ -160,9 +160,10 @@ filter description enables events from all classes.
 .Sh SAMPLING OPTIONS
 Sampling options are specified via a comma-separated list of recognized names that indicate what sampling should be enabled/disabled.
 The names that are recognized are:
-.Ql cswitch-sampling
-and
+.Ql cswitch-sampling ,
 .Ql syscall-sampling
+and
+.Ql vmfault-sampling
 .Sh VIEWING TAILSPIN DATA
 tailspin data can be viewed by
 .Xr ktrace 1 ,

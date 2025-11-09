@@ -17,7 +17,7 @@ exports:
                        _vmnet_max_packet_size_key, _vmnet_mtu_key, _vmnet_nat66_prefix_key, 
                        _vmnet_nat66_prefix_length_key, _vmnet_network_identifier_key, 
                        _vmnet_operation_mode_key, _vmnet_port_forwarding_rule_get_details, 
-                       _vmnet_read, _vmnet_shared_interface_name_key, _vmnet_start_address_key, 
-                       _vmnet_start_interface, _vmnet_stop_interface, _vmnet_subnet_mask_key, 
-                       _vmnet_write ]
+                       _vmnet_read, _vmnet_read_max_packets_key, _vmnet_shared_interface_name_key, 
+                       _vmnet_start_address_key, _vmnet_start_interface, _vmnet_stop_interface, 
+                       _vmnet_subnet_mask_key, _vmnet_write, _vmnet_write_max_packets_key ]
 ...

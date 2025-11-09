@@ -16,6 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
            The participant can be identified by `sessionIdentifier` property of the anchor.
  */
 API_AVAILABLE(ios(13.0))
+NS_SWIFT_SENDABLE
 @interface ARParticipantAnchor : ARAnchor
 
 /** Unavailable */

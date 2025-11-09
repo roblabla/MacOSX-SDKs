@@ -7,11 +7,11 @@
 
 #import <QuartzCore/CALayer.h>
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
-typedef NSString * CAShapeLayerFillRule NS_TYPED_ENUM;
-typedef NSString * CAShapeLayerLineJoin NS_TYPED_ENUM;
-typedef NSString * CAShapeLayerLineCap NS_TYPED_ENUM;
+typedef NSString * CAShapeLayerFillRule NS_TYPED_ENUM API_AVAILABLE(macos(10.6), ios(3.0), tvos(9.0)) API_UNAVAILABLE(watchos);
+typedef NSString * CAShapeLayerLineJoin NS_TYPED_ENUM API_AVAILABLE(macos(10.6), ios(3.0), tvos(9.0)) API_UNAVAILABLE(watchos);
+typedef NSString * CAShapeLayerLineCap NS_TYPED_ENUM API_AVAILABLE(macos(10.6), ios(3.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 
 /* The shape layer draws a cubic Bezier spline in its coordinate space.
  *
@@ -36,7 +36,7 @@ typedef NSString * CAShapeLayerLineCap NS_TYPED_ENUM;
  * Note: rasterization may favor speed over accuracy, e.g. pixels with
  * multiple intersecting path segments may not give exact results. */
 
-API_AVAILABLE(macos(10.6), ios(3.0), watchos(2.0), tvos(9.0))
+API_AVAILABLE(macos(10.6), ios(3.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 @interface CAShapeLayer : CALayer
 
 /* The path defining the shape to be rendered. If the path extends
@@ -108,28 +108,28 @@ API_AVAILABLE(macos(10.6), ios(3.0), watchos(2.0), tvos(9.0))
 /* `fillRule' values. */
 
 CA_EXTERN CAShapeLayerFillRule const kCAFillRuleNonZero
-    API_AVAILABLE(macos(10.6), ios(3.0), watchos(2.0), tvos(9.0));
+    API_AVAILABLE(macos(10.6), ios(3.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 CA_EXTERN CAShapeLayerFillRule const kCAFillRuleEvenOdd
-    API_AVAILABLE(macos(10.6), ios(3.0), watchos(2.0), tvos(9.0));
+    API_AVAILABLE(macos(10.6), ios(3.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 
 /* `lineJoin' values. */
 
 CA_EXTERN CAShapeLayerLineJoin const kCALineJoinMiter
-    API_AVAILABLE(macos(10.6), ios(3.0), watchos(2.0), tvos(9.0));
+    API_AVAILABLE(macos(10.6), ios(3.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 CA_EXTERN CAShapeLayerLineJoin const kCALineJoinRound
-    API_AVAILABLE(macos(10.6), ios(3.0), watchos(2.0), tvos(9.0));
+    API_AVAILABLE(macos(10.6), ios(3.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 CA_EXTERN CAShapeLayerLineJoin const kCALineJoinBevel
-    API_AVAILABLE(macos(10.6), ios(3.0), watchos(2.0), tvos(9.0));
+    API_AVAILABLE(macos(10.6), ios(3.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 
 /* `lineCap' values. */
 
 CA_EXTERN CAShapeLayerLineCap const kCALineCapButt
-    API_AVAILABLE(macos(10.6), ios(3.0), watchos(2.0), tvos(9.0));
+    API_AVAILABLE(macos(10.6), ios(3.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 CA_EXTERN CAShapeLayerLineCap const kCALineCapRound
-    API_AVAILABLE(macos(10.6), ios(3.0), watchos(2.0), tvos(9.0));
+    API_AVAILABLE(macos(10.6), ios(3.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 CA_EXTERN CAShapeLayerLineCap const kCALineCapSquare
-    API_AVAILABLE(macos(10.6), ios(3.0), watchos(2.0), tvos(9.0));
+    API_AVAILABLE(macos(10.6), ios(3.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)
 
 #endif

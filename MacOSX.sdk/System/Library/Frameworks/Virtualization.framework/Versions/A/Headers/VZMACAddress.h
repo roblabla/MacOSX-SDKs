@@ -18,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
  @see VZNetworkDeviceConfiguration
 */
 VZ_EXPORT API_AVAILABLE(macos(11.0))
-@interface VZMACAddress : NSObject<NSCopying>
+@interface VZMACAddress : NSObject <NSCopying>
 
 + (instancetype)new NS_UNAVAILABLE;
 - (instancetype)init NS_UNAVAILABLE;
@@ -33,7 +33,7 @@ VZ_EXPORT API_AVAILABLE(macos(11.0))
  @abstract Initialize the VZMACAddress from a string representation of a MAC address.
  @param string
     The string should be formatted representing the 6 bytes in hexadecimal separated by a colon character.
-        e.g. "01:23:45:ab:cd:ef"
+    e.g. "01:23:45:ab:cd:ef"
 
     The alphabetical characters can appear lowercase or uppercase.
  @return A VZMACAddress or nil if the string is not formatted correctly.

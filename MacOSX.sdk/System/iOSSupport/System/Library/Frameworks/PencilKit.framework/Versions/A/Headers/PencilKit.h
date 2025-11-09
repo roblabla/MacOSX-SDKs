@@ -2,7 +2,7 @@
 //  PencilKit.h
 //  PencilKit
 //
-//  Copyright © 2020 Apple. All rights reserved.
+//  Copyright © 2020 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -10,6 +10,14 @@
 #if TARGET_OS_IPHONE
 #import <PencilKit/PKCanvasView.h>
 #import <PencilKit/PKToolPicker.h>
+#import <PencilKit/PKToolPickerCustomItem.h>
+#import <PencilKit/PKToolPickerEraserItem.h>
+#import <PencilKit/PKToolPickerInkingItem.h>
+#import <PencilKit/PKToolPickerCustomItemConfiguration.h>
+#import <PencilKit/PKToolPickerItem.h>
+#import <PencilKit/PKToolPickerLassoItem.h>
+#import <PencilKit/PKToolPickerRulerItem.h>
+#import <PencilKit/PKToolPickerScribbleItem.h>
 #endif
 
 #import <PencilKit/PKTool.h>

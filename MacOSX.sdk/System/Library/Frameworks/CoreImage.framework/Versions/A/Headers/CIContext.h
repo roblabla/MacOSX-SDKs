@@ -417,6 +417,23 @@ CORE_IMAGE_EXPORT CIImageRepresentationOption const kCIImageRepresentationSemant
 // The value for kCIImageRepresentationSemanticSegmentationSkyMatteImage should be a monochome CIImage object. */
 CORE_IMAGE_EXPORT CIImageRepresentationOption const kCIImageRepresentationSemanticSegmentationSkyMatteImage NS_AVAILABLE(11_1, 14_3);
 
+// The value for kCIImageRepresentationHDRImage should be a HDR CIImage object.
+// This optional image can be passed to JPEGRepresentationOfImage or HEIFRepresentationOfImage.
+//
+// When provided, Core Image will calculate a HDRGainMap image from the ratio of the HDR image to
+// the primary SDR image.
+//
+// If the the HDR CIImage has a .contentHeadroom property, then that will be used when calculating the
+// HDRGainMap image and metadata.
+//
+CORE_IMAGE_EXPORT CIImageRepresentationOption const kCIImageRepresentationHDRImage NS_AVAILABLE(15_0, 18_0);
+
+// The value for kCIImageRepresentationHDRGainMapImage should be a monochome CIImage object.
+// The image.properties should contain information equivalent to what is returned when initialtizing
+// an image using the kCIImageAuxiliaryHDRGainMap option.
+//
+CORE_IMAGE_EXPORT CIImageRepresentationOption const kCIImageRepresentationHDRGainMapImage NS_AVAILABLE(11_0, 14_1);
+
 
 /* Render a CIImage to TIFF data. Image must have a finite non-empty extent. */
 /* The CGColorSpace must be kCGColorSpaceModelRGB or kCGColorSpaceModelMonochrome */
@@ -430,7 +447,7 @@ CORE_IMAGE_EXPORT CIImageRepresentationOption const kCIImageRepresentationSemant
 /* Render a CIImage to JPEG data. Image must have a finite non-empty extent. */
 /* The CGColorSpace must be kCGColorSpaceModelRGB or kCGColorSpaceModelMonochrome. */
 /* Supported options keys are kCGImageDestinationLossyCompressionQuality, */
-/* and the depth, disparity, and matte options. */
+/* kCGImageDestinationEmbedThumbnail, and the depth, disparity, and matte options. */
 - (nullable NSData*) JPEGRepresentationOfImage:(CIImage*)image
                                     colorSpace:(CGColorSpaceRef)colorSpace
                                        options:(NSDictionary<CIImageRepresentationOption, id>*)options NS_AVAILABLE(10_12,10_0);
@@ -439,7 +456,7 @@ CORE_IMAGE_EXPORT CIImageRepresentationOption const kCIImageRepresentationSemant
 /* The CGColorSpace must be kCGColorSpaceModelRGB or kCGColorSpaceModelMonochrome */
 /* and must match the specified CIFormat. */
 /* Supported options keys are kCGImageDestinationLossyCompressionQuality, */
-/* and the depth, disparity, and matte options. */
+/* kCGImageDestinationEmbedThumbnail,and the depth, disparity, and matte options. */
 - (nullable NSData*) HEIFRepresentationOfImage:(CIImage*)image
                                         format:(CIFormat)format
                                     colorSpace:(CGColorSpaceRef)colorSpace
@@ -494,7 +511,7 @@ CORE_IMAGE_EXPORT CIImageRepresentationOption const kCIImageRepresentationSemant
 /* Render a CIImage to JPEG file. Image must have a finite non-empty extent. */
 /* The CGColorSpace must be kCGColorSpaceModelRGB or kCGColorSpaceModelMonochrome. */
 /* Supported options keys are kCGImageDestinationLossyCompressionQuality, */
-/* and the depth, disparity, and matte options. */
+/* kCGImageDestinationEmbedThumbnail, and the depth, disparity, and matte options. */
 - (BOOL) writeJPEGRepresentationOfImage:(CIImage*)image
                                   toURL:(NSURL*)url
                              colorSpace:(CGColorSpaceRef)colorSpace
@@ -505,7 +522,7 @@ CORE_IMAGE_EXPORT CIImageRepresentationOption const kCIImageRepresentationSemant
 /* The CGColorSpace must be kCGColorSpaceModelRGB or kCGColorSpaceModelMonochrome */
 /* and must match the specified CIFormat. */
 /* Supported options keys are kCGImageDestinationLossyCompressionQuality, */
-/* and the depth, disparity, and matte options. */
+/* kCGImageDestinationEmbedThumbnail, and the depth, disparity, and matte options. */
 - (BOOL) writeHEIFRepresentationOfImage:(CIImage*)image
                                   toURL:(NSURL*)url
                                  format:(CIFormat)format

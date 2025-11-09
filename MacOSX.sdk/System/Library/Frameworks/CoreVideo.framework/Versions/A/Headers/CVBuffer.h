@@ -100,7 +100,7 @@ CV_EXPORT void	CVBufferSetAttachment( CVBufferRef CV_NONNULL buffer, CFStringRef
     @discussion You can attach any CF object to a CVBuffer object to store additional information. CVBufferGetAttachment retrieves an attachement identified by a key.
     @param      buffer  Target CVBuffer object.
     @param      key	Key in form of a CFString identifying the desired attachment.
-    @param      attachmentMode.  Returns the mode of the attachment, if desired.  May be NULL.
+    @param      attachmentMode  Returns the mode of the attachment, if desired.  May be NULL.
     @result     If found the attachment object
 */
 CV_EXPORT CFTypeRef CV_NULLABLE CVBufferGetAttachment( CVBufferRef CV_NONNULL buffer, CFStringRef CV_NONNULL key, CVAttachmentMode * CV_NULLABLE attachmentMode )  API_DEPRECATED_WITH_REPLACEMENT("CVBufferCopyAttachment", macos(10.4, 12.0), ios(4.0,15.0), tvos(9.0, 15.0), watchos(4.0, 8.0));
@@ -165,7 +165,7 @@ CV_EXPORT CFDictionaryRef CF_RETURNS_RETAINED CV_NULLABLE CVBufferCopyAttachment
     @discussion You can attach any CF object to a CVBuffer object to store additional information. CVBufferCopyAttachment retrieves a retained attachment identified by a key.
     @param      buffer  Target CVBuffer object.
     @param      key    Key in form of a CFString identifying the desired attachment.
-    @param      attachmentMode.  Returns the mode of the attachment, if desired.  May be NULL.
+    @param      attachmentMode  Returns the mode of the attachment, if desired.  May be NULL.
     @result     If found the attachment object, return the value; otherwize, return NULL.
 */
 CV_EXPORT CFTypeRef CV_NULLABLE CF_RETURNS_RETAINED CVBufferCopyAttachment( CVBufferRef CV_NONNULL buffer, CFStringRef CV_NONNULL key, CVAttachmentMode * CV_NULLABLE attachmentMode ) API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0));

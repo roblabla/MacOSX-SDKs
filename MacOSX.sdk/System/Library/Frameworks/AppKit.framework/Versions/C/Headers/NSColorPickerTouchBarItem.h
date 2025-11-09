@@ -1,7 +1,7 @@
 /*
  NSColorPickerTouchBarItem.h
  Application Kit
- Copyright (c) 2016-2023, Apple Inc.
+ Copyright (c) 2016-2024, Apple Inc.
  All rights reserved.
 */
 

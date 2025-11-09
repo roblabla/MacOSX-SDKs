@@ -31,7 +31,7 @@ NS_ASSUME_NONNULL_BEGIN
 typedef NS_ENUM(NSInteger, AVAssetSegmentType) {
 	AVAssetSegmentTypeInitialization	= 1,
 	AVAssetSegmentTypeSeparable			= 2
-} API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0)) API_UNAVAILABLE(watchos);
+} API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 
 /*!
@@ -42,7 +42,7 @@ typedef NS_ENUM(NSInteger, AVAssetSegmentType) {
 				Subclasses of this type that are used from Swift must fulfill the requirements of a Sendable type.
 */
 NS_SWIFT_SENDABLE
-API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0)) API_UNAVAILABLE(watchos)
+API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0), visionos(1.0)) API_UNAVAILABLE(watchos)
 @interface AVAssetSegmentReport : NSObject
 AV_INIT_UNAVAILABLE
 
@@ -67,7 +67,7 @@ AV_INIT_UNAVAILABLE
 	@discussion	Subclasses of this type that are used from Swift must fulfill the requirements of a Sendable type.
 */
 NS_SWIFT_SENDABLE
-API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0)) API_UNAVAILABLE(watchos)
+API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0), visionos(1.0)) API_UNAVAILABLE(watchos)
 @interface AVAssetSegmentTrackReport : NSObject
 AV_INIT_UNAVAILABLE
 
@@ -110,7 +110,7 @@ AV_INIT_UNAVAILABLE
 	@discussion	Subclasses of this type that are used from Swift must fulfill the requirements of a Sendable type.
 */
 NS_SWIFT_SENDABLE
-API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0)) API_UNAVAILABLE(watchos)
+API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0), visionos(1.0)) API_UNAVAILABLE(watchos)
 @interface AVAssetSegmentReportSampleInformation : NSObject
 AV_INIT_UNAVAILABLE
 

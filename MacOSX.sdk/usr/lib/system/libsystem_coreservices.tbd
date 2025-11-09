@@ -18,5 +18,6 @@ exports:
                        __libcoreservices_fork_child, __set_user_dir_suffix, _sysdir_get_next_search_path_enumeration, 
                        _sysdir_start_search_path_enumeration, _sysdir_start_search_path_enumeration_private ]
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-    symbols:         [ __idle_exit ]
+    symbols:         [ ___user_relative_dirname_with_hints, __dirhelper_relative_with_hints, 
+                       __idle_exit ]
 ...

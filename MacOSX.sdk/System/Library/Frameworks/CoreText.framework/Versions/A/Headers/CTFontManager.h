@@ -2,7 +2,7 @@
  *  CTFontManager.h
  *  CoreText
  *
- *  Copyright (c) 2008-2022 Apple Inc. All rights reserved.
+ *  Copyright (c) 2008-2024 Apple Inc. All rights reserved.
  *
  */
 
@@ -35,6 +35,7 @@ CF_ASSUME_NONNULL_BEGIN
  
     @result     An array of CFStrings.
 */
+CT_EXPORT
 CFArrayRef CTFontManagerCopyAvailablePostScriptNames( void ) CT_AVAILABLE(macos(10.6), ios(10.0), watchos(3.0), tvos(10.0));
 
 /*!
@@ -43,6 +44,7 @@ CFArrayRef CTFontManagerCopyAvailablePostScriptNames( void ) CT_AVAILABLE(macos(
 
     @result     An array of CFStrings.
 */
+CT_EXPORT
 CFArrayRef CTFontManagerCopyAvailableFontFamilyNames( void ) CT_AVAILABLE(macos(10.6), ios(10.0), watchos(3.0), tvos(10.0));
 
 /*!
@@ -51,6 +53,7 @@ CFArrayRef CTFontManagerCopyAvailableFontFamilyNames( void ) CT_AVAILABLE(macos(
 
     @result     An array of CFURLs.
 */
+CT_EXPORT
 CFArrayRef CTFontManagerCopyAvailableFontURLs( void ) CT_AVAILABLE(macos(10.6)) CT_UNAVAILABLE(ios, watchos, tvos);
 
 /*!
@@ -65,6 +68,7 @@ CFArrayRef CTFontManagerCopyAvailableFontURLs( void ) CT_AVAILABLE(macos(10.6)) 
                 Unused. Can be NULL.
     @result     A CFComparisonResult value indicating the sort order for the two family names. kCFComparisonResultGreaterThan if family1 is greater than family2, kCFComparisonResultLessThan if family1 is less than family2, and kCFComparisonResultEqualTo if they are equal.
 */
+CT_EXPORT
 CFComparisonResult CTFontManagerCompareFontFamilyNames(
     const void *        family1,
     const void *        family2,
@@ -80,6 +84,7 @@ CFComparisonResult CTFontManagerCompareFontFamilyNames(
 
     @result     An array of CTFontDescriptors or NULL if there are no valid fonts.
 */
+CT_EXPORT
 CFArrayRef _Nullable CTFontManagerCreateFontDescriptorsFromURL(
     CFURLRef            fileURL ) CT_AVAILABLE(macos(10.6), ios(7.0), watchos(2.0), tvos(9.0));
 
@@ -95,6 +100,7 @@ CFArrayRef _Nullable CTFontManagerCreateFontDescriptorsFromURL(
 
     @result     A font descriptor created from the data or NULL if it is not a valid font.
 */
+CT_EXPORT
 CTFontDescriptorRef _Nullable CTFontManagerCreateFontDescriptorFromData(
     CFDataRef               data ) CT_AVAILABLE(macos(10.7), ios(7.0), watchos(2.0), tvos(9.0));
 
@@ -108,6 +114,7 @@ CTFontDescriptorRef _Nullable CTFontManagerCreateFontDescriptorFromData(
 
     @result     An array of font descriptors. This can be an empty array in the event of invalid or unsupported font data.
 */
+CT_EXPORT
 CFArrayRef CTFontManagerCreateFontDescriptorsFromData(CFDataRef data) CT_AVAILABLE(macos(10.13), ios(11.0), watchos(4.0), tvos(11.0));
 
 /*!
@@ -160,6 +167,7 @@ CT_EXPORT const CFStringRef kCTFontRegistrationUserInfoAttribute CT_AVAILABLE(io
 
     @result     Returns true if registration of the fonts was successful.
 */
+CT_EXPORT
 bool CTFontManagerRegisterFontsForURL(
     CFURLRef                fontURL,
     CTFontManagerScope      scope,
@@ -182,6 +190,7 @@ bool CTFontManagerRegisterFontsForURL(
     @result     Returns true if unregistration of the fonts was successful.
 
 */
+CT_EXPORT
 bool CTFontManagerUnregisterFontsForURL(
     CFURLRef                fontURL,
     CTFontManagerScope      scope,
@@ -190,8 +199,9 @@ bool CTFontManagerUnregisterFontsForURL(
 /*!
     @function   CTFontManagerRegisterGraphicsFont
     @abstract   Registers the specified graphics font with the font manager. Registered fonts participate in font descriptor matching.
-                Attempts to register a font that is either already registered or contains the same PostScript name of an already registered font will fail.
-                This functionality is useful for fonts that may be embedded in documents or present/constructed in memory. A graphics font is obtained
+
+    @discussion Attempts to register a font that is either already registered or contains the same PostScript name of an already registered font will fail.
+                This functionality is intended for fonts that may be embedded in documents or present/constructed in memory. A graphics font is obtained
                 by calling CGFontCreateWithDataProvider. Fonts that are backed by files should be registered using CTFontManagerRegisterFontsForURL.
  
     @param      font
@@ -202,10 +212,11 @@ bool CTFontManagerUnregisterFontsForURL(
  
     @result     Returns true if registration of the fonts was successful.
 */
+CT_EXPORT
 bool CTFontManagerRegisterGraphicsFont(
     CGFontRef               font,
-    CFErrorRef *            error ) CT_AVAILABLE(macos(10.8), ios(4.1), watchos(2.0), tvos(9.0));
-    
+    CFErrorRef *            error ) CT_DEPRECATED("Use CTFontManagerCreateFontDescriptorsFromData or CTFontManagerRegisterFontsForURL", macos(10.8, 15), ios(4.1, 18), watchos(2, 11), tvos(9, 18));
+
 /*!
     @function   CTFontManagerUnregisterGraphicsFont
     @abstract   Unregisters the specified graphics font with the font manager. Unregistered fonts do not participate in font descriptor matching.
@@ -218,9 +229,10 @@ bool CTFontManagerRegisterGraphicsFont(
  
     @result     Returns true if unregistration of the font was successful.
 */
+CT_EXPORT
 bool CTFontManagerUnregisterGraphicsFont(
     CGFontRef               font,
-    CFErrorRef *            error ) CT_AVAILABLE(macos(10.8), ios(4.1), watchos(2.0), tvos(9.0));
+    CFErrorRef *            error ) CT_DEPRECATED("Use the API corresponding to the one used to register the font", macos(10.8, 15), ios(4.1, 18), watchos(2, 11), tvos(9, 18));
 
 /*!
     @function   CTFontManagerRegisterFontsForURLs
@@ -237,6 +249,7 @@ bool CTFontManagerUnregisterGraphicsFont(
 
     @result     Returns true if registration of all font URLs was successful. Otherwise false.
 */
+CT_EXPORT
 bool CTFontManagerRegisterFontsForURLs(
     CFArrayRef              fontURLs,
     CTFontManagerScope      scope,
@@ -258,6 +271,7 @@ bool CTFontManagerRegisterFontsForURLs(
 
     @result     Returns true if unregistration of all font URLs was successful. Otherwise false.
 */
+CT_EXPORT
 bool CTFontManagerUnregisterFontsForURLs(
     CFArrayRef              fontURLs,
     CTFontManagerScope      scope,
@@ -282,6 +296,7 @@ bool CTFontManagerUnregisterFontsForURLs(
 	@param      registrationHandler
 				Block called as errors are discovered or upon completion. The errors parameter contains an array of CFError references. An empty array indicates no errors. Each error reference will contain a CFArray of font URLs corresponding to kCTFontManagerErrorFontURLsKey. These URLs represent the font files that caused the error, and were not successfully registered. Note, the handler may be called multiple times during the registration process. The done parameter will be set to true when the registration process has completed. The handler should return false if the operation is to be stopped. This may be desirable after receiving an error.
  */
+CT_EXPORT
 void CTFontManagerRegisterFontURLs(
 	CFArrayRef              fontURLs,
 	CTFontManagerScope      scope,
@@ -302,6 +317,7 @@ void CTFontManagerRegisterFontURLs(
 	@param      registrationHandler
 				Block called as errors are discovered or upon completion. The errors parameter will be an empty array if all files are unregistered. Otherwise, it will contain an array of CFError references. Each error reference will contain a CFArray of font URLs corresponding to kCTFontManagerErrorFontURLsKey. These URLs represent the font files that caused the error, and were not successfully unregistered. Note, the handler may be called multiple times during the unregistration process. The done parameter will be set to true when the unregistration process has completed. The handler should return false if the operation is to be stopped. This may be desirable after receiving an error.
  */
+CT_EXPORT
 void CTFontManagerUnregisterFontURLs(
 	CFArrayRef              fontURLs,
 	CTFontManagerScope      scope,
@@ -325,6 +341,7 @@ void CTFontManagerUnregisterFontURLs(
 	@param      registrationHandler
 				Block called as errors are discovered or upon completion. The errors parameter contains an array of CFError references. An empty array indicates no errors. Each error reference will contain a CFArray of font descriptors corresponding to kCTFontManagerErrorFontDescriptorsKey. These represent the font descriptors that caused the error, and were not successfully registered. Note, the handler may be called multiple times during the registration process. The done parameter will be set to true when the registration process has completed. The handler should return false if the operation is to be stopped. This may be desirable after receiving an error.
  */
+CT_EXPORT
 void CTFontManagerRegisterFontDescriptors(
 	CFArrayRef              fontDescriptors,
 	CTFontManagerScope      scope,
@@ -344,6 +361,7 @@ void CTFontManagerRegisterFontDescriptors(
 	@param      registrationHandler
 				Block called as errors are discovered or upon completion. The errors parameter will be an empty array if all font descriptors are unregistered. Otherwise, it will contain an array of CFError references. Each error reference will contain a CFArray of font descriptors corresponding to kCTFontManagerErrorFontDescriptorsKey. These represent the font descriptors that caused the error, and were not successfully unregistered. Note, the handler may be called multiple times during the unregistration process. The done parameter will be set to true when the unregistration process has completed. The handler should return false if the operation is to be stopped. This may be desirable after receiving an error.
  */
+CT_EXPORT
 void CTFontManagerUnregisterFontDescriptors(
 	CFArrayRef              fontDescriptors,
 	CTFontManagerScope      scope,
@@ -371,6 +389,7 @@ void CTFontManagerUnregisterFontDescriptors(
 	@param      registrationHandler
 				Block called as errors are discovered, or upon completion. The errors parameter contains an array of CFError references. An empty array indicates no errors. Each error reference will contain a CFArray of font asset names corresponding to kCTFontManagerErrorFontAssetNameKey. These represent the font asset names that were not successfully registered. Note, the handler may be called multiple times during the registration process. The done parameter will be set to true when the registration process has completed. The handler should return false if the operation is to be stopped. This may be desirable after receiving an error.
  */
+CT_EXPORT
 void CTFontManagerRegisterFontsWithAssetNames(
 	CFArrayRef              fontAssetNames,
 	CFBundleRef _Nullable   bundle,
@@ -389,6 +408,7 @@ void CTFontManagerRegisterFontsWithAssetNames(
     @param      enable
                 Boolean value indicating whether the fonts matching descriptors should be enabled for font descriptor matching.
 */
+CT_EXPORT
 void CTFontManagerEnableFontDescriptors(
     CFArrayRef              descriptors,
     bool                    enable ) CT_AVAILABLE(macos(10.6)) CT_UNAVAILABLE(ios, watchos, tvos);
@@ -402,6 +422,7 @@ void CTFontManagerEnableFontDescriptors(
 
     @result     Returns the registration scope of the specified URL, will return kCTFontManagerScopeNone if not currently registered.
 */
+CT_EXPORT
 CTFontManagerScope CTFontManagerGetScopeForURL(
     CFURLRef                fontURL ) CT_AVAILABLE(macos(10.6)) CT_UNAVAILABLE(ios, watchos, tvos);
 
@@ -419,6 +440,7 @@ CTFontManagerScope CTFontManagerGetScopeForURL(
 	
 	@result     Array of of font descriptors registered by the application. Array may be empty if nothing is registered.
  */
+CT_EXPORT
 CFArrayRef  CTFontManagerCopyRegisteredFontDescriptors(
 	CTFontManagerScope      scope,
 	bool                    enabled ) CT_AVAILABLE(ios(13.0)) API_UNAVAILABLE(macos, watchos, tvos);
@@ -436,6 +458,7 @@ CFArrayRef  CTFontManagerCopyRegisteredFontDescriptors(
 	@param      completionHandler
 				Block called after request operation completes. Block takes a single parameter containing an array of those descriptors that could not be resolved/found. The array can be empty if all descriptors were resolved.
  */
+CT_EXPORT
 void CTFontManagerRequestFonts(
 	CFArrayRef              fontDescriptors,
 	void                    (^completionHandler)(CFArrayRef unresolvedFontDescriptors) ) CT_AVAILABLE(ios(13.0)) API_UNAVAILABLE(macos, watchos, tvos);
@@ -452,6 +475,7 @@ void CTFontManagerRequestFonts(
 
     @result     This function returns true if the file is in a supported font format.
 */
+CT_EXPORT
 bool CTFontManagerIsSupportedFont(
     CFURLRef                fontURL ) CT_AVAILABLE(macos(10.6)) CT_UNAVAILABLE(ios, watchos, tvos);
 
@@ -469,6 +493,7 @@ bool CTFontManagerIsSupportedFont(
                 A block to handle the font request.
     @result     A CFRunLoopSourceRef that should be added to the run loop. To stop receiving requests, invalidate this run loop source. Will return NULL on error, in the case of a duplicate requestPortName or invalid context structure.
 */
+CT_EXPORT
 CFRunLoopSourceRef _Nullable CTFontManagerCreateFontRequestRunLoopSource(
     CFIndex         sourceOrder,
     CFArrayRef    (^createMatchesCallback)(CFDictionaryRef requestAttributes, pid_t requestingProcess)) CT_DEPRECATED("This functionality will be removed in a future release", macos(10.6, 11.0)) CT_UNAVAILABLE(ios, watchos, tvos);
@@ -512,6 +537,7 @@ typedef CF_ENUM(uint32_t, CTFontManagerAutoActivationSetting) {
                 The new setting.
     @discussion Function will apply the setting to the appropriate preferences location.
 */
+CT_EXPORT
 void CTFontManagerSetAutoActivationSetting(
     CFStringRef _Nullable               bundleIdentifier,
     CTFontManagerAutoActivationSetting  setting ) CT_AVAILABLE(macos(10.6)) CT_UNAVAILABLE(ios, watchos, tvos);
@@ -525,6 +551,7 @@ void CTFontManagerSetAutoActivationSetting(
                 will set the global auto-activation settings.
     @result     Will return the auto-activation setting for specified bundle identifier.
 */
+CT_EXPORT
 CTFontManagerAutoActivationSetting CTFontManagerGetAutoActivationSetting(
     CFStringRef _Nullable bundleIdentifier ) CT_AVAILABLE(macos(10.6)) CT_UNAVAILABLE(ios, watchos, tvos);
 

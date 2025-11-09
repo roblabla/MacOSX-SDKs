@@ -17,9 +17,9 @@ typedef NS_ENUM(NSInteger, UISwitchStyle) {
     UISwitchStyleAutomatic = 0,  // The style most appropriate to the current UIUserInterfaceIdiom
     UISwitchStyleCheckbox,       // The AppKit-style checkbox — only supported for Catalyst in the Mac idiom
     UISwitchStyleSliding         // The on/off sliding style switch — classic iOS appearance.
-} API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(tvos);
+} API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(tvos, watchos);
 
-UIKIT_EXTERN API_AVAILABLE(ios(2.0)) API_UNAVAILABLE(tvos) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(2.0)) API_UNAVAILABLE(tvos, watchos) NS_SWIFT_UI_ACTOR
 @interface UISwitch : UIControl <NSCoding>
 
 @property(nullable, nonatomic, strong) UIColor *onTintColor API_AVAILABLE(ios(5.0)) UI_APPEARANCE_SELECTOR;
@@ -30,13 +30,13 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) API_UNAVAILABLE(tvos) NS_SWIFT_UI_ACTOR
 
 /// The title displayed alongside the switch, positioned appropriately for the @c UIUserInterfaceIdiom.
 /// @note This property is only supported for Catalyst in the Mac idiom.
-@property(nullable, nonatomic, copy) NSString *title API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(tvos);
+@property(nullable, nonatomic, copy) NSString *title API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(tvos, watchos);
 
 /// The switch's display style. This property always returns a concrete, resolved style (never UISwitchStyleAutomatic).
-@property(nonatomic, readonly) UISwitchStyle style API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(tvos);
+@property(nonatomic, readonly) UISwitchStyle style API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(tvos, watchos);
 
 /// Request a style for the switch. If the style changed, then the switch may resize.
-@property(nonatomic) UISwitchStyle preferredStyle API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(tvos);
+@property(nonatomic) UISwitchStyle preferredStyle API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(tvos, watchos);
 
 @property(nonatomic,getter=isOn) BOOL on;
 

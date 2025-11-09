@@ -24,10 +24,11 @@ exports:
                        SWCollaborationShareOptions, SWPerson, SWPersonIdentity, SWPersonIdentityProof, 
                        SWSignedPersonIdentityProof, SWStartCollaborationAction, SWUpdateCollaborationParticipantsAction, 
                        _SWActionResponse, _SWBaseCollaborationSource, _SWCollaborationCoordinator, 
-                       _SWCollaborationMetadata, _SWCollaborationOption, _SWCollaborationOptionsGroup, 
-                       _SWCollaborationOptionsPickerGroup, _SWCollaborationServiceSource, 
-                       _SWCollaborationServiceSourceEntitled, _SWCollaborationShareOptions, 
-                       _SWMutableCollaborationMetadata, _SWPendingCollaboration, 
-                       _SWPerson, _SWPersonIdentity, _SWPersonIdentityProof, _SWStartCollaborationAction, 
-                       _SWStartCollaborationActionResponse, _SWUpdateCollaborationParticipantsAction ]
+                       _SWCollaborationMetadata, _SWCollaborationMetadataType, _SWCollaborationOption, 
+                       _SWCollaborationOptionsGroup, _SWCollaborationOptionsPickerGroup, 
+                       _SWCollaborationServiceSource, _SWCollaborationServiceSourceEntitled, 
+                       _SWCollaborationShareOptions, _SWMutableCollaborationMetadata, 
+                       _SWPendingCollaboration, _SWPerson, _SWPersonIdentity, _SWPersonIdentityProof, 
+                       _SWStartCollaborationAction, _SWStartCollaborationActionResponse, 
+                       _SWUpdateCollaborationParticipantsAction ]
 ...

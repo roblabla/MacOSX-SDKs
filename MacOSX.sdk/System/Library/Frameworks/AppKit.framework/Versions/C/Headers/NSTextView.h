@@ -1,7 +1,7 @@
 /*
         NSTextView.h
         Application Kit
-        Copyright (c) 1994-2023, Apple Inc.
+        Copyright (c) 1994-2024, Apple Inc.
         All rights reserved.
 */
 
@@ -50,6 +50,7 @@ APPKIT_API_UNAVAILABLE_BEGIN_MACCATALYST
 @class NSSharingServicePicker;
 @class NSValue;
 @class NSTextAttachment;
+@class NSTextRange;
 
 /* Values for NSSelectionGranularity */
 typedef NS_ENUM(NSUInteger, NSSelectionGranularity) {
@@ -234,6 +235,7 @@ NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE
 #pragma mark Dark Mode
 // When YES, enables the adaptive color mapping mode. In this mode under the dark effective appearance, NSTextView maps all colors with NSColorTypeComponentBased by inverting the brightness whenever they are coming in and out of the model object, NSTextStorage. For example, when rendering, interacting with NSColorPanel and NSFontManager, and converting from/to the pasteboard and external formats, the color values are converted between the model and rendering contexts. Note that the color conversion algorithm compresses the brightness range and, therefore, does not retain the round-trip fidelity between the light and dark appearances. It may not be suitable for rich text authoring, so it is a good idea to provide a command or preference for your users to see and edit their docs without this option, or in light mode.
 @property BOOL usesAdaptiveColorMappingForDarkAppearance API_AVAILABLE(macos(10.14));
+
 @end
 
 @interface NSTextView (NSCompletion)
@@ -251,7 +253,6 @@ NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE
 
 // Called with final == NO as the user moves through the potential completions, then with final == YES when a completion is definitively selected (or completion is cancelled and the original value is reinserted).  The default implementation inserts the completion into the text at the appropriate location.  The movement argument takes its values from the movement codes defined in NSText.h, and allows subclassers to distinguish between canceling completion and selection by arrow keys, by return, by tab, or by other means such as clicking.
 - (void)insertCompletion:(NSString *)word forPartialWordRange:(NSRange)charRange movement:(NSInteger)movement isFinal:(BOOL)flag;
-
 @end
 
 @interface NSTextView (NSPasteboard)
@@ -420,12 +421,20 @@ NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE
 @property BOOL usesFontPanel;
 @property (getter=isRulerVisible) BOOL rulerVisible;
 - (void)setSelectedRange:(NSRange)charRange;
-    // Other NSText methods are implemented in the base NSTextView implementation rather than in this category.  See NSText.h for declarations.
+// Other NSText methods are implemented in the base NSTextView implementation rather than in this category.  See NSText.h for declarations.
 
 /*************************** Input Source support ***************************/
 /* Returns an array of locale identifiers representing keyboard input sources allowed to be enabled when the receiver has the keyboard focus.
  */
 @property (nullable, copy) NSArray<NSString *> *allowedInputSourceLocales API_AVAILABLE(macos(10.5));
+
+#pragma mark WritingTools
+@property(nonatomic,readonly,getter=isWritingToolsActive) BOOL writingToolsActive API_AVAILABLE(macos(15.0));
+
+@property NSWritingToolsBehavior writingToolsBehavior API_AVAILABLE(macos(15.0));
+@property NSWritingToolsResultOptions allowedWritingToolsResultOptions API_AVAILABLE(macos(15.0));
+@property NSWritingToolsAllowedInputOptions writingToolsAllowedInputOptions API_DEPRECATED_WITH_REPLACEMENT("allowedWritingToolsResultOptions", macos(15.0, API_TO_BE_DEPRECATED));
+
 @end
 
 @interface NSTextView (NSTextChecking)
@@ -475,6 +484,9 @@ NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE
 
 // Allows clients to turn inline prediction on or off for this view. The default setting should be appropriate for most purposes, but in some cases clients may wish to set this explicitly.
 @property NSTextInputTraitType inlinePredictionType API_AVAILABLE(macos(14.0));
+
+// Allows clients to turn math inline completion on or off for this view.
+@property NSTextInputTraitType mathExpressionCompletionType API_AVAILABLE(macos(15.0));
 
 @end
 
@@ -537,6 +549,20 @@ NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE
 // Instantiates a new text view configured for displaying the document contents enclosed in a scroll view. Access the text view via -[NSScrollView documentView].
 + (NSScrollView *)scrollableDocumentContentTextView API_AVAILABLE(macos(10.14));
 + (NSScrollView *)scrollablePlainDocumentContentTextView API_AVAILABLE(macos(10.14));
+@end
+
+#pragma mark NSTextHighlight
+@interface NSTextView (NSTextView_TextHighlight)
+/*************************** Text Highlight  support ***************************/
+// Attributes for NSTextHighlightStyleAttributeName rendering. It is consulted when the corresponding NSTextHighlightColorSchemeAttributeName is NSTextHighlightColorSchemeDefault. NSForegroundColorAttributeName overrides the text color, and NSBackgroundColorAttributeName specifies the highlight color rendered with drawTextHighlightBackground(for textRange:, origin:). When NSForegroundColorAttributeName is missing, it uses the text color specified by the document content. When NSBackgroundColorAttributeName is not specified, it is derived from NSForegroundColorAttributeName.
+@property (copy) NSDictionary<NSAttributedStringKey, id> *textHighlightAttributes API_AVAILABLE(macos(15.0));
+
+// Renders the text highlight background for NSTextHighlightStyleAttributeName in textRange. origin specifies the coordinate origin in the NSTextContainer coordinate system of the rendering context.
+- (void)drawTextHighlightBackgroundForTextRange:(NSTextRange *)textRange origin:(NSPoint)origin API_AVAILABLE(macos(15.0));
+
+/// An action for toggling `NSTextHighlightStyleAttributeName` in the receiver’s selected range.
+/// The sender should be a menu item with a `representedObject` of type (`NSTextHighlightColorScheme`).
+- (IBAction)highlight:(nullable id)sender API_AVAILABLE(macos(15.0));
 @end
 
 @interface NSTextView (NSDeprecated)
@@ -629,6 +655,11 @@ NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE
 // Delegate only. Notifies the delegate that the user selected the candidate at index in -[NSCandidateListTouchBarItem candidates] for textView.candidateListTouchBarItem. When no candidate selected, index is NSNotFound. Returning YES allows textView to insert the candidate into the text storage if it's NSString, NSAttributedString, or NSTextCheckingResult.
 - (BOOL)textView:(NSTextView *)textView shouldSelectCandidateAtIndex:(NSUInteger)index NS_SWIFT_UI_ACTOR API_AVAILABLE(macos(10.12.2));
 
+#pragma mark WritingTools
+// Delegate only.
+- (void)textViewWritingToolsWillBegin:(NSTextView *)textView NS_SWIFT_UI_ACTOR API_AVAILABLE(macos(15.0));
+- (void)textViewWritingToolsDidEnd:(NSTextView *)textView NS_SWIFT_UI_ACTOR API_AVAILABLE(macos(15.0));
+- (NSArray<NSValue *> *)textView:(NSTextView *)textView writingToolsIgnoredRangesInEnclosingRange:(NSRange)enclosingRange NS_SWIFT_UI_ACTOR API_AVAILABLE(macos(15.0));
 
 // The following delegate-only methods are deprecated in favor of the more verbose ones above.
 - (BOOL)textView:(NSTextView *)textView clickedOnLink:(null_unspecified id)link API_DEPRECATED("Use -textView:clickedOnLink:atIndex: instead", macos(10.0,10.6));

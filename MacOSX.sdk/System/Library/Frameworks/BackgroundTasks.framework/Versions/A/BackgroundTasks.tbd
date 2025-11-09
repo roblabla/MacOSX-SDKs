@@ -9,7 +9,8 @@ exports:
     symbols:         [ __BGTaskSchedulerRunningTasksDidChangeNotification ]
   - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
     symbols:         [ _BGTaskSchedulerErrorDomain ]
-    objc-classes:    [ BGAppRefreshTask, BGAppRefreshTaskRequest, BGHealthResearchTask, 
-                       BGHealthResearchTaskRequest, BGProcessingTask, BGProcessingTaskRequest, 
-                       BGTask, BGTaskRequest, BGTaskScheduler ]
+    objc-classes:    [ BGAppRefreshTask, BGAppRefreshTaskRequest, BGContinuedProcessingTask, 
+                       BGContinuedProcessingTaskRequest, BGHealthResearchTask, BGHealthResearchTaskRequest, 
+                       BGProcessingTask, BGProcessingTaskRequest, BGTask, BGTaskRequest, 
+                       BGTaskScheduler, _BGContinuedProcessingTask, _BGContinuedProcessingTaskRequest ]
 ...

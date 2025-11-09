@@ -15,10 +15,8 @@ NS_ASSUME_NONNULL_BEGIN
 @class MLParameterKey;
 @class MLParameterDescription;
 
-/*!
- * A description of a model containing input and output feature descriptions, optionally outputted features
- * with special meaning and metadata.
- */
+/// A description of a model containing input, output, and state feature descriptions, optionally outputted features
+/// with special meaning and metadata.
 API_AVAILABLE(macos(10.13), ios(11.0), watchos(4.0), tvos(11.0))
 ML_EXPORT
 @interface MLModelDescription : NSObject <NSSecureCoding>
@@ -28,6 +26,9 @@ ML_EXPORT
 
 /// Description of the outputs from the model
 @property (readonly, nonatomic) NSDictionary<NSString *, MLFeatureDescription *> *outputDescriptionsByName;
+
+/// Description of the state features.
+@property (readonly, nonatomic) NSDictionary<NSString *, MLFeatureDescription *> *stateDescriptionsByName API_AVAILABLE(macos(15.0), ios(18.0), watchos(11.0), tvos(18.0));
 
 /// Name of the primary target / predicted output feature in the output descriptions
 @property (readonly, nullable, nonatomic, copy) NSString *predictedFeatureName;

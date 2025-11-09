@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 @discussion
  The CMIOExtensionProperty string constants indicates a property key.
  */
-typedef NSString *CMIOExtensionProperty NS_TYPED_ENUM API_AVAILABLE(macos(12.3), macCatalyst(15.4)) API_UNAVAILABLE(ios, tvos);
+typedef NSString *CMIOExtensionProperty NS_TYPED_ENUM API_AVAILABLE(macos(12.3), macCatalyst(15.4)) API_UNAVAILABLE(ios, tvos, visionos);
 
 /*!
 @constant CMIOExtensionPropertyProviderName
@@ -25,7 +25,7 @@ typedef NSString *CMIOExtensionProperty NS_TYPED_ENUM API_AVAILABLE(macos(12.3),
 @discussion
  The property state for CMIOExtensionPropertyProviderName is a string with a readonly attribute.
 */
-FOUNDATION_EXTERN CMIOExtensionProperty const CMIOExtensionPropertyProviderName API_AVAILABLE(macos(12.3), macCatalyst(15.4)) API_UNAVAILABLE(ios, tvos);
+FOUNDATION_EXTERN CMIOExtensionProperty const CMIOExtensionPropertyProviderName API_AVAILABLE(macos(12.3), macCatalyst(15.4)) API_UNAVAILABLE(ios, tvos, visionos);
 
 /*!
 @constant CMIOExtensionPropertyProviderManufacturer
@@ -34,7 +34,7 @@ FOUNDATION_EXTERN CMIOExtensionProperty const CMIOExtensionPropertyProviderName 
 @discussion
  The property state for CMIOExtensionPropertyProviderManufacturer is a string with a readonly attribute.
 */
-FOUNDATION_EXTERN CMIOExtensionProperty const CMIOExtensionPropertyProviderManufacturer API_AVAILABLE(macos(12.3), macCatalyst(15.4)) API_UNAVAILABLE(ios, tvos);
+FOUNDATION_EXTERN CMIOExtensionProperty const CMIOExtensionPropertyProviderManufacturer API_AVAILABLE(macos(12.3), macCatalyst(15.4)) API_UNAVAILABLE(ios, tvos, visionos);
 
 /*!
 @constant CMIOExtensionPropertyDeviceModel
@@ -43,7 +43,7 @@ FOUNDATION_EXTERN CMIOExtensionProperty const CMIOExtensionPropertyProviderManuf
 @discussion
  The property state for CMIOExtensionPropertyDeviceModel is a string with a readonly attribute.
 */
-FOUNDATION_EXTERN CMIOExtensionProperty const CMIOExtensionPropertyDeviceModel API_AVAILABLE(macos(12.3), macCatalyst(15.4)) API_UNAVAILABLE(ios, tvos);
+FOUNDATION_EXTERN CMIOExtensionProperty const CMIOExtensionPropertyDeviceModel API_AVAILABLE(macos(12.3), macCatalyst(15.4)) API_UNAVAILABLE(ios, tvos, visionos);
 
 /*!
 @constant CMIOExtensionPropertyDeviceIsSuspended
@@ -54,7 +54,7 @@ FOUNDATION_EXTERN CMIOExtensionProperty const CMIOExtensionPropertyDeviceModel A
  to all requests just as if it were active, but the stream(s) will not provide any data.
  The property state for CMIOExtensionPropertyDeviceIsSuspended is a number as boolean with a readonly attribute.
 */
-FOUNDATION_EXTERN CMIOExtensionProperty const CMIOExtensionPropertyDeviceIsSuspended API_AVAILABLE(macos(12.3), macCatalyst(15.4)) API_UNAVAILABLE(ios, tvos);
+FOUNDATION_EXTERN CMIOExtensionProperty const CMIOExtensionPropertyDeviceIsSuspended API_AVAILABLE(macos(12.3), macCatalyst(15.4)) API_UNAVAILABLE(ios, tvos, visionos);
 
 /*!
 @constant CMIOExtensionPropertyDeviceTransportType
@@ -63,7 +63,7 @@ FOUNDATION_EXTERN CMIOExtensionProperty const CMIOExtensionPropertyDeviceIsSuspe
 @discussion
  The property state for CMIOExtensionPropertyDeviceTransportType is a number whose value correspond to the audio transport type ( kIOAudioDeviceTransportType... ) defined in <IOKit/audio/IOAudioTypes.h> and with a readonly attribute.
 */
-FOUNDATION_EXTERN CMIOExtensionProperty const CMIOExtensionPropertyDeviceTransportType API_AVAILABLE(macos(12.3), macCatalyst(15.4)) API_UNAVAILABLE(ios, tvos);
+FOUNDATION_EXTERN CMIOExtensionProperty const CMIOExtensionPropertyDeviceTransportType API_AVAILABLE(macos(12.3), macCatalyst(15.4)) API_UNAVAILABLE(ios, tvos, visionos);
 
 /*!
 @constant CMIOExtensionPropertyDeviceLinkedCoreAudioDeviceUID
@@ -72,7 +72,7 @@ FOUNDATION_EXTERN CMIOExtensionProperty const CMIOExtensionPropertyDeviceTranspo
 @discussion
  The property state for CMIOExtensionPropertyDeviceLinkedCoreAudioDeviceUID is a string with a readonly attribute.
 */
-FOUNDATION_EXTERN CMIOExtensionProperty const CMIOExtensionPropertyDeviceLinkedCoreAudioDeviceUID API_AVAILABLE(macos(12.3), macCatalyst(15.4)) API_UNAVAILABLE(ios, tvos);
+FOUNDATION_EXTERN CMIOExtensionProperty const CMIOExtensionPropertyDeviceLinkedCoreAudioDeviceUID API_AVAILABLE(macos(12.3), macCatalyst(15.4)) API_UNAVAILABLE(ios, tvos, visionos);
 
 /*!
 @constant CMIOExtensionPropertyDeviceCanBeDefaultInputDevice
@@ -81,7 +81,7 @@ FOUNDATION_EXTERN CMIOExtensionProperty const CMIOExtensionPropertyDeviceLinkedC
 @discussion
  The property state for CMIOExtensionPropertyDeviceCanBeDefaultInputDevice is a number representing a boolean value.
 */
-FOUNDATION_EXTERN CMIOExtensionProperty const CMIOExtensionPropertyDeviceCanBeDefaultInputDevice API_AVAILABLE(macos(12.3), macCatalyst(15.4)) API_UNAVAILABLE(ios, tvos);
+FOUNDATION_EXTERN CMIOExtensionProperty const CMIOExtensionPropertyDeviceCanBeDefaultInputDevice API_AVAILABLE(macos(12.3), macCatalyst(15.4)) API_UNAVAILABLE(ios, tvos, visionos);
 
 /*!
 @constant CMIOExtensionPropertyDeviceCanBeDefaultOutputDevice
@@ -90,7 +90,7 @@ FOUNDATION_EXTERN CMIOExtensionProperty const CMIOExtensionPropertyDeviceCanBeDe
 @discussion
  The property state for CMIOExtensionPropertyDeviceCanBeDefaultOutputDevice is a number representing a boolean value.
 */
-FOUNDATION_EXTERN CMIOExtensionProperty const CMIOExtensionPropertyDeviceCanBeDefaultOutputDevice API_AVAILABLE(macos(12.3), macCatalyst(15.4)) API_UNAVAILABLE(ios, tvos);
+FOUNDATION_EXTERN CMIOExtensionProperty const CMIOExtensionPropertyDeviceCanBeDefaultOutputDevice API_AVAILABLE(macos(12.3), macCatalyst(15.4)) API_UNAVAILABLE(ios, tvos, visionos);
 
 /*!
 @constant CMIOExtensionPropertyDeviceLatency
@@ -99,7 +99,7 @@ FOUNDATION_EXTERN CMIOExtensionProperty const CMIOExtensionPropertyDeviceCanBeDe
 @discussion
  The property state for CMIOExtensionPropertyDeviceLatency is a number containing the number of frames of latency in the CMIOExtensionDevice. Note that input and output latency may differ. Further, the CMIOExtensionDevice's CMIOExtensionStreams may have additional latency so they should be queried as well. If both the device and the stream say they have latency, then the total latency for the stream is the device latency summed with the stream latency. This property translates to the kCMIODevicePropertyLatency property.
 */
-FOUNDATION_EXTERN CMIOExtensionProperty const CMIOExtensionPropertyDeviceLatency API_AVAILABLE(macos(14.4), macCatalyst(17.4)) API_UNAVAILABLE(ios, tvos);
+FOUNDATION_EXTERN CMIOExtensionProperty const CMIOExtensionPropertyDeviceLatency API_AVAILABLE(macos(14.4), macCatalyst(17.4)) API_UNAVAILABLE(ios, tvos, visionos);
 
 /*!
 @constant CMIOExtensionPropertyStreamActiveFormatIndex
@@ -108,7 +108,7 @@ FOUNDATION_EXTERN CMIOExtensionProperty const CMIOExtensionPropertyDeviceLatency
 @discussion
  The property state for CMIOExtensionPropertyStreamActiveFormatIndex is a number.
 */
-FOUNDATION_EXTERN CMIOExtensionProperty const CMIOExtensionPropertyStreamActiveFormatIndex API_AVAILABLE(macos(12.3), macCatalyst(15.4)) API_UNAVAILABLE(ios, tvos);
+FOUNDATION_EXTERN CMIOExtensionProperty const CMIOExtensionPropertyStreamActiveFormatIndex API_AVAILABLE(macos(12.3), macCatalyst(15.4)) API_UNAVAILABLE(ios, tvos, visionos);
 
 /*!
 @constant CMIOExtensionPropertyStreamFrameDuration
@@ -117,7 +117,7 @@ FOUNDATION_EXTERN CMIOExtensionProperty const CMIOExtensionPropertyStreamActiveF
 @discussion
  The property state for CMIOExtensionPropertyStreamFrameDuration needs to be a dictionary representing a CMTime struct that is consistent with the frame duration specification provided by the current active format.
 */
-FOUNDATION_EXTERN CMIOExtensionProperty const CMIOExtensionPropertyStreamFrameDuration API_AVAILABLE(macos(12.3), macCatalyst(15.4)) API_UNAVAILABLE(ios, tvos);
+FOUNDATION_EXTERN CMIOExtensionProperty const CMIOExtensionPropertyStreamFrameDuration API_AVAILABLE(macos(12.3), macCatalyst(15.4)) API_UNAVAILABLE(ios, tvos, visionos);
 
 /*!
 @constant CMIOExtensionPropertyStreamMaxFrameDuration
@@ -126,7 +126,7 @@ FOUNDATION_EXTERN CMIOExtensionProperty const CMIOExtensionPropertyStreamFrameDu
 @discussion
  The property state for CMIOExtensionPropertyStreamMaxFrameDuration needs to be a dictionary representing a CMTime struct.
 */
-FOUNDATION_EXTERN CMIOExtensionProperty const CMIOExtensionPropertyStreamMaxFrameDuration API_AVAILABLE(macos(12.3), macCatalyst(15.4)) API_UNAVAILABLE(ios, tvos);
+FOUNDATION_EXTERN CMIOExtensionProperty const CMIOExtensionPropertyStreamMaxFrameDuration API_AVAILABLE(macos(12.3), macCatalyst(15.4)) API_UNAVAILABLE(ios, tvos, visionos);
 
 /*!
 @constant CMIOExtensionPropertyStreamSinkBufferQueueSize
@@ -135,7 +135,7 @@ FOUNDATION_EXTERN CMIOExtensionProperty const CMIOExtensionPropertyStreamMaxFram
 @discussion
  The property state for CMIOExtensionPropertyStreamSinkBufferQueueSize is a number. This property translates to the kCMIOStreamPropertyOutputBufferQueueSize property.
 */
-FOUNDATION_EXTERN CMIOExtensionProperty const CMIOExtensionPropertyStreamSinkBufferQueueSize API_AVAILABLE(macos(12.3), macCatalyst(15.4)) API_UNAVAILABLE(ios, tvos);
+FOUNDATION_EXTERN CMIOExtensionProperty const CMIOExtensionPropertyStreamSinkBufferQueueSize API_AVAILABLE(macos(12.3), macCatalyst(15.4)) API_UNAVAILABLE(ios, tvos, visionos);
 
 /*!
 @constant CMIOExtensionPropertyStreamSinkBuffersRequiredForStartup
@@ -144,7 +144,7 @@ FOUNDATION_EXTERN CMIOExtensionProperty const CMIOExtensionPropertyStreamSinkBuf
 @discussion
  The property state for CMIOExtensionPropertyStreamSinkBuffersRequiredForStartup is a number. This property translates to the kCMIOStreamPropertyOutputBuffersRequiredForStartup property.
 */
-FOUNDATION_EXTERN CMIOExtensionProperty const CMIOExtensionPropertyStreamSinkBuffersRequiredForStartup API_AVAILABLE(macos(12.3), macCatalyst(15.4)) API_UNAVAILABLE(ios, tvos);
+FOUNDATION_EXTERN CMIOExtensionProperty const CMIOExtensionPropertyStreamSinkBuffersRequiredForStartup API_AVAILABLE(macos(12.3), macCatalyst(15.4)) API_UNAVAILABLE(ios, tvos, visionos);
 
 /*!
 @constant CMIOExtensionPropertyStreamSinkBufferUnderrunCount
@@ -154,7 +154,7 @@ FOUNDATION_EXTERN CMIOExtensionProperty const CMIOExtensionPropertyStreamSinkBuf
  A number that is incremented every time a stream's buffers are not being serviced fast enough.
  The property state for CMIOExtensionPropertyStreamSinkBufferUnderrunCount is a number with a readonly attribute. This property translates to the kCMIOStreamPropertyOutputBufferUnderrunCount property.
 */
-FOUNDATION_EXTERN CMIOExtensionProperty const CMIOExtensionPropertyStreamSinkBufferUnderrunCount API_AVAILABLE(macos(12.3), macCatalyst(15.4)) API_UNAVAILABLE(ios, tvos);
+FOUNDATION_EXTERN CMIOExtensionProperty const CMIOExtensionPropertyStreamSinkBufferUnderrunCount API_AVAILABLE(macos(12.3), macCatalyst(15.4)) API_UNAVAILABLE(ios, tvos, visionos);
 
 /*!
 @constant CMIOExtensionPropertyStreamSinkEndOfData
@@ -163,7 +163,7 @@ FOUNDATION_EXTERN CMIOExtensionProperty const CMIOExtensionPropertyStreamSinkBuf
 @discussion
  The property state for CMIOExtensionPropertyStreamSinkEndOfData is a number, 1 means that the stream has reached the end and a value of 0 means that more data is (or will be) available. This property translates to the kCMIOStreamPropertyEndOfData property.
 */
-FOUNDATION_EXTERN CMIOExtensionProperty const CMIOExtensionPropertyStreamSinkEndOfData API_AVAILABLE(macos(12.3), macCatalyst(15.4)) API_UNAVAILABLE(ios, tvos);
+FOUNDATION_EXTERN CMIOExtensionProperty const CMIOExtensionPropertyStreamSinkEndOfData API_AVAILABLE(macos(12.3), macCatalyst(15.4)) API_UNAVAILABLE(ios, tvos, visionos);
 
 /*!
 @constant CMIOExtensionPropertyStreamLatency
@@ -172,14 +172,14 @@ FOUNDATION_EXTERN CMIOExtensionProperty const CMIOExtensionPropertyStreamSinkEnd
 @discussion
  The property state for CMIOExtensionPropertyStreamLatency is a number containing the number of frames of latency in the CMIOExtensionStream. Note that the owning CMIOExtensionDevice may have additional latency so it should be queried as well. If both the device and the stream say they have latency, then the total latency for the stream is the device latency summed with the stream latency. This property translates to the kCMIOStreamPropertyLatency property.
 */
-FOUNDATION_EXTERN CMIOExtensionProperty const CMIOExtensionPropertyStreamLatency API_AVAILABLE(macos(14.4), macCatalyst(17.4)) API_UNAVAILABLE(ios, tvos);
+FOUNDATION_EXTERN CMIOExtensionProperty const CMIOExtensionPropertyStreamLatency API_AVAILABLE(macos(14.4), macCatalyst(17.4)) API_UNAVAILABLE(ios, tvos, visionos);
 
 /*!
 @class CMIOExtensionPropertyAttributes
 @abstract
  A CMIOExtensionPropertyAttributes describes attributes of a property's value.
 */
-API_AVAILABLE(macos(12.3), macCatalyst(15.4)) API_UNAVAILABLE(ios, tvos)
+API_AVAILABLE(macos(12.3), macCatalyst(15.4)) API_UNAVAILABLE(ios, tvos, visionos)
 @interface CMIOExtensionPropertyAttributes<ObjectType> : NSObject<NSCopying, NSSecureCoding>
 
 - (instancetype)init NS_UNAVAILABLE;
@@ -273,7 +273,7 @@ API_AVAILABLE(macos(12.3), macCatalyst(15.4)) API_UNAVAILABLE(ios, tvos)
 @abstract
  A CMIOExtensionPropertyState describes a property state.
 */
-API_AVAILABLE(macos(12.3), macCatalyst(15.4)) API_UNAVAILABLE(ios, tvos)
+API_AVAILABLE(macos(12.3), macCatalyst(15.4)) API_UNAVAILABLE(ios, tvos, visionos)
 @interface CMIOExtensionPropertyState<ObjectType> : NSObject<NSCopying, NSSecureCoding>
 
 - (instancetype)init NS_UNAVAILABLE;
@@ -357,7 +357,7 @@ API_AVAILABLE(macos(12.3), macCatalyst(15.4)) API_UNAVAILABLE(ios, tvos)
 @abstract
  A CMIOExtensionStreamCustomClockProperties describes the parameters used to create a custom clock on the host side (as opposed to the stream using hosttime or a linked Core Audio clock.
 */
-API_AVAILABLE(macos(12.3), macCatalyst(15.4)) API_UNAVAILABLE(ios, tvos)
+API_AVAILABLE(macos(12.3), macCatalyst(15.4)) API_UNAVAILABLE(ios, tvos, visionos)
 @interface CMIOExtensionStreamCustomClockConfiguration : NSObject<NSCopying, NSSecureCoding>
 
 - (instancetype)init NS_UNAVAILABLE;
@@ -445,7 +445,7 @@ API_AVAILABLE(macos(12.3), macCatalyst(15.4)) API_UNAVAILABLE(ios, tvos)
 @abstract
  A CMIOExtensionStreamFormat describes a stream format.
 */
-API_AVAILABLE(macos(12.3), macCatalyst(15.4)) API_UNAVAILABLE(ios, tvos)
+API_AVAILABLE(macos(12.3), macCatalyst(15.4)) API_UNAVAILABLE(ios, tvos, visionos)
 @interface CMIOExtensionStreamFormat : NSObject<NSCopying, NSSecureCoding>
 
 - (instancetype)init NS_UNAVAILABLE;
@@ -521,7 +521,7 @@ API_AVAILABLE(macos(12.3), macCatalyst(15.4)) API_UNAVAILABLE(ios, tvos)
 
 @end
 
-API_AVAILABLE(macos(12.3), macCatalyst(15.4)) API_UNAVAILABLE(ios, tvos)
+API_AVAILABLE(macos(12.3), macCatalyst(15.4)) API_UNAVAILABLE(ios, tvos, visionos)
 @interface CMIOExtensionScheduledOutput : NSObject<NSCopying, NSSecureCoding>
 
 - (instancetype)init NS_UNAVAILABLE;
@@ -569,7 +569,7 @@ API_AVAILABLE(macos(12.3), macCatalyst(15.4)) API_UNAVAILABLE(ios, tvos)
 
 @end
 
-API_AVAILABLE(macos(12.3), macCatalyst(15.4)) API_UNAVAILABLE(ios, tvos)
+API_AVAILABLE(macos(12.3), macCatalyst(15.4)) API_UNAVAILABLE(ios, tvos, visionos)
 @interface CMIOExtensionClient : NSObject<NSCopying>
 
 - (instancetype)init NS_UNAVAILABLE;

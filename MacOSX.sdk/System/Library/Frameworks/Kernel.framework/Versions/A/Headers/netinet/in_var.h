@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2021 Apple Inc. All rights reserved.
+ * Copyright (c) 2000-2024 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  *
@@ -63,6 +63,7 @@
 #ifndef _NETINET_IN_VAR_H_
 #define _NETINET_IN_VAR_H_
 #include <sys/appleapiopts.h>
+#include <sys/protosw.h>
 
 #include <sys/queue.h>
 #include <sys/kern_event.h>
@@ -97,7 +98,7 @@ struct kev_in_collision {
 	struct net_event_data link_data; /* link where ARP was received on */
 	struct in_addr ia_ipaddr;       /* conflicting IP address */
 	u_char hw_len;                  /* length of hardware address */
-	u_char hw_addr[0];              /* variable length hardware address */
+	u_char hw_addr[__counted_by(hw_len)];/* variable length hardware address */
 };
 
 struct kev_in_arpfailure {

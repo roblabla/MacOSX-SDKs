@@ -54,6 +54,8 @@ typedef NS_ENUM(NSUInteger, NSNumberFormatterStyle) {
 + (NSNumberFormatterBehavior)defaultFormatterBehavior;
 + (void)setDefaultFormatterBehavior:(NSNumberFormatterBehavior)behavior;
 
+// See `kCFNumberFormatterMinGroupingDigits` in `CFNumberFormatter` for an explanation on how minimum grouping digits is used.
+@property NSInteger minimumGroupingDigits API_AVAILABLE(macos(15.0), ios(18.0), watchos(11.0), tvos(18.0), visionos(2.0));
 @property NSNumberFormatterStyle numberStyle;
 @property (null_resettable, copy) NSLocale *locale;
 @property BOOL generatesDecimalNumbers;

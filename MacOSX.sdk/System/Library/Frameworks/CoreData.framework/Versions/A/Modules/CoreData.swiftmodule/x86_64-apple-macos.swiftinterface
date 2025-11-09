@@ -1,6 +1,6 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.10 (swiftlang-5.10.0.12.5 clang-1500.3.9.1.1)
-// swift-module-flags: -target x86_64-apple-macos14.5 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-bare-slash-regex -user-module-version 1345 -module-name CoreData
+// swift-compiler-version: Apple Swift version 6.0 effective-5.10 (swiftlang-6.0.0.7.24 clang-1600.0.25.1)
+// swift-module-flags: -target x86_64-apple-macos15.0 -target-variant x86_64-apple-ios18.0-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-bare-slash-regex -user-module-version 1410 -module-name CoreData
 import Combine
 @_exported import CoreData
 import Foundation
@@ -24,7 +24,15 @@ extension CoreData.NSManagedObject : Foundation.ObservableObject {
   public var objectWillChange: Combine.ObservableObjectPublisher {
     get
   }
+  @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
   public typealias ObjectWillChangePublisher = Combine.ObservableObjectPublisher
+}
+@available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, *)
+extension CoreData.NSManagedObject {
+  public subscript(key: Swift.String) -> Any? {
+    get
+    set
+  }
 }
 @available(swift 5.8)
 @available(macOS 14, iOS 17, tvOS 17, watchOS 10, *)
@@ -48,6 +56,7 @@ extension CoreData.NSPersistentStore {
   public struct StoreType : Swift.Hashable, Swift.Equatable, Swift.RawRepresentable {
     public var rawValue: Swift.String
     public init(rawValue: Swift.String)
+    @available(iOS 15.0, tvOS 15.0, watchOS 8.0, macOS 12.0, *)
     public typealias RawValue = Swift.String
   }
 }
@@ -58,6 +67,10 @@ extension CoreData.NSPersistentStore.StoreType {
   public static let inMemory: CoreData.NSPersistentStore.StoreType
   @available(macCatalyst, unavailable)
   public static let xml: CoreData.NSPersistentStore.StoreType
+}
+@available(macOS 15, iOS 18, tvOS 18, watchOS 11, visionOS 2, *)
+extension CoreData.NSPersistentStoreCoordinator {
+  public func managedObjectID(for string: Swift.String) -> CoreData.NSManagedObjectID?
 }
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 extension CoreData.NSPersistentStoreCoordinator {
@@ -73,10 +86,8 @@ extension CoreData.NSPersistentStoreCoordinator {
 extension CoreData.NSPersistentStoreCoordinator {
   @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
   public func performAndWait<T>(_ block: () throws -> T) rethrows -> T
-  #if compiler(>=5.3) && $AsyncAwait
   @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
   public func perform<T>(_ block: @escaping () throws -> T) async rethrows -> T
-  #endif
 }
 @available(macOS 10.4, iOS 3.0, tvOS 3.0, watchOS 1.0, *)
 extension Foundation.CocoaError.Code {
@@ -880,10 +891,8 @@ extension CoreData.NSPersistentContainer {
 }
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 extension CoreData.NSPersistentContainer {
-  #if compiler(>=5.3) && $AsyncAwait
   @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
   public func performBackgroundTask<T>(_ block: @escaping (CoreData.NSManagedObjectContext) throws -> T) async rethrows -> T
-  #endif
 }
 @available(swift 5.8)
 @available(macOS 14, iOS 17, tvOS 17, watchOS 10, *)
@@ -916,6 +925,7 @@ extension CoreData.NSAttributeDescription {
   public struct AttributeType : Swift.Hashable, Swift.Equatable, Swift.RawRepresentable {
     public var rawValue: CoreData.NSAttributeType
     public init(rawValue: CoreData.NSAttributeType)
+    @available(iOS 15.0, tvOS 15.0, watchOS 8.0, macOS 12.0, *)
     public typealias RawValue = CoreData.NSAttributeType
   }
   public var type: CoreData.NSAttributeDescription.AttributeType {
@@ -991,6 +1001,7 @@ extension CoreData.NSManagedObjectContext {
     @available(macOS 10.12, iOS 10.3, tvOS 10.2, watchOS 3.2, *)
     case invalidatedObjectIDs
     public init?(rawValue: Swift.String)
+    @available(iOS 3.0, tvOS 3.0, watchOS 1.0, macOS 10.4, *)
     public typealias RawValue = Swift.String
     public var rawValue: Swift.String {
       get
@@ -1007,6 +1018,7 @@ extension CoreData.NSManagedObjectContext {
   public struct ConcurrencyType : Swift.Hashable, Swift.Equatable, Swift.RawRepresentable {
     public var rawValue: CoreData.NSManagedObjectContextConcurrencyType
     public init(rawValue: CoreData.NSManagedObjectContextConcurrencyType)
+    @available(iOS 15.0, tvOS 15.0, watchOS 8.0, macOS 12.0, *)
     public typealias RawValue = CoreData.NSManagedObjectContextConcurrencyType
   }
   public enum ScheduledTaskType {
@@ -1023,9 +1035,7 @@ extension CoreData.NSManagedObjectContext {
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 extension CoreData.NSManagedObjectContext {
   public func performAndWait<T>(_ block: () throws -> T) rethrows -> T
-  #if compiler(>=5.3) && $AsyncAwait
   public func perform<T>(schedule: CoreData.NSManagedObjectContext.ScheduledTaskType = .immediate, _ block: @escaping () throws -> T) async rethrows -> T
-  #endif
 }
 @available(macOS 10.4, iOS 3.0, tvOS 3.0, watchOS 1.0, *)
 extension CoreData.NSManagedObjectContext.NotificationKey : Swift.Equatable {}

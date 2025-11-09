@@ -1,6 +1,6 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.10 (swiftlang-5.10.0.12.5 clang-1500.3.9.1.1)
-// swift-module-flags: -target x86_64-apple-macos14.5 -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftXPC -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-bare-slash-regex -user-module-version 36.100.8 -module-name XPC
+// swift-compiler-version: Apple Swift version 6.0 effective-5.10 (swiftlang-6.0.0.7.24 clang-1600.0.25.1)
+// swift-module-flags: -target x86_64-apple-macos15.0 -target-variant x86_64-apple-ios18.0-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftXPC -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-bare-slash-regex -user-module-version 62.0.1 -module-name XPC
 import Swift
 @_exported import XPC
 import _Concurrency
@@ -14,8 +14,11 @@ public class XPCSession {
     public static var none: XPC.XPCSession.InitializationOptions
     public static var inactive: XPC.XPCSession.InitializationOptions
     public static var privileged: XPC.XPCSession.InitializationOptions
+    @available(iOS 17.0, tvOS 17.0, watchOS 10.0, macOS 14.0, *)
     public typealias ArrayLiteralElement = XPC.XPCSession.InitializationOptions
+    @available(iOS 17.0, tvOS 17.0, watchOS 10.0, macOS 14.0, *)
     public typealias Element = XPC.XPCSession.InitializationOptions
+    @available(iOS 17.0, tvOS 17.0, watchOS 10.0, macOS 14.0, *)
     public typealias RawValue = Swift.UInt64
   }
   @available(macOS 14.0, macCatalyst 17.0, *)
@@ -272,7 +275,7 @@ public var XPC_BOOL_FALSE: XPC.xpc_object_t {
   get
 }
 @available(macOS 10.10, iOS 8.0, watchOS 2.0, tvOS 9.0, *)
-public var XPC_ARRAY_APPEND: Darwin.size_t {
+public var XPC_ARRAY_APPEND: _Builtin_stddef.size_t {
   get
 }
 @available(macOS 10.10, iOS 8.0, watchOS 2.0, tvOS 9.0, *)
@@ -285,6 +288,10 @@ public var XPC_ERROR_CONNECTION_INVALID: XPC.xpc_object_t {
 }
 @available(macOS 10.10, iOS 8.0, watchOS 2.0, tvOS 9.0, *)
 public var XPC_ERROR_TERMINATION_IMMINENT: XPC.xpc_object_t {
+  get
+}
+@available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, *)
+public var XPC_ERROR_PEER_CODE_SIGNING_REQUIREMENT: XPC.xpc_object_t {
   get
 }
 @available(macOS, introduced: 13.0, deprecated: 14.0, renamed: "XPCSession")
@@ -312,8 +319,23 @@ public struct xpc_session_create_flags_t : Swift.OptionSet, @unchecked Swift.Sen
   public static let none: XPC.xpc_session_create_flags_t
   public static let privileged: XPC.xpc_session_create_flags_t
   public static let inactive: XPC.xpc_session_create_flags_t
+  @available(iOS, unavailable)
+  @available(tvOS, unavailable)
+  @available(watchOS, unavailable)
+  @available(macOS, introduced: 13.0, deprecated: 14.0, renamed: "XPCSession.InitializationOptions")
+  @available(macCatalyst, introduced: 16.0, deprecated: 17.0, renamed: "XPCSession.InitializationOptions")
   public typealias ArrayLiteralElement = XPC.xpc_session_create_flags_t
+  @available(iOS, unavailable)
+  @available(tvOS, unavailable)
+  @available(watchOS, unavailable)
+  @available(macOS, introduced: 13.0, deprecated: 14.0, renamed: "XPCSession.InitializationOptions")
+  @available(macCatalyst, introduced: 16.0, deprecated: 17.0, renamed: "XPCSession.InitializationOptions")
   public typealias Element = XPC.xpc_session_create_flags_t
+  @available(iOS, unavailable)
+  @available(tvOS, unavailable)
+  @available(watchOS, unavailable)
+  @available(macOS, introduced: 13.0, deprecated: 14.0, renamed: "XPCSession.InitializationOptions")
+  @available(macCatalyst, introduced: 16.0, deprecated: 17.0, renamed: "XPCSession.InitializationOptions")
   public typealias RawValue = Swift.UInt64
 }
 @available(macOS, introduced: 13.0, deprecated: 14.0, message: "See XPCSession initializer")
@@ -555,8 +577,20 @@ public class XPCListener {
     public init(rawValue: Swift.UInt64)
     public static var none: XPC.XPCListener.InitializationOptions
     public static var inactive: XPC.XPCListener.InitializationOptions
+    @available(macOS 14.0, macCatalyst 17.0, *)
+    @available(iOS, unavailable)
+    @available(tvOS, unavailable)
+    @available(watchOS, unavailable)
     public typealias ArrayLiteralElement = XPC.XPCListener.InitializationOptions
+    @available(macOS 14.0, macCatalyst 17.0, *)
+    @available(iOS, unavailable)
+    @available(tvOS, unavailable)
+    @available(watchOS, unavailable)
     public typealias Element = XPC.XPCListener.InitializationOptions
+    @available(macOS 14.0, macCatalyst 17.0, *)
+    @available(iOS, unavailable)
+    @available(tvOS, unavailable)
+    @available(watchOS, unavailable)
     public typealias RawValue = Swift.UInt64
   }
   @_hasMissingDesignatedInitializers public class IncomingSessionRequest {

@@ -3,7 +3,7 @@
  
      Contains:   TextEncoding-related types and constants, and prototypes for related functions
  
-     Copyright:  © 1995-2020 Apple Inc. All rights reserved.
+     Copyright:  © 1995-2023 Apple Inc. All rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -104,6 +104,9 @@
 #define kTextEncodingUnicodeV11_0 		0x0115				/*  Adds Georgian Mtavruli capitals, 7 scripts, Copyleft, 66 emoji...*/
 #define kTextEncodingUnicodeV12_1 		0x0116				/*  Adds 4 new scripts, more letters for 5, Marca reg., 61 emoji...*/
 #define kTextEncodingUnicodeV13_0 		0x0117				/*  Adds 4 new scripts, more letters for 3, CJK Ext G, 55 emoji...*/
+#define kTextEncodingUnicodeV14_0 		0x0118
+#define kTextEncodingUnicodeV15_0 		0x0119
+#define kTextEncodingUnicodeV15_1 		0x011A
 
 #define kTextEncodingISOLatin1 			0x0201				/*  ISO 8859-1, Western European */
 #define kTextEncodingISOLatin2 			0x0202				/*  ISO 8859-2, Central European */

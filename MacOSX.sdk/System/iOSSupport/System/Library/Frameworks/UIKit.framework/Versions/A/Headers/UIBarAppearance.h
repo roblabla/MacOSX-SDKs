@@ -15,7 +15,7 @@ NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 @class UIImage;
 @class UIBlurEffect;
 
-UIKIT_EXTERN API_AVAILABLE(ios(13.0), tvos(13.0)) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(13.0), tvos(13.0)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @interface UIBarAppearance : NSObject<NSCopying, NSSecureCoding>
 
 /// Constructs a new bar appearance, configured with default values and targeting the device idiom.

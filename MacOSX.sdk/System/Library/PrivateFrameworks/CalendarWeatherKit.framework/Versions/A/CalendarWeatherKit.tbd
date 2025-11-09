@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/CalendarWeatherKit.framework/Versions/A/CalendarWeatherKit'
-current-version: 719
+current-version: 726
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _WMLocationCodingCity, _WMLocationCodingCountry, _WMLocationCodingCountryAbbreviation, 

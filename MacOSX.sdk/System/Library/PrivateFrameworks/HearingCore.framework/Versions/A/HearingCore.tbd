@@ -18,6 +18,7 @@ exports:
                        _HCLogSoundMeter, _HCMessageDeviceNameKey, _HCPerformSafeBlock, 
                        _HCPreferencesBundleName, _HCProcessGetName, _HCRTTNotificationContentExtensionName, 
                        _HCSpringBoardProcessName, _HearingCoreVersionNumber, _HearingCoreVersionString, 
+                       _HearingEngineeringLog, _HearingInitializeLogging, _HearingLoggingQueue, 
                        _PAEngineeringLog, _PAInitializeLogging, _PALoggingQueue, 
                        _kAdjust0DB, _messageIdentifierDescription ]
     objc-classes:    [ HCDatabaseManager, HCServer, HCSettings, HCSettingsListenerHelper, 

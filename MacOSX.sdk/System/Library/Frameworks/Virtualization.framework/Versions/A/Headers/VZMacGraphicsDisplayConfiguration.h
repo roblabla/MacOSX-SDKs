@@ -31,9 +31,9 @@ VZ_EXPORT API_AVAILABLE(macos(12.0))
  @param screen The screen on which you intend to present the VZVirtualMachineView for the display.
  @param sizeInPoints The intended logical size of the display.
  @discussion
-     The pixel dimensions and pixel density will be initialized based on the specified screen and
-     size. Note: an instance of macOS running in the virtual machine may not necessarily provide
-     a display mode with a backing scale factor matching the specified screen.
+    The pixel dimensions and pixel density will be initialized based on the specified screen and
+    size. Note: an instance of macOS running in the virtual machine may not necessarily provide
+    a display mode with a backing scale factor matching the specified screen.
 */
 - (instancetype)initForScreen:(NSScreen *)screen sizeInPoints:(NSSize)sizeInPoints NS_SWIFT_NAME(init(for:sizeInPoints:));
 

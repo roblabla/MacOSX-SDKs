@@ -18,11 +18,15 @@ Globals:
   SwiftName: removalRequested
 - Name: MTLDeviceWasRemovedNotification
   SwiftName: wasRemoved
+- Name: NSDeviceCertificationiPhonePerformanceGaming
+  SwiftName: iPhonePerformanceGaming
 Functions:
 - Name: MTLCopyAllDevicesWithObserver
   SwiftPrivate: true
 - Name: MTLIOCreateCompressionContext
   SwiftPrivate: true
+- Name: MTLPackedFloatQuaternionMake
+  Availability: nonswift
 Enumerators:
 - Name: MTLArgumentAccessReadOnly
   SwiftPrivate: true
@@ -472,6 +476,11 @@ Classes:
   - Selector: 'setObject:atIndexedSubscript:'
     MethodKind: Instance
     SwiftPrivate: true
+- Name: NSProcessInfo
+  Methods:
+  - Selector: 'isDeviceCertifiedFor:'
+    SwiftName: isDeviceCertified(for:)
+    MethodKind: Instance
 
 Protocols:
 - Name: MTLIOScratchBufferAllocator
@@ -597,6 +606,13 @@ Protocols:
   - Selector: 'encodeSignalEvent:value:'
     SwiftName: encodeSignalEvent(_:value:)
     MethodKind: Instance
+  - Selector: 'useResidencySet:'
+    SwiftName: useResidencySet(_:)
+    MethodKind: Instance
+  - Selector: 'useResidencySets:count:'
+    SwiftName: __useResidencySets(_:count:)
+    MethodKind: Instance
+    SwiftPrivate: true
   Properties:
   - Name: logs
     SwiftName: __logs
@@ -613,6 +629,20 @@ Protocols:
   - Selector: 'commandBufferWithDescriptor:'
     SwiftName: makeCommandBuffer(descriptor:)
     MethodKind: Instance
+  - Selector: 'addResidencySet:'
+    SwiftName: addResidencySet(_:)
+    MethodKind: Instance
+  - Selector: 'addResidencySets:count:'
+    SwiftName: __addResidencySets(_:count:)
+    MethodKind: Instance
+    SwiftPrivate: true
+  - Selector: 'removeResidencySet:'
+    SwiftName: removeResidencySet(_:)
+    MethodKind: Instance
+  - Selector: 'removeResidencySets:count:'
+    SwiftName: __removeResidencySets(_:count:)
+    MethodKind: Instance
+    SwiftPrivate: true
 - Name: MTLIOCommandQueue
   Methods:
   - Selector: 'commandBuffer'
@@ -831,6 +861,9 @@ Protocols:
   - Selector: 'newCommandQueueWithMaxCommandBufferCount:'
     SwiftName: makeCommandQueue(maxCommandBufferCount:)
     MethodKind: Instance
+  - Selector: 'newCommandQueueWithDescriptor:'
+    SwiftName: makeCommandQueue(descriptor:)
+    MethodKind: Instance
   - Selector: 'newBufferWithLength:options:'
     SwiftName: makeBuffer(length:options:)
     MethodKind: Instance
@@ -842,6 +875,9 @@ Protocols:
     MethodKind: Instance
   - Selector: 'newDepthStencilStateWithDescriptor:'
     SwiftName: makeDepthStencilState(descriptor:)
+    MethodKind: Instance
+  - Selector: 'newLogStateWithDescriptor:error:'
+    SwiftName: makeLogState(descriptor:)
     MethodKind: Instance
   - Selector: 'newTextureWithDescriptor:'
     SwiftName: makeTexture(descriptor:)
@@ -948,6 +984,10 @@ Protocols:
   - Selector: 'sparseTileSizeWithTextureType:pixelFormat:sampleCount:sparsePageSize:'
     SwiftName: sparseTileSize(textureType:pixelFormat:sampleCount:sparsePageSize:)
     MethodKind: Instance
+  - Selector: 'newResidencySetWithDescriptor:error:'
+    SwiftName: makeResidencySet(descriptor:)
+    MethodKind: Instance
+
 - Name: MTLDrawable
   Methods:
   - Selector: 'presentAtTime:'
@@ -1438,6 +1478,59 @@ Protocols:
   - Selector: 'setOwnerWithIdentity:'
     MethodKind: Instance
     SwiftPrivate: true
+- Name: MTLResidencySet
+  Methods:
+  - Selector: 'addAllocations:count:'
+    SwiftName: __addAllocations(_:count:)
+    MethodKind: Instance
+    SwiftPrivate: true
+  - Selector: 'removeAllocations:count:'
+    SwiftName: __removeAllocations(_:count:)
+    MethodKind: Instance
+    SwiftPrivate: true
+  - Selector: 'addAllocation:'
+    SwiftName: addAllocation(_:)
+    MethodKind: Instance
+  - Selector: 'removeAllocation:'
+    SwiftName: removeAllocation(_:)
+    MethodKind: Instance
+  - Selector: 'containsAllocation:'
+    SwiftName: containsAllocation(_:)
+    MethodKind: Instance
+  - Selector: 'addResources:count:'
+    SwiftName: __addResources(_:count:)
+    MethodKind: Instance
+    SwiftPrivate: true
+  - Selector: 'removeResources:count:'
+    SwiftName: __removeResources(_:count:)
+    MethodKind: Instance
+    SwiftPrivate: true
+  - Selector: 'addResource:'
+    SwiftName: addResource(_:)
+    MethodKind: Instance
+  - Selector: 'removeResource:'
+    SwiftName: removeResource(_:)
+    MethodKind: Instance
+  - Selector: 'addHeaps:count:'
+    SwiftName: __addHeaps(_:count:)
+    MethodKind: Instance
+    SwiftPrivate: true
+  - Selector: 'removeHeaps:count:'
+    SwiftName: __removeHeaps(_:count:)
+    MethodKind: Instance
+    SwiftPrivate: true
+  - Selector: 'addHeap:'
+    SwiftName: addHeap(_:)
+    MethodKind: Instance
+  - Selector: 'removeHeap:'
+    SwiftName: removeHeap(_:)
+    MethodKind: Instance
+  - Selector: 'containsResource:'
+    SwiftName: containsResource(_:)
+    MethodKind: Instance
+  - Selector: 'containsHeap:'
+    SwiftName: containsHeap(_:)
+    MethodKind: Instance
 - Name: MTLSharedEvent
   Methods:
   - Selector: 'newSharedEventHandle'
@@ -1608,8 +1701,14 @@ Protocols:
   - Selector: 'addTileRenderPipelineFunctionsWithDescriptor:error:'
     SwiftName: addTileRenderPipelineFunctions(descriptor:)
     MethodKind: Instance
+  - Selector: 'addMeshRenderPipelineFunctionsWithDescriptor:error:'
+    SwiftName: addMeshRenderPipelineFunctions(descriptor:)
+    MethodKind: Instance
   - Selector: 'addFunctionWithDescriptor:library:error:'
     SwiftName: addFunction(descriptor:library:)
+    MethodKind: Instance
+  - Selector: 'addLibraryWithDescriptor:error:'
+    SwiftName: addLibrary(descriptor:)
     MethodKind: Instance
 
 SwiftVersions:

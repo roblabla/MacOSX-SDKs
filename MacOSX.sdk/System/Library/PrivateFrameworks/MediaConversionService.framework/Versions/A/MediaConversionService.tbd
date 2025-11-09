@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/MediaConversionService.framework/Versions/A/MediaConversionService'
-current-version: 651.0.100
+current-version: 701.0.230
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -12,10 +12,9 @@ exports:
                        _PAMediaConversionJobPriorityIsOptional, _PAMediaConversionNameForErrorCode, 
                        _PAMediaConversionNameForJobPriority, _PAMediaConversionNameForJobStatus, 
                        _PAMediaConversionNameForValueType, _PAMediaConversionOptionNameToValueTypeMapping, 
-                       _PAMediaConversionResourceRoleMainResource, _PAMediaConversionResourceRoleMainResourceSpatialOverCapture, 
-                       _PAMediaConversionResourceRoleVideoComplement, _PAMediaConversionResourceRoleVideoComplementSpatialOverCapture, 
+                       _PAMediaConversionResourceRoleCompositionSidecarDataFile, 
+                       _PAMediaConversionResourceRoleMainResource, _PAMediaConversionResourceRoleVideoComplement, 
                        _PAMediaConversionServiceAdjustmentCropKey, _PAMediaConversionServiceAdjustmentDataKey, 
-                       _PAMediaConversionServiceAdjustmentFinalizationDispositionKey, 
                        _PAMediaConversionServiceAdjustmentFormatIdentifierKey, _PAMediaConversionServiceAdjustmentFormatVersionKey, 
                        _PAMediaConversionServiceAdjustmentOrientationKey, _PAMediaConversionServiceBlastDoorSourcePropertiesKey, 
                        _PAMediaConversionServiceBlastDoorVideoComplementSourcePropertiesKey, 
@@ -39,9 +38,8 @@ exports:
                        _PAMediaConversionServiceOptionAVMetadataKeywordsKey, _PAMediaConversionServiceOptionAVMetadataLocationKey, 
                        _PAMediaConversionServiceOptionAVMetadataOriginatingSignatureKey, 
                        _PAMediaConversionServiceOptionAVMetadataRenderOriginatingSignatureKey, 
-                       _PAMediaConversionServiceOptionAVMetadataTitleKey, _PAMediaConversionServiceOptionAdjustmentFinalizationBehaviorKey, 
-                       _PAMediaConversionServiceOptionAdjustmentFinalizationCandidacyKey, 
-                       _PAMediaConversionServiceOptionAdjustmentInformationKey, _PAMediaConversionServiceOptionApplyOrientationTransformKey, 
+                       _PAMediaConversionServiceOptionAVMetadataTitleKey, _PAMediaConversionServiceOptionAdjustmentInformationKey, 
+                       _PAMediaConversionServiceOptionAlchemistConversionKey, _PAMediaConversionServiceOptionApplyOrientationTransformKey, 
                        _PAMediaConversionServiceOptionAudioTrackGroupHandlingKey, 
                        _PAMediaConversionServiceOptionBlastDoorMediaIsImageKey, _PAMediaConversionServiceOptionBoundingBoxKey, 
                        _PAMediaConversionServiceOptionColorSpaceKey, _PAMediaConversionServiceOptionCropAdjustmentInformationKey, 

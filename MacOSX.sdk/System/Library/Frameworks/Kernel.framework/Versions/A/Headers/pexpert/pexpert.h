@@ -71,6 +71,7 @@ int PE_stub_poll_input(unsigned int options, char *c);
 boolean_t PE_panic_debugging_enabled(void);
 
 void PE_mark_hwaccess(uint64_t thread);
+void PE_mark_hwaccess_data(uint8_t type, uint8_t size, uint64_t paddr);
 
 #endif /* defined(__arm__) || defined(__arm64__) */
 
@@ -287,6 +288,10 @@ extern boolean_t PE_parse_boot_argn(
 
 extern boolean_t PE_boot_arg_uint64_eq(const char *arg_string, uint64_t value);
 
+extern boolean_t PE_parse_boot_arg_str(
+	const char *arg_string,
+	char *      arg_ptr,
+	int         size);
 
 extern boolean_t PE_get_default(
 	const char      *property_name,
@@ -308,6 +313,7 @@ enum {
 
 extern boolean_t PE_get_hotkey(
 	unsigned char   key);
+
 
 extern kern_return_t PE_cpu_start(
 	cpu_id_t target,

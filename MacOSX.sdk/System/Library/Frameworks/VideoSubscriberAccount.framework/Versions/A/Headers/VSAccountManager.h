@@ -22,7 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol VSAccountManagerDelegate;
 
 // The URL string used to deep link to the system TV Provider settings.
-VS_EXTERN NSString * const VSOpenTVProviderSettingsURLString API_AVAILABLE(ios(13.0), tvos(13.0)) API_UNAVAILABLE(macos, macCatalyst);
+VS_EXTERN NSString * const VSOpenTVProviderSettingsURLString API_AVAILABLE(ios(13.0), tvos(13.0)) API_UNAVAILABLE(macos, macCatalyst) API_UNAVAILABLE(macos, macCatalyst);
 
 /// Represents the current state of the application's access to the user's subscription information.
 typedef NS_ENUM(NSInteger, VSAccountAccessStatus)

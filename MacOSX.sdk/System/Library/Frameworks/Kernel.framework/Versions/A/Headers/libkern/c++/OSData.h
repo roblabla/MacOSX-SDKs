@@ -131,7 +131,7 @@ public:
  * (<i>unlike</i> @link //apple_ref/doc/uid/20001498 CFMutableData@/link,
  * for which a nonzero initial capacity is a hard limit).
  */
-	static OSPtr<OSData> withCapacity(unsigned int capacity);
+	static OSPtr<OSData> withCapacity(unsigned int capacity __xnu_data_size);
 
 
 /*!
@@ -156,7 +156,7 @@ public:
  */
 	static OSPtr<OSData> withBytes(
 		const void   * bytes,
-		unsigned int   numBytes);
+		unsigned int   numBytes __xnu_data_size);
 
 
 
@@ -269,7 +269,7 @@ public:
  * (<i>unlike</i> @link //apple_ref/doc/uid/20001498 CFMutableData@/link,
  * for which a nonzero initial capacity is a hard limit).
  */
-	virtual bool initWithCapacity(unsigned int capacity);
+	virtual bool initWithCapacity(unsigned int capacity __xnu_data_size);
 
 
 /*!
@@ -295,7 +295,7 @@ public:
  */
 	virtual bool initWithBytes(
 		const void   * bytes,
-		unsigned int   numBytes);
+		unsigned int   numBytes __xnu_data_size);
 
 
 
@@ -538,7 +538,7 @@ public:
  */
 	virtual bool appendBytes(
 		const void   * bytes,
-		unsigned int   numBytes);
+		unsigned int   numBytes __xnu_data_size);
 
 
 
@@ -584,6 +584,7 @@ public:
  * it may have to reallocate its internal storage,
  * rendering invalid an extrated pointer to that storage.
  */
+	__xnu_returns_data_pointer
 	virtual const void * getBytesNoCopy() const;
 
 
@@ -613,6 +614,7 @@ public:
  * it may have to reallocate its internal storage,
  * rendering invalid an extrated pointer to that storage.
  */
+	__xnu_returns_data_pointer
 	virtual const void * getBytesNoCopy(
 		unsigned int start,
 		unsigned int numBytes) const;

@@ -16,10 +16,10 @@ NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 typedef NS_ENUM(NSUInteger, UIDocumentMenuOrder) {
     UIDocumentMenuOrderFirst,
     UIDocumentMenuOrderLast
-} API_DEPRECATED("", ios(8.0, 11.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos);
+} API_DEPRECATED("", ios(8.0, 11.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(visionos, watchos);
 
 API_DEPRECATED("UIDocumentMenuDelegate is deprecated. Use UIDocumentPickerViewController directly.", ios(8.0, 13.0))
-API_UNAVAILABLE(tvos, visionos) NS_SWIFT_UI_ACTOR
+API_UNAVAILABLE(tvos, visionos) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @protocol UIDocumentMenuDelegate <NSObject>
 
 - (void)documentMenu:(UIDocumentMenuViewController *)documentMenu didPickDocumentPicker:(UIDocumentPickerViewController *)documentPicker;
@@ -29,7 +29,7 @@ API_UNAVAILABLE(tvos, visionos) NS_SWIFT_UI_ACTOR
 @end
 
 UIKIT_EXTERN API_DEPRECATED("UIDocumentMenuViewController is deprecated. Use UIDocumentPickerViewController directly.", ios(8.0, 11.0))
-API_UNAVAILABLE(tvos, visionos) NS_SWIFT_UI_ACTOR
+API_UNAVAILABLE(tvos, visionos, watchos) NS_SWIFT_UI_ACTOR
 @interface UIDocumentMenuViewController : UIViewController
 
 - (instancetype)initWithDocumentTypes:(NSArray <NSString *> *)allowedUTIs inMode:(UIDocumentPickerMode)mode NS_DESIGNATED_INITIALIZER;

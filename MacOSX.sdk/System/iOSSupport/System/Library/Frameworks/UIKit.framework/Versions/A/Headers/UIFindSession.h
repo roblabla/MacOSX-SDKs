@@ -22,7 +22,7 @@ typedef NS_ENUM(NSInteger, UIFindSessionSearchResultDisplayStyle) {
     
     /// Do not display number of reported results.
     UIFindSessionSearchResultDisplayStyleNone,
-} NS_SWIFT_NAME(UIFindSession.SearchResultDisplayStyle);
+} NS_SWIFT_NAME(UIFindSession.SearchResultDisplayStyle) API_UNAVAILABLE(watchos);
 
 API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(watchos, tvos)
 typedef NS_ENUM(NSInteger, UITextSearchMatchMethod) {
@@ -34,7 +34,7 @@ typedef NS_ENUM(NSInteger, UITextSearchMatchMethod) {
     
     /// Word is an exact match for the search string.
     UITextSearchMatchMethodFullWord,
-} NS_SWIFT_NAME(UITextSearchOptions.WordMatchMethod);
+} NS_SWIFT_NAME(UITextSearchOptions.WordMatchMethod) API_UNAVAILABLE(watchos);
 
 UIKIT_EXTERN API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(watchos, tvos) NS_SWIFT_UI_ACTOR
 @interface UITextSearchOptions : NSObject

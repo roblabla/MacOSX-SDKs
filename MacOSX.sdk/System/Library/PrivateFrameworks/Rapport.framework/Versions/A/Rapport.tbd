@@ -39,11 +39,12 @@ exports:
                        _RPOptionSenderAccountAltDSID, _RPOptionSenderAccountID, _RPOptionSenderDeviceName, 
                        _RPOptionSenderID, _RPOptionSenderIDSDeviceID, _RPOptionSenderModelID, 
                        _RPOptionStatusFlags, _RPOptionTimeoutSeconds, _RPOptionXID, 
-                       _RPProfileIDDuetSync, _RPRemoteDisplayDiscoverySessionStartFaceTimeHandoff, 
-                       _RPRequestIDAny, _RPRequestIDIdentify, _RPRequestIDSpeak, 
-                       _RPTopicNone, _RPTopicNowPlayingArtwork, _RPTopicNowPlayingProgress, 
-                       _RPTopicNowPlayingText, _RPVersionToSourceVersionString, _gRPPrivateDaemon, 
-                       _nwrapport_copy_protocol_definition ]
+                       _RPProfileIDDuetSync, _RPRemoteDisplayDiscoverySessionReasonEnterOnPersonal, 
+                       _RPRemoteDisplayDiscoverySessionReasonSystemDisconnect, _RPRemoteDisplayDiscoverySessionReasonUserDisconnect, 
+                       _RPRemoteDisplayDiscoverySessionStartFaceTimeHandoff, _RPRequestIDAny, 
+                       _RPRequestIDIdentify, _RPRequestIDSpeak, _RPTopicNone, _RPTopicNowPlayingArtwork, 
+                       _RPTopicNowPlayingProgress, _RPTopicNowPlayingText, _RPVersionToSourceVersionString, 
+                       _gRPPrivateDaemon, _nwrapport_copy_protocol_definition ]
     objc-classes:    [ RPAppSignInService, RPClient, RPCompanionLinkAssertion, RPCompanionLinkClient, 
                        RPCompanionLinkDevice, RPConnection, RPDevice, RPDiscovery, 
                        RPEndpoint, RPEventRegistration, RPFileTransferItem, RPFileTransferProgress, 

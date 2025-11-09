@@ -323,7 +323,7 @@ CFPlugInTypes                   Dictionary      1 key/value pair
 					
 					New for CoreMIDI 1.1.
 */
-extern const CFStringRef kMIDIDriverPropertyUsesSerial		API_AVAILABLE(macos(10.1)) API_UNAVAILABLE(ios, tvos, watchos);
+extern const CFStringRef kMIDIDriverPropertyUsesSerial		API_AVAILABLE(macos(10.1)) MIDI_API_UNAVAILABLE_NON_MACOS;
 
 
 #ifdef __cplusplus
@@ -551,7 +551,7 @@ extern MIDIDeviceListRef	MIDIGetDriverDeviceList(MIDIDriverRef __nonnull driver)
 	@result			An OSStatus result code.
 */
 extern OSStatus			MIDIDriverEnableMonitoring(MIDIDriverRef __nonnull driver, Boolean enabled)
-															API_AVAILABLE(macos(10.1)) API_UNAVAILABLE(ios, tvos, watchos);
+															API_AVAILABLE(macos(10.1)) MIDI_API_UNAVAILABLE_NON_MACOS;
 
 
 #ifdef __cplusplus

@@ -13,9 +13,9 @@ NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 @class UITraitCollection;
 
-typedef NSString * UIConfigurationStateCustomKey NS_TYPED_EXTENSIBLE_ENUM API_AVAILABLE(ios(14.0), tvos(14.0), watchos(7.0));
+typedef NSString * UIConfigurationStateCustomKey NS_TYPED_EXTENSIBLE_ENUM API_AVAILABLE(ios(14.0), tvos(14.0)) API_UNAVAILABLE(watchos);
 
-UIKIT_EXTERN API_AVAILABLE(ios(14.0), tvos(14.0), watchos(7.0)) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(14.0), tvos(14.0)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @protocol UIConfigurationState <NSObject, NSCopying, NSSecureCoding>
 
 /// Returns a new instance with the specified trait collection.

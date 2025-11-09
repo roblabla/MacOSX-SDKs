@@ -63,7 +63,7 @@
 #include <sys/types.h>
 
 struct ifmibdata {
-	char                            ifmd_name[IFNAMSIZ]; /* name of interface */
+	char                    ifmd_name[IFNAMSIZ]; /* name of interface */
 	unsigned int            ifmd_pcount;    /* number of promiscuous listeners */
 	unsigned int            ifmd_flags;     /* interface flags */
 	unsigned int            ifmd_snd_len;   /* instantaneous length of send queue */
@@ -72,7 +72,6 @@ struct ifmibdata {
 	unsigned int            ifmd_filler[4]; /* for future expansion */
 	struct if_data64        ifmd_data; /* generic information and statistics */
 };
-
 
 /*
  * sysctl MIB tags at the net.link.generic level
@@ -201,16 +200,6 @@ enum {
  * Put other types of interface MIBs here, or in interface-specific
  * header files if convenient ones already exist.
  */
-
-/*
- * Structure for interface family ID table
- */
-
-struct if_family_id {
-	u_int32_t               iffmid_len;
-	u_int32_t               iffmid_id;
-	char                    iffmid_str[1];  /* variable length string */
-};
 
 
 #endif /* _NET_IF_MIB_H */

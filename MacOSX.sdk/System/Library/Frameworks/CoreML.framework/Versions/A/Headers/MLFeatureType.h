@@ -34,6 +34,9 @@ typedef NS_ENUM(NSInteger, MLFeatureType) {
 
     /// MLSequence. Ordered collection of feature values with the same type
     MLFeatureTypeSequence API_AVAILABLE(macos(10.14), ios(12.0), watchos(5.0), tvos(12.0)) = 7,
+    
+    /// MLState. Represents a model state that may be updated in each inference.
+    MLFeatureTypeState API_AVAILABLE(macos(15.0), ios(18.0), watchos(11.0), tvos(18.0)) = 8,
 
 } API_AVAILABLE(macos(10.13), ios(11.0), watchos(4.0), tvos(11.0));
 

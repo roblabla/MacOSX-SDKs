@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 MPS_CLASS_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))
 @interface MPSGraph(MPSGraphReductionOps)
 
-/// Create reduction sum op and return the result tensor.
+/// Creates a reduction sum operation and returns the result tensor.
 ///
 /// - Parameters:
 ///   - tensor: input tensor
@@ -27,7 +27,7 @@ MPS_CLASS_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))
                                        axis:(NSInteger) axis
                                        name:(NSString * _Nullable) name;
 
-/// Create reduction sum op and return the result tensor.
+/// Creates a reduction sum operation and returns the result tensor.
 ///
 /// - Parameters:
 ///   - tensor: input tensor
@@ -38,7 +38,7 @@ MPS_CLASS_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))
                                        axes:(NSArray<NSNumber *> *_Nullable)axes
                                        name:(NSString *_Nullable)name;
 
-/// Create reduction max op and return the result tensor.
+/// Creates a reduction max operation and returns the result tensor.
 ///
 /// - Parameters:
 ///   - tensor: input tensor
@@ -49,7 +49,7 @@ MPS_CLASS_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))
                                           axis:(NSInteger) axis
                                           name:(NSString * _Nullable) name;
 
-/// Create reduction max op and return the result tensor.
+/// Creates a reduction max operation and returns the result tensor.
 ///
 /// - Parameters:
 ///   - tensor: input tensor
@@ -60,7 +60,7 @@ MPS_CLASS_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))
                                            axes:(NSArray<NSNumber *> *_Nullable)axes
                                            name:(NSString *_Nullable)name;
 
-/// Create reduction minimum op and return the result tensor.
+/// Creates a reduction minimum operation and returns the result tensor.
 ///
 /// - Parameters:
 ///   - tensor: input tensor
@@ -71,7 +71,7 @@ MPS_CLASS_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))
                                            axis:(NSInteger) axis
                                            name:(NSString * _Nullable) name;
 
-/// Create reduction min op and return the result tensor.
+/// Creates a reduction min operation and returns the result tensor.
 ///
 /// - Parameters:
 ///   - tensor: input tensor
@@ -82,7 +82,7 @@ MPS_CLASS_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))
                                           axes:(NSArray<NSNumber *> *_Nullable)axes
                                           name:(NSString *_Nullable)name;
 
-/// Create reduction max propagate NaN op and return the result tensor.
+/// Creates a reduction max propagate NaN operation and returns the result tensor.
 ///
 /// - Parameters:
 ///   - tensor: input tensor
@@ -93,7 +93,7 @@ MPS_CLASS_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))
                                                        axis:(NSInteger) axis
                                                        name:(NSString * _Nullable) name;
 
-/// Create reduction max propagate NaN op and return the result tensor.
+/// Creates a reduction max propagate NaN operation and returns the result tensor.
 ///
 /// - Parameters:
 ///   - tensor: input tensor
@@ -104,7 +104,7 @@ MPS_CLASS_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))
                                                        axes:(NSArray<NSNumber *> *_Nullable)axes
                                                        name:(NSString *_Nullable)name;
 
-/// Create reduction min propagate NaN op and return the result tensor.
+/// Creates a reduction min propagate NaN operation and returns the result tensor.
 ///
 /// - Parameters:
 ///   - tensor: input tensor
@@ -115,7 +115,7 @@ MPS_CLASS_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))
                                                        axis:(NSInteger) axis
                                                        name:(NSString * _Nullable) name;
 
-/// Create reduction min propagate NaN op and return the result tensor.
+/// Creates a reduction min propagate NaN operation and returns the result tensor.
 ///
 /// - Parameters:
 ///   - tensor: input tensor
@@ -126,7 +126,7 @@ MPS_CLASS_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))
                                                        axes:(NSArray<NSNumber *> *_Nullable)axes
                                                        name:(NSString *_Nullable)name;
 
-/// Create reduction product op and return the result tensor.
+/// Creates a reduction product operation and returns the result tensor.
 ///
 /// - Parameters:
 ///   - tensor: input tensor
@@ -138,7 +138,7 @@ MPS_CLASS_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))
                                           name:(NSString * _Nullable) name;
 
 
-/// Create reduction product op and return the result tensor.
+/// Creates a reduction product operation and returns the result tensor.
 ///
 /// - Parameters:
 ///   - tensor: input tensor
@@ -149,7 +149,7 @@ MPS_CLASS_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))
                                            axes:(NSArray<NSNumber *> *_Nullable)axes
                                            name:(NSString *_Nullable)name;
 
-/// Create reduction argMax op and return the result tensor.
+/// Creates a reduction argMax operation and returns the result tensor.
 ///
 /// - Parameters:
 ///   - tensor: input tensor
@@ -161,7 +161,7 @@ MPS_CLASS_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))
                                               name:(NSString *_Nullable)name
 MPS_AVAILABLE_STARTING(macos(12.0), ios(15.0), macCatalyst(15.0), tvos(15.0));
 
-/// Create reduction argMin op and return the result tensor.
+/// Creates a reduction argMin operation and returns the result tensor.
 ///
 /// - Parameters:
 ///   - tensor: input tensor
@@ -173,7 +173,7 @@ MPS_AVAILABLE_STARTING(macos(12.0), ios(15.0), macCatalyst(15.0), tvos(15.0));
                                              name:(NSString *_Nullable)name
 MPS_AVAILABLE_STARTING(macos(12.0), ios(15.0), macCatalyst(15.0), tvos(15.0));
 
-/// Create reduction and op and return the result tensor.
+/// Creates a reduction and operation and returns the result tensor.
 ///
 /// - Parameters:
 ///   - tensor: input tensor
@@ -186,7 +186,7 @@ MPS_AVAILABLE_STARTING(macos(12.0), ios(15.0), macCatalyst(15.0), tvos(15.0));
 MPS_AVAILABLE_STARTING(macos(12.2), ios(15.3), macCatalyst(15.3), tvos(15.3));
 
 
-/// Create reduction and op and return the result tensor.
+/// Creates a reduction and operation and returns the result tensor.
 ///
 /// - Parameters:
 ///   - tensor: input tensor
@@ -198,7 +198,7 @@ MPS_AVAILABLE_STARTING(macos(12.2), ios(15.3), macCatalyst(15.3), tvos(15.3));
                                        name:(NSString *_Nullable)name
 MPS_AVAILABLE_STARTING(macos(12.2), ios(15.3), macCatalyst(15.3), tvos(15.3));
 
-/// Create reduction or op and return the result tensor.
+/// Creates a reduction or operation and returns the result tensor.
 ///
 /// - Parameters:
 ///   - tensor: input tensor
@@ -211,7 +211,7 @@ MPS_AVAILABLE_STARTING(macos(12.2), ios(15.3), macCatalyst(15.3), tvos(15.3));
 MPS_AVAILABLE_STARTING(macos(12.2), ios(15.3), macCatalyst(15.3), tvos(15.3));
 
 
-/// Create reduction or op and return the result tensor.
+/// Creates a reduction or operation and returns the result tensor.
 ///
 /// - Parameters:
 ///   - tensor: input tensor

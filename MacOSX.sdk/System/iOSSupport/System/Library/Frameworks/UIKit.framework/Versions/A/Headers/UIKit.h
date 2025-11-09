@@ -10,6 +10,11 @@
 
 #if __has_include(<UIKit/UIFoundation.h>)
 #import <UIKit/UIFoundation.h>
+#elif __has_include(<UIKit/NSAdaptiveImageGlyph.h>)
+#import <UIKit/NSAdaptiveImageGlyph.h>
+#import <UIKit/NSTextRange.h>
+#import <UIKit/NSTextList.h>
+#import <UIKit/NSTextAttachment.h>
 #endif
 
 #if __has_include(<UIKit/DocumentManager.h>)

@@ -34,7 +34,7 @@ A product archive is a flat file with a
 .Pa .pkg
 extension.
 .Nm
-creates a deployable product archive, which can be used with the OS X Installer,
+creates a deployable product archive, which can be used with the macOS Installer,
 or submitted to the Mac App Store. It has 5 different modes, as shown in the 
 .Sx SYNOPSIS
 above:
@@ -106,7 +106,7 @@ use only the
 .Cm --component
 mode of
 .Nm .
-The other modes will create product archives that are compatible with the OS X Installer, but
+The other modes will create product archives that are compatible with the macOS Installer, but
 are not necessarily acceptable for the Mac App Store.
 .\"																				OPTIONS 
 .Sh ARGUMENTS AND OPTIONS
@@ -214,7 +214,7 @@ provides identical behavior to omitting
 .Cm --component-compression
 entirely. It is currently equivalent to
 .Sy legacy
-but may change in future releases of OS X.
+but may change in future releases of macOS.
 .Bl -tag
 .El
 .Pp
@@ -272,7 +272,7 @@ tool with the
 .Cm --large-payload
 option specified, then its large payload format will be preserved. The generated
 product's distribution will include a minimum system version requirement of
-.Cm macOS 12.0
+.Cm macOS Monterey (12.0)
 or the minimum allowable system version(s) in the requirements property list,
 whichever is greater.
 .\"                                                                             --synthesize
@@ -291,12 +291,12 @@ See
 The contents of
 .Ar scripts-path
 is added to the product archive for use by system.run() commands in the distribution.
-This is valid only for product archives targeted to the OS X Installer application.
+This is valid only for product archives targeted to the macOS Installer application.
 .\"                                                                             --plugins
 .It Cm --plugins Ar plugins-path
 The contents of
 .Ar plugins-path
-is added to the product archive for use by the OS X Installer application's plugin mechanism.
+is added to the product archive for use by the macOS Installer application's plugin mechanism.
 It will normally contain a
 .Pa InstallerSections.plist
 file, and one or more plugin bundles.
@@ -314,7 +314,7 @@ or larger.
 Opting into
 .Cm --large-payload
 enforces a distribution requirement that mandates
-.Cm macOS 12.0
+.Cm macOS Monterey (12.0)
 or later.
 .\"                                                                             --sign
 .It Cm --sign Ar identity-name
@@ -403,7 +403,7 @@ key. If the distribution is evaluated under Rosetta 2, any package scripts insid
 product will be executed with Rosetta 2 at install time.
 .Pp
 .Em NOTE:
-Starting on macOS 11.0 (Big Sur),
+Starting on macOS Big Sur (11.0),
 .Sy productbuild
 will automatically specify support for both arm64 and x86_64 unless a custom value for
 .Sy arch

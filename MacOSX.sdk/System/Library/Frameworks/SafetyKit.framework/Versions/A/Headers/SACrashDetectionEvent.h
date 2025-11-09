@@ -18,13 +18,13 @@ NS_ASSUME_NONNULL_BEGIN
 typedef NS_ENUM(NSInteger, SACrashDetectionEventResponse) {
     SACrashDetectionEventResponseAttempted, ///< Emergency SOS response for the crash event was attempted
     SACrashDetectionEventResponseDisabled, ///< Emergency SOS response for crash events is disabled
-} NS_SWIFT_NAME(SACrashDetectionEvent.Response) API_AVAILABLE(ios(16.0), macos(13.0), watchos(9.0)) API_UNAVAILABLE(tvos);
+} NS_SWIFT_NAME(SACrashDetectionEvent.Response) API_AVAILABLE(ios(16.0), macos(13.0), watchos(10.1)) API_UNAVAILABLE(tvos);
 
 /**
  * @brief This object describes a Crash Detection event and response to it.
  * @sa SACrashDetectionEvent
  */
-SA_EXTERN API_AVAILABLE(ios(16.0), macos(13.0), watchos(9.0)) API_UNAVAILABLE(tvos)
+SA_EXTERN API_AVAILABLE(ios(16.0), macos(13.0), watchos(10.1)) API_UNAVAILABLE(tvos)
 @interface SACrashDetectionEvent : NSObject<NSSecureCoding, NSCopying>
 
 + (instancetype)new NS_UNAVAILABLE;

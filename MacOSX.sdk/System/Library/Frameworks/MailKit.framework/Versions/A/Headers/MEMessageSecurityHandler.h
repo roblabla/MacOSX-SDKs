@@ -5,7 +5,6 @@
 //  Copyright © 2021 Apple Inc. All rights reserved.
 //
 
-#import <MailKit/MailKit.h>
 #import <MailKit/MEMessageDecoder.h>
 #import <MailKit/MEMessageEncoder.h>
 
@@ -20,6 +19,7 @@ typedef NS_ERROR_ENUM(MEMessageSecurityErrorDomain, MEMessageSecurityErrorCode) 
 } API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, watchos, macCatalyst) API_UNAVAILABLE(tvos);
 
 API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, watchos, macCatalyst) API_UNAVAILABLE(tvos)
+NS_SWIFT_UI_ACTOR
 @protocol MEMessageSecurityHandler <MEMessageEncoder, MEMessageDecoder>
 
 #if !TARGET_OS_WATCH

@@ -326,6 +326,19 @@
 #endif
 
 /*
+ * Attributes to support Swift concurrency.
+ */
+#if __has_attribute(__swift_attr__)
+#define __swift_unavailable_from_async(_msg)    __attribute__((__swift_attr__("@_unavailableFromAsync(message: \"" _msg "\")")))
+#define __swift_nonisolated                     __attribute__((__swift_attr__("nonisolated")))
+#define __swift_nonisolated_unsafe              __attribute__((__swift_attr__("nonisolated(unsafe)")))
+#else
+#define __swift_unavailable_from_async(_msg)
+#define __swift_nonisolated
+#define __swift_nonisolated_unsafe
+#endif
+
+/*
  * __abortlike is the attribute to put on functions like abort() that are
  * typically used to mark assertions. These optimize the codegen
  * for outlining while still maintaining debugability.
@@ -1074,5 +1087,23 @@
 #define __kernel_dual_semantics
 
 
+
+#if defined(KERNEL_PRIVATE) && \
+        __has_attribute(xnu_data_size) && \
+        __has_attribute(xnu_returns_data_pointer)
+/*
+ * Annotate function parameters to specify that they semantically
+ * represent the size of a data-only backing storage.
+ */
+# define __xnu_data_size __attribute__((xnu_data_size))
+/*
+ * Annotate function declarations to specify that the pointer they return
+ * points to a data-only backing storage.
+ */
+# define __xnu_returns_data_pointer __attribute__((xnu_returns_data_pointer))
+#else
+# define __xnu_data_size
+# define __xnu_returns_data_pointer
+#endif
 
 #endif /* !_CDEFS_H_ */

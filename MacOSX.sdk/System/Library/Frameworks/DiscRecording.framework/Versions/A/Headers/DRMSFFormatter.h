@@ -24,6 +24,9 @@
 
 #import <Foundation/Foundation.h>
 
+#ifndef DISC_RECORDING_DRMSF_FORMATTER
+#define DISC_RECORDING_DRMSF_FORMATTER
+
 /*!
 	@class		DRMSFFormatter
 	@abstract	NSFormatter subclass
@@ -79,3 +82,5 @@
 - (void) setFormat:(NSString*)format;
 
 @end
+
+#endif // DISC_RECORDING_DRMSF_FORMATTER

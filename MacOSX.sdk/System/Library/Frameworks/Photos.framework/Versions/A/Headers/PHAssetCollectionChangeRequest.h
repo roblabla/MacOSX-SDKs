@@ -39,7 +39,7 @@ OS_EXPORT
 + (nullable instancetype)changeRequestForAssetCollection:(PHAssetCollection *)assetCollection;
 
 // to add, remove or rearrange assets in a collection, passing in the fetched assets in that collection will ensure that the asset positions are tracked correctly in the case that the collection has been externally edited after the fetch, but before this change is applied
-+ (nullable instancetype)changeRequestForAssetCollection:(PHAssetCollection *)assetCollection assets:(PHFetchResult<PHAsset *> *)assets;
++ (nullable instancetype)changeRequestForAssetCollection:(PHAssetCollection *)assetCollection assets:(nullable PHFetchResult<PHAsset *> *)assets;
 
 @property (nonatomic, strong, readwrite) NSString *title;
 

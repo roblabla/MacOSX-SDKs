@@ -5,6 +5,8 @@
 
 #ifdef __OBJC__
 
+#if __has_include(<Metal/MTLDrawable.h>)
+
 #import <QuartzCore/CALayer.h>
 #import <QuartzCore/CAEDRMetadata.h>
 #import <Metal/MTLPixelFormat.h>
@@ -16,7 +18,7 @@
 
 @class CAMetalLayer, NSDictionary;
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 /* CAMetalDrawable represents a displayable buffer that vends an object
  * that conforms to the MTLTexture protocol that may be used to create
@@ -43,7 +45,7 @@ NS_ASSUME_NONNULL_BEGIN
 /* Note: The default value of the `opaque' property for CAMetalLayer
  * instances is true. */
 
-API_AVAILABLE(macos(10.11), ios(8.0), watchos(2.0), tvos(9.0))
+API_AVAILABLE(macos(10.11), ios(8.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 @interface CAMetalLayer : CALayer
 {
 @private
@@ -61,7 +63,7 @@ API_AVAILABLE(macos(10.11), ios(8.0), watchos(2.0), tvos(9.0))
 /* This property returns the preferred MTLDevice for this CAMetalLayer. */
 
 @property(nullable, readonly) id<MTLDevice> preferredDevice
-  API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0));
+  API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0)) API_UNAVAILABLE(watchos);
 
 /* This property controls the pixel format of the MTLTexture objects.
  * The two supported values are MTLPixelFormatBGRA8Unorm and
@@ -127,7 +129,7 @@ API_AVAILABLE(macos(10.11), ios(16.0), macCatalyst(16.0)) API_UNAVAILABLE(tvos, 
  * will be rendered without tone mapping and values above the maximum EDR value
  * -[NSScreen maximumExtendedDynamicRangeColorComponentValue] may be clamped.
  * Defaults to nil. */
-@property (strong, nullable) CAEDRMetadata *EDRMetadata API_AVAILABLE(macos(10.15), ios(16.0));
+@property (strong, nullable) CAEDRMetadata *EDRMetadata API_AVAILABLE(macos(10.15), ios(16.0)) API_UNAVAILABLE(watchos);
 
 /* This property controls if this layer and its drawables will be synchronized
  * to the display's Vsync. The default value is YES. */
@@ -140,7 +142,7 @@ API_AVAILABLE(macos(10.11), ios(16.0), macCatalyst(16.0)) API_UNAVAILABLE(tvos, 
  * free drawable is available. */
 
 @property BOOL allowsNextDrawableTimeout
-  API_AVAILABLE(macos(10.13), ios(11.0), watchos(4.0), tvos(11.0));
+  API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0)) API_UNAVAILABLE(watchos);
 
 /* When non-nil, controls the options of developer HUD. Defaults to nil. */
 
@@ -149,6 +151,7 @@ API_AVAILABLE(macos(10.11), ios(16.0), macCatalyst(16.0)) API_UNAVAILABLE(tvos, 
 
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)
 
-#endif
+#endif /* __has_include(<Metal/MTLDrawable.h>) */
+#endif /* __OBJC__ */

@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/Frameworks/ContactsUI.framework/Versions/A/ContactsUI'
-current-version: 2571.3
+current-version: 2589
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -91,6 +91,8 @@ exports:
                        '_$s10ContactsUI27CNAvatarPickerViewInterfaceC26setupUserMemojiRecordsDataSDySS10Foundation0K0VGvpMV', 
                        '_$s10ContactsUI27CNAvatarPickerViewInterfaceC29setUserSetupMemojiRecordsDatayySDySS10Foundation0L0VGFTj', 
                        '_$s10ContactsUI27CNAvatarPickerViewInterfaceC29setUserSetupMemojiRecordsDatayySDySS10Foundation0L0VGFTq', 
+                       '_$s10ContactsUI27CNAvatarPickerViewInterfaceC36setAllowEditingMemojiAndMonogramOnlyyySbFTj', 
+                       '_$s10ContactsUI27CNAvatarPickerViewInterfaceC36setAllowEditingMemojiAndMonogramOnlyyySbFTq', 
                        '_$s10ContactsUI27CNAvatarPickerViewInterfaceC8cropRectSo6CGRectVvgTj', 
                        '_$s10ContactsUI27CNAvatarPickerViewInterfaceC8cropRectSo6CGRectVvgTq', 
                        '_$s10ContactsUI27CNAvatarPickerViewInterfaceC8cropRectSo6CGRectVvpMV', 

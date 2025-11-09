@@ -5,23 +5,24 @@ install-name:    '/System/Library/PrivateFrameworks/CoreRecognition.framework/Ve
 current-version: 157
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-    symbols:         [ _CRAdaptiveThresholdImage, _CRCameraReaderErrorDomain, _CRCameraReaderIDCardCapturePathAutomatic, 
+    symbols:         [ _CRCameraReaderErrorDomain, _CRCameraReaderIDCardCapturePathAutomatic, 
                        _CRCameraReaderIDCardCapturePathFallback, _CRCodeRedeemerErrorDomain, 
-                       _CRCodeRedeemerInfoStatsKey, _CRInsightsCardImageCutBufferKey, 
-                       _CRInsightsCardImageCutEmbossedBufferKey, _CRInsightsCardImageFixedCutLandscape, 
-                       _CRInsightsCardImageFreeformLandscape, _CRInsightsCardImageFreeformLandscapeInverted, 
-                       _CRInsightsCardImageFreeformPortrait, _CRInsightsCardPointsKey, 
-                       _CRInsightsCardholderNameKey, _CRInsightsCodeKey, _CRInsightsContextImageOrientation, 
-                       _CRInsightsContextImageOrientationLandscape, _CRInsightsContextImageOrientationLandscapeInverted, 
-                       _CRInsightsContextImageOrientationPortrait, _CRInsightsContextImageOrientationPortraitInverted, 
-                       _CRInsightsContextImagePath, _CRInsightsContextImagePathFixedCut, 
-                       _CRInsightsContextImagePathFreeform, _CRInsightsContextRecognitionTextFeature, 
-                       _CRInsightsContextRecognitionTextFeatureGroup, _CRInsightsDateResultsKey, 
-                       _CRInsightsEmbossedRegionsExpirationDate, _CRInsightsEmbossedRegionsName, 
-                       _CRInsightsEmbossedRegionsNumber, _CRInsightsEmbossedResultsFixedCutLandscape, 
-                       _CRInsightsEmbossedResultsFreeformLandscape, _CRInsightsEmbossedResultsFreeformLandscapeInverted, 
-                       _CRInsightsEndToEndTimeKey, _CRInsightsExpirationKey, _CRInsightsNameResultsKey, 
-                       _CRInsightsNumberResultsKey, _CRInsightsPerFrameTimeKey, _CRInsightsRecognitionResultForExpDateEmbossed, 
+                       _CRCodeRedeemerInfoCodeKey, _CRCodeRedeemerInfoErrorKey, _CRCodeRedeemerInfoStatsKey, 
+                       _CRInsightsCardImageCutBufferKey, _CRInsightsCardImageCutEmbossedBufferKey, 
+                       _CRInsightsCardImageFixedCutLandscape, _CRInsightsCardImageFreeformLandscape, 
+                       _CRInsightsCardImageFreeformLandscapeInverted, _CRInsightsCardImageFreeformPortrait, 
+                       _CRInsightsCardPointsKey, _CRInsightsCardholderNameKey, _CRInsightsCodeKey, 
+                       _CRInsightsContextImageOrientation, _CRInsightsContextImageOrientationLandscape, 
+                       _CRInsightsContextImageOrientationLandscapeInverted, _CRInsightsContextImageOrientationPortrait, 
+                       _CRInsightsContextImageOrientationPortraitInverted, _CRInsightsContextImagePath, 
+                       _CRInsightsContextImagePathFixedCut, _CRInsightsContextImagePathFreeform, 
+                       _CRInsightsContextRecognitionTextFeature, _CRInsightsContextRecognitionTextFeatureGroup, 
+                       _CRInsightsDateResultsKey, _CRInsightsEmbossedRegionsExpirationDate, 
+                       _CRInsightsEmbossedRegionsName, _CRInsightsEmbossedRegionsNumber, 
+                       _CRInsightsEmbossedResultsFixedCutLandscape, _CRInsightsEmbossedResultsFreeformLandscape, 
+                       _CRInsightsEmbossedResultsFreeformLandscapeInverted, _CRInsightsEndToEndTimeKey, 
+                       _CRInsightsExpirationKey, _CRInsightsNameResultsKey, _CRInsightsNumberResultsKey, 
+                       _CRInsightsPerFrameTimeKey, _CRInsightsRecognitionResultForExpDateEmbossed, 
                        _CRInsightsRecognitionResultForNameEmbossed, _CRInsightsRecognitionResultForNumberEmbossed, 
                        _CRInsightsRecognitionResultsForRegion, _CRInsightsReferenceExpirationKey, 
                        _CRInsightsTextDetectorRegionsFixedCutLandscape, _CRInsightsTextDetectorRegionsFreeformLandscape, 
@@ -67,12 +68,13 @@ exports:
                        _stringByTransliteratingNameToPinyin, _stringCandidatesByTransliteratingNameToRomaji ]
     objc-classes:    [ CRCameraReader, CRCameraReaderOutput, CRCameraReaderOutputCameraText, 
                        CRCameraReaderOutputExpirationDate, CRCameraReaderOutputIDCard, 
-                       CRCodeRedeemerLayer, CRCodeRedeemerView, CRInsights, CRInsightsCodeSection, 
-                       CRInsightsContext, CRMLCCModel, CRMLEmbossedCardholderModel, 
-                       CRMLEmbossedExpirationModel, CRMLEmbossedNumberModel, CRMLFlatModel, 
-                       CRPollingTimer ]
+                       CRCodeRedeemerController, CRCodeRedeemerLayer, CRCodeRedeemerView, 
+                       CRInsights, CRInsightsCodeSection, CRInsightsContext, CRMLCCModel, 
+                       CRMLEmbossedCardholderModel, CRMLEmbossedExpirationModel, 
+                       CRMLEmbossedNumberModel, CRMLFlatModel, CRPollingTimer ]
 reexports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-    symbols:         [ _writeBuffer, _writeCGImageToPNG ]
-    objc-classes:    [ CRImage, CRTextFeature, CRTextFeatureMultiRegion ]
+    symbols:         [ '_OBJC_CLASS_$_CRTextFeature', '_OBJC_CLASS_$_CRTextFeatureMultiRegion', 
+                       _writeBuffer, _writeCGImageToPNG ]
+    objc-classes:    [ CRImage ]
 ...

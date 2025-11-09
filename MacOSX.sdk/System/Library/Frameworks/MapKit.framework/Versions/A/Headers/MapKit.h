@@ -10,11 +10,13 @@
 #import <MapKit/MKAnnotation.h>
 #import <MapKit/MKDistanceFormatter.h>
 #import <MapKit/MKGeometry.h>
+#import <MapKit/MKMapItemIdentifier.h>
 #import <MapKit/MKMapItem.h>
 #import <MapKit/MKPlacemark.h>
 #import <MapKit/NSUserActivity+MKMapItem.h>
 
 #if __has_include(<MapKit/MKMapView.h>)
+#import <MapKit/MKAddressFilter.h>
 #import <MapKit/MKAnnotationView.h>
 #import <MapKit/MKMapView.h>
 #import <MapKit/MKMarkerAnnotationView.h>
@@ -26,6 +28,7 @@
 #import <MapKit/MKOverlay.h>
 #import <MapKit/MKShape.h>
 #import <MapKit/MKPointAnnotation.h>
+#import <MapKit/MKMapItemAnnotation.h>
 #import <MapKit/MKMultiPoint.h>
 #import <MapKit/MKMultiPolygon.h>
 #import <MapKit/MKMultiPolygonRenderer.h>
@@ -83,7 +86,6 @@
 #import <MapKit/MKUserTrackingButton.h>
 #import <MapKit/MKIconStyle.h>
 #import <MapKit/MKMapFeatureAnnotation.h>
-#import <MapKit/MKMapItemRequest.h>
 
 #endif // TARGET_OS_IOS || TARGET_OS_MACCATALYST || TARGET_OS_TV
 
@@ -97,5 +99,14 @@
 #import <MapKit/MKLookAroundViewController.h>
 
 #endif // (TARGET_OS_IOS || TARGET_OS_MACCATALYST || TARGET_OS_OSX || TARGET_OS_TV)
+
+#if (!TARGET_OS_WATCH)
+
+#import <MapKit/MKMapItemDetailViewController.h>
+#import <MapKit/MKMapItemRequest.h>
+#import <MapKit/MKSelectionAccessory.h>
+
+#endif // (!TARGET_OS_WATCH)
+
 
 #endif // __has_include(<MapKit/MKMapView.h>)

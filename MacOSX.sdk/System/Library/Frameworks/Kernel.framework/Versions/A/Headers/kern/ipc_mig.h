@@ -104,24 +104,26 @@ extern mach_msg_return_t mach_msg_send_from_kernel_proper(
  *
  *     Mach message body (descriptor count) will be set after the builder accordingly.
  */
+
 extern mach_msg_return_t kernel_mach_msg_send_with_builder(
 	mach_msg_size_t         descriptor_count,
 	mach_msg_size_t         payload_size,    /* Warning: NOT total send size */
-	void                    (^builder)(mach_msg_header_t *header,
-	mach_msg_descriptor_t * __counted_by(descriptor_count)descs, /* Nullable */
-	void *                  __sized_by(payload_size)payload));   /* Nullable */
+	void                  (^builder)(mach_msg_header_t *header,
+	mach_msg_descriptor_t  *__counted_by(descriptor_count)descs, /* Nullable */
+	void                   *__sized_by(payload_size)payload));   /* Nullable */
+
 
 extern mach_msg_return_t mach_msg_rpc_from_kernel_proper(
-	mach_msg_header_t       *msg,
+	mach_msg_header_t      *msg,
 	mach_msg_size_t         send_size,
 	mach_msg_size_t         rcv_size);
 
-#define mach_msg_rpc_from_kernel mach_msg_rpc_from_kernel_proper
-
 extern void mach_msg_destroy_from_kernel_proper(
-	mach_msg_header_t       *msg);
+	mach_msg_header_t      *msg);
 
+#define mach_msg_rpc_from_kernel    mach_msg_rpc_from_kernel_proper
 #define mach_msg_destroy_from_kernel mach_msg_destroy_from_kernel_proper
+
 
 
 __END_DECLS

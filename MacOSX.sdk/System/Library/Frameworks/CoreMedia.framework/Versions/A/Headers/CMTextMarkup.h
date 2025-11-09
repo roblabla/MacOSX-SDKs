@@ -42,7 +42,7 @@ CM_ASSUME_NONNULL_BEGIN
                 red, green and blue components are interpreted in the sRGB color space. The alpha indicates the opacity from 0.0 for transparent to
                 1.0 for 100% opaque.
 */
-CM_EXPORT const CFStringRef kCMTextMarkupAttribute_ForegroundColorARGB API_AVAILABLE(macos(10.9), ios(6.0), tvos(9.0), watchos(6.0));
+CM_EXPORT const CFStringRef kCMTextMarkupAttribute_ForegroundColorARGB API_AVAILABLE(macos(10.9), ios(6.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
     @const      kCMTextMarkupAttribute_BackgroundColorARGB
@@ -59,7 +59,7 @@ CM_EXPORT const CFStringRef kCMTextMarkupAttribute_ForegroundColorARGB API_AVAIL
                 If used, this attribute must be applied to the entire attributed string (i.e.,
                 CFRangeMake(0, CFAttributedStringGetLength(...))).
 */
-CM_EXPORT const CFStringRef kCMTextMarkupAttribute_BackgroundColorARGB API_AVAILABLE(macos(10.9), ios(6.0), tvos(9.0), watchos(6.0));
+CM_EXPORT const CFStringRef kCMTextMarkupAttribute_BackgroundColorARGB API_AVAILABLE(macos(10.9), ios(6.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
     @const      kCMTextMarkupAttribute_CharacterBackgroundColorARGB
@@ -69,7 +69,7 @@ CM_EXPORT const CFStringRef kCMTextMarkupAttribute_BackgroundColorARGB API_AVAIL
                 red, green and blue components are interpreted in the sRGB color space. The alpha indicates the opacity from 0.0 for transparent to
                 1.0 for 100% opaque.
  */
-CM_EXPORT const CFStringRef kCMTextMarkupAttribute_CharacterBackgroundColorARGB API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(6.0));
+CM_EXPORT const CFStringRef kCMTextMarkupAttribute_CharacterBackgroundColorARGB API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
     @const      kCMTextMarkupAttribute_BoldStyle
@@ -80,7 +80,7 @@ CM_EXPORT const CFStringRef kCMTextMarkupAttribute_CharacterBackgroundColorARGB 
                 with a bold style. Other styles such as italic may or may 
                 not be used as well.
 */
-CM_EXPORT const CFStringRef kCMTextMarkupAttribute_BoldStyle API_AVAILABLE(macos(10.9), ios(6.0), tvos(9.0), watchos(6.0));
+CM_EXPORT const CFStringRef kCMTextMarkupAttribute_BoldStyle API_AVAILABLE(macos(10.9), ios(6.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
     @const      kCMTextMarkupAttribute_ItalicStyle
@@ -91,7 +91,7 @@ CM_EXPORT const CFStringRef kCMTextMarkupAttribute_BoldStyle API_AVAILABLE(macos
                 with an italic style. Other styles such as bold may or may not 
                 be used as well.
 */
-CM_EXPORT const CFStringRef kCMTextMarkupAttribute_ItalicStyle API_AVAILABLE(macos(10.9), ios(6.0), tvos(9.0), watchos(6.0));
+CM_EXPORT const CFStringRef kCMTextMarkupAttribute_ItalicStyle API_AVAILABLE(macos(10.9), ios(6.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
     @const      kCMTextMarkupAttribute_UnderlineStyle
@@ -103,7 +103,7 @@ CM_EXPORT const CFStringRef kCMTextMarkupAttribute_ItalicStyle API_AVAILABLE(mac
                 with an underline. Other styles such as bold may or may not 
                 be used as well.
 */
-CM_EXPORT const CFStringRef kCMTextMarkupAttribute_UnderlineStyle API_AVAILABLE(macos(10.9), ios(6.0), tvos(9.0), watchos(6.0));
+CM_EXPORT const CFStringRef kCMTextMarkupAttribute_UnderlineStyle API_AVAILABLE(macos(10.9), ios(6.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
     @const      kCMTextMarkupAttribute_FontFamilyName
@@ -115,7 +115,7 @@ CM_EXPORT const CFStringRef kCMTextMarkupAttribute_UnderlineStyle API_AVAILABLE(
                 When vended by legible output, an attributed string will have at most one of kCMTextMarkupAttribute_FontFamilyName or
                 kCMTextMarkupAttribute_GenericFontFamilyName associated with each character.
 */
-CM_EXPORT const CFStringRef kCMTextMarkupAttribute_FontFamilyName API_AVAILABLE(macos(10.9), ios(6.0), tvos(9.0), watchos(6.0));
+CM_EXPORT const CFStringRef kCMTextMarkupAttribute_FontFamilyName API_AVAILABLE(macos(10.9), ios(6.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
     @const      kCMTextMarkupAttribute_FontFamilyNameList
@@ -126,7 +126,7 @@ CM_EXPORT const CFStringRef kCMTextMarkupAttribute_FontFamilyName API_AVAILABLE(
                 The CFArray value can hold multiple font names as a fallback where the author prefers specific fonts. If the renderer does not support the first font entry, it tries the following.
                 For example, the array includes InexistantFont and Times New Roman font names, it is expected the renderer to select the "Times New Roman" font for drawing caption.
 */
-CM_EXPORT const CFStringRef kCMTextMarkupAttribute_FontFamilyNameList API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0), watchos(9.0));
+CM_EXPORT const CFStringRef kCMTextMarkupAttribute_FontFamilyNameList API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0), watchos(9.0), visionos(1.0));
 
 /*!
     @const      kCMTextMarkupAttribute_GenericFontFamilyName
@@ -170,7 +170,7 @@ CM_EXPORT const CFStringRef kCMTextMarkupAttribute_FontFamilyNameList API_AVAILA
  
                 Concrete fonts are specified using the kCMTextMarkupAttribute_FontFamilyName attribute also defined in this header.
 */
-CM_EXPORT const CFStringRef kCMTextMarkupAttribute_GenericFontFamilyName API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(6.0));
+CM_EXPORT const CFStringRef kCMTextMarkupAttribute_GenericFontFamilyName API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
 	@abstract   Values for kCMTextMarkupAttribute_GenericFontFamilyName. 
@@ -212,18 +212,18 @@ CM_EXPORT const CFStringRef kCMTextMarkupAttribute_GenericFontFamilyName API_AVA
 	@const      kCMTextMarkupGenericFontName_SmallCapital
  				The generic font name indicating a font with lowercase letters set as small capitals. E.g., Engravers Gothic
  */
-CM_EXPORT  const CFStringRef kCMTextMarkupGenericFontName_Default               API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(6.0));
-CM_EXPORT  const CFStringRef kCMTextMarkupGenericFontName_Serif                 API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(6.0));
-CM_EXPORT  const CFStringRef kCMTextMarkupGenericFontName_SansSerif             API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(6.0));
-CM_EXPORT  const CFStringRef kCMTextMarkupGenericFontName_Monospace             API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(6.0));
-CM_EXPORT  const CFStringRef kCMTextMarkupGenericFontName_ProportionalSerif     API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(6.0));
-CM_EXPORT  const CFStringRef kCMTextMarkupGenericFontName_ProportionalSansSerif API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(6.0));
-CM_EXPORT  const CFStringRef kCMTextMarkupGenericFontName_MonospaceSerif        API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(6.0));
-CM_EXPORT  const CFStringRef kCMTextMarkupGenericFontName_MonospaceSansSerif    API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(6.0));
-CM_EXPORT  const CFStringRef kCMTextMarkupGenericFontName_Casual                API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(6.0));
-CM_EXPORT  const CFStringRef kCMTextMarkupGenericFontName_Cursive               API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(6.0));
-CM_EXPORT  const CFStringRef kCMTextMarkupGenericFontName_Fantasy               API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(6.0));
-CM_EXPORT  const CFStringRef kCMTextMarkupGenericFontName_SmallCapital          API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(6.0));
+CM_EXPORT  const CFStringRef kCMTextMarkupGenericFontName_Default               API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(6.0), visionos(1.0));
+CM_EXPORT  const CFStringRef kCMTextMarkupGenericFontName_Serif                 API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(6.0), visionos(1.0));
+CM_EXPORT  const CFStringRef kCMTextMarkupGenericFontName_SansSerif             API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(6.0), visionos(1.0));
+CM_EXPORT  const CFStringRef kCMTextMarkupGenericFontName_Monospace             API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(6.0), visionos(1.0));
+CM_EXPORT  const CFStringRef kCMTextMarkupGenericFontName_ProportionalSerif     API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(6.0), visionos(1.0));
+CM_EXPORT  const CFStringRef kCMTextMarkupGenericFontName_ProportionalSansSerif API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(6.0), visionos(1.0));
+CM_EXPORT  const CFStringRef kCMTextMarkupGenericFontName_MonospaceSerif        API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(6.0), visionos(1.0));
+CM_EXPORT  const CFStringRef kCMTextMarkupGenericFontName_MonospaceSansSerif    API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(6.0), visionos(1.0));
+CM_EXPORT  const CFStringRef kCMTextMarkupGenericFontName_Casual                API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(6.0), visionos(1.0));
+CM_EXPORT  const CFStringRef kCMTextMarkupGenericFontName_Cursive               API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(6.0), visionos(1.0));
+CM_EXPORT  const CFStringRef kCMTextMarkupGenericFontName_Fantasy               API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(6.0), visionos(1.0));
+CM_EXPORT  const CFStringRef kCMTextMarkupGenericFontName_SmallCapital          API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 
 /*!
@@ -232,7 +232,7 @@ CM_EXPORT  const CFStringRef kCMTextMarkupGenericFontName_SmallCapital          
  
     @discussion Value must be a non-negative CFNumber.  This is a number holding a percentage of the height of the video frame.  For example, a value of 5 indicates that the base font size should be 5% of the height of the video.
 */
-CM_EXPORT const CFStringRef kCMTextMarkupAttribute_BaseFontSizePercentageRelativeToVideoHeight API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(6.0));
+CM_EXPORT const CFStringRef kCMTextMarkupAttribute_BaseFontSizePercentageRelativeToVideoHeight API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
     @const      kCMTextMarkupAttribute_RelativeFontSize
@@ -244,7 +244,7 @@ CM_EXPORT const CFStringRef kCMTextMarkupAttribute_BaseFontSizePercentageRelativ
                 indicates 80% of the default font size.  The value 100 indicates no size
                 difference and is the default.
 */
-CM_EXPORT const CFStringRef kCMTextMarkupAttribute_RelativeFontSize API_AVAILABLE(macos(10.9), ios(6.0), tvos(9.0), watchos(6.0));
+CM_EXPORT const CFStringRef kCMTextMarkupAttribute_RelativeFontSize API_AVAILABLE(macos(10.9), ios(6.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
 	@const      kCMTextMarkupAttribute_VerticalLayout
@@ -259,7 +259,7 @@ CM_EXPORT const CFStringRef kCMTextMarkupAttribute_RelativeFontSize API_AVAILABL
 				If used, this attribute must be applied to the entire attributed string (i.e., 
                 CFRangeMake(0, CFAttributedStringGetLength(...))).
 */
-CM_EXPORT const CFStringRef kCMTextMarkupAttribute_VerticalLayout API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(6.0));
+CM_EXPORT const CFStringRef kCMTextMarkupAttribute_VerticalLayout API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
 	@abstract   Values for kCMTextMarkupAttribute_VerticalLayout. 
@@ -270,8 +270,8 @@ CM_EXPORT const CFStringRef kCMTextMarkupAttribute_VerticalLayout API_AVAILABLE(
 	@const      kCMTextVerticalLayout_RightToLeft
 				Newly added vertical lines are added from the right toward the left.
 */
-CM_EXPORT const CFStringRef kCMTextVerticalLayout_LeftToRight API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(6.0));
-CM_EXPORT const CFStringRef kCMTextVerticalLayout_RightToLeft API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(6.0));
+CM_EXPORT const CFStringRef kCMTextVerticalLayout_LeftToRight API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(6.0), visionos(1.0));
+CM_EXPORT const CFStringRef kCMTextVerticalLayout_RightToLeft API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 
 /*!
@@ -290,7 +290,7 @@ CM_EXPORT const CFStringRef kCMTextVerticalLayout_RightToLeft API_AVAILABLE(maco
 				If used, this attribute must be applied to the entire attributed string (i.e., 
                 CFRangeMake(0, CFAttributedStringGetLength(...))).
 */
-CM_EXPORT const CFStringRef kCMTextMarkupAttribute_Alignment API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(6.0));
+CM_EXPORT const CFStringRef kCMTextMarkupAttribute_Alignment API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
 	@abstract   Values for kCMTextMarkupAttribute_Alignment. 
@@ -320,11 +320,11 @@ CM_EXPORT const CFStringRef kCMTextMarkupAttribute_Alignment API_AVAILABLE(macos
 				kCMTextMarkupAlignmentType_End for vertical text, authors are discouraged from using kCMTextMarkupAlignmentType_Right
 				for vertical text.
 */
-CM_EXPORT const CFStringRef kCMTextMarkupAlignmentType_Start API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(6.0));
-CM_EXPORT const CFStringRef kCMTextMarkupAlignmentType_Middle API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(6.0));
-CM_EXPORT const CFStringRef kCMTextMarkupAlignmentType_End API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(6.0));
-CM_EXPORT const CFStringRef kCMTextMarkupAlignmentType_Left API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(6.0));
-CM_EXPORT const CFStringRef kCMTextMarkupAlignmentType_Right API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(6.0));
+CM_EXPORT const CFStringRef kCMTextMarkupAlignmentType_Start API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(6.0), visionos(1.0));
+CM_EXPORT const CFStringRef kCMTextMarkupAlignmentType_Middle API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(6.0), visionos(1.0));
+CM_EXPORT const CFStringRef kCMTextMarkupAlignmentType_End API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(6.0), visionos(1.0));
+CM_EXPORT const CFStringRef kCMTextMarkupAlignmentType_Left API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(6.0), visionos(1.0));
+CM_EXPORT const CFStringRef kCMTextMarkupAlignmentType_Right API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 
 /*!
@@ -342,7 +342,7 @@ CM_EXPORT const CFStringRef kCMTextMarkupAlignmentType_Right API_AVAILABLE(macos
 				 If used, this attribute must be applied to the entire attributed string (i.e., 
                  CFRangeMake(0, CFAttributedStringGetLength(...))).
 */
-CM_EXPORT const CFStringRef kCMTextMarkupAttribute_TextPositionPercentageRelativeToWritingDirection API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(6.0)); 
+CM_EXPORT const CFStringRef kCMTextMarkupAttribute_TextPositionPercentageRelativeToWritingDirection API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
 	@const      kCMTextMarkupAttribute_OrthogonalLinePositionPercentageRelativeToWritingDirection
@@ -362,7 +362,7 @@ CM_EXPORT const CFStringRef kCMTextMarkupAttribute_TextPositionPercentageRelativ
 				If used, this attribute must be applied to the entire attributed string (i.e., 
                 CFRangeMake(0, CFAttributedStringGetLength(...))).
 */
-CM_EXPORT const CFStringRef kCMTextMarkupAttribute_OrthogonalLinePositionPercentageRelativeToWritingDirection API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(6.0));
+CM_EXPORT const CFStringRef kCMTextMarkupAttribute_OrthogonalLinePositionPercentageRelativeToWritingDirection API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(6.0), visionos(1.0));
 	
 /*!
 	@const      kCMTextMarkupAttribute_WritingDirectionSizePercentage
@@ -378,7 +378,7 @@ CM_EXPORT const CFStringRef kCMTextMarkupAttribute_OrthogonalLinePositionPercent
 				If used, this attribute must be applied to the entire attributed string (i.e., 
                 CFRangeMake(0, CFAttributedStringGetLength(...))).
 */
-CM_EXPORT const CFStringRef kCMTextMarkupAttribute_WritingDirectionSizePercentage API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(6.0));
+CM_EXPORT const CFStringRef kCMTextMarkupAttribute_WritingDirectionSizePercentage API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
 	@const      kCMTextMarkupAttribute_CharacterEdgeStyle
@@ -394,7 +394,7 @@ CM_EXPORT const CFStringRef kCMTextMarkupAttribute_WritingDirectionSizePercentag
 				The absence of this attribute should be treated as though kCMTextMarkupCharacterEdgeStyle_None
 				is specified.
  */
-CM_EXPORT const CFStringRef kCMTextMarkupAttribute_CharacterEdgeStyle API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(6.0));
+CM_EXPORT const CFStringRef kCMTextMarkupAttribute_CharacterEdgeStyle API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
 	@abstract   Values for kCMTextMarkupAttribute_CharacterEdgeStyle. 
@@ -414,11 +414,11 @@ CM_EXPORT const CFStringRef kCMTextMarkupAttribute_CharacterEdgeStyle API_AVAILA
 	@const      kCMTextMarkupCharacterEdgeStyle_DropShadow
 				The character edge style indicating a drop shadow should be drawn.
  */
-CM_EXPORT  const CFStringRef kCMTextMarkupCharacterEdgeStyle_None       API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(6.0));
-CM_EXPORT  const CFStringRef kCMTextMarkupCharacterEdgeStyle_Raised     API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(6.0));
-CM_EXPORT  const CFStringRef kCMTextMarkupCharacterEdgeStyle_Depressed  API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(6.0));
-CM_EXPORT  const CFStringRef kCMTextMarkupCharacterEdgeStyle_Uniform    API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(6.0));
-CM_EXPORT  const CFStringRef kCMTextMarkupCharacterEdgeStyle_DropShadow API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(6.0));
+CM_EXPORT  const CFStringRef kCMTextMarkupCharacterEdgeStyle_None       API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(6.0), visionos(1.0));
+CM_EXPORT  const CFStringRef kCMTextMarkupCharacterEdgeStyle_Raised     API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(6.0), visionos(1.0));
+CM_EXPORT  const CFStringRef kCMTextMarkupCharacterEdgeStyle_Depressed  API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(6.0), visionos(1.0));
+CM_EXPORT  const CFStringRef kCMTextMarkupCharacterEdgeStyle_Uniform    API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(6.0), visionos(1.0));
+CM_EXPORT  const CFStringRef kCMTextMarkupCharacterEdgeStyle_DropShadow API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 CM_ASSUME_NONNULL_END
 

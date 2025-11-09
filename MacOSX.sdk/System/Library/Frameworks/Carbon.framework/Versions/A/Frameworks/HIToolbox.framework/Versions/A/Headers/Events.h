@@ -3,7 +3,7 @@
  
      Contains:   Event Manager Interfaces.
  
-     Copyright:  © 1985-2008 by Apple Computer, Inc., all rights reserved
+     Copyright:  ï¿½ 1985-2008 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -296,6 +296,7 @@ enum {
   kVK_F16                       = 0x6A,
   kVK_F14                       = 0x6B,
   kVK_F10                       = 0x6D,
+  kVK_ContextualMenu            = 0x6E,
   kVK_F12                       = 0x6F,
   kVK_F15                       = 0x71,
   kVK_Help                      = 0x72,

@@ -21,9 +21,9 @@ NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 typedef NS_ENUM(NSInteger, UIBarButtonItemStyle) {
     UIBarButtonItemStylePlain,
-    UIBarButtonItemStyleBordered API_DEPRECATED_WITH_REPLACEMENT("UIBarButtonItemStylePlain", ios(2.0, 8.0)) API_UNAVAILABLE(visionos),
+    UIBarButtonItemStyleBordered API_DEPRECATED_WITH_REPLACEMENT("UIBarButtonItemStylePlain", ios(2.0, 8.0)) API_UNAVAILABLE(visionos, watchos),
     UIBarButtonItemStyleDone,
-};
+} API_UNAVAILABLE(watchos);
 
 typedef NS_ENUM(NSInteger, UIBarButtonSystemItem) {
     UIBarButtonSystemItemDone,
@@ -49,13 +49,13 @@ typedef NS_ENUM(NSInteger, UIBarButtonSystemItem) {
     UIBarButtonSystemItemFastForward,
     UIBarButtonSystemItemUndo API_AVAILABLE(ios(3.0)),
     UIBarButtonSystemItemRedo API_AVAILABLE(ios(3.0)),
-    UIBarButtonSystemItemPageCurl API_DEPRECATED("", ios(4.0, 11.0)) API_UNAVAILABLE(visionos),
-    UIBarButtonSystemItemClose API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(tvos)
-};
+    UIBarButtonSystemItemPageCurl API_DEPRECATED("", ios(4.0, 11.0)) API_UNAVAILABLE(visionos, watchos),
+    UIBarButtonSystemItemClose API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(tvos, watchos)
+} API_UNAVAILABLE(watchos);
 
 @class UIImage, UIView;
 
-UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(2.0)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @interface UIBarButtonItem : UIBarItem <NSCoding>
 
 - (instancetype)init NS_DESIGNATED_INITIALIZER;
@@ -67,34 +67,34 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
 - (instancetype)initWithCustomView:(UIView *)customView;
 
 /// Creates a bar button item for the given systemItem. The primaryAction is copied, and its title & image are ignored.
-- (instancetype)initWithBarButtonSystemItem:(UIBarButtonSystemItem)systemItem primaryAction:(nullable UIAction *)primaryAction API_AVAILABLE(ios(14.0));
+- (instancetype)initWithBarButtonSystemItem:(UIBarButtonSystemItem)systemItem primaryAction:(nullable UIAction *)primaryAction API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos);
 
 /// Creates a plain-style bar button item from the properties of primaryAction. primaryAction is copied.
-- (instancetype)initWithPrimaryAction:(nullable UIAction *)primaryAction API_AVAILABLE(ios(14.0));
+- (instancetype)initWithPrimaryAction:(nullable UIAction *)primaryAction API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos);
 
 /// Creates a bar button item for the given systemItem. The constructed item will present the menu immediately when touched.
-- (instancetype)initWithBarButtonSystemItem:(UIBarButtonSystemItem)systemItem menu:(nullable UIMenu *)menu API_AVAILABLE(ios(14.0));
+- (instancetype)initWithBarButtonSystemItem:(UIBarButtonSystemItem)systemItem menu:(nullable UIMenu *)menu API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos);
 
 /// Creates a plain-style bar button item with the given title. The constructed item will present the menu immediately when touched.
-- (instancetype)initWithTitle:(nullable NSString *)title menu:(nullable UIMenu *)menu API_AVAILABLE(ios(14.0));
+- (instancetype)initWithTitle:(nullable NSString *)title menu:(nullable UIMenu *)menu API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos);
 
 /// Creates a plain-style bar button item with the given image. The constructed item will present the menu immediately when touched.
-- (instancetype)initWithImage:(nullable UIImage *)image menu:(nullable UIMenu *)menu API_AVAILABLE(ios(14.0));
+- (instancetype)initWithImage:(nullable UIImage *)image menu:(nullable UIMenu *)menu API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos);
 
 /// Creates a plain-style bar button item from the properties of primaryAction. primaryAction is copied.
-- (instancetype)initWithPrimaryAction:(nullable UIAction *)primaryAction menu:(nullable UIMenu *)menu API_AVAILABLE(ios(16.0));
+- (instancetype)initWithPrimaryAction:(nullable UIAction *)primaryAction menu:(nullable UIMenu *)menu API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(watchos);
 
 /// Creates a bar button item for the given systemItem. The primaryAction is copied, and its title & image are ignored.
-- (instancetype)initWithBarButtonSystemItem:(UIBarButtonSystemItem)systemItem primaryAction:(nullable UIAction *)primaryAction menu:(nullable UIMenu *)menu API_AVAILABLE(ios(16.0));
+- (instancetype)initWithBarButtonSystemItem:(UIBarButtonSystemItem)systemItem primaryAction:(nullable UIAction *)primaryAction menu:(nullable UIMenu *)menu API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(watchos);
 
 /// Creates a plain-style bar button item with the given title and image.
-- (instancetype)initWithTitle:(nullable NSString *)title image:(nullable UIImage *)image target:(nullable id)target action:(nullable SEL)action menu:(nullable UIMenu *)menu API_AVAILABLE(ios(16.0));
+- (instancetype)initWithTitle:(nullable NSString *)title image:(nullable UIImage *)image target:(nullable id)target action:(nullable SEL)action menu:(nullable UIMenu *)menu API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(watchos);
 
 /// Construct a new fixed space item with the given width.
-+ (instancetype)fixedSpaceItemOfWidth:(CGFloat)width API_AVAILABLE(ios(14.0));
++ (instancetype)fixedSpaceItemOfWidth:(CGFloat)width API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos);
 
 /// Construct a new flexible space item.
-+ (instancetype)flexibleSpaceItem API_AVAILABLE(ios(14.0));
++ (instancetype)flexibleSpaceItem API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos);
 
 @property (nonatomic, readwrite, assign) UIBarButtonItemStyle style;            // default is UIBarButtonItemStylePlain
 @property (nonatomic, readwrite, assign) CGFloat              width;            // default is 0.0
@@ -104,7 +104,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
 @property (nonatomic, readwrite, weak  , nullable) id                   target;           // default is nil
 
 /// Set the primaryAction on this item, updating the title & image of the item if appropriate (primaryAction is non-nil, and this is not a system item). When primaryAction is non-nil, the target & action properties are ignored. If primaryAction is set to nil, the title & image properties are left unchanged.
-@property (nonatomic, readwrite, copy, nullable) UIAction *primaryAction API_AVAILABLE(ios(14.0));
+@property (nonatomic, readwrite, copy, nullable) UIAction *primaryAction API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos);
 
 /// When non-nil the menu is presented, the gesture used to trigger the menu is based on if the bar button item would normally trigger an action when tapped.
 @property (nonatomic, readwrite, copy, nullable) UIMenu *menu API_AVAILABLE(ios(14.0), tvos(17.0)) API_UNAVAILABLE(watchos);
@@ -123,7 +123,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
 @property (nonatomic, readwrite, assign, getter = isHidden) BOOL hidden API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(tvos, watchos);
 
 /// Whether or not symbol animations are enabled for this bar button item.
-@property (nonatomic, readwrite, assign, getter=isSymbolAnimationEnabled) BOOL symbolAnimationEnabled API_AVAILABLE(ios(17.0), tvos(17.0), watchos(10.0));
+@property (nonatomic, readwrite, assign, getter=isSymbolAnimationEnabled) BOOL symbolAnimationEnabled API_AVAILABLE(ios(17.0), tvos(17.0)) API_UNAVAILABLE(watchos);
 
 /// A UIMenuElement that should substitute for the UIBarButtonItem when displayed in a menu.
 @property (nonatomic, readwrite, copy, nullable) UIMenuElement *menuRepresentation API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(tvos, watchos);
@@ -197,34 +197,34 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
 
 /// Adds a symbol effect to the bar button item with default options and animation.
 /// Only a subset of symbol effects are supported; Appear and Disappear effects, for example, are unsupported, and will assert.
-- (void)addSymbolEffect:(NSSymbolEffect *)symbolEffect API_AVAILABLE(ios(17.0),tvos(17.0),watchos(10.0));
+- (void)addSymbolEffect:(NSSymbolEffect *)symbolEffect API_AVAILABLE(ios(17.0), tvos(17.0)) API_UNAVAILABLE(watchos);
 /// Adds a symbol effect to the bar button item with specified options and default animation.
 /// Only a subset of symbol effects are supported; Appear and Disappear effects, for example, are unsupported, and will assert.
-- (void)addSymbolEffect:(NSSymbolEffect *)symbolEffect options:(NSSymbolEffectOptions *)options API_AVAILABLE(ios(17.0),tvos(17.0),watchos(10.0));
+- (void)addSymbolEffect:(NSSymbolEffect *)symbolEffect options:(NSSymbolEffectOptions *)options API_AVAILABLE(ios(17.0), tvos(17.0)) API_UNAVAILABLE(watchos);
 /// Adds a symbol effect to the bar button item with specified options and animation.
 /// Only a subset of symbol effects are supported; Appear and Disappear effects, for example, are unsupported, and will assert.
-- (void)addSymbolEffect:(NSSymbolEffect *)symbolEffect options:(NSSymbolEffectOptions *)options animated:(BOOL)animated API_AVAILABLE(ios(17.0),tvos(17.0),watchos(10.0));
+- (void)addSymbolEffect:(NSSymbolEffect *)symbolEffect options:(NSSymbolEffectOptions *)options animated:(BOOL)animated API_AVAILABLE(ios(17.0), tvos(17.0)) API_UNAVAILABLE(watchos);
 
 /// Removes from the bar button item the symbol effect matching the type of effect passed in, with default options and animation.
-- (void)removeSymbolEffectOfType:(NSSymbolEffect *)symbolEffect API_AVAILABLE(ios(17.0),tvos(17.0),watchos(10.0));
+- (void)removeSymbolEffectOfType:(NSSymbolEffect *)symbolEffect API_AVAILABLE(ios(17.0), tvos(17.0)) API_UNAVAILABLE(watchos);
 /// Removes from the bar button item the symbol effect matching the type of effect passed in, with specified options and default animation.
-- (void)removeSymbolEffectOfType:(NSSymbolEffect *)symbolEffect options:(NSSymbolEffectOptions *)options API_AVAILABLE(ios(17.0),tvos(17.0),watchos(10.0));
+- (void)removeSymbolEffectOfType:(NSSymbolEffect *)symbolEffect options:(NSSymbolEffectOptions *)options API_AVAILABLE(ios(17.0), tvos(17.0)) API_UNAVAILABLE(watchos);
 /// Removes from the bar button item the symbol effect matching the type of effect passed in, with specified options and animation.
-- (void)removeSymbolEffectOfType:(NSSymbolEffect *)symbolEffect options:(NSSymbolEffectOptions *)options animated:(BOOL)animated API_AVAILABLE(ios(17.0),tvos(17.0),watchos(10.0));
+- (void)removeSymbolEffectOfType:(NSSymbolEffect *)symbolEffect options:(NSSymbolEffectOptions *)options animated:(BOOL)animated API_AVAILABLE(ios(17.0), tvos(17.0)) API_UNAVAILABLE(watchos);
 
 /// Removes all symbol effects from the bar button item with default options and animation.
-- (void)removeAllSymbolEffects API_AVAILABLE(ios(17.0),tvos(17.0),watchos(10.0));
+- (void)removeAllSymbolEffects API_AVAILABLE(ios(17.0), tvos(17.0)) API_UNAVAILABLE(watchos);
 /// Removes all symbol effects from the bar button item with specified options and default animation.
-- (void)removeAllSymbolEffectsWithOptions:(NSSymbolEffectOptions *)options API_AVAILABLE(ios(17.0),tvos(17.0),watchos(10.0));
+- (void)removeAllSymbolEffectsWithOptions:(NSSymbolEffectOptions *)options API_AVAILABLE(ios(17.0), tvos(17.0)) API_UNAVAILABLE(watchos);
 /// Removes all symbol effects from the bar button item with specified options and animation.
-- (void)removeAllSymbolEffectsWithOptions:(NSSymbolEffectOptions *)options animated:(BOOL)animated API_AVAILABLE(ios(17.0),tvos(17.0),watchos(10.0));
+- (void)removeAllSymbolEffectsWithOptions:(NSSymbolEffectOptions *)options animated:(BOOL)animated API_AVAILABLE(ios(17.0), tvos(17.0)) API_UNAVAILABLE(watchos);
 
 /// Sets the symbol image on the bar button item with a symbol content transition and default options.
 /// Passing in a non-symbol image will result in undefined behavior.
-- (void)setSymbolImage:(UIImage *)symbolImage withContentTransition:(NSSymbolContentTransition *)transition API_AVAILABLE(ios(17.0),tvos(17.0),watchos(10.0));
+- (void)setSymbolImage:(UIImage *)symbolImage withContentTransition:(NSSymbolContentTransition *)transition API_AVAILABLE(ios(17.0), tvos(17.0)) API_UNAVAILABLE(watchos);
 /// Sets the symbol image on the bar button item with a symbol content transition and specified options.
 /// Passing in a non-symbol image will result in undefined behavior.
-- (void)setSymbolImage:(UIImage *)symbolImage withContentTransition:(NSSymbolContentTransition *)transition options:(NSSymbolEffectOptions *)options API_AVAILABLE(ios(17.0),tvos(17.0),watchos(10.0));
+- (void)setSymbolImage:(UIImage *)symbolImage withContentTransition:(NSSymbolContentTransition *)transition options:(NSSymbolEffectOptions *)options API_AVAILABLE(ios(17.0), tvos(17.0)) API_UNAVAILABLE(watchos);
 
 @end
 

@@ -88,6 +88,29 @@ NW_RETURNS_RETAINED _Nullable nw_listener_t
 nw_listener_create_with_port(const char *port, nw_parameters_t parameters);
 
 /*!
+ * @function nw_listener_create_with_launchd_key
+ *
+ * @abstract
+ *		Creates a network listener from a launchd key.
+ *
+ * @param parameters
+ *		The parameters to use for the listener. These include the protocols to be
+ *		used for the listener. Since launchd creates the listening sockets, these
+ *		parameters may not be applied in all cases.
+ *
+ * @param launchd_key
+ *		The name of the socket entry as specified in the launchd.plist.
+ *
+ * @result
+ *		Returns an allocated nw_listener_t object.
+ *		Callers are responsible for deallocating using nw_release(obj) or [obj release].
+ *		These objects support ARC.
+ */
+API_AVAILABLE(macos(10.14)) API_UNAVAILABLE(ios, watchos, tvos)
+NW_RETURNS_RETAINED nw_listener_t
+nw_listener_create_with_launchd_key(nw_parameters_t parameters, const char *launchd_key);
+
+/*!
  * @function nw_listener_create
  *
  * @abstract

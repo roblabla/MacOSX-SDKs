@@ -62,6 +62,7 @@ enum
   kCVPixelFormatType_32AlphaGray    = 'b32a',     /* 32 bit AlphaGray, 16-bit big-endian samples, black is zero */
   kCVPixelFormatType_16Gray         = 'b16g',     /* 16 bit Grayscale, 16-bit big-endian samples, black is zero */
   kCVPixelFormatType_30RGB          = 'R10k',     /* 30 bit RGB, 10-bit big-endian samples, 2 unused padding bits (at least significant end). */
+  kCVPixelFormatType_30RGB_r210     = 'r210',     /* 30 bit RGB, 10-bit big-endian samples, 2 unused padding bits (at most significant end), video-range (64-940). */
   kCVPixelFormatType_422YpCbCr8     = '2vuy',     /* Component Y'CbCr 8-bit 4:2:2, ordered Cb Y'0 Cr Y'1 */
   kCVPixelFormatType_4444YpCbCrA8   = 'v408',     /* Component Y'CbCrA 8-bit 4:4:4:4, ordered Cb Y' Cr A */
   kCVPixelFormatType_4444YpCbCrA8R  = 'r408',     /* Component Y'CbCrA 8-bit 4:4:4:4, rendering format. full range alpha, zero biased YUV, ordered A Y' Cb Cr */
@@ -145,12 +146,14 @@ enum
 #endif
 {
 	kCVPixelFormatType_Lossless_32BGRA                               = '&BGA', /* Lossless-compressed form of kCVPixelFormatType_32BGRA. */
-	
+	kCVPixelFormatType_Lossless_64RGBAHalf                           = '&RhA', /* Lossless-compressed form of kCVPixelFormatType_64RGBAHalf.  No CVPlanarPixelBufferInfo struct. */
+
 	// Lossless-compressed Bi-planar YCbCr pixel format types
 	kCVPixelFormatType_Lossless_420YpCbCr8BiPlanarVideoRange         = '&8v0', /* Lossless-compressed form of kCVPixelFormatType_420YpCbCr8BiPlanarVideoRange.  No CVPlanarPixelBufferInfo struct. */
 	kCVPixelFormatType_Lossless_420YpCbCr8BiPlanarFullRange          = '&8f0', /* Lossless-compressed form of kCVPixelFormatType_420YpCbCr8BiPlanarFullRange.  No CVPlanarPixelBufferInfo struct. */
 	kCVPixelFormatType_Lossless_420YpCbCr10PackedBiPlanarVideoRange  = '&xv0', /* Lossless-compressed-packed form of kCVPixelFormatType_420YpCbCr10BiPlanarVideoRange.  No CVPlanarPixelBufferInfo struct. Format is compressed-packed with no padding bits between pixels. */
 	kCVPixelFormatType_Lossless_422YpCbCr10PackedBiPlanarVideoRange  = '&xv2', /* Lossless-compressed form of kCVPixelFormatType_422YpCbCr10BiPlanarVideoRange.  No CVPlanarPixelBufferInfo struct. Format is compressed-packed with no padding bits between pixels. */
+	kCVPixelFormatType_Lossless_420YpCbCr10PackedBiPlanarFullRange   = '&xf0', /* Lossless-compressed form of kCVPixelFormatType_420YpCbCr10BiPlanarFullRange.  No CVPlanarPixelBufferInfo struct. Format is compressed-packed with no padding bits between pixels. */
 };
 
 /*
@@ -337,7 +340,7 @@ CV_EXPORT CFTypeID CVPixelBufferGetTypeID(void) __OSX_AVAILABLE_STARTING(__MAC_1
     @function   CVPixelBufferRetain
     @abstract   Retains a CVPixelBuffer object
     @discussion Equivalent to CFRetain, but NULL safe
-    @param      buffer A CVPixelBuffer object that you want to retain.
+    @param      texture A CVPixelBuffer object that you want to retain.
     @result     A CVPixelBuffer object that is the same as the passed in buffer.
 */
 CV_EXPORT CVPixelBufferRef CV_NULLABLE CVPixelBufferRetain( CVPixelBufferRef CV_NULLABLE texture ) __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);
@@ -346,7 +349,7 @@ CV_EXPORT CVPixelBufferRef CV_NULLABLE CVPixelBufferRetain( CVPixelBufferRef CV_
     @function   CVPixelBufferRelease
     @abstract   Releases a CVPixelBuffer object
     @discussion Equivalent to CFRelease, but NULL safe
-    @param      buffer A CVPixelBuffer object that you want to release.
+    @param      texture A CVPixelBuffer object that you want to release.
 */
 CV_EXPORT void CVPixelBufferRelease( CV_RELEASES_ARGUMENT CVPixelBufferRef CV_NULLABLE texture ) __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);
 

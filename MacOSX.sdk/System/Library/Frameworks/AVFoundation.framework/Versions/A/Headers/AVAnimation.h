@@ -18,7 +18,7 @@
 							The constant is a small, non-zero, positive value which avoids CoreAnimation
 							from replacing 0.0 with CACurrentMediaTime().
 */
-AVF_EXPORT const CFTimeInterval AVCoreAnimationBeginTimeAtZero API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0)) API_UNAVAILABLE(watchos);
+AVF_EXPORT const CFTimeInterval AVCoreAnimationBeginTimeAtZero API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 typedef NSString * AVLayerVideoGravity NS_STRING_ENUM;
 
@@ -28,7 +28,7 @@ typedef NSString * AVLayerVideoGravity NS_STRING_ENUM;
 	@discussion		AVLayerVideoGravityResizeAspect may be used when setting the videoGravity
                     property of an AVPlayerLayer or AVCaptureVideoPreviewLayer instance.
  */
-AVF_EXPORT AVLayerVideoGravity const AVLayerVideoGravityResizeAspect API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0)) API_UNAVAILABLE(watchos);
+AVF_EXPORT AVLayerVideoGravity const AVLayerVideoGravityResizeAspect API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 
 /*!
@@ -37,7 +37,7 @@ AVF_EXPORT AVLayerVideoGravity const AVLayerVideoGravityResizeAspect API_AVAILAB
     @discussion     AVLayerVideoGravityResizeAspectFill may be used when setting the videoGravity
                     property of an AVPlayerLayer or AVCaptureVideoPreviewLayer instance.
  */
-AVF_EXPORT AVLayerVideoGravity const AVLayerVideoGravityResizeAspectFill API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0)) API_UNAVAILABLE(watchos);
+AVF_EXPORT AVLayerVideoGravity const AVLayerVideoGravityResizeAspectFill API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 /*!
 	@constant		AVLayerVideoGravityResize
@@ -45,7 +45,7 @@ AVF_EXPORT AVLayerVideoGravity const AVLayerVideoGravityResizeAspectFill API_AVA
     @discussion     AVLayerVideoGravityResize may be used when setting the videoGravity
                     property of an AVPlayerLayer or AVCaptureVideoPreviewLayer instance.
  */
-AVF_EXPORT AVLayerVideoGravity const AVLayerVideoGravityResize API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0)) API_UNAVAILABLE(watchos);
+AVF_EXPORT AVLayerVideoGravity const AVLayerVideoGravityResize API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 #else
 #import <AVFCore/AVAnimation.h>

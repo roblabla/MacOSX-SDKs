@@ -12,7 +12,7 @@
 NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 /// The command system to build or rebuild.
-UIKIT_EXTERN API_AVAILABLE(ios(13.0)) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @interface UIMenuSystem : NSObject
 
 /// The main command system.

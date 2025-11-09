@@ -153,7 +153,7 @@ AV_INIT_UNAVAILABLE
  @discussion
     This property presents the available pixel format types as an array of NSNumbers, each wrapping an OSType (CV pixel format type).
  */
-@property(readonly) NSArray<NSNumber *> *availableDepthDataTypes;
+@property(readonly) NSArray<NSNumber *> *availableDepthDataTypes NS_REFINED_FOR_SWIFT;
 
 /*!
  @method dictionaryRepresentationForAuxiliaryDataType:

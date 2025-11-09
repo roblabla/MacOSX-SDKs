@@ -20,10 +20,10 @@
 
 NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
-NS_SWIFT_UI_ACTOR
+API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @protocol UIKeyInput <UITextInputTraits>
 
-@property(nonatomic, readonly) BOOL hasText;
+@property(nonatomic, readonly) BOOL hasText API_UNAVAILABLE(watchos);
 - (void)insertText:(NSString *)text;
 - (void)deleteBackward;
 
@@ -38,6 +38,9 @@ NS_SWIFT_UI_ACTOR
 @class UITextRange;
 @class UITextSelectionRect;
 @class UIBarButtonItemGroup;
+@class UIBarButtonItem;
+@class NSAdaptiveImageGlyph;
+@class NSAttributedString;
 
 @protocol UITextInputTokenizer;
 @protocol UITextInputDelegate;
@@ -46,16 +49,16 @@ NS_SWIFT_UI_ACTOR
 typedef NS_ENUM(NSInteger, UITextStorageDirection) {
     UITextStorageDirectionForward = 0,
     UITextStorageDirectionBackward
-};
+} API_UNAVAILABLE(watchos);
 
 typedef NS_ENUM(NSInteger, UITextLayoutDirection) {
     UITextLayoutDirectionRight = 2,
     UITextLayoutDirectionLeft,
     UITextLayoutDirectionUp,
     UITextLayoutDirectionDown
-};
+} API_UNAVAILABLE(watchos);
 
-typedef NSInteger UITextDirection NS_TYPED_ENUM;
+typedef NSInteger UITextDirection NS_TYPED_ENUM API_UNAVAILABLE(watchos);
 
 typedef NS_ENUM(NSInteger, UITextGranularity) {
     UITextGranularityCharacter,
@@ -64,9 +67,9 @@ typedef NS_ENUM(NSInteger, UITextGranularity) {
     UITextGranularityParagraph,
     UITextGranularityLine,
     UITextGranularityDocument
-};
+} API_UNAVAILABLE(watchos);
 
-UIKIT_EXTERN API_AVAILABLE(ios(5.1)) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(5.1)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @interface UIDictationPhrase : NSObject {
     @private
         NSString *_text;
@@ -81,19 +84,21 @@ UIKIT_EXTERN API_AVAILABLE(ios(5.1)) NS_SWIFT_UI_ACTOR
 
 @end
 
-UIKIT_EXTERN API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos) API_UNAVAILABLE(visionos) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(9.0), visionos(2.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @interface UITextInputAssistantItem : NSObject
 
 /// Default is YES, controls if the user is allowed to hide the shortcuts bar. Does not influence the built in auto-hiding logic.
-@property (nonatomic, readwrite, assign) BOOL allowsHidingShortcuts;
+@property (nonatomic, readwrite, assign) BOOL allowsHidingShortcuts API_UNAVAILABLE(visionos);
 /// Contains UIBarButtonItemGroups that should be displayed in the leading position on the keyboard's assistant bar.
-@property (nonatomic, readwrite, copy) NSArray<UIBarButtonItemGroup *> *leadingBarButtonGroups;
+@property (nonatomic, readwrite, copy) NSArray<UIBarButtonItemGroup *> *leadingBarButtonGroups API_UNAVAILABLE(visionos);
 /// Contains UIBarButtonItemGroups that should be displayed in the trailing position on the keyboard's assistant bar.
-@property (nonatomic, readwrite, copy) NSArray<UIBarButtonItemGroup *> *trailingBarButtonGroups;
+@property (nonatomic, readwrite, copy) NSArray<UIBarButtonItemGroup *> *trailingBarButtonGroups API_UNAVAILABLE(visionos);
+/// A button that appears next to the text preview in the keyboard on visionOS.
+@property (nullable, nonatomic, strong) UIBarButtonItem *keyboardActionButtonItem NS_SWIFT_NAME(keyboardAction) API_AVAILABLE(visionos(2.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 @end
 
-UIKIT_EXTERN API_AVAILABLE(ios(13.0)) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @interface UITextPlaceholder : NSObject
 // Return the rects of the placeholder
 @property (nonatomic, readonly) NSArray<UITextSelectionRect *> *rects;
@@ -102,9 +107,9 @@ UIKIT_EXTERN API_AVAILABLE(ios(13.0)) NS_SWIFT_UI_ACTOR
 typedef NS_ENUM(NSInteger, UITextAlternativeStyle) {
     UITextAlternativeStyleNone,
     UITextAlternativeStyleLowConfidence
-};
+} API_UNAVAILABLE(watchos);
 
-NS_SWIFT_UI_ACTOR
+API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @protocol UITextInput <UIKeyInput>
 @required
 
@@ -202,25 +207,25 @@ NS_SWIFT_UI_ACTOR
  * pending dictation results. -insertDictationPlaceholder must return a reference to the 
  * placeholder. This reference will be used to identify the placeholder by the other methods
  * (there may be more than one placeholder). */
-@property(nonatomic, readonly) id insertDictationResultPlaceholder;
+@property(nonatomic, readonly) id insertDictationResultPlaceholder API_UNAVAILABLE(watchos);
 - (CGRect)frameForDictationResultPlaceholder:(id)placeholder;
 /* willInsertResult will be NO if the recognition failed. */
 - (void)removeDictationResultPlaceholder:(id)placeholder willInsertResult:(BOOL)willInsertResult;
 
 // This is an optional method for clients that wish to support text phrase alternatives. If they do not implement this method,
 // the text will be inserted by -insertText: without the phase alternatives.
-- (void)insertText:(NSString *)text alternatives:(NSArray<NSString *> *)alternatives style:(UITextAlternativeStyle)style;
+- (void)insertText:(NSString *)text alternatives:(NSArray<NSString *> *)alternatives style:(UITextAlternativeStyle)style API_UNAVAILABLE(watchos);
 
 // set attributedString as markedText, selectedRange is a range within the markedText
-- (void)setAttributedMarkedText:(nullable NSAttributedString *)markedText selectedRange:(NSRange)selectedRange;
+- (void)setAttributedMarkedText:(nullable NSAttributedString *)markedText selectedRange:(NSRange)selectedRange API_UNAVAILABLE(watchos);
 
 // Insert a placeholder
 // If `size.height` is <= 0, then the placeholder is inline and line height.
 // If `size.height` is > 0, then the placeholder is treated as a paragraph of height `size.height`.
-- (UITextPlaceholder *)insertTextPlaceholderWithSize:(CGSize)size;
+- (UITextPlaceholder *)insertTextPlaceholderWithSize:(CGSize)size API_UNAVAILABLE(watchos);
 
 // Remove the placeholder.
-- (void)removeTextPlaceholder:(UITextPlaceholder *)textPlaceholder;
+- (void)removeTextPlaceholder:(UITextPlaceholder *)textPlaceholder API_UNAVAILABLE(watchos);
 
 /* The following three optional methods are for clients that wish to display a floating cursor to
  * guide user manipulation of the selected text range via the system-provided keyboard. If a client
@@ -232,7 +237,7 @@ NS_SWIFT_UI_ACTOR
 
 /// Similar to `-caretRectForPosition:`, optionally provide a transform for the caret at `position`. As with all geometry information in this protocol,
 /// transforms are assumed to be relative to the `textInputView` coordinate space. If unimplemented, the identity transform is assumed.
-- (CGAffineTransform)caretTransformForPosition:(UITextPosition *)position API_AVAILABLE(ios(17.4));
+- (CGAffineTransform)caretTransformForPosition:(UITextPosition *)position API_AVAILABLE(ios(17.4)) API_UNAVAILABLE(watchos);
 
 /**
  * Called when the text input is preparing an edit menu presentation for the specified text range.
@@ -242,31 +247,44 @@ NS_SWIFT_UI_ACTOR
  *
  * @return Return a UIMenu describing the desired menu hierarchy. Return @c nil to present the default system menu.
  */
-- (nullable UIMenu *)editMenuForTextRange:(UITextRange *)textRange suggestedActions:(NSArray<UIMenuElement *> *)suggestedActions API_AVAILABLE(ios(16.0));
+- (nullable UIMenu *)editMenuForTextRange:(UITextRange *)textRange suggestedActions:(NSArray<UIMenuElement *> *)suggestedActions API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(watchos);
 
 /* These are optional methods for clients that wish to know the visiblity of text editing menus */
-- (void)willPresentEditMenuWithAnimator:(id<UIEditMenuInteractionAnimating>)animator API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(watchos, tvos);
-- (void)willDismissEditMenuWithAnimator:(id<UIEditMenuInteractionAnimating>)animator API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(watchos, tvos);
+- (void)willPresentEditMenuWithAnimator:(id<UIEditMenuInteractionAnimating>)animator API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos);
+- (void)willDismissEditMenuWithAnimator:(id<UIEditMenuInteractionAnimating>)animator API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos);
 
+@property (nonatomic) BOOL supportsAdaptiveImageGlyph API_AVAILABLE(ios(18.0),tvos(18.0),watchos(11.0),visionos(2.0));
+
+- (void)insertAdaptiveImageGlyph:(NSAdaptiveImageGlyph *)adaptiveImageGlyph replacementRange:(UITextRange *)replacementRange API_AVAILABLE(ios(18.0),tvos(18.0),watchos(11.0),visionos(2.0));
+
+@property (nonatomic, readonly, getter=isEditable) BOOL editable API_AVAILABLE(ios(18.0), macos(15.0), visionos(2.0)) API_UNAVAILABLE(tvos, watchos);
+
+- (void)insertAttributedText:(NSAttributedString *)string API_AVAILABLE(ios(12.0), tvos(12.0), watchos(5.0), macos(10.14), visionos(1.0)) API_UNAVAILABLE(watchos);
+- (NSAttributedString *)attributedTextInRange:(UITextRange *)range API_AVAILABLE(ios(12.0), tvos(12.0), macos(10.14), visionos(1.0)) API_UNAVAILABLE(watchos);
+- (void)replaceRange:(UITextRange *)range withAttributedText:(NSAttributedString *)attributedText API_AVAILABLE(ios(13.0), tvos(13.0), macos(10.15), visionos(1.0)) API_UNAVAILABLE(watchos);
+
+// These methods are called when the Writing Tools panel is presented and dismissed
+- (void)willPresentWritingTools API_AVAILABLE(ios(18.0), macos(15.0)) API_UNAVAILABLE(tvos, watchos, visionos);
+- (void)didDismissWritingTools API_AVAILABLE(ios(18.0), macos(15.0)) API_UNAVAILABLE(tvos, watchos, visionos);
 @end
 
 //---------------------------------------------------------------------------------------------------
 
 /* UITextInput keys to style dictionaries are deprecated. Use NSAttributedString keys instead, such as NSFontAttribute, etc. */
-UIKIT_EXTERN NSString *const UITextInputTextBackgroundColorKey API_DEPRECATED_WITH_REPLACEMENT("NSBackgroundColorAttributeName", ios(3.2, 8.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos); // Key to a UIColor
-UIKIT_EXTERN NSString *const UITextInputTextColorKey           API_DEPRECATED_WITH_REPLACEMENT("NSForegroundColorAttributeName", ios(3.2, 8.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos); // Key to a UIColor
-UIKIT_EXTERN NSString *const UITextInputTextFontKey            API_DEPRECATED_WITH_REPLACEMENT("NSFontAttributeName", ios(3.2, 8.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos); // Key to a UIFont
+UIKIT_EXTERN NSString *const UITextInputTextBackgroundColorKey API_DEPRECATED_WITH_REPLACEMENT("NSBackgroundColorAttributeName", ios(3.2, 8.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(visionos, watchos); // Key to a UIColor
+UIKIT_EXTERN NSString *const UITextInputTextColorKey           API_DEPRECATED_WITH_REPLACEMENT("NSForegroundColorAttributeName", ios(3.2, 8.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(visionos, watchos); // Key to a UIColor
+UIKIT_EXTERN NSString *const UITextInputTextFontKey            API_DEPRECATED_WITH_REPLACEMENT("NSFontAttributeName", ios(3.2, 8.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(visionos, watchos); // Key to a UIFont
 
 /* To accommodate text entry in documents that contain nested elements, or in which supplying and
  * evaluating characters at indices is an expensive proposition, a position within a text input
  * document is represented as an object, not an integer.  UITextRange and UITextPosition are abstract
  * classes provided to be subclassed when adopting UITextInput */
-UIKIT_EXTERN API_AVAILABLE(ios(3.2)) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(3.2)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @interface UITextPosition : NSObject
 
 @end
 
-UIKIT_EXTERN API_AVAILABLE(ios(3.2)) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(3.2)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @interface UITextRange : NSObject
 
 @property (nonatomic, readonly, getter=isEmpty) BOOL empty;     //  Whether the range is zero-length.
@@ -278,7 +296,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(3.2)) NS_SWIFT_UI_ACTOR
 /* UITextSelectionRect defines an annotated selection rect used by the system to
  * offer rich text interaction experience.  It also serves as an abstract class
  * provided to be subclassed when adopting UITextInput */
-UIKIT_EXTERN API_AVAILABLE(ios(6.0)) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(6.0)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @interface UITextSelectionRect : NSObject
 
 @property (nonatomic, readonly) CGRect rect;
@@ -290,12 +308,12 @@ UIKIT_EXTERN API_AVAILABLE(ios(6.0)) NS_SWIFT_UI_ACTOR
 /// Custom transform for highlight rects.
 /// This transform is assumed to be in the `textInputView` coordinate space.
 /// Default is CGAffineTransformIdentity (no transform applied).
-@property (nonatomic, readonly) CGAffineTransform transform API_AVAILABLE(ios(17.4));
+@property (nonatomic, readonly) CGAffineTransform transform API_AVAILABLE(ios(17.4)) API_UNAVAILABLE(watchos);
 
 @end
 
 /* The input delegate must be notified of changes to the selection and text. */
-NS_SWIFT_UI_ACTOR
+API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @protocol UITextInputDelegate <NSObject>
 
 - (void)selectionWillChange:(nullable id <UITextInput>)textInput;
@@ -307,7 +325,7 @@ NS_SWIFT_UI_ACTOR
 
 
 /* A tokenizer allows the text input system to evaluate text units of varying granularity. */
-NS_SWIFT_UI_ACTOR
+API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @protocol UITextInputTokenizer <NSObject>
 
 @required
@@ -322,7 +340,7 @@ NS_SWIFT_UI_ACTOR
 
 /* A recommended base implementation of the tokenizer protocol. Subclasses are responsible
  * for handling directions and granularities affected by layout.*/
-UIKIT_EXTERN API_AVAILABLE(ios(3.2)) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(3.2)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @interface UITextInputStringTokenizer : NSObject <UITextInputTokenizer> 
 
 - (instancetype)initWithTextInput:(UIResponder <UITextInput> *)textInput;
@@ -331,24 +349,24 @@ UIKIT_EXTERN API_AVAILABLE(ios(3.2)) NS_SWIFT_UI_ACTOR
 
 /* The UITextInputMode class should not be subclassed. It is to allow other in-app functionality to adapt 
  * based on the keyboard language. Different UITextInputMode objects may have the same primaryLanguage. */
-UIKIT_EXTERN API_AVAILABLE(ios(4.2)) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(4.2)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @interface UITextInputMode : NSObject <NSSecureCoding>
 
 @property (nullable, nonatomic, readonly, strong) NSString *primaryLanguage; // The primary language, if any, of the input mode.  A BCP 47 language identifier such as en-US
 
 // To query the UITextInputMode, refer to the UIResponder method -textInputMode.
-+ (nullable UITextInputMode *)currentInputMode API_DEPRECATED("", ios(4.2, 7.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos); // The current input mode.  Nil if unset.
++ (nullable UITextInputMode *)currentInputMode API_DEPRECATED("", ios(4.2, 7.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(visionos, watchos); // The current input mode.  Nil if unset.
 @property(class, nonatomic, readonly) NSArray<UITextInputMode *> *activeInputModes; // The active input modes.
 
 @end
 
-UIKIT_EXTERN NSNotificationName const UITextInputCurrentInputModeDidChangeNotification API_AVAILABLE(ios(4.2));
+UIKIT_EXTERN NSNotificationName const UITextInputCurrentInputModeDidChangeNotification API_AVAILABLE(ios(4.2)) API_UNAVAILABLE(watchos) NS_SWIFT_NONISOLATED;
 
-typedef NSWritingDirection UITextWritingDirection API_DEPRECATED_WITH_REPLACEMENT("NSWritingDirection", ios(3.2, 13.0), tvos(9.0, 13.0)) API_UNAVAILABLE(visionos);
+typedef NSWritingDirection UITextWritingDirection API_DEPRECATED_WITH_REPLACEMENT("NSWritingDirection", ios(3.2, 13.0), tvos(9.0, 13.0)) API_UNAVAILABLE(visionos, watchos);
 
-static const UITextWritingDirection UITextWritingDirectionNatural API_DEPRECATED_WITH_REPLACEMENT("NSWritingDirectionNatural", ios(3.2, 13.0), tvos(9.0, 13.0)) API_UNAVAILABLE(visionos) = NSWritingDirectionNatural;
-static const UITextWritingDirection UITextWritingDirectionLeftToRight API_DEPRECATED_WITH_REPLACEMENT("NSWritingDirectionLeftToRight", ios(3.2, 13.0), tvos(9.0, 13.0)) API_UNAVAILABLE(visionos) = NSWritingDirectionLeftToRight;
-static const UITextWritingDirection UITextWritingDirectionRightToLeft API_DEPRECATED_WITH_REPLACEMENT("NSWritingDirectionRightToLeft", ios(3.2, 13.0), tvos(9.0, 13.0)) API_UNAVAILABLE(visionos) = NSWritingDirectionRightToLeft;
+static const UITextWritingDirection UITextWritingDirectionNatural API_DEPRECATED_WITH_REPLACEMENT("NSWritingDirectionNatural", ios(3.2, 13.0), tvos(9.0, 13.0)) API_UNAVAILABLE(visionos, watchos) = NSWritingDirectionNatural;
+static const UITextWritingDirection UITextWritingDirectionLeftToRight API_DEPRECATED_WITH_REPLACEMENT("NSWritingDirectionLeftToRight", ios(3.2, 13.0), tvos(9.0, 13.0)) API_UNAVAILABLE(visionos, watchos) = NSWritingDirectionLeftToRight;
+static const UITextWritingDirection UITextWritingDirectionRightToLeft API_DEPRECATED_WITH_REPLACEMENT("NSWritingDirectionRightToLeft", ios(3.2, 13.0), tvos(9.0, 13.0)) API_UNAVAILABLE(visionos, watchos) = NSWritingDirectionRightToLeft;
 
 NS_HEADER_AUDIT_END(nullability, sendability)
 

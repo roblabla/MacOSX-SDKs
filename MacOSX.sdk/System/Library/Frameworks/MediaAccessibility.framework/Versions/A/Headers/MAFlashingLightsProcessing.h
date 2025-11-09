@@ -31,7 +31,6 @@ MA_EXPORT API_AVAILABLE(ios(17.0), tvos(17.0), watchos(10.0), macos(14.0))
 @interface MAFlashingLightsProcessor : NSObject
 
 /*!
- @function canProcessSurface:
  @abstract Determines whether the flashing lights processor is able to process the content in the surface for flashing lights. This might be false on
  unsupported hardware or unsupported color spaces.
  @result A boolean result.
@@ -39,7 +38,6 @@ MA_EXPORT API_AVAILABLE(ios(17.0), tvos(17.0), watchos(10.0), macos(14.0))
 - (BOOL)canProcessSurface:(IOSurfaceRef)surface;
 
 /*!
- @function processSurface:outSurface:timestamp:options:
  @abstract Processes an inSurface by analyzing pixels for sequences of flashing lights and then darkens content to reduce the risk of discomfort from some users.
  The outSurface will contain the mitigated content.
  The timestamp indicates the time at which the surface will be shown in the video playback. FPS will be determined based on the values of the timestamps.

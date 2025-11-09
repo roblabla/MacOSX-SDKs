@@ -1,4 +1,4 @@
-framework module CoreML [extern_c] {
+framework module CoreML {
     umbrella header "CoreML.h"
 
     export *

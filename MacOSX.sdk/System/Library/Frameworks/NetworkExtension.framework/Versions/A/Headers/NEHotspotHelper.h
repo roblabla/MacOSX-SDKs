@@ -63,6 +63,7 @@
  */
 
 #import <Foundation/Foundation.h>
+#import <Network/Network.h>
 #import <os/availability.h>
 #import <NetworkExtension/NEHotspotNetwork.h>
 
@@ -296,6 +297,13 @@ API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, watchos, tvos);
 	API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, watchos, tvos);
 
 /*!
+ * @property interface
+ * @abstract Network interface associated with the command.
+ * @discussion To create a connection over the hotspot, set the interface on the corresponding parameters using `nw_parameters_require_interface`.
+ */
+@property (readonly) nw_interface_t interface API_AVAILABLE(ios(18.0), visionos(2.0)) API_UNAVAILABLE(macos, watchos, tvos);
+
+/*!
  * @method createTCPConnection
  * @abstract
  *   Create a new TCP connection over the interface associated with the command.
@@ -306,7 +314,7 @@ API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, watchos, tvos);
  *   non-nil NWTCPConnection object if successful, nil otherwise
  */
 - (NWTCPConnection *)createTCPConnection:(NWEndpoint *)endpoint
-	API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, watchos, tvos);
+	API_DEPRECATED("Use the `interface` property with `nw_parameters_require_interface`", ios(9.0, 18.0), visionos(1.0, 2.0)) API_UNAVAILABLE(macos, watchos, tvos);
 
 /*!
  * @method createUDPSession
@@ -319,7 +327,7 @@ API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, watchos, tvos);
  *   non-nil NWUDPSession object if successful, nil otherwise
  */
 - (NWUDPSession *)createUDPSession:(NWEndpoint *)endpoint
-	API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, watchos, tvos);
+	API_DEPRECATED("Use the `interface` property with `nw_parameters_require_interface`", ios(9.0, 18.0), visionos(1.0, 2.0)) API_UNAVAILABLE(macos, watchos, tvos);
 
 @end
 

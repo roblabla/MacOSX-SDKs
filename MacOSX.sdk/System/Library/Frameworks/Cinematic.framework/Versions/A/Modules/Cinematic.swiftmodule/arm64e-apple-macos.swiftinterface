@@ -1,6 +1,6 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.10 (swiftlang-5.10.0.12.5 clang-1500.3.9.1.1)
-// swift-module-flags: -target arm64e-apple-macos14.5 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-bare-slash-regex -user-module-version 341.3 -module-name Cinematic
+// swift-compiler-version: Apple Swift version 6.0 effective-5.10 (swiftlang-6.0.0.7.24 clang-1600.0.25.1)
+// swift-module-flags: -target arm64e-apple-macos15.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-bare-slash-regex -user-module-version 422 -module-name Cinematic
 import AVFoundation
 @_exported import Cinematic
 import CoreMedia
@@ -55,9 +55,7 @@ public class CNCustomDetectionTrack : Cinematic.CNDetectionTrack {
 @available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
 public class CNRenderingSession {
   public struct Attributes {
-    #if compiler(>=5.3) && $AsyncAwait
     public init(asset: AVFoundation.AVAsset) async throws
-    #endif
     public let renderingVersion: Swift.Int
   }
   @available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
@@ -109,12 +107,8 @@ public struct CNDetection : Swift.Sendable {
 }
 @_hasMissingDesignatedInitializers @available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
 public class CNAssetInfo {
-  #if compiler(>=5.3) && $AsyncAwait
   public class func isCinematic(asset: AVFoundation.AVAsset) async -> Swift.Bool
-  #endif
-  #if compiler(>=5.3) && $AsyncAwait
   public init(asset: AVFoundation.AVAsset) async throws
-  #endif
   final public let asset: AVFoundation.AVAsset
   public var allCinematicTracks: [AVFoundation.AVAssetTrack] {
     get
@@ -226,9 +220,7 @@ final public class CNScript : Swift.Sendable {
     public func detection(for detectionID: Cinematic.CNDetectionID) -> Cinematic.CNDetection?
     public func bestDetection(for detectionGroupID: Cinematic.CNDetectionGroupID) -> Cinematic.CNDetection?
   }
-  #if compiler(>=5.3) && $AsyncAwait
   public init(asset: AVFoundation.AVAsset, changes: Cinematic.CNScript.Changes? = nil, progress: Foundation.Progress? = nil) async throws
-  #endif
   final public func reload(changes: Cinematic.CNScript.Changes?)
   final public func changes() -> Cinematic.CNScript.Changes
   final public func changes(trimmedBy timeRange: CoreMedia.CMTimeRange) -> Cinematic.CNScript.Changes

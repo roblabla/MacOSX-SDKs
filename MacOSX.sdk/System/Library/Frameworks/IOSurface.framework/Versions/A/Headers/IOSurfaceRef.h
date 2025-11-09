@@ -307,6 +307,10 @@ extern const CFStringRef kIOSurfaceColorSpace API_AVAILABLE(macos(10.6), ios(11.
 /* CFData representation of the ICC Profile, generally via CGColorSpaceCopyICCData */
 extern const CFStringRef kIOSurfaceICCProfile  API_AVAILABLE(macos(10.6), ios(11.0), watchos(4.0), tvos(11.0));
 
+/* CFNumber representation of the content headroom, which is defined as the ratio of nominal peak luminance
+   ("peak white") to nominal diffuse luminance ("reference white" or "diffuse white"). */
+extern const CFStringRef kIOSurfaceContentHeadroom API_AVAILABLE(macos(15.0), ios(18.0), watchos(11.0), tvos(18.0));
+
 /* These  calls let you attach CF property list types to a IOSurface buffer.  These calls are
    expensive (they essentially must serialize the data into the kernel) and thus should be avoided whenever
    possible.   Note:  These functions can not be used to change the underlying surface properties. */

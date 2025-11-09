@@ -203,103 +203,103 @@ typedef NS_ENUM(NSUInteger, NSURLRequestAttribution)
 API_AVAILABLE(macos(10.2), ios(2.0), watchos(2.0), tvos(9.0))
 @interface NSURLRequest : NSObject <NSSecureCoding, NSCopying, NSMutableCopying>
 {
-    @private
+@private
     NSURLRequestInternal *_internal;
 }
 
-/*! 
-    @method requestWithURL:
-    @abstract Allocates and initializes an NSURLRequest with the given
-    URL.
-    @discussion Default values are used for cache policy
-    (NSURLRequestUseProtocolCachePolicy) and timeout interval (60
-    seconds).
-    @param URL The URL for the request.
-    @result A newly-created and autoreleased NSURLRequest instance.
-*/
+/*!
+ @method requestWithURL:
+ @abstract Allocates and initializes an NSURLRequest with the given
+ URL.
+ @discussion Default values are used for cache policy
+ (NSURLRequestUseProtocolCachePolicy) and timeout interval (60
+ seconds).
+ @param URL The URL for the request.
+ @result A newly-created and autoreleased NSURLRequest instance.
+ */
 + (instancetype)requestWithURL:(NSURL *)URL;
 
 /*!
-    @property supportsSecureCoding
-    @abstract Indicates that NSURLRequest implements the NSSecureCoding protocol.
-    @result A BOOL value set to YES.
-*/
+ @property supportsSecureCoding
+ @abstract Indicates that NSURLRequest implements the NSSecureCoding protocol.
+ @result A BOOL value set to YES.
+ */
 @property (class, readonly) BOOL supportsSecureCoding;
 /*!
-    @method requestWithURL:cachePolicy:timeoutInterval:
-    @abstract Allocates and initializes a NSURLRequest with the given
-    URL and cache policy.
-    @param URL The URL for the request. 
-    @param cachePolicy The cache policy for the request. 
-    @param timeoutInterval The timeout interval for the request. See the
-    commentary for the <tt>timeoutInterval</tt> for more information on
-    timeout intervals.
-    @result A newly-created and autoreleased NSURLRequest instance. 
-*/
+ @method requestWithURL:cachePolicy:timeoutInterval:
+ @abstract Allocates and initializes a NSURLRequest with the given
+ URL and cache policy.
+ @param URL The URL for the request.
+ @param cachePolicy The cache policy for the request.
+ @param timeoutInterval The timeout interval for the request. See the
+ commentary for the <tt>timeoutInterval</tt> for more information on
+ timeout intervals.
+ @result A newly-created and autoreleased NSURLRequest instance.
+ */
 + (instancetype)requestWithURL:(NSURL *)URL cachePolicy:(NSURLRequestCachePolicy)cachePolicy timeoutInterval:(NSTimeInterval)timeoutInterval;
 
-/*! 
-    @method initWithURL:
-    @abstract Initializes an NSURLRequest with the given URL. 
-    @discussion Default values are used for cache policy
-    (NSURLRequestUseProtocolCachePolicy) and timeout interval (60
-    seconds).
-    @param URL The URL for the request. 
-    @result An initialized NSURLRequest. 
-*/
+/*!
+ @method initWithURL:
+ @abstract Initializes an NSURLRequest with the given URL.
+ @discussion Default values are used for cache policy
+ (NSURLRequestUseProtocolCachePolicy) and timeout interval (60
+ seconds).
+ @param URL The URL for the request.
+ @result An initialized NSURLRequest.
+ */
 - (instancetype)initWithURL:(NSURL *)URL;
 
-/*! 
-    @method initWithURL:
-    @abstract Initializes an NSURLRequest with the given URL and
-    cache policy.
-    @discussion This is the designated initializer for the 
-    NSURLRequest class.
-    @param URL The URL for the request. 
-    @param cachePolicy The cache policy for the request. 
-    @param timeoutInterval The timeout interval for the request. See the
-    commentary for the <tt>timeoutInterval</tt> for more information on
-    timeout intervals.
-    @result An initialized NSURLRequest. 
-*/
+/*!
+ @method initWithURL:
+ @abstract Initializes an NSURLRequest with the given URL and
+ cache policy.
+ @discussion This is the designated initializer for the
+ NSURLRequest class.
+ @param URL The URL for the request.
+ @param cachePolicy The cache policy for the request.
+ @param timeoutInterval The timeout interval for the request. See the
+ commentary for the <tt>timeoutInterval</tt> for more information on
+ timeout intervals.
+ @result An initialized NSURLRequest.
+ */
 - (instancetype)initWithURL:(NSURL *)URL cachePolicy:(NSURLRequestCachePolicy)cachePolicy timeoutInterval:(NSTimeInterval)timeoutInterval NS_DESIGNATED_INITIALIZER;
 
-/*! 
-    @abstract Returns the URL of the receiver. 
-    @result The URL of the receiver. 
-*/
+/*!
+ @abstract Returns the URL of the receiver.
+ @result The URL of the receiver.
+ */
 @property (nullable, readonly, copy) NSURL *URL;
 
-/*! 
-    @abstract Returns the cache policy of the receiver.
-    @result The cache policy of the receiver. 
-*/
+/*!
+ @abstract Returns the cache policy of the receiver.
+ @result The cache policy of the receiver.
+ */
 @property (readonly) NSURLRequestCachePolicy cachePolicy;
 
-/*! 
-    @abstract Returns the timeout interval of the receiver.
-    @discussion The timeout interval specifies the limit on the idle
-    interval allotted to a request in the process of loading. The "idle
-    interval" is defined as the period of time that has passed since the
-    last instance of load activity occurred for a request that is in the
-    process of loading. Hence, when an instance of load activity occurs
-    (e.g. bytes are received from the network for a request), the idle
-    interval for a request is reset to 0. If the idle interval ever
-    becomes greater than or equal to the timeout interval, the request
-    is considered to have timed out. This timeout interval is measured
-    in seconds.
-    @result The timeout interval of the receiver. 
-*/
+/*!
+ @abstract Returns the timeout interval of the receiver.
+ @discussion The timeout interval specifies the limit on the idle
+ interval allotted to a request in the process of loading. The "idle
+ interval" is defined as the period of time that has passed since the
+ last instance of load activity occurred for a request that is in the
+ process of loading. Hence, when an instance of load activity occurs
+ (e.g. bytes are received from the network for a request), the idle
+ interval for a request is reset to 0. If the idle interval ever
+ becomes greater than or equal to the timeout interval, the request
+ is considered to have timed out. This timeout interval is measured
+ in seconds.
+ @result The timeout interval of the receiver.
+ */
 @property (readonly) NSTimeInterval timeoutInterval;
 
 /*!
-    @abstract The main document URL associated with this load.
-    @discussion This URL is used for the cookie "same domain as main
-    document" policy, and attributing the request as a sub-resource
-    of a user-specified URL. There may also be other future uses.
-    See setMainDocumentURL:
-    @result The main document URL.
-*/
+ @abstract The main document URL associated with this load.
+ @discussion This URL is used for the cookie "same domain as main
+ document" policy, and attributing the request as a sub-resource
+ of a user-specified URL. There may also be other future uses.
+ See setMainDocumentURL:
+ @result The main document URL.
+ */
 @property (nullable, readonly, copy) NSURL *mainDocumentURL;
 
 /*!
@@ -356,6 +356,15 @@ API_AVAILABLE(macos(10.2), ios(2.0), watchos(2.0), tvos(9.0))
  No otherwise. Defaults to NO.
  */
 @property (readonly) BOOL requiresDNSSECValidation API_AVAILABLE(macos(13.0), ios(16.1), watchos(9.1), tvos(16.1));
+
+/*!
+ @abstract Allows storing and usage of DNS answers, potentially beyond TTL expiry,
+ in a persistent per-process cache. This should only be set for hostnames whose resolutions
+ are not expected to change across networks.
+ @discussion YES, if the DNS lookup for this request is allowed to use a persistent per-process cache,
+ NO otherwise. Defaults to NO.
+ */
+@property (readonly) BOOL allowsPersistentDNS API_AVAILABLE(macos(15.0), ios(18.0), watchos(11.0), tvos(18.0), visionos(2.0));
 
 @end
 
@@ -482,6 +491,15 @@ API_AVAILABLE(macos(10.2), ios(2.0), watchos(2.0), tvos(9.0))
  No otherwise. Defaults to NO.
  */
 @property BOOL requiresDNSSECValidation API_AVAILABLE(macos(13.0), ios(16.1), watchos(9.1), tvos(16.1));
+
+/*!
+ @abstract Allows storing and usage of DNS answers, potentially beyond TTL expiry,
+ in a persistent per-process cache. This should only be set for hostnames whose resolutions
+ are not expected to change across networks.
+ @discussion YES, if the DNS lookup for this request is allowed to use a persistent per-process cache,
+ NO otherwise. Defaults to NO.
+ */
+@property BOOL allowsPersistentDNS API_AVAILABLE(macos(15.0), ios(18.0), watchos(11.0), tvos(18.0), visionos(2.0));
 
 @end
 

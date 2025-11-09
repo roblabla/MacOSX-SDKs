@@ -25,6 +25,7 @@ AS_EXTERN ASAuthorizationProviderAuthorizationOperation const ASAuthorizationPro
 @class ASAuthorizationProviderExtensionAuthorizationRequest;
 
 AS_EXTERN API_AVAILABLE(ios(13.0), macCatalyst(14.0), macos(10.15)) API_UNAVAILABLE(watchos, tvos)
+NS_SWIFT_UI_ACTOR
 @protocol ASAuthorizationProviderExtensionAuthorizationRequestHandler <NSObject>
 
 /*! @abstract Called to begin the authorization. It’s called on the main thread.

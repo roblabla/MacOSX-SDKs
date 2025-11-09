@@ -1,6 +1,6 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.10 (swiftlang-5.10.0.12.5 clang-1500.3.9.1.1)
-// swift-module-flags: -target arm64e-apple-macos14.5 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-bare-slash-regex -user-module-version 252.7 -module-name VisionKit
+// swift-compiler-version: Apple Swift version 6.0 effective-5.10 (swiftlang-6.0.0.7.24 clang-1600.0.25.1)
+// swift-module-flags: -target arm64e-apple-macos15.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-bare-slash-regex -user-module-version 272 -module-name VisionKit
 import AppKit
 import Foundation
 import Swift
@@ -29,8 +29,11 @@ final public class ImageAnalyzer : @unchecked Swift.Sendable {
     public static let text: VisionKit.ImageAnalyzer.AnalysisTypes
     public static let machineReadableCode: VisionKit.ImageAnalyzer.AnalysisTypes
     public static let visualLookUp: VisionKit.ImageAnalyzer.AnalysisTypes
+    @available(iOS 16.0, macOS 13.0, macCatalyst 17.0, *)
     public typealias ArrayLiteralElement = VisionKit.ImageAnalyzer.AnalysisTypes
+    @available(iOS 16.0, macOS 13.0, macCatalyst 17.0, *)
     public typealias Element = VisionKit.ImageAnalyzer.AnalysisTypes
+    @available(iOS 16.0, macOS 13.0, macCatalyst 17.0, *)
     public typealias RawValue = Swift.UInt
   }
   public init()
@@ -40,21 +43,11 @@ final public class ImageAnalyzer : @unchecked Swift.Sendable {
   final public class var supportedTextRecognitionLanguages: [Swift.String] {
     get
   }
-  #if compiler(>=5.3) && $AsyncAwait
   final public func analyze(_ image: AppKit.NSImage, orientation: ImageIO.CGImagePropertyOrientation, configuration: VisionKit.ImageAnalyzer.Configuration) async throws -> VisionKit.ImageAnalysis
-  #endif
-  #if compiler(>=5.3) && $AsyncAwait
   final public func analyze(_ cgImage: CoreGraphics.CGImage, orientation: ImageIO.CGImagePropertyOrientation, configuration: VisionKit.ImageAnalyzer.Configuration) async throws -> VisionKit.ImageAnalysis
-  #endif
-  #if compiler(>=5.3) && $AsyncAwait
   final public func analyze(_ ciImage: CoreImage.CIImage, orientation: ImageIO.CGImagePropertyOrientation, configuration: VisionKit.ImageAnalyzer.Configuration) async throws -> VisionKit.ImageAnalysis
-  #endif
-  #if compiler(>=5.3) && $AsyncAwait
   final public func analyze(_ pixelBuffer: CoreVideo.CVPixelBuffer, orientation: ImageIO.CGImagePropertyOrientation, configuration: VisionKit.ImageAnalyzer.Configuration) async throws -> VisionKit.ImageAnalysis
-  #endif
-  #if compiler(>=5.3) && $AsyncAwait
   final public func analyze(imageAt url: Foundation.URL, orientation: ImageIO.CGImagePropertyOrientation, configuration: VisionKit.ImageAnalyzer.Configuration) async throws -> VisionKit.ImageAnalysis
-  #endif
   @objc deinit
 }
 @available(macOS 13.0, *)
@@ -106,8 +99,11 @@ extension VisionKit.ImageAnalysisOverlayViewDelegate {
     public static let dataDetectors: VisionKit.ImageAnalysisOverlayView.InteractionTypes
     public static let imageSubject: VisionKit.ImageAnalysisOverlayView.InteractionTypes
     public static let visualLookUp: VisionKit.ImageAnalysisOverlayView.InteractionTypes
+    @available(macOS 13.0, *)
     public typealias ArrayLiteralElement = VisionKit.ImageAnalysisOverlayView.InteractionTypes
+    @available(macOS 13.0, *)
     public typealias Element = VisionKit.ImageAnalysisOverlayView.InteractionTypes
+    @available(macOS 13.0, *)
     public typealias RawValue = Swift.UInt
   }
   @available(macOS 14.0, *)
@@ -204,11 +200,9 @@ extension VisionKit.ImageAnalysisOverlayViewDelegate {
     @_Concurrency.MainActor public var bounds: CoreFoundation.CGRect {
       get
     }
-    #if compiler(>=5.3) && $EffectfulProp
     public var image: AppKit.NSImage {
       get async throws
     }
-    #endif
     public func hash(into hasher: inout Swift.Hasher)
     public static func == (a: VisionKit.ImageAnalysisOverlayView.Subject, b: VisionKit.ImageAnalysisOverlayView.Subject) -> Swift.Bool
     public var hashValue: Swift.Int {
@@ -216,21 +210,15 @@ extension VisionKit.ImageAnalysisOverlayViewDelegate {
     }
   }
   @_Concurrency.MainActor final public func beginSubjectAnalysisIfNecessary()
-  #if compiler(>=5.3) && $EffectfulProp
   @_Concurrency.MainActor final public var subjects: Swift.Set<VisionKit.ImageAnalysisOverlayView.Subject> {
     get async
   }
-  #endif
   @_Concurrency.MainActor final public var highlightedSubjects: Swift.Set<VisionKit.ImageAnalysisOverlayView.Subject> {
     get
     set
   }
-  #if compiler(>=5.3) && $AsyncAwait
   @_Concurrency.MainActor final public func subject(at point: CoreFoundation.CGPoint) async -> VisionKit.ImageAnalysisOverlayView.Subject?
-  #endif
-  #if compiler(>=5.3) && $AsyncAwait
   @_Concurrency.MainActor final public func image(for subjects: Swift.Set<VisionKit.ImageAnalysisOverlayView.Subject>) async throws -> AppKit.NSImage
-  #endif
   @objc deinit
 }
 @available(macOS 13.0, *)

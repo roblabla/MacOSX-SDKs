@@ -16,16 +16,16 @@ typedef NS_ENUM(NSInteger, UIBarMetrics) {
     UIBarMetricsDefaultPrompt = 101, // Applicable only in bars with the prompt property, such as UINavigationBar and UISearchBar
     UIBarMetricsCompactPrompt,
 
-    UIBarMetricsLandscapePhone API_DEPRECATED_WITH_REPLACEMENT("UIBarMetricsCompact", ios(5.0, 8.0)) API_UNAVAILABLE(visionos) = UIBarMetricsCompact,
-    UIBarMetricsLandscapePhonePrompt API_DEPRECATED_WITH_REPLACEMENT("UIBarMetricsCompactPrompt", ios(7.0, 8.0)) API_UNAVAILABLE(visionos) = UIBarMetricsCompactPrompt,
-};
+    UIBarMetricsLandscapePhone API_DEPRECATED_WITH_REPLACEMENT("UIBarMetricsCompact", ios(5.0, 8.0)) API_UNAVAILABLE(visionos, watchos) = UIBarMetricsCompact,
+    UIBarMetricsLandscapePhonePrompt API_DEPRECATED_WITH_REPLACEMENT("UIBarMetricsCompactPrompt", ios(7.0, 8.0)) API_UNAVAILABLE(visionos, watchos) = UIBarMetricsCompactPrompt,
+} API_UNAVAILABLE(watchos);
 
 typedef NS_ENUM(NSInteger, UIBarPosition) {
     UIBarPositionAny = 0,
     UIBarPositionBottom = 1, // The bar is at the bottom of its local context, and directional decoration draws accordingly (e.g., shadow above the bar).
     UIBarPositionTop = 2, // The bar is at the top of its local context, and directional decoration draws accordingly (e.g., shadow below the bar)
     UIBarPositionTopAttached = 3, // The bar is at the top of the screen (as well as its local context), and its background extends upward—currently only enough for the status bar.
-} API_AVAILABLE(ios(7.0));
+} API_AVAILABLE(ios(7.0)) API_UNAVAILABLE(watchos);
 
 #define UIToolbarPosition UIBarPosition
 #define UIToolbarPositionAny UIBarPositionAny
@@ -33,12 +33,12 @@ typedef NS_ENUM(NSInteger, UIBarPosition) {
 #define UIToolbarPositionTop UIBarPositionTop
 
 
-NS_SWIFT_UI_ACTOR
+API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @protocol UIBarPositioning <NSObject> // UINavigationBar, UIToolbar, and UISearchBar conform to this
 @property(nonatomic,readonly) UIBarPosition barPosition;
 @end
 
-NS_SWIFT_UI_ACTOR
+API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @protocol UIBarPositioningDelegate <NSObject> // UINavigationBarDelegate, UIToolbarDelegate, and UISearchBarDelegate all extend from this
 @optional
 /* Implement this method on your manual bar delegate when not managed by a UIKit controller.

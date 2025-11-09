@@ -2,7 +2,7 @@
 //  hv_vm_types.h
 //  Hypervisor
 //
-//  Copyright © 2018-2023 Apple Inc. All rights reserved.
+//  Copyright © 2018-2024 Apple Inc. All rights reserved.
 //
 
 #pragma once
@@ -18,10 +18,7 @@ OS_ASSUME_NONNULL_BEGIN
 __BEGIN_DECLS
 
 /*!
-* @typedef hv_vm_config_t
-*
-* @abstract
-* Configuration for hv_vm_create().
+ @abstract Configuration for hv_vm_create().
 */
 #if OS_OBJECT_USE_OBJC
 OS_OBJECT_DECL(hv_vm_config);
@@ -30,15 +27,12 @@ typedef struct hv_vm_config_s *hv_vm_config_t;
 #endif // OS_OBJECT_USE_OBJC
 
 /*!
- * @typedef    hv_ipa_t
- * @abstract   Type of an Intermediate Physical Address (a guest physical address)
+ @abstract Type of an Intermediate Physical Address (a guest physical address)
  */
 typedef uint64_t hv_ipa_t;
 
 /*!
- * @typedef    hv_memory_flags_t
- * @abstract   Guest physical memory region permissions for hv_vm_map()
- *             and hv_vm_protect()
+ @abstract Guest physical memory region permissions for hv_vm_map() and hv_vm_protect()
  */
 typedef uint64_t hv_memory_flags_t;
 

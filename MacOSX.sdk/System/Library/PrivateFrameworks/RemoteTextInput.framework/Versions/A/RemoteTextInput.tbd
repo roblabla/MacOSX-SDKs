@@ -6,12 +6,14 @@ install-name:    '/System/Library/PrivateFrameworks/RemoteTextInput.framework/Ve
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
-    symbols:         [ _RTIDocumentRequestAllSurroundingRects, _RTIInputSessionChangeLogFacility, 
-                       _RTIInputSessionDidEndUnexpectedlyNotification, _RTIInputSessionWillChangeToNewProcessNotification, 
-                       _RTIInputUIServiceMachNameiOS, _RTIInputUIServiceName, _RTILogFacility, 
-                       _RTIServiceAnonymousName, _RTIServiceAutoFillName, _RTIServiceIOSMacName, 
-                       _RTIServiceMediaRemoteName, _RTIServiceRapportName, _RTIServiceSharingName, 
-                       _RTIServiceSharingSafariName, _RTIServiceTVControlServicesName, 
+    symbols:         [ _RTIAttributeNSTextAnimationKey, _RTIAttributeNSTextAttributeKey, 
+                       _RTIAttributedStringKey_TextAnimation, _RTIDocumentRequestAllSurroundingRects, 
+                       _RTIInputSessionChangeLogFacility, _RTIInputSessionDidEndUnexpectedlyNotification, 
+                       _RTIInputSessionWillChangeToNewProcessNotification, _RTIInputUIServiceMachNameiOS, 
+                       _RTIInputUIServiceName, _RTILogFacility, _RTIServiceAnonymousName, 
+                       _RTIServiceAutoFillName, _RTIServiceIOSMacName, _RTIServiceMediaRemoteName, 
+                       _RTIServiceRapportName, _RTIServiceSharingName, _RTIServiceSharingSafariName, 
+                       _RTIServiceTVControlServicesName, _RTITextAnimationWithName, 
                        _RemoteTextInputVersionNumber, _RemoteTextInputVersionString, 
                        __RTI_NSStringFromCGRect, __RTI_NSStringFromRTIInputModality, 
                        _kRTISupplementalItemIconDataType_CodedNSImage, _kRTISupplementalItemIconDataType_CodedUIImage ]
@@ -23,6 +25,6 @@ exports:
                        RTIInputSystemSession, RTIInputSystemSourceSession, RTIInputSystemUIClient, 
                        RTIInputSystemUIService, RTIInputViewInfo, RTIKeyedArchiver, 
                        RTIKeyedUnarchiver, RTISessionOptions, RTIStyledIntermediateText, 
-                       RTISupplementalItemIcon, RTISupplementalLexicon, RTITextOperations, 
-                       RTITextStyling, RTIUtilities ]
+                       RTISupplementalItemIcon, RTISupplementalLexicon, RTITextInputKeyboardActionButtonConfiguration, 
+                       RTITextOperations, RTITextStyling, RTIUtilities ]
 ...

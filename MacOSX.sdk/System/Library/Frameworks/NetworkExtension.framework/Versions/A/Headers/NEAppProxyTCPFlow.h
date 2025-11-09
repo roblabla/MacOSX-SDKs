@@ -7,6 +7,7 @@
 #error "Please import the NetworkExtension module instead of this file directly."
 #endif
 
+#import <Network/Network.h>
 #import <NetworkExtension/NEAppProxyFlow.h>
 
 NS_ASSUME_NONNULL_BEGIN
@@ -45,10 +46,16 @@ API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(watchos, tvos)
 - (void)writeData:(NSData *)data withCompletionHandler:(void (^)(NSError * __nullable error))completionHandler API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(watchos, tvos);
 
 /*!
+ * @property remoteFlowEndpoint
+ * @discussion An `nw_endpoint_t` object containing information about the intended remote endpoint of the flow.
+ */
+@property (readonly) nw_endpoint_t remoteFlowEndpoint API_AVAILABLE(macos(15.0), ios(18.0), visionos(2.0)) API_UNAVAILABLE(watchos, tvos);
+
+/*!
  * @property remoteEndpoint
  * @discussion An NWEndpoint object containing information about the intended remote endpoint of the flow.
  */
-@property (readonly) NWEndpoint *remoteEndpoint API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(watchos, tvos);
+@property (readonly) NWEndpoint *remoteEndpoint API_DEPRECATED_WITH_REPLACEMENT("remoteFlowEndpoint", macos(10.11, 15.0), ios(9.0, 18.0), visionos(1.0, 2.0)) API_UNAVAILABLE(watchos, tvos);
 
 @end
 

@@ -22,18 +22,18 @@ typedef NSString * AVOutputSettingsPreset NS_STRING_ENUM;
  
  When source format information is supplied with these presets, the resulting video settings will not scale up the video from a smaller size.
  */
-AVF_EXPORT AVOutputSettingsPreset const AVOutputSettingsPreset640x480					API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0)) API_UNAVAILABLE(watchos);
-AVF_EXPORT AVOutputSettingsPreset const AVOutputSettingsPreset960x540					API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0)) API_UNAVAILABLE(watchos);
-AVF_EXPORT AVOutputSettingsPreset const AVOutputSettingsPreset1280x720					API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0)) API_UNAVAILABLE(watchos);
-AVF_EXPORT AVOutputSettingsPreset const AVOutputSettingsPreset1920x1080					API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0)) API_UNAVAILABLE(watchos);
-AVF_EXPORT AVOutputSettingsPreset const AVOutputSettingsPreset3840x2160					API_AVAILABLE(macos(10.10), ios(9.0), tvos(9.0)) API_UNAVAILABLE(watchos);
-AVF_EXPORT AVOutputSettingsPreset const AVOutputSettingsPresetHEVC1920x1080				API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0)) API_UNAVAILABLE(watchos);
-AVF_EXPORT AVOutputSettingsPreset const AVOutputSettingsPresetHEVC1920x1080WithAlpha	API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0)) API_UNAVAILABLE(watchos);
-AVF_EXPORT AVOutputSettingsPreset const AVOutputSettingsPresetHEVC3840x2160				API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0)) API_UNAVAILABLE(watchos);
-AVF_EXPORT AVOutputSettingsPreset const AVOutputSettingsPresetHEVC3840x2160WithAlpha	API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0)) API_UNAVAILABLE(watchos);
-AVF_EXPORT AVOutputSettingsPreset const AVOutputSettingsPresetHEVC7680x4320				API_AVAILABLE(macos(12.1)) API_UNAVAILABLE(ios, tvos, watchos);
-AVF_EXPORT AVOutputSettingsPreset const AVOutputSettingsPresetMVHEVC960x960				API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0)) API_UNAVAILABLE(watchos);
-AVF_EXPORT AVOutputSettingsPreset const AVOutputSettingsPresetMVHEVC1440x1440			API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0)) API_UNAVAILABLE(watchos);
+AVF_EXPORT AVOutputSettingsPreset const AVOutputSettingsPreset640x480					API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(watchos);
+AVF_EXPORT AVOutputSettingsPreset const AVOutputSettingsPreset960x540					API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(watchos);
+AVF_EXPORT AVOutputSettingsPreset const AVOutputSettingsPreset1280x720					API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(watchos);
+AVF_EXPORT AVOutputSettingsPreset const AVOutputSettingsPreset1920x1080					API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(watchos);
+AVF_EXPORT AVOutputSettingsPreset const AVOutputSettingsPreset3840x2160					API_AVAILABLE(macos(10.10), ios(9.0), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(watchos);
+AVF_EXPORT AVOutputSettingsPreset const AVOutputSettingsPresetHEVC1920x1080				API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), visionos(1.0)) API_UNAVAILABLE(watchos);
+AVF_EXPORT AVOutputSettingsPreset const AVOutputSettingsPresetHEVC1920x1080WithAlpha	API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0), visionos(1.0)) API_UNAVAILABLE(watchos);
+AVF_EXPORT AVOutputSettingsPreset const AVOutputSettingsPresetHEVC3840x2160				API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), visionos(1.0)) API_UNAVAILABLE(watchos);
+AVF_EXPORT AVOutputSettingsPreset const AVOutputSettingsPresetHEVC3840x2160WithAlpha	API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0), visionos(1.0)) API_UNAVAILABLE(watchos);
+AVF_EXPORT AVOutputSettingsPreset const AVOutputSettingsPresetHEVC7680x4320				API_AVAILABLE(macos(12.1)) API_UNAVAILABLE(ios, tvos, watchos, visionos);
+AVF_EXPORT AVOutputSettingsPreset const AVOutputSettingsPresetMVHEVC960x960				API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), visionos(1.0)) API_UNAVAILABLE(watchos);
+AVF_EXPORT AVOutputSettingsPreset const AVOutputSettingsPresetMVHEVC1440x1440			API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 @class AVOutputSettingsAssistantInternal;
 
@@ -47,7 +47,7 @@ AVF_EXPORT AVOutputSettingsPreset const AVOutputSettingsPresetMVHEVC1440x1440			
 		The recommendations made by an instance get better as you tell it more about the format of your source data.  For example, if you set the sourceVideoFormat property, the recommendation made by the videoSettings property will ensure that your video frames are not scaled up from a smaller size.
  */
 NS_SWIFT_NONSENDABLE
-API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0)) API_UNAVAILABLE(watchos)
+API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(watchos)
 @interface AVOutputSettingsAssistant : NSObject
 {
 @private
@@ -66,7 +66,7 @@ AV_INIT_UNAVAILABLE
  
 		On iOS, the returned array may be different between different device models.
  */
-+ (NSArray<AVOutputSettingsPreset> *)availableOutputSettingsPresets API_AVAILABLE(macos(10.10), ios(7.0), tvos(9.0)) API_UNAVAILABLE(watchos);
++ (NSArray<AVOutputSettingsPreset> *)availableOutputSettingsPresets API_AVAILABLE(macos(10.10), ios(7.0), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 /*!
 	@method outputSettingsAssistantWithPreset:
@@ -114,7 +114,7 @@ AV_INIT_UNAVAILABLE
 
 
 // Use these properties to give more information about the attributes of your source data, in order to get more informed recommendations
-API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0)) API_UNAVAILABLE(watchos)
+API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(watchos)
 @interface AVOutputSettingsAssistant (AVOutputSettingsAssistant_SourceInformation)
 
 /*!
@@ -165,7 +165,7 @@ API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0)) API_UNAVAILABLE(watchos)
  
 		It is an error to set this property to a value that is not positive or not numeric.  See CMTIME_IS_NUMERIC.
  */
-@property (nonatomic) CMTime sourceVideoMinFrameDuration API_AVAILABLE(macos(10.10), ios(7.0), tvos(9.0)) API_UNAVAILABLE(watchos);
+@property (nonatomic) CMTime sourceVideoMinFrameDuration API_AVAILABLE(macos(10.10), ios(7.0), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 @end
 

@@ -223,7 +223,7 @@ BROWSERENGINE_EXPORT BROWSERENGINE_TEXTINPUT_AVAILABILITY
  *  word backward = option + delete
  *  word forward = option + delete-forward
  *  line end = cmd + delete
- *  line start = comd + delete-forward
+ *  line start = cmd + delete-forward
  *  paragraph  end = ctrl + K
  *  paragraph start = ctrl + fn + K
  *
@@ -535,6 +535,14 @@ BROWSERENGINE_EXPORT BROWSERENGINE_TEXTINPUT_AVAILABILITY
  */
 - (void)insertTextAlternatives:(BETextAlternatives *)alternatives;
 
+@optional
+/**
+ *  Removes text alternatives from the text input object for the current selection
+ */
+- (void)removeTextAlternatives API_AVAILABLE(ios(18.0));
+
+@required
+
 #pragma mark - Text Placeholders
 
 /**
@@ -610,6 +618,14 @@ BROWSERENGINE_EXPORT BROWSERENGINE_TEXTINPUT_AVAILABILITY
  *  There will be no more calls into`autoscrollToPoint` until a text interaction gesture starts autoscrolling.
  */
 - (void)cancelAutoscroll;
+
+#pragma mark - Keyboards
+
+@optional
+/**
+ *  Called when the user has requested the keyboard to dismiss itself.
+ */
+- (void)keyboardWillDismiss API_AVAILABLE(ios(18.0));
 
 @end
 

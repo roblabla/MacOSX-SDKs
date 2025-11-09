@@ -22,7 +22,7 @@ NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 @protocol UIPopoverControllerDelegate;
 
 
-UIKIT_EXTERN API_DEPRECATED("UIPopoverController is deprecated. Popovers are now implemented as UIViewController presentations. Use a modal presentation style of UIModalPresentationPopover and UIPopoverPresentationController.", ios(3.2, 9.0)) API_UNAVAILABLE(visionos) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_DEPRECATED("UIPopoverController is deprecated. Popovers are now implemented as UIViewController presentations. Use a modal presentation style of UIModalPresentationPopover and UIPopoverPresentationController.", ios(3.2, 9.0)) API_UNAVAILABLE(visionos, watchos) NS_SWIFT_UI_ACTOR
 @interface UIPopoverController : NSObject <UIAppearanceContainer> {}
 
 /* The view controller provided becomes the content view controller for the UIPopoverController. This is the designated initializer for UIPopoverController.
@@ -79,21 +79,21 @@ UIKIT_EXTERN API_DEPRECATED("UIPopoverController is deprecated. Popovers are now
 
 @end
 
-NS_SWIFT_UI_ACTOR
+API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @protocol UIPopoverControllerDelegate <NSObject>
 @optional
 
 /* Called on the delegate when the popover controller will dismiss the popover. Return NO to prevent the dismissal of the view.
  */
-- (BOOL)popoverControllerShouldDismissPopover:(UIPopoverController *)popoverController API_DEPRECATED("", ios(3.2, 9.0)) API_UNAVAILABLE(visionos);
+- (BOOL)popoverControllerShouldDismissPopover:(UIPopoverController *)popoverController API_DEPRECATED("", ios(3.2, 9.0)) API_UNAVAILABLE(visionos, watchos);
 
 /* Called on the delegate when the user has taken action to dismiss the popover. This is not called when -dismissPopoverAnimated: is called directly.
  */
-- (void)popoverControllerDidDismissPopover:(UIPopoverController *)popoverController API_DEPRECATED("", ios(3.2, 9.0)) API_UNAVAILABLE(visionos);
+- (void)popoverControllerDidDismissPopover:(UIPopoverController *)popoverController API_DEPRECATED("", ios(3.2, 9.0)) API_UNAVAILABLE(visionos, watchos);
 
 /* -popoverController:willRepositionPopoverToRect:inView: is called on your delegate when the popover may require a different view or rectangle
  */
-- (void)popoverController:(UIPopoverController *)popoverController willRepositionPopoverToRect:(inout CGRect *)rect inView:(inout UIView * __nonnull * __nonnull)view API_DEPRECATED("", ios(7.0, 9.0)) API_UNAVAILABLE(visionos);
+- (void)popoverController:(UIPopoverController *)popoverController willRepositionPopoverToRect:(inout CGRect *)rect inView:(inout UIView * __nonnull * __nonnull)view API_DEPRECATED("", ios(7.0, 9.0)) API_UNAVAILABLE(visionos, watchos);
 
 @end
 

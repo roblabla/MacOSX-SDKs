@@ -53,7 +53,7 @@ CM_ASSUME_NONNULL_BEGIN
 		This pixel buffer pool is always compatible with the client's pixel buffer attributes
 		as specified when calling VTDecompressionSessionCreate.
 */
-VT_EXPORT const CFStringRef kVTDecompressionPropertyKey_PixelBufferPool API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2)); // Read-only, CVPixelBufferPool
+VT_EXPORT const CFStringRef kVTDecompressionPropertyKey_PixelBufferPool API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos); // Read-only, CVPixelBufferPool
 
 /*!
 	@constant	kVTDecompressionPropertyKey_PixelBufferPoolIsShared
@@ -64,7 +64,7 @@ VT_EXPORT const CFStringRef kVTDecompressionPropertyKey_PixelBufferPool API_AVAI
 		This is false if separate pools are used because the pixel buffer attributes specified 
 		by the video decoder and the client were incompatible.
 */
-VT_EXPORT const CFStringRef kVTDecompressionPropertyKey_PixelBufferPoolIsShared API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2)); // Read-only, CFBoolean
+VT_EXPORT const CFStringRef kVTDecompressionPropertyKey_PixelBufferPoolIsShared API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos); // Read-only, CFBoolean
 
 /*!
 	@constant	kVTDecompressionPropertyKey_OutputPoolRequestedMinimumBufferCount
@@ -88,7 +88,7 @@ VT_EXPORT const CFStringRef kVTDecompressionPropertyKey_PixelBufferPoolIsShared 
 		creation of a new CVPixelBufferPool. This will cause new buffers to be allocated, and 
 		existing buffers to be deallocated when they are released.
 */
-VT_EXPORT const CFStringRef kVTDecompressionPropertyKey_OutputPoolRequestedMinimumBufferCount API_AVAILABLE(macosx(10.9), ios(8.0), tvos(10.2)); // Read/Write, CFNumberRef
+VT_EXPORT const CFStringRef kVTDecompressionPropertyKey_OutputPoolRequestedMinimumBufferCount API_AVAILABLE(macos(10.9), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos); // Read/Write, CFNumberRef
 
 #pragma mark Asynchronous state
 
@@ -102,7 +102,7 @@ VT_EXPORT const CFStringRef kVTDecompressionPropertyKey_OutputPoolRequestedMinim
 	@discussion
 		This number may decrease asynchronously as frames are output.
 */
-VT_EXPORT const CFStringRef kVTDecompressionPropertyKey_NumberOfFramesBeingDecoded API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2)); // Read-only, CFNumber.
+VT_EXPORT const CFStringRef kVTDecompressionPropertyKey_NumberOfFramesBeingDecoded API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos); // Read-only, CFNumber.
 
 /*!
 	@constant	kVTDecompressionPropertyKey_MinOutputPresentationTimeStampOfFramesBeingDecoded
@@ -111,7 +111,7 @@ VT_EXPORT const CFStringRef kVTDecompressionPropertyKey_NumberOfFramesBeingDecod
 	@discussion
 		This may change asynchronously as frames are output.
 */
-VT_EXPORT const CFStringRef kVTDecompressionPropertyKey_MinOutputPresentationTimeStampOfFramesBeingDecoded API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2)); // Read-only, CMTime as CFDictionary.
+VT_EXPORT const CFStringRef kVTDecompressionPropertyKey_MinOutputPresentationTimeStampOfFramesBeingDecoded API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos); // Read-only, CMTime as CFDictionary.
 
 /*!
 	@constant	kVTDecompressionPropertyKey_MaxOutputPresentationTimeStampOfFramesBeingDecoded
@@ -120,7 +120,7 @@ VT_EXPORT const CFStringRef kVTDecompressionPropertyKey_MinOutputPresentationTim
 	@discussion
 		This may change asynchronously as frames are output.
 */
-VT_EXPORT const CFStringRef kVTDecompressionPropertyKey_MaxOutputPresentationTimeStampOfFramesBeingDecoded API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2)); // Read-only, CMTime as CFDictionary.
+VT_EXPORT const CFStringRef kVTDecompressionPropertyKey_MaxOutputPresentationTimeStampOfFramesBeingDecoded API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos); // Read-only, CMTime as CFDictionary.
 	
 #pragma mark Content
 
@@ -134,7 +134,7 @@ VT_EXPORT const CFStringRef kVTDecompressionPropertyKey_MaxOutputPresentationTim
 	@discussion
 		This is an optional property for video decoders to implement.
 */
-VT_EXPORT const CFStringRef kVTDecompressionPropertyKey_ContentHasInterframeDependencies API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2)); // Read-only, CFBoolean
+VT_EXPORT const CFStringRef kVTDecompressionPropertyKey_ContentHasInterframeDependencies API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos); // Read-only, CFBoolean
 
 #pragma mark Hardware acceleration
 
@@ -149,7 +149,7 @@ VT_EXPORT const CFStringRef kVTDecompressionPropertyKey_ContentHasInterframeDepe
 		this property can be set to kCFBooleanFalse.
 		In MacOS 10.15 and later, hardware decode is enabled in VTDecompressionSessions by default.
 */
-VT_EXPORT const CFStringRef kVTVideoDecoderSpecification_EnableHardwareAcceleratedVideoDecoder API_AVAILABLE(macosx(10.9), ios(17.0), tvos(17.0)); // CFBoolean, Optional, true by default
+VT_EXPORT const CFStringRef kVTVideoDecoderSpecification_EnableHardwareAcceleratedVideoDecoder API_AVAILABLE(macos(10.9), ios(17.0), tvos(17.0), visionos(1.0)) API_UNAVAILABLE(watchos); // CFBoolean, Optional, true by default
 
 /*!
 	@constant	kVTVideoDecoderSpecification_RequireHardwareAcceleratedVideoDecoder
@@ -169,7 +169,7 @@ VT_EXPORT const CFStringRef kVTVideoDecoderSpecification_EnableHardwareAccelerat
 			- the requested decoding format or configuration is not supported
 			- the hardware decode resources on the machine are busy
 */
-VT_EXPORT const CFStringRef kVTVideoDecoderSpecification_RequireHardwareAcceleratedVideoDecoder API_AVAILABLE(macosx(10.9), ios(17.0), tvos(17.0)); // CFBoolean, Optional
+VT_EXPORT const CFStringRef kVTVideoDecoderSpecification_RequireHardwareAcceleratedVideoDecoder API_AVAILABLE(macos(10.9), ios(17.0), tvos(17.0), visionos(1.0)) API_UNAVAILABLE(watchos); // CFBoolean, Optional
 
 /*!
 	@constant	kVTDecompressionPropertyKey_UsingHardwareAcceleratedVideoDecoder
@@ -180,7 +180,7 @@ VT_EXPORT const CFStringRef kVTVideoDecoderSpecification_RequireHardwareAccelera
 		accelerated decode using kVTVideoDecoderSpecification_EnableHardwareAcceleratedVideoDecoder
 		to see if a hardware accelerated decoder was selected.
 */
-VT_EXPORT const CFStringRef kVTDecompressionPropertyKey_UsingHardwareAcceleratedVideoDecoder API_AVAILABLE(macosx(10.9), ios(17.0), tvos(17.0)) ; // CFBoolean, Read; assumed false by default
+VT_EXPORT const CFStringRef kVTDecompressionPropertyKey_UsingHardwareAcceleratedVideoDecoder API_AVAILABLE(macos(10.9), ios(17.0), tvos(17.0), visionos(1.0)) API_UNAVAILABLE(watchos); // CFBoolean, Read; assumed false by default
 	
 #pragma mark Decoder behavior
 
@@ -194,7 +194,7 @@ VT_EXPORT const CFStringRef kVTDecompressionPropertyKey_UsingHardwareAccelerated
 		By default, the VideoToolbox will treat the VTDecompressionSession as though it is being used for
 		realtime playback.  Setting the property to NULL is equivalent to setting it to kCFBooleanTrue.
 */
-VT_EXPORT const CFStringRef kVTDecompressionPropertyKey_RealTime API_AVAILABLE(macosx(10.10), ios(8.0), tvos(10.2)); // Read/write, CFBoolean or NULL, Optional, default is true
+VT_EXPORT const CFStringRef kVTDecompressionPropertyKey_RealTime API_AVAILABLE(macos(10.10), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos); // Read/write, CFBoolean or NULL, Optional, default is true
 
 /*!
 	@constant	kVTDecompressionPropertyKey_MaximizePowerEfficiency
@@ -208,7 +208,7 @@ VT_EXPORT const CFStringRef kVTDecompressionPropertyKey_RealTime API_AVAILABLE(m
  		Not all video decoders may support this property
 		By default, this property is NULL.
  */
-VT_EXPORT const CFStringRef kVTDecompressionPropertyKey_MaximizePowerEfficiency API_AVAILABLE(macos(10.14), ios(8.0), tvos(10.2)); // Read/write, CFBoolean or NULL, Optional, default is false
+VT_EXPORT const CFStringRef kVTDecompressionPropertyKey_MaximizePowerEfficiency API_AVAILABLE(macos(10.14), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos); // Read/write, CFBoolean or NULL, Optional, default is false
 
 /*!
 	@constant	kVTDecompressionPropertyKey_ThreadCount
@@ -217,7 +217,7 @@ VT_EXPORT const CFStringRef kVTDecompressionPropertyKey_MaximizePowerEfficiency 
 	@discussion
 		This is an optional property for video decoders to implement.
 */
-VT_EXPORT const CFStringRef kVTDecompressionPropertyKey_ThreadCount API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2)); // Read/write, CFNumber
+VT_EXPORT const CFStringRef kVTDecompressionPropertyKey_ThreadCount API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos); // Read/write, CFNumber
 
 // Standard properties about quality of service.
 // By default, a decoder should completely decode every frame at full resolution.
@@ -231,12 +231,12 @@ VT_EXPORT const CFStringRef kVTDecompressionPropertyKey_ThreadCount API_AVAILABL
 		This is an optional property for video decoders to implement.
 		Decoders should only accept the modes that they will implement.
 */
-VT_EXPORT const CFStringRef kVTDecompressionPropertyKey_FieldMode API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2)); // Read/write, CFString, one of
-VT_EXPORT const CFStringRef kVTDecompressionProperty_FieldMode_BothFields API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2));
-VT_EXPORT const CFStringRef kVTDecompressionProperty_FieldMode_TopFieldOnly API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2));
-VT_EXPORT const CFStringRef kVTDecompressionProperty_FieldMode_BottomFieldOnly API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2));
-VT_EXPORT const CFStringRef kVTDecompressionProperty_FieldMode_SingleField API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2));  // Most appropriate of either TopFieldOnly or BottomFieldOnly
-VT_EXPORT const CFStringRef kVTDecompressionProperty_FieldMode_DeinterlaceFields API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2));
+VT_EXPORT const CFStringRef kVTDecompressionPropertyKey_FieldMode API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos); // Read/write, CFString, one of
+VT_EXPORT const CFStringRef kVTDecompressionProperty_FieldMode_BothFields API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos);
+VT_EXPORT const CFStringRef kVTDecompressionProperty_FieldMode_TopFieldOnly API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos);
+VT_EXPORT const CFStringRef kVTDecompressionProperty_FieldMode_BottomFieldOnly API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos);
+VT_EXPORT const CFStringRef kVTDecompressionProperty_FieldMode_SingleField API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos);  // Most appropriate of either TopFieldOnly or BottomFieldOnly
+VT_EXPORT const CFStringRef kVTDecompressionProperty_FieldMode_DeinterlaceFields API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 /*!
 	@constant	kVTDecompressionPropertyKey_DeinterlaceMode
@@ -248,9 +248,9 @@ VT_EXPORT const CFStringRef kVTDecompressionProperty_FieldMode_DeinterlaceFields
 		This property is only applicable if kVTDecompressionPropertyKey_FieldMode 
 		is set to kVTDecompressionProperty_FieldMode_DeinterlaceFields.
 */
-VT_EXPORT const CFStringRef kVTDecompressionPropertyKey_DeinterlaceMode API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2));   // Read/write, CFString; only applicable if kVTDecompressionPropertyKey_FieldMode is kVTDecompressionProperty_FieldMode_DeinterlaceFields; supported values may include:
-VT_EXPORT const CFStringRef kVTDecompressionProperty_DeinterlaceMode_VerticalFilter API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2));   // apply 0.25-0.50-0.25 vertical filter to individual interlaced frames; default mode
-VT_EXPORT const CFStringRef kVTDecompressionProperty_DeinterlaceMode_Temporal API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2));	// apply filter that makes use of a window of multiple frames to generate deinterlaced results, and provides a better result at the expense of a pipeline delay; this mode is only used if kVTDecodeFrame_EnableTemporalProcessing is set, otherwise a non-temporal mode (eg, VerticalFilter) will be used instead
+VT_EXPORT const CFStringRef kVTDecompressionPropertyKey_DeinterlaceMode API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos);   // Read/write, CFString; only applicable if kVTDecompressionPropertyKey_FieldMode is kVTDecompressionProperty_FieldMode_DeinterlaceFields; supported values may include:
+VT_EXPORT const CFStringRef kVTDecompressionProperty_DeinterlaceMode_VerticalFilter API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos);   // apply 0.25-0.50-0.25 vertical filter to individual interlaced frames; default mode
+VT_EXPORT const CFStringRef kVTDecompressionProperty_DeinterlaceMode_Temporal API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos);	// apply filter that makes use of a window of multiple frames to generate deinterlaced results, and provides a better result at the expense of a pipeline delay; this mode is only used if kVTDecodeFrame_EnableTemporalProcessing is set, otherwise a non-temporal mode (eg, VerticalFilter) will be used instead
 
 /*!
 	@constant	kVTDecompressionPropertyKey_ReducedResolutionDecode
@@ -261,9 +261,9 @@ VT_EXPORT const CFStringRef kVTDecompressionProperty_DeinterlaceMode_Temporal AP
 		Decoders that only support a fixed set of resolutions should pick the smallest resolution 
 		greater than or equal to the requested width x height.
 */
-VT_EXPORT const CFStringRef kVTDecompressionPropertyKey_ReducedResolutionDecode API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2)); // Read/write, CFDictionary containing width and height keys and CFNumber values:
-VT_EXPORT const CFStringRef kVTDecompressionResolutionKey_Width API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2)); // CFNumber
-VT_EXPORT const CFStringRef kVTDecompressionResolutionKey_Height API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2)); // CFNumber
+VT_EXPORT const CFStringRef kVTDecompressionPropertyKey_ReducedResolutionDecode API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos); // Read/write, CFDictionary containing width and height keys and CFNumber values:
+VT_EXPORT const CFStringRef kVTDecompressionResolutionKey_Width API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos); // CFNumber
+VT_EXPORT const CFStringRef kVTDecompressionResolutionKey_Height API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos); // CFNumber
 
 /*!
 	@constant	kVTDecompressionPropertyKey_ReducedCoefficientDecode
@@ -274,7 +274,7 @@ VT_EXPORT const CFStringRef kVTDecompressionResolutionKey_Height API_AVAILABLE(m
 		Only decoders for which such approximations make sense should implement this property.
 		The meaning of the number of coefficients will be decoder-specific.
 */
-VT_EXPORT const CFStringRef kVTDecompressionPropertyKey_ReducedCoefficientDecode API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2)); // Read/write, CFNumber
+VT_EXPORT const CFStringRef kVTDecompressionPropertyKey_ReducedCoefficientDecode API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos); // Read/write, CFNumber
 	
 	
 /*!
@@ -291,7 +291,7 @@ VT_EXPORT const CFStringRef kVTDecompressionPropertyKey_ReducedCoefficientDecode
 		If the decoder does not support this property directly, but reports that the content has 
 		no interframe dependencies, the video toolbox may step in and perform simple frame dropping.
 */
-VT_EXPORT const CFStringRef kVTDecompressionPropertyKey_ReducedFrameDelivery API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2)); // Read/write, CFNumber in range [0.0,1.0].
+VT_EXPORT const CFStringRef kVTDecompressionPropertyKey_ReducedFrameDelivery API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos); // Read/write, CFNumber in range [0.0,1.0].
 
 /*!
 	@constant	kVTDecompressionPropertyKey_OnlyTheseFrames
@@ -303,11 +303,11 @@ VT_EXPORT const CFStringRef kVTDecompressionPropertyKey_ReducedFrameDelivery API
 		this property, the ReducedFrameDelivery is the proportion of the frames selected by this property: 
 		0.25 and IFrames would indicate that only one I frame in every four should be delivered.
 */
-VT_EXPORT const CFStringRef kVTDecompressionPropertyKey_OnlyTheseFrames API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2)); // Read/write, CFString, supported values may include:
-VT_EXPORT const CFStringRef kVTDecompressionProperty_OnlyTheseFrames_AllFrames API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2));
-VT_EXPORT const CFStringRef kVTDecompressionProperty_OnlyTheseFrames_NonDroppableFrames API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2));
-VT_EXPORT const CFStringRef kVTDecompressionProperty_OnlyTheseFrames_IFrames API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2));
-VT_EXPORT const CFStringRef kVTDecompressionProperty_OnlyTheseFrames_KeyFrames API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2));
+VT_EXPORT const CFStringRef kVTDecompressionPropertyKey_OnlyTheseFrames API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos); // Read/write, CFString, supported values may include:
+VT_EXPORT const CFStringRef kVTDecompressionProperty_OnlyTheseFrames_AllFrames API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos);
+VT_EXPORT const CFStringRef kVTDecompressionProperty_OnlyTheseFrames_NonDroppableFrames API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos);
+VT_EXPORT const CFStringRef kVTDecompressionProperty_OnlyTheseFrames_IFrames API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos);
+VT_EXPORT const CFStringRef kVTDecompressionProperty_OnlyTheseFrames_KeyFrames API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos);
 	
 /*!
 	@constant       kVTDecompressionProperty_TemporalLevelLimit
@@ -321,7 +321,7 @@ VT_EXPORT const CFStringRef kVTDecompressionProperty_OnlyTheseFrames_KeyFrames A
 		For more information on temporal levels, see kCMSampleAttachmentKey_HEVCTemporalLevelInfo
 		in CoreMedia/CMSampleBuffer.h
 */
-VT_EXPORT const CFStringRef kVTDecompressionProperty_TemporalLevelLimit API_AVAILABLE(macosx(10.13), ios(11.0), tvos(10.4)); // Read/write, CFNumber
+VT_EXPORT const CFStringRef kVTDecompressionProperty_TemporalLevelLimit API_AVAILABLE(macos(10.13), ios(11.0), tvos(10.4), visionos(1.0)) API_UNAVAILABLE(watchos); // Read/write, CFNumber
 	
 /*!
 	@constant	kVTDecompressionPropertyKey_SuggestedQualityOfServiceTiers
@@ -336,7 +336,7 @@ VT_EXPORT const CFStringRef kVTDecompressionProperty_TemporalLevelLimit API_AVAI
 		decreasing qualities of service.  Clients may work their way down these tiers until they are 
 		able to keep up with the frame rate.
 */
-VT_EXPORT const CFStringRef kVTDecompressionPropertyKey_SuggestedQualityOfServiceTiers API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2)); // Read-only, CFArray of CFDictionaries containing property key/value pairs
+VT_EXPORT const CFStringRef kVTDecompressionPropertyKey_SuggestedQualityOfServiceTiers API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos); // Read-only, CFArray of CFDictionaries containing property key/value pairs
 
 /*!
 	@constant	kVTDecompressionPropertyKey_SupportedPixelFormatsOrderedByQuality
@@ -347,7 +347,7 @@ VT_EXPORT const CFStringRef kVTDecompressionPropertyKey_SuggestedQualityOfServic
 		This property value is an array containing CFNumbers holding CMPixelFormatType values,
 		ordered by quality from best to worse.
 */
-VT_EXPORT const CFStringRef kVTDecompressionPropertyKey_SupportedPixelFormatsOrderedByQuality API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2)); // Read-only, CFArray[CFNumber(CMPixelFormatType)] ordered best to worst, optional
+VT_EXPORT const CFStringRef kVTDecompressionPropertyKey_SupportedPixelFormatsOrderedByQuality API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos); // Read-only, CFArray[CFNumber(CMPixelFormatType)] ordered best to worst, optional
 
 /*!
 	@constant	kVTDecompressionPropertyKey_SupportedPixelFormatsOrderedByPerformance
@@ -358,7 +358,7 @@ VT_EXPORT const CFStringRef kVTDecompressionPropertyKey_SupportedPixelFormatsOrd
 		This property value is an array containing CFNumbers holding CMPixelFormatType values,
 		ordered by speed from fast to slow.
 */
-VT_EXPORT const CFStringRef kVTDecompressionPropertyKey_SupportedPixelFormatsOrderedByPerformance API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2)); // Read-only, CFArray[CFNumber(CMPixelFormatType)] ordered fast to slow, optional
+VT_EXPORT const CFStringRef kVTDecompressionPropertyKey_SupportedPixelFormatsOrderedByPerformance API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos); // Read-only, CFArray[CFNumber(CMPixelFormatType)] ordered fast to slow, optional
 
 /*!
 	@constant	kVTDecompressionPropertyKey_PixelFormatsWithReducedResolutionSupport
@@ -368,7 +368,32 @@ VT_EXPORT const CFStringRef kVTDecompressionPropertyKey_SupportedPixelFormatsOrd
 		This is an optional property for video decoders to implement.
 		This property value is an array containing CFNumbers holding CMPixelFormatType values.
 */
-VT_EXPORT const CFStringRef kVTDecompressionPropertyKey_PixelFormatsWithReducedResolutionSupport API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2)); // Read-only, CFArray[CFNumber(CMPixelFormatType)], optional
+VT_EXPORT const CFStringRef kVTDecompressionPropertyKey_PixelFormatsWithReducedResolutionSupport API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos); // Read-only, CFArray[CFNumber(CMPixelFormatType)], optional
+
+/*!
+	@constant	kVTDecompressionPropertyKey_AllowBitstreamToChangeFrameDimensions
+	@abstract
+		True if decoder is allowed to output buffers matching reduced frame dimensions in the bitstream rather than
+		under-filling them.
+	@discussion
+		This is an optional property only supported by video decoders for bitstream formats which have a provision
+		for specifying output dimensions per-frame, such as AV1.
+
+		If a decoder does not support this property or if the property value is set to `kCFBooleanFalse`, all decoded
+		frames will have the same dimensions as specified in the format description. In this case, if the bitstream
+		changes the frame dimensions, the output buffer will be padded to the dimensions specified in the format
+		description.
+
+		When this property is set to `kCFBooleanTrue`, the decoder will set the dimensions of each output buffer to
+		match the dimensions specified in the bitstream for that frame.
+
+		In all cases, output buffer dimensions will never exceed the dimensions specified in the format description.
+
+		In apps linked to SDK versions before this property was added, the AV1 decoder will behave as if this property
+		is set to `kCFBooleanFalse`. Otherwise, value of this property defaults to `kCFBooleanTrue` where supported.
+*/
+
+VT_EXPORT const CFStringRef kVTDecompressionPropertyKey_AllowBitstreamToChangeFrameDimensions API_AVAILABLE(macos(15.0), ios(18.0), tvos(18.0), visionos(2.0)) API_UNAVAILABLE(watchos); // Read/Write, CFBoolean, Optional
 
 #pragma mark Post-decompression processing
 
@@ -383,7 +408,7 @@ VT_EXPORT const CFStringRef kVTDecompressionPropertyKey_PixelFormatsWithReducedR
 		This property is implemented by the video toolbox.
 		This property value is a CFDictionary containing properties from VTPixelTransferProperties.h.
 */
-VT_EXPORT const CFStringRef kVTDecompressionPropertyKey_PixelTransferProperties API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2)); // Read/Write, CFDictionary containing properties from VTPixelTransferProperties.h.
+VT_EXPORT const CFStringRef kVTDecompressionPropertyKey_PixelTransferProperties API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos); // Read/Write, CFDictionary containing properties from VTPixelTransferProperties.h.
 
 /*!
 	@constant	kVTVideoDecoderSpecification_RequiredDecoderGPURegistryID
@@ -395,7 +420,7 @@ VT_EXPORT const CFStringRef kVTDecompressionPropertyKey_PixelTransferProperties 
 		This option can only be used to specify a GPU registryID corresponding to a removable GPU (eGPU).
 		If 0 is specified for the required GPU registryID, the VideoToolbox will not utilize removable GPUs for decode.
 */
-VT_EXPORT const CFStringRef kVTVideoDecoderSpecification_RequiredDecoderGPURegistryID API_AVAILABLE(macosx(10.13)); // CFNumber, Optional
+VT_EXPORT const CFStringRef kVTVideoDecoderSpecification_RequiredDecoderGPURegistryID API_AVAILABLE(macos(10.13), ios(11.3), tvos(11.3), visionos(1.0)) API_UNAVAILABLE(watchos); // CFNumber, Optional
 
 /*!
 	@constant	kVTVideoDecoderSpecification_PreferredDecoderGPURegistryID
@@ -411,7 +436,7 @@ VT_EXPORT const CFStringRef kVTVideoDecoderSpecification_RequiredDecoderGPURegis
 		The GPU registryID can be obtained from a MTLDevice using [MTLDevice registryID] or can be obtained from OpenGL or OpenCL.
 		This option can only be used to specify a GPU registryID corresponding to a removable GPU (eGPU).
 */
-VT_EXPORT const CFStringRef kVTVideoDecoderSpecification_PreferredDecoderGPURegistryID API_AVAILABLE(macosx(10.13)); // CFNumber, Optional
+VT_EXPORT const CFStringRef kVTVideoDecoderSpecification_PreferredDecoderGPURegistryID API_AVAILABLE(macos(10.13), ios(11.3), tvos(11.3), visionos(1.0)) API_UNAVAILABLE(watchos); // CFNumber, Optional
 
 /*!
 	@constant	kVTDecompressionPropertyKey_UsingGPURegistryID
@@ -421,7 +446,7 @@ VT_EXPORT const CFStringRef kVTVideoDecoderSpecification_PreferredDecoderGPURegi
 		You can query this property using VTSessionCopyProperty after building a VTDecompressionSession to find out which GPU the decoder is using.
 		If a decoder based on a built-in GPU was used it will return NULL.  If a software decoder is used, it will return NULL
 */
-VT_EXPORT const CFStringRef kVTDecompressionPropertyKey_UsingGPURegistryID API_AVAILABLE(macosx(10.15)) ; // CFNumberRef, Read;
+VT_EXPORT const CFStringRef kVTDecompressionPropertyKey_UsingGPURegistryID API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0), visionos(1.0)) API_UNAVAILABLE(watchos); // CFNumberRef, Read
 
 /*!
 	@constant    kVTDecompressionPropertyKey_PropagatePerFrameHDRDisplayMetadata
@@ -429,7 +454,7 @@ VT_EXPORT const CFStringRef kVTDecompressionPropertyKey_UsingGPURegistryID API_A
 		This controls whether or not to propagate any per frame HDR
 		display metadata from the input compressed bitstream to the output pixel buffer.
 */
-VT_EXPORT const CFStringRef kVTDecompressionPropertyKey_PropagatePerFrameHDRDisplayMetadata API_AVAILABLE(macosx(11.0), ios(14.0), tvos(14.0)); // Read/write, CFBoolean, Optional, default is kCFBooleanTrue
+VT_EXPORT const CFStringRef kVTDecompressionPropertyKey_PropagatePerFrameHDRDisplayMetadata API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0), visionos(1.0)) API_UNAVAILABLE(watchos); // Read/write, CFBoolean, Optional, default is kCFBooleanTrue
 
 /*!
 	@constant       kVTDecompressionPropertyKey_GeneratePerFrameHDRDisplayMetadata
@@ -439,7 +464,35 @@ VT_EXPORT const CFStringRef kVTDecompressionPropertyKey_PropagatePerFrameHDRDisp
 		If the color space and YCbCrMatrix matches a supported HDR format such as HLG (kCMFormatDescriptionTransferFunction_ITU_R_2100_HLG)
 		the decoded frame will be analyzed and metadata will be added as an attachment to the CVPixelBuffer.
 */
-VT_EXPORT const CFStringRef kVTDecompressionPropertyKey_GeneratePerFrameHDRDisplayMetadata API_AVAILABLE(macosx(14.0), ios(17.0)); // CFBoolean, Read/Write, Optional, kCFBooleanFalse by default
+VT_EXPORT const CFStringRef kVTDecompressionPropertyKey_GeneratePerFrameHDRDisplayMetadata API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), visionos(1.0)) API_UNAVAILABLE(watchos); // CFBoolean, Read/Write, Optional, kCFBooleanFalse by default
+
+/*!
+	@constant       kVTDecompressionPropertyKey_DecoderProducesRAWOutput
+	@abstract
+		Indicates whether the decoder can produce RAW output requiring a VTRAWProcessingSession for post-decode processing.
+	@discussion
+		If this property is not implemented, it is assumed that the decoder does not produce RAW output.
+		If the decoder reports that it produces RAW output the VTDecompressionSession will internally invoke a VTRAWProcessingSession by default to produce
+		processed output.
+		If the client sets kVTDecompressionPropertyKey_RequestRAWOutput, the VTDecompressionSession will do no processing and return the decoder's native RAW
+		output, and any requested destinationImageBufferAttributes on the VTDecompressionSession will be ignored.
+*/
+VT_EXPORT const CFStringRef kVTDecompressionPropertyKey_DecoderProducesRAWOutput API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, tvos, watchos, visionos); // CFBoolean, Read, Optional
+
+/*!
+	@constant       kVTDecompressionPropertyKey_RequestRAWOutput
+	@abstract
+		For decoders which produce RAW output, this property requests that the VTDecompressionSession provide output which has not been processed.
+	@discussion
+		When a decoder produces RAW output (signalled by kVTDecompressionPropertyKey_DecoderProducesRAWOutput) the VTDecompressionSession will automatically
+		invoke a VTRAWProcessingSession with default settings and emit processed frames by default, or when kVTDecompressionPropertyKey_RequestRAWOutput is set
+		to kCFBooleanFalse.
+		If a client wants to run a VTRAWProcessingSession on the RAW output themselves in order to control the post-decode processing of the decoded CVPixelBuffers,
+		they must set kVTDecompressionPropertyKey_RequestRAWOutput to kCFBooleanTrue.
+		If kVTDecompressionPropertyKey_RequestRAWOutput has been enabled and the decoder produces RAW output, the VTDecompressionSession 
+		will return CVPixelBuffers in the decoder's native RAW format.  Any destinationImageBufferAttributes set on the VTDecompressionSession will be ignored.
+*/
+VT_EXPORT const CFStringRef kVTDecompressionPropertyKey_RequestRAWOutput API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, tvos, watchos, visionos); // CFBoolean, Read/Write, Optional, kCFBooleanFalse by default
 
 
 #pragma mark Multi-image decompression
@@ -457,7 +510,7 @@ VT_EXPORT const CFStringRef kVTDecompressionPropertyKey_GeneratePerFrameHDRDispl
         If this property is NULL, MV-HEVC shall be decoded ignoring layers other than the base layer.
         Terminology note: in multi-image decompression, a single video sample (from one CMSampleBuffer) contains a single frame (with one PTS) that is decoded to produce multiple images.
  */
-VT_EXPORT const CFStringRef kVTDecompressionPropertyKey_RequestedMVHEVCVideoLayerIDs API_AVAILABLE(macos(14.0), ios(17.0)) API_UNAVAILABLE(tvos, watchos); // Read/write, CFArray(CFNumber), Optional
+VT_EXPORT const CFStringRef kVTDecompressionPropertyKey_RequestedMVHEVCVideoLayerIDs API_AVAILABLE(macos(14.0), ios(17.0), visionos(1.0)) API_UNAVAILABLE(tvos, watchos); // Read/write, CFArray(CFNumber), Optional
 
 	
 CM_ASSUME_NONNULL_END

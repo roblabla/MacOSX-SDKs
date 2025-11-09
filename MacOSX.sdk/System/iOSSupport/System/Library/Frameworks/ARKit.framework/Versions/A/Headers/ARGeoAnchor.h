@@ -19,6 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
  The session needs to be configured with ARGeoTrackingConfiguration.
  */
 API_AVAILABLE(ios(14.0))
+NS_SWIFT_SENDABLE
 @interface ARGeoAnchor : ARAnchor AR_GEO_ANCHOR_PROTOCOLS
 
 /**
@@ -33,12 +34,12 @@ API_AVAILABLE(ios(14.0))
  
  @discussion Only valid when altitudeSource is not ARAltitudeSourceUnknown.
  */
-@property (nonatomic, readonly, assign) CLLocationDistance altitude NS_REFINED_FOR_SWIFT;
+@property (nonatomic, readonly) CLLocationDistance altitude NS_REFINED_FOR_SWIFT;
 
 /**
  The source of altitude information. If the user did not provide the altitude, ARKit populates this property to indicate the expected accuracy depending on the available altitude data.
  */
-@property (nonatomic, readonly, assign) ARAltitudeSource altitudeSource;
+@property (nonatomic, readonly) ARAltitudeSource altitudeSource;
 
 /**
  Initializes a new ARGeoAnchor with the given coordinates.

@@ -18,6 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// @brief A protocol which must be adopted by the class set as extension's `NSExtensionPrincipalClass`.
 API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, watchos, macCatalyst) API_UNAVAILABLE(tvos)
+NS_SWIFT_UI_ACTOR
 @protocol MEExtension <NSObject>
 
 @optional

@@ -16,14 +16,14 @@ NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 // call the completionHandler to reset the context to its normal state (e.g. when swiping, resets to unswiped state)
 // pass YES to the completionHandler if the action was actually performed, to show a visual indication of the successful completion
-typedef void (^UIContextualActionHandler)(UIContextualAction *action, __kindof UIView *sourceView, void(^completionHandler)(BOOL actionPerformed));
+typedef void (^UIContextualActionHandler)(UIContextualAction *action, __kindof UIView *sourceView, void(^completionHandler)(BOOL actionPerformed)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR;
 
 typedef NS_ENUM(NSInteger, UIContextualActionStyle) {
     UIContextualActionStyleNormal,
     UIContextualActionStyleDestructive
-} NS_SWIFT_NAME(UIContextualAction.Style) API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(tvos);
+} NS_SWIFT_NAME(UIContextualAction.Style) API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos) API_UNAVAILABLE(tvos);
 
-UIKIT_EXTERN API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(tvos) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos) API_UNAVAILABLE(tvos) NS_SWIFT_UI_ACTOR
 @interface UIContextualAction : NSObject
 
 + (instancetype)contextualActionWithStyle:(UIContextualActionStyle)style title:(nullable NSString *)title handler:(UIContextualActionHandler)handler;

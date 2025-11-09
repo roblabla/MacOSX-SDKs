@@ -72,6 +72,35 @@ typedef NS_OPTIONS(NSUInteger, ASAuthorizationProviderExtensionUserSecureEnclave
 } NS_SWIFT_NAME(ASAuthorizationProviderExtensionLoginConfiguration.UserSecureEnclaveKeyBiometricPolicy);
 
 
+
+typedef NSNumber * ASAuthorizationProviderExtensionEncryptionAlgorithm API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, watchos, tvos) NS_TYPED_EXTENSIBLE_ENUM;
+
+/// A encryption algorithm that uses NIST P-256 elliptic curve key agreement, ConcatKDF key derivation
+/// with a 256-bit digest, and the Advanced Encryption Standard cipher in Galois/Counter Mode with a key length of 256 bits.
+AS_EXTERN ASAuthorizationProviderExtensionEncryptionAlgorithm const ASAuthorizationProviderExtensionEncryptionAlgorithmECDHE_A256GCM API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, watchos, tvos) NS_SWIFT_NAME(ecdhe_A256GCM);
+
+/// A cipher suite for HPKE that uses NIST P-256 elliptic curve key agreement, SHA-2 key derivation
+/// with a 256-bit digest, and the Advanced Encryption Standard cipher in Galois/Counter Mode with a key length of 256 bits.
+AS_EXTERN ASAuthorizationProviderExtensionEncryptionAlgorithm const ASAuthorizationProviderExtensionEncryptionAlgorithmHPKE_P256_SHA256_AES_GCM_256  API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, watchos, tvos) NS_SWIFT_NAME(hpke_P256_SHA256_AES_GCM_256);
+
+/// A cipher suite that you use for HPKE using NIST P-384 elliptic curve key agreement, SHA-2 key derivation
+/// with a 384-bit digest, and the Advanced Encryption Standard cipher in Galois/Counter Mode with a key length of 256 bits.
+AS_EXTERN ASAuthorizationProviderExtensionEncryptionAlgorithm const ASAuthorizationProviderExtensionEncryptionAlgorithmHPKE_P384_SHA384_AES_GCM_256  API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, watchos, tvos) NS_SWIFT_NAME(hpke_P384_SHA384_AES_GCM_256);
+
+/// A cipher suite for HPKE that uses X25519 elliptic curve key agreement, SHA-2 key derivation
+/// with a 256-bit digest, and the ChaCha20 stream cipher with the Poly1305 message authentication code.
+AS_EXTERN ASAuthorizationProviderExtensionEncryptionAlgorithm const ASAuthorizationProviderExtensionEncryptionAlgorithmHPKE_Curve25519_SHA256_ChachaPoly  API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, watchos, tvos) NS_SWIFT_NAME(hpke_Curve25519_SHA256_ChachaPoly);
+
+typedef NSNumber * ASAuthorizationProviderExtensionSigningAlgorithm API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, watchos, tvos) NS_TYPED_EXTENSIBLE_ENUM;
+
+// Use the ES256 signing algorithm per RFC 7518.
+AS_EXTERN ASAuthorizationProviderExtensionSigningAlgorithm const ASAuthorizationProviderExtensionSigningAlgorithmES256 API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, watchos, tvos) NS_SWIFT_NAME(es256);
+// Use the ES384 signing algorithm per RFC 7518.
+AS_EXTERN ASAuthorizationProviderExtensionSigningAlgorithm const ASAuthorizationProviderExtensionSigningAlgorithmES384 API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, watchos, tvos) NS_SWIFT_NAME(es384);
+// Use the Ed25519 signing algorithm per RFC 8032.
+AS_EXTERN ASAuthorizationProviderExtensionSigningAlgorithm const ASAuthorizationProviderExtensionSigningAlgorithmEd25519 API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, watchos, tvos) NS_SWIFT_NAME(ed25519);
+
+
 API_AVAILABLE(macos(13.0)) API_UNAVAILABLE(ios, watchos, tvos)
 @interface ASAuthorizationProviderExtensionLoginConfiguration : NSObject
 
@@ -350,6 +379,23 @@ API_AVAILABLE(macos(13.0)) API_UNAVAILABLE(ios, watchos, tvos)
  */
 @property (nonatomic, nullable, copy) NSData *loginRequestEncryptionAPVPrefix API_AVAILABLE(macos(14.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
+
+/*!
+ @abstract The encryption algorithm to use for the embedded login assertion.
+ */
+@property (nonatomic, copy) ASAuthorizationProviderExtensionEncryptionAlgorithm loginRequestEncryptionAlgorithm API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, watchos, tvos);
+
+/*!
+ @abstract The PreSharedKey to be used for HKPE for embedded login assertions. Setting this value will change the mode to PSK if the loginRequestHPKEPreSharedKeyID is also set. Must be at least 32 bytes.
+ */
+@property (nonatomic, copy, nullable) NSData *loginRequestHPKEPreSharedKey API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, watchos, tvos);
+
+/*!
+ @abstract  The PreSharedKey Id to be used for HPKE PSK for embedded login assertions.  This is required if the loginRequestHPKEPreSharedKey is set.
+ */
+@property (nonatomic, copy, nullable) NSData *loginRequestHPKEPreSharedKeyID API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, watchos, tvos);
+
+
 // MARK: - Key Exchange
 
 /*!
@@ -398,6 +444,25 @@ API_AVAILABLE(macos(13.0)) API_UNAVAILABLE(ios, watchos, tvos)
  @returns YES when successful and NO when claims are rejected.
  */
 - (BOOL)setCustomKeyRequestBodyClaims:(NSDictionary<NSString *, id> *)claims returningError:(NSError * _Nullable * _Nullable)error API_AVAILABLE(macos(14.0)) API_UNAVAILABLE(ios, watchos, tvos);
+
+
+
+#pragma mark - HPKE
+
+/*!
+ @abstract The PreSharedKey to be used for HKPE. Setting this value will change the mode to PSK or AuthPSK if the hpkeAuthPublicKey is also set. Must be at least 32 bytes.
+ */
+@property (nonatomic, copy, nullable) NSData *hpkePreSharedKey API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, watchos, tvos);
+
+/*!
+ @abstract The PreSharedKey Id to be used for HPKE PSK or AuthPSK mode.  This is requred if the hpkePreSharedKey is set.
+ */
+@property (nonatomic, copy, nullable) NSData *hpkePreSharedKeyID API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, watchos, tvos);
+
+/*!
+ @abstract The Authentication public key to be used for HPKE.  Setting this value with changet the mode to Auth or AuthPSK if the hpkePreSharedKey is also set.  This public key is used to authenticate HPKE responses.
+ */
+@property (nonatomic, nullable) SecKeyRef hpkeAuthPublicKey API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 
 @end

@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/WidgetObservation.framework/Versions/A/WidgetObservation'
-current-version: 1341.255
+current-version: 1458.255
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -18,7 +18,8 @@ exports:
                        '_$s17WidgetObservation08WOWidgetB10ControllerCACycfC', '_$s17WidgetObservation08WOWidgetB10ControllerCACycfc', 
                        '_$s17WidgetObservation08WOWidgetB10ControllerCMa', '_$s17WidgetObservation08WOWidgetB10ControllerCMn', 
                        '_$s17WidgetObservation08WOWidgetB10ControllerCMo', '_$s17WidgetObservation08WOWidgetB10ControllerCN', 
-                       '_$s17WidgetObservation08WOWidgetB10ControllerCfD', '_$s17WidgetObservation0A0V2id10Foundation4UUIDVvM', 
+                       '_$s17WidgetObservation08WOWidgetB10ControllerCfD', '_$s17WidgetObservation0A0V11descriptionSSvg', 
+                       '_$s17WidgetObservation0A0V11descriptionSSvpMV', '_$s17WidgetObservation0A0V2id10Foundation4UUIDVvM', 
                        '_$s17WidgetObservation0A0V2id10Foundation4UUIDVvg', '_$s17WidgetObservation0A0V2id10Foundation4UUIDVvpMV', 
                        '_$s17WidgetObservation0A0V2id10Foundation4UUIDVvs', '_$s17WidgetObservation0A0V2id5frameAC10Foundation4UUIDV_So6CGRectVtcfC', 
                        '_$s17WidgetObservation0A0V2id7display5frameAC10Foundation4UUIDV_AISo6CGRectVtcfC', 
@@ -31,7 +32,8 @@ exports:
                        '_$s17WidgetObservation0A0V7display10Foundation4UUIDVvs', 
                        '_$s17WidgetObservation0A0VMa', '_$s17WidgetObservation0A0VMn', 
                        '_$s17WidgetObservation0A0VN', '_$s17WidgetObservation0A0VSEAAMc', 
-                       '_$s17WidgetObservation0A0VSeAAMc', '_$s17WidgetObservation0A17PositionPublisherC011significantA6ChangeyyF', 
+                       '_$s17WidgetObservation0A0VSeAAMc', '_$s17WidgetObservation0A0Vs23CustomStringConvertibleAAMc', 
+                       '_$s17WidgetObservation0A17PositionPublisherC011significantA6ChangeyyF', 
                        '_$s17WidgetObservation0A17PositionPublisherC12showAddSheetyyF', 
                        '_$s17WidgetObservation0A17PositionPublisherC15widgetDidChangeyyAA0aG0OF', 
                        '_$s17WidgetObservation0A17PositionPublisherC16widgetsDidChangeyySayAA0aG0OGF', 
@@ -53,6 +55,7 @@ exports:
                        '_$s17WidgetObservation0A25PositionPublisherDelegateMp', '_$s17WidgetObservation0A25PositionPublisherDelegateP23showAddSheetFromDesktopyyFTj', 
                        '_$s17WidgetObservation0A25PositionPublisherDelegateP23showAddSheetFromDesktopyyFTq', 
                        '_$s17WidgetObservation0A25PositionPublisherDelegateTL', '_$s17WidgetObservation0A6ChangeO10changeKind6widgetACSgAA08WOWidgetcE0O_AA0A0VtcfC', 
+                       '_$s17WidgetObservation0A6ChangeO11descriptionSSvg', '_$s17WidgetObservation0A6ChangeO11descriptionSSvpMV', 
                        '_$s17WidgetObservation0A6ChangeO4fromACs7Decoder_p_tKcfC', 
                        '_$s17WidgetObservation0A6ChangeO5addedyAcA0A0VcACmFWC', '_$s17WidgetObservation0A6ChangeO5movedyAcA0A0VcACmFWC', 
                        '_$s17WidgetObservation0A6ChangeO6encode2toys7Encoder_p_tKF', 
@@ -60,7 +63,16 @@ exports:
                        '_$s17WidgetObservation0A6ChangeO7resizedyAcA0A0VcACmFWC', 
                        '_$s17WidgetObservation0A6ChangeOMa', '_$s17WidgetObservation0A6ChangeOMn', 
                        '_$s17WidgetObservation0A6ChangeON', '_$s17WidgetObservation0A6ChangeOSEAAMc', 
-                       '_$s17WidgetObservation0A6ChangeOSeAAMc', '_$s17WidgetObservation14WOWidgetChangeC6widgetAA0C0CSgvpMV', 
+                       '_$s17WidgetObservation0A6ChangeOSeAAMc', '_$s17WidgetObservation0A6ChangeOs23CustomStringConvertibleAAMc', 
+                       '_$s17WidgetObservation14WOWidgetChangeC15widgetIdentfier10Foundation4UUIDVvg', 
+                       '_$s17WidgetObservation14WOWidgetChangeC15widgetIdentfier10Foundation4UUIDVvpMV', 
+                       '_$s17WidgetObservation14WOWidgetChangeC16debugDescriptionSSvg', 
+                       '_$s17WidgetObservation14WOWidgetChangeC16widgetIdentifier10Foundation4UUIDVvg', 
+                       '_$s17WidgetObservation14WOWidgetChangeC16widgetIdentifier10Foundation4UUIDVvpMV', 
+                       '_$s17WidgetObservation14WOWidgetChangeC4kindAA0cD4KindOvg', 
+                       '_$s17WidgetObservation14WOWidgetChangeC4kindAA0cD4KindOvpMV', 
+                       '_$s17WidgetObservation14WOWidgetChangeC6widgetAA0C0CSgvg', 
+                       '_$s17WidgetObservation14WOWidgetChangeC6widgetAA0C0CSgvpMV', 
                        '_$s17WidgetObservation14WOWidgetChangeCMa', '_$s17WidgetObservation14WOWidgetChangeCMn', 
                        '_$s17WidgetObservation14WOWidgetChangeCMo', '_$s17WidgetObservation14WOWidgetChangeCMu', 
                        '_$s17WidgetObservation14WOWidgetChangeCN', '_$s17WidgetObservation14WOWidgetChangeCfD', 
@@ -73,9 +85,14 @@ exports:
                        '_$s17WidgetObservation18WOWidgetChangeKindON', '_$s17WidgetObservation18WOWidgetChangeKindOSHAAMc', 
                        '_$s17WidgetObservation18WOWidgetChangeKindOSQAAMc', '_$s17WidgetObservation18WOWidgetChangeKindOSYAAMc', 
                        '_$s17WidgetObservation18WOWidgetChangeKindOs23CustomStringConvertibleAAMc', 
-                       '_$s17WidgetObservation8WOWidgetC5frameSo6CGRectVvpMV', '_$s17WidgetObservation8WOWidgetCMa', 
-                       '_$s17WidgetObservation8WOWidgetCMn', '_$s17WidgetObservation8WOWidgetCMo', 
-                       '_$s17WidgetObservation8WOWidgetCMu', '_$s17WidgetObservation8WOWidgetCN', 
-                       '_$s17WidgetObservation8WOWidgetCfD' ]
+                       '_$s17WidgetObservation8WOWidgetC10identifier10Foundation4UUIDVvg', 
+                       '_$s17WidgetObservation8WOWidgetC10identifier10Foundation4UUIDVvpMV', 
+                       '_$s17WidgetObservation8WOWidgetC16debugDescriptionSSvg', 
+                       '_$s17WidgetObservation8WOWidgetC5frameSo6CGRectVvg', '_$s17WidgetObservation8WOWidgetC5frameSo6CGRectVvpMV', 
+                       '_$s17WidgetObservation8WOWidgetC6screenSo8NSScreenCSgvg', 
+                       '_$s17WidgetObservation8WOWidgetC6screenSo8NSScreenCSgvpMV', 
+                       '_$s17WidgetObservation8WOWidgetCMa', '_$s17WidgetObservation8WOWidgetCMn', 
+                       '_$s17WidgetObservation8WOWidgetCMo', '_$s17WidgetObservation8WOWidgetCMu', 
+                       '_$s17WidgetObservation8WOWidgetCN', '_$s17WidgetObservation8WOWidgetCfD' ]
     objc-classes:    [ WOWidget, WOWidgetChange, WOWidgetObservationController ]
 ...

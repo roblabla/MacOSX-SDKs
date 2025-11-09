@@ -14,8 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 @class VSSubscription;
 
 /// VSSubscriptionRegistrationCenter stores subscription information.
-VS_EXPORT API_AVAILABLE(ios(11.0), tvos(11.0)) API_UNAVAILABLE(macCatalyst)
-@interface VSSubscriptionRegistrationCenter : NSObject
+VS_EXPORT API_DEPRECATED_WITH_REPLACEMENT("VSUserAccountManager", ios(11.0, 18.0), tvos(11.0, 18.0), visionos(1.0, 2.0)) API_UNAVAILABLE(macCatalyst)
+    @interface VSSubscriptionRegistrationCenter : NSObject
 
 /// Use the default subscription registration center to tell the system about
 /// the customer's ability to access content within your app.

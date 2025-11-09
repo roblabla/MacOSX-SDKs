@@ -17,8 +17,5 @@ exports:
                        '_$s14SiriMessagesUI0B12UIPluginBaseCMn', '_$s14SiriMessagesUI0B12UIPluginBaseCMo', 
                        '_$s14SiriMessagesUI0B12UIPluginBaseCMu', '_$s14SiriMessagesUI0B12UIPluginBaseCN', 
                        '_$s14SiriMessagesUI0B12UIPluginBaseCfD', '_$s14SiriMessagesUI0B12UIPluginBaseCfd', 
-                       '_$sSo22CLLocationCoordinate2DV14SiriMessagesUIE2idSSvg', 
-                       '_$sSo22CLLocationCoordinate2DV14SiriMessagesUIE2idSSvpMV', 
-                       '_$sSo22CLLocationCoordinate2DVs12Identifiable14SiriMessagesUIMc', 
                        _SiriMessagesUIVersionNumber, _SiriMessagesUIVersionString ]
 ...

@@ -5,7 +5,23 @@ install-name:    '/System/Library/PrivateFrameworks/SpeechRecognitionSharedSuppo
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-    symbols:         [ '_$s30SpeechRecognitionSharedSupport017SRSSControlCenterD0C10$listening7Combine9PublishedV9PublisherVySb_GvM', 
+    symbols:         [ '_$s30SpeechRecognitionSharedSupport010SRSSSpeechB15PhoneticCheckerC16localeIdentifierACSgSS_tcfC', 
+                       '_$s30SpeechRecognitionSharedSupport010SRSSSpeechB15PhoneticCheckerC16localeIdentifierACSgSS_tcfCTj', 
+                       '_$s30SpeechRecognitionSharedSupport010SRSSSpeechB15PhoneticCheckerC16localeIdentifierACSgSS_tcfCTq', 
+                       '_$s30SpeechRecognitionSharedSupport010SRSSSpeechB15PhoneticCheckerC16localeIdentifierACSgSS_tcfc', 
+                       '_$s30SpeechRecognitionSharedSupport010SRSSSpeechB15PhoneticCheckerC7guesses3for10maxResults14phoneticWeight05priorM0SaySo012SRSSPhoneticG6ResultCGSS_SiS2dtFTj', 
+                       '_$s30SpeechRecognitionSharedSupport010SRSSSpeechB15PhoneticCheckerC7guesses3for10maxResults14phoneticWeight05priorM0SaySo012SRSSPhoneticG6ResultCGSS_SiS2dtFTq', 
+                       '_$s30SpeechRecognitionSharedSupport010SRSSSpeechB15PhoneticCheckerC7guesses3for10maxResultsSaySo012SRSSPhoneticG6ResultCGSS_SitFTj', 
+                       '_$s30SpeechRecognitionSharedSupport010SRSSSpeechB15PhoneticCheckerC7guesses3for10maxResultsSaySo012SRSSPhoneticG6ResultCGSS_SitFTq', 
+                       '_$s30SpeechRecognitionSharedSupport010SRSSSpeechB15PhoneticCheckerCACycfC', 
+                       '_$s30SpeechRecognitionSharedSupport010SRSSSpeechB15PhoneticCheckerCACycfc', 
+                       '_$s30SpeechRecognitionSharedSupport010SRSSSpeechB15PhoneticCheckerCMa', 
+                       '_$s30SpeechRecognitionSharedSupport010SRSSSpeechB15PhoneticCheckerCMn', 
+                       '_$s30SpeechRecognitionSharedSupport010SRSSSpeechB15PhoneticCheckerCMo', 
+                       '_$s30SpeechRecognitionSharedSupport010SRSSSpeechB15PhoneticCheckerCMu', 
+                       '_$s30SpeechRecognitionSharedSupport010SRSSSpeechB15PhoneticCheckerCN', 
+                       '_$s30SpeechRecognitionSharedSupport010SRSSSpeechB15PhoneticCheckerCfD', 
+                       '_$s30SpeechRecognitionSharedSupport017SRSSControlCenterD0C10$listening7Combine9PublishedV9PublisherVySb_GvM', 
                        '_$s30SpeechRecognitionSharedSupport017SRSSControlCenterD0C10$listening7Combine9PublishedV9PublisherVySb_Gvg', 
                        '_$s30SpeechRecognitionSharedSupport017SRSSControlCenterD0C10$listening7Combine9PublishedV9PublisherVySb_GvpMV', 
                        '_$s30SpeechRecognitionSharedSupport017SRSSControlCenterD0C10$listening7Combine9PublishedV9PublisherVySb_Gvs', 
@@ -117,11 +133,21 @@ exports:
                        '_$s30SpeechRecognitionSharedSupport28SRSSControlCenterPreferencesCMu', 
                        '_$s30SpeechRecognitionSharedSupport28SRSSControlCenterPreferencesCN', 
                        '_$s30SpeechRecognitionSharedSupport28SRSSControlCenterPreferencesCfD', 
-                       _SRSSPhoneticCheckerCopyGuesses, _SRSSPhoneticCheckerCreate, 
+                       '_$s30SpeechRecognitionSharedSupport38SRSSPhoneticVocabularyIPAMappingHelperC5nvASR7fromIPA6locale9separatorS2S_S2StFZ', 
+                       '_$s30SpeechRecognitionSharedSupport38SRSSPhoneticVocabularyIPAMappingHelperCACycfC', 
+                       '_$s30SpeechRecognitionSharedSupport38SRSSPhoneticVocabularyIPAMappingHelperCACycfc', 
+                       '_$s30SpeechRecognitionSharedSupport38SRSSPhoneticVocabularyIPAMappingHelperCMa', 
+                       '_$s30SpeechRecognitionSharedSupport38SRSSPhoneticVocabularyIPAMappingHelperCMn', 
+                       '_$s30SpeechRecognitionSharedSupport38SRSSPhoneticVocabularyIPAMappingHelperCMo', 
+                       '_$s30SpeechRecognitionSharedSupport38SRSSPhoneticVocabularyIPAMappingHelperCN', 
+                       '_$s30SpeechRecognitionSharedSupport38SRSSPhoneticVocabularyIPAMappingHelperCfD', 
+                       _SRSSCopyNvasrFromIPA, _SRSSPhoneticCheckerCopyGuesses, _SRSSPhoneticCheckerCreate, 
                        _SRSSPhoneticCheckerResultCopyText, _SRSSPhoneticCheckerResultGetScore, 
                        _SpeechRecognitionSharedSupportVersionNumber, _SpeechRecognitionSharedSupportVersionString ]
     objc-classes:    [ SRSSControlCenterPreferences_ObjC, SRSSControlCenterSupport_Language, 
                        SRSSControlCenterSupport_Microphone, SRSSControlCenterSupport_ObjC, 
                        SRSSMicrophoneLevelObserver, SRSSPhoneticChecker, SRSSPhoneticCheckerResult, 
-                       _TtC30SpeechRecognitionSharedSupport28SRSSControlCenterPreferences ]
+                       _TtC30SpeechRecognitionSharedSupport28SRSSControlCenterPreferences, 
+                       _TtC30SpeechRecognitionSharedSupport36SRSSSpeechRecognitionPhoneticChecker, 
+                       _TtC30SpeechRecognitionSharedSupport38SRSSPhoneticVocabularyIPAMappingHelper ]
 ...

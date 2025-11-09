@@ -14,6 +14,7 @@ exports:
                        __Z15WPOSLogDatabasev, __Z19WPOSLogSharedMemoryv, __ZN10WebPrivacy18enumerateListRulesERKN8Platform9ArrayViewIhEEONSt3__18functionIFvOS2_EEE, 
                        __ZN10WebPrivacy23createLinkFilteringDataERKN8Platform9ArrayViewIhEE, 
                        __ZN10WebPrivacy28createTrackerDomainNamesDataERKN8Platform9ArrayViewIhEE, 
+                       __ZN10WebPrivacy29createRestrictedOpenerDomainsERKN8Platform9ArrayViewIhEE, 
                        __ZN10WebPrivacy32createTrackerDomainNamesJSONDataERKN8Platform9ArrayViewIhEE, 
                        __ZN10WebPrivacy33createTrackerNetworkAddressesListERKN8Platform9ArrayViewIhEE, 
                        __ZN10WebPrivacy35createStorageAccessPromptQuirksDataERKN8Platform9ArrayViewIhEE, 
@@ -31,7 +32,8 @@ exports:
                        __ZN8Platform42createDirectoryWithIntermediateDirectoriesERKNSt3__112basic_stringIcNS0_11char_traitsIcEENS0_9allocatorIcEEEE, 
                        __ZNK8Platform12SharedMemory4viewEv ]
     objc-classes:    [ WPLinkFilteringData, WPLinkFilteringRule, WPNetworkAddressRange, 
-                       WPResourceRequestOptions, WPResources, WPStorageAccessPromptQuirk, 
-                       WPStorageAccessPromptQuirksData, WPStorageAccessUserAgentStringQuirk, 
-                       WPStorageAccessUserAgentStringQuirksData, WPTrackingDomain ]
+                       WPResourceRequestOptions, WPResources, WPRestrictedOpenerDomain, 
+                       WPStorageAccessPromptQuirk, WPStorageAccessPromptQuirksData, 
+                       WPStorageAccessUserAgentStringQuirk, WPStorageAccessUserAgentStringQuirksData, 
+                       WPTrackingDomain ]
 ...

@@ -47,7 +47,7 @@ MPS_CLASS_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))
                                 axes:(NSArray<NSNumber *> *) axes
                                 name:(NSString * _Nullable) name;
 
-/// Create a batch normalization op and return the result tensor.
+/// Creates a batch normalization operation and returns the result tensor.
 ///
 /// The mean and variance tensors should be outputs of `meanWithTensor:axes:name` and `varianceWithTensor:meanTensor:axes:name`. 
 /// Use the axes parameter to achieve different types of normalizations. 
@@ -76,7 +76,7 @@ MPS_CLASS_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))
                                        name:(NSString * _Nullable) name
 MPS_SWIFT_NAME( normalize(_:mean:variance:gamma:beta:epsilon:name:) );
 
-/// Create a normalization gamma gradient op and return the result tensor.
+/// Creates a normalization gamma-gradient operation and returns the result tensor.
 ///
 /// The mean and variance tensors should be outputs of ``meanWithTensor:axes:name`` and ``varianceWithTensor:meanTensor:axes:name``.
 /// Use the axes parameter to achieve different types of normalizations.
@@ -102,7 +102,7 @@ MPS_SWIFT_NAME( normalize(_:mean:variance:gamma:beta:epsilon:name:) );
                                                                  epsilon:(float) epsilon
                                                                     name:(NSString * _Nullable) name;
 
-/// Create a normalization beta gradient op and return the result tensor.
+/// Creates a normalization beta-gradient operation and returns the result tensor.
 ///
 /// The mean and variance tensors should be outputs of ``meanWithTensor:axes:name`` and ``varianceWithTensor:meanTensor:axes:name``.
 /// Use the axes parameter to achieve different types of normalizations.
@@ -121,7 +121,7 @@ MPS_SWIFT_NAME( normalize(_:mean:variance:gamma:beta:epsilon:name:) );
                                                            sourceTensor:(MPSGraphTensor *) sourceTensor
                                                           reductionAxes:(NSArray<NSNumber *> *) axes
                                                                    name:(NSString * _Nullable) name;
-/// Create a normalization input gradient op and return the result tensor.
+/// Creates a normalization input gradient operation and returns the result tensor.
 ///
 /// The mean and variance tensors should be outputs of ``meanWithTensor:axes:name`` and ``varianceWithTensor:meanTensor:axes:name``.
 /// Use the axes parameter to achieve different types of normalizations.

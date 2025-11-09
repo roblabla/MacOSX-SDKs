@@ -3,17 +3,16 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/Symptoms.framework/Versions/A/Frameworks/SymptomPresentationFeed.framework/Versions/A/SymptomPresentationFeed'
-current-version: 1871.120.6
+current-version: 2001.0.2
+reexported-libraries:
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
+    libraries:       [ '/System/Library/PrivateFrameworks/SymptomShared.framework/Versions/A/SymptomShared' ]
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
-    symbols:         [ _advisoryToString, _kDarwinNotificationHasAlternateAdvice, 
-                       _kDarwinNotificationMaterialLinkQualityChange, _kEstTransferTimeConfidence, 
-                       _kEstTransferTimeDLSecs, _kEstTransferTimeULSecs, _kNOIDiscretionaryInvitesWhenForegroundToo, 
-                       _kNWPVarModelAnalytics, _kNWPVarModelEpsilonGreedyEpsilonDecayRate, 
-                       _kNWPVarModelEpsilonGreedyEpsilonDecayedMinimumValue, _kNWPVarModelEpsilonGreedyEpsilonValue, 
-                       _kNWPVarModelEpsilonGreedyLastRewardsRetained, _kNWPVarModelEpsilonGreedyResetAtNthPull, 
-                       _kNWPVarModelUpperConfidenceBoundConfidenceValue, _kNWPVarModelUpperConfidenceBoundResetAtNthPull, 
+    symbols:         [ _advisoryToString, _kEstTransferTimeConfidence, _kEstTransferTimeDLSecs, 
+                       _kEstTransferTimeULSecs, _kNOIDiscretionaryInvitesWhenForegroundToo, 
                        _kPayloadInfoDLKB, _kPayloadInfoULKB, _kPerformanceFlowAvgUsecsEstabTime, 
                        _kPerformanceFlowConnAttempts, _kPerformanceFlowConnSuccesses, 
                        _kPerformanceFlowOverallTime, _kPerformanceFlowRemoteID, _kPerformanceFlowTimesThresholded, 
@@ -30,7 +29,10 @@ exports:
                        _kPerformanceNetAttachLqmTransitionCount, _kPerformanceNetAttachLqmTransitionRate, 
                        _kPerformanceNetAttachOverallStay, _kPerformanceNetAttachPacketsIn, 
                        _kPerformanceNetAttachPacketsOut, _kPerformanceNetAttachPassiveCaptivityDetections, 
-                       _kPerformanceNetAttachReTxBytes, _kPerformanceNetAttachRttAvg, 
+                       _kPerformanceNetAttachReTxBytes, _kPerformanceNetAttachRpmAvg, 
+                       _kPerformanceNetAttachRpmCount, _kPerformanceNetAttachRpmExitAvg, 
+                       _kPerformanceNetAttachRpmExitCount, _kPerformanceNetAttachRpmExitVar, 
+                       _kPerformanceNetAttachRpmVar, _kPerformanceNetAttachRttAvg, 
                        _kPerformanceNetAttachRttMin, _kPerformanceNetAttachRttVar, 
                        _kPerformanceNetAttachRxDupeBytes, _kPerformanceNetAttachRxOOOBytes, 
                        _kPerformanceNetAttachSinceTime, _kPerformanceNetAttachTimeStamp, 
@@ -64,8 +66,35 @@ exports:
                        _kUsageNetworkWiredOutBytes_var, _kUsageNetworkWiredSampleCount, 
                        _kUsageProcessBundleName, _kUsageProcessExtensionName, _kUsageProcessProcName, 
                        _kUsageSinceTime ]
-    objc-classes:    [ NWAppAdvice, NWNetworkAdviceUpdate, NWNetworkOfInterest, NWNetworkOfInterestManager, 
-                       NWNetworkPredictions, NWPVar, NWPVarBandit, NWPVarValueItem, 
-                       NetworkPerformanceFeed, ProcessNetStatsIndividualEntity, SFCache, 
+    objc-classes:    [ NWNetworkOfInterestManager, NetworkPerformanceFeed, ProcessNetStatsIndividualEntity, 
                        UsageFeed ]
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+install-name:    '/System/Library/PrivateFrameworks/SymptomShared.framework/Versions/A/SymptomShared'
+allowable-clients:
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+    clients:         [ SymptomEvaluator, SymptomPresentationFeed, SymptomsUnitTests, 
+                       symptomstool ]
+exports:
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+    symbols:         [ _kDarwinNotificationHasAlternateAdvice, _kDarwinNotificationMaterialLinkQualityChange, 
+                       _kNWPVarModelAnalytics, _kNWPVarModelEpsilonGreedyEpsilonDecayRate, 
+                       _kNWPVarModelEpsilonGreedyEpsilonDecayedMinimumValue, _kNWPVarModelEpsilonGreedyEpsilonValue, 
+                       _kNWPVarModelEpsilonGreedyLastRewardsRetained, _kNWPVarModelEpsilonGreedyResetAtNthPull, 
+                       _kNWPVarModelUpperConfidenceBoundConfidenceValue, _kNWPVarModelUpperConfidenceBoundResetAtNthPull ]
+    objc-classes:    [ FunctionalInterfaceUtils, NWAppAdvice, NWNetworkAdviceUpdate, 
+                       NWNetworkOfInterest, NWNetworkPredictions, NWPVar, NWPVarBandit, 
+                       NWPVarValueItem, SFCache ]
+    objc-ivars:      [ NWNetworkOfInterest._considerAlternate, NWNetworkOfInterest._considerAlternateUpdate, 
+                       NWNetworkOfInterest._customSignature, NWNetworkOfInterest._discretionaryTrafficInvited, 
+                       NWNetworkOfInterest._flags, NWNetworkOfInterest._functionalInterfaceType, 
+                       NWNetworkOfInterest._interface, NWNetworkOfInterest._interfaceClass, 
+                       NWNetworkOfInterest._interfaceSubtype, NWNetworkOfInterest._isAny, 
+                       NWNetworkOfInterest._isBuiltin, NWNetworkOfInterest._isThinnedOut, 
+                       NWNetworkOfInterest._isTrafficEligible, NWNetworkOfInterest._linkQuality, 
+                       NWNetworkOfInterest._powerCostDL, NWNetworkOfInterest._powerCostUL, 
+                       NWNetworkOfInterest._predictions, NWNetworkOfInterest._predictionsGeneratedAt, 
+                       NWNetworkOfInterest._scopedToLOI, NWNetworkOfInterest._version, 
+                       NWNetworkOfInterest._willGetDiscretionaryTrafficInvites ]
 ...

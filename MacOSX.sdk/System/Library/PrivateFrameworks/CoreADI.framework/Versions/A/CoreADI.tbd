@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos ]
 flags:           [ not_app_extension_safe ]
 install-name:    '/System/Library/PrivateFrameworks/CoreADI.framework/CoreADI'
-current-version: 7.2
+current-version: 8.3
 compatibility-version: 1.1
 exports:
   - targets:         [ x86_64-macos ]

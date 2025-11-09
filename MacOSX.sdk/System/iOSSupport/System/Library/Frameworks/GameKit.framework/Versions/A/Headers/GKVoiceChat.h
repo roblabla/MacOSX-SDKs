@@ -8,13 +8,12 @@ typedef NS_ENUM(NSInteger, GKVoiceChatPlayerState) {
     GKVoiceChatPlayerSpeaking,
     GKVoiceChatPlayerSilent,
     GKVoiceChatPlayerConnecting
-} __WATCHOS_PROHIBITED;
-
+} API_DEPRECATED("No longer supported", ios(4.1, 18.0), macos(10.8, 15.0), tvos(9.0, 18.0), visionos(1.0, 2.0)) __WATCHOS_PROHIBITED;
 @class GKPlayer;
 
 NS_ASSUME_NONNULL_BEGIN
 /// GKVoiceChat represents an instance of a named voice communications channel
-NS_CLASS_AVAILABLE(10_8, 4_1) __WATCHOS_PROHIBITED
+API_DEPRECATED("No longer supported", ios(4.1, 18.0), macos(10.8, 15.0), tvos(9.0, 18.0), visionos(1.0, 2.0)) __WATCHOS_PROHIBITED
 @interface GKVoiceChat : NSObject
 
 - (void)start;  /// start receiving audio from the chat

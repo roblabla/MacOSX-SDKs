@@ -26,7 +26,7 @@
  @param	boundingRect		The bounding CGRect you wish to fit into. 
  */
 
-AVF_EXPORT CGRect AVMakeRectWithAspectRatioInsideRect(CGSize aspectRatio, CGRect boundingRect) API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0)) API_UNAVAILABLE(watchos);
+AVF_EXPORT CGRect AVMakeRectWithAspectRatioInsideRect(CGSize aspectRatio, CGRect boundingRect) API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 
 /*
@@ -47,7 +47,7 @@ AVF_EXPORT CGRect AVMakeRectWithAspectRatioInsideRect(CGSize aspectRatio, CGRect
  @discussion
 	This extension simplifies converting CMVideoDimensions struct values into NSValue objects.
  */
-+ (NSValue *)valueWithCMVideoDimensions:(CMVideoDimensions)dimensions API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0), watchos(9.0));
++ (NSValue *)valueWithCMVideoDimensions:(CMVideoDimensions)dimensions API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0), watchos(9.0), visionos(1.0));
 
 /*!
  @property CMVideoDimensionsValue
@@ -57,7 +57,7 @@ AVF_EXPORT CGRect AVMakeRectWithAspectRatioInsideRect(CGSize aspectRatio, CGRect
  @discussion
 	This property simplifies accessing the contents of AVCaptureDeviceFormat.supportedMaxPhotoDimensions which are CMVideoDimension struct values encoded in NSValue objects.
  */
-@property (readonly) CMVideoDimensions CMVideoDimensionsValue API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0), watchos(9.0));
+@property (readonly) CMVideoDimensions CMVideoDimensionsValue API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0), watchos(9.0), visionos(1.0));
 
 @end
 

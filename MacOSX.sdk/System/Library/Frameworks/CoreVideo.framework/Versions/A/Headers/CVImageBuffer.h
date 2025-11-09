@@ -123,7 +123,13 @@ CV_EXPORT const CFStringRef CV_NONNULL kCVImageBufferAlphaChannelIsOpaque __OSX_
 
 CV_EXPORT const CFStringRef CV_NONNULL kCVImageBufferAlphaChannelModeKey API_AVAILABLE(macosx(10.15), ios(13.0), tvos(13.0)) API_UNAVAILABLE(watchos);
 CV_EXPORT const CFStringRef CV_NONNULL kCVImageBufferAlphaChannelMode_StraightAlpha API_AVAILABLE(macosx(10.15), ios(13.0), tvos(13.0)) API_UNAVAILABLE(watchos);
-CV_EXPORT const CFStringRef CV_NONNULL kCVImageBufferAlphaChannelMode_PremultipliedAlpha API_AVAILABLE(macosx(10.15), ios(13.0), tvos(13.0)) API_UNAVAILABLE(watchos);	
+CV_EXPORT const CFStringRef CV_NONNULL kCVImageBufferAlphaChannelMode_PremultipliedAlpha API_AVAILABLE(macosx(10.15), ios(13.0), tvos(13.0)) API_UNAVAILABLE(watchos);
+
+// Used to attach processing metadata to buffers transferred between video decoders and RAW processors.
+// Sequence metadata is expected to be invariant over the entire movie, while frame metadata can vary with each frame.
+CV_EXPORT const CFStringRef kCVImageBufferPostDecodeProcessingSequenceMetadataKey API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, watchos, tvos, visionos);	// CFDictionary
+CV_EXPORT const CFStringRef kCVImageBufferPostDecodeProcessingFrameMetadataKey API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, watchos, tvos, visionos);	// CFDictionary
+
 
 // Returns the standard integer code point corresponding to a given CoreVideo YCbCrMatrix constant string (in the kCVImageBufferYCbCrMatrix_... family).  Returns 2 (the code point for "unknown") if the string is NULL or not recognized.
 CV_EXPORT int CVYCbCrMatrixGetIntegerCodePointForString( CV_NULLABLE CFStringRef yCbCrMatrixString ) API_AVAILABLE(macosx(10.13), ios(11.0), tvos(11.0), watchos(4.0));
@@ -183,7 +189,7 @@ CV_EXPORT CGRect CVImageBufferGetCleanRect( CVImageBufferRef CV_NONNULL imageBuf
 /*!
     @function   CVImageBufferIsFlipped
     @abstract   Returns whether the image is flipped vertically or not.
-    @param      CVImageBuffer target
+    @param      imageBuffer target
     @result     True if 0,0 in the texture is upper left, false if 0,0 is lower left.
 */
 CV_EXPORT Boolean CVImageBufferIsFlipped( CVImageBufferRef CV_NONNULL imageBuffer ) __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);
@@ -227,12 +233,15 @@ CV_EXPORT const CFStringRef CV_NONNULL kCVImageBufferContentLightLevelInfoKey __
 // CFData (8 bytes) containing big-endian data matching payload of Ambient Viewing Environment SEI message
 CV_EXPORT const CFStringRef CV_NONNULL kCVImageBufferAmbientViewingEnvironmentKey API_AVAILABLE(macosx(12.0), ios(15.0), tvos(15.0), watchos(8.0));
 
+// CFNumberRef integer value in millilux
+CV_EXPORT const CFStringRef CV_NONNULL kCVImageBufferSceneIlluminationKey API_AVAILABLE(macos(15.0), ios(18.0), tvos(18.0), watchos(11.0), visionos(2.0));
+
 /*!
 	@constant    kCVImageBufferRegionOfInterestKey
 	@abstract
-		Specifies region of interest that image statistics cover. This value should be a CGRect dictionary created by CGRectCreateDictionaryRepresentation(). The origin in the CGRect represents the x,y coordinate within the CVPixelBuffer where region of interest is located.
+		Specifies region of interest that image statistics cover.
 	@discussion
-		
+		This value should be a CGRect dictionary created by CGRectCreateDictionaryRepresentation(). The origin in the CGRect represents the x,y coordinate within the CVPixelBuffer where region of interest is located.
 */
 CV_EXPORT const CFStringRef CV_NONNULL kCVImageBufferRegionOfInterestKey           API_AVAILABLE(macosx(12.0), ios(15.0), tvos(15.0), watchos(8.0));
 

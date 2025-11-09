@@ -79,6 +79,9 @@
 #import <AuthenticationServices/ASPublicKeyCredential.h>
 
 
+#import <AuthenticationServices/ASOneTimeCodeCredential.h>
+#import <AuthenticationServices/ASOneTimeCodeCredentialIdentity.h>
+#import <AuthenticationServices/ASOneTimeCodeCredentialRequest.h>
 
 
 
@@ -102,3 +105,13 @@
 #import <AuthenticationServices/ASSettingsHelper.h>
 
 #import <AuthenticationServices/ASWebAuthenticationSessionCallback.h>
+
+#import <AuthenticationServices/ASPasskeyAssertionCredentialExtensionOutput.h>
+#import <AuthenticationServices/ASPasskeyAssertionCredentialExtensionInput.h>
+#import <AuthenticationServices/ASPasskeyRegistrationCredentialExtensionInput.h>
+#import <AuthenticationServices/ASPasskeyRegistrationCredentialExtensionOutput.h>
+
+#import <AuthenticationServices/ASAuthorizationPublicKeyCredentialPRFAssertionInput.h>
+#import <AuthenticationServices/ASAuthorizationPublicKeyCredentialPRFAssertionOutput.h>
+#import <AuthenticationServices/ASAuthorizationPublicKeyCredentialPRFRegistrationInput.h>
+#import <AuthenticationServices/ASAuthorizationPublicKeyCredentialPRFRegistrationOutput.h>

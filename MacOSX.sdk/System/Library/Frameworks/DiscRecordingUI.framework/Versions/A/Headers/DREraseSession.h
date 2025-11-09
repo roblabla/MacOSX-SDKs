@@ -358,7 +358,7 @@ DREraseSessionBeginProgressDialog(
 }
 #endif
 
-#endif /* _H_DREraseSession */
-
 
 API_UNAVAILABLE_END
+
+#endif /* _H_DREraseSession */

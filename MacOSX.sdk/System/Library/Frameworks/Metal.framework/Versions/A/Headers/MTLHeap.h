@@ -7,6 +7,7 @@
 
 #import <Foundation/Foundation.h>
 #import <Metal/MTLDefines.h>
+#import <Metal/MTLAllocation.h>
 #import <Metal/MTLResource.h>
 #import <Metal/MTLBuffer.h>
 #import <Metal/MTLTexture.h>
@@ -105,7 +106,7 @@ MTL_EXPORT API_AVAILABLE(macos(10.13), ios(10.0))
  @protocol MTLHeap
  */
 API_AVAILABLE(macos(10.13), ios(10.0))
-@protocol MTLHeap <NSObject>
+@protocol MTLHeap <MTLAllocation>
 
 /*!
  @property label

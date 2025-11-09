@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/Frameworks/FamilyControls.framework/Versions/A/FamilyControls'
-current-version: 1150.1
+current-version: 1204
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -407,7 +407,11 @@ exports:
                        '_$s14FamilyControls7AppInfoCMu', '_$s14FamilyControls7AppInfoCN', 
                        '_$s14FamilyControls7AppInfoCfD', '_$s14FamilyControls7AppInfoCfd', 
                        '_$s14FamilyControls7AppInfoCs23CustomStringConvertibleAAMc', 
+                       '_$s14FamilyControls7FeatureV19isRebrandingEnabledSbvgZ', 
                        '_$s14FamilyControls7FeatureV22isAuthorizationEnabledSbvgZ', 
+                       '_$s14FamilyControls7FeatureV25overrideRebrandingEnabledSbSgvMZ', 
+                       '_$s14FamilyControls7FeatureV25overrideRebrandingEnabledSbSgvgZ', 
+                       '_$s14FamilyControls7FeatureV25overrideRebrandingEnabledSbSgvsZ', 
                        '_$s14FamilyControls7FeatureV28overrideAuthorizationEnabledSbSgvMZ', 
                        '_$s14FamilyControls7FeatureV28overrideAuthorizationEnabledSbSgvgZ', 
                        '_$s14FamilyControls7FeatureV28overrideAuthorizationEnabledSbSgvsZ', 

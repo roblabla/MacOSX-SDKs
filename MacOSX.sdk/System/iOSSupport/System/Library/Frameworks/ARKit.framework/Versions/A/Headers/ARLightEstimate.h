@@ -15,6 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
  A light estimate representing the light in the scene.
  */
 API_AVAILABLE(ios(11.0))
+NS_SWIFT_SENDABLE
 @interface ARLightEstimate : NSObject
 
 /**
@@ -42,6 +43,7 @@ API_AVAILABLE(ios(11.0))
  A directional light estimate representing the light intensity and direction in the scene.
  */
 API_AVAILABLE(ios(11.0))
+NS_SWIFT_SENDABLE
 @interface ARDirectionalLightEstimate : ARLightEstimate
 
 /**

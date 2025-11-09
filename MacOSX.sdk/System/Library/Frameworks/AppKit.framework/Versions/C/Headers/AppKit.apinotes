@@ -7498,6 +7498,10 @@ Typedefs:
   SwiftName: NSSpellChecker.OptionKey
 - Name: NSTextEffectStyle
   SwiftName: NSAttributedString.TextEffectStyle
+- Name: NSTextHighlightStyle
+  SwiftName: NSAttributedString.TextHighlightStyle
+- Name: NSTextHighlightColorScheme
+  SwiftName: NSAttributedString.TextHighlightColorScheme
 - Name: NSTextLayoutSectionKey
   SwiftName: NSAttributedString.TextLayoutSectionKey
 - Name: NSTextListMarkerFormat
@@ -8576,6 +8580,8 @@ Globals:
   SwiftName: zoomButton
 - Name: NSAccessibilityZoomButtonSubrole
   SwiftName: zoomButton
+- Name: NSAdaptiveImageGlyphAttributeName
+  SwiftName: adaptiveImageGlyph
 - Name: NSAlignmentBinding
   SwiftName: alignment
 - Name: NSAllowsEditingMultipleValuesSelectionBindingOption
@@ -10352,6 +10358,10 @@ Globals:
 - Name: NSTextFieldDatePickerStyle
   Availability: nonswift
   AvailabilityMsg: "prefer 'textField'"
+- Name: NSTextHighlightColorSchemeAttributeName
+  SwiftName: textHighlightColorScheme
+- Name: NSTextHighlightStyleAttributeName
+  SwiftName: textHighlightStyle
 - Name: NSTextInputContextKeyboardSelectionDidChangeNotification
   SwiftName: NSTextInputContext.keyboardSelectionDidChangeNotification
 - Name: NSTextLayoutSectionsAttribute

@@ -25,8 +25,11 @@ NS_ASSUME_NONNULL_BEGIN
  *             one relationship between a physical accessory and an object of this
  *             class. An accessory is composed of one or more services.
  */
-HM_EXTERN NS_SWIFT_SENDABLE API_AVAILABLE(ios(8.0), watchos(2.0), tvos(10.0), macCatalyst(14.0)) API_UNAVAILABLE(macos)
-    @interface HMAccessory : NSObject
+HM_EXTERN
+NS_SWIFT_SENDABLE
+API_AVAILABLE(ios(8.0), watchos(2.0), tvos(10.0), macCatalyst(14.0))
+API_UNAVAILABLE(macos)
+@interface HMAccessory : NSObject
 
 /*!
  * @brief The name of the accessory.
@@ -162,6 +165,8 @@ HM_EXTERN NS_SWIFT_SENDABLE API_AVAILABLE(ios(8.0), watchos(2.0), tvos(10.0), ma
  */
 - (void)identifyWithCompletionHandler:(void (^)(NSError *__nullable error))completion;
 
+- (instancetype)init API_DEPRECATED("HMAccessory objects are created by their parent container objects. Directly creating them is not supported.", ios(8.0, 8.0), watchos(2.0, 2.0), tvos(10.0, 10.0), macCatalyst(14.0, 14.0));
+
 @end
 
 
@@ -169,8 +174,11 @@ HM_EXTERN NS_SWIFT_SENDABLE API_AVAILABLE(ios(8.0), watchos(2.0), tvos(10.0), ma
  * @brief This defines the protocol for a delegate to receive updates about
  *        different aspects of an accessory
  */
-HM_EXTERN NS_SWIFT_SENDABLE API_AVAILABLE(ios(8.0), watchos(2.0), tvos(10.0), macCatalyst(14.0)) API_UNAVAILABLE(macos)
-    @protocol HMAccessoryDelegate<NSObject>
+HM_EXTERN
+NS_SWIFT_SENDABLE
+API_AVAILABLE(ios(8.0), watchos(2.0), tvos(10.0), macCatalyst(14.0))
+API_UNAVAILABLE(macos)
+@protocol HMAccessoryDelegate <NSObject>
 
 @optional
 
@@ -182,7 +190,7 @@ HM_EXTERN NS_SWIFT_SENDABLE API_AVAILABLE(ios(8.0), watchos(2.0), tvos(10.0), ma
 - (void)accessoryDidUpdateName:(HMAccessory *)accessory;
 
 /*!
- * @brief Informs the delegate when the name of a service is modfied.
+ * @brief Informs the delegate when the name of a service is modified.
  *
  * @param accessory Sender of the message.
  *

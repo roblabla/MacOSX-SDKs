@@ -14,7 +14,7 @@ exports:
                        _AIRNTGetSupportedImpls, _AIRNTGetVendorName, _AIRNTGetVersion, 
                        _AIRNTInit, _AIRNTInitCompilationContext, _AIRNTParseCommandLineOptions, 
                        _AIRNTSupportsArch, _AIRNTSupportsEmitBuiltinExecutableImage, 
-                       _AIRNTSupportsEmitExecutableImage, _AIRNTSupportsThreads, 
+                       _AIRNTSupportsEmitExecutableImage, _AIRNTSupportsTarget, _AIRNTSupportsThreads, 
                        _GLCompilerBuildRequest, _GLCompilerCreate, _GLCompilerDelete, 
                        _GLCompilerLogBuildRequest, _GLCompilerReleaseReply, _MTLCompilerBuildRequest, 
                        _MTLCompilerBuildRequestWithOptions, _MTLCompilerBuildRequestWithSerializedBitcode, 

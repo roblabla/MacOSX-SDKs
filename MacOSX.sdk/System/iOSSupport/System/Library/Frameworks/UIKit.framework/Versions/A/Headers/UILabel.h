@@ -29,7 +29,7 @@ typedef NS_ENUM(NSInteger, UILabelVibrancy) {
     UILabelVibrancyAutomatic,
 } API_AVAILABLE(visionos(1.0), ios(17.0), tvos(17.0)) API_UNAVAILABLE(watchos);
 
-UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(2.0)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @interface UILabel : UIView <NSCoding, UIContentSizeCategoryAdjusting, UILetterformAwareAdjusting>
 
 @property(nullable, nonatomic,copy)   NSString           *text; // default is nil
@@ -88,7 +88,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
 // Specifies the line break strategies that may be used for laying out the text in this label.
 // If this property is not set, the default value is NSLineBreakStrategyStandard.
 // If the label contains an attributed text with paragraph style(s) that specify a set of line break strategies, the set of strategies in the paragraph style(s) will be used instead of the set of strategies defined by this property.
-@property(nonatomic) NSLineBreakStrategy lineBreakStrategy API_AVAILABLE(ios(14.0), tvos(14.0), watchos(7.0));
+@property(nonatomic) NSLineBreakStrategy lineBreakStrategy API_AVAILABLE(ios(14.0), tvos(14.0)) API_UNAVAILABLE(watchos);
 
 // override points. can adjust rect before calling super.
 // label has default content mode of UIViewContentModeRedraw
@@ -106,14 +106,14 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
 @property (nonatomic) BOOL enablesMarqueeWhenAncestorFocused API_AVAILABLE(tvos(12.0)) API_UNAVAILABLE(ios, watchos);
 
 /// Indicates whether expansion text will be shown when the view is too small to show all the contents. Defaults to NO.
-@property (nonatomic) BOOL showsExpansionTextWhenTruncated API_AVAILABLE(macCatalyst(15.0));
+@property (nonatomic) BOOL showsExpansionTextWhenTruncated API_AVAILABLE(macCatalyst(15.0)) API_UNAVAILABLE(watchos);
 
 // deprecated:
 
-@property(nonatomic) CGFloat minimumFontSize API_DEPRECATED("", ios(2.0, 6.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos); // deprecated - use minimumScaleFactor. default is 0.0
+@property(nonatomic) CGFloat minimumFontSize API_DEPRECATED("", ios(2.0, 6.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(visionos, watchos); // deprecated - use minimumScaleFactor. default is 0.0
 
 // Non-functional.  Hand tune by using NSKernAttributeName to affect tracking, or consider using the allowsDefaultTighteningForTruncation property.
-@property(nonatomic) BOOL adjustsLetterSpacingToFitWidth API_DEPRECATED("", ios(6.0, 7.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos);
+@property(nonatomic) BOOL adjustsLetterSpacingToFitWidth API_DEPRECATED("", ios(6.0, 7.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(visionos, watchos);
 
 @end
 

@@ -49,5 +49,6 @@ exports:
                        OBPrivacySplashController, OBSplashBullet, OBSplashContent, 
                        OBTemplateContainerViewController, OBTemplatePartBulletExpandableListItem, 
                        OBTemplatePartBulletList, OBTemplatePartBulletListItem, OBTemplatePartDisclosingListView, 
-                       OBTemplatePartLinkButton, OBTemplateUIUtilities, OBTemplateView ]
+                       OBTemplatePartLinkButton, OBTemplateUIUtilities, OBTemplateView, 
+                       OBUtilities ]
 ...

@@ -2,12 +2,12 @@
 //  HKObjectType.h
 //  HealthKit
 //
-//  Copyright (c) 2013-2022 Apple Inc. All rights reserved.
+//  Copyright (c) 2013-2024 Apple Inc. All rights reserved.
 //
 
 #import <HealthKit/HKDefines.h>
-#import <HealthKit/HKTypeIdentifiers.h>
 #import <HealthKit/HKQuantityAggregationStyle.h>
+#import <HealthKit/HKTypeIdentifiers.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -20,9 +20,11 @@ NS_ASSUME_NONNULL_BEGIN
 @class HKElectrocardiogramType;
 @class HKQuantityType;
 @class HKSeriesType;
+@class HKStateOfMindType;
 @class HKUnit;
 @class HKPrescriptionType;
 @class HKWorkoutType;
+@class HKScoredAssessmentType;
 
 /*!
  @class         HKObjectType
@@ -53,6 +55,7 @@ NS_SWIFT_SENDABLE
 + (nullable HKCharacteristicType *)characteristicTypeForIdentifier:(HKCharacteristicTypeIdentifier)identifier;
 + (nullable HKCorrelationType *)correlationTypeForIdentifier:(HKCorrelationTypeIdentifier)identifier;
 + (nullable HKDocumentType *)documentTypeForIdentifier:(HKDocumentTypeIdentifier)identifier API_AVAILABLE(ios(10.0), watchos(3.0), macCatalyst(13.0), macos(13.0));
++ (nullable HKScoredAssessmentType *)scoredAssessmentTypeForIdentifier:(HKScoredAssessmentTypeIdentifier)identifier API_AVAILABLE(ios(18.0), watchos(11.0), macCatalyst(18.0), macos(15.0), visionos(2.0));
 #endif // defined(__swift__) && __swift__
 
 + (nullable HKSeriesType *)seriesTypeForIdentifier:(NSString *)identifier API_AVAILABLE(ios(11.0), watchos(4.0), macCatalyst(13.0), macos(13.0));
@@ -61,6 +64,7 @@ NS_SWIFT_SENDABLE
 + (HKAudiogramSampleType *)audiogramSampleType API_AVAILABLE(ios(13.0), watchos(6.0), macCatalyst(13.0), macos(13.0));
 + (HKElectrocardiogramType *)electrocardiogramType API_AVAILABLE(ios(14.0), watchos(7.0), macCatalyst(14.0), macos(13.0));
 + (HKPrescriptionType *)visionPrescriptionType API_AVAILABLE(ios(16.0), watchos(9.0), macCatalyst(16.0), macos(13.0));
++ (HKStateOfMindType *)stateOfMindType API_AVAILABLE(ios(18.0), watchos(11.0), macCatalyst(18.0), macos(15.0), visionos(2.0));
 
 /*!
  @method        requiresPerObjectAuthorization
@@ -226,6 +230,22 @@ NS_SWIFT_SENDABLE
 HK_EXTERN API_AVAILABLE(ios(16.0), watchos(9.0), macCatalyst(16.0), macos(13.0))
 NS_SWIFT_SENDABLE
 @interface HKPrescriptionType : HKSampleType
+@end
+
+/*!
+ @class    HKScoredAssessmentType
+ @abstract Represents a scored assessment sample
+ */
+HK_EXTERN API_AVAILABLE(ios(18.0), watchos(11.0), macCatalyst(18.0), macos(15.0), visionos(2.0))
+@interface HKScoredAssessmentType : HKSampleType
+@end
+
+/*!
+ @class    HKStateOfMindType
+ @abstract Represents an experienced feeling and its surrounding context.
+ */
+HK_EXTERN API_AVAILABLE(ios(18.0), watchos(11.0), macCatalyst(18.0), macos(15.0), visionos(2.0))
+@interface HKStateOfMindType : HKSampleType
 @end
 
 NS_ASSUME_NONNULL_END

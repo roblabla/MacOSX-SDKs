@@ -14,40 +14,40 @@ NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 typedef NS_ENUM(NSInteger, UIPageViewControllerNavigationOrientation) {
     UIPageViewControllerNavigationOrientationHorizontal = 0,
     UIPageViewControllerNavigationOrientationVertical = 1
-};
+} API_UNAVAILABLE(watchos);
 
 typedef NS_ENUM(NSInteger, UIPageViewControllerSpineLocation) {
     UIPageViewControllerSpineLocationNone = 0, // Returned if 'spineLocation' is queried when 'transitionStyle' is not 'UIPageViewControllerTransitionStylePageCurl'.
     UIPageViewControllerSpineLocationMin = 1,  // Requires one view controller.
     UIPageViewControllerSpineLocationMid = 2,  // Requires two view controllers.
     UIPageViewControllerSpineLocationMax = 3   // Requires one view controller.
-};   // Only pertains to 'UIPageViewControllerTransitionStylePageCurl'.
+} API_UNAVAILABLE(watchos);   // Only pertains to 'UIPageViewControllerTransitionStylePageCurl'.
 
 typedef NS_ENUM(NSInteger, UIPageViewControllerNavigationDirection) {
     UIPageViewControllerNavigationDirectionForward,
     UIPageViewControllerNavigationDirectionReverse
-};  // For 'UIPageViewControllerNavigationOrientationHorizontal', 'forward' is right-to-left, like pages in a book. For 'UIPageViewControllerNavigationOrientationVertical', bottom-to-top, like pages in a wall calendar.
+} API_UNAVAILABLE(watchos);  // For 'UIPageViewControllerNavigationOrientationHorizontal', 'forward' is right-to-left, like pages in a book. For 'UIPageViewControllerNavigationOrientationVertical', bottom-to-top, like pages in a wall calendar.
 
 typedef NS_ENUM(NSInteger, UIPageViewControllerTransitionStyle) {
     UIPageViewControllerTransitionStylePageCurl = 0, // Navigate between views via a page curl transition.
     UIPageViewControllerTransitionStyleScroll = 1 // Navigate between views by scrolling.
-};
+} API_UNAVAILABLE(watchos);
 
-typedef NSString * UIPageViewControllerOptionsKey NS_TYPED_ENUM;
+typedef NSString * UIPageViewControllerOptionsKey NS_TYPED_ENUM API_UNAVAILABLE(watchos);
 
 // Key for specifying spine location in options dictionary argument to initWithTransitionStyle:navigationOrientation:options:.
 // Value should be a 'UIPageViewControllerSpineLocation' wrapped in an NSNumber.
 // Only valid for use with page view controllers with transition style 'UIPageViewControllerTransitionStylePageCurl'.
-UIKIT_EXTERN UIPageViewControllerOptionsKey const UIPageViewControllerOptionSpineLocationKey;
+UIKIT_EXTERN UIPageViewControllerOptionsKey const UIPageViewControllerOptionSpineLocationKey API_UNAVAILABLE(watchos);
 
 // Key for specifying spacing between pages in options dictionary argument to initWithTransitionStyle:navigationOrientation:options:.
 // Value should be a CGFloat wrapped in an NSNumber. Default is '0'.
 // Only valid for use with page view controllers with transition style 'UIPageViewControllerTransitionStyleScroll'.
-UIKIT_EXTERN UIPageViewControllerOptionsKey const UIPageViewControllerOptionInterPageSpacingKey API_AVAILABLE(ios(6.0));
+UIKIT_EXTERN UIPageViewControllerOptionsKey const UIPageViewControllerOptionInterPageSpacingKey API_AVAILABLE(ios(6.0)) API_UNAVAILABLE(watchos);
 
 @protocol UIPageViewControllerDelegate, UIPageViewControllerDataSource;
 
-UIKIT_EXTERN API_AVAILABLE(ios(5.0)) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(5.0)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @interface UIPageViewController : UIViewController {
 }
 
@@ -76,7 +76,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(5.0)) NS_SWIFT_UI_ACTOR
 
 @end
 
-NS_SWIFT_UI_ACTOR
+API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @protocol UIPageViewControllerDelegate <NSObject>
 
 @optional
@@ -96,7 +96,7 @@ NS_SWIFT_UI_ACTOR
 
 @end
 
-NS_SWIFT_UI_ACTOR
+API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @protocol UIPageViewControllerDataSource <NSObject>
 
 @required

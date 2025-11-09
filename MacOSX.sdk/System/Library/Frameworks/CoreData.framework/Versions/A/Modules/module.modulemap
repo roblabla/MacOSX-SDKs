@@ -1,4 +1,4 @@
-framework module CoreData [extern_c] [system] {
+framework module CoreData [system] {
     umbrella header "CoreData.h"
     exclude header "CoreData_CloudKit.h"
     exclude header "NSPersistentCloudKitContainer_Sharing.h"

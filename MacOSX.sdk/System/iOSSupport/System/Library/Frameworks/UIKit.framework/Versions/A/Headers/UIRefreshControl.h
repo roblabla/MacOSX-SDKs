@@ -12,7 +12,7 @@
 
 NS_HEADER_AUDIT_BEGIN(nullability, sendability)
     
-UIKIT_EXTERN API_AVAILABLE(ios(6.0)) API_UNAVAILABLE(tvos) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(6.0)) API_UNAVAILABLE(tvos, watchos) NS_SWIFT_UI_ACTOR
 @interface UIRefreshControl : UIControl
 
 /* The designated initializer

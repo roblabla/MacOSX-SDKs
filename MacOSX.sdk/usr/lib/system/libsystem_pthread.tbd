@@ -1,28 +1,16 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ i386-macos, x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/usr/lib/system/libsystem_pthread.dylib'
-current-version: 519.120.4
+current-version: 535
 parent-umbrella:
-  - targets:         [ i386-macos, x86_64-macos, x86_64-maccatalyst, arm64-macos, 
-                       arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     umbrella:        System
 exports:
-  - targets:         [ i386-macos ]
-    symbols:         [ '_pthread_cancel$UNIX2003', '_pthread_cond_init$UNIX2003', 
-                       '_pthread_cond_timedwait$NOCANCEL$UNIX2003', '_pthread_cond_timedwait$UNIX2003', 
-                       '_pthread_cond_wait$NOCANCEL$UNIX2003', '_pthread_cond_wait$UNIX2003', 
-                       '_pthread_join$NOCANCEL$UNIX2003', '_pthread_join$UNIX2003', 
-                       '_pthread_mutexattr_destroy$UNIX2003', '_pthread_rwlock_destroy$UNIX2003', 
-                       '_pthread_rwlock_init$UNIX2003', '_pthread_rwlock_rdlock$UNIX2003', 
-                       '_pthread_rwlock_tryrdlock$UNIX2003', '_pthread_rwlock_trywrlock$UNIX2003', 
-                       '_pthread_rwlock_unlock$UNIX2003', '_pthread_rwlock_wrlock$UNIX2003', 
-                       '_pthread_setcancelstate$UNIX2003', '_pthread_setcanceltype$UNIX2003', 
-                       '_pthread_sigmask$UNIX2003', '_pthread_testcancel$UNIX2003', 
-                       '_sigwait$NOCANCEL$UNIX2003', '_sigwait$UNIX2003' ]
-  - targets:         [ i386-macos, x86_64-macos, x86_64-maccatalyst, arm64-macos, 
-                       arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ ____chkstk_darwin, ___is_threaded, ___pthread_init, ___pthread_late_init, 
                        ___pthread_workqueue_setkill, ___unix_conforming, __pthread_atfork_child, 
                        __pthread_atfork_child_handlers, __pthread_atfork_parent, 
@@ -59,10 +47,11 @@ exports:
                        _pthread_attr_setstackaddr, _pthread_attr_setstacksize, _pthread_attr_setworkinterval_np, 
                        _pthread_cancel, _pthread_chdir_np, _pthread_cond_broadcast, 
                        _pthread_cond_destroy, _pthread_cond_init, _pthread_cond_signal, 
-                       _pthread_cond_signal_thread_np, _pthread_cond_timedwait, _pthread_cond_timedwait_relative_np, 
-                       _pthread_cond_wait, _pthread_condattr_destroy, _pthread_condattr_getpshared, 
-                       _pthread_condattr_init, _pthread_condattr_setpshared, _pthread_cpu_number_np, 
-                       _pthread_create, _pthread_create_from_mach_thread, _pthread_create_suspended_np, 
+                       _pthread_cond_signal_thread_np, _pthread_cond_timedwait, '_pthread_cond_timedwait$NOCANCEL', 
+                       _pthread_cond_timedwait_relative_np, _pthread_cond_wait, '_pthread_cond_wait$NOCANCEL', 
+                       _pthread_condattr_destroy, _pthread_condattr_getpshared, _pthread_condattr_init, 
+                       _pthread_condattr_setpshared, _pthread_cpu_number_np, _pthread_create, 
+                       _pthread_create_from_mach_thread, _pthread_create_suspended_np, 
                        _pthread_create_with_workgroup_np, _pthread_current_stack_contains_np, 
                        _pthread_dependency_fulfill_np, _pthread_dependency_init_np, 
                        _pthread_dependency_wait_np, _pthread_detach, _pthread_equal, 
@@ -73,15 +62,16 @@ exports:
                        _pthread_introspection_getspecific_np, _pthread_introspection_hook_install, 
                        _pthread_introspection_setspecific_np, _pthread_is_threaded_np, 
                        _pthread_jit_write_freeze_callbacks_np, _pthread_jit_write_protect_supported_np, 
-                       _pthread_jit_write_with_callback_np, _pthread_join, _pthread_key_create, 
-                       _pthread_key_delete, _pthread_key_init_np, _pthread_kill, 
-                       _pthread_layout_offsets, _pthread_mach_thread_np, _pthread_main_np, 
-                       _pthread_main_thread_np, _pthread_mutex_destroy, _pthread_mutex_getprioceiling, 
-                       _pthread_mutex_init, _pthread_mutex_lock, _pthread_mutex_setprioceiling, 
-                       _pthread_mutex_trylock, _pthread_mutex_unlock, _pthread_mutexattr_destroy, 
-                       _pthread_mutexattr_getpolicy_np, _pthread_mutexattr_getprioceiling, 
-                       _pthread_mutexattr_getprotocol, _pthread_mutexattr_getpshared, 
-                       _pthread_mutexattr_gettype, _pthread_mutexattr_init, _pthread_mutexattr_setpolicy_np, 
+                       _pthread_jit_write_with_callback_np, _pthread_join, '_pthread_join$NOCANCEL', 
+                       _pthread_key_create, _pthread_key_delete, _pthread_key_init_np, 
+                       _pthread_kill, _pthread_layout_offsets, _pthread_mach_thread_np, 
+                       _pthread_main_np, _pthread_main_thread_np, _pthread_mutex_destroy, 
+                       _pthread_mutex_getprioceiling, _pthread_mutex_init, _pthread_mutex_lock, 
+                       _pthread_mutex_setprioceiling, _pthread_mutex_trylock, _pthread_mutex_unlock, 
+                       _pthread_mutexattr_destroy, _pthread_mutexattr_getpolicy_np, 
+                       _pthread_mutexattr_getprioceiling, _pthread_mutexattr_getprotocol, 
+                       _pthread_mutexattr_getpshared, _pthread_mutexattr_gettype, 
+                       _pthread_mutexattr_init, _pthread_mutexattr_setpolicy_np, 
                        _pthread_mutexattr_setprioceiling, _pthread_mutexattr_setprotocol, 
                        _pthread_mutexattr_setpshared, _pthread_mutexattr_settype, 
                        _pthread_once, _pthread_override_qos_class_end_np, _pthread_override_qos_class_start_np, 
@@ -100,12 +90,8 @@ exports:
                        _pthread_workqueue_addthreads_np, _pthread_workqueue_setdispatch_np, 
                        _pthread_workqueue_setdispatchoffset_np, _pthread_workqueue_setup, 
                        _pthread_yield_np, _qos_class_main, _qos_class_self, _sched_get_priority_max, 
-                       _sched_get_priority_min, _sched_yield, _sigwait, _start_wqthread, 
-                       _thread_chkstk_darwin, _thread_start ]
-  - targets:         [ i386-macos, x86_64-macos, arm64-macos, arm64e-macos ]
+                       _sched_get_priority_min, _sched_yield, _sigwait, '_sigwait$NOCANCEL', 
+                       _start_wqthread, _thread_chkstk_darwin, _thread_start ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ __pthread_mutex_enable_legacy_mode, _pthread_jit_write_protect_np ]
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
-    symbols:         [ '_pthread_cond_timedwait$NOCANCEL', '_pthread_cond_wait$NOCANCEL', 
-                       '_pthread_join$NOCANCEL', '_sigwait$NOCANCEL' ]
 ...

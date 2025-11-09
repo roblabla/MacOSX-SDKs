@@ -103,6 +103,11 @@ extern int PAGE_SHIFT_CONST;
 #define MACH_VM_MIN_ADDRESS_RAW 0x0ULL
 #define MACH_VM_MAX_ADDRESS_RAW 0x00007FFFFE000000ULL
 
+/*
+ * `MACH_VM_MAX_ADDRESS` is exported to user space, but we don't want this
+ * larger value for `MACH_VM_MAX_ADDRESS` to be exposed outside the kernel.
+ */
+
 #define MACH_VM_MIN_ADDRESS     ((mach_vm_offset_t) MACH_VM_MIN_ADDRESS_RAW)
 #define MACH_VM_MAX_ADDRESS     ((mach_vm_offset_t) MACH_VM_MAX_ADDRESS_RAW)
 
@@ -118,6 +123,8 @@ extern int PAGE_SHIFT_CONST;
 #define VM_MAP_MIN_ADDRESS      VM_MIN_ADDRESS
 #define VM_MAP_MAX_ADDRESS      VM_MAX_ADDRESS
 
+
+#include <vm/vm_memtag.h>
 
 #if defined (__arm__)
 #define VM_KERNEL_POINTER_SIGNIFICANT_BITS  31

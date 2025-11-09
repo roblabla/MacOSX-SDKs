@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/ModelIO.framework/Versions/A/ModelIO'
-current-version: 265.2.3
+current-version: 266.1.12
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -51,6 +51,6 @@ exports:
                        MDLTransformOrientOp, MDLTransformRotateOp, MDLTransformRotateXOp, 
                        MDLTransformRotateYOp, MDLTransformRotateZOp, MDLTransformScaleOp, 
                        MDLTransformStack, MDLTransformTranslateOp, MDLURLTexture, 
-                       MDLVertexAttribute, MDLVertexAttributeData, MDLVertexBufferLayout, 
+                       MDLUtility, MDLVertexAttribute, MDLVertexAttributeData, MDLVertexBufferLayout, 
                        MDLVertexDescriptor, MDLVolumeGrid, MDLVoxelArray ]
 ...

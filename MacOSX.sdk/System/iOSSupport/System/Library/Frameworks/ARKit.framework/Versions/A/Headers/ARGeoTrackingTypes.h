@@ -100,6 +100,7 @@ typedef NS_ENUM(NSInteger, ARGeoTrackingStateReason) {
  Collection of fields to give information on geo tracking status.
  */
 API_AVAILABLE(ios(14.0))
+NS_SWIFT_SENDABLE
 @interface ARGeoTrackingStatus : NSObject <NSCopying, NSSecureCoding>
 
 /**

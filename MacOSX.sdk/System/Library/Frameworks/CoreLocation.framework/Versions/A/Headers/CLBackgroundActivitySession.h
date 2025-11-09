@@ -10,6 +10,68 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+API_AVAILABLE(ios(18.0), watchos(11.0)) API_UNAVAILABLE(macos) NS_REFINED_FOR_SWIFT
+@interface CLBackgroundActivitySessionDiagnostic : NSObject
+/*
+ *  authorizationDenied
+ *
+ *  Discussion:
+ *      True if the session will be suspended while the app has been denied
+ *      location authorization.
+ *
+ */
+@property (nonatomic, readonly) BOOL authorizationDenied;
+
+/*
+ *  authorizationDeniedGlobally
+ *
+ *  Discussion:
+ *      True if the session will be suspended while the user has disabled Location
+ *      Services system-wide.
+ *
+ */
+@property (nonatomic, readonly) BOOL authorizationDeniedGlobally;
+
+/*
+ *  authorizationRestricted
+ *
+ *  Discussion:
+ *     True if session will be suspended while the app lacks authorization,
+ *     and authorization changes are prevented by parental restrictions,
+ *     MDM configuration, or other factors.
+ */
+ @property (nonatomic, readonly) BOOL authorizationRestricted;
+
+/*
+*  insufficientlyInUse
+*
+*  Discussion:
+*      True if the session will be suspended while the app is not sufficiently
+*      in-use.
+*
+*/
+@property (nonatomic, readonly) BOOL insufficientlyInUse;
+
+/*
+ *  serviceSessionRequired
+ *
+ *  Discussion:
+ *      True if LocationServices are disabled because the app has adopted CLRequireExplicitServiceSession
+ *      info.plist key but no CLServiceSession requiring authorization is outstanding yet.
+ *
+ */
+@property (nonatomic, readonly) BOOL serviceSessionRequired API_AVAILABLE(macos(15.0), ios(18.0)) API_UNAVAILABLE(watchos, tvos);
+
+/*
+ *  authorizationRequestInProgress
+ *
+ *  Discussion:
+ *      True if the system is requesting authorization from the user on behalf of the app, but no response has been received yet.
+ *
+ */
+@property (nonatomic, readonly) BOOL authorizationRequestInProgress API_AVAILABLE(macos(15.0), ios(18.0)) API_UNAVAILABLE(watchos, tvos);
+@end
+
 CL_EXTERN
 API_AVAILABLE(ios(17.0), watchos(10.0)) API_UNAVAILABLE(macos) NS_REFINED_FOR_SWIFT
 @interface CLBackgroundActivitySession : NSObject
@@ -63,12 +125,25 @@ API_AVAILABLE(ios(17.0), watchos(10.0)) API_UNAVAILABLE(macos) NS_REFINED_FOR_SW
  *
  *      Calling invalidate on the session will terminate it and render it
  *      immediately inactive.
+ *
+ *      This session does not deliver diagnostic properties. Use
+ *      -backgroundActivitySessionWithQueue:handler: to get diagnostic updates.
+ *
  */
-+ (instancetype)backgroundActivitySession API_AVAILABLE(ios(17.0), watchos(10.0)
-#if defined(TARGET_OS_VISION) && TARGET_OS_VISION
-, visionos(1.0)
-#endif
-) API_UNAVAILABLE(macos);
++ (instancetype)backgroundActivitySession API_AVAILABLE(ios(17.0), watchos(10.0)) API_UNAVAILABLE(macos);
+
+/* backgroundActivitySessionWithQueue:handler:
+ *  Discussion:
+ *      Starts a background activity session while delivering diagnostic
+ *      updates to the handler.
+ *
+ *      queue: Specifies the queue to which the handler is submitted with each
+ *          available diagnostic.
+ *      handler: Specifies the block that will be invoked with each update.
+ *
+ *      See -backgroundActivitySession for more details
+ */
++ (instancetype)backgroundActivitySessionWithQueue:(dispatch_queue_t)queue handler:(void(^)(CLBackgroundActivitySessionDiagnostic * diagnostic))handler API_AVAILABLE(ios(18.0), watchos(11.0)) API_UNAVAILABLE(macos);
 
 @end
 NS_ASSUME_NONNULL_END

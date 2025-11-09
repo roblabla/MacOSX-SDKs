@@ -13,23 +13,21 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-/*!
- *  @typedef    MPSGraphNonMaximumSuppressionCoordinateMode
- *  @discussion The coordinate mode to use. At initialization defaults to MPSGraphNonMaximumSuppressionCoordinateModeCornersHeightFirst.
- *              This mode specifies the representation used for the 4 box coordinate values.
- *
- *              Center coordinate modes define a centered box and the box dimensions
- *              @code
- *              CornersHeightFirst:
- *                  [h_start, w_start, h_end, w_end]
- *              CornersWidthFirst:
- *                  [w_start, h_start, w_end, h_end]
- *              CentersHeightFirst:
- *                  [h_center, w_center, box_height, box_width]
- *              CentersWidthFirst:
- *                  [w_center, w_center, box_height, box_width]
- *              @endcode
- */
+/// The non-maximum suppression coordinate mode.
+///
+/// The coordinate mode to use. At initialization defaults to MPSGraphNonMaximumSuppressionCoordinateModeCornersHeightFirst.
+/// This mode specifies the representation used for the 4 box coordinate values.
+/// Center coordinate modes define a centered box and the box dimensions.
+/// ```md
+/// CornersHeightFirst:
+///     [h_start, w_start, h_end, w_end]
+/// CornersWidthFirst:
+///     [w_start, h_start, w_end, h_end]
+/// CentersHeightFirst:
+///     [h_center, w_center, box_height, box_width]
+/// CentersWidthFirst:
+///     [w_center, w_center, box_height, box_width]
+/// ```
 typedef NS_ENUM(NSUInteger, MPSGraphNonMaximumSuppressionCoordinateMode)
 {
     MPSGraphNonMaximumSuppressionCoordinateModeCornersHeightFirst    MPS_ENUM_AVAILABLE_STARTING(macos(14.0), ios(17.0), tvos(17.0)) MPS_SWIFT_NAME(explicit)   =  0L,
@@ -41,7 +39,7 @@ typedef NS_ENUM(NSUInteger, MPSGraphNonMaximumSuppressionCoordinateMode)
 MPS_CLASS_AVAILABLE_STARTING(macos(14.0), ios(17.0), tvos(17.0))
 @interface MPSGraph(MPSGraphNonMaximumSuppressionOps)
 
-/// Create a nonMaximumumSuppression op and return the result tensor
+/// Creates a nonMaximumumSuppression operation and returns the result tensor.
 /// - Parameters:
 ///   - boxesTensor: A tensor containing the coordinates of the input boxes. Must be a rank 3 tensor of shape [N,B,4] of type ``MPSDataTypeFloat32``
 ///   - scoresTensor: A tensor containing the scores of the input boxes. Must be a rank 3 tensor of shape [N,B,K] of type ``MPSDataTypeFloat32``
@@ -58,7 +56,7 @@ MPS_CLASS_AVAILABLE_STARTING(macos(14.0), ios(17.0), tvos(17.0))
                                           coordinateMode:(MPSGraphNonMaximumSuppressionCoordinateMode) coordinateMode
                                                     name:(NSString * _Nullable) name;
 
-/// Create a nonMaximumumSuppression op and return the result tensor
+/// Creates a nonMaximumumSuppression operation and returns the result tensor.
 /// - Parameters:
 ///   - boxesTensor: A tensor containing the coordinates of the input boxes. Must be a rank 3 tensor of shape [N,B,4] of type ``MPSDataTypeFloat32``
 ///   - scoresTensor: A tensor containing the scores of the input boxes. Must be a rank 3 tensor of shape [N,B,1] of type ``MPSDataTypeFloat32``

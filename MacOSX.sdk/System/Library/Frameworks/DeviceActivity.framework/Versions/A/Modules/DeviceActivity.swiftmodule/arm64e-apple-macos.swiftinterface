@@ -1,6 +1,6 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.10 (swiftlang-5.10.0.12.5 clang-1500.3.9.1.1)
-// swift-module-flags: -target arm64e-apple-macos14.5 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-bare-slash-regex -user-module-version 346 -module-name DeviceActivity
+// swift-compiler-version: Apple Swift version 6.0 effective-5.10 (swiftlang-6.0.0.7.24 clang-1600.0.25.1)
+// swift-module-flags: -target arm64e-apple-macos15.0 -target-variant arm64e-apple-ios18.0-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-bare-slash-regex -user-module-version 376.1 -module-name DeviceActivity
 import Foundation
 import ManagedSettings
 import Swift
@@ -17,6 +17,10 @@ public struct DeviceActivityName : Swift.RawRepresentable, Swift.Equatable, Swif
   public var rawValue: Swift.String
   public init(_ rawValue: Swift.String)
   public init(rawValue: Swift.String)
+  @available(iOS 15.0, *)
+  @available(tvOS, unavailable)
+  @available(watchOS, unavailable)
+  @available(macOS, unavailable)
   public typealias RawValue = Swift.String
 }
 @available(iOS 15.0, *)
@@ -51,6 +55,10 @@ public struct DeviceActivityEvent : Swift.Equatable {
     public var rawValue: Swift.String
     public init(_ rawValue: Swift.String)
     public init(rawValue: Swift.String)
+    @available(iOS 15.0, *)
+    @available(tvOS, unavailable)
+    @available(watchOS, unavailable)
+    @available(macOS, unavailable)
     public typealias RawValue = Swift.String
   }
   public init(applications: Swift.Set<ManagedSettings.ApplicationToken> = [], categories: Swift.Set<ManagedSettings.ActivityCategoryToken> = [], webDomains: Swift.Set<ManagedSettings.WebDomainToken> = [], threshold: Foundation.DateComponents)
@@ -222,6 +230,10 @@ extension DeviceActivity.DeviceActivityData {
       case iPad
       case mac
       public init?(rawValue: Swift.Int)
+      @available(iOS 16.0, *)
+      @available(tvOS, unavailable)
+      @available(watchOS, unavailable)
+      @available(macOS, unavailable)
       public typealias RawValue = Swift.Int
       public var rawValue: Swift.Int {
         get
@@ -229,8 +241,8 @@ extension DeviceActivity.DeviceActivityData {
     }
     public var name: Swift.String?
     public var model: DeviceActivity.DeviceActivityData.Device.Model
-    public static func == (a: DeviceActivity.DeviceActivityData.Device, b: DeviceActivity.DeviceActivityData.Device) -> Swift.Bool
     public func hash(into hasher: inout Swift.Hasher)
+    public static func == (a: DeviceActivity.DeviceActivityData.Device, b: DeviceActivity.DeviceActivityData.Device) -> Swift.Bool
     public var hashValue: Swift.Int {
       get
     }
@@ -246,6 +258,10 @@ extension DeviceActivity.DeviceActivityData {
       case individual
       case child
       public init?(rawValue: Swift.Int)
+      @available(iOS 16.0, *)
+      @available(tvOS, unavailable)
+      @available(watchOS, unavailable)
+      @available(macOS, unavailable)
       public typealias RawValue = Swift.Int
       public var rawValue: Swift.Int {
         get
@@ -254,8 +270,8 @@ extension DeviceActivity.DeviceActivityData {
     public var appleID: Swift.String?
     public var nameComponents: Foundation.PersonNameComponents?
     public var role: DeviceActivity.DeviceActivityData.User.FamilyRole
-    public static func == (a: DeviceActivity.DeviceActivityData.User, b: DeviceActivity.DeviceActivityData.User) -> Swift.Bool
     public func hash(into hasher: inout Swift.Hasher)
+    public static func == (a: DeviceActivity.DeviceActivityData.User, b: DeviceActivity.DeviceActivityData.User) -> Swift.Bool
     public var hashValue: Swift.Int {
       get
     }
@@ -288,8 +304,8 @@ public struct DeviceActivityFilter : Swift.Equatable {
             ))
     case daily(during: Foundation.DateInterval)
     case weekly(during: Foundation.DateInterval)
-    public static func == (a: DeviceActivity.DeviceActivityFilter.SegmentInterval, b: DeviceActivity.DeviceActivityFilter.SegmentInterval) -> Swift.Bool
     public func hash(into hasher: inout Swift.Hasher)
+    public static func == (a: DeviceActivity.DeviceActivityFilter.SegmentInterval, b: DeviceActivity.DeviceActivityFilter.SegmentInterval) -> Swift.Bool
     public var hashValue: Swift.Int {
       get
     }

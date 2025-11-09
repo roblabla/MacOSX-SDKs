@@ -20,7 +20,7 @@
 
 #define QUICKLOOK_VERSION 6250
 
-#define QL_EXPORT extern
+#define QL_EXPORT extern __attribute__((visibility("default")))
 #define QL_PRIVATE_EXPORT __attribute__((visibility("hidden")))
 #define QL_INLINE static __inline__ __attribute__((always_inline))
 #define QL_NOINLINE __attribute__((noinline))

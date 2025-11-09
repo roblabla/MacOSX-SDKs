@@ -24,7 +24,7 @@ typedef NS_ENUM(NSInteger, UIViewAnimationCurve) {
     UIViewAnimationCurveEaseIn,            // slow at beginning
     UIViewAnimationCurveEaseOut,           // slow at end
     UIViewAnimationCurveLinear,
-};
+} API_UNAVAILABLE(watchos);
 
 typedef NS_ENUM(NSInteger, UIViewContentMode) {
     UIViewContentModeScaleToFill,
@@ -40,7 +40,7 @@ typedef NS_ENUM(NSInteger, UIViewContentMode) {
     UIViewContentModeTopRight,
     UIViewContentModeBottomLeft,
     UIViewContentModeBottomRight,
-};
+} API_UNAVAILABLE(watchos);
 
 typedef NS_ENUM(NSInteger, UIViewAnimationTransition) {
     UIViewAnimationTransitionNone,
@@ -48,7 +48,7 @@ typedef NS_ENUM(NSInteger, UIViewAnimationTransition) {
     UIViewAnimationTransitionFlipFromRight,
     UIViewAnimationTransitionCurlUp,
     UIViewAnimationTransitionCurlDown,
-};
+} API_UNAVAILABLE(watchos);
 
 typedef NS_OPTIONS(NSUInteger, UIViewAutoresizing) {
     UIViewAutoresizingNone                 = 0,
@@ -58,7 +58,7 @@ typedef NS_OPTIONS(NSUInteger, UIViewAutoresizing) {
     UIViewAutoresizingFlexibleTopMargin    = 1 << 3,
     UIViewAutoresizingFlexibleHeight       = 1 << 4,
     UIViewAutoresizingFlexibleBottomMargin = 1 << 5
-};
+} API_UNAVAILABLE(watchos);
 
 typedef NS_OPTIONS(NSUInteger, UIViewAnimationOptions) {
     UIViewAnimationOptionLayoutSubviews            = 1 <<  0,
@@ -90,7 +90,7 @@ typedef NS_OPTIONS(NSUInteger, UIViewAnimationOptions) {
     UIViewAnimationOptionPreferredFramesPerSecond60          = 3 << 24,
     UIViewAnimationOptionPreferredFramesPerSecond30          = 7 << 24,
     
-} API_AVAILABLE(ios(4.0));
+} API_AVAILABLE(ios(4.0)) API_UNAVAILABLE(watchos);
 
 typedef NS_OPTIONS(NSUInteger, UIViewKeyframeAnimationOptions) {
     UIViewKeyframeAnimationOptionLayoutSubviews            = UIViewAnimationOptionLayoutSubviews,
@@ -106,18 +106,18 @@ typedef NS_OPTIONS(NSUInteger, UIViewKeyframeAnimationOptions) {
     UIViewKeyframeAnimationOptionCalculationModePaced      = 2 << 10,
     UIViewKeyframeAnimationOptionCalculationModeCubic      = 3 << 10,
     UIViewKeyframeAnimationOptionCalculationModeCubicPaced = 4 << 10
-} API_AVAILABLE(ios(7.0));
+} API_AVAILABLE(ios(7.0)) API_UNAVAILABLE(watchos);
     
 typedef NS_ENUM(NSUInteger, UISystemAnimation) {
     UISystemAnimationDelete,    // removes the views from the hierarchy when complete
-} API_AVAILABLE(ios(7.0));
+} API_AVAILABLE(ios(7.0)) API_UNAVAILABLE(watchos);
 
 typedef NS_ENUM(NSInteger, UIViewTintAdjustmentMode) {
     UIViewTintAdjustmentModeAutomatic,
     
     UIViewTintAdjustmentModeNormal,
     UIViewTintAdjustmentModeDimmed,
-} API_AVAILABLE(ios(7.0));
+} API_AVAILABLE(ios(7.0)) API_UNAVAILABLE(watchos);
 
 typedef NS_ENUM(NSInteger, UISemanticContentAttribute) {
     UISemanticContentAttributeUnspecified = 0,
@@ -125,9 +125,9 @@ typedef NS_ENUM(NSInteger, UISemanticContentAttribute) {
     UISemanticContentAttributeSpatial, // for controls that result in some sort of directional change in the UI, e.g. a segmented control for text alignment or a D-pad in a game
     UISemanticContentAttributeForceLeftToRight,
     UISemanticContentAttributeForceRightToLeft
-} API_AVAILABLE(ios(9.0));
+} API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(watchos);
 
-NS_SWIFT_UI_ACTOR
+API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @protocol UICoordinateSpace <NSObject>
 
 - (CGPoint)convertPoint:(CGPoint)point toCoordinateSpace:(id <UICoordinateSpace>)coordinateSpace API_AVAILABLE(ios(8.0));
@@ -141,7 +141,7 @@ NS_SWIFT_UI_ACTOR
 
 @class UIBezierPath, UIEvent, UIWindow, UIViewController, UIColor, UIGestureRecognizer, UIMotionEffect, CALayer, UILayoutGuide, UIKeyboardLayoutGuide;
 
-UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(2.0)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @interface UIView : UIResponder <NSCoding, UIAppearance, UIAppearanceContainer, UIDynamicItem, UITraitEnvironment, UICoordinateSpace, UIFocusItem, UIFocusItemContainer, CALayerDelegate>
 
 @property(class, nonatomic, readonly) Class layerClass;                        // default is [CALayer class]. Used when creating the underlying layer for the view.
@@ -172,10 +172,10 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
 + (UIUserInterfaceLayoutDirection)userInterfaceLayoutDirectionForSemanticContentAttribute:(UISemanticContentAttribute)attribute API_AVAILABLE(ios(9.0));
 
 // This method returns the layout direction implied by the provided semantic content attribute relative to the provided layout direction. For example, when provided a layout direction of RightToLeft and a semantic content attribute of Playback, this method returns LeftToRight. Layout and drawing code can use this method to determine how to arrange elements, but might find it easier to query the container view’s effectiveUserInterfaceLayoutDirection property instead.
-+ (UIUserInterfaceLayoutDirection)userInterfaceLayoutDirectionForSemanticContentAttribute:(UISemanticContentAttribute)semanticContentAttribute relativeToLayoutDirection:(UIUserInterfaceLayoutDirection)layoutDirection API_AVAILABLE(ios(10.0));
++ (UIUserInterfaceLayoutDirection)userInterfaceLayoutDirectionForSemanticContentAttribute:(UISemanticContentAttribute)semanticContentAttribute relativeToLayoutDirection:(UIUserInterfaceLayoutDirection)layoutDirection API_AVAILABLE(ios(10.0)) API_UNAVAILABLE(watchos);
 
 // Returns the user interface layout direction appropriate for arranging the immediate content of this view. Always consult the effectiveUserInterfaceLayoutDirection of the view whose immediate content is being arranged or drawn. Do not assume that the value propagates through the view’s subtree.
-@property (readonly, nonatomic) UIUserInterfaceLayoutDirection effectiveUserInterfaceLayoutDirection API_AVAILABLE(ios(10.0));
+@property (readonly, nonatomic) UIUserInterfaceLayoutDirection effectiveUserInterfaceLayoutDirection API_AVAILABLE(ios(10.0)) API_UNAVAILABLE(watchos);
 
 @end
 
@@ -188,14 +188,14 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
 @property(nonatomic) CGRect            bounds;      // default bounds is zero origin, frame size. animatable
 @property(nonatomic) CGPoint           center;      // center is center of frame, relative to anchorPoint. animatable
 @property(nonatomic) CGAffineTransform transform;   // default is CGAffineTransformIdentity. animatable. Please use this property instead of the affineTransform property on the layer
-@property(nonatomic) CATransform3D     transform3D API_AVAILABLE(ios(13.0),tvos(13.0)); // default is CATransform3DIdentity. animatable. Please use this property instead of the transform property on the layer
+@property(nonatomic) CATransform3D     transform3D API_AVAILABLE(ios(13.0), tvos(13.0)) API_UNAVAILABLE(watchos); // default is CATransform3DIdentity. animatable. Please use this property instead of the transform property on the layer
 @property(nonatomic) CGFloat           contentScaleFactor API_AVAILABLE(ios(4.0));
 
 /* Defines the anchor point of the layer's bounds rect, as a point in
  * normalized layer coordinates - '(0, 0)' is the bottom left corner of
  * the bounds rect, '(1, 1)' is the top right corner. Defaults to
  * '(0.5, 0.5)', i.e. the center of the bounds rect. */
-@property(nonatomic) CGPoint anchorPoint API_AVAILABLE(ios(16.0));
+@property(nonatomic) CGPoint anchorPoint API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(watchos);
 
 @property(nonatomic,getter=isMultipleTouchEnabled) BOOL multipleTouchEnabled API_UNAVAILABLE(tvos);   // default is NO
 @property(nonatomic,getter=isExclusiveTouch) BOOL       exclusiveTouch API_UNAVAILABLE(tvos);         // default is NO
@@ -265,15 +265,15 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
 /* directionalLayoutMargins.leading is used on the left when the user interface direction is LTR and on the right for RTL.
  Vice versa for directionalLayoutMargins.trailing.
  */
-@property (nonatomic) NSDirectionalEdgeInsets directionalLayoutMargins API_AVAILABLE(ios(11.0),tvos(11.0));
+@property (nonatomic) NSDirectionalEdgeInsets directionalLayoutMargins API_AVAILABLE(ios(11.0), tvos(11.0)) API_UNAVAILABLE(watchos);
 
 @property (nonatomic) BOOL preservesSuperviewLayoutMargins API_AVAILABLE(ios(8.0)); // default is NO - set to enable pass-through or cascading behavior of margins from this view’s parent to its children
-@property (nonatomic) BOOL insetsLayoutMarginsFromSafeArea API_AVAILABLE(ios(11.0),tvos(11.0));  // Default: YES
+@property (nonatomic) BOOL insetsLayoutMarginsFromSafeArea API_AVAILABLE(ios(11.0), tvos(11.0)) API_UNAVAILABLE(watchos);  // Default: YES
 
 - (void)layoutMarginsDidChange API_AVAILABLE(ios(8.0));
 
-@property (nonatomic,readonly) UIEdgeInsets safeAreaInsets API_AVAILABLE(ios(11.0),tvos(11.0));
-- (void)safeAreaInsetsDidChange API_AVAILABLE(ios(11.0),tvos(11.0));
+@property (nonatomic,readonly) UIEdgeInsets safeAreaInsets API_AVAILABLE(ios(11.0), tvos(11.0)) API_UNAVAILABLE(watchos);
+- (void)safeAreaInsetsDidChange API_AVAILABLE(ios(11.0), tvos(11.0)) API_UNAVAILABLE(watchos);
 
 /* The edges of this guide are constrained to equal the edges of the view inset by the layoutMargins
  */
@@ -285,10 +285,10 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
 /* The top of the safeAreaLayoutGuide indicates the unobscured top edge of the view (e.g, not behind
  the status bar or navigation bar, if present). Similarly for the other edges.
  */
-@property(nonatomic,readonly,strong) UILayoutGuide *safeAreaLayoutGuide API_AVAILABLE(ios(11.0),tvos(11.0));
+@property(nonatomic,readonly,strong) UILayoutGuide *safeAreaLayoutGuide API_AVAILABLE(ios(11.0), tvos(11.0)) API_UNAVAILABLE(watchos);
 
 /// Follows the keyboard when on screen and docked. See UIKeyboardLayoutGuide.h for additional options.
-@property(nonatomic,readonly,strong) UIKeyboardLayoutGuide *keyboardLayoutGuide API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(watchos, tvos);
+@property(nonatomic,readonly,strong) UIKeyboardLayoutGuide *keyboardLayoutGuide API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos);
 
 @end
 
@@ -306,7 +306,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
 @property(nonatomic)                 BOOL              clearsContextBeforeDrawing; // default is YES. ignored for opaque views. for non-opaque views causes the active CGContext in drawRect: to be pre-filled with transparent pixels
 @property(nonatomic,getter=isHidden) BOOL              hidden;                     // default is NO. doesn't check superviews
 @property(nonatomic)                 UIViewContentMode contentMode;                // default is UIViewContentModeScaleToFill
-@property(nonatomic)                 CGRect            contentStretch API_DEPRECATED("", ios(3.0, 6.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos); // animatable. default is unit rectangle {{0,0} {1,1}}. Now deprecated: please use -[UIImage resizableImageWithCapInsets:] to achieve the same effect.
+@property(nonatomic)                 CGRect            contentStretch API_DEPRECATED("", ios(3.0, 6.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(visionos, watchos); // animatable. default is unit rectangle {{0,0} {1,1}}. Now deprecated: please use -[UIImage resizableImageWithCapInsets:] to achieve the same effect.
 
 @property(nullable, nonatomic,strong)          UIView           *maskView API_AVAILABLE(ios(8.0));
 
@@ -352,7 +352,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
 + (void)animateWithDuration:(NSTimeInterval)duration animations:(void (^)(void))animations API_AVAILABLE(ios(4.0)); // delay = 0.0, options = 0, completion = NULL
 
 /* Performs `animations` using a timing curve described by the motion of a spring. The `duration` specified here is a perceptual duration that defines the pace of the spring. This is approximately equal to the settling duration, but for very bouncy springs, will be the duration of the period of oscillation for the spring. When `bounce` is 0, there are no bounces, positive values indicate increasing amounts of bounciness up to a maximum of 1.0 (corresponding to undamped oscillation), and negative values indicate overdamped springs with a minimum value of -1.0. You can use the initial spring velocity to specify how fast the object at the end of the simulated spring was moving before it was attached. It's a unit coordinate system, where 1 is defined as traveling the total animation distance in a second. So if you're changing an object's position by 200pt in this animation, and you want the animation to behave as if the object was moving at 100pt/s before the animation started, you'd pass 0.5. You'll typically want to pass 0 for the velocity. */
-+ (void)animateWithSpringDuration:(NSTimeInterval)duration bounce:(CGFloat)bounce initialSpringVelocity:(CGFloat)velocity delay:(NSTimeInterval)delay options:(UIViewAnimationOptions)options animations:(void (NS_NOESCAPE ^)(void))animations completion:(void (^ __nullable)(BOOL finished))completion NS_SWIFT_DISABLE_ASYNC API_AVAILABLE(ios(17.0));
++ (void)animateWithSpringDuration:(NSTimeInterval)duration bounce:(CGFloat)bounce initialSpringVelocity:(CGFloat)velocity delay:(NSTimeInterval)delay options:(UIViewAnimationOptions)options animations:(void (NS_NOESCAPE ^)(void))animations completion:(void (^ __nullable)(BOOL finished))completion NS_SWIFT_DISABLE_ASYNC API_AVAILABLE(ios(17.0)) API_UNAVAILABLE(watchos);
 
 /* Performs `animations` using a timing curve described by the motion of a spring. When `dampingRatio` is 1, the animation will smoothly decelerate to its final model values without oscillating. Damping ratios less than 1 will oscillate more and more before coming to a complete stop. You can use the initial spring velocity to specify how fast the object at the end of the simulated spring was moving before it was attached. It's a unit coordinate system, where 1 is defined as traveling the total animation distance in a second. So if you're changing an object's position by 200pt in this animation, and you want the animation to behave as if the object was moving at 100pt/s before the animation started, you'd pass 0.5. You'll typically want to pass 0 for the velocity. */
 + (void)animateWithDuration:(NSTimeInterval)duration delay:(NSTimeInterval)delay usingSpringWithDamping:(CGFloat)dampingRatio initialSpringVelocity:(CGFloat)velocity options:(UIViewAnimationOptions)options animations:(void (^)(void))animations completion:(void (^ __nullable)(BOOL finished))completion NS_SWIFT_DISABLE_ASYNC API_AVAILABLE(ios(7.0));
@@ -366,7 +366,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
 + (void)performSystemAnimation:(UISystemAnimation)animation onViews:(NSArray<__kindof UIView *> *)views options:(UIViewAnimationOptions)options animations:(void (^ __nullable)(void))parallelAnimations completion:(void (^ __nullable)(BOOL finished))completion NS_SWIFT_DISABLE_ASYNC API_AVAILABLE(ios(7.0));
 
 /* Call this method from within an animation block to repeat animations, otherwise has no effect. The total duration of a repeating animation can be computed via (outerAnimationDuration * repeatCount * autoreverses ? 2 : 1). */
-+ (void)modifyAnimationsWithRepeatCount:(CGFloat)count autoreverses:(BOOL)autoreverses animations:(void(NS_NOESCAPE ^)(void))animations API_AVAILABLE(ios(13.0),tvos(13.0));
++ (void)modifyAnimationsWithRepeatCount:(CGFloat)count autoreverses:(BOOL)autoreverses animations:(void(NS_NOESCAPE ^)(void))animations API_AVAILABLE(ios(13.0), tvos(13.0)) API_UNAVAILABLE(watchos);
 
 @end
 
@@ -416,7 +416,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
 typedef NS_ENUM(NSInteger, UILayoutConstraintAxis) {
     UILayoutConstraintAxisHorizontal = 0,
     UILayoutConstraintAxisVertical = 1
-};
+} API_UNAVAILABLE(watchos);
 
 // Installing Constraints
 
@@ -489,7 +489,7 @@ typedef NS_ENUM(NSInteger, UILayoutConstraintAxis) {
  */
 @property(nonatomic, readonly) UIEdgeInsets alignmentRectInsets API_AVAILABLE(ios(6.0));
 
-- (UIView *)viewForBaselineLayout API_DEPRECATED("Override -viewForFirstBaselineLayout or -viewForLastBaselineLayout as appropriate, instead", ios(6.0, 9.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos);
+- (UIView *)viewForBaselineLayout API_DEPRECATED("Override -viewForFirstBaselineLayout or -viewForLastBaselineLayout as appropriate, instead", ios(6.0, 9.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(visionos, watchos);
 
 /* -viewForFirstBaselineLayout is called by the constraints system when interpreting
  the firstBaseline attribute for a view.
@@ -526,7 +526,7 @@ typedef NS_ENUM(NSInteger, UILayoutConstraintAxis) {
  
  Note that not all views have an intrinsicContentSize.  UIView's default implementation is to return (UIViewNoIntrinsicMetric, UIViewNoIntrinsicMetric).  The _intrinsic_ content size is concerned only with data that is in the view itself, not in other views. Remember that you can also set constant width or height constraints on any view, and you don't need to override intrinsicContentSize if these dimensions won't be changing with changing view content.
  */
-UIKIT_EXTERN const CGFloat UIViewNoIntrinsicMetric API_AVAILABLE(ios(6.0)); // -1
+UIKIT_EXTERN const CGFloat UIViewNoIntrinsicMetric API_AVAILABLE(ios(6.0)) API_UNAVAILABLE(watchos); // -1
 @property(nonatomic, readonly) CGSize intrinsicContentSize API_AVAILABLE(ios(6.0));
 - (void)invalidateIntrinsicContentSize API_AVAILABLE(ios(6.0)); // call this when something changes that affects the intrinsicContentSize.  Otherwise UIKit won't notice that it changed.
 
@@ -539,8 +539,8 @@ UIKIT_EXTERN const CGFloat UIViewNoIntrinsicMetric API_AVAILABLE(ios(6.0)); // -
 
 // Size To Fit
 
-UIKIT_EXTERN const CGSize UILayoutFittingCompressedSize API_AVAILABLE(ios(6.0));
-UIKIT_EXTERN const CGSize UILayoutFittingExpandedSize API_AVAILABLE(ios(6.0));
+UIKIT_EXTERN const CGSize UILayoutFittingCompressedSize API_AVAILABLE(ios(6.0)) API_UNAVAILABLE(watchos);
+UIKIT_EXTERN const CGSize UILayoutFittingExpandedSize API_AVAILABLE(ios(6.0)) API_UNAVAILABLE(watchos);
 
 @interface UIView (UIConstraintBasedLayoutFittingSize)
 /* The size fitting most closely to targetSize in which the receiver's subtree can be laid out while optimally satisfying the constraints. If you want the smallest possible size, pass UILayoutFittingCompressedSize; for the largest possible size, pass UILayoutFittingExpandedSize.
@@ -612,13 +612,13 @@ UIKIT_EXTERN const CGSize UILayoutFittingExpandedSize API_AVAILABLE(ios(6.0));
 /* This returns a list of all the constraints that are affecting the current location of the receiver.  The constraints do not necessarily involve the receiver, they may affect the frame indirectly.
  Pass UILayoutConstraintAxisHorizontal for the constraints affecting [self center].x and CGRectGetWidth([self bounds]), and UILayoutConstraintAxisVertical for the constraints affecting[self center].y and CGRectGetHeight([self bounds]).
  */
-- (NSArray<__kindof NSLayoutConstraint *> *)constraintsAffectingLayoutForAxis:(UILayoutConstraintAxis)axis API_AVAILABLE(ios(10.0));
+- (NSArray<__kindof NSLayoutConstraint *> *)constraintsAffectingLayoutForAxis:(UILayoutConstraintAxis)axis API_AVAILABLE(ios(10.0)) API_UNAVAILABLE(watchos);
 
 /* If there aren't enough constraints in the system to uniquely determine layout, we say the layout is ambiguous.  For example, if the only constraint in the system was x = y + 100, then there are lots of different possible values for x and y.  This situation is not automatically detected by UIKit, due to performance considerations and details of the algorithm used for layout.
  The symptom of ambiguity is that views sometimes jump from place to place, or possibly are just in the wrong place.
  -hasAmbiguousLayout runs a check for whether there is another center and bounds the receiver could have that could also satisfy the constraints.
  */
-@property(nonatomic, readonly) BOOL hasAmbiguousLayout API_AVAILABLE(ios(10.0));
+@property(nonatomic, readonly) BOOL hasAmbiguousLayout API_AVAILABLE(ios(10.0)) API_UNAVAILABLE(watchos);
 @end
 
 @interface UIView (UIStateRestoration)
@@ -652,19 +652,19 @@ UIKIT_EXTERN const CGSize UILayoutFittingExpandedSize API_AVAILABLE(ios(6.0));
 
 /* Deprecated in iOS 13.0. Please use the block-based animation API instead. */
 
-+ (void)beginAnimations:(nullable NSString *)animationID context:(nullable void *)context                       API_DEPRECATED("Use the block-based animation API instead", ios(2.0, 13.0)) API_UNAVAILABLE(visionos);
-+ (void)commitAnimations                                                                                        API_DEPRECATED("Use the block-based animation API instead", ios(2.0, 13.0)) API_UNAVAILABLE(visionos);
-+ (void)setAnimationDelegate:(nullable id)delegate                                                              API_DEPRECATED("Use the block-based animation API instead", ios(2.0, 13.0)) API_UNAVAILABLE(visionos);
-+ (void)setAnimationWillStartSelector:(nullable SEL)selector                                                    API_DEPRECATED("Use the block-based animation API instead", ios(2.0, 13.0)) API_UNAVAILABLE(visionos);
-+ (void)setAnimationDidStopSelector:(nullable SEL)selector                                                      API_DEPRECATED("Use the block-based animation API instead", ios(2.0, 13.0)) API_UNAVAILABLE(visionos);
-+ (void)setAnimationDuration:(NSTimeInterval)duration                                                           API_DEPRECATED("Use the block-based animation API instead", ios(2.0, 13.0)) API_UNAVAILABLE(visionos);
-+ (void)setAnimationDelay:(NSTimeInterval)delay                                                                 API_DEPRECATED("Use the block-based animation API instead", ios(2.0, 13.0)) API_UNAVAILABLE(visionos);
-+ (void)setAnimationStartDate:(NSDate *)startDate                                                               API_DEPRECATED("Use the block-based animation API instead", ios(2.0, 13.0)) API_UNAVAILABLE(visionos);
-+ (void)setAnimationCurve:(UIViewAnimationCurve)curve                                                           API_DEPRECATED("Use the block-based animation API instead", ios(2.0, 13.0)) API_UNAVAILABLE(visionos);
-+ (void)setAnimationRepeatCount:(float)repeatCount                                                              API_DEPRECATED("Use the block-based animation API instead", ios(2.0, 13.0)) API_UNAVAILABLE(visionos);
-+ (void)setAnimationRepeatAutoreverses:(BOOL)repeatAutoreverses                                                 API_DEPRECATED("Use the block-based animation API instead", ios(2.0, 13.0)) API_UNAVAILABLE(visionos);
-+ (void)setAnimationBeginsFromCurrentState:(BOOL)fromCurrentState                                               API_DEPRECATED("Use the block-based animation API instead", ios(2.0, 13.0)) API_UNAVAILABLE(visionos);
-+ (void)setAnimationTransition:(UIViewAnimationTransition)transition forView:(UIView *)view cache:(BOOL)cache   API_DEPRECATED("Use the block-based animation API instead", ios(2.0, 13.0)) API_UNAVAILABLE(visionos);
++ (void)beginAnimations:(nullable NSString *)animationID context:(nullable void *)context                       API_DEPRECATED("Use the block-based animation API instead", ios(2.0, 13.0)) API_UNAVAILABLE(visionos, watchos);
++ (void)commitAnimations                                                                                        API_DEPRECATED("Use the block-based animation API instead", ios(2.0, 13.0)) API_UNAVAILABLE(visionos, watchos);
++ (void)setAnimationDelegate:(nullable id)delegate                                                              API_DEPRECATED("Use the block-based animation API instead", ios(2.0, 13.0)) API_UNAVAILABLE(visionos, watchos);
++ (void)setAnimationWillStartSelector:(nullable SEL)selector                                                    API_DEPRECATED("Use the block-based animation API instead", ios(2.0, 13.0)) API_UNAVAILABLE(visionos, watchos);
++ (void)setAnimationDidStopSelector:(nullable SEL)selector                                                      API_DEPRECATED("Use the block-based animation API instead", ios(2.0, 13.0)) API_UNAVAILABLE(visionos, watchos);
++ (void)setAnimationDuration:(NSTimeInterval)duration                                                           API_DEPRECATED("Use the block-based animation API instead", ios(2.0, 13.0)) API_UNAVAILABLE(visionos, watchos);
++ (void)setAnimationDelay:(NSTimeInterval)delay                                                                 API_DEPRECATED("Use the block-based animation API instead", ios(2.0, 13.0)) API_UNAVAILABLE(visionos, watchos);
++ (void)setAnimationStartDate:(NSDate *)startDate                                                               API_DEPRECATED("Use the block-based animation API instead", ios(2.0, 13.0)) API_UNAVAILABLE(visionos, watchos);
++ (void)setAnimationCurve:(UIViewAnimationCurve)curve                                                           API_DEPRECATED("Use the block-based animation API instead", ios(2.0, 13.0)) API_UNAVAILABLE(visionos, watchos);
++ (void)setAnimationRepeatCount:(float)repeatCount                                                              API_DEPRECATED("Use the block-based animation API instead", ios(2.0, 13.0)) API_UNAVAILABLE(visionos, watchos);
++ (void)setAnimationRepeatAutoreverses:(BOOL)repeatAutoreverses                                                 API_DEPRECATED("Use the block-based animation API instead", ios(2.0, 13.0)) API_UNAVAILABLE(visionos, watchos);
++ (void)setAnimationBeginsFromCurrentState:(BOOL)fromCurrentState                                               API_DEPRECATED("Use the block-based animation API instead", ios(2.0, 13.0)) API_UNAVAILABLE(visionos, watchos);
++ (void)setAnimationTransition:(UIViewAnimationTransition)transition forView:(UIView *)view cache:(BOOL)cache   API_DEPRECATED("Use the block-based animation API instead", ios(2.0, 13.0)) API_UNAVAILABLE(visionos, watchos);
 
 @end
 
@@ -706,24 +706,24 @@ UIKIT_EXTERN const CGSize UILayoutFittingExpandedSize API_AVAILABLE(ios(6.0));
 ///     view.minimumContentSizeCategory = UIContentSizeCategoryMedium;
 ///     view.maximumContentSizeCategory = UIContentSizeCategoryAccessibilityExtraLarge;
 
-@property (nonatomic, copy, nullable) UIContentSizeCategory minimumContentSizeCategory API_AVAILABLE(ios(15.0));
-@property (nonatomic, copy, nullable) UIContentSizeCategory maximumContentSizeCategory API_AVAILABLE(ios(15.0));
+@property (nonatomic, copy, nullable) UIContentSizeCategory minimumContentSizeCategory API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(watchos);
+@property (nonatomic, copy, nullable) UIContentSizeCategory maximumContentSizeCategory API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(watchos);
 
 /// Will return a string with a log of all the superviews of this view, alongside with what
 /// content size category each view has and if that view has limits applied.
 /// This is for debugging purposes only.
-@property (nonatomic, copy, readonly) NSString *appliedContentSizeCategoryLimitsDescription API_AVAILABLE(ios(15.0));
+@property (nonatomic, copy, readonly) NSString *appliedContentSizeCategoryLimitsDescription API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(watchos);
 
 @end
 
-API_AVAILABLE(ios(17.0), tvos(17.0), watchos(10.0))
+API_AVAILABLE(ios(17.0), tvos(17.0)) API_UNAVAILABLE(watchos)
 @interface UIView () <UITraitChangeObservable>
 
-@property (nonatomic, readonly) id<UITraitOverrides> traitOverrides;
+@property (nonatomic, readonly) id<UITraitOverrides> traitOverrides API_AVAILABLE(ios(17.0), tvos(17.0)) API_UNAVAILABLE(watchos);
 
 /// Forces an immediate trait update for this view (and its view controller, if applicable) and any subviews,
 /// including any view controllers or views in its subtree. Any trait change callbacks are sent synchronously.
-- (void)updateTraitsIfNeeded;
+- (void)updateTraitsIfNeeded API_AVAILABLE(ios(17.0), tvos(17.0)) API_UNAVAILABLE(watchos);
 
 @end
 

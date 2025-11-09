@@ -24,15 +24,15 @@ NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 typedef NS_ENUM(NSInteger, UITableViewStyle) {
     UITableViewStylePlain,          // regular table view
     UITableViewStyleGrouped,        // sections are grouped together
-    UITableViewStyleInsetGrouped  API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(tvos)  // grouped sections are inset with rounded corners
-};
+    UITableViewStyleInsetGrouped  API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos) API_UNAVAILABLE(tvos)  // grouped sections are inset with rounded corners
+} API_UNAVAILABLE(watchos);
 
 typedef NS_ENUM(NSInteger, UITableViewScrollPosition) {
     UITableViewScrollPositionNone,
     UITableViewScrollPositionTop,    
     UITableViewScrollPositionMiddle,   
     UITableViewScrollPositionBottom
-};                // scroll so row of interest is completely visible at top/center/bottom of view
+} API_UNAVAILABLE(watchos);                // scroll so row of interest is completely visible at top/center/bottom of view
 
 typedef NS_ENUM(NSInteger, UITableViewRowAnimation) {
     UITableViewRowAnimationFade,
@@ -43,15 +43,23 @@ typedef NS_ENUM(NSInteger, UITableViewRowAnimation) {
     UITableViewRowAnimationNone,            // available in iOS 3.0
     UITableViewRowAnimationMiddle,          // available in iOS 3.2.  attempts to keep cell centered in the space it will/did occupy
     UITableViewRowAnimationAutomatic = 100  // available in iOS 5.0.  chooses an appropriate animation style for you
-};
+} API_UNAVAILABLE(watchos);
+
+/// A setting for which items in the table view should tightly hug their content
+typedef NS_OPTIONS(NSInteger, UITableViewContentHuggingElements) {
+    /// A content hugging mode where none of the items in the table view tightly hug their content
+    UITableViewContentHuggingElementsNone = 0,
+    /// A content hugging mode where section headers in the table view tightly hug their content
+    UITableViewContentHuggingElementsSectionHeaders = 1 << 0
+} API_AVAILABLE(ios(18.0), tvos(18.0), visionos(2.0)) API_UNAVAILABLE(watchos);
 
 // Including this constant string in the array of strings returned by sectionIndexTitlesForTableView: will cause a magnifying glass icon to be displayed at that location in the index.
 // This should generally only be used as the first title in the index.
-UIKIT_EXTERN NSString *const UITableViewIndexSearch API_AVAILABLE(ios(3.0)) API_UNAVAILABLE(tvos);
+UIKIT_EXTERN NSString *const UITableViewIndexSearch API_AVAILABLE(ios(3.0)) API_UNAVAILABLE(tvos, watchos);
 
 // Returning this value from tableView:heightForHeaderInSection: or tableView:heightForFooterInSection: results in a height that fits the value returned from
 // tableView:titleForHeaderInSection: or tableView:titleForFooterInSection: if the title is not nil.
-UIKIT_EXTERN const CGFloat UITableViewAutomaticDimension API_AVAILABLE(ios(5.0));
+UIKIT_EXTERN const CGFloat UITableViewAutomaticDimension API_AVAILABLE(ios(5.0)) API_UNAVAILABLE(watchos);
 
 @class UITableView, UINib, UITableViewHeaderFooterView, UIVisualEffect;
 @protocol UITableViewDataSource, UITableViewDataSourcePrefetching;
@@ -63,9 +71,9 @@ typedef NS_ENUM(NSInteger, UITableViewRowActionStyle) {
     UITableViewRowActionStyleDefault = 0,
     UITableViewRowActionStyleDestructive = UITableViewRowActionStyleDefault,
     UITableViewRowActionStyleNormal
-} API_DEPRECATED("Use UIContextualAction and related APIs instead.", ios(8.0, 13.0), visionos(1.0, 1.0)) API_UNAVAILABLE(tvos);
+} API_DEPRECATED("Use UIContextualAction and related APIs instead.", ios(8.0, 13.0), visionos(1.0, 1.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos);
 
-UIKIT_EXTERN API_DEPRECATED("Use UIContextualAction and related APIs instead.", ios(8.0, 13.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_DEPRECATED("Use UIContextualAction and related APIs instead.", ios(8.0, 13.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(visionos, watchos) NS_SWIFT_UI_ACTOR
 @interface UITableViewRowAction : NSObject <NSCopying>
 
 + (instancetype)rowActionWithStyle:(UITableViewRowActionStyle)style title:(nullable NSString *)title handler:(void (^)(UITableViewRowAction *action, NSIndexPath *indexPath))handler;
@@ -77,7 +85,7 @@ UIKIT_EXTERN API_DEPRECATED("Use UIContextualAction and related APIs instead.", 
 
 @end
 
-UIKIT_EXTERN API_AVAILABLE(ios(9.0)) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @interface UITableViewFocusUpdateContext : UIFocusUpdateContext
 
 @property (nonatomic, strong, readonly, nullable) NSIndexPath *previouslyFocusedIndexPath;
@@ -88,7 +96,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(9.0)) NS_SWIFT_UI_ACTOR
 //_______________________________________________________________________________________________________________
 // this represents the display and behavior of the cells.
 
-NS_SWIFT_UI_ACTOR
+API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @protocol UITableViewDelegate<NSObject, UIScrollViewDelegate>
 
 @optional
@@ -121,7 +129,7 @@ NS_SWIFT_UI_ACTOR
 
 // Accessories (disclosures). 
 
-- (UITableViewCellAccessoryType)tableView:(UITableView *)tableView accessoryTypeForRowWithIndexPath:(NSIndexPath *)indexPath API_DEPRECATED("", ios(2.0, 3.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos);
+- (UITableViewCellAccessoryType)tableView:(UITableView *)tableView accessoryTypeForRowWithIndexPath:(NSIndexPath *)indexPath API_DEPRECATED("", ios(2.0, 3.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(visionos, watchos);
 - (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath;
 
 // Selection
@@ -151,7 +159,7 @@ NS_SWIFT_UI_ACTOR
  * @return `YES` if the primary action can be performed; otherwise `NO`. If not implemented defaults to `YES` when not editing
  * and `NO` when editing.
  */
-- (BOOL)tableView:(UITableView *)tableView canPerformPrimaryActionForRowAtIndexPath:(NSIndexPath *)indexPath API_AVAILABLE(ios(16.0), tvos(16.0), watchos(9.0));
+- (BOOL)tableView:(UITableView *)tableView canPerformPrimaryActionForRowAtIndexPath:(NSIndexPath *)indexPath API_AVAILABLE(ios(16.0), tvos(16.0)) API_UNAVAILABLE(watchos);
 
 /*!
  * @abstract Called when the primary action should be performed for the row at the given indexPath.
@@ -167,7 +175,7 @@ NS_SWIFT_UI_ACTOR
  * @param tableView This UITableView
  * @param indexPath NSIndexPath of the row to perform the action on
  */
-- (void)tableView:(UITableView *)tableView performPrimaryActionForRowAtIndexPath:(NSIndexPath *)indexPath API_AVAILABLE(ios(16.0), tvos(16.0), watchos(9.0));
+- (void)tableView:(UITableView *)tableView performPrimaryActionForRowAtIndexPath:(NSIndexPath *)indexPath API_AVAILABLE(ios(16.0), tvos(16.0)) API_UNAVAILABLE(watchos);
 
 // Editing
 
@@ -176,13 +184,13 @@ NS_SWIFT_UI_ACTOR
 - (nullable NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath API_AVAILABLE(ios(3.0)) API_UNAVAILABLE(tvos);
 
 // This method supersedes -tableView:titleForDeleteConfirmationButtonForRowAtIndexPath: if return value is non-nil
-- (nullable NSArray<UITableViewRowAction *> *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath API_DEPRECATED_WITH_REPLACEMENT("tableView:trailingSwipeActionsConfigurationForRowAtIndexPath:", ios(8.0, 13.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos);
+- (nullable NSArray<UITableViewRowAction *> *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath API_DEPRECATED_WITH_REPLACEMENT("tableView:trailingSwipeActionsConfigurationForRowAtIndexPath:", ios(8.0, 13.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(visionos, watchos);
 
 // Swipe actions
 // These methods supersede -editActionsForRowAtIndexPath: if implemented
 // return nil to get the default swipe actions
-- (nullable UISwipeActionsConfiguration *)tableView:(UITableView *)tableView leadingSwipeActionsConfigurationForRowAtIndexPath:(NSIndexPath *)indexPath API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(tvos);
-- (nullable UISwipeActionsConfiguration *)tableView:(UITableView *)tableView trailingSwipeActionsConfigurationForRowAtIndexPath:(NSIndexPath *)indexPath API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(tvos);
+- (nullable UISwipeActionsConfiguration *)tableView:(UITableView *)tableView leadingSwipeActionsConfigurationForRowAtIndexPath:(NSIndexPath *)indexPath API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos) API_UNAVAILABLE(tvos);
+- (nullable UISwipeActionsConfiguration *)tableView:(UITableView *)tableView trailingSwipeActionsConfigurationForRowAtIndexPath:(NSIndexPath *)indexPath API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos) API_UNAVAILABLE(tvos);
 
 // Controls whether the background is indented while editing.  If not implemented, the default is YES.  This is unrelated to the indentation level below.  This method only applies to grouped style table views.
 - (BOOL)tableView:(UITableView *)tableView shouldIndentWhileEditingRowAtIndexPath:(NSIndexPath *)indexPath;
@@ -202,9 +210,9 @@ NS_SWIFT_UI_ACTOR
 
 // Copy/Paste.  All three methods must be implemented by the delegate.
 
-- (BOOL)tableView:(UITableView *)tableView shouldShowMenuForRowAtIndexPath:(NSIndexPath *)indexPath API_DEPRECATED_WITH_REPLACEMENT("tableView:contextMenuConfigurationForRowAtIndexPath:point:", ios(5.0, 13.0)) API_UNAVAILABLE(visionos);
-- (BOOL)tableView:(UITableView *)tableView canPerformAction:(SEL)action forRowAtIndexPath:(NSIndexPath *)indexPath withSender:(nullable id)sender API_DEPRECATED_WITH_REPLACEMENT("tableView:contextMenuConfigurationForRowAtIndexPath:point:", ios(5.0, 13.0)) API_UNAVAILABLE(visionos);
-- (void)tableView:(UITableView *)tableView performAction:(SEL)action forRowAtIndexPath:(NSIndexPath *)indexPath withSender:(nullable id)sender API_DEPRECATED_WITH_REPLACEMENT("tableView:contextMenuConfigurationForRowAtIndexPath:", ios(5.0, 13.0)) API_UNAVAILABLE(visionos);
+- (BOOL)tableView:(UITableView *)tableView shouldShowMenuForRowAtIndexPath:(NSIndexPath *)indexPath API_DEPRECATED_WITH_REPLACEMENT("tableView:contextMenuConfigurationForRowAtIndexPath:point:", ios(5.0, 13.0)) API_UNAVAILABLE(visionos, watchos);
+- (BOOL)tableView:(UITableView *)tableView canPerformAction:(SEL)action forRowAtIndexPath:(NSIndexPath *)indexPath withSender:(nullable id)sender API_DEPRECATED_WITH_REPLACEMENT("tableView:contextMenuConfigurationForRowAtIndexPath:point:", ios(5.0, 13.0)) API_UNAVAILABLE(visionos, watchos);
+- (void)tableView:(UITableView *)tableView performAction:(SEL)action forRowAtIndexPath:(NSIndexPath *)indexPath withSender:(nullable id)sender API_DEPRECATED_WITH_REPLACEMENT("tableView:contextMenuConfigurationForRowAtIndexPath:", ios(5.0, 13.0)) API_UNAVAILABLE(visionos, watchos);
 
 // Focus
 
@@ -312,7 +320,7 @@ NS_SWIFT_UI_ACTOR
 
 @end
 
-UIKIT_EXTERN NSNotificationName const UITableViewSelectionDidChangeNotification;
+UIKIT_EXTERN NSNotificationName const UITableViewSelectionDidChangeNotification API_UNAVAILABLE(watchos) NS_SWIFT_NONISOLATED;
 
 typedef NS_ENUM(NSInteger, UITableViewSeparatorInsetReference) {
     // The value set to the separatorInset property is interpreted as an offset from the edges of the cell.
@@ -320,7 +328,7 @@ typedef NS_ENUM(NSInteger, UITableViewSeparatorInsetReference) {
     
     // The value set to the separatorInset property is interpreted as an offset from the automatic separator insets.
     UITableViewSeparatorInsetFromAutomaticInsets
-} API_AVAILABLE(ios(11.0), tvos(11.0));
+} API_AVAILABLE(ios(11.0), tvos(11.0)) API_UNAVAILABLE(watchos);
 
 typedef NS_ENUM(NSInteger, UITableViewSelfSizingInvalidation) {
     /// No updates will take place when -invalidateIntrinsicContentSize is called on a self-sizing cell or its contentView.
@@ -330,12 +338,12 @@ typedef NS_ENUM(NSInteger, UITableViewSelfSizingInvalidation) {
     /// Calling -invalidateIntrinsicContentSize on a self-sizing cell or its contentView will cause it to be resized if necessary, and
     /// any Auto Layout changes within the contentView of a self-sizing cell will automatically trigger -invalidateIntrinsicContentSize.
     UITableViewSelfSizingInvalidationEnabledIncludingConstraints,
-} API_AVAILABLE(ios(16.0), tvos(16.0), watchos(9.0));
+} API_AVAILABLE(ios(16.0), tvos(16.0)) API_UNAVAILABLE(watchos);
 
 
 //_______________________________________________________________________________________________________________
 
-UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(2.0)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @interface UITableView : UIScrollView <NSCoding, UIDataSourceTranslating>
 
 - (instancetype)initWithFrame:(CGRect)frame style:(UITableViewStyle)style NS_DESIGNATED_INITIALIZER; // must specify style at creation. -initWithFrame: calls this with UITableViewStylePlain
@@ -346,8 +354,8 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
 @property (nonatomic, weak, nullable) id <UITableViewDataSource> dataSource;
 @property (nonatomic, weak, nullable) id <UITableViewDelegate> delegate;
 
-@property (nonatomic, weak, nullable) id <UITableViewDataSourcePrefetching> prefetchDataSource API_AVAILABLE(ios(10.0));
-@property (nonatomic, getter=isPrefetchingEnabled) BOOL prefetchingEnabled API_AVAILABLE(ios(15.0), tvos(15.0), watchos(8.0));
+@property (nonatomic, weak, nullable) id <UITableViewDataSourcePrefetching> prefetchDataSource API_AVAILABLE(ios(10.0)) API_UNAVAILABLE(watchos);
+@property (nonatomic, getter=isPrefetchingEnabled) BOOL prefetchingEnabled API_AVAILABLE(ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos);
 
 @property (nonatomic, weak, nullable) id <UITableViewDragDelegate> dragDelegate API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(tvos, watchos);
 @property (nonatomic, weak, nullable) id <UITableViewDropDelegate> dropDelegate API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(tvos, watchos);
@@ -361,15 +369,15 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
 
 /// The height for filler rows added below the last row when there aren't enough rows to fill a plain style table view.
 /// Set 0 to disable filler rows entirely, use `UITableViewAutomaticDimension` for the default height.
-@property (nonatomic) CGFloat fillerRowHeight API_AVAILABLE(ios(15.0), tvos(15.0), watchos(8.0));
+@property (nonatomic) CGFloat fillerRowHeight API_AVAILABLE(ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos);
 
 /// Padding above each section header. The default value is `UITableViewAutomaticDimension`.
-@property (nonatomic) CGFloat sectionHeaderTopPadding API_AVAILABLE(ios(15.0), tvos(15.0), watchos(8.0));
+@property (nonatomic) CGFloat sectionHeaderTopPadding API_AVAILABLE(ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos);
 
 @property (nonatomic) UIEdgeInsets separatorInset API_AVAILABLE(ios(7.0)) UI_APPEARANCE_SELECTOR; // allows customization of the frame of cell separators; see also the separatorInsetReference property. Use UITableViewAutomaticDimension for the automatic inset for that edge.
-@property (nonatomic) UITableViewSeparatorInsetReference separatorInsetReference API_AVAILABLE(ios(11.0), tvos(11.0)); // Changes how custom separatorInset values are interpreted. The default value is UITableViewSeparatorInsetFromCellEdges
+@property (nonatomic) UITableViewSeparatorInsetReference separatorInsetReference API_AVAILABLE(ios(11.0), tvos(11.0)) API_UNAVAILABLE(watchos); // Changes how custom separatorInset values are interpreted. The default value is UITableViewSeparatorInsetFromCellEdges
 
-@property (nonatomic) UITableViewSelfSizingInvalidation selfSizingInvalidation API_AVAILABLE(ios(16.0), tvos(16.0), watchos(9.0));
+@property (nonatomic) UITableViewSelfSizingInvalidation selfSizingInvalidation API_AVAILABLE(ios(16.0), tvos(16.0)) API_UNAVAILABLE(watchos);
 
 @property (nonatomic, strong, nullable) UIView *backgroundView API_AVAILABLE(ios(3.2)); // the background view will be automatically resized to track the size of the table view.  this will be placed as a subview of the table view behind all cells and headers/footers.  default may be non-nil for some devices.
 
@@ -404,7 +412,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
 // Reloading and Updating
 
 // Allows multiple insert/delete/reload/move calls to be animated simultaneously. Nestable.
-- (void)performBatchUpdates:(void (NS_NOESCAPE ^ _Nullable)(void))updates completion:(void (^ _Nullable)(BOOL finished))completion NS_SWIFT_DISABLE_ASYNC API_AVAILABLE(ios(11.0), tvos(11.0));
+- (void)performBatchUpdates:(void (NS_NOESCAPE ^ _Nullable)(void))updates completion:(void (^ _Nullable)(BOOL finished))completion NS_SWIFT_DISABLE_ASYNC API_AVAILABLE(ios(11.0), tvos(11.0)) API_UNAVAILABLE(watchos);
 
 // Use -performBatchUpdates:completion: instead of these methods, which will be deprecated in a future release.
 - (void)beginUpdates;
@@ -421,10 +429,10 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
 - (void)reloadRowsAtIndexPaths:(NSArray<NSIndexPath *> *)indexPaths withRowAnimation:(UITableViewRowAnimation)animation API_AVAILABLE(ios(3.0));
 // Reconfigures any existing cells for the rows. Reconfiguring is more efficient than reloading a row, as it does not replace the
 // existing cell with a new cell. Prefer reconfiguring over reloading unless you actually need an entirely new cell for the row.
-- (void)reconfigureRowsAtIndexPaths:(NSArray<NSIndexPath *> *)indexPaths API_AVAILABLE(ios(15.0), tvos(15.0), watchos(8.0));
+- (void)reconfigureRowsAtIndexPaths:(NSArray<NSIndexPath *> *)indexPaths API_AVAILABLE(ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos);
 
 // Returns YES if the table view is in the middle of reordering, is displaying a drop target gap, or has drop placeholders. If possible, avoid calling -reloadData while there are uncommitted updates to avoid interfering with user-initiated interactions that have not yet completed.
-@property (nonatomic, readonly) BOOL hasUncommittedUpdates API_AVAILABLE(ios(11.0), tvos(11.0));
+@property (nonatomic, readonly) BOOL hasUncommittedUpdates API_AVAILABLE(ios(11.0), tvos(11.0)) API_UNAVAILABLE(watchos);
 
 // Reloads everything from scratch. Redisplays visible rows. Note that this will cause any existing drop placeholder rows to be removed.
 - (void)reloadData;
@@ -463,7 +471,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
 @property (nonatomic, copy, nullable) UIVisualEffect *separatorEffect API_AVAILABLE(ios(8.0)) UI_APPEARANCE_SELECTOR API_UNAVAILABLE(tvos); // effect to apply to table separators
 
 @property (nonatomic) BOOL cellLayoutMarginsFollowReadableWidth API_AVAILABLE(ios(9.0)); // if cell layout margins are derived from the width of the readableContentGuide. default is NO.
-@property (nonatomic) BOOL insetsContentViewsToSafeArea API_AVAILABLE(ios(11.0), tvos(11.0)); // default value is YES
+@property (nonatomic) BOOL insetsContentViewsToSafeArea API_AVAILABLE(ios(11.0), tvos(11.0)) API_UNAVAILABLE(watchos); // default value is YES
 
 @property (nonatomic, strong, nullable) UIView *tableHeaderView;                           // accessory view for above row content. default is nil. not to be confused with section header
 @property (nonatomic, strong, nullable) UIView *tableFooterView;                           // accessory view below content. default is nil. not to be confused with section footer
@@ -492,12 +500,12 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
 /// Determines if the table view allows its cells to become focused.
 /// When tableView:canFocusRowAtIndexPath: is implemented, its return value takes precedence over this method.
 /// Defaults to a system derived value based on platform and other properties of the table view.
-@property (nonatomic) BOOL allowsFocus API_AVAILABLE(ios(15.0), tvos(15.0));
+@property (nonatomic) BOOL allowsFocus API_AVAILABLE(ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos);
 
 /// Determines if the table view allows its cells to become focused while editing.
 /// When tableView:canFocusRowAtIndexPath: is implemented, its return value takes precedence over this method.
 /// Defaults to a system derived value based on platform and other properties of the table view.
-@property (nonatomic) BOOL allowsFocusDuringEditing API_AVAILABLE(ios(15.0), tvos(15.0));
+@property (nonatomic) BOOL allowsFocusDuringEditing API_AVAILABLE(ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos);
 
 // Drag & Drop
 
@@ -511,6 +519,12 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
 // YES if table view is currently tracking a drop session.
 @property (nonatomic, readonly) BOOL hasActiveDrop API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(tvos, watchos);
 
+/// Determines the type of items that will tightly hug their content.
+///
+/// The default value for this property is `UITableViewContentHuggingElementsSectionHeaders` on visionOS for plain style table views and `UITableViewContentHuggingElementsNone` on all other platforms.
+/// When the value of this property is `UITableViewContentHuggingElementsSectionHeaders`, any header view will not stretch the width of the table view if their content's intrinsic content size is less than the table view's width.
+@property (nonatomic) UITableViewContentHuggingElements contentHuggingElements API_AVAILABLE(ios(18.0), tvos(18.0), visionos(2.0)) API_UNAVAILABLE(watchos);
+
 @end
 
 #if TARGET_OS_IOS
@@ -521,7 +535,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
 //_______________________________________________________________________________________________________________
 // this protocol represents the data model object. as such, it supplies no information about appearance (including the cells)
 
-NS_SWIFT_UI_ACTOR
+API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @protocol UITableViewDataSource<NSObject>
 
 @required
@@ -571,7 +585,7 @@ NS_SWIFT_UI_ACTOR
 // _______________________________________________________________________________________________________________
 // this protocol can provide information about cells before they are displayed on screen.
 
-NS_SWIFT_UI_ACTOR
+API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @protocol UITableViewDataSourcePrefetching <NSObject>
 
 @required

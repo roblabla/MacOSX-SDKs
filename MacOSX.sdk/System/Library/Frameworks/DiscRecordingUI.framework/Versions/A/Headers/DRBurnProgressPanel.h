@@ -39,9 +39,10 @@
 #import <AvailabilityMacros.h>
 #import <Availability.h>
 
+#ifndef DISC_RECORDING_UI_DR_BURN_PROGRESS_PANEL
+#define DISC_RECORDING_UI_DR_BURN_PROGRESS_PANEL
 
 API_UNAVAILABLE_BEGIN(ios)
-
 
 /*!
 	@const		DRBurnProgressPanelWillBeginNotification
@@ -239,3 +240,5 @@ AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 
 API_UNAVAILABLE_END
+
+#endif // DISC_RECORDING_UI_DR_BURN_PROGRESS_PANEL

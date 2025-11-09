@@ -10,6 +10,9 @@
 #ifndef __CORETELEPHONY_DEFINES_H__
 #define __CORETELEPHONY_DEFINES_H__
 
+// For exporting C++-only types.
+#define CORETELEPHONY_CPP_EXTERN  __attribute__((visibility ("default")))
+
 #ifdef __cplusplus
 #define CORETELEPHONY_EXTERN   extern "C" __attribute__((visibility ("default")))
 #else

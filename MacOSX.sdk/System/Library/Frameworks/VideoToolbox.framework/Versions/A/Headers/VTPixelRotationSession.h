@@ -36,7 +36,7 @@ extern "C"
 		and release your object reference.
  */
 
-typedef struct CM_BRIDGED_TYPE(id) OpaqueVTPixelRotationSession*  VTPixelRotationSessionRef CM_SWIFT_NONSENDABLE;
+typedef struct CM_BRIDGED_TYPE(id) OpaqueVTPixelRotationSession*  VTPixelRotationSessionRef CM_SWIFT_NONSENDABLE API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 /*!
 	@function	VTPixelRotationSessionCreate
@@ -49,7 +49,7 @@ typedef struct CM_BRIDGED_TYPE(id) OpaqueVTPixelRotationSession*  VTPixelRotatio
 VT_EXPORT OSStatus
 VTPixelRotationSessionCreate(
 	CM_NULLABLE CFAllocatorRef														 allocator,
-	CM_RETURNS_RETAINED_PARAMETER CM_NULLABLE VTPixelRotationSessionRef * CM_NONNULL pixelRotationSessionOut) API_AVAILABLE(macosx(13.0), ios(16.0), tvos(16.0), watchos(9.0));
+	CM_RETURNS_RETAINED_PARAMETER CM_NULLABLE VTPixelRotationSessionRef * CM_NONNULL pixelRotationSessionOut) API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 /*!
 	@function	VTPixelRotationSessionInvalidate
@@ -62,14 +62,14 @@ VTPixelRotationSessionCreate(
     	Calling VTPixelRotationSessionInvalidate ensures a deterministic, orderly teardown.
 */
 VT_EXPORT void
-VTPixelRotationSessionInvalidate( CM_NONNULL VTPixelRotationSessionRef session ) API_AVAILABLE(macosx(13.0), ios(16.0), tvos(16.0), watchos(9.0));
+VTPixelRotationSessionInvalidate( CM_NONNULL VTPixelRotationSessionRef session ) API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 /*!
 	@function VTPixelRotationSessionGetTypeID
 	@abstract Returns the CFTypeID for pixel rotation sessions.
 */
 VT_EXPORT CFTypeID
-VTPixelRotationSessionGetTypeID(void) API_AVAILABLE(macosx(13.0), ios(16.0), tvos(16.0), watchos(9.0));
+VTPixelRotationSessionGetTypeID(void) API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 /*!
 	@function	VTPixelRotationSessionRotateImage
@@ -96,7 +96,7 @@ VT_EXPORT OSStatus
 VTPixelRotationSessionRotateImage(
 	CM_NONNULL VTPixelRotationSessionRef       session,
 	CM_NONNULL CVPixelBufferRef                sourceBuffer,
-	CM_NONNULL CVPixelBufferRef                destinationBuffer) API_AVAILABLE(macosx(13.0), ios(16.0), tvos(16.0), watchos(9.0));
+	CM_NONNULL CVPixelBufferRef                destinationBuffer) API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 // See VTSession.h for property access APIs on VTPixelRotationSession.
 

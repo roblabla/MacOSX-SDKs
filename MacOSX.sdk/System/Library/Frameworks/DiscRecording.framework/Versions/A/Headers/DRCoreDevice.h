@@ -30,19 +30,19 @@
 #endif
 
 #ifndef __CORESERVICES__
-#include <CoreServices/CoreServices.h>
+#import <CoreServices/CoreServices.h>
 #endif
 
 #ifndef _H_DRCoreObject
-#include <DiscRecording/DRCoreObject.h>
+#import <DiscRecording/DRCoreObject.h>
 #endif
 
 #ifndef __AVAILABILITYMACROS__
-#include <AvailabilityMacros.h>
+#import <AvailabilityMacros.h>
 #endif
 
 #ifndef _MATH_H_
-#include <math.h>
+#import <math.h>
 #endif
 
 #ifdef __cplusplus
@@ -50,7 +50,7 @@ extern "C" {
 #endif
 
 #ifndef _IOKIT_IOKITLIB_H
-#include <IOKit/IOKitLib.h>
+#import <IOKit/IOKitLib.h>
 #endif
 
 /*!

@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/iCalendar.framework/Versions/A/iCalendar'
-current-version: 1158.1.1
+current-version: 1166
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -16,13 +16,14 @@ exports:
                        _iCalendarAppendStringToStringWithOptions, _iCalendarRepresentationForCALDay, 
                        _kCALSTR_XAPPLE_inviter_name_param, _kCALSTR_XAPPLE_self_invited_param, 
                        _kCALSTR_XAPPLE_telephone_param, _kICSSTR_XAPPLE_acknowledged_param, 
-                       _kICSSTR_XAPPLE_activity_prop, _kICSSTR_XAPPLE_app_link_data_prop, 
-                       _kICSSTR_XAPPLE_auto_refresh_prop, _kICSSTR_XAPPLE_autoarchived_param, 
-                       _kICSSTR_XAPPLE_bookmark, _kICSSTR_XAPPLE_calendar_color_prop, 
-                       _kICSSTR_XAPPLE_contact_identifiers, _kICSSTR_XAPPLE_creator_identity_prop, 
-                       _kICSSTR_XAPPLE_creator_team_identity_prop, _kICSSTR_XAPPLE_default_alarm, 
-                       _kICSSTR_XAPPLE_dontschedule_prop, _kICSSTR_XAPPLE_dropbox_prop, 
-                       _kICSSTR_XAPPLE_end_location, _kICSSTR_XAPPLE_etag, _kICSSTR_XAPPLE_ews_attachmentid_param, 
+                       _kICSSTR_XAPPLE_activity_prop, _kICSSTR_XAPPLE_alternative_due_date_for_calendar, 
+                       _kICSSTR_XAPPLE_app_link_data_prop, _kICSSTR_XAPPLE_auto_refresh_prop, 
+                       _kICSSTR_XAPPLE_autoarchived_param, _kICSSTR_XAPPLE_bookmark, 
+                       _kICSSTR_XAPPLE_calendar_color_prop, _kICSSTR_XAPPLE_contact_identifiers, 
+                       _kICSSTR_XAPPLE_creator_identity_prop, _kICSSTR_XAPPLE_creator_team_identity_prop, 
+                       _kICSSTR_XAPPLE_default_alarm, _kICSSTR_XAPPLE_dontschedule_prop, 
+                       _kICSSTR_XAPPLE_dropbox_prop, _kICSSTR_XAPPLE_end_location, 
+                       _kICSSTR_XAPPLE_etag, _kICSSTR_XAPPLE_ews_attachmentid_param, 
                        _kICSSTR_XAPPLE_ews_busystatus_prop, _kICSSTR_XAPPLE_ews_changekey_prop, 
                        _kICSSTR_XAPPLE_ews_itemid_prop, _kICSSTR_XAPPLE_ews_needsserverconfirmation_prop, 
                        _kICSSTR_XAPPLE_ews_permission_prop, _kICSSTR_XAPPLE_filename_param, 
@@ -109,10 +110,10 @@ exports:
                        ICSCalendarServerAccessValue, ICSCalendarUserParameter, ICSClassificationValue, 
                        ICSColor, ICSComponent, ICSCompressedInputStream, ICSConference, 
                        ICSDate, ICSDateTimeUTCValue, ICSDateTimeValue, ICSDateValue, 
-                       ICSDocument, ICSDuration, ICSEvent, ICSFreeBusy, ICSFreeBusyTime, 
-                       ICSFreeBusyTypeParameter, ICSInputData, ICSJournal, ICSLazyDigestUIDGenerator, 
-                       ICSLogger, ICSMethodValue, ICSMultiValueProperty, ICSParser, 
-                       ICSParticipationStatusParameter, ICSPeriod, ICSPredefinedValue, 
+                       ICSDigestPair, ICSDocument, ICSDuration, ICSEvent, ICSFreeBusy, 
+                       ICSFreeBusyTime, ICSFreeBusyTypeParameter, ICSInputData, ICSJournal, 
+                       ICSLazyDigestUIDGenerator, ICSLogger, ICSMethodValue, ICSMultiValueProperty, 
+                       ICSParser, ICSParticipationStatusParameter, ICSPeriod, ICSPredefinedValue, 
                        ICSProperty, ICSPushbackStream, ICSRecurrenceRule, ICSRelationshipTypeParameter, 
                        ICSRoleParameter, ICSScheduleAgentParameter, ICSScheduleForceSendParameter, 
                        ICSScheduleStatusParameter, ICSStatusValue, ICSStringWriter, 

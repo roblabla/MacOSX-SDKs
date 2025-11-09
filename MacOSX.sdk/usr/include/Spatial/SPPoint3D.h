@@ -4,32 +4,9 @@
 #include <Spatial/Structures.h>
 #include <Spatial/SPProjectiveTransform3D.h>
 #include <Spatial/SPAffineTransform3D.h>
+#include <Spatial/SPAngle.h>
 
 // MARK: - Public API
-
-/*!
- @abstract Creates a point with the specified coordinates.
- 
- @param x The x coordinate.
- @param y The y coordinate.
- @param z The z coordinate.
- @returns A new point.
-*/
-SPATIAL_INLINE
-SPATIAL_OVERLOADABLE
-SPPoint3D SPPoint3DMake(double x, double y, double z)
-__API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0), tvos(16.0));
-
-/*!
- @abstract Creates a point with coordinates specified as a 3-element SIMD vector.
- 
- @param xyz The source vector.
- @returns A new point.
-*/
-SPATIAL_INLINE
-SPATIAL_OVERLOADABLE
-SPPoint3D SPPoint3DMakeWithVector(simd_double3 xyz)
-__API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0), tvos(16.0));
 
 /*!
  @abstract Creates a point with coordinates specified as a Spatial vector.
@@ -257,26 +234,14 @@ simd_double3 SPPoint3DGetVector(SPPoint3D point) {
 
 SPATIAL_REFINED_FOR_SWIFT
 SPATIAL_OVERLOADABLE
-SPPoint3D SPPoint3DMake(double x, double y, double z) {
-    return (SPPoint3D){ .x = x, .y = y, .z = z };
-}
-
-SPATIAL_REFINED_FOR_SWIFT
-SPATIAL_OVERLOADABLE
-SPPoint3D SPPoint3DMakeWithVector(simd_double3 xyz) {
-    return (SPPoint3D){ .vector = xyz};
-}
-
-SPATIAL_REFINED_FOR_SWIFT
-SPATIAL_OVERLOADABLE
 SPPoint3D SPPoint3DMakeWithVector(SPVector3D xyz) {
-    return (SPPoint3D){ .vector = xyz.vector};
+    return SPPoint3DMake(xyz.vector.x, xyz.vector.y, xyz.vector.z);
 }
 
 SPATIAL_REFINED_FOR_SWIFT
 SPATIAL_OVERLOADABLE
 SPPoint3D SPPoint3DMakeWithSize(SPSize3D size) {
-    return (SPPoint3D){ .vector = size.vector};
+    return SPPoint3DMake(size.vector.x, size.vector.y, size.vector.z);
 }
 
 SPATIAL_SWIFT_NAME(Point3D.rotated(self:by:))
@@ -294,10 +259,10 @@ SPPoint3D SPPoint3DRotateAroundPoint(SPPoint3D point, SPRotation3D rotation, SPP
     
     SPAffineTransform3D transform = SPAffineTransform3DMakeRotation(rotation);
     
-    point = (SPPoint3D){ .vector = point.vector - pivot.vector } ;
+    point = SPPoint3DMakeWithVector(point.vector - pivot.vector);
     point = SPPoint3DApplyAffineTransform(point, transform);
     
-    return (SPPoint3D){ .vector = point.vector + pivot.vector } ;
+    return SPPoint3DMakeWithVector(point.vector + pivot.vector);
 }
 
 SPATIAL_SWIFT_NAME(Point3D.rotated(self:by:))
@@ -324,14 +289,14 @@ SPATIAL_REFINED_FOR_SWIFT
 SPATIAL_OVERLOADABLE
 SPPoint3D SPPoint3DTranslate(SPPoint3D point, SPSize3D offset) {
     
-    return (SPPoint3D) { .vector = point.vector + offset.vector};
+    return SPPoint3DMakeWithVector(point.vector + offset.vector);
 }
 
 SPATIAL_SWIFT_NAME(Point3D.translated(self:by:))
 SPATIAL_OVERLOADABLE
 SPPoint3D SPPoint3DTranslate(SPPoint3D point, SPVector3D offset) {
     
-    return (SPPoint3D) { .vector = point.vector + offset.vector};
+    return SPPoint3DMakeWithVector(point.vector + offset.vector);
 }
 
 SPATIAL_SWIFT_NAME(Point3D.rotation(self:to:))
@@ -380,7 +345,7 @@ SPPoint3D SPPoint3DApplyAffineTransform(SPPoint3D point, SPAffineTransform3D tra
     
     simd_double3 transformed = simd_mul(transform.matrix, rhs).xyz;
     
-    return (SPPoint3D){ .vector = transformed };
+    return SPPoint3DMakeWithVector(transformed);
 }
 
 SPATIAL_SWIFT_NAME(Point3D.applying(self:_:))
@@ -391,7 +356,7 @@ SPPoint3D SPPoint3DApplyProjectiveTransform(SPPoint3D point, SPProjectiveTransfo
     
     simd_double3 transformed = simd_mul(transform.matrix, rhs).xyz;
     
-    return (SPPoint3D){ .vector = transformed };
+    return SPPoint3DMakeWithVector(transformed);
 }
 
 SPATIAL_REFINED_FOR_SWIFT
@@ -420,13 +385,10 @@ SPATIAL_OVERLOADABLE
 SPPoint3D SPPoint3DApplyPose(SPPoint3D point,
                              SPPose3D pose) {
     
-    simd_double4 v = simd_make_double4(point.vector, 1);
-    simd_double4x4 m = simd_matrix4x4(pose.rotation.quaternion);
-    m.columns[3].xyz = pose.position.vector;
+    simd_double3 v = simd_act(pose.rotation.quaternion, point.vector);
+    v += pose.position.vector;
     
-    simd_double3 transformed = simd_mul(m, v).xyz;
-    
-    return (SPPoint3D){ .vector = transformed };
+    return SPPoint3DMakeWithVector(v);
 }
 
 /*!
@@ -447,14 +409,140 @@ SPATIAL_OVERLOADABLE
 SPPoint3D SPPoint3DUnapplyPose(SPPoint3D point,
                                SPPose3D pose) {
     
-    simd_double4 v = simd_make_double4(point.vector, 1);
-    simd_double4x4 m = simd_matrix4x4(pose.rotation.quaternion);
-    m.columns[3].xyz = pose.position.vector;
-    m = simd_inverse(m);
+    simd_quatd invPoseRot = simd_inverse(pose.rotation.quaternion);
+    simd_double3 invPosePos = simd_act(invPoseRot, -pose.position.vector);
+
+    simd_double3 v = simd_act(invPoseRot, point.vector);
+    v += invPosePos;
     
-    simd_double3 transformed = simd_mul(m, v).xyz;
+    return SPPoint3DMakeWithVector(v);
+}
+
+// MARK: - Transform by Scaled Pose
+
+/*!
+ @abstract Returns a point that's transformed by the specified scaled pose.
+ 
+ @param point The source point.
+ @param pose The scaled pose that the function applies to the point.
+ @returns The transformed point.
+ */
+SPATIAL_INLINE
+SPATIAL_OVERLOADABLE
+SPPoint3D SPPoint3DApplyScaledPose(SPPoint3D point,
+                                   SPScaledPose3D pose)
+__API_AVAILABLE(macos(15.0), ios(18.0), watchos(11.0), tvos(18.0));
+
+SPATIAL_REFINED_FOR_SWIFT
+SPATIAL_OVERLOADABLE
+SPPoint3D SPPoint3DApplyScaledPose(SPPoint3D point,
+                                   SPScaledPose3D pose) {
     
-    return (SPPoint3D){ .vector = transformed };
+    simd_double3 v = point.vector * pose.scale;
+    v = simd_act(pose.rotation.quaternion, v);
+    v += pose.position.vector;
+    
+    return SPPoint3DMakeWithVector(v);
+}
+
+/*!
+ @abstract Returns a point that's transformed by the inverse of the specified scaled pose.
+ 
+ @param point The source point.
+ @param pose The pose that the function unapplies to the point.
+ @returns The transformed point.
+ */
+SPATIAL_INLINE
+SPATIAL_OVERLOADABLE
+SPPoint3D SPPoint3DUnapplyScaledPose(SPPoint3D point,
+                                     SPScaledPose3D pose)
+__API_AVAILABLE(macos(15.0), ios(18.0), watchos(11.0), tvos(18.0));
+
+SPATIAL_REFINED_FOR_SWIFT
+SPATIAL_OVERLOADABLE
+SPPoint3D SPPoint3DUnapplyScaledPose(SPPoint3D point,
+                                     SPScaledPose3D pose) {
+    
+    simd_quatd invPoseRot = simd_inverse(pose.rotation.quaternion);
+    simd_double3 invPosePos = simd_act(invPoseRot, -pose.position.vector);
+    
+    simd_double3 v = simd_act(invPoseRot, point.vector);
+    v += invPosePos;
+    v /= pose.scale;
+    
+    return SPPoint3DMakeWithVector(v);
+}
+
+/*!
+ @abstract Returns a Boolean value that indicates whether the two points are equal within the specified default absolute tolerance.
+ 
+ @param p1 The first point.
+ @param p2 The first point.
+ @returns A Boolean value that indicates whether the two points are equal within the specified default absolute tolerance.
+ @note The Spatial default tolerance is @p sqrt(__DBL_EPSILON__) .
+ */
+SPATIAL_INLINE
+SPATIAL_OVERLOADABLE
+bool SPPoint3DAlmostEqualToPoint(SPPoint3D p1,
+                                 SPPoint3D p2,
+                                 double tolerance)
+__API_AVAILABLE(macos(15.0), ios(18.0), watchos(11.0), tvos(18.0));
+
+SPATIAL_OVERLOADABLE
+SPATIAL_REFINED_FOR_SWIFT
+bool SPPoint3DAlmostEqualToPoint(SPPoint3D p1,
+                                 SPPoint3D p2,
+                                 double tolerance) {
+    
+    return _sp_almost_equal_tolerance(p1.x, p2.x, tolerance) &&
+            _sp_almost_equal_tolerance(p1.y, p2.y, tolerance) &&
+            _sp_almost_equal_tolerance(p1.z, p2.z, tolerance);
+}
+
+/*!
+ @abstract Returns a Boolean value that indicates whether the two points are equal within the specified default absolute tolerance.
+ 
+ @param p1 The first point.
+ @param p2 The first point.
+ @returns A Boolean value that indicates whether the two points are equal within the specified default absolute tolerance.
+ @note The Spatial default tolerance is @p sqrt(__DBL_EPSILON__) .
+ */
+SPATIAL_INLINE
+SPATIAL_OVERLOADABLE
+bool SPPoint3DAlmostEqualToPoint(SPPoint3D p1,
+                                 SPPoint3D p2)
+__API_AVAILABLE(macos(15.0), ios(18.0), watchos(11.0), tvos(18.0));
+
+SPATIAL_OVERLOADABLE
+SPATIAL_REFINED_FOR_SWIFT
+bool SPPoint3DAlmostEqualToPoint(SPPoint3D p1,
+                                 SPPoint3D p2) {
+    
+    return SPPoint3DAlmostEqualToPoint(p1, p2, SPDefaultTolerance);
+}
+
+// MARK: - Spherical coordinate support
+
+/*!
+ @abstract Returns a Spatial point that represents the Cartesian coordinates of the specified spherical coordinates structure.
+ 
+ @param coords The source spherical coordinates structure.
+ @returns A new point that contains the spherical coorddinates converted to Cartesian coordinates.
+*/
+SPATIAL_INLINE
+SPATIAL_OVERLOADABLE
+SPPoint3D SPPoint3DMakeWithSphericalCoordinates(SPSphericalCoordinates3D coords)
+__API_AVAILABLE(macos(15.0), ios(18.0), watchos(11.0), tvos(18.0));
+ 
+SPATIAL_REFINED_FOR_SWIFT
+SPATIAL_OVERLOADABLE
+SPPoint3D SPPoint3DMakeWithSphericalCoordinates(SPSphericalCoordinates3D coords) {
+    
+    double x = coords.radius * SPAngleCos(coords.inclination) * SPAngleSin(coords.azimuth);
+    double y = coords.radius * SPAngleSin(coords.inclination);
+    double z = coords.radius * SPAngleCos(coords.inclination) * SPAngleCos(coords.azimuth);
+
+    return SPPoint3DMake(x, y, z);
 }
 
 #endif /* Spatial_SPPoint3D_h */

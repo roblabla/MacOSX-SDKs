@@ -172,6 +172,9 @@ When signing, causes
 .Nm
 to replace any existing signature on the path(s) given. Without this option,
 existing signatures will not be replaced, and the signing operation fails.
+.It Fl -force-library-entitlements
+When signing, forcefully embed the supplied entitlements in the signature of libraries (non-main-executables).
+Not embedding entitlements in library signatures is default behavior as of macOS 15.0 when signing for all platforms.
 .It Fl -generate-entitlement-der
 When signing, convert the supplied entitlements XML data to DER and embed the entitlements
 as both XML and DER in the signature. Embedding DER entitlements is default behavior
@@ -461,13 +464,16 @@ verifies the code signatures on all the
 given. The verification confirms that the code at those
 .Ar path(s)
 is signed, that the signature is valid, and that all sealed components are
-unaltered. If a
+unaltered. Valid in this case means that the signature is structurally and cryptographically sound. If a
 .Ar requirement
 is given, each
 .Ar path
 is also checked against this requirement (but see DIAGNOSTICS below).
 If verbose verification is requested, the program is also checked against its own
 designated requirement, which should never fail for a properly signed program.
+.Pp
+\FbNote:\Fr Verification/validation do not check the signature against OS policy.
+A valid/verified signature may still fail to meet Gatekeeper, Entitlements or other contextual policy requirements.
 .Pp
 If a
 .Ar path

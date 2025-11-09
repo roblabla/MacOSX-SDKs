@@ -117,7 +117,7 @@ extern CFStringRef kAXAutocorrectedTextAttribute	AVAILABLE_MAC_OS_X_VERSION_10_7
 
 
 /*! @constant kAXListItemPrefixTextAttribute
-      @abstract A <code>CFAttributedStringRef</code> value that indicates the prepended string of the list item. If the string is a common unicode character (e.g. a bullet ¥), return that unicode character. For lists with images before the text, return a reasonable label of the image.
+      @abstract A <code>CFAttributedStringRef</code> value that indicates the prepended string of the list item. If the string is a common unicode character (e.g. a bullet â€¢), return that unicode character. For lists with images before the text, return a reasonable label of the image.
  */
 extern CFStringRef kAXListItemPrefixTextAttribute	AVAILABLE_MAC_OS_X_VERSION_10_11_AND_LATER;
 

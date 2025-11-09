@@ -17,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
  Your app may initialize the voice control template with one or more states, and
  you may call @c activateVoiceControlState: to switch between states you've defined.
  */
-API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(macos, watchos, tvos)
+API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(macos, watchos)
 @interface CPVoiceControlState : NSObject <NSSecureCoding>
 
 /**
@@ -48,7 +48,7 @@ API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(macos, watchos, tvos)
 
 @end
 
-API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(macos, watchos, tvos)
+API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(macos, watchos)
 @interface CPVoiceControlTemplate : CPTemplate
 
 /**

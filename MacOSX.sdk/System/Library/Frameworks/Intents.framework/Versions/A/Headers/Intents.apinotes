@@ -1920,3 +1920,5 @@ SwiftVersions:
 Tags:
 - Name: INIntentErrorCode
   NSErrorDomain: INIntentErrorDomain
+- Name: INStickerType
+  SwiftName: INSticker.StickerType

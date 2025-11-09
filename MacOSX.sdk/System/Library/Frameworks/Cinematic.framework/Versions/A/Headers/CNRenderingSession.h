@@ -5,8 +5,6 @@
 //  Copyright © 2022-2023 Apple Inc. All rights reserved.
 //
 
-/* WARNING: Preliminary API — subject to change without notice */
-
 #import <AVFoundation/AVFoundation.h>
 #import <Metal/Metal.h>
 
@@ -52,14 +50,14 @@ API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0)) API_UNAVAILABLE(watchos)
 ///   - sampleBuffer: A sample buffer read from the timed cinematic metadata track of a cinematic asset.
 ///   - sessionAttributes: Rendering session attributes loaded from a cinematic asset.
 - (nullable instancetype)initWithSampleBuffer:(CMSampleBufferRef)sampleBuffer
-                   sessionAttributes:(CNRenderingSessionAttributes *)sessionAttributes;
+                            sessionAttributes:(CNRenderingSessionAttributes *)sessionAttributes;
 
 /// Initialize rendering frame attributes from a timed metadata group read from a cinematic metadata track.
 /// - Parameters:
 ///   - metadataGroup: An AVTimedMetadataGroup read from the timed cinematic metadata track of a cinematic asset.
 ///   - sessionAttributes: Rendering session attributes loaded from a cinematic asset.
 - (nullable instancetype)initWithTimedMetadataGroup:(AVTimedMetadataGroup *)metadataGroup
-                         sessionAttributes:(CNRenderingSessionAttributes *)sessionAttributes;
+                                  sessionAttributes:(CNRenderingSessionAttributes *)sessionAttributes;
 
 /// The disparity value which represents the focus plane at which the rendered image should be in focus.
 ///

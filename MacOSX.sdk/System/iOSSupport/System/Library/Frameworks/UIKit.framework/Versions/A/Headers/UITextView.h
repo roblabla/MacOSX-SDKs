@@ -24,10 +24,10 @@
 
 NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
-@class UIFindInteraction, UIFont, UIColor, UIMenu, UIMenuElement, UITextView, NSTextContainer, NSTextLayoutManager, NSLayoutManager, NSTextStorage, NSTextAttachment, UITextItem, UITextItemMenuConfiguration;
+@class UIFindInteraction, UIFont, UIColor, UIMenu, UIMenuElement, UITextView, NSTextContainer, NSTextLayoutManager, NSLayoutManager, NSTextStorage, NSTextAttachment, UITextItem, UITextItemMenuConfiguration, NSTextRange, UITextFormattingViewController, UITextFormattingViewControllerConfiguration;
 @protocol UIEditMenuInteractionAnimating, UIContextMenuInteractionAnimating;
 
-NS_SWIFT_UI_ACTOR
+API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @protocol UITextViewDelegate <NSObject, UIScrollViewDelegate>
 
 @optional
@@ -52,7 +52,7 @@ NS_SWIFT_UI_ACTOR
  *
  * @return Return a UIMenu describing the desired menu hierarchy. Return @c nil to present the default system menu.
  */
-- (nullable UIMenu *)textView:(UITextView *)textView editMenuForTextInRange:(NSRange)range suggestedActions:(NSArray<UIMenuElement *> *)suggestedActions API_AVAILABLE(ios(16.0));
+- (nullable UIMenu *)textView:(UITextView *)textView editMenuForTextInRange:(NSRange)range suggestedActions:(NSArray<UIMenuElement *> *)suggestedActions API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(watchos);
 
 /**
  * @abstract Called when the text view is about to present the edit menu.
@@ -60,7 +60,7 @@ NS_SWIFT_UI_ACTOR
  * @param textView      The text view displaying the menu.
  * @param animator      Appearance animator. Add animations to this object to run them alongside the appearance transition.
  */
-- (void)textView:(UITextView *)textView willPresentEditMenuWithAnimator:(id<UIEditMenuInteractionAnimating>)animator API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(tvos, watchos);
+- (void)textView:(UITextView *)textView willPresentEditMenuWithAnimator:(id<UIEditMenuInteractionAnimating>)animator API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos);
 
 /**
  * @abstract Called when the text view is about to dismiss the edit menu.
@@ -68,7 +68,7 @@ NS_SWIFT_UI_ACTOR
  * @param textView      The text view displaying the menu.
  * @param animator      Dismissal animator. Add animations to this object to run them alongside the dismissal transition.
  */
-- (void)textView:(UITextView *)textView willDismissEditMenuWithAnimator:(id<UIEditMenuInteractionAnimating>)animator API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(tvos, watchos);
+- (void)textView:(UITextView *)textView willDismissEditMenuWithAnimator:(id<UIEditMenuInteractionAnimating>)animator API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos);
 
 /**
  * Asks the delegate for the action to be performed when interacting with a text item. If a nil action is provided, the text view
@@ -91,7 +91,7 @@ NS_SWIFT_UI_ACTOR
  *
  * @return Return a menu configuration to be presented when the text item is interacted with. Return @c nil to prevent the menu from being presented.
  */
-- (nullable UITextItemMenuConfiguration *)textView:(UITextView *)textView menuConfigurationForTextItem:(UITextItem *)textItem defaultMenu:(UIMenu *)defaultMenu API_AVAILABLE(ios(17.0)) API_UNAVAILABLE(watchos, tvos);
+- (nullable UITextItemMenuConfiguration *)textView:(UITextView *)textView menuConfigurationForTextItem:(UITextItem *)textItem defaultMenu:(UIMenu *)defaultMenu API_AVAILABLE(ios(17.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos) ;
 
 /**
  * Informs the delegate that a text item menu is about to be presented with the specified animator.
@@ -100,7 +100,7 @@ NS_SWIFT_UI_ACTOR
  * @param textItem  The text item for performing said action.
  * @param animator  Appearance animator. Add animations to this object to run them alongside the appearance transition.
  */
-- (void)textView:(UITextView *)textView textItemMenuWillDisplayForTextItem:(UITextItem *)textItem animator:(id<UIContextMenuInteractionAnimating>)animator API_AVAILABLE(ios(17.0)) API_UNAVAILABLE(watchos, tvos);
+- (void)textView:(UITextView *)textView textItemMenuWillDisplayForTextItem:(UITextItem *)textItem animator:(id<UIContextMenuInteractionAnimating>)animator API_AVAILABLE(ios(17.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos);
 
 /**
  * Informs the delegate that a text item menu is about to be dismissed with the specified animator.
@@ -109,14 +109,66 @@ NS_SWIFT_UI_ACTOR
  * @param textItem  The text item for performing said action.
  * @param animator  Dismissal animator. Add animations to this object to run them alongside the dismissal transition.
  */
-- (void)textView:(UITextView *)textView textItemMenuWillEndForTextItem:(UITextItem *)textItem animator:(id<UIContextMenuInteractionAnimating>)animator API_AVAILABLE(ios(17.0)) API_UNAVAILABLE(watchos, tvos);
+- (void)textView:(UITextView *)textView textItemMenuWillEndForTextItem:(UITextItem *)textItem animator:(id<UIContextMenuInteractionAnimating>)animator API_AVAILABLE(ios(17.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos);
+
+/**
+ * @abstract Informs the delegate that Writing Tools will begin manipulating the text view
+ *
+ * @param textView  The text view interacting with Writing Tools
+ */
+- (void)textViewWritingToolsWillBegin:(UITextView *)textView API_AVAILABLE(ios(18.0), macos(15.0)) API_UNAVAILABLE(tvos, watchos, visionos);
+
+/**
+ * @abstract Informs the delegate that Writing Tools has finished manipulating the text view
+ *
+ * @param textView  The text view interacting with Writing Tools
+ */
+- (void)textViewWritingToolsDidEnd:(UITextView *)textView API_AVAILABLE(ios(18.0), macos(15.0)) API_UNAVAILABLE(tvos, watchos, visionos);
+
+/**
+ * @abstract Allows the delegate to specify ranges of text to be ignored by Writing Tools
+ *
+ * @param textView  The text view interacting with Writing Tools
+ * @param enclosingRange
+ *
+ * @return Return an array of ranges in the attributed substring of the textView storage with the enclosing range representing portions of text to be ignored by Writing Tools when evaluating the text for proofreading, summarization, rewrites, and so forth.
+ */
+- (NSArray<NSValue *> *)textView:(UITextView *)textView writingToolsIgnoredRangesInEnclosingRange:(NSRange)enclosingRange API_AVAILABLE(ios(18.0), macos(15.0)) API_UNAVAILABLE(tvos, watchos, visionos);
 
 
-- (BOOL)textView:(UITextView *)textView shouldInteractWithURL:(NSURL *)URL inRange:(NSRange)characterRange interaction:(UITextItemInteraction)interaction API_DEPRECATED("Replaced by primaryActionForTextItem: and menuConfigurationForTextItem: for additional customization options.", ios(10.0, 17.0), visionos(1.0, 1.0));
-- (BOOL)textView:(UITextView *)textView shouldInteractWithTextAttachment:(NSTextAttachment *)textAttachment inRange:(NSRange)characterRange interaction:(UITextItemInteraction)interaction API_DEPRECATED("Replaced by primaryActionForTextItem: and menuConfigurationForTextItem: for additional customization options.", ios(10.0, 17.0), visionos(1.0, 1.0));
+- (BOOL)textView:(UITextView *)textView shouldInteractWithURL:(NSURL *)URL inRange:(NSRange)characterRange interaction:(UITextItemInteraction)interaction API_DEPRECATED("Replaced by primaryActionForTextItem: and menuConfigurationForTextItem: for additional customization options.", ios(10.0, 17.0), visionos(1.0, 1.0)) API_UNAVAILABLE(watchos);
+- (BOOL)textView:(UITextView *)textView shouldInteractWithTextAttachment:(NSTextAttachment *)textAttachment inRange:(NSRange)characterRange interaction:(UITextItemInteraction)interaction API_DEPRECATED("Replaced by primaryActionForTextItem: and menuConfigurationForTextItem: for additional customization options.", ios(10.0, 17.0), visionos(1.0, 1.0)) API_UNAVAILABLE(watchos);
 
-- (BOOL)textView:(UITextView *)textView shouldInteractWithURL:(NSURL *)URL inRange:(NSRange)characterRange API_DEPRECATED_WITH_REPLACEMENT("textView:shouldInteractWithURL:inRange:interaction:", ios(7.0, 10.0)) API_UNAVAILABLE(visionos);
-- (BOOL)textView:(UITextView *)textView shouldInteractWithTextAttachment:(NSTextAttachment *)textAttachment inRange:(NSRange)characterRange API_DEPRECATED_WITH_REPLACEMENT("textView:shouldInteractWithTextAttachment:inRange:interaction:", ios(7.0, 10.0)) API_UNAVAILABLE(visionos);
+- (BOOL)textView:(UITextView *)textView shouldInteractWithURL:(NSURL *)URL inRange:(NSRange)characterRange API_DEPRECATED_WITH_REPLACEMENT("textView:shouldInteractWithURL:inRange:interaction:", ios(7.0, 10.0)) API_UNAVAILABLE(visionos, watchos);
+- (BOOL)textView:(UITextView *)textView shouldInteractWithTextAttachment:(NSTextAttachment *)textAttachment inRange:(NSRange)characterRange API_DEPRECATED_WITH_REPLACEMENT("textView:shouldInteractWithTextAttachment:inRange:interaction:", ios(7.0, 10.0)) API_UNAVAILABLE(visionos, watchos);
+
+/**
+ * @abstract Informs the delegate that text formatting controller is about to be presented.
+ *
+ * @param viewController  The text formatting controller that is being presented.
+ */
+- (void)textView:(UITextView *)textView willBeginFormattingWithViewController:(UITextFormattingViewController *)viewController API_AVAILABLE(ios(18.0))  API_UNAVAILABLE(visionos) API_UNAVAILABLE(watchos, tvos, macCatalyst);
+
+/**
+ * @abstract Informs the delegate that text formatting controller has been presented.
+ *
+ * @param viewController  The text formatting controller that is being presented.
+ */
+- (void)textView:(UITextView *)textView didBeginFormattingWithViewController:(UITextFormattingViewController *)viewController API_AVAILABLE(ios(18.0))  API_UNAVAILABLE(visionos) API_UNAVAILABLE(watchos, tvos, macCatalyst);
+
+/**
+ * @abstract Informs the delegate that text formatting controller is about to be dismissed.
+ *
+ * @param viewController  The text formatting controller that is being presented.
+ */
+- (void)textView:(UITextView *)textView willEndFormattingWithViewController:(UITextFormattingViewController *)viewController API_AVAILABLE(ios(18.0))  API_UNAVAILABLE(visionos) API_UNAVAILABLE(watchos, tvos, macCatalyst);
+
+/**
+ * @abstract Informs the delegate that text formatting controller has been dismissed.
+ *
+ * @param viewController  The text formatting controller that is being presented.
+ */
+- (void)textView:(UITextView *)textView didEndFormattingWithViewController:(UITextFormattingViewController *)viewController API_AVAILABLE(ios(18.0))  API_UNAVAILABLE(visionos) API_UNAVAILABLE(watchos, tvos, macCatalyst);
 
 @end
 
@@ -126,10 +178,10 @@ typedef NS_ENUM(NSInteger, UITextViewBorderStyle) {
     UITextViewBorderStyleNone,
 
     /// Displays a rounded-style border for the text view.
-    UITextViewBorderStyleRoundedRect API_AVAILABLE(visionos(1.0)) API_UNAVAILABLE(ios),
-} API_AVAILABLE(ios(17.0), visionos(1.0));
+    UITextViewBorderStyleRoundedRect API_AVAILABLE(visionos(1.0)) API_UNAVAILABLE(ios, watchos),
+} API_AVAILABLE(ios(17.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 
-UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(2.0)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @interface UITextView : UIScrollView <UITextInput, UIContentSizeCategoryAdjusting, UILetterformAwareAdjusting>
 
 @property(nullable,nonatomic,weak) id<UITextViewDelegate> delegate;
@@ -166,7 +218,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
 
 // From iOS 16 onwards, UITextViews are, by default, created with a TextKit 2 NSTextLayoutManager managing text layout (see the .textLayoutManager property). They will dynamically 'fall back' to a TextKit 1 NSLayoutManager if TextKit 1 features are used (notably, if the .layoutManager property is accessed).
 // This convenience initializer can be used to specify TextKit 1 by default if you know code in your app relies on that. This avoids inefficiencies associated with the needless creation of a NSTextLayoutManager and the subsequent fallback.
-+ (instancetype)textViewUsingTextLayoutManager:(BOOL)usingTextLayoutManager API_AVAILABLE(ios(16.0), tvos(16.0));
++ (instancetype)textViewUsingTextLayoutManager:(BOOL)usingTextLayoutManager API_AVAILABLE(ios(16.0), tvos(16.0)) API_UNAVAILABLE(watchos);
 
 - (nullable instancetype)initWithCoder:(NSCoder *)coder NS_DESIGNATED_INITIALIZER;
 
@@ -176,7 +228,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
 @property(nonatomic, assign) UIEdgeInsets textContainerInset API_AVAILABLE(ios(7.0));
 
 // This property accesses the TextKit 2 NSTextLayoutManager. You should generally prefer to use it over the TextKit 1 .layoutManager property if it exists. This property will return nil if TextKit 1 is in use.
-@property(nonatomic, nullable, readonly) NSTextLayoutManager *textLayoutManager API_AVAILABLE(ios(16.0), tvos(16.0));
+@property(nonatomic, nullable, readonly) NSTextLayoutManager *textLayoutManager API_AVAILABLE(ios(16.0), tvos(16.0)) API_UNAVAILABLE(watchos);
 
 // To ensure compatibility with older code, accessing the .layoutManager of a UITextView - or its .textContainer's .layoutManager - will cause a UITextView that's using TextKit 2 to 'fall back' to TextKit 1, and return a newly created NSLayoutManager. After this happens, .textLayoutManager will return nil - and _any TextKit 2 objects you may have cached will cease functioning_. Be careful about this if you are intending to be using TextKit 2!
 @property(nonatomic, readonly) NSLayoutManager *layoutManager API_AVAILABLE(ios(7.0));
@@ -188,7 +240,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
 @property(null_resettable, nonatomic, copy) NSDictionary<NSAttributedStringKey,id> *linkTextAttributes API_AVAILABLE(ios(7.0));
 
 // When turned on, this changes the rendering scale of the text to match the standard text scaling and preserves the original font point sizes when the contents of the text view are copied to the pasteboard.  Apps that show a lot of text content, such as a text viewer or editor, should turn this on and use the standard text scaling.
-@property (nonatomic) BOOL usesStandardTextScaling API_AVAILABLE(ios(13.0));
+@property (nonatomic) BOOL usesStandardTextScaling API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos);
 
 /// If `findInteractionEnabled` is set to true, returns this text view's built-in find interaction. Otherwise, nil.
 @property (nonatomic, nullable, readonly) UIFindInteraction *findInteraction API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(watchos, tvos);
@@ -198,7 +250,34 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
 
 
 /// The border style for the text field.
-@property (nonatomic) UITextViewBorderStyle borderStyle API_AVAILABLE(ios(17.0), visionos(1.0));
+@property (nonatomic) UITextViewBorderStyle borderStyle API_AVAILABLE(ios(17.0), visionos(1.0)) API_UNAVAILABLE(watchos);
+
+// Text Highlight
+// Attributes for NSTextHighlightStyleAttributeName rendering. It is consulted when the corresponding NSTextHighlightColorSchemeAttributeName is NSTextHighlightColorSchemeDefault. NSForegroundColorAttributeName overrides the text color, and NSBackgroundColorAttributeName specifies the highlight color rendered with drawTextHighlightBackground(for textRange:, origin:). When NSForegroundColorAttributeName is missing, it uses the text color specified by the document content. When NSBackgroundColorAttributeName is not specified, it is derived from NSForegroundColorAttributeName. By default, it returns a dictionary with tintColor for NSForegroundColorAttributeName.
+@property (nonatomic, copy, null_resettable) NSDictionary<NSAttributedStringKey, id> *textHighlightAttributes API_AVAILABLE(ios(18.0), tvos(18.0), visionos(2.0)) API_UNAVAILABLE(watchos);
+
+// Renders the text highlight background for NSTextHighlightStyleAttributeName in textRange. origin specifies the coordinate origin in the NSTextContainer coordinate system of the rendering context.
+- (void)drawTextHighlightBackgroundForTextRange:(NSTextRange *)textRange origin:(CGPoint)origin API_AVAILABLE(ios(18.0), tvos(18.0), visionos(2.0)) API_UNAVAILABLE(watchos);
+
+/**
+ * @abstract Convenience for tracking whether Writing Tools is active
+ *
+ * @return Returns @c YES while Writing Tools is interacting with the receiver (after @c -textViewWritingToolsWillBegin: completes until @c -textViewWritingToolsDidEnd: completes)
+ */
+@property(nonatomic,readonly,getter=isWritingToolsActive) BOOL writingToolsActive API_AVAILABLE(ios(18.0), macos(15.0)) API_UNAVAILABLE(tvos, watchos, visionos);
+
+// Also see UITextInputTraits.h
+@property UIWritingToolsBehavior writingToolsBehavior API_AVAILABLE(ios(18.0), macos(15.0)) API_UNAVAILABLE(tvos, watchos, visionos);
+
+// WARNING: UITextView does not support UIWritingToolsResultOptionsTable and will throw an exception for this value
+@property UIWritingToolsResultOptions allowedWritingToolsResultOptions API_AVAILABLE(ios(18.0), macos(15.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos, watchos);
+
+/// For text views that have flag `allowsEditingTextAttributes` set,
+/// this configuration will be used for `UITextFormattingViewController`
+/// when its presentation is requested.
+/// 
+/// It has a non-nil default value.
+@property(nonatomic, nullable, readwrite, copy) UITextFormattingViewControllerConfiguration *textFormattingConfiguration API_AVAILABLE(ios(18.0))  API_UNAVAILABLE(visionos) API_UNAVAILABLE(watchos, tvos, macCatalyst);
 
 @end
 
@@ -218,13 +297,13 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
 // and first responder status.
 // The object returned here will be a plist type, so can e.g. be stored in
 // an NSUserActivity's userInfo dictionary.
-@property (nonatomic, copy) id interactionState API_AVAILABLE(ios(15.0));
+@property (nonatomic, copy) id interactionState API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(watchos);
 
 @end
 
-UIKIT_EXTERN NSNotificationName const UITextViewTextDidBeginEditingNotification;
-UIKIT_EXTERN NSNotificationName const UITextViewTextDidChangeNotification;
-UIKIT_EXTERN NSNotificationName const UITextViewTextDidEndEditingNotification;
+UIKIT_EXTERN NSNotificationName const UITextViewTextDidBeginEditingNotification API_UNAVAILABLE(watchos) NS_SWIFT_NONISOLATED;
+UIKIT_EXTERN NSNotificationName const UITextViewTextDidChangeNotification API_UNAVAILABLE(watchos) NS_SWIFT_NONISOLATED;
+UIKIT_EXTERN NSNotificationName const UITextViewTextDidEndEditingNotification API_UNAVAILABLE(watchos) NS_SWIFT_NONISOLATED;
 
 NS_HEADER_AUDIT_END(nullability, sendability)
 

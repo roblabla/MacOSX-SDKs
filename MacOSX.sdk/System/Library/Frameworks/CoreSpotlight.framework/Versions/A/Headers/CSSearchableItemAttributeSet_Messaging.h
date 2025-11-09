@@ -66,7 +66,7 @@ CS_AVAILABLE(10_13, 9_0) CS_TVOS_UNAVAILABLE
 //(This is always the email address, and not the human readable version)
 @property(nullable, copy) NSArray<NSString*> *authorEmailAddresses;
 
-//This attribute indicates the reciepients email addresses.
+//This attribute indicates the recipients email addresses.
 //(This is always the email address,  and not the human readable version).
 @property(nullable, copy) NSArray<NSString*> *recipientEmailAddresses;
 

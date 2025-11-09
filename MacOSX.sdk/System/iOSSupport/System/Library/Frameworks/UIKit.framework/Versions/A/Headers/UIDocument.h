@@ -18,12 +18,12 @@ typedef NS_ENUM(NSInteger, UIDocumentChangeKind) {
     UIDocumentChangeUndone,
     UIDocumentChangeRedone,
     UIDocumentChangeCleared
-} API_UNAVAILABLE(tvos);
+} API_UNAVAILABLE(tvos, watchos);
 
 typedef NS_ENUM(NSInteger, UIDocumentSaveOperation) {
     UIDocumentSaveForCreating,
     UIDocumentSaveForOverwriting
-} API_UNAVAILABLE(tvos);
+} API_UNAVAILABLE(tvos, watchos);
 
 typedef NS_OPTIONS(NSUInteger, UIDocumentState) {
     UIDocumentStateNormal            = 0,
@@ -32,11 +32,16 @@ typedef NS_OPTIONS(NSUInteger, UIDocumentState) {
     UIDocumentStateSavingError       = 1 << 2, // An error has occurred that prevents the document from saving.
     UIDocumentStateEditingDisabled   = 1 << 3, // Set before calling -disableEditing. The document is is busy and it is not currently safe to allow user edits. -enableEditing will be called when it becomes safe to edit again.
     UIDocumentStateProgressAvailable = 1 << 4  // Set if the document is busy loading or saving. Progress is valid while this is set.
-} API_UNAVAILABLE(tvos);
+} API_UNAVAILABLE(tvos, watchos);
 
-UIKIT_EXTERN NSNotificationName const UIDocumentStateChangedNotification API_AVAILABLE(ios(5.0)) API_UNAVAILABLE(tvos);
+typedef NSString * UIDocumentCreationIntent NS_EXTENSIBLE_STRING_ENUM NS_SWIFT_NAME(UIDocument.CreationIntent) API_AVAILABLE(ios(18.0)) API_UNAVAILABLE(tvos, watchos);
 
-UIKIT_EXTERN API_AVAILABLE(ios(5.0)) API_UNAVAILABLE(tvos) NS_SWIFT_UI_ACTOR
+// The intent for creating a default document.
+UIKIT_EXTERN UIDocumentCreationIntent const UIDocumentCreationIntentDefault API_AVAILABLE(ios(18.0)) API_UNAVAILABLE(tvos, watchos);
+
+UIKIT_EXTERN NSNotificationName const UIDocumentStateChangedNotification API_AVAILABLE(ios(5.0)) API_UNAVAILABLE(tvos, watchos) NS_SWIFT_NONISOLATED;
+
+UIKIT_EXTERN API_AVAILABLE(ios(5.0)) API_UNAVAILABLE(tvos, watchos) NS_SWIFT_UI_ACTOR
 @interface UIDocument : NSObject <NSFilePresenter, NSProgressReporting>
 
 #pragma mark *** Initialization ***
@@ -96,7 +101,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(5.0)) API_UNAVAILABLE(tvos) NS_SWIFT_UI_ACTOR
 
 // Subclasses should generally not need to override this. Instead they should use the undoManager or call -updateChangeCount: every time they get a change and UIKit will calculate -hasUnsavedChanges automatically.
 // The default implementation of -autosaveWithCompletionHandler: initiates a save if [self hasUnsavedChanges] is YES.
-@property(nonatomic, readonly) BOOL hasUnsavedChanges API_UNAVAILABLE(tvos);
+@property(nonatomic, readonly) BOOL hasUnsavedChanges API_UNAVAILABLE(tvos, watchos);
 
 // Record the fact that a change affecting the value returned by -hasUnsavedChanges has occurred. Subclasses should not need to call this if they set the undoManager.
 - (void)updateChangeCount:(UIDocumentChangeKind)change API_UNAVAILABLE(tvos);
@@ -119,7 +124,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(5.0)) API_UNAVAILABLE(tvos) NS_SWIFT_UI_ACTOR
 // The default implementation of this method invokes [self hasUnsavedChanges] and, if that returns YES, invokes [self saveToURL:[self fileURL] forSaveOperation:UIDocumentSaveForOverwriting completionHandler:completionHandler].
 - (void)autosaveWithCompletionHandler:(void (^ __nullable)(BOOL success))completionHandler API_UNAVAILABLE(tvos);
 
-@property(nonatomic, readonly, nullable) NSString *savingFileType API_UNAVAILABLE(tvos); // The default implementation returns the current file type. saveToURL: will save to an extension based on this type so subclasses can override this to allow moving the document to a new type.
+@property(nonatomic, readonly, nullable) NSString *savingFileType API_UNAVAILABLE(tvos, watchos); // The default implementation returns the current file type. saveToURL: will save to an extension based on this type so subclasses can override this to allow moving the document to a new type.
 - (NSString *)fileNameExtensionForType:(nullable NSString *)typeName saveOperation:(UIDocumentSaveOperation)saveOperation API_UNAVAILABLE(tvos); // For a specified type, and a particular kind of save operation, return a file name extension that can be appended to a base file name.
 
 // This method is responsible for doing document writing in a way that minimizes the danger of leaving the disk to which writing is being done in an inconsistent state in the event of an application crash, system crash, hardware failure, power outage, etc.
@@ -183,7 +188,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(17.0)) API_UNAVAILABLE(tvos, watchos)
 
 #pragma mark *** Activity Continuation ***
 
-UIKIT_EXTERN NSString* const NSUserActivityDocumentURLKey API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(tvos);
+UIKIT_EXTERN NSString* const NSUserActivityDocumentURLKey API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(tvos, watchos);
 
 @interface UIDocument (ActivityContinuation) <UIUserActivityRestoring>
 @property (nonatomic, strong, nullable) NSUserActivity *userActivity API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(tvos);

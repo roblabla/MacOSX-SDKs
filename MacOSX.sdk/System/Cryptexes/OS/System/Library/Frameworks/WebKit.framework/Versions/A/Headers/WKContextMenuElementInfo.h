@@ -31,6 +31,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+WK_SWIFT_UI_ACTOR
 WK_EXTERN API_AVAILABLE(ios(13.0))
 @interface WKContextMenuElementInfo : NSObject
 

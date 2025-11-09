@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  @c CPTravelEstimates describes the time and distance remaining for the active navigation session.
  */
-API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(macos, watchos, tvos)
+API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(macos, watchos)
 @interface CPTravelEstimates : NSObject <NSSecureCoding>
 
 /**

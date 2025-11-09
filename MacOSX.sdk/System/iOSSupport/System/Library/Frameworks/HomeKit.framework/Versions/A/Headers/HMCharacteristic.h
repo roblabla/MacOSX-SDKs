@@ -18,8 +18,11 @@ NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 /*!
  * @brief Represent a characteristic on a service of an accessory.
  */
-HM_EXTERN NS_SWIFT_SENDABLE API_AVAILABLE(ios(8.0), watchos(2.0), tvos(10.0), macCatalyst(14.0)) API_UNAVAILABLE(macos)
-    @interface HMCharacteristic : NSObject
+HM_EXTERN
+NS_SWIFT_SENDABLE
+API_AVAILABLE(ios(8.0), watchos(2.0), tvos(10.0), macCatalyst(14.0))
+API_UNAVAILABLE(macos)
+@interface HMCharacteristic : NSObject
 
 /*!
  * @brief The type of the characteristic, e.g. HMCharacteristicTypePowerState.
@@ -117,6 +120,8 @@ HM_EXTERN NS_SWIFT_SENDABLE API_AVAILABLE(ios(8.0), watchos(2.0), tvos(10.0), ma
  *                   will be nil on success.
  */
 - (void)updateAuthorizationData:(nullable NSData *)data completionHandler:(void (^)(NSError *__nullable error))completion API_UNAVAILABLE(watchos, tvos);
+
+- (instancetype)init API_DEPRECATED("HMCharacteristic objects are created by their parent container objects. Directly creating them is not supported.", ios(8.0, 8.0), watchos(2.0, 2.0), tvos(10.0, 10.0), macCatalyst(14.0, 14.0));
 
 @end
 

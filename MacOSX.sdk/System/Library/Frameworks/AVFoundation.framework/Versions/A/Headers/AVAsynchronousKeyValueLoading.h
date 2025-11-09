@@ -19,7 +19,7 @@ typedef NS_ENUM(NSInteger, AVKeyValueStatus) {
 	AVKeyValueStatusLoaded = 2,
 	AVKeyValueStatusFailed = 3,
 	AVKeyValueStatusCancelled = 4
-} AVF_DEPRECATED_FOR_SWIFT_ONLY("Use AVAsyncProperty.Status instead", macos(10.7, 13.0), ios(4.0, 16.0), tvos(9.0, 16.0), watchos(1.0, 9.0));
+} AVF_DEPRECATED_FOR_SWIFT_ONLY("Use AVAsyncProperty.Status instead", macos(10.7, 13.0), ios(4.0, 16.0), tvos(9.0, 16.0), watchos(1.0, 9.0), visionos(1.0, 1.0));
 
 /*!
 	@protocol	AVAsynchronousKeyValueLoading
@@ -54,7 +54,7 @@ typedef NS_ENUM(NSInteger, AVKeyValueStatus) {
       
     The sole exception to this general rule is in usage on macOS on the desktop, where it may be acceptable to block in cases in which the client is preparing objects for use on background threads or in operation queues. On platforms other than macOS, values should always be loaded asynchronously prior to calling getters for the values, in any usage scenario.
 */
-- (AVKeyValueStatus)statusOfValueForKey:(NSString *)key error:(NSError * _Nullable * _Nullable)outError AVF_DEPRECATED_FOR_SWIFT_ONLY("Use status(of:) instead", macos(10.7, 13.0), ios(4.0, 16.0), tvos(9.0, 16.0), watchos(1.0, 9.0));
+- (AVKeyValueStatus)statusOfValueForKey:(NSString *)key error:(NSError * _Nullable * _Nullable)outError AVF_DEPRECATED_FOR_SWIFT_ONLY("Use status(of:) instead", macos(10.7, 13.0), ios(4.0, 16.0), tvos(9.0, 16.0), watchos(1.0, 9.0), visionos(1.0, 1.0));
 
 /*!
   @method		loadValuesAsynchronouslyForKeys:completionHandler:
@@ -64,7 +64,7 @@ typedef NS_ENUM(NSInteger, AVKeyValueStatus) {
   @param		handler
     The block to be invoked when loading succeeds, fails, or is cancelled.
 */
-- (void)loadValuesAsynchronouslyForKeys:(NSArray<NSString *> *)keys completionHandler:(nullable void (^)(void))handler AVF_DEPRECATED_FOR_SWIFT_ONLY("Use load(_:) instead.  For non-deprecated properties that do not have an AVAsyncProperty equivalent, continue to query these properties synchronously", macos(10.7, 13.0), ios(4.0, 16.0), tvos(9.0, 16.0), watchos(1.0, 9.0));
+- (void)loadValuesAsynchronouslyForKeys:(NSArray<NSString *> *)keys completionHandler:(nullable void (^ NS_SWIFT_SENDABLE)(void))handler AVF_DEPRECATED_FOR_SWIFT_ONLY("Use load(_:) instead.  For non-deprecated properties that do not have an AVAsyncProperty equivalent, continue to query these properties synchronously", macos(10.7, 13.0), ios(4.0, 16.0), tvos(9.0, 16.0), watchos(1.0, 9.0), visionos(1.0, 1.0));
 
 @end
 

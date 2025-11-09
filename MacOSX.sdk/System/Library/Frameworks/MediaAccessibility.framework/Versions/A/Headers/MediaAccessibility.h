@@ -9,5 +9,6 @@
 #include <MediaAccessibility/MAImageCaptioning.h>
 #include <MediaAccessibility/MAVideoAccommodations.h>
 #include <MediaAccessibility/MAFlashingLightsProcessing.h>
+#include <MediaAccessibility/MAMusicHaptics.h>
 
 #endif

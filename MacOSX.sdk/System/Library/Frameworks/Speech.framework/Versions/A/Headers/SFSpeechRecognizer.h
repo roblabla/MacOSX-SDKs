@@ -24,9 +24,9 @@ typedef NS_ENUM(NSInteger, SFSpeechRecognizerAuthorizationStatus) {
     SFSpeechRecognizerAuthorizationStatusDenied,
     SFSpeechRecognizerAuthorizationStatusRestricted,
     SFSpeechRecognizerAuthorizationStatusAuthorized,
-} API_AVAILABLE(ios(10.0), macos(10.15));
+} API_AVAILABLE(ios(10.0), macos(10.15), tvos(18));
 
-API_AVAILABLE(ios(10.0), macos(10.15))
+API_AVAILABLE(ios(10.0), macos(10.15), tvos(18))
 @interface SFSpeechRecognizer : NSObject
 
 // Locales which support speech recognition.
@@ -47,7 +47,7 @@ API_AVAILABLE(ios(10.0), macos(10.15))
 @property (nonatomic, readonly, copy) NSLocale *locale;
 
 // True if this recognition can handle requests with requiresOnDeviceRecognition set to true
-@property (nonatomic) BOOL supportsOnDeviceRecognition API_AVAILABLE(ios(13));
+@property (nonatomic) BOOL supportsOnDeviceRecognition API_AVAILABLE(ios(13), tvos(18));
 
 @property (nonatomic, weak) id<SFSpeechRecognizerDelegate> delegate;
 
@@ -71,7 +71,7 @@ API_AVAILABLE(ios(10.0), macos(10.15))
 
 @end
 
-API_AVAILABLE(ios(10.0), macos(10.15))
+API_AVAILABLE(ios(10.0), macos(10.15), tvos(18))
 @protocol SFSpeechRecognizerDelegate <NSObject>
 @optional
 

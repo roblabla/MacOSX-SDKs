@@ -35,12 +35,12 @@ CM_ASSUME_NONNULL_BEGIN
 		default is kVTRotation_0.
 */
 
-VT_EXPORT const CFStringRef kVTPixelRotationPropertyKey_Rotation API_AVAILABLE(macosx(13.0), ios(16.0), tvos(16.0), watchos(9.0));
+VT_EXPORT const CFStringRef kVTPixelRotationPropertyKey_Rotation API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 
-VT_EXPORT const CFStringRef kVTRotation_0 		API_AVAILABLE(macosx(13.0), ios(16.0), tvos(16.0), watchos(9.0));
-VT_EXPORT const CFStringRef kVTRotation_CW90	API_AVAILABLE(macosx(13.0), ios(16.0), tvos(16.0), watchos(9.0));
-VT_EXPORT const CFStringRef kVTRotation_180		API_AVAILABLE(macosx(13.0), ios(16.0), tvos(16.0), watchos(9.0));
-VT_EXPORT const CFStringRef kVTRotation_CCW90	API_AVAILABLE(macosx(13.0), ios(16.0), tvos(16.0), watchos(9.0));
+VT_EXPORT const CFStringRef kVTRotation_0 		API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0), visionos(1.0)) API_UNAVAILABLE(watchos);
+VT_EXPORT const CFStringRef kVTRotation_CW90	API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0), visionos(1.0)) API_UNAVAILABLE(watchos);
+VT_EXPORT const CFStringRef kVTRotation_180		API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0), visionos(1.0)) API_UNAVAILABLE(watchos);
+VT_EXPORT const CFStringRef kVTRotation_CCW90	API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 /*!
 	@constant	kVTPixelRotationPropertyKey_FlipHorizontalOrientation
@@ -51,7 +51,7 @@ VT_EXPORT const CFStringRef kVTRotation_CCW90	API_AVAILABLE(macosx(13.0), ios(16
 		default is false;
 */
 
-VT_EXPORT const CFStringRef kVTPixelRotationPropertyKey_FlipHorizontalOrientation API_AVAILABLE(macosx(13.0), ios(16.0), tvos(16.0), watchos(9.0));
+VT_EXPORT const CFStringRef kVTPixelRotationPropertyKey_FlipHorizontalOrientation API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 /*!
 	@constant	kVTPixelRotationPropertyKey_FlipVerticalOrientation
@@ -62,7 +62,7 @@ VT_EXPORT const CFStringRef kVTPixelRotationPropertyKey_FlipHorizontalOrientatio
 		default is false;
 */
 
-VT_EXPORT const CFStringRef kVTPixelRotationPropertyKey_FlipVerticalOrientation API_AVAILABLE(macosx(13.0), ios(16.0), tvos(16.0), watchos(9.0));
+VT_EXPORT const CFStringRef kVTPixelRotationPropertyKey_FlipVerticalOrientation API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 CM_ASSUME_NONNULL_END
 

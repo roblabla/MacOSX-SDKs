@@ -25,7 +25,26 @@
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_END@
  */
+#define USE_CLANG_STDDEF 0
+
+#if USE_CLANG_STDDEF
+
+#ifndef __NULL
+#define __NULL
+
+#define __need_NULL
+#include <stddef.h>
+#undef __need_NULL
+
+#endif /* __NULL */
+
+#else
+
 #ifndef NULL
 #include <sys/_types.h> /* __DARWIN_NULL */
 #define NULL  __DARWIN_NULL
 #endif  /* NULL */
+
+#endif
+
+#undef USE_CLANG_STDDEF

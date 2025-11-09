@@ -70,6 +70,7 @@
 #include <net/route.h>
 #include <stdint.h>
 #include <sys/types.h>
+#include <sys/ioccom.h>
 
 struct if_traffic_class {
 	u_int64_t               ifi_ibepackets;/* TC_BE packets received on interface */
@@ -134,7 +135,7 @@ struct if_packet_stats {
 struct if_description {
 	u_int32_t       ifd_maxlen; /* must be IF_DESCSIZE */
 	u_int32_t       ifd_len;    /* actual ifd_desc length */
-	u_int8_t        *ifd_desc;  /* ptr to desc buffer */
+	u_int8_t        *__sized_by(ifd_maxlen) ifd_desc;  /* ptr to desc buffer */
 };
 
 struct if_bandwidths {

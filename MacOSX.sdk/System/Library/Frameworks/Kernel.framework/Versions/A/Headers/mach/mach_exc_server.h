@@ -52,7 +52,7 @@ typedef function_table_entry   *function_table_t;
 #endif /* AUTOTEST */
 
 #ifndef	mach_exc_MSG_COUNT
-#define	mach_exc_MSG_COUNT	5
+#define	mach_exc_MSG_COUNT	6
 #endif	/* mach_exc_MSG_COUNT */
 
 #include <Availability.h>
@@ -155,7 +155,7 @@ extern const struct catch_mach_exc_subsystem {
 	unsigned int	maxsize;	/* Max msg size */
 	vm_address_t	reserved;	/* Reserved */
 	struct routine_descriptor	/* Array of routine descriptors */
-		routine[5];
+		routine[6];
 } catch_mach_exc_subsystem;
 
 /* typedefs for all requests */

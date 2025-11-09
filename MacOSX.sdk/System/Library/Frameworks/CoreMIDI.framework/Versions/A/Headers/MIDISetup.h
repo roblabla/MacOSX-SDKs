@@ -78,7 +78,7 @@ typedef MIDIObjectRef MIDISetupRef;
 	@result			An OSStatus result code.
 */
 extern OSStatus
-MIDISetupCreate(	MIDISetupRef *outSetup )					API_DEPRECATED("No longer supported", macos(10.0, 10.6)) API_UNAVAILABLE(ios, tvos, watchos);
+MIDISetupCreate(	MIDISetupRef *outSetup )					API_DEPRECATED("No longer supported", macos(10.0, 10.6)) MIDI_API_UNAVAILABLE_NON_MACOS;
 
 
 //  -----------------------------------------------------------------------------
@@ -96,7 +96,7 @@ MIDISetupCreate(	MIDISetupRef *outSetup )					API_DEPRECATED("No longer supporte
 	@result			An OSStatus result code.
 */
 extern OSStatus
-MIDISetupDispose(	MIDISetupRef setup )						API_DEPRECATED("No longer supported", macos(10.0, 10.6)) API_UNAVAILABLE(ios, tvos, watchos);
+MIDISetupDispose(	MIDISetupRef setup )						API_DEPRECATED("No longer supported", macos(10.0, 10.6)) MIDI_API_UNAVAILABLE_NON_MACOS;
 
 //  -----------------------------------------------------------------------------
 /*!
@@ -120,7 +120,7 @@ MIDISetupDispose(	MIDISetupRef setup )						API_DEPRECATED("No longer supported"
 	@result			An OSStatus result code.
 */
 extern OSStatus
-MIDISetupInstall(	MIDISetupRef setup )						API_DEPRECATED("No longer supported", macos(10.0, 10.6)) API_UNAVAILABLE(ios, tvos, watchos);
+MIDISetupInstall(	MIDISetupRef setup )						API_DEPRECATED("No longer supported", macos(10.0, 10.6)) MIDI_API_UNAVAILABLE_NON_MACOS;
 
 
 //  -----------------------------------------------------------------------------
@@ -141,7 +141,7 @@ MIDISetupInstall(	MIDISetupRef setup )						API_DEPRECATED("No longer supported"
 	@result			An OSStatus result code.
 */
 extern OSStatus
-MIDISetupGetCurrent(	MIDISetupRef *outSetup )				API_DEPRECATED("No longer supported", macos(10.0, 10.6)) API_UNAVAILABLE(ios, tvos, watchos);
+MIDISetupGetCurrent(	MIDISetupRef *outSetup )				API_DEPRECATED("No longer supported", macos(10.0, 10.6)) MIDI_API_UNAVAILABLE_NON_MACOS;
 
 
 //  -----------------------------------------------------------------------------
@@ -165,7 +165,7 @@ MIDISetupGetCurrent(	MIDISetupRef *outSetup )				API_DEPRECATED("No longer suppo
 */
 extern OSStatus
 MIDISetupToData(	MIDISetupRef	setup,
-					CFDataRef __nullable * __nonnull outData )	API_DEPRECATED("No longer supported", macos(10.0, 10.6)) API_UNAVAILABLE(ios, tvos, watchos);
+					CFDataRef __nullable * __nonnull outData )	API_DEPRECATED("No longer supported", macos(10.0, 10.6)) MIDI_API_UNAVAILABLE_NON_MACOS;
 
 //  -----------------------------------------------------------------------------
 /*!
@@ -188,7 +188,7 @@ MIDISetupToData(	MIDISetupRef	setup,
 */
 extern OSStatus
 MIDISetupFromData(	CFDataRef 		data, 
-					MIDISetupRef *	outSetup)					API_DEPRECATED("No longer supported", macos(10.0, 10.6)) API_UNAVAILABLE(ios, tvos, watchos);
+					MIDISetupRef *	outSetup)					API_DEPRECATED("No longer supported", macos(10.0, 10.6)) MIDI_API_UNAVAILABLE_NON_MACOS;
 
 //  -----------------------------------------------------------------------------
 /*!
@@ -197,7 +197,7 @@ MIDISetupFromData(	CFDataRef 		data,
 	@discussion		Drivers call this function to specify one of the entities that
 					comprise a device.
 					
-					Non-drivers may call this function as of macOS 10.16 & iOS 14 to
+					Non-drivers may call this function as of macOS 11.0 & iOS 14 to
 					add entities to external devices.
 	
 	@param			device
@@ -395,7 +395,7 @@ MIDISetupRemoveExternalDevice( MIDIDeviceRef device )		API_AVAILABLE(macos(10.1)
 */
 extern OSStatus
 MIDIGetSerialPortOwner(	CFStringRef			portName, 
-						CFStringRef __nullable * __nonnull outDriverName )	API_DEPRECATED("No longer supported", macos(10.1, 10.6)) API_UNAVAILABLE(ios, tvos, watchos);
+						CFStringRef __nullable * __nonnull outDriverName )	API_DEPRECATED("No longer supported", macos(10.1, 10.6)) MIDI_API_UNAVAILABLE_NON_MACOS;
 
 //  -----------------------------------------------------------------------------
 /*!
@@ -418,7 +418,7 @@ MIDIGetSerialPortOwner(	CFStringRef			portName,
 */
 extern OSStatus
 MIDISetSerialPortOwner(	CFStringRef			portName, 
-						CFStringRef			driverName )	API_DEPRECATED("No longer supported", macos(10.1, 10.6)) API_UNAVAILABLE(ios, tvos, watchos);
+						CFStringRef			driverName )	API_DEPRECATED("No longer supported", macos(10.1, 10.6)) MIDI_API_UNAVAILABLE_NON_MACOS;
 
 //  -----------------------------------------------------------------------------
 /*!
@@ -440,7 +440,7 @@ MIDISetSerialPortOwner(	CFStringRef			portName,
 	@result			An OSStatus result code.	
 */
 extern OSStatus
-MIDIGetSerialPortDrivers(	CFArrayRef __nullable * __nonnull outDriverNames )	API_DEPRECATED("No longer supported", macos(10.1, 10.6)) API_UNAVAILABLE(ios, tvos, watchos);
+MIDIGetSerialPortDrivers(	CFArrayRef __nullable * __nonnull outDriverNames )	API_DEPRECATED("No longer supported", macos(10.1, 10.6)) MIDI_API_UNAVAILABLE_NON_MACOS;
 
 //  -----------------------------------------------------------------------------
 /*!

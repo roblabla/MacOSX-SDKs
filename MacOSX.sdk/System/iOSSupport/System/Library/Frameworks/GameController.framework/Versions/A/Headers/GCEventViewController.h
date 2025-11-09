@@ -5,8 +5,6 @@
 //  Copyright © 2018 Apple Inc. All rights reserved.
 //
 
-#import <TargetConditionals.h>
-
 #import <Foundation/Foundation.h>
 
 #import <UIKit/UIViewController.h>

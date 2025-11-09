@@ -1,7 +1,7 @@
 /*
         NSTextContent.h
         Application Kit
-        Copyright (c) 2020-2023, Apple Inc.
+        Copyright (c) 2020-2024, Apple Inc.
         All rights reserved.
 */
 

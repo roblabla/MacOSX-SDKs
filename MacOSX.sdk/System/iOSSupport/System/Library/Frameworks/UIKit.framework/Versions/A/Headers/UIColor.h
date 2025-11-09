@@ -20,29 +20,37 @@ NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 @class UIImage;
 @class UITraitCollection;
 
-UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_SENDABLE
+// A type indicating the prominence of a color.
+typedef NS_ENUM(NSInteger, UIColorProminence) {
+    UIColorProminencePrimary,
+    UIColorProminenceSecondary,
+    UIColorProminenceTertiary,
+    UIColorProminenceQuaternary,
+} NS_SWIFT_NAME(UIColor.Prominence) API_AVAILABLE(visionos(2.0), ios(18.0), tvos(18.0)) API_UNAVAILABLE(watchos);
+
+UIKIT_EXTERN API_AVAILABLE(ios(2.0), watchos(2.0)) NS_SWIFT_SENDABLE
 @interface UIColor : NSObject <NSSecureCoding, NSCopying>
 
 // Convenience methods for creating colors
 + (UIColor *)colorWithWhite:(CGFloat)white alpha:(CGFloat)alpha;
 + (UIColor *)colorWithHue:(CGFloat)hue saturation:(CGFloat)saturation brightness:(CGFloat)brightness alpha:(CGFloat)alpha;
 + (UIColor *)colorWithRed:(CGFloat)red green:(CGFloat)green blue:(CGFloat)blue alpha:(CGFloat)alpha;
-+ (UIColor *)colorWithDisplayP3Red:(CGFloat)displayP3Red green:(CGFloat)green blue:(CGFloat)blue alpha:(CGFloat)alpha API_AVAILABLE(ios(10.0));
++ (UIColor *)colorWithDisplayP3Red:(CGFloat)displayP3Red green:(CGFloat)green blue:(CGFloat)blue alpha:(CGFloat)alpha API_AVAILABLE(ios(10.0), watchos(3.0));
 + (UIColor *)colorWithCGColor:(CGColorRef)cgColor;
 + (UIColor *)colorWithPatternImage:(UIImage *)image;
 #if __has_include(<CoreImage/CoreImage.h>)
-+ (UIColor *)colorWithCIColor:(CIColor *)ciColor API_AVAILABLE(ios(5.0));
++ (UIColor *)colorWithCIColor:(CIColor *)ciColor API_AVAILABLE(ios(5.0), watchos(2.0));
 #endif
 
 // Initializers for creating colors
 - (UIColor *)initWithWhite:(CGFloat)white alpha:(CGFloat)alpha;
 - (UIColor *)initWithHue:(CGFloat)hue saturation:(CGFloat)saturation brightness:(CGFloat)brightness alpha:(CGFloat)alpha;
 - (UIColor *)initWithRed:(CGFloat)red green:(CGFloat)green blue:(CGFloat)blue alpha:(CGFloat)alpha;
-- (UIColor *)initWithDisplayP3Red:(CGFloat)displayP3Red green:(CGFloat)green blue:(CGFloat)blue alpha:(CGFloat)alpha API_AVAILABLE(ios(10.0));
+- (UIColor *)initWithDisplayP3Red:(CGFloat)displayP3Red green:(CGFloat)green blue:(CGFloat)blue alpha:(CGFloat)alpha API_AVAILABLE(ios(10.0), watchos(3.0));
 - (UIColor *)initWithCGColor:(CGColorRef)cgColor;
 - (UIColor *)initWithPatternImage:(UIImage*)image;
 #if __has_include(<CoreImage/CoreImage.h>)
-- (UIColor *)initWithCIColor:(CIColor *)ciColor API_AVAILABLE(ios(5.0));
+- (UIColor *)initWithCIColor:(CIColor *)ciColor API_AVAILABLE(ios(5.0), watchos(2.0));
 #endif
 
 // Some convenience methods to create colors.  These colors will be as calibrated as possible.
@@ -72,9 +80,9 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_SENDABLE
 
 // Convenience methods for getting components.
 // If the receiver is of a compatible color space, any non-NULL parameters are populated and 'YES' is returned. Otherwise, the parameters are left unchanged and 'NO' is returned.
-- (BOOL)getWhite:(nullable CGFloat *)white alpha:(nullable CGFloat *)alpha API_AVAILABLE(ios(5.0));
-- (BOOL)getHue:(nullable CGFloat *)hue saturation:(nullable CGFloat *)saturation brightness:(nullable CGFloat *)brightness alpha:(nullable CGFloat *)alpha API_AVAILABLE(ios(5.0));
-- (BOOL)getRed:(nullable CGFloat *)red green:(nullable CGFloat *)green blue:(nullable CGFloat *)blue alpha:(nullable CGFloat *)alpha API_AVAILABLE(ios(5.0));
+- (BOOL)getWhite:(nullable CGFloat *)white alpha:(nullable CGFloat *)alpha API_AVAILABLE(ios(5.0), watchos(2.0));
+- (BOOL)getHue:(nullable CGFloat *)hue saturation:(nullable CGFloat *)saturation brightness:(nullable CGFloat *)brightness alpha:(nullable CGFloat *)alpha API_AVAILABLE(ios(5.0), watchos(2.0));
+- (BOOL)getRed:(nullable CGFloat *)red green:(nullable CGFloat *)green blue:(nullable CGFloat *)blue alpha:(nullable CGFloat *)alpha API_AVAILABLE(ios(5.0), watchos(2.0));
 
 // Returns a color in the same color space as the receiver with the specified alpha component.
 - (UIColor *)colorWithAlphaComponent:(CGFloat)alpha;
@@ -83,7 +91,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_SENDABLE
 @property(nonatomic,readonly) CGColorRef CGColor;
 - (CGColorRef)CGColor NS_RETURNS_INNER_POINTER CF_RETURNS_NOT_RETAINED;
 #if __has_include(<CoreImage/CoreImage.h>)
-@property(nonatomic,readonly) CIColor   *CIColor API_AVAILABLE(ios(5.0));
+@property(nonatomic,readonly) CIColor   *CIColor API_AVAILABLE(ios(5.0), watchos(2.0));
 #endif
 
 @end
@@ -97,13 +105,13 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_SENDABLE
 #if __has_include(<CoreImage/CoreImage.h>)
 @interface CIColor(UIKitAdditions)
 
-- (instancetype)initWithColor:(UIColor *)color API_AVAILABLE(ios(5.0));
+- (instancetype)initWithColor:(UIColor *)color API_AVAILABLE(ios(5.0), watchos(2.0));
 
 @end
 #endif
 
 @interface UIColor (UIColorNamedColors)
-+ (nullable UIColor *)colorNamed:(NSString *)name API_AVAILABLE(ios(11.0));      // load from main bundle
++ (nullable UIColor *)colorNamed:(NSString *)name API_AVAILABLE(ios(11.0), watchos(4.0));      // load from main bundle
 + (nullable UIColor *)colorNamed:(NSString *)name inBundle:(nullable NSBundle *)bundle compatibleWithTraitCollection:(nullable UITraitCollection *)traitCollection API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos);
 @end
 
@@ -124,6 +132,15 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_SENDABLE
 - (UIColor *)resolvedColorWithTraitCollection:(UITraitCollection *)traitCollection API_AVAILABLE(ios(13.0), tvos(13.0)) API_UNAVAILABLE(watchos);
 
 @end
+
+@interface UIColor (ProminenceSupport)
+
+// Returns a color as the receiver with the specified prominence.
+- (UIColor *)colorWithProminence:(UIColorProminence)prominence API_AVAILABLE(visionos(2.0), ios(18.0), tvos(18.0)) API_UNAVAILABLE(watchos);
+
+@property(nonatomic, readonly) UIColorProminence prominence API_AVAILABLE(visionos(2.0), ios(18.0), tvos(18.0)) API_UNAVAILABLE(watchos);
+@end
+
 
 NS_HEADER_AUDIT_END(nullability, sendability)
 

@@ -48,6 +48,7 @@ OS_EXPORT NSString *const AVAudioApplicationMuteStateKey API_AVAILABLE(ios(17.0)
 
 
 /// Class containing methods that relate to an application bundle's audio (i.e. a collection of one or more AVAudioSession instances)
+NS_SWIFT_SENDABLE
 API_AVAILABLE(ios(17.0), watchos(10.0), tvos(17.0), macos(14.0)) 
 @interface AVAudioApplication : NSObject
 

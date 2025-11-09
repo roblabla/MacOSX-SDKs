@@ -2,13 +2,14 @@
 //  HKQuery.h
 //  HealthKit
 //
-//  Copyright (c) 2013-2022 Apple Inc. All rights reserved.
+//  Copyright (c) 2013-2024 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import <HealthKit/HKDefines.h>
 #import <HealthKit/HKElectrocardiogram.h>
 #import <HealthKit/HKFHIRResource.h>
+#import <HealthKit/HKStateOfMind.h>
 #import <HealthKit/HKWorkout.h>
 
 NS_ASSUME_NONNULL_BEGIN
@@ -173,6 +174,16 @@ typedef NS_OPTIONS(NSUInteger, HKQueryOptions) {
  */
 + (NSPredicate *)predicateForObjectsAssociatedWithElectrocardiogram:(HKElectrocardiogram *)electrocardiogram API_AVAILABLE(ios(14.0), watchos(7.0)) NS_SWIFT_NAME(predicateForObjectsAssociated(electrocardiogram:));
 
+/*!
+ @method        predicateForWorkoutEffortSamplesRelatedToWorkout:
+ @abstract      Creates a predicate for use with HKQuery subclasses.
+ @discussion    Creates a query predicate that matches Workout Effort samples that have been related to the given workout
+ 
+ @param         workout     The HKWorkout that the object is related to.
+ @param         activity    The HKWorkoutActivity that the object is related to.
+
+ */
++ (NSPredicate *)predicateForWorkoutEffortSamplesRelatedToWorkout:(HKWorkout *)workout activity:(nullable HKWorkoutActivity *)activity API_AVAILABLE(ios(18.0), watchos(11.0), macCatalyst(18.0), macos(15.0), visionos(2.0))NS_SWIFT_NAME(predicateForWorkoutEffortSamplesRelated(workout:activity:));
 
 @end
 
@@ -268,7 +279,7 @@ typedef NS_OPTIONS(NSUInteger, HKQueryOptions) {
  @param         totalEnergyBurned   The value that the workout's totalEnergyBurned is being compared to. It is the right hand side of the
                                     expression. The unit for this value should be of type Energy.
  */
-+ (NSPredicate *)predicateForWorkoutsWithOperatorType:(NSPredicateOperatorType)operatorType totalEnergyBurned:(HKQuantity *)totalEnergyBurned API_DEPRECATED("Use predicateForWorkoutActivitiesWithOperatorType:quantityType:sumQuantity: passing the HKQuantityType for HKQuantityTypeIdentifierActiveEnergyBurned", ios(8.0, API_TO_BE_DEPRECATED), watchos(2.0, API_TO_BE_DEPRECATED), macCatalyst(13.0, API_TO_BE_DEPRECATED), macos(13.0, API_TO_BE_DEPRECATED));
++ (NSPredicate *)predicateForWorkoutsWithOperatorType:(NSPredicateOperatorType)operatorType totalEnergyBurned:(HKQuantity *)totalEnergyBurned API_DEPRECATED("Use predicateForWorkoutActivitiesWithOperatorType:quantityType:sumQuantity: passing the HKQuantityType for HKQuantityTypeIdentifierActiveEnergyBurned", ios(8.0, 18.0), watchos(2.0, 11.0), macCatalyst(13.0, 18.0), macos(13.0, 15.0));
 
 /*!
  @method        predicateForWorkoutsWithOperatorType:totalDistance:
@@ -290,7 +301,7 @@ typedef NS_OPTIONS(NSUInteger, HKQueryOptions) {
                                             It is the right hand side of the expression. The unit for this value should
                                             be of type Count.
  */
-+ (NSPredicate *)predicateForWorkoutsWithOperatorType:(NSPredicateOperatorType)operatorType totalSwimmingStrokeCount:(HKQuantity *)totalSwimmingStrokeCount API_DEPRECATED("Use predicateForWorkoutActivitiesWithOperatorType:quantityType:sumQuantity:", ios(10.0, API_TO_BE_DEPRECATED), watchos(3.0, API_TO_BE_DEPRECATED), macCatalyst(13.0, API_TO_BE_DEPRECATED), macos(13.0, API_TO_BE_DEPRECATED));
++ (NSPredicate *)predicateForWorkoutsWithOperatorType:(NSPredicateOperatorType)operatorType totalSwimmingStrokeCount:(HKQuantity *)totalSwimmingStrokeCount API_DEPRECATED("Use predicateForWorkoutActivitiesWithOperatorType:quantityType:sumQuantity: passing the HKQuantityType for HKQuantityTypeIdentifierSwimmingStrokeCount", ios(10.0, 18.0), watchos(3.0, 11.0), macCatalyst(13.0, 18.0), macos(13.0, 15.0));
 
 /*!
  @method        predicateForWorkoutsWithOperatorType:totalFlightsClimbed:
@@ -302,8 +313,8 @@ typedef NS_OPTIONS(NSUInteger, HKQueryOptions) {
                                             It is the right hand side of the expression. The unit for this value should
                                             be of type Count.
  */
-+ (NSPredicate *)predicateForWorkoutsWithOperatorType:(NSPredicateOperatorType)operatorType totalFlightsClimbed:(HKQuantity *)totalFlightsClimbed API_DEPRECATED("Use predicateForWorkoutActivitiesWithOperatorType:quantityType:sumQuantity: passing the HKQuantityType for HKQuantityTypeIdentifierSwimmingStrokeCount", ios(11.0, API_TO_BE_DEPRECATED), watchos(4.0, API_TO_BE_DEPRECATED), macCatalyst(13.0, API_TO_BE_DEPRECATED), macos(13.0, API_TO_BE_DEPRECATED));
-                                                                                                                                                            
++ (NSPredicate *)predicateForWorkoutsWithOperatorType:(NSPredicateOperatorType)operatorType totalFlightsClimbed:(HKQuantity *)totalFlightsClimbed API_DEPRECATED("Use predicateForWorkoutActivitiesWithOperatorType:quantityType:sumQuantity: passing the HKQuantityType for HKQuantityTypeIdentifierFlightsClimbed", ios(11.0, 18.0), watchos(4.0, 11.0), macCatalyst(13.0, 18.0), macos(13.0, 15.0));
+
 /*!
  @method        predicateForWorkoutsWithOperatorType:quantityType:sumQuantity:
  @abstract      Creates a predicate for use with HKQuery subclasses.
@@ -566,6 +577,48 @@ typedef NS_OPTIONS(NSUInteger, HKQueryOptions) {
  @param         dateInterval      The date interval that the record's relevant date is in.
  */
 + (NSPredicate *)predicateForVerifiableClinicalRecordsWithRelevantDateWithinDateInterval:(NSDateInterval *)dateInterval API_AVAILABLE(ios(15.0), macCatalyst(15.0), macos(13.0)) NS_SWIFT_NAME(predicateForVerifiableClinicalRecords(withRelevantDateWithin:));
+
+@end
+
+@interface HKQuery (HKStateOfMind)
+
+/**
+ @method        predicateForStatesOfMindWithValence:operatorType:
+ @abstract      Creates a predicate for use with HKStateOfMind
+ @discussion    Creates a query predicate that matches HKStateOfMind samples that have a valence property matching the operator type and valence.
+ 
+ @param         valence The value to be compared against.
+ @param         operatorType The comparison operator type for the expression.
+ */
++ (NSPredicate *)predicateForStatesOfMindWithValence:(double)valence 
+                                        operatorType:(NSPredicateOperatorType)operatorType;
+
+/**
+ @method        predicateForStatesOfMindWithKind:
+ @abstract      Creates a predicate for use with HKStateOfMind
+ @discussion    Creates a query predicate that matches HKStateOfMind samples that have the specified kind of feeling type.
+ 
+ @param         kind The kind of feeling type to be compared against.
+ */
++ (NSPredicate *)predicateForStatesOfMindWithKind:(HKStateOfMindKind)kind;
+
+/**
+ @method        predicateForStatesOfMindWithLabel:
+ @abstract      Creates a predicate for use with HKStateOfMind
+ @discussion    Creates a query predicate that matches HKStateOfMind samples that have the specified label.
+ 
+ @param         label The label to be compared against.
+ */
++ (NSPredicate *)predicateForStatesOfMindWithLabel:(HKStateOfMindLabel)label;
+
+/**
+ @method        predicateForStatesOfMindWithAssociation:
+ @abstract      Creates a predicate for use with HKStateOfMind
+ @discussion    Creates a query predicate that matches HKStateOfMind samples that have the specified association.
+ 
+ @param         association The association to be compared against.
+ */
++ (NSPredicate *)predicateForStatesOfMindWithAssociation:(HKStateOfMindAssociation)association;
 
 @end
 

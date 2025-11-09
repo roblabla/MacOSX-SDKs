@@ -1,7 +1,7 @@
 /*
     NSSplitViewController.h
     Application Kit
-    Copyright (c) 2014-2023, Apple Inc.
+    Copyright (c) 2014-2024, Apple Inc.
     All rights reserved.
 */
 
@@ -9,7 +9,6 @@
 #import <AppKit/NSSplitViewItem.h>
 #import <AppKit/AppKitDefines.h>
 #import <AppKit/NSSplitView.h>
-#import <AppKit/AppKitDefines.h>
 #import <Foundation/NSArray.h>
 
 NS_HEADER_AUDIT_BEGIN(nullability, sendability)

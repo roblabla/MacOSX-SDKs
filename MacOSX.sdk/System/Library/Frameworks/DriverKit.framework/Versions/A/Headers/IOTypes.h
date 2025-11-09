@@ -45,7 +45,18 @@ extern "C" {
 #endif
 
 #ifndef NULL
-#if defined (__cplusplus)
+
+#if defined(__has_feature) && __has_feature(modules)
+#define USE_CLANG_TYPES 1
+#else
+#define USE_CLANG_TYPES 0
+#endif
+
+#if USE_CLANG_TYPES
+#define __need_NULL
+#include <stddef.h>
+#undef __need_NULL
+#elif defined (__cplusplus)
 #if __cplusplus >= 201103L && (defined(__arm__) || defined(__arm64__))
 #define NULL nullptr
 #else
@@ -54,6 +65,9 @@ extern "C" {
 #else
 #define NULL ((void *)0)
 #endif
+
+#undef USE_CLANG_TYPES
+
 #endif
 
 /*

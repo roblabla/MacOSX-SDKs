@@ -12,20 +12,20 @@
 
 NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
-UIKIT_EXTERN API_AVAILABLE(ios(8.0))
+UIKIT_EXTERN API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @interface UIAccessibilityCustomAction : NSObject
 
 - (instancetype)initWithName:(NSString *)name target:(nullable id)target selector:(SEL)selector;
-- (instancetype)initWithAttributedName:(NSAttributedString *)attributedName target:(nullable id)target selector:(SEL)selector API_AVAILABLE(ios(11.0), tvos(11.0));
-- (instancetype)initWithName:(NSString *)name image:(nullable UIImage *)image target:(nullable id)target selector:(SEL)selector API_AVAILABLE(ios(14.0), tvos(14.0));
-- (instancetype)initWithAttributedName:(NSAttributedString *)attributedName image:(nullable UIImage *)image target:(nullable id)target selector:(SEL)selector API_AVAILABLE(ios(14.0), tvos(14.0));
+- (instancetype)initWithAttributedName:(NSAttributedString *)attributedName target:(nullable id)target selector:(SEL)selector API_AVAILABLE(ios(11.0), tvos(11.0)) API_UNAVAILABLE(watchos);
+- (instancetype)initWithName:(NSString *)name image:(nullable UIImage *)image target:(nullable id)target selector:(SEL)selector API_AVAILABLE(ios(14.0), tvos(14.0)) API_UNAVAILABLE(watchos);
+- (instancetype)initWithAttributedName:(NSAttributedString *)attributedName image:(nullable UIImage *)image target:(nullable id)target selector:(SEL)selector API_AVAILABLE(ios(14.0), tvos(14.0)) API_UNAVAILABLE(watchos);
 
 
-typedef BOOL(^UIAccessibilityCustomActionHandler)(UIAccessibilityCustomAction *customAction);
-- (instancetype)initWithName:(NSString *)name actionHandler:(UIAccessibilityCustomActionHandler)actionHandler API_AVAILABLE(ios(13.0), tvos(13.0));
-- (instancetype)initWithAttributedName:(NSAttributedString *)attributedName actionHandler:(UIAccessibilityCustomActionHandler)actionHandler API_AVAILABLE(ios(13.0), tvos(13.0));
-- (instancetype)initWithName:(NSString *)name image:(nullable UIImage *)image actionHandler:(UIAccessibilityCustomActionHandler)actionHandler API_AVAILABLE(ios(14.0), tvos(14.0));
-- (instancetype)initWithAttributedName:(NSAttributedString *)attributedName image:(nullable UIImage *)image actionHandler:(UIAccessibilityCustomActionHandler)actionHandler API_AVAILABLE(ios(14.0), tvos(14.0));
+typedef BOOL(^UIAccessibilityCustomActionHandler)(UIAccessibilityCustomAction *customAction) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR;
+- (instancetype)initWithName:(NSString *)name actionHandler:(UIAccessibilityCustomActionHandler)actionHandler API_AVAILABLE(ios(13.0), tvos(13.0)) API_UNAVAILABLE(watchos);
+- (instancetype)initWithAttributedName:(NSAttributedString *)attributedName actionHandler:(UIAccessibilityCustomActionHandler)actionHandler API_AVAILABLE(ios(13.0), tvos(13.0)) API_UNAVAILABLE(watchos);
+- (instancetype)initWithName:(NSString *)name image:(nullable UIImage *)image actionHandler:(UIAccessibilityCustomActionHandler)actionHandler API_AVAILABLE(ios(14.0), tvos(14.0)) API_UNAVAILABLE(watchos);
+- (instancetype)initWithAttributedName:(NSAttributedString *)attributedName image:(nullable UIImage *)image actionHandler:(UIAccessibilityCustomActionHandler)actionHandler API_AVAILABLE(ios(14.0), tvos(14.0)) API_UNAVAILABLE(watchos);
 
 
 /*
@@ -42,7 +42,7 @@ typedef BOOL(^UIAccessibilityCustomActionHandler)(UIAccessibilityCustomAction *c
  Underlying attributed version of the "name" property. Setting this property will change the
  value of the "name" property and vice-versa.
  */
-@property (nonatomic, copy) NSAttributedString *attributedName API_AVAILABLE(ios(11.0), tvos(11.0));
+@property (nonatomic, copy) NSAttributedString *attributedName API_AVAILABLE(ios(11.0), tvos(11.0)) API_UNAVAILABLE(watchos);
 
 /*
  The object that will perform the action.
@@ -60,9 +60,16 @@ typedef BOOL(^UIAccessibilityCustomActionHandler)(UIAccessibilityCustomAction *c
 /*
  If the actionHandler is set, it will be preferred over the target/selector.
  */
-@property (nonatomic, copy, nullable) UIAccessibilityCustomActionHandler actionHandler API_AVAILABLE(ios(13.0), tvos(13.0));
+@property (nonatomic, copy, nullable) UIAccessibilityCustomActionHandler actionHandler API_AVAILABLE(ios(13.0), tvos(13.0)) API_UNAVAILABLE(watchos);
+
+/*
+ A localized name that describes the action's category. If nil, the category will be the default "Actions" category
+ */
+@property (nullable, nonatomic, copy) NSString *category API_AVAILABLE(ios(18.0), tvos(18.0), visionos(2.0)) API_UNAVAILABLE(watchos);
 
 @end
+
+UIKIT_EXTERN NSString *const UIAccessibilityCustomActionCategoryEdit API_AVAILABLE(ios(18.0), tvos(18.0), visionos(2.0)) API_UNAVAILABLE(watchos) NS_SWIFT_NAME(UIAccessibilityCustomAction.editCategory) NS_SWIFT_NONISOLATED;
 
 NS_HEADER_AUDIT_END(nullability, sendability)
 

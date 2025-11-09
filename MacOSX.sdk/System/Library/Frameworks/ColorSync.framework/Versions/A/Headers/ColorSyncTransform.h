@@ -223,6 +223,7 @@ CSEXTERN CFStringRef kColorSyncTransformSimplifiedConversionData CS_AVAILABLE_ST
 CSEXTERN CFStringRef kColorSyncTransformParametricConversionData CS_AVAILABLE_STARTING(10.4, 16.0);   /* CFSTR("com.apple.cmm.ParametricConversion") */
 CSEXTERN CFStringRef kColorSyncTransformProfileSequnce CS_AVAILABLE_STARTING(11.0, 16.0);             /* CFSTR("com.apple.cmm.ProfileSequnce") */
 
+CSEXTERN CFStringRef kColorSyncTransformUseITU709OETF CS_AVAILABLE_STARTING(15.0, 18.0);              /* CFSTR("com.apple.cmm.TransformUseITU709OETF") */
 /*
  * Matrix: represented as a CFArray of three CFArrays of four CFNumbers (Float32)
  *         each, performin the following matrix operation

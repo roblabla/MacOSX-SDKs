@@ -1,7 +1,7 @@
 /*
     NSImageView.h
     Application Kit
-    Copyright (c) 1994-2023, Apple Inc.
+    Copyright (c) 1994-2024, Apple Inc.
     All rights reserved.
 */
 
@@ -50,7 +50,7 @@ typedef NS_ENUM(NSInteger, NSImageDynamicRange) {
 /*!
  Specifies a combination of point size, weight, and scale to use when sizing and displaying symbol images. If a symbol configuration isn't provided, the image view uses a default size, weight, and scale provided by the system. The default value is `nil`.
  */
-@property (nullable, copy) NSImageSymbolConfiguration *symbolConfiguration API_AVAILABLE(macos(11));
+@property (nullable, copy) NSImageSymbolConfiguration *symbolConfiguration API_AVAILABLE(macos(11.0));
 
 /*!
  A tint color to be used when rendering template image content. This color may be combined with other effects to produce a theme-appropriate rendition of the template image. A nil value indicates the standard set of effects without color modification. The default value is nil.

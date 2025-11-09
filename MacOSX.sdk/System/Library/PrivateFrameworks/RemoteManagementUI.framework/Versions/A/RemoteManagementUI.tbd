@@ -9,7 +9,6 @@ exports:
                        RMUIError, RMUIInteractiveProfileErrorViewModel, RMUIInteractiveProfileFooterViewModel, 
                        RMUIInteractiveProfileToggleViewModel, RMUIKeyValueDetailViewModel, 
                        RMUIKeyValueViewModel, RMUILegacyProfilesViewModelProvider, 
-                       RMUILocalizable, RMUILog, RMUIPasscodeDetailViewModel, RMUIPasscodeViewModel, 
-                       RMUIPasscodeViewModelProvider, RMUIPluginSectionViewModel, 
-                       RMUIPluginViewModel, RMUIPluginViewModelProvider, RMUIProfileViewModel ]
+                       RMUILocalizable, RMUILog, RMUIPluginSectionViewModel, RMUIPluginViewModel, 
+                       RMUIPluginViewModelProvider, RMUIProfileViewModel ]
 ...

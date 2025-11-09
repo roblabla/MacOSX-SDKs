@@ -46,16 +46,16 @@ extern PKPaymentErrorKey const PKPaymentErrorPostalAddressUserInfoKey API_AVAILA
 
 // PKDisbursementErrorDomain is used for errors with in-app disbursements.
 // You create your own PKDisbursementErrors and return them to indicate problems with a transfer.
-extern NSString * const PKDisbursementErrorDomain API_AVAILABLE(ios(17.0)) API_UNAVAILABLE(macos, watchos, tvos);
+extern NSString * const PKDisbursementErrorDomain API_AVAILABLE(ios(17.0)) API_UNAVAILABLE(watchos, tvos);
 
 typedef NS_ERROR_ENUM(PKDisbursementErrorDomain, PKDisbursementErrorCode) {
     PKDisbursementUnknownError = -1,               // there was an unknown error processing the disbursement. The user should try again.
     PKDisbursementUnsupportedCardError = 1,        // the selected card does not support receiving funds in.
     PKDisbursementRecipientContactInvalidError,    // the recipient contact information has an error. Use the PKDisbursementErrorKeys in the userInfo to detail the problem.
-} API_AVAILABLE(ios(17.0)) API_UNAVAILABLE(macos, watchos, tvos);
+} API_AVAILABLE(macos(15.0),ios(17.0)) API_UNAVAILABLE(watchos, tvos);
 
 typedef NSString * PKDisbursementErrorKey NS_STRING_ENUM;
-extern PKDisbursementErrorKey const PKDisbursementErrorContactFieldUserInfoKey  API_AVAILABLE(ios(17.0)) API_UNAVAILABLE(macos, watchos, tvos); // a PKContactField the error relates to. Use with PKDisbursementRecipientContactInvalidError
+extern PKDisbursementErrorKey const PKDisbursementErrorContactFieldUserInfoKey  API_AVAILABLE(ios(17.0)) API_UNAVAILABLE(watchos, tvos); // a PKContactField the error relates to. Use with PKDisbursementRecipientContactInvalidError
 
 typedef NS_ENUM(NSInteger, PKAddPaymentPassError) {
     PKAddPaymentPassErrorUnsupported,
@@ -66,7 +66,8 @@ typedef NS_ENUM(NSInteger, PKAddPaymentPassError) {
 extern NSString * const PKAddSecureElementPassErrorDomain API_AVAILABLE(ios(13.4));
 
 typedef NS_ERROR_ENUM(PKAddSecureElementPassErrorDomain, PKAddSecureElementPassErrorCode) {
-    PKAddSecureElementPassUnknownError,
+    PKAddSecureElementPassGenericError API_AVAILABLE(ios(18.0)) = 0,
+    PKAddSecureElementPassUnknownError API_DEPRECATED("Use PKAddSecureElementPassGeneralError instead.", ios(13.4, 18.0)) = PKAddSecureElementPassGenericError,
     PKAddSecureElementPassUserCanceledError,
     PKAddSecureElementPassUnavailableError,
     PKAddSecureElementPassInvalidConfigurationError,

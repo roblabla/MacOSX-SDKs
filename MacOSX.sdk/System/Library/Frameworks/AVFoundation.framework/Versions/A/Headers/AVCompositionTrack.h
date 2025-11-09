@@ -29,7 +29,7 @@ NS_ASSUME_NONNULL_BEGIN
 @class AVCompositionTrackInternal;
 @class AVCompositionTrackSegment;
 
-API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0))
+API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0), visionos(1.0))
 @interface AVCompositionTrack : AVAssetTrack
 {
 @private
@@ -60,7 +60,7 @@ API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0))
 	@abstract		An array of AVCompositionTrackFormatDescriptionReplacement objects indicating original format descriptions and their replacements.
 	@discussion     The value of this property is an array of AVCompositionTrackFormatDescriptionReplacement objects, each of which specifies an original format description together with its replacement format description (as specified by a previous call to -replaceFormatDescription:withFormatDescription:). Only format descriptions that are to be replaced will occur as the originalFormatDescription elements in the AVCompositionTrackFormatDescriptionReplacement objects in this array.
 */
-@property (readonly) NSArray <AVCompositionTrackFormatDescriptionReplacement *> *formatDescriptionReplacements API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0), watchos(6.0));
+@property (readonly) NSArray <AVCompositionTrackFormatDescriptionReplacement *> *formatDescriptionReplacements API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0), watchos(6.0), visionos(1.0));
 
 @end
 
@@ -73,7 +73,8 @@ API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0))
 
 @class AVMutableCompositionTrackInternal;
 
-API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0))
+NS_SWIFT_NONSENDABLE
+API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0), visionos(1.0))
 @interface AVMutableCompositionTrack : AVCompositionTrack
 {
 @private
@@ -84,7 +85,7 @@ API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0))
  @property       enabled
  @abstract       Specifies whether the track is enabled or disabled.  Default is YES.
  */
-@property (nonatomic, getter=isEnabled) BOOL enabled API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0)) API_UNAVAILABLE(watchos);
+@property (nonatomic, getter=isEnabled) BOOL enabled API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 /*!
     @property       naturalTimeScale
@@ -171,7 +172,7 @@ API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0))
       This method is equivalent to (but more efficient than) calling -insertTimeRange:ofTrack:atTime:error: for each timeRange/track pair. If this method returns an error, none of the time ranges will be inserted into the composition track. To specify an empty time range, pass NSNull for the track and a time range of starting at kCMTimeInvalid with a duration of the desired empty edit.
 	  This method throws an exception if time ranges and tracks to not have the same array count.
 */
-- (BOOL)insertTimeRanges:(NSArray<NSValue *> *)timeRanges ofTracks:(NSArray<AVAssetTrack *> *)tracks atTime:(CMTime)startTime error:(NSError * _Nullable * _Nullable)outError API_AVAILABLE(macos(10.8), ios(5.0), tvos(9.0), watchos(1.0));
+- (BOOL)insertTimeRanges:(NSArray<NSValue *> *)timeRanges ofTracks:(NSArray<AVAssetTrack *> *)tracks atTime:(CMTime)startTime error:(NSError * _Nullable * _Nullable)outError API_AVAILABLE(macos(10.8), ios(5.0), tvos(9.0), watchos(1.0), visionos(1.0));
 
 /*!
     @method         insertEmptyTimeRange:
@@ -228,7 +229,7 @@ API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0))
 	@param			trackAssociationType
 					The type of track association to add between the receiver and the specified compositionTrack (for instance, AVTrackAssociationTypeChapterList).
 */
-- (void)addTrackAssociationToTrack:(AVCompositionTrack *)compositionTrack type:(AVTrackAssociationType)trackAssociationType API_AVAILABLE(macos(10.14), ios(12.0), tvos(12.0), watchos(5.0));
+- (void)addTrackAssociationToTrack:(AVCompositionTrack *)compositionTrack type:(AVTrackAssociationType)trackAssociationType API_AVAILABLE(macos(10.14), ios(12.0), tvos(12.0), watchos(5.0), visionos(1.0));
 
 /*!
 	@method			removeTrackAssociationToTrack:type:
@@ -238,7 +239,7 @@ API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0))
 	@param			trackAssociationType
 					The type of track association to remove between the receiver and the specified compositionTrack (for instance, AVTrackAssociationTypeChapterList).
 */
-- (void)removeTrackAssociationToTrack:(AVCompositionTrack *)compositionTrack type:(AVTrackAssociationType)trackAssociationType API_AVAILABLE(macos(10.14), ios(12.0), tvos(12.0), watchos(5.0));
+- (void)removeTrackAssociationToTrack:(AVCompositionTrack *)compositionTrack type:(AVTrackAssociationType)trackAssociationType API_AVAILABLE(macos(10.14), ios(12.0), tvos(12.0), watchos(5.0), visionos(1.0));
 
 @end
 
@@ -248,7 +249,7 @@ API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0))
  @discussion    Subclasses of this type that are used from Swift must fulfill the requirements of a Sendable type.
 */
 NS_SWIFT_SENDABLE
-API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0), watchos(6.0))
+API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0), watchos(6.0), visionos(1.0))
 @interface AVCompositionTrackFormatDescriptionReplacement : NSObject <NSSecureCoding>
 
 /*!
@@ -276,7 +277,7 @@ API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0), watchos(6.0))
 	@discussion     You can use this method to make surgical changes to a track's format descriptions, such as adding format description extensions to a format description or changing the audio channel layout of an audio track. You should note that a format description can have extensions of type kCMFormatDescriptionExtension_VerbatimSampleDescription and kCMFormatDescriptionExtension_VerbatimISOSampleEntry; if you modify a copy of a format description, you should delete those extensions from the copy or your changes might be ignored. Also note that format description replacements are not transferred when performing editing operations on AVMutableCompositionTrack objects; for instance, inserting a range of a composition track into another composition track does not transfer any replacement format descriptions.
 					This method throws an exception if the media type of the replacement does not match the original format description.
 */
-- (void)replaceFormatDescription:(CMFormatDescriptionRef)originalFormatDescription withFormatDescription:(nullable CMFormatDescriptionRef)replacementFormatDescription API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0), watchos(6.0));
+- (void)replaceFormatDescription:(CMFormatDescriptionRef)originalFormatDescription withFormatDescription:(nullable CMFormatDescriptionRef)replacementFormatDescription API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0), watchos(6.0), visionos(1.0));
 
 @end
 
@@ -291,12 +292,12 @@ API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0), watchos(6.0))
 - (BOOL)hasMediaCharacteristic:(AVMediaCharacteristic)mediaCharacteristic;
 - (CMTime)samplePresentationTimeForTrackTime:(CMTime)trackTime;
 - (NSArray<AVMetadataItem *> *)metadataForFormat:(AVMetadataFormat)format;
-- (NSArray<AVAssetTrack *> *)associatedTracksOfType:(AVTrackAssociationType)trackAssociationType API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(1.0));
+- (NSArray<AVAssetTrack *> *)associatedTracksOfType:(AVTrackAssociationType)trackAssociationType API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(1.0), visionos(1.0));
 
 #if __swift__
 @property (nonatomic, readonly) NSArray *formatDescriptions;
-@property (nonatomic, readonly, getter=isPlayable) BOOL playable API_AVAILABLE(macos(10.8), ios(5.0), tvos(9.0), watchos(1.0));
-@property (nonatomic, readonly, getter=isDecodable) BOOL decodable API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0));
+@property (nonatomic, readonly, getter=isPlayable) BOOL playable API_AVAILABLE(macos(10.8), ios(5.0), tvos(9.0), watchos(1.0), visionos(1.0));
+@property (nonatomic, readonly, getter=isDecodable) BOOL decodable API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0), visionos(1.0));
 @property (nonatomic, readonly, getter=isEnabled) BOOL enabled;
 @property (nonatomic, readonly, getter=isSelfContained) BOOL selfContained;
 @property (nonatomic, readonly) long long totalSampleDataLength;
@@ -308,15 +309,15 @@ API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0), watchos(6.0))
 @property (nonatomic, readonly) CGSize naturalSize;
 @property (nonatomic, readonly) CGAffineTransform preferredTransform;
 @property (nonatomic, readonly) float preferredVolume;
-@property (nonatomic, readonly) BOOL hasAudioSampleDependencies API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0), watchos(6.0));
+@property (nonatomic, readonly) BOOL hasAudioSampleDependencies API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0), watchos(6.0), visionos(1.0));
 @property (nonatomic, readonly) float nominalFrameRate;
-@property (nonatomic, readonly) CMTime minFrameDuration API_AVAILABLE(macos(10.10), ios(7.0), tvos(9.0), watchos(1.0));
-@property (nonatomic, readonly) BOOL requiresFrameReordering API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(1.0));
+@property (nonatomic, readonly) CMTime minFrameDuration API_AVAILABLE(macos(10.10), ios(7.0), tvos(9.0), watchos(1.0), visionos(1.0));
+@property (nonatomic, readonly) BOOL requiresFrameReordering API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(1.0), visionos(1.0));
 @property (nonatomic, readonly) NSArray<AVMetadataItem *> *commonMetadata;
-@property (nonatomic, readonly) NSArray<AVMetadataItem *> *metadata API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(1.0));
+@property (nonatomic, readonly) NSArray<AVMetadataItem *> *metadata API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(1.0), visionos(1.0));
 @property (nonatomic, readonly) NSArray<AVMetadataFormat> *availableMetadataFormats;
-@property (nonatomic, readonly) NSArray<AVTrackAssociationType> *availableTrackAssociationTypes API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(1.0));
-@property (nonatomic, readonly) BOOL canProvideSampleCursors API_AVAILABLE(macos(10.10), ios(16.0), tvos(16.0), watchos(9.0));
+@property (nonatomic, readonly) NSArray<AVTrackAssociationType> *availableTrackAssociationTypes API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(1.0), visionos(1.0));
+@property (nonatomic, readonly) BOOL canProvideSampleCursors API_AVAILABLE(macos(10.10), ios(16.0), tvos(16.0), watchos(9.0), visionos(1.0));
 #endif // __swift__
 
 @end

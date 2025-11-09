@@ -7,10 +7,9 @@ compatibility-version: 0
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _TUIKTLearnMoreRemoteViewControllerHostInterface, _TUIKTLearnMoreRemoteViewControllerServiceInterface, 
-                       _ffKTAccountKeyUI, _ffKTIneligibleDevicesRemoteUI, _ffKTOldVerifyContactsBehavior, 
-                       _ffKTReportToApple, _ffKTResetButtonUI, _ffKTStateManagerUI, 
-                       _ffKTStaticId, _ffKTSystemFailureUI, _kIDSKeyTransparencyVerifierErrorDomain, 
-                       _kTUIAccessibilityIdentifierOptInSwitch, _kTUIAccessibilityIdentifierVerificationCode, 
+                       _ffKTOldVerifyContactsBehavior, _ffKTReportToApple, _kIDSKeyTransparencyVerifierErrorDomain, 
+                       _kTUIAccessibilityIdentifierOptInSwitch, _kTUIAccessibilityIdentifierPeerPublicVerificationCode, 
+                       _kTUIAccessibilityIdentifierSelfPublicVerificationCode, _kTUIAccessibilityIdentifierVerificationCode, 
                        _kTUIContactKeyVerificationLearnMoreURL, _kTUIContactVerificationCodeLearnMoreURL, 
                        _kTUIKeyContactIdentifier, _kTUIKeyLastUsedIdentifier, _kTUIKeyPublicAccountIdentity, 
                        _kTUIMessagesAccountSettingsURL, _kTUIOBKProtocolPropertyDetailTextKey, 
@@ -20,19 +19,19 @@ exports:
                        _kTUIPublicVerificationCodeLearnMoreURL, _kTUIReportToAppleLearnMoreURL, 
                        _kTUISetupFlowSheetHeight, _kTUISetupFlowSheetHeightLowResolution, 
                        _kTUISetupFlowSheetWidth, _kTUITapToRadarURL, _kTUITrustedDeviceListSettingsURL, 
-                       _kTUIUnknownDeviceIconURL, _kTransparencyAnalyticsEventIneligibleDevicesUI ]
+                       _kTUIUnknownDeviceIconURL, _kTransparencyAnalyticsEventIneligibleDevicesUI, 
+                       _kTransparencyAnalyticsEventOptIn ]
     objc-classes:    [ KTStaticKeyMock, KTStaticKeyMockDelay, KTStaticKeyMockDelayError, 
                        KTStaticKeyMockError, TUIAIDPPOptInSpecifierProvider, TUIAIDPPOptInSpecifierViewController, 
                        TUIAnalytics, TUIAppleAccountManager, TUIDeviceDetailsViewController, 
-                       TUIIDMSDeviceSource, TUIKTConversationPaneController, TUIKTConversationViewController, 
-                       TUIKTDeviceErrorViewController, TUIKTFooterViewController, 
-                       TUIKTLearnMorePresenter, TUIKTLearnMoreRemoteViewControllerHost, 
+                       TUIIDMSDeviceSource, TUIKTAppIntentsData, TUIKTConversationPaneController, 
+                       TUIKTConversationViewController, TUIKTDeviceErrorViewController, 
+                       TUIKTFooterViewController, TUIKTLearnMorePresenter, TUIKTLearnMoreRemoteViewControllerHost, 
                        TUIKTLearnMoreViewController, TUIKTOptInStatusViewController, 
                        TUIKTReportToAppleContext, TUIKTReportToAppleViewController, 
-                       TUIKTSingleAccountViewController, TUIMarkAsVerifiedButton, 
+                       TUIKTSingleAccountViewController, TUIKTStateManager, TUIMarkAsVerifiedButton, 
                        TUIMaskView, TUIMismatchedAppleIDModel, TUIMissingAppleIDModel, 
                        TUINetworkMonitor, TUIOptInFlowControllerImpl, TUIReportManager, 
-                       TUIStateManager, TUIStaticIdentityManager, TUIUpdateDevicesModel, 
-                       TUIUtils, TUIWelcomeControllerModel, TUIWelcomeSplashScreenModel, 
-                       _TUIFlippedClipView ]
+                       TUIStaticIdentityManager, TUIUpdateDevicesModel, TUIUtils, 
+                       TUIWelcomeControllerModel, TUIWelcomeSplashScreenModel, _TUIFlippedClipView ]
 ...

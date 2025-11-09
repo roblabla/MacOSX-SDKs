@@ -3,7 +3,7 @@
 //  NSTextRange.h
 //  Text Kit
 //
-//  Copyright (c) 2018-2021, Apple Inc. All rights reserved.
+//  Copyright (c) 2018-2024, Apple Inc. All rights reserved.
 //
 
 #import <Foundation/NSObject.h>
@@ -12,16 +12,16 @@ NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 #pragma mark NSTextLocation
 // NSTextLocation represents an abstract location inside document contents. A concrete class conforming to the protocol should be associated with a particular document backing store type. The interpretation of a location in enumeration operations is depending on the logical direction. When enumerating forward, it should start with the item containing the location. The enumeration should start with an item preceding the location for reverse operations.
-API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos) NS_PROTOCOL_REQUIRES_EXPLICIT_IMPLEMENTATION
+API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0), visionos(1.0)) NS_PROTOCOL_REQUIRES_EXPLICIT_IMPLEMENTATION
 @protocol NSTextLocation <NSObject>
 
 // Compares and returns the logical ordering to location
-- (NSComparisonResult)compare:(id <NSTextLocation>)location API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos);
+- (NSComparisonResult)compare:(id <NSTextLocation>)location API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0), visionos(1.0));
 @end
 
 #pragma mark NSTextRange
 // NSTextRange represents a contiguous range between two locations inside document contents. It consists of the starting location and terminating location. They are the two basic properties, location and endLocation, respectively. The terminating location, endLocation, is directly following the last location in the range. So, a location is contained in a range if (range.location <= location) && (location < range.endLocation).
-API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos)
+API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0), visionos(1.0))
 @interface NSTextRange : NSObject
 #pragma mark Initialization
 // Returns an empty range when endLocation=nil

@@ -14,22 +14,22 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-/// Representation of a compute datatype
+/// The representation of a compute data type.
 ///
-/// MPSGraphTensorData is how we pass data to an MPSGraph, a reference will be taken to your data and used just in time when MPSGraph is run.
+/// Pass data to a graph using a tensor data, a reference will be taken to your data and used just in time when the graph is run.
 MPS_CLASS_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))
 @interface MPSGraphTensorData : MPSGraphObject
 
-/// shape of the tensorData
+/// The shape of the tensor data.
 @property (readonly, copy, nonatomic) MPSShape *shape;
 
-/// dataType of the tensorData
+/// The data type of the tensor data.
 @property (readonly, nonatomic) MPSDataType dataType;
 
-/// device of the tensorData
+/// The device of the tensor data.
 @property (readonly, nonatomic) MPSGraphDevice * device;
 
-/// Initialize an MPSGraphTensorData with an NSData on an MPSDevice
+/// Initializes the tensor data with an `NSData` on a device.
 ///
 /// - Parameters:
 ///   - device: MPSDevice on which the MPSGraphTensorData exists
@@ -43,7 +43,8 @@ MPS_CLASS_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))
                          shape:(MPSShape *) shape
                       dataType:(MPSDataType) dataType;
 
-/// Initialize an MPSGraphTensorData with an MTLBuffer 
+/// Initializes an tensor data with a metal buffer.
+/// 
 /// The device of the MTLBuffer will be used to get the MPSDevice for this MPSGraphTensorData.
 ///
 /// - Parameters:
@@ -56,7 +57,8 @@ MPS_CLASS_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))
                          dataType:(MPSDataType) dataType
 MPS_SWIFT_NAME( init(_:shape:dataType:) );
 
-/// Initialize an MPSGraphTensorData with an MTLBuffer 
+/// Initializes an tensor data with a metal buffer.
+///
 /// The device of the MTLBuffer will be used to get the MPSDevice for this MPSGraphTensorData.
 ///
 /// - Parameters:
@@ -72,7 +74,8 @@ MPS_SWIFT_NAME( init(_:shape:dataType:) );
 MPS_SWIFT_NAME( init(_:shape:dataType:rowBytes:) )
 MPS_AVAILABLE_STARTING(macos(12.3), ios(15.4), tvos(15.4));
 
-/// Initialize an MPSGraphTensorData with an MPSMatrix 
+/// Initializes a tensor data with an MPS matrix.
+///
 /// The device of the MPSMatrix will be used to get the MPSDevice for this MPSGraphTensorData.
 ///
 /// - Parameters:
@@ -81,7 +84,8 @@ MPS_AVAILABLE_STARTING(macos(12.3), ios(15.4), tvos(15.4));
 -(instancetype) initWithMPSMatrix:(MPSMatrix *) matrix
 MPS_SWIFT_NAME( init(_:) );
 
-/// Initialize an MPSGraphTensorData with an MPSMatrix enforcing rank of the result. 
+/// Initializes a tensor data with an MPS matrix enforcing rank of the result.
+///
 /// The device of the MPSMatrix will be used to get the MPSDevice for this MPSGraphTensorData.
 ///
 /// - Parameters:
@@ -94,7 +98,8 @@ MPS_SWIFT_NAME( init(_:rank:) );
 
 
 
-/// Initialize an MPSGraphTensorData with an MPSVector 
+/// Initializes a tensor data with an MPS vector.
+///
 /// The device of the MPSVector will be used to get the MPSDevice for this MPSGraphTensorData.
 ///
 /// - Parameters:
@@ -103,7 +108,8 @@ MPS_SWIFT_NAME( init(_:rank:) );
 -(instancetype) initWithMPSVector:(MPSVector *) vector
 MPS_SWIFT_NAME( init(_:) );
 
-/// Initialize an MPSGraphTensorData with an MPSVector enforcing rank of the result. 
+/// Initializes a tensor data with an MPS vector enforcing rank of the result.
+///
 /// The device of the MPSVector will be used to get the MPSDevice for this MPSGraphTensorData.
 ///
 /// - Parameters:
@@ -116,17 +122,19 @@ MPS_SWIFT_NAME( init(_:rank:) );
 
 
 
-/// Initialize an MPSGraphTensorData with an MPSNDArray 
+/// Initializes an MPSGraphTensorData with an MPS ndarray.
+///
 /// The device of the MPSNDArray will be used to get the MPSDevice for this MPSGraphTensorData.
 ///
 /// - Parameters:
-///   - ndarray: MPSNDArray to be used within the MPSGraphTensorData
+///   - ndarray: MPSNDArray to be used within the MPSGraphTensorData.
 /// - Returns: A valid MPSGraphTensorData, or nil if allocation failure.
 -(instancetype) initWithMPSNDArray:(MPSNDArray *) ndarray
 MPS_SWIFT_NAME( init(_:) );
 
-/// Initialize an MPSGraphTensorData with an MPSImage batch, the dataLayout used will be NHWC, 
-/// call a transpose or permute to change to a layout of your choice.
+/// Initializes a tensor data with an MPS image batch.
+///
+/// The dataLayout used will be NHWC, call a transpose or permute to change to a layout of your choice.
 ///
 /// - Parameters:
 ///   - imageBatch: The device on which the kernel will run, unorm8 and unorm16 images will create a float32 tensorData
@@ -134,7 +142,7 @@ MPS_SWIFT_NAME( init(_:) );
 -(instancetype) initWithMPSImageBatch:(MPSImageBatch *) imageBatch
 MPS_SWIFT_NAME( init(_:) );
 
-/// Return an mpsndarray object will copy contents if the contents are not stored in an MPSNDArray
+/// Return an mpsndarray object will copy contents if the contents are not stored in an MPS ndarray.
 ///
 /// - Returns: A valid MPSNDArray, or nil if allocation fails.
 -(MPSNDArray *)mpsndarray;

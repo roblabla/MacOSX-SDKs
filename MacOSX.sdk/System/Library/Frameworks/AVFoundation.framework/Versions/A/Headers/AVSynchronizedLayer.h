@@ -53,7 +53,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 NS_SWIFT_NONSENDABLE
-API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0)) API_UNAVAILABLE(watchos)
+API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(watchos)
 @interface AVSynchronizedLayer : CALayer
 {
 @private

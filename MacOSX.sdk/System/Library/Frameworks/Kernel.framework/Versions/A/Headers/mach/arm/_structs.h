@@ -62,6 +62,12 @@ _STRUCT_ARM_EXCEPTION_STATE64
 	__uint32_t __esr;       /* Exception syndrome */
 	__uint32_t __exception; /* number of arm exception taken */
 };
+#define _STRUCT_ARM_EXCEPTION_STATE64_V2 struct __darwin_arm_exception_state64_v2
+_STRUCT_ARM_EXCEPTION_STATE64_V2
+{
+	__uint64_t __far;       /* Virtual Fault Address */
+	__uint64_t __esr;       /* Exception syndrome */
+};
 #else /* !__DARWIN_UNIX03 */
 #define _STRUCT_ARM_EXCEPTION_STATE64 struct arm_exception_state64
 _STRUCT_ARM_EXCEPTION_STATE64
@@ -69,6 +75,12 @@ _STRUCT_ARM_EXCEPTION_STATE64
 	__uint64_t far;         /* Virtual Fault Address */
 	__uint32_t esr;         /* Exception syndrome */
 	__uint32_t exception;   /* number of arm exception taken */
+};
+#define _STRUCT_ARM_EXCEPTION_STATE64_V2 struct arm_exception_state64_v2
+_STRUCT_ARM_EXCEPTION_STATE64_V2
+{
+	__uint64_t far;         /* Virtual Fault Address */
+	__uint64_t esr;         /* Exception syndrome */
 };
 #endif /* __DARWIN_UNIX03 */
 

@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 typedef NS_ENUM(NSInteger, CPBarButtonStyle) {
     CPBarButtonStyleNone,   // The button will be displayed with no additional styling.
     CPBarButtonStyleRounded // The button will be displayed with a rounded background.
-} API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(macos, watchos, tvos);
+} API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(macos, watchos);
 
 /**
  Specifies the type of a @c CPBarButton.
@@ -23,12 +23,12 @@ typedef NS_ENUM(NSInteger, CPBarButtonStyle) {
 typedef NS_ENUM(NSUInteger, CPBarButtonType) {
     CPBarButtonTypeText,
     CPBarButtonTypeImage
-} API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(macos, watchos, tvos) API_DEPRECATED_WITH_REPLACEMENT("-[CPBarButton initWithImage:handler:] or -[CPBarButton initWithTitle:handler:]", ios(12.0, 14.0));
+} API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(macos, watchos) API_DEPRECATED_WITH_REPLACEMENT("-[CPBarButton initWithImage:handler:] or -[CPBarButton initWithTitle:handler:]", ios(12.0, 14.0));
 
 /**
  A button for placement in a navigation bar.
  */
-API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(macos, watchos, tvos)
+API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(macos, watchos)
 @interface CPBarButton : NSObject <NSSecureCoding>
 
 typedef void (^CPBarButtonHandler) (CPBarButton *);
@@ -40,13 +40,13 @@ typedef void (^CPBarButtonHandler) (CPBarButton *);
  Convenience initializer that creates a bar button that renders with an image.
  */
 - (instancetype)initWithImage:(UIImage *)image
-                      handler:(nullable CPBarButtonHandler)handler API_AVAILABLE(ios(14.0));
+                      handler:(nullable CPBarButtonHandler)handler API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(tvos);
 
 /**
  Convenience initializer that creates a bar button that displays a text label.
  */
 - (instancetype)initWithTitle:(NSString *)title
-                      handler:(nullable CPBarButtonHandler)handler API_AVAILABLE(ios(14.0));
+                      handler:(nullable CPBarButtonHandler)handler API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(tvos);
 
 /**
  A Boolean value indicating whether the button is enabled.
@@ -60,7 +60,7 @@ typedef void (^CPBarButtonHandler) (CPBarButton *);
  
  Defaults to @c CPBarButtonStyleNone.
  */
-@property (nonatomic, assign) CPBarButtonStyle buttonStyle API_AVAILABLE(ios(14.0));
+@property (nonatomic, assign) CPBarButtonStyle buttonStyle API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(tvos);
 
 /**
  The image displayed on the button.

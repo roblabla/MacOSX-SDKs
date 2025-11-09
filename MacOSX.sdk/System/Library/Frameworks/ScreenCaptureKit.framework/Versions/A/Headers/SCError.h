@@ -31,6 +31,8 @@ typedef NS_ERROR_ENUM (SCStreamErrorDomain, SCStreamErrorCode) {
     SCStreamErrorUserStopped API_AVAILABLE(macos(12.3)) = -3817,                            // The stream was stopped by the user
     SCStreamErrorFailedToStartAudioCapture API_AVAILABLE(macos(13.0)) = -3818, // The stream failed to start audio
     SCStreamErrorFailedToStopAudioCapture API_AVAILABLE(macos(13.0)) = -3819,   // The stream failed to stop audio
+    SCStreamErrorFailedToStartMicrophoneCapture API_AVAILABLE(macos(15.0)) = -3820, // The stream failed to start microphone
+    SCStreamErrorSystemStoppedStream API_AVAILABLE(macos(15.0)) = -3821, // The stream was stopped by the system
 };
 
 NS_ASSUME_NONNULL_END

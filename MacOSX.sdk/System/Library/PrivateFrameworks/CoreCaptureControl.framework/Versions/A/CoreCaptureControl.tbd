@@ -9,5 +9,5 @@ exports:
     symbols:         [ _CoreCaptureControlCapture, _CoreCaptureControlCaptureWithComponentDirectory, 
                        _CoreCaptureControlConfigurePipe, _CoreCaptureControlConfigureProfile, 
                        _CoreCaptureControlConfigureStream, _CoreCaptureControlCreate, 
-                       _CoreCaptureControlStart, _CoreCaptureControlStop ]
+                       _CoreCaptureControlGetTypeID, _CoreCaptureControlStart, _CoreCaptureControlStop ]
 ...

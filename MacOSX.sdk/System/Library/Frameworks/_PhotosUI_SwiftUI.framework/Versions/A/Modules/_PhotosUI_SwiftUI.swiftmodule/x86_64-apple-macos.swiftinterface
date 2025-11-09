@@ -1,6 +1,6 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.10 (swiftlang-5.10.0.12.5 clang-1500.3.9.1.1)
-// swift-module-flags: -target x86_64-apple-macos14.5 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Osize -library-level api -enable-bare-slash-regex -user-module-version 651.0.100 -module-name _PhotosUI_SwiftUI
+// swift-compiler-version: Apple Swift version 6.0 effective-5.10 (swiftlang-6.0.0.7.24 clang-1600.0.25.1)
+// swift-module-flags: -target x86_64-apple-macos15.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Osize -library-level api -enable-bare-slash-regex -user-module-version 701.0.230 -module-name _PhotosUI_SwiftUI
 import CoreTransferable
 @_exported import PhotosUI
 import Swift
@@ -9,6 +9,20 @@ import UniformTypeIdentifiers
 import _Concurrency
 import _StringProcessing
 import _SwiftConcurrencyShims
+#if compiler(>=5.3) && $RetroactiveAttribute
+@available(iOS 16.0, macOS 13.0, *)
+@available(watchOS, unavailable)
+@available(tvOS, unavailable)
+extension Photos.PHLivePhoto : @retroactive CoreTransferable.Transferable {
+  public static var transferRepresentation: some CoreTransferable.TransferRepresentation {
+    get
+  }
+  @available(iOS 16.0, macOS 13.0, *)
+  @available(tvOS, unavailable, introduced: 16.0)
+  @available(watchOS, unavailable, introduced: 9.0)
+  public typealias Representation = @_opaqueReturnTypeOf("$sSo11PHLivePhotoC015_PhotosUI_SwiftD0E22transferRepresentationQrvpZ", 0) __
+}
+#else
 @available(iOS 16.0, macOS 13.0, *)
 @available(watchOS, unavailable)
 @available(tvOS, unavailable)
@@ -16,11 +30,15 @@ extension Photos.PHLivePhoto : CoreTransferable.Transferable {
   public static var transferRepresentation: some CoreTransferable.TransferRepresentation {
     get
   }
+  @available(iOS 16.0, macOS 13.0, *)
+  @available(tvOS, unavailable, introduced: 16.0)
+  @available(watchOS, unavailable, introduced: 9.0)
   public typealias Representation = @_opaqueReturnTypeOf("$sSo11PHLivePhotoC015_PhotosUI_SwiftD0E22transferRepresentationQrvpZ", 0) __
 }
+#endif
 @available(iOS 16.0, macOS 13.0, watchOS 9.0, *)
 @available(tvOS, unavailable)
-public struct PhotosPickerSelectionBehavior : Swift.Equatable, Swift.Hashable {
+public struct PhotosPickerSelectionBehavior : Swift.Equatable, Swift.Hashable, Swift.Sendable {
   public static let `default`: _PhotosUI_SwiftUI.PhotosPickerSelectionBehavior
   public static let ordered: _PhotosUI_SwiftUI.PhotosPickerSelectionBehavior
   @available(iOS 17.0, macOS 14.0, *)
@@ -38,7 +56,7 @@ public struct PhotosPickerSelectionBehavior : Swift.Equatable, Swift.Hashable {
 @available(iOS 17.0, macOS 14.0, *)
 @available(watchOS, unavailable)
 @available(tvOS, unavailable)
-public struct PhotosPickerStyle : Swift.Equatable, Swift.Hashable {
+public struct PhotosPickerStyle : Swift.Equatable, Swift.Hashable, Swift.Sendable {
   public static let presentation: _PhotosUI_SwiftUI.PhotosPickerStyle
   public static let inline: _PhotosUI_SwiftUI.PhotosPickerStyle
   public static let compact: _PhotosUI_SwiftUI.PhotosPickerStyle
@@ -50,8 +68,8 @@ public struct PhotosPickerStyle : Swift.Equatable, Swift.Hashable {
 }
 @available(iOS 16.0, macOS 13.0, watchOS 9.0, *)
 @available(tvOS, unavailable)
-public struct PhotosPickerItem : Swift.Equatable, Swift.Hashable {
-  public struct EncodingDisambiguationPolicy : Swift.Equatable, Swift.Hashable {
+public struct PhotosPickerItem : Swift.Equatable, Swift.Hashable, @unchecked Swift.Sendable {
+  public struct EncodingDisambiguationPolicy : Swift.Equatable, Swift.Hashable, Swift.Sendable {
     public static let automatic: _PhotosUI_SwiftUI.PhotosPickerItem.EncodingDisambiguationPolicy
     public static let current: _PhotosUI_SwiftUI.PhotosPickerItem.EncodingDisambiguationPolicy
     public static let compatible: _PhotosUI_SwiftUI.PhotosPickerItem.EncodingDisambiguationPolicy
@@ -70,9 +88,7 @@ public struct PhotosPickerItem : Swift.Equatable, Swift.Hashable {
   }
   @discardableResult
   public func loadTransferable<T>(type: T.Type, completionHandler: @escaping (Swift.Result<T?, any Swift.Error>) -> Swift.Void) -> Foundation.Progress where T : CoreTransferable.Transferable
-  #if compiler(>=5.3) && $AsyncAwait
   public func loadTransferable<T>(type: T.Type) async throws -> T? where T : CoreTransferable.Transferable
-  #endif
   @available(watchOS, unavailable)
   public init(itemIdentifier: Swift.String)
   public static func == (a: _PhotosUI_SwiftUI.PhotosPickerItem, b: _PhotosUI_SwiftUI.PhotosPickerItem) -> Swift.Bool
@@ -83,56 +99,61 @@ public struct PhotosPickerItem : Swift.Equatable, Swift.Hashable {
 }
 @available(iOS 16.0, macOS 13.0, watchOS 9.0, *)
 @available(tvOS, unavailable)
-public struct PhotosPicker<Label> : SwiftUI.View where Label : SwiftUI.View {
-  public init(selection: SwiftUI.Binding<_PhotosUI_SwiftUI.PhotosPickerItem?>, matching filter: PhotosUI.PHPickerFilter? = nil, preferredItemEncoding: _PhotosUI_SwiftUI.PhotosPickerItem.EncodingDisambiguationPolicy = .automatic, @SwiftUI.ViewBuilder label: () -> Label)
-  public init(selection: SwiftUI.Binding<[_PhotosUI_SwiftUI.PhotosPickerItem]>, maxSelectionCount: Swift.Int? = nil, selectionBehavior: _PhotosUI_SwiftUI.PhotosPickerSelectionBehavior = .default, matching filter: PhotosUI.PHPickerFilter? = nil, preferredItemEncoding: _PhotosUI_SwiftUI.PhotosPickerItem.EncodingDisambiguationPolicy = .automatic, @SwiftUI.ViewBuilder label: () -> Label)
+@_Concurrency.MainActor @preconcurrency public struct PhotosPicker<Label> : SwiftUICore.View where Label : SwiftUICore.View {
+  @preconcurrency nonisolated public init(selection: SwiftUICore.Binding<_PhotosUI_SwiftUI.PhotosPickerItem?>, matching filter: PhotosUI.PHPickerFilter? = nil, preferredItemEncoding: _PhotosUI_SwiftUI.PhotosPickerItem.EncodingDisambiguationPolicy = .automatic, @SwiftUICore.ViewBuilder label: @Sendable () -> Label)
+  @preconcurrency nonisolated public init(selection: SwiftUICore.Binding<[_PhotosUI_SwiftUI.PhotosPickerItem]>, maxSelectionCount: Swift.Int? = nil, selectionBehavior: _PhotosUI_SwiftUI.PhotosPickerSelectionBehavior = .default, matching filter: PhotosUI.PHPickerFilter? = nil, preferredItemEncoding: _PhotosUI_SwiftUI.PhotosPickerItem.EncodingDisambiguationPolicy = .automatic, @SwiftUICore.ViewBuilder label: @Sendable () -> Label)
   @available(watchOS, unavailable)
-  public init(selection: SwiftUI.Binding<_PhotosUI_SwiftUI.PhotosPickerItem?>, matching filter: PhotosUI.PHPickerFilter? = nil, preferredItemEncoding: _PhotosUI_SwiftUI.PhotosPickerItem.EncodingDisambiguationPolicy = .automatic, photoLibrary: Photos.PHPhotoLibrary, @SwiftUI.ViewBuilder label: () -> Label)
+  @preconcurrency nonisolated public init(selection: SwiftUICore.Binding<_PhotosUI_SwiftUI.PhotosPickerItem?>, matching filter: PhotosUI.PHPickerFilter? = nil, preferredItemEncoding: _PhotosUI_SwiftUI.PhotosPickerItem.EncodingDisambiguationPolicy = .automatic, photoLibrary: Photos.PHPhotoLibrary, @SwiftUICore.ViewBuilder label: @Sendable () -> Label)
   @available(watchOS, unavailable)
-  public init(selection: SwiftUI.Binding<[_PhotosUI_SwiftUI.PhotosPickerItem]>, maxSelectionCount: Swift.Int? = nil, selectionBehavior: _PhotosUI_SwiftUI.PhotosPickerSelectionBehavior = .default, matching filter: PhotosUI.PHPickerFilter? = nil, preferredItemEncoding: _PhotosUI_SwiftUI.PhotosPickerItem.EncodingDisambiguationPolicy = .automatic, photoLibrary: Photos.PHPhotoLibrary, @SwiftUI.ViewBuilder label: () -> Label)
-  @_Concurrency.MainActor(unsafe) public var body: some SwiftUI.View {
+  @preconcurrency nonisolated public init(selection: SwiftUICore.Binding<[_PhotosUI_SwiftUI.PhotosPickerItem]>, maxSelectionCount: Swift.Int? = nil, selectionBehavior: _PhotosUI_SwiftUI.PhotosPickerSelectionBehavior = .default, matching filter: PhotosUI.PHPickerFilter? = nil, preferredItemEncoding: _PhotosUI_SwiftUI.PhotosPickerItem.EncodingDisambiguationPolicy = .automatic, photoLibrary: Photos.PHPhotoLibrary, @SwiftUICore.ViewBuilder label: @Sendable () -> Label)
+  @_Concurrency.MainActor @preconcurrency public var body: some SwiftUICore.View {
     get
   }
+  @available(iOS 16.0, watchOS 9.0, macOS 13.0, *)
+  @available(tvOS, unavailable, introduced: 13.0)
   public typealias Body = @_opaqueReturnTypeOf("$s015_PhotosUI_SwiftB00A6PickerV4bodyQrvp", 0) __<Label>
 }
 @available(iOS 16.0, macOS 13.0, watchOS 9.0, *)
 @available(tvOS, unavailable)
-extension _PhotosUI_SwiftUI.PhotosPicker where Label == SwiftUI.Text {
-  public init(_ titleKey: SwiftUI.LocalizedStringKey, selection: SwiftUI.Binding<_PhotosUI_SwiftUI.PhotosPickerItem?>, matching filter: PhotosUI.PHPickerFilter? = nil, preferredItemEncoding: _PhotosUI_SwiftUI.PhotosPickerItem.EncodingDisambiguationPolicy = .automatic)
-  @_disfavoredOverload public init<S>(_ title: S, selection: SwiftUI.Binding<_PhotosUI_SwiftUI.PhotosPickerItem?>, matching filter: PhotosUI.PHPickerFilter? = nil, preferredItemEncoding: _PhotosUI_SwiftUI.PhotosPickerItem.EncodingDisambiguationPolicy = .automatic) where S : Swift.StringProtocol
-  public init(_ titleKey: SwiftUI.LocalizedStringKey, selection: SwiftUI.Binding<[_PhotosUI_SwiftUI.PhotosPickerItem]>, maxSelectionCount: Swift.Int? = nil, selectionBehavior: _PhotosUI_SwiftUI.PhotosPickerSelectionBehavior = .default, matching filter: PhotosUI.PHPickerFilter? = nil, preferredItemEncoding: _PhotosUI_SwiftUI.PhotosPickerItem.EncodingDisambiguationPolicy = .automatic)
-  @_disfavoredOverload public init<S>(_ title: S, selection: SwiftUI.Binding<[_PhotosUI_SwiftUI.PhotosPickerItem]>, maxSelectionCount: Swift.Int? = nil, selectionBehavior: _PhotosUI_SwiftUI.PhotosPickerSelectionBehavior = .default, matching filter: PhotosUI.PHPickerFilter? = nil, preferredItemEncoding: _PhotosUI_SwiftUI.PhotosPickerItem.EncodingDisambiguationPolicy = .automatic) where S : Swift.StringProtocol
+extension _PhotosUI_SwiftUI.PhotosPicker where Label == SwiftUICore.Text {
+  nonisolated public init(_ titleKey: SwiftUICore.LocalizedStringKey, selection: SwiftUICore.Binding<_PhotosUI_SwiftUI.PhotosPickerItem?>, matching filter: PhotosUI.PHPickerFilter? = nil, preferredItemEncoding: _PhotosUI_SwiftUI.PhotosPickerItem.EncodingDisambiguationPolicy = .automatic)
+  @_disfavoredOverload nonisolated public init<S>(_ title: S, selection: SwiftUICore.Binding<_PhotosUI_SwiftUI.PhotosPickerItem?>, matching filter: PhotosUI.PHPickerFilter? = nil, preferredItemEncoding: _PhotosUI_SwiftUI.PhotosPickerItem.EncodingDisambiguationPolicy = .automatic) where S : Swift.StringProtocol
+  nonisolated public init(_ titleKey: SwiftUICore.LocalizedStringKey, selection: SwiftUICore.Binding<[_PhotosUI_SwiftUI.PhotosPickerItem]>, maxSelectionCount: Swift.Int? = nil, selectionBehavior: _PhotosUI_SwiftUI.PhotosPickerSelectionBehavior = .default, matching filter: PhotosUI.PHPickerFilter? = nil, preferredItemEncoding: _PhotosUI_SwiftUI.PhotosPickerItem.EncodingDisambiguationPolicy = .automatic)
+  @_disfavoredOverload nonisolated public init<S>(_ title: S, selection: SwiftUICore.Binding<[_PhotosUI_SwiftUI.PhotosPickerItem]>, maxSelectionCount: Swift.Int? = nil, selectionBehavior: _PhotosUI_SwiftUI.PhotosPickerSelectionBehavior = .default, matching filter: PhotosUI.PHPickerFilter? = nil, preferredItemEncoding: _PhotosUI_SwiftUI.PhotosPickerItem.EncodingDisambiguationPolicy = .automatic) where S : Swift.StringProtocol
   @available(watchOS, unavailable)
-  public init(_ titleKey: SwiftUI.LocalizedStringKey, selection: SwiftUI.Binding<_PhotosUI_SwiftUI.PhotosPickerItem?>, matching filter: PhotosUI.PHPickerFilter? = nil, preferredItemEncoding: _PhotosUI_SwiftUI.PhotosPickerItem.EncodingDisambiguationPolicy = .automatic, photoLibrary: Photos.PHPhotoLibrary)
+  nonisolated public init(_ titleKey: SwiftUICore.LocalizedStringKey, selection: SwiftUICore.Binding<_PhotosUI_SwiftUI.PhotosPickerItem?>, matching filter: PhotosUI.PHPickerFilter? = nil, preferredItemEncoding: _PhotosUI_SwiftUI.PhotosPickerItem.EncodingDisambiguationPolicy = .automatic, photoLibrary: Photos.PHPhotoLibrary)
   @available(watchOS, unavailable)
-  @_disfavoredOverload public init<S>(_ title: S, selection: SwiftUI.Binding<_PhotosUI_SwiftUI.PhotosPickerItem?>, matching filter: PhotosUI.PHPickerFilter? = nil, preferredItemEncoding: _PhotosUI_SwiftUI.PhotosPickerItem.EncodingDisambiguationPolicy = .automatic, photoLibrary: Photos.PHPhotoLibrary) where S : Swift.StringProtocol
+  @_disfavoredOverload nonisolated public init<S>(_ title: S, selection: SwiftUICore.Binding<_PhotosUI_SwiftUI.PhotosPickerItem?>, matching filter: PhotosUI.PHPickerFilter? = nil, preferredItemEncoding: _PhotosUI_SwiftUI.PhotosPickerItem.EncodingDisambiguationPolicy = .automatic, photoLibrary: Photos.PHPhotoLibrary) where S : Swift.StringProtocol
   @available(watchOS, unavailable)
-  public init(_ titleKey: SwiftUI.LocalizedStringKey, selection: SwiftUI.Binding<[_PhotosUI_SwiftUI.PhotosPickerItem]>, maxSelectionCount: Swift.Int? = nil, selectionBehavior: _PhotosUI_SwiftUI.PhotosPickerSelectionBehavior = .default, matching filter: PhotosUI.PHPickerFilter? = nil, preferredItemEncoding: _PhotosUI_SwiftUI.PhotosPickerItem.EncodingDisambiguationPolicy = .automatic, photoLibrary: Photos.PHPhotoLibrary)
+  nonisolated public init(_ titleKey: SwiftUICore.LocalizedStringKey, selection: SwiftUICore.Binding<[_PhotosUI_SwiftUI.PhotosPickerItem]>, maxSelectionCount: Swift.Int? = nil, selectionBehavior: _PhotosUI_SwiftUI.PhotosPickerSelectionBehavior = .default, matching filter: PhotosUI.PHPickerFilter? = nil, preferredItemEncoding: _PhotosUI_SwiftUI.PhotosPickerItem.EncodingDisambiguationPolicy = .automatic, photoLibrary: Photos.PHPhotoLibrary)
   @available(watchOS, unavailable)
-  @_disfavoredOverload public init<S>(_ title: S, selection: SwiftUI.Binding<[_PhotosUI_SwiftUI.PhotosPickerItem]>, maxSelectionCount: Swift.Int? = nil, selectionBehavior: _PhotosUI_SwiftUI.PhotosPickerSelectionBehavior = .default, matching filter: PhotosUI.PHPickerFilter? = nil, preferredItemEncoding: _PhotosUI_SwiftUI.PhotosPickerItem.EncodingDisambiguationPolicy = .automatic, photoLibrary: Photos.PHPhotoLibrary) where S : Swift.StringProtocol
+  @_disfavoredOverload nonisolated public init<S>(_ title: S, selection: SwiftUICore.Binding<[_PhotosUI_SwiftUI.PhotosPickerItem]>, maxSelectionCount: Swift.Int? = nil, selectionBehavior: _PhotosUI_SwiftUI.PhotosPickerSelectionBehavior = .default, matching filter: PhotosUI.PHPickerFilter? = nil, preferredItemEncoding: _PhotosUI_SwiftUI.PhotosPickerItem.EncodingDisambiguationPolicy = .automatic, photoLibrary: Photos.PHPhotoLibrary) where S : Swift.StringProtocol
 }
 @available(iOS 16.0, macOS 13.0, watchOS 9.0, *)
 @available(tvOS, unavailable)
-extension SwiftUI.View {
-  public func photosPicker(isPresented: SwiftUI.Binding<Swift.Bool>, selection: SwiftUI.Binding<_PhotosUI_SwiftUI.PhotosPickerItem?>, matching filter: PhotosUI.PHPickerFilter? = nil, preferredItemEncoding: _PhotosUI_SwiftUI.PhotosPickerItem.EncodingDisambiguationPolicy = .automatic) -> some SwiftUI.View
+extension SwiftUICore.View {
+  nonisolated public func photosPicker(isPresented: SwiftUICore.Binding<Swift.Bool>, selection: SwiftUICore.Binding<_PhotosUI_SwiftUI.PhotosPickerItem?>, matching filter: PhotosUI.PHPickerFilter? = nil, preferredItemEncoding: _PhotosUI_SwiftUI.PhotosPickerItem.EncodingDisambiguationPolicy = .automatic) -> some SwiftUICore.View
   
-  public func photosPicker(isPresented: SwiftUI.Binding<Swift.Bool>, selection: SwiftUI.Binding<[_PhotosUI_SwiftUI.PhotosPickerItem]>, maxSelectionCount: Swift.Int? = nil, selectionBehavior: _PhotosUI_SwiftUI.PhotosPickerSelectionBehavior = .default, matching filter: PhotosUI.PHPickerFilter? = nil, preferredItemEncoding: _PhotosUI_SwiftUI.PhotosPickerItem.EncodingDisambiguationPolicy = .automatic) -> some SwiftUI.View
-  
-  @available(watchOS, unavailable)
-  public func photosPicker(isPresented: SwiftUI.Binding<Swift.Bool>, selection: SwiftUI.Binding<_PhotosUI_SwiftUI.PhotosPickerItem?>, matching filter: PhotosUI.PHPickerFilter? = nil, preferredItemEncoding: _PhotosUI_SwiftUI.PhotosPickerItem.EncodingDisambiguationPolicy = .automatic, photoLibrary: Photos.PHPhotoLibrary) -> some SwiftUI.View
+  nonisolated public func photosPicker(isPresented: SwiftUICore.Binding<Swift.Bool>, selection: SwiftUICore.Binding<[_PhotosUI_SwiftUI.PhotosPickerItem]>, maxSelectionCount: Swift.Int? = nil, selectionBehavior: _PhotosUI_SwiftUI.PhotosPickerSelectionBehavior = .default, matching filter: PhotosUI.PHPickerFilter? = nil, preferredItemEncoding: _PhotosUI_SwiftUI.PhotosPickerItem.EncodingDisambiguationPolicy = .automatic) -> some SwiftUICore.View
   
   @available(watchOS, unavailable)
-  public func photosPicker(isPresented: SwiftUI.Binding<Swift.Bool>, selection: SwiftUI.Binding<[_PhotosUI_SwiftUI.PhotosPickerItem]>, maxSelectionCount: Swift.Int? = nil, selectionBehavior: _PhotosUI_SwiftUI.PhotosPickerSelectionBehavior = .default, matching filter: PhotosUI.PHPickerFilter? = nil, preferredItemEncoding: _PhotosUI_SwiftUI.PhotosPickerItem.EncodingDisambiguationPolicy = .automatic, photoLibrary: Photos.PHPhotoLibrary) -> some SwiftUI.View
+  nonisolated public func photosPicker(isPresented: SwiftUICore.Binding<Swift.Bool>, selection: SwiftUICore.Binding<_PhotosUI_SwiftUI.PhotosPickerItem?>, matching filter: PhotosUI.PHPickerFilter? = nil, preferredItemEncoding: _PhotosUI_SwiftUI.PhotosPickerItem.EncodingDisambiguationPolicy = .automatic, photoLibrary: Photos.PHPhotoLibrary) -> some SwiftUICore.View
+  
+  @available(watchOS, unavailable)
+  nonisolated public func photosPicker(isPresented: SwiftUICore.Binding<Swift.Bool>, selection: SwiftUICore.Binding<[_PhotosUI_SwiftUI.PhotosPickerItem]>, maxSelectionCount: Swift.Int? = nil, selectionBehavior: _PhotosUI_SwiftUI.PhotosPickerSelectionBehavior = .default, matching filter: PhotosUI.PHPickerFilter? = nil, preferredItemEncoding: _PhotosUI_SwiftUI.PhotosPickerItem.EncodingDisambiguationPolicy = .automatic, photoLibrary: Photos.PHPhotoLibrary) -> some SwiftUICore.View
   
 }
 @available(iOS 17.0, macOS 14.0, *)
 @available(watchOS, unavailable)
 @available(tvOS, unavailable)
-extension SwiftUI.View {
-  public func photosPickerStyle(_ style: _PhotosUI_SwiftUI.PhotosPickerStyle) -> some SwiftUI.View
+extension SwiftUICore.View {
+  nonisolated public func photosPickerStyle(_ style: _PhotosUI_SwiftUI.PhotosPickerStyle) -> some SwiftUICore.View
   
-  public func photosPickerAccessoryVisibility(_ visibility: SwiftUI.Visibility, edges: SwiftUI.Edge.Set = .all) -> some SwiftUI.View
+  nonisolated public func photosPickerAccessoryVisibility(_ visibility: SwiftUI.Visibility, edges: SwiftUICore.Edge.Set = .all) -> some SwiftUICore.View
   
-  public func photosPickerDisabledCapabilities(_ disabledCapabilities: PhotosUI.PHPickerCapabilities) -> some SwiftUI.View
+  nonisolated public func photosPickerDisabledCapabilities(_ disabledCapabilities: PhotosUI.PHPickerCapabilities) -> some SwiftUICore.View
   
 }
+@available(iOS 16.0, macOS 13.0, watchOS 9.0, *)
+@available(tvOS, unavailable)
+extension _PhotosUI_SwiftUI.PhotosPicker : Swift.Sendable {}

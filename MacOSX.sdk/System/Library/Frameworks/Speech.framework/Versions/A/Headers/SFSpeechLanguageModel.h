@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-API_AVAILABLE(ios(17), macos(14))
+API_AVAILABLE(ios(17), macos(14), tvos(18))
 NS_SWIFT_SENDABLE
 NS_SWIFT_NAME(SFSpeechLanguageModel.Configuration)
 @interface SFSpeechLanguageModelConfiguration : NSObject <NSCopying>
@@ -23,7 +23,7 @@ NS_SWIFT_NAME(SFSpeechLanguageModel.Configuration)
 
 @end
 
-API_AVAILABLE(ios(17), macos(14))
+API_AVAILABLE(ios(17), macos(14), tvos(18))
 @interface SFSpeechLanguageModel : NSObject
   
 + (void)prepareCustomLanguageModelForUrl:(NSURL *)asset clientIdentifier:(NSString *)clientIdentifier configuration:(SFSpeechLanguageModelConfiguration *)configuration completion:(void(^)(NSError * __nullable error))completion;

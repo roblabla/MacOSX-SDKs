@@ -25,8 +25,8 @@ exports:
                        _kACMAppID, _kIASAuthInstallServiceID, _kIASChunklistChunkFormatV1, 
                        _kIASChunklistEFIModulusLength, _kIASChunklistEFIRSASignatureLength, 
                        _kIASChunklistFileVersionV1, _kIASChunklistIntegrityOnlySignatureLength, 
-                       _kIASChunklistMagic, _kIASChunklistV1ChunkSize, _uncompressedDataProvided, 
-                       _uncompressedDataRequested ]
+                       _kIASChunklistMagic, _kIASChunklistV1ChunkSize, _kIASWoolyJumperAppID, 
+                       _kIASWoolyJumperServiceID, _uncompressedDataProvided, _uncompressedDataRequested ]
     objc-classes:    [ IASAuthenticationAgentController, IASAuthenticationManager, 
                        IASBZIP2InputStream, IASBZIP2OutputStream, IASChunklist, IASCredentialManager, 
                        IASFilesystemUtils, IASInputStream, IASLZMAInputStream, IASLZMAOutputStream, 

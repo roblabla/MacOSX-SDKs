@@ -11,8 +11,9 @@ exports:
                        ___osLogLatency, ___osLogTrace, _kBiometricAbcDomain, _kBiometricAbcProcess, 
                        _kBiometricKitCADeviceEnclosureColor, _kBiometricKitCADisplayOn, 
                        _kBiometricKitCAEventCanceled, _kBiometricKitCALogPath, _kBiometricKitCALogPrefix, 
-                       _kBiometricKitCAPreviousEventDate, _kBiometricKitCATimeSinceLastEnrollment, 
-                       _kBiometricKitCATimeSinceLastEnrollmentBinned, _kBiometricKitCATimeSinceLastEvent ]
+                       _kBiometricKitCAPasscodeSet, _kBiometricKitCAPreviousEventDate, 
+                       _kBiometricKitCATimeSinceLastEnrollment, _kBiometricKitCATimeSinceLastEnrollmentBinned, 
+                       _kBiometricKitCATimeSinceLastEvent ]
     objc-classes:    [ ActivityTracker, BKCatacomb, BKLocalization, BiometricAutoBugCapture, 
                        BiometricEnrollOperation, BiometricKitCoreAnalyticsEvent, 
                        BiometricKitXPCExportedClientObject, BiometricKitXPCExportedObject, 

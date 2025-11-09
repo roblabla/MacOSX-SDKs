@@ -11,6 +11,7 @@
 #import <UserNotifications/UNNotificationAction.h>
 #import <UserNotifications/UNNotificationActionIcon.h>
 #import <UserNotifications/UNNotificationAttachment.h>
+#import <UserNotifications/UNNotificationAttributedMessageContext.h>
 #import <UserNotifications/UNNotificationCategory.h>
 #import <UserNotifications/UNNotificationContent.h>
 #import <UserNotifications/UNNotificationRequest.h>

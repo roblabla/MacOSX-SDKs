@@ -3,7 +3,7 @@
 //  NSTextSelection.h
 //  Text Kit
 //
-//  Copyright (c) 2018-2021, Apple Inc. All rights reserved.
+//  Copyright (c) 2018-2024, Apple Inc. All rights reserved.
 //
 
 #import <Foundation/NSAttributedString.h>
@@ -23,14 +23,14 @@ typedef NS_ENUM(NSInteger, NSTextSelectionGranularity) {
   NSTextSelectionGranularityParagraph,
   NSTextSelectionGranularityLine,
   NSTextSelectionGranularitySentence
-} API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos);
+} API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 typedef NS_ENUM(NSInteger, NSTextSelectionAffinity) {
   NSTextSelectionAffinityUpstream = 0,
   NSTextSelectionAffinityDownstream = 1
-} API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos);
+} API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 
-API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos)
+API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), visionos(1.0)) API_UNAVAILABLE(watchos)
 @interface NSTextSelection : NSObject <NSSecureCoding>
 #pragma mark Initialization
 // textRanges should be ordered and not overlapping. Otherwise, textRanges would get normalized by reordered and merging overlapping ranges.

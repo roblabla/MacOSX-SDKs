@@ -20,8 +20,12 @@ NS_HEADER_AUDIT_BEGIN(nullability, sendability)
  * @abstract This view can render a camera source.
  */
 
-HM_EXTERN API_AVAILABLE(ios(10.0), tvos(10.0), macCatalyst(14.0)) API_UNAVAILABLE(watchos)
-    @interface HMCameraView : UIView
+HM_EXTERN
+API_AVAILABLE(ios(10.0), tvos(10.0), macCatalyst(14.0))
+API_UNAVAILABLE(watchos)
+@interface HMCameraView : UIView
+
+- (instancetype)init;
 
 /*!
  * @brief Represents the camera source.

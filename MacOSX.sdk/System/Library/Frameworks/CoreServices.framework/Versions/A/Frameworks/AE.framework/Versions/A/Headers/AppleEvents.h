@@ -60,6 +60,13 @@ CF_ENUM(AEKeyword) {
   keyAEVersion                  = 'vers' /* available only in vers 1.0.1 and greater */
 };
 
+CF_ENUM(AEKeyword) {
+	kAEApplicationActivationExpected = 'aapd'	 //!< in a kAEOpenDocuments/kAEReopenApplication event, a typeBoolean value, if true then the process should expect a request to be frontmost to accompany this AppleEvent
+};
+
+
+
+
 /* Event Class */
 CF_ENUM(DescType) {
   kCoreEventClass               = 'aevt'
@@ -77,9 +84,11 @@ CF_ENUM(AEEventID) {
   kAEShowPreferences            = 'pref' //!< sent by Mac OS X when the user chooses the Preferences item
 };
 
+#if __MAC_OS_X_VERSION_MIN_REQUIRED >= 1500
 CF_ENUM(DescType) {
-	keyAERestoreAppState = 'rsto' //!< If present in a kAEOpenApplication or kAEReopenApplication AppleEvent, with the value kAEYes, then any saved application state should be restored; if present and kAENo, then any saved application state should not be restored
+	keyAERestoreAppState = 'rsto', //!< If present in a kAEOpenApplication or kAEReopenApplication AppleEvent, with the value kAEYes, then any saved application state should be restored; if present and kAENo, then any saved application state should not be restored
 };
+#endif
 
 /* Constants for recording */
 CF_ENUM(AEEventID) {

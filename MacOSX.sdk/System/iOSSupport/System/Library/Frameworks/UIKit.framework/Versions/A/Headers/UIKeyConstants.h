@@ -251,7 +251,7 @@ API_AVAILABLE(ios(13.4), tvos(13.4)) API_UNAVAILABLE(watchos) typedef NS_ENUM(CF
     UIKeyboardHIDUsageKeyboardKatakana = UIKeyboardHIDUsageKeyboardLANG3,
     UIKeyboardHIDUsageKeyboardHiragana = UIKeyboardHIDUsageKeyboardLANG4,
     UIKeyboardHIDUsageKeyboardZenkakuHankakuKanji = UIKeyboardHIDUsageKeyboardLANG5,
-};
+} API_UNAVAILABLE(watchos);
 
 
 

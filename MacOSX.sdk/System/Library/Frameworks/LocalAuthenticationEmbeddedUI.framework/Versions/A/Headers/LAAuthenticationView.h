@@ -32,8 +32,8 @@ API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, watchos, tvos)
 /// Since the view is designed for authentication with Touch ID or Watch
 /// the only supported policies for calling `evaluatePolicy` on the context are
 /// - `LAPolicyDeviceOwnerAuthenticationWithBiometrics`
-/// - `LAPolicyDeviceOwnerAuthenticationWithWatch`
-/// - `LAPolicyDeviceOwnerAuthenticationWitchBiometricsOrWatch`
+/// - `LAPolicyDeviceOwnerAuthenticationWithCompanion`
+/// - `LAPolicyDeviceOwnerAuthenticationWitchBiometricsOrCompanion`
 /// - `LAPolicyDeviceOwnerAuthentication` (This one is supported just for convenience. If neither biometric nor watch authentication is available, the evaluation of the policy fails)
 /// @param context  @c LAContext instance to control the authentication.
 - (instancetype)initWithContext:(LAContext *)context
@@ -47,8 +47,8 @@ API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, watchos, tvos);
 /// Since the view is designed for authentication with Touch ID or Watch
 /// the only supported policies for calling `evaluatePolicy` on the context are
 /// - `LAPolicyDeviceOwnerAuthenticationWithBiometrics`
-/// - `LAPolicyDeviceOwnerAuthenticationWithWatch`
-/// - `LAPolicyDeviceOwnerAuthenticationWitchBiometricsOrWatch`
+/// - `LAPolicyDeviceOwnerAuthenticationWithCompanion`
+/// - `LAPolicyDeviceOwnerAuthenticationWitchBiometricsOrCompanion`
 /// - `LAPolicyDeviceOwnerAuthentication` (This one is supported just for convenience. If neither biometric nor watch authentication is available, the evaluation of the policy fails)
 /// @param context  @c LAContext instance to control the authentication.
 /// @param controlSize Preferred size of @c LAAuthenticationView provided using @c NSControlSize

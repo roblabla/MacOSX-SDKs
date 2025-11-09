@@ -17,11 +17,13 @@
 #import <CoreML/MLArrayBatchProvider.h>
 #import <CoreML/MLMultiArray.h>
 #import <CoreML/MLSequence.h>
+#import <CoreML/MLState.h>
 
 #import <CoreML/MLMultiArrayConstraint.h>
 #import <CoreML/MLImageConstraint.h>
 #import <CoreML/MLDictionaryConstraint.h>
 #import <CoreML/MLSequenceConstraint.h>
+#import <CoreML/MLStateConstraint.h>
 
 #import <CoreML/MLImageSize.h>
 #import <CoreML/MLImageSizeConstraint.h>
@@ -38,6 +40,7 @@
 
 #import <CoreML/MLModel+MLModelCompilation.h>
 #import <CoreML/MLModel+MLComputeDevice.h>
+#import <CoreML/MLModel+MLState.h>
 
 #import <CoreML/MLModelError.h>
 

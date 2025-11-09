@@ -22,44 +22,44 @@ NS_ASSUME_NONNULL_BEGIN
  * @constant NFCVASModeNormal      Full VAS protocol.
  */
 typedef NS_ENUM(NSInteger, NFCVASMode) {
-    NFCVASModeURLOnly API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos)    = 0,
-    NFCVASModeNormal API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos)     = 1,
+    NFCVASModeURLOnly API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos)    = 0,
+    NFCVASModeNormal API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos)     = 1,
     
-    VASModeURLOnly API_DEPRECATED_WITH_REPLACEMENT("NFCVASModeURLOnly", ios(13.0, 14.0)) API_UNAVAILABLE(watchos, macos, tvos)
+    VASModeURLOnly API_DEPRECATED_WITH_REPLACEMENT("NFCVASModeURLOnly", ios(13.0, 14.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos)
         = NFCVASModeURLOnly,
-    VASModeNormal API_DEPRECATED_WITH_REPLACEMENT("NFCVASModeNormal", ios(13.0, 14.0)) API_UNAVAILABLE(watchos, macos, tvos)
+    VASModeNormal API_DEPRECATED_WITH_REPLACEMENT("NFCVASModeNormal", ios(13.0, 14.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos)
         = NFCVASModeNormal,
 } API_AVAILABLE(ios(13.0));
 
-typedef NFCVASMode VASMode API_DEPRECATED_WITH_REPLACEMENT("NFCVASMode", ios(13.0, 14.0)) API_UNAVAILABLE(watchos, macos, tvos);
+typedef NFCVASMode VASMode API_DEPRECATED_WITH_REPLACEMENT("NFCVASMode", ios(13.0, 14.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos);
 
 /*!
  * @class NFCVASCommandConfiguration
  *
  * @discussion Configuration for one GET VAS DATA command.
  */
-API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos)
+API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos)
 @interface NFCVASCommandConfiguration : NSObject<NSCopying>
 
 /*!
  * @property mode
  * @discussion  VAS protocol mode.
  */
-@property (nonatomic, assign) NFCVASMode mode API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos);
+@property (nonatomic, assign) NFCVASMode mode API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos);
 
 /*!
  * @property passTypeIdentifier
  * @discussion  Wallet Pass Type Identifier of the Wallet Pass.  The string value will be used to calculate the
  *              Merchant ID value for the GET VAS DATA command.
  */
-@property (nonatomic, retain) NSString *passTypeIdentifier API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos);
+@property (nonatomic, retain) NSString *passTypeIdentifier API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos);
 
 /*!
  * @property url
  * @discussion  Merchant URL object.  Maximum length of the URL is 64 characters, including the schema.
  *              Set to nil to disable the merchant URL.
  */
-@property (nonatomic, retain, nullable) NSURL *url API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos);
+@property (nonatomic, retain, nullable) NSURL *url API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos);
 
 /*!
  * @method initWithVASMode:passTypeIdentifier:url:
@@ -77,41 +77,41 @@ API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos)
  * @discussion Response APDU status word.
  */
 typedef NS_ENUM(NSInteger, NFCVASErrorCode) {
-    NFCVASErrorCodeSuccess API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos)                        = 0x9000,
-    NFCVASErrorCodeDataNotFound API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos)                   = 0x6A83,
-    NFCVASErrorCodeDataNotActivated API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos)               = 0x6287,
-    NFCVASErrorCodeWrongParameters API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos)                = 0x6B00,
-    NFCVASErrorCodeWrongLCField API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos)                   = 0x6700,
-    NFCVASErrorCodeUserIntervention API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos)               = 0x6984,
-    NFCVASErrorCodeIncorrectData API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos)                  = 0x6A80,
-    NFCVASErrorCodeUnsupportedApplicationVersion API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos)  = 0x6340,
+    NFCVASErrorCodeSuccess API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos)                        = 0x9000,
+    NFCVASErrorCodeDataNotFound API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos)                   = 0x6A83,
+    NFCVASErrorCodeDataNotActivated API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos)               = 0x6287,
+    NFCVASErrorCodeWrongParameters API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos)                = 0x6B00,
+    NFCVASErrorCodeWrongLCField API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos)                   = 0x6700,
+    NFCVASErrorCodeUserIntervention API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos)               = 0x6984,
+    NFCVASErrorCodeIncorrectData API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos)                  = 0x6A80,
+    NFCVASErrorCodeUnsupportedApplicationVersion API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos)  = 0x6340,
     
-    VASErrorCodeSuccess API_DEPRECATED_WITH_REPLACEMENT("NFCVASErrorCodeSuccess", ios(13.0, 14.0)) API_UNAVAILABLE(watchos, macos, tvos)
+    VASErrorCodeSuccess API_DEPRECATED_WITH_REPLACEMENT("NFCVASErrorCodeSuccess", ios(13.0, 14.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos)
         = NFCVASErrorCodeSuccess,
-    VASErrorCodeDataNotFound API_DEPRECATED_WITH_REPLACEMENT("NFCVASErrorCodeDataNotFound", ios(13.0, 14.0)) API_UNAVAILABLE(watchos, macos, tvos)
+    VASErrorCodeDataNotFound API_DEPRECATED_WITH_REPLACEMENT("NFCVASErrorCodeDataNotFound", ios(13.0, 14.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos)
         = NFCVASErrorCodeDataNotFound,
-    VASErrorCodeDataNotActivated API_DEPRECATED_WITH_REPLACEMENT("NFCVASErrorCodeDataNotActivated", ios(13.0, 14.0)) API_UNAVAILABLE(watchos, macos, tvos)
+    VASErrorCodeDataNotActivated API_DEPRECATED_WITH_REPLACEMENT("NFCVASErrorCodeDataNotActivated", ios(13.0, 14.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos)
         = NFCVASErrorCodeDataNotActivated,
-    VASErrorCodeWrongParameters API_DEPRECATED_WITH_REPLACEMENT("NFCVASErrorCodeWrongParameters", ios(13.0, 14.0)) API_UNAVAILABLE(watchos, macos, tvos)
+    VASErrorCodeWrongParameters API_DEPRECATED_WITH_REPLACEMENT("NFCVASErrorCodeWrongParameters", ios(13.0, 14.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos)
         = NFCVASErrorCodeWrongParameters,
-    VASErrorCodeWrongLCField API_DEPRECATED_WITH_REPLACEMENT("NFCVASErrorCodeWrongLCField", ios(13.0, 14.0)) API_UNAVAILABLE(watchos, macos, tvos)
+    VASErrorCodeWrongLCField API_DEPRECATED_WITH_REPLACEMENT("NFCVASErrorCodeWrongLCField", ios(13.0, 14.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos)
         = NFCVASErrorCodeWrongLCField,
-    VASErrorCodeUserIntervention API_DEPRECATED_WITH_REPLACEMENT("NFCVASErrorCodeUserIntervention", ios(13.0, 14.0)) API_UNAVAILABLE(watchos, macos, tvos)
+    VASErrorCodeUserIntervention API_DEPRECATED_WITH_REPLACEMENT("NFCVASErrorCodeUserIntervention", ios(13.0, 14.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos)
         = NFCVASErrorCodeUserIntervention,
-    VASErrorCodeIncorrectData API_DEPRECATED_WITH_REPLACEMENT("NFCVASErrorCodeIncorrectData", ios(13.0, 14.0)) API_UNAVAILABLE(watchos, macos, tvos)
+    VASErrorCodeIncorrectData API_DEPRECATED_WITH_REPLACEMENT("NFCVASErrorCodeIncorrectData", ios(13.0, 14.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos)
         = NFCVASErrorCodeIncorrectData,
-    VASErrorCodeUnsupportedApplicationVersion API_DEPRECATED_WITH_REPLACEMENT("NFCVASErrorCodeUnsupportedApplicationVersion", ios(13.0, 14.0)) API_UNAVAILABLE(watchos, macos, tvos)
+    VASErrorCodeUnsupportedApplicationVersion API_DEPRECATED_WITH_REPLACEMENT("NFCVASErrorCodeUnsupportedApplicationVersion", ios(13.0, 14.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos)
         = NFCVASErrorCodeUnsupportedApplicationVersion,
 } API_AVAILABLE(ios(13.0));
 
-typedef NFCVASErrorCode VASErrorCode API_DEPRECATED_WITH_REPLACEMENT("NFCVASErrorCode", ios(13.0, 14.0)) API_UNAVAILABLE(watchos, macos, tvos);
+typedef NFCVASErrorCode VASErrorCode API_DEPRECATED_WITH_REPLACEMENT("NFCVASErrorCode", ios(13.0, 14.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos);
 
 /*!
  * @class NFCVASResponse
  *
  * @discussion Response from one GET VAS DATA command.
  */
-API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos)
+API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos)
 @interface NFCVASResponse : NSObject<NSCopying>
 
 /*!
@@ -119,21 +119,21 @@ API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos)
  *
  * @discussion Response APDU status.
  */
-@property (nonatomic, assign, readonly) NFCVASErrorCode status API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos);
+@property (nonatomic, assign, readonly) NFCVASErrorCode status API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos);
 
 /*!
  * @property vasData
  *
  * @discussion VAS data.
  */
-@property (nonatomic, retain, readonly) NSData *vasData API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos);
+@property (nonatomic, retain, readonly) NSData *vasData API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos);
 
 /*!
  * @property mobileToken
  *
  * @discussion Mobile token value.
  */
-@property (nonatomic, retain, readonly) NSData *mobileToken API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos);
+@property (nonatomic, retain, readonly) NSData *mobileToken API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos);
 
 @end
 
@@ -142,7 +142,7 @@ API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos)
  *
  * @discussion  Value Added Service (VAS) reader session callbacks.
  */
-API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos)
+API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos)
 @protocol NFCVASReaderSessionDelegate <NSObject>
 @optional
 
@@ -154,7 +154,7 @@ API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos)
  * @discussion      Gets called when the NFC reader session has become active. RF is enabled and reader is scanning for VAS tags.
  *                  The @link readerSession:didReceiveVASResponses: @link/ will be called when a VAS transaction is completed.
  */
-- (void)readerSessionDidBecomeActive:(NFCVASReaderSession *)session API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos);
+- (void)readerSessionDidBecomeActive:(NFCVASReaderSession *)session API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos);
 
 @required
 
@@ -167,7 +167,7 @@ API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos)
  * @discussion      Gets called when a session becomes invalid.  At this point the client is expected to discard
  *                  the returned session object.
  */
-- (void)readerSession:(NFCVASReaderSession *)session didInvalidateWithError:(NSError *)error API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos);
+- (void)readerSession:(NFCVASReaderSession *)session didInvalidateWithError:(NSError *)error API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos);
 
 /*!
  * @method readerSession:didReceiveVASResponses:
@@ -179,7 +179,7 @@ API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos)
  * @discussion      Gets called when the reader completes the requested VAS transaction.  Polling
  *                  is automatically restarted once the detected tag is removed from the reader's read range.
  */
-- (void)readerSession:(NFCVASReaderSession *)session didReceiveVASResponses:(NSArray<NFCVASResponse *> *)responses API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos);
+- (void)readerSession:(NFCVASReaderSession *)session didReceiveVASResponses:(NSArray<NFCVASResponse *> *)responses API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos);
 
 @end
 
@@ -194,7 +194,7 @@ API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos)
  * NOTE:
  * Only one NFCReaderSession can be active at any time in the system. Subsequent opened sessions will get queued up and processed by the system in FIFO order.
  */
-API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos)
+API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos)
 @interface NFCVASReaderSession : NFCReaderSession
 
 - (instancetype)init NS_UNAVAILABLE;
@@ -228,7 +228,7 @@ API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos)
  */
 - (instancetype)initWithVASCommandConfigurations:(NSArray<NFCVASCommandConfiguration *> *)commandConfigurations
                                         delegate:(id<NFCVASReaderSessionDelegate>)delegate
-                                           queue:(nullable dispatch_queue_t)queue NS_DESIGNATED_INITIALIZER API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos) NS_EXTENSION_UNAVAILABLE("Not available to extensions");
+                                           queue:(nullable dispatch_queue_t)queue NS_DESIGNATED_INITIALIZER API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos) NS_EXTENSION_UNAVAILABLE("Not available to extensions");
 @end
 
 NS_ASSUME_NONNULL_END

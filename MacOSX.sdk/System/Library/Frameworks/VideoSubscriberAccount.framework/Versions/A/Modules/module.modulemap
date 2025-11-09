@@ -1,4 +1,4 @@
-framework module VideoSubscriberAccount {
+framework module VideoSubscriberAccount [system]  {
     umbrella header "VideoSubscriberAccount.h"
 
     export *

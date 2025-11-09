@@ -1330,6 +1330,10 @@ struct build_tool_version {
 
 #endif /* __OPEN_SOURCE__ */
 
+#ifndef __OPEN_SOURCE__
+
+#endif /* __OPEN_SOURCE__ */
+
 /* Known values for the tool field above. */
 #define TOOL_CLANG 1
 #define TOOL_SWIFT 2

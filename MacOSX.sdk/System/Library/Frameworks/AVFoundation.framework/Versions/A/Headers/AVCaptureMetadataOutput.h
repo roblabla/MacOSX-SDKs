@@ -51,7 +51,7 @@ API_AVAILABLE(macos(13.0), ios(6.0), macCatalyst(14.0), tvos(17.0)) API_UNAVAILA
  
     Clients that need to minimize the chances of metadata being dropped should specify a queue on which a sufficiently small amount of processing is performed along with receiving metadata objects.
  
-    A serial dispatch queue must be used to guarantee that metadata objects will be delivered in order. The objectsCallbackQueue parameter may not be NULL, except when setting the objectsDelegate to nil.
+    A serial dispatch queue must be used to guarantee that metadata objects will be delivered in order. The objectsCallbackQueue parameter may not be NULL, except when setting the objectsDelegate to nil otherwise -setMetadataObjectsDelegate:queue: throws an NSInvalidArgumentException.
  */
 - (void)setMetadataObjectsDelegate:(nullable id<AVCaptureMetadataOutputObjectsDelegate>)objectsDelegate queue:(nullable dispatch_queue_t)objectsCallbackQueue;
 

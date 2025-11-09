@@ -34,6 +34,8 @@
 #import <DiscRecording/DRFSObject.h>
 
 
+#ifndef DISC_RECORDING_FOLDER
+#define DISC_RECORDING_FOLDER
 
 /*!
 	@class		DRFolder
@@ -166,3 +168,5 @@
 - (NSArray*) children;
 
 @end
+
+#endif // DISC_RECORDING_FOLDER

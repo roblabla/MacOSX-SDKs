@@ -16,40 +16,40 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol NFCTag, NFCNDEFTag;
 
 typedef NS_OPTIONS(uint8_t, NFCISO15693RequestFlag) {
-    NFCISO15693RequestFlagDualSubCarriers API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos)     = (1 << 0),
-    NFCISO15693RequestFlagHighDataRate API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos)        = (1 << 1),
-    NFCISO15693RequestFlagProtocolExtension API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos)   = (1 << 3),
-    NFCISO15693RequestFlagSelect API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos)              = (1 << 4),
-    NFCISO15693RequestFlagAddress API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos)             = (1 << 5),
-    NFCISO15693RequestFlagOption API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos)              = (1 << 6),
-    NFCISO15693RequestFlagCommandSpecificBit8 API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos, macos, tvos) = (1 << 7),
+    NFCISO15693RequestFlagDualSubCarriers API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos)     = (1 << 0),
+    NFCISO15693RequestFlagHighDataRate API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos)        = (1 << 1),
+    NFCISO15693RequestFlagProtocolExtension API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos)   = (1 << 3),
+    NFCISO15693RequestFlagSelect API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos)              = (1 << 4),
+    NFCISO15693RequestFlagAddress API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos)             = (1 << 5),
+    NFCISO15693RequestFlagOption API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos)              = (1 << 6),
+    NFCISO15693RequestFlagCommandSpecificBit8 API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos) = (1 << 7),
     
-    RequestFlagDualSubCarriers API_DEPRECATED_WITH_REPLACEMENT("NFCISO15693RequestFlagDualSubCarriers", ios(11.0, 14.0)) API_UNAVAILABLE(watchos, macos, tvos) 
+    RequestFlagDualSubCarriers API_DEPRECATED_WITH_REPLACEMENT("NFCISO15693RequestFlagDualSubCarriers", ios(11.0, 14.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos)
         = NFCISO15693RequestFlagDualSubCarriers,
-    RequestFlagHighDataRate API_DEPRECATED_WITH_REPLACEMENT("NFCISO15693RequestFlagHighDataRate", ios(11.0,14.0)) API_UNAVAILABLE(watchos, macos, tvos)
+    RequestFlagHighDataRate API_DEPRECATED_WITH_REPLACEMENT("NFCISO15693RequestFlagHighDataRate", ios(11.0,14.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos)
         = NFCISO15693RequestFlagHighDataRate,
-    RequestFlagProtocolExtension API_DEPRECATED_WITH_REPLACEMENT("NFCISO15693RequestFlagProtocolExtension", ios(11.0,14.0)) API_UNAVAILABLE(watchos, macos, tvos) 
+    RequestFlagProtocolExtension API_DEPRECATED_WITH_REPLACEMENT("NFCISO15693RequestFlagProtocolExtension", ios(11.0,14.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos)
         = NFCISO15693RequestFlagProtocolExtension,
-    RequestFlagSelect API_DEPRECATED_WITH_REPLACEMENT("NFCISO15693RequestFlagSelect", ios(11.0,14.0)) API_UNAVAILABLE(watchos, macos, tvos)
+    RequestFlagSelect API_DEPRECATED_WITH_REPLACEMENT("NFCISO15693RequestFlagSelect", ios(11.0,14.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos)
         = NFCISO15693RequestFlagSelect,
-    RequestFlagAddress API_DEPRECATED_WITH_REPLACEMENT("NFCISO15693RequestFlagAddress", ios(11.0,14.0)) API_UNAVAILABLE(watchos, macos, tvos)
+    RequestFlagAddress API_DEPRECATED_WITH_REPLACEMENT("NFCISO15693RequestFlagAddress", ios(11.0,14.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos)
         = NFCISO15693RequestFlagAddress,
-    RequestFlagOption API_DEPRECATED_WITH_REPLACEMENT("NFCISO15693RequestFlagOption", ios(11.0,14.0)) API_UNAVAILABLE(watchos, macos, tvos)
+    RequestFlagOption API_DEPRECATED_WITH_REPLACEMENT("NFCISO15693RequestFlagOption", ios(11.0,14.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos)
         = NFCISO15693RequestFlagOption
 
-} API_AVAILABLE(ios(14.0));
+} API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos);
 
-typedef NFCISO15693RequestFlag RequestFlag API_AVAILABLE(ios(11.0)) API_DEPRECATED_WITH_REPLACEMENT("NFCISO15693RequestFlag", ios(11.0, 14.0));
+typedef NFCISO15693RequestFlag RequestFlag API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos) API_DEPRECATED_WITH_REPLACEMENT("NFCISO15693RequestFlag", ios(11.0, 14.0));
 
 typedef NS_OPTIONS(uint8_t, NFCISO15693ResponseFlag) {
-    NFCISO15693ResponseFlagError API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos, macos, tvos)                     = (1 << 0),
-    NFCISO15693ResponseFlagResponseBufferValid API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos, macos, tvos)       = (1 << 1),
-    NFCISO15693ResponseFlagFinalResponse API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos, macos, tvos)             = (1 << 2),
-    NFCISO15693ResponseFlagProtocolExtension API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos, macos, tvos)         = (1 << 3),
-    NFCISO15693ResponseFlagBlockSecurityStatusBit5 API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos, macos, tvos)   = (1 << 4),
-    NFCISO15693ResponseFlagBlockSecurityStatusBit6 API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos, macos, tvos)   = (1 << 5),
-    NFCISO15693ResponseFlagWaitTimeExtension API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos, macos, tvos)         = (1 << 6),
-} API_AVAILABLE(ios(14.0));
+    NFCISO15693ResponseFlagError API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos)                     = (1 << 0),
+    NFCISO15693ResponseFlagResponseBufferValid API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos)       = (1 << 1),
+    NFCISO15693ResponseFlagFinalResponse API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos)             = (1 << 2),
+    NFCISO15693ResponseFlagProtocolExtension API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos)         = (1 << 3),
+    NFCISO15693ResponseFlagBlockSecurityStatusBit5 API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos)   = (1 << 4),
+    NFCISO15693ResponseFlagBlockSecurityStatusBit6 API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos)   = (1 << 5),
+    NFCISO15693ResponseFlagWaitTimeExtension API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos)         = (1 << 6),
+} API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos);
 
 /*!
  * @class       NFCISO15693CustomCommandConfiguration
@@ -57,23 +57,23 @@ typedef NS_OPTIONS(uint8_t, NFCISO15693ResponseFlag) {
  * @discussion  Configuration options for the Manufacturer Custom command.
  */
 
-NS_EXTENSION_UNAVAILABLE("Not available to extensions") API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos)
+NS_EXTENSION_UNAVAILABLE("Not available to extensions") API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos)
 @interface NFCISO15693CustomCommandConfiguration : NFCTagCommandConfiguration
 
 /*!
  * @discussion  Manufacturer code. Valid range is 0x00 to 0xFF.
  */
-@property (nonatomic, assign) NSUInteger manufacturerCode API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos);
+@property (nonatomic, assign) NSUInteger manufacturerCode API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos);
 
 /*!
  * @discussion  Manufacturer Custom Command Index.  Valid range is 0xA0 to 0xDF.
  */
-@property (nonatomic, assign) NSUInteger customCommandCode API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos);
+@property (nonatomic, assign) NSUInteger customCommandCode API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos);
 
 /*!
  * @discussion  Custom request data.
  */
-@property (nonatomic, copy) NSData *requestParameters API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos);
+@property (nonatomic, copy) NSData *requestParameters API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos);
 
 /*!
  * @method initWithManufacturerCode:customCommandCode:requestParameters:
@@ -86,7 +86,7 @@ NS_EXTENSION_UNAVAILABLE("Not available to extensions") API_AVAILABLE(ios(11.0))
  */
 - (instancetype)initWithManufacturerCode:(NSUInteger)manufacturerCode
                        customCommandCode:(NSUInteger)customCommandCode
-                       requestParameters:(nullable NSData *)requestParameters API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos);
+                       requestParameters:(nullable NSData *)requestParameters API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos);
 
 /*!
  * @method initWithManufacturerCode:customCommandCode:requestParameters:maximumRetries:retryInterval:
@@ -94,14 +94,14 @@ NS_EXTENSION_UNAVAILABLE("Not available to extensions") API_AVAILABLE(ios(11.0))
  * @param manufacturerCode      8 bits manufacturer code.
  * @param customCommandCode     8 bits custom command code.  Valid range is 0xA0 to 0xDF.
  * @param requestParameters     Optional custom request parameters.
- * @param maximumRetries        Maximum number of retry attempt when tag response is not recevied.
+ * @param maximumRetries        Maximum number of retry attempt when tag response is not received.
  * @param retryInterval         Time interval wait between each retry attempt.
  */
 - (instancetype)initWithManufacturerCode:(NSUInteger)manufacturerCode
                        customCommandCode:(NSUInteger)customCommandCode
                        requestParameters:(nullable NSData *)requestParameters
                           maximumRetries:(NSUInteger)maximumRetries
-                           retryInterval:(NSTimeInterval)retryInterval API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos);
+                           retryInterval:(NSTimeInterval)retryInterval API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos);
 @end
 
 /*!
@@ -109,36 +109,36 @@ NS_EXTENSION_UNAVAILABLE("Not available to extensions") API_AVAILABLE(ios(11.0))
  *
  * @discussion  Configuration options for the Read Multiple Blocks command.
  */
-NS_EXTENSION_UNAVAILABLE("Not available to extensions")  API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos)
+NS_EXTENSION_UNAVAILABLE("Not available to extensions")  API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos)
 @interface NFCISO15693ReadMultipleBlocksConfiguration : NFCTagCommandConfiguration
 
 /*!
  * @discussion  Range to read in blocks.  Valid start index range is 0x00 to 0xFF.  Length shall not be 0.
  */
-@property (nonatomic, assign) NSRange range API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos);
+@property (nonatomic, assign) NSRange range API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos);
 
 /*!
  * @discussion  Number of blocks to read per Read Multiple Blocks command. This may be limited by the tag hardware.
  */
-@property (nonatomic, assign) NSUInteger chunkSize API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos);
+@property (nonatomic, assign) NSUInteger chunkSize API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos);
 
 /*!
  * @discussion  Initialize with default zero maximum retry and zero retry interval.
  */
 - (instancetype)initWithRange:(NSRange)range
-                    chunkSize:(NSUInteger)chunkSize API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos);
+                    chunkSize:(NSUInteger)chunkSize API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos);
 /*!
  * @method initWithRange:chunkSize:maximumRetries:retryInterval:
  *
  * @param range             Read range specify by the starting block index and the total number of blocks.
  * @param chunkSize         Specify number of blocks parameter for the Read multiple blocks command.
- * @param maximumRetries    Maximum number of retry attempt when tag response is not recevied.
+ * @param maximumRetries    Maximum number of retry attempt when tag response is not received.
  * @param retryInterval     Time interval wait between each retry attempt.
  */
 - (instancetype)initWithRange:(NSRange)range
                     chunkSize:(NSUInteger)chunkSize
                maximumRetries:(NSUInteger)maximumRetries
-                retryInterval:(NSTimeInterval)retryInterval API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos);
+                retryInterval:(NSTimeInterval)retryInterval API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos);
 
 @end
 
@@ -154,7 +154,7 @@ NS_EXTENSION_UNAVAILABLE("Not available to extensions")  API_AVAILABLE(ios(11.0)
  *              Tag must be in the connected state for NFCNDEFTag protocol properties and methods to work correctly.  Each data frame send out by the reader may not
  *              exceed 256 bytes total.
  */
-API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos)
+API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos)
 @protocol NFCISO15693Tag <NFCTag, NFCNDEFTag>
 
 @required
@@ -162,17 +162,17 @@ API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos)
 /*!
  * @discussion The 64 bit hardware UID of the tag. Data is in Big Endian byte order.
  */
-@property (nonatomic, readonly, copy) NSData *identifier API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos);
+@property (nonatomic, readonly, copy) NSData *identifier API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos);
 
 /*!
  * @discussion  The IC manufacturer code (bits 56 – 49) in UID according to ISO/IEC 7816-6:2004.
  */
-@property (nonatomic, readonly) NSUInteger icManufacturerCode API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos);
+@property (nonatomic, readonly) NSUInteger icManufacturerCode API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos);
 
 /*!
  * @discussion  The IC serial number (bits 48 – 1) in UID assigned by the manufacturer.  Data is in Big Endian byte order.
  */
-@property (nonatomic, readonly, copy) NSData *icSerialNumber API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos);
+@property (nonatomic, readonly, copy) NSData *icSerialNumber API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos);
 
 
 #pragma mark - Legacy APIs
@@ -195,7 +195,7 @@ API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos)
  *             specification for details.
  */
 - (void)sendCustomCommandWithConfiguration:(NFCISO15693CustomCommandConfiguration *)commandConfiguration
-                         completionHandler:(void(^)(NSData *customResponseParameters, NSError * _Nullable error))completionHandler NS_SWIFT_DISABLE_ASYNC API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos) NS_EXTENSION_UNAVAILABLE("Not available to extensions");
+                         completionHandler:(void(^)(NSData *customResponseParameters, NSError * _Nullable error))completionHandler NS_SWIFT_DISABLE_ASYNC API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos) NS_EXTENSION_UNAVAILABLE("Not available to extensions");
 
 /*!
  * @method readMultipleBlocksWithConfiguration:completionHandler:
@@ -210,7 +210,7 @@ API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos)
  *              Multiple Read Multiple Blocks commands will be sent if necessary to complete the operation.
  */
 - (void)readMultipleBlocksWithConfiguration:(NFCISO15693ReadMultipleBlocksConfiguration *)readConfiguration
-                          completionHandler:(void(^)(NSData *data, NSError * _Nullable error))completionHandler NS_SWIFT_DISABLE_ASYNC API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos) NS_EXTENSION_UNAVAILABLE("Not available to extensions");
+                          completionHandler:(void(^)(NSData *data, NSError * _Nullable error))completionHandler NS_SWIFT_DISABLE_ASYNC API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos) NS_EXTENSION_UNAVAILABLE("Not available to extensions");
 
 
 #pragma mark - Public APIs
@@ -226,7 +226,7 @@ API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos)
  *
  * @discussion              Stay quiet command (0x02 command code) as defined in ISO15693-3 specification.
  */
-- (void)stayQuietWithCompletionHandler:(void(^)(NSError * _Nullable error))completionHandler API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos);
+- (void)stayQuietWithCompletionHandler:(void(^)(NSError * _Nullable error))completionHandler API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos);
 
 /*!
  * @method readSingleBlockWithRequestFlags:blockNumber:completionHandler:
@@ -245,7 +245,7 @@ API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos)
  */
 - (void)readSingleBlockWithRequestFlags:(NFCISO15693RequestFlag)flags
                             blockNumber:(uint8_t)blockNumber
-                      completionHandler:(void(^)(NSData *data, NSError * _Nullable error))completionHandler API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos);
+                      completionHandler:(void(^)(NSData *data, NSError * _Nullable error))completionHandler API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos);
 
 /*!
  * @method writeSingleBlockWithRequestFlags:blockNumber:dataBlock:completionHandler:
@@ -264,7 +264,7 @@ API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos)
 - (void)writeSingleBlockWithRequestFlags:(NFCISO15693RequestFlag)flags
                              blockNumber:(uint8_t)blockNumber
                                dataBlock:(NSData *)dataBlock
-                       completionHandler:(void(^)(NSError * _Nullable error))completionHandler API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos);
+                       completionHandler:(void(^)(NSError * _Nullable error))completionHandler API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos);
 
 /*!
 * @method lockBlockWithRequestFlags:blockNumber:completionHandler:
@@ -282,7 +282,7 @@ API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos)
 */
 - (void)lockBlockWithRequestFlags:(NFCISO15693RequestFlag)flags
                       blockNumber:(uint8_t)blockNumber
-                completionHandler:(void(^)(NSError * _Nullable error))completionHandler API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos);
+                completionHandler:(void(^)(NSError * _Nullable error))completionHandler API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos);
 
 /*!
  * @method readMultipleBlocksWithRequestFlags:blockRange:completionHandler:
@@ -302,7 +302,7 @@ API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos)
  */
 - (void)readMultipleBlocksWithRequestFlags:(NFCISO15693RequestFlag)flags
                                 blockRange:(NSRange)blockRange
-                         completionHandler:(void(^)(NSArray<NSData *> *dataBlocks, NSError * _Nullable error))completionHandler API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos);
+                         completionHandler:(void(^)(NSArray<NSData *> *dataBlocks, NSError * _Nullable error))completionHandler API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos);
 
 /*!
  * @method writeMultipleBlocksWithRequestFlags:blockRange:dataBlocks:completionHandler:
@@ -322,7 +322,7 @@ API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos)
 - (void)writeMultipleBlocksWithRequestFlags:(NFCISO15693RequestFlag)flags
                                  blockRange:(NSRange)blockRange
                                  dataBlocks:(NSArray<NSData *> *)dataBlocks
-                          completionHandler:(void(^)(NSError * _Nullable error))completionHandler API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos);
+                          completionHandler:(void(^)(NSError * _Nullable error))completionHandler API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos);
 
 /*!
  * @method selectWithRequestFlags:completionHandler:
@@ -337,7 +337,7 @@ API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos)
  *                          enforced by default and the tag's UID is sent with the command; setting RequestFlagSelect to flags will disable the Address flag.
  */
 - (void)selectWithRequestFlags:(NFCISO15693RequestFlag)flags
-             completionHandler:(void(^)(NSError * _Nullable error))completionHandler API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos);
+             completionHandler:(void(^)(NSError * _Nullable error))completionHandler API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos);
 
 /*!
  * @method resetToReadyWithRequestFlags:completionHandler:
@@ -352,7 +352,7 @@ API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos)
  *                          enforced by default and the tag's UID is sent with the command; setting RequestFlagSelect to flags will disable the Address flag.
  */
 - (void)resetToReadyWithRequestFlags:(NFCISO15693RequestFlag)flags
-                   completionHandler:(void(^)(NSError * _Nullable error))completionHandler API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos);
+                   completionHandler:(void(^)(NSError * _Nullable error))completionHandler API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos);
 
 /*!
  * @method writeAFIWithRequestFlag:afi:completionHandler:
@@ -369,7 +369,7 @@ API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos)
  */
 - (void)writeAFIWithRequestFlag:(NFCISO15693RequestFlag)flags
                             afi:(uint8_t)afi
-              completionHandler:(void(^)(NSError * _Nullable error))completionHandler API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos);
+              completionHandler:(void(^)(NSError * _Nullable error))completionHandler API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos);
 
 /*!
  * @method lockAFIWithRequestFlag:completionHandler:
@@ -384,7 +384,7 @@ API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos)
  *                          enforced by default and the tag's UID is sent with the command; setting RequestFlagSelect to flags will disable the Address flag.
  */
 - (void)lockAFIWithRequestFlag:(NFCISO15693RequestFlag)flags
-             completionHandler:(void(^)(NSError * _Nullable error))completionHandler API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos);
+             completionHandler:(void(^)(NSError * _Nullable error))completionHandler API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos);
 
 /*!
  * @method writeDSFIDWithRequestFlag:dsfid:completionHandler:
@@ -401,7 +401,7 @@ API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos)
  */
 - (void)writeDSFIDWithRequestFlag:(NFCISO15693RequestFlag)flags
                             dsfid:(uint8_t)dsfid
-                completionHandler:(void(^)(NSError * _Nullable error))completionHandler API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos);
+                completionHandler:(void(^)(NSError * _Nullable error))completionHandler API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos);
 
 /*!
  * @method lockDFSIDWithRequestFlag:completionHandler:
@@ -415,7 +415,7 @@ API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos)
  * @discussion              Use the replacement -lockDSFIDWithRequestFlag:completionHandler:.
  */
 - (void)lockDFSIDWithRequestFlag:(NFCISO15693RequestFlag)flags
-               completionHandler:(void(^)(NSError * _Nullable error))completionHandler API_DEPRECATED_WITH_REPLACEMENT("lockDSFIDWithRequestFlag:completionHandler:", ios(13.0, 14.0)) NS_SWIFT_DISABLE_ASYNC API_UNAVAILABLE(watchos, macos, tvos);
+               completionHandler:(void(^)(NSError * _Nullable error))completionHandler API_DEPRECATED_WITH_REPLACEMENT("lockDSFIDWithRequestFlag:completionHandler:", ios(13.0, 14.0)) NS_SWIFT_DISABLE_ASYNC API_UNAVAILABLE(watchos, macos, tvos, visionos);
 
 /*!
  * @method lockDSFIDWithRequestFlag:completionHandler:
@@ -430,7 +430,7 @@ API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos)
  *                          enforced by default and the tag's UID is sent with the command; setting RequestFlagSelect to flags will disable the Address flag.
  */
 - (void)lockDSFIDWithRequestFlag:(NFCISO15693RequestFlag)flags
-               completionHandler:(void(^)(NSError * _Nullable error))completionHandler API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos, macos, tvos);
+               completionHandler:(void(^)(NSError * _Nullable error))completionHandler API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos);
 
 /*!
  * @method getSystemInfoWithRequestFlag:completionHandler:
@@ -447,7 +447,7 @@ API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos)
  * @discussion              Use the replacement -getSystemInfoAndUIDWithRequestFlag:completionHandler:.
  */
 - (void)getSystemInfoWithRequestFlag:(NFCISO15693RequestFlag)flags
-                   completionHandler:(void(^)(NSInteger dsfid, NSInteger afi, NSInteger blockSize, NSInteger blockCount, NSInteger icReference, NSError * _Nullable error))completionHandler API_DEPRECATED_WITH_REPLACEMENT("getSystemInfoAndUIDWithRequestFlag:completionHandler:", ios(13.0, 14.0)) NS_SWIFT_DISABLE_ASYNC API_UNAVAILABLE(watchos, macos, tvos);
+                   completionHandler:(void(^)(NSInteger dsfid, NSInteger afi, NSInteger blockSize, NSInteger blockCount, NSInteger icReference, NSError * _Nullable error))completionHandler API_DEPRECATED_WITH_REPLACEMENT("getSystemInfoAndUIDWithRequestFlag:completionHandler:", ios(13.0, 14.0)) NS_SWIFT_DISABLE_ASYNC API_UNAVAILABLE(watchos, macos, tvos, visionos);
 
 /*!
 * @method getSystemInfoAndUIDWithRequestFlag:completionHandler:
@@ -471,7 +471,7 @@ API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos)
                                                     NSInteger blockSize,
                                                     NSInteger blockCount,
                                                     NSInteger icReference,
-                                                    NSError * _Nullable error))completionHandler API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos, macos, tvos);
+                                                    NSError * _Nullable error))completionHandler API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos);
 
 /*!
  * @method getMultipleBlockSecurityStatusWithRequestFlag:blockRange:completionHandler:
@@ -489,7 +489,7 @@ API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos)
  */
 - (void)getMultipleBlockSecurityStatusWithRequestFlag:(NFCISO15693RequestFlag)flags
                                            blockRange:(NSRange)blockRange
-                                    completionHandler:(void(^)(NSArray<NSNumber *> *securityStatus, NSError * _Nullable error))completionHandler API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos);
+                                    completionHandler:(void(^)(NSArray<NSNumber *> *securityStatus, NSError * _Nullable error))completionHandler API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos);
 
 /*!
  * @method fastReadMultipleBlocksWithRequestFlag:blockRange:completionHandler:
@@ -501,7 +501,7 @@ API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos)
  */
 - (void)fastReadMultipleBlocksWithRequestFlag:(NFCISO15693RequestFlag)flags
                                    blockRange:(NSRange)blockRange
-                            completionHandler:(void(^)(NSArray<NSData *> * dataBlocks, NSError * _Nullable error))completionHandler API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos, macos, tvos);
+                            completionHandler:(void(^)(NSArray<NSData *> * dataBlocks, NSError * _Nullable error))completionHandler API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos);
 
 /*!
  * @method customCommandWithRequestFlag:customCommandCode:customRequestParameters:completionHandler:
@@ -513,7 +513,7 @@ API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos)
  *                                  A @link NFCErrorDomain @link/ error is returned when there is a communication issue with the tag.
  *                                  A @link NFCISO15693TagResponseErrorKey @link/ in NSError userInfo dictionary is returned when the tag
  *                                  responded to the command with an error, and the error code value is defined in ISO15693-3 specification.
- *                                  The custom reponse parameters are returned on success.
+ *                                  The custom response parameters are returned on success.
  *
  * @discussion                      Custom command (0xA0 to 0xDF command code) as defined in ISO15693-3 specification.  IC manufacturer code from the tag is
  *                                  automatically inserted after the command byte before appending the custom request parameters in forming the packet.
@@ -521,7 +521,7 @@ API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos)
 - (void)customCommandWithRequestFlag:(NFCISO15693RequestFlag)flags
                    customCommandCode:(NSInteger)customCommandCode
              customRequestParameters:(NSData *)customRequestParameters
-                   completionHandler:(void(^)(NSData *customResponseParameters, NSError * _Nullable error))completionHandler API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos);
+                   completionHandler:(void(^)(NSData *customResponseParameters, NSError * _Nullable error))completionHandler API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos);
 
 /*!
  * @method extendedReadSingleBlockWithRequestFlags:blockNumber:completionHandler:
@@ -539,7 +539,7 @@ API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos)
  */
 - (void)extendedReadSingleBlockWithRequestFlags:(NFCISO15693RequestFlag)flags
                                     blockNumber:(NSInteger)blockNumber
-                              completionHandler:(void(^)(NSData *data, NSError * _Nullable error))completionHandler API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos);
+                              completionHandler:(void(^)(NSData *data, NSError * _Nullable error))completionHandler API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos);
 
 /*!
  * @method extendedWriteSingleBlockWithRequestFlags:blockNumber:dataBlock:completionHandler:
@@ -558,7 +558,7 @@ API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos)
 - (void)extendedWriteSingleBlockWithRequestFlags:(NFCISO15693RequestFlag)flags
                                      blockNumber:(NSInteger)blockNumber
                                        dataBlock:(NSData *)dataBlock
-                               completionHandler:(void(^)(NSError * _Nullable error))completionHandler API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos);
+                               completionHandler:(void(^)(NSError * _Nullable error))completionHandler API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos);
 
 /*!
  * @method extendedLockBlockWithRequestFlags:blockNumber:completionHandler:
@@ -570,12 +570,12 @@ API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos)
  *                          A @link NFCISO15693TagResponseErrorKey @link/ in NSError userInfo dictionary is returned when the tag
  *                          responded to the command with an error, and the error code value is defined in ISO15693-3 specification.
  *
- * @discussion              Extende lock single block command (0x32 command code) as defined in ISO15693-3 specification.  Address flag is automatically
+ * @discussion              Extended lock single block command (0x32 command code) as defined in ISO15693-3 specification.  Address flag is automatically
  *                          enforced by default and the tag's UID is sent with the command; setting RequestFlagSelect to flags will disable the Address flag.
  */
 - (void)extendedLockBlockWithRequestFlags:(NFCISO15693RequestFlag)flags
                               blockNumber:(NSInteger)blockNumber
-                        completionHandler:(void(^)(NSError * _Nullable error))completionHandler API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos);
+                        completionHandler:(void(^)(NSError * _Nullable error))completionHandler API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos);
 
 /*!
  * @method extendedReadMultipleBlocksWithRequestFlags:blockRange:completionHandler:
@@ -594,7 +594,7 @@ API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos)
  */
 - (void)extendedReadMultipleBlocksWithRequestFlags:(NFCISO15693RequestFlag)flags
                                         blockRange:(NSRange)blockRange
-                                 completionHandler:(void(^)(NSArray<NSData *> *dataBlocks, NSError * _Nullable error))completionHandler API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos);
+                                 completionHandler:(void(^)(NSArray<NSData *> *dataBlocks, NSError * _Nullable error))completionHandler API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos);
 
 /*!
  * @method extendedWriteMultipleBlocksWithRequestFlags:blockRange:dataBlocks:completionHandler:
@@ -614,7 +614,7 @@ API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos)
 - (void)extendedWriteMultipleBlocksWithRequestFlags:(NFCISO15693RequestFlag)flags
                                          blockRange:(NSRange)blockRange
                                          dataBlocks:(NSArray<NSData *> *)dataBlocks
-                                  completionHandler:(void(^)(NSError * _Nullable error))completionHandler API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos, macos, tvos);
+                                  completionHandler:(void(^)(NSError * _Nullable error))completionHandler API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos);
 
 /*!
  * @method authenticateWithRequestFlags:cryptoSuiteIdentifier:message:completionHandler:
@@ -633,7 +633,7 @@ API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos)
 - (void)authenticateWithRequestFlags:(NFCISO15693RequestFlag)flags
                cryptoSuiteIdentifier:(NSInteger)cryptoSuiteIdentifier
                              message:(NSData *)message
-                   completionHandler:(void(^)(NFCISO15693ResponseFlag responseFlag, NSData * response, NSError * _Nullable error))completionHandler API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos, macos, tvos);
+                   completionHandler:(void(^)(NFCISO15693ResponseFlag responseFlag, NSData * response, NSError * _Nullable error))completionHandler API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos);
 
 /*!
  * @method keyUpdateWithRequestFlags:message:completionHandler:
@@ -652,7 +652,7 @@ API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos)
 - (void)keyUpdateWithRequestFlags:(NFCISO15693RequestFlag)flags
                     keyIdentifier:(NSInteger)keyIdentifier
                           message:(NSData *)message
-                completionHandler:(void(^)(NFCISO15693ResponseFlag responseFlag, NSData * response, NSError * _Nullable error))completionHandler API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos, macos, tvos);
+                completionHandler:(void(^)(NFCISO15693ResponseFlag responseFlag, NSData * response, NSError * _Nullable error))completionHandler API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos);
 
 /*!
  * @method challengeWithRequestFlags:message:completionHandler:
@@ -670,7 +670,7 @@ API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos)
 - (void)challengeWithRequestFlags:(NFCISO15693RequestFlag)flags
             cryptoSuiteIdentifier:(NSInteger)cryptoSuiteIdentifier
                           message:(NSData *)message
-                completionHandler:(void(^)(NSError * _Nullable error))completionHandler API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos, macos, tvos);
+                completionHandler:(void(^)(NSError * _Nullable error))completionHandler API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos);
 
 /*!
  * @method readBufferWithRequestFlags:completionHandler:
@@ -685,7 +685,7 @@ API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos)
  * @discussion              Read buffer command (0x3A command code) as defined in ISO15693-3 specification.
  */
 - (void)readBufferWithRequestFlags:(NFCISO15693RequestFlag)flags
-                 completionHandler:(void(^)(NFCISO15693ResponseFlag responseFlag, NSData * data, NSError * _Nullable error))completionHandler API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos, macos, tvos);
+                 completionHandler:(void(^)(NFCISO15693ResponseFlag responseFlag, NSData * data, NSError * _Nullable error))completionHandler API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos);
 
 /*!
  * @method extendedGetMultipleBlockSecurityStatusWithRequestFlag:blockRange:completionHandler:
@@ -703,7 +703,7 @@ API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos)
  */
 - (void)extendedGetMultipleBlockSecurityStatusWithRequestFlag:(NFCISO15693RequestFlag)flags
                                                    blockRange:(NSRange)blockRange
-                                            completionHandler:(void(^)(NSArray<NSNumber *> *securityStatus, NSError * _Nullable error))completionHandler API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos, macos, tvos);
+                                            completionHandler:(void(^)(NSArray<NSNumber *> *securityStatus, NSError * _Nullable error))completionHandler API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos);
 
 
 /*!
@@ -715,7 +715,7 @@ API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos)
  */
 - (void)extendedFastReadMultipleBlocksWithRequestFlag:(NFCISO15693RequestFlag)flags
                                            blockRange:(NSRange)blockRange
-                                    completionHandler:(void(^)(NSArray<NSData *> * dataBlocks, NSError * _Nullable error))completionHandler API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos, macos, tvos);
+                                    completionHandler:(void(^)(NSArray<NSData *> * dataBlocks, NSError * _Nullable error))completionHandler API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos);
 
 /*!
  * @method sendRequestWithFlag:commandCode:parameters:data:completionHandler:
@@ -730,7 +730,7 @@ API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos)
 - (void)sendRequestWithFlag:(NSInteger)flags
                 commandCode:(NSInteger)commandCode
                        data:(NSData * _Nullable)data
-          completionHandler:(void(^)(NFCISO15693ResponseFlag responseFlag, NSData * _Nullable_result data, NSError * _Nullable error))completionHandler API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos, macos, tvos);
+          completionHandler:(void(^)(NFCISO15693ResponseFlag responseFlag, NSData * _Nullable_result data, NSError * _Nullable error))completionHandler API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos);
 @end
 
 NS_ASSUME_NONNULL_END

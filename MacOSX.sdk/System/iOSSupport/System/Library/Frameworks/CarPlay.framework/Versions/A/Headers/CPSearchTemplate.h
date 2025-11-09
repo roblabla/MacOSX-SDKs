@@ -13,14 +13,14 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol CPSearchTemplateDelegate;
 
 
-API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(macos, watchos, tvos)
+API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(macos, watchos)
 @interface CPSearchTemplate : CPTemplate
 
 @property (nullable, nonatomic, weak) id<CPSearchTemplateDelegate> delegate;
 
 @end
 
-API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(macos, watchos, tvos)
+API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(macos, watchos)
 @protocol CPSearchTemplateDelegate <NSObject>
 
 /**

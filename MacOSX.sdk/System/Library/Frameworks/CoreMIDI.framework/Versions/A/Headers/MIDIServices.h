@@ -74,6 +74,14 @@
 #include <CoreFoundation/CoreFoundation.h>
 #include <stddef.h>
 
+
+#define MIDI_API_UNAVAILABLE_NON_MACOS       \
+	__OS_AVAILABILITY(bridgeos, unavailable) \
+	__OS_AVAILABILITY(ios, unavailable)      \
+	__OS_AVAILABILITY(tvos, unavailable)     \
+	__OS_AVAILABILITY(watchos, unavailable)
+
+
 CF_ASSUME_NONNULL_BEGIN
 
 #ifdef __cplusplus
@@ -687,7 +695,8 @@ typedef CF_ENUM(SInt32, MIDINotificationMessageID) {
 	kMIDIMsgPropertyChanged			= 4,
 	kMIDIMsgThruConnectionsChanged	= 5,
 	kMIDIMsgSerialPortOwnerChanged	= 6,
-	kMIDIMsgIOError					= 7
+	kMIDIMsgIOError					= 7,
+	kMIDIMsgInternalStart API_UNAVAILABLE(macos) = 0x1000,
 };
 
 
@@ -1000,7 +1009,7 @@ extern const CFStringRef	kMIDIPropertyDriverOwner				API_AVAILABLE(macos(10.1), 
 		Added in CoreMIDI 1.1 (Mac OS X 10.1).  DEPRECATED as of CoreMIDI 1.3. Use
 		kMIDIPropertyNameConfiguration instead.
 */
-extern const CFStringRef	kMIDIPropertyFactoryPatchNameFile		API_DEPRECATED_WITH_REPLACEMENT("kMIDIPropertyNameConfiguration", macos(10.1, 10.2)) API_UNAVAILABLE(ios, tvos, watchos);
+extern const CFStringRef	kMIDIPropertyFactoryPatchNameFile		API_DEPRECATED_WITH_REPLACEMENT("kMIDIPropertyNameConfiguration", macos(10.1, 10.2)) MIDI_API_UNAVAILABLE_NON_MACOS;
 
 
 /*!
@@ -1013,7 +1022,7 @@ extern const CFStringRef	kMIDIPropertyFactoryPatchNameFile		API_DEPRECATED_WITH_
 		Added in CoreMIDI 1.1 (Mac OS X 10.1).  DEPRECATED as of CoreMIDI 1.3. Use
 		kMIDIPropertyNameConfiguration instead.
 */
-extern const CFStringRef	kMIDIPropertyUserPatchNameFile			API_DEPRECATED_WITH_REPLACEMENT("kMIDIPropertyNameConfiguration", macos(10.1, 10.2)) API_UNAVAILABLE(ios, tvos, watchos);
+extern const CFStringRef	kMIDIPropertyUserPatchNameFile			API_DEPRECATED_WITH_REPLACEMENT("kMIDIPropertyNameConfiguration", macos(10.1, 10.2)) MIDI_API_UNAVAILABLE_NON_MACOS;
 
 /*!
 	@constant		kMIDIPropertyNameConfiguration
@@ -1354,6 +1363,18 @@ extern const CFStringRef kMIDIPropertyUMPActiveGroupBitmap API_AVAILABLE(macos(1
 		messages with no group (e.g., message type 0 and message type F).
 */
 extern const CFStringRef kMIDIPropertyUMPCanTransmitGroupless API_AVAILABLE(macos(14.0), ios(17.0)) API_UNAVAILABLE(tvos, watchos);
+
+/*!
+	constant		kMIDIPropertyAssociatedEndpoint
+	@discussion
+		endpoint property, MIDIUniqueID. If this property is present, the indicated endpoint should be
+		used for bidirectional communication purposes, (e.g. UMP Endpoint pairing or MIDI-CI devices).
+		When setting this property on an endpoint, it should also be set on the assocated endpoint to
+		create a bidirectional mapping.
+
+		Note: This value is a MIDIUniqueID, use MIDIObjectFindByUniqueID to resolve it to a MIDIObjectRef.
+*/
+extern const CFStringRef kMIDIPropertyAssociatedEndpoint API_AVAILABLE(macos(15.0), ios(18.0)) API_UNAVAILABLE(tvos, watchos);
 
 //==================================================================================================
 #pragma mark	Clients

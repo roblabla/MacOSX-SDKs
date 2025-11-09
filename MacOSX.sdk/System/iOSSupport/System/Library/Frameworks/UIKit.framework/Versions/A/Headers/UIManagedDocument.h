@@ -16,7 +16,7 @@ NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 @class NSManagedObjectContext;
 @class NSPersistentStoreCoordinator;
 
-UIKIT_EXTERN API_AVAILABLE(ios(5.0)) API_UNAVAILABLE(tvos) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(5.0)) API_UNAVAILABLE(tvos, watchos) NS_SWIFT_UI_ACTOR
 @interface UIManagedDocument : UIDocument
 
 /* The name for the persistent store file inside the document's file wrapper.  When working with the Core Data APIs, this path component is appended to the document URL provided by the UIDocument APIs.  The default name is @"documentpersistentstore.db"

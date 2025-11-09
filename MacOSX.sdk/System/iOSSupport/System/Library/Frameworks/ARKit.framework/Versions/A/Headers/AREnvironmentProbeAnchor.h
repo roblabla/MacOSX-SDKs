@@ -17,6 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
  textures from the probe's location in the world.
  */
 API_AVAILABLE(ios(12.0))
+NS_SWIFT_SENDABLE
 @interface AREnvironmentProbeAnchor : ARAnchor
 
 /**

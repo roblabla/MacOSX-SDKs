@@ -29,7 +29,7 @@
 #import <UIKit/NSStringDrawing.h>
 #import <UIKit/NSText.h>
 
-#if !TARGET_OS_WATCH || __has_include(<QuartzCore/QuartzCore.h>)
+#if !TARGET_OS_WATCH || (__has_include(<QuartzCore/QuartzCore.h>) && __has_include(<UIKit/UIAccelerometer.h>))
 #import <UIKit/UIAccelerometer.h>
 #import <UIKit/UIAccessibility.h>
 #import <UIKit/UIAccessibilityContentSizeCategoryImageAdjusting.h>
@@ -83,6 +83,7 @@
 #import <UIKit/UIDevice.h>
 #import <UIKit/UIDocument.h>
 #import <UIKit/UIDocumentViewController.h>
+#import <UIKit/UIDocumentViewControllerLaunchOptions.h>
 #import <UIKit/UIDocumentPickerViewController.h>
 #import <UIKit/UIDocumentMenuViewController.h>
 #import <UIKit/UIDocumentPickerExtensionViewController.h>
@@ -195,6 +196,7 @@
 #import <UIKit/UITouch.h>
 #import <UIKit/UITrait.h>
 #import <UIKit/UITraitCollection.h>
+#import <UIKit/UITraitListEnvironment.h>
 #import <UIKit/UIUserActivity.h>
 #import <UIKit/UIVideoEditorController.h>
 #import <UIKit/UIView.h>
@@ -300,6 +302,7 @@
 #import <UIKit/UISceneOptions.h>
 #import <UIKit/UIScene.h>
 #import <UIKit/UIScene+AVAudioSession.h>
+#import <UIKit/UISceneSystemProtectionManager.h>
 #import <UIKit/UIWindowScene.h>
 #import <UIKit/UISceneSession.h>
 #import <UIKit/UISceneSessionActivationRequest.h>
@@ -312,6 +315,8 @@
 #import <UIKit/UIWindowScenePlacement.h>
 #import <UIKit/UIWindowSceneStandardPlacement.h>
 #import <UIKit/UIWindowSceneProminentPlacement.h>
+#import <UIKit/UIWindowSceneReplacePlacement.h>
+#import <UIKit/UIWindowScenePushPlacement.h>
 #import <UIKit/UIOpenURLContext.h>
 #import <UIKit/UIStatusBarManager.h>
 #import <UIKit/UIScreenshotService.h>
@@ -351,6 +356,7 @@
 #import <UIKit/UICalendarSelection.h>
 #import <UIKit/UICalendarSelectionSingleDate.h>
 #import <UIKit/UICalendarSelectionMultiDate.h>
+#import <UIKit/UICalendarSelectionWeekOfYear.h>
 #import <UIKit/UITextSearching.h>
 #import <UIKit/UIFindSession.h>
 #import <UIKit/UIFindInteraction.h>
@@ -361,4 +367,21 @@
 #import <UIKit/UIContentUnavailableButtonProperties.h>
 #import <UIKit/UIContentUnavailableConfigurationState.h>
 #import <UIKit/UIContentUnavailableView.h>
+#import <UIKit/UIUpdateInfo.h>
+#import <UIKit/UIUpdateActionPhase.h>
+#import <UIKit/UIUpdateLink.h>
+#import <UIKit/UITab.h>
+#import <UIKit/UITabGroup.h>
+#import <UIKit/UISearchTab.h>
+#import <UIKit/UITabBarControllerSidebar.h>
+#import <UIKit/UITabSidebarItem.h>
+#import <UIKit/UIViewControllerTransition.h>
+#import <UIKit/UIZoomTransitionOptions.h>
+#import <UIKit/UIShadowProperties.h>
+#import <UIKit/UITextFormattingViewController.h>
+#import <UIKit/UITextFormattingViewControllerChangeValue.h>
+#import <UIKit/UITextFormattingViewControllerFormattingStyle.h>
+#import <UIKit/UITextFormattingViewControllerConfiguration.h>
+#import <UIKit/UITextFormattingViewControllerComponent.h>
+#import <UIKit/UITextFormattingViewControllerFormattingDescriptor.h>
 #endif

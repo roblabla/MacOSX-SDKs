@@ -22,6 +22,7 @@ AS_EXTERN API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(macos, tvos, watchos)
 @end
 
 AS_EXTERN API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(macos, tvos, watchos)
+NS_SWIFT_UI_ACTOR
 @protocol ASAccountAuthenticationModificationControllerPresentationContextProviding <NSObject>
 @required
 

@@ -1,17 +1,103 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.10 (swiftlang-5.10.0.12.5 clang-1500.3.9.1.1)
-// swift-module-flags: -target arm64e-apple-macos14.5 -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftPassKit -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-bare-slash-regex -user-module-version 1552.6.8.1 -module-name PassKit
+// swift-compiler-version: Apple Swift version 6.0 effective-5.10 (swiftlang-6.0.0.7.24 clang-1600.0.25.1)
+// swift-module-flags: -target arm64e-apple-macos15.0 -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftPassKit -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-bare-slash-regex -user-module-version 1589.3.5 -module-name PassKit
 @_exported import PassKit
 import Swift
 import _Concurrency
 import _StringProcessing
 import _SwiftConcurrencyShims
+@available(iOS 18.0, *)
+@available(macOS, unavailable)
+@available(macCatalyst, unavailable)
+@available(watchOS, unavailable)
+@available(tvOS, unavailable)
+@available(visionOS, unavailable)
+public struct JPKIPassContents {
+  public let userIdentity: PassKit.JPKIPassContents.UserIdentity?
+  public let signingIdentity: PassKit.JPKIPassContents.SigningIdentity?
+  public init(_ pass: PassKit.PKPass) async throws
+  public protocol Identity {
+    associatedtype IdentityType : PassKit.JPKIPassContents.Identity
+    func certificate(using request: PassKit.JPKIPassContents.AuthenticationRequest<Self.IdentityType>) async throws -> PassKit.JPKIPassContents.Certificate<Self.IdentityType>
+    func signature(for data: Foundation.Data, using request: PassKit.JPKIPassContents.AuthenticationRequest<Self.IdentityType>) async throws -> PassKit.JPKIPassContents.Signature<Self.IdentityType>
+  }
+  public struct UserIdentity : PassKit.JPKIPassContents.Identity {
+    public enum AuthenticationType {
+      case pin(Swift.String)
+      case systemBiometric
+    }
+    public func certificate(using request: PassKit.JPKIPassContents.AuthenticationRequest<PassKit.JPKIPassContents.UserIdentity>) async throws -> PassKit.JPKIPassContents.Certificate<PassKit.JPKIPassContents.UserIdentity>
+    public func signature(for data: Foundation.Data, using request: PassKit.JPKIPassContents.AuthenticationRequest<PassKit.JPKIPassContents.UserIdentity>) async throws -> PassKit.JPKIPassContents.Signature<PassKit.JPKIPassContents.UserIdentity>
+    public func changePIN(from oldValue: Swift.String, to newValue: Swift.String) async throws
+    @available(iOS 18.0, *)
+    @available(tvOS, unavailable)
+    @available(watchOS, unavailable)
+    @available(visionOS, unavailable)
+    @available(macOS, unavailable)
+    @available(macCatalyst, unavailable)
+    public typealias IdentityType = PassKit.JPKIPassContents.UserIdentity
+  }
+  public struct SigningIdentity : PassKit.JPKIPassContents.Identity {
+    public enum AuthenticationType {
+      case password(Swift.String)
+    }
+    public func certificate(using request: PassKit.JPKIPassContents.AuthenticationRequest<PassKit.JPKIPassContents.SigningIdentity>) async throws -> PassKit.JPKIPassContents.Certificate<PassKit.JPKIPassContents.SigningIdentity>
+    public func signature(for data: Foundation.Data, using request: PassKit.JPKIPassContents.AuthenticationRequest<PassKit.JPKIPassContents.SigningIdentity>) async throws -> PassKit.JPKIPassContents.Signature<PassKit.JPKIPassContents.SigningIdentity>
+    public func changePassword(from oldValue: Swift.String, to newValue: Swift.String) async throws
+    @available(iOS 18.0, *)
+    @available(tvOS, unavailable)
+    @available(watchOS, unavailable)
+    @available(visionOS, unavailable)
+    @available(macOS, unavailable)
+    @available(macCatalyst, unavailable)
+    public typealias IdentityType = PassKit.JPKIPassContents.SigningIdentity
+  }
+  public struct Certificate<IdentityType> where IdentityType : PassKit.JPKIPassContents.Identity {
+    public let data: Foundation.Data
+  }
+  public struct Signature<IdentityType> where IdentityType : PassKit.JPKIPassContents.Identity {
+    public let signatureData: Foundation.Data
+    public let certificate: PassKit.JPKIPassContents.Certificate<IdentityType>
+  }
+  public struct AuthenticationRequest<IdentityType> where IdentityType : PassKit.JPKIPassContents.Identity {
+  }
+  public enum Error : Swift.Error {
+    case appNotForeground
+    case invalidInput
+    case biometricUnavailable
+    case incorrectUserAuthentication
+    case resourceNotAvailable
+    public static func == (a: PassKit.JPKIPassContents.Error, b: PassKit.JPKIPassContents.Error) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
+    public var hashValue: Swift.Int {
+      get
+    }
+  }
+}
+@available(iOS 18.0, *)
+@available(macOS, unavailable)
+@available(macCatalyst, unavailable)
+@available(watchOS, unavailable)
+@available(tvOS, unavailable)
+@available(visionOS, unavailable)
+extension PassKit.JPKIPassContents.AuthenticationRequest where IdentityType == PassKit.JPKIPassContents.UserIdentity {
+  public init(type: PassKit.JPKIPassContents.UserIdentity.AuthenticationType)
+}
+@available(iOS 18.0, *)
+@available(macOS, unavailable)
+@available(macCatalyst, unavailable)
+@available(watchOS, unavailable)
+@available(tvOS, unavailable)
+@available(visionOS, unavailable)
+extension PassKit.JPKIPassContents.AuthenticationRequest where IdentityType == PassKit.JPKIPassContents.SigningIdentity {
+  public init(type: PassKit.JPKIPassContents.SigningIdentity.AuthenticationType)
+}
 @available(macOS 12.0, iOS 15.0, watchOS 8.0, *)
 extension PassKit.PKStoredValuePassProperties {
   @objc @_alwaysEmitIntoClient dynamic public var isBlocked: Swift.Bool {
     @objc get {
-        // Because this computed property is @_alwaysEmitIntoClient, changes to it will
-        // require clients to rebuild their binaries for the changes to take effect.
+         
+         
         return isBlacklisted
     }
   }
@@ -21,8 +107,8 @@ extension PassKit.PKTransitPassProperties {
   @available(macOS 11.3, iOS 14.5, watchOS 7.5, *)
   @_alwaysEmitIntoClient @objc override dynamic public var isBlocked: Swift.Bool {
     @objc get {
-        // Because this computed property is @_alwaysEmitIntoClient, changes to it will
-        // require clients to rebuild their binaries for the changes to take effect.
+         
+         
         return isBlacklisted
     }
   }
@@ -31,8 +117,8 @@ extension PassKit.PKTransitPassProperties {
 extension PassKit.PKSuicaPassProperties {
   @_alwaysEmitIntoClient @objc override dynamic public var isBlocked: Swift.Bool {
     @objc get {
-        // Because this computed property is @_alwaysEmitIntoClient, changes to it will
-        // require clients to rebuild their binaries for the changes to take effect.
+         
+         
         return isBlacklisted
     }
   }
@@ -70,6 +156,27 @@ extension PassKit.PKPaymentRequest {
         get
       }
     }
+  }
+  @available(macOS 15.0, iOS 18.0, watchOS 11.0, *)
+  @available(tvOS, unavailable)
+  public var merchantCategoryCode: PassKit.PKPaymentRequest.MerchantCategoryCode? {
+    get
+    set
+  }
+  @available(macOS 15.0, iOS 18.0, watchOS 11.0, *)
+  @available(tvOS, unavailable)
+  public struct MerchantCategoryCode : Swift.Codable, Swift.Hashable, Swift.RawRepresentable, Swift.Sendable, Swift.LosslessStringConvertible {
+    public init(rawValue: Swift.Int16)
+    public let rawValue: Swift.Int16
+    public init?(_ description: Swift.String)
+    public var description: Swift.String {
+      get
+    }
+    public init(from decoder: any Swift.Decoder) throws
+    public func encode(to encoder: any Swift.Encoder) throws
+    @available(iOS 18.0, watchOS 11.0, macOS 15.0, *)
+    @available(tvOS, unavailable)
+    public typealias RawValue = Swift.Int16
   }
 }
 extension PassKit.PKMerchantCapability {
@@ -121,6 +228,30 @@ extension PassKit.PKDisbursementRequest {
   }
   convenience public init(merchantIdentifier: Swift.String, currency: Foundation.Locale.Currency, region: Foundation.Locale.Region, supportedNetworks: [PassKit.PKPaymentNetwork], merchantCapabilities: PassKit.PKMerchantCapability, summaryItems: [PassKit.PKPaymentSummaryItem])
 }
+@available(iOS 18.0, *)
+@available(macOS, unavailable)
+@available(watchOS, unavailable)
+@available(tvOS, unavailable)
+extension PassKit.PKIdentityNationalIDCardDescriptor {
+  public var region: Foundation.Locale.Region? {
+    get
+    set
+  }
+}
+@available(iOS 18.0, *)
+@available(macOS, unavailable)
+@available(macCatalyst, unavailable)
+@available(watchOS, unavailable)
+@available(tvOS, unavailable)
+@available(visionOS, unavailable)
+extension PassKit.JPKIPassContents.Error : Swift.Equatable {}
+@available(iOS 18.0, *)
+@available(macOS, unavailable)
+@available(macCatalyst, unavailable)
+@available(watchOS, unavailable)
+@available(tvOS, unavailable)
+@available(visionOS, unavailable)
+extension PassKit.JPKIPassContents.Error : Swift.Hashable {}
 @available(macOS 14.0, iOS 17.0, *)
 extension PassKit.PKPaymentRequest.ApplePayLaterAvailability.Reason : Swift.Equatable {}
 @available(macOS 14.0, iOS 17.0, *)

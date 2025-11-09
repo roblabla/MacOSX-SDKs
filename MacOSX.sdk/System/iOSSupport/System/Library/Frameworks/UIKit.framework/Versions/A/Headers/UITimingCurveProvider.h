@@ -13,13 +13,13 @@ typedef NS_ENUM(NSInteger, UITimingCurveType) {
     UITimingCurveTypeCubic,
     UITimingCurveTypeSpring,
     UITimingCurveTypeComposed,        
-} API_AVAILABLE(ios(10.0));
+} API_AVAILABLE(ios(10.0)) API_UNAVAILABLE(watchos);
 
 @class UICubicTimingParameters, UISpringTimingParameters;
 
 NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
-NS_SWIFT_UI_ACTOR
+API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @protocol UITimingCurveProvider <NSCoding, NSCopying>
 
 @property(nonatomic, readonly) UITimingCurveType timingCurveType;

@@ -1,6 +1,6 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.10 (swiftlang-5.10.0.12.5 clang-1500.3.9.1.1)
-// swift-module-flags: -target x86_64-apple-ios17.5-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftUniformTypeIdentifiers -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-bare-slash-regex -user-module-version 791.2.12 -module-name UniformTypeIdentifiers
+// swift-compiler-version: Apple Swift version 6.0 effective-5.10 (swiftlang-6.0.0.7.24 clang-1600.0.25.1)
+// swift-module-flags: -target x86_64-apple-ios18.0-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftUniformTypeIdentifiers -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-bare-slash-regex -user-module-version 819.101 -module-name UniformTypeIdentifiers
 import Foundation
 import Swift
 @_exported import UniformTypeIdentifiers
@@ -109,6 +109,7 @@ extension UniformTypeIdentifiers.UTType : Foundation.ReferenceConvertible {
   public static func _forceBridgeFromObjectiveC(_ source: UniformTypeIdentifiers.UTTypeReference, result: inout UniformTypeIdentifiers.UTType?)
   public static func _conditionallyBridgeFromObjectiveC(_ source: UniformTypeIdentifiers.UTTypeReference, result: inout UniformTypeIdentifiers.UTType?) -> Swift.Bool
   public static func _unconditionallyBridgeFromObjectiveC(_ source: UniformTypeIdentifiers.UTTypeReference?) -> UniformTypeIdentifiers.UTType
+  @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, macCatalyst 14.0, *)
   public typealias _ObjectiveCType = UniformTypeIdentifiers.UTTypeReference
 }
 @available(macOS 11.0, macCatalyst 14.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
@@ -197,6 +198,10 @@ extension UniformTypeIdentifiers.UTType {
     get
   }
   public static var yaml: UniformTypeIdentifiers.UTType {
+    get
+  }
+  @available(macOS 15.0, macCatalyst 18.0, iOS 18.0, watchOS 11.0, tvOS 18.0, *)
+  public static var css: UniformTypeIdentifiers.UTType {
     get
   }
   public static var sourceCode: UniformTypeIdentifiers.UTType {
@@ -323,7 +328,19 @@ extension UniformTypeIdentifiers.UTType {
   public static var heic: UniformTypeIdentifiers.UTType {
     get
   }
+  @available(macOS 15.0, macCatalyst 18.0, iOS 18.0, watchOS 11.0, tvOS 18.0, *)
+  public static var heics: UniformTypeIdentifiers.UTType {
+    get
+  }
   public static var webP: UniformTypeIdentifiers.UTType {
+    get
+  }
+  @available(macOS 15.0, macCatalyst 18.0, iOS 18.0, watchOS 11.0, tvOS 18.0, *)
+  public static var exr: UniformTypeIdentifiers.UTType {
+    get
+  }
+  @available(macOS 15.0, macCatalyst 18.0, iOS 18.0, watchOS 11.0, tvOS 18.0, *)
+  public static var dng: UniformTypeIdentifiers.UTType {
     get
   }
   public static var threeDContent: UniformTypeIdentifiers.UTType {
@@ -461,6 +478,10 @@ extension UniformTypeIdentifiers.UTType {
   public static var appleArchive: UniformTypeIdentifiers.UTType {
     get
   }
+  @available(macOS 15.0, macCatalyst 18.0, iOS 18.0, watchOS 11.0, tvOS 18.0, *)
+  public static var tarArchive: UniformTypeIdentifiers.UTType {
+    get
+  }
   public static var spreadsheet: UniformTypeIdentifiers.UTType {
     get
   }
@@ -516,27 +537,28 @@ extension UniformTypeIdentifiers.UTType {
   public static var ahap: UniformTypeIdentifiers.UTType {
     get
   }
+  @available(macOS 15.0, macCatalyst 18.0, iOS 18.0, watchOS 11.0, tvOS 18.0, *)
+  public static var geoJSON: UniformTypeIdentifiers.UTType {
+    get
+  }
+  @available(macOS 15.0, macCatalyst 18.0, iOS 18.0, watchOS 11.0, tvOS 18.0, *)
+  public static var linkPresentationMetadata: UniformTypeIdentifiers.UTType {
+    get
+  }
 }
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 extension Foundation.NSItemProvider {
   convenience public init(contentsOf fileURL: Foundation.URL, contentType: UniformTypeIdentifiers.UTType?, openInPlace: Swift.Bool = false, coordinated: Swift.Bool = false, visibility: Foundation.NSItemProviderRepresentationVisibility = .all)
-  #if compiler(>=5.3) && $Sendable
   public func registerDataRepresentation(for contentType: UniformTypeIdentifiers.UTType, visibility: Foundation.NSItemProviderRepresentationVisibility = .all, loadHandler: @escaping @Sendable (@escaping (Foundation.Data?, (any Swift.Error)?) -> Swift.Void) -> Foundation.Progress?)
-  #endif
-  #if compiler(>=5.3) && $Sendable
   public func registerFileRepresentation(for contentType: UniformTypeIdentifiers.UTType, visibility: Foundation.NSItemProviderRepresentationVisibility = .all, openInPlace: Swift.Bool = false, loadHandler: @escaping @Sendable (@escaping (Foundation.URL?, Swift.Bool, (any Swift.Error)?) -> Swift.Void) -> Foundation.Progress?)
-  #endif
-  #if compiler(>=5.3) && $Sendable
   public func loadDataRepresentation(for contentType: UniformTypeIdentifiers.UTType, completionHandler: @escaping @Sendable (Foundation.Data?, (any Swift.Error)?) -> Swift.Void) -> Foundation.Progress
-  #endif
-  #if compiler(>=5.3) && $Sendable
   public func loadFileRepresentation(for contentType: UniformTypeIdentifiers.UTType, openInPlace: Swift.Bool = false, completionHandler: @escaping @Sendable (Foundation.URL?, Swift.Bool, (any Swift.Error)?) -> Swift.Void) -> Foundation.Progress
-  #endif
 }
 @available(macOS 11.0, macCatalyst 14.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 public struct UTTagClass : Swift.RawRepresentable {
   public let rawValue: Swift.String
   public init(rawValue: Swift.String)
+  @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, macCatalyst 14.0, *)
   public typealias RawValue = Swift.String
 }
 @available(macOS 11.0, macCatalyst 14.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)

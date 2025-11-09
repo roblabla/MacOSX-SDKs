@@ -16,37 +16,37 @@ CF_ASSUME_NONNULL_BEGIN
 /* Create a content stream from `page'. */
 
 CG_EXTERN CGPDFContentStreamRef CGPDFContentStreamCreateWithPage(
-  CGPDFPageRef page) CG_AVAILABLE_STARTING(10.4, 2.0);
+  CGPDFPageRef page) API_AVAILABLE(macos(10.4), ios(2.0));
 
 /* Create a content stream from `stream'. */
 
 CG_EXTERN CGPDFContentStreamRef CGPDFContentStreamCreateWithStream(
   CGPDFStreamRef stream, CGPDFDictionaryRef streamResources,
   CGPDFContentStreamRef cg_nullable parent)
-  CG_AVAILABLE_STARTING(10.4, 2.0);
+  API_AVAILABLE(macos(10.4), ios(2.0));
 
 /* Increment the retain count of `cs'. */
 
 CG_EXTERN CGPDFContentStreamRef CGPDFContentStreamRetain(
-  CGPDFContentStreamRef cs) CG_AVAILABLE_STARTING(10.4, 2.0);
+  CGPDFContentStreamRef cs) API_AVAILABLE(macos(10.4), ios(2.0));
 
 /* Decrement the retain count of `cs'. */
 
 CG_EXTERN void CGPDFContentStreamRelease(CGPDFContentStreamRef cs)
-  CG_AVAILABLE_STARTING(10.4, 2.0);
+  API_AVAILABLE(macos(10.4), ios(2.0));
 
 /* Return the array of CGPDFStreamRefs comprising the entire content stream
    of `cs'. */
 
 CG_EXTERN CFArrayRef __nullable CGPDFContentStreamGetStreams(CGPDFContentStreamRef cs)
-  CG_AVAILABLE_STARTING(10.4, 2.0);
+  API_AVAILABLE(macos(10.4), ios(2.0));
 
 /* Return the resource named `name' in category `category' of the resource
    dictionaries of `cs'. */
 
 CG_EXTERN CGPDFObjectRef __nullable CGPDFContentStreamGetResource(
   CGPDFContentStreamRef cs, const char *category, const char *name)
-  CG_AVAILABLE_STARTING(10.4, 2.0);
+  API_AVAILABLE(macos(10.4), ios(2.0));
 
 CF_ASSUME_NONNULL_END
 

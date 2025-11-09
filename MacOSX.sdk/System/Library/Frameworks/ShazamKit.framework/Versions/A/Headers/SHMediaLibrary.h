@@ -13,7 +13,7 @@ NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 /// @brief @c SHMediaLibrary represents the user's synced Shazam library.
 /// @discussion You can add new @c SHMediaItem instances to the user's library.
-SH_EXPORT API_DEPRECATED("Use SHLibrary instead", macos(12.0, API_TO_BE_DEPRECATED), ios(15.0, API_TO_BE_DEPRECATED), tvos(15.0, API_TO_BE_DEPRECATED), watchos(8.0, API_TO_BE_DEPRECATED))
+SH_EXPORT API_DEPRECATED("Use SHLibrary instead", macos(12.0, 15.0), ios(15.0, 18.0), tvos(15.0, 18.0), watchos(8.0, 11.0))
 @interface SHMediaLibrary : NSObject
 
 /// @brief Returns an instance of the default Shazam library.

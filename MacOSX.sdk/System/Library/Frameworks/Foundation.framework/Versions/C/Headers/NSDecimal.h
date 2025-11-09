@@ -58,28 +58,28 @@ FOUNDATION_EXPORT void NSDecimalCopy(NSDecimal *destination, const NSDecimal *so
 FOUNDATION_EXPORT void NSDecimalCompact(NSDecimal *number);
 
 FOUNDATION_EXPORT NSComparisonResult NSDecimalCompare(const NSDecimal *leftOperand, const NSDecimal *rightOperand);
-    // NSDecimalCompare:Compares leftOperand and rightOperand.
+// NSDecimalCompare:Compares leftOperand and rightOperand.
 
 FOUNDATION_EXPORT void NSDecimalRound(NSDecimal *result, const NSDecimal *number, NSInteger scale, NSRoundingMode roundingMode);
-    // Rounds num to the given scale using the given mode.
-    // result may be a pointer to same space as num.
-    // scale indicates number of significant digits after the decimal point
+// Rounds num to the given scale using the given mode.
+// result may be a pointer to same space as num.
+// scale indicates number of significant digits after the decimal point
 
 FOUNDATION_EXPORT NSCalculationError NSDecimalNormalize(NSDecimal *number1, NSDecimal *number2, NSRoundingMode roundingMode);
 
 FOUNDATION_EXPORT NSCalculationError NSDecimalAdd(NSDecimal *result, const NSDecimal *leftOperand, const NSDecimal *rightOperand, NSRoundingMode roundingMode);
-    // Exact operations. result may be a pointer to same space as leftOperand or rightOperand
+// Exact operations. result may be a pointer to same space as leftOperand or rightOperand
 
 FOUNDATION_EXPORT NSCalculationError NSDecimalSubtract(NSDecimal *result, const NSDecimal *leftOperand, const NSDecimal *rightOperand, NSRoundingMode roundingMode);
-    // Exact operations. result may be a pointer to same space as leftOperand or rightOperand
+// Exact operations. result may be a pointer to same space as leftOperand or rightOperand
 
 FOUNDATION_EXPORT NSCalculationError NSDecimalMultiply(NSDecimal *result, const NSDecimal *leftOperand, const NSDecimal *rightOperand, NSRoundingMode roundingMode);
-    // Exact operations. result may be a pointer to same space as leftOperand or rightOperand
+// Exact operations. result may be a pointer to same space as leftOperand or rightOperand
 
 FOUNDATION_EXPORT NSCalculationError NSDecimalDivide(NSDecimal *result, const NSDecimal *leftOperand, const NSDecimal *rightOperand, NSRoundingMode roundingMode);
-    // Division could be silently inexact;
-    // Exact operations. result may be a pointer to same space as leftOperand or rightOperand
-    
+// Division could be silently inexact;
+// Exact operations. result may be a pointer to same space as leftOperand or rightOperand
+
 FOUNDATION_EXPORT NSCalculationError NSDecimalPower(NSDecimal *result, const NSDecimal *number, NSUInteger power, NSRoundingMode roundingMode);
 
 FOUNDATION_EXPORT NSCalculationError NSDecimalMultiplyByPowerOf10(NSDecimal *result, const NSDecimal *number, short power, NSRoundingMode roundingMode);

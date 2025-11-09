@@ -44,7 +44,7 @@ typedef NS_ENUM(NSInteger, CPAssistantCellPosition) {
 @protocol CPListTemplateDelegate;
 @class CPListItem;
 
-API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(macos, watchos, tvos)
+API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(macos, watchos)
 /**
  @c CPAssistantCellConfiguration encapsulates the configuration options for your assistant cell.
   
@@ -78,7 +78,7 @@ API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(macos, watchos, tvos)
 
 @end
 
-API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(macos, watchos, tvos)
+API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(macos, watchos)
 @interface CPListTemplate : CPTemplate <CPBarButtonProviding>
 
 - (instancetype)init NS_UNAVAILABLE;
@@ -101,7 +101,7 @@ API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(macos, watchos, tvos)
  */
 - (instancetype)initWithTitle:(nullable NSString *)title
                      sections:(NSArray <CPListSection *> *)sections
-   assistantCellConfiguration:(nullable CPAssistantCellConfiguration *)assistantCellConfiguration API_AVAILABLE(ios(15.0));
+   assistantCellConfiguration:(nullable CPAssistantCellConfiguration *)assistantCellConfiguration API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(tvos);
 
 /**
  The list template's delegate is informed of list selection events.
@@ -114,7 +114,7 @@ API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(macos, watchos, tvos)
  @note Your list template will display the first @c maximumItemCount items, across all sections.
  Any items or sections beyond that limit will be trimmed.
  */
-@property (nonatomic, class, readonly) NSUInteger maximumItemCount API_AVAILABLE(ios(14.0));
+@property (nonatomic, class, readonly) NSUInteger maximumItemCount API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(tvos);
 
 /**
  The maximum number of sections that may appear in a @c CPListTemplate.
@@ -122,7 +122,7 @@ API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(macos, watchos, tvos)
  @note Your list template will display the first @c maximumSectionCount sections.
  Any sections beyond that limit will be trimmed.
  */
-@property (nonatomic, class, readonly) NSUInteger maximumSectionCount API_AVAILABLE(ios(14.0));
+@property (nonatomic, class, readonly) NSUInteger maximumSectionCount API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(tvos);
 
 /**
  The sections displayed in this list.
@@ -143,12 +143,12 @@ API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(macos, watchos, tvos)
 /**
  The number of sections currently displayed in this list template.
  */
-@property (nonatomic, readonly) NSUInteger sectionCount API_AVAILABLE(ios(14.0));
+@property (nonatomic, readonly) NSUInteger sectionCount API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(tvos);
 
 /**
  The number of items currently displayed in this list template, across all sections.
  */
-@property (nonatomic, readonly) NSUInteger itemCount API_AVAILABLE(ios(14.0));
+@property (nonatomic, readonly) NSUInteger itemCount API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(tvos);
 
 #pragma mark - Item Access
 
@@ -156,7 +156,7 @@ API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(macos, watchos, tvos)
  Return an @c NSIndexPath for the specified item, if it exists in any section
  in this list template, or nil if not found.
  */
-- (nullable NSIndexPath *)indexPathForItem:(id <CPListTemplateItem>)item API_AVAILABLE(ios(14.0));
+- (nullable NSIndexPath *)indexPathForItem:(id <CPListTemplateItem>)item API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(tvos);
 
 #pragma mark - Empty View
 
@@ -172,7 +172,7 @@ API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(macos, watchos, tvos)
  If the list template is updated to contain items, the empty view will be automatically
  removed.
  */
-@property (nonatomic, copy) NSArray<NSString *> *emptyViewTitleVariants API_AVAILABLE(ios(14.0));
+@property (nonatomic, copy) NSArray<NSString *> *emptyViewTitleVariants API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(tvos);
 
 /**
  An optional array of strings, ordered from most to least preferred.
@@ -186,7 +186,7 @@ API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(macos, watchos, tvos)
  If the list template is updated to contain items, the empty view will be automatically
  removed.
  */
-@property (nonatomic, copy) NSArray<NSString *> *emptyViewSubtitleVariants API_AVAILABLE(ios(14.0));
+@property (nonatomic, copy) NSArray<NSString *> *emptyViewSubtitleVariants API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(tvos);
 
 #pragma mark - Assistant Cell
 
@@ -201,7 +201,7 @@ API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(macos, watchos, tvos)
  Instead, configure an Intents app extention to receive user requests from SiriKit, in order to turn the requests into an
  app-specific actions.
  */
-@property (nonatomic, nullable, strong) CPAssistantCellConfiguration *assistantCellConfiguration API_AVAILABLE(ios(15.0));
+@property (nonatomic, nullable, strong) CPAssistantCellConfiguration *assistantCellConfiguration API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(tvos);
 
 @end
 

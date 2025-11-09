@@ -16,7 +16,7 @@ NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 // Changes: when a finger moves while two fingers are down
 // Ends:    when both fingers have lifted
 
-UIKIT_EXTERN API_AVAILABLE(ios(3.2)) API_UNAVAILABLE(tvos) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(3.2)) API_UNAVAILABLE(tvos, watchos) NS_SWIFT_UI_ACTOR
 @interface UIRotationGestureRecognizer : UIGestureRecognizer
 
 @property (nonatomic)          CGFloat rotation;            // rotation in radians

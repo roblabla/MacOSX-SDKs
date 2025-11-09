@@ -14,7 +14,7 @@
 
 NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
-typedef struct NS_SWIFT_SENDABLE {
+typedef struct NS_SWIFT_SENDABLE API_UNAVAILABLE(watchos) {
     /// Offset from the primary pointer shape. Only allows positive values.
     CGFloat offset;
     

@@ -2,7 +2,7 @@
 //  PKTool.h
 //  PencilKit
 //
-//  Copyright © 2019 Apple. All rights reserved.
+//  Copyright © 2019 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -15,7 +15,6 @@ NS_REFINED_FOR_SWIFT
 API_AVAILABLE(ios(13.0), macos(10.15))
 @interface PKTool : NSObject <NSCopying>
 
-+ (instancetype)new NS_UNAVAILABLE;
 - (instancetype)init NS_UNAVAILABLE;
 
 @end

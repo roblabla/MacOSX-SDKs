@@ -7,8 +7,10 @@ swift-abi-version: 7
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
-    clients:         [ FMFCore, FMIPCore, FindMy, FindMyCryptoTests, SPSharedTests, 
-                       findmybeaconingd, searchpartyd, searchpartydTests, searchpartyuseragent ]
+    clients:         [ FMFCore, FMIPCore, FindMy, FindMyCryptoTests, FindMyLocateTests, 
+                       SPSharedTests, findmybeaconingd, findmylocateagent, findmylocated, 
+                       findmylocatedTests, fmltool, searchpartyd, searchpartydTests, 
+                       searchpartyuseragent ]
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -71,6 +73,8 @@ exports:
                        '_$s12FindMyCrypto13AdvertisementV4fromACs7Decoder_p_tKcfC', 
                        '_$s12FindMyCrypto13AdvertisementV4hints5UInt8Vvg', '_$s12FindMyCrypto13AdvertisementV4hints5UInt8VvpMV', 
                        '_$s12FindMyCrypto13AdvertisementV6encode2toys7Encoder_p_tKF', 
+                       '_$s12FindMyCrypto13AdvertisementV6hashedAA06HashedD0Vvg', 
+                       '_$s12FindMyCrypto13AdvertisementV6hashedAA06HashedD0VvpMV', 
                        '_$s12FindMyCrypto13AdvertisementV6lengthSivgZ', '_$s12FindMyCrypto13AdvertisementV7address10Foundation4DataVvg', 
                        '_$s12FindMyCrypto13AdvertisementV7address10Foundation4DataVvpMV', 
                        '_$s12FindMyCrypto13AdvertisementV9nearOwnerAA04NearfD0Vvg', 
@@ -251,7 +255,22 @@ exports:
                        '_$s12FindMyCrypto19DiversifiedRootKeysVMa', '_$s12FindMyCrypto19DiversifiedRootKeysVMn', 
                        '_$s12FindMyCrypto19DiversifiedRootKeysVN', '_$s12FindMyCrypto19DiversifiedRootKeysVSEAAMc', 
                        '_$s12FindMyCrypto19DiversifiedRootKeysVSHAAMc', '_$s12FindMyCrypto19DiversifiedRootKeysVSQAAMc', 
-                       '_$s12FindMyCrypto19DiversifiedRootKeysVSeAAMc', '_$s12FindMyCrypto21KeyRepresentableErrorO013invalidPublicD0yAC10Foundation4DataV_tcACmFWC', 
+                       '_$s12FindMyCrypto19DiversifiedRootKeysVSeAAMc', '_$s12FindMyCrypto19HashedAdvertisementV3keyAA24KeyRepresentableInternalVvg', 
+                       '_$s12FindMyCrypto19HashedAdvertisementV3keyAA24KeyRepresentableInternalVvpMV', 
+                       '_$s12FindMyCrypto19HashedAdvertisementV3keyAcA24KeyRepresentableInternalV_tcfC', 
+                       '_$s12FindMyCrypto19HashedAdvertisementV4data10Foundation4DataVvg', 
+                       '_$s12FindMyCrypto19HashedAdvertisementV4data10Foundation4DataVvpMV', 
+                       '_$s12FindMyCrypto19HashedAdvertisementV4fromACs7Decoder_p_tKcfC', 
+                       '_$s12FindMyCrypto19HashedAdvertisementV6encode2toys7Encoder_p_tKF', 
+                       '_$s12FindMyCrypto19HashedAdvertisementV6lengthSivgZ', '_$s12FindMyCrypto19HashedAdvertisementVAA15KeyRepresentingAAMc', 
+                       '_$s12FindMyCrypto19HashedAdvertisementVAA15KeyRepresentingAAWP', 
+                       '_$s12FindMyCrypto19HashedAdvertisementVAA16KeyRepresentableAAMc', 
+                       '_$s12FindMyCrypto19HashedAdvertisementVAA16KeyRepresentableAAWP', 
+                       '_$s12FindMyCrypto19HashedAdvertisementVMa', '_$s12FindMyCrypto19HashedAdvertisementVMn', 
+                       '_$s12FindMyCrypto19HashedAdvertisementVN', '_$s12FindMyCrypto19HashedAdvertisementVSEAAMc', 
+                       '_$s12FindMyCrypto19HashedAdvertisementVSHAAMc', '_$s12FindMyCrypto19HashedAdvertisementVSQAAMc', 
+                       '_$s12FindMyCrypto19HashedAdvertisementVSYAAMc', '_$s12FindMyCrypto19HashedAdvertisementVSeAAMc', 
+                       '_$s12FindMyCrypto21KeyRepresentableErrorO013invalidPublicD0yAC10Foundation4DataV_tcACmFWC', 
                        '_$s12FindMyCrypto21KeyRepresentableErrorO11descriptionSSvg', 
                        '_$s12FindMyCrypto21KeyRepresentableErrorO11descriptionSSvpMV', 
                        '_$s12FindMyCrypto21KeyRepresentableErrorO11invalidDatayA2CmFWC', 

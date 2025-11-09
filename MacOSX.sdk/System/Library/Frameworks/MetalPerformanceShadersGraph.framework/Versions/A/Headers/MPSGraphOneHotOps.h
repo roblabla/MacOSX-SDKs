@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 MPS_CLASS_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))
 @interface MPSGraph(MPSGraphOneHotOps)
 
-/// Create oneHot op and return the result tensor
+/// Creates a oneHot operation and returns the result tensor.
 ///
 /// Creates a tensor of rank equal to the indicesTensor rank + 1. 
 /// Inserts a new axis at the axis specified, or the minor axis if axis is -1.
@@ -41,7 +41,7 @@ MPS_CLASS_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))
                                     offValue:(double) offValue
                                         name:(NSString * _Nullable) name;
 
-/// Create oneHot op and return the result tensor
+/// Creates a oneHot operation and returns the result tensor.
 ///
 /// Creates a tensor of rank equal to the rank of `indicesTensor` + 1.
 /// Inserts a new axis at the minor dimension.
@@ -51,7 +51,7 @@ MPS_CLASS_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))
 /// - Parameters:
 ///   - indicesTensor: Tensor of indices for on values
 ///   - depth: Depth of the oneHot vector along the axis
-///   - dataType: MPSDataType of the result tensor
+///   - dataType: MPSDataType of the result tensor.
 ///   - onValue: The value for indices designated by the indicesTensor. This value must match the specified data type.
 ///   - offValue: The value for indices not designated by the indicesTensor. This value must match the specified data type.
 ///   - name: Name for the operation
@@ -64,7 +64,7 @@ MPS_CLASS_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))
                                     offValue:(double) offValue
                                         name:(NSString * _Nullable) name;
 
-/// Create oneHot op and return the result tensor
+/// Creates a oneHot operation and returns the result tensor.
 ///
 /// Creates a tensor of rank equal to the rank of `indicesTensor` + 1.
 /// Inserts a new axis at the axis specified, or the minor axis if `axis` is -1.
@@ -75,7 +75,7 @@ MPS_CLASS_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))
 ///   - indicesTensor: Tensor of indices for on values
 ///   - depth: Depth of the oneHot vector along the axis
 ///   - axis: The axis to insert the new oneHot vector at
-///   - dataType: MPSDataType of the result tensor
+///   - dataType: MPSDataType of the result tensor.
 ///   - name: Name for the operation
 /// - Returns: A valid MPSGraphTensor object.
 ///
@@ -85,7 +85,7 @@ MPS_CLASS_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))
                                     dataType:(MPSDataType) dataType
                                         name:(NSString * _Nullable) name;
 
-/// Create oneHot op and return the result tensor
+/// Creates a oneHot operation and returns the result tensor.
 ///
 /// Creates a tensor of rank equal to the rank of `indicesTensor` + 1, of type MPSDataTypeFloat32.
 /// Inserts a new axis at the axis specified, or the minor axis if `axis` is -1.
@@ -104,7 +104,7 @@ MPS_CLASS_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))
                                         axis:(NSUInteger) axis
                                         name:(NSString * _Nullable) name;
 
-/// Create oneHot op and return the result tensor
+/// Creates a oneHot operation and returns the result tensor.
 ///
 /// Creates a tensor of rank equal to the rank of `indicesTensor` + 1.
 /// Inserts a new axis at the minor dimension.
@@ -114,7 +114,7 @@ MPS_CLASS_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))
 /// - Parameters:
 ///   - indicesTensor: Tensor of indices for on values
 ///   - depth: Depth of the oneHot vector along the axis
-///   - dataType: MPSDataType of the result tensor
+///   - dataType: MPSDataType of the result tensor.
 ///   - name: Name for the operation
 /// - Returns: A valid MPSGraphTensor object.
 ///
@@ -123,7 +123,7 @@ MPS_CLASS_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))
                                     dataType:(MPSDataType) dataType
                                         name:(NSString * _Nullable) name;
 
-/// Create oneHot op and return the result tensor
+/// Creates a oneHot operation and returns the result tensor.
 ///
 /// Creates a tensor of rank equal to the rank of `indicesTensor` + 1, of type MPSDataTypeFloat32.
 /// Inserts a new axis at the minor dimension.

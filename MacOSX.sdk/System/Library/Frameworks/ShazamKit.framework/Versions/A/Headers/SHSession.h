@@ -55,8 +55,10 @@ SH_EXPORT API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0))
 /// @brief A delegate for communicating the results of matching
 @property (NS_NONATOMIC_IOSONLY, weak) id<SHSessionDelegate> delegate;
 
+
 /// Create A new @c SHSession that searches the Shazam Catalog
 - (instancetype)init;
+
 
 /// Create A new @c SHSession based upon the supplied @c SHCatalog
 /// @param catalog The store of signatures to match against

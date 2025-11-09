@@ -41,6 +41,9 @@
 
 #import <DiscRecording/DRCoreNotifications.h>
 
+#ifndef DISC_RECORDING_CORE_NOTIFICATION_CENTER
+#define DISC_RECORDING_CORE_NOTIFICATION_CENTER
+
 /*!
 	@class 		DRNotificationCenter
 	@discussion	A DRNotificationCenter object (or simply, notification center) is
@@ -113,3 +116,5 @@
 - (void)removeObserver:(id)observer name:(NSString *)aName object:(id)anObject;
 
 @end
+
+#endif // DISC_RECORDING_CORE_NOTIFICATION_CENTER

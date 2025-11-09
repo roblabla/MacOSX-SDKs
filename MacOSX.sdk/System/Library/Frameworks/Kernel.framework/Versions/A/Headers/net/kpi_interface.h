@@ -353,6 +353,27 @@ typedef errno_t (*ifnet_framer_func)(ifnet_t interface, mbuf_t *packet,
     );
 
 /*!
+ *       @struct ifnet_demux_desc
+ *       @discussion This structure is to identify packets that belong to a
+ *               specific protocol. The types supported are interface specific.
+ *               Ethernet supports ETHER_DESC_ETYPE2, ETHER_DESC_SAP, and
+ *               ETHER_DESC_SNAP. The type defines the offset in the packet where
+ *               the data will be matched as well as context. For example, if
+ *               ETHER_DESC_SNAP is specified, the only valid datalen is 5 and
+ *               only in the 5 bytes will only be matched when the packet header
+ *               indicates that the packet is a SNAP packet.
+ *       @field type The type of identifier data (i.e. ETHER_DESC_ETYPE2)
+ *       @field data A pointer to an entry of type (i.e. pointer to 0x0800).
+ *       @field datalen The number of bytes of data used to describe the
+ *               packet.
+ */
+struct ifnet_demux_desc {
+	u_int32_t       type;
+	void            *__sized_by(datalen) data;
+	u_int32_t       datalen;
+};
+
+/*!
  *       @typedef ifnet_add_proto_func
  *       @discussion if_add_proto_func is called by the stack when a protocol
  *               is attached to an interface. This gives the interface an
@@ -371,7 +392,7 @@ typedef errno_t (*ifnet_framer_func)(ifnet_t interface, mbuf_t *packet,
  */
 typedef errno_t (*ifnet_add_proto_func)(ifnet_t interface,
     protocol_family_t protocol_family,
-    const struct ifnet_demux_desc *demux_array, u_int32_t demux_count);
+    const struct ifnet_demux_desc *__counted_by(demux_count) demux_array, u_int32_t demux_count);
 
 /*!
  *       @typedef if_del_proto_func
@@ -624,7 +645,7 @@ struct ifnet_stat_increment_param {
  */
 struct ifnet_init_params {
 	/* used to match recycled interface */
-	const void              *uniqueid;              /* optional */
+	const void *__sized_by(uniqueid_len) uniqueid;  /* optional */
 	u_int32_t               uniqueid_len;           /* optional */
 
 	/* used to fill out initial values for interface */
@@ -643,7 +664,7 @@ struct ifnet_init_params {
 	ifnet_set_bpf_tap       set_bpf_tap;            /* deprecated */
 	ifnet_detached_func     detach;                 /* optional */
 	ifnet_event_func        event;                  /* optional */
-	const void              *broadcast_addr;        /* required for non point-to-point interfaces */
+	const void *__sized_by(broadcast_len) broadcast_addr; /* required for non point-to-point interfaces */
 	u_int32_t               broadcast_len;          /* required for non point-to-point interfaces */
 };
 
@@ -678,27 +699,6 @@ struct ifnet_stats_param {
 };
 
 /*!
- *       @struct ifnet_demux_desc
- *       @discussion This structure is to identify packets that belong to a
- *               specific protocol. The types supported are interface specific.
- *               Ethernet supports ETHER_DESC_ETYPE2, ETHER_DESC_SAP, and
- *               ETHER_DESC_SNAP. The type defines the offset in the packet where
- *               the data will be matched as well as context. For example, if
- *               ETHER_DESC_SNAP is specified, the only valid datalen is 5 and
- *               only in the 5 bytes will only be matched when the packet header
- *               indicates that the packet is a SNAP packet.
- *       @field type The type of identifier data (i.e. ETHER_DESC_ETYPE2)
- *       @field data A pointer to an entry of type (i.e. pointer to 0x0800).
- *       @field datalen The number of bytes of data used to describe the
- *               packet.
- */
-struct ifnet_demux_desc {
-	u_int32_t       type;
-	void            *data;
-	u_int32_t       datalen;
-};
-
-/*!
  *       @struct ifnet_attach_proto_param
  *       @discussion This structure is used to attach a protocol to an
  *               interface. This structure provides the various functions for
@@ -715,7 +715,7 @@ struct ifnet_demux_desc {
  */
 
 struct ifnet_attach_proto_param {
-	struct ifnet_demux_desc         *demux_array;   /* interface may/may not require */
+	struct ifnet_demux_desc         *__counted_by(demux_count) demux_array; /* interface may/may not require */
 	u_int32_t                       demux_count;    /* interface may/may not require */
 
 	proto_media_input               input;          /* required */
@@ -728,7 +728,7 @@ struct ifnet_attach_proto_param {
 };
 
 struct ifnet_attach_proto_param_v2 {
-	struct ifnet_demux_desc         *demux_array;   /* interface may/may not require */
+	struct ifnet_demux_desc         *__counted_by(demux_count) demux_array;   /* interface may/may not require */
 	u_int32_t                       demux_count;    /* interface may/may not require */
 
 	proto_media_input_v2            input;          /* required */
@@ -1137,7 +1137,7 @@ __NKE_API_DEPRECATED;
  *       @param mibLen Length of data pointed to.
  *       @result 0 on success otherwise the errno error.
  */
-extern errno_t ifnet_set_link_mib_data(ifnet_t interface, void *mibData,
+extern errno_t ifnet_set_link_mib_data(ifnet_t interface, void *__sized_by(mibLen) mibData,
     u_int32_t mibLen)
 __NKE_API_DEPRECATED;
 
@@ -1155,7 +1155,7 @@ __NKE_API_DEPRECATED;
  *       @result Returns an error if the buffer size is too small or there is
  *               no data.
  */
-extern errno_t ifnet_get_link_mib_data(ifnet_t interface, void *mibData,
+extern errno_t ifnet_get_link_mib_data(ifnet_t interface, void *__sized_by(*mibLen) mibData,
     u_int32_t *mibLen)
 __NKE_API_DEPRECATED;
 
@@ -1559,7 +1559,25 @@ __NKE_API_DEPRECATED;
  *       @param addresses A pointer to a NULL terminated array of ifaddr_ts.
  *       @result 0 on success otherwise the errno error.
  */
-extern errno_t ifnet_get_address_list(ifnet_t interface, ifaddr_t **addresses)
+extern errno_t ifnet_get_address_list(ifnet_t interface, ifaddr_t *__null_terminated *addresses)
+__NKE_API_DEPRECATED;
+
+/*!
+ *       @function ifnet_get_address_list_with_count
+ *       @discussion Get a list of addresses on the interface. Passing NULL
+ *               for the interface will return a list of all addresses. The
+ *               addresses will have their reference count bumped so they will
+ *               not go away. Calling ifnet_free_address_list will decrement the
+ *               refcount and free the array. If you wish to hold on to a
+ *               reference to an ifaddr_t, be sure to bump the reference count
+ *               before calling ifnet_free_address_list.
+ *       @param interface The interface.
+ *       @param addresses A pointer to a NULL terminated array of ifaddr_ts.
+ *       @param addresses_count Count of ifaddr_ts in addresses.
+ *       @result 0 on success otherwise the errno error.
+ */
+extern errno_t ifnet_get_address_list_with_count(ifnet_t interface,
+    ifaddr_t *__counted_by(*addresses_count) * addresses, uint16_t *addresses_count)
 __NKE_API_DEPRECATED;
 
 /*!
@@ -1578,7 +1596,7 @@ __NKE_API_DEPRECATED;
  *       @result 0 on success otherwise the errno error.
  */
 extern errno_t ifnet_get_address_list_family(ifnet_t interface,
-    ifaddr_t **addresses, sa_family_t family)
+    ifaddr_t *__null_terminated *addresses, sa_family_t family)
 __NKE_API_DEPRECATED;
 
 
@@ -1589,7 +1607,7 @@ __NKE_API_DEPRECATED;
  *               memory used for the array of references.
  *       @param addresses An array of ifaddr_ts.
  */
-extern void ifnet_free_address_list(ifaddr_t *addresses)
+extern void ifnet_free_address_list(ifaddr_t *__null_terminated addresses)
 __NKE_API_DEPRECATED;
 
 /*!
@@ -1601,7 +1619,7 @@ __NKE_API_DEPRECATED;
  *               the 6 byte ethernet address for ethernet).
  *       @param lladdr_len The length, in bytes, of the link layer address.
  */
-extern errno_t ifnet_set_lladdr(ifnet_t interface, const void *lladdr,
+extern errno_t ifnet_set_lladdr(ifnet_t interface, const void *__sized_by(lladdr_len) lladdr,
     size_t lladdr_len)
 __NKE_API_DEPRECATED;
 
@@ -1614,7 +1632,7 @@ __NKE_API_DEPRECATED;
  *       @param length The length of the buffer. This value must match the
  *               length of the link-layer address.
  */
-extern errno_t ifnet_lladdr_copy_bytes(ifnet_t interface, void *lladdr,
+extern errno_t ifnet_lladdr_copy_bytes(ifnet_t interface, void *__sized_by(length) lladdr,
     size_t length)
 __NKE_API_DEPRECATED;
 
@@ -1628,7 +1646,7 @@ __NKE_API_DEPRECATED;
  *       @param bufferlen The length of the buffer at addr.
  *       @param out_len On return, the length of the broadcast address.
  */
-extern errno_t ifnet_llbroadcast_copy_bytes(ifnet_t interface, void *addr,
+extern errno_t ifnet_llbroadcast_copy_bytes(ifnet_t interface, void *__sized_by(bufferlen) addr,
     size_t bufferlen, size_t *out_len)
 __NKE_API_DEPRECATED;
 
@@ -1710,7 +1728,7 @@ __NKE_API_DEPRECATED;
  *       @result 0 on success otherwise the errno error.
  */
 extern errno_t ifnet_get_multicast_list(ifnet_t interface,
-    ifmultiaddr_t **addresses)
+    ifmultiaddr_t *__null_terminated *addresses)
 __NKE_API_DEPRECATED;
 
 /*!
@@ -1720,7 +1738,7 @@ __NKE_API_DEPRECATED;
  *               multicast address and frees the array.
  *       @param multicasts An array of references to the multicast addresses.
  */
-extern void ifnet_free_multicast_list(ifmultiaddr_t *multicasts)
+extern void ifnet_free_multicast_list(ifmultiaddr_t *__null_terminated multicasts)
 __NKE_API_DEPRECATED;
 
 /*!
@@ -1751,8 +1769,9 @@ __NKE_API_DEPRECATED;
  *               matching interfaces in the array.
  *       @result 0 on success otherwise the errno error.
  */
-extern errno_t ifnet_list_get(ifnet_family_t family, ifnet_t **interfaces,
-    u_int32_t *count)
+extern errno_t ifnet_list_get(ifnet_family_t family,
+    ifnet_t *__counted_by(*count) * interfaces,
+    uint32_t *count)
 __NKE_API_DEPRECATED;
 
 
@@ -1765,8 +1784,9 @@ __NKE_API_DEPRECATED;
  *               ifnet_list_free.
  *       @param interfaces An array of interface references from ifnet_list_get.
  */
-extern void ifnet_list_free(ifnet_t *interfaces)
+extern void ifnet_list_free(ifnet_t *__null_terminated interfaces)
 __NKE_API_DEPRECATED;
+
 
 /******************************************************************************/
 /* ifaddr_t accessors                                                         */
@@ -1912,6 +1932,15 @@ __NKE_API_DEPRECATED;
 extern ifaddr_t ifaddr_findbestforaddr(const struct sockaddr *addr,
     ifnet_t interface)
 __NKE_API_DEPRECATED;
+
+/*!
+ *       @function ifaddr_get_ia6_flags
+ *       @discussion Copies the ia6 flags out of the ifaddr if it's AF_INET6
+ *       @param ifaddr The interface address.
+ *       @param out_flags On return, the IA6 flags of the ifaddr
+ *       @result 0 upon success
+ */
+extern errno_t ifaddr_get_ia6_flags(ifaddr_t ifaddr, u_int32_t *out_flags);
 
 /******************************************************************************/
 /* ifmultiaddr_t accessors                                                    */

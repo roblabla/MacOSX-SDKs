@@ -30,7 +30,7 @@ typedef NS_OPTIONS(NSUInteger, UICollectionViewScrollPosition) {
     UICollectionViewScrollPositionLeft                 = 1 << 3,
     UICollectionViewScrollPositionCenteredHorizontally = 1 << 4,
     UICollectionViewScrollPositionRight                = 1 << 5
-};
+} API_UNAVAILABLE(watchos);
 
 
 typedef NS_ENUM(NSInteger, UICollectionViewReorderingCadence) {
@@ -47,7 +47,7 @@ typedef NS_ENUM(NSInteger, UICollectionViewSelfSizingInvalidation) {
     /// Calling -invalidateIntrinsicContentSize on a self-sizing cell or its contentView will cause it to be resized if necessary, and
     /// any Auto Layout changes within the contentView of a self-sizing cell will automatically trigger -invalidateIntrinsicContentSize.
     UICollectionViewSelfSizingInvalidationEnabledIncludingConstraints,
-} API_AVAILABLE(ios(16.0), tvos(16.0), watchos(9.0));
+} API_AVAILABLE(ios(16.0), tvos(16.0)) API_UNAVAILABLE(watchos);
 
 @class UICollectionView, UICollectionReusableView, UICollectionViewCell, UICollectionViewLayout, UICollectionViewTransitionLayout, UICollectionViewLayoutAttributes, UITouch, UINib;
 @class UIDragItem, UIDragPreviewParameters, UIDragPreviewTarget;
@@ -59,9 +59,9 @@ typedef NS_ENUM(NSInteger, UICollectionViewSelfSizingInvalidation) {
 @protocol UICollectionViewDragDelegate, UICollectionViewDropDelegate, UICollectionViewDropCoordinator, UICollectionViewDropItem, UICollectionViewDropPlaceholderContext;
 
 // layout transition block signature
-typedef void (^UICollectionViewLayoutInteractiveTransitionCompletion)(BOOL completed, BOOL finished);
+typedef void (^UICollectionViewLayoutInteractiveTransitionCompletion)(BOOL completed, BOOL finished) API_UNAVAILABLE(watchos);
 
-UIKIT_EXTERN API_AVAILABLE(ios(9.0)) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @interface UICollectionViewFocusUpdateContext : UIFocusUpdateContext
 
 @property (nonatomic, strong, readonly, nullable) NSIndexPath *previouslyFocusedIndexPath;
@@ -69,7 +69,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(9.0)) NS_SWIFT_UI_ACTOR
 
 @end
 
-NS_SWIFT_UI_ACTOR
+API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @protocol UICollectionViewDataSource <NSObject>
 @required
 
@@ -89,15 +89,15 @@ NS_SWIFT_UI_ACTOR
 - (void)collectionView:(UICollectionView *)collectionView moveItemAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath*)destinationIndexPath API_AVAILABLE(ios(9.0));
 
 /// Returns a list of index titles to display in the index view (e.g. ["A", "B", "C" ... "Z", "#"])
-- (nullable NSArray<NSString *> *)indexTitlesForCollectionView:(UICollectionView *)collectionView API_AVAILABLE(ios(14.0), tvos(10.2));
+- (nullable NSArray<NSString *> *)indexTitlesForCollectionView:(UICollectionView *)collectionView API_AVAILABLE(ios(14.0), tvos(10.2)) API_UNAVAILABLE(watchos);
 
 /// Returns the index path that corresponds to the given title / index. (e.g. "B",1)
 /// Return an index path with a single index to indicate an entire section, instead of a specific item.
-- (NSIndexPath *)collectionView:(UICollectionView *)collectionView indexPathForIndexTitle:(NSString *)title atIndex:(NSInteger)index API_AVAILABLE(ios(14.0), tvos(10.2));
+- (NSIndexPath *)collectionView:(UICollectionView *)collectionView indexPathForIndexTitle:(NSString *)title atIndex:(NSInteger)index API_AVAILABLE(ios(14.0), tvos(10.2)) API_UNAVAILABLE(watchos);
 
 @end
 
-NS_SWIFT_UI_ACTOR
+API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @protocol UICollectionViewDataSourcePrefetching <NSObject>
 @required
 // indexPaths are ordered ascending by geometric distance from the collection view
@@ -110,7 +110,7 @@ NS_SWIFT_UI_ACTOR
 @end
 
 
-NS_SWIFT_UI_ACTOR
+API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @protocol UICollectionViewDelegate <UIScrollViewDelegate>
 @optional
 
@@ -143,7 +143,7 @@ NS_SWIFT_UI_ACTOR
  * @return `YES` if the primary action can be performed; otherwise `NO`. If not implemented, defaults to `YES` when not editing
  * and `NO` when editing.
  */
-- (BOOL)collectionView:(UICollectionView *)collectionView canPerformPrimaryActionForItemAtIndexPath:(NSIndexPath *)indexPath API_AVAILABLE(ios(16.0), tvos(16.0), watchos(9.0));
+- (BOOL)collectionView:(UICollectionView *)collectionView canPerformPrimaryActionForItemAtIndexPath:(NSIndexPath *)indexPath API_AVAILABLE(ios(16.0), tvos(16.0)) API_UNAVAILABLE(watchos);
 
 /*!
  * @abstract Called when the primary action should be performed for the item at the given indexPath.
@@ -159,7 +159,7 @@ NS_SWIFT_UI_ACTOR
  * @param collectionView This UICollectionView
  * @param indexPath NSIndexPath of the item to perform the action on
  */
-- (void)collectionView:(UICollectionView *)collectionView performPrimaryActionForItemAtIndexPath:(NSIndexPath *)indexPath API_AVAILABLE(ios(16.0), tvos(16.0), watchos(9.0));
+- (void)collectionView:(UICollectionView *)collectionView performPrimaryActionForItemAtIndexPath:(NSIndexPath *)indexPath API_AVAILABLE(ios(16.0), tvos(16.0)) API_UNAVAILABLE(watchos);
 
 - (void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath API_AVAILABLE(ios(8.0));
 - (void)collectionView:(UICollectionView *)collectionView willDisplaySupplementaryView:(UICollectionReusableView *)view forElementKind:(NSString *)elementKind atIndexPath:(NSIndexPath *)indexPath API_AVAILABLE(ios(8.0));
@@ -168,9 +168,9 @@ NS_SWIFT_UI_ACTOR
 
 // These methods provide support for copy/paste actions on cells.
 // All three should be implemented if any are.
-- (BOOL)collectionView:(UICollectionView *)collectionView shouldShowMenuForItemAtIndexPath:(NSIndexPath *)indexPath API_DEPRECATED_WITH_REPLACEMENT("collectionView:contextMenuConfigurationForItemsAtIndexPaths:point:", ios(6.0, 13.0)) API_UNAVAILABLE(visionos);
-- (BOOL)collectionView:(UICollectionView *)collectionView canPerformAction:(SEL)action forItemAtIndexPath:(NSIndexPath *)indexPath withSender:(nullable id)sender API_DEPRECATED_WITH_REPLACEMENT("collectionView:contextMenuConfigurationForItemsAtIndexPaths:point:", ios(6.0, 13.0)) API_UNAVAILABLE(visionos);
-- (void)collectionView:(UICollectionView *)collectionView performAction:(SEL)action forItemAtIndexPath:(NSIndexPath *)indexPath withSender:(nullable id)sender API_DEPRECATED_WITH_REPLACEMENT("collectionView:contextMenuConfigurationForItemsAtIndexPaths:point:", ios(6.0, 13.0)) API_UNAVAILABLE(visionos);
+- (BOOL)collectionView:(UICollectionView *)collectionView shouldShowMenuForItemAtIndexPath:(NSIndexPath *)indexPath API_DEPRECATED_WITH_REPLACEMENT("collectionView:contextMenuConfigurationForItemsAtIndexPaths:point:", ios(6.0, 13.0)) API_UNAVAILABLE(visionos, watchos);
+- (BOOL)collectionView:(UICollectionView *)collectionView canPerformAction:(SEL)action forItemAtIndexPath:(NSIndexPath *)indexPath withSender:(nullable id)sender API_DEPRECATED_WITH_REPLACEMENT("collectionView:contextMenuConfigurationForItemsAtIndexPaths:point:", ios(6.0, 13.0)) API_UNAVAILABLE(visionos, watchos);
+- (void)collectionView:(UICollectionView *)collectionView performAction:(SEL)action forItemAtIndexPath:(NSIndexPath *)indexPath withSender:(nullable id)sender API_DEPRECATED_WITH_REPLACEMENT("collectionView:contextMenuConfigurationForItemsAtIndexPaths:point:", ios(6.0, 13.0)) API_UNAVAILABLE(visionos, watchos);
 
 // support for custom transition layout
 - (nonnull UICollectionViewTransitionLayout *)collectionView:(UICollectionView *)collectionView transitionLayoutForOldLayout:(UICollectionViewLayout *)fromLayout newLayout:(UICollectionViewLayout *)toLayout;
@@ -185,8 +185,8 @@ NS_SWIFT_UI_ACTOR
 /// If the collection view's global selectionFollowsFocus is enabled, this method will allow you to override that behavior on a per-index path basis. This method is not called if selectionFollowsFocus is disabled.
 - (BOOL)collectionView:(UICollectionView *)collectionView selectionFollowsFocusForItemAtIndexPath:(NSIndexPath *)indexPath API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(watchos, tvos);
 
-- (NSIndexPath *)collectionView:(UICollectionView *)collectionView targetIndexPathForMoveOfItemFromOriginalIndexPath:(NSIndexPath *)originalIndexPath atCurrentIndexPath:(NSIndexPath *)currentIndexPath toProposedIndexPath:(NSIndexPath *)proposedIndexPath API_AVAILABLE(ios(15.0), tvos(15.0), watchos(8.0));
-- (NSIndexPath *)collectionView:(UICollectionView *)collectionView targetIndexPathForMoveFromItemAtIndexPath:(NSIndexPath *)currentIndexPath toProposedIndexPath:(NSIndexPath *)proposedIndexPath API_DEPRECATED_WITH_REPLACEMENT("collectionView:targetIndexPathForMoveOfItemFromOriginalIndexPath:atCurrentIndexPath:toProposedIndexPath:", ios(9.0, 15.0), visionos(1.0, 1.0));
+- (NSIndexPath *)collectionView:(UICollectionView *)collectionView targetIndexPathForMoveOfItemFromOriginalIndexPath:(NSIndexPath *)originalIndexPath atCurrentIndexPath:(NSIndexPath *)currentIndexPath toProposedIndexPath:(NSIndexPath *)proposedIndexPath API_AVAILABLE(ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos);
+- (NSIndexPath *)collectionView:(UICollectionView *)collectionView targetIndexPathForMoveFromItemAtIndexPath:(NSIndexPath *)currentIndexPath toProposedIndexPath:(NSIndexPath *)proposedIndexPath API_DEPRECATED_WITH_REPLACEMENT("collectionView:targetIndexPathForMoveOfItemFromOriginalIndexPath:atCurrentIndexPath:toProposedIndexPath:", ios(9.0, 15.0), visionos(1.0, 1.0)) API_UNAVAILABLE(watchos);
 
 - (CGPoint)collectionView:(UICollectionView *)collectionView targetContentOffsetForProposedContentOffset:(CGPoint)proposedContentOffset API_AVAILABLE(ios(9.0)); // customize the content offset to be applied during transition or update animations
 
@@ -198,7 +198,7 @@ NS_SWIFT_UI_ACTOR
  *
  * @return `YES` if the item is editable; otherwise, `NO`. Defaults to `YES`.
  */
-- (BOOL)collectionView:(UICollectionView *)collectionView canEditItemAtIndexPath:(NSIndexPath *)indexPath API_AVAILABLE(ios(14.0), tvos(14.0), watchos(7.0));
+- (BOOL)collectionView:(UICollectionView *)collectionView canEditItemAtIndexPath:(NSIndexPath *)indexPath API_AVAILABLE(ios(14.0), tvos(14.0)) API_UNAVAILABLE(watchos);
 
 // Spring Loading
 
@@ -358,7 +358,7 @@ NS_SWIFT_UI_ACTOR
 
 @end
 
-UIKIT_EXTERN API_AVAILABLE(ios(6.0)) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(6.0)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @interface UICollectionView : UIScrollView <UIDataSourceTranslating>
 
 - (instancetype)initWithFrame:(CGRect)frame collectionViewLayout:(UICollectionViewLayout *)layout NS_DESIGNATED_INITIALIZER;
@@ -368,8 +368,8 @@ UIKIT_EXTERN API_AVAILABLE(ios(6.0)) NS_SWIFT_UI_ACTOR
 @property (nonatomic, weak, nullable) id <UICollectionViewDelegate> delegate;
 @property (nonatomic, weak, nullable) id <UICollectionViewDataSource> dataSource;
 
-@property (nonatomic, weak, nullable) id<UICollectionViewDataSourcePrefetching> prefetchDataSource API_AVAILABLE(ios(10.0));
-@property (nonatomic, getter=isPrefetchingEnabled) BOOL prefetchingEnabled API_AVAILABLE(ios(10.0));
+@property (nonatomic, weak, nullable) id<UICollectionViewDataSourcePrefetching> prefetchDataSource API_AVAILABLE(ios(10.0)) API_UNAVAILABLE(watchos);
+@property (nonatomic, getter=isPrefetchingEnabled) BOOL prefetchingEnabled API_AVAILABLE(ios(10.0)) API_UNAVAILABLE(watchos);
 
 @property (nonatomic, weak, nullable) id <UICollectionViewDragDelegate> dragDelegate API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(tvos, watchos);
 @property (nonatomic, weak, nullable) id <UICollectionViewDropDelegate> dropDelegate API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(tvos, watchos);
@@ -388,7 +388,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(6.0)) NS_SWIFT_UI_ACTOR
  */
 @property (nonatomic) UICollectionViewReorderingCadence reorderingCadence API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(tvos, watchos);
 
-@property (nonatomic) UICollectionViewSelfSizingInvalidation selfSizingInvalidation API_AVAILABLE(ios(16.0), tvos(16.0), watchos(9.0));
+@property (nonatomic) UICollectionViewSelfSizingInvalidation selfSizingInvalidation API_AVAILABLE(ios(16.0), tvos(16.0)) API_UNAVAILABLE(watchos);
 
 @property (nonatomic, strong, nullable) UIView *backgroundView; // will be automatically resized to track the size of the collection view and placed behind all cells and supplementary views.
 
@@ -404,8 +404,8 @@ UIKIT_EXTERN API_AVAILABLE(ios(6.0)) NS_SWIFT_UI_ACTOR
 - (__kindof UICollectionViewCell *)dequeueReusableCellWithReuseIdentifier:(NSString *)identifier forIndexPath:(NSIndexPath *)indexPath;
 - (__kindof UICollectionReusableView *)dequeueReusableSupplementaryViewOfKind:(NSString *)elementKind withReuseIdentifier:(NSString *)identifier forIndexPath:(NSIndexPath *)indexPath;
 
-- (__kindof UICollectionViewCell *)dequeueConfiguredReusableCellWithRegistration:(UICollectionViewCellRegistration*)registration forIndexPath:(NSIndexPath*)indexPath item:(id)item API_AVAILABLE(ios(14.0),tvos(14.0));
-- (__kindof UICollectionReusableView *)dequeueConfiguredReusableSupplementaryViewWithRegistration:(UICollectionViewSupplementaryRegistration*)registration forIndexPath:(NSIndexPath *)indexPath API_AVAILABLE(ios(14.0),tvos(14.0));
+- (__kindof UICollectionViewCell *)dequeueConfiguredReusableCellWithRegistration:(UICollectionViewCellRegistration*)registration forIndexPath:(NSIndexPath*)indexPath item:(id)item API_AVAILABLE(ios(14.0), tvos(14.0)) API_UNAVAILABLE(watchos);
+- (__kindof UICollectionReusableView *)dequeueConfiguredReusableSupplementaryViewWithRegistration:(UICollectionViewSupplementaryRegistration*)registration forIndexPath:(NSIndexPath *)indexPath API_AVAILABLE(ios(14.0), tvos(14.0)) API_UNAVAILABLE(watchos);
 
 // These properties control whether items can be selected, and if so, whether multiple items can be simultaneously selected.
 @property (nonatomic) BOOL allowsSelection; // default is YES
@@ -416,7 +416,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(6.0)) NS_SWIFT_UI_ACTOR
 - (void)deselectItemAtIndexPath:(NSIndexPath *)indexPath animated:(BOOL)animated;
 
 // Returns YES if the collection view is reordering or has drop placeholders.
-@property (nonatomic, readonly) BOOL hasUncommittedUpdates API_AVAILABLE(ios(11.0));
+@property (nonatomic, readonly) BOOL hasUncommittedUpdates API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos);
 
 // Note: -reloadData will discard any uncommitted updates (e.g. placeholders)
 - (void)reloadData; // discard the dataSource and delegate data and requery as necessary
@@ -438,6 +438,11 @@ UIKIT_EXTERN API_AVAILABLE(ios(6.0)) NS_SWIFT_UI_ACTOR
 
 - (nullable NSIndexPath *)indexPathForItemAtPoint:(CGPoint)point;
 - (nullable NSIndexPath *)indexPathForCell:(UICollectionViewCell *)cell;
+
+/// Gets the index path of the specified supplementary view.
+/// @param supplementaryView The supplementary or decoration view whose index path you want.
+/// @return The index path of the specified view if it is in the collection view, else `nil`.
+- (nullable NSIndexPath *)indexPathForSupplementaryView:(UICollectionReusableView *)supplementaryView;
 
 // Returns any existing visible or prepared cell for the index path. Returns nil when no cell exists, or if index path is out of range.
 - (nullable __kindof UICollectionViewCell *)cellForItemAtIndexPath:(NSIndexPath *)indexPath;
@@ -465,7 +470,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(6.0)) NS_SWIFT_UI_ACTOR
 - (void)reloadItemsAtIndexPaths:(NSArray<NSIndexPath *> *)indexPaths;
 // Reconfigures any existing cells for the items. Reconfiguring is more efficient than reloading an item, as it does not replace the
 // existing cell with a new cell. Prefer reconfiguring over reloading unless you actually need an entirely new cell for the item.
-- (void)reconfigureItemsAtIndexPaths:(NSArray<NSIndexPath *> *)indexPaths API_AVAILABLE(ios(15.0), tvos(15.0), watchos(8.0));
+- (void)reconfigureItemsAtIndexPaths:(NSArray<NSIndexPath *> *)indexPaths API_AVAILABLE(ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos);
 
 - (void)performBatchUpdates:(void (NS_NOESCAPE ^ _Nullable)(void))updates completion:(void (^ _Nullable)(BOOL finished))completion NS_SWIFT_DISABLE_ASYNC; // allows multiple insert/delete/reload/move calls to be animated simultaneously. Nestable.
 
@@ -485,12 +490,12 @@ UIKIT_EXTERN API_AVAILABLE(ios(6.0)) NS_SWIFT_UI_ACTOR
 /// Determines if the collection view allows its cells to become focused.
 /// When collectionView:canFocusItemAtIndexPath: is implemented, its return value takes precedence over this method.
 /// Defaults to a system derived value based on platform and other properties of the collection view.
-@property (nonatomic) BOOL allowsFocus API_AVAILABLE(ios(15.0), tvos(15.0));
+@property (nonatomic) BOOL allowsFocus API_AVAILABLE(ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos);
 
 /// Determines if the collection view allows its cells to become focused while editing.
 /// When collectionView:canFocusItemAtIndexPath: is implemented, its return value takes precedence over this method.
 /// Defaults to a system derived value based on platform and other properties of the collection view.
-@property (nonatomic) BOOL allowsFocusDuringEditing API_AVAILABLE(ios(15.0), tvos(15.0));
+@property (nonatomic) BOOL allowsFocusDuringEditing API_AVAILABLE(ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos);
 
 // Drag & Drop
 
@@ -506,18 +511,18 @@ UIKIT_EXTERN API_AVAILABLE(ios(6.0)) NS_SWIFT_UI_ACTOR
 
 /* Controls the editing state for the receiver.
  */
-@property (nonatomic, getter=isEditing) BOOL editing API_AVAILABLE(ios(14.0), tvos(14.0), watchos(7.0));
+@property (nonatomic, getter=isEditing) BOOL editing API_AVAILABLE(ios(14.0), tvos(14.0)) API_UNAVAILABLE(watchos);
 
 /* Controls whether an item can be selected when the receiver is editing.
  * Defaults to NO.
  */
-@property (nonatomic) BOOL allowsSelectionDuringEditing API_AVAILABLE(ios(14.0), tvos(14.0), watchos(7.0));
+@property (nonatomic) BOOL allowsSelectionDuringEditing API_AVAILABLE(ios(14.0), tvos(14.0)) API_UNAVAILABLE(watchos);
 
 
 /* Controls whether multiple item selection can occur when the receiver is editing.
  * Defaults to NO.
  */
-@property (nonatomic) BOOL allowsMultipleSelectionDuringEditing API_AVAILABLE(ios(14.0), tvos(14.0), watchos(7.0));
+@property (nonatomic) BOOL allowsMultipleSelectionDuringEditing API_AVAILABLE(ios(14.0), tvos(14.0)) API_UNAVAILABLE(watchos);
 
 @end
 

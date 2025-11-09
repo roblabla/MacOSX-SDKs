@@ -62,7 +62,18 @@ API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0))
 
 /// this lets the developer trigger the access point as if the user had touched it.  This is useful for games that use controllers or the remote on AppleTV.  the argument lets you specify a specific state (default, profile, achievements, leaderboards) for GameCenterViewController
 - (void)triggerAccessPointWithHandler:(void (^)(void))handler NS_SWIFT_NAME(trigger(handler:));
-- (void)triggerAccessPointWithState:(GKGameCenterViewControllerState)state handler:(void (^)(void))handler NS_SWIFT_NAME(trigger(state:handler:));
+- (void)triggerAccessPointWithState:(GKGameCenterViewControllerState)state
+                            handler:(void (^)(void))handler NS_SWIFT_NAME(trigger(state:handler:));
+- (void)triggerAccessPointWithAchievementID:(NSString *)achievementID
+                                    handler:(void (^ __nullable)(void))handler NS_SWIFT_NAME(trigger(achievementID:handler:)) API_AVAILABLE(ios(18.0), macos(15.0), tvos(18.0), visionos(2.0)) API_UNAVAILABLE(watchos);
+- (void)triggerAccessPointWithLeaderboardSetID:(NSString *)leaderboardSetID
+                                       handler:(void (^ __nullable)(void))handler NS_SWIFT_NAME(trigger(leaderboardSetID:handler:)) API_AVAILABLE(ios(18.0), macos(15.0), tvos(18.0), visionos(2.0)) API_UNAVAILABLE(watchos);
+- (void)triggerAccessPointWithLeaderboardID:(NSString *)leaderboardID
+                                playerScope:(GKLeaderboardPlayerScope)playerScope
+                                  timeScope:(GKLeaderboardTimeScope)timeScope
+                                    handler:(void (^ __nullable)(void))handler NS_SWIFT_NAME(trigger(leaderboardID:playerScope:timeScope:handler:)) API_AVAILABLE(ios(18.0), macos(15.0), tvos(18.0), visionos(2.0)) API_UNAVAILABLE(watchos);
+- (void)triggerAccessPointWithPlayer:(GKPlayer *)player
+                             handler:(void (^ __nullable)(void))handler NS_SWIFT_NAME(trigger(player:handler:)) API_AVAILABLE(ios(18.0), macos(15.0), tvos(18.0), visionos(2.0)) API_UNAVAILABLE(watchos);
 
 @end
 

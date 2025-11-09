@@ -591,8 +591,8 @@ SPATIAL_OVERLOADABLE
 SPRect3D SPRect3DMakeAtOriginWithVector(simd_double3 origin,
                                         simd_double3 size) {
     
-    return SPRect3DMakeAtOrigin((SPPoint3D){ .vector = origin},
-                                (SPSize3D){ .vector = size });
+    return SPRect3DMakeAtOrigin(SPPoint3DMakeWithVector(origin),
+                                SPSize3DMakeWithVector(size));
 }
 
 SPATIAL_REFINED_FOR_SWIFT
@@ -600,8 +600,8 @@ SPATIAL_OVERLOADABLE
 SPRect3D SPRect3DMakeAtOriginWithVector(SPVector3D origin,
                                         SPVector3D size) {
     
-    return SPRect3DMakeAtOrigin((SPPoint3D){ .vector = origin.vector },
-                                (SPSize3D){ .vector = size.vector });
+    return SPRect3DMakeAtOrigin(SPPoint3DMakeWithVector(origin.vector),
+                                SPSize3DMakeWithVector(size.vector));
 }
 
 SPATIAL_REFINED_FOR_SWIFT
@@ -636,7 +636,7 @@ SPPoint3D SPPoint3DClampToRect(SPPoint3D point, SPRect3D rect) {
     p = simd_max(p, clampMin);
     p = simd_min(p, clampMax);
     
-    return (SPPoint3D){ .x = p.x, .y = p.y, .z = p.z };
+    return SPPoint3DMakeWithVector(p);
 }
 
 SPATIAL_REFINED_FOR_SWIFT
@@ -673,8 +673,8 @@ SPRect3D SPRect3DMakeBoundingFromPoints(SPPoint3D points[], int pointCount) {
     simd_double3 size = maximum - minimum;
     
     return (SPRect3D) {
-        (SPPoint3D){ .vector = minimum},
-        (SPSize3D){ .vector = size}
+        SPPoint3DMakeWithVector(minimum),
+        SPSize3DMakeWithVector(size)
     };
 }
 
@@ -755,7 +755,7 @@ SPPoint3D SPRect3DGetMinimum(SPRect3D rect) {
     
     simd_double3 result = origin + simd_min(0, size);
     
-    return (SPPoint3D){ .vector = result };
+    return SPPoint3DMakeWithVector(result);
 }
 
 SPATIAL_SWIFT_NAME(getter:Rect3D.max(self:))
@@ -765,7 +765,7 @@ SPPoint3D SPRect3DGetMaximum(SPRect3D rect) {
     simd_double3 size = rect.size.vector;
     
     simd_double3 result = origin + simd_max(0, size);
-    return (SPPoint3D){ .vector = result };
+    return SPPoint3DMakeWithVector(result);
 }
 
 SPATIAL_REFINED_FOR_SWIFT
@@ -813,8 +813,8 @@ SPRect3D SPRect3DUnion(SPRect3D rect, SPRect3D other) {
                                  SPRect3DGetMaximum(other).vector) - origin;
     
     return (SPRect3D){
-        .origin = (SPPoint3D){ .vector = origin },
-        .size = (SPSize3D){ .vector = size }
+        .origin = SPPoint3DMakeWithVector(origin),
+        .size = SPSize3DMakeWithVector(size)
     };
 }
 
@@ -834,8 +834,8 @@ SPRect3D SPRect3DIntersection(SPRect3D rect, SPRect3D other) {
     
     if (minSize >= 0) {
         return (SPRect3D){
-            .origin = (SPPoint3D){ .vector = origin },
-            .size = (SPSize3D){ .vector = size }
+            .origin = SPPoint3DMakeWithVector(origin),
+            .size = SPSize3DMakeWithVector(size)
         };
     } else {
         return SPRect3DNull;
@@ -851,7 +851,7 @@ SPRect3D SPRect3DStandardize(SPRect3D rect) {
     
     return (SPRect3D){
         .origin =  SPRect3DGetMinimum(rect),
-        .size = (SPSize3D){ .vector = size }
+        .size = SPSize3DMakeWithVector(size)
     };
 }
 
@@ -928,7 +928,7 @@ SPRect3D SPRect3DRotateByQuaternionAroundPoint(SPRect3D rect, simd_quatd quatern
 SPATIAL_REFINED_FOR_SWIFT
 SPATIAL_OVERLOADABLE
 SPRect3D SPRect3DTranslate(SPRect3D rect, SPSize3D offset) {
-    SPVector3D v = (SPVector3D){ .vector = offset.vector };
+    SPVector3D v = SPVector3DMakeWithVector(offset.vector);
     return SPRect3DMakeAtOrigin(SPPoint3DTranslate(rect.origin, v), rect.size);
 }
 
@@ -1039,7 +1039,7 @@ bool SPRect3DIntersectsRect(SPRect3D rect, SPRect3D other) {
  @abstract Returns a rectangle that's transformed by the specified pose.
  
  @param rect The source rectangle.
- @param pose The pose that the function applies to the size.
+ @param pose The pose that the function applies to the rectangle.
  @returns The transformed rectangle.
  */
 SPATIAL_INLINE
@@ -1071,7 +1071,7 @@ SPRect3D SPRect3DApplyPose(SPRect3D rect,
  @abstract Returns a rectangle that's transformed by the inverse of the specified pose.
  
  @param rect The source rectangle.
- @param pose The pose that the function unapplies to the size.
+ @param pose The pose that the function unapplies to the rectangle.
  @returns The transformed rectangle.
  @note The pose's rotation angle must be zero, otherwise this function returns @p SPRect3DNull .
  */
@@ -1096,6 +1096,76 @@ SPRect3D SPRect3DUnapplyPose(SPRect3D rect,
     
     for (int i = 0; i < 8; ++i) {
         points[i] = SPPoint3DUnapplyPose(points[i], pose);
+    }
+    
+    SPRect3D transformed = SPRect3DMakeBoundingFromPoints(points, 8);
+    
+    return transformed;
+}
+
+// MARK: - Transform by Scaled Pose
+
+/*!
+ @abstract Returns a rectangle that's transformed by the specified scaled pose.
+ 
+ @param rect The source rectangle.
+ @param pose The scaled pose that the function applies to the rectangle.
+ @returns The transformed rectangle.
+ */
+SPATIAL_INLINE
+SPATIAL_OVERLOADABLE
+SPRect3D SPRect3DApplyScaledPose(SPRect3D rect,
+                                 SPScaledPose3D pose)
+__API_AVAILABLE(macos(15.0), ios(18.0), watchos(11.0), tvos(18.0));
+
+SPATIAL_REFINED_FOR_SWIFT
+SPATIAL_OVERLOADABLE
+SPRect3D SPRect3DApplyScaledPose(SPRect3D rect,
+                           SPScaledPose3D pose) {
+    
+    SPPoint3D points[8] = {0};
+    
+    SPRect3DGetCornerPoints(rect, points);
+    
+    for (int i = 0; i < 8; ++i) {
+        
+        points[i] = SPPoint3DApplyScaledPose(points[i], pose);
+    }
+    
+    SPRect3D transformed = SPRect3DMakeBoundingFromPoints(points, 8);
+    
+    return transformed;
+}
+
+/*!
+ @abstract Returns a rectangle that's transformed by the inverse of the specified scaled pose.
+ 
+ @param rect The source rectangle.
+ @param pose The scaled pose that the function unapplies to the rectangle.
+ @returns The transformed rectangle.
+ @note The pose's rotation angle must be zero, otherwise this function returns @p SPRect3DNull .
+ */
+SPATIAL_INLINE
+SPATIAL_OVERLOADABLE
+SPRect3D SPRect3DUnapplyScaledPose(SPRect3D rect,
+                                   SPScaledPose3D pose)
+__API_AVAILABLE(macos(15.0), ios(18.0), watchos(11.0), tvos(18.0));
+
+SPATIAL_REFINED_FOR_SWIFT
+SPATIAL_OVERLOADABLE
+SPRect3D SPRect3DUnapplyScaledPose(SPRect3D rect,
+                             SPScaledPose3D pose) {
+    
+    if(fabs(simd_angle(pose.rotation.quaternion)) > SPDefaultTolerance) {
+        return SPRect3DNull;
+    }
+    
+    SPPoint3D points[8] = {0};
+    
+    SPRect3DGetCornerPoints(rect, points);
+    
+    for (int i = 0; i < 8; ++i) {
+        points[i] = SPPoint3DUnapplyScaledPose(points[i], pose);
     }
     
     SPRect3D transformed = SPRect3DMakeBoundingFromPoints(points, 8);

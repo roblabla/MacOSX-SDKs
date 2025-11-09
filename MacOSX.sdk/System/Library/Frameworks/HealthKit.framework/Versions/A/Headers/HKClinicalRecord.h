@@ -23,7 +23,7 @@ HK_EXTERN NSString * const HKPredicateKeyPathClinicalRecordFHIRResourceType API_
                for a given sample. Use a combination of HKSource, FHIRResource.resourceType, and
                FHIRResource.identifier instead.
 */
-HK_EXTERN
+HK_EXTERN NS_SWIFT_SENDABLE
 API_AVAILABLE(ios(12.0), macCatalyst(13.0), macos(13.0))
 __WATCHOS_PROHIBITED
 @interface HKClinicalRecord : HKSample <NSSecureCoding, NSCopying>

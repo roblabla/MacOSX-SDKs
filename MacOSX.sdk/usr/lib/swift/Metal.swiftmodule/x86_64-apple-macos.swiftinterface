@@ -1,6 +1,6 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.10 (swiftlang-5.10.0.12.5 clang-1500.3.9.1.1)
-// swift-module-flags: -target x86_64-apple-macos14.5 -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftMetal -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-bare-slash-regex -user-module-version 343.19 -module-name Metal
+// swift-compiler-version: Apple Swift version 6.0 effective-5.10 (swiftlang-6.0.0.7.24 clang-1600.0.25.1)
+// swift-module-flags: -target x86_64-apple-macos15.0 -target-variant x86_64-apple-ios18.0-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftMetal -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-bare-slash-regex -user-module-version 366.22 -module-name Metal
 @_exported import Metal
 import Swift
 import _Concurrency
@@ -32,6 +32,7 @@ public struct MTLLogContainer : Swift.Sequence {
   public typealias Element = Metal.MTLFunctionLog
   public struct Iterator : Swift.IteratorProtocol {
     public mutating func next() -> (any Metal.MTLFunctionLog)?
+    @available(iOS 14.0, tvOS 14.0, macOS 11.0, *)
     public typealias Element = any Metal.MTLFunctionLog
   }
   public func makeIterator() -> Metal.MTLLogContainer.Iterator
@@ -42,6 +43,8 @@ extension Metal.MTLCommandBuffer {
   public var logs: Metal.MTLLogContainer {
     get
   }
+  @available(macOS 15.0, iOS 18.0, tvOS 18.0, *)
+  public func useResidencySets(_ residencySets: [any Metal.MTLResidencySet])
 }
 @available(macOS 11.0, iOS 14.0, *)
 @available(tvOS, unavailable)
@@ -134,6 +137,20 @@ public func MTLIOCreateCompressionContext(_ path: Swift.String, _ type: Metal.MT
 @available(macOS 10.12, iOS 10.0, tvOS 10.0, *)
 extension Metal.MTLFunctionConstantValues {
   public func setConstantValues(_ values: Swift.UnsafeRawPointer, type: Metal.MTLDataType, range: Swift.Range<Swift.Int>)
+}
+@available(macOS 15.0, iOS 18.0, tvOS 18.0, *)
+extension Metal.MTLResidencySet {
+  @available(macOS 15.0, iOS 18.0, tvOS 18.0, *)
+  public func addAllocations(_ allocations: [any Metal.MTLAllocation])
+  @available(macOS 15.0, iOS 18.0, tvOS 18.0, *)
+  public func removeAllocations(_ allocations: [any Metal.MTLAllocation])
+}
+@available(macOS 15.0, iOS 18.0, tvOS 18.0, *)
+extension Metal.MTLCommandQueue {
+  @available(macOS 15.0, iOS 18.0, tvOS 18.0, *)
+  public func addResidencySets(_ residencySets: [any Metal.MTLResidencySet])
+  @available(macOS 15.0, iOS 18.0, tvOS 18.0, *)
+  public func removeResidencySets(_ residencySets: [any Metal.MTLResidencySet])
 }
 @available(macOS 10.13, iOS 11.0, tvOS 11.0, *)
 extension Metal.MTLArgumentEncoder {

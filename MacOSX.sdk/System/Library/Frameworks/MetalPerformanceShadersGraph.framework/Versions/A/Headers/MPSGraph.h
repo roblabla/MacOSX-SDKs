@@ -32,7 +32,7 @@ typedef NS_ENUM(uint64_t, MPSGraphOptions)
     MPSGraphOptionsDefault                                         MPS_ENUM_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))                      =   MPSGraphOptionsSynchronizeResults,
 };
 
-/// Optimization levels to tradeoff compilation time for even more runtime performance by running more passes.
+/// The optimization levels to trade compilation time for even more runtime performance by running more passes.
 typedef NS_ENUM(uint64_t, MPSGraphOptimization)
 {
     /// Graph performs core optimizations only.
@@ -41,7 +41,7 @@ typedef NS_ENUM(uint64_t, MPSGraphOptimization)
     MPSGraphOptimizationLevel1                        MPS_ENUM_AVAILABLE_STARTING(macos(12.3), ios(15.4), tvos(15.4))                        =   1L,
 };
 
-/// Optimization profile used as heuristic as graph compiler optimizes network.
+/// The optimization profile used as a heuristic as the graph compiler optimizes the network.
 typedef NS_ENUM(uint64_t, MPSGraphOptimizationProfile)
 {
     /// Default, graph optimized for performance.
@@ -57,15 +57,15 @@ typedef NS_ENUM(uint64_t, MPSGraphExecutionStage)
     MPSGraphExecutionStageCompleted                        MPS_ENUM_AVAILABLE_STARTING(macos(13.0), ios(16.0), tvos(16.0)) MPS_SWIFT_NAME(completed) =   0L,
 };
 
-/// A dictionary of tensors and correspondiing tensorData for them.
+/// A dictionary of tensors and corresponding tensor data.
 MPS_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))
 typedef NSDictionary<MPSGraphTensor*, MPSGraphTensorData *> MPSGraphTensorDataDictionary;
 
-/// A dictionary of tensors and correspondiing shapes for them.
+/// A dictionary of tensors and corresponding shapes for them.
 MPS_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))
 typedef NSDictionary<MPSGraphTensor*, MPSGraphShapedType *> MPSGraphTensorShapedTypeDictionary;
 
-/// A notification when graph execution: has finished.
+/// A notification that appears when graph execution finishes.
 ///
 /// - Parameters:
 ///   - resultsDictionary: If no error, the results dictionary produced by the graph operation.
@@ -73,15 +73,15 @@ typedef NSDictionary<MPSGraphTensor*, MPSGraphShapedType *> MPSGraphTensorShaped
 typedef void (^MPSGraphCompletionHandler)(MPSGraphTensorDataDictionary * resultsDictionary,
                                           NSError * _Nullable error);
 
-/// A notification when graph execution: has been scheduled.
+/// A notification that appears when graph execution schedules.
 ///
 /// - Parameters:
-///   - resultsDictionary: If no error, the results dictionary produced by the graph operation. If Graph has not yet allocated the results will be NSNull.
+///   - resultsDictionary: If no error, the results dictionary produced by the graph operation. If Graph has not yet allocated, the results will be `NSNull`.
 ///   - error: If an error occurs, more information might be found here.
 typedef void (^MPSGraphScheduledHandler)(MPSGraphTensorDataDictionary * resultsDictionary,
                                          NSError * _Nullable error);
 
-/// A notification when compilation: has finished.
+/// A notification that appears when compilation finishes.
 ///
 /// - Parameters:
 ///   - executable: If no error, the executable produced by the compilation.
@@ -89,7 +89,11 @@ typedef void (^MPSGraphScheduledHandler)(MPSGraphTensorDataDictionary * resultsD
 typedef void (^MPSGraphCompilationCompletionHandler)(MPSGraphExecutable* executable,
                                                      NSError * _Nullable error);
 
-/// This is a class that consists of all the levers for compiling graphs.
+/// A dictionary of symbol names and the corresponding executables for them.
+MPS_AVAILABLE_STARTING(macos(14.1), ios(17.1), tvos(17.1))
+typedef NSDictionary<NSString *, MPSGraphExecutable *> MPSGraphCallableMap;
+
+/// A class that consists of all the levers for compiling graphs.
 MPS_CLASS_AVAILABLE_STARTING(macos(12.0), ios(15.0), tvos(15.0))
 @interface MPSGraphCompilationDescriptor : MPSGraphObject <NSCopying>
 
@@ -102,33 +106,50 @@ MPS_CLASS_AVAILABLE_STARTING(macos(12.0), ios(15.0), tvos(15.0))
 /// Flag that makes the compile or specialize call blocking till the entire compilation is complete, defaults to NO.
 @property (readwrite, nonatomic) BOOL waitForCompilationCompletion MPS_AVAILABLE_STARTING(macos(13.0), ios(16.0), tvos(16.0));
 
-/// The graph calls this handler at the completion of the compilation, default value is nil.
+/// The handler that the graph calls when the compilation completes.
+///
+/// Default value is nil.
 @property (readwrite, atomic) MPSGraphCompilationCompletionHandler compilationCompletionHandler MPS_AVAILABLE_STARTING(macos(13.0), ios(16.0), tvos(16.0));
 
-/// The dispatch queue used for the compilation, default value is nil.
+/// The dispatch queue used for the compilation.
+///
+/// Default value is nil.
 @property (readwrite, atomic, retain) dispatch_queue_t dispatchQueue MPS_AVAILABLE_STARTING(macos(13.0), ios(16.0), tvos(16.0));
 
-/// The optimization profile for the graph optimization, default is MPSGraphOptimizationProfilePerformance.
+/// The optimization profile for the graph optimization.
+///
+/// Default is MPSGraphOptimizationProfilePerformance.
 @property (readwrite, nonatomic) MPSGraphOptimizationProfile optimizationProfile
 MPS_AVAILABLE_STARTING_BUT_DEPRECATED("MPSGraph will automatically provide the best performance and power efficiency with MPSGraphOptimizationLevel1.",
                                       macos(12.3, 14.0), ios(15.4, 17.0), tvos(15.4, 17.0));
 
+/// The dictionary used during runtime to lookup the ``MPSGraphExecutable`` which correspond to the ``symbolName``.
+@property (readwrite, atomic, nullable) MPSGraphCallableMap *callables MPS_AVAILABLE_STARTING(macos(14.1), ios(17.1), tvos(17.1));
+
 @end
 
-/// This is a class that consists of all the levers  to synchronize and schedule graph execution.
+/// A class that consists of all the levers  to synchronize and schedule graph execution.
 MPS_CLASS_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))
 @interface MPSGraphExecutionDescriptor : MPSGraphObject
 
-/// The graph calls this handler when it schedules the execution, default value is nil.
+/// The handler that graph calls when it schedules the execution.
+///
+/// Default value is nil.
 @property (readwrite, atomic) MPSGraphScheduledHandler scheduledHandler;
 
-/// The graph calls this handler at the completion of the execution, default value is nil.
+/// The handler that graph calls at the completion of the execution.
+///
+/// Default value is nil.
 @property (readwrite, atomic) MPSGraphCompletionHandler completionHandler;
 
-/// Flag that makes the execution call blocking till the entire compilation is complete, defaults to NO.
+/// The flag that blocks the execution call until the entire execution is complete.
+///
+/// Defaults to NO.
 @property (readwrite, atomic) BOOL waitUntilCompleted;
 
-/// compilationDescriptor for the graph, default value is nil.
+/// The compilation descriptor for the graph.
+///
+/// Default value is nil.
 @property (readwrite, atomic, copy, nullable) MPSGraphCompilationDescriptor *compilationDescriptor
 MPS_AVAILABLE_STARTING(macos(12.3), ios(15.4), tvos(15.4));
 
@@ -154,16 +175,18 @@ MPS_AVAILABLE_STARTING(macos(13.0), ios(16.0), tvos(16.0));
 
 @end
 
-/// Optimized representation of a compute graph of MPSGraphOperations and MPSGraphTensors.
+/// The optimized representation of a compute graph of operations and tensors.
 ///
 /// An MPSGraph is a symbolic representation of operations to be utilized to execute compute graphs on a device.
 MPS_CLASS_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))
 @interface MPSGraph : MPSGraphObject
 
-/// Options for the graph, the default value is MPSGraphOptionsDefault.
+/// Options for the graph.
+///
+/// The default value is `MPSGraphOptionsDefault`.
 @property (readwrite, atomic) MPSGraphOptions options;
 
-/// Create a new MPSGraph to insert nodes in.
+/// Creates a new graph to insert nodes in.
 +(instancetype) new;
 
 /// Initialize an MPSGraph to insert nodes in.
@@ -172,9 +195,9 @@ MPS_CLASS_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))
 /// Array of all the placeholder tensors.
 @property (readonly, nonnull, nonatomic) NSArray<MPSGraphTensor *> *placeholderTensors;
 
-/// Compiles the graph for given feeds to return targetTensor values, ensuring all target operations would be executed.
+/// Compiles the graph for the given feeds to returns the target tensor values, ensuring all target operations would be executed.
 ///
-/// This call blocks till execution has completed. The compilation descriptor helps specialize the executable returned.
+/// This call blocks until execution has completed. The compilation descriptor helps specialize the executable returned.
 ///
 /// - Parameters:
 ///   - device: MPSGraph device to optimize for.
@@ -188,10 +211,10 @@ MPS_CLASS_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))
                             targetTensors:(NSArray<MPSGraphTensor *> *) targetTensors
                          targetOperations:(NSArray<MPSGraphOperation *> * _Nullable) targetOperations
                     compilationDescriptor:(MPSGraphCompilationDescriptor * _Nullable) compilationDescriptor MPS_AVAILABLE_STARTING(macos(12.0), ios(15.0), tvos(15.0));
-
-/// Runs the graph for given feeds to return targetTensor values, ensuring all target operations also executed.
+#if !MPSGRAPH_TOOLCHAIN_BUILD
+/// Runs the graph for the given feeds and returns the target tensor values, ensuring all target operations also executed.
 ///
-/// This call blocks till execution has completed.
+/// This call blocks until execution has completed.
 ///
 /// - Parameters:
 ///   - feeds: Feeds dictionary for the placeholder tensors.
@@ -203,7 +226,9 @@ MPS_CLASS_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))
                               targetOperations:(NSArray<MPSGraphOperation *> * _Nullable) targetOperations
 MPS_SWIFT_NAME( run(feeds:targetTensors:targetOperations:) );
 
-/// Runs the graph for given feeds to return targetTensor values, ensuring all target operations also executed. This call blocks till execution has completed.
+/// Runs the graph for the given feeds and returns the target tensor values, ensuring all target operations also executed. 
+///
+/// This call blocks until execution has completed.
 ///
 /// - Parameters:
 ///   - commandQueue: CommandQueue passed to exectute the graph on.
@@ -217,9 +242,9 @@ MPS_SWIFT_NAME( run(feeds:targetTensors:targetOperations:) );
                                         targetOperations:(NSArray<MPSGraphOperation *> * _Nullable) targetOperations
 MPS_SWIFT_NAME( run(with:feeds:targetTensors:targetOperations:) );
 
-/// Runs the graph for given feeds to return targetTensor values in the resultsDictionary provided by the user.
+/// Runs the graph for the given feeds and returns the target tensor values in the results dictionary provided by the user.
 ///
-/// It also ensures all target operations also executed. This call blocks till execution has completed.
+/// It also ensures all target operations also executed. This call blocks until execution has completed.
 ///
 /// - Parameters:
 ///   - commandQueue: CommandQueue passed to exectute the graph on.
@@ -235,7 +260,7 @@ MPS_SWIFT_NAME( run(with:feeds:targetOperations:resultsDictionary:) );
 
 // Async methods
 
-/// Runs the graph for given feeds to return targetTensor values, ensuring all target operations also executed. 
+/// Runs the graph for the given feeds and returns the target tensor values, ensuring all target operations also executed. 
 ///
 /// This call is asynchronous and will return immediately if a completionHandler is set.
 ///
@@ -252,7 +277,7 @@ MPS_SWIFT_NAME( run(with:feeds:targetOperations:resultsDictionary:) );
 MPS_SWIFT_NAME( runAsync(feeds:targetTensors:targetOperations:executionDescriptor:) );
 
 
-/// Runs the graph for given feeds to return targetTensor values, ensuring all target operations also executed. 
+/// Runs the graph for the given feeds and returns the target tensor values, ensuring all target operations also executed. 
 ///
 /// This call is asynchronous and will return immediately if a completionHandler is set.
 ///
@@ -270,7 +295,7 @@ MPS_SWIFT_NAME( runAsync(feeds:targetTensors:targetOperations:executionDescripto
                                           executionDescriptor:(MPSGraphExecutionDescriptor * _Nullable) executionDescriptor
 MPS_SWIFT_NAME( runAsync(with:feeds:targetTensors:targetOperations:executionDescriptor:) );
 
-/// Encodes the graph for given feeds to return targetTensor values in the resultsDictionary provided by the user.
+/// Encodes the graph for the given feeds to returns the target tensor values in the results dictionary provided by the user.
 ///
 /// It ensures all target operations also executed. This call is asynchronous and will return immediately if a completionHandler is set.
 ///
@@ -287,7 +312,7 @@ MPS_SWIFT_NAME( runAsync(with:feeds:targetTensors:targetOperations:executionDesc
                 executionDescriptor:(MPSGraphExecutionDescriptor * _Nullable) executionDescriptor
 MPS_SWIFT_NAME( runAsync(with:feeds:targetOperations:resultsDictionary:executionDescriptor:) );
 
-/// Encodes graph for given feeds to return targetTensor values, ensuring all target operations also executed. 
+/// Encodes the graph for the given feeds to returns the target tensor values, ensuring all target operations also executed. 
 ///
 /// This call is asynchronous and will return immediately if a completionHandler is set.
 ///
@@ -305,7 +330,7 @@ MPS_SWIFT_NAME( runAsync(with:feeds:targetOperations:resultsDictionary:execution
                                     executionDescriptor:(MPSGraphExecutionDescriptor * _Nullable) executionDescriptor
 MPS_SWIFT_NAME( encode(to:feeds:targetTensors:targetOperations:executionDescriptor:) );
 
-/// Encodes the graph for given feeds to return targetTensor values in the resultsDictionary provided by the user.
+/// Encodes the graph for the given feeds to returns the target tensor values in the results dictionary provided by the user.
 ///
 /// It ensures all target operations also executed. This call is asynchronous and will return immediately if a completionHandler is set.
 ///
@@ -321,7 +346,7 @@ MPS_SWIFT_NAME( encode(to:feeds:targetTensors:targetOperations:executionDescript
             resultsDictionary:(MPSGraphTensorDataDictionary *) resultsDictionary
           executionDescriptor:(MPSGraphExecutionDescriptor * _Nullable) executionDescriptor
 MPS_SWIFT_NAME( encode(to:feeds:targetOperations:resultsDictionary:executionDescriptor:) );
-
+#endif
 
 @end
 

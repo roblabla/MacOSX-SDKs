@@ -12,7 +12,7 @@ NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 @class UIPageControlProgress;
 
-API_AVAILABLE(ios(17.0), tvos(17.0))
+API_AVAILABLE(ios(17.0), tvos(17.0)) API_UNAVAILABLE(watchos)
 @protocol UIPageControlProgressDelegate<NSObject>
 
 @optional
@@ -40,7 +40,7 @@ API_AVAILABLE(ios(17.0), tvos(17.0))
 
 @end
 
-UIKIT_EXTERN API_AVAILABLE(ios(17.0), tvos(17.0))
+UIKIT_EXTERN API_AVAILABLE(ios(17.0), tvos(17.0)) API_UNAVAILABLE(watchos)
 @interface UIPageControlProgress: NSObject
 
 /// An object that defines the delegate of the page control progress.
@@ -60,7 +60,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(17.0), tvos(17.0))
 
 @class UIPageControlTimerProgress;
 
-API_AVAILABLE(ios(17.0), tvos(17.0))
+API_AVAILABLE(ios(17.0), tvos(17.0)) API_UNAVAILABLE(watchos)
 @protocol UIPageControlTimerProgressDelegate<UIPageControlProgressDelegate>
 
 @optional
@@ -74,7 +74,7 @@ API_AVAILABLE(ios(17.0), tvos(17.0))
 
 @end
 
-UIKIT_EXTERN API_AVAILABLE(ios(17.0), tvos(17.0))
+UIKIT_EXTERN API_AVAILABLE(ios(17.0), tvos(17.0)) API_UNAVAILABLE(watchos)
 @interface UIPageControlTimerProgress: UIPageControlProgress
 
 /// Creates a time interval progress with a specified preferred duration.

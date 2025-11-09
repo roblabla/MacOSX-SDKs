@@ -20,11 +20,11 @@ NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 // The following keys are understood by UIViewControllerContextTransitioning context objects
 // that are created by the system.
 
-UIKIT_EXTERN UITransitionContextViewControllerKey const UITransitionContextFromViewControllerKey NS_SWIFT_NAME(from) API_AVAILABLE(ios(7.0));
-UIKIT_EXTERN UITransitionContextViewControllerKey const UITransitionContextToViewControllerKey NS_SWIFT_NAME(to) API_AVAILABLE(ios(7.0));
+UIKIT_EXTERN UITransitionContextViewControllerKey const UITransitionContextFromViewControllerKey API_UNAVAILABLE(watchos) NS_SWIFT_NAME(from) API_AVAILABLE(ios(7.0));
+UIKIT_EXTERN UITransitionContextViewControllerKey const UITransitionContextToViewControllerKey API_UNAVAILABLE(watchos) NS_SWIFT_NAME(to) API_AVAILABLE(ios(7.0));
 
-UIKIT_EXTERN UITransitionContextViewKey const UITransitionContextFromViewKey NS_SWIFT_NAME(from) API_AVAILABLE(ios(8.0));
-UIKIT_EXTERN UITransitionContextViewKey const UITransitionContextToViewKey NS_SWIFT_NAME(to) API_AVAILABLE(ios(8.0));
+UIKIT_EXTERN UITransitionContextViewKey const UITransitionContextFromViewKey API_UNAVAILABLE(watchos) NS_SWIFT_NAME(from) API_AVAILABLE(ios(8.0));
+UIKIT_EXTERN UITransitionContextViewKey const UITransitionContextToViewKey API_UNAVAILABLE(watchos) NS_SWIFT_NAME(to) API_AVAILABLE(ios(8.0));
 
 
 // A transition context object is constructed by the system and passed to the
@@ -64,22 +64,22 @@ UIKIT_EXTERN UITransitionContextViewKey const UITransitionContextToViewKey NS_SW
 // that are created by an animator.
 
 
-NS_SWIFT_UI_ACTOR
+API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @protocol UIViewControllerContextTransitioning <NSObject>
 
 // The view in which the animated transition should take place.
-@property(nonatomic, readonly) UIView *containerView;
+@property(nonatomic, readonly) UIView *containerView API_UNAVAILABLE(watchos);
 
 // Most of the time this is YES. For custom transitions that use the new UIModalPresentationCustom
 // presentation type we will invoke the animateTransition: even though the transition should not be
 // animated. This allows the custom transition to add or remove subviews to the container view. 
-@property(nonatomic, readonly, getter=isAnimated) BOOL animated;
+@property(nonatomic, readonly, getter=isAnimated) BOOL animated API_UNAVAILABLE(watchos);
 
 // The next two values can change if the animating transition is interruptible.
-@property(nonatomic, readonly, getter=isInteractive) BOOL interactive; // This indicates whether the transition is currently interactive.
-@property(nonatomic, readonly) BOOL transitionWasCancelled;
+@property(nonatomic, readonly, getter=isInteractive) BOOL interactive API_UNAVAILABLE(watchos); // This indicates whether the transition is currently interactive.
+@property(nonatomic, readonly) BOOL transitionWasCancelled API_UNAVAILABLE(watchos);
 
-@property(nonatomic, readonly) UIModalPresentationStyle presentationStyle;
+@property(nonatomic, readonly) UIModalPresentationStyle presentationStyle API_UNAVAILABLE(watchos);
 
 // An interaction controller that conforms to the
 // UIViewControllerInteractiveTransitioning protocol (which is vended by a
@@ -96,14 +96,15 @@ NS_SWIFT_UI_ACTOR
 
 // This should be called if the transition animation is interruptible and it 
 // is being paused.
-- (void)pauseInteractiveTransition API_AVAILABLE(ios(10.0));
+- (void)pauseInteractiveTransition API_AVAILABLE(ios(10.0)) API_UNAVAILABLE(watchos);
 
 // This must be called whenever a transition completes (or is cancelled.)
 // Typically this is called by the object conforming to the
 // UIViewControllerAnimatedTransitioning protocol that was vended by the transitioning
 // delegate.  For purely interactive transitions it should be called by the
 // interaction controller. This method effectively updates internal view
-// controller state at the end of the transition.
+// controller state at the end of the transition. On iOS 17 and later, this may safely
+// be called multiple times, but only the first call will have any effect.
 - (void)completeTransition:(BOOL)didComplete;
 
 
@@ -132,7 +133,7 @@ NS_SWIFT_UI_ACTOR
 - (CGRect)finalFrameForViewController:(UIViewController *)vc;
 @end
 
-NS_SWIFT_UI_ACTOR
+API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @protocol UIViewControllerAnimatedTransitioning <NSObject>
 
 // This is used for percent driven interactive transitions, as well as for
@@ -148,7 +149,7 @@ NS_SWIFT_UI_ACTOR
 /// be interrupted. For example, it could return an instance of a
 /// UIViewPropertyAnimator. It is expected that this method will return the same
 /// instance for the life of a transition.
-- (id <UIViewImplicitlyAnimating>) interruptibleAnimatorForTransition:(id <UIViewControllerContextTransitioning>)transitionContext API_AVAILABLE(ios(10.0));
+- (id <UIViewImplicitlyAnimating>) interruptibleAnimatorForTransition:(id <UIViewControllerContextTransitioning>)transitionContext API_AVAILABLE(ios(10.0)) API_UNAVAILABLE(watchos);
 
 // This is a convenience and if implemented will be invoked by the system when the transition context's completeTransition: method is invoked.
 - (void)animationEnded:(BOOL) transitionCompleted;
@@ -156,26 +157,26 @@ NS_SWIFT_UI_ACTOR
 @end
 
 
-NS_SWIFT_UI_ACTOR
+API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @protocol UIViewControllerInteractiveTransitioning <NSObject>
 - (void)startInteractiveTransition:(id <UIViewControllerContextTransitioning>)transitionContext;
 
 @optional
-@property(nonatomic, readonly) CGFloat completionSpeed;
-@property(nonatomic, readonly) UIViewAnimationCurve completionCurve;
+@property(nonatomic, readonly) CGFloat completionSpeed API_UNAVAILABLE(watchos);
+@property(nonatomic, readonly) UIViewAnimationCurve completionCurve API_UNAVAILABLE(watchos);
 
 /// In 10.0, if an object conforming to UIViewControllerAnimatedTransitioning is
 /// known to be interruptible, it is possible to start it as if it was not
 /// interactive and then interrupt the transition and interact with it. In this
 /// case, implement this method and return NO. If an interactor does not
 /// implement this method, YES is assumed.
-@property (nonatomic, readonly) BOOL wantsInteractiveStart API_AVAILABLE(ios(10.0));
+@property (nonatomic, readonly) BOOL wantsInteractiveStart API_AVAILABLE(ios(10.0)) API_UNAVAILABLE(watchos);
 
 @end
 
 @class UIPresentationController;
 
-NS_SWIFT_UI_ACTOR
+API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @protocol UIViewControllerTransitioningDelegate <NSObject>
 
 @optional
@@ -191,7 +192,7 @@ NS_SWIFT_UI_ACTOR
 
 @end
 
-UIKIT_EXTERN API_AVAILABLE(ios(7.0)) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(7.0)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @interface UIPercentDrivenInteractiveTransition : NSObject <UIViewControllerInteractiveTransitioning>
 
 /// This is the non-interactive duration that was returned when the
@@ -217,17 +218,17 @@ UIKIT_EXTERN API_AVAILABLE(ios(7.0)) NS_SWIFT_UI_ACTOR
 /// For an interruptible animator, one can specify a different timing curve provider to use when the
 /// transition is continued. This property is ignored if the animated transitioning object does not
 /// vend an interruptible animator.
-@property (nullable, nonatomic, strong)id <UITimingCurveProvider> timingCurve API_AVAILABLE(ios(10.0));
+@property (nullable, nonatomic, strong)id <UITimingCurveProvider> timingCurve API_AVAILABLE(ios(10.0)) API_UNAVAILABLE(watchos);
 
 /// Set this to NO in order to start an interruptible transition non
 /// interactively. By default this is YES, which is consistent with the behavior
 /// before 10.0.
-@property (nonatomic) BOOL wantsInteractiveStart API_AVAILABLE(ios(10.0));
+@property (nonatomic) BOOL wantsInteractiveStart API_AVAILABLE(ios(10.0)) API_UNAVAILABLE(watchos);
 
 /// Use this method to pause a running interruptible animator. This will ensure that all blocks
 /// provided by a transition coordinator's notifyWhenInteractionChangesUsingBlock: method
 /// are executed when a transition moves in and out of an interactive mode.
-- (void)pauseInteractiveTransition API_AVAILABLE(ios(10.0));
+- (void)pauseInteractiveTransition API_AVAILABLE(ios(10.0)) API_UNAVAILABLE(watchos);
 
 // These methods should be called by the gesture recognizer or some other logic
 // to drive the interaction. This style of interaction controller should only be

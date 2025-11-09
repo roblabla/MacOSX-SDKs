@@ -14,7 +14,7 @@ NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 /// @class      @c UIStandardTextCursorView
 /// @abstract   Displays a flashing cursor (aka "caret") view. Concrete implementation of UITextCursorView.
 /// @discussion When a selection is not ranged (or has a zero-length), a cursor view is displayed.
-UIKIT_EXTERN API_AVAILABLE(ios(17.4))
+UIKIT_EXTERN API_AVAILABLE(ios(17.4)) API_UNAVAILABLE(watchos)
 @interface UIStandardTextCursorView : UIView <UITextCursorView>
 @end
 

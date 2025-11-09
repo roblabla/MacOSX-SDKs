@@ -68,7 +68,7 @@ API_UNAVAILABLE(visionos)
 ///
 /// - Parameters:
 ///   - viewController: The user interface object from the remote process.
--(void)hostViewControllerDidActivate:(EXHostViewController*)viewController;
+-(void)hostViewControllerDidActivate:(EXHostViewController*)viewController NS_SWIFT_UI_ACTOR;
 
 /// A delegate method the host view controller calls when an extension
 /// disconnects.
@@ -82,7 +82,7 @@ API_UNAVAILABLE(visionos)
 ///
 ///   - error: An error object containing information about why the object
 /// disconnected, or `nil` if it’s disconnecting without error.
--(void)hostViewControllerWillDeactivate:(EXHostViewController*)viewController error:(nullable NSError *)error;
+-(void)hostViewControllerWillDeactivate:(EXHostViewController*)viewController error:(nullable NSError *)error NS_SWIFT_UI_ACTOR;
 
 @end
 

@@ -140,7 +140,7 @@ typedef NS_ENUM(NSInteger, AVMIDIControlChangeMessageType)
 	AVMIDIControlChangeMessageTypeOmniModeOn			= 125,
 	AVMIDIControlChangeMessageTypeMonoModeOn			= 126,
 	AVMIDIControlChangeMessageTypeMonoModeOff			= 127
-};
+} API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0)) API_UNAVAILABLE(watchos);
 
 /*!	@class AVMIDIControlChangeEvent
 	@abstract
@@ -333,7 +333,7 @@ typedef NS_ENUM(NSInteger, AVMIDIMetaEventType)
 	AVMIDIMetaEventTypeTimeSignature		= 0x58,
 	AVMIDIMetaEventTypeKeySignature			= 0x59,
 	AVMIDIMetaEventTypeProprietaryEvent		= 0x7f
-};
+} API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0)) API_UNAVAILABLE(watchos);
 
 /*!	@class AVMIDIMetaEvent
 	@abstract

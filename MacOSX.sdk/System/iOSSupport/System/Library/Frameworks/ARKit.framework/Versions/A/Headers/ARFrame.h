@@ -70,6 +70,7 @@ typedef NS_ENUM(NSInteger, ARWorldMappingStatus) {
  @discussion The model provides a snapshot of all data needed to render a given frame.
  */
 API_AVAILABLE(ios(11.0))
+NS_SWIFT_SENDABLE
 @interface ARFrame : NSObject <NSCopying>
 
 /**
@@ -223,7 +224,6 @@ API_AVAILABLE(ios(11.0))
  @param viewportSize The size of the viewport.
  */
 - (CGAffineTransform)displayTransformForOrientation:(UIInterfaceOrientation)orientation viewportSize:(CGSize)viewportSize;
-
 
 /** Unavailable */
 - (instancetype)init NS_UNAVAILABLE;

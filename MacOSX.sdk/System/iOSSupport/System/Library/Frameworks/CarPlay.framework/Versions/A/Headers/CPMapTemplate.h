@@ -23,7 +23,7 @@ typedef NS_OPTIONS(NSInteger, CPPanDirection) {
     CPPanDirectionRight = 1 << 1,
     CPPanDirectionUp = 1 << 2,
     CPPanDirectionDown = 1 << 3,
-} API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(macos, watchos, tvos);
+} API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(macos, watchos);
 
 typedef NS_OPTIONS(NSInteger, CPManeuverDisplayStyle) {
     CPManeuverDisplayStyleDefault,
@@ -31,23 +31,23 @@ typedef NS_OPTIONS(NSInteger, CPManeuverDisplayStyle) {
     CPManeuverDisplayStyleTrailingSymbol,
     CPManeuverDisplayStyleSymbolOnly,
     CPManeuverDisplayStyleInstructionOnly
-} API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(macos, watchos, tvos);
+} API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(macos, watchos);
 
 typedef NS_ENUM(NSUInteger, CPTimeRemainingColor) {
     CPTimeRemainingColorDefault = 0,
     CPTimeRemainingColorGreen,
     CPTimeRemainingColorOrange,
     CPTimeRemainingColorRed,
-} API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(macos, watchos, tvos);
+} API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(macos, watchos);
 
 typedef NS_ENUM(NSUInteger, CPTripEstimateStyle) {
     CPTripEstimateStyleLight = 0,
     CPTripEstimateStyleDark
-} API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(macos, watchos, tvos);
+} API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(macos, watchos);
 
 @protocol CPMapTemplateDelegate;
 
-API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(macos, watchos, tvos)
+API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(macos, watchos)
 @interface CPMapTemplate : CPTemplate <CPBarButtonProviding>
 
 /**
@@ -179,7 +179,7 @@ API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(macos, watchos, tvos)
 
 @end
 
-API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(macos, watchos, tvos)
+API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(macos, watchos)
 @protocol CPMapTemplateDelegate <NSObject>
 @optional
 

@@ -24,6 +24,7 @@ NS_ASSUME_NONNULL_BEGIN
 // =================================================================================================
 #pragma mark-- iOS/tvOS/watchOS AVAudioSession interface --
 
+NS_SWIFT_SENDABLE
 API_AVAILABLE(ios(3.0), watchos(2.0), tvos(9.0)) API_UNAVAILABLE(macos) 
 @interface AVAudioSession : NSObject {
 @private
@@ -327,7 +328,7 @@ API_AVAILABLE(ios(3.0), watchos(2.0), tvos(9.0)) API_UNAVAILABLE(macos)
 	an error.
 */
 
-/// The current hardware sample rate
+/// The current hardware sample rate. Is key-value observable (starting iOS 18.0).
 @property (readonly) double sampleRate API_AVAILABLE(ios(6.0), watchos(2.0), tvos(9.0)) API_UNAVAILABLE(macos);
 
 /// The current number of hardware input channels. Is key-value observable.
@@ -446,7 +447,7 @@ API_AVAILABLE(ios(3.0), watchos(2.0), tvos(9.0)) API_UNAVAILABLE(macos)
 
 @end // interface for AVAudioSession (RoutingConfiguration)
 
-#if defined(TARGET_OS_VISION) && TARGET_OS_VISION
+#if TARGET_OS_VISION
 /*!
  The perceived "size" or "immersivity" of the sound. Use Small for least
  immersive and Large for most immersive.
@@ -548,7 +549,7 @@ OS_EXPORT AVAudioSessionSpatialExperienceOption AVAudioSessionSpatialExperienceO
 
 @end // AVAudioSession (NowPlayingCandidacy)
 
-#endif // TARGET_OS_XR
+#endif // TARGET_OS_VISION
 
 
 #pragma mark-- Names for NSNotifications --

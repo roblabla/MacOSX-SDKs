@@ -31,9 +31,9 @@ NS_SWIFT_SENDABLE
 - (instancetype)init NS_UNAVAILABLE;
 + (instancetype)new NS_UNAVAILABLE;
 
-/*! @discussion It is acceptable to relate two records that have not yet been uploaded to the server, but those records must be uploaded to the server in the same operation.
+/*! @discussion It is acceptable to relate two records that have not yet been uploaded to the server. Those records must be uploaded to the server in the same operation if using an action other than `CKReferenceActionNone`.
  *
- *  If a record references a record that does not exist on the server and is not in the current save operation it will result in an error.
+ *  If a record references a record that does not exist on the server and is not in the current save operation it will result in an error if using an action other than `CKReferenceActionNone`.
  */
 - (instancetype)initWithRecordID:(CKRecordID *)recordID action:(CKReferenceAction)action NS_DESIGNATED_INITIALIZER;
 - (instancetype)initWithRecord:(CKRecord *)record action:(CKReferenceAction)action;

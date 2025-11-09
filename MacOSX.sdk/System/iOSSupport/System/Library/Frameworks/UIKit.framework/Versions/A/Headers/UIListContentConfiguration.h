@@ -14,40 +14,47 @@
 
 NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
-UIKIT_EXTERN API_AVAILABLE(ios(14.0), tvos(14.0), watchos(7.0)) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(14.0), tvos(14.0)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @interface UIListContentConfiguration : NSObject <UIContentConfiguration, NSSecureCoding>
 
 /// Returns the default configuration for a list cell.
+/// From iOS 18 onwards, the configuration will automatically adopt the appropriate style for a list when updating for a
+/// new configuration state, by reading the `listEnvironment` trait from the state's trait collection.
+/// Defaults to a cell in a plain-style list.
 + (instancetype)cellConfiguration;
+
 /// Returns the default configuration for a list cell with subtitle text.
+/// From iOS 18 onwards, the configuration will automatically adopt the appropriate style for a list when updating for a
+/// new configuration state, by reading the `listEnvironment` trait from the state's trait collection.
+/// Defaults to a subtitle cell in a plain-style list.
 + (instancetype)subtitleCellConfiguration;
+
 /// Returns the default configuration for a list cell with side-by-side value text.
+/// From iOS 18 onwards, the configuration will automatically adopt the appropriate style for a list when updating for a
+/// new configuration state, by reading the `listEnvironment` trait from the state's trait collection.
+/// Defaults to the appearance of a value cell in a plain-style list.
 + (instancetype)valueCellConfiguration;
 
-/// Returns the default configuration for a plain list header.
-+ (instancetype)plainHeaderConfiguration;
-/// Returns the default configuration for a plain list footer.
-+ (instancetype)plainFooterConfiguration;
-/// Returns the default configuration for a grouped list header.
-+ (instancetype)groupedHeaderConfiguration;
-/// Returns the default configuration for a grouped list footer.
-+ (instancetype)groupedFooterConfiguration;
+/// Represents a generic header configuration that automatically adopts the style of a containing list when updating for a
+/// new configuration state, by reading the `listEnvironment` trait from the state's trait collection.
+/// Defaults to the header configuration for a plain-style list.
++ (instancetype)headerConfiguration API_AVAILABLE(ios(18.0), tvos(18.0), visionos(2.0)) API_UNAVAILABLE(watchos);
+
+/// Represents a generic footer configuration that automatically adopts the style of a containing list when updating for a
+/// new configuration state, by reading the `listEnvironment` trait from the state's trait collection.
+/// Defaults to the footer configuration for a plain-style list.
++ (instancetype)footerConfiguration API_AVAILABLE(ios(18.0), tvos(18.0), visionos(2.0)) API_UNAVAILABLE(watchos);
+
+
 /// Returns the default configuration for a prominent inset grouped list header.
 + (instancetype)prominentInsetGroupedHeaderConfiguration API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(tvos, watchos);
 /// Returns the default configuration for an extra prominent inset grouped list header.
 + (instancetype)extraProminentInsetGroupedHeaderConfiguration API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(tvos, watchos);
 
-/// Returns the default configuration for a sidebar list cell.
-+ (instancetype)sidebarCellConfiguration API_UNAVAILABLE(watchos) API_UNAVAILABLE(tvos);
-/// Returns the default configuration for a sidebar list cell with subtitle text.
-+ (instancetype)sidebarSubtitleCellConfiguration API_UNAVAILABLE(tvos, watchos);
 /// Returns the default configuration for an accompanied sidebar list cell.
 + (instancetype)accompaniedSidebarCellConfiguration API_UNAVAILABLE(tvos, watchos);
 /// Returns the default configuration for an accompanied sidebar list cell with subtitle text.
 + (instancetype)accompaniedSidebarSubtitleCellConfiguration API_UNAVAILABLE(tvos, watchos);
-
-/// Returns the default configuration for a sidebar list header.
-+ (instancetype)sidebarHeaderConfiguration API_UNAVAILABLE(tvos, watchos);
 
 + (instancetype)new NS_UNAVAILABLE;
 - (instancetype)init NS_UNAVAILABLE;
@@ -86,10 +93,29 @@ UIKIT_EXTERN API_AVAILABLE(ios(14.0), tvos(14.0), watchos(7.0)) NS_SWIFT_UI_ACTO
 /// Vertical padding between the text and secondary text. Only applies when there is both text and secondary text, and they are in a stacked layout.
 @property (nonatomic) CGFloat textToSecondaryTextVerticalPadding;
 
+/// The alpha to apply to the entire content view. Defaults to 1.0.
+@property (nonatomic) CGFloat alpha API_AVAILABLE(ios(18.0), tvos(18.0), visionos(2.0)) API_UNAVAILABLE(watchos);
+
+// Deprecated declarations
+
+/// Returns the default configuration for a sidebar list cell.
++ (instancetype)sidebarCellConfiguration API_DEPRECATED_WITH_REPLACEMENT("cellConfiguration", ios(14.0, 18.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos);
+/// Returns the default configuration for a sidebar list cell with subtitle text.
++ (instancetype)sidebarSubtitleCellConfiguration API_DEPRECATED_WITH_REPLACEMENT("subtitleCellConfiguration", ios(14.0, 18.0)) API_UNAVAILABLE(tvos, watchos);
+/// Returns the default configuration for a plain list header.
++ (instancetype)plainHeaderConfiguration API_DEPRECATED_WITH_REPLACEMENT("headerConfiguration", ios(14.0, 18.0), tvos(14.0, 18.0)) API_UNAVAILABLE(watchos);
+/// Returns the default configuration for a plain list footer.
++ (instancetype)plainFooterConfiguration API_DEPRECATED_WITH_REPLACEMENT("footerConfiguration", ios(14.0, 18.0), tvos(14.0, 18.0)) API_UNAVAILABLE(watchos);
+/// Returns the default configuration for a grouped list header.
++ (instancetype)groupedHeaderConfiguration API_DEPRECATED_WITH_REPLACEMENT("headerConfiguration", ios(14.0, 18.0), tvos(14.0, 18.0)) API_UNAVAILABLE(watchos);
+/// Returns the default configuration for a grouped list footer.
++ (instancetype)groupedFooterConfiguration API_DEPRECATED_WITH_REPLACEMENT("footerConfiguration", ios(14.0, 18.0), tvos(14.0, 18.0)) API_UNAVAILABLE(watchos);
+/// Returns the default configuration for a sidebar list header.
++ (instancetype)sidebarHeaderConfiguration API_DEPRECATED_WITH_REPLACEMENT("headerConfiguration", ios(14.0, 18.0)) API_UNAVAILABLE(tvos, watchos);
+
 @end
 
-
-UIKIT_EXTERN API_AVAILABLE(ios(14.0), tvos(14.0), watchos(7.0)) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(14.0), tvos(14.0)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @interface UIListContentView : UIView <UIContentView>
 
 - (instancetype)initWithConfiguration:(UIListContentConfiguration *)configuration NS_DESIGNATED_INITIALIZER;

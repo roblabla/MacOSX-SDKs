@@ -467,10 +467,9 @@ exports:
                        _CKVLocalizationErrorDomain, _CKVRegisterIndexMaintenanceActivity, 
                        _CKVRegisterPostOSInstallMigrationActivity, _CKVTaskIdDescription, 
                        _CKVocabularyAdministratorResultDescription, _CoreKnowledgeVersionNumber, 
-                       _CoreKnowledgeVersionString, _MAX_SAMPLED_REQUESTS_SELECTED_PER_DAY, 
-                       _kCKLogContextDaemon, _kCKLogContextFramework, _kKnownAppIdMessages, 
-                       _kKnownAppIdMessagesMacOS, _kKnownAppIdPhotos, _kKnownAppIdPhotosMacOS, 
-                       _kKnownAppIdSiriVoiceShortctus, _kKnownAppIdVoiceShortctus, 
+                       _CoreKnowledgeVersionString, _kCKLogContextDaemon, _kCKLogContextFramework, 
+                       _kKnownAppIdMessages, _kKnownAppIdMessagesMacOS, _kKnownAppIdPhotos, 
+                       _kKnownAppIdPhotosMacOS, _kKnownAppIdSiriVoiceShortctus, _kKnownAppIdVoiceShortctus, 
                        _kPropertyNameAppId, _kPropertyNameItem ]
     objc-classes:    [ CKAppInteractionsContext, CKClosure, CKDataVault, CKEntity, 
                        CKEphemeralEventSequence, CKEvent, CKGenericCondition, CKHistoricEvent, 

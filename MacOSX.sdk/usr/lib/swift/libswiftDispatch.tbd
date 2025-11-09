@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/usr/lib/swift/libswiftDispatch.dylib'
-current-version: 41
+current-version: 49
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -450,6 +450,10 @@ exports:
                        '_$sSo18OS_dispatch_sourceC8DispatchE16makeSignalSource6signal5queueSo0a1_b1_c1_H0_ps5Int32V_So0a1_b1_I0CSgtFZ', 
                        '_$sSo18OS_dispatch_sourceC8DispatchE17makeProcessSource10identifier9eventMask5queueSo0a1_b1_C5_proc_ps5Int32V_AbCE0F5EventVSo0a1_b1_K0CSgtFZ', 
                        '_$sSo18OS_dispatch_sourceC8DispatchE18makeMachSendSource4port9eventMask5queueSo0a1_b1_C10_mach_send_ps6UInt32V_AbCE0fG5EventVSo0a1_b1_L0CSgtFZ', 
+                       '_$sSo18OS_dispatch_sourceC8DispatchE19MemoryPressureEventV11descriptionSSvg', 
+                       '_$sSo18OS_dispatch_sourceC8DispatchE19MemoryPressureEventV11descriptionSSvpMV', 
+                       '_$sSo18OS_dispatch_sourceC8DispatchE19MemoryPressureEventV13procLimitWarnAEvgZ', 
+                       '_$sSo18OS_dispatch_sourceC8DispatchE19MemoryPressureEventV17procLimitCriticalAEvgZ', 
                        '_$sSo18OS_dispatch_sourceC8DispatchE19MemoryPressureEventV3allAEvgZ', 
                        '_$sSo18OS_dispatch_sourceC8DispatchE19MemoryPressureEventV6normalAEvgZ', 
                        '_$sSo18OS_dispatch_sourceC8DispatchE19MemoryPressureEventV7warningAEvgZ', 
@@ -457,12 +461,14 @@ exports:
                        '_$sSo18OS_dispatch_sourceC8DispatchE19MemoryPressureEventV8rawValueAESu_tcfC', 
                        '_$sSo18OS_dispatch_sourceC8DispatchE19MemoryPressureEventV8rawValueSuvg', 
                        '_$sSo18OS_dispatch_sourceC8DispatchE19MemoryPressureEventV8rawValueSuvpMV', 
+                       '_$sSo18OS_dispatch_sourceC8DispatchE19MemoryPressureEventV9mslStatusAEvgZ', 
                        '_$sSo18OS_dispatch_sourceC8DispatchE19MemoryPressureEventVMa', 
                        '_$sSo18OS_dispatch_sourceC8DispatchE19MemoryPressureEventVMn', 
                        '_$sSo18OS_dispatch_sourceC8DispatchE19MemoryPressureEventVN', 
                        '_$sSo18OS_dispatch_sourceC8DispatchE19MemoryPressureEventVSQACMc', 
                        '_$sSo18OS_dispatch_sourceC8DispatchE19MemoryPressureEventVSYACMc', 
                        '_$sSo18OS_dispatch_sourceC8DispatchE19MemoryPressureEventVs10SetAlgebraACMc', 
+                       '_$sSo18OS_dispatch_sourceC8DispatchE19MemoryPressureEventVs23CustomStringConvertibleACMc', 
                        '_$sSo18OS_dispatch_sourceC8DispatchE19MemoryPressureEventVs25ExpressibleByArrayLiteralACMc', 
                        '_$sSo18OS_dispatch_sourceC8DispatchE19MemoryPressureEventVs9OptionSetACMc', 
                        '_$sSo18OS_dispatch_sourceC8DispatchE20makeUserDataOrSource5queueSo0a1_b1_C8_data_or_pSo0a1_b1_J0CSg_tFZ', 

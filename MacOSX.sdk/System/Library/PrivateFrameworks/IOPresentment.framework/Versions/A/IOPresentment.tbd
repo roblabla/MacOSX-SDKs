@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/IOPresentment.framework/Versions/A/IOPresentment'
-current-version: 65
+current-version: 66
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst ]
     symbols:         [ __ZN27IOPresentmentFailTracerImpl12format_traceEPKcS1_S1_mP13__va_list_tag, 
@@ -41,7 +41,6 @@ exports:
                        _IOPresentmentTerminate, _IOPresentmentTransactionBindResource, 
                        _IOPresentmentTransactionGet, _IOPresentmentTransactionRelease, 
                        _IOPresentmentTransactionSet, _IOPresentmentUpdateSubmitTimestamp, 
-                       _IOPresentmentVersionNumber, _IOPresentmentVersionString, 
                        _IOPresentmentWaitActive, _IOPresentmentWaitComplete, __Z18iopNodeDescriptionR21iopNodeDescriptionCtxRK24sioPresentmentObjectNodeb, 
                        __Z20iopDeviceDescriptionyRK29sioPresentmentDeviceObjectSet, 
                        __Z20iopNodeIDDescriptionR21iopNodeDescriptionCtxyy, __Z21iopDeviceDescriptionsPK23sioPresentmentDeviceMap, 

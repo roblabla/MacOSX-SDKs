@@ -147,6 +147,14 @@ Globals:
   SwiftName: auxiliarySemanticSegmentationGlassesMatte
 - Name: kCIImageAuxiliarySemanticSegmentationSkyMatte
   SwiftName: auxiliarySemanticSegmentationSkyMatte
+- Name: kCIImageAuxiliaryHDRGainMap
+  SwiftName: auxiliaryHDRGainMap
+- Name: kCIImageContentHeadroom
+  SwiftName: contentHeadroom
+
+# CIImageRepresentationOption
+- Name: kCIImageRepresentationHDRGainMapImage
+  SwiftName: hdrGainMapImage
 
 # CIImageOptions - Private
 - Name: kCIImageFlipped
@@ -185,8 +193,6 @@ Globals:
   SwiftName: AVPortraitEffectsMatte
 - Name: kCIImageTextScaleFactor
   SwiftName: textScaleFactor
-- Name: kCIImageAuxiliaryHDRGainMap
-  SwiftName: auxiliaryHDRGainMap
 
 # CIContextOption
 - Name: kCIContextOutputColorSpace

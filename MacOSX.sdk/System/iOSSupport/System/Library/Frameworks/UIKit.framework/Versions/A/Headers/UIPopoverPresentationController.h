@@ -17,7 +17,7 @@ NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 @class UIPopoverPresentationController, UISheetPresentationController;
 
-API_UNAVAILABLE(tvos) NS_SWIFT_UI_ACTOR
+API_UNAVAILABLE(tvos, watchos) NS_SWIFT_UI_ACTOR
 @protocol UIPopoverPresentationControllerDelegate <UIAdaptivePresentationControllerDelegate>
 @optional
 
@@ -25,10 +25,10 @@ API_UNAVAILABLE(tvos) NS_SWIFT_UI_ACTOR
 
 // Called on the delegate when the popover controller will dismiss the popover. Return NO to prevent the
 // dismissal of the view.
-- (BOOL)popoverPresentationControllerShouldDismissPopover:(UIPopoverPresentationController *)popoverPresentationController API_DEPRECATED_WITH_REPLACEMENT("presentationControllerShouldDismiss:", ios(8.0, 13.0)) API_UNAVAILABLE(visionos);
+- (BOOL)popoverPresentationControllerShouldDismissPopover:(UIPopoverPresentationController *)popoverPresentationController API_DEPRECATED_WITH_REPLACEMENT("presentationControllerShouldDismiss:", ios(8.0, 13.0)) API_UNAVAILABLE(visionos, watchos);
 
 // Called on the delegate when the user has taken action to dismiss the popover. This is not called when the popover is dismissed programatically.
-- (void)popoverPresentationControllerDidDismissPopover:(UIPopoverPresentationController *)popoverPresentationController API_DEPRECATED_WITH_REPLACEMENT("presentationControllerDidDismiss:", ios(8.0, 13.0)) API_UNAVAILABLE(visionos);
+- (void)popoverPresentationControllerDidDismissPopover:(UIPopoverPresentationController *)popoverPresentationController API_DEPRECATED_WITH_REPLACEMENT("presentationControllerDidDismiss:", ios(8.0, 13.0)) API_UNAVAILABLE(visionos, watchos);
 
 // -popoverPresentationController:willRepositionPopoverToRect:inView: is called on your delegate when the
 // popover may require a different view or rectangle.
@@ -36,7 +36,7 @@ API_UNAVAILABLE(tvos) NS_SWIFT_UI_ACTOR
 
 @end
 
-UIKIT_EXTERN API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(tvos) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(tvos, watchos) NS_SWIFT_UI_ACTOR
 @interface UIPopoverPresentationController : UIPresentationController
 
 @property (nullable, nonatomic, weak) id <UIPopoverPresentationControllerDelegate> delegate;
@@ -55,9 +55,9 @@ UIKIT_EXTERN API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(tvos) NS_SWIFT_UI_ACTOR
 @property (nonatomic, assign) BOOL canOverlapSourceViewRect API_AVAILABLE(ios(9.0));
 
 // Accepts UIBarButtonItem as well as NSToolbarItem in Catalyst.
-@property (nullable, nonatomic, strong) id<UIPopoverPresentationControllerSourceItem> sourceItem API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(tvos);
+@property (nullable, nonatomic, strong) id<UIPopoverPresentationControllerSourceItem> sourceItem API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(tvos, watchos);
 
-@property (nullable, nonatomic, strong) UIBarButtonItem *barButtonItem API_DEPRECATED_WITH_REPLACEMENT("sourceItem", ios(8.0, API_TO_BE_DEPRECATED), visionos(1.0, API_TO_BE_DEPRECATED));
+@property (nullable, nonatomic, strong) UIBarButtonItem *barButtonItem API_DEPRECATED_WITH_REPLACEMENT("sourceItem", ios(8.0, API_TO_BE_DEPRECATED), visionos(1.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(watchos);
 
 // Returns the direction the arrow is pointing on a presented popover. Before presentation, this returns UIPopoverArrowDirectionUnknown.
 @property (nonatomic, readonly) UIPopoverArrowDirection arrowDirection;

@@ -1,4 +1,4 @@
-.Dd November 10, 2016
+.Dd March 13, 2024
 .Dt socketfilterfw 8
 .Os Mac OS X
 .Sh NAME
@@ -6,7 +6,7 @@
 .Nd Application Firewall daemon
 .Sh SYNOPSIS
 .Nm
-.Op Fl hdlk
+.Op Fl h
 .Op Fl -getglobalstate
 .Op Fl -setglobalstate Ar on | off
 .Op Fl -getblockall
@@ -22,10 +22,6 @@
 .Op Fl -setallowsignedapp
 .Op Fl -getstealthmode
 .Op Fl -setstealthmode Ar on | off
-.Op Fl -getloggingmode
-.Op Fl -setloggingmode Ar on | off
-.Op Fl -getloggingopt
-.Op Fl -setloggingopt Ar throttled | brief | detail
 .Pp
 .Sh DESCRIPTION
 .Nm
@@ -36,12 +32,6 @@ The command line options are as follows:
 .Bl -tag -width indent
 .It Fl h
 Display this help and exit.
-.It Fl d
-Turn on debugging.
-.It Fl l
-Do logging and run in daemon mode.
-.It Fl k
-Kill daemon.
 .It Fl -getglobalstate
 Display if the firewall is enabled or not.
 .It Fl -setglobalstate Ar on | off
@@ -72,12 +62,4 @@ Set whether downloaded signed applications are to automatically receive incoming
 Show whether stealth mode is on or not.
 .It Fl -setstealthmode Ar on | off
 Set stealth mode on or off.
-.It Fl -getloggingmode
-Show whether logging is on or not.
-.It Fl -setloggingmode Ar on | off
-Set logging to on or off.
-.It Fl -getloggingopt
-Show logging option.
-.It Fl -setloggingopt Ar throttled | brief | detail
-Set logging option.
 .El

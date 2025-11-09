@@ -9,7 +9,7 @@
 */
 
 #import <AVFoundation/AVBase.h>
-#if TARGET_OS_OSX
+#if ( TARGET_OS_OSX || ( TARGET_OS_IOS && ! TARGET_OS_VISION ) )
 
 #import <Foundation/Foundation.h>
 #import <CoreGraphics/CoreGraphics.h>
@@ -76,21 +76,21 @@ typedef struct AVCaptionSize {
 	@abstract	Makes an AVCaptionDimension from a value and units.
 */
 AVF_EXPORT AVCaptionDimension AVCaptionDimensionMake( CGFloat value, AVCaptionUnitsType units )
-API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, tvos, watchos);
+API_AVAILABLE(macos(12.0), ios(18.0), macCatalyst(15.0)) API_UNAVAILABLE(tvos, watchos, visionos);
 
 /*!
 	@function	AVCaptionPointMake
 	@abstract	Makes an AVCaptionPoint from x and y coordinate AVCaptionDimensions.
 */
 AVF_EXPORT AVCaptionPoint AVCaptionPointMake( AVCaptionDimension x, AVCaptionDimension y )
-API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, tvos, watchos);
+API_AVAILABLE(macos(12.0), ios(18.0), macCatalyst(15.0)) API_UNAVAILABLE(tvos, watchos, visionos);
 
 /*!
 	@function	AVCaptionSizeMake
 	@abstract	Makes an AVCaptionSize from width and height AVCaptionDimensions.
 */
 AVF_EXPORT AVCaptionSize AVCaptionSizeMake( AVCaptionDimension width, AVCaptionDimension height )
-API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, tvos, watchos);
+API_AVAILABLE(macos(12.0), ios(18.0), macCatalyst(15.0)) API_UNAVAILABLE(tvos, watchos, visionos);
 
 /*!
  @enum AVCaptionRegionDisplayAlignment
@@ -115,7 +115,7 @@ typedef NS_ENUM(NSInteger, AVCaptionRegionDisplayAlignment) {
 	AVCaptionRegionDisplayAlignmentBefore        = 0,
 	AVCaptionRegionDisplayAlignmentCenter        = 1,
 	AVCaptionRegionDisplayAlignmentAfter         = 2,
-} API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, tvos, watchos);
+} API_AVAILABLE(macos(12.0), ios(18.0), macCatalyst(15.0)) API_UNAVAILABLE(tvos, watchos, visionos);
 
 /*!
  @enum AVCaptionRegionWritingMode
@@ -128,7 +128,7 @@ typedef NS_ENUM(NSInteger, AVCaptionRegionDisplayAlignment) {
 typedef NS_ENUM(NSInteger, AVCaptionRegionWritingMode) {
 	AVCaptionRegionWritingModeLeftToRightAndTopToBottom  = 0,
 	AVCaptionRegionWritingModeTopToBottomAndRightToLeft  = 2,
-} API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, tvos, watchos);
+} API_AVAILABLE(macos(12.0), ios(18.0), macCatalyst(15.0)) API_UNAVAILABLE(tvos, watchos, visionos);
 
 /*!
  @enum AVCaptionRegionScroll
@@ -141,7 +141,7 @@ typedef NS_ENUM(NSInteger, AVCaptionRegionWritingMode) {
 typedef NS_ENUM(NSInteger, AVCaptionRegionScroll) {
 	AVCaptionRegionScrollNone   = 0,
 	AVCaptionRegionScrollRollUp = 1,
-} API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, tvos, watchos);
+} API_AVAILABLE(macos(12.0), ios(18.0), macCatalyst(15.0)) API_UNAVAILABLE(tvos, watchos, visionos);
 
 /*!
  @class AVCaptionRegion
@@ -150,8 +150,7 @@ typedef NS_ENUM(NSInteger, AVCaptionRegionScroll) {
  @discussion
 	Currently, there is just four predefined region instances. The interface doesn't support configuration of region settings.
  */
-NS_SWIFT_NONSENDABLE
-API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, tvos, watchos)
+API_AVAILABLE(macos(12.0), ios(18.0), macCatalyst(15.0)) API_UNAVAILABLE(tvos, watchos, visionos)
 @interface AVCaptionRegion : NSObject <NSCopying, NSMutableCopying, NSSecureCoding>
 
 /*!
@@ -293,7 +292,7 @@ API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, tvos, watchos)
 	Mutable subclass of AVCaptionRegion.
  */
 NS_SWIFT_NONSENDABLE
-API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, tvos, watchos)
+API_AVAILABLE(macos(12.0), ios(18.0), macCatalyst(15.0)) API_UNAVAILABLE(tvos, watchos, visionos)
 @interface AVMutableCaptionRegion : AVCaptionRegion
 
 /*!
@@ -336,14 +335,14 @@ API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, tvos, watchos)
   @abstract
     Alignment of lines in the region.
  */
-@property (nonatomic, assign) AVCaptionRegionDisplayAlignment displayAlignment API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, tvos, watchos);
+@property (nonatomic, assign) AVCaptionRegionDisplayAlignment displayAlignment API_AVAILABLE(macos(12.0), ios(18.0), macCatalyst(15.0)) API_UNAVAILABLE(tvos, watchos, visionos);
 
 /*!
   @property writingMode
   @abstract
     The block and inline progression direction of the region.
  */
-@property (nonatomic, assign) AVCaptionRegionWritingMode writingMode API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, tvos, watchos);
+@property (nonatomic, assign) AVCaptionRegionWritingMode writingMode API_AVAILABLE(macos(12.0), ios(18.0), macCatalyst(15.0)) API_UNAVAILABLE(tvos, watchos, visionos);
 @end
 
 /*!
@@ -357,7 +356,7 @@ API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, tvos, watchos)
 typedef NS_ENUM(NSInteger, AVCaptionAnimation) {
 	AVCaptionAnimationNone = 0,
 	AVCaptionAnimationCharacterReveal = 1,
-} API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, tvos, watchos);
+} API_AVAILABLE(macos(12.0), ios(18.0), macCatalyst(15.0)) API_UNAVAILABLE(tvos, watchos, visionos);
 
 /*!
  @class AVCaption
@@ -366,8 +365,7 @@ typedef NS_ENUM(NSInteger, AVCaptionAnimation) {
  @discussion
 	A caption contains one meaningful sentence, paragraph, or otherwise known as a caption cue. Within the active time range, it may perform animation (e.g. Karaoke), rolling-up, changes the visibility, or any other dynamic styling.
  */
-NS_SWIFT_NONSENDABLE
-API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, tvos, watchos)
+API_AVAILABLE(macos(12.0), ios(18.0), macCatalyst(15.0)) API_UNAVAILABLE(tvos, watchos, visionos)
 @interface AVCaption : NSObject <NSCopying, NSMutableCopying, NSSecureCoding>
 AV_INIT_UNAVAILABLE
 
@@ -435,7 +433,7 @@ AV_INIT_UNAVAILABLE
 	Mutable subclass of AVCaption.
  */
 NS_SWIFT_NONSENDABLE
-API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, tvos, watchos)
+API_AVAILABLE(macos(12.0), ios(18.0), macCatalyst(15.0)) API_UNAVAILABLE(tvos, watchos, visionos)
 @interface AVMutableCaption : AVCaption
 
 /*!
@@ -469,7 +467,7 @@ typedef NS_ENUM(NSInteger, AVCaptionFontWeight) {
 	AVCaptionFontWeightUnknown = 0,
 	AVCaptionFontWeightNormal = 1,
 	AVCaptionFontWeightBold = 2
-} API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, tvos, watchos);
+} API_AVAILABLE(macos(12.0), ios(18.0), macCatalyst(15.0)) API_UNAVAILABLE(tvos, watchos, visionos);
 
 /*!
  @enum AVCaptionFontStyle
@@ -484,7 +482,7 @@ typedef NS_ENUM(NSInteger, AVCaptionFontStyle) {
 	AVCaptionFontStyleUnknown = 0,
 	AVCaptionFontStyleNormal = 1,
 	AVCaptionFontStyleItalic = 2
-} API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, tvos, watchos);
+} API_AVAILABLE(macos(12.0), ios(18.0), macCatalyst(15.0)) API_UNAVAILABLE(tvos, watchos, visionos);
 
 /*!
  @enum AVCaptionDecoration
@@ -501,7 +499,7 @@ typedef NS_OPTIONS(NSUInteger, AVCaptionDecoration) {
 	AVCaptionDecorationUnderline   = 1 << 0,
 	AVCaptionDecorationLineThrough = 1 << 1,
 	AVCaptionDecorationOverline    = 1 << 2,
-} API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, tvos, watchos);
+} API_AVAILABLE(macos(12.0), ios(18.0), macCatalyst(15.0)) API_UNAVAILABLE(tvos, watchos, visionos);
 
 /*!
  @enum AVCaptionTextCombine
@@ -538,7 +536,7 @@ typedef NS_ENUM(NSInteger, AVCaptionTextCombine) {
 	AVCaptionTextCombineTwoDigits   = 2,
 	AVCaptionTextCombineThreeDigits = 3,
 	AVCaptionTextCombineFourDigits  = 4,
-} API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, tvos, watchos);
+} API_AVAILABLE(macos(12.0), ios(18.0), macCatalyst(15.0)) API_UNAVAILABLE(tvos, watchos, visionos);
 
 /*!
  @enum AVCaptionTextAlignment
@@ -561,7 +559,7 @@ typedef NS_ENUM(NSInteger, AVCaptionTextAlignment) {
 	AVCaptionTextAlignmentCenter    = 2,
 	AVCaptionTextAlignmentLeft      = 3,
 	AVCaptionTextAlignmentRight     = 4,
-} API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, tvos, watchos);
+} API_AVAILABLE(macos(12.0), ios(18.0), macCatalyst(15.0)) API_UNAVAILABLE(tvos, watchos, visionos);
 
 
 @interface AVCaption (Styling)
@@ -839,7 +837,7 @@ typedef NS_ENUM(NSInteger, AVCaptionTextAlignment) {
 typedef NS_ENUM(NSInteger, AVCaptionRubyPosition) {
 	AVCaptionRubyPositionBefore = 0,
 	AVCaptionRubyPositionAfter  = 1,
-} API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, tvos, watchos);
+} API_AVAILABLE(macos(12.0), ios(18.0), macCatalyst(15.0)) API_UNAVAILABLE(tvos, watchos, visionos);
 
 /*!
  @enum AVCaptionRubyAlignment
@@ -871,7 +869,7 @@ typedef NS_ENUM(NSInteger, AVCaptionRubyAlignment) {
 	AVCaptionRubyAlignmentCenter                 = 1,
 	AVCaptionRubyAlignmentDistributeSpaceBetween = 2,
 	AVCaptionRubyAlignmentDistributeSpaceAround  = 3,
-} API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, tvos, watchos);
+} API_AVAILABLE(macos(12.0), ios(18.0), macCatalyst(15.0)) API_UNAVAILABLE(tvos, watchos, visionos);
 
 /*!
  @class AVCaptionRuby
@@ -879,7 +877,7 @@ typedef NS_ENUM(NSInteger, AVCaptionRubyAlignment) {
 	Subclasses of this type that are used from Swift must fulfill the requirements of a Sendable type.
 */
 NS_SWIFT_SENDABLE
-API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, tvos, watchos)
+API_AVAILABLE(macos(12.0), ios(18.0), macCatalyst(15.0)) API_UNAVAILABLE(tvos, watchos, visionos)
 @interface AVCaptionRuby : NSObject <NSCopying, NSSecureCoding>
 AV_INIT_UNAVAILABLE
 
@@ -912,7 +910,7 @@ AV_INIT_UNAVAILABLE
 
 NS_ASSUME_NONNULL_END
 
-#endif // TARGET_OS_OSX
+#endif // ( TARGET_OS_OSX || ( TARGET_OS_IOS && ! TARGET_OS_VISION ) )
 
 #else
 #import <AVFCore/AVCaption.h>

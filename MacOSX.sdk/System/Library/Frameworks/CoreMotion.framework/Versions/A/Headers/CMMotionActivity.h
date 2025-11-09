@@ -47,9 +47,9 @@ typedef NS_ENUM(NSInteger, CMMotionActivityConfidence) {
  *
  */
 #if defined(TARGET_OS_VISION) && TARGET_OS_VISION
-COREMOTION_EXPORT API_AVAILABLE(ios(7.0)) API_UNAVAILABLE(macos, visionos)
+COREMOTION_EXPORT API_AVAILABLE(ios(7.0), macos(15.0)) API_UNAVAILABLE(visionos)
 #else
-COREMOTION_EXPORT API_AVAILABLE(ios(7.0)) API_UNAVAILABLE(macos)
+COREMOTION_EXPORT API_AVAILABLE(ios(7.0), macos(15.0))
 #endif // defined(TARGET_OS_VISION) && TARGET_OS_VISION
 @interface CMMotionActivity : CMLogItem
 

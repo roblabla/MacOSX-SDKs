@@ -63,6 +63,8 @@ The following options are available:
 Sort output by total size of class instances, rather than by count.
 .It Fl z | Fl zones
 Show the output separated out into the different malloc zones, instead of an aggregated summary of all zones.
+.It Fl H | Fl humanReadable
+"Human-readable" output. Use unit suffixes: K, M, G, and T in order to reduce the number of digits to three or less using base 2 for sizes.
 .It Fl guessNonObjects
 Look through the memory contents of each Objective-C object to find pointers to malloc'ed
 blocks (non-objects), such as the variable array hanging from an NSArray.  These referenced
@@ -132,3 +134,5 @@ The Xcode developer tools also include Instruments, a graphical application that
 The Allocations instrument graphically displays dynamic, real-time
 information about the object and memory use in an application, including backtraces of where the allocations
 occurred.  The Leaks instrument performs memory leak analysis.
+.Sh CAVEATS
+All memory sizes are given in binary-prefixed units. For example, "1K" refers to 1024 bytes.

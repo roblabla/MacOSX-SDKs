@@ -99,7 +99,7 @@ API_AVAILABLE(macos(10.11), ios(9.0), tvos(17.0)) API_UNAVAILABLE(watchos)
  * @param delegate An object to use as the connections delegate. This object should conform to the NWTCPConnectionAuthenticationDelegate protocol.
  * @return An NWTCPConnection object.
  */
-- (NWTCPConnection *)createTCPConnectionToEndpoint:(NWEndpoint *)remoteEndpoint enableTLS:(BOOL)enableTLS TLSParameters:(nullable NWTLSParameters *)TLSParameters delegate:(nullable id)delegate API_AVAILABLE(macos(10.11), ios(9.0), tvos(17.0)) API_UNAVAILABLE(watchos);
+- (NWTCPConnection *)createTCPConnectionToEndpoint:(NWEndpoint *)remoteEndpoint enableTLS:(BOOL)enableTLS TLSParameters:(nullable NWTLSParameters *)TLSParameters delegate:(nullable id)delegate API_DEPRECATED("Use nw_connection_t in Network framework instead", macos(10.11, 15.0), ios(9.0, 18.0), tvos(17.0, 18.0), visionos(1.0, 2.0)) API_UNAVAILABLE(watchos);
 
 /*!
  * @method createUDPSessionToEndpoint:fromEndpoint:
@@ -108,7 +108,7 @@ API_AVAILABLE(macos(10.11), ios(9.0), tvos(17.0)) API_UNAVAILABLE(watchos)
  * @param localEndpoint An NWHostEndpoint object that specifies the local IP address endpoint to use as the source endpoint of the UDP session.
  * @return An NWUDPSession object.
  */
-- (NWUDPSession *)createUDPSessionToEndpoint:(NWEndpoint *)remoteEndpoint fromEndpoint:(nullable NWHostEndpoint *)localEndpoint API_AVAILABLE(macos(10.11), ios(9.0), tvos(17.0)) API_UNAVAILABLE(watchos);
+- (NWUDPSession *)createUDPSessionToEndpoint:(NWEndpoint *)remoteEndpoint fromEndpoint:(nullable NWHostEndpoint *)localEndpoint API_DEPRECATED("Use nw_connection_t in Network framework instead", macos(10.11, 15.0), ios(9.0, 18.0), tvos(17.0, 18.0), visionos(1.0, 2.0)) API_UNAVAILABLE(watchos);
 
 /*!
  * @method displayMessage:completionHandler:
@@ -150,7 +150,7 @@ API_AVAILABLE(macos(10.11), ios(9.0), tvos(17.0)) API_UNAVAILABLE(watchos)
  * @property defaultPath
  * @discussion The current default path for connections created by the provider. Use KVO to watch for network changes.
  */
-@property (readonly, nullable) NWPath *defaultPath API_AVAILABLE(macos(10.11), ios(9.0), tvos(17.0)) API_UNAVAILABLE(watchos);
+@property (readonly, nullable) NWPath *defaultPath API_DEPRECATED("Use nw_path_monitor_t in Network framework instead", macos(10.11, 15.0), ios(9.0, 18.0), tvos(17.0, 18.0), visionos(1.0, 2.0)) API_UNAVAILABLE(watchos);
 
 @end
 

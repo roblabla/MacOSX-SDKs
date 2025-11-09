@@ -55,7 +55,7 @@ exports:
                        _DEDKeySeedingSubmissionType, _DEDKeySendActionLabel, _DEDKeyUNShouldPlaySound, 
                        _DEDNotifierUserNotificationActionReview, _DEDNotifierUserNotificationActionSend, 
                        _DEDNotifierUserNotificationCategory, _DEDRequestAdvertiserServiceName, 
-                       _DEDSeedingClientErrorDomain, _DEDSeedingFileClerkFilename, 
+                       _DEDSeedingClientErrorDomain, _DEDSeedingClientFilerURL, _DEDSeedingFileClerkFilename, 
                        _DEDSeedingFilerErrorDomain, _DEDSessionCleanupLog, _DEDSessionStartLog, 
                        _DEDSessionStateLog, _DEDTimeElapsed, _DEDTimeIntervalNotAvailable, 
                        _DEDUnknown, _DiagnosticExtensionsDaemonVersionNumber, _DiagnosticExtensionsDaemonVersionString, 

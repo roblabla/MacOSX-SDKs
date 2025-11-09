@@ -593,7 +593,9 @@
 #define	SYS_mkfifoat       553
 #define	SYS_mknodat        554
 #define	SYS_ungraftdmg     555
-#define	SYS_MAXSYSCALL	556
+#define	SYS_coalition_policy_set 556
+#define	SYS_coalition_policy_get 557
+#define	SYS_MAXSYSCALL	558
 #define	SYS_invalid	63
 
 #endif /* __APPLE_API_PRIVATE */

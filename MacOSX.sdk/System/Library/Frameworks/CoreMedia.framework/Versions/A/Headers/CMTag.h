@@ -36,7 +36,7 @@ typedef CF_ENUM(OSStatus, CMTagError)
 {
 	kCMTagError_ParamErr = -15730,
 	kCMTagError_AllocationFailed = -15731,
-} CF_SWIFT_UNAVAILABLE("Unavailable in Swift") API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0));
+} CF_SWIFT_UNAVAILABLE("Unavailable in Swift") API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0), visionos(1.0));
 
 #pragma mark - CMTagCategory enums
 
@@ -69,7 +69,7 @@ typedef CF_ENUM(FourCharCode, CMTagCategory)
 	kCMTagCategory_ProjectionType 					= 'proj',
 	kCMTagCategory_StereoView 					= 'eyes',
 	kCMTagCategory_StereoViewInterpretation 	= 'eyip',
-} CF_REFINED_FOR_SWIFT API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0));
+} CF_REFINED_FOR_SWIFT API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0), visionos(1.0));
 
 #pragma mark - CMTagDataType enums
 
@@ -88,7 +88,7 @@ typedef CF_ENUM( uint32_t, CMTagDataType ) {
 	kCMTagDataType_Float64 						= 3,
 	kCMTagDataType_OSType 						= 5,
 	kCMTagDataType_Flags 						= 7,
-} CF_REFINED_FOR_SWIFT API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0));
+} CF_REFINED_FOR_SWIFT API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0), visionos(1.0));
 
 #pragma mark - CMTagValue
 
@@ -97,7 +97,7 @@ typedef CF_ENUM( uint32_t, CMTagDataType ) {
 	@abstract	64-bit value interpreted within the context of the CMTagCategory.
 	@discussion	The 64-bit value can be one of several data types fitting within that range and holding a category-specific value. Data types include numeric and non-numeric types. Examples of numeric include a signed 64-bit integer and a 64-bit floating point value. Non-numeric types include a single OSType and an OSType pair. The value may hold values including discrete values, bit flags, enums representable as a signed 64-bit integer or float and values encoding any of these.
 */
-typedef uint64_t CMTagValue CF_REFINED_FOR_SWIFT API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0));
+typedef uint64_t CMTagValue CF_REFINED_FOR_SWIFT API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0), visionos(1.0));
 
 #pragma mark - CMTag
 
@@ -113,8 +113,8 @@ struct CMTag {
 	CMTagCategory category;
 	CMTagDataType dataType;
 	CMTagValue value;
-} CF_REFINED_FOR_SWIFT API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0));
-typedef struct CMTag CMTag CF_REFINED_FOR_SWIFT API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0));
+} CF_REFINED_FOR_SWIFT API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0), visionos(1.0));
+typedef struct CMTag CMTag CF_REFINED_FOR_SWIFT API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0), visionos(1.0));
 
 #pragma mark - CMTag data type and value accessors
 
@@ -124,7 +124,7 @@ typedef struct CMTag CMTag CF_REFINED_FOR_SWIFT API_AVAILABLE(macos(14.0), ios(1
 	@param tag The CMTag to evaluate.
 	@result		Returns false if the tag's dataType is kCMTagDataType_Invalid, true otherwise.
 */
-CM_INLINE Boolean CMTagIsValid( CMTag tag ) CF_REFINED_FOR_SWIFT API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0));
+CM_INLINE Boolean CMTagIsValid( CMTag tag ) CF_REFINED_FOR_SWIFT API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0), visionos(1.0));
 
 /*!
 	@function	CMTagGetValueDataType
@@ -132,7 +132,7 @@ CM_INLINE Boolean CMTagIsValid( CMTag tag ) CF_REFINED_FOR_SWIFT API_AVAILABLE(m
 	@param tag CMTag from which to extract the data type.
 	@result		kCMTagDataType_* value.
 */
-CM_EXPORT CMTagDataType CMTagGetValueDataType( CMTag tag ) CF_REFINED_FOR_SWIFT API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0));
+CM_EXPORT CMTagDataType CMTagGetValueDataType( CMTag tag ) CF_REFINED_FOR_SWIFT API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0), visionos(1.0));
 
 #pragma mark - CMTag constants
 
@@ -140,7 +140,7 @@ CM_EXPORT CMTagDataType CMTagGetValueDataType( CMTag tag ) CF_REFINED_FOR_SWIFT 
 	@constant   kCMTagInvalid
 	@abstract	CMTag with an unspecified or "null" value.
  */
-CM_EXPORT const CMTag kCMTagInvalid CF_REFINED_FOR_SWIFT API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0));
+CM_EXPORT const CMTag kCMTagInvalid CF_REFINED_FOR_SWIFT API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0), visionos(1.0));
 
 #pragma mark - MediaType convenience tags
 
@@ -148,25 +148,25 @@ CM_EXPORT const CMTag kCMTagInvalid CF_REFINED_FOR_SWIFT API_AVAILABLE(macos(14.
 	@constant kCMTagMediaTypeVideo
 	@abstract A CMTag of category kCMTagCategory_MediaType and the value kCMMediaType_Video (OSType).
  */
-CM_EXPORT const CMTag kCMTagMediaTypeVideo CF_REFINED_FOR_SWIFT API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0));
+CM_EXPORT const CMTag kCMTagMediaTypeVideo CF_REFINED_FOR_SWIFT API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0), visionos(1.0));
 
 /*!
 	@constant kCMTagMediaSubTypeMebx
 	@abstract A CMTag of category kCMTagCategory_MediaType and the value kCMMetadataFormatType_Boxed (OSType).
  */
-CM_EXPORT const CMTag kCMTagMediaSubTypeMebx CF_REFINED_FOR_SWIFT API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0));
+CM_EXPORT const CMTag kCMTagMediaSubTypeMebx CF_REFINED_FOR_SWIFT API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0), visionos(1.0));
 
 /*!
 	@constant kCMTagMediaTypeAudio
 	@abstract A CMTag of category kCMTagCategory_MediaType and the value kCMMediaType_Audio (OSType).
  */
-CM_EXPORT const CMTag kCMTagMediaTypeAudio CF_REFINED_FOR_SWIFT API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0));
+CM_EXPORT const CMTag kCMTagMediaTypeAudio CF_REFINED_FOR_SWIFT API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0), visionos(1.0));
 
 /*!
 	@constant kCMTagMediaTypeMetadata
 	@abstract A CMTag of category kCMTagCategory_MediaType and the value kCMMediaType_Metadata (OSType).
  */
-CM_EXPORT const CMTag kCMTagMediaTypeMetadata CF_REFINED_FOR_SWIFT API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0));
+CM_EXPORT const CMTag kCMTagMediaTypeMetadata CF_REFINED_FOR_SWIFT API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0), visionos(1.0));
 
 #pragma mark - StereoView data types and convenience tags
 
@@ -186,31 +186,31 @@ typedef CF_OPTIONS(uint64_t, CMStereoViewComponents)
 	kCMStereoView_None          = 0,
 	kCMStereoView_LeftEye 		= 1UL << 0,
 	kCMStereoView_RightEye 		= 1UL << 1
-} API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0));
+} API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0), visionos(1.0));
 
 /*!
 	@constant kCMTagStereoLeftEye
 	@abstract A CMTag of category kCMTagCategory_StereoView and the value kCMTagStereoViewComponent_LeftEye (Flags).
  */
-CM_EXPORT const CMTag kCMTagStereoLeftEye CF_REFINED_FOR_SWIFT API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0));
+CM_EXPORT const CMTag kCMTagStereoLeftEye CF_REFINED_FOR_SWIFT API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0), visionos(1.0));
 
 /*!
 	@constant kCMTagStereoRightEye
 	@abstract A CMTag of category kCMTagCategory_StereoView and the value kCMTagStereoViewComponent_RightEye (Flags).
  */
-CM_EXPORT const CMTag kCMTagStereoRightEye CF_REFINED_FOR_SWIFT API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0));
+CM_EXPORT const CMTag kCMTagStereoRightEye CF_REFINED_FOR_SWIFT API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0), visionos(1.0));
 
 /*!
 	@constant kCMTagStereoLeftAndRightEye
 	@abstract A CMTag of category kCMTagCategory_StereoView and the value of the bitwise OR of kCMTagStereoViewComponent_LeftEye and kCMTagStereoViewComponent_RightEye (Flags).
  */
-CM_EXPORT const CMTag kCMTagStereoLeftAndRightEye CF_REFINED_FOR_SWIFT API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0));
+CM_EXPORT const CMTag kCMTagStereoLeftAndRightEye CF_REFINED_FOR_SWIFT API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0), visionos(1.0));
 
 /*!
 	@constant kCMTagStereoNone
 	@abstract A CMTag of category kCMTagCategory_StereoView and the value of kCMTagStereoViewComponent_None. (Flags)
  */
-CM_EXPORT const CMTag kCMTagStereoNone CF_REFINED_FOR_SWIFT API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0));
+CM_EXPORT const CMTag kCMTagStereoNone CF_REFINED_FOR_SWIFT API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0), visionos(1.0));
 
 #pragma mark - StereoViewInterpretation data types and convenience tags
 
@@ -226,13 +226,13 @@ typedef CF_OPTIONS(uint64_t, CMStereoViewInterpretationOptions)
 	kCMStereoViewInterpretation_Default      			= 0,
 	kCMStereoViewInterpretation_StereoOrderReversed 	= 1UL << 0,
 	kCMStereoViewInterpretation_AdditionalViews 		= 1UL << 1
-} API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0));
+} API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0), visionos(1.0));
 
 /*!
 	@constant kCMTagStereoInterpretationOrderReversed
 	@abstract A CMTag of category kCMTagCategory_StereoViewInterpretation and the value of kCMStereoViewInterpretation_StereoOrderReversed (Flags).
  */
-CM_EXPORT const CMTag kCMTagStereoInterpretationOrderReversed CF_REFINED_FOR_SWIFT API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0));
+CM_EXPORT const CMTag kCMTagStereoInterpretationOrderReversed CF_REFINED_FOR_SWIFT API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0), visionos(1.0));
 
 #pragma mark - ProjectionType data types and convenience tags
 
@@ -250,25 +250,32 @@ typedef CF_ENUM(uint64_t, CMProjectionType)
 	kCMProjectionType_Equirectangular 		= 'equi',
 	kCMProjectionType_HalfEquirectangular 	= 'hequ',
 	kCMProjectionType_Fisheye 				= 'fish',
-} API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0));
+} API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0), visionos(1.0));
 
 /*!
 	@constant kCMTagProjectionTypeRectangular
 	@abstract A CMTag of category kCMTagCategory_ProjectionType and the value kCMTagProjectionType_Rectangular (OSType).
  */
-CM_EXPORT const CMTag kCMTagProjectionTypeRectangular CF_REFINED_FOR_SWIFT API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0));
+CM_EXPORT const CMTag kCMTagProjectionTypeRectangular CF_REFINED_FOR_SWIFT API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0), visionos(1.0));
 
 /*!
 	@constant kCMTagProjectionTypeEquirectangular
 	@abstract A CMTag of category kCMTagCategory_ProjectionType and the value kCMTagProjectionType_Equirectangular (OSType).
  */
-CM_EXPORT const CMTag kCMTagProjectionTypeEquirectangular CF_REFINED_FOR_SWIFT API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0));
+CM_EXPORT const CMTag kCMTagProjectionTypeEquirectangular CF_REFINED_FOR_SWIFT API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0), visionos(1.0));
+
+/*!
+	@constant kCMTagProjectionTypeHalfEquirectangular
+	@abstract A CMTag of category kCMTagCategory_ProjectionType and the value kCMProjectionType_HalfEquirectangular (OSType).
+ */
+CM_EXPORT const CMTag kCMTagProjectionTypeHalfEquirectangular
+	API_AVAILABLE(macos(15.0), ios(18.0), tvos(18.0), watchos(11.0), visionos(2.0));
 
 /*!
 	@constant kCMTagProjectionTypeFisheye
 	@abstract A CMTag of category kCMTagCategory_ProjectionType and the value kCMTagProjectionType_Fisheye (OSType).
  */
-CM_EXPORT const CMTag kCMTagProjectionTypeFisheye CF_REFINED_FOR_SWIFT API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0));
+CM_EXPORT const CMTag kCMTagProjectionTypeFisheye CF_REFINED_FOR_SWIFT API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0), visionos(1.0));
 
 #pragma mark - PackingType data types and convenience tags
 
@@ -284,25 +291,25 @@ typedef CF_ENUM(uint64_t, CMPackingType)
 	kCMPackingType_None 			= 'none',
 	kCMPackingType_SideBySide 	= 'side',
 	kCMPackingType_OverUnder 	= 'over',
-} API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0));
+} API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0), visionos(1.0));
 
 /*!
 	@constant kCMTagPackingTypeNone
 	@abstract A CMTag of category kCMTagCategory_PackingType and the value kCMTagPackingType_None (OStype).
  */
-CM_EXPORT const CMTag kCMTagPackingTypeNone CF_REFINED_FOR_SWIFT API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0));
+CM_EXPORT const CMTag kCMTagPackingTypeNone CF_REFINED_FOR_SWIFT API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0), visionos(1.0));
 
 /*!
 	@constant kCMTagPackingTypeSideBySide
 	@abstract A CMTag of category kCMTagCategory_PackingType and the value kCMTagPackingType_SideBySide (OStype).
  */
-CM_EXPORT const CMTag kCMTagPackingTypeSideBySide CF_REFINED_FOR_SWIFT API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0));
+CM_EXPORT const CMTag kCMTagPackingTypeSideBySide CF_REFINED_FOR_SWIFT API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0), visionos(1.0));
 
 /*!
 	@constant kCMTagPackingTypeOverUnder
 	@abstract A CMTag of category kCMTagCategory_PackingType and the value kCMTagPackingType_OverUnder (OStype).
  */
-CM_EXPORT const CMTag kCMTagPackingTypeOverUnder CF_REFINED_FOR_SWIFT API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0));
+CM_EXPORT const CMTag kCMTagPackingTypeOverUnder CF_REFINED_FOR_SWIFT API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0), visionos(1.0));
 
 #pragma mark - CMTag accessors and creation
 
@@ -312,7 +319,7 @@ CM_EXPORT const CMTag kCMTagPackingTypeOverUnder CF_REFINED_FOR_SWIFT API_AVAILA
 	@param tag CMTag to access.
 	@result		CMTagCategory of the tag.
 */
-CM_INLINE CMTagCategory CMTagGetCategory( CMTag tag ) CF_REFINED_FOR_SWIFT API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0));
+CM_INLINE CMTagCategory CMTagGetCategory( CMTag tag ) CF_REFINED_FOR_SWIFT API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0), visionos(1.0));
 
 /*!
 	@function	CMTagCategoryEqualToTagCategory
@@ -322,7 +329,7 @@ CM_INLINE CMTagCategory CMTagGetCategory( CMTag tag ) CF_REFINED_FOR_SWIFT API_A
 	@param 		tag2 Second CMTag to test.
 	@result		Boolean indicating if the tag categories are equal.
 */
-CM_INLINE Boolean CMTagCategoryEqualToTagCategory( CMTag tag1, CMTag tag2 ) CF_SWIFT_UNAVAILABLE("Unavailable in Swift") API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0));
+CM_INLINE Boolean CMTagCategoryEqualToTagCategory( CMTag tag1, CMTag tag2 ) CF_SWIFT_UNAVAILABLE("Unavailable in Swift") API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0), visionos(1.0));
 
 /*!
 	@function	CMTagGetValue
@@ -331,7 +338,7 @@ CM_INLINE Boolean CMTagCategoryEqualToTagCategory( CMTag tag1, CMTag tag2 ) CF_S
 	@param		tag CMTag to access.
 	@result		CMTagValue of the tag.
 */
-CM_INLINE CMTagValue CMTagGetValue( CMTag tag ) CF_REFINED_FOR_SWIFT API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0));
+CM_INLINE CMTagValue CMTagGetValue( CMTag tag ) CF_REFINED_FOR_SWIFT API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0), visionos(1.0));
 
 /*!
 	@function	CMTagHasCategory
@@ -340,7 +347,7 @@ CM_INLINE CMTagValue CMTagGetValue( CMTag tag ) CF_REFINED_FOR_SWIFT API_AVAILAB
 	@param category CMTagCategory to check for.
 	@result		CMTagCategory of the tag.
 */
-CM_INLINE Boolean CMTagHasCategory( CMTag tag, CMTagCategory category ) CF_SWIFT_UNAVAILABLE("Unavailable in Swift") API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0));
+CM_INLINE Boolean CMTagHasCategory( CMTag tag, CMTagCategory category ) CF_SWIFT_UNAVAILABLE("Unavailable in Swift") API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0), visionos(1.0));
 
 /*!
 	@function	CMTagHasSInt64Value
@@ -348,7 +355,7 @@ CM_INLINE Boolean CMTagHasCategory( CMTag tag, CMTagCategory category ) CF_SWIFT
 	@param tag CMTag to evaluate.
 	@result	Returns true if the CMTag carries a signed 64-bit value indicated by a data type of kCMTagDataType_SInt64, false otherwise.
 */
-CM_EXPORT Boolean CMTagHasSInt64Value( CMTag tag ) CF_SWIFT_UNAVAILABLE("Unavailable in Swift") API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0));
+CM_EXPORT Boolean CMTagHasSInt64Value( CMTag tag ) CF_SWIFT_UNAVAILABLE("Unavailable in Swift") API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0), visionos(1.0));
 
 /*!
 	@function	CMTagGetSInt64Value
@@ -357,7 +364,7 @@ CM_EXPORT Boolean CMTagHasSInt64Value( CMTag tag ) CF_SWIFT_UNAVAILABLE("Unavail
 	@param tag CMTag to evaluate.
 	@result	Signed 64-bit integer.
 */
-CM_EXPORT int64_t CMTagGetSInt64Value( CMTag tag ) CF_REFINED_FOR_SWIFT API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0));
+CM_EXPORT int64_t CMTagGetSInt64Value( CMTag tag ) CF_REFINED_FOR_SWIFT API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0), visionos(1.0));
 
 /*!
 	@function	CMTagHasFloat64Value
@@ -365,7 +372,7 @@ CM_EXPORT int64_t CMTagGetSInt64Value( CMTag tag ) CF_REFINED_FOR_SWIFT API_AVAI
 	@param tag CMTag to evaluate.
 	@result	Returns true if the CMTag carries a 64-bit float indicated by a data type of kCMTagDataType_Float64, false otherwise.
 */
-CM_EXPORT Boolean CMTagHasFloat64Value( CMTag tag ) CF_SWIFT_UNAVAILABLE("Unavailable in Swift") API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0));
+CM_EXPORT Boolean CMTagHasFloat64Value( CMTag tag ) CF_SWIFT_UNAVAILABLE("Unavailable in Swift") API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0), visionos(1.0));
 
 /*!
 	@function	CMTagGetFloat64Value
@@ -374,7 +381,7 @@ CM_EXPORT Boolean CMTagHasFloat64Value( CMTag tag ) CF_SWIFT_UNAVAILABLE("Unavai
 	@param tag CMTag to evaluate.
 	@result	64-bit float.
 */
-CM_EXPORT Float64 CMTagGetFloat64Value( CMTag tag ) CF_REFINED_FOR_SWIFT API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0));
+CM_EXPORT Float64 CMTagGetFloat64Value( CMTag tag ) CF_REFINED_FOR_SWIFT API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0), visionos(1.0));
 
 /*!
 	@function	CMTagHasOSTypeValue
@@ -382,7 +389,7 @@ CM_EXPORT Float64 CMTagGetFloat64Value( CMTag tag ) CF_REFINED_FOR_SWIFT API_AVA
 	@param tag CMTag to evaluate.
 	@result	Returns true if the CMTag carries an OSType indicated by a data type of kCMTagDataType_OSType, false otherwise.
 */
-CM_EXPORT Boolean CMTagHasOSTypeValue( CMTag tag ) CF_SWIFT_UNAVAILABLE("Unavailable in Swift") API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0));
+CM_EXPORT Boolean CMTagHasOSTypeValue( CMTag tag ) CF_SWIFT_UNAVAILABLE("Unavailable in Swift") API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0), visionos(1.0));
 
 /*!
 	@function	CMTagGetOSTypeValue
@@ -391,7 +398,7 @@ CM_EXPORT Boolean CMTagHasOSTypeValue( CMTag tag ) CF_SWIFT_UNAVAILABLE("Unavail
 	@param tag CMTag to evaluate.
 	@result	OSType.
 */
-CM_EXPORT OSType CMTagGetOSTypeValue( CMTag tag ) CF_REFINED_FOR_SWIFT API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0));
+CM_EXPORT OSType CMTagGetOSTypeValue( CMTag tag ) CF_REFINED_FOR_SWIFT API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0), visionos(1.0));
 
 /*!
 	@function	CMTagHasFlagsValue
@@ -399,7 +406,7 @@ CM_EXPORT OSType CMTagGetOSTypeValue( CMTag tag ) CF_REFINED_FOR_SWIFT API_AVAIL
 	@param tag CMTag to evaluate.
 	@result	Returns true if the CMTag carries 64 bits of flags indicated by a data type of kCMTagDataType_Flags, false otherwise.
 */
-CM_EXPORT Boolean CMTagHasFlagsValue( CMTag tag ) CF_SWIFT_UNAVAILABLE("Unavailable in Swift") API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0));
+CM_EXPORT Boolean CMTagHasFlagsValue( CMTag tag ) CF_SWIFT_UNAVAILABLE("Unavailable in Swift") API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0), visionos(1.0));
 
 /*!
 	@function	CMTagGetFlagsValue
@@ -408,7 +415,7 @@ CM_EXPORT Boolean CMTagHasFlagsValue( CMTag tag ) CF_SWIFT_UNAVAILABLE("Unavaila
 	@param tag CMTag to evaluate.
 	@result	Unsigned 64-bit integer holding the flags value.
 */
-CM_EXPORT uint64_t CMTagGetFlagsValue( CMTag tag ) CF_REFINED_FOR_SWIFT API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0));
+CM_EXPORT uint64_t CMTagGetFlagsValue( CMTag tag ) CF_REFINED_FOR_SWIFT API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0), visionos(1.0));
 
 #pragma mark - CMTag creation functions
 
@@ -420,7 +427,7 @@ CM_EXPORT uint64_t CMTagGetFlagsValue( CMTag tag ) CF_REFINED_FOR_SWIFT API_AVAI
 	@param value A signed 64-bit integer to encode in the returned CMTag.
 	@result A CMTag.
 */
-CM_EXPORT CMTag CMTagMakeWithSInt64Value( CMTagCategory category, int64_t value ) CF_REFINED_FOR_SWIFT API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0));
+CM_EXPORT CMTag CMTagMakeWithSInt64Value( CMTagCategory category, int64_t value ) CF_REFINED_FOR_SWIFT API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0), visionos(1.0));
 
 /*!
 	@function	CMTagMakeWithFloat64Value
@@ -430,7 +437,7 @@ CM_EXPORT CMTag CMTagMakeWithSInt64Value( CMTagCategory category, int64_t value 
 	@param value A 64-bit float to encode in the returned CMTag.
 	@result A CMTag.
 */
-CM_EXPORT CMTag CMTagMakeWithFloat64Value( CMTagCategory category, Float64 value ) CF_REFINED_FOR_SWIFT API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0));
+CM_EXPORT CMTag CMTagMakeWithFloat64Value( CMTagCategory category, Float64 value ) CF_REFINED_FOR_SWIFT API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0), visionos(1.0));
 
 /*!
 	@function	CMTagMakeWithOSTypeValue
@@ -440,7 +447,7 @@ CM_EXPORT CMTag CMTagMakeWithFloat64Value( CMTagCategory category, Float64 value
 	@param value An OSType to encode in the returned CMTag.
 	@result A CMTag.
 */
-CM_EXPORT CMTag CMTagMakeWithOSTypeValue( CMTagCategory category, OSType value ) CF_REFINED_FOR_SWIFT API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0));
+CM_EXPORT CMTag CMTagMakeWithOSTypeValue( CMTagCategory category, OSType value ) CF_REFINED_FOR_SWIFT API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0), visionos(1.0));
 
 
 /*!
@@ -451,7 +458,7 @@ CM_EXPORT CMTag CMTagMakeWithOSTypeValue( CMTagCategory category, OSType value )
 	@param flagsForTag An unsigned 64-bit integer to encode in the returned CMTag.
 	@result A CMTag.
 */
-CM_EXPORT CMTag CMTagMakeWithFlagsValue( CMTagCategory category, uint64_t flagsForTag ) CF_REFINED_FOR_SWIFT API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0));
+CM_EXPORT CMTag CMTagMakeWithFlagsValue( CMTagCategory category, uint64_t flagsForTag ) CF_REFINED_FOR_SWIFT API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0), visionos(1.0));
 
 #pragma mark - CMTag equality
 
@@ -467,7 +474,7 @@ CM_EXPORT CMTag CMTagMakeWithFlagsValue( CMTagCategory category, uint64_t flagsF
 	@param tag2 Second CMTag to test for equality.
 	@result		Returns true if the two tags are equal, false otherwise.
 */
-CM_EXPORT Boolean CMTagEqualToTag( CMTag tag1, CMTag tag2 ) CF_REFINED_FOR_SWIFT API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0));
+CM_EXPORT Boolean CMTagEqualToTag( CMTag tag1, CMTag tag2 ) CF_REFINED_FOR_SWIFT API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0), visionos(1.0));
 
 /*!
 	@function	CMTagCompare
@@ -477,7 +484,7 @@ CM_EXPORT Boolean CMTagEqualToTag( CMTag tag1, CMTag tag2 ) CF_REFINED_FOR_SWIFT
 	@param tag2 Second CMTag to compare in ordered fashion.
 	@result		The CFComparisonResult indicating the order of tag1 compared to tag2.
 */
-CM_EXPORT CFComparisonResult CMTagCompare( CMTag tag1, CMTag tag2 ) CF_SWIFT_UNAVAILABLE("Unavailable in Swift") API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0));
+CM_EXPORT CFComparisonResult CMTagCompare( CMTag tag1, CMTag tag2 ) CF_SWIFT_UNAVAILABLE("Unavailable in Swift") API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0), visionos(1.0));
 
 /*!
 	@function	CMTagCategoryValueEqualToValue
@@ -487,7 +494,7 @@ CM_EXPORT CFComparisonResult CMTagCompare( CMTag tag1, CMTag tag2 ) CF_SWIFT_UNA
 	@param tag2 Second CMTag to test for equality.
 	@result		Boolean indicating if the tag values are equal.
 */
-CM_INLINE Boolean CMTagCategoryValueEqualToValue( CMTag tag1, CMTag tag2 ) CF_SWIFT_UNAVAILABLE("Unavailable in Swift") API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0));
+CM_INLINE Boolean CMTagCategoryValueEqualToValue( CMTag tag1, CMTag tag2 ) CF_SWIFT_UNAVAILABLE("Unavailable in Swift") API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0), visionos(1.0));
 
 /*!
 	@function	CMTagHash
@@ -495,7 +502,7 @@ CM_INLINE Boolean CMTagCategoryValueEqualToValue( CMTag tag1, CMTag tag2 ) CF_SW
 	@param tag CMTag to hash.
 	@result		The created CFHashCode.
 */
-CM_EXPORT CFHashCode CMTagHash( CMTag tag) CF_SWIFT_UNAVAILABLE("Unavailable in Swift") API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0));
+CM_EXPORT CFHashCode CMTagHash( CMTag tag) CF_SWIFT_UNAVAILABLE("Unavailable in Swift") API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0), visionos(1.0));
 
 /*!
 	@function	CMTagCopyDescription
@@ -508,7 +515,7 @@ CM_EXPORT CFHashCode CMTagHash( CMTag tag) CF_SWIFT_UNAVAILABLE("Unavailable in 
 CM_EXPORT CFStringRef CM_NULLABLE CMTagCopyDescription(
 	CFAllocatorRef CM_NULLABLE allocator,
 	CMTag tag ) CF_REFINED_FOR_SWIFT
-API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0));
+API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0), visionos(1.0));
 
 #pragma mark - CMTag serialization
 
@@ -523,7 +530,7 @@ API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0));
 CM_EXPORT CFDictionaryRef CM_NULLABLE CMTagCopyAsDictionary(
 				CMTag tag,
 				CFAllocatorRef CM_NULLABLE  allocator) CF_SWIFT_UNAVAILABLE("Unavailable in Swift")
-				API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0));
+				API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0), visionos(1.0));
 /*!
 	@function	CMTagMakeFromDictionary
 	@abstract   Reconstitutes a CMTag struct from a CFDictionary previously created by CMTagCopyAsDictionary.
@@ -533,7 +540,7 @@ CM_EXPORT CFDictionaryRef CM_NULLABLE CMTagCopyAsDictionary(
 */
 CM_EXPORT CMTag CMTagMakeFromDictionary(
 				CFDictionaryRef CM_NONNULL dict) CF_SWIFT_UNAVAILABLE("Unavailable in Swift")
-				API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0));
+				API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0), visionos(1.0));
 
 #pragma mark - Tag Dictionary Keys
 
@@ -541,19 +548,19 @@ CM_EXPORT CMTag CMTagMakeFromDictionary(
 	@constant kCMTagValueKey
 	@discussion CFDictionary key for value field of a CMTag.
 */
-CM_EXPORT const CFStringRef kCMTagValueKey CF_SWIFT_UNAVAILABLE("Unavailable in Swift") API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0));
+CM_EXPORT const CFStringRef kCMTagValueKey CF_SWIFT_UNAVAILABLE("Unavailable in Swift") API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0), visionos(1.0));
 
 /*!
 	@constant kCMTagCategoryKey
 	@discussion CFDictionary key for category field of a CMTag.
 */
-CM_EXPORT const CFStringRef kCMTagCategoryKey CF_SWIFT_UNAVAILABLE("Unavailable in Swift") API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0));
+CM_EXPORT const CFStringRef kCMTagCategoryKey CF_SWIFT_UNAVAILABLE("Unavailable in Swift") API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0), visionos(1.0));
 
 /*!
 	@constant kCMTagDataTypeKey
 	@discussion CFDictionary key for dataType field of a CMTag.
 */
-CM_EXPORT const CFStringRef kCMTagDataTypeKey CF_SWIFT_UNAVAILABLE("Unavailable in Swift") API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0));
+CM_EXPORT const CFStringRef kCMTagDataTypeKey CF_SWIFT_UNAVAILABLE("Unavailable in Swift") API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0), visionos(1.0));
 
 #pragma mark - CMTag Inline Routine Definitions
 

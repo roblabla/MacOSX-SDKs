@@ -111,6 +111,7 @@ API_AVAILABLE(macos(10.15), ios(10.0), macCatalyst(14.0), tvos(17.0)) API_UNAVAI
         - For auto exposure brackets, exposureTargetBias value must be within the source device's minExposureTargetBias and maxExposureTargetBias values.
     Deferred Photo Delivery rules:
      - If the receiver's autoDeferredPhotoDeliveryEnabled is YES, your delegate must respond to -captureOutput:didFinishCapturingDeferredPhotoProxy:error:.
+     - The maxPhotoDimensions setting for 24MP (5712, 4284), when supported, is only serviced as 24MP via deferred photo delivery.
     Color space rules:
         - Photo capture is not supported when AVCaptureDevice has selected AVCaptureColorSpace_AppleLog as color space.
 */
@@ -168,6 +169,15 @@ API_AVAILABLE(macos(10.15), ios(10.0), macCatalyst(14.0), tvos(17.0)) API_UNAVAI
  */
 @property(nonatomic, readonly) NSArray<AVVideoCodecType> *availablePhotoCodecTypes;
 
+/*!
+ @property availableRawPhotoCodecTypes
+ @abstract
+    An array of available AVVideoCodecType values that may be used for the raw photo.
+
+ @discussion
+    Not all codecs can be used for all rawPixelFormatType values and this call will show all of the possible codecs available. To check if a codec is available for a specific rawPixelFormatType and rawFileType, one should use supportedRawPhotoCodecTypesForRawPhotoPixelFormatType:fileType:.
+ */
+@property(nonatomic, readonly) NSArray<AVVideoCodecType> *availableRawPhotoCodecTypes API_AVAILABLE(ios(18.0), macCatalyst(18.0), tvos(18.0)) API_UNAVAILABLE(macos, visionos) API_UNAVAILABLE(watchos);
 /*!
  @property appleProRAWSupported
  @abstract
@@ -272,6 +282,22 @@ API_AVAILABLE(macos(10.15), ios(10.0), macCatalyst(14.0), tvos(17.0)) API_UNAVAI
  */
 - (NSArray<AVVideoCodecType> *)supportedPhotoCodecTypesForFileType:(AVFileType)fileType API_AVAILABLE(ios(11.0), macCatalyst(14.0), tvos(17.0)) API_UNAVAILABLE(visionos);
 
+/*!
+ @method supportedRawPhotoCodecTypesForRawPhotoPixelFormatType:fileType:
+ @abstract
+    An array of AVVideoCodecType values that are currently supported by the receiver for a particular file container and raw pixel format.
+
+ @param pixelFormatType
+    A Bayer RAW or Apple ProRAW pixel format OSType (defined in CVPixelBuffer.h).
+ @param fileType
+    The AVFileType container type intended for storage of a photo which can be retrieved from -availableRawPhotoFileTypes.
+ @result
+    An array of AVVideoCodecType values supported by the receiver for the file type and and raw pixel format in question.
+
+ @discussion
+    If you wish to capture a raw photo for storage using a Bayer RAW or Apple ProRAW pixel format and to be stored in a file container, such as DNG, you must ensure that the codec type you request is valid for that file and pixel format type. If no RAW codec types are supported for a given file type and/or pixel format type, an empty array is returned. If you have not yet added your receiver to an AVCaptureSession with a video source, an empty array is returned.
+ */
+- (NSArray<AVVideoCodecType> *)supportedRawPhotoCodecTypesForRawPhotoPixelFormatType:(OSType)pixelFormatType fileType:(AVFileType)fileType API_AVAILABLE(ios(18.0), macCatalyst(18.0), tvos(18.0)) API_UNAVAILABLE(macos, visionos) API_UNAVAILABLE(watchos);
 /*!
  @method supportedRawPhotoPixelFormatTypesForFileType:
  @abstract
@@ -508,10 +534,11 @@ typedef NS_ENUM(NSInteger, AVCapturePhotoQualityPrioritization) {
 /*!
  @property maxPhotoDimensions
  @abstract
-	Indicates the maximum resolution of the requested photo.
+    Indicates the maximum resolution of the requested photo.
  
  @discussion
-	Set this property to enable requesting of images up to as large as the specified dimensions. Images returned by AVCapturePhotoOutput may be smaller than these dimensions but will never be larger. Once set, images can be requested with any valid maximum photo dimensions by setting AVCapturePhotoSettings.maxPhotoDimensions on a per photo basis. The dimensions set must match one of the dimensions returned by AVCaptureDeviceFormat.supportedMaxPhotoDimensions for the current active format. Changing this property may trigger a lengthy reconfiguration of the capture render pipeline so it is recommended that this is set before calling -[AVCaptureSession startRunning].
+    Set this property to enable requesting of images up to as large as the specified dimensions. Images returned by AVCapturePhotoOutput may be smaller than these dimensions but will never be larger. Once set, images can be requested with any valid maximum photo dimensions by setting AVCapturePhotoSettings.maxPhotoDimensions on a per photo basis. The dimensions set must match one of the dimensions returned by AVCaptureDeviceFormat.supportedMaxPhotoDimensions for the current active format. Changing this property may trigger a lengthy reconfiguration of the capture render pipeline so it is recommended that this is set before calling -[AVCaptureSession startRunning].
+    Note: When supported, the 24MP setting (5712, 4284) is only serviced as 24MP when opted-in to autoDeferredPhotoDeliveryEnabled.
  */
 @property(nonatomic) CMVideoDimensions maxPhotoDimensions API_AVAILABLE(ios(16.0), macos(13.0), macCatalyst(16.0), tvos(17.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(watchos);
 
@@ -722,6 +749,44 @@ typedef NS_ENUM(NSInteger, AVCapturePhotoOutputCaptureReadiness) {
     This property can be key-value observed to enable and disable shutter button UI depending on whether the output is ready to capture, which is especially important when the responsiveCaptureEnabled property is YES. When interacting with AVCapturePhotoOutput on a background queue AVCapturePhotoOutputReadinessCoordinator should instead be used to observe readiness changes and perform UI updates. Capturing only when the output is ready limits the number of requests inflight to minimize shutter lag while maintaining the fastest shot to shot time. When the property returns a value other than Ready the output is not ready to capture and the shutter button should be disabled to prevent the user from initiating new requests. The output continues to accept requests when the captureReadiness property returns a value other than Ready, but the request may not be serviced for a longer period. The visual presentation of the shutter button can be customized based on the readiness value. When the user rapidly taps the shutter button the property may transition to NotReadyMomentarily for a brief period. Although the shutter button should be disabled during this period it is short lived enough that dimming or changing the appearance of the shutter is not recommended as it would be visually distracting to the user. Longer running capture types like flash or captures with AVCapturePhotoQualityPrioritizationQuality may prevent the output from capturing for an extended period, indicated by NotReadyWaitingForCapture or NotReadyWaitingForProcessing, which is appropriate to show by dimming or disabling the shutter button. For NotReadyWaitingForProcessing it is also appropriate to show a spinner or other indication that the shutter is busy.
   */
 @property(nonatomic, readonly) AVCapturePhotoOutputCaptureReadiness captureReadiness API_AVAILABLE(ios(17.0), macos(14.0), macCatalyst(17.0), tvos(17.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(watchos);
+
+/*!
+ @property constantColorSupported
+ @abstract
+    A BOOL value specifying whether constant color capture is supported.
+ 
+ @discussion
+    An object's color in a photograph is affected by the light sources illuminating the scene, so the color of the same object photographed in warm light might look markedly different than in colder light. In some use cases, such ambient light induced color variation is undesirable, and the user may prefer an estimate of what these materials would look like under a standard light such as daylight (D65), regardless of the lighting conditions at the time the photograph was taken. Some devices are capable of producing such constant color photos.
+   
+    Constant color captures require the flash to be fired and may require pre-flash sequence to determine the correct focus and exposure, therefore it might take several seconds to acquire a constant color photo. Due to this flash requirement, a constant color capture can only be taken with AVCaptureFlashModeAuto or AVCaptureFlashModeOn as the flash mode, otherwise an exception is thrown.
+ 
+    Constant color can only be achieved when the flash has a discernible effect on the scene so it may not perform well in bright conditions such as direct sunlight. Use the constantColorConfidenceMap property to examine the confidence level, and therefore the usefulness, of each region of a constant color photo.
+ 
+    Constant color should not be used in conjunction with locked or manual white balance.
+ 
+    This property returns YES if the session's current configuration allows photos to be captured with constant color. When switching cameras or formats this property may change. When this property changes from YES to NO, constantColorEnabled also reverts to NO. If you've previously opted in for constant color and then change configurations, you may need to set constantColorEnabled = YES again. This property is key-value observable.
+ */
+@property(nonatomic, readonly, getter=isConstantColorSupported) BOOL constantColorSupported API_AVAILABLE(macos(15.0), ios(18.0), macCatalyst(18.0), tvos(18.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(watchos);
+
+/*!
+ @property constantColorEnabled
+ @abstract
+    A BOOL value specifying whether the photo render pipeline is set up to perform constant color captures.
+ 
+ @discussion
+    Default is NO. Set to YES to enable support for taking constant color photos. This property may only be set to YES if constantColorSupported is YES. Enabling constant color requires a lengthy reconfiguration of the capture render pipeline, so if you intend to capture constant color photos, you should set this property to YES before calling -[AVCaptureSession startRunning] or within -[AVCaptureSession beginConfiguration] and -[AVCaptureSession commitConfiguration] while running.
+ */
+@property(nonatomic, getter=isConstantColorEnabled) BOOL constantColorEnabled API_AVAILABLE(macos(15.0), ios(18.0), macCatalyst(18.0), tvos(18.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(watchos);
+
+/*!
+ @property shutterSoundSuppressionSupported
+ @abstract
+    Specifies whether suppressing the shutter sound is supported.
+ 
+ @discussion
+    On iOS, this property returns NO in jurisdictions where shutter sound production cannot be disabled. On all other platforms, it always returns NO.
+ */
+@property(nonatomic, readonly, getter=isShutterSoundSuppressionSupported) BOOL shutterSoundSuppressionSupported API_AVAILABLE(macos(15.0), ios(18.0), macCatalyst(18.0), tvos(18.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(watchos);
 
 @end
 
@@ -1223,6 +1288,15 @@ API_AVAILABLE(macos(10.15), ios(10.0), macCatalyst(14.0), tvos(17.0)) API_UNAVAI
 @property(readonly, copy, nullable) NSDictionary<NSString *, id> *format;
 
 /*!
+@property rawFileFormat
+@abstract
+    A dictionary of AVVideoSettings keys specifying the RAW file format to be used for the RAW photo.
+
+@discussion
+    One can specify desired format properties of the RAW file that will be created. Currently only the key AVVideoAppleProRAWBitDepthKey is allowed and the value to which it can be set should be from 8-16.  The AVVideoCodecKey must be present in the receiver's -availableRawPhotoCodecTypes array as well as in -supportedRawPhotoCodecTypesForRawPhotoPixelFormatType:fileType:. AVVideoQualityKey (NSNumber in range [0.0,1.0]) can be optionally set and a value between [0.0,1.0] will use lossy compression with lower values being more lossy resulting in smaller file sizes but lower image quality, while a value of 1.0 will use lossless compression resulting in the largest file size but also the best quality.
+*/
+@property(nonatomic, copy, nullable) NSDictionary<NSString *, id> *rawFileFormat API_AVAILABLE(ios(18.0), macCatalyst(18.0), tvos(18.0)) API_UNAVAILABLE(macos, visionos) API_UNAVAILABLE(watchos);
+/*!
  @property processedFileType
  @abstract
     The file container for which the processed photo is formatted to be stored.
@@ -1549,6 +1623,36 @@ API_AVAILABLE(macos(10.15), ios(10.0), macCatalyst(14.0), tvos(17.0)) API_UNAVAI
     Default is NO. Set to YES if you wish content aware distortion correction to be performed on your AVCapturePhotos, when the photo output deems it necessary. Photos may or may not benefit from distortion correction. For instance, photos lacking faces may be left as is. Setting this property to YES does introduce a small additional amount of latency to the photo processing. You may check your AVCaptureResolvedPhotoSettings to see whether content aware distortion correction will be enabled for a given photo request. Throws an exception if -[AVCapturePhotoOutput contentAwareDistortionCorrectionEnabled] is not set to YES.
  */
 @property(nonatomic, getter=isAutoContentAwareDistortionCorrectionEnabled) BOOL autoContentAwareDistortionCorrectionEnabled API_AVAILABLE(ios(14.1), macCatalyst(14.1), tvos(17.0)) API_UNAVAILABLE(macos, visionos) API_UNAVAILABLE(watchos);
+
+/*!
+ @property constantColorEnabled
+ @abstract
+    Specifies whether the photo will be captured with constant color.
+
+ @discussion
+    Default is NO. Set to YES if you wish to capture a constant color photo. Throws an exception if -[AVCapturePhotoOutput constantColorEnabled] is not set to YES.
+ */
+@property(nonatomic, getter=isConstantColorEnabled) BOOL constantColorEnabled API_AVAILABLE(macos(15.0), ios(18.0), macCatalyst(18.0), tvos(18.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(watchos);
+
+/*!
+ @property constantColorFallbackPhotoDeliveryEnabled
+ @abstract
+    Specifies whether a fallback photo is delivered when taking a constant color capture.
+
+ @discussion
+    Default is NO. Set to YES if you wish to receive a fallback photo that can be used in case the main constant color photo's confidence level is too low for your use case.
+ */
+@property(nonatomic, getter=isConstantColorFallbackPhotoDeliveryEnabled) BOOL constantColorFallbackPhotoDeliveryEnabled API_AVAILABLE(macos(15.0), ios(18.0), macCatalyst(18.0), tvos(18.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(watchos);
+
+/*!
+ @property shutterSoundSuppressionEnabled
+ @abstract
+    Specifies whether the built-in shutter sound should be suppressed when capturing a photo with these settings.
+
+ @discussion
+    Default is NO. Set to YES if you wish to suppress AVCapturePhotoOutput's built-in shutter sound for this request. AVCapturePhotoOutput throws an NSInvalidArgumentException in `-capturePhotoWithSettings:` if its `shutterSoundSuppressionSupported` property returns NO.
+ */
+@property(nonatomic, getter=isShutterSoundSuppressionEnabled) BOOL shutterSoundSuppressionEnabled API_AVAILABLE(macos(15.0), ios(18.0), macCatalyst(18.0), tvos(18.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(watchos);
 
 @end
 
@@ -1989,6 +2093,37 @@ AV_INIT_UNAVAILABLE
     When taking a virtual device constituent photo capture, you may query this property to find out the source type of the photo. For instance, on a DualCamera, resulting photos will be of sourceDeviceType AVCaptureDeviceTypeBuiltInWideCamera, or AVCaptureDeviceTypeBuiltInTelephotoCamera. For all other types of capture, the source device type is equal to the -[AVCaptureDevice deviceType] of the AVCaptureDevice to which the AVCapturePhotoOutput is connected. Returns nil if the source of the photo is not an AVCaptureDevice.
  */
 @property(nullable, readonly) AVCaptureDeviceType sourceDeviceType API_UNAVAILABLE(macos);
+
+/*!
+ @property constantColorConfidenceMap
+ @abstract
+    Returns a pixel buffer with the same aspect ratio as the constant color photo, where each pixel value (unsigned 8-bit integer) indicates how fully the constant color effect has been achieved in the corresponding region of the constant color photo -- 255 means full confidence, 0 means zero confidence.
+ 
+ @discussion
+    NULL is returned for any non constant color photos.
+ */
+@property(nullable, readonly) CVPixelBufferRef constantColorConfidenceMap API_AVAILABLE(macos(15.0), ios(18.0), macCatalyst(18.0), tvos(18.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(watchos);
+
+/*!
+ @property constantColorCenterWeightedMeanConfidenceLevel
+ @abstract
+    Returns a score summarizing the overall confidence level of a constant color photo -- 1.0 means full confidence, 0.0 means zero confidence.
+ 
+ @discussion
+    Default is 0.0.
+ 
+    In most use cases (document scanning for example), the central region of the photo is considered more important than the peripherals, therefore the confidence level of the central pixels are weighted more heavily than pixels on the edges of the photo.
+ 
+    Use constantColorConfidenceMap for more use case specific analyses of the confidence level.
+ */
+@property(readonly) float constantColorCenterWeightedMeanConfidenceLevel API_AVAILABLE(macos(15.0), ios(18.0), macCatalyst(18.0), tvos(18.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(watchos);
+
+/*!
+ @property constantColorFallbackPhoto
+ @abstract
+    Indicates whether this photo is a fallback photo for a constant color capture.
+ */
+@property(readonly, getter=isConstantColorFallbackPhoto) BOOL constantColorFallbackPhoto API_AVAILABLE(macos(15.0), ios(18.0), macCatalyst(18.0), tvos(18.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(watchos);
 
 @end
 

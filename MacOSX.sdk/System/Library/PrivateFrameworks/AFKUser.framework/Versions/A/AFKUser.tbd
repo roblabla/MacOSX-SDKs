@@ -4,7 +4,9 @@ targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/AFKUser.framework/Versions/A/AFKUser'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-    symbols:         [ _AFKEndpointInterfaceDataQueueSizeKey, _AFKUserVersionNumber, 
+    symbols:         [ _AFKEndpointInterfaceDataQueueSizeKey, _AFKEndpointInterfaceEnsureCommandDeliveryKey, 
+                       _AFKEndpointInterfaceEnsureDescriptorDeliveryKey, _AFKEndpointInterfaceEnsureReportDeliveryKey, 
+                       _AFKEndpointInterfaceUserClientOOBThreshold, _AFKUserVersionNumber, 
                        _AFKUserVersionString, __AFKUserLog, _kAFKEventCancel, _kAFKEventError ]
     objc-classes:    [ AFKBufferMemoryDescriptor, AFKEndpointInterface, AFKMemoryDescriptor, 
                        AFKMemoryDescriptorManager ]

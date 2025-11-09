@@ -25,7 +25,7 @@ HK_EXTERN API_AVAILABLE(ios(14.0), watchos(7.0), macCatalyst(14.0), macos(13.0))
 
 /*!
 @method        quantityForLead:
-@abstract      Returns an HKQuantity for the specified lead with a unit compatible with [HKUnit voltageUnit].
+@abstract      Returns an HKQuantity for the specified lead with a unit compatible with [HKUnit voltUnit].
 
 @param         lead      The HKElectrocardiogramLead for which voltage quantity will be returned.
 */

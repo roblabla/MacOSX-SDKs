@@ -10,5 +10,6 @@ exports:
     symbols:         [ _NearFieldPrivateServicesVersionNumber, _NearFieldPrivateServicesVersionString, 
                        _kNFUIServiceCoreNFC_UserCancel ]
     objc-classes:    [ NFPrivateService, NFPrivateServiceInterface, NFRadioPowerSwitch, 
-                       NFRestoreService, NFUIService ]
+                       NFRestoreService, NFStorageService, NFTagProcessorService, 
+                       NFUIService ]
 ...

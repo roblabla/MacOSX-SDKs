@@ -19,13 +19,13 @@ typedef NS_ENUM(NSUInteger, CPTripPauseReason) {
     CPTripPauseReasonLocating         = 3,
     CPTripPauseReasonRerouting        = 4,
     CPTripPauseReasonProceedToRoute   = 5,
-} API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(macos, watchos, tvos);
+} API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(macos, watchos);
 
 /**
  @c CPNavigationSession represents the active navigation session. A @c CPNavigationSession will be created for you
  when calling startNavigationSessionForTrip: on @c CYMapTemplate
  */
-API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(macos, watchos, tvos)
+API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(macos, watchos)
 @interface CPNavigationSession : NSObject
 
 - (instancetype)init NS_UNAVAILABLE;

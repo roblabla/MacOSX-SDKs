@@ -1,19 +1,11 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.10 (swiftlang-5.10.0.12.5 clang-1500.3.9.1.1)
-// swift-module-flags: -target arm64e-apple-ios17.5-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Osize -library-level api -enable-bare-slash-regex -user-module-version 3305.20.1 -module-name Speech
-import AVFAudio
-import CoreMedia
-import Darwin
-import Distributed
-import Foundation
-@_exported import Speech
-import Swift
-import _Concurrency
-import _StringProcessing
-import _SwiftConcurrencyShims
-import os.log
-import os
-import os.signpost
+// swift-compiler-version: Apple Swift version 6.0 effective-5.10 (swiftlang-6.0.0.7.24 clang-1600.0.25.1)
+// swift-module-flags: -target arm64e-apple-ios18.0-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Osize -library-level api -enable-upcoming-feature InternalImportsByDefault -enable-bare-slash-regex -user-module-version 3400.140.2 -module-name Speech -package-name com.apple.Speech
+@_exported public import Speech
+public import Swift
+public import _Concurrency
+public import _StringProcessing
+public import _SwiftConcurrencyShims
 @available(macOS 14, iOS 17, watchOS 10, tvOS 17, *)
 public protocol DataInsertable {
   func insert(data: Speech.SFCustomLanguageModelData)
@@ -63,7 +55,6 @@ public class SFCustomLanguageModelData : Swift.Hashable, Swift.Codable {
     public static func buildOptional(_ component: (any Speech.DataInsertable)?) -> any Speech.DataInsertable
     public static func buildArray(_ components: [any Speech.DataInsertable]) -> any Speech.DataInsertable
   }
-  #if compiler(>=5.3) && $RethrowsProtocol
   public class PhraseCountGenerator : Swift.Hashable, Swift.Codable, _Concurrency.AsyncSequence, Speech.DataInsertable {
     public typealias AsyncIterator = Speech.SFCustomLanguageModelData.PhraseCountGenerator.Iterator
     public typealias Element = Speech.SFCustomLanguageModelData.PhraseCount
@@ -71,14 +62,26 @@ public class SFCustomLanguageModelData : Swift.Hashable, Swift.Codable {
     public init()
     @_hasMissingDesignatedInitializers public class Iterator : _Concurrency.AsyncIteratorProtocol {
       public typealias Element = Speech.SFCustomLanguageModelData.PhraseCount
-      #if compiler(>=5.3) && $AsyncAwait
       public func next() async throws -> Speech.SFCustomLanguageModelData.PhraseCount?
+      #if compiler(>=5.3) && $AssociatedTypeImplements
+      @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
+      @_implements(_Concurrency.AsyncIteratorProtocol, Failure) public typealias __AsyncIteratorProtocol_Failure = any Swift.Error
+      #else
+      @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
+      public typealias __AsyncIteratorProtocol_Failure = any Swift.Error
       #endif
       @objc deinit
     }
     public static func == (lhs: Speech.SFCustomLanguageModelData.PhraseCountGenerator, rhs: Speech.SFCustomLanguageModelData.PhraseCountGenerator) -> Swift.Bool
     public func hash(into hasher: inout Swift.Hasher)
     public func insert(data: Speech.SFCustomLanguageModelData)
+    #if compiler(>=5.3) && $AssociatedTypeImplements
+    @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
+    @_implements(_Concurrency.AsyncSequence, Failure) public typealias __AsyncSequence_Failure = any Swift.Error
+    #else
+    @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
+    public typealias __AsyncSequence_Failure = any Swift.Error
+    #endif
     @objc deinit
     public func encode(to encoder: any Swift.Encoder) throws
     public var hashValue: Swift.Int {
@@ -86,7 +89,6 @@ public class SFCustomLanguageModelData : Swift.Hashable, Swift.Codable {
     }
     required public init(from decoder: any Swift.Decoder) throws
   }
-  #endif
   @_inheritsConvenienceInitializers public class TemplatePhraseCountGenerator : Speech.SFCustomLanguageModelData.PhraseCountGenerator {
     public struct Template : Swift.Hashable, Swift.Codable, Speech.TemplateInsertable {
       public let body: Swift.String
@@ -104,16 +106,12 @@ public class SFCustomLanguageModelData : Swift.Hashable, Swift.Codable {
     @_hasMissingDesignatedInitializers public class Iterator : Speech.SFCustomLanguageModelData.PhraseCountGenerator.Iterator {
       public typealias Element = Speech.SFCustomLanguageModelData.PhraseCount
       public init(templates: [Speech.SFCustomLanguageModelData.TemplatePhraseCountGenerator.Template], templateClasses: [Swift.String : [Swift.String]])
-      #if compiler(>=5.3) && $AsyncAwait
       override public func next() async throws -> Speech.SFCustomLanguageModelData.PhraseCount?
-      #endif
       @objc deinit
     }
     public func insert(template: Swift.String, count: Swift.Int)
     public func define(className: Swift.String, values: [Swift.String])
-    #if compiler(>=5.3) && $RethrowsProtocol
     override public func makeAsyncIterator() -> Speech.SFCustomLanguageModelData.PhraseCountGenerator.Iterator
-    #endif
     public static func == (lhs: Speech.SFCustomLanguageModelData.TemplatePhraseCountGenerator, rhs: Speech.SFCustomLanguageModelData.TemplatePhraseCountGenerator) -> Swift.Bool
     override public func hash(into hasher: inout Swift.Hasher)
     override public init()
@@ -142,13 +140,9 @@ public class SFCustomLanguageModelData : Swift.Hashable, Swift.Codable {
   public init(locale: Foundation.Locale, identifier: Swift.String, version: Swift.String)
   convenience public init(locale: Foundation.Locale, identifier: Swift.String, version: Swift.String, @Speech.SFCustomLanguageModelData.DataInsertableBuilder builder: () -> any Speech.DataInsertable)
   public func insert(phraseCount: Speech.SFCustomLanguageModelData.PhraseCount)
-  #if compiler(>=5.3) && $RethrowsProtocol
   public func insert(phraseCountGenerator: Speech.SFCustomLanguageModelData.PhraseCountGenerator)
-  #endif
   public func insert(term: Speech.SFCustomLanguageModelData.CustomPronunciation)
-  #if compiler(>=5.3) && $AsyncAwait
   public func export(to path: Foundation.URL) async throws
-  #endif
   public static func == (lhs: Speech.SFCustomLanguageModelData, rhs: Speech.SFCustomLanguageModelData) -> Swift.Bool
   public func hash(into hasher: inout Swift.Hasher)
   @objc deinit

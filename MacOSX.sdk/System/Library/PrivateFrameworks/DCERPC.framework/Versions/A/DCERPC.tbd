@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/DCERPC.framework/Versions/A/DCERPC'
-current-version: 92
+current-version: 95
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _dce_error_inq_text, _dcethread_SIGEMT_e, _dcethread_SIGIOT_e, 

@@ -1,7 +1,7 @@
 /*
     NSPathControl.h
     Application Kit
-    Copyright (c) 2005-2023, Apple Inc.
+    Copyright (c) 2005-2024, Apple Inc.
     All rights reserved.
 */
 

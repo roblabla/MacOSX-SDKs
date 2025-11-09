@@ -4,12 +4,12 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2015-2021 Apple Inc. All rights reserved.
+	Copyright 2015-2023 Apple Inc. All rights reserved.
 
 */
 
 #import <AVFoundation/AVBase.h>
-#if TARGET_OS_OSX
+#if ( TARGET_OS_OSX || ( TARGET_OS_IOS && ! TARGET_OS_VISION ) )
 
 #import <Foundation/Foundation.h>
 #import <CoreMedia/CMTimeRange.h>
@@ -41,7 +41,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 	A client may use AVCaptionGroup to get the list of active captions for the time range. For example, presentation processing may find the AVCaptionGroup object for the current time, get the list of captions, and place them into the destination display region. 
  */
-API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, tvos, watchos)
+API_AVAILABLE(macos(12.0), ios(18.0), macCatalyst(15.0)) API_UNAVAILABLE(tvos, watchos, visionos)
 @interface AVCaptionGroup : NSObject
 {
 @private
@@ -96,7 +96,7 @@ API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, tvos, watchos)
 
 NS_ASSUME_NONNULL_END
 
-#endif // TARGET_OS_OSX
+#endif // ( TARGET_OS_OSX || ( TARGET_OS_IOS && ! TARGET_OS_VISION ) )
 
 #else
 #import <AVFCore/AVCaptionGroup.h>

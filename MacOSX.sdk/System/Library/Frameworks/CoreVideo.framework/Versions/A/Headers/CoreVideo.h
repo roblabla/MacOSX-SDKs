@@ -56,6 +56,8 @@
 #if TARGET_OS_MAC
 #include <CoreVideo/CVMetalTexture.h>
 #include <CoreVideo/CVMetalTextureCache.h>
+#include <CoreVideo/CVMetalBuffer.h>
+#include <CoreVideo/CVMetalBufferCache.h>
 #endif
 #endif
 #endif

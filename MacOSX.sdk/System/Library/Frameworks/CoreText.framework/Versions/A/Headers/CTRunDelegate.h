@@ -2,7 +2,7 @@
  *  CTRunDelegate.h
  *  CoreText
  *
- *  Copyright (c) 2006-2018 Apple Inc. All rights reserved.
+ *  Copyright (c) 2006-2024 Apple Inc. All rights reserved.
  *
  */
 
@@ -26,6 +26,7 @@ typedef const struct CF_BRIDGED_TYPE(id) __CTRunDelegate * CTRunDelegateRef;
     @abstract   Returns the CFType of CTRunDelegate objects.
 */
 
+CT_EXPORT
 CFTypeID CTRunDelegateGetTypeID( void ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 
@@ -165,6 +166,7 @@ enum {
                 object. Otherwise, this function will return NULL.
 */
 
+CT_EXPORT
 CTRunDelegateRef _Nullable CTRunDelegateCreate(
     const CTRunDelegateCallbacks* callbacks,
     void * _Nullable refCon ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
@@ -187,9 +189,22 @@ CTRunDelegateRef _Nullable CTRunDelegateCreate(
     @result     The refCon value of the supplied run delegate.
 */
 
+CT_EXPORT
 void * CTRunDelegateGetRefCon(
     CTRunDelegateRef runDelegate ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
+
+#pragma mark -
+
+#if defined(__OBJC__)
+
+@protocol CTAdaptiveImageProviding
+/* The callee is to return an image for use at a particular point size and scale factor, as well as its offset and size (in points), which define the placement of the returned image relative to a rect with the proposed size.
+ */
+- (CGImageRef _Nullable)imageForProposedSize:(CGSize)proposedSize scaleFactor:(CGFloat)scaleFactor imageOffset:(out CGPoint * _Nonnull)outImageOffset imageSize:(out CGSize * _Nonnull)outImageSize CF_RETURNS_NOT_RETAINED;
+@end
+
+#endif // defined(__OBJC__)
 
 CF_ASSUME_NONNULL_END
 CF_EXTERN_C_END

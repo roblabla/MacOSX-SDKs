@@ -1,7 +1,7 @@
 /*
         NSMenuItemBadge.h
         Application Kit
-        Copyright (c) 2023-2023, Apple Inc.
+        Copyright (c) 2023-2024, Apple Inc.
         All rights reserved.
 */
 

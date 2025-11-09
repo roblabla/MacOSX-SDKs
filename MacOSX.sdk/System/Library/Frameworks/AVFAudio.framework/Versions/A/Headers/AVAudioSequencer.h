@@ -44,6 +44,7 @@ typedef NS_OPTIONS(NSUInteger, AVMusicSequenceLoadOptions) {
 /*! @typedef AVBeatRange
 	@abstract Used to describe a specific time range within an AVMusicTrack.
 */
+NS_SWIFT_SENDABLE
 typedef struct _AVBeatRange {
 	AVMusicTimeStamp start;
 	AVMusicTimeStamp length;

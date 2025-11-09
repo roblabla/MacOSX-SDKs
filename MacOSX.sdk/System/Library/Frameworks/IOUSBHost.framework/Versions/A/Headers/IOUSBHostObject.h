@@ -84,6 +84,14 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)destroy;
 
 /*!
+ * @brief      Removes underlying allocations of the IOUSBHostObject object along with user client
+ * @discussion Extends <code>destroy</code> to take an options to modify the destroy behavior.  Currently only the
+ *             <code>IOUSBHostObjectDestroyOptionsDeviceSurrender</code> is defined to support surrendering ownersip of
+ *             the kernel service.  To be used when accepting the <code>kUSBHostMessageDeviceIsRequestingClose</code> message.
+ */
+- (void)destroyWithOptions:(IOUSBHostObjectDestroyOptions)options;
+
+/*!
  * @brief   Retrieve the IOUSBHostObject's io_service_t.
  */
 @property(readonly) io_service_t ioService;

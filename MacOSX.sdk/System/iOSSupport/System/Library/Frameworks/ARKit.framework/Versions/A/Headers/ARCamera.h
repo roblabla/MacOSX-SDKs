@@ -17,6 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
  A model representing the camera and its parameters.
  */
 API_AVAILABLE(ios(11.0))
+NS_SWIFT_SENDABLE
 @interface ARCamera : NSObject <NSCopying>
 
 /**

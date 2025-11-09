@@ -7,7 +7,11 @@ swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
-    symbols:         [ '_$s10Foundation16AttributedStringV16CoreTransferable0E0ADMc', 
+    symbols:         [ '$ld$previous$/System/Library/Frameworks/SwiftUI.framework/Versions/A/SwiftUI$$1$10.15$15.0$_$ss5NeverO7SwiftUIE4bodyABvg$', 
+                       '$ld$previous$/System/Library/Frameworks/SwiftUI.framework/Versions/A/SwiftUI$$1$10.15$15.0$_$ss5NeverO7SwiftUIE4bodyABvpMV$', 
+                       '$ld$previous$/System/iOSSupport/System/Library/Frameworks/SwiftUI.framework/Versions/A/SwiftUI$$6$13.0$18.0$_$ss5NeverO7SwiftUIE4bodyABvg$', 
+                       '$ld$previous$/System/iOSSupport/System/Library/Frameworks/SwiftUI.framework/Versions/A/SwiftUI$$6$13.0$18.0$_$ss5NeverO7SwiftUIE4bodyABvpMV$', 
+                       '_$s10Foundation16AttributedStringV16CoreTransferable0E0ADMc', 
                        '_$s10Foundation16AttributedStringV16CoreTransferable0E0ADWP', 
                        '_$s10Foundation16AttributedStringV16CoreTransferableE22transferRepresentationQrvgZ', 
                        '_$s10Foundation16AttributedStringV16CoreTransferableE22transferRepresentationQrvpZQOMQ', 
@@ -29,6 +33,8 @@ exports:
                        '_$s16CoreTransferable0B0PAAE4data11contentType10Foundation4DataV07UniformE11Identifiers6UTTypeV_tYaKFTu', 
                        '_$s16CoreTransferable0B0PAAE4data11contentTypex10Foundation4DataV_07UniformE11Identifiers6UTTypeVtYaKcfC', 
                        '_$s16CoreTransferable0B0PAAE4data11contentTypex10Foundation4DataV_07UniformE11Identifiers6UTTypeVtYaKcfCTu', 
+                       '_$s16CoreTransferable0B0PAAE4file11contentType0C7Handlery07UniformE11Identifiers6UTTypeV_y10Foundation3URLVXEtYaKF', 
+                       '_$s16CoreTransferable0B0PAAE4file11contentType0C7Handlery07UniformE11Identifiers6UTTypeV_y10Foundation3URLVXEtYaKFTu', 
                        '_$s16CoreTransferable0B0TL', '_$s16CoreTransferable0B5ErrorO12exportFailedyA2CmFWC', 
                        '_$s16CoreTransferable0B5ErrorO12importFailedyA2CmFWC', '_$s16CoreTransferable0B5ErrorO2eeoiySbAC_ACtFZ', 
                        '_$s16CoreTransferable0B5ErrorO4hash4intoys6HasherVz_tF', 
@@ -223,6 +229,6 @@ exports:
                        '_$ss5NeverO16CoreTransferable22TransferRepresentationACMc', 
                        '_$ss5NeverO16CoreTransferable22TransferRepresentationACWP', 
                        '_$ss5NeverO16CoreTransferableE22transferRepresentationABvgZ', 
-                       '_$ss5NeverO16CoreTransferableE4bodyABvg', '_$ss5NeverO16CoreTransferableE4bodyABvpMV', 
+                       '_$ss5NeverO7SwiftUIE4bodyABvg', '_$ss5NeverO7SwiftUIE4bodyABvpMV', 
                        _CoreTransferableVersionNumber ]
 ...

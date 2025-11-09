@@ -2,9 +2,10 @@
 //  HKActivitySummary.h
 //  HealthKit
 //
-//  Copyright (c) 2015-2022 Apple Inc. All rights reserved.
+//  Copyright (c) 2015-2024 Apple Inc. All rights reserved.
 //
 
+#import <Foundation/Foundation.h>
 #import <HealthKit/HKDefines.h>
 
 NS_ASSUME_NONNULL_BEGIN
@@ -31,6 +32,13 @@ HK_EXTERN API_AVAILABLE(ios(9.3), watchos(2.2), macCatalyst(13.0), macos(13.0))
   @discussion    The move mode of an activity summary determines if activeEnergyBurned or appleMoveTime are used for the move ring.
   */
 @property (nonatomic, assign) HKActivityMoveMode activityMoveMode API_AVAILABLE(ios(14.0), watchos(7.0), macCatalyst(14.0), macos(13.0));
+
+/**
+ @property paused
+ @abstract The paused state of this activity summary
+ @discussion The paused state of an activity summary indicates if the user is tracking their rings for the given day.
+ */
+@property (nonatomic, assign, getter=isPaused) BOOL paused API_AVAILABLE(ios(18.0), watchos(11.0), macCatalyst(18.0), macos(15.0), visionos(2.0));
 
 /**
   @property      activeEnergyBurned

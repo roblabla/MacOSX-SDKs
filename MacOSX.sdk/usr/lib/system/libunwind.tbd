@@ -3,16 +3,12 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/usr/lib/system/libunwind.dylib'
-current-version: 1700.242
+current-version: 1800.85
 parent-umbrella:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
     umbrella:        System
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst ]
-    symbols:         [ ___deregister_frame_info, ___deregister_frame_info_bases, 
-                       ___register_frame_info, ___register_frame_info_bases, ___register_frame_info_table, 
-                       ___register_frame_info_table_bases, ___register_frame_table ]
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ __Unwind_Backtrace, __Unwind_DeleteException, __Unwind_FindEnclosingFunction, 

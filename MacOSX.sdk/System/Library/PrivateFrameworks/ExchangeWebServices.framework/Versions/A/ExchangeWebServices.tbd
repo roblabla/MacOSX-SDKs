@@ -59,7 +59,7 @@ exports:
                        _SOAPFaultKey, _SOAPNamespaceURI, _SOAPWebServicesErrorDomain, 
                        _autodiscoverKillSwitchURL, _encodedTypeCopy, _encodedTypeNonatomic, 
                        _encodedTypeRetain, _kAutodiscoverProtocolActiveSync, _kAutodiscoverProtocolEWS, 
-                       _kCacheMaxTimeInterval, _kExchangeBasicAccountMigrationLastAttemptDate, 
+                       _kAutodiscoverProtocolGraph, _kCacheMaxTimeInterval, _kExchangeBasicAccountMigrationLastAttemptDate, 
                        _kExchangeBasicAccountMigrationStatus, _kExchangeJWKSCacheDate, 
                        _kExchangeJWKSData, _kExchangeJWKSURI, _kExchangeOAuthOnPremKey, 
                        _kExchangeOAuthSupportedKey, _kExchangeOAuthVersion, _kExchangeRenewCredentialsShouldTriggerMigrationKey, 

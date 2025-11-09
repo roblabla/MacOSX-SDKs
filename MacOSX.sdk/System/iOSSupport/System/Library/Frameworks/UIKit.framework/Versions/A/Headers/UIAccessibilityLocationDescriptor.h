@@ -19,7 +19,7 @@ NS_HEADER_AUDIT_BEGIN(nullability, sendability)
  * `accessibilityDropPointDescriptors` properties in the UIAccessibilityDragging informal protocol
  * use UIAccessibilityLocationDescriptor objects to describe where drags may begin and end.
  */
-UIKIT_EXTERN API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, tvos)
+UIKIT_EXTERN API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, tvos) NS_SWIFT_UI_ACTOR
 @interface UIAccessibilityLocationDescriptor : NSObject
 
 - (instancetype)init NS_UNAVAILABLE;

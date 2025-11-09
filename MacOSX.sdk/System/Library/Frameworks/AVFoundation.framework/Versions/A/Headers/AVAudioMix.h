@@ -34,8 +34,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-NS_SWIFT_NONSENDABLE
-API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0))
+API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0), visionos(1.0))
 @interface AVAudioMix : NSObject <NSCopying, NSMutableCopying> {
 @private
     AVAudioMixInternal    *_audioMix;
@@ -50,7 +49,7 @@ API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0))
 @class AVMutableAudioMixInternal;
 
 NS_SWIFT_NONSENDABLE
-API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0))
+API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0), visionos(1.0))
 @interface AVMutableAudioMix : AVAudioMix {
 @private
     AVMutableAudioMixInternal    *_mutableAudioMix __attribute__((unused));
@@ -94,8 +93,7 @@ API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0))
 
 @class AVAudioMixInputParametersInternal;
 
-NS_SWIFT_NONSENDABLE
-API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0))
+API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0), visionos(1.0))
 @interface AVAudioMixInputParameters : NSObject <NSCopying, NSMutableCopying> {
 @private
     AVAudioMixInputParametersInternal    *_inputParameters;
@@ -114,7 +112,7 @@ API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0))
    Constants for various time pitch algorithms, e.g. AVAudioTimePitchSpectral, are defined in AVAudioProcessingSettings.h.
    Can be nil, in which case the audioTimePitchAlgorithm set on the AVPlayerItem, AVAssetExportSession, or AVAssetReaderAudioMixOutput on which the AVAudioMix is set will be used for the associated track.
 */
-@property (nonatomic, readonly, copy, nullable) AVAudioTimePitchAlgorithm audioTimePitchAlgorithm API_AVAILABLE(macos(10.10), ios(7.0), tvos(9.0), watchos(1.0));
+@property (nonatomic, readonly, copy, nullable) AVAudioTimePitchAlgorithm audioTimePitchAlgorithm API_AVAILABLE(macos(10.10), ios(7.0), tvos(9.0), watchos(1.0), visionos(1.0));
 
 
 #if AVF_AUDIO_PROCESSING_TAP_AVAILABLE
@@ -123,7 +121,7 @@ API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0))
  @property		audioTapProcessor
  @abstract		Indicates the audio processing tap that will be used for the audio track.
 */
-@property (nonatomic, readonly, retain, nullable) __attribute__((NSObject)) MTAudioProcessingTapRef audioTapProcessor API_AVAILABLE(macos(10.9), ios(6.0), tvos(9.0)) API_UNAVAILABLE(watchos);
+@property (nonatomic, readonly, retain, nullable) __attribute__((NSObject)) MTAudioProcessingTapRef audioTapProcessor API_AVAILABLE(macos(10.9), ios(6.0), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 #endif
 
@@ -152,7 +150,7 @@ API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0))
 @class AVMutableAudioMixInputParametersInternal;
 
 NS_SWIFT_NONSENDABLE
-API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0))
+API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0), visionos(1.0))
 @interface AVMutableAudioMixInputParameters : AVAudioMixInputParameters {
 @private
     AVMutableAudioMixInputParametersInternal    *_mutableInputParameters __attribute__((unused));
@@ -185,7 +183,7 @@ API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0))
    Constants for various time pitch algorithms, e.g. AVAudioTimePitchSpectral, are defined in AVAudioProcessingSettings.h.
    Can be nil, in which case the audioTimePitchAlgorithm set on the AVPlayerItem, AVAssetExportSession, or AVAssetReaderAudioMixOutput on which the AVAudioMix is set will be used for the associated track.
 */
-@property (nonatomic, copy, nullable) AVAudioTimePitchAlgorithm audioTimePitchAlgorithm API_AVAILABLE(macos(10.10), ios(7.0), tvos(9.0), watchos(1.0));
+@property (nonatomic, copy, nullable) AVAudioTimePitchAlgorithm audioTimePitchAlgorithm API_AVAILABLE(macos(10.10), ios(7.0), tvos(9.0), watchos(1.0), visionos(1.0));
 
 #if AVF_AUDIO_PROCESSING_TAP_AVAILABLE
 
@@ -193,7 +191,7 @@ API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0))
  @property		audioTapProcessor
  @abstract		Indicates the audio processing tap that will be used for the audio track.
 */
-@property (nonatomic, retain, nullable) __attribute__((NSObject)) MTAudioProcessingTapRef audioTapProcessor API_AVAILABLE(macos(10.9), ios(6.0), tvos(9.0)) API_UNAVAILABLE(watchos);
+@property (nonatomic, retain, nullable) __attribute__((NSObject)) MTAudioProcessingTapRef audioTapProcessor API_AVAILABLE(macos(10.9), ios(6.0), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 #endif
 

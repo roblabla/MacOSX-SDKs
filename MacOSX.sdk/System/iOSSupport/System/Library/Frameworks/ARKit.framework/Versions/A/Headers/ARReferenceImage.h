@@ -18,6 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
  A reference image to be detected in the scene.
  */
 API_AVAILABLE(ios(11.3))
+NS_SWIFT_SENDABLE
 @interface ARReferenceImage : NSObject
 
 /**
@@ -42,7 +43,7 @@ API_AVAILABLE(ios(11.3))
  @discussion When loading reference images from the asset catalog this verification is not needed as the same verification happens
  at compile time.
  @param completionHandler Completion handler invoked when validation is done. The completion handler takes the following parameters:
- error - An error that indicates why the image is not suitable for tracking, or nil if no error occured.
+ error - An error that indicates why the image is not suitable for tracking, or nil if no error occurred.
  */
 - (void)validateWithCompletionHandler:(void (^)(NSError * _Nullable error))completionHandler API_AVAILABLE(ios(13.0));
 

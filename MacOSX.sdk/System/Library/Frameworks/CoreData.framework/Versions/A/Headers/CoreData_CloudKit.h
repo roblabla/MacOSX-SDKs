@@ -1,7 +1,7 @@
 /*
     CoreData_CloudKit.h
     Core Data
-    Copyright (c) 2021-2023, Apple Inc.
+    Copyright (c) 2021-2024, Apple Inc.
     All rights reserved.
 */
 

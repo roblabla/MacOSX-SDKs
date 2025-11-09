@@ -342,7 +342,7 @@ double SPAngleTanh(SPAngle angle) {
 // MARK: - Normalization
 
 /*!
- @abstract Returns the specified angle normalized to [-180°, 180.0°).
+ @abstract Returns the specified angle normalized to `(-π, π]` radians (`(-180°, 180.0°]`).
  
  @param angle The source angle.
  @returns  The normalized angle.
@@ -355,15 +355,16 @@ __API_AVAILABLE(macos(14.0), ios(17.0), watchos(10.0), tvos(17.0));
 SPATIAL_REFINED_FOR_SWIFT
 SPATIAL_OVERLOADABLE
 SPAngle SPAngleNormalize(SPAngle angle) {
-    
-    double radians = angle.radians;
 
-#ifdef __cplusplus
-    radians = ::__tg_atan2(::__tg_sin(radians), ::__tg_cos(radians));
-#else
-    radians = atan2(sin(radians), cos(radians));
-#endif
-    
+        double radians = fmod(angle.radians, M_PI * 2);
+
+        if (radians <= -M_PI) {
+            radians += M_PI * 2;
+        }
+        else if (radians > M_PI) {
+            radians -= M_PI * 2;
+        }
+
     return SPAngleMakeWithRadians(radians);
 }
 

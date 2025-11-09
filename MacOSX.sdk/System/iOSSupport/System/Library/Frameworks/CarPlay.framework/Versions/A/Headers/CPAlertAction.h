@@ -14,7 +14,7 @@ typedef NS_ENUM(NSUInteger, CPAlertActionStyle) {
     CPAlertActionStyleDefault = 0, // A style that indicates a default action.
     CPAlertActionStyleCancel,      // A style that indicates the action will cancel and leave data unchanged.
     CPAlertActionStyleDestructive, // A style that indicates the button might change or delete data.
-} API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(macos, watchos, tvos);
+} API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(macos, watchos);
 
 /**
  @c CPAlertAction represents a single action that appears inside of a @c CPActionSheetTemplate or @c CPAlertTemplate.
@@ -25,7 +25,7 @@ typedef NS_ENUM(NSUInteger, CPAlertActionStyle) {
  The action has a customizable title, style, and a block callback
  that is invoked when the user taps this button.
  */
-API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(macos, watchos, tvos)
+API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(macos, watchos)
 @interface CPAlertAction : NSObject <NSSecureCoding>
 
 typedef void (^CPAlertActionHandler) (CPAlertAction *);
@@ -52,12 +52,12 @@ typedef void (^CPAlertActionHandler) (CPAlertAction *);
  */
 - (instancetype)initWithTitle:(NSString *)title
                         color:(UIColor *)color
-                      handler:(CPAlertActionHandler)handler API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(macos, watchos, tvos);
+                      handler:(CPAlertActionHandler)handler API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(macos, watchos);
 
 @property (nonatomic, copy, readonly) NSString *title;
 @property (nonatomic, assign, readonly) CPAlertActionStyle style;
 @property (nonatomic, copy, readonly) CPAlertActionHandler handler;
-@property (nonatomic, copy, readonly, nullable) UIColor *color API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(macos, watchos, tvos);
+@property (nonatomic, copy, readonly, nullable) UIColor *color API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(macos, watchos);
 
 @end
 

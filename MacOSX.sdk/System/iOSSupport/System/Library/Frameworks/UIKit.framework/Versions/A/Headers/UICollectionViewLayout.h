@@ -19,27 +19,27 @@
 
 NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
-UIKIT_EXTERN const CGFloat UICollectionViewLayoutAutomaticDimension API_AVAILABLE(ios(15.0), tvos(15.0), watchos(8.0));
+UIKIT_EXTERN const CGFloat UICollectionViewLayoutAutomaticDimension API_AVAILABLE(ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos);
 
-UIKIT_EXTERN NSString *const UICollectionElementKindSectionHeader API_AVAILABLE(ios(6.0));
-UIKIT_EXTERN NSString *const UICollectionElementKindSectionFooter API_AVAILABLE(ios(6.0));
+UIKIT_EXTERN NSString *const UICollectionElementKindSectionHeader API_AVAILABLE(ios(6.0)) API_UNAVAILABLE(watchos);
+UIKIT_EXTERN NSString *const UICollectionElementKindSectionFooter API_AVAILABLE(ios(6.0)) API_UNAVAILABLE(watchos);
 
 typedef NS_ENUM(NSInteger, UICollectionViewScrollDirection) {
     UICollectionViewScrollDirectionVertical,
     UICollectionViewScrollDirectionHorizontal
-};
+} API_UNAVAILABLE(watchos);
 
 typedef NS_ENUM(NSUInteger, UICollectionElementCategory) {
     UICollectionElementCategoryCell,
     UICollectionElementCategorySupplementaryView,
     UICollectionElementCategoryDecorationView
-};
+} API_UNAVAILABLE(watchos);
 
 @class UICollectionViewLayoutAttributes;
 @class UICollectionView;
 @class UINib;
 
-UIKIT_EXTERN API_AVAILABLE(ios(6.0)) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(6.0)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @interface UICollectionViewLayoutAttributes : NSObject <NSCopying, UIDynamicItem>
 
 @property (nonatomic) CGRect frame;
@@ -62,7 +62,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(6.0)) NS_SWIFT_UI_ACTOR
 
 @end
 
-UIKIT_EXTERN API_AVAILABLE(ios(7.0)) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(7.0)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @interface UICollectionViewLayoutInvalidationContext : NSObject
 
 @property (nonatomic, readonly) BOOL invalidateEverything; // set to YES when invalidation occurs because the collection view is sent -reloadData
@@ -85,7 +85,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(7.0)) NS_SWIFT_UI_ACTOR
 
 @end
 
-UIKIT_EXTERN API_AVAILABLE(ios(6.0)) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(6.0)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @interface UICollectionViewLayout : NSObject <NSCoding>
 
 - (instancetype)init NS_DESIGNATED_INITIALIZER;

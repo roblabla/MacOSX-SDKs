@@ -28,7 +28,7 @@ typedef NS_ENUM(NSInteger, UINavigationBarNSToolbarSection) {
     UINavigationBarNSToolbarSectionContent,
 } NS_SWIFT_NAME(UINavigationBar.NSToolbarSection) API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(tvos, watchos);
 
-UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(2.0)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @interface UINavigationBar : UIView <NSCoding, UIBarPositioning> 
 
 @property(nonatomic,assign) UIBarStyle barStyle UI_APPEARANCE_SELECTOR API_UNAVAILABLE(tvos);
@@ -60,7 +60,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
 - (void)setItems:(nullable NSArray<UINavigationItem *> *)items animated:(BOOL)animated; // If animated is YES, then simulate a push or pop depending on whether the new top item was previously in the stack.
 
 /// When set to YES, the navigation bar will use a larger out-of-line title view when requested by the current navigation item. To specify when the large out-of-line title view appears, see UINavigationItem.largeTitleDisplayMode. Defaults to NO.
-@property (nonatomic, readwrite, assign) BOOL prefersLargeTitles UI_APPEARANCE_SELECTOR API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(tvos);
+@property (nonatomic, readwrite, assign) BOOL prefersLargeTitles UI_APPEARANCE_SELECTOR API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos) API_UNAVAILABLE(tvos);
 
 /// The toolbar section that this navigation bar is currently using.
 @property (nonatomic, readonly, assign) UINavigationBarNSToolbarSection currentNSToolbarSection API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(tvos, watchos);
@@ -104,7 +104,7 @@ vertically if necessary when the navigation bar is in the position UIBarPosition
 
 /* You may specify the font, text color, and shadow properties for the large title in the text attributes dictionary, using the keys found in NSAttributedString.h.
  */
-@property(nullable, nonatomic, copy) NSDictionary<NSAttributedStringKey, id> *largeTitleTextAttributes UI_APPEARANCE_SELECTOR API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(tvos);
+@property(nullable, nonatomic, copy) NSDictionary<NSAttributedStringKey, id> *largeTitleTextAttributes UI_APPEARANCE_SELECTOR API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos) API_UNAVAILABLE(tvos);
 
 - (void)setTitleVerticalPositionAdjustment:(CGFloat)adjustment forBarMetrics:(UIBarMetrics)barMetrics API_AVAILABLE(ios(5.0)) UI_APPEARANCE_SELECTOR;
 - (CGFloat)titleVerticalPositionAdjustmentForBarMetrics:(UIBarMetrics)barMetrics API_AVAILABLE(ios(5.0)) UI_APPEARANCE_SELECTOR;
@@ -137,16 +137,16 @@ vertically if necessary when the navigation bar is in the position UIBarPosition
  */
 
 /// Describes the appearance attributes for the navigation bar to use when it is displayed with its standard height.
-@property (nonatomic, readwrite, copy) UINavigationBarAppearance *standardAppearance UI_APPEARANCE_SELECTOR API_AVAILABLE(ios(13.0), tvos(13.0));
+@property (nonatomic, readwrite, copy) UINavigationBarAppearance *standardAppearance UI_APPEARANCE_SELECTOR API_AVAILABLE(ios(13.0), tvos(13.0)) API_UNAVAILABLE(watchos);
 /// Describes the appearance attributes for the navigation bar to use when it is displayed with its compact height. If not set, the standardAppearance will be used instead.
-@property (nonatomic, readwrite, copy, nullable) UINavigationBarAppearance *compactAppearance UI_APPEARANCE_SELECTOR API_AVAILABLE(ios(13.0));
+@property (nonatomic, readwrite, copy, nullable) UINavigationBarAppearance *compactAppearance UI_APPEARANCE_SELECTOR API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos);
 /// Describes the appearance attributes for the navigation bar to use when an associated UIScrollView has reached the edge abutting the bar (the top edge for the navigation bar). If not set, a modified standardAppearance will be used instead.
-@property (nonatomic, readwrite, copy, nullable) UINavigationBarAppearance *scrollEdgeAppearance UI_APPEARANCE_SELECTOR API_AVAILABLE(ios(13.0));
+@property (nonatomic, readwrite, copy, nullable) UINavigationBarAppearance *scrollEdgeAppearance UI_APPEARANCE_SELECTOR API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos);
 /// Describes the appearance attributes for the navigation bar to use when it is displayed with its compact heights, and an associated UIScrollView has reached the edge abutting the bar. If not set, first the scrollEdgeAppearance will be tried, and if that is nil then compactAppearance followed by a modified standardAppearance.
-@property(nonatomic,readwrite, copy, nullable) UINavigationBarAppearance *compactScrollEdgeAppearance UI_APPEARANCE_SELECTOR API_AVAILABLE(ios(15.0));
+@property(nonatomic,readwrite, copy, nullable) UINavigationBarAppearance *compactScrollEdgeAppearance UI_APPEARANCE_SELECTOR API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(watchos);
 @end
 
-NS_SWIFT_UI_ACTOR
+API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @protocol UINavigationBarDelegate <UIBarPositioningDelegate>
 
 @optional
@@ -158,7 +158,7 @@ NS_SWIFT_UI_ACTOR
 
 #if !TARGET_OS_TV && !TARGET_OS_WATCH
 /// Which section of the NSToolbar this navigation bar should use when attempting to host in an NSToolbar. Returning 'None' will disable NSToolbar hosting as if preferredBehavioralStyle were set to 'Pad' The specific section returned will also affect how the navigation bar presents in that section.
-- (UINavigationBarNSToolbarSection)navigationBarNSToolbarSection:(UINavigationBar *)navigationBar;
+- (UINavigationBarNSToolbarSection)navigationBarNSToolbarSection:(UINavigationBar *)navigationBar API_UNAVAILABLE(watchos);
 #endif
 
 @end

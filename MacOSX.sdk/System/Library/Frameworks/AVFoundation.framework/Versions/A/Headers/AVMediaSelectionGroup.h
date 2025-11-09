@@ -24,7 +24,7 @@ NS_ASSUME_NONNULL_BEGIN
 @class AVMediaSelectionOption;
 @class AVMediaSelectionGroupInternal;
 
-API_AVAILABLE(macos(10.8), ios(5.0), tvos(9.0), watchos(1.0))
+API_AVAILABLE(macos(10.8), ios(5.0), tvos(9.0), watchos(1.0), visionos(1.0))
 @interface AVMediaSelectionGroup : NSObject <NSCopying> {
 @private
 	AVMediaSelectionGroupInternal	*_mediaSelectionGroup;
@@ -43,7 +43,7 @@ API_AVAILABLE(macos(10.8), ios(5.0), tvos(9.0), watchos(1.0))
  @discussion
 	Can be nil, indicating that without a specific end-user selection or preference, no option in the group is intended to be selected.
 */
-@property (nonatomic, readonly, nullable) AVMediaSelectionOption *defaultOption API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(1.0));
+@property (nonatomic, readonly, nullable) AVMediaSelectionOption *defaultOption API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(1.0), visionos(1.0));
 
 /*!
  @property		allowsEmptySelection
@@ -94,7 +94,7 @@ API_AVAILABLE(macos(10.8), ios(5.0), tvos(9.0), watchos(1.0))
 				An array of language identifiers in order of preference, each of which is an IETF BCP 47 (RFC 4646) language identifier. Use +[NSLocale preferredLanguages] to obtain the user's list of preferred languages.
  @result		An instance of NSArray containing media selection options of the specified NSArray that match a preferred language, sorted according to the order of preference of the language each matches.
 */
-+ (NSArray<AVMediaSelectionOption *> *)mediaSelectionOptionsFromArray:(NSArray<AVMediaSelectionOption *> *)mediaSelectionOptions filteredAndSortedAccordingToPreferredLanguages:(NSArray<NSString *> *)preferredLanguages API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(1.0));
++ (NSArray<AVMediaSelectionOption *> *)mediaSelectionOptionsFromArray:(NSArray<AVMediaSelectionOption *> *)mediaSelectionOptions filteredAndSortedAccordingToPreferredLanguages:(NSArray<NSString *> *)preferredLanguages API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(1.0), visionos(1.0));
 
 /*!
   @method		mediaSelectionOptionsFromArray:withLocale:
@@ -144,7 +144,7 @@ API_AVAILABLE(macos(10.8), ios(5.0), tvos(9.0), watchos(1.0))
 @class AVMediaSelectionOptionInternal;
 @class AVMetadataItem;
 
-API_AVAILABLE(macos(10.8), ios(5.0), tvos(9.0), watchos(1.0))
+API_AVAILABLE(macos(10.8), ios(5.0), tvos(9.0), watchos(1.0), visionos(1.0))
 @interface AVMediaSelectionOption : NSObject <NSCopying> {
 @private
 	AVMediaSelectionOptionInternal	*_mediaSelectionOption;
@@ -187,7 +187,7 @@ API_AVAILABLE(macos(10.8), ios(5.0), tvos(9.0), watchos(1.0))
  @property		extendedLanguageTag
  @abstract		Indicates the RFC 4646 language tag associated with the option. May be nil.
  */
-@property (nonatomic, readonly, nullable) NSString *extendedLanguageTag API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(1.0));
+@property (nonatomic, readonly, nullable) NSString *extendedLanguageTag API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(1.0), visionos(1.0));
 
 /*!
  @property		locale
@@ -269,7 +269,7 @@ API_AVAILABLE(macos(10.8), ios(5.0), tvos(9.0), watchos(1.0))
   @discussion
    May use this option's common metadata, media characteristics and locale properties in addition to the provided locale to formulate an NSString intended for display. Will only consider common metadata with the specified locale.
 */
-- (NSString *)displayNameWithLocale:(NSLocale *)locale API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(1.0));
+- (NSString *)displayNameWithLocale:(NSLocale *)locale API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(1.0), visionos(1.0));
 
 /*!
   @property		displayName
@@ -279,7 +279,7 @@ API_AVAILABLE(macos(10.8), ios(5.0), tvos(9.0), watchos(1.0))
    In the event that common metadata is not available in the specified locale, displayName will fall back to considering locales with the multilingual ("mul") then undetermined ("und") locale identifiers.
    For a display name strictly with the specified locale use displayNameWithLocale: instead.
 */
-@property (nonatomic, readonly) NSString *displayName API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(1.0));
+@property (nonatomic, readonly) NSString *displayName API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(1.0), visionos(1.0));
 
 @end
 

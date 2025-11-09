@@ -9,7 +9,7 @@
 */
 
 #import <AVFoundation/AVBase.h>
-#if TARGET_OS_OSX
+#if ( TARGET_OS_OSX || ( TARGET_OS_IOS && ! TARGET_OS_VISION ) )
 
 #import <Foundation/Foundation.h>
 #import <AVFoundation/AVCaption.h>
@@ -18,7 +18,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 NS_SWIFT_NONSENDABLE
-API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, tvos, watchos)
+API_AVAILABLE(macos(12.0), ios(18.0), macCatalyst(15.0)) API_UNAVAILABLE(tvos, watchos, visionos)
 @interface AVCaptionGrouper : NSObject
 {
 @private
@@ -32,7 +32,7 @@ API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, tvos, watchos)
 
 NS_ASSUME_NONNULL_END
 
-#endif //TARGET_OS_OSX
+#endif // ( TARGET_OS_OSX || ( TARGET_OS_IOS && ! TARGET_OS_VISION ) )
 
 #else
 #import <AVFCore/AVCaptionGrouper.h>

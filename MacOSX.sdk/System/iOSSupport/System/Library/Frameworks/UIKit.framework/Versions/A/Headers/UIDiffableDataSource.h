@@ -31,7 +31,7 @@ NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 //      2. If you pass duplicate values in an item or section array (e.g. -appendItemsWithIdentifiers:), the system will throw an exception.
 //
 
-UIKIT_EXTERN API_AVAILABLE(ios(13.0),tvos(13.0),watchos(6.0))
+UIKIT_EXTERN API_AVAILABLE(ios(13.0), tvos(13.0)) API_UNAVAILABLE(watchos)
 @interface NSDiffableDataSourceSnapshot<SectionIdentifierType,ItemIdentifierType> : NSObject<NSCopying>
 
 // structure
@@ -89,11 +89,11 @@ UIKIT_EXTERN API_AVAILABLE(ios(13.0),tvos(13.0),watchos(6.0))
 
 #endif // UIKIT_HAS_UIFOUNDATION_SYMBOLS
 
-typedef UICollectionViewCell * _Nullable (^UICollectionViewDiffableDataSourceCellProvider)(UICollectionView * _Nonnull collectionView, NSIndexPath * _Nonnull indexPath, id _Nonnull itemIdentifier);
-typedef UICollectionReusableView * _Nullable (^UICollectionViewDiffableDataSourceSupplementaryViewProvider)(UICollectionView* _Nonnull collectionView, NSString * _Nonnull elementKind, NSIndexPath * _Nonnull indexPath);
+typedef UICollectionViewCell * _Nullable (^UICollectionViewDiffableDataSourceCellProvider)(UICollectionView * _Nonnull collectionView, NSIndexPath * _Nonnull indexPath, id _Nonnull itemIdentifier) API_UNAVAILABLE(watchos);
+typedef UICollectionReusableView * _Nullable (^UICollectionViewDiffableDataSourceSupplementaryViewProvider)(UICollectionView* _Nonnull collectionView, NSString * _Nonnull elementKind, NSIndexPath * _Nonnull indexPath) API_UNAVAILABLE(watchos);
 
 
-UIKIT_EXTERN API_AVAILABLE(ios(14.0),tvos(14.0)) NS_SWIFT_SENDABLE
+UIKIT_EXTERN API_AVAILABLE(ios(14.0), tvos(14.0)) API_UNAVAILABLE(watchos) NS_SWIFT_SENDABLE
 @interface NSDiffableDataSourceSectionTransaction<SectionIdentifierType, ItemIdentifierType> : NSObject
 @property(nonatomic,readonly) SectionIdentifierType sectionIdentifier;
 @property(nonatomic,readonly) NSDiffableDataSourceSectionSnapshot<ItemIdentifierType> *initialSnapshot;
@@ -101,7 +101,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(14.0),tvos(14.0)) NS_SWIFT_SENDABLE
 @property(nonatomic,readonly) NSOrderedCollectionDifference<ItemIdentifierType> *difference;
 @end
 
-UIKIT_EXTERN API_AVAILABLE(ios(14.0),tvos(14.0)) NS_SWIFT_SENDABLE
+UIKIT_EXTERN API_AVAILABLE(ios(14.0), tvos(14.0)) API_UNAVAILABLE(watchos) NS_SWIFT_SENDABLE
 @interface NSDiffableDataSourceTransaction<SectionIdentifierType, ItemIdentifierType> : NSObject
 @property(nonatomic,readonly) NSDiffableDataSourceSnapshot<SectionIdentifierType, ItemIdentifierType> *initialSnapshot;
 @property(nonatomic,readonly) NSDiffableDataSourceSnapshot<SectionIdentifierType, ItemIdentifierType> *finalSnapshot;
@@ -109,14 +109,14 @@ UIKIT_EXTERN API_AVAILABLE(ios(14.0),tvos(14.0)) NS_SWIFT_SENDABLE
 @property(nonatomic,readonly) NSArray<NSDiffableDataSourceSectionTransaction<SectionIdentifierType, ItemIdentifierType>*> *sectionTransactions;
 @end
 
-UIKIT_EXTERN API_AVAILABLE(ios(14.0),tvos(14.0)) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(14.0), tvos(14.0)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @interface UICollectionViewDiffableDataSourceReorderingHandlers<SectionType,ItemType> : NSObject<NSCopying>
 @property(nonatomic,copy,nullable) BOOL(^canReorderItemHandler)(ItemType);
 @property(nonatomic,copy,nullable) void(^willReorderHandler)(NSDiffableDataSourceTransaction<SectionType, ItemType> *);
 @property(nonatomic,copy,nullable) void(^didReorderHandler)(NSDiffableDataSourceTransaction<SectionType, ItemType> *);
 @end
 
-UIKIT_EXTERN API_AVAILABLE(ios(14.0),tvos(14.0)) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(14.0), tvos(14.0)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @interface UICollectionViewDiffableDataSourceSectionSnapshotHandlers<ItemType> : NSObject<NSCopying>
 @property(nonatomic,copy,nullable) BOOL(^shouldExpandItemHandler)(ItemType);
 @property(nonatomic,copy,nullable) void(^willExpandItemHandler)(ItemType);
@@ -126,7 +126,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(14.0),tvos(14.0)) NS_SWIFT_UI_ACTOR
 @end
 
 
-UIKIT_EXTERN API_AVAILABLE(ios(13.0),tvos(13.0),watchos(6.0)) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(13.0), tvos(13.0)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @interface UICollectionViewDiffableDataSource<SectionIdentifierType,ItemIdentifierType> : NSObject<UICollectionViewDataSource>
 
 - (instancetype)initWithCollectionView:(UICollectionView*)collectionView cellProvider:(UICollectionViewDiffableDataSourceCellProvider)cellProvider;
@@ -138,7 +138,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(13.0),tvos(13.0),watchos(6.0)) NS_SWIFT_UI_ACTOR
 // Create a snapshot of the current UICollectionView data source state.
 //   This snapshot can be mutated and later applied via -applySnapshot:animatingDifferences:
 
-- (NSDiffableDataSourceSnapshot<SectionIdentifierType,ItemIdentifierType>*)snapshot UIKIT_SWIFT_ACTOR_INDEPENDENT;
+- (NSDiffableDataSourceSnapshot<SectionIdentifierType,ItemIdentifierType>*)snapshot;
 
 // Apply a snapshot to the collection view committing to the new data source state.
 //
@@ -152,8 +152,8 @@ UIKIT_EXTERN API_AVAILABLE(ios(13.0),tvos(13.0),watchos(6.0)) NS_SWIFT_UI_ACTOR
 //        (if you violate this restriction and mix calls between the main queue and some background queue, the framework
 //         will log and/or assert to avoid deadlocks)
 
-- (void)applySnapshot:(NSDiffableDataSourceSnapshot<SectionIdentifierType,ItemIdentifierType>*)snapshot animatingDifferences:(BOOL)animatingDifferences UIKIT_SWIFT_ACTOR_INDEPENDENT;
-- (void)applySnapshot:(NSDiffableDataSourceSnapshot<SectionIdentifierType,ItemIdentifierType>*)snapshot animatingDifferences:(BOOL)animatingDifferences completion:(void(^ _Nullable)(void))completion NS_SWIFT_DISABLE_ASYNC UIKIT_SWIFT_ACTOR_INDEPENDENT;
+- (void)applySnapshot:(NSDiffableDataSourceSnapshot<SectionIdentifierType,ItemIdentifierType>*)snapshot animatingDifferences:(BOOL)animatingDifferences;
+- (void)applySnapshot:(NSDiffableDataSourceSnapshot<SectionIdentifierType,ItemIdentifierType>*)snapshot animatingDifferences:(BOOL)animatingDifferences completion:(void(^ _Nullable)(void))completion NS_SWIFT_DISABLE_ASYNC;
 
 // Apply a snapshot to the collection view using reloadData.
 //
@@ -162,8 +162,8 @@ UIKIT_EXTERN API_AVAILABLE(ios(13.0),tvos(13.0),watchos(6.0)) NS_SWIFT_UI_ACTOR
 //  new state immediately (e.g. recycling the collection view for use with a completely different data set), or when you
 //  specifically want to skip diffing (e.g. applying an exceptionally large changeset).
 
-- (void)applySnapshotUsingReloadData:(NSDiffableDataSourceSnapshot<SectionIdentifierType,ItemIdentifierType>*)snapshot UIKIT_SWIFT_ACTOR_INDEPENDENT API_AVAILABLE(ios(15.0), tvos(15.0));
-- (void)applySnapshotUsingReloadData:(NSDiffableDataSourceSnapshot<SectionIdentifierType,ItemIdentifierType>*)snapshot completion:(void(^ _Nullable)(void))completion NS_SWIFT_DISABLE_ASYNC UIKIT_SWIFT_ACTOR_INDEPENDENT API_AVAILABLE(ios(15.0), tvos(15.0));
+- (void)applySnapshotUsingReloadData:(NSDiffableDataSourceSnapshot<SectionIdentifierType,ItemIdentifierType>*)snapshot API_AVAILABLE(ios(15.0), tvos(15.0));
+- (void)applySnapshotUsingReloadData:(NSDiffableDataSourceSnapshot<SectionIdentifierType,ItemIdentifierType>*)snapshot completion:(void(^ _Nullable)(void))completion NS_SWIFT_DISABLE_ASYNC API_AVAILABLE(ios(15.0), tvos(15.0));
 
 // convert section index <-> SectionIdentifierType
 
@@ -181,17 +181,17 @@ UIKIT_EXTERN API_AVAILABLE(ios(13.0),tvos(13.0),watchos(6.0)) NS_SWIFT_UI_ACTOR
 
 // Section Snapshot Support
 
-- (void)applySnapshot:(NSDiffableDataSourceSectionSnapshot<ItemIdentifierType>*)snapshot toSection:(SectionIdentifierType)sectionIdentifier animatingDifferences:(BOOL)animatingDifferences UIKIT_SWIFT_ACTOR_INDEPENDENT API_AVAILABLE(ios(14.0),tvos(14.0));
-- (void)applySnapshot:(NSDiffableDataSourceSectionSnapshot<ItemIdentifierType>*)snapshot toSection:(SectionIdentifierType)sectionIdentifier animatingDifferences:(BOOL)animatingDifferences completion:(void (^ _Nullable)(void))completion UIKIT_SWIFT_ACTOR_INDEPENDENT NS_SWIFT_DISABLE_ASYNC API_AVAILABLE(ios(14.0),tvos(14.0));
-- (NSDiffableDataSourceSectionSnapshot<ItemIdentifierType>*)snapshotForSection:(SectionIdentifierType)section UIKIT_SWIFT_ACTOR_INDEPENDENT API_AVAILABLE(ios(14.0),tvos(14.0));
+- (void)applySnapshot:(NSDiffableDataSourceSectionSnapshot<ItemIdentifierType>*)snapshot toSection:(SectionIdentifierType)sectionIdentifier animatingDifferences:(BOOL)animatingDifferences API_AVAILABLE(ios(14.0),tvos(14.0));
+- (void)applySnapshot:(NSDiffableDataSourceSectionSnapshot<ItemIdentifierType>*)snapshot toSection:(SectionIdentifierType)sectionIdentifier animatingDifferences:(BOOL)animatingDifferences completion:(void (^ _Nullable)(void))completion NS_SWIFT_DISABLE_ASYNC API_AVAILABLE(ios(14.0),tvos(14.0));
+- (NSDiffableDataSourceSectionSnapshot<ItemIdentifierType>*)snapshotForSection:(SectionIdentifierType)section API_AVAILABLE(ios(14.0),tvos(14.0));
 
 @property(nonatomic,copy) UICollectionViewDiffableDataSourceSectionSnapshotHandlers<ItemIdentifierType> *sectionSnapshotHandlers API_AVAILABLE(ios(14.0),tvos(14.0));
 
 @end
 
-typedef UITableViewCell * _Nullable (^UITableViewDiffableDataSourceCellProvider)(UITableView * _Nonnull tableView, NSIndexPath * _Nonnull indexPath, id _Nonnull itemIdentifier);
+typedef UITableViewCell * _Nullable (^UITableViewDiffableDataSourceCellProvider)(UITableView * _Nonnull tableView, NSIndexPath * _Nonnull indexPath, id _Nonnull itemIdentifier) API_UNAVAILABLE(watchos);
 
-UIKIT_EXTERN API_AVAILABLE(ios(13.0),tvos(13.0),watchos(6.0)) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(13.0), tvos(13.0)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @interface UITableViewDiffableDataSource<SectionIdentifierType,ItemIdentifierType> : NSObject<UITableViewDataSource>
 
 - (instancetype)initWithTableView:(UITableView*)tableView cellProvider:(UITableViewDiffableDataSourceCellProvider)cellProvider;
@@ -201,7 +201,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(13.0),tvos(13.0),watchos(6.0)) NS_SWIFT_UI_ACTOR
 // Create a snapshot of the current UITableView data source state.
 //   This snapshot can be mutated and later applied via -applySnapshot:animatingDifferences:
 
-- (NSDiffableDataSourceSnapshot<SectionIdentifierType,ItemIdentifierType>*)snapshot UIKIT_SWIFT_ACTOR_INDEPENDENT;
+- (NSDiffableDataSourceSnapshot<SectionIdentifierType,ItemIdentifierType>*)snapshot;
 
 // Apply a snapshot to the table view committing to the new data source state.
 //
@@ -215,8 +215,8 @@ UIKIT_EXTERN API_AVAILABLE(ios(13.0),tvos(13.0),watchos(6.0)) NS_SWIFT_UI_ACTOR
 //        (if you violate this restriction and mix calls between the main queue and some background queue, the framework
 //         will log and/or assert to avoid deadlocks)
 
-- (void)applySnapshot:(NSDiffableDataSourceSnapshot<SectionIdentifierType,ItemIdentifierType>*)snapshot animatingDifferences:(BOOL)animatingDifferences UIKIT_SWIFT_ACTOR_INDEPENDENT;
-- (void)applySnapshot:(NSDiffableDataSourceSnapshot<SectionIdentifierType,ItemIdentifierType>*)snapshot animatingDifferences:(BOOL)animatingDifferences completion:(void(^ _Nullable)(void))completion NS_SWIFT_DISABLE_ASYNC UIKIT_SWIFT_ACTOR_INDEPENDENT;
+- (void)applySnapshot:(NSDiffableDataSourceSnapshot<SectionIdentifierType,ItemIdentifierType>*)snapshot animatingDifferences:(BOOL)animatingDifferences;
+- (void)applySnapshot:(NSDiffableDataSourceSnapshot<SectionIdentifierType,ItemIdentifierType>*)snapshot animatingDifferences:(BOOL)animatingDifferences completion:(void(^ _Nullable)(void))completion NS_SWIFT_DISABLE_ASYNC;
 
 // Apply a snapshot to the table view using reloadData.
 //
@@ -225,8 +225,8 @@ UIKIT_EXTERN API_AVAILABLE(ios(13.0),tvos(13.0),watchos(6.0)) NS_SWIFT_UI_ACTOR
 //  new state immediately (e.g. recycling the table view for use with a completely different data set), or when you
 //  specifically want to skip diffing (e.g. applying an exceptionally large changeset).
 
-- (void)applySnapshotUsingReloadData:(NSDiffableDataSourceSnapshot<SectionIdentifierType,ItemIdentifierType>*)snapshot UIKIT_SWIFT_ACTOR_INDEPENDENT API_AVAILABLE(ios(15.0), tvos(15.0));
-- (void)applySnapshotUsingReloadData:(NSDiffableDataSourceSnapshot<SectionIdentifierType,ItemIdentifierType>*)snapshot completion:(void(^ _Nullable)(void))completion NS_SWIFT_DISABLE_ASYNC UIKIT_SWIFT_ACTOR_INDEPENDENT API_AVAILABLE(ios(15.0), tvos(15.0));
+- (void)applySnapshotUsingReloadData:(NSDiffableDataSourceSnapshot<SectionIdentifierType,ItemIdentifierType>*)snapshot API_AVAILABLE(ios(15.0), tvos(15.0));
+- (void)applySnapshotUsingReloadData:(NSDiffableDataSourceSnapshot<SectionIdentifierType,ItemIdentifierType>*)snapshot completion:(void(^ _Nullable)(void))completion NS_SWIFT_DISABLE_ASYNC API_AVAILABLE(ios(15.0), tvos(15.0));
 
 // convert section index <-> SectionIdentifierType
 

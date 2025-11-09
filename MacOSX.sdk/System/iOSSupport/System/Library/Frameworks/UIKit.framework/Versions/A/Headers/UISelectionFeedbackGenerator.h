@@ -11,7 +11,7 @@
 NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 // UISelectionFeedbackGenerator is used to give user feedback when a selection changes
-UIKIT_EXTERN API_AVAILABLE(ios(10.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos, watchos) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(10.0)) API_UNAVAILABLE(visionos, tvos) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @interface UISelectionFeedbackGenerator : UIFeedbackGenerator
 
 /// call when the selection changes (not on initial selection)

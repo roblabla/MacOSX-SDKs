@@ -9,7 +9,7 @@
 */
 
 #import <AVFoundation/AVBase.h>
-#if TARGET_OS_OSX
+#if ( TARGET_OS_OSX || ( TARGET_OS_IOS && ! TARGET_OS_VISION ) )
 
 #import <Foundation/Foundation.h>
 #import <AVFoundation/AVCaption.h>
@@ -31,7 +31,7 @@ NS_ASSUME_NONNULL_BEGIN
 	An instance of AVCaptionRenderer performs drawing of a caption "scene" from a population of captions given a time. If there are no captions or no captions at the specified time, "emptiness" will still be drawn (e.g., flood filling with zero alpha or a color).
  */
 NS_SWIFT_NONSENDABLE
-API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, tvos, watchos)
+API_AVAILABLE(macos(12.0), ios(18.0), macCatalyst(15.0)) API_UNAVAILABLE(tvos, watchos, visionos)
 @interface AVCaptionRenderer : NSObject
 {
 @private
@@ -97,7 +97,7 @@ API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, tvos, watchos)
 	Subclasses of this type that are used from Swift must fulfill the requirements of a Sendable type.
  */
 NS_SWIFT_SENDABLE
-API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, tvos, watchos)
+API_AVAILABLE(macos(12.0), ios(18.0), macCatalyst(15.0)) API_UNAVAILABLE(tvos, watchos, visionos)
 @interface AVCaptionRendererScene : NSObject <NSCopying>
 {
 @private
@@ -135,7 +135,8 @@ AV_INIT_UNAVAILABLE
 
 NS_ASSUME_NONNULL_END
 
-#endif // TARGET_OS_OSX
+#endif // ( TARGET_OS_OSX || ( TARGET_OS_IOS && ! TARGET_OS_VISION ) )
+
 
 #else
 #import <AVFCore/AVCaptionRenderer.h>

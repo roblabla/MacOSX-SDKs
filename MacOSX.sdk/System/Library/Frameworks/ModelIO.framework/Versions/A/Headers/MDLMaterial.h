@@ -380,7 +380,7 @@ MDL_EXPORT
 
 // Iterates all material properties. If they are string values, they are resolved into
 // valid paths as NSURL values.
-// @param resolver If non-nil, the resolver can be invoked to convert stringValues
+// @param resolver The resolver can be invoked to convert stringValues
 //                 to NSURLs for loading.
 - (void)resolveTexturesWithResolver:(id<MDLAssetResolver>)resolver API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0));
 
@@ -388,8 +388,8 @@ MDL_EXPORT
 // can be resolved as textures, then the string and NSURL values will be replaced by
 // MDLTextureSampler values. The transforms on the samplers will be identity, the
 // wrap modes will be clamp, and the filter modes will be linear.
-// @param resolver If non-nil, the resolver can be invoked to convert stringValues
-//                 to NSURLs for loading.
+// @param resolver The resolver can be invoked to convert stringValues or NSURLs
+//                 to an MDLTextureSampler.
 - (void)loadTexturesUsingResolver:(id<MDLAssetResolver>)resolver API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0));
 
 @property (nonatomic, readonly, retain) MDLScatteringFunction *scatteringFunction;

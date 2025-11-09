@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 @class NSString, UIImage;
 @protocol UIPopoverPresentationControllerSourceItem;
 
-UIKIT_EXTERN API_AVAILABLE(ios(16.0)) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @protocol UIMenuLeaf <NSObject>
 
 /// Short display title.
@@ -24,7 +24,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(16.0)) NS_SWIFT_UI_ACTOR
 @property (nullable, nonatomic, copy) UIImage *image;
 
 /// Image that can appear next to this action when the `state` is `UIMenuElementStateOn`
-@property (nullable, nonatomic, copy) UIImage *selectedImage API_AVAILABLE(ios(17.0));
+@property (nullable, nonatomic, copy) UIImage *selectedImage API_AVAILABLE(ios(17.0)) API_UNAVAILABLE(watchos);
 
 /// Elaborated title used in keyboard shortcut overlay.
 @property (nullable, nonatomic, copy) NSString *discoverabilityTitle;

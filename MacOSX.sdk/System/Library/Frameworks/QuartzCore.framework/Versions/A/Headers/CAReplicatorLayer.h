@@ -7,7 +7,7 @@
 
 #import <QuartzCore/CALayer.h>
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 /* The replicator layer creates a specified number of copies of its
  * sublayers, each copy potentially having geometric, temporal and
@@ -17,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
  * instance of z replicator layer's sublayers. This may change in the
  * future. */
 
-API_AVAILABLE(macos(10.6), ios(3.0), watchos(2.0), tvos(9.0))
+API_AVAILABLE(macos(10.6), ios(3.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 @interface CAReplicatorLayer : CALayer
 
 /* The number of copies to create, including the source object.
@@ -60,6 +60,6 @@ API_AVAILABLE(macos(10.6), ios(3.0), watchos(2.0), tvos(9.0))
 
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)
 
 #endif

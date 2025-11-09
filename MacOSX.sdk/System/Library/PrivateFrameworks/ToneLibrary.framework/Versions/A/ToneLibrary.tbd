@@ -6,11 +6,12 @@ install-name:    '/System/Library/PrivateFrameworks/ToneLibrary.framework/Versio
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
-    symbols:         [ _NSStringFromTLAlertPlaybackCompletionType, _NSStringFromTLAlertType, 
-                       _TLAlertErrorDomain, _TLAlertPlaybackCompletionTypeFromString, 
-                       _TLAlertTopicActivityFriendsGoalAttained, _TLAlertTopicActivityGoalAttained, 
-                       _TLAlertTopicActivityGoalBehind, _TLAlertTopicAlarmGoToSleep, 
-                       _TLAlertTopicAlarmNightstand, _TLAlertTopicAlarmWakeUp, _TLAlertTopicAppNotificationCriticalAlert, 
+    symbols:         [ _NSStringFromTLAlertPlaybackCompletionType, _NSStringFromTLAlertTargetDevice, 
+                       _NSStringFromTLAlertType, _TLAlertErrorDomain, _TLAlertPlaybackCompletionTypeFromString, 
+                       _TLAlertTargetDeviceFromString, _TLAlertTopicActivityFriendsGoalAttained, 
+                       _TLAlertTopicActivityGoalAttained, _TLAlertTopicActivityGoalBehind, 
+                       _TLAlertTopicAlarmGoToSleep, _TLAlertTopicAlarmNightstand, 
+                       _TLAlertTopicAlarmWakeUp, _TLAlertTopicAppNotificationCriticalAlert, 
                        _TLAlertTopicAppNotificationFirstParty, _TLAlertTopicEmergencyNonInterrupting, 
                        _TLAlertTopicHandwashingReminder, _TLAlertTopicHandwashingSessionEnd, 
                        _TLAlertTopicHandwashingSessionProgressTapHaptics, _TLAlertTopicHandwashingSessionProgressVibeHaptics, 
@@ -40,7 +41,8 @@ exports:
                        _TLLogPlayback, _TLLogToneManagement, _TLLogVibrationManagement, 
                        _TLServiceAgentIdentifier, _TLServiceAgentPreferencesDomain, 
                        _TLServiceCommunicationErrorDomain, _TLServicePersistenceErrorDomain, 
-                       _TLServiceValidationErrorDomain, _TLToneIdentifierNone, __TLAlertOverridePolicyDidChangeNotification, 
+                       _TLServiceValidationErrorDomain, _TLToneIdentifierNone, _TLTonePreferencesDidChangeNotification, 
+                       __TLAlertOverridePolicyDidChangeNotification, __TLAlertTargetDeviceGetHumanReadableDescription, 
                        __TLAlertTopicClassroomDeemphasized, __TLAlertTopicIncomingCallDeemphasized, 
                        __TLAlertTypeGetHumanReadableDescription, __TLAlertTypeValidateConsistencyOfEnumeration, 
                        __TLToneManagerContentsChangedNotification, _kSystemSoundID_InvalidTone, 
@@ -55,8 +57,8 @@ exports:
                        TLAlertPlaybackPolicy, TLAlertQueuePlayerController, TLAlertQueuePlayerStateDescriptor, 
                        TLAlertStoppingOptions, TLAlertSystemSoundContext, TLAlertSystemSoundController, 
                        TLAlertSystemSoundPlayTaskDescriptor, TLAlertSystemSoundStopTasksDescriptor, 
-                       TLAlertTone, TLAudioQueue, TLBacklight, TLCapabilitiesManager, 
-                       TLContentProtectionStateObserver, TLDeemphasizableAlertSystemSoundBeginPlayingContext, 
-                       TLITunesTone, TLPreferencesUtilities, TLSystemApplication, 
-                       TLSystemSound, TLToneManager, TLToneStoreDownload ]
+                       TLAudioQueue, TLBacklight, TLCapabilitiesManager, TLContentProtectionStateObserver, 
+                       TLDeemphasizableAlertSystemSoundBeginPlayingContext, TLITunesTone, 
+                       TLPreferencesUtilities, TLSystemApplication, TLSystemSound, 
+                       TLSystemTone, TLToneManager, TLToneStoreDownload ]
 ...

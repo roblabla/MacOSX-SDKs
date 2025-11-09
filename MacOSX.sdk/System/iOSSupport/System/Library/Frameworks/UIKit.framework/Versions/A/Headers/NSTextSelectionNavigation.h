@@ -3,7 +3,7 @@
 //  NSTextSelectionNavigation.h
 //  Text Kit
 //
-//  Copyright (c) 2019-2021, Apple Inc. All rights reserved.
+//  Copyright (c) 2019-2024, Apple Inc. All rights reserved.
 //
 
 #import <Foundation/NSObject.h>
@@ -32,7 +32,7 @@ typedef NS_ENUM(NSInteger, NSTextSelectionNavigationDirection) {
     NSTextSelectionNavigationDirectionLeft,
     NSTextSelectionNavigationDirectionUp,
     NSTextSelectionNavigationDirectionDown
-} API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos);
+} API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 typedef NS_ENUM(NSInteger, NSTextSelectionNavigationDestination) {
     NSTextSelectionNavigationDestinationCharacter, // Moving to the next extended grapheme cluster boundary. Could result in a location inside a cluster depending on operations. When the movement direction is not along the line (i.e. up and down for a horizontal line), it moves to the adjacent line using the anchor point instead of resolving to the logical direction
@@ -42,25 +42,25 @@ typedef NS_ENUM(NSInteger, NSTextSelectionNavigationDestination) {
     NSTextSelectionNavigationDestinationParagraph, // Moving to the next paragraph boundary. Ignores the end of line elastic characters and paragraph separators
     NSTextSelectionNavigationDestinationContainer, // Moving to the next container/page boundary. Ignores the end of line elastic characters and container/page separators
     NSTextSelectionNavigationDestinationDocument, // Moving to the document boundary
-} API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos);
+} API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 typedef NS_OPTIONS(NSUInteger, NSTextSelectionNavigationModifier) {
     NSTextSelectionNavigationModifierExtend = (1 << 0), // Extends the selection by not moving the initial location while drag selection
     NSTextSelectionNavigationModifierVisual = (1 << 1), // Extends the selection visually inside the rectangular area defined by the anchor and dragged positions
     NSTextSelectionNavigationModifierMultiple = (1 << 2), // Extends the selection visually inside the rectangular area defined by the anchor and dragged positions and produces an NSTextSelection per line
-} API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos);
+} API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 typedef NS_ENUM(NSInteger, NSTextSelectionNavigationWritingDirection) {
     NSTextSelectionNavigationWritingDirectionLeftToRight   = 0,    // Left to right writing direction
     NSTextSelectionNavigationWritingDirectionRightToLeft   = 1     // Right to left writing direction
-} API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos);
+} API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 typedef NS_ENUM(NSInteger, NSTextSelectionNavigationLayoutOrientation) {
     NSTextSelectionNavigationLayoutOrientationHorizontal = 0, // Lines rendered horizontally, grow top to bottom
     NSTextSelectionNavigationLayoutOrientationVertical = 1, // Lines rendered vertically, grow right to left
-} API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos);
+} API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 
-API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos)
+API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), visionos(1.0)) API_UNAVAILABLE(watchos)
 @interface NSTextSelectionNavigation : NSObject
 #pragma mark Initialization
 - (instancetype)initWithDataSource:(id <NSTextSelectionDataSource>)dataSource NS_DESIGNATED_INITIALIZER;
@@ -103,7 +103,7 @@ API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos)
 - (NSArray<NSTextRange *> *)deletionRangesForTextSelection:(NSTextSelection *)textSelection direction:(NSTextSelectionNavigationDirection)direction destination:(NSTextSelectionNavigationDestination)destination allowsDecomposition:(BOOL)allowsDecomposition;
 @end
 
-API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos)
+API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), visionos(1.0)) API_UNAVAILABLE(watchos)
 @protocol NSTextSelectionDataSource <NSObject>
 @required
 // Declares the starting and ending locations for the document.

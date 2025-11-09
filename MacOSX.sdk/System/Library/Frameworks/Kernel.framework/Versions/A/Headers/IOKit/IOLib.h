@@ -81,6 +81,14 @@ IOMallocArraySize(vm_size_t hdr_size, vm_size_t elem_size, vm_size_t elem_count)
 	return s;
 }
 
+#define IOKIT_TYPE_IS_COMPATIBLE_PTR(ptr, type) \
+	(__builtin_xnu_types_compatible(os_get_pointee_type(ptr), type) ||   \
+	    __builtin_xnu_types_compatible(os_get_pointee_type(ptr), void))  \
+
+#define IOKIT_TYPE_ASSERT_COMPATIBLE_POINTER(ptr, type) \
+	_Static_assert(IOKIT_TYPE_IS_COMPATIBLE_PTR(ptr, type), \
+	    "Pointer type is not compatible with specified type")
+
 /*
  * These are opaque to the user.
  */
@@ -179,6 +187,41 @@ void * IOMallocPageableZero(vm_size_t size, vm_size_t alignment) __attribute__((
 
 void IOFreePageable(void * address, vm_size_t size);
 
+
+/*! @function IOMallocData
+ *   @abstract Allocates wired memory in the kernel map, from a separate section meant for pure data.
+ *   @discussion Same as IOMalloc except that this function should be used for allocating pure data.
+ *   @param size Size of the memory requested.
+ *   @result Pointer to the allocated memory, or zero on failure. */
+void * IOMallocData(vm_size_t size) __attribute__((alloc_size(1)));
+
+/*! @function IOMallocZeroData
+ *   @abstract Allocates wired memory in the kernel map, from a separate section meant for pure data bytes that don't contain pointers.
+ *   @discussion Same as IOMallocData except that the memory returned is zeroed.
+ *   @param size Size of the memory requested.
+ *   @result Pointer to the allocated memory, or zero on failure. */
+void * IOMallocZeroData(vm_size_t size) __attribute__((alloc_size(1)));
+
+
+/*! @function IOFreeData
+ *   @abstract Frees memory allocated with IOMallocData or IOMallocZeroData.
+ *   @discussion This function frees memory allocated with IOMallocData/IOMallocZeroData, it may block and so should not be called from interrupt level or while a simple lock is held.
+ *   @param address Virtual address of the allocated memory. Passing NULL here is acceptable.
+ *   @param size Size of the memory allocated. It is acceptable to pass 0 size for a NULL address. */
+void IOFreeData(void * address, vm_size_t size);
+
+#define IONewData(type, count) \
+	((type *)IOMallocData(IOMallocArraySize(0, sizeof(type), count)))
+
+#define IONewZeroData(type, count) \
+	((type *)IOMallocZeroData(IOMallocArraySize(0, sizeof(type), count)))
+
+#define IODeleteData(ptr, type, count) ({ \
+	vm_size_t  __count = (vm_size_t)(count);             \
+	IOKIT_TYPE_ASSERT_COMPATIBLE_POINTER(ptr, type);     \
+	IOFreeData(os_ptr_load_and_erase(ptr),               \
+	    IOMallocArraySize(0, sizeof(type), __count));    \
+})
 
 
 /*

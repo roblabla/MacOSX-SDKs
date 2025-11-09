@@ -1,7 +1,7 @@
 /*
         NSGraphicsContext.h
         Application Kit
-        Copyright (c) 1997-2023, Apple Inc.
+        Copyright (c) 1997-2024, Apple Inc.
         All rights reserved.
 */
 
@@ -41,9 +41,6 @@ typedef NS_ENUM(NSUInteger, NSImageInterpolation) {
 
 // Instantiates from an appropriate concrete subclass depending on NSGraphicsContextDestinationAttributeName attribute
 + (nullable NSGraphicsContext *)graphicsContextWithAttributes:(NSDictionary<NSGraphicsContextAttributeKey, id> *)attributes;
-
-// Convenience cover method for [NSGraphicsContext graphicsContextWithAttributes:[NSDictionary dictionaryWithObject:<NSWindow instance> forKey:NSGraphicsContextDestinationAttributeName]]
-+ (NSGraphicsContext *)graphicsContextWithWindow:(NSWindow *)window;
 
 /* Convenience cover method for [NSGraphicsContext graphicsContextWithAttributes:[NSDictionary dictionaryWithObject:<NSBitmapImageRep instance> forKey:NSGraphicsContextDestinationAttributeName]]. Only NSBitmapImageRep instances with isPlanar == NO are supported.
 */
@@ -108,6 +105,8 @@ typedef NS_ENUM(NSUInteger, NSImageInterpolation) {
 
 + (NSGraphicsContext *)graphicsContextWithGraphicsPort:(void *)graphicsPort flipped:(BOOL)initialFlippedState API_DEPRECATED_WITH_REPLACEMENT("graphicsContextWithCGContext:flipped:", macos(10.0,10.14));
 @property (readonly) void *graphicsPort NS_RETURNS_INNER_POINTER API_DEPRECATED_WITH_REPLACEMENT("CGContext", macos(10.0,10.14));
+
++ (NSGraphicsContext *)graphicsContextWithWindow:(NSWindow *)window API_DEPRECATED("Add instances of NSView to display content in a window", macos(10.0,10.14));
 
 @end
 

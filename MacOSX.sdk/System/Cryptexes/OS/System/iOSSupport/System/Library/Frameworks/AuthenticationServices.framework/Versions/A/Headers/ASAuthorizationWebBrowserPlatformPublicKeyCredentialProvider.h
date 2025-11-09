@@ -2,6 +2,8 @@
 
 #import <AuthenticationServices/ASFoundation.h>
 
+#import <AuthenticationServices/ASAuthorizationPlatformPublicKeyCredentialRegistrationRequest.h>
+
 @class ASAuthorizationPlatformPublicKeyCredentialAssertionRequest;
 @class ASAuthorizationPlatformPublicKeyCredentialRegistrationRequest;
 @class ASPublicKeyCredentialClientData;
@@ -17,6 +19,8 @@ NS_REFINED_FOR_SWIFT
 @protocol ASAuthorizationWebBrowserPlatformPublicKeyCredentialProvider
 
 - (ASAuthorizationPlatformPublicKeyCredentialRegistrationRequest *)createCredentialRegistrationRequestWithClientData:(ASPublicKeyCredentialClientData *)clientData name:(NSString *)name userID:(NSData *)userID;
+
+- (ASAuthorizationPlatformPublicKeyCredentialRegistrationRequest *)createCredentialRegistrationRequestWithClientData:(ASPublicKeyCredentialClientData *)clientData name:(NSString *)name userID:(NSData *)userID requestStyle:(ASAuthorizationPlatformPublicKeyCredentialRegistrationRequestStyle)requestStyle API_AVAILABLE(macos(15.0), ios(18.0)) API_UNAVAILABLE(tvos, watchos, visionos);
 
 - (ASAuthorizationPlatformPublicKeyCredentialAssertionRequest *)createCredentialAssertionRequestWithClientData:(ASPublicKeyCredentialClientData *)clientData;
 

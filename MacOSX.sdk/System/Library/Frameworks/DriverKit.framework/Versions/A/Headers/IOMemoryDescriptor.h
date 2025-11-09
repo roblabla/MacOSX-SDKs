@@ -1,6 +1,6 @@
-/* iig(DriverKit-380.120.5) generated from IOMemoryDescriptor.iig */
+/* iig(DriverKit-400.0.2) generated from IOMemoryDescriptor.iig */
 
-/* IOMemoryDescriptor.iig:1-78 */
+/* IOMemoryDescriptor.iig:1-79 */
 /*
  * Copyright (c) 2019-2019 Apple Inc. All rights reserved.
  *
@@ -64,6 +64,7 @@ enum {
 	kIOMemoryMapCacheModeInhibit      = 0x00000100,
 	kIOMemoryMapCacheModeCopyback     = 0x00000200,
 	kIOMemoryMapCacheModeWriteThrough = 0x00000400,
+	kIOMemoryMapCacheModeRealTime     = 0x00000800,
 };
 
 struct IOAddressSegment {
@@ -76,7 +77,7 @@ struct _IOMDPrivateState {
 	uint64_t options;
 };
 
-/* source class IOMemoryDescriptor IOMemoryDescriptor.iig:79-191 */
+/* source class IOMemoryDescriptor IOMemoryDescriptor.iig:80-192 */
 
 #if __DOCUMENTATION__
 #define KERNEL IIG_KERNEL
@@ -196,7 +197,7 @@ private:
 #undef KERNEL
 #else /* __DOCUMENTATION__ */
 
-/* generated class IOMemoryDescriptor IOMemoryDescriptor.iig:79-191 */
+/* generated class IOMemoryDescriptor IOMemoryDescriptor.iig:80-192 */
 
 #define IOMemoryDescriptor__CopyState_ID            0xa2c0861d4118ce5eULL
 #define IOMemoryDescriptor_CreateMapping_ID            0xc5e69b0414ff6ee5ULL
@@ -397,7 +398,7 @@ IOMemoryDescriptor_DECLARE_IVARS
 #endif /* !__DOCUMENTATION__ */
 
 
-/* IOMemoryDescriptor.iig:200- */
+/* IOMemoryDescriptor.iig:201- */
 
 
 

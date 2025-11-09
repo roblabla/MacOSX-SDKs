@@ -10,7 +10,7 @@ exports:
                        _CKContextTagTypePhoneNumber, _CKContextTagTypePlainTextLabel, 
                        _CKContextTagTypeTitle, _CKContextTagTypeURL, _ContextKitErrorDomain, 
                        _ContextKitVersionNumber, _ContextKitVersionString ]
-    objc-classes:    [ CKContextClient, CKContextCompleter, CKContextCountedItem, 
+    objc-classes:    [ CKContextClient, CKContextCompleter, CKContextCountedString, 
                        CKContextFingerprint, CKContextFingerprintMinHash, CKContextGlobals, 
                        CKContextRequest, CKContextResponse, CKContextResult, CKContextSemaphore, 
                        CKContextXPCClient ]

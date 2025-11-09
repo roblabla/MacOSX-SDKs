@@ -90,6 +90,16 @@ API_AVAILABLE(macos(13.0)) API_UNAVAILABLE(ios, watchos, tvos)
 /// @param keyType The key type to retrieve.
 - (nullable SecIdentityRef)copyIdentityForKeyType:(ASAuthorizationProviderExtensionKeyType)keyType NS_SWIFT_NAME(identity(for:)) CF_RETURNS_RETAINED;
 
+
+/// @abstract Generates a new key for the specified platform SSO key type using the strongest supported key strength returning the new key.  Nil is returned if there is an error generating the new key.
+/// @param keyType The key type to retrieve.
+- (nullable SecKeyRef)beginKeyRotationForKeyType:(ASAuthorizationProviderExtensionKeyType)keyType API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, watchos, tvos) NS_SWIFT_NAME(beginKeyRotation(_:)) CF_RETURNS_RETAINED;
+
+/// @abstract Completes rotation for the key to replace the previous key.
+/// @param keyType The key type to retrieve.
+- (void)completeKeyRotationForKeyType:(ASAuthorizationProviderExtensionKeyType)keyType API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, watchos, tvos) NS_SWIFT_NAME(completeKeyRotation(_:));
+
+
 /// @abstract Requests AppSSOAgent reauthenticate the current user for the current extension.  This is used when the tokens are revoked, or expired and need to be requested again.
 - (void)userNeedsReauthenticationWithCompletion:(void(^)(NSError * _Nullable error))completion;
 

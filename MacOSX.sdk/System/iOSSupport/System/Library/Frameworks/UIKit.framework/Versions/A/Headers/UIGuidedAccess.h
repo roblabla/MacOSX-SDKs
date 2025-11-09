@@ -11,7 +11,7 @@
 
 NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
-UIKIT_EXTERN NSErrorDomain const UIGuidedAccessErrorDomain API_AVAILABLE(ios(12.2));
+UIKIT_EXTERN NSErrorDomain const UIGuidedAccessErrorDomain API_AVAILABLE(ios(12.2)) API_UNAVAILABLE(watchos) NS_SWIFT_NONISOLATED;
 
 typedef NS_ERROR_ENUM(UIGuidedAccessErrorDomain, UIGuidedAccessErrorCode) {
     // The application is not authorized to perform the requested action. For example, it may have requested a configuration change but is not locked into Single App Mode via a configuration profile.
@@ -37,7 +37,7 @@ typedef NS_ERROR_ENUM(UIGuidedAccessErrorDomain, UIGuidedAccessErrorCode) {
 typedef NS_ENUM(NSInteger, UIGuidedAccessRestrictionState) {
     UIGuidedAccessRestrictionStateAllow,
     UIGuidedAccessRestrictionStateDeny
-};
+} API_UNAVAILABLE(watchos);
 
 /*
  UIGuidedAccessRestrictionDelegate
@@ -46,7 +46,7 @@ typedef NS_ENUM(NSInteger, UIGuidedAccessRestrictionState) {
  
  The initial state of all Guided Access restrictions is UIGuidedAccessRestrictionStateAllow.
  */
-UIKIT_EXTERN API_AVAILABLE(ios(7.0)) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(7.0)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @protocol UIGuidedAccessRestrictionDelegate <NSObject>
 
 @required
@@ -72,7 +72,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(7.0)) NS_SWIFT_UI_ACTOR
 @end
 
 // Returns the state of the restriction associated with the identifier.
-UIKIT_EXTERN UIGuidedAccessRestrictionState UIGuidedAccessRestrictionStateForIdentifier(NSString *restrictionIdentifier) API_AVAILABLE(ios(7.0));
+UIKIT_EXTERN UIGuidedAccessRestrictionState UIGuidedAccessRestrictionStateForIdentifier(NSString *restrictionIdentifier) API_AVAILABLE(ios(7.0)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR;
 
 /*
  * Applications that are locked into Guided Access via a Single App Mode profile are granted the ability to configure certain accessibility features,
@@ -87,7 +87,7 @@ typedef NS_OPTIONS(NSUInteger, UIGuidedAccessAccessibilityFeature) {
     UIGuidedAccessAccessibilityFeatureGrayscaleDisplay = 1 << 4,
 } API_AVAILABLE(ios(12.2)) API_UNAVAILABLE(watchos, tvos);
 
-UIKIT_EXTERN void UIGuidedAccessConfigureAccessibilityFeatures(UIGuidedAccessAccessibilityFeature features, BOOL enabled, void (^completion)(BOOL success, NSError * _Nullable error)) API_AVAILABLE(ios(12.2)) API_UNAVAILABLE(watchos, tvos);
+UIKIT_EXTERN void UIGuidedAccessConfigureAccessibilityFeatures(UIGuidedAccessAccessibilityFeature features, BOOL enabled, void (^completion)(BOOL success, NSError * _Nullable error)) API_AVAILABLE(ios(12.2)) API_UNAVAILABLE(watchos, tvos) NS_SWIFT_UI_ACTOR;
 
 NS_HEADER_AUDIT_END(nullability, sendability)
 

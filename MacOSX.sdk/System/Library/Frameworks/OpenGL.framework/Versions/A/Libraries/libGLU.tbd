@@ -1,9 +1,11 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libGLU.dylib'
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _gluBeginCurve, _gluBeginPolygon, _gluBeginSurface, _gluBeginTrim, 
                        _gluBuild1DMipmapLevels, _gluBuild1DMipmapLevelsCTX, _gluBuild1DMipmaps, 
                        _gluBuild1DMipmapsCTX, _gluBuild2DMipmapLevels, _gluBuild2DMipmapLevelsCTX, 

@@ -1,7 +1,7 @@
 //
 //  UTCoreTypes.h
 //
-//  Copyright © 2020 Apple. All rights reserved.
+//  Copyright © 2020-2024 Apple. All rights reserved.
 //
 
 #ifndef __UNIFORMTYPEIDENTIFIERS_UTCORETYPES__
@@ -270,6 +270,16 @@ UT_EXPORT UTType *const UTTypeXML NS_REFINED_FOR_SWIFT;
 	conforms to: public.text
 */
 UT_EXPORT UTType *const UTTypeYAML NS_REFINED_FOR_SWIFT;
+
+/**
+    \brief Cascading Style Sheets (CSS)
+
+    UTI: public.css
+
+    conforms to: public.text
+*/
+UT_EXPORT UTType *const UTTypeCSS NS_REFINED_FOR_SWIFT
+API_AVAILABLE(macos(15.0), macCatalyst(18.0), ios(18.0), watchos(11.0), tvos(18.0));
 
 #pragma mark - Programming languages
 /**
@@ -652,6 +662,16 @@ UT_EXPORT UTType *const UTTypeHEIF NS_REFINED_FOR_SWIFT;
 UT_EXPORT UTType *const UTTypeHEIC NS_REFINED_FOR_SWIFT;
 
 /**
+    \brief A High Efficiency Image Coding Image Sequence.
+
+    UTI: public.heics
+
+    conforms to: public.heif-standard
+*/
+UT_EXPORT UTType *const UTTypeHEICS NS_REFINED_FOR_SWIFT
+API_AVAILABLE(macos(15.0), macCatalyst(18.0), ios(18.0), watchos(11.0), tvos(18.0));
+
+/**
 	\brief The WebP image format.
 
 	UTI: org.webmproject.webp
@@ -659,6 +679,27 @@ UT_EXPORT UTType *const UTTypeHEIC NS_REFINED_FOR_SWIFT;
 	conforms to: public.image
 */
 UT_EXPORT UTType *const UTTypeWebP NS_REFINED_FOR_SWIFT;
+
+/**
+    \brief An EXR image.
+
+    UTI: com.ilm.openexr-image
+
+    conforms to: public.image
+*/
+UT_EXPORT UTType *const UTTypeEXR NS_REFINED_FOR_SWIFT
+API_AVAILABLE(macos(15.0), macCatalyst(18.0), ios(18.0), watchos(11.0), tvos(18.0));
+
+/**
+    \brief An Adobe DNG (digital negative) image.
+
+    UTI: com.adobe.raw-image
+
+    conforms to: public.image
+*/
+UT_EXPORT UTType *const UTTypeDNG NS_REFINED_FOR_SWIFT
+API_AVAILABLE(macos(15.0), macCatalyst(18.0), ios(18.0), watchos(11.0), tvos(18.0));
+
 
 #pragma mark - 3D Content
 
@@ -1081,6 +1122,16 @@ UT_EXPORT UTType *const UTTypeZIP NS_REFINED_FOR_SWIFT;
 */
 UT_EXPORT UTType *const UTTypeAppleArchive NS_REFINED_FOR_SWIFT;
 
+/**
+    \brief A tar Archive.
+
+    UTI: public.tar-archive
+
+    conforms to: public.data, public.archive
+*/
+UT_EXPORT UTType *const UTTypeTarArchive NS_REFINED_FOR_SWIFT
+API_AVAILABLE(macos(15.0), macCatalyst(18.0), ios(18.0), watchos(11.0), tvos(18.0));
+
 #pragma mark - Document types
 
 /**
@@ -1236,6 +1287,23 @@ UT_EXPORT UTType *const UTTypeLog NS_REFINED_FOR_SWIFT;
 UT_EXPORT UTType *const UTTypeAHAP NS_REFINED_FOR_SWIFT
 API_AVAILABLE(macos(14.0), macCatalyst(17.0), ios(17.0), watchos(10.0), tvos(17.0));
 
+/**
+    \brief A GeoJSON file.
+
+    UTI: public.geojson
+*/
+UT_EXPORT UTType *const UTTypeGeoJSON NS_REFINED_FOR_SWIFT
+API_AVAILABLE(macos(15.0), macCatalyst(18.0), ios(18.0), watchos(11.0), tvos(18.0));
+
+/**
+    \brief Serialized LinkPresentation metadata.
+
+    UTI: com.apple.linkpresentation.metadata
+
+    conforms to: public.data
+*/
+UT_EXPORT UTType *const UTTypeLinkPresentationMetadata NS_REFINED_FOR_SWIFT
+API_AVAILABLE(macos(15.0), macCatalyst(18.0), ios(18.0), watchos(11.0), tvos(18.0));
 
 UT_AVAILABLE_END
 NS_ASSUME_NONNULL_END

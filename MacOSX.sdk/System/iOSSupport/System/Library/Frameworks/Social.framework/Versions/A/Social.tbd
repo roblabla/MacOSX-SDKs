@@ -51,12 +51,12 @@ exports:
                        SLSheetPlaceViewController, SLSheetPreviewImageSource, SLSheetTextComposeView, 
                        SLSystemConfigManager, SLURLAttachment, SLURLPreviewGenerator, 
                        SLVideoAttachment, SLWebAuthController, SLWebAuthFlowController, 
-                       SLWebAuthIdentity, SLWebTokenHandlerController, SLWebUserInfoResponse, 
-                       SLYahooLoginTokenRequest, SLYahooLoginTokenResponse, SLYahooOAuth2MigrationRequest, 
-                       SLYahooOAuth2MigrationResponse, SLYahooWebAuthController, 
-                       SLYahooWebAuthRequest, SLYahooWebClient, SLYahooWebOAuth2TokenRequest, 
-                       SLYahooWebOAuth2TokenResponse, SL_OOPAWebViewController, _SLAuthHostExtensionContext, 
-                       _SLAuthHostViewController ]
+                       SLWebAuthIdentity, SLWebTokenHandlerController, SLWebTokenHandlerResponse, 
+                       SLWebUserInfoResponse, SLYahooLoginTokenRequest, SLYahooLoginTokenResponse, 
+                       SLYahooOAuth2MigrationRequest, SLYahooOAuth2MigrationResponse, 
+                       SLYahooWebAuthController, SLYahooWebAuthRequest, SLYahooWebClient, 
+                       SLYahooWebOAuth2TokenRequest, SLYahooWebOAuth2TokenResponse, 
+                       SL_OOPAWebViewController, _SLAuthHostExtensionContext, _SLAuthHostViewController ]
     objc-ivars:      [ SLSheetPhotoAlbumImageView._frameLayer, SLSheetPhotoAlbumImageView._glossLayer, 
                        SLSystemConfigManager._applySkipCount, SLSystemConfigManager._notifyForExternalChangeOnly, 
                        SLSystemConfigManager._prefs ]

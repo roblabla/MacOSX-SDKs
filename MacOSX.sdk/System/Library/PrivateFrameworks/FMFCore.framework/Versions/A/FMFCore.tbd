@@ -7,12 +7,12 @@ swift-abi-version: 7
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
-    clients:         [ '-allowable_client', FMFCoreTests, FMInternalSettingsBundle, 
-                       FindMy, FindMyNotificationsContent, FindMySiriIntents, FindMyTests, 
-                       FindMyUICore, FindMyWidgetIntentsPeople, FindMyWidgetPeople, 
-                       FindMyWidgetTestApp, FindPeople, NanoFindMyBulletinFactory, 
-                       People, PeopleTests, SiriFindMy, SiriFindMyTester, SiriFindMyTests, 
-                       fmfcoretool, fmfd, peopled, 'peopled Tests (iOS)' ]
+    clients:         [ FMFCoreTests, FMInternalSettingsBundle, FindMy, FindMyNotificationsContent, 
+                       FindMySiriIntents, FindMyTesterApp, FindMyTests, FindMyUICore, 
+                       FindMyWidgetIntentsPeople, FindMyWidgetPeople, FindMyWidgetTestApp, 
+                       FindPeople, NanoFindMyBulletinFactory, People, PeopleTests, 
+                       SiriFindMy, SiriFindMyTester, SiriFindMyTests, fmfcoretool, 
+                       fmfd, peopled, 'peopled Tests (iOS)' ]
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -31,9 +31,16 @@ exports:
                        '_$s7FMFCore10FMFAddressV16debugDescriptionSSvg', '_$s7FMFCore10FMFAddressV16debugDescriptionSSvpMV', 
                        '_$s7FMFCore10FMFAddressV16formattedAddressSSvg', '_$s7FMFCore10FMFAddressV16formattedAddressSSvpMV', 
                        '_$s7FMFCore10FMFAddressV16fullThoroughfareSSSgvg', '_$s7FMFCore10FMFAddressV16fullThoroughfareSSSgvpMV', 
+                       '_$s7FMFCore10FMFAddressV16poiAddressModernSSSgvg', '_$s7FMFCore10FMFAddressV16poiAddressModernSSSgvpMV', 
                        '_$s7FMFCore10FMFAddressV18administrativeAreaSSSgvg', '_$s7FMFCore10FMFAddressV18administrativeAreaSSSgvpMV', 
+                       '_$s7FMFCore10FMFAddressV18largeAddressModernSSSgvg', '_$s7FMFCore10FMFAddressV18largeAddressModernSSSgvpMV', 
+                       '_$s7FMFCore10FMFAddressV18smallAddressModernSSSgvg', '_$s7FMFCore10FMFAddressV18smallAddressModernSSSgvpMV', 
+                       '_$s7FMFCore10FMFAddressV19coarseAddressModernSSSgvg', '_$s7FMFCore10FMFAddressV19coarseAddressModernSSSgvpMV', 
                        '_$s7FMFCore10FMFAddressV19mapFormattedAddressSSSgvg', '_$s7FMFCore10FMFAddressV19mapFormattedAddressSSSgvpMV', 
+                       '_$s7FMFCore10FMFAddressV19mediumAddressModernSSSgvg', '_$s7FMFCore10FMFAddressV19mediumAddressModernSSSgvpMV', 
+                       '_$s7FMFCore10FMFAddressV19streetAddressModernSSSgvg', '_$s7FMFCore10FMFAddressV19streetAddressModernSSSgvpMV', 
                        '_$s7FMFCore10FMFAddressV21formattedAddressLines3forSaySSGSgSo08CNPostalD0C_tFZ', 
+                       '_$s7FMFCore10FMFAddressV21formattedAddressLines7country0F4Code10streetName0hD08locality05stateG006postalG08landmark18administrativeArea14areaOfInterest16fullThoroughfare012mapFormattedD006coarseD6Modern0hdX005smalldX006mediumdX005largedX003poidX0ACSaySSGSg_SSSgA8yw8YtcfC', 
                        '_$s7FMFCore10FMFAddressV21formattedAddressLines7country0F4Code10streetName0hD08locality05stateG006postalG08landmark18administrativeArea14areaOfInterest16fullThoroughfare012mapFormattedD0ACSaySSGSg_SSSgA8sq2StcfC', 
                        '_$s7FMFCore10FMFAddressV21formattedAddressLines7country0F4Code10streetName0hD08locality05stateG006postalG08landmark18administrativeArea14areaOfInterest16fullThoroughfareACSaySSGSg_SSSgA8rpRtcfC', 
                        '_$s7FMFCore10FMFAddressV21formattedAddressLinesSaySSGSgvg', 
@@ -1059,7 +1066,7 @@ exports:
                        '_$s7FMFCore28FMFUpdateLocationAlertActionCMn', '_$s7FMFCore28FMFUpdateLocationAlertActionCMo', 
                        '_$s7FMFCore28FMFUpdateLocationAlertActionCMu', '_$s7FMFCore28FMFUpdateLocationAlertActionCN', 
                        '_$s7FMFCore28FMFUpdateLocationAlertActionCfD', '_$s7FMFCore28FMFUpdateLocationAlertActionCfd', 
-                       '_$s7FMFCore29FMFDimplekeyGlobalConfigStoreSDyAA14FMFConfigValueOypGvM', 
+                       '_$s7FMFCore29FMFBundleIdsAllowedToUseCacheShySSGvg', '_$s7FMFCore29FMFDimplekeyGlobalConfigStoreSDyAA14FMFConfigValueOypGvM', 
                        '_$s7FMFCore29FMFDimplekeyGlobalConfigStoreSDyAA14FMFConfigValueOypGvg', 
                        '_$s7FMFCore29FMFDimplekeyGlobalConfigStoreSDyAA14FMFConfigValueOypGvs', 
                        '_$s7FMFCore30FMAPSConnectionHandlerDelegateMp', '_$s7FMFCore30FMAPSConnectionHandlerDelegateP010connectionC0_10didReceive11publicTokenyAA0bC0C_SSSgAItFTj', 

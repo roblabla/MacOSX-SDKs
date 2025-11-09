@@ -28,9 +28,10 @@ NS_ASSUME_NONNULL_BEGIN
  */
 NS_REFINED_FOR_SWIFT
 CL_EXTERN
-API_AVAILABLE(macos(14.0), ios(17.0)) API_UNAVAILABLE(watchos, tvos)
 #if defined(TARGET_OS_VISION) && TARGET_OS_VISION
-API_UNAVAILABLE(visionos)
+API_AVAILABLE(macos(14.0), ios(17.0)) API_UNAVAILABLE(watchos, tvos, visionos)
+#else
+API_AVAILABLE(macos(14.0), ios(17.0)) API_UNAVAILABLE(watchos, tvos)
 #endif
 @interface CLMonitoringRecord : NSObject<NSSecureCoding>
 

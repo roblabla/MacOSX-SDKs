@@ -29,6 +29,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 API_AVAILABLE(ios(10.0))
 API_UNAVAILABLE(watchos, tvos)
+NS_SWIFT_UI_ACTOR
 @protocol INUIHostedViewControlling <NSObject>
 
 @optional

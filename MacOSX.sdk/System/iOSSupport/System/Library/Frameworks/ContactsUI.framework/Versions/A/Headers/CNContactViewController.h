@@ -19,7 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
  *              You must use one of the class factory methods.
  */
 
-NS_CLASS_AVAILABLE_IOS(9_0)
+NS_CLASS_AVAILABLE_IOS(9_0) API_UNAVAILABLE(tvos)
 @interface CNContactViewController : UIViewController
 
 /*!
@@ -133,7 +133,7 @@ NS_CLASS_AVAILABLE_IOS(9_0)
 @end
 
 
-NS_AVAILABLE_IOS(9_0)
+NS_AVAILABLE_IOS(9_0) API_UNAVAILABLE(tvos)
 @protocol CNContactViewControllerDelegate <NSObject>
 @optional
 

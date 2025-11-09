@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/IMAP.framework/Versions/A/IMAP'
-current-version: 3774.255.62
+current-version: 3818.100.11
 allowable-clients:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     clients:         [ EmailFunctionalTests, EmailTestSupport, IMAPFunctionalTests, 
@@ -30,8 +30,7 @@ exports:
                        _IMAPPowerLogKeySkeletons, _IMAPPowerLogKeyTotalAttachmentSize, 
                        _IMAPPowerLogKeyTotalBodySize, _IMAPQuotaKeyCurrentUsage, 
                        _IMAPQuotaKeyMaxUsage, _IMAPQuotaKeyResourceName, _IMAPQuotaResourceMessage, 
-                       _IMAPQuotaResourceStorage, _IMAPSASLProfileName, _IMAPStandardPorts, 
-                       _IMAPStandardSSLPorts, _IMAPStatusKeyHighestModificationSequence, 
+                       _IMAPQuotaResourceStorage, _IMAPSASLProfileName, _IMAPStatusKeyHighestModificationSequence, 
                        _IMAPStatusKeyMessages, _IMAPStatusKeyRecent, _IMAPStatusKeyUidNext, 
                        _IMAPStatusKeyUidValidity, _IMAPStatusKeyUnseen, _IMAPStringKeyAppendOperation, 
                        _IMAPStringKeyCheckOperation, _IMAPStringKeyCommandFailedFormat, 
@@ -89,8 +88,8 @@ exports:
                        IMAPSyncAttachmentsOperation, IMAPSyncBodiesOperation, IMAPSyncSkeletonsOperation, 
                        IMAPSyncUIDsFlagsAndLabelsOperation, IMAPTask, IMAPTaskManager, 
                        IMAPUIDCommand, IMAPUIDCopyCommand, IMAPUIDCopyOrMoveCommand, 
-                       IMAPUIDExpungeCommand, IMAPUIDMoveCommand, IMAPUIDSearchCommand, 
-                       IMAPUIDStoreCommand, IMAPUidFetchResult, IMAPUnselectCommand, 
-                       IMAPUnsubscribeCommand, IMAPVanishedResponse, IMAPVerifyMailboxOperation, 
-                       _IMAPFetchUnit, _IMAPLock, _UIDsBatch ]
+                       IMAPUIDExpungeCommand, IMAPUIDMoveCommand, IMAPUIDStoreCommand, 
+                       IMAPUidFetchResult, IMAPUnselectCommand, IMAPUnsubscribeCommand, 
+                       IMAPVanishedResponse, IMAPVerifyMailboxOperation, _IMAPFetchUnit, 
+                       _IMAPLock, _UIDsBatch ]
 ...

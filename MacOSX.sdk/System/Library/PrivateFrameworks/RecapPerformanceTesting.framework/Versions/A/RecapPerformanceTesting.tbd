@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/RecapPerformanceTesting.framework/Versions/A/RecapPerformanceTesting'
-current-version: 17
+current-version: 49.5
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _RPTAmplitudeFromPagesOfView, _RPTAxisFromScrollDirection, 
@@ -19,6 +19,6 @@ exports:
                        RPTDirectionalSwipeTestParameters, RPTDockGestureInteraction, 
                        RPTDragInteraction, RPTDragTestParameters, RPTGroupScrollTestParameters, 
                        RPTInteractionOptions, RPTInteractionTestParameters, RPTPagingScrollTestParameters, 
-                       RPTResizeInteraction, RPTResizeTestParameters, RPTScrollViewTestParameters, 
-                       RPTTestRunner, RPTWaitTestParameters ]
+                       RPTPagingScrollViewTestParameters, RPTResizeInteraction, RPTResizeTestParameters, 
+                       RPTScrollViewTestParameters, RPTTestRunner, RPTWaitTestParameters ]
 ...

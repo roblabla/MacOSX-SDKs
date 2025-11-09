@@ -122,6 +122,13 @@ API_AVAILABLE(macos(10.11), ios(8.0), tvos(17.0)) API_UNAVAILABLE(watchos)
  */
 @property BOOL enforceRoutes API_AVAILABLE(macos(11.0), ios(14.2), tvos(17.0)) API_UNAVAILABLE(watchos);
 
+/*!
+ * @property sliceUUID
+ * @discussion Identification string of the associated Cellular slice.  If present, VPN tunnel will be scoped to the associated Cellular slice whenever slice is active.
+ * Otherwise, VPN tunnel will fallback onto the primary interface.
+ */
+@property (copy, nullable) NSString *sliceUUID API_AVAILABLE(ios(18.0)) API_UNAVAILABLE(macos, watchos, tvos);
+
 @end
 
 NS_ASSUME_NONNULL_END

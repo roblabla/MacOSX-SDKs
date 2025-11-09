@@ -1080,9 +1080,9 @@
  */
 /*#define USE_STDIO_PTR	/ **/
 #ifdef USE_STDIO_PTR
-#define FILE_ptr(fp)	((fp)->_p)
+#define FILE_ptr(fp)	((fp)->_ptr)
 /*#define STDIO_PTR_LVALUE		/ **/
-#define FILE_cnt(fp)	((fp)->_r)
+#define FILE_cnt(fp)	((fp)->_cnt)
 /*#define STDIO_CNT_LVALUE		/ **/
 /*#define STDIO_PTR_LVAL_SETS_CNT	/ **/
 /*#define STDIO_PTR_LVAL_NOCHANGE_CNT	/ **/
@@ -1110,8 +1110,8 @@
  */
 /*#define USE_STDIO_BASE	/ **/
 #ifdef USE_STDIO_BASE
-#define FILE_base(fp)	((fp)->_ub._base ? (fp)->_ub._base : (fp)->_bf._base)
-#define FILE_bufsiz(fp)	((fp)->_ub._base ? (fp)->_ub._size : (fp)->_bf._size)
+#define FILE_base(fp)	((fp)->_base)
+#define FILE_bufsiz(fp)	((fp)->_cnt + (fp)->_ptr - (fp)->_base)
 #endif
 
 /* DOUBLESIZE:
@@ -1379,7 +1379,7 @@
  *	feature tests from Configure are generally more reliable.
  */
 #define OSNAME "darwin"		/**/
-#define OSVERS "23.0"		/**/
+#define OSVERS "24.0"		/**/
 
 /* CAT2:
  *	This macro concatenates 2 tokens together.

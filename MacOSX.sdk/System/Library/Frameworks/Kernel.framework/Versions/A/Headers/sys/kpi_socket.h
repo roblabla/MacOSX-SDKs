@@ -40,6 +40,7 @@
 #include <sys/types.h>
 #include <sys/kernel_types.h>
 #include <sys/socket.h>
+#include <sys/ioccom.h>
 
 #include <Availability.h>
 #define __NKE_API_DEPRECATED __API_DEPRECATED("Network Kernel Extension KPI is deprecated", macos(10.4, 10.15))
@@ -94,7 +95,7 @@ typedef void (*sock_upcall)(socket_t so, void *cookie, int waitf);
  *               socket for tracking the connection.
  *       @result 0 on success otherwise the errno error.
  */
-extern errno_t sock_accept(socket_t so, struct sockaddr *from, int fromlen,
+extern errno_t sock_accept(socket_t so, struct sockaddr *__sized_by(fromlen) from, int fromlen,
     int flags, sock_upcall callback, void *cookie, socket_t *new_so)
 __NKE_API_DEPRECATED;
 
@@ -136,7 +137,7 @@ __NKE_API_DEPRECATED;
  *       @param peernamelen Length of storage for the peer name.
  *       @result 0 on success otherwise the errno error.
  */
-extern errno_t sock_getpeername(socket_t so, struct sockaddr *peername,
+extern errno_t sock_getpeername(socket_t so, struct sockaddr *__sized_by(peernamelen) peername,
     int peernamelen)
 __NKE_API_DEPRECATED;
 
@@ -149,7 +150,7 @@ __NKE_API_DEPRECATED;
  *       @param socknamelen Length of storage for the socket name.
  *       @result 0 on success otherwise the errno error.
  */
-extern errno_t sock_getsockname(socket_t so, struct sockaddr *sockname,
+extern errno_t sock_getsockname(socket_t so, struct sockaddr *__sized_by(socknamelen) sockname,
     int socknamelen)
 __NKE_API_DEPRECATED;
 
@@ -175,7 +176,7 @@ __NKE_API_DEPRECATED;
  *       @param argp The argument.
  *       @result 0 on success otherwise the errno error.
  */
-extern errno_t sock_ioctl(socket_t so, unsigned long request, void *argp)
+extern errno_t sock_ioctl(socket_t so, unsigned long request, void *__sized_by(IOCPARM_LEN(request)) argp)
 __NKE_API_DEPRECATED;
 
 /*!

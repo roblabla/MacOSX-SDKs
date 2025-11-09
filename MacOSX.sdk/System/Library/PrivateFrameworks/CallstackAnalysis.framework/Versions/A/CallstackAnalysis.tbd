@@ -5,5 +5,5 @@ install-name:    '/System/Library/PrivateFrameworks/CallstackAnalysis.framework/
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     objc-classes:    [ TPCCallstackMatching, TPCLogFormatTypeWrapper, TPCMatchDetails, 
-                       TPCSignatureStore ]
+                       TPCSignatureMetadata, TPCSignatureStore ]
 ...

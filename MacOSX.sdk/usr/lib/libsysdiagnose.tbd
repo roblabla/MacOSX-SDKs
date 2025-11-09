@@ -8,7 +8,9 @@ exports:
                        arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _metricCompression, _metricGetLogCopying, _metricGetLogGeneration, 
                        _metricGetOSLogArchive, _metricGetTimeSensitive, _metricLogCopying, 
-                       _metricLogGeneration, _metricOSLogarchiveGeneration, _metricStartToTar, 
+                       _metricLogGeneration, _metricOSLogarchiveGeneration, _metricPersistLookback, 
+                       _metricPersistSize, _metricSignpostLookback, _metricSignpostSize, 
+                       _metricSpecialLookback, _metricSpecialSize, _metricStartToTar, 
                        _metricTimeSensitive, _metricTotalSize, _sdProgressDiagnosticId, 
                        _sdProgressPercent, _sdProgressPhase ]
     objc-classes:    [ Libsysdiagnose ]

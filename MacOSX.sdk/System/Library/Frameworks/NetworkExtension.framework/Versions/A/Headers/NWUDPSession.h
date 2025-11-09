@@ -15,6 +15,12 @@
 #ifndef __NWUDPSession_h_
 #define __NWUDPSession_h_
 
+/**
+ * DEPRECATION NOTICE
+ *
+ * NW object wrappers are hidden in Swift 6. To continue accessing them, you
+ * can prepend double underscores to the symbol name.
+ */
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -40,13 +46,16 @@ typedef NS_ENUM(NSInteger, NWUDPSessionState) {
 	NWUDPSessionStateFailed = 4,
 	/*! @constant NWUDPSessionStateCancelled The session has been cancelled by the client */
 	NWUDPSessionStateCancelled = 5,
-} API_AVAILABLE(macos(10.11), ios(9.0), tvos(17.0)) API_UNAVAILABLE(watchos);
+}
+API_DEPRECATED("Use `nw_connection_state_t` in Network framework instead, see deprecation notice in <NetworkExtension/NWUDPSession.h>", macos(10.11, 15.0), ios(9.0, 18.0), tvos(17.0, 18.0), visionos(1.0, 2.0))
+API_UNAVAILABLE(watchos);
 
 /*!
  * @interface NWUDPSession
  * @discussion Open UDP datagram sessions to an endpoint, and send and receive datagrams.
  */
-API_AVAILABLE(macos(10.11), ios(9.0), tvos(17.0)) API_UNAVAILABLE(watchos)
+API_DEPRECATED("Use `nw_connection_t` in Network framework instead, see deprecation notice in <NetworkExtension/NWUDPSession.h>", macos(10.11, 15.0), ios(9.0, 18.0), tvos(17.0, 18.0), visionos(1.0, 2.0))
+API_UNAVAILABLE(watchos)
 @interface NWUDPSession : NSObject
 
 /*!
@@ -65,7 +74,9 @@ API_AVAILABLE(macos(10.11), ios(9.0), tvos(17.0)) API_UNAVAILABLE(watchos)
  * @param session The original session from which the application will upgrade
  * @return An initialized NWUDPSession object.
  */
-- (instancetype)initWithUpgradeForSession:(NWUDPSession *)session API_AVAILABLE(macos(10.11), ios(9.0), tvos(17.0)) API_UNAVAILABLE(watchos);
+- (instancetype)initWithUpgradeForSession:(NWUDPSession *)session
+API_DEPRECATED("Use `nw_connection_create` in Network framework instead, see deprecation notice in <NetworkExtension/NWUDPSession.h>", macos(10.11, 15.0), ios(9.0, 18.0), tvos(17.0, 18.0), visionos(1.0, 2.0))
+API_UNAVAILABLE(watchos);
 
 /*!
  * @property state
@@ -74,39 +85,51 @@ API_AVAILABLE(macos(10.11), ios(9.0), tvos(17.0)) API_UNAVAILABLE(watchos)
  *		NWUDPSessionStateFailed if the endpoint could not be resolved, or all endpoints have been
  *		rejected. Use KVO to watch for changes.
  */
-@property (nonatomic, readonly) NWUDPSessionState state API_AVAILABLE(macos(10.11), ios(9.0), tvos(17.0)) API_UNAVAILABLE(watchos);
+@property (nonatomic, readonly) NWUDPSessionState state
+API_DEPRECATED("Use `nw_connection_set_state_changed_handler` in Network framework instead, see deprecation notice in <NetworkExtension/NWUDPSession.h>", macos(10.11, 15.0), ios(9.0, 18.0), tvos(17.0, 18.0), visionos(1.0, 2.0))
+API_UNAVAILABLE(watchos);
 
 /*!
  * @property endpoint
  * @discussion The provided endpoint.
  */
-@property (atomic, readonly) NWEndpoint *endpoint API_AVAILABLE(macos(10.11), ios(9.0), tvos(17.0)) API_UNAVAILABLE(watchos);
+@property (atomic, readonly) NWEndpoint *endpoint
+API_DEPRECATED("Use `nw_connection_copy_endpoint` in Network framework instead, see deprecation notice in <NetworkExtension/NWUDPSession.h>", macos(10.11, 15.0), ios(9.0, 18.0), tvos(17.0, 18.0), visionos(1.0, 2.0))
+API_UNAVAILABLE(watchos);
 
 /*!
  * @property resolvedEndpoint
  * @discussion The currently targeted remote endpoint. Use KVO to watch for changes.
  */
-@property (nonatomic, readonly, nullable) NWEndpoint *resolvedEndpoint API_AVAILABLE(macos(10.11), ios(9.0), tvos(17.0)) API_UNAVAILABLE(watchos);
+@property (nonatomic, readonly, nullable) NWEndpoint *resolvedEndpoint
+API_DEPRECATED("Use `nw_connection_copy_current_path` in Network framework instead, see deprecation notice in <NetworkExtension/NWUDPSession.h>", macos(10.11, 15.0), ios(9.0, 18.0), tvos(17.0, 18.0), visionos(1.0, 2.0))
+API_UNAVAILABLE(watchos);
 
 /*!
  * @property viable
  * @discussion YES if the connection can read and write data, NO otherwise.
  *		Use KVO to watch this property.
  */
-@property (nonatomic, readonly, getter=isViable) BOOL viable API_AVAILABLE(macos(10.11), ios(9.0), tvos(17.0)) API_UNAVAILABLE(watchos);
+@property (nonatomic, readonly, getter=isViable) BOOL viable
+API_DEPRECATED("Use `nw_connection_set_viability_changed_handler` in Network framework instead, see deprecation notice in <NetworkExtension/NWUDPSession.h>", macos(10.11, 15.0), ios(9.0, 18.0), tvos(17.0, 18.0), visionos(1.0, 2.0))
+API_UNAVAILABLE(watchos);
 
 /*!
  * @property hasBetterPath
  * @discussion YES if there is another path available that is preferred over the currentPath.
  *		To take advantage of this path, create a new UDPSession. Use KVO to watch for changes.
  */
-@property (nonatomic, readonly) BOOL hasBetterPath API_AVAILABLE(macos(10.11), ios(9.0), tvos(17.0)) API_UNAVAILABLE(watchos);
+@property (nonatomic, readonly) BOOL hasBetterPath
+API_DEPRECATED("Use `nw_connection_set_better_path_available_handler` in Network framework instead, see deprecation notice in <NetworkExtension/NWUDPSession.h>", macos(10.11, 15.0), ios(9.0, 18.0), tvos(17.0, 18.0), visionos(1.0, 2.0))
+API_UNAVAILABLE(watchos);
 
 /*!
  * @property currentPath
  * @discussion The current evaluated path for the resolvedEndpoint. Use KVO to watch for changes.
  */
-@property (nonatomic, readonly, nullable) NWPath *currentPath API_AVAILABLE(macos(10.11), ios(9.0), tvos(17.0)) API_UNAVAILABLE(watchos);
+@property (nonatomic, readonly, nullable) NWPath *currentPath
+API_DEPRECATED("Use `nw_connection_copy_current_path` in Network framework instead, see deprecation notice in <NetworkExtension/NWUDPSession.h>", macos(10.11, 15.0), ios(9.0, 18.0), tvos(17.0, 18.0), visionos(1.0, 2.0))
+API_UNAVAILABLE(watchos);
 
 /*!
  * @method tryNextResolvedEndpoint
@@ -115,7 +138,9 @@ API_AVAILABLE(macos(10.11), ios(9.0), tvos(17.0)) API_UNAVAILABLE(watchos)
  *		with the current resolvedEndpoint, and the caller has determined that it is unusable. If
  *		there are no other resolved endpoints, the session will move to the failed state.
  */
-- (void)tryNextResolvedEndpoint API_AVAILABLE(macos(10.11), ios(9.0), tvos(17.0)) API_UNAVAILABLE(watchos);
+- (void)tryNextResolvedEndpoint
+API_DEPRECATED("Use `nw_connection_cancel_current_endpoint` in Network framework instead, see deprecation notice in <NetworkExtension/NWUDPSession.h>", macos(10.11, 15.0), ios(9.0, 18.0), tvos(17.0, 18.0), visionos(1.0, 2.0))
+API_UNAVAILABLE(watchos);
 
 /*!
  * @property maximumDatagramLength
@@ -124,7 +149,9 @@ API_AVAILABLE(macos(10.11), ios(9.0), tvos(17.0)) API_UNAVAILABLE(watchos)
  *		value is not guaranteed to be the maximum datagram length for end-to-end communication
  *		across the network. Use KVO to watch for changes.
  */
-@property (nonatomic, readonly) NSUInteger maximumDatagramLength API_AVAILABLE(macos(10.11), ios(9.0), tvos(17.0)) API_UNAVAILABLE(watchos);
+@property (nonatomic, readonly) NSUInteger maximumDatagramLength
+API_DEPRECATED("Use `nw_connection_get_maximum_datagram_size` in Network framework instead, see deprecation notice in <NetworkExtension/NWUDPSession.h>", macos(10.11, 15.0), ios(9.0, 18.0), tvos(17.0, 18.0), visionos(1.0, 2.0))
+API_UNAVAILABLE(watchos);
 
 /*!
  * @method setReadHandler:maxDatagrams
@@ -134,7 +161,9 @@ API_AVAILABLE(macos(10.11), ios(9.0), tvos(17.0)) API_UNAVAILABLE(watchos)
  * @param maxDatagrams The maximum number of datagrams to send to the handler.
  */
 - (void)setReadHandler:(void (^)(NSArray<NSData *> * _Nullable datagrams, NSError * _Nullable error))handler
-		  maxDatagrams:(NSUInteger)maxDatagrams API_AVAILABLE(macos(10.11), ios(9.0), tvos(17.0)) API_UNAVAILABLE(watchos);
+		  maxDatagrams:(NSUInteger)maxDatagrams
+API_DEPRECATED("Use `nw_connection_receive` in Network framework instead, see deprecation notice in <NetworkExtension/NWUDPSession.h>", macos(10.11, 15.0), ios(9.0, 18.0), tvos(17.0, 18.0), visionos(1.0, 2.0))
+API_UNAVAILABLE(watchos);
 
 /*!
  * @method writeMultipleDatagrams:completionHandler
@@ -144,7 +173,9 @@ API_AVAILABLE(macos(10.11), ios(9.0), tvos(17.0)) API_UNAVAILABLE(watchos)
  * @param completionHandler A handler called when the write request has either succeeded or failed.
  */
 - (void)writeMultipleDatagrams:(NSArray<NSData *> *)datagramArray
-			 completionHandler:(void (^)(NSError * _Nullable error))completionHandler NS_SWIFT_DISABLE_ASYNC API_AVAILABLE(macos(10.11), ios(9.0), tvos(17.0)) API_UNAVAILABLE(watchos);
+			 completionHandler:(void (^)(NSError * _Nullable error))completionHandler NS_SWIFT_DISABLE_ASYNC
+API_DEPRECATED("Use `nw_connection_send` in Network framework instead, see deprecation notice in <NetworkExtension/NWUDPSession.h>", macos(10.11, 15.0), ios(9.0, 18.0), tvos(17.0, 18.0), visionos(1.0, 2.0))
+API_UNAVAILABLE(watchos);
 
 /*!
  * @method writeDatagram:completionHandler
@@ -154,14 +185,18 @@ API_AVAILABLE(macos(10.11), ios(9.0), tvos(17.0)) API_UNAVAILABLE(watchos)
  * @param completionHandler A handler called when the write request has either succeeded or failed.
  */
 - (void)writeDatagram:(NSData *)datagram
-	completionHandler:(void (^)(NSError * _Nullable error))completionHandler NS_SWIFT_DISABLE_ASYNC API_AVAILABLE(macos(10.11), ios(9.0), tvos(17.0)) API_UNAVAILABLE(watchos);
+	completionHandler:(void (^)(NSError * _Nullable error))completionHandler NS_SWIFT_DISABLE_ASYNC
+API_DEPRECATED("Use `nw_connection_send` in Network framework instead, see deprecation notice in <NetworkExtension/NWUDPSession.h>", macos(10.11, 15.0), ios(9.0, 18.0), tvos(17.0, 18.0), visionos(1.0, 2.0))
+API_UNAVAILABLE(watchos);
 
 /*!
  * @method cancel
  * @discussion Move into the NWUDPSessionStateCancelled state. The connection will be terminated,
  *		and all handlers will be cancelled.
  */
-- (void)cancel API_AVAILABLE(macos(10.11), ios(9.0), tvos(17.0)) API_UNAVAILABLE(watchos);
+- (void)cancel
+API_DEPRECATED("Use `nw_connection_cancel` in Network framework instead, see deprecation notice in <NetworkExtension/NWUDPSession.h>", macos(10.11, 15.0), ios(9.0, 18.0), tvos(17.0, 18.0), visionos(1.0, 2.0))
+API_UNAVAILABLE(watchos);
 
 @end
 

@@ -321,5 +321,15 @@ typedef NS_ENUM(NSInteger, PHASECalibrationMode) {
     PHASECalibrationModeAbsoluteSpl = 2,
 };
 
-#endif /* PHASETypes_h */
+/*!
+    @enum PHASEAutomaticHeadTrackingFlags
+    @abstract Automatic Head-Tracking flags.
+    @constant PHASEAutomaticHeadTrackingFlagOrientation
+        On capable devices, listener orientation will be automatically rotated based on user's head-orientation.
+ */
+typedef NS_OPTIONS(NSUInteger, PHASEAutomaticHeadTrackingFlags) {
+        PHASEAutomaticHeadTrackingFlagOrientation = 1UL << 0,
+}
+API_AVAILABLE(macos(15.0), ios(18.0), tvos(18.0)) API_UNAVAILABLE( watchos, visionos);
 
+#endif /* PHASETypes_h */

@@ -576,16 +576,6 @@ relstring(
   Boolean       diacSensitive)                                __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
 
 
-/*
- *  equalstring()
- *  
- *  Availability:
- *    Mac OS X:         not available [32-bit only]
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
- */
-
-
 #endif  /* !__LP64__ */
 
 

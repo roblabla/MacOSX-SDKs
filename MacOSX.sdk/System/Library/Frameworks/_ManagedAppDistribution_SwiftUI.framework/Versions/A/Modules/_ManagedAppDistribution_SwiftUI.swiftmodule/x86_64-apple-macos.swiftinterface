@@ -1,6 +1,6 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.10 (swiftlang-5.10.0.12.5 clang-1500.3.9.1.1)
-// swift-module-flags: -target x86_64-apple-macos14.5 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -package-name _ManagedAppDistribution_SwiftUI -enable-bare-slash-regex -user-module-version 1.4.2 -module-name _ManagedAppDistribution_SwiftUI
+// swift-compiler-version: Apple Swift version 6.0 effective-5.10 (swiftlang-6.0.0.7.24 clang-1600.0.25.1)
+// swift-module-flags: -target x86_64-apple-macos15.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -package-name _ManagedAppDistribution_SwiftUI -enable-upcoming-feature StrictConcurrency -enable-bare-slash-regex -user-module-version 1.4.2 -module-name _ManagedAppDistribution_SwiftUI
 import Combine
 import ExtensionKit
 import Foundation
@@ -66,11 +66,17 @@ public struct ManagedContentOfferState : Swift.Hashable {
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 @available(visionOS, unavailable)
-public struct ManagedAppView : SwiftUI.View {
-  public init(app: ManagedAppDistribution.ManagedApp)
-  @_Concurrency.MainActor(unsafe) public var body: some SwiftUI.View {
+@_Concurrency.MainActor @preconcurrency public struct ManagedAppView : SwiftUICore.View {
+  @_Concurrency.MainActor @preconcurrency public init(app: ManagedAppDistribution.ManagedApp)
+  @_Concurrency.MainActor @preconcurrency public var body: some SwiftUICore.View {
     get
   }
+  @available(iOS 17.2, *)
+  @available(tvOS, unavailable, introduced: 13.0)
+  @available(watchOS, unavailable, introduced: 6.0)
+  @available(visionOS, unavailable)
+  @available(macOS, unavailable, introduced: 10.15)
+  @available(macCatalyst, unavailable)
   public typealias Body = @_opaqueReturnTypeOf("$s31_ManagedAppDistribution_SwiftUI0aB4ViewV4bodyQrvp", 0) __
 }
 @available(iOS 17.2, *)
@@ -79,12 +85,18 @@ public struct ManagedAppView : SwiftUI.View {
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 @available(visionOS, unavailable)
-public struct ManagedContentView<Icon> : SwiftUI.View where Icon : SwiftUI.View {
-  public init(primaryLabel: SwiftUI.LocalizedStringKey, secondaryLabel: SwiftUI.LocalizedStringKey = "", tertiaryLabel: SwiftUI.LocalizedStringKey = "", quaternaryLabel: SwiftUI.LocalizedStringKey = "", offerState: _ManagedAppDistribution_SwiftUI.ManagedContentOfferState, offerAction: @escaping (_ManagedAppDistribution_SwiftUI.ManagedContentOfferState) -> Swift.Void, @SwiftUI.ViewBuilder icon: () -> Icon)
-  @_disfavoredOverload public init(primaryLabel: any Swift.StringProtocol, secondaryLabel: any Swift.StringProtocol = "", tertiaryLabel: any Swift.StringProtocol = "", quaternaryLabel: any Swift.StringProtocol = "", offerState: _ManagedAppDistribution_SwiftUI.ManagedContentOfferState, offerAction: @escaping (_ManagedAppDistribution_SwiftUI.ManagedContentOfferState) -> Swift.Void, @SwiftUI.ViewBuilder icon: () -> Icon)
-  @_Concurrency.MainActor(unsafe) public var body: some SwiftUI.View {
+@_Concurrency.MainActor @preconcurrency public struct ManagedContentView<Icon> : SwiftUICore.View where Icon : SwiftUICore.View {
+  @_Concurrency.MainActor @preconcurrency public init(primaryLabel: SwiftUICore.LocalizedStringKey, secondaryLabel: SwiftUICore.LocalizedStringKey = "", tertiaryLabel: SwiftUICore.LocalizedStringKey = "", quaternaryLabel: SwiftUICore.LocalizedStringKey = "", offerState: _ManagedAppDistribution_SwiftUI.ManagedContentOfferState, offerAction: @escaping (_ManagedAppDistribution_SwiftUI.ManagedContentOfferState) -> Swift.Void, @SwiftUICore.ViewBuilder icon: () -> Icon)
+  @_disfavoredOverload @_Concurrency.MainActor @preconcurrency public init(primaryLabel: any Swift.StringProtocol, secondaryLabel: any Swift.StringProtocol = "", tertiaryLabel: any Swift.StringProtocol = "", quaternaryLabel: any Swift.StringProtocol = "", offerState: _ManagedAppDistribution_SwiftUI.ManagedContentOfferState, offerAction: @escaping (_ManagedAppDistribution_SwiftUI.ManagedContentOfferState) -> Swift.Void, @SwiftUICore.ViewBuilder icon: () -> Icon)
+  @_Concurrency.MainActor @preconcurrency public var body: some SwiftUICore.View {
     get
   }
+  @available(iOS 17.2, *)
+  @available(tvOS, unavailable, introduced: 13.0)
+  @available(watchOS, unavailable, introduced: 6.0)
+  @available(visionOS, unavailable)
+  @available(macOS, unavailable, introduced: 10.15)
+  @available(macCatalyst, unavailable)
   public typealias Body = @_opaqueReturnTypeOf("$s31_ManagedAppDistribution_SwiftUI0A11ContentViewV4bodyQrvp", 0) __<Icon>
 }
 @available(iOS 17.2, *)
@@ -93,7 +105,21 @@ public struct ManagedContentView<Icon> : SwiftUI.View where Icon : SwiftUI.View 
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 @available(visionOS, unavailable)
-extension SwiftUI.View {
-  public func managedContentStyle(_ style: _ManagedAppDistribution_SwiftUI.ManagedContentStyle) -> some SwiftUI.View
+extension SwiftUICore.View {
+  @_Concurrency.MainActor @preconcurrency public func managedContentStyle(_ style: _ManagedAppDistribution_SwiftUI.ManagedContentStyle) -> some SwiftUICore.View
   
 }
+@available(iOS 17.2, *)
+@available(macOS, unavailable)
+@available(macCatalyst, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+@available(visionOS, unavailable)
+extension _ManagedAppDistribution_SwiftUI.ManagedAppView : Swift.Sendable {}
+@available(iOS 17.2, *)
+@available(macOS, unavailable)
+@available(macCatalyst, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+@available(visionOS, unavailable)
+extension _ManagedAppDistribution_SwiftUI.ManagedContentView : Swift.Sendable {}

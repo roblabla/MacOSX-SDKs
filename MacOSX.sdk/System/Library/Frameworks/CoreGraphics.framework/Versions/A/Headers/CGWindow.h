@@ -48,20 +48,20 @@ CF_ASSUME_NONNULL_BEGIN
    value. */
 
 CG_EXTERN const CFStringRef  kCGWindowNumber
-    CG_AVAILABLE_STARTING(10.5);
+    API_AVAILABLE(macos(10.5));
 
 /* The backing store type of the window, one of `kCGBackingStoreRetained',
    `kCGBackingStoreNonretained', or `kCGBackingStoreBuffered'. The value of
    this key is a CFNumber 32-bit signed integer value. */
 
 CG_EXTERN const CFStringRef  kCGWindowStoreType
-    CG_AVAILABLE_STARTING(10.5);
+    API_AVAILABLE(macos(10.5));
 
 /* The window layer number of the window. The value of this key is a
    CFNumber 32-bit signed integer value. */
 
 CG_EXTERN const CFStringRef  kCGWindowLayer
-    CG_AVAILABLE_STARTING(10.5);
+    API_AVAILABLE(macos(10.5));
 
 /* The bounds of the window in screen space, with the origin at the
    upper-left corner of the main display. The value of this key is a
@@ -69,34 +69,34 @@ CG_EXTERN const CFStringRef  kCGWindowLayer
    bounds as a CGRect value. */
 
 CG_EXTERN const CFStringRef  kCGWindowBounds
-    CG_AVAILABLE_STARTING(10.5);
+    API_AVAILABLE(macos(10.5));
 
 /* The sharing state of the window, one of `kCGWindowSharingNone',
    `kCGWindowSharingReadOnly', or `kCGWindowSharingReadWrite'. The value of
    this key is a CFNumber 32-bit signed integer value. */
 
 CG_EXTERN const CFStringRef  kCGWindowSharingState
-    CG_AVAILABLE_STARTING(10.5);
+    API_AVAILABLE(macos(10.5));
 
 /* The alpha fade of the window. The value of this key is a CFNumber
    floating-point value. The value 1.0 is normal (opaque); the value 0.0 is
    fully transparent (invisible). */
 
 CG_EXTERN const CFStringRef  kCGWindowAlpha
-    CG_AVAILABLE_STARTING(10.5);
+    API_AVAILABLE(macos(10.5));
 
 /* The process ID of the process that owns the window. The value of this key
    is a CFNumber 32-bit signed integer value. */
 
 CG_EXTERN const CFStringRef  kCGWindowOwnerPID
-    CG_AVAILABLE_STARTING(10.5);
+    API_AVAILABLE(macos(10.5));
 
 /* An estimate of the memory in bytes currently used by the window and its
    supporting data structures. The value of this key is a CFNumber 64-bit
    signed integer value. */
 
 CG_EXTERN const CFStringRef  kCGWindowMemoryUsage
-    CG_AVAILABLE_STARTING(10.5);
+    API_AVAILABLE(macos(10.5));
 
 /* Optional keys for window dictionaries. */
 
@@ -104,33 +104,33 @@ CG_EXTERN const CFStringRef  kCGWindowMemoryUsage
    The value of this key is a CFNumber 32-bit signed integer value. */
 
 CG_EXTERN const CFStringRef  kCGWindowWorkspace
-  CG_AVAILABLE_BUT_DEPRECATED(10.5, 10.8);
+  API_DEPRECATED("No longer supported", macos(10.5,10.8));
 
 /* If present, the name of the application process which owns the window.
    The value of this key is a CFString. */
 
 CG_EXTERN const CFStringRef  kCGWindowOwnerName
-    CG_AVAILABLE_STARTING(10.5);
+    API_AVAILABLE(macos(10.5));
 
 /* If present, the name of the window. The value of this key is a
    CFString. */
 
 CG_EXTERN const CFStringRef  kCGWindowName
-    CG_AVAILABLE_STARTING(10.5);
+    API_AVAILABLE(macos(10.5));
 
 /* If present, true if the window is ordered on screen, false otherwise. If
    the key is not present, then the window is not ordered on screen. The
    value of this key is a CFBoolean. */
 
 CG_EXTERN const CFStringRef  kCGWindowIsOnscreen
-    CG_AVAILABLE_STARTING(10.5);
+    API_AVAILABLE(macos(10.5));
 
 /* If present, true if the window backing store is in video memory, false
    otherwise. If the key is not present, then the window backing store is in
    main memory. The value of this key is a CFBoolean. */
 
 CG_EXTERN const CFStringRef  kCGWindowBackingLocationVideoMemory
-    CG_AVAILABLE_STARTING(10.5);
+    API_AVAILABLE(macos(10.5));
 
 /* Flags for CGWindowListOption values.  These may be ORed together. */
 
@@ -169,7 +169,7 @@ typedef CF_OPTIONS(uint32_t, CGWindowListOption) {
 
 CG_EXTERN CFArrayRef __nullable CGWindowListCopyWindowInfo(CGWindowListOption option,
     CGWindowID relativeToWindow)
-    CG_AVAILABLE_STARTING(10.5);
+    API_AVAILABLE(macos(10.5));
 
 /* Return an array of CGWindowID values for windows within the user session.
 
@@ -179,7 +179,7 @@ CG_EXTERN CFArrayRef __nullable CGWindowListCopyWindowInfo(CGWindowListOption op
 
 CG_EXTERN CFArrayRef __nullable CGWindowListCreate(CGWindowListOption option,
     CGWindowID relativeToWindow)
-    CG_AVAILABLE_STARTING(10.5)
+    API_AVAILABLE(macos(10.5))
     CF_SWIFT_UNAVAILABLE("No replacement at present");
 
 /* Return an array of window dictionaries, each corresponding to a window ID
@@ -191,7 +191,7 @@ CG_EXTERN CFArrayRef __nullable CGWindowListCreate(CGWindowListOption option,
 
 CG_EXTERN CFArrayRef __nullable CGWindowListCreateDescriptionFromArray(
     CFArrayRef __nullable windowArray)
-    CG_AVAILABLE_STARTING(10.5);
+    API_AVAILABLE(macos(10.5));
 
 /* Flags for CGWindowImageOption values.  These may be ORed together. */
 
@@ -218,6 +218,11 @@ typedef CF_OPTIONS(uint32_t, CGWindowImageOption) {
      equals the returned image size. */
     kCGWindowImageNominalResolution = (1 << 4)
 };
+
+
+#define SCREEN_CAPTURE_OBSOLETE(x,y,z) \
+    __attribute__((availability(macos,introduced=x,deprecated=y,obsoleted=z,message="Please use ScreenCaptureKit instead.")));
+
 
 /* Create an image containing a composite of the specified set of windows
    contained within a rectangular area. The set of windows is specified
@@ -266,7 +271,7 @@ typedef CF_OPTIONS(uint32_t, CGWindowImageOption) {
 CG_EXTERN CGImageRef __nullable CGWindowListCreateImage(CGRect screenBounds,
     CGWindowListOption listOption, CGWindowID windowID,
     CGWindowImageOption imageOption)
-    CG_AVAILABLE_BUT_DEPRECATED(10.5, 14.0, "This API is deprecated. Please use ScreenCaptureKit's captureScreenshot APIs instead.");
+    SCREEN_CAPTURE_OBSOLETE(10.5,14.0,15.0);
 
 /* Create an image containing a composite of the specified set of windows
    contained within a rectangular area à la `CGWindowListCreateImage'. The
@@ -275,7 +280,7 @@ CG_EXTERN CGImageRef __nullable CGWindowListCreateImage(CGRect screenBounds,
 CG_EXTERN CGImageRef __nullable CGWindowListCreateImageFromArray(
     CGRect screenBounds, CFArrayRef  windowArray,
     CGWindowImageOption imageOption)
-    CG_AVAILABLE_BUT_DEPRECATED(10.5, 14.0, "This API is deprecated. Please use ScreenCaptureKit's captureScreenshot APIs instead.");
+    SCREEN_CAPTURE_OBSOLETE(10.5,14.0,15.0);
 
 /* A CFNumberRef encoding appropriate for use with a CGWindowID. */
 #define kCGWindowIDCFNumberType kCFNumberSInt32Type
@@ -287,10 +292,10 @@ CG_EXTERN CGImageRef __nullable CGWindowListCreateImageFromArray(
 #define kCGWindowBackingCFNumberType kCFNumberSInt32Type
 
 /* Checks whether the current process already has screen capture access */
-CG_EXTERN bool CGPreflightScreenCaptureAccess(void) CG_AVAILABLE_STARTING(10.15);
+CG_EXTERN bool CGPreflightScreenCaptureAccess(void) API_AVAILABLE(macos(10.15));
 
 /* Requests event listening access if absent, potentially prompting */
-CG_EXTERN bool CGRequestScreenCaptureAccess(void) CG_AVAILABLE_STARTING(10.15);
+CG_EXTERN bool CGRequestScreenCaptureAccess(void) API_AVAILABLE(macos(10.15));
 
 
 CF_ASSUME_NONNULL_END

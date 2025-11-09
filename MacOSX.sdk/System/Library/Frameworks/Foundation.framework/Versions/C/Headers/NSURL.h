@@ -1,5 +1,5 @@
 /*	NSURL.h
-	Copyright (c) 1997-2019, Apple Inc. All rights reserved.
+	Copyright (c) 1997-2023, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -505,11 +505,7 @@ typedef NSUInteger NSURLBookmarkFileCreationOptions;
 NS_SWIFT_SENDABLE // Immutable with no mutable subclasses
 API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0))
 // NSURLQueryItem encapsulates a single query name-value pair. The name and value strings of a query name-value pair are not percent encoded. For use with the NSURLComponents queryItems property.
-@interface NSURLQueryItem : NSObject <NSSecureCoding, NSCopying> {
-@private
-    NSString *_name;
-    NSString *_value;
-}
+@interface NSURLQueryItem : NSObject <NSSecureCoding, NSCopying> 
 - (instancetype)initWithName:(NSString *)name value:(nullable NSString *)value NS_DESIGNATED_INITIALIZER;
 + (instancetype)queryItemWithName:(NSString *)name value:(nullable NSString *)value;
 @property (readonly) NSString *name;

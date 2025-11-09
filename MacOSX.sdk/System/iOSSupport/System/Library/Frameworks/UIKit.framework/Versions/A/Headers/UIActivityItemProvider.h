@@ -12,8 +12,9 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class UIActivityViewController, UIImage, LPLinkMetadata;
+@class UIActivityViewController, UIImage, LPLinkMetadata, INPerson;
 
+API_AVAILABLE(ios(6.0)) API_UNAVAILABLE(watchos)
 @protocol UIActivityItemSource <NSObject>
 
 @required
@@ -23,14 +24,18 @@ NS_ASSUME_NONNULL_BEGIN
 
 @optional
 
-- (NSString *)activityViewController:(UIActivityViewController *)activityViewController subjectForActivityType:(nullable UIActivityType)activityType; // if activity supports a Subject field. iOS 7.0
-- (NSString *)activityViewController:(UIActivityViewController *)activityViewController dataTypeIdentifierForActivityType:(nullable UIActivityType)activityType; // UTI for item if it is an NSData. iOS 7.0. will be called with nil activity and then selected activity
-- (nullable UIImage *)activityViewController:(UIActivityViewController *)activityViewController thumbnailImageForActivityType:(nullable UIActivityType)activityType suggestedSize:(CGSize)size; // if activity supports preview image. iOS 7.0
-- (nullable LPLinkMetadata *)activityViewControllerLinkMetadata:(UIActivityViewController *)activityViewController API_AVAILABLE(ios(13.0)); // called to fetch LinkPresentation metadata for the activity item. iOS 13.0
+- (NSString *)activityViewController:(UIActivityViewController *)activityViewController subjectForActivityType:(nullable UIActivityType)activityType API_AVAILABLE(ios(7.0)) API_UNAVAILABLE(watchos); // if activity supports a Subject field. iOS 7.0
+- (NSString *)activityViewController:(UIActivityViewController *)activityViewController dataTypeIdentifierForActivityType:(nullable UIActivityType)activityType API_AVAILABLE(ios(7.0)) API_UNAVAILABLE(watchos); // UTI for item if it is an NSData. iOS 7.0. will be called with nil activity and then selected activity
+- (nullable UIImage *)activityViewController:(UIActivityViewController *)activityViewController thumbnailImageForActivityType:(nullable UIActivityType)activityType suggestedSize:(CGSize)size API_AVAILABLE(ios(7.0)) API_UNAVAILABLE(watchos); // if activity supports preview image. iOS 7.0
+- (nullable LPLinkMetadata *)activityViewControllerLinkMetadata:(UIActivityViewController *)activityViewController API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos); // called to fetch LinkPresentation metadata for the activity item. iOS 13.0
+
+/// @abstract Allows the activity item source to provide recipients who will be filled in by default in the compose view if that sharing app supports it.
+/// @discussion This might fail to pre-fill correctly if the sharing app chosen by the user can't recognize the provided person. Also, if a people suggestion is chosen, that suggestion will override this provided value.
+- (NSArray<INPerson *> *)activityViewControllerShareRecipients:(UIActivityViewController *)activityViewController API_AVAILABLE(ios(18.0)) API_UNAVAILABLE(watchos);
 
 @end
 
-NS_CLASS_AVAILABLE_IOS(6_0) __TVOS_PROHIBITED @interface UIActivityItemProvider : NSOperation <UIActivityItemSource>
+API_AVAILABLE(ios(6.0)) API_UNAVAILABLE(watchos) __TVOS_PROHIBITED @interface UIActivityItemProvider : NSOperation <UIActivityItemSource>
 
 - (instancetype)init NS_UNAVAILABLE;
 - (instancetype)initWithPlaceholderItem:(id)placeholderItem NS_DESIGNATED_INITIALIZER;               // placeHolder is the return value for -activityViewControllerPlaceholderItem:

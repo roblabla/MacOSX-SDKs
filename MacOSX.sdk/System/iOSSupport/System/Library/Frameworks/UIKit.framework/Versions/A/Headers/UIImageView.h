@@ -17,7 +17,7 @@ NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 @class UIImage, UIImageSymbolConfiguration;
 
-UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(2.0)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @interface UIImageView : UIView 
 
 - (instancetype)initWithImage:(nullable UIImage *)image;
@@ -25,7 +25,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
 
 @property (nullable, nonatomic, strong) UIImage *image; // default is nil
 @property (nullable, nonatomic, strong) UIImage *highlightedImage API_AVAILABLE(ios(3.0)); // default is nil
-@property (nullable, nonatomic, strong) UIImageSymbolConfiguration* preferredSymbolConfiguration API_AVAILABLE(ios(13.0),tvos(13.0),watchos(6.0));
+@property (nullable, nonatomic, strong) UIImageSymbolConfiguration* preferredSymbolConfiguration API_AVAILABLE(ios(13.0), tvos(13.0)) API_UNAVAILABLE(watchos);
 @property (nonatomic, getter=isUserInteractionEnabled) BOOL userInteractionEnabled; // default is NO
 
 @property (nonatomic, getter=isHighlighted) BOOL highlighted API_AVAILABLE(ios(3.0)); // default is NO
@@ -76,39 +76,39 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
 @interface UIImageView (/*Symbol animation presets*/)
 
 /// Adds a symbol effect to the image view with default options and animation.
-- (void)addSymbolEffect:(NSSymbolEffect *)symbolEffect API_AVAILABLE(ios(17.0),tvos(17.0),watchos(10.0));
+- (void)addSymbolEffect:(NSSymbolEffect *)symbolEffect API_AVAILABLE(ios(17.0), tvos(17.0)) API_UNAVAILABLE(watchos);
 /// Adds a symbol effect to the image view with specified options and default animation.
-- (void)addSymbolEffect:(NSSymbolEffect *)symbolEffect options:(NSSymbolEffectOptions *)options API_AVAILABLE(ios(17.0),tvos(17.0),watchos(10.0));
+- (void)addSymbolEffect:(NSSymbolEffect *)symbolEffect options:(NSSymbolEffectOptions *)options API_AVAILABLE(ios(17.0), tvos(17.0)) API_UNAVAILABLE(watchos);
 /// Adds a symbol effect to the image view with specified options and animation.
-- (void)addSymbolEffect:(NSSymbolEffect *)symbolEffect options:(NSSymbolEffectOptions *)options animated:(BOOL)animated API_AVAILABLE(ios(17.0),tvos(17.0),watchos(10.0));
+- (void)addSymbolEffect:(NSSymbolEffect *)symbolEffect options:(NSSymbolEffectOptions *)options animated:(BOOL)animated API_AVAILABLE(ios(17.0), tvos(17.0)) API_UNAVAILABLE(watchos);
 /// Adds a symbol effect to the image view with specified options, animation, and completion handler.
-- (void)addSymbolEffect:(NSSymbolEffect *)symbolEffect options:(NSSymbolEffectOptions *)options animated:(BOOL)animated completion:(nullable UISymbolEffectCompletion)completionHandler API_AVAILABLE(ios(17.0),tvos(17.0),watchos(10.0));
+- (void)addSymbolEffect:(NSSymbolEffect *)symbolEffect options:(NSSymbolEffectOptions *)options animated:(BOOL)animated completion:(nullable UISymbolEffectCompletion)completionHandler API_AVAILABLE(ios(17.0), tvos(17.0)) API_UNAVAILABLE(watchos);
 
 /// Removes from the image view the symbol effect matching the type of effect passed in, with default options and animation.
-- (void)removeSymbolEffectOfType:(NSSymbolEffect *)symbolEffect API_AVAILABLE(ios(17.0),tvos(17.0),watchos(10.0));
+- (void)removeSymbolEffectOfType:(NSSymbolEffect *)symbolEffect API_AVAILABLE(ios(17.0), tvos(17.0)) API_UNAVAILABLE(watchos);
 /// Removes from the image view the symbol effect matching the type of effect passed in, with specified options and default animation.
-- (void)removeSymbolEffectOfType:(NSSymbolEffect *)symbolEffect options:(NSSymbolEffectOptions *)options API_AVAILABLE(ios(17.0),tvos(17.0),watchos(10.0));
+- (void)removeSymbolEffectOfType:(NSSymbolEffect *)symbolEffect options:(NSSymbolEffectOptions *)options API_AVAILABLE(ios(17.0), tvos(17.0)) API_UNAVAILABLE(watchos);
 /// Removes from the image view the symbol effect matching the type of effect passed in, with specified options and animation.
-- (void)removeSymbolEffectOfType:(NSSymbolEffect *)symbolEffect options:(NSSymbolEffectOptions *)options animated:(BOOL)animated API_AVAILABLE(ios(17.0),tvos(17.0),watchos(10.0));
+- (void)removeSymbolEffectOfType:(NSSymbolEffect *)symbolEffect options:(NSSymbolEffectOptions *)options animated:(BOOL)animated API_AVAILABLE(ios(17.0), tvos(17.0)) API_UNAVAILABLE(watchos);
 /// Removes from the image view the symbol effect matching the type of effect passed in, with specified options, animation, and completion handler.
-- (void)removeSymbolEffectOfType:(NSSymbolEffect *)symbolEffect options:(NSSymbolEffectOptions *)options animated:(BOOL)animated completion:(nullable UISymbolEffectCompletion)completionHandler API_AVAILABLE(ios(17.0),tvos(17.0),watchos(10.0));
+- (void)removeSymbolEffectOfType:(NSSymbolEffect *)symbolEffect options:(NSSymbolEffectOptions *)options animated:(BOOL)animated completion:(nullable UISymbolEffectCompletion)completionHandler API_AVAILABLE(ios(17.0), tvos(17.0)) API_UNAVAILABLE(watchos);
 
 /// Removes all symbol effects from the image view with default options and animation.
-- (void)removeAllSymbolEffects API_AVAILABLE(ios(17.0),tvos(17.0),watchos(10.0));
+- (void)removeAllSymbolEffects API_AVAILABLE(ios(17.0), tvos(17.0)) API_UNAVAILABLE(watchos);
 /// Removes all symbol effects from the image view with specified options and default animation.
-- (void)removeAllSymbolEffectsWithOptions:(NSSymbolEffectOptions *)options API_AVAILABLE(ios(17.0),tvos(17.0),watchos(10.0));
+- (void)removeAllSymbolEffectsWithOptions:(NSSymbolEffectOptions *)options API_AVAILABLE(ios(17.0), tvos(17.0)) API_UNAVAILABLE(watchos);
 /// Removes all symbol effects from the image view with specified options and animation.
-- (void)removeAllSymbolEffectsWithOptions:(NSSymbolEffectOptions *)options animated:(BOOL)animated API_AVAILABLE(ios(17.0),tvos(17.0),watchos(10.0));
+- (void)removeAllSymbolEffectsWithOptions:(NSSymbolEffectOptions *)options animated:(BOOL)animated API_AVAILABLE(ios(17.0), tvos(17.0)) API_UNAVAILABLE(watchos);
 
 /// Sets the symbol image on the image view with a symbol content transition and default options.
 /// Passing in a non-symbol image will result in undefined behavior.
-- (void)setSymbolImage:(UIImage *)symbolImage withContentTransition:(NSSymbolContentTransition *)transition API_AVAILABLE(ios(17.0),tvos(17.0),watchos(10.0));
+- (void)setSymbolImage:(UIImage *)symbolImage withContentTransition:(NSSymbolContentTransition *)transition API_AVAILABLE(ios(17.0), tvos(17.0)) API_UNAVAILABLE(watchos);
 /// Sets the symbol image on the image view with a symbol content transition and specified options.
 /// Passing in a non-symbol image will result in undefined behavior.
-- (void)setSymbolImage:(UIImage *)symbolImage withContentTransition:(NSSymbolContentTransition *)transition options:(NSSymbolEffectOptions *)options API_AVAILABLE(ios(17.0),tvos(17.0),watchos(10.0));
+- (void)setSymbolImage:(UIImage *)symbolImage withContentTransition:(NSSymbolContentTransition *)transition options:(NSSymbolEffectOptions *)options API_AVAILABLE(ios(17.0), tvos(17.0)) API_UNAVAILABLE(watchos);
 /// Sets the symbol image on the image view with a symbol content transition, options, and completion handler.
 /// Passing in a non-symbol image will result in undefined behavior.
-- (void)setSymbolImage:(UIImage *)symbolImage withContentTransition:(NSSymbolContentTransition *)transition options:(NSSymbolEffectOptions *)options completion:(nullable UISymbolEffectCompletion)completionHandler API_AVAILABLE(ios(17.0),tvos(17.0),watchos(10.0));
+- (void)setSymbolImage:(UIImage *)symbolImage withContentTransition:(NSSymbolContentTransition *)transition options:(NSSymbolEffectOptions *)options completion:(nullable UISymbolEffectCompletion)completionHandler API_AVAILABLE(ios(17.0), tvos(17.0)) API_UNAVAILABLE(watchos);
 
 @end
 

@@ -45,7 +45,7 @@ API_AVAILABLE(macos(10.13), ios(10.0)) CS_TVOS_UNAVAILABLE
 
 // queryString: The query string (e.g., 'contentType == "public.email-message" && subject != "Re:*"')
 // attributes: The attributes to be fetched for the searchable items
-- (instancetype)initWithQueryString:(NSString *)queryString attributes:(NSArray<NSString *> * _Nullable)attributes;
+- (instancetype)initWithQueryString:(NSString *)queryString attributes:(NSArray<NSString *> * _Nullable)attributes NS_DEPRECATED(10_13, 13_0, 10_0, 16_0, "Use initWithQueryString:queryContext instead");
 
 @property (readonly, getter=isCancelled) BOOL cancelled;
 

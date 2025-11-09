@@ -14,6 +14,12 @@
 #ifndef __NWBonjourServiceEndpoint_h_
 #define __NWBonjourServiceEndpoint_h_
 
+/**
+ * DEPRECATION NOTICE
+ *
+ * NW object wrappers are hidden in Swift 6. To continue accessing them, you
+ * can prepend double underscores to the symbol name.
+ */
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -24,7 +30,8 @@ NS_ASSUME_NONNULL_BEGIN
  *		Bonjour service MyMusicStudio._music._tcp.local. has the name "MyMusicStudio",
  *		the type "_music._tcp", and the domain "local".
  */
-API_AVAILABLE(macos(10.11), ios(9.0), tvos(17.0)) API_UNAVAILABLE(watchos)
+API_DEPRECATED("Use `nw_endpoint_t` in Network framework instead, see deprecation notice in <NetworkExtension/NWBonjourServiceEndpoint.h>", macos(10.11, 15.0), ios(9.0, 18.0), tvos(17.0, 18.0), visionos(1.0, 2.0))
+API_UNAVAILABLE(watchos)
 @interface NWBonjourServiceEndpoint : NWEndpoint
 
 /*!
@@ -36,25 +43,35 @@ API_AVAILABLE(macos(10.11), ios(9.0), tvos(17.0)) API_UNAVAILABLE(watchos)
  */
 + (instancetype)endpointWithName:(NSString *)name
 							type:(NSString *)type
-						  domain:(NSString *)domain API_AVAILABLE(macos(10.11), ios(9.0), tvos(17.0)) API_UNAVAILABLE(watchos);
+						  domain:(NSString *)domain
+API_DEPRECATED("Use `nw_endpoint_create_bonjour_service` in Network framework instead, see deprecation notice in <NetworkExtension/NWBonjourServiceEndpoint.h>", macos(10.11, 15.0), ios(9.0, 18.0), tvos(17.0, 18.0), visionos(1.0, 2.0))
+API_UNAVAILABLE(watchos);
 
 /*!
  * @property name
  * @discussion The endpoint's Bonjour service name.
  */
-@property (nonatomic, readonly) NSString *name API_AVAILABLE(macos(10.11), ios(9.0), tvos(17.0)) API_UNAVAILABLE(watchos);
+@property (nonatomic, readonly) NSString *name
+API_DEPRECATED("Use `nw_endpoint_get_bonjour_service_name` in Network framework instead, see deprecation notice in <NetworkExtension/NWBonjourServiceEndpoint.h>", macos(10.11, 15.0), ios(9.0, 18.0), tvos(17.0, 18.0), visionos(1.0, 2.0))
+API_UNAVAILABLE(watchos);
+
 
 /*!
  * @property type
  * @discussion The endpoint's Bonjour service type.
  */
-@property (nonatomic, readonly) NSString *type API_AVAILABLE(macos(10.11), ios(9.0), tvos(17.0)) API_UNAVAILABLE(watchos);
+@property (nonatomic, readonly) NSString *type
+API_DEPRECATED("Use `nw_endpoint_get_bonjour_service_type` in Network framework instead, see deprecation notice in <NetworkExtension/NWBonjourServiceEndpoint.h>", macos(10.11, 15.0), ios(9.0, 18.0), tvos(17.0, 18.0), visionos(1.0, 2.0))
+API_UNAVAILABLE(watchos);
+
 
 /*!
  * @property domain
  * @discussion The endpoint's Bonjour service domain.
  */
-@property (nonatomic, readonly) NSString *domain API_AVAILABLE(macos(10.11), ios(9.0), tvos(17.0)) API_UNAVAILABLE(watchos);
+@property (nonatomic, readonly) NSString *domain
+API_DEPRECATED("Use `nw_endpoint_get_bonjour_service_domain` in Network framework instead, see deprecation notice in <NetworkExtension/NWBonjourServiceEndpoint.h>", macos(10.11, 15.0), ios(9.0, 18.0), tvos(17.0, 18.0), visionos(1.0, 2.0))
+API_UNAVAILABLE(watchos);
 
 @end
 

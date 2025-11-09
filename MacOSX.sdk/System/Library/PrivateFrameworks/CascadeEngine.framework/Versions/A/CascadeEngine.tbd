@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/CascadeEngine.framework/Versions/A/CascadeEngine'
-current-version: 123.9
+current-version: 153.5
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -14,6 +14,6 @@ exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _CascadeEngineVersionNumber, _CascadeEngineVersionString ]
-    objc-classes:    [ CCDataSiteManager, CCDonateConnection, CCDonateConnectionFactory, 
-                       CCDonateRequestManager, CCSetStoreUpdateService ]
+    objc-classes:    [ CCDonateConnection, CCDonateConnectionFactory, CCDonateRequestManager, 
+                       CCRapportSyncEngine, CCSetStoreUpdateService ]
 ...

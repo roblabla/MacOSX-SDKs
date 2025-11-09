@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/MailKit.framework/Versions/A/MailKit'
-current-version: 3774.255.62
+current-version: 3818.100.11
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -12,7 +12,12 @@ exports:
                        _MEMailExtensionCapabilityComposeSession, _MEMailExtensionCapabilityContentBlocking, 
                        _MEMailExtensionCapabilityMessageActions, _MEMailExtensionCapabilityMessageSecurity, 
                        _MEMailExtensionErrorDomain, _MEMailExtensionErrorExtensionIdentifierKey, 
-                       _MEMailExtensionsLog, _MEMessageSecurityErrorDomain, _MEVisibleMessagesReload ]
+                       _MEMailExtensionsLog, _MEMessageSecurityErrorDomain, _MEVisibleMessagesReload, 
+                       _experimentDeploymentIDKeyName, _experimentIDKeyName, _experimentTreatmentIDKeyName, 
+                       _finalRuleVersionKeyName, _modelScoreKeyName, _modelVersionKeyName, 
+                       _reasonCodesKeyName, _rolloutDeploymentIDKeyName, _rolloutFactorPackIDKeyName, 
+                       _rolloutIDKeyName, _senderModelScoreKeyName, _senderModelVersionKeyName, 
+                       _tsModelScoreKeyName, _tsModelVersionKeyName ]
     objc-classes:    [ MEAddressAnnotation, MEAppExtensionsController, MEComposeContext, 
                        MEComposeExtensionValidationError, MEComposeExtensionsHelper, 
                        MEComposeSession, MEContentRuleListManager, MEDecodeContext, 
@@ -20,6 +25,7 @@ exports:
                        MEEncodedOutgoingMessage, MEExtensionHostContext, MEExtensionManager, 
                        MEMailComposeToolbarItemInfo, MEMessage, MEMessageAction, 
                        MEMessageActionDecision, MEMessageActionDestination, MEMessageActionFlagChange, 
+                       MEMessageCategorizationResult, MEMessageCategorizationResultMetadata, 
                        MEMessageEncodingResult, MEMessageRecipients, MEMessageSecurityInformation, 
                        MEMessageSenderMetadata, MEMessageSigner, MEOutgoingMessageEncodingStatus, 
                        MERemoteExtension, MERemoteExtensionContext ]

@@ -58,9 +58,19 @@ NS_CLASS_AVAILABLE(10_9, 6_0)
 - (instancetype)initWithLeaderboard:(GKLeaderboard *)leaderboard playerScope:(GKLeaderboardPlayerScope)playerScope API_AVAILABLE(ios(14.0), macos(11.0), tvos(14.0)) API_UNAVAILABLE(watchos);
 
 /**
+ Use this to display the leaderboard sets for the specified leaderboardSetID.
+ */
+- (instancetype)initWithLeaderboardSetID:(NSString *)leaderboardSetID API_AVAILABLE(ios(18.0), macos(15.0), tvos(18.0), visionos(2.0)) API_UNAVAILABLE(watchos);
+
+/**
  Use this to display the details associated with the specified achievementID
  */
 - (instancetype)initWithAchievementID:(NSString *)achievementID API_AVAILABLE(ios(14.0), macos(11.0), tvos(14.0)) API_UNAVAILABLE(watchos);
+
+/**
+ Use this to display the profile page associated with the specified player.
+ */
+- (instancetype)initWithPlayer:(GKPlayer *)player API_AVAILABLE(ios(18.0), macos(15.0), tvos(18.0), visionos(2.0)) API_UNAVAILABLE(watchos);
 
 @end
 

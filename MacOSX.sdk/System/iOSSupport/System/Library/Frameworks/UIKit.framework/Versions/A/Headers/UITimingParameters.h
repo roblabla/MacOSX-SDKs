@@ -13,7 +13,7 @@
 
 NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
-UIKIT_EXTERN API_AVAILABLE(ios(10.0)) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(10.0)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @interface UICubicTimingParameters : NSObject  <UITimingCurveProvider>
 
 @property(nonatomic, readonly) UIViewAnimationCurve animationCurve;
@@ -28,7 +28,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(10.0)) NS_SWIFT_UI_ACTOR
 @end
 
 
-UIKIT_EXTERN API_AVAILABLE(ios(10.0)) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(10.0)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @interface UISpringTimingParameters : NSObject  <UITimingCurveProvider>
 
 @property(nonatomic, readonly) CGVector initialVelocity;
@@ -68,11 +68,11 @@ UIKIT_EXTERN API_AVAILABLE(ios(10.0)) NS_SWIFT_UI_ACTOR
 // positive values indicate increasing amounts of bounciness up to a maximum of
 // 1.0 (corresponding to undamped oscillation), and negative values indicate
 // overdamped springs with a minimum value of -1.0.
-- (instancetype)initWithDuration:(NSTimeInterval)duration bounce:(CGFloat)bounce initialVelocity:(CGVector)velocity NS_DESIGNATED_INITIALIZER API_AVAILABLE(ios(17.0));
+- (instancetype)initWithDuration:(NSTimeInterval)duration bounce:(CGFloat)bounce initialVelocity:(CGVector)velocity NS_DESIGNATED_INITIALIZER API_AVAILABLE(ios(17.0)) API_UNAVAILABLE(watchos);
 
 // Equivalent to initWithDuration:bounce:initialVelocity: where the velocity
 // is the zero-vector.
-- (instancetype)initWithDuration:(NSTimeInterval)duration bounce:(CGFloat)bounce API_AVAILABLE(ios(17.0));
+- (instancetype)initWithDuration:(NSTimeInterval)duration bounce:(CGFloat)bounce API_AVAILABLE(ios(17.0)) API_UNAVAILABLE(watchos);
 
 @end
 

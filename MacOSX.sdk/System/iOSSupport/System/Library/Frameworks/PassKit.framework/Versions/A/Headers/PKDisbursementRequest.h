@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class PKPaymentSummaryItem;
 
-API_AVAILABLE(ios(17.0)) API_UNAVAILABLE(macos, tvos, watchos)
+API_AVAILABLE(ios(17.0)) API_UNAVAILABLE(watchos, tvos)
 @interface PKDisbursementRequest : NSObject
 
 // Identifies the merchant, as previously agreed with Apple. Must match one of the merchant

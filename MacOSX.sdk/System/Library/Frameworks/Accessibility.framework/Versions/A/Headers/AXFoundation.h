@@ -18,3 +18,9 @@
         #define AX_EXTERN   extern __attribute__((visibility("default")))
     #endif
 #endif
+
+#ifdef __swift__
+    // This struct is not available in Objective-C. Its only purpose is to create a namespace for accessibility symbols in Swift.
+typedef struct AccessibilitySettings { void *_reserved; } AccessibilitySettings;
+#endif
+

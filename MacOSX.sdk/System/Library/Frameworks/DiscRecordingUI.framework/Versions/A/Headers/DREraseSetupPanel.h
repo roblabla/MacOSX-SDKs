@@ -25,6 +25,8 @@
 #import <DiscRecordingUI/DRSetupPanel.h>
 #import <Availability.h>
 
+#ifndef DISC_RECORDING_ERASE_SETUP_PANEL
+#define DISC_RECORDING_ERASE_SETUP_PANEL
 
 API_UNAVAILABLE_BEGIN(ios)
 
@@ -97,3 +99,5 @@ API_UNAVAILABLE_BEGIN(ios)
 
 
 API_UNAVAILABLE_END
+
+#endif // DISC_RECORDING_ERASE_SETUP_PANEL

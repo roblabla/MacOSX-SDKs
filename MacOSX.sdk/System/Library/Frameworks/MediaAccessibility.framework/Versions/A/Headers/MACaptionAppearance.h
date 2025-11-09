@@ -242,6 +242,16 @@ void MACaptionAppearanceSetDisplayType(MACaptionAppearanceDomain domain, MACapti
 MA_EXPORT
 CFArrayRef MACaptionAppearanceCopyPreferredCaptioningMediaCharacteristics(MACaptionAppearanceDomain domain) CF_AVAILABLE(10_9, 7_0);
 
+/*!
+ @function MACaptionAppearanceIsCustomized
+ @abstract Provides a boolean indicating if the currently-active style has been customized by the user. This is useful for some clients who may need different fallback strategies for customized styles vs system-default styles.
+ @param domain Preference domain, see  @link MACaptionAppearanceDomain @/link.
+ @result A boolean indicating if the currently-active style has been customized by the user
+ */
+MA_EXPORT
+bool MACaptionAppearanceIsCustomized(MACaptionAppearanceDomain domain) CF_AVAILABLE(15_0, 18_0);
+
+
 #pragma mark Color preferences
 /*——————————————————————————————————————————————————————————————————————————————————————*/
 /*! @group Color preferences                                                            */
@@ -250,7 +260,7 @@ CFArrayRef MACaptionAppearanceCopyPreferredCaptioningMediaCharacteristics(MACapt
  @function MACaptionAppearanceCopyForegroundColor
  @abstract User preference for foreground/text color.
  @param domain Preference domain, see  @link MACaptionAppearanceDomain @/link.
- @param *behavior (see @link MACaptionAppearanceBehavior @/link)
+ @param behavior (see @link MACaptionAppearanceBehavior @/link)
  @result User preference for foreground/text color.
  */
 MA_EXPORT
@@ -261,7 +271,7 @@ CGColorRef MACaptionAppearanceCopyForegroundColor(MACaptionAppearanceDomain doma
  @abstract User preference for background color.
  @discussion The background color is the color behind each caption glyph.
  @param domain Preference domain, see @link MACaptionAppearanceDomain @/link.
- @param *behavior (see @link MACaptionAppearanceBehavior @/link)
+ @param behavior (see @link MACaptionAppearanceBehavior @/link)
  @result User preference for background color.
  */
 MA_EXPORT
@@ -272,7 +282,7 @@ CGColorRef MACaptionAppearanceCopyBackgroundColor(MACaptionAppearanceDomain doma
  @abstract User preference for window color.
  @discussion The window color is the color of a box behind all of the caption glyphs.
  @param domain Preference domain, see  @link MACaptionAppearanceDomain @/link.
- @param *behavior (see @link MACaptionAppearanceBehavior @/link)
+ @param behavior (see @link MACaptionAppearanceBehavior @/link)
  @result User preference for window color.
  */
 MA_EXPORT
@@ -282,7 +292,7 @@ CGColorRef MACaptionAppearanceCopyWindowColor(MACaptionAppearanceDomain domain, 
  @function MACaptionAppearanceGetForegroundOpacity
  @abstract User preference for foreground opacity.
  @param domain Preference domain, see @link MACaptionAppearanceDomain @/link.
- @param *behavior (see @link MACaptionAppearanceBehavior @/link)
+ @param behavior (see @link MACaptionAppearanceBehavior @/link)
  @result User preference for foreground opacity.
  */
 MA_EXPORT
@@ -292,7 +302,7 @@ CGFloat MACaptionAppearanceGetForegroundOpacity(MACaptionAppearanceDomain domain
  @function MACaptionAppearanceGetBackgroundOpacity
  @abstract User preference for background opacity.
  @param domain Preference domain, see  @link MACaptionAppearanceDomain @/link.
- @param *behavior (see @link MACaptionAppearanceBehavior @/link)
+ @param behavior (see @link MACaptionAppearanceBehavior @/link)
  @result User preference for background opacity.
  */
 MA_EXPORT
@@ -302,7 +312,7 @@ CGFloat MACaptionAppearanceGetBackgroundOpacity(MACaptionAppearanceDomain domain
  @function MACaptionAppearanceGetWindowOpacity
  @abstract User preference for window opacity.
  @param domain Preference domain, see  @link MACaptionAppearanceDomain @/link.
- @param *behavior (see @link MACaptionAppearanceBehavior @/link)
+ @param behavior (see @link MACaptionAppearanceBehavior @/link)
  @result User preference for window opacity.
  */
 MA_EXPORT
@@ -312,7 +322,7 @@ CGFloat MACaptionAppearanceGetWindowOpacity(MACaptionAppearanceDomain domain, MA
  @function MACaptionAppearanceGetWindowRoundedCornerRadius
  @abstract User preference for caption-window corner radius.
  @param domain Preference domain, see  @link MACaptionAppearanceDomain @/link.
- @param *behavior (see @link MACaptionAppearanceBehavior @/link)
+ @param behavior (see @link MACaptionAppearanceBehavior @/link)
  @result User preference for caption-window corner radius.
  */
 MA_EXPORT
@@ -326,7 +336,7 @@ CGFloat MACaptionAppearanceGetWindowRoundedCornerRadius(MACaptionAppearanceDomai
  @function MACaptionAppearanceCopyFontForStyle
  @abstract User font preference for the specified style.
  @param domain Preference domain, see  @link MACaptionAppearanceDomain @/link.
- @param *behavior (see @link MACaptionAppearanceBehavior @/link)
+ @param behavior (see @link MACaptionAppearanceBehavior @/link)
  @param fontStyle Font style, see  @link MACaptionAppearanceFontStyle @/link.
  @result User font preference for the specified style.
  */
@@ -336,7 +346,7 @@ MA_EXPORT CTFontDescriptorRef MACaptionAppearanceCopyFontDescriptorForStyle(MACa
  @function MACaptionAppearanceGetRelativeCharacterSize
  @abstract User preference for font scaling.
  @param domain Preference domain, see  @link MACaptionAppearanceDomain @/link.
- @param *behavior (see @link MACaptionAppearanceBehavior @/link)
+ @param behavior (see @link MACaptionAppearanceBehavior @/link)
  @result User font scaling preference for the specified style.
  */
 MA_EXPORT
@@ -346,7 +356,7 @@ CGFloat MACaptionAppearanceGetRelativeCharacterSize(MACaptionAppearanceDomain do
  @function MACaptionAppearanceGetTextEdgeStyle
  @abstract User preference for text edge style.
  @param domain Preference domain, see  @link MACaptionAppearanceDomain @/link.
- @param *behavior (see @link MACaptionAppearanceBehavior @/link)
+ @param behavior (see @link MACaptionAppearanceBehavior @/link)
  @result User preference for text edge style.
  */
 MA_EXPORT

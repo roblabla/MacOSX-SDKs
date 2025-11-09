@@ -24,9 +24,9 @@ typedef NS_ENUM(NSInteger, VSOriginatingDeviceCategory) {
 } NS_REFINED_FOR_SWIFT API_AVAILABLE(ios(16.4), tvos(16.4), macos(13.3)) API_UNAVAILABLE(watchos, macCatalyst);
 
 VS_EXPORT API_AVAILABLE(ios(16.4), tvos(16.4), macos(13.3)) API_UNAVAILABLE(watchos, macCatalyst)
-NS_REFINED_FOR_SWIFT
-NS_SWIFT_SENDABLE
-@interface VSUserAccount : NSObject
+    NS_REFINED_FOR_SWIFT
+    NS_SWIFT_SENDABLE
+    @interface VSUserAccount : NSObject
 
 // The URL pointing to the application JS that can respond to account update requests, or nil if JS updates are not supported.
 @property (nonatomic, copy, nullable) NSURL *updateURL;

@@ -620,6 +620,7 @@ exports:
                        '_$s7CoreNFC21NFCISO15693SystemInfoV9blockSizeSivpMV', '_$s7CoreNFC21NFCISO15693SystemInfoV9blockSizeSivs', 
                        '_$s7CoreNFC21NFCISO15693SystemInfoVMa', '_$s7CoreNFC21NFCISO15693SystemInfoVMn', 
                        '_$s7CoreNFC21NFCISO15693SystemInfoVN', '_$s7CoreNFC22NFCISO7816ResponseAPDUV11statusWord10F5Word27paylaodACs5UInt8V_AH10Foundation4DataVSgtcfC', 
+                       '_$s7CoreNFC22NFCISO7816ResponseAPDUV11statusWord10F5Word27payloadACs5UInt8V_AH10Foundation4DataVSgtcfC', 
                        '_$s7CoreNFC22NFCISO7816ResponseAPDUV11statusWord1s5UInt8VvM', 
                        '_$s7CoreNFC22NFCISO7816ResponseAPDUV11statusWord1s5UInt8Vvg', 
                        '_$s7CoreNFC22NFCISO7816ResponseAPDUV11statusWord1s5UInt8VvpMV', 

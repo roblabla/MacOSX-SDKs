@@ -41,7 +41,7 @@ extern "C"
 		to tear it down and CFRelease to release your object reference.
  */
 
-typedef struct CM_BRIDGED_TYPE(id) OpaqueVTPixelTransferSession*  VTPixelTransferSessionRef CM_SWIFT_NONSENDABLE;
+typedef struct CM_BRIDGED_TYPE(id) OpaqueVTPixelTransferSession*  VTPixelTransferSessionRef CM_SWIFT_NONSENDABLE API_AVAILABLE(macos(10.8), ios(16.0), tvos(16.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 /*!
 	@function	VTPixelTransferSessionCreate
@@ -57,7 +57,7 @@ typedef struct CM_BRIDGED_TYPE(id) OpaqueVTPixelTransferSession*  VTPixelTransfe
 VT_EXPORT OSStatus 
 VTPixelTransferSessionCreate(
   CM_NULLABLE CFAllocatorRef							allocator,
-  CM_RETURNS_RETAINED_PARAMETER CM_NULLABLE VTPixelTransferSessionRef * CM_NONNULL pixelTransferSessionOut) VT_AVAILABLE_STARTING(10_8);
+							 CM_RETURNS_RETAINED_PARAMETER CM_NULLABLE VTPixelTransferSessionRef * CM_NONNULL pixelTransferSessionOut) API_AVAILABLE(macos(10.8), ios(16.0), tvos(16.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 CF_IMPLICIT_BRIDGING_ENABLED
 	
@@ -72,14 +72,14 @@ CF_IMPLICIT_BRIDGING_ENABLED
     	Calling VTPixelTransferSessionInvalidate ensures a deterministic, orderly teardown.
 */
 VT_EXPORT void 
-VTPixelTransferSessionInvalidate( CM_NONNULL VTPixelTransferSessionRef session ) VT_AVAILABLE_STARTING(10_8);
+VTPixelTransferSessionInvalidate( CM_NONNULL VTPixelTransferSessionRef session ) API_AVAILABLE(macos(10.8), ios(16.0), tvos(16.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 /*!
 	@function VTPixelTransferSessionGetTypeID
 	@abstract Returns the CFTypeID for pixel transfer sessions.  
 */
 VT_EXPORT CFTypeID 
-VTPixelTransferSessionGetTypeID(void) VT_AVAILABLE_STARTING(10_8);
+VTPixelTransferSessionGetTypeID(void) API_AVAILABLE(macos(10.8), ios(16.0), tvos(16.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 /*!
 	@function	VTPixelTransferSessionTransferImage
@@ -104,7 +104,8 @@ VT_EXPORT OSStatus
 VTPixelTransferSessionTransferImage(
   CM_NONNULL VTPixelTransferSessionRef       session,
   CM_NONNULL CVPixelBufferRef                sourceBuffer,
-  CM_NONNULL CVPixelBufferRef                destinationBuffer) VT_AVAILABLE_STARTING(10_8);
+  CM_NONNULL CVPixelBufferRef                destinationBuffer)
+  API_AVAILABLE(macos(10.8), ios(16.0), tvos(16.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 	
 CF_IMPLICIT_BRIDGING_DISABLED
 

@@ -71,28 +71,89 @@
 #include <mach/kern_return.h>
 #include <mach/vm_types.h>
 
+
 __BEGIN_DECLS
 
 
-#pragma mark - the kmem subsystem
+#pragma mark - kernel address obfuscation / hashing for logging
 
-#pragma mark - kernel address obfuscation / hashhing for logging
-
-extern vm_offset_t vm_kernel_addrperm_ext;
-
+/*!
+ * @function vm_kernel_addrhide()
+ *
+ * @brief
+ * Unslides a kernel pointer.
+ *
+ * @discussion
+ * This is exporting the VM_KERNEL_ADDRHIDE() functionality to kernel
+ * extensions.
+ *
+ * @param addr          the kernel address to unslide
+ * @param hide_addr     the unslid value of @c addr if it was part of a slid
+ *                      region of the kernel.
+ *
+ *                      0 on release kernels if @c addr is not part of a slid
+ *                      region of the kernel.
+ *
+ *                      @c addr on development kernels if @c addr is not part of
+ *                      a slid region of the kernel.
+ */
 extern void vm_kernel_addrhide(
 	vm_offset_t             addr,
 	vm_offset_t            *hide_addr);
 
+
+/*!
+ * @function vm_kernel_addrperm_external()
+ *
+ * @brief
+ * Unslides or "permutate" a kernel pointer.
+ *
+ * @discussion
+ * This is exporting the VM_KERNEL_ADDRPERM() functionality to kernel
+ * extensions.
+ *
+ * The level of "hiding" of heap kernel pointers done by this function is
+ * insufficient. Using @c vm_kernel_addrhash() is preferred when possible.
+ *
+ * Note that this function might cause lazy allocation to preserve the floating
+ * point register state on Intel and is generally unsafe to call under lock.
+ *
+ * @param addr          the kernel address to unslide
+ * @param perm_addr     the unslid value of @c addr if it was part of a slid
+ *                      region of the kernel.
+ */
 extern void vm_kernel_addrperm_external(
 	vm_offset_t             addr,
 	vm_offset_t            *perm_addr);
 
+
+/*!
+ * @function vm_kernel_unslide_or_perm_external()
+ *
+ * @brief
+ * Equivalent to vm_kernel_addrperm_external().
+ */
 extern void vm_kernel_unslide_or_perm_external(
 	vm_offset_t             addr,
-	vm_offset_t            *up_addr);
+	vm_offset_t            *perm_addr);
 
 
+/*!
+ * @function vm_kernel_addrhash()
+ *
+ * @brief
+ * Unslides or hashes a kernel pointer.
+ *
+ * @discussion
+ * This is exporting the VM_KERNEL_ADDRHASH() functionality to kernel
+ * extensions.
+ *
+ * @param addr          the kernel address to unslide
+ * @returns             the unslid value of @c addr if it was part of a slid
+ *                      region of the kernel.
+ *
+ *                      a hashed value of @c addr otherwise.
+ */
 extern vm_offset_t vm_kernel_addrhash(
 	vm_offset_t             addr);
 

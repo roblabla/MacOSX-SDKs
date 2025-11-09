@@ -152,7 +152,7 @@ API_AVAILABLE(macos(10.9), ios(7.0), watchos(2.0), tvos(9.0))
  * has been issued. 
  *
  * -finishTasksAndInvalidate and -invalidateAndCancel do not
- * have any effect on the shared session singleton.
+ * have any effect on the shared session instance.
  *
  * When invalidating a background session, it is not safe to create another background
  * session with the same identifier until URLSession:didBecomeInvalidWithError: has
@@ -716,8 +716,8 @@ typedef NS_ENUM(NSInteger, NSURLSessionMultipathServiceType)
  * created, a copy of the configuration object is made - you cannot
  * modify the configuration of a session after it has been created.
  *
- * The shared session uses the global singleton credential, cache
- * and cookie storage objects.
+ * The shared session uses the global credential, cache and cookie
+ * storage objects.
  *
  * An ephemeral session has no persistent disk storage for cookies,
  * cache or credentials.

@@ -25,15 +25,15 @@ typedef NS_ENUM(NSInteger, UICellAccessoryDisplayedState) {
     UICellAccessoryDisplayedWhenEditing,
     /// The accessory is displayed only when the cell is not editing.
     UICellAccessoryDisplayedWhenNotEditing
-} API_AVAILABLE(ios(14.0), tvos(14.0), watchos(7.0));
+} API_AVAILABLE(ios(14.0), tvos(14.0)) API_UNAVAILABLE(watchos);
 
 /// A special constant that can be set to the `reservedLayoutWidth` property. This requests the
 /// system standard layout width.
-UIKIT_EXTERN const CGFloat UICellAccessoryStandardDimension API_AVAILABLE(ios(14.0), tvos(14.0), watchos(7.0));
+UIKIT_EXTERN const CGFloat UICellAccessoryStandardDimension API_AVAILABLE(ios(14.0), tvos(14.0)) API_UNAVAILABLE(watchos);
 
 
 /// Abstract base class. Do not instantiate directly.
-UIKIT_EXTERN API_AVAILABLE(ios(14.0), tvos(14.0), watchos(7.0)) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(14.0), tvos(14.0)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @interface UICellAccessory : NSObject <NSCopying, NSSecureCoding>
 
 /// The state(s) for which the accessory should be displayed.
@@ -59,13 +59,13 @@ UIKIT_EXTERN API_AVAILABLE(ios(14.0), tvos(14.0), watchos(7.0)) NS_SWIFT_UI_ACTO
 
 
 /// A disclosure chevron that points in the trailing direction.
-UIKIT_EXTERN API_AVAILABLE(ios(14.0), tvos(14.0), watchos(7.0)) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(14.0), tvos(14.0)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @interface UICellAccessoryDisclosureIndicator : UICellAccessory
 @end
 
 
 /// A detail (info) button.
-UIKIT_EXTERN API_AVAILABLE(ios(15.4), tvos(15.4), watchos(8.5)) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(15.4), tvos(15.4)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @interface UICellAccessoryDetail : UICellAccessory
 
 /// An optional handler to call when the detail accessory is tapped. If nil, taps on the accessory are ignored.
@@ -75,13 +75,13 @@ UIKIT_EXTERN API_AVAILABLE(ios(15.4), tvos(15.4), watchos(8.5)) NS_SWIFT_UI_ACTO
 
 
 /// A checkmark with default green color.
-UIKIT_EXTERN API_AVAILABLE(ios(14.0), tvos(14.0), watchos(7.0)) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(14.0), tvos(14.0)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @interface UICellAccessoryCheckmark : UICellAccessory
 @end
 
 
 /// A delete control (minus sign inside a circle) with default red color.
-UIKIT_EXTERN API_AVAILABLE(ios(14.0), tvos(14.0), watchos(7.0)) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(14.0), tvos(14.0)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @interface UICellAccessoryDelete : UICellAccessory
 
 /// The background color to apply to the accessory. Default value is nil, which uses the system default.
@@ -94,7 +94,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(14.0), tvos(14.0), watchos(7.0)) NS_SWIFT_UI_ACTO
 
 
 /// An insert control (plus sign inside a circle) with default green color.
-UIKIT_EXTERN API_AVAILABLE(ios(14.0), tvos(14.0), watchos(7.0)) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(14.0), tvos(14.0)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @interface UICellAccessoryInsert : UICellAccessory
 
 /// The background color to apply to the accessory. Default value is nil, which uses the system default.
@@ -108,7 +108,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(14.0), tvos(14.0), watchos(7.0)) NS_SWIFT_UI_ACTO
 
 /// A reorder control (three horizontal lines) with default gray color that automatically initiates interactive
 /// reordering on the collection view when dragged (if supported).
-UIKIT_EXTERN API_AVAILABLE(ios(14.0), tvos(14.0), watchos(7.0)) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(14.0), tvos(14.0)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @interface UICellAccessoryReorder : UICellAccessory
 
 /// Whether a vertical separator is displayed before the accessory when it is placed after another accessory. Default is YES.
@@ -119,7 +119,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(14.0), tvos(14.0), watchos(7.0)) NS_SWIFT_UI_ACTO
 
 /// A two-state control whose appearance follows the selection state of the cell (empty circle when deselected,
 /// filled circle with checkmark when selected).
-UIKIT_EXTERN API_AVAILABLE(ios(14.0), tvos(14.0), watchos(7.0)) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(14.0), tvos(14.0)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @interface UICellAccessoryMultiselect : UICellAccessory
 
 /// The background color to apply to the accessory. Default value is nil, which uses the system default.
@@ -173,7 +173,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watc
 
 
 /// A label displaying a short string of text, typically a small number such as a count for the associated item.
-UIKIT_EXTERN API_AVAILABLE(ios(14.0), tvos(14.0), watchos(7.0)) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(14.0), tvos(14.0)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @interface UICellAccessoryLabel : UICellAccessory
 
 /// Creates a new label accessory using the provided text.
@@ -199,19 +199,19 @@ typedef NS_ENUM(NSInteger, UICellAccessoryPlacement) {
     UICellAccessoryPlacementLeading,
     /// Accessory placed on the trailing edge.
     UICellAccessoryPlacementTrailing
-} API_AVAILABLE(ios(14.0), tvos(14.0), watchos(7.0));
+} API_AVAILABLE(ios(14.0), tvos(14.0)) API_UNAVAILABLE(watchos);
 
 /// Return an index to insert the accessory at, given an array of the existing accessories on the edge (in leading to trailing order).
-typedef NSUInteger (^/*NS_SWIFT_SENDABLE*/ UICellAccessoryPosition)(NSArray<__kindof UICellAccessory *> *accessories) API_AVAILABLE(ios(14.0), tvos(14.0), watchos(7.0));
+typedef NSUInteger (^/*NS_SWIFT_SENDABLE*/ UICellAccessoryPosition)(NSArray<__kindof UICellAccessory *> *accessories) API_AVAILABLE(ios(14.0), tvos(14.0)) API_UNAVAILABLE(watchos);
 
 /// Positions the accessory before the accessory matching the class specified, or at the beginning if not found.
-UIKIT_EXTERN UICellAccessoryPosition UICellAccessoryPositionBeforeAccessoryOfClass(Class accessoryClass) API_AVAILABLE(ios(14.0), tvos(14.0), watchos(7.0));
+UIKIT_EXTERN UICellAccessoryPosition UICellAccessoryPositionBeforeAccessoryOfClass(Class accessoryClass) API_AVAILABLE(ios(14.0), tvos(14.0)) API_UNAVAILABLE(watchos);
 /// Positions the accessory after the accessory matching the class specified, or at the end if not found.
-UIKIT_EXTERN UICellAccessoryPosition UICellAccessoryPositionAfterAccessoryOfClass(Class accessoryClass) API_AVAILABLE(ios(14.0), tvos(14.0), watchos(7.0));
+UIKIT_EXTERN UICellAccessoryPosition UICellAccessoryPositionAfterAccessoryOfClass(Class accessoryClass) API_AVAILABLE(ios(14.0), tvos(14.0)) API_UNAVAILABLE(watchos);
 
 
 /// An accessory using a custom view.
-UIKIT_EXTERN API_AVAILABLE(ios(14.0), tvos(14.0), watchos(7.0)) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(14.0), tvos(14.0)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @interface UICellAccessoryCustomView : UICellAccessory
 
 /// Creates a new custom view accessory using the provided view and specified placement. The custom view must have translatesAutoresizingMaskIntoConstraints

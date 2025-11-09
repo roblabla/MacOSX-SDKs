@@ -28,7 +28,8 @@ NS_ASSUME_NONNULL_BEGIN
 @class AVMetadataItem;
 
 #pragma mark --- AVMovieTrack ---
-API_AVAILABLE(macos(10.10), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos)
+
+API_AVAILABLE(macos(10.10), ios(13.0), watchos(6.0), visionos(1.0)) API_UNAVAILABLE(tvos)
 @interface AVMovieTrack : AVAssetTrack {
 @private
     AVMovieTrackInternal    *_movieTrackInternal __attribute__((unused));
@@ -38,13 +39,13 @@ API_AVAILABLE(macos(10.10), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos)
 	@property       mediaPresentationTimeRange
 	@abstract       A CMTimeRange indicating the range of presentation times for the track's media.
 */
-@property (nonatomic, readonly) CMTimeRange mediaPresentationTimeRange API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos);
+@property (nonatomic, readonly) CMTimeRange mediaPresentationTimeRange API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0), visionos(1.0)) API_UNAVAILABLE(tvos);
 
 /*!
 	@property       mediaDecodeTimeRange
 	@abstract       A CMTimeRange indicating the range of decode times for the track's media.
 */
-@property (nonatomic, readonly) CMTimeRange mediaDecodeTimeRange API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos);
+@property (nonatomic, readonly) CMTimeRange mediaDecodeTimeRange API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0), visionos(1.0)) API_UNAVAILABLE(tvos);
 
 /*!
 	@property       alternateGroupID
@@ -52,12 +53,12 @@ API_AVAILABLE(macos(10.10), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos)
 */
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wavailability"
-@property (nonatomic, readonly) NSInteger alternateGroupID API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos);
+@property (nonatomic, readonly) NSInteger alternateGroupID API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0), visionos(1.0)) API_UNAVAILABLE(tvos);
 #pragma clang diagnostic pop
 
 @end
 
-API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos)
+API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0), visionos(1.0)) API_UNAVAILABLE(tvos)
 @interface AVMovieTrack (AVMovieTrackMediaDataStorage)
 
 /*!
@@ -65,7 +66,7 @@ API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos)
 	@abstract       The storage container for media data added to a track.
 	@discussion     The value of this property is an AVMediaDataStorage object that indicates the location at which media data inserted or appended to the track will be written.
 */
-@property (nonatomic, readonly, copy, nullable) AVMediaDataStorage *mediaDataStorage API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos);
+@property (nonatomic, readonly, copy, nullable) AVMediaDataStorage *mediaDataStorage API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0), visionos(1.0)) API_UNAVAILABLE(tvos);
 
 @end
 
@@ -79,7 +80,9 @@ API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos)
 @class AVMutableMovieTrackInternal;
 
 #pragma mark --- AVMutableMovieTrack ---
-API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos)
+
+NS_SWIFT_NONSENDABLE
+API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0), visionos(1.0)) API_UNAVAILABLE(tvos)
 @interface AVMutableMovieTrack : AVMovieTrack {
 @private
     AVMutableMovieTrackInternal    *_mutableMovieTrackInternal;
@@ -141,7 +144,7 @@ API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos)
 @end
 
 
-API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos)
+API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0), visionos(1.0)) API_UNAVAILABLE(tvos)
 @interface AVMutableMovieTrack (AVMutableMovieTrackLanguageProperties)
 
 /*!
@@ -161,7 +164,7 @@ API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos)
 @end
 
 
-API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos)
+API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0), visionos(1.0)) API_UNAVAILABLE(tvos)
 @interface AVMutableMovieTrack (AVMutableMovieTrackVisualProperties)
 
 /*!
@@ -203,7 +206,7 @@ API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos)
 @end
 
 
-API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos)
+API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0), visionos(1.0)) API_UNAVAILABLE(tvos)
 @interface AVMutableMovieTrack (AVMutableMovieTrackAudibleProperties)
 
 /*!
@@ -215,7 +218,7 @@ API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos)
 @end
 
 
-API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos)
+API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0), visionos(1.0)) API_UNAVAILABLE(tvos)
 @interface AVMutableMovieTrack (AVMutableMovieTrackChunkProperties)
 
 /*!
@@ -261,7 +264,7 @@ API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos)
 @end
 
 
-API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos)
+API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0), visionos(1.0)) API_UNAVAILABLE(tvos)
 @interface AVMutableMovieTrack (AVMutableMovieTrackTrackLevelEditing)
 
 /*!
@@ -316,7 +319,7 @@ API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos)
 @end
 
 
-API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos)
+API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0), visionos(1.0)) API_UNAVAILABLE(tvos)
 @interface AVMutableMovieTrack (AVMutableMovieTrackMetadataEditing)
 
 /*!
@@ -329,7 +332,7 @@ API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos)
 @end
 
 
-API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos)
+API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0), visionos(1.0)) API_UNAVAILABLE(tvos)
 @interface AVMutableMovieTrack (AVMutableMovieTrackTrackAssociations)
 
 /*!
@@ -356,7 +359,7 @@ API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos)
 
 @end
 
-API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos)
+API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0), visionos(1.0)) API_UNAVAILABLE(tvos)
 @interface AVMutableMovieTrack (AVMutableMovieTrackFormatDescriptions)
 
 /*!
@@ -370,12 +373,12 @@ API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos)
  
 					This method throws an exception if the media type of the new format description does not match the media type of the receiver.
 */
-- (void)replaceFormatDescription:(CMFormatDescriptionRef)formatDescription withFormatDescription:(CMFormatDescriptionRef)newFormatDescription API_AVAILABLE(macos(10.13), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos);
+- (void)replaceFormatDescription:(CMFormatDescriptionRef)formatDescription withFormatDescription:(CMFormatDescriptionRef)newFormatDescription API_AVAILABLE(macos(10.13), ios(13.0), watchos(6.0), visionos(1.0)) API_UNAVAILABLE(tvos);
 
 @end
 
 
-API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos)
+API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0), visionos(1.0)) API_UNAVAILABLE(tvos)
 @interface AVMutableMovieTrack (AVMutableMovieTrackSampleLevelEditing)
 
 /*!
@@ -414,7 +417,7 @@ API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos)
                         - the sample buffer contains image buffers (must contain encoded video)
                         - the sample buffer contains caption groups (must contain encoded media data)
 */
-- (BOOL)appendSampleBuffer:(CMSampleBufferRef)sampleBuffer decodeTime:(nullable CMTime *)outDecodeTime presentationTime:(nullable CMTime *)outPresentationTime error:(NSError * _Nullable * _Nullable)outError API_AVAILABLE(macos(10.12), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos);
+- (BOOL)appendSampleBuffer:(CMSampleBufferRef)sampleBuffer decodeTime:(nullable CMTime *)outDecodeTime presentationTime:(nullable CMTime *)outPresentationTime error:(NSError * _Nullable * _Nullable)outError API_AVAILABLE(macos(10.12), ios(13.0), watchos(6.0), visionos(1.0)) API_UNAVAILABLE(tvos);
 
 /*!
 	@method			insertMediaTimeRange:intoTimeRange:
@@ -432,7 +435,7 @@ API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos)
                     
                     Pass kCMTimeInvalid for trackTimeRange.start to indicate that the segment should be appended to the end of the track.
 */
-- (BOOL)insertMediaTimeRange:(CMTimeRange)mediaTimeRange intoTimeRange:(CMTimeRange)trackTimeRange API_AVAILABLE(macos(10.12), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos);
+- (BOOL)insertMediaTimeRange:(CMTimeRange)mediaTimeRange intoTimeRange:(CMTimeRange)trackTimeRange API_AVAILABLE(macos(10.12), ios(13.0), watchos(6.0), visionos(1.0)) API_UNAVAILABLE(tvos);
 
 @end
 
@@ -441,29 +444,31 @@ API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos)
 /*!
 	@class			AVFragmentedMovieTrack
 	@abstract		A subclass of AVMovieTrack for handling tracks of fragmented movie files. An AVFragmentedMovieTrack is capable of changing the values of certain of its properties, if its parent movie is associated with an instance of AVFragmentedMovieMinder when one or more movie fragments are appended to the movie file.
+	@discussion		Subclasses of this type that are used from Swift must fulfill the requirements of a Sendable type.
 */
 
 /*!
  @constant       AVFragmentedMovieTrackTimeRangeDidChangeNotification
  @abstract       Posted when the timeRange of an AVFragmentedMovieTrack changes while the associated instance of AVFragmentedMovie is being minded by an AVFragmentedMovieMinder, but only for changes that occur after the status of the value of @"timeRange" has reached AVKeyValueStatusLoaded.
 */
-AVF_EXPORT NSString *const AVFragmentedMovieTrackTimeRangeDidChangeNotification API_AVAILABLE(macos(10.10), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos);
+AVF_EXPORT NSString *const AVFragmentedMovieTrackTimeRangeDidChangeNotification API_AVAILABLE(macos(10.10), ios(13.0), watchos(6.0), visionos(1.0)) API_UNAVAILABLE(tvos);
 
 /*!
  @constant       AVFragmentedMovieTrackSegmentsDidChangeNotification
  @abstract       Posted when the array of segments of an AVFragmentedMovieTrack changes while the associated instance of AVFragmentedMovie is being minded by an AVFragmentedMovieMinder, but only for changes that occur after the status of the value of @"segments" has reached AVKeyValueStatusLoaded.
 */
-AVF_EXPORT NSString *const AVFragmentedMovieTrackSegmentsDidChangeNotification API_AVAILABLE(macos(10.10), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos);
+AVF_EXPORT NSString *const AVFragmentedMovieTrackSegmentsDidChangeNotification API_AVAILABLE(macos(10.10), ios(13.0), watchos(6.0), visionos(1.0)) API_UNAVAILABLE(tvos);
 
 /*!
  @constant       AVFragmentedMovieTrackTotalSampleDataLengthDidChangeNotification
  @discussion     This notification name has been deprecated. Use either AVFragmentedMovieTrackTimeRangeDidChangeNotification or AVFragmentedMovieTrackSegmentsDidChangeNotification instead; in either case, you can assume that timing changes to fragmented tracks result in changes to the total length of the sample data used by the track.
 */
-AVF_EXPORT NSString *const AVFragmentedMovieTrackTotalSampleDataLengthDidChangeNotification API_DEPRECATED("Upon receipt of either AVFragmentedMovieTrackTimeRangeDidChangeNotification or AVFragmentedMovieTrackSegmentsDidChangeNotification, you can assume that the sender's totalSampleDataLength has changed.", macos(10.10, 10.11)) API_UNAVAILABLE(ios, tvos, watchos);
+AVF_EXPORT NSString *const AVFragmentedMovieTrackTotalSampleDataLengthDidChangeNotification API_DEPRECATED("Upon receipt of either AVFragmentedMovieTrackTimeRangeDidChangeNotification or AVFragmentedMovieTrackSegmentsDidChangeNotification, you can assume that the sender's totalSampleDataLength has changed.", macos(10.10, 10.11)) API_UNAVAILABLE(ios, tvos, watchos, visionos);
 
 @class AVFragmentedMovieTrackInternal;
 
-API_AVAILABLE(macos(10.10), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos)
+NS_SWIFT_SENDABLE
+API_AVAILABLE(macos(10.10), ios(13.0), watchos(6.0), visionos(1.0)) API_UNAVAILABLE(tvos)
 @interface AVFragmentedMovieTrack : AVMovieTrack
 {
 @private
@@ -478,33 +483,33 @@ API_AVAILABLE(macos(10.10), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos)
  @discussion
 	See AVAssetTrack's interface for more information about these interfaces.
  */
-API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos)
+API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0), visionos(1.0)) API_UNAVAILABLE(tvos)
 @interface AVMutableMovieTrack (SynchronousTrackInterface)
 
 - (BOOL)hasMediaCharacteristic:(AVMediaCharacteristic)mediaCharacteristic;
 - (nullable AVAssetTrackSegment *)segmentForTrackTime:(CMTime)trackTime;
 - (CMTime)samplePresentationTimeForTrackTime:(CMTime)trackTime;
 - (NSArray<AVMetadataItem *> *)metadataForFormat:(AVMetadataFormat)format;
-- (NSArray<AVAssetTrack *> *)associatedTracksOfType:(AVTrackAssociationType)trackAssociationType API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(1.0));
+- (NSArray<AVAssetTrack *> *)associatedTracksOfType:(AVTrackAssociationType)trackAssociationType API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(1.0), visionos(1.0));
 
 #if __swift__
 @property (nonatomic, readonly) NSArray *formatDescriptions;
-@property (nonatomic, readonly, getter=isPlayable) BOOL playable API_AVAILABLE(macos(10.8), ios(5.0), watchos(1.0)) API_UNAVAILABLE(tvos);
-@property (nonatomic, readonly, getter=isDecodable) BOOL decodable API_AVAILABLE(macos(10.13), ios(11.0), watchos(4.0)) API_UNAVAILABLE(tvos);
+@property (nonatomic, readonly, getter=isPlayable) BOOL playable API_AVAILABLE(macos(10.8), ios(5.0), watchos(1.0), visionos(1.0)) API_UNAVAILABLE(tvos);
+@property (nonatomic, readonly, getter=isDecodable) BOOL decodable API_AVAILABLE(macos(10.13), ios(11.0), watchos(4.0), visionos(1.0)) API_UNAVAILABLE(tvos);
 @property (nonatomic, readonly, getter=isSelfContained) BOOL selfContained;
 @property (nonatomic, readonly) long long totalSampleDataLength;
 @property (nonatomic, readonly) CMTimeRange timeRange;
 @property (nonatomic, readonly) CMTimeScale naturalTimeScale;
 @property (nonatomic, readonly) float estimatedDataRate;
-@property (nonatomic, readonly) BOOL hasAudioSampleDependencies API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos);
+@property (nonatomic, readonly) BOOL hasAudioSampleDependencies API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), visionos(1.0)) API_UNAVAILABLE(tvos);
 @property (nonatomic, readonly) float nominalFrameRate;
-@property (nonatomic, readonly) CMTime minFrameDuration API_AVAILABLE(macos(10.10), ios(7.0), watchos(1.0)) API_UNAVAILABLE(tvos);
-@property (nonatomic, readonly) BOOL requiresFrameReordering API_AVAILABLE(macos(10.10), ios(8.0), watchos(1.0)) API_UNAVAILABLE(tvos);
+@property (nonatomic, readonly) CMTime minFrameDuration API_AVAILABLE(macos(10.10), ios(7.0), watchos(1.0), visionos(1.0)) API_UNAVAILABLE(tvos);
+@property (nonatomic, readonly) BOOL requiresFrameReordering API_AVAILABLE(macos(10.10), ios(8.0), watchos(1.0), visionos(1.0)) API_UNAVAILABLE(tvos);
 @property (nonatomic, copy, readonly) NSArray<AVAssetTrackSegment *> *segments;
 @property (nonatomic, readonly) NSArray<AVMetadataItem *> *commonMetadata;
 @property (nonatomic, readonly) NSArray<AVMetadataFormat> *availableMetadataFormats;
-@property (nonatomic, readonly) NSArray<AVTrackAssociationType> *availableTrackAssociationTypes API_AVAILABLE(macos(10.9), ios(7.0), watchos(1.0)) API_UNAVAILABLE(tvos);
-@property (nonatomic, readonly) BOOL canProvideSampleCursors API_AVAILABLE(macos(10.10), ios(16.0), watchos(9.0)) API_UNAVAILABLE(tvos);
+@property (nonatomic, readonly) NSArray<AVTrackAssociationType> *availableTrackAssociationTypes API_AVAILABLE(macos(10.9), ios(7.0), watchos(1.0), visionos(1.0)) API_UNAVAILABLE(tvos);
+@property (nonatomic, readonly) BOOL canProvideSampleCursors API_AVAILABLE(macos(10.10), ios(16.0), watchos(9.0), visionos(1.0)) API_UNAVAILABLE(tvos);
 #endif // __swift__
 
 @end

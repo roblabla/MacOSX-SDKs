@@ -87,7 +87,7 @@ CM_ASSUME_NONNULL_BEGIN
 	@discussion
 		This number may decrease asynchronously.
 */
-VT_EXPORT const CFStringRef kVTCompressionPropertyKey_NumberOfPendingFrames API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2)); // Read-only, CFNumber<int>
+VT_EXPORT const CFStringRef kVTCompressionPropertyKey_NumberOfPendingFrames API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos); // Read-only, CFNumber<int>
 	
 /*!
 	@constant	kVTCompressionPropertyKey_PixelBufferPoolIsShared
@@ -98,7 +98,7 @@ VT_EXPORT const CFStringRef kVTCompressionPropertyKey_NumberOfPendingFrames API_
 		This is false if separate pools are used because the video encoder's 
 		and the client's pixel buffer attributes were incompatible.
 */
-VT_EXPORT const CFStringRef kVTCompressionPropertyKey_PixelBufferPoolIsShared API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2)); // Read-only, CFBoolean
+VT_EXPORT const CFStringRef kVTCompressionPropertyKey_PixelBufferPoolIsShared API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos); // Read-only, CFBoolean
 
 /*!
 	@constant	kVTCompressionPropertyKey_VideoEncoderPixelBufferAttributes
@@ -107,7 +107,7 @@ VT_EXPORT const CFStringRef kVTCompressionPropertyKey_PixelBufferPoolIsShared AP
 	@discussion
 		You can use these to create a pixel buffer pool for source pixel buffers. 
 */
-VT_EXPORT const CFStringRef kVTCompressionPropertyKey_VideoEncoderPixelBufferAttributes API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2)); // Read-only, CFDictionary
+VT_EXPORT const CFStringRef kVTCompressionPropertyKey_VideoEncoderPixelBufferAttributes API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos); // Read-only, CFDictionary
 
 // Standard properties describing content.
 
@@ -139,7 +139,7 @@ VT_EXPORT const CFStringRef kVTCompressionPropertyKey_VideoEncoderPixelBufferAtt
 		and both limits will be enforced - requiring a keyframe every X
 		frames or every Y seconds, whichever comes first.
 */
-VT_EXPORT const CFStringRef kVTCompressionPropertyKey_MaxKeyFrameInterval API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2)); // Read/write, CFNumber<int>, Optional
+VT_EXPORT const CFStringRef kVTCompressionPropertyKey_MaxKeyFrameInterval API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos); // Read/write, CFNumber<int>, Optional
 
 /*!
 	@constant	kVTCompressionPropertyKey_MaxKeyFrameIntervalDuration
@@ -156,7 +156,7 @@ VT_EXPORT const CFStringRef kVTCompressionPropertyKey_MaxKeyFrameInterval API_AV
 		and both limits will be enforced - requiring a keyframe every X
 		frames or every Y seconds, whichever comes first.
 */
-VT_EXPORT const CFStringRef kVTCompressionPropertyKey_MaxKeyFrameIntervalDuration API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2)); // Read/write, CFNumber<seconds>, Optional
+VT_EXPORT const CFStringRef kVTCompressionPropertyKey_MaxKeyFrameIntervalDuration API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos); // Read/write, CFNumber<seconds>, Optional
 
 
 /*!
@@ -166,7 +166,7 @@ VT_EXPORT const CFStringRef kVTCompressionPropertyKey_MaxKeyFrameIntervalDuratio
 	@discussion
 		True by default.  Set this to false to require key-frame-only compression.
 */
-VT_EXPORT const CFStringRef kVTCompressionPropertyKey_AllowTemporalCompression API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2)); // Read/Write, CFBoolean, Optional, defaults to true
+VT_EXPORT const CFStringRef kVTCompressionPropertyKey_AllowTemporalCompression API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos); // Read/Write, CFBoolean, Optional, defaults to true
 
 /*!
 	@constant	kVTCompressionPropertyKey_AllowFrameReordering
@@ -179,7 +179,7 @@ VT_EXPORT const CFStringRef kVTCompressionPropertyKey_AllowTemporalCompression A
 		they were presented to the video encoder (the display order). 
 		True by default.  Set this to false to prevent frame reordering.
 */
-VT_EXPORT const CFStringRef kVTCompressionPropertyKey_AllowFrameReordering API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2)); // Read/Write, CFBoolean, Optional, defaults to true
+VT_EXPORT const CFStringRef kVTCompressionPropertyKey_AllowFrameReordering API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos); // Read/Write, CFBoolean, Optional, defaults to true
 
 /*!
 	@constant	kVTCompressionPropertyKey_AllowOpenGOP
@@ -193,7 +193,7 @@ VT_EXPORT const CFStringRef kVTCompressionPropertyKey_AllowFrameReordering API_A
 		will be no frame dependencies across sync samples (frames where kCMSampleAttachmentKey_NotSync is absent or kCFBooleanFalse)
 		When the value is kCFBooleanTrue, the encoder may use Open GOP frame dependency structures to increase compression efficiency or quality.
 */
-VT_EXPORT const CFStringRef kVTCompressionPropertyKey_AllowOpenGOP API_AVAILABLE(macosx(10.14), ios(12.0), tvos(12.0)); // Read/Write, CFBoolean, Optional
+VT_EXPORT const CFStringRef kVTCompressionPropertyKey_AllowOpenGOP API_AVAILABLE(macos(10.14), ios(12.0), tvos(12.0), visionos(1.0)) API_UNAVAILABLE(watchos); // Read/Write, CFBoolean, Optional
 
 #pragma mark Rate control
 
@@ -209,7 +209,7 @@ VT_EXPORT const CFStringRef kVTCompressionPropertyKey_AllowOpenGOP API_AVAILABLE
 		information is provided for source frames, and that some codecs do
 		not support limiting to specified bit rates.
 */
-VT_EXPORT const CFStringRef kVTCompressionPropertyKey_AverageBitRate API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2)); // Read/write, CFNumber<SInt32>, Optional
+VT_EXPORT const CFStringRef kVTCompressionPropertyKey_AverageBitRate API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos); // Read/write, CFNumber<SInt32>, Optional
 
 /*!
 	@constant	kVTCompressionPropertyKey_DataRateLimits
@@ -244,7 +244,7 @@ VT_EXPORT const CFStringRef kVTCompressionPropertyKey_AverageBitRate API_AVAILAB
 		kVTCompressionPropertyKey_AverageBitRate if the specified target is too
 		close to a hard limit specified by kVTCompressionPropertyKey_DataRateLimits.
 */
-VT_EXPORT const CFStringRef kVTCompressionPropertyKey_DataRateLimits API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2)); // Read/write, CFArray[CFNumber], [bytes, seconds, bytes, seconds...], Optional
+VT_EXPORT const CFStringRef kVTCompressionPropertyKey_DataRateLimits API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos); // Read/write, CFArray[CFNumber], [bytes, seconds, bytes, seconds...], Optional
 
 /*!
 	@constant	kVTCompressionPropertyKey_Quality
@@ -257,7 +257,7 @@ VT_EXPORT const CFStringRef kVTCompressionPropertyKey_DataRateLimits API_AVAILAB
 		high = 0.75, and 1.0 implies lossless compression for encoders that
 		support it.
 */
-VT_EXPORT const CFStringRef kVTCompressionPropertyKey_Quality API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2)); // Read/write, CFNumber<Float>, Optional
+VT_EXPORT const CFStringRef kVTCompressionPropertyKey_Quality API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos); // Read/write, CFNumber<Float>, Optional
 
 /*!
 	@constant	kVTCompressionPropertyKey_TargetQualityForAlpha
@@ -271,7 +271,7 @@ VT_EXPORT const CFStringRef kVTCompressionPropertyKey_Quality API_AVAILABLE(maco
 		the alpha channel, quality is given priority over bitrate.  Note this
 		parameter is currently only applicable to HEVC with Alpha encoders.
 */
-VT_EXPORT const CFStringRef kVTCompressionPropertyKey_TargetQualityForAlpha	API_AVAILABLE(macosx(10.15), ios(13.0), tvos(13.0)); // Read/write, CFNumber<Float>, Optional, NULL by default
+VT_EXPORT const CFStringRef kVTCompressionPropertyKey_TargetQualityForAlpha	API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0), visionos(1.0)) API_UNAVAILABLE(watchos); // Read/write, CFNumber<Float>, Optional, NULL by default
 
 /*!
 	@constant	kVTCompressionPropertyKey_MoreFramesBeforeStart
@@ -288,7 +288,7 @@ VT_EXPORT const CFStringRef kVTCompressionPropertyKey_TargetQualityForAlpha	API_
 		segments can be concatenated smoothly -- for example, avoiding
 		data rate spikes where segments are joined. 
 */
-VT_EXPORT const CFStringRef kVTCompressionPropertyKey_MoreFramesBeforeStart API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2)); // Read/write, CFBoolean, Optional
+VT_EXPORT const CFStringRef kVTCompressionPropertyKey_MoreFramesBeforeStart API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos); // Read/write, CFBoolean, Optional
 
 /*!
 	@constant	kVTCompressionPropertyKey_MoreFramesAfterEnd
@@ -301,7 +301,7 @@ VT_EXPORT const CFStringRef kVTCompressionPropertyKey_MoreFramesBeforeStart API_
 		stand-alone session, or if this session will encode the last
 		segment of a multi-segment compression. By default, false.
 */
-VT_EXPORT const CFStringRef kVTCompressionPropertyKey_MoreFramesAfterEnd API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2)); // Read/write, CFBoolean, Optional
+VT_EXPORT const CFStringRef kVTCompressionPropertyKey_MoreFramesAfterEnd API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos); // Read/write, CFBoolean, Optional
 
 /*!
 	@constant	kVTCompressionPropertyKey_PrioritizeEncodingSpeedOverQuality
@@ -320,7 +320,7 @@ VT_EXPORT const CFStringRef kVTCompressionPropertyKey_MoreFramesAfterEnd API_AVA
 		Not all video encoders support this property.
 		By default, this property is NULL.
 */
-VT_EXPORT const CFStringRef kVTCompressionPropertyKey_PrioritizeEncodingSpeedOverQuality API_AVAILABLE(macosx(11.0), ios(14.0), tvos(14.0)); // CFBoolean, Optional
+VT_EXPORT const CFStringRef kVTCompressionPropertyKey_PrioritizeEncodingSpeedOverQuality API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0), visionos(1.0)) API_UNAVAILABLE(watchos); // CFBoolean, Optional
 
 /*!
 	@constant	kVTCompressionPropertyKey_ConstantBitRate
@@ -341,7 +341,7 @@ VT_EXPORT const CFStringRef kVTCompressionPropertyKey_PrioritizeEncodingSpeedOve
 		returned when this option is not supported.
 
 */
-VT_EXPORT const CFStringRef kVTCompressionPropertyKey_ConstantBitRate API_AVAILABLE(macosx(13.0), ios(16.0), tvos(16.0)); // CFNumber bits per second, Optional
+VT_EXPORT const CFStringRef kVTCompressionPropertyKey_ConstantBitRate API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0), visionos(1.0)) API_UNAVAILABLE(watchos); // CFNumber bits per second, Optional
 
 /*!
 	@constant	kVTCompressionPropertyKey_EstimatedAverageBytesPerFrame
@@ -352,7 +352,7 @@ VT_EXPORT const CFStringRef kVTCompressionPropertyKey_ConstantBitRate API_AVAILA
 		This property is not implemented by all video encoders.
 		
 */
-VT_EXPORT const CFStringRef kVTCompressionPropertyKey_EstimatedAverageBytesPerFrame API_AVAILABLE(macosx(13.0), ios(16.0), tvos(16.0), watchos(9.0)); // Read Only, CFNumber (bytes per frame)
+VT_EXPORT const CFStringRef kVTCompressionPropertyKey_EstimatedAverageBytesPerFrame API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0), visionos(1.0)) API_UNAVAILABLE(watchos); // Read Only, CFNumber (bytes per frame)
 
 
 #pragma mark Bitstream configuration
@@ -365,64 +365,66 @@ VT_EXPORT const CFStringRef kVTCompressionPropertyKey_EstimatedAverageBytesPerFr
 		Available profiles and levels vary across formats and between video encoders.
 		Video encoders should use standard keys where available, and follow standard patterns where not.
 */
-VT_EXPORT const CFStringRef kVTCompressionPropertyKey_ProfileLevel API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2)); // Read/write, CFString (enumeration), Optional
+VT_EXPORT const CFStringRef kVTCompressionPropertyKey_ProfileLevel API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos); // Read/write, CFString (enumeration), Optional
 	
-VT_EXPORT const CFStringRef kVTProfileLevel_HEVC_Main_AutoLevel API_AVAILABLE(macosx(10.13), ios(11.0), tvos(11.0));
-VT_EXPORT const CFStringRef kVTProfileLevel_HEVC_Main10_AutoLevel API_AVAILABLE(macosx(10.13), ios(11.0), tvos(11.0));
-VT_EXPORT const CFStringRef kVTProfileLevel_HEVC_Main42210_AutoLevel API_AVAILABLE(macosx(12.3), ios(15.4), tvos(15.4));
+VT_EXPORT const CFStringRef kVTProfileLevel_HEVC_Main_AutoLevel API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), visionos(1.0)) API_UNAVAILABLE(watchos);
+VT_EXPORT const CFStringRef kVTProfileLevel_HEVC_Main10_AutoLevel API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), visionos(1.0)) API_UNAVAILABLE(watchos);
+VT_EXPORT const CFStringRef kVTProfileLevel_HEVC_Main42210_AutoLevel API_AVAILABLE(macos(12.3), ios(15.4), tvos(15.4), visionos(1.0)) API_UNAVAILABLE(watchos);
+VT_EXPORT const CFStringRef kVTProfileLevel_HEVC_Monochrome_AutoLevel API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), visionos(1.0)) API_UNAVAILABLE(watchos);
+VT_EXPORT const CFStringRef kVTProfileLevel_HEVC_Monochrome10_AutoLevel API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 
-VT_EXPORT const CFStringRef kVTProfileLevel_H264_Baseline_1_3 API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2));
-VT_EXPORT const CFStringRef kVTProfileLevel_H264_Baseline_3_0 API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2));
-VT_EXPORT const CFStringRef kVTProfileLevel_H264_Baseline_3_1 API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2));
-VT_EXPORT const CFStringRef kVTProfileLevel_H264_Baseline_3_2 API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2));
-VT_EXPORT const CFStringRef kVTProfileLevel_H264_Baseline_4_0 API_AVAILABLE(macosx(10.9), ios(8.0), tvos(10.2));
-VT_EXPORT const CFStringRef kVTProfileLevel_H264_Baseline_4_1 API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2));
-VT_EXPORT const CFStringRef kVTProfileLevel_H264_Baseline_4_2 API_AVAILABLE(macosx(10.9), ios(8.0), tvos(10.2));
-VT_EXPORT const CFStringRef kVTProfileLevel_H264_Baseline_5_0 API_AVAILABLE(macosx(10.9), ios(8.0), tvos(10.2));
-VT_EXPORT const CFStringRef kVTProfileLevel_H264_Baseline_5_1 API_AVAILABLE(macosx(10.9), ios(8.0), tvos(10.2));
-VT_EXPORT const CFStringRef kVTProfileLevel_H264_Baseline_5_2 API_AVAILABLE(macosx(10.9), ios(8.0), tvos(10.2));
-VT_EXPORT const CFStringRef kVTProfileLevel_H264_Baseline_AutoLevel API_AVAILABLE(macosx(10.9), ios(8.0), tvos(10.2));
-VT_EXPORT const CFStringRef kVTProfileLevel_H264_ConstrainedBaseline_AutoLevel API_AVAILABLE(macosx(12.0), ios(15.0), tvos(15.0));
-VT_EXPORT const CFStringRef kVTProfileLevel_H264_Main_3_0 API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2));
-VT_EXPORT const CFStringRef kVTProfileLevel_H264_Main_3_1 API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2));
-VT_EXPORT const CFStringRef kVTProfileLevel_H264_Main_3_2 API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2));
-VT_EXPORT const CFStringRef kVTProfileLevel_H264_Main_4_0 API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2));
-VT_EXPORT const CFStringRef kVTProfileLevel_H264_Main_4_1 API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2));
-VT_EXPORT const CFStringRef kVTProfileLevel_H264_Main_4_2 API_AVAILABLE(macosx(10.9), ios(8.0), tvos(10.2));
-VT_EXPORT const CFStringRef kVTProfileLevel_H264_Main_5_0 API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2));
-VT_EXPORT const CFStringRef kVTProfileLevel_H264_Main_5_1 API_AVAILABLE(macosx(10.9), ios(8.0), tvos(10.2));
-VT_EXPORT const CFStringRef kVTProfileLevel_H264_Main_5_2 API_AVAILABLE(macosx(10.9), ios(8.0), tvos(10.2));
-VT_EXPORT const CFStringRef kVTProfileLevel_H264_Main_AutoLevel API_AVAILABLE(macosx(10.9), ios(8.0), tvos(10.2));
-VT_EXPORT const CFStringRef kVTProfileLevel_H264_Extended_5_0 API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2));
-VT_EXPORT const CFStringRef kVTProfileLevel_H264_Extended_AutoLevel API_AVAILABLE(macosx(10.9), ios(8.0), tvos(10.2));
-VT_EXPORT const CFStringRef kVTProfileLevel_H264_High_3_0 API_AVAILABLE(macosx(10.9), ios(8.0), tvos(10.2));
-VT_EXPORT const CFStringRef kVTProfileLevel_H264_High_3_1 API_AVAILABLE(macosx(10.9), ios(8.0), tvos(10.2));
-VT_EXPORT const CFStringRef kVTProfileLevel_H264_High_3_2 API_AVAILABLE(macosx(10.9), ios(8.0), tvos(10.2));
-VT_EXPORT const CFStringRef kVTProfileLevel_H264_High_4_0 API_AVAILABLE(macosx(10.9), ios(8.0), tvos(10.2));
-VT_EXPORT const CFStringRef kVTProfileLevel_H264_High_4_1 API_AVAILABLE(macosx(10.9), ios(8.0), tvos(10.2));
-VT_EXPORT const CFStringRef kVTProfileLevel_H264_High_4_2 API_AVAILABLE(macosx(10.9), ios(8.0), tvos(10.2));
-VT_EXPORT const CFStringRef kVTProfileLevel_H264_High_5_0 API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2));
-VT_EXPORT const CFStringRef kVTProfileLevel_H264_High_5_1 API_AVAILABLE(macosx(10.9), ios(8.0), tvos(10.2));
-VT_EXPORT const CFStringRef kVTProfileLevel_H264_High_5_2 API_AVAILABLE(macosx(10.9), ios(8.0), tvos(10.2));
-VT_EXPORT const CFStringRef kVTProfileLevel_H264_High_AutoLevel API_AVAILABLE(macosx(10.9), ios(8.0), tvos(10.2));
-VT_EXPORT const CFStringRef kVTProfileLevel_H264_ConstrainedHigh_AutoLevel API_AVAILABLE(macosx(12.0), ios(15.0), tvos(15.0));
+VT_EXPORT const CFStringRef kVTProfileLevel_H264_Baseline_1_3 API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos);
+VT_EXPORT const CFStringRef kVTProfileLevel_H264_Baseline_3_0 API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos);
+VT_EXPORT const CFStringRef kVTProfileLevel_H264_Baseline_3_1 API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos);
+VT_EXPORT const CFStringRef kVTProfileLevel_H264_Baseline_3_2 API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos);
+VT_EXPORT const CFStringRef kVTProfileLevel_H264_Baseline_4_0 API_AVAILABLE(macos(10.9), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos);
+VT_EXPORT const CFStringRef kVTProfileLevel_H264_Baseline_4_1 API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos);
+VT_EXPORT const CFStringRef kVTProfileLevel_H264_Baseline_4_2 API_AVAILABLE(macos(10.9), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos);
+VT_EXPORT const CFStringRef kVTProfileLevel_H264_Baseline_5_0 API_AVAILABLE(macos(10.9), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos);
+VT_EXPORT const CFStringRef kVTProfileLevel_H264_Baseline_5_1 API_AVAILABLE(macos(10.9), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos);
+VT_EXPORT const CFStringRef kVTProfileLevel_H264_Baseline_5_2 API_AVAILABLE(macos(10.9), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos);
+VT_EXPORT const CFStringRef kVTProfileLevel_H264_Baseline_AutoLevel API_AVAILABLE(macos(10.9), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos);
+VT_EXPORT const CFStringRef kVTProfileLevel_H264_ConstrainedBaseline_AutoLevel API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), visionos(1.0)) API_UNAVAILABLE(watchos);
+VT_EXPORT const CFStringRef kVTProfileLevel_H264_Main_3_0 API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos);
+VT_EXPORT const CFStringRef kVTProfileLevel_H264_Main_3_1 API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos);
+VT_EXPORT const CFStringRef kVTProfileLevel_H264_Main_3_2 API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos);
+VT_EXPORT const CFStringRef kVTProfileLevel_H264_Main_4_0 API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos);
+VT_EXPORT const CFStringRef kVTProfileLevel_H264_Main_4_1 API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos);
+VT_EXPORT const CFStringRef kVTProfileLevel_H264_Main_4_2 API_AVAILABLE(macos(10.9), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos);
+VT_EXPORT const CFStringRef kVTProfileLevel_H264_Main_5_0 API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos);
+VT_EXPORT const CFStringRef kVTProfileLevel_H264_Main_5_1 API_AVAILABLE(macos(10.9), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos);
+VT_EXPORT const CFStringRef kVTProfileLevel_H264_Main_5_2 API_AVAILABLE(macos(10.9), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos);
+VT_EXPORT const CFStringRef kVTProfileLevel_H264_Main_AutoLevel API_AVAILABLE(macos(10.9), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos);
+VT_EXPORT const CFStringRef kVTProfileLevel_H264_Extended_5_0 API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos);
+VT_EXPORT const CFStringRef kVTProfileLevel_H264_Extended_AutoLevel API_AVAILABLE(macos(10.9), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos);
+VT_EXPORT const CFStringRef kVTProfileLevel_H264_High_3_0 API_AVAILABLE(macos(10.9), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos);
+VT_EXPORT const CFStringRef kVTProfileLevel_H264_High_3_1 API_AVAILABLE(macos(10.9), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos);
+VT_EXPORT const CFStringRef kVTProfileLevel_H264_High_3_2 API_AVAILABLE(macos(10.9), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos);
+VT_EXPORT const CFStringRef kVTProfileLevel_H264_High_4_0 API_AVAILABLE(macos(10.9), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos);
+VT_EXPORT const CFStringRef kVTProfileLevel_H264_High_4_1 API_AVAILABLE(macos(10.9), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos);
+VT_EXPORT const CFStringRef kVTProfileLevel_H264_High_4_2 API_AVAILABLE(macos(10.9), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos);
+VT_EXPORT const CFStringRef kVTProfileLevel_H264_High_5_0 API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos);
+VT_EXPORT const CFStringRef kVTProfileLevel_H264_High_5_1 API_AVAILABLE(macos(10.9), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos);
+VT_EXPORT const CFStringRef kVTProfileLevel_H264_High_5_2 API_AVAILABLE(macos(10.9), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos);
+VT_EXPORT const CFStringRef kVTProfileLevel_H264_High_AutoLevel API_AVAILABLE(macos(10.9), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos);
+VT_EXPORT const CFStringRef kVTProfileLevel_H264_ConstrainedHigh_AutoLevel API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 
-VT_EXPORT const CFStringRef kVTProfileLevel_MP4V_Simple_L0 API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2));
-VT_EXPORT const CFStringRef kVTProfileLevel_MP4V_Simple_L1 API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2));
-VT_EXPORT const CFStringRef kVTProfileLevel_MP4V_Simple_L2 API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2));
-VT_EXPORT const CFStringRef kVTProfileLevel_MP4V_Simple_L3 API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2));
-VT_EXPORT const CFStringRef kVTProfileLevel_MP4V_Main_L2 API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2));
-VT_EXPORT const CFStringRef kVTProfileLevel_MP4V_Main_L3 API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2));
-VT_EXPORT const CFStringRef kVTProfileLevel_MP4V_Main_L4 API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2));
-VT_EXPORT const CFStringRef kVTProfileLevel_MP4V_AdvancedSimple_L0 API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2));
-VT_EXPORT const CFStringRef kVTProfileLevel_MP4V_AdvancedSimple_L1 API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2));
-VT_EXPORT const CFStringRef kVTProfileLevel_MP4V_AdvancedSimple_L2 API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2));
-VT_EXPORT const CFStringRef kVTProfileLevel_MP4V_AdvancedSimple_L3 API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2));
-VT_EXPORT const CFStringRef kVTProfileLevel_MP4V_AdvancedSimple_L4 API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2));
+VT_EXPORT const CFStringRef kVTProfileLevel_MP4V_Simple_L0 API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos);
+VT_EXPORT const CFStringRef kVTProfileLevel_MP4V_Simple_L1 API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos);
+VT_EXPORT const CFStringRef kVTProfileLevel_MP4V_Simple_L2 API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos);
+VT_EXPORT const CFStringRef kVTProfileLevel_MP4V_Simple_L3 API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos);
+VT_EXPORT const CFStringRef kVTProfileLevel_MP4V_Main_L2 API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos);
+VT_EXPORT const CFStringRef kVTProfileLevel_MP4V_Main_L3 API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos);
+VT_EXPORT const CFStringRef kVTProfileLevel_MP4V_Main_L4 API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos);
+VT_EXPORT const CFStringRef kVTProfileLevel_MP4V_AdvancedSimple_L0 API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos);
+VT_EXPORT const CFStringRef kVTProfileLevel_MP4V_AdvancedSimple_L1 API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos);
+VT_EXPORT const CFStringRef kVTProfileLevel_MP4V_AdvancedSimple_L2 API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos);
+VT_EXPORT const CFStringRef kVTProfileLevel_MP4V_AdvancedSimple_L3 API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos);
+VT_EXPORT const CFStringRef kVTProfileLevel_MP4V_AdvancedSimple_L4 API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos);
 
-VT_EXPORT const CFStringRef kVTProfileLevel_H263_Profile0_Level10 API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2));
-VT_EXPORT const CFStringRef kVTProfileLevel_H263_Profile0_Level45 API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2));
-VT_EXPORT const CFStringRef kVTProfileLevel_H263_Profile3_Level45 API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2));
+VT_EXPORT const CFStringRef kVTProfileLevel_H263_Profile0_Level10 API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos);
+VT_EXPORT const CFStringRef kVTProfileLevel_H263_Profile0_Level45 API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos);
+VT_EXPORT const CFStringRef kVTProfileLevel_H263_Profile3_Level45 API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 /*!
 	@constant	kVTCompressionPropertyKey_OutputBitDepth
@@ -430,7 +432,7 @@ VT_EXPORT const CFStringRef kVTProfileLevel_H263_Profile3_Level45 API_AVAILABLE(
 		 When set, requires the encoder to output bitstream with the requested bit depth, if supported by the configured profile level setting.
 		 In the absence of this property, the video encoder will assume the highest bit depth allowable by the configured profile level setting.
 */
-VT_EXPORT const CFStringRef kVTCompressionPropertyKey_OutputBitDepth API_AVAILABLE(macosx(12.3), ios(15.4), tvos(15.4), watchos(8.4)); // Read/write, Optional, CFNumber, NULL by default
+VT_EXPORT const CFStringRef kVTCompressionPropertyKey_OutputBitDepth API_AVAILABLE(macos(12.3), ios(15.4), tvos(15.4), visionos(1.0)) API_UNAVAILABLE(watchos); // Read/write, Optional, CFNumber, NULL by default
 
 /*!
     @constant    kVTCompressionPropertyKey_HDRMetadataInsertionMode
@@ -444,9 +446,9 @@ VT_EXPORT const CFStringRef kVTCompressionPropertyKey_OutputBitDepth API_AVAILAB
         This property has no effect if the output color space is not HDR, or if
         there is currently no underlying support for the HDR format.
 */
-VT_EXPORT const CFStringRef kVTCompressionPropertyKey_HDRMetadataInsertionMode API_AVAILABLE(macosx(11.0), ios(14.0), tvos(14.0), watchos(7.0)); // Read/write, CFString, Optional, default is kVTHDRMetadataInsertionMode_Auto
-    VT_EXPORT const CFStringRef kVTHDRMetadataInsertionMode_None API_AVAILABLE(macosx(11.0), ios(14.0), tvos(14.0), watchos(7.0));
-    VT_EXPORT const CFStringRef kVTHDRMetadataInsertionMode_Auto API_AVAILABLE(macosx(11.0), ios(14.0), tvos(14.0), watchos(7.0));
+VT_EXPORT const CFStringRef kVTCompressionPropertyKey_HDRMetadataInsertionMode API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0), visionos(1.0)) API_UNAVAILABLE(watchos); // Read/write, CFString, Optional, default is kVTHDRMetadataInsertionMode_Auto
+    VT_EXPORT const CFStringRef kVTHDRMetadataInsertionMode_None API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0), visionos(1.0)) API_UNAVAILABLE(watchos);
+    VT_EXPORT const CFStringRef kVTHDRMetadataInsertionMode_Auto API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 /*!
 	 @constant	kVTCompressionPropertyKey_H264EntropyMode
@@ -461,9 +463,9 @@ VT_EXPORT const CFStringRef kVTCompressionPropertyKey_HDRMetadataInsertionMode A
 		which is not compatible with a requested Profile and Level.  Results in this case are undefined,
 		and could include encode errors or a non-compliant output stream.
 */
-VT_EXPORT const CFStringRef kVTCompressionPropertyKey_H264EntropyMode API_AVAILABLE(macosx(10.9), ios(8.0), tvos(10.2));	// Read/write, CFString, optional
-VT_EXPORT const CFStringRef kVTH264EntropyMode_CAVLC API_AVAILABLE(macosx(10.9), ios(8.0), tvos(10.2));
-VT_EXPORT const CFStringRef kVTH264EntropyMode_CABAC API_AVAILABLE(macosx(10.9), ios(8.0), tvos(10.2));
+VT_EXPORT const CFStringRef kVTCompressionPropertyKey_H264EntropyMode API_AVAILABLE(macos(10.9), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos);	// Read/write, CFString, optional
+VT_EXPORT const CFStringRef kVTH264EntropyMode_CAVLC API_AVAILABLE(macos(10.9), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos);
+VT_EXPORT const CFStringRef kVTH264EntropyMode_CABAC API_AVAILABLE(macos(10.9), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos);
 	
 
 /*!
@@ -474,7 +476,7 @@ VT_EXPORT const CFStringRef kVTH264EntropyMode_CABAC API_AVAILABLE(macosx(10.9),
 		This property is only supported by video encoders for formats that are 
 		tied to particular pixel formats (eg, 16-bit RGB, 24-bit RGB).
 */
-VT_EXPORT const CFStringRef kVTCompressionPropertyKey_Depth API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2)); // Read/write, CFNumber (CMPixelFormatType), Optional
+VT_EXPORT const CFStringRef kVTCompressionPropertyKey_Depth API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos); // Read/write, CFNumber (CMPixelFormatType), Optional
 
 /*!
 	@constant	kVTCompressionPropertyKey_PreserveAlphaChannel
@@ -485,7 +487,7 @@ VT_EXPORT const CFStringRef kVTCompressionPropertyKey_Depth API_AVAILABLE(macosx
 		The client may set this to kCFBooleanFalse in cases where they are not interested in preserving alpha, or if the alpha channel is known to be fully opaque.
 		This property is not supported by all encoders.
 */
-VT_EXPORT const CFStringRef kVTCompressionPropertyKey_PreserveAlphaChannel API_AVAILABLE(macosx(13.0), ios(16.0), tvos(16.0), watchos(9.0)); // Read/write, CFBoolean, Optional, (effectively) kCFBooleanTrue by default
+VT_EXPORT const CFStringRef kVTCompressionPropertyKey_PreserveAlphaChannel API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0), visionos(1.0)) API_UNAVAILABLE(watchos); // Read/write, CFBoolean, Optional, (effectively) kCFBooleanTrue by default
 
 #pragma mark Runtime restrictions
 
@@ -503,7 +505,7 @@ VT_EXPORT const CFStringRef kVTCompressionPropertyKey_PreserveAlphaChannel API_A
 		The default is kVTUnlimitedFrameDelayCount, which sets no limit
 		on the compression window.
 */
-VT_EXPORT const CFStringRef kVTCompressionPropertyKey_MaxFrameDelayCount API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2)); // Read/write, CFNumber, Optional
+VT_EXPORT const CFStringRef kVTCompressionPropertyKey_MaxFrameDelayCount API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos); // Read/write, CFNumber, Optional
 enum { kVTUnlimitedFrameDelayCount = -1 };
 	
 /*!
@@ -515,7 +517,7 @@ enum { kVTUnlimitedFrameDelayCount = -1 };
 		slices produced by the encoder, where possible.
 		By default, no limit is specified.  A value of zero implies default behavior.
 */
-VT_EXPORT const CFStringRef kVTCompressionPropertyKey_MaxH264SliceBytes API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2)); // Read/write, CFNumber<SInt32>, Optional
+VT_EXPORT const CFStringRef kVTCompressionPropertyKey_MaxH264SliceBytes API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos); // Read/write, CFNumber<SInt32>, Optional
 
 /*!
 	@constant	kVTCompressionPropertyKey_RealTime
@@ -536,7 +538,7 @@ VT_EXPORT const CFStringRef kVTCompressionPropertyKey_MaxH264SliceBytes API_AVAI
 		by anticipating that encoding requests will happen at this rate.
 		By default, this property is NULL, indicating unknown.  
 */
-VT_EXPORT const CFStringRef kVTCompressionPropertyKey_RealTime API_AVAILABLE(macosx(10.9), ios(8.0), tvos(10.2)); // Read/write, CFBoolean or NULL, Optional, default NULL
+VT_EXPORT const CFStringRef kVTCompressionPropertyKey_RealTime API_AVAILABLE(macos(10.9), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos); // Read/write, CFBoolean or NULL, Optional, default NULL
 
 /*!
 	@constant	kVTCompressionPropertyKey_MaximizePowerEfficiency
@@ -551,7 +553,7 @@ VT_EXPORT const CFStringRef kVTCompressionPropertyKey_RealTime API_AVAILABLE(mac
 		If the kVTCompressionPropertyKey_RealTime property is set to kCFBooleanTrue, 
 		the video encoder may act as though this property were set to kCFBooleanFalse.
  */
-VT_EXPORT const CFStringRef kVTCompressionPropertyKey_MaximizePowerEfficiency API_AVAILABLE(macos(10.14), ios(12.0), tvos(12.0)); // Read/write, CFBoolean or NULL, Optional, default is false
+VT_EXPORT const CFStringRef kVTCompressionPropertyKey_MaximizePowerEfficiency API_AVAILABLE(macos(10.14), ios(12.0), tvos(12.0), visionos(1.0)) API_UNAVAILABLE(watchos); // Read/write, CFBoolean or NULL, Optional, default is false
 
 
 #pragma mark Hints
@@ -568,23 +570,34 @@ VT_EXPORT const CFStringRef kVTCompressionPropertyKey_MaximizePowerEfficiency AP
 		The default is 0, which indicates that the number of source frames
 		is not known.
 */
-VT_EXPORT const CFStringRef kVTCompressionPropertyKey_SourceFrameCount API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2)); // Read/write, CFNumber, Optional
+VT_EXPORT const CFStringRef kVTCompressionPropertyKey_SourceFrameCount API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos); // Read/write, CFNumber, Optional
 
 /*!
 	@constant	kVTCompressionPropertyKey_ExpectedFrameRate
 	@abstract
-		Indicates the expected frame rate, if known.
+		Indicates the expected frame rate of the video to be encoded.
 	@discussion
-		The frame rate is measured in frames per second. 
-		This is not used to control the frame rate; it is provided as a hint to the 
-		video encoder so that it can set up internal configuration before compression begins. 
-		The actual frame rate will depend on frame durations and may vary. 
-		When the kVTCompressionPropertyKey_RealTime property is set to kCFBooleanTrue, 
-		the video encoder may use this property's value to optimize energy usage,
-		by anticipating that encoding requests will happen at this rate.
-		By default, this is zero, indicating "unknown".
+		The frame rate is measured in frames per second.
+		This property is used to inform the encoder of the expected cadence of the presentation time stamp values of frames that will be submitted to the encoder. 
+		The actual frame rate may vary, and will depend on the frame durations calculated by the difference between subsequent presentation time stamps.
+		If kVTCompressionPropertyKey_RealTime has been set to true, the ExpectedFrameRate may be used to optimize energy usage as well as perform internal encoder configuration before compression begins.
+		If kVTCompressionPropertyKey_RealTime is not set, or has been set to false, the ExpectedFrameRate is still helpful and allows the encoder to optimize internal encoder configuration before compression begins.
+		By default, the property has a value of zero indicating "unknown".
 */
-VT_EXPORT const CFStringRef kVTCompressionPropertyKey_ExpectedFrameRate API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2)); // Read/write, CFNumber, Optional
+VT_EXPORT const CFStringRef kVTCompressionPropertyKey_ExpectedFrameRate API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos); // Read/write, CFNumber, Optional
+
+/*!
+	@constant	kVTCompressionPropertyKey_MaximumRealTimeFrameRate
+	@abstract
+		Indicates the maximum real time rate at which frames could be submitted to the VTCompressionSession
+	@discussion
+		The frame rate is measured in frames per second.
+		This property can be used to inform the encoder of the maximum rate that frames could be submitted to the encoder during realtime encoding.  This allows the encoder to configure itself to ensure this capability.
+		This property can only be used when kVTCompressionPropertyKey_RealTime has been set to true.
+		Unlike kVTCompressionPropertyKey_ExpectedFrameRate, this property informs the maximum possible rate that the VTCompressionSession could see, not the average frame rate that is expected in normal operation.
+		By default, the property has a value of zero indicating "unknown".
+*/
+VT_EXPORT const CFStringRef kVTCompressionPropertyKey_MaximumRealTimeFrameRate API_AVAILABLE(macos(15.0), ios(18.0), tvos(18.0), visionos(2.0)) API_UNAVAILABLE(watchos); // Read/write, CFNumber, Optional
 
 /*!
 	@constant	kVTCompressionPropertyKey_BaseLayerFrameRateFraction
@@ -594,7 +607,7 @@ VT_EXPORT const CFStringRef kVTCompressionPropertyKey_ExpectedFrameRate API_AVAI
 		This property indicates the fraction of total frames submitted that should be encoded in the base layer.
 		For example, a value of 0.5 means that half of the frames are in the base layer, and half are in the enhancement layer.
 */
-VT_EXPORT const CFStringRef kVTCompressionPropertyKey_BaseLayerFrameRateFraction API_AVAILABLE(macosx(11.3), ios(14.5), tvos(14.5)); // Read/write, CFNumber<Float>, Optional
+VT_EXPORT const CFStringRef kVTCompressionPropertyKey_BaseLayerFrameRateFraction API_AVAILABLE(macos(11.3), ios(14.5), tvos(14.5), visionos(1.0)) API_UNAVAILABLE(watchos); // Read/write, CFNumber<Float>, Optional
 
 /*!
 	@constant	kVTCompressionPropertyKey_BaseLayerBitRateFraction
@@ -605,7 +618,7 @@ VT_EXPORT const CFStringRef kVTCompressionPropertyKey_BaseLayerFrameRateFraction
 		For example: If the target bitrate is set to 500kbps and kVTCompressionPropertyKey_BaseLayerBitRateFraction is set to 0.6, the base layer will be given a
 		budget of 300kbps and the enhancement layer 200kbps.
 */
-VT_EXPORT const CFStringRef kVTCompressionPropertyKey_BaseLayerBitRateFraction API_AVAILABLE(macosx(12.0), ios(15.0), tvos(15.0)); // Read/write, CFNumber<Float>, Optional
+VT_EXPORT const CFStringRef kVTCompressionPropertyKey_BaseLayerBitRateFraction API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), visionos(1.0)) API_UNAVAILABLE(watchos); // Read/write, CFNumber<Float>, Optional
 
 /*!
 	@constant	kVTCompressionPropertyKey_ExpectedDuration
@@ -614,7 +627,7 @@ VT_EXPORT const CFStringRef kVTCompressionPropertyKey_BaseLayerBitRateFraction A
 	@discussion
 		By default, this is zero, indicating "unknown".
 */
-VT_EXPORT const CFStringRef kVTCompressionPropertyKey_ExpectedDuration API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2)); // Read/write, CFNumber(seconds), Optional
+VT_EXPORT const CFStringRef kVTCompressionPropertyKey_ExpectedDuration API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos); // Read/write, CFNumber(seconds), Optional
 
 /*!
 	@constant	kVTCompressionPropertyKey_BaseLayerFrameRate
@@ -624,7 +637,7 @@ VT_EXPORT const CFStringRef kVTCompressionPropertyKey_ExpectedDuration API_AVAIL
 		The frame rate is measured in frames per second.
 		This property is only implemented by encoders which support hierarchical frame encoding, and requests that this encoding feature be enabled.
 */
-VT_EXPORT const CFStringRef kVTCompressionPropertyKey_BaseLayerFrameRate API_AVAILABLE(macosx(10.13), ios(11.0), tvos(11.0)); // Read/write, CFNumber, Optional
+VT_EXPORT const CFStringRef kVTCompressionPropertyKey_BaseLayerFrameRate API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), visionos(1.0)) API_UNAVAILABLE(watchos); // Read/write, CFNumber, Optional
 
 /*!
 	 @constant	kVTCompressionPropertyKey_ReferenceBufferCount
@@ -634,7 +647,7 @@ VT_EXPORT const CFStringRef kVTCompressionPropertyKey_BaseLayerFrameRate API_AVA
 		This is typically used to force the encoder to use lower count than allowed by the stantard for a level/profile.
 		The encoder will fail and  report an error if the requested value exceeds the limit set by the standard for such a level/profile.
 */
-VT_EXPORT const CFStringRef kVTCompressionPropertyKey_ReferenceBufferCount API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0), watchos(9.0)); // CFNumber, Optional
+VT_EXPORT const CFStringRef kVTCompressionPropertyKey_ReferenceBufferCount API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0), visionos(1.0)) API_UNAVAILABLE(watchos); // CFNumber, Optional
 
 
 /*!
@@ -645,7 +658,7 @@ VT_EXPORT const CFStringRef kVTCompressionPropertyKey_ReferenceBufferCount API_A
 		The MSE value returned may be measured using an internal representation of the decoded frame which may lack filtering or processing present in the actual decoded frame.  Because of this, there may be a small delta between the reported MSE and the true MSE.
 		If supported, the MSE values will be returned as sample buffer attachments on the encoded frame using the kVTSampleAttachmentKey_QualityMetrics key.
 */
-VT_EXPORT const CFStringRef kVTCompressionPropertyKey_CalculateMeanSquaredError API_AVAILABLE(macos(14.4), ios(17.4), tvos(17.4), watchos(10.4)); // Read/write, CFBoolean
+VT_EXPORT const CFStringRef kVTCompressionPropertyKey_CalculateMeanSquaredError API_AVAILABLE(macos(14.4), ios(17.4), tvos(17.4), visionos(1.1)) API_UNAVAILABLE(watchos); // Read/write, CFBoolean
 
 
 /*!
@@ -655,7 +668,7 @@ VT_EXPORT const CFStringRef kVTCompressionPropertyKey_CalculateMeanSquaredError 
 	@discussion
 		The video encoder will attach this via the CMSampleBufferGetSampleAttachmentsArray interface before emitting the sample buffer.
 */
-VT_EXPORT const CFStringRef kVTSampleAttachmentKey_QualityMetrics API_AVAILABLE(macos(14.4), ios(17.4), tvos(17.4), watchos(10.4)); //CFDictionary
+VT_EXPORT const CFStringRef kVTSampleAttachmentKey_QualityMetrics API_AVAILABLE(macos(14.4), ios(17.4), tvos(17.4), visionos(1.1)) API_UNAVAILABLE(watchos); //CFDictionary
 
 /*!
 	@constant	kVTSampleAttachmentQualityMetricsKey_LumaMeanSquaredError
@@ -666,7 +679,7 @@ VT_EXPORT const CFStringRef kVTSampleAttachmentKey_QualityMetrics API_AVAILABLE(
 		For multi-view video, a CFArray value is returned, and each element (CFNumber) in the CFArray includes MSE for the corresponding view.
 		The video encoder will attach this in kVTSampleAttachmentKey_QualityMetrics via the CMSampleBufferGetSampleAttachmentsArray interface before emitting the sample buffer.
 */
-VT_EXPORT const CFStringRef kVTSampleAttachmentQualityMetricsKey_LumaMeanSquaredError API_AVAILABLE(macos(14.4), ios(17.4), tvos(17.4), watchos(10.4)); // CFNumber, CFArray
+VT_EXPORT const CFStringRef kVTSampleAttachmentQualityMetricsKey_LumaMeanSquaredError API_AVAILABLE(macos(14.4), ios(17.4), tvos(17.4), visionos(1.1)) API_UNAVAILABLE(watchos); // CFNumber, CFArray
 
 /*!
 	@constant	kVTSampleAttachmentQualityMetricsKey_ChromaBlueMeanSquaredError
@@ -677,7 +690,7 @@ VT_EXPORT const CFStringRef kVTSampleAttachmentQualityMetricsKey_LumaMeanSquared
 		For multi-view video, a CFArray value is returned, and each element (CFNumber) in the CFArray includes MSE for the corresponding view.
 		The video encoder will attach this in kVTSampleAttachmentKey_QualityMetrics via the CMSampleBufferGetSampleAttachmentsArray interface before emitting the sample buffer.
 **/
-VT_EXPORT const CFStringRef kVTSampleAttachmentQualityMetricsKey_ChromaBlueMeanSquaredError API_AVAILABLE(macos(14.4), ios(17.4), tvos(17.4), watchos(10.4)); // CFNumber, CFArray
+VT_EXPORT const CFStringRef kVTSampleAttachmentQualityMetricsKey_ChromaBlueMeanSquaredError API_AVAILABLE(macos(14.4), ios(17.4), tvos(17.4), visionos(1.1)) API_UNAVAILABLE(watchos); // CFNumber, CFArray
 
 /*!
 	@constant	kVTSampleAttachmentQualityMetricsKey_ChromaRedMeanSquaredError
@@ -688,7 +701,7 @@ VT_EXPORT const CFStringRef kVTSampleAttachmentQualityMetricsKey_ChromaBlueMeanS
 		For multi-view video, a CFArray value is returned, and each element (CFNumber) in the CFArray includes MSE for the corresponding view.
 		The video encoder will attach this in kVTSampleAttachmentKey_QualityMetrics via the CMSampleBufferGetSampleAttachmentsArray interface before emitting the sample buffer.
 */
-VT_EXPORT const CFStringRef kVTSampleAttachmentQualityMetricsKey_ChromaRedMeanSquaredError API_AVAILABLE(macos(14.4), ios(17.4), tvos(17.4), watchos(10.4)); // CFNumber, CFArray
+VT_EXPORT const CFStringRef kVTSampleAttachmentQualityMetricsKey_ChromaRedMeanSquaredError API_AVAILABLE(macos(14.4), ios(17.4), tvos(17.4), visionos(1.1)) API_UNAVAILABLE(watchos); // CFNumber, CFArray
 
 
 
@@ -704,7 +717,7 @@ VT_EXPORT const CFStringRef kVTSampleAttachmentQualityMetricsKey_ChromaRedMeanSq
 		this property can be set to kCFBooleanFalse.
  		In MacOS 10.15 and later, hardware encode is enabled in VTCompressionSessions by default.
 */
-VT_EXPORT const CFStringRef kVTVideoEncoderSpecification_EnableHardwareAcceleratedVideoEncoder API_AVAILABLE(macosx(10.9), ios(17.4), tvos(17.4)); // CFBoolean, Optional, true by default
+VT_EXPORT const CFStringRef kVTVideoEncoderSpecification_EnableHardwareAcceleratedVideoEncoder API_AVAILABLE(macos(10.9), ios(17.4), tvos(17.4), visionos(1.1)) API_UNAVAILABLE(watchos); // CFBoolean, Optional, true by default
 
 /*!
 	@constant	kVTVideoEncoderSpecification_RequireHardwareAcceleratedVideoEncoder
@@ -723,7 +736,7 @@ VT_EXPORT const CFStringRef kVTVideoEncoderSpecification_EnableHardwareAccelerat
 			- the requested encoding format or encoding configuration is not supported
 			- the hardware encoding resources on the machine are busy
 */
-VT_EXPORT const CFStringRef kVTVideoEncoderSpecification_RequireHardwareAcceleratedVideoEncoder API_AVAILABLE(macosx(10.9), ios(17.4), tvos(17.4)); // CFBoolean, Optional
+VT_EXPORT const CFStringRef kVTVideoEncoderSpecification_RequireHardwareAcceleratedVideoEncoder API_AVAILABLE(macos(10.9), ios(17.4), tvos(17.4), visionos(1.1)) API_UNAVAILABLE(watchos); // CFBoolean, Optional
 
 /*!
 	@constant	kVTCompressionPropertyKey_UsingHardwareAcceleratedVideoEncoder
@@ -734,7 +747,7 @@ VT_EXPORT const CFStringRef kVTVideoEncoderSpecification_RequireHardwareAccelera
 		accelerated encode using kVTVideoEncoderSpecification_EnableHardwareAcceleratedVideoEncoder
 		to see if a hardware accelerated encoder was selected.
 */
-VT_EXPORT const CFStringRef kVTCompressionPropertyKey_UsingHardwareAcceleratedVideoEncoder API_AVAILABLE(macosx(10.9), ios(17.4), tvos(17.4)); // CFBoolean, Read; assumed false by default
+VT_EXPORT const CFStringRef kVTCompressionPropertyKey_UsingHardwareAcceleratedVideoEncoder API_AVAILABLE(macos(10.9), ios(17.4), tvos(17.4), visionos(1.1)) API_UNAVAILABLE(watchos); // CFBoolean, Read; assumed false by default
 
 /*!
 	@constant	kVTVideoEncoderSpecification_RequiredEncoderGPURegistryID
@@ -744,7 +757,7 @@ VT_EXPORT const CFStringRef kVTCompressionPropertyKey_UsingHardwareAcceleratedVi
 		This specification implies kVTVideoEncoderSpecification_EnableHardwareAcceleratedVideoEncoder.  A separate hardware encode opt-in is not required.
 		The GPU registryID can be obtained from a MTLDevice using [MTLDevice registryID] or can be obtained from OpenGL or OpenCL.
 */
-VT_EXPORT const CFStringRef kVTVideoEncoderSpecification_RequiredEncoderGPURegistryID API_AVAILABLE(macosx(10.14)); // CFNumber, Optional
+VT_EXPORT const CFStringRef kVTVideoEncoderSpecification_RequiredEncoderGPURegistryID API_AVAILABLE(macos(10.14), ios(13.0), tvos(13.0), visionos(1.0)) API_UNAVAILABLE(watchos); // CFNumber, Optional
 
 /*!
 	@constant	kVTVideoEncoderSpecification_PreferredEncoderGPURegistryID
@@ -757,7 +770,7 @@ VT_EXPORT const CFStringRef kVTVideoEncoderSpecification_RequiredEncoderGPURegis
 		This specification can be used in conjunction with kVTVideoEncoderSpecification_RequireHardwareAcceleratedVideoEncoder to prevent a fallback to software encode.
 		The GPU registryID can be obtained from a MTLDevice using [MTLDevice registryID] or can be obtained from OpenGL or OpenCL.
 */
-VT_EXPORT const CFStringRef kVTVideoEncoderSpecification_PreferredEncoderGPURegistryID API_AVAILABLE(macosx(10.14)); // CFNumber, Optional
+VT_EXPORT const CFStringRef kVTVideoEncoderSpecification_PreferredEncoderGPURegistryID API_AVAILABLE(macos(10.14), ios(13.0), tvos(13.0), visionos(1.0)) API_UNAVAILABLE(watchos); // CFNumber, Optional
 
 /*!
 	@constant	kVTCompressionPropertyKey_UsingGPURegistryID
@@ -767,7 +780,7 @@ VT_EXPORT const CFStringRef kVTVideoEncoderSpecification_PreferredEncoderGPURegi
 		You can query this property using VTSessionCopyProperty after building a VTCompressionSession to find out which GPU the encoder is using.
 		If a encoder based on a built-in GPU was used it will return NULL.  If a software encoder is used, it will return NULL
 */
-VT_EXPORT const CFStringRef kVTCompressionPropertyKey_UsingGPURegistryID API_AVAILABLE(macosx(10.15)) ; // CFNumberRef, Read;
+VT_EXPORT const CFStringRef kVTCompressionPropertyKey_UsingGPURegistryID API_AVAILABLE(macos(10.14), ios(13.0), tvos(13.0), visionos(1.0)) API_UNAVAILABLE(watchos); // CFNumberRef, Read;
 
 /*!
 	@constant  kVTCompressionPropertyKey_SupportsBaseFrameQP
@@ -777,7 +790,7 @@ VT_EXPORT const CFStringRef kVTCompressionPropertyKey_UsingGPURegistryID API_AVA
 		If this property returns kCFBooleanTrue, it indicates that the encoder supports base frame QP requests through kVTEncodeFrameOptionKey_BaseFrameQP. If it returns false or kVTPropertyNotSupportedErr, base frame QP requests will cause errors on VTCompressionSessionEncodeFrame calls, or will be ignored.
 
 */
-VT_EXPORT const CFStringRef kVTCompressionPropertyKey_SupportsBaseFrameQP API_AVAILABLE(macosx(12.0), ios(15.0), tvos(15.0)); // Read only, CFBoolean, Optional, false by default
+VT_EXPORT const CFStringRef kVTCompressionPropertyKey_SupportsBaseFrameQP API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), visionos(1.0)) API_UNAVAILABLE(watchos); // Read only, CFBoolean, Optional, false by default
 
 #pragma mark Per-frame configuration
 	
@@ -792,7 +805,7 @@ VT_EXPORT const CFStringRef kVTCompressionPropertyKey_SupportsBaseFrameQP API_AV
 		Note that it may not be possible for the encoder to accomodate all
 		requests.
 */
-VT_EXPORT const CFStringRef kVTEncodeFrameOptionKey_ForceKeyFrame API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2)); //  CFBoolean
+VT_EXPORT const CFStringRef kVTEncodeFrameOptionKey_ForceKeyFrame API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos); //  CFBoolean
 
 /*!
 	@constant  kVTEncodeFrameOptionKey_BaseFrameQP
@@ -822,7 +835,7 @@ VT_EXPORT const CFStringRef kVTEncodeFrameOptionKey_ForceKeyFrame API_AVAILABLE(
 
 		Note that it may not be possible for the encoder to accommodate all requests.
 */
-VT_EXPORT const CFStringRef kVTEncodeFrameOptionKey_BaseFrameQP API_AVAILABLE(macosx(12.0), ios(15.0), tvos(15.0)); // CFNumberRef, Optional
+VT_EXPORT const CFStringRef kVTEncodeFrameOptionKey_BaseFrameQP API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), visionos(1.0)) API_UNAVAILABLE(watchos); // CFNumberRef, Optional
 
 
 #pragma mark Clean aperture and pixel aspect ratio
@@ -838,7 +851,7 @@ VT_EXPORT const CFStringRef kVTEncodeFrameOptionKey_BaseFrameQP API_AVAILABLE(ma
 		and may affect source frame scaling.
 		NULL is a valid value for this property, meaning that the clean aperture is the full width and height.
 */
-VT_EXPORT const CFStringRef kVTCompressionPropertyKey_CleanAperture API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2)); // Read/write, CFDictionary (see CMFormatDescription.h), Optional
+VT_EXPORT const CFStringRef kVTCompressionPropertyKey_CleanAperture API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos); // Read/write, CFDictionary (see CMFormatDescription.h), Optional
 
 /*!
 	@constant	kVTCompressionPropertyKey_PixelAspectRatio
@@ -851,7 +864,7 @@ VT_EXPORT const CFStringRef kVTCompressionPropertyKey_CleanAperture API_AVAILABL
 		and may affect source frame scaling.
 		NULL is a valid value for this property, meaning square pixels (1:1).
 */
-VT_EXPORT const CFStringRef kVTCompressionPropertyKey_PixelAspectRatio API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2)); // Read/write, CFDictionary (see CMFormatDescription.h), Optional
+VT_EXPORT const CFStringRef kVTCompressionPropertyKey_PixelAspectRatio API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos); // Read/write, CFDictionary (see CMFormatDescription.h), Optional
 
 /*!
 	@constant	kVTCompressionPropertyKey_FieldCount
@@ -862,7 +875,7 @@ VT_EXPORT const CFStringRef kVTCompressionPropertyKey_PixelAspectRatio API_AVAIL
 		and may affect source frame scaling.
 		NULL is a valid value for this property.
 */
-VT_EXPORT const CFStringRef kVTCompressionPropertyKey_FieldCount API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2)); // Read/write, CFNumber (see kCMFormatDescriptionExtension_FieldCount), Optional
+VT_EXPORT const CFStringRef kVTCompressionPropertyKey_FieldCount API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos); // Read/write, CFNumber (see kCMFormatDescriptionExtension_FieldCount), Optional
 
 /*!
 	@constant	kVTCompressionPropertyKey_FieldDetail
@@ -875,7 +888,7 @@ VT_EXPORT const CFStringRef kVTCompressionPropertyKey_FieldCount API_AVAILABLE(m
 		and may affect source frame scaling.
 		NULL is a valid value for this property.
 */
-VT_EXPORT const CFStringRef kVTCompressionPropertyKey_FieldDetail API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2)); // Read/write, CFString (see kCMFormatDescriptionExtension_FieldDetail), Optional
+VT_EXPORT const CFStringRef kVTCompressionPropertyKey_FieldDetail API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos); // Read/write, CFString (see kCMFormatDescriptionExtension_FieldDetail), Optional
 
 /*!
 	@constant	kVTCompressionPropertyKey_AspectRatio16x9
@@ -887,7 +900,7 @@ VT_EXPORT const CFStringRef kVTCompressionPropertyKey_FieldDetail API_AVAILABLE(
 		When true, the picture aspect ratio is 16:9.
 		Either way, a fixed PixelAspectRatio is used (the specific value depends on whether the format is NTSC or PAL).
 */
-VT_EXPORT const CFStringRef kVTCompressionPropertyKey_AspectRatio16x9 API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2)); // Read/write, CFBoolean, Optional
+VT_EXPORT const CFStringRef kVTCompressionPropertyKey_AspectRatio16x9 API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos); // Read/write, CFBoolean, Optional
 
 /*!
 	@constant	kVTCompressionPropertyKey_ProgressiveScan
@@ -899,7 +912,7 @@ VT_EXPORT const CFStringRef kVTCompressionPropertyKey_AspectRatio16x9 API_AVAILA
 		If true, content is encoded as progressive.
 		The value of this property fixes the FieldCount and FieldDetail properties.
 */
-VT_EXPORT const CFStringRef kVTCompressionPropertyKey_ProgressiveScan API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2)); // Read/write, CFBoolean, Optional
+VT_EXPORT const CFStringRef kVTCompressionPropertyKey_ProgressiveScan API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos); // Read/write, CFBoolean, Optional
 
 #pragma mark Color
 
@@ -912,7 +925,7 @@ VT_EXPORT const CFStringRef kVTCompressionPropertyKey_ProgressiveScan API_AVAILA
 		in those cases this property will be read-only (SetProperty will return kVTPropertyReadOnlyErr).
 		The value will be set on the format description for output sample buffers.
 */
-VT_EXPORT const CFStringRef kVTCompressionPropertyKey_ColorPrimaries API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2)); // Read/write, CFString (see kCMFormatDescriptionExtension_ColorPrimaries), Optional
+VT_EXPORT const CFStringRef kVTCompressionPropertyKey_ColorPrimaries API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos); // Read/write, CFString (see kCMFormatDescriptionExtension_ColorPrimaries), Optional
 
 /*!
 	@constant	kVTCompressionPropertyKey_TransferFunction
@@ -923,7 +936,7 @@ VT_EXPORT const CFStringRef kVTCompressionPropertyKey_ColorPrimaries API_AVAILAB
 		in those cases this property will be read-only (SetProperty will return kVTPropertyReadOnlyErr).
 		The value will be set on the format description for output sample buffers.
 */
-VT_EXPORT const CFStringRef kVTCompressionPropertyKey_TransferFunction API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2)); // Read/write, CFString (see kCMFormatDescriptionExtension_TransferFunction), Optional
+VT_EXPORT const CFStringRef kVTCompressionPropertyKey_TransferFunction API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos); // Read/write, CFString (see kCMFormatDescriptionExtension_TransferFunction), Optional
 
 /*!
 	@constant	kVTCompressionPropertyKey_YCbCrMatrix
@@ -934,7 +947,7 @@ VT_EXPORT const CFStringRef kVTCompressionPropertyKey_TransferFunction API_AVAIL
 		in those cases this property will be read-only (SetProperty will return kVTPropertyReadOnlyErr).
 		The value will be set on the format description for output sample buffers.
 */
-VT_EXPORT const CFStringRef kVTCompressionPropertyKey_YCbCrMatrix API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2)); // Read/write, CFString (see kCMFormatDescriptionExtension_YCbCrMatrix), Optional
+VT_EXPORT const CFStringRef kVTCompressionPropertyKey_YCbCrMatrix API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos); // Read/write, CFString (see kCMFormatDescriptionExtension_YCbCrMatrix), Optional
 
 /*!
 	@constant	kVTCompressionPropertyKey_ICCProfile
@@ -948,7 +961,7 @@ VT_EXPORT const CFStringRef kVTCompressionPropertyKey_YCbCrMatrix API_AVAILABLE(
 		The value will be set on the format description for output sample buffers.
 		NULL can be a valid value for this property.
 */
-VT_EXPORT const CFStringRef kVTCompressionPropertyKey_ICCProfile API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2)); // Read/write, CFData (see kCMFormatDescriptionExtension_ICCProfile), Optional
+VT_EXPORT const CFStringRef kVTCompressionPropertyKey_ICCProfile API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos); // Read/write, CFData (see kCMFormatDescriptionExtension_ICCProfile), Optional
 
 /*!
 	@constant	kVTCompressionPropertyKey_MasteringDisplayColorVolume
@@ -958,7 +971,7 @@ VT_EXPORT const CFStringRef kVTCompressionPropertyKey_ICCProfile API_AVAILABLE(m
 		The value will be set on the format description for output sample buffers,
 		and incorporated into the appropriate SEI NAL unit where supported by the encoder.
 */
-VT_EXPORT const CFStringRef kVTCompressionPropertyKey_MasteringDisplayColorVolume API_AVAILABLE(macosx(10.13), ios(11.0), tvos(11.0)); // Read/write, CFData(24 bytes) (see kCMFormatDescriptionExtension_MasteringDisplayColorVolume), Optional
+VT_EXPORT const CFStringRef kVTCompressionPropertyKey_MasteringDisplayColorVolume API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), visionos(1.0)) API_UNAVAILABLE(watchos); // Read/write, CFData(24 bytes) (see kCMFormatDescriptionExtension_MasteringDisplayColorVolume), Optional
 
 /*!
 	@constant	kVTCompressionPropertyKey_ContentLightLevelInfo
@@ -968,7 +981,7 @@ VT_EXPORT const CFStringRef kVTCompressionPropertyKey_MasteringDisplayColorVolum
 		The value will be set on the format description for output sample buffers,
 		and incorporated into the appropriate SEI NAL unit where supported by the encoder.
 */
-VT_EXPORT const CFStringRef kVTCompressionPropertyKey_ContentLightLevelInfo API_AVAILABLE(macosx(10.13), ios(11.0), tvos(11.0)); // Read/write, CFData(4 bytes) (see kCMFormatDescriptionExtension_ContentLightLevelInfo), Optional
+VT_EXPORT const CFStringRef kVTCompressionPropertyKey_ContentLightLevelInfo API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), visionos(1.0)) API_UNAVAILABLE(watchos); // Read/write, CFData(4 bytes) (see kCMFormatDescriptionExtension_ContentLightLevelInfo), Optional
 
 
 /*!
@@ -978,7 +991,7 @@ VT_EXPORT const CFStringRef kVTCompressionPropertyKey_ContentLightLevelInfo API_
 	@discussion
 		This property allows the caller to specify a gamma value to include in the CMVideoFormatDescription attached to output CMSampleBuffers. It does not change pixel data being encoded.
 */
-	VT_EXPORT const CFStringRef kVTCompressionPropertyKey_GammaLevel VT_AVAILABLE_STARTING(10_9); // Read/write, CFNumber (see kCMFormatDescriptionExtension_GammaLevel), Optional
+VT_EXPORT const CFStringRef kVTCompressionPropertyKey_GammaLevel API_AVAILABLE(macos(10.9), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos); // Read/write, CFNumber (see kCMFormatDescriptionExtension_GammaLevel), Optional
 	
 
 /*!
@@ -990,9 +1003,9 @@ VT_EXPORT const CFStringRef kVTCompressionPropertyKey_ContentLightLevelInfo API_
 		If this property is not set, the encoder may read the first source image buffer's kCVImageBufferAlphaChannelMode attachment.
 		If neither the property nor the first buffer's attachment is set, defaults to kVTAlphaChannelMode_PremultipliedAlpha.
  */
-VT_EXPORT const CFStringRef kVTCompressionPropertyKey_AlphaChannelMode	API_AVAILABLE(macosx(10.15), ios(13.0), tvos(13.0), watchos(6.0)); // Read/write, Optional, CFString(kVTAlphaChannelMode_*); if property is not set, matches first source frame's attachment; if that's also not set, defaults to premultiplied alpha
-VT_EXPORT const CFStringRef kVTAlphaChannelMode_StraightAlpha	API_AVAILABLE(macosx(10.15), ios(13.0), tvos(13.0), watchos(6.0));
-VT_EXPORT const CFStringRef kVTAlphaChannelMode_PremultipliedAlpha	API_AVAILABLE(macosx(10.15), ios(13.0), tvos(13.0), watchos(6.0));
+VT_EXPORT const CFStringRef kVTCompressionPropertyKey_AlphaChannelMode	API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0), visionos(1.0)) API_UNAVAILABLE(watchos); // Read/write, Optional, CFString(kVTAlphaChannelMode_*); if property is not set, matches first source frame's attachment; if that's also not set, defaults to premultiplied alpha
+VT_EXPORT const CFStringRef kVTAlphaChannelMode_StraightAlpha	API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0), visionos(1.0)) API_UNAVAILABLE(watchos);
+VT_EXPORT const CFStringRef kVTAlphaChannelMode_PremultipliedAlpha	API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 	
 #pragma mark Pre-compression processing
@@ -1009,7 +1022,7 @@ VT_EXPORT const CFStringRef kVTAlphaChannelMode_PremultipliedAlpha	API_AVAILABLE
 		Setting this property alone does not necessarily guarantee that a VTPixelTransferSession will be created.
 		See VTPixelTransferProperties.h.
 */
-VT_EXPORT const CFStringRef kVTCompressionPropertyKey_PixelTransferProperties API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2)); // Read/Write, CFDictionary containing properties from VTPixelTransferProperties.h.
+VT_EXPORT const CFStringRef kVTCompressionPropertyKey_PixelTransferProperties API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos); // Read/Write, CFDictionary containing properties from VTPixelTransferProperties.h.
 	
 #pragma mark Multi-pass
 	
@@ -1029,7 +1042,7 @@ VT_EXPORT const CFStringRef kVTCompressionPropertyKey_PixelTransferProperties AP
 	 
 	You can create and use a VTFrameSilo object to merge sequences of compressed frames across passes during multi-pass encoding.
 */
-VT_EXPORT const CFStringRef kVTCompressionPropertyKey_MultiPassStorage API_AVAILABLE(macosx(10.10), ios(8.0), tvos(10.2)); // VTMultiPassStorage, optional, default is NULL
+VT_EXPORT const CFStringRef kVTCompressionPropertyKey_MultiPassStorage API_AVAILABLE(macos(10.10), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos); // VTMultiPassStorage, optional, default is NULL
 
 #pragma mark Encoder information
 	
@@ -1040,7 +1053,7 @@ VT_EXPORT const CFStringRef kVTCompressionPropertyKey_MultiPassStorage API_AVAIL
 	@discussion
 		Matches the value specified in kVTVideoEncoderSpecification_EncoderID, and the kVTVideoEncoderList_EncoderID value returned from VTCopyVideoEncoderList.
 */
-VT_EXPORT const CFStringRef kVTCompressionPropertyKey_EncoderID API_AVAILABLE(macosx(10.13), ios(11.0), tvos(11.0)); // CFStringRef
+VT_EXPORT const CFStringRef kVTCompressionPropertyKey_EncoderID API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), visionos(1.0)) API_UNAVAILABLE(watchos); // CFStringRef
 
 /*!
 	@constant	kVTCompressionPropertyKey_RecommendedParallelizationLimit
@@ -1066,7 +1079,7 @@ VT_EXPORT const CFStringRef kVTCompressionPropertyKey_EncoderID API_AVAILABLE(ma
 				kVTCompressionPropertyKey_MoreFramesAfterEnd = false
 				kVTCompressionPropertyKey_SourceFrameCount = 100
 */
-VT_EXPORT const CFStringRef kVTCompressionPropertyKey_RecommendedParallelizationLimit API_AVAILABLE(macosx(14.0)) API_UNAVAILABLE(ios, tvos, watchos); // Read-only, CFNumber<int>
+VT_EXPORT const CFStringRef kVTCompressionPropertyKey_RecommendedParallelizationLimit API_AVAILABLE(macos(14.0)) API_UNAVAILABLE(ios, tvos, watchos, visionos); // Read-only, CFNumber<int>
 
 /*!
 	@constant	kVTCompressionPropertyKey_RecommendedParallelizedSubdivisionMinimumFrameCount
@@ -1077,7 +1090,7 @@ VT_EXPORT const CFStringRef kVTCompressionPropertyKey_RecommendedParallelization
 		See also kVTCompressionPropertyKey_RecommendedParallelizationLimit
 		See also kVTCompressionPropertyKey_RecommendedParallelizedSubdivisionMinimumDuration
 */
-VT_EXPORT const CFStringRef kVTCompressionPropertyKey_RecommendedParallelizedSubdivisionMinimumFrameCount API_AVAILABLE(macosx(14.0)) API_UNAVAILABLE(ios, tvos, watchos); // Read-only, CFNumber<uint64_t>
+VT_EXPORT const CFStringRef kVTCompressionPropertyKey_RecommendedParallelizedSubdivisionMinimumFrameCount API_AVAILABLE(macos(14.0)) API_UNAVAILABLE(ios, tvos, watchos, visionos); // Read-only, CFNumber<uint64_t>
 
 /*!
 	@constant	kVTCompressionPropertyKey_RecommendedParallelizedSubdivisionMinimumDuration
@@ -1088,7 +1101,7 @@ VT_EXPORT const CFStringRef kVTCompressionPropertyKey_RecommendedParallelizedSub
 		See also kVTCompressionPropertyKey_RecommendedParallelizationLimit
 		See also kVTCompressionPropertyKey_RecommendedParallelizedSubdivisionMinimumFrameCount
 */
-VT_EXPORT const CFStringRef kVTCompressionPropertyKey_RecommendedParallelizedSubdivisionMinimumDuration API_AVAILABLE(macosx(14.0)) API_UNAVAILABLE(ios, tvos, watchos); // Read-only, CMTime as CFDictionary
+VT_EXPORT const CFStringRef kVTCompressionPropertyKey_RecommendedParallelizedSubdivisionMinimumDuration API_AVAILABLE(macos(14.0)) API_UNAVAILABLE(ios, tvos, watchos, visionos); // Read-only, CMTime as CFDictionary
 
 /*!
 	@constant	kVTCompressionPropertyKey_PreserveDynamicHDRMetadata
@@ -1100,7 +1113,7 @@ VT_EXPORT const CFStringRef kVTCompressionPropertyKey_RecommendedParallelizedSub
 		dynamic HDR metadata for the pixel buffer, if the HDR format is supported.
 */
 VT_EXPORT const CFStringRef kVTCompressionPropertyKey_PreserveDynamicHDRMetadata // CFBoolean, Write, Optional
-							API_AVAILABLE(macosx(11.0), ios(14.0), tvos(14.0));
+							API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 /*!
 	@constant	kVTVideoEncoderSpecification_EnableLowLatencyRateControl
@@ -1118,7 +1131,7 @@ VT_EXPORT const CFStringRef kVTCompressionPropertyKey_PreserveDynamicHDRMetadata
 			kVTCompressionPropertyKey_BaseLayerFrameRateFraction
 			kVTEncodeFrameOptionKey_ForceKeyFrame
 */
-VT_EXPORT const CFStringRef kVTVideoEncoderSpecification_EnableLowLatencyRateControl API_AVAILABLE(macosx(11.3), ios(14.5), tvos(14.5)); // Read/write, CFBoolean, Optional
+VT_EXPORT const CFStringRef kVTVideoEncoderSpecification_EnableLowLatencyRateControl API_AVAILABLE(macos(11.3), ios(14.5), tvos(14.5), visionos(1.0)) API_UNAVAILABLE(watchos); // Read/write, CFBoolean, Optional
 
 /*!
 	@constant	kVTCompressionPropertyKey_MaxAllowedFrameQP
@@ -1130,7 +1143,7 @@ VT_EXPORT const CFStringRef kVTVideoEncoderSpecification_EnableLowLatencyRateCon
 		This is not supported in all encoders or in all encoder operating modes. kVTPropertyNotSupportedErr will be
 		returned when this option is not supported.
 */
-VT_EXPORT const CFStringRef kVTCompressionPropertyKey_MaxAllowedFrameQP API_AVAILABLE(macosx(12.0), ios(15.0), tvos(15.0)); // Read/write, CFNumberRef, Optional
+VT_EXPORT const CFStringRef kVTCompressionPropertyKey_MaxAllowedFrameQP API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), visionos(1.0)) API_UNAVAILABLE(watchos); // Read/write, CFNumberRef, Optional
 
 /*!
 	@constant	kVTCompressionPropertyKey_MinAllowedFrameQP
@@ -1142,7 +1155,7 @@ VT_EXPORT const CFStringRef kVTCompressionPropertyKey_MaxAllowedFrameQP API_AVAI
 		This is not supported in all encoders or in all encoder operating modes. kVTPropertyNotSupportedErr will be
 		returned when this option is not supported.
 */
-VT_EXPORT const CFStringRef kVTCompressionPropertyKey_MinAllowedFrameQP API_AVAILABLE(macosx(13.0), ios(16.0), tvos(16.0)); // Read/write, CFNumberRef, Optional
+VT_EXPORT const CFStringRef kVTCompressionPropertyKey_MinAllowedFrameQP API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0), visionos(1.0)) API_UNAVAILABLE(watchos); // Read/write, CFNumberRef, Optional
 
 /*!
 	@constant	kVTCompressionPropertyKey_EnableLTR
@@ -1163,7 +1176,7 @@ VT_EXPORT const CFStringRef kVTCompressionPropertyKey_MinAllowedFrameQP API_AVAI
 			kVTEncodeFrameOptionKey_ForceLTRRefresh
 			kVTSampleAttachmentKey_RequireLTRAcknowledgementToken
 */
-VT_EXPORT const CFStringRef kVTCompressionPropertyKey_EnableLTR API_AVAILABLE(macosx(12.0), ios(15.0), tvos(15.0)); // Read/write, CFBoolean, Optional
+VT_EXPORT const CFStringRef kVTCompressionPropertyKey_EnableLTR API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), visionos(1.0)) API_UNAVAILABLE(watchos); // Read/write, CFBoolean, Optional
 
 /*!
 	@constant	kVTEncodeFrameOptionKey_AcknowledgedLTRTokens
@@ -1178,7 +1191,7 @@ VT_EXPORT const CFStringRef kVTCompressionPropertyKey_EnableLTR API_AVAILABLE(ma
 		kVTEncodeFrameOptionKey_ForceLTRRefresh
 		kVTSampleAttachmentKey_RequireLTRAcknowledgementToken
 */
-VT_EXPORT const CFStringRef kVTEncodeFrameOptionKey_AcknowledgedLTRTokens API_AVAILABLE(macosx(12.0), ios(15.0), tvos(15.0)); // CFArray[CFNumberRef], Optional
+VT_EXPORT const CFStringRef kVTEncodeFrameOptionKey_AcknowledgedLTRTokens API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), visionos(1.0)) API_UNAVAILABLE(watchos); // CFArray[CFNumberRef], Optional
 
 /*!
 	@constant	kVTEncodeFrameOptionKey_ForceLTRRefresh
@@ -1193,7 +1206,7 @@ VT_EXPORT const CFStringRef kVTEncodeFrameOptionKey_AcknowledgedLTRTokens API_AV
 			kVTEncodeFrameOptionKey_AcknowledgedLTRTokens
 			kVTSampleAttachmentKey_RequireLTRAcknowledgementToken
 */
-VT_EXPORT const CFStringRef kVTEncodeFrameOptionKey_ForceLTRRefresh API_AVAILABLE(macosx(12.0), ios(15.0), tvos(15.0)); // CFNumberRef, Optional
+VT_EXPORT const CFStringRef kVTEncodeFrameOptionKey_ForceLTRRefresh API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), visionos(1.0)) API_UNAVAILABLE(watchos); // CFNumberRef, Optional
 
 /*!
 	@constant	kVTSampleAttachmentKey_RequireLTRAcknowledgementToken
@@ -1208,7 +1221,7 @@ VT_EXPORT const CFStringRef kVTEncodeFrameOptionKey_ForceLTRRefresh API_AVAILABL
 			kVTEncodeFrameOptionKey_AcknowledgedLTRTokens
 			kVTEncodeFrameOptionKey_ForceLTRRefresh
 */
-VT_EXPORT const CFStringRef kVTSampleAttachmentKey_RequireLTRAcknowledgementToken API_AVAILABLE(macosx(12.0), ios(15.0), tvos(15.0)); // CFNumberRef, Optional
+VT_EXPORT const CFStringRef kVTSampleAttachmentKey_RequireLTRAcknowledgementToken API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), visionos(1.0)) API_UNAVAILABLE(watchos); // CFNumberRef, Optional
 
 #pragma mark Multi-image compression
 
@@ -1221,7 +1234,7 @@ VT_EXPORT const CFStringRef kVTSampleAttachmentKey_RequireLTRAcknowledgementToke
         The property value is a CFArray containing VideoLayerIDs as CFNumbers.
         The property is NULL by default.
  */
-VT_EXPORT const CFStringRef kVTCompressionPropertyKey_MVHEVCVideoLayerIDs API_AVAILABLE(macos(14.0), ios(17.0)) API_UNAVAILABLE(tvos, watchos); // Read/write, CFArray(CFNumber), Optional
+VT_EXPORT const CFStringRef kVTCompressionPropertyKey_MVHEVCVideoLayerIDs API_AVAILABLE(macos(14.0), ios(17.0), visionos(1.0)) API_UNAVAILABLE(tvos, watchos); // Read/write, CFArray(CFNumber), Optional
 
 /*!
     @constant	kVTCompressionPropertyKey_MVHEVCViewIDs
@@ -1233,7 +1246,7 @@ VT_EXPORT const CFStringRef kVTCompressionPropertyKey_MVHEVCVideoLayerIDs API_AV
         The entries in this array should be in the same order and have the same count as the value set via kVTCompressionPropertyKey_MVHEVCVideoLayerIDs.
         The property is NULL by default.
  */
-VT_EXPORT const CFStringRef kVTCompressionPropertyKey_MVHEVCViewIDs API_AVAILABLE(macos(14.0), ios(17.0)) API_UNAVAILABLE(tvos, watchos); // Read/write, CFArray(CFNumber), Optional
+VT_EXPORT const CFStringRef kVTCompressionPropertyKey_MVHEVCViewIDs API_AVAILABLE(macos(14.0), ios(17.0), visionos(1.0)) API_UNAVAILABLE(tvos, watchos); // Read/write, CFArray(CFNumber), Optional
 
 /*!
     @constant	kVTCompressionPropertyKey_MVHEVCLeftAndRightViewIDs
@@ -1245,7 +1258,7 @@ VT_EXPORT const CFStringRef kVTCompressionPropertyKey_MVHEVCViewIDs API_AVAILABL
         The property value is a CFArray containing two ViewIDs as CFNumbers with the first correspponding to the left eye and the second corresponding to the right eye.
         The property is NULL by default.
  */
-VT_EXPORT const CFStringRef kVTCompressionPropertyKey_MVHEVCLeftAndRightViewIDs API_AVAILABLE(macos(14.0), ios(17.0)) API_UNAVAILABLE(tvos, watchos); // Read/write, CFArray[CFNumber(left view ID), CFNumber(right view ID)], Optional
+VT_EXPORT const CFStringRef kVTCompressionPropertyKey_MVHEVCLeftAndRightViewIDs API_AVAILABLE(macos(14.0), ios(17.0), visionos(1.0)) API_UNAVAILABLE(tvos, watchos); // Read/write, CFArray[CFNumber(left view ID), CFNumber(right view ID)], Optional
 
 #pragma mark VideoExtendedUsage signaling
 
@@ -1256,7 +1269,7 @@ VT_EXPORT const CFStringRef kVTCompressionPropertyKey_MVHEVCLeftAndRightViewIDs 
     @discussion
         The value will be set on the format description for output samples and may affect the decoded frame presentation.
  */
-VT_EXPORT const CFStringRef kVTCompressionPropertyKey_HeroEye API_AVAILABLE(macos(14.0), ios(17.0)) API_UNAVAILABLE(tvos, watchos);	// CFString, see kCMFormatDescriptionExtension_HeroEye
+VT_EXPORT const CFStringRef kVTCompressionPropertyKey_HeroEye API_AVAILABLE(macos(14.0), ios(17.0), visionos(1.0)) API_UNAVAILABLE(tvos, watchos);	// CFString, see kCMFormatDescriptionExtension_HeroEye
 
 /*!
 	@constant	kVTCompressionPropertyKey_StereoCameraBaseline
@@ -1265,7 +1278,7 @@ VT_EXPORT const CFStringRef kVTCompressionPropertyKey_HeroEye API_AVAILABLE(maco
     @discussion
         The value will be set on the format description for output samples and may affect the decoded frame presentation.
  */
-VT_EXPORT const CFStringRef kVTCompressionPropertyKey_StereoCameraBaseline API_AVAILABLE(macos(14.0), ios(17.0)) API_UNAVAILABLE(tvos, watchos);	// CFNumber(uint32), see kCMFormatDescriptionExtension_StereoCameraBaseline
+VT_EXPORT const CFStringRef kVTCompressionPropertyKey_StereoCameraBaseline API_AVAILABLE(macos(14.0), ios(17.0), visionos(1.0)) API_UNAVAILABLE(tvos, watchos);	// CFNumber(uint32), see kCMFormatDescriptionExtension_StereoCameraBaseline
 
 /*!
     @constant	kVTCompressionPropertyKey_HorizontalDisparityAdjustment
@@ -1275,7 +1288,7 @@ VT_EXPORT const CFStringRef kVTCompressionPropertyKey_StereoCameraBaseline API_A
         The value will be set on the format description for output samples and may affect the decoded frame presentation.
  */
 
-VT_EXPORT const CFStringRef kVTCompressionPropertyKey_HorizontalDisparityAdjustment API_AVAILABLE(macos(14.0), ios(17.0)) API_UNAVAILABLE(tvos, watchos);	// CFNumber(int32), see kCMFormatDescriptionExtension_HorizontalDisparityAdjustment
+VT_EXPORT const CFStringRef kVTCompressionPropertyKey_HorizontalDisparityAdjustment API_AVAILABLE(macos(14.0), ios(17.0), visionos(1.0)) API_UNAVAILABLE(tvos, watchos);	// CFNumber(int32), see kCMFormatDescriptionExtension_HorizontalDisparityAdjustment
 
 /*!
     @constant    kVTCompressionPropertyKey_HasLeftStereoEyeView
@@ -1284,7 +1297,7 @@ VT_EXPORT const CFStringRef kVTCompressionPropertyKey_HorizontalDisparityAdjustm
     @discussion
         The value will be set on the format description for output samples and may affect the decoded frame presentation.
  */
-VT_EXPORT const CFStringRef kVTCompressionPropertyKey_HasLeftStereoEyeView API_AVAILABLE(macos(14.0), ios(17.0)) API_UNAVAILABLE(tvos, watchos);  // CFBoolean, see kCMFormatDescriptionExtension_HasLeftStereoEyeView
+VT_EXPORT const CFStringRef kVTCompressionPropertyKey_HasLeftStereoEyeView API_AVAILABLE(macos(14.0), ios(17.0), visionos(1.0)) API_UNAVAILABLE(tvos, watchos);  // CFBoolean, see kCMFormatDescriptionExtension_HasLeftStereoEyeView
 
 /*!
     @constant    kVTCompressionPropertyKey_HasRightStereoEyeView
@@ -1293,7 +1306,7 @@ VT_EXPORT const CFStringRef kVTCompressionPropertyKey_HasLeftStereoEyeView API_A
     @discussion
         The value will be set on the format description for output samples and may affect the decoded frame presentation.
  */
-VT_EXPORT const CFStringRef kVTCompressionPropertyKey_HasRightStereoEyeView API_AVAILABLE(macos(14.0), ios(17.0)) API_UNAVAILABLE(tvos, watchos);  // CFBoolean, see kCMFormatDescriptionExtension_HasRightStereoEyeView
+VT_EXPORT const CFStringRef kVTCompressionPropertyKey_HasRightStereoEyeView API_AVAILABLE(macos(14.0), ios(17.0), visionos(1.0)) API_UNAVAILABLE(tvos, watchos);  // CFBoolean, see kCMFormatDescriptionExtension_HasRightStereoEyeView
 
 /*!
     @constant    kVTCompressionPropertyKey_HorizontalFieldOfView
@@ -1303,7 +1316,55 @@ VT_EXPORT const CFStringRef kVTCompressionPropertyKey_HasRightStereoEyeView API_
     The value is a CFNumber holding an unsigned 32-bit integer that is interpreted in millidegree or thousandths of a degree (e.g., 123456 is 123.456 degree).
     This property is optional and should only be specified if the field of view is known.
 */
-VT_EXPORT const CFStringRef kVTCompressionPropertyKey_HorizontalFieldOfView API_AVAILABLE(macos(14.4), ios(17.4)) API_UNAVAILABLE(tvos, watchos);     // CFNumber(uint32) as millidegrees
+VT_EXPORT const CFStringRef kVTCompressionPropertyKey_HorizontalFieldOfView API_AVAILABLE(macos(14.4), ios(17.4), visionos(1.1)) API_UNAVAILABLE(tvos, watchos);     // CFNumber(uint32) as millidegrees
+
+/*!
+	@constant	kVTCompressionPropertyKey_ProjectionKind
+	@abstract
+		Specifies the value of kCMFormatDescriptionExtension_ProjectionKind.
+	@discussion
+		The value will be set on the format description for output samples and may affect the decoded frame presentation.
+ */
+VT_EXPORT const CFStringRef kVTCompressionPropertyKey_ProjectionKind API_AVAILABLE(macos(15.0), ios(18.0), visionos(2.0)) API_UNAVAILABLE(tvos, watchos);  // CFString, see kCMFormatDescriptionExtension_ProjectionKind.
+
+/*!
+	@constant	kVTCompressionPropertyKey_ViewPackingKind
+	@abstract
+		Specifies the value of kCMFormatDescriptionExtension_ViewPackingKind.
+	@discussion
+		The value will be set on the format description for output samples and may affect the decoded frame presentation.
+ */
+VT_EXPORT const CFStringRef kVTCompressionPropertyKey_ViewPackingKind API_AVAILABLE(macos(15.0), ios(18.0), visionos(2.0)) API_UNAVAILABLE(tvos, watchos); // CFString, see kCMFormatDescriptionExtension_ViewPackingKind.
+	
+/*!
+    @constant	kVTCompressionPropertyKey_SuggestedLookAheadFrameCount
+	@abstract
+		Requests that the encoder retain the specified number of frames during encoding. These frames will be used for additional analysis and statistics
+		gathering before the frame is finally encoded at the end of the window. When this property is not set, video encoder will automatically determine
+		the number of lookahead frames.
+	@discussion
+		Encoder will choose number of lookahead frames closer to the suggested value based on internal configuration. This property directly affects latency
+		of the video encoder. The following properties also affect look ahead frames:
+		1. Value of this property must be less than or equal to `kVTCompressionPropertyKey_MaxFrameDelayCount`.
+		2. This property is ignored when `VTVideoEncoderSpecification_EnableLowLatencyRateControl` is set to true
+		3. This property is ignored when `kVTCompressionPropertyKey_Quality` is set to 1.0
+		4. This property can not be used in conjunction with multi-pass feature (`kVTCompressionPropertyKey_MultiPassStorage`)
+*/
+VT_EXPORT const CFStringRef kVTCompressionPropertyKey_SuggestedLookAheadFrameCount API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, tvos, watchos, visionos); // Read/write, CFNumberRef, Optional
+
+/*!
+	@constant	kVTCompressionPropertyKey_SpatialAdaptiveQPLevel
+	@abstract
+		Control spatial adaptation of the quantization parameter (QP) based on per-frame statistics.
+		If set to kVTAdaptiveQPLevel_Disable, spatial QP adaptation is not applied based on per-frame statistics.
+		If set to kVTAdaptiveQPLevel_Default, video encoder is allowed to apply spatial QP adaptation for each macro block (or coding unit) within a video frame.
+ 		QP adaptation is based on spatial characteristics of a frame and the level of spatial QP adaptation is decided internally by the rate controller.
+*/
+VT_EXPORT const CFStringRef kVTCompressionPropertyKey_SpatialAdaptiveQPLevel API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, tvos, watchos, visionos); // Read/write, CFNumberRef, Optional
+enum {
+	kVTQPModulationLevel_Default = -1,
+	kVTQPModulationLevel_Disable = 0,
+};
 
 	
 CM_ASSUME_NONNULL_END

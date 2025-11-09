@@ -19,8 +19,13 @@ NS_HEADER_AUDIT_BEGIN(nullability, sendability)
  * @brief This class is used to discover new accessories in the home
  *        that have never been paired with and therefore not part of the home.
  */
-HM_EXTERN NS_SWIFT_SENDABLE API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(macos, watchos, tvos, macCatalyst)
-    @interface HMAccessoryBrowser : NSObject
+HM_EXTERN
+NS_SWIFT_SENDABLE
+API_AVAILABLE(ios(8.0))
+API_UNAVAILABLE(macos, watchos, tvos, macCatalyst)
+@interface HMAccessoryBrowser : NSObject
+
+- (instancetype)init;
 
 /*!
  * @brief Delegate that receives updates on the state of the accessories discovered.

@@ -2,11 +2,11 @@
 //  HKQueryAnchor.h
 //  HealthKit
 //
-//  Copyright © 2019-2022 Apple. All rights reserved.
+//  Copyright © 2019-2024 Apple. All rights reserved.
 //
 
-#import <HealthKit/HKDefines.h>
 #import <Foundation/Foundation.h>
+#import <HealthKit/HKDefines.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
  @class         HKQueryAnchor
  @discussion    This object encapsulates the state of an HKAnchoredObjectQuery
  */
-HK_EXTERN API_AVAILABLE(ios(9.0), watchos(2.0), macCatalyst(13.0), macos(13.0))
+HK_EXTERN API_AVAILABLE(ios(9.0), watchos(2.0), macCatalyst(13.0), macos(13.0)) NS_SWIFT_SENDABLE
 @interface HKQueryAnchor : NSObject <NSSecureCoding, NSCopying>
 
 /*!

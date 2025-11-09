@@ -23,11 +23,11 @@ typedef NS_ENUM(NSInteger, UISegmentedControlStyle) {
     UISegmentedControlStyleBordered,  // large bordered
     UISegmentedControlStyleBar,       // small button/nav bar style. tintable
     UISegmentedControlStyleBezeled,   // DEPRECATED. Do not use this style.
-} API_DEPRECATED("The segmentedControlStyle property no longer has any effect", ios(2.0, 7.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos);
+} API_DEPRECATED("The segmentedControlStyle property no longer has any effect", ios(2.0, 7.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(visionos, watchos);
 
 enum {
     UISegmentedControlNoSegment = -1   // segment index for no selected segment
-};
+} API_UNAVAILABLE(watchos);
 
 typedef NS_ENUM(NSInteger, UISegmentedControlSegment) {
     UISegmentedControlSegmentAny = 0,
@@ -35,11 +35,11 @@ typedef NS_ENUM(NSInteger, UISegmentedControlSegment) {
     UISegmentedControlSegmentCenter = 2, // Any segment between the left and rightmost segments. Only applies when numSegments > 2.
     UISegmentedControlSegmentRight = 3,  // The capped,rightmost segment. Only applies when numSegments > 1.
     UISegmentedControlSegmentAlone = 4,  // The standalone segment, capped on both ends. Only applies when numSegments = 1.
-};
+} API_UNAVAILABLE(watchos);
 
 @class UIImage, UIColor;
 
-UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(2.0)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @interface UISegmentedControl : UIControl <NSCoding>
 
 - (instancetype)initWithFrame:(CGRect)frame NS_DESIGNATED_INITIALIZER;
@@ -49,18 +49,18 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
 - (instancetype)initWithItems:(nullable NSArray *)items NS_DESIGNATED_INITIALIZER;
 
 /// Initializes the segmented control with the given frame and segments constructed from the given UIActions. Segments will prefer images over titles when both are provided. Selecting a segment calls UIAction.actionHandler as well as handlers for the ValueChanged and PrimaryActionTriggered control events.
-- (instancetype)initWithFrame:(CGRect)frame actions:(NSArray<UIAction *> *)actions API_AVAILABLE(ios(14.0));
+- (instancetype)initWithFrame:(CGRect)frame actions:(NSArray<UIAction *> *)actions API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos);
 
 /// Insert a segment with the given action at the given index. Segments will prefer images over titles when both are provided. When the segment is selected UIAction.actionHandler is called. If a segment already exists with the action's identifier that segment will either be updated (if the index is the same) or it will be removed (if different).
-- (void)insertSegmentWithAction:(UIAction *)action atIndex:(NSUInteger)segment animated:(BOOL)animated API_AVAILABLE(ios(14.0));
+- (void)insertSegmentWithAction:(UIAction *)action atIndex:(NSUInteger)segment animated:(BOOL)animated API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos);
 /// Reconfigures the given segment with this action. Segments will prefer images over titles when both are provided. When the segment is selected UIAction.actionHandler is called. UIAction.identifier must either match the action of the existing segment at this index, or be unique within all actions associated with the segmented control, or this method will assert.
-- (void)setAction:(UIAction *)action forSegmentAtIndex:(NSUInteger)segment API_AVAILABLE(ios(14.0));
+- (void)setAction:(UIAction *)action forSegmentAtIndex:(NSUInteger)segment API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos);
 /// Fetch the action for the given segment, if one has been assigned to that segment
-- (nullable UIAction *)actionForSegmentAtIndex:(NSUInteger)segment API_AVAILABLE(ios(14.0));
+- (nullable UIAction *)actionForSegmentAtIndex:(NSUInteger)segment API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos);
 /// Returns the index of the segment associated with the given actionIdentifier, or NSNotFound if the identifier could not be found.
-- (NSInteger)segmentIndexForActionIdentifier:(UIActionIdentifier)actionIdentifier API_AVAILABLE(ios(14.0));
+- (NSInteger)segmentIndexForActionIdentifier:(UIActionIdentifier)actionIdentifier API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos);
 
-@property(nonatomic) UISegmentedControlStyle segmentedControlStyle API_DEPRECATED("The segmentedControlStyle property no longer has any effect", ios(2.0, 7.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos);
+@property(nonatomic) UISegmentedControlStyle segmentedControlStyle API_DEPRECATED("The segmentedControlStyle property no longer has any effect", ios(2.0, 7.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(visionos, watchos);
 @property(nonatomic,getter=isMomentary) BOOL momentary;             // if set, then we don't keep showing selected state after tracking ends. default is NO
 @property(nonatomic,readonly) NSUInteger numberOfSegments;
 
@@ -92,7 +92,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
 @property(nonatomic) NSInteger selectedSegmentIndex;
 
 // The color to use for highlighting the currently selected segment.
-@property(nullable, nonatomic, strong) UIColor *selectedSegmentTintColor API_AVAILABLE(ios(13.0)) UI_APPEARANCE_SELECTOR;
+@property(nullable, nonatomic, strong) UIColor *selectedSegmentTintColor API_AVAILABLE(ios(13.0)) UI_APPEARANCE_SELECTOR API_UNAVAILABLE(watchos);
 
 /* If backgroundImage is an image returned from -[UIImage resizableImageWithCapInsets:] the cap widths will be calculated from that information, otherwise, the cap width will be calculated by subtracting one from the image's width then dividing by 2. The cap widths will also be used as the margins for text placement. To adjust the margin use the margin adjustment methods.
  

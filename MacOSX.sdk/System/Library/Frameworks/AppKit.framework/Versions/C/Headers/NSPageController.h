@@ -1,7 +1,7 @@
 /*
  NSPageController.h
  Application Kit
- Copyright (c) 2011-2023, Apple Inc.
+ Copyright (c) 2011-2024, Apple Inc.
  All rights reserved.
  */
 

@@ -27,7 +27,7 @@ typedef NS_ENUM(NSInteger, UISearchControllerScopeBarActivation) {
 
 @class UISearchController;
 
-NS_SWIFT_UI_ACTOR
+API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @protocol UISearchControllerDelegate <NSObject>
 @optional
 // These methods are called when automatic presentation or dismissal occurs. They will not be called if you present or dismiss the search controller yourself.
@@ -45,7 +45,7 @@ NS_SWIFT_UI_ACTOR
 
 @protocol UISearchSuggestion;
 
-NS_SWIFT_UI_ACTOR
+API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @protocol UISearchResultsUpdating <NSObject>
 @required
 // Called when the search bar's text or scope has changed or when the search bar becomes first responder.
@@ -55,7 +55,7 @@ NS_SWIFT_UI_ACTOR
 - (void)updateSearchResultsForSearchController:(nonnull UISearchController *)searchController selectingSearchSuggestion:(nonnull id<UISearchSuggestion>)searchSuggestion API_AVAILABLE(tvos(14.0), ios(16.0)) API_UNAVAILABLE(watchos);
 @end
 
-UIKIT_EXTERN API_AVAILABLE(ios(8.0)) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @interface UISearchController : UIViewController <UIViewControllerTransitioningDelegate, UIViewControllerAnimatedTransitioning>
 
 // Pass nil if you wish to display search results in the same view that you are searching. This is not supported on tvOS; please provide a results controller on tvOS.
@@ -73,7 +73,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(8.0)) NS_SWIFT_UI_ACTOR
 @property (nonatomic, assign, getter = isActive) BOOL active;
 
 @property (nullable, nonatomic, weak) id <UISearchControllerDelegate> delegate;
-@property (nonatomic, assign) BOOL dimsBackgroundDuringPresentation API_UNAVAILABLE(tvos) API_DEPRECATED_WITH_REPLACEMENT("obscuresBackgroundDuringPresentation", ios(8.0,12.0)) API_UNAVAILABLE(visionos); // default is YES, and has the same behavior as obscuresBackgroundDuringPresentation.
+@property (nonatomic, assign) BOOL dimsBackgroundDuringPresentation API_DEPRECATED_WITH_REPLACEMENT("obscuresBackgroundDuringPresentation", ios(8.0, 12.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(visionos, watchos); // default is YES, and has the same behavior as obscuresBackgroundDuringPresentation.
 
 /* On iOS, default is NO for apps linked on iOS 15.0 and later, YES otherwise.
  On tvOS, default is NO when contained in UISearchContainerViewController, YES otherwise.
@@ -89,8 +89,8 @@ UIKIT_EXTERN API_AVAILABLE(ios(8.0)) NS_SWIFT_UI_ACTOR
 // For inspecting the current placement of the search bar when the search controller has been assigned to a UINavigationItem
 @property (nonatomic, readonly) UINavigationItemSearchBarPlacement searchBarPlacement API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(tvos, watchos);
 
-@property (nonatomic) BOOL automaticallyShowsSearchResultsController API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(tvos); // When true, UISearchController will automatically show its results controller based on the contents of its text property. Defaults to true. Setting the showsSearchResultsController property will change this property to false.
-@property (nonatomic) BOOL showsSearchResultsController API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(tvos); // Set this property to directly control the visibility of the search results controller. Setting this property changes the automaticallyShowsSearchResultsController property to false.
+@property (nonatomic) BOOL automaticallyShowsSearchResultsController API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos) API_UNAVAILABLE(tvos); // When true, UISearchController will automatically show its results controller based on the contents of its text property. Defaults to true. Setting the showsSearchResultsController property will change this property to false.
+@property (nonatomic) BOOL showsSearchResultsController API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos) API_UNAVAILABLE(tvos); // Set this property to directly control the visibility of the search results controller. Setting this property changes the automaticallyShowsSearchResultsController property to false.
 
 /* By default, UISearchController will show the search bar's cancel button when 
  search becomes active and hide it when search is dismissed.
@@ -101,7 +101,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(8.0)) NS_SWIFT_UI_ACTOR
  Additionally, setting the showsCancelButton property on the searchController's searchBar
  will change the UISearchController's automaticallyShowsCancelButton property to NO.
  */
-@property (nonatomic) BOOL automaticallyShowsCancelButton API_AVAILABLE(ios(13.0)); // Default YES
+@property (nonatomic) BOOL automaticallyShowsCancelButton API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos); // Default YES
 
 /* By default, UISearchController will show the search bar's scope bar 
  (when there are at least two scope button titles for the search bar)
@@ -115,7 +115,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(8.0)) NS_SWIFT_UI_ACTOR
  
  On iOS, this will be fully deprecated in a future release in favor of `scopeBarActivation`
  */
-@property (nonatomic) BOOL automaticallyShowsScopeBar API_DEPRECATED("Use scopeBarActivation instead", ios(13.0, API_TO_BE_DEPRECATED), visionos(1.0, API_TO_BE_DEPRECATED)) API_AVAILABLE(tvos(13.0));
+@property (nonatomic) BOOL automaticallyShowsScopeBar API_AVAILABLE(tvos(13.0)) API_DEPRECATED("Use scopeBarActivation instead", ios(13.0, API_TO_BE_DEPRECATED), visionos(1.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(watchos);
 
 /// Controls if and when the UISearchController shows and hides the scope bar
 /// However, UISearchBar will not show the scope bar if `scopeButtonTitles` contains fewer than two titles

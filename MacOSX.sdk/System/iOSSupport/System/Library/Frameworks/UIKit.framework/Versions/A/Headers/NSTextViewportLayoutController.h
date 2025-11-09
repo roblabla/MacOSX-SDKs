@@ -3,7 +3,7 @@
 //  NSTextViewportLayoutController.h
 //  Text Kit
 //
-//  Copyright (c) 2017-2021, Apple Inc. All rights reserved.
+//  Copyright (c) 2017-2024, Apple Inc. All rights reserved.
 //
 
 #import <Foundation/NSObject.h>
@@ -11,8 +11,8 @@
 
 @class NSTextRange;
 @class NSTextLayoutManager;
-@class NSTextLayoutFragment;
 @class NSTextViewportLayoutController;
+@class NSTextLayoutFragment;
 @protocol NSTextLocation;
 
 NS_HEADER_AUDIT_BEGIN(nullability, sendability)
@@ -20,7 +20,7 @@ NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 // A viewport is a rectangular area within a flipped coordinate system expanding along the y-axis. With text contents, lines advance along the expanding direction typically. It defines the active area where text layout fragments laid out. The area corresponds to the user visible area with additional over-scroll region in most cases. NSTextViewportLayoutController manages the layout process inside the viewport interacting with its delegate.
 
 #pragma mark NSTextViewportLayoutControllerDelegate
-API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos)
+API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), visionos(1.0)) API_UNAVAILABLE(watchos)
 @protocol NSTextViewportLayoutControllerDelegate <NSObject>
 #pragma mark Properties
 // The current viewport, typically the view visible bounds with overdraw.
@@ -45,7 +45,7 @@ API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos)
 @end
 
 #pragma mark NSTextViewportLayoutController
-API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos)
+API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), visionos(1.0)) API_UNAVAILABLE(watchos)
 @interface NSTextViewportLayoutController : NSObject
 #pragma mark Initialization
 - (instancetype)initWithTextLayoutManager:(NSTextLayoutManager *)textLayoutManager NS_DESIGNATED_INITIALIZER;

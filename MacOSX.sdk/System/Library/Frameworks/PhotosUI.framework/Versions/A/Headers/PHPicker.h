@@ -28,7 +28,7 @@ typedef NS_ENUM(NSInteger, PHPickerConfigurationAssetRepresentationMode) {
     PHPickerConfigurationAssetRepresentationModeCurrent = 1,
     /// Uses the most compatible representation if possible, even if transcoding is required.
     PHPickerConfigurationAssetRepresentationModeCompatible = 2,
-} API_AVAILABLE(ios(14), macos(13)) API_UNAVAILABLE(watchos) API_UNAVAILABLE(tvos);
+} NS_SWIFT_SENDABLE API_AVAILABLE(ios(14), macos(13)) API_UNAVAILABLE(watchos) API_UNAVAILABLE(tvos);
 
 /// An enum that determines how \c PHPickerViewController handles user selection.
 typedef NS_ENUM(NSInteger, PHPickerConfigurationSelection) {
@@ -40,7 +40,7 @@ typedef NS_ENUM(NSInteger, PHPickerConfigurationSelection) {
     PHPickerConfigurationSelectionContinuous API_AVAILABLE(ios(17), macos(14)) API_UNAVAILABLE(watchos) = 2,
     /// Selection can be delivered continuously and uses the selection order made by the user. Selected assets are numbered.
     PHPickerConfigurationSelectionContinuousAndOrdered API_AVAILABLE(ios(17), macos(14)) API_UNAVAILABLE(watchos) = 3,
-} API_AVAILABLE(ios(15), macos(13)) API_UNAVAILABLE(watchos) API_UNAVAILABLE(tvos);
+} NS_SWIFT_SENDABLE API_AVAILABLE(ios(15), macos(13)) API_UNAVAILABLE(watchos) API_UNAVAILABLE(tvos);
 
 /// An enum that determines the mode of \c PHPickerViewController.
 typedef NS_ENUM(NSInteger, PHPickerMode) {
@@ -111,6 +111,9 @@ API_UNAVAILABLE(watchos)
 
 /// The filter for time-lapse videos.
 @property (nonatomic, class, readonly) PHPickerFilter *timelapseVideosFilter API_AVAILABLE(ios(15));
+
+/// The filter for spatial media.
+@property (nonatomic, class, readonly) PHPickerFilter *spatialMediaFilter API_AVAILABLE(ios(18), macos(15), visionos(2));
 
 /// Returns a new filter based on the asset playback style.
 + (PHPickerFilter *)playbackStyleFilter:(PHAssetPlaybackStyle)playbackStyle API_AVAILABLE(ios(15));

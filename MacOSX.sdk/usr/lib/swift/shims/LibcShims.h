@@ -61,7 +61,7 @@ SWIFT_READONLY
 static inline int _swift_stdlib_memcmp(const void *s1, const void *s2,
                                        __swift_size_t n) {
 // FIXME: Is there a way to identify Glibc specifically?
-#if defined(__gnu_linux__)
+#if (defined(__gnu_linux__) || defined(__ANDROID__)) && !defined(__musl__)
   extern int memcmp(const void * _Nonnull, const void * _Nonnull, __swift_size_t);
 #else
   extern int memcmp(const void * _Null_unspecified, const void * _Null_unspecified, __swift_size_t);
@@ -109,7 +109,7 @@ static inline __swift_size_t _swift_stdlib_malloc_size(const void *ptr) {
 static inline __swift_size_t _swift_stdlib_malloc_size(const void *ptr) {
 #if defined(__ANDROID__)
 #if !defined(__ANDROID_API__) || __ANDROID_API__ >= 17
-  extern __swift_size_t malloc_usable_size(const void *ptr);
+  extern __swift_size_t malloc_usable_size(const void * _Nullable ptr);
 #endif
 #else
   extern __swift_size_t malloc_usable_size(void *ptr);
@@ -171,15 +171,6 @@ long double _stdlib_squareRootl(long double _self) {
   return __builtin_sqrtl(_self);
 }
 #endif
-
-// Apple's math.h does not declare lgamma_r() etc by default, but they're
-// unconditionally exported by libsystem_m.dylib in all OS versions that
-// support Swift development; we simply need to provide declarations here.
-#if defined(__APPLE__)
-float lgammaf_r(float x, int *psigngam);
-double lgamma_r(double x, int *psigngam);
-long double lgammal_r(long double x, int *psigngam);
-#endif // defined(__APPLE__)
 
 #ifdef __cplusplus
 } // extern "C"

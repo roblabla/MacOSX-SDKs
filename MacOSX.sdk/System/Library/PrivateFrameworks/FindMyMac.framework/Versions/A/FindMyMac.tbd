@@ -17,9 +17,8 @@ exports:
                        _FMMSendSyncMessageToHasTRBTool, _FMMSetComputerName, _FMMSetDisplayMessage, 
                        _FMMSetDisplayMessageWithTitle, _FMMSetGoodSamaritanMessage, 
                        _FMMSetToWipeWhenSystemLocked, _FMMSetTokenForAccount, _FMMShowDisplayMessage, 
-                       _FMMSystemHasTRB, _FMMUnlockSystem, _FMMWipeStatus, _FMMXPCDaemonServerConnection, 
-                       _FMMXPCHasTRBServerConnection, _FMMXPCMessengerServerConnection, 
-                       _GetPropertyAsBOOL, _GetPropertyAsInteger, _LogCategory_Unspecified, 
-                       _RunningInRecoveryOS, _SaveBooleanProperty, _SaveDataProperty, 
-                       _SaveIntegerProperty, _SaveStringProperty, _SaveStringPropertyAsData ]
+                       _FMMSystemHasTRB, _FMMUnlockSystem, _FMMWipeStatus, _GetPropertyAsBOOL, 
+                       _GetPropertyAsInteger, _LogCategory_Unspecified, _RunningInRecoveryOS, 
+                       _SaveBooleanProperty, _SaveDataProperty, _SaveIntegerProperty, 
+                       _SaveStringProperty, _SaveStringPropertyAsData ]
 ...

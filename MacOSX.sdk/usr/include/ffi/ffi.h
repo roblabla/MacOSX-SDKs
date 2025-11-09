@@ -51,15 +51,15 @@ extern "C" {
 
 #include <os/availability.h>
 
-/* TODO: Add arm64_32 and armv7k support to support watchOS unconditionally */
+/* watchos: No support for armv7k */
 #ifdef __LP64__
 #define FFI_AVAILABLE_APPLE      API_AVAILABLE(macos(10.0), macCatalyst(13.0)) API_UNAVAILABLE(ios, tvos, watchos)
 #define FFI_AVAILABLE_APPLE_2019 API_AVAILABLE(macos(10.15), macCatalyst(13.0)) API_UNAVAILABLE(ios, tvos, watchos)
 #define FFI_AVAILABLE_APPLE_2019_DEPRECATED_2020 API_DEPRECATED("Deprecated", macos(10.15, 11.0), macCatalyst(13.0, 14.0)) API_UNAVAILABLE(ios, tvos, watchos)
 #else
-#define FFI_AVAILABLE_APPLE      API_AVAILABLE(macos(10.0), macCatalyst(13.0)) API_UNAVAILABLE(ios, tvos) API_UNAVAILABLE(watchos)
-#define FFI_AVAILABLE_APPLE_2019 API_AVAILABLE(macos(10.15), macCatalyst(13.0)) API_UNAVAILABLE(ios, tvos) API_UNAVAILABLE(watchos)
-#define FFI_AVAILABLE_APPLE_2019_DEPRECATED_2020 API_DEPRECATED("Deprecated", macos(10.15, 11.0), macCatalyst(13.0, 14.0)) API_UNAVAILABLE(ios, tvos) API_UNAVAILABLE(watchos)
+#define FFI_AVAILABLE_APPLE      API_AVAILABLE(macos(10.0), macCatalyst(13.0)) API_UNAVAILABLE(ios, tvos, watchos)
+#define FFI_AVAILABLE_APPLE_2019 API_AVAILABLE(macos(10.15), macCatalyst(13.0)) API_UNAVAILABLE(ios, tvos, watchos)
+#define FFI_AVAILABLE_APPLE_2019_DEPRECATED_2020 API_DEPRECATED("Deprecated", macos(10.15, 11.0), macCatalyst(13.0, 14.0)) API_UNAVAILABLE(ios, tvos, watchos)
 #endif
 
 /* Specify which architecture libffi is configured for. */

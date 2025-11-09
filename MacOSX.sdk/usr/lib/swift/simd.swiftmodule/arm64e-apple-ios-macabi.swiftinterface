@@ -1,6 +1,6 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.10 (swiftlang-5.10.0.12.5 clang-1500.3.9.1.1)
-// swift-module-flags: -target arm64e-apple-ios17.5-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftsimd -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-bare-slash-regex -user-module-version 18 -module-name simd
+// swift-compiler-version: Apple Swift version 6.0 effective-5.10 (swiftlang-6.0.0.7.24 clang-1600.0.25.1)
+// swift-module-flags: -target arm64e-apple-ios18.0-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftsimd -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-bare-slash-regex -user-module-version 21 -module-name simd
 import Darwin
 import Swift
 import _Concurrency
@@ -4914,6 +4914,246 @@ public func matrix_equal(_ lhs: simd.simd_double4x4, _ rhs: simd.simd_double4x4)
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 @_transparent public func isnormal(_ x: simd.simd_float16) -> simd.simd_int16 {
   return __tg_isnormal(x)
+}
+@available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, *)
+@_transparent public func ceil(_ x: simd.simd_half2) -> simd.simd_half2 {
+    return __tg_ceil(x)
+}
+@available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, *)
+@_transparent public func floor(_ x: simd.simd_half2) -> simd.simd_half2 {
+    return __tg_floor(x)
+}
+@available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, *)
+@_transparent public func trunc(_ x: simd.simd_half2) -> simd.simd_half2 {
+    return __tg_trunc(x)
+}
+@available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, *)
+@_transparent public func rint(_ x: simd.simd_half2) -> simd.simd_half2 {
+    return __tg_rint(x)
+}
+@available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, *)
+@_transparent public func sqrt(_ x: simd.simd_half2) -> simd.simd_half2 {
+    return __tg_sqrt(x)
+}
+@available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, *)
+@_transparent public func abs(_ x: simd.simd_half2) -> simd.simd_half2 {
+    return __tg_fabs(x)
+}
+@available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, *)
+@_transparent public func min(_ x: simd.simd_half2, _ y: simd.simd_half2) -> simd.simd_half2 {
+  return __tg_fmin(x, y)
+}
+@available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, *)
+@_transparent public func max(_ x: simd.simd_half2, _ y: simd.simd_half2) -> simd.simd_half2 {
+  return __tg_fmax(x, y)
+}
+@available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, *)
+@_transparent public func min(_ vector: simd.simd_half2, _ scalar: Swift.Float16) -> simd.simd_half2 {
+  return __tg_fmin(vector, simd_half2(repeating: scalar))
+}
+@available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, *)
+@_transparent public func max(_ vector: simd.simd_half2, _ scalar: Swift.Float16) -> simd.simd_half2 {
+  return __tg_fmax(vector, simd_half2(repeating: scalar))
+}
+@available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, *)
+@_transparent public func ceil(_ x: simd.simd_half3) -> simd.simd_half3 {
+    return __tg_ceil(x)
+}
+@available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, *)
+@_transparent public func floor(_ x: simd.simd_half3) -> simd.simd_half3 {
+    return __tg_floor(x)
+}
+@available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, *)
+@_transparent public func trunc(_ x: simd.simd_half3) -> simd.simd_half3 {
+    return __tg_trunc(x)
+}
+@available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, *)
+@_transparent public func rint(_ x: simd.simd_half3) -> simd.simd_half3 {
+    return __tg_rint(x)
+}
+@available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, *)
+@_transparent public func sqrt(_ x: simd.simd_half3) -> simd.simd_half3 {
+    return __tg_sqrt(x)
+}
+@available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, *)
+@_transparent public func abs(_ x: simd.simd_half3) -> simd.simd_half3 {
+    return __tg_fabs(x)
+}
+@available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, *)
+@_transparent public func min(_ x: simd.simd_half3, _ y: simd.simd_half3) -> simd.simd_half3 {
+  return __tg_fmin(x, y)
+}
+@available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, *)
+@_transparent public func max(_ x: simd.simd_half3, _ y: simd.simd_half3) -> simd.simd_half3 {
+  return __tg_fmax(x, y)
+}
+@available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, *)
+@_transparent public func min(_ vector: simd.simd_half3, _ scalar: Swift.Float16) -> simd.simd_half3 {
+  return __tg_fmin(vector, simd_half3(repeating: scalar))
+}
+@available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, *)
+@_transparent public func max(_ vector: simd.simd_half3, _ scalar: Swift.Float16) -> simd.simd_half3 {
+  return __tg_fmax(vector, simd_half3(repeating: scalar))
+}
+@available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, *)
+@_transparent public func ceil(_ x: simd.simd_half4) -> simd.simd_half4 {
+    return __tg_ceil(x)
+}
+@available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, *)
+@_transparent public func floor(_ x: simd.simd_half4) -> simd.simd_half4 {
+    return __tg_floor(x)
+}
+@available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, *)
+@_transparent public func trunc(_ x: simd.simd_half4) -> simd.simd_half4 {
+    return __tg_trunc(x)
+}
+@available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, *)
+@_transparent public func rint(_ x: simd.simd_half4) -> simd.simd_half4 {
+    return __tg_rint(x)
+}
+@available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, *)
+@_transparent public func sqrt(_ x: simd.simd_half4) -> simd.simd_half4 {
+    return __tg_sqrt(x)
+}
+@available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, *)
+@_transparent public func abs(_ x: simd.simd_half4) -> simd.simd_half4 {
+    return __tg_fabs(x)
+}
+@available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, *)
+@_transparent public func min(_ x: simd.simd_half4, _ y: simd.simd_half4) -> simd.simd_half4 {
+  return __tg_fmin(x, y)
+}
+@available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, *)
+@_transparent public func max(_ x: simd.simd_half4, _ y: simd.simd_half4) -> simd.simd_half4 {
+  return __tg_fmax(x, y)
+}
+@available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, *)
+@_transparent public func min(_ vector: simd.simd_half4, _ scalar: Swift.Float16) -> simd.simd_half4 {
+  return __tg_fmin(vector, simd_half4(repeating: scalar))
+}
+@available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, *)
+@_transparent public func max(_ vector: simd.simd_half4, _ scalar: Swift.Float16) -> simd.simd_half4 {
+  return __tg_fmax(vector, simd_half4(repeating: scalar))
+}
+@available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, *)
+@_transparent public func ceil(_ x: simd.simd_half8) -> simd.simd_half8 {
+    return __tg_ceil(x)
+}
+@available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, *)
+@_transparent public func floor(_ x: simd.simd_half8) -> simd.simd_half8 {
+    return __tg_floor(x)
+}
+@available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, *)
+@_transparent public func trunc(_ x: simd.simd_half8) -> simd.simd_half8 {
+    return __tg_trunc(x)
+}
+@available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, *)
+@_transparent public func rint(_ x: simd.simd_half8) -> simd.simd_half8 {
+    return __tg_rint(x)
+}
+@available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, *)
+@_transparent public func sqrt(_ x: simd.simd_half8) -> simd.simd_half8 {
+    return __tg_sqrt(x)
+}
+@available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, *)
+@_transparent public func abs(_ x: simd.simd_half8) -> simd.simd_half8 {
+    return __tg_fabs(x)
+}
+@available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, *)
+@_transparent public func min(_ x: simd.simd_half8, _ y: simd.simd_half8) -> simd.simd_half8 {
+  return __tg_fmin(x, y)
+}
+@available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, *)
+@_transparent public func max(_ x: simd.simd_half8, _ y: simd.simd_half8) -> simd.simd_half8 {
+  return __tg_fmax(x, y)
+}
+@available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, *)
+@_transparent public func min(_ vector: simd.simd_half8, _ scalar: Swift.Float16) -> simd.simd_half8 {
+  return __tg_fmin(vector, simd_half8(repeating: scalar))
+}
+@available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, *)
+@_transparent public func max(_ vector: simd.simd_half8, _ scalar: Swift.Float16) -> simd.simd_half8 {
+  return __tg_fmax(vector, simd_half8(repeating: scalar))
+}
+@available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, *)
+@_transparent public func ceil(_ x: simd.simd_half16) -> simd.simd_half16 {
+    return __tg_ceil(x)
+}
+@available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, *)
+@_transparent public func floor(_ x: simd.simd_half16) -> simd.simd_half16 {
+    return __tg_floor(x)
+}
+@available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, *)
+@_transparent public func trunc(_ x: simd.simd_half16) -> simd.simd_half16 {
+    return __tg_trunc(x)
+}
+@available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, *)
+@_transparent public func rint(_ x: simd.simd_half16) -> simd.simd_half16 {
+    return __tg_rint(x)
+}
+@available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, *)
+@_transparent public func sqrt(_ x: simd.simd_half16) -> simd.simd_half16 {
+    return __tg_sqrt(x)
+}
+@available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, *)
+@_transparent public func abs(_ x: simd.simd_half16) -> simd.simd_half16 {
+    return __tg_fabs(x)
+}
+@available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, *)
+@_transparent public func min(_ x: simd.simd_half16, _ y: simd.simd_half16) -> simd.simd_half16 {
+  return __tg_fmin(x, y)
+}
+@available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, *)
+@_transparent public func max(_ x: simd.simd_half16, _ y: simd.simd_half16) -> simd.simd_half16 {
+  return __tg_fmax(x, y)
+}
+@available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, *)
+@_transparent public func min(_ vector: simd.simd_half16, _ scalar: Swift.Float16) -> simd.simd_half16 {
+  return __tg_fmin(vector, simd_half16(repeating: scalar))
+}
+@available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, *)
+@_transparent public func max(_ vector: simd.simd_half16, _ scalar: Swift.Float16) -> simd.simd_half16 {
+  return __tg_fmax(vector, simd_half16(repeating: scalar))
+}
+@available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, *)
+@_transparent public func ceil(_ x: simd.simd_half32) -> simd.simd_half32 {
+    return __tg_ceil(x)
+}
+@available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, *)
+@_transparent public func floor(_ x: simd.simd_half32) -> simd.simd_half32 {
+    return __tg_floor(x)
+}
+@available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, *)
+@_transparent public func trunc(_ x: simd.simd_half32) -> simd.simd_half32 {
+    return __tg_trunc(x)
+}
+@available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, *)
+@_transparent public func rint(_ x: simd.simd_half32) -> simd.simd_half32 {
+    return __tg_rint(x)
+}
+@available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, *)
+@_transparent public func sqrt(_ x: simd.simd_half32) -> simd.simd_half32 {
+    return __tg_sqrt(x)
+}
+@available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, *)
+@_transparent public func abs(_ x: simd.simd_half32) -> simd.simd_half32 {
+    return __tg_fabs(x)
+}
+@available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, *)
+@_transparent public func min(_ x: simd.simd_half32, _ y: simd.simd_half32) -> simd.simd_half32 {
+  return __tg_fmin(x, y)
+}
+@available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, *)
+@_transparent public func max(_ x: simd.simd_half32, _ y: simd.simd_half32) -> simd.simd_half32 {
+  return __tg_fmax(x, y)
+}
+@available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, *)
+@_transparent public func min(_ vector: simd.simd_half32, _ scalar: Swift.Float16) -> simd.simd_half32 {
+  return __tg_fmin(vector, simd_half32(repeating: scalar))
+}
+@available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, *)
+@_transparent public func max(_ vector: simd.simd_half32, _ scalar: Swift.Float16) -> simd.simd_half32 {
+  return __tg_fmax(vector, simd_half32(repeating: scalar))
 }
 extension simd.simd_quatf {
   @_transparent public init(ix: Swift.Float, iy: Swift.Float, iz: Swift.Float, r: Swift.Float) {

@@ -1,7 +1,7 @@
 /*
 	NSButtonTouchBarItem.h
 	Application Kit
-	Copyright (c) 2019-2023, Apple Inc.
+	Copyright (c) 2019-2024, Apple Inc.
 	All rights reserved.
 */
 

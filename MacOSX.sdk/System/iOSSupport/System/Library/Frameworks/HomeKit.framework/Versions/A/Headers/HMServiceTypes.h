@@ -224,8 +224,28 @@ HM_EXTERN NSString * const HMServiceTypeHeaterCooler API_AVAILABLE(ios(10.2), wa
 HM_EXTERN NSString * const HMServiceTypeHumidifierDehumidifier API_AVAILABLE(ios(10.2), watchos(3.1.1), tvos(10.1), macCatalyst(14.0)) API_UNAVAILABLE(macos);
 
 /*!
+ * @brief Service type for television.
+ */
+HM_EXTERN NSString * const HMServiceTypeTelevision API_AVAILABLE(ios(18.0), watchos(11.0), tvos(18.0), visionos(2.0)) API_UNAVAILABLE(macos);
+
+/*!
+ * @brief Service type for input source.
+ */
+HM_EXTERN NSString * const HMServiceTypeInputSource API_AVAILABLE(ios(18.0), watchos(11.0), tvos(18.0), visionos(2.0)) API_UNAVAILABLE(macos);
+
+/*!
  * @brief Service type for doorbell.
  */
 HM_EXTERN NSString * const HMServiceTypeDoorbell API_AVAILABLE(ios(10.0), watchos(3.0), tvos(10.0), macCatalyst(14.0)) API_UNAVAILABLE(macos);
+
+/*!
+ * @brief Service type for Wi-Fi router.
+ */
+HM_EXTERN NSString * const HMServiceTypeWiFiRouter API_AVAILABLE(ios(18.0), watchos(11.0), tvos(18.0), visionos(2.0)) API_UNAVAILABLE(macos);
+
+/*!
+ * @brief Service type for Wi-Fi satellite.
+ */
+HM_EXTERN NSString * const HMServiceTypeWiFiSatellite API_AVAILABLE(ios(18.0), watchos(11.0), tvos(18.0), visionos(2.0)) API_UNAVAILABLE(macos);
 
 NS_ASSUME_NONNULL_END

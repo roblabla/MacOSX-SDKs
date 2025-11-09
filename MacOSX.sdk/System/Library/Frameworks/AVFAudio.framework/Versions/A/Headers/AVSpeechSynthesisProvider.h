@@ -29,6 +29,7 @@ NS_ASSUME_NONNULL_BEGIN
  
         An @c AVSpeechSynthesisProviderVoice will surface as an @c AVSpeechSynthesisVoice when using @c AVSpeechSynthesisVoice.speechVoices(). The quality will always be listed as @c .enhanced
  */
+NS_SWIFT_SENDABLE
 API_AVAILABLE(ios(16.0), macos(13.0), watchos(9.0), tvos(16.0)) 
 @interface AVSpeechSynthesisProviderVoice : NSObject <NSSecureCoding, NSCopying>
 
@@ -98,6 +99,7 @@ API_AVAILABLE(ios(16.0), macos(13.0), watchos(9.0), tvos(16.0))
     An @c AVSpeechSynthesisProviderRequest gets delivered to an @c AVSpeechSynthesisProviderAudioUnit in order to synthesize audio.
     This is distinct from an @c AVSpeechUtterance, which is a generic utterance to be spoken.
  */
+NS_SWIFT_SENDABLE
 API_AVAILABLE(ios(16.0), macos(13.0), watchos(9.0), tvos(16.0)) 
 @interface AVSpeechSynthesisProviderRequest : NSObject <NSSecureCoding, NSCopying>
 
@@ -126,6 +128,7 @@ API_AVAILABLE(ios(16.0), macos(13.0), watchos(9.0), tvos(16.0))
  */
 
 #if __has_include(<AudioToolbox/AUAudioUnit.h>)
+NS_SWIFT_NONSENDABLE
 API_AVAILABLE(ios(16.0), macos(13.0), tvos(16.0)) API_UNAVAILABLE(watchos) 
 @interface AVSpeechSynthesisProviderAudioUnit : AUAudioUnit
 

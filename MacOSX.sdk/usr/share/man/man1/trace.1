@@ -209,8 +209,11 @@ Prevent kdebug events from being included in the trace file,
 following a filter description.
 Some events are necessary for particular analysis tools.
 .It Fl Fl prioritize-collection
-Increase the priority of the collection thread,
-at the cost of potentially interfering with the workload being measured.
+Use the highest collection priority possible, or the value specified by
+.Fl Fl collection-priority .
+Potentially interferes with other processes.
+.It Fl Fl collection-priority
+Set priority of collection, potentially interfering with other processes.
 .El
 .
 .Sh AMEND
@@ -267,15 +270,6 @@ and the options that can be passed to them.
 .Bl -tag
 .It Fl Fl experimental
 Show experimental providers.
-.El
-.
-.Sh ENVIRONMENT
-.Bl -tag
-.It Ev KTRACE_PLAN_PATH
-Redirect the tool to search for plans under the directory path set in this variable.
-This requires the
-.Fl Fl experimental
-flag.
 .El
 .
 .Sh KTRACE

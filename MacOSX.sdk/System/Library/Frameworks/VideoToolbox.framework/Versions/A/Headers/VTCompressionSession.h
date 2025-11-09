@@ -83,7 +83,7 @@ typedef void (*VTCompressionOutputCallback)(
 		void * CM_NULLABLE sourceFrameRefCon, 
 		OSStatus status, 
 		VTEncodeInfoFlags infoFlags,
-		CM_NULLABLE CMSampleBufferRef sampleBuffer );
+		CM_NULLABLE CMSampleBufferRef sampleBuffer ) API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos);
 	
 CM_ASSUME_NONNULL_BEGIN
 		
@@ -97,7 +97,7 @@ CM_ASSUME_NONNULL_BEGIN
 		The EncoderID CFString may be obtained from the kVTVideoEncoderList_EncoderID entry in
 		the array returned by VTCopyVideoEncoderList.
 */
-VT_EXPORT const CFStringRef kVTVideoEncoderSpecification_EncoderID API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2)); // CFString
+VT_EXPORT const CFStringRef kVTVideoEncoderSpecification_EncoderID API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos); // CFString
 
 CM_ASSUME_NONNULL_END
 
@@ -149,7 +149,7 @@ VTCompressionSessionCreate(
 	CM_NULLABLE CFAllocatorRef							compressedDataAllocator,
 	CM_NULLABLE VTCompressionOutputCallback				outputCallback,
 	void * CM_NULLABLE									outputCallbackRefCon,
-	CM_RETURNS_RETAINED_PARAMETER CM_NULLABLE VTCompressionSessionRef * CM_NONNULL compressionSessionOut) API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2));
+	CM_RETURNS_RETAINED_PARAMETER CM_NULLABLE VTCompressionSessionRef * CM_NONNULL compressionSessionOut) API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 CF_IMPLICIT_BRIDGING_ENABLED
 	
@@ -164,14 +164,14 @@ CF_IMPLICIT_BRIDGING_ENABLED
     	Calling VTCompressionSessionInvalidate ensures a deterministic, orderly teardown.
 */
 VT_EXPORT void 
-VTCompressionSessionInvalidate( CM_NONNULL VTCompressionSessionRef session ) API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2));
+VTCompressionSessionInvalidate( CM_NONNULL VTCompressionSessionRef session ) API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 /*!
 	@function VTCompressionSessionGetTypeID
 	@abstract Returns the CFTypeID for compression sessions.  
 */
 VT_EXPORT CFTypeID 
-VTCompressionSessionGetTypeID(void) API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2));
+VTCompressionSessionGetTypeID(void) API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 /*!
 	@function	VTCompressionSessionGetPixelBufferPool
@@ -193,7 +193,7 @@ VTCompressionSessionGetTypeID(void) API_AVAILABLE(macosx(10.8), ios(8.0), tvos(1
 */
 VT_EXPORT CM_NULLABLE CVPixelBufferPoolRef
 VTCompressionSessionGetPixelBufferPool(
-	CM_NONNULL VTCompressionSessionRef		session ) API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2));
+	CM_NONNULL VTCompressionSessionRef		session ) API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 /*!
 	@function	VTCompressionSessionPrepareToEncodeFrames
@@ -209,7 +209,7 @@ VTCompressionSessionGetPixelBufferPool(
 		The compression session.
 */
 VT_EXPORT OSStatus
-VTCompressionSessionPrepareToEncodeFrames( CM_NONNULL VTCompressionSessionRef session ) API_AVAILABLE(macosx(10.9), ios(8.0), tvos(10.2));
+VTCompressionSessionPrepareToEncodeFrames( CM_NONNULL VTCompressionSessionRef session ) API_AVAILABLE(macos(10.9), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos);
 	
 /*!
 	@function	VTCompressionSessionEncodeFrame
@@ -251,7 +251,7 @@ VTCompressionSessionEncodeFrame(
 	CMTime								duration, // may be kCMTimeInvalid
 	CM_NULLABLE CFDictionaryRef			frameProperties,
 	void * CM_NULLABLE					sourceFrameRefcon,
-	VTEncodeInfoFlags * CM_NULLABLE		infoFlagsOut ) API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2));
+	VTEncodeInfoFlags * CM_NULLABLE		infoFlagsOut ) API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos);
 	
 #if __BLOCKS__
 /*!
@@ -274,7 +274,7 @@ VTCompressionSessionEncodeFrame(
 typedef void (^VTCompressionOutputHandler)(
 		OSStatus status,
 		VTEncodeInfoFlags infoFlags,
-		CM_NULLABLE CMSampleBufferRef sampleBuffer ) CM_SWIFT_SENDABLE;
+		CM_NULLABLE CMSampleBufferRef sampleBuffer ) CM_SWIFT_SENDABLE API_AVAILABLE(macos(10.11), ios(9.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos);
 	
 /*!
 	@function	VTCompressionSessionEncodeFrameWithOutputHandler
@@ -318,7 +318,7 @@ VTCompressionSessionEncodeFrameWithOutputHandler(
 		CMTime									duration, // may be kCMTimeInvalid
 		CM_NULLABLE CFDictionaryRef				frameProperties, // may be NULL
 		VTEncodeInfoFlags * CM_NULLABLE			infoFlagsOut,
-		CM_NONNULL VTCompressionOutputHandler	outputHandler ) API_AVAILABLE(macosx(10.11), ios(9.0), tvos(10.2));
+		CM_NONNULL VTCompressionOutputHandler	outputHandler ) API_AVAILABLE(macos(10.11), ios(9.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos);
 #endif // __BLOCKS__
 
 /*!
@@ -333,7 +333,7 @@ VTCompressionSessionEncodeFrameWithOutputHandler(
 VT_EXPORT OSStatus
 VTCompressionSessionCompleteFrames(
 	CM_NONNULL VTCompressionSessionRef	session,
-	CMTime								completeUntilPresentationTimeStamp) API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2)); // complete all frames if non-numeric
+	CMTime								completeUntilPresentationTimeStamp) API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos); // complete all frames if non-numeric
 	
 #pragma mark Multi-image compression
 
@@ -343,7 +343,7 @@ VTCompressionSessionCompleteFrames(
 	@discussion   This call returning true does not guarantee that encode resources will be available at all times.
  */
 VT_EXPORT Boolean
-VTIsStereoMVHEVCEncodeSupported( void ) API_AVAILABLE(macos(14.0), ios(17.0));
+VTIsStereoMVHEVCEncodeSupported( void ) API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 /*!
 	@function	VTCompressionSessionEncodeMultiImageFrame
@@ -384,7 +384,7 @@ VTCompressionSessionEncodeMultiImageFrame(
 		CMTime								duration, // may be kCMTimeInvalid
 		CM_NULLABLE CFDictionaryRef			frameProperties,
 		void * CM_NULLABLE					sourceFrameRefcon,
-		VTEncodeInfoFlags * CM_NULLABLE		infoFlagsOut ) API_AVAILABLE(macosx(14.0), ios(17.0)) API_UNAVAILABLE(tvos) CF_SWIFT_UNAVAILABLE("Unavailable in Swift");
+		VTEncodeInfoFlags * CM_NULLABLE		infoFlagsOut ) API_AVAILABLE(macos(14.0), ios(17.0), visionos(1.0)) API_UNAVAILABLE(tvos, watchos) CF_SWIFT_UNAVAILABLE("Unavailable in Swift");
 
 
 #if __BLOCKS__
@@ -429,7 +429,7 @@ VTCompressionSessionEncodeMultiImageFrameWithOutputHandler(
 		CMTime									duration, // may be kCMTimeInvalid
 		CM_NULLABLE CFDictionaryRef				frameProperties, // may be NULL
 		VTEncodeInfoFlags * CM_NULLABLE			infoFlagsOut,
-		CM_NONNULL VTCompressionOutputHandler	outputHandler ) API_AVAILABLE(macosx(14.0), ios(17.0)) API_UNAVAILABLE(tvos) CF_REFINED_FOR_SWIFT;
+		CM_NONNULL VTCompressionOutputHandler	outputHandler ) API_AVAILABLE(macos(14.0), ios(17.0), visionos(1.0)) API_UNAVAILABLE(tvos, watchos) CF_REFINED_FOR_SWIFT;
 #endif // __BLOCKS__
 
 #pragma mark Multi-pass
@@ -441,7 +441,7 @@ VTCompressionSessionEncodeMultiImageFrameWithOutputHandler(
 	
 typedef CF_OPTIONS(uint32_t, VTCompressionSessionOptionFlags) {
 	kVTCompressionSessionBeginFinalPass = 1<<0
-};
+} API_AVAILABLE(macos(10.10), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 /*!
 	@function	VTCompressionSessionBeginPass
@@ -456,7 +456,7 @@ VT_EXPORT OSStatus
 VTCompressionSessionBeginPass(
 	CM_NONNULL VTCompressionSessionRef	session,
 	VTCompressionSessionOptionFlags		beginPassFlags,
-	uint32_t * CM_NULLABLE				reserved) API_AVAILABLE(macosx(10.10), ios(8.0), tvos(10.2));
+	uint32_t * CM_NULLABLE				reserved) API_AVAILABLE(macos(10.10), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos);
 	
 /*!
 	@function	VTCompressionSessionEndPass
@@ -473,7 +473,7 @@ VT_EXPORT OSStatus
 VTCompressionSessionEndPass(
 	CM_NONNULL VTCompressionSessionRef	session,
 	Boolean * CM_NULLABLE				furtherPassesRequestedOut,
-	uint32_t * CM_NULLABLE				reserved) API_AVAILABLE(macosx(10.10), ios(8.0), tvos(10.2));
+	uint32_t * CM_NULLABLE				reserved) API_AVAILABLE(macos(10.10), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos);
 	
 /*!
 	 @function	VTCompressionSessionGetTimeRangesForNextPass
@@ -493,7 +493,7 @@ VT_EXPORT OSStatus
 VTCompressionSessionGetTimeRangesForNextPass(
 	CM_NONNULL VTCompressionSessionRef				session,
 	CMItemCount * CM_NONNULL						timeRangeCountOut,
-	const CMTimeRange * CM_NULLABLE * CM_NONNULL	timeRangeArrayOut ) API_AVAILABLE(macosx(10.10), ios(8.0), tvos(10.2)); /* returned pointer will be valid until next call to VTCompressionSessionEndPass */
+	const CMTimeRange * CM_NULLABLE * CM_NONNULL	timeRangeArrayOut ) API_AVAILABLE(macos(10.10), ios(8.0), tvos(10.2), visionos(1.0)) API_UNAVAILABLE(watchos); /* returned pointer will be valid until next call to VTCompressionSessionEndPass */
 
 // See VTSession.h for property access APIs on VTCompressionSessions.
 // See VTCompressionProperties.h for standard property keys and values for compression sessions.

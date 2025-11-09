@@ -18,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 SF_CLASS_AVAILABLE_MAC_SAFARI(10_0)
 @interface SFSafariExtensionManager : NSObject
 
-+ (void)getStateOfSafariExtensionWithIdentifier:(NSString *)identifier completionHandler:(void (^)(SFSafariExtensionState * _Nullable state, NSError * _Nullable error))completionHandler;
++ (void)getStateOfSafariExtensionWithIdentifier:(NSString *)identifier completionHandler:(NS_SWIFT_UI_ACTOR void (^)(SFSafariExtensionState * _Nullable state, NSError * _Nullable error))completionHandler;
 
 @end
 

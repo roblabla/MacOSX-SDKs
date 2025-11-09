@@ -26,10 +26,8 @@ NS_ASSUME_NONNULL_BEGIN
 		framePosition property.
 */
 API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0))
-@interface AVAudioFile : NSObject {
-@private
-	void *_impl;
-}
+@interface AVAudioFile : NSObject
+
 /*! @method initForReading:error:
 	@abstract Open a file for reading.
 	@param fileURL
@@ -92,6 +90,20 @@ API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0))
 */
 - (nullable instancetype)initForWriting:(NSURL *)fileURL settings:(NSDictionary<NSString *, id> *)settings commonFormat:(AVAudioCommonFormat)format interleaved:(BOOL)interleaved error:(NSError **)outError;
 
+/*! @method close
+	@abstract Close the audio file.
+	@discussion
+		The underlying file will be closed if open.
+
+		- It is normally unnecessary to close a file opened for reading (it will be automatically closed
+		when the object is released)
+		- It is only necessary to close a file opened for writing in order to achieve specific control over
+		when the file's header is updated.
+
+		Note: Once closed, further file read or write operations will fail with kAudio_FileNotFoundError.
+*/
+- (void)close API_AVAILABLE(macos(15.0), ios(18.0), watchos(11.0), tvos(18.0), macCatalyst(18.0));
+
 /*! @method readIntoBuffer:error:
 	@abstract Read an entire buffer.
 	@param buffer
@@ -136,6 +148,11 @@ API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0))
 		Writes sequentially. The buffer's frameLength signifies how much of the buffer is to be written.
 */
 - (BOOL)writeFromBuffer:(const AVAudioPCMBuffer *)buffer error:(NSError **)outError;
+
+/*! @property isOpen
+	@abstract Whether the file is open or not.
+ */
+@property (nonatomic, readonly) BOOL isOpen API_AVAILABLE(macos(15.0), ios(18.0), watchos(11.0), tvos(18.0), macCatalyst(18.0));
 
 /*!	@property url
 	@abstract The URL the file is reading or writing.

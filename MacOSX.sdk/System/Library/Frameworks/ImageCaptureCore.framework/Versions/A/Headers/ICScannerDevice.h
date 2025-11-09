@@ -181,10 +181,6 @@ IC_AVAILABLE(macos(10.4)) IC_UNAVAILABLE(ios)
 __attribute__((visibility("default")))
 IC_AVAILABLE(macos(10.4)) IC_UNAVAILABLE(ios)
 @interface ICScannerDevice : ICDevice
-{
-@private
-    id _scannerProperties;
-}
 
 /*!
   @property availableFunctionalUnitTypes

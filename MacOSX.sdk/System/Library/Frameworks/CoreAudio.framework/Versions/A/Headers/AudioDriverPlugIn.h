@@ -142,7 +142,7 @@ AudioDriverPlugInOpen(AudioDriverPlugInHostInfo*    inHostInfo);
     @function       AudioDriverPlugInClose
     @abstract       Closes an instance of the driver plug-in.
     @param          inDevice
-                        The AudioDeviceID that describes the device who's plug-in instance is being
+                        The AudioDeviceID that describes the device whose plug-in instance is being
                         closed.
     @result         An OSStatus indicating success or failure.
 */
@@ -251,7 +251,7 @@ AudioDriverPlugInDeviceSetProperty( AudioDeviceID                       inDevice
     @function       AudioDriverPlugInStreamGetPropertyInfo
     @abstract       Retrieve information about the given property of an AudioStream.
     @param          inDevice
-                        The AudioDevice who's stream is being queried.
+                        The AudioDevice whose stream is being queried.
     @param          inIOAudioStream
                         The IOAudioStream to query.
     @param          inChannel
@@ -283,7 +283,7 @@ AudioDriverPlugInStreamGetPropertyInfo( AudioDeviceID           inDevice,
     @abstract       Queries an the AudioStream object to get the data of the given property and
                     places it in the provided buffer.
     @param          inDevice
-                        The AudioDevice who's stream is being queried.
+                        The AudioDevice whose stream is being queried.
     @param          inIOAudioStream
                         The IOAudioStream to query.
     @param          inChannel
@@ -316,7 +316,7 @@ AudioDriverPlugInStreamGetProperty( AudioDeviceID           inDevice,
                     HAL has called the listeners as many properties values are changed
                     asynchronously.
     @param          inDevice
-                        The AudioDevice who's stream is being changed.
+                        The AudioDevice whose stream is being changed.
     @param          inIOAudioStream
                         The IOAudioStream to change.
     @param          inWhen

@@ -27,6 +27,9 @@
 #import <DiscRecording/DRFSObject.h>
 #import <AvailabilityMacros.h>
 
+#ifndef DISC_RECORDING_FILE
+#define DISC_RECORDING_FILE
+
 /*!
 	@class		DRFile
 	@abstract	Represents a file to be created on the disc.
@@ -296,3 +299,4 @@ enum
 
 @end
 
+#endif // DISC_RECORDING_FILE

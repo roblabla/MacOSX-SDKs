@@ -22,30 +22,6 @@
 #include <os/availability.h>
 #include <TargetConditionals.h>
 
-#if TARGET_OS_OSX
-# define CA_OSX_VERSION(v) ((__MAC_##v) > 0 && __MAC_OS_X_VERSION_MAX_ALLOWED >= (__MAC_##v))
-#else
-# define CA_OSX_VERSION(v) (0)
-#endif
-
-#if TARGET_OS_IOS
-# define CA_IOS_VERSION(v) ((__IPHONE_##v) > 0 && __IPHONE_OS_VERSION_MIN_REQUIRED >= (__IPHONE_##v))
-#else
-# define CA_IOS_VERSION(v) (0)
-#endif
-
-#if TARGET_OS_TV
-# define CA_TV_VERSION(v) ((__TVOS_##v) > 0 && __TV_OS_VERSION_MIN_REQUIRED >= (__TVOS_##v))
-#else
-# define CA_TV_VERSION(v) (0)
-#endif
-
-#if TARGET_OS_WATCH
-# define CA_WATCH_VERSION(v) ((__WATCHOS_##v) > 0 && __WATCH_OS_VERSION_MIN_REQUIRED >= (__WATCHOS_##v))
-#else
-# define CA_WATCH_VERSION(v) (0)
-#endif
-
 #ifdef __cplusplus
 # define CA_EXTERN_C_BEGIN extern "C" {
 # define CA_EXTERN_C_END   }
@@ -117,6 +93,14 @@
 # endif
 #endif
 
+#ifndef CA_NOINLINE
+# if CA_GNUC (3, 0)
+#  define CA_NOINLINE __attribute__ ((noinline))
+# else
+#  define CA_NOINLINE /* no noinline */
+# endif
+#endif
+
 #ifndef CA_WARN_DEPRECATED
 # define CA_WARN_DEPRECATED 1
 #endif
@@ -141,7 +125,7 @@ CA_EXTERN_C_BEGIN
  * calling mach_absolute_time () and converting the units to seconds. */
 
 CA_EXTERN CFTimeInterval CACurrentMediaTime (void)
-    API_AVAILABLE (macos(10.5), ios(2.0));
+    API_AVAILABLE(macos(10.5), ios(2.0)) API_UNAVAILABLE(watchos);
 
 CA_EXTERN_C_END
 

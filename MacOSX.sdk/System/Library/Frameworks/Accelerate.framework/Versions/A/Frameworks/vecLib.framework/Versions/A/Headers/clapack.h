@@ -23,6 +23,12 @@
  =================================================================================================
  */
 
+#if __has_include(<TargetConditionals.h>)
+#include <TargetConditionals.h>
+#endif // #if __has_include(<TargetConditionals.h>)
+
+#if !0
+
 #ifndef __CLAPACK_H
 #define __CLAPACK_H
 
@@ -10545,3 +10551,5 @@ API_DEPRECATED("The CLAPACK interface is deprecated.  Please compile with -DACCE
 }
 #endif
 #endif /* __CLAPACK_H */
+
+#endif 

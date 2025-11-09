@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/MultitouchSupport.framework/Versions/A/MultitouchSupport'
-current-version: 7440.9
+current-version: 8400.33
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -11,8 +11,9 @@ exports:
                        _MTActuatorActuate, _MTActuatorClose, _MTActuatorCreateFromDeviceID, 
                        _MTActuatorCreateFromService, _MTActuatorGetDeviceID, _MTActuatorGetMTDevice, 
                        _MTActuatorGetReport, _MTActuatorGetService, _MTActuatorGetSystemActuationsEnabled, 
-                       _MTActuatorGetTransportMethod, _MTActuatorGetTypeID, _MTActuatorIsOpen, 
-                       _MTActuatorLoadActuations, _MTActuatorOpen, _MTActuatorReclaimHostClickControl, 
+                       _MTActuatorGetTransportMethod, _MTActuatorGetTypeID, _MTActuatorHandoffHostClickControl, 
+                       _MTActuatorIsOpen, _MTActuatorLoadActuations, _MTActuatorOpen, 
+                       _MTActuatorReclaimHostClickControl, _MTActuatorRequestHostClickControl, 
                        _MTActuatorSetFirmwareClicks, _MTActuatorSetReport, _MTActuatorSetSystemActuationsEnabled, 
                        _MTBreakpoint, _MTContact_getCentroidPixel, _MTContact_getEllipseEccentricity, 
                        _MTContact_getEllipseMajorAxisRadius, _MTContact_getEllipseMajorAxisVector, 

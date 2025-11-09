@@ -292,6 +292,11 @@ struct  tcpstat {
 	u_int32_t       tcps_sack_send_blocks;      /* SACK blocks (options) sent     */
 	u_int32_t       tcps_sack_sboverflow;       /* SACK sendblock overflow   */
 
+	/* RACK related stats */
+	u_int32_t       tcps_rack_recovery_episode; /* RACK recovery episodes */
+	u_int32_t       tcps_rack_reordering_timeout_recovery_episode; /* RACK recovery episodes due to reordering timeout */
+	u_int32_t       tcps_rack_rexmits;          /* RACK rexmit segments   */
+
 	u_int32_t       tcps_bg_rcvtotal;       /* total background packets received */
 	u_int32_t       tcps_rxtfindrop;        /* drop conn after retransmitting FIN */
 	u_int32_t       tcps_fcholdpacket;      /* packets withheld because of flow control */

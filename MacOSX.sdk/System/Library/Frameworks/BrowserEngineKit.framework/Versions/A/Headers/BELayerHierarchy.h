@@ -8,11 +8,11 @@
 #import <BrowserEngineKit/BELayerHierarchyHandle.h>
 #import <BrowserEngineKit/BEMacros.h>
 #import <Foundation/Foundation.h>
-#import <QuartzCore/QuartzCore.h>
 
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class CALayer;
 
 API_AVAILABLE(ios(17.4))
 API_UNAVAILABLE(macos, watchos, tvos, visionos)

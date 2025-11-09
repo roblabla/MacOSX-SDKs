@@ -171,4 +171,11 @@ MP_EXTERN NSString * const MPNowPlayingInfoPropertyAdTimeRanges MP_API(ios(16.0)
 // A replacement for MPNowPlayingInfoPropertyPlaybackProgress.
 MP_EXTERN NSString * const MPNowPlayingInfoPropertyCreditsStartTime MP_API(ios(16.0), tvos(16.0), macos(13.0)); // NSNumber (double)
 
+// Represents the International Standard Recording Code (ISRC) for a song, if available.
+// This will be used by system services that leverage now playing data, such as Music Haptics.
+MP_EXTERN NSString * const MPNowPlayingInfoPropertyInternationalStandardRecordingCode MP_API(ios(18.0), tvos(18.0), macos(15.0)); // NSString
+
+// A boolean denoting whether the now playing item should be excluded from content suggestions.
+MP_EXTERN NSString * const MPNowPlayingInfoPropertyExcludeFromSuggestions MP_API(ios(18.0), tvos(18.0), macos(15.0)); // NSNumber (BOOL)
+
 NS_ASSUME_NONNULL_END

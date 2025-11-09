@@ -161,7 +161,7 @@ IMAGEIO_EXTERN const CFStringRef kCGImagePropertyJFIFYDensity  IMAGEIO_AVAILABLE
 IMAGEIO_EXTERN const CFStringRef kCGImagePropertyJFIFDensityUnit  IMAGEIO_AVAILABLE_STARTING(10.4, 4.0);
 IMAGEIO_EXTERN const CFStringRef kCGImagePropertyJFIFIsProgressive  IMAGEIO_AVAILABLE_STARTING(10.4, 4.0);
 
-/* Possible keys for kCGImagePropertyHEICSDictionary and kCGImagePropertyAVISDictionary */
+/* Possible keys for kCGImagePropertyHEICSDictionary */
 
 IMAGEIO_EXTERN const CFStringRef kCGImagePropertyHEICSLoopCount  IMAGEIO_AVAILABLE_STARTING(10.15, 13.0);
 IMAGEIO_EXTERN const CFStringRef kCGImagePropertyHEICSDelayTime  IMAGEIO_AVAILABLE_STARTING(10.15, 13.0);
@@ -817,6 +817,7 @@ IMAGEIO_EXTERN const CFStringRef kCGImageAuxiliaryDataTypeSemanticSegmentationTe
 IMAGEIO_EXTERN const CFStringRef kCGImageAuxiliaryDataTypeSemanticSegmentationGlassesMatte IMAGEIO_AVAILABLE_STARTING(11.0, 14.1);
 IMAGEIO_EXTERN const CFStringRef kCGImageAuxiliaryDataTypeSemanticSegmentationSkyMatte IMAGEIO_AVAILABLE_STARTING(11.0, 14.1);
 IMAGEIO_EXTERN const CFStringRef kCGImageAuxiliaryDataTypeHDRGainMap   IMAGEIO_AVAILABLE_STARTING(11.0, 14.1);
+IMAGEIO_EXTERN const CFStringRef kCGImageAuxiliaryDataTypeISOGainMap   IMAGEIO_AVAILABLE_STARTING(15.0, 18);
 
 
 /* Depth/Disparity data support for JPEG, HEIF, and DNG images:
@@ -824,11 +825,12 @@ IMAGEIO_EXTERN const CFStringRef kCGImageAuxiliaryDataTypeHDRGainMap   IMAGEIO_A
  * kCGImageAuxiliaryDataInfoData - the depth data (CFDataRef)
  * kCGImageAuxiliaryDataInfoDataDescription - the depth data description (CFDictionary)
  * kCGImageAuxiliaryDataInfoMetadata - metadata (CGImageMetadataRef)
+ * kCGImageAuxiliaryDataInfoColorSpace - the color space associated with the aux image (CGColorSpaceRef)
  */
 IMAGEIO_EXTERN const CFStringRef kCGImageAuxiliaryDataInfoData IMAGEIO_AVAILABLE_STARTING(10.13, 11.0);
 IMAGEIO_EXTERN const CFStringRef kCGImageAuxiliaryDataInfoDataDescription IMAGEIO_AVAILABLE_STARTING(10.13, 11.0);
 IMAGEIO_EXTERN const CFStringRef kCGImageAuxiliaryDataInfoMetadata IMAGEIO_AVAILABLE_STARTING(10.13, 11.0);
-
+IMAGEIO_EXTERN const CFStringRef kCGImageAuxiliaryDataInfoColorSpace IMAGEIO_AVAILABLE_STARTING(15.0, 18.0);
 
 IMAGEIO_EXTERN const CFStringRef kCGImagePropertyImageCount IMAGEIO_AVAILABLE_STARTING(10.13, 11.0);
 IMAGEIO_EXTERN const CFStringRef kCGImagePropertyWidth IMAGEIO_AVAILABLE_STARTING(10.13, 11.0);
@@ -849,11 +851,24 @@ IMAGEIO_EXTERN const CFStringRef kCGImagePropertyGroupTypeAlternate IMAGEIO_AVAI
 IMAGEIO_EXTERN const CFStringRef kCGImagePropertyGroupImagesAlternate IMAGEIO_AVAILABLE_STARTING(12.0, 15.0);
 IMAGEIO_EXTERN const CFStringRef kCGImagePropertyGroupImageIndexLeft IMAGEIO_AVAILABLE_STARTING(12.0, 15.0);
 IMAGEIO_EXTERN const CFStringRef kCGImagePropertyGroupImageIndexRight IMAGEIO_AVAILABLE_STARTING(12.0, 15.0);
+IMAGEIO_EXTERN const CFStringRef kCGImagePropertyGroupImageIndexMonoscopic IMAGEIO_AVAILABLE_STARTING(15.0, 18.0);
 IMAGEIO_EXTERN const CFStringRef kCGImagePropertyGroupImageIsLeftImage IMAGEIO_AVAILABLE_STARTING(12.0, 15.0);
 IMAGEIO_EXTERN const CFStringRef kCGImagePropertyGroupImageIsRightImage IMAGEIO_AVAILABLE_STARTING(12.0, 15.0);
+IMAGEIO_EXTERN const CFStringRef kCGImagePropertyGroupImageIsMonoscopicImage IMAGEIO_AVAILABLE_STARTING(15.0, 18.0);
 IMAGEIO_EXTERN const CFStringRef kCGImagePropertyGroupImageIsAlternateImage IMAGEIO_AVAILABLE_STARTING(12.0, 15.0);
 IMAGEIO_EXTERN const CFStringRef kCGImagePropertyGroupImageBaseline IMAGEIO_AVAILABLE_STARTING(13.0, 16.0);
 IMAGEIO_EXTERN const CFStringRef kCGImagePropertyGroupImageDisparityAdjustment IMAGEIO_AVAILABLE_STARTING(13.0, 16.0);
+IMAGEIO_EXTERN const CFStringRef kCGImagePropertyGroupImageStereoAggressors IMAGEIO_AVAILABLE_STARTING(15.0, 18.0);
+
+IMAGEIO_EXTERN const CFStringRef kIIOStereoAggressors_Type IMAGEIO_AVAILABLE_STARTING(15.0, 18.0);
+IMAGEIO_EXTERN const CFStringRef kIIOStereoAggressors_SubTypeURI IMAGEIO_AVAILABLE_STARTING(15.0, 18.0);
+IMAGEIO_EXTERN const CFStringRef kIIOStereoAggressors_Severity IMAGEIO_AVAILABLE_STARTING(15.0, 18.0);
+
+IMAGEIO_EXTERN const CFStringRef kCGImagePropertyGroupMonoscopicImageLocation IMAGEIO_AVAILABLE_STARTING(15.0, 18.0);
+IMAGEIO_EXTERN const CFStringRef kIIOMonoscopicImageLocation_Unspecified IMAGEIO_AVAILABLE_STARTING(15.0, 18.0);
+IMAGEIO_EXTERN const CFStringRef kIIOMonoscopicImageLocation_Left IMAGEIO_AVAILABLE_STARTING(15.0, 18.0);
+IMAGEIO_EXTERN const CFStringRef kIIOMonoscopicImageLocation_Right IMAGEIO_AVAILABLE_STARTING(15.0, 18.0);
+IMAGEIO_EXTERN const CFStringRef kIIOMonoscopicImageLocation_Center IMAGEIO_AVAILABLE_STARTING(15.0, 18.0);
 
 IMAGEIO_EXTERN const CFStringRef kIIOMetadata_CameraExtrinsicsKey  IMAGEIO_AVAILABLE_STARTING(13.0, 16.0);
 IMAGEIO_EXTERN const CFStringRef kIIOCameraExtrinsics_CoordinateSystemID IMAGEIO_AVAILABLE_STARTING(13.0, 16.0);

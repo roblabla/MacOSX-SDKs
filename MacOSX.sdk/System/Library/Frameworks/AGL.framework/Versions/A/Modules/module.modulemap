@@ -1,4 +1,4 @@
-framework module AGL [extern_c] {
+framework module AGL {
   header "agl.h"
   export *
 

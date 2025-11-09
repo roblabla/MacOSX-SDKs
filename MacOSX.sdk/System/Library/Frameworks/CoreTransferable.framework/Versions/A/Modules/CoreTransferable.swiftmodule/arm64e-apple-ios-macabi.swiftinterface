@@ -1,6 +1,6 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.10 (swiftlang-5.10.0.12.5 clang-1500.3.9.1.1)
-// swift-module-flags: -target arm64e-apple-ios17.5-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -library-level api -library-level api -enable-bare-slash-regex -user-module-version 1.2.3 -module-name CoreTransferable
+// swift-compiler-version: Apple Swift version 6.0 effective-5.10 (swiftlang-6.0.0.7.24 clang-1600.0.25.1)
+// swift-module-flags: -target arm64e-apple-ios18.0-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -library-level api -library-level api -enable-bare-slash-regex -user-module-version 2.1 -module-name CoreTransferable
 import Combine
 @_exported import CoreTransferable
 import Foundation
@@ -11,12 +11,35 @@ import _StringProcessing
 import _SwiftConcurrencyShims
 import os.log
 import os
+@available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
+@_originallyDefinedIn(module: "SwiftUI", iOS 18.0)
+@_originallyDefinedIn(module: "SwiftUI", macOS 15.0)
+@_originallyDefinedIn(module: "SwiftUI", tvOS 18.0)
+@_originallyDefinedIn(module: "SwiftUI", watchOS 11.0)
+extension Swift.Never {
+  public typealias Body = Swift.Never
+  public var body: Swift.Never {
+    get
+  }
+}
+@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
+extension Swift.Never : CoreTransferable.TransferRepresentation {
+  public typealias Item = Swift.Never
+}
+@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
+extension Swift.Never : CoreTransferable.Transferable {
+  public typealias Representation = Swift.Never
+  public static var transferRepresentation: Swift.Never {
+    get
+  }
+}
 @available(iOS 16.1, macOS 13.0, tvOS 16.1, watchOS 9.1, *)
 extension Foundation.AttributedString : CoreTransferable.Transferable {
   @available(iOS 16.1, macOS 13.0, tvOS 16.1, watchOS 9.1, *)
   public static var transferRepresentation: some CoreTransferable.TransferRepresentation {
     get
   }
+  @available(iOS 16.1, tvOS 16.1, watchOS 9.1, macOS 13.0, *)
   public typealias Representation = @_opaqueReturnTypeOf("$s10Foundation16AttributedStringV16CoreTransferableE22transferRepresentationQrvpZ", 0) __
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
@@ -29,6 +52,7 @@ extension Foundation.Data : CoreTransferable.Transferable, @unchecked Swift.Send
   public static var transferRepresentation: some CoreTransferable.TransferRepresentation {
     get
   }
+  @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
   public typealias Representation = @_opaqueReturnTypeOf("$s10Foundation4DataV16CoreTransferableE22transferRepresentationQrvpZ", 0) __
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
@@ -36,6 +60,7 @@ extension Swift.String : CoreTransferable.Transferable {
   public static var transferRepresentation: some CoreTransferable.TransferRepresentation {
     get
   }
+  @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
   public typealias Representation = @_opaqueReturnTypeOf("$sSS16CoreTransferableE22transferRepresentationQrvpZ", 0) __
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
@@ -43,6 +68,7 @@ extension Foundation.URL : CoreTransferable.Transferable, @unchecked Swift.Senda
   public static var transferRepresentation: some CoreTransferable.TransferRepresentation {
     get
   }
+  @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
   public typealias Representation = @_opaqueReturnTypeOf("$s10Foundation3URLV16CoreTransferableE22transferRepresentationQrvpZ", 0) __
 }
 #if compiler(>=5.3) && $PrimaryAssociatedTypes2
@@ -118,24 +144,21 @@ public protocol TransferRepresentation : Swift.Sendable {
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 extension CoreTransferable.TransferRepresentation {
-  #if compiler(>=5.3) && $Sendable
   public func exportingCondition(_ condition: @escaping @Sendable (Self.Item) -> Swift.Bool) -> CoreTransferable._ConditionalTransferRepresentation<Self>
-  #endif
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 public struct _ConditionalTransferRepresentation<Base> : CoreTransferable.TransferRepresentation where Base : CoreTransferable.TransferRepresentation {
   public typealias Item = Base.Item
+  @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
   public typealias Body = Swift.Never
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 extension CoreTransferable.TransferRepresentation {
   public func suggestedFileName(_ fileName: Swift.String) -> some CoreTransferable.TransferRepresentation<Self.Item>
   
-  #if compiler(>=5.3) && $Sendable
   @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
   public func suggestedFileName(_ fileName: @escaping @Sendable (Self.Item) -> Swift.String?) -> some CoreTransferable.TransferRepresentation<Self.Item>
   
-  #endif
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 public struct CodableRepresentation<Item, Encoder, Decoder> : CoreTransferable.TransferRepresentation, Swift.Sendable where Item : CoreTransferable.Transferable, Item : Swift.Decodable, Item : Swift.Encodable, Encoder : Combine.TopLevelEncoder, Decoder : Combine.TopLevelDecoder, Encoder.Output == Foundation.Data, Decoder.Input == Foundation.Data {
@@ -143,54 +166,37 @@ public struct CodableRepresentation<Item, Encoder, Decoder> : CoreTransferable.T
   public init(for itemType: Item.Type = Item.self, contentType: UniformTypeIdentifiers.UTType) where Encoder == Foundation.JSONEncoder, Decoder == Foundation.JSONDecoder
   @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
   public init(for itemType: Item.Type = Item.self, contentType: UniformTypeIdentifiers.UTType, encoder: Encoder, decoder: Decoder)
+  @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
   public typealias Body = Swift.Never
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 public struct ProxyRepresentation<Item, ProxyRepresentation> : CoreTransferable.TransferRepresentation where Item : CoreTransferable.Transferable, ProxyRepresentation : CoreTransferable.Transferable {
-  #if compiler(>=5.3) && $Sendable
   public init(importing: @escaping @Sendable (ProxyRepresentation) throws -> Item)
-  #endif
-  #if compiler(>=5.3) && $AsyncAwait && $Sendable
   @available(iOS 16.1, macOS 13.0, tvOS 16.1, watchOS 9.1, *)
   public init(importing: @escaping @Sendable (ProxyRepresentation) async throws -> Item)
-  #endif
-  #if compiler(>=5.3) && $Sendable
   public init(exporting: @escaping @Sendable (Item) throws -> ProxyRepresentation)
-  #endif
-  #if compiler(>=5.3) && $AsyncAwait && $Sendable
   @available(iOS, introduced: 16.1, deprecated: 17.0, message: "A synchronous exporter should be used instead.")
   @available(macOS, introduced: 13.0, deprecated: 14.0, message: "A synchronous exporter should be used instead.")
   @available(tvOS, introduced: 16.1, deprecated: 17.0, message: "A synchronous exporter should be used instead.")
   @available(watchOS, introduced: 9.1, deprecated: 10.0, message: "A synchronous exporter should be used instead.")
   public init(exporting: @escaping @Sendable (Item) async throws -> ProxyRepresentation)
-  #endif
-  #if compiler(>=5.3) && $Sendable
   public init(exporting: @escaping @Sendable (Item) throws -> ProxyRepresentation, importing: @escaping @Sendable (ProxyRepresentation) throws -> Item)
-  #endif
-  #if compiler(>=5.3) && $AsyncAwait && $Sendable
   @available(iOS, introduced: 16.1, deprecated: 17.0, message: "A synchronous exporter should be used instead.")
   @available(macOS, introduced: 13.0, deprecated: 14.0, message: "A synchronous exporter should be used instead.")
   @available(tvOS, introduced: 16.1, deprecated: 17.0, message: "A synchronous exporter should be used instead.")
   @available(watchOS, introduced: 9.1, deprecated: 10.0, message: "A synchronous exporter should be used instead.")
   public init(exporting: @escaping @Sendable (Item) async throws -> ProxyRepresentation, importing: @escaping @Sendable (ProxyRepresentation) async throws -> Item)
-  #endif
-  #if compiler(>=5.3) && $AsyncAwait && $Sendable
   @available(iOS 17.2, macOS 14.2, tvOS 17.2, watchOS 10.2, *)
   public init(exporting: @escaping @Sendable (Item) throws -> ProxyRepresentation, importing: @escaping @Sendable (ProxyRepresentation) async throws -> Item)
-  #endif
+  @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
   public typealias Body = Swift.Never
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 public struct DataRepresentation<Item> : CoreTransferable.TransferRepresentation where Item : CoreTransferable.Transferable {
-  #if compiler(>=5.3) && $AsyncAwait && $Sendable
   public init(contentType: UniformTypeIdentifiers.UTType, exporting: @escaping @Sendable (Item) async throws -> Foundation.Data, importing: @escaping @Sendable (Foundation.Data) async throws -> Item)
-  #endif
-  #if compiler(>=5.3) && $AsyncAwait && $Sendable
   public init(exportedContentType: UniformTypeIdentifiers.UTType, exporting: @escaping @Sendable (Item) async throws -> Foundation.Data)
-  #endif
-  #if compiler(>=5.3) && $AsyncAwait && $Sendable
   public init(importedContentType: UniformTypeIdentifiers.UTType, importing: @escaping @Sendable (Foundation.Data) async throws -> Item)
-  #endif
+  @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
   public typealias Body = Swift.Never
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
@@ -206,15 +212,10 @@ public struct ReceivedTransferredFile : Swift.Sendable {
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 public struct FileRepresentation<Item> : CoreTransferable.TransferRepresentation where Item : CoreTransferable.Transferable {
-  #if compiler(>=5.3) && $AsyncAwait && $Sendable
   public init(contentType: UniformTypeIdentifiers.UTType, shouldAttemptToOpenInPlace: Swift.Bool = false, exporting: @escaping @Sendable (Item) async throws -> CoreTransferable.SentTransferredFile, importing: @escaping @Sendable (CoreTransferable.ReceivedTransferredFile) async throws -> Item)
-  #endif
-  #if compiler(>=5.3) && $AsyncAwait && $Sendable
   public init(exportedContentType: UniformTypeIdentifiers.UTType, shouldAllowToOpenInPlace: Swift.Bool = false, exporting: @escaping @Sendable (Item) async throws -> CoreTransferable.SentTransferredFile)
-  #endif
-  #if compiler(>=5.3) && $AsyncAwait && $Sendable
   public init(importedContentType: UniformTypeIdentifiers.UTType, shouldAttemptToOpenInPlace: Swift.Bool = false, importing: @escaping @Sendable (CoreTransferable.ReceivedTransferredFile) async throws -> Item)
-  #endif
+  @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
   public typealias Body = Swift.Never
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
@@ -226,22 +227,8 @@ public struct TupleTransferRepresentation<Item, Value> : CoreTransferable.Transf
   internal var value: Value
   @usableFromInline
   internal init(_ value: Value)
+  @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
   public typealias Body = @_opaqueReturnTypeOf("$s16CoreTransferable27TupleTransferRepresentationV4bodyQrvp", 0) __<Item, Value>
-}
-@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
-extension Swift.Never : CoreTransferable.TransferRepresentation {
-  public typealias Item = Swift.Never
-  public typealias Body = Swift.Never
-  public var body: Swift.Never {
-    get
-  }
-}
-@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
-extension Swift.Never : CoreTransferable.Transferable {
-  public typealias Representation = Swift.Never
-  public static var transferRepresentation: Swift.Never {
-    get
-  }
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 public protocol Transferable {
@@ -262,10 +249,6 @@ public struct TransferRepresentationVisibility : Swift.Sendable, Swift.Equatable
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 extension Foundation.NSItemProvider {
-  #if compiler(>=5.3) && $Sendable
   public func register<T>(_ transferable: @autoclosure @escaping @Sendable () -> T) where T : CoreTransferable.Transferable
-  #endif
-  #if compiler(>=5.3) && $Sendable
   public func loadTransferable<T>(type transferableType: T.Type, completionHandler: @escaping @Sendable (Swift.Result<T, any Swift.Error>) -> Swift.Void) -> Foundation.Progress where T : CoreTransferable.Transferable
-  #endif
 }

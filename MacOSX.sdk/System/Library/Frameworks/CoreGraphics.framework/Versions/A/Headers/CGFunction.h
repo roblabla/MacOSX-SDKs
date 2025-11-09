@@ -52,7 +52,7 @@ typedef struct CGFunctionCallbacks CGFunctionCallbacks;
 /* Return the CFTypeID for CGFunctionRefs. */
 
 CG_EXTERN CFTypeID CGFunctionGetTypeID(void)
-    CG_AVAILABLE_STARTING(10.2, 2.0);
+    API_AVAILABLE(macos(10.2), ios(2.0));
 
 /* Create a CGFunction using `callbacks' to evaluate the function. `info' is
    passed to each of the callback functions. `domainDimension' is the number
@@ -84,20 +84,20 @@ CG_EXTERN CGFunctionRef __nullable CGFunctionCreate(void * __nullable info,
     size_t domainDimension, const CGFloat *__nullable domain,
     size_t rangeDimension, const CGFloat * __nullable range,
     const CGFunctionCallbacks * cg_nullable callbacks)
-    CG_AVAILABLE_STARTING(10.2, 2.0);
+    API_AVAILABLE(macos(10.2), ios(2.0));
 
 /* Equivalent to `CFRetain(function)', except it doesn't crash (as CFRetain
    does) if `function' is NULL. */
 
 CG_EXTERN CGFunctionRef cg_nullable CGFunctionRetain(
     CGFunctionRef cg_nullable function)
-    CG_AVAILABLE_STARTING(10.2, 2.0);
+    API_AVAILABLE(macos(10.2), ios(2.0));
 
 /* Equivalent to `CFRelease(function)', except it doesn't crash (as
    CFRelease does) if `function' is NULL. */
 
 CG_EXTERN void CGFunctionRelease(CGFunctionRef cg_nullable function)
-    CG_AVAILABLE_STARTING(10.2, 2.0);
+    API_AVAILABLE(macos(10.2), ios(2.0));
 
 CF_ASSUME_NONNULL_END
 

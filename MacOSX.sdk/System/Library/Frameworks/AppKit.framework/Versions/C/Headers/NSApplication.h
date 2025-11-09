@@ -1,7 +1,7 @@
 /*
     NSApplication.h
     Application Kit
-    Copyright (c) 1994-2023, Apple Inc.
+    Copyright (c) 1994-2024, Apple Inc.
     All rights reserved.
 */
 
@@ -209,7 +209,8 @@ APPKIT_EXTERN __kindof NSApplication * _Null_unspecified NSApp NS_SWIFT_UI_ACTOR
 - (void)deactivate;
 
 /// Makes the receiver the active app.
-- (void)activateIgnoringOtherApps:(BOOL)flag API_DEPRECATED("This method will be deprecated in a future release. Use NSApp.activate instead.", macos(10.0, API_TO_BE_DEPRECATED));
+/// - Parameter ignoreOtherApps: If `NO`, the app is activated only if no other app is currently active. If `YES`, the app activates regardless.
+- (void)activateIgnoringOtherApps:(BOOL)ignoreOtherApps API_DEPRECATED("This method will be deprecated in a future release. Use NSApp.activate instead.", macos(10.0, API_TO_BE_DEPRECATED));
 
 /// Makes the receiver the active app, if possible.
 ///
@@ -344,7 +345,7 @@ typedef NS_ENUM(NSUInteger, NSApplicationDelegateReply) {
 
 @interface NSApplication(NSEvent)
 - (void)sendEvent:(NSEvent *)event;
-- (void)postEvent:(NSEvent *)event atStart:(BOOL)flag;
+- (void)postEvent:(NSEvent *)event atStart:(BOOL)atStart;
 @property (nullable, readonly, strong) NSEvent *currentEvent;
 - (nullable NSEvent *)nextEventMatchingMask:(NSEventMask)mask untilDate:(nullable NSDate *)expiration inMode:(NSRunLoopMode)mode dequeue:(BOOL)deqFlag;
 - (void)discardEventsMatchingMask:(NSEventMask)mask beforeEvent:(nullable NSEvent *)lastEvent;
@@ -369,9 +370,9 @@ typedef NS_ENUM(NSUInteger, NSApplicationDelegateReply) {
 @end
 
 @interface NSApplication(NSFullKeyboardAccess)
-/**
- Use this method to get the status of Full Keyboard Access, as configured in the Keyboard preference pane. You may use this status to implement your own key loop or to implement in-control tabbing behavior similar to @c NSTableView. Because of the nature of the preference storage, you will not be notified of changes to the key if you attempt to observe it via key-value observing; however, calling this method is fairly inexpensive, so you should always call it when you need the underlying value instead of caching it.
- */
+/// A Boolean value indicating whether keyboard navigation is enabled in System Settings > Keyboard.
+/// - Note: The value of this property is `YES` if keyboard navigation is enabled or `NO` if it’s not. You might use this value to implement your own key loop or to implement in-control tabbing behavior similar to `NSTableView`. Because of the nature of the preference storage, you won’t be notified of changes to this property if you attempt to observe it through key-value observing; however, accessing this property is fairly inexpensive, so you can access it directly rather than caching it.
+/// - Note: This property’s value isn’t necessarily reflective of the separate accessibility setting named “Full Keyboard Access” in System Settings > Accessibility > Keyboard.
 @property (getter=isFullKeyboardAccessEnabled, readonly) BOOL fullKeyboardAccessEnabled API_AVAILABLE(macos(10.6));
 @end
 
@@ -415,7 +416,7 @@ typedef NS_ENUM(NSUInteger, NSApplicationPrintReply) {
 - (BOOL)application:(NSApplication *)sender printFile:(NSString *)filename NS_SWIFT_UI_ACTOR;
 - (NSApplicationPrintReply)application:(NSApplication *)application printFiles:(NSArray<NSString *> *)fileNames withSettings:(NSDictionary<NSPrintInfoAttributeKey, id> *)printSettings showPrintPanels:(BOOL)showPrintPanels NS_SWIFT_UI_ACTOR;
 - (BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)sender NS_SWIFT_UI_ACTOR;
-- (BOOL)applicationShouldHandleReopen:(NSApplication *)sender hasVisibleWindows:(BOOL)flag NS_SWIFT_UI_ACTOR;
+- (BOOL)applicationShouldHandleReopen:(NSApplication *)sender hasVisibleWindows:(BOOL)hasVisibleWindows NS_SWIFT_UI_ACTOR;
 - (nullable NSMenu *)applicationDockMenu:(NSApplication *)sender NS_SWIFT_UI_ACTOR;
 - (NSError *)application:(NSApplication *)application willPresentError:(NSError *)error NS_SWIFT_UI_ACTOR;
 
@@ -700,7 +701,7 @@ enum {
 - (void)endSheet:(NSWindow *)sheet API_DEPRECATED("Use -[NSWindow endSheet:] instead", macos(10.0,10.10));
 - (void)endSheet:(NSWindow *)sheet returnCode:(NSInteger)returnCode API_DEPRECATED("Use -[NSWindow endSheet:returnCode:] instead", macos(10.0,10.10));
 
-- (nullable NSWindow *)makeWindowsPerform:(SEL)selector inOrder:(BOOL)flag API_DEPRECATED("Use -enumerateWindowsWithOptions:usingBlock: instead", macos(10.0,10.14));
+- (nullable NSWindow *)makeWindowsPerform:(SEL)selector inOrder:(BOOL)inOrder API_DEPRECATED("Use -enumerateWindowsWithOptions:usingBlock: instead", macos(10.0,10.14));
 
 /**
  This method is deprecated as of macOS 10.12. Beginning in OS X 10.11 it would always return nil. Prior to this it would return an undefined graphics context that was not generally suitable for drawing.

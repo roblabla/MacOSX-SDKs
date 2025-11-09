@@ -9,15 +9,16 @@
 #import <Foundation/Foundation.h>
 #import <CoreLocation/CLAvailability.h>
 
-#if (((defined(__MAC_OS_X_VERSION_MIN_REQUIRED) && \
+#if ((defined(__MAC_OS_X_VERSION_MIN_REQUIRED) && \
 			 __MAC_OS_X_VERSION_MIN_REQUIRED  >=    __MAC_14_0) || \
 	(defined(__IPHONE_OS_VERSION_MIN_REQUIRED) && \
 			 __IPHONE_OS_VERSION_MIN_REQUIRED >= __IPHONE_17_0) || \
 	(defined(__TV_OS_VERSION_MIN_REQUIRED) && \
 			 __TV_OS_VERSION_MIN_REQUIRED     >=   __TVOS_17_0) || \
 	(defined(__WATCH_OS_VERSION_MIN_REQUIRED) && \
-			 __WATCH_OS_VERSION_MIN_REQUIRED  >= __WATCHOS_10_0)) && \
-	!TARGET_OS_VISION)
+			 __WATCH_OS_VERSION_MIN_REQUIRED  >= __WATCHOS_10_0) || \
+	(defined(__VISION_OS_VERSION_MIN_REQUIRED) && \
+			 __VISION_OS_VERSION_MIN_REQUIRED  >= __VISIONOS_2_0)) //To prevent iPadOS apps from crashing in visionOS
 #define CL_TARGET_SUPPORTS_CONDITIONS 1
 #else
 #define CL_TARGET_SUPPORTS_CONDITIONS 0

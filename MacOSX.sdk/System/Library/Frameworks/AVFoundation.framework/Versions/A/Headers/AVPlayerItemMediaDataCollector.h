@@ -29,7 +29,7 @@ NS_ASSUME_NONNULL_BEGIN
 		Subclasses of this type that are used from Swift must fulfill the requirements of a Sendable type.
 */
 NS_SWIFT_SENDABLE
-API_AVAILABLE(macos(10.11.3), ios(9.3), tvos(9.2), watchos(2.3))
+API_AVAILABLE(macos(10.11.3), ios(9.3), tvos(9.2), watchos(2.3), visionos(1.0))
 @interface AVPlayerItemMediaDataCollector : NSObject
 {
 @private
@@ -50,7 +50,7 @@ API_AVAILABLE(macos(10.11.3), ios(9.3), tvos(9.2), watchos(2.3))
 		Subclasses of this type that are used from Swift must fulfill the requirements of a Sendable type.
 */
 NS_SWIFT_SENDABLE
-API_AVAILABLE(macos(10.11.3), ios(9.3), tvos(9.2), watchos(2.3))
+API_AVAILABLE(macos(10.11.3), ios(9.3), tvos(9.2), watchos(2.3), visionos(1.0))
 @interface AVPlayerItemMetadataCollector : AVPlayerItemMediaDataCollector
 {
 @private
@@ -99,6 +99,7 @@ API_AVAILABLE(macos(10.11.3), ios(9.3), tvos(9.2), watchos(2.3))
 
 @end
 
+NS_SWIFT_SENDABLE
 @protocol AVPlayerItemMetadataCollectorPushDelegate <NSObject>
 
 /*!

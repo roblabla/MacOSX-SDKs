@@ -23,7 +23,8 @@ exports:
                        '_$sSo9STSReaderC24SecureTransactionServiceE5start13configurationAbCE12StateChangesVSo26STSEngagementConfigurationC_tYaKFTu', 
                        _NFCD_XPCHELPER_ERROR_DOMAIN, _STSXPCHelperErrorDescriptions, 
                        _STS_XCPHELPER_ERROR_BT_SUBDOMAIN, _STS_XCPHELPER_ERROR_DOMAIN, 
-                       _STS_XCPHELPER_ERROR_WIFI_SUBDOMAIN ]
+                       _STS_XCPHELPER_ERROR_WIFI_SUBDOMAIN, _kSTSErrorAlreadyInProgress, 
+                       _kSTSTapToProvisionErrorDomain ]
     objc-classes:    [ STS18013ReaderAnalyticsData, STS18013ReaderAuthInfo, STS18013RequestElement, 
                        STSAuxiliaryCredential, STSAuxiliaryTransaction, STSCredential, 
                        STSDCKAssertion, STSEngagementConfiguration, STSExpressEventInfo, 
@@ -32,7 +33,9 @@ exports:
                        STSListener, STSMerchantPaymentRequest, STSMerchantPaymentResponse, 
                        STSPaymentRequestBase, STSPaymentResponseBase, STSPeerPaymentRequest, 
                        STSPeerPaymentResponse, STSPeerPaymentTransferRequest, STSReader, 
-                       STSSession, STSSessionBase, STSSigningSession, STSTestReader, 
-                       STSTransaction18013Request, STSTransactionEndEvent, STSTransactionStartEvent, 
-                       STSVASCredential, STSVASTransaction, STSVehicleReport ]
+                       STSSession, STSSessionBase, STSSigningSession, STSTapToProvisionAppletData, 
+                       STSTapToProvisionParameters, STSTapToProvisionReader, STSTapToProvisionResult, 
+                       STSTestReader, STSTransaction18013Request, STSTransactionEndEvent, 
+                       STSTransactionStartEvent, STSVASCredential, STSVASTransaction, 
+                       STSVehicleReport ]
 ...

@@ -11,8 +11,7 @@
 
 #import <TargetConditionals.h>
 
-#if !TARGET_OS_WATCH && !TARGET_OS_TV
-
+#if !TARGET_OS_WATCH
 #if TARGET_OS_IOS && !TARGET_OS_MACCATALYST && __has_include(<AddressBook/ABRecord.h>)
 #import <AddressBook/ABRecord.h>
 #endif

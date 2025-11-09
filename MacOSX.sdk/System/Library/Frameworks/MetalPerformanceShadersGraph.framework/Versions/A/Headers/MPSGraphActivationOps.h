@@ -75,14 +75,14 @@ MPS_CLASS_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))
 ///   - gradient: The incoming gradient tensor.
 ///   - source: The input tensor.
 ///   - axis: The axis along which softmax is computed.
-///   - name: The name for the operation
+///   - name: The name for the operation.
 /// - Returns: A valid ``MPSGraphTensor`` object
 -(MPSGraphTensor *) softMaxGradientWithIncomingGradient:(MPSGraphTensor *) gradient
                                            sourceTensor:(MPSGraphTensor *) source
                                                    axis:(NSInteger) axis
                                                    name:(NSString * _Nullable) name;
 
-/// Computes the leaky ReLU (rectified linear unit activation) function on the input tensor.
+/// Computes the leaky rectified linear unit (ReLU) activation function on the input tensor.
 ///
 /// The operation is: f(x) = max(x, alpha).
 /// 
@@ -96,7 +96,7 @@ MPS_CLASS_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))
                                  name:(NSString* _Nullable) name
 MPS_AVAILABLE_STARTING(macos(12.0), ios(15.0), tvos(15.0));
 
-/// Computes the leaky ReLU (rectified linear unit activation) function on the input tensor.
+/// Computes the leaky rectified linear unit (ReLU) activation function on the input tensor.
 ///
 /// The operation is: f(x) = max(x, alpha).
 /// This operation supports broadcasting with the alpha tensor.
@@ -111,7 +111,7 @@ MPS_AVAILABLE_STARTING(macos(12.0), ios(15.0), tvos(15.0));
                                  name:(NSString* _Nullable) name
 MPS_AVAILABLE_STARTING(macos(12.0), ios(15.0), tvos(15.0));
 
-/// Computes the gradient of the leaky ReLU (rectified linear unit activation).
+/// Computes the gradient of the leaky rectified linear unit (ReLU) activation.
 ///
 /// This operation supports broadcasting with the alpha tensor.
 ///

@@ -95,7 +95,7 @@ MPS_SWIFT_NAME( transpose(_:permutation:name:) );
                          length:(NSInteger) length
                            name:(NSString * _Nullable) name;
 
-/// Creates a strided slice operation and returns the result tensor.
+/// Creates a strided-slice operation and returns the result tensor.
 ///
 /// Slices a tensor starting from `starts`, stopping short before `ends` stepping
 /// `strides` paces between each value. Semantics based on
@@ -114,7 +114,7 @@ MPS_SWIFT_NAME( transpose(_:permutation:name:) );
                         strides:(NSArray<NSNumber *> *) strides
                            name:(NSString * _Nullable) name;
 
-/// Creates a strided slice operation and returns the result tensor.
+/// Creates a strided-slice operation and returns the result tensor.
 ///
 /// Slices a tensor starting from `starts`, stopping short before `ends` stepping
 /// `strides` paces between each value. Semantics based on
@@ -139,7 +139,7 @@ MPS_SWIFT_NAME( transpose(_:permutation:name:) );
                     squeezeMask:(uint32_t) squeezeMask
                            name:(NSString * _Nullable) name;
 
-/// Creates a strided slice gradient operation and returns the result tensor.
+/// Creates a strided-slice gradient operation and returns the result tensor.
 ///
 /// - Parameters:
 ///   - inputGradientTensor: The input gradient.
@@ -156,7 +156,7 @@ MPS_SWIFT_NAME( transpose(_:permutation:name:) );
                                 strides:(NSArray<NSNumber *> *) strides
                                    name:(NSString * _Nullable) name;
 
-/// Creates a strided slice gradient operation and returns the result tensor.
+/// Creates a strided-slice gradient operation and returns the result tensor.
 ///
 /// - Parameters:
 ///   - inputGradientTensor: The input gradient.
@@ -167,7 +167,7 @@ MPS_SWIFT_NAME( transpose(_:permutation:name:) );
 ///   - startMask: A bitmask that indicates dimensions whose `starts` values the operation should ignore.
 ///   - endMask: A bitmask that indicates dimensions whose `ends` values the operation should ignore.
 ///   - squeezeMask: A bitmask that indicates dimensions the operation will squeeze out from the result.
-///   - name: The name for the operation
+///   - name: The name for the operation.
 /// - Returns: A valid MPSGraphTensor object
 -(MPSGraphTensor *) sliceGradientTensor:(MPSGraphTensor *) inputGradientTensor
                        fwdInShapeTensor:(MPSGraphTensor *) fwdInShapeTensor
@@ -179,7 +179,7 @@ MPS_SWIFT_NAME( transpose(_:permutation:name:) );
                             squeezeMask:(uint32_t) squeezeMask
                                    name:(NSString * _Nullable) name;
 
-/// Creates a strided slice update operation and returns the result tensor.
+/// Creates a strided-slice update operation and returns the result tensor.
 ///
 /// - Parameters:
 ///   - dataTensor: The large tensor that will receive the update.
@@ -190,7 +190,7 @@ MPS_SWIFT_NAME( transpose(_:permutation:name:) );
 ///   - startMask: A bitmask that indicates dimensions whose `starts` values the operation should ignore.
 ///   - endMask: A bitmask that indicates dimensions whose `ends` values the operation should ignore.
 ///   - squeezeMask: A bitmask that indicates dimensions the operation will squeeze out from the result.
-///   - name: The name for the operation
+///   - name: The name for the operation.
 /// - Returns: A valid MPSGraphTensor object
 -(MPSGraphTensor *) sliceUpdateDataTensor:(MPSGraphTensor *) dataTensor
                              updateTensor:(MPSGraphTensor *) updateTensor
@@ -203,7 +203,7 @@ MPS_SWIFT_NAME( transpose(_:permutation:name:) );
                                      name:(NSString * _Nullable) name
 MPS_AVAILABLE_STARTING(macos(14.4), ios(17.4), tvos(17.4));
 
-/// Creates a strided slice update operation and returns the result tensor.
+/// Creates a strided-slice update operation and returns the result tensor.
 ///
 /// - Parameters:
 ///   - dataTensor: The large tensor that will receive the update.
@@ -214,7 +214,7 @@ MPS_AVAILABLE_STARTING(macos(14.4), ios(17.4), tvos(17.4));
 ///   - startMask: A bitmask that indicates dimensions whose `starts` values the operation should ignore.
 ///   - endMask: A bitmask that indicates dimensions whose `ends` values the operation should ignore.
 ///   - squeezeMask: A bitmask that indicates dimensions the operation will squeeze out from the result.
-///   - name: The name for the operation
+///   - name: The name for the operation.
 /// - Returns: A valid MPSGraphTensor object
 -(MPSGraphTensor *) sliceUpdateDataTensor:(MPSGraphTensor *) dataTensor
                              updateTensor:(MPSGraphTensor *) updateTensor
@@ -226,6 +226,44 @@ MPS_AVAILABLE_STARTING(macos(14.4), ios(17.4), tvos(17.4));
                               squeezeMask:(uint32_t) squeezeMask
                                      name:(NSString * _Nullable) name
 MPS_AVAILABLE_STARTING(macos(14.4), ios(17.4), tvos(17.4));
+
+/// Creates a strided-slice update operation with zero masks and returns the result tensor.
+///
+/// - Parameters:
+///   - dataTensor: The large tensor that will receive the update.
+///   - updateTensor: The tensor with the new values that will replace values in the dataTensor.
+///   - startsTensor: A Tensor that contains an array of numbers that specify the starting points for each dimension.
+///   - endsTensor: A Tensor that contains an array of numbers that specify the ending points for each dimension.
+///   - stridesTensor: A Tensor that contains an array of numbers that specify the strides for each dimension.
+///   - name: The name for the operation.
+/// - Returns: A valid MPSGraphTensor object
+-(MPSGraphTensor *) sliceUpdateDataTensor:(MPSGraphTensor *) dataTensor
+                             updateTensor:(MPSGraphTensor *) updateTensor
+                             startsTensor:(MPSGraphTensor *) startsTensor
+                               endsTensor:(MPSGraphTensor *) endsTensor
+                            stridesTensor:(MPSGraphTensor *) stridesTensor
+                                     name:(NSString * _Nullable) name
+MPS_AVAILABLE_STARTING(macos(15.0), ios(18.0), macCatalyst(18.0), tvos(18.0), xros(2.0));
+
+/// Creates a strided-slice update operation with zero masks and returns the result tensor.
+///
+/// - Parameters:
+///   - dataTensor: The large tensor that will receive the update.
+///   - updateTensor: The tensor with the new values that will replace values in the dataTensor.
+///   - starts: An array of numbers that specify the starting points for each dimension.
+///   - ends: An array of numbers that specify the ending points for each dimension.
+///   - strides: An array of numbers that specify the strides for each dimension.
+///   - name: The name for the operation.
+/// - Returns: A valid MPSGraphTensor object
+-(MPSGraphTensor *) sliceUpdateDataTensor:(MPSGraphTensor *) dataTensor
+                             updateTensor:(MPSGraphTensor *) updateTensor
+                                   starts:(NSArray<NSNumber *> *) starts
+                                     ends:(NSArray<NSNumber *> *) ends
+                                  strides:(NSArray<NSNumber *> *) strides
+                                     name:(NSString * _Nullable) name
+MPS_AVAILABLE_STARTING(macos(15.0), ios(18.0), macCatalyst(18.0), tvos(18.0), xros(2.0));
+
+
 
 /// Creates a concatenation operation and returns the result tensor.
 ///
@@ -341,7 +379,7 @@ MPS_AVAILABLE_STARTING(macos(14.4), ios(17.4), tvos(17.4));
                                             rightPadding:(MPSShape *) rightPadding
                                                     name:(NSString * _Nullable) name;
 
-/// Creates a space-to-depth2d operation and returns the result tensor.
+/// Creates a space-to-depth2D operation and returns the result tensor.
 ///
 /// This operation outputs a copy of the `input` tensor, where values from the
 /// `widthAxis` and `heightAxis` dimensions are moved in spatial blocks of size
@@ -369,7 +407,7 @@ MPS_AVAILABLE_STARTING(macos(14.4), ios(17.4), tvos(17.4));
                                    name:(NSString * _Nullable) name
 MPS_AVAILABLE_STARTING(macos(12.0), ios(15.0), tvos(15.0));
 
-/// Creates a space-to-depth2d operation and returns the result tensor.
+/// Creates a space-to-depth2D operation and returns the result tensor.
 ///
 /// This operation outputs a copy of the `input` tensor, where values from the
 /// `widthAxisTensor` and `heightAxisTensor` dimensions are moved in spatial blocks of size
@@ -398,7 +436,7 @@ MPS_AVAILABLE_STARTING(macos(12.0), ios(15.0), tvos(15.0));
                                    name:(NSString * _Nullable) name
 MPS_AVAILABLE_STARTING(macos(12.0), ios(15.0), tvos(15.0));
 
-/// Creates a depth-to-space2d operation and returns the result tensor.
+/// Creates a depth-to-space2D operation and returns the result tensor.
 ///
 /// This operation outputs a copy of the input tensor, where values from the 
 /// `depthAxis` dimension are moved in spatial blocks of size `blockSize` to the
@@ -428,7 +466,7 @@ MPS_AVAILABLE_STARTING(macos(12.0), ios(15.0), tvos(15.0));
                                    name:(NSString * _Nullable) name
 MPS_AVAILABLE_STARTING(macos(12.0), ios(15.0), tvos(15.0));
 
-/// Creates a depth-to-space2d operation and returns the result tensor.
+/// Creates a depth-to-space2D operation and returns the result tensor.
 ///
 /// This operation outputs a copy of the input tensor, where values from the
 /// `depthAxisTensor` dimension are moved in spatial blocks of size `blockSize` to the
@@ -631,7 +669,7 @@ MPS_AVAILABLE_STARTING(macos(12.0), ios(15.0), tvos(15.0));
 MPS_AVAILABLE_STARTING(macos(12.0), ios(15.0), tvos(15.0));
 
 
-/// Creates a flatten2d operation and returns the result tensor.
+/// Creates a flatten2D operation and returns the result tensor.
 ///
 /// Flattens dimensions before `axis` to `result[0]` and dimensions starting
 /// from `axis` to `result[1]` and returns a rank-2 tensor as result.
@@ -647,7 +685,7 @@ MPS_AVAILABLE_STARTING(macos(12.0), ios(15.0), tvos(15.0));
 MPS_SWIFT_NAME( flatten2D(_:axis:name:) )
 MPS_AVAILABLE_STARTING(macos(12.0), ios(15.0), tvos(15.0));
 
-/// Creates a flatten2d operation and returns the result tensor.
+/// Creates a flatten2D operation and returns the result tensor.
 ///
 /// Flattens dimensions before `axis` to `result[0]` and dimensions starting
 /// from `axis` to `result[1]` and returns a rank-2 tensor as result.
@@ -670,8 +708,8 @@ MPS_AVAILABLE_STARTING(macos(12.0), ios(15.0), tvos(15.0));
 ///
 /// - Parameters:
 ///   - tensor: The tensor to be broadcasted
-///   - shape: The shape of the result tensor
-///   - name: The name for the operation
+///   - shape: The shape of the result tensor.
+///   - name: The name for the operation.
 /// - Returns: A valid MPSGraphTensor object
 -(MPSGraphTensor *) broadcastTensor:(MPSGraphTensor *) tensor
                             toShape:(MPSShape *) shape
@@ -782,7 +820,7 @@ MPS_AVAILABLE_STARTING(macos(12.3), ios(15.4), tvos(15.4));
 ///   - tensor: The input tensor
 ///   - splitSizesTensor: The lengths of the result tensors along the split axis.
 ///   - axis: The dimension along which MPSGraph splits the input tensor.
-///   - name: The name for the operation
+///   - name: The name for the operation.
 /// - Returns: A valid MPSGraphTensor object
 -(NSArray<MPSGraphTensor *> *) splitTensor:(MPSGraphTensor *) tensor
                           splitSizesTensor:(MPSGraphTensor *) splitSizesTensor
@@ -870,7 +908,7 @@ MPS_AVAILABLE_STARTING(macos(12.3), ios(15.4), tvos(15.4));
 MPS_SWIFT_NAME( squeeze(_:axesTensor:name:) )
 MPS_AVAILABLE_STARTING(macos(12.3), ios(15.4), tvos(15.4));
 
-/// Creates an expand dimensions operation and returns the result tensor.
+/// Creates an expand-dimensions operation and returns the result tensor.
 ///
 /// Expands the tensor, inserting a dimension with size 1 at the specified axis.
 ///
@@ -885,7 +923,7 @@ MPS_AVAILABLE_STARTING(macos(12.3), ios(15.4), tvos(15.4));
 MPS_SWIFT_NAME( expandDims(_:axis:name:) )
 MPS_AVAILABLE_STARTING(macos(12.3), ios(15.4), tvos(15.4));
 
-/// Creates an expand dimensions operation and returns the result tensor.
+/// Creates an expand-dimensions operation and returns the result tensor.
 ///
 /// Expands the tensor, inserting dimensions with size 1 at specified axes.
 ///
@@ -900,7 +938,7 @@ MPS_AVAILABLE_STARTING(macos(12.3), ios(15.4), tvos(15.4));
 MPS_SWIFT_NAME( expandDims(_:axes:name:) )
 MPS_AVAILABLE_STARTING(macos(12.3), ios(15.4), tvos(15.4));
 
-/// Creates an expand dimensions operation and returns the result tensor.
+/// Creates an expand-dimensions operation and returns the result tensor.
 ///
 /// Expands the tensor, inserting dimensions with size 1 at specified axes.
 ///

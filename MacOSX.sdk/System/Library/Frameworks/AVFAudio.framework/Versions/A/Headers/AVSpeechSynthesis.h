@@ -107,6 +107,7 @@ extern NSNotificationName AVSpeechSynthesisAvailableVoicesDidChangeNotification 
  Retrieve a voice by specifying the language code your text should be spoken in, or by using voiceWithIdentifier
  for a known voice identifier.
  */
+NS_SWIFT_SENDABLE
 NS_CLASS_AVAILABLE(10_14, 7_0)
 @interface AVSpeechSynthesisVoice : NSObject<NSSecureCoding>
 
@@ -161,6 +162,7 @@ NS_CLASS_AVAILABLE(10_14, 7_0)
  @discussion
  To start speaking, specify the AVSpeechSynthesisVoice and the string to be spoken, then optionally change the rate, pitch or volume if desired.
  */
+NS_SWIFT_NONSENDABLE
 NS_CLASS_AVAILABLE(10_14, 7_0)
 @interface AVSpeechUtterance : NSObject<NSCopying, NSSecureCoding>
 
@@ -220,6 +222,7 @@ NS_CLASS_AVAILABLE(10_14, 7_0)
  @discussion
  Create an instance of AVSpeechSynthesizer to start generating synthesized speech by using AVSpeechUtterance objects.
  */
+NS_SWIFT_NONSENDABLE
 NS_CLASS_AVAILABLE(10_14, 7_0)
 @interface AVSpeechSynthesizer : NSObject
 
@@ -290,6 +293,7 @@ NS_CLASS_AVAILABLE(10_14, 7_0)
  @abstract
  Defines an interface for delegates of AVSpeechSynthesizer to receive notifications of important speech utterance events.
  */
+NS_SWIFT_SENDABLE
 @protocol AVSpeechSynthesizerDelegate <NSObject>
 
 @optional
@@ -306,6 +310,7 @@ NS_CLASS_AVAILABLE(10_14, 7_0)
 
 #pragma mark - AVSpeechSynthesisMarker
 
+NS_SWIFT_SENDABLE
 API_AVAILABLE(ios(16.0), macos(13.0), watchos(9.0), tvos(16.0)) 
 @interface AVSpeechSynthesisMarker : NSObject <NSSecureCoding, NSCopying>
 

@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
  @c CPAlertTemplate represents a modal alert that must be dismissed with a button press
  before the user may return to using the app.
  */
-API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(macos, watchos, tvos)
+API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(macos, watchos)
 @interface CPAlertTemplate : CPTemplate
 
 /**
@@ -43,7 +43,7 @@ API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(macos, watchos, tvos)
  If you add more than this number of buttons, only the most recently-added buttons
  (up to this count) will be kept.
 */
-@property (nonatomic, class, readonly) NSUInteger maximumActionCount API_AVAILABLE(ios(14.0));
+@property (nonatomic, class, readonly) NSUInteger maximumActionCount API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(tvos);
 
 @property (nonatomic, strong, readonly) NSArray <CPAlertAction *> *actions;
 

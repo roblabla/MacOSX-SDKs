@@ -58,7 +58,7 @@ NS_SWIFT_SENDABLE
 
 @property (nonatomic, assign, readonly) BOOL hasAdjustments API_AVAILABLE(macos(12), ios(15), tvos(15));
 // only applies to adjusted assets
-@property (nonatomic, assign, readonly, nullable) NSString *adjustmentFormatIdentifier API_AVAILABLE(macos(12), ios(15), tvos(15));
+@property (nonatomic, copy, readonly, nullable) NSString *adjustmentFormatIdentifier API_AVAILABLE(macos(12), ios(15), tvos(15));
 
 #pragma mark - Capabilities
 

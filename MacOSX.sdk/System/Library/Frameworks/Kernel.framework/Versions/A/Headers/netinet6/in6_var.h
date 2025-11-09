@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2021 Apple Inc. All rights reserved.
+ * Copyright (c) 2000-2023 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  *
@@ -96,9 +96,11 @@
 #include <net/if_var.h>
 #include <net/net_kev.h>
 
+#include <sys/protosw.h>
 #include <netinet/in.h>
 #include <netinet6/scope6_var.h>
 #include <sys/kern_event.h>
+#include <sys/protosw.h>
 #include <net/ethernet.h>
 
 /*
@@ -405,9 +407,7 @@ struct kev_in6_data {
 #define SIOCGIFPDSTADDR_IN6     _IOWR('i', 64, struct in6_ifreq)
 #define SIOCGIFAFLAG_IN6        _IOWR('i', 73, struct in6_ifreq)
 
-#define SIOCGDRLST_IN6          _IOWR('i', 74, struct in6_drlist)
-
-#define SIOCGPRLST_IN6          _IOWR('i', 75, struct in6_prlist)
+/* removed: #define SIOCGDRLST_IN6          _IOWR('i', 74, struct in6_drlist) */
 
 #define OSIOCGIFINFO_IN6        _IOWR('i', 108, struct in6_ondireq)
 #define SIOCGIFINFO_IN6         _IOWR('i', 76, struct in6_ondireq)

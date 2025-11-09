@@ -12,10 +12,10 @@ NS_ASSUME_NONNULL_BEGIN
 /*!
  @abstract Base class of boot loader configuration.
  @discussion
-     VZVirtualMachineConfiguration requires a boot loader defining how to start the virtual machine.
-     VZBootLoader is the abstract base class of boot loader definitions.
+    VZVirtualMachineConfiguration requires a boot loader defining how to start the virtual machine.
+    VZBootLoader is the abstract base class of boot loader definitions.
 
-     Don't instantiate VZBootLoader directly, instead use its subclass VZEFIBootLoader, VZLinuxBootLoader, or VZMacOSBootLoader.
+    Don't instantiate VZBootLoader directly, instead use its subclass VZEFIBootLoader, VZLinuxBootLoader, or VZMacOSBootLoader.
 
  @see VZEFIBootLoader
  @see VZLinuxBootLoader

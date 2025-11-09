@@ -40,6 +40,13 @@ OS_EXPORT API_AVAILABLE(macos(12.0), ios(15.0), tvos(17.0)) API_UNAVAILABLE(watc
 */
 @property(nonatomic, assign) double gain;
 
+/*!
+    @property automaticHeadTrackingFlags
+    @abstract A combination of flags to express automatic headtracking behaviors for this listener.
+*/
+@property(nonatomic, assign) PHASEAutomaticHeadTrackingFlags automaticHeadTrackingFlags
+API_AVAILABLE(macos(15.0), ios(18.0), tvos(18.0)) API_UNAVAILABLE( watchos, visionos);
+
 @end
 
 NS_ASSUME_NONNULL_END

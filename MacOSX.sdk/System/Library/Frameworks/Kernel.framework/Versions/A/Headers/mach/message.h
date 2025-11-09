@@ -71,8 +71,10 @@
 #ifndef _MACH_MESSAGE_H_
 #define _MACH_MESSAGE_H_
 
+#include <stddef.h>
 #include <stdint.h>
 #include <machine/limits.h>
+#include <machine/types.h> /* user_addr_t */
 #include <mach/port.h>
 #include <mach/boolean.h>
 #include <mach/kern_return.h>
@@ -81,6 +83,9 @@
 #include <sys/cdefs.h>
 #include <sys/appleapiopts.h>
 #include <Availability.h>
+#if __has_feature(ptrauth_calls)
+#include <ptrauth.h>
+#endif
 
 /*
  *  The timeout mechanism uses mach_msg_timeout_t values,
@@ -281,6 +286,8 @@ typedef unsigned int mach_msg_descriptor_type_t;
 
 #define MACH_MSG_DESCRIPTOR_MAX MACH_MSG_GUARDED_PORT_DESCRIPTOR
 
+#define __ipc_desc_sign(d)
+
 #pragma pack(push, 4)
 
 typedef struct {
@@ -291,15 +298,15 @@ typedef struct {
 } mach_msg_type_descriptor_t;
 
 typedef struct {
-	mach_port_t                   name;
-#if !(defined(KERNEL) && defined(__LP64__))
-// Pad to 8 bytes everywhere except the K64 kernel where mach_port_t is 8 bytes
-	mach_msg_size_t               pad1;
-#endif
+	union {
+		mach_port_t __ipc_desc_sign("port") name;
+		mach_port_t           kext_name;
+		mach_port_t           u_name;
+	};
 	unsigned int                  pad2 : 16;
 	mach_msg_type_name_t          disposition : 8;
 	mach_msg_descriptor_type_t    type : 8;
-	uint32_t          pad_end;
+	uint32_t                      pad_end;
 } mach_msg_port_descriptor_t;
 
 
@@ -322,7 +329,11 @@ typedef struct {
 } mach_msg_ool_descriptor64_t;
 
 typedef struct {
-	void*                         address;
+	union {
+		void *__ipc_desc_sign("address") address;
+		void                 *kext_address;
+		user_addr_t           u_address;
+	};
 #if !defined(__LP64__)
 	mach_msg_size_t               size;
 #endif
@@ -357,7 +368,11 @@ typedef struct {
 } mach_msg_ool_ports_descriptor64_t;
 
 typedef struct {
-	void*                         address;
+	union {
+		void *__ipc_desc_sign("port_array") address;
+		void                 *kext_address;
+		user_addr_t           u_address;
+	};
 #if !defined(__LP64__)
 	mach_msg_size_t               count;
 #endif
@@ -390,16 +405,18 @@ typedef struct {
 } mach_msg_guarded_port_descriptor64_t;
 
 typedef struct {
-	mach_port_t                   name;
-#if !defined(__LP64__)
-	uint32_t                      pad1;
-#endif
+	union {
+		mach_port_t __ipc_desc_sign("guarded_port") name;
+		mach_port_t           kext_name;
+		mach_port_context_t   u_context;
+	};
 	mach_msg_guard_flags_t        flags : 16;
 	mach_msg_type_name_t          disposition : 8;
 	mach_msg_descriptor_type_t    type : 8;
-#if defined(__LP64__)
-	uint32_t                      pad_end;
-#endif /* defined(__LP64__) */
+	union {
+		uint32_t              pad_end;
+		mach_port_name_t      u_name;
+	};
 } mach_msg_guarded_port_descriptor_t;
 
 /*
@@ -408,7 +425,7 @@ typedef struct {
  * are of the same size in that environment.
  */
 #if defined(__LP64__) && defined(KERNEL)
-typedef union{
+typedef union {
 	mach_msg_port_descriptor_t            port;
 	mach_msg_ool_descriptor32_t           out_of_line;
 	mach_msg_ool_ports_descriptor32_t     ool_ports;
@@ -416,7 +433,7 @@ typedef union{
 	mach_msg_guarded_port_descriptor32_t  guarded_port;
 } mach_msg_descriptor_t;
 #else
-typedef union{
+typedef union {
 	mach_msg_port_descriptor_t            port;
 	mach_msg_ool_descriptor_t             out_of_line;
 	mach_msg_ool_ports_descriptor_t       ool_ports;
@@ -685,6 +702,10 @@ typedef natural_t mach_msg_type_number_t;
 #define MACH_MSG_TYPE_PORT_ANY_SEND(x)                  \
 	(((x) >= MACH_MSG_TYPE_MOVE_SEND) &&            \
 	 ((x) <= MACH_MSG_TYPE_MAKE_SEND_ONCE))
+
+#define MACH_MSG_TYPE_PORT_ANY_SEND_ONCE(x)             \
+	(((x) == MACH_MSG_TYPE_MOVE_SEND_ONCE) ||       \
+	 ((x) == MACH_MSG_TYPE_MAKE_SEND_ONCE))
 
 #define MACH_MSG_TYPE_PORT_ANY_RIGHT(x)                 \
 	(((x) >= MACH_MSG_TYPE_MOVE_RECEIVE) &&         \

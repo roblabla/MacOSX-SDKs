@@ -3,8 +3,11 @@
 #ifndef __BNNS_HEADER__
 #define __BNNS_HEADER__
 
+#include <TargetConditionals.h>
+
 #include "bnns_constants.h"
 #include "bnns_structures.h"
+#include "bnns_graph.h"
 
 #include <sys/types.h>
 
@@ -43,7 +46,8 @@ extern "C" {
  @abstract Filter object
 
  */
-typedef void * _Nullable BNNSFilter;
+typedef void * _Nullable BNNSFilter
+__API_DEPRECATED("Use BNNSGraph* APIs", macos(10.12, 15.0), ios(10.0, 18.0), watchos(3.0, 11.0), tvos(10.0, 18.0));
 
 /*!
 
@@ -61,7 +65,7 @@ typedef void * _Nullable BNNSFilter;
  */
 BNNSFilter BNNSFilterCreateLayerConvolution(const BNNSLayerParametersConvolution * layer_params,
                                             const BNNSFilterParameters * _Nullable filter_params)
-__API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0));
+__API_DEPRECATED("Use BNNSGraph* APIs", macos(11.0, 15.0), ios(14.0, 18.0), watchos(7.0, 11.0), tvos(14.0, 18.0));
 
 /*!
 
@@ -79,7 +83,7 @@ __API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0));
  */
 BNNSFilter BNNSFilterCreateLayerTransposedConvolution(const BNNSLayerParametersConvolution * layer_params,
                                                       const BNNSFilterParameters * _Nullable filter_params)
-__API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0));
+__API_DEPRECATED("Use BNNSGraph* APIs", macos(11.0, 15.0), ios(14.0, 18.0), watchos(7.0, 11.0), tvos(14.0, 18.0));
 
 /*!
 
@@ -97,7 +101,9 @@ __API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0));
  */
 BNNSFilter BNNSFilterCreateLayerFullyConnected(const BNNSLayerParametersFullyConnected * layer_params,
                                                const BNNSFilterParameters * _Nullable filter_params)
-__API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0));
+__API_DEPRECATED("Use BNNSGraph* APIs", macos(11.0, 15.0), ios(14.0, 18.0), watchos(7.0, 11.0), tvos(14.0, 18.0));
+
+#if !0
 
 /*!
 
@@ -115,7 +121,9 @@ __API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0));
  */
 BNNSFilter BNNSFilterCreateLayerPooling(const BNNSLayerParametersPooling * layer_params,
                                         const BNNSFilterParameters * _Nullable filter_params)
-__API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0));
+__API_DEPRECATED("Use BNNSGraph* APIs", macos(11.0, 15.0), ios(14.0, 18.0), watchos(7.0, 11.0), tvos(14.0, 18.0));
+
+#endif 
 
 /*!
 
@@ -133,7 +141,9 @@ __API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0));
  */
 BNNSFilter BNNSFilterCreateLayerActivation(const BNNSLayerParametersActivation * layer_params,
                                            const BNNSFilterParameters * _Nullable filter_params)
-__API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0));
+__API_DEPRECATED("Use BNNSGraph* APIs", macos(11.0, 15.0), ios(14.0, 18.0), watchos(7.0, 11.0), tvos(14.0, 18.0));
+
+#if !0
 
 /*!
 
@@ -150,7 +160,7 @@ __API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0));
  */
 BNNSFilter BNNSFilterCreateLayerLoss(const void * _Nonnull layer_params,
                                      const BNNSFilterParameters * _Nullable filter_params)
-__API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0));
+__API_DEPRECATED("Use BNNSGraph* APIs", macos(11.0, 15.0), ios(14.0, 18.0), watchos(7.0, 11.0), tvos(14.0, 18.0));
 
 /*!
 
@@ -169,7 +179,9 @@ __API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0));
 BNNSFilter BNNSFilterCreateLayerNormalization(BNNSFilterType normType,
                                               const BNNSLayerParametersNormalization * layer_params,
                                               const BNNSFilterParameters * _Nullable filter_params)
-__API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0));
+__API_DEPRECATED("Use BNNSGraph* APIs", macos(11.0, 15.0), ios(14.0, 18.0), watchos(7.0, 11.0), tvos(14.0, 18.0));
+
+#endif 
 
 /*!
 
@@ -186,7 +198,9 @@ __API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0));
  */
 BNNSFilter BNNSFilterCreateLayerArithmetic(const BNNSLayerParametersArithmetic * layer_params,
                                            const BNNSFilterParameters * _Nullable filter_params)
-__API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0));
+__API_DEPRECATED("Use BNNSGraph* APIs", macos(11.0, 15.0), ios(14.0, 18.0), watchos(7.0, 11.0), tvos(14.0, 18.0));
+
+#if !0
 
 /*!
 
@@ -203,7 +217,7 @@ __API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0));
  */
 BNNSFilter BNNSFilterCreateLayerPermute(const BNNSLayerParametersPermute * layer_params,
                                         const BNNSFilterParameters * _Nullable filter_params)
-__API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0));
+__API_DEPRECATED("Use BNNSGraph* APIs", macos(11.0, 15.0), ios(14.0, 18.0), watchos(7.0, 11.0), tvos(14.0, 18.0));
 
 /*
  @abstract Create a dropout filter
@@ -220,7 +234,7 @@ __API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0));
  */
 BNNSFilter BNNSFilterCreateLayerDropout(const BNNSLayerParametersDropout * layer_params,
                                         const BNNSFilterParameters * _Nullable filter_params)
-__API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0));
+__API_DEPRECATED("Use BNNSGraph* APIs", macos(11.0, 15.0), ios(14.0, 18.0), watchos(7.0, 11.0), tvos(14.0, 18.0));
 
 /*!
  @abstract Create a padding filter
@@ -238,7 +252,9 @@ The function will:
 
 BNNSFilter _Nullable BNNSFilterCreateLayerPadding(const BNNSLayerParametersPadding * layer_params,
                                         const BNNSFilterParameters * _Nullable filter_params)
-__API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0));
+__API_DEPRECATED("Use BNNSGraph* APIs", macos(11.0, 15.0), ios(14.0, 18.0), watchos(7.0, 11.0), tvos(14.0, 18.0));
+
+#endif 
 
 /*! @abstract Create a layer representing a broadcast matrix multiplication
  *
@@ -252,7 +268,7 @@ __API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0));
  */
 BNNSFilter BNNSFilterCreateLayerBroadcastMatMul(const BNNSLayerParametersBroadcastMatMul *layer_params,
                                                 const BNNSFilterParameters  * _Nullable filter_params)
-__API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0));
+__API_DEPRECATED("Use BNNSGraph* APIs", macos(11.0, 15.0), ios(14.0, 18.0), watchos(7.0, 11.0), tvos(14.0, 18.0));
 
 /*! @abstract Creates a layer representing an arbitrary tensor contraction
  *
@@ -267,7 +283,9 @@ __API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0));
  */
 BNNSFilter BNNSFilterCreateLayerTensorContraction(const BNNSLayerParametersTensorContraction *layer_params,
                                                   const BNNSFilterParameters  * _Nullable filter_params)
-__API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0));
+__API_DEPRECATED("Use BNNSGraph* APIs", macos(11.0, 15.0), ios(14.0, 18.0), watchos(7.0, 11.0), tvos(14.0, 18.0));
+
+#if !0
 
 /*! @abstract Create a layer representing a Gram matrix calculation
  *
@@ -283,7 +301,7 @@ __API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0));
  */
 BNNSFilter BNNSFilterCreateLayerGram(const BNNSLayerParametersGram *layer_params,
                                      const BNNSFilterParameters  * _Nullable filter_params)
-__API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0));
+__API_DEPRECATED("Use BNNSGraph* APIs", macos(11.0, 15.0), ios(14.0, 18.0), watchos(7.0, 11.0), tvos(14.0, 18.0));
 
 /*! @abstract Create a layer representing a resizing in one or more dimensions
  *
@@ -297,7 +315,7 @@ __API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0));
 */
 BNNSFilter BNNSFilterCreateLayerResize(const BNNSLayerParametersResize *layer_params,
                                        const BNNSFilterParameters * _Nullable filter_params)
-__API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0));
+__API_DEPRECATED("Use BNNSGraph* APIs", macos(11.0, 15.0), ios(14.0, 18.0), watchos(7.0, 11.0), tvos(14.0, 18.0));
 
 /*! @abstract Create a multiheaded attention layer
  *
@@ -311,7 +329,7 @@ __API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0));
  */
 BNNSFilter BNNSFilterCreateLayerMultiheadAttention(const BNNSLayerParametersMultiheadAttention * layer_params,
                                                    const BNNSFilterParameters * _Nullable filter_params)
-__API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0));
+__API_DEPRECATED("Use BNNSGraph* APIs", macos(11.0, 15.0), ios(14.0, 18.0), watchos(7.0, 11.0), tvos(14.0, 18.0));
 
 /*! @abstract Create a reduction layer
  *
@@ -325,7 +343,7 @@ __API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0));
  */
 BNNSFilter BNNSFilterCreateLayerReduction(const BNNSLayerParametersReduction * layer_params,
                                           const BNNSFilterParameters * _Nullable filter_params)
-__API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0));
+__API_DEPRECATED("Use BNNSGraph* APIs", macos(11.0, 15.0), ios(14.0, 18.0), watchos(7.0, 11.0), tvos(14.0, 18.0));
 
 /*!
 
@@ -349,7 +367,7 @@ __API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0));
   layer_params: [pointer to BNNSLayerParametersFullyConnected, pointer to BNNSLayerParametersNormalization]
 
   Configuration 3: Transposed Convolution -> Normalization
-  filter0 is tranposed convolution and filter1 is normalization. for example, the filter_type and layer_params arrays when using batchnorm should be as follows:
+  filter0 is transposed convolution and filter1 is normalization. for example, the filter_type and layer_params arrays when using batchnorm should be as follows:
   filter_type: [BNNSTransposedConvolution, BNNSBatchNorm]
   layer_params: [pointer to BNNSLayerParametersConvolution, pointer to BNNSLayerParametersNormalization]
 
@@ -368,7 +386,7 @@ __API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0));
   Note that if the quantization layer uses batch as an axis with scale and/or bias, the batch size is encoded in the quantization layer parameters. In this case, if the batch size changes, the filter must be destroyed and recreated.
  
   Configuration 6: Transposed Convolution -> Quantization
-  filter0 is tranposed convolution and filter1 is quantization. The filter_type and layer_params arrays should be as follows:
+  filter0 is transposed convolution and filter1 is quantization. The filter_type and layer_params arrays should be as follows:
   filter_type: [BNNSTransposedConvolution, BNNSQuantization]
   layer_params: [pointer to BNNSLayerParametersConvolution, pointer to BNNSLayerParametersQuantization]
   input and ouput descriptor data pointers in BNNSLayerParametersQuantization are ignored
@@ -392,7 +410,7 @@ BNNSFilter BNNSFilterCreateFusedLayer(const size_t number_of_fused_filters,
                                       const BNNSFilterType * filter_type,
                                       const void *_Nonnull *_Nonnull layer_params,
                                       const BNNSFilterParameters * _Nullable filter_params)
-__API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0));
+__API_DEPRECATED("Use BNNSGraph* APIs", macos(11.0, 15.0), ios(14.0, 18.0), watchos(7.0, 11.0), tvos(14.0, 18.0));
 
 /*! @abstract Create an embedding layer
  *
@@ -407,7 +425,9 @@ __API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0));
  */
 BNNSFilter BNNSFilterCreateLayerEmbedding(const BNNSLayerParametersEmbedding * layer_params,
                                           const BNNSFilterParameters * _Nullable filter_params)
-__API_AVAILABLE(macos(12.0), ios(15.0), watchos(8.0), tvos(15.0));
+__API_DEPRECATED("Use BNNSGraph* APIs", macos(12.0, 15.0), ios(15.0, 18.0), watchos(8.0, 11.0), tvos(15.0, 18.0));
+
+#endif 
 
 #pragma mark - Inference
 
@@ -421,7 +441,7 @@ __API_AVAILABLE(macos(12.0), ios(15.0), watchos(8.0), tvos(15.0));
   @return 0 on success, and -1 on failure.
  */
 int BNNSFilterApply(BNNSFilter filter, const void * in, void * out)
-__API_AVAILABLE(macos(10.12), ios(10.0), watchos(3.0), tvos(10.0));
+__API_DEPRECATED("Use BNNSGraph* APIs", macos(10.12, 15.0), ios(10.0, 18.0), watchos(3.0, 11.0), tvos(10.0, 18.0));
 
 /*!
 
@@ -448,7 +468,9 @@ int BNNSFilterApplyBatch(BNNSFilter filter,
                          size_t in_stride,
                          void * out,
                          size_t out_stride)
-__API_AVAILABLE(macos(10.12), ios(10.0), watchos(3.0), tvos(10.0));
+__API_DEPRECATED("Use BNNSGraph* APIs", macos(10.12, 15.0), ios(10.0, 18.0), watchos(3.0, 11.0), tvos(10.0, 18.0));
+
+#if !0
 
 /*!
  @abstract Applies a previously created pooling layer filter
@@ -474,7 +496,7 @@ int BNNSPoolingFilterApplyBatch(BNNSFilter filter, size_t batch_size,
                                 const void * _Nonnull in, size_t in_stride,
                                 void * _Nonnull out, size_t out_stride,
                                 size_t * _Nullable indices, size_t idx_stride)
-__API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0));
+__API_DEPRECATED("Use BNNSGraph* APIs", macos(11.0, 15.0), ios(14.0, 18.0), watchos(7.0, 11.0), tvos(14.0, 18.0));
 
 /*!
  @abstract Applies a previously created pooling layer filter, supporting multiple index data types
@@ -501,7 +523,9 @@ int BNNSPoolingFilterApplyBatchEx(BNNSFilter filter, size_t batch_size,
                                   const void * _Nonnull in, size_t in_stride,
                                   void * _Nonnull out, size_t out_stride,
                                   const BNNSDataType indices_data_type, void * _Nullable indices, size_t idx_stride)
-__API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0), tvos(16.0));
+__API_DEPRECATED("Use BNNSGraph* APIs", macos(13.0, 15.0), ios(16.0, 18.0), watchos(9.0, 11.0), tvos(16.0, 18.0));
+
+#endif 
 
 /*!
 
@@ -518,7 +542,7 @@ int BNNSFilterApplyTwoInput(BNNSFilter filter,
                             const void * inA,
                             const void * inB,
                             void * out)
-__API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0));
+__API_DEPRECATED("Use BNNSGraph* APIs", macos(11.0, 15.0), ios(14.0, 18.0), watchos(7.0, 11.0), tvos(14.0, 18.0));
 
 /*!
 
@@ -548,7 +572,9 @@ int BNNSFilterApplyTwoInputBatch(BNNSFilter filter,
                                  size_t inB_stride,
                                  void * out,
                                  size_t out_stride)
-__API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0));
+__API_DEPRECATED("Use BNNSGraph* APIs", macos(11.0, 15.0), ios(14.0, 18.0), watchos(7.0, 11.0), tvos(14.0, 18.0));
+
+#if !0
 
 /*!
 
@@ -589,7 +615,7 @@ int BNNSNormalizationFilterApplyBatch(BNNSFilter filter,
                                       void * out,
                                       size_t out_stride,
                                       bool training)
-__API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0));
+__API_DEPRECATED("Use BNNSGraph* APIs", macos(11.0, 15.0), ios(14.0, 18.0), watchos(7.0, 11.0), tvos(14.0, 18.0));
 
 /*!
 
@@ -620,7 +646,7 @@ int BNNSFusedFilterApplyBatch(BNNSFilter filter,
                               void * out,
                               size_t out_stride,
                               bool training)
-__API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0));
+__API_DEPRECATED("Use BNNSGraph* APIs", macos(11.0, 15.0), ios(14.0, 18.0), watchos(7.0, 11.0), tvos(14.0, 18.0));
 
 /*!
 
@@ -655,7 +681,9 @@ int BNNSFusedFilterApplyMultiInputBatch(BNNSFilter filter,
                                         void * _Nonnull out,
                                         size_t out_stride,
                                         bool training)
-__API_AVAILABLE(macos(12.0), ios(15.0), watchos(8.0), tvos(15.0));
+__API_DEPRECATED("Use BNNSGraph* APIs", macos(12.0, 15.0), ios(15.0, 18.0), watchos(8.0, 11.0), tvos(15.0, 18.0));
+
+#endif 
 
 /*!
 
@@ -700,8 +728,9 @@ int BNNSArithmeticFilterApplyBatch(BNNSFilter filter,
                                    const size_t * in_stride,
                                    void * out,
                                    size_t out_stride)
-__API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0));
+__API_DEPRECATED("Use BNNSGraph* APIs", macos(11.0, 15.0), ios(14.0, 18.0), watchos(7.0, 11.0), tvos(14.0, 18.0));
 
+#if !0
 
 /*! @abstract Applies a previously created multihead attention layer
  *
@@ -760,7 +789,7 @@ int BNNSApplyMultiheadAttention(BNNSFilter F, size_t batch_size,
                                 BNNSNDArrayDescriptor const* _Nullable add_to_attention,
                                 size_t * _Nullable backprop_cache_size, void * _Nullable backprop_cache,
                                 size_t * _Nullable workspace_size, void * _Nullable workspace)
-__API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0));
+__API_DEPRECATED("Use BNNSGraph* APIs", macos(11.0, 15.0), ios(14.0, 18.0), watchos(7.0, 11.0), tvos(14.0, 18.0));
 
 /*!
  @abstract Direct Apply a Quantization filter
@@ -780,7 +809,10 @@ int BNNSDirectApplyQuantizer(const BNNSLayerParametersQuantization * layer_param
                              size_t batch_size,
                              size_t input_stride,
                              size_t output_stride)
-__API_AVAILABLE(macos(12.0), ios(15.0), watchos(8.0), tvos(15.0));
+__API_DEPRECATED("Use BNNSGraph* APIs", macos(12.0, 15.0), ios(15.0, 18.0), watchos(8.0, 11.0), tvos(15.0, 18.0));
+
+#endif 
+
 #pragma mark - Filter destruction
 
 /*!
@@ -793,9 +825,11 @@ __API_AVAILABLE(macos(12.0), ios(15.0), watchos(8.0), tvos(15.0));
 
 */
 void BNNSFilterDestroy(BNNSFilter filter)
-__API_AVAILABLE(macos(10.12), ios(10.0), watchos(3.0), tvos(10.0));
+__API_DEPRECATED("Use BNNSGraph* APIs", macos(10.12, 15.0), ios(10.0, 18.0), watchos(3.0, 11.0), tvos(10.0, 18.0));
 
 #pragma mark - Training
+
+#if !0
 
 /*!
 
@@ -858,7 +892,7 @@ int BNNSOptimizerStep(BNNSOptimizerFunction function, const void *OptimizerAlgFi
                       const BNNSNDArrayDescriptor *_Nonnull *_Nonnull gradients,
                       BNNSNDArrayDescriptor * _Nullable * _Nullable accumulators,
                       const BNNSFilterParameters * _Nullable filter_params)
-__API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0));
+__API_DEPRECATED("Use BNNSGraph* APIs", macos(11.0, 15.0), ios(14.0, 18.0), watchos(7.0, 11.0), tvos(14.0, 18.0));
 
 /*!
 
@@ -877,7 +911,7 @@ __API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0));
 int BNNSClipByValue(BNNSNDArrayDescriptor * _Nonnull dest,
                     const BNNSNDArrayDescriptor * _Nonnull src,
                     float min_val, float max_val)
-__API_AVAILABLE(macos(12.0), ios(15.0), watchos(8.0), tvos(15.0));
+__API_DEPRECATED("Use BNNSGraph* APIs", macos(12.0, 15.0), ios(15.0, 18.0), watchos(8.0, 11.0), tvos(15.0, 18.0));
 
 /*!
 
@@ -898,7 +932,7 @@ int BNNSClipByNorm(BNNSNDArrayDescriptor * _Nonnull dest,
                    const BNNSNDArrayDescriptor * _Nonnull src,
                    float max_norm,
                    uint32_t axis_flags)
-__API_AVAILABLE(macos(12.0), ios(15.0), watchos(8.0), tvos(15.0));
+__API_DEPRECATED("Use BNNSGraph* APIs", macos(12.0, 15.0), ios(15.0, 18.0), watchos(8.0, 11.0), tvos(15.0, 18.0));
 
 /*!
 
@@ -921,7 +955,7 @@ int BNNSClipByGlobalNorm(BNNSNDArrayDescriptor * _Nonnull * _Nonnull dest,
                          size_t count,
                          float max_norm,
                          float use_norm)
-__API_AVAILABLE(macos(12.0), ios(15.0), watchos(8.0), tvos(15.0));
+__API_DEPRECATED("Use BNNSGraph* APIs", macos(12.0, 15.0), ios(15.0, 18.0), watchos(8.0, 11.0), tvos(15.0, 18.0));
 
 /*!
 
@@ -942,7 +976,7 @@ int BNNSComputeNorm(BNNSNDArrayDescriptor * _Nonnull dest,
                     const BNNSNDArrayDescriptor * _Nonnull src,
                     BNNSNormType norm_type,
                     uint32_t axis_flags)
-__API_AVAILABLE(macos(12.0), ios(15.0), watchos(8.0), tvos(15.0));
+__API_DEPRECATED("Use BNNSGraph* APIs", macos(12.0, 15.0), ios(15.0, 18.0), watchos(8.0, 11.0), tvos(15.0, 18.0));
 
 /*!
 
@@ -966,7 +1000,7 @@ int BNNSComputeNormBackward(const void * _Nonnull in,
                             const BNNSNDArrayDescriptor * _Nonnull out_delta,
                             BNNSNormType norm_type,
                             uint32_t axis_flags)
-__API_AVAILABLE(macos(12.0), ios(15.0), watchos(8.0), tvos(15.0));
+__API_DEPRECATED("Use BNNSGraph* APIs", macos(12.0, 15.0), ios(15.0, 18.0), watchos(8.0, 11.0), tvos(15.0, 18.0));
 
 /*!
 
@@ -1074,7 +1108,7 @@ int BNNSFilterApplyBackwardBatch(BNNSFilter filter,
                                  size_t out_delta_stride,
                                  BNNSNDArrayDescriptor * _Nullable weights_delta,
                                  BNNSNDArrayDescriptor * _Nullable bias_delta)
-__API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0));
+__API_DEPRECATED("Use BNNSGraph* APIs", macos(11.0, 15.0), ios(14.0, 18.0), watchos(7.0, 11.0), tvos(14.0, 18.0));
 
 /*!
 
@@ -1119,7 +1153,7 @@ int BNNSPoolingFilterApplyBackwardBatch(BNNSFilter filter,
                                         BNNSNDArrayDescriptor * _Nullable bias_delta,
                                         const size_t * _Nullable indices,
                                         size_t idx_stride)
-__API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0));
+__API_DEPRECATED("Use BNNSGraph* APIs", macos(11.0, 15.0), ios(14.0, 18.0), watchos(7.0, 11.0), tvos(14.0, 18.0));
 
 /*!
 
@@ -1168,7 +1202,7 @@ int BNNSPoolingFilterApplyBackwardBatchEx(BNNSFilter filter,
                                           const BNNSDataType indices_data_type,
                                           const void * _Nullable indices,
                                           size_t idx_stride)
-__API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0), tvos(16.0));
+__API_DEPRECATED("Use BNNSGraph* APIs", macos(13.0, 15.0), ios(16.0, 18.0), watchos(9.0, 11.0), tvos(16.0, 18.0));
 
 /*!
 
@@ -1278,7 +1312,7 @@ int BNNSFilterApplyBackwardTwoInputBatch(BNNSFilter filter,
                                          size_t out_delta_stride,
                                          BNNSNDArrayDescriptor * _Nullable weights_delta,
                                          BNNSNDArrayDescriptor * _Nullable bias_delta)
-__API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0));
+__API_DEPRECATED("Use BNNSGraph* APIs", macos(11.0, 15.0), ios(14.0, 18.0), watchos(7.0, 11.0), tvos(14.0, 18.0));
 
 /*!
 
@@ -1320,7 +1354,7 @@ int BNNSNormalizationFilterApplyBackwardBatch(BNNSFilter filter,
                                               size_t out_delta_stride,
                                               BNNSNDArrayDescriptor * _Nullable beta_delta,
                                               BNNSNDArrayDescriptor * _Nullable gamma_delta)
-__API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0));
+__API_DEPRECATED("Use BNNSGraph* APIs", macos(11.0, 15.0), ios(14.0, 18.0), watchos(7.0, 11.0), tvos(14.0, 18.0));
 
 /*!
 
@@ -1369,7 +1403,7 @@ int BNNSFusedFilterApplyBackwardBatch(BNNSFilter filter,
                                       BNNSNDArrayDescriptor * out_delta,
                                       size_t out_delta_stride,
                                       BNNSNDArrayDescriptor * _Nullable * _Nullable delta_parameters)
-__API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0));
+__API_DEPRECATED("Use BNNSGraph* APIs", macos(11.0, 15.0), ios(14.0, 18.0), watchos(7.0, 11.0), tvos(14.0, 18.0));
 
 /*!
 
@@ -1418,7 +1452,7 @@ int BNNSFusedFilterApplyBackwardMultiInputBatch(BNNSFilter filter,
                                                 BNNSNDArrayDescriptor * _Nonnull out_delta,
                                                 size_t out_delta_stride,
                                                 BNNSNDArrayDescriptor * _Nullable * _Nullable delta_parameters)
-__API_AVAILABLE(macos(12.0), ios(15.0), watchos(8.0), tvos(15.0));
+__API_DEPRECATED("Use BNNSGraph* APIs", macos(12.0, 15.0), ios(15.0, 18.0), watchos(8.0, 11.0), tvos(15.0, 18.0));
 
 /*!
 
@@ -1459,7 +1493,7 @@ int BNNSArithmeticFilterApplyBackwardBatch(BNNSFilter filter,
                                            const size_t out_stride,
                                            BNNSNDArrayDescriptor * out_delta,
                                            const size_t out_delta_stride)
-__API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0));
+__API_DEPRECATED("Use BNNSGraph* APIs", macos(11.0, 15.0), ios(14.0, 18.0), watchos(7.0, 11.0), tvos(14.0, 18.0));
 
 /*!
 
@@ -1482,7 +1516,7 @@ int BNNSPermuteFilterApplyBackwardBatch(BNNSFilter filter,
                                         size_t in_delta_stride,
                                         const BNNSNDArrayDescriptor * out_delta,
                                         size_t out_delta_stride)
-__API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0));
+__API_DEPRECATED("Use BNNSGraph* APIs", macos(11.0, 15.0), ios(14.0, 18.0), watchos(7.0, 11.0), tvos(14.0, 18.0));
 
 /*!
 
@@ -1534,7 +1568,7 @@ int BNNSLossFilterApplyBatch(BNNSFilter filter,
                              void * out,
                              BNNSNDArrayDescriptor * _Nullable in_delta,
                              size_t in_delta_stride)
-__API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0));
+__API_DEPRECATED("Use BNNSGraph* APIs", macos(11.0, 15.0), ios(14.0, 18.0), watchos(7.0, 11.0), tvos(14.0, 18.0));
 
 /*!
 
@@ -1580,7 +1614,7 @@ int BNNSLossFilterApplyBackwardBatch(BNNSFilter filter,
                                      size_t weights_size,
                                      const BNNSNDArrayDescriptor * out_delta,
                                      size_t out_delta_stride)
-__API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0));
+__API_DEPRECATED("Use BNNSGraph* APIs", macos(11.0, 15.0), ios(14.0, 18.0), watchos(7.0, 11.0), tvos(14.0, 18.0));
 
 /*! @abstract Applies a previously created multihead attention layer backwards to obtain gradients
  *
@@ -1642,7 +1676,7 @@ int BNNSApplyMultiheadAttentionBackward(BNNSFilter F, size_t batch_size,
                                         size_t backprop_cache_size, void * _Nullable backprop_cache,
                                         size_t * _Nullable workspace_size, void * _Nullable workspace
                                         )
-__API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0));
+__API_DEPRECATED("Use BNNSGraph* APIs", macos(11.0, 15.0), ios(14.0, 18.0), watchos(7.0, 11.0), tvos(14.0, 18.0));
 
 #pragma mark - Direct inference
 
@@ -1651,7 +1685,7 @@ __API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0));
  @return minimum bytes capacity of the training cache buffer
  */
 size_t BNNSComputeLSTMTrainingCacheCapacity(const BNNSLayerParametersLSTM * layer_params)
-__API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0));
+__API_DEPRECATED("Use BNNSGraph* APIs", macos(11.0, 15.0), ios(14.0, 18.0), watchos(7.0, 11.0), tvos(14.0, 18.0));
 
 /*!
 
@@ -1671,7 +1705,9 @@ int BNNSDirectApplyLSTMBatchTrainingCaching(const BNNSLayerParametersLSTM * laye
                                             const BNNSFilterParameters * _Nullable filter_params,
                                             void * _Nullable training_cache_ptr,
                                             const size_t training_cache_capacity)
-__API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0));
+__API_DEPRECATED("Use BNNSGraph* APIs", macos(11.0, 15.0), ios(14.0, 18.0), watchos(7.0, 11.0), tvos(14.0, 18.0));
+
+#endif 
 
 /*!
 
@@ -1696,7 +1732,7 @@ int BNNSDirectApplyActivationBatch(const BNNSLayerParametersActivation * layer_p
                                    size_t batch_size,
                                    size_t in_stride,
                                    size_t out_stride)
-__API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0));
+__API_DEPRECATED("Use BNNSGraph* APIs", macos(11.0, 15.0), ios(14.0, 18.0), watchos(7.0, 11.0), tvos(14.0, 18.0));
 
 /*!
 
@@ -1712,6 +1748,8 @@ int BNNSCopy(BNNSNDArrayDescriptor * dest,
              BNNSNDArrayDescriptor const * src,
              const BNNSFilterParameters * _Nullable filter_params)
 __API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0));
+
+#if !0
 
 /*!
  * @abstract Returns required workspace size for a call to BNNSMatMul() with the given paramters.
@@ -1737,7 +1775,7 @@ ssize_t BNNSMatMulWorkspaceSize(const bool transA,
                                 const BNNSNDArrayDescriptor * inputB,
                                 const BNNSNDArrayDescriptor * output,
                                 const BNNSFilterParameters * _Nullable filter_params)
-__API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0), tvos(16.0));
+__API_DEPRECATED("Use BNNSGraph* APIs", macos(13.0, 15.0), ios(16.0, 18.0), watchos(9.0, 11.0), tvos(16.0, 18.0));
 
 /*!
  * @abstract Directly apply a broadcast matrix multiplication layer.
@@ -1776,7 +1814,7 @@ int BNNSMatMul(const bool transA,
                const BNNSNDArrayDescriptor * output,
                void * _Nullable workspace,
                const BNNSFilterParameters * _Nullable filter_params)
-__API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0), tvos(16.0));
+__API_DEPRECATED("Use BNNSGraph* APIs", macos(13.0, 15.0), ios(16.0, 18.0), watchos(9.0, 11.0), tvos(16.0, 18.0));
 
 /*!
  * @abstract Directly apply a broadcast matrix multiplication layer.
@@ -1800,6 +1838,8 @@ void BNNSDirectApplyBroadcastMatMul(const bool transA,
                                     const BNNSNDArrayDescriptor * output,
                                     const BNNSFilterParameters * _Nullable filter_params)
 __API_DEPRECATED_WITH_REPLACEMENT("BNNSMatMul", macos(11.0, 13.0), ios(14.0, 16.0), watchos(7.0, 9.0), tvos(14.0, 16.0));
+
+#endif 
 
 /*! @abstract Transposes a tensor by swapping two of its dimensions.
  *
@@ -1829,6 +1869,8 @@ int BNNSTranspose(BNNSNDArrayDescriptor *dest,
                   const BNNSFilterParameters * _Nullable filter_params)
 __API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0));
 
+#if !0
+
 /*!
   @abstract Apply Reduction on selected axis
  @param layer_params  Layer parameters: input descriptor, output descriptor, reduce function and epsilon
@@ -1857,7 +1899,7 @@ __API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0));
  @return the error code of the processing - error only if I/O tensor descriptors have invalid or mismatching information
  */
 int BNNSCompareTensor(const BNNSNDArrayDescriptor * in0, const BNNSNDArrayDescriptor * in1, BNNSRelationalOperator op, BNNSNDArrayDescriptor * out)
-__API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0));
+__API_DEPRECATED("Use BNNSGraph* APIs", macos(11.0, 15.0), ios(14.0, 18.0), watchos(7.0, 11.0), tvos(14.0, 18.0));
 
 /*!
  @abstract return a new tensor by replicating the input tensor multiple times
@@ -1874,7 +1916,7 @@ __API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0));
 int BNNSTile(const BNNSNDArrayDescriptor *_Nonnull input,
              BNNSNDArrayDescriptor *_Nonnull output,
              const BNNSFilterParameters *_Nullable filter_params)
-__API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0), tvos(16.0));
+__API_DEPRECATED("Use BNNSGraph* APIs", macos(13.0, 15.0), ios(16.0, 18.0), watchos(9.0, 11.0), tvos(16.0, 18.0));
 
 
 /*!
@@ -1970,7 +2012,7 @@ int BNNSGather(size_t axis,
                const BNNSNDArrayDescriptor *indices,
                BNNSNDArrayDescriptor *output,
                const BNNSFilterParameters * _Nullable filter_params)
-__API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0), tvos(16.0));
+__API_DEPRECATED("Use BNNSGraph* APIs", macos(13.0, 15.0), ios(16.0, 18.0), watchos(9.0, 11.0), tvos(16.0, 18.0));
 
 /*!
  @abstract Scatter elements along a single axis
@@ -2004,7 +2046,7 @@ int BNNSScatter(size_t axis,
                 const BNNSNDArrayDescriptor *indices,
                 BNNSNDArrayDescriptor *output,
                 const BNNSFilterParameters * _Nullable filter_params)
-__API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0), tvos(16.0));
+__API_DEPRECATED("Use BNNSGraph* APIs", macos(13.0, 15.0), ios(16.0, 18.0), watchos(9.0, 11.0), tvos(16.0, 18.0));
 
 /*!
  @abstract Gathers a (k-1)-dimensional set of slices or elements from the input array
@@ -2033,7 +2075,7 @@ int BNNSGatherND(const BNNSNDArrayDescriptor *input,
                  const BNNSNDArrayDescriptor *indices,
                  BNNSNDArrayDescriptor *output,
                  const BNNSFilterParameters * _Nullable filter_params)
-__API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0), tvos(16.0));
+__API_DEPRECATED("Use BNNSGraph* APIs", macos(13.0, 15.0), ios(16.0, 18.0), watchos(9.0, 11.0), tvos(16.0, 18.0));
 
 /*!
  @abstract Scatters a (k-1)-dimensional set of slices or elements across the output array
@@ -2070,7 +2112,7 @@ int BNNSScatterND(BNNSReduceFunction op,
                   const BNNSNDArrayDescriptor *indices,
                   BNNSNDArrayDescriptor *output,
                   const BNNSFilterParameters * _Nullable filter_params)
-__API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0), tvos(16.0));
+__API_DEPRECATED("Use BNNSGraph* APIs", macos(13.0, 15.0), ios(16.0, 18.0), watchos(9.0, 11.0), tvos(16.0, 18.0));
 
 /*!
  @abstract Rearranges elements in a tensor according to shuffle type
@@ -2085,7 +2127,7 @@ int BNNSShuffle(const BNNSShuffleType type,
                 const BNNSNDArrayDescriptor *input,
                 BNNSNDArrayDescriptor *output,
                 const BNNSFilterParameters * _Nullable filter_params)
-__API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0), tvos(16.0));
+__API_DEPRECATED("Use BNNSGraph* APIs", macos(13.0, 15.0), ios(16.0, 18.0), watchos(9.0, 11.0), tvos(16.0, 18.0));
 
 /*!
  @abstract Set elements outside a center band to zeros for the innermost matrix (the two dimensions with
@@ -2105,7 +2147,7 @@ int BNNSBandPart(const int num_lower,
                  const BNNSNDArrayDescriptor *input,
                  BNNSNDArrayDescriptor *output,
                  const BNNSFilterParameters * _Nullable filter_params)
-__API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0), tvos(16.0));
+__API_DEPRECATED("Use BNNSGraph* APIs", macos(13.0, 15.0), ios(16.0, 18.0), watchos(9.0, 11.0), tvos(16.0, 18.0));
 
 /*!
  @abstract Resize the spatial dimensions (two dimensions with the smallest strides) of the first input
@@ -2126,7 +2168,7 @@ int BNNSCropResize(const BNNSLayerParametersCropResize * layer_params,
                    const BNNSNDArrayDescriptor *roi,
                    BNNSNDArrayDescriptor *output,
                    const BNNSFilterParameters * _Nullable filter_params)
-__API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0), tvos(16.0));
+__API_DEPRECATED("Use BNNSGraph* APIs", macos(13.0, 15.0), ios(16.0, 18.0), watchos(9.0, 11.0), tvos(16.0, 18.0));
 
 #pragma mark - Direct Apply Backward
 
@@ -2145,7 +2187,7 @@ int BNNSDirectApplyLSTMBatchBackward(const BNNSLayerParametersLSTM * layer_param
                                      const BNNSFilterParameters * _Nullable filter_params,
                                      const void * _Nullable training_cache_ptr,
                                      const size_t training_cache_capacity)
-__API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0));
+__API_DEPRECATED("Use BNNSGraph* APIs", macos(11.0, 15.0), ios(14.0, 18.0), watchos(7.0, 11.0), tvos(14.0, 18.0));
 
 /*!
  @abstract backward path of BNNSTile to calculate input delta from output delta
@@ -2162,7 +2204,7 @@ __API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0));
 int BNNSTileBackward(BNNSNDArrayDescriptor *_Nonnull in_delta,
                      const BNNSNDArrayDescriptor *_Nonnull out_delta,
                      const BNNSFilterParameters *_Nullable filter_params)
-__API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0), tvos(16.0));
+__API_DEPRECATED("Use BNNSGraph* APIs", macos(13.0, 15.0), ios(16.0, 18.0), watchos(9.0, 11.0), tvos(16.0, 18.0));
 
 /*!
  @abstract backward path of BNNSCropResize to calculate input delta from output delta
@@ -2182,7 +2224,7 @@ int BNNSCropResizeBackward(const BNNSLayerParametersCropResize * layer_params,
                            const BNNSNDArrayDescriptor *roi,
                            const BNNSNDArrayDescriptor *out_delta,
                            const BNNSFilterParameters * _Nullable filter_params)
-__API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0), tvos(16.0));
+__API_DEPRECATED("Use BNNSGraph* APIs", macos(13.0, 15.0), ios(16.0, 18.0), watchos(9.0, 11.0), tvos(16.0, 18.0));
 
 #pragma mark - Utility
 
@@ -2201,7 +2243,9 @@ __API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0), tvos(16.0));
           On failure, a BNNSNDArrayDescriptor with data member set to NULL.
  */
 BNNSNDArrayDescriptor BNNSGetPointer(BNNSFilter filter, BNNSPointerSpecifier target)
-__API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0));
+__API_DEPRECATED("Use BNNSGraph* APIs", macos(11.0, 15.0), ios(14.0, 18.0), watchos(7.0, 11.0), tvos(14.0, 18.0));
+
+#endif 
 
 /*!
  @abstract calculate the size in bytes of the array data
@@ -2211,11 +2255,21 @@ size_t BNNSNDArrayGetDataSize(const BNNSNDArrayDescriptor *_Nonnull array)
 __API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0), tvos(16.0));
 
 /*!
+ @abstract calculate the minimum size in bytes of the array data given the shape and stride
+ @return size of allocation sufficient to hold the tensor data, or `SIZE_T_MAX` if unable to
+         determine the size (e.g. due to dynamic shape or overflow)
+ */
+size_t BNNSTensorGetAllocationSize(const BNNSTensor *_Nonnull tensor)
+__API_AVAILABLE(macos(15.0), ios(18.0), watchos(11.0), tvos(18.0));
+
+/*!
  @abstract Determine the rank of the given layout
  @return The number of dimensions represented by `layout`, or `SIZE_T_MAX` if unable to determine
  */
 size_t BNNSDataLayoutGetRank(BNNSDataLayout layout)
 __API_AVAILABLE(macos(14.4), ios(17.4), watchos(10.4), tvos(17.4));
+
+#if !0
 
 /*!
  @abstract Converts sparse tensor from the standardized COO layout to a device specific sparse layout used by FullyConnected
@@ -2246,7 +2300,7 @@ int BNNSNDArrayFullyConnectedSparsifySparseCOO(const BNNSNDArrayDescriptor * _No
                                                void * _Nullable workspace,
                                                const size_t workspace_size,
                                                const BNNSFilterParameters *_Nullable filter_params)
-__API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0), tvos(16.0));
+__API_DEPRECATED("Use BNNSGraph* APIs", macos(13.0, 15.0), ios(16.0, 18.0), watchos(9.0, 11.0), tvos(16.0, 18.0));
 
 /*!
  @abstract Converts sparse tensor from the standardized CSR layout to a device specific sparse layout used by FullyConnected
@@ -2279,7 +2333,9 @@ int BNNSNDArrayFullyConnectedSparsifySparseCSR(const BNNSNDArrayDescriptor * _No
                                                void * _Nullable workspace,
                                                const size_t workspace_size,
                                                const BNNSFilterParameters *_Nullable filter_params)
-__API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0), tvos(16.0));
+__API_DEPRECATED("Use BNNSGraph* APIs", macos(13.0, 15.0), ios(16.0, 18.0), watchos(9.0, 11.0), tvos(16.0, 18.0));
+
+#endif 
 
 #pragma mark - Random number generation
 
@@ -2494,6 +2550,8 @@ int BNNSRandomFillCategoricalFloat(BNNSRandomGenerator generator,
                                    bool log_probabilities)
 __API_AVAILABLE(macos(14.0), ios(17.0), watchos(10.0), tvos(17.0));
 
+#if !0
+
 #pragma mark - K-Nearest Neighbors
 
 /*!
@@ -2652,6 +2710,8 @@ BNNSFilter BNNSFilterCreateVectorActivationLayer(const BNNSVectorDescriptor * in
                                                  const BNNSActivation * activation,
                                                  const BNNSFilterParameters * _Nullable filter_params)
 __API_DEPRECATED_WITH_REPLACEMENT("BNNSFilterCreateLayerActivation", macos(10.13, 11.0), ios(11.0, 14.0), watchos(4.0, 7.0), tvos(11.0, 14.0));
+
+#endif 
 
 #if !__has_include( <Availability.h> )
 #undef __API_AVAILABLE

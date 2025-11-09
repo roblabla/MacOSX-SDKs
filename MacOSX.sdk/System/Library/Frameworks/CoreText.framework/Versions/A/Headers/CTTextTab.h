@@ -47,6 +47,7 @@ typedef const struct CF_RELATED_TYPE(NSTextTab,,) __CTTextTab * CTTextTabRef;
     @abstract   Returns the CFType of the text tab object
 */
 
+CT_EXPORT
 CFTypeID CTTextTabGetTypeID( void ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 
@@ -93,6 +94,7 @@ CT_EXPORT const CFStringRef kCTTabColumnTerminatorsAttributeName CT_AVAILABLE(ma
     @result     The new CTTextTab.
 */
 
+CT_EXPORT
 CTTextTabRef CTTextTabCreate(
     CTTextAlignment alignment,
     double location,
@@ -113,6 +115,7 @@ CTTextTabRef CTTextTabCreate(
     @result     The tab's text alignment value.
 */
 
+CT_EXPORT
 CTTextAlignment CTTextTabGetAlignment(
     CTTextTabRef tab ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
@@ -127,6 +130,7 @@ CTTextAlignment CTTextTabGetAlignment(
     @result     The tab's ruler location relative to the back margin.
 */
 
+CT_EXPORT
 double CTTextTabGetLocation(
     CTTextTabRef tab ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
@@ -142,6 +146,7 @@ double CTTextTabGetLocation(
                 no dictionary is present.
 */
 
+CT_EXPORT
 CFDictionaryRef _Nullable CTTextTabGetOptions(
     CTTextTabRef tab ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 

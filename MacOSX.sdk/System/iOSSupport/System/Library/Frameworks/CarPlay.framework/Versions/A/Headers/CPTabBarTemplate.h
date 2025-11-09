@@ -11,7 +11,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @protocol CPTabBarTemplateDelegate;
 
-API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(macos, watchos, tvos)
+API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(macos, watchos)
 @interface CPTabBarTemplate : CPTemplate
 
 - (instancetype)init NS_UNAVAILABLE;
@@ -62,7 +62,7 @@ API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(macos, watchos, tvos)
  
  @param newTemplate The template that should become selected in the tab bar.
  */
-- (void)selectTemplate:(CPTemplate *)newTemplate NS_SWIFT_NAME(select(_:)) API_AVAILABLE(ios(17.0));
+- (void)selectTemplate:(CPTemplate *)newTemplate NS_SWIFT_NAME(select(_:)) API_AVAILABLE(ios(17.0)) API_UNAVAILABLE(tvos);
 
 /**
  Update the currently-selected tab in this tab bar template, switching to the tab
@@ -71,7 +71,7 @@ API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(macos, watchos, tvos)
  @param index The index of the tab to select. This must be less than the number
  of tabs in this tab bar template.
  */
-- (void)selectTemplateAtIndex:(NSInteger)index NS_SWIFT_NAME(selectTemplate(at:)) API_AVAILABLE(ios(17.0));
+- (void)selectTemplateAtIndex:(NSInteger)index NS_SWIFT_NAME(selectTemplate(at:)) API_AVAILABLE(ios(17.0)) API_UNAVAILABLE(tvos);
 
 @end
 

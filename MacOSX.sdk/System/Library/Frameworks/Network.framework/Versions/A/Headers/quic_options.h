@@ -823,6 +823,14 @@ uint16_t
 nw_quic_get_keepalive_interval(nw_protocol_metadata_t metadata);
 
 /*!
+ * @define NW_QUIC_CONNECTION_DEFAULT_KEEPALIVE
+ * @discussion A sentinel value passed to `nw_quic_set_keepalive_interval` to configure
+ * 		the default keepalive value. The current default behavior is to send a keepalive
+ * 		every 20 seconds, although this is subject to change.
+ */
+#define NW_QUIC_CONNECTION_DEFAULT_KEEPALIVE	UINT16_MAX
+
+/*!
  * @function nw_quic_set_keepalive_interval
  *
  * @abstract

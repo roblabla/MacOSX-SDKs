@@ -22,12 +22,23 @@
 #include <CoreMIDI/MIDIMessages.h>
 #include <CoreMIDI/MIDIBluetoothConnection.h>
 
+#include <CoreMIDI/MIDIUMPCI.h>
+
 #if __OBJC__
 #import <CoreMIDI/MIDINetworkSession.h>
 #endif
 
 #if __OBJC2__
+#import <CoreMIDI/MIDIUMPEndpoint.h>
+#import <CoreMIDI/MIDIUMPEndpointManager.h>
+#import <CoreMIDI/MIDIUMPFunctionBlock.h>
+#import <CoreMIDI/MIDIUMPMutableEndpoint.h>
+#import <CoreMIDI/MIDIUMPMutableFunctionBlock.h>
+
+#import <CoreMIDI/MIDICIDevice.h>
+#import <CoreMIDI/MIDICIDeviceManager.h>
 #import <CoreMIDI/MIDICapabilityInquiry.h>
+#import <CoreMIDI/MIDIUMPCIProfile.h>
 #endif
 
 #endif

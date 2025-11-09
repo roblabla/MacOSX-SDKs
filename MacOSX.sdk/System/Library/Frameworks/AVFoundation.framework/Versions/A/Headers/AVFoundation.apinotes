@@ -882,6 +882,8 @@ Tags:
 Typedefs:
 - Name: AVAssetImageGeneratorApertureMode
   SwiftName: AVAssetImageGenerator.ApertureMode
+- Name: AVAssetImageGeneratorDynamicRangePolicy
+  SwiftName: AVAssetImageGenerator.DynamicRangePolicy
 - Name: AVAssetWriterInputMediaDataLocation
   SwiftName: AVAssetWriterInput.MediaDataLocation
 - Name: AVCaptureDeviceTransportControlsSpeed
@@ -1339,6 +1341,12 @@ Globals:
   SwiftName: AVPlayerInterstitialEventMonitor.currentEventDidChangeNotification
 - Name: AVPlayerInterstitialEventMonitorAssetListResponseStatusDidChangeNotification
   SwiftName: AVPlayerInterstitialEventMonitor.assetListResponseStatusDidChangeNotification
+
+# AVPlayerItemIntegratedTimeline
+- Name: AVPlayerIntegratedTimelineSnapshotsOutOfSyncNotification
+  SwiftName: AVPlayerItemIntegratedTimeline.snapshotsOutOfSyncNotification
+- Name: AVPlayerIntegratedTimelineSnapshotsOutOfSyncReasonKey
+  SwiftName: AVPlayerItemIntegratedTimeline.snapshotsOutOfSyncReasonKey
 
 # AVPlaybackCoordinator
 - Name: AVPlaybackCoordinatorOtherParticipantsDidChangeNotification
@@ -2186,6 +2194,8 @@ SwiftVersions:
     SwiftWrapper: none
   - Name: AVAssetImageGeneratorApertureMode
     SwiftWrapper: none
+  - Name: AVAssetImageGeneratorDynamicRangePolicy
+    SwiftWrapper: none
   - Name: AVAudioTimePitchAlgorithm
     SwiftWrapper: none
   - Name: AVCaptureDeviceTransportControlsSpeed
@@ -2707,6 +2717,8 @@ SwiftVersions:
     SwiftName: AVAssetWriterInputMediaDataLocation
   - Name: AVAssetImageGeneratorApertureMode
     SwiftName: AVAssetImageGeneratorApertureMode
+  - Name: AVAssetImageGeneratorDynamicRangePolicy
+    SwiftName: AVAssetImageGenerator.DynamicRangePolicy
   - Name: AVContentKeyRequestRetryReason
     SwiftName: AVContentKeyRequestRetryReason
   - Name: AVPlayerItemLegibleOutputTextStylingResolution

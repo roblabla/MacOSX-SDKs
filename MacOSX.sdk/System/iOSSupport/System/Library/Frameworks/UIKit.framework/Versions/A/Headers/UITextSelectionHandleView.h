@@ -14,7 +14,7 @@ NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 /// @abstract   A view that represents a selection handle drawn at the edges of contiguous selection ranges.
 /// @discussion When a selection is ranged (i.e., length is > 0), and the device supports range adjustment via a gesture,
 ///             selection handles ("lollipops") are displayed at the edges of the contiguous selection (usually a UITextSelectionHighlightView).
-UIKIT_EXTERN API_AVAILABLE(ios(17.0)) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(17.0)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @protocol UITextSelectionHandleView <UICoordinateSpace>
 
 /// Controls which direction the handle is oriented. For example, NSDirectionalRectEdgeLeading indicates the handle is on the leading

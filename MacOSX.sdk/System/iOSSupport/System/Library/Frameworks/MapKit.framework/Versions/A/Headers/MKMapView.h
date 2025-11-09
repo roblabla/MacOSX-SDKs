@@ -22,6 +22,10 @@
 #import <MapKit/MKMapFeatureAnnotation.h>
 #endif
 
+#if !TARGET_OS_WATCH
+#import <MapKit/MKSelectionAccessory.h>
+#endif
+
 @class MKUserLocation;
 @class MKMapCamera;
 @class MKMapCameraZoomRange;
@@ -252,6 +256,7 @@ API_DEPRECATED_WITH_REPLACEMENT("-rendererForOverlay:", ios(4.0, 13.0)) API_UNAV
 @end
 
 API_UNAVAILABLE(watchos)
+NS_SWIFT_UI_ACTOR
 @protocol MKMapViewDelegate <NSObject>
 @optional
 
@@ -287,6 +292,23 @@ API_UNAVAILABLE(watchos)
 
 - (void)mapView:(MKMapView *)mapView didSelectAnnotation:(id<MKAnnotation>)annotation API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(macos, tvos, watchos);
 - (void)mapView:(MKMapView *)mapView didDeselectAnnotation:(id<MKAnnotation>)annotation API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(macos, tvos, watchos);
+
+#if !TARGET_OS_WATCH && !TARGET_OS_TV
+// Specifies the accessory to display for a selected annotation
+//
+// Called for all selected annotations. Not all types of annotations
+// currently support displaying selection accessories. Please return `nil`
+// for annotations where a selection accessory is not desired.
+//
+// No accessory will be displayed if...
+// - `nil` is returned
+// - `- mapView:selectionAccessoryForAnnotation:` is not implemented
+// - the accessory returned is not supported for `annotation`
+- (nullable MKSelectionAccessory *)mapView:(MKMapView *)mapView
+           selectionAccessoryForAnnotation:(id<MKAnnotation>)annotation
+API_AVAILABLE(ios(18.0), macos(15.0), visionos(2.0))
+API_UNAVAILABLE(watchos, tvos);
+#endif
 
 - (void)mapViewWillStartLocatingUser:(MKMapView *)mapView NS_AVAILABLE(10_9, 4_0);
 - (void)mapViewDidStopLocatingUser:(MKMapView *)mapView NS_AVAILABLE(10_9, 4_0);

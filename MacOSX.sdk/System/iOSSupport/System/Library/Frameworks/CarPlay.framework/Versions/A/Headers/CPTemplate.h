@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  Abstract superclass for a template object.
  */
-API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(macos, watchos, tvos)
+API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(macos, watchos)
 @interface CPTemplate : NSObject <NSSecureCoding>
 
 /**
@@ -31,7 +31,7 @@ API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(macos, watchos, tvos)
  
  @note Your template should specify either a @c tabSystemItem OR both a @c tabImage and @c tabTitle.
  */
-@property (nullable, nonatomic, copy) NSString *tabTitle API_AVAILABLE(ios(14.0));
+@property (nullable, nonatomic, copy) NSString *tabTitle API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(tvos);
 
 /**
  When this template is the first template displayed in a @c CPTabBarTemplate's tab, the tab will inherit
@@ -39,7 +39,7 @@ API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(macos, watchos, tvos)
  
  @note Your template should specify either a @c tabSystemItem OR both a @c tabImage and @c tabTitle.
  */
-@property (nullable, nonatomic, strong) UIImage *tabImage API_AVAILABLE(ios(14.0));
+@property (nullable, nonatomic, strong) UIImage *tabImage API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(tvos);
 
 /**
  When this template is the first template displayed in a @c CPTabBarTemplate's tab, the tab will inherit
@@ -47,7 +47,7 @@ API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(macos, watchos, tvos)
  
  @note Your template should specify either a @c tabSystemItem OR both a @c tabImage and @c tabTitle.
  */
-@property (nonatomic) UITabBarSystemItem tabSystemItem API_AVAILABLE(ios(14.0));
+@property (nonatomic) UITabBarSystemItem tabSystemItem API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(tvos);
 
 /**
  When this template is the first template displayed in a @c CPTabBarTemplate's tab, the tab may optionally
@@ -55,7 +55,7 @@ API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(macos, watchos, tvos)
  
  @note This defaults to NO. Specify YES to display a badge indicator on this tab.
 */
-@property (nonatomic) BOOL showsTabBadge API_AVAILABLE(ios(14.0));
+@property (nonatomic) BOOL showsTabBadge API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(tvos);
 
 @end
 

@@ -2,7 +2,7 @@
 //  hv_vm_allocate.h
 //  Hypervisor
 //
-//  Copyright © 2021-2023 Apple Inc. All rights reserved.
+//  Copyright © 2021-2024 Apple Inc. All rights reserved.
 //
 
 #pragma once
@@ -25,8 +25,7 @@ OS_ASSUME_NONNULL_BEGIN
 __BEGIN_DECLS
 
 /*!
- * @enum       hv_allocate_flags_t
- * @abstract   Memory allocation flags
+ @abstract Memory allocation flags
  */
 enum {
     HV_ALLOCATE_DEFAULT = 0,
@@ -35,34 +34,29 @@ enum {
 typedef uint64_t hv_allocate_flags_t;
 
 /*!
- * @function   hv_vm_allocate
- * @abstract   Allocate anonymous memory suitable to be mapped as guest memory
- * @param      uvap   Returned virtual address of the allocated memory
- * @param      size   Size in bytes of the region to be allocated
- * @param      flags  Memory allocation flags
- * @result     0 on success or error code
- * @discussion
- *             The memory is allocated with VM_PROT_DEFAULT permissions
- *             This API enables accurate memory accounting of the allocations
- *             it creates
- *             Size must be a multiple of PAGE_SIZE
- *             Memory returned by this API should be deallocated with
- *             hv_vm_deallocate
+ @abstract Allocate anonymous memory suitable to be mapped as guest memory
+ @param uvap Returned virtual address of the allocated memory
+ @param size Size in bytes of the region to be allocated
+ @param flags Memory allocation flags
+ @result 0 on success or error code
+ @discussion
+    The memory is allocated with VM_PROT_DEFAULT permissions
+    This API enables accurate memory accounting of the allocations
+    it creates
+    Size must be a multiple of PAGE_SIZE
+    Memory returned by this API should be deallocated with
+    hv_vm_deallocate
  */
-HV_API_AVAILABLE_ARM64(macos(12.1)) HV_API_AVAILABLE_X86_64(macos(12.0)) API_UNAVAILABLE(ios, tvos)
-OS_EXPORT
-hv_return_t hv_vm_allocate(void * _Nullable * _Nonnull uvap,
-    size_t size, hv_allocate_flags_t flags);
+OS_EXPORT HV_API_AVAILABLE_ARM64(macos(12.1)) HV_API_AVAILABLE_X86_64(macos(12.0)) API_UNAVAILABLE(ios, tvos)
+hv_return_t hv_vm_allocate(void * _Nullable * _Nonnull uvap, size_t size, hv_allocate_flags_t flags);
 
 /*!
- * @function   hv_vm_deallocate
- * @abstract   Deallocate memory previously allocated by hv_vm_allocate
- * @param      uva    Virtual address of the allocated memory
- * @param      size   Size in bytes of the region to be deallocated
- * @result     0 on success or error code
+ @abstract Deallocate memory previously allocated by hv_vm_allocate
+ @param uva Virtual address of the allocated memory
+ @param size Size in bytes of the region to be deallocated
+ @result 0 on success or error code
  */
-HV_API_AVAILABLE_ARM64(macos(12.1)) HV_API_AVAILABLE_X86_64(macos(12.0)) API_UNAVAILABLE(ios, tvos)
-OS_EXPORT
+OS_EXPORT HV_API_AVAILABLE_ARM64(macos(12.1)) HV_API_AVAILABLE_X86_64(macos(12.0)) API_UNAVAILABLE(ios, tvos)
 hv_return_t hv_vm_deallocate(void *uva, size_t size);
 
 __END_DECLS

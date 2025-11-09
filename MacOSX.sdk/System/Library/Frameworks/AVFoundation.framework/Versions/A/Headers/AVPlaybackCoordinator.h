@@ -4,7 +4,7 @@
 	
 	Framework: AVFoundation
 	
-	Copyright © 2020-2021 Apple Inc. All rights reserved.
+	Copyright © 2020-2024 Apple Inc. All rights reserved.
 */
 
 #import <AVFoundation/AVBase.h>
@@ -23,44 +23,44 @@ NS_ASSUME_NONNULL_BEGIN
 	@typedef 	AVCoordinatedPlaybackSuspensionReason
 	@abstract	Describes why an AVCoordinatedPlaybackParticipant is not currently available to participate in coordinated playback.
 */
-API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos)
+API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), visionos(1.0)) API_UNAVAILABLE(watchos)
 typedef NSString *AVCoordinatedPlaybackSuspensionReason NS_TYPED_EXTENSIBLE_ENUM;
 
 /**
 	@constant	AVCoordinatedPlaybackSuspensionReasonAudioSessionInterrupted
 	@abstract	The participant's audio session was interrupted.
  */
-AVF_EXPORT AVCoordinatedPlaybackSuspensionReason const AVCoordinatedPlaybackSuspensionReasonAudioSessionInterrupted API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos);
+AVF_EXPORT AVCoordinatedPlaybackSuspensionReason const AVCoordinatedPlaybackSuspensionReasonAudioSessionInterrupted API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 /**
 	@constant	AVCoordinatedPlaybackSuspensionReasonStallRecovery
 	@abstract	The player is buffering data after a stall.
  */
-AVF_EXPORT AVCoordinatedPlaybackSuspensionReason const AVCoordinatedPlaybackSuspensionReasonStallRecovery API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos);
+AVF_EXPORT AVCoordinatedPlaybackSuspensionReason const AVCoordinatedPlaybackSuspensionReasonStallRecovery API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 /**
 	@constant	AVCoordinatedPlaybackSuspensionReasonPlayingInterstitial
 	@abstract	The participant is presented with interstitial content instead of the main player.
  */
-AVF_EXPORT AVCoordinatedPlaybackSuspensionReason const AVCoordinatedPlaybackSuspensionReasonPlayingInterstitial API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos);
+AVF_EXPORT AVCoordinatedPlaybackSuspensionReason const AVCoordinatedPlaybackSuspensionReasonPlayingInterstitial API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 /**
 	@constant	AVCoordinatedPlaybackSuspensionReasonCoordinatedPlaybackNotPossible
 	@abstract	The participant cannot participate in coordinated playback.
  */
-AVF_EXPORT AVCoordinatedPlaybackSuspensionReason const AVCoordinatedPlaybackSuspensionReasonCoordinatedPlaybackNotPossible API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos);
+AVF_EXPORT AVCoordinatedPlaybackSuspensionReason const AVCoordinatedPlaybackSuspensionReasonCoordinatedPlaybackNotPossible API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 /**
 	@constant	AVCoordinatedPlaybackSuspensionReasonUserActionRequired
 	@abstract	The participant's playback object is in a state that requires manual intervention by the user to resume playback.
  */
-AVF_EXPORT AVCoordinatedPlaybackSuspensionReason const AVCoordinatedPlaybackSuspensionReasonUserActionRequired API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos);
+AVF_EXPORT AVCoordinatedPlaybackSuspensionReason const AVCoordinatedPlaybackSuspensionReasonUserActionRequired API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 /**
 	@constant	AVCoordinatedPlaybackSuspensionReasonUserIsChangingCurrentTime
 	@abstract	The participant is actively changing current time.
  */
-AVF_EXPORT AVCoordinatedPlaybackSuspensionReason const AVCoordinatedPlaybackSuspensionReasonUserIsChangingCurrentTime API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos);
+AVF_EXPORT AVCoordinatedPlaybackSuspensionReason const AVCoordinatedPlaybackSuspensionReasonUserIsChangingCurrentTime API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 /**
 	@class		AVCoordinatedPlaybackSuspension
@@ -68,7 +68,7 @@ AVF_EXPORT AVCoordinatedPlaybackSuspensionReason const AVCoordinatedPlaybackSusp
 	@note		See AVPlaybackCoordinator's beginSuspensionForReason: method for details on use.
 	@discussion	Subclasses of this type that are used from Swift must fulfill the requirements of a Sendable type.
  */
-API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos)
+API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), visionos(1.0)) API_UNAVAILABLE(watchos)
 @interface AVCoordinatedPlaybackSuspension : NSObject
 
 AV_INIT_UNAVAILABLE
@@ -108,13 +108,13 @@ AV_INIT_UNAVAILABLE
 	@constant	AVPlaybackCoordinatorOtherParticipantsDidChangeNotification
 	@abstract	Posted by the playback coordinator when its otherParticipants property changes.
  */
-AVF_EXPORT NSNotificationName const AVPlaybackCoordinatorOtherParticipantsDidChangeNotification API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0))  API_UNAVAILABLE(watchos);
+AVF_EXPORT NSNotificationName const AVPlaybackCoordinatorOtherParticipantsDidChangeNotification API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), visionos(1.0))  API_UNAVAILABLE(watchos);
 
 /**
 	@constant	AVPlaybackCoordinatorSuspensionReasonsDidChangeNotification
 	@abstract	Posted by the playback coordinator when its suspensionReasons property changes.
  */
-AVF_EXPORT NSNotificationName const AVPlaybackCoordinatorSuspensionReasonsDidChangeNotification API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0))  API_UNAVAILABLE(watchos);
+AVF_EXPORT NSNotificationName const AVPlaybackCoordinatorSuspensionReasonsDidChangeNotification API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), visionos(1.0))  API_UNAVAILABLE(watchos);
 
 
 /**
@@ -124,7 +124,7 @@ AVF_EXPORT NSNotificationName const AVPlaybackCoordinatorSuspensionReasonsDidCha
 				AVPlaybackCoordinator does not manage the items in the play queue of the connected players, so it is up to player's owner to share and match the play queue across participants.
 				The coordinator does, however, keep track of the identity of items enqueued in each player. This means that for one player's current time and rate to be applied on another player, both players must be playing the same item. If two players are playing different items, they each have independent playback states. When one of the two players transitions to the other's item later, it will match the time and rate of that other player.
 */
-API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos)
+API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), visionos(1.0)) API_UNAVAILABLE(watchos)
 @interface AVPlaybackCoordinator : NSObject
 
 AV_INIT_UNAVAILABLE
@@ -171,7 +171,7 @@ AV_INIT_UNAVAILABLE
 	@discussion	Subclasses of this type that are used from Swift must fulfill the requirements of a Sendable type.
 */
 NS_SWIFT_SENDABLE
-API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos)
+API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), visionos(1.0)) API_UNAVAILABLE(watchos)
 @interface AVCoordinatedPlaybackParticipant : NSObject
 
 /**
@@ -199,7 +199,7 @@ API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos)
 	@category	AVPlaybackCoordinator (AVCoordinatedPlaybackPolicies)
 	@abstract	Policies used by AVPlaybackCoordinator to determine how to interact with the group.
 */
-API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos)
+API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), visionos(1.0)) API_UNAVAILABLE(watchos)
 @interface AVPlaybackCoordinator (AVCoordinatedPlaybackPolicies)
 
 /**
@@ -244,7 +244,7 @@ API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos)
 				See AVPlayer's playbackCoordinator property for more details about player behavior changes.
 				AVPlayerPlaybackCoordinator may begin suspensions on behalf of the player when the player's timeControlStatus changes from AVPlayerTimeControlStatusPlaying to AVPlayerTimeControlStatusWaitingToPlayAtSpecifiedRate or AVPlayerTimeControlStatusPaused. These suspensions will end when the player's timeControlStatus changes back to AVPlayerTimeControlStatusPlaying. This means that a suspension that begun because the player entered a waiting state, will end automatically when the player is done waiting. A suspension that begun because the player paused, will only end once the player's rate changes back to non-zero.
 */
-API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos)
+API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), visionos(1.0)) API_UNAVAILABLE(watchos)
 @interface AVPlayerPlaybackCoordinator : AVPlaybackCoordinator
 
 AV_INIT_UNAVAILABLE
@@ -267,7 +267,8 @@ AV_INIT_UNAVAILABLE
 	@protocol	AVPlayerPlaybackCoordinatorDelegate
 	@abstract	Delegate protocol for AVPlayerPlaybackCoordinator.
  */
-API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos)
+NS_SWIFT_SENDABLE
+API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), visionos(1.0)) API_UNAVAILABLE(watchos)
 @protocol AVPlayerPlaybackCoordinatorDelegate <NSObject>
 
 @optional
@@ -290,7 +291,7 @@ API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos)
 				This delegate method is expected to return an array of NSValues with each value containing a CMTimeRange that represents the interstitial.
 				If the method is not implemented, the coordinator would assume that the entire item corresponds to the primary content.
 */
--(NSArray<NSValue *> *)playbackCoordinator:(AVPlayerPlaybackCoordinator *)coordinator interstitialTimeRangesForPlayerItem:(AVPlayerItem *)playerItem API_AVAILABLE(macos(12.3), ios(15.4), tvos(15.4)) API_UNAVAILABLE(watchos);
+-(NSArray<NSValue *> *)playbackCoordinator:(AVPlayerPlaybackCoordinator *)coordinator interstitialTimeRangesForPlayerItem:(AVPlayerItem *)playerItem API_AVAILABLE(macos(12.3), ios(15.4), tvos(15.4), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 @end
 
@@ -306,7 +307,7 @@ API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos)
 	@constant	AVDelegatingPlaybackCoordinatorRateChangeOptionPlayImmediately
 					Requests that the coordinator begin playback as soon as possible and ignore other participant's readiness and suspensions.
 */
-API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos)
+API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), visionos(1.0)) API_UNAVAILABLE(watchos)
 typedef NS_OPTIONS(NSUInteger, AVDelegatingPlaybackCoordinatorRateChangeOptions) {
 	AVDelegatingPlaybackCoordinatorRateChangeOptionPlayImmediately = (1UL << 0),
 };
@@ -318,7 +319,7 @@ typedef NS_OPTIONS(NSUInteger, AVDelegatingPlaybackCoordinatorRateChangeOptions)
 	@constant	AVDelegatingPlaybackCoordinatorSeekOptionResumeImmediately
 					Requests that the coordinator resume playback as soon as possible after the seek is complete and ignore other participant's readiness and suspensions.
 */
-API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos)
+API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), visionos(1.0)) API_UNAVAILABLE(watchos)
 typedef NS_OPTIONS(NSUInteger, AVDelegatingPlaybackCoordinatorSeekOptions) {
 	AVDelegatingPlaybackCoordinatorSeekOptionResumeImmediately = (1UL << 0),
 };
@@ -328,7 +329,7 @@ typedef NS_OPTIONS(NSUInteger, AVDelegatingPlaybackCoordinatorSeekOptions) {
 	@abstract	An AVPlaybackCoordinator subclass for controlling a custom playback object.
 	@note		Use AVPlayer's playbackCoordinator property to get an AVPlaybackCoordinator for an AVPlayer.
 */
-API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos)
+API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), visionos(1.0)) API_UNAVAILABLE(watchos)
 @interface AVDelegatingPlaybackCoordinator : AVPlaybackCoordinator
 
 /**
@@ -420,7 +421,8 @@ API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos)
 	@protocol	AVPlaybackCoordinatorPlaybackControlDelegate
 	@abstract	A custom player implementation
 */
-API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos)
+NS_SWIFT_SENDABLE
+API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), visionos(1.0)) API_UNAVAILABLE(watchos)
 @protocol AVPlaybackCoordinatorPlaybackControlDelegate <NSObject>
 
 /**
@@ -439,7 +441,7 @@ API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos)
 */
 -(void)playbackCoordinator:(AVDelegatingPlaybackCoordinator *)coordinator
 	   didIssuePlayCommand:(AVDelegatingPlaybackCoordinatorPlayCommand *)playCommand
-		 completionHandler:(void (^)(void))completionHandler;
+		 completionHandler:(void (^ NS_SWIFT_SENDABLE)(void))completionHandler;
 
 /**
 	@method		playbackCoordinator:didIssuePauseCommand:completionHandler:
@@ -456,7 +458,7 @@ API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos)
 */
 -(void)playbackCoordinator:(AVDelegatingPlaybackCoordinator *)coordinator
 	  didIssuePauseCommand:(AVDelegatingPlaybackCoordinatorPauseCommand *)pauseCommand
-		 completionHandler:(void (^)(void))completionHandler;
+		 completionHandler:(void (^ NS_SWIFT_SENDABLE)(void))completionHandler;
 
 
 /**
@@ -475,7 +477,7 @@ API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos)
 */
 -(void)playbackCoordinator:(AVDelegatingPlaybackCoordinator *)coordinator
 	   didIssueSeekCommand:(AVDelegatingPlaybackCoordinatorSeekCommand *)seekCommand
-		 completionHandler:(void (^)(void))completionHandler;
+		 completionHandler:(void (^ NS_SWIFT_SENDABLE)(void))completionHandler;
 
 
 /**
@@ -496,7 +498,7 @@ API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos)
 */
 -(void)playbackCoordinator:(AVDelegatingPlaybackCoordinator *)coordinator
   didIssueBufferingCommand:(AVDelegatingPlaybackCoordinatorBufferingCommand *)bufferingCommand
-		 completionHandler:(void (^)(void))completionHandler;
+		 completionHandler:(void (^ NS_SWIFT_SENDABLE)(void))completionHandler;
 
 @end
 
@@ -506,7 +508,7 @@ API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos)
 	@discussion	Subclasses of this type that are used from Swift must fulfill the requirements of a Sendable type.
 */
 NS_SWIFT_SENDABLE
-API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos)
+API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), visionos(1.0)) API_UNAVAILABLE(watchos)
 @interface AVDelegatingPlaybackCoordinatorPlaybackControlCommand : NSObject
 
 AV_INIT_UNAVAILABLE
@@ -537,7 +539,7 @@ AV_INIT_UNAVAILABLE
 	@discussion	Subclasses of this type that are used from Swift must fulfill the requirements of a Sendable type.
 */
 NS_SWIFT_SENDABLE
-API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos)
+API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), visionos(1.0)) API_UNAVAILABLE(watchos)
 @interface AVDelegatingPlaybackCoordinatorPlayCommand : AVDelegatingPlaybackCoordinatorPlaybackControlCommand
 
 AV_INIT_UNAVAILABLE
@@ -576,7 +578,7 @@ AV_INIT_UNAVAILABLE
 				Subclasses of this type that are used from Swift must fulfill the requirements of a Sendable type.
 */
 NS_SWIFT_SENDABLE
-API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos)
+API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), visionos(1.0)) API_UNAVAILABLE(watchos)
 @interface AVDelegatingPlaybackCoordinatorBufferingCommand : AVDelegatingPlaybackCoordinatorPlaybackControlCommand
 
 AV_INIT_UNAVAILABLE
@@ -606,7 +608,7 @@ AV_INIT_UNAVAILABLE
 	@discussion	Subclasses of this type that are used from Swift must fulfill the requirements of a Sendable type.
 */
 NS_SWIFT_SENDABLE
-API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos)
+API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), visionos(1.0)) API_UNAVAILABLE(watchos)
 @interface AVDelegatingPlaybackCoordinatorPauseCommand : AVDelegatingPlaybackCoordinatorPlaybackControlCommand
 
 AV_INIT_UNAVAILABLE
@@ -637,7 +639,7 @@ AV_INIT_UNAVAILABLE
 				Subclasses of this type that are used from Swift must fulfill the requirements of a Sendable type.
 */
 NS_SWIFT_SENDABLE
-API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos)
+API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), visionos(1.0)) API_UNAVAILABLE(watchos)
 @interface AVDelegatingPlaybackCoordinatorSeekCommand : AVDelegatingPlaybackCoordinatorPlaybackControlCommand
 
 AV_INIT_UNAVAILABLE

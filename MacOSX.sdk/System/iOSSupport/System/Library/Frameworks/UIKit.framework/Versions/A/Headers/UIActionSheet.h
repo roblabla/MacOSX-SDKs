@@ -21,9 +21,9 @@ typedef NS_ENUM(NSInteger, UIActionSheetStyle) {
     UIActionSheetStyleDefault          = UIBarStyleDefault,
     UIActionSheetStyleBlackTranslucent = UIBarStyleBlackTranslucent,
     UIActionSheetStyleBlackOpaque      = UIBarStyleBlackOpaque ,
-} API_UNAVAILABLE(tvos) API_DEPRECATED("UIActionSheet is deprecated. Use UIAlertController with a preferredStyle of UIAlertControllerStyleActionSheet instead.", ios(2.0, 13.0)) API_UNAVAILABLE(visionos);
+} API_DEPRECATED("UIActionSheet is deprecated. Use UIAlertController with a preferredStyle of UIAlertControllerStyleActionSheet instead.", ios(2.0, 13.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(visionos, watchos);
 
-UIKIT_EXTERN API_DEPRECATED("UIActionSheet is deprecated. Use UIAlertController with a preferredStyle of UIAlertControllerStyleActionSheet instead", ios(2.0, 8.3)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_DEPRECATED("UIActionSheet is deprecated. Use UIAlertController with a preferredStyle of UIAlertControllerStyleActionSheet instead", ios(2.0, 8.3)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(visionos, watchos) NS_SWIFT_UI_ACTOR
 @interface UIActionSheet : UIView
 
 - (instancetype)initWithTitle:(nullable NSString *)title delegate:(nullable id<UIActionSheetDelegate>)delegate cancelButtonTitle:(nullable NSString *)cancelButtonTitle destructiveButtonTitle:(nullable NSString *)destructiveButtonTitle otherButtonTitles:(nullable NSString *)otherButtonTitles, ... NS_REQUIRES_NIL_TERMINATION;
@@ -59,22 +59,22 @@ UIKIT_EXTERN API_DEPRECATED("UIActionSheet is deprecated. Use UIAlertController 
 @end
 
 
-API_UNAVAILABLE(tvos) NS_SWIFT_UI_ACTOR
+API_UNAVAILABLE(tvos, watchos) NS_SWIFT_UI_ACTOR
 @protocol UIActionSheetDelegate <NSObject>
 @optional
 
 // Called when a button is clicked. The view will be automatically dismissed after this call returns
-- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex API_DEPRECATED("Use UIAlertController instead.", ios(2.0, 8.3)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos);
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex API_DEPRECATED("Use UIAlertController instead.", ios(2.0, 8.3)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(visionos, watchos);
 
 // Called when we cancel a view (eg. the user clicks the Home button). This is not called when the user clicks the cancel button.
 // If not defined in the delegate, we simulate a click in the cancel button
-- (void)actionSheetCancel:(UIActionSheet *)actionSheet API_DEPRECATED("Use UIAlertController instead.", ios(2.0, 8.3)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos);
+- (void)actionSheetCancel:(UIActionSheet *)actionSheet API_DEPRECATED("Use UIAlertController instead.", ios(2.0, 8.3)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(visionos, watchos);
 
-- (void)willPresentActionSheet:(UIActionSheet *)actionSheet API_DEPRECATED("Use UIAlertController instead.", ios(2.0, 8.3)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos);  // before animation and showing view
-- (void)didPresentActionSheet:(UIActionSheet *)actionSheet API_DEPRECATED("Use UIAlertController instead.", ios(2.0, 8.3)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos);  // after animation
+- (void)willPresentActionSheet:(UIActionSheet *)actionSheet API_DEPRECATED("Use UIAlertController instead.", ios(2.0, 8.3)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(visionos, watchos);  // before animation and showing view
+- (void)didPresentActionSheet:(UIActionSheet *)actionSheet API_DEPRECATED("Use UIAlertController instead.", ios(2.0, 8.3)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(visionos, watchos);  // after animation
 
-- (void)actionSheet:(UIActionSheet *)actionSheet willDismissWithButtonIndex:(NSInteger)buttonIndex API_DEPRECATED("Use UIAlertController instead.", ios(2.0, 8.3)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos); // before animation and hiding view
-- (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex API_DEPRECATED("Use UIAlertController instead.", ios(2.0, 8.3)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos);  // after animation
+- (void)actionSheet:(UIActionSheet *)actionSheet willDismissWithButtonIndex:(NSInteger)buttonIndex API_DEPRECATED("Use UIAlertController instead.", ios(2.0, 8.3)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(visionos, watchos); // before animation and hiding view
+- (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex API_DEPRECATED("Use UIAlertController instead.", ios(2.0, 8.3)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(visionos, watchos);  // after animation
 
 @end
 

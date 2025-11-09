@@ -24,10 +24,6 @@
 #ifndef __OPENCL_CL_GL_EXT_H
 #define __OPENCL_CL_GL_EXT_H
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 #include <OpenCL/cl_gl.h>
 
 #include <OpenGL/CGLTypes.h>
@@ -35,6 +31,10 @@ extern "C" {
 	
 #ifndef AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER
 #include <IOSurface/IOSurface.h>
+#endif
+
+#ifdef __cplusplus
+extern "C" {
 #endif
 
 /* Context GL sharing

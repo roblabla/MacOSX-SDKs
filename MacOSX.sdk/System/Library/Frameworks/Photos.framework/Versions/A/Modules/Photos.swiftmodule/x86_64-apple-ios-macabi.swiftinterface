@@ -1,11 +1,15 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.10 (swiftlang-5.10.0.12.5 clang-1500.3.9.1.1)
-// swift-module-flags: -target x86_64-apple-ios17.5-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Osize -library-level api -enable-bare-slash-regex -user-module-version 651.0.100 -module-name Photos
+// swift-compiler-version: Apple Swift version 6.0 effective-5.10 (swiftlang-6.0.0.7.24 clang-1600.0.25.1)
+// swift-module-flags: -target x86_64-apple-ios18.0-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Osize -library-level api -enable-bare-slash-regex -user-module-version 701.0.230 -module-name Photos
+// swift-module-flags-ignorable: -no-verify-emitted-module-interface
+import CoreData
+import Foundation
 @_exported import Photos
 import Swift
 import _Concurrency
 import _StringProcessing
 import _SwiftConcurrencyShims
+import os
 @available(iOS 8.0, tvOS 10.0, macOS 10.13, *)
 extension Photos.PHChange {
   @_alwaysEmitIntoClient public func changeDetails<T>(for object: T) -> Photos.PHObjectChangeDetails<T>? where T : Photos.PHObject {
@@ -34,5 +38,6 @@ extension Photos.PHPersistentChangeFetchResult : Swift.Sequence {
     @objc deinit
   }
   public func makeIterator() -> Photos.PHPersistentChangeFetchResult.Iterator
+  @available(iOS 16, tvOS 16, macOS 13, *)
   public typealias Element = Photos.PHPersistentChangeFetchResult.Iterator.Element
 }

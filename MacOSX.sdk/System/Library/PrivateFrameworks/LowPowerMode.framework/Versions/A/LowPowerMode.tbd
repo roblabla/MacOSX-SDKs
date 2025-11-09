@@ -8,5 +8,6 @@ exports:
                        _kPMLPMSourceLostMode, _kPMLPMSourceReenableBulletin, _kPMLPMSourceSettings, 
                        _kPMLPMSourceSiri, _kPMLPMSourceSpringBoardAlert, _kPMLPMSourceSystemDisable, 
                        _kPMLPMSourceWorkouts, _kPMLowPowerModeServiceName ]
-    objc-classes:    [ _PMCoreSmartPowerNap, _PMLowPowerMode ]
+    objc-classes:    [ _PMCoreSmartPowerNap, _PMLowPowerMode, _PMPowerModeSession, 
+                       _PMPowerModes ]
 ...

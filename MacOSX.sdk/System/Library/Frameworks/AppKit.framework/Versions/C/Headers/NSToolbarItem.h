@@ -1,7 +1,7 @@
 /*
 	NSToolbarItem.h
 	Application Kit
-	Copyright (c) 2000-2023, Apple Inc.
+	Copyright (c) 2000-2024, Apple Inc.
 	All rights reserved.
 */
 
@@ -33,66 +33,112 @@ static const NSToolbarItemVisibilityPriority NSToolbarItemVisibilityPriorityUser
 API_AVAILABLE(ios(13.0)) NS_SWIFT_UI_ACTOR
 @interface NSToolbarItem : NSObject <NSCopying>
 
-/* Initialize the toolbar item with an identifier which is a development language string used by the toolbar and its delegate for identification purposes.  */
+/**
+ Initialize the toolbar item with an identifier which is a development language string used by the toolbar and its delegate for identification purposes.
+ */
 - (instancetype)initWithItemIdentifier:(NSToolbarItemIdentifier)itemIdentifier NS_DESIGNATED_INITIALIZER;
 @property (readonly, copy) NSToolbarItemIdentifier itemIdentifier;
 
-/* Use this to determine the toolbar in which an item is currently displayed. */
+/**
+ Use this to determine the toolbar in which an item is currently displayed.
+ */
 @property (readonly, nullable, weak) NSToolbar *toolbar;
 
-// ----- Setters and Getters -----
 
-/* Use this to set the item's label that appears in the toolbar.  The implication here is that the toolbar will draw the label for the item, and a redraw is triggered by this method.  The toolbar is in charge of the label area.  It is fine for an item to have no toolbar label.  Also, developers should make sure the length of the label is appropriate and not too long.  */
+# pragma mark - Setters and Getters
+
+/**
+ Use this to set the item's label that appears in the toolbar.
+ The label may also be used for the default `menuFormRepresentation` of the item.
+ Also, developers should make sure the length of the label is appropriate and not too long.
+ */
 @property (copy) NSString *label;
 
-/* Use this to set the item's label that appears when the item is in the customization palette.  All Items must have a palette label, and for most things it is reasonable to set them to the same string as the label used in the toolbar. */
+/**
+ Use this to set the item's label that appears when the item is in the customization palette.
+ All Items must have a palette label, and for most things it is reasonable to set them to the same string as the label used in the toolbar.
+ */
 @property (copy) NSString *paletteLabel;
 
 /**
- An array of all alternate labels this item may display. The item will use the size of the longest label to prevent resizing when the label is changed.
+ An array of all alternate labels this item may display.
+ The item will use the size of the longest label to prevent resizing when the label is changed.
  */
 @property (copy) NSSet<NSString *> *possibleLabels API_AVAILABLE(macos(13.0));
 
-/* Use this to set a tooltip to be used when the item is displayed in the toolbar.  (forwards to -view if it responds) */
+/**
+ Use this to set a tooltip to be used when the item is displayed in the toolbar. (forwards to `-view` if it responds)
+ */
 @property (nullable, copy) NSString *toolTip;
 
-/* The menu form of a toolbar item's purpose is twofold.  First, when the window is too small to display an item, it will be clipped but remain accessible from a "clipped items" menu containing the menu item returned here.  Second, in text only mode, the menu returned will be used to create the displayed items.  Singleton menu items will be clickable, while submenu items will be represented as a pull down.  For instance, say you want a button that allows you to switch between modes A, B, and C.  You could represent this as a menu by :  a menu item "mode" with three submenu items "A", "B", and "C".   By default, this method returns a singleton menu item with item label as the title.  For standard items, the target, action is set.  */
+/**
+ The menu form of a toolbar item's purpose is twofold.
+ First, when the window is too small to display an item, it will be clipped but remain accessible from a "clipped items" menu containing the menu item returned here.
+ Second, in text only mode, the menu returned will be used to create the displayed items.
+ Singleton menu items will be clickable, while submenu items will be represented as a pull down.
+ For instance, say you want a button that allows you to switch between modes A, B, and C.
+ You could represent this as a menu by: a menu item "mode" with three submenu items "A", "B", and "C".
+ By default, this method returns a singleton menu item with item label as the title.
+ For standard items, the target, action is set.
+ */
 @property (nullable, strong) NSMenuItem *menuFormRepresentation API_UNAVAILABLE(ios);
 
-/* Tag for your own custom purpose. (forwards to -view if it responds) */ 
+/**
+ Tag for your own custom purpose. (forwards to `-view` if it responds)
+ */
 @property NSInteger tag;
 
-/* Set and get the action of an item. (forwards to -view if it responds) */
+/**
+ Set and get the action of an item. (forwards to `-view` if it responds)
+ */
 @property (nullable, weak) id target;
 
-/* Set and get the action of an item. For custom views, this method will call setAction:/action on the view if it responds. (forwards to -view if it responds) */
+/**
+ Set and get the action of an item.
+ For custom views, this method will call `-setAction:` on the view if it responds. (forwards to `-view` if it responds)
+ */
 @property (nullable) SEL action;
 
-/* Set and get the enabled flag of an item.  For custom views, this method will call setEnabled:/isEnabled on the view if it responds. (forwards to -view if it responds) */
+/**
+ Set and get the enabled flag of an item.
+ For custom views, this method will call `-setEnabled:` on the view if it responds. (forwards to `-view` if it responds)
+ */
 @property (getter=isEnabled) BOOL enabled;
 
-/* Set and get the image of an item.  For custom views, this method will call setImage:/image on the view if it responds. (forwards to -view if it responds) */
+/**
+ Set and get the image of an item.
+ For custom views, this method will call `-setImage:` on the view if it responds. (forwards to `-view` if it responds)
+ */
 #if !TARGET_OS_IPHONE
 @property (nullable, strong) NSImage *image;
 #else
 @property (nullable, strong) UIImage *image API_AVAILABLE(ios(13.0));
 #endif
 
-/* Set and get the title of an item. For custom views, this method will call setTitle:/title on the view if it responds. (forwards to -view if it responds) */
+/**
+ Set and get the title of an item.
+ For custom views, this method will call `-setTitle:` on the view if it responds. (forwards to `-view` if it responds)
+ */
 @property (copy) NSString *title API_AVAILABLE(macos(10.15), ios(13.0));
 
-/*
+/**
  When set on an item without a custom view, the button produced will have a bordered style.
  Defaults to NO.
  */
 @property (getter=isBordered) BOOL bordered API_AVAILABLE(macos(10.15), ios(13.0));
 
-/*
-Whether or not the item behaves as a navigation item (i.e. back/forward) in the toolbar. Navigation items may be specially positioned by the system outside the normal list of items of the toolbar in the order specified by -toolbarDefaultItemIdentifiers:.
+/**
+ Whether or not the item behaves as a navigation item (i.e. back/forward) in the toolbar.
+ Navigation items may be specially positioned by the system outside the normal list of items of the toolbar in the order specified by `-toolbarDefaultItemIdentifiers:`.
+ Defaults to NO.
  */
 @property (getter=isNavigational) BOOL navigational API_AVAILABLE(macos(11.0), ios(14.0));
 
-/* Use setView: if you want your toolbar item to use something other than the standard.  Note that, by default, many of the set/get methods will be implemented by calls forwarded to the view you set, if it responds to it. */
+/**
+ Items with automatically generated views will return nil from this getter.
+ Custom views may be provided but not all `NSToolbarItem` subclasses support custom views.
+ Note that, by default, many of the set/get methods will be implemented by calls forwarded to the view you set, if it responds to it.
+ */
 @property (nullable, strong) NSView *view API_UNAVAILABLE(ios);
 
 /**
@@ -101,7 +147,12 @@ Whether or not the item behaves as a navigation item (i.e. back/forward) in the 
  */
 @property (readonly, getter=isVisible) BOOL visible API_AVAILABLE(macos(12.0), ios(16.0));
 
-/*
+/**
+ When an item is hidden it will not be visible in the toolbar. The item will still be visible in the customization panel. Because hidden items may be visible during user customization, use the `visible` property to determine if an item is currently displayed. Note that even hidden toolbar items are sync'd to other toolbars with a shared identifier, but its `hidden` state can be unique to each instance. Use this property to show a toolbar item in one toolbar instance but not another.
+ */
+@property (getter=isHidden) BOOL hidden API_AVAILABLE(macos(15.0), ios(18.0));
+
+/**
  Unless you have already set your own custom view, you should not call these methods.
  The min size should be small enough to look nice in all display modes.
  If you do not set a min/max size, the view's size properties will be calculated using constraints. Apps linked before 10.14 will use the view's current size.
@@ -110,25 +161,42 @@ Whether or not the item behaves as a navigation item (i.e. back/forward) in the 
 @property NSSize minSize API_DEPRECATED("This property is no longer recommended. Instead, let the system automatically measure the size of the view using constraints.", macos(10.0, 12.0)) API_UNAVAILABLE(ios);
 @property NSSize maxSize API_DEPRECATED("This property is no longer recommended. Instead, let the system automatically measure the size of the view using constraints.", macos(10.0, 12.0)) API_UNAVAILABLE(ios);
 
-/* When a toolbar does not have enough space to fit all its items, it must push some into the overflow menu.  Items with the highest visibility priority level are choosen last for the overflow menu.  The default visibilityPriority value is NSToolbarItemVisibilityPriorityStandard.  To suggest that an item always remain visible, give it a value greater than NSToolbarItemVisibilityPriorityStandard, but less than NSToolbarItemVisibilityPriorityUser.   In 10.7, users can no longer modify the toolbar item visibility priority. */
+/**
+ When a toolbar does not have enough space to fit all its items, it must push some into the overflow menu.
+ Items with the highest `visibilityPriority` level are chosen last for the overflow menu.
+ The default `visibilityPriority` value is `NSToolbarItemVisibilityPriorityStandard`.
+ To suggest that an item always remain visible, give it a value greater than `NSToolbarItemVisibilityPriorityStandard`, but less than `NSToolbarItemVisibilityPriorityUser`.
+ In 10.7, users can no longer modify the toolbar item visibility priority.
+ */
 @property NSToolbarItemVisibilityPriority visibilityPriority;
 
 
-// ----- Validation of the items -----
+# pragma mark - Validation of the items
 
-/* Typically you should not invoke this method.  This method is called by its toolbar during validation.  Standard items validate themselves by sending the validateToolbarItem: validate message to the current validator.  Since items with custom views don't always have meaningful target/actions, they do nothing.  So for your custom items it may be useful to override this method and invent your own validation. */
+/**
+ Typically you should not invoke this method.
+ This method is called by its toolbar during validation.
+ Standard items validate themselves by sending the `-validateToolbarItem:` validate message to the current validator.
+ Since items with custom views don't always have meaningful target/actions, they do nothing.
+ So for your custom items it may be useful to override this method and invent your own validation.
+ */
 - (void)validate API_AVAILABLE(ios(13.0));
 
 
-/* This property only affects automatic validation performed by NSToolbar. Explicit validation requests, such as the `-[NSToolbar validateVisibleItems]` method, will invoke the `-validate` method even if `autovalidates` is `NO`. */
+/**
+ This property only affects automatic validation performed by NSToolbar.
+ Explicit validation requests, such as the `-[NSToolbar validateVisibleItems]` method, will invoke the `-validate` method even if `autovalidates` is `NO`.
+ Defaults to YES.
+ */
 @property BOOL autovalidates API_AVAILABLE(ios(13.0));
 
 
+# pragma mark - Controlling Duplicates In The Toolbar
 
-// ----- Controlling Duplicates In The Toolbar -----
-
-/* Return YES to allow dragging duplicate items into the toolbar.  By default, if an item with the same identifier is already in the toolbar, dragging in will act as a move of this item.  However, for instance, the separator item drags in as a duplicate always. */
-@property (readonly) BOOL allowsDuplicatesInToolbar API_UNAVAILABLE(ios);
+/**
+ Duplicate items outside of spaces are not allowed.
+ */
+@property (readonly) BOOL allowsDuplicatesInToolbar API_UNAVAILABLE(ios) API_DEPRECATED("Duplicates are no longer supported.", macos(10.0, 15.0));
 
 @end
 
@@ -141,7 +209,10 @@ Whether or not the item behaves as a navigation item (i.e. back/forward) in the 
 
 @protocol NSToolbarItemValidation <NSObject>
 
-/* NSToolbarItemValidation extends the standard validation idea by introducing this new method which is sent to validators for each visible standard NSToolbarItem with a valid target/action pair.  Note: This message is sent from NSToolbarItem's validate method, however validate will not send this message for items that have custom views. */
+/**
+ `NSToolbarItemValidation` extends the standard validation idea by introducing this new method which is sent to validators for each visible standard `NSToolbarItem` with a valid target/action pair.
+ Note: This message is sent from NSToolbarItem's validate method, however validate will not send this message for items that have custom views.
+ */
 - (BOOL)validateToolbarItem:(NSToolbarItem *)item NS_SWIFT_UI_ACTOR;
 
 @end
@@ -154,48 +225,59 @@ Whether or not the item behaves as a navigation item (i.e. back/forward) in the 
 
 @protocol NSCloudSharingValidation <NSObject>
 
-/* NSToolbarItems created with NSToolbarCloudSharingItemIdentifier use this method for further validation after sending `-validateToolbarItem:` or `-validateUserInterfaceItem:`. The validator for the item's action should return the current CKShare corresponding to the selected item, if any. The state of the item will be changed reflect the state of the CKShare. */
+/**
+ `NSToolbarItems` created with `NSToolbarCloudSharingItemIdentifier` use this method for further validation after sending `-validateToolbarItem:` or `-validateUserInterfaceItem:`.
+ The validator for the item's action should return the current CKShare corresponding to the selected item, if any.
+ The state of the item will be changed reflect the state of the CKShare.
+ */
 - (nullable CKShare *)cloudShareForUserInterfaceItem:(id <NSValidatedUserInterfaceItem>)item NS_SWIFT_UI_ACTOR;
 
 @end
 
 #endif
 
-/*
- These are the standard toolbar item identifiers that AppKit will automatically create when they appear in the default or allowed item sets. As such, the delegate method -toolbar:itemForItemIdentifier:willBeInsertedIntoToolbar: will not be called for these items.
+/**
+ These are the standard toolbar item identifiers that AppKit will automatically create when they appear in the default or allowed item sets.
+ As such, the delegate method `-toolbar:itemForItemIdentifier:willBeInsertedIntoToolbar:` will not be called for these items.
  */
 
-/* A space item of a standard fixed size. */
+/** A space item of a standard fixed size. */
 APPKIT_EXTERN NSToolbarItemIdentifier NSToolbarSpaceItemIdentifier API_AVAILABLE(ios(13.0));
 
-/* A space item of flexible width. */
+/** A space item of flexible width. */
 APPKIT_EXTERN NSToolbarItemIdentifier NSToolbarFlexibleSpaceItemIdentifier API_AVAILABLE(ios(13.0));
 
-/* A standard item that is configured to show the color panel when invoked. */
+/** A standard item that is configured to show the color panel when invoked. */
 APPKIT_EXTERN NSToolbarItemIdentifier NSToolbarShowColorsItemIdentifier API_AVAILABLE(ios(13.0));
 
-/* A standard item that is configured to show the font panel when invoked. */
+/** A standard item that is configured to show the font panel when invoked. */
 APPKIT_EXTERN NSToolbarItemIdentifier NSToolbarShowFontsItemIdentifier API_AVAILABLE(ios(13.0));
 
-/* A standard item that is configured to send -printDocument: to the firstResponder when invoked */
+/** A standard item that is configured to send -printDocument: to the firstResponder when invoked */
 APPKIT_EXTERN NSToolbarItemIdentifier NSToolbarPrintItemIdentifier API_AVAILABLE(ios(13.0));
 
-/* A standard item that is configured to send -toggleSidebar: to the firstResponder when invoked. */
+/** A standard item that is configured to send -toggleSidebar: to the firstResponder when invoked. */
 APPKIT_EXTERN NSToolbarItemIdentifier NSToolbarToggleSidebarItemIdentifier API_AVAILABLE(macos(10.11), ios(13.0));
 
-/* A standard item that is configured to send -toggleInspector: to the firstResponder when invoked. */
+/** A standard item that is configured to send -toggleInspector: to the firstResponder when invoked. */
 APPKIT_EXTERN NSToolbarItemIdentifier NSToolbarToggleInspectorItemIdentifier API_AVAILABLE(macos(14.0), ios(17.0));
 
-/* A standard item for cloud sharing via NSSharingServiceNameCloudSharing. It validates itself and modifies its appearance by using the NSCloudSharingValidation protocol. It sends -performCloudSharing: to the firstResponder. */
+/** A standard item for cloud sharing via NSSharingServiceNameCloudSharing. It validates itself and modifies its appearance by using the NSCloudSharingValidation protocol. It sends -performCloudSharing: to the firstResponder. */
 APPKIT_EXTERN NSToolbarItemIdentifier NSToolbarCloudSharingItemIdentifier API_AVAILABLE(macos(10.12));
 
-/* Creates a new NSTrackingSeparatorToolbarItem and automatically configures it to track the divider of the sidebar if one is discovered. */
+/**
+ Creates a new NSTrackingSeparatorToolbarItem and automatically configures it to track the divider of the sidebar if one is discovered.
+ Only applies to windows with `NSWindowStyleMaskFullSizeContentView` applied.
+ */
 APPKIT_EXTERN NSToolbarItemIdentifier NSToolbarSidebarTrackingSeparatorItemIdentifier API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios);
 
-/* Creates a new NSTrackingSeparatorToolbarItem and automatically configures it to track the divider of the inspector if one is discovered. */
+/**
+ Creates a new NSTrackingSeparatorToolbarItem and automatically configures it to track the divider of the inspector if one is discovered.
+ Only applies to windows with `NSWindowStyleMaskFullSizeContentView` applied.
+ */
 APPKIT_EXTERN NSToolbarItemIdentifier NSToolbarInspectorTrackingSeparatorItemIdentifier API_AVAILABLE(macos(14.0)) API_UNAVAILABLE(ios);
 
-/*
+/**
  Deprecated Item Identifiers
  */
 APPKIT_EXTERN NSToolbarItemIdentifier NSToolbarSeparatorItemIdentifier API_DEPRECATED("This item is no longer recommended and will be ignored on 10.7 and later.", macos(10.0, 11.0)) API_UNAVAILABLE(ios);

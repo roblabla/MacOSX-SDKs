@@ -2,7 +2,7 @@
 //  PKDrawing.h
 //  PencilKit
 //
-//  Copyright © 2023 Apple. All rights reserved.
+//  Copyright © 2023 Apple Inc. All rights reserved.
 //
 
 #import <PencilKit/PKContentVersion.h>

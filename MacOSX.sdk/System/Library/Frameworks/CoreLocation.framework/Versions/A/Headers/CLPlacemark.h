@@ -24,7 +24,7 @@ NS_ASSUME_NONNULL_BEGIN
  *    information such as the country, state, city, and street address.
  */
 CL_EXTERN
-API_AVAILABLE(macos(10.8), ios(5.0))
+NS_SWIFT_SENDABLE API_AVAILABLE(macos(10.8), ios(5.0))
 @interface CLPlacemark : NSObject <NSCopying, NSSecureCoding>
 {
 @private

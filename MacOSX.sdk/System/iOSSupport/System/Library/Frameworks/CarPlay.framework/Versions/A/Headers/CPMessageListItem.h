@@ -50,7 +50,7 @@ typedef NS_ENUM(NSInteger, CPMessageTrailingItem) {
  @c CPMessageListItemLeadingConfiguration encapsulates the configuration options for
  the leading side of your message list cell.
  */
-API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(macos, watchos, tvos)
+API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(macos, watchos)
 @interface CPMessageListItemLeadingConfiguration : NSObject
 
 @property (nonatomic, readonly, getter=isUnread) BOOL unread;
@@ -84,7 +84,7 @@ API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(macos, watchos, tvos)
  @c CPMessageListItemTrailingConfiguration encapsulates the configuration options for
  the trailing side of your message list cell.
  */
-API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(macos, watchos, tvos)
+API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(macos, watchos)
 @interface CPMessageListItemTrailingConfiguration : NSObject
 
 @property (nonatomic, readonly) CPMessageTrailingItem trailingItem;
@@ -126,7 +126,7 @@ API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(macos, watchos, tvos)
    accepts a full name and phone/email. When the user selects this item, Siri will perform
    a message compose flow.
  */
-API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(macos, watchos, tvos)
+API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(macos, watchos)
 @interface CPMessageListItem : NSObject <CPListTemplateItem>
 
 /**

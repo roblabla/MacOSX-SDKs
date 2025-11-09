@@ -12,9 +12,9 @@
 NS_ASSUME_NONNULL_BEGIN
 
 VS_EXPORT API_AVAILABLE(ios(17.4), tvos(17.4), macos(14.4), visionos(1.1)) API_UNAVAILABLE(watchos, macCatalyst)
-NS_REFINED_FOR_SWIFT
-NS_SWIFT_SENDABLE
-@interface VSAppleSubscription : NSObject
+    NS_REFINED_FOR_SWIFT
+    NS_SWIFT_SENDABLE
+    @interface VSAppleSubscription : NSObject
 
 // The identifier of the customer as previously reported to Apple.
 @property (nonatomic, strong) NSString *customerID;

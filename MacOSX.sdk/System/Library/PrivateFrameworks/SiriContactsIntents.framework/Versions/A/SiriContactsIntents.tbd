@@ -5,8 +5,8 @@ install-name:    '/System/Library/PrivateFrameworks/SiriContactsIntents.framewor
 swift-abi-version: 7
 allowable-clients:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-    clients:         [ ContactsFlowDelegatePlugin, ContactsIntentExtension, SiriContactsIntentsTests, 
-                       SiriIdentityInternal, SiriIdentityInternalTests ]
+    clients:         [ ContactsFlowDelegatePlugin, ContactsFlowUIPlugin, ContactsIntentExtension, 
+                       SiriContactsIntentsTests, SiriIdentityInternal, SiriIdentityInternalTests ]
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ '_$s11SiriKitFlow11DisplayHintV0A15ContactsIntentsE11descriptionSSvg', 
@@ -24,8 +24,6 @@ exports:
                        '_$s13SiriInference7ContactV0A15ContactsIntentsE21asHighConfidenceMatchACvpMV', 
                        '_$s13SiriInference7ContactV0A15ContactsIntentsE7isEmptySbvg', 
                        '_$s13SiriInference7ContactV0A15ContactsIntentsE7isEmptySbvpMV', 
-                       '_$s16SiriDialogEngine17PhonemeDataParserO0A15ContactsIntentsE5parse4fromAA0dE0VSgSo8SAPersonC_tFZ', 
-                       '_$s16SiriDialogEngine17PhonemeDataParserO0A15ContactsIntentsE5parse4fromAA0dE0VSgSo9CNContactC_tFZ', 
                        '_$s19SiriContactsIntents010GetContactA23MatchesResolutionResultC11unsupported9forReasonACXDAA0deaf11UnsupportedK0O_tFZTj', 
                        '_$s19SiriContactsIntents010GetContactA23MatchesResolutionResultC11unsupported9forReasonACXDAA0deaf11UnsupportedK0O_tFZTq', 
                        '_$s19SiriContactsIntents010GetContactA23MatchesResolutionResultC14JSONDictionary6intentACSgSDySSypG_So8INIntentCtcfC', 
@@ -1230,11 +1228,7 @@ exports:
                        '_$sSS19SiriContactsIntentsE23mapToNLContactTypeValue03forG0SSAA016ContactAttributeG0O_tF', 
                        '_$sSS19SiriContactsIntentsE30convertToContactAttributeLabelSSvg', 
                        '_$sSS19SiriContactsIntentsE30convertToContactAttributeLabelSSvpMV', 
-                       '_$sSS19SiriContactsIntentsE5EMPTYSSvgZ', '_$sSo14CNLabeledValueC19SiriContactsIntentsSo15CNPostalAddressCRszrlE12buildMapsURL7contact10Foundation0J0VSgSo9CNContactC_tF', 
-                       '_$sSo14CNLabeledValueC19SiriContactsIntentsSo15CNPostalAddressCRszrlE15formattedStringSSvg', 
-                       '_$sSo14CNLabeledValueC19SiriContactsIntentsSo15CNPostalAddressCRszrlE15formattedStringSSvpMV', 
-                       '_$sSo9CNContactC19SiriContactsIntentsE17formattedFullNameSSvg', 
-                       '_$sSo9CNContactC19SiriContactsIntentsE17formattedFullNameSSvpMV' ]
+                       '_$sSo14CNLabeledValueC19SiriContactsIntentsSo15CNPostalAddressCRszrlE12buildMapsURL7contact10Foundation0J0VSgSo9CNContactC_tF' ]
     objc-classes:    [ AgeDateTime, AgeDateTimeResolutionResult, Contact, ContactAttribute, 
                        ContactAttributeResolutionResult, ContactAttributeTypeResolutionResult, 
                        ContactRelation, ContactRelationResolutionResult, ContactResolutionResult, 

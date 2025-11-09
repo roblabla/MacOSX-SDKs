@@ -29,7 +29,7 @@ UIKIT_CLASS_AVAILABLE_IOS_ONLY(10_0) NS_SWIFT_UI_ACTOR
 
 @end
 
-NS_SWIFT_UI_ACTOR
+API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @protocol UIPreviewInteractionDelegate <NSObject>
 
 - (void)previewInteraction:(UIPreviewInteraction *)previewInteraction didUpdatePreviewTransition:(CGFloat)transitionProgress ended:(BOOL)ended UIKIT_AVAILABLE_IOS_ONLY(10_0); // transitionProgress ranges from 0 to 1

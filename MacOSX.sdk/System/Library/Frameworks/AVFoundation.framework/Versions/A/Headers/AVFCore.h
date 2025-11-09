@@ -3,7 +3,7 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2019 Apple Inc. All rights reserved.
+	Copyright 2019-2024 Apple Inc. All rights reserved.
 
  */
 
@@ -27,13 +27,12 @@
 #import <AVFoundation/AVAssetWriter.h>
 #import <AVFoundation/AVAssetWriterInput.h>
 #import <AVFoundation/AVAssetPlaybackAssistant.h>
+#import <AVFoundation/AVAssetSegmentReport.h>
 #import <AVFoundation/AVAsynchronousKeyValueLoading.h>
 #import <AVFoundation/AVAudioMix.h>
 #import <AVFoundation/AVAudioProcessingSettings.h>
-
 #import <AVFoundation/AVAssetDownloadTask.h>
 #import <AVFoundation/AVAssetDownloadStorageManager.h>
-
 #import <AVFoundation/AVCaption.h>
 #import <AVFoundation/AVCaptionGroup.h>
 #import <AVFoundation/AVCaptionGrouper.h>
@@ -41,11 +40,11 @@
 #import <AVFoundation/AVCaptionFormatConformer.h>
 #import <AVFoundation/AVCaptionRenderer.h>
 #import <AVFoundation/AVCaptionSettings.h>
-
 #import <AVFoundation/AVComposition.h>
 #import <AVFoundation/AVCompositionTrack.h>
 #import <AVFoundation/AVCompositionTrackSegment.h>
 #import <AVFoundation/AVError.h>
+#import <AVFoundation/AVGeometry.h>
 #import <AVFoundation/AVMediaFormat.h>
 #import <AVFoundation/AVMediaSelection.h>
 #import <AVFoundation/AVMediaSelectionGroup.h>
@@ -69,7 +68,9 @@
 #import <AVFoundation/AVPlayerLooper.h>
 #import <AVFoundation/AVPlayerMediaSelectionCriteria.h>
 #import <AVFoundation/AVPlayerInterstitialEventController.h>
+#import <AVFoundation/AVPlayerItemIntegratedTimeline.h>
 #import <AVFoundation/AVQueuedSampleBufferRendering.h>
+#import <AVFoundation/AVRenderedCaptionImage.h>
 #import <AVFoundation/AVRouteDetector.h>
 #import <AVFoundation/AVSampleBufferAudioRenderer.h>
 #import <AVFoundation/AVSampleBufferDisplayLayer.h>
@@ -89,3 +90,4 @@
 #if TARGET_OS_IPHONE && ! TARGET_OS_MACCATALYST
 #import <AVFoundation/AVDisplayCriteria.h>
 #endif
+#import <AVFoundation/AVMetrics.h>

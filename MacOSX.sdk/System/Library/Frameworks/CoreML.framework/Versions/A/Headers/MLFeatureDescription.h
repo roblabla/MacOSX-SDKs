@@ -12,6 +12,7 @@
 #import <CoreML/MLMultiArrayConstraint.h>
 #import <CoreML/MLImageConstraint.h>
 #import <CoreML/MLSequenceConstraint.h>
+#import <CoreML/MLStateConstraint.h>
 #import <CoreML/MLExport.h>
 
 NS_ASSUME_NONNULL_BEGIN
@@ -54,6 +55,11 @@ API_AVAILABLE(macos(10.13), ios(11.0), watchos(4.0), tvos(11.0))
 
 /// Constraint when type == MLFeatureTypeSequence, nil otherwise
 @property (readonly, nullable, nonatomic) MLSequenceConstraint *sequenceConstraint API_AVAILABLE(macos(10.14), ios(12.0), watchos(5.0), tvos(12.0));
+
+/// The state feature value constraint.
+///
+/// The property has a value when `.type == MLFeatureTypeState`.
+@property (readonly, nullable, nonatomic) MLStateConstraint *stateConstraint API_AVAILABLE(macos(15.0), ios(18.0), watchos(11.0), tvos(18.0));
 
 @end
 

@@ -32,6 +32,13 @@ API_UNAVAILABLE(visionos)
 // property on the scaler object.
 @property (readwrite, nonatomic, getter=isAutoExposureEnabled) BOOL autoExposureEnabled;
 
+// requiresSynchronousInitialization property, setting this to YES ensures
+// that the effect is fully created before first use, setting it to NO
+// allows the implementation to create an optimized version asynchronously, this
+// can cause the performance to be submoptimal while the optimized version is created.
+// Defaults to NO.
+@property (readwrite, nonatomic) BOOL requiresSynchronousInitialization;
+
 // Dynamic Resolution properties
 // Set inputContentPropertiesEnabled to YES to indicate using dynamic resolution
 // Scale value represents output resolution / input content resolution for either

@@ -479,6 +479,17 @@ enum {
 CT_EXPORT const CFStringRef kCTRubyAnnotationAttributeName CT_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0));
 
 
+/*!
+    @const      kCTAdaptiveImageProviderAttributeName
+    @abstract   Provide the image for an emoji-like text attachment.
+
+    @discussion The attribute value must be an object conforming to the CTAdaptiveImageProviding protocol.
+                The range this attribute is applied to should be one or more U+FFFC characters, each of which will be drawn as the provided image,
+                and the font attribute applied to that range will be used to determine properties such as point size.
+*/
+CT_EXPORT const CFStringRef kCTAdaptiveImageProviderAttributeName CT_AVAILABLE(macos(15.0), ios(18.0), watchos(11.0), tvos(18.0));
+
+
 CF_ASSUME_NONNULL_END
 CF_EXTERN_C_END
 

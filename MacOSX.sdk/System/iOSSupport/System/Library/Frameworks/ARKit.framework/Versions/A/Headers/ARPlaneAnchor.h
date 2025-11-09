@@ -22,7 +22,8 @@ typedef NS_ENUM(NSInteger, ARPlaneAnchorAlignment) {
     ARPlaneAnchorAlignmentHorizontal,
     
     /** A plane that is vertical with respect to gravity. */
-    ARPlaneAnchorAlignmentVertical API_AVAILABLE(ios(11.3))
+    ARPlaneAnchorAlignmentVertical API_AVAILABLE(ios(11.3)),
+    
 } NS_SWIFT_NAME(ARPlaneAnchor.Alignment);
 
 /**
@@ -60,6 +61,7 @@ typedef NS_ENUM(NSInteger, ARPlaneClassification) {
  Represents the extents of a plane.
  */
 API_AVAILABLE(ios(16.0))
+NS_SWIFT_SENDABLE
 @interface ARPlaneExtent : NSObject <NSSecureCoding>
 
 /**
@@ -84,6 +86,7 @@ API_AVAILABLE(ios(16.0))
  @discussion Planes are defined in the X and Z direction, where Y is the surface’s normal.
  */
 API_AVAILABLE(ios(11.0))
+NS_SWIFT_SENDABLE
 @interface ARPlaneAnchor : ARAnchor AR_PLANE_ANCHOR_PROTOCOLS
 
 /**

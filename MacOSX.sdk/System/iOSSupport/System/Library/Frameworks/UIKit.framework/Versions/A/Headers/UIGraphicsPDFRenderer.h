@@ -13,14 +13,14 @@ NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 @class UIGraphicsPDFRendererContext;
 
-typedef void (^UIGraphicsPDFDrawingActions)(UIGraphicsPDFRendererContext *rendererContext) API_AVAILABLE(ios(10.0));
+typedef void (^UIGraphicsPDFDrawingActions)(UIGraphicsPDFRendererContext *rendererContext) API_AVAILABLE(ios(10.0)) API_UNAVAILABLE(watchos);
 
-UIKIT_EXTERN API_AVAILABLE(ios(10.0))
+UIKIT_EXTERN API_AVAILABLE(ios(10.0)) API_UNAVAILABLE(watchos)
 @interface UIGraphicsPDFRendererFormat : UIGraphicsRendererFormat
 @property (nonatomic, copy) NSDictionary<NSString *, id> *documentInfo;
 @end
 
-UIKIT_EXTERN API_AVAILABLE(ios(10.0))
+UIKIT_EXTERN API_AVAILABLE(ios(10.0)) API_UNAVAILABLE(watchos)
 @interface UIGraphicsPDFRendererContext : UIGraphicsRendererContext
 @property (nonatomic, readonly) CGRect pdfContextBounds;
 
@@ -32,7 +32,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(10.0))
 - (void)setDestinationWithName:(NSString *)name forRect:(CGRect)rect;
 @end
 
-UIKIT_EXTERN API_AVAILABLE(ios(10.0))
+UIKIT_EXTERN API_AVAILABLE(ios(10.0)) API_UNAVAILABLE(watchos)
 @interface UIGraphicsPDFRenderer : UIGraphicsRenderer
 - (instancetype)initWithBounds:(CGRect)bounds format:(UIGraphicsPDFRendererFormat *)format NS_DESIGNATED_INITIALIZER;
 

@@ -12,7 +12,7 @@ exports:
                        HMEMessageDatagramServer, HMEPendingEventsCollection, HMEPendingTopicsCombiner, 
                        HMEPersistentConnectionClient, HMEPersistentConnectionServer, 
                        HMEProtoEvent, HMEProtoEventInfo, HMEProtoEventMetadata, HMERouterClient, 
-                       HMERouterServer, HMETopicRouter ]
+                       HMERouterServer, HMEThreadSafePendingEventsCollection, HMETopicRouter ]
     objc-ivars:      [ HMEProtoEvent._eventData, HMEProtoEvent._eventMetadata, HMEProtoEventInfo._event, 
                        HMEProtoEventInfo._topic, HMEProtoEventMetadata._cachePolicy, 
                        HMEProtoEventMetadata._combinePolicy, HMEProtoEventMetadata._has, 

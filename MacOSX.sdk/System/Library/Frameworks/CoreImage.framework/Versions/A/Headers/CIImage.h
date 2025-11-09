@@ -43,45 +43,45 @@ NS_CLASS_AVAILABLE(10_4, 5_0)
 
 typedef int CIFormat NS_TYPED_ENUM;
 
-CORE_IMAGE_EXPORT CIFormat kCIFormatARGB8 NS_AVAILABLE(10_4, 6_0);
-CORE_IMAGE_EXPORT CIFormat kCIFormatBGRA8;
-CORE_IMAGE_EXPORT CIFormat kCIFormatRGBA8;
-CORE_IMAGE_EXPORT CIFormat kCIFormatABGR8 NS_AVAILABLE(10_11, 9_0);
+CORE_IMAGE_EXPORT const CIFormat kCIFormatARGB8 NS_AVAILABLE(10_4, 6_0);
+CORE_IMAGE_EXPORT const CIFormat kCIFormatBGRA8;
+CORE_IMAGE_EXPORT const CIFormat kCIFormatRGBA8;
+CORE_IMAGE_EXPORT const CIFormat kCIFormatABGR8 NS_AVAILABLE(10_11, 9_0);
 
-CORE_IMAGE_EXPORT CIFormat kCIFormatRGBAh NS_AVAILABLE(10_4, 6_0);
-CORE_IMAGE_EXPORT CIFormat kCIFormatRGBA16 NS_AVAILABLE(10_4, 10_0);
-CORE_IMAGE_EXPORT CIFormat kCIFormatRGBAf NS_AVAILABLE(10_4, 7_0);
-CORE_IMAGE_EXPORT CIFormat kCIFormatRGBX16 NS_AVAILABLE(11_0, 14_2);
-CORE_IMAGE_EXPORT CIFormat kCIFormatRGBXh NS_AVAILABLE(14_0, 17_0);
-CORE_IMAGE_EXPORT CIFormat kCIFormatRGBXf NS_AVAILABLE(14_0, 17_0);
+CORE_IMAGE_EXPORT const CIFormat kCIFormatRGBAh NS_AVAILABLE(10_4, 6_0);
+CORE_IMAGE_EXPORT const CIFormat kCIFormatRGBA16 NS_AVAILABLE(10_4, 10_0);
+CORE_IMAGE_EXPORT const CIFormat kCIFormatRGBAf NS_AVAILABLE(10_4, 7_0);
+CORE_IMAGE_EXPORT const CIFormat kCIFormatRGBX16 NS_AVAILABLE(11_0, 14_2);
+CORE_IMAGE_EXPORT const CIFormat kCIFormatRGBXh NS_AVAILABLE(14_0, 17_0);
+CORE_IMAGE_EXPORT const CIFormat kCIFormatRGBXf NS_AVAILABLE(14_0, 17_0);
 
 // RGB101010 stored in little-endian 32bit int, 2 MSB are ignored, full-range (0-1024)
-CORE_IMAGE_EXPORT CIFormat kCIFormatRGB10 NS_AVAILABLE(14_0, 17_0);
+CORE_IMAGE_EXPORT const CIFormat kCIFormatRGB10 NS_AVAILABLE(14_0, 17_0);
 
-CORE_IMAGE_EXPORT CIFormat kCIFormatA8 NS_AVAILABLE(10_11, 9_0);
-CORE_IMAGE_EXPORT CIFormat kCIFormatA16 NS_AVAILABLE(10_11, 9_0);
-CORE_IMAGE_EXPORT CIFormat kCIFormatAh NS_AVAILABLE(10_11, 9_0);
-CORE_IMAGE_EXPORT CIFormat kCIFormatAf NS_AVAILABLE(10_11, 9_0);
+CORE_IMAGE_EXPORT const CIFormat kCIFormatA8 NS_AVAILABLE(10_11, 9_0);
+CORE_IMAGE_EXPORT const CIFormat kCIFormatA16 NS_AVAILABLE(10_11, 9_0);
+CORE_IMAGE_EXPORT const CIFormat kCIFormatAh NS_AVAILABLE(10_11, 9_0);
+CORE_IMAGE_EXPORT const CIFormat kCIFormatAf NS_AVAILABLE(10_11, 9_0);
 
-CORE_IMAGE_EXPORT CIFormat kCIFormatR8 NS_AVAILABLE(10_11, 9_0);
-CORE_IMAGE_EXPORT CIFormat kCIFormatR16 NS_AVAILABLE(10_11, 9_0);
-CORE_IMAGE_EXPORT CIFormat kCIFormatRh NS_AVAILABLE(10_11, 9_0);
-CORE_IMAGE_EXPORT CIFormat kCIFormatRf NS_AVAILABLE(10_11, 9_0);
+CORE_IMAGE_EXPORT const CIFormat kCIFormatR8 NS_AVAILABLE(10_11, 9_0);
+CORE_IMAGE_EXPORT const CIFormat kCIFormatR16 NS_AVAILABLE(10_11, 9_0);
+CORE_IMAGE_EXPORT const CIFormat kCIFormatRh NS_AVAILABLE(10_11, 9_0);
+CORE_IMAGE_EXPORT const CIFormat kCIFormatRf NS_AVAILABLE(10_11, 9_0);
 
-CORE_IMAGE_EXPORT CIFormat kCIFormatRG8 NS_AVAILABLE(10_11, 9_0);
-CORE_IMAGE_EXPORT CIFormat kCIFormatRG16 NS_AVAILABLE(10_11, 9_0);
-CORE_IMAGE_EXPORT CIFormat kCIFormatRGh NS_AVAILABLE(10_11, 9_0);
-CORE_IMAGE_EXPORT CIFormat kCIFormatRGf NS_AVAILABLE(10_11, 9_0);
+CORE_IMAGE_EXPORT const CIFormat kCIFormatRG8 NS_AVAILABLE(10_11, 9_0);
+CORE_IMAGE_EXPORT const CIFormat kCIFormatRG16 NS_AVAILABLE(10_11, 9_0);
+CORE_IMAGE_EXPORT const CIFormat kCIFormatRGh NS_AVAILABLE(10_11, 9_0);
+CORE_IMAGE_EXPORT const CIFormat kCIFormatRGf NS_AVAILABLE(10_11, 9_0);
 
-CORE_IMAGE_EXPORT CIFormat kCIFormatL8 NS_AVAILABLE(10_12, 10_0);
-CORE_IMAGE_EXPORT CIFormat kCIFormatL16 NS_AVAILABLE(10_12, 10_0);
-CORE_IMAGE_EXPORT CIFormat kCIFormatLh NS_AVAILABLE(10_12, 10_0);
-CORE_IMAGE_EXPORT CIFormat kCIFormatLf NS_AVAILABLE(10_12, 10_0);
+CORE_IMAGE_EXPORT const CIFormat kCIFormatL8 NS_AVAILABLE(10_12, 10_0);
+CORE_IMAGE_EXPORT const CIFormat kCIFormatL16 NS_AVAILABLE(10_12, 10_0);
+CORE_IMAGE_EXPORT const CIFormat kCIFormatLh NS_AVAILABLE(10_12, 10_0);
+CORE_IMAGE_EXPORT const CIFormat kCIFormatLf NS_AVAILABLE(10_12, 10_0);
 
-CORE_IMAGE_EXPORT CIFormat kCIFormatLA8 NS_AVAILABLE(10_12, 10_0);
-CORE_IMAGE_EXPORT CIFormat kCIFormatLA16 NS_AVAILABLE(10_12, 10_0);
-CORE_IMAGE_EXPORT CIFormat kCIFormatLAh NS_AVAILABLE(10_12, 10_0);
-CORE_IMAGE_EXPORT CIFormat kCIFormatLAf NS_AVAILABLE(10_12, 10_0);
+CORE_IMAGE_EXPORT const CIFormat kCIFormatLA8 NS_AVAILABLE(10_12, 10_0);
+CORE_IMAGE_EXPORT const CIFormat kCIFormatLA16 NS_AVAILABLE(10_12, 10_0);
+CORE_IMAGE_EXPORT const CIFormat kCIFormatLAh NS_AVAILABLE(10_12, 10_0);
+CORE_IMAGE_EXPORT const CIFormat kCIFormatLAf NS_AVAILABLE(10_12, 10_0);
 
 
 /* Image options dictionary keys.
@@ -119,6 +119,18 @@ CORE_IMAGE_EXPORT CIImageOption const kCIImageToneMapHDRtoSDR NS_AVAILABLE(11_0,
  */
 CORE_IMAGE_EXPORT CIImageOption const kCIImageExpandToHDR NS_AVAILABLE(14_0, 17_0);
 
+/* A float value for overriding the image's content headroom.
+ * This option is supported by:
+ *     imageWithContentsOfURL:options:, initWithContentsOfURL:options,
+ *     imageWithData:options:,          initWithData:options:,
+ *     imageWithCGImage:options:,       initWithCGImage:options:,
+ *     imageWithCGImageSource:options:, initWithCGImageSource:options:,
+ *     imageWithIOSurface:options:,     initWithIOSurface:options:,
+ *
+ * If the value for this option is a NSNumber greater than or equal to 1.0,
+ * then it will override the automatic behavior of the 'headroom' property.
+ */
+CORE_IMAGE_EXPORT CIImageOption const kCIImageContentHeadroom NS_AVAILABLE(15_0, 18_0);
 
 /* A boolean value specifying how the image should sampled. 
  * If this option value is @YES, then the image will be sampled using nearest neighbor sampling.
@@ -176,6 +188,10 @@ CORE_IMAGE_EXPORT CIImageOption const kCIImageTextureFormat CI_GL_DEPRECATED_MAC
  *
  * If the value of any of these keys is @YES, the auxiliary image be returned if present.
  * The returned image will be a monochrome image.
+ *
+ * The kCIImageAuxiliaryHDRGainMap option will return as a CIImage the auxiliary data returned
+ * by either kCGImageAuxiliaryDataTypeHDRGainMap or kCGImageAuxiliaryDataTypeISOGainMap.
+ * If the file contains both gain maps, then the kCGImageAuxiliaryDataTypeISOGainMap data is returned.
  */
 CORE_IMAGE_EXPORT CIImageOption const kCIImageAuxiliaryDepth NS_AVAILABLE(10_13, 11_0);
 CORE_IMAGE_EXPORT CIImageOption const kCIImageAuxiliaryDisparity NS_AVAILABLE(10_13, 11_0);
@@ -404,11 +420,11 @@ CORE_IMAGE_EXPORT CIImageOption const kCIImageAuxiliaryHDRGainMap NS_AVAILABLE(1
 
 
 /* Return a new image by color matching from the colorSpace to the context's working space.
- * This method will return nil if the CGColorSpace is not kCGColorSpaceModelRGB. */
+ * This method will return nil if the CGColorSpace is not kCGColorSpaceModelRGB or Monochrome. */
 - (nullable CIImage *)imageByColorMatchingColorSpaceToWorkingSpace:(CGColorSpaceRef)colorSpace NS_AVAILABLE(10_12, 10_0);
 
 /* Return a new image by color matching from the context's working space to the colorSpace.
- * This method will return nil if the CGColorSpace is not kCGColorSpaceModelRGB. */
+ * This method will return nil if the CGColorSpace is not kCGColorSpaceModelRGB or Monochrome. */
 - (nullable CIImage *)imageByColorMatchingWorkingSpaceToColorSpace:(CGColorSpaceRef)colorSpace NS_AVAILABLE(10_12, 10_0);
 
 /* Return a new image by multiplying the receiver's RGB values by its alpha. */
@@ -440,8 +456,23 @@ CORE_IMAGE_EXPORT CIImageOption const kCIImageAuxiliaryHDRGainMap NS_AVAILABLE(1
  * independent of the CIContext's kCIContextCacheIntermediates option.  */
 - (CIImage *)imageByInsertingIntermediate:(BOOL)cache NS_AVAILABLE(10_14, 12_0);
 
+/* Returns a new image that applies a gain map image to the received image.
+ * The gain map image should be obtained by creating a image using either the 
+ * kCIImageAuxiliaryHDRGainMap option set to @YES. If the gain map image doesn't
+ * have the needed metadata, the received image will be returned as-is. */
+- (CIImage*) imageByApplyingGainMap:(CIImage*)gainmap NS_AVAILABLE(15_0, 18_0);
+
+/* Returns a new image that applies a gain map image to the received image
+ * and to specify how much headroom the resulting image should have.
+ * The headroom value will be limited to between 1.0 (i.e. SDR) and 
+ * the full headroom allowed by the gain map. */
+- (CIImage*) imageByApplyingGainMap:(CIImage*)gainmap headroom:(float)headroom NS_AVAILABLE(15_0, 18_0);
+
 /* Return a rect the defines the bounds of non-(0,0,0,0) pixels */
 @property (NS_NONATOMIC_IOSONLY, readonly) CGRect extent;
+
+/* Returns YES if the image is known to have alpha==1 over the entire image extent */
+@property (nonatomic, readonly, getter=isOpaque) BOOL opaque;
 
 /* Returns the metadata properties of an image. If the image is the
  * output of one or more CIFilters, then the metadata of the root inputImage
@@ -455,9 +486,44 @@ CORE_IMAGE_EXPORT CIImageOption const kCIImageAuxiliaryHDRGainMap NS_AVAILABLE(1
  * This method will return nil, if the URL cannot be determined. */
 @property (atomic, readonly, nullable) NSURL *url NS_AVAILABLE(10_4, 9_0);
 
-/* Returns if possible the color space of the image it was defined in.
- * This method will return nil, if the color space cannot be determined. */
+/* Returns the color space of the image.
+ * If this returns nil, the image should be assumed to be in the Core Image working colorspace.
+ *
+ * This method will return nil if image is the result of applying a CIFilter or CIKernel.
+ * There are exceptions to this.  Applying CIWarpKernels or certain CIFilters (e.g. CIGaussianBlur,
+ * CILanczosScaleTransform, CIAreaAverage and some others) to an image will result in a CIImage with
+ * the same 'colorspace' property value.
+ */
 @property (atomic, readonly, nullable) CGColorSpaceRef colorSpace NS_AVAILABLE(10_4, 9_0) CF_RETURNS_NOT_RETAINED;
+
+/* Returns the content headroom of the image.
+ *
+ * If the image headroom is unknown, then the value 0.0 will be returned.
+ *
+ * If the image headroom is known, then a value greater than or equal to 1.0 will be returned.
+ * A value of 1.0 will be returned if the image is SDR.
+ * A value greater than 1.0 will be returned if the image is EDR.
+ *
+ * The image headroom may known when a CIImage is first initialized.
+ * If the a CIImage is initialized using:
+ *   [CIImage imageWithContentsOfURL:..] or [CIImage imageWithData:..]
+ *   headroom may be determined by associated metadata or deduced from pixel format or colorSpace information.
+ *
+ *   [CIImage imageWithCGImage:..]
+ *   headroom may be determined by CGImageGetHeadroomInfo() or deduced from pixel format or colorSpace information.
+ *
+ *   [CIImage imageWithIOSurface:..] or [CIImage imageWithCVPixelBuffer:..]
+ *   headroom may be determined by kIOSurfaceContentHeadroom or deduced from pixel format or colorSpace information.
+ *
+ *   [CIImage imageWithBitmapData:..]
+ *   headroom may be deduced from pixel format or colorSpace information.
+ *
+ * If the image is the result of applying a CIFilter or CIKernel, this method will return 0.0.
+ * There are exceptions to this.  Applying CIWarpKernels or certain CIFilters (e.g. CIGaussianBlur,
+ * CILanczosScaleTransform, CIAreaAverage and some others) to an image will result in a CIImage with
+ * the same 'headroom' property value.
+ */
+@property (nonatomic, readonly) float contentHeadroom NS_AVAILABLE(15_0, 18_0);
 
 /* Returns a CVPixelBufferRef if the CIImage was created with [CIImage imageWithCVPixelBuffer] and no options.
  * Otherwise this property will be nil and calling [CIContext render:toCVPixelBuffer:] is recommended.
@@ -467,6 +533,11 @@ CORE_IMAGE_EXPORT CIImageOption const kCIImageAuxiliaryHDRGainMap NS_AVAILABLE(1
 /* Returns a CGImageRef if the CIImage was created with [CIImage imageWithCGImage] or [CIImage imageWithContentsOfURL] and no options.
  * Otherwise this property will be nil and calling [CIContext createCGImage:fromRect:] is recommended. */
 @property (nonatomic, readonly, nullable) CGImageRef CGImage NS_AVAILABLE(10_12,10_0);
+
+/* Returns a MTLTexture if the CIImage was created with [CIImage imageWithMTLTexture] and no options.
+ * Otherwise this property will be nil and calling [CIContext render:toMTLTexture:] is recommended.
+ * Modifying the contents of this texture will cause the CIImage to render with undefined results. */
+@property (nonatomic, readonly, nullable) id<MTLTexture> metalTexture NS_AVAILABLE(15_0, 18_0);
 
 /* Returns the rectangle of 'image' that is required to render the
  * rectangle 'rect' of the receiver.  This may return a null rect. */

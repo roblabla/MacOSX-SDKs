@@ -15,17 +15,17 @@ typedef NS_OPTIONS(NSUInteger, UIPopoverArrowDirection) {
     UIPopoverArrowDirectionRight = 1UL << 3,
     UIPopoverArrowDirectionAny = UIPopoverArrowDirectionUp | UIPopoverArrowDirectionDown | UIPopoverArrowDirectionLeft | UIPopoverArrowDirectionRight,
     UIPopoverArrowDirectionUnknown = NSUIntegerMax
-};
+} API_UNAVAILABLE(watchos);
 
 @interface UIViewController (UIPopoverController)
 
 /* modalInPopover is set on the view controller when you wish to force the popover hosting the view controller into modal behavior. When this is active, the popover will ignore events outside of its bounds until this is set to NO.
  */
-@property (nonatomic,readwrite,getter=isModalInPopover) BOOL modalInPopover API_DEPRECATED_WITH_REPLACEMENT("modalInPresentation", ios(3.2, 13.0)) API_UNAVAILABLE(visionos);
+@property (nonatomic,readwrite,getter=isModalInPopover) BOOL modalInPopover API_DEPRECATED_WITH_REPLACEMENT("modalInPresentation", ios(3.2, 13.0)) API_UNAVAILABLE(visionos, watchos);
 
 /* contentSizeForViewInPopover allows you to set the size of the content from within the view controller. This property is read/write, and you should generally not override it.
  */
-@property (nonatomic,readwrite) CGSize contentSizeForViewInPopover API_DEPRECATED_WITH_REPLACEMENT("preferredContentSize", ios(3.2, 7.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos);
+@property (nonatomic,readwrite) CGSize contentSizeForViewInPopover API_DEPRECATED_WITH_REPLACEMENT("preferredContentSize", ios(3.2, 7.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(visionos, watchos);
 
 @end
 

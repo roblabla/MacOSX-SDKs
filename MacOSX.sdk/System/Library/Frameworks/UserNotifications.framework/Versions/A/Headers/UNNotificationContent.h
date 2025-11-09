@@ -9,7 +9,6 @@
 
 @class UNNotificationAttachment;
 @class UNNotificationSound;
-@class UNNotificationContent;
 
 NS_ASSUME_NONNULL_BEGIN
 

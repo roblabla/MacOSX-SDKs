@@ -12,7 +12,7 @@
 
 NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
-UIKIT_EXTERN API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(tvos) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(tvos, watchos) NS_SWIFT_UI_ACTOR
 @interface UILexiconEntry : NSObject <NSCopying>
 // -documentText returns the intended text to be inserted into the document for a given -userInput.
 // -userInput represents the expected typed string, which need not match the actual typed string.
@@ -22,7 +22,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(tvos) NS_SWIFT_UI_ACTOR
 @property (nonatomic, readonly) NSString *userInput;
 @end
 
-UIKIT_EXTERN API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(tvos) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(tvos, watchos) NS_SWIFT_UI_ACTOR
 @interface UILexicon : NSObject <NSCopying>
 @property (nonatomic, readonly) NSArray<UILexiconEntry *> *entries;
 @end

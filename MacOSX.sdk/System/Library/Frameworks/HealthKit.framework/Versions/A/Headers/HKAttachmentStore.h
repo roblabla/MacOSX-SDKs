@@ -2,11 +2,11 @@
 //  HKAttachmentStore.h
 //  HealthKit
 //
-//  Copyright © 2022 Apple. All rights reserved.
+//  Copyright © 2022-2024 Apple. All rights reserved.
 //
 
-#import <HealthKit/HKDefines.h>
 #import <HealthKit/HKAttachment.h>
+#import <HealthKit/HKDefines.h>
 
 @class HKHealthStore;
 @class HKObject;

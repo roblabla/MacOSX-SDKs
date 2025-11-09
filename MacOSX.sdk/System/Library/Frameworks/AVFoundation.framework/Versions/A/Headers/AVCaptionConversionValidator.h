@@ -9,7 +9,7 @@
 */
 
 #import <AVFoundation/AVBase.h>
-#if TARGET_OS_OSX
+#if ( TARGET_OS_OSX || ( TARGET_OS_IOS && ! TARGET_OS_VISION ) )
 
 #import <AVFoundation/AVCaption.h>
 #import <AVFoundation/AVCaptionSettings.h>
@@ -38,14 +38,14 @@ typedef NS_ENUM(NSInteger, AVCaptionConversionValidatorStatus) {
     AVCaptionConversionValidatorStatusValidating = 1,
     AVCaptionConversionValidatorStatusCompleted = 2,
     AVCaptionConversionValidatorStatusStopped = 3
-} API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, watchos, tvos);
+} API_AVAILABLE(macos(12.0), ios(18.0), macCatalyst(15.0), visionos(2.0)) API_UNAVAILABLE(watchos, tvos);
 
 /*!
  @class         AVCaptionConversionValidator
  @abstract      Performs a validation of captions for a conversion operation and warns about problems that are encountered.
 */
 NS_SWIFT_NONSENDABLE
-API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, watchos, tvos)
+API_AVAILABLE(macos(12.0), ios(18.0), macCatalyst(15.0), visionos(2.0)) API_UNAVAILABLE(watchos, tvos)
 @interface AVCaptionConversionValidator : NSObject
 AV_INIT_UNAVAILABLE
 
@@ -106,7 +106,7 @@ AV_INIT_UNAVAILABLE
    If you wish to stop a validation operation in progress before it has been completed, send the message stopValidating to the receiver.
    When the validation is complete and all warnings have been reported, the block will be executed once with a value of nil for its warning parameter. When this occurs, the value of status will have been changed to AVCaptionConversionValidatorStatusCompleted.
 */
-- (void)validateCaptionConversionWithWarningHandler:(void (^)(AVCaptionConversionWarning * _Nullable warning))handler;
+- (void)validateCaptionConversionWithWarningHandler:(void (^ NS_SWIFT_SENDABLE)(AVCaptionConversionWarning * _Nullable warning))handler;
 
 /*!
  @method        stopValidating
@@ -130,13 +130,13 @@ AV_INIT_UNAVAILABLE
  @typedef       AVCaptionConversionWarningType
  @abstract      The type of a caption conversion warning.
 */
-typedef NSString *AVCaptionConversionWarningType NS_TYPED_ENUM API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, watchos, tvos);
+typedef NSString *AVCaptionConversionWarningType NS_TYPED_ENUM API_AVAILABLE(macos(12.0), ios(18.0), macCatalyst(15.0), visionos(2.0)) API_UNAVAILABLE(watchos, tvos);
 
 /*!
  @constant      AVCaptionConversionWarningTypeExcessMediaData
  @abstract      Indicates that one or more captions in the validator's captions array exceed the capacity for media data of the media type and subtype specified by the conversion settings.
 */
-AVF_EXPORT AVCaptionConversionWarningType const AVCaptionConversionWarningTypeExcessMediaData API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, watchos, tvos);
+AVF_EXPORT AVCaptionConversionWarningType const AVCaptionConversionWarningTypeExcessMediaData API_AVAILABLE(macos(12.0), ios(18.0), macCatalyst(15.0), visionos(2.0)) API_UNAVAILABLE(watchos, tvos);
 
 /*!
  @class         AVCaptionConversionWarning
@@ -144,7 +144,7 @@ AVF_EXPORT AVCaptionConversionWarningType const AVCaptionConversionWarningTypeEx
  @discussion    Subclasses of this type that are used from Swift must fulfill the requirements of a Sendable type.
 */
 NS_SWIFT_SENDABLE
-API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, watchos, tvos)
+API_AVAILABLE(macos(12.0), ios(18.0), macCatalyst(15.0), visionos(2.0)) API_UNAVAILABLE(watchos, tvos)
 @interface AVCaptionConversionWarning : NSObject
 AV_INIT_UNAVAILABLE
 
@@ -174,13 +174,13 @@ AV_INIT_UNAVAILABLE
  @typedef       AVCaptionConversionAdjustmentType
  @abstract      The type of a caption conversion adjustment.
 */
-typedef NSString *AVCaptionConversionAdjustmentType NS_TYPED_ENUM API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, watchos, tvos);
+typedef NSString *AVCaptionConversionAdjustmentType NS_TYPED_ENUM API_AVAILABLE(macos(12.0), ios(18.0), macCatalyst(15.0), visionos(2.0)) API_UNAVAILABLE(watchos, tvos);
 
 /*!
  @constant      AVCaptionConversionAdjustmentTypeTimeRange
  @abstract      Indicates a timing adjustment.
 */
-AVF_EXPORT AVCaptionConversionAdjustmentType const AVCaptionConversionAdjustmentTypeTimeRange API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, watchos, tvos);
+AVF_EXPORT AVCaptionConversionAdjustmentType const AVCaptionConversionAdjustmentTypeTimeRange API_AVAILABLE(macos(12.0), ios(18.0), macCatalyst(15.0), visionos(2.0)) API_UNAVAILABLE(watchos, tvos);
 
 /*!
  @class         AVCaptionConversionAdjustment
@@ -188,7 +188,7 @@ AVF_EXPORT AVCaptionConversionAdjustmentType const AVCaptionConversionAdjustment
  @discussion    Subclasses of this type that are used from Swift must fulfill the requirements of a Sendable type.
 */
 NS_SWIFT_SENDABLE
-API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, watchos, tvos)
+API_AVAILABLE(macos(12.0), ios(18.0), macCatalyst(15.0), visionos(2.0)) API_UNAVAILABLE(watchos, tvos)
 @interface AVCaptionConversionAdjustment : NSObject
 AV_INIT_UNAVAILABLE
 
@@ -206,7 +206,7 @@ AV_INIT_UNAVAILABLE
  @discussion    Subclasses of this type that are used from Swift must fulfill the requirements of a Sendable type.
 */
 NS_SWIFT_SENDABLE
-API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, watchos, tvos)
+API_AVAILABLE(macos(12.0), ios(18.0), macCatalyst(15.0), visionos(2.0)) API_UNAVAILABLE(watchos, tvos)
 @interface AVCaptionConversionTimeRangeAdjustment : AVCaptionConversionAdjustment
 AV_INIT_UNAVAILABLE
 
@@ -228,7 +228,7 @@ AV_INIT_UNAVAILABLE
 
 NS_ASSUME_NONNULL_END
 
-#endif // TARGET_OS_OSX
+#endif // ( TARGET_OS_OSX || ( TARGET_OS_IOS && ! TARGET_OS_VISION ) )
 
 #else
 #import <AVFCore/AVCaptionConversionValidator.h>

@@ -1,6 +1,6 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.10 (swiftlang-5.10.0.12.5 clang-1500.3.9.1.1)
-// swift-module-flags: -target arm64e-apple-ios17.4-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-bare-slash-regex -user-module-version 8 -module-name LightweightCodeRequirements
+// swift-compiler-version: Apple Swift version 6.0 effective-5.10 (swiftlang-6.0.0.7.24 clang-1600.0.25.1)
+// swift-module-flags: -target arm64e-apple-ios18.0-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-bare-slash-regex -user-module-version 15.0.2 -module-name LightweightCodeRequirements
 import Foundation
 import Security
 import Swift
@@ -28,6 +28,10 @@ public struct ProcessCodeRequirement : Swift.Sendable, Swift.Codable {
   public func encode(to encoder: any Swift.Encoder) throws
   public init(from decoder: any Swift.Decoder) throws
 }
+@available(macOS 15.0, macCatalyst 18.0, iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+extension LightweightCodeRequirements.ProcessCodeRequirement : Swift.Equatable {
+  public static func == (lhs: LightweightCodeRequirements.ProcessCodeRequirement, rhs: LightweightCodeRequirements.ProcessCodeRequirement) -> Swift.Bool
+}
 @available(macOS 14.4, iOS 17.4, tvOS 17.4, watchOS 10.4, visionOS 1.1, *)
 public struct LaunchCodeRequirement : Swift.Sendable, Swift.Codable {
   public static func allOf(@LightweightCodeRequirements.LaunchConstraintBuilder requirement: () -> [any LightweightCodeRequirements.LaunchConstraint]) throws -> LightweightCodeRequirements.LaunchCodeRequirement
@@ -37,6 +41,10 @@ public struct LaunchCodeRequirement : Swift.Sendable, Swift.Codable {
   public func encode(to encoder: any Swift.Encoder) throws
   public init(from decoder: any Swift.Decoder) throws
 }
+@available(macOS 15.0, macCatalyst 18.0, iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+extension LightweightCodeRequirements.LaunchCodeRequirement : Swift.Equatable {
+  public static func == (lhs: LightweightCodeRequirements.LaunchCodeRequirement, rhs: LightweightCodeRequirements.LaunchCodeRequirement) -> Swift.Bool
+}
 @available(macOS 14.4, iOS 17.4, tvOS 17.4, watchOS 10.4, visionOS 1.1, *)
 public struct OnDiskCodeRequirement : Swift.Sendable, Swift.Codable {
   public static func allOf(@LightweightCodeRequirements.OnDiskConstraintBuilder requirement: () -> [any LightweightCodeRequirements.OnDiskConstraint]) throws -> LightweightCodeRequirements.OnDiskCodeRequirement
@@ -45,6 +53,10 @@ public struct OnDiskCodeRequirement : Swift.Sendable, Swift.Codable {
   public init(_ launchRequirement: LightweightCodeRequirements.LaunchCodeRequirement) throws
   public func encode(to encoder: any Swift.Encoder) throws
   public init(from decoder: any Swift.Decoder) throws
+}
+@available(macOS 15.0, macCatalyst 18.0, iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+extension LightweightCodeRequirements.OnDiskCodeRequirement : Swift.Equatable {
+  public static func == (lhs: LightweightCodeRequirements.OnDiskCodeRequirement, rhs: LightweightCodeRequirements.OnDiskCodeRequirement) -> Swift.Bool
 }
 @available(macOS 14.4, macCatalyst 17.4, *)
 extension Foundation.Process {
@@ -120,8 +132,11 @@ public struct ProcessCodeSigningFlags : LightweightCodeRequirements.ProcessConst
     public static let isPlatformSigned: LightweightCodeRequirements.ProcessCodeSigningFlags.ValueSet
     public static let isDebugged: LightweightCodeRequirements.ProcessCodeSigningFlags.ValueSet
     public static let isSigned: LightweightCodeRequirements.ProcessCodeSigningFlags.ValueSet
+    @available(iOS 17.4, tvOS 17.4, watchOS 10.4, visionOS 1.1, macOS 14.4, *)
     public typealias ArrayLiteralElement = LightweightCodeRequirements.ProcessCodeSigningFlags.ValueSet
+    @available(iOS 17.4, tvOS 17.4, watchOS 10.4, visionOS 1.1, macOS 14.4, *)
     public typealias Element = LightweightCodeRequirements.ProcessCodeSigningFlags.ValueSet
+    @available(iOS 17.4, tvOS 17.4, watchOS 10.4, visionOS 1.1, macOS 14.4, *)
     public typealias RawValue = Swift.Int64
   }
   public static func isSuperset(of: LightweightCodeRequirements.ProcessCodeSigningFlags.DataType) -> LightweightCodeRequirements.ProcessCodeSigningFlags.OutType
@@ -144,8 +159,11 @@ public struct OnDiskCodeSigningFlags : LightweightCodeRequirements.OnDiskConstra
     public static let isLibraryValidationRequired: LightweightCodeRequirements.OnDiskCodeSigningFlags.ValueSet
     public static let isHardenedRuntimeEnforced: LightweightCodeRequirements.OnDiskCodeSigningFlags.ValueSet
     public static let isSignedByLinker: LightweightCodeRequirements.OnDiskCodeSigningFlags.ValueSet
+    @available(iOS 17.4, tvOS 17.4, watchOS 10.4, visionOS 1.1, macOS 14.4, *)
     public typealias ArrayLiteralElement = LightweightCodeRequirements.OnDiskCodeSigningFlags.ValueSet
+    @available(iOS 17.4, tvOS 17.4, watchOS 10.4, visionOS 1.1, macOS 14.4, *)
     public typealias Element = LightweightCodeRequirements.OnDiskCodeSigningFlags.ValueSet
+    @available(iOS 17.4, tvOS 17.4, watchOS 10.4, visionOS 1.1, macOS 14.4, *)
     public typealias RawValue = Swift.Int64
   }
   public static func isSuperset(of: LightweightCodeRequirements.OnDiskCodeSigningFlags.DataType) -> LightweightCodeRequirements.OnDiskCodeSigningFlags.OutType
@@ -232,6 +250,7 @@ public struct PlatformType : LightweightCodeRequirements.ProcessConstraint, Ligh
     public static let driverKit: LightweightCodeRequirements.PlatformType.Value
     public static let visionOS: LightweightCodeRequirements.PlatformType.Value
     public static let visionOSSimulator: LightweightCodeRequirements.PlatformType.Value
+    @available(iOS 17.4, tvOS 17.4, watchOS 10.4, visionOS 1.1, macOS 14.4, *)
     public typealias RawValue = Swift.Int64
   }
   public init(_ value: LightweightCodeRequirements.PlatformType.Value)
@@ -260,6 +279,13 @@ public struct TeamIdentifier : LightweightCodeRequirements.ProcessConstraint, Li
   public func encode(to encoder: any Swift.Encoder) throws
   public init(from decoder: any Swift.Decoder) throws
 }
+@available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+public struct TeamIdentifierMatchesCurrentProcess : LightweightCodeRequirements.ProcessConstraint {
+  public init()
+  public init(_ value: Swift.Bool)
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
 @available(macOS 14.4, iOS 17.4, tvOS 17.4, watchOS 10.4, visionOS 1.1, *)
 public struct ValidationCategory : LightweightCodeRequirements.ProcessConstraint, LightweightCodeRequirements.LaunchConstraint, LightweightCodeRequirements.OnDiskConstraint {
   public typealias OutType = LightweightCodeRequirements.ValidationCategory
@@ -274,6 +300,7 @@ public struct ValidationCategory : LightweightCodeRequirements.ProcessConstraint
     public static let enterprise: LightweightCodeRequirements.ValidationCategory.Value
     public static let developerID: LightweightCodeRequirements.ValidationCategory.Value
     public static let none: LightweightCodeRequirements.ValidationCategory.Value
+    @available(iOS 17.4, tvOS 17.4, watchOS 10.4, visionOS 1.1, macOS 14.4, *)
     public typealias RawValue = Swift.Int64
   }
   public init(_ value: LightweightCodeRequirements.ValidationCategory.Value)
@@ -298,9 +325,19 @@ public enum ConstraintError : Swift.Error {
 }
 @available(macOS 14.4, macCatalyst 17.4, *)
 public struct ValidationResult {
+  @available(macOS 15.0, macCatalyst 18.0, *)
+  public let signatureIsValid: Swift.Bool
+  @available(macOS 15.0, macCatalyst 18.0, *)
+  public let requirementMatched: Swift.Bool
+  @available(macOS 15.0, macCatalyst 18.0, *)
+  public let failureReason: Darwin.OSStatus
 }
 @available(macOS 14.4, macCatalyst 17.4, *)
 public func SecStaticCodeCheckValidityWithOnDiskRequirement(code: Security.SecStaticCode, flags: Security.SecCSFlags, requirement: LightweightCodeRequirements.OnDiskCodeRequirement) -> LightweightCodeRequirements.ValidationResult
+@available(macOS 15.0, macCatalyst 18.0, *)
+public func SecCodeCheckValidityWithOnDiskRequirement(code: Security.SecCode, flags: Security.SecCSFlags, requirement: LightweightCodeRequirements.OnDiskCodeRequirement) -> LightweightCodeRequirements.ValidationResult
+@available(macOS 15.0, macCatalyst 18.0, *)
+public func SecCodeCheckValidityWithProcessRequirement(code: Security.SecCode, flags: Security.SecCSFlags, requirement: LightweightCodeRequirements.ProcessCodeRequirement) -> LightweightCodeRequirements.ValidationResult
 @available(macOS 14.4, iOS 17.4, tvOS 17.4, watchOS 10.4, visionOS 1.1, *)
 extension LightweightCodeRequirements.ProcessCodeSigningFlags.ValueSet : Swift.OptionSet {}
 @available(macOS 14.4, iOS 17.4, tvOS 17.4, watchOS 10.4, visionOS 1.1, *)

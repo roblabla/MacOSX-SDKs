@@ -10,7 +10,7 @@
 
 NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
-UIKIT_EXTERN API_AVAILABLE(ios(17.0)) API_UNAVAILABLE(visionos) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(17.0)) API_UNAVAILABLE(visionos, watchos) NS_SWIFT_UI_ACTOR
 @interface UITextLoupeSession : NSObject
 
 /// Begins a loupe session at the specified point. The system will animate the presentation of the loupe, as well as its position and hierarchy.

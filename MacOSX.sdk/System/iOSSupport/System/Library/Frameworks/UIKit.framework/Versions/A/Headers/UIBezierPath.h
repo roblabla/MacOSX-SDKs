@@ -14,7 +14,7 @@
 
 NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
-UIKIT_EXTERN API_AVAILABLE(ios(3.2)) @interface UIBezierPath : NSObject<NSCopying, NSSecureCoding>
+UIKIT_EXTERN API_AVAILABLE(ios(3.2), watchos(2.0)) @interface UIBezierPath : NSObject<NSCopying, NSSecureCoding>
 
 + (instancetype)bezierPath;
 + (instancetype)bezierPathWithRect:(CGRect)rect;
@@ -38,7 +38,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(3.2)) @interface UIBezierPath : NSObject<NSCopyin
 - (void)addLineToPoint:(CGPoint)point;
 - (void)addCurveToPoint:(CGPoint)endPoint controlPoint1:(CGPoint)controlPoint1 controlPoint2:(CGPoint)controlPoint2;
 - (void)addQuadCurveToPoint:(CGPoint)endPoint controlPoint:(CGPoint)controlPoint;
-- (void)addArcWithCenter:(CGPoint)center radius:(CGFloat)radius startAngle:(CGFloat)startAngle endAngle:(CGFloat)endAngle clockwise:(BOOL)clockwise API_AVAILABLE(ios(4.0));
+- (void)addArcWithCenter:(CGPoint)center radius:(CGFloat)radius startAngle:(CGFloat)startAngle endAngle:(CGFloat)endAngle clockwise:(BOOL)clockwise API_AVAILABLE(ios(4.0), watchos(2.0));
 - (void)closePath;
 
 - (void)removeAllPoints;
@@ -49,7 +49,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(3.2)) @interface UIBezierPath : NSObject<NSCopyin
 
 // Modified paths
 
-- (UIBezierPath *)bezierPathByReversingPath API_AVAILABLE(ios(6.0));
+- (UIBezierPath *)bezierPathByReversingPath API_AVAILABLE(ios(6.0), watchos(2.0));
 
 // Transforming paths
 

@@ -20,6 +20,9 @@ NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 // used with NSRunLoop's performSelector:target:argument:order:modes:
 static const NSUInteger NSUndoCloseGroupingRunLoopOrdering = 350000;
 
+/// A key used to set and get user info for undo and redo actions
+typedef NSString * NSUndoManagerUserInfoKey NS_TYPED_EXTENSIBLE_ENUM NS_SWIFT_NAME(UndoManager.UserInfoKey) API_AVAILABLE(macos(15.0), ios(18.0), tvos(18.0), watchos(11.0));
+
 API_AVAILABLE(macos(10.0), ios(3.0), watchos(2.0), tvos(9.0))
 @interface NSUndoManager : NSObject
 
@@ -198,6 +201,21 @@ FOUNDATION_EXPORT NSString * const NSUndoManagerGroupIsDiscardableKey API_AVAILA
 /// 
 /// - Parameter actionName: The name of the action.
 - (void)setActionName:(NSString *)actionName;
+
+/// Get a value from the undo action's user info
+///
+/// - Parameter key: Which value should be retrieved
+-(id _Nullable)undoActionUserInfoValueForKey:(NSUndoManagerUserInfoKey)key API_AVAILABLE(macos(15.0), ios(18.0), tvos(18.0), watchos(11.0));
+
+/// Get a value from the redo action's user info
+/// 
+/// - Parameter key: Which value should be retrieved
+-(id _Nullable)redoActionUserInfoValueForKey:(NSUndoManagerUserInfoKey)key API_AVAILABLE(macos(15.0), ios(18.0), tvos(18.0), watchos(11.0));
+
+/// Set user info for the Undo or Redo command.
+/// - Parameter info: Value to be saved in the user info
+/// - Parameter key: Key at which the object should be saved
+-(void)setActionUserInfoValue:(id _Nullable)info forKey:(NSUndoManagerUserInfoKey)key API_AVAILABLE(macos(15.0), ios(18.0), tvos(18.0), watchos(11.0));
 
 // Call undoMenuItemTitle or redoMenuItemTitle to get the string for the undo or redo menu item.
 // In English they will return "Undo <action name>"/"Redo <action name>" or "Undo"/"Redo" if there is

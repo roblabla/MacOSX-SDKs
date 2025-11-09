@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/OfficeImport.framework/Versions/A/OfficeImport'
-current-version: 302.5.2
+current-version: 309
 exports:
   - targets:         [ x86_64-macos ]
     weak-symbols:    [ __ZTISt11logic_error, __ZTISt12length_error, __ZTISt12out_of_range, 
@@ -17,5 +17,5 @@ exports:
                        _OIPreviewProcessWithData, _OIPreviewProcessWithDataAndOptions, 
                        _OIPreviewProcessWithURL, _OIPreviewProcessWithURLAndOptions, 
                        _kOIPreviewOptionsNoDecorations, _kOIPreviewOptionsPassphrase ]
-    objc-classes:    [ OISpotlightImporter ]
+    objc-classes:    [ MFConverter, OISpotlightImporter ]
 ...

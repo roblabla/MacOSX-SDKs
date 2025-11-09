@@ -1,6 +1,6 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.10 (swiftlang-5.10.0.12.5 clang-1500.3.9.1.1)
-// swift-module-flags: -target arm64e-apple-macos14.5 -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftDispatch -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-bare-slash-regex -user-module-version 41 -module-name Dispatch
+// swift-compiler-version: Apple Swift version 6.0 effective-5.10 (swiftlang-6.0.0.7.24 clang-1600.0.25.1)
+// swift-module-flags: -target arm64e-apple-macos15.0 -target-variant arm64e-apple-ios18.0-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftDispatch -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-bare-slash-regex -user-module-version 49 -module-name Dispatch
 import Combine
 @_exported import Dispatch
 import Swift
@@ -80,8 +80,10 @@ final public class DispatchSpecificKey<T> {
   public init()
   @objc deinit
 }
+extension Dispatch.DispatchSpecificKey : Swift.Sendable where T : Swift.Sendable {
+}
 extension Dispatch.DispatchQueue {
-  public struct Attributes : Swift.OptionSet {
+  public struct Attributes : Swift.OptionSet, Swift.Sendable {
     public let rawValue: Swift.UInt64
     public init(rawValue: Swift.UInt64)
     public static let concurrent: Dispatch.DispatchQueue.Attributes
@@ -91,7 +93,7 @@ extension Dispatch.DispatchQueue {
     public typealias Element = Dispatch.DispatchQueue.Attributes
     public typealias RawValue = Swift.UInt64
   }
-  public enum GlobalQueuePriority {
+  public enum GlobalQueuePriority : Swift.Sendable {
     @available(macOS, deprecated: 10.10, message: "Use qos attributes instead")
     @available(iOS, deprecated: 8.0, message: "Use qos attributes instead")
     @available(tvOS, deprecated, message: "Use qos attributes instead")
@@ -118,7 +120,7 @@ extension Dispatch.DispatchQueue {
       get
     }
   }
-  public enum AutoreleaseFrequency {
+  public enum AutoreleaseFrequency : Swift.Sendable {
     case inherit
     @available(macOS 10.12, iOS 10.0, tvOS 10.0, watchOS 3.0, *)
     case workItem
@@ -130,7 +132,7 @@ extension Dispatch.DispatchQueue {
       get
     }
   }
-  public class func concurrentPerform(iterations: Swift.Int, execute work: (Swift.Int) -> Swift.Void)
+  @preconcurrency public class func concurrentPerform(iterations: Swift.Int, execute work: @Sendable (Swift.Int) -> Swift.Void)
   public class var main: Dispatch.DispatchQueue {
     get
   }
@@ -141,7 +143,7 @@ extension Dispatch.DispatchQueue {
   public class func global(priority: Dispatch.DispatchQueue.GlobalQueuePriority) -> Dispatch.DispatchQueue
   @available(macOS 10.10, iOS 8.0, *)
   public class func global(qos: Dispatch.DispatchQoS.QoSClass = .default) -> Dispatch.DispatchQueue
-  public class func getSpecific<T>(key: Dispatch.DispatchSpecificKey<T>) -> T?
+  @preconcurrency public class func getSpecific<T>(key: Dispatch.DispatchSpecificKey<T>) -> T? where T : Swift.Sendable
   convenience public init(label: Swift.String, qos: Dispatch.DispatchQoS = .unspecified, attributes: Dispatch.DispatchQueue.Attributes = [], autoreleaseFrequency: Dispatch.DispatchQueue.AutoreleaseFrequency = .inherit, target: Dispatch.DispatchQueue? = nil)
   public var label: Swift.String {
     get
@@ -156,9 +158,7 @@ extension Dispatch.DispatchQueue {
   public func async(group: Dispatch.DispatchGroup, execute workItem: Dispatch.DispatchWorkItem)
   @available(macOS 14.0, iOS 17.0, tvOS 17.0, watchOS 10.0, *)
   public func asyncUnsafe(group: Dispatch.DispatchGroup? = nil, qos: Dispatch.DispatchQoS = .unspecified, flags: Dispatch.DispatchWorkItemFlags = [], execute work: @escaping @convention(block) () -> Swift.Void)
-  #if compiler(>=5.3) && $Sendable
   @preconcurrency public func async(group: Dispatch.DispatchGroup? = nil, qos: Dispatch.DispatchQoS = .unspecified, flags: Dispatch.DispatchWorkItemFlags = [], execute work: @escaping @Sendable @convention(block) () -> Swift.Void)
-  #endif
   @available(macOS 10.14, iOS 12.0, tvOS 12.0, watchOS 5.0, *)
   public func asyncAndWait<T>(execute work: () throws -> T) rethrows -> T
   @available(macOS 10.14, iOS 12.0, tvOS 12.0, watchOS 5.0, *)
@@ -167,14 +167,10 @@ extension Dispatch.DispatchQueue {
   public func sync<T>(flags: Dispatch.DispatchWorkItemFlags, execute work: () throws -> T) rethrows -> T
   @available(macOS 14.0, iOS 17.0, tvOS 17.0, watchOS 10.0, *)
   public func asyncAfterUnsafe(deadline: Dispatch.DispatchTime, qos: Dispatch.DispatchQoS = .unspecified, flags: Dispatch.DispatchWorkItemFlags = [], execute work: @escaping @convention(block) () -> Swift.Void)
-  #if compiler(>=5.3) && $Sendable
   @preconcurrency public func asyncAfter(deadline: Dispatch.DispatchTime, qos: Dispatch.DispatchQoS = .unspecified, flags: Dispatch.DispatchWorkItemFlags = [], execute work: @escaping @Sendable @convention(block) () -> Swift.Void)
-  #endif
   @available(macOS 14.0, iOS 17.0, tvOS 17.0, watchOS 10.0, *)
   public func asyncAfterUnsafe(wallDeadline: Dispatch.DispatchWallTime, qos: Dispatch.DispatchQoS = .unspecified, flags: Dispatch.DispatchWorkItemFlags = [], execute work: @escaping @convention(block) () -> Swift.Void)
-  #if compiler(>=5.3) && $Sendable
   @preconcurrency public func asyncAfter(wallDeadline: Dispatch.DispatchWallTime, qos: Dispatch.DispatchQoS = .unspecified, flags: Dispatch.DispatchWorkItemFlags = [], execute work: @escaping @Sendable @convention(block) () -> Swift.Void)
-  #endif
   @available(macOS 10.10, iOS 8.0, *)
   public func asyncAfter(deadline: Dispatch.DispatchTime, execute: Dispatch.DispatchWorkItem)
   @available(macOS 10.10, iOS 8.0, *)
@@ -183,8 +179,8 @@ extension Dispatch.DispatchQueue {
   public var qos: Dispatch.DispatchQoS {
     get
   }
-  public func getSpecific<T>(key: Dispatch.DispatchSpecificKey<T>) -> T?
-  public func setSpecific<T>(key: Dispatch.DispatchSpecificKey<T>, value: T?)
+  @preconcurrency public func getSpecific<T>(key: Dispatch.DispatchSpecificKey<T>) -> T? where T : Swift.Sendable
+  @preconcurrency public func setSpecific<T>(key: Dispatch.DispatchSpecificKey<T>, value: T?) where T : Swift.Sendable
 }
 @available(macOS 14.0, iOS 17.0, tvOS 17.0, watchOS 10.0, *)
 extension Dispatch._DispatchSerialExecutorQueue : _Concurrency.SerialExecutor {
@@ -192,38 +188,50 @@ extension Dispatch._DispatchSerialExecutorQueue : _Concurrency.SerialExecutor {
   public func enqueue(_ job: consuming _Concurrency.ExecutorJob)
   #endif
   public func asUnownedSerialExecutor() -> _Concurrency.UnownedSerialExecutor
+  @_alwaysEmitIntoClient public func checkIsolated() {
+		dispatchPrecondition(condition: .onQueue(self))
+	}
 }
 @available(macOS 14.0, iOS 17.0, tvOS 17.0, watchOS 10.0, *)
 extension Dispatch.DispatchSerialQueue {
-  public struct Attributes : Swift.OptionSet {
+  public struct Attributes : Swift.OptionSet, Swift.Sendable {
     public let rawValue: Swift.UInt64
     public init(rawValue: Swift.UInt64)
     public static let initiallyInactive: Dispatch.DispatchSerialQueue.Attributes
+    @available(iOS 17.0, tvOS 17.0, watchOS 10.0, macOS 14.0, *)
     public typealias ArrayLiteralElement = Dispatch.DispatchSerialQueue.Attributes
+    @available(iOS 17.0, tvOS 17.0, watchOS 10.0, macOS 14.0, *)
     public typealias Element = Dispatch.DispatchSerialQueue.Attributes
+    @available(iOS 17.0, tvOS 17.0, watchOS 10.0, macOS 14.0, *)
     public typealias RawValue = Swift.UInt64
   }
   convenience public init(label: Swift.String, qos: Dispatch.DispatchQoS = .unspecified, attributes: Dispatch.DispatchSerialQueue.Attributes = [], autoreleaseFrequency: Dispatch.DispatchQueue.AutoreleaseFrequency = .workItem, target: Dispatch.DispatchQueue? = nil)
 }
 @available(macOS 14.0, iOS 17.0, tvOS 17.0, watchOS 10.0, *)
 extension Dispatch.DispatchConcurrentQueue {
-  public struct Attributes : Swift.OptionSet {
+  public struct Attributes : Swift.OptionSet, Swift.Sendable {
     public let rawValue: Swift.UInt64
     public init(rawValue: Swift.UInt64)
     public static let initiallyInactive: Dispatch.DispatchConcurrentQueue.Attributes
+    @available(iOS 17.0, tvOS 17.0, watchOS 10.0, macOS 14.0, *)
     public typealias ArrayLiteralElement = Dispatch.DispatchConcurrentQueue.Attributes
+    @available(iOS 17.0, tvOS 17.0, watchOS 10.0, macOS 14.0, *)
     public typealias Element = Dispatch.DispatchConcurrentQueue.Attributes
+    @available(iOS 17.0, tvOS 17.0, watchOS 10.0, macOS 14.0, *)
     public typealias RawValue = Swift.UInt64
   }
   convenience public init(label: Swift.String, qos: Dispatch.DispatchQoS = .unspecified, attributes: Dispatch.DispatchConcurrentQueue.Attributes = [], autoreleaseFrequency: Dispatch.DispatchQueue.AutoreleaseFrequency = .workItem, target: Dispatch.DispatchQueue? = nil)
 }
 @available(macOS 14.0, iOS 17.0, tvOS 17.0, watchOS 10.0, *)
 extension Dispatch.DispatchWorkloop {
-  public struct Attributes : Swift.OptionSet {
+  public struct Attributes : Swift.OptionSet, Swift.Sendable {
     public let rawValue: Swift.UInt64
     public init(rawValue: Swift.UInt64)
+    @available(iOS 17.0, tvOS 17.0, watchOS 10.0, macOS 14.0, *)
     public typealias ArrayLiteralElement = Dispatch.DispatchWorkloop.Attributes
+    @available(iOS 17.0, tvOS 17.0, watchOS 10.0, macOS 14.0, *)
     public typealias Element = Dispatch.DispatchWorkloop.Attributes
+    @available(iOS 17.0, tvOS 17.0, watchOS 10.0, macOS 14.0, *)
     public typealias RawValue = Swift.UInt64
   }
   convenience public init(label: Swift.String, attributes: Dispatch.DispatchWorkloop.Attributes = [], autoreleaseFrequency: Dispatch.DispatchQueue.AutoreleaseFrequency = .workItem, osWorkgroup: os_workgroup.WorkGroup? = nil)
@@ -266,13 +274,16 @@ extension Dispatch.DispatchSource {
     public typealias Element = Dispatch.DispatchSource.MachSendEvent
     public typealias RawValue = Swift.UInt
   }
-  public struct MemoryPressureEvent : Swift.OptionSet, Swift.RawRepresentable {
+  public struct MemoryPressureEvent : Swift.OptionSet, Swift.RawRepresentable, Swift.CustomStringConvertible {
     public let rawValue: Swift.UInt
     public init(rawValue: Swift.UInt)
     public static let normal: Dispatch.DispatchSource.MemoryPressureEvent
     public static let warning: Dispatch.DispatchSource.MemoryPressureEvent
     public static let critical: Dispatch.DispatchSource.MemoryPressureEvent
     public static let all: Dispatch.DispatchSource.MemoryPressureEvent
+    public var description: Swift.String {
+      get
+    }
     public typealias ArrayLiteralElement = Dispatch.DispatchSource.MemoryPressureEvent
     public typealias Element = Dispatch.DispatchSource.MemoryPressureEvent
     public typealias RawValue = Swift.UInt
@@ -313,10 +324,10 @@ extension Dispatch.DispatchSource {
     public typealias Element = Dispatch.DispatchSource.FileSystemEvent
     public typealias RawValue = Swift.UInt
   }
-  public class func makeMachSendSource(port: Darwin.mach_port_t, eventMask: Dispatch.DispatchSource.MachSendEvent, queue: Dispatch.DispatchQueue? = nil) -> any Dispatch.DispatchSourceMachSend
-  public class func makeMachReceiveSource(port: Darwin.mach_port_t, queue: Dispatch.DispatchQueue? = nil) -> any Dispatch.DispatchSourceMachReceive
+  public class func makeMachSendSource(port: _mach_port_t.mach_port_t, eventMask: Dispatch.DispatchSource.MachSendEvent, queue: Dispatch.DispatchQueue? = nil) -> any Dispatch.DispatchSourceMachSend
+  public class func makeMachReceiveSource(port: _mach_port_t.mach_port_t, queue: Dispatch.DispatchQueue? = nil) -> any Dispatch.DispatchSourceMachReceive
   public class func makeMemoryPressureSource(eventMask: Dispatch.DispatchSource.MemoryPressureEvent, queue: Dispatch.DispatchQueue? = nil) -> any Dispatch.DispatchSourceMemoryPressure
-  public class func makeProcessSource(identifier: Darwin.pid_t, eventMask: Dispatch.DispatchSource.ProcessEvent, queue: Dispatch.DispatchQueue? = nil) -> any Dispatch.DispatchSourceProcess
+  public class func makeProcessSource(identifier: sys_types.pid_t, eventMask: Dispatch.DispatchSource.ProcessEvent, queue: Dispatch.DispatchQueue? = nil) -> any Dispatch.DispatchSourceProcess
   public class func makeReadSource(fileDescriptor: Swift.Int32, queue: Dispatch.DispatchQueue? = nil) -> any Dispatch.DispatchSourceRead
   public class func makeSignalSource(signal: Swift.Int32, queue: Dispatch.DispatchQueue? = nil) -> any Dispatch.DispatchSourceSignal
   public class func makeTimerSource(flags: Dispatch.DispatchSource.TimerFlags = [], queue: Dispatch.DispatchQueue? = nil) -> any Dispatch.DispatchSourceTimer
@@ -327,7 +338,7 @@ extension Dispatch.DispatchSource {
   public class func makeWriteSource(fileDescriptor: Swift.Int32, queue: Dispatch.DispatchQueue? = nil) -> any Dispatch.DispatchSourceWrite
 }
 extension Dispatch.DispatchSourceMachSend {
-  public var handle: Darwin.mach_port_t {
+  public var handle: _mach_port_t.mach_port_t {
     get
   }
   public var data: Dispatch.DispatchSource.MachSendEvent {
@@ -338,7 +349,7 @@ extension Dispatch.DispatchSourceMachSend {
   }
 }
 extension Dispatch.DispatchSourceMachReceive {
-  public var handle: Darwin.mach_port_t {
+  public var handle: _mach_port_t.mach_port_t {
     get
   }
 }
@@ -351,7 +362,7 @@ extension Dispatch.DispatchSourceMemoryPressure {
   }
 }
 extension Dispatch.DispatchSourceProcess {
-  public var handle: Darwin.pid_t {
+  public var handle: sys_types.pid_t {
     get
   }
   public var data: Dispatch.DispatchSource.ProcessEvent {
@@ -420,7 +431,7 @@ public struct DispatchWallTime : Swift.Comparable, Swift.Sendable {
   public let rawValue: Dispatch.dispatch_time_t
   public static func now() -> Dispatch.DispatchWallTime
   public static let distantFuture: Dispatch.DispatchWallTime
-  public init(timespec: Darwin.timespec)
+  public init(timespec: _time.timespec)
 }
 extension Dispatch.DispatchWallTime {
   public static func < (a: Dispatch.DispatchWallTime, b: Dispatch.DispatchWallTime) -> Swift.Bool
@@ -449,7 +460,7 @@ extension Dispatch.DispatchTime {
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 extension Dispatch.DispatchQueue : Combine.Scheduler {
-  public struct SchedulerTimeType : Swift.Strideable, Swift.Codable, Swift.Hashable {
+  public struct SchedulerTimeType : Swift.Strideable, Swift.Codable, Swift.Hashable, Swift.Sendable {
     public var dispatchTime: Dispatch.DispatchTime
     public init(_ time: Dispatch.DispatchTime)
     public init(from decoder: any Swift.Decoder) throws
@@ -499,7 +510,7 @@ extension Dispatch.DispatchQueue : Combine.Scheduler {
       get
     }
   }
-  public struct SchedulerOptions {
+  public struct SchedulerOptions : Swift.Sendable {
     public var qos: Dispatch.DispatchQoS
     public var flags: Dispatch.DispatchWorkItemFlags
     public var group: Dispatch.DispatchGroup?
@@ -515,7 +526,7 @@ extension Dispatch.DispatchQueue : Combine.Scheduler {
   public func schedule(after date: Dispatch.DispatchQueue.SchedulerTimeType, tolerance: Dispatch.DispatchQueue.SchedulerTimeType.Stride, options: Dispatch.DispatchQueue.SchedulerOptions?, _ action: @escaping () -> Swift.Void)
   public func schedule(after date: Dispatch.DispatchQueue.SchedulerTimeType, interval: Dispatch.DispatchQueue.SchedulerTimeType.Stride, tolerance: Dispatch.DispatchQueue.SchedulerTimeType.Stride, options: Dispatch.DispatchQueue.SchedulerOptions?, _ action: @escaping () -> Swift.Void) -> any Combine.Cancellable
 }
-public struct DispatchWorkItemFlags : Swift.OptionSet, Swift.RawRepresentable {
+public struct DispatchWorkItemFlags : Swift.OptionSet, Swift.RawRepresentable, Swift.Sendable {
   public let rawValue: Swift.UInt
   public init(rawValue: Swift.UInt)
   public static let barrier: Dispatch.DispatchWorkItemFlags
@@ -551,7 +562,7 @@ public struct DispatchWorkItemFlags : Swift.OptionSet, Swift.RawRepresentable {
   @objc deinit
 }
 extension Dispatch.DispatchIO {
-  public enum StreamType : Swift.UInt {
+  public enum StreamType : Swift.UInt, Swift.Sendable {
     case stream
     case random
     public init?(rawValue: Swift.UInt)
@@ -560,7 +571,7 @@ extension Dispatch.DispatchIO {
       get
     }
   }
-  public struct CloseFlags : Swift.OptionSet, Swift.RawRepresentable {
+  public struct CloseFlags : Swift.OptionSet, Swift.RawRepresentable, Swift.Sendable {
     public let rawValue: Swift.UInt
     public init(rawValue: Swift.UInt)
     public static let stop: Dispatch.DispatchIO.CloseFlags
@@ -568,7 +579,7 @@ extension Dispatch.DispatchIO {
     public typealias Element = Dispatch.DispatchIO.CloseFlags
     public typealias RawValue = Swift.UInt
   }
-  public struct IntervalFlags : Swift.OptionSet, Swift.RawRepresentable {
+  public struct IntervalFlags : Swift.OptionSet, Swift.RawRepresentable, Swift.Sendable {
     public let rawValue: Swift.UInt
     public init(rawValue: Swift.UInt)
     public init(nilLiteral: ())
@@ -581,17 +592,17 @@ extension Dispatch.DispatchIO {
   public class func write(toFileDescriptor: Swift.Int32, data: Dispatch.DispatchData, runningHandlerOn queue: Dispatch.DispatchQueue, handler: @escaping (_ data: Dispatch.DispatchData?, _ error: Swift.Int32) -> Swift.Void)
   convenience public init(type: Dispatch.DispatchIO.StreamType, fileDescriptor: Swift.Int32, queue: Dispatch.DispatchQueue, cleanupHandler: @escaping (_ error: Swift.Int32) -> Swift.Void)
   @available(swift, obsoleted: 4)
-  convenience public init(type: Dispatch.DispatchIO.StreamType, path: Swift.UnsafePointer<Swift.Int8>, oflag: Swift.Int32, mode: Darwin.mode_t, queue: Dispatch.DispatchQueue, cleanupHandler: @escaping (_ error: Swift.Int32) -> Swift.Void)
+  convenience public init(type: Dispatch.DispatchIO.StreamType, path: Swift.UnsafePointer<Swift.Int8>, oflag: Swift.Int32, mode: sys_types.mode_t, queue: Dispatch.DispatchQueue, cleanupHandler: @escaping (_ error: Swift.Int32) -> Swift.Void)
   @available(swift 4)
-  convenience public init?(type: Dispatch.DispatchIO.StreamType, path: Swift.UnsafePointer<Swift.Int8>, oflag: Swift.Int32, mode: Darwin.mode_t, queue: Dispatch.DispatchQueue, cleanupHandler: @escaping (_ error: Swift.Int32) -> Swift.Void)
+  convenience public init?(type: Dispatch.DispatchIO.StreamType, path: Swift.UnsafePointer<Swift.Int8>, oflag: Swift.Int32, mode: sys_types.mode_t, queue: Dispatch.DispatchQueue, cleanupHandler: @escaping (_ error: Swift.Int32) -> Swift.Void)
   convenience public init(type: Dispatch.DispatchIO.StreamType, io: Dispatch.DispatchIO, queue: Dispatch.DispatchQueue, cleanupHandler: @escaping (_ error: Swift.Int32) -> Swift.Void)
-  public func read(offset: Darwin.off_t, length: Swift.Int, queue: Dispatch.DispatchQueue, ioHandler: @escaping (_ done: Swift.Bool, _ data: Dispatch.DispatchData?, _ error: Swift.Int32) -> Swift.Void)
-  public func write(offset: Darwin.off_t, data: Dispatch.DispatchData, queue: Dispatch.DispatchQueue, ioHandler: @escaping (_ done: Swift.Bool, _ data: Dispatch.DispatchData?, _ error: Swift.Int32) -> Swift.Void)
+  public func read(offset: sys_types.off_t, length: Swift.Int, queue: Dispatch.DispatchQueue, ioHandler: @escaping (_ done: Swift.Bool, _ data: Dispatch.DispatchData?, _ error: Swift.Int32) -> Swift.Void)
+  public func write(offset: sys_types.off_t, data: Dispatch.DispatchData, queue: Dispatch.DispatchQueue, ioHandler: @escaping (_ done: Swift.Bool, _ data: Dispatch.DispatchData?, _ error: Swift.Int32) -> Swift.Void)
   public func setInterval(interval: Dispatch.DispatchTimeInterval, flags: Dispatch.DispatchIO.IntervalFlags = [])
   public func close(flags: Dispatch.DispatchIO.CloseFlags = [])
 }
 @available(macOS 10.12, iOS 10.0, tvOS 10.0, watchOS 3.0, *)
-public enum DispatchPredicate {
+public enum DispatchPredicate : Swift.Sendable {
   case onQueue(Dispatch.DispatchQueue)
   case onQueueAsBarrier(Dispatch.DispatchQueue)
   case notOnQueue(Dispatch.DispatchQueue)
@@ -600,11 +611,11 @@ public enum DispatchPredicate {
 public func _dispatchPreconditionTest(_ condition: Dispatch.DispatchPredicate) -> Swift.Bool
 @available(macOS 10.12, iOS 10.0, tvOS 10.0, watchOS 3.0, *)
 @_transparent public func dispatchPrecondition(condition: @autoclosure () -> Dispatch.DispatchPredicate) {
-	// precondition is able to determine release-vs-debug asserts where the overlay
-	// cannot, so formulating this into a call that we can call with precondition()
+	 
+	 
 	precondition(_dispatchPreconditionTest(condition()), "dispatchPrecondition failure")
 }
-public struct DispatchQoS : Swift.Equatable {
+public struct DispatchQoS : Swift.Equatable, Swift.Sendable {
   public let qosClass: Dispatch.DispatchQoS.QoSClass
   public let relativePriority: Swift.Int
   @available(macOS 10.10, iOS 8.0, *)
@@ -618,7 +629,7 @@ public struct DispatchQoS : Swift.Equatable {
   @available(macOS 10.10, iOS 8.0, *)
   public static let userInteractive: Dispatch.DispatchQoS
   public static let unspecified: Dispatch.DispatchQoS
-  public enum QoSClass {
+  public enum QoSClass : Swift.Sendable {
     @available(macOS 10.10, iOS 8.0, *)
     case background
     @available(macOS 10.10, iOS 8.0, *)
@@ -631,9 +642,9 @@ public struct DispatchQoS : Swift.Equatable {
     case userInteractive
     case unspecified
     @available(macOS 10.10, iOS 8.0, *)
-    public init?(rawValue: Darwin.qos_class_t)
+    public init?(rawValue: DarwinFoundation.qos_class_t)
     @available(macOS 10.10, iOS 8.0, *)
-    public var rawValue: Darwin.qos_class_t {
+    public var rawValue: DarwinFoundation.qos_class_t {
       get
     }
     public static func == (a: Dispatch.DispatchQoS.QoSClass, b: Dispatch.DispatchQoS.QoSClass) -> Swift.Bool
@@ -645,7 +656,7 @@ public struct DispatchQoS : Swift.Equatable {
   public init(qosClass: Dispatch.DispatchQoS.QoSClass, relativePriority: Swift.Int)
   public static func == (a: Dispatch.DispatchQoS, b: Dispatch.DispatchQoS) -> Swift.Bool
 }
-@frozen public enum DispatchTimeoutResult {
+@frozen public enum DispatchTimeoutResult : Swift.Sendable {
   case success
   case timedOut
   public static func == (a: Dispatch.DispatchTimeoutResult, b: Dispatch.DispatchTimeoutResult) -> Swift.Bool
@@ -658,40 +669,16 @@ extension Dispatch.DispatchGroup {
   public func notify(qos: Dispatch.DispatchQoS = .unspecified, flags: Dispatch.DispatchWorkItemFlags = [], queue: Dispatch.DispatchQueue, execute work: @escaping @convention(block) () -> Swift.Void)
   @available(macOS 10.10, iOS 8.0, *)
   public func notify(queue: Dispatch.DispatchQueue, work: Dispatch.DispatchWorkItem)
-  #if compiler(>=5.3) && $UnavailableFromAsync
   @_unavailableFromAsync(message: "Use a TaskGroup instead") public func wait()
-  #else
-  public func wait()
-  #endif
-  #if compiler(>=5.3) && $UnavailableFromAsync
   @_unavailableFromAsync(message: "Use a TaskGroup instead") public func wait(timeout: Dispatch.DispatchTime) -> Dispatch.DispatchTimeoutResult
-  #else
-  public func wait(timeout: Dispatch.DispatchTime) -> Dispatch.DispatchTimeoutResult
-  #endif
-  #if compiler(>=5.3) && $UnavailableFromAsync
   @_unavailableFromAsync(message: "Use a TaskGroup instead") public func wait(wallTimeout timeout: Dispatch.DispatchWallTime) -> Dispatch.DispatchTimeoutResult
-  #else
-  public func wait(wallTimeout timeout: Dispatch.DispatchWallTime) -> Dispatch.DispatchTimeoutResult
-  #endif
 }
 extension Dispatch.DispatchSemaphore {
   @discardableResult
   public func signal() -> Swift.Int
-  #if compiler(>=5.3) && $UnavailableFromAsync
   @_unavailableFromAsync(message: "Await a Task handle instead") public func wait()
-  #else
-  public func wait()
-  #endif
-  #if compiler(>=5.3) && $UnavailableFromAsync
   @_unavailableFromAsync(message: "Await a Task handle instead") public func wait(timeout: Dispatch.DispatchTime) -> Dispatch.DispatchTimeoutResult
-  #else
-  public func wait(timeout: Dispatch.DispatchTime) -> Dispatch.DispatchTimeoutResult
-  #endif
-  #if compiler(>=5.3) && $UnavailableFromAsync
   @_unavailableFromAsync(message: "Await a Task handle instead") public func wait(wallTimeout: Dispatch.DispatchWallTime) -> Dispatch.DispatchTimeoutResult
-  #else
-  public func wait(wallTimeout: Dispatch.DispatchWallTime) -> Dispatch.DispatchTimeoutResult
-  #endif
 }
 @available(*, unavailable, renamed: "DispatchQueue.init(label:qos:attributes:autoreleaseFrequency:target:)")
 public func dispatch_queue_create(_ label: Swift.UnsafePointer<Swift.Int8>?, _ attr: Dispatch.__OS_dispatch_queue_attr?) -> Dispatch.DispatchQueue
@@ -700,7 +687,7 @@ public func dispatch_queue_create_with_target(_ label: Swift.UnsafePointer<Swift
 @available(*, unavailable, renamed: "DispatchIO.init(type:fileDescriptor:queue:cleanupHandler:)")
 public func dispatch_io_create(_ type: Swift.UInt, _ fd: Swift.Int32, _ queue: Dispatch.DispatchQueue, _ cleanup_handler: (Swift.Int32) -> Swift.Void) -> Dispatch.DispatchIO
 @available(*, unavailable, renamed: "DispatchIO.init(type:path:oflag:mode:queue:cleanupHandler:)")
-public func dispatch_io_create_with_path(_ type: Swift.UInt, _ path: Swift.UnsafePointer<Swift.Int8>, _ oflag: Swift.Int32, _ mode: Darwin.mode_t, _ queue: Dispatch.DispatchQueue, _ cleanup_handler: (Swift.Int32) -> Swift.Void) -> Dispatch.DispatchIO
+public func dispatch_io_create_with_path(_ type: Swift.UInt, _ path: Swift.UnsafePointer<Swift.Int8>, _ oflag: Swift.Int32, _ mode: sys_types.mode_t, _ queue: Dispatch.DispatchQueue, _ cleanup_handler: (Swift.Int32) -> Swift.Void) -> Dispatch.DispatchIO
 @available(*, unavailable, renamed: "DispatchIO.init(type:io:queue:cleanupHandler:)")
 public func dispatch_io_create_with_io(_ type: Swift.UInt, _ io: Dispatch.DispatchIO, _ queue: Dispatch.DispatchQueue, _ cleanup_handler: (Swift.Int32) -> Swift.Void) -> Dispatch.DispatchIO
 @available(*, unavailable, renamed: "DispatchIO.read(fileDescriptor:length:queue:handler:)")
@@ -742,11 +729,11 @@ public func dispatch_queue_attr_make_initially_inactive(_ attr: Dispatch.__OS_di
 @available(*, unavailable, renamed: "DispatchQueue.AutoreleaseFrequency.workItem")
 public func dispatch_queue_attr_make_with_autorelease_frequency(_ attr: Dispatch.__OS_dispatch_queue_attr?, _ frequency: Dispatch.__dispatch_autorelease_frequency_t) -> Dispatch.__OS_dispatch_queue_attr
 @available(*, unavailable, renamed: "DispatchQoS")
-public func dispatch_queue_attr_make_with_qos_class(_ attr: Dispatch.__OS_dispatch_queue_attr?, _ qos_class: Darwin.qos_class_t, _ relative_priority: Swift.Int32) -> Dispatch.__OS_dispatch_queue_attr
+public func dispatch_queue_attr_make_with_qos_class(_ attr: Dispatch.__OS_dispatch_queue_attr?, _ qos_class: DarwinFoundation.qos_class_t, _ relative_priority: Swift.Int32) -> Dispatch.__OS_dispatch_queue_attr
 @available(*, unavailable, renamed: "getter:DispatchQueue.label(self:)")
 public func dispatch_queue_get_label(_ queue: Dispatch.DispatchQueue?) -> Swift.UnsafePointer<Swift.Int8>
 @available(*, unavailable, renamed: "getter:DispatchQueue.qos(self:)")
-public func dispatch_queue_get_qos_class(_ queue: Dispatch.DispatchQueue, _ relative_priority_ptr: Swift.UnsafeMutablePointer<Swift.Int32>?) -> Darwin.qos_class_t
+public func dispatch_queue_get_qos_class(_ queue: Dispatch.DispatchQueue, _ relative_priority_ptr: Swift.UnsafeMutablePointer<Swift.Int32>?) -> DarwinFoundation.qos_class_t
 @available(*, unavailable, renamed: "DispatchQueue.asyncAfter(self:deadline:qos:flags:execute:)")
 public func dispatch_after(_ when: Dispatch.dispatch_time_t, _ queue: Dispatch.DispatchQueue, _ block: () -> Swift.Void)
 @available(*, unavailable, renamed: "DispatchQueue.async(self:group:qos:flags:execute:)")
@@ -794,7 +781,7 @@ public func dispatch_source_set_registration_handler(_ source: Dispatch.Dispatch
 @available(*, unavailable, renamed: "DispatchTime.now()")
 public func dispatch_time(_ when: Dispatch.dispatch_time_t, _ delta: Swift.Int64) -> Dispatch.dispatch_time_t
 @available(*, unavailable, renamed: "DispatchWalltime.init(time:)")
-public func dispatch_walltime(_ when: Swift.UnsafePointer<Darwin.timespec>?, _ delta: Swift.Int64) -> Dispatch.dispatch_time_t
+public func dispatch_walltime(_ when: Swift.UnsafePointer<_time.timespec>?, _ delta: Swift.Int64) -> Dispatch.dispatch_time_t
 @available(*, unavailable, renamed: "DispatchQueue.GlobalQueuePriority.high")
 public var DISPATCH_QUEUE_PRIORITY_HIGH: Swift.Int {
   get
@@ -914,4 +901,4 @@ extension Dispatch.DispatchQoS.QoSClass : Swift.Equatable {}
 extension Dispatch.DispatchQoS.QoSClass : Swift.Hashable {}
 extension Dispatch.DispatchTimeoutResult : Swift.Equatable {}
 extension Dispatch.DispatchTimeoutResult : Swift.Hashable {}
-extension Dispatch.DispatchTimeoutResult : Swift.Sendable {}
+extension Dispatch.DispatchTimeoutResult : Swift.BitwiseCopyable {}

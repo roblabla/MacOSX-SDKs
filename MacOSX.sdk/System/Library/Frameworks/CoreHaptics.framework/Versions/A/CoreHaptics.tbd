@@ -38,8 +38,8 @@ exports:
                        _CHHapticPowerUsageHigh, _CHHapticPowerUsageLow, _CHHapticPriorityExclusive, 
                        _CHHapticPriorityHigh, _CHHapticPriorityHighest, _CHHapticPriorityLow, 
                        _CHHapticUsageCategoryDefault, _CHHapticUsageCategoryDefaultWithConstantVolume, 
-                       _CHHapticUsageCategorySystemSound, _CHHapticUsageCategoryUIFeedback, 
-                       _CHHapticUsageCategoryiOSKeyboard ]
+                       _CHHapticUsageCategorySystemSound, _CHHapticUsageCategorySystemSoundHapticsParser, 
+                       _CHHapticUsageCategoryUIFeedback, _CHHapticUsageCategoryiOSKeyboard ]
     objc-classes:    [ AVHapticParameterCurveValue, AVHapticPlayer, AVHapticPlayerChannel, 
                        AVHapticSequence, CHHapticDynamicParameter, CHHapticEngine, 
                        CHHapticEvent, CHHapticEventParameter, CHHapticParameterCurve, 

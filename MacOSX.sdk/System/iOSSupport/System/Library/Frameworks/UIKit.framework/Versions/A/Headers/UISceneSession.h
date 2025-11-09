@@ -14,7 +14,7 @@ NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 @class UIScene, UIStoryboard;
 
-UIKIT_EXTERN API_AVAILABLE(ios(13.0)) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @interface UISceneConfiguration : NSObject <NSCopying, NSSecureCoding>
 // Creates a UISceneConfiguration instance from your Info.plist using the name and session role provided.
 // If nil is provided for the name, the first matching instance of the provided session role is used.
@@ -33,7 +33,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(13.0)) NS_SWIFT_UI_ACTOR
 @property (nonatomic, nullable, strong) UIStoryboard *storyboard;
 @end
 
-UIKIT_EXTERN API_AVAILABLE(ios(13.0)) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @interface UISceneSession : NSObject <NSSecureCoding>
 + (instancetype)new NS_UNAVAILABLE;
 - (instancetype)init NS_UNAVAILABLE;

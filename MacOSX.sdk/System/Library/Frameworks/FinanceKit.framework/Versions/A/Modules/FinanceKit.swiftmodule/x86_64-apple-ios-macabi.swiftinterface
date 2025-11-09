@@ -1,13 +1,15 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.10 (swiftlang-5.10.0.12.5 clang-1500.3.9.1.1)
-// swift-module-flags: -target x86_64-apple-ios17.5-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-bare-slash-regex -user-module-version 144.37.1 -module-name FinanceKit
+// swift-compiler-version: Apple Swift version 6.0 effective-5.10 (swiftlang-6.0.0.7.24 clang-1600.0.25.1)
+// swift-module-flags: -target x86_64-apple-ios18.0-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-bare-slash-regex -user-module-version 223 -module-name FinanceKit
+import CoreData
+import CoreGraphics
 @_exported import FinanceKit
 import Foundation
 import Swift
 import _Concurrency
 import _StringProcessing
 import _SwiftConcurrencyShims
-import _System_Foundation
+import os
 @available(iOS 17, *)
 @available(tvOS, unavailable)
 @available(macOS, unavailable)
@@ -20,8 +22,12 @@ extension FinanceKit.FinanceStore {
     case olderExists
     public static func == (a: FinanceKit.FinanceStore.ContainsOrderResult, b: FinanceKit.FinanceStore.ContainsOrderResult) -> Swift.Bool
     public func hash(into hasher: inout Swift.Hasher)
+    @available(iOS 17, *)
+    @available(tvOS, unavailable)
+    @available(watchOS, unavailable)
+    @available(macOS, unavailable)
     public typealias AllCases = [FinanceKit.FinanceStore.ContainsOrderResult]
-    public static var allCases: [FinanceKit.FinanceStore.ContainsOrderResult] {
+    nonisolated public static var allCases: [FinanceKit.FinanceStore.ContainsOrderResult] {
       get
     }
     public var hashValue: Swift.Int {
@@ -34,9 +40,7 @@ extension FinanceKit.FinanceStore {
 @available(macOS, unavailable)
 @available(watchOS, unavailable)
 extension FinanceKit.FinanceStore {
-  #if compiler(>=5.3) && $AsyncAwait
   public func containsOrder(matching fqoid: FinanceKit.FullyQualifiedOrderIdentifier, updatedDate: Foundation.Date? = nil) async throws -> FinanceKit.FinanceStore.ContainsOrderResult
-  #endif
 }
 @available(iOS 17, *)
 @available(tvOS, unavailable)
@@ -49,8 +53,12 @@ extension FinanceKit.FinanceStore {
     case newerExisting
     public static func == (a: FinanceKit.FinanceStore.SaveOrderResult, b: FinanceKit.FinanceStore.SaveOrderResult) -> Swift.Bool
     public func hash(into hasher: inout Swift.Hasher)
+    @available(iOS 17, *)
+    @available(tvOS, unavailable)
+    @available(watchOS, unavailable)
+    @available(macOS, unavailable)
     public typealias AllCases = [FinanceKit.FinanceStore.SaveOrderResult]
-    public static var allCases: [FinanceKit.FinanceStore.SaveOrderResult] {
+    nonisolated public static var allCases: [FinanceKit.FinanceStore.SaveOrderResult] {
       get
     }
     public var hashValue: Swift.Int {
@@ -63,9 +71,7 @@ extension FinanceKit.FinanceStore {
 @available(macOS, unavailable)
 @available(watchOS, unavailable)
 extension FinanceKit.FinanceStore {
-  #if compiler(>=5.3) && $AsyncAwait
   public func saveOrder(signedArchive: Foundation.Data) async throws -> FinanceKit.FinanceStore.SaveOrderResult
-  #endif
 }
 @available(iOS 17, *)
 @available(tvOS, unavailable)
@@ -117,7 +123,7 @@ extension FinanceKit.FullyQualifiedOrderIdentifier : Swift.CustomStringConvertib
 @available(tvOS, unavailable)
 @available(macOS, unavailable)
 @available(watchOS, unavailable)
-public class FinanceStore {
+public class FinanceStore : @unchecked Swift.Sendable {
   public static let shared: FinanceKit.FinanceStore
   @objc deinit
 }
@@ -128,6 +134,11 @@ public class FinanceStore {
 public enum FinanceError : Foundation.CustomNSError, Foundation.LocalizedError, Swift.Equatable, Swift.Sendable {
   case dataRestricted(FinanceKit.FinanceStore.DataType)
   case unknown
+  @available(iOS 18, *)
+  @available(tvOS, unavailable)
+  @available(macOS, unavailable)
+  @available(watchOS, unavailable)
+  case historyTokenInvalid
   public var errorCode: Swift.Int {
     get
   }

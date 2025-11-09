@@ -12,7 +12,7 @@
 NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 /// Use this class to express iOS-specific geometry preferences when calling `-[UIWindowScene requestGeometryUpdateWithPreferences:errorHandler:]`
-UIKIT_EXTERN API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(tvos)
+UIKIT_EXTERN API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(tvos, watchos)
 @interface UIWindowSceneGeometryPreferencesIOS : UIWindowSceneGeometryPreferences
 
 - (instancetype)init NS_DESIGNATED_INITIALIZER;

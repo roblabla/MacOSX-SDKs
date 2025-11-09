@@ -19,9 +19,9 @@ typedef NS_ENUM(NSUInteger, UIDynamicItemCollisionBoundsType) {
     UIDynamicItemCollisionBoundsTypeRectangle,
     UIDynamicItemCollisionBoundsTypeEllipse, // radii will be determined from the items bounds width, height
     UIDynamicItemCollisionBoundsTypePath
-} API_AVAILABLE(ios(9.0));
+} API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(watchos);
 
-NS_SWIFT_UI_ACTOR
+API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @protocol UIDynamicItem <NSObject>
 
 @property (nonatomic, readwrite) CGPoint center;
@@ -43,7 +43,7 @@ NS_SWIFT_UI_ACTOR
 
 @end
 
-UIKIT_EXTERN API_AVAILABLE(ios(9.0)) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @interface UIDynamicItemGroup : NSObject <UIDynamicItem>
 
 - (instancetype)initWithItems:(NSArray<id <UIDynamicItem>> *)items;
@@ -52,7 +52,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(9.0)) NS_SWIFT_UI_ACTOR
 
 @end
 
-UIKIT_EXTERN API_AVAILABLE(ios(7.0)) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(7.0)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @interface UIDynamicBehavior : NSObject
 
 - (void)addChildBehavior:(UIDynamicBehavior *)behavior;

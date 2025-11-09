@@ -28,6 +28,18 @@
 
 #ifndef _VA_LIST_T
 #define _VA_LIST_T
+
+#define USE_CLANG_STDARG 0
+
+#if USE_CLANG_STDARG
+#define __need_va_list
+#include <stdarg.h>
+#undef __need_va_list
+#else
 #include <machine/types.h> /* __darwin_va_list */
 typedef __darwin_va_list va_list;
+#endif
+
+#undef USE_CLANG_STDARG
+
 #endif /* _VA_LIST_T */

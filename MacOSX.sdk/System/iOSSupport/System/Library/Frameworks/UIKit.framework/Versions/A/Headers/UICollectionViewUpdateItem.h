@@ -17,9 +17,9 @@ typedef NS_ENUM(NSInteger, UICollectionUpdateAction) {
     UICollectionUpdateActionReload,
     UICollectionUpdateActionMove,
     UICollectionUpdateActionNone
-};
+} API_UNAVAILABLE(watchos);
 
-UIKIT_EXTERN API_AVAILABLE(ios(6.0)) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(6.0)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @interface UICollectionViewUpdateItem : NSObject
 
 @property (nonatomic, readonly, nullable) NSIndexPath *indexPathBeforeUpdate; // nil for UICollectionUpdateActionInsert

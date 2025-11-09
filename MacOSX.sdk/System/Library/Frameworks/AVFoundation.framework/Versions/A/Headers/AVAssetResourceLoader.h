@@ -29,7 +29,7 @@ NS_ASSUME_NONNULL_BEGIN
 @class AVAssetResourceRenewalRequest;
 @class AVAssetResourceLoaderInternal;
 
-API_AVAILABLE(macos(10.9), ios(6.0), tvos(9.0)) API_UNAVAILABLE(watchos)
+API_AVAILABLE(macos(10.9), ios(6.0), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(watchos)
 @interface AVAssetResourceLoader : NSObject {
 @private
 	AVAssetResourceLoaderInternal *_resourceLoader;
@@ -95,7 +95,7 @@ AV_INIT_UNAVAILABLE
   If an AVURLAsset is added to an AVContentKeySession object and a delegate is set on its AVAssetResourceLoader, that delegate's resourceLoader:shouldWaitForLoadingOfRequestedResource: method must specify which custom URL requests should be handled as content keys. This is done by returning YES and passing either AVStreamingKeyDeliveryPersistentContentKeyType or AVStreamingKeyDeliveryContentKeyType into -[AVAssetResourceLoadingContentInformationRequest setContentType:] and then calling -[AVAssetResourceLoadingRequest finishLoading].
 
 */
-- (BOOL)resourceLoader:(AVAssetResourceLoader *)resourceLoader shouldWaitForLoadingOfRequestedResource:(AVAssetResourceLoadingRequest *)loadingRequest API_AVAILABLE(macos(10.9), ios(6.0), tvos(9.0)) API_UNAVAILABLE(watchos);
+- (BOOL)resourceLoader:(AVAssetResourceLoader *)resourceLoader shouldWaitForLoadingOfRequestedResource:(AVAssetResourceLoadingRequest *)loadingRequest API_AVAILABLE(macos(10.9), ios(6.0), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 /*!
  @method 		resourceLoader:shouldWaitForRenewalOfRequestedResource:
@@ -113,7 +113,7 @@ AV_INIT_UNAVAILABLE
  
   If an AVURLAsset is added to an AVContentKeySession object and a delegate is set on its AVAssetResourceLoader, that delegate's resourceLoader:shouldWaitForRenewalOfRequestedResource:renewalRequest method must specify which custom URL requests should be handled as content keys. This is done by returning YES and passing either AVStreamingKeyDeliveryPersistentContentKeyType or AVStreamingKeyDeliveryContentKeyType into -[AVAssetResourceLoadingContentInformationRequest setContentType:] and then calling -[AVAssetResourceLoadingRequest finishLoading].
 */
-- (BOOL)resourceLoader:(AVAssetResourceLoader *)resourceLoader shouldWaitForRenewalOfRequestedResource:(AVAssetResourceRenewalRequest *)renewalRequest API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0)) API_UNAVAILABLE(watchos);
+- (BOOL)resourceLoader:(AVAssetResourceLoader *)resourceLoader shouldWaitForRenewalOfRequestedResource:(AVAssetResourceRenewalRequest *)renewalRequest API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 /*!
  @method 		resourceLoader:didCancelLoadingRequest:
@@ -122,7 +122,7 @@ AV_INIT_UNAVAILABLE
 				The loading request that has been cancelled. 
  @discussion	Previously issued loading requests can be cancelled when data from the resource is no longer required or when a loading request is superseded by new requests for data from the same resource. For example, if to complete a seek operation it becomes necessary to load a range of bytes that's different from a range previously requested, the prior request may be cancelled while the delegate is still handling it.
 */
-- (void)resourceLoader:(AVAssetResourceLoader *)resourceLoader didCancelLoadingRequest:(AVAssetResourceLoadingRequest *)loadingRequest API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0)) API_UNAVAILABLE(watchos);
+- (void)resourceLoader:(AVAssetResourceLoader *)resourceLoader didCancelLoadingRequest:(AVAssetResourceLoadingRequest *)loadingRequest API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 /*!
  @method 		resourceLoader:shouldWaitForResponseToAuthenticationChallenge:
@@ -135,7 +135,7 @@ AV_INIT_UNAVAILABLE
   Delegates receive this message when assistance is required of the application to respond to an authentication challenge.
   If the result is YES, the resource loader expects you to send an appropriate response, either subsequently or immediately, to the NSURLAuthenticationChallenge's sender, i.e. [authenticationChallenge sender], via use of one of the messages defined in the NSURLAuthenticationChallengeSender protocol (see NSAuthenticationChallenge.h). If you intend to respond to the authentication challenge after your handling of -resourceLoader:shouldWaitForResponseToAuthenticationChallenge: returns, you must retain the instance of NSURLAuthenticationChallenge until after your response has been made.
 */
-- (BOOL)resourceLoader:(AVAssetResourceLoader *)resourceLoader shouldWaitForResponseToAuthenticationChallenge:(NSURLAuthenticationChallenge *)authenticationChallenge API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0)) API_UNAVAILABLE(watchos);
+- (BOOL)resourceLoader:(AVAssetResourceLoader *)resourceLoader shouldWaitForResponseToAuthenticationChallenge:(NSURLAuthenticationChallenge *)authenticationChallenge API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 /*!
  @method 		resourceLoader:didCancelAuthenticationChallenge:
@@ -143,7 +143,7 @@ AV_INIT_UNAVAILABLE
  @param 		authenticationChallenge
 				The authentication challenge that has been cancelled. 
 */
-- (void)resourceLoader:(AVAssetResourceLoader *)resourceLoader didCancelAuthenticationChallenge:(NSURLAuthenticationChallenge *)authenticationChallenge API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0)) API_UNAVAILABLE(watchos);
+- (void)resourceLoader:(AVAssetResourceLoader *)resourceLoader didCancelAuthenticationChallenge:(NSURLAuthenticationChallenge *)authenticationChallenge API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 @end
 
@@ -159,7 +159,7 @@ AV_INIT_UNAVAILABLE
 @class AVAssetResourceLoadingRequestor;
 @class AVAssetResourceLoadingRequestorInternal;
 
-API_AVAILABLE(macos(10.14), ios(12.0), tvos(12.0)) API_UNAVAILABLE(watchos)
+API_AVAILABLE(macos(10.14), ios(12.0), tvos(12.0), visionos(1.0)) API_UNAVAILABLE(watchos)
 @interface AVAssetResourceLoadingRequestor : NSObject {
 @private
 	AVAssetResourceLoadingRequestorInternal *_requestor;
@@ -188,7 +188,7 @@ AV_INIT_UNAVAILABLE
 @class AVAssetResourceLoadingContentInformationRequest;
 @class AVAssetResourceLoadingDataRequest;
 
-API_AVAILABLE(macos(10.9), ios(6.0), tvos(9.0)) API_UNAVAILABLE(watchos)
+API_AVAILABLE(macos(10.9), ios(6.0), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(watchos)
 @interface AVAssetResourceLoadingRequest : NSObject {
 @private
 	AVAssetResourceLoadingRequestInternal *_loadingRequest;
@@ -213,45 +213,45 @@ AV_INIT_UNAVAILABLE
  @abstract		Indicates whether the request has been cancelled.
  @discussion	The value of this property becomes YES when the resource loader cancels the loading of a request, just prior to sending the message -resourceLoader:didCancelLoadingRequest: to its delegate.
 */
-@property (nonatomic, readonly, getter=isCancelled) BOOL cancelled API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0)) API_UNAVAILABLE(watchos);
+@property (nonatomic, readonly, getter=isCancelled) BOOL cancelled API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 /*! 
  @property 		contentInformationRequest
  @abstract		An instance of AVAssetResourceLoadingContentInformationRequest that you must populate with information about the resource before responding to any AVAssetResourceLoadingDataRequests for the resource.  The value of this property will be nil if no such information is being requested.
 */
-@property (nonatomic, readonly, nullable) AVAssetResourceLoadingContentInformationRequest *contentInformationRequest API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0)) API_UNAVAILABLE(watchos);
+@property (nonatomic, readonly, nullable) AVAssetResourceLoadingContentInformationRequest *contentInformationRequest API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 /*! 
  @property 		dataRequest
  @abstract		An instance of AVAssetResourceLoadingDataRequest that indicates the range of resource data that's being requested.  If an AVAssetResourceLoadingContentInformationRequest has been provided, you must set its properties appropriately before responding to any AVAssetResourceLoadingDataRequests.  The value of this property will be nil if no data is being requested.
 */
-@property (nonatomic, readonly, nullable) AVAssetResourceLoadingDataRequest *dataRequest API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0)) API_UNAVAILABLE(watchos);
+@property (nonatomic, readonly, nullable) AVAssetResourceLoadingDataRequest *dataRequest API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 /*! 
  @property 		response
  @abstract		Set the value of this property to an instance of NSURLResponse indicating a response to the loading request. If no response is needed, leave the value of this property set to nil.
 */
-@property (nonatomic, copy, nullable) NSURLResponse *response API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0)) API_UNAVAILABLE(watchos);
+@property (nonatomic, copy, nullable) NSURLResponse *response API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 /*! 
  @property 		redirect
  @abstract		Set the value of this property to an instance of NSURLRequest indicating a redirection of the loading request to another URL. If no redirection is needed, leave the value of this property set to nil.
  @discussion	AVAssetResourceLoader supports redirects to HTTP URLs only. Redirects to other URLs will result in a loading failure.
 */
-@property (nonatomic, copy, nullable) NSURLRequest *redirect API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0)) API_UNAVAILABLE(watchos);
+@property (nonatomic, copy, nullable) NSURLRequest *redirect API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 /*!
  @property 		requestor
  @abstract		The AVAssetResourceLoadingRequestor that made this request
  */
-@property (nonatomic, readonly) AVAssetResourceLoadingRequestor *requestor API_AVAILABLE(macos(10.14), ios(12.0), tvos(12.0)) API_UNAVAILABLE(watchos);
+@property (nonatomic, readonly) AVAssetResourceLoadingRequestor *requestor API_AVAILABLE(macos(10.14), ios(12.0), tvos(12.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 /*! 
  @method 		finishLoading   
  @abstract		Causes the receiver to treat the processing of the request as complete.
- @discussion	If a dataRequest is present and the resource does not contain the full extent of the data that has been requested according to the values of the requestedOffset and requestedLength properties of the dataRequest, or if requestsAllDataToEndOfResource has a value of YES, you may invoke -finishLoading after you have provided as much of the requested data as the resource contains.
+ @discussion	If a dataRequest is present, and the resource does not contain the full extent of the data that has been requested according to the values of the requestedOffset and requestedLength properties of the dataRequest, or if requestsAllDataToEndOfResource has a value of YES, -finishLoading may be invoked after providing as much of the requested data as the resource contains. If the contentInformationRequest property is not nil and specifies a non-empty allowedContentTypes array, the contentInformationRequest's contentType property must be set to a value within allowedContentTypes. Otherwise, this method will throw an exception.
 */
-- (void)finishLoading API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0)) API_UNAVAILABLE(watchos);
+- (void)finishLoading API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 /*! 
  @method 		finishLoadingWithError:   
@@ -272,7 +272,7 @@ AV_INIT_UNAVAILABLE
  When an AVURLAsset needs to renew a resource (because contentInformationRequest.renewalDate has been set on a previous loading request), it asks its AVAssetResourceLoader object to assist. The resource loader encapsulates the request information by creating an instance of this object, which it then hands to its delegate for processing. The delegate uses the information in this object to perform the request and report on the success or failure of the operation.
 
  */
-API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0)) API_UNAVAILABLE(watchos)
+API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(watchos)
 @interface AVAssetResourceRenewalRequest : AVAssetResourceLoadingRequest
 
 @end
@@ -290,7 +290,7 @@ API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 
 @class AVAssetResourceLoadingContentInformationRequestInternal;
 
-API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0)) API_UNAVAILABLE(watchos)
+API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(watchos)
 @interface AVAssetResourceLoadingContentInformationRequest : NSObject {
 @private
 	AVAssetResourceLoadingContentInformationRequestInternal *_contentInformationRequest;
@@ -307,9 +307,9 @@ AV_INIT_UNAVAILABLE
 /*!
  @property		allowedContentTypes
  @abstract		An array showing the types of data which will be accepted as a valid response for the requested resource.
- @discussion	If allowedContentTypes is nonnil and the contentType property is not in allowedContentTypes, an exception will be raised.
+ @discussion	If an AVAssetResourceLoadingRequest's contentInformationRequest is not nil, ensure that the value assigned to the contentType property is in this array. Otherwise, calling -finishLoading on the associated request will result in an exception.
 */
-@property (nonatomic, readonly, nullable) NSArray <NSString *> *allowedContentTypes API_AVAILABLE(macos(10.13.2), ios(11.2), tvos(11.2)) API_UNAVAILABLE(watchos);
+@property (nonatomic, readonly, nullable) NSArray <NSString *> *allowedContentTypes API_AVAILABLE(macos(10.13.2), ios(11.2), tvos(11.2), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 /*! 
  @property 		contentLength
@@ -330,14 +330,14 @@ AV_INIT_UNAVAILABLE
  @abstract		For resources that expire, the date at which a new AVAssetResourceLoadingRequest will be issued for a renewal of this resource, if the media system still requires it.
  @discussion	Before you finish loading an AVAssetResourceLoadingRequest, if the resource is prone to expiry you should set the value of this property to the date at which a renewal should be triggered. This value should be set sufficiently early enough to allow an AVAssetResourceRenewalRequest, delivered to your delegate via -resourceLoader:shouldWaitForRenewalOfRequestedResource:, to finish before the actual expiry time. Otherwise media playback may fail.
  */
-@property (nonatomic, copy, nullable) NSDate *renewalDate API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0)) API_UNAVAILABLE(watchos);
+@property (nonatomic, copy, nullable) NSDate *renewalDate API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 /*!
  @property		entireLengthAvailableOnDemand
  @abstract		Indicates whether asset data loading can expect data to be produced immediately.
  @discussion	Before you finish loading an AVAssetResourceLoadingRequest, if its contentInformationRequest is not nil, you may set this property to YES to indicate that all asset data can be produced immediately, e.g., because the data is fully cached, or because the custom URL scheme ultimately refers to files on local storage. This allows significant data flow optimizations. For backward compatibility, this property defaults to NO.
 */
-@property (nonatomic, getter=isEntireLengthAvailableOnDemand) BOOL entireLengthAvailableOnDemand API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0), watchos(9.0));
+@property (nonatomic, getter=isEntireLengthAvailableOnDemand) BOOL entireLengthAvailableOnDemand API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0), watchos(9.0), visionos(1.0));
 
 @end
 
@@ -356,7 +356,7 @@ AV_INIT_UNAVAILABLE
 
 @class AVAssetResourceLoadingDataRequestInternal;
 
-API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0)) API_UNAVAILABLE(watchos)
+API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(watchos)
 @interface AVAssetResourceLoadingDataRequest : NSObject {
 @private
 	AVAssetResourceLoadingDataRequestInternal *_dataRequest;
@@ -383,7 +383,7 @@ AV_INIT_UNAVAILABLE
  @abstract		Specifies that the entire remaining length of the resource from requestedOffset to the end of the resource is being requested.
  @discussion	When requestsAllDataToEndOfResource has a value of YES, you should disregard the value of requestedLength and incrementally provide as much data starting from the requestedOffset as the resource contains, until you have provided all of the available data successfully and invoked -finishLoading, until you have encountered a failure and invoked -finishLoadingWithError:, or until you have received -resourceLoader:didCancelLoadingRequest: for the AVAssetResourceLoadingRequest from which the AVAssetResourceLoadingDataRequest was obtained.
 */
-@property (nonatomic, readonly) BOOL requestsAllDataToEndOfResource API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0)) API_UNAVAILABLE(watchos);
+@property (nonatomic, readonly) BOOL requestsAllDataToEndOfResource API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 /*! 
  @property 		currentOffset
@@ -403,7 +403,7 @@ AV_INIT_UNAVAILABLE
 
 @end
 
-API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0)) API_UNAVAILABLE(watchos)
+API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(watchos)
 @interface AVAssetResourceLoader (AVAssetResourceLoaderContentKeySupport)
 
 /*!
@@ -411,11 +411,23 @@ API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0)) API_UNAVAILABLE(watchos)
  @abstract		When YES, eligible content keys will be loaded as eagerly as possible, potentially handled by the delegate. Setting to YES may result in network activity.
  @discussion	Any work done as a result of setting this property will be performed asynchronously.
 */
-@property (nonatomic) BOOL preloadsEligibleContentKeys API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0)) API_UNAVAILABLE(watchos);
+@property (nonatomic) BOOL preloadsEligibleContentKeys API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 @end
 
-API_AVAILABLE(macos(10.9), ios(6.0), tvos(9.0)) API_UNAVAILABLE(watchos)
+API_AVAILABLE(macos(15.0), ios(18.0), tvos(18.0), watchos(11.0), visionos(2.0))
+@interface AVAssetResourceLoader (AVAssetResourceLoaderCommonMediaClientDataSupport)
+
+/*
+ @property		sendsCommonMediaClientDataAsHTTPHeaders
+ @abstract		Enables Common Media Client Data to be attached as HTTP request headers.
+ @discussion	Defaults to NO.
+*/
+@property (nonatomic) BOOL sendsCommonMediaClientDataAsHTTPHeaders;
+
+@end
+
+API_DEPRECATED("AVAssetResourceLoader based key loading is no longer supported, transition to AVContentKeySession", macos(10.9, 15.0), ios(6.0, 18.0), tvos(9.0, 18.0), visionos(1.0, 2.0)) API_UNAVAILABLE(watchos)
 @interface AVAssetResourceLoadingRequest (AVAssetResourceLoadingRequestContentKeyRequestSupport)
 
 /*! 
@@ -431,7 +443,7 @@ API_AVAILABLE(macos(10.9), ios(6.0), tvos(9.0)) API_UNAVAILABLE(watchos)
  				If obtaining the streaming content key request fails, will be set to an instance of NSError describing the failure.
  @result		The key request data that must be transmitted to the key vendor to obtain the content key.
 */
-- (nullable NSData *)streamingContentKeyRequestDataForApp:(NSData *)appIdentifier contentIdentifier:(NSData *)contentIdentifier options:(nullable NSDictionary<NSString *, id> *)options error:(NSError * _Nullable * _Nullable)outError API_DEPRECATED_WITH_REPLACEMENT("-[AVContentKeyRequest makeStreamingContentKeyRequestDataForApp:contentIdentifier:options:completionHandler:]", macos(10.9, API_TO_BE_DEPRECATED), ios(7.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(watchos, visionos);
+- (nullable NSData *)streamingContentKeyRequestDataForApp:(NSData *)appIdentifier contentIdentifier:(NSData *)contentIdentifier options:(nullable NSDictionary<NSString *, id> *)options error:(NSError * _Nullable * _Nullable)outError API_DEPRECATED("Use -[AVContentKeyRequest makeStreamingContentKeyRequestDataForApp:contentIdentifier:options:completionHandler:] instead", macos(10.9, 15.0), ios(7.0, 18.0), tvos(9.0, 18.0)) API_UNAVAILABLE(watchos, visionos);
 
 /*! 
  @method 		persistentContentKeyFromKeyVendorResponse:options:error:
@@ -445,7 +457,7 @@ API_AVAILABLE(macos(10.9), ios(6.0), tvos(9.0)) API_UNAVAILABLE(watchos)
  @result		The persistable content key data that may be stored offline to answer future loading requests of the same content key.
  @discussion	The data returned from this method may be used to immediately satisfy an AVAssetResourceLoadingDataRequest, as well as any subsequent requests for the same key url. The value of AVAssetResourceLoadingContentInformationRequest.contentType must be set to AVStreamingKeyDeliveryPersistentContentKeyType when responding with data created with this method.
 */
-- (nullable NSData *)persistentContentKeyFromKeyVendorResponse:(NSData *)keyVendorResponse options:(nullable NSDictionary<NSString *, id> *)options error:(NSError **)outError API_DEPRECATED_WITH_REPLACEMENT("-[AVPersistableContentKeyRequest persistableContentKeyFromKeyVendorResponse:options:error:]", macos(10.15, API_TO_BE_DEPRECATED), ios(9.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(watchos, visionos);
+- (nullable NSData *)persistentContentKeyFromKeyVendorResponse:(NSData *)keyVendorResponse options:(nullable NSDictionary<NSString *, id> *)options error:(NSError **)outError API_DEPRECATED("Use -[AVPersistableContentKeyRequest persistableContentKeyFromKeyVendorResponse:options:error:] instead", macos(10.15, 15.0), ios(9.0, 18.0), tvos(9.0, 18.0)) API_UNAVAILABLE(watchos, visionos);
 
 @end
 
@@ -454,9 +466,9 @@ API_AVAILABLE(macos(10.9), ios(6.0), tvos(9.0)) API_UNAVAILABLE(watchos)
  @constant		AVAssetResourceLoadingRequestStreamingContentKeyRequestRequiresPersistentKey
  @abstract		Specifies whether the content key request should require a persistable key to be returned from the key vendor. Value should be a NSNumber created with +[NSNumber numberWithBool:].
 */
-AVF_EXPORT NSString *const AVAssetResourceLoadingRequestStreamingContentKeyRequestRequiresPersistentKey API_DEPRECATED_WITH_REPLACEMENT("-[AVPersistableContentKeyRequest persistableContentKeyFromKeyVendorResponse:options:error:]", macos(10.14, API_TO_BE_DEPRECATED), ios(9.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(watchos, visionos);
+AVF_EXPORT NSString *const AVAssetResourceLoadingRequestStreamingContentKeyRequestRequiresPersistentKey API_DEPRECATED("Use -[AVPersistableContentKeyRequest persistableContentKeyFromKeyVendorResponse:options:error:] instead", macos(10.14, 15.0), ios(9.0, 18.0), tvos(9.0, 18.0)) API_UNAVAILABLE(watchos, visionos);
 
-API_AVAILABLE(macos(10.9), ios(6.0), tvos(9.0)) API_UNAVAILABLE(watchos)
+API_AVAILABLE(macos(10.9), ios(6.0), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(watchos)
 @interface AVAssetResourceLoadingRequest (AVAssetResourceLoadingRequestDeprecated)
 
 /*! 

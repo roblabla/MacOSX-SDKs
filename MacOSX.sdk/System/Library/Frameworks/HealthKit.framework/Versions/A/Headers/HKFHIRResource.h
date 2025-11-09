@@ -2,7 +2,7 @@
 //  HKFHIRResource.h
 //  HealthKit
 //
-//  Copyright © 2018-2022 Apple. All rights reserved.
+//  Copyright © 2018-2024 Apple. All rights reserved.
 //
 
 
@@ -29,11 +29,12 @@ HK_EXTERN HKFHIRResourceType const HKFHIRResourceTypeMedicationStatement API_AVA
 HK_EXTERN HKFHIRResourceType const HKFHIRResourceTypeObservation API_AVAILABLE(ios(12.0), macCatalyst(13.0), macos(13.0)) API_UNAVAILABLE(watchos);
 HK_EXTERN HKFHIRResourceType const HKFHIRResourceTypeProcedure API_AVAILABLE(ios(12.0), macCatalyst(13.0), macos(13.0)) API_UNAVAILABLE(watchos);
 
+
 /*!
  @class         HKFHIRResource
  @abstract      The HKFHIRResource class encapsulates a FHIR (Fast Healthcare Interoperability Resources) resource.
  */
-HK_EXTERN API_AVAILABLE(ios(12.0), macCatalyst(13.0), macos(13.0)) API_UNAVAILABLE(watchos)
+HK_EXTERN NS_SWIFT_SENDABLE API_AVAILABLE(ios(12.0), macCatalyst(13.0), macos(13.0)) API_UNAVAILABLE(watchos)
 @interface HKFHIRResource : NSObject <NSSecureCoding, NSCopying>
 
 /*!

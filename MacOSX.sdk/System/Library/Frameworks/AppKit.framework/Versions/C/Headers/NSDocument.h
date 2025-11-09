@@ -1,8 +1,8 @@
 /*
-	NSDocument.h
-	Application Kit
-	Copyright (c) 1997-2023, Apple Inc.
-	All rights reserved.
+    NSDocument.h
+    Application Kit
+    Copyright (c) 1997-2024, Apple Inc.
+    All rights reserved.
 */
 
 #import <AppKit/NSNib.h>
@@ -361,15 +361,15 @@ The list of conditions for which NSDocument checks is subject to change. Regardl
 
     - (void)document:(NSDocument *)document didSave:(BOOL)didSaveSuccessfully contextInfo:(void *)contextInfo;
 
-The default implementation of this method first makes sure that any editor registered using Cocoa Bindings' NSEditorRegistration protocol has committed its changes, then creates a save panel, adds a standard "file format" accessory view if there is more than one file type for the user to choose from and [self shouldRunSavePanelWithAccessoryView] returns YES, sets various attributes of the panel, invokes [self prepareSavePanel:theSavePanel] to provide an opportunity for customization, then presents the panel. If the user OKs the panel -saveToURL:ofType:forSaveOperation:delegate:didSaveSelector:contextInfo: is invoked.
+The default implementation of this method first makes sure that any editor registered using Cocoa Bindings' NSEditorRegistration protocol has committed its changes. It then creates a save panel, adds a standard file formats selection control if there is more than one file type for the user to choose from and self.savePanelShowsFileFormatsControl returns YES, sets various attributes of the panel, invokes [self prepareSavePanel:theSavePanel] to provide an opportunity for customization, and presents the panel. If the user OKs the panel -saveToURL:ofType:forSaveOperation:delegate:didSaveSelector:contextInfo: is invoked.
 
 For backward binary compatibility with Mac OS 10.3 and earlier, the default implementation of this method instead invokes [self saveToFile:nil saveOperation:saveOperation delegate:delegate didSaveSelector:contextInfo:] if -saveToFile:saveOperation:delegate:didSaveSelector:contextInfo: is overridden, even if the user cancels the panel (because that's what 10.3 did).
 */
 - (void)runModalSavePanelForSaveOperation:(NSSaveOperationType)saveOperation delegate:(nullable id)delegate didSaveSelector:(nullable SEL)didSaveSelector contextInfo:(nullable void *)contextInfo;
 
-/* Return YES if -runModalSavePanelForSaveOperation:delegate:didSaveSelector:contextInfo: should add NSDocument's standard file format accessory view to the save panel, NO otherwise. The default implementation of this method returns YES. You can override this method to prevent NSDocument from adding an accessory view to the save panel so that your application can add its own when -prepareSavePanel is invoked.
+/* Return YES if -runModalSavePanelForSaveOperation:delegate:didSaveSelector:contextInfo: should add the standard file formats selection control to the save panel, NO otherwise. The default implementation of this property returns YES.
 */
-@property (readonly) BOOL shouldRunSavePanelWithAccessoryView;
+@property (readonly) BOOL savePanelShowsFileFormatsControl API_AVAILABLE(macos(15.0));
 
 /* Given the save panel that -runModalSavePanelForSaveOperation:delegate:didSaveSelector:contextInfo: is about to present to the user, make any final changes before it is presented, and return YES for success. Return NO for failure, to cancel the save operation. The default implementation of this method just returns YES.
 */
@@ -443,7 +443,7 @@ The default implementation of this method invokes [self hasUnautosavedChanges] a
  
 AppKit invokes this method at a variety of times, and not always on the main thread. For example, -autosaveWithImplicitCancellability:completionHandler: invokes this as part of determining whether the autosaving will be an NSAutosaveInPlaceOperation instead of an NSAutosaveElsewhereOperation. For another example, -canCloseDocumentWithDelegate:shouldCloseSelector:contextInfo: and NSDocumentController's machinery for handling unsaved changes at application termination time both invoke this as part of determining whether alerts about unsaved changes should be presented to the user.
 */
-@property(class, readonly) BOOL autosavesInPlace API_AVAILABLE(macos(10.7));
+@property(class, readonly) BOOL autosavesInPlace NS_SWIFT_NONISOLATED API_AVAILABLE(macos(10.7));
 
 /* Return YES if the receiving subclass of NSDocument supports Mac OS 10.7 version preservation, NO otherwise. The default implementation of this method returns [self autosavesInPlace]. You can override it and return NO to declare that NSDocument should not preserve old document versions.
 
@@ -833,6 +833,10 @@ You can override this method to customize the appending of extensions to file na
 @end
 
 @interface NSDocument(NSDeprecated)
+
+/* APIs that will be deprecated in an imminent future release.
+*/
+@property (readonly) BOOL shouldRunSavePanelWithAccessoryView API_DEPRECATED_WITH_REPLACEMENT("savePanelShowsFileFormatsControl", macos(10.0, API_TO_BE_DEPRECATED));
 
 #pragma mark *** Backward Compatibility ***
 

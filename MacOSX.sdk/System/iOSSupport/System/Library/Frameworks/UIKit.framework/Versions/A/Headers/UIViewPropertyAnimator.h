@@ -13,7 +13,7 @@
 
 NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
-UIKIT_EXTERN API_AVAILABLE(ios(10.0)) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(10.0)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @interface UIViewPropertyAnimator : NSObject <UIViewImplicitlyAnimating, NSCopying>
 
 @property(nullable, nonatomic, copy, readonly) id <UITimingCurveProvider> timingParameters;
@@ -33,10 +33,10 @@ UIKIT_EXTERN API_AVAILABLE(ios(10.0)) NS_SWIFT_UI_ACTOR
 @property(nonatomic, getter=isInterruptible) BOOL interruptible;
 
 /// Defaults to YES. Provides the ability for an animator to pause and scrub either linearly or using the animator’s current timing.
-@property(nonatomic) BOOL scrubsLinearly API_AVAILABLE(ios(11.0));
+@property(nonatomic) BOOL scrubsLinearly API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos);
 
 /// Defaults to NO. Provides the ability for an animator to pause on completion instead of transitioning to the .inactive state.
-@property(nonatomic) BOOL pausesOnCompletion API_AVAILABLE(ios(11.0));
+@property(nonatomic) BOOL pausesOnCompletion API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos);
 
 - (instancetype)initWithDuration:(NSTimeInterval)duration timingParameters:(id <UITimingCurveProvider>)parameters NS_DESIGNATED_INITIALIZER;
 

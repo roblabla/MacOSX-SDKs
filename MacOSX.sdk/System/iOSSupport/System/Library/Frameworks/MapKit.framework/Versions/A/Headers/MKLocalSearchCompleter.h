@@ -7,6 +7,7 @@
 
 #import <MapKit/MapKit.h>
 #import <MapKit/MKLocalSearchRequest.h>
+#import <MapKit/MKAddressFilter.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -27,7 +28,8 @@ API_DEPRECATED("Use MKLocalSearchCompleterResultType", ios(9.3, 13.0), macos(10.
 typedef NS_OPTIONS(NSUInteger, MKLocalSearchCompleterResultType) {
     MKLocalSearchCompleterResultTypeAddress = 1 << 0,
     MKLocalSearchCompleterResultTypePointOfInterest = 1 << 1,
-    MKLocalSearchCompleterResultTypeQuery = 1 << 2
+    MKLocalSearchCompleterResultTypeQuery = 1 << 2,
+    MKLocalSearchCompleterResultTypePhysicalFeature API_AVAILABLE(ios(18.0), visionos(2.0), tvos(18.0), macos(15.0)) API_UNAVAILABLE(watchos) = 1 << 3
 } API_AVAILABLE(ios(13.0), macos(10.15), tvos(13.0)) API_UNAVAILABLE(watchos);
 
 NS_CLASS_AVAILABLE(10_11_4, 9_3) __TVOS_AVAILABLE(9_2) API_UNAVAILABLE(watchos)
@@ -35,6 +37,7 @@ NS_CLASS_AVAILABLE(10_11_4, 9_3) __TVOS_AVAILABLE(9_2) API_UNAVAILABLE(watchos)
 
 @property (nonatomic, copy) NSString *queryFragment;
 @property (nonatomic, assign) MKCoordinateRegion region;
+@property (nonatomic, assign) MKLocalSearchRegionPriority regionPriority API_AVAILABLE(ios(18.0), visionos(2.0), tvos(18.0), macos(15.0)) API_UNAVAILABLE(watchos);
 @property (nonatomic, assign) MKSearchCompletionFilterType filterType
 #if defined(TARGET_OS_VISION) && TARGET_OS_VISION
 API_UNAVAILABLE(visionos);
@@ -43,6 +46,7 @@ API_DEPRECATED("Use resultTypes", ios(9.3, 13.0), macos(10.11.4, 10.15), tvos(9.
 #endif
 @property (nonatomic, assign) MKLocalSearchCompleterResultType resultTypes API_AVAILABLE(ios(13.0), macos(10.15), tvos(13.0)) API_UNAVAILABLE(watchos);
 @property (nonatomic, copy, nullable) MKPointOfInterestFilter *pointOfInterestFilter API_AVAILABLE(ios(13.0), macos(10.15), tvos(13.0)) API_UNAVAILABLE(watchos);
+@property (nonatomic, copy, nullable) MKAddressFilter *addressFilter API_AVAILABLE(ios(18.0), visionos(2.0), tvos(18.0), macos(15.0)) API_UNAVAILABLE(watchos);
 
 @property (nonatomic, weak, nullable) id<MKLocalSearchCompleterDelegate> delegate;
 

@@ -24,27 +24,27 @@ typedef NS_ENUM(NSUInteger, MPSGraphFFTScalingMode)
     MPSGraphFFTScalingModeUnitary       MPS_ENUM_AVAILABLE_STARTING(macos(14.0), ios(17.0), tvos(17.0))
 };
 
-/// This class defines parameters for a fast Fourier transform (FFT) operation.
+/// The class that defines the parameters for a fast Fourier transform (FFT) operation.
 ///
 /// Use this descriptor with ``MPSGraph/fastFourierTransformWithTensor:axes:descriptor:name:``,
-/// ``MPSGraph/realToHermiteanFFTWithTensor:axesTensor:descriptor:name:`` and
+/// ``MPSGraph/realToHermiteanFFTWithTensor:axesTensor:descriptor:name:``, and
 /// ``MPSGraph/HermiteanToRealFFTWithTensor:axesTensor:descriptor:name:`` methods.
 MPS_CLASS_AVAILABLE_STARTING(macos(14.0), ios(17.0), tvos(17.0))
 @interface MPSGraphFFTDescriptor : MPSGraphObject<NSCopying>
 
-/// A boolean-valued parameter that defines the phase factor sign for Fourier transforms.
+/// A Boolean-valued parameter that defines the phase factor sign for Fourier transforms.
 ///
-/// When set to `YES` MPSGraph uses the positive phase factor: `exp(+i 2Pi mu nu / n)`, when computing the (inverse) Fourier transform.
+/// When set to `YES` graph uses the positive phase factor: `exp(+i 2Pi mu nu / n)`, when computing the (inverse) Fourier transform.
 /// Otherwise MPSGraph uses the negative phase factor: `exp(-i 2Pi mu nu / n)`, when computing the Fourier transform.
 /// Default value: `NO`.
 @property (readwrite, nonatomic) BOOL inverse;
 
-/// The scaling mode of the FFT operation.
+/// The scaling mode of the fast fourier transform (FFT) operation.
 ///
 /// Note that the scaling mode is independent from the phase factor. Default value: `MPSGraphFFTScalingModeNone`.
 @property (readwrite, nonatomic) MPSGraphFFTScalingMode scalingMode;
 
-/// A parameter which controls how MPSGraph rounds the output tensor size for a Hermitean-to-real Fourier transform.
+/// A parameter which controls how graph rounds the output tensor size for a Hermitean-to-real Fourier transform.
 ///
 /// If set to `YES` then MPSGraph rounds the last output dimension of the result tensor in
 /// ``MPSGraph/HermiteanToRealFFTWithTensor:axesTensor:descriptor:name:`` to an odd value.
@@ -84,7 +84,7 @@ MPS_CLASS_AVAILABLE_STARTING(macos(14.0), ios(17.0), tvos(17.0))
 /// - Parameters:
 ///   - tensor: A complex or real-valued input tensor.
 ///   - axes: An array of numbers that specifies over which axes MPSGraph performs the Fourier transform - all axes must be contained within last four dimensions of the input tensor.
-///   - descriptor: A descriptor that defines parameters of the Fourier transform operation - see ``MPSGraphFFTDescriptor``.
+///   - descriptor: A descriptor that defines the parameters of the Fourier transform operation - see ``MPSGraphFFTDescriptor``.
 ///   - name: The name for the operation.
 /// - Returns: A valid complex-valued MPSGraphTensor of the same shape as `tensor`.
 -(MPSGraphTensor *) fastFourierTransformWithTensor:(MPSGraphTensor *) tensor
@@ -117,7 +117,7 @@ MPS_AVAILABLE_STARTING(macos(14.0), ios(17.0), tvos(17.0));
 /// - Parameters:
 ///   - tensor: A complex or real-valued input tensor.
 ///   - axesTensor: A tensor of rank one containing the axes over which MPSGraph performs the transformation. See ``MPSGraph/fastFourierTransformWithTensor:axes:descriptor:name:``.
-///   - descriptor: A descriptor that defines parameters of the Fourier transform operation - see ``MPSGraphFFTDescriptor``.
+///   - descriptor: A descriptor that defines the parameters of the Fourier transform operation - see ``MPSGraphFFTDescriptor``.
 ///   - name: The name for the operation.
 /// - Returns: A valid complex-valued MPSGraphTensor of the same shape as `tensor`.
 -(MPSGraphTensor *) fastFourierTransformWithTensor:(MPSGraphTensor *) tensor
@@ -151,7 +151,7 @@ MPS_AVAILABLE_STARTING(macos(14.0), ios(17.0), tvos(17.0));
 /// - Parameters:
 ///   - tensor: A Real-valued input tensor. Must have datatype `MPSDataTypeFloat32` or `MPSDatatypeFloat16`.
 ///   - axes: An array of numbers that specifies over which axes MPSGraph performs the Fourier transform - all axes must be contained within last four dimensions of the input tensor.
-///   - descriptor: A descriptor that defines parameters of the Fourier transform operation - see ``MPSGraphFFTDescriptor``.
+///   - descriptor: A descriptor that defines the parameters of the Fourier transform operation - see ``MPSGraphFFTDescriptor``.
 ///   - name: The name for the operation.
 /// - Returns: A valid MPSGraphTensor of type `MPSDataTypeComplexFloat32` or `MPSDataTypeComplexFloat16` with reduced size (see Discussion).
 -(MPSGraphTensor *) realToHermiteanFFTWithTensor:(MPSGraphTensor *) tensor
@@ -186,7 +186,7 @@ MPS_AVAILABLE_STARTING(macos(14.0), ios(17.0), tvos(17.0));
 /// - Parameters:
 ///   - tensor: A real-valued input tensor. Must have datatype `MPSDataTypeFloat32` or `MPSDatatypeFloat16`.
 ///   - axesTensor: A tensor of rank one containing the axes over which MPSGraph performs the transformation. See ``MPSGraph/fastFourierTransformWithTensor:axes:descriptor:name:``.
-///   - descriptor: A descriptor that defines parameters of the Fourier transform operation - see ``MPSGraphFFTDescriptor``.
+///   - descriptor: A descriptor that defines the parameters of the Fourier transform operation - see ``MPSGraphFFTDescriptor``.
 ///   - name: The name for the operation.
 /// - Returns: A valid MPSGraphTensor of type `MPSDataTypeComplexFloat32` or `MPSDataTypeComplexFloat16`  with reduced size (see Discussion).
 -(MPSGraphTensor *) realToHermiteanFFTWithTensor:(MPSGraphTensor *) tensor
@@ -196,7 +196,7 @@ MPS_AVAILABLE_STARTING(macos(14.0), ios(17.0), tvos(17.0));
 MPS_SWIFT_NAME(realToHermiteanFFT(_:axesTensor:descriptor:name:))
 MPS_AVAILABLE_STARTING(macos(14.0), ios(17.0), tvos(17.0));
 
-/// Creates a Hermitean-to-Real fast Fourier transform operation and returns the result tensor.
+/// Creates a Hermitean-to-real fast Fourier transform operation and returns the result tensor.
 ///
 /// This operation computes the fast Fourier transform of a complex-valued input tensor according to the following formulae.
 /// ```md
@@ -223,7 +223,7 @@ MPS_AVAILABLE_STARTING(macos(14.0), ios(17.0), tvos(17.0));
 /// - Parameters:
 ///   - tensor: A complex-valued input tensor with reduced size (see Discussion). Must have datatype `MPSDataTypeComplexFloat32` or `MPSDataTypeComplexFloat16`.
 ///   - axes: An array of numbers that specifies over which axes MPSGraph performs the Fourier transform - all axes must be contained within last four dimensions of the input tensor.
-///   - descriptor: A descriptor that defines parameters of the Fourier transform operation - see ``MPSGraphFFTDescriptor``.
+///   - descriptor: A descriptor that defines the parameters of the Fourier transform operation - see ``MPSGraphFFTDescriptor``.
 ///   - name: The name for the operation.
 /// - Returns: A valid MPSGraphTensor of type `MPSDataTypeFloat32` or `MPSDataTypeFloat16` (full size).
 -(MPSGraphTensor *) HermiteanToRealFFTWithTensor:(MPSGraphTensor *) tensor
@@ -234,7 +234,7 @@ MPS_SWIFT_NAME(HermiteanToRealFFT(_:axes:descriptor:name:))
 MPS_AVAILABLE_STARTING(macos(14.0), ios(17.0), tvos(17.0));
 
 
-/// Creates a Hermitean-to-Real fast Fourier transform operation and returns the result tensor.
+/// Creates a Hermitean-to-real fast Fourier transform operation and returns the result tensor.
 ///
 /// This operation computes the fast Fourier transform of a complex-valued input tensor according to the following formulae.
 /// ```md
@@ -261,7 +261,7 @@ MPS_AVAILABLE_STARTING(macos(14.0), ios(17.0), tvos(17.0));
 /// - Parameters:
 ///   - tensor: A complex-valued input tensor with reduced size (see Discussion). Must have datatype `MPSDataTypeComplexFloat32` or `MPSDataTypeComplexFloat16`.
 ///   - axesTensor: A tensor of rank one containing the axes over which MPSGraph performs the transformation. See ``MPSGraph/fastFourierTransformWithTensor:axes:descriptor:name:``.
-///   - descriptor: A descriptor that defines parameters of the Fourier transform operation - see ``MPSGraphFFTDescriptor``.
+///   - descriptor: A descriptor that defines the parameters of the Fourier transform operation - see ``MPSGraphFFTDescriptor``.
 ///   - name: The name for the operation.
 /// - Returns: A valid MPSGraphTensor of type `MPSDataTypeFloat32` or `MPSDataTypeFloat16` (full size).
 -(MPSGraphTensor *) HermiteanToRealFFTWithTensor:(MPSGraphTensor *) tensor

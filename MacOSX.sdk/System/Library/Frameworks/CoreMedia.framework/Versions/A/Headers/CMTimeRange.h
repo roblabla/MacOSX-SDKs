@@ -52,7 +52,7 @@ typedef struct
 {
 	CMTime			start;		/*!< The start time of the time range. */
 	CMTime			duration;	/*!< The duration of the time range. */
-} CMTimeRange API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
+} CMTimeRange API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
 	@function	CMTIMERANGE_IS_VALID
@@ -88,11 +88,11 @@ typedef struct
 
 CM_EXPORT const CMTimeRange kCMTimeRangeZero	/*! @constant kCMTimeRangeZero 
 													Use this constant to generate an empty CMTimeRange at 0. */
-							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));		
+							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0), visionos(1.0));		
 
 CM_EXPORT const CMTimeRange kCMTimeRangeInvalid /*! @constant kCMTimeRangeInvalid 
 													Use this constant to generate an invalid CMTimeRange. */
-							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
+							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
 	@function	CMTimeRangeMake
@@ -103,7 +103,7 @@ CM_EXPORT const CMTimeRange kCMTimeRangeInvalid /*! @constant kCMTimeRangeInvali
 CM_EXPORT CMTimeRange CMTimeRangeMake(
 				CMTime start,					/*! @param start			Initializes the start field of the resulting CMTimeRange. */
 				CMTime duration)				/*! @param duration			Initializes the duration field of the resulting CMTimeRange. */
-							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
+							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0), visionos(1.0));
  
 /*!
 	@function	CMTimeRangeGetUnion
@@ -115,7 +115,7 @@ CM_EXPORT CMTimeRange CMTimeRangeMake(
 CM_EXPORT CMTimeRange CMTimeRangeGetUnion(
 				CMTimeRange range,				/*! @param range			A CMTimeRange to be unioned. */
 				CMTimeRange otherRange)				/*! @param otherRange			Another CMTimeRange to be unioned. */
-							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
+							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
 	@function	CMTimeRangeGetIntersection
@@ -127,7 +127,7 @@ CM_EXPORT CMTimeRange CMTimeRangeGetUnion(
 CM_EXPORT CMTimeRange CMTimeRangeGetIntersection(
 				CMTimeRange range,				/*! @param range			A CMTimeRange to be intersected. */
 				CMTimeRange otherRange)				/*! @param otherRange			Another CMTimeRange to be intersected. */
-							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
+							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
 	@function	CMTimeRangeEqual
@@ -138,7 +138,7 @@ CM_EXPORT CMTimeRange CMTimeRangeGetIntersection(
 CM_EXPORT Boolean CMTimeRangeEqual(
 				CMTimeRange range1,				/*! @param range1			A CMTimeRange to be compared for equality. */
 				CMTimeRange range2)				/*! @param range2			Another CMTimeRange to be compared for equality. */
-							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
+							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
 	@function	CMTimeRangeContainsTime
@@ -150,7 +150,7 @@ CM_EXPORT Boolean CMTimeRangeEqual(
 CM_EXPORT Boolean CMTimeRangeContainsTime(
 				CMTimeRange range,				/*! @param range			A CMTimeRange to be tested for inclusion. */
 				CMTime time)					/*! @param time				A CMTime to be tested for inclusion. */
-							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
+							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
 	@function	CMTimeRangeContainsTimeRange
@@ -162,7 +162,7 @@ CM_EXPORT Boolean CMTimeRangeContainsTime(
 CM_EXPORT Boolean CMTimeRangeContainsTimeRange(
 				CMTimeRange range,				/*! @param range			A CMTimeRange. */
 				CMTimeRange otherRange)				/*! @param otherRange			Another CMTimeRange to be tested for inclusion. */
-							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
+							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
 	@function	CMTimeRangeGetEnd
@@ -173,7 +173,7 @@ CM_EXPORT Boolean CMTimeRangeContainsTimeRange(
 */
 CM_EXPORT CMTime CMTimeRangeGetEnd(
 				CMTimeRange range)				/*! @param range			A CMTimeRange. */
-							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
+							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
 	@function	CMTimeMapTimeFromRangeToRange
@@ -191,7 +191,7 @@ CM_EXPORT CMTime CMTimeMapTimeFromRangeToRange(
 				CMTime t, 
 				CMTimeRange fromRange, 
 				CMTimeRange toRange )
-							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
+							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
 	@function	CMTimeClampToRange
@@ -206,7 +206,7 @@ CM_EXPORT CMTime CMTimeMapTimeFromRangeToRange(
 CM_EXPORT CMTime CMTimeClampToRange( 
 				CMTime time, 
 				CMTimeRange range )
-							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
+							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
 	@function	CMTimeMapDurationFromRangeToRange
@@ -220,7 +220,7 @@ CM_EXPORT CMTime CMTimeMapDurationFromRangeToRange(
 				CMTime dur, 
 				CMTimeRange fromRange, 
 				CMTimeRange toRange )
-							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
+							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
 	@function	CMTimeFoldIntoRange
@@ -233,7 +233,7 @@ CM_EXPORT CMTime
 CMTimeFoldIntoRange(
 				CMTime time,					/*! @param time				The CMTime to fold. */
 				CMTimeRange foldRange )			/*! @param foldRange		The CMTimeRange into which to fold it. */
-							API_AVAILABLE(macos(10.14), ios(12.0), tvos(12.0), watchos(6.0));
+							API_AVAILABLE(macos(10.14), ios(12.0), tvos(12.0), watchos(6.0), visionos(1.0));
 
 /*!
 	@function	CMTimeRangeFromTimeToTime
@@ -243,7 +243,7 @@ CMTimeFoldIntoRange(
 CM_EXPORT CMTimeRange CMTimeRangeFromTimeToTime(
 				CMTime start, 
 				CMTime end )
-							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
+							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
 	@function	CMTimeRangeCopyAsDictionary
@@ -254,7 +254,7 @@ CM_EXPORT CMTimeRange CMTimeRangeFromTimeToTime(
 CM_EXPORT CFDictionaryRef CM_NULLABLE CMTimeRangeCopyAsDictionary(
 				CMTimeRange range,							/*! @param range			The CMTimeRange from which to create a dictionary. */
 				CFAllocatorRef CM_NULLABLE  allocator)		/*! @param allocator		CFAllocator with which to create a dictionary. Pass kCFAllocatorDefault to use the default allocator. */
-							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
+							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
 	@function	CMTimeRangeMakeFromDictionary
@@ -265,7 +265,7 @@ CM_EXPORT CFDictionaryRef CM_NULLABLE CMTimeRangeCopyAsDictionary(
 */
 CM_EXPORT CMTimeRange CMTimeRangeMakeFromDictionary(
 				CFDictionaryRef CM_NONNULL dictionaryRepresentation)			/*! @param dictionaryRepresentation				A CFDictionary from which to create a CMTimeRange. */
-							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
+							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 CM_ASSUME_NONNULL_BEGIN
 
@@ -274,14 +274,14 @@ CM_ASSUME_NONNULL_BEGIN
 	@discussion CFDictionary key for start field of a CMTimeRange (CMTime)
 */
 CM_EXPORT const CFStringRef kCMTimeRangeStartKey
-							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
+							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
 	@constant kCMTimeRangeDurationKey
 	@discussion CFDictionary key for timescale field of a CMTimeRange (CMTime)
 */
 CM_EXPORT const CFStringRef kCMTimeRangeDurationKey
-							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
+							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 CM_ASSUME_NONNULL_END
 
@@ -295,7 +295,7 @@ CM_ASSUME_NONNULL_END
 CM_EXPORT CFStringRef CM_NULLABLE CMTimeRangeCopyDescription(
 				CFAllocatorRef CM_NULLABLE allocator,		/*! @param allocator		CFAllocator with which to create description. Pass kCFAllocatorDefault to use the default allocator. */
 				CMTimeRange range)							/*! @param range			The CMTimeRange to describe. */
-							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
+							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
 	@function	CMTimeRangeShow
@@ -304,7 +304,7 @@ CM_EXPORT CFStringRef CM_NULLABLE CMTimeRangeCopyDescription(
 */
 CM_EXPORT void CMTimeRangeShow(
 				CMTimeRange range)				/*! @param range			The CMTimeRange to show. */
-							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
+							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
 	@typedef	CMTimeMapping
@@ -325,7 +325,7 @@ typedef struct
 {
 	CMTimeRange source; // eg, media.  source.start is kCMTimeInvalid for empty edits.
 	CMTimeRange target; // eg, track.
-} CMTimeMapping API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
+} CMTimeMapping API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
 	@function	CMTIMEMAPPING_IS_VALID
@@ -353,7 +353,7 @@ typedef struct
 
 CM_EXPORT const CMTimeMapping kCMTimeMappingInvalid /*! @constant kCMTimeMappingInvalid 
 													Use this constant to generate an invalid CMTimeMapping. */
-							API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(6.0));
+							API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
 	@function	CMTimeMappingMake
@@ -364,7 +364,7 @@ CM_EXPORT const CMTimeMapping kCMTimeMappingInvalid /*! @constant kCMTimeMapping
 CM_EXPORT CMTimeMapping CMTimeMappingMake(
 				CMTimeRange source,				/*! @param source			Initializes the source field of the resulting CMTimeMapping. */
 				CMTimeRange target)				/*! @param target			Initializes the target field of the resulting CMTimeMapping. */
-							API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(6.0));
+							API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(6.0), visionos(1.0));
  
 /*!
 	@function	CMTimeMappingMakeEmpty
@@ -374,7 +374,7 @@ CM_EXPORT CMTimeMapping CMTimeMappingMake(
 */
 CM_EXPORT CMTimeMapping CMTimeMappingMakeEmpty(
 				CMTimeRange target)				/*! @param target			Initializes the target field of the resulting CMTimeMapping. */
-							API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(6.0));
+							API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(6.0), visionos(1.0));
  
 /*!
 	@function	CMTimeMappingCopyAsDictionary
@@ -385,7 +385,7 @@ CM_EXPORT CMTimeMapping CMTimeMappingMakeEmpty(
 CM_EXPORT CFDictionaryRef CM_NULLABLE CMTimeMappingCopyAsDictionary(
 				CMTimeMapping mapping,			/*! @param mapping			The CMTimeMapping from which to create a dictionary. */
 				CFAllocatorRef CM_NULLABLE allocator)		/*! @param allocator		CFAllocator with which to create a dictionary. Pass kCFAllocatorDefault to use the default allocator. */
-							API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(6.0));
+							API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
 	@function	CMTimeMappingMakeFromDictionary
@@ -396,21 +396,21 @@ CM_EXPORT CFDictionaryRef CM_NULLABLE CMTimeMappingCopyAsDictionary(
 */
 CM_EXPORT CMTimeMapping CMTimeMappingMakeFromDictionary(
 				CFDictionaryRef CM_NONNULL dictionaryRepresentation)			/*! @param dictionaryRepresentation				A CFDictionary from which to create a CMTimeMapping. */
-							API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(6.0));
+							API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(6.0), visionos(1.0));
 CM_ASSUME_NONNULL_BEGIN
 /*!
 	@constant kCMTimeMappingSourceKey
 	@discussion CFDictionary key for source field of a CMTimeMapping (CMTimeRange)
 */
 CM_EXPORT const CFStringRef kCMTimeMappingSourceKey
-							API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(6.0));
+							API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
 	@constant kCMTimeMappingTargetKey
 	@discussion CFDictionary key for target field of a CMTimeMapping (CMTimeRange)
 */
 CM_EXPORT const CFStringRef kCMTimeMappingTargetKey
-							API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(6.0));
+							API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(6.0), visionos(1.0));
 CM_ASSUME_NONNULL_END
 /*!
 	@function	CMTimeMappingCopyDescription
@@ -422,7 +422,7 @@ CM_ASSUME_NONNULL_END
 CM_EXPORT CFStringRef CM_NULLABLE CMTimeMappingCopyDescription(
 				CFAllocatorRef CM_NULLABLE allocator,		/*! @param allocator		CFAllocator with which to create description. Pass kCFAllocatorDefault to use the default allocator. */
 				CMTimeMapping mapping)			/*! @param mapping			The CMTimeMapping to describe. */
-							API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(6.0));
+							API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
 	@function	CMTimeMappingShow
@@ -431,7 +431,7 @@ CM_EXPORT CFStringRef CM_NULLABLE CMTimeMappingCopyDescription(
 */
 CM_EXPORT void CMTimeMappingShow(
 				CMTimeMapping mapping)			/*! @param mapping			The CMTimeMapping to show. */
-							API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(6.0));
+							API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 CF_IMPLICIT_BRIDGING_DISABLED
 

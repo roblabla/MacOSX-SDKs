@@ -2,11 +2,11 @@
 //  HKHealthStore.h
 //  HealthKit
 //
-//  Copyright (c) 2013-2022 Apple Inc. All rights reserved.
+//  Copyright (c) 2013-2024 Apple Inc. All rights reserved.
 //
 
-#import <HealthKit/HKDefines.h>
 #import <HealthKit/HKCharacteristicObjects.h>
+#import <HealthKit/HKDefines.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -22,6 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
 @class HKSourceRevision;
 @class HKUnit;
 @class HKWorkout;
+@class HKWorkoutActivity;
 @class HKWorkoutBuilder;
 @class HKWorkoutConfiguration;
 @class HKWorkoutSession;
@@ -78,7 +79,7 @@ NS_SWIFT_SENDABLE
  */
 - (void)requestAuthorizationToShareTypes:(nullable NSSet<HKSampleType *> *)typesToShare
                                readTypes:(nullable NSSet<HKObjectType *> *)typesToRead
-                              completion:(void (^)(BOOL success, NSError * _Nullable error))completion NS_REFINED_FOR_SWIFT_ASYNC(3) NS_SWIFT_ASYNC_THROWS_ON_FALSE(1);
+                              completion:(void (^ NS_SWIFT_SENDABLE)(BOOL success, NSError * _Nullable error))completion NS_REFINED_FOR_SWIFT_ASYNC(3) NS_SWIFT_ASYNC_THROWS_ON_FALSE(1);
 
 /*!
  @method        requestPerObjectReadAuthorizationForType:predicate:completion:
@@ -96,7 +97,7 @@ NS_SWIFT_SENDABLE
   */
 - (void)requestPerObjectReadAuthorizationForType:(HKObjectType *)objectType
                                        predicate:(nullable NSPredicate *)predicate
-                                      completion:(void (^)(BOOL success, NSError * _Nullable error))completion NS_SWIFT_ASYNC_THROWS_ON_FALSE(1) API_AVAILABLE(ios(16.0), macCatalyst(16.0), macos(13.0));
+                                      completion:(void (^ NS_SWIFT_SENDABLE)(BOOL success, NSError * _Nullable error))completion NS_SWIFT_ASYNC_THROWS_ON_FALSE(1) API_AVAILABLE(ios(16.0), macCatalyst(16.0), macos(13.0));
 
 /*!
  @method        getRequestStatusForAuthorizationToShareTypes:readTypes:completion:
@@ -108,7 +109,7 @@ NS_SWIFT_SENDABLE
  */
 - (void)getRequestStatusForAuthorizationToShareTypes:(NSSet<HKSampleType *> *)typesToShare
                                            readTypes:(NSSet<HKObjectType *> *)typesToRead
-                                          completion:(void (^)(HKAuthorizationRequestStatus requestStatus, NSError * _Nullable error))completion NS_SWIFT_ASYNC_NAME(statusForAuthorizationRequest(toShare:read:)) API_AVAILABLE(ios(12.0), watchos(5.0), macCatalyst(13.0), macos(13.0));
+                                          completion:(void (^ NS_SWIFT_SENDABLE)(HKAuthorizationRequestStatus requestStatus, NSError * _Nullable error))completion NS_SWIFT_ASYNC_NAME(statusForAuthorizationRequest(toShare:read:)) API_AVAILABLE(ios(12.0), watchos(5.0), macCatalyst(13.0), macos(13.0));
 
 /*!
  @method        handleAuthorizationForExtensionWithCompletion:
@@ -122,7 +123,7 @@ NS_SWIFT_SENDABLE
                 the user, if necessary, completed successfully and was not cancelled by the user.  It does NOT indicate
                 whether the application was granted authorization.
  */
-- (void)handleAuthorizationForExtensionWithCompletion:(void (^)(BOOL success, NSError * _Nullable error))completion NS_SWIFT_ASYNC_THROWS_ON_FALSE(1) API_AVAILABLE(ios(9.0), macCatalyst(13.0), macos(13.0)) API_UNAVAILABLE(watchos) NS_EXTENSION_UNAVAILABLE("Not available to extensions");
+- (void)handleAuthorizationForExtensionWithCompletion:(void (^ NS_SWIFT_SENDABLE)(BOOL success, NSError * _Nullable error))completion NS_SWIFT_ASYNC_THROWS_ON_FALSE(1) API_AVAILABLE(ios(9.0), macCatalyst(13.0), macos(13.0)) API_UNAVAILABLE(watchos) NS_EXTENSION_UNAVAILABLE("Not available to extensions");
 
 /*!
  @method        earliestPermittedSampleDate
@@ -407,8 +408,38 @@ HK_EXTERN NSString * const HKUserPreferencesDidChangeNotification API_AVAILABLE(
  */
 - (void)recalibrateEstimatesForSampleType:(HKSampleType *)sampleType
                                    atDate:(NSDate *)date
-                               completion:(void(^)(BOOL success, NSError * _Nullable error))completion API_AVAILABLE(ios(15.0), watchos(8.0), macCatalyst(15.0), macos(13.0)) NS_SWIFT_ASYNC_THROWS_ON_FALSE(1) NS_SWIFT_NAME(recalibrateEstimates(sampleType:date:completion:));
+                               completion:(void(^ NS_SWIFT_SENDABLE)(BOOL success, NSError * _Nullable error))completion API_AVAILABLE(ios(15.0), watchos(8.0), macCatalyst(15.0), macos(13.0)) NS_SWIFT_ASYNC_THROWS_ON_FALSE(1) NS_SWIFT_NAME(recalibrateEstimates(sampleType:date:completion:));
 
+@end
+
+@interface HKHealthStore (HKWorkoutRelationship)
+
+/*!
+ @method        relateWorkoutEffortSample:withWorkout:activity:completion
+ @abstract      Relates a workout effort sample with a workout
+ 
+ @param         sample     The workout effort sample
+ @param         workout    The HKWorkout to relate the sample to
+ @param         activity   The HKWorkoutActivity on the HKWorkout
+ @param         completion The block to be called when the sample has been related
+ */
+- (void)relateWorkoutEffortSample:(HKSample *)sample
+                      withWorkout:(HKWorkout *)workout
+                         activity:(nullable HKWorkoutActivity *)activity
+                       completion:(void (^)(BOOL success, NSError * _Nullable error))completion API_AVAILABLE(ios(18.0), watchos(11.0), macCatalyst(18.0), macos(15.0), visionos(2.0));
+/*!
+ @method        unrelateWorkoutEffortSample:fromWorkout:activity:completion
+ @abstract      Unrelates a workout effort sample from a workout
+ 
+ @param         sample     The workout effort sample
+ @param         workout    The HKWorkout to unrelate the sample from
+ @param         activity   The HKWorkoutActivity on the HKWorkout
+ @param         completion The block to be called when the sample has been unrelated
+ */
+- (void)unrelateWorkoutEffortSample:(HKSample *)sample
+                        fromWorkout:(HKWorkout *)workout
+                           activity:(nullable HKWorkoutActivity *)activity
+                         completion:(void (^)(BOOL success, NSError * _Nullable error))completion API_AVAILABLE(ios(18.0), watchos(11.0), macCatalyst(18.0), macos(15.0), visionos(2.0));
 @end
 
 NS_ASSUME_NONNULL_END

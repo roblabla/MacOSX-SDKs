@@ -50,9 +50,7 @@ exports:
                        DAUserNotificationInfo, DAUserNotificationUtilities, DAWaiterWrapper, 
                        DAiCalendarLogger, EventsFolderItemsSyncContext ]
     objc-ivars:      [ DAAccount._continueCount, DAAccount._isFetchingAutomatically, 
-                       DAAccount._taskManager, DAAccount._xpcActivity, DAAccountClassNames._accountClassName, 
-                       DAAccountClassNames._agentClassName, DAAccountClassNames._clientAccountClassName, 
-                       DAAccountClassNames._daemonAccountClassName, DAActivity._account, 
+                       DAAccount._taskManager, DAAccount._xpcActivity, DAActivity._account, 
                        DADataHandler._container, DATaskManager._account, DATaskManager._daActivity, 
                        DATaskManager._transaction, DAWaiterWrapper._completionHandler, 
                        DAWaiterWrapper._dataclasses, DAWaiterWrapper._waiter, DAWaiterWrapper._waiterNum ]

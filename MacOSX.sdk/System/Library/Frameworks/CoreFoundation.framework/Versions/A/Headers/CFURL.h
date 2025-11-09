@@ -489,7 +489,7 @@ Boolean CFURLGetFSRef(CFURLRef url, struct FSRef *fsRef) API_DEPRECATED("Not sup
 #endif
 #endif
 
-#if TARGET_OS_MAC || CF_BUILDING_CF || NSBUILDINGFOUNDATION || DEPLOYMENT_TARGET_SWIFT
+#if TARGET_OS_MAC || CF_BUILDING_CF || NSBUILDINGFOUNDATION
 #if !0
 CF_IMPLICIT_BRIDGING_DISABLED
 
@@ -1210,8 +1210,6 @@ CF_EXPORT
 const CFStringRef kCFURLUbiquitousItemDownloadingStatusCurrent API_AVAILABLE(macos(10.9), ios(7.0), watchos(2.0), tvos(9.0));
     /* there is a local version of this item and it is the most up-to-date version known to this device. */
 
-#if !DEPLOYMENT_TARGET_SWIFT
-
 typedef CF_OPTIONS(CFOptionFlags, CFURLBookmarkCreationOptions) {
     kCFURLBookmarkCreationMinimalBookmarkMask = ( 1UL << 9 ), // creates bookmark data with "less" information, which may be smaller but still be able to resolve in certain ways
     kCFURLBookmarkCreationSuitableForBookmarkFile = ( 1UL << 10 ), // include the properties required by CFURLWriteBookmarkDataToFile() in the bookmark data created
@@ -1285,7 +1283,6 @@ Boolean CFURLStartAccessingSecurityScopedResource(CFURLRef url) API_AVAILABLE(ma
 CF_EXPORT
 void CFURLStopAccessingSecurityScopedResource(CFURLRef url) API_AVAILABLE(macos(10.7), ios(8.0), watchos(2.0), tvos(9.0)); // On OSX, available in MacOS X 10.7.3 and later
 
-#endif /* !DEPLOYMENT_TARGET_SWIFT */
 #endif 
 #endif /* TARGET_OS_MAC || CF_BUILDING_CF || NSBUILDINGFOUNDATION || DEPLOYMENT_TARGET_SWIFT */
 

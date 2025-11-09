@@ -15,18 +15,18 @@ typedef NS_ENUM(NSInteger, UIViewAnimatingState)
     UIViewAnimatingStateInactive, // The animation is not executing.
     UIViewAnimatingStateActive,   // The animation is executing.
     UIViewAnimatingStateStopped,  // The animation has been stopped and has not transitioned to inactive.
-} API_AVAILABLE(ios(10.0)) ;
+} API_AVAILABLE(ios(10.0)) API_UNAVAILABLE(watchos) ;
 
 typedef NS_ENUM(NSInteger, UIViewAnimatingPosition) {
     UIViewAnimatingPositionEnd,
     UIViewAnimatingPositionStart,
     UIViewAnimatingPositionCurrent,
-} API_AVAILABLE(ios(10.0));
+} API_AVAILABLE(ios(10.0)) API_UNAVAILABLE(watchos);
 
 
 NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
-NS_SWIFT_UI_ACTOR
+API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @protocol UIViewAnimating <NSObject>
 
 @property(nonatomic, readonly) UIViewAnimatingState state;
@@ -73,7 +73,7 @@ NS_SWIFT_UI_ACTOR
 
 @protocol UITimingCurveProvider;
 
-NS_SWIFT_UI_ACTOR
+API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @protocol UIViewImplicitlyAnimating <UIViewAnimating>
 
 @optional

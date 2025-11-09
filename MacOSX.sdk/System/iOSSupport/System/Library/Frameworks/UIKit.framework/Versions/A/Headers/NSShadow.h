@@ -19,7 +19,7 @@ NS_HEADER_AUDIT_BEGIN(nullability, sendability)
  To set a shadow on an NSAttributedString use it as a value for NSShadowAttributeName.
  */
 
-UIKIT_EXTERN API_AVAILABLE(ios(6.0))
+UIKIT_EXTERN API_AVAILABLE(ios(6.0), watchos(2.0))
 @interface NSShadow : NSObject <NSCopying, NSSecureCoding>
 
 - (instancetype)init NS_DESIGNATED_INITIALIZER;

@@ -2,7 +2,7 @@
 //  Intents_Generated.h
 //  Intents
 //
-//  Copyright (c) 2016-2023 Apple Inc. All rights reserved.
+//  Copyright (c) 2016-2024 Apple Inc. All rights reserved.
 //
 
 #import <Intents/INAccountType.h>
@@ -77,6 +77,8 @@
 #import <Intents/INMessageAttributeOptionsResolutionResult.h>
 #import <Intents/INMessageAttributeResolutionResult.h>
 #import <Intents/INMessageLinkMetadata.h>
+#import <Intents/INMessageReaction.h>
+#import <Intents/INMessageReactionType.h>
 #import <Intents/INNote.h>
 #import <Intents/INNoteContentResolutionResult.h>
 #import <Intents/INNoteContentType.h>
@@ -134,6 +136,8 @@
 #import <Intents/INStartCallCallCapabilityResolutionResult.h>
 #import <Intents/INStartCallCallRecordToCallBackResolutionResult.h>
 #import <Intents/INStartCallContactResolutionResult.h>
+#import <Intents/INSticker.h>
+#import <Intents/INStickerType.h>
 #import <Intents/INTask.h>
 #import <Intents/INTaskList.h>
 #import <Intents/INTaskListResolutionResult.h>

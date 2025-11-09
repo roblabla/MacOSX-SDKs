@@ -18,9 +18,15 @@
 #import <ShazamKit/SHMatch.h>
 #import <ShazamKit/SHMatchedMediaItem.h>
 #import <ShazamKit/SHMediaItem.h>
-#import <ShazamKit/SHMediaLibrary.h>
 #import <ShazamKit/SHRange.h>
 #import <ShazamKit/SHSession.h>
 #import <ShazamKit/SHSignature.h>
 #import <ShazamKit/SHSignatureGenerator.h>
+
+#if !0
+#import <ShazamKit/SHMediaLibrary.h>
+#endif
+
+#if __has_include(<UniformTypeIdentifiers/UniformTypeIdentifiers.h>)
 #import <ShazamKit/UTType+SHShazamAdditions.h>
+#endif

@@ -13,7 +13,7 @@ NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 /// Sensitive Analysis Results object is returned after sensitivity analysis is performed on media
 NS_SWIFT_SENDABLE
-API_AVAILABLE(macos(14.0), ios(17.0)) API_UNAVAILABLE(watchos, tvos, visionos)
+API_AVAILABLE(macos(14.0), ios(17.0), visionos(2.0)) API_UNAVAILABLE(watchos, tvos)
 @interface SCSensitivityAnalysis : NSObject
 /// Set to YES if analyzed media contains sensitive content
 @property(readonly, getter=isSensitive) BOOL sensitive;
@@ -29,11 +29,11 @@ typedef NS_ENUM(NSInteger, SCSensitivityAnalysisPolicy) {
     /// Sensitive Analysis is enabled for kids or teens in ScreenTime through "Communications Safety" feature.
     /// It's expected to have more descriptive UI for the user, explaining potential risks.
     SCSensitivityAnalysisPolicyDescriptiveInterventions = 2,
-} API_AVAILABLE(macos(14.0), ios(17.0)) API_UNAVAILABLE(watchos, tvos, visionos);
+} API_AVAILABLE(macos(14.0), ios(17.0), visionos(2.0)) API_UNAVAILABLE(watchos, tvos);
 
 /// Main class for content sensitivity analysis
 NS_SWIFT_SENDABLE
-API_AVAILABLE(macos(14.0), ios(17.0)) API_UNAVAILABLE(watchos, tvos, visionos)
+API_AVAILABLE(macos(14.0), ios(17.0), visionos(2.0)) API_UNAVAILABLE(watchos, tvos)
 @interface SCSensitivityAnalyzer : NSObject
 
 - (instancetype)init;

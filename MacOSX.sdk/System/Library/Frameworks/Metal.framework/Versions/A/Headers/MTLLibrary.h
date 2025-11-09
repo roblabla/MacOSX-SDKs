@@ -193,6 +193,8 @@ typedef NS_ENUM(NSUInteger, MTLLanguageVersion) {
     (3 << 16) + 0,
     MTLLanguageVersion3_1 API_AVAILABLE(macos(14.0), ios(17.0)) = 
     (3 << 16) + 1,
+    MTLLanguageVersion3_2 API_AVAILABLE(macos(15.0), ios(18.0)) =
+    (3 << 16) + 2,
 } API_AVAILABLE(macos(10.11), ios(9.0));
 
 typedef NS_ENUM(NSInteger, MTLLibraryType) {
@@ -223,6 +225,42 @@ typedef NS_ENUM(NSInteger, MTLCompileSymbolVisibility)
     MTLCompileSymbolVisibilityHidden = 1,
 } API_AVAILABLE(macos(13.3), ios(16.4));
 
+/*!
+ @enum MTLMathMode
+ @abstract An enum to indicate if the compiler can perform optimizations for floating-point arithmetic that may violate the IEEE 754 standard
+ 
+ @constant MTLMathModeSafe 
+ Disables unsafe floating-point optimizations
+
+ @constant MTLMathModeRelaxed
+ Allows aggressive, unsafe floating-point optimizations but preserves infs and nans
+
+ @constant MTLMathModeFast
+ Allows aggressive, unsafe floating-point optimizations
+ */
+typedef NS_ENUM(NSInteger, MTLMathMode)
+{
+    MTLMathModeSafe = 0,
+    MTLMathModeRelaxed = 1,
+    MTLMathModeFast = 2,
+};
+
+/*!
+ @enum MTLMathFloatingPointFunctions
+ @abstract An enum to indicate the default math functions for single precision floating-point
+ 
+ @constant MTLMathFloatingPointFunctionsFast
+ Sets the default math functions for single precision floating-point to the corresponding functions in `metal::fast` namespace
+
+ @constant MTLMathFloatingPointFunctionsPrecise
+ Sets the default math functions for single precision floating-point to the corresponding functions in 'metal::precise' namespace
+ */
+typedef NS_ENUM(NSInteger, MTLMathFloatingPointFunctions)
+{
+    MTLMathFloatingPointFunctionsFast = 0,
+    MTLMathFloatingPointFunctionsPrecise = 1,
+};
+
 MTL_EXPORT API_AVAILABLE(macos(10.11), ios(8.0))
 @interface MTLCompileOptions : NSObject <NSCopying>
 
@@ -241,7 +279,19 @@ MTL_EXPORT API_AVAILABLE(macos(10.11), ios(8.0))
  @property fastMathEnabled
  @abstract If YES, enables the compiler to perform optimizations for floating-point arithmetic that may violate the IEEE 754 standard. It also enables the high precision variant of math functions for single precision floating-point scalar and vector types. fastMathEnabled defaults to YES.
  */
-@property (readwrite, nonatomic) BOOL fastMathEnabled;
+@property (readwrite, nonatomic) BOOL fastMathEnabled API_DEPRECATED("Use mathMode instead", macos(10.11, 15.0), ios(8.0, 18.0));
+
+ /*!
+ @property mathMode
+ @abstract Sets the floating-point arithmetic optimizations. Default depends on the language standard version.
+ */
+@property (readwrite, nonatomic) MTLMathMode mathMode API_AVAILABLE(macos(15.0), ios(18.0));
+
+ /*!
+ @property mathFloatingPointFunctions
+ @abstract Sets the default math functions for single precision floating-point. Default is `MTLMathFloatingPointFunctionsFast`.
+ */
+@property (nonatomic) MTLMathFloatingPointFunctions mathFloatingPointFunctions API_AVAILABLE(macos(15.0), ios(18.0));
 
 /*!
  @property languageVersion
@@ -315,6 +365,11 @@ MTL_EXPORT API_AVAILABLE(macos(10.11), ios(8.0))
 */
 @property (readwrite, nonatomic) NSUInteger maxTotalThreadsPerThreadgroup API_AVAILABLE(macos(13.3), ios(16.4));
 
+/*!
+ @property enableLogging
+ @abstract If YES,  set the compiler to enable any logging in the shader. The default is false.
+ */
+@property (readwrite, nonatomic) BOOL enableLogging API_AVAILABLE(macos(15.0), ios(18.0));
 @end
 
 /*!

@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/PerformanceControlKit.framework/Versions/A/PerformanceControlKit'
-current-version: 994.120.9
+current-version: 1175.0.34
 exports:
   - targets:         [ x86_64-macos ]
     weak-symbols:    [ __ZTINSt3__110__function6__baseIFbN4clpc4user8ioreport7ChannelEEEE, 

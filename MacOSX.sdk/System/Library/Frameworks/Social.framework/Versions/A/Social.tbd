@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/Frameworks/Social.framework/Versions/A/Social'
-current-version: 759
+current-version: 764
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _CPFileBuildDirectoriesToPath, _SLErrorDomain, _SLFacebookEnvironmentDidChangeNotification, 
@@ -39,8 +39,8 @@ exports:
                        SLNotificationPrefs, SLPlace, SLRemoteSession, SLRemoteSessionProxy, 
                        SLRequest, SLRequestMultiPart, SLSafeLocationManagerDelegate, 
                        SLService, SLServiceListener, SLWebAuthController, SLWebAuthIdentity, 
-                       SLWebTokenHandlerController, SLWebUserInfoResponse, SLYahooLoginTokenRequest, 
-                       SLYahooLoginTokenResponse, SLYahooOAuth2MigrationRequest, 
+                       SLWebTokenHandlerController, SLWebTokenHandlerResponse, SLWebUserInfoResponse, 
+                       SLYahooLoginTokenRequest, SLYahooLoginTokenResponse, SLYahooOAuth2MigrationRequest, 
                        SLYahooOAuth2MigrationResponse, SLYahooWebAuthController, 
                        SLYahooWebAuthRequest, SLYahooWebClient, SLYahooWebOAuth2TokenRequest, 
                        SLYahooWebOAuth2TokenResponse ]

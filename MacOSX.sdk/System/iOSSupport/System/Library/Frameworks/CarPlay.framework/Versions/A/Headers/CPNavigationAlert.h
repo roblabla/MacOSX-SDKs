@@ -19,7 +19,7 @@ typedef NS_ENUM(NSUInteger, CPNavigationAlertDismissalContext) {
     CPNavigationAlertDismissalContextTimeout = 0,    // The banner was visible long enough to reach its timeout.
     CPNavigationAlertDismissalContextUserDismissed,  // The banner was dismissed in response to a user button press.
     CPNavigationAlertDismissalContextSystemDismissed // The banner was dismissed because of a request by the app.
-} API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(macos, watchos, tvos);
+} API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(macos, watchos);
 
 /**
  Your @c CPNavigationAlert may specify a duration for which the alert will be visible onscreen,
@@ -32,7 +32,7 @@ static NSTimeInterval const CPNavigationAlertMinimumDuration = 5;
 /**
  @c CPNavigationAlert is a banner alert that can display map or navigation-related information to the user.
 */
-API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(macos, watchos, tvos)
+API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(macos, watchos)
 @interface CPNavigationAlert : NSObject <NSSecureCoding>
 
 /**

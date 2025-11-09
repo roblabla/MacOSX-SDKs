@@ -859,6 +859,8 @@ protected:
         tUSBDeviceLPMStatus _lpmL1Status;
         OSDictionary*       _dkInterfaceIteratorDict;
         uintptr_t           _dkInterfaceInteratorRefID;
+        IOService*          _owner;
+        bool                _beingSeized;
     };
 
     tExpansionData* _expansionData;

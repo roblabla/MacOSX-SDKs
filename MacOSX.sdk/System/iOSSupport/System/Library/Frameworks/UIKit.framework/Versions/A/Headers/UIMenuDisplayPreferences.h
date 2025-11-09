@@ -11,7 +11,7 @@
 
 NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
-UIKIT_EXTERN API_AVAILABLE(ios(17.4)) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(17.4)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @interface UIMenuDisplayPreferences : NSObject <NSCopying, NSSecureCoding>
 
 /// Maximum number of title and subtitle lines displayed for this menu's elements. Defaults to NSNotFound, indicating no preference.

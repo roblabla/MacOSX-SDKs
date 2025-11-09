@@ -7,8 +7,8 @@ exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ '_$s15FocusSettingsUI0A19InformationIconViewV05SwiftC00F0AAMc', 
                        '_$s15FocusSettingsUI0A19InformationIconViewV12_colorScheme33_C7A3D878254E7B5777519BEDE4AACE54LL05SwiftC011EnvironmentVyAF05ColorH0OGvpfi', 
+                       '_$s15FocusSettingsUI0A19InformationIconViewV12semanticType15symbolImageName9tintColorACSo015DNDModeSemanticH0V_SS05SwiftC00M0VSgtcfC', 
                        '_$s15FocusSettingsUI0A19InformationIconViewV13_sizeCategory33_C7A3D878254E7B5777519BEDE4AACE54LL05SwiftC011EnvironmentVyAF011ContentSizeH0OGvpfi', 
-                       '_$s15FocusSettingsUI0A19InformationIconViewV15symbolImageName9tintColorACSS_05SwiftC00K0VSgtcfC', 
                        '_$s15FocusSettingsUI0A19InformationIconViewV4bodyQrvg', '_$s15FocusSettingsUI0A19InformationIconViewV4bodyQrvpMV', 
                        '_$s15FocusSettingsUI0A19InformationIconViewV4bodyQrvpQOMQ', 
                        '_$s15FocusSettingsUI0A19InformationIconViewVMa', '_$s15FocusSettingsUI0A19InformationIconViewVMn', 
@@ -353,8 +353,10 @@ exports:
                        '_$sSo20DNDModeConfigurationC15FocusSettingsUIE31webAppIdentifiersWithExceptionsShySo27DNDWebApplicationIdentifierCGvg', 
                        '_$sSo20DNDModeConfigurationC15FocusSettingsUIE31webAppIdentifiersWithExceptionsShySo27DNDWebApplicationIdentifierCGvpMV', 
                        '_$sSo20DNDModeConfigurationC15FocusSettingsUIE32configurationWithSymbolImageNameyABSgSSF', 
-                       '_$sSo23MKLocalSearchCompletionCs12Identifiable15FocusSettingsUIMc', 
+                       '_$sSo23FSUIPlatformEligibilityC15FocusSettingsUIEABycfC', 
+                       '_$sSo23FSUIPlatformEligibilityC15FocusSettingsUIEABycfc', 
+                       '_$sSo23FSUIPlatformEligibilityCMa', '_$sSo23MKLocalSearchCompletionCs12Identifiable15FocusSettingsUIMc', 
                        _FocusSettingsUIVersionNumber, _FocusSettingsUIVersionString ]
-    objc-classes:    [ FSUIFocusActivationManager, _TtC15FocusSettingsUI36FocusFilterConfigurationMastheadView, 
+    objc-classes:    [ FSUIFocusActivationManager, FSUIPlatformEligibility, _TtC15FocusSettingsUI36FocusFilterConfigurationMastheadView, 
                        _TtC15FocusSettingsUI42FocusFilterSystemConfigurationMastheadView ]
 ...

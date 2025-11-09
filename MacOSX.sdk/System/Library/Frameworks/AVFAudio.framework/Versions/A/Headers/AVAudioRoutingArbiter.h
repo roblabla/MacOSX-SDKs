@@ -45,6 +45,7 @@ NS_ASSUME_NONNULL_BEGIN
     @constant   AVAudioRoutingArbitrationCategoryPlayAndRecordVoice
         Appropriate for Voice over IP(VoIP) applications.
 */
+API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios, watchos, tvos, visionos)
 typedef NS_ENUM(NSInteger, AVAudioRoutingArbitrationCategory) {
     AVAudioRoutingArbitrationCategoryPlayback           = 0,
     AVAudioRoutingArbitrationCategoryPlayAndRecord      = 1,
@@ -55,7 +56,8 @@ typedef NS_ENUM(NSInteger, AVAudioRoutingArbitrationCategory) {
     @class      AVAudioRoutingArbiter
     @brief      The interface to participate in audio routing arbitration.
 */
-API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios, watchos, tvos)
+NS_SWIFT_SENDABLE
+API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios, watchos, tvos, visionos)
 @interface AVAudioRoutingArbiter : NSObject
 
 - (instancetype)init NS_UNAVAILABLE;

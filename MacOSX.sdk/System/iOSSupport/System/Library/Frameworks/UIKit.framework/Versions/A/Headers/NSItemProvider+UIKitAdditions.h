@@ -19,7 +19,7 @@ typedef NS_ENUM(NSInteger, UIPreferredPresentationStyle) {
     UIPreferredPresentationStyleUnspecified = 0,
     UIPreferredPresentationStyleInline,
     UIPreferredPresentationStyleAttachment,
-};
+} API_AVAILABLE(watchos(4.0));
 
 @interface NSItemProvider (UIKitAdditions)
 
@@ -43,7 +43,7 @@ API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, tvos) NS_SWIFT_UI_ACTOR
 
 @end
 
-@protocol UIItemProviderReadingAugmentationProviding
+API_AVAILABLE(watchos(10.4)) @protocol UIItemProviderReadingAugmentationProviding
 // Conforming classes should not fall through to [requestedClass objectWithItemProviderData:typeIdentifier:error:.
 // UIItemProvider does this on your behalf.
 + (nullable id)objectWithItemProviderData:(NSData *)data
@@ -56,7 +56,7 @@ API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, tvos) NS_SWIFT_UI_ACTOR
 @property (class, NS_NONATOMIC_IOSONLY, readonly, copy) NSArray<NSString *> *additionalTrailingReadableTypeIdentifiersForItemProvider;
 @end
 
-@protocol UIItemProviderReadingAugmentationDesignating <NSItemProviderReading>
+API_AVAILABLE(watchos(10.4)) @protocol UIItemProviderReadingAugmentationDesignating <NSItemProviderReading>
 + (Class<UIItemProviderReadingAugmentationProviding>)_ui_augmentingNSItemProviderReadingClass;
 @end
 

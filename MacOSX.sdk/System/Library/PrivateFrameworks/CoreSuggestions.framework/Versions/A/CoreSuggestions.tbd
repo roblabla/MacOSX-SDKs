@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/CoreSuggestions.framework/Versions/A/CoreSuggestions'
-current-version: 1226.5.2
+current-version: 1259.1
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -142,13 +142,14 @@ exports:
                        _kSGEventMetadataKey, _kSGEventMetadataOriginBundleIdKey, 
                        _kSGEventMetadataParticipantsKey, _kSGEventMetadataSchemaOrgKey, 
                        _kSGEventMetadataTypeKey, _kSGEventMetadataUnknownProperty, 
-                       _kSGFollowUpComputeCustomTimeRange, _kSGFollowUpTimeRangeForDebugging, 
-                       _kSGHarvestBudgetCPUTimeSeconds, _kSGHarvestBudgetNumberOfOperations, 
-                       _kSGHashedSessionsLogging, _kSGLabelDateBirthday, _kSGLoggingLevel, 
-                       _kSGMailIntelligenceSPILogging, _kSGMessagesToProcessImmediately, 
-                       _kSGOnlyShowSignificantNLEvents, _kSGOnlyShowSignificantPseudoContacts, 
-                       _kSGParsecFlightCachingAPIBaseURL, _kSGShowOperatingSystemVersionInSnippets, 
-                       _kSGShowPastEvents, _kSGShowSuggestionsCalendar, _kSGSuggestionsBundleIdentifier, 
+                       _kSGEventsMLRegexEnsembleExtractionEnabled, _kSGFollowUpComputeCustomTimeRange, 
+                       _kSGFollowUpTimeRangeForDebugging, _kSGHarvestBudgetCPUTimeSeconds, 
+                       _kSGHarvestBudgetNumberOfOperations, _kSGHashedSessionsLogging, 
+                       _kSGLabelDateBirthday, _kSGLoggingLevel, _kSGMailIntelligenceSPILogging, 
+                       _kSGMessagesToProcessImmediately, _kSGOnlyShowSignificantNLEvents, 
+                       _kSGOnlyShowSignificantPseudoContacts, _kSGParsecFlightCachingAPIBaseURL, 
+                       _kSGShowOperatingSystemVersionInSnippets, _kSGShowPastEvents, 
+                       _kSGShowSuggestionsCalendar, _kSGSuggestionsBundleIdentifier, 
                        _kSGSuggestionsCoreAnalyticsDomain, _kSGSuggestionsInternalsCoreAnalyticsDomain, 
                        _kSGSuggestionsNotificationsChangedBySuggestions, _kSGSuggestionsNotificationsChangedByUser, 
                        _kSGSuggestionsPrepareForQuery, _kSGSuggestionsSettingsChanged, 

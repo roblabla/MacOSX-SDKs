@@ -2,14 +2,16 @@
 //  HKUnit.h
 //  HealthKit
 //
-//  Copyright (c) 2013-2022 Apple Inc. All rights reserved.
+//  Copyright (c) 2013-2024 Apple Inc. All rights reserved.
 //
 
+#import <Foundation/Foundation.h>
 #import <HealthKit/HKDefines.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
 HK_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0), macCatalyst(13.0), macos(13.0))
+NS_SWIFT_SENDABLE
 @interface HKUnit : NSObject <NSSecureCoding, NSCopying>
 
 /// Returns a unique string representation for the unit that could be used with +unitFromString:
@@ -95,6 +97,8 @@ HK_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0), macCatalyst(13.0), macos(13.0))
 // [Hearing Sensitivity]
 // dBHL (decibel Hearing Level)
 //
+// [Unitless]
+// appleEffortScore
 
 // Units can be combined using multiplication (. or *) and division (/), and raised to integral powers (^).
 // For simplicity, only a single '/' is allowed in a unit string, and multiplication is evaluated first.
@@ -269,6 +273,11 @@ typedef NS_ENUM(NSInteger, HKMetricPrefix) {
 + (instancetype)luxUnitWithMetricPrefix:(HKMetricPrefix)prefix API_AVAILABLE(ios(17.0), watchos(10.0), macCatalyst(17.0), macos(14.0));      // lx
 + (instancetype)luxUnit API_AVAILABLE(ios(17.0), watchos(10.0), macCatalyst(17.0), macos(14.0));  // lx
 
+@end
+
+/* UnitLess Unit */
+@interface HKUnit (UnitLess)
++ (instancetype)appleEffortScoreUnit API_AVAILABLE(ios(18.0), watchos(11.0), macCatalyst(18.0), macos(15.0), visionos(2.0));  // appleEffortScore
 @end
 
 /* Mole Constants */

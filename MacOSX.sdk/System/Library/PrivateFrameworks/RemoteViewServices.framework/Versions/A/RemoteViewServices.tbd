@@ -80,7 +80,7 @@ exports:
                        _onDeallocPerform, _runloop_dispatch_async, _setForwardedNSAppPresentationOptions ]
     objc-classes:    [ NSAccessibilityChildPanel, NSLocalTitlebarRenamingWindow, 
                        NSLocalWindowWrappingRemoteWindow, NSPowerboxTitlebarRenamingSessionInvalidator, 
-                       NSRVS_Deallocator, NSRemoteMovePanel, NSRemotePanel, NSRemotePanelOrderingContext, 
+                       NSRVS_Deallocator, NSRemotePanel, NSRemotePanelOrderingContext, 
                        NSRemoteResponderProxyObject, NSRemoteServiceConnection, NSRemoteServiceEndpoint, 
                        NSRemoteServiceMessage, NSRemoteServiceReply, NSRemoteServiceRequest, 
                        NSRemoteTitlebarRenamingSession, NSRemoteTitlebarRenamingWindowController, 

@@ -65,9 +65,11 @@
 #define kUSBHostMessageConfigurationSet             iokit_usbhost_msg(0x00) // 0xe0005000  IOUSBHostDevice -> clients upon a setConfiguration call.
 #define kUSBHostMessageRenegotiateCurrent           iokit_usbhost_msg(0x01) // 0xe0005001  Request clients to renegotiate bus current allocations
 #define kUSBHostMessageControllerException          iokit_usbhost_msg(0x02) // 0xe0005002  A fatal problem has occurred with an AppleUSBUserHCI controller
+#define kUSBHostMessageDeviceIsRequestingClose      iokit_usbhost_msg(0x03) // 0xe0005003  A new client is attempting to seize ownership of the IOUSBHostDevice service.  To honor this request, close the IOUSBHostDevice service.
 
 #define kUSBHostReturnPipeStalled                   iokit_usbhost_err(0x0)  // 0xe0005000  Pipe has issued a STALL handshake.  Use clearStall to clear this condition.
 #define kUSBHostReturnNoPower                       iokit_usbhost_err(0x1)  // 0xe0005001  A setConfiguration call was not able to succeed because all configurations require more power than is available.
+#define kUSBHostReturnRedundant                     iokit_usbhost_err(0x2)  // 0xe0005002  A redundant setting was attempted.
 
 /*!
  * @enum       tIOUSBHostConnectionSpeed
@@ -163,6 +165,7 @@ enum tIOUSBHostPortStatus
 #define kIOUSBHostControllerInterfaceEntitlement                "com.apple.developer.usb.host-controller-interface"
 #define kIOUSBBillboardEntitlement                              "com.apple.developer.usb.billboard"
 
+
 #pragma mark Registry property names
 
 #define kUSBHostMatchingPropertySpeed                           "USBSpeed"
@@ -203,6 +206,8 @@ enum tIOUSBHostPortStatus
 #define kUSBHostUserClientPropertyEntitlementExceptionAllowUnlocked "UsbUserClientEntitlementExceptionAllowUnlocked"    // OSBoolean, true or false to allow access if the system is unlocked.  Part of the OSDictionary.
 #define kUSBHostUserClientPropertyEnableReset                       "UsbUserClientEnableReset"
 #define kUSBHostUserClientPropertyEnableDataToggleReset             "UsbUserClientEnableDataToggleReset"
+#define kUSBHostUserClientPropertyBufferStatistics                "UsbUserClientBufferStatistics"
+#define kUSBHostUserClientPropertyBufferAllocations               "UsbUserClientBufferAllocations"
 
 #define kUSBHostDevicePropertyVendorString                      "kUSBVendorString"
 #define kUSBHostDevicePropertySerialNumberString                "kUSBSerialNumberString"
@@ -230,6 +235,7 @@ enum tIOUSBHostPortStatus
 #define kUSBHostDevicePropertyEnumerationState                  "UsbEnumerationState"                   // OSNumber with IOUSBHostDevice::tEnumerationState.  NULL if the device has been registered for matching.
 #define kUSBHostDevicePropertySignature                         "UsbDeviceSignature"                    // OSData containing identifying information available at enumeration time
 #define kUSBHostDevicePropertyTunnel                            "UsbTunnel"                             // Default kOSBooleanFalse.  kOSBooleanTrue if the device is connected via a USB4 tunnel
+#define kUSBHostDevicePropertyPowerSinkCapability               "UsbPowerSinkCapability"                // OSNumber maximum mA of current the device can sink from Vbus (5V), as directed by the Apple USB Power Capability Vendor Request
 
 #define kUSBHostBillboardDevicePropertyNumberOfAlternateModes   "bNumberOfAlternateModes"
 #define kUSBHostBillboardDevicePropertyPreferredAlternateMode   "bPreferredAlternateMode"

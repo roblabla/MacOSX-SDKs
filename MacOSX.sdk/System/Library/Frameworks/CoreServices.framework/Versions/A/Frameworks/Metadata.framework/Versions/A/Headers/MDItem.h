@@ -348,6 +348,9 @@ MD_EXPORT CFArrayRef MDItemsCopyAttributes(CFArrayRef items, CFArrayRef names) A
  
    @const kMDItemCodecs
    The codecs used to encode/decode the media
+ 
+   @const kMDItemMediaExtensions
+   The media extensions used to decode the media
 
    @const kMDItemMediaTypes
    Media types present in the content
@@ -475,6 +478,8 @@ MD_EXPORT const CFStringRef     kMDItemContactKeywords MD_AVAIL;           // CF
 MD_EXPORT const CFStringRef     kMDItemVersion MD_AVAIL;                   // CFString
 
 MD_EXPORT const CFStringRef     kMDItemPixelHeight MD_AVAIL;               // CFNumber
+MD_EXPORT const CFStringRef     kMDItemXMPCredit MD_AVAIL;                 // CFString
+MD_EXPORT const CFStringRef     kMDItemXMPDigitalSourceType MD_AVAIL;      // CFString
 MD_EXPORT const CFStringRef     kMDItemPixelWidth MD_AVAIL;                // CFNumber
 MD_EXPORT const CFStringRef     kMDItemPixelCount API_AVAILABLE( macos(10.6) ) API_UNAVAILABLE( ios, tvos, watchos ); // CFNumber
 MD_EXPORT const CFStringRef     kMDItemColorSpace MD_AVAIL;                // CFString
@@ -522,6 +527,7 @@ MD_EXPORT const CFStringRef kMDItemGPSAreaInformation API_AVAILABLE( macos(10.7)
 MD_EXPORT const CFStringRef kMDItemGPSDateStamp API_AVAILABLE( macos(10.7) ) API_UNAVAILABLE( ios, tvos, watchos );          // CFDate
 MD_EXPORT const CFStringRef kMDItemGPSDifferental API_AVAILABLE( macos(10.7) ) API_UNAVAILABLE( ios, tvos, watchos );        // CFNumber
 
+MD_EXPORT const CFStringRef     kMDItemMediaExtensions API_AVAILABLE( macos(15.0) ) API_UNAVAILABLE( ios, tvos, watchos );   // CFArray of CFString
 MD_EXPORT const CFStringRef     kMDItemCodecs MD_AVAIL;                    // CFArray of CFString
 MD_EXPORT const CFStringRef     kMDItemMediaTypes MD_AVAIL;                // CFArray of CFString
 MD_EXPORT const CFStringRef     kMDItemStreamable MD_AVAIL;                // CFBoolean
@@ -955,7 +961,7 @@ MD_EXPORT const CFStringRef    kMDItemSupportFileType API_DEPRECATED("No longer 
         the email address, and not the human readable version)
 
         @const kMDItemRecipientEmailAddresses
-        This attribute indicates the reciepients email addresses. (This is always the email
+        This attribute indicates the recipients email addresses. (This is always the email
         address,  and not the human readable version).
 
         @const kMDItemAuthorAddresses

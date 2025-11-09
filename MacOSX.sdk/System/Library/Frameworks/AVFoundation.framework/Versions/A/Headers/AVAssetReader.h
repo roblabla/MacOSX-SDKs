@@ -58,7 +58,7 @@ typedef NS_ENUM(NSInteger, AVAssetReaderStatus) {
 	
 	AVAssetReaderAudioMixOutput mixes multiple audio tracks of the asset after reading them, while AVAssetReaderVideoCompositionOutput composites multiple video tracks after reading them.
  */
-API_AVAILABLE(macos(10.7), ios(4.1), tvos(9.0)) API_UNAVAILABLE(watchos)
+API_AVAILABLE(macos(10.7), ios(4.1), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(watchos)
 @interface AVAssetReader : NSObject
 {
 @private

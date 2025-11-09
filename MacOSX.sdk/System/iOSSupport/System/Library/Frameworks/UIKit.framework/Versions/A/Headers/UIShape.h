@@ -21,7 +21,7 @@ typedef NS_ENUM(NSInteger, UICornerCurve) {
     UICornerCurveCircular,
     /// Always use a continuous corner style.
     UICornerCurveContinuous,
-};
+} API_UNAVAILABLE(watchos);
 
 @class UIShapeResolutionContext, UIResolvedShape, UIBezierPath;
 

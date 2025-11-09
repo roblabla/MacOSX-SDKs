@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/UIKitServices.framework/Versions/A/UIKitServices'
-current-version: 7511.1.255
+current-version: 8081.1.255
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -22,14 +22,16 @@ exports:
                        _UISOpenApplicationOptionClickAttribution, _UISOpenApplicationOptionKeySceneSessionPersistentIdentifier, 
                        _UISOpenApplicationOptionKeyTargetContentIdentifier, _UISOpenApplicationOptionPasteSharingToken, 
                        _UISSecureControlServiceInterface, _UISSecureControlServiceName, 
-                       _UISSecureControlServiceSharedRemoteInterface, _UISSlotMachineErrorDomain, 
+                       _UISSecureControlServiceSharedRemoteInterface, _UISServiceContextDidBecomeInsecureNotification, 
+                       _UISServiceContextDidBecomeSecureNotification, _UISSlotMachineErrorDomain, 
                        _UISSlotMachineInterface, _UISSystemReferenceAngleAffectedContextIDsKey, 
                        _UISSystemReferenceAngleChangedNotification, _UISSystemReferenceAngleForContextID, 
                        _UISSystemReferenceAngleKey, _UISSystemReferenceAngleModeForContextID, 
                        _UISSystemReferenceAngleModeKey, __UISKBUndoInteractiveControlLabelSizeCategory, 
                        __UISKBUndoInteractiveControlLabelTextStyle, __UISSetSystemReferenceAngleDataSource, 
-                       __UISStringForSystemReferenceAngleMode, __UISVisibilityEnvironmentForSceneIdentityTokenString, 
-                       __UISVisibilityEnvironmentForUIHostedWindowContextID, __UISVisibilityNamespace ]
+                       __UISStringForSystemReferenceAngleMode, __UISTouchAuthenticationTelemetryReportRecord, 
+                       __UISVisibilityEnvironmentForSceneIdentityTokenString, __UISVisibilityEnvironmentForUIHostedWindowContextID, 
+                       __UISVisibilityNamespace ]
     objc-classes:    [ UISActivityContinuationAction, UISApplicationInitializationContext, 
                        UISApplicationInitializationContextParameters, UISApplicationState, 
                        UISApplicationStateService, UISApplicationSupportClient, UISApplicationSupportDisplayEdgeInfo, 
@@ -44,12 +46,15 @@ exports:
                        UISMutableDeviceContext, UISMutableDisplayContext, UISMutableSlotStyle, 
                        UISNotificationResponseAction, UISOpenURLAction, UISPasteSharingToken, 
                        UISPasteVariant, UISPathDrawing, UISSceneBackgroundPlacementConfiguration, 
-                       UISSceneFullscreenPlacementConfiguration, UISSceneOverlayPlacementConfiguration, 
-                       UISScenePlacementConfiguration, UISScenePreservedPlacementConfiguration, 
-                       UISSceneProminentPlacementConfiguration, UISSceneRequestOptions, 
-                       UISSceneStandardPlacementConfiguration, UISSlotLocalContent, 
-                       UISSlotMachine, UISSlotRemoteContent, UISSlotStyle, UISSlotTag, 
-                       UISTextLineDrawing, UISTextParagraphDrawing, UISTransform3DGrader, 
-                       UISVectorGlyphDrawing, _UISPlaygroundsPassthroughAction, _UISPlaygroundsPassthroughActionResponse, 
-                       _UISSecureControlCategory, _UISSecureControlSizeSpec, _UISSecureControlTag ]
+                       UISSceneFullscreenPlacementConfiguration, UISSceneOrderedPlacementConfiguration, 
+                       UISSceneOverlayPlacementConfiguration, UISScenePlacementConfiguration, 
+                       UISScenePreservedPlacementConfiguration, UISSceneProminentPlacementConfiguration, 
+                       UISScenePushPlacementConfiguration, UISSceneReplacePlacementConfiguration, 
+                       UISSceneRequestOptions, UISSceneStandardPlacementConfiguration, 
+                       UISSlotLocalContent, UISSlotMachine, UISSlotRemoteContent, 
+                       UISSlotStyle, UISSlotTag, UISTextLineDrawing, UISTextParagraphDrawing, 
+                       UISTransform3DGrader, UISVectorGlyphDrawing, _UISPlaygroundsPassthroughAction, 
+                       _UISPlaygroundsPassthroughActionResponse, _UISSecureControlCategory, 
+                       _UISSecureControlSizeSpec, _UISSecureControlTag, _UISTouchAuthenticationDurationBasedTelemetryManager, 
+                       _UISTouchAuthenticationRecord, _UISTouchAuthenticationTelemetryManager ]
 ...

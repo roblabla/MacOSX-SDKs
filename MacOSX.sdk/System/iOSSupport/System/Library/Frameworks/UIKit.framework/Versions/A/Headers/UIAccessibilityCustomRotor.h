@@ -31,7 +31,7 @@ NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 typedef NS_ENUM(NSInteger, UIAccessibilityCustomRotorDirection) {
     UIAccessibilityCustomRotorDirectionPrevious API_AVAILABLE(ios(10.0)),
     UIAccessibilityCustomRotorDirectionNext API_AVAILABLE(ios(10.0)),
-};
+} API_UNAVAILABLE(watchos);
 
 /*
  UIAccessibilityCustomSystemRotorType should be used when you want to allow searching for one of the following types.
@@ -57,39 +57,39 @@ typedef NS_ENUM(NSInteger, UIAccessibilityCustomSystemRotorType) {
     UIAccessibilityCustomSystemRotorTypeTable,
     UIAccessibilityCustomSystemRotorTypeList,
     UIAccessibilityCustomSystemRotorTypeLandmark,
-} API_AVAILABLE(ios(11.0));
+} API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos);
 
-typedef UIAccessibilityCustomRotorItemResult *_Nullable(^UIAccessibilityCustomRotorSearch)(UIAccessibilityCustomRotorSearchPredicate *predicate);
+typedef UIAccessibilityCustomRotorItemResult *_Nullable(^UIAccessibilityCustomRotorSearch)(UIAccessibilityCustomRotorSearchPredicate *predicate) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR;
 
 // Create the array of UIAccessibilityCustomRotors and set it on the target element or ancestor element to which it applies.
 @interface NSObject (UIAccessibilityCustomRotor)
-@property (nonatomic, retain, nullable) NSArray<UIAccessibilityCustomRotor *> *accessibilityCustomRotors API_AVAILABLE(ios(10.0));
+@property (nonatomic, retain, nullable) NSArray<UIAccessibilityCustomRotor *> *accessibilityCustomRotors API_AVAILABLE(ios(10.0)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR;
 
-typedef NSArray<UIAccessibilityCustomRotor *> * __nullable (^AXCustomRotorsReturnBlock)(void);
-@property (nullable, nonatomic, copy) AXCustomRotorsReturnBlock accessibilityCustomRotorsBlock API_AVAILABLE(ios(17.0), tvos(17.0));
+typedef NSArray<UIAccessibilityCustomRotor *> * __nullable (^AXCustomRotorsReturnBlock)(void) API_AVAILABLE(ios(17.0), tvos(17.0)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR;
+@property (nullable, nonatomic, copy) AXCustomRotorsReturnBlock accessibilityCustomRotorsBlock API_AVAILABLE(ios(17.0), tvos(17.0)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR;
 @end
 
 // UIAccessibilityCustomRotorSearchPredicate is a container for search parameters.
 // It should be examined to determine the next matching UIAccessibilityCustomRotorItemResult.
-UIKIT_EXTERN API_AVAILABLE(ios(10.0))
+UIKIT_EXTERN API_AVAILABLE(ios(10.0)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @interface UIAccessibilityCustomRotorSearchPredicate : NSObject
 @property (nonatomic, retain) UIAccessibilityCustomRotorItemResult *currentItem;
 @property (nonatomic) UIAccessibilityCustomRotorDirection searchDirection;
 @end
 
-UIKIT_EXTERN API_AVAILABLE(ios(10.0))
+UIKIT_EXTERN API_AVAILABLE(ios(10.0)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @interface UIAccessibilityCustomRotor : NSObject
 
 - (instancetype)initWithName:(NSString *)name itemSearchBlock:(UIAccessibilityCustomRotorSearch)itemSearchBlock;
-- (instancetype)initWithAttributedName:(NSAttributedString *)attributedName itemSearchBlock:(UIAccessibilityCustomRotorSearch)itemSearchBlock API_AVAILABLE(ios(11.0), tvos(11.0));
-- (instancetype)initWithSystemType:(UIAccessibilityCustomSystemRotorType)type itemSearchBlock:(UIAccessibilityCustomRotorSearch)itemSearchBlock API_AVAILABLE(ios(11.0));
+- (instancetype)initWithAttributedName:(NSAttributedString *)attributedName itemSearchBlock:(UIAccessibilityCustomRotorSearch)itemSearchBlock API_AVAILABLE(ios(11.0), tvos(11.0)) API_UNAVAILABLE(watchos);
+- (instancetype)initWithSystemType:(UIAccessibilityCustomSystemRotorType)type itemSearchBlock:(UIAccessibilityCustomRotorSearch)itemSearchBlock API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos);
 
 // The localized name the assistive technology will use to describe the custom rotor.
 @property (nonatomic, copy) NSString *name;
 
 // Underlying attributed version of the "name" property. Setting this property will change the
 // value of the "name" property and vice-versa.
-@property (nonatomic, copy) NSAttributedString *attributedName API_AVAILABLE(ios(11.0), tvos(11.0));
+@property (nonatomic, copy) NSAttributedString *attributedName API_AVAILABLE(ios(11.0), tvos(11.0)) API_UNAVAILABLE(watchos);
 
 // A block that takes a UIAccessibilityCustomRotorItemResult and the search direction and returns the next/previous instance of that rotor item.
 // If the currentItem is nil, that implies the first/last item should be returned.
@@ -97,12 +97,12 @@ UIKIT_EXTERN API_AVAILABLE(ios(10.0))
 
 // The system rotor type that was optionally used during initialization.
 // default = UIAccessibilityCustomSystemRotorTypeNone
-@property (nonatomic, readonly) UIAccessibilityCustomSystemRotorType systemRotorType API_AVAILABLE(ios(11.0));
+@property (nonatomic, readonly) UIAccessibilityCustomSystemRotorType systemRotorType API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos);
 
 @end
 
 
-UIKIT_EXTERN API_AVAILABLE(ios(10.0))
+UIKIT_EXTERN API_AVAILABLE(ios(10.0)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @interface UIAccessibilityCustomRotorItemResult : NSObject
 
 - (instancetype)initWithTargetElement:(id<NSObject>)targetElement targetRange:(nullable UITextRange *)targetRange;

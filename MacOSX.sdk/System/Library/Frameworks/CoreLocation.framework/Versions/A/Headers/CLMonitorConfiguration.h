@@ -12,11 +12,9 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-#if  !TARGET_OS_VISION
 @class CLLocationManager;
 @class CLMonitor;
 @class CLMonitoringEvent;
-#endif
 /*
  *		`CLMonitorConfiguration` describes the configuration with which a `CLMonitor`
  *		instance can be created.
@@ -24,9 +22,10 @@ NS_ASSUME_NONNULL_BEGIN
  */
 NS_REFINED_FOR_SWIFT NS_SWIFT_SENDABLE
 CL_EXTERN
-API_AVAILABLE(macos(14.0), ios(17.0)) API_UNAVAILABLE(watchos, tvos)
 #if defined(TARGET_OS_VISION) && TARGET_OS_VISION
-API_UNAVAILABLE(visionos)
+API_AVAILABLE(macos(14.0), ios(17.0)) API_UNAVAILABLE(watchos, tvos, visionos)
+#else
+API_AVAILABLE(macos(14.0), ios(17.0)) API_UNAVAILABLE(watchos, tvos)
 #endif
 @interface CLMonitorConfiguration : NSObject
 
@@ -48,7 +47,6 @@ API_UNAVAILABLE(visionos)
  */
 @property (readonly) dispatch_queue_t queue;
 
-#if !TARGET_OS_VISION
 /*
  *	handler
  *
@@ -76,7 +74,6 @@ API_UNAVAILABLE(visionos)
 + (CLMonitorConfiguration *)configWithMonitorName:(NSString *)name
 											queue:(dispatch_queue_t)queue
 									 eventHandler:(void(^)(CLMonitor *monitor, CLMonitoringEvent *event))eventHandler;
-#endif
 
 @end
 

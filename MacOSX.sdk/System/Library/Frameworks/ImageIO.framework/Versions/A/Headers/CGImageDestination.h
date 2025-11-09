@@ -211,6 +211,22 @@ IMAGEIO_EXTERN bool CGImageDestinationCopyImageSource(CGImageDestinationRef _iio
  */
 IMAGEIO_EXTERN void CGImageDestinationAddAuxiliaryDataInfo(CGImageDestinationRef _iio_Nonnull idst, CFStringRef _iio_Nonnull auxiliaryImageDataType, CFDictionaryRef _iio_Nonnull auxiliaryDataInfoDictionary ) IMAGEIO_AVAILABLE_STARTING(10.13, 11.0);
 
+
+/* HDR-support */
+
+IMAGEIO_EXTERN const CFStringRef kCGImageDestinationEncodeRequest         IMAGEIO_AVAILABLE_STARTING(15, 18.0, 18.0, 11.0);
+
+IMAGEIO_EXTERN const CFStringRef kCGImageDestinationEncodeToSDR           IMAGEIO_AVAILABLE_STARTING(15, 18.0, 18.0, 11.0);
+IMAGEIO_EXTERN const CFStringRef kCGImageDestinationEncodeToISOHDR        IMAGEIO_AVAILABLE_STARTING(15, 18.0, 18.0, 11.0);
+IMAGEIO_EXTERN const CFStringRef kCGImageDestinationEncodeToISOGainmap    IMAGEIO_AVAILABLE_STARTING(15, 18.0, 18.0, 11.0);
+
+/* kCGImageSourceEncodeRequestOptions - CFDictionaryRef to specify additional options
+ */
+IMAGEIO_EXTERN const CFStringRef kCGImageDestinationEncodeRequestOptions  IMAGEIO_AVAILABLE_STARTING(15, 18.0, 18.0, 11.0);
+IMAGEIO_EXTERN const CFStringRef kCGImageDestinationEncodeBaseIsSDR       IMAGEIO_AVAILABLE_STARTING(15, 18.0, 18.0, 11.0);
+IMAGEIO_EXTERN const CFStringRef kCGImageDestinationEncodeTonemapMode     IMAGEIO_AVAILABLE_STARTING(15, 18.0, 18.0, 11.0);
+
+
 CF_ASSUME_NONNULL_END
 
 CF_IMPLICIT_BRIDGING_DISABLED

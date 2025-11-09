@@ -1,7 +1,7 @@
 /*
 	NSUserInterfaceValidation.h
 	Application Kit
-	Copyright (c) 1999-2023, Apple Inc.
+	Copyright (c) 1999-2024, Apple Inc.
 	All rights reserved.
 */
 
@@ -11,12 +11,12 @@
 /*
 This file defines the protocols used by AppKit's standard user interface validation mechanism.  The NSValidatedUserInterfaceItem protocol must be implemented by validated objects. The validated object should send a -validateUserInterfaceItem: message to its validator.  A validator can be determined by calling the -[NSApplication targetForAction:to:from:] method from the -update method in the validated object.
 
-You can extend this functionality by introducing a new set of protocols that are targeted to your specific validated objects.  NSMenuItem protocol is one example extending this validation machinary to allow validators to modify menu items being validated. These are the steps to extend UI validation:
+You can extend this functionality by introducing a new set of protocols that are targeted to your specific validated objects.  NSMenuItem protocol is one example extending this validation machinery to allow validators to modify menu items being validated. These are the steps to extend UI validation:
  
  1) Declare a subprotocol of NSValidatedUserInterfaceItem
     You can add as many features as you want for your validated objects in this protocol
     i.e.
-        @protocol NSValidatedToobarItem <NSValidatedUserInterfaceItem>
+        @protocol NSValidatedToolbarItem <NSValidatedUserInterfaceItem>
         - (NSImage *)image;
         - (void)setImage:(NSImage *)image
         - (NSString *)toolTip;
@@ -27,7 +27,7 @@ You can extend this functionality by introducing a new set of protocols that are
     You should declare your new selector that takes your object as the argument.
     i.e.
         @protocol NSToolbarItemValidation
-        - (BOOL)validateToolbarItem:(id <NSValidatedToobarItem>)item;
+        - (BOOL)validateToolbarItem:(id <NSValidatedToolbarItem>)item;
         @end
 
  3) Implement your -update method
@@ -54,7 +54,7 @@ You can extend this functionality by introducing a new set of protocols that are
     i.e.
         @implementation NSTextView (NSToolbarItemValidation)
     
-        - (BOOL)validateToolbarItem:(id <NSValidatedToobarItem>)item {
+        - (BOOL)validateToolbarItem:(id <NSValidatedToolbarItem>)item {
             BOOL returnValue = [self validateUserInterfaceItem:item];
 
             // Your own validation

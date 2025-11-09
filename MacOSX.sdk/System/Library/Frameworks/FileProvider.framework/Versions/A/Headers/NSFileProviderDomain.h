@@ -8,7 +8,6 @@
 #import <Foundation/Foundation.h>
 #import <FileProvider/NSFileProviderExtension.h>
 
-
 NS_ASSUME_NONNULL_BEGIN
 
 FILEPROVIDER_API_AVAILABILITY_V2_V3
@@ -65,6 +64,15 @@ typedef NS_OPTIONS(NSUInteger, NSFileProviderDomainTestingModes) {
      */
     NSFileProviderDomainTestingModeInteractive = 1 << 1
 } NS_SWIFT_NAME(NSFileProviderDomain.TestingModes);
+
+/** Specifying a list of known folders.
+ */
+FILEPROVIDER_API_AVAILABILITY_DESKTOP
+typedef NS_OPTIONS(NSUInteger, NSFileProviderKnownFolders) {
+    NSFileProviderDesktop = 1 << 0,
+
+    NSFileProviderDocuments = 1 << 1
+};
 
 /**
  File provider domain.
@@ -129,6 +137,21 @@ FILEPROVIDER_API_AVAILABILITY_V2_V3
  file provider extension is using.
  */
 - (instancetype)initWithIdentifier:(NSFileProviderDomainIdentifier)identifier displayName:(NSString *)displayName FILEPROVIDER_API_AVAILABILITY_V3_IOS;
+
+/**
+ Initialize a new replicated NSFileProviderDomain on a specific volume.
+
+ If a volumeURL is specified, and that volume is eligible, the domain will be located on this volume. The URL is used to designate a volume
+ but doesn't influence where on this volume is the domain going to be stored.
+
+ In order to avoid domainID collisions between volumes, the NSFileProviderDomainIdentifier of external domains are generated randomly by FileProvider.
+ The provider should therefore use the userInfo to associate all necessary information to map the created object to the corresponding account.
+ The userInfo will be persisted on the volume where the domain was created. If that is an external volume, the userInfo can be used on other devices
+ to assist in setting up the domain on those devices. See the`NSFileProviderExternalVolumeHandling` protocol for more details.
+ */
+- (instancetype)initWithDisplayName:(NSString *)displayName
+                           userInfo:(NSDictionary *)userInfo
+                          volumeURL:(nullable NSURL *)volumeURL FILEPROVIDER_API_AVAILABILITY_EXTERNAL_VOLUME;
 
 /**
  The identifier - as provided by the file provider extension.
@@ -214,18 +237,37 @@ FILEPROVIDER_API_AVAILABILITY_V2_V3
  */
 @property (nonatomic, readonly, nullable) NSData *backingStoreIdentity FILEPROVIDER_API_AVAILABILITY_V4_0_IOS;
 
-/** If the domain supports syncing the trash.
+/** Whether the domain supports syncing the trash.
 
- This property only applies for extensions that implement NSFileProviderReplicatedExtension.
+ The system supports syncing a trash folder (NSFileProviderTrashContainerItemIdentifier) to the extension.
+ On iOS, this is surfaced to the user as "Recently Deleted" in the Files app. On macOS, this is surfaced
+ to the user as the Trash in Finder.
 
- Defaults to YES. Set this to NO to indicate that the domain cannot sync the trash.
- If this property is set to YES the system will move the trashed item to the domain trash.
- If this property is set to NO and the trashed item does not have the NSFileProviderItemCapabilitiesAllowsTrashing capability, the system will offer to permanently delete the item.
- If this property is set to NO and the trashed item does have the NSFileProviderItemCapabilitiesAllowsTrashing capability, then the system will behave differently based on whether the item
- is recursively materialized. If the item is fully materialized, it will be moved to the user's home trash and the operation will look like a delete to the extension.
- If the item is not fully materialized, the system will offer to permanently delete the item.
+ If the domain is configured with supportsSyncingTrash=YES, the system will reparent trashed
+ files (which were located in the extension's domain) to NSFileProviderTrashContainerItemIdentifier.
+ If the domain is configured with supportsSyncingTrash=NO, the system will decide how to handle
+ the trashing operation (not guaranteed by API contract).
+
+ This property is only applicable for NSFileProviderReplicatedExtension-based domains.
+
+ This property defaults to YES.
  */
-@property (readwrite, assign) BOOL supportsSyncingTrash FILEPROVIDER_API_AVAILABILITY_V5_0;
+@property (readwrite, assign) BOOL supportsSyncingTrash API_AVAILABLE(macos(13.0), ios(18.0)) API_UNAVAILABLE(watchos, tvos) API_UNAVAILABLE(macCatalyst);
+
+@property (nonatomic, readonly, nullable) NSUUID *volumeUUID FILEPROVIDER_API_AVAILABILITY_EXTERNAL_VOLUME;
+
+/**
+ A dictionary set by the client app. Keys must be strings, values must be [String, Number, Date, Data]
+ */
+@property (nonatomic, readwrite, copy, nullable) NSDictionary *userInfo FILEPROVIDER_API_AVAILABILITY_EXTERNAL_VOLUME;
+
+/** List of known folders that are currently replicated by this domain.
+ */
+@property (readonly, assign) NSFileProviderKnownFolders replicatedKnownFolders FILEPROVIDER_API_AVAILABILITY_DESKTOP;
+
+/** List known folders that can be replicated by this domain.
+ */
+@property (readwrite, assign) NSFileProviderKnownFolders supportedKnownFolders FILEPROVIDER_API_AVAILABILITY_DESKTOP;
 
 @end
 

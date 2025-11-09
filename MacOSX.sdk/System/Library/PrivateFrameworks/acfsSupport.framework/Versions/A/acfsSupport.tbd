@@ -9,7 +9,8 @@ reexported-libraries:
     libraries:       [ '/System/Library/PrivateFrameworks/acfs.framework/Versions/A/acfs' ]
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-    symbols:         [ _VolConfigAdvanced, _VolConfigCaseInsensitive, _VolConfigEnforceACLs, 
+    symbols:         [ '_OBJC_CLASS_$_XsanControllerBrowser', '_OBJC_CLASS_$_XsanOSTransaction', 
+                       _VolConfigAdvanced, _VolConfigCaseInsensitive, _VolConfigEnforceACLs, 
                        _VolConfigHasData, _VolConfigHasJournal, _VolConfigHasMetadata, 
                        _VolConfigIgnoreOwners, _VolConfigLUNlabels, _VolConfigName, 
                        _VolConfigNobodyGID, _VolConfigNobodyUID, _VolConfigStoragePools, 
@@ -27,7 +28,6 @@ exports:
                        _support_RemoveProfilesWithXsanPayloads, _support_isODRunning, 
                        _support_kMPIOLogicalUnitPropertyAlias, _support_kMPIOLogicalUnitPropertyLogicalUnitID, 
                        _xsanSetCrashLogThread ]
-    objc-classes:    [ XsanControllerBrowser, XsanOSTransaction ]
 reexports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _kMDConfigErase, _kMDConfigSearchLevel, _kMDConfigSearchLevelFSSearchOnly, 

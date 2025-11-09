@@ -28,7 +28,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///   - paddingMode: determines how samples outside the inputTensor are evaluated (only constant, reflect, symmetric and clampToEdge are supported)
 ///   - samplingMode: Can be either MPSGraphResizeNearest or MPSGraphResizeBilinear. Nearest sampling will use roundPreferCeil.
 ///   - constantValue: If paddingMode is MPSGraphPaddingModeConstant, then this constant is used for samples outside the input tensor.
-///   - name: The name for the operation
+///   - name: The name for the operation.
 /// - Returns: A valid MPSGraphTensor object
 - (MPSGraphTensor *) sampleGridWithSourceTensor:(MPSGraphTensor *) source
                                coordinateTensor:(MPSGraphTensor *) coordinates
@@ -57,7 +57,7 @@ MPS_AVAILABLE_STARTING(macos(13.1), ios(16.2), tvos(16.2));
 ///   - paddingMode: determines how samples outside the inputTensor are evaluated (only constant, reflect, symmetric and clampToEdge are supported)
 ///   - nearestRoundingMode: The rounding mode to use for determining the nearest neighbor. Valid modes are roundPreferCeil, roundPreferFloor, ceil, and floor.
 ///   - constantValue: If paddingMode is MPSGraphPaddingModeConstant, then this constant is used for samples outside the input tensor.
-///   - name: The name for the operation
+///   - name: The name for the operation.
 /// - Returns: A valid MPSGraphTensor object
 - (MPSGraphTensor *) sampleGridWithSourceTensor:(MPSGraphTensor *) source
                                coordinateTensor:(MPSGraphTensor *) coordinates

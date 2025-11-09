@@ -15,26 +15,26 @@ NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 typedef NS_ENUM(NSInteger, UIAttachmentBehaviorType) {
     UIAttachmentBehaviorTypeItems,
     UIAttachmentBehaviorTypeAnchor
-} API_AVAILABLE(ios(7.0));
+} API_AVAILABLE(ios(7.0)) API_UNAVAILABLE(watchos);
 
-typedef struct NS_SWIFT_SENDABLE {
+typedef struct NS_SWIFT_SENDABLE API_UNAVAILABLE(watchos) {
     CGFloat minimum;
     CGFloat maximum;
-} UIFloatRange;
+} UIFloatRange API_UNAVAILABLE(watchos);
 
-UIKIT_EXTERN const UIFloatRange UIFloatRangeZero API_AVAILABLE(ios(9.0));
-UIKIT_EXTERN const UIFloatRange UIFloatRangeInfinite API_AVAILABLE(ios(9.0));
-UIKIT_EXTERN BOOL UIFloatRangeIsInfinite(UIFloatRange range) API_AVAILABLE(ios(9.0));
+UIKIT_EXTERN const UIFloatRange UIFloatRangeZero API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(watchos);
+UIKIT_EXTERN const UIFloatRange UIFloatRangeInfinite API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(watchos);
+UIKIT_EXTERN BOOL UIFloatRangeIsInfinite(UIFloatRange range) API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(watchos);
 
-UIKIT_STATIC_INLINE UIFloatRange UIFloatRangeMake(CGFloat minimum, CGFloat maximum) {
+UIKIT_STATIC_INLINE UIFloatRange UIFloatRangeMake(CGFloat minimum, CGFloat maximum) API_UNAVAILABLE(watchos) {
     return (UIFloatRange){minimum, maximum};
 }
 
-UIKIT_STATIC_INLINE BOOL UIFloatRangeIsEqualToRange(UIFloatRange range, UIFloatRange otherRange) {
+UIKIT_STATIC_INLINE BOOL UIFloatRangeIsEqualToRange(UIFloatRange range, UIFloatRange otherRange) API_UNAVAILABLE(watchos) {
     return range.minimum == otherRange.minimum && range.maximum == otherRange.maximum;
 }
 
-UIKIT_EXTERN API_AVAILABLE(ios(7.0)) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(7.0)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @interface UIAttachmentBehavior : UIDynamicBehavior
 
 - (instancetype)initWithItem:(id <UIDynamicItem>)item attachedToAnchor:(CGPoint)point;

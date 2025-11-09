@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-maccatalyst, 
                    arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/ImageIO.framework/Versions/A/Resources/libPng.dylib'
-current-version: 2488.5.4
+current-version: 2629.0.4
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-maccatalyst, 
                        arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
@@ -40,9 +40,10 @@ exports:
                        __cg_png_set_read_user_transform_fn, __cg_png_set_row_number, 
                        __cg_png_set_sRGB, __cg_png_set_scale_16, __cg_png_set_swap, 
                        __cg_png_set_tRNS, __cg_png_set_tRNS_to_alpha, __cg_png_set_text, 
-                       __cg_png_set_write_fn, __cg_png_set_zstream_owner, __cg_png_write_chunk, 
-                       __cg_png_write_chunk_data, __cg_png_write_chunk_end, __cg_png_write_chunk_header, 
-                       __cg_png_write_complete_chunk, __cg_png_write_end, __cg_png_write_flush, 
-                       __cg_png_write_frame_head, __cg_png_write_frame_tail, __cg_png_write_info, 
-                       __cg_png_write_row, __cg_png_write_row_sized, __cg_png_write_start_row ]
+                       __cg_png_set_unknown_chunks, __cg_png_set_write_fn, __cg_png_set_zstream_owner, 
+                       __cg_png_write_chunk, __cg_png_write_chunk_data, __cg_png_write_chunk_end, 
+                       __cg_png_write_chunk_header, __cg_png_write_complete_chunk, 
+                       __cg_png_write_end, __cg_png_write_flush, __cg_png_write_frame_head, 
+                       __cg_png_write_frame_tail, __cg_png_write_info, __cg_png_write_row, 
+                       __cg_png_write_row_sized, __cg_png_write_start_row ]
 ...

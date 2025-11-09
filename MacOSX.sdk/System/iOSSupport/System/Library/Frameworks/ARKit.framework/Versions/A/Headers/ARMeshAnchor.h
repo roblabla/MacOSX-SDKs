@@ -15,6 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
  An anchor representing a mesh in the world.
  */
 API_AVAILABLE(ios(13.4))
+NS_SWIFT_SENDABLE
 @interface ARMeshAnchor : ARAnchor
 
 /**

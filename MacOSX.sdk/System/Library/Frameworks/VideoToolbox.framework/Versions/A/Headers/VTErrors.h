@@ -67,6 +67,8 @@ enum
 	kVTExtensionDisabledErr 				= -17697,
     kVTVideoEncoderMVHEVCVideoLayerIDsMismatchErr = -17698,
 	kVTCouldNotOutputTaggedBufferGroupErr	= -17699,
+	kVTCouldNotFindExtensionErr				= -19510,
+	kVTExtensionConflictErr					= -19511,
 };
 
 /*!

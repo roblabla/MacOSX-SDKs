@@ -275,12 +275,14 @@ MPSFloatDataTypeShift
     // signed integers
     MPSDataTypeSignedBit MPS_ENUM_AVAILABLE_STARTING( macos(10.13), ios(10.0), macCatalyst(13.0), tvos(10.0)) = 0x20000000,
     MPSDataTypeIntBit DEPRECATED_ATTRIBUTE = MPSDataTypeSignedBit,
+    MPSDataTypeInt4    MPS_ENUM_AVAILABLE_STARTING( macos(15.0), ios(18.0), macCatalyst(18.0), tvos(18.0), xros(2.0))   = MPSDataTypeSignedBit | 4,
     MPSDataTypeInt8   MPS_ENUM_AVAILABLE_STARTING( macos(10.13), ios(10.0), macCatalyst(13.0), tvos(10.0))   = MPSDataTypeSignedBit | 8,
     MPSDataTypeInt16  MPS_ENUM_AVAILABLE_STARTING( macos(10.13), ios(10.0), macCatalyst(13.0), tvos(10.0))   = MPSDataTypeSignedBit | 16,
     MPSDataTypeInt32  MPS_ENUM_AVAILABLE_STARTING( macos(10.13), ios(10.0), macCatalyst(13.0), tvos(10.0))   = MPSDataTypeSignedBit | 32,
     MPSDataTypeInt64  MPS_ENUM_AVAILABLE_STARTING( macos(11.0),  ios(14.1), macCatalyst(14.1), tvos(14.1))   = MPSDataTypeSignedBit | 64,
 
     // unsigned integers. Range: [0, UTYPE_MAX]
+    MPSDataTypeUInt4   MPS_ENUM_AVAILABLE_STARTING( macos(15.0), ios(18.0), macCatalyst(18.0), tvos(18.0), xros(2.0))    = 4,
     MPSDataTypeUInt8   MPS_ENUM_AVAILABLE_STARTING( macos(10.13), ios(10.0), macCatalyst(13.0), tvos(10.0))   = 8,
     MPSDataTypeUInt16  MPS_ENUM_AVAILABLE_STARTING( macos(10.13), ios(10.0), macCatalyst(13.0), tvos(10.0))   = 16,
     MPSDataTypeUInt32  MPS_ENUM_AVAILABLE_STARTING( macos(10.13), ios(10.0), macCatalyst(13.0), tvos(10.0))   = 32,

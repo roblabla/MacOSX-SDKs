@@ -123,6 +123,9 @@
 #if __has_include(<PassKit/PKAddShareablePassConfiguration.h>)
 #import <PassKit/PKAddShareablePassConfiguration.h>
 #endif
+#if __has_include(<PassKit/PKAddIdentityDocumentConfiguration.h>)
+#import <PassKit/PKAddIdentityDocumentConfiguration.h>
+#endif
 #if __has_include(<PassKit/PKIssuerProvisioningExtensionAuthorizationProviding.h>)
 #import <PassKit/PKIssuerProvisioningExtensionAuthorizationProviding.h>
 #endif

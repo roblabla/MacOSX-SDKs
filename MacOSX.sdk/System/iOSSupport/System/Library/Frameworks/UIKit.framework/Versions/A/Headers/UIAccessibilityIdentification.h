@@ -14,6 +14,7 @@
 
 NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
+API_UNAVAILABLE(watchos)
 @protocol UIAccessibilityIdentification <NSObject>
 @required
 
@@ -21,7 +22,7 @@ NS_HEADER_AUDIT_BEGIN(nullability, sendability)
  A string that identifies the user interface element.
  default == nil
 */
-@property(nullable, nonatomic, copy) NSString *accessibilityIdentifier API_AVAILABLE(ios(5.0));
+@property(nullable, nonatomic, copy) NSString *accessibilityIdentifier API_AVAILABLE(ios(5.0)) NS_SWIFT_UI_ACTOR;
 
 @end
 
@@ -41,6 +42,7 @@ NS_HEADER_AUDIT_BEGIN(nullability, sendability)
  Defaults to the filename of the image, if available.
  The default identifier for a UIImageView will be the identifier of its UIImage.
  */
+API_UNAVAILABLE(watchos)
 @interface UIImage (UIAccessibility) <UIAccessibilityIdentification>
 @end
 

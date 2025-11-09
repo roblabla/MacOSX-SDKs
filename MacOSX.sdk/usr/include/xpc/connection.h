@@ -89,7 +89,7 @@ const struct _xpc_dictionary_s _xpc_error_termination_imminent;
  */
 #define XPC_ERROR_PEER_CODE_SIGNING_REQUIREMENT \
 	XPC_GLOBAL_OBJECT(_xpc_error_peer_code_signing_requirement)
-__API_AVAILABLE(macos(12.0))
+__API_AVAILABLE(macos(12.0), macCatalyst(15.0))
 XPC_EXPORT
 const struct _xpc_dictionary_s _xpc_error_peer_code_signing_requirement;
 
@@ -198,7 +198,7 @@ xpc_connection_create(const char * _Nullable name,
  * because the Mach namespace is not queried for the service name until the
  * connection has been activated. See {@link xpc_connection_activate()}.
  */
-API_AVAILABLE(macos(10.7))
+API_AVAILABLE(macos(10.7), macCatalyst(5.0))
 API_UNAVAILABLE(ios)
 XPC_EXPORT XPC_MALLOC XPC_RETURNS_RETAINED XPC_WARN_RESULT XPC_NONNULL1
 xpc_connection_t
@@ -787,7 +787,7 @@ xpc_connection_set_finalizer_f(xpc_connection_t connection,
  *
  * @see https://developer.apple.com/documentation/technotes/tn3127-inside-code-signing-requirements
  */
-__API_AVAILABLE(macos(12.0))
+__API_AVAILABLE(macos(12.0), macCatalyst(15.0))
 API_UNAVAILABLE(ios, tvos, watchos)
 XPC_EXPORT XPC_NONNULL_ALL XPC_WARN_RESULT
 int

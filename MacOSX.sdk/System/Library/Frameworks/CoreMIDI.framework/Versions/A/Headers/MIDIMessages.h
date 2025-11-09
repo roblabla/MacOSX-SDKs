@@ -29,25 +29,26 @@ extern "C" {
 
 // MIDI Universal Packet message type nibbles.
 typedef CF_ENUM(unsigned int, MIDIMessageType) {
-	kMIDIMessageTypeUtility	        =   0x0,	// 1 word
-	kMIDIMessageTypeSystem          =   0x1,	// 1 word
-	kMIDIMessageTypeChannelVoice1   =   0x2,	// 1 word - MIDI 1.0
-	kMIDIMessageTypeSysEx           =   0x3,	// 2 words (Data, but primarily SysEx)
-	kMIDIMessageTypeChannelVoice2   =   0x4,	// 2 words - MIDI 2.0
-	kMIDIMessageTypeData128         =   0x5,	// 4 words
-	kMIDIMessageTypeUnknownF		=	0xF
-	
-	// Sizes of undefined message types:
-	// 6: 1 word
-	// 7: 1 word
-	// 8: 2 words
-	// 9: 2 words
-	// A: 2 words
-	// B: 3 words
-	// C: 3 words
-	// D: 4 words
-	// E: 4 words
-	// F: 4 words
+	kMIDIMessageTypeUtility = 0x0,       // 1 word
+	kMIDIMessageTypeSystem = 0x1,        // 1 word
+	kMIDIMessageTypeChannelVoice1 = 0x2, // 1 word - MIDI 1.0
+	kMIDIMessageTypeSysEx = 0x3,         // 2 words (Data, but primarily SysEx)
+	kMIDIMessageTypeChannelVoice2 = 0x4, // 2 words - MIDI 2.0
+	kMIDIMessageTypeData128 = 0x5,       // 4 words
+	kMIDIMessageTypeFlexData = 0xD,      // 4 words
+	kMIDIMessageTypeUnknownF = 0xF,      // Replaced by kMIDIMessageTypeStream
+	kMIDIMessageTypeStream = 0xF,        // 4 words
+										 // Sizes of undefined message types:
+										 // 6: 1 word
+										 // 7: 1 word
+										 // 8: 2 words
+										 // 9: 2 words
+										 // A: 2 words
+										 // B: 3 words
+										 // C: 3 words
+										 // E: 4 words
+	kMIDIMessageTypeInvalid = 0xFF,      // Invalid / Unkown Type
+
 };
 
 // kMIDIMessageTypeChannelVoice1 / kMIDIMessageTypeChannelVoice2 status nibbles.
@@ -107,9 +108,27 @@ typedef CF_ENUM(unsigned int, MIDISysExStatus) {
 
 // kMIDIMessageTypeUtility status nibbles.
 typedef CF_ENUM(unsigned int, MIDIUtilityStatus) {
-	kMIDIUtilityStatusNOOP						= 0x0,
-	kMIDIUtilityStatusJitterReductionClock		= 0x1,
-	kMIDIUtilityStatusJitterReductionTimestamp	= 0x2
+	kMIDIUtilityStatusNOOP = 0x0,
+	kMIDIUtilityStatusJitterReductionClock = 0x1,
+	kMIDIUtilityStatusJitterReductionTimestamp = 0x2,
+	kMIDIUtilityStatusDeltaClockstampTicksPerQuarterNote = 0x3,
+	kMIDIUtilityStatusTicksSinceLastEvent = 0x4
+};
+
+// kUMPStreamMessageStatus status nibbles.
+typedef CF_ENUM(unsigned int, UMPStreamMessageStatus) {
+	kUMPStreamMessageStatusEndpointDiscovery = 0x00,
+	kUMPStreamMessageStatusEndpointInfoNotification = 0x01,
+	kUMPStreamMessageStatusDeviceIdentityNotification = 0x02,
+	kUMPStreamMessageStatusEndpointNameNotification = 0x03,
+	kUMPStreamMessageStatusProductInstanceIDNotification = 0x04,
+	kUMPStreamMessageStatusStreamConfigurationRequest = 0x05,
+	kUMPStreamMessageStatusStreamConfigurationNotification = 0x06,
+	kUMPStreamMessageStatusFunctionBlockDiscovery = 0x10,
+	kUMPStreamMessageStatusFunctionBlockInfoNotification = 0x11,
+	kUMPStreamMessageStatusFunctionBlockNameNotification = 0x12,
+	kUMPStreamMessageStatusStartOfClip = 0x20,
+	kUMPStreamMessageStatusEndOfClip = 0x21
 };
 
 // MIDI 2.0 Note On/Off Message Attribute Types
@@ -127,11 +146,78 @@ typedef CF_OPTIONS(UInt8, MIDIProgramChangeOptions) {
 
 // MIDI 2.0 Per Note Management Options
 typedef CF_OPTIONS(UInt8, MIDIPerNoteManagementOptions) {
-    kMIDIPerNoteManagementReset = 0x1,
-    kMIDIPerNoteManagementDetach = 0x2
+	kMIDIPerNoteManagementReset = 0x1,
+	kMIDIPerNoteManagementDetach = 0x2
 };
 
-#if defined(__cplusplus) && __has_feature(cxx_constexpr)
+/// MIDI 1.0 speed information for Function Blocks
+typedef CF_ENUM(SInt32, MIDIUMPFunctionBlockMIDI1Info) {
+	kMIDIUMPFunctionBlockMIDI1InfoNotMIDI1 = 0,
+	kMIDIUMPFunctionBlockMIDI1InfoUnrestrictedBandwidth = 1,
+	kMIDIUMPFunctionBlockMIDI1InfoRestrictedBandwidth = 2
+};
+
+/// UI hint types for Function Blocks
+typedef CF_ENUM(SInt32, MIDIUMPFunctionBlockUIHint) {
+	kMIDIUMPFunctionBlockUIHintUnknown = 0,
+	kMIDIUMPFunctionBlockUIHintReceiver = 1,
+	kMIDIUMPFunctionBlockUIHintSender = 2,
+	kMIDIUMPFunctionBlockUIHintSenderReceiver = 3
+};
+
+/// Function Block direction types
+typedef CF_ENUM(SInt32, MIDIUMPFunctionBlockDirection) {
+	kMIDIUMPFunctionBlockDirectionUnknown = 0,
+	kMIDIUMPFunctionBlockDirectionInput = 1,
+	kMIDIUMPFunctionBlockDirectionOutput = 2,
+	kMIDIUMPFunctionBlockDirectionBidirectional = 3
+};
+
+/// Stream Message Format
+typedef CF_ENUM(UInt8, UMPStreamMessageFormat) {
+	kUMPStreamMessageFormatComplete = 0x00,
+	kUMPStreamMessageFormatStart = 0x01,
+	kUMPStreamMessageFormatContinuing = 0x02,
+	kUMPStreamMessageFormatEnd = 0x03
+};
+
+//==================================================================================================
+#pragma mark -
+#pragma mark MIDI 2 Messages
+/// MIDI unsigned integer types
+typedef UInt8 MIDIUInteger2;   //! 2  bits usable; allowed values 0x0~0x3
+typedef UInt8 MIDIUInteger4;   //! 4  bits usable; allowed values 0x0~0xF
+typedef UInt8 MIDIUInteger7;   //! 7  bits usable; allowed values 0x0~0x7F
+typedef UInt16 MIDIUInteger14; //! 14 bits usable; allowed values 0x0~0x3FFF;
+typedef UInt32 MIDIUInteger28; //! 28 bits usable; allowed values 0x0~0xFFFFFFF;
+
+static const MIDIUInteger2 kMIDIUInteger2Max = 0x3;
+static const MIDIUInteger4 kMIDIUInteger4Max = 0xF;
+static const MIDIUInteger7 kMIDIUInteger7Max = 0x7F;
+static const MIDIUInteger14 kMIDIUInteger14Max = 0x3FFF;
+static const MIDIUInteger28 kMIDIUInteger28Max = 0xFFFFFFF;
+
+/// Type for all UMP Groups
+typedef MIDIUInteger4 MIDIUMPGroupNumber;
+
+/// MIDI Channel, 0~15 (channels 1 through 16, respectively).
+/// Per the MIDI-CI specification, this is always a single nibble, 0x0~0xF.
+typedef MIDIUInteger4 MIDIChannelNumber;
+
+/// Some MIDI-CI messages use a CI device ID, which is either a UMP group or a reserved 7-bit value
+typedef MIDIUInteger7 MIDICIDeviceID;
+
+/// Device ID value used to specify that a message is to/from a UMP group.
+static const MIDICIDeviceID kMIDIDeviceIDUMPGroup = 0x7e;
+
+/// Device ID used for to/from Function Block; also used when Function Blocks are not supported.
+static const MIDICIDeviceID kMIDIDeviceIDFunctionBlock = 0x7f;
+
+/// The unique MIDI-CI negotiation identifier (MUID) used for a MIDICIResponder connection.
+/// Per the MIDI-CI specification, this is a randomly assigned unsigned 28-bit integer.
+typedef MIDIUInteger28 MIDICIMUID;
+
+#if defined(__cplusplus) && __has_feature(cxx_constexpr) && __cplusplus >= 202002L
 #define CM_CONSTEXPR constexpr
 #else
 #define CM_CONSTEXPR
@@ -199,8 +285,23 @@ CF_INLINE CM_CONSTEXPR MIDIMessage_32 MIDI1UPNoteOn(UInt8 group, UInt8 channel, 
     return MIDI1UPChannelVoiceMessage(group, kMIDICVStatusNoteOn, channel, noteNumber, velocity);
 }
 
+CF_INLINE CM_CONSTEXPR MIDIMessage_32 MIDI1UPPolyPressure(UInt8 group, UInt8 channel, UInt8 noteNumber, UInt8 pressure)
+{
+	return MIDI1UPChannelVoiceMessage(group, kMIDICVStatusPolyPressure, channel, noteNumber, pressure);
+}
+
 CF_INLINE CM_CONSTEXPR MIDIMessage_32 MIDI1UPControlChange(UInt8 group, UInt8 channel, UInt8 index, UInt8 data) {
     return MIDI1UPChannelVoiceMessage(group, kMIDICVStatusControlChange, channel, index, data);
+}
+
+CF_INLINE CM_CONSTEXPR MIDIMessage_32 MIDI1UPProgramChange(UInt8 group, UInt8 channel, UInt8 program)
+{
+	return MIDI1UPChannelVoiceMessage(group, kMIDICVStatusProgramChange, channel, program, 0);
+}
+
+CF_INLINE CM_CONSTEXPR MIDIMessage_32 MIDI1UPChannelPressure(UInt8 group, UInt8 channel, UInt8 value)
+{
+	return MIDI1UPChannelVoiceMessage(group, kMIDICVStatusChannelPressure, channel, value, 0);
 }
 
 CF_INLINE CM_CONSTEXPR MIDIMessage_32 MIDI1UPPitchBend(UInt8 group, UInt8 channel, UInt8 lsb, UInt8 msb) {
@@ -221,7 +322,7 @@ CF_INLINE CM_CONSTEXPR MIDIMessage_64 MIDI1UPSysEx(UInt8 group, UInt8 status, UI
 static const UInt8 kMIDI1UPMaxSysexSize = 6;
 CF_INLINE CM_CONSTEXPR MIDIMessage_64 MIDI1UPSysExArray(UInt8 group, UInt8 status, const Byte *begin, const Byte *end)
 {
-	int numberOfBytes = end <= begin ? 0 : end - begin;
+	long numberOfBytes = end <= begin ? 0 : end - begin;
 	if (numberOfBytes > kMIDI1UPMaxSysexSize) numberOfBytes = kMIDI1UPMaxSysexSize; // prevent overflow
     return MIDI1UPSysEx(group, status, numberOfBytes,
 						numberOfBytes > 0 ? *begin : 0,
@@ -317,6 +418,168 @@ CF_INLINE CM_CONSTEXPR MIDIMessage_64 MIDI2PitchBend(UInt8 group, UInt8 channel,
 
 CF_INLINE CM_CONSTEXPR MIDIMessage_64 MIDI2PerNotePitchBend(UInt8 group, UInt8 channel, UInt8 noteNumber, UInt32 value) {
 	return MIDI2ChannelVoiceMessage(group, kMIDICVStatusPerNotePitchBend, channel, (UInt16)(noteNumber) << 8, value);
+}
+
+CF_INLINE CM_CONSTEXPR MIDIMessage_128 MIDI2StreamMessage(UMPStreamMessageFormat format, UMPStreamMessageStatus status, UInt16 data1, UInt32 data2, UInt32 data3, UInt32 data4)
+{
+	const UInt32 word0 = (UInt32)(kMIDIMessageTypeStream) << 28u | (UInt32)(format & 0x03) << 26u | (UInt32)status << 16u | (UInt32)data1;
+	return (MIDIMessage_128){ word0, data2, data3, data4 };
+}
+
+CF_INLINE CM_CONSTEXPR MIDIMessage_128 MIDI2StreamMessageFromData(UMPStreamMessageFormat format, UMPStreamMessageStatus status, const Byte* data, const size_t length)
+{
+	UInt32 words[3] = {};
+	UInt16 data16 = 0;
+
+	if (length > 0) {
+		data16 = (UInt16)(data[0]) << 8u;
+	}
+
+	if (length > 1) {
+		data16 |= (UInt16)(data[1]);
+
+		long remainingBytes = length - 2;
+		if (remainingBytes > 0) {
+			UInt8 byteIndex = 2;
+			for (UInt8 i = 0; i < 3; i++) {
+				words[i] = (byteIndex < length ? (UInt32)(data[byteIndex++]) << 24u : 0u);
+				words[i] |= (byteIndex < length ? (UInt32)(data[byteIndex++]) << 16u : 0u);
+				words[i] |= (byteIndex < length ? (UInt32)(data[byteIndex++]) << 8u : 0u);
+				words[i] |= (byteIndex < length ? (UInt32)(data[byteIndex++]) : 0u);
+			}
+		}
+	}
+	return MIDI2StreamMessage(format, status, data16, words[0], words[1], words[2]);
+}
+
+CF_INLINE CM_CONSTEXPR MIDIMessage_128 MIDI2EndpointDiscoveryMessage(UInt8 versionMajor, UInt8 versionMinor, bool endpointInfoRequest, bool deviceIdentityRequest, bool endpointNameRequest, bool productInstanceIDRequest, bool streamConfigurationRequest)
+{
+	const UInt16 data1 = (UInt16)versionMajor << 8u | (UInt16)versionMinor;
+	UInt32 data2 = (UInt32)(streamConfigurationRequest ? 1u : 0u) << 4u;
+	data2 |= (UInt32)(productInstanceIDRequest ? 1u : 0u) << 3u;
+	data2 |= (UInt32)(endpointNameRequest ? 1u : 0u) << 2u;
+	data2 |= (UInt32)(deviceIdentityRequest ? 1u : 0u) << 1u;
+	data2 |= (UInt32)(endpointInfoRequest ? 1u : 0u);
+	return MIDI2StreamMessage(kUMPStreamMessageFormatComplete, kUMPStreamMessageStatusEndpointDiscovery, data1, data2, 0, 0);
+}
+
+CF_INLINE CM_CONSTEXPR MIDIMessage_128 MIDI2EndpointInfoNotificationMessage(UInt8 versionMajor, UInt8 versionMinor, bool staticFunctionBlocks, UInt8 numberOfFunctionBlocks, bool m1, bool m2, bool receiveJRTimestamp, bool transmitJRTimestamp)
+{
+	const UInt16 data1 = (UInt16)versionMajor << 8u | (UInt16)versionMinor;
+	UInt32 data2 = (UInt32)(staticFunctionBlocks ? 1u : 0u) << 31u;
+	data2 |= (UInt32)(numberOfFunctionBlocks & 0x7F) << 24u;
+	data2 |= (UInt32)(m2 ? 1u : 0u) << 9u;
+	data2 |= (UInt32)(m1 ? 1u : 0u) << 8u;
+	data2 |= (UInt32)(receiveJRTimestamp ? 1u : 0u) << 1u;
+	data2 |= (UInt32)(transmitJRTimestamp ? 1u : 0u);
+	return MIDI2StreamMessage(kUMPStreamMessageFormatComplete, kUMPStreamMessageStatusEndpointInfoNotification, data1, data2, 0, 0);
+}
+
+CF_INLINE MIDIMessage_128 MIDI2EndpointDeviceIdentityNotificationMessage(MIDIUInteger7 deviceManufacturer1, MIDIUInteger7 deviceManufacturer2, MIDIUInteger7 deviceManufacturer3, MIDIUInteger14 deviceFamily, MIDIUInteger14 deviceFamilyModel, MIDIUInteger28 revisionLevel)
+{
+	UInt8 buffer[14] = {};
+	buffer[3] = deviceManufacturer1 & 0x7F;
+	buffer[4] = deviceManufacturer2 & 0x7F;
+	buffer[5] = deviceManufacturer3 & 0x7F;
+
+	buffer[6] = (deviceFamily & 0x7f);
+	buffer[7] = ((deviceFamily >> 7) & 0x7F);
+
+	buffer[8] = (deviceFamilyModel & 0x7f);
+	buffer[9] = ((deviceFamilyModel >> 7) & 0x7F);
+
+	buffer[10] = revisionLevel & 0x7F;
+	buffer[11] = (revisionLevel >> 7) & 0x7F;
+	buffer[12] = (revisionLevel >> 14) & 0x7F;
+	buffer[13] = (revisionLevel >> 21) & 0x7F;
+
+	return MIDI2StreamMessageFromData(kUMPStreamMessageFormatComplete, kUMPStreamMessageStatusDeviceIdentityNotification, buffer, 14);
+}
+
+CF_INLINE MIDIMessage_128 MIDI2EndpointNameNotificationMessage(UMPStreamMessageFormat format, const char* data, const size_t length)
+{
+	return MIDI2StreamMessageFromData(format, kUMPStreamMessageStatusEndpointNameNotification, (const Byte*)data, length);
+}
+
+CF_INLINE MIDIMessage_128 MIDI2EndpointProductInstanceIDNotificationMessage(UMPStreamMessageFormat format, const char* data, const size_t length)
+{
+	return MIDI2StreamMessageFromData(format, kUMPStreamMessageStatusProductInstanceIDNotification, (const Byte*)data, length);
+}
+
+CF_INLINE CM_CONSTEXPR MIDIMessage_128 MIDI2StreamConfigurationRequestMessage(UInt8 protocol, bool receiveJRTimestamp, bool transmitJRTimestamp)
+{
+	const UInt16 data1 = (UInt16)protocol << 8u | (UInt16)(receiveJRTimestamp ? 1u : 0u) << 1u | (UInt16)(transmitJRTimestamp ? 1u : 0u);
+	return MIDI2StreamMessage(kUMPStreamMessageFormatComplete, kUMPStreamMessageStatusStreamConfigurationRequest, data1, 0, 0, 0);
+}
+
+CF_INLINE CM_CONSTEXPR MIDIMessage_128 MIDI2StreamConfigurationNotificationMessage(UInt8 protocol, bool receiveJRTimestamp, bool transmitJRTimestamp)
+{
+	const UInt16 data1 = (UInt16)protocol << 8u | (UInt16)(receiveJRTimestamp ? 1u : 0u) << 1u | (UInt16)(transmitJRTimestamp ? 1u : 0u);
+	return MIDI2StreamMessage(kUMPStreamMessageFormatComplete, kUMPStreamMessageStatusStreamConfigurationNotification, data1, 0, 0, 0);
+}
+
+CF_INLINE CM_CONSTEXPR MIDIMessage_128 MIDI2FunctionBlockDiscoveryMessage(UInt8 functionBlockNumber, bool infoRequest, bool nameRequest)
+{
+	const UInt16 data1 = (UInt16)functionBlockNumber << 8u | (UInt16)(nameRequest ? 1u : 0u) << 1u | (UInt16)(infoRequest ? 1u : 0u);
+	return MIDI2StreamMessage(kUMPStreamMessageFormatComplete, kUMPStreamMessageStatusFunctionBlockDiscovery, data1, 0, 0, 0);
+}
+
+CF_INLINE CM_CONSTEXPR MIDIMessage_128 MIDI2FunctionBlockInfoNotificationMessage(bool active, MIDIUInteger7 blockNumber, MIDIUMPFunctionBlockUIHint UIHint, MIDIUMPFunctionBlockMIDI1Info MIDI1, MIDIUMPFunctionBlockDirection direction, UInt8 firstGroup, UInt8 numberOfGroupsSpanned, UInt8 CIVersion, UInt8 maxSysex8Streams)
+{
+	const UInt16 data1 = (UInt16)(active ? 1u : 0u) << 15u | (UInt16)(blockNumber & 0x7F) << 8u | (UInt16)UIHint << 4u | (UInt16)MIDI1 << 2u | (UInt16)direction;
+	const UInt32 data2 = (UInt32)firstGroup << 24u | (UInt32)numberOfGroupsSpanned << 16u | (UInt32)CIVersion << 8u | (UInt32)maxSysex8Streams;
+	return MIDI2StreamMessage(kUMPStreamMessageFormatComplete, kUMPStreamMessageStatusFunctionBlockInfoNotification, data1, data2, 0, 0);
+}
+
+CF_INLINE MIDIMessage_128 MIDI2FunctionBlockNameNotificationMessage(UMPStreamMessageFormat format, UInt8 blockNumber, const char* data, size_t length)
+{
+	Byte buffer[14] = {};
+	buffer[0] = blockNumber;
+	memcpy(buffer + 1, data, (length > 13) ? 13 : length);
+	return MIDI2StreamMessageFromData(format, kUMPStreamMessageStatusFunctionBlockNameNotification, buffer, 14);
+}
+
+CF_INLINE CM_CONSTEXPR MIDIMessage_128 MIDI2StartOfClipMessage(void)
+{
+	return MIDI2StreamMessage(kUMPStreamMessageFormatComplete, kUMPStreamMessageStatusStartOfClip, 0, 0, 0, 0);
+}
+
+CF_INLINE CM_CONSTEXPR MIDIMessage_128 MIDI2EndOfClipMessage(void)
+{
+	return MIDI2StreamMessage(kUMPStreamMessageFormatComplete, kUMPStreamMessageStatusEndOfClip, 0, 0, 0, 0);
+}
+
+CF_INLINE CM_CONSTEXPR MIDIMessage_32 MIDINoOpMessage(void)
+{
+	return 0x0000;
+}
+
+CF_INLINE CM_CONSTEXPR MIDIMessage_32 MIDIJitterReductionClockMessage(UInt16 senderClockTime)
+{
+	return (UInt32)kMIDIUtilityStatusJitterReductionClock << 20u | (UInt32)senderClockTime;
+}
+
+CF_INLINE CM_CONSTEXPR MIDIMessage_32 MIDIJitterReductionTimestampMessage(UInt16 senderClockTimestamp)
+{
+	return (UInt32)kMIDIUtilityStatusJitterReductionTimestamp << 20u | (UInt32)senderClockTimestamp;
+}
+
+CF_INLINE CM_CONSTEXPR MIDIMessage_32 MIDIDeltaClockstampTicksPerQuarterNoteMessage(UInt16 ticksPerQuarterNote)
+{
+	return (UInt32)kMIDIUtilityStatusDeltaClockstampTicksPerQuarterNote << 20u | (UInt32)ticksPerQuarterNote;
+}
+
+CF_INLINE CM_CONSTEXPR MIDIMessage_32 MIDITicksSinceLastEventMessage(UInt32 ticksSinceLastEvent)
+{
+	return (UInt32)kMIDIUtilityStatusTicksSinceLastEvent << 20u | (UInt32)(ticksSinceLastEvent & 0x000FFFFF);
+}
+
+CF_INLINE CM_CONSTEXPR MIDIMessage_128 MIDI2FlexDataMessage(MIDIUInteger4 group, MIDIUInteger2 format, MIDIUInteger2 address, MIDIUInteger4 channel, UInt8 statusBank, UInt8 status, UInt32 data1, UInt32 data2, UInt32 data3)
+{
+	UInt32 word0 = (UInt32)kMIDIMessageTypeFlexData << 28u | (UInt32)(group & 0x0F) << 24u | (UInt32)(format & 0x03) << 22u | (UInt32)(address & 0x03) << 20u | (UInt32)(channel & 0x0F) << 16u;
+	word0 |= (UInt32)statusBank << 8u;
+	word0 |= (UInt32)status;
+	return (MIDIMessage_128){ word0, data1, data2, data3 };
 }
 
 //==================================================================================================
@@ -472,7 +735,7 @@ typedef struct MIDIUniversalMessage {
 
 		struct {
 			UInt32 words[4];  //!< up to four 32 bit words
-		} unknown;            //!< active when type is kMIDIMessageTypeUnknownF
+		} unknown;            //!< active when type is unkown
 	};
 } MIDIUniversalMessage;
 
@@ -536,7 +799,7 @@ typedef void (*MIDIEventVisitor)(void* context, MIDITimeStamp timeStamp, MIDIUni
 */
 extern void MIDIEventListForEachEvent(
 	const MIDIEventList* evtlist, MIDIEventVisitor visitor, void* visitorContext)
-									API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0));
+	API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0));
 
 
 #ifdef __cplusplus

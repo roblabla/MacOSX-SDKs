@@ -10,5 +10,5 @@ exports:
     symbols:         [ _QueryUnderstandingVersionNumber, _QueryUnderstandingVersionString, 
                        _intentArgLabel, _intentArgShortLabel, _intentLabel, _kQUModelErrorDomain, 
                        _kQUModelErrorLocaleNotSupported, _kQUModelErrorVersionMismatch ]
-    objc-classes:    [ QUModelFactory, U2HeadWrapper, U2Output, U2OwlModel ]
+    objc-classes:    [ QUModelFactory, QUSpans, U2HeadWrapper, U2Output, U2OwlModel ]
 ...

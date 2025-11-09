@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIDocument.h>
 #import <UIKit/UIViewController.h>
 #import <UIKit/UIViewControllerTransitioning.h>
 
@@ -55,6 +56,9 @@ API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos,tvos)
 
 /// Defaults to YES
 @property (assign, nonatomic) BOOL allowsDocumentCreation;
+
+/// The active document creation intent.
+@property (nonatomic, readonly, nullable) UIDocumentCreationIntent activeDocumentCreationIntent API_AVAILABLE(ios(18.0));
 
 /// Defaults to NO
 @property (assign, nonatomic) BOOL allowsPickingMultipleItems;

@@ -19,6 +19,7 @@
 .Op Fl -size Ar num Op k|m
 .Op Fl -last Ar num Op m|h|d
 .Op Fl -device | Fl -device-name Ar name | Fl -device-udid Ar UDID
+.Op Fl -predicate Ar predicate
 .Pp
 .Nm
 .Cm config
@@ -105,6 +106,10 @@ Collect system logs from paired device (first device found).
 Collect system logs from paired device with the given name.
 .It Fl -device-udid Ar UDID
 Collect system logs from paired device with the given UDID.
+.It Fl -predicate Ar predicate
+Collect system logs using a given predicate following NSPredicate format. This option can significantly
+increase the time and memory usage required to collect an archive.
+Example: "--predicate "process=='kernel.development'"
 .El
 .It Cm config
 Configure, reset or read settings for the logging system.
@@ -241,15 +246,27 @@ Shows a breakdown of the events contained within a log datastore or archive.
 The following options can be supplied to all modes of \fBlog stats\fR:
 .Bl -tag -width "--sort events | bytes "
 .It Fl -archive Ar archive
-Display statistics for events stored in the given archive.
-The archive must be a valid log archive bundle with the suffix
-\fB.logarchive\fR.
+Display statistics for events stored in the given archive. The archive must be a valid log archive 
+bundle with the suffix \fB.logarchive\fR.
 .It Fl -sort Ar events | bytes
 Sort tabulated data output by number of events, or number of bytes.
 .It Fl -count Ar count | all
 Limit tabulated data to the given number of lines, or \fBall\fR displays all entries in tables.
 .It Fl -style Ar human | json
 Control the format style of the requested output mode.
+.It Fl -last Ar time Ns Oo m|h|d Oc | boot
+Shows statistics for events that occurred within the given time relative to the end of the log
+archive, or beginning at the last boot contained within the log archive.
+Time may be specified as minutes, hours or days.
+Time is assumed in seconds unless specified.
+.It Fl -start Ar date/time
+Shows statistics for events starting from the provided date.
+The following date/time formats are accepted:
+"YYYY-MM-DD",
+"YYYY-MM-DD HH:MM:SS",
+"YYYY-MM-DD HH:MM:SSZZZZZ"
+.It Fl -end Ar date/time
+Shows statistics for events up to the provided date.
 .El
 .Pp
 In addition, one of the following output modes can be supplied:
@@ -299,6 +316,27 @@ By default all types are streamed unless otherwise specified.
 Pass an appropriate
 .Fl -type
 for each requested type of event.
+.El
+.It Cm repack
+Repack all logs in a logarchive matching a predicate into a new logarchive
+with only the matching logs. Includes info and debug messages by default.
+.Bl -tag -width "--sort events | bytes "
+.It Fl -archive Ar archive
+Archive to be repacked.
+.It Fl -no-timeout
+Remove the default timeout (5 Mins) for repacking. This is generally not needed.
+.It Fl -fatal-warnings
+Treat all warnings as errors and stop repacking.
+.It Fl -predicate Ar predicate
+Include events matching a predicate.
+See section \fB"PREDICATE-BASED FILTERING"\fR below.
+.It Fl -verbose
+Include extra output for debugging.
+.It Fl -mutate
+Mutate logarchive 'in-place' without copying it. This is a destructive operation
+and cannot be undone.
+.It Fl -skip-uuid-purge
+Skip purging unused UUIDs from the resulting archive.
 .El
 .El
 .Sh PREDICATE-BASED FILTERING

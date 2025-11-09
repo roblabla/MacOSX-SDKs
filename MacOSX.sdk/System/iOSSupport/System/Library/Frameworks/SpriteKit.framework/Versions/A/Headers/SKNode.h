@@ -44,7 +44,7 @@ typedef NS_ENUM(NSInteger, SKNodeFocusBehavior) {
  */
 #if TARGET_OS_IPHONE
 #if SKVIEW_AVAILABLE
-SK_EXPORT @interface SKNode : UIResponder <NSCopying, NSSecureCoding, UIFocusItem>
+SK_EXPORT @interface SKNode : UIResponder <NSCopying, NSSecureCoding, UIFocusItem, UIFocusItemContainer, UICoordinateSpace>
 #else
 SK_EXPORT @interface SKNode : NSObject <NSCopying, NSSecureCoding>
 #endif
@@ -66,6 +66,7 @@ SK_EXPORT @interface SKNode : NSResponder <NSCopying, NSSecureCoding>
 + (nullable instancetype)nodeWithFileNamed:(NSString *)filename securelyWithClasses:(NSSet<Class> *)classes andError:(NSError **)error API_AVAILABLE(macos(10.14), ios(12.0), tvos(12.0), watchos(5.0));
 
 @property (nonatomic, readonly) CGRect frame;
+
 
 /**
  Calculates the bounding box including all child nodes in parents coordinate system.

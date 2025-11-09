@@ -1,6 +1,6 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.10 (swiftlang-5.10.0.12.5 clang-1500.3.9.1.1)
-// swift-module-flags: -target arm64e-apple-ios17.4-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-bare-slash-regex -user-module-version 183.100.21 -module-name CryptoKit
+// swift-compiler-version: Apple Swift version 6.0 effective-5.10 (swiftlang-6.0.0.7.24 clang-1600.0.25.1)
+// swift-module-flags: -target arm64e-apple-ios18.0-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-bare-slash-regex -user-module-version 241.0.11 -module-name CryptoKit
 import Foundation
 import LocalAuthentication
 import Security.SecAccessControl
@@ -17,8 +17,9 @@ extension CryptoKit.HPKE {
     case HKDF_SHA512
     public static func == (a: CryptoKit.HPKE.KDF, b: CryptoKit.HPKE.KDF) -> Swift.Bool
     public func hash(into hasher: inout Swift.Hasher)
+    @available(iOS 17.0, tvOS 17.0, watchOS 10.0, macOS 14.0, macCatalyst 17.0, *)
     public typealias AllCases = [CryptoKit.HPKE.KDF]
-    public static var allCases: [CryptoKit.HPKE.KDF] {
+    nonisolated public static var allCases: [CryptoKit.HPKE.KDF] {
       get
     }
     public var hashValue: Swift.Int {
@@ -66,8 +67,9 @@ extension CryptoKit.HPKE {
     case Curve25519_HKDF_SHA256
     public static func == (a: CryptoKit.HPKE.KEM, b: CryptoKit.HPKE.KEM) -> Swift.Bool
     public func hash(into hasher: inout Swift.Hasher)
+    @available(iOS 17.0, tvOS 17.0, watchOS 10.0, macOS 14.0, macCatalyst 17.0, *)
     public typealias AllCases = [CryptoKit.HPKE.KEM]
-    public static var allCases: [CryptoKit.HPKE.KEM] {
+    nonisolated public static var allCases: [CryptoKit.HPKE.KEM] {
       get
     }
     public var hashValue: Swift.Int {
@@ -111,7 +113,9 @@ public struct HashedAuthenticationCode<H> : CryptoKit.MessageAuthenticationCode 
   }
   public func withUnsafeBytes<R>(_ body: (Swift.UnsafeRawBufferPointer) throws -> R) rethrows -> R
   public func hash(into hasher: inout Swift.Hasher)
-  public typealias Element = Swift.IndexingIterator<Swift.Array<Swift.UInt8>>.Element
+  @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, macCatalyst 13.0, *)
+  public typealias Element = Swift.UInt8
+  @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, macCatalyst 13.0, *)
   public typealias Iterator = Swift.Array<Swift.UInt8>.Iterator
   public var hashValue: Swift.Int {
     get
@@ -156,8 +160,9 @@ extension CryptoKit.HPKE {
     case exportOnly
     public static func == (a: CryptoKit.HPKE.AEAD, b: CryptoKit.HPKE.AEAD) -> Swift.Bool
     public func hash(into hasher: inout Swift.Hasher)
+    @available(iOS 17.0, tvOS 17.0, watchOS 10.0, macOS 14.0, macCatalyst 17.0, *)
     public typealias AllCases = [CryptoKit.HPKE.AEAD]
-    public static var allCases: [CryptoKit.HPKE.AEAD] {
+    nonisolated public static var allCases: [CryptoKit.HPKE.AEAD] {
       get
     }
     public var hashValue: Swift.Int {
@@ -197,6 +202,7 @@ extension CryptoKit.HPKE {
 @available(iOS 13.0, macOS 10.15, watchOS 6.0, tvOS 13.0, macCatalyst 13.0, *)
 extension CryptoKit.SecureEnclave.P256.KeyAgreement.PrivateKey : CryptoKit.DiffieHellmanKeyAgreement {
   public func sharedSecretFromKeyAgreement(with publicKeyShare: CryptoKit.P256.KeyAgreement.PublicKey) throws -> CryptoKit.SharedSecret
+  @available(iOS 17.0, tvOS 17.0, watchOS 10.0, macOS 14.0, macCatalyst 17.0, *)
   public typealias PublicKey = CryptoKit.P256.KeyAgreement.PublicKey
 }
 @available(iOS 14.0, macOS 11.0, watchOS 7.0, tvOS 14.0, macCatalyst 14.0, *)
@@ -217,24 +223,8 @@ public struct HKDF<H> where H : CryptoKit.HashFunction {
 @available(iOS 13.0, macOS 10.15, watchOS 6.0, tvOS 13.0, macCatalyst 13.0, *)
 public struct SHA256 {
   @available(iOS 13.2, macOS 10.15, watchOS 6.1, tvOS 13.2, macCatalyst 13.2, *)
-  public static var blockByteCount: Swift.Int {
-    get
-    @available(iOS, obsoleted: 14.0)
-    @available(macOS, obsoleted: 11.0)
-    @available(watchOS, obsoleted: 7.0)
-    @available(tvOS, obsoleted: 14.0)
-    @available(macCatalyst, obsoleted: 14.0)
-    set
-  }
-  public static var byteCount: Swift.Int {
-    get
-    @available(iOS, obsoleted: 14.0)
-    @available(macOS, obsoleted: 11.0)
-    @available(watchOS, obsoleted: 7.0)
-    @available(tvOS, obsoleted: 14.0)
-    @available(macCatalyst, obsoleted: 14.0)
-    set
-  }
+  public static let blockByteCount: Swift.Int
+  public static let byteCount: Swift.Int
   public typealias Digest = CryptoKit.SHA256Digest
   public init()
   public mutating func update(bufferPointer: Swift.UnsafeRawBufferPointer)
@@ -243,24 +233,8 @@ public struct SHA256 {
 @available(iOS 13.0, macOS 10.15, watchOS 6.0, tvOS 13.0, macCatalyst 13.0, *)
 public struct SHA384 {
   @available(iOS 13.2, macOS 10.15, watchOS 6.1, tvOS 13.2, macCatalyst 13.2, *)
-  public static var blockByteCount: Swift.Int {
-    get
-    @available(iOS, obsoleted: 14.0)
-    @available(macOS, obsoleted: 11.0)
-    @available(watchOS, obsoleted: 7.0)
-    @available(tvOS, obsoleted: 14.0)
-    @available(macCatalyst, obsoleted: 14.0)
-    set
-  }
-  public static var byteCount: Swift.Int {
-    get
-    @available(iOS, obsoleted: 14.0)
-    @available(macOS, obsoleted: 11.0)
-    @available(watchOS, obsoleted: 7.0)
-    @available(tvOS, obsoleted: 14.0)
-    @available(macCatalyst, obsoleted: 14.0)
-    set
-  }
+  public static let blockByteCount: Swift.Int
+  public static let byteCount: Swift.Int
   public typealias Digest = CryptoKit.SHA384Digest
   public init()
   public mutating func update(bufferPointer: Swift.UnsafeRawBufferPointer)
@@ -269,24 +243,8 @@ public struct SHA384 {
 @available(iOS 13.0, macOS 10.15, watchOS 6.0, tvOS 13.0, macCatalyst 13.0, *)
 public struct SHA512 {
   @available(iOS 13.2, macOS 10.15, watchOS 6.1, tvOS 13.2, macCatalyst 13.2, *)
-  public static var blockByteCount: Swift.Int {
-    get
-    @available(iOS, obsoleted: 14.0)
-    @available(macOS, obsoleted: 11.0)
-    @available(watchOS, obsoleted: 7.0)
-    @available(tvOS, obsoleted: 14.0)
-    @available(macCatalyst, obsoleted: 14.0)
-    set
-  }
-  public static var byteCount: Swift.Int {
-    get
-    @available(iOS, obsoleted: 14.0)
-    @available(macOS, obsoleted: 11.0)
-    @available(watchOS, obsoleted: 7.0)
-    @available(tvOS, obsoleted: 14.0)
-    @available(macCatalyst, obsoleted: 14.0)
-    set
-  }
+  public static let blockByteCount: Swift.Int
+  public static let byteCount: Swift.Int
   public typealias Digest = CryptoKit.SHA512Digest
   public init()
   public mutating func update(bufferPointer: Swift.UnsafeRawBufferPointer)
@@ -327,8 +285,8 @@ extension CryptoKit.ChaChaPoly {
       get
     }
     @inlinable public init<D>(combined: D) throws where D : Foundation.DataProtocol {
-            // ChachaPoly nonce (12 bytes) + ChachaPoly tag (16 bytes)
-            // While we have these values in the internal APIs, we can't use it in inlinable code.
+             
+             
             let chachaPolyOverhead = 12 + 16
             
             if combined.count < chachaPolyOverhead {
@@ -427,8 +385,8 @@ extension CryptoKit.AES.GCM {
     @usableFromInline
     internal init(combined: Foundation.Data)
     @inlinable public init<D>(combined: D) throws where D : Foundation.DataProtocol {
-            // AES minimum nonce (12 bytes) + AES tag (16 bytes)
-            // While we have these values in the internal APIs, we can't use it in inlinable code.
+             
+             
             let aesGCMOverhead = 12 + 16
             
             if combined.count < aesGCMOverhead {
@@ -471,24 +429,8 @@ extension CryptoKit.SharedSecret : Swift.CustomStringConvertible, Swift.Equatabl
 extension CryptoKit.Insecure {
   public struct SHA1 {
     @available(iOS 13.2, macOS 10.15, watchOS 6.1, tvOS 13.2, macCatalyst 13.2, *)
-    public static var blockByteCount: Swift.Int {
-      get
-      @available(iOS, obsoleted: 14.0)
-      @available(macOS, obsoleted: 11.0)
-      @available(watchOS, obsoleted: 7.0)
-      @available(tvOS, obsoleted: 14.0)
-      @available(macCatalyst, obsoleted: 14.0)
-      set
-    }
-    public static var byteCount: Swift.Int {
-      get
-      @available(iOS, obsoleted: 14.0)
-      @available(macOS, obsoleted: 11.0)
-      @available(watchOS, obsoleted: 7.0)
-      @available(tvOS, obsoleted: 14.0)
-      @available(macCatalyst, obsoleted: 14.0)
-      set
-    }
+    public static let blockByteCount: Swift.Int
+    public static let byteCount: Swift.Int
     public typealias Digest = CryptoKit.Insecure.SHA1Digest
     public init()
     public mutating func update(bufferPointer: Swift.UnsafeRawBufferPointer)
@@ -496,24 +438,8 @@ extension CryptoKit.Insecure {
   }
   public struct MD5 {
     @available(iOS 13.2, macOS 10.15, watchOS 6.1, tvOS 13.2, macCatalyst 13.2, *)
-    public static var blockByteCount: Swift.Int {
-      get
-      @available(iOS, obsoleted: 14.0)
-      @available(macOS, obsoleted: 11.0)
-      @available(watchOS, obsoleted: 7.0)
-      @available(tvOS, obsoleted: 14.0)
-      @available(macCatalyst, obsoleted: 14.0)
-      set
-    }
-    public static var byteCount: Swift.Int {
-      get
-      @available(iOS, obsoleted: 14.0)
-      @available(macOS, obsoleted: 11.0)
-      @available(watchOS, obsoleted: 7.0)
-      @available(tvOS, obsoleted: 14.0)
-      @available(macCatalyst, obsoleted: 14.0)
-      set
-    }
+    public static let blockByteCount: Swift.Int
+    public static let byteCount: Swift.Int
     public typealias Digest = CryptoKit.Insecure.MD5Digest
     public init()
     public mutating func update(bufferPointer: Swift.UnsafeRawBufferPointer)
@@ -601,6 +527,7 @@ extension CryptoKit.Curve25519 {
       public var rawRepresentation: Foundation.Data {
         get
       }
+      @available(iOS 17.0, tvOS 17.0, watchOS 10.0, macOS 14.0, macCatalyst 17.0, *)
       public typealias PublicKey = CryptoKit.Curve25519.KeyAgreement.PublicKey
     }
   }
@@ -621,6 +548,7 @@ extension CryptoKit.HPKE {
     public mutating func seal<M, AD>(_ msg: M, authenticating aad: AD) throws -> Foundation.Data where M : Foundation.DataProtocol, AD : Foundation.DataProtocol
     public mutating func seal<M>(_ msg: M) throws -> Foundation.Data where M : Foundation.DataProtocol
   }
+  @available(iOS 17.0, macOS 14.0, watchOS 10.0, tvOS 17.0, macCatalyst 17.0, *)
   public struct Recipient {
     public func exportSecret<Context>(context: Context, outputByteCount: Swift.Int) throws -> CryptoKit.SymmetricKey where Context : Foundation.DataProtocol
     public init<SK>(privateKey: SK, ciphersuite: CryptoKit.HPKE.Ciphersuite, info: Foundation.Data, encapsulatedKey: Foundation.Data) throws where SK : CryptoKit.HPKEDiffieHellmanPrivateKey
@@ -713,7 +641,9 @@ extension CryptoKit.AES.GCM {
     public init<D>(data: D) throws where D : Foundation.DataProtocol
     public func withUnsafeBytes<R>(_ body: (Swift.UnsafeRawBufferPointer) throws -> R) rethrows -> R
     public func makeIterator() -> Swift.Array<Swift.UInt8>.Iterator
+    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, macCatalyst 13.0, *)
     public typealias Element = Swift.IndexingIterator<Swift.Array<Swift.UInt8>>.Element
+    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, macCatalyst 13.0, *)
     public typealias Iterator = Swift.Array<Swift.UInt8>.Iterator
   }
 }
@@ -725,7 +655,9 @@ extension CryptoKit.ChaChaPoly {
     public init<D>(data: D) throws where D : Foundation.DataProtocol
     public func withUnsafeBytes<R>(_ body: (Swift.UnsafeRawBufferPointer) throws -> R) rethrows -> R
     public func makeIterator() -> Swift.Array<Swift.UInt8>.Iterator
+    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, macCatalyst 13.0, *)
     public typealias Element = Swift.IndexingIterator<Swift.Array<Swift.UInt8>>.Element
+    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, macCatalyst 13.0, *)
     public typealias Iterator = Swift.Array<Swift.UInt8>.Iterator
   }
 }
@@ -739,7 +671,9 @@ public struct SHA256Digest {
     get
   }
   public func hash(into hasher: inout Swift.Hasher)
-  public typealias Element = Swift.IndexingIterator<Swift.Array<Swift.UInt8>>.Element
+  @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, macCatalyst 13.0, *)
+  public typealias Element = Swift.UInt8
+  @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, macCatalyst 13.0, *)
   public typealias Iterator = Swift.Array<Swift.UInt8>.Iterator
   public var hashValue: Swift.Int {
     get
@@ -755,7 +689,9 @@ public struct SHA384Digest {
     get
   }
   public func hash(into hasher: inout Swift.Hasher)
-  public typealias Element = Swift.IndexingIterator<Swift.Array<Swift.UInt8>>.Element
+  @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, macCatalyst 13.0, *)
+  public typealias Element = Swift.UInt8
+  @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, macCatalyst 13.0, *)
   public typealias Iterator = Swift.Array<Swift.UInt8>.Iterator
   public var hashValue: Swift.Int {
     get
@@ -771,7 +707,9 @@ public struct SHA512Digest {
     get
   }
   public func hash(into hasher: inout Swift.Hasher)
-  public typealias Element = Swift.IndexingIterator<Swift.Array<Swift.UInt8>>.Element
+  @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, macCatalyst 13.0, *)
+  public typealias Element = Swift.UInt8
+  @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, macCatalyst 13.0, *)
   public typealias Iterator = Swift.Array<Swift.UInt8>.Iterator
   public var hashValue: Swift.Int {
     get
@@ -789,7 +727,9 @@ extension CryptoKit.Insecure {
       get
     }
     public func hash(into hasher: inout Swift.Hasher)
-    public typealias Element = Swift.IndexingIterator<Swift.Array<Swift.UInt8>>.Element
+    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, macCatalyst 13.0, *)
+    public typealias Element = Swift.UInt8
+    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, macCatalyst 13.0, *)
     public typealias Iterator = Swift.Array<Swift.UInt8>.Iterator
     public var hashValue: Swift.Int {
       get
@@ -808,7 +748,9 @@ extension CryptoKit.Insecure {
       get
     }
     public func hash(into hasher: inout Swift.Hasher)
-    public typealias Element = Swift.IndexingIterator<Swift.Array<Swift.UInt8>>.Element
+    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, macCatalyst 13.0, *)
+    public typealias Element = Swift.UInt8
+    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, macCatalyst 13.0, *)
     public typealias Iterator = Swift.Array<Swift.UInt8>.Iterator
     public var hashValue: Swift.Int {
       get
@@ -1227,16 +1169,19 @@ extension CryptoKit.P521 {
 @available(iOS 13.0, macOS 10.15, watchOS 6.0, tvOS 13.0, macCatalyst 13.0, *)
 extension CryptoKit.P256.KeyAgreement.PrivateKey : CryptoKit.DiffieHellmanKeyAgreement {
   public func sharedSecretFromKeyAgreement(with publicKeyShare: CryptoKit.P256.KeyAgreement.PublicKey) throws -> CryptoKit.SharedSecret
+  @available(iOS 17.0, tvOS 17.0, watchOS 10.0, macOS 14.0, macCatalyst 17.0, *)
   public typealias PublicKey = CryptoKit.P256.KeyAgreement.PublicKey
 }
 @available(iOS 13.0, macOS 10.15, watchOS 6.0, tvOS 13.0, macCatalyst 13.0, *)
 extension CryptoKit.P384.KeyAgreement.PrivateKey : CryptoKit.DiffieHellmanKeyAgreement {
   public func sharedSecretFromKeyAgreement(with publicKeyShare: CryptoKit.P384.KeyAgreement.PublicKey) throws -> CryptoKit.SharedSecret
+  @available(iOS 17.0, tvOS 17.0, watchOS 10.0, macOS 14.0, macCatalyst 17.0, *)
   public typealias PublicKey = CryptoKit.P384.KeyAgreement.PublicKey
 }
 @available(iOS 13.0, macOS 10.15, watchOS 6.0, tvOS 13.0, macCatalyst 13.0, *)
 extension CryptoKit.P521.KeyAgreement.PrivateKey : CryptoKit.DiffieHellmanKeyAgreement {
   public func sharedSecretFromKeyAgreement(with publicKeyShare: CryptoKit.P521.KeyAgreement.PublicKey) throws -> CryptoKit.SharedSecret
+  @available(iOS 17.0, tvOS 17.0, watchOS 10.0, macOS 14.0, macCatalyst 17.0, *)
   public typealias PublicKey = CryptoKit.P521.KeyAgreement.PublicKey
 }
 @available(iOS 13.0, macOS 10.15, watchOS 6.0, tvOS 13.0, macCatalyst 13.0, *)

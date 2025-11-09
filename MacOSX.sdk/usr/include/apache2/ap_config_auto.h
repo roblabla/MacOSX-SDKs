@@ -53,14 +53,17 @@
 /* Using autoconf to configure Apache */
 #define AP_USING_AUTOCONF 1
 
-/* Define to 1 if you have the `arc4random_buf' function. */
+/* Define to 1 if you have the 'arc4random_buf' function. */
 #define HAVE_ARC4RANDOM_BUF 1
 
-/* Define to 1 if you have the `bindprocessor' function. */
+/* Define to 1 if you have the 'bindprocessor' function. */
 /* #undef HAVE_BINDPROCESSOR */
 
 /* Define to 1 if you have the <bstring.h> header file. */
 /* #undef HAVE_BSTRING_H */
+
+/* Define if crypt() supports SHA-2 hashes */
+/* #undef HAVE_CRYPT_SHA2 */
 
 /* Define if curl is available */
 #define HAVE_CURL 1
@@ -74,31 +77,31 @@
 /* Define to 1 if you have the <distcache/dc_client.h> header file. */
 /* #undef HAVE_DISTCACHE_DC_CLIENT_H */
 
-/* Define to 1 if you have the `ENGINE_init' function. */
+/* Define to 1 if you have the 'ENGINE_init' function. */
 #define HAVE_ENGINE_INIT 1
 
-/* Define to 1 if you have the `ENGINE_load_builtin_engines' function. */
+/* Define to 1 if you have the 'ENGINE_load_builtin_engines' function. */
 #define HAVE_ENGINE_LOAD_BUILTIN_ENGINES 1
 
-/* Define to 1 if you have the `epoll_create' function. */
+/* Define to 1 if you have the 'epoll_create' function. */
 /* #undef HAVE_EPOLL_CREATE */
 
-/* Define to 1 if you have the `fopen64' function. */
+/* Define to 1 if you have the 'fopen64' function. */
 /* #undef HAVE_FOPEN64 */
 
-/* Define to 1 if you have the `getgrnam' function. */
+/* Define to 1 if you have the 'getgrnam' function. */
 #define HAVE_GETGRNAM 1
 
-/* Define to 1 if you have the `getloadavg' function. */
+/* Define to 1 if you have the 'getloadavg' function. */
 #define HAVE_GETLOADAVG 1
 
-/* Define to 1 if you have the `getpgid' function. */
+/* Define to 1 if you have the 'getpgid' function. */
 #define HAVE_GETPGID 1
 
-/* Define to 1 if you have the `getpwnam' function. */
+/* Define to 1 if you have the 'getpwnam' function. */
 #define HAVE_GETPWNAM 1
 
-/* Define if you have gettid() */
+/* Define to 1 if you have the 'gettid' function. */
 /* #undef HAVE_GETTID */
 
 /* Define if struct tm has a tm_gmtoff field */
@@ -107,7 +110,7 @@
 /* Define to 1 if you have the <grp.h> header file. */
 #define HAVE_GRP_H 1
 
-/* Define to 1 if you have the `initgroups' function. */
+/* Define to 1 if you have the 'initgroups' function. */
 #define HAVE_INITGROUPS 1
 
 /* Define to 1 if you have the <inttypes.h> header file. */
@@ -116,17 +119,17 @@
 /* Define if jansson is available */
 /* #undef HAVE_JANSSON */
 
-/* Define to 1 if you have the `killpg' function. */
+/* Define to 1 if you have the 'killpg' function. */
 #define HAVE_KILLPG 1
 
-/* Define to 1 if you have the `kqueue' function. */
+/* Define to 1 if you have the 'kqueue' function. */
 #define HAVE_KQUEUE 1
 
 /* Define to 1 if you have the <limits.h> header file. */
 #define HAVE_LIMITS_H 1
 
-/* Define to 1 if you have the <memory.h> header file. */
-#define HAVE_MEMORY_H 1
+/* Define to 1 if you have the <minix/config.h> header file. */
+/* #undef HAVE_MINIX_CONFIG_H */
 
 /* Define if nghttp2 is available */
 #define HAVE_NGHTTP2 1
@@ -134,31 +137,31 @@
 /* Define to 1 if you have the <nghttp2/nghttp2.h> header file. */
 #define HAVE_NGHTTP2_NGHTTP2_H 1
 
-/* Define to 1 if you have the `nghttp2_option_set_no_closed_streams'
+/* Define to 1 if you have the 'nghttp2_option_set_no_closed_streams'
    function. */
 /* #undef HAVE_NGHTTP2_OPTION_SET_NO_CLOSED_STREAMS */
 
 /* Define to 1 if you have the
-   `nghttp2_option_set_no_rfc9113_leading_and_trailing_ws_validation'
+   'nghttp2_option_set_no_rfc9113_leading_and_trailing_ws_validation'
    function. */
 /* #undef HAVE_NGHTTP2_OPTION_SET_NO_RFC9113_LEADING_AND_TRAILING_WS_VALIDATION */
 
 /* Define to 1 if you have the
-   `nghttp2_session_callbacks_set_on_invalid_header_callback' function. */
+   'nghttp2_session_callbacks_set_on_invalid_header_callback' function. */
 /* #undef HAVE_NGHTTP2_SESSION_CALLBACKS_SET_ON_INVALID_HEADER_CALLBACK */
 
-/* Define to 1 if you have the `nghttp2_session_change_stream_priority'
+/* Define to 1 if you have the 'nghttp2_session_change_stream_priority'
    function. */
 /* #undef HAVE_NGHTTP2_SESSION_CHANGE_STREAM_PRIORITY */
 
-/* Define to 1 if you have the `nghttp2_session_get_stream_local_window_size'
+/* Define to 1 if you have the 'nghttp2_session_get_stream_local_window_size'
    function. */
 /* #undef HAVE_NGHTTP2_SESSION_GET_STREAM_LOCAL_WINDOW_SIZE */
 
-/* Define to 1 if you have the `nghttp2_session_server_new2' function. */
+/* Define to 1 if you have the 'nghttp2_session_server_new2' function. */
 /* #undef HAVE_NGHTTP2_SESSION_SERVER_NEW2 */
 
-/* Define to 1 if you have the `nghttp2_stream_get_weight' function. */
+/* Define to 1 if you have the 'nghttp2_stream_get_weight' function. */
 /* #undef HAVE_NGHTTP2_STREAM_GET_WEIGHT */
 
 /* Define if OpenSSL is available */
@@ -167,41 +170,44 @@
 /* Define to 1 if you have the <openssl/engine.h> header file. */
 #define HAVE_OPENSSL_ENGINE_H 1
 
-/* Define to 1 if you have the `OPENSSL_init_ssl' function. */
+/* Define to 1 if you have the 'OPENSSL_init_ssl' function. */
 #define HAVE_OPENSSL_INIT_SSL 1
 
 /* Detected PCRE2 */
 /* #undef HAVE_PCRE2 */
 
-/* Define to 1 if you have the `port_create' function. */
+/* Define to 1 if you have the 'port_create' function. */
 /* #undef HAVE_PORT_CREATE */
 
-/* Define to 1 if you have the `prctl' function. */
+/* Define to 1 if you have the 'prctl' function. */
 /* #undef HAVE_PRCTL */
 
 /* Define to 1 if you have the <priv.h> header file. */
 /* #undef HAVE_PRIV_H */
 
-/* Define to 1 if you have the `pthread_kill' function. */
+/* Define to 1 if you have the 'pthread_kill' function. */
 #define HAVE_PTHREAD_KILL 1
 
 /* Define to 1 if you have the <pwd.h> header file. */
 #define HAVE_PWD_H 1
 
-/* Define to 1 if you have the `RAND_egd' function. */
+/* Define to 1 if you have the 'RAND_egd' function. */
 /* #undef HAVE_RAND_EGD */
 
 /* Define if rustls is available */
 /* #undef HAVE_RUSTLS */
 
-/* Define to 1 if you have the `setsid' function. */
+/* Define to 1 if you have the 'setsid' function. */
 #define HAVE_SETSID 1
 
-/* Define to 1 if you have the `SSL_CTX_new' function. */
+/* Define to 1 if you have the 'SSL_CTX_new' function. */
 #define HAVE_SSL_CTX_NEW 1
 
 /* Define to 1 if you have the <stdint.h> header file. */
 #define HAVE_STDINT_H 1
+
+/* Define to 1 if you have the <stdio.h> header file. */
+#define HAVE_STDIO_H 1
 
 /* Define to 1 if you have the <stdlib.h> header file. */
 #define HAVE_STDLIB_H 1
@@ -212,7 +218,7 @@
 /* Define to 1 if you have the <string.h> header file. */
 #define HAVE_STRING_H 1
 
-/* Define to 1 if you have the `syslog' function. */
+/* Define to 1 if you have the 'syslog' function. */
 #define HAVE_SYSLOG 1
 
 /* Define if systemd is supported */
@@ -220,6 +226,9 @@
 
 /* Define to 1 if you have the <systemd/sd-daemon.h> header file. */
 /* #undef HAVE_SYSTEMD_SD_DAEMON_H */
+
+/* Define if you have gettid() via syscall() */
+/* #undef HAVE_SYS_GETTID */
 
 /* Define to 1 if you have the <sys/ipc.h> header file. */
 #define HAVE_SYS_IPC_H 1
@@ -260,17 +269,20 @@
 /* Define to 1 if you have <sys/wait.h> that is POSIX.1 compatible. */
 #define HAVE_SYS_WAIT_H 1
 
-/* Define to 1 if you have the `timegm' function. */
+/* Define to 1 if you have the 'timegm' function. */
 #define HAVE_TIMEGM 1
 
-/* Define to 1 if you have the `times' function. */
+/* Define to 1 if you have the 'times' function. */
 #define HAVE_TIMES 1
 
 /* Define to 1 if you have the <unistd.h> header file. */
 #define HAVE_UNISTD_H 1
 
-/* Define to 1 if you have the `vsyslog' function. */
+/* Define to 1 if you have the 'vsyslog' function. */
 /* #undef HAVE_VSYSLOG */
+
+/* Define to 1 if you have the <wchar.h> header file. */
+#define HAVE_WCHAR_H 1
 
 /* Root directory of the Apache install area */
 #define HTTPD_ROOT "/usr"
@@ -299,45 +311,107 @@
 /* This platform doesn't suffer from the thundering herd problem */
 #define SINGLE_LISTEN_UNSERIALIZED_ACCEPT 1
 
-/* Define to 1 if you have the ANSI C header files. */
+/* Define to 1 if all of the C89 standard headers exist (not just the ones
+   required in a freestanding environment). This macro is provided for
+   backward compatibility; new code need not use it. */
 #define STDC_HEADERS 1
 
 /* Path to suexec binary */
 /* #undef SUEXEC_BIN */
 
-/* Enable extensions on AIX 3, Interix.  */
+/* Enable extensions on AIX, Interix, z/OS.  */
 #ifndef _ALL_SOURCE
 # define _ALL_SOURCE 1
 #endif
-/* Enable GNU extensions on systems that have them.  */
-#ifndef _GNU_SOURCE
-# define _GNU_SOURCE 1
-#endif
-/* Enable threading extensions on Solaris.  */
-#ifndef _POSIX_PTHREAD_SEMANTICS
-# define _POSIX_PTHREAD_SEMANTICS 1
-#endif
-/* Enable extensions on HP NonStop.  */
-#ifndef _TANDEM_SOURCE
-# define _TANDEM_SOURCE 1
+/* Enable general extensions on macOS.  */
+#ifndef _DARWIN_C_SOURCE
+# define _DARWIN_C_SOURCE 1
 #endif
 /* Enable general extensions on Solaris.  */
 #ifndef __EXTENSIONS__
 # define __EXTENSIONS__ 1
 #endif
+/* Enable GNU extensions on systems that have them.  */
+#ifndef _GNU_SOURCE
+# define _GNU_SOURCE 1
+#endif
+/* Enable X/Open compliant socket functions that do not require linking
+   with -lxnet on HP-UX 11.11.  */
+#ifndef _HPUX_ALT_XOPEN_SOCKET_API
+# define _HPUX_ALT_XOPEN_SOCKET_API 1
+#endif
+/* Identify the host operating system as Minix.
+   This macro does not affect the system headers' behavior.
+   A future release of Autoconf may stop defining this macro.  */
+#ifndef _MINIX
+/* # undef _MINIX */
+#endif
+/* Enable general extensions on NetBSD.
+   Enable NetBSD compatibility extensions on Minix.  */
+#ifndef _NETBSD_SOURCE
+# define _NETBSD_SOURCE 1
+#endif
+/* Enable OpenBSD compatibility extensions on NetBSD.
+   Oddly enough, this does nothing on OpenBSD.  */
+#ifndef _OPENBSD_SOURCE
+# define _OPENBSD_SOURCE 1
+#endif
+/* Define to 1 if needed for POSIX-compatible behavior.  */
+#ifndef _POSIX_SOURCE
+/* # undef _POSIX_SOURCE */
+#endif
+/* Define to 2 if needed for POSIX-compatible behavior.  */
+#ifndef _POSIX_1_SOURCE
+/* # undef _POSIX_1_SOURCE */
+#endif
+/* Enable POSIX-compatible threading on Solaris.  */
+#ifndef _POSIX_PTHREAD_SEMANTICS
+# define _POSIX_PTHREAD_SEMANTICS 1
+#endif
+/* Enable extensions specified by ISO/IEC TS 18661-5:2014.  */
+#ifndef __STDC_WANT_IEC_60559_ATTRIBS_EXT__
+# define __STDC_WANT_IEC_60559_ATTRIBS_EXT__ 1
+#endif
+/* Enable extensions specified by ISO/IEC TS 18661-1:2014.  */
+#ifndef __STDC_WANT_IEC_60559_BFP_EXT__
+# define __STDC_WANT_IEC_60559_BFP_EXT__ 1
+#endif
+/* Enable extensions specified by ISO/IEC TS 18661-2:2015.  */
+#ifndef __STDC_WANT_IEC_60559_DFP_EXT__
+# define __STDC_WANT_IEC_60559_DFP_EXT__ 1
+#endif
+/* Enable extensions specified by C23 Annex F.  */
+#ifndef __STDC_WANT_IEC_60559_EXT__
+# define __STDC_WANT_IEC_60559_EXT__ 1
+#endif
+/* Enable extensions specified by ISO/IEC TS 18661-4:2015.  */
+#ifndef __STDC_WANT_IEC_60559_FUNCS_EXT__
+# define __STDC_WANT_IEC_60559_FUNCS_EXT__ 1
+#endif
+/* Enable extensions specified by C23 Annex H and ISO/IEC TS 18661-3:2015.  */
+#ifndef __STDC_WANT_IEC_60559_TYPES_EXT__
+# define __STDC_WANT_IEC_60559_TYPES_EXT__ 1
+#endif
+/* Enable extensions specified by ISO/IEC TR 24731-2:2010.  */
+#ifndef __STDC_WANT_LIB_EXT2__
+# define __STDC_WANT_LIB_EXT2__ 1
+#endif
+/* Enable extensions specified by ISO/IEC 24747:2009.  */
+#ifndef __STDC_WANT_MATH_SPEC_FUNCS__
+# define __STDC_WANT_MATH_SPEC_FUNCS__ 1
+#endif
+/* Enable extensions on HP NonStop.  */
+#ifndef _TANDEM_SOURCE
+# define _TANDEM_SOURCE 1
+#endif
+/* Enable X/Open extensions.  Define to 500 only if necessary
+   to make mbstate_t available.  */
+#ifndef _XOPEN_SOURCE
+/* # undef _XOPEN_SOURCE */
+#endif
 
 
-/* Define to 1 if on MINIX. */
-/* #undef _MINIX */
-
-/* Define to 2 if the system does not provide POSIX.1 features except with
-   this defined. */
-/* #undef _POSIX_1_SOURCE */
-
-/* Define to 1 if you need to in order for `stat' and other things to work. */
-/* #undef _POSIX_SOURCE */
-
-/* Define to empty if `const' does not conform to ANSI C. */
+/* Define to empty if 'const' does not conform to ANSI C. */
 /* #undef const */
 
 /* Define to 'int' if <sys/resource.h> doesn't define it for us */

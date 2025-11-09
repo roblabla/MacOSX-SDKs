@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/WallpaperExtensionKit.framework/Versions/A/WallpaperExtensionKit'
-current-version: 95.201
+current-version: 147.0.1
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -28,9 +28,11 @@ exports:
                        '_$s21WallpaperExtensionKit0A11DestinationV10colorSpaceSo07CGColorF3RefavpMV', 
                        '_$s21WallpaperExtensionKit0A11DestinationV11scaleFactor12CoreGraphics7CGFloatVvg', 
                        '_$s21WallpaperExtensionKit0A11DestinationV11scaleFactor12CoreGraphics7CGFloatVvpMV', 
+                       '_$s21WallpaperExtensionKit0A11DestinationV15directDisplayIDs6UInt32VSgvg', 
+                       '_$s21WallpaperExtensionKit0A11DestinationV15directDisplayIDs6UInt32VSgvpMV', 
                        '_$s21WallpaperExtensionKit0A11DestinationV2eeoiySbAC_ACtFZ', 
                        '_$s21WallpaperExtensionKit0A11DestinationV4fromACs7Decoder_p_tKcfC', 
-                       '_$s21WallpaperExtensionKit0A11DestinationV4size10colorSpace11scaleFactorACSo6CGSizeV_So07CGColorG3Refa12CoreGraphics7CGFloatVtcfC', 
+                       '_$s21WallpaperExtensionKit0A11DestinationV4size10colorSpace11scaleFactor15directDisplayIDACSo6CGSizeV_So07CGColorG3Refa12CoreGraphics7CGFloatVs6UInt32VSgtcfC', 
                        '_$s21WallpaperExtensionKit0A11DestinationV4sizeSo6CGSizeVvg', 
                        '_$s21WallpaperExtensionKit0A11DestinationV4sizeSo6CGSizeVvpMV', 
                        '_$s21WallpaperExtensionKit0A11DestinationV6encode2toys7Encoder_p_tKF', 

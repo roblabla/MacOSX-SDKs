@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
  @c CPActionSheetTemplate represents an action sheet that must be dismissed with a button press
  before the user may return to using the app.
  */
-API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(macos, watchos, tvos)
+API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(macos, watchos)
 @interface CPActionSheetTemplate : CPTemplate
 
 /**

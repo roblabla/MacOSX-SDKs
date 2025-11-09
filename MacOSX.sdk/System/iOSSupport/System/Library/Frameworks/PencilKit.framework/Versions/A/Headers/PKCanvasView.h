@@ -2,7 +2,7 @@
 //  PKCanvasView.h
 //  PencilKit
 //
-//  Copyright © 2019 Apple. All rights reserved.
+//  Copyright © 2019 Apple Inc. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
@@ -16,6 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// The optional methods a delegate can receive from editing-related changes
 /// to a PKCanvasView.
 API_AVAILABLE(ios(13.0))
+NS_SWIFT_UI_ACTOR
 @protocol PKCanvasViewDelegate<NSObject, UIScrollViewDelegate>
 @optional
 /// Called after the drawing on the canvas did change.
@@ -84,6 +85,13 @@ API_AVAILABLE(ios(13.0))
 
 /// The gesture recognizer used to draw in the canvas.
 @property (nonatomic, readonly) UIGestureRecognizer *drawingGestureRecognizer;
+
+/// Controls if drawing input is enabled on this canvas view. Defaults to true.
+///
+/// Note `toolPickerSelectedToolItemDidChange` may set this value
+/// as some `PKToolPickerItem`s do not have a `PKTool`.
+/// This will happen when the canvas is an observer of a `PKToolPicker`.
+@property (nonatomic, assign, getter=isDrawingEnabled) BOOL drawingEnabled API_AVAILABLE(ios(18.0), visionos(2.0));
 
 @property (nonatomic) BOOL allowsFingerDrawing API_DEPRECATED("Use 'drawingPolicy' property.", ios(13_0, 14_0));
 

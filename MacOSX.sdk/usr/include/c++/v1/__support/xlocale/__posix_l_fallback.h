@@ -90,15 +90,7 @@ inline _LIBCPP_HIDE_FROM_ABI_C int strcoll_l(const char* __s1, const char* __s2,
 }
 
 inline _LIBCPP_HIDE_FROM_ABI_C size_t strxfrm_l(char* __dest, const char* __src, size_t __n, locale_t) {
-  // TODO: Remove this workaround once strxfrm is provided by SepOS (rdar://106710744)
-#ifdef _LIBCPP_ON_SEP
-  if (__dest) {
-    ::strncpy(__dest, __unsafe_null_terminated_to_indexable(__src), __n);
-  }
-  return strlen(__src);
-#else
   return ::strxfrm(__dest, __src, __n);
-#endif
 }
 
 inline _LIBCPP_HIDE_FROM_ABI_C size_t

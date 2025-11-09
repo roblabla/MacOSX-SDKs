@@ -177,10 +177,13 @@ Return the manager responsible for the default domain.
  or modifyItem.
 
  If the system cannot find a suitable directory, this calls will fail. This could happen e.g. if the domain
- does not exist.
+ does not exist or is in instance of initialization.
 
- This call will not fail when called from the extension process with an active instance of the extension
- for that domain.
+ This call succeeds when called from the extension process with an instance of the extension for the domain 
+ unless domain was disconnected by
+ `-[NSFileProviderExternalVolumeHandling shouldConnectExternalDomainWithCompletionHandler:]`.
+ It can also fail in the extension process if the domain (external) is being setup for the very first time
+ (meaning it never existed).
  */
 - (nullable NSURL *)temporaryDirectoryURLWithError:(NSError **)error FILEPROVIDER_API_AVAILABILITY_V3_IOS;
 
@@ -249,11 +252,12 @@ Return the manager responsible for the default domain.
 /**
  Calling this method will cause the system to cancel throttling on every item which has been throttled due to the given error.
 
- This call supports 4 types of errors:
+ This call supports the following errors:
  - NSFileProviderErrorNotAuthenticated
  - NSFileProviderErrorInsufficientQuota
  - NSFileProviderErrorServerUnreachable
  - NSFileProviderErrorCannotSynchronize
+ - NSFileProviderErrorExcludedFromSync
  */
 - (void)signalErrorResolved:(NSError *)error completionHandler:(void(^)(NSError *_Nullable error))completionHandler
 FILEPROVIDER_API_AVAILABILITY_V3_IOS;
@@ -570,6 +574,63 @@ typedef NS_OPTIONS(NSUInteger, NSFileProviderManagerDisconnectionOptions) {
 - (void)requestDownloadForItemWithIdentifier:(NSFileProviderItemIdentifier)itemIdentifier
                               requestedRange:(NSRange)rangeToMaterialize
                            completionHandler:(void (^)(NSError * _Nullable error))completionHandler NS_REFINED_FOR_SWIFT FILEPROVIDER_API_AVAILABILITY_V5_0;
+@end
+
+@interface NSFileProviderManager (StateDirectory)
+/**
+ A directory suitable for storing state information for the domain.
+
+ The returned URL is guaranteed to be on the same volume as the user visible URL and the temporary URL, making sure
+ the system can atomatically clone/move files from that location to the user visible URL.
+ The caller is responsible for managing the security scope of the returned URL.
+
+ When syncing a domain on an external volume, all information about the sync state must be kept in this directory
+ if the volume is to be shared between multiple machines.
+
+ If the system cannot find a suitable directory, this call will fail. This could happen e.g. if the domain
+ does not exist or is in instance of initialization.
+
+ This call will not fail when called from the extension process with an active instance of the extension
+ for that domain unless the domain is being setup for the very first time (meaning it never existed).
+
+ Removing the domain will remove the corresponding directory along with it.
+*/
+- (nullable NSURL *)stateDirectoryURLWithError:(NSError *__autoreleasing  _Nullable *)error FILEPROVIDER_API_AVAILABILITY_EXTERNAL_VOLUME;
+@end
+
+typedef NS_OPTIONS(NSUInteger, NSFileProviderVolumeUnsupportedReason) {
+    NSFileProviderVolumeUnsupportedReasonNone           = 0,
+    NSFileProviderVolumeUnsupportedReasonUnknown        = 1 << 0,
+    NSFileProviderVolumeUnsupportedReasonNonAPFS        = 1 << 1,
+    NSFileProviderVolumeUnsupportedReasonNonEncrypted   = 1 << 2,
+    NSFileProviderVolumeUnsupportedReasonReadOnly       = 1 << 3,
+    NSFileProviderVolumeUnsupportedReasonNetwork        = 1 << 4,
+    NSFileProviderVolumeUnsupportedReasonQuarantined    = 1 << 5
+} FILEPROVIDER_API_AVAILABILITY_EXTERNAL_VOLUME;
+
+@interface NSFileProviderManager (ExternalDomain)
+
+/**
+ Check if a URL is eligible for storing a domain.
+
+ This returns whether the check has been performed succesfully - NOT whether the drive is eligible.
+
+ If an error was encountered while checking, this method returns FALSE and an error describing
+ the problem will be set.
+
+ The eligible parameter will contain the result of the check and indicate whether the volume can be
+ used to store FP domains. Its value is only defined if the call returns YES.
+
+ The url can be any existing and accessible URL on the volume for which you want to assess eligibility.
+ The checks are volume-wide and the exact location on the volume doesn't impact them.
+
+ If a drive is eligible, unsupportedReason will be empty (0). Otherwise it will contain the list of identified
+ conditions that currently prevent this drive from being used to store FP domains.
+ */
++ (BOOL)checkDomainsCanBeStored:(BOOL *)eligible
+                  onVolumeAtURL:(NSURL *)url
+              unsupportedReason:(NSFileProviderVolumeUnsupportedReason * _Nullable)unsupportedReason
+                          error:(NSError *_Nullable *_Nullable)error NS_REFINED_FOR_SWIFT FILEPROVIDER_API_AVAILABILITY_EXTERNAL_VOLUME;
 @end
 
 NS_ASSUME_NONNULL_END

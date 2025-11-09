@@ -5,6 +5,7 @@ install-name:    '/System/Library/PrivateFrameworks/PlatformSSOUI.framework/Vers
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     objc-classes:    [ POAgentWindow, POAgentWindowController, POUIAlert, POUIAuthenticationDialog, 
-                       POUIAuthenticationViewController, POUISmartCardDialog, POUISmartCardViewController, 
+                       POUIAuthenticationViewController, POUIPasswordSyncPrompt, 
+                       POUIRegistrationWindow, POUISmartCardDialog, POUISmartCardViewController, 
                        POWindowController ]
 ...

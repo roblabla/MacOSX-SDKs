@@ -139,6 +139,7 @@ exports:
                        '_$s14NearbySessions9SubsystemOSHAAMc', '_$s14NearbySessions9SubsystemOSQAAMc', 
                        '_$s14NearbySessions9SubsystemOSYAAMc', '_$s2os6LoggerV14NearbySessionsE9subsystem8categoryACx_SStcSYRzSS8RawValueRtzlufC', 
                        '_$ss26DefaultStringInterpolationV14NearbySessionsE06appendC0yyxSglF', 
-                       _NearbySessionsVersionNumber, _NearbySessionsVersionString ]
-    objc-classes:    [ _TtC14NearbySessions17NearbyGroupMember, _TtC14NearbySessions27NearbyGroupClientConnection ]
+                       _NearbySessionsVersionNumber, _NearbySessionsVersionString, 
+                       '_OBJC_METACLASS_$__TtC14NearbySessions27NearbyGroupClientConnection' ]
+    objc-classes:    [ _TtC14NearbySessions17NearbyGroupMember ]
 ...

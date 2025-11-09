@@ -21,7 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
  *              not be prompted for access. It will only have access to the final selection of the user.
  *              Changing the predicates only takes effect before the view is presented.
  */
-NS_CLASS_AVAILABLE_IOS(9_0)
+NS_CLASS_AVAILABLE_IOS(9_0) API_UNAVAILABLE(tvos)
 @interface CNContactPickerViewController : UIViewController
 
 /*!
@@ -61,7 +61,7 @@ NS_CLASS_AVAILABLE_IOS(9_0)
 @end
 
 
-NS_AVAILABLE_IOS(9_0)
+NS_AVAILABLE_IOS(9_0) API_UNAVAILABLE(tvos)
 @protocol CNContactPickerDelegate <NSObject>
 
 @optional

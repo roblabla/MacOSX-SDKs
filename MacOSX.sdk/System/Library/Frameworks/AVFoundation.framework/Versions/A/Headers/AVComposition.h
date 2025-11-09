@@ -56,7 +56,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class AVCompositionInternal;
 
-API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0))
+API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0), visionos(1.0))
 @interface AVComposition : AVAsset <NSMutableCopying>
 {
 @private
@@ -82,7 +82,7 @@ API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0))
       AVCompositions create AVURLAssets internally for URLs specified by AVCompositionTrackSegments of AVCompositionTracks, as needed, whenever AVCompositionTrackSegments were originally added to a track via -[AVMutableCompositionTrack setSegments:] rather than by inserting timeranges of already existing AVAssets or AVAssetTracks.
       The value of URLAssetInitializationOptions can be specified at the time an AVMutableComposition is created via +compositionWithURLAssetInitializationOptions:.
  */
-@property (nonatomic, readonly, copy) NSDictionary<NSString *, id> *URLAssetInitializationOptions API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(2.0));
+@property (nonatomic, readonly, copy) NSDictionary<NSString *, id> *URLAssetInitializationOptions API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(2.0), visionos(1.0));
 
 @end
 
@@ -107,7 +107,7 @@ API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0))
 	@param		completionHandler
 				A block that is called when the loading is finished, with either the loaded track (which may be nil if no track of the specified trackID is available) or an error.
 */
-- (void)loadTrackWithTrackID:(CMPersistentTrackID)trackID completionHandler:(void (^)(AVCompositionTrack * _Nullable_result, NSError * _Nullable))completionHandler API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0));
+- (void)loadTrackWithTrackID:(CMPersistentTrackID)trackID completionHandler:(void (^ NS_SWIFT_SENDABLE)(AVCompositionTrack * _Nullable_result, NSError * _Nullable))completionHandler API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0), visionos(1.0));
 
 /*!
     @method         tracksWithMediaType:
@@ -128,7 +128,7 @@ API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0))
 	@param		completionHandler
 				A block that is called when the loading is finished, with either the loaded tracks (which may be empty if no tracks of the specified media type are available) or an error.
 */
-- (void)loadTracksWithMediaType:(AVMediaType)mediaType completionHandler:(void (^)(NSArray<AVCompositionTrack *> * _Nullable, NSError * _Nullable))completionHandler API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0));
+- (void)loadTracksWithMediaType:(AVMediaType)mediaType completionHandler:(void (^ NS_SWIFT_SENDABLE)(NSArray<AVCompositionTrack *> * _Nullable, NSError * _Nullable))completionHandler API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0), visionos(1.0));
 
 /*!
     @method         tracksWithMediaCharacteristic:
@@ -149,14 +149,15 @@ API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0))
 	@param		completionHandler
 				A block that is called when the loading is finished, with either the loaded tracks (which may be empty if no tracks with the specified characteristic are available) or an error.
 */
-- (void)loadTracksWithMediaCharacteristic:(AVMediaCharacteristic)mediaCharacteristic completionHandler:(void (^)(NSArray<AVCompositionTrack *> * _Nullable, NSError * _Nullable))completionHandler API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0));
+- (void)loadTracksWithMediaCharacteristic:(AVMediaCharacteristic)mediaCharacteristic completionHandler:(void (^ NS_SWIFT_SENDABLE)(NSArray<AVCompositionTrack *> * _Nullable, NSError * _Nullable))completionHandler API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0), visionos(1.0));
 
 @end
 
 
 @class AVMutableCompositionInternal;
 
-API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0))
+NS_SWIFT_NONSENDABLE
+API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0), visionos(1.0))
 @interface AVMutableComposition : AVComposition
 {
 @private
@@ -191,7 +192,7 @@ API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0))
     @discussion
       AVMutableCompositions create AVURLAssets internally for URLs specified by AVCompositionTrackSegments of AVMutableCompositionTracks, as needed, whenever AVCompositionTrackSegments are added to tracks via -[AVMutableCompositionTrack setSegments:] rather than by inserting timeranges of already existing AVAssets or AVAssetTracks.
  */
-+ (instancetype)compositionWithURLAssetInitializationOptions:(nullable NSDictionary<NSString *, id> *)URLAssetInitializationOptions API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(2.0));
++ (instancetype)compositionWithURLAssetInitializationOptions:(nullable NSDictionary<NSString *, id> *)URLAssetInitializationOptions API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(2.0), visionos(1.0));
 
 @end
 
@@ -204,7 +205,7 @@ API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0))
     @param          timeRange
                     Specifies the timeRange of the asset to be inserted.
     @param          asset
-                    Specifies the asset that contains the tracks that are to be inserted. Only instances of AVURLAsset and AVComposition are supported (AVComposition starting in macOS 10.10 and iOS 8.0).
+                    Specifies the asset that contains the tracks that are to be inserted. Only instances of AVURLAsset and AVComposition are supported (AVComposition starting in macOS 10.10 and iOS 8.0). The asset should have its tracks loaded, and the tracks should have their formatDescriptions loaded before invoking this method to avoid blocking.
     @param          startTime
                     Specifies the time at which the inserted tracks are to be presented by the composition.
     @param          outError
@@ -215,9 +216,9 @@ API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0))
       This method may add new tracks to ensure that all tracks of the asset are represented in the inserted timeRange.
       Note that the media data for the inserted timeRange will be presented at its natural duration and rate. It can be scaled to a different duration and presented at a different rate via -scaleTimeRange:toDuration:.
       Existing content at the specified startTime will be pushed out by the duration of timeRange.
-      Note that metadata will not be automatically copied.
+      Note that this operation only inserts one or more track segments into affected AVMutableCompositionTracks; it does not affect the values of other track properties, either to match the corresponding values of tracks in the source asset or for any other purpose.
 */
-- (BOOL)insertTimeRange:(CMTimeRange)timeRange ofAsset:(AVAsset *)asset atTime:(CMTime)startTime error:(NSError * _Nullable * _Nullable)outError API_DEPRECATED_WITH_REPLACEMENT("insertTimeRange:ofAsset:atTime:completionHandler:", macos(10.7, API_TO_BE_DEPRECATED), ios(4.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(visionos);
+- (BOOL)insertTimeRange:(CMTimeRange)timeRange ofAsset:(AVAsset *)asset atTime:(CMTime)startTime error:(NSError * _Nullable * _Nullable)outError API_DEPRECATED_WITH_REPLACEMENT("insertTimeRange:ofAsset:atTime:completionHandler:", macos(10.7, 15.0), ios(4.0, 18.0), tvos(9.0, 18.0), watchos(1.0, 11.0), visionos(1.0, 2.0));
 
 /*!
 	@method         insertTimeRange:ofAsset:atTime:completionHandler:
@@ -235,9 +236,9 @@ API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0))
 	  This method may add new tracks to ensure that all tracks of the asset are represented in the inserted timeRange.
 	  Note that the media data for the inserted timeRange will be presented at its natural duration and rate. It can be scaled to a different duration and presented at a different rate via -scaleTimeRange:toDuration:.
 	  Existing content at the specified startTime will be pushed out by the duration of timeRange.
-	  Note that metadata will not be automatically copied.
+	  Note that this operation only inserts one or more track segments into affected AVMutableCompositionTracks; it does not affect the values of other track properties, either to match the corresponding values of tracks in the source asset or for any other purpose.
 */
-- (void)insertTimeRange:(CMTimeRange)timeRange ofAsset:(AVAsset *)asset atTime:(CMTime)startTime completionHandler:(void (^)(NSError * _Nullable error))completionHandler API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0), watchos(9.0));
+- (void)insertTimeRange:(CMTimeRange)timeRange ofAsset:(AVAsset *)asset atTime:(CMTime)startTime completionHandler:(void (^ NS_SWIFT_SENDABLE)(NSError * _Nullable error))completionHandler AVF_DEPRECATED_FOR_SWIFT_ONLY("Use insertTimeRange(_:of:at:isolation:) async instead", macos(13.0, 15.0), ios(16.0, 18.0), tvos(16.0, 18.0), watchos(9.0, 11.0), visionos(1.0, 2.0)) NS_SWIFT_DISABLE_ASYNC;
 
 /*!
     @method         insertEmptyTimeRange:
@@ -340,7 +341,7 @@ API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0))
 	@param		completionHandler
 				A block that is called when the loading is finished, with either the loaded track (which may be nil if no track of the specified trackID is available) or an error.
 */
-- (void)loadTrackWithTrackID:(CMPersistentTrackID)trackID completionHandler:(void (^)(AVMutableCompositionTrack * _Nullable_result, NSError * _Nullable))completionHandler API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0));
+- (void)loadTrackWithTrackID:(CMPersistentTrackID)trackID completionHandler:(void (^ NS_SWIFT_SENDABLE)(AVMutableCompositionTrack * _Nullable_result, NSError * _Nullable))completionHandler API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0), visionos(1.0));
 
 /*!
     @method         tracksWithMediaType:
@@ -361,7 +362,7 @@ API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0))
 	@param		completionHandler
 				A block that is called when the loading is finished, with either the loaded tracks (which may be empty if no tracks of the specified media type are available) or an error.
 */
-- (void)loadTracksWithMediaType:(AVMediaType)mediaType completionHandler:(void (^)(NSArray<AVMutableCompositionTrack *> * _Nullable, NSError * _Nullable))completionHandler API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0));
+- (void)loadTracksWithMediaType:(AVMediaType)mediaType completionHandler:(void (^ NS_SWIFT_SENDABLE)(NSArray<AVMutableCompositionTrack *> * _Nullable, NSError * _Nullable))completionHandler API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0), visionos(1.0));
 
 /*!
     @method         tracksWithMediaCharacteristic:
@@ -382,7 +383,7 @@ API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0))
 	@param		completionHandler
 				A block that is called when the loading is finished, with either the loaded tracks (which may be empty if no tracks with the specified characteristic are available) or an error.
 */
-- (void)loadTracksWithMediaCharacteristic:(AVMediaCharacteristic)mediaCharacteristic completionHandler:(void (^)(NSArray<AVMutableCompositionTrack *> * _Nullable, NSError * _Nullable))completionHandler API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0));
+- (void)loadTracksWithMediaCharacteristic:(AVMediaCharacteristic)mediaCharacteristic completionHandler:(void (^ NS_SWIFT_SENDABLE)(NSArray<AVMutableCompositionTrack *> * _Nullable, NSError * _Nullable))completionHandler API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0), visionos(1.0));
 
 @end
 
@@ -405,29 +406,29 @@ API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0))
 @property (nonatomic, readonly) float preferredRate;
 @property (nonatomic, readonly) float preferredVolume;
 @property (nonatomic, readonly) CGAffineTransform preferredTransform;
-@property (nonatomic, readonly) AVDisplayCriteria *preferredDisplayCriteria API_AVAILABLE(tvos(11.2)) API_UNAVAILABLE(ios) API_UNAVAILABLE(macos, watchos);
-@property (nonatomic, readonly) CMTime minimumTimeOffsetFromLive API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0), watchos(6.0));
+@property (nonatomic, readonly) AVDisplayCriteria *preferredDisplayCriteria API_AVAILABLE(tvos(11.2)) API_UNAVAILABLE(ios, visionos) API_UNAVAILABLE(macos, watchos);
+@property (nonatomic, readonly) CMTime minimumTimeOffsetFromLive API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0), watchos(6.0), visionos(1.0));
 @property (nonatomic, readonly) BOOL providesPreciseDurationAndTiming;
-@property (nonatomic, readonly) NSArray<AVAssetTrackGroup *> *trackGroups API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(1.0));
-@property (nonatomic, readonly, nullable) AVMetadataItem *creationDate API_AVAILABLE(macos(10.8), ios(5.0), tvos(9.0), watchos(1.0));
+@property (nonatomic, readonly) NSArray<AVAssetTrackGroup *> *trackGroups API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(1.0), visionos(1.0));
+@property (nonatomic, readonly, nullable) AVMetadataItem *creationDate API_AVAILABLE(macos(10.8), ios(5.0), tvos(9.0), watchos(1.0), visionos(1.0));
 @property (nonatomic, readonly, nullable) NSString *lyrics;
 @property (nonatomic, readonly) NSArray<AVMetadataItem *> *commonMetadata;
-@property (nonatomic, readonly) NSArray<AVMetadataItem *> *metadata API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(1.0));
+@property (nonatomic, readonly) NSArray<AVMetadataItem *> *metadata API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(1.0), visionos(1.0));
 @property (nonatomic, readonly) NSArray<AVMetadataFormat> *availableMetadataFormats;
-@property (readonly) NSArray<NSLocale *> *availableChapterLocales API_AVAILABLE(macos(10.7), ios(4.3), tvos(9.0), watchos(1.0));
-@property (nonatomic, readonly) NSArray<AVMediaCharacteristic> *availableMediaCharacteristicsWithMediaSelectionOptions API_AVAILABLE(macos(10.8), ios(5.0), tvos(9.0), watchos(1.0));;
-@property (nonatomic, readonly) AVMediaSelection *preferredMediaSelection API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(2.0));
-@property (nonatomic, readonly) NSArray<AVMediaSelection *> *allMediaSelections API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0));
-@property (nonatomic, readonly) BOOL hasProtectedContent API_AVAILABLE(macos(10.7), ios(4.2), tvos(9.0)) API_UNAVAILABLE(watchos);
-@property (nonatomic, readonly) BOOL canContainFragments API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0)) API_UNAVAILABLE(watchos);
-@property (nonatomic, readonly) BOOL containsFragments API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0)) API_UNAVAILABLE(watchos);
-@property (nonatomic, readonly) CMTime overallDurationHint API_AVAILABLE(macos(10.12.2), ios(10.2), tvos(10.2), watchos(3.2));
-@property (nonatomic, readonly, getter=isPlayable) BOOL playable API_AVAILABLE(macos(10.7), ios(4.3), tvos(9.0), watchos(1.0));
-@property (nonatomic, readonly, getter=isExportable) BOOL exportable API_AVAILABLE(macos(10.7), ios(4.3), tvos(9.0)) API_UNAVAILABLE(watchos);
-@property (nonatomic, readonly, getter=isReadable) BOOL readable API_AVAILABLE(macos(10.7), ios(4.3), tvos(9.0)) API_UNAVAILABLE(watchos);
-@property (nonatomic, readonly, getter=isComposable) BOOL composable API_AVAILABLE(macos(10.7), ios(4.3), tvos(9.0), watchos(1.0));
-@property (nonatomic, readonly, getter=isCompatibleWithSavedPhotosAlbum) BOOL compatibleWithSavedPhotosAlbum API_AVAILABLE(ios(5.0), tvos(9.0)) API_UNAVAILABLE(macos, watchos);
-@property (nonatomic, readonly, getter=isCompatibleWithAirPlayVideo) BOOL compatibleWithAirPlayVideo API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0)) API_UNAVAILABLE(watchos);
+@property (readonly) NSArray<NSLocale *> *availableChapterLocales API_AVAILABLE(macos(10.7), ios(4.3), tvos(9.0), watchos(1.0), visionos(1.0));
+@property (nonatomic, readonly) NSArray<AVMediaCharacteristic> *availableMediaCharacteristicsWithMediaSelectionOptions API_AVAILABLE(macos(10.8), ios(5.0), tvos(9.0), watchos(1.0), visionos(1.0));;
+@property (nonatomic, readonly) AVMediaSelection *preferredMediaSelection API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(2.0), visionos(1.0));
+@property (nonatomic, readonly) NSArray<AVMediaSelection *> *allMediaSelections API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0), visionos(1.0));
+@property (nonatomic, readonly) BOOL hasProtectedContent API_AVAILABLE(macos(10.7), ios(4.2), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(watchos);
+@property (nonatomic, readonly) BOOL canContainFragments API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(watchos);
+@property (nonatomic, readonly) BOOL containsFragments API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(watchos);
+@property (nonatomic, readonly) CMTime overallDurationHint API_AVAILABLE(macos(10.12.2), ios(10.2), tvos(10.2), watchos(3.2), visionos(1.0));
+@property (nonatomic, readonly, getter=isPlayable) BOOL playable API_AVAILABLE(macos(10.7), ios(4.3), tvos(9.0), watchos(1.0), visionos(1.0));
+@property (nonatomic, readonly, getter=isExportable) BOOL exportable API_AVAILABLE(macos(10.7), ios(4.3), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(watchos);
+@property (nonatomic, readonly, getter=isReadable) BOOL readable API_AVAILABLE(macos(10.7), ios(4.3), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(watchos);
+@property (nonatomic, readonly, getter=isComposable) BOOL composable API_AVAILABLE(macos(10.7), ios(4.3), tvos(9.0), watchos(1.0), visionos(1.0));
+@property (nonatomic, readonly, getter=isCompatibleWithSavedPhotosAlbum) BOOL compatibleWithSavedPhotosAlbum API_AVAILABLE(ios(5.0), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(macos, watchos);
+@property (nonatomic, readonly, getter=isCompatibleWithAirPlayVideo) BOOL compatibleWithAirPlayVideo API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 #endif // __swift__
 
 @end

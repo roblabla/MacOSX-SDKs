@@ -2,22 +2,23 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/UXKit.framework/Versions/A/UXKit'
-current-version: 651.0.100
+current-version: 701.0.230
 allowable-clients:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     clients:         [ Mondrian, PhotoPrintProduct, Photos, PhotosUI, PhotosUICore, 
-                       PhotosUICoreProtoApp, PhotosUIPrivate, PlacesKit ]
+                       PhotosUICoreProtoApp, PhotosUIPrivate ]
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-    symbols:         [ _NSStringFromUXCollectionViewLayoutDropPosition, _UXCollectionElementKindCell, 
-                       _UXCollectionElementKindSectionFooter, _UXCollectionElementKindSectionHeader, 
-                       _UXCollectionViewDraggingPasteboardItemType, _UXCollectionViewDraggingPasteboardOptionWasPressed, 
-                       _UXCollectionViewElementKindCell, _UXCollectionViewElementKindDecorationView, 
-                       _UXCollectionViewElementKindSectionFooter, _UXCollectionViewElementKindSectionHeader, 
-                       _UXEdgeInsetsZero, _UXFlowLayoutCommonRowHorizontalAlignmentKey, 
-                       _UXFlowLayoutLastRowHorizontalAlignmentKey, _UXFlowLayoutRowVerticalAlignmentKey, 
-                       _UXKitVersionNumber, _UXKitVersionString, _UXLocalizedString, 
-                       _UXNavigationControllerOperationToString, _UXNavigationDestinationIsEqualToDestination, 
+    symbols:         [ _NSImageDynamicRangeFromUXImageDynamicRange, _NSStringFromUXCollectionViewLayoutDropPosition, 
+                       _UXCollectionElementKindCell, _UXCollectionElementKindSectionFooter, 
+                       _UXCollectionElementKindSectionHeader, _UXCollectionViewDraggingPasteboardItemType, 
+                       _UXCollectionViewDraggingPasteboardOptionWasPressed, _UXCollectionViewElementKindCell, 
+                       _UXCollectionViewElementKindDecorationView, _UXCollectionViewElementKindSectionFooter, 
+                       _UXCollectionViewElementKindSectionHeader, _UXEdgeInsetsZero, 
+                       _UXFlowLayoutCommonRowHorizontalAlignmentKey, _UXFlowLayoutLastRowHorizontalAlignmentKey, 
+                       _UXFlowLayoutRowVerticalAlignmentKey, _UXKitVersionNumber, 
+                       _UXKitVersionString, _UXLocalizedString, _UXNavigationControllerOperationToString, 
+                       _UXNavigationDestinationIsEqualToDestination, _UXNavigationItemSubtitleKey, 
                        _UXNavigationItemTitleKey, _UXSourceControllerForceSelectionKey, 
                        _UXSourceControllerSenderIdentifierKey, _UXSourceControllerShouldForceSelectionForNavigationDestination, 
                        _UXSourceControllerSkipDestinationRemovalKey, _UXTransitionContextFromViewControllerKey, 

@@ -40,7 +40,7 @@ BROWSERENGINE_EXPORT BROWSERENGINE_TEXTINPUT_AVAILABILITY
 @property (nonatomic, readonly, getter=isKeyRepeating) BOOL keyRepeating;
 
 /**
- * Time at which the key event occured.
+ * Time at which the key event occurred.
  */
 @property (nonatomic, readonly) NSTimeInterval timestamp;
 

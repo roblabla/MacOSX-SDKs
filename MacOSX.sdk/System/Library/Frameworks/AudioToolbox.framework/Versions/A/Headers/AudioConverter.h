@@ -402,6 +402,21 @@ struct AudioConverterPrimeInfo {
 };
 typedef struct AudioConverterPrimeInfo AudioConverterPrimeInfo;
 
+/*!	@enum	AudioConverterOptions
+	@constant   kAudioConverterOption_Unbuffered
+		This is an option for AudioConverterNewWithOptions which removes unnecessary
+		buffering, both for input and internally to the converter, saving memory
+		at the cost of reduced format support and usage restrictions:
+		
+		- Input and output formats must be constant bit-rate, non-zero bytes per packet
+		  (e.g. linear PCM, a-law, etc.) with the same sample rate and frames per packet.
+		- AudioConverterFillBuffer cannot be used.
+		- AudioConverterFillComplexBuffer cannot be used.
+*/
+typedef CF_OPTIONS(UInt32, AudioConverterOptions) {
+	kAudioConverterOption_Unbuffered = (1 << 16)
+};
+
 //=============================================================================
 //  Errors
 //=============================================================================
@@ -453,6 +468,28 @@ CF_ENUM(OSStatus)
 
 //-----------------------------------------------------------------------------
 /*!
+    @function   AudioConverterPrepare
+    @abstract   Optimizes the subsequent creation of audio converters by the current process.
+    @discussion This function performs its work asynchronously.  The optional completion block,
+                if provided, is executed once preparation is complete.
+                Although a best effort is made to ensure future audio converters will be created quickly,
+                there are no guarantees.
+
+    @param      inFlags
+                    Reserved for future use.  Pass 0.
+    @param      ioReserved
+                    Reserved for future use.  Pass NULL.
+    @param      inCompletionBlock
+                    Optional block to execute once preparation is complete.  May be NULL.
+                    The block is given the OSStatus result of the preparation.
+    */
+extern void
+AudioConverterPrepare(  UInt32            inFlags,
+                        void * __nullable ioReserved,
+                        void (^__nullable inCompletionBlock)(OSStatus))         API_AVAILABLE(macos(15.0), ios(18.0), tvos(18.0), watchos(11.0), visionos(2.0));
+
+//-----------------------------------------------------------------------------
+/*!
     @function   AudioConverterNew
     @abstract   Create a new AudioConverter.
 
@@ -488,6 +525,12 @@ CF_ENUM(OSStatus)
 	supported formats. When using a codec, you can use any supported PCM format (as
 	above); the converter will perform any necessary additional conversion between
 	your PCM format and the one created or consumed by the codec.
+	
+	Note that AudioConverter may change the formats to correct any
+	inconsistent or erroneous values.  The actual formats expected and used
+	by the newly created AudioConverter can be obtained by getting the
+	properties `kAudioConverterCurrentInputStreamDescription` and
+	`kAudioConverterCurrentOutputStreamDescription` from it.
 */
 extern OSStatus
 AudioConverterNew(      const AudioStreamBasicDescription * inSourceFormat,
@@ -522,6 +565,30 @@ AudioConverterNewSpecific(  const AudioStreamBasicDescription * inSourceFormat,
                             const AudioClassDescription *       inClassDescriptions,
                             AudioConverterRef __nullable * __nonnull outAudioConverter)
                                                                                 API_AVAILABLE(macos(10.4), ios(2.0), watchos(2.0), tvos(9.0));
+
+//-----------------------------------------------------------------------------
+/*!
+    @function   AudioConverterNewWithOptions
+    @abstract   Create a new AudioConverter with one or more options enabled.
+
+    @param      inSourceFormat
+                    The format of the source audio to be converted.
+    @param      inDestinationFormat
+                    The destination format to which the audio is to be converted.
+    @param      inOptions
+                    Flags selecting one or more optional configurations for the AudioConverter.
+    @param      outAudioConverter
+                    On successful return, points to a new AudioConverter instance.
+    @result     An OSStatus result code.
+    
+	This is an alternative to AudioConverterNew which supports enabling
+	one or more optional configurations for the new AudioConverter.
+*/
+extern OSStatus
+AudioConverterNewWithOptions(const AudioStreamBasicDescription * inSourceFormat,
+                             const AudioStreamBasicDescription * inDestinationFormat,
+                             AudioConverterOptions inOptions,
+                             AudioConverterRef __nullable * __nonnull outAudioConverter)      API_AVAILABLE(macos(15.0), ios(18.0), tvos(18.0), watchos(11.0), visionos(2.0));
 
 //-----------------------------------------------------------------------------
 /*!
@@ -679,6 +746,7 @@ AudioConverterConvertBuffer(    AudioConverterRef               inAudioConverter
 	The callback may return one or more packets. If this is less than the minimum,
 	the callback will simply be called again in the near future. Note that ioNumberDataPackets counts
 	packets in terms of the converter's input format (not its output format).
+	Also note that the callback must provide a whole number of packets.
 
 	The callback may be asked to provide multiple input packets in a single call, even for compressed
 	formats.  The callback must update the number of packets pointed to by ioNumberDataPackets

@@ -67,53 +67,53 @@ typedef CF_OPTIONS(uint32_t, CGPDFAccessPermissions) {
 /* Key:   kCGPDFOutlineTitle */
 /* Value: CFString */
 CG_EXTERN const CFStringRef kCGPDFOutlineTitle
-    CG_AVAILABLE_STARTING(10.13, 11.0);
+    API_AVAILABLE(macos(10.13), ios(11.0));
 
 /* Key:   kCGPDFOutlineChildren */
 /* Value: CFArray of CFDictionaries */
 CG_EXTERN const CFStringRef kCGPDFOutlineChildren
-    CG_AVAILABLE_STARTING(10.13, 11.0);
+    API_AVAILABLE(macos(10.13), ios(11.0));
 
 /* Key:   kCGPDFOutlineDestination */
 /* Value: CFNumber (for a one-indexed page number) or CFURL */
 CG_EXTERN const CFStringRef kCGPDFOutlineDestination
-    CG_AVAILABLE_STARTING(10.13, 11.0);
+    API_AVAILABLE(macos(10.13), ios(11.0));
 
 /* Key:   kCGPDFOutlineDestinationRect */
 /* Value: CFDictionary from CGRectCreateDictionaryRepresentation. Only valid when the destination is a page number. */
 CG_EXTERN const CFStringRef kCGPDFOutlineDestinationRect
-    CG_AVAILABLE_STARTING(10.13, 11.0);
+    API_AVAILABLE(macos(10.13), ios(11.0));
 
 /* Create a PDF document, using `provider' to obtain the document's data. */
 
 CG_EXTERN CGPDFDocumentRef __nullable CGPDFDocumentCreateWithProvider(
     CGDataProviderRef cg_nullable provider)
-    CG_AVAILABLE_STARTING(10.0, 2.0);
+    API_AVAILABLE(macos(10.0), ios(2.0));
 
 /* Create a PDF document from `url'. */
 
 CG_EXTERN CGPDFDocumentRef __nullable CGPDFDocumentCreateWithURL(
     CFURLRef cg_nullable url)
-    CG_AVAILABLE_STARTING(10.0, 2.0);
+    API_AVAILABLE(macos(10.0), ios(2.0));
 
 /* Equivalent to `CFRetain(document)', except it doesn't crash (as CFRetain
    does) if `document' is NULL. */
 
 CG_EXTERN CGPDFDocumentRef cg_nullable CGPDFDocumentRetain(
     CGPDFDocumentRef cg_nullable document)
-    CG_AVAILABLE_STARTING(10.0, 2.0);
+    API_AVAILABLE(macos(10.0), ios(2.0));
 
 /* Equivalent to `CFRelease(document)', except it doesn't crash (as
    CFRelease does) if `document' is NULL. */
 
 CG_EXTERN void CGPDFDocumentRelease(CGPDFDocumentRef cg_nullable document)
-    CG_AVAILABLE_STARTING(10.0, 2.0);
+    API_AVAILABLE(macos(10.0), ios(2.0));
 
 /* Return the major and minor version numbers of `document'. */
 
 CG_EXTERN void CGPDFDocumentGetVersion(CGPDFDocumentRef cg_nullable document,
   int *  majorVersion, int *  minorVersion)
-    CG_AVAILABLE_STARTING(10.3, 2.0);
+    API_AVAILABLE(macos(10.3), ios(2.0));
 
 /* Return true if the PDF file associated with `document' is encrypted;
    false otherwise. If the PDF file is encrypted, then a password must be
@@ -121,7 +121,7 @@ CG_EXTERN void CGPDFDocumentGetVersion(CGPDFDocumentRef cg_nullable document,
    enable different operations. */
 
 CG_EXTERN bool CGPDFDocumentIsEncrypted(CGPDFDocumentRef cg_nullable document)
-    CG_AVAILABLE_STARTING(10.2, 2.0);
+    API_AVAILABLE(macos(10.2), ios(2.0));
 
 /* Use `password' to decrypt `document' and grant permission for certain
    operations. Returns true if `password' is a valid password; false
@@ -129,14 +129,14 @@ CG_EXTERN bool CGPDFDocumentIsEncrypted(CGPDFDocumentRef cg_nullable document)
 
 CG_EXTERN bool CGPDFDocumentUnlockWithPassword(
     CGPDFDocumentRef cg_nullable document, const char *  password)
-    CG_AVAILABLE_STARTING(10.2, 2.0);
+    API_AVAILABLE(macos(10.2), ios(2.0));
 
 /* Return true if `document' is unlocked; false otherwise. A document is
    unlocked if it isn't encrypted, or if it is encrypted and a valid
    password was specified with `CGPDFDocumentUnlockWithPassword'. */
 
 CG_EXTERN bool CGPDFDocumentIsUnlocked(CGPDFDocumentRef cg_nullable document)
-    CG_AVAILABLE_STARTING(10.2, 2.0);
+    API_AVAILABLE(macos(10.2), ios(2.0));
 
 /* Return true if `document' allows printing; false otherwise. Typically,
    this function returns false only if the document is encrypted and the
@@ -144,7 +144,7 @@ CG_EXTERN bool CGPDFDocumentIsUnlocked(CGPDFDocumentRef cg_nullable document)
    printing. */
 
 CG_EXTERN bool CGPDFDocumentAllowsPrinting(CGPDFDocumentRef cg_nullable document)
-    CG_AVAILABLE_STARTING(10.2, 2.0);
+    API_AVAILABLE(macos(10.2), ios(2.0));
 
 /* Return true if `document' allows copying; false otherwise. Typically,
    this function returns false only if the document is encrypted and the
@@ -152,53 +152,53 @@ CG_EXTERN bool CGPDFDocumentAllowsPrinting(CGPDFDocumentRef cg_nullable document
    copying. */
 
 CG_EXTERN bool CGPDFDocumentAllowsCopying(CGPDFDocumentRef cg_nullable document)
-    CG_AVAILABLE_STARTING(10.2, 2.0);
+    API_AVAILABLE(macos(10.2), ios(2.0));
 
 /* Return the number of pages in `document'. */
 
 CG_EXTERN size_t CGPDFDocumentGetNumberOfPages(
     CGPDFDocumentRef cg_nullable document)
-    CG_AVAILABLE_STARTING(10.0, 2.0);
+    API_AVAILABLE(macos(10.0), ios(2.0));
 
 /* Return the page corresponding to `pageNumber', or NULL if no such page
    exists in the document. Pages are numbered starting at 1. */
 
 CG_EXTERN CGPDFPageRef __nullable CGPDFDocumentGetPage(
     CGPDFDocumentRef cg_nullable document, size_t pageNumber)
-    CG_AVAILABLE_STARTING(10.3, 2.0);
+    API_AVAILABLE(macos(10.3), ios(2.0));
 
 /* Return the document catalog of `document'. */
 
 CG_EXTERN CGPDFDictionaryRef __nullable CGPDFDocumentGetCatalog(
     CGPDFDocumentRef cg_nullable document)
-    CG_AVAILABLE_STARTING(10.3, 2.0);
+    API_AVAILABLE(macos(10.3), ios(2.0));
 
 /* Return the info dictionary of `document'. */
 
 CG_EXTERN CGPDFDictionaryRef __nullable CGPDFDocumentGetInfo(
     CGPDFDocumentRef cg_nullable document)
-    CG_AVAILABLE_STARTING(10.4, 2.0);
+    API_AVAILABLE(macos(10.4), ios(2.0));
 
 /* Return the "file identifier" array of `document'. */
 
 CG_EXTERN CGPDFArrayRef __nullable CGPDFDocumentGetID(
     CGPDFDocumentRef cg_nullable document)
-    CG_AVAILABLE_STARTING(10.4, 2.0);
+    API_AVAILABLE(macos(10.4), ios(2.0));
 
 /* Return the CFTypeID for CGPDFDocumentRefs. */
 
 CG_EXTERN CFTypeID CGPDFDocumentGetTypeID(void)
-    CG_AVAILABLE_STARTING(10.2, 2.0);
+    API_AVAILABLE(macos(10.2), ios(2.0));
 
 /* Return the document outline in the form of a CFDictionary tree containing the kCGPDFOutline keys. */
 
 CG_EXTERN __nullable CFDictionaryRef CGPDFDocumentGetOutline(CGPDFDocumentRef document)
-    CG_AVAILABLE_STARTING(10.13, 11.0);
+    API_AVAILABLE(macos(10.13), ios(11.0));
 
 /* Return the document access permissions. */
 
 CG_EXTERN CGPDFAccessPermissions CGPDFDocumentGetAccessPermissions(CGPDFDocumentRef document)
-    CG_AVAILABLE_STARTING(10.13, 11.0);
+    API_AVAILABLE(macos(10.13), ios(11.0));
 
 /* The following functions are deprecated in favor of the CGPDFPage API. */
 
@@ -207,7 +207,7 @@ CG_EXTERN CGPDFAccessPermissions CGPDFDocumentGetAccessPermissions(CGPDFDocument
 
 CG_EXTERN CGRect CGPDFDocumentGetMediaBox(CGPDFDocumentRef cg_nullable document,
     int page)
-    CG_AVAILABLE_BUT_DEPRECATED(10.0, 10.5) CG_UNAVAILABLE_EMBEDDED;
+    API_DEPRECATED("No longer supported", macos(10.0,10.5)) API_UNAVAILABLE(ios, tvos, watchos);
 
 /* DEPRECATED; return the crop box of page number `page' in `document'.
    CGRectNull is returned if cannot find `page' in `document'. */
@@ -215,35 +215,35 @@ CG_EXTERN CGRect CGPDFDocumentGetMediaBox(CGPDFDocumentRef cg_nullable document,
 
 CG_EXTERN CGRect CGPDFDocumentGetCropBox(CGPDFDocumentRef cg_nullable document,
     int page)
-    CG_AVAILABLE_BUT_DEPRECATED(10.0, 10.5) CG_UNAVAILABLE_EMBEDDED;
+    API_DEPRECATED("No longer supported", macos(10.0,10.5)) API_UNAVAILABLE(ios, tvos, watchos);
 
 /* DEPRECATED; return the bleed box of page number `page' in `document'.
    CGRectNull is returned if cannot find `page' in `document'. */
 
 CG_EXTERN CGRect CGPDFDocumentGetBleedBox(CGPDFDocumentRef cg_nullable document,
     int page)
-    CG_AVAILABLE_BUT_DEPRECATED(10.0, 10.5) CG_UNAVAILABLE_EMBEDDED;
+    API_DEPRECATED("No longer supported", macos(10.0,10.5)) API_UNAVAILABLE(ios, tvos, watchos);
 
 /* DEPRECATED; return the trim box of page number `page' in `document'.
    CGRectNull is returned if cannot find `page' in `document'. */
 
 CG_EXTERN CGRect CGPDFDocumentGetTrimBox(CGPDFDocumentRef cg_nullable document,
     int page)
-    CG_AVAILABLE_BUT_DEPRECATED(10.0, 10.5) CG_UNAVAILABLE_EMBEDDED;
+    API_DEPRECATED("No longer supported", macos(10.0,10.5)) API_UNAVAILABLE(ios, tvos, watchos);
 
 /* DEPRECATED; return the art box of page number `page' in `document'.
   CGRectNull is returned if cannot find `page' in `document'. */
 
 CG_EXTERN CGRect CGPDFDocumentGetArtBox(CGPDFDocumentRef cg_nullable document,
     int page)
-    CG_AVAILABLE_BUT_DEPRECATED(10.0, 10.5) CG_UNAVAILABLE_EMBEDDED;
+    API_DEPRECATED("No longer supported", macos(10.0,10.5)) API_UNAVAILABLE(ios, tvos, watchos);
 
 /* DEPRECATED; return the rotation angle (in degrees) of page number `page'
    in `document'. 0 if if cannot find `page' in `document'.*/
 
 CG_EXTERN int CGPDFDocumentGetRotationAngle(CGPDFDocumentRef cg_nullable document,
     int page)
-    CG_AVAILABLE_BUT_DEPRECATED(10.0, 10.5) CG_UNAVAILABLE_EMBEDDED;
+    API_DEPRECATED("No longer supported", macos(10.0,10.5)) API_UNAVAILABLE(ios, tvos, watchos);
 
 CF_ASSUME_NONNULL_END
 

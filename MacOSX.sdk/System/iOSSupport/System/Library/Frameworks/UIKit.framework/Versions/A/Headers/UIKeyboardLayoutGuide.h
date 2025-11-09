@@ -11,7 +11,7 @@
 
 NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
-UIKIT_EXTERN API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(watchos, tvos) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @interface UIKeyboardLayoutGuide : UITrackingLayoutGuide
 
 /**
@@ -28,10 +28,10 @@ UIKIT_EXTERN API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(watchos, tvos) NS_SWIFT_UI
 @property (nonatomic, readwrite) BOOL followsUndockedKeyboard;
 
 /// Defaults to @c YES. When the keyboard is offscreen, the layout guide is tied to the bottomAnchor of the view's safeAreaLayoutGuide. Set this to @c NO to instead have the guide use the bottomAnchor of the view.
-@property (nonatomic, readwrite) BOOL usesBottomSafeArea API_AVAILABLE(ios(17.0)) API_UNAVAILABLE(watchos, tvos);
+@property (nonatomic, readwrite) BOOL usesBottomSafeArea API_AVAILABLE(ios(17.0));
 
 /// Defaults to 0.0. When a user scrolls to dismiss the keyboard (see @c UIScrollViewKeyboardDismissMode), the gesture waits to start the dismiss until it intersects with the keyboard. This adds padding above the keyboard to start the dismiss earlier. Negative values will be treated as 0.
-@property (nonatomic, readwrite) CGFloat keyboardDismissPadding API_AVAILABLE(ios(17.0)) API_UNAVAILABLE(watchos, tvos);
+@property (nonatomic, readwrite) CGFloat keyboardDismissPadding API_AVAILABLE(ios(17.0));
 
 @end
 

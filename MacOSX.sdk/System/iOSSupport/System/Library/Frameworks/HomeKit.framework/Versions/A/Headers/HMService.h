@@ -20,8 +20,11 @@ NS_HEADER_AUDIT_BEGIN(nullability, sendability)
  *             A service is composed of one or more characteristics that can be 
  *             modified.
  */
-HM_EXTERN NS_SWIFT_SENDABLE API_AVAILABLE(ios(8.0), watchos(2.0), tvos(10.0), macCatalyst(14.0)) API_UNAVAILABLE(macos)
-    @interface HMService : NSObject
+HM_EXTERN
+NS_SWIFT_SENDABLE
+API_AVAILABLE(ios(8.0), watchos(2.0), tvos(10.0), macCatalyst(14.0))
+API_UNAVAILABLE(macos)
+@interface HMService : NSObject
 
 /*!
  * @brief Accessory that provides this service.
@@ -89,6 +92,13 @@ HM_EXTERN NS_SWIFT_SENDABLE API_AVAILABLE(ios(8.0), watchos(2.0), tvos(10.0), ma
 @property (readonly, copy, nonatomic) NSArray<HMService *> *__nullable linkedServices API_AVAILABLE(ios(10.0), watchos(3.0), tvos(10.0));
 
 /*!
+ * @brief The Matter endpoint identifier that this service is mapped to.
+ *
+ * @discussion This property is nil for HAP accessories, and set to a valid value for Matter devices.
+ */
+@property (nullable, readonly, copy, nonatomic) NSNumber *matterEndpointID NS_REFINED_FOR_SWIFT API_AVAILABLE(ios(18.0), watchos(11.0), tvos(18.0), macCatalyst(18.0)) API_UNAVAILABLE(macos);
+
+/*!
  * @brief This method is used to change the name of the service.
  *
  * @param name New name for the service.
@@ -121,6 +131,8 @@ HM_EXTERN NS_SWIFT_SENDABLE API_AVAILABLE(ios(8.0), watchos(2.0), tvos(10.0), ma
  *                   will be nil on success.
  */
 - (void)updateAssociatedServiceType:(nullable NSString *)serviceType completionHandler:(void (^)(NSError *__nullable error))completion API_UNAVAILABLE(watchos, tvos);
+
+- (instancetype)init API_DEPRECATED("HMService objects are created by their parent container objects. Directly creating them is not supported.", ios(8.0, 8.0), watchos(2.0, 2.0), tvos(10.0, 10.0), macCatalyst(14.0, 14.0));
 
 @end
 

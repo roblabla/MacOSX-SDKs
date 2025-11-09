@@ -4,7 +4,7 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2010-2021 Apple Inc. All rights reserved.
+	Copyright 2010-2023 Apple Inc. All rights reserved.
 
 */
 
@@ -39,7 +39,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 	As of macOS 10.10 and iOS 8.0 AVAssetWriterInput can also be used to create tracks that are not self-contained.  Such tracks reference sample data that is located in another file. This is currently supported only for instances of AVAssetWriterInput attached to an instance of AVAssetWriter that writes files of type AVFileTypeQuickTimeMovie.
  */
-API_AVAILABLE(macos(10.7), ios(4.1), tvos(9.0)) API_UNAVAILABLE(watchos)
+API_AVAILABLE(macos(10.7), ios(4.1), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(watchos)
 @interface AVAssetWriterInput : NSObject
 {
 @private
@@ -95,7 +95,7 @@ AV_INIT_UNAVAILABLE
 		- the output scaling mode is AVVideoScalingModeFit
 		- the output settings contain AVSampleRateConverterAudioQualityKey or AVVideoDecompressionPropertiesKey
  */
-+ (instancetype)assetWriterInputWithMediaType:(AVMediaType)mediaType outputSettings:(nullable NSDictionary<NSString *, id> *)outputSettings sourceFormatHint:(nullable CMFormatDescriptionRef)sourceFormatHint API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0)) API_UNAVAILABLE(watchos);
++ (instancetype)assetWriterInputWithMediaType:(AVMediaType)mediaType outputSettings:(nullable NSDictionary<NSString *, id> *)outputSettings sourceFormatHint:(nullable CMFormatDescriptionRef)sourceFormatHint API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 /*!
  @method initWithMediaType:outputSettings:
@@ -152,7 +152,7 @@ AV_INIT_UNAVAILABLE
 		- the output scaling mode is AVVideoScalingModeFit
 		- the output settings contain AVSampleRateConverterAudioQualityKey or AVVideoDecompressionPropertiesKey
  */
-- (instancetype)initWithMediaType:(AVMediaType)mediaType outputSettings:(nullable NSDictionary<NSString *, id> *)outputSettings sourceFormatHint:(nullable CMFormatDescriptionRef)sourceFormatHint API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0)) API_UNAVAILABLE(watchos) NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithMediaType:(AVMediaType)mediaType outputSettings:(nullable NSDictionary<NSString *, id> *)outputSettings sourceFormatHint:(nullable CMFormatDescriptionRef)sourceFormatHint API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(watchos) NS_DESIGNATED_INITIALIZER;
 
 /*!
  @property mediaType
@@ -182,7 +182,7 @@ AV_INIT_UNAVAILABLE
  @discussion
 	AVAssetWriterInput may be able to use this hint to fill in missing output settings or perform more upfront validation.  To guarantee successful file writing, clients who specify a format hint should ensure that subsequently-appended media data are of the specified format.
  */
-@property (nonatomic, readonly, nullable) __attribute__((NSObject)) CMFormatDescriptionRef sourceFormatHint API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0)) API_UNAVAILABLE(watchos);
+@property (nonatomic, readonly, nullable) __attribute__((NSObject)) CMFormatDescriptionRef sourceFormatHint API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 /*!
  @property metadata
@@ -330,7 +330,7 @@ AV_INIT_UNAVAILABLE
 
 @end
 
-API_AVAILABLE(macos(10.7), ios(4.1), tvos(9.0)) API_UNAVAILABLE(watchos)
+API_AVAILABLE(macos(10.7), ios(4.1), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(watchos)
 @interface AVAssetWriterInput (AVAssetWriterInputLanguageProperties)
 
 /*!
@@ -345,7 +345,7 @@ API_AVAILABLE(macos(10.7), ios(4.1), tvos(9.0)) API_UNAVAILABLE(watchos)
  
 	This property throws an exception if a language code is set which does not conform to the ISO 639-2/T language codes.
  */
-@property (nonatomic, copy, nullable) NSString *languageCode API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0)) API_UNAVAILABLE(watchos);
+@property (nonatomic, copy, nullable) NSString *languageCode API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 /*!
  @property extendedLanguageTag
@@ -359,11 +359,11 @@ API_AVAILABLE(macos(10.7), ios(4.1), tvos(9.0)) API_UNAVAILABLE(watchos)
  
 	This property throws an exception if an extended language tag is set which does not conform to the IETF BCP 47 (RFC 4646) language identifiers.
  */
-@property (nonatomic, copy, nullable) NSString *extendedLanguageTag API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0)) API_UNAVAILABLE(watchos);
+@property (nonatomic, copy, nullable) NSString *extendedLanguageTag API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 @end
 
-API_AVAILABLE(macos(10.7), ios(4.1), tvos(9.0)) API_UNAVAILABLE(watchos)
+API_AVAILABLE(macos(10.7), ios(4.1), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(watchos)
 @interface AVAssetWriterInput (AVAssetWriterInputPropertiesForVisualCharacteristic)
 
 /*!
@@ -376,7 +376,7 @@ API_AVAILABLE(macos(10.7), ios(4.1), tvos(9.0)) API_UNAVAILABLE(watchos)
 
 	This property cannot be set after writing on the receiver's AVAssetWriter has started.
 */
-@property (nonatomic) CGSize naturalSize API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0)) API_UNAVAILABLE(watchos);
+@property (nonatomic) CGSize naturalSize API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 /*!
  @property transform
@@ -392,7 +392,7 @@ API_AVAILABLE(macos(10.7), ios(4.1), tvos(9.0)) API_UNAVAILABLE(watchos)
 
 @end
 
-API_AVAILABLE(macos(10.7), ios(4.1), tvos(9.0)) API_UNAVAILABLE(watchos)
+API_AVAILABLE(macos(10.7), ios(4.1), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(watchos)
 @interface AVAssetWriterInput (AVAssetWriterInputPropertiesForAudibleCharacteristic)
 
 /*!
@@ -405,11 +405,11 @@ API_AVAILABLE(macos(10.7), ios(4.1), tvos(9.0)) API_UNAVAILABLE(watchos)
  
 	This property cannot be set after writing on the receiver's AVAssetWriter has started.
  */
-@property (nonatomic) float preferredVolume API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0)) API_UNAVAILABLE(watchos);
+@property (nonatomic) float preferredVolume API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 @end
 
-API_AVAILABLE(macos(10.7), ios(4.1), tvos(9.0)) API_UNAVAILABLE(watchos)
+API_AVAILABLE(macos(10.7), ios(4.1), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(watchos)
 @interface AVAssetWriterInput (AVAssetWriterInputFileTypeSpecificProperties)
 
 /*!
@@ -424,7 +424,7 @@ API_AVAILABLE(macos(10.7), ios(4.1), tvos(9.0)) API_UNAVAILABLE(watchos)
  
 	This property throws an exception if a value is set on an asset writer input that is contained in an input group.
  */
-@property (nonatomic) BOOL marksOutputTrackAsEnabled API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0)) API_UNAVAILABLE(watchos);
+@property (nonatomic) BOOL marksOutputTrackAsEnabled API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 /*!
  @property mediaTimeScale
@@ -438,7 +438,7 @@ API_AVAILABLE(macos(10.7), ios(4.1), tvos(9.0)) API_UNAVAILABLE(watchos)
  
 	This property throws an exception if a value is set on an asset writer input with media type AVMediaTypeAudio.
  */
-@property (nonatomic) CMTimeScale mediaTimeScale API_AVAILABLE(macos(10.7), ios(4.3), tvos(9.0)) API_UNAVAILABLE(watchos);
+@property (nonatomic) CMTimeScale mediaTimeScale API_AVAILABLE(macos(10.7), ios(4.3), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 /*!
  @property preferredMediaChunkDuration
@@ -456,7 +456,7 @@ API_AVAILABLE(macos(10.7), ios(4.1), tvos(9.0)) API_UNAVAILABLE(watchos)
  
 	This property throws an exception if a duration is set which is non-numeric or non-positive (see CMTIME_IS_NUMERIC).
  */
-@property (nonatomic) CMTime preferredMediaChunkDuration API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0)) API_UNAVAILABLE(watchos);
+@property (nonatomic) CMTime preferredMediaChunkDuration API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 /*!
  @property preferredMediaChunkAlignment
@@ -468,7 +468,7 @@ API_AVAILABLE(macos(10.7), ios(4.1), tvos(9.0)) API_UNAVAILABLE(watchos)
  
 	This property cannot be set after -startWriting has been called on the receiver.
  */
-@property (nonatomic) NSInteger preferredMediaChunkAlignment API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0)) API_UNAVAILABLE(watchos);
+@property (nonatomic) NSInteger preferredMediaChunkAlignment API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 /*!
  @property sampleReferenceBaseURL
@@ -488,21 +488,21 @@ API_AVAILABLE(macos(10.7), ios(4.1), tvos(9.0)) API_UNAVAILABLE(watchos)
  
 	This property cannot be set after -startWriting has been called on the receiver.
  */
-@property (nonatomic, copy, nullable) NSURL *sampleReferenceBaseURL API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0)) API_UNAVAILABLE(watchos);
+@property (nonatomic, copy, nullable) NSURL *sampleReferenceBaseURL API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 
-typedef NSString *AVAssetWriterInputMediaDataLocation NS_STRING_ENUM API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0)) API_UNAVAILABLE(watchos);
+typedef NSString *AVAssetWriterInputMediaDataLocation NS_STRING_ENUM API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 /*!
  @constant AVAssetWriterInputMediaDataLocationInterleavedWithMainMediaData
 	Indicates that the media data should be interleaved with all other media data with this constant.
  */
-AVF_EXPORT AVAssetWriterInputMediaDataLocation const AVAssetWriterInputMediaDataLocationInterleavedWithMainMediaData API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0)) API_UNAVAILABLE(watchos);
+AVF_EXPORT AVAssetWriterInputMediaDataLocation const AVAssetWriterInputMediaDataLocationInterleavedWithMainMediaData API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 /*!
  @constant AVAssetWriterInputMediaDataLocationBeforeMainMediaDataNotInterleaved
 	Indicates that the media data should be laid out before all the media data with AVAssetWriterInputMediaDataLocationInterleavedWithMainMediaData and not be interleaved.
  */
-AVF_EXPORT AVAssetWriterInputMediaDataLocation const AVAssetWriterInputMediaDataLocationBeforeMainMediaDataNotInterleaved API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0)) API_UNAVAILABLE(watchos);
+AVF_EXPORT AVAssetWriterInputMediaDataLocation const AVAssetWriterInputMediaDataLocationBeforeMainMediaDataNotInterleaved API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 /*!
  @property mediaDataLocation
@@ -521,11 +521,11 @@ AVF_EXPORT AVAssetWriterInputMediaDataLocation const AVAssetWriterInputMediaData
 
 	This property cannot be set after -startWriting has been called on the receiver.
  */
-@property (nonatomic, copy) AVAssetWriterInputMediaDataLocation mediaDataLocation API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0)) API_UNAVAILABLE(watchos);
+@property (nonatomic, copy) AVAssetWriterInputMediaDataLocation mediaDataLocation API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 @end
 
-API_AVAILABLE(macos(10.7), ios(4.1), tvos(9.0)) API_UNAVAILABLE(watchos)
+API_AVAILABLE(macos(10.7), ios(4.1), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(watchos)
 @interface AVAssetWriterInput (AVAssetWriterInputTrackAssociations)
 
 /*!
@@ -541,7 +541,7 @@ API_AVAILABLE(macos(10.7), ios(4.1), tvos(9.0)) API_UNAVAILABLE(watchos)
  @discussion
 	If the type of association requires tracks of specific media types that don't match the media types of the inputs, or if the output file type does not support track associations, -canAddTrackAssociationWithTrackOfInput:type: will return NO.
  */
-- (BOOL)canAddTrackAssociationWithTrackOfInput:(AVAssetWriterInput *)input type:(NSString *)trackAssociationType API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0)) API_UNAVAILABLE(watchos);
+- (BOOL)canAddTrackAssociationWithTrackOfInput:(AVAssetWriterInput *)input type:(NSString *)trackAssociationType API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 /*!
  @method addTrackAssociationWithTrackOfInput:type:
@@ -560,14 +560,14 @@ API_AVAILABLE(macos(10.7), ios(4.1), tvos(9.0)) API_UNAVAILABLE(watchos)
  
 	This method throws an exception if the input and track association type cannot be added (see -canAddTrackAssociationWithTrackOfInput:type:).
  */
-- (void)addTrackAssociationWithTrackOfInput:(AVAssetWriterInput *)input type:(NSString *)trackAssociationType API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0)) API_UNAVAILABLE(watchos);
+- (void)addTrackAssociationWithTrackOfInput:(AVAssetWriterInput *)input type:(NSString *)trackAssociationType API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 @end
 
 
 @class AVAssetWriterInputPassDescription;
 
-API_AVAILABLE(macos(10.7), ios(4.1), tvos(9.0)) API_UNAVAILABLE(watchos)
+API_AVAILABLE(macos(10.7), ios(4.1), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(watchos)
 @interface AVAssetWriterInput (AVAssetWriterInputMultiPass)
 
 /*!
@@ -588,7 +588,7 @@ API_AVAILABLE(macos(10.7), ios(4.1), tvos(9.0)) API_UNAVAILABLE(watchos)
 
 	This property cannot be set after writing on the receiver's AVAssetWriter has started.
  */
-@property (nonatomic) BOOL performsMultiPassEncodingIfSupported API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0)) API_UNAVAILABLE(watchos);
+@property (nonatomic) BOOL performsMultiPassEncodingIfSupported API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 /*!
  @property canPerformMultiplePasses
@@ -604,7 +604,7 @@ API_AVAILABLE(macos(10.7), ios(4.1), tvos(9.0)) API_UNAVAILABLE(watchos)
  
 	This property is key-value observable.
  */
-@property (nonatomic, readonly) BOOL canPerformMultiplePasses API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0)) API_UNAVAILABLE(watchos);
+@property (nonatomic, readonly) BOOL canPerformMultiplePasses API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 /*!
  @property currentPassDescription
@@ -620,7 +620,7 @@ API_AVAILABLE(macos(10.7), ios(4.1), tvos(9.0)) API_UNAVAILABLE(watchos)
  
 	This property is key-value observable.  Observers should not assume that they will be notified of changes on a specific thread.
  */
-@property (readonly, nullable) AVAssetWriterInputPassDescription *currentPassDescription API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0)) API_UNAVAILABLE(watchos);
+@property (readonly, nullable) AVAssetWriterInputPassDescription *currentPassDescription API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 /*!
  @method respondToEachPassDescriptionOnQueue:usingBlock:
@@ -645,7 +645,7 @@ API_AVAILABLE(macos(10.7), ios(4.1), tvos(9.0)) API_UNAVAILABLE(watchos)
  
 	This method throws an exception if called more than once.
  */
-- (void)respondToEachPassDescriptionOnQueue:(dispatch_queue_t)queue usingBlock:(dispatch_block_t NS_SWIFT_SENDABLE)block API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0)) API_UNAVAILABLE(watchos);
+- (void)respondToEachPassDescriptionOnQueue:(dispatch_queue_t)queue usingBlock:(dispatch_block_t NS_SWIFT_SENDABLE)block API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 /*!
  @method markCurrentPassAsFinished
@@ -665,7 +665,7 @@ API_AVAILABLE(macos(10.7), ios(4.1), tvos(9.0)) API_UNAVAILABLE(watchos)
 
 	Before calling this method, you must ensure that the receiver is attached to an AVAssetWriter via a prior call to -addInput: and that -startWriting has been called on the asset writer.
  */
-- (void)markCurrentPassAsFinished API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0)) API_UNAVAILABLE(watchos);
+- (void)markCurrentPassAsFinished API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 @end
 
@@ -680,7 +680,7 @@ API_AVAILABLE(macos(10.7), ios(4.1), tvos(9.0)) API_UNAVAILABLE(watchos)
 	Subclasses of this type that are used from Swift must fulfill the requirements of a Sendable type.
  */
 NS_SWIFT_SENDABLE
-API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0)) API_UNAVAILABLE(watchos)
+API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(watchos)
 @interface AVAssetWriterInputPassDescription : NSObject
 {
 @private
@@ -711,7 +711,7 @@ AV_INIT_UNAVAILABLE
  @discussion
 	Instances of AVAssetWriterInputPixelBufferAdaptor provide a CVPixelBufferPool that can be used to allocate pixel buffers for writing to the output file.  Using the provided pixel buffer pool for buffer allocation is typically more efficient than appending pixel buffers allocated using a separate pool.
  */
-API_AVAILABLE(macos(10.7), ios(4.1), tvos(9.0)) API_UNAVAILABLE(watchos)
+API_AVAILABLE(macos(10.7), ios(4.1), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(watchos)
 @interface AVAssetWriterInputPixelBufferAdaptor : NSObject
 {
 @private
@@ -839,7 +839,7 @@ AV_INIT_UNAVAILABLE
  @discussion
 	Instances of AVAssetWriterInputTaggedPixelBufferGroupAdaptor provide a CVPixelBufferPool that can be used to allocate the pixel buffers of tagged buffer groups for writing to the output file. Using the provided pixel buffer pool for buffer allocation is typically more efficient than appending pixel buffers allocated using a separate pool.
  */
-API_AVAILABLE(macos(14.0), ios(17.0)) API_UNAVAILABLE(tvos, watchos)
+API_AVAILABLE(macos(14.0), ios(17.0), visionos(1.0)) API_UNAVAILABLE(tvos, watchos)
 @interface AVAssetWriterInputTaggedPixelBufferGroupAdaptor : NSObject
 AV_INIT_UNAVAILABLE
 
@@ -973,7 +973,7 @@ AV_INIT_UNAVAILABLE
 	Defines an interface for writing metadata, packaged as instances of AVTimedMetadataGroup, to a single AVAssetWriterInput object.
  */
 
-API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0)) API_UNAVAILABLE(watchos)
+API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(watchos)
 @interface AVAssetWriterInputMetadataAdaptor : NSObject {
     AVAssetWriterInputMetadataAdaptorInternal	*_internal;
 }
@@ -1056,7 +1056,7 @@ AV_INIT_UNAVAILABLE
 	@abstract
 		An adaptor class for appending instances of AVCaption to an asset writer input. -[AVAssetWriterInput -appendSampleBuffer:] will throw an exception if used when this adaptor is attached.
  */
-API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, tvos, watchos)
+API_AVAILABLE(macos(12.0), ios(18.0), macCatalyst(15.0)) API_UNAVAILABLE(tvos, watchos, visionos)
 @interface AVAssetWriterInputCaptionAdaptor : NSObject
 {
 @private

@@ -3,7 +3,7 @@
  
      Contains:   Pasteboard Manager Interfaces.
  
-     Copyright:  � 2003-2012 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 2003-2012 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:

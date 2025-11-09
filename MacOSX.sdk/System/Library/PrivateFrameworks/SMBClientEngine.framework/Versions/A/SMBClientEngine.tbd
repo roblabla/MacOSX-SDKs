@@ -90,6 +90,6 @@ exports:
                        SMBSocket.ipv4v6DotName, SMBSocket.is_NetBIOS, SMBSocket.nw_conn_queue, 
                        SMBSocket.nw_conn_state, SMBSocket.pd, SMBSocket.remote_endpoint, 
                        SMBSocket.send_queue, SMBSocket.server_addr, SMBSocket.skt_lock, 
-                       SMBSocket.state, SMBSocket.timer, SMBSocket.timer_queue, SMBSocket.timer_running, 
-                       SMBSocket.timer_semaphore ]
+                       SMBSocket.skt_lock_cond, SMBSocket.state, SMBSocket.timer, 
+                       SMBSocket.timer_queue, SMBSocket.timer_running, SMBSocket.timer_semaphore ]
 ...

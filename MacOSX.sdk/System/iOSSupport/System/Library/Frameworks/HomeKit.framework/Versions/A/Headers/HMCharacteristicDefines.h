@@ -8,6 +8,8 @@
 
 #import <HomeKit/HMDefines.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /*!
  @enum      HMCharacteristicValueLockMechanismLastKnownAction
 
@@ -325,6 +327,32 @@ typedef NS_ENUM(NSInteger, HMCharacteristicValueValveType) {
     HMCharacteristicValueValveTypeWaterFaucet,
 } API_AVAILABLE(ios(11.2), watchos(4.2), tvos(11.2), macCatalyst(14.0)) API_UNAVAILABLE(macos);
 
+/*!
+ @enum      HMCharacteristicValueVolumeControlType
+
+ @constant  HMCharacteristicValueVolumeControlTypeNone                 Volume cannot be controlled.
+ @constant  HMCharacteristicValueVolumeControlTypeRelative             Relative control (changed by one step at a time).
+ @constant  HMCharacteristicValueVolumeControlTypeRelativeWithCurrent  Relative control (changed by one step at a time), but has a current value.
+ @constant  HMCharacteristicValueVolumeControlTypeAbsolute             Absolute control (can be directly set to a specific value).
+ */
+typedef NS_ENUM(NSInteger, HMCharacteristicValueVolumeControlType) {
+    HMCharacteristicValueVolumeControlTypeNone = 0,
+    HMCharacteristicValueVolumeControlTypeRelative,
+    HMCharacteristicValueVolumeControlTypeRelativeWithCurrent,
+    HMCharacteristicValueVolumeControlTypeAbsolute,
+} API_AVAILABLE(ios(18.0), watchos(11.0), tvos(18.0), visionos(2.0)) API_UNAVAILABLE(macos);
+
+/*!
+ @enum      HMCharacteristicValueVolumeSelector
+
+ @constant  HMCharacteristicValueVolumeSelectorVolumeIncrement     Increment the volume.
+ @constant  HMCharacteristicValueVolumeSelectorVolumeDecrement     Decrement the volume.
+ */
+typedef NS_ENUM(NSInteger, HMCharacteristicValueVolumeSelector) {
+    HMCharacteristicValueVolumeSelectorVolumeIncrement = 0,
+    HMCharacteristicValueVolumeSelectorVolumeDecrement,
+} API_AVAILABLE(ios(18.0), watchos(11.0), tvos(18.0), visionos(2.0)) API_UNAVAILABLE(macos);
+
 
 /*!
  @enum      HMCharacteristicValueDoorState
@@ -602,3 +630,235 @@ typedef NS_ENUM(NSInteger, HMCharacteristicValueConfigurationState) {
     HMCharacteristicValueConfigurationStateConfigured = 1,
 } API_AVAILABLE(ios(11.2), watchos(4.2), tvos(11.2), macCatalyst(14.0)) API_UNAVAILABLE(macos);
 
+/*!
+ @enum      HMCharacteristicValueInputSourceType
+
+ @constant  HMCharacteristicValueInputSourceTypeOther           Other.
+ @constant  HMCharacteristicValueInputSourceTypeHomeScreen      Home Screen.
+ @constant  HMCharacteristicValueInputSourceTypeTuner           Tuner.
+ @constant  HMCharacteristicValueInputSourceTypeHDMI            HDMI.
+ @constant  HMCharacteristicValueInputSourceTypeCompositeVideo  Composite Video.
+ @constant  HMCharacteristicValueInputSourceTypeSVideo          S-Video.
+ @constant  HMCharacteristicValueInputSourceTypeComponentVideo  Component Video.
+ @constant  HMCharacteristicValueInputSourceTypeDVI             DVI.
+ @constant  HMCharacteristicValueInputSourceTypeAirPlay         AirPlay.
+ @constant  HMCharacteristicValueInputSourceTypeUSB             USB.
+ @constant  HMCharacteristicValueInputSourceTypeApplication     Application.
+*/
+typedef NS_ENUM(NSInteger, HMCharacteristicValueInputSourceType) {
+    HMCharacteristicValueInputSourceTypeOther = 0,
+    HMCharacteristicValueInputSourceTypeHomeScreen = 1,
+    HMCharacteristicValueInputSourceTypeTuner = 2,
+    HMCharacteristicValueInputSourceTypeHDMI NS_SWIFT_NAME(hdmi) = 3,
+    HMCharacteristicValueInputSourceTypeCompositeVideo = 4,
+    HMCharacteristicValueInputSourceTypeSVideo = 5,
+    HMCharacteristicValueInputSourceTypeComponentVideo = 6,
+    HMCharacteristicValueInputSourceTypeDVI NS_SWIFT_NAME(dvi) = 7,
+    HMCharacteristicValueInputSourceTypeAirPlay = 8,
+    HMCharacteristicValueInputSourceTypeUSB NS_SWIFT_NAME(usb) = 9,
+    HMCharacteristicValueInputSourceTypeApplication = 10,
+} API_AVAILABLE(ios(18.0), watchos(11.0), tvos(18.0), visionos(2.0)) API_UNAVAILABLE(macos);
+
+/*!
+ @enum      HMCharacteristicValueInputDeviceType
+
+ @constant  HMCharacteristicValueInputDeviceTypeOther        Other.
+ @constant  HMCharacteristicValueInputDeviceTypeTV           TV.
+ @constant  HMCharacteristicValueInputDeviceTypeRecording    Recording.
+ @constant  HMCharacteristicValueInputDeviceTypeTuner        Tuner.
+ @constant  HMCharacteristicValueInputDeviceTypePlayback     Playback.
+ @constant  HMCharacteristicValueInputDeviceTypeAudioSystem  Audio System.
+ @constant  HMCharacteristicValueInputDeviceTypeNone         None.
+*/
+typedef NS_ENUM(NSInteger, HMCharacteristicValueInputDeviceType) {
+    HMCharacteristicValueInputDeviceTypeOther = 0,
+    HMCharacteristicValueInputDeviceTypeTV NS_SWIFT_NAME(tv) = 1,
+    HMCharacteristicValueInputDeviceTypeRecording = 2,
+    HMCharacteristicValueInputDeviceTypeTuner = 3,
+    HMCharacteristicValueInputDeviceTypePlayback = 4,
+    HMCharacteristicValueInputDeviceTypeAudioSystem = 5,
+    HMCharacteristicValueInputDeviceTypeNone = 6,
+} API_AVAILABLE(ios(18.0), watchos(11.0), tvos(18.0), visionos(2.0)) API_UNAVAILABLE(macos);
+
+/*!
+ @enum      HMCharacteristicValueClosedCaptions
+
+ @constant  HMCharacteristicValueClosedCaptionsDisabled  Disabled.
+ @constant  HMCharacteristicValueClosedCaptionsEnabled   Enabled.
+*/
+typedef NS_ENUM(NSInteger, HMCharacteristicValueClosedCaptions) {
+    HMCharacteristicValueClosedCaptionsDisabled = 0,
+    HMCharacteristicValueClosedCaptionsEnabled = 1,
+} API_AVAILABLE(ios(18.0), watchos(11.0), tvos(18.0), visionos(2.0)) API_UNAVAILABLE(macos);
+
+/*!
+ @enum      HMCharacteristicValuePowerModeSelection
+
+ @constant  HMCharacteristicValuePowerModeSelectionShow  Show.
+ @constant  HMCharacteristicValuePowerModeSelectionHide  Hide.
+*/
+typedef NS_ENUM(NSInteger, HMCharacteristicValuePowerModeSelection) {
+    HMCharacteristicValuePowerModeSelectionShow = 0,
+    HMCharacteristicValuePowerModeSelectionHide = 1,
+} API_AVAILABLE(ios(18.0), watchos(11.0), tvos(18.0), visionos(2.0)) API_UNAVAILABLE(macos);
+
+/*!
+ @enum      HMCharacteristicValueCurrentMediaState
+
+ @constant  HMCharacteristicValueCurrentMediaStatePlaying      Playing content.
+ @constant  HMCharacteristicValueCurrentMediaStatePaused       Paused playback of media content.
+ @constant  HMCharacteristicValueCurrentMediaStateStopped      Stopped playback.
+ @constant  HMCharacteristicValueCurrentMediaStateUnknown      Unknown playback state.
+ @constant  HMCharacteristicValueCurrentMediaStateLoading      Loading content.
+ @constant  HMCharacteristicValueCurrentMediaStateInterrupted  Playback interrupted.
+*/
+typedef NS_ENUM(NSInteger, HMCharacteristicValueCurrentMediaState) {
+    HMCharacteristicValueCurrentMediaStatePlaying = 0,
+    HMCharacteristicValueCurrentMediaStatePaused = 1,
+    HMCharacteristicValueCurrentMediaStateStopped = 2,
+    HMCharacteristicValueCurrentMediaStateUnknown = 3,
+    HMCharacteristicValueCurrentMediaStateLoading = 4,
+    HMCharacteristicValueCurrentMediaStateInterrupted = 5,
+} API_AVAILABLE(ios(18.0), watchos(11.0), tvos(18.0), visionos(2.0)) API_UNAVAILABLE(macos);
+
+/*!
+ @enum      HMCharacteristicValueRemoteKey
+
+ @constant  HMCharacteristicValueRemoteKeyRewind         Rewind.
+ @constant  HMCharacteristicValueRemoteKeyFastForward    Fast Forward.
+ @constant  HMCharacteristicValueRemoteKeyNextTrack      Next Track.
+ @constant  HMCharacteristicValueRemoteKeyPreviousTrack  Previous Track.
+ @constant  HMCharacteristicValueRemoteKeyArrowUp        Arrow Up.
+ @constant  HMCharacteristicValueRemoteKeyArrowDown      Arrow Down.
+ @constant  HMCharacteristicValueRemoteKeyArrowLeft      Arrow Left.
+ @constant  HMCharacteristicValueRemoteKeyArrowRight     Arrow Right.
+ @constant  HMCharacteristicValueRemoteKeySelect         Select.
+ @constant  HMCharacteristicValueRemoteKeyBack           Back.
+ @constant  HMCharacteristicValueRemoteKeyExit           Exit.
+ @constant  HMCharacteristicValueRemoteKeyPlayPause      Play Pause.
+ @constant  HMCharacteristicValueRemoteKeyPlay           Play.
+ @constant  HMCharacteristicValueRemoteKeyPause          Pause.
+ @constant  HMCharacteristicValueRemoteKeyMenu           Menu.
+ @constant  HMCharacteristicValueRemoteKeyInfo           Info.
+ @constant  HMCharacteristicValueRemoteKeyHome           Home.
+*/
+typedef NS_ENUM(NSInteger, HMCharacteristicValueRemoteKey) {
+    HMCharacteristicValueRemoteKeyRewind = 0,
+    HMCharacteristicValueRemoteKeyFastForward = 1,
+    HMCharacteristicValueRemoteKeyNextTrack = 2,
+    HMCharacteristicValueRemoteKeyPreviousTrack = 3,
+    HMCharacteristicValueRemoteKeyArrowUp = 4,
+    HMCharacteristicValueRemoteKeyArrowDown = 5,
+    HMCharacteristicValueRemoteKeyArrowLeft = 6,
+    HMCharacteristicValueRemoteKeyArrowRight = 7,
+    HMCharacteristicValueRemoteKeySelect = 8,
+    HMCharacteristicValueRemoteKeyBack = 9,
+    HMCharacteristicValueRemoteKeyExit = 10,
+    HMCharacteristicValueRemoteKeyPlayPause = 11,
+    HMCharacteristicValueRemoteKeyPlay = 12,
+    HMCharacteristicValueRemoteKeyPause = 13,
+    HMCharacteristicValueRemoteKeyMenu = 14,
+    HMCharacteristicValueRemoteKeyInfo = 15,
+    HMCharacteristicValueRemoteKeyHome = 16,
+} API_AVAILABLE(ios(18.0), watchos(11.0), tvos(18.0), visionos(2.0)) API_UNAVAILABLE(macos);
+
+/*!
+ @enum      HMCharacteristicValuePictureMode
+
+ @constant  HMCharacteristicValuePictureModeStandard    Standard.
+ @constant  HMCharacteristicValuePictureModeMovie       Movie.
+ @constant  HMCharacteristicValuePictureModeSport       Sport.
+ @constant  HMCharacteristicValuePictureModeGame        Game.
+ @constant  HMCharacteristicValuePictureModePhoto       Photo.
+ @constant  HMCharacteristicValuePictureModeVivid       Vivid.
+ @constant  HMCharacteristicValuePictureModeDark        Dark.
+ @constant  HMCharacteristicValuePictureModeBright      Bright.
+ @constant  HMCharacteristicValuePictureModeComputer    Computer.
+ @constant  HMCharacteristicValuePictureModeNight       Night.
+ @constant  HMCharacteristicValuePictureModeCalibrated  Calibrated.
+ @constant  HMCharacteristicValuePictureModeCustom1     Custom1.
+ @constant  HMCharacteristicValuePictureModeCustom2     Custom2.
+ @constant  HMCharacteristicValuePictureModeCustom3     Custom3.
+*/
+typedef NS_ENUM(NSInteger, HMCharacteristicValuePictureMode) {
+    HMCharacteristicValuePictureModeStandard = 0,
+    HMCharacteristicValuePictureModeMovie = 1,
+    HMCharacteristicValuePictureModeSport = 2,
+    HMCharacteristicValuePictureModeGame = 3,
+    HMCharacteristicValuePictureModePhoto = 4,
+    HMCharacteristicValuePictureModeVivid = 5,
+    HMCharacteristicValuePictureModeDark = 6,
+    HMCharacteristicValuePictureModeBright = 7,
+    HMCharacteristicValuePictureModeComputer = 8,
+    HMCharacteristicValuePictureModeNight = 9,
+    HMCharacteristicValuePictureModeCalibrated = 10,
+    HMCharacteristicValuePictureModeCustom1 = 11,
+    HMCharacteristicValuePictureModeCustom2 = 12,
+    HMCharacteristicValuePictureModeCustom3 = 13,
+} API_AVAILABLE(ios(18.0), watchos(11.0), tvos(18.0), visionos(2.0)) API_UNAVAILABLE(macos);
+
+/*!
+ @enum      HMCharacteristicValueTargetVisibilityState
+
+ @constant  HMCharacteristicValueTargetVisibilityStateShow  Show.
+ @constant  HMCharacteristicValueTargetVisibilityStateHide  Hide.
+*/
+typedef NS_ENUM(NSInteger, HMCharacteristicValueTargetVisibilityState) {
+    HMCharacteristicValueTargetVisibilityStateShow = 0,
+    HMCharacteristicValueTargetVisibilityStateHide = 1,
+} API_AVAILABLE(ios(18.0), watchos(11.0), tvos(18.0), visionos(2.0)) API_UNAVAILABLE(macos);
+
+/*!
+ @enum      HMCharacteristicValueCurrentVisibilityState
+
+ @constant  HMCharacteristicValueCurrentVisibilityStateShown        The media source is displayed.
+ @constant  HMCharacteristicValueCurrentVisibilityStateHidden       The media source is not displayed.
+ @constant  HMCharacteristicValueCurrentVisibilityStateConnected    The media source is displayed since there is a connected device.
+ @constant  HMCharacteristicValueCurrentVisibilityStateAlwaysShown  The media source is always displayed.
+*/
+typedef NS_ENUM(NSInteger, HMCharacteristicValueCurrentVisibilityState) {
+    HMCharacteristicValueCurrentVisibilityStateShown = 0,
+    HMCharacteristicValueCurrentVisibilityStateHidden = 1,
+    HMCharacteristicValueCurrentVisibilityStateConnected = 2,
+    HMCharacteristicValueCurrentVisibilityStateAlwaysShown = 3,
+} API_AVAILABLE(ios(18.0), watchos(11.0), tvos(18.0), visionos(2.0)) API_UNAVAILABLE(macos);
+
+/*!
+ @enum      HMCharacteristicValueTargetMediaState
+
+ @constant  HMCharacteristicValueTargetMediaStatePlay   Start playback.
+ @constant  HMCharacteristicValueTargetMediaStatePause  Pause playback.
+ @constant  HMCharacteristicValueTargetMediaStateStop   Stop playback.
+*/
+typedef NS_ENUM(NSInteger, HMCharacteristicValueTargetMediaState) {
+    HMCharacteristicValueTargetMediaStatePlay = 0,
+    HMCharacteristicValueTargetMediaStatePause = 1,
+    HMCharacteristicValueTargetMediaStateStop = 2,
+} API_AVAILABLE(ios(18.0), watchos(11.0), tvos(18.0), visionos(2.0)) API_UNAVAILABLE(macos);
+
+/*!
+ @enum      HMCharacteristicValueRouterStatus
+
+ @constant  HMCharacteristicValueRouterStatusReady     Router has deployed HomeKit configuration.
+ @constant  HMCharacteristicValueRouterStatusNotReady  Router has not deployed HomeKit configuration.
+*/
+typedef NS_ENUM(NSInteger, HMCharacteristicValueRouterStatus) {
+    HMCharacteristicValueRouterStatusReady = 0,
+    HMCharacteristicValueRouterStatusNotReady = 1,
+} API_AVAILABLE(ios(18.0), watchos(11.0), tvos(18.0), visionos(2.0)) API_UNAVAILABLE(macos);
+
+/*!
+ @enum      HMCharacteristicValueWiFiSatelliteStatus
+
+ @constant  HMCharacteristicValueWiFiSatelliteStatusUnknown       Unknown.
+ @constant  HMCharacteristicValueWiFiSatelliteStatusConnected     Connected.
+ @constant  HMCharacteristicValueWiFiSatelliteStatusNotConnected  Not Connected.
+*/
+typedef NS_ENUM(NSInteger, HMCharacteristicValueWiFiSatelliteStatus) {
+    HMCharacteristicValueWiFiSatelliteStatusUnknown = 0,
+    HMCharacteristicValueWiFiSatelliteStatusConnected = 1,
+    HMCharacteristicValueWiFiSatelliteStatusNotConnected = 2,
+} API_AVAILABLE(ios(18.0), watchos(11.0), tvos(18.0), visionos(2.0)) API_UNAVAILABLE(macos);
+
+
+NS_ASSUME_NONNULL_END

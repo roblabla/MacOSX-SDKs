@@ -33,36 +33,36 @@ NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 /*
  Returns the number of accessibility elements in the container.
  */
-- (NSInteger)accessibilityElementCount NS_SWIFT_UI_ACTOR;
+- (NSInteger)accessibilityElementCount API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR;
 
 /*
  Returns the accessibility element in order, based on index.
  default == nil
  */
-- (nullable id)accessibilityElementAtIndex:(NSInteger)index NS_SWIFT_UI_ACTOR;
+- (nullable id)accessibilityElementAtIndex:(NSInteger)index API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR;
 
 /*
  Returns the ordered index for an accessibility element
  default == NSNotFound
  */
-- (NSInteger)indexOfAccessibilityElement:(id)element NS_SWIFT_UI_ACTOR;
+- (NSInteger)indexOfAccessibilityElement:(id)element API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR;
 
 // A list of container elements managed by the receiver.
 // This can be used as an alternative to implementing the dynamic methods.
 // default == nil
-@property (nullable, nonatomic, strong) NSArray *accessibilityElements API_AVAILABLE(ios(8.0)) NS_SWIFT_UI_ACTOR;
+@property (nullable, nonatomic, strong) NSArray *accessibilityElements API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR;
 
 // Some containers provide more context for accessibility elements, such as tables or lists.
 // Set this property so that assistive technologies can output more information.
 // default == UIAccessibilityContainerTypeNone
-@property (nonatomic) UIAccessibilityContainerType accessibilityContainerType API_AVAILABLE(ios(11.0)) NS_SWIFT_UI_ACTOR;
+@property (nonatomic) UIAccessibilityContainerType accessibilityContainerType API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR;
 
 // An array of container elements similar to accessibilityElements but specific for automation.
 // This can be used to modify the children in the accessibility tree for automation.
 // If not set, automationElements will default first to accessibilityElements if it’s not an accessibility element.
 // If there are no accessibilityElements and the view is an accessibility element, it will return the list of subviews that have accessibilityIdentifier.
 // Otherwise, the default will be an empty array.
-@property (nullable, nonatomic, strong) NSArray *automationElements API_AVAILABLE(ios(17.0), tvos(17.0)) NS_SWIFT_UI_ACTOR;
+@property (nullable, nonatomic, strong) NSArray *automationElements API_AVAILABLE(ios(17.0), tvos(17.0)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR;
 
 @end
 
@@ -71,7 +71,7 @@ NS_HEADER_AUDIT_BEGIN(nullability, sendability)
  convey more information specific to tables that contain structured data.
  */
 
-UIKIT_EXTERN API_AVAILABLE(ios(11.0)) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @protocol UIAccessibilityContainerDataTableCell <NSObject>
 @required
 
@@ -82,7 +82,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(11.0)) NS_SWIFT_UI_ACTOR
 
 @end
 
-UIKIT_EXTERN API_AVAILABLE(ios(11.0)) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @protocol UIAccessibilityContainerDataTable <NSObject>
 @required
 

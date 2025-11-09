@@ -14,14 +14,14 @@ NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 @class NSArray, NSDictionary, NSLayoutAnchor;
 
-typedef float UILayoutPriority NS_TYPED_EXTENSIBLE_ENUM;
-static const UILayoutPriority UILayoutPriorityRequired API_AVAILABLE(ios(6.0)) = 1000; // A required constraint.  Do not exceed this.
-static const UILayoutPriority UILayoutPriorityDefaultHigh API_AVAILABLE(ios(6.0)) = 750; // This is the priority level with which a button resists compressing its content.
-static const UILayoutPriority UILayoutPriorityDragThatCanResizeScene API_AVAILABLE(macCatalyst(13.0)) = 510; // This is the appropriate priority level for a drag that may end up resizing the window's scene.
-static const UILayoutPriority UILayoutPrioritySceneSizeStayPut API_AVAILABLE(macCatalyst(13.0)) = 500; // This is the priority level at which the window's scene prefers to stay the same size.  It's generally not appropriate to make a constraint at exactly this priority. You want to be higher or lower.
-static const UILayoutPriority UILayoutPriorityDragThatCannotResizeScene API_AVAILABLE(macCatalyst(13.0)) = 490; // This is the priority level at which a split view divider, say, is dragged.  It won't resize the window's scene.
-static const UILayoutPriority UILayoutPriorityDefaultLow API_AVAILABLE(ios(6.0)) = 250; // This is the priority level at which a button hugs its contents horizontally.
-static const UILayoutPriority UILayoutPriorityFittingSizeLevel API_AVAILABLE(ios(6.0)) = 50; // When you send -[UIView systemLayoutSizeFittingSize:], the size fitting most closely to the target size (the argument) is computed.  UILayoutPriorityFittingSizeLevel is the priority level with which the view wants to conform to the target size in that computation.  It's quite low.  It is generally not appropriate to make a constraint at exactly this priority.  You want to be higher or lower.
+typedef float UILayoutPriority NS_TYPED_EXTENSIBLE_ENUM API_UNAVAILABLE(watchos);
+static const UILayoutPriority UILayoutPriorityRequired API_AVAILABLE(ios(6.0)) API_UNAVAILABLE(watchos) = 1000; // A required constraint.  Do not exceed this.
+static const UILayoutPriority UILayoutPriorityDefaultHigh API_AVAILABLE(ios(6.0)) API_UNAVAILABLE(watchos) = 750; // This is the priority level with which a button resists compressing its content.
+static const UILayoutPriority UILayoutPriorityDragThatCanResizeScene API_AVAILABLE(macCatalyst(13.0)) API_UNAVAILABLE(watchos) = 510; // This is the appropriate priority level for a drag that may end up resizing the window's scene.
+static const UILayoutPriority UILayoutPrioritySceneSizeStayPut API_AVAILABLE(macCatalyst(13.0)) API_UNAVAILABLE(watchos) = 500; // This is the priority level at which the window's scene prefers to stay the same size.  It's generally not appropriate to make a constraint at exactly this priority. You want to be higher or lower.
+static const UILayoutPriority UILayoutPriorityDragThatCannotResizeScene API_AVAILABLE(macCatalyst(13.0)) API_UNAVAILABLE(watchos) = 490; // This is the priority level at which a split view divider, say, is dragged.  It won't resize the window's scene.
+static const UILayoutPriority UILayoutPriorityDefaultLow API_AVAILABLE(ios(6.0)) API_UNAVAILABLE(watchos) = 250; // This is the priority level at which a button hugs its contents horizontally.
+static const UILayoutPriority UILayoutPriorityFittingSizeLevel API_AVAILABLE(ios(6.0)) API_UNAVAILABLE(watchos) = 50; // When you send -[UIView systemLayoutSizeFittingSize:], the size fitting most closely to the target size (the argument) is computed.  UILayoutPriorityFittingSizeLevel is the priority level with which the view wants to conform to the target size in that computation.  It's quite low.  It is generally not appropriate to make a constraint at exactly this priority.  You want to be higher or lower.
 
 #if !TARGET_OS_IPHONE
 typedef float NSLayoutPriority NS_TYPED_EXTENSIBLE_ENUM;
@@ -42,7 +42,7 @@ typedef NS_ENUM(NSInteger, NSLayoutRelation) {
     NSLayoutRelationLessThanOrEqual = -1,
     NSLayoutRelationEqual = 0,
     NSLayoutRelationGreaterThanOrEqual = 1,
-};
+} API_UNAVAILABLE(watchos);
 
 typedef NS_ENUM(NSInteger, NSLayoutAttribute) {
     NSLayoutAttributeLeft = 1,
@@ -75,7 +75,7 @@ typedef NS_ENUM(NSInteger, NSLayoutAttribute) {
 #endif
     
     NSLayoutAttributeNotAnAttribute = 0
-};
+} API_UNAVAILABLE(watchos);
 
 typedef NS_OPTIONS(NSUInteger, NSLayoutFormatOptions) {
     NSLayoutFormatAlignAllLeft = (1 << NSLayoutAttributeLeft),
@@ -107,7 +107,7 @@ typedef NS_OPTIONS(NSUInteger, NSLayoutFormatOptions) {
 #if TARGET_OS_IPHONE
     /* choose only one spacing format
      */
-    NSLayoutFormatSpacingEdgeToEdge API_AVAILABLE(ios(11.0),tvos(11.0)) = 0 << 19, // default
+    NSLayoutFormatSpacingEdgeToEdge API_AVAILABLE(ios(11.0), tvos(11.0)) API_UNAVAILABLE(watchos) = 0 << 19, // default
     
     /* Valid only for vertical layouts. Between views with text content the value
      will be used to determine the distance from the last baseline of the view above
@@ -116,13 +116,13 @@ typedef NS_OPTIONS(NSUInteger, NSLayoutFormatOptions) {
      The default spacing "]-[" will be determined from the line heights of the fonts
      involved in views with text content, when present.
      */
-    NSLayoutFormatSpacingBaselineToBaseline API_AVAILABLE(ios(11.0),tvos(11.0)) = 1 << 19,
+    NSLayoutFormatSpacingBaselineToBaseline API_AVAILABLE(ios(11.0), tvos(11.0)) API_UNAVAILABLE(watchos) = 1 << 19,
     
-    NSLayoutFormatSpacingMask API_AVAILABLE(ios(11.0),tvos(11.0)) = 0x1 << 19,
+    NSLayoutFormatSpacingMask API_AVAILABLE(ios(11.0), tvos(11.0)) API_UNAVAILABLE(watchos) = 0x1 << 19,
 #endif
-};
+} API_UNAVAILABLE(watchos);
 
-NSLAYOUTCONSTRAINT_EXTERN API_AVAILABLE(macos(10.7), ios(6.0), tvos(9.0)) NS_SWIFT_UI_ACTOR
+NSLAYOUTCONSTRAINT_EXTERN API_AVAILABLE(macos(10.7), ios(6.0), tvos(9.0)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @interface NSLayoutConstraint : NSObject
 
 /* Create an array of constraints using an ASCII-art-like visual format string.  The values of the `metrics` dictionary should be NSNumber (or some other type that responds to -doubleValue and returns a double).
@@ -168,8 +168,8 @@ NSLAYOUTCONSTRAINT_EXTERN NSDictionary<NSString *, id> *_NSDictionaryOfVariableB
 /* accessors
  firstAnchor{==,<=,>=} secondAnchor * multiplier + constant
  */
-@property (readonly, copy) NSLayoutAnchor *firstAnchor API_AVAILABLE(macos(10.12), ios(10.0));
-@property (readonly, copy, nullable) NSLayoutAnchor *secondAnchor API_AVAILABLE(macos(10.12), ios(10.0));
+@property (readonly, copy) NSLayoutAnchor *firstAnchor API_AVAILABLE(macos(10.12), ios(10.0)) API_UNAVAILABLE(watchos);
+@property (readonly, copy, nullable) NSLayoutAnchor *secondAnchor API_AVAILABLE(macos(10.12), ios(10.0)) API_UNAVAILABLE(watchos);
 @property (readonly) NSLayoutRelation relation;
 @property (readonly) CGFloat multiplier;
 
@@ -209,7 +209,7 @@ NSLAYOUTCONSTRAINT_EXTERN NSDictionary<NSString *, id> *_NSDictionaryOfVariableB
  */
 @class NSLayoutYAxisAnchor, NSLayoutDimension;
 
-NS_SWIFT_UI_ACTOR
+API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @protocol UILayoutSupport <NSObject>
 @property(nonatomic,readonly) CGFloat length;  // As a courtesy when not using auto layout, this value is safe to refer to in -viewDidLayoutSubviews, or in -layoutSubviews after calling super
 

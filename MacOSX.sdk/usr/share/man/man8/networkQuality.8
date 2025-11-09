@@ -7,7 +7,8 @@
 .Nd Network quality testing tool
 .Sh SYNOPSIS
 .Nm
-.Op Fl cdhksuv          \" [-chkpsv]
+.Op Fl bcdhksuv          \" [-bcdhksuv]
+.Op Fl B Ar Bonjour name \" [-C Bonjour name]
 .Op Fl C Ar configuration URL \" [-C configuration URL]
 .Op Fl f Ar protocol selection \" [-f h1,h2,h3]
 .Op Fl I Ar interface \" [-I interface]
@@ -24,13 +25,17 @@ The responsiveness of the connection. Responsiveness measures the quality of you
 .Pp
 Other aspects of the connection that affect the quality of experience.
 .Pp
-NOTE: This tool will connect to the Internet to perform its tests. This will use data on your Internet service plan.
+\fBNOTE\fR: This tool will connect to the Internet to perform its tests. This will use data on your Internet service plan.
 .Pp
 For more details about the RPM score and the methodology around the testing, see
 .Ar https://datatracker.ietf.org/doc/draft-cpaasch-ippm-responsiveness/
 .Pp
 The following options are available:
 .Bl -tag -width -indent
+.It Fl b
+Show Bonjour advertised networkQuality servers
+.It Fl B Ar Bonjour name
+Run against specified Bonjour instance
 .It Fl C Ar configuration URL/path
 Use custom configuration URL or path (with scheme file://). See
 .Ar https://github.com/network-quality/server
@@ -59,7 +64,7 @@ It will display the URL of the config-file that can be passed on to a client-ins
 with option -C. Note that the certificate is self-signed and thus option -k needs
 to be used on the client-instance.
 .It Fl c
-Produce computer-readable output.
+Produce computer-readable output (JSON).
 .It Fl d
 Do not run a download test (implies -s)
 .It Fl h
@@ -78,9 +83,10 @@ Verbose output.
 .Pp
 .\" .El
 .Sh COMPUTER OUTPUT FIELD DESCRIPTION
-The -c option will produce JSON output with the following fields:
+The -c option will produce JSON output with the following fields,
+depending on the options used and the result of the run.
 .Bl -tag -width lud_foreign_dl_h2_req_resp
-.It Ft base_rt
+.It Ft base_rtt
 The calculated idle latency of the test run (in milliseconds).
 .It Ft dl_flows
 Number of download flows initiated.
@@ -164,6 +170,21 @@ The uplink responsiveness score (in RPM)
 (only available when -s is specified).
 .It Ft ul_throughput
 The measured uplink throughput (in bytes per second).
+.It Ft error_code
+Error domain specific error code
+.Pp
+(only displayed if
+.nM
+could not complete its test).
+.It Ft error_domain
+Error domain in which an error occurred in
+.Pp
+(only displayed if
+.Nm
+could not complete its test).
+.El
+.Pp
+\fBNOTE\fR: This is not meant to be a comprehensive list of fields.
 
 .Sh SEE ALSO
 .\" List links in ascending order by section, alphabetically within a section.

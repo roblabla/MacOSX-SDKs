@@ -14,4 +14,5 @@
 #define GK_EXTERN_WEAK  GK_EXTERN __attribute__((weak_import))
 #endif
 
-typedef NSDictionary<NSString *, id> GKMatchProperties API_AVAILABLE(ios(17.2), macos(14.2), watchos(10.2), tvos(17.2));
+typedef NSDictionary<NSString *, id> GKMatchProperties API_AVAILABLE(ios(17.2), macos(14.2), watchos(10.2), tvos(17.2), visionos(1.1));
+

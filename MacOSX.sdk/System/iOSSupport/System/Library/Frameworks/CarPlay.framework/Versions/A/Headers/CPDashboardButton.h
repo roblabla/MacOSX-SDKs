@@ -9,7 +9,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-API_AVAILABLE(ios(13.4)) API_UNAVAILABLE(macos, watchos, tvos)
+API_AVAILABLE(ios(13.4)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(macos, watchos)
 @interface CPDashboardButton : NSObject <NSSecureCoding>
 
 + (instancetype)new NS_UNAVAILABLE;

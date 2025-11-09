@@ -127,7 +127,7 @@ API_AVAILABLE(ios(10.0), macCatalyst(14.0), macos(11.0)) API_UNAVAILABLE(watchos
 ///
 /// - Parameters:
 ///   - notification: The notification that arrived.
-- (void)didReceiveNotification:(UNNotification *)notification;
+- (void)didReceiveNotification:(UNNotification *)notification NS_SWIFT_UI_ACTOR;
 
 @optional
 

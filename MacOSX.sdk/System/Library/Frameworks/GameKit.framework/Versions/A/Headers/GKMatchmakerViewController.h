@@ -90,7 +90,7 @@ NS_CLASS_AVAILABLE(10_8, 4_1)
 /// If implemented, this function must call `completionHandler`: failing to do so will hang matchmaking.
 - (void)matchmakerViewController:(GKMatchmakerViewController *)viewController
   getMatchPropertiesForRecipient:(GKPlayer *)recipient
-           withCompletionHandler:(void(^)(GKMatchProperties *recipientProperties))completionHandler API_AVAILABLE(ios(17.2), macos(14.2), tvos(17.2));
+           withCompletionHandler:(void(^)(GKMatchProperties *recipientProperties))completionHandler API_AVAILABLE(ios(17.2), macos(14.2), tvos(17.2), visionos(1.1));
 
 /*** These protocol methods are obsoleted. They will never be invoked and their implementation does nothing***/
 - (void)matchmakerViewController:(GKMatchmakerViewController *)viewController didFindPlayers:(NSArray<NSString *> *)playerIDs API_DEPRECATED_WITH_REPLACEMENT("-matchmakerViewController:didFindHostedPlayers:", ios(4.1,8.0), macos(10.8,10.10)) API_UNAVAILABLE(tvos);

@@ -37,7 +37,7 @@ typedef CF_ENUM(uint32_t, CGImageByteOrderInfo) {
     kCGImageByteOrder32Little = (2 << 12),
     kCGImageByteOrder16Big    = (3 << 12),
     kCGImageByteOrder32Big    = (4 << 12)
-} CG_AVAILABLE_STARTING(10.0, 2.0);
+} API_AVAILABLE(macos(10.0), ios(2.0));
 
 typedef CF_ENUM(uint32_t, CGImagePixelFormatInfo) {
     kCGImagePixelFormatMask      = 0xF0000,
@@ -48,7 +48,7 @@ typedef CF_ENUM(uint32_t, CGImagePixelFormatInfo) {
     kCGImagePixelFormatRGBCIF10  = (4 << 16)  /* Only for RGB 32 bits per pixel,
                                                * 10 bits per component, kCGImageByteOrder32Little
                                                * The 2 MSB of the pixel need to be set to 1 */
-} CG_AVAILABLE_STARTING(10.14, 12.0);
+} API_AVAILABLE(macos(10.14), ios(12.0));
 
 typedef CF_OPTIONS(uint32_t, CGBitmapInfo) {
     kCGBitmapAlphaInfoMask = 0x1F,
@@ -62,7 +62,7 @@ typedef CF_OPTIONS(uint32_t, CGBitmapInfo) {
     kCGBitmapByteOrder32Little = kCGImageByteOrder32Little,
     kCGBitmapByteOrder16Big    = kCGImageByteOrder16Big,
     kCGBitmapByteOrder32Big    = kCGImageByteOrder32Big
-} CG_AVAILABLE_STARTING(10.0, 2.0);
+} API_AVAILABLE(macos(10.0), ios(2.0));
 
 #ifdef __BIG_ENDIAN__
 static const CGBitmapInfo kCGBitmapByteOrder16Host = kCGBitmapByteOrder16Big;
@@ -75,7 +75,7 @@ static const CGBitmapInfo kCGBitmapByteOrder32Host = kCGBitmapByteOrder32Little;
 /* Return the CFTypeID for CGImageRefs. */
 
 CG_EXTERN CFTypeID CGImageGetTypeID(void)
-    CG_AVAILABLE_STARTING(10.2, 2.0);
+    API_AVAILABLE(macos(10.2), ios(2.0));
 
 /* Create an image. */
 
@@ -85,7 +85,7 @@ CG_EXTERN CGImageRef __nullable CGImageCreate(size_t width, size_t height,
     CGDataProviderRef cg_nullable provider,
     const CGFloat * __nullable decode, bool shouldInterpolate,
     CGColorRenderingIntent intent)
-    CG_AVAILABLE_STARTING(10.0, 2.0);
+    API_AVAILABLE(macos(10.0), ios(2.0));
 
 /* Create an image mask. Legal values for bits per component are 1, 2, 4 and 8.
  * Bits per pixel must be either the same as bits per component or 8, with
@@ -96,13 +96,13 @@ CG_EXTERN CGImageRef __nullable CGImageMaskCreate(size_t width, size_t height,
     size_t bitsPerComponent, size_t bitsPerPixel, size_t bytesPerRow,
     CGDataProviderRef cg_nullable provider, const CGFloat * __nullable decode,
     bool shouldInterpolate)
-    CG_AVAILABLE_STARTING(10.0, 2.0);
+    API_AVAILABLE(macos(10.0), ios(2.0));
 
 /* Return a copy of `image'. Only the image structure itself is copied; the
    underlying data is not. */
 
 CG_EXTERN CGImageRef __nullable CGImageCreateCopy(CGImageRef cg_nullable image)
-    CG_AVAILABLE_STARTING(10.4, 2.0);
+    API_AVAILABLE(macos(10.4), ios(2.0));
 
 /* Create an image from `source', a data provider of JPEG-encoded data. */
 
@@ -110,7 +110,7 @@ CG_EXTERN CGImageRef __nullable CGImageCreateWithJPEGDataProvider(
     CGDataProviderRef cg_nullable source, const CGFloat * __nullable decode,
     bool shouldInterpolate,
     CGColorRenderingIntent intent)
-    CG_AVAILABLE_STARTING(10.1, 2.0);
+    API_AVAILABLE(macos(10.1), ios(2.0));
 
 /* Create an image using `source', a data provider for PNG-encoded data. */
 
@@ -118,7 +118,7 @@ CG_EXTERN CGImageRef __nullable CGImageCreateWithPNGDataProvider(
     CGDataProviderRef cg_nullable source, const CGFloat * __nullable decode,
     bool shouldInterpolate,
     CGColorRenderingIntent intent)
-    CG_AVAILABLE_STARTING(10.2, 2.0);
+    API_AVAILABLE(macos(10.2), ios(2.0));
 
 /* Create an image using the data contained within the subrectangle `rect'
    of `image'.
@@ -143,7 +143,7 @@ CG_EXTERN CGImageRef __nullable CGImageCreateWithPNGDataProvider(
 
 CG_EXTERN CGImageRef __nullable CGImageCreateWithImageInRect(
     CGImageRef cg_nullable image, CGRect rect)
-    CG_AVAILABLE_STARTING(10.4, 2.0);
+    API_AVAILABLE(macos(10.4), ios(2.0));
 
 /* Create a new image from `image' masked by `mask', which may be an image
    mask or an image.
@@ -173,7 +173,7 @@ CG_EXTERN CGImageRef __nullable CGImageCreateWithImageInRect(
 
 CG_EXTERN CGImageRef __nullable CGImageCreateWithMask(
     CGImageRef cg_nullable image, CGImageRef cg_nullable mask)
-    CG_AVAILABLE_STARTING(10.4, 2.0);
+    API_AVAILABLE(macos(10.4), ios(2.0));
 
 /* Create a new image from `image' masked by `components', an array of 2N
    values { min[1], max[1], ... min[N], max[N] } where N is the number of
@@ -193,7 +193,7 @@ CG_EXTERN CGImageRef __nullable CGImageCreateWithMask(
 
 CG_EXTERN CGImageRef __nullable CGImageCreateWithMaskingColors(
     CGImageRef cg_nullable image, const CGFloat * cg_nullable components)
-    CG_AVAILABLE_STARTING(10.4, 2.0);
+    API_AVAILABLE(macos(10.4), ios(2.0));
 
 /* Create a copy of `image', replacing the image's color space with `space'.
    Returns NULL if `image' is an image mask, or if the number of components
@@ -202,96 +202,151 @@ CG_EXTERN CGImageRef __nullable CGImageCreateWithMaskingColors(
 
 CG_EXTERN CGImageRef __nullable CGImageCreateCopyWithColorSpace(
     CGImageRef cg_nullable image, CGColorSpaceRef cg_nullable space)
-    CG_AVAILABLE_STARTING(10.3, 2.0);
+    API_AVAILABLE(macos(10.3), ios(2.0));
+
+/* Create an image with specified content headroom. ColorSpace 'space' must be an
+   extended color space, PQ or HLG. In case of extended color spaces, image
+   components must be either 16-bit or 32-bit float. In case of PQ or HLG
+   color spaces, 16-bit or 32-bit float image components values will be
+   clipped to [0.0, 1.0] range, and other bit depths will be treated as
+   representing [0.0, 1.0] range, same as in the 'CGImageCreate' API.
+   The headroom parameter must be either equal 0.0f or be greater or equal 1.0f.
+   When the headroom parameter is 0.0f and the color space is extended,
+   the image content headroom will be calculated from the image data.
+   When needed, the exisitng 'CGImageCreate' API will create an image with
+   content headroom equal 0.0f.
+   When the headroom parameter is 0.0f in case of PQ or HLG color spaces,
+   the image content headroom value will be estimated based on the color space.
+   When justified, kCGDefaultHDRImageContentHeadroom which is a typical content
+   headroom for PQ and HLG images could be used to specify the content headroom.*/
+
+CG_EXTERN CGImageRef __nullable CGImageCreateWithContentHeadroom(
+    float headroom,
+    size_t width, size_t height,
+    size_t bitsPerComponent, size_t bitsPerPixel, size_t bytesPerRow,
+    CGColorSpaceRef cg_nullable space, CGBitmapInfo bitmapInfo,
+    CGDataProviderRef cg_nullable provider,
+    const CGFloat * __nullable decode, bool shouldInterpolate,
+    CGColorRenderingIntent intent)
+    API_AVAILABLE(macos(15.0), ios(18.0), tvos(18.0), watchos(11.0));
+
+/* Create a copy of `image' adding or replacing the image's content headroom.
+   Returns NULL if `image' is an image mask, or if original is not using
+   extended color space, PQ or HLG.
+   The headroom parameter must be either equal 0.0f or be greater or equal 1.0f.
+   When the headroom parameter is 0.0f and the color space is extended,
+   the image content headroom will be calculated from the image data. */
+
+CG_EXTERN CGImageRef __nullable CGImageCreateCopyWithContentHeadroom(
+    float headroom, CGImageRef cg_nullable image)
+API_AVAILABLE(macos(15.0), ios(18.0), tvos(18.0), watchos(11.0));
+
+CG_EXTERN float kCGDefaultHDRImageContentHeadroom
+API_AVAILABLE(macos(15.0), ios(18.0), tvos(18.0), watchos(11.0));
+
+/* Return image content headroom */
+
+CG_EXTERN float CGImageGetContentHeadroom(CGImageRef cg_nullable image)
+   API_AVAILABLE(macos(15.0), ios(18.0), tvos(18.0), watchos(11.0));
 
 /* Equivalent to `CFRetain(image)'. */
 
 CG_EXTERN CGImageRef cg_nullable CGImageRetain(CGImageRef cg_nullable image)
-    CG_AVAILABLE_STARTING(10.0, 2.0);
+    API_AVAILABLE(macos(10.0), ios(2.0));
 
 /* Equivalent to `CFRelease(image)'. */
 
 CG_EXTERN void CGImageRelease(CGImageRef cg_nullable image)
-    CG_AVAILABLE_STARTING(10.0, 2.0);
+    API_AVAILABLE(macos(10.0), ios(2.0));
 
 /* Return true if `image' is an image mask, false otherwise. */
 
 CG_EXTERN bool CGImageIsMask(CGImageRef cg_nullable image)
-    CG_AVAILABLE_STARTING(10.0, 2.0);
+    API_AVAILABLE(macos(10.0), ios(2.0));
 
 /* Return the width of `image'. */
 
 CG_EXTERN size_t CGImageGetWidth(CGImageRef cg_nullable image)
-    CG_AVAILABLE_STARTING(10.0, 2.0);
+    API_AVAILABLE(macos(10.0), ios(2.0));
 
 /* Return the height of `image'. */
 
 CG_EXTERN size_t CGImageGetHeight(CGImageRef cg_nullable image)
-    CG_AVAILABLE_STARTING(10.0, 2.0);
+    API_AVAILABLE(macos(10.0), ios(2.0));
 
 /* Return the number of bits/component of `image'. */
 
 CG_EXTERN size_t CGImageGetBitsPerComponent(CGImageRef cg_nullable image)
-    CG_AVAILABLE_STARTING(10.0, 2.0);
+    API_AVAILABLE(macos(10.0), ios(2.0));
 
 /* Return the number of bits/pixel of `image'. */
 
 CG_EXTERN size_t CGImageGetBitsPerPixel(CGImageRef cg_nullable image)
-    CG_AVAILABLE_STARTING(10.0, 2.0);
+    API_AVAILABLE(macos(10.0), ios(2.0));
 
 /* Return the number of bytes/row of `image'. */
 
 CG_EXTERN size_t CGImageGetBytesPerRow(CGImageRef cg_nullable image)
-    CG_AVAILABLE_STARTING(10.0, 2.0);
+    API_AVAILABLE(macos(10.0), ios(2.0));
 
 /* Return the color space of `image', or NULL if `image' is an image
    mask. */
 
 CG_EXTERN CGColorSpaceRef __nullable CGImageGetColorSpace(CGImageRef cg_nullable image)
-    CG_AVAILABLE_STARTING(10.0, 2.0);
+    API_AVAILABLE(macos(10.0), ios(2.0));
 
 /* Return the alpha info of `image'. */
 
 CG_EXTERN CGImageAlphaInfo CGImageGetAlphaInfo(CGImageRef cg_nullable image)
-    CG_AVAILABLE_STARTING(10.0, 2.0);
+    API_AVAILABLE(macos(10.0), ios(2.0));
 
 /* Return the data provider of `image'. */
 
 CG_EXTERN CGDataProviderRef __nullable CGImageGetDataProvider(CGImageRef cg_nullable image)
-    CG_AVAILABLE_STARTING(10.0, 2.0);
+    API_AVAILABLE(macos(10.0), ios(2.0));
 
 /* Return the decode array of `image'. */
 
 CG_EXTERN const CGFloat * __nullable CGImageGetDecode(CGImageRef cg_nullable image)
-    CG_AVAILABLE_STARTING(10.0, 2.0);
+    API_AVAILABLE(macos(10.0), ios(2.0));
 
 /* Return the interpolation parameter of `image'. */
 
 CG_EXTERN bool CGImageGetShouldInterpolate(CGImageRef cg_nullable image)
-    CG_AVAILABLE_STARTING(10.0, 2.0);
+    API_AVAILABLE(macos(10.0), ios(2.0));
 
 /* Return the rendering intent of `image'. */
 
 CG_EXTERN CGColorRenderingIntent CGImageGetRenderingIntent(cg_nullable CGImageRef image)
-    CG_AVAILABLE_STARTING(10.0, 2.0);
+    API_AVAILABLE(macos(10.0), ios(2.0));
 
 /* Return the bitmap info of `image'. */
 
 CG_EXTERN CGBitmapInfo CGImageGetBitmapInfo(CGImageRef cg_nullable image)
-    CG_AVAILABLE_STARTING(10.4, 2.0);
+    API_AVAILABLE(macos(10.4), ios(2.0));
 
 /* Return the byte order info of `image'. */
 
-CG_EXTERN CGImageByteOrderInfo CGImageGetByteOrderInfo(CGImageRef cg_nullable image) CG_AVAILABLE_STARTING(10.14, 12.0);
+CG_EXTERN CGImageByteOrderInfo CGImageGetByteOrderInfo(CGImageRef cg_nullable image) API_AVAILABLE(macos(10.14), ios(12.0));
 
 /* Return the pixel format of `image'. */
 
-CG_EXTERN CGImagePixelFormatInfo CGImageGetPixelFormatInfo(CGImageRef cg_nullable image) CG_AVAILABLE_STARTING(10.14, 12.0);
+CG_EXTERN CGImagePixelFormatInfo CGImageGetPixelFormatInfo(CGImageRef cg_nullable image) API_AVAILABLE(macos(10.14), ios(12.0));
+
+/* Return true if `image' should be tone mapped while rendering, false otherwise.
+   Tone mapping results depend on the receiving context.
+ */
+
+CG_EXTERN bool CGImageShouldToneMap(CGImageRef cg_nullable image) API_AVAILABLE(macos(15.0), ios(18.0), tvos(18.0), watchos(11.0));
+
+/* Return true if `image' contains image specific tone mapping metadata, false otherwise. */
+
+CG_EXTERN bool CGImageContainsImageSpecificToneMappingMetadata(CGImageRef cg_nullable image) API_AVAILABLE(macos(15.0), ios(18.0), tvos(18.0), watchos(11.0));
 
 /* Return the UTType of `image'. */
 
 CG_EXTERN CFStringRef  __nullable CGImageGetUTType(cg_nullable CGImageRef image)
-    CG_AVAILABLE_STARTING(10.11, 9.0);
+    API_AVAILABLE(macos(10.11), ios(9.0));
 
 CF_ASSUME_NONNULL_END
 

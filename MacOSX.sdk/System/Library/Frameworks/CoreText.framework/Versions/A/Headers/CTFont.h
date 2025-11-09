@@ -2,7 +2,7 @@
  *  CTFont.h
  *  CoreText
  *
- *  Copyright (c) 2006-2022 Apple Inc. All rights reserved.
+ *  Copyright (c) 2006-2024 Apple Inc. All rights reserved.
  *
  */
 
@@ -43,6 +43,7 @@ typedef const struct CF_BRIDGED_TYPE(NSFont) __CTFont * CTFontRef;
     @abstract   Returns the type identifier for Core Text font references.
     @result     The identifier for the opaque type CTFontRef.
 */
+CT_EXPORT
 CFTypeID CTFontGetTypeID( void ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 /*! --------------------------------------------------------------------------
@@ -164,6 +165,7 @@ CT_EXPORT const CFStringRef kCTFontPostScriptCIDNameKey CT_AVAILABLE(macos(10.5)
 
     @result     This function will return a CTFontRef that best matches the name provided with size and matrix attributes. The name parameter is the only required parameters, and default values will be used for unspecified parameters. A best match will be found if all parameters cannot be matched identically.
 */
+CT_EXPORT
 CTFontRef CTFontCreateWithName(
     CFStringRef                 name,
     CGFloat                     size,
@@ -198,6 +200,7 @@ static inline CF_SWIFT_NAME(CTFont.init(_:transform:)) CTFontRef _CTFontCreateWi
 
     @result     This function will return a CTFontRef that best matches the attributes provided with the font descriptor. The size and matrix parameters will override any specified in the font descriptor, unless they are unspecified. A best match font will always be returned, and default values will be used for any unspecified.
 */
+CT_EXPORT
 CTFontRef CTFontCreateWithFontDescriptor(
     CTFontDescriptorRef     descriptor,
     CGFloat                 size,
@@ -256,6 +259,7 @@ typedef CF_OPTIONS(CFOptionFlags, CTFontOptions) {
 
     @result     This function will return a CTFontRef that best matches the name provided with size and matrix attributes. The name parameter is the only required parameters, and default values will be used for unspecified parameters. A best match will be found if all parameters cannot be matched identically.
 */
+CT_EXPORT
 CTFontRef CTFontCreateWithNameAndOptions(
     CFStringRef                 name,
     CGFloat                     size,
@@ -280,6 +284,7 @@ CTFontRef CTFontCreateWithNameAndOptions(
 
     @result     This function will return a CTFontRef that best matches the attributes provided with the font descriptor. The size and matrix parameters will override any specified in the font descriptor, unless they are unspecified. A best match font will always be returned, and default values will be used for any unspecified.
 */
+CT_EXPORT
 CTFontRef CTFontCreateWithFontDescriptorAndOptions(
     CTFontDescriptorRef     descriptor,
     CGFloat                 size,
@@ -394,6 +399,7 @@ typedef CF_ENUM(uint32_t, CTFontUIFontType) {
 
     @result     This function returns the correct font for various UI uses. The only required parameter is the uiType selector, unspecified optional parameters will use default values.
 */
+CT_EXPORT
 CTFontRef _Nullable CTFontCreateUIFontForLanguage(
     CTFontUIFontType    uiType,
     CGFloat             size,
@@ -433,6 +439,7 @@ static inline CF_SWIFT_NAME(CTFont.init(_:size:language:)) CTFontRef _CTFontCrea
 
     @result     Returns a new font reference converted from the original with the specified attributes.
 */
+CT_EXPORT
 CTFontRef CTFontCreateCopyWithAttributes(
     CTFontRef                   font,
     CGFloat                     size,
@@ -460,6 +467,7 @@ CTFontRef CTFontCreateCopyWithAttributes(
 
     @result     Returns a new font reference in the same family with the given symbolic traits, or NULL if none found in the system.
 */
+CT_EXPORT
 CTFontRef _Nullable CTFontCreateCopyWithSymbolicTraits(
     CTFontRef                   font,
     CGFloat                     size,
@@ -485,6 +493,7 @@ CTFontRef _Nullable CTFontCreateCopyWithSymbolicTraits(
 
     @result     Returns a new font reference with the original traits in the given family. NULL if non found in the system.
 */
+CT_EXPORT
 CTFontRef _Nullable CTFontCreateCopyWithFamily(
     CTFontRef                   font,
     CGFloat                     size,
@@ -516,6 +525,7 @@ CTFontRef _Nullable CTFontCreateCopyWithFamily(
     @seealso    CTFontGetGlyphsForCharacters
     @seealso    kCTFontCascadeListAttribute
 */
+CT_EXPORT
 CTFontRef CTFontCreateForString(
     CTFontRef       currentFont,
     CFStringRef     string,
@@ -545,6 +555,7 @@ CTFontRef CTFontCreateForString(
     @seealso    CTFontGetGlyphsForCharacters
     @seealso    kCTFontCascadeListAttribute
 */
+CT_EXPORT
 CTFontRef CTFontCreateForStringWithLanguage(
     CTFontRef               currentFont,
     CFStringRef             string,
@@ -578,6 +589,7 @@ static inline CF_SWIFT_NAME(CTFont.init(font:string:range:language:)) CTFontRef 
 
     @result     This function returns a normalized font descriptor for a font. The font descriptor contains enough information to recreate this font at a later time.
 */
+CT_EXPORT
 CTFontDescriptorRef CTFontCopyFontDescriptor(
     CTFontRef       font ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
@@ -593,6 +605,7 @@ CTFontDescriptorRef CTFontCopyFontDescriptor(
 
     @result     This function returns a retained reference to an arbitrary attribute. If the requested attribute is not present, NULL is returned. Refer to the attribute definitions for documentation as to how each attribute is packaged as a CFType.
 */
+CT_EXPORT
 CFTypeRef _Nullable CTFontCopyAttribute(
     CTFontRef       font,
     CFStringRef     attribute ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
@@ -606,6 +619,7 @@ CFTypeRef _Nullable CTFontCopyAttribute(
 
     @result     This function returns the point size of the given font reference. This is the point size provided when the font was created.
 */
+CT_EXPORT
 CGFloat CTFontGetSize( CTFontRef font ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 /*!
@@ -617,6 +631,7 @@ CGFloat CTFontGetSize( CTFontRef font ) CT_AVAILABLE(macos(10.5), ios(3.2), watc
 
     @result     This function returns the transformation matrix for this given font reference. This is the matrix that was provided when the font was created.
 */
+CT_EXPORT
 CGAffineTransform CTFontGetMatrix( CTFontRef font ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 /*!
@@ -628,6 +643,7 @@ CGAffineTransform CTFontGetMatrix( CTFontRef font ) CT_AVAILABLE(macos(10.5), io
 
     @result     This function returns the symbolic traits of the font. This is equivalent to the kCTFontSymbolicTrait of traits dictionary. See CTFontTraits.h for a definition of the font traits.
 */
+CT_EXPORT
 CTFontSymbolicTraits CTFontGetSymbolicTraits( CTFontRef font ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 /*!
@@ -639,7 +655,23 @@ CTFontSymbolicTraits CTFontGetSymbolicTraits( CTFontRef font ) CT_AVAILABLE(maco
 
     @result     This function returns a retained reference to the font traits dictionary. Individual traits can be accessed with the trait key constants. See CTFontTraits.h for a definition of the font traits.
 */
+CT_EXPORT
 CFDictionaryRef CTFontCopyTraits( CTFontRef font ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
+
+/*!
+    @function   CTFontCopyDefaultCascadeListForLanguages
+    @abstract   Return an ordered list of CTFontDescriptorRef's for font fallback derived from the system default fallback according to the given language preferences, making a reasonable attempt to match the given font's style, weight, and width.
+
+    @param      font
+                The font reference.
+
+    @param      languagePrefList
+                An array of language identifiers as CFString values, in decreasing order of preference.
+
+    @result     The ordered list of fallback fonts - ordered array of CTFontDescriptors.
+*/
+CT_EXPORT
+CFArrayRef _Nullable CTFontCopyDefaultCascadeListForLanguages( CTFontRef font, CFArrayRef _Nullable languagePrefList ) CT_AVAILABLE(macos(10.8), ios(6.0), watchos(2.0), tvos(9.0));
 
 /*! --------------------------------------------------------------------------
     @group Font Names
@@ -654,6 +686,7 @@ CFDictionaryRef CTFontCopyTraits( CTFontRef font ) CT_AVAILABLE(macos(10.5), ios
 
     @result     This function returns a retained reference to the PostScript name of the font.
 */
+CT_EXPORT
 CFStringRef CTFontCopyPostScriptName( CTFontRef font ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 /*!
@@ -665,6 +698,7 @@ CFStringRef CTFontCopyPostScriptName( CTFontRef font ) CT_AVAILABLE(macos(10.5),
 
     @result     This function returns a retained reference to the family name of the font.
 */
+CT_EXPORT
 CFStringRef CTFontCopyFamilyName( CTFontRef font ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 /*!
@@ -676,6 +710,7 @@ CFStringRef CTFontCopyFamilyName( CTFontRef font ) CT_AVAILABLE(macos(10.5), ios
 
     @result     This function returns a retained reference to the full name of the font.
 */
+CT_EXPORT
 CFStringRef CTFontCopyFullName( CTFontRef font ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 /*!
@@ -687,6 +722,7 @@ CFStringRef CTFontCopyFullName( CTFontRef font ) CT_AVAILABLE(macos(10.5), ios(3
 
     @result     This function returns a retained reference to the localized display name of the font.
 */
+CT_EXPORT
 CFStringRef CTFontCopyDisplayName( CTFontRef font ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 /*!
@@ -701,6 +737,7 @@ CFStringRef CTFontCopyDisplayName( CTFontRef font ) CT_AVAILABLE(macos(10.5), io
 
     @result     This function creates the requested name for the font, or NULL if the font does not have an entry for the requested name. The Unicode version of the name will be preferred, otherwise the first available will be used.
 */
+CT_EXPORT
 CFStringRef _Nullable CTFontCopyName(
     CTFontRef       font,
     CFStringRef     nameKey ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
@@ -721,6 +758,7 @@ CFStringRef _Nullable CTFontCopyName(
 
     @result     This function returns a specific localized name from the font reference. The name is localized based on the user's global language precedence. If the font does not have an entry for the requested name, NULL will be returned. The matched language will be returned in the caller's buffer.
 */
+CT_EXPORT
 CFStringRef _Nullable CTFontCopyLocalizedName(
     CTFontRef       font,
     CFStringRef     nameKey,
@@ -739,6 +777,7 @@ CFStringRef _Nullable CTFontCopyLocalizedName(
 
     @result     This function returns a retained reference to the font's character set. This character set covers the nominal referenced by the font's Unicode cmap table (or equivalent).
 */
+CT_EXPORT
 CFCharacterSetRef CTFontCopyCharacterSet( CTFontRef font ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 /*!
@@ -750,6 +789,7 @@ CFCharacterSetRef CTFontCopyCharacterSet( CTFontRef font ) CT_AVAILABLE(macos(10
 
     @result     This function returns the best string encoding for the font.
 */
+CT_EXPORT
 CFStringEncoding CTFontGetStringEncoding( CTFontRef font ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 /*!
@@ -761,6 +801,7 @@ CFStringEncoding CTFontGetStringEncoding( CTFontRef font ) CT_AVAILABLE(macos(10
 
     @result     This function returns a retained reference to an array of languages supported by the font. The array contains language identifier strings as CFStringRefs. The format of the language identifier will conform to UTS #35.
 */
+CT_EXPORT
 CFArrayRef CTFontCopySupportedLanguages( CTFontRef font ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 /*!
@@ -785,6 +826,7 @@ CFArrayRef CTFontCopySupportedLanguages( CTFontRef font ) CT_AVAILABLE(macos(10.
 
     @seealso    CTFontCopyCharacterSet
 */
+CT_EXPORT
 bool CTFontGetGlyphsForCharacters(
     CTFontRef       font,
     const UniChar   characters[_Nonnull],
@@ -804,6 +846,7 @@ bool CTFontGetGlyphsForCharacters(
 
     @result     This function returns the font ascent metric scaled based on the point size and matrix of the font reference.
 */
+CT_EXPORT
 CGFloat CTFontGetAscent( CTFontRef font ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 /*!
@@ -815,6 +858,7 @@ CGFloat CTFontGetAscent( CTFontRef font ) CT_AVAILABLE(macos(10.5), ios(3.2), wa
 
     @result     This function returns the font descent metric scaled based on the point size and matrix of the font reference.
 */
+CT_EXPORT
 CGFloat CTFontGetDescent( CTFontRef font ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 /*!
@@ -826,6 +870,7 @@ CGFloat CTFontGetDescent( CTFontRef font ) CT_AVAILABLE(macos(10.5), ios(3.2), w
 
     @result     This function returns the font leading metric scaled based on the point size and matrix of the font reference.
 */
+CT_EXPORT
 CGFloat CTFontGetLeading( CTFontRef font ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 /*!
@@ -837,6 +882,7 @@ CGFloat CTFontGetLeading( CTFontRef font ) CT_AVAILABLE(macos(10.5), ios(3.2), w
 
     @result     This function returns the units per em of the font.
 */
+CT_EXPORT
 unsigned CTFontGetUnitsPerEm( CTFontRef font ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 /*!
@@ -848,6 +894,7 @@ unsigned CTFontGetUnitsPerEm( CTFontRef font ) CT_AVAILABLE(macos(10.5), ios(3.2
 
     @result     This function returns the number of glyphs in the font.
 */
+CT_EXPORT
 CFIndex CTFontGetGlyphCount( CTFontRef font ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 /*!
@@ -859,6 +906,7 @@ CFIndex CTFontGetGlyphCount( CTFontRef font ) CT_AVAILABLE(macos(10.5), ios(3.2)
 
     @result     This will return the design bounding box of the font, which is the rectangle defined by xMin, yMin, xMax, and yMax values for the font.
 */
+CT_EXPORT
 CGRect CTFontGetBoundingBox( CTFontRef font ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 /*!
@@ -870,6 +918,7 @@ CGRect CTFontGetBoundingBox( CTFontRef font ) CT_AVAILABLE(macos(10.5), ios(3.2)
 
     @result     This function returns the font underline position metric scaled based on the point size and matrix of the font reference.
 */
+CT_EXPORT
 CGFloat CTFontGetUnderlinePosition( CTFontRef font ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 /*!
@@ -881,6 +930,7 @@ CGFloat CTFontGetUnderlinePosition( CTFontRef font ) CT_AVAILABLE(macos(10.5), i
 
     @result     This function returns the font underline thickness metric scaled based on the point size and matrix of the font reference.
 */
+CT_EXPORT
 CGFloat CTFontGetUnderlineThickness( CTFontRef font ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 /*!
@@ -892,6 +942,7 @@ CGFloat CTFontGetUnderlineThickness( CTFontRef font ) CT_AVAILABLE(macos(10.5), 
 
     @result     This function returns the transformed slant angle of the font. This is equivalent to the italic or caret angle with any skew from the transformation matrix applied.
 */
+CT_EXPORT
 CGFloat CTFontGetSlantAngle( CTFontRef font ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 /*!
@@ -903,6 +954,7 @@ CGFloat CTFontGetSlantAngle( CTFontRef font ) CT_AVAILABLE(macos(10.5), ios(3.2)
 
     @result     This function returns the font cap height metric scaled based on the point size and matrix of the font reference.
 */
+CT_EXPORT
 CGFloat CTFontGetCapHeight( CTFontRef font ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 /*!
@@ -914,6 +966,7 @@ CGFloat CTFontGetCapHeight( CTFontRef font ) CT_AVAILABLE(macos(10.5), ios(3.2),
 
     @result     This function returns the font X height metric scaled based on the point size and matrix of the font reference.
 */
+CT_EXPORT
 CGFloat CTFontGetXHeight( CTFontRef font ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 /*! --------------------------------------------------------------------------
@@ -932,6 +985,7 @@ CGFloat CTFontGetXHeight( CTFontRef font ) CT_AVAILABLE(macos(10.5), ios(3.2), w
 
     @result     The glyph with the specified name or 0 if the name is not recognized; this glyph can be used with other Core Text glyph data accessors or with Quartz.
 */
+CT_EXPORT
 CGGlyph CTFontGetGlyphWithName(
     CTFontRef           font,
     CFStringRef         glyphName ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
@@ -950,6 +1004,7 @@ CGGlyph CTFontGetGlyphWithName(
 
     @seealso    CTFontGetGlyphWithName
 */
+CT_EXPORT
 CFStringRef _Nullable CTFontCopyNameForGlyph(
     CTFontRef           font,
     CGGlyph             glyph ) CT_AVAILABLE(macos(10.8), ios(6.0), watchos(2.0), tvos(9.0));
@@ -975,6 +1030,7 @@ CFStringRef _Nullable CTFontCopyNameForGlyph(
 
     @result     This function returns the overall bounding rectangle for an array or run of glyphs. The bounding rects of the individual glyphs are returned through the boundingRects parameter. These are the design metrics from the font transformed in font space.
 */
+CT_EXPORT
 CGRect CTFontGetBoundingRectsForGlyphs(
     CTFontRef           font,
     CTFontOrientation   orientation,
@@ -1005,6 +1061,7 @@ CGRect CTFontGetBoundingRectsForGlyphs(
 
     @result     This function returns the overall bounding rectangle for an array or run of glyphs. The bounding rects of the individual glyphs are returned through the boundingRects parameter. These are the design metrics from the font transformed in font space.
 */
+CT_EXPORT
 CGRect CTFontGetOpticalBoundsForGlyphs(
     CTFontRef           font,
     const CGGlyph       glyphs[_Nonnull],
@@ -1033,6 +1090,7 @@ CGRect CTFontGetOpticalBoundsForGlyphs(
 
     @result     This function returns the summed glyph advance of an array of glyphs. Individual glyph advances are passed back via the advances parameter. These are the ideal metrics for each glyph scaled and transformed in font space.
 */
+CT_EXPORT
 double CTFontGetAdvancesForGlyphs(
     CTFontRef           font,
     CTFontOrientation   orientation,
@@ -1056,6 +1114,7 @@ double CTFontGetAdvancesForGlyphs(
     @param      count
                 The capacity of the glyphs and translations buffers.
 */
+CT_EXPORT
 void CTFontGetVerticalTranslationsForGlyphs(
     CTFontRef       font,
     const CGGlyph   glyphs[_Nonnull],
@@ -1079,6 +1138,7 @@ void CTFontGetVerticalTranslationsForGlyphs(
 
     @result     A retained CGPath reference containing the glyph outlines or NULL if there is no such glyph or it has no outline.
 */
+CT_EXPORT
 CGPathRef _Nullable CTFontCreatePathForGlyph(
     CTFontRef                   font,
     CGGlyph                     glyph,
@@ -1115,7 +1175,7 @@ CT_EXPORT const CFStringRef kCTFontVariationAxisDefaultValueKey CT_AVAILABLE(mac
 /*!
     @defined    kCTFontVariationAxisNameKey
     @abstract   Key to get the variation axis name string.
-    @discussion This key is used with a variation axis dictionary to get the localized variation axis name.
+    @discussion This key is used with a variation axis dictionary to get the variation axis name.
 */
 CT_EXPORT const CFStringRef kCTFontVariationAxisNameKey CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 /*!
@@ -1128,12 +1188,14 @@ CT_EXPORT const CFStringRef kCTFontVariationAxisHiddenKey CT_AVAILABLE(macos(10.
 /*!
     @function   CTFontCopyVariationAxes
     @abstract   Returns an array of variation axis dictionaries.
+    @discussion Each variation axis dictionary contains the five kCTFontVariationAxis* keys above, and kCTFontVariationAxisNameKey values will be localized when supported by the font.
 
     @param      font
                 The font reference.
 
-    @result     This function returns an array of variation axis dictionaries or null if the font does not support variations. Each variation axis dictionary contains the five kCTFontVariationAxis* keys above.
+    @result     An array of variation axis dictionaries or null if the font does not support variations.
 */
+CT_EXPORT
 CFArrayRef _Nullable CTFontCopyVariationAxes( CTFontRef font ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 /*!
@@ -1149,6 +1211,7 @@ CFArrayRef _Nullable CTFontCopyVariationAxes( CTFontRef font ) CT_AVAILABLE(maco
     @seealso    kCTFontVariationAxisIdentifierKey
     @seealso    kCTFontVariationAxisDefaultValueKey
 */
+CT_EXPORT
 CFDictionaryRef _Nullable CTFontCopyVariation( CTFontRef font ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 /*! --------------------------------------------------------------------------
@@ -1237,6 +1300,7 @@ CT_EXPORT const CFStringRef kCTFontFeatureTooltipTextKey CT_AVAILABLE(macos(10.1
 
     @result     This function returns an array of font feature dictionaries for the font reference.
 */
+CT_EXPORT
 CFArrayRef _Nullable CTFontCopyFeatures( CTFontRef font ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 /*!
@@ -1250,6 +1314,7 @@ CFArrayRef _Nullable CTFontCopyFeatures( CTFontRef font ) CT_AVAILABLE(macos(10.
 
     @result     This function returns a normalized array of font feature setting dictionaries. The array will only contain the non-default settings that should be applied to the font, or NULL if the default settings should be used.
 */
+CT_EXPORT
 CFArrayRef _Nullable CTFontCopyFeatureSettings( CTFontRef font ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 /*! --------------------------------------------------------------------------
@@ -1268,6 +1333,7 @@ CFArrayRef _Nullable CTFontCopyFeatureSettings( CTFontRef font ) CT_AVAILABLE(ma
 
     @result     This function returns a CGFontRef for the given font reference. Additional attributes from the font will be passed back as a font descriptor via the attributes parameter. The result must be released by the caller.
 */
+CT_EXPORT
 CGFontRef CTFontCopyGraphicsFont(
     CTFontRef           font,
     CTFontDescriptorRef _Nullable * _Nullable attributes ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
@@ -1290,6 +1356,7 @@ CGFontRef CTFontCopyGraphicsFont(
 
     @result     This function returns a new font reference for an existing CGFontRef with the specified size, matrix, and additional attributes.
 */
+CT_EXPORT
 CTFontRef CTFontCreateWithGraphicsFont(
     CGFontRef                   graphicsFont,
     CGFloat                     size,
@@ -1314,6 +1381,7 @@ typedef UInt32 ATSFontRef;
     @result     This function returns a an ATSFontRef for the given font reference. Additional attributes from the font will be passed back as a font descriptor via the attributes parameter.
 */
 
+CT_EXPORT
 ATSFontRef CTFontGetPlatformFont(
     CTFontRef               font,
     CTFontDescriptorRef _Nullable * _Nullable attributes ) CT_DEPRECATED("ATS is deprecated", macos(10.5, 11.0)) CT_UNAVAILABLE(ios, watchos, tvos);
@@ -1336,6 +1404,7 @@ ATSFontRef CTFontGetPlatformFont(
 
     @result     This function returns a new font reference for an ATSFontRef with the specified size, matrix, and additional attributes.
 */
+CT_EXPORT
 CTFontRef _Nullable CTFontCreateWithPlatformFont(
     ATSFontRef                  platformFont,
     CGFloat                     size,
@@ -1362,6 +1431,7 @@ CTFontRef _Nullable CTFontCreateWithPlatformFont(
 
     @result     This function returns the best font instance matching the Quickdraw instance information.
 */
+CT_EXPORT
 CTFontRef CTFontCreateWithQuickdrawInstance(
     ConstStr255Param _Nullable name,
     int16_t             identifier,
@@ -1472,9 +1542,26 @@ typedef CF_OPTIONS(uint32_t, CTFontTableOptions) {
     @result     This function returns an array of CTFontTableTag values for the given font and the supplied options. The returned set will contain unboxed values, which may be extracted like so:
                 <code>CTFontTableTag tag = (CTFontTableTag)(uintptr_t)CFArrayGetValueAtIndex(tags, index);</code>
 */
+CT_EXPORT
 CFArrayRef _Nullable CTFontCopyAvailableTables(
     CTFontRef           font,
     CTFontTableOptions  options ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
+
+/*!
+    @function   CTFontHasTable
+    @abstract   Determine whether a table is present in a font.
+    @discussion This is a convenience function to avoid requesting an array of table tags or any table data. It behaves according as if using `kCTFontTableOptionNoOptions`.
+
+    @param      font
+                The font reference.
+
+    @param      tag
+                The font table identifier as a CTFontTableTag.
+
+    @result     Returns true if the call was successful and the requested table is present.
+*/
+CT_EXPORT
+bool CTFontHasTable(CTFontRef font, CTFontTableTag tag) CT_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0));
 
 /*!
     @function   CTFontCopyTable
@@ -1491,6 +1578,7 @@ CFArrayRef _Nullable CTFontCopyAvailableTables(
 
     @result     This function returns a retained reference to the font table data as CFDataRef or NULL if the table is not present.
 */
+CT_EXPORT
 CFDataRef _Nullable CTFontCopyTable(
     CTFontRef           font,
     CTFontTableTag      table,
@@ -1518,8 +1606,9 @@ CFDataRef _Nullable CTFontCopyTable(
     @param      context
                 CGContext used to render the glyphs.
 */
+CT_EXPORT
 void CTFontDrawGlyphs(
-    CTFontRef       font, 
+    CTFontRef       font,
     const CGGlyph   glyphs[_Nonnull],
     const CGPoint   positions[_Nonnull],
     size_t          count, 
@@ -1550,6 +1639,7 @@ void CTFontDrawGlyphs(
  
     @result     Returns the number of caret positions for the specified glyph.
 */
+CT_EXPORT
 CFIndex CTFontGetLigatureCaretPositions(
     CTFontRef       font,
     CGGlyph         glyph,
@@ -1633,19 +1723,68 @@ CT_EXPORT const CFStringRef kCTBaselineReferenceFont CT_AVAILABLE(macos(10.8), i
 CT_EXPORT const CFStringRef kCTBaselineOriginalFont CT_AVAILABLE(macos(10.8), ios(6.0), watchos(2.0), tvos(9.0));
 
 
+/*! --------------------------------------------------------------------------
+    @group Adaptive Image Glyphs
+*///--------------------------------------------------------------------------
+
+#if defined(__OBJC__)
+@protocol CTAdaptiveImageProviding;
+#endif
+
 /*!
-    @function   CTFontCopyDefaultCascadeListForLanguages
-    @abstract   Return an ordered list of CTFontDescriptorRef's for font fallback derived from the system default fallback region according to the given language preferences. The style of the given is also matched as well as the weight and width of the font is not one of the system UI font, otherwise the UI font fallback is applied.
+    @function   CTFontGetTypographicBoundsForAdaptiveImageProvider
+    @abstract   Returns metrics needed by clients performing their own typesetting of an adaptive image glyph.
+
+    @discussion Adaptive image glyphs are handled automatically when using an attributed string with system frameworks.
+                Clients performing their own typesetting can use this function to calculate the appropriate metrics for an adaptive image glyph,
+                including the ascent and descent to be used instead of those applicable to the font on its own.
 
     @param      font
-                The font reference.
- 
-    @param      languagePrefList
-                The language preference list - ordered array of CFStringRef's of ISO language codes.
+                The effective font in the range containing the adaptive image glyph.
 
-    @result     The ordered list of fallback fonts - ordered array of CTFontDescriptors.
+    @param      provider
+                An object conforming to the CTAdaptiveImageProviding protocol. Default results will be returned in the absence of a provider, on the assumption an image is not yet available.
+
+    @result     The typographic bounds in points expressed as a rect whose width corresponds to the advance width, maximum Y corresponds to the ascent (above the baseline), and minimum Y corresponds to the descent (below the baseline).
+
+    @seealso    CTAdaptiveImageProviding
 */
-CFArrayRef _Nullable CTFontCopyDefaultCascadeListForLanguages( CTFontRef font, CFArrayRef _Nullable languagePrefList ) CT_AVAILABLE(macos(10.8), ios(6.0), watchos(2.0), tvos(9.0));
+#if defined(__OBJC__)
+CT_EXPORT
+CGRect CTFontGetTypographicBoundsForAdaptiveImageProvider(CTFontRef font, id<CTAdaptiveImageProviding> _Nullable provider) CT_AVAILABLE(macos(15.0), ios(18.0), watchos(11.0), tvos(18.0));
+#else
+CT_EXPORT
+CGRect CTFontGetTypographicBoundsForAdaptiveImageProvider(CTFontRef font, CFTypeRef _Nullable provider) CT_AVAILABLE(macos(15.0), ios(18.0), watchos(11.0), tvos(18.0));
+#endif
+
+/*!
+    @function   CTFontDrawImageFromAdaptiveImageProviderAtPoint
+    @abstract   Draws the image for a font and adaptive image provider.
+
+    @discussion Adaptive image glyphs are handled automatically when using an attributed string with system frameworks.
+                Clients performing their own typesetting can use this function to display an adaptive image glyph at the given point.
+
+    @param      font
+                The effective font in the range containing the adaptive image glyph.
+
+    @param      provider
+                An object conforming to the CTAdaptiveImageProviding protocol.
+
+    @param      point
+                The position relative to which the adaptive image glyph will be drawn.
+
+    @param      context
+                The context in which the adaptive image glyph will be drawn.
+
+    @seealso    CTAdaptiveImageProviding
+*/
+#if defined(__OBJC__)
+CT_EXPORT
+void CTFontDrawImageFromAdaptiveImageProviderAtPoint(CTFontRef font, id<CTAdaptiveImageProviding> provider, CGPoint point, CGContextRef context) CT_AVAILABLE(macos(15.0), ios(18.0), watchos(11.0), tvos(18.0));
+#else
+CT_EXPORT
+void CTFontDrawImageFromAdaptiveImageProviderAtPoint(CTFontRef font, CFTypeRef provider, CGPoint point, CGContextRef context) CT_AVAILABLE(macos(15.0), ios(18.0), watchos(11.0), tvos(18.0));
+#endif
 
 CF_ASSUME_NONNULL_END
 CF_EXTERN_C_END

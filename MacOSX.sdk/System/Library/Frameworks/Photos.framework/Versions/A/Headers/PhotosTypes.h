@@ -61,8 +61,8 @@ typedef NS_ENUM(NSInteger, PHCollectionEditOperation) {
 #pragma mark - PHAssetCollection types
 
 typedef NS_ENUM(NSInteger, PHAssetCollectionType) {
-    PHAssetCollectionTypeAlbum      = 1,
-    PHAssetCollectionTypeSmartAlbum = 2,
+    PHAssetCollectionTypeAlbum           = 1,
+    PHAssetCollectionTypeSmartAlbum      = 2,
 
     PHAssetCollectionTypeMoment     API_DEPRECATED("Will be removed in a future release", ios(8, 13), tvos(10, 13)) API_UNAVAILABLE(macos) = 3,
 
@@ -101,8 +101,10 @@ typedef NS_ENUM(NSInteger, PHAssetCollectionSubtype) {
     PHAssetCollectionSubtypeSmartAlbumUnableToUpload API_AVAILABLE(macos(10.15), ios(13), tvos(13)) = 216,
     PHAssetCollectionSubtypeSmartAlbumRAW API_AVAILABLE(macos(12), ios(15), tvos(15)) = 217,
     PHAssetCollectionSubtypeSmartAlbumCinematic API_AVAILABLE(macos(12), ios(15), tvos(15)) = 218,
+    PHAssetCollectionSubtypeSmartAlbumSpatial API_AVAILABLE(macos(15), ios(18), tvos(18)) = 219,
 
 
+    
     // Used for fetching, if you don't care about the exact subtype
     PHAssetCollectionSubtypeAny = NSIntegerMax
 };
@@ -140,14 +142,15 @@ typedef NS_OPTIONS(NSUInteger, PHAssetMediaSubtype) {
     PHAssetMediaSubtypePhotoScreenshot API_AVAILABLE(ios(9)) = (1UL << 2),
     PHAssetMediaSubtypePhotoLive API_AVAILABLE(ios(9.1)) = (1UL << 3),
     PHAssetMediaSubtypePhotoDepthEffect API_AVAILABLE(macos(10.12.2), ios(10.2), tvos(10.1)) = (1UL << 4),
+    PHAssetMediaSubtypeSpatialMedia API_AVAILABLE(macos(13), ios(16), tvos(16)) = (1UL << 10),
 
-    
     // Video subtypes
     PHAssetMediaSubtypeVideoStreamed      = (1UL << 16),
     PHAssetMediaSubtypeVideoHighFrameRate = (1UL << 17),
     PHAssetMediaSubtypeVideoTimelapse     = (1UL << 18),
     PHAssetMediaSubtypeVideoCinematic API_AVAILABLE(macos(12), ios(15), tvos(15)) = (1UL << 21),
 };
+
 
 typedef NS_OPTIONS(NSUInteger, PHAssetBurstSelectionType) {
     PHAssetBurstSelectionTypeNone     = 0,
@@ -177,6 +180,7 @@ typedef NS_ENUM(NSInteger, PHAssetResourceType) {
     PHAssetResourceTypeAdjustmentBaseVideo API_AVAILABLE(macos(10.15), ios(13)) = 12,
 
     PHAssetResourceTypePhotoProxy API_AVAILABLE(macos(14), ios(17))= 19,
+
 } API_AVAILABLE(ios(9));
 
 API_AVAILABLE_END

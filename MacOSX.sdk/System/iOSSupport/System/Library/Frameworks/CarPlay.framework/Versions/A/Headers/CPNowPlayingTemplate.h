@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class CPNowPlayingTemplate;
 
-API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(macos, watchos, tvos)
+API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(macos, watchos)
 @protocol CPNowPlayingTemplateObserver <NSObject>
 @optional
 
@@ -32,7 +32,7 @@ API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(macos, watchos, tvos)
 
 @end
 
-API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(macos, watchos, tvos)
+API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(macos, watchos)
 @interface CPNowPlayingTemplate : CPTemplate
 
 /**

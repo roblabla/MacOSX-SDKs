@@ -116,15 +116,15 @@
 #endif
 
 #ifndef __COREFOUNDATION__
-#include <CoreFoundation/CoreFoundation.h>
+#import <CoreFoundation/CoreFoundation.h>
 #endif
 
 #ifndef _H_DRCoreObject
-#include <DiscRecording/DRCoreObject.h>
+#import <DiscRecording/DRCoreObject.h>
 #endif
 
 #ifndef __AVAILABILITYMACROS__
-#include <AvailabilityMacros.h>
+#import <AvailabilityMacros.h>
 #endif
 
 #ifdef __cplusplus

@@ -26,14 +26,14 @@ NS_EXTENSION_UNAVAILABLE("Not available to extensions") API_AVAILABLE(ios(11.0))
  *
  * @discussion Array of NFCNDEFPayload records contained in this message.
  */
-@property (nonatomic, copy) NSArray<NFCNDEFPayload *> *records API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos);
+@property (nonatomic, copy) NSArray<NFCNDEFPayload *> *records API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos);
 
 /*!
  * @property length
  *
  * @discussion Length of the resulting NDEF message in bytes as it would be stored on a NFC tag.
  */
-@property (nonatomic, readonly) NSUInteger length API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos);
+@property (nonatomic, readonly) NSUInteger length API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos);
 
 - (instancetype)init NS_UNAVAILABLE;
 
@@ -42,7 +42,7 @@ NS_EXTENSION_UNAVAILABLE("Not available to extensions") API_AVAILABLE(ios(11.0))
  *
  * @param records  NSArray of NFCNDEFPayload object.  An empty array will create an empty NDEF message.
  */
-- (instancetype)initWithNDEFRecords:(NSArray<NFCNDEFPayload *> *)records API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos);
+- (instancetype)initWithNDEFRecords:(NSArray<NFCNDEFPayload *> *)records API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos);
 
 /*!
  * @method ndefMessageWithData:
@@ -51,7 +51,7 @@ NS_EXTENSION_UNAVAILABLE("Not available to extensions") API_AVAILABLE(ios(11.0))
  *              be valid according to the NFC Forum NDEF RTD specification and it shall only contain a single NDEF message.
  *
  */
-+ (_Nullable instancetype)ndefMessageWithData:(NSData *)data API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos);
++ (_Nullable instancetype)ndefMessageWithData:(NSData *)data API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos);
 @end
 
 NS_ASSUME_NONNULL_END

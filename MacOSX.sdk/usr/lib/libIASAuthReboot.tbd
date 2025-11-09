@@ -20,18 +20,12 @@ exports:
                        __IARPreparePrincipalUserCookie, __IARReadRandom, __IARRootDiskIsAPFS, 
                        __IARStagePrincipalUserCookie, __IARStashAPFSFDEKeyForPath, 
                        __IARStashFDEKey, __IARStashFileVaultKeyBagKek, __IARStashLoginCredentialsAKSHijack, 
-                       __IARStashLoginCredentialsAKSHijackWithMasterKey, __IARStashLoginCredentialsOld, 
-                       __IARStashLoginCredentialsOldWithMasterKey, __IARStashMasterKey, 
+                       __IARStashLoginCredentialsAKSHijackWithMasterKey, __IARStashMasterKey, 
                        __IARUnwrapVolumeKEK, __IARValidateKeyCheck, __IARWritePrincipalUserCookie, 
                        __IARWriteToSMC, __IAR_APFSVolumeGetVEKState, __IAR_APFSVolumeQueryCryptoProgress, 
                        __IAR_Cambria_Translated, __IAR_IsAppleSilicon, __IAR_MKBFilevaultStashKek, 
                        __IAR_MKBKeyBagKeyStashCommitWithOpts, __IAR_MKBKeyBagKeyStashCreateWithOpts, 
-                       __initializeCSSM, _aes_decrypt, _aes_decrypt_cbc, _aes_decrypt_key, 
-                       _aes_decrypt_key128, _aes_decrypt_key192, _aes_decrypt_key256, 
-                       _aes_encrypt, _aes_encrypt_cbc, _aes_encrypt_key, _aes_encrypt_key128, 
-                       _aes_encrypt_key192, _aes_encrypt_key256, _gen_tabs, _t_fl, 
-                       _t_fn, _t_il, _t_im, _t_in, _t_rc, _xts_decrypt, _xts_done, 
-                       _xts_encrypt, _xts_start ]
+                       __initializeCSSM ]
     objc-classes:    [ KeychainMasterHandler ]
     objc-ivars:      [ KeychainMasterHandler._errorStatus, KeychainMasterHandler._errorString, 
                        KeychainMasterHandler._keychainRef, KeychainMasterHandler._moduleHandle ]

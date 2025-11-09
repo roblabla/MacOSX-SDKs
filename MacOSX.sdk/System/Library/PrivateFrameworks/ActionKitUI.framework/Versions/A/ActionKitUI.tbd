@@ -23,6 +23,8 @@ exports:
                        '_$sSo17WFSSHKeyParameterC14WorkflowEditor08ViewableB011ActionKitUIMc', 
                        '_$sSo23WFAccountAccessResourceC11ActionKitUIE24accountConfigurationView05SwiftF003AnyI0Vvg', 
                        '_$sSo23WFAccountAccessResourceC11ActionKitUIE24accountConfigurationView05SwiftF003AnyI0VvpMV', 
-                       '_$sSo23WFAccountAccessResourceC14WorkflowEditor019AccountConfigurablebC011ActionKitUIMc' ]
+                       '_$sSo23WFAccountAccessResourceC14WorkflowEditor019AccountConfigurablebC011ActionKitUIMc', 
+                       '_$sSo8NSBundleC11ActionKitUIE8_currentABvgZ', '_$ss12StaticStringV11ActionKitUIE03_asB0SSvg', 
+                       '_$ss12StaticStringV11ActionKitUIE03_asB0SSvpMV' ]
     objc-classes:    [ WFSendMessageActionAppKitUserInterface, WFWebViewController ]
 ...

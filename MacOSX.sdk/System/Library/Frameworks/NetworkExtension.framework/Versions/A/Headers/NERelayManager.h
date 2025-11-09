@@ -45,6 +45,36 @@ typedef NS_ENUM(NSInteger, NERelayManagerError) {
 /*! @const NERelayErrorDomain The NERelay error domain */
 NERELAY_EXPORT NSString * const NERelayErrorDomain API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0)) API_UNAVAILABLE(watchos);
 
+/*!
+ * @typedef NERelayManagerClientError
+ * @abstract NERelay Manager error codes detected by the client while trying to use this relay
+ */
+typedef NS_ENUM(NSInteger, NERelayManagerClientError) {
+	/*! @const NERelayManagerClientErrorNone The client did not have an error on the last connection */
+	NERelayManagerClientErrorNone = 1,
+	/*! @const NERelayManagerClientErrorDNSFailed DNS resolution of the relay server failed */
+	NERelayManagerClientErrorDNSFailed = 2,
+	/*! @const NERelayManagerClientErrorServerUnreachable The relay server was unreachable */
+	NERelayManagerClientErrorServerUnreachable = 3,
+	/*! @const NERelayManagerClientErrorServerDisconnected The relay server prematurely disconnected the connection  */
+	NERelayManagerClientErrorServerDisconnected = 4,
+	/*! @const NERelayManagerClientErrorCertificateMissing The certificate needed to connect to the relay server could not be accessed or was not provided */
+	NERelayManagerClientErrorCertificateMissing = 5,
+	/*! @const NERelayManagerClientErrorCertificateInvalid The certificate needed to connect to the relay server was invalid. */
+	NERelayManagerClientErrorCertificateInvalid = 6,
+	/*! @const NERelayManagerClientErrorCertificateExpired The certificate needed to connect to the relay server was expired. */
+	NERelayManagerClientErrorCertificateExpired = 7,
+	/*! @const NERelayManagerClientErrorServerCertificateInvalid The relay server certificate was invalid. */
+	NERelayManagerClientErrorServerCertificateInvalid = 8,
+	/*! @const NERelayManagerClientErrorServerCertificateExpired The relay server certificate was expired. */
+	NERelayManagerClientErrorServerCertificateExpired = 9,
+	/*! @const NERelayManagerClientErrorOther The client detected an error that has not yet been enumerated */
+	NERelayManagerClientErrorOther = 10,
+} API_AVAILABLE(macos(15.0), ios(18.0), tvos(18.0)) API_UNAVAILABLE(watchos);
+
+/*! @const NERelayClientErrorDomain The NERelay error domain as detected by the client*/
+NERELAY_EXPORT NSString * const NERelayClientErrorDomain API_AVAILABLE(macos(15.0), ios(18.0), tvos(18.0)) API_UNAVAILABLE(watchos);
+
 /*! @const NERelayConfigurationDidChangeNotification Name of the NSNotification that is posted when the relay configuration changes. */
 NERELAY_EXPORT NSString * const NERelayConfigurationDidChangeNotification API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0)) API_UNAVAILABLE(watchos);
 
@@ -85,6 +115,14 @@ API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0)) API_UNAVAILABLE(watchos)
  * @param completionHandler A block that will be called when the save operation is completed. The NSError passed to this block will be nil if the save operation succeeded, non-nil otherwise.
  */
 - (void)saveToPreferencesWithCompletionHandler:(void (^)(NSError * __nullable error))completionHandler;
+
+/*!
+ * @method getLastClientErrors
+ * @discussion This function will get errors that the client detected while using this relay configuration within the specified time period.  Errors will be from the NERelayClientErrorDomain and the NERelayManagerClientErrorNone value will be set for successful connections.
+ * @param seconds A NSTimeInterval that specifies how many seconds to report errors for.  The maximum supported value is 24 hours and any larger values will be automatically reduced to 24 hours.
+ * @param completionHandler A block that will be called when once the errors have been collected. The NSArray will contain a list of NERelayManagerClientError values detected within the last number of seconds as specified by the "seconds" parameter.  The values will be ordered from the error most recently detected to the oldest.  The error value of NERelayManagerClientErrorNone indicates the last successful use of the relay without error.  The NSArray will be empty if there are no values detected within the specified time period or nil if there was a problem in retrieving the errors.
+ */
+- (void)getLastClientErrors:(NSTimeInterval)seconds completionHandler:(void (^)(NSArray<NSError *> * __nullable errors))completionHandler API_AVAILABLE(macos(15.0), ios(18.0), tvos(18.0)) API_UNAVAILABLE(watchos);
 
 /*!
  * @property localizedDescription

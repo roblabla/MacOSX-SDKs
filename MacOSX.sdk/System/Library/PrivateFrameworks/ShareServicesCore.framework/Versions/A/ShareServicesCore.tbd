@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/ShareServicesCore.framework/Versions/A/ShareServicesCore'
-current-version: 651.0.100
+current-version: 701.0.230
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _SBLDontAllowRAWForSharingService, _SBLFileURLFromFileURLs, 
@@ -11,9 +11,9 @@ exports:
                        _SBLShareKitSharingParameterImage, _SBLSharingServiceNameAddToNotes, 
                        _SBLSharingServiceNameCopyICloudLink, _SBLSharingServiceNameCreateReminder, 
                        _SBLSharingServiceNameSendToSimulator, _SBLSharingServiceParametersSkipAssetsPreparationKey, 
-                       _SBLShouldProvideImageForAsset, _SBLShouldProvideMovieForAsset, 
-                       _SBLSubsystemShareKit, _SBLTemporaryExportURLFromURL, _SBLVariantFromVariants, 
-                       _SBLVideoSharingServicePrefix, _ShareServicesCoreVersionNumber, 
+                       _SBLSharingServiceParametersSkipIncrementShareCountKey, _SBLShouldProvideImageForAsset, 
+                       _SBLShouldProvideMovieForAsset, _SBLSubsystemShareKit, _SBLTemporaryExportURLFromURL, 
+                       _SBLVariantFromVariants, _SBLVideoSharingServicePrefix, _ShareServicesCoreVersionNumber, 
                        _ShareServicesCoreVersionString, _kCompletedUnitCountProperty, 
                        _kSBLItemKey, _kSBLPreSharingAlertCancelButtonTitle, _kSBLPreSharingAlertConfirmButtonTitle, 
                        _kSBLPreSharingAlertMessage, _kSBLPreSharingAlertNeeded, _kSBLPreSharingAlertTitle, 

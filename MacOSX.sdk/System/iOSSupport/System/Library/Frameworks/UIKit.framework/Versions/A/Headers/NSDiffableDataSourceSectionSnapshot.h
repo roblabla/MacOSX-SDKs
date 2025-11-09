@@ -11,7 +11,7 @@
 
 NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
-UIKIT_EXTERN API_AVAILABLE(ios(14.0),tvos(14.0),watchos(7.0))
+UIKIT_EXTERN API_AVAILABLE(ios(14.0), tvos(14.0)) API_UNAVAILABLE(watchos)
 @interface NSDiffableDataSourceSectionSnapshot<ItemIdentifierType> : NSObject<NSCopying>
 
 // creates an empty snapshot

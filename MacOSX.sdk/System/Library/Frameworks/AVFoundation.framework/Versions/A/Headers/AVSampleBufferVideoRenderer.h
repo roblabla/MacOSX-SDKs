@@ -21,12 +21,12 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-AVF_EXPORT NSNotificationName const AVSampleBufferVideoRendererDidFailToDecodeNotification API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0)) API_UNAVAILABLE(watchos); // decode failed, see NSError in notification payload
-AVF_EXPORT NSString *const AVSampleBufferVideoRendererDidFailToDecodeNotificationErrorKey API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0)) API_UNAVAILABLE(watchos); // NSError
+AVF_EXPORT NSNotificationName const AVSampleBufferVideoRendererDidFailToDecodeNotification API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), visionos(1.0)) API_UNAVAILABLE(watchos); // decode failed, see NSError in notification payload
+AVF_EXPORT NSString *const AVSampleBufferVideoRendererDidFailToDecodeNotificationErrorKey API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), visionos(1.0)) API_UNAVAILABLE(watchos); // NSError
 
-AVF_EXPORT NSNotificationName const AVSampleBufferVideoRendererRequiresFlushToResumeDecodingDidChangeNotification API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0)) API_UNAVAILABLE(watchos); // see requiresFlushToResumeDecoding property
+AVF_EXPORT NSNotificationName const AVSampleBufferVideoRendererRequiresFlushToResumeDecodingDidChangeNotification API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), visionos(1.0)) API_UNAVAILABLE(watchos); // see requiresFlushToResumeDecoding property
 
-API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0)) API_UNAVAILABLE(watchos)
+API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), visionos(1.0)) API_UNAVAILABLE(watchos)
 @interface AVSampleBufferVideoRenderer : NSObject <AVQueuedSampleBufferRendering>
 
 /*!
@@ -64,7 +64,7 @@ API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0)) API_UNAVAILABLE(watchos)
 	@discussion		A flush resets decoder state. The next frame passed to enqueueSampleBuffer: should be an IDR frame (also known as a key frame or sync sample).
 */
 
-- (void)flushWithRemovalOfDisplayedImage:(BOOL)removeDisplayedImage completionHandler:(nullable void (^)(void))handler;
+- (void)flushWithRemovalOfDisplayedImage:(BOOL)removeDisplayedImage completionHandler:(nullable void (^ NS_SWIFT_SENDABLE)(void))handler;
 
 @end
 
@@ -127,7 +127,7 @@ API_AVAILABLE(macos(14.4), ios(17.4), tvos(17.4), visionos(1.1)) API_UNAVAILABLE
 					The handler to invoke with the video performance metrics.
 	@discussion		If there are no performance metrics available, the completion handler will be called with nil videoPerformanceMetrics.
 */
-- (void)loadVideoPerformanceMetricsWithCompletionHandler:(void (^)(AVVideoPerformanceMetrics * _Nullable_result videoPerformanceMetrics))completionHandler NS_SWIFT_ASYNC_NAME(getter:videoPerformanceMetrics()) API_AVAILABLE(macos(14.4), ios(17.4), tvos(17.4), visionos(1.1)) API_UNAVAILABLE(watchos);
+- (void)loadVideoPerformanceMetricsWithCompletionHandler:(void (^ NS_SWIFT_SENDABLE)(AVVideoPerformanceMetrics * _Nullable_result videoPerformanceMetrics))completionHandler NS_SWIFT_ASYNC_NAME(getter:videoPerformanceMetrics()) API_AVAILABLE(macos(14.4), ios(17.4), tvos(17.4), visionos(1.1)) API_UNAVAILABLE(watchos);
 
 @end
 

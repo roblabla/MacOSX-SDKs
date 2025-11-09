@@ -16,7 +16,7 @@ NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 @class UIImageSymbolConfiguration;
 @class UIColor;
 
-UIKIT_EXTERN API_AVAILABLE(ios(14.0), tvos(14.0), watchos(7.0)) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(14.0), tvos(14.0)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @interface UIListContentImageProperties : NSObject <NSCopying, NSSecureCoding>
 
 /// The symbol configuration to use.
@@ -61,12 +61,24 @@ UIKIT_EXTERN API_AVAILABLE(ios(14.0), tvos(14.0), watchos(7.0)) NS_SWIFT_UI_ACTO
 /// Prevents the image from inverting its colors when the accessibility setting is enabled.
 @property (nonatomic) BOOL accessibilityIgnoresInvertColors;
 
+/// The width of the stroke to draw around the image. Default is `0.0`.
+@property (nonatomic) CGFloat strokeWidth API_AVAILABLE(ios(18.0), tvos(18.0), visionos(2.0)) API_UNAVAILABLE(watchos);
+
+/// Configures the color of the stroke. A nil value uses the view's tint color; use `clearColor` for no color (transparent).
+@property (nonatomic, strong, nullable) UIColor *strokeColor API_AVAILABLE(ios(18.0), tvos(18.0), visionos(2.0)) API_UNAVAILABLE(watchos);
+
+/// Optional color transformer that is used to resolve the stroke color. A nil value means the `strokeColor` is used as-is.
+@property (nonatomic, copy, nullable) UIConfigurationColorTransformer strokeColorTransformer API_AVAILABLE(ios(18.0), tvos(18.0), visionos(2.0)) API_UNAVAILABLE(watchos);
+
+/// Returns the resolved stroke color for the specified tint color, based on the `strokeColor` and `strokeColorTransformer`.
+- (UIColor *)resolvedStrokeColorForTintColor:(UIColor *)tintColor API_AVAILABLE(ios(18.0), tvos(18.0), visionos(2.0)) API_UNAVAILABLE(watchos);
+
 @end
 
 /// A special constant that can be set to the `reservedLayoutSize` width or height. This
 /// forces the system standard value that a symbol image would use for that dimension,
 /// even when the image is not a symbol image.
-UIKIT_EXTERN const CGFloat UIListContentImageStandardDimension API_AVAILABLE(ios(14.0), tvos(14.0), watchos(7.0));
+UIKIT_EXTERN const CGFloat UIListContentImageStandardDimension API_AVAILABLE(ios(14.0), tvos(14.0)) API_UNAVAILABLE(watchos);
 
 NS_HEADER_AUDIT_END(nullability, sendability)
 

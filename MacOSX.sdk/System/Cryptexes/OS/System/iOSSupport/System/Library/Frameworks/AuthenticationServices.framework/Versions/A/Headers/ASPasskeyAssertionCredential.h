@@ -11,6 +11,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class ASPasskeyAssertionCredentialExtensionOutput;
+
 /*! @class This class encapsulates a passkey assertion response created by a credential provider extension.
  */
 AS_EXTERN API_AVAILABLE(ios(17.0), macos(14.0)) API_UNAVAILABLE(tvos, watchos)
@@ -22,6 +24,14 @@ AS_EXTERN API_AVAILABLE(ios(17.0), macos(14.0)) API_UNAVAILABLE(tvos, watchos)
  @param signature the signature for the assertion challenge.
  */
 - (instancetype)initWithUserHandle:(NSData *)userHandle relyingParty:(NSString *)relyingParty signature:(NSData *)signature clientDataHash:(NSData *)clientDataHash authenticatorData:(NSData *)authenticatorData credentialID:(NSData *)credentialID;
+
+/*! @abstract Initializes an ASPasskeyCredential object.
+ @param userHandle The identifier for the account the passkey is associated with.
+ @param relyingParty The relying party.
+ @param signature The signature for the assertion challenge.
+ @param extensionOutput The outputs of WebAuthn extensions processed by the credential provider.
+ */
+- (instancetype)initWithUserHandle:(NSData *)userHandle relyingParty:(NSString *)relyingParty signature:(NSData *)signature clientDataHash:(NSData *)clientDataHash authenticatorData:(NSData *)authenticatorData credentialID:(NSData *)credentialID extensionOutput:(nullable ASPasskeyAssertionCredentialExtensionOutput *)extensionOutput NS_REFINED_FOR_SWIFT API_AVAILABLE(ios(18.0), macos(15.0), visionos(2.0)) API_UNAVAILABLE(tvos, watchos);
 
 /*! @abstract Creates and initializes a new ASPasskeyCredential object.
  @param userHandle The identifier for the account the passkey is associated with.
@@ -53,6 +63,10 @@ AS_EXTERN API_AVAILABLE(ios(17.0), macos(14.0)) API_UNAVAILABLE(tvos, watchos)
 /*! @abstract The raw credential ID for this passkey credential.
  */
 @property (nonatomic, copy, readonly) NSData *credentialID;
+
+/*! @abstract The outputs of WebAuthn extensions processed by the credential provider.
+ */
+@property (nonatomic, copy, nullable) ASPasskeyAssertionCredentialExtensionOutput *extensionOutput NS_REFINED_FOR_SWIFT API_AVAILABLE(ios(18.0), macos(15.0), visionos(2.0)) API_UNAVAILABLE(tvos, watchos);
 
 @end
 

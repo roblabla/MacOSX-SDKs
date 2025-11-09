@@ -19,8 +19,11 @@ NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 /*!
  * @abstract This class can be used to control the stream from a camera.
  */
-HM_EXTERN NS_SWIFT_SENDABLE API_AVAILABLE(ios(10.0), watchos(3.0), tvos(10.0), macCatalyst(14.0)) API_UNAVAILABLE(macos)
-    @interface HMCameraStreamControl : HMCameraControl
+HM_EXTERN
+NS_SWIFT_SENDABLE
+API_AVAILABLE(ios(10.0), watchos(3.0), tvos(10.0), macCatalyst(14.0))
+API_UNAVAILABLE(macos)
+@interface HMCameraStreamControl : HMCameraControl
 
 /*!
  * @brief Delegate that receives updates on the camera stream changes.
@@ -47,6 +50,8 @@ HM_EXTERN NS_SWIFT_SENDABLE API_AVAILABLE(ios(10.0), watchos(3.0), tvos(10.0), m
  * @brief Stops the camera stream.
  * */
 - (void)stopStream;
+
+- (instancetype)init API_DEPRECATED("HMCameraStreamControl objects are created by their parent container objects. Directly creating them is not supported.", ios(10.0, 10.0), watchos(3.0, 3.0), tvos(10.0, 10.0), macCatalyst(14.0, 14.0));
 
 @end
 

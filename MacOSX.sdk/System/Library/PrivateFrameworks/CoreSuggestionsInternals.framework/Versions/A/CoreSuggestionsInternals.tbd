@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/CoreSuggestionsInternals.framework/Versions/A/CoreSuggestionsInternals'
-current-version: 1226.5.2
+current-version: 1259.1
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst ]
     weak-symbols:    [ __ZTIN3re217NumCapturesWalkerE, __ZTIN3re218CaptureNamesWalkerE, 
@@ -313,9 +313,10 @@ exports:
                        _kNicknameExtractionTimeWindowInSeconds, _kNonDyadicConversation, 
                        _kPackedJSAccountHandlesKey, _kPackedJSAccountServerIdentifierKey, 
                        _kPackedJSBundleIDKey, _kPackedJSDocumentTypeKey, _kPackedJSEpochKey, 
-                       _kPackedJSExtractionModeKey, _kPackedJSFromKey, _kPackedJSHTMLKey, 
-                       _kPackedJSHeadersKey, _kPackedJSPlainKey, _kPackedJSSchemasKey, 
-                       _kPackedJSSubjectKey, _kPackedJSURLKey, _kPackedJSWebKitPlainTextDDResultKey, 
+                       _kPackedJSExtractionModeKey, _kPackedJSFromKey, _kPackedJSFromSuggestToolKey, 
+                       _kPackedJSHTMLKey, _kPackedJSHeadersKey, _kPackedJSIsForwardedKey, 
+                       _kPackedJSPlainKey, _kPackedJSSchemasKey, _kPackedJSSubjectKey, 
+                       _kPackedJSTextKey, _kPackedJSURLKey, _kPackedJSWebKitPlainTextDDResultKey, 
                        _kPackedJSWebKitPlainTextKey, _kRateLimitInterval, _kReminderErrorNoConfirmation, 
                        _kReminderErrorNoProposal, _kReminderErrorNoTitle, _kReminderErrorNoTrigger, 
                        _kReminderModelName, _kSGAggregateLoggingKeyPrefix, _kSGBiomeStreamIdentifier, 
@@ -403,10 +404,10 @@ exports:
                        _kTotalSGMIFalseNegativePredictions, _kTotalSGMIFalsePositivePredictions, 
                        _kTotalSGMITrueNegativePredictions, _kTotalSGMITruePositivePredictions, 
                        _kTotalSGMIUpdaterMailsProcessed, _kUnknownMailbox, _kUnupdatedTokenRetentionPolicyInDays, 
-                       _largeAttachmentSizeInBytes, _largeTextContentLength, _mallocRegexp, 
-                       _maxAllowedNegativeUserEngagementDiffToExposeAWarning, _migrationCompletedForPaths, 
-                       _mincut, _newVertex, _postMatchExplorationLength, _printDot, 
-                       _qmarksSeparatedByCommas, _safeguardingQuotedRegionsRegex, 
+                       _knosisPredicateIdName, _largeAttachmentSizeInBytes, _largeTextContentLength, 
+                       _mallocRegexp, _maxAllowedNegativeUserEngagementDiffToExposeAWarning, 
+                       _migrationCompletedForPaths, _mincut, _newVertex, _postMatchExplorationLength, 
+                       _printDot, _qmarksSeparatedByCommas, _safeguardingQuotedRegionsRegex, 
                        _sameConnectedComponent, _sketchWithInitialAndName, _sqlite3_bind_nsdata, 
                        _sqlite3_bind_nsstring, _sqlite3_column_nssecurecoding, _sqlite3_column_nsstring, 
                        _stateForWalletOrderString, _stateForWalletPassStateString, 
@@ -415,7 +416,7 @@ exports:
                        _visitConnectedComponents, _walletOrderStateDescription, _walletPassStateDescription ]
     objc-classes:    [ FIAPHistoricalDataRequest, FIAPResult, SGAccountsAdapter, 
                        SGAddressCoalescingState, SGAggregateLogging, SGAhoCorasick, 
-                       SGAppLaunchHistory, SGAsset, SGBinaryClassificationModel, 
+                       SGAppLaunchHistory, SGAsset, SGAutonamingConsumer, SGBinaryClassificationModel, 
                        SGBloomFilter, SGBloomFilterChunkInMemory, SGBloomFilterChunkInMemorySparse, 
                        SGBloomFilterChunkMmap, SGCNContactIdentifierCollection, SGCalendarAttachmentDissector, 
                        SGChatLengthEstimator, SGCoalescingDropBox, SGContactAggregator, 

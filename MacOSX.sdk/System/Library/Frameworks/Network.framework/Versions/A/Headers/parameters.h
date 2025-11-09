@@ -2,7 +2,7 @@
 //  parameters.h
 //  Network
 //
-//  Copyright (c) 2014-2021 Apple Inc. All rights reserved.
+//  Copyright (c) 2014-2021, 2024 Apple Inc. All rights reserved.
 //
 
 #ifndef __NW_PARAMETERS_H__
@@ -1064,6 +1064,11 @@ typedef enum {
 	nw_parameters_expired_dns_behavior_allow = 1,
 	/*! @const nw_parameters_expired_dns_behavior_allow Explicitly prohibit the use of expired DNS answers */
 	nw_parameters_expired_dns_behavior_prohibit = 2,
+	/*! @const nw_parameters_expired_dns_behavior_persistent Allow the use of expired DNS answers, and store answers in a persistent per-process cache.
+				This should only be set for hostnames whose resolutions are not expected to change across networks. */
+	nw_parameters_expired_dns_behavior_persistent
+	   API_AVAILABLE(macos(15.0), ios(18.0), watchos(11.0), tvos(18.0), visionos(2.0))
+	   = 3,
 } nw_parameters_expired_dns_behavior_t;
 
 /*!

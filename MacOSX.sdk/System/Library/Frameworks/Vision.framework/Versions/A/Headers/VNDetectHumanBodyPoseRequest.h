@@ -7,7 +7,7 @@
 
 #import <Vision/VNRequest.h>
 #import <Vision/VNObservation.h>
-
+#import <Vision/VNDetectHumanHandPoseRequest.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -107,13 +107,10 @@ API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0))
  */
 @property (readonly, copy) NSArray<VNHumanBodyPoseObservationJointName>* availableJointNames;
 
-
-
 /*!
  @brief All of the joints group names available in the observation.
  */
 @property (readonly, copy) NSArray<VNHumanBodyPoseObservationJointsGroupName>* availableJointsGroupNames;
-
 
 /*!
  @brief Obtain a specific normalized point for a named human body joint.
@@ -193,8 +190,5 @@ API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0))
 
 API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0))
 static const NSUInteger VNDetectHumanBodyPoseRequestRevision1 = 1;
-
-
-
 
 NS_ASSUME_NONNULL_END

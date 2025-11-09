@@ -5,12 +5,16 @@
 
 #import <AVFAudio/AVAudioBuffer.h>
 #import <AVFAudio/AVAudioChannelLayout.h>
+#import <AVFAudio/AVAudioFormat.h>
+#import <AVFAudio/AVAudioSettings.h>
+#import <AVFAudio/AVAudioTime.h>
+#import <AVFAudio/AVAudioTypes.h>
+#if !0
 #import <AVFAudio/AVAudioConnectionPoint.h>
 #import <AVFAudio/AVAudioConverter.h>
 #import <AVFAudio/AVAudioEngine.h>
 #import <AVFAudio/AVAudioEnvironmentNode.h>
 #import <AVFAudio/AVAudioFile.h>
-#import <AVFAudio/AVAudioFormat.h>
 #import <AVFAudio/AVAudioIONode.h>
 #import <AVFAudio/AVAudioMixerNode.h>
 #import <AVFAudio/AVAudioMixing.h>
@@ -23,11 +27,8 @@
 #endif
 
 #import <AVFAudio/AVAudioSequencer.h>
-#import <AVFAudio/AVAudioSettings.h>
 #import <AVFAudio/AVAudioSinkNode.h>
 #import <AVFAudio/AVAudioSourceNode.h>
-#import <AVFAudio/AVAudioTime.h>
-#import <AVFAudio/AVAudioTypes.h>
 #import <AVFAudio/AVAudioUnit.h>
 #import <AVFAudio/AVAudioUnitComponent.h>
 #import <AVFAudio/AVAudioUnitDelay.h>
@@ -52,6 +53,7 @@
 #import <AVFAudio/AVAudioSessionRoute.h>
 #import <AVFAudio/AVAudioSessionTypes.h>
 #import <AVFAudio/AVAudioSessionDeprecated.h>
+#endif
 #endif
 
 

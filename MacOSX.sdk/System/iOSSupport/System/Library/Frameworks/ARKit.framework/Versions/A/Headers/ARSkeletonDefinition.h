@@ -31,6 +31,7 @@ FOUNDATION_EXTERN ARSkeletonJointName const ARSkeletonJointNameRightShoulder    
  One may use the parentIndices property to identify the hierarchy for a given skeleton definition.
  */
 API_AVAILABLE(ios(13.0))
+NS_SWIFT_SENDABLE
 @interface ARSkeletonDefinition : NSObject
 
 /**
@@ -87,3 +88,4 @@ API_AVAILABLE(ios(13.0))
 @end
 
 NS_ASSUME_NONNULL_END
+

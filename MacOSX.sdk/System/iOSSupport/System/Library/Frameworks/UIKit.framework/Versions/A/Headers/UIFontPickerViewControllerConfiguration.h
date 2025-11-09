@@ -3,7 +3,7 @@
 //  UIFontPickerViewControllerConfiguration.h
 //  UIKit
 //
-//  Copyright © 2019 Apple Inc. All rights reserved.
+//  Copyright © 2019, 2024 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -24,10 +24,10 @@ UIKIT_EXTERN API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(tvos, watchos) NS_SWIFT_UI
 @property (nonatomic) UIFontDescriptorSymbolicTraits filteredTraits;
 
 // Filter fonts based on languages supported using a predicate. The predicate is evaluated against an array of string language identifiers (conforming to UTS #35) supported by the font.
-@property (nullable, copy, nonatomic) NSPredicate *filteredLanguagesPredicate;
+@property (nullable, copy, nonatomic) NSPredicate *filteredLanguagesPredicate API_DEPRECATED("Use languageFilter", ios(13.0, 18.0));
 
 // Generate a filter predicate to filter to fonts that support one of the specified language identifiers (conforming to UTS #35).
-+ (nullable NSPredicate *)filterPredicateForFilteredLanguages:(NSArray<NSString *> *)filteredLanguages;
++ (nullable NSPredicate *)filterPredicateForFilteredLanguages:(NSArray<NSString *> *)filteredLanguages API_DEPRECATED("Use languageFilter", ios(13.0, 18.0));
 
 @end
 

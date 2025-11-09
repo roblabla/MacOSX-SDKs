@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 MPS_CLASS_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))
 @interface MPSGraph(GatherNDOps)
-/// Create GatherND op and return the result tensor
+/// Creates a GatherND operation and returns the result tensor.
 ///
 /// Gathers the slices in updatesTensor to the result tensor along the indices in indicesTensor. 
 /// The gather is defined as 
@@ -36,10 +36,10 @@ MPS_CLASS_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))
 /// ```
 ///
 /// - Parameters:
-///   - updatesTensor: Tensor containing slices to be inserted into the result tensor
+///   - updatesTensor: Tensor containing slices to be inserted into the result tensor.
 ///   - indicesTensor: Tensor containg the updates indices to read slices from
 ///   - batchDimensions: The number of batch dimensions
-///   - name: The name for the operation
+///   - name: The name for the operation.
 /// - Returns: A valid MPSGraphTensor object 
 ///
 - (MPSGraphTensor *) gatherNDWithUpdatesTensor:(MPSGraphTensor *) updatesTensor
@@ -52,7 +52,7 @@ MPS_CLASS_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))
 MPS_CLASS_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))
 @interface MPSGraph(GatherOps)
 
-/// Create Gather op and return the result tensor
+/// Creates a Gather operation and returns the result tensor.
 ///
 /// Gathers the values in updatesTensor to the result tensor along the indices in indicesTensor. 
 /// The gather is defined as 
@@ -74,11 +74,11 @@ MPS_CLASS_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))
 /// ```
 ///
 /// - Parameters:
-///   - updatesTensor: Tensor containing slices to be inserted into the result tensor
+///   - updatesTensor: Tensor containing slices to be inserted into the result tensor.
 ///   - indicesTensor: Tensor containg the updates indices to read slices from
 ///   - axis: The dimension on which to perform the gather
 ///   - batchDimensions: The number of batch dimensions
-///   - name: The name for the operation
+///   - name: The name for the operation.
 /// - Returns: A valid MPSGraphTensor object 
 ///
 - (MPSGraphTensor *) gatherWithUpdatesTensor:(MPSGraphTensor *) updatesTensor
@@ -91,7 +91,7 @@ MPS_CLASS_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))
 
 @interface MPSGraph(MPSGraphGatherAlongAxisOps)
 
-/// Create GatherAlongAxis op and return the result tensor
+/// Creates a GatherAlongAxis operation and returns the result tensor.
 ///
 /// Gather values from `updatesTensor` along the specified `axis` at indices in `indicesTensor`. 
 /// The shape of `updatesTensor` and `indicesTensor` must match except at `axis`. 
@@ -102,7 +102,7 @@ MPS_CLASS_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))
 ///   - axis: The axis to gather from. Negative values wrap around
 ///   - updatesTensor: The input tensor to gather values from
 ///   - indicesTensor: Int32 or Int64 tensor used to index `updatesTensor`
-///   - name: The name for the operation
+///   - name: The name for the operation.
 /// - Returns: A valid MPSGraphTensor object 
 ///
 
@@ -113,7 +113,7 @@ MPS_CLASS_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))
 MPS_SWIFT_NAME( gatherAlongAxis(_:updates:indices:name:) )
 MPS_AVAILABLE_STARTING(macos(12.3), ios(15.4), tvos(15.4));
 
-/// Create GatherAlongAxis op and return the result tensor
+/// Creates a GatherAlongAxis operation and returns the result tensor.
 ///
 /// Gather values from `updatesTensor` along the specified `axis` at indices in `indicesTensor`.
 /// The shape of `updatesTensor` and `indicesTensor` must match except at `axis`.
@@ -124,7 +124,7 @@ MPS_AVAILABLE_STARTING(macos(12.3), ios(15.4), tvos(15.4));
 ///   - axisTensor: Scalar Int32 tensor. The axis to gather from. Negative values wrap around
 ///   - updatesTensor: The input tensor to gather values from
 ///   - indicesTensor: Int32 or Int64 tensor used to index `updatesTensor`
-///   - name: The name for the operation
+///   - name: The name for the operation.
 /// - Returns: A valid MPSGraphTensor object 
 ///
 - (MPSGraphTensor *) gatherAlongAxisTensor:(MPSGraphTensor *) axisTensor

@@ -8,7 +8,6 @@
 
 #import <PassKit/PKPaymentSummaryItem.h>
 
-
 #ifndef PKAutomaticReloadPaymentSummaryItem_h
 #define PKAutomaticReloadPaymentSummaryItem_h
 
@@ -25,7 +24,6 @@ API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(watchos)
 NS_ASSUME_NONNULL_END
 
 #endif // PKAutomaticReloadPaymentSummaryItem_h
-
 
 #else
 #import <TargetConditionals.h>

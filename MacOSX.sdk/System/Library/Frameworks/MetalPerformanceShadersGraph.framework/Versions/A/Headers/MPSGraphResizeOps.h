@@ -40,7 +40,7 @@ typedef NS_ENUM(NSUInteger, MPSGraphResizeNearestRoundingMode)
 MPS_CLASS_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))
 @interface MPSGraph(MPSGraphResizeOps)
 
-/// Create Resize op and return the result tensor
+/// Creates a Resize operation and returns the result tensor.
 ///
 /// Resamples input images to given size. Result images will be distorted if size is of different aspect ratio. 
 /// Resize supports the following modes: 
@@ -69,7 +69,7 @@ MPS_CLASS_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))
 ///   - centerResult: Controls if the result image is centered on the input image. When NO, the result will have the top left corner aligned
 ///   - alignCorners: When YES, the result image will have the same value as the input image in the corners
 ///   - layout: Specifies what layout the provided tensor is in. The returned tensor will follow the same layout. Valid layouts are NHWC, NCHW, HWC, CHW, and HW.
-///   - name: The name for the operation
+///   - name: The name for the operation.
 /// - Returns: A valid MPSGraphTensor object
 -(MPSGraphTensor *) resizeTensor:(MPSGraphTensor *) imagesTensor
                             size:(MPSShape *) size
@@ -80,7 +80,7 @@ MPS_CLASS_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))
                             name:(NSString * _Nullable) name
 MPS_SWIFT_NAME( resize(_:size:mode:centerResult:alignCorners:layout:name:) );
 
-/// Create Resize op and return the result tensor
+/// Creates a Resize operation and returns the result tensor.
 ///
 /// Resamples input images to given size. Result images will be distorted if size is of different aspect ratio. 
 /// Resize supports the following modes: 
@@ -109,7 +109,7 @@ MPS_SWIFT_NAME( resize(_:size:mode:centerResult:alignCorners:layout:name:) );
 ///   - centerResult: Controls if the result image is centered on the input image. When NO, the result will have the top left corner aligned
 ///   - alignCorners: When YES, the result image will have the same value as the input image in the corners
 ///   - layout: Specifies what layout the provided tensor is in. The returned tensor will follow the same layout. Valid layouts are NHWC, NCHW, HWC, CHW, and HW.
-///   - name: The name for the operation
+///   - name: The name for the operation.
 /// - Returns: A valid MPSGraphTensor object
 -(MPSGraphTensor *) resizeTensor:(MPSGraphTensor *) imagesTensor
                       sizeTensor:(MPSGraphTensor *) size
@@ -121,7 +121,7 @@ MPS_SWIFT_NAME( resize(_:size:mode:centerResult:alignCorners:layout:name:) );
 MPS_AVAILABLE_STARTING(macos(12.0), ios(15.0), tvos(15.0))
 MPS_SWIFT_NAME( resize(_:sizeTensor:mode:centerResult:alignCorners:layout:name:) );
 
-/// Create Resize op and return the result tensor
+/// Creates a Resize operation and returns the result tensor.
 ///
 /// Resamples input images to given size. Result images will be distorted if size is of different aspect ratio.
 /// Resize supports the following modes:
@@ -149,7 +149,7 @@ MPS_SWIFT_NAME( resize(_:sizeTensor:mode:centerResult:alignCorners:layout:name:)
 ///   - mode: The resampling mode to use. If nearest sampling is specifed, RoundPreferCeil mode will be used.
 ///   - centerResult: Controls if the result image is centered on the input image. When NO, the result will have the top left corner aligned
 ///   - alignCorners: When YES, the result image will have the same value as the input image in the corners
-///   - name: The name for the operation
+///   - name: The name for the operation.
 /// - Returns: A valid MPSGraphTensor object
 -(MPSGraphTensor *) resizeTensor:(MPSGraphTensor *) imagesTensor
                       sizeTensor:(MPSGraphTensor *) size
@@ -160,9 +160,28 @@ MPS_SWIFT_NAME( resize(_:sizeTensor:mode:centerResult:alignCorners:layout:name:)
 MPS_AVAILABLE_STARTING(macos(14.0), ios(17.0), tvos(17.0))
 MPS_SWIFT_NAME( resize(_:sizeTensor:mode:centerResult:alignCorners:name:) );
 
-/// Resamples input images to given size using nearest neighbor sampling. This API allows for 
-/// the rounding mode to be specified. 
-/// See above discussion for more details.
+/// Resamples input images to given size using nearest neighbor sampling. 
+///
+/// This API allows for the rounding mode to be specified.
+/// Resamples input images to given size. Result images will be distorted if size is of different aspect ratio.
+/// Resize supports the following modes:
+/// Nearest Neighbor - values are interpolated using the closest neighbor pixel
+/// Bilinear - values are computed using bilinear interpolation of 4 neighboring pixels
+/// Destination indices are computed using direct index scaling by default, with no offset added.
+/// If the centerResult parameter is true, the destination indices will be scaled and shifted to be centered
+/// on the input image.
+/// If the alignCorners parameter is true, the corners of the result images will match the input images.
+/// Scaling will be modified to a factor of (size - 1) / (inputSize - 1). When alignCorners is true, the
+/// centerResult parameter does nothing.
+/// In order to achieve the same behavior as OpenCV's resize and TensorFlowV2's resize,
+/// ```md
+/// centerResult = YES;
+/// alginCorners = NO;
+/// ```
+/// To achieve the same behavior as TensorFlowV1 resize
+/// ```md
+/// centerResult = NO;
+/// ```
 ///
 /// - Parameters:
 ///   - imagesTensor: Tensor containing input images.
@@ -171,7 +190,7 @@ MPS_SWIFT_NAME( resize(_:sizeTensor:mode:centerResult:alignCorners:name:) );
 ///   - centerResult: Controls if the result image is centered on the input image. When NO, the result will have the top left corner aligned
 ///   - alignCorners: When YES, the result image will have the same value as the input image in the corners
 ///   - layout: Specifies what layout the provided tensor is in. The returned tensor will follow the same layout. Valid layouts are NHWC, NCHW, HWC, CHW, and HW.
-///   - name: The name for the operation
+///   - name: The name for the operation.
 /// - Returns: A valid MPSGraphTensor object
 -(MPSGraphTensor *) resizeNearestWithTensor:(MPSGraphTensor *) imagesTensor
                                  sizeTensor:(MPSGraphTensor *) size
@@ -183,7 +202,7 @@ MPS_SWIFT_NAME( resize(_:sizeTensor:mode:centerResult:alignCorners:name:) );
 MPS_AVAILABLE_STARTING(macos(13.0), ios(16.0), tvos(16.0))
 MPS_SWIFT_NAME( resizeNearest(_:sizeTensor:nearestRoundingMode:centerResult:alignCorners:layout:name:) );
 
-/// Create Resize op and return the result tensor
+/// Creates a Resize operation and returns the result tensor.
 ///
 /// Resamples input images to given size using nearest neighbor sampling. Result images will be distorted if
 /// size is of different aspect ratio.
@@ -209,7 +228,7 @@ MPS_SWIFT_NAME( resizeNearest(_:sizeTensor:nearestRoundingMode:centerResult:alig
 ///   - nearestRoundingMode: The rounding mode to use when using nearest resampling. Default is roundPreferCeil.
 ///   - centerResult: Controls if the result image is centered on the input image. When NO, the result will have the top left corner aligned
 ///   - alignCorners: When YES, the result image will have the same value as the input image in the corners
-///   - name: The name for the operation
+///   - name: The name for the operation.
 /// - Returns: A valid MPSGraphTensor object
 -(MPSGraphTensor *) resizeNearestWithTensor:(MPSGraphTensor *) imagesTensor
                                  sizeTensor:(MPSGraphTensor *) size
@@ -221,7 +240,24 @@ MPS_AVAILABLE_STARTING(macos(14.0), ios(17.0), tvos(17.0))
 MPS_SWIFT_NAME( resizeNearest(_:sizeTensor:nearestRoundingMode:centerResult:alignCorners:name:) );
 
 /// Resamples input images to given size using bilinear sampling. 
-/// See above discussion for more details.
+/// 
+/// Resamples input images to given size using nearest neighbor sampling. Result images will be distorted if
+/// size is of different aspect ratio.
+/// Destination indices are computed using direct index scaling by default, with no offset added.
+/// If the centerResult parameter is true, the destination indices will be scaled and shifted to be centered
+/// on the input image.
+/// If the alignCorners parameter is true, the corners of the result images will match the input images.
+/// Scaling will be modified to a factor of (size - 1) / (inputSize - 1). When alignCorners is true, the
+/// centerResult parameter does nothing.
+/// In order to achieve the same behavior as OpenCV's resize and TensorFlowV2's resize,
+/// ```md
+/// centerResult = YES;
+/// alginCorners = NO;
+/// ```
+/// To achieve the same behavior as TensorFlowV1 resize
+/// ```md
+/// centerResult = NO;
+/// ```
 ///
 /// - Parameters:
 ///   - imagesTensor: Tensor containing input images.
@@ -229,7 +265,7 @@ MPS_SWIFT_NAME( resizeNearest(_:sizeTensor:nearestRoundingMode:centerResult:alig
 ///   - centerResult: Controls if the result image is centered on the input image. When NO, the result will have the top left corner aligned
 ///   - alignCorners: When YES, the result image will have the same value as the input image in the corners
 ///   - layout: Specifies what layout the provided tensor is in. The returned tensor will follow the same layout. Valid layouts are NHWC, NCHW, HWC, CHW, and HW.
-///   - name: The name for the operation
+///   - name: The name for the operation.
 /// - Returns: A valid MPSGraphTensor object
 -(MPSGraphTensor *) resizeBilinearWithTensor:(MPSGraphTensor *) imagesTensor
                                   sizeTensor:(MPSGraphTensor *) size
@@ -240,7 +276,7 @@ MPS_SWIFT_NAME( resizeNearest(_:sizeTensor:nearestRoundingMode:centerResult:alig
 MPS_AVAILABLE_STARTING(macos(13.0), ios(16.0), tvos(16.0))
 MPS_SWIFT_NAME( resizeBilinear(_:sizeTensor:centerResult:alignCorners:layout:name:) );
 
-/// Create Resize op and return the result tensor
+/// Creates a Resize operation and returns the result tensor.
 ///
 /// Resamples input images to given size using bilinear sampling. Result images will be distorted if
 /// size is of different aspect ratio.
@@ -265,7 +301,7 @@ MPS_SWIFT_NAME( resizeBilinear(_:sizeTensor:centerResult:alignCorners:layout:nam
 ///   - size: The target size of the result tensor. 1D Int32 or Int64 tensor of size equal to rank of input.
 ///   - centerResult: Controls if the result image is centered on the input image. When NO, the result will have the top left corner aligned
 ///   - alignCorners: When YES, the result image will have the same value as the input image in the corners
-///   - name: The name for the operation
+///   - name: The name for the operation.
 /// - Returns: A valid MPSGraphTensor object
 -(MPSGraphTensor *) resizeBilinearWithTensor:(MPSGraphTensor *) imagesTensor
                                   sizeTensor:(MPSGraphTensor *) size
@@ -289,7 +325,7 @@ MPS_SWIFT_NAME( resizeBilinear(_:sizeTensor:centerResult:alignCorners:name:) );
 ///   - scaleOffset: 1D float tensor. A 4-element shape as [scaleY, scaleX, offsetY, offsetX]
 ///   - mode: The resampling mode to use. If nearest sampling is specifed, RoundPreferCeil mode will be used.
 ///   - layout: Specifies what layout the provided tensor is in. The returned tensor will follow the same layout. Valid layouts are NHWC, NCHW, HWC, CHW, and HW.
-///   - name: The name for the operation
+///   - name: The name for the operation.
 /// - Returns: A valid MPSGraphTensor object
 -(MPSGraphTensor *) resizeTensor:(MPSGraphTensor *) imagesTensor
                       sizeTensor:(MPSGraphTensor *) size
@@ -300,7 +336,7 @@ MPS_SWIFT_NAME( resizeBilinear(_:sizeTensor:centerResult:alignCorners:name:) );
 MPS_AVAILABLE_STARTING(macos(13.0), ios(16.0), tvos(16.0))
 MPS_SWIFT_NAME( resize(_:sizeTensor:scaleOffsetTensor:mode:layout:name:) );
 
-/// Create Resize op and return the result tensor
+/// Creates a Resize operation and returns the result tensor.
 ///
 /// Resamples input images to given size using the provided scale and offset.
 /// Destination indices are computed using
@@ -316,7 +352,7 @@ MPS_SWIFT_NAME( resize(_:sizeTensor:scaleOffsetTensor:mode:layout:name:) );
 ///   - scale: 1D float tensor of size equal to rank of input.
 ///   - offset: 1D float tensor of size equal to rank of input.
 ///   - mode: The resampling mode to use. If nearest sampling is specifed, RoundPreferCeil mode will be used.
-///   - name: The name for the operation
+///   - name: The name for the operation.
 /// - Returns: A valid MPSGraphTensor object
 -(MPSGraphTensor *) resizeTensor:(MPSGraphTensor *) imagesTensor
                       sizeTensor:(MPSGraphTensor *) size
@@ -336,7 +372,7 @@ MPS_SWIFT_NAME( resize(_:sizeTensor:scaleTensor:offsetTenor:mode:name:) );
 ///   - scaleOffset: 1D float tensor. A 4-element shape as [scaleY, scaleX, offsetY, offsetX]
 ///   - nearestRoundingMode: The rounding mode to use when using nearest resampling.
 ///   - layout: Specifies what layout the provided tensor is in. The returned tensor will follow the same layout. Valid layouts are NHWC, NCHW, HWC, CHW, and HW.
-///   - name: The name for the operation
+///   - name: The name for the operation.
 /// - Returns: A valid MPSGraphTensor object
 -(MPSGraphTensor *) resizeNearestWithTensor:(MPSGraphTensor *) imagesTensor
                                  sizeTensor:(MPSGraphTensor *) size
@@ -347,7 +383,7 @@ MPS_SWIFT_NAME( resize(_:sizeTensor:scaleTensor:offsetTenor:mode:name:) );
 MPS_AVAILABLE_STARTING(macos(13.0), ios(16.0), tvos(16.0))
 MPS_SWIFT_NAME( resizeNearest(_:sizeTensor:scaleOffsetTensor:nearestRoundingMode:layout:name:) );
 
-/// Create Resize op and return the result tensor
+/// Creates a Resize operation and returns the result tensor.
 ///
 /// Resamples input images to given size using the provided scale and offset and nearest neighbor sampling.
 /// Destination indices are computed using
@@ -363,7 +399,7 @@ MPS_SWIFT_NAME( resizeNearest(_:sizeTensor:scaleOffsetTensor:nearestRoundingMode
 ///   - scale: 1D float tensor of size equal to rank of input.
 ///   - offset: 1D float tensor of size equal to rank of input.
 ///   - nearestRoundingMode: The rounding mode to use when using nearest resampling. Default is roundPreferCeil.
-///   - name: The name for the operation
+///   - name: The name for the operation.
 /// - Returns: A valid MPSGraphTensor object
 -(MPSGraphTensor *) resizeNearestWithTensor:(MPSGraphTensor *) imagesTensor
                                  sizeTensor:(MPSGraphTensor *) size
@@ -383,7 +419,7 @@ MPS_SWIFT_NAME( resizeNearest(_:sizeTensor:scaleTensor:offsetTensor:nearestRound
 ///   - scaleOffset: 1D float tensor. A 4-element shape as [scaleY, scaleX, offsetY, offsetX]
 ///   - nearestRoundingMode: The rounding mode to use when using nearest resampling.
 ///   - layout: Specifies what layout the provided tensor is in. The returned tensor will follow the same layout. Valid layouts are NHWC, NCHW, HWC, CHW, and HW.
-///   - name: The name for the operation
+///   - name: The name for the operation.
 /// - Returns: A valid MPSGraphTensor object
 -(MPSGraphTensor *) resizeBilinearWithTensor:(MPSGraphTensor *) imagesTensor
                                   sizeTensor:(MPSGraphTensor *) size
@@ -393,7 +429,7 @@ MPS_SWIFT_NAME( resizeNearest(_:sizeTensor:scaleTensor:offsetTensor:nearestRound
 MPS_AVAILABLE_STARTING(macos(13.0), ios(16.0), tvos(16.0))
 MPS_SWIFT_NAME( resizeBilinear(_:sizeTensor:scaleOffsetTensor:layout:name:) );
 
-/// Create Resize op and return the result tensor
+/// Creates a Resize operation and returns the result tensor.
 ///
 /// Resamples input images to given size using the provided scale and offset and bilinear sampling.
 /// Destination indices are computed using
@@ -408,7 +444,7 @@ MPS_SWIFT_NAME( resizeBilinear(_:sizeTensor:scaleOffsetTensor:layout:name:) );
 ///   - size: The target size of the result tensor.  1D Int32 or Int64 tensor of size equal to rank of input.
 ///   - scale: 1D float tensor of size equal to rank of input.
 ///   - offset: 1D float tensor of size equal to rank of input.
-///   - name: The name for the operation
+///   - name: The name for the operation.
 /// - Returns: A valid MPSGraphTensor object
 -(MPSGraphTensor *) resizeBilinearWithTensor:(MPSGraphTensor *) imagesTensor
                                   sizeTensor:(MPSGraphTensor *) size
@@ -418,7 +454,7 @@ MPS_SWIFT_NAME( resizeBilinear(_:sizeTensor:scaleOffsetTensor:layout:name:) );
 MPS_AVAILABLE_STARTING(macos(14.0), ios(17.0), tvos(17.0))
 MPS_SWIFT_NAME( resizeBilinear(_:sizeTensor:scaleTensor:offsetTensor:name:) );
 
-/// Create Resize gradient op and return the result tensor
+/// Creates a Resize gradient operation and returns the result tensor.
 ///
 /// Computes the gradient for the forward pass Resize op with identical parameters. 
 /// See discussion of resizeTensor for more in depth description of resize paramters.
@@ -430,7 +466,7 @@ MPS_SWIFT_NAME( resizeBilinear(_:sizeTensor:scaleTensor:offsetTensor:name:) );
 ///   - centerResult: Controls if the result image is centered on the input image. When NO, the result will have the top left corner aligned
 ///   - alignCorners: When YES, the result image will have the same value as the input image in the corners
 ///   - layout: Specifies what layout the provided tensor is in. The returned tensor will follow the same layout. Valid layouts are NHWC, NCHW, HWC, CHW, and HW.
-///   - name: The name for the operation
+///   - name: The name for the operation.
 /// - Returns: A valid MPSGraphTensor object
 -(MPSGraphTensor *) resizeWithGradientTensor:(MPSGraphTensor *) gradient
                                        input:(MPSGraphTensor *) input
@@ -440,7 +476,7 @@ MPS_SWIFT_NAME( resizeBilinear(_:sizeTensor:scaleTensor:offsetTensor:name:) );
                                       layout:(MPSGraphTensorNamedDataLayout) layout
                                         name:(NSString * _Nullable) name;
 
-/// Create Resize gradient op and return the result tensor
+/// Creates a Resize gradient operation and returns the result tensor.
 ///
 /// Computes the gradient for the forward pass Resize op with identical parameters. 
 /// See discussion of resizeTensor for more in depth description of resize paramters.
@@ -452,7 +488,7 @@ MPS_SWIFT_NAME( resizeBilinear(_:sizeTensor:scaleTensor:offsetTensor:name:) );
 ///   - centerResult: Controls if the result image is centered on the input image. When NO, the result will have the top left corner aligned
 ///   - alignCorners: When YES, the result image will have the same value as the input image in the corners
 ///   - layout: Specifies what layout the provided tensor is in. The returned tensor will follow the same layout. Valid layouts are NHWC, NCHW, HWC, CHW, and HW.
-///   - name: The name for the operation
+///   - name: The name for the operation.
 /// - Returns: A valid MPSGraphTensor object
 -(MPSGraphTensor *) resizeNearestWithGradientTensor:(MPSGraphTensor *) gradient
                                               input:(MPSGraphTensor *) input
@@ -463,7 +499,7 @@ MPS_SWIFT_NAME( resizeBilinear(_:sizeTensor:scaleTensor:offsetTensor:name:) );
                                                name:(NSString * _Nullable) name
 MPS_AVAILABLE_STARTING(macos(13.0), ios(16.0), tvos(16.0));
 
-/// Create Resize gradient op and return the result tensor
+/// Creates a Resize gradient operation and returns the result tensor.
 ///
 /// Computes the gradient for the forward pass Resize op with identical parameters. 
 /// See discussion of resizeTensor for more in depth description of resize paramters.
@@ -474,7 +510,7 @@ MPS_AVAILABLE_STARTING(macos(13.0), ios(16.0), tvos(16.0));
 ///   - centerResult: Controls if the result image is centered on the input image. When NO, the result will have the top left corner aligned
 ///   - alignCorners: When YES, the result image will have the same value as the input image in the corners
 ///   - layout: Specifies what layout the provided tensor is in. The returned tensor will follow the same layout. Valid layouts are NHWC, NCHW, HWC, CHW, and HW.
-///   - name: The name for the operation
+///   - name: The name for the operation.
 /// - Returns: A valid MPSGraphTensor object
 -(MPSGraphTensor *) resizeBilinearWithGradientTensor:(MPSGraphTensor *) gradient
                                                input:(MPSGraphTensor *) input
@@ -485,7 +521,7 @@ MPS_AVAILABLE_STARTING(macos(13.0), ios(16.0), tvos(16.0));
 MPS_AVAILABLE_STARTING(macos(13.0), ios(16.0), tvos(16.0));
 
 
-/// Create Resize gradient op and return the result tensor
+/// Creates a Resize gradient operation and returns the result tensor.
 ///
 /// Computes the gradient for the forward pass Resize op with identical parameters. 
 /// See discussion of resizeTensor for more in depth description of resize paramters.
@@ -496,7 +532,7 @@ MPS_AVAILABLE_STARTING(macos(13.0), ios(16.0), tvos(16.0));
 ///   - scaleOffset: 1D float tensor. A 4-element shape as [scaleY, scaleX, offsetY, offsetX]
 ///   - mode: The resampling mode to use. If nearest sampling is specifed, RoundPreferCeil mode will be used.
 ///   - layout: Specifies what layout the provided tensor is in. The returned tensor will follow the same layout. Valid layouts are NHWC, NCHW, HWC, CHW, and HW.
-///   - name: The name for the operation
+///   - name: The name for the operation.
 /// - Returns: A valid MPSGraphTensor object
 -(MPSGraphTensor *) resizeWithGradientTensor:(MPSGraphTensor *) gradient
                                        input:(MPSGraphTensor *) input
@@ -506,7 +542,7 @@ MPS_AVAILABLE_STARTING(macos(13.0), ios(16.0), tvos(16.0));
                                         name:(NSString * _Nullable) name
 MPS_AVAILABLE_STARTING(macos(13.0), ios(16.0), tvos(16.0));
 
-/// Create Resize gradient op and return the result tensor
+/// Creates a Resize gradient operation and returns the result tensor.
 ///
 /// Computes the gradient for the forward pass Resize op with identical parameters. 
 /// See discussion of resizeTensor for more in depth description of resize paramters.
@@ -517,7 +553,7 @@ MPS_AVAILABLE_STARTING(macos(13.0), ios(16.0), tvos(16.0));
 ///   - scale: 1D float tensor of size equal to rank of input.
 ///   - offset: 1D float tensor of size equal to rank of input.
 ///   - mode: The resampling mode to use. If nearest sampling is specifed, RoundPreferCeil mode will be used.
-///   - name: The name for the operation
+///   - name: The name for the operation.
 /// - Returns: A valid MPSGraphTensor object
 -(MPSGraphTensor *) resizeWithGradientTensor:(MPSGraphTensor *) gradient
                                        input:(MPSGraphTensor *) input
@@ -527,7 +563,7 @@ MPS_AVAILABLE_STARTING(macos(13.0), ios(16.0), tvos(16.0));
                                         name:(NSString * _Nullable) name
 MPS_AVAILABLE_STARTING(macos(14.0), ios(17.0), tvos(17.0));
 
-/// Create Resize gradient op and return the result tensor
+/// Creates a Resize gradient operation and returns the result tensor.
 ///
 /// Computes the gradient for the forward pass Resize op with identical parameters.
 /// See discussion of resizeTensor for more in depth description of resize paramters.
@@ -538,7 +574,7 @@ MPS_AVAILABLE_STARTING(macos(14.0), ios(17.0), tvos(17.0));
 ///   - scaleOffset: 1D float tensor. A 4-element shape as [scaleY, scaleX, offsetY, offsetX]
 ///   - nearestRoundingMode: The rounding mode to use when using nearest resampling.
 ///   - layout: Specifies what layout the provided tensor is in. The returned tensor will follow the same layout. Valid layouts are NHWC, NCHW, HWC, CHW, and HW.
-///   - name: The name for the operation
+///   - name: The name for the operation.
 /// - Returns: A valid MPSGraphTensor object
 -(MPSGraphTensor *) resizeNearestWithGradientTensor:(MPSGraphTensor *) gradient
                                               input:(MPSGraphTensor *) input
@@ -548,7 +584,7 @@ MPS_AVAILABLE_STARTING(macos(14.0), ios(17.0), tvos(17.0));
                                                name:(NSString * _Nullable) name
 MPS_AVAILABLE_STARTING(macos(13.0), ios(16.0), tvos(16.0));
 
-/// Create Resize gradient op and return the result tensor
+/// Creates a Resize gradient operation and returns the result tensor.
 ///
 /// Computes the gradient for the forward pass Resize op with nearest neighbor sampling and identical parameters.
 /// See discussion of resizeTensor for more in depth description of resize paramters.
@@ -559,7 +595,7 @@ MPS_AVAILABLE_STARTING(macos(13.0), ios(16.0), tvos(16.0));
 ///   - scale: 1D float tensor of size equal to rank of input.
 ///   - offset: 1D float tensor of size equal to rank of input.
 ///   - nearestRoundingMode: The rounding mode to use when using nearest resampling. Default is roundPreferCeil.
-///   - name: The name for the operation
+///   - name: The name for the operation.
 /// - Returns: A valid MPSGraphTensor object
 -(MPSGraphTensor *) resizeNearestWithGradientTensor:(MPSGraphTensor *) gradient
                                               input:(MPSGraphTensor *) input
@@ -569,7 +605,7 @@ MPS_AVAILABLE_STARTING(macos(13.0), ios(16.0), tvos(16.0));
                                                name:(NSString * _Nullable) name
 MPS_AVAILABLE_STARTING(macos(14.0), ios(17.0), tvos(17.0));
 
-/// Create Resize gradient op and return the result tensor
+/// Creates a Resize gradient operation and returns the result tensor.
 ///
 /// Computes the gradient for the forward pass Resize op with bilinear sampling and identical parameters.
 /// See discussion of resizeTensor for more in depth description of resize paramters.
@@ -579,7 +615,7 @@ MPS_AVAILABLE_STARTING(macos(14.0), ios(17.0), tvos(17.0));
 ///   - input: Forward pass input tensor
 ///   - scaleOffset: 1D float tensor. A 4-element shape as [scaleY, scaleX, offsetY, offsetX]
 ///   - layout: Specifies what layout the provided tensor is in. The returned tensor will follow the same layout. Valid layouts are NHWC, NCHW, HWC, CHW, and HW.
-///   - name: The name for the operation
+///   - name: The name for the operation.
 /// - Returns: A valid MPSGraphTensor object
 -(MPSGraphTensor *) resizeBilinearWithGradientTensor:(MPSGraphTensor *) gradient
                                                input:(MPSGraphTensor *) input
@@ -588,7 +624,7 @@ MPS_AVAILABLE_STARTING(macos(14.0), ios(17.0), tvos(17.0));
                                                 name:(NSString * _Nullable) name
 MPS_AVAILABLE_STARTING(macos(13.0), ios(16.0), tvos(16.0));
 
-/// Create Resize gradient op and return the result tensor
+/// Creates a Resize gradient operation and returns the result tensor.
 ///
 /// Computes the gradient for the forward pass Resize op with bilinear sampling and identical parameters.
 ///
@@ -597,7 +633,7 @@ MPS_AVAILABLE_STARTING(macos(13.0), ios(16.0), tvos(16.0));
 ///   - input: Forward pass input tensor
 ///   - scale: 1D float tensor of size equal to rank of input.
 ///   - offset: 1D float tensor of size equal to rank of input.
-///   - name: The name for the operation
+///   - name: The name for the operation.
 /// - Returns: A valid MPSGraphTensor object
 -(MPSGraphTensor *) resizeBilinearWithGradientTensor:(MPSGraphTensor *) gradient
                                                input:(MPSGraphTensor *) input

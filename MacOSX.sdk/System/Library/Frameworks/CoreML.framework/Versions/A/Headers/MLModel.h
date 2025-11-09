@@ -55,35 +55,46 @@ ML_EXPORT
             configuration:(MLModelConfiguration *)configuration
         completionHandler:(void (^)(MLModel * _Nullable model, NSError * _Nullable error))handler API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0)) NS_REFINED_FOR_SWIFT NS_SWIFT_DISABLE_ASYNC;
 
-/// Convenience method to run a prediction synchronously with default prediction options.
+/// Run a prediction on a model synchronously.
+///
+/// This is a convenience overload method of `prediction(from:options:)` that uses the default prediction options.
+///
+/// - Parameters
+///   - input: The input features to make a prediction from.
+///   - error: The output parameter to be filled with error information on failure.
+/// - Returns: The output features from the prediction.
 - (nullable id<MLFeatureProvider>)predictionFromFeatures:(id<MLFeatureProvider>)input
-                                                   error:(NSError **)error;
+                                                   error:(NSError * __autoreleasing *)error;
 
-/*!
- Run a prediction on a model synchronously
-
- @param input The input features to make a prediction from
- @param options Prediction options to modify how the prediction is run
- @param error The out parameter for error when nil is returned. On success, it is nil
- @returns The output features from the prediction
-*/
+/// Run a prediction on a model synchronously
+///
+/// - Parameters
+///   - input: The input features to make a prediction from.
+///   - options: Prediction options to modify how the prediction is run.
+///   - error: The output parameter to be filled with error information on failure.
+/// - Returns: The output features from the prediction.
 - (nullable id<MLFeatureProvider>)predictionFromFeatures:(id<MLFeatureProvider>)input
                                                  options:(MLPredictionOptions *)options
                                                    error:(NSError **)error;
 
-/// Convenience method to run a prediction asynchronously with default prediction options.
+/// Run a prediction on a model asynchronously.
+///
+/// This is a convenience overload method of `prediction(from:options:) async` that uses the default prediction options.
+///
+/// - Parameters
+///   - input: The input features to make a prediction from.
+///   - completionHandler: A block that will be invoked once the prediction has completed successfully or unsuccessfully. On success, it is invoked with a valid model output. On failure, it is invoked with a nil output and NSError
 - (void)predictionFromFeatures:(id<MLFeatureProvider>)input
              completionHandler:(void (^)(_Nullable id<MLFeatureProvider> output, NSError * _Nullable error))completionHandler
                  API_AVAILABLE(macos(14.0), ios(17.0), watchos(10.0), tvos(17.0))
                  NS_REFINED_FOR_SWIFT NS_SWIFT_DISABLE_ASYNC;
 
-/*!
- Run a prediction on a model asynchronously.
-
- @param input The input features to make a prediction from
- @param options Prediction options to modify how the prediction is run
- @param completionHandler A block that will be invoked once the prediction has completed successfully or unsuccessfully. On success, it is invoked with a valid model output. On failure, it is invoked with a nil output and NSError
-*/
+/// Run a prediction on a model asynchronously.
+///
+/// - Parameters
+///   - input: The input features to make a prediction from.
+///   - options: Prediction options to modify how the prediction is run.
+///   - completionHandler: A block that will be invoked once the prediction has completed successfully or unsuccessfully. On success, it is invoked with a valid model output. On failure, it is invoked with a nil output and NSError
 - (void)predictionFromFeatures:(id<MLFeatureProvider>)input
                        options:(MLPredictionOptions *)options
              completionHandler:(void (^)(_Nullable id<MLFeatureProvider> output, NSError * _Nullable error))completionHandler

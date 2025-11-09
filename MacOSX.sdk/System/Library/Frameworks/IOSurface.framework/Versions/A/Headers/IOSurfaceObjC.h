@@ -151,6 +151,7 @@ API_AVAILABLE(macos(10.12), ios(11.0), watchos(4.0), tvos(11.0))
 @property (readonly) NSInteger bytesPerElement;
 @property (readonly) NSInteger elementWidth;
 @property (readonly) NSInteger elementHeight;
+@property (readonly) uint32_t surfaceID API_AVAILABLE(macos(15.0), ios(18.0), watchos(11.0), tvos(18.0));
 
 /* This will return the current seed value of the buffer and is a cheap property to read to see
    if the contents of the buffer have changed since the last lock/unlock. */

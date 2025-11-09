@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/PHASE.framework/Versions/A/PHASE'
-current-version: 270.6.3
+current-version: 303.107
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -36,8 +36,9 @@ exports:
                        PHASEMixerInformation, PHASEMixerParameters, PHASEMutedSpeechActivityInfo, 
                        PHASENumberMetaParameter, PHASENumberMetaParameterDefinition, 
                        PHASENumericPair, PHASEObject, PHASEOccluder, PHASEPreSpatialTapSource, 
-                       PHASEPresetMedium, PHASEProcedureNodeDefinition, PHASEPushStreamNode, 
-                       PHASEPushStreamNodeDefinition, PHASERandomNodeDefinition, 
+                       PHASEPresetMedium, PHASEProcedureNodeDefinition, PHASEPullStreamNode, 
+                       PHASEPullStreamNodeDefinition, PHASEPushStreamNode, PHASEPushStreamNodeDefinition, 
+                       PHASERandomNodeDefinition, PHASERoomSimulationDataSet, PHASERoomSimulationView, 
                        PHASESamplerNodeDefinition, PHASEScatteringData, PHASEServiceSharedEntityDebugInfo, 
                        PHASEShape, PHASEShapeElement, PHASESharedEntityDebugInfo, 
                        PHASESharedListenerDebugInfo, PHASESoundAsset, PHASESoundEvent, 
@@ -45,9 +46,10 @@ exports:
                        PHASESoundReductionIndex, PHASESource, PHASESpatialMixer, 
                        PHASESpatialMixerDefinition, PHASESpatialModelerSendDefinition, 
                        PHASESpatialPipeline, PHASESpatialPipelineEntry, PHASESphericalCapDirectivityModelParameters, 
-                       PHASEStringMetaParameter, PHASEStringMetaParameterDefinition, 
+                       PHASEStreamNode, PHASEStringMetaParameter, PHASEStringMetaParameterDefinition, 
                        PHASESubband, PHASESubtreeView, PHASESwitchNodeDefinition, 
-                       PHASETapDescription, PHASETapRegistry, PHASETransmissionModelerSourcePointSet, 
+                       PHASETapDescription, PHASETapRegistry, PHASETargetRoomAcousticParameters, 
+                       PHASETargetRoomAcousticSubbandParameters, PHASETransmissionModelerSourcePointSet, 
                        PHASETransmissionModelerView, PHASETriangleSet, PHASEVoxelLevelView, 
                        PHASEVoxelSet3D, PHASEVoxelTreeView, PHASEWaterProcedureNodeDefinition, 
                        PHASEXPCService ]

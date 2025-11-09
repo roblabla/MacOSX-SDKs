@@ -28,7 +28,7 @@ NS_ASSUME_NONNULL_BEGIN
 		Subclasses of this type that are used from Swift must fulfill the requirements of a Sendable type.
 */
 NS_SWIFT_SENDABLE
-API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0), watchos(10.0))
+API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0), watchos(10.0), visionos(1.0))
 @interface AVAssetCache : NSObject
 
 /*

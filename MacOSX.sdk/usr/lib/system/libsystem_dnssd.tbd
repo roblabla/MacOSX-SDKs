@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/usr/lib/system/libsystem_dnssd.dylib'
-current-version: 2200.120.24
+current-version: 2559.1.1
 parent-umbrella:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -15,6 +15,7 @@ exports:
                        _DNSServiceAttrSetFailoverPolicy, _DNSServiceAttrSetValidationData, 
                        _DNSServiceAttrSetValidationPolicy, _DNSServiceAttributeCreate, 
                        _DNSServiceAttributeDeallocate, _DNSServiceAttributeSetAAAAPolicy, 
+                       _DNSServiceAttributeSetHostKeyHash, _DNSServiceAttributeSetResolverOverride, 
                        _DNSServiceAttributeSetTimestamp, _DNSServiceBrowse, _DNSServiceBrowseEx, 
                        _DNSServiceConstructFullName, _DNSServiceCreateConnection, 
                        _DNSServiceCreateDelegateConnection, _DNSServiceEnumerateDomains, 

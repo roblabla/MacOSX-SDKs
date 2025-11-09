@@ -60,7 +60,7 @@ typedef struct CGPatternCallbacks CGPatternCallbacks;
 /* Return the CFTypeID for CGPatternRefs. */
 
 CG_EXTERN CFTypeID CGPatternGetTypeID(void)
-    CG_AVAILABLE_STARTING(10.2, 2.0);
+    API_AVAILABLE(macos(10.2), ios(2.0));
 
 /* Create a pattern. */
 
@@ -68,19 +68,19 @@ CG_EXTERN CGPatternRef __nullable CGPatternCreate(void * __nullable info,
     CGRect bounds, CGAffineTransform matrix, CGFloat xStep, CGFloat yStep,
     CGPatternTiling tiling, bool isColored,
     const CGPatternCallbacks * cg_nullable callbacks)
-    CG_AVAILABLE_STARTING(10.0, 2.0);
+    API_AVAILABLE(macos(10.0), ios(2.0));
 
 /* Equivalent to `CFRetain(pattern)', except it doesn't crash (as CF does)
    if `pattern' is NULL. */
 
 CG_EXTERN CGPatternRef cg_nullable CGPatternRetain(CGPatternRef cg_nullable pattern)
-    CG_AVAILABLE_STARTING(10.0, 2.0);
+    API_AVAILABLE(macos(10.0), ios(2.0));
 
 /* Equivalent to `CFRelease(pattern)', except it doesn't crash (as CF does)
    if `pattern' is NULL. */
 
 CG_EXTERN void CGPatternRelease(CGPatternRef cg_nullable pattern)
-    CG_AVAILABLE_STARTING(10.0, 2.0);
+    API_AVAILABLE(macos(10.0), ios(2.0));
 
 CF_ASSUME_NONNULL_END
 

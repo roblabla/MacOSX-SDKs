@@ -2,12 +2,12 @@
 //  HKCharacteristicObjects.h
 //  HealthKit
 //
-//  Copyright © 2016-2022 Apple. All rights reserved.
+//  Copyright © 2016-2024 Apple. All rights reserved.
 //
 
-#import <HealthKit/HKDefines.h>
-
 #import <Foundation/Foundation.h>
+#import <HealthKit/HKCharacteristicValues.h>
+#import <HealthKit/HKDefines.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

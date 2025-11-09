@@ -963,4 +963,28 @@ API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0))
 
 @end
 
+#pragma mark ---- VNImageAestheticsScoresObservation ----
+
+/*!
+ @class VNImageAestheticsScoresObservation
+ @superclass VNObservation
+ @brief VNImageAestheticsScoresObservation provides an overall score of aesthetic attributes for an image.
+ */
+API_AVAILABLE(macos(15.0), ios(18.0), tvos(18.0), visionos(2.0))
+@interface VNImageAestheticsScoresObservation: VNObservation
+
+-(instancetype) init NS_UNAVAILABLE;
+
+/*!
+ @brief `isUtility` represents images that are not necessarily of poor image quality but may not have memorable or exciting content. `isUtility` can be true or false.
+ */
+@property (readonly, nonatomic, assign) BOOL isUtility;
+
+/*!
+ @brief A score which incorporates aesthetic score, failure score and utility labels. `overallScore` is within the range [-1, 1] where 1 is most desirable and -1 is not desirable.
+ */
+@property (readonly, nonatomic, assign) float overallScore;
+
+@end
+
 NS_ASSUME_NONNULL_END

@@ -49,6 +49,7 @@ API_AVAILABLE(ios(11.0))
  Object representing a physical location and orientation in 3D space.
  */
 API_AVAILABLE(ios(11.0))
+NS_SWIFT_SENDABLE
 @interface ARAnchor : NSObject <AR_ANCHOR_PROTOCOLS>
 
 /**

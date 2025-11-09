@@ -4,7 +4,7 @@
  
     Framework:  AVFoundation
  
-    Copyright 2010-2022 Apple Inc. All rights reserved.
+    Copyright 2010-2024 Apple Inc. All rights reserved.
 */
 
 #import <AVFoundation/AVBase.h>
@@ -63,7 +63,7 @@ AV_INIT_UNAVAILABLE
  @discussion
     The notification object is the AVCaptureInputPort instance whose format description changed.
  */
-AVF_EXPORT NSString *const AVCaptureInputPortFormatDescriptionDidChangeNotification API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0), tvos(17.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(watchos);
+AVF_EXPORT NSNotificationName const AVCaptureInputPortFormatDescriptionDidChangeNotification NS_SWIFT_NAME(AVCaptureInputPort.formatDescriptionDidChangeNotification) API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0), tvos(17.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(watchos);
 
 
 #pragma mark - AVCaptureInputPort
@@ -280,6 +280,73 @@ API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0), tvos(17.0), visionos(1.0
     When a device input is added to a session, this property reverts back to the default of kCMTimeInvalid (no override).
  */
 @property(nonatomic) CMTime videoMinFrameDurationOverride API_AVAILABLE(ios(13.0), macCatalyst(14.0), tvos(17.0)) API_UNAVAILABLE(macos, visionos) API_UNAVAILABLE(watchos);
+
+/*!
+ @enum AVCaptureMultichannelAudioMode
+ @abstract
+    Constants indicating the modes of multichannel audio.
+ 
+ @constant AVCaptureMultichannelAudioModeNone
+    Indicates that no multichannel audio should be used.
+ @constant AVCaptureMultichannelAudioModeStereo
+    Indicates that the audio should be recorded using stereo.
+ @constant AVCaptureMultichannelAudioModeFirstOrderAmbisonics
+    Indicates that the audio should be recorded using first-order ambisonics. When recording a QuickTime movie file, a stereo audio track will be recorded alongside the FOA track for backward playback compatibility.
+ */
+typedef NS_ENUM(NSInteger, AVCaptureMultichannelAudioMode) {
+    AVCaptureMultichannelAudioModeNone                 = 0,
+    AVCaptureMultichannelAudioModeStereo               = 1,
+    AVCaptureMultichannelAudioModeFirstOrderAmbisonics = 2,
+} API_AVAILABLE(macos(15.0), ios(18.0), macCatalyst(18.0), tvos(18.0)) API_UNAVAILABLE(watchos, visionos);
+
+/*!
+ @method isMultichannelAudioModeSupported:
+ @abstract
+    Returns whether the receiver supports the given multichannel audio mode.
+ 
+ @param multichannelAudioMode
+    An AVCaptureMultichannelAudioMode to be checked.
+ @result
+    YES if the receiver supports the given multichannel audio mode, NO otherwise.
+ 
+ @discussion
+    The receiver's multichannelAudioMode property can only be set to a certain mode if this method returns YES for that mode.
+ 
+    Multichannel audio modes are not supported when used in conjunction with AVCaptureMultiCamSession.
+ */
+- (BOOL)isMultichannelAudioModeSupported:(AVCaptureMultichannelAudioMode)multichannelAudioMode API_AVAILABLE(macos(15.0), ios(18.0), macCatalyst(18.0), tvos(18.0)) API_UNAVAILABLE(watchos, visionos);
+
+/*!
+ @property multichannelAudioMode
+ @abstract
+    Indicates the multichannel audio mode to apply when recording audio.
+ 
+ @discussion
+    This property only takes effect when audio is being routed through the built-in microphone, and is ignored if an external microphone is in use.
+    
+    The default value is AVCaptureMultichannelAudioModeNone, in which case the default single channel audio recording is used.
+ */
+@property(nonatomic) AVCaptureMultichannelAudioMode multichannelAudioMode API_AVAILABLE(macos(15.0), ios(18.0), macCatalyst(18.0), tvos(18.0)) API_UNAVAILABLE(watchos, visionos);
+
+/*!
+ @property windNoiseRemovalSupported
+ @abstract
+    Returns whether or not the device supports wind noise removal during audio capture.
+ 
+ @discussion
+    YES if the device supports wind noise removal, NO otherwise.
+ */
+@property(nonatomic, readonly, getter=isWindNoiseRemovalSupported) BOOL windNoiseRemovalSupported API_AVAILABLE(macos(15.0), ios(18.0), macCatalyst(18.0), tvos(18.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(watchos);
+
+/*!
+ @property windNoiseRemovalEnabled
+ @abstract
+    Specifies whether or not wind noise is removed during audio capture.
+ 
+ @discussion
+    Wind noise removal is available when the AVCaptureDeviceInput multichannelAudioMode property is set to any value other than AVCaptureMultichannelAudioModeNone.
+ */
+@property(nonatomic, getter=isWindNoiseRemovalEnabled) BOOL windNoiseRemovalEnabled API_AVAILABLE(macos(15.0), ios(18.0), macCatalyst(18.0), tvos(18.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(watchos);
 
 @end
 

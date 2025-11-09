@@ -13,45 +13,45 @@
 // view controller transition.
 NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
-typedef NSString * UITransitionContextViewControllerKey NS_TYPED_ENUM;
-typedef NSString * UITransitionContextViewKey NS_TYPED_ENUM;
+typedef NSString * UITransitionContextViewControllerKey NS_TYPED_ENUM API_UNAVAILABLE(watchos);
+typedef NSString * UITransitionContextViewKey NS_TYPED_ENUM API_UNAVAILABLE(watchos);
 
-NS_SWIFT_UI_ACTOR
+API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @protocol UIViewControllerTransitionCoordinatorContext <NSObject>
 
 // Most of the time isAnimated will be YES. For custom transitions that use the
 // new UIModalPresentationCustom presentation type we invoke the
 // animateTransition: even though the transition is not animated. (This allows
 // the custom transition to add or remove subviews to the container view.)
-@property(nonatomic, readonly, getter=isAnimated) BOOL animated;
+@property(nonatomic, readonly, getter=isAnimated) BOOL animated API_UNAVAILABLE(watchos);
 
 // A modal presentation style whose transition is being customized or UIModalPresentationNone if this is not a modal presentation
 // or dismissal.
-@property(nonatomic, readonly) UIModalPresentationStyle presentationStyle;
+@property(nonatomic, readonly) UIModalPresentationStyle presentationStyle API_UNAVAILABLE(watchos);
 
 /// initiallyInteractive indicates whether the transition was initiated as an interactive transition.
 /// It never changes during the course of a transition.
 /// It can only be YES if isAnimated is YES.
 ///If it is NO, then isInteractive can only be YES if isInterruptible is YES
-@property(nonatomic, readonly) BOOL initiallyInteractive;
-@property(nonatomic,readonly) BOOL isInterruptible API_AVAILABLE(ios(10.0));
+@property(nonatomic, readonly) BOOL initiallyInteractive API_UNAVAILABLE(watchos);
+@property(nonatomic,readonly) BOOL isInterruptible API_AVAILABLE(ios(10.0)) API_UNAVAILABLE(watchos);
 
 // Interactive transitions have non-interactive segments. For example, they all complete non-interactively. Some interactive transitions may have
 // intermediate segments that are not interactive.
-@property(nonatomic, readonly, getter=isInteractive) BOOL interactive;
+@property(nonatomic, readonly, getter=isInteractive) BOOL interactive API_UNAVAILABLE(watchos);
 
 // isCancelled is usually NO. It is only set to YES for an interactive transition that was cancelled.
-@property(nonatomic, readonly, getter=isCancelled) BOOL cancelled;
+@property(nonatomic, readonly, getter=isCancelled) BOOL cancelled API_UNAVAILABLE(watchos);
 
 // The full expected duration of the transition if it is run non-interactively. 
-@property(nonatomic, readonly) NSTimeInterval transitionDuration;
+@property(nonatomic, readonly) NSTimeInterval transitionDuration API_UNAVAILABLE(watchos);
 
 // These three methods are potentially meaningful for interactive transitions that are
 // completing. It reports the percent complete of the transition when it moves
 // to the non-interactive completion phase of the transition.
-@property(nonatomic, readonly) CGFloat percentComplete;
-@property(nonatomic, readonly) CGFloat completionVelocity;
-@property(nonatomic, readonly) UIViewAnimationCurve completionCurve;
+@property(nonatomic, readonly) CGFloat percentComplete API_UNAVAILABLE(watchos);
+@property(nonatomic, readonly) CGFloat completionVelocity API_UNAVAILABLE(watchos);
+@property(nonatomic, readonly) UIViewAnimationCurve completionCurve API_UNAVAILABLE(watchos);
 
 // Currently only two keys are defined by the system:
 //   UITransitionContextToViewControllerKey
@@ -64,7 +64,7 @@ NS_SWIFT_UI_ACTOR
 - (nullable __kindof UIView *)viewForKey:(UITransitionContextViewKey)key API_AVAILABLE(ios(8.0));
 
 // The view in which the animated transition is taking place.
-@property(nonatomic, readonly) UIView *containerView;
+@property(nonatomic, readonly) UIView *containerView API_UNAVAILABLE(watchos);
 
 // This is either CGAffineTransformIdentity (indicating no rotation), or a rotation transform of +90, -90, or 180.
 @property(nonatomic, readonly) CGAffineTransform targetTransform API_AVAILABLE(ios(8.0));
@@ -77,7 +77,7 @@ NS_SWIFT_UI_ACTOR
 // ephemeral object that is released after the transition completes and the
 // last callback has been made.
 
-NS_SWIFT_UI_ACTOR
+API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @protocol UIViewControllerTransitionCoordinator <UIViewControllerTransitionCoordinatorContext>
 
 
@@ -110,13 +110,13 @@ NS_SWIFT_UI_ACTOR
 // appearing will receive a viewWillDisappear: call, and the view controller
 // that was disappearing will receive a viewWillAppear: call.  This handler is
 // invoked BEFORE the "will" method calls are made.
-- (void)notifyWhenInteractionEndsUsingBlock: (void (^)(id <UIViewControllerTransitionCoordinatorContext>context))handler API_DEPRECATED_WITH_REPLACEMENT("notifyWhenInteractionChangesUsingBlock", ios(7.0, 10.0)) API_UNAVAILABLE(visionos);
+- (void)notifyWhenInteractionEndsUsingBlock: (void (^)(id <UIViewControllerTransitionCoordinatorContext>context))handler API_DEPRECATED_WITH_REPLACEMENT("notifyWhenInteractionChangesUsingBlock", ios(7.0, 10.0)) API_UNAVAILABLE(visionos, watchos);
 
 // This method behavior is identical to the method above. On 10.0, however, the behavior has
 // changed slightly to account for the fact that transitions can be interruptible. For interruptible transitions
 // The block may be called multiple times. It is called each time the transition moves from an interactive to a 
 // non-interactive state and vice-versa. The block is now also retained until the transition has completed.
-- (void)notifyWhenInteractionChangesUsingBlock: (void (^)(id <UIViewControllerTransitionCoordinatorContext>context))handler API_AVAILABLE(ios(10.0));
+- (void)notifyWhenInteractionChangesUsingBlock: (void (^)(id <UIViewControllerTransitionCoordinatorContext>context))handler API_AVAILABLE(ios(10.0)) API_UNAVAILABLE(watchos);
 
 @end
 

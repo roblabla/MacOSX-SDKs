@@ -31,24 +31,24 @@ typedef CF_ENUM (int32_t, CGPDFBox) {
    does) if `page' is NULL. */
 
 CG_EXTERN CGPDFPageRef __nullable CGPDFPageRetain(CGPDFPageRef cg_nullable page)
-    CG_AVAILABLE_STARTING(10.3, 2.0);
+    API_AVAILABLE(macos(10.3), ios(2.0));
 
 /* Equivalent to `CFRelease(page)', except it doesn't crash (as CFRelease
    does) if `page' is NULL. */
 
 CG_EXTERN void CGPDFPageRelease(CGPDFPageRef cg_nullable page)
-    CG_AVAILABLE_STARTING(10.3, 2.0);
+    API_AVAILABLE(macos(10.3), ios(2.0));
 
 /* Return the document of `page'. */
 
 CG_EXTERN CGPDFDocumentRef __nullable CGPDFPageGetDocument(
     CGPDFPageRef cg_nullable page)
-    CG_AVAILABLE_STARTING(10.3, 2.0);
+    API_AVAILABLE(macos(10.3), ios(2.0));
 
 /* Return the page number of `page'. */
 
 CG_EXTERN size_t CGPDFPageGetPageNumber(CGPDFPageRef cg_nullable page)
-    CG_AVAILABLE_STARTING(10.3, 2.0);
+    API_AVAILABLE(macos(10.3), ios(2.0));
 
 /* Return the rectangle associated with `box' in `page'. This is the value
    of the corresponding entry (such as /MediaBox, /ArtBox, and so on) in the
@@ -56,14 +56,14 @@ CG_EXTERN size_t CGPDFPageGetPageNumber(CGPDFPageRef cg_nullable page)
    or `box' is not a valid CGPDFBox. */
 
 CG_EXTERN CGRect CGPDFPageGetBoxRect(CGPDFPageRef cg_nullable page, CGPDFBox box)
-    CG_AVAILABLE_STARTING(10.3, 2.0);
+    API_AVAILABLE(macos(10.3), ios(2.0));
 
 /* Return the rotation angle (in degrees) of `page'. This is the value of
    the /Rotate entry in the page's dictionary. Return 0 if `page' is not a valid
    CGPDFPageRef. */
 
 CG_EXTERN int CGPDFPageGetRotationAngle(CGPDFPageRef cg_nullable page)
-    CG_AVAILABLE_STARTING(10.3, 2.0);
+    API_AVAILABLE(macos(10.3), ios(2.0));
 
 /* Return a transform mapping the box specified by `box' to `rect' as
    follows:
@@ -81,18 +81,18 @@ CG_EXTERN int CGPDFPageGetRotationAngle(CGPDFPageRef cg_nullable page)
 CG_EXTERN CGAffineTransform CGPDFPageGetDrawingTransform(
     CGPDFPageRef cg_nullable page, CGPDFBox box, CGRect rect, int rotate,
     bool preserveAspectRatio)
-    CG_AVAILABLE_STARTING(10.3, 2.0);
+    API_AVAILABLE(macos(10.3), ios(2.0));
 
 /* Return the dictionary of `page'. */
 
 CG_EXTERN CGPDFDictionaryRef __nullable CGPDFPageGetDictionary(
     CGPDFPageRef cg_nullable page)
-    CG_AVAILABLE_STARTING(10.3, 2.0);
+    API_AVAILABLE(macos(10.3), ios(2.0));
 
 /* Return the CFTypeID for CGPDFPageRefs. */
 
 CG_EXTERN CFTypeID CGPDFPageGetTypeID(void)
-    CG_AVAILABLE_STARTING(10.3, 2.0);
+    API_AVAILABLE(macos(10.3), ios(2.0));
 
 CF_ASSUME_NONNULL_END
 

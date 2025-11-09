@@ -14,7 +14,7 @@
 #import <PhotosUI/PHLivePhotoView.h>
 #endif
 
-#if TARGET_OS_IOS || TARGET_OS_OSX || TARGET_OS_WATCH || TARGET_OS_VISION
+#if TARGET_OS_IOS || TARGET_OS_OSX || TARGET_OS_WATCH || TARGET_OS_VISION || TARGET_OS_TV
 #import <PhotosUI/PHPicker.h>
 #endif
 

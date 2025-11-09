@@ -327,6 +327,7 @@ struct nd_opt_hdr {             /* Neighbor discovery option header */
 #define ND_OPT_REDIRECTED_HEADER        4
 #define ND_OPT_MTU                      5
 #define ND_OPT_NONCE                    14      /* RFC 3971 */
+#define ND_OPT_PVD                      21      /* RFC 8801 */
 #define ND_OPT_ROUTE_INFO               24      /* RFC 4191 */
 #define ND_OPT_RDNSS                    25      /* RFC 6106 */
 #define ND_OPT_DNSSL                    31      /* RFC 6106 */
@@ -417,6 +418,28 @@ struct nd_opt_pref64 {   /* NAT64 prefix */
 #define ND_OPT_PREF64_PLC_56                    2
 #define ND_OPT_PREF64_PLC_64                    1
 #define ND_OPT_PREF64_PLC_96                    0
+
+/*
+ * PvD (Provisioning Domain) RFC 8801
+ */
+struct nd_opt_pvd {
+	u_int8_t        nd_opt_pvd_type;
+	u_int8_t        nd_opt_pvd_len;
+	/* http:		1 bit */
+	/* legacy:		1 bit */
+	/* ra:			1 bit */
+	/* reserved:	9 bits */
+	/* delay:		4 bits */
+	u_int8_t        nd_opt_flags_delay[2];
+	u_int16_t       nd_opt_pvd_seq;
+	u_int8_t        nd_opt_pvd_id[1];
+} __attribute__((__packed__));
+
+#define ND_OPT_PVD_MIN_LENGTH  offsetof(struct nd_opt_pvd, nd_opt_pvd_id)
+#define ND_OPT_PVD_FLAGS_HTTP          0x80
+#define ND_OPT_PVD_FLAGS_LEGACY        0x40
+#define ND_OPT_PVD_FLAGS_RA            0x20
+#define ND_OPT_PVD_DELAY_MASK          0x0f
 
 /*
  * icmp6 namelookup

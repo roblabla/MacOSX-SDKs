@@ -10,10 +10,13 @@ exports:
                        _AXPCustomRotorUUID, _AXPFontAttributeName, _AXPForegroundColorAttributeName, 
                        _AXPIsCatalyst, _AXPIsGoodOldAppleCatalystApp, _AXPIsiOSAppOnMac, 
                        _AXPLinkedOnOrAfterGozul, _AXPNilOrEmptyString, _AXPOriginalFontAttributeName, 
-                       _AXPParagraphStyleAttributeName, _AXPProcessAttributedString, 
+                       _AXPParagraphStyleAttributeName, _AXPParametersDictActionsKey, 
+                       _AXPParametersDictAttributesKey, _AXPProcessAttributedString, 
                        _AXPSearchStartElementKey, _AXPShadowAttributeName, _AXPTextAlternativesAttributeName, 
-                       _AXPTextEffectAttributeName, __AXPActionToString, __AXPAttributeToString, 
+                       _AXPTextEffectAttributeName, _AXPTreeDumpTypeAdditionalData, 
+                       _AXPTreeDumpTypeInitialDump, __AXPActionToString, __AXPAttributeToString, 
                        __AXPNotificationToString ]
-    objc-classes:    [ AXPMacPlatformElement, AXPTranslationObject, AXPTranslator, 
-                       AXPTranslatorRequest, AXPTranslatorResponse ]
+    objc-classes:    [ AXPHostCacheManager, AXPHostCacheOverlayView, AXPMacPlatformElement, 
+                       AXPTranslationObject, AXPTranslator, AXPTranslatorRequest, 
+                       AXPTranslatorResponse ]
 ...

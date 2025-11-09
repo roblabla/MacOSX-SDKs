@@ -62,6 +62,7 @@ NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 loading system that is intended for use by NSURLProtocol
 implementors.
 */
+NS_SWIFT_SENDABLE
 API_AVAILABLE(macos(10.2), ios(2.0), watchos(2.0), tvos(9.0))
 @protocol NSURLProtocolClient <NSObject>
 

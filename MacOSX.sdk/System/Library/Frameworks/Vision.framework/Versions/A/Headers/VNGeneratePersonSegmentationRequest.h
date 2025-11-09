@@ -44,6 +44,12 @@ API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0))
  */
 @property (readwrite, nonatomic, assign) VNGeneratePersonSegmentationRequestQualityLevel qualityLevel;
 
+
+/*!
+	@brief Obtain the collection of supported output pixel formats for the configured request.
+*/
+- (nullable NSArray<NSNumber*>*) supportedOutputPixelFormatsAndReturnError:(NSError**)error API_AVAILABLE(macos(15.0), ios(18.0), tvos(18.0), visionos(2.0));
+
 /*!
  @brief Pixel format type of the output buffer. Valid values are kCVPixelFormatType_OneComponent32Float, kCVPixelFormatType_OneComponent16Half, and kCVPixelFormatType_OneComponent8. Default is kCVPixelFormatType_OneComponent8.
  */

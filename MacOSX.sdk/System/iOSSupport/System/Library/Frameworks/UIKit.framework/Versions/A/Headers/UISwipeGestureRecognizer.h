@@ -25,9 +25,9 @@ typedef NS_OPTIONS(NSUInteger, UISwipeGestureRecognizerDirection) {
     UISwipeGestureRecognizerDirectionLeft  = 1 << 1,
     UISwipeGestureRecognizerDirectionUp    = 1 << 2,
     UISwipeGestureRecognizerDirectionDown  = 1 << 3
-};
+} API_UNAVAILABLE(watchos);
 
-UIKIT_EXTERN API_AVAILABLE(ios(3.2)) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(3.2)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @interface UISwipeGestureRecognizer : UIGestureRecognizer 
 
 @property(nonatomic) NSUInteger                        numberOfTouchesRequired API_UNAVAILABLE(tvos); // default is 1. the number of fingers that must swipe

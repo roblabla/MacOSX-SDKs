@@ -4,7 +4,7 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2010-2022 Apple Inc. All rights reserved.
+	Copyright 2010-2024 Apple Inc. All rights reserved.
 
 */
 
@@ -27,7 +27,8 @@ NS_ASSUME_NONNULL_BEGIN
 		Note that inspection of assets tracks is provided by AVAssetTrack.
 		This class is intended to represent presentation state for a track of an asset that's played by an AVPlayer and AVPlayerItem.
 */
-API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0))
+NS_SWIFT_UI_ACTOR
+API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0), visionos(1.0))
 @interface AVPlayerItemTrack : NSObject
 {
 @private
@@ -49,8 +50,8 @@ API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0))
  @discussion	Before macOS 13, iOS 16, tvOS 16, and watchOS 9, this property must be accessed on the main thread/queue.
 */
 @property (nonatomic, assign, getter=isEnabled) BOOL enabled
-#if ! AVF_DEPLOYING_TO_2022_RELEASES_AND_LATER
-NS_SWIFT_UI_ACTOR
+#if AVF_DEPLOYING_TO_2022_RELEASES_AND_LATER
+NS_SWIFT_NONISOLATED
 #endif
 ;
 
@@ -62,10 +63,10 @@ NS_SWIFT_UI_ACTOR
  Before macOS 13, iOS 16, tvOS 16, and watchOS 9, this property must be accessed on the main thread/queue.
 */
 @property (readonly) float currentVideoFrameRate
-#if ! AVF_DEPLOYING_TO_2022_RELEASES_AND_LATER
-NS_SWIFT_UI_ACTOR
+#if AVF_DEPLOYING_TO_2022_RELEASES_AND_LATER
+NS_SWIFT_NONISOLATED
 #endif
-API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0)) API_UNAVAILABLE(watchos);
+API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 #if (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE))
 
@@ -73,7 +74,7 @@ API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0)) API_UNAVAILABLE(watchos);
  @constant		AVPlayerItemTrackVideoFieldModeDeinterlaceFields
  @abstract		Use with videoFieldMode property to request deinterlacing of video fields.
 */
-AVF_EXPORT NSString *const AVPlayerItemTrackVideoFieldModeDeinterlaceFields API_AVAILABLE(macos(10.10)) API_UNAVAILABLE(ios, tvos, watchos);
+AVF_EXPORT NSString *const AVPlayerItemTrackVideoFieldModeDeinterlaceFields API_AVAILABLE(macos(10.10)) API_UNAVAILABLE(ios, tvos, watchos, visionos);
 
 /*!
  @property		videoFieldMode
@@ -84,10 +85,10 @@ AVF_EXPORT NSString *const AVPlayerItemTrackVideoFieldModeDeinterlaceFields API_
  Before macOS 13, iOS 16, tvOS 16, and watchOS 9, this property must be accessed on the main thread/queue.
 */
 @property (nonatomic, copy, nullable) NSString *videoFieldMode
-#if ! AVF_DEPLOYING_TO_2022_RELEASES_AND_LATER
-NS_SWIFT_UI_ACTOR
+#if AVF_DEPLOYING_TO_2022_RELEASES_AND_LATER
+NS_SWIFT_NONISOLATED
 #endif
-API_AVAILABLE(macos(10.10)) API_UNAVAILABLE(ios, tvos, watchos);
+API_AVAILABLE(macos(10.10)) API_UNAVAILABLE(ios, tvos, watchos, visionos);
 
 #endif
 

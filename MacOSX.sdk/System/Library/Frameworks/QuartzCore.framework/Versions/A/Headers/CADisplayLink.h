@@ -11,10 +11,10 @@
 
 @class NSString, NSRunLoop;
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 /** Class representing a timer bound to the display vsync. **/
-API_AVAILABLE(ios(3.1), watchos(2.0), tvos(9.0))
+API_AVAILABLE(ios(3.1), tvos(9.0)) API_UNAVAILABLE(watchos)
 
 API_AVAILABLE(macos(14.0))
 
@@ -61,7 +61,7 @@ API_AVAILABLE(macos(14.0))
 /* The next timestamp that the client should target their render for. */
 
 @property(readonly, nonatomic) CFTimeInterval targetTimestamp
-    API_AVAILABLE(ios(10.0), watchos(3.0), tvos(10.0));
+    API_AVAILABLE(ios(10.0), tvos(10.0)) API_UNAVAILABLE(watchos);
 
 /* When true the object is prevented from firing. Initial state is
  * false. */
@@ -76,9 +76,8 @@ API_AVAILABLE(macos(14.0))
  * DEPRECATED - use preferredFramesPerSecond. */
 
 @property(nonatomic) NSInteger frameInterval
-  API_DEPRECATED("preferredFramesPerSecond", ios(3.1, 10.0),
-                 watchos(2.0, 3.0), tvos(9.0, 10.0))
-  API_UNAVAILABLE(macos);
+  API_DEPRECATED("preferredFramesPerSecond", ios(3.1, 10.0), tvos(9.0, 10.0))
+  API_UNAVAILABLE(macos, watchos);
 
 /* Defines the desired callback rate in frames-per-second for this display
  * link. If set to zero, the default value, the display link will fire at the
@@ -88,9 +87,8 @@ API_AVAILABLE(macos(14.0))
 @property(nonatomic) NSInteger preferredFramesPerSecond
   API_DEPRECATED_WITH_REPLACEMENT ("preferredFrameRateRange",
                                    ios(10.0, API_TO_BE_DEPRECATED),
-                                   watchos(3.0, API_TO_BE_DEPRECATED),
                                    tvos(10.0, API_TO_BE_DEPRECATED))
-  API_UNAVAILABLE(macos);
+  API_UNAVAILABLE(macos, watchos);
 
 /* Defines the range of desired callback rate in frames-per-second for this
    display link. If the range contains the same minimum and maximum frame rate,
@@ -99,10 +97,10 @@ API_AVAILABLE(macos(14.0))
    animation sources. */
 
 @property(nonatomic) CAFrameRateRange preferredFrameRateRange
-    API_AVAILABLE(ios(15.0), watchos(8.0), tvos(15.0));
+    API_AVAILABLE(ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos);
 
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)
 
 #endif

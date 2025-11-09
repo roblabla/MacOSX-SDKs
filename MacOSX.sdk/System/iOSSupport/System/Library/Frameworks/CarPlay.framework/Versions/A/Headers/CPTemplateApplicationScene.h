@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class CPTemplateApplicationScene;
 
-API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(macos, watchos, tvos)
+API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(macos, watchos)
 @protocol CPTemplateApplicationSceneDelegate <UISceneDelegate>
 
 @optional
@@ -41,7 +41,7 @@ API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(macos, watchos, tvos)
  @note The interfaceController object will be strongly retained by the CPTemplateApplicationScene, the delegate does not need to retain it.
   */
 - (void)templateApplicationScene:(CPTemplateApplicationScene *)templateApplicationScene
-   didConnectInterfaceController:(CPInterfaceController *)interfaceController API_AVAILABLE(ios(14.0));
+   didConnectInterfaceController:(CPInterfaceController *)interfaceController API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(tvos);
 
 /**
  The CarPlay screen has disconnected.
@@ -56,7 +56,7 @@ didDisconnectInterfaceController:(CPInterfaceController *)interfaceController
  The CarPlay screen has disconnected.
  */
 - (void)templateApplicationScene:(CPTemplateApplicationScene *)templateApplicationScene
-didDisconnectInterfaceController:(CPInterfaceController *)interfaceController API_AVAILABLE(ios(14.0));
+didDisconnectInterfaceController:(CPInterfaceController *)interfaceController API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(tvos);
 
 /**
  If your application posts a @c CPNavigationAlert while backgrounded, a notification banner may be presented to the user.
@@ -75,12 +75,12 @@ didDisconnectInterfaceController:(CPInterfaceController *)interfaceController AP
 /**
  The CarPlay system suggested content style for this scene has changed.
  */
-- (void)contentStyleDidChange:(UIUserInterfaceStyle)contentStyle API_AVAILABLE(ios(15.4)) API_UNAVAILABLE(macos, watchos, tvos);
+- (void)contentStyleDidChange:(UIUserInterfaceStyle)contentStyle API_AVAILABLE(ios(15.4)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(macos, watchos);
 
 @end
 
 
-API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(macos, watchos, tvos)
+API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(macos, watchos)
 @interface CPTemplateApplicationScene : UIScene
 
 /**
@@ -98,11 +98,11 @@ API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(macos, watchos, tvos)
  */
 @property (nonnull, nonatomic, strong, readonly) CPWindow *carWindow;
 
-@property (nonatomic, readonly) UIUserInterfaceStyle contentStyle API_AVAILABLE(ios(15.4)) API_UNAVAILABLE(macos, watchos, tvos);
+@property (nonatomic, readonly) UIUserInterfaceStyle contentStyle API_AVAILABLE(ios(15.4)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(macos, watchos);
 
 @end
 
 // A session role which defines a typical interactive application on the car display
-extern UISceneSessionRole const CPTemplateApplicationSceneSessionRoleApplication API_AVAILABLE(ios(13.0));
+extern UISceneSessionRole const CPTemplateApplicationSceneSessionRoleApplication API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(tvos);
 
 NS_ASSUME_NONNULL_END

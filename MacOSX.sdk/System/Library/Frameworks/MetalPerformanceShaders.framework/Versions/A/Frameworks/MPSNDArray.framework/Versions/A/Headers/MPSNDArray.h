@@ -10,3 +10,6 @@
 #import <MPSNDArray/MPSNDArrayMatrixMultiplication.h>
 #import <MPSNDArray/MPSNDArrayStridedSlice.h>
 #import <MPSNDArray/MPSNDArrayGather.h>
+#import <MPSNDArray/MPSNDArrayIdentity.h>
+#import <MPSNDArray/MPSNDArrayQuantization.h>
+#import <MPSNDArray/MPSNDArrayQuantizedMatrixMultiplication.h>

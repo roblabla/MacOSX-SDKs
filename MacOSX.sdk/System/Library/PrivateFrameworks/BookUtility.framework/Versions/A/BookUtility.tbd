@@ -3,20 +3,19 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/BookUtility.framework/Versions/A/BookUtility'
-current-version: 2078
+current-version: 2154
 compatibility-version: 0
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
-    symbols:         [ _BCPointsAlmostEqual, _BKApplicationAccessBundleID, _BKDisableBookStorePreferenceKey, 
-                       _BKPreferenceApplicationID, _BKRestrictExplicitContentPreferenceKey, 
-                       _BUArrayDescription, _BUAssertionFailed, _BUAssertionLog, 
-                       _BUBooksGroupContainerIdentifier, _BUBundle, _BUCFTypeCast, 
-                       _BUCastRecord, _BUCastStatsDump, _BUClamp, _BUClassAndProtocolCast, 
-                       _BUCoalescingCallBlockLog, _BUCrashBreakpoint, _BUCrashFinalThrow, 
-                       _BUDynamicCast, _BUEncodedBlockInfoAreEqual, _BUEncodedBlockInfoCreate, 
-                       _BUErrorDomain, _BUErrorException, _BUForceUnitTestsToHaltDebugger, 
-                       _BUFractionalPart, _BUGrantDebuggerPermissionToStopExecution, 
+    symbols:         [ _BCPointsAlmostEqual, _BKDisableBookStorePreferenceKey, _BKPreferenceApplicationID, 
+                       _BKRestrictExplicitContentPreferenceKey, _BUArrayDescription, 
+                       _BUAssertionFailed, _BUAssertionLog, _BUBooksGroupContainerIdentifier, 
+                       _BUBundle, _BUCFTypeCast, _BUCastRecord, _BUCastStatsDump, 
+                       _BUClamp, _BUClassAndProtocolCast, _BUCoalescingCallBlockLog, 
+                       _BUCrashBreakpoint, _BUCrashFinalThrow, _BUDynamicCast, _BUEncodedBlockInfoAreEqual, 
+                       _BUEncodedBlockInfoCreate, _BUErrorDomain, _BUErrorException, 
+                       _BUForceUnitTestsToHaltDebugger, _BUFractionalPart, _BUGrantDebuggerPermissionToStopExecution, 
                        _BUHaltDebugger, _BUIsGDPRAcknowledgementNeededForBooks, _BUIsRunningTests, 
                        _BUIsStoreBookAssetID, _BULocalizedErrorAlertMessageKey, _BULocalizedErrorAlertTitleKey, 
                        _BUMix, _BUNetworkMonitorInterfaceDidChangeNotification, _BUObjectReferenceDescription, 

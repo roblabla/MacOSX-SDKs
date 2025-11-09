@@ -9,6 +9,7 @@
 #define MediaAccessibility_MAVideoAccommodations_h
 
 #include <MediaAccessibility/MADefinitions.h>
+#include <CoreFoundation/CoreFoundation.h>
 
 CF_ASSUME_NONNULL_BEGIN
 

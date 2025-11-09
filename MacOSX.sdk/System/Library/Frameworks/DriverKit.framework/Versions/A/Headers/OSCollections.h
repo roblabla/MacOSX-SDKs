@@ -99,6 +99,16 @@ OSObjectRelease(OSObjectPtr container);
 void
 OSCollectionsInitialize();
 
+struct __OSStringStatic {
+    const char * cString;
+    OSString * osString;
+};
+
+#define OSSTR(cStr) ({ \
+    static struct __OSStringStatic __attribute__((used, visibility("hidden"),section("__DATA,__osstringinfo,regular,no_dead_strip"),no_sanitize("address"))) static_str = { cStr, NULL }; \
+    static_str.osString; \
+})
+
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 const char *

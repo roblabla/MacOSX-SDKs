@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.10 (swiftlang-5.10.0.12.5 clang-1500.3.9.1.1)
-// swift-module-flags: -target arm64e-apple-macosx14.5 -enable-objc-interop -enable-library-evolution -module-link-name swiftRegexBuilder -swift-version 5 -O -library-level api -enforce-exclusivity=unchecked -target-min-inlining-version min -user-module-version 5.10.0.12.5 -module-name RegexBuilder
-// swift-module-flags-ignorable: -enable-lexical-lifetimes=false
+// swift-compiler-version: Apple Swift version 6.0 effective-5.10 (swiftlang-6.0.0.7.24 clang-1600.0.25.1)
+// swift-module-flags: -target arm64e-apple-macosx15.0 -target-variant arm64e-apple-ios14.5-macabi -enable-objc-interop -enable-library-evolution -module-link-name swiftRegexBuilder -swift-version 5 -O -library-level api -enforce-exclusivity=unchecked -target-min-inlining-version min -enable-experimental-feature NoncopyableGenerics2 -enable-experimental-feature SuppressedAssociatedTypes -enable-experimental-feature ExtensionImportVisiblity -user-module-version 6.0.0.7.24 -module-name RegexBuilder
+// swift-module-flags-ignorable: -enable-ossa-modules -enable-lexical-lifetimes=false
 import Swift
 import _StringProcessing
 extension Swift.BidirectionalCollection where Self.SubSequence == Swift.Substring {
@@ -56,6 +56,7 @@ extension RegexBuilder.Anchor : _StringProcessing.RegexComponent {
   public var regex: _StringProcessing.Regex<Swift.Substring> {
     get
   }
+  @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
   public typealias RegexOutput = Swift.Substring
 }
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
@@ -93,6 +94,7 @@ public struct Lookahead<Output> {
   public var regex: _StringProcessing.Regex<Output>
   public init<R>(_ component: R) where Output == R.RegexOutput, R : _StringProcessing.RegexComponent
   public init<R>(@RegexBuilder.RegexComponentBuilder _ component: () -> R) where Output == R.RegexOutput, R : _StringProcessing.RegexComponent
+  @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
   public typealias RegexOutput = Output
 }
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
@@ -100,6 +102,7 @@ public struct NegativeLookahead<Output> {
   public var regex: _StringProcessing.Regex<Output>
   public init<R>(_ component: R) where Output == R.RegexOutput, R : _StringProcessing.RegexComponent
   public init<R>(@RegexBuilder.RegexComponentBuilder _ component: () -> R) where Output == R.RegexOutput, R : _StringProcessing.RegexComponent
+  @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
   public typealias RegexOutput = Output
 }
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
@@ -116,6 +119,7 @@ extension RegexBuilder.CharacterClass : _StringProcessing.RegexComponent {
   public var regex: _StringProcessing.Regex<Swift.Substring> {
     get
   }
+  @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
   public typealias RegexOutput = Swift.Substring
 }
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
@@ -185,42 +189,95 @@ extension RegexBuilder.CharacterClass {
 extension _StringProcessing.Regex {
   public init(@RegexBuilder.RegexComponentBuilder _ content: () -> some RegexComponent<Output>)
 }
+#if compiler(>=5.3) && $RetroactiveAttribute
+@available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
+extension Swift.String : @retroactive _StringProcessing.RegexComponent {
+  public typealias Output = Swift.Substring
+  public var regex: _StringProcessing.Regex<Swift.String.Output> {
+    get
+  }
+  @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
+  public typealias RegexOutput = Swift.String.Output
+}
+#else
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 extension Swift.String : _StringProcessing.RegexComponent {
   public typealias Output = Swift.Substring
   public var regex: _StringProcessing.Regex<Swift.String.Output> {
     get
   }
+  @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
   public typealias RegexOutput = Swift.String.Output
 }
+#endif
+#if compiler(>=5.3) && $RetroactiveAttribute
+@available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
+extension Swift.Substring : @retroactive _StringProcessing.RegexComponent {
+  public typealias Output = Swift.Substring
+  public var regex: _StringProcessing.Regex<Swift.Substring.Output> {
+    get
+  }
+  @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
+  public typealias RegexOutput = Swift.Substring.Output
+}
+#else
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 extension Swift.Substring : _StringProcessing.RegexComponent {
   public typealias Output = Swift.Substring
   public var regex: _StringProcessing.Regex<Swift.Substring.Output> {
     get
   }
+  @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
   public typealias RegexOutput = Swift.Substring.Output
 }
+#endif
+#if compiler(>=5.3) && $RetroactiveAttribute
+@available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
+extension Swift.Character : @retroactive _StringProcessing.RegexComponent {
+  public typealias Output = Swift.Substring
+  public var regex: _StringProcessing.Regex<Swift.Character.Output> {
+    get
+  }
+  @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
+  public typealias RegexOutput = Swift.Character.Output
+}
+#else
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 extension Swift.Character : _StringProcessing.RegexComponent {
   public typealias Output = Swift.Substring
   public var regex: _StringProcessing.Regex<Swift.Character.Output> {
     get
   }
+  @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
   public typealias RegexOutput = Swift.Character.Output
 }
+#endif
+#if compiler(>=5.3) && $RetroactiveAttribute
+@available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
+extension Swift.Unicode.Scalar : @retroactive _StringProcessing.RegexComponent {
+  public typealias Output = Swift.Substring
+  public var regex: _StringProcessing.Regex<Swift.Unicode.Scalar.Output> {
+    get
+  }
+  @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
+  public typealias RegexOutput = Swift.Unicode.Scalar.Output
+}
+#else
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 extension Swift.Unicode.Scalar : _StringProcessing.RegexComponent {
   public typealias Output = Swift.Substring
   public var regex: _StringProcessing.Regex<Swift.Unicode.Scalar.Output> {
     get
   }
+  @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
   public typealias RegexOutput = Swift.Unicode.Scalar.Output
 }
+#endif
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 public struct One<Output> : _StringProcessing.RegexComponent {
   public var regex: _StringProcessing.Regex<Output>
   public init(_ component: some RegexComponent<Output>)
+  @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
   public typealias RegexOutput = Output
 }
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
@@ -228,6 +285,7 @@ public struct OneOrMore<Output> {
   public var regex: _StringProcessing.Regex<Output>
   @usableFromInline
   internal init(_ regex: _StringProcessing.Regex<Output>)
+  @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
   public typealias RegexOutput = Output
 }
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
@@ -235,6 +293,7 @@ public struct ZeroOrMore<Output> {
   public var regex: _StringProcessing.Regex<Output>
   @usableFromInline
   internal init(_ regex: _StringProcessing.Regex<Output>)
+  @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
   public typealias RegexOutput = Output
 }
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
@@ -242,6 +301,7 @@ public struct Optionally<Output> {
   public var regex: _StringProcessing.Regex<Output>
   @usableFromInline
   internal init(_ regex: _StringProcessing.Regex<Output>)
+  @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
   public typealias RegexOutput = Output
 }
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
@@ -249,6 +309,7 @@ public struct Repeat<Output> {
   public var regex: _StringProcessing.Regex<Output>
   @usableFromInline
   internal init(_ regex: _StringProcessing.Regex<Output>)
+  @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
   public typealias RegexOutput = Output
 }
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
@@ -262,6 +323,7 @@ public struct ChoiceOf<Output> {
   @usableFromInline
   internal init(_ regex: _StringProcessing.Regex<Output>)
   public init(@RegexBuilder.AlternationBuilder _ builder: () -> RegexBuilder.ChoiceOf<Output>)
+  @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
   public typealias RegexOutput = Output
 }
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
@@ -269,6 +331,7 @@ public struct Capture<Output> {
   public var regex: _StringProcessing.Regex<Output>
   @usableFromInline
   internal init(_ regex: _StringProcessing.Regex<Output>)
+  @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
   public typealias RegexOutput = Output
 }
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
@@ -276,6 +339,7 @@ public struct TryCapture<Output> {
   public var regex: _StringProcessing.Regex<Output>
   @usableFromInline
   internal init(_ regex: _StringProcessing.Regex<Output>)
+  @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
   public typealias RegexOutput = Output
 }
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
@@ -283,6 +347,7 @@ public struct Local<Output> {
   public var regex: _StringProcessing.Regex<Output>
   @usableFromInline
   internal init(_ regex: _StringProcessing.Regex<Output>)
+  @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
   public typealias RegexOutput = Output
 }
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
@@ -295,6 +360,7 @@ public struct Reference<Capture> : _StringProcessing.RegexComponent {
   public var regex: _StringProcessing.Regex<Capture> {
     get
   }
+  @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
   public typealias RegexOutput = Capture
 }
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)

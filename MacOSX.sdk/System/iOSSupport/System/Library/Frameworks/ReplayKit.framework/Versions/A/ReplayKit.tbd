@@ -12,6 +12,7 @@ exports:
                        _RPSampleBufferUtilities_CreateSampleBufferWithPixelBuffer, 
                        _RPSampleBufferUtilities_EncodeAudioSampleBuffer, _RPSampleBufferUtilities_ReleaseAudioSampleBuffer, 
                        _RPSampleBufferUtilities_SecondsPresentationTimeForSample, 
+                       _RPStringUtility_CStrToFourcc, _RPStringUtility_FourccToCStr, 
                        _RPVideoEditorExtensionAppNameKey, _RPVideoEditorExtensionBundleIdentifierKey, 
                        _RPVideoEditorExtensionFileAttachmentKey, _RPVideoEditorExtensionMoviePathKey, 
                        _RPVideoEditorExtensionOverrideShareMessageKey, _RPVideoEditorExtensionOverrideTintColorKey, 
@@ -26,6 +27,6 @@ exports:
                        RPFlatVideoOverlayButton, RPHighFidelityVideoOverlayButton, 
                        RPIOSurfaceObject, RPModalPresentationWindow, RPPipView, RPPipViewController, 
                        RPPreviewViewController, RPScreenRecorder, RPStoreInfo, RPStoreManager, 
-                       RPSystemBroadcastPickerView, RPVideoEditorExtensionHostContext, 
+                       RPStringUtility, RPSystemBroadcastPickerView, RPVideoEditorExtensionHostContext, 
                        RPVideoEditorHostViewController ]
 ...

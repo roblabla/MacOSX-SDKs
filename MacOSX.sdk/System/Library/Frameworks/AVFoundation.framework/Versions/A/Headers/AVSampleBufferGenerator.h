@@ -38,7 +38,7 @@ NS_ASSUME_NONNULL_BEGIN
 @class AVSampleBufferGeneratorInternal;
 
 NS_SWIFT_SENDABLE
-API_AVAILABLE(macos(10.10), ios(16.0), tvos(16.0), watchos(9.0))
+API_AVAILABLE(macos(10.10), ios(16.0), tvos(16.0), watchos(9.0), visionos(1.0))
 @interface AVSampleBufferGenerator : NSObject {
 @private
 	AVSampleBufferGeneratorInternal	*_generator;
@@ -68,7 +68,7 @@ AV_INIT_UNAVAILABLE
   @result		A CMSampleBuffer object referencing the output sample buffer.
   @discussion	If the AVSampleBufferGenerator was created with a NULL timebase, any associated AVSampleBufferRequest will default to using AVSampleBufferRequestModeImmediate.
 */
-- (nullable CMSampleBufferRef)createSampleBufferForRequest:(AVSampleBufferRequest *)request error:(NSError * _Nullable * _Nullable)outError CF_RETURNS_RETAINED API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0), watchos(9.0)) NS_SWIFT_NAME(makeSampleBuffer(for:));
+- (nullable CMSampleBufferRef)createSampleBufferForRequest:(AVSampleBufferRequest *)request error:(NSError * _Nullable * _Nullable)outError CF_RETURNS_RETAINED API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0), watchos(9.0), visionos(1.0)) NS_SWIFT_NAME(makeSampleBuffer(for:));
 
 /* It is an error to use an AVSampleBufferRequest with mode set to AVSampleBufferRequestModeScheduled when the AVSampleBufferGenerator was created with a NULL timebase. */
 - (nullable CMSampleBufferRef)createSampleBufferForRequest:(AVSampleBufferRequest *)request CF_RETURNS_RETAINED API_DEPRECATED("Use -createSampleBufferForRequest: error:, passing NULL for the error if not required", macos(10.10, 13.0)) API_UNAVAILABLE(ios, tvos, watchos, visionos);
@@ -78,7 +78,7 @@ AV_INIT_UNAVAILABLE
   @abstract		Creates a batch to handle multiple sample buffers, allowing to asynchronously load sample data and optimize I/O when possible.
   @result		An instance of an AVSampleBufferGeneratorBatch that can be used in calls to createSampleBufferForRequest:addingToBatch:error: of the same AVSampleBufferGenerator instance.
 */
-- (AVSampleBufferGeneratorBatch *) makeBatch API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0), watchos(9.0));
+- (AVSampleBufferGeneratorBatch *) makeBatch API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0), watchos(9.0), visionos(1.0));
 
 /*!
   @method		createSampleBufferForRequest: addingToBatch: error:
@@ -95,7 +95,7 @@ AV_INIT_UNAVAILABLE
   @result		A CMSampleBuffer object referencing the output sample buffer. The generator may defer I/O to fetch sample data depending on the source of the sample data and
 				the generator's timebase.
 */
-- (nullable CMSampleBufferRef)createSampleBufferForRequest:(AVSampleBufferRequest *)request addingToBatch: (AVSampleBufferGeneratorBatch *)batch error:(NSError * _Nullable * _Nullable)outError CF_RETURNS_RETAINED API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0), watchos(9.0)) NS_SWIFT_NAME(makeSampleBuffer(for:addTo:));
+- (nullable CMSampleBufferRef)createSampleBufferForRequest:(AVSampleBufferRequest *)request addingToBatch: (AVSampleBufferGeneratorBatch *)batch error:(NSError * _Nullable * _Nullable)outError CF_RETURNS_RETAINED API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0), watchos(9.0), visionos(1.0)) NS_SWIFT_NAME(makeSampleBuffer(for:addTo:));
 
 /*!
   @method		notifyOfDataReadyForSampleBuffer: completionHandler:
@@ -103,7 +103,8 @@ AV_INIT_UNAVAILABLE
   @param		completionHandler
 				The completionHandler will be called, when the sample buffer data is ready, or as soon as an error has occurred.
 */
-+ (void)notifyOfDataReadyForSampleBuffer:(CMSampleBufferRef)sbuf completionHandler:(void (^)(BOOL dataReady, NSError *error))completionHandler;
+
++ (void)notifyOfDataReadyForSampleBuffer:(CMSampleBufferRef)sbuf completionHandler:(void (^ NS_SWIFT_SENDABLE)(BOOL dataReady, NSError * _Nullable error))completionHandler NS_SWIFT_ASYNC_THROWS_ON_FALSE(1);
 
 @end
 
@@ -153,7 +154,7 @@ typedef NS_ENUM(NSInteger, AVSampleBufferRequestMode) {
 	@abstract	An AVSampleBufferRequest describes a CMSampleBuffer creation request.
  */
 NS_SWIFT_NONSENDABLE
-API_AVAILABLE(macos(10.10), ios(16.0), tvos(16.0), watchos(9.0))
+API_AVAILABLE(macos(10.10), ios(16.0), tvos(16.0), watchos(9.0), visionos(1.0))
 @interface AVSampleBufferRequest : NSObject {
 @private
 	AVSampleBufferRequestInternal	*_request;
@@ -197,7 +198,7 @@ AV_INIT_UNAVAILABLE
 */
 
 NS_SWIFT_SENDABLE
-API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0), watchos(9.0))
+API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0), watchos(9.0), visionos(1.0))
 @interface AVSampleBufferGeneratorBatch : NSObject
 
 AV_INIT_UNAVAILABLE
@@ -209,7 +210,7 @@ AV_INIT_UNAVAILABLE
   @param		completionHandler
 				The completionHandler is called once, when all CMSampleBuffers in the batch are data-ready, or as soon as an error has occurred.
 */
-- (void) makeDataReadyWithCompletionHandler: (void (^)(NSError * _Nullable error))completionHandler;
+- (void) makeDataReadyWithCompletionHandler: (void (^ NS_SWIFT_SENDABLE)(NSError * _Nullable error))completionHandler;
 
 /*!
   @method		cancel

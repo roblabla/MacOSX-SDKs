@@ -3,7 +3,7 @@
 //  NSTextListElement.h
 //  Text Kit
 //
-//  Copyright (c) 2021, Apple Inc. All rights reserved.
+//  Copyright (c) 2021-2022, Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -16,7 +16,7 @@ NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 // NSTextListElement is a concrete subclass of NSTextElement representing a text list node. It can contain an array of child element. A text list can be represented by a tree of NSTextListElements.
 #pragma mark NSTextListElement
 
-API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0)) API_UNAVAILABLE(watchos)
+API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0), visionos(1.0)) API_UNAVAILABLE(watchos)
 @interface NSTextListElement : NSTextParagraph
 #pragma mark Initializer
 // Designated initializer. Initializes 2 types of NSTextListElement: a standard list item and nesting parent element. Either of contents, markerAttributes, or childElements must be non-nil. Clients should typically use one of 2 factory methods below for instantiating with a specific type. When markerAttributes!=nil, it will be used to format the marker; otherwise, it is derived from contents.

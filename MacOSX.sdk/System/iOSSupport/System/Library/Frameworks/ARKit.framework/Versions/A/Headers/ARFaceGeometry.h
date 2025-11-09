@@ -6,11 +6,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <SceneKit/SCNGeometry.h>
 #import <ARKit/ARFaceAnchor.h>
-#if __has_include(<ARKit/ARSCNFaceGeometry.h>)
-#import <ARKit/ARSCNFaceGeometry.h>
-#endif
 
 @protocol MTLBuffer;
 @protocol MTLDevice;
@@ -24,6 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
  and vertices, updating only the vertex positions from frame to frame.
  */
 API_AVAILABLE(ios(11.0))
+NS_SWIFT_SENDABLE
 @interface ARFaceGeometry : NSObject<NSSecureCoding, NSCopying>
 
 /**

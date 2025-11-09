@@ -1,6 +1,6 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.10 (swiftlang-5.10.0.12.5 clang-1500.3.9.1.1)
-// swift-module-flags: -target x86_64-apple-macos14.5 -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftFileProvider -swift-version 5 -enforce-exclusivity=checked -O -library-level other -enable-bare-slash-regex -user-module-version 1835.120.53 -module-name FileProvider
+// swift-compiler-version: Apple Swift version 6.0 effective-5.10 (swiftlang-6.0.0.7.24 clang-1600.0.25.1)
+// swift-module-flags: -target x86_64-apple-macos15.0 -target-variant x86_64-apple-ios18.0-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftFileProvider -swift-version 5 -enforce-exclusivity=checked -O -library-level other -enable-bare-slash-regex -user-module-version 2732.0.85 -module-name FileProvider
 @_exported import FileProvider
 import Swift
 import _Concurrency
@@ -38,8 +38,14 @@ public struct _FileProvider_CSQueryExpressionFlag : Swift.OptionSet {
   public static var fuzzyMatching: FileProvider._FileProvider_CSQueryExpressionFlag
   public static var fuzzyThreshold: FileProvider._FileProvider_CSQueryExpressionFlag
   public static var collationTypeNoSearch: FileProvider._FileProvider_CSQueryExpressionFlag
+  @available(iOS 16.0, macOS 11.3, *)
+  @available(macCatalyst, unavailable)
   public typealias ArrayLiteralElement = FileProvider._FileProvider_CSQueryExpressionFlag
+  @available(iOS 16.0, macOS 11.3, *)
+  @available(macCatalyst, unavailable)
   public typealias Element = FileProvider._FileProvider_CSQueryExpressionFlag
+  @available(iOS 16.0, macOS 11.3, *)
+  @available(macCatalyst, unavailable)
   public typealias RawValue = Swift.UInt32
 }
 @_hasMissingDesignatedInitializers @available(macOS 11.3, iOS 16.0, *)
@@ -57,7 +63,15 @@ extension FileProvider.NSFileProviderDomainVersion : Swift.Comparable {
 @available(macCatalyst, unavailable)
 extension FileProvider.NSFileProviderManager {
   public func requestDownloadForItem(withIdentifier itemIdentifier: FileProvider.NSFileProviderItemIdentifier, requestedRange: Foundation.NSRange? = nil, completionHandler: @escaping ((any Swift.Error)?) -> Swift.Void)
-  #if compiler(>=5.3) && $AsyncAwait
   public func requestDownloadForItem(withIdentifier itemIdentifier: FileProvider.NSFileProviderItemIdentifier, requestedRange: Foundation.NSRange? = nil) async throws
-  #endif
+}
+@available(macOS 15.0, *)
+@available(macCatalyst, unavailable)
+extension FileProvider.NSFileProviderManager {
+  public enum EligibilityResult : Swift.Equatable {
+    case eligible
+    case ineligible(FileProvider.NSFileProviderVolumeUnsupportedReason)
+    public static func == (a: FileProvider.NSFileProviderManager.EligibilityResult, b: FileProvider.NSFileProviderManager.EligibilityResult) -> Swift.Bool
+  }
+  public class func checkDomainsCanBeStoredOnVolume(at url: Foundation.URL) throws -> FileProvider.NSFileProviderManager.EligibilityResult
 }

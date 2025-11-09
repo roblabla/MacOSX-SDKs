@@ -4,12 +4,12 @@
 
 	Framework:  AVFoundation
 
-	Copyright 2018-2021 Apple Inc. All rights reserved.
+	Copyright 2018-2023 Apple Inc. All rights reserved.
 
 */
 
 #import <AVFoundation/AVBase.h>
-#if TARGET_OS_OSX
+#if ( TARGET_OS_OSX || ( TARGET_OS_IOS && ! TARGET_OS_VISION ) )
 
 #import <Foundation/Foundation.h>
 
@@ -22,13 +22,13 @@
 	@typedef	AVCaptionSettingsKey
 	@abstract	Keys for the captions settings dictionary.
 */
-typedef NSString * AVCaptionSettingsKey NS_TYPED_ENUM API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, watchos, tvos);
+typedef NSString * AVCaptionSettingsKey NS_TYPED_ENUM API_AVAILABLE(macos(12.0), ios(18.0), macCatalyst(15.0), visionos(2.0)) API_UNAVAILABLE(watchos, tvos);
 
 /*!
 	@constant	AVCaptionMediaTypeKey
 	@abstract	Indicates the output media type of a caption conversion operation. For example, AVMediaTypeClosedCaption.
 */
-AVF_EXPORT AVCaptionSettingsKey const AVCaptionMediaTypeKey API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, watchos, tvos);
+AVF_EXPORT AVCaptionSettingsKey const AVCaptionMediaTypeKey API_AVAILABLE(macos(12.0), ios(18.0), macCatalyst(15.0), visionos(2.0)) API_UNAVAILABLE(watchos, tvos);
 
 /*!
 	@constant	AVCaptionMediaSubTypeKey
@@ -36,7 +36,7 @@ AVF_EXPORT AVCaptionSettingsKey const AVCaptionMediaTypeKey API_AVAILABLE(macos(
 	@discussion
 		Both numeric and string forms of media subtypes are accepted for caption conversions, so you could, for example, use @"c608" instead of [NSNumber numberWithInt:kCMClosedCaptionFormatType_CEA608].
 */
-AVF_EXPORT AVCaptionSettingsKey const AVCaptionMediaSubTypeKey API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, watchos, tvos);
+AVF_EXPORT AVCaptionSettingsKey const AVCaptionMediaSubTypeKey API_AVAILABLE(macos(12.0), ios(18.0), macCatalyst(15.0), visionos(2.0)) API_UNAVAILABLE(watchos, tvos);
 
 /*!
     @constant   AVCaptionTimeCodeFrameDurationKey
@@ -46,7 +46,7 @@ AVF_EXPORT AVCaptionSettingsKey const AVCaptionMediaSubTypeKey API_AVAILABLE(mac
 
 		For example, if the time code steps for every 1001 / 30000 seconds, the value should be CMTime(value: 1001, scale: 30000).
 */
-AVF_EXPORT AVCaptionSettingsKey const AVCaptionTimeCodeFrameDurationKey API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, watchos, tvos); // CMTime as NSValue through +[NSValue valueWithCMTime] in AVTime.h
+AVF_EXPORT AVCaptionSettingsKey const AVCaptionTimeCodeFrameDurationKey API_AVAILABLE(macos(12.0), ios(18.0), macCatalyst(15.0), visionos(2.0)) API_UNAVAILABLE(watchos, tvos); // CMTime as NSValue through +[NSValue valueWithCMTime] in AVTime.h
 
 /*!
 	@constant	AVCaptionUseDropFrameTimeCodeKey
@@ -57,9 +57,9 @@ AVF_EXPORT AVCaptionSettingsKey const AVCaptionTimeCodeFrameDurationKey API_AVAI
 		When the value for this key is a NSNumber indicating the BOOL NO, the receiver will use the non-drop frame time code.
 		The default is NO.
 */
-AVF_EXPORT AVCaptionSettingsKey const AVCaptionUseDropFrameTimeCodeKey API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, watchos, tvos);
+AVF_EXPORT AVCaptionSettingsKey const AVCaptionUseDropFrameTimeCodeKey API_AVAILABLE(macos(12.0), ios(18.0), macCatalyst(15.0), visionos(2.0)) API_UNAVAILABLE(watchos, tvos);
 
-#endif // TARGET_OS_OSX
+#endif // ( TARGET_OS_OSX || ( TARGET_OS_IOS && ! TARGET_OS_VISION ) )
 
 #else
 #import <AVFCore/AVCaptionSettings.h>

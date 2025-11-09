@@ -15,12 +15,12 @@ NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 @protocol UIPickerViewDataSource, UIPickerViewDelegate;
 
-UIKIT_EXTERN API_AVAILABLE(ios(2.0)) API_UNAVAILABLE(tvos) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(2.0)) API_UNAVAILABLE(tvos, watchos) NS_SWIFT_UI_ACTOR
 @interface UIPickerView : UIView <NSCoding>
 
 @property(nullable,nonatomic,weak) id<UIPickerViewDataSource> dataSource;                // default is nil. weak reference
 @property(nullable,nonatomic,weak) id<UIPickerViewDelegate>   delegate;                  // default is nil. weak reference
-@property(nonatomic) BOOL showsSelectionIndicator API_DEPRECATED("This property has no effect on iOS 7 and later.", ios(2.0, 13.0)) API_UNAVAILABLE(visionos);
+@property(nonatomic) BOOL showsSelectionIndicator API_DEPRECATED("This property has no effect on iOS 7 and later.", ios(2.0, 13.0)) API_UNAVAILABLE(visionos, watchos);
 
 // info that was fetched and cached from the data source and delegate
 @property(nonatomic,readonly) NSInteger numberOfComponents;
@@ -44,7 +44,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) API_UNAVAILABLE(tvos) NS_SWIFT_UI_ACTOR
 @end
 
 
-API_UNAVAILABLE(tvos) NS_SWIFT_UI_ACTOR
+API_UNAVAILABLE(tvos, watchos) NS_SWIFT_UI_ACTOR
 @protocol UIPickerViewDataSource<NSObject>
 @required
 
@@ -55,7 +55,7 @@ API_UNAVAILABLE(tvos) NS_SWIFT_UI_ACTOR
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component;
 @end
 
-API_UNAVAILABLE(tvos) NS_SWIFT_UI_ACTOR
+API_UNAVAILABLE(tvos, watchos) NS_SWIFT_UI_ACTOR
 @protocol UIPickerViewDelegate<NSObject>
 @optional
 

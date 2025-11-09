@@ -20,6 +20,7 @@ FOUNDATION_EXTERN NSString *const ARReferenceObjectArchiveExtension NS_SWIFT_NAM
  A reference object to track in the scene.
  */
 API_AVAILABLE(ios(12.0))
+NS_SWIFT_SENDABLE
 @interface ARReferenceObject : NSObject<NSSecureCoding>
 
 /**

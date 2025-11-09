@@ -1,7 +1,7 @@
 /*
         NSComboButton.h
         Application Kit
-        Copyright (c) 2021-2023, Apple Inc.
+        Copyright (c) 2021-2024, Apple Inc.
         All rights reserved.
 */
 

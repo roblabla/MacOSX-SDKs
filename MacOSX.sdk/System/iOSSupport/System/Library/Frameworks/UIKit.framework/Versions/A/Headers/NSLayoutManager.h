@@ -26,7 +26,7 @@ NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 typedef NS_ENUM(NSInteger, NSTextLayoutOrientation) {
     NSTextLayoutOrientationHorizontal = 0, // Lines rendered horizontally, grow top to bottom
     NSTextLayoutOrientationVertical = 1, // Lines rendered vertically, grow right to left
-} API_AVAILABLE(macosx(10.0), ios(7.0), watchos(2.0), tvos(9.0));
+} API_AVAILABLE(macosx(10.0), ios(7.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 #endif // !__NSLAYOUT_MANAGER_SHARED_SECTION__
 
 typedef NS_OPTIONS(NSInteger, NSGlyphProperty) {
@@ -34,7 +34,7 @@ typedef NS_OPTIONS(NSInteger, NSGlyphProperty) {
     NSGlyphPropertyControlCharacter = (1 << 1), // control character such as tab, attachment, etc that has special behavior associated with
     NSGlyphPropertyElastic = (1 << 2), // glyphs with elastic glyph width behavior such as white spaces
     NSGlyphPropertyNonBaseCharacter = (1 << 3) // glyphs with combining properties. typically characters in Unicode Mn class.
-} API_AVAILABLE(macos(10.11), ios(7.0));
+} API_AVAILABLE(macos(10.11), ios(7.0)) API_UNAVAILABLE(watchos);
 
 typedef NS_OPTIONS(NSInteger, NSControlCharacterAction) {
     NSControlCharacterActionZeroAdvancement = (1 << 0), // glyphs with this action are filtered out from layout (notShownAttribute == YES)
@@ -43,15 +43,15 @@ typedef NS_OPTIONS(NSInteger, NSControlCharacterAction) {
     NSControlCharacterActionLineBreak = (1 << 3), // Causes line break
     NSControlCharacterActionParagraphBreak = (1 << 4), // Causes paragraph break; firstLineIndent will be used for the following glyph
     NSControlCharacterActionContainerBreak = (1 << 5) // Causes container break
-} API_AVAILABLE(macos(10.11), ios(7.0));
+} API_AVAILABLE(macos(10.11), ios(7.0)) API_UNAVAILABLE(watchos);
 
-@protocol NSTextLayoutOrientationProvider
+API_UNAVAILABLE(watchos) @protocol NSTextLayoutOrientationProvider
 // A property describing the receiver's layout orientation.  This property defines the default value for the range of string laid out in the receiver in absence of explicit NSVerticalGlyphFormAttributeName attribute.  For example, when NSTextLayoutOrientationVertical, the default value for NSVerticalGlyphFormAttributeName is 1.  When rendering into the receiver, the Text System assumes the coordinate system is appropriately rotated.
 @property (readonly, NS_NONATOMIC_IOSONLY) NSTextLayoutOrientation layoutOrientation API_AVAILABLE(macos(10.7), ios(7.0));
 @end
 
 
-UIKIT_EXTERN API_AVAILABLE(macos(10.0), ios(7.0))
+UIKIT_EXTERN API_AVAILABLE(macos(10.0), ios(7.0)) API_UNAVAILABLE(watchos)
 @interface NSLayoutManager : NSObject <NSSecureCoding>
 
 /**************************** Initialization ****************************/
@@ -112,10 +112,10 @@ UIKIT_EXTERN API_AVAILABLE(macos(10.0), ios(7.0))
 @property (readonly, NS_NONATOMIC_IOSONLY) BOOL hasNonContiguousLayout API_AVAILABLE(macos(10.5), ios(7.0));
 
 // When YES, enables internal security analysis for malicious inputs and activates defensive behaviors. By enabling this functionality, it's possible certain text such as a very long paragraph might result in unexpected layout. NO by default.
-@property BOOL limitsLayoutForSuspiciousContents API_AVAILABLE(macos(10.14), ios(12.0), watchos(5.0), tvos(12.0));
+@property BOOL limitsLayoutForSuspiciousContents API_AVAILABLE(macos(10.14), ios(12.0), tvos(12.0)) API_UNAVAILABLE(watchos);
 
 // When YES, NSLayoutManager will attempt to hyphenate when wrapping lines. May be overridden on a per-paragraph basis by the NSParagraphStyle's hyphenationFactor. The receiver makes the best effort to decide the exact logic including the hyphenation factor based on the context. The default value is NO. Can be overridden by the preference key @"NSUsesDefaultHyphenation".
-@property BOOL usesDefaultHyphenation API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0));
+@property BOOL usesDefaultHyphenation API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0)) API_UNAVAILABLE(watchos);
 
 /************************** Invalidation **************************/
 
@@ -158,7 +158,7 @@ UIKIT_EXTERN API_AVAILABLE(macos(10.0), ios(7.0))
 // If non-contiguous layout is not enabled, these will cause generation of all glyphs up to and including glyphIndex.  The first CGGlyphAtIndex variant returns kCGFontIndexInvalid if the requested index is out of the range (0, numberOfGlyphs), and optionally returns a flag indicating whether the requested index is in range.  The second CGGlyphAtIndex variant raises a NSRangeError if the requested index is out of range.
 - (CGGlyph)CGGlyphAtIndex:(NSUInteger)glyphIndex isValidIndex:(nullable BOOL *)isValidIndex API_AVAILABLE(macos(10.11), ios(7.0));
 - (CGGlyph)CGGlyphAtIndex:(NSUInteger)glyphIndex API_AVAILABLE(macos(10.11), ios(7.0));
-- (BOOL)isValidGlyphIndex:(NSUInteger)glyphIndex API_AVAILABLE(macosx(10.0), ios(7.0), watchos(2.0), tvos(9.0));
+- (BOOL)isValidGlyphIndex:(NSUInteger)glyphIndex API_AVAILABLE(macosx(10.0), ios(7.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 
 // If non-contiguous layout is not enabled, this will cause generation of all glyphs up to and including glyphIndex.  It will return the glyph property associated with the glyph at the specified index.
 - (NSGlyphProperty)propertyForGlyphAtIndex:(NSUInteger)glyphIndex API_AVAILABLE(macos(10.5), ios(7.0));
@@ -288,7 +288,7 @@ UIKIT_EXTERN API_AVAILABLE(macos(10.0), ios(7.0))
 - (void)drawGlyphsForGlyphRange:(NSRange)glyphsToShow atPoint:(CGPoint)origin;
 
 // This is the glyph rendering primitive method.  Renders glyphs at positions into the CGContext.  The positions are in the user space coordinate system.  CGContext that is passed in is already configured according to the text attributes arguments: font, textMatrix, and attributes.  The font argument represents the font applied to the graphics state.  The value can be different from the NSFontAttributeName value in the attributes argument because of various font substitutions that the system automatically executes.  The textMatrix is the affine transform mapping the text space coordinate system to the user space coordinate system.  The tx and ty components of textMatrix are ignored since Quartz overrides them with the glyph positions.
-- (void)showCGGlyphs:(const CGGlyph *)glyphs positions:(const CGPoint *)positions count:(NSInteger)glyphCount font:(UIFont *)font textMatrix:(CGAffineTransform)textMatrix attributes:(NSDictionary<NSAttributedStringKey, id> *)attributes inContext:(CGContextRef)CGContext API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0));
+- (void)showCGGlyphs:(const CGGlyph *)glyphs positions:(const CGPoint *)positions count:(NSInteger)glyphCount font:(UIFont *)font textMatrix:(CGAffineTransform)textMatrix attributes:(NSDictionary<NSAttributedStringKey, id> *)attributes inContext:(CGContextRef)CGContext API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0)) API_UNAVAILABLE(watchos);
 
 // This is the primitive used by -drawBackgroundForGlyphRange:atPoint: for actually filling rects with a particular background color, whether due to a background color attribute, a selected or marked range highlight, a block decoration, or any other rect fill needed by that method.  As with -showCGGlyphs:..., the character range and color are merely for informational purposes; the color will already be set in the graphics state.  If for any reason you modify it, you must restore it before returning from this method.  You should never call this method, but you might override it.  The default implementation will simply fill the specified rect array.
 - (void)fillBackgroundRectArray:(const CGRect *)rectArray count:(NSUInteger)rectCount forCharacterRange:(NSRange)charRange color:(UIColor *)color API_AVAILABLE(macos(10.6), ios(7.0));
@@ -304,7 +304,7 @@ UIKIT_EXTERN API_AVAILABLE(macos(10.0), ios(7.0))
 @end
 
 
-@protocol NSLayoutManagerDelegate <NSObject>
+API_UNAVAILABLE(watchos) @protocol NSLayoutManagerDelegate <NSObject>
 @optional
 
 /************************ Glyph generation ************************/
@@ -355,24 +355,24 @@ UIKIT_EXTERN API_AVAILABLE(macos(10.0), ios(7.0))
 
 /************************ Deprecated ************************/
 enum {
-    NSControlCharacterZeroAdvancementAction API_DEPRECATED_WITH_REPLACEMENT("NSControlCharacterActionZeroAdvancement", ios(7.0, 9.0)) API_UNAVAILABLE(visionos) = NSControlCharacterActionZeroAdvancement,
-    NSControlCharacterWhitespaceAction API_DEPRECATED_WITH_REPLACEMENT("NSControlCharacterActionWhitespace", ios(7.0, 9.0)) API_UNAVAILABLE(visionos) = NSControlCharacterActionWhitespace,
-    NSControlCharacterHorizontalTabAction API_DEPRECATED_WITH_REPLACEMENT("NSControlCharacterActionHorizontalTab", ios(7.0, 9.0)) API_UNAVAILABLE(visionos) = NSControlCharacterActionHorizontalTab,
-    NSControlCharacterLineBreakAction API_DEPRECATED_WITH_REPLACEMENT("NSControlCharacterActionLineBreak", ios(7.0, 9.0)) API_UNAVAILABLE(visionos) = NSControlCharacterActionLineBreak,
-    NSControlCharacterParagraphBreakAction API_DEPRECATED_WITH_REPLACEMENT("NSControlCharacterActionParagraphBreak", ios(7.0, 9.0)) API_UNAVAILABLE(visionos) = NSControlCharacterActionParagraphBreak,
-    NSControlCharacterContainerBreakAction API_DEPRECATED_WITH_REPLACEMENT("NSControlCharacterActionContainerBreak", ios(7.0, 9.0)) API_UNAVAILABLE(visionos) = NSControlCharacterActionContainerBreak
-};
+    NSControlCharacterZeroAdvancementAction API_DEPRECATED_WITH_REPLACEMENT("NSControlCharacterActionZeroAdvancement", ios(7.0, 9.0)) API_UNAVAILABLE(visionos, watchos) = NSControlCharacterActionZeroAdvancement,
+    NSControlCharacterWhitespaceAction API_DEPRECATED_WITH_REPLACEMENT("NSControlCharacterActionWhitespace", ios(7.0, 9.0)) API_UNAVAILABLE(visionos, watchos) = NSControlCharacterActionWhitespace,
+    NSControlCharacterHorizontalTabAction API_DEPRECATED_WITH_REPLACEMENT("NSControlCharacterActionHorizontalTab", ios(7.0, 9.0)) API_UNAVAILABLE(visionos, watchos) = NSControlCharacterActionHorizontalTab,
+    NSControlCharacterLineBreakAction API_DEPRECATED_WITH_REPLACEMENT("NSControlCharacterActionLineBreak", ios(7.0, 9.0)) API_UNAVAILABLE(visionos, watchos) = NSControlCharacterActionLineBreak,
+    NSControlCharacterParagraphBreakAction API_DEPRECATED_WITH_REPLACEMENT("NSControlCharacterActionParagraphBreak", ios(7.0, 9.0)) API_UNAVAILABLE(visionos, watchos) = NSControlCharacterActionParagraphBreak,
+    NSControlCharacterContainerBreakAction API_DEPRECATED_WITH_REPLACEMENT("NSControlCharacterActionContainerBreak", ios(7.0, 9.0)) API_UNAVAILABLE(visionos, watchos) = NSControlCharacterActionContainerBreak
+} API_UNAVAILABLE(watchos);
 
 @interface NSLayoutManager (NSLayoutManagerDeprecated)
 // These two methods are soft deprecated starting with iOS 9. It will be officially deprecated in a future release
-- (CGGlyph)glyphAtIndex:(NSUInteger)glyphIndex isValidIndex:(nullable BOOL *)isValidIndex; // Use -CGGlyphAtIndex:isValidIndex: instead
-- (CGGlyph)glyphAtIndex:(NSUInteger)glyphIndex; // Use -CGGlyphAtIndex: instead
+- (CGGlyph)glyphAtIndex:(NSUInteger)glyphIndex isValidIndex:(nullable BOOL *)isValidIndex API_UNAVAILABLE(watchos); // Use -CGGlyphAtIndex:isValidIndex: instead
+- (CGGlyph)glyphAtIndex:(NSUInteger)glyphIndex API_UNAVAILABLE(watchos); // Use -CGGlyphAtIndex: instead
 
 // 0.0 - 1.0.  Whenever (width of the real contents of the line) / (the line fragment width) is below this value, hyphenation will be attempted when laying out the line.  By default, the value is 0.0, meaning hyphenation is off.  A value of 1.0 causes hyphenation to be attempted always.  Note that hyphenation will slow down text layout and increase memory usage, so it should be used sparingly.  Maybe overridden on a per-paragraph basis by the NSParagraphStyle's hyphenationFactor.
-@property CGFloat hyphenationFactor API_DEPRECATED("Please use usesDefaultHyphenation or -[NSParagraphStyle hyphenationFactor] instead.", macos(10.0,10.15), ios(7.0,13.0), watchos(2.0,6.0), tvos(9.0,13.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(macCatalyst);
+@property CGFloat hyphenationFactor API_DEPRECATED("Please use usesDefaultHyphenation or -[NSParagraphStyle hyphenationFactor] instead.", macos(10.0, 10.15), ios(7.0, 13.0), tvos(9.0, 13.0)) API_UNAVAILABLE(visionos, watchos) API_UNAVAILABLE(macCatalyst);
 
 // This is the glyph rendering primitive method.  Renders glyphs at positions into the graphicsContext.  The positions are in the user space coordinate system.  graphicsContext that passed in is already configured according to the text attributes arguments: font, textMatrix, and attributes.  The font argument represents the font applied to the graphics state.  The value can be different from the NSFontAttributeName value in the attributes argument because of various font substitutions that the system automatically executes.  The textMatrix is the affine transform mapping the text space coordinate system to the user space coordinate system.  The tx and ty components of textMatrix are ignored since Quartz overrides them with the glyph positions.
-- (void)showCGGlyphs:(const CGGlyph *)glyphs positions:(const CGPoint *)positions count:(NSUInteger)glyphCount font:(UIFont *)font matrix:(CGAffineTransform)textMatrix attributes:(NSDictionary<NSAttributedStringKey, id> *)attributes inContext:(CGContextRef)graphicsContext API_DEPRECATED_WITH_REPLACEMENT("showCGGlyphs:positions:count:font:textMatrix:attributes:inContext:", macos(10.7,10.15), ios(7.0,13.0), watchos(2.0,6.0), tvos(9.0,13.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(macCatalyst);
+- (void)showCGGlyphs:(const CGGlyph *)glyphs positions:(const CGPoint *)positions count:(NSUInteger)glyphCount font:(UIFont *)font matrix:(CGAffineTransform)textMatrix attributes:(NSDictionary<NSAttributedStringKey, id> *)attributes inContext:(CGContextRef)graphicsContext API_DEPRECATED_WITH_REPLACEMENT("showCGGlyphs:positions:count:font:textMatrix:attributes:inContext:", macos(10.7, 10.15), ios(7.0, 13.0), tvos(9.0, 13.0)) API_UNAVAILABLE(visionos, watchos) API_UNAVAILABLE(macCatalyst);
 
 @end
 

@@ -2,7 +2,7 @@
 //  PGDeviceSpec.h
 //  ParavirtualizedGraphics
 //
-//  Copyright © 2018-2023 Apple Inc. All rights reserved.
+//  Copyright © 2018-2024 Apple Inc. All rights reserved.
 //
 
 #ifndef PGDeviceSpec_H

@@ -6,13 +6,15 @@ exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _RPApplicationInfoBundleIdentifierKey, _RPAudioPacketPool_Alloc, 
                        _RPAudioPacketPool_Create, _RPAudioPacketPool_Destroy, _RPAudioPacketPool_Free, 
-                       _RPLogSetLogLevel, _RPRecordingErrorDomain, _RPSampleBufferUtilities_CopySampleBufferFromSourceBuffer, 
+                       _RPLogSetLogLevel, _RPMathUtilityNewsroomPositionTransitionScreenRect, 
+                       _RPRecordingErrorDomain, _RPSampleBufferUtilities_CopySampleBufferFromSourceBuffer, 
                        _RPSampleBufferUtilities_CreateAudioSampleBuffer, _RPSampleBufferUtilities_CreateCGImageFromIOSurface, 
                        _RPSampleBufferUtilities_CreateDecodeAudioSampleBuffer, _RPSampleBufferUtilities_CreateEmptyAudioSampleBufferWithTimeInterval, 
                        _RPSampleBufferUtilities_CreateSampleBufferFromIOSurface, 
                        _RPSampleBufferUtilities_CreateSampleBufferWithPixelBuffer, 
                        _RPSampleBufferUtilities_EncodeAudioSampleBuffer, _RPSampleBufferUtilities_ReleaseAudioSampleBuffer, 
                        _RPSampleBufferUtilities_SecondsPresentationTimeForSample, 
+                       _RPStringUtility_CStrToFourcc, _RPStringUtility_FourccToCStr, 
                        _RPVideoEditorExtensionAppNameKey, _RPVideoEditorExtensionBundleIdentifierKey, 
                        _RPVideoEditorExtensionFileAttachmentKey, _RPVideoEditorExtensionMoviePathKey, 
                        _RPVideoEditorExtensionOverrideShareMessageKey, _RPVideoEditorExtensionOverrideTintColorKey, 
@@ -33,8 +35,9 @@ exports:
                        RPFeatureFlagUtility, RPIOSurfaceObject, RPMacUtility, RPPipView, 
                        RPPipViewController, RPPreviewViewController, RPRemoteViewContainerWindow, 
                        RPRemoteWindowController, RPScreenRecorder, RPStoreInfo, RPStoreManager, 
-                       RPStreamingActivity, RPStreamingActivityKey, RPThread, RPTransparentWindow, 
-                       RPVideoEditorHostRemoteNSViewController, RPVideoEditorViewServiceExtensionHostContext ]
+                       RPStreamingActivity, RPStreamingActivityKey, RPStringUtility, 
+                       RPThread, RPTransparentWindow, RPVideoEditorHostRemoteNSViewController, 
+                       RPVideoEditorViewServiceExtensionHostContext ]
     objc-ivars:      [ RPBorderlessEffectWindow.noSourceWindow, RPDimAndShadowWindow.animatesTransitions, 
                        RPDimAndShadowWindow.dimLayer, RPDimAndShadowWindow.groupLayer, 
                        RPDimAndShadowWindow.shadowCenterKnockoutLayer, RPDimAndShadowWindow.shadowLayer ]

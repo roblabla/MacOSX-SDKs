@@ -15,7 +15,7 @@ NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 @class UIAction;
 @class UIMenu;
 
-UIKIT_EXTERN API_AVAILABLE(ios(17.0), tvos(17.0), watchos(10.0)) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(17.0), tvos(17.0)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @interface UIContentUnavailableButtonProperties : NSObject <NSCopying, NSSecureCoding>
 
 /// The primary action of the button.

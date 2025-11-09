@@ -50,13 +50,13 @@ CF_ASSUME_NONNULL_BEGIN
 /* Return the CFTypeID for CGEventSourceRefs. */
 
 CG_EXTERN CFTypeID CGEventSourceGetTypeID(void)
-    CG_AVAILABLE_STARTING(10.4);
+    API_AVAILABLE(macos(10.4));
 
 /* Return a Quartz event source created with a specified source state. */
 
 CG_EXTERN CGEventSourceRef __nullable CGEventSourceCreate(
     CGEventSourceStateID stateID)
-    CG_AVAILABLE_STARTING(10.4);
+    API_AVAILABLE(macos(10.4));
 
 /* Return the keyboard type to be used with a Quartz event source.
    Result of CGSDefaultKeyboardID() is returned if source is not a valid
@@ -64,13 +64,13 @@ CG_EXTERN CGEventSourceRef __nullable CGEventSourceCreate(
 
 CG_EXTERN CGEventSourceKeyboardType CGEventSourceGetKeyboardType(
     CGEventSourceRef __nullable source)
-    CG_AVAILABLE_STARTING(10.4);
+    API_AVAILABLE(macos(10.4));
 
 /* Set the keyboard type to be used with a Quartz event source. */
 
 CG_EXTERN void CGEventSourceSetKeyboardType(CGEventSourceRef __nullable source,
     CGEventSourceKeyboardType keyboardType)
-    CG_AVAILABLE_STARTING(10.4);
+    API_AVAILABLE(macos(10.4));
 
 /* Return the scale of pixels per line in a scrolling event source.
 
@@ -83,7 +83,7 @@ CG_EXTERN void CGEventSourceSetKeyboardType(CGEventSourceRef __nullable source,
 
 CG_EXTERN double CGEventSourceGetPixelsPerLine(
     CGEventSourceRef __nullable source)
-    CG_AVAILABLE_STARTING(10.5);
+    API_AVAILABLE(macos(10.5));
 
 /* Set the scale of pixels per line in a scrolling event source.
 
@@ -96,7 +96,7 @@ CG_EXTERN double CGEventSourceGetPixelsPerLine(
 
 CG_EXTERN void CGEventSourceSetPixelsPerLine(CGEventSourceRef __nullable source,
     double pixelsPerLine)
-    CG_AVAILABLE_STARTING(10.5);
+    API_AVAILABLE(macos(10.5));
 
 /* Return the source state associated with a Quartz event source.
 
@@ -111,27 +111,27 @@ CG_EXTERN void CGEventSourceSetPixelsPerLine(CGEventSourceRef __nullable source,
 
 CG_EXTERN CGEventSourceStateID CGEventSourceGetSourceStateID(
     CGEventSourceRef __nullable source)
-    CG_AVAILABLE_STARTING(10.4);
+    API_AVAILABLE(macos(10.4));
 
 /* Return a Boolean value indicating the current button state of a Quartz
    event source. If true, the button is down; if false, the button is up. */
 
 CG_EXTERN bool CGEventSourceButtonState(CGEventSourceStateID stateID,
     CGMouseButton button)
-    CG_AVAILABLE_STARTING(10.4);
+    API_AVAILABLE(macos(10.4));
 
 /* Return a Boolean value indicating the current keyboard state of a Quartz
    event source. If true, the key is down; if false, the key is up. */
 
 CG_EXTERN bool CGEventSourceKeyState(CGEventSourceStateID stateID,
     CGKeyCode key)
-    CG_AVAILABLE_STARTING(10.4);
+    API_AVAILABLE(macos(10.4));
 
 /* Return the current flags of a Quartz event source. If true, the key is
    down; if false, the key is up. */
 
 CG_EXTERN CGEventFlags CGEventSourceFlagsState(CGEventSourceStateID stateID)
-    CG_AVAILABLE_STARTING(10.4);
+    API_AVAILABLE(macos(10.4));
 
 /* Return the elapsed time since the last event for a Quartz event source.
 
@@ -140,7 +140,7 @@ CG_EXTERN CGEventFlags CGEventSourceFlagsState(CGEventSourceStateID stateID)
 
 CG_EXTERN CFTimeInterval CGEventSourceSecondsSinceLastEventType(
     CGEventSourceStateID stateID, CGEventType eventType)
-    CG_AVAILABLE_STARTING(10.4);
+    API_AVAILABLE(macos(10.4));
 
 /* Return a count of events of a given type seen since the Window Server
    started.
@@ -158,7 +158,7 @@ CG_EXTERN CFTimeInterval CGEventSourceSecondsSinceLastEventType(
 
 CG_EXTERN uint32_t CGEventSourceCounterForEventType(CGEventSourceStateID
     stateID, CGEventType eventType)
-    CG_AVAILABLE_STARTING(10.4);
+    API_AVAILABLE(macos(10.4));
 
 /* Set the 64-bit user-specified data for a Quartz event source.
 
@@ -169,7 +169,7 @@ CG_EXTERN uint32_t CGEventSourceCounterForEventType(CGEventSourceStateID
 
 CG_EXTERN void CGEventSourceSetUserData(CGEventSourceRef __nullable source,
     int64_t userData)
-    CG_AVAILABLE_STARTING(10.4);
+    API_AVAILABLE(macos(10.4));
 
 /* Return the 64-bit user-specified data for a Quartz event source.
 
@@ -180,7 +180,7 @@ CG_EXTERN void CGEventSourceSetUserData(CGEventSourceRef __nullable source,
    source. */
 
 CG_EXTERN int64_t CGEventSourceGetUserData(CGEventSourceRef __nullable source)
-    CG_AVAILABLE_STARTING(10.4);
+    API_AVAILABLE(macos(10.4));
 
 /* Set the mask that indicates which classes of local hardware events are
    enabled during event suppression.
@@ -203,7 +203,7 @@ CG_EXTERN int64_t CGEventSourceGetUserData(CGEventSourceRef __nullable source)
 CG_EXTERN void CGEventSourceSetLocalEventsFilterDuringSuppressionState(
     CGEventSourceRef __nullable source, CGEventFilterMask filter,
     CGEventSuppressionState state)
-    CG_AVAILABLE_STARTING(10.4);
+    API_AVAILABLE(macos(10.4));
 
 
 /* Return the mask that indicates which classes of local hardware events are
@@ -223,7 +223,7 @@ CG_EXTERN void CGEventSourceSetLocalEventsFilterDuringSuppressionState(
 CG_EXTERN CGEventFilterMask
     CGEventSourceGetLocalEventsFilterDuringSuppressionState(
     CGEventSourceRef __nullable source, CGEventSuppressionState state)
-    CG_AVAILABLE_STARTING(10.4);
+    API_AVAILABLE(macos(10.4));
 
 /* Set the interval that local hardware events may be suppressed following
    the posting of a Quartz event.
@@ -235,7 +235,7 @@ CG_EXTERN CGEventFilterMask
 
 CG_EXTERN void CGEventSourceSetLocalEventsSuppressionInterval(
     CGEventSourceRef __nullable source, CFTimeInterval seconds)
-    CG_AVAILABLE_STARTING(10.4);
+    API_AVAILABLE(macos(10.4));
 
 /* Return the interval that local hardware events may be suppressed
    following the posting of a Quartz event.
@@ -244,7 +244,7 @@ CG_EXTERN void CGEventSourceSetLocalEventsSuppressionInterval(
 
 CG_EXTERN CFTimeInterval CGEventSourceGetLocalEventsSuppressionInterval(
     CGEventSourceRef __nullable source)
-    CG_AVAILABLE_STARTING(10.4);
+    API_AVAILABLE(macos(10.4));
 
 CF_ASSUME_NONNULL_END
 

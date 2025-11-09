@@ -19,13 +19,13 @@ typedef NS_ENUM(NSUInteger, UIWindowScenePresentationStyle) {
     UIWindowScenePresentationStyleAutomatic,
     UIWindowScenePresentationStyleStandard,
     UIWindowScenePresentationStyleProminent
-} NS_SWIFT_NAME(UIWindowScene.PresentationStyle);
+} NS_SWIFT_NAME(UIWindowScene.PresentationStyle) API_UNAVAILABLE(watchos);
 
 
-UIKIT_EXTERN API_AVAILABLE(ios(15.0))
+UIKIT_EXTERN API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(watchos)
 @interface UIWindowSceneActivationRequestOptions : UISceneActivationRequestOptions
 
-@property (nonatomic, readwrite) UIWindowScenePresentationStyle preferredPresentationStyle API_DEPRECATED("Place use .placement with an appropriate UIWindowScenePlacement.", ios(15.0, 17.0), visionos(1.0, 1.0));
+@property (nonatomic, readwrite) UIWindowScenePresentationStyle preferredPresentationStyle API_DEPRECATED("Place use .placement with an appropriate UIWindowScenePlacement.", ios(15.0, 17.0), visionos(1.0, 1.0)) API_UNAVAILABLE(watchos);
 
 /// The preferred placement of the window scene to be activated. Scene placements influence how the
 /// system positions the activated scene. A `nil` value indicates that the system should determine

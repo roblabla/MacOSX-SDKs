@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/Frameworks/SecurityInterface.framework/Versions/A/SecurityInterface'
-current-version: 55185
+current-version: 55188
 reexported-libraries:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     libraries:       [ '/System/Library/Frameworks/SecurityFoundation.framework/Versions/A/SecurityFoundation' ]

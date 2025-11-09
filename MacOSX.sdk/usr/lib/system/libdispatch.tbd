@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/usr/lib/system/libdispatch.dylib'
-current-version: 1477.100.9
+current-version: 1502.0.1
 parent-umbrella:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -126,7 +126,8 @@ exports:
                        _dispatch_workloop_set_autorelease_frequency, _dispatch_workloop_set_cpupercent, 
                        _dispatch_workloop_set_os_workgroup, _dispatch_workloop_set_qos_class, 
                        _dispatch_workloop_set_qos_class_floor, _dispatch_workloop_set_scheduler_priority, 
-                       _dispatch_write, _dispatch_write_f, _libdispatch_init, _mach_voucher_persona_for_originator, 
+                       _dispatch_workloop_set_uses_bound_thread, _dispatch_write, 
+                       _dispatch_write_f, _libdispatch_init, _mach_voucher_persona_for_originator, 
                        _mach_voucher_persona_self, _os_eventlink_activate, _os_eventlink_associate, 
                        _os_eventlink_cancel, _os_eventlink_create, _os_eventlink_create_remote_with_eventlink, 
                        _os_eventlink_create_with_port, _os_eventlink_disassociate, 
@@ -145,18 +146,18 @@ exports:
                        _os_workgroup_leave, _os_workgroup_leave_self, _os_workgroup_max_parallel_threads, 
                        _os_workgroup_parallel_create, _os_workgroup_set_working_arena, 
                        _os_workgroup_testcancel, _voucher_activity_create_with_data, 
-                       _voucher_activity_create_with_location, _voucher_activity_flush, 
-                       _voucher_activity_get_logging_preferences, _voucher_activity_get_metadata_buffer, 
-                       _voucher_activity_id_allocate, _voucher_activity_initialize_4libtrace, 
-                       _voucher_activity_should_send_strings, _voucher_activity_trace, 
-                       _voucher_activity_trace_v, _voucher_activity_trace_v_2, _voucher_adopt, 
-                       _voucher_copy, _voucher_copy_with_persona_mach_voucher, _voucher_copy_without_importance, 
-                       _voucher_create_with_mach_msg, _voucher_decrement_importance_count4CF, 
-                       _voucher_get_activity_id, _voucher_get_activity_id_and_creator, 
-                       _voucher_get_current_persona, _voucher_get_current_persona_originator_info, 
-                       _voucher_get_current_persona_proximate_info, _voucher_kvoucher_debug, 
-                       _voucher_process_can_use_arbitrary_personas, _voucher_release, 
-                       _voucher_replace_default_voucher, _voucher_retain ]
+                       _voucher_activity_create_with_data_2, _voucher_activity_create_with_location, 
+                       _voucher_activity_flush, _voucher_activity_get_logging_preferences, 
+                       _voucher_activity_get_metadata_buffer, _voucher_activity_id_allocate, 
+                       _voucher_activity_initialize_4libtrace, _voucher_activity_should_send_strings, 
+                       _voucher_activity_trace, _voucher_activity_trace_v, _voucher_activity_trace_v_2, 
+                       _voucher_adopt, _voucher_copy, _voucher_copy_with_persona_mach_voucher, 
+                       _voucher_copy_without_importance, _voucher_create_with_mach_msg, 
+                       _voucher_decrement_importance_count4CF, _voucher_get_activity_id, 
+                       _voucher_get_activity_id_and_creator, _voucher_get_current_persona, 
+                       _voucher_get_current_persona_originator_info, _voucher_get_current_persona_proximate_info, 
+                       _voucher_kvoucher_debug, _voucher_process_can_use_arbitrary_personas, 
+                       _voucher_release, _voucher_replace_default_voucher, _voucher_retain ]
     objc-classes:    [ OS_dispatch_channel, OS_dispatch_data, OS_dispatch_disk, OS_dispatch_group, 
                        OS_dispatch_io, OS_dispatch_mach, OS_dispatch_mach_msg, OS_dispatch_object, 
                        OS_dispatch_operation, OS_dispatch_queue, OS_dispatch_queue_attr, 

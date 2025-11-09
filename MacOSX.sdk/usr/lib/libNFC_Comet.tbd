@@ -22,9 +22,10 @@ exports:
                        _phLibNfc_DnldEseSmbCfgSeq, _phLibNfc_EsePwrCfgDelayCb, _phLibNfc_EseSmbCfgDelayCb, 
                        _phLibNfc_FlashIntg_Verify_3_0_CrcStatus_NewLayout, _phLibNfc_FlashIntg_Verify_4_0_CrcStatus_NewLayout, 
                        _phLibNfc_FlashIntg_Verify_5_0_CrcStatus_NewLayout, _phLibNfc_FlashIntg_Verify_5_1_CrcStatus, 
-                       _phLibNfc_FlashIntg_Verify_5_1_CrcStatus_NewLayout, _phLibNfc_GetMemoryDump, 
-                       _phLibNfc_GetMemoryDumpCmd, _phLibNfc_GetMemoryDumpRsp, _phLibNfc_GetMemoryDumpSeqComplete, 
-                       _phLibNfc_GetTagInfo, _phLibNfc_Mgt_ConfigRoutingTable, _phLibNfc_Mgt_ConfigureAssertionLogging, 
+                       _phLibNfc_FlashIntg_Verify_5_1_CrcStatus_NewHlmLayout, _phLibNfc_FlashIntg_Verify_5_1_CrcStatus_NewLayout, 
+                       _phLibNfc_GetMemoryDump, _phLibNfc_GetMemoryDumpCmd, _phLibNfc_GetMemoryDumpRsp, 
+                       _phLibNfc_GetMemoryDumpSeqComplete, _phLibNfc_GetTagInfo, 
+                       _phLibNfc_Mgt_ConfigRoutingTable, _phLibNfc_Mgt_ConfigureAssertionLogging, 
                        _phLibNfc_Mgt_ConfigureDiscovery, _phLibNfc_Mgt_ConfigureDriver, 
                        _phLibNfc_Mgt_ConfigureHsuParams, _phLibNfc_Mgt_ConfigureMwLogging, 
                        _phLibNfc_Mgt_ConfigurePowerMode, _phLibNfc_Mgt_DeInitialize, 
@@ -45,6 +46,7 @@ exports:
                        _phLibNfc_SE_NtfUnregister, _phLibNfc_SE_RawTranseive, _phLibNfc_SE_SetMode, 
                        _phLibNfc_TriggerRfFieldOnNtf, _phLibNfc_Verify_3_0_CrcStatus_NewLayout, 
                        _phLibNfc_Verify_4_0_CrcStatus_NewLayout, _phLibNfc_Verify_5_0_CrcStatus_NewLayout, 
-                       _phLibNfc_Verify_5_1_CrcStatus, _phLibNfc_Verify_5_1_CrcStatus_NewLayout, 
-                       _phLibNfc_eSE_GetAtr, _phLibNfc_eSE_Transceive ]
+                       _phLibNfc_Verify_5_1_CrcStatus, _phLibNfc_Verify_5_1_CrcStatus_NewHlmLayout, 
+                       _phLibNfc_Verify_5_1_CrcStatus_NewLayout, _phLibNfc_eSE_GetAtr, 
+                       _phLibNfc_eSE_Transceive ]
 ...

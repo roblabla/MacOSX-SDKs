@@ -18,6 +18,8 @@
 
 #define BROWSERENGINE_TEXTINPUT_AVAILABILITY API_AVAILABLE(ios(17.4))
 
+#define BROWSERENGINE_ACCESSIBILITY_AVAILABILITY API_AVAILABLE(ios(18.0))
+
 #ifndef BROWSERENGINE_FINAL
     #if defined(__has_attribute) && __has_attribute(objc_subclassing_restricted)
         #define BROWSERENGINE_FINAL __attribute__((objc_subclassing_restricted))

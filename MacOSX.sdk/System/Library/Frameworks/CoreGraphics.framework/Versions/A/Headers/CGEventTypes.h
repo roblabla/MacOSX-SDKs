@@ -379,7 +379,16 @@ typedef CF_ENUM(uint32_t, CGEventField) {
 
   /* Unaccelerated pointer movement */
   kCGEventUnacceleratedPointerMovementX = 170,
-  kCGEventUnacceleratedPointerMovementY = 171
+  kCGEventUnacceleratedPointerMovementY = 171,
+
+  /* Momentum Scroll Optional Phase */
+  kCGScrollWheelEventMomentumOptionPhase = 173,
+
+  /* Raw and accelerated scroll wheel deltas*/
+  kCGScrollWheelEventAcceleratedDeltaAxis1 = 176,
+  kCGScrollWheelEventAcceleratedDeltaAxis2 = 175,
+  kCGScrollWheelEventRawDeltaAxis1 = 178,
+  kCGScrollWheelEventRawDeltaAxis2 = 177
 };
 
 /* Constants used with the `kCGMouseEventSubtype' event field. */

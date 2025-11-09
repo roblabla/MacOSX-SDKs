@@ -11,7 +11,7 @@
 
 NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
-typedef NSString * UIPasteboardName NS_TYPED_EXTENSIBLE_ENUM;
+typedef NSString * UIPasteboardName NS_TYPED_EXTENSIBLE_ENUM API_UNAVAILABLE(watchos);
 
 UIKIT_EXTERN UIPasteboardName const UIPasteboardNameGeneral API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos);
 UIKIT_EXTERN NSString *const UIPasteboardNameFind API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos) API_UNAVAILABLE(visionos) API_DEPRECATED("The Find pasteboard is no longer available.", ios(3.0, 10.0));
@@ -98,7 +98,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(3.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watch
 @property(nonatomic,copy) NSArray<NSDictionary<NSString *, id> *> *items;
 - (void)addItems:(NSArray<NSDictionary<NSString *, id> *> *)items;
 
-typedef NSString * UIPasteboardOption NS_TYPED_ENUM API_AVAILABLE(ios(10.0));
+typedef NSString * UIPasteboardOption NS_TYPED_ENUM API_AVAILABLE(ios(10.0)) API_UNAVAILABLE(watchos);
 
 UIKIT_EXTERN UIPasteboardOption const UIPasteboardOptionExpirationDate API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos) API_AVAILABLE(ios(10.0)) NS_SWIFT_NAME(UIPasteboardOption.expirationDate); // Value: NSDate.
 UIKIT_EXTERN UIPasteboardOption const UIPasteboardOptionLocalOnly API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos) API_AVAILABLE(ios(10.0)) NS_SWIFT_NAME(UIPasteboardOption.localOnly); // Value: NSNumber, boolean.
@@ -168,11 +168,11 @@ UIKIT_EXTERN UIPasteboardOption const UIPasteboardOptionLocalOnly API_UNAVAILABL
 
 // Notification
 
-UIKIT_EXTERN NSNotificationName const UIPasteboardChangedNotification API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos);
-UIKIT_EXTERN NSString *const UIPasteboardChangedTypesAddedKey API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos);
-UIKIT_EXTERN NSString *const UIPasteboardChangedTypesRemovedKey API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos);
+UIKIT_EXTERN NSNotificationName const UIPasteboardChangedNotification API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos) NS_SWIFT_NONISOLATED;
+UIKIT_EXTERN NSString *const UIPasteboardChangedTypesAddedKey API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos) NS_SWIFT_NONISOLATED;
+UIKIT_EXTERN NSString *const UIPasteboardChangedTypesRemovedKey API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos) NS_SWIFT_NONISOLATED;
 
-UIKIT_EXTERN NSNotificationName const UIPasteboardRemovedNotification API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos);
+UIKIT_EXTERN NSNotificationName const UIPasteboardRemovedNotification API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos) NS_SWIFT_NONISOLATED;
 
 // Types
 

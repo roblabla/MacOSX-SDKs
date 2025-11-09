@@ -2,7 +2,7 @@
 //  HKCDADocumentSample.h
 //  HealthKit
 //
-//  Copyright © 2015-2022 Apple. All rights reserved.
+//  Copyright © 2015-2024 Apple. All rights reserved.
 //
 //  HealthKit support for storing and retrieving
 //  Consolidated Clinical Document records.
@@ -18,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
  @class         HKCDADocumentSample
  @abstract      A sample object representing a CDA document.
  */
-HK_EXTERN API_AVAILABLE(ios(10.0), macCatalyst(13.0), macos(13.0)) API_UNAVAILABLE(watchos)
+HK_EXTERN NS_SWIFT_SENDABLE API_AVAILABLE(ios(10.0), macCatalyst(13.0), macos(13.0)) API_UNAVAILABLE(watchos)
 @interface HKCDADocumentSample : HKDocumentSample
 
 /*!
@@ -54,7 +54,7 @@ HK_EXTERN API_AVAILABLE(ios(10.0), macCatalyst(13.0), macos(13.0)) API_UNAVAILAB
 
 @end
 
-HK_EXTERN API_AVAILABLE(ios(11.0), macCatalyst(13.0), macos(13.0)) API_UNAVAILABLE(watchos)
+HK_EXTERN NS_SWIFT_SENDABLE API_AVAILABLE(ios(11.0), macCatalyst(13.0), macos(13.0)) API_UNAVAILABLE(watchos)
 @interface HKCDADocument : NSObject
 
 /*!

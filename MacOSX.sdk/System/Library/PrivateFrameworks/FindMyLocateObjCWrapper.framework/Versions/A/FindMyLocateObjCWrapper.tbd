@@ -7,7 +7,8 @@ swift-abi-version: 7
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
-    clients:         [ FindMyLocateTests, Messages, fmltool ]
+    clients:         [ FindMyLocateTests, Messages, findmydevice-user-agent, findmydeviced, 
+                       fmltool ]
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -42,6 +43,8 @@ exports:
                        '_$s23FindMyLocateObjCWrapper0D10CBootstrapC22meDeviceUpdateCallbackySo9FMLDeviceCSgYbcSgvpMV', 
                        '_$s23FindMyLocateObjCWrapper0D10CBootstrapC22meDeviceUpdateCallbackySo9FMLDeviceCSgYbcSgvsTj', 
                        '_$s23FindMyLocateObjCWrapper0D10CBootstrapC22meDeviceUpdateCallbackySo9FMLDeviceCSgYbcSgvsTq', 
+                       '_$s23FindMyLocateObjCWrapper0D10CBootstrapC22processLocationPayload7payloady10Foundation4DataV_tYaKF', 
+                       '_$s23FindMyLocateObjCWrapper0D10CBootstrapC22processLocationPayload7payloady10Foundation4DataV_tYaKFTu', 
                        '_$s23FindMyLocateObjCWrapper0D10CBootstrapC22stopRefreshingLocation3for8priority11isFromGroupySaySo9FMLHandleCG_So17FMLLocatePriorityVSbtYaKF', 
                        '_$s23FindMyLocateObjCWrapper0D10CBootstrapC22stopRefreshingLocation3for8priority11isFromGroupySaySo9FMLHandleCG_So17FMLLocatePriorityVSbtYaKFTu', 
                        '_$s23FindMyLocateObjCWrapper0D10CBootstrapC22stopRefreshingLocationyyYaKF', 
@@ -61,6 +64,8 @@ exports:
                        '_$s23FindMyLocateObjCWrapper0D10CBootstrapC26canShareLocationWithHandle_11isFromGroupSo011FMLLocationH5StateVSo9FMLHandleC_SbtYaKFTu', 
                        '_$s23FindMyLocateObjCWrapper0D10CBootstrapC27getOfferExpirationForHandle_7groupId10Foundation4DateVSgSo9FMLHandleC_SSSgtYaKF', 
                        '_$s23FindMyLocateObjCWrapper0D10CBootstrapC27getOfferExpirationForHandle_7groupId10Foundation4DateVSgSo9FMLHandleC_SSSgtYaKFTu', 
+                       '_$s23FindMyLocateObjCWrapper0D10CBootstrapC29processLocationCommandPayload7payloady10Foundation4DataV_tYaKF', 
+                       '_$s23FindMyLocateObjCWrapper0D10CBootstrapC29processLocationCommandPayload7payloady10Foundation4DataV_tYaKFTu', 
                        '_$s23FindMyLocateObjCWrapper0D10CBootstrapC30cachedFriendsWithPendingOffersSaySo9FMLFriendCGyF', 
                        '_$s23FindMyLocateObjCWrapper0D10CBootstrapC30getActiveLocationSharingDeviceSo9FMLDeviceCyYaKF', 
                        '_$s23FindMyLocateObjCWrapper0D10CBootstrapC30getActiveLocationSharingDeviceSo9FMLDeviceCyYaKFTu', 

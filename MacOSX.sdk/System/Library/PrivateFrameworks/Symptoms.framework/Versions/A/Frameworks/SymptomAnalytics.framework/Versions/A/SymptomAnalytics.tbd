@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/Symptoms.framework/Versions/A/Frameworks/SymptomAnalytics.framework/Versions/A/SymptomAnalytics'
-current-version: 1871.120.6
+current-version: 2001.0.2
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -13,10 +13,12 @@ exports:
                        _kProcessKeyTypeBundleName, _kProcessKeyTypeExtensionName, 
                        _kProcessKeyTypeProcName, _kStateMachineStatusKeyAdminState, 
                        _kStateMachineStatusKeyInternalVariables, _kStateMachineStatusKeyState, 
-                       _kSymptomActivityBitmapCellularInterface, _kSymptomActivityBitmapCurrentMachAbsTime, 
-                       _kSymptomActivityBitmapEndTime, _kSymptomActivityBitmapEthernetInterface, 
-                       _kSymptomActivityBitmapIPSecInterface, _kSymptomActivityBitmapShowExtensions, 
-                       _kSymptomActivityBitmapStartTime, _kSymptomActivityBitmapWiFiInterface, 
+                       _kSymptomActivityBitmapBluetoothInterface, _kSymptomActivityBitmapCellularInterface, 
+                       _kSymptomActivityBitmapCurrentMachAbsTime, _kSymptomActivityBitmapEndTime, 
+                       _kSymptomActivityBitmapEthernetInterface, _kSymptomActivityBitmapIPSecInterface, 
+                       _kSymptomActivityBitmapShowConciseFormat, _kSymptomActivityBitmapShowExtensions, 
+                       _kSymptomActivityBitmapShowIntermediateFormat, _kSymptomActivityBitmapStartTime, 
+                       _kSymptomActivityBitmapWiFiAWDLInterface, _kSymptomActivityBitmapWiFiInterface, 
                        _kSymptomActivityBitmapsActualStartTimeKey, _kSymptomActivityBitmapsBitmapKey, 
                        _kSymptomActivityBitmapsValidBitsCountKey, _kSymptomAnalyticsFrameworkModelName, 
                        _kSymptomAnalyticsHelperServiceEndpoint, _kSymptomAnalyticsNetworkAdvisoryDefiniteImprovement, 

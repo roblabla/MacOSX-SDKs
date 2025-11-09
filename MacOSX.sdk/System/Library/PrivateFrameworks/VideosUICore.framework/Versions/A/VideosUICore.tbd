@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/VideosUICore.framework/Versions/A/VideosUICore'
-current-version: 883.54.1
+current-version: 973.4.1
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _CALayerKeyBounds, _CALayerKeyBoundsOrigin, _CALayerKeyBoundsSize, 
@@ -18,10 +18,11 @@ exports:
                        _VUICeilValue, _VUICornerRadiiZero, _VUIDefaultsAvailabilityEndOverrideInSeconds, 
                        _VUIDefaultsCanaryURL, _VUIDefaultsCoWatchStartsInPlayingStateInsteadOfPaused, 
                        _VUIDefaultsCollectionMaxCacheValueKey, _VUIDefaultsCollectionRefreshTypeValueKey, 
-                       _VUIDefaultsDownloadExpirationOverrideInSeconds, _VUIDefaultsEnableDebugUI, 
-                       _VUIDefaultsEnableDemoMode, _VUIDefaultsEnableMetricsExpandedClickLogging, 
+                       _VUIDefaultsDownloadExpirationOverrideInSeconds, _VUIDefaultsEnableCapellaDebugger, 
+                       _VUIDefaultsEnableDebugUI, _VUIDefaultsEnableDemoMode, _VUIDefaultsEnableMetricsExpandedClickLogging, 
                        _VUIDefaultsEnableMetricsExpandedLogging, _VUIDefaultsEnableMetricsLogging, 
-                       _VUIDefaultsEnableMetricsPageRenderLogging, _VUIDefaultsEnableRefreshEventDebug, 
+                       _VUIDefaultsEnableMetricsPageRenderLogging, _VUIDefaultsEnablePerformanceDebugger, 
+                       _VUIDefaultsEnablePerformanceDebuggerVerbose, _VUIDefaultsEnableRefreshEventDebug, 
                        _VUIDefaultsForceGDPRFirstTimeFlow, _VUIDefaultsForceGDPRWhatsNewFlow, 
                        _VUIDefaultsPageMaxCacheValueKey, _VUIDefaultsPageRefreshTypeValueKey, 
                        _VUIDefaultsPlaybackURLOverrides, _VUIDefaultsUTSBaseURL, 

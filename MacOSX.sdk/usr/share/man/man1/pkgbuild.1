@@ -24,7 +24,7 @@
 .Sh DESCRIPTION
 A 
 .Dq component package
-contains payload to be installed by the OS X Installer. Although a component package
+contains payload to be installed by the macOS Installer. Although a component package
 can be installed on its own, it is typically incorporated into a product archive,
 along with a
 .Dq distribution
@@ -97,7 +97,7 @@ If you specify
 .Cm --root ,
 you can use 
 .Cm --component-plist
-to identity the bundles within that destination root, and control how the OS X Installer
+to identity the bundles within that destination root, and control how the macOS Installer
 handles those bundles. See more at
 .Sx COMPONENT PROPERTY LIST .
 If you add bundles and need to update your component property list, you can specify the
@@ -115,16 +115,20 @@ as the package scripts. If this directory contains scripts named
 .Pa preinstall
 and/or
 .Pa postinstall ,
-these will be run as the top-level scripts of the package. If you want to run scripts for
+these will be ran as the top-level scripts of the package. If you want to run scripts for
 specific bundles, you must specify those in a component property list; see more at
 .Sx COMPONENT PROPERTY LIST .
 Any other files under
 .Ar scripts-path
-will be used only if the top-level or component-specific scripts invoke them.
+will be used only if the top-level or component-specific scripts invoke them. If the script
+needs to run for longer than 10 minutes, it should be added as a component-specific script
+with the
+.Sx BundleInstallScriptTimeout
+component key added.
 .It Cm --nopayload
 Indicates that the package will contain only scripts, with no payload.
 .It Cm --identifier Ar pkg-identifier
-Specify a unique identifier for this package. The OS X Installer recognizes a package
+Specify a unique identifier for this package. The macOS Installer recognizes a package
 as being an upgrade to an already-installed package only if the package identifiers match,
 so it is advisable to set a meaningful, consistent identifier when you build the package.
 .Nm
@@ -143,7 +147,7 @@ of
 .Nm
 attempts to infer a sensible install path if this option is not used, but it may not
 choose correctly. Note that whether or not the default install location is actually used
-by the OS X Installer depends on the distribution file you deploy with the package.
+by the macOS Installer depends on the distribution file you deploy with the package.
 .It Cm --analyze
 Instead of creating a package, create a template component property list from the destination root given with
 .Cm --root .
@@ -217,7 +221,7 @@ or larger.
 The
 .Cm --large-payload
 option generates packages that are only compatible with
-.Cm macOS 12.0
+.Cm macOS Monterey (12.0)
 and above. Packages using this feature will fail to install or extract on previous releases.
 Specifying this option requires the user to pass
 .Cm [--min-os-version 12.0]
@@ -277,7 +281,7 @@ is used, the path to which the template component property list will be written.
 .\"																				COMPONENT PROPERTY LIST 
 .Sh COMPONENT PROPERTY LIST
 When you package a destination root, you can use a component property list to
-specify how bundles in that root should be handled by the OS X Installer. This property
+specify how bundles in that root should be handled by the macOS Installer. This property
 list should be an array of dictionaries, where each dictionary specifies a single bundle. The
 dictionary keys are as follows:
 .Bl -column ".Sy BundlePostInstallScriptPath" A012345678901234567890123456789012345678901234567890123456789
@@ -289,6 +293,7 @@ dictionary keys are as follows:
 .It Sy BundleOverwriteAction Ta "How to treat existing on-disk version of bundle (string)" 
 .It Sy BundlePreInstallScriptPath Ta "Relative path to bundle-specific preinstall script"
 .It Sy BundlePostInstallScriptPath Ta "Relative path to bundle-specific postinstall script"
+.It Sy BundleInstallScriptTimeout Ta "Duration (in seconds) for how long the script may run before it is terminated (integer)"
 .It Sy ChildBundles Ta "Bundles under this bundle (array of dictionaries)"
 .El
 .Pp
@@ -330,6 +335,12 @@ are meaningful only if
 .Cm --scripts
 was used to specify a scripts directory. The paths given by these keys must be relative to
 the scripts directory.
+.Pp
+.Sy BundleInstallScriptTimeout
+defines how long the script is able to run before the operating system terminates it with SIGKILL.
+If this key is not specified, the operating system default timeout is chosen, which is currently
+10 minutes but is also subject to change. This key is only respected on versions of macOS newer
+than macOS 15.0.
 .Pp
 .Sy ChildBundles
 can be used to represent nesting of bundles, but it does not change the meaning of 

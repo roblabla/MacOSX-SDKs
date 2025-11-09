@@ -34,6 +34,10 @@ typedef NS_ENUM(NSInteger, SMAppServiceStatus) {
 	SMAppServiceStatusNotFound,
 } NS_SWIFT_NAME(SMAppService.Status);
 
+XPC_EXPORT
+API_AVAILABLE(macos(15.0), macCatalyst(18.0)) API_UNAVAILABLE(ios, tvos, watchos)
+NSString * const SMAppServiceErrorDomain;
+
 /*!
  * @abstract
  * An SMAppService is used to control helper executables that live inside of an app's main bundle.

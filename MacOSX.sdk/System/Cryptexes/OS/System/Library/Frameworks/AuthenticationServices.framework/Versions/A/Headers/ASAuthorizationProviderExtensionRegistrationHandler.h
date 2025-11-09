@@ -31,6 +31,8 @@ typedef NS_OPTIONS(NSUInteger, ASAuthorizationProviderExtensionRequestOptions) {
     ASAuthorizationProviderExtensionRequestOptionsRegistrationSharedDeviceKeys API_AVAILABLE(macos(14.0)) API_UNAVAILABLE(ios, watchos, tvos) = 1 << 2,
     // The registration is changing to or from shared device keys.
     ASAuthorizationProviderExtensionRequestOptionsRegistrationDeviceKeyMigration API_AVAILABLE(macos(14.0)) API_UNAVAILABLE(ios, watchos, tvos) = 1 << 3,
+    // A stronger key is available for rotation.
+    ASAuthorizationProviderExtensionRequestOptionsStrongerKeyAvailable API_AVAILABLE(macos(15.0), ios(18.0)) API_UNAVAILABLE(watchos, tvos) = 1 << 4,
     // The user secure enclave key is invalid and must be replaced.
     ASAuthorizationProviderExtensionRequestOptionsUserKeyInvalid API_AVAILABLE(macos(14.4)) API_UNAVAILABLE(ios, watchos, tvos) = 1 << 5,
 };
@@ -108,6 +110,31 @@ API_AVAILABLE(macos(13.0)) API_UNAVAILABLE(ios, watchos, tvos)
  @abstract The protocol version supported by the identity provider.
  */
 - (ASAuthorizationProviderExtensionPlatformSSOProtocolVersion)protocolVersion API_AVAILABLE(macos(14.0)) API_UNAVAILABLE(ios, watchos, tvos);
+
+
+
+/*!
+ @abstract The supported device signing algorithms.
+ */
+@property (readonly) NSArray<ASAuthorizationProviderExtensionSigningAlgorithm> * supportedDeviceSigningAlgorithms API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, watchos, tvos);
+
+/*!
+ @abstract The supported device encryption algorithms.
+ */
+@property (readonly) NSArray<ASAuthorizationProviderExtensionEncryptionAlgorithm> *supportedDeviceEncryptionAlgorithms API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, watchos, tvos);
+
+/*!
+ @abstract The supported user Secure Enclave Key signing algorithms.
+ */
+@property (readonly) NSArray<ASAuthorizationProviderExtensionSigningAlgorithm> *supportedUserSecureEnclaveKeySigningAlgorithms API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, watchos, tvos);
+
+/*!
+ @abstract The specified keyType will rotate to a new key. The rotation is complete when the completion handler is called.  This is only called by the system for automatic key rotation.
+ */
+- (void)keyWillRotateForKeyType:(ASAuthorizationProviderExtensionKeyType)keyType
+                         newKey:(SecKeyRef)newKey
+                   loginManager:(ASAuthorizationProviderExtensionLoginManager *)loginManager
+                     completion:(void (^)(BOOL success))completion API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 
 @end

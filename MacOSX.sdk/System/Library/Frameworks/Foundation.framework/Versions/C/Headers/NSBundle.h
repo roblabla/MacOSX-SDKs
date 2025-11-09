@@ -53,7 +53,11 @@ NS_SWIFT_SENDABLE
 @property (nullable, readonly, copy) NSURL *sharedSupportURL API_AVAILABLE(macos(10.6), ios(4.0), watchos(2.0), tvos(9.0));
 @property (nullable, readonly, copy) NSURL *builtInPlugInsURL API_AVAILABLE(macos(10.6), ios(4.0), watchos(2.0), tvos(9.0));
 
+#if defined(__swift__) // Deprecated for Swift only
+@property (nullable, readonly, copy) NSURL *appStoreReceiptURL API_DEPRECATED("Use AppTransaction.shared and Transaction.all from StoreKit.framework instead", macosx(10.7,15.0), ios(7.0,18.0), watchos(2.0,11.0), tvos(9.0,18.0));
+#else
 @property (nullable, readonly, copy) NSURL *appStoreReceiptURL API_AVAILABLE(macos(10.7), ios(7.0), watchos(2.0), tvos(9.0));
+#endif
 
 @property (readonly, copy) NSString *bundlePath;
 @property (nullable, readonly, copy) NSString *resourcePath;

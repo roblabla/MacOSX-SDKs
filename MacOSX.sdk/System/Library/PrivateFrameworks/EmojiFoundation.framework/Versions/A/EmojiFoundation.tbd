@@ -2,14 +2,36 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/EmojiFoundation.framework/Versions/A/EmojiFoundation'
+swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos ]
-    weak-symbols:    [ __ZTINSt3__110__function6__baseIFvRKNS_3mapINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEENS_7variantIJNS_9monostateEjdS8_NS_6vectorIhNS6_IhEEEEEEENS_4lessIS8_EENS6_INS_4pairIKS8_SE_EEEEEEEEE, 
+    weak-symbols:    [ __ZTIN4trie10MarisaTrieItDsEE, __ZTIN4trie4TrieItDsN8internal6marisa6CursorEEE, 
+                       __ZTIN4trie8TrieBaseE, __ZTIN8internal6marisa9ExceptionE, 
+                       __ZTINSt3__110__function6__baseIFvRKNS_3mapINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEENS_7variantIJNS_9monostateEjdS8_NS_6vectorIhNS6_IhEEEEEEENS_4lessIS8_EENS6_INS_4pairIKS8_SE_EEEEEEEEE, 
+                       __ZTINSt3__110__function6__baseIFvcRKN8internal6marisa6CursorERbEEE, 
+                       __ZTINSt3__110__function6__baseIFvmNS_17basic_string_viewIcNS_11char_traitsIcEEEERbEEE, 
+                       __ZTINSt3__110__function6__baseIFvtNS_17basic_string_viewIDsNS_11char_traitsIDsEEEERbEEE, 
                        __ZTINSt3__117bad_function_callE, __ZTINSt3__120__shared_ptr_emplaceIN3CEM18AdaptationDatabaseENS_9allocatorIS2_EEEE, 
+                       __ZTSN4trie10MarisaTrieItDsEE, __ZTSN4trie4TrieItDsN8internal6marisa6CursorEEE, 
+                       __ZTSN4trie8TrieBaseE, __ZTSN8internal6marisa9ExceptionE, 
                        __ZTSNSt3__110__function6__baseIFvRKNS_3mapINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEENS_7variantIJNS_9monostateEjdS8_NS_6vectorIhNS6_IhEEEEEEENS_4lessIS8_EENS6_INS_4pairIKS8_SE_EEEEEEEEE, 
+                       __ZTSNSt3__110__function6__baseIFvcRKN8internal6marisa6CursorERbEEE, 
+                       __ZTSNSt3__110__function6__baseIFvmNS_17basic_string_viewIcNS_11char_traitsIcEEEERbEEE, 
+                       __ZTSNSt3__110__function6__baseIFvtNS_17basic_string_viewIDsNS_11char_traitsIDsEEEERbEEE, 
                        __ZTSNSt3__117bad_function_callE, __ZTSNSt3__120__shared_ptr_emplaceIN3CEM18AdaptationDatabaseENS_9allocatorIS2_EEEE ]
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-    symbols:         [ _EMFEmojiCategoryActivity, _EMFEmojiCategoryFlags, _EMFEmojiCategoryFoodAndDrink, 
+    symbols:         [ '_$s15EmojiFoundation016centeredImageForA0_2in9frameSize13contentsScale12transformOut17isLowerLeftOriginSo10CGImageRefaSgSS_So6CGRectVSo6CGSizeV12CoreGraphics7CGFloatVSo17CGAffineTransformVzSbtF', 
+                       '_$s15EmojiFoundation016centeredImageForA0_9frameSize13contentsScale12transformOut17isLowerLeftOriginSo10CGImageRefaSgSS_So6CGSizeV12CoreGraphics7CGFloatVSo17CGAffineTransformVzSbtF', 
+                       '_$s15EmojiFoundation016centeredImageForD6Source_2in9frameSize13contentsScale12transformOut17isLowerLeftOriginSo10CGImageRefaSgSo0rfS0a_So6CGRectVSo6CGSizeV12CoreGraphics7CGFloatVSo17CGAffineTransformVzSbtF', 
+                       '_$s15EmojiFoundation016centeredImageForD6Source_9frameSize13contentsScale12transformOut17isLowerLeftOriginSo10CGImageRefaSgSo0qfR0a_So6CGSizeV12CoreGraphics7CGFloatVSo17CGAffineTransformVzSbtF', 
+                       '_$s15EmojiFoundation0A13CenteringDataV4font6emojisACSo9CTFontRefa_SStcfC', 
+                       '_$s15EmojiFoundation0A13CenteringDataV4fromACs7Decoder_p_tKcfC', 
+                       '_$s15EmojiFoundation0A13CenteringDataV6encode2toys7Encoder_p_tKF', 
+                       '_$s15EmojiFoundation0A13CenteringDataVMa', '_$s15EmojiFoundation0A13CenteringDataVMn', 
+                       '_$s15EmojiFoundation0A13CenteringDataVN', '_$s15EmojiFoundation0A13CenteringDataVSEAAMc', 
+                       '_$s15EmojiFoundation0A13CenteringDataVSeAAMc', '_$s15EmojiFoundation24getTransformForCentering_2in9frameSize13contentsScale17isLowerLeftOriginSo08CGAffineD0VSo10CGImageRefa_So6CGRectVSo6CGSizeV12CoreGraphics7CGFloatVSbtF', 
+                       '_$s15EmojiFoundation24getTransformForCentering_9frameSize13contentsScale17isLowerLeftOriginSo08CGAffineD0VSo10CGImageRefa_So6CGSizeV12CoreGraphics7CGFloatVSbtF', 
+                       _EMFEmojiCategoryActivity, _EMFEmojiCategoryFlags, _EMFEmojiCategoryFoodAndDrink, 
                        _EMFEmojiCategoryNature, _EMFEmojiCategoryObjects, _EMFEmojiCategoryPeople, 
                        _EMFEmojiCategoryPrepopulated, _EMFEmojiCategoryRecents, _EMFEmojiCategorySymbols, 
                        _EMFEmojiCategoryTravelAndPlaces, _EMFEmojiPreferencesChangedNotification, 
@@ -21,8 +43,9 @@ exports:
                        _EMFSkinToneSpecifierTypeFitzpatrickNone, _EMFSkinToneSpecifierTypeFitzpatrickSilhouette, 
                        _EmojiFoundationVersionNumber, _EmojiFoundationVersionString, 
                        _SN_close_env, _SN_create_env, _SN_set_current, __Z24EMFGetDeviceBuildVersionv, 
-                       __Z30getEmojiAdaptationDatabasePathv, __ZN3CEM15deviceIsChineseEv, 
-                       __ZN3CEM17CFStringsAreEqualEPK10__CFStringS2_m, __ZN3CEM18AdaptationDatabase16executeStatementERNS_9StatementE, 
+                       __Z30_getSharedSerialOperationQueuev, __Z30getEmojiAdaptationDatabasePathv, 
+                       __ZN3CEM15deviceIsChineseEv, __ZN3CEM17CFStringsAreEqualEPK10__CFStringS2_m, 
+                       __ZN3CEM18AdaptationDatabase16executeStatementERNS_9StatementE, 
                        __ZN3CEM18AdaptationDatabase16executeStatementERNS_9StatementENSt3__18functionIFvRKNS3_3mapINS3_12basic_stringIcNS3_11char_traitsIcEENS3_9allocatorIcEEEENS3_7variantIJNS3_9monostateEjdSB_NS3_6vectorIhNS9_IhEEEEEEENS3_4lessISB_EENS9_INS3_4pairIKSB_SH_EEEEEEEEE, 
                        __ZN3CEM18AdaptationDatabase24initializeDatbaseWithSqlENSt3__117basic_string_viewIcNS1_11char_traitsIcEEEE, 
                        __ZN3CEM18AdaptationDatabaseC1ERKNSt3__14__fs10filesystem4pathE, 
@@ -30,7 +53,7 @@ exports:
                        __ZN3CEM18AdaptationDatabaseD1Ev, __ZN3CEM18AdaptationDatabaseD2Ev, 
                        __ZN3CEM21createFrameworkBundleEv, __ZN3CEM22createNormalizedLocaleEPK10__CFLocale, 
                        __ZN3CEM25getUTF8StringFromCFStringEPK10__CFString, __ZN3CEM25shouldShowTaiwanFlagEmojiEv, 
-                       __ZN3CEM28AdaptationDatabaseController13createEmojiIdENSt3__117basic_string_viewIcNS1_11char_traitsIcEEEE, 
+                       __ZN3CEM26getUTF16StringFromCFStringEPK10__CFString, __ZN3CEM28AdaptationDatabaseController13createEmojiIdENSt3__117basic_string_viewIcNS1_11char_traitsIcEEEE, 
                        __ZN3CEM28AdaptationDatabaseController14createStringIdENSt3__117basic_string_viewIcNS1_11char_traitsIcEEEE, 
                        __ZN3CEM28AdaptationDatabaseController21recordEmojiEngagementENSt3__117basic_string_viewIcNS1_11char_traitsIcEEEES5_, 
                        __ZN3CEM28AdaptationDatabaseController24createAdaptationDatabaseERKNSt3__14__fs10filesystem4pathE, 
@@ -69,6 +92,7 @@ exports:
                        __compareEmojiTokensUsingGenderInclusiveSortCollation, __createNormalizedString, 
                        __createStemmedTokensForTokenArray, __createStrippedFallbackLocaleIdentifierForLocale, 
                        __createStrippedLocaleIdentifierForLocale, __createTokensForString, 
+                       __overridePlistForLocaleIdentifier, __overridePlistForLocaleIdentifierCheckingBothLocations, 
                        __strategyClassForIndex, _arabic_UTF_8_close_env, _arabic_UTF_8_create_env, 
                        _arabic_UTF_8_stem, _assign_to, _basque_UTF_8_close_env, _basque_UTF_8_create_env, 
                        _basque_UTF_8_stem, _catalan_UTF_8_close_env, _catalan_UTF_8_create_env, 
@@ -122,5 +146,11 @@ exports:
                        EMFQuery, EMFQueryEvaluator, EMFQueryLogger, EMFQueryResult, 
                        EMFQueryResultOverride, EMFQueryResultOverrideList, EMFQueryResultOverrideListLoader, 
                        EMFQueryResultSorter, EMFQueryUntokenized, EMFSearchEngineBundleLoader, 
-                       EMFStringStemmer, EMFStringUtilities ]
+                       EMFStringStemmer, EMFStringUtilities, TESLocaleData, TESLocalizedPListLoader, 
+                       TESMatchResult, TESMatcher, TESMatcherManager, TESPatternMatcherAsterisk, 
+                       TESPatternMatcherBase, TESPatternMatcherCapitalLetter, TESPatternMatcherHyphen, 
+                       TESPatternMatcherLoader, TESPatternMatcherRepeatedCharacter, 
+                       TESPatternMatcherSlash, TESPatternMatcherTilde, TESPatternMatcherUnderscore, 
+                       TESStylePatternLoader, TESTriggerPhraseCollection, TESTriggerPhraseLoader, 
+                       TESTriggerPhraseMatcher ]
 ...

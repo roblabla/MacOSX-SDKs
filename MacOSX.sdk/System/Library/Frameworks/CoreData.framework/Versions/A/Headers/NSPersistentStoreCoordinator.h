@@ -1,7 +1,7 @@
 /*
     NSPersistentStoreCoordinator.h
     Core Data
-    Copyright (c) 2004-2023, Apple Inc.
+    Copyright (c) 2004-2024, Apple Inc.
     All rights reserved.
 */
 
@@ -214,6 +214,12 @@ COREDATA_EXTERN NSString * const NSPersistentHistoryTokenKey API_AVAILABLE(macos
  */
 COREDATA_EXTERN NSString * const NSPersistentStoreDeferredLightweightMigrationOptionKey API_AVAILABLE(macosx(11.0),ios(14.0),tvos(14.0),watchos(7.0));
 
+/* Key to represent the version checksum for the model.
+   This key is in the metadata for a persistent store and can be used to quickly
+   determine if a store and a model are compatible.
+*/
+COREDATA_EXTERN NSString * const NSPersistentStoreModelVersionChecksumKey API_AVAILABLE(macosx(15.0),ios(18.0),tvos(18.0),watchos(11.0),visionos(2.0));
+
 API_AVAILABLE(macosx(10.4),ios(3.0)) NS_SWIFT_SENDABLE
 @interface NSPersistentStoreCoordinator : NSObject <NSLocking> {
 }
@@ -316,6 +322,8 @@ API_AVAILABLE(macosx(10.4),ios(3.0)) NS_SWIFT_SENDABLE
 
 // Finish deferred work from lightweight migration for a single table
 - (BOOL)finishDeferredLightweightMigrationTask:(NSError **)error API_AVAILABLE(macosx(11.0),ios(14.0),tvos(14.0),watchos(7.0));
+    
+- (NSManagedObjectID *)managedObjectIDFromUTF8String:(const char *)utf8string length:(NSUInteger)len API_AVAILABLE(macosx(10.8), ios(5.0)) API_UNAVAILABLE(watchos, tvos, visionos) NS_REFINED_FOR_SWIFT;
 
  /*
   *   DEPRECATED

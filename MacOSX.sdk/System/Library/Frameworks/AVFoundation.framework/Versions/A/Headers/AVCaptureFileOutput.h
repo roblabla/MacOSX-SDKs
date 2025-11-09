@@ -114,7 +114,7 @@ API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0), tvos(17.0)) API_UNAVAILA
  @discussion
     This property indicates recording to the file returned by outputFileURL has been previously paused using the pauseRecording method. When a recording is paused, captured samples are not written to the output file, but new samples can be written to the same file in the future by calling resumeRecording.
  */
-@property(nonatomic, readonly, getter=isRecordingPaused) BOOL recordingPaused API_UNAVAILABLE(ios, tvos, visionos);
+@property(nonatomic, readonly, getter=isRecordingPaused) BOOL recordingPaused API_AVAILABLE(macos(10.7), ios(18.0), macCatalyst(18.0), tvos(18.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(watchos);
 
 /*!
  @method pauseRecording
@@ -125,8 +125,12 @@ API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0), tvos(17.0)) API_UNAVAILA
     This method causes the receiver to stop writing captured samples to the current output file returned by outputFileURL, but leaves the file open so that samples can be written to it in the future, when resumeRecording is called. This allows clients to record multiple media segments that are not contiguous in time to a single file.
  
     On macOS, if this method is called within the captureOutput:didOutputSampleBuffer:fromConnection: delegate method, the last samples written to the current file are guaranteed to be those that were output immediately before those in the sample buffer passed to that method.
+ 
+    A recording can be stopped as normal, even when it's paused.
+ 
+    A format or device change will result in the recording being stopped, even when it's paused.
  */
-- (void)pauseRecording API_UNAVAILABLE(ios, tvos, visionos);
+- (void)pauseRecording API_AVAILABLE(macos(10.7), ios(18.0), macCatalyst(18.0), tvos(18.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(watchos);
 
 /*!
  @method resumeRecording
@@ -138,7 +142,7 @@ API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0), tvos(17.0)) API_UNAVAILA
  
     On macOS, if this method is called within the captureOutput:didOutputSampleBuffer:fromConnection: delegate method, the first samples written to the current file are guaranteed to be those contained in the sample buffer passed to that method.
  */
-- (void)resumeRecording API_UNAVAILABLE(ios, tvos, visionos);
+- (void)resumeRecording API_AVAILABLE(macos(10.7), ios(18.0), macCatalyst(18.0), tvos(18.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(watchos);
 
 /*!
  @property recordedDuration
@@ -239,7 +243,7 @@ API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0), tvos(17.0)) API_UNAVAILA
  
     Clients should not assume that this method will be called on a specific thread, and should also try to make this method as efficient as possible.
  */
-- (void)captureOutput:(AVCaptureFileOutput *)output didPauseRecordingToOutputFileAtURL:(NSURL *)fileURL fromConnections:(NSArray<AVCaptureConnection *> *)connections API_UNAVAILABLE(ios, macCatalyst, watchos, tvos, visionos);
+- (void)captureOutput:(AVCaptureFileOutput *)output didPauseRecordingToOutputFileAtURL:(NSURL *)fileURL fromConnections:(NSArray<AVCaptureConnection *> *)connections API_AVAILABLE(macos(10.7), ios(18.0), macCatalyst(18.0), tvos(18.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(watchos);
 
 /*!
  @method captureOutput:didResumeRecordingToOutputFileAtURL:fromConnections:
@@ -258,7 +262,7 @@ API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0), tvos(17.0)) API_UNAVAILA
  
     Clients should not assume that this method will be called on a specific thread, and should also try to make this method as efficient as possible.
  */
-- (void)captureOutput:(AVCaptureFileOutput *)output didResumeRecordingToOutputFileAtURL:(NSURL *)fileURL fromConnections:(NSArray<AVCaptureConnection *> *)connections API_UNAVAILABLE(ios, macCatalyst, watchos, tvos, visionos);
+- (void)captureOutput:(AVCaptureFileOutput *)output didResumeRecordingToOutputFileAtURL:(NSURL *)fileURL fromConnections:(NSArray<AVCaptureConnection *> *)connections API_AVAILABLE(macos(10.7), ios(18.0), macCatalyst(18.0), tvos(18.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(watchos);
 
 /*!
  @method captureOutput:willFinishRecordingToOutputFileAtURL:fromConnections:error:
@@ -541,6 +545,23 @@ API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0), tvos(17.0)) API_UNAVAILA
     By default, this property is set to AVCapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorCondition{VideoZoomChanged | FocusModeChanged | ExposureModeChanged}. This property is key-value observable.
  */
 @property(nonatomic, readonly) AVCapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditions primaryConstituentDeviceRestrictedSwitchingBehaviorConditionsForRecording API_AVAILABLE(macos(12.0), ios(15.0), macCatalyst(15.0), tvos(17.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(watchos);
+
+/*!
+ @property spatialVideoCaptureSupported
+ @abstract
+    Returns whether or not capturing spatial video to a file is supported. Note that in order to be supported, two conditions must be met. (1) The source AVCaptureDevice's activeFormat.spatialVideoCaptureSupported property must return YES. (2) The video AVCaptureConnection's activeVideoStabilizationMode property must return AVCaptureVideoStabilizationModeCinematic, AVCaptureVideoStabilizationModeCinematicExtended, or AVCaptureVideoStabilizationModeCinematicExtendedEnhanced.
+ */
+@property(nonatomic, readonly, getter=isSpatialVideoCaptureSupported) BOOL spatialVideoCaptureSupported API_AVAILABLE(macos(15.0), ios(18.0), macCatalyst(18.0), tvos(18.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(watchos);
+
+/*!
+ @property spatialVideoCaptureEnabled
+ @abstract
+    Enable or disable capturing spatial video to a file.
+ 
+ @discussion
+    This property enables capturing spatial video to a file. By default, this property is set to NO. Check spatialVideoCaptureSupported before setting this property, as setting to YES will throw an exception if the feature is not supported.
+ */
+@property(nonatomic, getter=isSpatialVideoCaptureEnabled) BOOL spatialVideoCaptureEnabled API_AVAILABLE(macos(15.0), ios(18.0), macCatalyst(18.0), tvos(18.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(watchos);
 
 @end
 

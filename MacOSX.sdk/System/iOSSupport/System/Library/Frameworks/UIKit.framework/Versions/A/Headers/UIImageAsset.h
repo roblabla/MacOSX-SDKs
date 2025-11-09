@@ -14,7 +14,7 @@ NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 @class UITraitCollection;
 @protocol UIImageConfiguration;
 
-UIKIT_EXTERN API_AVAILABLE(ios(8.0)) NS_SWIFT_SENDABLE
+UIKIT_EXTERN API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(watchos) NS_SWIFT_SENDABLE
 @interface UIImageAsset : NSObject <NSSecureCoding>
 
 - (instancetype)init NS_DESIGNATED_INITIALIZER;

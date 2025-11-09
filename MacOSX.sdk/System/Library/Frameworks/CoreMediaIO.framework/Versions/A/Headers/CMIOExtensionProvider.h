@@ -18,21 +18,21 @@ NS_ASSUME_NONNULL_BEGIN
 @abstract
  The CoreMediaIO extension info dictionary key.
 */
-FOUNDATION_EXTERN NSString * const CMIOExtensionInfoDictionaryKey API_AVAILABLE(macos(12.3), macCatalyst(15.4)) API_UNAVAILABLE(ios, tvos);
+FOUNDATION_EXTERN NSString * const CMIOExtensionInfoDictionaryKey API_AVAILABLE(macos(12.3), macCatalyst(15.4)) API_UNAVAILABLE(ios, tvos, visionos);
 
 /*!
 @constant CMIOExtensionMachServiceNameKey
 @abstract
  A key contained in the Info.plist that specifies the mach service name.
 */
-FOUNDATION_EXTERN NSString * const CMIOExtensionMachServiceNameKey API_AVAILABLE(macos(12.3), macCatalyst(15.4)) API_UNAVAILABLE(ios, tvos);
+FOUNDATION_EXTERN NSString * const CMIOExtensionMachServiceNameKey API_AVAILABLE(macos(12.3), macCatalyst(15.4)) API_UNAVAILABLE(ios, tvos, visionos);
 
 /*!
 @class CMIOExtensionProviderProperties
 @abstract
  A CMIOExtensionProviderProperties describes CoreMediaIO extension provider properties.
 */
-API_AVAILABLE(macos(12.3), macCatalyst(15.4)) API_UNAVAILABLE(ios, tvos)
+API_AVAILABLE(macos(12.3), macCatalyst(15.4)) API_UNAVAILABLE(ios, tvos, visionos)
 @interface CMIOExtensionProviderProperties : NSObject
 
 - (instancetype)init NS_UNAVAILABLE;
@@ -102,7 +102,7 @@ API_AVAILABLE(macos(12.3), macCatalyst(15.4)) API_UNAVAILABLE(ios, tvos)
 
 @end
 
-API_AVAILABLE(macos(12.3), macCatalyst(15.4)) API_UNAVAILABLE(ios, tvos)
+API_AVAILABLE(macos(12.3), macCatalyst(15.4)) API_UNAVAILABLE(ios, tvos, visionos)
 @protocol CMIOExtensionProviderSource <NSObject>
 @required
 
@@ -173,7 +173,7 @@ API_AVAILABLE(macos(12.3), macCatalyst(15.4)) API_UNAVAILABLE(ios, tvos)
 @abstract
  A CMIOExtensionProvider describes a CoreMediaIO extension provider.
 */
-API_AVAILABLE(macos(12.3), macCatalyst(15.4)) API_UNAVAILABLE(ios, tvos)
+API_AVAILABLE(macos(12.3), macCatalyst(15.4)) API_UNAVAILABLE(ios, tvos, visionos)
 @interface CMIOExtensionProvider : NSObject
 
 /*!
@@ -290,7 +290,7 @@ API_AVAILABLE(macos(12.3), macCatalyst(15.4)) API_UNAVAILABLE(ios, tvos)
 
 @end
 
-API_AVAILABLE(macos(14.0), macCatalyst(17.0)) API_UNAVAILABLE(ios, tvos)
+API_AVAILABLE(macos(14.0), macCatalyst(17.0)) API_UNAVAILABLE(ios, tvos, visionos)
 @interface CMIOExtensionProvider (SignalHandling)
 
 /*!

@@ -15,15 +15,15 @@
 @class UIResponder;
 @class UIWindow;
 
-API_AVAILABLE(ios(9.0)) typedef NS_ENUM(NSInteger, UIPressPhase) {
+typedef NS_ENUM(NSInteger, UIPressPhase) {
     UIPressPhaseBegan,         // whenever a button press begins.
     UIPressPhaseChanged,       // whenever a button moves.
     UIPressPhaseStationary,    // whenever a buttons was pressed and is still being held down.
     UIPressPhaseEnded,         // whenever a button is released.
     UIPressPhaseCancelled,     // whenever a button press doesn't end but we need to stop tracking.
-};
+} API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(watchos);
 
-API_AVAILABLE(ios(9.0)) typedef NS_ENUM(NSInteger, UIPressType) {
+typedef NS_ENUM(NSInteger, UIPressType) {
     UIPressTypeUpArrow,
     UIPressTypeDownArrow,
     UIPressTypeLeftArrow,
@@ -35,9 +35,9 @@ API_AVAILABLE(ios(9.0)) typedef NS_ENUM(NSInteger, UIPressType) {
 
     UIPressTypePageUp API_AVAILABLE(tvos(14.3)) API_UNAVAILABLE(ios, watchos) = 30,
     UIPressTypePageDown API_AVAILABLE(tvos(14.3)) API_UNAVAILABLE(ios, watchos) = 31,
-};
+} API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(watchos);
 
-UIKIT_EXTERN API_AVAILABLE(ios(9.0)) @interface UIPress : NSObject
+UIKIT_EXTERN API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(watchos) @interface UIPress : NSObject
 
 @property (nonatomic, readonly) NSTimeInterval   timestamp;
 @property (nonatomic, readonly) UIPressPhase     phase;

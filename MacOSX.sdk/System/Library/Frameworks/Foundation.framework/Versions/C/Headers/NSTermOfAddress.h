@@ -37,6 +37,13 @@ NS_REFINED_FOR_SWIFT
 + (instancetype)masculine;
 
 /**
+ * The term of address that should be used for addressing the user
+ *
+ * This term of address will only compare equal to another `+[NSTermOfAddress currentUser]`
+ */
++ (instancetype)currentUser API_AVAILABLE(macos(15.0), ios(18.0), tvos(18.0), watchos(11.0), visionos(2.0));
+
+/**
  * A term of address restricted to a given language
  * @param language ISO language code identifier for the language
  * @param pronouns A list of pronouns in the target language that can be used to

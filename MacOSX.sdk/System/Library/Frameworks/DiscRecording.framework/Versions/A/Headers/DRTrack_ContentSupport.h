@@ -29,6 +29,9 @@
 
 #include <AvailabilityMacros.h>
 
+#ifndef DISC_RECORDING_TRACK_CONTENT_SUPPORT
+#define DISC_RECORDING_TRACK_CONTENT_SUPPORT
+
 /* ------------------------------------------------------------------------------ */
 /* Preconfigured track types */
 /*!
@@ -89,3 +92,5 @@
 + (DRTrack*) trackForRootFolder:(DRFolder*)rootFolder;
 
 @end
+
+#endif // DISC_RECORDING_TRACK_CONTENT_SUPPORT

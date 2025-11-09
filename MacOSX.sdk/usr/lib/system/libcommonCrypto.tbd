@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/usr/lib/system/libcommonCrypto.dylib'
-current-version: 65535.100.1
+current-version: 65535
 parent-umbrella:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -21,14 +21,18 @@ exports:
                        _CCBigNumModExp, _CCBigNumModI, _CCBigNumMul, _CCBigNumMulI, 
                        _CCBigNumMulMod, _CCBigNumRightShift, _CCBigNumSetI, _CCBigNumSetNegative, 
                        _CCBigNumSub, _CCBigNumSubI, _CCBigNumToData, _CCBigNumToDecimalString, 
-                       _CCBigNumToHexString, _CCBigNumZeroLSBCount, _CCCKGContributorCommit, 
-                       _CCCKGContributorCreate, _CCCKGContributorDestroy, _CCCKGContributorFinish, 
-                       _CCCKGGetCommitmentSize, _CCCKGGetOpeningSize, _CCCKGGetShareSize, 
-                       _CCCKGOwnerCreate, _CCCKGOwnerDestroy, _CCCKGOwnerFinish, 
-                       _CCCKGOwnerGenerateShare, _CCCalibratePBKDF, _CCCreateBigNum, 
-                       _CCCrypt, _CCCryptorAddParameter, _CCCryptorChaCha20, _CCCryptorChaCha20Poly1305OneshotDecrypt, 
-                       _CCCryptorChaCha20Poly1305OneshotEncrypt, _CCCryptorCreate, 
-                       _CCCryptorCreateFromData, _CCCryptorCreateFromDataWithMode, 
+                       _CCBigNumToHexString, _CCBigNumZeroLSBCount, _CCCKG2ContributorCommit, 
+                       _CCCKG2ContributorCreate, _CCCKG2ContributorDestroy, _CCCKG2ContributorFinish, 
+                       _CCCKG2GetCommitmentSize, _CCCKG2GetOpeningSize, _CCCKG2GetShareSize, 
+                       _CCCKG2OwnerCreate, _CCCKG2OwnerDestroy, _CCCKG2OwnerFinish, 
+                       _CCCKG2OwnerGenerateShare, _CCCKG2ParamsP224Sha256Version2, 
+                       _CCCKGContributorCommit, _CCCKGContributorCreate, _CCCKGContributorDestroy, 
+                       _CCCKGContributorFinish, _CCCKGGetCommitmentSize, _CCCKGGetOpeningSize, 
+                       _CCCKGGetShareSize, _CCCKGOwnerCreate, _CCCKGOwnerDestroy, 
+                       _CCCKGOwnerFinish, _CCCKGOwnerGenerateShare, _CCCalibratePBKDF, 
+                       _CCCreateBigNum, _CCCrypt, _CCCryptorAddParameter, _CCCryptorChaCha20, 
+                       _CCCryptorChaCha20Poly1305OneshotDecrypt, _CCCryptorChaCha20Poly1305OneshotEncrypt, 
+                       _CCCryptorCreate, _CCCryptorCreateFromData, _CCCryptorCreateFromDataWithMode, 
                        _CCCryptorCreateWithMode, _CCCryptorDecryptDataBlock, _CCCryptorEncryptDataBlock, 
                        _CCCryptorFinal, _CCCryptorGCM, _CCCryptorGCMAddAAD, _CCCryptorGCMAddADD, 
                        _CCCryptorGCMAddIV, _CCCryptorGCMDecrypt, _CCCryptorGCMEncrypt, 

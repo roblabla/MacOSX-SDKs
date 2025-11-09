@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/usr/lib/libc++abi.dylib'
-current-version: 1700.255.5
+current-version: 1800.101
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -92,12 +92,13 @@ exports:
                        ___cxa_free_exception, ___cxa_get_exception_ptr, ___cxa_get_globals, 
                        ___cxa_get_globals_fast, ___cxa_guard_abort, ___cxa_guard_acquire, 
                        ___cxa_guard_release, ___cxa_increment_exception_refcount, 
-                       ___cxa_new_handler, ___cxa_pure_virtual, ___cxa_rethrow, ___cxa_rethrow_primary_exception, 
-                       ___cxa_terminate_handler, ___cxa_throw, ___cxa_throw_bad_array_new_length, 
-                       ___cxa_uncaught_exception, ___cxa_uncaught_exceptions, ___cxa_unexpected_handler, 
-                       ___cxa_vec_cctor, ___cxa_vec_cleanup, ___cxa_vec_ctor, ___cxa_vec_delete, 
-                       ___cxa_vec_delete2, ___cxa_vec_delete3, ___cxa_vec_dtor, ___cxa_vec_new, 
-                       ___cxa_vec_new2, ___cxa_vec_new3, ___dynamic_cast, ___gxx_personality_v0 ]
+                       ___cxa_init_primary_exception, ___cxa_new_handler, ___cxa_pure_virtual, 
+                       ___cxa_rethrow, ___cxa_rethrow_primary_exception, ___cxa_terminate_handler, 
+                       ___cxa_throw, ___cxa_throw_bad_array_new_length, ___cxa_uncaught_exception, 
+                       ___cxa_uncaught_exceptions, ___cxa_unexpected_handler, ___cxa_vec_cctor, 
+                       ___cxa_vec_cleanup, ___cxa_vec_ctor, ___cxa_vec_delete, ___cxa_vec_delete2, 
+                       ___cxa_vec_delete3, ___cxa_vec_dtor, ___cxa_vec_new, ___cxa_vec_new2, 
+                       ___cxa_vec_new3, ___dynamic_cast, ___gxx_personality_v0 ]
     weak-symbols:    [ __ZTISt11range_error, __ZTISt12domain_error, __ZTISt12length_error, 
                        __ZTISt12out_of_range, __ZTISt14overflow_error, __ZTISt15underflow_error, 
                        __ZTISt16invalid_argument, __ZdaPv, __ZdaPvRKSt9nothrow_t, 

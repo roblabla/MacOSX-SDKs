@@ -110,7 +110,7 @@ API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, tvos) NS_SWIFT_UI_ACTOR
 @end
 
 /// Posted when the large content viewer gets enabled or disabled on the device.
-UIKIT_EXTERN NSNotificationName const UILargeContentViewerInteractionEnabledStatusDidChangeNotification API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, tvos);
+UIKIT_EXTERN NSNotificationName const UILargeContentViewerInteractionEnabledStatusDidChangeNotification API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, tvos) NS_SWIFT_NONISOLATED;
 
 NS_HEADER_AUDIT_END(nullability, sendability)
 

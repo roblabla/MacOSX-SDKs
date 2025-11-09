@@ -18,7 +18,7 @@ NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 // Changes: when a finger moves
 // Ends:    when a finger is lifted
 
-UIKIT_EXTERN API_AVAILABLE(ios(3.2)) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(3.2)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @interface UILongPressGestureRecognizer : UIGestureRecognizer
 
 @property (nonatomic) NSUInteger numberOfTapsRequired;      // Default is 0. The number of full taps required before the press for gesture to be recognized

@@ -636,7 +636,7 @@ API_UNAVAILABLE(macos)
  *
  * @param home Sender of this message.
  *
- * @param group The service group that was modfied.
+ * @param group The service group that was modified.
  */
 - (void)home:(HMHome *)home didUpdateNameForServiceGroup:(HMServiceGroup *)group;
 

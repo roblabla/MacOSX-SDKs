@@ -29,10 +29,10 @@ typedef CF_ENUM (uint32_t, CGColorConversionInfoTransformType) {
  */
 
 CG_EXTERN CGColorConversionInfoRef __nullable CGColorConversionInfoCreate(cg_nullable CGColorSpaceRef src, cg_nullable CGColorSpaceRef dst)
-    CG_AVAILABLE_STARTING(10.12, 10.0);
+    API_AVAILABLE(macos(10.12), ios(10.0));
 
 CG_EXTERN CGColorConversionInfoRef __nullable CGColorConversionInfoCreateWithOptions(__nonnull CGColorSpaceRef src, __nonnull CGColorSpaceRef dst, CFDictionaryRef __nullable options)
-CG_AVAILABLE_STARTING(10.14.6, 13);
+API_AVAILABLE(macos(10.14.6), ios(13));
 
 /* Create CGColorConversionInfoRef from a list of CG color spaces, transform types and rendering intents.
  * ColorSpaces are iterated from first to last. The list of triples:
@@ -42,16 +42,16 @@ CG_AVAILABLE_STARTING(10.14.6, 13);
 
 CG_EXTERN CGColorConversionInfoRef __nullable CGColorConversionInfoCreateFromList
   (CFDictionaryRef __nullable options, cg_nullable CGColorSpaceRef, CGColorConversionInfoTransformType, CGColorRenderingIntent, ...)
-  CG_AVAILABLE_STARTING(10.12, 10.0);
+  API_AVAILABLE(macos(10.12), ios(10.0));
 
 CG_EXTERN CGColorConversionInfoRef __nullable CGColorConversionInfoCreateFromListWithArguments
   (CFDictionaryRef __nullable options, cg_nullable CGColorSpaceRef, CGColorConversionInfoTransformType, CGColorRenderingIntent, va_list)
-  CG_AVAILABLE_STARTING(10.13, 11.0);
+  API_AVAILABLE(macos(10.13), ios(11.0));
 
-/* CFBooleanRef which can be used as option to create CGColorConversionInfoRef, when Black Point Compensation is desired */
-CG_EXTERN const CFStringRef kCGColorConversionBlackPointCompensation CG_AVAILABLE_STARTING(10.12, 10.0);
+/* CFBooleanRef's which can be used as options to create CGColorConversionInfoRef */
+CG_EXTERN const CFStringRef kCGColorConversionBlackPointCompensation API_AVAILABLE(macos(10.12), ios(10.0));
 
-CG_EXTERN const CFStringRef kCGColorConversionTRCSize CG_AVAILABLE_STARTING(10.13, 11.0);
+CG_EXTERN const CFStringRef kCGColorConversionTRCSize API_AVAILABLE(macos(10.13), ios(11.0));
 
 CF_ASSUME_NONNULL_END
 

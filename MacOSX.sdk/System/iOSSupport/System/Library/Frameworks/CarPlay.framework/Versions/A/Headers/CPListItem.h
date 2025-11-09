@@ -17,17 +17,17 @@ NS_ASSUME_NONNULL_BEGIN
  @c CPListItem describes a single object appearing in a list template.
  Each @c CPListItem is displayed as a single cell in the list.
  */
-API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(macos, watchos, tvos)
+API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(macos, watchos)
 @interface CPListItem : NSObject <CPSelectableListItem>
 
-API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(macos, watchos, tvos)
+API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(macos, watchos)
 typedef NS_ENUM(NSInteger, CPListItemAccessoryType) {
     CPListItemAccessoryTypeNone = 0,             // The list item will render without a trailing accessory, or using your custom image.
     CPListItemAccessoryTypeDisclosureIndicator,  // The list item will display a disclosure indicator on its trailing side.
     CPListItemAccessoryTypeCloud                 // The list item will display a cloud image on its trailing side, perhaps indicating remotely-available content.
 };
 
-API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(macos, watchos, tvos)
+API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(macos, watchos)
 typedef NS_ENUM(NSInteger, CPListItemPlayingIndicatorLocation) {
     CPListItemPlayingIndicatorLocationLeading = 0, // The list item will display its now playing indicator on the leading side.
     CPListItemPlayingIndicatorLocationTrailing,    // The list item will display its now playing indicator on the trailing side.
@@ -54,7 +54,7 @@ typedef NS_ENUM(NSInteger, CPListItemPlayingIndicatorLocation) {
                   detailText:(nullable NSString *)detailText
                        image:(nullable UIImage *)image
               accessoryImage:(nullable UIImage *)accessoryImage
-               accessoryType:(CPListItemAccessoryType)accessoryType API_AVAILABLE(ios(14.0));
+               accessoryType:(CPListItemAccessoryType)accessoryType API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(tvos);
 
 /**
  Initialize a list item with text, detail text, and an image.
@@ -89,7 +89,7 @@ typedef NS_ENUM(NSInteger, CPListItemPlayingIndicatorLocation) {
 
  @discussion Set the value of this property to @c YES to enable the list item or @c NO to disable it. The default value of this property is @c YES.
  */
-@property (nonatomic, assign, getter=isEnabled) BOOL enabled API_AVAILABLE(ios(15.0));
+@property (nonatomic, assign, getter=isEnabled) BOOL enabled API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(tvos);
 
 /**
  An accessory image type to display in the trailing portion of this list item.
@@ -97,32 +97,32 @@ typedef NS_ENUM(NSInteger, CPListItemPlayingIndicatorLocation) {
  @note If you specify a custom accessoryImage, it will take priority over one of the
  built-in accessory types specified here.
  */
-@property (nonatomic, assign) CPListItemAccessoryType accessoryType API_AVAILABLE(ios(14.0));
+@property (nonatomic, assign) CPListItemAccessoryType accessoryType API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(tvos);
 
 /**
  If YES, a cell displaying this list item will render with an explicit indicator to the trailing edge of the text
  
  Defaults to NO.
  */
-@property (nonatomic, assign, getter=isExplicitContent) BOOL explicitContent API_AVAILABLE(ios(14.0));
+@property (nonatomic, assign, getter=isExplicitContent) BOOL explicitContent API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(tvos);
 
 /**
  Set a fractional value between 0 and 1 to display a progress bar on this list item.
  */
-@property (nonatomic, assign) CGFloat playbackProgress API_AVAILABLE(ios(14.0));
+@property (nonatomic, assign) CGFloat playbackProgress API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(tvos);
 
 /**
  Indicate that this list item represents content that is currently playing. This list item
  will render with an icon indicating that this item is playing.
  */
-@property (nonatomic, assign, getter=isPlaying) BOOL playing API_AVAILABLE(ios(14.0));
+@property (nonatomic, assign, getter=isPlaying) BOOL playing API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(tvos);
 
 /**
  Specify the location in the list item for the now playing indicator.
  
  Defaults to CPListItemPlayingIndicatorLocationLeading.
  */
-@property (nonatomic, assign) CPListItemPlayingIndicatorLocation playingIndicatorLocation API_AVAILABLE(ios(14.0));
+@property (nonatomic, assign) CPListItemPlayingIndicatorLocation playingIndicatorLocation API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(tvos);
 
 /**
  The expected image size for your @c CPListItem.
@@ -130,14 +130,14 @@ typedef NS_ENUM(NSInteger, CPListItemPlayingIndicatorLocation) {
  To properly size your list images, your app should size them to the display scale of the car screen.
  See -[CPInterfaceController carTraitCollection].
  */
-@property (nonatomic, class, readonly) CGSize maximumImageSize API_AVAILABLE(ios(14.0));
+@property (nonatomic, class, readonly) CGSize maximumImageSize API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(tvos);
 
 #pragma mark - Dynamic List Item Updates
 
 /**
  Update the detail text in this list item, reloading this item in the table if needed.
  */
-- (void)setDetailText:(nullable NSString *)detailText API_AVAILABLE(ios(14.0));
+- (void)setDetailText:(nullable NSString *)detailText API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(tvos);
 
 /**
  Update the image in this list item, reloading this item in the table if needed.
@@ -149,7 +149,7 @@ typedef NS_ENUM(NSInteger, CPListItemPlayingIndicatorLocation) {
 
  UIImageAsset is used to combine multiple UIImages with different trait collections into a single UIImage.
  */
-- (void)setImage:(nullable UIImage *)image API_AVAILABLE(ios(14.0));
+- (void)setImage:(nullable UIImage *)image API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(tvos);
 
 /**
  Update the accessory image in this list item, reloading this item in the table if needed.
@@ -161,12 +161,12 @@ typedef NS_ENUM(NSInteger, CPListItemPlayingIndicatorLocation) {
 
  UIImageAsset is used to combine multiple UIImages with different trait collections into a single UIImage.
  */
-- (void)setAccessoryImage:(nullable UIImage *)accessoryImage API_AVAILABLE(ios(14.0));
+- (void)setAccessoryImage:(nullable UIImage *)accessoryImage API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(tvos);
 
 /**
  Assign a new text label to this list item, automatically reloading this item in its list template.
  */
-- (void)setText:(NSString *)text API_AVAILABLE(ios(14.0));
+- (void)setText:(NSString *)text API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(tvos);
 
 /**
  An optional action block, fired when the user selects this item in a list template.
@@ -174,7 +174,7 @@ typedef NS_ENUM(NSInteger, CPListItemPlayingIndicatorLocation) {
  You must call the completion block after processing the user's selection.
  */
 @property (nullable, nonatomic, copy) void (^handler) (id <CPSelectableListItem> item,
-                                                       dispatch_block_t completionBlock) API_AVAILABLE(ios(14.0));
+                                                       dispatch_block_t completionBlock) API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(tvos);
 
 /**
  The primary text shown in a cell displaying this list item.

@@ -3,13 +3,14 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/XCTAutomationSupport.framework/Versions/A/XCTAutomationSupport'
-current-version: 22714.3
+current-version: 23182.1
 compatibility-version: 0
+swift-abi-version: 7
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
     clients:         [ AXHierarchyTool, AutomationInfrastructureIntegrationTests, 
-                       IDEApplicationTests, IDETestingFoundationTests, IDEXcodeUITesting, 
+                       IDEApplicationTests, IDEFoundationTestingTests, IDEXcodeUITesting, 
                        TestResultsUI, XCTAutomationSupportTests, XCTDaemon, XCTDaemonControl, 
                        XCTDaemonControlTests, XCTDaemonTests, XCTHarness, XCTHarnessTests, 
                        XCTest-AppHostedTests, XCTest-PerformanceTests, XCTest-ToolHostedTests, 
@@ -19,7 +20,10 @@ allowable-clients:
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
-    symbols:         [ _NSStringFromXCTAttachmentFutureMetadataFinalizationState, 
+    symbols:         [ '_$sSo20XCTScreenshotOptionsV20XCTAutomationSupportE11descriptionSSvg', 
+                       '_$sSo20XCTScreenshotOptionsV20XCTAutomationSupportE11descriptionSSvpMV', 
+                       '_$sSo20XCTScreenshotOptionsVs23CustomStringConvertible20XCTAutomationSupportMc', 
+                       _NSStringFromXCTAttachmentFutureMetadataFinalizationState, 
                        _NSStringFromXCTVideoCodec, _XCAXAccessibilityAttributeForStringAttribute, 
                        _XCAXAccessibilityAttributesForStringAttributes, _XCAXAuditRunForApplication, 
                        _XCAXAuditTypeAction, _XCAXAuditTypeAll, _XCAXAuditTypeContrast, 

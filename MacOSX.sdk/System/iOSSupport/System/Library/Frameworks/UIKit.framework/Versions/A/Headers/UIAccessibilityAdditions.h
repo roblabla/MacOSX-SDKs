@@ -19,18 +19,18 @@ NS_HEADER_AUDIT_BEGIN(nullability, sendability)
   See UIAccessibility.h for more information about hints and labels.
 */
 
-API_UNAVAILABLE(tvos) NS_SWIFT_UI_ACTOR
+API_UNAVAILABLE(tvos, watchos) NS_SWIFT_UI_ACTOR
 @protocol UIPickerViewAccessibilityDelegate <UIPickerViewDelegate>
 
 @optional
 - (nullable NSString *)pickerView:(UIPickerView *)pickerView accessibilityLabelForComponent:(NSInteger)component;
 - (nullable NSString *)pickerView:(UIPickerView *)pickerView accessibilityHintForComponent:(NSInteger)component;
-- (NSArray<NSString *> *)pickerView:(UIPickerView *)pickerView accessibilityUserInputLabelsForComponent:(NSInteger)component API_AVAILABLE(ios(13.0));
+- (NSArray<NSString *> *)pickerView:(UIPickerView *)pickerView accessibilityUserInputLabelsForComponent:(NSInteger)component API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos);
 
 // If an object adopting this protocol responds to these methods, the system will try sending them before sending their non-attributed versions.
-- (nullable NSAttributedString *)pickerView:(UIPickerView *)pickerView accessibilityAttributedLabelForComponent:(NSInteger)component API_AVAILABLE(ios(11.0));
-- (nullable NSAttributedString *)pickerView:(UIPickerView *)pickerView accessibilityAttributedHintForComponent:(NSInteger)component API_AVAILABLE(ios(11.0));
-- (NSArray<NSAttributedString *> *)pickerView:(UIPickerView *)pickerView accessibilityAttributedUserInputLabelsForComponent:(NSInteger)component API_AVAILABLE(ios(13.0));
+- (nullable NSAttributedString *)pickerView:(UIPickerView *)pickerView accessibilityAttributedLabelForComponent:(NSInteger)component API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos);
+- (nullable NSAttributedString *)pickerView:(UIPickerView *)pickerView accessibilityAttributedHintForComponent:(NSInteger)component API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos);
+- (NSArray<NSAttributedString *> *)pickerView:(UIPickerView *)pickerView accessibilityAttributedUserInputLabelsForComponent:(NSInteger)component API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos);
 
 @end
 
@@ -40,14 +40,14 @@ API_UNAVAILABLE(tvos) NS_SWIFT_UI_ACTOR
  this protocol to announce "Showing books 10 through 20".
  By default, VoiceOver will announce "Page X of Y" when scrolling. 
  */
-NS_SWIFT_UI_ACTOR
+API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @protocol UIScrollViewAccessibilityDelegate <UIScrollViewDelegate>
 
 @optional
 - (nullable NSString *)accessibilityScrollStatusForScrollView:(UIScrollView *)scrollView;
 
 // If an object adopting this protocol responds to this method, the system will try sending it before sending its non-attributed version.
-- (nullable NSAttributedString *)accessibilityAttributedScrollStatusForScrollView:(UIScrollView *)scrollView API_AVAILABLE(ios(11.0), tvos(11.0));
+- (nullable NSAttributedString *)accessibilityAttributedScrollStatusForScrollView:(UIScrollView *)scrollView API_AVAILABLE(ios(11.0), tvos(11.0)) API_UNAVAILABLE(watchos);
 
 @end
 
@@ -61,12 +61,12 @@ NS_SWIFT_UI_ACTOR
    property.
  */
 @interface UIView (UIAccessibilityInvertColors)
-@property(nonatomic) BOOL accessibilityIgnoresInvertColors API_AVAILABLE(ios(11_0), tvos(11_0));
+@property(nonatomic) BOOL accessibilityIgnoresInvertColors API_AVAILABLE(ios(11_0), tvos(11_0)) API_UNAVAILABLE(watchos);
 @end
 
 @interface UIColor (UIAccessibility)
 // Provides an accessible name for the UIColor for use in accessibility attribute APIs, such as when using accessibilityLabel.
-@property (nonatomic, readonly) NSString *accessibilityName API_AVAILABLE(ios(14.0), tvos(14.0), watchos(7.0), macos(11.0));
+@property (nonatomic, readonly) NSString *accessibilityName API_AVAILABLE(ios(14.0), tvos(14.0), macos(11.0)) API_UNAVAILABLE(watchos);
 @end
 
 NS_HEADER_AUDIT_END(nullability, sendability)

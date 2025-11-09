@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/Spotlight.framework/Versions/A/Spotlight'
-current-version: 2274.31
+current-version: 2313.7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _SPAppDelegatePreferencesChanged, _SPBodyColor, _SPBodyFont, 
@@ -25,16 +25,17 @@ exports:
                        PRSConversionResult, PRSCurrencyConversionResult, PRSDictionaryAsyncCard, 
                        PRSDictionaryResult, PRSPurchaseHistoryManager, PRSUnitConversionResult, 
                        SPAppDefaults, SPApplicationQuery, SPApplicationQueryResult, 
-                       SPClientSession, SPCoreSpotlightQuery, SPCoreSpotlightResult, 
-                       SPDefaults, SPFileRadarSupport, SPFolderQuery, SPGroupHeadingResult, 
-                       SPKCalculatorQuery, SPKCoreParsecInterface, SPKDataDetectorsStoreQuery, 
-                       SPKDictionaryQuery, SPKParsecQuery, SPKWorldClockQuery, SPMessageTracing, 
-                       SPMessageTracingSearchSession, SPMetadataGroupHeadingResult, 
-                       SPMetadataQuery, SPMetadataResult, SPParsecGroupHeadingResult, 
-                       SPPhotoUtilities, SPPreviewController, SPQueryTask, SPSearchSuggestionsBuilder, 
-                       SPServerResult, SPSettingsQueryResult, SPShortcuts, SPSuggestionCardSection, 
-                       SPTTRResult, SPUISearchModel, SPUISearchModelGeneral, SPURLQuery, 
-                       SPURLResult, _SPResultsArrays ]
-    objc-ivars:      [ SPQueryTask._queryStartTime, SPQueryTask._shortcutResultChecked, 
-                       SPQueryTask._topHitSection ]
+                       SPClientSession, SPCoreSpotlightManagedQuery, SPCoreSpotlightQuery, 
+                       SPCoreSpotlightResult, SPDefaults, SPFileRadarSupport, SPFolderQuery, 
+                       SPGroupHeadingResult, SPKCalculatorQuery, SPKCoreParsecInterface, 
+                       SPKDataDetectorsStoreQuery, SPKDictionaryQuery, SPKParsecQuery, 
+                       SPKWorldClockQuery, SPMessageTracing, SPMessageTracingSearchSession, 
+                       SPMetadataGroupHeadingResult, SPMetadataQuery, SPMetadataResult, 
+                       SPParsecGroupHeadingResult, SPPhotoUtilities, SPPreviewController, 
+                       SPQueryTask, SPSearchSuggestionsBuilder, SPServerResult, SPSettingsQueryResult, 
+                       SPShortcuts, SPSuggestionCardSection, SPTTRResult, SPUISearchModel, 
+                       SPUISearchModelGeneral, SPURLQuery, SPURLResult, _SPResultsArrays ]
+    objc-ivars:      [ SPCoreSpotlightQuery._queryCanceled, SPCoreSpotlightQuery._queryLock, 
+                       SPCoreSpotlightQuery._suggestions, SPQueryTask._queryStartTime, 
+                       SPQueryTask._shortcutResultChecked, SPQueryTask._topHitSection ]
 ...

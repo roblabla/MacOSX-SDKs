@@ -28,7 +28,7 @@ API_AVAILABLE(ios(16.0), macos(13.0)) API_UNAVAILABLE(watchos, tvos)
 @property (nonatomic, readonly, getter=isCancelled) BOOL cancelled;
 @property (nonatomic, readonly, getter=isLoading) BOOL loading;
 
-- (void)getSceneWithCompletionHandler:(void (^)(MKLookAroundScene * _Nullable_result scene, NSError * _Nullable error))completionHandler NS_SWIFT_ASYNC_NAME(getter:scene());
+- (void)getSceneWithCompletionHandler:(NS_SWIFT_UI_ACTOR void (^)(MKLookAroundScene * _Nullable_result scene, NSError * _Nullable error))completionHandler NS_SWIFT_ASYNC_NAME(getter:scene());
 - (void)cancel;
 
 @end

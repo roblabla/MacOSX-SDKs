@@ -23,7 +23,7 @@ NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 typedef NS_OPTIONS(NSUInteger, NSTextStorageEditActions) {
     NSTextStorageEditedAttributes = (1 << 0),
     NSTextStorageEditedCharacters = (1 << 1)
-} API_AVAILABLE(macos(10.11), ios(7.0));
+} API_AVAILABLE(macos(10.11), ios(7.0)) API_UNAVAILABLE(watchos);
 
 
 /* Note for subclassing NSTextStorage: NSTextStorage is a semi-abstract subclass of NSMutableAttributedString. It implements change management (beginEditing/endEditing), verification of attributes, delegate handling, and layout management notification. The one aspect it does not implement is the actual attributed string storage --- this is left up to the subclassers, which need to override the two NSMutableAttributedString primitives in addition to two NSAttributedString primitives:
@@ -37,7 +37,7 @@ typedef NS_OPTIONS(NSUInteger, NSTextStorageEditActions) {
  These primitives should perform the change then call edited:range:changeInLength: to get everything else to happen.
 */
 
-UIKIT_EXTERN API_AVAILABLE(macos(10.0), ios(7.0))
+UIKIT_EXTERN API_AVAILABLE(macos(10.0), ios(7.0)) API_UNAVAILABLE(watchos)
 @interface NSTextStorage : NSMutableAttributedString <NSSecureCoding>
 
 /**************************** Layout manager ****************************/
@@ -98,7 +98,7 @@ UIKIT_EXTERN API_AVAILABLE(macos(10.0), ios(7.0))
 
 /****  NSTextStorage delegate methods ****/
 
-@protocol NSTextStorageDelegate <NSObject>
+API_UNAVAILABLE(watchos) @protocol NSTextStorageDelegate <NSObject>
 @optional
 
 // Sent inside -processEditing right before fixing attributes.  Delegates can change the characters or attributes.
@@ -111,8 +111,8 @@ UIKIT_EXTERN API_AVAILABLE(macos(10.0), ios(7.0))
 
 /**** Notifications ****/
 
-UIKIT_EXTERN NSNotificationName const NSTextStorageWillProcessEditingNotification API_AVAILABLE(macos(10.0), ios(7.0));
-UIKIT_EXTERN NSNotificationName const NSTextStorageDidProcessEditingNotification API_AVAILABLE(macos(10.0), ios(7.0));
+UIKIT_EXTERN NSNotificationName const NSTextStorageWillProcessEditingNotification API_AVAILABLE(macos(10.0), ios(7.0)) API_UNAVAILABLE(watchos);
+UIKIT_EXTERN NSNotificationName const NSTextStorageDidProcessEditingNotification API_AVAILABLE(macos(10.0), ios(7.0)) API_UNAVAILABLE(watchos);
 
 #pragma mark NSTextStorageObserving
 // NSTextStorageObserving defines the protocol for NSTextStorage controller objects observing changes in the text backing-store.

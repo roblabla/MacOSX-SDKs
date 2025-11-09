@@ -1,6 +1,6 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.10 (swiftlang-5.10.0.12.5 clang-1500.3.9.1.1)
-// swift-module-flags: -target x86_64-apple-ios17.5-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-bare-slash-regex -user-module-version 150 -module-name DockKit
+// swift-compiler-version: Apple Swift version 6.0 effective-5.10 (swiftlang-6.0.0.7.24 clang-1600.0.25.1)
+// swift-module-flags: -target x86_64-apple-ios18.0-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-bare-slash-regex -user-module-version 230.1 -module-name DockKit
 import AVFoundation
 @_exported import DockKit
 import Foundation
@@ -32,15 +32,11 @@ public class DockAccessoryManager : @unchecked Swift.Sendable {
   public var isSystemTrackingEnabled: Swift.Bool {
     get
   }
-  #if compiler(>=5.3) && $EffectfulProp && $RethrowsProtocol
   public var accessoryStateChanges: DockKit.DockAccessory.StateChanges {
     get throws
   }
-  #endif
   public static let shared: DockKit.DockAccessoryManager
-  #if compiler(>=5.3) && $AsyncAwait
   public func setSystemTrackingEnabled(_ isEnabled: Swift.Bool) async throws
-  #endif
   @objc deinit
 }
 @_hasMissingDesignatedInitializers @available(iOS 17, macOS 14, *)
@@ -138,38 +134,118 @@ final public class DockAccessory : @unchecked Swift.Sendable, Swift.CustomDebugS
     public let state: DockKit.DockAccessory.State
     public let trackingButtonEnabled: Swift.Bool
   }
-  #if compiler(>=5.3) && $RethrowsProtocol
   public struct StateChanges : _Concurrency.AsyncSequence {
     public typealias Element = DockKit.DockAccessory.StateChange
     public struct Iterator : _Concurrency.AsyncIteratorProtocol {
-      #if compiler(>=5.3) && $AsyncAwait
       public mutating func next() async -> DockKit.DockAccessory.StateChange?
-      #endif
+      @available(iOS 17, tvOS 13.0, watchOS 6.0, macOS 14, *)
       public typealias Element = DockKit.DockAccessory.StateChange
+      #if compiler(>=5.3) && $AssociatedTypeImplements
+      @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
+      @_implements(_Concurrency.AsyncIteratorProtocol, Failure) public typealias __AsyncIteratorProtocol_Failure = Swift.Never
+      #else
+      @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
+      public typealias __AsyncIteratorProtocol_Failure = Swift.Never
+      #endif
     }
     public func makeAsyncIterator() -> DockKit.DockAccessory.StateChanges.Iterator
+    @available(iOS 17, tvOS 13.0, watchOS 6.0, macOS 14, *)
     public typealias AsyncIterator = DockKit.DockAccessory.StateChanges.Iterator
+    #if compiler(>=5.3) && $AssociatedTypeImplements
+    @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
+    @_implements(_Concurrency.AsyncSequence, Failure) public typealias __AsyncSequence_Failure = Swift.Never
+    #else
+    @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
+    public typealias __AsyncSequence_Failure = Swift.Never
+    #endif
   }
-  #endif
   public struct MotionState : Swift.Sendable {
     public let angularVelocities: Spatial.Vector3D
     public let angularPositions: Spatial.Vector3D
     public let timestamp: Foundation.TimeInterval
     public let error: (any Swift.Error)?
   }
-  #if compiler(>=5.3) && $RethrowsProtocol
   public struct MotionStates : _Concurrency.AsyncSequence {
     public typealias Element = DockKit.DockAccessory.MotionState
     public struct Iterator : _Concurrency.AsyncIteratorProtocol {
-      #if compiler(>=5.3) && $AsyncAwait
       public mutating func next() async -> DockKit.DockAccessory.MotionState?
-      #endif
+      @available(iOS 17, tvOS 13.0, watchOS 6.0, macOS 14, *)
       public typealias Element = DockKit.DockAccessory.MotionState
+      #if compiler(>=5.3) && $AssociatedTypeImplements
+      @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
+      @_implements(_Concurrency.AsyncIteratorProtocol, Failure) public typealias __AsyncIteratorProtocol_Failure = Swift.Never
+      #else
+      @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
+      public typealias __AsyncIteratorProtocol_Failure = Swift.Never
+      #endif
     }
     public func makeAsyncIterator() -> DockKit.DockAccessory.MotionStates.Iterator
+    @available(iOS 17, tvOS 13.0, watchOS 6.0, macOS 14, *)
     public typealias AsyncIterator = DockKit.DockAccessory.MotionStates.Iterator
+    #if compiler(>=5.3) && $AssociatedTypeImplements
+    @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
+    @_implements(_Concurrency.AsyncSequence, Failure) public typealias __AsyncSequence_Failure = Swift.Never
+    #else
+    @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
+    public typealias __AsyncSequence_Failure = Swift.Never
+    #endif
   }
-  #endif
+  @available(iOS 18.0, macOS 15.0, *)
+  public enum TrackedSubjectType : Swift.Sendable, Swift.Equatable {
+    case person(DockKit.DockAccessory.TrackedPerson)
+    case object(DockKit.DockAccessory.TrackedObject)
+    public static func == (a: DockKit.DockAccessory.TrackedSubjectType, b: DockKit.DockAccessory.TrackedSubjectType) -> Swift.Bool
+  }
+  @available(iOS 18.0, macOS 15.0, *)
+  public struct TrackedPerson : Swift.Equatable, Swift.Sendable {
+    public var identifier: Foundation.UUID
+    public var rect: CoreFoundation.CGRect
+    public var saliencyRank: Swift.Int?
+    public var speakingConfidence: Swift.Double?
+    public var lookingAtCameraConfidence: Swift.Double?
+    public static func == (a: DockKit.DockAccessory.TrackedPerson, b: DockKit.DockAccessory.TrackedPerson) -> Swift.Bool
+  }
+  @available(iOS 18.0, macOS 15.0, *)
+  public struct TrackedObject : Swift.Equatable, Swift.Sendable {
+    public var identifier: Foundation.UUID
+    public var rect: CoreFoundation.CGRect
+    public var saliencyRank: Swift.Int?
+    public static func == (a: DockKit.DockAccessory.TrackedObject, b: DockKit.DockAccessory.TrackedObject) -> Swift.Bool
+  }
+  @available(iOS 18.0, macOS 15.0, *)
+  public struct TrackingState : Swift.Sendable {
+    public var time: Foundation.Date
+    public var trackedSubjects: [DockKit.DockAccessory.TrackedSubjectType]
+    public var description: Swift.String {
+      get
+    }
+  }
+  @available(iOS 18.0, macOS 15.0, *)
+  public struct TrackingStates : _Concurrency.AsyncSequence {
+    public typealias Element = DockKit.DockAccessory.TrackingState
+    public struct Iterator : _Concurrency.AsyncIteratorProtocol {
+      public mutating func next() async -> DockKit.DockAccessory.TrackingState?
+      @available(iOS 18.0, tvOS 13.0, watchOS 6.0, macOS 15.0, *)
+      public typealias Element = DockKit.DockAccessory.TrackingState
+      #if compiler(>=5.3) && $AssociatedTypeImplements
+      @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
+      @_implements(_Concurrency.AsyncIteratorProtocol, Failure) public typealias __AsyncIteratorProtocol_Failure = Swift.Never
+      #else
+      @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
+      public typealias __AsyncIteratorProtocol_Failure = Swift.Never
+      #endif
+    }
+    public func makeAsyncIterator() -> DockKit.DockAccessory.TrackingStates.Iterator
+    @available(iOS 18.0, tvOS 13.0, watchOS 6.0, macOS 15.0, *)
+    public typealias AsyncIterator = DockKit.DockAccessory.TrackingStates.Iterator
+    #if compiler(>=5.3) && $AssociatedTypeImplements
+    @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
+    @_implements(_Concurrency.AsyncSequence, Failure) public typealias __AsyncSequence_Failure = Swift.Never
+    #else
+    @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
+    public typealias __AsyncSequence_Failure = Swift.Never
+    #endif
+  }
   @available(iOS 17.4, macOS 14.4, *)
   public enum AccessoryEvent : Swift.Sendable, Swift.Equatable, Swift.Hashable {
     case button(id: Swift.Int, pressed: Swift.Bool)
@@ -182,26 +258,89 @@ final public class DockAccessory : @unchecked Swift.Sendable, Swift.CustomDebugS
       get
     }
   }
-  #if compiler(>=5.3) && $RethrowsProtocol
   @available(iOS 17.4, macOS 14.4, *)
   public struct AccessoryEvents : _Concurrency.AsyncSequence {
     public typealias Element = DockKit.DockAccessory.AccessoryEvent
     public struct Iterator : _Concurrency.AsyncIteratorProtocol {
-      #if compiler(>=5.3) && $AsyncAwait
       public mutating func next() async -> DockKit.DockAccessory.AccessoryEvent?
-      #endif
+      @available(iOS 17.4, tvOS 13.0, watchOS 6.0, macOS 14.4, *)
       public typealias Element = DockKit.DockAccessory.AccessoryEvent
+      #if compiler(>=5.3) && $AssociatedTypeImplements
+      @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
+      @_implements(_Concurrency.AsyncIteratorProtocol, Failure) public typealias __AsyncIteratorProtocol_Failure = Swift.Never
+      #else
+      @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
+      public typealias __AsyncIteratorProtocol_Failure = Swift.Never
+      #endif
     }
     public func makeAsyncIterator() -> DockKit.DockAccessory.AccessoryEvents.Iterator
+    @available(iOS 17.4, tvOS 13.0, watchOS 6.0, macOS 14.4, *)
     public typealias AsyncIterator = DockKit.DockAccessory.AccessoryEvents.Iterator
+    #if compiler(>=5.3) && $AssociatedTypeImplements
+    @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
+    @_implements(_Concurrency.AsyncSequence, Failure) public typealias __AsyncSequence_Failure = Swift.Never
+    #else
+    @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
+    public typealias __AsyncSequence_Failure = Swift.Never
+    #endif
   }
-  #endif
-  #if compiler(>=5.3) && $EffectfulProp && $RethrowsProtocol
   @available(iOS 17.4, macOS 14.4, *)
   final public var accessoryEvents: DockKit.DockAccessory.AccessoryEvents {
     get throws
   }
-  #endif
+  @available(iOS 18.0, macOS 15.0, *)
+  public enum BatteryChargeState : Swift.Sendable, Swift.Equatable, Swift.Hashable {
+    case notCharging
+    case charging
+    case notChargeable
+    public static func == (a: DockKit.DockAccessory.BatteryChargeState, b: DockKit.DockAccessory.BatteryChargeState) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
+    public var hashValue: Swift.Int {
+      get
+    }
+  }
+  @available(iOS 18.0, macOS 15.0, *)
+  public struct BatteryState : Swift.Sendable, Swift.Equatable, Swift.Hashable {
+    public let name: Swift.String
+    public let batteryLevel: Swift.Double
+    public let lowBattery: Swift.Bool
+    public let chargeState: DockKit.DockAccessory.BatteryChargeState
+    public static func == (a: DockKit.DockAccessory.BatteryState, b: DockKit.DockAccessory.BatteryState) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
+    public var hashValue: Swift.Int {
+      get
+    }
+  }
+  @available(iOS 18.0, macOS 15.0, *)
+  public struct BatteryStates : _Concurrency.AsyncSequence {
+    public typealias Element = DockKit.DockAccessory.BatteryState
+    public struct Iterator : _Concurrency.AsyncIteratorProtocol {
+      public mutating func next() async -> DockKit.DockAccessory.BatteryState?
+      @available(iOS 18.0, tvOS 13.0, watchOS 6.0, macOS 15.0, *)
+      public typealias Element = DockKit.DockAccessory.BatteryState
+      #if compiler(>=5.3) && $AssociatedTypeImplements
+      @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
+      @_implements(_Concurrency.AsyncIteratorProtocol, Failure) public typealias __AsyncIteratorProtocol_Failure = Swift.Never
+      #else
+      @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
+      public typealias __AsyncIteratorProtocol_Failure = Swift.Never
+      #endif
+    }
+    public func makeAsyncIterator() -> DockKit.DockAccessory.BatteryStates.Iterator
+    @available(iOS 18.0, tvOS 13.0, watchOS 6.0, macOS 15.0, *)
+    public typealias AsyncIterator = DockKit.DockAccessory.BatteryStates.Iterator
+    #if compiler(>=5.3) && $AssociatedTypeImplements
+    @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
+    @_implements(_Concurrency.AsyncSequence, Failure) public typealias __AsyncSequence_Failure = Swift.Never
+    #else
+    @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
+    public typealias __AsyncSequence_Failure = Swift.Never
+    #endif
+  }
+  @available(iOS 18.0, macOS 15.0, *)
+  final public var batteryStates: DockKit.DockAccessory.BatteryStates {
+    get throws
+  }
   public enum FramingMode : Swift.Codable, Swift.Sendable, Swift.Hashable, Swift.Equatable {
     case automatic
     case center
@@ -243,43 +382,41 @@ final public class DockAccessory : @unchecked Swift.Sendable, Swift.CustomDebugS
   final public var regionOfInterest: CoreFoundation.CGRect {
     get
   }
-  #if compiler(>=5.3) && $EffectfulProp && $RethrowsProtocol
   final public var motionStates: DockKit.DockAccessory.MotionStates {
     get throws
   }
-  #endif
-  #if compiler(>=5.3) && $EffectfulProp
+  @available(iOS 18.0, macOS 15.0, *)
+  final public var trackingStates: DockKit.DockAccessory.TrackingStates {
+    get throws
+  }
   final public var limits: DockKit.DockAccessory.Limits {
     get throws
   }
-  #endif
   @objc deinit
   public static func == (lhs: DockKit.DockAccessory, rhs: DockKit.DockAccessory) -> Swift.Bool
   final public func hash(into hasher: inout Swift.Hasher)
+  @available(iOS, introduced: 17, deprecated: 18, message: "please use async version of setOrientation")
+  @available(macOS, introduced: 14, deprecated: 15, message: "please use async version of setOrientation")
   final public func setOrientation(_ rotation: Spatial.Vector3D, duration: Swift.Duration = .seconds(0), relative: Swift.Bool = false) throws -> Foundation.Progress
+  @available(iOS, introduced: 17, deprecated: 18, message: "please use async version of setOrientation")
+  @available(macOS, introduced: 14, deprecated: 15, message: "please use async version of setOrientation")
   final public func setOrientation(_ rotation: Spatial.Rotation3D, duration: Swift.Duration = .seconds(0), relative: Swift.Bool = false) throws -> Foundation.Progress
-  #if compiler(>=5.3) && $AsyncAwait
+  @available(iOS 18, macOS 15, *)
+  final public func setOrientation(_ rotation: Spatial.Vector3D, duration: Swift.Duration = .seconds(0), relative: Swift.Bool = false) async throws -> Foundation.Progress
+  @available(iOS 18, macOS 15, *)
+  final public func setOrientation(_ rotation: Spatial.Rotation3D, duration: Swift.Duration = .seconds(0), relative: Swift.Bool = false) async throws -> Foundation.Progress
   final public func setAngularVelocity(_ angularVelocity: Spatial.Vector3D) async throws
-  #endif
   final public func setLimits(_ limits: DockKit.DockAccessory.Limits) throws
-  #if compiler(>=5.3) && $AsyncAwait
   final public func track(_ data: [DockKit.DockAccessory.Observation], cameraInformation: DockKit.DockAccessory.CameraInformation) async throws
-  #endif
-  #if compiler(>=5.3) && $AsyncAwait
+  final public func track(_ data: [DockKit.DockAccessory.Observation], cameraInformation: DockKit.DockAccessory.CameraInformation, image: CoreVideo.CVPixelBuffer) async throws
   final public func track(_ metadata: [AVFoundation.AVMetadataObject], cameraInformation: DockKit.DockAccessory.CameraInformation) async throws
-  #endif
-  #if compiler(>=5.3) && $AsyncAwait
+  final public func track(_ metadata: [AVFoundation.AVMetadataObject], cameraInformation: DockKit.DockAccessory.CameraInformation, image: CoreVideo.CVPixelBuffer) async throws
   final public func selectSubject(at unitPoint: CoreFoundation.CGPoint) async throws
-  #endif
-  #if compiler(>=5.3) && $AsyncAwait
+  @available(iOS 18.0, macOS 15.0, *)
+  final public func selectSubjects(_ ids: [Foundation.UUID]) async throws
   final public func setFramingMode(_ mode: DockKit.DockAccessory.FramingMode) async throws
-  #endif
-  #if compiler(>=5.3) && $AsyncAwait
   final public func setRegionOfInterest(_ region: CoreFoundation.CGRect) async throws
-  #endif
-  #if compiler(>=5.3) && $AsyncAwait
   final public func animate(motion: DockKit.DockAccessory.Animation) async throws -> Foundation.Progress
-  #endif
   final public var hashValue: Swift.Int {
     get
   }

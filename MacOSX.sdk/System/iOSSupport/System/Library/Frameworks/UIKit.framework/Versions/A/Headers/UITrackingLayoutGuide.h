@@ -15,7 +15,7 @@
 
 NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
-UIKIT_EXTERN API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(watchos, tvos) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @interface UITrackingLayoutGuide : UILayoutGuide
 
 /// Set up constraints to be activated and deactivated depending on which edge the guide is close to. Different tracking guides may respond to different edges, and if a guide never gets to an edge, those constraints will not be activated automatically.

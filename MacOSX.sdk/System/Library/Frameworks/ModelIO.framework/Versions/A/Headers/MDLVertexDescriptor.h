@@ -5,8 +5,8 @@
  @copyright Copyright © 2015 Apple, Inc. All rights reserved.
  */
 #import <Foundation/Foundation.h>
-#import "ModelIOExports.h"
-#import "MDLMeshBuffer.h"
+#import <ModelIO/ModelIOExports.h>
+#import <ModelIO/MDLMeshBuffer.h>
 #import <simd/simd.h>
 
 NS_ASSUME_NONNULL_BEGIN

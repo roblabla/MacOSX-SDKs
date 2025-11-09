@@ -17,9 +17,9 @@ NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 typedef NS_ENUM(NSInteger, UIProgressViewStyle) {
     UIProgressViewStyleDefault,     // normal progress bar
     UIProgressViewStyleBar API_UNAVAILABLE(tvos),     // for use in a toolbar
-};
+} API_UNAVAILABLE(watchos);
 
-UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(2.0)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @interface UIProgressView : UIView <NSCoding>
 
 - (instancetype)initWithFrame:(CGRect)frame NS_DESIGNATED_INITIALIZER;

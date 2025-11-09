@@ -16,8 +16,10 @@ NS_ASSUME_NONNULL_BEGIN
 @class HMAccessorySetupPayload;
 @class HMHome;
 
-HM_EXTERN API_DEPRECATED("No longer supported", ios(13.0, 15.0)) API_UNAVAILABLE(ios, macos, watchos, tvos, macCatalyst)
-    @interface HMAddAccessoryRequest : NSObject
+HM_EXTERN
+API_DEPRECATED("No longer supported", ios(13.0, 15.0))
+API_UNAVAILABLE(ios, macos, watchos, tvos, macCatalyst)
+@interface HMAddAccessoryRequest : NSObject
 
 /*!
  * @brief Home that the accessory is to be added to.
@@ -68,6 +70,8 @@ HM_EXTERN API_DEPRECATED("No longer supported", ios(13.0, 15.0)) API_UNAVAILABLE
  * @discussion This method may fail if the setup payload URL is not a valid payload URL.
  */
 - (nullable HMAccessorySetupPayload *)payloadWithURL:(NSURL *)setupPayloadURL ownershipToken:(HMAccessoryOwnershipToken *)ownershipToken NS_SWIFT_NAME(makePayload(url:ownershipToken:));
+
+- (instancetype)init API_DEPRECATED("HMAddAccessoryRequest objects are created by their associated objects. Directly creating them is not supported.", ios(13.0, 13.0));
 
 @end
 

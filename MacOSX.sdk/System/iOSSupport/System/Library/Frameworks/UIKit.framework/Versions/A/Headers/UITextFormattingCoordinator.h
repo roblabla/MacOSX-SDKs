@@ -15,12 +15,12 @@ NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 @class UIWindowScene;
 
-API_AVAILABLE(ios(13.0)) NS_SWIFT_UI_ACTOR
+API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @protocol UITextFormattingCoordinatorDelegate <NSObject>
 - (void)updateTextAttributesWithConversionHandler:(NS_NOESCAPE UITextAttributesConversionHandler _Nonnull)conversionHandler API_AVAILABLE(ios(13.0));
 @end
 
-UIKIT_EXTERN API_AVAILABLE(ios(13.0)) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 #if !TARGET_OS_WATCH && !TARGET_OS_TV
 @interface UITextFormattingCoordinator : NSObject <UIFontPickerViewControllerDelegate>
 #else

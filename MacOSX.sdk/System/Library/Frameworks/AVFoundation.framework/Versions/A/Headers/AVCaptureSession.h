@@ -4,7 +4,7 @@
  
     Framework:  AVFoundation
  
-    Copyright 2010-2023 Apple Inc. All rights reserved.
+    Copyright 2010-2024 Apple Inc. All rights reserved.
 */
 
 #import <AVFoundation/AVBase.h>
@@ -23,7 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
  @discussion
     The notification object is the AVCaptureSession instance that encountered a runtime error. The userInfo dictionary contains an NSError for the key AVCaptureSessionErrorKey.
  */
-AVF_EXPORT NSString *const AVCaptureSessionRuntimeErrorNotification API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0), tvos(17.0), visionos(1.0)) API_UNAVAILABLE(watchos);
+AVF_EXPORT NSNotificationName const AVCaptureSessionRuntimeErrorNotification NS_SWIFT_NAME(AVCaptureSession.runtimeErrorNotification) API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0), tvos(17.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 /*!
  @constant AVCaptureSessionErrorKey
@@ -43,7 +43,7 @@ AVF_EXPORT NSString *const AVCaptureSessionErrorKey API_AVAILABLE(macos(10.7), i
  @discussion
     Clients may observe the AVCaptureSessionDidStartRunningNotification to know when an instance of AVCaptureSession starts running.
  */
-AVF_EXPORT NSString *const AVCaptureSessionDidStartRunningNotification API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0), tvos(17.0), visionos(1.0)) API_UNAVAILABLE(watchos);
+AVF_EXPORT NSNotificationName const AVCaptureSessionDidStartRunningNotification NS_SWIFT_NAME(AVCaptureSession.didStartRunningNotification) API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0), tvos(17.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 /*!
  @constant AVCaptureSessionDidStopRunningNotification
@@ -53,7 +53,7 @@ AVF_EXPORT NSString *const AVCaptureSessionDidStartRunningNotification API_AVAIL
  @discussion
     Clients may observe the AVCaptureSessionDidStopRunningNotification to know when an instance of AVCaptureSession stops running. An AVCaptureSession instance may stop running automatically due to external system conditions, such as the device going to sleep, or being locked by a user.
  */
-AVF_EXPORT NSString *const AVCaptureSessionDidStopRunningNotification API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0), tvos(17.0), visionos(1.0)) API_UNAVAILABLE(watchos);
+AVF_EXPORT NSNotificationName const AVCaptureSessionDidStopRunningNotification NS_SWIFT_NAME(AVCaptureSession.didStopRunningNotification) API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0), tvos(17.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 /*!
  @constant AVCaptureSessionWasInterruptedNotification
@@ -65,7 +65,7 @@ AVF_EXPORT NSString *const AVCaptureSessionDidStopRunningNotification API_AVAILA
  
     Beginning in iOS 9.0, the AVCaptureSessionWasInterruptedNotification userInfo dictionary contains an AVCaptureSessionInterruptionReasonKey indicating the reason for the interruption.
  */
-AVF_EXPORT NSString *const AVCaptureSessionWasInterruptedNotification API_AVAILABLE(macos(10.14), ios(4.0), macCatalyst(14.0), tvos(17.0), visionos(1.0)) API_UNAVAILABLE(watchos);
+AVF_EXPORT NSNotificationName const AVCaptureSessionWasInterruptedNotification NS_SWIFT_NAME(AVCaptureSession.wasInterruptedNotification) API_AVAILABLE(macos(10.14), ios(4.0), macCatalyst(14.0), tvos(17.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 
 /*!
@@ -121,7 +121,7 @@ AVF_EXPORT NSString *const AVCaptureSessionInterruptionSystemPressureStateKey AP
  @discussion
     Clients may observe the AVCaptureSessionInterruptionEndedNotification to know when an instance of AVCaptureSession ceases to be interrupted, for example, when a phone call ends, and hardware resources needed to run the session are again available. When appropriate, the AVCaptureSession instance that was previously stopped in response to an interruption will automatically restart once the interruption ends.
  */
-AVF_EXPORT NSString *const AVCaptureSessionInterruptionEndedNotification API_AVAILABLE(macos(10.14), ios(4.0), macCatalyst(14.0), tvos(17.0), visionos(1.0)) API_UNAVAILABLE(watchos);
+AVF_EXPORT NSNotificationName const AVCaptureSessionInterruptionEndedNotification NS_SWIFT_NAME(AVCaptureSession.interruptionEndedNotification) API_AVAILABLE(macos(10.14), ios(4.0), macCatalyst(14.0), tvos(17.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 /*!
  @enum AVCaptureVideoOrientation
@@ -149,7 +149,9 @@ typedef NS_ENUM(NSInteger, AVCaptureVideoOrientation) {
 @class AVCaptureInput;
 @class AVCaptureOutput;
 @class AVCaptureConnection;
+@class AVCaptureControl;
 @class AVCaptureSessionInternal;
+@protocol AVCaptureSessionControlsDelegate;
 
 /*!
  @class AVCaptureSession
@@ -212,7 +214,7 @@ API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0), tvos(17.0), visionos(1.0
     YES if the proposed input can be added to the receiver, NO otherwise.
  
  @discussion
-    An AVCaptureInput instance can only be added to a session using -addInput: if -canAddInput: returns YES.
+    An AVCaptureInput instance can only be added to a session using -addInput: if -canAddInput: returns YES, otherwise an NSInvalidArgumentException is thrown.
  */
 - (BOOL)canAddInput:(AVCaptureInput *)input;
 
@@ -225,7 +227,7 @@ API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0), tvos(17.0), visionos(1.0
     An AVCaptureInput instance.
  
  @discussion
-    An AVCaptureInput instance can only be added to a session using -addInput: if -canAddInput: returns YES. -addInput: may be called while the session is running.
+    An AVCaptureInput instance can only be added to a session using -addInput: if -canAddInput: returns YES, otherwise an NSInvalidArgumentException is thrown. -addInput: may be called while the session is running.
  */
 - (void)addInput:(AVCaptureInput *)input;
 
@@ -263,7 +265,7 @@ API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0), tvos(17.0), visionos(1.0
     YES if the proposed output can be added to the receiver, NO otherwise.
  
  @discussion
-    An AVCaptureOutput instance can only be added to a session using -addOutput: if -canAddOutput: returns YES.
+    An AVCaptureOutput instance can only be added to a session using -addOutput: if -canAddOutput: returns YES, otherwise an NSInvalidArgumentException is thrown.
 
     On iOS and Mac Catalyst, some limitations to adding combinations of different types of outputs apply:
      - A maximum of one output of each type may be added. For applications linked on or after iOS 16.0, this restriction no longer applies to AVCaptureVideoDataOutputs. When adding more than one AVCaptureVideoDataOutput, AVCaptureSession.hardwareCost must be taken into account.
@@ -282,7 +284,7 @@ API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0), tvos(17.0), visionos(1.0
     An AVCaptureOutput instance.
  
  @discussion
-    An AVCaptureOutput instance can only be added to a session using -addOutput: if -canAddOutput: returns YES. -addOutput: may be called while the session is running.
+    An AVCaptureOutput instance can only be added to a session using -addOutput: if -canAddOutput: returns YES, otherwise an NSInvalidArgumentException is thrown. -addOutput: may be called while the session is running.
  */
 - (void)addOutput:(AVCaptureOutput *)output;
 
@@ -308,7 +310,7 @@ API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0), tvos(17.0), visionos(1.0
     An AVCaptureInput instance.
  
  @discussion
-    -addInputWithNoConnections: may be called while the session is running. The -addInput: method is the preferred method for adding an input to an AVCaptureSession. -addInputWithNoConnections: may be called if you need fine-grained control over which inputs are connected to which outputs.
+    An AVCaptureInput instance can only be added to a session using -addInputWithNoConnections: if -canAddInput: returns YES, otherwise an NSInvalidArgumentException is thrown. -addInputWithNoConnections: may be called while the session is running. The -addInput: method is the preferred method for adding an input to an AVCaptureSession. -addInputWithNoConnections: may be called if you need fine-grained control over which inputs are connected to which outputs.
  */
 - (void)addInputWithNoConnections:(AVCaptureInput *)input API_AVAILABLE(ios(8.0), macCatalyst(14.0), tvos(17.0)) API_UNAVAILABLE(visionos);
 
@@ -321,7 +323,7 @@ API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0), tvos(17.0), visionos(1.0
     An AVCaptureOutput instance.
  
  @discussion
-    -addOutputWithNoConnections: may be called while the session is running. The -addOutput: method is the preferred method for adding an output to an AVCaptureSession. -addOutputWithNoConnections: may be called if you need fine-grained control over which inputs are connected to which outputs.
+    An AVCaptureOutput instance can only be added to a session using -addOutputWithNoConnections: if -canAddOutput: returns YES, otherwise an NSInvalidArgumentException is thrown. -addOutputWithNoConnections: may be called while the session is running. The -addOutput: method is the preferred method for adding an output to an AVCaptureSession. -addOutputWithNoConnections: may be called if you need fine-grained control over which inputs are connected to which outputs.
  */
 - (void)addOutputWithNoConnections:(AVCaptureOutput *)output API_AVAILABLE(ios(8.0), macCatalyst(14.0), tvos(17.0)) API_UNAVAILABLE(visionos);
 
@@ -344,7 +346,7 @@ API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0), tvos(17.0), visionos(1.0
     An AVCaptureConnection instance.
  
  @discussion
-    An AVCaptureConnection instance can only be added to a session using -addConnection: if canAddConnection: returns YES. When using -addInput: or -addOutput:, connections are formed automatically between all compatible inputs and outputs. Manually adding connections is only necessary when adding an input or output with no connections.
+    An AVCaptureConnection instance can only be added to a session using -addConnection: if -canAddConnection: returns YES, otherwise an NSInvalidArgumentException is thrown. When using -addInput: or -addOutput:, connections are formed automatically between all compatible inputs and outputs. Manually adding connections is only necessary when adding an input or output with no connections.
  */
 - (BOOL)canAddConnection:(AVCaptureConnection *)connection API_AVAILABLE(ios(8.0), macCatalyst(14.0), tvos(17.0)) API_UNAVAILABLE(visionos);
 
@@ -357,7 +359,7 @@ API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0), tvos(17.0), visionos(1.0
     An AVCaptureConnection instance.
  
  @discussion
-    An AVCaptureConnection instance can only be added to a session using -addConnection: if canAddConnection: returns YES. When using -addInput: or -addOutput:, connections are formed automatically between all compatible inputs and outputs. Manually adding connections is only necessary when adding an input or output with no connections. -addConnection: may be called while the session is running.
+    An AVCaptureConnection instance can only be added to a session using -addConnection: if canAddConnection: returns YES, otherwise an NSInvalidArgumentException is thrown. When using -addInput: or -addOutput:, connections are formed automatically between all compatible inputs and outputs. Manually adding connections is only necessary when adding an input or output with no connections. -addConnection: may be called while the session is running.
  */
 - (void)addConnection:(AVCaptureConnection *)connection API_AVAILABLE(ios(8.0), macCatalyst(14.0), tvos(17.0)) API_UNAVAILABLE(visionos);
 
@@ -375,12 +377,122 @@ API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0), tvos(17.0), visionos(1.0
 - (void)removeConnection:(AVCaptureConnection *)connection API_AVAILABLE(ios(8.0), macCatalyst(14.0), tvos(17.0)) API_UNAVAILABLE(visionos);
 
 /*!
+ @property supportsControls
+ @abstract
+    Indicates whether session controls are supported on this platform.
+ 
+ @discussion
+    `AVCaptureControl`s are only supported on platforms with necessary hardware.
+ */
+@property(nonatomic, readonly) BOOL supportsControls API_AVAILABLE(macos(15.0), ios(18.0), macCatalyst(18.0), tvos(18.0)) API_UNAVAILABLE(visionos);
+
+
+/*!
+ @property maxControlsCount
+ @abstract
+    Specifies the maximum number of controls that can be added to a session.
+ */
+@property(nonatomic, readonly) NSInteger maxControlsCount API_AVAILABLE(macos(15.0), ios(18.0), macCatalyst(18.0), tvos(18.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(watchos);
+
+/*!
+ @method setControlsDelegate:queue:
+ @abstract
+    Sets the receiver's controls delegate that receives events about the session's controls and the dispatch queue on which the delegate is called.
+ 
+ @param controlsDelegate
+    An object conforming to the `AVCaptureSessionControlsDelegate` protocol that receives events about the session's controls.
+ @param controlsDelegateCallbackQueue
+    A dispatch queue on which all delegate methods are called.
+ 
+ @discussion
+    Users can interact with an `AVCaptureSession`'s controls by performing specific gestures to enable their visibility. A delegate may be specified to be informed when the controls can be interacted with and are dismissed. All delegate methods will be called on the specified dispatch queue.
+ 
+    A serial dispatch queue must be used to guarantee that delegate callbacks will be delivered in order. The `controlsDelegateCallbackQueue` parameter may not be `NULL`, except when setting the `controlsDelegate` to `nil` otherwise `-setControlsDelegate:queue:` throws an `NSInvalidArgumentException`.
+ */
+- (void)setControlsDelegate:(nullable id<AVCaptureSessionControlsDelegate>)controlsDelegate queue:(nullable dispatch_queue_t)controlsDelegateCallbackQueue API_AVAILABLE(macos(15.0), ios(18.0), macCatalyst(18.0), tvos(18.0)) API_UNAVAILABLE(visionos);
+
+/*!
+ @property controlsDelegate
+ @abstract
+    The receiver's controls delegate.
+ 
+ @discussion
+    The value of this property is an object conforming to the `AVCaptureSessionControlsDelegate` protocol that receives events about the session's controls. The delegate is set using the `-setControlsDelegate:queue:` method.
+ 
+    A controls delegate must be specified for controls to become active.
+ */
+@property(nonatomic, readonly, nullable) id<AVCaptureSessionControlsDelegate> controlsDelegate API_AVAILABLE(macos(15.0), ios(18.0), macCatalyst(18.0), tvos(18.0)) API_UNAVAILABLE(visionos);
+
+/*!
+ @property controlsDelegateCallbackQueue
+ @abstract
+    The dispatch queue on which all controls delegate methods will be called.
+ 
+ @discussion
+    The value of this property is a `dispatch_queue_t`. The queue is set using the `-setControlsDelegate:queue:` method.
+ */
+@property(nonatomic, readonly, nullable) dispatch_queue_t controlsDelegateCallbackQueue API_AVAILABLE(macos(15.0), ios(18.0), macCatalyst(18.0), tvos(18.0)) API_UNAVAILABLE(visionos);
+
+/*!
+ @property controls
+ @abstract
+    An `NSArray` of `AVCaptureControl`s currently added to the session.
+ 
+ @discussion
+    The value of this property is an `NSArray` of `AVCaptureControl`s currently added to the session. Clients can add `AVCaptureControl`s to a session by calling `-addControl:`.
+ */
+@property(nonatomic, readonly) NSArray<__kindof AVCaptureControl *> *controls API_AVAILABLE(macos(15.0), ios(18.0), macCatalyst(18.0), tvos(18.0)) API_UNAVAILABLE(visionos);
+
+/*!
+ @method canAddControl:
+ @abstract
+    Returns whether the proposed control can be added to the session.
+ 
+ @param control
+    An `AVCaptureControl` instance.
+ @result
+    `YES` if the proposed control can be added to the session, `NO` otherwise.
+ 
+ @discussion
+    An `AVCaptureControl` instance can only be added to a session using `-addControl:` if `-canAddControl:` returns `YES`. For example, some platforms do not support controls. Instances of `AVCaptureSlider`, `AVCaptureToggle` and `AVCaptureIndexPicker` must have an action and an action queue set before being added to a session.
+ */
+- (BOOL)canAddControl:(AVCaptureControl *)control API_AVAILABLE(macos(15.0), ios(18.0), macCatalyst(18.0), tvos(18.0)) API_UNAVAILABLE(visionos);
+
+/*!
+ @method addControl:
+ @abstract
+    Adds an `AVCaptureControl` instance to the session.
+ 
+ @param control
+    An `AVCaptureControl` instance.
+ 
+ @discussion
+    An `AVCaptureControl` instance can only be added to a session using `-addControl:` if `-canAddControl:` returns `YES`, otherwise an `NSInvalidArgumentException` is thrown. `-addControl:` may be called while the session is running.
+ 
+    For an `AVCaptureControl` instance to become active, an `AVCaptureSessionControlsDelegate` must be set on the session.
+ */
+- (void)addControl:(AVCaptureControl *)control API_AVAILABLE(macos(15.0), ios(18.0), macCatalyst(18.0), tvos(18.0)) API_UNAVAILABLE(visionos);
+
+/*!
+ @method removeControl:
+ @abstract
+    Removes an `AVCaptureControl` instance from the session.
+ 
+ @param control
+    An `AVCaptureControl` instance.
+ 
+ @discussion
+    `-removeControl:` may be called while the session is running.
+ */
+- (void)removeControl:(AVCaptureControl *)control API_AVAILABLE(macos(15.0), ios(18.0), macCatalyst(18.0), tvos(18.0)) API_UNAVAILABLE(visionos);
+
+/*!
  @method beginConfiguration
  @abstract
     When paired with commitConfiguration, allows a client to batch multiple configuration operations on a running session into atomic updates.
  
  @discussion
-    -beginConfiguration / -commitConfiguration are AVCaptureSession's mechanism for batching multiple configuration operations on a running session into atomic updates. After calling [session beginConfiguration], clients may add or remove outputs, alter the sessionPreset, or configure individual AVCaptureInput or Output properties. All changes will be pended until the client calls [session commitConfiguration], at which time they will be applied together. -beginConfiguration / -commitConfiguration pairs may be nested, and will only be applied when the outermost commit is invoked.
+    -beginConfiguration / -commitConfiguration are AVCaptureSession's mechanism for batching multiple configuration operations on a running session into atomic updates. After calling [session beginConfiguration], clients may add or remove outputs, alter the sessionPreset, or configure individual AVCaptureInput or Output properties. All changes will be pended until the client calls [session commitConfiguration], at which time they will be applied together. -beginConfiguration / -commitConfiguration pairs may be nested, and will only be applied when the outermost commit is invoked. If you've called -beginConfiguration, you must call -commitConfiguration before invoking -startRunning or -stopRunning, otherwise an NSGenericException is thrown.
  */
 - (void)beginConfiguration;
 
@@ -390,7 +502,7 @@ API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0), tvos(17.0), visionos(1.0
     When preceded by beginConfiguration, allows a client to batch multiple configuration operations on a running session into atomic updates.
  
  @discussion
-    -beginConfiguration / -commitConfiguration are AVCaptureSession's mechanism for batching multiple configuration operations on a running session into atomic updates. After calling [session beginConfiguration], clients may add or remove outputs, alter the sessionPreset, or configure individual AVCaptureInput or Output properties. All changes will be pended until the client calls [session commitConfiguration], at which time they will be applied together. -beginConfiguration / -commitConfiguration pairs may be nested, and will only be applied when the outermost commit is invoked.
+    -beginConfiguration / -commitConfiguration are AVCaptureSession's mechanism for batching multiple configuration operations on a running session into atomic updates. After calling [session beginConfiguration], clients may add or remove outputs, alter the sessionPreset, or configure individual AVCaptureInput or Output properties. All changes will be pended until the client calls [session commitConfiguration], at which time they will be applied together. -beginConfiguration / -commitConfiguration pairs may be nested, and will only be applied when the outermost commit is invoked. If you've called -beginConfiguration, you must call -commitConfiguration before invoking -startRunning or -stopRunning, otherwise an NSGenericException is thrown.
  */
 - (void)commitConfiguration;
 
@@ -422,9 +534,11 @@ API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0), tvos(17.0), visionos(1.0
  @discussion
     This property can be used to determine whether multitaskingCameraAccessEnabled may be set to YES. When this property changes from YES to NO, multitaskingCameraAccessEnabled also reverts to NO.
  
-    This property returns true on iPads that support Stage Manager with an extended display.
+    Prior to iOS 18, this property returns YES on iPads that support Stage Manager with an extended display. In applications linked on or after iOS 18, this property returns YES for video conferencing applications (apps that use "voip" as one of their UIBackgroundModes).
  
-    This property returns true on Apple TV.
+	This property also returns YES for iOS applications that have the com.apple.developer.avfoundation.multitasking-camera-access entitlement.
+ 
+    This property returns YES on Apple TV.
  
     This property is key-value observable.
  */
@@ -469,6 +583,16 @@ API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0), tvos(17.0), visionos(1.0
 @property(nonatomic) BOOL automaticallyConfiguresApplicationAudioSession API_AVAILABLE(ios(7.0), macCatalyst(14.0), tvos(17.0)) API_UNAVAILABLE(macos, visionos);
 
 /*!
+ @property configuresApplicationAudioSessionToMixWithOthers
+ @abstract
+    Indicates whether the receiver should configure the application's audio session to mix with others.
+ 
+ @discussion
+    The value of this property is a BOOL indicating whether the receiver should configure the application's audio session to mix with, instead of interrupting, any ongoing audio sessions. It has no effect when usesApplicationAudioSession is set to NO. It also has no effect on Live Photo movie complement capture (where music is always mixed with). The default value is NO.
+ */
+@property(nonatomic) BOOL configuresApplicationAudioSessionToMixWithOthers API_AVAILABLE(ios(18.0), macCatalyst(18.0), tvos(18.0)) API_UNAVAILABLE(macos, visionos);
+
+/*!
  @property automaticallyConfiguresCaptureDeviceForWideColor
  @abstract
     Indicates whether the receiver automatically configures its video device's activeFormat and activeColorSpace properties, preferring wide color for photos.
@@ -484,7 +608,7 @@ API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0), tvos(17.0), visionos(1.0
     Starts an AVCaptureSession instance running.
  
  @discussion
-    Clients invoke -startRunning to start the flow of data from inputs to outputs connected to the AVCaptureSession instance. This call blocks until the session object has completely started up or failed. A failure to start running is reported through the AVCaptureSessionRuntimeErrorNotification mechanism.
+    Clients invoke -startRunning to start the flow of data from inputs to outputs connected to the AVCaptureSession instance. This call blocks until the session object has completely started up or failed. A failure to start running is reported through the AVCaptureSessionRuntimeErrorNotification mechanism. If you've called -beginConfiguration, you must call -commitConfiguration before invoking -startRunning, otherwise an NSGenericException is thrown.
  */
 - (void)startRunning;
 
@@ -494,7 +618,7 @@ API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0), tvos(17.0), visionos(1.0
     Stops an AVCaptureSession instance that is currently running.
  
  @discussion
-    Clients invoke -stopRunning to stop the flow of data from inputs to outputs connected to the AVCaptureSession instance. This call blocks until the session object has completely stopped.
+    Clients invoke -stopRunning to stop the flow of data from inputs to outputs connected to the AVCaptureSession instance. This call blocks until the session object has completely stopped. -stopRunning may not be called while the session is being configured. If you've called -beginConfiguration, you must call -commitConfiguration before invoking -stopRunning, otherwise an NSGenericException is thrown.
  */
 - (void)stopRunning;
 
@@ -535,15 +659,83 @@ API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0), tvos(17.0), visionos(1.0
     The value of this property is a float from 0.0 => 1.0 indicating how much of the session's available hardware is in use as a percentage, given the currently connected inputs and outputs and the features for which you've opted in. When your hardwareCost is greater than 1.0, the capture session cannot run your desired configuration due to hardware constraints, so you receive an AVCaptureSessionRuntimeErrorNotification when attempting to start it running. Default value is 0.
  
     Contributors to hardwareCost include:
-        - Whether the source devices' active formats use the full sensor (4:3) or a crop (16:9). Cropped formats require lower hardware bandwidth, and therefore lower the cost.
-        - The max frame rate supported by the source devices' active formats. The higher the max frame rate, the higher the cost.
-        - Whether the source devices' active formats are binned or not. Binned formats require substantially less hardware bandwidth, and therefore result in a lower cost.
+        - Whether the source device's active format uses the full sensor (4:3) or a crop (16:9). Cropped formats require lower hardware bandwidth, and therefore lower the cost.
+        - The max frame rate supported by the source device's active format. The higher the max frame rate, the higher the cost.
+        - Whether the source device's active format is binned or not. Binned formats require substantially less hardware bandwidth, and therefore result in a lower cost.
         - The number of sources configured to deliver streaming disparity / depth via AVCaptureDepthDataOutput. The higher the number of cameras configured to produce depth, the higher the cost.
+    For AVCaptureMultiCamSessions, all of the source devices' active formats contribute to hardwareCost.
     In order to reduce hardwareCost, consider picking a sensor-cropped activeFormat, or a binned format. You may also use AVCaptureDeviceInput's videoMinFrameDurationOverride property to artificially limit the max frame rate (which is the reciprocal of the min frame duration) of a source device to a lower value. By doing so, you only pay the hardware cost for the max frame rate you intend to use.
  
     AVCaptureMultiCamSessions always computes this hardwareCost. AVCaptureSessions only computes a non-zero hardwareCost when multiple AVCaptureVideoDataOutputs or an AVCaptureMovieFileOutput and one or more AVCaptureVideoDataOutputs are added to the session.
  */
 @property(nonatomic, readonly) float hardwareCost API_AVAILABLE(ios(16.0), macCatalyst(16.0), tvos(17.0)) API_UNAVAILABLE(macos, visionos) API_UNAVAILABLE(watchos);
+
+@end
+
+
+/*!
+ @protocol AVCaptureSessionControlsDelegate
+ @abstract
+    Defines an interface for delegates of `AVCaptureSession` to receive events about the session's controls.
+ */
+API_AVAILABLE(macos(15.0), ios(18.0), macCatalyst(18.0), tvos(18.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(watchos)
+@protocol AVCaptureSessionControlsDelegate <NSObject>
+
+@required
+
+/*!
+ @method sessionControlsDidBecomeActive:
+ @abstract
+    Called when the controls of an `AVCaptureSession` instance become active and are available for interaction.
+ 
+ @param session
+    The `AVCaptureSession` instance whose controls are active.
+ 
+ @discussion
+    Delegates receive this message when the controls of an `AVCaptureSession` instance become active and are available for interaction.
+ */
+- (void)sessionControlsDidBecomeActive:(AVCaptureSession *)session;
+
+
+/*!
+ @method sessionControlsWillEnterFullscreenAppearance:
+ @abstract
+    Called when the controls of an `AVCaptureSession` instance will enter a fullscreen appearance.
+ 
+ @param session
+    The `AVCaptureSession` instance whose controls will enter a fullscreen appearance.
+ 
+ @discussion
+    When the controls enter a fullscreen appearance, applications are encouraged to hide portions of their user interface including zoom or exposure sliders and shutter buttons. Few on-screen elements should be visible so users can focus on the controls they are interacting with and view the camera preview unobstructed.
+ */
+- (void)sessionControlsWillEnterFullscreenAppearance:(AVCaptureSession *)session;
+
+/*!
+ @method sessionControlsWillExitFullscreenAppearance:
+ @abstract
+    Called when the controls of an `AVCaptureSession` instance will exit a fullscreen appearance.
+ 
+ @param session
+    The `AVCaptureSession` instance whose controls will exit a fullscreen appearance.
+ 
+ @discussion
+    Delegates receive this message when the controls of an `AVCaptureSession` instance should resume showing portions of their user interface that were hidden in response to receiving `-sessionControlsWillEnterFullscreenAppearance:`. This message is sent before `sessionControlsDidBecomeInactive:`.
+ */
+- (void)sessionControlsWillExitFullscreenAppearance:(AVCaptureSession *)session;
+
+
+/*!
+ @method sessionControlsDidBecomeInactive:
+ @abstract
+    Called when the controls of an `AVCaptureSession` instance become inactive and are no longer available for interaction.
+ 
+ @param session
+    The `AVCaptureSession` instance whose controls are inactive.
+ 
+ @discussion
+    Delegates receive this message when the controls of an `AVCaptureSession` instance become inactive and are no longer available for interaction.
+ */
+- (void)sessionControlsDidBecomeInactive:(AVCaptureSession *)session;
 
 @end
 
@@ -802,7 +994,7 @@ AV_INIT_UNAVAILABLE
     Indicates whether the video flowing through the connection should be mirrored about its vertical axis.
  
  @discussion
-    This property is only applicable to AVCaptureConnection instances involving video. if -isVideoMirroringSupported returns YES, videoMirrored may be set to flip the video about its vertical axis and produce a mirror-image effect.
+    This property is only applicable to AVCaptureConnection instances involving video. if -isVideoMirroringSupported returns YES, videoMirrored may be set to flip the video about its vertical axis and produce a mirror-image effect. This property may not be set unless -isVideoMirroringSupported returns YES, otherwise a NSInvalidArgumentException is thrown. This property may not be set if -automaticallyAdjustsVideoMirroring returns YES, otherwise an NSInvalidArgumentException is thrown.
  */
 @property(nonatomic, getter=isVideoMirrored) BOOL videoMirrored;
 
@@ -838,6 +1030,8 @@ AV_INIT_UNAVAILABLE
  
  @discussion
     This property is only applicable to AVCaptureConnection instances involving video or depth. -setVideoRotationAngle: throws an NSInvalidArgumentException if set to an unsupported value (see -isVideoRotationAngleSupported:). Note that setting videoRotationAngle does not necessarily result in physical rotation of video buffers. For instance, a video connection to an AVCaptureMovieFileOutput handles orientation using a Quicktime track matrix. In the AVCapturePhotoOutput, orientation is handled using Exif tags. And the AVCaptureVideoPreviewLayer applies transforms to its contents to perform rotations. However, the AVCaptureVideoDataOutput and AVCaptureDepthDataOutput do output physically rotated video buffers. Setting a video rotation angle for an output that does physically rotate buffers requires a lengthy configuration of the capture render pipeline and should be done before calling -[AVCaptureSession startRunning].
+
+    Starting with the Spring 2024 iPad line, the default value of videoRotationAngle is 180 degrees for video data on Front Camera as compared to 0 degrees on previous devices. So clients using AVCaptureVideoDataOutput and AVCaptureDepthDataOutput should set videoRotationAngle to 0 to avoid the physical buffer rotation described above. And clients rotating video data by themselves must account for the default value of videoRotationAngle when applying angles (videoRotationAngleForHorizonLevelPreview, videoRotationAngleForHorizonLevelCapture) from AVCaptureDeviceRotationCoordinator. Note that this change in default value is currently limited to these iPads, however it is recommended that clients rotating video data themselves incorporate the default rotation value into their workflows for all devices.
  */
 @property(nonatomic) CGFloat videoRotationAngle API_AVAILABLE(macos(14.0), ios(17.0), macCatalyst(17.0), tvos(17.0)) API_UNAVAILABLE(visionos);
 
@@ -857,7 +1051,7 @@ AV_INIT_UNAVAILABLE
     Indicates whether the video flowing through the connection should be rotated to a given orientation.
  
  @discussion
-    This property is deprecated. Use -videoRotationAngle instead.
+    This property is deprecated. Use -videoRotationAngle instead. This property may only be set if -isVideoOrientationSupported returns YES, otherwise an NSInvalidArgumentException is thrown.
  */
 @property(nonatomic) AVCaptureVideoOrientation videoOrientation API_DEPRECATED("Use -videoRotationAngle instead", macos(10.7, 14.0), ios(4.0, 17.0), macCatalyst(14.0, 17.0)) API_UNAVAILABLE(tvos, visionos);
 

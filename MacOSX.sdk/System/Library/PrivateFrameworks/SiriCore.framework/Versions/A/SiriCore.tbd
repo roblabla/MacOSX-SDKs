@@ -40,8 +40,8 @@ exports:
                        SiriCoreSQLiteTableDescription, SiriCoreSiriBackgroundConnection, 
                        SiriCoreSiriConnection, SiriCoreSiriConnectionInfo, SiriCoreSiriDaemonLaunchContext, 
                        SiriCoreSpeechPacket, SiriCoreSymptomsReporter, SiriCoreSyncDatabase, 
-                       SiriCoreSyncRecord, SiriCoreWLANDelegate, SiriCoreWiFiManagerClient, 
-                       SiriCoreZlibDataCompressor, SiriCoreZlibDataDecompressor, 
+                       SiriCoreSyncRecord, SiriCoreTrialUtilities, SiriCoreWLANDelegate, 
+                       SiriCoreWiFiManagerClient, SiriCoreZlibDataCompressor, SiriCoreZlibDataDecompressor, 
                        _SAMetricsSendCompletionsProxy, _SiriCoreSQLiteColumnInfo, 
                        _SiriCoreSQLiteIndexInfo, _SiriCoreSQLiteTableInfo ]
     objc-ivars:      [ _SAMetricsSendCompletionsProxy._blocks ]

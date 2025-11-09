@@ -7,6 +7,7 @@
 #error "Please import the NetworkExtension module instead of this file directly."
 #endif
 
+#import <Network/Network.h>
 #import <NetworkExtension/NETunnelProvider.h>
 
 NS_ASSUME_NONNULL_BEGIN
@@ -64,6 +65,13 @@ API_AVAILABLE(macos(10.11), ios(9.0), tvos(17.0)) API_UNAVAILABLE(watchos)
 @property (readonly) NEPacketTunnelFlow *packetFlow API_AVAILABLE(macos(10.11), ios(9.0), tvos(17.0)) API_UNAVAILABLE(watchos);
 
 /*!
+ * @property virtualInterface
+ * @abstract The virtual network interface used to route packets to the packet tunnel provider.
+ * @discussion For NEPacketTunnelProvider sub-classes, this property will be non-nil when `-[NEPacketTunnelProvider startTunnelWithOptions:completionHandler:]` is called. For NEEthernetTunnelProvider sub-classes, this property will be non-nil when the completion handler passed to `-[NETunnelProvider setTunnelNetworkSettings:completionHandler:]` is executed. To create a connection through the tunnel, pass this interface to `nw_parameters_require_interface`.
+ */
+@property (readonly, nullable) nw_interface_t virtualInterface API_AVAILABLE(macos(15.0), ios(18.0), tvos(18.0), visionos(2.0)) API_UNAVAILABLE(watchos);
+
+/*!
  * @method createTCPConnectionThroughTunnelToEndpoint:enableTLS:TLSParameters:delegate:
  * @discussion This function can be called by subclass implementations to create a TCP connection to a given network endpoint, through the tunnel established by the provider. This function should not be overridden by subclasses.
  * @param remoteEndpoint An NWEndpoint object that specifies the remote network endpoint to connect to.
@@ -72,7 +80,7 @@ API_AVAILABLE(macos(10.11), ios(9.0), tvos(17.0)) API_UNAVAILABLE(watchos)
  * @param delegate An object to use as the connection delegate. This object should conform to the NWTCPConnectionAuthenticationDelegate protocol.
  * @return An NWTCPConnection object.
  */
-- (NWTCPConnection *)createTCPConnectionThroughTunnelToEndpoint:(NWEndpoint *)remoteEndpoint enableTLS:(BOOL)enableTLS TLSParameters:(nullable NWTLSParameters *)TLSParameters delegate:(nullable id)delegate API_AVAILABLE(macos(10.11), ios(9.0), tvos(17.0)) API_UNAVAILABLE(watchos);
+- (NWTCPConnection *)createTCPConnectionThroughTunnelToEndpoint:(NWEndpoint *)remoteEndpoint enableTLS:(BOOL)enableTLS TLSParameters:(nullable NWTLSParameters *)TLSParameters delegate:(nullable id)delegate API_DEPRECATED("Use the `virtualInterface` property with `nw_parameters_require_interface`", macos(10.11, 15.0), ios(9.0, 18.0), tvos(17.0, 18.0), visionos(1.0, 2.0)) API_UNAVAILABLE(watchos);
 
 /*!
  * @method createUDPSessionThroughTunnelToEndpoint:fromEndpoint:
@@ -81,7 +89,7 @@ API_AVAILABLE(macos(10.11), ios(9.0), tvos(17.0)) API_UNAVAILABLE(watchos)
  * @param localEndpoint An NWHostEndpoint object that specifies the local IP address endpoint to use as the source endpoint of the UDP session.
  * @return An NWUDPSession object.
  */
-- (NWUDPSession *)createUDPSessionThroughTunnelToEndpoint:(NWEndpoint *)remoteEndpoint fromEndpoint:(nullable NWHostEndpoint *)localEndpoint API_AVAILABLE(macos(10.11), ios(9.0), tvos(17.0)) API_UNAVAILABLE(watchos);
+- (NWUDPSession *)createUDPSessionThroughTunnelToEndpoint:(NWEndpoint *)remoteEndpoint fromEndpoint:(nullable NWHostEndpoint *)localEndpoint API_DEPRECATED("Use the `virtualInterface` property with `nw_parameters_require_interface`", macos(10.11, 15.0), ios(9.0, 18.0), tvos(17.0, 18.0), visionos(1.0, 2.0)) API_UNAVAILABLE(watchos);
 
 @end
 

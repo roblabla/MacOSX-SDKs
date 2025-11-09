@@ -18,6 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
  @see ARSkeletonDefinition
  */
 API_AVAILABLE(ios(13.0))
+NS_SWIFT_SENDABLE
 @interface ARSkeleton : NSObject
 
 /**
@@ -48,6 +49,7 @@ API_AVAILABLE(ios(13.0))
  An object representing a skeleton in 3D.
  */
 API_AVAILABLE(ios(13.0))
+NS_SWIFT_SENDABLE
 @interface ARSkeleton3D : ARSkeleton
 
 /**
@@ -88,6 +90,7 @@ API_AVAILABLE(ios(13.0))
  An object representing a skeleton in 2D.
  */
 API_AVAILABLE(ios(13.0))
+NS_SWIFT_SENDABLE
 @interface ARSkeleton2D : ARSkeleton
 
 /**

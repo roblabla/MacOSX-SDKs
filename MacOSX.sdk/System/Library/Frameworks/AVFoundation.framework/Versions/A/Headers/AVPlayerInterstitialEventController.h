@@ -4,10 +4,11 @@
 
 	Framework:  AVFoundation
  
-   Copyright:  2020-2023 by Apple Inc., all rights reserved.
+   Copyright:  2020-2024 by Apple Inc., all rights reserved.
 
 */
 
+#import <Foundation/Foundation.h>
 #import <AVFoundation/AVPlayer.h>
 #import <AVFoundation/AVPlayerItem.h>
 
@@ -30,7 +31,7 @@ typedef NS_OPTIONS(NSUInteger, AVPlayerInterstitialEventRestrictions) {
 	AVPlayerInterstitialEventRestrictionRequiresPlaybackAtPreferredRateForAdvancement = (1UL << 2),
 	
 	AVPlayerInterstitialEventRestrictionDefaultPolicy = AVPlayerInterstitialEventRestrictionNone
-} NS_SWIFT_NAME(AVPlayerInterstitialEvent.Restrictions) API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0));
+} NS_SWIFT_NAME(AVPlayerInterstitialEvent.Restrictions) API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0), visionos(1.0));
 
 /*!
   @enum         AVPlayerInterstitialEventCue
@@ -43,10 +44,24 @@ typedef NS_OPTIONS(NSUInteger, AVPlayerInterstitialEventRestrictions) {
   @constant     AVPlayerInterstitialEventLeaveCue
 	Event playback should occur after primary playback ends without error, either at the end of the primary asset or at the client-specified forward playback end time.
 */
-typedef NSString * AVPlayerInterstitialEventCue NS_TYPED_ENUM NS_SWIFT_NAME(AVPlayerInterstitialEvent.Cue) API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0), watchos(9.0));
-AVF_EXPORT AVPlayerInterstitialEventCue const AVPlayerInterstitialEventNoCue                                   API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0), watchos(9.0));
-AVF_EXPORT AVPlayerInterstitialEventCue const AVPlayerInterstitialEventJoinCue                                 API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0), watchos(9.0));
-AVF_EXPORT AVPlayerInterstitialEventCue const AVPlayerInterstitialEventLeaveCue                                API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0), watchos(9.0));
+typedef NSString * AVPlayerInterstitialEventCue NS_TYPED_ENUM NS_SWIFT_NAME(AVPlayerInterstitialEvent.Cue) API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0), watchos(9.0), visionos(1.0));
+AVF_EXPORT AVPlayerInterstitialEventCue const AVPlayerInterstitialEventNoCue                                   API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0), watchos(9.0), visionos(1.0));
+AVF_EXPORT AVPlayerInterstitialEventCue const AVPlayerInterstitialEventJoinCue                                 API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0), watchos(9.0), visionos(1.0));
+AVF_EXPORT AVPlayerInterstitialEventCue const AVPlayerInterstitialEventLeaveCue                                API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0), watchos(9.0), visionos(1.0));
+
+/*!
+  @enum         AVPlayerInterstitialEventTimelineOccupancy
+  @abstract     These constants specify how an event occupies time on AVPlayerItemIntegratedTimeline.
+
+  @constant     AVPlayerInterstitialEventTimelineOccupancySinglePoint
+	Indicates this interstitial event occupies a single point on AVPlayerItemIntegratedTimeline.
+  @constant     AVPlayerInterstitialEventTimelineOccupancyFill
+	Indicates this interstitial event fills AVPlayerItemIntegratedTimeline with the duration of this event.
+*/
+typedef NS_ENUM(NSInteger, AVPlayerInterstitialEventTimelineOccupancy) {
+	AVPlayerInterstitialEventTimelineOccupancySinglePoint = 0,
+	AVPlayerInterstitialEventTimelineOccupancyFill = 1,
+} NS_SWIFT_NAME(AVPlayerInterstitialEvent.TimelineOccupancy) API_AVAILABLE(macos(15.0), ios(18.0), tvos(18.0), watchos(11.0), visionos(2.0));
 
 /*!
   @class        AVPlayerInterstitialEvent
@@ -66,7 +81,7 @@ AVF_EXPORT AVPlayerInterstitialEventCue const AVPlayerInterstitialEventLeaveCue 
 	Note that while previously AVPlayerInterstitialEvent was an immutable object, it is now mutable. This allows it to be created and customized before being set on an AVPlayerInterstitialEventController.
 */
 NS_SWIFT_NONSENDABLE
-API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0))
+API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0), visionos(1.0))
 @interface AVPlayerInterstitialEvent : NSObject <NSCopying>
 
 AV_INIT_UNAVAILABLE
@@ -91,7 +106,7 @@ AV_INIT_UNAVAILABLE
 			    Storage for attributes defined by the client or the content vendor. Attribute names should begin with X- for uniformity with server insertion.
   @result       An instance of AVPlayerInterstitialEvent.
 */
-+ (instancetype)interstitialEventWithPrimaryItem:(AVPlayerItem *)primaryItem identifier:(nullable NSString *)identifier time:(CMTime)time templateItems:(NSArray<AVPlayerItem *> *)templateItems restrictions:(AVPlayerInterstitialEventRestrictions)restrictions resumptionOffset:(CMTime)resumptionOffset playoutLimit:(CMTime)playoutLimit userDefinedAttributes:(nullable NSDictionary*)userDefinedAttributes NS_REFINED_FOR_SWIFT API_DEPRECATED_WITH_REPLACEMENT("interstitialEventWithPrimaryItem:time:", macos(12.0, API_TO_BE_DEPRECATED), ios(15.0, API_TO_BE_DEPRECATED), tvos(15.0, API_TO_BE_DEPRECATED), watchos(8.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(visionos);
++ (instancetype)interstitialEventWithPrimaryItem:(AVPlayerItem *)primaryItem identifier:(nullable NSString *)identifier time:(CMTime)time templateItems:(NSArray<AVPlayerItem *> *)templateItems restrictions:(AVPlayerInterstitialEventRestrictions)restrictions resumptionOffset:(CMTime)resumptionOffset playoutLimit:(CMTime)playoutLimit userDefinedAttributes:(nullable NSDictionary*)userDefinedAttributes NS_REFINED_FOR_SWIFT API_DEPRECATED("Use interstitialEventWithPrimaryItem:time: instead", macos(12.0, 15.0), ios(15.0, 18.0), tvos(15.0, 18.0), watchos(8.0, 11.0)) API_UNAVAILABLE(visionos);
 
 /*!
   @method       interstitialEventWithPrimaryItem:date:templateItems:restrictions:resumptionOffset:
@@ -114,7 +129,7 @@ AV_INIT_UNAVAILABLE
 			    Storage for attributes defined by the client or the content vendor. Attribute names should begin with X- for uniformity with server insertion.
   @result       An instance of AVPlayerInterstitialEvent.
 */
-+ (instancetype)interstitialEventWithPrimaryItem:(AVPlayerItem *)primaryItem identifier:(nullable NSString *)identifier date:(NSDate *)date templateItems:(NSArray<AVPlayerItem *> *)templateItems restrictions:(AVPlayerInterstitialEventRestrictions)restrictions resumptionOffset:(CMTime)resumptionOffset playoutLimit:(CMTime)playoutLimit userDefinedAttributes:(nullable NSDictionary*)userDefinedAttributes NS_REFINED_FOR_SWIFT API_DEPRECATED_WITH_REPLACEMENT("interstitialEventWithPrimaryItem:date:", macos(12.0, API_TO_BE_DEPRECATED), ios(15.0, API_TO_BE_DEPRECATED), tvos(15.0, API_TO_BE_DEPRECATED), watchos(8.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(visionos);
++ (instancetype)interstitialEventWithPrimaryItem:(AVPlayerItem *)primaryItem identifier:(nullable NSString *)identifier date:(NSDate *)date templateItems:(NSArray<AVPlayerItem *> *)templateItems restrictions:(AVPlayerInterstitialEventRestrictions)restrictions resumptionOffset:(CMTime)resumptionOffset playoutLimit:(CMTime)playoutLimit userDefinedAttributes:(nullable NSDictionary*)userDefinedAttributes NS_REFINED_FOR_SWIFT API_DEPRECATED("Use interstitialEventWithPrimaryItem:date: instead", macos(12.0, 15.0), ios(15.0, 18.0), tvos(15.0, 18.0), watchos(8.0, 11.0)) API_UNAVAILABLE(visionos);
 
 /*!
   @method       interstitialEventWithPrimaryItem:time:
@@ -125,7 +140,7 @@ AV_INIT_UNAVAILABLE
                 The time within the duration of the primary item at which playback of the primary content should be temporarily suspended and the interstitial items played.
   @result       An instance of AVPlayerInterstitialEvent.
 */
-+ (instancetype)interstitialEventWithPrimaryItem:(AVPlayerItem *)primaryItem time:(CMTime)time API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0), watchos(9.0));
++ (instancetype)interstitialEventWithPrimaryItem:(AVPlayerItem *)primaryItem time:(CMTime)time API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0), watchos(9.0), visionos(1.0));
 
 /*!
   @method       interstitialEventWithPrimaryItem:date:
@@ -136,7 +151,7 @@ AV_INIT_UNAVAILABLE
                 The date within the date range of the primary item at which playback of the primary content should be temporarily suspended and the interstitial items played.
   @result       An instance of AVPlayerInterstitialEvent.
 */
-+ (instancetype)interstitialEventWithPrimaryItem:(AVPlayerItem *)primaryItem date:(NSDate *)date API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0), watchos(9.0));
++ (instancetype)interstitialEventWithPrimaryItem:(AVPlayerItem *)primaryItem date:(NSDate *)date API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0), watchos(9.0), visionos(1.0));
 
 /*!
   @property     primaryItem
@@ -203,7 +218,7 @@ AV_INIT_UNAVAILABLE
   @discussion
     If true, the start time or date of the interstitial will be adjusted to the nearest segment boundary when the primary player is playing an HTTP Live Streaming asset.
 */
-@property (nonatomic, readonly) BOOL alignsStartWithPrimarySegmentBoundary API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0), watchos(9.0));
+@property (nonatomic, readonly) BOOL alignsStartWithPrimarySegmentBoundary API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0), watchos(9.0), visionos(1.0));
 
 /*!
   @property     alignsResumptionWithPrimarySegmentBoundary
@@ -211,13 +226,13 @@ AV_INIT_UNAVAILABLE
   @discussion
     If true, the resumption time of primary playback following an interstitial will be adjusted to the nearest segment boundary when the primary player is playing an HTTP Live Streaming asset.
 */
-@property (nonatomic, readonly) BOOL alignsResumptionWithPrimarySegmentBoundary API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0), watchos(9.0));
+@property (nonatomic, readonly) BOOL alignsResumptionWithPrimarySegmentBoundary API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0), watchos(9.0), visionos(1.0));
 
 /*!
   @property     cue
   @abstract     The cue property is used to schedule event playback at a predefined position of primary playback.
 */
-@property (nonatomic, readonly) AVPlayerInterstitialEventCue cue API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0), watchos(9.0));
+@property (nonatomic, readonly) AVPlayerInterstitialEventCue cue API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0), watchos(9.0), visionos(1.0));
 
 /*!
   @property     willPlayOnce
@@ -225,7 +240,7 @@ AV_INIT_UNAVAILABLE
   @discussion
     The "once" provision takes effect at the start of interstitial playback. The interstitial will not be scheduled again even if the first playback is canceled before completion.
 */
-@property (nonatomic, readonly) BOOL willPlayOnce API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0), watchos(9.0));
+@property (nonatomic, readonly) BOOL willPlayOnce API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0), watchos(9.0), visionos(1.0));
 
 /*!
   @property     userDefinedAttributes
@@ -233,14 +248,14 @@ AV_INIT_UNAVAILABLE
   @discussion
     Dictionary keys are attribute names. Dictionary values are attribute values.
 */
-@property (nonatomic, readonly) NSDictionary *userDefinedAttributes;
+@property (nonatomic, readonly) NSDictionary * NS_SWIFT_SENDABLE userDefinedAttributes;
 
 /*!
   @property     assetListResponse
   @abstract     The asset list JSON response as a dictionary, or nil if no asset list response has been loaded for the event.
   @discussion   If the AVPlayerInterstitialEvent's templateItems is empty and the assetListResponse is nil, then an asset list read is expected. If the AVPlayerInterstitialEvent's templateItems is not empty and the assetListResponse is nil, then an asset list read is not expected.
 */
-@property (nonatomic, readonly, nullable) NSDictionary *assetListResponse API_AVAILABLE(macos(13.3), ios(16.4), tvos(16.4), watchos(9.4));
+@property (readonly, nullable) NSDictionary * NS_SWIFT_SENDABLE assetListResponse API_AVAILABLE(macos(13.3), ios(16.4), tvos(16.4), watchos(9.4), visionos(1.0));
 
 /*!
   @enum AVPlayerInterstitialEventAssetListResponseStatus
@@ -257,24 +272,51 @@ typedef NS_ENUM(NSInteger, AVPlayerInterstitialEventAssetListResponseStatus) {
 	AVPlayerInterstitialEventAssetListResponseStatusAvailable = 0,
 	AVPlayerInterstitialEventAssetListResponseStatusCleared = 1,
 	AVPlayerInterstitialEventAssetListResponseStatusUnavailable = 2
-} API_AVAILABLE(macos(13.3), ios(16.4), tvos(16.4), watchos(9.4));
+} API_AVAILABLE(macos(13.3), ios(16.4), tvos(16.4), watchos(9.4), visionos(1.0));
 
+/*!
+  @property     timelineOccupancy
+  @abstract     Indicates this event's occupancy on AVPlayerItemIntegratedTimeline. The default value is AVPlayerInterstitialEventTimelineSinglePointOccupancy.
+*/
+@property (nonatomic, readonly) AVPlayerInterstitialEventTimelineOccupancy timelineOccupancy API_AVAILABLE(macos(15.0), ios(18.0), tvos(18.0), watchos(11.0), visionos(2.0));
+
+/*!
+  @property     supplementsPrimaryContent
+  @abstract     Indicates this event will supplement the primary content and should be presented unified with the primary item. The default value is NO.
+*/
+@property (nonatomic, readonly) BOOL supplementsPrimaryContent API_AVAILABLE(macos(15.0), ios(18.0), tvos(18.0), watchos(11.0), visionos(2.0));
+
+/*!
+  @property     contentMayVary
+  @abstract     Indicates this event's content is dynamic and server may respond with different interstitial assets for other particpants in coordinated playback.
+  @discussion   Indicates this event's content is dynamic and server may respond with different interstitial assets for other particpants in coordinated playback. If this value is set to NO and the primary asset is particpating in coordinated playback, this event will participate in coordinated playback as well. The default value is YES.
+*/
+@property (nonatomic, readonly) BOOL contentMayVary API_AVAILABLE(macos(15.0), ios(18.0), tvos(18.0), watchos(11.0), visionos(2.0));
 @end
 
 @interface AVPlayerInterstitialEvent (MutableEvents)
-@property (nonatomic, readwrite, weak) AVPlayerItem *primaryItem API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0), watchos(9.0));
-@property (nonatomic, readwrite, copy) NSString *identifier API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0), watchos(9.0));
-@property (nonatomic, readwrite) CMTime time API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0), watchos(9.0));
-@property (nonatomic, readwrite, copy, nullable) NSDate *date API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0), watchos(9.0));
-@property (nonatomic, readwrite, copy) NSArray<AVPlayerItem *> *templateItems API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0), watchos(9.0));
-@property (nonatomic, readwrite) AVPlayerInterstitialEventRestrictions restrictions API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0), watchos(9.0));
-@property (nonatomic, readwrite) CMTime resumptionOffset API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0), watchos(9.0));
-@property (nonatomic, readwrite) CMTime playoutLimit API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0), watchos(9.0));
-@property (nonatomic, readwrite) BOOL alignsStartWithPrimarySegmentBoundary API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0), watchos(9.0));
-@property (nonatomic, readwrite) BOOL alignsResumptionWithPrimarySegmentBoundary API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0), watchos(9.0));
-@property (nonatomic, readwrite, retain) AVPlayerInterstitialEventCue cue API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0), watchos(9.0));
-@property (nonatomic, readwrite) BOOL willPlayOnce API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0), watchos(9.0));
-@property (nonatomic, readwrite, copy) NSDictionary *userDefinedAttributes API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0), watchos(9.0));
+@property (nonatomic, readwrite, weak) AVPlayerItem *primaryItem API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0), watchos(9.0), visionos(1.0));
+@property (nonatomic, readwrite, copy) NSString *identifier API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0), watchos(9.0), visionos(1.0));
+@property (nonatomic, readwrite) CMTime time API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0), watchos(9.0), visionos(1.0));
+@property (nonatomic, readwrite, copy, nullable) NSDate *date API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0), watchos(9.0), visionos(1.0));
+@property (nonatomic, readwrite, copy) NSArray<AVPlayerItem *> *templateItems API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0), watchos(9.0), visionos(1.0));
+@property (nonatomic, readwrite) AVPlayerInterstitialEventRestrictions restrictions API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0), watchos(9.0), visionos(1.0));
+@property (nonatomic, readwrite) CMTime resumptionOffset API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0), watchos(9.0), visionos(1.0));
+@property (nonatomic, readwrite) CMTime playoutLimit API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0), watchos(9.0), visionos(1.0));
+@property (nonatomic, readwrite) BOOL alignsStartWithPrimarySegmentBoundary API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0), watchos(9.0), visionos(1.0));
+@property (nonatomic, readwrite) BOOL alignsResumptionWithPrimarySegmentBoundary API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0), watchos(9.0), visionos(1.0));
+@property (nonatomic, readwrite, retain) AVPlayerInterstitialEventCue cue API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0), watchos(9.0), visionos(1.0));
+@property (nonatomic, readwrite) BOOL willPlayOnce API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0), watchos(9.0), visionos(1.0));
+@property (nonatomic, readwrite, copy) NSDictionary * NS_SWIFT_SENDABLE userDefinedAttributes API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0), watchos(9.0), visionos(1.0));
+@property (nonatomic, readwrite) AVPlayerInterstitialEventTimelineOccupancy timelineOccupancy API_AVAILABLE(macos(15.0), ios(18.0), tvos(18.0), watchos(11.0), visionos(2.0));
+@property (nonatomic, readwrite) BOOL supplementsPrimaryContent API_AVAILABLE(macos(15.0), ios(18.0), tvos(18.0), watchos(11.0), visionos(2.0));
+@property (nonatomic, readwrite) BOOL contentMayVary API_AVAILABLE(macos(15.0), ios(18.0), tvos(18.0), watchos(11.0), visionos(2.0));
+
+/*!
+  @property     plannedDuration
+  @abstract     Indicates the event's planned duration. The default value is kCMTimeInvalid.
+*/
+@property (nonatomic, readwrite) CMTime plannedDuration API_AVAILABLE(macos(15.0), ios(18.0), tvos(18.0), watchos(11.0), visionos(2.0));
 @end
 
 /*!
@@ -286,8 +328,10 @@ typedef NS_ENUM(NSInteger, AVPlayerInterstitialEventAssetListResponseStatus) {
   @discussion
     The schedule of interstitial events is provided as an array of AVPlayerInterstitialEvents. For each AVPlayerInterstitialEvent, when the primary player's current item is the primary item of the interstitial event and its currentDate reaches the date of the event, playback of the primary item by the primary player is temporarily suspended, i.e. its timeControlStatus changes to AVPlayerTimeControlStatusWaitingToPlayAtSpecifiedRate and its reasonForWaitingToPlay will change to AVPlayerWaitingDuringInterstitialEventReason. During this suspension, playback of items that replicate the interstitial template items of the event are played by the interstitial player, which temporarily assumes the output configuration of the primary player; for example, its visual content will be routed to AVPlayerLayers that reference the primary player. Once the interstitial player has advanced through playback of the interstitial items specified by the event or its current item otherwise becomes nil, playback of the primary content will resume, at an offset from the time at which it was suspended as specified by the event.
   
+    Subclasses of this type that are used from Swift must fulfill the requirements of a Sendable type.
 */
-API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0))
+NS_SWIFT_SENDABLE
+API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0), visionos(1.0))
 @interface AVPlayerInterstitialEventMonitor : NSObject
 
 /*!
@@ -335,13 +379,13 @@ API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0))
   @constant     AVPlayerInterstitialEventMonitorEventsDidChangeNotification
   @abstract     A notification that's posted whenever the value of events of an AVPlayerInterstitialEventMonitor is changed.
 */
-AVF_EXPORT NSNotificationName const AVPlayerInterstitialEventMonitorEventsDidChangeNotification API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0));
+AVF_EXPORT NSNotificationName const AVPlayerInterstitialEventMonitorEventsDidChangeNotification API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0), visionos(1.0));
 
 /*!
   @constant     AVPlayerInterstitialEventMonitorCurrentEventDidChangeNotification
   @abstract     A notification that's posted whenever the currentEvent of an AVPlayerInterstitialEventMonitor changes.
 */
-AVF_EXPORT NSNotificationName const AVPlayerInterstitialEventMonitorCurrentEventDidChangeNotification API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0));
+AVF_EXPORT NSNotificationName const AVPlayerInterstitialEventMonitorCurrentEventDidChangeNotification API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0), visionos(1.0));
 
 /*!
   @constant     AVPlayerInterstitialEventMonitorAssetListResponseStatusDidChangeNotification
@@ -351,28 +395,28 @@ AVF_EXPORT NSNotificationName const AVPlayerInterstitialEventMonitorCurrentEvent
                     2. AVPlayerInterstitialEventMonitorAssetListResponseStatusDidChangeStatusKey, with a value of type AVPlayerInterstitialEventAssetListResponseStatus, indicating the changed asset response status.
                     3. AVPlayerInterstitialEventMonitorAssetListResponseStatusDidChangeErrorKey, with a value of type NSError that carries additional information about the failure to read the asset list. This key is only present when the new AVPlayerInterstitialEventAssetListResponseStatus is AVPlayerInterstitialEventAssetListResponseStatusUnavailable.
 */
-AVF_EXPORT NSNotificationName const AVPlayerInterstitialEventMonitorAssetListResponseStatusDidChangeNotification API_AVAILABLE(macos(13.3), ios(16.4), tvos(16.4), watchos(9.4));
+AVF_EXPORT NSNotificationName const AVPlayerInterstitialEventMonitorAssetListResponseStatusDidChangeNotification API_AVAILABLE(macos(13.3), ios(16.4), tvos(16.4), watchos(9.4), visionos(1.0));
 
 /*!
   @constant     AVPlayerInterstitialEventMonitorAssetListResponseStatusDidChangeEventKey
   @abstract     The dictionary key for the AVPlayerInterstitial event that had its asset list response status changed in the payload of the AVPlayerInterstitialEventMonitorAssetListResponseStatusDidChangeNotification.
   @discussion   The value corresponding to this key is of type AVPlayerInterstitialEvent.
 */
-AVF_EXPORT NSString *const AVPlayerInterstitialEventMonitorAssetListResponseStatusDidChangeEventKey API_AVAILABLE(macos(13.3), ios(16.4), tvos(16.4), watchos(9.4));
+AVF_EXPORT NSString *const AVPlayerInterstitialEventMonitorAssetListResponseStatusDidChangeEventKey API_AVAILABLE(macos(13.3), ios(16.4), tvos(16.4), watchos(9.4), visionos(1.0));
 
 /*!
   @constant     AVPlayerInterstitialEventMonitorAssetListResponseStatusDidChangeStatusKey
   @abstract     The dictionary key for the asset list response status in the payload of the AVPlayerInterstitialEventMonitorAssetListResponseStatusDidChangeNotification.
   @discussion   The value corresponding to this key is of type AVPlayerInterstitialEventAssetListResponseStatus.
 */
-AVF_EXPORT NSString *const AVPlayerInterstitialEventMonitorAssetListResponseStatusDidChangeStatusKey API_AVAILABLE(macos(13.3), ios(16.4), tvos(16.4), watchos(9.4));
+AVF_EXPORT NSString *const AVPlayerInterstitialEventMonitorAssetListResponseStatusDidChangeStatusKey API_AVAILABLE(macos(13.3), ios(16.4), tvos(16.4), watchos(9.4), visionos(1.0));
 
 /*!
   @constant     AVPlayerInterstitialEventMonitorAssetListResponseStatusDidChangeErrorKey
   @abstract     The dictionary key for the NSError in the payload of the AVPlayerInterstitialEventMonitorAssetListResponseStatusDidChangeNotification.
   @discussion   The value corresponding to this key is of type NSError. This key only exists in the payload of AVPlayerInterstitialEventMonitorAssetListResponseStatusDidChangeNotification if AVPlayerInterstitialEventMonitorAssetListResponseStatusDidChangeStatusKey in the same payload points to a value of AVPlayerInterstitialEventAssetListResponseStatusUnavailable.
 */
-AVF_EXPORT NSString *const AVPlayerInterstitialEventMonitorAssetListResponseStatusDidChangeErrorKey API_AVAILABLE(macos(13.3), ios(16.4), tvos(16.4), watchos(9.4));
+AVF_EXPORT NSString *const AVPlayerInterstitialEventMonitorAssetListResponseStatusDidChangeErrorKey API_AVAILABLE(macos(13.3), ios(16.4), tvos(16.4), watchos(9.4), visionos(1.0));
 
 /*!
   @class        AVPlayerInterstitialEventController
@@ -384,8 +428,9 @@ AVF_EXPORT NSString *const AVPlayerInterstitialEventMonitorAssetListResponseStat
   @discussion
     The schedule of interstitial events is specified as an array of AVPlayerInterstitialEvents. For each AVPlayerInterstitialEvent, when the primary player's current item is the primary item of the interstitial event and its currentDate reaches the date of the event, playback of the primary item by the primary player is temporarily suspended, i.e. its timeControlStatus changes to AVPlayerTimeControlStatusWaitingToPlayAtSpecifiedRate and its reasonForWaitingToPlay will change to AVPlayerWaitingDuringInterstitialEventReason. During this suspension, playback of items that replicate the interstitial template items of the event are played by the interstitial player, which temporarily assumes the output configuration of the primary player; for example, its visual content will be routed to AVPlayerLayers that reference the primary player. Once the interstitial player has advanced through playback of the interstitial items specified by the event or its current item otherwise becomes nil, playback of the primary content will resume, at an offset from the time at which it was suspended as specified by the event.
 
+    Subclasses of this type that are used from Swift must fulfill the requirements of a Sendable type.
 */
-API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0))
+API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0), visionos(1.0))
 @interface AVPlayerInterstitialEventController : AVPlayerInterstitialEventMonitor
 
 /*!
@@ -444,7 +489,7 @@ API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0))
  @discussion
     The player is waiting for playback because an interstitial event is currently in progress. Interstitial events can be monitored via use of an AVPlayerInterstitialEventMonitor.
  */
-AVF_EXPORT AVPlayerWaitingReason const AVPlayerWaitingDuringInterstitialEventReason API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0));
+AVF_EXPORT AVPlayerWaitingReason const AVPlayerWaitingDuringInterstitialEventReason API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0), visionos(1.0));
 
 @end
 
@@ -456,16 +501,16 @@ AVF_EXPORT AVPlayerWaitingReason const AVPlayerWaitingDuringInterstitialEventRea
   @discussion	Before macOS 13, iOS 16, tvOS 16, and watchOS 9, this property must be accessed on the main thread/queue.
  */
 @property (nonatomic) BOOL automaticallyHandlesInterstitialEvents
-#if ! AVF_DEPLOYING_TO_2022_RELEASES_AND_LATER
-NS_SWIFT_UI_ACTOR
+#if AVF_DEPLOYING_TO_2022_RELEASES_AND_LATER
+NS_SWIFT_NONISOLATED
 #endif
-API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0));
+API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0), visionos(1.0));
 
 /*!
   @property     templatePlayerItem
   @abstract     If the item was created automatically according to a template item for looping, for interstitial playback, or for other purposes, indicates the AVPlayerItem that was used as the template.
 */
-@property (nonatomic, readonly, nullable) AVPlayerItem *templatePlayerItem API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0));
+@property (nonatomic, readonly, nullable) AVPlayerItem *templatePlayerItem NS_SWIFT_NONISOLATED API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0), visionos(1.0));
 
 @end
 

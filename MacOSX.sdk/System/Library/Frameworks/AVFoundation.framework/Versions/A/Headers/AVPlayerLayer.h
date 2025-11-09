@@ -48,7 +48,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0)) API_UNAVAILABLE(watchos)
+API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(watchos)
 @interface AVPlayerLayer : CALayer
 {
 @private
@@ -91,7 +91,7 @@ API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 	@property		videoRect
 	@abstract		The current size and position of the video image as displayed within the receiver's bounds.
  */
-@property (nonatomic, readonly) CGRect videoRect API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0)) API_UNAVAILABLE(watchos);
+@property (nonatomic, readonly) CGRect videoRect API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 /*!
 	@property		pixelBufferAttributes
@@ -99,7 +99,7 @@ API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 	@discussion		Pixel buffer attribute keys are defined in <CoreVideo/CVPixelBuffer.h>
 					This property is key-value observable.
  */
-@property (nonatomic, copy, nullable) NSDictionary<NSString *, id> *pixelBufferAttributes API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0)) API_UNAVAILABLE(watchos);
+@property (nonatomic, copy, nullable) NSDictionary<NSString *, id> *pixelBufferAttributes API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 /*!
  	@method			copyDisplayedPixelBuffer
@@ -108,7 +108,7 @@ API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0)) API_UNAVAILABLE(watchos)
  			
  					Do not write to the returned CVPixelBuffer's attachments or pixel data.
  */
-- (nullable CVPixelBufferRef)copyDisplayedPixelBuffer CF_RETURNS_RETAINED API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0)) API_UNAVAILABLE(watchos);
+- (nullable CVPixelBufferRef)copyDisplayedPixelBuffer CF_RETURNS_RETAINED API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 @end
 

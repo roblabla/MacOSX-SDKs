@@ -95,7 +95,7 @@ API_AVAILABLE(macos(14.4), ios(17.4), watchos(10.4), tvos(17.4))
 /// Returns The anticipated compute devices that would be used for executing an ML Program operation.
 ///
 /// @param operation  An ML Program operation.
-/// @returns The anticipated compute devices that would be used for evaluating the operation or `nil`if the usage couldn't be determined.
+/// @returns The anticipated compute devices that would be used for executing the operation or `nil`if the usage couldn't be determined.
 - (nullable MLComputePlanDeviceUsage *)computeDeviceUsageForMLProgramOperation:(MLModelStructureProgramOperation *)operation NS_SWIFT_NAME(computeDeviceUsage(for:));
 
 /// The model structure.

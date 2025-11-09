@@ -1,6 +1,6 @@
 /* VideoToolbox.h
 
-   Copyright (c) 2008-2022 Apple Computer, Inc.
+   Copyright (c) 2008-2023 Apple Computer, Inc.
    All rights reserved. */
 
 #include <VideoToolbox/VTCompressionProperties.h>
@@ -17,8 +17,11 @@
 #include <VideoToolbox/VTPixelTransferSession.h>
 #include <VideoToolbox/VTPixelRotationProperties.h>
 #include <VideoToolbox/VTPixelRotationSession.h>
-#if !TARGET_OS_IPHONE
+#if ( !TARGET_OS_IPHONE || TARGET_OS_MACCATALYST )
+#include <VideoToolbox/VTRAWProcessingSession.h>
+#include <VideoToolbox/VTRAWProcessingProperties.h>
 #include <VideoToolbox/VTProfessionalVideoWorkflow.h>
-#endif // !TARGET_OS_IPHONE
-
-
+#endif // ( !TARGET_OS_IPHONE || TARGET_OS_MACCATALYST )
+#if ( TARGET_OS_OSX || TARGET_OS_IOS || TARGET_OS_TV || TARGET_OS_VISION )
+#include <VideoToolbox/VTHDRPerFrameMetadataGenerationSession.h>
+#endif // ( TARGET_OS_OSX || TARGET_OS_IOS || TARGET_OS_TVOS || TARGET_OS_XR )

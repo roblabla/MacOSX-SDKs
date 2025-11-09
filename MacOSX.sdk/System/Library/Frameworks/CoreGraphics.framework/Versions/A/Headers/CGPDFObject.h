@@ -47,7 +47,7 @@ typedef CF_ENUM (int32_t, CGPDFObjectType) {
 /* Return the type of `object'. */
 
 CG_EXTERN CGPDFObjectType CGPDFObjectGetType(CGPDFObjectRef cg_nullable object)
-    CG_AVAILABLE_STARTING(10.3, 2.0);
+    API_AVAILABLE(macos(10.3), ios(2.0));
 
 /* Get the value of `object'. If the type of `object' is equal to `type',
    then copy the value of `object' to `value' (if it's non-NULL) and return
@@ -58,7 +58,7 @@ CG_EXTERN CGPDFObjectType CGPDFObjectGetType(CGPDFObjectRef cg_nullable object)
 
 CG_EXTERN bool CGPDFObjectGetValue(CGPDFObjectRef cg_nullable object,
     CGPDFObjectType type, void * __nullable value)
-    CG_AVAILABLE_STARTING(10.3, 2.0);
+    API_AVAILABLE(macos(10.3), ios(2.0));
 
 CF_ASSUME_NONNULL_END
 

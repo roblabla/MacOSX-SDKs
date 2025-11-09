@@ -20,16 +20,16 @@ typedef NS_ENUM(NSInteger, UIListContentTextAlignment) {
     UIListContentTextAlignmentNatural,
     UIListContentTextAlignmentCenter,
     UIListContentTextAlignmentJustified
-} API_AVAILABLE(ios(14.0), tvos(14.0), watchos(7.0));
+} API_AVAILABLE(ios(14.0), tvos(14.0)) API_UNAVAILABLE(watchos);
 
 typedef NS_ENUM(NSInteger, UIListContentTextTransform) {
     UIListContentTextTransformNone,
     UIListContentTextTransformUppercase,
     UIListContentTextTransformLowercase,
     UIListContentTextTransformCapitalized
-} API_AVAILABLE(ios(14.0), tvos(14.0), watchos(7.0));
+} API_AVAILABLE(ios(14.0), tvos(14.0)) API_UNAVAILABLE(watchos);
 
-UIKIT_EXTERN API_AVAILABLE(ios(14.0), tvos(14.0), watchos(7.0)) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(14.0), tvos(14.0)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @interface UIListContentTextProperties : NSObject <NSCopying, NSSecureCoding>
 
 /// The font used for the text.

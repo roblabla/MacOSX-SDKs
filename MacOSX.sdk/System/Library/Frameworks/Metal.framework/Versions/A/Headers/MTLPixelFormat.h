@@ -122,14 +122,14 @@ typedef NS_ENUM(NSUInteger, MTLPixelFormat)
     MTLPixelFormatBC7_RGBAUnorm_sRGB    API_AVAILABLE(macos(10.11), macCatalyst(13.0), ios(16.4)) = 153,
 
     /* PVRTC */
-    MTLPixelFormatPVRTC_RGB_2BPP        API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(8.0)) = 160,
-    MTLPixelFormatPVRTC_RGB_2BPP_sRGB   API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(8.0)) = 161,
-    MTLPixelFormatPVRTC_RGB_4BPP        API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(8.0)) = 162,
-    MTLPixelFormatPVRTC_RGB_4BPP_sRGB   API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(8.0)) = 163,
-    MTLPixelFormatPVRTC_RGBA_2BPP       API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(8.0)) = 164,
-    MTLPixelFormatPVRTC_RGBA_2BPP_sRGB  API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(8.0)) = 165,
-    MTLPixelFormatPVRTC_RGBA_4BPP       API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(8.0)) = 166,
-    MTLPixelFormatPVRTC_RGBA_4BPP_sRGB  API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(8.0)) = 167,
+    MTLPixelFormatPVRTC_RGB_2BPP        API_DEPRECATED("Usage of ASTC/ETC2/BC formats is recommended instead.", macos(11.0,15.0), macCatalyst(14.0,18.0), ios(8.0,18.0)) = 160,
+    MTLPixelFormatPVRTC_RGB_2BPP_sRGB   API_DEPRECATED("Usage of ASTC/ETC2/BC formats is recommended instead.", macos(11.0,15.0), macCatalyst(14.0,18.0), ios(8.0,18.0)) = 161,
+    MTLPixelFormatPVRTC_RGB_4BPP        API_DEPRECATED("Usage of ASTC/ETC2/BC formats is recommended instead.", macos(11.0,15.0), macCatalyst(14.0,18.0), ios(8.0,18.0)) = 162,
+    MTLPixelFormatPVRTC_RGB_4BPP_sRGB   API_DEPRECATED("Usage of ASTC/ETC2/BC formats is recommended instead.", macos(11.0,15.0), macCatalyst(14.0,18.0), ios(8.0,18.0)) = 163,
+    MTLPixelFormatPVRTC_RGBA_2BPP       API_DEPRECATED("Usage of ASTC/ETC2/BC formats is recommended instead.", macos(11.0,15.0), macCatalyst(14.0,18.0), ios(8.0,18.0)) = 164,
+    MTLPixelFormatPVRTC_RGBA_2BPP_sRGB  API_DEPRECATED("Usage of ASTC/ETC2/BC formats is recommended instead.", macos(11.0,15.0), macCatalyst(14.0,18.0), ios(8.0,18.0)) = 165,
+    MTLPixelFormatPVRTC_RGBA_4BPP       API_DEPRECATED("Usage of ASTC/ETC2/BC formats is recommended instead.", macos(11.0,15.0), macCatalyst(14.0,18.0), ios(8.0,18.0)) = 166,
+    MTLPixelFormatPVRTC_RGBA_4BPP_sRGB  API_DEPRECATED("Usage of ASTC/ETC2/BC formats is recommended instead.", macos(11.0,15.0), macCatalyst(14.0,18.0), ios(8.0,18.0)) = 167,
 
     /* ETC2 */
     MTLPixelFormatEAC_R11Unorm          API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(8.0)) = 170,

@@ -11,7 +11,7 @@
 #import <QuartzCore/CATransform3D.h>
 
 /// Provides information about the current state of hinting for the focused item.
-UIKIT_EXTERN API_AVAILABLE(ios(12.0)) @interface UIFocusMovementHint: NSObject <NSCopying>
+UIKIT_EXTERN API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(watchos) @interface UIFocusMovementHint: NSObject <NSCopying>
 
 /// Value between {-1.0, -1.0} and {1.0, 1.0} representing how close focus is to moving in a particular direction.
 @property (nonatomic, readonly) CGVector movementDirection;

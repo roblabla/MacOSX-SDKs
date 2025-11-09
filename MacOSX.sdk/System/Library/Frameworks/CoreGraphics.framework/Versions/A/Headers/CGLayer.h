@@ -26,29 +26,29 @@ CF_ASSUME_NONNULL_BEGIN
 CG_EXTERN CGLayerRef __nullable CGLayerCreateWithContext(
     CGContextRef cg_nullable context,
     CGSize size, CFDictionaryRef __nullable auxiliaryInfo)
-    CG_AVAILABLE_STARTING(10.4, 2.0);
+    API_AVAILABLE(macos(10.4), ios(2.0));
 
 /* Equivalent to `CFRetain(layer)', except it doesn't crash (as CFRetain
    does) if `layer' is NULL. */
 
 CG_EXTERN CGLayerRef cg_nullable CGLayerRetain(CGLayerRef cg_nullable layer)
-    CG_AVAILABLE_STARTING(10.4, 2.0);
+    API_AVAILABLE(macos(10.4), ios(2.0));
 
 /* Equivalent to `CFRelease(layer)', except it doesn't crash (as CFRelease
    does) if `layer' is NULL. */
 
 CG_EXTERN void CGLayerRelease(CGLayerRef cg_nullable layer)
-    CG_AVAILABLE_STARTING(10.4, 2.0);
+    API_AVAILABLE(macos(10.4), ios(2.0));
 
 /* Return the size of the layer `layer'. CGSizeZero if invalid `layer'. */
 
 CG_EXTERN CGSize CGLayerGetSize(CGLayerRef cg_nullable layer)
-    CG_AVAILABLE_STARTING(10.4, 2.0);
+    API_AVAILABLE(macos(10.4), ios(2.0));
 
 /* Return the context of `layer'. */
 
 CG_EXTERN CGContextRef __nullable CGLayerGetContext(CGLayerRef cg_nullable layer)
-    CG_AVAILABLE_STARTING(10.4, 2.0);
+    API_AVAILABLE(macos(10.4), ios(2.0));
 
 /* Draw the contents of `layer' into `rect' of `context'. The contents are
    scaled, if necessary, to fit into `rect'; the rectangle `rect' is in user
@@ -56,7 +56,7 @@ CG_EXTERN CGContextRef __nullable CGLayerGetContext(CGLayerRef cg_nullable layer
 
 CG_EXTERN void CGContextDrawLayerInRect(CGContextRef cg_nullable context,
     CGRect rect, CGLayerRef cg_nullable layer)
-    CG_AVAILABLE_STARTING(10.4, 2.0);
+    API_AVAILABLE(macos(10.4), ios(2.0));
 
 /* Draw the contents of `layer' at `point' in `context'. This is equivalent
    to calling "CGContextDrawLayerInRect" with a rectangle having origin at
@@ -64,12 +64,12 @@ CG_EXTERN void CGContextDrawLayerInRect(CGContextRef cg_nullable context,
 
 CG_EXTERN void CGContextDrawLayerAtPoint(CGContextRef cg_nullable context,
     CGPoint point, CGLayerRef cg_nullable layer)
-    CG_AVAILABLE_STARTING(10.4, 2.0);
+    API_AVAILABLE(macos(10.4), ios(2.0));
 
 /* Return the CFTypeID for CGLayerRefs. */
 
 CG_EXTERN CFTypeID CGLayerGetTypeID(void)
-    CG_AVAILABLE_STARTING(10.4, 2.0);
+    API_AVAILABLE(macos(10.4), ios(2.0));
 
 CF_ASSUME_NONNULL_END
 

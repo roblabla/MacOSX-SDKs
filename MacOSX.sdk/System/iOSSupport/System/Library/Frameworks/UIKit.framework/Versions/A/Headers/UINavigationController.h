@@ -34,15 +34,15 @@ typedef NS_ENUM(NSInteger, UINavigationControllerOperation) {
     UINavigationControllerOperationNone,
     UINavigationControllerOperationPush,
     UINavigationControllerOperationPop,
-};
+} API_UNAVAILABLE(watchos);
 
-UIKIT_EXTERN const CGFloat UINavigationControllerHideShowBarDuration;
+UIKIT_EXTERN const CGFloat UINavigationControllerHideShowBarDuration API_UNAVAILABLE(watchos);
 
 @class UIView, UINavigationBar, UINavigationItem, UIToolbar;
 @protocol UINavigationControllerDelegate;
 
 
-UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(2.0)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @interface UINavigationController : UIViewController
 
 
@@ -102,7 +102,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
 @protocol UIViewControllerInteractiveTransitioning;
 @protocol UIViewControllerAnimatedTransitioning;
 
-NS_SWIFT_UI_ACTOR
+API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @protocol UINavigationControllerDelegate <NSObject>
 
 @optional

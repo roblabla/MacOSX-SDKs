@@ -4,7 +4,7 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2011-2019 Apple Inc. All rights reserved.
+	Copyright 2011-2024 Apple Inc. All rights reserved.
 
 */
 
@@ -37,7 +37,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class AVPlayerItemOutputInternal;
 
-API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(1.0))
+API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(1.0), visionos(1.0))
 @interface AVPlayerItemOutput : NSObject
 {
 	@private
@@ -78,12 +78,13 @@ API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(1.0))
 	@abstract		Convenience method to convert a CoreVideo timestamp to the equivalent time on the item's timebase.
 	@discussion
 		Note: A CVDisplayLink provides a parameter inOutputTimestamp that expresses a future screen refresh time. You can use this value directly to find the next appropriate item time.
+		Use `itemTimeForHostTime` if you were using this method previously to find the item time and have to switch over due to CVDisplayLink deprecation.
 	@param			timestamp
 					The CoreVideo timestamp value to convert to item time.
 	@result			The equivalent item time.
  */
 
-- (CMTime)itemTimeForCVTimeStamp:(CVTimeStamp)timestamp API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, tvos, watchos);
+- (CMTime)itemTimeForCVTimeStamp:(CVTimeStamp)timestamp API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, tvos, watchos, visionos);
 
 #endif // !TARGET_OS_IPHONE
 
@@ -95,7 +96,7 @@ API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(1.0))
  
 		 Whenever any output is added to an AVPlayerItem that has suppressesPlayerRendering set to YES, the media data supplied to the output will not be rendered by AVPlayer. Other media data associated with the item but not provided to such an output is not affected. For example, if an output of class AVPlayerItemVideoOutput with a value of YES for suppressesPlayerRendering is added to an AVPlayerItem, video media for that item will not be rendered by the AVPlayer, while audio media, subtitle media, and other kinds of media, if present, will be rendered.
 */
-@property (nonatomic, readwrite) BOOL suppressesPlayerRendering API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0)) API_UNAVAILABLE(watchos);
+@property (nonatomic, readwrite) BOOL suppressesPlayerRendering API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 @end
 
@@ -103,64 +104,57 @@ API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(1.0))
 	@class			AVPlayerItemVideoOutput
 	@abstract		A concrete subclass of AVPlayerItemOutput that vends video images as CVPixelBuffers.
 	@discussion
-		It is best to use a AVPlayerItemVideoOutput in conjunction with the services of a CVDisplayLink or CADisplayLink to accurately synchronize with screen device refreshes. For optimum efficiency there are opportunities to quiesce these services. Examples include when playback is paused or during playback of empty edits. Below is sample code that illustrates how you might quiesce a CVDisplayLink when used with a AVPlayerItemVideoOutput.
-
-
-	(void)CVDisplayLinkCreateWithActiveCGDisplays( &myDisplayLink );
-	CVDisplayLinkSetOutputCallback( myDisplayLink, myDisplayCallback, self );
-	
+		It is best to use a AVPlayerItemVideoOutput in conjunction with the services of a CADisplayLink to accurately synchronize with screen device refreshes. For optimum efficiency there are opportunities to quiesce these services. Examples include when playback is paused or during playback of empty edits. Below is sample code that illustrates how you might quiesce a CADisplayLink when used with a AVPlayerItemVideoOutput.
+ 
+ #if MACOS
+	myDisplayLink = [[NSScreen mainScreen]/ displayLinkWithTarget:self selector:@selector(displayLinkCallback:)]; // or use - [NSView displayLinkWithTarget:selector:] / -[NSWindow displayLinkWithTarget:selector:]
+ #else
+	myDisplayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(displayLinkCallback:)];
+ #endif
+	[myDisplayLink addToRunLoop:[NSRunLoop currentRunLoop] forMode:NSRunLoopCommonModes];
+	[myDisplayLink setPaused:YES];
+ 
 	[myPlayerItem addOutput:myVideoOutput];
 	[myVideoOutput setDelegate:self queue:myDispatchQueue];
-	
-	...
-	
-	static CVReturn myDisplayCallback ( CVDisplayLinkRef displayLink, 
-										const CVTimeStamp *inNow, 
-										const CVTimeStamp *inOutputTime, 
-										CVOptionFlags flagsIn, 
-										CVOptionFlags *flagsOut, 
-										void *displayLinkContext )
+ 
+	- (void)displayLinkCallback:(CADisplayLink *)displayLink
 	{
-		MYObject *self = displayLinkContext;
-	 
-		CMTime outputItemTime = [[self myVideoOutput] itemTimeForCVTimeStamp:*inOutputTime];
-		if ( [[self myVideoOutput] hasNewPixelBufferForItemTime:outputItemTime] ) {
-			CVPixelBufferRef pixBuff = NULL;
-			CMTime presentationItemTime = kCMTimeZero;
-			self->myLastHostTime = inOutputTime->hostTime;
-			pixBuff = [[self myVideoOutput] copyPixelBufferForItemTime:outputItemTime itemTimeForDisplay:&presentationItemTime];
-	 
+		NSTimeInterval now = [displayLink timestamp];
+		NSTimeInterval outputTime = now + [displayLink duration];
+		CMTime outputItemTime = [myVideoOutput itemTimeForHostTime:outputTime];
+		CMTime presentationItemTime = kCMTimeInvalid;
+ 
+		if ( [myVideoOutput hasNewPixelBufferForItemTime:outputItemTime] ) {
+			myLastHostTime = now;
+			CVPixelBufferRef pixBuff = [myVideoOutput copyPixelBufferForItemTime:outputItemTime itemTimeForDisplay:&presentationItemTime];
+			
 			// Use pixBuff here
 			// presentationItemTime is the item time appropriate for
 			// the next screen refresh
-	
+
 			CVBufferRelease( pixBuff );
-		}
-		else {
-			CMTime elapsedTime = CMClockMakeHostTimeFromSystemUnits( inNow->hostTime - self->myLastHostTime );
+		} else {
+			CMTime elapsedTime = CMClockMakeHostTimeFromSystemUnits( now - myLastHostTime );
 			if ( CMTimeGetSeconds( elapsedTime ) > NON_QUIESCENT_PERIOD_IN_SECONDS ) {
-				[[self myVideoOutput] requestNotificationOfMediaDataChangeWithAdvanceInterval:MY_STARTUP_TIME_IN_SECONDS];
-				CVDisplayLinkStop( displayLink );
+				[myVideoOutput requestNotificationOfMediaDataChangeWithAdvanceInterval:MY_STARTUP_TIME_IN_SECONDS];
+				[displayLink setPaused:YES];
 			}
 		}
-		return kCVReturnSuccess;
-	}
-	
+ 	}
+ 
 	- (void)outputMediaDataWillChange:(AVPlayerItemOutput *)output
-	{	
+	{
 		// Start running again
-		myLastHostTime = CVGetCurrentHostTime();
-		CVDisplayLinkStart( myDisplayLink );
+		myLastHostTime = CMTimeGetSeconds(CMClockGetTime(CMClockGetHostTimeClock()));
+		[myDisplayLink setPaused:NO];
 	}
-
-
  */
  
 @protocol AVPlayerItemOutputPullDelegate;
 
 @class AVPlayerItemVideoOutputInternal;
 
-API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0)) API_UNAVAILABLE(watchos)
+API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(watchos)
 @interface AVPlayerItemVideoOutput : AVPlayerItemOutput
 {
 @private
@@ -196,7 +190,7 @@ API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 					- the settings do not honor the requirements listed above for outputSettings
  */
 
-- (instancetype)initWithOutputSettings:(nullable NSDictionary<NSString *, id> *)outputSettings API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0)) API_UNAVAILABLE(watchos) NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithOutputSettings:(nullable NSDictionary<NSString *, id> *)outputSettings API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0), visionos(1.0)) API_UNAVAILABLE(watchos) NS_DESIGNATED_INITIALIZER;
 
 /*!
 	@method			hasNewPixelBufferForItemTime:
@@ -216,7 +210,7 @@ API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 	@discussion
 		The client is responsible for calling CVBufferRelease on the returned CVPixelBuffer when finished with it. 
 		
-		Typically you would call this method in response to a CVDisplayLink callback or CADisplayLink delegate invocation and if hasNewPixelBufferForItemTime: also returns YES. 
+		Typically you would call this method in response to a CADisplayLink delegate invocation and if hasNewPixelBufferForItemTime: also returns YES.
 		
 		The buffer reference retrieved from copyPixelBufferForItemTime:itemTimeForDisplay: may itself be NULL. A reference to a NULL pixel buffer communicates that nothing should be displayed for the supplied item time.
 	@param			itemTime
@@ -244,7 +238,7 @@ API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 	@param			interval
 					A wall clock time interval.
 	@discussion
-		Message this method before you suspend your use of a CVDisplayLink or CADisplayLink. The interval you provide will be used to message your delegate, in advance, that it should resume the display link. If the interval you provide is large, effectively requesting wakeup earlier than the AVPlayerItemVideoOutput is prepared to act, the delegate will be invoked as soon as possible. Do not use this method to force a delegate invocation for each sample.
+		Message this method before you suspend your use of a CADisplayLink. The interval you provide will be used to message your delegate, in advance, that it should resume the display link. If the interval you provide is large, effectively requesting wakeup earlier than the AVPlayerItemVideoOutput is prepared to act, the delegate will be invoked as soon as possible. Do not use this method to force a delegate invocation for each sample.
  */
  
 - (void)requestNotificationOfMediaDataChangeWithAdvanceInterval:(NSTimeInterval)interval;
@@ -268,9 +262,10 @@ API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 	@protocol		AVPlayerItemOutputPullDelegate
 	@abstract		Defines common delegate methods for objects participating in AVPlayerItemOutput pull sample output acquisition.
  */
- 
+
+NS_SWIFT_SENDABLE
  @protocol AVPlayerItemOutputPullDelegate <NSObject>
- 
+
  @optional
  
  /*!
@@ -280,7 +275,7 @@ API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 		This method is invoked once after the sender is messaged requestNotificationOfMediaDataChangeWithAdvanceInterval:.
   */
 
-- (void)outputMediaDataWillChange:(AVPlayerItemOutput *)sender API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(1.0));
+- (void)outputMediaDataWillChange:(AVPlayerItemOutput *)sender API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(1.0), visionos(1.0));
  
  /*!
 	@method			outputSequenceWasFlushed:
@@ -289,10 +284,9 @@ API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 		This method is invoked after any seeking and change in playback direction. If you are maintaining any queued future samples, copied previously, you may want to discard these after receiving this message.
   */
 
-- (void)outputSequenceWasFlushed:(AVPlayerItemOutput *)output API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(1.0));
+- (void)outputSequenceWasFlushed:(AVPlayerItemOutput *)output API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(1.0), visionos(1.0));
 
 @end
-
 
 @protocol AVPlayerItemLegibleOutputPushDelegate;
 @class AVPlayerItemLegibleOutputInternal;
@@ -303,7 +297,7 @@ API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 	@discussion
 		An instance of AVPlayerItemLegibleOutput is typically initialized using the -init method.
  */
-API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0)) API_UNAVAILABLE(watchos)
+API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(watchos)
 @interface AVPlayerItemLegibleOutput : AVPlayerItemOutput
 {
 @private
@@ -348,7 +342,7 @@ API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 
 @end
 
-API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0)) API_UNAVAILABLE(watchos)
+API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(watchos)
 @interface AVPlayerItemLegibleOutput (AVPlayerItemLegibleOutput_NativeRepresentation)
 
 /*!
@@ -368,7 +362,7 @@ API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 
 @end
 
-API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0)) API_UNAVAILABLE(watchos)
+API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(watchos)
 @interface AVPlayerItemLegibleOutput (AVPlayerItemLegibleOutput_TextStylingResolution)
 
 /*!
@@ -382,7 +376,7 @@ typedef NSString * AVPlayerItemLegibleOutputTextStylingResolution NS_STRING_ENUM
  @constant		AVPlayerItemLegibleOutputTextStylingResolutionDefault
  @abstract		Specify this level of text styling resolution to receive attributed strings from an AVPlayerItemLegibleOutput that include the same level of styling information that AVFoundation would use itself to render text within an AVPlayerLayer. The text styling will accommodate user-level Media Accessibility settings.
  */
-AVF_EXPORT AVPlayerItemLegibleOutputTextStylingResolution const AVPlayerItemLegibleOutputTextStylingResolutionDefault API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0)) API_UNAVAILABLE(watchos);
+AVF_EXPORT AVPlayerItemLegibleOutputTextStylingResolution const AVPlayerItemLegibleOutputTextStylingResolutionDefault API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 /*!
  @constant		AVPlayerItemLegibleOutputTextStylingResolutionSourceAndRulesOnly
@@ -390,7 +384,7 @@ AVF_EXPORT AVPlayerItemLegibleOutputTextStylingResolution const AVPlayerItemLegi
  @discussion
 	This level of resolution excludes styling provided by the user-level Media Accessibility settings. You would typically use it if you wish to override the styling specified in source media. If you do this, you are strongly encouraged to allow your custom styling in turn to be overriden by user preferences for text styling that are available as Media Accessibility settings.
  */
-AVF_EXPORT AVPlayerItemLegibleOutputTextStylingResolution const AVPlayerItemLegibleOutputTextStylingResolutionSourceAndRulesOnly API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0)) API_UNAVAILABLE(watchos);
+AVF_EXPORT AVPlayerItemLegibleOutputTextStylingResolution const AVPlayerItemLegibleOutputTextStylingResolutionSourceAndRulesOnly API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 /*!
  @property		textStylingResolution
@@ -402,13 +396,13 @@ AVF_EXPORT AVPlayerItemLegibleOutputTextStylingResolution const AVPlayerItemLegi
 
 @end
 
-
 @protocol AVPlayerItemOutputPushDelegate;
 
 /*!
 	@protocol		AVPlayerItemLegibleOutputPushDelegate
 	@abstract		Extends AVPlayerItemOutputPushDelegate to provide additional methods specific to attributed string output.
  */
+NS_SWIFT_SENDABLE
 @protocol AVPlayerItemLegibleOutputPushDelegate <AVPlayerItemOutputPushDelegate>
 
 @optional
@@ -427,7 +421,7 @@ AVF_EXPORT AVPlayerItemLegibleOutputTextStylingResolution const AVPlayerItemLegi
 	@discussion
 		For each media subtype in the array passed in to -initWithMediaSubtypesForNativeRepresentation:, the delegate will receive sample buffers carrying data in its native format via the nativeSamples parameter, if there is media data of that subtype in the media resource.  For all other media subtypes present in the media resource, the delegate will receive attributed strings in a common format via the strings parameter.  See <CoreMedia/CMTextMarkup.h> for the string attributes that are used in the attributed strings.
  */
-- (void)legibleOutput:(AVPlayerItemLegibleOutput *)output didOutputAttributedStrings:(NSArray<NSAttributedString *> *)strings nativeSampleBuffers:(NSArray *)nativeSamples forItemTime:(CMTime)itemTime API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0)) API_UNAVAILABLE(watchos);
+- (void)legibleOutput:(AVPlayerItemLegibleOutput *)output didOutputAttributedStrings:(NSArray<NSAttributedString *> *)strings nativeSampleBuffers:(NSArray *)nativeSamples forItemTime:(CMTime)itemTime API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 @end
 
@@ -436,6 +430,7 @@ AVF_EXPORT AVPlayerItemLegibleOutputTextStylingResolution const AVPlayerItemLegi
  @protocol		AVPlayerItemOutputPushDelegate
  @abstract		Defines common delegate methods for objects participating in AVPlayerItemOutput push sample output acquisition.
  */
+NS_SWIFT_SENDABLE
 @protocol AVPlayerItemOutputPushDelegate <NSObject>
 
 @optional
@@ -461,7 +456,7 @@ AVF_EXPORT AVPlayerItemLegibleOutputTextStylingResolution const AVPlayerItemLegi
 	@discussion
 		Setting the value of suppressesPlayerRendering on an instance of AVPlayerItemMetadataOutput has no effect.
  */
-API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(1.0))
+API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(1.0), visionos(1.0))
 @interface AVPlayerItemMetadataOutput : AVPlayerItemOutput
 {
 @private
@@ -521,6 +516,7 @@ API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(1.0))
 	@protocol		AVPlayerItemMetadataOutputPushDelegate
 	@abstract		Extends AVPlayerItemOutputPushDelegate to provide additional methods specific to metadata output.
  */
+NS_SWIFT_SENDABLE
 @protocol AVPlayerItemMetadataOutputPushDelegate <AVPlayerItemOutputPushDelegate>
 
 @optional
@@ -540,7 +536,101 @@ API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(1.0))
 		Note that if the item carries multiple metadata tracks containing metadata with the same metadata identifiers, this method can be invoked for each one separately, each with reference to the associated AVPlayerItemTrack.
 		Note that the associated AVPlayerItemTrack parameter can be nil which implies that the metadata describes the asset as a whole, not just a single track of the asset.
  */
-- (void)metadataOutput:(AVPlayerItemMetadataOutput *)output didOutputTimedMetadataGroups:(NSArray<AVTimedMetadataGroup *> *)groups fromPlayerItemTrack:(nullable AVPlayerItemTrack *)track API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(1.0));
+- (void)metadataOutput:(AVPlayerItemMetadataOutput *)output didOutputTimedMetadataGroups:(NSArray<AVTimedMetadataGroup *> *)groups fromPlayerItemTrack:(nullable AVPlayerItemTrack *)track API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(1.0), visionos(1.0));
+
+@end
+
+@protocol AVPlayerItemRenderedLegibleOutputPushDelegate;
+@class AVRenderedCaptionImage;
+
+/*!
+	@class			AVPlayerItemRenderedLegibleOutput
+	@abstract		A subclass of AVPlayerItemOutput that can vend media with a legible characteristic as rendered CVPixelBufferRefs.
+	@discussion
+		An instance of AVPlayerItemRenderedLegibleOutput is initialized using the -init method.
+ */
+API_AVAILABLE(macos(15.0), ios(18.0)) API_UNAVAILABLE(tvos, watchos, visionos)
+@interface AVPlayerItemRenderedLegibleOutput : AVPlayerItemOutput
+AV_INIT_UNAVAILABLE
+
+/*!
+	@method			initWithVideoDisplaySize:
+	@abstract		Creates an instance of AVPlayerItemRenderedLegibleOutput.
+	@param			videoDisplaySize
+					CGSize for the video display area
+	@discussion
+		This is the only available initializer for AVPlayerItemRenderedLegibleOutput. The client can also choose to reset videoDisplaySize after initialization or during playback. Initializing and resetting videoDisplaySize with a zero height or width will result in an exception being thrown.
+ */
+- (instancetype)initWithVideoDisplaySize:(CGSize)videoDisplaySize;
+
+/*!
+	@method			setDelegate:queue:
+	@abstract		Sets the receiver's delegate and a dispatch queue on which the delegate will be called.
+	@param			delegate
+					An object conforming to AVPlayerItemRenderedLegibleOutputPushDelegate protocol.
+	@param			delegateQueue
+					A dispatch queue on which all delegate methods will be called.
+	@discussion
+		The delegate is held using a zeroing-weak reference, so it is safe to deallocate the delegate while the receiver still has a reference to it.
+ */
+- (void)setDelegate:(nullable id <AVPlayerItemRenderedLegibleOutputPushDelegate>)delegate queue:(nullable dispatch_queue_t)delegateQueue;
+
+/*!
+	@property		delegate
+	@abstract		The receiver's delegate.
+	@discussion
+		The delegate is held using a zeroing-weak reference, so this property will have a value of nil after a delegate that was previously set has been deallocated.  This property is not key-value observable.
+ */
+@property (nonatomic, readonly, weak, nullable) id <AVPlayerItemRenderedLegibleOutputPushDelegate> delegate;
+
+/*!
+	@property		delegateQueue
+	@abstract		The dispatch queue where the delegate is messaged.
+	@discussion
+		This property is not key-value observable.
+ */
+@property (nonatomic, readonly, nullable) dispatch_queue_t delegateQueue;
+
+/*!
+	@property		advanceIntervalForDelegateInvocation
+	@abstract		Permits advance invocation of the associated delegate, if any.
+	@discussion
+		If it is possible, an AVPlayerItemRenderedLegibleOutput will message its delegate advanceIntervalForDelegateInvocation seconds earlier than otherwise. If the value you provide is large, effectively requesting provision of samples earlier than the AVPlayerItemRenderedLegibleOutput is prepared to act on them, the delegate will be invoked as soon as possible.
+ */
+@property (nonatomic, readwrite) NSTimeInterval advanceIntervalForDelegateInvocation;
+
+/*!
+	@property		videoDisplaySize
+	@abstract		Permits rendering of pixel buffers according to the set width and height
+	@discussion		The client is expected to set videodisplay size during init and may also set it again during playback. The pixel buffers will be rendered according to the set width and height of display area. If this property is set during the presentation time of a vended caption image, a new caption image rendered according to new videoDisplaySize, will be vended out. Setting this property with a zero height or width will result in an exception being thrown and it is client's responsibility to handle it using appropriate catch block.
+ */
+@property (nonatomic, assign) CGSize videoDisplaySize;
+
+@end
+
+@protocol AVPlayerItemOutputPushDelegate;
+
+/*!
+	@protocol		AVPlayerItemRenderedLegibleOutputPushDelegate
+	@abstract		Extends AVPlayerItemOutputPushDelegate to provide additional methods specific to pixel buffers output.
+ */
+API_AVAILABLE(macos(15.0), ios(18.0)) API_UNAVAILABLE(tvos, watchos, visionos)
+@protocol AVPlayerItemRenderedLegibleOutputPushDelegate <AVPlayerItemOutputPushDelegate>
+
+@optional
+
+/*!
+	@method			renderedLegibleOutput:didOutputRenderedCaptionImages:forItemTime:
+	@abstract		A delegate callback that delivers new rendered caption images
+	@param			output
+					The AVPlayerItemRenderedLegibleOutput source.
+	@param			captionImages
+					An NSArray of AVRenderedCaptionImage(s), consisting of a CVPixelBufferRef and its associated position (in pixels) relative to the video frame
+	@param			itemTime
+					The item time at which the caption images should be presented.
+
+ */
+- (void)renderedLegibleOutput:(AVPlayerItemRenderedLegibleOutput *)output didOutputRenderedCaptionImages:(NSArray<AVRenderedCaptionImage *> *)captionImages forItemTime:(CMTime)itemTime API_AVAILABLE(macos(15.0), ios(18.0)) API_UNAVAILABLE(tvos, watchos, visionos);
 
 @end
 

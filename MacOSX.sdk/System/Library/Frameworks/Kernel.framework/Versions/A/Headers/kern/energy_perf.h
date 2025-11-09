@@ -35,7 +35,12 @@
 #ifndef _KERN_ENERGY_PERF_H_
 #define _KERN_ENERGY_PERF_H_
 
+#include <sys/cdefs.h>
+
 #include <stdint.h>
+
+#include <kern/kern_types.h>
+#include <mach/mach_types.h>
 
 __BEGIN_DECLS
 
@@ -55,6 +60,8 @@ void gpu_describe(gpu_descriptor_t);
 
 /* GPU utilisation update for the current thread. */
 uint64_t gpu_accumulate_time(uint32_t scope, uint32_t gpu_id, uint32_t gpu_domain, uint64_t gpu_accumulated_ns, uint64_t gpu_tstamp_ns);
+
+
 
 /* Interfaces for the block storage driver to advise the perf. controller of
  * recent IOs

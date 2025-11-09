@@ -30,8 +30,8 @@ NS_CLASS_AVAILABLE(10_8, 4_1) __WATCHOS_PROHIBITED
 @property(nonatomic, readonly) NSArray<GKPlayer *> *players NS_AVAILABLE(10_10, 8_0);    /// all the GKPlayers in the match
 @property(nonatomic, nullable, weak) id<GKMatchDelegate> delegate;
 @property(nonatomic, readonly) NSUInteger expectedPlayerCount;
-@property(nonatomic, nullable, readonly) GKMatchProperties *properties API_AVAILABLE(ios(17.2), macos(14.2), tvos(17.2));
-@property(nonatomic, nullable, readonly) NSDictionary<GKPlayer *, GKMatchProperties *> *playerProperties API_AVAILABLE(ios(17.2), macos(14.2), watchos(10.2), tvos(17.2));
+@property(nonatomic, nullable, readonly) GKMatchProperties *properties API_AVAILABLE(ios(17.2), macos(14.2), tvos(17.2), visionos(1.1));
+@property(nonatomic, nullable, readonly) NSDictionary<GKPlayer *, GKMatchProperties *> *playerProperties API_AVAILABLE(ios(17.2), macos(14.2), tvos(17.2), visionos(1.1));
 
 /// Asynchronously send data to one or more GKPlayers. Returns YES if delivery started, NO if unable to start sending and error will be set.
 - (BOOL)sendData:(NSData *)data toPlayers:(NSArray<GKPlayer *> *)players dataMode:(GKMatchSendDataMode)mode error:(NSError * __nullable * __nullable)error NS_AVAILABLE(10_10, 8_0);
@@ -42,10 +42,6 @@ NS_CLASS_AVAILABLE(10_8, 4_1) __WATCHOS_PROHIBITED
 /// Disconnect the match. This will show all other players in the match that the local player has disconnected. This should be called before releasing the match instance.
 - (void)disconnect;
 
-/// Join a named voice chat channel
-/// Will return nil if parental controls are turned on
-- (nullable GKVoiceChat *)voiceChatWithName:(NSString *)name;
-
 /// Choose the best host from among the connected players using gathered estimates for bandwidth and packet loss. This is intended for applications that wish to implement a client-server model on top of the match. The returned player ID will be nil if the best host cannot currently be determined (e.g. players are still connecting).
 - (void)chooseBestHostingPlayerWithCompletionHandler:(void(^)(GKPlayer * __nullable player))completionHandler NS_AVAILABLE(10_10, 8_0);
 
@@ -54,6 +50,9 @@ NS_CLASS_AVAILABLE(10_8, 4_1) __WATCHOS_PROHIBITED
 /// 1. Communications failure
 /// 2. Timeout
 - (void)rematchWithCompletionHandler:(void(^__nullable)(GKMatch * __nullable match, NSError * __nullable error))completionHandler NS_AVAILABLE(10_9, 6_0);
+
+/*** This method is deprecated. GKVoiceChat is no longer supported. ***/
+- (nullable GKVoiceChat *)voiceChatWithName:(NSString *)name API_DEPRECATED("No longer supported", ios(4.1, 18.0), macos(10.8, 15.0), tvos(9.0, 18.0), visionos(1.0, 2.0));
 
 @end
 

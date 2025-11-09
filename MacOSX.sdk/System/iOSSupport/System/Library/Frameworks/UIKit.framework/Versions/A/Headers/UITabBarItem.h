@@ -27,11 +27,11 @@ typedef NS_ENUM(NSInteger, UITabBarSystemItem) {
     UITabBarSystemItemDownloads,
     UITabBarSystemItemMostRecent,
     UITabBarSystemItemMostViewed,
-};
+} API_UNAVAILABLE(watchos);
 
 @class UIView, UIImage, UITabBarAppearance;
 
-UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(2.0)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @interface UITabBarItem : UIBarItem 
 
 - (instancetype)init NS_DESIGNATED_INITIALIZER;
@@ -50,9 +50,9 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
 
 /*  These methods are now deprecated. Please use -initWithTitle:image:selectedImage:.
  */
-- (void)setFinishedSelectedImage:(nullable UIImage *)selectedImage withFinishedUnselectedImage:(nullable UIImage *)unselectedImage API_DEPRECATED("Use initWithTitle:image:selectedImage: or the image and selectedImage properties along with UIImageRenderingModeAlwaysOriginal", ios(5.0, 7.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos);
-- (nullable UIImage *)finishedSelectedImage API_DEPRECATED("", ios(5.0, 7.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos);
-- (nullable UIImage *)finishedUnselectedImage API_DEPRECATED("", ios(5.0, 7.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos);
+- (void)setFinishedSelectedImage:(nullable UIImage *)selectedImage withFinishedUnselectedImage:(nullable UIImage *)unselectedImage API_DEPRECATED("Use initWithTitle:image:selectedImage: or the image and selectedImage properties along with UIImageRenderingModeAlwaysOriginal", ios(5.0, 7.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(visionos, watchos);
+- (nullable UIImage *)finishedSelectedImage API_DEPRECATED("", ios(5.0, 7.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(visionos, watchos);
+- (nullable UIImage *)finishedUnselectedImage API_DEPRECATED("", ios(5.0, 7.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(visionos, watchos);
 
 /* To set item label text attributes use the appearance selectors available on the superclass, UIBarItem.
 
@@ -61,18 +61,18 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
 @property (nonatomic, readwrite, assign) UIOffset titlePositionAdjustment API_AVAILABLE(ios(5.0)) UI_APPEARANCE_SELECTOR;
 
 /// If this item displays a badge, this color will be used for the badge's background. If set to nil, the default background color will be used instead.
-@property (nonatomic, readwrite, copy, nullable) UIColor *badgeColor API_AVAILABLE(ios(10.0)) UI_APPEARANCE_SELECTOR;
+@property (nonatomic, readwrite, copy, nullable) UIColor *badgeColor API_AVAILABLE(ios(10.0)) UI_APPEARANCE_SELECTOR API_UNAVAILABLE(watchos);
 
 /// Provide text attributes to use to draw the badge text for the given singular control state (Normal, Disabled, Focused, Selected, or Highlighted). Default values will be supplied for keys that are not provided by this dictionary. See NSAttributedString.h for details on what keys are available.
-- (void)setBadgeTextAttributes:(nullable NSDictionary<NSAttributedStringKey,id> *)textAttributes forState:(UIControlState)state API_AVAILABLE(ios(10.0)) UI_APPEARANCE_SELECTOR;
+- (void)setBadgeTextAttributes:(nullable NSDictionary<NSAttributedStringKey,id> *)textAttributes forState:(UIControlState)state API_AVAILABLE(ios(10.0)) UI_APPEARANCE_SELECTOR API_UNAVAILABLE(watchos);
 
 /// Returns attributes previously set via -setBadgeTextAttributes:forState:.
-- (nullable NSDictionary<NSAttributedStringKey,id> *)badgeTextAttributesForState:(UIControlState)state API_AVAILABLE(ios(10.0)) UI_APPEARANCE_SELECTOR;
+- (nullable NSDictionary<NSAttributedStringKey,id> *)badgeTextAttributesForState:(UIControlState)state API_AVAILABLE(ios(10.0)) UI_APPEARANCE_SELECTOR API_UNAVAILABLE(watchos);
 
 ///  When set and this item is selected, overrides the hosting tab bar's standardAppearance.
-@property (nonatomic, readwrite, copy, nullable) UITabBarAppearance *standardAppearance UI_APPEARANCE_SELECTOR API_AVAILABLE(ios(13.0), tvos(13.0));
+@property (nonatomic, readwrite, copy, nullable) UITabBarAppearance *standardAppearance UI_APPEARANCE_SELECTOR API_AVAILABLE(ios(13.0), tvos(13.0)) API_UNAVAILABLE(watchos);
 ///  When set and this item is selected, overrides the hosting tab bar's scrollEdgeAppearance.
-@property (nonatomic, readwrite, copy, nullable) UITabBarAppearance *scrollEdgeAppearance UI_APPEARANCE_SELECTOR API_AVAILABLE(ios(15.0));
+@property (nonatomic, readwrite, copy, nullable) UITabBarAppearance *scrollEdgeAppearance UI_APPEARANCE_SELECTOR API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(watchos);
 @end
 
 #if TARGET_OS_IOS

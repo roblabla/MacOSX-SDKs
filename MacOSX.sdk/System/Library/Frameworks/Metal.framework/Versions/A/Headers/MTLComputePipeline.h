@@ -136,6 +136,13 @@ MTL_EXPORT API_AVAILABLE(macos(10.11), ios(9.0))
 
 
 
+/*!
+ @property shaderValidation
+ @abstract Toggle that determines whether Metal Shader Validation should be enabled or disabled for the pipeline.
+ @discussion The value can be overridden using `MTL_SHADER_VALIDATION_ENABLE_PIPELINES` or `MTL_SHADER_VALIDATION_DISABLE_PIPELINES` Environment Variables.
+ */
+@property (readwrite, nonatomic) MTLShaderValidation shaderValidation API_AVAILABLE(macos(15.0), ios(18.0));
+
 @end
 
 /*!
@@ -220,6 +227,11 @@ API_AVAILABLE(macos(10.11), ios(8.0))
 - (nullable id <MTLIntersectionFunctionTable>)newIntersectionFunctionTableWithDescriptor:(MTLIntersectionFunctionTableDescriptor * _Nonnull)descriptor API_AVAILABLE(macos(11.0), ios(14.0));
 
 
+/*!
+ @property shaderValidation
+ @abstract Current state of Shader Validation for the pipeline.
+ */
+@property (readonly, nonatomic) MTLShaderValidation shaderValidation API_AVAILABLE(macos(15.0), ios(18.0));
 @end
 
 NS_ASSUME_NONNULL_END

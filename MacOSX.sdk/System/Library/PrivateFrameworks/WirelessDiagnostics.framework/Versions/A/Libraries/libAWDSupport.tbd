@@ -7,8 +7,10 @@ exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst ]
     weak-symbols:    [ __ZTI17AwdMetadataLoader, __ZTIN5boost6system6detail12std_categoryE, 
                        __ZTIN5boost6system6detail21system_error_categoryE, __ZTIN5boost6system6detail22generic_error_categoryE, 
+                       __ZTINSt3__120__shared_ptr_emplaceI17AwdMetadataLoaderNS_9allocatorIS1_EEEE, 
                        __ZTS17AwdMetadataLoader, __ZTSN5boost6system6detail12std_categoryE, 
-                       __ZTSN5boost6system6detail21system_error_categoryE, __ZTSN5boost6system6detail22generic_error_categoryE ]
+                       __ZTSN5boost6system6detail21system_error_categoryE, __ZTSN5boost6system6detail22generic_error_categoryE, 
+                       __ZTSNSt3__120__shared_ptr_emplaceI17AwdMetadataLoaderNS_9allocatorIS1_EEEE ]
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ __Z14sDumpMetricLogNSt3__110shared_ptrI17AwdMetadataLoaderEEPKvm10DumpFormat, 

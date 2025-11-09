@@ -35,6 +35,7 @@ typedef const struct CF_BRIDGED_TYPE(id) __CTTypesetter * CTTypesetterRef;
     @abstract   Returns the CFType of the typesetter object
 */
 
+CT_EXPORT
 CFTypeID CTTypesetterGetTypeID( void ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 
@@ -98,6 +99,7 @@ CT_EXPORT const CFStringRef kCTTypesetterOptionForcedEmbeddingLevel CT_AVAILABLE
     @result     This function will return a reference to a CTTypesetter.
 */
 
+CT_EXPORT
 CTTypesetterRef CTTypesetterCreateWithAttributedString(
     CFAttributedStringRef string ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
@@ -125,6 +127,7 @@ CTTypesetterRef CTTypesetterCreateWithAttributedString(
     @seealso    kCTTypesetterOptionAllowUnboundedLayout
 */
 
+CT_EXPORT
 CTTypesetterRef _Nullable CTTypesetterCreateWithAttributedStringAndOptions(
     CFAttributedStringRef string,
     CFDictionaryRef _Nullable options ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
@@ -157,6 +160,7 @@ CTTypesetterRef _Nullable CTTypesetterCreateWithAttributedStringAndOptions(
     @result     This function will return a reference to a CTLine.
 */
 
+CT_EXPORT
 CTLineRef CTTypesetterCreateLineWithOffset(
     CTTypesetterRef typesetter,
     CFRange stringRange,
@@ -168,6 +172,7 @@ CTLineRef CTTypesetterCreateLineWithOffset(
     @abstract   Equivalent to CTTypesetterCreateLineWithOffset with offset = 0.0.
 */
 
+CT_EXPORT
 CTLineRef CTTypesetterCreateLine(
     CTTypesetterRef typesetter,
     CFRange stringRange ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
@@ -203,6 +208,7 @@ CTLineRef CTTypesetterCreateLine(
                 to construct a character range for CTTypesetterCreateLine.
 */
 
+CT_EXPORT
 CFIndex CTTypesetterSuggestLineBreakWithOffset(
     CTTypesetterRef typesetter,
     CFIndex startIndex,
@@ -215,6 +221,7 @@ CFIndex CTTypesetterSuggestLineBreakWithOffset(
     @abstract   Equivalent to CTTypesetterSuggestLineBreakWithOffset with offset = 0.0.
 */
 
+CT_EXPORT
 CFIndex CTTypesetterSuggestLineBreak(
     CTTypesetterRef typesetter,
     CFIndex startIndex,
@@ -252,6 +259,7 @@ CFIndex CTTypesetterSuggestLineBreak(
                 used to construct a character range for CTTypesetterCreateLine.
 */
 
+CT_EXPORT
 CFIndex CTTypesetterSuggestClusterBreakWithOffset(
     CTTypesetterRef typesetter,
     CFIndex startIndex,
@@ -264,6 +272,7 @@ CFIndex CTTypesetterSuggestClusterBreakWithOffset(
     @abstract   Equivalent to CTTypesetterSuggestClusterBreakWithOffset with offset = 0.0.
 */
 
+CT_EXPORT
 CFIndex CTTypesetterSuggestClusterBreak(
     CTTypesetterRef typesetter,
     CFIndex startIndex,

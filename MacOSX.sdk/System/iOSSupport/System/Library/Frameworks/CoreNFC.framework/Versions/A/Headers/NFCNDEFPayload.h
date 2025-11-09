@@ -16,14 +16,15 @@ NS_ASSUME_NONNULL_BEGIN
  * @discussion Type Name Format value defined by NFC Data Exchange Format (NDEF) Technical Specification
  *             from NFC Forum.
  */
+API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos)
 typedef NS_ENUM(uint8_t, NFCTypeNameFormat) {
-    NFCTypeNameFormatEmpty API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos)            = 0x00,
-    NFCTypeNameFormatNFCWellKnown API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos)     = 0x01,
-    NFCTypeNameFormatMedia API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos)            = 0x02,
-    NFCTypeNameFormatAbsoluteURI API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos)      = 0x03,
-    NFCTypeNameFormatNFCExternal API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos)      = 0x04,
-    NFCTypeNameFormatUnknown API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos)          = 0x05,
-    NFCTypeNameFormatUnchanged API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos)        = 0x06
+    NFCTypeNameFormatEmpty API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos)            = 0x00,
+    NFCTypeNameFormatNFCWellKnown API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos)     = 0x01,
+    NFCTypeNameFormatMedia API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos)            = 0x02,
+    NFCTypeNameFormatAbsoluteURI API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos)      = 0x03,
+    NFCTypeNameFormatNFCExternal API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos)      = 0x04,
+    NFCTypeNameFormatUnknown API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos)          = 0x05,
+    NFCTypeNameFormatUnchanged API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos)        = 0x06
 };
 
 /*!
@@ -32,13 +33,13 @@ typedef NS_ENUM(uint8_t, NFCTypeNameFormat) {
  * @discussion  A NDEF message payload consists of Type Name Format, Type, Payload Identifier, and Payload data.
  *              The NDEF payload cannot result into a record that is greater than 128KB in size.
  */
-NS_EXTENSION_UNAVAILABLE("Not available to extensions") API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos)
+NS_EXTENSION_UNAVAILABLE("Not available to extensions") API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos)
 @interface NFCNDEFPayload : NSObject<NSSecureCoding>
 
-@property (nonatomic, assign) NFCTypeNameFormat typeNameFormat API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos);
-@property (nonatomic, copy) NSData *type API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos);
-@property (nonatomic, copy) NSData *identifier API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos);
-@property (nonatomic, copy) NSData *payload API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos);
+@property (nonatomic, assign) NFCTypeNameFormat typeNameFormat API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos);
+@property (nonatomic, copy) NSData *type API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos);
+@property (nonatomic, copy) NSData *identifier API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos);
+@property (nonatomic, copy) NSData *payload API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos);
 
 - (instancetype)init NS_UNAVAILABLE;
 
@@ -52,7 +53,7 @@ NS_EXTENSION_UNAVAILABLE("Not available to extensions") API_AVAILABLE(ios(11.0))
  *
  * This initializer uses the maximum payload chunk size defined by the NFC NDEF specification, i.e. 2^32-1 octets.
  */
-- (instancetype)initWithFormat:(NFCTypeNameFormat)format type:(NSData *)type identifier:(NSData *)identifier payload:(NSData *)payload API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos);
+- (instancetype)initWithFormat:(NFCTypeNameFormat)format type:(NSData *)type identifier:(NSData *)identifier payload:(NSData *)payload API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos);
 
 /*!
  * @method initWithFormat:type:identifier:paylaod:
@@ -63,7 +64,7 @@ NS_EXTENSION_UNAVAILABLE("Not available to extensions") API_AVAILABLE(ios(11.0))
  * @param payload       Payload data.  Empty data indicates field is absent from the payload.
  * @param chunkSize     Maximum size of a payload chunk.  0 means no chunking on the payload, i.e. payload is fit in a single record.
  */
-- (instancetype)initWithFormat:(NFCTypeNameFormat)format type:(NSData *)type identifier:(NSData *)identifier payload:(NSData *)payload chunkSize:(size_t)chunkSize API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos);
+- (instancetype)initWithFormat:(NFCTypeNameFormat)format type:(NSData *)type identifier:(NSData *)identifier payload:(NSData *)payload chunkSize:(size_t)chunkSize API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos);
 
 @end
 
@@ -78,7 +79,7 @@ NS_EXTENSION_UNAVAILABLE("Not available to extensions") API_AVAILABLE(ios(11.0))
  * @discussion      Used for creating NDEF URI payloads which cannot be represented with NSURL object.  These are URIs that contain characters
  *                  such as 'ä' and 'ö' which cannot be represent by the 7 bits ASCII encoding.
  */
-+ (_Nullable instancetype)wellKnownTypeURIPayloadWithString:(NSString *)uri API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos);
++ (_Nullable instancetype)wellKnownTypeURIPayloadWithString:(NSString *)uri API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos);
 
 /*!
  * @method wellKnownTypeURIPayloadWithURL:
@@ -87,7 +88,7 @@ NS_EXTENSION_UNAVAILABLE("Not available to extensions") API_AVAILABLE(ios(11.0))
  *
  * @discussion      Preferred convenience function for creating NDEF URI payload with common URLs such as "https://www.apple.com" or "tel:+1-555-555-5555".
  */
-+ (_Nullable instancetype)wellKnownTypeURIPayloadWithURL:(NSURL *)url API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos);
++ (_Nullable instancetype)wellKnownTypeURIPayloadWithURL:(NSURL *)url API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos);
 
 /*!
  * @method wellKnownTypeTextPayloadWithString:locale:
@@ -95,15 +96,15 @@ NS_EXTENSION_UNAVAILABLE("Not available to extensions") API_AVAILABLE(ios(11.0))
  * @param text      Text message.
  * @param locale    NSLocale object.  IANA language code specified by the locale will be saved with the payload.
  */
-+ (_Nullable instancetype)wellKnownTypeTextPayloadWithString:(NSString *)text locale:(NSLocale *)locale API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos);
-+ (_Nullable instancetype)wellKnowTypeTextPayloadWithString:(NSString *)text locale:(NSLocale *)locale API_UNAVAILABLE(watchos, macos, tvos) API_DEPRECATED_WITH_REPLACEMENT("-wellKnownTypeTextPayloadWithString:locale", ios(13.0, 13.0));
++ (_Nullable instancetype)wellKnownTypeTextPayloadWithString:(NSString *)text locale:(NSLocale *)locale API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos);
++ (_Nullable instancetype)wellKnowTypeTextPayloadWithString:(NSString *)text locale:(NSLocale *)locale API_UNAVAILABLE(watchos, macos, tvos, visionos) API_DEPRECATED_WITH_REPLACEMENT("-wellKnownTypeTextPayloadWithString:locale", ios(13.0, 13.0));
 
 /*!
  * @method      wellKnownTypeURIPayload
  *
  * @return      NSURL object base on a valid Well Known Type URI payload. nil if payload is not a URI.
  */
-- (NSURL * _Nullable)wellKnownTypeURIPayload API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos);
+- (NSURL * _Nullable)wellKnownTypeURIPayload API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos);
 
 /*!
  * @method wellKnownTypeTextPayloadWithLocale:
@@ -111,7 +112,7 @@ NS_EXTENSION_UNAVAILABLE("Not available to extensions") API_AVAILABLE(ios(11.0))
  * @param locale    Returns NSLocale object that is constructed from the IANA language code stored with the text payload.
  * @return          NSString object base on a valid Well Known Type Text payload.  nil if payload is not a text.
  */
-- (NSString * _Nullable)wellKnownTypeTextPayloadWithLocale:(NSLocale * _Nullable * _Nonnull)locale API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos);
+- (NSString * _Nullable)wellKnownTypeTextPayloadWithLocale:(NSLocale * _Nullable * _Nonnull)locale API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos);
 
 @end
 NS_ASSUME_NONNULL_END

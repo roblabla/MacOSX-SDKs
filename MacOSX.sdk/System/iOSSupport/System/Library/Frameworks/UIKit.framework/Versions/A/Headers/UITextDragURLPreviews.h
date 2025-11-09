@@ -20,22 +20,22 @@ NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 @interface UIDragPreview (URLPreviews)
 
-+ (instancetype)previewForURL:(NSURL *)url API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, tvos);
++ (instancetype)previewForURL:(NSURL *)url;
 
 /* If the title is nil or empty, this is the same as `previewForURL:`.
  */
-+ (instancetype)previewForURL:(NSURL *)url title:(NSString * _Nullable)title API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, tvos);
++ (instancetype)previewForURL:(NSURL *)url title:(NSString * _Nullable)title;
 
 @end
 
 
 @interface UITargetedDragPreview (URLPreviews)
 
-+ (instancetype)previewForURL:(NSURL *)url target:(UIDragPreviewTarget*)target API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, tvos);
++ (instancetype)previewForURL:(NSURL *)url target:(UIDragPreviewTarget*)target;
 
 /* If the title is nil or empty, this is the same as `previewForURL:target:`.
  */
-+ (instancetype)previewForURL:(NSURL *)url title:(NSString * _Nullable)title target:(UIDragPreviewTarget*)target API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, tvos);
++ (instancetype)previewForURL:(NSURL *)url title:(NSString * _Nullable)title target:(UIDragPreviewTarget*)target;
 
 @end
 

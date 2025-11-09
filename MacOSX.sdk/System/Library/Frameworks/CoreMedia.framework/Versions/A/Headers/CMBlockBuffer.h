@@ -73,14 +73,14 @@ enum
 	kCMBlockBufferEmptyBBufErr					= -12706,
 	kCMBlockBufferUnallocatedBlockErr			= -12707,
 	kCMBlockBufferInsufficientSpaceErr			= -12708,
-} API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
+} API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
 	@typedef CMBlockBufferFlags
 	@discussion
 	Type used for parameters containing CMBlockBuffer feature and control flags
 */
-typedef uint32_t CMBlockBufferFlags API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
+typedef uint32_t CMBlockBufferFlags API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
 	@enum CMBlockBuffer Flags
@@ -104,7 +104,7 @@ enum
 	kCMBlockBufferAlwaysCopyDataFlag		= (1L<<1),
 	kCMBlockBufferDontOptimizeDepthFlag		= (1L<<2),
 	kCMBlockBufferPermitEmptyReferenceFlag	= (1L<<3)
-} API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
+} API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
 	@typedef CMBlockBufferRef
@@ -113,7 +113,7 @@ enum
 	on the last reference to the CMBlockBuffer, any referenced BlockBuffers are released and eligible memory blocks are
 	deallocated. These operations are recursive, so one release could result in many follow on releses.
 */
-typedef struct CM_BRIDGED_TYPE(id) OpaqueCMBlockBuffer *CMBlockBufferRef API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0)) CM_SWIFT_NONSENDABLE;
+typedef struct CM_BRIDGED_TYPE(id) OpaqueCMBlockBuffer *CMBlockBufferRef API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0), visionos(1.0)) CM_SWIFT_NONSENDABLE;
 
 /*!
 	@typedef CMBlockBufferCustomBlockSource
@@ -135,7 +135,7 @@ typedef  struct {
 	void* CM_NULLABLE (* CM_NULLABLE AllocateBlock)(void* CM_NULLABLE refcon, size_t sizeInBytes);
 	void (* CM_NULLABLE FreeBlock)(void* CM_NULLABLE refcon, void* CM_NONNULL doomedMemoryBlock, size_t sizeInBytes);
 	void* CM_NULLABLE refCon;
-} CMBlockBufferCustomBlockSource API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
+} CMBlockBufferCustomBlockSource API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 #if COREMEDIA_USE_DERIVED_ENUMS_FOR_CONSTANTS
 enum : uint32_t
@@ -144,7 +144,7 @@ enum
 #endif
 {
 	kCMBlockBufferCustomBlockSourceVersion = 0
-} API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
+} API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*! 
  @functiongroup CMBlockBuffer creation and assembly functions
@@ -175,7 +175,7 @@ CM_EXPORT OSStatus	CMBlockBufferCreateEmpty(
 		uint32_t subBlockCapacity, 
 		CMBlockBufferFlags flags, 
 		CM_RETURNS_RETAINED_PARAMETER CMBlockBufferRef CM_NULLABLE * CM_NONNULL blockBufferOut)
-							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
+							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
 	@function	CMBlockBufferCreateWithMemoryBlock
@@ -220,7 +220,7 @@ CM_EXPORT OSStatus	CMBlockBufferCreateWithMemoryBlock(
 		size_t dataLength,
 		CMBlockBufferFlags flags, 
 		CM_RETURNS_RETAINED_PARAMETER CMBlockBufferRef CM_NULLABLE * CM_NONNULL blockBufferOut)
-							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
+							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
 	@function	CMBlockBufferCreateWithBufferReference
@@ -248,7 +248,7 @@ CM_EXPORT OSStatus	CMBlockBufferCreateWithBufferReference(
 		size_t dataLength, 
 		CMBlockBufferFlags flags, 
 		CM_RETURNS_RETAINED_PARAMETER CMBlockBufferRef CM_NULLABLE * CM_NONNULL blockBufferOut)
-							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
+							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
 	@function	CMBlockBufferCreateContiguous
@@ -286,7 +286,7 @@ CM_EXPORT OSStatus	CMBlockBufferCreateContiguous(
 		size_t dataLength, 
 		CMBlockBufferFlags flags, 
 		CM_RETURNS_RETAINED_PARAMETER CMBlockBufferRef CM_NULLABLE * CM_NONNULL blockBufferOut)
-							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
+							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 
 /*!
@@ -297,7 +297,7 @@ CM_EXPORT OSStatus	CMBlockBufferCreateContiguous(
 	
 	@result	Returns the CFTypeID corresponding to CMBlockBuffer.
 */
-CM_EXPORT CFTypeID CMBlockBufferGetTypeID(void) API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
+CM_EXPORT CFTypeID CMBlockBufferGetTypeID(void) API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
 	@function	CMBlockBufferAppendMemoryBlock
@@ -341,7 +341,7 @@ CM_EXPORT OSStatus	CMBlockBufferAppendMemoryBlock(
 		size_t offsetToData, 
 		size_t dataLength, 
 		CMBlockBufferFlags flags)
-							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
+							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
 	@function	CMBlockBufferAppendBufferReference
@@ -368,7 +368,7 @@ CM_EXPORT OSStatus	CMBlockBufferAppendBufferReference(
 		size_t offsetToData,
 		size_t dataLength,
 		CMBlockBufferFlags flags)
-							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
+							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
 	@function	CMBlockBufferAssureBlockMemory
@@ -382,7 +382,7 @@ CM_EXPORT OSStatus	CMBlockBufferAppendBufferReference(
 	@result	Returns kCMBlockBufferNoErr if successful.
 */
 CM_EXPORT OSStatus	CMBlockBufferAssureBlockMemory(CMBlockBufferRef CM_NONNULL theBuffer)
-							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
+							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*! 
  @functiongroup CMBlockBuffer access and query functions
@@ -413,7 +413,7 @@ CM_EXPORT OSStatus CMBlockBufferAccessDataBytes(
 		size_t length, 
 		void * CM_NONNULL temporaryBlock,
 		char * CM_NULLABLE * CM_NONNULL returnedPointerOut)
-							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
+							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
 	@function	CMBlockBufferCopyDataBytes
@@ -437,7 +437,7 @@ CM_EXPORT OSStatus	CMBlockBufferCopyDataBytes(
 		size_t offsetToData, 
 		size_t dataLength, 
 		void* CM_NONNULL destination)
-							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
+							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
 	@function	CMBlockBufferReplaceDataBytes
@@ -460,7 +460,7 @@ CM_EXPORT OSStatus	CMBlockBufferReplaceDataBytes(
 		CMBlockBufferRef CM_NONNULL destinationBuffer,
 		size_t offsetIntoDestination, 
 		size_t dataLength)
-							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
+							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
 	@function	CMBlockBufferFillDataBytes
@@ -484,7 +484,7 @@ CM_EXPORT OSStatus	CMBlockBufferFillDataBytes(
 		CMBlockBufferRef CM_NONNULL destinationBuffer,
 		size_t offsetIntoDestination, 
 		size_t dataLength)
-							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
+							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
 	@function	CMBlockBufferGetDataPointer
@@ -516,7 +516,7 @@ CM_EXPORT OSStatus	CMBlockBufferGetDataPointer(
 		size_t * CM_NULLABLE lengthAtOffsetOut,
 		size_t * CM_NULLABLE totalLengthOut,
 		char * CM_NULLABLE * CM_NULLABLE dataPointerOut)
-							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
+							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
 	@function	CMBlockBufferGetDataLength
@@ -532,7 +532,7 @@ CM_EXPORT OSStatus	CMBlockBufferGetDataPointer(
 	@result	Returns the total data length available via this CMBlockBuffer, or zero if it is empty, NULL, or somehow invalid.
 */
 CM_EXPORT size_t	CMBlockBufferGetDataLength(CMBlockBufferRef CM_NONNULL theBuffer)
-							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
+							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
 	@function	CMBlockBufferIsRangeContiguous
@@ -553,7 +553,7 @@ CM_EXPORT Boolean	CMBlockBufferIsRangeContiguous(
 		CMBlockBufferRef CM_NONNULL theBuffer,
 		size_t offset, 
 		size_t length)
-							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
+							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 
 /*!
@@ -568,7 +568,7 @@ CM_EXPORT Boolean	CMBlockBufferIsRangeContiguous(
 	@result	Returns the result of the emptiness test. Will return false if the CMBlockBuffer is NULL.
 */
 CM_EXPORT Boolean	CMBlockBufferIsEmpty(CMBlockBufferRef CM_NONNULL theBuffer)
-							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
+							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 #pragma pack(pop)
     

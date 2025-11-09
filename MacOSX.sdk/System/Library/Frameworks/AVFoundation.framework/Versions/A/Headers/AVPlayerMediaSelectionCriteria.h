@@ -29,7 +29,7 @@ NS_ASSUME_NONNULL_BEGIN
  @discussion    Subclasses of this type that are used from Swift must fulfill the requirements of a Sendable type.
 */
 NS_SWIFT_SENDABLE
-API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(1.0))
+API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(1.0), visionos(1.0))
 @interface AVPlayerMediaSelectionCriteria : NSObject {
 @private
 	void *_criteriaInternal;
@@ -50,7 +50,7 @@ API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(1.0))
    If no option in a media selection group that possesses all of the principal media characteristics is available, the default option in the group will be considered the best match.
    When making automatic selections, AVPlayer treats principal media characteristics as criteria that supersede both language preferences and preferred media characteristics. Use principal media characteristics with caution; use cases in support of accessibility features are normally satisfied via the use of a combination of language preferences and preferred characteristics, not via the use of principal media characteristics.
  */
-@property (nonatomic, readonly, nullable) NSArray<AVMediaCharacteristic> *principalMediaCharacteristics API_AVAILABLE(macos(10.14), ios(12.0), tvos(12.0), watchos(5.0));
+@property (nonatomic, readonly, nullable) NSArray<AVMediaCharacteristic> *principalMediaCharacteristics API_AVAILABLE(macos(10.14), ios(12.0), tvos(12.0), watchos(5.0), visionos(1.0));
 
 /*!
   @method		initWithPreferredLanguages:preferredMediaCharacteristics:
@@ -75,7 +75,7 @@ API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(1.0))
    @result		An instance of AVPlayerMediaSelectionCriteria.
    @discussion  Note that even though principal media characteristics, when present, will override language preferences when making a selection within a specific media selection group, language preferences may still pertain to selections in other groups. For example, language preferences for the group that corresponds to the audible characteristic may be considered when choosing whether or not to select non-forced subtitles for translation purposes.
 */
-- (instancetype)initWithPrincipalMediaCharacteristics:(nullable NSArray<AVMediaCharacteristic> *)principalMediaCharacteristics preferredLanguages:(nullable NSArray<NSString *> *)preferredLanguages preferredMediaCharacteristics:(nullable NSArray<AVMediaCharacteristic> *)preferredMediaCharacteristics API_AVAILABLE(macos(10.14), ios(12.0), tvos(12.0), watchos(5.0));
+- (instancetype)initWithPrincipalMediaCharacteristics:(nullable NSArray<AVMediaCharacteristic> *)principalMediaCharacteristics preferredLanguages:(nullable NSArray<NSString *> *)preferredLanguages preferredMediaCharacteristics:(nullable NSArray<AVMediaCharacteristic> *)preferredMediaCharacteristics API_AVAILABLE(macos(10.14), ios(12.0), tvos(12.0), watchos(5.0), visionos(1.0));
 
 @end
 

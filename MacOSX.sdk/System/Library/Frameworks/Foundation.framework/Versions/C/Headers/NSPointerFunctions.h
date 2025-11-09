@@ -40,7 +40,7 @@ typedef NS_OPTIONS(NSUInteger, NSPointerFunctionsOptions) {
     NSPointerFunctionsMachVirtualMemory API_AVAILABLE(macos(10.5), ios(6.0), watchos(2.0), tvos(9.0)) = (4UL << 0),
 #endif
     NSPointerFunctionsWeakMemory API_AVAILABLE(macos(10.8), ios(6.0), watchos(2.0), tvos(9.0)) = (5UL << 0),         // uses weak read and write barriers appropriate for ARC
-    
+        
     // Personalities are mutually exclusive
     // default is object.  As a special case, 'strong' memory used for Objects will do retain/release under non-GC
     NSPointerFunctionsObjectPersonality API_AVAILABLE(macos(10.5), ios(6.0), watchos(2.0), tvos(9.0)) = (0UL << 8),         // use -hash and -isEqual, object description

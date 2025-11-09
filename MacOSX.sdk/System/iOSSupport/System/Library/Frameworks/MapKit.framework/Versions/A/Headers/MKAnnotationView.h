@@ -77,6 +77,18 @@ NS_CLASS_AVAILABLE(10_9, NA)
 // centerOffset is the offset in screen points from the center of the annotion view.
 @property (nonatomic) CGPoint centerOffset;
 
+// The offset (in points) that selection accessories reference.
+//
+// By default, the center point of an annotation view is referenced
+// by accessories positioned adjacent to the annotation view on the map.
+// You can use this property to reposition the reference point as
+// necessary. MapKit measures the x- and y-offset values in points.
+// Positive offset values move the reference point down and to the right,
+// and negative values move it up and to the left.
+@property (nonatomic, assign) CGPoint accessoryOffset
+API_AVAILABLE(ios(18.0), macos(15.0), visionos(2.0))
+API_UNAVAILABLE(watchos, tvos);
+
 // calloutOffset is the offset in screen points from the top-middle of the annotation view, where the anchor of the callout should be shown.
 @property (nonatomic) CGPoint calloutOffset;
 

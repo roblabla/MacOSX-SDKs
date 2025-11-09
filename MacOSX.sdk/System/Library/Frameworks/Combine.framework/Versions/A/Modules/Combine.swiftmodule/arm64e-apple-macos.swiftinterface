@@ -1,6 +1,6 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.10 (swiftlang-5.10.0.12.5 clang-1500.3.9.1.1)
-// swift-module-flags: -target arm64e-apple-macos14.5 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-library-evolution -enable-library-evolution -enable-library-evolution -enable-library-evolution -enable-library-evolution -enable-bare-slash-regex -user-module-version 314 -module-name Combine
+// swift-compiler-version: Apple Swift version 6.0 effective-5.10 (swiftlang-6.0.0.7.24 clang-1600.0.25.1)
+// swift-module-flags: -target arm64e-apple-macos15.0 -target-variant arm64e-apple-ios18.0-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-library-evolution -enable-library-evolution -enable-library-evolution -enable-library-evolution -enable-library-evolution -enable-bare-slash-regex -user-module-version 338 -module-name Combine
 import Darwin
 import Swift
 import _Concurrency
@@ -356,7 +356,7 @@ extension Combine.Subscribers {
 
             box = AnySubscriberBox(s)
 
-            // The following use normal memory management semantics
+             
             if let desc = s as? CustomStringConvertible {
                 descriptionThunk = {
                     return desc.description
@@ -392,7 +392,7 @@ extension Combine.Subscribers {
             receiveCompletion ?? { _ in }
         )
         
-        // The following use normal memory management semantics
+         
         combineIdentifier = CombineIdentifier()
         descriptionThunk = {
             return "Anonymous AnySubscriber"
@@ -730,6 +730,7 @@ extension Combine.Publishers {
 extension Combine.Publishers.SetFailureType : Swift.Equatable where Upstream : Swift.Equatable {
   public static func == (lhs: Combine.Publishers.SetFailureType<Upstream, Failure>, rhs: Combine.Publishers.SetFailureType<Upstream, Failure>) -> Swift.Bool
 }
+#if compiler(>=5.3) && $NoncopyableGenerics
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 extension Swift.Optional {
   @available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
@@ -745,6 +746,23 @@ extension Swift.Optional {
     public func receive<S>(subscriber: S) where Wrapped == S.Input, S : Combine.Subscriber, S.Failure == Swift.Never
   }
 }
+#else
+@available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+extension Swift.Optional {
+  @available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
+  public var publisher: Swift.Optional<Wrapped>.Publisher {
+    get
+  }
+  @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+  public struct Publisher : Combine.Publisher {
+    public typealias Output = Wrapped
+    public typealias Failure = Swift.Never
+    public let output: Swift.Optional<Wrapped>.Publisher.Output?
+    public init(_ output: Swift.Optional<Wrapped>.Publisher.Output?)
+    public func receive<S>(subscriber: S) where Wrapped == S.Input, S : Combine.Subscriber, S.Failure == Swift.Never
+  }
+}
+#endif
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 extension Swift.Optional.Publisher : Swift.Equatable where Wrapped : Swift.Equatable {
   public static func == (lhs: Swift.Optional<Wrapped>.Publisher, rhs: Swift.Optional<Wrapped>.Publisher) -> Swift.Bool
@@ -1319,52 +1337,72 @@ extension Combine._Introspection {
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 extension Combine.Publisher where Self.Failure == Swift.Never {
-  #if compiler(>=5.3) && $RethrowsProtocol
   @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
   public var values: Combine.AsyncPublisher<Self> {
     get
   }
-  #endif
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 extension Combine.Publisher {
-  #if compiler(>=5.3) && $RethrowsProtocol
   @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
   public var values: Combine.AsyncThrowingPublisher<Self> {
     get
   }
-  #endif
 }
-#if compiler(>=5.3) && $RethrowsProtocol
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 public struct AsyncPublisher<P> : _Concurrency.AsyncSequence where P : Combine.Publisher, P.Failure == Swift.Never {
   public typealias Element = P.Output
   public struct Iterator : _Concurrency.AsyncIteratorProtocol {
-    #if compiler(>=5.3) && $AsyncAwait
     public mutating func next() async -> P.Output?
-    #endif
+    @available(iOS 15.0, tvOS 15.0, watchOS 8.0, macOS 12.0, *)
     public typealias Element = P.Output
+    #if compiler(>=5.3) && $AssociatedTypeImplements
+    @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
+    @_implements(_Concurrency.AsyncIteratorProtocol, Failure) public typealias __AsyncIteratorProtocol_Failure = Swift.Never
+    #else
+    @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
+    public typealias __AsyncIteratorProtocol_Failure = Swift.Never
+    #endif
   }
   public init(_ publisher: P)
   public func makeAsyncIterator() -> Combine.AsyncPublisher<P>.Iterator
+  @available(iOS 15.0, tvOS 15.0, watchOS 8.0, macOS 12.0, *)
   public typealias AsyncIterator = Combine.AsyncPublisher<P>.Iterator
+  #if compiler(>=5.3) && $AssociatedTypeImplements
+  @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
+  @_implements(_Concurrency.AsyncSequence, Failure) public typealias __AsyncSequence_Failure = Swift.Never
+  #else
+  @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
+  public typealias __AsyncSequence_Failure = Swift.Never
+  #endif
 }
-#endif
-#if compiler(>=5.3) && $RethrowsProtocol
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 public struct AsyncThrowingPublisher<P> : _Concurrency.AsyncSequence where P : Combine.Publisher {
   public typealias Element = P.Output
   public struct Iterator : _Concurrency.AsyncIteratorProtocol {
-    #if compiler(>=5.3) && $AsyncAwait
     public mutating func next() async throws -> P.Output?
-    #endif
+    @available(iOS 15.0, tvOS 15.0, watchOS 8.0, macOS 12.0, *)
     public typealias Element = P.Output
+    #if compiler(>=5.3) && $AssociatedTypeImplements
+    @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
+    @_implements(_Concurrency.AsyncIteratorProtocol, Failure) public typealias __AsyncIteratorProtocol_Failure = any Swift.Error
+    #else
+    @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
+    public typealias __AsyncIteratorProtocol_Failure = any Swift.Error
+    #endif
   }
   public init(_ publisher: P)
   public func makeAsyncIterator() -> Combine.AsyncThrowingPublisher<P>.Iterator
+  @available(iOS 15.0, tvOS 15.0, watchOS 8.0, macOS 12.0, *)
   public typealias AsyncIterator = Combine.AsyncThrowingPublisher<P>.Iterator
+  #if compiler(>=5.3) && $AssociatedTypeImplements
+  @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
+  @_implements(_Concurrency.AsyncSequence, Failure) public typealias __AsyncSequence_Failure = any Swift.Error
+  #else
+  @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
+  public typealias __AsyncSequence_Failure = any Swift.Error
+  #endif
 }
-#endif
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 extension Combine.Publisher {
   public func prefix<P>(untilOutputFrom publisher: P) -> Combine.Publishers.PrefixUntilOutput<Self, P> where P : Combine.Publisher
@@ -1611,6 +1649,7 @@ extension Combine.Publishers.Merge8 : Swift.Equatable where A : Swift.Equatable,
 extension Combine.Publishers.MergeMany : Swift.Equatable where Upstream : Swift.Equatable {
   public static func == (lhs: Combine.Publishers.MergeMany<Upstream>, rhs: Combine.Publishers.MergeMany<Upstream>) -> Swift.Bool
 }
+#if compiler(>=5.3) && $NoncopyableGenerics
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 extension Swift.Result {
   public var publisher: Swift.Result<Success, Failure>.Publisher {
@@ -1626,6 +1665,23 @@ extension Swift.Result {
     public func receive<S>(subscriber: S) where Success == S.Input, Failure == S.Failure, S : Combine.Subscriber
   }
 }
+#else
+@available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+extension Swift.Result {
+  public var publisher: Swift.Result<Success, Failure>.Publisher {
+    get
+  }
+  @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+  public struct Publisher : Combine.Publisher {
+    public typealias Output = Success
+    public let result: Swift.Result<Swift.Result<Success, Failure>.Publisher.Output, Failure>
+    public init(_ result: Swift.Result<Swift.Result<Success, Failure>.Publisher.Output, Failure>)
+    public init(_ output: Swift.Result<Success, Failure>.Publisher.Output)
+    public init(_ failure: Failure)
+    public func receive<S>(subscriber: S) where Success == S.Input, Failure == S.Failure, S : Combine.Subscriber
+  }
+}
+#endif
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 extension Swift.Result.Publisher : Swift.Equatable where Success : Swift.Equatable, Failure : Swift.Equatable {
   public static func == (lhs: Swift.Result<Swift.Result<Success, Failure>.Publisher.Output, Failure>.Publisher, rhs: Swift.Result<Swift.Result<Success, Failure>.Publisher.Output, Failure>.Publisher) -> Swift.Bool
@@ -2221,7 +2277,7 @@ extension Combine.Publishers.Last : Swift.Equatable where Upstream : Swift.Equat
     get
   }
   @inlinable public init<P>(_ publisher: P) where Output == P.Output, Failure == P.Failure, P : Combine.Publisher {
-        // If this has already been boxed, avoid boxing again
+         
         if let erased = publisher as? AnyPublisher<Output, Failure> {
             box = erased.box
         } else {
@@ -2574,21 +2630,17 @@ extension Combine.Publishers.Drop : Swift.Equatable where Upstream : Swift.Equat
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 extension Combine.Future where Failure == Swift.Never {
-  #if compiler(>=5.3) && $EffectfulProp
   @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
   final public var value: Output {
     get async
   }
-  #endif
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 extension Combine.Future {
-  #if compiler(>=5.3) && $EffectfulProp
   @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
   final public var value: Output {
     get async throws
   }
-  #endif
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 extension Combine.Publisher {
@@ -2634,6 +2686,8 @@ extension Combine.Publishers.First : Swift.Equatable where Upstream : Swift.Equa
 extension Combine.Subscribers.Completion : Swift.Sendable {}
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 extension Combine.Subscribers.Demand : Swift.Sendable {}
+@available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+extension Combine.Subscribers.Demand : Swift.BitwiseCopyable {}
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 extension Combine.Publishers.PrefetchStrategy : Swift.Equatable {}
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)

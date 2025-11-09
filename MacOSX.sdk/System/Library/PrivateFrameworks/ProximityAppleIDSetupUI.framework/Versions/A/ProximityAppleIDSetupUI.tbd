@@ -60,6 +60,8 @@ exports:
                        '_$s23ProximityAppleIDSetupUI24PASUITargetViewPresenterC20navigationController04flowI0AcA39PASFlowStepsPresentationHandlerProtocol_pSg_0abC0013PASTargetFlowiO0_ptcfc', 
                        '_$s23ProximityAppleIDSetupUI24PASUITargetViewPresenterC20navigationController33_332FA0D13657FC1D27F78EE89D28FB67LLAA39PASFlowStepsPresentationHandlerProtocol_pSgvpfi', 
                        '_$s23ProximityAppleIDSetupUI24PASUITargetViewPresenterC20navigationControllerAcA39PASFlowStepsPresentationHandlerProtocol_p_tcfC', 
+                       '_$s23ProximityAppleIDSetupUI24PASUITargetViewPresenterC20navigationControllerAcA39PASFlowStepsPresentationHandlerProtocol_p_tcfCTq', 
+                       '_$s23ProximityAppleIDSetupUI24PASUITargetViewPresenterC20navigationControllerAcA39PASFlowStepsPresentationHandlerProtocol_p_tcfc', 
                        '_$s23ProximityAppleIDSetupUI24PASUITargetViewPresenterC20stepDidRequestCancelyy0abC011PASFlowStep_pYaF', 
                        '_$s23ProximityAppleIDSetupUI24PASUITargetViewPresenterC20stepDidRequestCancelyy0abC011PASFlowStep_pYaFTu', 
                        '_$s23ProximityAppleIDSetupUI24PASUITargetViewPresenterC21_featureFlagsProvider33_332FA0D13657FC1D27F78EE89D28FB67LL0abC010PASServiceCyAF010PASFeatureI8Protocol_pGvpfi', 

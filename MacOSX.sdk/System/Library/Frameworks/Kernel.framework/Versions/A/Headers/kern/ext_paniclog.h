@@ -35,7 +35,7 @@
 
 #define EXT_PANICLOG_ENABLE     1
 
-#define EXT_PANICLOG_VERSION    1
+#define EXT_PANICLOG_VERSION    2
 
 #define MAX_DATA_ID_SIZE    32
 
@@ -55,6 +55,22 @@
 #define PANIC_WITH_DATA_DATA_ID "Panic with Data Buffer"
 
 #define EXTPANICLOG_ENTITLEMENT         "com.apple.private.allow-ext_paniclog"
+
+/*
+ * These flags are set internally and are passed along with each handle in
+ * the extensible paniclog to be processed by DumpPanic.
+ */
+OS_CLOSED_OPTIONS(ext_paniclog_flags, uint32_t,
+    EXT_PANICLOG_FLAGS_NONE = 0x0,
+    EXT_PANICLOG_FLAGS_ADD_SEPARATE_KEY = 0x1);
+
+OS_CLOSED_OPTIONS(ext_paniclog_create_options, uint32_t,
+    EXT_PANICLOG_OPTIONS_NONE = 0x0,
+    EXT_PANICLOG_OPTIONS_WITH_BUFFER = 0x1,
+    /* Adds the 'data ID' as a key and handle data as its value directly
+     * in the paniclog instead of within the 'ExtensiblePaniclog' field
+     */
+    EXT_PANICLOG_OPTIONS_ADD_SEPARATE_KEY = 0x2);
 
 
 #endif // _KERN_EXT_PANICLOG_H_

@@ -6,6 +6,8 @@
 
 AS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
+@class ASPasskeyAssertionCredentialExtensionInput;
+
 /// A class that holds various parameters related to a passkey credential request.
 ///  This class is provided by the system to the credential provider extension when there is an active passkey request as part of
 ///  -[ASCredentialProviderViewController prepareCredentialListForServiceIdentifiers:requestParameters:] and should be used
@@ -27,6 +29,9 @@ AS_SWIFT_SENDABLE
 
 /// A list of allowed credential IDs for this request. An empty list means all credentials are allowed.
 @property (nonatomic, readonly, copy) NSArray<NSData *> *allowedCredentials;
+
+/// Inputs for WebAuthn extensions used for passkey assertion.
+@property (nonatomic, readonly, nullable) ASPasskeyAssertionCredentialExtensionInput *extensionInput NS_REFINED_FOR_SWIFT API_AVAILABLE(ios(18.0), macos(15.0), visionos(2.0)) API_UNAVAILABLE(watchos, tvos);
 
 @end
 

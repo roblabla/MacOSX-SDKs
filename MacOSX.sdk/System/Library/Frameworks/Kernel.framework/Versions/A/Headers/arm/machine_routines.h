@@ -53,7 +53,7 @@ void ml_cpu_signal_deferred_adjust_timer(uint64_t nanosecs);
 uint64_t ml_cpu_signal_deferred_get_timer(void);
 void ml_cpu_signal_deferred(unsigned int cpu_id);
 void ml_cpu_signal_retract(unsigned int cpu_id);
-bool ml_cpu_signal_is_enabled(void);
+
 
 /* Initialize Interrupts */
 void    ml_init_interrupt(void);
@@ -182,13 +182,12 @@ ex_cb_action_t ex_cb_invoke(
 	vm_offset_t         far);
 
 typedef enum {
-	CLUSTER_TYPE_SMP,
-	CLUSTER_TYPE_E,
-	CLUSTER_TYPE_P,
+	CLUSTER_TYPE_SMP = 0,
+	CLUSTER_TYPE_E   = 1,
+	CLUSTER_TYPE_P   = 2,
 	MAX_CPU_TYPES,
 } cluster_type_t;
 
-void ml_parse_cpu_topology(void);
 
 unsigned int ml_get_cpu_count(void);
 
@@ -251,139 +250,6 @@ typedef struct ml_cpu_info ml_cpu_info_t;
 
 cluster_type_t ml_get_boot_cluster_type(void);
 
-/*!
- * @typedef ml_topology_cpu_t
- * @brief Describes one CPU core in the topology.
- *
- * @field cpu_id            Logical CPU ID: 0, 1, 2, 3, 4, ...
- *                          Dynamically assigned by XNU so it might not match EDT.  No holes.
- * @field phys_id           Physical CPU ID (EDT: reg).  Same as MPIDR[15:0], i.e.
- *                          (cluster_id << 8) | core_number_within_cluster
- * @field cluster_id        Logical Cluster ID: 0, 1, 2, 3, 4, ...
- *                          Dynamically assigned by XNU so it might not match EDT.  No holes.
- * @field die_id            Die ID (EDT: die-id)
- * @field cluster_type      The type of CPUs found in this cluster.
- * @field l2_access_penalty Indicates that the scheduler should try to de-prioritize a core because
- *                          L2 accesses are slower than on the boot processor.
- * @field l2_cache_size     Size of the L2 cache, in bytes.  0 if unknown or not present.
- * @field l2_cache_id       l2-cache-id property read from EDT.
- * @field l3_cache_size     Size of the L3 cache, in bytes.  0 if unknown or not present.
- * @field l3_cache_id       l3-cache-id property read from EDT.
- * @field cpu_IMPL_regs     IO-mapped virtual address of cpuX_IMPL (implementation-defined) register block.
- * @field cpu_IMPL_pa       Physical address of cpuX_IMPL register block.
- * @field cpu_IMPL_len      Length of cpuX_IMPL register block.
- * @field cpu_UTTDBG_regs   IO-mapped virtual address of cpuX_UTTDBG register block.
- * @field cpu_UTTDBG_pa     Physical address of cpuX_UTTDBG register block, if set in DT, else zero
- * @field cpu_UTTDBG_len    Length of cpuX_UTTDBG register block, if set in DT, else zero
- * @field coresight_regs    IO-mapped virtual address of CoreSight debug register block.
- * @field coresight_pa      Physical address of CoreSight register block.
- * @field coresight_len     Length of CoreSight register block.
- * @field die_cluster_id    Physical cluster ID within the local die (EDT: die-cluster-id)
- * @field cluster_core_id   Physical core ID within the local cluster (EDT: cluster-core-id)
- */
-typedef struct ml_topology_cpu {
-	unsigned int                    cpu_id;
-	uint32_t                        phys_id;
-	unsigned int                    cluster_id;
-	unsigned int                    die_id;
-	cluster_type_t                  cluster_type;
-	uint32_t                        l2_access_penalty;
-	uint32_t                        l2_cache_size;
-	uint32_t                        l2_cache_id;
-	uint32_t                        l3_cache_size;
-	uint32_t                        l3_cache_id;
-	vm_offset_t                     cpu_IMPL_regs;
-	uint64_t                        cpu_IMPL_pa;
-	uint64_t                        cpu_IMPL_len;
-	vm_offset_t                     cpu_UTTDBG_regs;
-	uint64_t                        cpu_UTTDBG_pa;
-	uint64_t                        cpu_UTTDBG_len;
-	vm_offset_t                     coresight_regs;
-	uint64_t                        coresight_pa;
-	uint64_t                        coresight_len;
-	unsigned int                    die_cluster_id;
-	unsigned int                    cluster_core_id;
-} ml_topology_cpu_t;
-
-/*!
- * @typedef ml_topology_cluster_t
- * @brief Describes one cluster in the topology.
- *
- * @field cluster_id        Cluster ID (EDT: cluster-id)
- * @field cluster_type      The type of CPUs found in this cluster.
- * @field num_cpus          Total number of usable CPU cores in this cluster.
- * @field first_cpu_id      The cpu_id of the first CPU in the cluster.
- * @field cpu_mask          A bitmask representing the cpu_id's that belong to the cluster.  Example:
- *                          If the cluster contains CPU4 and CPU5, cpu_mask will be 0x30.
- * @field acc_IMPL_regs     IO-mapped virtual address of acc_IMPL (implementation-defined) register block.
- * @field acc_IMPL_pa       Physical address of acc_IMPL register block.
- * @field acc_IMPL_len      Length of acc_IMPL register block.
- * @field cpm_IMPL_regs     IO-mapped virtual address of cpm_IMPL (implementation-defined) register block.
- * @field cpm_IMPL_pa       Physical address of cpm_IMPL register block.
- * @field cpm_IMPL_len      Length of cpm_IMPL register block.
- */
-typedef struct ml_topology_cluster {
-	unsigned int                    cluster_id;
-	cluster_type_t                  cluster_type;
-	unsigned int                    num_cpus;
-	unsigned int                    first_cpu_id;
-	uint64_t                        cpu_mask;
-	vm_offset_t                     acc_IMPL_regs;
-	uint64_t                        acc_IMPL_pa;
-	uint64_t                        acc_IMPL_len;
-	vm_offset_t                     cpm_IMPL_regs;
-	uint64_t                        cpm_IMPL_pa;
-	uint64_t                        cpm_IMPL_len;
-} ml_topology_cluster_t;
-
-// Bump this version number any time any ml_topology_* struct changes, so
-// that KPI users can check whether their headers are compatible with
-// the running kernel.
-#define CPU_TOPOLOGY_VERSION 1
-
-/*!
- * @typedef ml_topology_info_t
- * @brief Describes the CPU topology for all APs in the system.  Populated from EDT and read-only at runtime.
- * @discussion This struct only lists CPU cores that are considered usable by both iBoot and XNU.  Some
- *             physically present CPU cores may be considered unusable due to configuration options like
- *             the "cpus=" boot-arg.  Cores that are disabled in hardware will not show up in EDT at all, so
- *             they also will not be present in this struct.
- *
- * @field version           Version of the struct (set to CPU_TOPOLOGY_VERSION).
- * @field num_cpus          Total number of usable CPU cores.
- * @field max_cpu_id        The highest usable logical CPU ID.
- * @field num_clusters      Total number of AP CPU clusters on the system (usable or not).
- * @field max_cluster_id    The highest cluster ID found in EDT.
- * @field cpus              List of |num_cpus| entries.
- * @field clusters          List of |num_clusters| entries.
- * @field boot_cpu          Points to the |cpus| entry for the boot CPU.
- * @field boot_cluster      Points to the |clusters| entry which contains the boot CPU.
- * @field chip_revision     Silicon revision reported by iBoot, which comes from the
- *                          SoC-specific fuse bits.  See CPU_VERSION_xx macros for definitions.
- */
-typedef struct ml_topology_info {
-	unsigned int                    version;
-	unsigned int                    num_cpus;
-	unsigned int                    max_cpu_id;
-	unsigned int                    num_clusters;
-	unsigned int                    max_cluster_id;
-	unsigned int                    max_die_id;
-	ml_topology_cpu_t               *cpus;
-	ml_topology_cluster_t           *clusters;
-	ml_topology_cpu_t               *boot_cpu;
-	ml_topology_cluster_t           *boot_cluster;
-	unsigned int                    chip_revision;
-	unsigned int                    cluster_types;
-	unsigned int                    cluster_type_num_cpus[MAX_CPU_TYPES];
-	unsigned int                    cluster_type_num_clusters[MAX_CPU_TYPES];
-} ml_topology_info_t;
-
-/*!
- * @function ml_get_topology_info
- * @result A pointer to the read-only topology struct.  Does not need to be freed.  Returns NULL
- *         if the struct hasn't been initialized or the feature is unsupported.
- */
-const ml_topology_info_t *ml_get_topology_info(void);
 
 /*!
  * @function ml_map_cpu_pio
@@ -639,6 +505,8 @@ unsigned int ml_get_machine_mem(void);
 extern void     ml_cpu_init_completed(void);
 extern void     ml_cpu_up(void);
 extern void     ml_cpu_down(void);
+extern int      ml_find_next_up_processor(void);
+
 /*
  * The update to CPU counts needs to be separate from other actions
  * in ml_cpu_up() and ml_cpu_down()
@@ -679,15 +547,12 @@ extern int      be_tracing(void);
  * to wake it up as needed, where "as needed" is defined as "all other CPUs have
  * called the broadcast func". Look around the kernel for examples, or instead use
  * cpu_broadcast_xcall_simple() which does indeed act like you would expect, given
- * the prototype. cpu_broadcast_immediate_xcall has the same caveats and has a similar
- * _simple() wrapper
+ * the prototype.
  */
 typedef void (*broadcastFunc) (void *);
 unsigned int cpu_broadcast_xcall(uint32_t *, boolean_t, broadcastFunc, void *);
 unsigned int cpu_broadcast_xcall_simple(boolean_t, broadcastFunc, void *);
 __result_use_check kern_return_t cpu_xcall(int, broadcastFunc, void *);
-unsigned int cpu_broadcast_immediate_xcall(uint32_t *, boolean_t, broadcastFunc, void *);
-unsigned int cpu_broadcast_immediate_xcall_simple(boolean_t, broadcastFunc, void *);
 __result_use_check kern_return_t cpu_immediate_xcall(int, broadcastFunc, void *);
 
 

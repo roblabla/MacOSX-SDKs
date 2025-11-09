@@ -16,7 +16,7 @@ NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 @class UITraitCollection;
 @protocol UIContentView;
 
-API_AVAILABLE(ios(14.0), tvos(14.0), watchos(7.0)) NS_SWIFT_UI_ACTOR
+API_AVAILABLE(ios(14.0), tvos(14.0)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @protocol UIContentConfiguration <NSObject, NSCopying>
 
 /// Initializes and returns a new instance of the content view using this configuration.
@@ -28,7 +28,7 @@ API_AVAILABLE(ios(14.0), tvos(14.0), watchos(7.0)) NS_SWIFT_UI_ACTOR
 @end
 
 
-API_AVAILABLE(ios(14.0), tvos(14.0), watchos(7.0)) NS_SWIFT_UI_ACTOR
+API_AVAILABLE(ios(14.0), tvos(14.0)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @protocol UIContentView <NSObject>
 
 /// Returns the current configuration of the view. Setting this property applies the new configuration to the view.
@@ -40,7 +40,7 @@ API_AVAILABLE(ios(14.0), tvos(14.0), watchos(7.0)) NS_SWIFT_UI_ACTOR
 /// it being set to the `configuration` property and is capable of updating itself for the
 /// configuration. If not implemented, the view is assumed to be compatible with configuration
 /// classes that match the class of the view's existing configuration.
-- (BOOL)supportsConfiguration:(id<UIContentConfiguration>)configuration API_AVAILABLE(ios(16.0), tvos(16.0), watchos(9.0));
+- (BOOL)supportsConfiguration:(id<UIContentConfiguration>)configuration API_AVAILABLE(ios(16.0), tvos(16.0)) API_UNAVAILABLE(watchos);
 
 @end
 

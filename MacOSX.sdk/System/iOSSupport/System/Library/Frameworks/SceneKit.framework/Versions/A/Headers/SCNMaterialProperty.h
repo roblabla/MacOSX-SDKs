@@ -8,6 +8,8 @@
 #import <SceneKit/SceneKitTypes.h>
 #import <SceneKit/SCNAnimation.h>
 
+@protocol MTLDevice;
+
 NS_ASSUME_NONNULL_BEGIN
 
 /*! @enum SCNFilterMode
@@ -116,13 +118,31 @@ SCN_EXPORT
  */
 @property(nonatomic) SCNColorMask textureComponents API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0));
 
-
 /*!
  @property maxAnisotropy
  @abstract Specifies the receiver's max anisotropy. Defaults to 1.0.
  @discussion Anisotropic filtering reduces blur and preserves detail at extreme viewing angles.
  */
 @property(nonatomic) CGFloat maxAnisotropy API_AVAILABLE(macos(10.9));
+
+/*!
+ @method precomputedLightingEnvironmentContentsWithURL:error:
+ @abstract Returns an object suitable for a scene's `lightingEnvironment.contents` and initialized with data that was previously created by `+precomputedLightingEnvironmentDataForContents:device:error:`.
+ */
++ (nullable id)precomputedLightingEnvironmentContentsWithURL:(NSURL *)url error:(NSError **)error API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0), visionos(1.0));
+
+/*!
+ @method precomputedLightingEnvironmentContentsWithData:error:
+ @abstract Returns an object suitable for a scene's `lightingEnvironment.contents` and initialized with data that was previously created by `+precomputedLightingEnvironmentDataForContents:device:error:`.
+ */
++ (nullable id)precomputedLightingEnvironmentContentsWithData:(NSData *)data error:(NSError **)error API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0), visionos(1.0));
+
+/*!
+ @method precomputedLightingEnvironmentDataForContents:device:error:
+ @abstract Returns an `NSData` instance containing the result of CPU and GPU-intensive operations that is suitable for caching.
+ @discussion This method can be leveraged in a custom offline asset pipeline, or at run time at a convenient time before the scene is presented to the user.
+ */
++ (nullable NSData *)precomputedLightingEnvironmentDataForContents:(id)contents device:(nullable id<MTLDevice>)device error:(NSError **)error API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0), visionos(1.0));
 
 @end
     

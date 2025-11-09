@@ -20,7 +20,7 @@ NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 @class UIPresentationController;
 
-NS_SWIFT_UI_ACTOR
+API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @protocol UIAdaptivePresentationControllerDelegate <NSObject>
 
 @optional
@@ -32,7 +32,7 @@ NS_SWIFT_UI_ACTOR
 - (UIModalPresentationStyle)adaptivePresentationStyleForPresentationController:(UIPresentationController *)controller traitCollection:(UITraitCollection *)traitCollection API_AVAILABLE(ios(8.3));
 
 // Called during adaptation so the delegate may configure properties of the adaptive presentation controller before it is presented.
-- (void)presentationController:(UIPresentationController *)presentationController prepareAdaptivePresentationController:(UIPresentationController *)adaptivePresentationController API_AVAILABLE(ios(15.0));
+- (void)presentationController:(UIPresentationController *)presentationController prepareAdaptivePresentationController:(UIPresentationController *)adaptivePresentationController API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(watchos);
 
 // If this method is not implemented, or returns nil, then the originally presented view controller is used.
 - (nullable UIViewController *)presentationController:(UIPresentationController *)controller viewControllerForAdaptivePresentationStyle:(UIModalPresentationStyle)style;
@@ -44,24 +44,24 @@ NS_SWIFT_UI_ACTOR
 // This method may be called at any time, and may not necessarily be followed by presentationControllerWillDismiss: or presentationControllerDidDismiss:.
 // Any implementation of this method should be fast.
 // Return NO to prevent dismissal of the view controller.
-- (BOOL)presentationControllerShouldDismiss:(UIPresentationController *)presentationController API_AVAILABLE(ios(13.0));
+- (BOOL)presentationControllerShouldDismiss:(UIPresentationController *)presentationController API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos);
 
 // Called on the delegate when the user has taken action to dismiss the presentation, before interaction or animations begin.
 // Use this callback to setup alongside animations or interaction notifications with the presentingViewController's transitionCoordinator.
 // This is not called if the presentation is dismissed programatically.
-- (void)presentationControllerWillDismiss:(UIPresentationController *)presentationController API_AVAILABLE(ios(13.0));
+- (void)presentationControllerWillDismiss:(UIPresentationController *)presentationController API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos);
 
 // Called on the delegate when the user has taken action to dismiss the presentation successfully, after all animations are finished.
 // This is not called if the presentation is dismissed programatically.
-- (void)presentationControllerDidDismiss:(UIPresentationController *)presentationController API_AVAILABLE(ios(13.0));
+- (void)presentationControllerDidDismiss:(UIPresentationController *)presentationController API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos);
 
 // Called on the delegate when the user attempts to dismiss the presentation, but user-initiated dismissal is prevented because the presentedViewController isModalInPresentation or presentationControllerShouldDismiss: returned NO.
 // When this method is called, it is recommended that the user be informed why they cannot dismiss the presentation, such as by presenting an instance of UIAlertController.
-- (void)presentationControllerDidAttemptToDismiss:(UIPresentationController *)presentationController API_AVAILABLE(ios(13.0));
+- (void)presentationControllerDidAttemptToDismiss:(UIPresentationController *)presentationController API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos);
 
 @end
 
-UIKIT_EXTERN API_AVAILABLE(ios(8.0)) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @interface UIPresentationController : NSObject <UIAppearanceContainer, UITraitEnvironment, UIContentContainer, UIFocusEnvironment>
 
 @property(nonatomic, strong, readonly) UIViewController *presentingViewController;
@@ -112,13 +112,13 @@ UIKIT_EXTERN API_AVAILABLE(ios(8.0)) NS_SWIFT_UI_ACTOR
 - (void)dismissalTransitionDidEnd:(BOOL)completed;
 
 // Modifies the trait collection for the presentation controller.
-@property(nullable, nonatomic, copy) UITraitCollection *overrideTraitCollection API_DEPRECATED("Use the traitOverrides property instead", ios(8.0, 17.0), visionos(1.0, 1.0));
+@property(nullable, nonatomic, copy) UITraitCollection *overrideTraitCollection API_DEPRECATED("Use the traitOverrides property instead", ios(8.0, 17.0), visionos(1.0, 1.0)) API_UNAVAILABLE(watchos);
 
 @end
 
-API_AVAILABLE(ios(17.0), tvos(17.0), watchos(10.0))
+API_AVAILABLE(ios(17.0), tvos(17.0)) API_UNAVAILABLE(watchos)
 @interface UIPresentationController () <UITraitChangeObservable>
-@property (nonatomic, readonly) id<UITraitOverrides> traitOverrides;
+@property (nonatomic, readonly) id<UITraitOverrides> traitOverrides API_AVAILABLE(ios(17.0), tvos(17.0)) API_UNAVAILABLE(watchos);
 @end
 
 NS_HEADER_AUDIT_END(nullability, sendability)

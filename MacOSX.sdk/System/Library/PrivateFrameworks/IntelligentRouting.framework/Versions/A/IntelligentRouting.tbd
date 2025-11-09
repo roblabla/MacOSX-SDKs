@@ -10,10 +10,12 @@ exports:
                        _IRCandidateClassificationToString, _IRContextAppleTVControlKey, 
                        _IRContextMediaControlKey, _IRContextMediaRouteKey, _IRErrorDomain, 
                        _IRLogObject, _IRLogObjectLongTerm, _IRLogObjectQE, _IRMakeXPCClientInterface, 
-                       _IRMakeXPCServerInterface, _IRMediaEventSubTypeToString, _IRMediaEventTypeToString, 
-                       _IRServicePackageString, _IRSetupLogging, _kIREventNameAppleTVControl, 
-                       _kIREventNameMedia, _kIRServiceLogPrefixKey ]
-    objc-classes:    [ IRAppleTVControlEvent, IRCandidate, IRCandidateResult, IRConfiguration, 
-                       IRContext, IREvent, IRMediaEvent, IRNode, IRServiceParameters, 
-                       IRServiceToken, IRSession, IRSessionSpotOnLocationParameters ]
+                       _IRMakeXPCServerInterface, _IRMediaBundleTypeToString, _IRMediaEventSubTypeToString, 
+                       _IRMediaEventTypeToString, _IRServicePackageString, _IRSessionAvailableNotification, 
+                       _IRSetupLogging, _kIREventNameAppleTVControl, _kIREventNameMedia, 
+                       _kIRServiceLogPrefixKey ]
+    objc-classes:    [ IRAppleTVControlEvent, IRBundle, IRCandidate, IRCandidateResult, 
+                       IRConfiguration, IRContext, IREvent, IRMediaBundle, IRMediaEvent, 
+                       IRNode, IRServiceParameters, IRServiceToken, IRSession, IRSessionSpotOnLocationParameters, 
+                       IRXPCSessionClient ]
 ...

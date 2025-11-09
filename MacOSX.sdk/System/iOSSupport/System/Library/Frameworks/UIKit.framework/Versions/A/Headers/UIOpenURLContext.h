@@ -13,7 +13,7 @@
 NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 // This object is vended to your application by UIKit when there are URLs to open
-UIKIT_EXTERN API_AVAILABLE(ios(13.0)) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @interface UIOpenURLContext : NSObject
 + (instancetype)new NS_UNAVAILABLE;
 - (instancetype)init NS_UNAVAILABLE;

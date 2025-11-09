@@ -14,11 +14,11 @@
 
 NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
-typedef double UIAccelerationValue API_DEPRECATED("UIAcceleration has been replaced by the CoreMotion framework", ios(2.0, 13.0), tvos(9.0, 13.0)) API_UNAVAILABLE(visionos);
+typedef double UIAccelerationValue API_DEPRECATED("UIAcceleration has been replaced by the CoreMotion framework", ios(2.0, 13.0), tvos(9.0, 13.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(watchos);
 
 @protocol UIAccelerometerDelegate;
 
-UIKIT_EXTERN API_DEPRECATED("UIAcceleration has been replaced by the CoreMotion framework", ios(2.0, 5.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_DEPRECATED("UIAcceleration has been replaced by the CoreMotion framework", ios(2.0, 5.0)) API_UNAVAILABLE(visionos, tvos, watchos) NS_SWIFT_UI_ACTOR
 @interface UIAcceleration : NSObject
 
 @property(nonatomic,readonly) NSTimeInterval timestamp;
@@ -28,7 +28,7 @@ UIKIT_EXTERN API_DEPRECATED("UIAcceleration has been replaced by the CoreMotion 
 
 @end
 
-UIKIT_EXTERN API_DEPRECATED("UIAccelerometer has been replaced by the CoreMotion framework", ios(2.0, 5.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_DEPRECATED("UIAccelerometer has been replaced by the CoreMotion framework", ios(2.0, 5.0)) API_UNAVAILABLE(visionos, tvos, watchos) NS_SWIFT_UI_ACTOR
 @interface UIAccelerometer : NSObject
 
 + (UIAccelerometer *)sharedAccelerometer;
@@ -38,11 +38,11 @@ UIKIT_EXTERN API_DEPRECATED("UIAccelerometer has been replaced by the CoreMotion
 
 @end
 
-API_DEPRECATED("UIAcceleration has been replaced by the CoreMotion framework", ios(2.0, 13.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos) NS_SWIFT_UI_ACTOR
+API_DEPRECATED("UIAcceleration has been replaced by the CoreMotion framework", ios(2.0, 13.0)) API_UNAVAILABLE(visionos, tvos, watchos) NS_SWIFT_UI_ACTOR
 @protocol UIAccelerometerDelegate<NSObject>
 @optional
 
-- (void)accelerometer:(UIAccelerometer *)accelerometer didAccelerate:(UIAcceleration *)acceleration API_DEPRECATED("", ios(2.0, 5.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(visionos);
+- (void)accelerometer:(UIAccelerometer *)accelerometer didAccelerate:(UIAcceleration *)acceleration API_DEPRECATED("", ios(2.0, 5.0)) API_UNAVAILABLE(tvos, visionos, watchos);
 
 @end
 

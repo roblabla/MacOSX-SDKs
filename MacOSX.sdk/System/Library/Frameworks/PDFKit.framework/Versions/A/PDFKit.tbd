@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/Frameworks/PDFKit.framework/Versions/A/PDFKit'
-current-version: 1266.4.2
+current-version: 1332.0.1
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ '$ld$install_name$os10.10$/System/Library/Frameworks/Quartz.framework/Versions/A/Quartz', 
@@ -79,17 +79,17 @@ exports:
                        _PDFPageImageInitializationOptionUpscaleIfSmaller, _PDFPageImageProperty_BackgroundColor, 
                        _PDFPageImageProperty_ColorSpace, _PDFPageImageProperty_DrawAnnotations, 
                        _PDFPageImageProperty_DrawBookmark, _PDFPageImageProperty_DrawProgressCallback, 
-                       _PDFPageImageProperty_WithRotation, _PDFPointEqualToPoint, 
-                       _PDFPointFromCGPoint, _PDFPointMake, _PDFPointToCGPoint, _PDFPrintAutoRotateKey, 
-                       _PDFPrintRotateRightKey, _PDFPrintScalingModeKey, _PDFRectContainsPoint, 
-                       _PDFRectContainsRect, _PDFRectEqualToRect, _PDFRectFromCGRect, 
-                       _PDFRectGetMaxX, _PDFRectGetMaxY, _PDFRectGetMidX, _PDFRectGetMidY, 
-                       _PDFRectGetMinX, _PDFRectGetMinY, _PDFRectInset, _PDFRectIntegral, 
-                       _PDFRectIntersection, _PDFRectIntersectsRect, _PDFRectIsEmpty, 
-                       _PDFRectMake, _PDFRectOffset, _PDFRectToCGRect, _PDFRectUnion, 
-                       _PDFScrollViewPageMayHaveChangedNotification, _PDFScrollViewWillBeginDraggingNotification, 
-                       _PDFSelectionChangedColorNotification, _PDFSizeFromCGSize, 
-                       _PDFSizeMake, _PDFSizeToCGSize, _PDFTextSelectionMenuDidChangeScrollPosition, 
+                       _PDFPageImageProperty_ForOCR, _PDFPageImageProperty_WithRotation, 
+                       _PDFPointEqualToPoint, _PDFPointFromCGPoint, _PDFPointMake, 
+                       _PDFPointToCGPoint, _PDFPrintAutoRotateKey, _PDFPrintRotateRightKey, 
+                       _PDFPrintScalingModeKey, _PDFRectContainsPoint, _PDFRectContainsRect, 
+                       _PDFRectEqualToRect, _PDFRectFromCGRect, _PDFRectGetMaxX, 
+                       _PDFRectGetMaxY, _PDFRectGetMidX, _PDFRectGetMidY, _PDFRectGetMinX, 
+                       _PDFRectGetMinY, _PDFRectInset, _PDFRectIntegral, _PDFRectIntersection, 
+                       _PDFRectIntersectsRect, _PDFRectIsEmpty, _PDFRectMake, _PDFRectOffset, 
+                       _PDFRectToCGRect, _PDFRectUnion, _PDFScrollViewPageMayHaveChangedNotification, 
+                       _PDFScrollViewWillBeginDraggingNotification, _PDFSelectionChangedColorNotification, 
+                       _PDFSizeFromCGSize, _PDFSizeMake, _PDFSizeToCGSize, _PDFTextSelectionMenuDidChangeScrollPosition, 
                        _PDFTextSelectionMenuWillChangeScrollPosition, _PDFTextSelectionMenuWillChangeZoomFactor, 
                        _PDFThumbnailViewDocumentEditedNotification, _PDFViewAnnotationHitNotification, 
                        _PDFViewAnnotationWillHitNotification, _PDFViewAnnotationsDidChangeNotification, 

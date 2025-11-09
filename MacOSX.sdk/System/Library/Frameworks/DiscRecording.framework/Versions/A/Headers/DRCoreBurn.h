@@ -29,23 +29,23 @@
 #endif
 
 #ifndef __CORESERVICES__
-#include <CoreServices/CoreServices.h>
+#import <CoreServices/CoreServices.h>
 #endif
 
 #ifndef _H_DRCoreObject
-#include <DiscRecording/DRCoreObject.h>
+#import <DiscRecording/DRCoreObject.h>
 #endif
 
 #ifndef _H_DRCoreTrack
-#include <DiscRecording/DRCoreTrack.h>
+#import <DiscRecording/DRCoreTrack.h>
 #endif
 
 #ifndef _H_DRCoreDevice
-#include <DiscRecording/DRCoreDevice.h>
+#import <DiscRecording/DRCoreDevice.h>
 #endif
 
 #ifndef __AVAILABILITYMACROS__
-#include <AvailabilityMacros.h>
+#import <AvailabilityMacros.h>
 #endif
 
 #ifdef __cplusplus

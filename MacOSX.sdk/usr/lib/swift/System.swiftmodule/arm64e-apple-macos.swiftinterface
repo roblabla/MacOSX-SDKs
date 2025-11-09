@@ -1,26 +1,25 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.10 (swiftlang-5.10.0.12.5 clang-1500.3.9.1.1)
-// swift-module-flags: -target arm64e-apple-macos14.5 -enable-objc-interop -enable-library-evolution -module-link-name swiftSystem -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-bare-slash-regex -user-module-version 33 -module-name System
+// swift-compiler-version: Apple Swift version 6.0 effective-5.10 (swiftlang-6.0.0.7.24 clang-1600.0.25.1)
+// swift-module-flags: -target arm64e-apple-macos15.0 -target-variant arm64e-apple-ios15.0-macabi -enable-objc-interop -enable-library-evolution -module-link-name swiftSystem -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-bare-slash-regex -user-module-version 60 -module-name System
 import Darwin
 import Darwin.Mach
 import Swift
 import _Concurrency
 import _StringProcessing
 import _SwiftConcurrencyShims
-@available(macOS 14.3, iOS 17.4, watchOS 10.4, tvOS 17.4, *)
+@available(macOS 14.4, iOS 17.4, watchOS 10.4, tvOS 17.4, *)
 public protocol MachPortRight {
 }
-@available(macOS 14.3, iOS 17.4, watchOS 10.4, tvOS 17.4, *)
+@available(macOS 14.4, iOS 17.4, watchOS 10.4, tvOS 17.4, *)
 @inlinable internal func _machPrecondition(file: Swift.StaticString = #file, line: Swift.UInt = #line, _ body: @autoclosure () -> Darwin.kern_return_t) {
   let kr = body()
   let expected = KERN_SUCCESS
   precondition(kr == expected, file: file, line: line)
 }
-@available(macOS 14.3, iOS 17.4, watchOS 10.4, tvOS 17.4, *)
+@available(macOS 14.4, iOS 17.4, watchOS 10.4, tvOS 17.4, *)
 @frozen public enum Mach {
-  #if compiler(>=5.3) && $MoveOnly && $MoveOnlyResilientTypes
-  @available(macOS 14.3, iOS 17.4, watchOS 10.4, tvOS 17.4, *)
-  @_moveOnly public struct Port<RightType> where RightType : System.MachPortRight {
+  @available(macOS 14.4, iOS 17.4, watchOS 10.4, tvOS 17.4, *)
+  public struct Port<RightType> : ~Swift.Copyable where RightType : System.MachPortRight {
     @usableFromInline
     internal var _name: Darwin.mach_port_name_t
     @usableFromInline
@@ -31,7 +30,6 @@ public protocol MachPortRight {
     }
     deinit
   }
-  #endif
   public enum PortRightError : Swift.Error {
     case deadName
     public static func == (a: System.Mach.PortRightError, b: System.Mach.PortRightError) -> Swift.Bool
@@ -47,39 +45,38 @@ public protocol MachPortRight {
   @frozen public struct SendOnceRight : System.MachPortRight {
   }
 }
-#if compiler(>=5.3) && $MoveOnly
-@available(macOS 14.3, iOS 17.4, watchOS 10.4, tvOS 17.4, *)
+@available(macOS 14.4, iOS 17.4, watchOS 10.4, tvOS 17.4, *)
 extension System.Mach.Port where RightType == System.Mach.ReceiveRight {
   public init(name: Darwin.mach_port_name_t, context: Darwin.mach_port_context_t)
-  @available(macOS 14.3, iOS 17.4, watchOS 10.4, tvOS 17.4, *)
+  @available(macOS 14.4, iOS 17.4, watchOS 10.4, tvOS 17.4, *)
   @inlinable public init() {
     var storage: mach_port_name_t = mach_port_name_t(MACH_PORT_NULL)
     _machPrecondition(
       mach_port_allocate(mach_task_self_, MACH_PORT_RIGHT_RECEIVE, &storage)
     )
 
-    // name-only init will guard ReceiveRights
+     
     self.init(name: storage)
   }
-  @available(macOS 14.3, iOS 17.4, watchOS 10.4, tvOS 17.4, *)
+  @available(macOS 14.4, iOS 17.4, watchOS 10.4, tvOS 17.4, *)
   @inlinable public consuming func relinquish() -> (name: Darwin.mach_port_name_t, context: Darwin.mach_port_context_t) {
     let destructured = (name: _name, context: _context)
     discard self
     return destructured
   }
-  @available(macOS 14.3, iOS 17.4, watchOS 10.4, tvOS 17.4, *)
+  @available(macOS 14.4, iOS 17.4, watchOS 10.4, tvOS 17.4, *)
   @inlinable public consuming func unguardAndRelinquish() -> Darwin.mach_port_name_t {
     let (name, context) = self.relinquish()
     _machPrecondition(mach_port_unguard(mach_task_self_, name, context))
     return name
   }
-  @available(macOS 14.3, iOS 17.4, watchOS 10.4, tvOS 17.4, *)
+  @available(macOS 14.4, iOS 17.4, watchOS 10.4, tvOS 17.4, *)
   @inlinable public func withBorrowedName<ReturnType>(body: (Darwin.mach_port_name_t, Darwin.mach_port_context_t) -> ReturnType) -> ReturnType {
     return body(_name, _context)
   }
-  @available(macOS 14.3, iOS 17.4, watchOS 10.4, tvOS 17.4, *)
+  @available(macOS 14.4, iOS 17.4, watchOS 10.4, tvOS 17.4, *)
   @inlinable public func makeSendOnceRight() -> System.Mach.Port<System.Mach.SendOnceRight> {
-    // send once rights do not coalesce
+     
     var newRight: mach_port_name_t = mach_port_name_t(MACH_PORT_NULL)
     var newRightType: mach_port_type_t = MACH_PORT_TYPE_NONE
 
@@ -93,16 +90,16 @@ extension System.Mach.Port where RightType == System.Mach.ReceiveRight {
       )
     )
 
-    // The value of newRight is validated by the Mach.Port initializer
+     
     precondition(newRightType == MACH_MSG_TYPE_MOVE_SEND_ONCE)
 
     return Mach.Port(name: newRight)
   }
-  @available(macOS 14.3, iOS 17.4, watchOS 10.4, tvOS 17.4, *)
+  @available(macOS 14.4, iOS 17.4, watchOS 10.4, tvOS 17.4, *)
   @inlinable public func makeSendRight() -> System.Mach.Port<System.Mach.SendRight> {
     let how = MACH_MSG_TYPE_MAKE_SEND
 
-    // name is the same because send and recv rights are coalesced
+     
     _machPrecondition(
       mach_port_insert_right(
         mach_task_self_, _name, _name, mach_msg_type_name_t(how)
@@ -111,7 +108,7 @@ extension System.Mach.Port where RightType == System.Mach.ReceiveRight {
 
     return Mach.Port(name: _name)
   }
-  @available(macOS 14.3, iOS 17.4, watchOS 10.4, tvOS 17.4, *)
+  @available(macOS 14.4, iOS 17.4, watchOS 10.4, tvOS 17.4, *)
   @inlinable public var makeSendCount: Darwin.mach_port_mscount_t {
     get {
       var status: mach_port_status = mach_port_status()
@@ -138,20 +135,18 @@ extension System.Mach.Port where RightType == System.Mach.ReceiveRight {
     }
   }
 }
-#endif
-#if compiler(>=5.3) && $MoveOnly
-@available(macOS 14.3, iOS 17.4, watchOS 10.4, tvOS 17.4, *)
+@available(macOS 14.4, iOS 17.4, watchOS 10.4, tvOS 17.4, *)
 extension System.Mach.Port where RightType == System.Mach.SendRight {
   @inlinable public consuming func relinquish() -> Darwin.mach_port_name_t {
     let name = _name
     discard self
     return name
   }
-  @available(macOS 14.3, iOS 17.4, watchOS 10.4, tvOS 17.4, *)
+  @available(macOS 14.4, iOS 17.4, watchOS 10.4, tvOS 17.4, *)
   @inlinable public func copySendRight() throws -> System.Mach.Port<System.Mach.SendRight> {
     let how = MACH_MSG_TYPE_COPY_SEND
 
-    // name is the same because send rights are coalesced
+     
     let kr = mach_port_insert_right(
       mach_task_self_, _name, _name, mach_msg_type_name_t(how)
     )
@@ -163,22 +158,20 @@ extension System.Mach.Port where RightType == System.Mach.SendRight {
     return Mach.Port(name: _name)
   }
 }
-#endif
-#if compiler(>=5.3) && $MoveOnly
-@available(macOS 14.3, iOS 17.4, watchOS 10.4, tvOS 17.4, *)
+@available(macOS 14.4, iOS 17.4, watchOS 10.4, tvOS 17.4, *)
 extension System.Mach.Port where RightType == System.Mach.SendOnceRight {
-  @available(macOS 14.3, iOS 17.4, watchOS 10.4, tvOS 17.4, *)
+  @available(macOS 14.4, iOS 17.4, watchOS 10.4, tvOS 17.4, *)
   @inlinable public consuming func relinquish() -> Darwin.mach_port_name_t {
     let name = _name
     discard self
     return name
   }
 }
-#endif
 @available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 @frozen public struct FileDescriptor : Swift.RawRepresentable, Swift.Hashable, Swift.Codable {
   @_alwaysEmitIntoClient public let rawValue: Swift.CInt
   @_alwaysEmitIntoClient public init(rawValue: Swift.CInt) { self.rawValue = rawValue }
+  @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
   public typealias RawValue = Swift.CInt
 }
 @available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
@@ -220,6 +213,7 @@ extension System.FileDescriptor {
     @_alwaysEmitIntoClient public static var O_RDWR: System.FileDescriptor.AccessMode {
       get { readWrite }
     }
+    @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
     public typealias RawValue = Swift.CInt
   }
   @available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
@@ -311,8 +305,11 @@ extension System.FileDescriptor {
     @_alwaysEmitIntoClient public static var O_CLOEXEC: System.FileDescriptor.OpenOptions {
       get { closeOnExec }
     }
+    @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
     public typealias ArrayLiteralElement = System.FileDescriptor.OpenOptions
+    @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
     public typealias Element = System.FileDescriptor.OpenOptions
+    @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
     public typealias RawValue = Swift.CInt
   }
   @available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
@@ -354,6 +351,7 @@ extension System.FileDescriptor {
     @_alwaysEmitIntoClient public static var SEEK_DATA: System.FileDescriptor.SeekOrigin {
       get { nextData }
     }
+    @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
     public typealias RawValue = Swift.CInt
   }
 }
@@ -470,7 +468,7 @@ extension System.FilePath {
 }
 @available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
 extension Swift.String {
-  public init(platformString: Swift.UnsafePointer<System.CInterop.PlatformChar>)
+  @_disfavoredOverload public init(platformString: Swift.UnsafePointer<System.CInterop.PlatformChar>)
   @inlinable @_alwaysEmitIntoClient public init(platformString: [System.CInterop.PlatformChar]) {
     guard let _ = platformString.firstIndex(of: 0) else {
       fatalError(
@@ -606,8 +604,11 @@ extension System.FilePath.ComponentView : Swift.BidirectionalCollection {
   public subscript(position: System.FilePath.ComponentView.Index) -> System.FilePath.Component {
     get
   }
+  @available(iOS 15.0, tvOS 15.0, watchOS 8.0, macOS 12.0, *)
   public typealias Indices = Swift.DefaultIndices<System.FilePath.ComponentView>
+  @available(iOS 15.0, tvOS 15.0, watchOS 8.0, macOS 12.0, *)
   public typealias Iterator = Swift.IndexingIterator<System.FilePath.ComponentView>
+  @available(iOS 15.0, tvOS 15.0, watchOS 8.0, macOS 12.0, *)
   public typealias SubSequence = Swift.Slice<System.FilePath.ComponentView>
 }
 @available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
@@ -706,8 +707,11 @@ extension System.FilePath.ComponentView {
   @_alwaysEmitIntoClient public static var saveText: System.FilePermissions {
     get { FilePermissions(0o1000) }
   }
+  @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
   public typealias ArrayLiteralElement = System.FilePermissions
+  @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
   public typealias Element = System.FilePermissions
+  @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
   public typealias RawValue = System.CModeT
 }
 @available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
@@ -720,10 +724,10 @@ extension System.FilePermissions : Swift.CustomStringConvertible, Swift.CustomDe
   }
 }
 @available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
-public typealias CModeT = Darwin.mode_t
+public typealias CModeT = sys_types.mode_t
 @available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
 public enum CInterop {
-  public typealias Mode = Darwin.mode_t
+  public typealias Mode = sys_types.mode_t
   public typealias Char = Swift.CChar
   public typealias PlatformChar = System.CInterop.Char
   public typealias PlatformUnicodeEncoding = Swift.UTF8
@@ -1274,24 +1278,33 @@ extension System.FilePath.Root {
 extension System.FilePath : Swift.ExpressibleByStringLiteral {
   public init(stringLiteral: Swift.String)
   public init(_ string: Swift.String)
+  @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
   public typealias ExtendedGraphemeClusterLiteralType = Swift.String
+  @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
   public typealias StringLiteralType = Swift.String
+  @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
   public typealias UnicodeScalarLiteralType = Swift.String
 }
 @available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
 extension System.FilePath.Component : Swift.ExpressibleByStringLiteral {
   public init(stringLiteral: Swift.String)
   public init?(_ string: Swift.String)
+  @available(iOS 15.0, tvOS 15.0, watchOS 8.0, macOS 12.0, *)
   public typealias ExtendedGraphemeClusterLiteralType = Swift.String
+  @available(iOS 15.0, tvOS 15.0, watchOS 8.0, macOS 12.0, *)
   public typealias StringLiteralType = Swift.String
+  @available(iOS 15.0, tvOS 15.0, watchOS 8.0, macOS 12.0, *)
   public typealias UnicodeScalarLiteralType = Swift.String
 }
 @available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
 extension System.FilePath.Root : Swift.ExpressibleByStringLiteral {
   public init(stringLiteral: Swift.String)
   public init?(_ string: Swift.String)
+  @available(iOS 15.0, tvOS 15.0, watchOS 8.0, macOS 12.0, *)
   public typealias ExtendedGraphemeClusterLiteralType = Swift.String
+  @available(iOS 15.0, tvOS 15.0, watchOS 8.0, macOS 12.0, *)
   public typealias StringLiteralType = Swift.String
+  @available(iOS 15.0, tvOS 15.0, watchOS 8.0, macOS 12.0, *)
   public typealias UnicodeScalarLiteralType = Swift.String
 }
 @available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
@@ -1432,13 +1445,13 @@ extension System.FilePath {
 }
 @available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 extension System.FilePath : Swift.Hashable, Swift.Codable {
-  public static func == (a: System.FilePath, b: System.FilePath) -> Swift.Bool
+  public init(from decoder: any Swift.Decoder) throws
   public func hash(into hasher: inout Swift.Hasher)
+  public static func == (a: System.FilePath, b: System.FilePath) -> Swift.Bool
   public func encode(to encoder: any Swift.Encoder) throws
   public var hashValue: Swift.Int {
     get
   }
-  public init(from decoder: any Swift.Decoder) throws
 }
 @available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 extension System.FileDescriptor {
@@ -1535,16 +1548,16 @@ extension System.FileDescriptor {
   @usableFromInline
   internal static func _pipe() -> Swift.Result<(readEnd: System.FileDescriptor, writeEnd: System.FileDescriptor), System.Errno>
 }
-@available(macOS 14.3, iOS 17.4, watchOS 10.4, tvOS 17.4, *)
+@available(macOS 14.4, iOS 17.4, watchOS 10.4, tvOS 17.4, *)
 extension System.FileDescriptor {
-  @available(macOS 14.3, iOS 17.4, watchOS 10.4, tvOS 17.4, *)
+  @available(macOS 14.4, iOS 17.4, watchOS 10.4, tvOS 17.4, *)
   @_alwaysEmitIntoClient public func resize(to newSize: Swift.Int64, retryOnInterrupt: Swift.Bool = true) throws {
     try _resize(
       to: newSize,
       retryOnInterrupt: retryOnInterrupt
     ).get()
   }
-  @available(macOS 14.3, iOS 17.4, watchOS 10.4, tvOS 17.4, *)
+  @available(macOS 14.4, iOS 17.4, watchOS 10.4, tvOS 17.4, *)
   @usableFromInline
   internal func _resize(to newSize: Swift.Int64, retryOnInterrupt: Swift.Bool) -> Swift.Result<(), System.Errno>
 }
@@ -2260,6 +2273,7 @@ extension System.FileDescriptor {
   @_alwaysEmitIntoClient public static var EOPNOTSUPP: System.Errno {
     get { notSupportedOnSocket }
   }
+  @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
   public typealias RawValue = Swift.CInt
 }
 @available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
@@ -2346,20 +2360,36 @@ extension System.Errno {
     return lhs == value
   }
 }
-@available(macOS 14.3, iOS 17.4, watchOS 10.4, tvOS 17.4, *)
+@available(macOS 14.4, iOS 17.4, watchOS 10.4, tvOS 17.4, *)
 extension System.Mach : Swift.Sendable {}
-@available(macOS 14.3, iOS 17.4, watchOS 10.4, tvOS 17.4, *)
+@available(macOS 14.4, iOS 17.4, watchOS 10.4, tvOS 17.4, *)
+extension System.Mach : Swift.BitwiseCopyable {}
+@available(macOS 14.4, iOS 17.4, watchOS 10.4, tvOS 17.4, *)
 extension System.Mach.PortRightError : Swift.Equatable {}
-@available(macOS 14.3, iOS 17.4, watchOS 10.4, tvOS 17.4, *)
+@available(macOS 14.4, iOS 17.4, watchOS 10.4, tvOS 17.4, *)
 extension System.Mach.PortRightError : Swift.Hashable {}
-@available(macOS 14.3, iOS 17.4, watchOS 10.4, tvOS 17.4, *)
+@available(macOS 14.4, iOS 17.4, watchOS 10.4, tvOS 17.4, *)
 extension System.Mach.ReceiveRight : Swift.Sendable {}
-@available(macOS 14.3, iOS 17.4, watchOS 10.4, tvOS 17.4, *)
+@available(macOS 14.4, iOS 17.4, watchOS 10.4, tvOS 17.4, *)
+extension System.Mach.ReceiveRight : Swift.BitwiseCopyable {}
+@available(macOS 14.4, iOS 17.4, watchOS 10.4, tvOS 17.4, *)
 extension System.Mach.SendRight : Swift.Sendable {}
-@available(macOS 14.3, iOS 17.4, watchOS 10.4, tvOS 17.4, *)
+@available(macOS 14.4, iOS 17.4, watchOS 10.4, tvOS 17.4, *)
+extension System.Mach.SendRight : Swift.BitwiseCopyable {}
+@available(macOS 14.4, iOS 17.4, watchOS 10.4, tvOS 17.4, *)
 extension System.Mach.SendOnceRight : Swift.Sendable {}
+@available(macOS 14.4, iOS 17.4, watchOS 10.4, tvOS 17.4, *)
+extension System.Mach.SendOnceRight : Swift.BitwiseCopyable {}
 @available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 extension System.FileDescriptor : Swift.Sendable {}
+@available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
+extension System.FileDescriptor : Swift.BitwiseCopyable {}
+@available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
+extension System.FileDescriptor.AccessMode : Swift.BitwiseCopyable {}
+@available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
+extension System.FileDescriptor.OpenOptions : Swift.BitwiseCopyable {}
+@available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
+extension System.FileDescriptor.SeekOrigin : Swift.BitwiseCopyable {}
 @available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
 extension System.FilePath.Component : Swift.Encodable {}
 @available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
@@ -2377,8 +2407,14 @@ extension System.FilePath.Component.Kind : Swift.Equatable {}
 @available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
 extension System.FilePath.Component.Kind : Swift.Hashable {}
 @available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
+extension System.FilePath.Component.Kind : Swift.BitwiseCopyable {}
+@available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
 extension System.FilePath.ComponentView : Swift.Encodable {}
 @available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
 extension System.FilePath.ComponentView : Swift.Decodable {}
 @available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
 extension System.FilePath.ComponentView : Swift.Hashable {}
+@available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
+extension System.FilePermissions : Swift.BitwiseCopyable {}
+@available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
+extension System.Errno : Swift.BitwiseCopyable {}

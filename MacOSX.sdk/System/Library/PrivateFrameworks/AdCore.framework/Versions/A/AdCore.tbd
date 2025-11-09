@@ -29,8 +29,8 @@ exports:
                        _AppStoreDefaultsBundleID, _ClientTypeToString, _GetKeychainPropertyListForKey, 
                        _NewsWidgetDefaultsBundleID, _PreferencesDefaultsBundleID, 
                        _PreferencesMacDefaultsBundleID, _RequestRetryDelay, _SetKeychainPropertyListForKey, 
-                       _StringIsUUID, _StringIsZeroUUID, _StringMatch, __ADLog, _dumpObject, 
-                       _kAPSystemInfoUnknown, _kBagPropertyJingleRequest_OptInBagKey, 
+                       _StringIsFromUUID, _StringIsUUID, _StringIsZeroUUID, _StringMatch, 
+                       __ADLog, _dumpObject, _kAPSystemInfoUnknown, _kBagPropertyJingleRequest_OptInBagKey, 
                        _kBagPropertyJingleRequest_OptOutBagKey, _kBagPropertyJingleRequest_SegmentBagKey, 
                        _releaseXPCTransaction, _takeXPCTransaction ]
     objc-classes:    [ ADAnalyticsEvent, ADAttributionRequest, ADAttributionResponse, 

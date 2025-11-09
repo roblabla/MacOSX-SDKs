@@ -22,7 +22,7 @@ API_AVAILABLE(ios(16.0), macos(13.0)) API_UNAVAILABLE(watchos, tvos)
 - (instancetype)initWithScene:(MKLookAroundScene *)scene options:(MKLookAroundSnapshotOptions *)options NS_DESIGNATED_INITIALIZER;
 
 // defaults to the main queue
-- (void)getSnapshotWithCompletionHandler:(void (^)(MKLookAroundSnapshot * _Nullable snapshot, NSError * _Nullable error))completionHandler NS_SWIFT_ASYNC_NAME(getter:snapshot());
+- (void)getSnapshotWithCompletionHandler:(NS_SWIFT_UI_ACTOR void (^)(MKLookAroundSnapshot * _Nullable snapshot, NSError * _Nullable error))completionHandler NS_SWIFT_ASYNC_NAME(getter:snapshot());
 - (void)cancel;
 
 @property (nonatomic, readonly, getter=isLoading) BOOL loading;

@@ -6,7 +6,7 @@ AS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 NS_REFINED_FOR_SWIFT
 API_AVAILABLE(macos(14.0), ios(17.0)) API_UNAVAILABLE(tvos, watchos)
-@interface ASAuthorizationPublicKeyCredentialLargeBlobRegistrationOutput : NSObject
+@interface ASAuthorizationPublicKeyCredentialLargeBlobRegistrationOutput : NSObject <NSCopying, NSSecureCoding>
 
 @property (nonatomic, readonly) BOOL isSupported;
 

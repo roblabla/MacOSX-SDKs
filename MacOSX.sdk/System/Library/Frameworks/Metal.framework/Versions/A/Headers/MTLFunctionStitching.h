@@ -18,6 +18,28 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /*!
+ @abstract
+ A bitfield of options to create a stitched library
+ */
+typedef NS_OPTIONS(NSUInteger, MTLStitchedLibraryOptions)
+{
+    MTLStitchedLibraryOptionNone                       = 0,
+    
+    /**
+     * @brief Library creation fails (i.e nil is returned) if:
+     * - A lookup binary archive has been specified
+     * - The library has not been found in the archive
+     */
+    MTLStitchedLibraryOptionFailOnBinaryArchiveMiss    = 1 << 0,
+    /**
+     * @brief stores and tracks this library in a Metal Pipelines Script
+     * This flag is optional and only supported in the context of binary archives.
+     * @discussion This flag is required for inspecting and consuming binary archives with stitched libraries via the metal-source tool. It is not required for recompilation, nor for storing stitched libraries in binary archives. Set this flag only if you intend to use metal-source on a serialized binary archive.
+     */
+    MTLStitchedLibraryOptionStoreLibraryInMetalPipelinesScript  = 1 << 1,
+} API_AVAILABLE(macos(15.0), ios(18.0));
+
+/*!
  @protocol MTLFunctionStitchingAttribute
  @abstract An attribute to be applied to the produced stitched function.
 */
@@ -74,7 +96,7 @@ MTL_EXPORT API_AVAILABLE(macos(12.0), ios(15.0))
 @interface MTLFunctionStitchingGraph : NSObject<NSCopying>
 @property (readwrite, copy, nonnull, nonatomic) NSString* functionName;
 @property (readwrite, copy, nonnull, nonatomic) NSArray<MTLFunctionStitchingFunctionNode *>* nodes;
-@property (readwrite, copy, nullable, nonatomic) MTLFunctionStitchingFunctionNode* outputNode;
+@property (readwrite, retain, nullable, nonatomic) MTLFunctionStitchingFunctionNode* outputNode;
 @property (readwrite, copy, nonnull, nonatomic) NSArray<id<MTLFunctionStitchingAttribute>>* attributes;
 - (instancetype)initWithFunctionName:(nonnull NSString*)functionName
                                nodes:(nonnull NSArray<MTLFunctionStitchingFunctionNode *>*)nodes
@@ -90,6 +112,19 @@ MTL_EXPORT API_AVAILABLE(macos(12.0), ios(15.0))
 @interface MTLStitchedLibraryDescriptor : NSObject<NSCopying>
 @property (readwrite, copy, nonnull, nonatomic) NSArray<MTLFunctionStitchingGraph *>* functionGraphs;
 @property (readwrite, copy, nonnull, nonatomic) NSArray<id<MTLFunction>>* functions;
+
+/*!
+@property binaryArchives
+@abstract The array of archives to be searched.
+@discussion Binary archives to be searched for precompiled stitched libraries during the compilation of this library.
+*/
+@property (readwrite, copy, nonnull, nonatomic) NSArray<id<MTLBinaryArchive>>* binaryArchives API_AVAILABLE(macos(15.0), ios(18.0));
+
+/*!
+* @property options
+* @abstract The options to use for this new MTLLibrary.
+*/
+@property (readwrite, nonatomic) MTLStitchedLibraryOptions options API_AVAILABLE(macos(15.0), ios(18.0));
 @end
 
 

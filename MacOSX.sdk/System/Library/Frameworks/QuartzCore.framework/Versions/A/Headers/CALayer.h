@@ -16,12 +16,12 @@
 @protocol CAAction, CALayerDelegate;
 @protocol CALayoutManager;
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
-typedef NSString * CALayerContentsGravity NS_TYPED_ENUM;
-typedef NSString * CALayerContentsFormat NS_TYPED_ENUM;
-typedef NSString * CALayerContentsFilter NS_TYPED_ENUM;
-typedef NSString * CALayerCornerCurve NS_TYPED_ENUM;
+typedef NSString * CALayerContentsGravity NS_TYPED_ENUM API_AVAILABLE(macos(10.5), ios(2.0), tvos(9.0)) API_UNAVAILABLE(watchos);
+typedef NSString * CALayerContentsFormat NS_TYPED_ENUM API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0)) API_UNAVAILABLE(watchos);
+typedef NSString * CALayerContentsFilter NS_TYPED_ENUM API_AVAILABLE(macos(10.5), ios(2.0), tvos(9.0)) API_UNAVAILABLE(watchos);
+typedef NSString * CALayerCornerCurve NS_TYPED_ENUM API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0)) API_UNAVAILABLE(watchos);
 
 /* Bit definitions for `autoresizingMask' property. */
 
@@ -36,6 +36,26 @@ typedef NS_OPTIONS (unsigned int, CAAutoresizingMask)
   kCALayerMaxYMargin    = 1U << 5
 };
 
+
+/* Options that control when to tone map CALayer contents and
+   CAMetalLayer drawables. Defaults to CAToneMapModeAutomatic. */
+typedef NSString * CAToneMapMode NS_TYPED_ENUM NS_SWIFT_NAME(CALayer.ToneMapMode)
+API_AVAILABLE(macos(15.0), ios(18.0), tvos(18.0), visionos(2.0)) API_UNAVAILABLE(watchos);
+
+/* Let the OS decide whether to tone map. */
+extern CAToneMapMode const CAToneMapModeAutomatic NS_SWIFT_NAME(automatic)
+API_AVAILABLE(macos(15.0), ios(18.0), tvos(18.0), visionos(2.0)) API_UNAVAILABLE(watchos);
+
+/* Never tone map contents. */
+extern CAToneMapMode const CAToneMapModeNever NS_SWIFT_NAME(never)
+API_AVAILABLE(macos(15.0), ios(18.0), tvos(18.0), visionos(2.0)) API_UNAVAILABLE(watchos);
+
+/* Tone map whenever supported by the OS. This includes
+   PQ, HLG and extended-range contents for CALayer
+   and CAMetalLayers. */
+extern CAToneMapMode const CAToneMapModeIfSupported NS_SWIFT_NAME(ifSupported)
+API_AVAILABLE(macos(15.0), ios(18.0), tvos(18.0), visionos(2.0)) API_UNAVAILABLE(watchos);
+
 /* Bit definitions for `edgeAntialiasingMask' property. */
 
 typedef NS_OPTIONS (unsigned int, CAEdgeAntialiasingMask)
@@ -44,7 +64,7 @@ typedef NS_OPTIONS (unsigned int, CAEdgeAntialiasingMask)
   kCALayerRightEdge     = 1U << 1,      /* Maximum X edge. */
   kCALayerBottomEdge    = 1U << 2,      /* Minimum Y edge. */
   kCALayerTopEdge       = 1U << 3,      /* Maximum Y edge. */
-};
+} API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 
 /* Bit definitions for `maskedCorners' property. */
 
@@ -54,11 +74,11 @@ typedef NS_OPTIONS (NSUInteger, CACornerMask)
   kCALayerMaxXMinYCorner = 1U << 1,
   kCALayerMinXMaxYCorner = 1U << 2,
   kCALayerMaxXMaxYCorner = 1U << 3,
-};
+} API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0)) API_UNAVAILABLE(watchos);
 
 /** The base layer class. **/
 
-API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0))
+API_AVAILABLE(macos(10.5), ios(2.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 @interface CALayer : NSObject <NSSecureCoding, CAMediaTiming>
 
 /** Layer creation and initialization. **/
@@ -349,7 +369,7 @@ API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0))
  * as large as the layer bounds). Defaults to one. Animatable. */
 
 @property CGFloat contentsScale
-  API_AVAILABLE(macos(10.7), ios(4.0), watchos(2.0), tvos(9.0));
+  API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 
 /* A rectangle in normalized image coordinates defining the scaled
  * center part of the `contents' image.
@@ -377,7 +397,7 @@ API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0))
  * does not affect the interpretation of the `contents' property directly. */
 
 @property(copy) CALayerContentsFormat contentsFormat
-  API_AVAILABLE(macos(10.12), ios(10.0), watchos(3.0), tvos(10.0));
+  API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0)) API_UNAVAILABLE(watchos);
 
 /* If YES, contents of the layer can be displayed up to its NSScreen's
  * maximumExtendedDynamicRangeColorComponentValue or UIScreen's
@@ -390,6 +410,18 @@ API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0))
 @property BOOL wantsExtendedDynamicRangeContent
   API_AVAILABLE(macos(14.0), ios(17.0), macCatalyst(17.0)) API_UNAVAILABLE(tvos, watchos);
 
+/* Options that control when to tone map CALayer contents and
+   CAMetalLayer drawables. */
+@property(copy) CAToneMapMode toneMapMode
+API_AVAILABLE(macos(15.0), ios(18.0), tvos(18.0), visionos(2.0)) API_UNAVAILABLE(watchos);
+
+/* If YES, allows the layer's content to render at arbitrary integer scales
+   to preserve high-quality vector graphics. This only affects content drawn
+   through -drawLayerInContext or -drawInContext. Changing this value will
+   trigger an explicit `setNeedsDisplay`. The default value is NO. */
+
+@property BOOL wantsDynamicContentScaling
+  API_AVAILABLE(visionos(1.0)) API_UNAVAILABLE(macos, ios, tvos, watchos);
 
 
 /* The filter types to use when rendering the `contents' property of
@@ -447,7 +479,7 @@ API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0))
  * default value is NO. */
 
 @property BOOL drawsAsynchronously
-  API_AVAILABLE(macos(10.8), ios(6.0), watchos(2.0), tvos(9.0));
+  API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 
 /* Called via the -display method when the `contents' property is being
  * updated. Default implementation does nothing. The context may be
@@ -486,7 +518,7 @@ API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0))
  * YES on macOS and NO on iOS. */
 
 @property BOOL allowsEdgeAntialiasing
-    API_AVAILABLE(macos(10.10), ios(2.0), watchos(2.0), tvos(9.0));
+    API_AVAILABLE(macos(10.10), ios(2.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 
 /* The background color of the layer. Default value is nil. Colors
  * created from tiled patterns are supported. Animatable. */
@@ -503,19 +535,19 @@ API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0))
  * `cornerRadius' property. Defaults to all four corners. */
 
 @property CACornerMask maskedCorners
-  API_AVAILABLE(macos(10.13), ios(11.0), watchos(4.0), tvos(11.0));
+  API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0)) API_UNAVAILABLE(watchos);
 
 /* Defines the curve used for rendering the rounded corners of the layer.
  * Defaults to 'kCACornerCurveCircular'. */
 
 @property(copy) CALayerCornerCurve cornerCurve
-  API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0));
+  API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0)) API_UNAVAILABLE(watchos);
 
 /* Expansion scale factor applied to the rounded corner bounding box size
  * when specific corner curve is used. */
 
 + (CGFloat)cornerCurveExpansionFactor:(CALayerCornerCurve)curve
-  API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0));
+  API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0)) API_UNAVAILABLE(watchos);
 
 /* The width of the layer's border, inset from the layer bounds. The
  * border is composited above the layer's content and sublayers and
@@ -547,7 +579,7 @@ API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0))
  * macOS and NO on iOS. */
 
 @property BOOL allowsGroupOpacity
-    API_AVAILABLE(macos(10.10), ios(2.0), watchos(2.0), tvos(9.0));
+    API_AVAILABLE(macos(10.10), ios(2.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 
 /* A filter object used to composite the layer with its (possibly
  * filtered) background. Default value is nil, which implies source-
@@ -838,6 +870,7 @@ API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0))
 
 /** Action (event handler) protocol. **/
 
+API_AVAILABLE(macos(10.5), ios(2.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 @protocol CAAction
 
 /* Called to trigger the event named 'path' on the receiver. The object
@@ -852,12 +885,14 @@ API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0))
 
 /** NSNull protocol conformance. **/
 
+API_AVAILABLE(macos(10.5), ios(2.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 @interface NSNull (CAActionAdditions) <CAAction>
 
 @end
 
 /** Delegate methods. **/
 
+API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0)) API_UNAVAILABLE(watchos)
 @protocol CALayerDelegate <NSObject>
 @optional
 
@@ -877,7 +912,7 @@ API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0))
  * be called if the delegate implements -displayLayer. */
 
 - (void)layerWillDraw:(CALayer *)layer
-  API_AVAILABLE(macos(10.12), ios(10.0), watchos(3.0), tvos(10.0));
+  API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0)) API_UNAVAILABLE(watchos);
 
 /* Called by the default -layoutSublayers implementation before the layout
  * manager is checked. Note that if the delegate method is invoked, the
@@ -899,72 +934,72 @@ API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0))
 /** Layer `contentsGravity' values. **/
 
 CA_EXTERN CALayerContentsGravity const kCAGravityCenter
-    API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
+    API_AVAILABLE(macos(10.5), ios(2.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 CA_EXTERN CALayerContentsGravity const kCAGravityTop
-    API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
+    API_AVAILABLE(macos(10.5), ios(2.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 CA_EXTERN CALayerContentsGravity const kCAGravityBottom
-    API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
+    API_AVAILABLE(macos(10.5), ios(2.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 CA_EXTERN CALayerContentsGravity const kCAGravityLeft
-    API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
+    API_AVAILABLE(macos(10.5), ios(2.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 CA_EXTERN CALayerContentsGravity const kCAGravityRight
-    API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
+    API_AVAILABLE(macos(10.5), ios(2.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 CA_EXTERN CALayerContentsGravity const kCAGravityTopLeft
-    API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
+    API_AVAILABLE(macos(10.5), ios(2.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 CA_EXTERN CALayerContentsGravity const kCAGravityTopRight
-    API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
+    API_AVAILABLE(macos(10.5), ios(2.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 CA_EXTERN CALayerContentsGravity const kCAGravityBottomLeft
-    API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
+    API_AVAILABLE(macos(10.5), ios(2.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 CA_EXTERN CALayerContentsGravity const kCAGravityBottomRight
-    API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
+    API_AVAILABLE(macos(10.5), ios(2.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 CA_EXTERN CALayerContentsGravity const kCAGravityResize
-    API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
+    API_AVAILABLE(macos(10.5), ios(2.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 CA_EXTERN CALayerContentsGravity const kCAGravityResizeAspect
-    API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
+    API_AVAILABLE(macos(10.5), ios(2.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 CA_EXTERN CALayerContentsGravity const kCAGravityResizeAspectFill
-    API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
+    API_AVAILABLE(macos(10.5), ios(2.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 
 /** Layer `contentsFormat` values. **/
 
 CA_EXTERN CALayerContentsFormat const kCAContentsFormatRGBA8Uint /* RGBA UInt8 per component */
-  API_AVAILABLE(macos(10.12), ios(10.0), watchos(3.0), tvos(10.0));
+  API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0)) API_UNAVAILABLE(watchos);
 CA_EXTERN CALayerContentsFormat const kCAContentsFormatRGBA16Float /* RGBA half-float 16-bit per component */
-  API_AVAILABLE(macos(10.12), ios(10.0), watchos(3.0), tvos(10.0));
+  API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0)) API_UNAVAILABLE(watchos);
 CA_EXTERN CALayerContentsFormat const kCAContentsFormatGray8Uint /* Grayscale with alpha (if not opaque) UInt8 per component */
-  API_AVAILABLE(macos(10.12), ios(10.0), watchos(3.0), tvos(10.0));
+  API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0)) API_UNAVAILABLE(watchos);
 
 /** Contents filter names. **/
 
 CA_EXTERN CALayerContentsFilter const kCAFilterNearest
-    API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
+    API_AVAILABLE(macos(10.5), ios(2.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 CA_EXTERN CALayerContentsFilter const kCAFilterLinear
-    API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
+    API_AVAILABLE(macos(10.5), ios(2.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 
 /* Trilinear minification filter. Enables mipmap generation. Some
  * renderers may ignore this, or impose additional restrictions, such
  * as source images requiring power-of-two dimensions. */
 
 CA_EXTERN CALayerContentsFilter const kCAFilterTrilinear
-    API_AVAILABLE(macos(10.6), ios(3.0), watchos(2.0), tvos(9.0));
+    API_AVAILABLE(macos(10.6), ios(3.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 
 /** Corner curve names. **/
 
 CA_EXTERN CALayerCornerCurve const kCACornerCurveCircular
-    API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0));
+    API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0)) API_UNAVAILABLE(watchos);
 CA_EXTERN CALayerCornerCurve const kCACornerCurveContinuous
-    API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0));
+    API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0)) API_UNAVAILABLE(watchos);
 
 /** Layer event names. **/
 
 CA_EXTERN NSString * const kCAOnOrderIn
-    API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
+    API_AVAILABLE(macos(10.5), ios(2.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 CA_EXTERN NSString * const kCAOnOrderOut
-    API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
+    API_AVAILABLE(macos(10.5), ios(2.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 
 /** The animation key used for transitions. **/
 
 CA_EXTERN NSString * const kCATransition
-    API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
+    API_AVAILABLE(macos(10.5), ios(2.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)
 
 #endif

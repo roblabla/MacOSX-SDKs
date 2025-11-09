@@ -13,7 +13,7 @@ NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 @class UITextSearchOptions;
 
-typedef id<NSObject, NSCopying> UITextSearchDocumentIdentifier;
+typedef id<NSObject, NSCopying> UITextSearchDocumentIdentifier API_UNAVAILABLE(watchos);
 
 typedef NS_ENUM(NSInteger, UITextSearchFoundTextStyle) {
     /// No style.

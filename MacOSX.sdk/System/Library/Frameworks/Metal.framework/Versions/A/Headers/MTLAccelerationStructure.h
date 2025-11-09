@@ -74,6 +74,18 @@ typedef NS_OPTIONS(uint32_t, MTLAccelerationStructureInstanceOptions) {
     MTLAccelerationStructureInstanceOptionNonOpaque = (1 << 3),
 } API_AVAILABLE(macos(11.0), ios(14.0));
 
+typedef NS_ENUM(NSInteger, MTLMatrixLayout) {
+    /**
+     * @brief Column-major order
+     */
+    MTLMatrixLayoutColumnMajor = 0,
+    
+    /**
+     * @brief Row-major order
+     */
+    MTLMatrixLayoutRowMajor = 1,
+} API_AVAILABLE(macos(15.0), ios(18.0));
+
 /**
  * @brief Base class for acceleration structure descriptors. Do not use this class directly. Use
  * one of the derived classes instead.
@@ -255,6 +267,11 @@ MTL_EXPORT API_AVAILABLE(macos(11.0), ios(14.0))
  */
 @property (nonatomic) NSUInteger transformationMatrixBufferOffset API_AVAILABLE(macos(13.0), ios(16.0));
 
+/**
+ * @brief Matrix layout for the transformation matrix in the transformation
+ * matrix buffer. Defaults to MTLMatrixLayoutColumnMajor.
+ */
+@property (nonatomic) MTLMatrixLayout transformationMatrixLayout API_AVAILABLE(macos(15.0), ios(18.0));
 + (instancetype)descriptor;
 
 @end
@@ -368,6 +385,11 @@ MTL_EXPORT API_AVAILABLE(macos(12.0), ios(15.0))
  */
 @property (nonatomic) NSUInteger transformationMatrixBufferOffset API_AVAILABLE(macos(13.0), ios(16.0));
 
+/**
+ * @brief Matrix layout for the transformation matrix in the transformation
+ * matrix buffer. Defaults to MTLMatrixLayoutColumnMajor.
+ */
+@property (nonatomic) MTLMatrixLayout transformationMatrixLayout API_AVAILABLE(macos(15.0), ios(18.0));
 + (instancetype)descriptor;
 
 @end
@@ -950,6 +972,21 @@ typedef struct {
     float motionEndTime;
 } MTLIndirectAccelerationStructureMotionInstanceDescriptor API_AVAILABLE(macos(14.0), ios(17.0));
 
+typedef NS_ENUM(NSInteger, MTLTransformType) {
+    /**
+     * @brief A tightly packed matrix with 4 columns and 3 rows. The full transform is assumed
+     * to be a 4x4 matrix with the last row being (0, 0, 0, 1).
+     */
+    MTLTransformTypePackedFloat4x3 = 0,
+
+    /**
+     * @brief A transformation represented by individual components such as translation and
+     * rotation. The rotation is represented by a quaternion, allowing for correct motion
+     * interpolation.
+     */
+    MTLTransformTypeComponent = 1,
+} API_AVAILABLE(macos(15.0), ios(18.0));
+
 /**
  * @brief Descriptor for an instance acceleration structure
  */
@@ -1005,6 +1042,24 @@ MTL_EXPORT API_AVAILABLE(macos(11.0), ios(14.0))
  * @brief Number of motion transforms
  */
 @property (nonatomic) NSUInteger motionTransformCount API_AVAILABLE(macos(12.0), ios(15.0));
+
+/**
+ * Matrix layout of the transformation matrices in the instance descriptors
+ * in the instance descriptor buffer and the transformation matrices in the
+ * transformation matrix buffer. Defaults to MTLMatrixLayoutColumnMajor.
+ */
+@property (nonatomic) MTLMatrixLayout instanceTransformationMatrixLayout API_AVAILABLE(macos(15.0), ios(18.0));
+
+/**
+ * @brief Type of motion transforms. Defaults to MTLTransformTypePackedFloat4x3.
+ */
+@property (nonatomic) MTLTransformType motionTransformType API_AVAILABLE(macos(15.0), ios(18.0));
+
+/**
+ * @brief Motion transform stride. Defaults to 0, indicating that transforms are tightly packed according to the
+ * motion transform type.
+ */
+@property (nonatomic) NSUInteger motionTransformStride API_AVAILABLE(macos(15.0), ios(18.0));
 
 + (instancetype)descriptor;
 
@@ -1086,6 +1141,24 @@ MTL_EXPORT API_AVAILABLE(macos(14.0), ios(17.0))
  * aligned to the platform's buffer offset alignment.
  */
 @property (nonatomic) NSUInteger motionTransformCountBufferOffset;
+
+/**
+ * Matrix layout of the transformation matrices in the instance descriptors
+ * in the instance descriptor buffer and the transformation matrices in the
+ * transformation matrix buffer. Defaults to MTLMatrixLayoutColumnMajor.
+ */
+@property (nonatomic) MTLMatrixLayout instanceTransformationMatrixLayout API_AVAILABLE(macos(15.0), ios(18.0));
+
+/**
+ * @brief Type of motion transforms. Defaults to MTLTransformTypePackedFloat4x3.
+ */
+@property (nonatomic) MTLTransformType motionTransformType API_AVAILABLE(macos(15.0), ios(18.0));
+
+/**
+ * @brief Motion transform stride. Defaults to 0, indicating that transforms are tightly packed according to the
+ * motion transform type.
+ */
+@property (nonatomic) NSUInteger motionTransformStride API_AVAILABLE(macos(15.0), ios(18.0));
 
 + (instancetype)descriptor;
 

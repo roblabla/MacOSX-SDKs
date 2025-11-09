@@ -20,7 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
  *      SAAuthorizationStatusAuthorized when access is authorized by the user.
  *
  */
-API_AVAILABLE(ios(16.0), macos(13.0), watchos(9.0)) API_UNAVAILABLE(tvos)
+API_AVAILABLE(ios(16.0), macos(13.0), watchos(10.1)) API_UNAVAILABLE(tvos)
 typedef NS_ENUM(NSInteger, SAAuthorizationStatus) {
     SAAuthorizationStatusNotDetermined = 0,
     SAAuthorizationStatusDenied,

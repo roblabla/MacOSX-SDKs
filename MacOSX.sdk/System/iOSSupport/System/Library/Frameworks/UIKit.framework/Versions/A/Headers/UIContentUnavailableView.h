@@ -12,7 +12,7 @@
 
 NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
-UIKIT_EXTERN API_AVAILABLE(ios(17.0), tvos(17.0), watchos(10.0)) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(17.0), tvos(17.0)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @interface UIContentUnavailableView : UIView <UIContentView>
 
 - (instancetype)initWithConfiguration:(UIContentUnavailableConfiguration *)configuration NS_DESIGNATED_INITIALIZER;

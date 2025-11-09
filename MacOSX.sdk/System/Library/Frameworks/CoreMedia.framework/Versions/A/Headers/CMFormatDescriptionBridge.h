@@ -52,38 +52,38 @@ enum
 	kCMFormatDescriptionBridgeError_IncompatibleFormatDescription		= -12716,
 	kCMFormatDescriptionBridgeError_UnsupportedSampleDescriptionFlavor	= -12717,
 	kCMFormatDescriptionBridgeError_InvalidSlice						= -12719,
-} API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0));
+} API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0), visionos(1.0));
 	
 CM_ASSUME_NONNULL_BEGIN
 
-typedef CFStringRef CMImageDescriptionFlavor CF_EXTENSIBLE_STRING_ENUM API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0));
+typedef CFStringRef CMImageDescriptionFlavor CF_EXTENSIBLE_STRING_ENUM API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
 	@constant	kCMImageDescriptionFlavor_QuickTimeMovie
 	@abstract	Chooses the QuickTime Movie Image Description format.
 	@discussion	Passing NULL is equivalent to passing this constant.
 */
-CM_EXPORT const CMImageDescriptionFlavor kCMImageDescriptionFlavor_QuickTimeMovie		API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0));	// equivalent to NULL
+CM_EXPORT const CMImageDescriptionFlavor kCMImageDescriptionFlavor_QuickTimeMovie		API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0), visionos(1.0));	// equivalent to NULL
 	
 /*!
 	@constant	kCMImageDescriptionFlavor_ISOFamily
 	@abstract	Chooses the ISO family sample description format, used in MP4
 */
-CM_EXPORT const CMImageDescriptionFlavor kCMImageDescriptionFlavor_ISOFamily			API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0));	// MP4, etc
+CM_EXPORT const CMImageDescriptionFlavor kCMImageDescriptionFlavor_ISOFamily			API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0), visionos(1.0));	// MP4, etc
 	
 /*!
 	@constant	kCMImageDescriptionFlavor_3GPFamily
 	@abstract	Chooses the 3GP family sample description format.
 	@discussion	This implies kCMImageDescriptionFlavor_ISOFamily and adds additional rules specific to the 3GP family.
 */
-CM_EXPORT const CMImageDescriptionFlavor kCMImageDescriptionFlavor_3GPFamily			API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0));	// 3GPP (implies ISO)
+CM_EXPORT const CMImageDescriptionFlavor kCMImageDescriptionFlavor_3GPFamily			API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0), visionos(1.0));	// 3GPP (implies ISO)
 
 /*!
 	@constant	kCMImageDescriptionFlavor_ISOFamilyWithAppleExtensions
 	@abstract	Chooses the ISO family sample description format with use of Apple extensions where appropriate for M4V and M4A.
 	@discussion	This implies kCMImageDescriptionFlavor_ISOFamily and adds additional rules specific to the .m4a, .m4b, and .m4v file formats.
 */
-CM_EXPORT const CMImageDescriptionFlavor kCMImageDescriptionFlavor_ISOFamilyWithAppleExtensions			API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0), watchos(9.0));	// M4A, M4V, etc (implies ISO)
+CM_EXPORT const CMImageDescriptionFlavor kCMImageDescriptionFlavor_ISOFamilyWithAppleExtensions			API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0), watchos(9.0), visionos(1.0));	// M4A, M4V, etc (implies ISO)
 
 CM_ASSUME_NONNULL_END
 	
@@ -109,7 +109,7 @@ CM_EXPORT OSStatus CMVideoFormatDescriptionCreateFromBigEndianImageDescriptionDa
 		CFStringEncoding stringEncoding,
 		CMImageDescriptionFlavor CM_NULLABLE flavor,
 		CM_RETURNS_RETAINED_PARAMETER CMVideoFormatDescriptionRef CM_NULLABLE * CM_NONNULL formatDescriptionOut )
-							API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0));
+							API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
 	@function	CMVideoFormatDescriptionCreateFromBigEndianImageDescriptionBlockBuffer
@@ -127,7 +127,7 @@ CM_EXPORT OSStatus CMVideoFormatDescriptionCreateFromBigEndianImageDescriptionBl
 		CFStringEncoding stringEncoding,
 		CMImageDescriptionFlavor CM_NULLABLE flavor,
 		CM_RETURNS_RETAINED_PARAMETER CMVideoFormatDescriptionRef CM_NULLABLE * CM_NONNULL formatDescriptionOut )
-							API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0));
+							API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
 	@function	CMVideoFormatDescriptionCopyAsBigEndianImageDescriptionBlockBuffer
@@ -149,7 +149,7 @@ CM_EXPORT OSStatus CMVideoFormatDescriptionCopyAsBigEndianImageDescriptionBlockB
 		CFStringEncoding stringEncoding,
 		CMImageDescriptionFlavor CM_NULLABLE flavor,
 		CM_RETURNS_RETAINED_PARAMETER CMBlockBufferRef CM_NULLABLE * CM_NONNULL blockBufferOut )
-							API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0));
+							API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 CF_IMPLICIT_BRIDGING_ENABLED
 
@@ -165,7 +165,7 @@ CF_IMPLICIT_BRIDGING_ENABLED
 CM_EXPORT OSStatus CMSwapBigEndianImageDescriptionToHost(
 		uint8_t * CM_NONNULL imageDescriptionData,
 		size_t imageDescriptionSize )
-							API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0));
+							API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
 	@function	CMSwapHostEndianImageDescriptionToBig
@@ -177,7 +177,7 @@ CM_EXPORT OSStatus CMSwapBigEndianImageDescriptionToHost(
 CM_EXPORT OSStatus CMSwapHostEndianImageDescriptionToBig(
 		uint8_t * CM_NONNULL imageDescriptionData,
 		size_t imageDescriptionSize )
-							API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0));
+							API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 #else // TARGET_RT_BIG_ENDIAN
 
@@ -190,7 +190,7 @@ CF_IMPLICIT_BRIDGING_DISABLED
 
 CM_ASSUME_NONNULL_BEGIN
 
-typedef CFStringRef CMSoundDescriptionFlavor CF_EXTENSIBLE_STRING_ENUM API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0));
+typedef CFStringRef CMSoundDescriptionFlavor CF_EXTENSIBLE_STRING_ENUM API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
 	@constant	kCMSoundDescriptionFlavor_QuickTimeMovie
@@ -198,7 +198,7 @@ typedef CFStringRef CMSoundDescriptionFlavor CF_EXTENSIBLE_STRING_ENUM API_AVAIL
 	@discussion	A V1 sound description will be written if possible.
 				If a V1 sound description is written for CBR or PCM audio, the sample tables will need to use the legacy CBR layout.
 */
-CM_EXPORT const CMSoundDescriptionFlavor kCMSoundDescriptionFlavor_QuickTimeMovie		API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0));	// equivalent to NULL
+CM_EXPORT const CMSoundDescriptionFlavor kCMSoundDescriptionFlavor_QuickTimeMovie		API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0), visionos(1.0));	// equivalent to NULL
 	
 /*!
  	@constant	kCMSoundDescriptionFlavor_QuickTimeMovieV2
@@ -206,20 +206,20 @@ CM_EXPORT const CMSoundDescriptionFlavor kCMSoundDescriptionFlavor_QuickTimeMovi
 	@discussion	A V2 sound description will be written.
 				V2 Sound Descriptions contain no legacy CBR layout, and use 'lpcm' for all flavors of PCM.
 */
-CM_EXPORT const CMSoundDescriptionFlavor kCMSoundDescriptionFlavor_QuickTimeMovieV2		API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0));
+CM_EXPORT const CMSoundDescriptionFlavor kCMSoundDescriptionFlavor_QuickTimeMovieV2		API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0), visionos(1.0));
 	
 /*!
  	@constant	kCMSoundDescriptionFlavor_ISOFamily
 	@abstract	Chooses the ISO family sample description format, used in MP4, M4A, etc.
 */
-CM_EXPORT const CMSoundDescriptionFlavor kCMSoundDescriptionFlavor_ISOFamily			API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0));	// MP4, etc
+CM_EXPORT const CMSoundDescriptionFlavor kCMSoundDescriptionFlavor_ISOFamily			API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0), visionos(1.0));	// MP4, etc
 	
 /*!
  	@constant	kCMSoundDescriptionFlavor_3GPFamily
 	@abstract	Chooses the 3GP family sample description format.
 	@discussion	This implies kCMSoundDescriptionFlavor_ISOFamily and adds additional rules specific to the 3GP family.
 */
-CM_EXPORT const CMSoundDescriptionFlavor kCMSoundDescriptionFlavor_3GPFamily			API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0));	// 3GPP (implies ISO)
+CM_EXPORT const CMSoundDescriptionFlavor kCMSoundDescriptionFlavor_3GPFamily			API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0), visionos(1.0));	// 3GPP (implies ISO)
 
 CM_ASSUME_NONNULL_END
 
@@ -243,7 +243,7 @@ CM_EXPORT OSStatus CMAudioFormatDescriptionCreateFromBigEndianSoundDescriptionDa
 		size_t size,
 		CMSoundDescriptionFlavor CM_NULLABLE flavor,
 		CM_RETURNS_RETAINED_PARAMETER CMAudioFormatDescriptionRef CM_NULLABLE * CM_NONNULL  formatDescriptionOut )
-							API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0));
+							API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
 	@function	CMAudioFormatDescriptionCreateFromBigEndianSoundDescriptionBlockBuffer
@@ -259,7 +259,7 @@ CM_EXPORT OSStatus CMAudioFormatDescriptionCreateFromBigEndianSoundDescriptionBl
 		CMBlockBufferRef CM_NONNULL soundDescriptionBlockBuffer,
 		CMSoundDescriptionFlavor CM_NULLABLE flavor,
 		CM_RETURNS_RETAINED_PARAMETER CMAudioFormatDescriptionRef CM_NULLABLE * CM_NONNULL formatDescriptionOut )
-							API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0));
+							API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
 	@function	CMAudioFormatDescriptionCopyAsBigEndianSoundDescriptionBlockBuffer
@@ -279,7 +279,7 @@ CM_EXPORT OSStatus CMAudioFormatDescriptionCopyAsBigEndianSoundDescriptionBlockB
 		CMAudioFormatDescriptionRef CM_NONNULL audioFormatDescription,
 		CMSoundDescriptionFlavor CM_NULLABLE flavor,
 		CM_RETURNS_RETAINED_PARAMETER CMBlockBufferRef CM_NULLABLE * CM_NONNULL blockBufferOut )
-							API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0));
+							API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 CF_IMPLICIT_BRIDGING_ENABLED
 
@@ -293,7 +293,7 @@ CF_IMPLICIT_BRIDGING_ENABLED
 CM_EXPORT Boolean CMDoesBigEndianSoundDescriptionRequireLegacyCBRSampleTableLayout(
 		CMBlockBufferRef CM_NONNULL soundDescriptionBlockBuffer,
 		CMSoundDescriptionFlavor CM_NULLABLE flavor )
-							API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0));
+							API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 #if TARGET_RT_LITTLE_ENDIAN
 
@@ -307,7 +307,7 @@ CM_EXPORT Boolean CMDoesBigEndianSoundDescriptionRequireLegacyCBRSampleTableLayo
 CM_EXPORT OSStatus CMSwapBigEndianSoundDescriptionToHost(
 		uint8_t * CM_NONNULL soundDescriptionData,
 		size_t soundDescriptionSize )
-							API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0));
+							API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
 	@function	CMSwapHostEndianSoundDescriptionToBig
@@ -319,7 +319,7 @@ CM_EXPORT OSStatus CMSwapBigEndianSoundDescriptionToHost(
 CM_EXPORT OSStatus CMSwapHostEndianSoundDescriptionToBig(
 		uint8_t * CM_NONNULL soundDescriptionData,
 		size_t soundDescriptionSize )
-							API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0));
+							API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 #else // TARGET_RT_BIG_ENDIAN
 
@@ -330,7 +330,7 @@ CM_EXPORT OSStatus CMSwapHostEndianSoundDescriptionToBig(
 
 CF_IMPLICIT_BRIDGING_DISABLED
 
-typedef CFStringRef CMTextDescriptionFlavor CF_EXTENSIBLE_STRING_ENUM API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0));
+typedef CFStringRef CMTextDescriptionFlavor CF_EXTENSIBLE_STRING_ENUM API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0), visionos(1.0));
 	
 /*!
 	@functiongroup	CMTextFormatDescription and TextDescription bridge functions
@@ -354,7 +354,7 @@ CM_EXPORT OSStatus CMTextFormatDescriptionCreateFromBigEndianTextDescriptionData
 		CMTextDescriptionFlavor CM_NULLABLE flavor,
 		CMMediaType mediaType,
 		CM_RETURNS_RETAINED_PARAMETER CMTextFormatDescriptionRef CM_NULLABLE * CM_NONNULL formatDescriptionOut )
-							API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0));
+							API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
 	@function	CMTextFormatDescriptionCreateFromBigEndianTextDescriptionBlockBuffer
@@ -372,7 +372,7 @@ CM_EXPORT OSStatus CMTextFormatDescriptionCreateFromBigEndianTextDescriptionBloc
 		CMTextDescriptionFlavor CM_NULLABLE flavor,
 		CMMediaType mediaType,
 		CM_RETURNS_RETAINED_PARAMETER CMTextFormatDescriptionRef CM_NULLABLE * CM_NONNULL formatDescriptionOut )
-							API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0));
+							API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
 	@function	CMTextFormatDescriptionCopyAsBigEndianTextDescriptionBlockBuffer
@@ -392,7 +392,7 @@ CM_EXPORT OSStatus CMTextFormatDescriptionCopyAsBigEndianTextDescriptionBlockBuf
 		CMTextFormatDescriptionRef CM_NONNULL textFormatDescription,
 		CMTextDescriptionFlavor CM_NULLABLE flavor,
 		CM_RETURNS_RETAINED_PARAMETER CMBlockBufferRef CM_NULLABLE * CM_NONNULL blockBufferOut )
-							API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0));
+							API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 CF_IMPLICIT_BRIDGING_ENABLED
 
@@ -408,7 +408,7 @@ CF_IMPLICIT_BRIDGING_ENABLED
 CM_EXPORT OSStatus CMSwapBigEndianTextDescriptionToHost(
 		uint8_t * CM_NONNULL textDescriptionData,
 		size_t textDescriptionSize )
-							API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0));
+							API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
 	@function	CMSwapHostEndianTextDescriptionToBig
@@ -420,7 +420,7 @@ CM_EXPORT OSStatus CMSwapBigEndianTextDescriptionToHost(
 CM_EXPORT OSStatus CMSwapHostEndianTextDescriptionToBig(
 		uint8_t * CM_NONNULL textDescriptionData,
 		size_t textDescriptionSize )
-							API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0));
+							API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 #else // TARGET_RT_BIG_ENDIAN
 
@@ -431,7 +431,7 @@ CM_EXPORT OSStatus CMSwapHostEndianTextDescriptionToBig(
 
 CF_IMPLICIT_BRIDGING_DISABLED
 
-typedef CFStringRef CMClosedCaptionDescriptionFlavor CF_EXTENSIBLE_STRING_ENUM API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0));
+typedef CFStringRef CMClosedCaptionDescriptionFlavor CF_EXTENSIBLE_STRING_ENUM API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
 	@functiongroup	CMClosedCaptionFormatDescription and ClosedCaptionDescription bridge functions
@@ -453,7 +453,7 @@ CM_EXPORT OSStatus CMClosedCaptionFormatDescriptionCreateFromBigEndianClosedCapt
 		size_t size,
 		CMClosedCaptionDescriptionFlavor CM_NULLABLE flavor,
 		CM_RETURNS_RETAINED_PARAMETER CMClosedCaptionFormatDescriptionRef CM_NULLABLE * CM_NONNULL formatDescriptionOut )
-							API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0));
+							API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
 	@function	CMClosedCaptionFormatDescriptionCreateFromBigEndianClosedCaptionDescriptionBlockBuffer
@@ -469,7 +469,7 @@ CM_EXPORT OSStatus CMClosedCaptionFormatDescriptionCreateFromBigEndianClosedCapt
 		CMBlockBufferRef CM_NONNULL closedCaptionDescriptionBlockBuffer,
 		CMClosedCaptionDescriptionFlavor CM_NULLABLE flavor,
 		CM_RETURNS_RETAINED_PARAMETER CMClosedCaptionFormatDescriptionRef CM_NULLABLE * CM_NONNULL formatDescriptionOut )
-							API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0));
+							API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
 	@function	CMClosedCaptionFormatDescriptionCopyAsBigEndianClosedCaptionDescriptionBlockBuffer
@@ -489,7 +489,7 @@ CM_EXPORT OSStatus CMClosedCaptionFormatDescriptionCopyAsBigEndianClosedCaptionD
 		CMClosedCaptionFormatDescriptionRef CM_NONNULL closedCaptionFormatDescription,
 		CMClosedCaptionDescriptionFlavor CM_NULLABLE flavor,
 		CM_RETURNS_RETAINED_PARAMETER CMBlockBufferRef CM_NULLABLE * CM_NONNULL blockBufferOut )
-							API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0));
+							API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 CF_IMPLICIT_BRIDGING_ENABLED
 
@@ -505,7 +505,7 @@ CF_IMPLICIT_BRIDGING_ENABLED
 CM_EXPORT OSStatus CMSwapBigEndianClosedCaptionDescriptionToHost(
 		uint8_t * CM_NONNULL closedCaptionDescriptionData,
 		size_t closedCaptionDescriptionSize )
-							API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0));
+							API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
 	@function	CMSwapHostEndianClosedCaptionDescriptionToBig
@@ -517,7 +517,7 @@ CM_EXPORT OSStatus CMSwapBigEndianClosedCaptionDescriptionToHost(
 CM_EXPORT OSStatus CMSwapHostEndianClosedCaptionDescriptionToBig(
 		uint8_t * CM_NONNULL closedCaptionDescriptionData,
 		size_t closedCaptionDescriptionSize )
-							API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0));
+							API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 #else // TARGET_RT_BIG_ENDIAN
 
@@ -528,7 +528,7 @@ CM_EXPORT OSStatus CMSwapHostEndianClosedCaptionDescriptionToBig(
 
 CF_IMPLICIT_BRIDGING_DISABLED
 
-typedef CFStringRef CMTimeCodeDescriptionFlavor CF_EXTENSIBLE_STRING_ENUM API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0));
+typedef CFStringRef CMTimeCodeDescriptionFlavor CF_EXTENSIBLE_STRING_ENUM API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
 	@functiongroup	CMTimeCodeFormatDescription and TimeCodeDescription bridge functions
@@ -550,7 +550,7 @@ CM_EXPORT OSStatus CMTimeCodeFormatDescriptionCreateFromBigEndianTimeCodeDescrip
 		size_t size, 
 		CMTimeCodeDescriptionFlavor CM_NULLABLE flavor,
 		CM_RETURNS_RETAINED_PARAMETER CMTimeCodeFormatDescriptionRef CM_NULLABLE * CM_NONNULL formatDescriptionOut )
-							API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0));
+							API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
 	@function	CMTimeCodeFormatDescriptionCreateFromBigEndianTimeCodeDescriptionBlockBuffer
@@ -566,7 +566,7 @@ CM_EXPORT OSStatus CMTimeCodeFormatDescriptionCreateFromBigEndianTimeCodeDescrip
 		CMBlockBufferRef CM_NONNULL timeCodeDescriptionBlockBuffer,
 		CMTimeCodeDescriptionFlavor CM_NULLABLE flavor,
 		CM_RETURNS_RETAINED_PARAMETER CMTimeCodeFormatDescriptionRef CM_NULLABLE * CM_NONNULL formatDescriptionOut )
-							API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0));
+							API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
 	@function	CMTimeCodeFormatDescriptionCopyAsBigEndianTimeCodeDescriptionBlockBuffer
@@ -586,7 +586,7 @@ CM_EXPORT OSStatus CMTimeCodeFormatDescriptionCopyAsBigEndianTimeCodeDescription
 		CMTimeCodeFormatDescriptionRef CM_NONNULL timeCodeFormatDescription,
 		CMTimeCodeDescriptionFlavor CM_NULLABLE flavor,
 		CM_RETURNS_RETAINED_PARAMETER CMBlockBufferRef CM_NULLABLE * CM_NONNULL blockBufferOut )
-							API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0));
+							API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 CF_IMPLICIT_BRIDGING_ENABLED
 
@@ -602,7 +602,7 @@ CF_IMPLICIT_BRIDGING_ENABLED
 CM_EXPORT OSStatus CMSwapBigEndianTimeCodeDescriptionToHost(
 		uint8_t * CM_NONNULL timeCodeDescriptionData,
 		size_t timeCodeDescriptionSize )
-							API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0));
+							API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
 	@function	CMSwapHostEndianTimeCodeDescriptionToBig
@@ -614,7 +614,7 @@ CM_EXPORT OSStatus CMSwapBigEndianTimeCodeDescriptionToHost(
 CM_EXPORT OSStatus CMSwapHostEndianTimeCodeDescriptionToBig(
 		uint8_t * CM_NONNULL timeCodeDescriptionData,
 		size_t timeCodeDescriptionSize )
-							API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0));
+							API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 #else // TARGET_RT_BIG_ENDIAN
 
@@ -625,7 +625,7 @@ CM_EXPORT OSStatus CMSwapHostEndianTimeCodeDescriptionToBig(
 
 CF_IMPLICIT_BRIDGING_DISABLED
 
-typedef CFStringRef CMMetadataDescriptionFlavor CF_EXTENSIBLE_STRING_ENUM API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0));
+typedef CFStringRef CMMetadataDescriptionFlavor CF_EXTENSIBLE_STRING_ENUM API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
 	@functiongroup	CMMetadataFormatDescription and MetadataDescription bridge functions
@@ -647,7 +647,7 @@ CM_EXPORT OSStatus CMMetadataFormatDescriptionCreateFromBigEndianMetadataDescrip
 		size_t size,
 		CMMetadataDescriptionFlavor CM_NULLABLE flavor,
 		CM_RETURNS_RETAINED_PARAMETER CMMetadataFormatDescriptionRef CM_NULLABLE * CM_NONNULL formatDescriptionOut )
-							API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0));
+							API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
 	@function	CMMetadataFormatDescriptionCreateFromBigEndianMetadataDescriptionBlockBuffer
@@ -663,7 +663,7 @@ CM_EXPORT OSStatus CMMetadataFormatDescriptionCreateFromBigEndianMetadataDescrip
 		CMBlockBufferRef CM_NONNULL metadataDescriptionBlockBuffer,
 		CMMetadataDescriptionFlavor CM_NULLABLE flavor,
 		CM_RETURNS_RETAINED_PARAMETER CMMetadataFormatDescriptionRef CM_NULLABLE * CM_NONNULL formatDescriptionOut )
-							API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0));
+							API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
 	@function	CMMetadataFormatDescriptionCopyAsBigEndianMetadataDescriptionBlockBuffer
@@ -683,7 +683,7 @@ CM_EXPORT OSStatus CMMetadataFormatDescriptionCopyAsBigEndianMetadataDescription
 		CMMetadataFormatDescriptionRef CM_NONNULL metadataFormatDescription,
 		CMMetadataDescriptionFlavor CM_NULLABLE flavor,
 		CM_RETURNS_RETAINED_PARAMETER CMBlockBufferRef CM_NULLABLE * CM_NONNULL blockBufferOut )
-							API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0));
+							API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 CF_IMPLICIT_BRIDGING_ENABLED
 
@@ -699,7 +699,7 @@ CF_IMPLICIT_BRIDGING_ENABLED
 CM_EXPORT OSStatus CMSwapBigEndianMetadataDescriptionToHost(
 		uint8_t * CM_NONNULL metadataDescriptionData,
 		size_t metadataDescriptionSize )
-							API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0));
+							API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
 	@function	CMSwapHostEndianMetadataDescriptionToBig
@@ -711,7 +711,7 @@ CM_EXPORT OSStatus CMSwapBigEndianMetadataDescriptionToHost(
 CM_EXPORT OSStatus CMSwapHostEndianMetadataDescriptionToBig(
 		uint8_t * CM_NONNULL metadataDescriptionData,
 		size_t metadataDescriptionSize )
-							API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0));
+							API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 #else // TARGET_RT_BIG_ENDIAN
 

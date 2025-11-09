@@ -20,14 +20,14 @@ NS_ASSUME_NONNULL_BEGIN
 /*!
  * @protocol NFCNDEFReaderSessionDelegate
  *
- * @discussion NDEF reader session callbacks.  Presence of the -readerSession:didDetectTags: optional method will change the session behaviour
+ * @discussion NDEF reader session callbacks.  Presence of the -readerSession:didDetectTags: optional method will change the session behavior
  *             into a read-write session where @link NFCNDEFTag @link/ objects are returned.
  *
  * @note       A read-write session does not trigger the -readerSession:didDetectNDEFs: method.
  * @note       A read-write session does not get invalidate automatically after a successful tag detection.  Invalidation occurs when
  *             the invalidation method is called explicitly or the 60 seconds session time limit is reached.
  */
-API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos)
+API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos)
 @protocol NFCNDEFReaderSessionDelegate <NSObject>
 
 @required
@@ -41,7 +41,7 @@ API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos)
  * @discussion      Gets called when a session becomes invalid.  At this point the client is expected to discard
  *                  the returned session object.
  */
-- (void)readerSession:(NFCNDEFReaderSession *)session didInvalidateWithError:(NSError *)error API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos);
+- (void)readerSession:(NFCNDEFReaderSession *)session didInvalidateWithError:(NSError *)error API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos);
 
 /*!
  * @method readerSession:didDetectNDEFs:
@@ -54,7 +54,7 @@ API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos)
  *                  is only get call if the optional -readerSession:didDetectTags: method is not
  *                  implemented.
  */
-- (void)readerSession:(NFCNDEFReaderSession *)session didDetectNDEFs:(NSArray<NFCNDEFMessage *> *)messages API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos);
+- (void)readerSession:(NFCNDEFReaderSession *)session didDetectNDEFs:(NSArray<NFCNDEFMessage *> *)messages API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos);
 
 @optional
 
@@ -67,7 +67,7 @@ API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos)
  * @discussion      Gets called when the reader detects NDEF tag(s) in the RF field.  Presence of this method overrides -readerSession:didDetectNDEFs: and enables
  *                  read-write capability for the session.
  */
-- (void)readerSession:(NFCNDEFReaderSession *)session didDetectTags:(NSArray<__kindof id<NFCNDEFTag>> *)tags API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos);
+- (void)readerSession:(NFCNDEFReaderSession *)session didDetectTags:(NSArray<__kindof id<NFCNDEFTag>> *)tags API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos);
 
 /*!
  * @method readerSessionDidBecomeActive:
@@ -76,7 +76,7 @@ API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos)
  *
  * @discussion      Gets called when the NFC reader session has become active. RF is enabled and reader is scanning for tags.
  */
-- (void)readerSessionDidBecomeActive:(NFCNDEFReaderSession *)session API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos);
+- (void)readerSessionDidBecomeActive:(NFCNDEFReaderSession *)session API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos);
 
 @end
 
@@ -97,7 +97,7 @@ API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos)
  * @note       The error symbol will not be drawn on the action sheet if -invalidateSessionWithError: method is called on a session that is not a read-write session;
  *             -invalidateSession: method should be used in a read-only session.
  */
-API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos)
+API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos)
 @interface NFCNDEFReaderSession : NFCReaderSession
 
 - (instancetype)init NS_UNAVAILABLE;
@@ -135,7 +135,7 @@ API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos)
  */
 - (instancetype)initWithDelegate:(id<NFCNDEFReaderSessionDelegate>)delegate
                            queue:(nullable dispatch_queue_t)queue
-        invalidateAfterFirstRead:(BOOL)invalidateAfterFirstRead NS_DESIGNATED_INITIALIZER API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos) NS_EXTENSION_UNAVAILABLE("Not available to extensions");
+        invalidateAfterFirstRead:(BOOL)invalidateAfterFirstRead NS_DESIGNATED_INITIALIZER API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos) NS_EXTENSION_UNAVAILABLE("Not available to extensions");
 
 /*!
  * @method restartPolling
@@ -146,7 +146,7 @@ API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos)
  *             will have no effect; a new reader session is required to restart the reader. Calling this method on an instance initiated with a delegate object that does not implement
  *             the optional -readerSession:didDetectTags: method has no effect as RF polling restart is done automatically.
  */
-- (void)restartPolling API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos);
+- (void)restartPolling API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos);
 
 /*!
  * @method connectToTag:completionHandler:
@@ -160,7 +160,7 @@ API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos)
  *              Connecting to a different tag will automatically terminate the previous tag connection and put it into the halt state.  Tag stays in the
  *              connected state until another tag is connected or the polling is restarted.
  */
-- (void)connectToTag:(id<NFCNDEFTag>)tag completionHandler:(void(^)(NSError * _Nullable error))completionHandler API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos);
+- (void)connectToTag:(id<NFCNDEFTag>)tag completionHandler:(void(^)(NSError * _Nullable error))completionHandler API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos);
 @end
 
 NS_ASSUME_NONNULL_END

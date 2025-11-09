@@ -3,9 +3,9 @@
  
      Contains:   SearchKit Interfaces.
  
-     Version:    SearchKit-417.1
+     Version:    SearchKit-417.5
  
-     Copyright:  2004-2019 by Apple, Inc., all rights reserved
+     Copyright:  © 2004–2023 Apple Inc. All rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:

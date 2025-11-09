@@ -82,9 +82,10 @@ exports:
                        _IKUIFlavorAllowFallback, _IKUISizeFlavor, _IKUISizeMini, 
                        _IKUISizeRegular, _IKUISizeSmall, _IKUImaxSize, _IK_ApertureBundleIdentifier, 
                        _IK_MailBundleIdentifier, _IK_PhotosBundleIdentifier, _IK_iPhotoBundleIdentifier, 
-                       _kIKAllowLowPowerRendering, _kIKColorSpace, _kIKEnableImageSourceHardwareAcceleration, 
-                       _kIKGeometryChanged, _kIKInitialBackingScale, _kIKInitialCenter, 
-                       _kIKInitialZoomFactor, _kIKKeepZoomToFitSticky, _kIKOutputImageChangedNotification, 
+                       _kIKAllowLowPowerRendering, _kIKColorSpace, _kIKDestinationWindow, 
+                       _kIKEnableImageSourceHardwareAcceleration, _kIKGeometryChanged, 
+                       _kIKInitialBackingScale, _kIKInitialCenter, _kIKInitialZoomFactor, 
+                       _kIKKeepZoomToFitSticky, _kIKOutputImageChangedNotification, 
                        _kIKPictureTakenNotification, _kIKTakePictureAbortedNotification, 
                        _kIKThumbnailLowResFactor, _kIKWebImageURL, _kIKWebPageURL, 
                        _kIKZoomToFitOnStart, _kIKZoomToFitOnStartIgnoreWindowSize ]

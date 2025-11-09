@@ -15,8 +15,11 @@ NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 /*!
  * @abstract Represents a camera stream.
  */
-HM_EXTERN NS_SWIFT_SENDABLE API_AVAILABLE(ios(10.0), watchos(3.0), tvos(10.0), macCatalyst(14.0)) API_UNAVAILABLE(macos)
-    @interface HMCameraStream : HMCameraSource
+HM_EXTERN
+NS_SWIFT_SENDABLE
+API_AVAILABLE(ios(10.0), watchos(3.0), tvos(10.0), macCatalyst(14.0))
+API_UNAVAILABLE(macos)
+@interface HMCameraStream : HMCameraSource
 
 /*!
  * @brief Represents the audio setting for the current stream.
@@ -41,6 +44,8 @@ HM_EXTERN NS_SWIFT_SENDABLE API_AVAILABLE(ios(10.0), watchos(3.0), tvos(10.0), m
  *                   will be nil on success.
  */
 - (void)updateAudioStreamSetting:(HMCameraAudioStreamSetting)audioStreamSetting completionHandler:(void (^)(NSError *__nullable error))completion API_AVAILABLE(tvos(14.5));
+
+- (instancetype)init NS_DESIGNATED_INITIALIZER API_DEPRECATED("HMCameraStream objects are created by their parent container objects. Directly creating them is not supported.", ios(10.0, 10.0), watchos(3.0, 3.0), tvos(10.0, 10.0), macCatalyst(14.0, 14.0));
 
 @end
 

@@ -24,7 +24,7 @@ QL_EXTERN_C_BEGIN
 
 typedef struct CF_BRIDGED_TYPE(id) __QLThumbnail *QLThumbnailRef;
 
-QL_EXPORT CFTypeID QLThumbnailGetTypeID(void) API_DEPRECATED("Use QuickLookThumbnailing for thumbnails.", macos(10.6, API_TO_BE_DEPRECATED));
+QL_EXPORT CFTypeID QLThumbnailGetTypeID(void) API_DEPRECATED("Use QuickLookThumbnailing for thumbnails.", macos(10.6, 15.0));
 
 /*
  @function QLThumbnailCreate
@@ -35,28 +35,28 @@ QL_EXPORT CFTypeID QLThumbnailGetTypeID(void) API_DEPRECATED("Use QuickLookThumb
  @param options Optional hints for the thumbnail. (Only kQLThumbnailOptionScaleFactorKey is available for now)
  @result The thumbnail instance.
  */
-QL_EXPORT QLThumbnailRef QLThumbnailCreate(CFAllocatorRef allocator, CFURLRef url, CGSize maxThumbnailSize, CFDictionaryRef options) API_DEPRECATED("Use QLThumbnailGenerationRequest in QuickLookThumbnailing to generate thumbnails.", macos(10.6, API_TO_BE_DEPRECATED));
+QL_EXPORT QLThumbnailRef QLThumbnailCreate(CFAllocatorRef allocator, CFURLRef url, CGSize maxThumbnailSize, CFDictionaryRef options) API_DEPRECATED("Use QLThumbnailGenerationRequest in QuickLookThumbnailing to generate thumbnails.", macos(10.6, 15.0));
 
 /*
  @function QLThumbnailCopyDocumentURL
  @abstract Returns the URL of the document to thumbnail.
  @param thumbnail The thumbnail to compute.
  */
-QL_EXPORT CFURLRef QLThumbnailCopyDocumentURL(QLThumbnailRef thumbnail) API_DEPRECATED("Use QuickLookThumbnailing for thumbnails.", macos(10.6, API_TO_BE_DEPRECATED));
+QL_EXPORT CFURLRef QLThumbnailCopyDocumentURL(QLThumbnailRef thumbnail) API_DEPRECATED("Use QuickLookThumbnailing for thumbnails.", macos(10.6, 15.0));
 
 /*
  @function QLThumbnailGetMaximumSize
  @abstract Returns the maximum size (in points) allowed for the thumbnail image.
  @param thumbnail The thumbnail to compute.
  */
-QL_EXPORT CGSize QLThumbnailGetMaximumSize(QLThumbnailRef thumbnail) API_DEPRECATED("Use QLThumbnailGenerationRequest in QuickLookThumbnailing.", macos(10.6, API_TO_BE_DEPRECATED));
+QL_EXPORT CGSize QLThumbnailGetMaximumSize(QLThumbnailRef thumbnail) API_DEPRECATED("Use QLThumbnailGenerationRequest in QuickLookThumbnailing.", macos(10.6, 15.0));
 
 /*
  @function QLThumbnailCopyOptions
  @abstract Returns the options for the thumbnail.
  @param thumbnail The thumbnail to compute.
  */
-QL_EXPORT CFDictionaryRef QLThumbnailCopyOptions(QLThumbnailRef thumbnail) API_DEPRECATED("Use QuickLookThumbnailing for thumbnails.", macos(10.6, API_TO_BE_DEPRECATED));
+QL_EXPORT CFDictionaryRef QLThumbnailCopyOptions(QLThumbnailRef thumbnail) API_DEPRECATED("Use QuickLookThumbnailing for thumbnails.", macos(10.6, 15.0));
 
 #if __BLOCKS__ && MAC_OS_X_VERSION_10_6 <= MAC_OS_X_VERSION_MAX_ALLOWED
 /*
@@ -67,7 +67,7 @@ QL_EXPORT CFDictionaryRef QLThumbnailCopyOptions(QLThumbnailRef thumbnail) API_D
  @param completion The completion block called upon thumbnail completion.
  @discussion The completion block will always be called, even if the thumbnail computation has been cancelled.
  */
-QL_EXPORT void QLThumbnailDispatchAsync(QLThumbnailRef thumbnail, dispatch_queue_t queue, dispatch_block_t completion) API_DEPRECATED("Use QLThumbnailGenerator in QuickLookThumbnailing to generate thumbnails.", macos(10.6, API_TO_BE_DEPRECATED));
+QL_EXPORT void QLThumbnailDispatchAsync(QLThumbnailRef thumbnail, dispatch_queue_t queue, dispatch_block_t completion) API_DEPRECATED("Use QLThumbnailGenerator in QuickLookThumbnailing to generate thumbnails.", macos(10.6, 15.0));
 #endif
 
 /*
@@ -78,7 +78,7 @@ QL_EXPORT void QLThumbnailDispatchAsync(QLThumbnailRef thumbnail, dispatch_queue
  @discussion If called without a previous of QLThumbnailDispatchAsync(), the call will block until the thumbnail is computed.
              QLThumbnailCopyImage() should not be called during async dispatch (before the completion block has been called)
  */
-QL_EXPORT CGImageRef QLThumbnailCopyImage(QLThumbnailRef thumbnail) API_DEPRECATED("Use QuickLookThumbnailing for thumbnails.", macos(10.6, API_TO_BE_DEPRECATED));
+QL_EXPORT CGImageRef QLThumbnailCopyImage(QLThumbnailRef thumbnail) API_DEPRECATED("Use QuickLookThumbnailing for thumbnails.", macos(10.6, 15.0));
 
 /*
  @function QLThumbnailGetContentRect
@@ -88,7 +88,7 @@ QL_EXPORT CGImageRef QLThumbnailCopyImage(QLThumbnailRef thumbnail) API_DEPRECAT
  @param thumbnail The thumbnail to compute.
  @result The content rect of the thumbnail expressed in pixel coordinates.
  */
-QL_EXPORT CGRect QLThumbnailGetContentRect(QLThumbnailRef thumbnail) API_DEPRECATED("Use QuickLookThumbnailing for thumbnails.", macos(10.6, API_TO_BE_DEPRECATED));
+QL_EXPORT CGRect QLThumbnailGetContentRect(QLThumbnailRef thumbnail) API_DEPRECATED("Use QuickLookThumbnailing for thumbnails.", macos(10.6, 15.0));
 
 
 /*
@@ -98,14 +98,14 @@ QL_EXPORT CGRect QLThumbnailGetContentRect(QLThumbnailRef thumbnail) API_DEPRECA
  @discussion If used with QLThumbnailDispatchAsync() the completion callback will be called.
              If used in synchronous mode, QLThumbnailCopyImage() will return immediately NULL.
  */
-QL_EXPORT void QLThumbnailCancel(QLThumbnailRef thumbnail) API_DEPRECATED("Use [QLThumbnailGenerator cancelRequest:] in QuickLookThumbnailing.", macos(10.6, API_TO_BE_DEPRECATED));
+QL_EXPORT void QLThumbnailCancel(QLThumbnailRef thumbnail) API_DEPRECATED("Use [QLThumbnailGenerator cancelRequest:] in QuickLookThumbnailing.", macos(10.6, 15.0));
 
 /*
  @function QLThumbnailIsCancelled
  @abstract Returns wether the thumbnail computation has been cancelled.
  @param thumbnail The thumbnail to compute.
  */
-QL_EXPORT Boolean QLThumbnailIsCancelled(QLThumbnailRef thumbnail) API_DEPRECATED("Use QuickLookThumbnailing for thumbnails.", macos(10.6, API_TO_BE_DEPRECATED));
+QL_EXPORT Boolean QLThumbnailIsCancelled(QLThumbnailRef thumbnail) API_DEPRECATED("Use QuickLookThumbnailing for thumbnails.", macos(10.6, 15.0));
 
 
 QL_EXTERN_C_END

@@ -145,11 +145,31 @@ typedef NS_ENUM (NSUInteger, IOUSBHostAbortOption)
  *              besides the caller.
  *              Upon <code>destroy</code> of the IOUSBHostDevice, the device will be reset and drivers will be re-registered
  *              for matching. This option is only valid for macOS
+ * @constant    IOUSBHostObjectInitOptionsDeviceSeize This option will request the current owner of the underlying kernel
+ *              service to close via <code>kUSBHostMessageDeviceIsRequestingClose</code> message.  The message will include
+ *              the registry entry ID of the requesting service.
  */
 typedef NS_OPTIONS (NSUInteger, IOUSBHostObjectInitOptions)
 {
     IOUSBHostObjectInitOptionsNone          = 0,
-    IOUSBHostObjectInitOptionsDeviceCapture = (1 << 0)
+    IOUSBHostObjectInitOptionsDeviceCapture = (1 << 0),
+    IOUSBHostObjectInitOptionsDeviceSeize   = (1 << 1)
+};
+
+/*!
+ * @enum        IOUSBHostObjectDestroyOptions
+ * @brief       Options for <code>destroyWithOptions</code>
+ * @constant    IOUSBHostObjectDestroyOptionsDeviceSurrender Upon <code>destroyWithOptions</code> of the IOUSBHostDevice,
+ *              the device will not be reset and drivers will not be re-registered for matching.  This allows for IOUSBHostDevice
+ *              objects that were initialized with <code>IOUSBHostObjectInitOptionsDeviceCapture</code> to honor the
+ *              <code>kUSBHostMessageDeviceIsRequestingClose</code> message.
+ *
+ *              This option is only valid for macOS
+ */
+typedef NS_OPTIONS (NSUInteger, IOUSBHostObjectDestroyOptions)
+{
+    IOUSBHostObjectDestroyOptionsNone        = 0,
+    IOUSBHostObjectDestroyOptionsDeviceSurrender = (1 << 0)
 };
 
 /*!

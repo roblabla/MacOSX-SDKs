@@ -10,7 +10,7 @@
 
 NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
-UIKIT_EXTERN API_AVAILABLE(ios(14.0)) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @interface UIDeferredMenuElement : UIMenuElement
 
 /*!
@@ -33,7 +33,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(14.0)) NS_SWIFT_UI_ACTOR
  * @param elementProvider  Called by the system to request the deferred menu items when the containing menu is presented.
  *                         Call this block's completion handler when the menu items are available.
  */
-+ (instancetype)elementWithUncachedProvider:(void(^)(void(^completion)(NSArray<UIMenuElement *> *elements)))elementProvider API_AVAILABLE(ios(15.0));
++ (instancetype)elementWithUncachedProvider:(void(^)(void(^completion)(NSArray<UIMenuElement *> *elements)))elementProvider API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(watchos);
 
 @end
 

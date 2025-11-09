@@ -15,6 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
  An anchor representing an object in the world.
  */
 API_AVAILABLE(ios(12.0))
+NS_SWIFT_SENDABLE
 @interface ARObjectAnchor : ARAnchor
 
 /**

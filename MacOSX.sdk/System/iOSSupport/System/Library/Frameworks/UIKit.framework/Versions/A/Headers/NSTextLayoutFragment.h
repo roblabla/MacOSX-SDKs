@@ -3,7 +3,7 @@
 //  NSTextLayoutFragment.h
 //  Text Kit
 //
-//  Copyright (c) 2017-2023, Apple Inc. All rights reserved.
+//  Copyright (c) 2017-2024, Apple Inc. All rights reserved.
 //
 
 #import <Foundation/NSArray.h>
@@ -28,16 +28,16 @@ typedef NS_OPTIONS(NSUInteger, NSTextLayoutFragmentEnumerationOptions) {
   NSTextLayoutFragmentEnumerationOptionsEstimatesSize = (1 << 1), // When enumerating, the layout fragments will be asked to estimate their size.
   NSTextLayoutFragmentEnumerationOptionsEnsuresLayout = (1 << 2), // When enumerating, the layout fragments will be asked to layout.
   NSTextLayoutFragmentEnumerationOptionsEnsuresExtraLineFragment = (1 << 3), // It synthesizes the extra line fragment when necessary.
-} API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos);
+} API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 typedef NS_ENUM(NSUInteger, NSTextLayoutFragmentState) {
   NSTextLayoutFragmentStateNone = 0, // No layout information
   NSTextLayoutFragmentStateEstimatedUsageBounds = 1, // When associated with NSTextLayoutManager, filled with an estimated rect if no layout
   NSTextLayoutFragmentStateCalculatedUsageBounds = 2, // layout fragment measurements available without textLineFragments
   NSTextLayoutFragmentStateLayoutAvailable = 3 // textLineFragments and layout fragment measurements available
-} API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos);
+} API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 
-API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos)
+API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), visionos(1.0)) API_UNAVAILABLE(watchos)
 @interface NSTextLayoutFragment : NSObject <NSSecureCoding>
 #pragma mark Initialization
 - (instancetype)initWithTextElement:(NSTextElement *)textElement range:(nullable NSTextRange *)rangeInElement NS_DESIGNATED_INITIALIZER;
@@ -60,10 +60,10 @@ API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos)
 @property (copy, readonly) NSArray<NSTextLineFragment *> *textLineFragments;
 
 // Returns the NSTextLineFragment containing verticalOffset if found. When requiresExactMatch=NO, it returns the closest line fragment beyond verticalOffset if no line fragment contains verticalOffset.
-- (nullable NSTextLineFragment *)textLineFragmentForVerticalOffset:(CGFloat)verticalOffset requiresExactMatch:(BOOL)requiresExactMatch API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0)) API_UNAVAILABLE(watchos);
+- (nullable NSTextLineFragment *)textLineFragmentForVerticalOffset:(CGFloat)verticalOffset requiresExactMatch:(BOOL)requiresExactMatch API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 // Returns the NSTextLineFragment containing textLocation. When isUpstreamAffinity=YES, it returns the text line fragment ending at textLocation.
-- (nullable NSTextLineFragment *)textLineFragmentForTextLocation:(id <NSTextLocation>)textLocation isUpstreamAffinity:(BOOL)isUpstreamAffinity API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0)) API_UNAVAILABLE(watchos);
+- (nullable NSTextLineFragment *)textLineFragmentForTextLocation:(id <NSTextLocation>)textLocation isUpstreamAffinity:(BOOL)isUpstreamAffinity API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 // When non-nil, the layout operation is dispatched to the queue asynchronously.
 @property (nullable, strong) NSOperationQueue *layoutQueue;

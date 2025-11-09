@@ -37,7 +37,44 @@
 
 #endif
 
-
+#if !(defined (_WIN32) && defined(_MSC_VER))
+    #include <stdint.h>
+#endif
+#include <stddef.h>
+#if defined( __VEC__ )
+    #include <altivec.h>
+#endif
+#if defined( __SSE__ )
+    #if defined( __MINGW64__ )
+        #include <intrin.h>
+    #else
+        #include <xmmintrin.h>
+    #endif
+#endif
+#if defined( __SSE2__ )
+    #if defined( __MINGW64__ )
+        #include <intrin.h>
+    #else
+        #include <emmintrin.h>
+    #endif
+#endif
+#if defined( __MMX__ )
+    #include <mmintrin.h>
+#endif
+#if defined( __AVX__ )
+    #if defined( __MINGW64__ )
+        #include <intrin.h>
+    #else
+        #include <immintrin.h>
+    #endif
+#endif
+#if defined( __AVX2__ )
+    #if defined( __MINGW64__ )
+        #include <intrin.h>
+    #else
+        #include <immintrin.h>
+    #endif
+#endif
 
 #ifdef __cplusplus
 extern "C" {
@@ -210,8 +247,6 @@ typedef double                  cl_double;
 
 #else
 
-#include <stdint.h>
-
 /* scalar types  */
 typedef int8_t          cl_char;
 typedef uint8_t         cl_uchar;
@@ -308,8 +343,6 @@ typedef double          cl_double   __attribute__((aligned(8)));
 
 #endif
 
-#include <stddef.h>
-
 /* Mirror types to GL types. Mirror types allow us to avoid deciding which headers to load based on whether we are using GL or GLES here. */
 typedef unsigned int cl_GLuint;
 typedef int          cl_GLint;
@@ -341,7 +374,6 @@ typedef unsigned int cl_GLenum;
 #endif
     
 #if defined( __VEC__ )
-   #include <altivec.h>   /* may be omitted depending on compiler. AltiVec spec provides no way to detect whether the header is required. */
    typedef vector unsigned char     __cl_uchar16;
    typedef vector signed char       __cl_char16;
    typedef vector unsigned short    __cl_ushort8;
@@ -359,11 +391,6 @@ typedef unsigned int cl_GLenum;
 #endif
 
 #if defined( __SSE__ )
-    #if defined( __MINGW64__ )
-        #include <intrin.h>
-    #else
-        #include <xmmintrin.h>
-    #endif
     #if __has_extension(attribute_ext_vector_type)
         typedef     __attribute__((ext_vector_type(4)))     float __cl_float4;
     #elif defined( __GNUC__ )
@@ -375,11 +402,6 @@ typedef unsigned int cl_GLenum;
 #endif
 
 #if defined( __SSE2__ )
-    #if defined( __MINGW64__ )
-        #include <intrin.h>
-    #else
-        #include <emmintrin.h>
-    #endif
     #if __has_extension(attribute_ext_vector_type)
         typedef cl_uchar    __attribute__((ext_vector_type(16)))    __cl_uchar16;
         typedef cl_char     __attribute__((ext_vector_type(16)))    __cl_char16;
@@ -423,7 +445,6 @@ typedef unsigned int cl_GLenum;
 #endif
 
 #if defined( __MMX__ )
-    #include <mmintrin.h>
     #if __has_extension(attribute_ext_vector_type)
         typedef cl_uchar    __attribute__((ext_vector_type(8)))     __cl_uchar8;
         typedef cl_char     __attribute__((ext_vector_type(8)))     __cl_char8 ;
@@ -463,11 +484,6 @@ typedef unsigned int cl_GLenum;
 #endif
 
 #if defined( __AVX__ )
-    #if defined( __MINGW64__ )
-        #include <intrin.h>
-    #else
-        #include <immintrin.h> 
-    #endif
     #if __has_extension(attribute_ext_vector_type)
         typedef cl_float    __attribute__((ext_vector_type(8)))     __cl_float8;
         typedef cl_double   __attribute__((ext_vector_type(4)))     __cl_double4;
@@ -485,11 +501,6 @@ typedef unsigned int cl_GLenum;
 #endif
 
 #if defined( __AVX2__ )
-    #if defined( __MINGW64__ )
-        #include <intrin.h>
-    #else
-        #include <immintrin.h>
-    #endif
 #if __has_extension(attribute_ext_vector_type)
     typedef cl_ushort   __attribute__((ext_vector_type(16)))    __cl_ushort16;
     typedef cl_short    __attribute__((ext_vector_type(16)))    __cl_short16;

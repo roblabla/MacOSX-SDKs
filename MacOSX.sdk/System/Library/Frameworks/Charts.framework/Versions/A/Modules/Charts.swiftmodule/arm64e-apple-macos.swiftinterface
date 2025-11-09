@@ -1,6 +1,6 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.10 (swiftlang-5.10.0.12.5 clang-1500.3.9.1.1)
-// swift-module-flags: -target arm64e-apple-macos14.5 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-bare-slash-regex -user-module-version 2.4.10 -module-name Charts
+// swift-compiler-version: Apple Swift version 6.0 effective-5.10 (swiftlang-6.0.0.7.24 clang-1600.0.25.1)
+// swift-module-flags: -target arm64e-apple-macos15.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-bare-slash-regex -user-module-version 3.0.59 -module-name Charts
 import Foundation
 import Swift
 import SwiftUI
@@ -88,14 +88,14 @@ extension Swift.ArraySlice : Charts.ScaleRange {
 extension Swift.ArraySlice : Charts.PositionScaleRange where Element == CoreFoundation.CGFloat {
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
-extension SwiftUI.Gradient : Charts.ScaleRange {
-  public typealias VisualValue = SwiftUI.Color
-  public func _makeScaleRange() -> Charts._ScaleRangeOutputs<SwiftUI.Gradient.VisualValue>
+extension SwiftUICore.Gradient : Charts.ScaleRange {
+  public typealias VisualValue = SwiftUICore.Color
+  public func _makeScaleRange() -> Charts._ScaleRangeOutputs<SwiftUICore.Gradient.VisualValue>
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
-extension SwiftUI.AnyGradient : Charts.ScaleRange {
-  public typealias VisualValue = SwiftUI.Color
-  public func _makeScaleRange() -> Charts._ScaleRangeOutputs<SwiftUI.AnyGradient.VisualValue>
+extension SwiftUICore.AnyGradient : Charts.ScaleRange {
+  public typealias VisualValue = SwiftUICore.Color
+  public func _makeScaleRange() -> Charts._ScaleRangeOutputs<SwiftUICore.AnyGradient.VisualValue>
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 public struct AutomaticScaleDomain : Charts.ScaleDomain {
@@ -112,6 +112,7 @@ extension Charts.ScaleDomain where Self == Charts.AutomaticScaleDomain {
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 public struct PlotDimensionScaleRange : Charts.PositionScaleRange {
   public func _makeScaleRange() -> Charts._ScaleRangeOutputs<CoreFoundation.CGFloat>
+  @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
   public typealias VisualValue = CoreFoundation.CGFloat
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
@@ -123,138 +124,143 @@ extension Charts.PositionScaleRange where Self == Charts.PlotDimensionScaleRange
   public static func plotDimension(startPadding: CoreFoundation.CGFloat = 0, endPadding: CoreFoundation.CGFloat = 0) -> Charts.PlotDimensionScaleRange
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
-extension SwiftUI.View {
-  public func chartXScale<Domain, Range>(domain: Domain, range: Range, type: Charts.ScaleType? = nil) -> some SwiftUI.View where Domain : Charts.ScaleDomain, Range : Charts.PositionScaleRange
+extension SwiftUICore.View {
+  nonisolated public func chartXScale<Domain, Range>(domain: Domain, range: Range, type: Charts.ScaleType? = nil) -> some SwiftUICore.View where Domain : Charts.ScaleDomain, Range : Charts.PositionScaleRange
   
-  public func chartXScale<Domain>(domain: Domain, type: Charts.ScaleType? = nil) -> some SwiftUI.View where Domain : Charts.ScaleDomain
+  nonisolated public func chartXScale<Domain>(domain: Domain, type: Charts.ScaleType? = nil) -> some SwiftUICore.View where Domain : Charts.ScaleDomain
   
-  public func chartXScale<Range>(range: Range, type: Charts.ScaleType? = nil) -> some SwiftUI.View where Range : Charts.PositionScaleRange
+  nonisolated public func chartXScale<Range>(range: Range, type: Charts.ScaleType? = nil) -> some SwiftUICore.View where Range : Charts.PositionScaleRange
   
-  public func chartXScale(type: Charts.ScaleType? = nil) -> some SwiftUI.View
+  nonisolated public func chartXScale(type: Charts.ScaleType? = nil) -> some SwiftUICore.View
   
-  public func chartYScale<Domain, Range>(domain: Domain, range: Range, type: Charts.ScaleType? = nil) -> some SwiftUI.View where Domain : Charts.ScaleDomain, Range : Charts.PositionScaleRange
+  nonisolated public func chartYScale<Domain, Range>(domain: Domain, range: Range, type: Charts.ScaleType? = nil) -> some SwiftUICore.View where Domain : Charts.ScaleDomain, Range : Charts.PositionScaleRange
   
-  public func chartYScale<Domain>(domain: Domain, type: Charts.ScaleType? = nil) -> some SwiftUI.View where Domain : Charts.ScaleDomain
+  nonisolated public func chartYScale<Domain>(domain: Domain, type: Charts.ScaleType? = nil) -> some SwiftUICore.View where Domain : Charts.ScaleDomain
   
-  public func chartYScale<Range>(range: Range, type: Charts.ScaleType? = nil) -> some SwiftUI.View where Range : Charts.PositionScaleRange
+  nonisolated public func chartYScale<Range>(range: Range, type: Charts.ScaleType? = nil) -> some SwiftUICore.View where Range : Charts.PositionScaleRange
   
-  public func chartYScale(type: Charts.ScaleType? = nil) -> some SwiftUI.View
+  nonisolated public func chartYScale(type: Charts.ScaleType? = nil) -> some SwiftUICore.View
   
-  public func chartForegroundStyleScale<Domain, Range>(domain: Domain, range: Range, type: Charts.ScaleType? = nil) -> some SwiftUI.View where Domain : Charts.ScaleDomain, Range : Charts.ScaleRange, Range.VisualValue : SwiftUI.ShapeStyle
+  nonisolated public func chartForegroundStyleScale<Domain, Range>(domain: Domain, range: Range, type: Charts.ScaleType? = nil) -> some SwiftUICore.View where Domain : Charts.ScaleDomain, Range : Charts.ScaleRange, Range.VisualValue : SwiftUICore.ShapeStyle
   
-  public func chartForegroundStyleScale<Domain>(domain: Domain, type: Charts.ScaleType? = nil) -> some SwiftUI.View where Domain : Charts.ScaleDomain
+  nonisolated public func chartForegroundStyleScale<Domain>(domain: Domain, type: Charts.ScaleType? = nil) -> some SwiftUICore.View where Domain : Charts.ScaleDomain
   
-  public func chartForegroundStyleScale<Range>(range: Range, type: Charts.ScaleType? = nil) -> some SwiftUI.View where Range : Charts.ScaleRange, Range.VisualValue : SwiftUI.ShapeStyle
+  nonisolated public func chartForegroundStyleScale<Range>(range: Range, type: Charts.ScaleType? = nil) -> some SwiftUICore.View where Range : Charts.ScaleRange, Range.VisualValue : SwiftUICore.ShapeStyle
   
-  public func chartForegroundStyleScale(type: Charts.ScaleType? = nil) -> some SwiftUI.View
+  nonisolated public func chartForegroundStyleScale(type: Charts.ScaleType? = nil) -> some SwiftUICore.View
   
-  public func chartForegroundStyleScale<DataValue, S>(_ mapping: Swift.KeyValuePairs<DataValue, S>) -> some SwiftUI.View where DataValue : Charts.Plottable, S : SwiftUI.ShapeStyle
+  nonisolated public func chartForegroundStyleScale<DataValue, S>(_ mapping: Swift.KeyValuePairs<DataValue, S>) -> some SwiftUICore.View where DataValue : Charts.Plottable, S : SwiftUICore.ShapeStyle
   
-  public func chartForegroundStyleScale<Domain, S>(domain: Domain, mapping: @escaping (Domain.Element) -> S) -> some SwiftUI.View where Domain : Swift.Collection, S : SwiftUI.ShapeStyle, Domain.Element : Charts.Plottable
+  nonisolated public func chartForegroundStyleScale<Domain, S>(domain: Domain, mapping: @escaping (Domain.Element) -> S) -> some SwiftUICore.View where Domain : Swift.Collection, S : SwiftUICore.ShapeStyle, Domain.Element : Charts.Plottable
   
-  public func chartForegroundStyleScale<DataValue, S>(mapping: @escaping (DataValue) -> S) -> some SwiftUI.View where DataValue : Charts.Plottable, S : SwiftUI.ShapeStyle
+  nonisolated public func chartForegroundStyleScale<DataValue, S>(mapping: @escaping (DataValue) -> S) -> some SwiftUICore.View where DataValue : Charts.Plottable, S : SwiftUICore.ShapeStyle
   
-  public func chartSymbolScale<Domain, Range>(domain: Domain, range: Range) -> some SwiftUI.View where Domain : Charts.ScaleDomain, Range : Charts.ScaleRange, Range.VisualValue : Charts.ChartSymbolShape
+  nonisolated public func chartSymbolScale<Domain, Range>(domain: Domain, range: Range) -> some SwiftUICore.View where Domain : Charts.ScaleDomain, Range : Charts.ScaleRange, Range.VisualValue : Charts.ChartSymbolShape
   
-  @_disfavoredOverload public func chartSymbolScale<Domain>(domain: Domain, range: [any Charts.ChartSymbolShape]) -> some SwiftUI.View where Domain : Charts.ScaleDomain
+  @_disfavoredOverload nonisolated public func chartSymbolScale<Domain>(domain: Domain, range: [any Charts.ChartSymbolShape]) -> some SwiftUICore.View where Domain : Charts.ScaleDomain
   
-  public func chartSymbolScale<Domain>(domain: Domain) -> some SwiftUI.View where Domain : Charts.ScaleDomain
+  nonisolated public func chartSymbolScale<Domain>(domain: Domain) -> some SwiftUICore.View where Domain : Charts.ScaleDomain
   
-  public func chartSymbolScale<Range>(range: Range) -> some SwiftUI.View where Range : Charts.ScaleRange, Range.VisualValue : Charts.ChartSymbolShape
+  nonisolated public func chartSymbolScale<Range>(range: Range) -> some SwiftUICore.View where Range : Charts.ScaleRange, Range.VisualValue : Charts.ChartSymbolShape
   
-  @_disfavoredOverload public func chartSymbolScale(range: [any Charts.ChartSymbolShape]) -> some SwiftUI.View
+  @_disfavoredOverload nonisolated public func chartSymbolScale(range: [any Charts.ChartSymbolShape]) -> some SwiftUICore.View
   
-  public func chartSymbolScale<DataValue, S>(_ mapping: Swift.KeyValuePairs<DataValue, S>) -> some SwiftUI.View where DataValue : Charts.Plottable, S : Charts.ChartSymbolShape
+  nonisolated public func chartSymbolScale<DataValue, S>(_ mapping: Swift.KeyValuePairs<DataValue, S>) -> some SwiftUICore.View where DataValue : Charts.Plottable, S : Charts.ChartSymbolShape
   
-  @_disfavoredOverload public func chartSymbolScale<DataValue>(_ mapping: Swift.KeyValuePairs<DataValue, any Charts.ChartSymbolShape>) -> some SwiftUI.View where DataValue : Charts.Plottable
+  @_disfavoredOverload nonisolated public func chartSymbolScale<DataValue>(_ mapping: Swift.KeyValuePairs<DataValue, any Charts.ChartSymbolShape>) -> some SwiftUICore.View where DataValue : Charts.Plottable
   
-  public func chartSymbolScale<Domain, S>(domain: Domain, mapping: @escaping (Domain.Element) -> S) -> some SwiftUI.View where Domain : Swift.Collection, S : Charts.ChartSymbolShape, Domain.Element : Charts.Plottable
+  nonisolated public func chartSymbolScale<Domain, S>(domain: Domain, mapping: @escaping (Domain.Element) -> S) -> some SwiftUICore.View where Domain : Swift.Collection, S : Charts.ChartSymbolShape, Domain.Element : Charts.Plottable
   
-  public func chartSymbolScale<DataValue, S>(mapping: @escaping (DataValue) -> S) -> some SwiftUI.View where DataValue : Charts.Plottable, S : Charts.ChartSymbolShape
+  nonisolated public func chartSymbolScale<DataValue, S>(mapping: @escaping (DataValue) -> S) -> some SwiftUICore.View where DataValue : Charts.Plottable, S : Charts.ChartSymbolShape
   
-  public func chartLineStyleScale<Domain, Range>(domain: Domain, range: Range) -> some SwiftUI.View where Domain : Charts.ScaleDomain, Range : Charts.ScaleRange, Range.VisualValue == SwiftUI.StrokeStyle
+  nonisolated public func chartLineStyleScale<Domain, Range>(domain: Domain, range: Range) -> some SwiftUICore.View where Domain : Charts.ScaleDomain, Range : Charts.ScaleRange, Range.VisualValue == SwiftUICore.StrokeStyle
   
-  public func chartLineStyleScale<Domain>(domain: Domain) -> some SwiftUI.View where Domain : Charts.ScaleDomain
+  nonisolated public func chartLineStyleScale<Domain>(domain: Domain) -> some SwiftUICore.View where Domain : Charts.ScaleDomain
   
-  public func chartLineStyleScale<Range>(range: Range) -> some SwiftUI.View where Range : Charts.ScaleRange, Range.VisualValue == SwiftUI.StrokeStyle
+  nonisolated public func chartLineStyleScale<Range>(range: Range) -> some SwiftUICore.View where Range : Charts.ScaleRange, Range.VisualValue == SwiftUICore.StrokeStyle
   
-  public func chartLineStyleScale<DataValue>(_ mapping: Swift.KeyValuePairs<DataValue, SwiftUI.StrokeStyle>) -> some SwiftUI.View where DataValue : Charts.Plottable
+  nonisolated public func chartLineStyleScale<DataValue>(_ mapping: Swift.KeyValuePairs<DataValue, SwiftUICore.StrokeStyle>) -> some SwiftUICore.View where DataValue : Charts.Plottable
   
-  public func chartLineStyleScale<Domain>(domain: Domain, mapping: @escaping (Domain.Element) -> SwiftUI.StrokeStyle) -> some SwiftUI.View where Domain : Swift.Collection, Domain.Element : Charts.Plottable
+  nonisolated public func chartLineStyleScale<Domain>(domain: Domain, mapping: @escaping (Domain.Element) -> SwiftUICore.StrokeStyle) -> some SwiftUICore.View where Domain : Swift.Collection, Domain.Element : Charts.Plottable
   
-  public func chartLineStyleScale<DataValue>(mapping: @escaping (DataValue) -> SwiftUI.StrokeStyle) -> some SwiftUI.View where DataValue : Charts.Plottable
+  nonisolated public func chartLineStyleScale<DataValue>(mapping: @escaping (DataValue) -> SwiftUICore.StrokeStyle) -> some SwiftUICore.View where DataValue : Charts.Plottable
   
-  public func chartSymbolSizeScale<Domain, Range>(domain: Domain, range: Range, type: Charts.ScaleType? = nil) -> some SwiftUI.View where Domain : Charts.ScaleDomain, Range : Charts.ScaleRange, Range.VisualValue == CoreFoundation.CGFloat
+  nonisolated public func chartSymbolSizeScale<Domain, Range>(domain: Domain, range: Range, type: Charts.ScaleType? = nil) -> some SwiftUICore.View where Domain : Charts.ScaleDomain, Range : Charts.ScaleRange, Range.VisualValue == CoreFoundation.CGFloat
   
-  public func chartSymbolSizeScale<Domain>(domain: Domain, type: Charts.ScaleType? = nil) -> some SwiftUI.View where Domain : Charts.ScaleDomain
+  nonisolated public func chartSymbolSizeScale<Domain>(domain: Domain, type: Charts.ScaleType? = nil) -> some SwiftUICore.View where Domain : Charts.ScaleDomain
   
-  public func chartSymbolSizeScale<Range>(range: Range, type: Charts.ScaleType? = nil) -> some SwiftUI.View where Range : Charts.ScaleRange, Range.VisualValue == CoreFoundation.CGFloat
+  nonisolated public func chartSymbolSizeScale<Range>(range: Range, type: Charts.ScaleType? = nil) -> some SwiftUICore.View where Range : Charts.ScaleRange, Range.VisualValue == CoreFoundation.CGFloat
   
-  public func chartSymbolSizeScale(type: Charts.ScaleType? = nil) -> some SwiftUI.View
+  nonisolated public func chartSymbolSizeScale(type: Charts.ScaleType? = nil) -> some SwiftUICore.View
   
-  public func chartSymbolSizeScale<DataValue>(_ mapping: Swift.KeyValuePairs<DataValue, CoreFoundation.CGFloat>) -> some SwiftUI.View where DataValue : Charts.Plottable
+  nonisolated public func chartSymbolSizeScale<DataValue>(_ mapping: Swift.KeyValuePairs<DataValue, CoreFoundation.CGFloat>) -> some SwiftUICore.View where DataValue : Charts.Plottable
   
-  public func chartSymbolSizeScale<Domain>(domain: Domain, mapping: @escaping (Domain.Element) -> CoreFoundation.CGFloat) -> some SwiftUI.View where Domain : Swift.Collection, Domain.Element : Charts.Plottable
+  nonisolated public func chartSymbolSizeScale<Domain>(domain: Domain, mapping: @escaping (Domain.Element) -> CoreFoundation.CGFloat) -> some SwiftUICore.View where Domain : Swift.Collection, Domain.Element : Charts.Plottable
   
-  public func chartSymbolSizeScale<DataValue>(mapping: @escaping (DataValue) -> CoreFoundation.CGFloat) -> some SwiftUI.View where DataValue : Charts.Plottable
+  nonisolated public func chartSymbolSizeScale<DataValue>(mapping: @escaping (DataValue) -> CoreFoundation.CGFloat) -> some SwiftUICore.View where DataValue : Charts.Plottable
   
 }
 @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
-public struct ChartAxisContent : SwiftUI.View {
-  @_Concurrency.MainActor(unsafe) public var body: some SwiftUI.View {
+@_Concurrency.MainActor @preconcurrency public struct ChartAxisContent : SwiftUICore.View {
+  @_Concurrency.MainActor @preconcurrency public var body: some SwiftUICore.View {
     get
   }
+  @available(iOS 17.0, tvOS 17.0, watchOS 10.0, macOS 14.0, *)
   public typealias Body = @_opaqueReturnTypeOf("$s6Charts16ChartAxisContentV4bodyQrvp", 0) __
 }
 @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
-extension SwiftUI.View {
-  public func chartXAxisStyle<Content>(@SwiftUI.ViewBuilder content: @escaping (Charts.ChartAxisContent) -> Content) -> some SwiftUI.View where Content : SwiftUI.View
+extension SwiftUICore.View {
+  nonisolated public func chartXAxisStyle<Content>(@SwiftUICore.ViewBuilder content: @escaping (Charts.ChartAxisContent) -> Content) -> some SwiftUICore.View where Content : SwiftUICore.View
   
-  public func chartYAxisStyle<Content>(@SwiftUI.ViewBuilder content: @escaping (Charts.ChartAxisContent) -> Content) -> some SwiftUI.View where Content : SwiftUI.View
+  nonisolated public func chartYAxisStyle<Content>(@SwiftUICore.ViewBuilder content: @escaping (Charts.ChartAxisContent) -> Content) -> some SwiftUICore.View where Content : SwiftUICore.View
   
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
-public struct Chart<Content> : SwiftUI.View where Content : Charts.ChartContent {
-  public init(@Charts.ChartContentBuilder content: () -> Content)
-  public init<Data, C>(_ data: Data, @Charts.ChartContentBuilder content: @escaping (Data.Element) -> C) where Content == SwiftUI.ForEach<Data, Data.Element.ID, C>, Data : Swift.RandomAccessCollection, C : Charts.ChartContent, Data.Element : Swift.Identifiable
-  public init<Data, ID, C>(_ data: Data, id: Swift.KeyPath<Data.Element, ID>, @Charts.ChartContentBuilder content: @escaping (Data.Element) -> C) where Content == SwiftUI.ForEach<Data, ID, C>, Data : Swift.RandomAccessCollection, ID : Swift.Hashable, C : Charts.ChartContent
+@_Concurrency.MainActor @preconcurrency public struct Chart<Content> : SwiftUICore.View where Content : Charts.ChartContent {
+  nonisolated public init(@Charts.ChartContentBuilder content: () -> Content)
+  nonisolated public init<Data, C>(_ data: Data, @Charts.ChartContentBuilder content: @escaping (Data.Element) -> C) where Content == SwiftUICore.ForEach<Data, Data.Element.ID, C>, Data : Swift.RandomAccessCollection, C : Charts.ChartContent, Data.Element : Swift.Identifiable
+  nonisolated public init<Data, ID, C>(_ data: Data, id: Swift.KeyPath<Data.Element, ID>, @Charts.ChartContentBuilder content: @escaping (Data.Element) -> C) where Content == SwiftUICore.ForEach<Data, ID, C>, Data : Swift.RandomAccessCollection, ID : Swift.Hashable, C : Charts.ChartContent
+  nonisolated public static func _makeView(view: SwiftUICore._GraphValue<Charts.Chart<Content>>, inputs: SwiftUICore._ViewInputs) -> SwiftUICore._ViewOutputs
+  nonisolated public static func _makeViewList(view: SwiftUICore._GraphValue<Charts.Chart<Content>>, inputs: SwiftUICore._ViewListInputs) -> SwiftUICore._ViewListOutputs
+  nonisolated public static func _viewListCount(inputs: SwiftUICore._ViewListCountInputs) -> Swift.Int?
   @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
   @usableFromInline
-  internal var actualBody: some SwiftUI.View {
+  @_Concurrency.MainActor @preconcurrency internal var actualBody: some SwiftUICore.View {
     get
   }
-  @_Concurrency.MainActor(unsafe) public var body: some SwiftUI.View {
+  @_Concurrency.MainActor @preconcurrency public var body: some SwiftUICore.View {
     get
   }
+  @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
   public typealias Body = @_opaqueReturnTypeOf("$s6Charts5ChartV4bodyQrvp", 0) __<Content>
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
-extension SwiftUI.View {
-  public func chartXAxis(_ visibility: SwiftUI.Visibility) -> some SwiftUI.View
+extension SwiftUICore.View {
+  nonisolated public func chartXAxis(_ visibility: SwiftUI.Visibility) -> some SwiftUICore.View
   
-  public func chartYAxis(_ visibility: SwiftUI.Visibility) -> some SwiftUI.View
-  
-}
-@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
-extension SwiftUI.View {
-  public func chartXAxis<Content>(@Charts.AxisContentBuilder content: () -> Content) -> some SwiftUI.View where Content : Charts.AxisContent
-  
-  public func chartYAxis<Content>(@Charts.AxisContentBuilder content: () -> Content) -> some SwiftUI.View where Content : Charts.AxisContent
+  nonisolated public func chartYAxis(_ visibility: SwiftUI.Visibility) -> some SwiftUICore.View
   
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
-extension SwiftUI.View {
-  public func chartXAxisLabel<C>(position: Charts.AnnotationPosition = .automatic, alignment: SwiftUI.Alignment? = nil, spacing: CoreFoundation.CGFloat? = nil, @SwiftUI.ViewBuilder content: () -> C) -> some SwiftUI.View where C : SwiftUI.View
+extension SwiftUICore.View {
+  nonisolated public func chartXAxis<Content>(@Charts.AxisContentBuilder content: () -> Content) -> some SwiftUICore.View where Content : Charts.AxisContent
   
-  public func chartXAxisLabel(_ labelKey: SwiftUI.LocalizedStringKey, position: Charts.AnnotationPosition = .automatic, alignment: SwiftUI.Alignment? = nil, spacing: CoreFoundation.CGFloat? = nil) -> some SwiftUI.View
+  nonisolated public func chartYAxis<Content>(@Charts.AxisContentBuilder content: () -> Content) -> some SwiftUICore.View where Content : Charts.AxisContent
   
-  public func chartXAxisLabel<S>(_ label: S, position: Charts.AnnotationPosition = .automatic, alignment: SwiftUI.Alignment? = nil, spacing: CoreFoundation.CGFloat? = nil) -> some SwiftUI.View where S : Swift.StringProtocol
+}
+@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
+extension SwiftUICore.View {
+  nonisolated public func chartXAxisLabel<C>(position: Charts.AnnotationPosition = .automatic, alignment: SwiftUICore.Alignment? = nil, spacing: CoreFoundation.CGFloat? = nil, @SwiftUICore.ViewBuilder content: () -> C) -> some SwiftUICore.View where C : SwiftUICore.View
   
-  public func chartYAxisLabel<C>(position: Charts.AnnotationPosition = .automatic, alignment: SwiftUI.Alignment? = nil, spacing: CoreFoundation.CGFloat? = nil, @SwiftUI.ViewBuilder content: () -> C) -> some SwiftUI.View where C : SwiftUI.View
+  nonisolated public func chartXAxisLabel(_ labelKey: SwiftUICore.LocalizedStringKey, position: Charts.AnnotationPosition = .automatic, alignment: SwiftUICore.Alignment? = nil, spacing: CoreFoundation.CGFloat? = nil) -> some SwiftUICore.View
   
-  public func chartYAxisLabel(_ labelKey: SwiftUI.LocalizedStringKey, position: Charts.AnnotationPosition = .automatic, alignment: SwiftUI.Alignment? = nil, spacing: CoreFoundation.CGFloat? = nil) -> some SwiftUI.View
+  nonisolated public func chartXAxisLabel<S>(_ label: S, position: Charts.AnnotationPosition = .automatic, alignment: SwiftUICore.Alignment? = nil, spacing: CoreFoundation.CGFloat? = nil) -> some SwiftUICore.View where S : Swift.StringProtocol
   
-  public func chartYAxisLabel<S>(_ label: S, position: Charts.AnnotationPosition = .automatic, alignment: SwiftUI.Alignment? = nil, spacing: CoreFoundation.CGFloat? = nil) -> some SwiftUI.View where S : Swift.StringProtocol
+  nonisolated public func chartYAxisLabel<C>(position: Charts.AnnotationPosition = .automatic, alignment: SwiftUICore.Alignment? = nil, spacing: CoreFoundation.CGFloat? = nil, @SwiftUICore.ViewBuilder content: () -> C) -> some SwiftUICore.View where C : SwiftUICore.View
+  
+  nonisolated public func chartYAxisLabel(_ labelKey: SwiftUICore.LocalizedStringKey, position: Charts.AnnotationPosition = .automatic, alignment: SwiftUICore.Alignment? = nil, spacing: CoreFoundation.CGFloat? = nil) -> some SwiftUICore.View
+  
+  nonisolated public func chartYAxisLabel<S>(_ label: S, position: Charts.AnnotationPosition = .automatic, alignment: SwiftUICore.Alignment? = nil, spacing: CoreFoundation.CGFloat? = nil) -> some SwiftUICore.View where S : Swift.StringProtocol
   
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
@@ -277,7 +283,7 @@ public struct AnnotationContext {
 }
 @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 public struct AnnotationOverflowResolution {
-  public init(x: Charts.AnnotationOverflowResolution.Strategy = .automatic, y: Charts.AnnotationOverflowResolution.Strategy = .automatic)
+  nonisolated public init(x: Charts.AnnotationOverflowResolution.Strategy = .automatic, y: Charts.AnnotationOverflowResolution.Strategy = .automatic)
   public struct Strategy {
     public static let fit: Charts.AnnotationOverflowResolution.Strategy
     public static func fit(to boundary: Charts.AnnotationOverflowResolution.Boundary) -> Charts.AnnotationOverflowResolution.Strategy
@@ -294,31 +300,43 @@ public struct AnnotationOverflowResolution {
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 extension Charts.ChartContent {
-  public func annotation<C>(position: Charts.AnnotationPosition = .automatic, alignment: SwiftUI.Alignment = .center, spacing: CoreFoundation.CGFloat? = nil, @SwiftUI.ViewBuilder content: () -> C) -> some Charts.ChartContent where C : SwiftUI.View
+  nonisolated public func annotation<C>(position: Charts.AnnotationPosition = .automatic, alignment: SwiftUICore.Alignment = .center, spacing: CoreFoundation.CGFloat? = nil, @SwiftUICore.ViewBuilder content: () -> C) -> some Charts.ChartContent where C : SwiftUICore.View
   
-  public func annotation<C>(position: Charts.AnnotationPosition = .automatic, alignment: SwiftUI.Alignment = .center, spacing: CoreFoundation.CGFloat? = nil, @SwiftUI.ViewBuilder content: @escaping (Charts.AnnotationContext) -> C) -> some Charts.ChartContent where C : SwiftUI.View
+  nonisolated public func annotation<C>(position: Charts.AnnotationPosition = .automatic, alignment: SwiftUICore.Alignment = .center, spacing: CoreFoundation.CGFloat? = nil, @SwiftUICore.ViewBuilder content: @escaping (Charts.AnnotationContext) -> C) -> some Charts.ChartContent where C : SwiftUICore.View
   
 }
 @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 extension Charts.ChartContent {
-  public func annotation<C>(position: Charts.AnnotationPosition = .automatic, alignment: SwiftUI.Alignment = .center, spacing: CoreFoundation.CGFloat? = nil, overflowResolution: Charts.AnnotationOverflowResolution, @SwiftUI.ViewBuilder content: () -> C) -> some Charts.ChartContent where C : SwiftUI.View
+  nonisolated public func annotation<C>(position: Charts.AnnotationPosition = .automatic, alignment: SwiftUICore.Alignment = .center, spacing: CoreFoundation.CGFloat? = nil, overflowResolution: Charts.AnnotationOverflowResolution, @SwiftUICore.ViewBuilder content: () -> C) -> some Charts.ChartContent where C : SwiftUICore.View
   
-  public func annotation<C>(position: Charts.AnnotationPosition = .automatic, alignment: SwiftUI.Alignment = .center, spacing: CoreFoundation.CGFloat? = nil, overflowResolution: Charts.AnnotationOverflowResolution, @SwiftUI.ViewBuilder content: @escaping (Charts.AnnotationContext) -> C) -> some Charts.ChartContent where C : SwiftUI.View
+  nonisolated public func annotation<C>(position: Charts.AnnotationPosition = .automatic, alignment: SwiftUICore.Alignment = .center, spacing: CoreFoundation.CGFloat? = nil, overflowResolution: Charts.AnnotationOverflowResolution, @SwiftUICore.ViewBuilder content: @escaping (Charts.AnnotationContext) -> C) -> some Charts.ChartContent where C : SwiftUICore.View
   
 }
+@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+extension Charts.BuilderPair where T0 : Charts.ChartContent, T1 : Charts.ChartContent {
+  @usableFromInline
+  internal static func _makeChartContent(content: SwiftUICore._GraphValue<Charts.BuilderPair<T0, T1>>, inputs: Charts._ChartContentInputs) -> Charts._ChartContentOutputs
+  @usableFromInline
+  internal static func _chartContentCount(inputs: Charts._ChartContentInputs) -> Swift.Int?
+}
 @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
-public struct SectorMark {
-  public init(angle: Charts.PlottableValue<some Plottable>, innerRadius: Charts.MarkDimension = .automatic, outerRadius: Charts.MarkDimension = .automatic, angularInset: CoreFoundation.CGFloat? = nil)
-  public static func _layoutChartContent(_ content: Charts.SectorMark, _ inputs: Charts._ChartContentLayoutInputs)
-  public static func _renderChartContent(_ content: Charts.SectorMark, _ inputs: Charts._ChartContentRenderInputs) -> Charts._ChartContentRenderOutputs
+@_Concurrency.MainActor @preconcurrency public struct SectorMark {
+  nonisolated public init(angle: Charts.PlottableValue<some Plottable>, innerRadius: Charts.MarkDimension = .automatic, outerRadius: Charts.MarkDimension = .automatic, angularInset: CoreFoundation.CGFloat? = nil)
+  @_Concurrency.MainActor @preconcurrency public static func _layoutChartContent(_ content: Charts.SectorMark, _ inputs: Charts._ChartContentLayoutInputs)
+  @_Concurrency.MainActor @preconcurrency public static func _renderChartContent(_ content: Charts.SectorMark, _ inputs: Charts._ChartContentRenderInputs) -> Charts._ChartContentRenderOutputs
+  @available(iOS 17.0, tvOS 17.0, watchOS 10.0, macOS 14.0, *)
   public typealias Body = Swift.Never
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
-@_typeEraser(AnyChartContent) public protocol ChartContent {
+@_typeEraser(AnyChartContent) @preconcurrency @_Concurrency.MainActor public protocol ChartContent {
   associatedtype Body : Charts.ChartContent
-  @Charts.ChartContentBuilder var body: Self.Body { get }
-  static func _layoutChartContent(_ content: Self, _ inputs: Charts._ChartContentLayoutInputs)
-  static func _renderChartContent(_ content: Self, _ inputs: Charts._ChartContentRenderInputs) -> Charts._ChartContentRenderOutputs
+  @Charts.ChartContentBuilder @_Concurrency.MainActor @preconcurrency var body: Self.Body { get }
+  @_Concurrency.MainActor @preconcurrency static func _layoutChartContent(_ content: Self, _ inputs: Charts._ChartContentLayoutInputs)
+  @_Concurrency.MainActor @preconcurrency static func _renderChartContent(_ content: Self, _ inputs: Charts._ChartContentRenderInputs) -> Charts._ChartContentRenderOutputs
+  @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+  @_Concurrency.MainActor @preconcurrency static func _makeChartContent(content: SwiftUICore._GraphValue<Self>, inputs: Charts._ChartContentInputs) -> Charts._ChartContentOutputs
+  @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+  @_Concurrency.MainActor @preconcurrency static func _chartContentCount(inputs: Charts._ChartContentInputs) -> Swift.Int?
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 public struct _ChartContentLayoutInputs {
@@ -331,16 +349,57 @@ public struct _ChartContentRenderOutputs {
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 extension Charts.ChartContent {
-  public static func _layoutChartContent(_ content: Self, _ inputs: Charts._ChartContentLayoutInputs)
-  public static func _renderChartContent(_ content: Self, _ inputs: Charts._ChartContentRenderInputs) -> Charts._ChartContentRenderOutputs
+  @_Concurrency.MainActor @preconcurrency public static func _layoutChartContent(_ content: Self, _ inputs: Charts._ChartContentLayoutInputs)
+  @_Concurrency.MainActor @preconcurrency public static func _renderChartContent(_ content: Self, _ inputs: Charts._ChartContentRenderInputs) -> Charts._ChartContentRenderOutputs
 }
+#if compiler(>=5.3) && $PrimaryAssociatedTypes2
+@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+public protocol VectorizedChartContent<DataElement> : Charts.ChartContent {
+  associatedtype DataElement
+}
+#else
+@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+public protocol VectorizedChartContent : Charts.ChartContent {
+  associatedtype DataElement
+}
+#endif
+#if compiler(>=5.3) && $ParameterPacks
+@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+@usableFromInline
+@frozen internal struct BuilderTuple<each T> {
+  @usableFromInline
+  internal var elements: (repeat each T)
+  @inlinable internal init(elements: (repeat each T)) {
+        self.elements = elements
+    }
+}
+#endif
+#if compiler(>=5.3) && $ParameterPacks
+@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+extension Charts.BuilderTuple : Charts.ChartContent where repeat each T : Charts.ChartContent {
+  @inlinable @_Concurrency.MainActor @preconcurrency internal var body: Swift.Never {
+    get { fatalError() }
+  }
+  @usableFromInline
+  @_Concurrency.MainActor @preconcurrency internal static func _layoutChartContent(_ content: Charts.BuilderTuple<repeat each T>, _ inputs: Charts._ChartContentLayoutInputs)
+  @usableFromInline
+  @_Concurrency.MainActor @preconcurrency internal static func _renderChartContent(_ content: Charts.BuilderTuple<repeat each T>, _ inputs: Charts._ChartContentRenderInputs) -> Charts._ChartContentRenderOutputs
+  @usableFromInline
+  @_Concurrency.MainActor @preconcurrency internal static func _makeChartContent(content: SwiftUICore._GraphValue<Charts.BuilderTuple<repeat each T>>, inputs: Charts._ChartContentInputs) -> Charts._ChartContentOutputs
+  @usableFromInline
+  @_Concurrency.MainActor @preconcurrency internal static func _chartContentCount(inputs: Charts._ChartContentInputs) -> Swift.Int?
+  @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
+  @usableFromInline
+  internal typealias Body = Swift.Never
+}
+#endif
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
-extension SwiftUI.View {
-  public func chartLegend<Content>(position: Charts.AnnotationPosition = .automatic, alignment: SwiftUI.Alignment? = nil, spacing: CoreFoundation.CGFloat? = nil, @SwiftUI.ViewBuilder content: () -> Content) -> some SwiftUI.View where Content : SwiftUI.View
+extension SwiftUICore.View {
+  nonisolated public func chartLegend<Content>(position: Charts.AnnotationPosition = .automatic, alignment: SwiftUICore.Alignment? = nil, spacing: CoreFoundation.CGFloat? = nil, @SwiftUICore.ViewBuilder content: () -> Content) -> some SwiftUICore.View where Content : SwiftUICore.View
   
-  public func chartLegend(position: Charts.AnnotationPosition = .automatic, alignment: SwiftUI.Alignment? = nil, spacing: CoreFoundation.CGFloat? = nil) -> some SwiftUI.View
+  @_Concurrency.MainActor @preconcurrency public func chartLegend(position: Charts.AnnotationPosition = .automatic, alignment: SwiftUICore.Alignment? = nil, spacing: CoreFoundation.CGFloat? = nil) -> some SwiftUICore.View
   
-  public func chartLegend(_ visibility: SwiftUI.Visibility) -> some SwiftUI.View
+  @_Concurrency.MainActor @preconcurrency public func chartLegend(_ visibility: SwiftUI.Visibility) -> some SwiftUICore.View
   
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
@@ -352,17 +411,111 @@ public struct ChartBinRange<Bound> : Swift.RangeExpression where Bound : Swift.C
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 extension Charts.PlottableValue {
-  public static func value(_ labelKey: SwiftUI.LocalizedStringKey, _ range: Charts.ChartBinRange<Value>) -> Charts.PlottableValue<Value> where Value : Swift.Comparable
+  public static func value(_ labelKey: SwiftUICore.LocalizedStringKey, _ range: Charts.ChartBinRange<Value>) -> Charts.PlottableValue<Value> where Value : Swift.Comparable
   @_disfavoredOverload public static func value<S>(_ label: S, _ range: Charts.ChartBinRange<Value>) -> Charts.PlottableValue<Value> where Value : Swift.Comparable, S : Swift.StringProtocol
-  public static func value(_ label: SwiftUI.Text, _ range: Charts.ChartBinRange<Value>) -> Charts.PlottableValue<Value> where Value : Swift.Comparable
+  public static func value(_ label: SwiftUICore.Text, _ range: Charts.ChartBinRange<Value>) -> Charts.PlottableValue<Value> where Value : Swift.Comparable
+}
+@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+public struct AreaPlot<Content> {
+}
+@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+extension Charts.AreaPlot : Charts.ChartContent where Content : Charts.ChartContent {
+  @_Concurrency.MainActor @preconcurrency public var body: some Charts.ChartContent {
+    get
+  }
+  @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
+  public typealias Body = @_opaqueReturnTypeOf("$s6Charts8AreaPlotVA2A12ChartContentRzlE4bodyQrvp", 0) __<Content>
+}
+@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+extension Charts.AreaPlot : Charts.VectorizedChartContent where Content : Charts.VectorizedChartContent {
+  public typealias DataElement = Content.DataElement
+}
+@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+extension Charts.AreaPlot {
+  nonisolated public init<Data>(_ data: Data, x: Charts.PlottableProjection<Charts.AreaPlot<Content>.DataElement, some Plottable>, y: Charts.PlottableProjection<Charts.AreaPlot<Content>.DataElement, some Plottable>, stacking: Charts.MarkStackingMethod = .standard) where Content == Charts.VectorizedAreaPlotContent<Data>, Data : Swift.RandomAccessCollection
+  nonisolated public init<Data, X>(_ data: Data, xStart: Charts.PlottableProjection<Charts.AreaPlot<Content>.DataElement, X>, xEnd: Charts.PlottableProjection<Charts.AreaPlot<Content>.DataElement, X>, y: Charts.PlottableProjection<Charts.AreaPlot<Content>.DataElement, some Plottable>) where Content == Charts.VectorizedAreaPlotContent<Data>, Data : Swift.RandomAccessCollection, X : Charts.Plottable
+  nonisolated public init<Data, Y>(_ data: Data, x: Charts.PlottableProjection<Charts.AreaPlot<Content>.DataElement, some Plottable>, yStart: Charts.PlottableProjection<Charts.AreaPlot<Content>.DataElement, Y>, yEnd: Charts.PlottableProjection<Charts.AreaPlot<Content>.DataElement, Y>) where Content == Charts.VectorizedAreaPlotContent<Data>, Data : Swift.RandomAccessCollection, Y : Charts.Plottable
+  nonisolated public init<Data>(_ data: Data, x: Charts.PlottableProjection<Charts.AreaPlot<Content>.DataElement, some Plottable>, y: Charts.PlottableProjection<Charts.AreaPlot<Content>.DataElement, some Plottable>, series: Charts.PlottableProjection<Charts.AreaPlot<Content>.DataElement, some Plottable>, stacking: Charts.MarkStackingMethod = .standard) where Content == Charts.VectorizedAreaPlotContent<Data>, Data : Swift.RandomAccessCollection
+  nonisolated public init<Data, X>(_ data: Data, xStart: Charts.PlottableProjection<Charts.AreaPlot<Content>.DataElement, X>, xEnd: Charts.PlottableProjection<Charts.AreaPlot<Content>.DataElement, X>, y: Charts.PlottableProjection<Charts.AreaPlot<Content>.DataElement, some Plottable>, series: Charts.PlottableProjection<Charts.AreaPlot<Content>.DataElement, some Plottable>) where Content == Charts.VectorizedAreaPlotContent<Data>, Data : Swift.RandomAccessCollection, X : Charts.Plottable
+  nonisolated public init<Data, Y>(_ data: Data, x: Charts.PlottableProjection<Charts.AreaPlot<Content>.DataElement, some Plottable>, yStart: Charts.PlottableProjection<Charts.AreaPlot<Content>.DataElement, Y>, yEnd: Charts.PlottableProjection<Charts.AreaPlot<Content>.DataElement, Y>, series: Charts.PlottableProjection<Charts.AreaPlot<Content>.DataElement, some Plottable>) where Content == Charts.VectorizedAreaPlotContent<Data>, Data : Swift.RandomAccessCollection, Y : Charts.Plottable
+}
+@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+extension Charts.AreaPlot where Content == Charts.FunctionAreaPlotContent {
+  nonisolated public init(x: SwiftUICore.Text, yStart: SwiftUICore.Text, yEnd: SwiftUICore.Text, domain: Swift.ClosedRange<Swift.Double>? = nil, function: @escaping @Sendable (Swift.Double) -> (yStart: Swift.Double, yEnd: Swift.Double))
+  nonisolated public init(x: SwiftUICore.LocalizedStringKey, yStart: SwiftUICore.LocalizedStringKey, yEnd: SwiftUICore.LocalizedStringKey, domain: Swift.ClosedRange<Swift.Double>? = nil, function: @escaping @Sendable (Swift.Double) -> (yStart: Swift.Double, yEnd: Swift.Double))
+  @_disfavoredOverload nonisolated public init<S1, S2, S3>(x: S1, yStart: S2, yEnd: S3, domain: Swift.ClosedRange<Swift.Double>? = nil, function: @escaping @Sendable (Swift.Double) -> (yStart: Swift.Double, yEnd: Swift.Double)) where S1 : Swift.StringProtocol, S2 : Swift.StringProtocol, S3 : Swift.StringProtocol
+  nonisolated public init(x: SwiftUICore.Text, y: SwiftUICore.Text, domain: Swift.ClosedRange<Swift.Double>? = nil, function: @escaping @Sendable (Swift.Double) -> Swift.Double)
+  nonisolated public init(x: SwiftUICore.LocalizedStringKey, y: SwiftUICore.LocalizedStringKey, domain: Swift.ClosedRange<Swift.Double>? = nil, function: @escaping @Sendable (Swift.Double) -> Swift.Double)
+  @_disfavoredOverload nonisolated public init<S1, S2>(x: S1, y: S2, domain: Swift.ClosedRange<Swift.Double>? = nil, function: @escaping @Sendable (Swift.Double) -> Swift.Double) where S1 : Swift.StringProtocol, S2 : Swift.StringProtocol
+}
+@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+@_Concurrency.MainActor @preconcurrency public struct FunctionAreaPlotContent {
+  @_Concurrency.MainActor @preconcurrency public static func _layoutChartContent(_ content: Charts.FunctionAreaPlotContent, _ inputs: Charts._ChartContentLayoutInputs)
+  @_Concurrency.MainActor @preconcurrency public static func _renderChartContent(_ content: Charts.FunctionAreaPlotContent, _ inputs: Charts._ChartContentRenderInputs) -> Charts._ChartContentRenderOutputs
+  @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
+  public typealias Body = Swift.Never
+}
+@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+@_Concurrency.MainActor @preconcurrency public struct VectorizedAreaPlotContent<Data> : Charts.VectorizedChartContent where Data : Swift.RandomAccessCollection {
+  public typealias DataElement = Data.Element
+  @_Concurrency.MainActor @preconcurrency public var body: some Charts.ChartContent {
+    get
+  }
+  @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
+  public typealias Body = @_opaqueReturnTypeOf("$s6Charts25VectorizedAreaPlotContentV4bodyQrvp", 0) __<Data>
+}
+@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+public struct RectanglePlot<Content> {
+}
+@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+extension Charts.RectanglePlot : Charts.ChartContent where Content : Charts.ChartContent {
+  @_Concurrency.MainActor @preconcurrency public var body: some Charts.ChartContent {
+    get
+  }
+  @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
+  public typealias Body = @_opaqueReturnTypeOf("$s6Charts13RectanglePlotVA2A12ChartContentRzlE4bodyQrvp", 0) __<Content>
+}
+@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+extension Charts.RectanglePlot : Charts.VectorizedChartContent where Content : Charts.VectorizedChartContent {
+  public typealias DataElement = Content.DataElement
+}
+@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+extension Charts.RectanglePlot {
+  nonisolated public init<Data>(_ data: Data, x: Charts.PlottableProjection<Charts.RectanglePlot<Content>.DataElement, some Plottable>, y: Charts.PlottableProjection<Charts.RectanglePlot<Content>.DataElement, some Plottable>, width: Charts.MarkDimensions<Charts.RectanglePlot<Content>.DataElement> = .automatic, height: Charts.MarkDimensions<Charts.RectanglePlot<Content>.DataElement> = .automatic) where Content == Charts.VectorizedRectanglePlotContent<Data>, Data : Swift.RandomAccessCollection
+  nonisolated public init<Data, X>(_ data: Data, xStart: Charts.PlottableProjection<Charts.RectanglePlot<Content>.DataElement, X>, xEnd: Charts.PlottableProjection<Charts.RectanglePlot<Content>.DataElement, X>, y: Charts.PlottableProjection<Charts.RectanglePlot<Content>.DataElement, some Plottable>, height: Charts.MarkDimensions<Charts.RectanglePlot<Content>.DataElement> = .automatic) where Content == Charts.VectorizedRectanglePlotContent<Data>, Data : Swift.RandomAccessCollection, X : Charts.Plottable
+  nonisolated public init<Data, Y>(_ data: Data, x: Charts.PlottableProjection<Charts.RectanglePlot<Content>.DataElement, some Plottable>, yStart: Charts.PlottableProjection<Charts.RectanglePlot<Content>.DataElement, Y>, yEnd: Charts.PlottableProjection<Charts.RectanglePlot<Content>.DataElement, Y>, width: Charts.MarkDimensions<Charts.RectanglePlot<Content>.DataElement> = .automatic) where Content == Charts.VectorizedRectanglePlotContent<Data>, Data : Swift.RandomAccessCollection, Y : Charts.Plottable
+  nonisolated public init<Data, X, Y>(_ data: Data, xStart: Charts.PlottableProjection<Charts.RectanglePlot<Content>.DataElement, X>, xEnd: Charts.PlottableProjection<Charts.RectanglePlot<Content>.DataElement, X>, yStart: Charts.PlottableProjection<Charts.RectanglePlot<Content>.DataElement, Y>, yEnd: Charts.PlottableProjection<Charts.RectanglePlot<Content>.DataElement, Y>) where Content == Charts.VectorizedRectanglePlotContent<Data>, Data : Swift.RandomAccessCollection, X : Charts.Plottable, Y : Charts.Plottable
+}
+@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+extension Charts.RectanglePlot {
+  nonisolated public init<Data>(_ data: Data, x: Charts.PlottableProjection<Charts.RectanglePlot<Content>.DataElement, some Plottable>, yStart: CoreFoundation.CGFloat? = nil, yEnd: CoreFoundation.CGFloat? = nil, width: Charts.MarkDimensions<Charts.RectanglePlot<Content>.DataElement> = .automatic) where Content == Charts.VectorizedRectanglePlotContent<Data>, Data : Swift.RandomAccessCollection
+  nonisolated public init<Data>(_ data: Data, xStart: CoreFoundation.CGFloat? = nil, xEnd: CoreFoundation.CGFloat? = nil, y: Charts.PlottableProjection<Charts.RectanglePlot<Content>.DataElement, some Plottable>, height: Charts.MarkDimensions<Charts.RectanglePlot<Content>.DataElement> = .automatic) where Content == Charts.VectorizedRectanglePlotContent<Data>, Data : Swift.RandomAccessCollection
+  nonisolated public init<Data, X>(_ data: Data, xStart: Charts.PlottableProjection<Charts.RectanglePlot<Content>.DataElement, X>, xEnd: Charts.PlottableProjection<Charts.RectanglePlot<Content>.DataElement, X>, yStart: CoreFoundation.CGFloat? = nil, yEnd: CoreFoundation.CGFloat? = nil) where Content == Charts.VectorizedRectanglePlotContent<Data>, Data : Swift.RandomAccessCollection, X : Charts.Plottable
+  nonisolated public init<Data, Y>(_ data: Data, xStart: CoreFoundation.CGFloat? = nil, xEnd: CoreFoundation.CGFloat? = nil, yStart: Charts.PlottableProjection<Charts.RectanglePlot<Content>.DataElement, Y>, yEnd: Charts.PlottableProjection<Charts.RectanglePlot<Content>.DataElement, Y>) where Content == Charts.VectorizedRectanglePlotContent<Data>, Data : Swift.RandomAccessCollection, Y : Charts.Plottable
+}
+@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+extension Charts.RectanglePlot {
+  nonisolated public init<Data>(_ data: Data, x: Charts.PlottableProjection<Charts.RectanglePlot<Content>.DataElement, some Plottable>, yStart: Swift.KeyPath<Charts.RectanglePlot<Content>.DataElement, CoreFoundation.CGFloat>, yEnd: Swift.KeyPath<Charts.RectanglePlot<Content>.DataElement, CoreFoundation.CGFloat>, width: Charts.MarkDimensions<Charts.RectanglePlot<Content>.DataElement> = .automatic) where Content == Charts.VectorizedRectanglePlotContent<Data>, Data : Swift.RandomAccessCollection
+  nonisolated public init<Data>(_ data: Data, xStart: Swift.KeyPath<Charts.RectanglePlot<Content>.DataElement, CoreFoundation.CGFloat>, xEnd: Swift.KeyPath<Charts.RectanglePlot<Content>.DataElement, CoreFoundation.CGFloat>, y: Charts.PlottableProjection<Charts.RectanglePlot<Content>.DataElement, some Plottable>, height: Charts.MarkDimensions<Charts.RectanglePlot<Content>.DataElement> = .automatic) where Content == Charts.VectorizedRectanglePlotContent<Data>, Data : Swift.RandomAccessCollection
+  nonisolated public init<Data, X>(_ data: Data, xStart: Charts.PlottableProjection<Charts.RectanglePlot<Content>.DataElement, X>, xEnd: Charts.PlottableProjection<Charts.RectanglePlot<Content>.DataElement, X>, yStart: Swift.KeyPath<Charts.RectanglePlot<Content>.DataElement, CoreFoundation.CGFloat>, yEnd: Swift.KeyPath<Charts.RectanglePlot<Content>.DataElement, CoreFoundation.CGFloat>) where Content == Charts.VectorizedRectanglePlotContent<Data>, Data : Swift.RandomAccessCollection, X : Charts.Plottable
+  nonisolated public init<Data, Y>(_ data: Data, xStart: Swift.KeyPath<Charts.RectanglePlot<Content>.DataElement, CoreFoundation.CGFloat>, xEnd: Swift.KeyPath<Charts.RectanglePlot<Content>.DataElement, CoreFoundation.CGFloat>, yStart: Charts.PlottableProjection<Charts.RectanglePlot<Content>.DataElement, Y>, yEnd: Charts.PlottableProjection<Charts.RectanglePlot<Content>.DataElement, Y>) where Content == Charts.VectorizedRectanglePlotContent<Data>, Data : Swift.RandomAccessCollection, Y : Charts.Plottable
+  nonisolated public init<Data>(_ data: Data, xStart: Swift.KeyPath<Charts.RectanglePlot<Content>.DataElement, CoreFoundation.CGFloat>, xEnd: Swift.KeyPath<Charts.RectanglePlot<Content>.DataElement, CoreFoundation.CGFloat>, yStart: Swift.KeyPath<Charts.RectanglePlot<Content>.DataElement, CoreFoundation.CGFloat>, yEnd: Swift.KeyPath<Charts.RectanglePlot<Content>.DataElement, CoreFoundation.CGFloat>) where Content == Charts.VectorizedRectanglePlotContent<Data>, Data : Swift.RandomAccessCollection
+}
+@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+@_Concurrency.MainActor @preconcurrency public struct VectorizedRectanglePlotContent<Data> : Charts.VectorizedChartContent where Data : Swift.RandomAccessCollection {
+  public typealias DataElement = Data.Element
+  @_Concurrency.MainActor @preconcurrency public static func _layoutChartContent(_ content: Charts.VectorizedRectanglePlotContent<Data>, _ inputs: Charts._ChartContentLayoutInputs)
+  @_Concurrency.MainActor @preconcurrency public static func _renderChartContent(_ content: Charts.VectorizedRectanglePlotContent<Data>, _ inputs: Charts._ChartContentRenderInputs) -> Charts._ChartContentRenderOutputs
+  @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
+  public typealias Body = Swift.Never
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
-public struct AxisValueLabel<Content> : Charts.AxisMark where Content : SwiftUI.View {
-  public init(centered: Swift.Bool? = nil, anchor: SwiftUI.UnitPoint? = nil, multiLabelAlignment: SwiftUI.Alignment? = nil, collisionResolution: Charts.AxisValueLabelCollisionResolution = .automatic, offsetsMarks: Swift.Bool? = nil, orientation: Charts.AxisValueLabelOrientation = .automatic, horizontalSpacing: CoreFoundation.CGFloat? = nil, verticalSpacing: CoreFoundation.CGFloat? = nil) where Content == Swift.Never
-  public init(centered: Swift.Bool? = nil, anchor: SwiftUI.UnitPoint? = nil, multiLabelAlignment: SwiftUI.Alignment? = nil, collisionResolution: Charts.AxisValueLabelCollisionResolution = .automatic, offsetsMarks: Swift.Bool? = nil, orientation: Charts.AxisValueLabelOrientation = .automatic, horizontalSpacing: CoreFoundation.CGFloat? = nil, verticalSpacing: CoreFoundation.CGFloat? = nil, @SwiftUI.ViewBuilder content: () -> Content)
-  public init(_ titleKey: SwiftUI.LocalizedStringKey, centered: Swift.Bool? = nil, anchor: SwiftUI.UnitPoint? = nil, multiLabelAlignment: SwiftUI.Alignment? = nil, collisionResolution: Charts.AxisValueLabelCollisionResolution = .automatic, offsetsMarks: Swift.Bool? = nil, orientation: Charts.AxisValueLabelOrientation = .automatic, horizontalSpacing: CoreFoundation.CGFloat? = nil, verticalSpacing: CoreFoundation.CGFloat? = nil) where Content == SwiftUI.Text
-  @_disfavoredOverload public init<S>(_ title: S, centered: Swift.Bool? = nil, anchor: SwiftUI.UnitPoint? = nil, multiLabelAlignment: SwiftUI.Alignment? = nil, collisionResolution: Charts.AxisValueLabelCollisionResolution = .automatic, offsetsMarks: Swift.Bool? = nil, orientation: Charts.AxisValueLabelOrientation = .automatic, horizontalSpacing: CoreFoundation.CGFloat? = nil, verticalSpacing: CoreFoundation.CGFloat? = nil) where Content == SwiftUI.Text, S : Swift.StringProtocol
-  public init<Format>(format: Format, centered: Swift.Bool? = nil, anchor: SwiftUI.UnitPoint? = nil, multiLabelAlignment: SwiftUI.Alignment? = nil, collisionResolution: Charts.AxisValueLabelCollisionResolution = .automatic, offsetsMarks: Swift.Bool? = nil, orientation: Charts.AxisValueLabelOrientation = .automatic, horizontalSpacing: CoreFoundation.CGFloat? = nil, verticalSpacing: CoreFoundation.CGFloat? = nil) where Content == Swift.Never, Format : Foundation.FormatStyle, Format.FormatInput : Charts.Plottable, Format.FormatOutput == Swift.String
+public struct AxisValueLabel<Content> : Charts.AxisMark where Content : SwiftUICore.View {
+  nonisolated public init(centered: Swift.Bool? = nil, anchor: SwiftUICore.UnitPoint? = nil, multiLabelAlignment: SwiftUICore.Alignment? = nil, collisionResolution: Charts.AxisValueLabelCollisionResolution = .automatic, offsetsMarks: Swift.Bool? = nil, orientation: Charts.AxisValueLabelOrientation = .automatic, horizontalSpacing: CoreFoundation.CGFloat? = nil, verticalSpacing: CoreFoundation.CGFloat? = nil) where Content == Swift.Never
+  nonisolated public init(centered: Swift.Bool? = nil, anchor: SwiftUICore.UnitPoint? = nil, multiLabelAlignment: SwiftUICore.Alignment? = nil, collisionResolution: Charts.AxisValueLabelCollisionResolution = .automatic, offsetsMarks: Swift.Bool? = nil, orientation: Charts.AxisValueLabelOrientation = .automatic, horizontalSpacing: CoreFoundation.CGFloat? = nil, verticalSpacing: CoreFoundation.CGFloat? = nil, @SwiftUICore.ViewBuilder content: () -> Content)
+  nonisolated public init(_ titleKey: SwiftUICore.LocalizedStringKey, centered: Swift.Bool? = nil, anchor: SwiftUICore.UnitPoint? = nil, multiLabelAlignment: SwiftUICore.Alignment? = nil, collisionResolution: Charts.AxisValueLabelCollisionResolution = .automatic, offsetsMarks: Swift.Bool? = nil, orientation: Charts.AxisValueLabelOrientation = .automatic, horizontalSpacing: CoreFoundation.CGFloat? = nil, verticalSpacing: CoreFoundation.CGFloat? = nil) where Content == SwiftUICore.Text
+  @_disfavoredOverload nonisolated public init<S>(_ title: S, centered: Swift.Bool? = nil, anchor: SwiftUICore.UnitPoint? = nil, multiLabelAlignment: SwiftUICore.Alignment? = nil, collisionResolution: Charts.AxisValueLabelCollisionResolution = .automatic, offsetsMarks: Swift.Bool? = nil, orientation: Charts.AxisValueLabelOrientation = .automatic, horizontalSpacing: CoreFoundation.CGFloat? = nil, verticalSpacing: CoreFoundation.CGFloat? = nil) where Content == SwiftUICore.Text, S : Swift.StringProtocol
+  nonisolated public init<Format>(format: Format, centered: Swift.Bool? = nil, anchor: SwiftUICore.UnitPoint? = nil, multiLabelAlignment: SwiftUICore.Alignment? = nil, collisionResolution: Charts.AxisValueLabelCollisionResolution = .automatic, offsetsMarks: Swift.Bool? = nil, orientation: Charts.AxisValueLabelOrientation = .automatic, horizontalSpacing: CoreFoundation.CGFloat? = nil, verticalSpacing: CoreFoundation.CGFloat? = nil) where Content == Swift.Never, Format : Foundation.FormatStyle, Format.FormatInput : Charts.Plottable, Format.FormatOutput == Swift.String
   public static func _layoutAxisMark(_ content: Charts.AxisValueLabel<Content>, _ inputs: Charts._AxisMarkLayoutInputs)
   public static func _renderAxisMark(_ content: Charts.AxisValueLabel<Content>, _ inputs: Charts._AxisMarkRenderInputs) -> Charts._AxisMarkRenderOutputs
 }
@@ -405,14 +558,26 @@ public struct AxisValueLabelCollisionResolution : Swift.CustomStringConvertible 
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 extension Charts.AxisMark {
-  public func foregroundStyle<S>(_ style: S) -> some Charts.AxisMark where S : SwiftUI.ShapeStyle
+  public func foregroundStyle<S>(_ style: S) -> some Charts.AxisMark where S : SwiftUICore.ShapeStyle
   
-  public func font(_ font: SwiftUI.Font?) -> some Charts.AxisMark
+  public func font(_ font: SwiftUICore.Font?) -> some Charts.AxisMark
   
   public func offset(x: CoreFoundation.CGFloat = 0, y: CoreFoundation.CGFloat = 0) -> some Charts.AxisMark
   
   public func offset(_ offset: CoreFoundation.CGSize) -> some Charts.AxisMark
   
+}
+@available(iOS 18.0, macOS 15.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+@usableFromInline
+internal struct ChartModifiedContent<Content, Modifier> {
+  @usableFromInline
+  internal typealias Body = Swift.Never
+  @usableFromInline
+  internal var content: Content
+  @usableFromInline
+  internal var modifier: Modifier
+  @usableFromInline
+  nonisolated internal init(content: Content, modifier: Modifier)
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 @frozen public struct MarkStackingMethod : Swift.Equatable {
@@ -425,9 +590,9 @@ extension Charts.AxisMark {
     case center
     case unstacked
     @usableFromInline
-    internal func hash(into hasher: inout Swift.Hasher)
-    @usableFromInline
     internal static func == (a: Charts.MarkStackingMethod.Storage, b: Charts.MarkStackingMethod.Storage) -> Swift.Bool
+    @usableFromInline
+    internal func hash(into hasher: inout Swift.Hasher)
     @usableFromInline
     internal var hashValue: Swift.Int {
       @usableFromInline
@@ -487,10 +652,30 @@ extension Charts.MarkStackingMethod : Swift.CustomStringConvertible {
   @inlinable public static func fixed(_ value: CoreFoundation.CGFloat) -> Charts.MarkDimension {
         return .init(.fixed(value))
     }
-  @inlinable public init(floatLiteral value: Swift.Double) {
+  @inlinable nonisolated public init(floatLiteral value: Swift.Double) {
         self = .fixed(CGFloat(value))
     }
-  @inlinable public init(integerLiteral value: Swift.Int) {
+  @inlinable nonisolated public init(integerLiteral value: Swift.Int) {
+        self = .fixed(CGFloat(value))
+    }
+}
+@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+public struct MarkDimensions<DataElement> : Swift.ExpressibleByFloatLiteral, Swift.ExpressibleByIntegerLiteral {
+  public typealias IntegerLiteralType = Swift.Int
+  public typealias FloatLiteralType = Swift.Double
+  public static var automatic: Charts.MarkDimensions<DataElement> {
+    get
+  }
+  public static func ratio(_ value: CoreFoundation.CGFloat) -> Charts.MarkDimensions<DataElement>
+  public static func inset(_ value: CoreFoundation.CGFloat) -> Charts.MarkDimensions<DataElement>
+  public static func fixed(_ value: CoreFoundation.CGFloat) -> Charts.MarkDimensions<DataElement>
+  public static func ratio(_ keyPath: Swift.KeyPath<DataElement, CoreFoundation.CGFloat>) -> Charts.MarkDimensions<DataElement>
+  public static func inset(_ keyPath: Swift.KeyPath<DataElement, CoreFoundation.CGFloat>) -> Charts.MarkDimensions<DataElement>
+  public static func fixed(_ keyPath: Swift.KeyPath<DataElement, CoreFoundation.CGFloat>) -> Charts.MarkDimensions<DataElement>
+  @inlinable nonisolated public init(floatLiteral value: Swift.Double) {
+        self = .fixed(CGFloat(value))
+    }
+  @inlinable nonisolated public init(integerLiteral value: Swift.Int) {
         self = .fixed(CGFloat(value))
     }
 }
@@ -546,7 +731,7 @@ extension Charts.InterpolationMethod : Swift.CustomStringConvertible {
   }
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
-public struct AxisValue {
+public struct AxisValue : Swift.Sendable {
   public func `as`<P>(_ type: P.Type) -> P? where P : Charts.Plottable
   public var index: Swift.Int {
     get
@@ -555,13 +740,19 @@ public struct AxisValue {
     get
   }
 }
+@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+public struct _ChartContentInputs {
+}
+@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+public struct _ChartContentOutputs {
+}
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 public struct ChartProxy {
   @available(iOS, deprecated: 17.0, renamed: "plotFrame")
   @available(macOS, deprecated: 14.0, renamed: "plotFrame")
   @available(tvOS, deprecated: 17.0, renamed: "plotFrame")
   @available(watchOS, deprecated: 10.0, renamed: "plotFrame")
-  public var plotAreaFrame: SwiftUI.Anchor<CoreFoundation.CGRect> {
+  public var plotAreaFrame: SwiftUICore.Anchor<CoreFoundation.CGRect> {
     get
   }
   @available(iOS, deprecated: 17.0, renamed: "plotSize")
@@ -583,10 +774,10 @@ public struct ChartProxy {
 }
 @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 extension Charts.ChartProxy {
-  public var plotFrame: SwiftUI.Anchor<CoreFoundation.CGRect>? {
+  public var plotFrame: SwiftUICore.Anchor<CoreFoundation.CGRect>? {
     get
   }
-  public var plotContainerFrame: SwiftUI.Anchor<CoreFoundation.CGRect>? {
+  public var plotContainerFrame: SwiftUICore.Anchor<CoreFoundation.CGRect>? {
     get
   }
   public var plotSize: CoreFoundation.CGSize {
@@ -595,8 +786,8 @@ extension Charts.ChartProxy {
 }
 @available(iOS 16.4, macOS 13.3, tvOS 16.4, watchOS 9.4, *)
 extension Charts.ChartProxy {
-  public func foregroundStyle<P>(for value: P) -> SwiftUI.AnyShapeStyle? where P : Charts.Plottable
-  public func lineStyle<P>(for value: P) -> SwiftUI.StrokeStyle? where P : Charts.Plottable
+  public func foregroundStyle<P>(for value: P) -> SwiftUICore.AnyShapeStyle? where P : Charts.Plottable
+  public func lineStyle<P>(for value: P) -> SwiftUICore.StrokeStyle? where P : Charts.Plottable
   public func symbol<P>(for value: P) -> Charts.AnyChartSymbolShape? where P : Charts.Plottable
   public func symbolSize<P>(for value: P) -> CoreFoundation.CGFloat? where P : Charts.Plottable
 }
@@ -615,38 +806,38 @@ extension Charts.ChartProxy {
   public func selectYValue(at yPosition: CoreFoundation.CGFloat)
   public func selectXRange(from: CoreFoundation.CGFloat, to: CoreFoundation.CGFloat)
   public func selectYRange(from: CoreFoundation.CGFloat, to: CoreFoundation.CGFloat)
-  public func selectAngleValue(at angle: SwiftUI.Angle)
-  public func angle(at position: CoreFoundation.CGPoint) -> SwiftUI.Angle
-  public func value<P>(atAngle angle: SwiftUI.Angle, as: P.Type = P.self) -> P? where P : Charts.Plottable
+  public func selectAngleValue(at angle: SwiftUICore.Angle)
+  public func angle(at position: CoreFoundation.CGPoint) -> SwiftUICore.Angle
+  public func value<P>(atAngle angle: SwiftUICore.Angle, as: P.Type = P.self) -> P? where P : Charts.Plottable
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
-extension SwiftUI.View {
-  public func chartOverlay<V>(alignment: SwiftUI.Alignment = .center, @SwiftUI.ViewBuilder content: @escaping (Charts.ChartProxy) -> V) -> some SwiftUI.View where V : SwiftUI.View
+extension SwiftUICore.View {
+  nonisolated public func chartOverlay<V>(alignment: SwiftUICore.Alignment = .center, @SwiftUICore.ViewBuilder content: @escaping (Charts.ChartProxy) -> V) -> some SwiftUICore.View where V : SwiftUICore.View
   
-  public func chartBackground<V>(alignment: SwiftUI.Alignment = .center, @SwiftUI.ViewBuilder content: @escaping (Charts.ChartProxy) -> V) -> some SwiftUI.View where V : SwiftUI.View
+  nonisolated public func chartBackground<V>(alignment: SwiftUICore.Alignment = .center, @SwiftUICore.ViewBuilder content: @escaping (Charts.ChartProxy) -> V) -> some SwiftUICore.View where V : SwiftUICore.View
   
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 extension Charts.ChartContent {
-  public func mask<C>(@Charts.ChartContentBuilder content: () -> C) -> some Charts.ChartContent where C : Charts.ChartContent
+  nonisolated public func mask<C>(@Charts.ChartContentBuilder content: () -> C) -> some Charts.ChartContent where C : Charts.ChartContent
   
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 public struct AxisGridLine : Charts.AxisMark {
-  public init(centered: Swift.Bool? = nil, stroke: SwiftUI.StrokeStyle? = nil)
+  nonisolated public init(centered: Swift.Bool? = nil, stroke: SwiftUICore.StrokeStyle? = nil)
   public static func _layoutAxisMark(_ content: Charts.AxisGridLine, _ inputs: Charts._AxisMarkLayoutInputs)
   public static func _renderAxisMark(_ content: Charts.AxisGridLine, _ inputs: Charts._AxisMarkRenderInputs) -> Charts._AxisMarkRenderOutputs
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 public struct AxisMarks<Content> : Charts.AxisContent where Content : Charts.AxisMark {
-  public init(preset: Charts.AxisMarkPreset = .automatic, position: Charts.AxisMarkPosition = .automatic, values: Charts.AxisMarkValues = .automatic, @Charts.AxisMarkBuilder content: @escaping (Charts.AxisValue) -> Content)
-  public init<Value>(preset: Charts.AxisMarkPreset = .automatic, position: Charts.AxisMarkPosition = .automatic, values: [Value], @Charts.AxisMarkBuilder content: @escaping (Charts.AxisValue) -> Content) where Value : Charts.Plottable
-  public init(preset: Charts.AxisMarkPreset = .automatic, position: Charts.AxisMarkPosition = .automatic, values: Charts.AxisMarkValues = .automatic, @Charts.AxisMarkBuilder content: @escaping () -> Content)
-  public init<Value>(preset: Charts.AxisMarkPreset = .automatic, position: Charts.AxisMarkPosition = .automatic, values: [Value], @Charts.AxisMarkBuilder content: @escaping () -> Content) where Value : Charts.Plottable
-  public init<Format>(format: Format, preset: Charts.AxisMarkPreset = .automatic, position: Charts.AxisMarkPosition = .automatic, values: Charts.AxisMarkValues = .automatic, stroke: SwiftUI.StrokeStyle? = nil) where Content == Swift.Never, Format : Foundation.FormatStyle, Format.FormatInput : Charts.Plottable, Format.FormatOutput == Swift.String
-  public init<Value, Format>(format: Format, preset: Charts.AxisMarkPreset = .automatic, position: Charts.AxisMarkPosition = .automatic, values: [Value], stroke: SwiftUI.StrokeStyle? = nil) where Content == Swift.Never, Value : Charts.Plottable, Value == Format.FormatInput, Format : Foundation.FormatStyle, Format.FormatOutput == Swift.String
-  public init(preset: Charts.AxisMarkPreset = .automatic, position: Charts.AxisMarkPosition = .automatic, values: Charts.AxisMarkValues = .automatic, stroke: SwiftUI.StrokeStyle? = nil) where Content == Swift.Never
-  public init<Value>(preset: Charts.AxisMarkPreset = .automatic, position: Charts.AxisMarkPosition = .automatic, values: [Value], stroke: SwiftUI.StrokeStyle? = nil) where Content == Swift.Never, Value : Charts.Plottable
+  nonisolated public init(preset: Charts.AxisMarkPreset = .automatic, position: Charts.AxisMarkPosition = .automatic, values: Charts.AxisMarkValues = .automatic, @Charts.AxisMarkBuilder content: @escaping (Charts.AxisValue) -> Content)
+  nonisolated public init<Value>(preset: Charts.AxisMarkPreset = .automatic, position: Charts.AxisMarkPosition = .automatic, values: [Value], @Charts.AxisMarkBuilder content: @escaping (Charts.AxisValue) -> Content) where Value : Charts.Plottable
+  nonisolated public init(preset: Charts.AxisMarkPreset = .automatic, position: Charts.AxisMarkPosition = .automatic, values: Charts.AxisMarkValues = .automatic, @Charts.AxisMarkBuilder content: @escaping () -> Content)
+  nonisolated public init<Value>(preset: Charts.AxisMarkPreset = .automatic, position: Charts.AxisMarkPosition = .automatic, values: [Value], @Charts.AxisMarkBuilder content: @escaping () -> Content) where Value : Charts.Plottable
+  nonisolated public init<Format>(format: Format, preset: Charts.AxisMarkPreset = .automatic, position: Charts.AxisMarkPosition = .automatic, values: Charts.AxisMarkValues = .automatic, stroke: SwiftUICore.StrokeStyle? = nil) where Content == Swift.Never, Format : Foundation.FormatStyle, Format.FormatInput : Charts.Plottable, Format.FormatOutput == Swift.String
+  nonisolated public init<Value, Format>(format: Format, preset: Charts.AxisMarkPreset = .automatic, position: Charts.AxisMarkPosition = .automatic, values: [Value], stroke: SwiftUICore.StrokeStyle? = nil) where Content == Swift.Never, Value : Charts.Plottable, Value == Format.FormatInput, Format : Foundation.FormatStyle, Format.FormatOutput == Swift.String
+  nonisolated public init(preset: Charts.AxisMarkPreset = .automatic, position: Charts.AxisMarkPosition = .automatic, values: Charts.AxisMarkValues = .automatic, stroke: SwiftUICore.StrokeStyle? = nil) where Content == Swift.Never
+  nonisolated public init<Value>(preset: Charts.AxisMarkPreset = .automatic, position: Charts.AxisMarkPosition = .automatic, values: [Value], stroke: SwiftUICore.StrokeStyle? = nil) where Content == Swift.Never, Value : Charts.Plottable
   public static func _makeAxisContent(_ content: Charts.AxisMarks<Content>, _ inputs: Charts._AxisContentInputs) -> Charts._AxisContentOutputs
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
@@ -703,21 +894,22 @@ public struct AxisMarkValues : Swift.CustomStringConvertible {
 }
 @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 extension Charts.ChartContent {
-  public func compositingLayer() -> some Charts.ChartContent
+  nonisolated public func compositingLayer() -> some Charts.ChartContent
   
-  public func compositingLayer<V>(style: (SwiftUI.PlaceholderContentView<Self>) -> V) -> some Charts.ChartContent where V : SwiftUI.View
+  nonisolated public func compositingLayer<V>(style: (SwiftUICore.PlaceholderContentView<Self>) -> V) -> some Charts.ChartContent where V : SwiftUICore.View
   
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
-public struct AreaMark {
-  public init<X, Y>(x: Charts.PlottableValue<X>, y: Charts.PlottableValue<Y>, stacking: Charts.MarkStackingMethod = .standard) where X : Charts.Plottable, Y : Charts.Plottable
-  public init<X, Y>(xStart: Charts.PlottableValue<X>, xEnd: Charts.PlottableValue<X>, y: Charts.PlottableValue<Y>) where X : Charts.Plottable, Y : Charts.Plottable
-  public init<X, Y>(x: Charts.PlottableValue<X>, yStart: Charts.PlottableValue<Y>, yEnd: Charts.PlottableValue<Y>) where X : Charts.Plottable, Y : Charts.Plottable
-  public init<X, Y, S>(x: Charts.PlottableValue<X>, y: Charts.PlottableValue<Y>, series: Charts.PlottableValue<S>, stacking: Charts.MarkStackingMethod = .standard) where X : Charts.Plottable, Y : Charts.Plottable, S : Charts.Plottable
-  public init<X, Y, S>(xStart: Charts.PlottableValue<X>, xEnd: Charts.PlottableValue<X>, y: Charts.PlottableValue<Y>, series: Charts.PlottableValue<S>) where X : Charts.Plottable, Y : Charts.Plottable, S : Charts.Plottable
-  public init<X, Y, S>(x: Charts.PlottableValue<X>, yStart: Charts.PlottableValue<Y>, yEnd: Charts.PlottableValue<Y>, series: Charts.PlottableValue<S>) where X : Charts.Plottable, Y : Charts.Plottable, S : Charts.Plottable
-  public static func _layoutChartContent(_ content: Charts.AreaMark, _ inputs: Charts._ChartContentLayoutInputs)
-  public static func _renderChartContent(_ content: Charts.AreaMark, _ inputs: Charts._ChartContentRenderInputs) -> Charts._ChartContentRenderOutputs
+@_Concurrency.MainActor @preconcurrency public struct AreaMark {
+  nonisolated public init<X, Y>(x: Charts.PlottableValue<X>, y: Charts.PlottableValue<Y>, stacking: Charts.MarkStackingMethod = .standard) where X : Charts.Plottable, Y : Charts.Plottable
+  nonisolated public init<X, Y>(xStart: Charts.PlottableValue<X>, xEnd: Charts.PlottableValue<X>, y: Charts.PlottableValue<Y>) where X : Charts.Plottable, Y : Charts.Plottable
+  nonisolated public init<X, Y>(x: Charts.PlottableValue<X>, yStart: Charts.PlottableValue<Y>, yEnd: Charts.PlottableValue<Y>) where X : Charts.Plottable, Y : Charts.Plottable
+  nonisolated public init<X, Y, S>(x: Charts.PlottableValue<X>, y: Charts.PlottableValue<Y>, series: Charts.PlottableValue<S>, stacking: Charts.MarkStackingMethod = .standard) where X : Charts.Plottable, Y : Charts.Plottable, S : Charts.Plottable
+  nonisolated public init<X, Y, S>(xStart: Charts.PlottableValue<X>, xEnd: Charts.PlottableValue<X>, y: Charts.PlottableValue<Y>, series: Charts.PlottableValue<S>) where X : Charts.Plottable, Y : Charts.Plottable, S : Charts.Plottable
+  nonisolated public init<X, Y, S>(x: Charts.PlottableValue<X>, yStart: Charts.PlottableValue<Y>, yEnd: Charts.PlottableValue<Y>, series: Charts.PlottableValue<S>) where X : Charts.Plottable, Y : Charts.Plottable, S : Charts.Plottable
+  @_Concurrency.MainActor @preconcurrency public static func _layoutChartContent(_ content: Charts.AreaMark, _ inputs: Charts._ChartContentLayoutInputs)
+  @_Concurrency.MainActor @preconcurrency public static func _renderChartContent(_ content: Charts.AreaMark, _ inputs: Charts._ChartContentRenderInputs) -> Charts._ChartContentRenderOutputs
+  @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
   public typealias Body = Swift.Never
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
@@ -725,11 +917,11 @@ public struct DateBins {
   public var thresholds: [Foundation.Date] {
     get
   }
-  public init(thresholds: [Foundation.Date])
-  public init(timeInterval: Foundation.TimeInterval, range: Swift.ClosedRange<Foundation.Date>)
-  public init(unit: Foundation.Calendar.Component, by stride: Swift.Int = 1, range: Swift.ClosedRange<Foundation.Date>, calendar: Foundation.Calendar = .autoupdatingCurrent)
-  public init(range: Swift.ClosedRange<Foundation.Date>, desiredCount: Swift.Int = 10, calendar: Foundation.Calendar = .autoupdatingCurrent)
-  public init(data: [Foundation.Date], desiredCount: Swift.Int? = nil, calendar: Foundation.Calendar = .autoupdatingCurrent)
+  nonisolated public init(thresholds: [Foundation.Date])
+  nonisolated public init(timeInterval: Foundation.TimeInterval, range: Swift.ClosedRange<Foundation.Date>)
+  nonisolated public init(unit: Foundation.Calendar.Component, by stride: Swift.Int = 1, range: Swift.ClosedRange<Foundation.Date>, calendar: Foundation.Calendar = .autoupdatingCurrent)
+  nonisolated public init(range: Swift.ClosedRange<Foundation.Date>, desiredCount: Swift.Int = 10, calendar: Foundation.Calendar = .autoupdatingCurrent)
+  nonisolated public init(data: [Foundation.Date], desiredCount: Swift.Int? = nil, calendar: Foundation.Calendar = .autoupdatingCurrent)
   public subscript(position: Swift.Int) -> Charts.ChartBinRange<Foundation.Date> {
     get
   }
@@ -742,16 +934,21 @@ public struct DateBins {
     get
   }
   public static func == (a: Charts.DateBins, b: Charts.DateBins) -> Swift.Bool
+  @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
   public typealias Element = Charts.ChartBinRange<Foundation.Date>
+  @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
   public typealias Index = Swift.Int
+  @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
   public typealias Indices = Swift.DefaultIndices<Charts.DateBins>
+  @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
   public typealias Iterator = Swift.IndexingIterator<Charts.DateBins>
+  @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
   public typealias SubSequence = Swift.Slice<Charts.DateBins>
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 public struct AxisTick : Charts.AxisMark {
-  public init(centered: Swift.Bool? = nil, length: Charts.AxisTick.Length = .automatic, stroke: SwiftUI.StrokeStyle? = nil)
-  public init(centered: Swift.Bool? = nil, length: CoreFoundation.CGFloat, stroke: SwiftUI.StrokeStyle? = nil)
+  nonisolated public init(centered: Swift.Bool? = nil, length: Charts.AxisTick.Length = .automatic, stroke: SwiftUICore.StrokeStyle? = nil)
+  nonisolated public init(centered: Swift.Bool? = nil, length: CoreFoundation.CGFloat, stroke: SwiftUICore.StrokeStyle? = nil)
   public struct Length : Swift.CustomStringConvertible {
     public static var automatic: Charts.AxisTick.Length {
       get
@@ -771,119 +968,233 @@ public struct AxisTick : Charts.AxisMark {
   public static func _layoutAxisMark(_ content: Charts.AxisTick, _ inputs: Charts._AxisMarkLayoutInputs)
   public static func _renderAxisMark(_ content: Charts.AxisTick, _ inputs: Charts._AxisMarkRenderInputs) -> Charts._AxisMarkRenderOutputs
 }
+@available(iOS 18.0, macOS 15.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+extension SwiftUICore.ForEach where Content : Charts.ChartContent {
+  public static func _makeChartContent(content: SwiftUICore._GraphValue<SwiftUICore.ForEach<Data, ID, Content>>, inputs: Charts._ChartContentInputs) -> Charts._ChartContentOutputs
+}
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 extension Charts.ChartContent {
-  public func accessibilityLabel(_ label: SwiftUI.Text) -> some Charts.ChartContent
+  nonisolated public func accessibilityLabel(_ label: SwiftUICore.Text) -> some Charts.ChartContent
   
-  public func accessibilityLabel(_ labelKey: SwiftUI.LocalizedStringKey) -> some Charts.ChartContent
+  nonisolated public func accessibilityLabel(_ labelKey: SwiftUICore.LocalizedStringKey) -> some Charts.ChartContent
   
-  @_disfavoredOverload public func accessibilityLabel<S>(_ label: S) -> some Charts.ChartContent where S : Swift.StringProtocol
+  @_disfavoredOverload nonisolated public func accessibilityLabel<S>(_ label: S) -> some Charts.ChartContent where S : Swift.StringProtocol
+  
+}
+@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+extension Charts.VectorizedChartContent {
+  nonisolated public func accessibilityLabel(_ label: Swift.KeyPath<Self.DataElement, SwiftUICore.Text>) -> some Charts.VectorizedChartContent<Self.DataElement>
+  
+  nonisolated public func accessibilityLabel(_ labelKey: Swift.KeyPath<Self.DataElement, SwiftUICore.LocalizedStringKey>) -> some Charts.VectorizedChartContent<Self.DataElement>
+  
+  nonisolated public func accessibilityLabel(_ label: Swift.KeyPath<Self.DataElement, some StringProtocol>) -> some Charts.VectorizedChartContent<Self.DataElement>
   
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 extension Charts.ChartContent {
-  public func accessibilityValue(_ valueDescription: SwiftUI.Text) -> some Charts.ChartContent
+  nonisolated public func accessibilityValue(_ valueDescription: SwiftUICore.Text) -> some Charts.ChartContent
   
-  public func accessibilityValue(_ valueKey: SwiftUI.LocalizedStringKey) -> some Charts.ChartContent
+  nonisolated public func accessibilityValue(_ valueKey: SwiftUICore.LocalizedStringKey) -> some Charts.ChartContent
   
-  @_disfavoredOverload public func accessibilityValue<S>(_ value: S) -> some Charts.ChartContent where S : Swift.StringProtocol
+  @_disfavoredOverload nonisolated public func accessibilityValue<S>(_ value: S) -> some Charts.ChartContent where S : Swift.StringProtocol
+  
+}
+@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+extension Charts.VectorizedChartContent {
+  nonisolated public func accessibilityValue(_ valueDescription: Swift.KeyPath<Self.DataElement, SwiftUICore.Text>) -> some Charts.VectorizedChartContent<Self.DataElement>
+  
+  nonisolated public func accessibilityValue(_ valueKey: Swift.KeyPath<Self.DataElement, SwiftUICore.LocalizedStringKey>) -> some Charts.VectorizedChartContent<Self.DataElement>
+  
+  nonisolated public func accessibilityValue(_ value: Swift.KeyPath<Self.DataElement, some StringProtocol>) -> some Charts.VectorizedChartContent<Self.DataElement>
   
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 extension Charts.ChartContent {
-  public func accessibilityIdentifier(_ identifier: Swift.String) -> some Charts.ChartContent
+  nonisolated public func accessibilityIdentifier(_ identifier: Swift.String) -> some Charts.ChartContent
+  
+}
+@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+extension Charts.VectorizedChartContent {
+  nonisolated public func accessibilityIdentifier(_ identifier: Swift.KeyPath<Self.DataElement, Swift.String>) -> some Charts.VectorizedChartContent<Self.DataElement>
   
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 extension Charts.ChartContent {
-  public func accessibilityHidden(_ hidden: Swift.Bool) -> some Charts.ChartContent
+  nonisolated public func accessibilityHidden(_ hidden: Swift.Bool) -> some Charts.ChartContent
+  
+}
+@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+extension Charts.VectorizedChartContent {
+  nonisolated public func accessibilityHidden(_ hidden: Swift.KeyPath<Self.DataElement, Swift.Bool>) -> some Charts.VectorizedChartContent<Self.DataElement>
+  
+}
+@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+public struct BarPlot<Content> {
+}
+@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+extension Charts.BarPlot : Charts.ChartContent where Content : Charts.ChartContent {
+  @_Concurrency.MainActor @preconcurrency public var body: some Charts.ChartContent {
+    get
+  }
+  @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
+  public typealias Body = @_opaqueReturnTypeOf("$s6Charts7BarPlotVA2A12ChartContentRzlE4bodyQrvp", 0) __<Content>
+}
+@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+extension Charts.BarPlot : Charts.VectorizedChartContent where Content : Charts.VectorizedChartContent {
+  public typealias DataElement = Content.DataElement
+}
+@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+extension Charts.BarPlot {
+  nonisolated public init<Data>(_ data: Data, x: Charts.PlottableProjection<Charts.BarPlot<Content>.DataElement, some Plottable>, y: Charts.PlottableProjection<Charts.BarPlot<Content>.DataElement, some Plottable>, width: Charts.MarkDimensions<Charts.BarPlot<Content>.DataElement> = .automatic, height: Charts.MarkDimensions<Charts.BarPlot<Content>.DataElement> = .automatic, stacking: Charts.MarkStackingMethod = .standard) where Content == Charts.VectorizedBarPlotContent<Data>, Data : Swift.RandomAccessCollection
+  nonisolated public init<Data, X>(_ data: Data, xStart: Charts.PlottableProjection<Charts.BarPlot<Content>.DataElement, X>, xEnd: Charts.PlottableProjection<Charts.BarPlot<Content>.DataElement, X>, y: Charts.PlottableProjection<Charts.BarPlot<Content>.DataElement, some Plottable>, height: Charts.MarkDimensions<Charts.BarPlot<Content>.DataElement> = .automatic) where Content == Charts.VectorizedBarPlotContent<Data>, Data : Swift.RandomAccessCollection, X : Charts.Plottable
+  nonisolated public init<Data, Y>(_ data: Data, x: Charts.PlottableProjection<Charts.BarPlot<Content>.DataElement, some Plottable>, yStart: Charts.PlottableProjection<Charts.BarPlot<Content>.DataElement, Y>, yEnd: Charts.PlottableProjection<Charts.BarPlot<Content>.DataElement, Y>, width: Charts.MarkDimensions<Charts.BarPlot<Content>.DataElement> = .automatic) where Content == Charts.VectorizedBarPlotContent<Data>, Data : Swift.RandomAccessCollection, Y : Charts.Plottable
+}
+@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+extension Charts.BarPlot {
+  nonisolated public init<Data>(_ data: Data, x: Charts.PlottableProjection<Charts.BarPlot<Content>.DataElement, some Plottable>, yStart: CoreFoundation.CGFloat? = nil, yEnd: CoreFoundation.CGFloat? = nil, width: Charts.MarkDimensions<Charts.BarPlot<Content>.DataElement> = .automatic, stacking: Charts.MarkStackingMethod = .standard) where Content == Charts.VectorizedBarPlotContent<Data>, Data : Swift.RandomAccessCollection
+  nonisolated public init<Data>(_ data: Data, xStart: CoreFoundation.CGFloat? = nil, xEnd: CoreFoundation.CGFloat? = nil, y: Charts.PlottableProjection<Charts.BarPlot<Content>.DataElement, some Plottable>, height: Charts.MarkDimensions<Charts.BarPlot<Content>.DataElement> = .automatic, stacking: Charts.MarkStackingMethod = .standard) where Content == Charts.VectorizedBarPlotContent<Data>, Data : Swift.RandomAccessCollection
+  nonisolated public init<Data, X>(_ data: Data, xStart: Charts.PlottableProjection<Charts.BarPlot<Content>.DataElement, X>, xEnd: Charts.PlottableProjection<Charts.BarPlot<Content>.DataElement, X>, yStart: CoreFoundation.CGFloat? = nil, yEnd: CoreFoundation.CGFloat? = nil) where Content == Charts.VectorizedBarPlotContent<Data>, Data : Swift.RandomAccessCollection, X : Charts.Plottable
+  nonisolated public init<Data, Y>(_ data: Data, xStart: CoreFoundation.CGFloat? = nil, xEnd: CoreFoundation.CGFloat? = nil, yStart: Charts.PlottableProjection<Charts.BarPlot<Content>.DataElement, Y>, yEnd: Charts.PlottableProjection<Charts.BarPlot<Content>.DataElement, Y>) where Content == Charts.VectorizedBarPlotContent<Data>, Data : Swift.RandomAccessCollection, Y : Charts.Plottable
+}
+@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+extension Charts.BarPlot {
+  nonisolated public init<Data>(_ data: Data, x: Charts.PlottableProjection<Charts.BarPlot<Content>.DataElement, some Plottable>, yStart: Swift.KeyPath<Charts.BarPlot<Content>.DataElement, CoreFoundation.CGFloat>, yEnd: Swift.KeyPath<Charts.BarPlot<Content>.DataElement, CoreFoundation.CGFloat>, width: Charts.MarkDimensions<Charts.BarPlot<Content>.DataElement> = .automatic, stacking: Charts.MarkStackingMethod = .standard) where Content == Charts.VectorizedBarPlotContent<Data>, Data : Swift.RandomAccessCollection
+  nonisolated public init<Data>(_ data: Data, xStart: Swift.KeyPath<Charts.BarPlot<Content>.DataElement, CoreFoundation.CGFloat>, xEnd: Swift.KeyPath<Charts.BarPlot<Content>.DataElement, CoreFoundation.CGFloat>, y: Charts.PlottableProjection<Charts.BarPlot<Content>.DataElement, some Plottable>, height: Charts.MarkDimensions<Charts.BarPlot<Content>.DataElement> = .automatic, stacking: Charts.MarkStackingMethod = .standard) where Content == Charts.VectorizedBarPlotContent<Data>, Data : Swift.RandomAccessCollection
+  nonisolated public init<Data, X>(_ data: Data, xStart: Charts.PlottableProjection<Charts.BarPlot<Content>.DataElement, X>, xEnd: Charts.PlottableProjection<Charts.BarPlot<Content>.DataElement, X>, yStart: Swift.KeyPath<Charts.BarPlot<Content>.DataElement, CoreFoundation.CGFloat>, yEnd: Swift.KeyPath<Charts.BarPlot<Content>.DataElement, CoreFoundation.CGFloat>) where Content == Charts.VectorizedBarPlotContent<Data>, Data : Swift.RandomAccessCollection, X : Charts.Plottable
+  nonisolated public init<Data, Y>(_ data: Data, xStart: Swift.KeyPath<Charts.BarPlot<Content>.DataElement, CoreFoundation.CGFloat>, xEnd: Swift.KeyPath<Charts.BarPlot<Content>.DataElement, CoreFoundation.CGFloat>, yStart: Charts.PlottableProjection<Charts.BarPlot<Content>.DataElement, Y>, yEnd: Charts.PlottableProjection<Charts.BarPlot<Content>.DataElement, Y>) where Content == Charts.VectorizedBarPlotContent<Data>, Data : Swift.RandomAccessCollection, Y : Charts.Plottable
+}
+@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+@_Concurrency.MainActor @preconcurrency public struct VectorizedBarPlotContent<Data> : Charts.VectorizedChartContent where Data : Swift.RandomAccessCollection {
+  public typealias DataElement = Data.Element
+  @_Concurrency.MainActor @preconcurrency public var body: some Charts.ChartContent {
+    get
+  }
+  @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
+  public typealias Body = @_opaqueReturnTypeOf("$s6Charts24VectorizedBarPlotContentV4bodyQrvp", 0) __<Data>
+}
+@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
+extension Charts.ChartContent {
+  nonisolated public func foregroundStyle<S>(_ style: S) -> some Charts.ChartContent where S : SwiftUICore.ShapeStyle
+  
+  nonisolated public func foregroundStyle<D>(by value: Charts.PlottableValue<D>) -> some Charts.ChartContent where D : Charts.Plottable
+  
+}
+@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+extension Charts.VectorizedChartContent {
+  nonisolated public func foregroundStyle(_ keyPath: Swift.KeyPath<Self.DataElement, some ShapeStyle>) -> some Charts.VectorizedChartContent<Self.DataElement>
+  
+  nonisolated public func foregroundStyle(by value: Charts.PlottableProjection<Self.DataElement, some Plottable>) -> some Charts.VectorizedChartContent<Self.DataElement>
   
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 extension Charts.ChartContent {
-  public func foregroundStyle<S>(_ style: S) -> some Charts.ChartContent where S : SwiftUI.ShapeStyle
-  
-  public func foregroundStyle<D>(by value: Charts.PlottableValue<D>) -> some Charts.ChartContent where D : Charts.Plottable
+  nonisolated public func alignsMarkStylesWithPlotArea(_ aligns: Swift.Bool = true) -> some Charts.ChartContent
   
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 extension Charts.ChartContent {
-  public func alignsMarkStylesWithPlotArea(_ aligns: Swift.Bool = true) -> some Charts.ChartContent
+  nonisolated public func position<P>(by value: Charts.PlottableValue<P>, axis: SwiftUICore.Axis? = nil, span: Charts.MarkDimension = .automatic) -> some Charts.ChartContent where P : Charts.Plottable
+  
+}
+@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+extension Charts.VectorizedChartContent {
+  nonisolated public func position(by value: Charts.PlottableProjection<Self.DataElement, some Plottable>, axis: SwiftUICore.Axis? = nil, span: Charts.MarkDimension = .automatic) -> some Charts.VectorizedChartContent<Self.DataElement>
   
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 extension Charts.ChartContent {
-  public func position<P>(by value: Charts.PlottableValue<P>, axis: SwiftUI.Axis? = nil, span: Charts.MarkDimension = .automatic) -> some Charts.ChartContent where P : Charts.Plottable
+  nonisolated public func opacity(_ value: Swift.Double) -> some Charts.ChartContent
+  
+}
+@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+extension Charts.VectorizedChartContent {
+  nonisolated public func opacity(_ keyPath: Swift.KeyPath<Self.DataElement, CoreFoundation.CGFloat>) -> some Charts.VectorizedChartContent<Self.DataElement>
   
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 extension Charts.ChartContent {
-  public func opacity(_ value: Swift.Double) -> some Charts.ChartContent
+  nonisolated public func clipShape(_ shape: some Shape, style: SwiftUICore.FillStyle = FillStyle()) -> some Charts.ChartContent
   
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 extension Charts.ChartContent {
-  public func clipShape(_ shape: some Shape, style: SwiftUI.FillStyle = FillStyle()) -> some Charts.ChartContent
+  nonisolated public func lineStyle(_ style: SwiftUICore.StrokeStyle) -> some Charts.ChartContent
+  
+  nonisolated public func lineStyle<D>(by value: Charts.PlottableValue<D>) -> some Charts.ChartContent where D : Charts.Plottable
+  
+}
+@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+extension Charts.VectorizedChartContent {
+  nonisolated public func lineStyle(_ style: Swift.KeyPath<Self.DataElement, SwiftUICore.StrokeStyle>) -> some Charts.VectorizedChartContent<Self.DataElement>
+  
+  nonisolated public func lineStyle(by value: Charts.PlottableProjection<Self.DataElement, some Plottable>) -> some Charts.VectorizedChartContent<Self.DataElement>
   
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 extension Charts.ChartContent {
-  public func lineStyle(_ style: SwiftUI.StrokeStyle) -> some Charts.ChartContent
+  nonisolated public func symbol<S>(_ symbol: S) -> some Charts.ChartContent where S : Charts.ChartSymbolShape
   
-  public func lineStyle<D>(by value: Charts.PlottableValue<D>) -> some Charts.ChartContent where D : Charts.Plottable
+  nonisolated public func symbol<D>(by value: Charts.PlottableValue<D>) -> some Charts.ChartContent where D : Charts.Plottable
+  
+  nonisolated public func symbol<V>(@SwiftUICore.ViewBuilder symbol: () -> V) -> some Charts.ChartContent where V : SwiftUICore.View
+  
+}
+@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+extension Charts.VectorizedChartContent {
+  nonisolated public func symbol(by value: Charts.PlottableProjection<Self.DataElement, some Plottable>) -> some Charts.VectorizedChartContent<Self.DataElement>
   
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 extension Charts.ChartContent {
-  public func symbol<S>(_ symbol: S) -> some Charts.ChartContent where S : Charts.ChartSymbolShape
+  nonisolated public func symbolSize(_ area: CoreFoundation.CGFloat) -> some Charts.ChartContent
   
-  public func symbol<D>(by value: Charts.PlottableValue<D>) -> some Charts.ChartContent where D : Charts.Plottable
+  nonisolated public func symbolSize(_ size: CoreFoundation.CGSize) -> some Charts.ChartContent
   
-  public func symbol<V>(@SwiftUI.ViewBuilder symbol: () -> V) -> some Charts.ChartContent where V : SwiftUI.View
+  nonisolated public func symbolSize<D>(by value: Charts.PlottableValue<D>) -> some Charts.ChartContent where D : Charts.Plottable
+  
+}
+@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+extension Charts.VectorizedChartContent {
+  nonisolated public func symbolSize(_ area: Swift.KeyPath<Self.DataElement, CoreFoundation.CGFloat>) -> some Charts.VectorizedChartContent<Self.DataElement>
+  
+  nonisolated public func symbolSize(_ size: Swift.KeyPath<Self.DataElement, CoreFoundation.CGSize>) -> some Charts.VectorizedChartContent<Self.DataElement>
+  
+  nonisolated public func symbolSize(by value: Charts.PlottableProjection<Self.DataElement, some Plottable>) -> some Charts.VectorizedChartContent<Self.DataElement>
   
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 extension Charts.ChartContent {
-  public func symbolSize(_ area: CoreFoundation.CGFloat) -> some Charts.ChartContent
+  nonisolated public func offset(x: CoreFoundation.CGFloat = 0, y: CoreFoundation.CGFloat = 0) -> some Charts.ChartContent
   
-  public func symbolSize(_ size: CoreFoundation.CGSize) -> some Charts.ChartContent
+  nonisolated public func offset(_ value: CoreFoundation.CGSize) -> some Charts.ChartContent
   
-  public func symbolSize<D>(by value: Charts.PlottableValue<D>) -> some Charts.ChartContent where D : Charts.Plottable
+  nonisolated public func offset(x: CoreFoundation.CGFloat = 0, yStart: CoreFoundation.CGFloat = 0, yEnd: CoreFoundation.CGFloat = 0) -> some Charts.ChartContent
   
-}
-@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
-extension Charts.ChartContent {
-  public func offset(x: CoreFoundation.CGFloat = 0, y: CoreFoundation.CGFloat = 0) -> some Charts.ChartContent
+  nonisolated public func offset(xStart: CoreFoundation.CGFloat = 0, xEnd: CoreFoundation.CGFloat = 0, y: CoreFoundation.CGFloat = 0) -> some Charts.ChartContent
   
-  public func offset(_ value: CoreFoundation.CGSize) -> some Charts.ChartContent
-  
-  public func offset(x: CoreFoundation.CGFloat = 0, yStart: CoreFoundation.CGFloat = 0, yEnd: CoreFoundation.CGFloat = 0) -> some Charts.ChartContent
-  
-  public func offset(xStart: CoreFoundation.CGFloat = 0, xEnd: CoreFoundation.CGFloat = 0, y: CoreFoundation.CGFloat = 0) -> some Charts.ChartContent
-  
-  public func offset(xStart: CoreFoundation.CGFloat = 0, xEnd: CoreFoundation.CGFloat = 0, yStart: CoreFoundation.CGFloat = 0, yEnd: CoreFoundation.CGFloat = 0) -> some Charts.ChartContent
+  nonisolated public func offset(xStart: CoreFoundation.CGFloat = 0, xEnd: CoreFoundation.CGFloat = 0, yStart: CoreFoundation.CGFloat = 0, yEnd: CoreFoundation.CGFloat = 0) -> some Charts.ChartContent
   
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 extension Charts.ChartContent {
-  public func cornerRadius(_ radius: CoreFoundation.CGFloat, style: SwiftUI.RoundedCornerStyle = .continuous) -> some Charts.ChartContent
+  nonisolated public func cornerRadius(_ radius: CoreFoundation.CGFloat, style: SwiftUICore.RoundedCornerStyle = .continuous) -> some Charts.ChartContent
   
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 extension Charts.ChartContent {
-  public func interpolationMethod(_ method: Charts.InterpolationMethod) -> some Charts.ChartContent
+  nonisolated public func interpolationMethod(_ method: Charts.InterpolationMethod) -> some Charts.ChartContent
   
 }
 @available(iOS 16.4, macOS 13.3, tvOS 16.4, watchOS 9.4, *)
 extension Charts.ChartContent {
-  public func blur(radius: CoreFoundation.CGFloat) -> some Charts.ChartContent
+  nonisolated public func blur(radius: CoreFoundation.CGFloat) -> some Charts.ChartContent
   
-  public func shadow(color: SwiftUI.Color = Color(.sRGBLinear, white: 0, opacity: 0.33), radius: CoreFoundation.CGFloat, x: CoreFoundation.CGFloat = 0, y: CoreFoundation.CGFloat = 0) -> some Charts.ChartContent
+  nonisolated public func shadow(color: SwiftUICore.Color = Color(.sRGBLinear, white: 0, opacity: 0.33), radius: CoreFoundation.CGFloat, x: CoreFoundation.CGFloat = 0, y: CoreFoundation.CGFloat = 0) -> some Charts.ChartContent
   
 }
 @available(iOS 17, macOS 14, tvOS 17, watchOS 10, *)
 extension Charts.ChartContent {
-  public func zIndex(_ value: Swift.Double) -> some Charts.ChartContent
+  nonisolated public func zIndex(_ value: Swift.Double) -> some Charts.ChartContent
   
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
@@ -892,13 +1203,36 @@ extension Charts.ChartContent {
         BuilderEmpty()
     }
   
+  @available(iOS, introduced: 16.0, obsoleted: 18.0)
+  @available(macOS, introduced: 13.0, obsoleted: 15.0)
+  @available(tvOS, introduced: 16.0, obsoleted: 18.0)
+  @available(watchOS, introduced: 9.0, obsoleted: 11.0)
+  @available(visionOS, introduced: 1.0, obsoleted: 2.0)
   @_alwaysEmitIntoClient public static func buildPartialBlock<T>(first content: T) -> T where T : Charts.ChartContent {
         return content
     }
+  @available(iOS, introduced: 16.0, obsoleted: 18.0)
+  @available(macOS, introduced: 13.0, obsoleted: 15.0)
+  @available(tvOS, introduced: 16.0, obsoleted: 18.0)
+  @available(watchOS, introduced: 9.0, obsoleted: 11.0)
+  @available(visionOS, introduced: 1.0, obsoleted: 2.0)
   @_alwaysEmitIntoClient public static func buildPartialBlock(accumulated: some ChartContent, next: some ChartContent) -> some Charts.ChartContent {
-        BuilderPair(accumulated, next)
+        return BuilderPair(accumulated, next)
     }
   
+  @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+  @_alwaysEmitIntoClient public static func buildBlock<C>(_ content: C) -> C where C : Charts.ChartContent {
+        return content
+    }
+  #if compiler(>=5.3) && $ParameterPacks
+  @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+  @_alwaysEmitIntoClient @_disfavoredOverload public static func buildBlock<each C>(_ content: repeat each C) -> some Charts.ChartContent where repeat each C : Charts.ChartContent {
+        return BuilderTuple(elements: (repeat each content))
+    }
+  #if compiler(>=5.3) && $ParameterPacks
+
+  #endif
+  #endif
   @_alwaysEmitIntoClient public static func buildIf<T>(_ content: T?) -> T? where T : Charts.ChartContent {
         return content
     }
@@ -917,35 +1251,55 @@ extension Charts.ChartContent {
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 extension Swift.Never : Charts.ChartContent {
-  public var body: Swift.Never {
+  @_Concurrency.MainActor @preconcurrency public var body: Swift.Never {
     get
   }
-  public static func _layoutChartContent(_ content: Swift.Never, _ inputs: Charts._ChartContentLayoutInputs)
-  public static func _renderChartContent(_ content: Swift.Never, _ inputs: Charts._ChartContentRenderInputs) -> Charts._ChartContentRenderOutputs
+  @_Concurrency.MainActor @preconcurrency public static func _layoutChartContent(_ content: Swift.Never, _ inputs: Charts._ChartContentLayoutInputs)
+  @_Concurrency.MainActor @preconcurrency public static func _renderChartContent(_ content: Swift.Never, _ inputs: Charts._ChartContentRenderInputs) -> Charts._ChartContentRenderOutputs
 }
+#if compiler(>=5.3) && $NoncopyableGenerics
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 extension Swift.Optional : Charts.ChartContent where Wrapped : Charts.ChartContent {
-  public var body: Swift.Never {
+  @_Concurrency.MainActor @preconcurrency public var body: Swift.Never {
     get
   }
-  public static func _layoutChartContent(_ content: Swift.Optional<Wrapped>, _ inputs: Charts._ChartContentLayoutInputs)
-  public static func _renderChartContent(_ content: Swift.Optional<Wrapped>, _ inputs: Charts._ChartContentRenderInputs) -> Charts._ChartContentRenderOutputs
+  @_Concurrency.MainActor @preconcurrency public static func _layoutChartContent(_ content: Swift.Optional<Wrapped>, _ inputs: Charts._ChartContentLayoutInputs)
+  @_Concurrency.MainActor @preconcurrency public static func _renderChartContent(_ content: Swift.Optional<Wrapped>, _ inputs: Charts._ChartContentRenderInputs) -> Charts._ChartContentRenderOutputs
+  @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
   public typealias Body = Swift.Never
 }
+#else
+@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
+extension Swift.Optional : Charts.ChartContent where Wrapped : Charts.ChartContent {
+  @_Concurrency.MainActor @preconcurrency public var body: Swift.Never {
+    get
+  }
+  @_Concurrency.MainActor @preconcurrency public static func _layoutChartContent(_ content: Swift.Optional<Wrapped>, _ inputs: Charts._ChartContentLayoutInputs)
+  @_Concurrency.MainActor @preconcurrency public static func _renderChartContent(_ content: Swift.Optional<Wrapped>, _ inputs: Charts._ChartContentRenderInputs) -> Charts._ChartContentRenderOutputs
+  @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
+  public typealias Body = Swift.Never
+}
+#endif
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 @usableFromInline
-@frozen internal struct BuilderEmpty : Charts.ChartContent {
-  @inlinable internal init() {}
+@frozen @_Concurrency.MainActor @preconcurrency internal struct BuilderEmpty : Charts.ChartContent {
+  @inlinable @_Concurrency.MainActor @preconcurrency internal init() {}
   @usableFromInline
-  internal var body: Swift.Never {
+  @_Concurrency.MainActor @preconcurrency internal var body: Swift.Never {
     get
   }
   @usableFromInline
-  internal static func _layoutChartContent(_: Charts.BuilderEmpty, _: Charts._ChartContentLayoutInputs)
+  @_Concurrency.MainActor @preconcurrency internal static func _layoutChartContent(_: Charts.BuilderEmpty, _: Charts._ChartContentLayoutInputs)
   @usableFromInline
-  internal static func _renderChartContent(_: Charts.BuilderEmpty, _: Charts._ChartContentRenderInputs) -> Charts._ChartContentRenderOutputs
+  @_Concurrency.MainActor @preconcurrency internal static func _renderChartContent(_: Charts.BuilderEmpty, _: Charts._ChartContentRenderInputs) -> Charts._ChartContentRenderOutputs
+  @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
   @usableFromInline
   internal typealias Body = Swift.Never
+}
+@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+extension Charts.BuilderEmpty {
+  @_Concurrency.MainActor @preconcurrency public static func _makeChartContent(content: SwiftUICore._GraphValue<Charts.BuilderEmpty>, inputs: Charts._ChartContentInputs) -> Charts._ChartContentOutputs
+  @_Concurrency.MainActor @preconcurrency public static func _chartContentCount(inputs: Charts._ChartContentInputs) -> Swift.Int?
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 @frozen public struct BuilderConditional<TrueContent, FalseContent> {
@@ -962,11 +1316,12 @@ extension Swift.Optional : Charts.ChartContent where Wrapped : Charts.ChartConte
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 extension Charts.BuilderConditional : Charts.ChartContent where TrueContent : Charts.ChartContent, FalseContent : Charts.ChartContent {
-  public var body: Swift.Never {
+  @_Concurrency.MainActor @preconcurrency public var body: Swift.Never {
     get
   }
-  public static func _layoutChartContent(_ content: Charts.BuilderConditional<TrueContent, FalseContent>, _ inputs: Charts._ChartContentLayoutInputs)
-  public static func _renderChartContent(_ content: Charts.BuilderConditional<TrueContent, FalseContent>, _ inputs: Charts._ChartContentRenderInputs) -> Charts._ChartContentRenderOutputs
+  @_Concurrency.MainActor @preconcurrency public static func _layoutChartContent(_ content: Charts.BuilderConditional<TrueContent, FalseContent>, _ inputs: Charts._ChartContentLayoutInputs)
+  @_Concurrency.MainActor @preconcurrency public static func _renderChartContent(_ content: Charts.BuilderConditional<TrueContent, FalseContent>, _ inputs: Charts._ChartContentRenderInputs) -> Charts._ChartContentRenderOutputs
+  @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
   public typealias Body = Swift.Never
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
@@ -990,28 +1345,30 @@ extension Charts.BuilderPair : Charts.ChartContent where T0 : Charts.ChartConten
         self.secondConformance = T1.conformanceToChartContent
     }
   @usableFromInline
-  internal var body: Swift.Never {
+  @_Concurrency.MainActor @preconcurrency internal var body: Swift.Never {
     get
   }
   @usableFromInline
-  internal static func _layoutChartContent(_ content: Charts.BuilderPair<T0, T1>, _ inputs: Charts._ChartContentLayoutInputs)
+  @_Concurrency.MainActor @preconcurrency internal static func _layoutChartContent(_ content: Charts.BuilderPair<T0, T1>, _ inputs: Charts._ChartContentLayoutInputs)
   @usableFromInline
-  internal static func _renderChartContent(_ content: Charts.BuilderPair<T0, T1>, _ inputs: Charts._ChartContentRenderInputs) -> Charts._ChartContentRenderOutputs
+  @_Concurrency.MainActor @preconcurrency internal static func _renderChartContent(_ content: Charts.BuilderPair<T0, T1>, _ inputs: Charts._ChartContentRenderInputs) -> Charts._ChartContentRenderOutputs
+  @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
   @usableFromInline
   internal typealias Body = Swift.Never
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
-@frozen public struct AnyChartContent {
+@frozen @_Concurrency.MainActor @preconcurrency public struct AnyChartContent {
   @usableFromInline
-  internal let storage: any Charts.ChartContent
-  @inlinable public init(_ content: any Charts.ChartContent) {
+  @_Concurrency.MainActor @preconcurrency internal let storage: any Charts.ChartContent
+  @inlinable nonisolated public init(_ content: any Charts.ChartContent) {
         self.storage = content
     }
-  @inlinable public init(erasing content: some ChartContent) {
+  @inlinable nonisolated public init(erasing content: some ChartContent) {
         self.init(content)
     }
-  public static func _layoutChartContent(_ content: Charts.AnyChartContent, _ inputs: Charts._ChartContentLayoutInputs)
-  public static func _renderChartContent(_ content: Charts.AnyChartContent, _ inputs: Charts._ChartContentRenderInputs) -> Charts._ChartContentRenderOutputs
+  @_Concurrency.MainActor @preconcurrency public static func _layoutChartContent(_ content: Charts.AnyChartContent, _ inputs: Charts._ChartContentLayoutInputs)
+  @_Concurrency.MainActor @preconcurrency public static func _renderChartContent(_ content: Charts.AnyChartContent, _ inputs: Charts._ChartContentRenderInputs) -> Charts._ChartContentRenderOutputs
+  @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
   public typealias Body = Swift.Never
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
@@ -1019,38 +1376,71 @@ public struct PlottableValue<Value> where Value : Charts.Plottable {
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 extension Charts.PlottableValue {
-  public static func value(_ labelKey: SwiftUI.LocalizedStringKey, _ value: Value) -> Charts.PlottableValue<Value>
+  public static func value(_ labelKey: SwiftUICore.LocalizedStringKey, _ value: Value) -> Charts.PlottableValue<Value>
   @_disfavoredOverload public static func value<S>(_ label: S, _ value: Value) -> Charts.PlottableValue<Value> where S : Swift.StringProtocol
-  public static func value(_ label: SwiftUI.Text, _ value: Value) -> Charts.PlottableValue<Value>
+  public static func value(_ label: SwiftUICore.Text, _ value: Value) -> Charts.PlottableValue<Value>
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 extension Charts.PlottableValue {
-  public static func value(_ labelKey: SwiftUI.LocalizedStringKey, _ range: Swift.Range<Value>) -> Charts.PlottableValue<Value> where Value : Swift.Comparable
+  public static func value(_ labelKey: SwiftUICore.LocalizedStringKey, _ range: Swift.Range<Value>) -> Charts.PlottableValue<Value> where Value : Swift.Comparable
   @_disfavoredOverload public static func value<S>(_ label: S, _ range: Swift.Range<Value>) -> Charts.PlottableValue<Value> where Value : Swift.Comparable, S : Swift.StringProtocol
-  public static func value(_ label: SwiftUI.Text, _ range: Swift.Range<Value>) -> Charts.PlottableValue<Value> where Value : Swift.Comparable
+  public static func value(_ label: SwiftUICore.Text, _ range: Swift.Range<Value>) -> Charts.PlottableValue<Value> where Value : Swift.Comparable
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 extension Charts.PlottableValue {
-  public static func value(_ labelKey: SwiftUI.LocalizedStringKey, _ date: Foundation.Date, unit: Foundation.Calendar.Component, calendar: Foundation.Calendar? = nil) -> Charts.PlottableValue<Value> where Value == Foundation.Date
+  public static func value(_ labelKey: SwiftUICore.LocalizedStringKey, _ date: Foundation.Date, unit: Foundation.Calendar.Component, calendar: Foundation.Calendar? = nil) -> Charts.PlottableValue<Value> where Value == Foundation.Date
   @_disfavoredOverload public static func value<S>(_ label: S, _ date: Foundation.Date, unit: Foundation.Calendar.Component, calendar: Foundation.Calendar? = nil) -> Charts.PlottableValue<Value> where Value == Foundation.Date, S : Swift.StringProtocol
-  public static func value(_ label: SwiftUI.Text, _ date: Foundation.Date, unit: Foundation.Calendar.Component, calendar: Foundation.Calendar? = nil) -> Charts.PlottableValue<Value> where Value == Foundation.Date
+  public static func value(_ label: SwiftUICore.Text, _ date: Foundation.Date, unit: Foundation.Calendar.Component, calendar: Foundation.Calendar? = nil) -> Charts.PlottableValue<Value> where Value == Foundation.Date
+}
+@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+public struct PlottableProjection<DataElement, DataValue> where DataValue : Charts.Plottable {
+}
+@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+extension Charts.PlottableProjection {
+  public static func value(_ label: SwiftUICore.Text, _ value: Swift.KeyPath<DataElement, DataValue>) -> Charts.PlottableProjection<DataElement, DataValue>
+  @_disfavoredOverload public static func value(_ label: some StringProtocol, _ value: Swift.KeyPath<DataElement, DataValue>) -> Charts.PlottableProjection<DataElement, DataValue>
+  public static func value(_ labelKey: SwiftUICore.LocalizedStringKey, _ value: Swift.KeyPath<DataElement, DataValue>) -> Charts.PlottableProjection<DataElement, DataValue>
+  public static func value(_ label: SwiftUICore.Text, _ start: Swift.KeyPath<DataElement, DataValue>, _ end: Swift.KeyPath<DataElement, DataValue>) -> Charts.PlottableProjection<DataElement, DataValue> where DataValue : Swift.Comparable
+  @_disfavoredOverload public static func value(_ label: some StringProtocol, _ start: Swift.KeyPath<DataElement, DataValue>, _ end: Swift.KeyPath<DataElement, DataValue>) -> Charts.PlottableProjection<DataElement, DataValue> where DataValue : Swift.Comparable
+  public static func value(_ labelKey: SwiftUICore.LocalizedStringKey, _ start: Swift.KeyPath<DataElement, DataValue>, _ end: Swift.KeyPath<DataElement, DataValue>) -> Charts.PlottableProjection<DataElement, DataValue> where DataValue : Swift.Comparable
+}
+@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+extension Charts.PlottableProjection where DataValue.PrimitivePlottable == Foundation.Date {
+  public static func value(_ label: SwiftUICore.Text, _ date: Swift.KeyPath<DataElement, DataValue>, unit: Foundation.Calendar.Component, calendar: Foundation.Calendar? = nil) -> Charts.PlottableProjection<DataElement, DataValue>
+  @_disfavoredOverload public static func value(_ label: some StringProtocol, _ date: Swift.KeyPath<DataElement, DataValue>, unit: Foundation.Calendar.Component, calendar: Foundation.Calendar? = nil) -> Charts.PlottableProjection<DataElement, DataValue>
+  public static func value(_ labelKey: SwiftUICore.LocalizedStringKey, _ date: Swift.KeyPath<DataElement, DataValue>, unit: Foundation.Calendar.Component, calendar: Foundation.Calendar? = nil) -> Charts.PlottableProjection<DataElement, DataValue>
+}
+@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+extension Charts.PlottableProjection {
+  public static func value(_ label: SwiftUICore.Text, _ value: DataValue) -> Charts.PlottableProjection<DataElement, DataValue>
+  @_disfavoredOverload public static func value(_ label: some StringProtocol, _ value: DataValue) -> Charts.PlottableProjection<DataElement, DataValue>
+  public static func value(_ labelKey: SwiftUICore.LocalizedStringKey, _ value: DataValue) -> Charts.PlottableProjection<DataElement, DataValue>
+  public static func value(_ label: SwiftUICore.Text, _ start: DataValue, _ end: DataValue) -> Charts.PlottableProjection<DataElement, DataValue> where DataValue : Swift.Comparable
+  @_disfavoredOverload public static func value(_ label: some StringProtocol, _ start: DataValue, _ end: DataValue) -> Charts.PlottableProjection<DataElement, DataValue> where DataValue : Swift.Comparable
+  public static func value(_ labelKey: SwiftUICore.LocalizedStringKey, _ start: DataValue, _ end: DataValue) -> Charts.PlottableProjection<DataElement, DataValue> where DataValue : Swift.Comparable
+}
+@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+extension Charts.PlottableProjection where DataValue == Foundation.Date {
+  public static func value(_ label: SwiftUICore.Text, _ date: DataValue, unit: Foundation.Calendar.Component, calendar: Foundation.Calendar? = nil) -> Charts.PlottableProjection<DataElement, DataValue>
+  @_disfavoredOverload public static func value(_ label: some StringProtocol, _ date: DataValue, unit: Foundation.Calendar.Component, calendar: Foundation.Calendar? = nil) -> Charts.PlottableProjection<DataElement, DataValue>
+  public static func value(_ labelKey: SwiftUICore.LocalizedStringKey, _ date: DataValue, unit: Foundation.Calendar.Component, calendar: Foundation.Calendar? = nil) -> Charts.PlottableProjection<DataElement, DataValue>
 }
 @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
-extension SwiftUI.View {
-  public func chartXSelection<P>(value: SwiftUI.Binding<P?>) -> some SwiftUI.View where P : Charts.Plottable
+extension SwiftUICore.View {
+  nonisolated public func chartXSelection<P>(value: SwiftUICore.Binding<P?>) -> some SwiftUICore.View where P : Charts.Plottable
   
-  public func chartXSelection<P>(range: SwiftUI.Binding<Swift.ClosedRange<P>?>) -> some SwiftUI.View where P : Charts.Plottable, P : Swift.Comparable
+  nonisolated public func chartXSelection<P>(range: SwiftUICore.Binding<Swift.ClosedRange<P>?>) -> some SwiftUICore.View where P : Charts.Plottable, P : Swift.Comparable
   
-  public func chartYSelection<P>(value: SwiftUI.Binding<P?>) -> some SwiftUI.View where P : Charts.Plottable
+  nonisolated public func chartYSelection<P>(value: SwiftUICore.Binding<P?>) -> some SwiftUICore.View where P : Charts.Plottable
   
-  public func chartYSelection<P>(range: SwiftUI.Binding<Swift.ClosedRange<P>?>) -> some SwiftUI.View where P : Charts.Plottable, P : Swift.Comparable
+  nonisolated public func chartYSelection<P>(range: SwiftUICore.Binding<Swift.ClosedRange<P>?>) -> some SwiftUICore.View where P : Charts.Plottable, P : Swift.Comparable
   
-  public func chartAngleSelection<P>(value: SwiftUI.Binding<P?>) -> some SwiftUI.View where P : Charts.Plottable
+  nonisolated public func chartAngleSelection<P>(value: SwiftUICore.Binding<P?>) -> some SwiftUICore.View where P : Charts.Plottable
   
 }
 @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
-extension SwiftUI.View {
-  public func chartGesture(_ gesture: @escaping (Charts.ChartProxy) -> some Gesture) -> some SwiftUI.View
+extension SwiftUICore.View {
+  nonisolated public func chartGesture(_ gesture: @escaping (Charts.ChartProxy) -> some Gesture) -> some SwiftUICore.View
   
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
@@ -1058,15 +1448,15 @@ public struct NumberBins<Value> where Value : Swift.Comparable, Value : Swift.Nu
   public var thresholds: [Value] {
     get
   }
-  public init(thresholds: [Value])
-  public init(size: Value, range: Swift.ClosedRange<Value>) where Value : Swift.BinaryFloatingPoint
-  public init(size: Value, range: Swift.ClosedRange<Value>) where Value : Swift.BinaryInteger
-  public init(range: Swift.ClosedRange<Value>, count: Swift.Int) where Value : Swift.BinaryFloatingPoint
-  public init(range: Swift.ClosedRange<Value>, count: Swift.Int) where Value : Swift.BinaryInteger
-  public init(range: Swift.ClosedRange<Value>, desiredCount: Swift.Int = 10, minimumStride: Value = 0) where Value : Swift.BinaryFloatingPoint
-  public init(range: Swift.ClosedRange<Value>, desiredCount: Swift.Int = 10, minimumStride: Value = 0) where Value : Swift.BinaryInteger
-  public init(data: [Value], desiredCount: Swift.Int? = nil, minimumStride: Value = 0) where Value : Swift.BinaryFloatingPoint
-  public init(data: [Value], desiredCount: Swift.Int? = nil, minimumStride: Value = 0) where Value : Swift.BinaryInteger
+  nonisolated public init(thresholds: [Value])
+  nonisolated public init(size: Value, range: Swift.ClosedRange<Value>) where Value : Swift.BinaryFloatingPoint
+  nonisolated public init(size: Value, range: Swift.ClosedRange<Value>) where Value : Swift.BinaryInteger
+  nonisolated public init(range: Swift.ClosedRange<Value>, count: Swift.Int) where Value : Swift.BinaryFloatingPoint
+  nonisolated public init(range: Swift.ClosedRange<Value>, count: Swift.Int) where Value : Swift.BinaryInteger
+  nonisolated public init(range: Swift.ClosedRange<Value>, desiredCount: Swift.Int = 10, minimumStride: Value = 0) where Value : Swift.BinaryFloatingPoint
+  nonisolated public init(range: Swift.ClosedRange<Value>, desiredCount: Swift.Int = 10, minimumStride: Value = 0) where Value : Swift.BinaryInteger
+  nonisolated public init(data: [Value], desiredCount: Swift.Int? = nil, minimumStride: Value = 0) where Value : Swift.BinaryFloatingPoint
+  nonisolated public init(data: [Value], desiredCount: Swift.Int? = nil, minimumStride: Value = 0) where Value : Swift.BinaryInteger
   public subscript(position: Swift.Int) -> Charts.ChartBinRange<Value> {
     get
   }
@@ -1079,76 +1469,164 @@ public struct NumberBins<Value> where Value : Swift.Comparable, Value : Swift.Nu
     get
   }
   public static func == (a: Charts.NumberBins<Value>, b: Charts.NumberBins<Value>) -> Swift.Bool
+  @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
   public typealias Element = Charts.ChartBinRange<Value>
+  @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
   public typealias Index = Swift.Int
+  @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
   public typealias Indices = Swift.DefaultIndices<Charts.NumberBins<Value>>
+  @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
   public typealias Iterator = Swift.IndexingIterator<Charts.NumberBins<Value>>
+  @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
   public typealias SubSequence = Swift.Slice<Charts.NumberBins<Value>>
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
-public struct LineMark {
-  public init<X, Y>(x: Charts.PlottableValue<X>, y: Charts.PlottableValue<Y>) where X : Charts.Plottable, Y : Charts.Plottable
-  public init<X, Y, S>(x: Charts.PlottableValue<X>, y: Charts.PlottableValue<Y>, series: Charts.PlottableValue<S>) where X : Charts.Plottable, Y : Charts.Plottable, S : Charts.Plottable
-  public static func _layoutChartContent(_ content: Charts.LineMark, _ inputs: Charts._ChartContentLayoutInputs)
-  public static func _renderChartContent(_ content: Charts.LineMark, _ inputs: Charts._ChartContentRenderInputs) -> Charts._ChartContentRenderOutputs
+@_Concurrency.MainActor @preconcurrency public struct LineMark {
+  nonisolated public init<X, Y>(x: Charts.PlottableValue<X>, y: Charts.PlottableValue<Y>) where X : Charts.Plottable, Y : Charts.Plottable
+  nonisolated public init<X, Y, S>(x: Charts.PlottableValue<X>, y: Charts.PlottableValue<Y>, series: Charts.PlottableValue<S>) where X : Charts.Plottable, Y : Charts.Plottable, S : Charts.Plottable
+  @_Concurrency.MainActor @preconcurrency public static func _layoutChartContent(_ content: Charts.LineMark, _ inputs: Charts._ChartContentLayoutInputs)
+  @_Concurrency.MainActor @preconcurrency public static func _renderChartContent(_ content: Charts.LineMark, _ inputs: Charts._ChartContentRenderInputs) -> Charts._ChartContentRenderOutputs
+  @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
   public typealias Body = Swift.Never
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
-public struct ChartPlotContent : SwiftUI.View {
-  @_Concurrency.MainActor(unsafe) public var body: some SwiftUI.View {
+@_Concurrency.MainActor @preconcurrency public struct ChartPlotContent : SwiftUICore.View {
+  @_Concurrency.MainActor @preconcurrency public var body: some SwiftUICore.View {
     get
   }
+  @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
   public typealias Body = @_opaqueReturnTypeOf("$s6Charts16ChartPlotContentV4bodyQrvp", 0) __
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
-extension SwiftUI.View {
-  public func chartPlotStyle<Content>(@SwiftUI.ViewBuilder content: @escaping (Charts.ChartPlotContent) -> Content) -> some SwiftUI.View where Content : SwiftUI.View
+extension SwiftUICore.View {
+  nonisolated public func chartPlotStyle<Content>(@SwiftUICore.ViewBuilder content: @escaping (Charts.ChartPlotContent) -> Content) -> some SwiftUICore.View where Content : SwiftUICore.View
   
 }
-@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
-public struct BarMark {
-  public init<X, Y>(x: Charts.PlottableValue<X>, y: Charts.PlottableValue<Y>, width: Charts.MarkDimension = .automatic, height: Charts.MarkDimension = .automatic, stacking: Charts.MarkStackingMethod = .standard) where X : Charts.Plottable, Y : Charts.Plottable
-  public init<X>(x: Charts.PlottableValue<X>, yStart: CoreFoundation.CGFloat? = nil, yEnd: CoreFoundation.CGFloat? = nil, width: Charts.MarkDimension = .automatic, stacking: Charts.MarkStackingMethod = .standard) where X : Charts.Plottable
-  public init<Y>(xStart: CoreFoundation.CGFloat? = nil, xEnd: CoreFoundation.CGFloat? = nil, y: Charts.PlottableValue<Y>, height: Charts.MarkDimension = .automatic, stacking: Charts.MarkStackingMethod = .standard) where Y : Charts.Plottable
-  public init<X, Y>(xStart: Charts.PlottableValue<X>, xEnd: Charts.PlottableValue<X>, y: Charts.PlottableValue<Y>, height: Charts.MarkDimension = .automatic) where X : Charts.Plottable, Y : Charts.Plottable
-  public init<X>(xStart: Charts.PlottableValue<X>, xEnd: Charts.PlottableValue<X>, yStart: CoreFoundation.CGFloat? = nil, yEnd: CoreFoundation.CGFloat? = nil) where X : Charts.Plottable
-  public init<X, Y>(x: Charts.PlottableValue<X>, yStart: Charts.PlottableValue<Y>, yEnd: Charts.PlottableValue<Y>, width: Charts.MarkDimension = .automatic) where X : Charts.Plottable, Y : Charts.Plottable
-  public init<Y>(xStart: CoreFoundation.CGFloat? = nil, xEnd: CoreFoundation.CGFloat? = nil, yStart: Charts.PlottableValue<Y>, yEnd: Charts.PlottableValue<Y>) where Y : Charts.Plottable
-  public static func _layoutChartContent(_ content: Charts.BarMark, _ inputs: Charts._ChartContentLayoutInputs)
-  public static func _renderChartContent(_ content: Charts.BarMark, _ inputs: Charts._ChartContentRenderInputs) -> Charts._ChartContentRenderOutputs
-  public typealias Body = Swift.Never
+@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+public struct PointPlot<Content> {
 }
-@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
-public struct RectangleMark {
-  public init<X, Y>(x: Charts.PlottableValue<X>, y: Charts.PlottableValue<Y>, width: Charts.MarkDimension = .automatic, height: Charts.MarkDimension = .automatic) where X : Charts.Plottable, Y : Charts.Plottable
-  public init<X>(x: Charts.PlottableValue<X>, yStart: CoreFoundation.CGFloat? = nil, yEnd: CoreFoundation.CGFloat? = nil, width: Charts.MarkDimension = .automatic) where X : Charts.Plottable
-  public init<Y>(xStart: CoreFoundation.CGFloat? = nil, xEnd: CoreFoundation.CGFloat? = nil, y: Charts.PlottableValue<Y>, height: Charts.MarkDimension = .automatic) where Y : Charts.Plottable
-  public init<X, Y>(xStart: Charts.PlottableValue<X>, xEnd: Charts.PlottableValue<X>, y: Charts.PlottableValue<Y>, height: Charts.MarkDimension = .automatic) where X : Charts.Plottable, Y : Charts.Plottable
-  public init<X>(xStart: Charts.PlottableValue<X>, xEnd: Charts.PlottableValue<X>, yStart: CoreFoundation.CGFloat? = nil, yEnd: CoreFoundation.CGFloat? = nil) where X : Charts.Plottable
-  public init<X, Y>(x: Charts.PlottableValue<X>, yStart: Charts.PlottableValue<Y>, yEnd: Charts.PlottableValue<Y>, width: Charts.MarkDimension = .automatic) where X : Charts.Plottable, Y : Charts.Plottable
-  public init<Y>(xStart: CoreFoundation.CGFloat? = nil, xEnd: CoreFoundation.CGFloat? = nil, yStart: Charts.PlottableValue<Y>, yEnd: Charts.PlottableValue<Y>) where Y : Charts.Plottable
-  public init<X, Y>(xStart: Charts.PlottableValue<X>, xEnd: Charts.PlottableValue<X>, yStart: Charts.PlottableValue<Y>, yEnd: Charts.PlottableValue<Y>) where X : Charts.Plottable, Y : Charts.Plottable
-  public init(xStart: CoreFoundation.CGFloat? = nil, xEnd: CoreFoundation.CGFloat? = nil, yStart: CoreFoundation.CGFloat? = nil, yEnd: CoreFoundation.CGFloat? = nil)
-  public static func _layoutChartContent(_ content: Charts.RectangleMark, _ inputs: Charts._ChartContentLayoutInputs)
-  public static func _renderChartContent(_ content: Charts.RectangleMark, _ inputs: Charts._ChartContentRenderInputs) -> Charts._ChartContentRenderOutputs
-  public typealias Body = Swift.Never
-}
-@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
-extension SwiftUI.ForEach : Charts.ChartContent where Content : Charts.ChartContent {
-  public var body: Swift.Never {
+@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+extension Charts.PointPlot : Charts.ChartContent where Content : Charts.ChartContent {
+  @_Concurrency.MainActor @preconcurrency public var body: some Charts.ChartContent {
     get
   }
-  public static func _layoutChartContent(_ content: SwiftUI.ForEach<Data, ID, Content>, _ inputs: Charts._ChartContentLayoutInputs)
-  public static func _renderChartContent(_ content: SwiftUI.ForEach<Data, ID, Content>, _ inputs: Charts._ChartContentRenderInputs) -> Charts._ChartContentRenderOutputs
+  @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
+  public typealias Body = @_opaqueReturnTypeOf("$s6Charts9PointPlotVA2A12ChartContentRzlE4bodyQrvp", 0) __<Content>
+}
+@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+extension Charts.PointPlot : Charts.VectorizedChartContent where Content : Charts.VectorizedChartContent {
+  public typealias DataElement = Content.DataElement
+}
+@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+extension Charts.PointPlot {
+  nonisolated public init<Data>(_ data: Data, x: Charts.PlottableProjection<Charts.PointPlot<Content>.DataElement, some Plottable>, y: Charts.PlottableProjection<Charts.PointPlot<Content>.DataElement, some Plottable>) where Content == Charts.VectorizedPointPlotContent<Data>, Data : Swift.RandomAccessCollection
+  nonisolated public init<Data>(_ data: Data, x: Charts.PlottableProjection<Charts.PointPlot<Content>.DataElement, some Plottable>, y: CoreFoundation.CGFloat? = nil) where Content == Charts.VectorizedPointPlotContent<Data>, Data : Swift.RandomAccessCollection
+  nonisolated public init<Data>(_ data: Data, x: Charts.PlottableProjection<Charts.PointPlot<Content>.DataElement, some Plottable>, y: Swift.KeyPath<Charts.PointPlot<Content>.DataElement, CoreFoundation.CGFloat>) where Content == Charts.VectorizedPointPlotContent<Data>, Data : Swift.RandomAccessCollection
+  nonisolated public init<Data>(_ data: Data, x: CoreFoundation.CGFloat? = nil, y: Charts.PlottableProjection<Charts.PointPlot<Content>.DataElement, some Plottable>) where Content == Charts.VectorizedPointPlotContent<Data>, Data : Swift.RandomAccessCollection
+  nonisolated public init<Data>(_ data: Data, x: Swift.KeyPath<Data.Element, CoreFoundation.CGFloat>, y: Charts.PlottableProjection<Charts.PointPlot<Content>.DataElement, some Plottable>) where Content == Charts.VectorizedPointPlotContent<Data>, Data : Swift.RandomAccessCollection
+}
+@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+@_Concurrency.MainActor @preconcurrency public struct VectorizedPointPlotContent<Data> : Charts.VectorizedChartContent where Data : Swift.RandomAccessCollection {
+  public typealias DataElement = Data.Element
+  @_Concurrency.MainActor @preconcurrency public static func _layoutChartContent(_ content: Charts.VectorizedPointPlotContent<Data>, _ inputs: Charts._ChartContentLayoutInputs)
+  @_Concurrency.MainActor @preconcurrency public static func _renderChartContent(_ content: Charts.VectorizedPointPlotContent<Data>, _ inputs: Charts._ChartContentRenderInputs) -> Charts._ChartContentRenderOutputs
+  @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
   public typealias Body = Swift.Never
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
-extension SwiftUI.ForEach where ID == Data.Element.ID, Content : Charts.ChartContent, Data.Element : Swift.Identifiable {
-  public init(_ data: Data, @Charts.ChartContentBuilder content: @escaping (Data.Element) -> Content)
+@_Concurrency.MainActor @preconcurrency public struct BarMark {
+  nonisolated public init<X, Y>(x: Charts.PlottableValue<X>, y: Charts.PlottableValue<Y>, width: Charts.MarkDimension = .automatic, height: Charts.MarkDimension = .automatic, stacking: Charts.MarkStackingMethod = .standard) where X : Charts.Plottable, Y : Charts.Plottable
+  nonisolated public init<X>(x: Charts.PlottableValue<X>, yStart: CoreFoundation.CGFloat? = nil, yEnd: CoreFoundation.CGFloat? = nil, width: Charts.MarkDimension = .automatic, stacking: Charts.MarkStackingMethod = .standard) where X : Charts.Plottable
+  nonisolated public init<Y>(xStart: CoreFoundation.CGFloat? = nil, xEnd: CoreFoundation.CGFloat? = nil, y: Charts.PlottableValue<Y>, height: Charts.MarkDimension = .automatic, stacking: Charts.MarkStackingMethod = .standard) where Y : Charts.Plottable
+  nonisolated public init<X, Y>(xStart: Charts.PlottableValue<X>, xEnd: Charts.PlottableValue<X>, y: Charts.PlottableValue<Y>, height: Charts.MarkDimension = .automatic) where X : Charts.Plottable, Y : Charts.Plottable
+  nonisolated public init<X>(xStart: Charts.PlottableValue<X>, xEnd: Charts.PlottableValue<X>, yStart: CoreFoundation.CGFloat? = nil, yEnd: CoreFoundation.CGFloat? = nil) where X : Charts.Plottable
+  nonisolated public init<X, Y>(x: Charts.PlottableValue<X>, yStart: Charts.PlottableValue<Y>, yEnd: Charts.PlottableValue<Y>, width: Charts.MarkDimension = .automatic) where X : Charts.Plottable, Y : Charts.Plottable
+  nonisolated public init<Y>(xStart: CoreFoundation.CGFloat? = nil, xEnd: CoreFoundation.CGFloat? = nil, yStart: Charts.PlottableValue<Y>, yEnd: Charts.PlottableValue<Y>) where Y : Charts.Plottable
+  @_Concurrency.MainActor @preconcurrency public static func _layoutChartContent(_ content: Charts.BarMark, _ inputs: Charts._ChartContentLayoutInputs)
+  @_Concurrency.MainActor @preconcurrency public static func _renderChartContent(_ content: Charts.BarMark, _ inputs: Charts._ChartContentRenderInputs) -> Charts._ChartContentRenderOutputs
+  @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
+  public typealias Body = Swift.Never
+}
+@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+public struct RulePlot<Content> {
+}
+@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+extension Charts.RulePlot : Charts.ChartContent where Content : Charts.ChartContent {
+  @_Concurrency.MainActor @preconcurrency public var body: some Charts.ChartContent {
+    get
+  }
+  @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
+  public typealias Body = @_opaqueReturnTypeOf("$s6Charts8RulePlotVA2A12ChartContentRzlE4bodyQrvp", 0) __<Content>
+}
+@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+extension Charts.RulePlot : Charts.VectorizedChartContent where Content : Charts.VectorizedChartContent {
+  public typealias DataElement = Content.DataElement
+}
+@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+extension Charts.RulePlot {
+  nonisolated public init<Data, X>(_ data: Data, xStart: Charts.PlottableProjection<Charts.RulePlot<Content>.DataElement, X>, xEnd: Charts.PlottableProjection<Charts.RulePlot<Content>.DataElement, X>, y: Charts.PlottableProjection<Charts.RulePlot<Content>.DataElement, some Plottable>) where Content == Charts.VectorizedRulePlotContent<Data>, Data : Swift.RandomAccessCollection, X : Charts.Plottable
+  nonisolated public init<Data, Y>(_ data: Data, x: Charts.PlottableProjection<Charts.RulePlot<Content>.DataElement, some Plottable>, yStart: Charts.PlottableProjection<Charts.RulePlot<Content>.DataElement, Y>, yEnd: Charts.PlottableProjection<Charts.RulePlot<Content>.DataElement, Y>) where Content == Charts.VectorizedRulePlotContent<Data>, Data : Swift.RandomAccessCollection, Y : Charts.Plottable
+}
+@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+extension Charts.RulePlot {
+  nonisolated public init<Data>(_ data: Data, xStart: CoreFoundation.CGFloat? = nil, xEnd: CoreFoundation.CGFloat? = nil, y: Charts.PlottableProjection<Charts.RulePlot<Content>.DataElement, some Plottable>) where Content == Charts.VectorizedRulePlotContent<Data>, Data : Swift.RandomAccessCollection
+  nonisolated public init<Data, X>(_ data: Data, xStart: Charts.PlottableProjection<Charts.RulePlot<Content>.DataElement, X>, xEnd: Charts.PlottableProjection<Charts.RulePlot<Content>.DataElement, X>, y: CoreFoundation.CGFloat? = nil) where Content == Charts.VectorizedRulePlotContent<Data>, Data : Swift.RandomAccessCollection, X : Charts.Plottable
+  nonisolated public init<Data>(_ data: Data, x: Charts.PlottableProjection<Charts.RulePlot<Content>.DataElement, some Plottable>, yStart: CoreFoundation.CGFloat? = nil, yEnd: CoreFoundation.CGFloat? = nil) where Content == Charts.VectorizedRulePlotContent<Data>, Data : Swift.RandomAccessCollection
+  nonisolated public init<Data, Y>(_ data: Data, x: CoreFoundation.CGFloat? = nil, yStart: Charts.PlottableProjection<Charts.RulePlot<Content>.DataElement, Y>, yEnd: Charts.PlottableProjection<Charts.RulePlot<Content>.DataElement, Y>) where Content == Charts.VectorizedRulePlotContent<Data>, Data : Swift.RandomAccessCollection, Y : Charts.Plottable
+}
+@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+extension Charts.RulePlot {
+  nonisolated public init<Data>(_ data: Data, xStart: Swift.KeyPath<Charts.RulePlot<Content>.DataElement, CoreFoundation.CGFloat>, xEnd: Swift.KeyPath<Charts.RulePlot<Content>.DataElement, CoreFoundation.CGFloat>, y: Charts.PlottableProjection<Charts.RulePlot<Content>.DataElement, some Plottable>) where Content == Charts.VectorizedRulePlotContent<Data>, Data : Swift.RandomAccessCollection
+  nonisolated public init<Data, X>(_ data: Data, xStart: Charts.PlottableProjection<Charts.RulePlot<Content>.DataElement, X>, xEnd: Charts.PlottableProjection<Charts.RulePlot<Content>.DataElement, X>, y: Swift.KeyPath<Charts.RulePlot<Content>.DataElement, CoreFoundation.CGFloat>) where Content == Charts.VectorizedRulePlotContent<Data>, Data : Swift.RandomAccessCollection, X : Charts.Plottable
+  nonisolated public init<Data>(_ data: Data, x: Charts.PlottableProjection<Charts.RulePlot<Content>.DataElement, some Plottable>, yStart: Swift.KeyPath<Charts.RulePlot<Content>.DataElement, CoreFoundation.CGFloat>, yEnd: Swift.KeyPath<Charts.RulePlot<Content>.DataElement, CoreFoundation.CGFloat>) where Content == Charts.VectorizedRulePlotContent<Data>, Data : Swift.RandomAccessCollection
+  nonisolated public init<Data, Y>(_ data: Data, x: Swift.KeyPath<Charts.RulePlot<Content>.DataElement, CoreFoundation.CGFloat>, yStart: Charts.PlottableProjection<Charts.RulePlot<Content>.DataElement, Y>, yEnd: Charts.PlottableProjection<Charts.RulePlot<Content>.DataElement, Y>) where Content == Charts.VectorizedRulePlotContent<Data>, Data : Swift.RandomAccessCollection, Y : Charts.Plottable
+}
+@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+@_Concurrency.MainActor @preconcurrency public struct VectorizedRulePlotContent<Data> : Charts.VectorizedChartContent where Data : Swift.RandomAccessCollection {
+  public typealias DataElement = Data.Element
+  @_Concurrency.MainActor @preconcurrency public static func _layoutChartContent(_ content: Charts.VectorizedRulePlotContent<Data>, _ inputs: Charts._ChartContentLayoutInputs)
+  @_Concurrency.MainActor @preconcurrency public static func _renderChartContent(_ content: Charts.VectorizedRulePlotContent<Data>, _ inputs: Charts._ChartContentRenderInputs) -> Charts._ChartContentRenderOutputs
+  @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
+  public typealias Body = Swift.Never
+}
+@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+extension Charts.ChartContent {
+  @_Concurrency.MainActor @preconcurrency public static func _makeChartContent(content: SwiftUICore._GraphValue<Self>, inputs: Charts._ChartContentInputs) -> Charts._ChartContentOutputs
+  @_Concurrency.MainActor @preconcurrency public static func _chartContentCount(inputs: Charts._ChartContentInputs) -> Swift.Int?
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
-extension SwiftUI.ForEach where Content : Charts.ChartContent {
-  public init(_ data: Data, id: Swift.KeyPath<Data.Element, ID>, @Charts.ChartContentBuilder content: @escaping (Data.Element) -> Content)
+@_Concurrency.MainActor @preconcurrency public struct RectangleMark {
+  nonisolated public init<X, Y>(x: Charts.PlottableValue<X>, y: Charts.PlottableValue<Y>, width: Charts.MarkDimension = .automatic, height: Charts.MarkDimension = .automatic) where X : Charts.Plottable, Y : Charts.Plottable
+  nonisolated public init<X>(x: Charts.PlottableValue<X>, yStart: CoreFoundation.CGFloat? = nil, yEnd: CoreFoundation.CGFloat? = nil, width: Charts.MarkDimension = .automatic) where X : Charts.Plottable
+  nonisolated public init<Y>(xStart: CoreFoundation.CGFloat? = nil, xEnd: CoreFoundation.CGFloat? = nil, y: Charts.PlottableValue<Y>, height: Charts.MarkDimension = .automatic) where Y : Charts.Plottable
+  nonisolated public init<X, Y>(xStart: Charts.PlottableValue<X>, xEnd: Charts.PlottableValue<X>, y: Charts.PlottableValue<Y>, height: Charts.MarkDimension = .automatic) where X : Charts.Plottable, Y : Charts.Plottable
+  nonisolated public init<X>(xStart: Charts.PlottableValue<X>, xEnd: Charts.PlottableValue<X>, yStart: CoreFoundation.CGFloat? = nil, yEnd: CoreFoundation.CGFloat? = nil) where X : Charts.Plottable
+  nonisolated public init<X, Y>(x: Charts.PlottableValue<X>, yStart: Charts.PlottableValue<Y>, yEnd: Charts.PlottableValue<Y>, width: Charts.MarkDimension = .automatic) where X : Charts.Plottable, Y : Charts.Plottable
+  nonisolated public init<Y>(xStart: CoreFoundation.CGFloat? = nil, xEnd: CoreFoundation.CGFloat? = nil, yStart: Charts.PlottableValue<Y>, yEnd: Charts.PlottableValue<Y>) where Y : Charts.Plottable
+  nonisolated public init<X, Y>(xStart: Charts.PlottableValue<X>, xEnd: Charts.PlottableValue<X>, yStart: Charts.PlottableValue<Y>, yEnd: Charts.PlottableValue<Y>) where X : Charts.Plottable, Y : Charts.Plottable
+  nonisolated public init(xStart: CoreFoundation.CGFloat? = nil, xEnd: CoreFoundation.CGFloat? = nil, yStart: CoreFoundation.CGFloat? = nil, yEnd: CoreFoundation.CGFloat? = nil)
+  @_Concurrency.MainActor @preconcurrency public static func _layoutChartContent(_ content: Charts.RectangleMark, _ inputs: Charts._ChartContentLayoutInputs)
+  @_Concurrency.MainActor @preconcurrency public static func _renderChartContent(_ content: Charts.RectangleMark, _ inputs: Charts._ChartContentRenderInputs) -> Charts._ChartContentRenderOutputs
+  @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
+  public typealias Body = Swift.Never
+}
+@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
+extension SwiftUICore.ForEach : Charts.ChartContent where Content : Charts.ChartContent {
+  @_Concurrency.MainActor @preconcurrency public var body: Swift.Never {
+    get
+  }
+  @_Concurrency.MainActor @preconcurrency public static func _layoutChartContent(_ content: SwiftUICore.ForEach<Data, ID, Content>, _ inputs: Charts._ChartContentLayoutInputs)
+  @_Concurrency.MainActor @preconcurrency public static func _renderChartContent(_ content: SwiftUICore.ForEach<Data, ID, Content>, _ inputs: Charts._ChartContentRenderInputs) -> Charts._ChartContentRenderOutputs
+  @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
+  public typealias Body = Swift.Never
+}
+@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
+extension SwiftUICore.ForEach where ID == Data.Element.ID, Content : Charts.ChartContent, Data.Element : Swift.Identifiable {
+  nonisolated public init(_ data: Data, @Charts.ChartContentBuilder content: @escaping (Data.Element) -> Content)
+}
+@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
+extension SwiftUICore.ForEach where Content : Charts.ChartContent {
+  nonisolated public init(_ data: Data, id: Swift.KeyPath<Data.Element, ID>, @Charts.ChartContentBuilder content: @escaping (Data.Element) -> Content)
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 @_functionBuilder public struct AxisMarkBuilder {
@@ -1156,13 +1634,36 @@ extension SwiftUI.ForEach where Content : Charts.ChartContent {
         BuilderEmpty()
     }
   
+  @available(iOS, introduced: 16.0, obsoleted: 18.0)
+  @available(macOS, introduced: 13.0, obsoleted: 15.0)
+  @available(tvOS, introduced: 16.0, obsoleted: 18.0)
+  @available(watchOS, introduced: 9.0, obsoleted: 11.0)
+  @available(visionOS, introduced: 1.0, obsoleted: 2.0)
   @_alwaysEmitIntoClient public static func buildPartialBlock<T>(first content: T) -> T where T : Charts.AxisMark {
         return content
     }
+  @available(iOS, introduced: 16.0, obsoleted: 18.0)
+  @available(macOS, introduced: 13.0, obsoleted: 15.0)
+  @available(tvOS, introduced: 16.0, obsoleted: 18.0)
+  @available(watchOS, introduced: 9.0, obsoleted: 11.0)
+  @available(visionOS, introduced: 1.0, obsoleted: 2.0)
   @_alwaysEmitIntoClient public static func buildPartialBlock(accumulated: some AxisMark, next: some AxisMark) -> some Charts.AxisMark {
         BuilderPair(accumulated, next)
     }
   
+  @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+  @_alwaysEmitIntoClient public static func buildBlock<T>(_ content: T) -> T where T : Charts.AxisMark {
+        content
+    }
+  #if compiler(>=5.3) && $ParameterPacks
+  @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+  @_alwaysEmitIntoClient @_disfavoredOverload public static func buildBlock<each T>(_ content: repeat each T) -> some Charts.AxisMark where repeat each T : Charts.AxisMark {
+        BuilderTuple(elements: (repeat each content))
+    }
+  #if compiler(>=5.3) && $ParameterPacks
+
+  #endif
+  #endif
   @_alwaysEmitIntoClient public static func buildIf<T>(_ content: T?) -> T? where T : Charts.AxisMark {
         return content
     }
@@ -1179,6 +1680,15 @@ extension SwiftUI.ForEach where Content : Charts.ChartContent {
         content
     }
 }
+#if compiler(>=5.3) && $ParameterPacks
+@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+extension Charts.BuilderTuple : Charts.AxisMark where repeat each T : Charts.AxisMark {
+  @usableFromInline
+  internal static func _layoutAxisMark(_ content: Charts.BuilderTuple<repeat each T>, _ inputs: Charts._AxisMarkLayoutInputs)
+  @usableFromInline
+  internal static func _renderAxisMark(_ content: Charts.BuilderTuple<repeat each T>, _ inputs: Charts._AxisMarkRenderInputs) -> Charts._AxisMarkRenderOutputs
+}
+#endif
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 extension Charts.BuilderPair : Charts.AxisContent where T0 : Charts.AxisContent, T1 : Charts.AxisContent {
   @inlinable internal init(_ first: T0, _ second: T1) {
@@ -1191,22 +1701,22 @@ extension Charts.BuilderPair : Charts.AxisContent where T0 : Charts.AxisContent,
   internal static func _makeAxisContent(_ content: Charts.BuilderPair<T0, T1>, _ inputs: Charts._AxisContentInputs) -> Charts._AxisContentOutputs
 }
 @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
-extension SwiftUI.View {
-  public func chartScrollableAxes(_ axes: SwiftUI.Axis.Set) -> some SwiftUI.View
+extension SwiftUICore.View {
+  nonisolated public func chartScrollableAxes(_ axes: SwiftUICore.Axis.Set) -> some SwiftUICore.View
   
-  public func chartXVisibleDomain<P>(length: P) -> some SwiftUI.View where P : Charts.Plottable, P : Swift.Numeric
+  nonisolated public func chartXVisibleDomain<P>(length: P) -> some SwiftUICore.View where P : Charts.Plottable, P : Swift.Numeric
   
-  public func chartYVisibleDomain<P>(length: P) -> some SwiftUI.View where P : Charts.Plottable, P : Swift.Numeric
+  nonisolated public func chartYVisibleDomain<P>(length: P) -> some SwiftUICore.View where P : Charts.Plottable, P : Swift.Numeric
   
-  public func chartScrollTargetBehavior(_ behavior: some ChartScrollTargetBehavior) -> some SwiftUI.View
+  nonisolated public func chartScrollTargetBehavior(_ behavior: some ChartScrollTargetBehavior) -> some SwiftUICore.View
   
-  public func chartScrollPosition(initialX: some Plottable) -> some SwiftUI.View
+  nonisolated public func chartScrollPosition(initialX: some Plottable) -> some SwiftUICore.View
   
-  public func chartScrollPosition(x: SwiftUI.Binding<some Plottable>) -> some SwiftUI.View
+  nonisolated public func chartScrollPosition(x: SwiftUICore.Binding<some Plottable>) -> some SwiftUICore.View
   
-  public func chartScrollPosition(initialY: some Plottable) -> some SwiftUI.View
+  nonisolated public func chartScrollPosition(initialY: some Plottable) -> some SwiftUICore.View
   
-  public func chartScrollPosition(y: SwiftUI.Binding<some Plottable>) -> some SwiftUI.View
+  nonisolated public func chartScrollPosition(y: SwiftUICore.Binding<some Plottable>) -> some SwiftUICore.View
   
 }
 @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
@@ -1220,11 +1730,11 @@ extension SwiftUI.View {
 }
 @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 public protocol ChartScrollTargetBehavior : SwiftUI.ScrollTargetBehavior {
-  func updateTarget(_ target: inout SwiftUI.ScrollTarget, context: Charts.ChartScrollTargetBehaviorContext)
+  func updateTarget(_ target: inout SwiftUICore.ScrollTarget, context: Charts.ChartScrollTargetBehaviorContext)
 }
 @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 extension Charts.ChartScrollTargetBehavior {
-  public func updateTarget(_ target: inout SwiftUI.ScrollTarget, context: SwiftUI.ScrollTargetBehaviorContext)
+  public func updateTarget(_ target: inout SwiftUICore.ScrollTarget, context: SwiftUI.ScrollTargetBehaviorContext)
 }
 @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 extension Charts.ChartScrollTargetBehavior {
@@ -1257,17 +1767,17 @@ public struct MajorValueAlignment<Value> where Value : Charts.Plottable {
 }
 @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 public struct ValueAlignedChartScrollTargetBehavior : Charts.ChartScrollTargetBehavior {
-  public init<T>(unit: T, majorAlignment: Charts.MajorValueAlignment<T>? = nil, limitBehavior: Charts.ValueAlignedLimitBehavior = .automatic) where T : Charts.Plottable, T : Swift.Numeric
-  public init(matching components: Foundation.DateComponents, majorAlignment: Charts.MajorValueAlignment<Foundation.Date>? = nil, limitBehavior: Charts.ValueAlignedLimitBehavior = .automatic)
-  public init<X, Y>(xUnit: X, yUnit: Y, xMajorAlignment: Charts.MajorValueAlignment<X>? = nil, yMajorAlignment: Charts.MajorValueAlignment<Y>? = nil, limitBehavior: Charts.ValueAlignedLimitBehavior = .automatic) where X : Charts.Plottable, X : Swift.Numeric, Y : Charts.Plottable, Y : Swift.Numeric
-  public init(xMatching xComponents: Foundation.DateComponents, yMatching yComponents: Foundation.DateComponents, xMajorAlignment: Charts.MajorValueAlignment<Foundation.Date>? = nil, yMajorAlignment: Charts.MajorValueAlignment<Foundation.Date>? = nil, limitBehavior: Charts.ValueAlignedLimitBehavior = .automatic)
-  public init<Y>(xMatching xComponents: Foundation.DateComponents, yUnit: Y, xMajorAlignment: Charts.MajorValueAlignment<Foundation.Date>? = nil, yMajorAlignment: Charts.MajorValueAlignment<Y>? = nil, limitBehavior: Charts.ValueAlignedLimitBehavior = .automatic) where Y : Charts.Plottable, Y : Swift.Numeric
-  public init<X>(xUnit: X, yMatching yComponents: Foundation.DateComponents, xMajorAlignment: Charts.MajorValueAlignment<X>? = nil, yMajorAlignment: Charts.MajorValueAlignment<Foundation.Date>? = nil, limitBehavior: Charts.ValueAlignedLimitBehavior = .automatic) where X : Charts.Plottable, X : Swift.Numeric
-  public func updateTarget(_ target: inout SwiftUI.ScrollTarget, context: Charts.ChartScrollTargetBehaviorContext)
+  nonisolated public init<T>(unit: T, majorAlignment: Charts.MajorValueAlignment<T>? = nil, limitBehavior: Charts.ValueAlignedLimitBehavior = .automatic) where T : Charts.Plottable, T : Swift.Numeric
+  nonisolated public init(matching components: Foundation.DateComponents, majorAlignment: Charts.MajorValueAlignment<Foundation.Date>? = nil, limitBehavior: Charts.ValueAlignedLimitBehavior = .automatic)
+  nonisolated public init<X, Y>(xUnit: X, yUnit: Y, xMajorAlignment: Charts.MajorValueAlignment<X>? = nil, yMajorAlignment: Charts.MajorValueAlignment<Y>? = nil, limitBehavior: Charts.ValueAlignedLimitBehavior = .automatic) where X : Charts.Plottable, X : Swift.Numeric, Y : Charts.Plottable, Y : Swift.Numeric
+  nonisolated public init(xMatching xComponents: Foundation.DateComponents, yMatching yComponents: Foundation.DateComponents, xMajorAlignment: Charts.MajorValueAlignment<Foundation.Date>? = nil, yMajorAlignment: Charts.MajorValueAlignment<Foundation.Date>? = nil, limitBehavior: Charts.ValueAlignedLimitBehavior = .automatic)
+  nonisolated public init<Y>(xMatching xComponents: Foundation.DateComponents, yUnit: Y, xMajorAlignment: Charts.MajorValueAlignment<Foundation.Date>? = nil, yMajorAlignment: Charts.MajorValueAlignment<Y>? = nil, limitBehavior: Charts.ValueAlignedLimitBehavior = .automatic) where Y : Charts.Plottable, Y : Swift.Numeric
+  nonisolated public init<X>(xUnit: X, yMatching yComponents: Foundation.DateComponents, xMajorAlignment: Charts.MajorValueAlignment<X>? = nil, yMajorAlignment: Charts.MajorValueAlignment<Foundation.Date>? = nil, limitBehavior: Charts.ValueAlignedLimitBehavior = .automatic) where X : Charts.Plottable, X : Swift.Numeric
+  public func updateTarget(_ target: inout SwiftUICore.ScrollTarget, context: Charts.ChartScrollTargetBehaviorContext)
 }
 @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 extension SwiftUI.PagingScrollTargetBehavior : Charts.ChartScrollTargetBehavior {
-  public func updateTarget(_ target: inout SwiftUI.ScrollTarget, context: Charts.ChartScrollTargetBehaviorContext)
+  public func updateTarget(_ target: inout SwiftUICore.ScrollTarget, context: Charts.ChartScrollTargetBehaviorContext)
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 extension Charts.BuilderPair : Charts.AxisMark where T0 : Charts.AxisMark, T1 : Charts.AxisMark {
@@ -1282,17 +1792,91 @@ extension Charts.BuilderPair : Charts.AxisMark where T0 : Charts.AxisMark, T1 : 
   @usableFromInline
   internal static func _renderAxisMark(_ content: Charts.BuilderPair<T0, T1>, _ inputs: Charts._AxisMarkRenderInputs) -> Charts._AxisMarkRenderOutputs
 }
+@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+public struct SectorPlot<Content> {
+}
+@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+extension Charts.SectorPlot : Charts.ChartContent where Content : Charts.ChartContent {
+  @_Concurrency.MainActor @preconcurrency public var body: some Charts.ChartContent {
+    get
+  }
+  @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
+  public typealias Body = @_opaqueReturnTypeOf("$s6Charts10SectorPlotVA2A12ChartContentRzlE4bodyQrvp", 0) __<Content>
+}
+@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+extension Charts.SectorPlot : Charts.VectorizedChartContent where Content : Charts.VectorizedChartContent {
+  public typealias DataElement = Content.DataElement
+}
+@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+extension Charts.SectorPlot {
+  nonisolated public init<Data>(_ data: Data, angle: Charts.PlottableProjection<Charts.SectorPlot<Content>.DataElement, some Plottable>, innerRadius: Charts.MarkDimensions<Charts.SectorPlot<Content>.DataElement> = .automatic, outerRadius: Charts.MarkDimensions<Charts.SectorPlot<Content>.DataElement> = .automatic, angularInset: CoreFoundation.CGFloat? = nil) where Content == Charts.VectorizedSectorPlotContent<Data>, Data : Swift.RandomAccessCollection
+  nonisolated public init<Data>(_ data: Data, angle: Charts.PlottableProjection<Charts.SectorPlot<Content>.DataElement, some Plottable>, innerRadius: Charts.MarkDimensions<Charts.SectorPlot<Content>.DataElement> = .automatic, outerRadius: Charts.MarkDimensions<Charts.SectorPlot<Content>.DataElement> = .automatic, angularInset: Swift.KeyPath<Charts.SectorPlot<Content>.DataElement, CoreFoundation.CGFloat>) where Content == Charts.VectorizedSectorPlotContent<Data>, Data : Swift.RandomAccessCollection
+}
+@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+@_Concurrency.MainActor @preconcurrency public struct VectorizedSectorPlotContent<Data> : Charts.VectorizedChartContent where Data : Swift.RandomAccessCollection {
+  public typealias DataElement = Data.Element
+  @_Concurrency.MainActor @preconcurrency public var body: some Charts.ChartContent {
+    get
+  }
+  @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
+  public typealias Body = @_opaqueReturnTypeOf("$s6Charts27VectorizedSectorPlotContentV4bodyQrvp", 0) __<Data>
+}
+@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+public struct LinePlot<Content> {
+}
+@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+extension Charts.LinePlot : Charts.ChartContent where Content : Charts.ChartContent {
+  @_Concurrency.MainActor @preconcurrency public var body: some Charts.ChartContent {
+    get
+  }
+  @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
+  public typealias Body = @_opaqueReturnTypeOf("$s6Charts8LinePlotVA2A12ChartContentRzlE4bodyQrvp", 0) __<Content>
+}
+@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+extension Charts.LinePlot : Charts.VectorizedChartContent where Content : Charts.VectorizedChartContent {
+  public typealias DataElement = Content.DataElement
+}
+@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+extension Charts.LinePlot {
+  nonisolated public init<Data>(_ data: Data, x: Charts.PlottableProjection<Charts.LinePlot<Content>.DataElement, some Plottable>, y: Charts.PlottableProjection<Charts.LinePlot<Content>.DataElement, some Plottable>) where Content == Charts.VectorizedLinePlotContent<Data>, Data : Swift.RandomAccessCollection
+  nonisolated public init<Data>(_ data: Data, x: Charts.PlottableProjection<Charts.LinePlot<Content>.DataElement, some Plottable>, y: Charts.PlottableProjection<Charts.LinePlot<Content>.DataElement, some Plottable>, series: Charts.PlottableProjection<Charts.LinePlot<Content>.DataElement, some Plottable>) where Content == Charts.VectorizedLinePlotContent<Data>, Data : Swift.RandomAccessCollection
+}
+@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+extension Charts.LinePlot where Content == Charts.FunctionLinePlotContent {
+  nonisolated public init(x: SwiftUICore.Text, y: SwiftUICore.Text, domain: Swift.ClosedRange<Swift.Double>? = nil, function: @escaping @Sendable (Swift.Double) -> Swift.Double)
+  nonisolated public init(x: SwiftUICore.LocalizedStringKey, y: SwiftUICore.LocalizedStringKey, domain: Swift.ClosedRange<Swift.Double>? = nil, function: @escaping @Sendable (Swift.Double) -> Swift.Double)
+  @_disfavoredOverload nonisolated public init<S1, S2>(x: S1, y: S2, domain: Swift.ClosedRange<Swift.Double>? = nil, function: @escaping @Sendable (Swift.Double) -> Swift.Double) where S1 : Swift.StringProtocol, S2 : Swift.StringProtocol
+  nonisolated public init(x: SwiftUICore.Text, y: SwiftUICore.Text, t: SwiftUICore.Text, domain: Swift.ClosedRange<Swift.Double>, function: @escaping @Sendable (Swift.Double) -> (x: Swift.Double, y: Swift.Double))
+  nonisolated public init(x: SwiftUICore.LocalizedStringKey, y: SwiftUICore.LocalizedStringKey, t: SwiftUICore.LocalizedStringKey, domain: Swift.ClosedRange<Swift.Double>, function: @escaping @Sendable (Swift.Double) -> (x: Swift.Double, y: Swift.Double))
+  @_disfavoredOverload nonisolated public init<S1, S2, S3>(x: S1, y: S2, t: S3, domain: Swift.ClosedRange<Swift.Double>, function: @escaping @Sendable (Swift.Double) -> (x: Swift.Double, y: Swift.Double)) where S1 : Swift.StringProtocol, S2 : Swift.StringProtocol, S3 : Swift.StringProtocol
+}
+@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+@_Concurrency.MainActor @preconcurrency public struct FunctionLinePlotContent {
+  @_Concurrency.MainActor @preconcurrency public static func _layoutChartContent(_ content: Charts.FunctionLinePlotContent, _ inputs: Charts._ChartContentLayoutInputs)
+  @_Concurrency.MainActor @preconcurrency public static func _renderChartContent(_ content: Charts.FunctionLinePlotContent, _ inputs: Charts._ChartContentRenderInputs) -> Charts._ChartContentRenderOutputs
+  @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
+  public typealias Body = Swift.Never
+}
+@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+@_Concurrency.MainActor @preconcurrency public struct VectorizedLinePlotContent<Data> : Charts.VectorizedChartContent where Data : Swift.RandomAccessCollection {
+  public typealias DataElement = Data.Element
+  @_Concurrency.MainActor @preconcurrency public var body: some Charts.ChartContent {
+    get
+  }
+  @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
+  public typealias Body = @_opaqueReturnTypeOf("$s6Charts25VectorizedLinePlotContentV4bodyQrvp", 0) __<Data>
+}
 @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 extension Charts.AxisContent {
   public func compositingLayer() -> some Charts.AxisContent
   
-  public func compositingLayer<V>(@SwiftUI.ViewBuilder style: (SwiftUI.PlaceholderContentView<Self>) -> V) -> some Charts.AxisContent where V : SwiftUI.View
+  public func compositingLayer<V>(@SwiftUICore.ViewBuilder style: (SwiftUICore.PlaceholderContentView<Self>) -> V) -> some Charts.AxisContent where V : SwiftUICore.View
   
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 extension Charts.ChartContent {
   @usableFromInline
-  internal static var conformanceToChartContent: Swift.UnsafeRawPointer {
+  @_Concurrency.MainActor @preconcurrency internal static var conformanceToChartContent: Swift.UnsafeRawPointer {
     get
   }
 }
@@ -1311,43 +1895,47 @@ extension Charts.AxisMark {
   }
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
-public protocol ChartSymbolShape : SwiftUI.Shape {
+public protocol ChartSymbolShape : SwiftUICore.Shape {
   var perceptualUnitRect: CoreFoundation.CGRect { get }
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
-extension Charts.ChartSymbolShape where Self : SwiftUI.InsettableShape {
+extension Charts.ChartSymbolShape where Self : SwiftUICore.InsettableShape {
   public func strokeBorder(lineWidth: CoreFoundation.CGFloat = 1) -> some Charts.ChartSymbolShape
   
-  public func strokeBorder(style: SwiftUI.StrokeStyle) -> some Charts.ChartSymbolShape
+  public func strokeBorder(style: SwiftUICore.StrokeStyle) -> some Charts.ChartSymbolShape
   
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 @frozen public struct AnyChartSymbolShape : Charts.ChartSymbolShape {
   internal let storage: any Charts.ChartSymbolShape
-  public init(_ content: any Charts.ChartSymbolShape)
-  public func path(in rect: CoreFoundation.CGRect) -> SwiftUI.Path
+  nonisolated public init(_ content: any Charts.ChartSymbolShape)
+  nonisolated public func path(in rect: CoreFoundation.CGRect) -> SwiftUICore.Path
   public var perceptualUnitRect: CoreFoundation.CGRect {
     get
   }
-  public typealias AnimatableData = SwiftUI.EmptyAnimatableData
-  public typealias Body = SwiftUI._ShapeView<Charts.AnyChartSymbolShape, SwiftUI.ForegroundStyle>
+  @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
+  public typealias AnimatableData = SwiftUICore.EmptyAnimatableData
+  @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
+  public typealias Body = SwiftUICore._ShapeView<Charts.AnyChartSymbolShape, SwiftUICore.ForegroundStyle>
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
-extension SwiftUI.Circle : Charts.ChartSymbolShape {
+extension SwiftUICore.Circle : Charts.ChartSymbolShape {
   public var perceptualUnitRect: CoreFoundation.CGRect {
     get
   }
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 public struct BasicChartSymbolShape : Charts.ChartSymbolShape {
-  public func path(in rect: CoreFoundation.CGRect) -> SwiftUI.Path
+  nonisolated public func path(in rect: CoreFoundation.CGRect) -> SwiftUICore.Path
   public var perceptualUnitRect: CoreFoundation.CGRect {
     get
   }
   public func strokeBorder(lineWidth: CoreFoundation.CGFloat = 1) -> some Charts.ChartSymbolShape
   
-  public typealias AnimatableData = SwiftUI.EmptyAnimatableData
-  public typealias Body = SwiftUI._ShapeView<Charts.BasicChartSymbolShape, SwiftUI.ForegroundStyle>
+  @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
+  public typealias AnimatableData = SwiftUICore.EmptyAnimatableData
+  @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
+  public typealias Body = SwiftUICore._ShapeView<Charts.BasicChartSymbolShape, SwiftUICore.ForegroundStyle>
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 extension Charts.ChartSymbolShape where Self == Charts.BasicChartSymbolShape {
@@ -1382,13 +1970,36 @@ extension Charts.ChartSymbolShape where Self == Charts.BasicChartSymbolShape {
         BuilderEmpty()
     }
   
+  @available(iOS, introduced: 16.0, obsoleted: 18.0)
+  @available(macOS, introduced: 13.0, obsoleted: 15.0)
+  @available(tvOS, introduced: 16.0, obsoleted: 18.0)
+  @available(watchOS, introduced: 9.0, obsoleted: 11.0)
+  @available(visionOS, introduced: 1.0, obsoleted: 2.0)
   @_alwaysEmitIntoClient public static func buildPartialBlock<T>(first content: T) -> T where T : Charts.AxisContent {
         content
     }
+  @available(iOS, introduced: 16.0, obsoleted: 18.0)
+  @available(macOS, introduced: 13.0, obsoleted: 15.0)
+  @available(tvOS, introduced: 16.0, obsoleted: 18.0)
+  @available(watchOS, introduced: 9.0, obsoleted: 11.0)
+  @available(visionOS, introduced: 1.0, obsoleted: 2.0)
   @_alwaysEmitIntoClient public static func buildPartialBlock(accumulated: some AxisContent, next: some AxisContent) -> some Charts.AxisContent {
         BuilderPair(accumulated, next)
     }
   
+  @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+  @_alwaysEmitIntoClient public static func buildBlock<T>(_ content: T) -> T where T : Charts.AxisContent {
+        content
+    }
+  #if compiler(>=5.3) && $ParameterPacks
+  @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+  @_alwaysEmitIntoClient @_disfavoredOverload public static func buildBlock<each T>(_ content: repeat each T) -> some Charts.AxisContent where repeat each T : Charts.AxisContent {
+        BuilderTuple(elements: (repeat each content))
+    }
+  #if compiler(>=5.3) && $ParameterPacks
+
+  #endif
+  #endif
   @_alwaysEmitIntoClient public static func buildIf<T>(_ content: T?) -> T? where T : Charts.AxisContent {
         content
     }
@@ -1405,14 +2016,27 @@ extension Charts.ChartSymbolShape where Self == Charts.BasicChartSymbolShape {
         content
     }
 }
+#if compiler(>=5.3) && $ParameterPacks
+@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+extension Charts.BuilderTuple : Charts.AxisContent where repeat each T : Charts.AxisContent {
+  @usableFromInline
+  internal static func _makeAxisContent(_ content: Charts.BuilderTuple<repeat each T>, _ inputs: Charts._AxisContentInputs) -> Charts._AxisContentOutputs
+}
+#endif
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
-public struct PointMark {
-  public init<X, Y>(x: Charts.PlottableValue<X>, y: Charts.PlottableValue<Y>) where X : Charts.Plottable, Y : Charts.Plottable
-  public init<X>(x: Charts.PlottableValue<X>, y: CoreFoundation.CGFloat? = nil) where X : Charts.Plottable
-  public init<Y>(x: CoreFoundation.CGFloat? = nil, y: Charts.PlottableValue<Y>) where Y : Charts.Plottable
-  public static func _layoutChartContent(_ content: Charts.PointMark, _ inputs: Charts._ChartContentLayoutInputs)
-  public static func _renderChartContent(_ content: Charts.PointMark, _ inputs: Charts._ChartContentRenderInputs) -> Charts._ChartContentRenderOutputs
+@_Concurrency.MainActor @preconcurrency public struct PointMark {
+  nonisolated public init<X, Y>(x: Charts.PlottableValue<X>, y: Charts.PlottableValue<Y>) where X : Charts.Plottable, Y : Charts.Plottable
+  nonisolated public init<X>(x: Charts.PlottableValue<X>, y: CoreFoundation.CGFloat? = nil) where X : Charts.Plottable
+  nonisolated public init<Y>(x: CoreFoundation.CGFloat? = nil, y: Charts.PlottableValue<Y>) where Y : Charts.Plottable
+  @_Concurrency.MainActor @preconcurrency public static func _layoutChartContent(_ content: Charts.PointMark, _ inputs: Charts._ChartContentLayoutInputs)
+  @_Concurrency.MainActor @preconcurrency public static func _renderChartContent(_ content: Charts.PointMark, _ inputs: Charts._ChartContentRenderInputs) -> Charts._ChartContentRenderOutputs
+  @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
   public typealias Body = Swift.Never
+}
+@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+extension Charts.PointMark {
+  @_Concurrency.MainActor @preconcurrency public static func _makeChartContent(content: SwiftUICore._GraphValue<Charts.PointMark>, inputs: Charts._ChartContentInputs) -> Charts._ChartContentOutputs
+  @_Concurrency.MainActor @preconcurrency public static func _chartContentCount(inputs: Charts._ChartContentInputs) -> Swift.Int?
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 @_typeEraser(AnyAxisContent) public protocol AxisContent {
@@ -1432,18 +2056,25 @@ extension Swift.Never : Charts.AxisContent {
 @frozen public struct AnyAxisContent : Charts.AxisContent {
   @usableFromInline
   internal let storage: any Charts.AxisContent
-  @inlinable public init(_ content: any Charts.AxisContent) {
+  @inlinable nonisolated public init(_ content: any Charts.AxisContent) {
         storage = content
     }
-  @inlinable public init(erasing content: some AxisContent) {
+  @inlinable nonisolated public init(erasing content: some AxisContent) {
         self.init(content)
     }
   public static func _makeAxisContent(_ content: Charts.AnyAxisContent, _ inputs: Charts._AxisContentInputs) -> Charts._AxisContentOutputs
 }
+#if compiler(>=5.3) && $NoncopyableGenerics
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 extension Swift.Optional : Charts.AxisContent where Wrapped : Charts.AxisContent {
   public static func _makeAxisContent(_ content: Wrapped?, _ inputs: Charts._AxisContentInputs) -> Charts._AxisContentOutputs
 }
+#else
+@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
+extension Swift.Optional : Charts.AxisContent where Wrapped : Charts.AxisContent {
+  public static func _makeAxisContent(_ content: Wrapped?, _ inputs: Charts._AxisContentInputs) -> Charts._AxisContentOutputs
+}
+#endif
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 extension Charts.BuilderConditional : Charts.AxisContent where TrueContent : Charts.AxisContent, FalseContent : Charts.AxisContent {
   public static func _makeAxisContent(_ content: Charts.BuilderConditional<TrueContent, FalseContent>, _ inputs: Charts._AxisContentInputs) -> Charts._AxisContentOutputs
@@ -1451,13 +2082,14 @@ extension Charts.BuilderConditional : Charts.AxisContent where TrueContent : Cha
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 extension Charts.BuilderEmpty : Charts.AxisContent {
   @usableFromInline
-  internal static func _makeAxisContent(_: Charts.BuilderEmpty, _: Charts._AxisContentInputs) -> Charts._AxisContentOutputs
+  @_Concurrency.MainActor @preconcurrency internal static func _makeAxisContent(_: Charts.BuilderEmpty, _: Charts._AxisContentInputs) -> Charts._AxisContentOutputs
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
-public struct Plot<Content> where Content : Charts.ChartContent {
-  public init(@Charts.ChartContentBuilder content: () -> Content)
-  public static func _layoutChartContent(_ content: Charts.Plot<Content>, _ inputs: Charts._ChartContentLayoutInputs)
-  public static func _renderChartContent(_ content: Charts.Plot<Content>, _ inputs: Charts._ChartContentRenderInputs) -> Charts._ChartContentRenderOutputs
+@_Concurrency.MainActor @preconcurrency public struct Plot<Content> where Content : Charts.ChartContent {
+  nonisolated public init(@Charts.ChartContentBuilder content: () -> Content)
+  @_Concurrency.MainActor @preconcurrency public static func _layoutChartContent(_ content: Charts.Plot<Content>, _ inputs: Charts._ChartContentLayoutInputs)
+  @_Concurrency.MainActor @preconcurrency public static func _renderChartContent(_ content: Charts.Plot<Content>, _ inputs: Charts._ChartContentRenderInputs) -> Charts._ChartContentRenderOutputs
+  @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
   public typealias Body = Swift.Never
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
@@ -1475,7 +2107,7 @@ extension Charts.PrimitivePlottableProtocol {
   public var primitivePlottable: Self {
     get
   }
-  public init?(primitivePlottable: Self.PrimitivePlottable)
+  nonisolated public init?(primitivePlottable: Self.PrimitivePlottable)
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 public struct _PrimitivePlottableKind<Value> where Value : Charts.PrimitivePlottableProtocol {
@@ -1485,7 +2117,7 @@ extension Charts.Plottable where Self : Swift.RawRepresentable, Self.RawValue ==
   public var primitivePlottable: Swift.String {
     get
   }
-  public init?(primitivePlottable: Self.RawValue)
+  nonisolated public init?(primitivePlottable: Self.RawValue)
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 extension Swift.Never : Charts.PrimitivePlottableProtocol {
@@ -1495,7 +2127,8 @@ extension Swift.Never : Charts.PrimitivePlottableProtocol {
   public var primitivePlottable: Swift.Never {
     get
   }
-  public init?(primitivePlottable: Swift.Never)
+  nonisolated public init?(primitivePlottable: Swift.Never)
+  @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
   public typealias PrimitivePlottable = Swift.Never
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
@@ -1503,6 +2136,7 @@ extension Swift.Double : Charts.Plottable, Charts.PrimitivePlottableProtocol {
   public static var _primitivePlottableKind: Charts._PrimitivePlottableKind<Swift.Double> {
     get
   }
+  @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
   public typealias PrimitivePlottable = Swift.Double
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
@@ -1510,6 +2144,7 @@ extension Swift.String : Charts.Plottable, Charts.PrimitivePlottableProtocol {
   public static var _primitivePlottableKind: Charts._PrimitivePlottableKind<Swift.String> {
     get
   }
+  @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
   public typealias PrimitivePlottable = Swift.String
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
@@ -1517,6 +2152,7 @@ extension Foundation.Date : Charts.Plottable, Charts.PrimitivePlottableProtocol 
   public static var _primitivePlottableKind: Charts._PrimitivePlottableKind<Foundation.Date> {
     get
   }
+  @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
   public typealias PrimitivePlottable = Foundation.Date
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
@@ -1524,6 +2160,7 @@ extension Swift.Float16 : Charts.PrimitivePlottableProtocol {
   public static var _primitivePlottableKind: Charts._PrimitivePlottableKind<Swift.Float16> {
     get
   }
+  @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
   public typealias PrimitivePlottable = Swift.Float16
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
@@ -1531,6 +2168,7 @@ extension Swift.Float : Charts.PrimitivePlottableProtocol {
   public static var _primitivePlottableKind: Charts._PrimitivePlottableKind<Swift.Float> {
     get
   }
+  @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
   public typealias PrimitivePlottable = Swift.Float
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
@@ -1538,7 +2176,8 @@ extension Foundation.Decimal : Charts.Plottable {
   public var primitivePlottable: Swift.Double {
     get
   }
-  public init?(primitivePlottable: Swift.Double)
+  nonisolated public init?(primitivePlottable: Swift.Double)
+  @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
   public typealias PrimitivePlottable = Swift.Double
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
@@ -1546,10 +2185,11 @@ extension Swift.Int : Charts.PrimitivePlottableProtocol {
   public var primitivePlottable: Swift.Int {
     get
   }
-  public init?(primitivePlottable: Swift.Int)
+  nonisolated public init?(primitivePlottable: Swift.Int)
   public static var _primitivePlottableKind: Charts._PrimitivePlottableKind<Swift.Int> {
     get
   }
+  @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
   public typealias PrimitivePlottable = Swift.Int
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
@@ -1557,6 +2197,7 @@ extension Swift.Int8 : Charts.PrimitivePlottableProtocol {
   public static var _primitivePlottableKind: Charts._PrimitivePlottableKind<Swift.Int8> {
     get
   }
+  @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
   public typealias PrimitivePlottable = Swift.Int8
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
@@ -1564,10 +2205,11 @@ extension Swift.Int16 : Charts.PrimitivePlottableProtocol {
   public var primitivePlottable: Swift.Int16 {
     get
   }
-  public init?(primitivePlottable: Swift.Int16)
+  nonisolated public init?(primitivePlottable: Swift.Int16)
   public static var _primitivePlottableKind: Charts._PrimitivePlottableKind<Swift.Int16> {
     get
   }
+  @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
   public typealias PrimitivePlottable = Swift.Int16
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
@@ -1575,6 +2217,7 @@ extension Swift.Int32 : Charts.PrimitivePlottableProtocol {
   public static var _primitivePlottableKind: Charts._PrimitivePlottableKind<Swift.Int32> {
     get
   }
+  @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
   public typealias PrimitivePlottable = Swift.Int32
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
@@ -1582,10 +2225,11 @@ extension Swift.Int64 : Charts.PrimitivePlottableProtocol {
   public var primitivePlottable: Swift.Int64 {
     get
   }
-  public init?(primitivePlottable: Swift.Int64)
+  nonisolated public init?(primitivePlottable: Swift.Int64)
   public static var _primitivePlottableKind: Charts._PrimitivePlottableKind<Swift.Int64> {
     get
   }
+  @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
   public typealias PrimitivePlottable = Swift.Int64
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
@@ -1593,6 +2237,7 @@ extension Swift.UInt : Charts.PrimitivePlottableProtocol {
   public static var _primitivePlottableKind: Charts._PrimitivePlottableKind<Swift.UInt> {
     get
   }
+  @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
   public typealias PrimitivePlottable = Swift.UInt
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
@@ -1600,10 +2245,11 @@ extension Swift.UInt8 : Charts.PrimitivePlottableProtocol {
   public var primitivePlottable: Swift.UInt8 {
     get
   }
-  public init?(primitivePlottable: Swift.UInt8)
+  nonisolated public init?(primitivePlottable: Swift.UInt8)
   public static var _primitivePlottableKind: Charts._PrimitivePlottableKind<Swift.UInt8> {
     get
   }
+  @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
   public typealias PrimitivePlottable = Swift.UInt8
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
@@ -1611,6 +2257,7 @@ extension Swift.UInt16 : Charts.PrimitivePlottableProtocol {
   public static var _primitivePlottableKind: Charts._PrimitivePlottableKind<Swift.UInt16> {
     get
   }
+  @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
   public typealias PrimitivePlottable = Swift.UInt16
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
@@ -1618,6 +2265,7 @@ extension Swift.UInt32 : Charts.PrimitivePlottableProtocol {
   public static var _primitivePlottableKind: Charts._PrimitivePlottableKind<Swift.UInt32> {
     get
   }
+  @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
   public typealias PrimitivePlottable = Swift.UInt32
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
@@ -1625,19 +2273,52 @@ extension Swift.UInt64 : Charts.PrimitivePlottableProtocol {
   public static var _primitivePlottableKind: Charts._PrimitivePlottableKind<Swift.UInt64> {
     get
   }
+  @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
   public typealias PrimitivePlottable = Swift.UInt64
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
-public struct RuleMark {
-  public init<Y>(xStart: CoreFoundation.CGFloat? = nil, xEnd: CoreFoundation.CGFloat? = nil, y: Charts.PlottableValue<Y>) where Y : Charts.Plottable
-  public init<X, Y>(xStart: Charts.PlottableValue<X>, xEnd: Charts.PlottableValue<X>, y: Charts.PlottableValue<Y>) where X : Charts.Plottable, Y : Charts.Plottable
-  public init<X>(xStart: Charts.PlottableValue<X>, xEnd: Charts.PlottableValue<X>, y: CoreFoundation.CGFloat? = nil) where X : Charts.Plottable
-  public init<X>(x: Charts.PlottableValue<X>, yStart: CoreFoundation.CGFloat? = nil, yEnd: CoreFoundation.CGFloat? = nil) where X : Charts.Plottable
-  public init<X, Y>(x: Charts.PlottableValue<X>, yStart: Charts.PlottableValue<Y>, yEnd: Charts.PlottableValue<Y>) where X : Charts.Plottable, Y : Charts.Plottable
-  public init<Y>(x: CoreFoundation.CGFloat? = nil, yStart: Charts.PlottableValue<Y>, yEnd: Charts.PlottableValue<Y>) where Y : Charts.Plottable
-  public static func _layoutChartContent(_ content: Charts.RuleMark, _ inputs: Charts._ChartContentLayoutInputs)
-  public static func _renderChartContent(_ content: Charts.RuleMark, _ inputs: Charts._ChartContentRenderInputs) -> Charts._ChartContentRenderOutputs
+@_Concurrency.MainActor @preconcurrency public struct RuleMark {
+  nonisolated public init<Y>(xStart: CoreFoundation.CGFloat? = nil, xEnd: CoreFoundation.CGFloat? = nil, y: Charts.PlottableValue<Y>) where Y : Charts.Plottable
+  nonisolated public init<X, Y>(xStart: Charts.PlottableValue<X>, xEnd: Charts.PlottableValue<X>, y: Charts.PlottableValue<Y>) where X : Charts.Plottable, Y : Charts.Plottable
+  nonisolated public init<X>(xStart: Charts.PlottableValue<X>, xEnd: Charts.PlottableValue<X>, y: CoreFoundation.CGFloat? = nil) where X : Charts.Plottable
+  nonisolated public init<X>(x: Charts.PlottableValue<X>, yStart: CoreFoundation.CGFloat? = nil, yEnd: CoreFoundation.CGFloat? = nil) where X : Charts.Plottable
+  nonisolated public init<X, Y>(x: Charts.PlottableValue<X>, yStart: Charts.PlottableValue<Y>, yEnd: Charts.PlottableValue<Y>) where X : Charts.Plottable, Y : Charts.Plottable
+  nonisolated public init<Y>(x: CoreFoundation.CGFloat? = nil, yStart: Charts.PlottableValue<Y>, yEnd: Charts.PlottableValue<Y>) where Y : Charts.Plottable
+  @_Concurrency.MainActor @preconcurrency public static func _layoutChartContent(_ content: Charts.RuleMark, _ inputs: Charts._ChartContentLayoutInputs)
+  @_Concurrency.MainActor @preconcurrency public static func _renderChartContent(_ content: Charts.RuleMark, _ inputs: Charts._ChartContentRenderInputs) -> Charts._ChartContentRenderOutputs
+  @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
   public typealias Body = Swift.Never
+}
+@available(iOS 18.0, macOS 15.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+public protocol _ChartContentModifier {
+  associatedtype Body : Charts._ChartContentModifier
+  var body: Self.Body { get }
+  static func _makeChartContent(modifier: SwiftUICore._GraphValue<Self>, inputs: Charts._ChartContentInputs, body: @escaping (Charts._ChartContentInputs) -> Charts._ChartContentOutputs) -> Charts._ChartContentOutputs
+  static func _chartContentCount(inputs: Charts._ChartContentInputs, body: @escaping (Charts._ChartContentInputs) -> Swift.Int?) -> Swift.Int?
+}
+@available(iOS 18.0, macOS 15.0, watchOS 11.0, tvOS 18.0, *)
+extension Charts._ChartContentModifier {
+  public static func _makeChartContent(modifier: SwiftUICore._GraphValue<Self>, inputs: Charts._ChartContentInputs, body: @escaping (Charts._ChartContentInputs) -> Charts._ChartContentOutputs) -> Charts._ChartContentOutputs
+  public static func _chartContentCount(inputs: Charts._ChartContentInputs, body: @escaping (Charts._ChartContentInputs) -> Swift.Int?) -> Swift.Int?
+}
+@available(iOS 18.0, macOS 15.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+extension Swift.Never : Charts._ChartContentModifier {
+}
+@available(iOS 18.0, macOS 15.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+extension Charts.ChartModifiedContent : Charts.ChartContent where Content : Charts.ChartContent, Modifier : Charts._ChartContentModifier {
+  @usableFromInline
+  @_Concurrency.MainActor @preconcurrency internal var body: Swift.Never {
+    get
+  }
+  @usableFromInline
+  @_Concurrency.MainActor @preconcurrency internal static func _makeChartContent(content: SwiftUICore._GraphValue<Charts.ChartModifiedContent<Content, Modifier>>, inputs: Charts._ChartContentInputs) -> Charts._ChartContentOutputs
+  @usableFromInline
+  @_Concurrency.MainActor @preconcurrency internal static func _chartContentCount(inputs: Charts._ChartContentInputs) -> Swift.Int?
+}
+@available(iOS 18.0, macOS 15.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+extension Charts.ChartContent {
+  @usableFromInline
+  @_Concurrency.MainActor @preconcurrency internal func modifier<M>(_ modifier: M) -> Charts.ChartModifiedContent<Self, M> where M : Charts._ChartContentModifier
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 @_typeEraser(AnyAxisMark) public protocol AxisMark {
@@ -1662,26 +2343,34 @@ extension Swift.Never : Charts.AxisMark {
 @frozen public struct AnyAxisMark : Charts.AxisMark {
   @usableFromInline
   internal let storage: any Charts.AxisMark
-  @inlinable public init(_ content: any Charts.AxisMark) {
+  @inlinable nonisolated public init(_ content: any Charts.AxisMark) {
         storage = content
     }
-  @inlinable public init(erasing content: some AxisMark) {
+  @inlinable nonisolated public init(erasing content: some AxisMark) {
         self.init(content)
     }
   public static func _layoutAxisMark(_ content: Charts.AnyAxisMark, _ inputs: Charts._AxisMarkLayoutInputs)
   public static func _renderAxisMark(_ content: Charts.AnyAxisMark, _ inputs: Charts._AxisMarkRenderInputs) -> Charts._AxisMarkRenderOutputs
 }
+#if compiler(>=5.3) && $NoncopyableGenerics
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 extension Swift.Optional : Charts.AxisMark where Wrapped : Charts.AxisMark {
   public static func _layoutAxisMark(_ content: Wrapped?, _ inputs: Charts._AxisMarkLayoutInputs)
   public static func _renderAxisMark(_ content: Wrapped?, _ inputs: Charts._AxisMarkRenderInputs) -> Charts._AxisMarkRenderOutputs
 }
+#else
+@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
+extension Swift.Optional : Charts.AxisMark where Wrapped : Charts.AxisMark {
+  public static func _layoutAxisMark(_ content: Wrapped?, _ inputs: Charts._AxisMarkLayoutInputs)
+  public static func _renderAxisMark(_ content: Wrapped?, _ inputs: Charts._AxisMarkRenderInputs) -> Charts._AxisMarkRenderOutputs
+}
+#endif
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 extension Charts.BuilderEmpty : Charts.AxisMark {
   @usableFromInline
-  internal static func _layoutAxisMark(_: Charts.BuilderEmpty, _: Charts._AxisMarkLayoutInputs)
+  @_Concurrency.MainActor @preconcurrency internal static func _layoutAxisMark(_: Charts.BuilderEmpty, _: Charts._AxisMarkLayoutInputs)
   @usableFromInline
-  internal static func _renderAxisMark(_: Charts.BuilderEmpty, _: Charts._AxisMarkRenderInputs) -> Charts._AxisMarkRenderOutputs
+  @_Concurrency.MainActor @preconcurrency internal static func _renderAxisMark(_: Charts.BuilderEmpty, _: Charts._AxisMarkRenderInputs) -> Charts._AxisMarkRenderOutputs
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 extension Charts.BuilderConditional : Charts.AxisMark where TrueContent : Charts.AxisMark, FalseContent : Charts.AxisMark {
@@ -1689,29 +2378,63 @@ extension Charts.BuilderConditional : Charts.AxisMark where TrueContent : Charts
   public static func _renderAxisMark(_ content: Charts.BuilderConditional<TrueContent, FalseContent>, _ inputs: Charts._AxisMarkRenderInputs) -> Charts._AxisMarkRenderOutputs
 }
 @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
+extension Charts.ChartAxisContent : Swift.Sendable {}
+@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
+extension Charts.Chart : Swift.Sendable {}
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 extension Charts.SectorMark : Charts.ChartContent {}
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
+extension Charts.SectorMark : Swift.Sendable {}
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 extension Charts.MarkDimension : Swift.Sendable {}
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
+extension Charts.MarkDimension : Swift.BitwiseCopyable {}
+@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+extension Charts.FunctionAreaPlotContent : Charts.ChartContent {}
+@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+extension Charts.FunctionAreaPlotContent : Swift.Sendable {}
+@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+extension Charts.VectorizedAreaPlotContent : Swift.Sendable {}
+@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+extension Charts.VectorizedRectanglePlotContent : Swift.Sendable {}
+@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 extension Charts.MarkStackingMethod : Swift.Sendable {}
+@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
+extension Charts.MarkStackingMethod : Swift.BitwiseCopyable {}
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 extension Charts.MarkStackingMethod.Storage : Swift.Sendable {}
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
+extension Charts.MarkStackingMethod.Storage : Swift.BitwiseCopyable {}
+@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 extension Charts.MarkDimension.Storage : Swift.Sendable {}
+@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
+extension Charts.MarkDimension.Storage : Swift.BitwiseCopyable {}
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 extension Charts.InterpolationMethod : Swift.Sendable {}
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
+extension Charts.InterpolationMethod : Swift.BitwiseCopyable {}
+@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 extension Charts.InterpolationMethod.Storage : Swift.Sendable {}
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
+extension Charts.InterpolationMethod.Storage : Swift.BitwiseCopyable {}
+@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 extension Charts.AreaMark : Charts.ChartContent {}
+@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
+extension Charts.AreaMark : Swift.Sendable {}
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 extension Charts.DateBins : Swift.Collection {}
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 extension Charts.DateBins : Swift.Equatable {}
+@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+extension Charts.VectorizedBarPlotContent : Swift.Sendable {}
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 extension Charts.BuilderEmpty : Swift.Sendable {}
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
+extension Charts.BuilderEmpty : Swift.BitwiseCopyable {}
+@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 extension Charts.AnyChartContent : Charts.ChartContent {}
+@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
+extension Charts.AnyChartContent : Swift.Sendable {}
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 extension Charts.NumberBins : Swift.Collection {}
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
@@ -1719,12 +2442,38 @@ extension Charts.NumberBins : Swift.Equatable {}
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 extension Charts.LineMark : Charts.ChartContent {}
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
+extension Charts.LineMark : Swift.Sendable {}
+@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
+extension Charts.ChartPlotContent : Swift.Sendable {}
+@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+extension Charts.VectorizedPointPlotContent : Swift.Sendable {}
+@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 extension Charts.BarMark : Charts.ChartContent {}
+@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
+extension Charts.BarMark : Swift.Sendable {}
+@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+extension Charts.VectorizedRulePlotContent : Swift.Sendable {}
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 extension Charts.RectangleMark : Charts.ChartContent {}
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
+extension Charts.RectangleMark : Swift.Sendable {}
+@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+extension Charts.VectorizedSectorPlotContent : Swift.Sendable {}
+@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+extension Charts.FunctionLinePlotContent : Charts.ChartContent {}
+@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+extension Charts.FunctionLinePlotContent : Swift.Sendable {}
+@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+extension Charts.VectorizedLinePlotContent : Swift.Sendable {}
+@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 extension Charts.PointMark : Charts.ChartContent {}
+@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
+extension Charts.PointMark : Swift.Sendable {}
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 extension Charts.Plot : Charts.ChartContent {}
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
+extension Charts.Plot : Swift.Sendable {}
+@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 extension Charts.RuleMark : Charts.ChartContent {}
+@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
+extension Charts.RuleMark : Swift.Sendable {}

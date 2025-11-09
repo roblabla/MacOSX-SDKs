@@ -1,13 +1,18 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.10 (swiftlang-5.10.0.12.5 clang-1500.3.9.1.1)
-// swift-module-flags: -target arm64e-apple-ios17.5-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-bare-slash-regex -user-module-version 457.15.4.5 -module-name PencilKit
+// swift-compiler-version: Apple Swift version 6.0 effective-5.10 (swiftlang-6.0.0.7.24 clang-1600.0.25.1)
+// swift-module-flags: -target arm64e-apple-ios18.0-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-bare-slash-regex -user-module-version 511 -module-name PencilKit
+import CoreGraphics
 import DeveloperToolsSupport
 import Foundation
+import MetalKit
 @_exported import PencilKit
 import Swift
+import UIKit.UIGestureRecognizerSubclass
+import UIKit
 import _Concurrency
 import _StringProcessing
 import _SwiftConcurrencyShims
+import simd
 @available(iOS 14.0, macOS 11.0, *)
 public struct PKStroke {
   public init(ink: PencilKit.PKInk, path: PencilKit.PKStrokePath, transform: CoreFoundation.CGAffineTransform = .identity, mask: UIKit.UIBezierPath? = nil)
@@ -135,6 +140,14 @@ extension PencilKit.PKStrokePoint : Swift._ObjectiveCBridgeable {
   public static func _conditionallyBridgeFromObjectiveC(_ source: PencilKit.PKStrokePoint._ObjectiveCType, result: inout PencilKit.PKStrokePoint?) -> Swift.Bool
   public static func _unconditionallyBridgeFromObjectiveC(_ source: PencilKit.PKStrokePoint._ObjectiveCType?) -> PencilKit.PKStrokePoint
 }
+@available(iOS 18.0, visionOS 2.0, *)
+extension PencilKit.PKToolPickerEraserItem {
+  convenience public init(type: PencilKit.PKEraserTool.EraserType)
+  convenience public init(type: PencilKit.PKEraserTool.EraserType, width: CoreFoundation.CGFloat)
+  public var eraserTool: PencilKit.PKEraserTool {
+    get
+  }
+}
 @available(iOS 13.0, macOS 10.15, *)
 public struct PKDrawing {
   public init()
@@ -206,7 +219,9 @@ extension PencilKit.PKInk : Swift._ObjectiveCBridgeable {
 @available(iOS 14.0, macOS 11.0, *)
 extension PencilKit.PKStrokePath.InterpolatedSlice : Swift.Sequence, Swift.IteratorProtocol {
   public mutating func next() -> PencilKit.PKStrokePoint?
+  @available(iOS 14.0, macOS 11.0, *)
   public typealias Element = PencilKit.PKStrokePoint
+  @available(iOS 14.0, macOS 11.0, *)
   public typealias Iterator = PencilKit.PKStrokePath.InterpolatedSlice
 }
 @available(iOS 13.0, macOS 11.0, *)
@@ -235,6 +250,7 @@ public struct PKInkingTool : PencilKit.PKTool, Swift.Equatable {
       get
     }
     public init?(rawValue: Swift.String)
+    @available(iOS 13.0, macOS 11.0, *)
     public typealias RawValue = Swift.String
     public var rawValue: Swift.String {
       get
@@ -274,6 +290,31 @@ extension PencilKit.PKInkingTool : Swift._ObjectiveCBridgeable {
   public static func _conditionallyBridgeFromObjectiveC(_ source: PencilKit.PKInkingTool._ObjectiveCType, result: inout PencilKit.PKInkingTool?) -> Swift.Bool
   public static func _unconditionallyBridgeFromObjectiveC(_ source: PencilKit.PKInkingTool._ObjectiveCType?) -> PencilKit.PKInkingTool
 }
+@available(iOS 18.0, visionOS 2.0, *)
+extension PencilKit.PKToolPickerLassoItem {
+  public var lassoTool: PencilKit.PKLassoTool {
+    get
+  }
+}
+@available(iOS 18.0, visionOS 2.0, *)
+extension PencilKit.PKToolPickerCustomItem {
+  public var configuration: PencilKit.PKToolPickerCustomItem.Configuration {
+    get
+  }
+  convenience public init(configuration: PencilKit.PKToolPickerCustomItem.Configuration)
+  public struct Configuration {
+    public var identifier: Swift.String
+    public var name: Swift.String
+    public var imageProvider: ((PencilKit.PKToolPickerCustomItem) -> UIKit.UIImage)?
+    public var viewControllerProvider: ((PencilKit.PKToolPickerCustomItem) -> UIKit.UIViewController)?
+    public var defaultWidth: CoreFoundation.CGFloat
+    public var widthVariants: [CoreFoundation.CGFloat : UIKit.UIImage]
+    public var defaultColor: UIKit.UIColor
+    public var allowsColorSelection: Swift.Bool
+    public var toolAttributeControls: PencilKit.PKToolPickerCustomItem.ControlOptions
+    public init(identifier: Swift.String, name: Swift.String)
+  }
+}
 @available(iOS 13.0, macOS 11.0, *)
 public struct PKLassoTool : PencilKit.PKTool, Swift.Equatable {
   public init()
@@ -287,8 +328,17 @@ extension PencilKit.PKLassoTool : Swift._ObjectiveCBridgeable {
   public static func _conditionallyBridgeFromObjectiveC(_ source: PencilKit.PKLassoTool._ObjectiveCType, result: inout PencilKit.PKLassoTool?) -> Swift.Bool
   public static func _unconditionallyBridgeFromObjectiveC(_ source: PencilKit.PKLassoTool._ObjectiveCType?) -> PencilKit.PKLassoTool
 }
+@available(iOS 18.0, visionOS 2.0, *)
+extension PencilKit.PKToolPickerInkingItem {
+  convenience public init(type: PencilKit.PKInkingTool.InkType, color: UIKit.UIColor? = nil, width: CoreFoundation.CGFloat? = nil, identifier: Swift.String? = nil)
+  public var inkingTool: PencilKit.PKInkingTool {
+    get
+  }
+}
 @available(iOS 13.0, *)
 extension PencilKit.PKToolPicker {
+  @available(iOS, introduced: 13.0, deprecated: 18.0, message: "Use selectedToolItem instead.")
+  @available(visionOS, introduced: 1.0, deprecated: 2.0, message: "Use selectedToolItem instead.")
   public var selectedTool: any PencilKit.PKTool {
     get
     set
@@ -296,7 +346,7 @@ extension PencilKit.PKToolPicker {
 }
 @available(iOS 13.0, *)
 extension PencilKit.PKCanvasView {
-  @_Concurrency.MainActor(unsafe) public var tool: any PencilKit.PKTool {
+  @_Concurrency.MainActor @preconcurrency public var tool: any PencilKit.PKTool {
     get
     set
   }
@@ -333,8 +383,11 @@ public struct PKStrokePath : Swift.RandomAccessCollection {
   public subscript(index: PencilKit.PKStrokePath.Index) -> PencilKit.PKStrokePoint {
     get
   }
+  @available(iOS 14.0, macOS 11.0, *)
   public typealias Indices = Swift.Range<PencilKit.PKStrokePath.Index>
+  @available(iOS 14.0, macOS 11.0, *)
   public typealias Iterator = Swift.IndexingIterator<PencilKit.PKStrokePath>
+  @available(iOS 14.0, macOS 11.0, *)
   public typealias SubSequence = Swift.Slice<PencilKit.PKStrokePath>
 }
 @available(iOS 14.0, macOS 11.0, *)

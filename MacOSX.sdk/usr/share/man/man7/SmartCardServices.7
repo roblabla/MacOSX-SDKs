@@ -210,11 +210,11 @@ with value "John Appleseed" and an
 .Em RFC 822 Name
 with value "jappleseed@apple.com". The
 .Em formatString
-"$1-$2"
+"$2-$1"
 will join both values and the result will be
 .Em "jappleseed@apple.com-John Appleseed".
 This result will be compared to a directory attribute - in this case, the
-.Em dsAttrTypeNative:email
+.Em dsAttrTypeNative:longName
 field. When a match is found, the corresponding user is considered associated with the SmartCard.
 .Sh OFFLINE SMARTCARD LOGIN VIA KERBEROS CACHING
 In environments where macOS clients may not always be able to reach Directory Servers, cached SmartCard login support is possible via Kerberos caching. This configuration allows users with network accounts to authenticate via SmartCard when operating outside the enterprise environment. Note: Initial account setup requires machine binding and access to the directory server.

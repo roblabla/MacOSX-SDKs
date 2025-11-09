@@ -7,6 +7,4 @@
 
 #import <Foundation/Foundation.h>
 
-#if !TARGET_OS_TV
 #import <SensitiveContentAnalysis/SCSensitivityAnalyzer.h>
-#endif // !TARGET_OS_TV

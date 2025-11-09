@@ -3,7 +3,7 @@
 //  NSTextElement.h
 //  Text Kit
 //
-//  Copyright (c) 2018-2021, Apple Inc. All rights reserved.
+//  Copyright (c) 2018-2024, Apple Inc. All rights reserved.
 //
 
 
@@ -15,7 +15,7 @@
 NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 // NSTextElement is an abstract base class for representing the smallest text layout unit typically paragraphs, tables, or attachments. A text element is associated with an NSTextContentManager.
-API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos)
+API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), visionos(1.0)) API_UNAVAILABLE(watchos)
 @interface NSTextElement : NSObject
 #pragma mark Initialization
 - (instancetype)initWithTextContentManager:(nullable NSTextContentManager *)textContentManager NS_DESIGNATED_INITIALIZER;
@@ -30,19 +30,19 @@ API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos)
 #pragma mark Child Elements
 // A concrete NSTextElement subclass can be structured in a tree. An element can have zero or more child elements. This section provides interface for supporting such a configuration.
 // Returns an array of children. The array can contain zero or more elements.
-@property (readonly, copy) NSArray<__kindof NSTextElement *> *childElements API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0)) API_UNAVAILABLE(watchos);
+@property (readonly, copy) NSArray<__kindof NSTextElement *> *childElements API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 // Returns the parent element if the receiver is a child.
-@property (nullable, readonly, weak) __kindof NSTextElement *parentElement API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0)) API_UNAVAILABLE(watchos);
+@property (nullable, readonly, weak) __kindof NSTextElement *parentElement API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 // Returns YES if it is an element represented in text layout. It is enumerated by NSTextContentManager.
-@property (readonly) BOOL isRepresentedElement API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0)) API_UNAVAILABLE(watchos);
+@property (readonly) BOOL isRepresentedElement API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 @end
 
 #pragma mark NSTextParagraph
 // NSTextParagraph represents a single paragraph backed by NSAttributedString as the contents.
-API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos)
+API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), visionos(1.0)) API_UNAVAILABLE(watchos)
 @interface NSTextParagraph : NSTextElement
 #pragma mark Initialization
 - (instancetype)initWithAttributedString:(nullable NSAttributedString *)attributedString NS_DESIGNATED_INITIALIZER;

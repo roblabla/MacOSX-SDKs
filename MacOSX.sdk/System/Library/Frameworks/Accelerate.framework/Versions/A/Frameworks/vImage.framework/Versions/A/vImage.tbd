@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-maccatalyst, 
                    arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vImage.framework/Versions/A/vImage'
-current-version: 587.100.1
+current-version: 601.1.1
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-maccatalyst, 
                        arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
@@ -264,8 +264,8 @@ exports:
                        _vImageLookupTable_Planar8toPlanar16, _vImageLookupTable_Planar8toPlanar24, 
                        _vImageLookupTable_Planar8toPlanar48, _vImageLookupTable_Planar8toPlanar96, 
                        _vImageLookupTable_Planar8toPlanarF, _vImageLookupTable_PlanarFtoPlanar8, 
-                       _vImageMapping_CreateFromMap_Image8U, _vImageMapping_Release, 
-                       _vImageMatrixMultiply_ARGB8888, _vImageMatrixMultiply_ARGB8888ToPlanar8, 
+                       _vImageMapping_CreateFromImageMap_Image8U, _vImageMapping_CreateFromMap_Image8U, 
+                       _vImageMapping_Release, _vImageMatrixMultiply_ARGB8888, _vImageMatrixMultiply_ARGB8888ToPlanar8, 
                        _vImageMatrixMultiply_ARGBFFFF, _vImageMatrixMultiply_ARGBFFFFToPlanarF, 
                        _vImageMatrixMultiply_Planar16S, _vImageMatrixMultiply_Planar8, 
                        _vImageMatrixMultiply_PlanarF, _vImageMax_ARGB8888, _vImageMax_ARGBFFFF, 

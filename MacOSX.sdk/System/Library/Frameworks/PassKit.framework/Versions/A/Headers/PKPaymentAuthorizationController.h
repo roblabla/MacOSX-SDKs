@@ -141,7 +141,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 // PKPaymentAuthorizationController prompts the user to authorize a PKPaymentRequest, funding the
 // payment amount with a valid payment card.
-API_AVAILABLE(macos(11.0), ios(10.0), watchos(3.0))
+API_AVAILABLE(macos(11.0), ios(10.0), watchos(3.0)) API_UNAVAILABLE(tvos)
 @interface PKPaymentAuthorizationController : NSObject
 
 // Determine whether this device can process payment requests.
@@ -188,7 +188,7 @@ API_AVAILABLE(macos(11.0), ios(10.0), watchos(3.0))
                               capabilities:(PKMerchantCapability)capabilties NS_SWIFT_NAME(supportsDisbursements(using:capabilities:)) API_AVAILABLE(ios(17.0)) API_UNAVAILABLE(macos, watchos, tvos);
 
 // Initialize the controller with a request to send money to a user.
-- (instancetype)initWithDisbursementRequest:(PKDisbursementRequest *)request API_AVAILABLE(ios(17.0)) API_UNAVAILABLE(macos, watchos, tvos);
+- (instancetype)initWithDisbursementRequest:(PKDisbursementRequest *)request API_AVAILABLE(ios(17.0), macos(15.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(tvos);
 
 @end
 

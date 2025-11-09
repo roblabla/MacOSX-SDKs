@@ -7,7 +7,7 @@
 
 #import <TargetConditionals.h>
 #import <os/availability.h>
-#if TARGET_OS_IPHONE && __has_include("OpenGLES/gltypes.h")
+#if TARGET_OS_IPHONE && __has_include(<OpenGLES/gltypes.h>)
 #import <OpenGLES/gltypes.h>
 #else // !TARGET_OS_IPHONE
 #import <OpenGL/gltypes.h>
@@ -20,7 +20,7 @@
 	#define GLK_EXTERN extern 
 #endif
 
-#if TARGET_OS_IPHONE && __has_include("OpenGLES/OpenGLESAvailability.h")
+#if TARGET_OS_IPHONE && __has_include(<OpenGLES/OpenGLESAvailability.h>)
 #import <OpenGLES/OpenGLESAvailability.h>
 #define OPENGL_DEPRECATED(...)
 #else

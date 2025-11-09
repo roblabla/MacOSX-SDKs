@@ -21,26 +21,14 @@ CK_SUBCLASSING_DEPRECATED // should not be subclassed, or Sendable may no longer
 - (instancetype)init NS_UNAVAILABLE;
 + (instancetype)new NS_UNAVAILABLE;
 
-/*! This is the @c lookupInfo you passed in to @c CKDiscoverUserIdentitiesOperation or @c CKFetchShareParticipantsOperation */
-@property (nullable, readonly, copy) CKUserIdentityLookupInfo *lookupInfo;
-
-@property (nullable, readonly, copy) NSPersonNameComponents *nameComponents;
 @property (nullable, readonly, copy) CKRecordID *userRecordID;
 
-/*! @abstract Link to the Contacts database.
- *
- *  @discussion Identities discovered via @c CKDiscoverAllUserIdentitiesOperation correspond to entries in the local Contacts database.  These identities will have @c contactIdentifiers filled out, which your app may use to get additional information about the contacts that were discovered.  Multiple @c contactIdentifiers may exist for a single discovered user, as multiple contacts may contain the same email addresses or phone numbers.
- *
- *  @return individual, non-unified contacts.
- *
- *  @discussion To transform these identifiers into an array of unified contact identifiers, pass a @c CNContact.predicateForContacts(withIdentifiers:) predicate into @c CNContactStore.unifiedContacts(matching:keysToFetch:)
- *
- *  @see Contacts.framework and CNContact.identifier
- */
-@property (readonly, copy) NSArray<NSString *> *contactIdentifiers API_AVAILABLE(macos(10.13), ios(11.0), watchos(4.0)) API_UNAVAILABLE(tvos);
-
-
+/*! This is the @c lookupInfo you passed in to @c CKDiscoverUserIdentitiesOperation or @c CKFetchShareParticipantsOperation */
+@property (nullable, readonly, copy) CKUserIdentityLookupInfo *lookupInfo;
+@property (nullable, readonly, copy) NSPersonNameComponents *nameComponents;
 @property (readonly, assign) BOOL hasiCloudAccount;
+
+@property (readonly, copy) NSArray<NSString *> *contactIdentifiers API_DEPRECATED("No longer supported. Please see Sharing CloudKit Data with Other iCloud Users.", macos(10.13, 15.0), ios(11.0, 18.0), watchos(4.0, 11.0));
 
 @end
 

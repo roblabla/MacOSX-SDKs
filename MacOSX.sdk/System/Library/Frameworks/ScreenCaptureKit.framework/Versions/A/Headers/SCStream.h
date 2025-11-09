@@ -10,6 +10,7 @@
 #import <ScreenCaptureKit/SCShareableContent.h>
 #import <CoreMedia/CMSampleBuffer.h>
 #import <CoreMedia/CMSync.h>
+#import <ScreenCaptureKit/SCRecordingOutput.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -19,12 +20,15 @@ NS_ASSUME_NONNULL_BEGIN
  @discussion
     SCStreamOutputTypeScreen is a screen capture sample buffer. This sample buffer that is wrapping a CMSampleBuffer that is backed by an IOSurface. The width and height of the sample buffer is what is defined in the SCStreamConfiguration for width and height. The sample buffer will be called back on the provided queue when adding a SCStreamOutput. The pixel format of the sample buffer will be what is defined in the SCStreamConfiguration. In the case of multiple window capture, the width and height will be that of the display passed in for the filter. The background color of multiwindow sample buffers will be default black and can be set through the SCStreamConfiguration.
  @constant SCStreamOutputTypeAudio audio sample output type.
+ @constant SCStreamOutputTypeMicrophone microphone audio sample output type.
  @discussion
- SCStreamOutputTypeAudio is a audio capture sample buffer. This sample buffer that is wrapping a audio buffer list. The format of the audio buffer is based on sampleRate and channelCount set in SCStreamConfiguration.
+ SCStreamOutputTypeAudio is an audio capture sample buffer. This sample buffer that is wrapping an audio buffer list. The format of the audio buffer is based on sampleRate and channelCount set in SCStreamConfiguration.
+ SCStreamOutputTypeMicrophone is a microphone audio capture sample buffer. This sample buffer that is wrapping an audio buffer list. The format of the audio buffer is based on the selected microphone capture device's native format.
 */
 typedef NS_ENUM(NSInteger, SCStreamOutputType) {
     SCStreamOutputTypeScreen,
-    SCStreamOutputTypeAudio API_AVAILABLE(macos(13.0))
+    SCStreamOutputTypeAudio API_AVAILABLE(macos(13.0)),
+    SCStreamOutputTypeMicrophone API_AVAILABLE(macos(15.0))
 };
 
 /*!
@@ -68,13 +72,26 @@ typedef NS_ENUM(NSInteger, SCPresenterOverlayAlertSetting) {
 typedef NS_ENUM(NSInteger, SCStreamType) {
     SCStreamTypeWindow,
     SCStreamTypeDisplay
-};
+} API_DEPRECATED("Use SCShareableContentStyle instead", macos(14.0, 15.0));
 
 typedef NS_ENUM(NSInteger, SCCaptureResolutionType) {
     SCCaptureResolutionAutomatic,
     SCCaptureResolutionBest,
     SCCaptureResolutionNominal
 };
+
+/*!
+ @typedef SCCaptureDynamicRange
+ @abstract SCCaptureDynamicRange client can specify whether the captured screen output will be SDR or HDR. When SCCaptureDynamicRangeHDR is set, the output screen capture buffer pixel format and color space will be updated in order to support HDR.
+ @constant SCCaptureDynamicRangeSDR by default, screen capture output will be SDR.
+ @constant SCCaptureDynamicRangeHDRLocalDisplay by default, screen capture output will be HDR, optimized for rendering on the local captured display
+ @constant SCCaptureDynamicRangeHDRCanonicalDisplay by default, screen capture output will be HDR, optimized for rendering on any HDR display
+*/
+typedef NS_ENUM(NSInteger, SCCaptureDynamicRange) {
+    SCCaptureDynamicRangeSDR,
+    SCCaptureDynamicRangeHDRLocalDisplay,
+    SCCaptureDynamicRangeHDRCanonicalDisplay
+} API_AVAILABLE(macos(15.0));
 
 /*!
  @abstract SCContentFilter
@@ -90,16 +107,16 @@ API_AVAILABLE(macos(12.3))
 /*!
  @abstract style of stream
  */
-@property (nonatomic, readonly) SCShareableContentStyle style;
+@property (nonatomic, readonly) SCShareableContentStyle style API_AVAILABLE(macos(14.0));
 /*!
  @abstract Pixel to points scaling factor
  */
-@property (nonatomic, readonly) float pointPixelScale;
+@property (nonatomic, readonly) float pointPixelScale API_AVAILABLE(macos(14.0));
 
 /*!
  @abstract Size and location of content in points
  */
-@property (nonatomic, readonly) CGRect contentRect;
+@property (nonatomic, readonly) CGRect contentRect API_AVAILABLE(macos(14.0));
 
 /*!
  @abstract To include menu bar as part of the capture. This property has no effect for the desktop independent window filter. For content filters created with initWithDisplay:excluding, the default value is YES. Display excluding content filters contains the desktop and dock. For content filters created with initWithDisplay:including, the default value is NO. Display including content filters do not contain the desktop and dock
@@ -155,6 +172,22 @@ API_AVAILABLE(macos(12.3))
 */
 API_AVAILABLE(macos(12.3))
 @interface SCStreamConfiguration : NSObject
+
+/*!
+ @typedef SCStreamConfigurationPreset
+ @abstract Client can use SCStreamConfigurationPreset to create SCStreamConfiguration with suggested values of properties for various use cases
+ @constant SCStreamConfigurationPresetCaptureHDRLocalDisplay using this preset will help client set suggested values for captureDynamicRange, pixelFormat, ColorSpace, colorMatrix in order to get HDR capture output with SCStream, optimized for rendering on the local captured display.
+ @constant SCStreamConfigurationPresetCaptureHDRCanonicalDisplay using this preset will help client set suggested values for captureDynamicRange, pixelFormat, ColorSpace, colorMatrix in order to get HDR capture output with SCStream, optimized for rendering on canonical HDR display
+ @constant SCStreamConfigurationPresetCaptureHDRScreenshotLocalDisplay using this preset will help client set suggested values for captureDynamicRange, pixelFormat, ColorSpace in order to get HDR screenshot with SCScreenshotManager, optimized for rendering on the local captured display.
+ @constant SCStreamConfigurationPresetCaptureHDRScreenshotCanonicalDisplay using this preset will help client set suggested values for captureDynamicRange, pixelFormat, ColorSpace in order to get HDR screenshot with SCScreenshotManager, optimized for rendering on canonical HDR display
+*/
+typedef NS_ENUM(NSInteger, SCStreamConfigurationPreset) {
+    SCStreamConfigurationPresetCaptureHDRStreamLocalDisplay,
+    SCStreamConfigurationPresetCaptureHDRStreamCanonicalDisplay,
+    SCStreamConfigurationPresetCaptureHDRScreenshotLocalDisplay,
+    SCStreamConfigurationPresetCaptureHDRScreenshotCanonicalDisplay
+} NS_SWIFT_NAME(SCStreamConfiguration.Preset) API_AVAILABLE(macos(15.0));
+
 /*!
  @abstract SCStreamProperty for output width as measured in pixels. Default is set to 1920.
  */
@@ -166,7 +199,7 @@ API_AVAILABLE(macos(12.3))
 @property(nonatomic, assign) size_t height;
 
 /*!
- @abstract SCStreamProperty that specifies the desired minimum time in seconds between frame updates, allowing you to throttle the rate at which updates are received. The default value is 0, meaning that updates are not throttled.
+ @abstract SCStreamProperty that specifies the desired minimum time in seconds between frame updates, allowing you to throttle the rate at which updates are received. The default value is 1/60, meaning that updates are coming in at or up to 60fps. Set this to kCMTimeZero to capture at display's native refresh rate.
  */
 @property(nonatomic, assign) CMTime minimumFrameInterval;
 
@@ -176,6 +209,8 @@ API_AVAILABLE(macos(12.3))
  'l10r': Packed Little Endian ARGB2101010
  '420v': 2-plane "video" range YCbCr 4:2:0
  '420f': 2-plane "full" range YCbCr 4:2:0
+ 'xf44': 2 plane "full" range YCbCr10 4:4:4
+ 'RGhA': 64 bit RGBA IEEE half-precision float, 16-bit little-endian
  See https://developer.apple.com/documentation/coregraphics/1455170-cgdisplaystreamcreate
  */
 @property(nonatomic, assign) OSType pixelFormat;
@@ -199,6 +234,11 @@ API_AVAILABLE(macos(12.3))
  @abstract SCStreamProperty that specifies whether the cursor should appear in the stream.  By default the cursor is visible.
  */
 @property(nonatomic, assign) BOOL showsCursor;
+
+/*!
+ @abstract SCStreamProperty that specifies whether to draw a circle around the cursor click, default is NO. This property will not be affected by showsCursor. This property currently applies when pixelFormat is set to BGRA.
+ */
+@property (nonatomic, assign) BOOL showMouseClicks API_AVAILABLE(macos(15.0));
 
 /*!
  @abstract SCStreamProperty for background color. By default the background color is clear.
@@ -295,6 +335,29 @@ API_AVAILABLE(macos(12.3))
  @abstract SCStreamProperty to show the child windows in display bound windows and applications sharing.  Child windows are included by default.
  */
 @property(nonatomic, assign) BOOL includeChildWindows API_AVAILABLE(macos(14.2));
+
+/*!
+ @abstract SCStreamProperty that specifies whether the microphone audio will be captured.  By default microphone is not captured.
+ */
+@property(nonatomic, assign) BOOL captureMicrophone API_AVAILABLE(macos(15.0));
+
+/*!
+ @abstract SCStreamProperty that specifies which microphone device to capture. This deviceID is the uniqueID from AVCaptureDevice for the microphone. System Default Microphone will be used if not specified by client.
+ */
+@property(nonatomic, strong, nullable) NSString *microphoneCaptureDeviceID API_AVAILABLE(macos(15.0));
+
+/*!
+ @abstract SCStreamProperty client will choose captureDynamicRange between SCCaptureDynamicRangeSDR, SCCaptureDynamicRangeHDRLocalDisplay,  SCCaptureDynamicRangeHDRCanonicalDisplay. By default, the stream is capturing with SCCaptureDynamicRangeSDR. HDR capture is only supported with Apple Silicon Mac, setting this property on Intel Mac will have no effect. HDR recording is not support yet, adding a recording output to a stream with SCCaptureDynamicRangeHDR set will fail.
+ */
+@property(nonatomic, assign) SCCaptureDynamicRange captureDynamicRange API_AVAILABLE(macos(15.0));
+
+/*!
+ @method streamConfigurationWithPreset:
+ @abstract Returns an instance of SCStreamConfiguration corresponding to the given preset
+ @param preset The enum identifier for the desired preset
+ @discussion The SCStreamConfiguration of the returned object can be used as a guide for creating and configuring an SCStream. If all the suggested properties are respected in creating the SCStream, the resulting capture result will conform to the criteria implied by the preset.
+ */
++ (instancetype)streamConfigurationWithPreset:(SCStreamConfigurationPreset)preset API_AVAILABLE(macos(15.0));
 
 @end
 
@@ -432,6 +495,24 @@ API_AVAILABLE(macos(12.3))
 */
 - (void)stopCaptureWithCompletionHandler:(nullable void (^)(NSError *_Nullable error))completionHandler;
 
+/*!
+ @method addRecordingOutput
+ @abstract Add a SCRecordingOutput to the SCStream. Starts Recording if stream is already capturing, otherwise recording will be started after capture starts. Recording will be written into a file url specified in SCRecordingOutput. Media(Screen/Audio/Microphone) to be recorded will be based on the SCStream configuration.
+ @param recordingOutput an SCRecordingOutput that including configuration of recording, and delegate for recording event.
+ @param error the error pertaining to the add recording output
+ @discussion Returns a BOOL denoting if the add was successful. Currently only support one recordingOutput on a stream. To guarantee the first sample captured in the stream to be written into the recording file, client need to add recordingOutput before startCapture. Delegate for recordingDidStart will be notified in SCRecordingOutput or recordingDidFinishWithError will be notified with an error associated if recording failed to start.
+*/
+- (BOOL)addRecordingOutput:(SCRecordingOutput *)recordingOutput error:(NSError **)error NS_SWIFT_NAME(addRecordingOutput(_:)) API_AVAILABLE(macos(15.0));
+
+/*!
+ @method removeRecordingOutput
+ @abstract Remove SCRecordingOutput from the SCStream. Stops Recording if the stream is currently recording.
+ @param recordingOutput an SCRecordingOutput that including configuration of recording, and delegate for recording event.
+ @param error the error pertaining to the remove recording output
+ @discussion Returns a BOOL denoting if the remove was successful. Delegate for recordingDidFinishWithError will be notified in SCRecordingOutput, associate with an error code if recording failed to finish written to the file. If stopCapture is called without removing recordingOutput, recording will be stopped and finish writting into the file. In case client update the stream configuration during recording, recording will be stopped as well.
+*/
+- (BOOL)removeRecordingOutput:(SCRecordingOutput *)recordingOutput error:(NSError **)error NS_SWIFT_NAME(removeRecordingOutput(_:)) API_AVAILABLE(macos(15.0));
+
 @end
 
 API_AVAILABLE(macos(12.3))
@@ -459,13 +540,6 @@ API_AVAILABLE(macos(12.3))
  @discussion notifies the delegate that the stream has stopped and the error associated with it
 */
 - (void)stream:(SCStream *)stream didStopWithError:(NSError *)error;
-
-/*!
- @abstract userDidStopStream:
- @param stream the SCStream object
- @discussion notifies the delegate that the stream was stopped by the user from the control center module
- */
-- (void)userDidStopStream:(SCStream *)stream NS_SWIFT_NAME(userDidStopStream(_:)) API_AVAILABLE(macos(14.4));
 
 /*!
  @abstract outputVideoEffectDidStartForStream:

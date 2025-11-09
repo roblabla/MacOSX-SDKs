@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
  @class     HKVerifiableClinicalRecordSubject
  @abstract  An NSObject that represents a verifiable clinical record subject.
  */
-HK_EXTERN API_AVAILABLE(ios(15.0), macCatalyst(15.0), macos(13.0)) __WATCHOS_PROHIBITED
+HK_EXTERN NS_SWIFT_SENDABLE API_AVAILABLE(ios(15.0), macCatalyst(15.0), macos(13.0)) __WATCHOS_PROHIBITED
 @interface HKVerifiableClinicalRecordSubject : NSObject <NSSecureCoding, NSCopying>
 
 /*!

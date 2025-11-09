@@ -119,6 +119,10 @@
 				}
 				@/textblock</pre>
 */
+
+#ifndef DISC_RECORDING_DR_ERASE
+#define DISC_RECORDING_DR_ERASE
+
 @interface DRErase : NSObject 
 { 
 @private
@@ -248,3 +252,4 @@ extern NSString* const DREraseTypeComplete		AVAILABLE_MAC_OS_X_VERSION_10_2_AND_
 */
 extern NSString* const DREraseStatusChangedNotification	AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
+#endif // DISC_RECORDING_DR_ERASE

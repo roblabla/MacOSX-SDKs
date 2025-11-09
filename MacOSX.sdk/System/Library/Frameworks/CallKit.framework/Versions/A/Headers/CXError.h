@@ -29,6 +29,7 @@ typedef NS_ERROR_ENUM(CXErrorDomainIncomingCall, CXErrorCodeIncomingCallError) {
     CXErrorCodeIncomingCallErrorFilteredByDoNotDisturb = 3,
     CXErrorCodeIncomingCallErrorFilteredByBlockList = 4,
     CXErrorCodeIncomingCallErrorFilteredDuringRestrictedSharingMode = 5,
+    CXErrorCodeIncomingCallErrorCallIsProtected = 6,
 } API_AVAILABLE(ios(10.0), macCatalyst(13.0), watchos(9.0))  API_UNAVAILABLE(macos, tvos);
 
 typedef NS_ERROR_ENUM(CXErrorDomainRequestTransaction, CXErrorCodeRequestTransactionError) {
@@ -40,6 +41,7 @@ typedef NS_ERROR_ENUM(CXErrorDomainRequestTransaction, CXErrorCodeRequestTransac
     CXErrorCodeRequestTransactionErrorCallUUIDAlreadyExists = 5,
     CXErrorCodeRequestTransactionErrorInvalidAction = 6,
     CXErrorCodeRequestTransactionErrorMaximumCallGroupsReached = 7,
+    CXErrorCodeRequestTransactionErrorCallIsProtected = 8,
 } API_AVAILABLE(ios(10.0), macCatalyst(13.0), watchos(9.0))  API_UNAVAILABLE(macos, tvos);
 
 typedef NS_ERROR_ENUM(CXErrorDomainCallDirectoryManager, CXErrorCodeCallDirectoryManagerError) {

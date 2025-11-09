@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/ProactiveSupport.framework/Versions/A/ProactiveSupport'
-current-version: 388
+current-version: 399
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -13,13 +13,16 @@ exports:
                        '_$s16ProactiveSupport14AsyncFIFOQueueC5asyncyyyyYaYbcFTj', 
                        '_$s16ProactiveSupport14AsyncFIFOQueueC5asyncyyyyYaYbcFTq', 
                        '_$s16ProactiveSupport14AsyncFIFOQueueC6cancelyyFTj', '_$s16ProactiveSupport14AsyncFIFOQueueC6cancelyyFTq', 
-                       '_$s16ProactiveSupport14AsyncFIFOQueueCACycfC', '_$s16ProactiveSupport14AsyncFIFOQueueCACycfCTj', 
-                       '_$s16ProactiveSupport14AsyncFIFOQueueCACycfCTq', '_$s16ProactiveSupport14AsyncFIFOQueueCACycfc', 
-                       '_$s16ProactiveSupport14AsyncFIFOQueueCMa', '_$s16ProactiveSupport14AsyncFIFOQueueCMm', 
-                       '_$s16ProactiveSupport14AsyncFIFOQueueCMn', '_$s16ProactiveSupport14AsyncFIFOQueueCMo', 
-                       '_$s16ProactiveSupport14AsyncFIFOQueueCMu', '_$s16ProactiveSupport14AsyncFIFOQueueCN', 
-                       '_$s16ProactiveSupport14AsyncFIFOQueueCScAAAMc', '_$s16ProactiveSupport14AsyncFIFOQueueCfD', 
-                       '_$s16ProactiveSupport14AsyncFIFOQueueCfd', '_$s16ProactiveSupport4TrieV10dictionaryACyxq_GSDySSq_G_tcfC', 
+                       '_$s16ProactiveSupport14AsyncFIFOQueueC8priorityACScPSg_tcfC', 
+                       '_$s16ProactiveSupport14AsyncFIFOQueueC8priorityACScPSg_tcfCTj', 
+                       '_$s16ProactiveSupport14AsyncFIFOQueueC8priorityACScPSg_tcfCTq', 
+                       '_$s16ProactiveSupport14AsyncFIFOQueueC8priorityACScPSg_tcfc', 
+                       '_$s16ProactiveSupport14AsyncFIFOQueueCACycfC', '_$s16ProactiveSupport14AsyncFIFOQueueCMa', 
+                       '_$s16ProactiveSupport14AsyncFIFOQueueCMm', '_$s16ProactiveSupport14AsyncFIFOQueueCMn', 
+                       '_$s16ProactiveSupport14AsyncFIFOQueueCMo', '_$s16ProactiveSupport14AsyncFIFOQueueCMu', 
+                       '_$s16ProactiveSupport14AsyncFIFOQueueCN', '_$s16ProactiveSupport14AsyncFIFOQueueCScAAAMc', 
+                       '_$s16ProactiveSupport14AsyncFIFOQueueCfD', '_$s16ProactiveSupport14AsyncFIFOQueueCfd', 
+                       '_$s16ProactiveSupport4TrieV10dictionaryACyxq_GSDySSq_G_tcfC', 
                        '_$s16ProactiveSupport4TrieV10dictionaryACyxq_GSDySayxGq_G_tcfC', 
                        '_$s16ProactiveSupport4TrieV2eeoiySbACyxq_G_AEtFZ', '_$s16ProactiveSupport4TrieV4fromACyxq_Gs7Decoder_p_tKcfC', 
                        '_$s16ProactiveSupport4TrieV6encode2toys7Encoder_p_tKF', '_$s16ProactiveSupport4TrieVMa', 

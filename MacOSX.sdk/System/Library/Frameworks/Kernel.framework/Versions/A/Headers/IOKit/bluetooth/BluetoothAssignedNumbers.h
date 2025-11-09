@@ -839,6 +839,7 @@ enum BluetoothHCIExtendedInquiryResponseDataTypes
     kBluetoothHCIExtendedInquiryResponseDataTypeURI											=	0x24,
     kBluetoothHCIExtendedInquiryResponseDataTypeIndoorPositioning							=	0x25,
     kBluetoothHCIExtendedInquiryResponseDataTypeTransportDiscoveryData						=	0x26,
+    kBluetoothHCIExtendedInquiryResponseDataTypeCsisRsiData                                 =   0x2E,
     kBluetoothHCIExtendedInquiryResponseDataType3DInformationData							=	0x3D,
 	kBluetoothHCIExtendedInquiryResponseDataTypeManufacturerSpecificData					=	0xFF,
 	kBluetoothHCIExtendedInquiryResponseDataTypeSlaveConnectionIntervalRange __attribute__ ((deprecated)) = kBluetoothHCIExtendedInquiryResponseDataTypePeripheralConnectionIntervalRange,

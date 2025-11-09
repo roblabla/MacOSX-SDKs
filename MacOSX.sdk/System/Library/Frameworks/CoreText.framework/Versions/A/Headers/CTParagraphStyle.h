@@ -38,6 +38,7 @@ typedef const struct CF_RELATED_TYPE(NSParagraphStyle,,) __CTParagraphStyle * CT
     @abstract   Returns the CFType of the paragraph style object
 */
 
+CT_EXPORT
 CFTypeID CTParagraphStyleGetTypeID( void ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 
@@ -417,6 +418,7 @@ typedef struct CTParagraphStyleSetting
                 object. Otherwise, this function will return NULL.
 */
 
+CT_EXPORT
 CTParagraphStyleRef CTParagraphStyleCreate(
     const CTParagraphStyleSetting * _Nullable settings,
     size_t settingCount ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
@@ -435,6 +437,7 @@ CTParagraphStyleRef CTParagraphStyleCreate(
                 "paragraphStyle".
 */
 
+CT_EXPORT
 CTParagraphStyleRef CTParagraphStyleCreateCopy(
     CTParagraphStyleRef paragraphStyle ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
@@ -478,6 +481,7 @@ CTParagraphStyleRef CTParagraphStyleCreateCopy(
                 indicating that one or more of the parameters is not valid.
 */
 
+CT_EXPORT
 bool CTParagraphStyleGetValueForSpecifier(
     CTParagraphStyleRef paragraphStyle,
     CTParagraphStyleSpecifier spec,

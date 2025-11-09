@@ -1,7 +1,7 @@
 /*
         NSTextStorageScripting.h
         AppKit Framework
-        Copyright (c) 1997-2023, Apple Inc.
+        Copyright (c) 1997-2024, Apple Inc.
         All rights reserved.
 */
 

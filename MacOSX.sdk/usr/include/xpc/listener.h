@@ -67,7 +67,7 @@ typedef void (^xpc_listener_incoming_session_handler_t)(xpc_session_t peer);
  * should be disposed of with free(3) when done. This will return NULL if a
  * string description could not be generated.
  */
-API_AVAILABLE(macos(14.0))
+API_AVAILABLE(macos(14.0), macCatalyst(17.0))
 API_UNAVAILABLE(ios, tvos, watchos)
 XPC_EXPORT XPC_SWIFT_NOEXPORT XPC_WARN_RESULT
 char * _Nullable
@@ -116,7 +116,7 @@ xpc_listener_copy_description(xpc_listener_t listener);
  * or cancel the session using `xpc_session_cancel`. Failure to take one of
  * these two actions will result in an API misuse crash.
  */
-API_AVAILABLE(macos(14.0))
+API_AVAILABLE(macos(14.0), macCatalyst(17.0))
 API_UNAVAILABLE(ios, tvos, watchos)
 XPC_EXPORT XPC_SWIFT_NOEXPORT XPC_RETURNS_RETAINED XPC_WARN_RESULT
 xpc_listener_t _Nullable
@@ -146,7 +146,7 @@ xpc_listener_create(const char * service,
  * activated. Releasing the last reference on an inactive listener that was
  * created with an xpc_listener_create() is undefined.
  */
-API_AVAILABLE(macos(14.0))
+API_AVAILABLE(macos(14.0), macCatalyst(17.0))
 API_UNAVAILABLE(ios, tvos, watchos)
 XPC_EXPORT XPC_SWIFT_NOEXPORT
 bool
@@ -168,7 +168,7 @@ xpc_listener_activate(xpc_listener_t listener,
  * to be explicitly cancelled and the process can safely terminate
  * without cancelling the listener.
  */
-API_AVAILABLE(macos(14.0))
+API_AVAILABLE(macos(14.0), macCatalyst(17.0))
 API_UNAVAILABLE(ios, tvos, watchos)
 XPC_EXPORT XPC_SWIFT_NOEXPORT
 void
@@ -188,7 +188,7 @@ xpc_listener_cancel(xpc_listener_t listener);
  * @discussion
  * The peer session will be cancelled and cannot be used after it has been rejected
  */
-API_AVAILABLE(macos(14.0))
+API_AVAILABLE(macos(14.0), macCatalyst(17.0))
 API_UNAVAILABLE(ios, tvos, watchos)
 XPC_EXPORT XPC_SWIFT_NOEXPORT
 void

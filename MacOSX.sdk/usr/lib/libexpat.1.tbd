@@ -28,9 +28,10 @@ exports:
                        _XML_SetExternalEntityRefHandlerArg, _XML_SetHashSalt, _XML_SetNamespaceDeclHandler, 
                        _XML_SetNotStandaloneHandler, _XML_SetNotationDeclHandler, 
                        _XML_SetParamEntityParsing, _XML_SetProcessingInstructionHandler, 
-                       _XML_SetReturnNSTriplet, _XML_SetSkippedEntityHandler, _XML_SetStartCdataSectionHandler, 
-                       _XML_SetStartDoctypeDeclHandler, _XML_SetStartElementHandler, 
-                       _XML_SetStartNamespaceDeclHandler, _XML_SetUnknownEncodingHandler, 
-                       _XML_SetUnparsedEntityDeclHandler, _XML_SetUserData, _XML_SetXmlDeclHandler, 
-                       _XML_StopParser, _XML_UseForeignDTD, _XML_UseParserAsHandlerArg ]
+                       _XML_SetReparseDeferralEnabled, _XML_SetReturnNSTriplet, _XML_SetSkippedEntityHandler, 
+                       _XML_SetStartCdataSectionHandler, _XML_SetStartDoctypeDeclHandler, 
+                       _XML_SetStartElementHandler, _XML_SetStartNamespaceDeclHandler, 
+                       _XML_SetUnknownEncodingHandler, _XML_SetUnparsedEntityDeclHandler, 
+                       _XML_SetUserData, _XML_SetXmlDeclHandler, _XML_StopParser, 
+                       _XML_UseForeignDTD, _XML_UseParserAsHandlerArg ]
 ...

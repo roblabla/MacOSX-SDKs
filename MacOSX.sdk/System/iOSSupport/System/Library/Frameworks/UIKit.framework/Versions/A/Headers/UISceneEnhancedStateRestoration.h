@@ -12,8 +12,8 @@ NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 API_AVAILABLE(ios(15.0)) @interface UIScene (UISceneEnhancedStateRestoration)
 
-- (void)extendStateRestoration;
-- (void)completeStateRestoration;
+- (void)extendStateRestoration API_UNAVAILABLE(watchos);
+- (void)completeStateRestoration API_UNAVAILABLE(watchos);
 
 @end
 

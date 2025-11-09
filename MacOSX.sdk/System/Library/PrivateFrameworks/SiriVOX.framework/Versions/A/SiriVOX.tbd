@@ -75,14 +75,14 @@ exports:
                        _SVXTaskOriginGetName, _SiriVOXErrorCodeGetFromName, _SiriVOXErrorCodeGetIsValid, 
                        _SiriVOXErrorCodeGetIsValidAndSpecified, _SiriVOXErrorCodeGetName, 
                        _SiriVOXErrorDomain ]
-    objc-classes:    [ SVXActivationContext, SVXAlarmAndTimerFiringContext, SVXAnnouncer, 
-                       SVXButtonEvent, SVXClientInfo, SVXClientServiceConnection, 
+    objc-classes:    [ SVXActivationContext, SVXAlarmAndTimerFiringContext, SVXAlarmAndTimerUtilities, 
+                       SVXAnnouncer, SVXButtonEvent, SVXClientInfo, SVXClientServiceConnection, 
                        SVXClientServiceManager, SVXDaemon, SVXDeactivationContext, 
                        SVXDeactivationOptions, SVXDeviceSetupContext, SVXDeviceSetupFlow, 
                        SVXDeviceSetupFlowDisplayKeyFrame, SVXDeviceSetupFlowScene, 
-                       SVXDeviceSetupFlowSceneBuilder, SVXDeviceSetupOptions, SVXPlatformDependency, 
-                       SVXQueuePerformer, SVXServiceCommandResult, SVXSpeechSynthesisRequest, 
-                       SVXSpeechSynthesisResult, SVXSpeechSynthesisUtils, SVXSpeechSynthesisUtteranceInfo, 
-                       SVXSpeechSynthesisWordTiming, SVXStoreDemo, SVXSystemEvent, 
-                       SVXTaskContext ]
+                       SVXDeviceSetupFlowSceneBuilder, SVXDeviceSetupOptions, SVXLocalizationUtils, 
+                       SVXPlatformDependency, SVXQueuePerformer, SVXServiceCommandResult, 
+                       SVXSpeechSynthesisRequest, SVXSpeechSynthesisResult, SVXSpeechSynthesisUtils, 
+                       SVXSpeechSynthesisUtteranceInfo, SVXSpeechSynthesisWordTiming, 
+                       SVXStoreDemo, SVXSystemEvent, SVXTaskContext ]
 ...

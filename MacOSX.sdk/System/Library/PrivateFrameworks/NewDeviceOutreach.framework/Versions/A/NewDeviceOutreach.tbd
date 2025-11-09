@@ -7,7 +7,8 @@ exports:
     symbols:         [ _NewDeviceOutreachVersionNumber, _NewDeviceOutreachVersionString, 
                        __NDOLogSystem, _kAppAvailabilityType, _kAppAvailablityText, 
                        _kAppBundleID, _kAppIconURL, _kAppLinkURL, _kAppTitle, _kAppVendorName ]
-    objc-classes:    [ NDOBAAManager, NDOClientConfiguration, NDODevice, NDODeviceInfo, 
-                       NDODeviceSection, NDOFollowUp, NDOManager, NDOServerVersionUtilities, 
-                       NDOUtilities, NDOWarranty ]
+    objc-classes:    [ NDOAppleSupportManager, NDOBAAManager, NDOClientConfiguration, 
+                       NDODevice, NDODeviceInfo, NDODeviceSection, NDOFollowUp, NDOFollowUpDismissalTracker, 
+                       NDOManager, NDOServerVersionUtilities, NDOTypeChecking, NDOUtilities, 
+                       NDOViewModelGenerationHelpers, NDOWarranty ]
 ...

@@ -18,5 +18,8 @@
 #include <Spatial/SPRay3D.h>
 #include <Spatial/SPSize3D.h>
 #include <Spatial/SPPose3D.h>
+#include <Spatial/SPScaledPose3D.h>
+
+#include <Spatial/SPSphericalCoordinates3D.h>
 
 #endif // Spatial_h

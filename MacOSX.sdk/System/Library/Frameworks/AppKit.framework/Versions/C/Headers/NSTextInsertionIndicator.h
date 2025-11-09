@@ -1,7 +1,7 @@
 /*
         NSTextInsertionIndicator.h
         Application Kit
-        Copyright (c) 2023-2023, Apple Inc.
+        Copyright (c) 2023-2024, Apple Inc.
         All rights reserved.
 */
 
@@ -28,8 +28,8 @@ API_AVAILABLE(macos(14.0))
 @property NSTextInsertionIndicatorDisplayMode displayMode;
 
 /// The color of the indicator.
-/// @discussion Defaults to the system accent color.
-/// @note If set to @c nil, uses the system accent color.
+/// @discussion Defaults to NSColor.textInsertionPointColor.
+/// @note If set to @c nil, uses NSColor.textInsertionPointColor.
 @property(copy, null_resettable) NSColor *color;
 
 /// Options for the NSTextInsertionIndicatorDisplayModeAutomatic display mode.

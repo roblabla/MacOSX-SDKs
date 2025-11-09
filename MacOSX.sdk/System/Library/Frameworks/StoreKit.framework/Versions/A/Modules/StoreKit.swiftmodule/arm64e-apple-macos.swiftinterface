@@ -1,6 +1,6 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.10 (swiftlang-5.10.0.12.5 clang-1500.3.9.1.1)
-// swift-module-flags: -target arm64e-apple-macos14.5 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-bare-slash-regex -user-module-version 813.4.41 -module-name StoreKit
+// swift-compiler-version: Apple Swift version 6.0 effective-5.10 (swiftlang-6.0.0.7.24 clang-1600.0.25.1)
+// swift-module-flags: -target arm64e-apple-macos15.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Osize -library-level api -enable-bare-slash-regex -user-module-version 814.0.59.1.2 -module-name StoreKit
 import AppKit
 import Combine
 import CoreFoundation
@@ -45,14 +45,14 @@ public struct PaymentMethodBinding : Swift.Sendable, Swift.Hashable, Swift.Ident
     }
   }
   public let id: Swift.String
-  #if compiler(>=5.3) && $AsyncAwait
   public init(id: Swift.String) async throws
-  #endif
-  #if compiler(>=5.3) && $AsyncAwait
   public func bind() async throws
-  #endif
   public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: StoreKit.PaymentMethodBinding, b: StoreKit.PaymentMethodBinding) -> Swift.Bool
+  @available(iOS 16.4, visionOS 1.0, *)
+  @available(tvOS, unavailable, introduced: 13.0)
+  @available(watchOS, unavailable, introduced: 6.0)
+  @available(macOS, unavailable, introduced: 10.15)
   public typealias ID = Swift.String
   public var hashValue: Swift.Int {
     get
@@ -66,6 +66,7 @@ public struct Transaction : Swift.Identifiable {
     public init(rawValue: Swift.String)
     public static let purchase: StoreKit.Transaction.Reason
     public static let renewal: StoreKit.Transaction.Reason
+    @available(iOS 17.0, tvOS 17.0, watchOS 10.0, macOS 14.0, *)
     public typealias RawValue = Swift.String
   }
   public struct RevocationReason : Swift.RawRepresentable, Swift.Equatable, Swift.Hashable {
@@ -73,6 +74,7 @@ public struct Transaction : Swift.Identifiable {
     public init(rawValue: Swift.Int)
     public static let developerIssue: StoreKit.Transaction.RevocationReason
     public static let other: StoreKit.Transaction.RevocationReason
+    @available(iOS 15.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, macOS 12.0, *)
     public typealias RawValue = Swift.Int
   }
   public struct OfferType : Swift.RawRepresentable, Swift.Equatable, Swift.Hashable {
@@ -81,6 +83,12 @@ public struct Transaction : Swift.Identifiable {
     public static let introductory: StoreKit.Transaction.OfferType
     public static let promotional: StoreKit.Transaction.OfferType
     public static let code: StoreKit.Transaction.OfferType
+    @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
+    @backDeployed(before: iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0)
+    public static var winBack: StoreKit.Transaction.OfferType {
+      get { .init(rawValue: 4) }
+    }
+    @available(iOS 15.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, macOS 12.0, *)
     public typealias RawValue = Swift.Int
   }
   public struct OwnershipType : Swift.RawRepresentable, Swift.Equatable, Swift.Hashable {
@@ -88,6 +96,7 @@ public struct Transaction : Swift.Identifiable {
     public init(rawValue: Swift.String)
     public static let purchased: StoreKit.Transaction.OwnershipType
     public static let familyShared: StoreKit.Transaction.OwnershipType
+    @available(iOS 15.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, macOS 12.0, *)
     public typealias RawValue = Swift.String
   }
   @available(iOS 17.2, macOS 14.2, tvOS 17.2, watchOS 10.2, visionOS 1.1, *)
@@ -98,6 +107,7 @@ public struct Transaction : Swift.Identifiable {
       public static let freeTrial: StoreKit.Transaction.Offer.PaymentMode
       public static let payAsYouGo: StoreKit.Transaction.Offer.PaymentMode
       public static let payUpFront: StoreKit.Transaction.Offer.PaymentMode
+      @available(iOS 17.2, tvOS 17.2, watchOS 10.2, visionOS 1.1, macOS 14.2, *)
       public typealias RawValue = Swift.String
     }
     public let id: Swift.String?
@@ -193,11 +203,11 @@ public struct Transaction : Swift.Identifiable {
   @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
   public let reason: StoreKit.Transaction.Reason
   @backDeployed(before: iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, macCatalyst 17.0)
-  @available(iOS, introduced: 15.0, deprecated: 16.0, message: "Use the reason property instead")
-  @available(macOS, introduced: 12.0, deprecated: 13.0, message: "Use the reason property instead")
-  @available(tvOS, introduced: 15.0, deprecated: 16.0, message: "Use the reason property instead")
-  @available(watchOS, introduced: 8.0, deprecated: 9.0, message: "Use the reason property instead")
-  @available(macCatalyst, introduced: 15.0, deprecated: 16.0, message: "Use the reason property instead")
+  @available(iOS, introduced: 15.0, deprecated: 17.0, message: "Use the reason property instead")
+  @available(macOS, introduced: 12.0, deprecated: 14.0, message: "Use the reason property instead")
+  @available(tvOS, introduced: 15.0, deprecated: 17.0, message: "Use the reason property instead")
+  @available(watchOS, introduced: 8.0, deprecated: 10.0, message: "Use the reason property instead")
+  @available(macCatalyst, introduced: 15.0, deprecated: 17.0, message: "Use the reason property instead")
   @available(visionOS, unavailable)
   public var reasonStringRepresentation: Swift.String {
     get {
@@ -251,7 +261,7 @@ public struct Transaction : Swift.Identifiable {
                 atKeyPath: "price",
                 sentinel: nil,
                 transform: {
-                    // price expressed in milli-amount, e.g. `$9.99` expressed as `9990`
+                     
                     Decimal($0).map { $0 / 1000 }
                 }
             )
@@ -301,9 +311,8 @@ public struct Transaction : Swift.Identifiable {
   public let deviceVerificationNonce: Foundation.UUID
   public let ownershipType: StoreKit.Transaction.OwnershipType
   public let signedDate: Foundation.Date
-  #if compiler(>=5.3) && $AsyncAwait
   public func finish() async
-  #endif
+  @available(iOS 15.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, macOS 12.0, *)
   public typealias ID = Swift.UInt64
 }
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
@@ -327,47 +336,46 @@ extension StoreKit.Transaction : Swift.CustomDebugStringConvertible {
 }
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension StoreKit.Transaction {
-  #if compiler(>=5.3) && $RethrowsProtocol
   public struct Transactions : _Concurrency.AsyncSequence {
     public typealias Element = StoreKit.VerificationResult<StoreKit.Transaction>
     public struct AsyncIterator : _Concurrency.AsyncIteratorProtocol {
-      #if compiler(>=5.3) && $AsyncAwait
       public mutating func next() async -> StoreKit.VerificationResult<StoreKit.Transaction>?
-      #endif
+      @available(iOS 15.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, macOS 12.0, *)
       public typealias Element = StoreKit.VerificationResult<StoreKit.Transaction>
+      #if compiler(>=5.3) && $AssociatedTypeImplements
+      @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
+      @_implements(_Concurrency.AsyncIteratorProtocol, Failure) public typealias __AsyncIteratorProtocol_Failure = Swift.Never
+      #else
+      @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
+      public typealias __AsyncIteratorProtocol_Failure = Swift.Never
+      #endif
     }
     public func makeAsyncIterator() -> StoreKit.Transaction.Transactions.AsyncIterator
+    #if compiler(>=5.3) && $AssociatedTypeImplements
+    @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
+    @_implements(_Concurrency.AsyncSequence, Failure) public typealias __AsyncSequence_Failure = Swift.Never
+    #else
+    @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
+    public typealias __AsyncSequence_Failure = Swift.Never
+    #endif
   }
-  #endif
-  #if compiler(>=5.3) && $RethrowsProtocol
   public static var all: StoreKit.Transaction.Transactions {
     get
   }
-  #endif
-  #if compiler(>=5.3) && $RethrowsProtocol
   public static var currentEntitlements: StoreKit.Transaction.Transactions {
     get
   }
-  #endif
-  #if compiler(>=5.3) && $AsyncAwait
   public static func currentEntitlement(for productID: Swift.String) async -> StoreKit.VerificationResult<StoreKit.Transaction>?
-  #endif
-  #if compiler(>=5.3) && $AsyncAwait
   public static func latest(for productID: Swift.String) async -> StoreKit.VerificationResult<StoreKit.Transaction>?
-  #endif
-  #if compiler(>=5.3) && $RethrowsProtocol
   public static var unfinished: StoreKit.Transaction.Transactions {
     get
   }
-  #endif
 }
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension StoreKit.Transaction {
-  #if compiler(>=5.3) && $RethrowsProtocol
   public static var updates: StoreKit.Transaction.Transactions {
     get
   }
-  #endif
 }
 @available(iOS 15.0, macOS 12.0, tvOS 17.0, watchOS 10.0, visionOS 1.0, *)
 extension StoreKit.Transaction {
@@ -391,7 +399,6 @@ extension StoreKit.Transaction {
       get
     }
   }
-  #if compiler(>=5.3) && $AsyncAwait
   @available(macOS 12.0, *)
   @available(visionOS, unavailable)
   @available(watchOS, unavailable)
@@ -399,18 +406,14 @@ extension StoreKit.Transaction {
   @inlinable public func beginRefundRequest(in controller: AppKit.NSViewController) async throws -> StoreKit.Transaction.RefundRequestStatus {
         return try await Transaction.beginRefundRequest(for: self.id, in: controller)
     }
-  #endif
-  #if compiler(>=5.3) && $AsyncAwait
   @available(macOS 12.0, *)
   @available(visionOS, unavailable)
   @available(watchOS, unavailable)
   @available(tvOS, unavailable)
   public static func beginRefundRequest(for transactionID: Swift.UInt64, in controller: AppKit.NSViewController) async throws -> StoreKit.Transaction.RefundRequestStatus
-  #endif
 }
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension StoreKit.Transaction {
-  #if compiler(>=5.3) && $EffectfulProp
   @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
   @backDeployed(before: iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0)
   public var subscriptionStatus: StoreKit.Product.SubscriptionInfo.Status? {
@@ -424,7 +427,6 @@ extension StoreKit.Transaction {
             .first { $0.transaction.unsafePayloadValue.originalID == originalID }
         }
   }
-  #endif
 }
 @available(iOS 15.0, macCatalyst 15.0, tvOS 17.0, macOS 12.0, watchOS 10.0, visionOS 1.0, *)
 extension StoreKit.Transaction.RefundRequestError : Swift.Sendable {
@@ -444,11 +446,9 @@ extension StoreKit.Transaction.OfferType : Swift.Sendable {
 @available(iOS 15.0, macCatalyst 15.0, tvOS 15.0, macOS 12.0, watchOS 8.0, visionOS 1.0, *)
 extension StoreKit.Transaction.OwnershipType : Swift.Sendable {
 }
-#if compiler(>=5.3) && $RethrowsProtocol
 @available(iOS 15.0, macCatalyst 15.0, tvOS 15.0, macOS 12.0, watchOS 8.0, visionOS 1.0, *)
 extension StoreKit.Transaction.Transactions : Swift.Sendable {
 }
-#endif
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 public enum AppStore {
   public static var canMakePayments: Swift.Bool {
@@ -460,9 +460,7 @@ public enum AppStore {
 }
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension StoreKit.AppStore {
-  #if compiler(>=5.3) && $AsyncAwait
   public static func sync() async throws
-  #endif
 }
 extension StoreKit.AppStore {
   @available(macOS 13.0, *)
@@ -472,6 +470,14 @@ extension StoreKit.AppStore {
   @available(tvOS, unavailable)
   @_Concurrency.MainActor public static func requestReview(in controller: AppKit.NSViewController)
 }
+extension StoreKit.AppStore {
+  @available(macOS 15.0, *)
+  @available(iOS, unavailable)
+  @available(visionOS, unavailable)
+  @available(watchOS, unavailable)
+  @available(tvOS, unavailable)
+  @_Concurrency.MainActor public static func presentOfferCodeRedeemSheet(from controller: AppKit.NSViewController) async throws
+}
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, *)
 extension StoreKit.AppStore {
   public struct Environment : Swift.RawRepresentable, Swift.Equatable, Swift.Hashable, Swift.Sendable {
@@ -480,6 +486,7 @@ extension StoreKit.AppStore {
     public static let production: StoreKit.AppStore.Environment
     public static let sandbox: StoreKit.AppStore.Environment
     public static let xcode: StoreKit.AppStore.Environment
+    @available(iOS 16.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, macOS 13.0, *)
     public typealias RawValue = Swift.String
   }
 }
@@ -488,49 +495,81 @@ extension StoreKit.AppStore : Swift.Sendable {
 }
 @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 extension StoreKit.AppStore {
-  #if compiler(>=5.3) && $EffectfulProp
   @usableFromInline
   internal static var canMakePaymentsAsyncUsableFromInline: Swift.Bool {
     get async throws
   }
-  #endif
 }
 @available(iOS 16.4, macOS 14.4, macCatalyst 16.4, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 @available(visionOS, unavailable)
-public struct PurchaseIntent : Swift.Equatable, Swift.Sendable {
+public struct PurchaseIntent : Swift.Equatable, Swift.Identifiable, Swift.Sendable {
   public let product: StoreKit.Product
+  @available(iOS 18.0, macOS 15.0, *)
+  @available(tvOS, unavailable)
+  @available(watchOS, unavailable)
+  @available(visionOS, unavailable)
+  public let offer: StoreKit.Product.SubscriptionOffer?
   public var id: StoreKit.Product.ID {
     get
   }
   public static func == (a: StoreKit.PurchaseIntent, b: StoreKit.PurchaseIntent) -> Swift.Bool
+  @available(iOS 16.4, macOS 14.4, macCatalyst 16.4, *)
+  @available(tvOS, unavailable, introduced: 13.0)
+  @available(watchOS, unavailable, introduced: 6.0)
+  @available(visionOS, unavailable)
+  public typealias ID = StoreKit.Product.ID
 }
 @available(iOS 16.4, macOS 14.4, macCatalyst 16.4, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 @available(visionOS, unavailable)
 extension StoreKit.PurchaseIntent {
-  #if compiler(>=5.3) && $RethrowsProtocol
   public struct PurchaseIntents : _Concurrency.AsyncSequence {
     public typealias Element = StoreKit.PurchaseIntent
     public struct AsyncIterator : _Concurrency.AsyncIteratorProtocol {
-      #if compiler(>=5.3) && $AsyncAwait
       public mutating func next() async -> StoreKit.PurchaseIntent.PurchaseIntents.Element?
-      #endif
+      @available(iOS 16.4, macOS 14.4, macCatalyst 16.4, *)
+      @available(tvOS, unavailable, introduced: 13.0)
+      @available(watchOS, unavailable, introduced: 6.0)
+      @available(visionOS, unavailable)
       public typealias Element = StoreKit.PurchaseIntent.PurchaseIntents.Element
+      #if compiler(>=5.3) && $AssociatedTypeImplements
+      @available(iOS 18.0, macOS 15.0, macCatalyst 16.4, *)
+      @available(tvOS, unavailable, introduced: 18.0)
+      @available(watchOS, unavailable, introduced: 11.0)
+      @available(visionOS, unavailable, introduced: 2.0)
+      @_implements(_Concurrency.AsyncIteratorProtocol, Failure) public typealias __AsyncIteratorProtocol_Failure = Swift.Never
+      #else
+      @available(iOS 18.0, macOS 15.0, macCatalyst 16.4, *)
+      @available(tvOS, unavailable, introduced: 18.0)
+      @available(watchOS, unavailable, introduced: 11.0)
+      @available(visionOS, unavailable, introduced: 2.0)
+      public typealias __AsyncIteratorProtocol_Failure = Swift.Never
+      #endif
     }
     public func makeAsyncIterator() -> StoreKit.PurchaseIntent.PurchaseIntents.AsyncIterator
+    #if compiler(>=5.3) && $AssociatedTypeImplements
+    @available(iOS 18.0, macOS 15.0, macCatalyst 16.4, *)
+    @available(tvOS, unavailable, introduced: 18.0)
+    @available(watchOS, unavailable, introduced: 11.0)
+    @available(visionOS, unavailable, introduced: 2.0)
+    @_implements(_Concurrency.AsyncSequence, Failure) public typealias __AsyncSequence_Failure = Swift.Never
+    #else
+    @available(iOS 18.0, macOS 15.0, macCatalyst 16.4, *)
+    @available(tvOS, unavailable, introduced: 18.0)
+    @available(watchOS, unavailable, introduced: 11.0)
+    @available(visionOS, unavailable, introduced: 2.0)
+    public typealias __AsyncSequence_Failure = Swift.Never
+    #endif
   }
-  #endif
-  #if compiler(>=5.3) && $RethrowsProtocol
   public static var intents: StoreKit.PurchaseIntent.PurchaseIntents {
     get
   }
-  #endif
 }
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
-public struct Storefront : Swift.Identifiable {
+public struct Storefront : Swift.Identifiable, Swift.Sendable {
   public let countryCode: Swift.String
   public let id: Swift.String
   @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, macCatalyst 17.0, *)
@@ -539,41 +578,41 @@ public struct Storefront : Swift.Identifiable {
   @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, macCatalyst 17.0, *)
   @usableFromInline
   internal init(iso3ACountryCode countryCode: Swift.String, id: Swift.String, locale: Foundation.Locale)
-  #if compiler(>=5.3) && $EffectfulProp
   public static var current: StoreKit.Storefront? {
     get async
   }
-  #endif
+  @available(iOS 15.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, macOS 12.0, *)
   public typealias ID = Swift.String
 }
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension StoreKit.Storefront {
-  #if compiler(>=5.3) && $RethrowsProtocol
-  public struct Storefronts : _Concurrency.AsyncSequence {
+  public struct Storefronts : _Concurrency.AsyncSequence, Swift.Sendable {
     public typealias Element = StoreKit.Storefront
     public struct AsyncIterator : _Concurrency.AsyncIteratorProtocol {
-      #if compiler(>=5.3) && $AsyncAwait
       public mutating func next() async -> StoreKit.Storefront?
-      #endif
+      @available(iOS 15.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, macOS 12.0, *)
       public typealias Element = StoreKit.Storefront
+      #if compiler(>=5.3) && $AssociatedTypeImplements
+      @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
+      @_implements(_Concurrency.AsyncIteratorProtocol, Failure) public typealias __AsyncIteratorProtocol_Failure = Swift.Never
+      #else
+      @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
+      public typealias __AsyncIteratorProtocol_Failure = Swift.Never
+      #endif
     }
     public func makeAsyncIterator() -> StoreKit.Storefront.Storefronts.AsyncIterator
+    #if compiler(>=5.3) && $AssociatedTypeImplements
+    @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
+    @_implements(_Concurrency.AsyncSequence, Failure) public typealias __AsyncSequence_Failure = Swift.Never
+    #else
+    @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
+    public typealias __AsyncSequence_Failure = Swift.Never
+    #endif
   }
-  #endif
-  #if compiler(>=5.3) && $RethrowsProtocol
   public static var updates: StoreKit.Storefront.Storefronts {
     get
   }
-  #endif
 }
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
-extension StoreKit.Storefront : Swift.Sendable {
-}
-#if compiler(>=5.3) && $RethrowsProtocol
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
-extension StoreKit.Storefront.Storefronts : Swift.Sendable {
-}
-#endif
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension StoreKit.Product {
   public struct SubscriptionPeriod : Swift.Equatable, Swift.Hashable {
@@ -640,15 +679,15 @@ extension StoreKit.Product.SubscriptionPeriod.Unit {
   @usableFromInline
   internal var calendarComponent: Foundation.Calendar.Component {
     get {
-        // if we're on sydro+ call into the usable from inline method to check
-        // for potential new cases
+         
+         
         if #available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *) {
             return dynamicCalendarComponent
         }
-        // otherwise switch over the cases in starsky
+         
         else {
-            // this warning is a compiler bug, if we add @unknown default it will
-            // give us another warning saying the default will never execute :)
+             
+             
             switch self {
             case .day: return .day
             case .week: return .weekOfYear
@@ -682,6 +721,64 @@ extension StoreKit.Product.SubscriptionPeriod {
   @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, *)
   public func formatted<S>(_ format: S, referenceDate: Foundation.Date = .now) -> S.FormatOutput where S : Foundation.FormatStyle, S.FormatInput == Swift.Duration
 }
+extension StoreKit.Product.SubscriptionPeriod {
+  @available(iOS 16.4, macOS 13.3, tvOS 16.4, watchOS 9.4, visionOS 1.0, *)
+  @backDeployed(before: iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0)
+  public static var weekly: StoreKit.Product.SubscriptionPeriod {
+    get {
+        Self(unit: .week, value: 1)
+    }
+  }
+  @available(iOS 16.4, macOS 13.3, tvOS 16.4, watchOS 9.4, visionOS 1.0, *)
+  @backDeployed(before: iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0)
+  public static var monthly: StoreKit.Product.SubscriptionPeriod {
+    get {
+        Self(unit: .month, value: 1)
+    }
+  }
+  @available(iOS 16.4, macOS 13.3, tvOS 16.4, watchOS 9.4, visionOS 1.0, *)
+  @backDeployed(before: iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0)
+  public static var yearly: StoreKit.Product.SubscriptionPeriod {
+    get {
+        Self(unit: .year, value: 1)
+    }
+  }
+  @available(iOS 16.4, macOS 13.3, tvOS 16.4, watchOS 9.4, visionOS 1.0, *)
+  @backDeployed(before: iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0)
+  public static var everyThreeDays: StoreKit.Product.SubscriptionPeriod {
+    get {
+        Self(unit: .day, value: 3)
+    }
+  }
+  @available(iOS 16.4, macOS 13.3, tvOS 16.4, watchOS 9.4, visionOS 1.0, *)
+  @backDeployed(before: iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0)
+  public static var everyTwoWeeks: StoreKit.Product.SubscriptionPeriod {
+    get {
+        Self(unit: .week, value: 2)
+    }
+  }
+  @available(iOS 16.4, macOS 13.3, tvOS 16.4, watchOS 9.4, visionOS 1.0, *)
+  @backDeployed(before: iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0)
+  public static var everyTwoMonths: StoreKit.Product.SubscriptionPeriod {
+    get {
+        Self(unit: .month, value: 2)
+    }
+  }
+  @available(iOS 16.4, macOS 13.3, tvOS 16.4, watchOS 9.4, visionOS 1.0, *)
+  @backDeployed(before: iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0)
+  public static var everyThreeMonths: StoreKit.Product.SubscriptionPeriod {
+    get {
+        Self(unit: .month, value: 3)
+    }
+  }
+  @available(iOS 16.4, macOS 13.3, tvOS 16.4, watchOS 9.4, visionOS 1.0, *)
+  @backDeployed(before: iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0)
+  public static var everySixMonths: StoreKit.Product.SubscriptionPeriod {
+    get {
+        Self(unit: .month, value: 6)
+    }
+  }
+}
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, *)
 extension StoreKit.Product.SubscriptionPeriod.Unit {
   @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, *)
@@ -692,7 +789,9 @@ extension StoreKit.Product.SubscriptionPeriod.Unit {
     public init(from decoder: any Swift.Decoder) throws
     public func hash(into hasher: inout Swift.Hasher)
     public static func == (a: StoreKit.Product.SubscriptionPeriod.Unit.FormatStyle, b: StoreKit.Product.SubscriptionPeriod.Unit.FormatStyle) -> Swift.Bool
+    @available(iOS 16.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, macOS 13.0, *)
     public typealias FormatInput = StoreKit.Product.SubscriptionPeriod.Unit
+    @available(iOS 16.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, macOS 13.0, *)
     public typealias FormatOutput = Swift.String
     public var hashValue: Swift.Int {
       get
@@ -727,15 +826,11 @@ public enum ExternalPurchase : Swift.Sendable {
       get
     }
   }
-  #if compiler(>=5.3) && $EffectfulProp
   @available(iOS 17.4, macOS 14.4, macCatalyst 17.4, tvOS 17.4, watchOS 10.4, visionOS 1.1, *)
   public static var canPresent: Swift.Bool {
     get async
   }
-  #endif
-  #if compiler(>=5.3) && $AsyncAwait
   public static func presentNoticeSheet() async throws -> StoreKit.ExternalPurchase.NoticeResult
-  #endif
 }
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension StoreKit.Product {
@@ -745,6 +840,9 @@ extension StoreKit.Product {
       public init(rawValue: Swift.String)
       public static let introductory: StoreKit.Product.SubscriptionOffer.OfferType
       public static let promotional: StoreKit.Product.SubscriptionOffer.OfferType
+      @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+      public static let winBack: StoreKit.Product.SubscriptionOffer.OfferType
+      @available(iOS 15.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, macOS 12.0, *)
       public typealias RawValue = Swift.String
     }
     public struct PaymentMode : Swift.RawRepresentable, Swift.Equatable, Swift.Hashable {
@@ -753,6 +851,7 @@ extension StoreKit.Product {
       public static let payAsYouGo: StoreKit.Product.SubscriptionOffer.PaymentMode
       public static let payUpFront: StoreKit.Product.SubscriptionOffer.PaymentMode
       public static let freeTrial: StoreKit.Product.SubscriptionOffer.PaymentMode
+      @available(iOS 15.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, macOS 12.0, *)
       public typealias RawValue = Swift.String
     }
     public let id: Swift.String?
@@ -795,38 +894,26 @@ extension StoreKit.Product.SubscriptionOffer {
 }
 @available(iOS 15.4, macOS 14.4, macCatalyst 15.4, tvOS 17.4, watchOS 10.4, visionOS 1.1, *)
 public enum ExternalPurchaseLink : Swift.Sendable {
-  #if compiler(>=5.3) && $EffectfulProp
   public static var canOpen: Swift.Bool {
     get async
   }
-  #endif
-  #if compiler(>=5.3) && $EffectfulProp
   @available(iOS 17.5, macOS 14.5, macCatalyst 17.5, tvOS 17.5, watchOS 10.5, visionOS 1.2, *)
   public static var eligibleURLs: [Foundation.URL]? {
     get async
   }
-  #endif
-  #if compiler(>=5.3) && $AsyncAwait
   public static func open() async throws
-  #endif
-  #if compiler(>=5.3) && $AsyncAwait
   @available(iOS 17.5, macOS 14.5, macCatalyst 17.5, tvOS 17.5, watchOS 10.5, visionOS 1.2, *)
   public static func open(url: Foundation.URL) async throws
-  #endif
 }
 @available(iOS 16.0, macCatalyst 16.0, tvOS 16.4, *)
 @available(macOS, unavailable)
 @available(watchOS, unavailable)
 @available(visionOS, unavailable)
 public enum ExternalLinkAccount : Swift.Sendable {
-  #if compiler(>=5.3) && $EffectfulProp
   public static var canOpen: Swift.Bool {
     get async
   }
-  #endif
-  #if compiler(>=5.3) && $AsyncAwait
   public static func open() async throws
-  #endif
 }
 extension Foundation.Date {
   @_alwaysEmitIntoClient internal init(unixEpochMS: Swift.Int64) {
@@ -961,6 +1048,7 @@ extension StoreKit.Product.SubscriptionInfo {
     public static let inBillingRetryPeriod: StoreKit.Product.SubscriptionInfo.RenewalState
     public static let inGracePeriod: StoreKit.Product.SubscriptionInfo.RenewalState
     public static let revoked: StoreKit.Product.SubscriptionInfo.RenewalState
+    @available(iOS 15.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, macOS 12.0, *)
     public typealias RawValue = Swift.Int
   }
   public struct RenewalInfo {
@@ -972,6 +1060,7 @@ extension StoreKit.Product.SubscriptionInfo {
       public static let didNotConsentToPriceIncrease: StoreKit.Product.SubscriptionInfo.RenewalInfo.ExpirationReason
       public static let productUnavailable: StoreKit.Product.SubscriptionInfo.RenewalInfo.ExpirationReason
       public static let unknown: StoreKit.Product.SubscriptionInfo.RenewalInfo.ExpirationReason
+      @available(iOS 15.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, macOS 12.0, *)
       public typealias RawValue = Swift.Int
     }
     @frozen public enum PriceIncreaseStatus : Swift.Equatable, Swift.Hashable {
@@ -997,8 +1086,44 @@ extension StoreKit.Product.SubscriptionInfo {
     public let priceIncreaseStatus: StoreKit.Product.SubscriptionInfo.RenewalInfo.PriceIncreaseStatus
     public let isInBillingRetry: Swift.Bool
     public let gracePeriodExpirationDate: Foundation.Date?
-    public let offerID: Swift.String?
-    public let offerType: StoreKit.Transaction.OfferType?
+    @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+    public let offer: StoreKit.Transaction.Offer?
+    @available(iOS, introduced: 15.0, deprecated: 18.0, renamed: "offer.id", message: "Use the offer property instead")
+    @available(macOS, introduced: 12.0, deprecated: 15.0, renamed: "offer.id", message: "Use the offer property instead")
+    @available(tvOS, introduced: 15.0, deprecated: 18.0, renamed: "offer.id", message: "Use the offer property instead")
+    @available(watchOS, introduced: 8.0, deprecated: 11.0, renamed: "offer.id", message: "Use the offer property instead")
+    @available(visionOS, introduced: 1.0, deprecated: 2.0, renamed: "offer.id", message: "Use the offer property instead")
+    public var offerID: Swift.String? {
+      get
+    }
+    @available(iOS, introduced: 15.0, deprecated: 18.0, renamed: "offer.type", message: "Use the offer property instead")
+    @available(macOS, introduced: 12.0, deprecated: 15.0, renamed: "offer.type", message: "Use the offer property instead")
+    @available(tvOS, introduced: 15.0, deprecated: 18.0, renamed: "offer.type", message: "Use the offer property instead")
+    @available(watchOS, introduced: 8.0, deprecated: 11.0, renamed: "offer.type", message: "Use the offer property instead")
+    @available(visionOS, introduced: 1.0, deprecated: 2.0, renamed: "offer.type", message: "Use the offer property instead")
+    public var offerType: StoreKit.Transaction.OfferType? {
+      get
+    }
+    @backDeployed(before: iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0)
+    @available(iOS, introduced: 15.0, deprecated: 18.0, renamed: "offer.paymentMode.rawValue", message: "Use the offer property instead")
+    @available(macOS, introduced: 12.0, deprecated: 15.0, renamed: "offer.paymentMode.rawValue", message: "Use the offer property instead")
+    @available(tvOS, introduced: 15.0, deprecated: 18.0, renamed: "offer.paymentMode.rawValue", message: "Use the offer property instead")
+    @available(watchOS, introduced: 8.0, deprecated: 11.0, renamed: "offer.paymentMode.rawValue", message: "Use the offer property instead")
+    @available(visionOS, introduced: 1.0, deprecated: 2.0, renamed: "offer.paymentMode.rawValue", message: "Use the offer property instead")
+    public var offerPaymentModeStringRepresentation: Swift.String? {
+      get {
+            if #available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *) {
+                return offer?.paymentMode?.rawValue
+            }
+            else {
+                return backing.value(
+                    atKeyPath: "offerDiscountType",
+                    sentinel: nil,
+                    transform: String.init
+                )
+            }
+        }
+    }
     @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, *)
     public let environment: StoreKit.AppStore.Environment
     @backDeployed(before: iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, macCatalyst 16.0)
@@ -1060,6 +1185,69 @@ extension StoreKit.Product.SubscriptionInfo {
             }
         }
     }
+    @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+    @usableFromInline
+    internal let renewalPriceStorage: Foundation.Decimal?
+    @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
+    @backDeployed(before: iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0)
+    public var renewalPrice: Foundation.Decimal? {
+      get {
+            if #available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *) {
+                return renewalPriceStorage
+            }
+            else {
+                return backing.value(
+                    atKeyPath: "renewalPrice",
+                    sentinel: nil,
+                    transform: {
+                         
+                        Decimal($0).map { $0 / 1000 }
+                    }
+                )
+            }
+        }
+    }
+    @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+    @usableFromInline
+    internal let currencyStorage: Foundation.Locale.Currency?
+    @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, *)
+    @backDeployed(before: iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0)
+    public var currency: Foundation.Locale.Currency? {
+      get {
+            if #available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *) {
+                return currencyStorage
+            }
+            else {
+                return backing.value(
+                    atKeyPath: "currency",
+                    sentinel: nil,
+                    transform: { String($0).map({ Locale.Currency($0) }) }
+                )
+            }
+        }
+    }
+    @backDeployed(before: iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0)
+    @available(iOS, introduced: 15.0, deprecated: 16.0, renamed: "currency.identifier", message: "Use the currency property instead")
+    @available(macOS, introduced: 12.0, deprecated: 13.0, renamed: "currency.identifier", message: "Use the currency property instead")
+    @available(tvOS, introduced: 15.0, deprecated: 16.0, renamed: "currency.identifier", message: "Use the currency property instead")
+    @available(watchOS, introduced: 8.0, deprecated: 9.0, renamed: "currency.identifier", message: "Use the currency property instead")
+    @available(visionOS, unavailable)
+    public var currencyCode: Swift.String? {
+      get {
+            if #available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *) {
+                return currencyStorage?.identifier
+            }
+            else {
+                return backing.value(
+                    atKeyPath: "currency",
+                    sentinel: nil,
+                    transform: String.init
+                )
+            }
+        }
+    }
+    @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+    public let eligibleWinBackOfferIDs: [Swift.String]
     public let deviceVerification: Foundation.Data
     public let deviceVerificationNonce: Foundation.UUID
     public let signedDate: Foundation.Date
@@ -1074,36 +1262,41 @@ extension StoreKit.Product.SubscriptionInfo {
       get
     }
   }
-  #if compiler(>=5.3) && $EffectfulProp
   @inlinable public var status: [StoreKit.Product.SubscriptionInfo.Status] {
     get async throws {
             try await Product.SubscriptionInfo.status(for: subscriptionGroupID)
         }
   }
-  #endif
-  #if compiler(>=5.3) && $AsyncAwait
   public static func status(for groupID: Swift.String) async throws -> [StoreKit.Product.SubscriptionInfo.Status]
-  #endif
 }
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension StoreKit.Product.SubscriptionInfo.Status {
-  #if compiler(>=5.3) && $RethrowsProtocol
   public struct Statuses : _Concurrency.AsyncSequence {
     public typealias Element = StoreKit.Product.SubscriptionInfo.Status
     public struct AsyncIterator : _Concurrency.AsyncIteratorProtocol {
-      #if compiler(>=5.3) && $AsyncAwait
       public mutating func next() async -> StoreKit.Product.SubscriptionInfo.Status.Statuses.Element?
-      #endif
+      @available(iOS 15.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, macOS 12.0, *)
       public typealias Element = StoreKit.Product.SubscriptionInfo.Status.Statuses.Element
+      #if compiler(>=5.3) && $AssociatedTypeImplements
+      @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
+      @_implements(_Concurrency.AsyncIteratorProtocol, Failure) public typealias __AsyncIteratorProtocol_Failure = Swift.Never
+      #else
+      @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
+      public typealias __AsyncIteratorProtocol_Failure = Swift.Never
+      #endif
     }
     public func makeAsyncIterator() -> StoreKit.Product.SubscriptionInfo.Status.Statuses.AsyncIterator
+    #if compiler(>=5.3) && $AssociatedTypeImplements
+    @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
+    @_implements(_Concurrency.AsyncSequence, Failure) public typealias __AsyncSequence_Failure = Swift.Never
+    #else
+    @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
+    public typealias __AsyncSequence_Failure = Swift.Never
+    #endif
   }
-  #endif
-  #if compiler(>=5.3) && $RethrowsProtocol
   public static var updates: StoreKit.Product.SubscriptionInfo.Status.Statuses {
     get
   }
-  #endif
 }
 @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, visionOS 1.0, *)
 extension StoreKit.Product.SubscriptionInfo.Status {
@@ -1137,11 +1330,9 @@ extension StoreKit.Product.SubscriptionInfo.RenewalState : Swift.Sendable {
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension StoreKit.Product.SubscriptionInfo.Status : Swift.Sendable {
 }
-#if compiler(>=5.3) && $RethrowsProtocol
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension StoreKit.Product.SubscriptionInfo.Status.Statuses : Swift.Sendable {
 }
-#endif
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension StoreKit.Product.SubscriptionInfo.RenewalInfo : Swift.Sendable {
 }
@@ -1155,11 +1346,9 @@ extension StoreKit.Product.SubscriptionInfo.RenewalInfo.PriceIncreaseStatus : Sw
 @frozen public enum VerificationResult<SignedType> {
   case unverified(SignedType, StoreKit.VerificationResult<SignedType>.VerificationError)
   case verified(SignedType)
-  #if compiler(>=5.3) && $EffectfulProp
   public var payloadValue: SignedType {
     get throws
   }
-  #endif
   public var unsafePayloadValue: SignedType {
     get
   }
@@ -1212,6 +1401,11 @@ extension StoreKit.Product {
       case visible
       case hidden
       public init?(rawValue: Swift.Int)
+      @available(iOS 16.4, *)
+      @available(tvOS, unavailable, introduced: 15.0)
+      @available(watchOS, unavailable, introduced: 8.0)
+      @available(visionOS, unavailable)
+      @available(macOS, unavailable, introduced: 12.0)
       public typealias RawValue = Swift.Int
       public var rawValue: Swift.Int {
         get
@@ -1219,23 +1413,13 @@ extension StoreKit.Product {
     }
     public let productID: StoreKit.Product.ID
     public var visibility: StoreKit.Product.PromotionInfo.Visibility
-    #if compiler(>=5.3) && $AsyncAwait
     public func update() async throws
-    #endif
-    #if compiler(>=5.3) && $EffectfulProp
     public static var currentOrder: [StoreKit.Product.PromotionInfo] {
       get async throws
     }
-    #endif
-    #if compiler(>=5.3) && $AsyncAwait
     public static func updateProductOrder(byID order: some Collection<Product.ID>) async throws
-    #endif
-    #if compiler(>=5.3) && $AsyncAwait
     public static func updateProductVisibility(_ visibility: StoreKit.Product.PromotionInfo.Visibility, for productID: StoreKit.Product.ID) async throws
-    #endif
-    #if compiler(>=5.3) && $AsyncAwait
     public static func updateAll(_ promotions: some Collection<PromotionInfo>) async throws
-    #endif
     public static func == (a: StoreKit.Product.PromotionInfo, b: StoreKit.Product.PromotionInfo) -> Swift.Bool
   }
 }
@@ -1353,14 +1537,10 @@ public struct AppTransaction : Swift.Sendable {
   public let deviceVerification: Foundation.Data
   public let deviceVerificationNonce: Foundation.UUID
   public let signedDate: Foundation.Date
-  #if compiler(>=5.3) && $EffectfulProp
   public static var shared: StoreKit.VerificationResult<StoreKit.AppTransaction> {
     get async throws
   }
-  #endif
-  #if compiler(>=5.3) && $AsyncAwait
   public static func refresh() async throws -> StoreKit.VerificationResult<StoreKit.AppTransaction>
-  #endif
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, *)
 extension StoreKit.AppTransaction : Swift.Equatable {
@@ -1386,6 +1566,8 @@ extension StoreKit.Product {
   public struct SubscriptionInfo : Swift.Equatable, Swift.Hashable {
     public let introductoryOffer: StoreKit.Product.SubscriptionOffer?
     public let promotionalOffers: [StoreKit.Product.SubscriptionOffer]
+    @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+    public let winBackOffers: [StoreKit.Product.SubscriptionOffer]
     public let subscriptionGroupID: Swift.String
     public let subscriptionPeriod: StoreKit.Product.SubscriptionPeriod
     @available(iOS 16.4, macOS 13.3, tvOS 16.4, watchOS 9.4, visionOS 1.0, *)
@@ -1397,16 +1579,12 @@ extension StoreKit.Product {
     @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
     @usableFromInline
     internal let groupDisplayNameStorage: Swift.String
-    #if compiler(>=5.3) && $EffectfulProp
     @inlinable public var isEligibleForIntroOffer: Swift.Bool {
       get async {
                 await Self.isEligibleForIntroOffer(for: subscriptionGroupID)
             }
     }
-    #endif
-    #if compiler(>=5.3) && $AsyncAwait
     public static func isEligibleForIntroOffer(for groupID: Swift.String) async -> Swift.Bool
-    #endif
     public static func == (a: StoreKit.Product.SubscriptionInfo, b: StoreKit.Product.SubscriptionInfo) -> Swift.Bool
     public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
@@ -1472,6 +1650,15 @@ public struct Message : Swift.Sendable {
     @available(tvOS, unavailable)
     @available(watchOS, unavailable)
     public static let billingIssue: StoreKit.Message.Reason
+    @available(iOS 18.0, macCatalyst 18.0, visionOS 2.0, *)
+    @available(macOS, unavailable)
+    @available(tvOS, unavailable)
+    @available(watchOS, unavailable)
+    public static let winBackOffer: StoreKit.Message.Reason
+    @available(iOS 16.0, visionOS 1.0, macCatalyst 16.0, *)
+    @available(tvOS, unavailable)
+    @available(watchOS, unavailable)
+    @available(macOS, unavailable)
     public typealias RawValue = Swift.Int
   }
 }
@@ -1497,23 +1684,47 @@ extension StoreKit.Message : Swift.Hashable {
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 extension StoreKit.Message {
-  #if compiler(>=5.3) && $RethrowsProtocol
   public struct Messages : _Concurrency.AsyncSequence, Swift.Sendable {
     public typealias Element = StoreKit.Message
     public struct AsyncIterator : _Concurrency.AsyncIteratorProtocol {
-      #if compiler(>=5.3) && $AsyncAwait
       public mutating func next() async -> StoreKit.Message.Messages.Element?
-      #endif
+      @available(iOS 16.0, visionOS 1.0, macCatalyst 16.0, *)
+      @available(tvOS, unavailable, introduced: 13.0)
+      @available(watchOS, unavailable, introduced: 6.0)
+      @available(macOS, unavailable, introduced: 10.15)
       public typealias Element = StoreKit.Message.Messages.Element
+      #if compiler(>=5.3) && $AssociatedTypeImplements
+      @available(iOS 18.0, visionOS 2.0, macCatalyst 16.0, *)
+      @available(tvOS, unavailable, introduced: 18.0)
+      @available(watchOS, unavailable, introduced: 11.0)
+      @available(macOS, unavailable, introduced: 15.0)
+      @_implements(_Concurrency.AsyncIteratorProtocol, Failure) public typealias __AsyncIteratorProtocol_Failure = Swift.Never
+      #else
+      @available(iOS 18.0, visionOS 2.0, macCatalyst 16.0, *)
+      @available(tvOS, unavailable, introduced: 18.0)
+      @available(watchOS, unavailable, introduced: 11.0)
+      @available(macOS, unavailable, introduced: 15.0)
+      public typealias __AsyncIteratorProtocol_Failure = Swift.Never
+      #endif
     }
     public func makeAsyncIterator() -> StoreKit.Message.Messages.AsyncIterator
+    #if compiler(>=5.3) && $AssociatedTypeImplements
+    @available(iOS 18.0, visionOS 2.0, macCatalyst 16.0, *)
+    @available(tvOS, unavailable, introduced: 18.0)
+    @available(watchOS, unavailable, introduced: 11.0)
+    @available(macOS, unavailable, introduced: 15.0)
+    @_implements(_Concurrency.AsyncSequence, Failure) public typealias __AsyncSequence_Failure = Swift.Never
+    #else
+    @available(iOS 18.0, visionOS 2.0, macCatalyst 16.0, *)
+    @available(tvOS, unavailable, introduced: 18.0)
+    @available(watchOS, unavailable, introduced: 11.0)
+    @available(macOS, unavailable, introduced: 15.0)
+    public typealias __AsyncSequence_Failure = Swift.Never
+    #endif
   }
-  #endif
-  #if compiler(>=5.3) && $RethrowsProtocol
   public static var messages: StoreKit.Message.Messages {
     get
   }
-  #endif
 }
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension StoreKit.Product {
@@ -1528,9 +1739,9 @@ extension StoreKit.Product {
     public static func promotionalOffer(offerID: Swift.String, keyID: Swift.String, nonce: Foundation.UUID, signature: Foundation.Data, timestamp: Swift.Int) -> StoreKit.Product.PurchaseOption
     public static func quantity(_ quantity: Swift.Int) -> StoreKit.Product.PurchaseOption
     public static func simulatesAskToBuyInSandbox(_ simulateAskToBuy: Swift.Bool) -> StoreKit.Product.PurchaseOption
-    #if compiler(>=5.3) && $Sendable
     @preconcurrency public static func onStorefrontChange(shouldContinuePurchase: @escaping @Sendable (StoreKit.Storefront) -> Swift.Bool) -> StoreKit.Product.PurchaseOption
-    #endif
+    @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+    public static func winBackOffer(_ offer: StoreKit.Product.SubscriptionOffer) -> StoreKit.Product.PurchaseOption
     public static func == (a: StoreKit.Product.PurchaseOption, b: StoreKit.Product.PurchaseOption) -> Swift.Bool
     public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
@@ -1560,6 +1771,7 @@ public struct Product : Swift.Identifiable {
     public static let nonConsumable: StoreKit.Product.ProductType
     public static let nonRenewable: StoreKit.Product.ProductType
     public static let autoRenewable: StoreKit.Product.ProductType
+    @available(iOS 15.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, macOS 12.0, *)
     public typealias RawValue = Swift.String
   }
   @usableFromInline
@@ -1578,6 +1790,7 @@ public struct Product : Swift.Identifiable {
   @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, *)
   @usableFromInline
   internal let priceLocaleStorage: Foundation.Locale
+  @available(iOS 15.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, macOS 12.0, *)
   public typealias ID = Swift.String
 }
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
@@ -1625,34 +1838,26 @@ extension StoreKit.Product {
       get
     }
   }
-  #if compiler(>=5.3) && $AsyncAwait
   @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
   @available(visionOS, unavailable, message: "Use @Environment(\\.purchase) to get a PurchaseAction value to call. If your app uses UIKit, use purchase(confirmIn:options:).")
   public func purchase(options: Swift.Set<StoreKit.Product.PurchaseOption> = []) async throws -> StoreKit.Product.PurchaseResult
-  #endif
 }
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension StoreKit.Product {
-  #if compiler(>=5.3) && $AsyncAwait
   public static func products<Identifiers>(for identifiers: Identifiers) async throws -> [StoreKit.Product] where Identifiers : Swift.Collection, Identifiers.Element == Swift.String
-  #endif
 }
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension StoreKit.Product {
-  #if compiler(>=5.3) && $EffectfulProp
   @inlinable public var latestTransaction: StoreKit.VerificationResult<StoreKit.Transaction>? {
     get async {
             await Transaction.latest(for: id)
         }
   }
-  #endif
-  #if compiler(>=5.3) && $EffectfulProp
   @inlinable public var currentEntitlement: StoreKit.VerificationResult<StoreKit.Transaction>? {
     get async {
             await Transaction.currentEntitlement(for: id)
         }
   }
-  #endif
 }
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension StoreKit.Product : Swift.Sendable {
@@ -1688,8 +1893,8 @@ extension StoreKit.Product {
     get {
         let locale = priceLocaleInternal
         return Decimal.FormatStyle.Currency(
-            // We enforce this to be nonnull Sydro+, but we should handle without
-            // crashing for back deployed OS
+             
+             
             code: locale.currencyCode ?? "",
             locale: locale
         )
@@ -1701,7 +1906,7 @@ extension StoreKit.Product {
     get {
         let locale = priceLocaleInternal
         return Date.ComponentsFormatStyle(
-            // this default is arbitrary, callers can modify this as they'd like
+             
             style: .spellOut,
             locale: locale,
             calendar: {
@@ -1910,6 +2115,8 @@ extension StoreKit.Product.PurchaseError : Swift.Hashable {}
 extension StoreKit.VerificationResult.VerificationError : Swift.Equatable {}
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension StoreKit.VerificationResult.VerificationError : Swift.Hashable {}
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
+extension StoreKit.Product.SubscriptionInfo.RenewalInfo.PriceIncreaseStatus : Swift.BitwiseCopyable {}
 @available(iOS 16.4, *)
 @available(visionOS, unavailable)
 @available(macOS, unavailable)

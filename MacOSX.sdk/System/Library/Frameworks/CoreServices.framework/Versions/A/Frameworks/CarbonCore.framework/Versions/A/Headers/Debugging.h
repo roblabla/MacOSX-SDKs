@@ -9,6 +9,8 @@
 #ifndef __DEBUGGING__
 #define __DEBUGGING__
 
+#include <sys/cdefs.h>
+
 #ifndef __MACTYPES__
 #include <MacTypes.h>
 #endif
@@ -28,10 +30,6 @@
 
 #if PRAGMA_ONCE
 #pragma once
-#endif
-
-#ifdef __cplusplus
-extern "C" {
 #endif
 
 /*
@@ -217,6 +215,9 @@ extern "C" {
  *  Include AssertMacros.h where all of the check, verify, and require macros are defined
  */
 #include <AssertMacros.h>
+
+__BEGIN_DECLS
+
 /*
  *  The following check, verify, and require macros assert that TaskLevel is 0.
  */
@@ -285,7 +286,6 @@ extern "C" {
 #else
     #define DPRINTF(x)  { }
 #endif
-
 
 /*
  *  kBlessedBusErrorBait is an address that will never be mapped by
@@ -729,130 +729,30 @@ typedef STACK_UPP_TYPE(DebugAssertOutputHandlerProcPtr)         DebugAssertOutpu
 extern void 
 InstallDebugAssertOutputHandler(DebugAssertOutputHandlerUPP handler) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
 
-
-/*
- *  dprintf()
- *  
- *  Summary:
- *    printf takes a variable argument list and 'prints' that to the
- *    debugging output handler.  Calling dprintf() from anything but C
- *    or C++ is tricky.
- *  
- *  Parameters:
- *    
- *    format:
- *      The format string.
- *    
- *    ...:
- *      The arguments to the format string.
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in DebugLib 1.1 and later
- */
-
-
-/*
- *  vdprintf()
- *  
- *  Summary:
- *    vdprintf takes a va_args list and 'prints' that to the debugging
- *    output handler.
- *  
- *  Parameters:
- *    
- *    format:
- *      The format string.
- *    
- *    va_args_list:
- *      The va_args list.
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in DebugLib 1.1 and later
- */
-
-
-/*
- *  GetMacOSStatusErrorString()
- *  
- *  Summary:
- *    Returns a const char* string which corresponds to the textual
- *    constant for the given OSStatus code.
- *  
- *  Discussion:
- *    This function returns a text string which corresponds to the
- *    given OSStatus code, based on the errors in MacErrors.h.  For
- *    example, GetMacOSStatusErrorString( -43 ) returns "fnfErr", which
- *    is the text representation for the error constant -43.  This
- *    function is useful if you want to get or print out ( for
- *    debugging purposes only ) a useful description for a given
- *    OSStatus error.  If no string is available for the given
- *    constant, then the empty string "" is returned. Some error values
- *    have multiple meanings; in those cases the multiple meanings are
+/*!
+ * @abstract Returns a const char\* string which corresponds to the textual constant for the given OSStatus code.
+ * @discussion
+ *    This function returns a text string which corresponds to the given OSStatus code, based on the errors in MacErrors.h.  For example, GetMacOSStatusErrorString( -43 ) returns "fnfErr", which
+ *    is the text representation for the error constant -43.  This function is useful if you want to get or print out (for debugging purposes only) a useful description for a given
+ *    OSStatus error.  If no string is available for the given constant, then the empty string "" is returned. Some error values have multiple meanings; in those cases the multiple meanings are
  *    all returned seperated by '/'es.
- *  
- *  Mac OS X threading:
- *    Thread safe
- *  
- *  Parameters:
- *    
- *    err:
- *      The OSStatus to return a text string for.
- *  
- *  Result:
- *    A const char* string corresponding to the given OSStatus
- *  
- *  Availability:
- *    Mac OS X:         in version 10.4 and later in CoreServices.framework
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   not available
+ * @param	err  the OSStatus to return a text string for
+ *  @result a const char\* string corresponding to the given OSStatus
  */
 extern const char * 
-GetMacOSStatusErrorString(OSStatus err)                       __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
+GetMacOSStatusErrorString(OSStatus err)                       API_AVAILABLE(macos(10.4), macCatalyst(11.0) ) API_UNAVAILABLE(ios, tvos, watchos );
 
-
-/*
- *  GetMacOSStatusCommentString()
- *  
- *  Summary:
- *    Returns a const char* string which corresponds to the descriptive
- *    string for the given OSStatus code.
- *  
- *  Discussion:
- *    This function returns a text string which corresponds to a
- *    comment for the given OSStatus code, based on the errors in
- *    MacErrors.h.  For example, GetMacOSStatusConstantString( -43 )
- *    returns "File not found", which is the text representation for
- *    the error constant -43.  This function is useful if you want to
- *    get or print out ( for debugging purposes only ) a useful
- *    description for a given OSStatus error.  If no string is
- *    available for the given constant, then the empty string "" is
- *    returned. If no string is available for the given constant, then
- *    the empty string "" is returned.  Some error values have multiple
- *    meanings; in those cases the multiple meanings are all returned
- *    seperated by '/'es.
- *  
- *  Mac OS X threading:
- *    Thread safe
- *  
- *  Parameters:
- *    
- *    err:
- *      The OSStatus to return a text string for.
- *  
- *  Result:
- *    A const char* string corresponding to the given OSStatus
- *  
- *  Availability:
- *    Mac OS X:         in version 10.4 and later in CoreServices.framework
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   not available
+/*!
+ *	@abstract Returns a const char\* string which corresponds to the descriptive string for the given OSStatus code.
+ *  @discussion This function returns a text string which corresponds to a comment for the given OSStatus code, based on the errors in MacErrors.h.  For example, GetMacOSStatusConstantString( -43 )
+ *    returns "File not found", which is the text representation for the error constant -43.  This function is useful if you want to get or print out ( for debugging purposes only ) a useful
+ *    description for a given OSStatus error.  If no string is available for the given constant, then the empty string "" is returned. If no string is available for the given constant, then
+ *    the empty string "" is returned.  Some error values have multiple meanings; in those cases the multiple meanings are all returned seperated by '/'es.
+ *	@param err the OSStatus to return a text string for.
+ *  @result a const char\* string corresponding to the given OSStatus
  */
 extern const char * 
-GetMacOSStatusCommentString(OSStatus err)                     __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
+GetMacOSStatusCommentString(OSStatus err)                     API_AVAILABLE(macos(10.4), macCatalyst(11.0) ) API_UNAVAILABLE(ios, tvos, watchos ) ;
 
 
 /*
@@ -954,9 +854,7 @@ InvokeDebugAssertOutputHandlerUPP(
 #endif
 
 
-#ifdef __cplusplus
-}
-#endif
+__END_DECLS
 
 #endif /* __DEBUGGING__ */
 

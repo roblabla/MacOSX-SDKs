@@ -18,6 +18,7 @@ exports:
                        _WiFiManagerClientDisable, _WiFiManagerClientDisableNetwork, 
                        _WiFiManagerClientEnable, _WiFiManagerClientGetDevice, _WiFiManagerClientGetThermalIndex, 
                        _WiFiManagerClientGetWoWCapability, _WiFiManagerClientGetWoWState, 
+                       _WiFiManagerClientPrivateMacIsQuickProbeRequired, _WiFiManagerClientPrivateMacReportProbeResult, 
                        _WiFiManagerClientRegisterDeviceAttachmentCallback, _WiFiManagerClientRegisterWowStateChangedCallback, 
                        _WiFiManagerClientScheduleWithRunLoop, _WiFiManagerClientSetPower, 
                        _WiFiManagerClientSetThermalIndex, _WiFiManagerClientSetWoWState, 

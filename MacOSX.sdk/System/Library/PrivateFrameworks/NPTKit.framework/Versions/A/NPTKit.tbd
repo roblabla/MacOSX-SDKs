@@ -10,11 +10,11 @@ exports:
                        _NEVPNStatusDidChangeNotification, _NPTKitVersionNumber, _NPTKitVersionString, 
                        _PING_URL, _POST_URL, _POST_URL_EXTENSION, _TEMP_FILE_NAME, 
                        _UNIQUE_QUERY_PARAM ]
-    objc-classes:    [ NPTAWDLCollector, NPTBTCollector, NPTCDNDebugCollector, NPTDownload, 
-                       NPTFileSizeConverter, NPTLogger, NPTMetadataCollector, NPTMetadataEvent, 
-                       NPTMetadataEventTypeConverter, NPTMetricResult, NPTNetworkCollector, 
-                       NPTPerformanceTest, NPTPerformanceTestConfiguration, NPTPing, 
-                       NPTPingResult, NPTResults, NPTSpeedMetric, NPTSystemCollector, 
+    objc-classes:    [ NPTAWDLCollector, NPTBTCollector, NPTCDNDebugCollector, NPTDLogger, 
+                       NPTDownload, NPTFileSizeConverter, NPTLogger, NPTMetadataCollector, 
+                       NPTMetadataEvent, NPTMetadataEventTypeConverter, NPTMetricResult, 
+                       NPTNetworkCollector, NPTPerformanceTest, NPTPerformanceTestConfiguration, 
+                       NPTPing, NPTPingResult, NPTResults, NPTSpeedMetric, NPTSystemCollector, 
                        NPTTaskMetrics, NPTUpload, NPTUploadDataStream, NPTVPNCollector, 
-                       NPTWiFiCollector, Ping, SDLogger, SimplePing, SpeedDClient ]
+                       NPTWiFiCollector, NetworkPerformanceTesterDClient, Ping, SimplePing ]
 ...

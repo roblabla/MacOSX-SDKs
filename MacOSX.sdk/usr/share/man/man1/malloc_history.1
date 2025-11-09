@@ -70,7 +70,7 @@ in the target program.
 .Pp
 The
 .Fl highWaterMark
-option does not work with memory graph files since they only contain stack logs for active allocations, not full history.
+option requires full mode of MallocStackLogging, in either a live process or a memory graph file recorded with -fullStackHistory.
 .Pp
 By specifying one or more addresses,
 .Nm malloc_history
@@ -208,4 +208,6 @@ The Xcode developer tools also include Instruments, a graphical application that
 .Nm malloc_history.
 The Allocations instrument graphically displays dynamic, real-time
 information about the object and memory use in an application, including backtraces
-of where the allocations occured.
+of where the allocations occurred.
+.Sh CAVEATS
+All memory sizes are given in binary-prefixed units. For example, "1K" refers to 1024 bytes.

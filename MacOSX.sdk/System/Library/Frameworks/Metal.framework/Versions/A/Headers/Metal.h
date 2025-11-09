@@ -8,12 +8,15 @@
 #import <Metal/MTLDefines.h>
 #import <Metal/MTLTypes.h>
 #import <Metal/MTLBlitCommandEncoder.h>
+#import <Metal/MTLAllocation.h>
+#import <Metal/MTLResource.h>
 #import <Metal/MTLBuffer.h>
 #import <Metal/MTLCommandBuffer.h>
 #import <Metal/MTLComputeCommandEncoder.h>
 #import <Metal/MTLCommandQueue.h>
 #import <Metal/MTLCounters.h>
 #import <Metal/MTLDevice.h>
+#import <Metal/MTLDeviceCertification.h>
 #import <Metal/MTLDepthStencil.h>
 #import <Metal/MTLDrawable.h>
 #import <Metal/MTLRenderPass.h>
@@ -44,6 +47,7 @@
 #import <Metal/MTLDynamicLibrary.h>
 #import <Metal/MTLFunctionDescriptor.h>
 #import <Metal/MTLLinkedFunctions.h>
+#import <Metal/MTLLogState.h>
 #import <Metal/MTLFunctionHandle.h>
 #import <Metal/MTLVisibleFunctionTable.h>
 #import <Metal/MTLBinaryArchive.h>
@@ -52,3 +56,5 @@
 #import <Metal/MTLIOCommandQueue.h>
 #import <Metal/MTLIOCommandBuffer.h>
 #import <Metal/MTLIOCompressor.h>
+#import <Metal/MTLResidencySet.h>
+

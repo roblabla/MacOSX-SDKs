@@ -1,6 +1,6 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.10 (swiftlang-5.10.0.12.5 clang-1500.3.9.1.1)
-// swift-module-flags: -target arm64e-apple-macos14.5 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-bare-slash-regex -user-module-version 145.5.14.13 -module-name BrowserEngineKit
+// swift-compiler-version: Apple Swift version 6.0 effective-5.10 (swiftlang-6.0.0.7.24 clang-1600.0.25.1)
+// swift-module-flags: -target arm64e-apple-macos15.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-upcoming-feature StrictConcurrency -enable-bare-slash-regex -user-module-version 193 -module-name BrowserEngineKit
 import AVFoundation
 @_exported import BrowserEngineCore
 @_exported import BrowserEngineKit
@@ -23,8 +23,8 @@ public protocol WebContentExtension : BrowserEngineKit.RestrictedSandboxAppliabl
 @available(watchOS, unavailable)
 @available(tvOS, unavailable)
 @available(visionOS, unavailable)
-public struct WebContentExtensionConfiguration : ExtensionFoundation.AppExtensionConfiguration {
-  public func accept(connection: Foundation.NSXPCConnection) -> Swift.Bool
+@_Concurrency.MainActor @preconcurrency public struct WebContentExtensionConfiguration : ExtensionFoundation.AppExtensionConfiguration {
+  nonisolated public func accept(connection: Foundation.NSXPCConnection) -> Swift.Bool
 }
 @available(macOS 14.3, iOS 17.4, *)
 @available(watchOS, unavailable)
@@ -46,8 +46,8 @@ public protocol RenderingExtension : BrowserEngineKit.RestrictedSandboxAppliable
 @available(watchOS, unavailable)
 @available(tvOS, unavailable)
 @available(visionOS, unavailable)
-public struct RenderingExtensionConfiguration : ExtensionFoundation.AppExtensionConfiguration {
-  public func accept(connection: Foundation.NSXPCConnection) -> Swift.Bool
+@_Concurrency.MainActor @preconcurrency public struct RenderingExtensionConfiguration : ExtensionFoundation.AppExtensionConfiguration {
+  nonisolated public func accept(connection: Foundation.NSXPCConnection) -> Swift.Bool
 }
 @available(macOS 14.3, iOS 17.4, *)
 @available(watchOS, unavailable)
@@ -63,9 +63,7 @@ extension BrowserEngineKit.RenderingExtension {
 @available(tvOS, unavailable)
 @available(visionOS, unavailable)
 public struct NetworkingProcess {
-  #if compiler(>=5.3) && $AsyncAwait
   public init(bundleIdentifier: Swift.String? = nil, onInterruption: @escaping () -> Swift.Void) async throws
-  #endif
   public func makeLibXPCConnection() throws -> XPC.xpc_connection_t
   public func invalidate()
 }
@@ -74,9 +72,7 @@ public struct NetworkingProcess {
 @available(tvOS, unavailable)
 @available(visionOS, unavailable)
 public struct WebContentProcess {
-  #if compiler(>=5.3) && $AsyncAwait
   public init(bundleIdentifier: Swift.String? = nil, onInterruption: @escaping () -> Swift.Void) async throws
-  #endif
   public func makeLibXPCConnection() throws -> XPC.xpc_connection_t
   public func invalidate()
 }
@@ -85,9 +81,7 @@ public struct WebContentProcess {
 @available(tvOS, unavailable)
 @available(visionOS, unavailable)
 public struct RenderingProcess {
-  #if compiler(>=5.3) && $AsyncAwait
   public init(bundleIdentifier: Swift.String? = nil, onInterruption: @escaping () -> Swift.Void) async throws
-  #endif
   public func makeLibXPCConnection() throws -> XPC.xpc_connection_t
   public func invalidate()
 }
@@ -130,8 +124,12 @@ public enum RestrictedSandboxRevision : Swift.CaseIterable, Swift.Comparable {
   public static func < (lhs: BrowserEngineKit.RestrictedSandboxRevision, rhs: BrowserEngineKit.RestrictedSandboxRevision) -> Swift.Bool
   public static func == (a: BrowserEngineKit.RestrictedSandboxRevision, b: BrowserEngineKit.RestrictedSandboxRevision) -> Swift.Bool
   public func hash(into hasher: inout Swift.Hasher)
+  @available(iOS 17.4, macOS 14.3, *)
+  @available(tvOS, unavailable)
+  @available(watchOS, unavailable)
+  @available(visionOS, unavailable)
   public typealias AllCases = [BrowserEngineKit.RestrictedSandboxRevision]
-  public static var allCases: [BrowserEngineKit.RestrictedSandboxRevision] {
+  nonisolated public static var allCases: [BrowserEngineKit.RestrictedSandboxRevision] {
     get
   }
   public var hashValue: Swift.Int {
@@ -199,6 +197,12 @@ public struct MediaEnvironment {
 @available(visionOS, unavailable)
 extension BrowserEngineKit.NetworkingProcess {
   public func grantCapability(_ capability: BrowserEngineKit.ProcessCapability) throws -> BrowserEngineKit.ProcessCapability.Grant
+  @available(iOS 17.6, *)
+  @available(macOS, unavailable)
+  @available(watchOS, unavailable)
+  @available(tvOS, unavailable)
+  @available(visionOS, unavailable)
+  public func grantCapability(_ capability: BrowserEngineKit.ProcessCapability, invalidationHandler: @escaping () -> Swift.Void) throws -> BrowserEngineKit.ProcessCapability.Grant
 }
 @available(macOS 14.3, iOS 17.4, *)
 @available(watchOS, unavailable)
@@ -206,6 +210,12 @@ extension BrowserEngineKit.NetworkingProcess {
 @available(visionOS, unavailable)
 extension BrowserEngineKit.WebContentProcess {
   public func grantCapability(_ capability: BrowserEngineKit.ProcessCapability) throws -> BrowserEngineKit.ProcessCapability.Grant
+  @available(iOS 17.6, *)
+  @available(macOS, unavailable)
+  @available(watchOS, unavailable)
+  @available(tvOS, unavailable)
+  @available(visionOS, unavailable)
+  public func grantCapability(_ capability: BrowserEngineKit.ProcessCapability, invalidationHandler: @escaping () -> Swift.Void) throws -> BrowserEngineKit.ProcessCapability.Grant
 }
 @available(macOS 14.3, iOS 17.4, *)
 @available(watchOS, unavailable)
@@ -213,6 +223,12 @@ extension BrowserEngineKit.WebContentProcess {
 @available(visionOS, unavailable)
 extension BrowserEngineKit.RenderingProcess {
   public func grantCapability(_ capability: BrowserEngineKit.ProcessCapability) throws -> BrowserEngineKit.ProcessCapability.Grant
+  @available(iOS 17.6, *)
+  @available(macOS, unavailable)
+  @available(watchOS, unavailable)
+  @available(tvOS, unavailable)
+  @available(visionOS, unavailable)
+  public func grantCapability(_ capability: BrowserEngineKit.ProcessCapability, invalidationHandler: @escaping () -> Swift.Void) throws -> BrowserEngineKit.ProcessCapability.Grant
 }
 @objc @_hasMissingDesignatedInitializers @available(iOS 17.4, *)
 @available(macOS, unavailable)
@@ -240,8 +256,8 @@ public protocol NetworkingExtension : BrowserEngineKit.RestrictedSandboxAppliabl
 @available(watchOS, unavailable)
 @available(tvOS, unavailable)
 @available(visionOS, unavailable)
-public struct NetworkingExtensionConfiguration : ExtensionFoundation.AppExtensionConfiguration {
-  public func accept(connection: Foundation.NSXPCConnection) -> Swift.Bool
+@_Concurrency.MainActor @preconcurrency public struct NetworkingExtensionConfiguration : ExtensionFoundation.AppExtensionConfiguration {
+  nonisolated public func accept(connection: Foundation.NSXPCConnection) -> Swift.Bool
 }
 @available(macOS 14.3, iOS 17.4, *)
 @available(watchOS, unavailable)

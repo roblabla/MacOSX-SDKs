@@ -8,7 +8,8 @@ allowable-clients:
                        arm64e-macos, arm64e-maccatalyst ]
     clients:         [ AssetViewer, CoreMaterialTester, MaterialKit, Materials, MaterialsPlugIn, 
                        MicaKit, PointerUIServices, SpringBoard, SpringBoard-Tests, 
-                       SpringBoardHome, SwiftUI, UIKitCore, UIKitester, VisionKitCore ]
+                       SpringBoardHome, SwiftUI, SwiftUICore, UIKitCore, UIKitester, 
+                       VisionKitCore, _SwiftUICore ]
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]

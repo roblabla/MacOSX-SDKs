@@ -2,10 +2,11 @@
 //  VZUSBMassStorageDeviceConfiguration.h
 //  Virtualization
 //
-//  Copyright © 2021-2023 Apple Inc. All rights reserved.
+//  Copyright © 2021-2024 Apple Inc. All rights reserved.
 //
 
 #import <Virtualization/VZStorageDeviceConfiguration.h>
+#import <Virtualization/VZUSBDeviceConfiguration.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -15,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
     This device configuration creates a storage device that conforms to the USB Mass Storage specification.
  */
 VZ_EXPORT API_AVAILABLE(macos(13.0))
-@interface VZUSBMassStorageDeviceConfiguration : VZStorageDeviceConfiguration
+@interface VZUSBMassStorageDeviceConfiguration : VZStorageDeviceConfiguration <VZUSBDeviceConfiguration>
 
 /*!
  @abstract Initialize a VZUSBMassStorageDeviceConfiguration with a device attachment.

@@ -15,27 +15,29 @@ NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 @protocol UIConfigurationState;
 @class UIVisualEffect;
 @class UIImage;
+@class UIShadowProperties;
 
-
-UIKIT_EXTERN API_AVAILABLE(ios(14.0), tvos(14.0), watchos(7.0)) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(14.0), tvos(14.0)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @interface UIBackgroundConfiguration : NSObject <NSCopying, NSSecureCoding>
 
 /// Returns a clear configuration, with no default styling.
 + (instancetype)clearConfiguration;
 
-/// Returns the default configuration for a plain list cell.
-+ (instancetype)listPlainCellConfiguration;
-/// Returns the default configuration for a plain list header or footer.
-+ (instancetype)listPlainHeaderFooterConfiguration;
-/// Returns the default configuration for a grouped list cell.
-+ (instancetype)listGroupedCellConfiguration;
-/// Returns the default configuration for a grouped list header or footer.
-+ (instancetype)listGroupedHeaderFooterConfiguration;
+/// Represents a generic cell background configuration that automatically adopts the style of a containing list when updated for a
+/// new configuration state, by reading the `listEnvironment` trait from the state's trait collection.
+/// Defaults to the background configuration for a cell in a plain-style list.
++ (instancetype)listCellConfiguration API_AVAILABLE(ios(18.0), tvos(18.0), visionos(2.0)) API_UNAVAILABLE(watchos);
 
-/// Returns the default configuration for a sidebar list header.
-+ (instancetype)listSidebarHeaderConfiguration API_UNAVAILABLE(tvos, watchos);
-/// Returns the default configuration for a sidebar list cell.
-+ (instancetype)listSidebarCellConfiguration API_UNAVAILABLE(watchos) API_UNAVAILABLE(tvos);
+/// Represents a generic header background configuration that automatically adopts the style of a containing list when updated for a
+/// new configuration state, by reading the `listEnvironment` trait from the state's trait collection.
+/// Defaults to the background configuration for a header in a plain-style list.
++ (instancetype)listHeaderConfiguration API_AVAILABLE(ios(18.0), tvos(18.0), visionos(2.0)) API_UNAVAILABLE(watchos);
+
+/// Represents a generic footer background configuration that automatically adopts the style of a containing list when updated for a
+/// new configuration state, by reading the `listEnvironment` trait from the state's trait collection.
+/// Defaults to the background configuration for a footer in a plain-style list.
++ (instancetype)listFooterConfiguration API_AVAILABLE(ios(18.0), tvos(18.0), visionos(2.0)) API_UNAVAILABLE(watchos);
+
 /// Returns the default configuration for an accompanied sidebar list cell.
 + (instancetype)listAccompaniedSidebarCellConfiguration API_UNAVAILABLE(tvos, watchos);
 
@@ -73,9 +75,9 @@ UIKIT_EXTERN API_AVAILABLE(ios(14.0), tvos(14.0), watchos(7.0)) NS_SWIFT_UI_ACTO
 @property (nonatomic, copy, nullable) UIVisualEffect *visualEffect;
 
 /// The image to use. Default is nil.
-@property (nonatomic, strong, nullable) UIImage *image API_AVAILABLE(ios(15.0), tvos(15.0), watchos(8.0));
+@property (nonatomic, strong, nullable) UIImage *image API_AVAILABLE(ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos);
 /// The content mode to use when rendering the image. Default is UIViewContentModeScaleToFill.
-@property (nonatomic) UIViewContentMode imageContentMode API_AVAILABLE(ios(15.0), tvos(15.0), watchos(8.0));
+@property (nonatomic) UIViewContentMode imageContentMode API_AVAILABLE(ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos);
 
 // Stroke
 
@@ -92,6 +94,31 @@ UIKIT_EXTERN API_AVAILABLE(ios(14.0), tvos(14.0), watchos(7.0)) NS_SWIFT_UI_ACTO
 /// Outset (or inset, if negative) for the stroke, relative to the background (including any backgroundInsets). Default is 0.
 /// The corner radius of the stroke is adjusted for any outset to remain concentric with the background.
 @property (nonatomic) CGFloat strokeOutset;
+
+/// Describes a shadow applied by the background.
+/// Defaults to no shadow (i.e. a shadow with an opacity of 0.0).
+@property (nonatomic, readonly) UIShadowProperties *shadowProperties API_AVAILABLE(ios(18.0), tvos(18.0), visionos(2.0)) API_UNAVAILABLE(watchos);
+
+
+// Deprecated
+
+/// Returns the default configuration for a plain list cell.
++ (instancetype)listPlainCellConfiguration API_DEPRECATED_WITH_REPLACEMENT("listCellConfiguration", ios(14.0, 18.0)) API_UNAVAILABLE(watchos);
+
+/// Returns the default configuration for a grouped list cell.
++ (instancetype)listGroupedCellConfiguration API_DEPRECATED_WITH_REPLACEMENT("listCellConfiguration", ios(14.0, 18.0)) API_UNAVAILABLE(watchos);
+
+/// Returns the default configuration for a sidebar list cell.
++ (instancetype)listSidebarCellConfiguration API_DEPRECATED_WITH_REPLACEMENT("listCellConfiguration", ios(14.0, 18.0)) API_UNAVAILABLE(watchos, tvos);
+
+/// Returns the default configuration for a plain list header or footer.
++ (instancetype)listPlainHeaderFooterConfiguration API_DEPRECATED("Use +listHeaderConfiguration or +listFooterConfiguration", ios(14.0, 18.0)) API_UNAVAILABLE(watchos);
+
+/// Returns the default configuration for a grouped list header or footer.
++ (instancetype)listGroupedHeaderFooterConfiguration API_DEPRECATED("Use +listHeaderConfiguration or +listFooterConfiguration", ios(14.0, 18.0)) API_UNAVAILABLE(watchos);
+
+/// Returns the default configuration for a sidebar list header.
++ (instancetype)listSidebarHeaderConfiguration API_DEPRECATED("Use +listHeaderConfiguration or +listFooterConfiguration", ios(14.0, 18.0)) API_UNAVAILABLE(tvos, watchos);
 
 @end
 

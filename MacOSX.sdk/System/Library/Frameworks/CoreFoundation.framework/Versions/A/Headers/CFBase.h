@@ -80,22 +80,33 @@
     #include <MacTypes.h>
   #endif
 #else
-  #if (TARGET_OS_OSX || TARGET_OS_IPHONE) && !DEPLOYMENT_RUNTIME_SWIFT
+  #if (TARGET_OS_OSX || TARGET_OS_IPHONE)
     #include <libkern/OSTypes.h>
   #endif
 #endif
 
+// from <malloc/malloc.h>
+typedef unsigned long long CFAllocatorTypeID;
+
+#if TARGET_OS_MAC && (defined(CF_BUILDING_CF) || defined(NSBUILDINGFOUNDATION))
+    #if defined(__has_feature) && __has_feature(typed_memory_operations)
+        #if __has_builtin(__is_target_os) && (__is_target_os(ios) || __is_target_os(driverkit) || __is_target_os(macos) || (__has_builtin(__is_target_environment) && (__is_target_environment(exclavekit) || __is_target_environment(exclavecore))))
+            #define _CF_TYPED_ALLOC(override, type_param_pos) __attribute__((typed_memory_operation(override, type_param_pos)))
+            #define CF_HAS_TYPED_ALLOCATOR 1
+        #endif
+    #endif /* defined(__has_feature) && __has_feature(typed_memory_operations) */
+#endif /* TARGET_OS_MAC && (defined(CF_BUILDING_CF) || defined(NSBUILDINGFOUNDATION)) */
+
+#if !defined(_CF_TYPED_ALLOC)
+#define _CF_TYPED_ALLOC(override, type_param_pos)
+#define CF_HAS_TYPED_ALLOCATOR 0
+#endif
+
 #if !defined(__MACTYPES__)
 #if !defined(_OS_OSTYPES_H)
-#if DEPLOYMENT_RUNTIME_SWIFT || 0
-#if defined(__cplusplus)
-    typedef bool                    Boolean;
-#else
-    typedef _Bool                   Boolean;
-#endif //defined(__cplusplus)
-#else
+
     typedef unsigned char           Boolean;
-#endif
+
     typedef unsigned char           UInt8;
     typedef signed char             SInt8;
     typedef unsigned short          UInt16;
@@ -654,11 +665,30 @@ CFAllocatorRef CFAllocatorGetDefault(void);
 CF_EXPORT
 CFAllocatorRef CFAllocatorCreate(CFAllocatorRef allocator, CFAllocatorContext *context);
 
-CF_EXPORT
-void *CFAllocatorAllocate(CFAllocatorRef allocator, CFIndex size, CFOptionFlags hint);
+/* Typed allocator interfaces
+
+   These interfaces are provided to either serve as rewrite targets for the
+   compiler, or to be invoked internally to Foundation/CoreFoundation to
+   manually interfact with the typed allocator.
+*/
 
 CF_EXPORT
-void *CFAllocatorReallocate(CFAllocatorRef allocator, void *ptr, CFIndex newsize, CFOptionFlags hint);
+void *CFAllocatorAllocateTyped(CFAllocatorRef allocator, CFIndex size, CFAllocatorTypeID descriptor, CFOptionFlags hint) API_AVAILABLE(macos(15.0), ios(18.0), watchos(11.0), tvos(18.0), visionos(2.0));
+
+CF_EXPORT
+void *CFAllocatorReallocateTyped(CFAllocatorRef allocator, void *ptr, CFIndex newsize, CFAllocatorTypeID descriptor, CFOptionFlags hint) API_AVAILABLE(macos(15.0), ios(18.0), watchos(11.0), tvos(18.0), visionos(2.0));
+
+CF_EXPORT
+void *CFAllocatorAllocateBytes(CFAllocatorRef allocator, CFIndex size, CFOptionFlags hint) API_AVAILABLE(macos(15.0), ios(18.0), watchos(11.0), tvos(18.0), visionos(2.0));
+
+CF_EXPORT
+void *CFAllocatorReallocateBytes(CFAllocatorRef allocator, void *ptr, CFIndex newsize, CFOptionFlags hint) API_AVAILABLE(macos(15.0), ios(18.0), watchos(11.0), tvos(18.0), visionos(2.0));
+
+CF_EXPORT
+void *CFAllocatorAllocate(CFAllocatorRef allocator, CFIndex size, CFOptionFlags hint) _CF_TYPED_ALLOC(CFAllocatorAllocateTyped, 2);
+
+CF_EXPORT
+void *CFAllocatorReallocate(CFAllocatorRef allocator, void *ptr, CFIndex newsize, CFOptionFlags hint) _CF_TYPED_ALLOC(CFAllocatorReallocateTyped, 3);
 
 CF_EXPORT
 void CFAllocatorDeallocate(CFAllocatorRef allocator, void *ptr);
@@ -686,14 +716,11 @@ CFTypeRef CFRetain(CFTypeRef cf);
 CF_EXPORT
 void CFRelease(CFTypeRef cf);
 
-#if DEPLOYMENT_RUNTIME_SWIFT
-#else
 CF_EXPORT
 CFTypeRef CFAutorelease(CFTypeRef CF_RELEASES_ARGUMENT arg) API_AVAILABLE(macos(10.9), ios(7.0), watchos(2.0), tvos(9.0));
 
 CF_EXPORT
 CFIndex CFGetRetainCount(CFTypeRef cf);
-#endif
 
 CF_EXPORT
 Boolean CFEqual(CFTypeRef cf1, CFTypeRef cf2);
@@ -714,12 +741,6 @@ CF_EXPORT
 CFTypeRef CFMakeCollectable(CFTypeRef cf) CF_AUTOMATED_REFCOUNT_UNAVAILABLE;
 
 CF_EXTERN_C_END
-
-#if DEPLOYMENT_RUNTIME_SWIFT
-
-#define _CF_SWIFT_RC_PINNED_FLAG (0x1)
-#define _CF_CONSTANT_OBJECT_STRONG_RC ((uintptr_t)_CF_SWIFT_RC_PINNED_FLAG)
-#endif
 
 #if __has_include(<ptrauth.h>)
 #include <ptrauth.h>

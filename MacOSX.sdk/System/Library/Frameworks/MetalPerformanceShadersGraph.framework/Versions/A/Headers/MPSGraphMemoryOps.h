@@ -13,14 +13,14 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-/// This class defines parameters for an MPSGraphVariableOp.
+/// The class that defines the parameters for a variable.
 MPS_CLASS_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))
 @interface MPSGraphVariableOp : MPSGraphOperation
 
 /// The shape of the variable.
 @property (readonly, nonnull, nonatomic) MPSShape *shape;
 
-/// The dataType of the variable.
+/// The data type of the variable.
 @property (readonly, nonatomic) MPSDataType dataType;
 
 @end
@@ -28,7 +28,7 @@ MPS_CLASS_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))
 MPS_CLASS_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))
 @interface MPSGraph(MemoryOps)
 
-/// Creates a placeholder op and returns the result tensor.
+/// Creates a placeholder operation and returns the result tensor.
 ///
 /// - Parameters:
 ///   - shape: The shape of the output tensor. A nil shape will result in an unranked tensor.
@@ -40,7 +40,7 @@ MPS_CLASS_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))
                                     name:(NSString * _Nullable) name
 MPS_SWIFT_NAME( placeholder(shape:dataType:name:) );
 
-/// Creates a placeholder op and returns the result tensor with the dataType of the placeholder tensor set to MPSDataTypeFloat32.
+/// Creates a placeholder operation and returns the result tensor with the dataType of the placeholder tensor set to 32 bit float.
 ///
 /// - Parameters:
 ///   - shape: The shape of the output tensor. A nil shape will result in an unranked tensor.
@@ -63,7 +63,7 @@ MPS_SWIFT_NAME( placeholder(shape:name:) );
                             dataType:(MPSDataType) dataType
 MPS_SWIFT_NAME( constant(_:shape:dataType:) );
 
-/// Creates a constant op and returns the result tensor.
+/// Creates a constant operation and returns the result tensor.
 ///
 /// - Parameters:
 ///   - scalar: The scalar value to fill the entire tensor values with.
@@ -97,7 +97,7 @@ MPS_SWIFT_NAME( constant(_:shape:dataType:) );
 MPS_AVAILABLE_STARTING(macos(14.0), ios(17.0), tvos(17.0))
 MPS_SWIFT_NAME( complexConstant(realPart:imaginaryPart:) );
 
-/// Creates a complex constant op and returns the result tensor.
+/// Creates a complex constant operation and returns the result tensor.
 ///
 /// - Parameters:
 ///   - realPart: The real part of the complex scalar to fill the entire tensor values with.
@@ -125,7 +125,7 @@ MPS_SWIFT_NAME( complexConstant(realPart:imaginaryPart:dataType:) );
 MPS_AVAILABLE_STARTING(macos(14.0), ios(17.0), tvos(17.0))
 MPS_SWIFT_NAME( complexConstant(realPart:imaginaryPart:shape:dataType:) );
 
-/// Creates a variable op and returns the result tensor.
+/// Creates a variable operation and returns the result tensor.
 ///
 /// - Parameters:
 ///   - data: The data for the tensor. The number of bytes should be sizeof(dataType)numberOfElements.
@@ -138,6 +138,17 @@ MPS_SWIFT_NAME( complexConstant(realPart:imaginaryPart:shape:dataType:) );
                             dataType:(MPSDataType) dataType
                                 name:(NSString * _Nullable) name;
 
+/// Creates a variable from an input tensor.
+///
+/// - Parameters:
+///   - tensor: The tensor from which to form the variable.
+///   - name: The name for the operation.
+/// - Returns: A valid MPSGraphTensor object.
+    -(MPSGraphTensor *) variableFromTensorWithTensor:(MPSGraphTensor * _Nonnull) tensor
+                                                name:(NSString * _Nullable) name
+MPS_SWIFT_NAME( variableFromTensor(_:name:) )
+MPS_AVAILABLE_STARTING(macos(15.0), ios(18.0), macCatalyst(18.0), tvos(18.0));
+
 /// Creates a read op which reads at this point of execution of the graph and returns the result tensor.
 ///
 /// - Parameters:
@@ -148,7 +159,7 @@ MPS_SWIFT_NAME( complexConstant(realPart:imaginaryPart:shape:dataType:) );
                             name:(NSString * _Nullable) name
 MPS_SWIFT_NAME( read(_:name:) );
 
-/// Creates an assign op which writes at this point of execution of the graph.
+/// Creates an assign operation which writes at this point of execution of the graph.
 ///
 /// - Parameters:
 ///   - variable: The variable resource tensor to assign to.

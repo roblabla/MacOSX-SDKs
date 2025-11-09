@@ -13,7 +13,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 // A request for a speech recognition from an audio source
-API_AVAILABLE(ios(10.0), macos(10.15))
+API_AVAILABLE(ios(10.0), macos(10.15), tvos(18))
 @interface SFSpeechRecognitionRequest : NSObject
 
 @property (nonatomic) SFSpeechRecognitionTaskHint taskHint;
@@ -32,17 +32,17 @@ API_AVAILABLE(ios(10.0), macos(10.15))
 // This will reduce accuracy but enables certain applications where it is
 // inappropriate to transmit user speech to a remote service.
 // Default is false
-@property (nonatomic) BOOL requiresOnDeviceRecognition API_AVAILABLE(ios(13), macos(10.15));
+@property (nonatomic) BOOL requiresOnDeviceRecognition API_AVAILABLE(ios(13), macos(10.15), tvos(18));
 
 // If true, punctuations will be automatically included in the recognition results
-@property (nonatomic) BOOL addsPunctuation API_AVAILABLE(ios(16), macos(13));
+@property (nonatomic) BOOL addsPunctuation API_AVAILABLE(ios(16), macos(13), tvos(18));
 
-@property (nonatomic, copy, nullable) SFSpeechLanguageModelConfiguration *customizedLanguageModel API_AVAILABLE(ios(17), macos(14));
+@property (nonatomic, copy, nullable) SFSpeechLanguageModelConfiguration *customizedLanguageModel API_AVAILABLE(ios(17), macos(14), tvos(18));
 
 @end
 
 // A request to recognize speech from a recorded audio file
-API_AVAILABLE(ios(10.0), macos(10.15))
+API_AVAILABLE(ios(10.0), macos(10.15), tvos(18))
 @interface SFSpeechURLRecognitionRequest : SFSpeechRecognitionRequest
 
 - (instancetype)init NS_UNAVAILABLE;
@@ -55,7 +55,7 @@ API_AVAILABLE(ios(10.0), macos(10.15))
 @end
 
 // A request to recognize speech from arbitrary audio buffers
-API_AVAILABLE(ios(10.0), macos(10.15))
+API_AVAILABLE(ios(10.0), macos(10.15), tvos(18))
 @interface SFSpeechAudioBufferRecognitionRequest : SFSpeechRecognitionRequest
 
 // Preferred audio format for optimal speech recognition

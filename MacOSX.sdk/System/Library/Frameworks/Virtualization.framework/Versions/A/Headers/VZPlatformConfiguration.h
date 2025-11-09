@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 /*!
  @abstract Base class for a platform configuration.
  @discussion
- VZPlatformConfiguration should not be instantiated directly.
+    VZPlatformConfiguration should not be instantiated directly.
     One of its subclasses should be used instead.
 
  @see VZGenericPlatformConfiguration

@@ -2,7 +2,7 @@
 //  SCNGeometry.h
 //  SceneKit
 //
-//  Copyright © 2012-2021 Apple Inc. All rights reserved.
+//  Copyright © 2012-2024 Apple Inc. All rights reserved.
 //
 
 #import <SceneKit/SceneKitTypes.h>
@@ -110,9 +110,66 @@ SCN_EXPORT
  @abstract Creates and returns a new geometry built from geometry sources and geometry elements.
  @param sources An array of geometry sources. If several geometry sources have the same semantic, only the first one is taken into account.
  @param elements An array of geometry elements. The sort order in the array determines the mapping between materials and geometry elements.
- @discussion A geometry is made of geometry sources (at least vertices) and at least one geometry element. Multiple sources for texture coordinates are accepted. In that case the mappingChannel is implicitly set based on the order of the texture sources, starting at index 0.
+ @discussion A geometry is made of geometry sources (at least `SCNGeometrySourceSemanticVertex`) and at least one geometry element. Multiple sources for texture coordinates are accepted. In that case the `mappingChannel` is implicitly set based on the order of the texture sources, starting at index 0.
 */
-+ (instancetype)geometryWithSources:(NSArray<SCNGeometrySource *> *)sources elements:(nullable NSArray<SCNGeometryElement *> *)elements;
++ (instancetype)geometryWithSources:(NSArray<SCNGeometrySource *> *)sources 
+                           elements:(nullable NSArray<SCNGeometryElement *> *)elements;
+
+/*!
+ @method geometryWithSources:elements:sourceChannels:
+ @abstract Creates and returns a new geometry built from geometry sources and geometry elements, with per-source indexed geometry data.
+ @param sources An array of geometry sources. If several geometry sources have the same semantic, only the first one is taken into account.
+ @param elements An array of geometry elements. The sort order in the array determines the mapping between materials and geometry elements.
+ @param sourceChannels An array of indices that describes, for each geometry source, which channel of the geometry elements to use.
+ @discussion
+ ```
+ Example: geometry made of 3 primitives (2 quads, 1 pentagon) using different indices to reference position and UV data (2 channels)
+ 
+        Positions         ┆   POS0           POS3           POS4    ┆             quad   quad   pentagon    quad   quad   pentagon    ┆   SCNGeometryElement *element = [SCNGeometryElement geometryElementWithData:…
+    0 │ (0.0, 0.0, 0.0)   ┆        ┌───────────┬───────────┐        ┆           ┌─────┐ ┌─────┐ ┌───────┐ ┌─────┐ ┌─────┐ ┌───────┐   ┆                                                               primitiveType:SCNGeometryPrimitiveTypePolygon
+    1 │ (0.0, 1.0, 0.0)   ┆        │UV0     UV3│UV0     UV3│        ┆     4 4 5 0 1 2 3 5 4 3 2 7 6 5 2 1 0 1 2 3 2 3 0 1 1 2 3 4 0   ┆                                                              primitiveCount:3
+    2 │ (1.0, 0.0, 0.0)   ┆        │           │           │        ┆     └───┘ └───────────────────────┘ └───────────────────────┘   ┆                                                         indicesChannelCount:2
+    3 │ (1.0, 1.0, 0.0)   ┆        │     A     │     B     │        ┆   polygons        channel 0                 channel 1           ┆                                                  interleavedIndicesChannels:…
+    4 │ (2.0, 0.0, 0.0)   ┆        │           │           │        ┆                  (positions)                  (UVs)             ┆                                                               bytesPerIndex:…];
+    5 │ (2.0, 1.0, 0.0)   ┆        │UV1     UV2│UV1     UV2│        ┆                                                                 ┆
+    6 │ (2.0, 2.0, 0.0)   ┆   POS1 ├───────────┴───────────┤ POS5   ┆                                                                 ┆   SCNGeometry *geometry = [SCNGeometry geometryWithSources:@[positionSource, texcoordsSource]
+    7 │ (0.0, 2.0, 0.0)   ┆        │UVO       UV4       UV3│        ┆                                                                 ┆                                                   elements:@[element]
+                          ┆        │         POS2          │        ┆                quad A          quad B          pentagon C       ┆                                             sourceChannels:@[0, 1]];
+        UVs               ┆        │                       │        ┆           ┌─────────────┐ ┌─────────────┐ ┌─────────────────┐   ┆
+    0 │ (0.0, 0.0)        ┆        │           C           │        ┆     4 4 5 0 0 1 1 2 2 3 3 5 2 4 3 3 0 2 1 7 1 6 2 5 3 2 4 1 0   ┆
+    1 │ (0.0, 1.0)        ┆        │                       │        ┆     └───┘└──────────────────────────────────────────────────┘   ┆
+    2 │ (1.0, 1.0)        ┆        │UV1                 UV2│        ┆   polygons               interleaved  channels                  ┆
+    3 │ (1.0, 0.0)        ┆        └───────────────────────┘        ┆                           (positions and UVs)                   ┆
+    4 │ (0.5, 0.0)        ┆   POS7                          POS6    ┆                                                                 ┆
+ 
+ 
+ Example: geometry made of 3 primitives (2 quads, 1 pentagon) using the same indices to reference position and UV data (1 channel)
+ 
+        Positions         ┆   POS0           POS3           POS4    ┆             quad A      quad B      pentagon C                  ┆   SCNGeometryElement *element = [SCNGeometryElement geometryElementWithData:…
+    0 │ (0.0, 4.0, 0.0)   ┆        ┌───────────┬───────────┐        ┆           ┌────────┐  ┌────────┐  ┌───────────┐                 ┆                                                               primitiveType:SCNGeometryPrimitiveTypePolygon
+    1 │ (0.0, 2.0, 0.0)   ┆        │UV0     UV3│UV3     UV4│        ┆     4 4 5 0  1  2  3  5  4  3  2  7  6  5  2  1                 ┆                                                              primitiveCount:3
+    2 │ (2.0, 2.0, 0.0)   ┆        │           │           │        ┆     └───┘ └───────────────────────────────────┘                 ┆                                                               bytesPerIndex:…];
+    3 │ (2.0, 4.0, 0.0)   ┆        │     A     │     B     │        ┆   polygons              channel 0                               ┆
+    4 │ (4.0, 4.0, 0.0)   ┆        │           │           │        ┆                    (positions and UVs)                          ┆   SCNGeometry *geometry = [SCNGeometry geometryWithSources:@[positionSource, texcoordsSource]
+    5 │ (4.0, 2.0, 0.0)   ┆        │UV1     UV2│UV2     UV5│        ┆                                                                 ┆                                                   elements:@[element]];
+    6 │ (4.0, 0.0, 0.0)   ┆   POS1 ├───────────┴───────────┤ POS5   ┆                                                                 ┆
+    7 │ (0.0, 0.0, 0.0)   ┆        │UV1       UV2       UV5│        ┆                                                                 ┆                                            === or equivalently ===
+                          ┆        │         POS2          │        ┆                                                                 ┆
+        UVs               ┆        │                       │        ┆                                                                 ┆   SCNGeometryElement *element = [SCNGeometryElement geometryElementWithData:…
+    0 │ (0.0, 0.0)        ┆        │           C           │        ┆                                                                 ┆                                                               primitiveType:SCNGeometryPrimitiveTypePolygon
+    1 │ (0.0, 0.5)        ┆        │                       │        ┆                                                                 ┆                                                              primitiveCount:3
+    2 │ (0.5, 0.5)        ┆        │UV7                 UV6│        ┆                                                                 ┆                                                         indicesChannelCount:1
+    3 │ (0.5, 0.0)        ┆        └───────────────────────┘        ┆                                                                 ┆                                                  interleavedIndicesChannels:…
+    4 │ (1.0, 0.0)        ┆   POS7                          POS6    ┆                                                                 ┆                                                               bytesPerIndex:…];
+    5 │ (1.0, 0.5)        ┆                                         ┆                                                                 ┆
+    6 │ (1.0, 1.0)        ┆                                         ┆                                                                 ┆   SCNGeometry *geometry = [SCNGeometry geometryWithSources:@[positionSource, texcoordsSource]
+    7 │ (0.0, 1.0)        ┆                                         ┆                                                                 ┆                                                   elements:@[element]
+                          ┆                                         ┆                                                                 ┆                                             sourceChannels:@[0, 0]];                                                                                                                                               ┆
+ ```
+ */
++ (instancetype)geometryWithSources:(NSArray<SCNGeometrySource *> *)sources
+                           elements:(nullable NSArray<SCNGeometryElement *> *)elements
+                     sourceChannels:(nullable NSArray<NSNumber *> *)sourceChannels API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0), watchos(9.0), visionos(1.0));
 
 /*!
  @property geometrySources
@@ -146,6 +203,12 @@ SCN_EXPORT
  @param elementIndex The index of the geometry element.
  */
 - (SCNGeometryElement *)geometryElementAtIndex:(NSInteger)elementIndex;
+
+/*!
+ @property geometrySourceChannels
+ @abstract An array of indices that describes, for each geometry source, which channel of the geometry elements to use.
+ */
+@property(nonatomic, readonly, nullable) NSArray<NSNumber *> *geometrySourceChannels API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0), watchos(9.0), visionos(1.0));
 
 /*!
  @property levelsOfDetail
@@ -340,18 +403,37 @@ SCN_EXPORT
 /*!
  @method geometryElementWithData:primitiveType:primitiveCount:bytesPerIndex:
  @abstract Creates and returns a geometry element from the given data and data format info.
- @param data The data that contains element indexes. You can pass nil to use an implicit vertex ordering (0,1,2...).
+ @param data The data that contains element indices. You can pass nil to use an implicit vertex ordering (0,1,2,…).
  @param primitiveType The primitive type, as listed in the SCNGeometryPrimitiveType enumeration.
  @param primitiveCount The number of primitives in the data.
  @param bytesPerIndex The number of bytes that represent a single index value in the data.
  */
-+ (instancetype)geometryElementWithData:(nullable NSData *)data primitiveType:(SCNGeometryPrimitiveType)primitiveType primitiveCount:(NSInteger)primitiveCount bytesPerIndex:(NSInteger)bytesPerIndex;
++ (instancetype)geometryElementWithData:(nullable NSData *)data
+                          primitiveType:(SCNGeometryPrimitiveType)primitiveType
+                         primitiveCount:(NSInteger)primitiveCount
+                          bytesPerIndex:(NSInteger)bytesPerIndex;
+
+/*!
+@method geometryElementWithData:primitiveType:primitiveCount:indicesChannelCount:interleavedIndicesChannels:bytesPerIndex:
+@param data The data that contains element indices. You can pass nil to use an implicit vertex ordering (0,1,2,…).
+@param primitiveType The primitive type, as listed in the SCNGeometryPrimitiveType enumeration.
+@param primitiveCount The number of primitives in the data.
+@param indicesChannelCount The number of channels for the vertex indices.
+@param interleavedIndicesChannels Whether the channels are interleaved.
+@param bytesPerIndex The number of bytes that represent a single index value in the data.
+*/
++ (instancetype)geometryElementWithData:(nullable NSData *)data
+                          primitiveType:(SCNGeometryPrimitiveType)primitiveType
+                         primitiveCount:(NSInteger)primitiveCount
+                    indicesChannelCount:(NSInteger)indicesChannelCount
+             interleavedIndicesChannels:(BOOL)interleavedIndicesChannels
+                          bytesPerIndex:(NSInteger)bytesPerIndex API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0), watchos(9.0), visionos(1.0));
 
 #if SCN_ENABLE_METAL
 /*!
-@method geometryElementWithBuffer:primitiveType:primitiveCount:bytesPerIndex
+@method geometryElementWithBuffer:primitiveType:primitiveCount:bytesPerIndex:
 @abstract Creates and returns a geometry element from the given Metal buffer and parameters.
-@param buffer The buffer that contains element indexes.
+@param buffer The buffer that contains element indices.
 @param primitiveType The primitive type, as listed in the SCNGeometryPrimitiveType enumeration.
 @param primitiveCount The number of primitives in the data.
 @param bytesPerIndex The number of bytes that represent a single index value in the data.
@@ -360,6 +442,14 @@ SCN_EXPORT
                             primitiveType:(SCNGeometryPrimitiveType)primitiveType
                            primitiveCount:(NSInteger)primitiveCount
                             bytesPerIndex:(NSInteger)bytesPerIndex API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0), watchos(7.0));
+
++ (instancetype)geometryElementWithBuffer:(id <MTLBuffer>)buffer
+                            primitiveType:(SCNGeometryPrimitiveType)primitiveType
+                           primitiveCount:(NSInteger)primitiveCount
+                      indicesChannelCount:(NSInteger)indicesChannelCount
+               interleavedIndicesChannels:(BOOL)interleavedIndicesChannels
+                            bytesPerIndex:(NSInteger)bytesPerIndex API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0), watchos(9.0), visionos(1.0));
+
 #endif
 
 /*!
@@ -381,17 +471,29 @@ SCN_EXPORT
 @property(nonatomic, readonly) NSInteger primitiveCount;
 
 /*!
- @property primitiveRange
- @abstract Specifies the subrange of primitives to render within NSMakeRange(0, primitiveCount). Defaults to NSMakeRange(NSNotFound, 0).
- @discussion When the location of the range is set to NSNotFound, the entire geometry element is rendered.
+ @property interleavedIndicesChannels
+ @abstract Determines whether the channels are interleaved.
  */
-@property(nonatomic) NSRange primitiveRange API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0));
+@property(nonatomic, readonly, getter=hasInterleavedIndicesChannels) BOOL interleavedIndicesChannels API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0), watchos(9.0), visionos(1.0));
+
+/*!
+ @property indicesChannelCount
+ @abstract The number of channels in the geometry element.
+ */
+@property(nonatomic, readonly) NSInteger indicesChannelCount API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0), watchos(9.0), visionos(1.0));
 
 /*!
  @property bytesPerIndex
  @abstract The number of bytes that represent an index value
  */
 @property(nonatomic, readonly) NSInteger bytesPerIndex;
+
+/*!
+ @property primitiveRange
+ @abstract Specifies the subrange of primitives to render within NSMakeRange(0, primitiveCount). Defaults to NSMakeRange(NSNotFound, 0).
+ @discussion When the location of the range is set to NSNotFound, the entire geometry element is rendered.
+ */
+@property(nonatomic) NSRange primitiveRange API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0));
 
 /*!
  @property pointSize

@@ -5,5 +5,5 @@ install-name:    '/System/Library/PrivateFrameworks/ContainerManagerUser.framewo
 allowable-clients:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     clients:         [ ContainerManagerSystem, ContainerManagerUser, ContainerMigrator, 
-                       MobileContainerManager, containermanagerd ]
+                       MobileContainerManager, containermanagerd, containermanagerd_system ]
 ...

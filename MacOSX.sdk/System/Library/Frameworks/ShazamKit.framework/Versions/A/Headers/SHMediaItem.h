@@ -147,9 +147,11 @@ SH_EXPORT NS_SWIFT_SENDABLE API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), wa
 /// @discussion You may add your own keys here to return custom data, custom data should conform to NSCoding
 + (instancetype)mediaItemWithProperties:(NSDictionary<SHMediaItemProperty, id> *)properties NS_REFINED_FOR_SWIFT;
 
+#if !0
 /// @brief Fetch a @c SHMediaItem by Shazam ID
 /// @discussion The completionHandler will contain a @c SHMediaItem if the ShazamID is valid, otherwise nil and an error
 + (void)fetchMediaItemWithShazamID:(NSString *)shazamID completionHandler:(void (NS_SWIFT_SENDABLE ^)(SHMediaItem * __nullable mediaItem, NSError * __nullable error))completionHandler NS_SWIFT_NAME(fetch(shazamID:completionHandler:));
+#endif
 
 /// Retrieve a value using a known key
 /// @param property The `SHMediaItemProperty` for a value

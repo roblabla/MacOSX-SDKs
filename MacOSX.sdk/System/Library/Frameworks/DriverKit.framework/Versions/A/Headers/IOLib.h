@@ -616,6 +616,22 @@ IOThreadLocalStorageSet(uint64_t key, const void * value);
 void *
 IOThreadLocalStorageGet(uint64_t key);
 
+typedef void (^IOCallOnceBlock)(void);
+
+/*!
+ * Structure to test whether block has completed or not.
+ */
+struct IOCallOnceFlag {
+	intptr_t opaque;
+};
+
+/*! @function IOCallOnce
+ *  @abstract Executes a block object only once
+ *  @param flag A pointer to a IOCallOnceFlag structure that is used to test whether the block has completed or not.
+ *  @param block The block object to execute once.
+ */
+void IOCallOnce(struct IOCallOnceFlag * flag, IOCallOnceBlock block);
+
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 #if TARGET_OS_DRIVERKIT && !DRIVERKIT_PRIVATE

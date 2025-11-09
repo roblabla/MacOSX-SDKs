@@ -1275,6 +1275,8 @@ Classes:
   SwiftPrivate: true
 - Name: UIWindowSceneProminentPlacement
   SwiftPrivate: true
+- Name: UIWindowScenePushPlacement
+  SwiftPrivate: true
 - Name: UISheetPresentationControllerDetent
   SwiftName: UISheetPresentationController.Detent
   Methods:
@@ -1658,6 +1660,8 @@ Tags:
 - Name: UICollectionLayoutListHeaderMode
   SwiftPrivate: true
 - Name: UICollectionLayoutListFooterMode
+  SwiftPrivate: true
+- Name: UICollectionLayoutListContentHuggingElements
   SwiftPrivate: true
 - Name: UIListSeparatorVisibility
   SwiftPrivate: true
@@ -2065,6 +2069,10 @@ Typedefs:
   SwiftName: NSAttributedString.DocumentType
 - Name: NSTextEffectStyle
   SwiftName: NSAttributedString.TextEffectStyle
+- Name: NSTextHighlightStyle
+  SwiftName: NSAttributedString.TextHighlightStyle
+- Name: NSTextHighlightColorScheme
+  SwiftName: NSAttributedString.TextHighlightColorScheme
 - Name: NSTextLayoutSectionKey
   SwiftName: NSAttributedString.TextLayoutSectionKey
 - Name: NSTextTabOptionKey
@@ -2243,6 +2251,8 @@ Globals:
   SwiftName: UIStackView.spacingUseDefault
 - Name: UIStackViewSpacingUseSystem
   SwiftName: UIStackView.spacingUseSystem
+- Name: NSAdaptiveImageGlyphAttributeName
+  SwiftName: adaptiveImageGlyph
 - Name: NSFontAttributeName
   SwiftName: font
 - Name: NSParagraphStyleAttributeName
@@ -2269,6 +2279,10 @@ Globals:
   SwiftName: shadow
 - Name: NSTextEffectAttributeName
   SwiftName: textEffect
+- Name: NSTextHighlightColorSchemeAttributeName
+  SwiftName: textHighlightColorScheme
+- Name: NSTextHighlightStyleAttributeName
+  SwiftName: textHighlightStyle
 - Name: NSAttachmentAttributeName
   SwiftName: attachment
 - Name: NSLinkAttributeName

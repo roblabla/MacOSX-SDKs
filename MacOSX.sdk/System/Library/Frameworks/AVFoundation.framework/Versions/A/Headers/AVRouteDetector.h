@@ -23,7 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 	Subclasses of this type that are used from Swift must fulfill the requirements of a Sendable type.
  */
-API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0)) API_UNAVAILABLE(watchos)
+API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), visionos(1.0)) API_UNAVAILABLE(watchos)
 @interface AVRouteDetector : NSObject
 {
 @private
@@ -52,13 +52,13 @@ API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0)) API_UNAVAILABLE(watchos)
  @discussion
 	Only set this to YES if also using AVCustomRoutingController.
  */
-@property (nonatomic) BOOL detectsCustomRoutes API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(macos, tvos, watchos);
+@property (nonatomic) BOOL detectsCustomRoutes API_AVAILABLE(ios(16.0), visionos(1.0)) API_UNAVAILABLE(macos, tvos, watchos);
 
 /*!
  @constant	AVRouteDetectorMultipleRoutesDetectedDidChangeNotification
  @abstract	Posted when the value of multipleRoutesDetected changes.
  */
-AVF_EXPORT NSNotificationName const AVRouteDetectorMultipleRoutesDetectedDidChangeNotification API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0)) API_UNAVAILABLE(watchos);
+AVF_EXPORT NSNotificationName const AVRouteDetectorMultipleRoutesDetectedDidChangeNotification API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 @end
 

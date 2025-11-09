@@ -43,8 +43,18 @@ exports:
                        '_$s18MessagesSettingsUI0A6BundleCMa', '_$s18MessagesSettingsUI0A6BundleCMn', 
                        '_$s18MessagesSettingsUI0A6BundleCMo', '_$s18MessagesSettingsUI0A6BundleCMu', 
                        '_$s18MessagesSettingsUI0A6BundleCN', '_$s18MessagesSettingsUI0A6BundleCfD', 
+                       '_$s18MessagesSettingsUI0B4ItemCMa', '_$s18MessagesSettingsUI0B4ItemCMm', 
+                       '_$s18MessagesSettingsUI0B4ItemCMn', '_$s18MessagesSettingsUI0B4ItemCMo', 
+                       '_$s18MessagesSettingsUI0B4ItemCMu', '_$s18MessagesSettingsUI0B4ItemCN', 
+                       '_$s18MessagesSettingsUI0B4ItemCfD', '_$s18MessagesSettingsUI0B4ItemCfd', 
+                       '_$s18MessagesSettingsUI0B5ModelC11Observation10ObservableAAMc', 
+                       '_$s18MessagesSettingsUI0B5ModelCMa', '_$s18MessagesSettingsUI0B5ModelCMm', 
+                       '_$s18MessagesSettingsUI0B5ModelCMn', '_$s18MessagesSettingsUI0B5ModelCMo', 
+                       '_$s18MessagesSettingsUI0B5ModelCMu', '_$s18MessagesSettingsUI0B5ModelCN', 
+                       '_$s18MessagesSettingsUI0B5ModelCfD', '_$s18MessagesSettingsUI0B5ModelCfd', 
                        _MessagesSettingsUIVersionNumber, _MessagesSettingsUIVersionString ]
-    objc-classes:    [ CKKeepMessagesPreferenceManager, CKiCloudSettingsSyncController, 
-                       CKiCloudSettingsUtils, CKiCloudSettingsViewModel, CKiCloudSyncStateBuilder, 
-                       CKiCloudSyncStateModel, _TtC18MessagesSettingsUI14MessagesBundle ]
+    objc-classes:    [ BusinessSettingsHelper, CKKeepMessagesPreferenceManager, CKMMSSettingsHelper, 
+                       CKSharedSettingsHelper, CKiCloudSettingsSyncController, CKiCloudSettingsUtils, 
+                       CKiCloudSettingsViewModel, CKiCloudSyncStateBuilder, CKiCloudSyncStateModel, 
+                       _TtC18MessagesSettingsUI14MessagesBundle ]
 ...

@@ -15,6 +15,7 @@ API_UNAVAILABLE_BEGIN(ios, tvos, macCatalyst)
 
 
 OS_EXPORT
+NS_SWIFT_SENDABLE
 @interface PHProject : PHAssetCollection
 
 @property (nonatomic, readonly) NSData *projectExtensionData;

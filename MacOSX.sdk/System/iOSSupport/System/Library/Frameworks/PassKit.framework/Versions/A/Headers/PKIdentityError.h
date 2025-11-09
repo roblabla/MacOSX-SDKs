@@ -12,7 +12,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /// Error domain for identity errors.
-extern NSErrorDomain const PKIdentityErrorDomain API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(macos, watchos, tvos);
+extern NSErrorDomain const PKIdentityErrorDomain API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(macos, tvos);
 
 /// Identity error codes.
 typedef NS_ERROR_ENUM(PKIdentityErrorDomain, PKIdentityError) {
@@ -40,8 +40,11 @@ typedef NS_ERROR_ENUM(PKIdentityErrorDomain, PKIdentityError) {
     PKIdentityErrorInvalidNonce = 6,
 
     /// Returned if an element requested by the caller is invalid.
-    PKIdentityErrorInvalidElement = 7
-} API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(macos, watchos, tvos);
+    PKIdentityErrorInvalidElement = 7,
+
+    /// Returned if the document descriptor region is not supported.
+    PKIdentityErrorRegionNotSupported API_AVAILABLE(ios(18.0)) = 8,
+} API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(macos, tvos);
 
 NS_ASSUME_NONNULL_END
 

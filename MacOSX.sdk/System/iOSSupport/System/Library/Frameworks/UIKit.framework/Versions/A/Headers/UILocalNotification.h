@@ -14,7 +14,7 @@ NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 @class CLRegion;
 
 // In iOS 8.0 and later, your application must register for user notifications using -[UIApplication registerUserNotificationSettings:] before being able to schedule and present UILocalNotifications
-UIKIT_EXTERN API_DEPRECATED("Use UserNotifications Framework's UNNotificationRequest", ios(4.0, 10.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_DEPRECATED("Use UserNotifications Framework's UNNotificationRequest", ios(4.0, 10.0), watchos(2.0, 3.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos) NS_SWIFT_UI_ACTOR
 @interface UILocalNotification : NSObject<NSCopying, NSCoding>
 
 - (instancetype)init NS_DESIGNATED_INITIALIZER;
@@ -32,17 +32,17 @@ UIKIT_EXTERN API_DEPRECATED("Use UserNotifications Framework's UNNotificationReq
 // location-based scheduling
 
 // set a CLRegion object to trigger the notification when the user enters or leaves a geographic region, depending upon the properties set on the CLRegion object itself. registering multiple UILocalNotifications with different regions containing the same identifier will result in undefined behavior. the number of region-triggered UILocalNotifications that may be registered at any one time is internally limited. in order to use region-triggered notifications, applications must have "when-in-use" authorization through CoreLocation. see the CoreLocation documentation for more information.
-@property(nullable, nonatomic,copy) CLRegion *region API_AVAILABLE(ios(8.0));
+@property(nullable, nonatomic,copy) CLRegion *region API_AVAILABLE(ios(8.0), watchos(2.0));
 
 // when YES, the notification will only fire one time. when NO, the notification will fire every time the region is entered or exited (depending upon the CLRegion object's configuration). default is YES.
-@property(nonatomic,assign) BOOL regionTriggersOnce API_AVAILABLE(ios(8.0));
+@property(nonatomic,assign) BOOL regionTriggersOnce API_AVAILABLE(ios(8.0), watchos(2.0));
 
 // alerts
 @property(nullable, nonatomic,copy) NSString *alertBody;      // defaults to nil. pass a string or localized string key to show an alert
 @property(nonatomic) BOOL hasAction;                // defaults to YES. pass NO to hide launching button/slider
 @property(nullable, nonatomic,copy) NSString *alertAction;    // used in UIAlert button or 'slide to unlock...' slider in place of unlock
 @property(nullable, nonatomic,copy) NSString *alertLaunchImage;   // used as the launch image (UILaunchImageFile) when launch button is tapped
-@property(nullable, nonatomic,copy) NSString *alertTitle API_AVAILABLE(ios(8.2));  // defaults to nil. pass a string or localized string key
+@property(nullable, nonatomic,copy) NSString *alertTitle API_AVAILABLE(ios(8.2), watchos(2.0));  // defaults to nil. pass a string or localized string key
 
 // sound
 @property(nullable, nonatomic,copy) NSString *soundName;      // name of resource in app's bundle to play or UILocalNotificationDefaultSoundName
@@ -54,12 +54,12 @@ UIKIT_EXTERN API_DEPRECATED("Use UserNotifications Framework's UNNotificationReq
 @property(nullable, nonatomic,copy) NSDictionary *userInfo;   // throws if contains non-property list types
 
 // category identifier of the local notification, as set on a UIUserNotificationCategory and passed to +[UIUserNotificationSettings settingsForTypes:categories:]
-@property (nullable, nonatomic, copy) NSString *category API_AVAILABLE(ios(8.0));
+@property (nullable, nonatomic, copy) NSString *category API_AVAILABLE(ios(8.0), watchos(2.0));
 
 @end
 
 
-UIKIT_EXTERN NSString *const UILocalNotificationDefaultSoundName API_DEPRECATED("Use UserNotifications Framework's +[UNNotificationSound defaultSound]", ios(4.0, 10.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos);
+UIKIT_EXTERN NSString *const UILocalNotificationDefaultSoundName API_DEPRECATED("Use UserNotifications Framework's +[UNNotificationSound defaultSound]", ios(4.0, 10.0), watchos(2.0, 3.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos);
 
 NS_HEADER_AUDIT_END(nullability, sendability)
 

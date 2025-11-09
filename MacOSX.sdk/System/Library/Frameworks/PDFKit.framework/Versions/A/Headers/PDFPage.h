@@ -13,7 +13,25 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class PDFDocument, PDFAnnotation, PDFSelection, PDFPagePrivate, PDFAccessibilityNode;
+@class PDFDocument, PDFAnnotation, PDFSelection, PDFAccessibilityNode;
+
+// PDF areas of interest (bitfield, multiple bits below may be set).
+PDFKIT_AVAILABLE(10_4, 11_0)
+typedef NS_OPTIONS(NSInteger, PDFAreaOfInterest)
+{
+    kPDFNoArea =            0,
+    kPDFPageArea =          (1UL << 0),
+    kPDFTextArea =          (1UL << 1),
+    kPDFAnnotationArea =    (1UL << 2),
+    kPDFLinkArea =          (1UL << 3),
+    kPDFControlArea =       (1UL << 4),
+    kPDFTextFieldArea =     (1UL << 5),
+    kPDFIconArea =          (1UL << 6),
+    kPDFPopupArea =         (1UL << 7),
+    kPDFImageArea =         (1UL << 8),
+
+    kPDFAnyArea =           NSIntegerMax
+};
 
 // Page boxes.
 PDFKIT_ENUM_AVAILABLE(10_4, 11_0)
@@ -31,8 +49,6 @@ typedef NSString * PDFPageImageInitializationOption NS_SWIFT_NAME(PDFPage.ImageI
 PDFKIT_CLASS_AVAILABLE(10_4, 11_0)
 @interface PDFPage : NSObject <NSCopying>
 {
-@private
-	PDFPagePrivate *_private;
 }
 
 // -------- initializer
@@ -134,7 +150,7 @@ PDFKIT_CLASS_AVAILABLE(10_4, 11_0)
 - (nullable PDFSelection *)selectionForRect:(PDFRect)rect;
 
 // Given a point in page-space, returns a selection representing a whole word at that point. May return NULL if no 
-// character (and by extension no word) under point. If data dectors are enabled (-[PDFView enableDataDetectors]),
+// character (and by extension no word) under point. If data dectors are enabled (-[PDFDocument enableDataDetectors]),
 // this return the smart-selection for the content at the given point.
 - (nullable PDFSelection *)selectionForWordAtPoint:(PDFPoint)point;
 

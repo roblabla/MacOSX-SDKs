@@ -195,40 +195,37 @@ typedef natural_t mach_port_right_t;
 #define MACH_PORT_RIGHT_LABELH          ((mach_port_right_t) 5) /* obsolete right */
 #define MACH_PORT_RIGHT_NUMBER          ((mach_port_right_t) 6) /* right not implemented */
 
+#define MACH_PORT_TYPE(right)                                   \
+	((mach_port_type_t)(((mach_port_type_t) 1)              \
+	<< ((right) + ((mach_port_right_t) 16))))
 
 typedef natural_t mach_port_type_t;
 typedef mach_port_type_t *mach_port_type_array_t;
 
-#define MACH_PORT_TYPE(right)                                           \
-	        ((mach_port_type_t)(((mach_port_type_t) 1)              \
-	        << ((right) + ((mach_port_right_t) 16))))
-#define MACH_PORT_TYPE_NONE         ((mach_port_type_t) 0L)
-#define MACH_PORT_TYPE_SEND         MACH_PORT_TYPE(MACH_PORT_RIGHT_SEND)
-#define MACH_PORT_TYPE_RECEIVE      MACH_PORT_TYPE(MACH_PORT_RIGHT_RECEIVE)
-#define MACH_PORT_TYPE_SEND_ONCE    MACH_PORT_TYPE(MACH_PORT_RIGHT_SEND_ONCE)
-#define MACH_PORT_TYPE_PORT_SET     MACH_PORT_TYPE(MACH_PORT_RIGHT_PORT_SET)
-#define MACH_PORT_TYPE_DEAD_NAME    MACH_PORT_TYPE(MACH_PORT_RIGHT_DEAD_NAME)
-#define MACH_PORT_TYPE_LABELH       MACH_PORT_TYPE(MACH_PORT_RIGHT_LABELH) /* obsolete */
-
+#define MACH_PORT_TYPE_NONE             ((mach_port_type_t) 0L)
+#define MACH_PORT_TYPE_SEND             MACH_PORT_TYPE(MACH_PORT_RIGHT_SEND)
+#define MACH_PORT_TYPE_RECEIVE          MACH_PORT_TYPE(MACH_PORT_RIGHT_RECEIVE)
+#define MACH_PORT_TYPE_SEND_ONCE        MACH_PORT_TYPE(MACH_PORT_RIGHT_SEND_ONCE)
+#define MACH_PORT_TYPE_PORT_SET         MACH_PORT_TYPE(MACH_PORT_RIGHT_PORT_SET)
+#define MACH_PORT_TYPE_DEAD_NAME        MACH_PORT_TYPE(MACH_PORT_RIGHT_DEAD_NAME)
+#define MACH_PORT_TYPE_LABELH           MACH_PORT_TYPE(MACH_PORT_RIGHT_LABELH) /* obsolete */
+/* Dummy type bits that mach_port_type/mach_port_names can return. */
+#define MACH_PORT_TYPE_DNREQUEST        0x80000000
+#define MACH_PORT_TYPE_SPREQUEST        0x40000000
+#define MACH_PORT_TYPE_SPREQUEST_DELAYED 0x20000000
 
 /* Convenient combinations. */
 
 #define MACH_PORT_TYPE_SEND_RECEIVE                                     \
-	        (MACH_PORT_TYPE_SEND|MACH_PORT_TYPE_RECEIVE)
+	(MACH_PORT_TYPE_SEND|MACH_PORT_TYPE_RECEIVE)
 #define MACH_PORT_TYPE_SEND_RIGHTS                                      \
-	        (MACH_PORT_TYPE_SEND|MACH_PORT_TYPE_SEND_ONCE)
+	(MACH_PORT_TYPE_SEND|MACH_PORT_TYPE_SEND_ONCE)
 #define MACH_PORT_TYPE_PORT_RIGHTS                                      \
-	        (MACH_PORT_TYPE_SEND_RIGHTS|MACH_PORT_TYPE_RECEIVE)
+	(MACH_PORT_TYPE_SEND_RIGHTS|MACH_PORT_TYPE_RECEIVE)
 #define MACH_PORT_TYPE_PORT_OR_DEAD                                     \
-	        (MACH_PORT_TYPE_PORT_RIGHTS|MACH_PORT_TYPE_DEAD_NAME)
+	(MACH_PORT_TYPE_PORT_RIGHTS|MACH_PORT_TYPE_DEAD_NAME)
 #define MACH_PORT_TYPE_ALL_RIGHTS                                       \
-	        (MACH_PORT_TYPE_PORT_OR_DEAD|MACH_PORT_TYPE_PORT_SET)
-
-/* Dummy type bits that mach_port_type/mach_port_names can return. */
-
-#define MACH_PORT_TYPE_DNREQUEST                0x80000000
-#define MACH_PORT_TYPE_SPREQUEST                0x40000000
-#define MACH_PORT_TYPE_SPREQUEST_DELAYED        0x20000000
+	(MACH_PORT_TYPE_PORT_OR_DEAD|MACH_PORT_TYPE_PORT_SET)
 
 /* User-references for capabilities. */
 
@@ -368,7 +365,7 @@ typedef struct mach_service_port_info * mach_service_port_info_t;
 #define MPO_REPLY_PORT                     0x1000  /* Designate port as a reply port. */
 #define MPO_ENFORCE_REPLY_PORT_SEMANTICS   0x2000  /* When talking to this port, local port of mach msg needs to follow reply port semantics.*/
 #define MPO_PROVISIONAL_REPLY_PORT         0x4000  /* Designate port as a provisional reply port. */
-#define MPO_PROVISIONAL_ID_PROT_OPTOUT     0x8000  /* Opted out of EXCEPTION_IDENTITY_PROTECTED violation for now */
+#define MPO_EXCEPTION_PORT                 0x8000  /* Used for hardened exceptions - immovable */
 
 
 /*

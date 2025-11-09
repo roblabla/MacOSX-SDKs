@@ -22,7 +22,7 @@ typedef NS_ENUM(NSUInteger, UIBehavioralStyle) {
 
     /// A style and set of behaviors best for macOS applications
     UIBehavioralStyleMac,
-};
+} API_UNAVAILABLE(watchos);
 
 API_AVAILABLE(ios(15.0), macCatalyst(15.0)) API_UNAVAILABLE(watchos, tvos)
 @interface UIButton (UIBehavioralStyle)

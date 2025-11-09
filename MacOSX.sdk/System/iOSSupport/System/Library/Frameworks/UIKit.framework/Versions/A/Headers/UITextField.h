@@ -34,21 +34,21 @@ typedef NS_ENUM(NSInteger, UITextBorderStyle) {
     UITextBorderStyleLine,
     UITextBorderStyleBezel,
     UITextBorderStyleRoundedRect
-};
+} API_UNAVAILABLE(watchos);
 
 typedef NS_ENUM(NSInteger, UITextFieldViewMode) {
     UITextFieldViewModeNever,
     UITextFieldViewModeWhileEditing,
     UITextFieldViewModeUnlessEditing,
     UITextFieldViewModeAlways
-};
+} API_UNAVAILABLE(watchos);
 
 typedef NS_ENUM(NSInteger, UITextFieldDidEndEditingReason) {
     UITextFieldDidEndEditingReasonCommitted,
     UITextFieldDidEndEditingReasonCancelled UIKIT_AVAILABLE_TVOS_ONLY(10_0)
-} API_AVAILABLE(ios(10.0));
+} API_AVAILABLE(ios(10.0)) API_UNAVAILABLE(watchos);
 
-UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(2.0)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @interface UITextField : UIControl <UITextInput, NSCoding, UIContentSizeCategoryAdjusting, UILetterformAwareAdjusting>
 
 @property(nullable, nonatomic,copy)   NSString               *text;                 // default is nil
@@ -99,7 +99,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
 - (CGRect)leftViewRectForBounds:(CGRect)bounds;
 - (CGRect)rightViewRectForBounds:(CGRect)bounds;
 
-- (void)drawTextInRect:(CGRect)rect API_DEPRECATED("This method is no longer called.", ios(2.0, 15.0), visionos(1.0, 1.0));
+- (void)drawTextInRect:(CGRect)rect API_DEPRECATED("This method is no longer called.", ios(2.0, 15.0), visionos(1.0, 1.0)) API_UNAVAILABLE(watchos);
 - (void)drawPlaceholderInRect:(CGRect)rect;
 
 // Presented when object becomes first responder.  If set to nil, reverts to following responder chain.  If
@@ -127,7 +127,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
 // responder status.
 // The object returned here will be a plist type, so can e.g. be stored in
 // an NSUserActivity's userInfo dictionary.
-@property (nonatomic, copy) id interactionState API_AVAILABLE(ios(15.0));
+@property (nonatomic, copy) id interactionState API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(watchos);
 
 @end
 
@@ -136,7 +136,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
 - (BOOL)endEditing:(BOOL)force;    // use to make the view or any subview that is the first responder resign (optionally force)
 @end
 
-NS_SWIFT_UI_ACTOR
+API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @protocol UITextFieldDelegate <NSObject>
 
 @optional
@@ -145,11 +145,11 @@ NS_SWIFT_UI_ACTOR
 - (void)textFieldDidBeginEditing:(UITextField *)textField;           // became first responder
 - (BOOL)textFieldShouldEndEditing:(UITextField *)textField;          // return YES to allow editing to stop and to resign first responder status. NO to disallow the editing session to end
 - (void)textFieldDidEndEditing:(UITextField *)textField;             // may be called if forced even if shouldEndEditing returns NO (e.g. view removed from window) or endEditing:YES called
-- (void)textFieldDidEndEditing:(UITextField *)textField reason:(UITextFieldDidEndEditingReason)reason API_AVAILABLE(ios(10.0)); // if implemented, called in place of textFieldDidEndEditing:
+- (void)textFieldDidEndEditing:(UITextField *)textField reason:(UITextFieldDidEndEditingReason)reason API_AVAILABLE(ios(10.0)) API_UNAVAILABLE(watchos); // if implemented, called in place of textFieldDidEndEditing:
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string;   // return NO to not change text
 
-- (void)textFieldDidChangeSelection:(UITextField *)textField API_AVAILABLE(ios(13.0), tvos(13.0));
+- (void)textFieldDidChangeSelection:(UITextField *)textField API_AVAILABLE(ios(13.0), tvos(13.0)) API_UNAVAILABLE(watchos);
 
 - (BOOL)textFieldShouldClear:(UITextField *)textField;               // called when clear button pressed. return NO to ignore (no notifications)
 - (BOOL)textFieldShouldReturn:(UITextField *)textField;              // called when 'return' key pressed. return NO to ignore.
@@ -163,7 +163,7 @@ NS_SWIFT_UI_ACTOR
  *
  * @return Return a UIMenu describing the desired menu hierarchy. Return @c nil to present the default system menu.
  */
-- (nullable UIMenu *)textField:(UITextField *)textField editMenuForCharactersInRange:(NSRange)range suggestedActions:(NSArray<UIMenuElement *> *)suggestedActions API_AVAILABLE(ios(16.0));
+- (nullable UIMenu *)textField:(UITextField *)textField editMenuForCharactersInRange:(NSRange)range suggestedActions:(NSArray<UIMenuElement *> *)suggestedActions API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(watchos);
 
 /**
  * @abstract Called when the text field is about to present the edit menu.
@@ -171,7 +171,7 @@ NS_SWIFT_UI_ACTOR
  * @param textField    The text field displaying the menu.
  * @param animator      Appearance animator. Add animations to this object to run them alongside the appearance transition.
  */
-- (void)textField:(UITextField *)textField willPresentEditMenuWithAnimator:(id<UIEditMenuInteractionAnimating>)animator API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(tvos, watchos);
+- (void)textField:(UITextField *)textField willPresentEditMenuWithAnimator:(id<UIEditMenuInteractionAnimating>)animator API_AVAILABLE(ios(16.0))  API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos);
 
 /**
  * @abstract Called when the text field is about to dismiss the edit menu.
@@ -179,15 +179,15 @@ NS_SWIFT_UI_ACTOR
  * @param textField    The text field displaying the menu.
  * @param animator      Dismissal animator. Add animations to this object to run them alongside the dismissal transition.
  */
-- (void)textField:(UITextField *)textField willDismissEditMenuWithAnimator:(id<UIEditMenuInteractionAnimating>)animator API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(tvos, watchos);
+- (void)textField:(UITextField *)textField willDismissEditMenuWithAnimator:(id<UIEditMenuInteractionAnimating>)animator API_AVAILABLE(ios(16.0))  API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos);
 
 @end
 
-UIKIT_EXTERN NSNotificationName const UITextFieldTextDidBeginEditingNotification;
-UIKIT_EXTERN NSNotificationName const UITextFieldTextDidEndEditingNotification;
-UIKIT_EXTERN NSNotificationName const UITextFieldTextDidChangeNotification;
+UIKIT_EXTERN NSNotificationName const UITextFieldTextDidBeginEditingNotification API_UNAVAILABLE(watchos) NS_SWIFT_NONISOLATED;
+UIKIT_EXTERN NSNotificationName const UITextFieldTextDidEndEditingNotification API_UNAVAILABLE(watchos) NS_SWIFT_NONISOLATED;
+UIKIT_EXTERN NSNotificationName const UITextFieldTextDidChangeNotification API_UNAVAILABLE(watchos) NS_SWIFT_NONISOLATED;
 
-UIKIT_EXTERN NSString *const UITextFieldDidEndEditingReasonKey API_AVAILABLE(ios(10.0));
+UIKIT_EXTERN NSString *const UITextFieldDidEndEditingReasonKey API_AVAILABLE(ios(10.0)) API_UNAVAILABLE(watchos) NS_SWIFT_NONISOLATED;
 
 NS_HEADER_AUDIT_END(nullability, sendability)
 

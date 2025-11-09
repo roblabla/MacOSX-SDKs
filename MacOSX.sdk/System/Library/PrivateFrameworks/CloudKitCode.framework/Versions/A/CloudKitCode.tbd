@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/CloudKitCode.framework/Versions/A/CloudKitCode'
-current-version: 2160.17.1
+current-version: 2200.155
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -408,7 +408,6 @@ exports:
                        '_$sSo11CKContainerC12CloudKitCodeE7declineySDySo15CKShareMetadataCs6ResultOyyts5Error_pGGSayAFGYaKF', 
                        '_$sSo11CKContainerC12CloudKitCodeE7declineySDySo15CKShareMetadataCs6ResultOyyts5Error_pGGSayAFGYaKFTu', 
                        '_$sSo11CKMergeableP12CloudKitCodeE5mergeyySo0A11RecordValueCKF', 
-                       '_$sSo11CKSchedulerC12CloudKitCodeE26registerActivityIdentifier_7handlerySS_So0aF6ResultVSo0aF0CYaYbctF', 
                        '_$sSo13CKCodeServiceC12CloudKitCodeE13databaseScopeSo010CKDatabaseG0VSgvg', 
                        '_$sSo13CKCodeServiceC12CloudKitCodeE13databaseScopeSo010CKDatabaseG0VSgvpMV', 
                        '_$sSo13CKCodeServiceC12CloudKitCodeE3addyyAC0A9OperationCyxq_G21InternalSwiftProtobuf7MessageRzAhIR_r0_lF', 

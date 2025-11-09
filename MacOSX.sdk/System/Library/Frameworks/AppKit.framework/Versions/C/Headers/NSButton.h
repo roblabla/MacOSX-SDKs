@@ -1,7 +1,7 @@
 /*
 	NSButton.h
 	Application Kit
-	Copyright (c) 1994-2023, Apple Inc.
+	Copyright (c) 1994-2024, Apple Inc.
 	All rights reserved.
 */
 
@@ -140,7 +140,7 @@ APPKIT_API_UNAVAILABLE_BEGIN_MACCATALYST
 /*!
  Specifies a combination of point size, weight, and scale to use when sizing and displaying symbol images. If a symbol configuration isn't provided, the symbol is matched to the button's `font` property. The default value is nil.
  */
-@property (nullable, copy) NSImageSymbolConfiguration *symbolConfiguration API_AVAILABLE(macos(11));
+@property (nullable, copy) NSImageSymbolConfiguration *symbolConfiguration API_AVAILABLE(macos(11.0));
 
 #pragma mark Managing Button State
 

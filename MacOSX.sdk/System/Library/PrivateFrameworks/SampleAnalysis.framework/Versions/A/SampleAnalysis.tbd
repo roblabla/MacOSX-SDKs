@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/SampleAnalysis.framework/Versions/A/SampleAnalysis'
-current-version: 347.3
+current-version: 379
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -19,12 +19,14 @@ exports:
                        _SASpawnPlatformBinaryWithSigningIdentifier, _TracePointString ]
     objc-classes:    [ SAAuxiliaryData, SABinary, SABinaryLoadInfo, SABinaryLocator, 
                        SABlockingInfo, SACallTree, SACallTreeFrame, SACallTreeNode, 
-                       SADispatchQueue, SADispatchQueueState, SAExclave, SAExecutableCallTree, 
-                       SAFanSpeed, SAFrame, SAHIDEvent, SAHIDStep, SAIOEvent, SAInstruction, 
-                       SAKernelCache, SAMSTypeStats, SAMemoryPressureEvent, SAMicrostackshotStatistics, 
-                       SAPowerModeTransition, SASamplePrintOptions, SASamplePrinter, 
-                       SASampleStore, SASegment, SASharedCache, SASourceInfo, SASwiftTask, 
-                       SASwiftTaskState, SASymbol, SATask, SATaskCallTree, SATaskState, 
-                       SATaskThreadCallTrees, SAThread, SAThreadCallTree, SAThreadState, 
-                       SATimeRange, SATimestamp, SATurnstileInfo, SAWaitInfo ]
+                       SADependencyGraphNode, SADispatchQueue, SADispatchQueueState, 
+                       SAExclave, SAExecutableCallTree, SAFanSpeed, SAFrame, SAHIDEvent, 
+                       SAHIDStep, SAIOEvent, SAInstruction, SAKPerfTrigger, SAKernelCache, 
+                       SAMSTypeStats, SAMemoryPressureEvent, SAMicrostackshotStatistics, 
+                       SAModel, SAModelExecution, SAModelLoadedChange, SAPowerModeTransition, 
+                       SASamplePrintOptions, SASamplePrinter, SASampleStore, SASegment, 
+                       SASharedCache, SASourceInfo, SASwiftTask, SASwiftTaskState, 
+                       SASymbol, SATask, SATaskCallTree, SATaskState, SATaskThreadCallTrees, 
+                       SAThread, SAThreadCallTree, SAThreadState, SATimeRange, SATimestamp, 
+                       SATurnstileInfo, SAWaitInfo ]
 ...

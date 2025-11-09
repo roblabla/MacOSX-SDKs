@@ -13,7 +13,7 @@ NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 @class UIViewController;
 
-UIKIT_EXTERN API_AVAILABLE(ios(5.0)) NS_SWIFT_UI_ACTOR API_DEPRECATED("Loading Interface Builder products will not be supported in a future version of visionOS.", visionos(1.0, 1.0))
+UIKIT_EXTERN API_AVAILABLE(ios(5.0)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR API_DEPRECATED("Loading Interface Builder products will not be supported in a future version of visionOS.", visionos(1.0, 1.0))
 @interface UIStoryboardSegue : NSObject
 
 // Convenience constructor for returning a segue that performs a handler block in its -perform method.
@@ -34,7 +34,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(5.0)) NS_SWIFT_UI_ACTOR API_DEPRECATED("Loading I
 
 /// Encapsulates the source of a prospective unwind segue.
 /// You do not create instances of this class directly. Instead, UIKit creates an instance of this class and sends -allowedChildViewControllersForUnwindingFromSource: to each ancestor of the sourceViewController until it finds a view controller which returns YES from -canPerformUnwindSegueAction:fromViewController:sender:.
-UIKIT_EXTERN API_AVAILABLE(ios(9.0)) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @interface UIStoryboardUnwindSegueSource : NSObject
 
 - (instancetype)init NS_UNAVAILABLE;

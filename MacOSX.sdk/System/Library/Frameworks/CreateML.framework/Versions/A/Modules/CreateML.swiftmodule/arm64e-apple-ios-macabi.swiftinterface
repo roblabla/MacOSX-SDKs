@@ -1,6 +1,6 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.10 (swiftlang-5.10.0.12.5 clang-1500.3.9.1.1)
-// swift-module-flags: -target arm64e-apple-ios17.5-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Osize -library-level api -enable-bare-slash-regex -user-module-version 1163.100.9.0.1 -module-name CreateML
+// swift-compiler-version: Apple Swift version 6.0 effective-5.10 (swiftlang-6.0.0.7.24 clang-1600.0.25.1)
+// swift-module-flags: -target arm64e-apple-ios18.0-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Osize -library-level api -enable-bare-slash-regex -user-module-version 1325 -module-name CreateML
 import AVFoundation
 import Accelerate
 import Combine
@@ -14,6 +14,7 @@ import Dispatch
 import Foundation
 import ImageIO
 import NaturalLanguage
+import OSLog
 import Swift
 import TabularData
 import UniformTypeIdentifiers
@@ -314,6 +315,8 @@ public struct MLStyleTransfer : Swift.Sendable {
       case cnn
       case cnnLite
       public init?(rawValue: Swift.String)
+      @available(iOS 15.0, macOS 11.0, *)
+      @available(tvOS, unavailable)
       public typealias RawValue = Swift.String
       public var rawValue: Swift.String {
         get
@@ -377,10 +380,15 @@ extension CreateML.MLDataTable {
     public subscript(i: Swift.Int) -> Swift.String {
       get
     }
+    @available(iOS 15.0, tvOS 16.0, macOS 10.14, *)
     public typealias Element = Swift.String
+    @available(iOS 15.0, tvOS 16.0, macOS 10.14, *)
     public typealias Index = Swift.Int
+    @available(iOS 15.0, tvOS 16.0, macOS 10.14, *)
     public typealias Indices = Swift.Range<Swift.Int>
+    @available(iOS 15.0, tvOS 16.0, macOS 10.14, *)
     public typealias Iterator = Swift.IndexingIterator<CreateML.MLDataTable.ColumnNames>
+    @available(iOS 15.0, tvOS 16.0, macOS 10.14, *)
     public typealias SubSequence = Swift.Slice<CreateML.MLDataTable.ColumnNames>
   }
   @available(macOS 10.14, iOS 15.0, tvOS 16.0, *)
@@ -823,9 +831,13 @@ extension CreateML.MLDataTable.Rows : Swift.RandomAccessCollection {
   public var endIndex: Swift.Int {
     get
   }
+  @available(iOS 15.0, tvOS 16.0, macOS 10.14, *)
   public typealias Index = Swift.Int
+  @available(iOS 15.0, tvOS 16.0, macOS 10.14, *)
   public typealias Indices = Swift.Range<Swift.Int>
+  @available(iOS 15.0, tvOS 16.0, macOS 10.14, *)
   public typealias Iterator = Swift.IndexingIterator<CreateML.MLDataTable.Rows>
+  @available(iOS 15.0, tvOS 16.0, macOS 10.14, *)
   public typealias SubSequence = Swift.Slice<CreateML.MLDataTable.Rows>
 }
 @available(macOS 10.14, iOS 15.0, tvOS 16.0, *)
@@ -1056,8 +1068,14 @@ extension CreateML.MLImageClassifier {
     public static let rotation: CreateML.MLImageClassifier.ImageAugmentationOptions
     public static let crop: CreateML.MLImageClassifier.ImageAugmentationOptions
     public init(rawValue: Swift.Int)
+    @available(iOS 15.0, macOS 10.14, *)
+    @available(tvOS, unavailable)
     public typealias ArrayLiteralElement = CreateML.MLImageClassifier.ImageAugmentationOptions
+    @available(iOS 15.0, macOS 10.14, *)
+    @available(tvOS, unavailable)
     public typealias Element = CreateML.MLImageClassifier.ImageAugmentationOptions
+    @available(iOS 15.0, macOS 10.14, *)
+    @available(tvOS, unavailable)
     public typealias RawValue = Swift.Int
   }
 }
@@ -1393,13 +1411,17 @@ extension CreateML.MLDataValue.SequenceType : Swift.RandomAccessCollection {
   public subscript(index: CreateML.MLDataValue.SequenceType.Index) -> CreateML.MLDataValue.SequenceType.Element {
     get
   }
+  @available(iOS 15.0, tvOS 16.0, macOS 10.14, *)
   public typealias Indices = Swift.Range<CreateML.MLDataValue.SequenceType.Index>
+  @available(iOS 15.0, tvOS 16.0, macOS 10.14, *)
   public typealias Iterator = Swift.IndexingIterator<CreateML.MLDataValue.SequenceType>
+  @available(iOS 15.0, tvOS 16.0, macOS 10.14, *)
   public typealias SubSequence = Swift.Slice<CreateML.MLDataValue.SequenceType>
 }
 @available(macOS 10.14, iOS 15.0, tvOS 16.0, *)
 extension CreateML.MLDataValue.SequenceType : Swift.ExpressibleByArrayLiteral {
   public init(arrayLiteral: CreateML.MLDataValue.SequenceType.Element...)
+  @available(iOS 15.0, tvOS 16.0, macOS 10.14, *)
   public typealias ArrayLiteralElement = CreateML.MLDataValue.SequenceType.Element
 }
 @available(macOS 10.14, iOS 15.0, tvOS 16.0, *)
@@ -1600,7 +1622,9 @@ public struct MLProgress : Swift.Codable {
       get
     }
     public init?(rawValue: Swift.String)
+    @available(iOS 15.0, tvOS 16.0, macOS 11.0, *)
     public typealias AllCases = [CreateML.MLProgress.Metric]
+    @available(iOS 15.0, tvOS 16.0, macOS 11.0, *)
     public typealias RawValue = Swift.String
     public var rawValue: Swift.String {
       get
@@ -1862,8 +1886,11 @@ extension CreateML.MLDataTable.Row : Swift.Collection {
   public subscript(position: Swift.Int) -> (CreateML.MLDataTable.Row.Key, CreateML.MLDataTable.Row.Value) {
     get
   }
+  @available(iOS 15.0, tvOS 16.0, macOS 10.14, *)
   public typealias Indices = Swift.DefaultIndices<CreateML.MLDataTable.Row>
+  @available(iOS 15.0, tvOS 16.0, macOS 10.14, *)
   public typealias Iterator = Swift.IndexingIterator<CreateML.MLDataTable.Row>
+  @available(iOS 15.0, tvOS 16.0, macOS 10.14, *)
   public typealias SubSequence = Swift.Slice<CreateML.MLDataTable.Row>
 }
 @available(macOS 10.14, iOS 15.0, tvOS 16.0, *)
@@ -1890,10 +1917,15 @@ extension CreateML.MLDataTable.Row {
     public subscript(i: Swift.Int) -> CreateML.MLDataValue {
       get
     }
+    @available(iOS 15.0, tvOS 16.0, macOS 10.14, *)
     public typealias Element = CreateML.MLDataValue
+    @available(iOS 15.0, tvOS 16.0, macOS 10.14, *)
     public typealias Index = Swift.Int
+    @available(iOS 15.0, tvOS 16.0, macOS 10.14, *)
     public typealias Indices = Swift.Range<Swift.Int>
+    @available(iOS 15.0, tvOS 16.0, macOS 10.14, *)
     public typealias Iterator = Swift.IndexingIterator<CreateML.MLDataTable.Row.Values>
+    @available(iOS 15.0, tvOS 16.0, macOS 10.14, *)
     public typealias SubSequence = Swift.Slice<CreateML.MLDataTable.Row.Values>
   }
 }
@@ -2347,8 +2379,11 @@ extension CreateML.MLDataValue.DictionaryType : Swift.Collection {
     get
   }
   public func index(after i: CreateML.MLDataValue.DictionaryType.Index) -> CreateML.MLDataValue.DictionaryType.Index
+  @available(iOS 15.0, tvOS 16.0, macOS 10.14, *)
   public typealias Indices = Swift.DefaultIndices<CreateML.MLDataValue.DictionaryType>
+  @available(iOS 15.0, tvOS 16.0, macOS 10.14, *)
   public typealias Iterator = Swift.IndexingIterator<CreateML.MLDataValue.DictionaryType>
+  @available(iOS 15.0, tvOS 16.0, macOS 10.14, *)
   public typealias SubSequence = Swift.Slice<CreateML.MLDataValue.DictionaryType>
 }
 @available(macOS 10.14, iOS 15.0, tvOS 16.0, *)
@@ -2800,8 +2835,14 @@ extension CreateML.MLHandActionClassifier {
     public static let interpolateFrames: CreateML.MLHandActionClassifier.VideoAugmentationOptions
     public static let dropFrames: CreateML.MLHandActionClassifier.VideoAugmentationOptions
     public init(rawValue: Swift.Int)
+    @available(iOS 15.0, macOS 12.0, *)
+    @available(tvOS, unavailable)
     public typealias ArrayLiteralElement = CreateML.MLHandActionClassifier.VideoAugmentationOptions
+    @available(iOS 15.0, macOS 12.0, *)
+    @available(tvOS, unavailable)
     public typealias Element = CreateML.MLHandActionClassifier.VideoAugmentationOptions
+    @available(iOS 15.0, macOS 12.0, *)
+    @available(tvOS, unavailable)
     public typealias RawValue = Swift.Int
   }
 }
@@ -2858,6 +2899,7 @@ public enum MLPhase : Swift.String, Swift.Codable, Swift.Sendable {
   case evaluating
   case inferencing
   public init?(rawValue: Swift.String)
+  @available(iOS 15.0, tvOS 16.0, macOS 11.0, *)
   public typealias RawValue = Swift.String
   public var rawValue: Swift.String {
     get
@@ -3453,8 +3495,14 @@ extension CreateML.MLHandPoseClassifier {
     public static let translate: CreateML.MLHandPoseClassifier.ImageAugmentationOptions
     public static let scale: CreateML.MLHandPoseClassifier.ImageAugmentationOptions
     public init(rawValue: Swift.Int)
+    @available(iOS 15.0, macOS 12.0, *)
+    @available(tvOS, unavailable)
     public typealias ArrayLiteralElement = CreateML.MLHandPoseClassifier.ImageAugmentationOptions
+    @available(iOS 15.0, macOS 12.0, *)
+    @available(tvOS, unavailable)
     public typealias Element = CreateML.MLHandPoseClassifier.ImageAugmentationOptions
+    @available(iOS 15.0, macOS 12.0, *)
+    @available(tvOS, unavailable)
     public typealias RawValue = Swift.Int
   }
 }

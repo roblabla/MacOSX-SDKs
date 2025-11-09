@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/Frameworks/GLKit.framework/Versions/A/GLKit'
-current-version: 126
+current-version: 129
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _GLKMathProject, _GLKMathUnproject, _GLKMatrix3Identity, _GLKMatrix3Invert, 
@@ -28,23 +28,13 @@ exports:
                        _GLKVertexAttributeParametersFromModelIO, _NSStringFromGLKMatrix2, 
                        _NSStringFromGLKMatrix3, _NSStringFromGLKMatrix4, _NSStringFromGLKQuaternion, 
                        _NSStringFromGLKVector2, _NSStringFromGLKVector3, _NSStringFromGLKVector4, 
-                       __GLKMatrixDebugDescription, __GLKMatrixDestroy, __GLKMatrixFormatDescription, 
-                       __GLKMatrixStackRegisterClass, __GLKModelErrorWithCode, __GLKModelErrorWithCodeAndErrorString, 
-                       __GLKModelErrorWithCodeAndUserInfo, __GLKStackAlloc, __GLKStackDealloc, 
-                       __GLKStackLoad, __GLKStackPop, __GLKStackPush, __GLKStackSize, 
-                       __GLKStackTop, __GLKTextureErrorWithCode, __GLKTextureErrorWithCodeAndErrorString, 
-                       __GLKTextureErrorWithCodeAndUserInfo, __lightStateChanged, 
-                       __modelviewMatrixMask, __normalizedNormalsMask, __reflectionMappingEnabled, 
-                       __staticFshMasks, __staticVshMasks, __texturingEnabledMask, 
-                       __useTexCoordAttribMask, __vNormalEyeMask, __vPositionEyeMask, 
                        _glkLinkedOSVersion, _kGLKModelErrorDomain, _kGLKModelErrorKey ]
     objc-classes:    [ GLKBaseEffect, GLKEffect, GLKEffectProperty, GLKEffectPropertyConstantColor, 
                        GLKEffectPropertyFog, GLKEffectPropertyLight, GLKEffectPropertyMaterial, 
                        GLKEffectPropertyTexGen, GLKEffectPropertyTexture, GLKEffectPropertyTransform, 
                        GLKHashableBigInt, GLKMesh, GLKMeshBuffer, GLKMeshBufferAllocator, 
-                       GLKMeshBufferHolder, GLKMeshBufferZone, GLKReflectionMapEffect, 
-                       GLKShaderBlockNode, GLKShadingHash, GLKSkyboxEffect, GLKSubmesh, 
-                       GLKTexture, GLKTextureInfo, GLKTextureLoader, GLKTextureTXR ]
+                       GLKReflectionMapEffect, GLKShaderBlockNode, GLKShadingHash, 
+                       GLKSkyboxEffect, GLKSubmesh, GLKTexture, GLKTextureInfo, GLKTextureLoader ]
     objc-ivars:      [ GLKBaseEffect._colorMaterialEnabled, GLKBaseEffect._constantColor, 
                        GLKBaseEffect._fog, GLKBaseEffect._fogEnabled, GLKBaseEffect._label, 
                        GLKBaseEffect._light0, GLKBaseEffect._light1, GLKBaseEffect._light2, 

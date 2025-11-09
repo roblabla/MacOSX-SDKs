@@ -108,7 +108,7 @@ xpc_session_copy_description(xpc_session_t session);
  * This will fail if the specified XPC service is either not found or is
  * unavailable.
  */
-API_AVAILABLE(macos(13.0))
+API_AVAILABLE(macos(13.0), macCatalyst(16.0))
 API_UNAVAILABLE(ios, tvos, watchos)
 XPC_EXPORT XPC_SWIFT_NOEXPORT XPC_RETURNS_RETAINED XPC_WARN_RESULT
 xpc_session_t _Nullable
@@ -154,7 +154,7 @@ xpc_session_create_xpc_service(const char *name,
  * bootstrap or is otherwise unavailable.
  *
  */
-API_AVAILABLE(macos(13.0))
+API_AVAILABLE(macos(13.0), macCatalyst(16.0))
 API_UNAVAILABLE(ios, tvos, watchos)
 XPC_EXPORT XPC_SWIFT_NOEXPORT XPC_RETURNS_RETAINED XPC_WARN_RESULT
 xpc_session_t _Nullable
@@ -403,9 +403,8 @@ xpc_session_send_message_with_reply_async(xpc_session_t session,
  * It is a programming error to call `xpc_session_set_peer_code_signing_requirement` more than once per session.
  *
  * All messages received on this session will be checked to ensure they come from a peer who satisfies
- * the code signing requirement. When a reply is expected on the session and the peer does
- * not satisfy the requirement `XPC_ERROR_PEER_CODE_SIGNING_REQUIREMENT` will be
- * delivered instead of the reply.
+ * the code signing requirement. When message or a reply is received on the session and the peer does
+ * not satisfy the requirement the session will be cancelled.
  *
  * @see https://developer.apple.com/documentation/technotes/tn3127-inside-code-signing-requirements
  */

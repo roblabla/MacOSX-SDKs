@@ -70,6 +70,8 @@
 #include <mach/machine/vm_param.h>
 
 
+#include <vm/vm_memtag.h>
+
 #ifndef ASSEMBLER
 #include <mach/vm_types.h>
 #endif  /* ASSEMBLER */

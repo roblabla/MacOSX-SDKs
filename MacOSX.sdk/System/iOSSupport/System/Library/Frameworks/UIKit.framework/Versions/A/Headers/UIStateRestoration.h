@@ -16,19 +16,19 @@ NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 // UIStoryBoard that originally created the ViewController that saved state, nil if no UIStoryboard
 
-UIKIT_EXTERN NSString *const UIStateRestorationViewControllerStoryboardKey API_AVAILABLE(ios(6.0));
+UIKIT_EXTERN NSString *const UIStateRestorationViewControllerStoryboardKey API_AVAILABLE(ios(6.0)) API_UNAVAILABLE(watchos);
 
 // NSString with value of info.plist's Bundle Version (app version) when state was last saved for the app
-UIKIT_EXTERN NSString *const UIApplicationStateRestorationBundleVersionKey API_AVAILABLE(ios(6.0));
+UIKIT_EXTERN NSString *const UIApplicationStateRestorationBundleVersionKey API_AVAILABLE(ios(6.0)) API_UNAVAILABLE(watchos);
 
 // NSNumber containing the UIUserInterfaceIdiom enum value of the app that saved state
-UIKIT_EXTERN NSString *const UIApplicationStateRestorationUserInterfaceIdiomKey API_AVAILABLE(ios(6.0));
+UIKIT_EXTERN NSString *const UIApplicationStateRestorationUserInterfaceIdiomKey API_AVAILABLE(ios(6.0)) API_UNAVAILABLE(watchos);
 
 // NSDate specifying the date/time the state restoration archive was saved. This is in UTC.
-UIKIT_EXTERN NSString *const UIApplicationStateRestorationTimestampKey API_AVAILABLE(ios(7.0));
+UIKIT_EXTERN NSString *const UIApplicationStateRestorationTimestampKey API_AVAILABLE(ios(7.0)) API_UNAVAILABLE(watchos);
 
 // NSString with value of the system version (iOS version) when state was last saved for the app
-UIKIT_EXTERN NSString *const UIApplicationStateRestorationSystemVersionKey API_AVAILABLE(ios(7.0));
+UIKIT_EXTERN NSString *const UIApplicationStateRestorationSystemVersionKey API_AVAILABLE(ios(7.0)) API_UNAVAILABLE(watchos);
 
 @class UIView;
 @class UIViewController;
@@ -36,12 +36,12 @@ UIKIT_EXTERN NSString *const UIApplicationStateRestorationSystemVersionKey API_A
 #pragma mark -- State Restoration protocols for UIView and UIViewController --
 
 // A class must implement this protocol if it is specified as the restoration class of a UIViewController.
-NS_SWIFT_UI_ACTOR
+API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @protocol UIViewControllerRestoration
 + (nullable UIViewController *) viewControllerWithRestorationIdentifierPath:(NSArray<NSString *> *)identifierComponents coder:(NSCoder *)coder;
 @end
 
-NS_SWIFT_UI_ACTOR
+API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @protocol UIDataSourceModelAssociation
 - (nullable NSString *) modelIdentifierForElementAtIndexPath:(NSIndexPath *)idx inView:(UIView *)view;
 - (nullable NSIndexPath *) indexPathForElementWithModelIdentifier:(NSString *)identifier inView:(UIView *)view;
@@ -54,7 +54,7 @@ NS_SWIFT_UI_ACTOR
 //
 // To participate in state restoration, the function registerObjectForStateRestoration must
 // be called for the object.
-NS_SWIFT_UI_ACTOR
+API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @protocol UIStateRestoring <NSObject>
 @optional
 // The parent property is used to scope the restoration identifier path for an object, to
@@ -81,7 +81,7 @@ NS_SWIFT_UI_ACTOR
 
 // Protocol for classes that act as a factory to find a restorable object during state restoration
 // A class must implement this protocol if it is specified as the restoration class of a UIRestorableObject.
-NS_SWIFT_UI_ACTOR
+API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @protocol UIObjectRestoration
 + (nullable id<UIStateRestoring>) objectWithRestorationIdentifierPath:(NSArray<NSString *> *)identifierComponents coder:(NSCoder *)coder;
 @end

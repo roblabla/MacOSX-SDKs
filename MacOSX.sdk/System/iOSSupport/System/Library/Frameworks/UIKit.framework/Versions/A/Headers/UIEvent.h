@@ -23,7 +23,7 @@ typedef NS_ENUM(NSInteger, UIEventType) {
     UIEventTypeScroll      API_AVAILABLE(ios(13.4), tvos(13.4)) API_UNAVAILABLE(watchos) = 10,
     UIEventTypeHover       API_AVAILABLE(ios(13.4), tvos(13.4)) API_UNAVAILABLE(watchos) = 11,
     UIEventTypeTransform   API_AVAILABLE(ios(13.4), tvos(13.4)) API_UNAVAILABLE(watchos) = 14,
-};
+} API_UNAVAILABLE(watchos);
 
 typedef NS_ENUM(NSInteger, UIEventSubtype) {
     // available in iPhone OS 3.0
@@ -43,7 +43,7 @@ typedef NS_ENUM(NSInteger, UIEventSubtype) {
     UIEventSubtypeRemoteControlEndSeekingBackward   = 107,
     UIEventSubtypeRemoteControlBeginSeekingForward  = 108,
     UIEventSubtypeRemoteControlEndSeekingForward    = 109,
-};
+} API_UNAVAILABLE(watchos);
 
 /// Set of buttons pressed for the current event
 /// Raw format of: 1 << (buttonNumber - 1)
@@ -58,7 +58,7 @@ typedef NS_OPTIONS(NSInteger, UIEventButtonMask) {
 /// .button(2) == .secondary
 UIKIT_EXTERN UIEventButtonMask UIEventButtonMaskForButtonNumber(NSInteger buttonNumber) NS_SWIFT_NAME(UIEventButtonMask.button(_:)) API_AVAILABLE(ios(13.4)) API_UNAVAILABLE(tvos, watchos);
 
-UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(2.0)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @interface UIEvent : NSObject
 
 @property(nonatomic,readonly) UIEventType     type API_AVAILABLE(ios(3.0));

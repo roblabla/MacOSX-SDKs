@@ -8,7 +8,7 @@ exports:
     objc-classes:    [ SKHandle, SKHandleInvitability, SKInvitationPayload, SKPresence, 
                        SKPresenceDaemonConnection, SKPresenceOptions, SKPresencePayload, 
                        SKPresentDevice, SKPseudonyms, SKPublishedStatus, SKStatusPayload, 
-                       SKStatusPublishRequest, SKStatusPublishingDaemonConnection, 
+                       SKStatusProvisionPayload, SKStatusPublishRequest, SKStatusPublishingDaemonConnection, 
                        SKStatusPublishingService, SKStatusSubscription, SKStatusSubscriptionDaemonConnection, 
                        SKStatusSubscriptionMetadata, SKStatusSubscriptionService, 
                        SKSubscriptionValidationTokens ]

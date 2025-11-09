@@ -4,7 +4,7 @@
 
 	Framework:  AVFoundation
 
-	Copyright 2016-2018 Apple Inc. All rights reserved.
+	Copyright 2016-2024 Apple Inc. All rights reserved.
 
  */
 
@@ -36,6 +36,8 @@
     // To end the looping
     [looper disableLooping];
     // Player will play through the end of the current looping item
+ 
+    Subclasses of this type that are used from Swift must fulfill the requirements of a Sendable type.
  */
 
 
@@ -82,9 +84,10 @@ typedef NS_ENUM(NSInteger, AVPlayerLooperStatus) {
 typedef NS_ENUM(NSInteger, AVPlayerLooperItemOrdering) {
 	AVPlayerLooperItemOrderingLoopingItemsPrecedeExistingItems = 0,
 	AVPlayerLooperItemOrderingLoopingItemsFollowExistingItems = 1
-} NS_SWIFT_NAME(AVPlayerLooper.ItemOrdering) API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0)) API_UNAVAILABLE(watchos);
+} NS_SWIFT_NAME(AVPlayerLooper.ItemOrdering) API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 
-API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0)) API_UNAVAILABLE(watchos)
+NS_SWIFT_SENDABLE
+API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0), visionos(1.0)) API_UNAVAILABLE(watchos)
 @interface AVPlayerLooper : NSObject
 {
 @private
@@ -158,7 +161,7 @@ AV_INIT_UNAVAILABLE
  @discussion
 	The specified AVPlayerItem will be used as a template to generate at least 3 AVPlayerItem replicas and the replicas will be inserted into specified AVQueuePlayer's play queue to accomplish the looping playback. The specified AVPlayerItem should have its asset's duration property loaded beforehand so looping setup work would not be blocked until the duration value is known. Otherwise, AVPlayerLooper's status property is  AVPlayerLooperStatusUnknown until the duration property is loaded. The specified AVPlayerItem will not be used in the actual looping playback. Furthermore, AVPlayerItem replicas will be generated at initialization time so any changes made to the specified AVPlayerItem's property afterwards will not be reflected in the replicas used for looping playback. Specified CMTimeRange will limit each item loop iteration to playing within the specified time range. To play from beginning and the whole duration of the item, specify kCMTimeRangeInvalid for the range parameter. Time range will be accomplished by seeking to range start time and setting AVPlayerItem's forwardPlaybackEndTime property on the looping item replicas. Client should not modify AVQueuePlayer's play queue while AVPlayerLooper is performing the looping. AVPlayerLooper will insert the replica items in the specified AVQueuePlayer's play queue before or after existing equeued items according to the specified AVPlayerLooperItemOrdering. The looper will change the actionAtItemEnd to AVPlayerActionAtItemEndAdvance if required. AVQueuePlayer's play queue and actionAtItemEnd will be restored when -disableLooping method is called and then current looping item replicas completes playback or when AVPlayerLooper is destroyed. While AVPlayerLooper is being initialized, the specified AVQueuePlayer will be paused (rate of 0.0) if necessary and the original player rate will be restored after initialization completes. The client shall set the specified AVQueuePlayer's rate to 0 beforehand if additional set-up work needs to be performed after AVPlayerLooper initialization and before starting looping playback. An NSInvalidArgumentException will be raised if the player and template item are not specified or the template item has a 0 duration. An NSInvalidArgumentException will be raised if a valid time range has a duration of 0 or is not contained within time 0 and duration of the templateItem.
  */
-- (instancetype)initWithPlayer:(AVQueuePlayer *)player templateItem:(AVPlayerItem *)itemToLoop timeRange:(CMTimeRange)loopRange existingItemsOrdering:(AVPlayerLooperItemOrdering)itemOrdering NS_DESIGNATED_INITIALIZER API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0)) API_UNAVAILABLE(watchos);
+- (instancetype)initWithPlayer:(AVQueuePlayer *)player templateItem:(AVPlayerItem *)itemToLoop timeRange:(CMTimeRange)loopRange existingItemsOrdering:(AVPlayerLooperItemOrdering)itemOrdering NS_DESIGNATED_INITIALIZER API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 /*!
  @property status
@@ -205,7 +208,7 @@ AV_INIT_UNAVAILABLE
  @result
     Array containing replicas of specified AVPlayerItem
  */
-@property (nonatomic, readonly) NSArray<AVPlayerItem *> *loopingPlayerItems;
+@property (readonly) NSArray<AVPlayerItem *> *loopingPlayerItems;
 
 @end
 

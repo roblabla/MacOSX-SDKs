@@ -13,7 +13,7 @@ NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 /// @protocol   UITextSelectionHighlightView
 /// @abstract   A view that displays a tinted highlight behind rendered text to indicate selection.
 /// @discussion When a selection is ranged (i.e., length is > 0), a highlight view is shown to indicate the selected text range.
-UIKIT_EXTERN API_AVAILABLE(ios(17.0)) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(17.0)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @protocol UITextSelectionHighlightView <UICoordinateSpace>
 
 /// A collection of @c UITextSelectionRects representing the geometry of the current selection. Rects are expected to be in the

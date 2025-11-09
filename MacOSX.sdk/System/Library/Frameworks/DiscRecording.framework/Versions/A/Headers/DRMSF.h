@@ -37,6 +37,10 @@
 				A frame is equivalent to a sector or block in normal disk parlance. 75 frames make up one
 				second, so a 2 second pause (typical pregap size) is 150 frames. 
 */
+
+#ifndef DISC_RECORDING_DRMSF
+#define DISC_RECORDING_DRMSF
+
 @interface DRMSF : NSNumber
 {
 @private
@@ -174,3 +178,5 @@
 - (BOOL) isEqualToMSF:(DRMSF*)otherDRMSF;
 
 @end
+
+#endif // DISC_RECORDING_DRMSF

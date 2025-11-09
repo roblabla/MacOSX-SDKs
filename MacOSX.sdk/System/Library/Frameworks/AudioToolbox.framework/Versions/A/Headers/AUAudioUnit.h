@@ -1077,6 +1077,19 @@ API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0))
 */
 @property (NS_NONATOMIC_IOSONLY, copy, nullable) NSString *contextName;
 
+/*!	@property	migrateFromPlugin
+	@brief		Information for migrating data from other audio plug-ins to the v3 Audio Unit architecture.
+	@discussion
+		This can be used to migrate settings from an older Audio Unit; this allows manufacturers
+		to deprecate older Audio Units and replace them with new ones. The data for the older Audio Unit is
+		an array of NSData representing byte encoded AudioUnitOtherPluginDescs to migrate from.
+		Can also be used to migrate from a v2 to a v3 Audio Unit.
+
+		Bridged to the v2 property kAudioUnitMigrateProperty_FromPlugin.
+*/
+@property (NS_NONATOMIC_IOSONLY, readonly) NSArray* migrateFromPlugin API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0), tvos(16.0));
+
+
 /*!	@property	supportsMPE
 	@brief		Specifies whether an audio unit supports Multi-dimensional Polyphonic Expression.
 	@discussion

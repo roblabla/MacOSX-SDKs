@@ -1,6 +1,6 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.10 (swiftlang-5.10.0.12.5 clang-1500.3.9.1.1)
-// swift-module-flags: -target arm64e-apple-macos14.5 -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftMLCompute -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-concurrency -enable-bare-slash-regex -user-module-version 75.100.1 -module-name MLCompute
+// swift-compiler-version: Apple Swift version 6.0 effective-5.10 (swiftlang-6.0.0.7.24 clang-1600.0.25.1)
+// swift-module-flags: -target arm64e-apple-macos15.0 -target-variant arm64e-apple-ios18.0-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftMLCompute -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-concurrency -enable-bare-slash-regex -user-module-version 80 -module-name MLCompute
 @_exported import MLCompute
 import Swift
 import _Concurrency
@@ -98,27 +98,19 @@ extension MLCompute.MLCLayerNormalizationLayer {
 @available(iOS, introduced: 15.0, deprecated: 17.0, message: "Use Metal Performance Shaders Graph or BNNS instead.")
 @available(tvOS, introduced: 15.0, deprecated: 17.0, message: "Use Metal Performance Shaders Graph or BNNS instead.")
 extension MLCompute.MLCInferenceGraph {
-  #if compiler(>=5.3) && $AsyncAwait
   @discardableResult
   public func execute(inputsData: [Swift.String : MLCompute.MLCTensorData], lossLabelsData: [Swift.String : MLCompute.MLCTensorData]? = nil, lossLabelWeightsData: [Swift.String : MLCompute.MLCTensorData]? = nil, outputsData: [Swift.String : MLCompute.MLCTensorData]? = nil, batchSize: Swift.Int, options: MLCompute.MLCExecutionOptions = []) async throws -> (result: MLCompute.MLCTensor?, executionTime: Foundation.TimeInterval)
-  #endif
 }
 @available(macOS, introduced: 12.0, deprecated: 14.0, message: "Use Metal Performance Shaders Graph or BNNS instead.")
 @available(iOS, introduced: 15.0, deprecated: 17.0, message: "Use Metal Performance Shaders Graph or BNNS instead.")
 @available(tvOS, introduced: 15.0, deprecated: 17.0, message: "Use Metal Performance Shaders Graph or BNNS instead.")
 extension MLCompute.MLCTrainingGraph {
-  #if compiler(>=5.3) && $AsyncAwait
   @discardableResult
   public func executeForward(batchSize: Swift.Int, options: MLCompute.MLCExecutionOptions = [], outputsData: [Swift.String : MLCompute.MLCTensorData]? = nil) async throws -> (result: MLCompute.MLCTensor?, executionTime: Foundation.TimeInterval)
-  #endif
-  #if compiler(>=5.3) && $AsyncAwait
   @discardableResult
   public func executeGradient(batchSize: Swift.Int, options: MLCompute.MLCExecutionOptions = [], outputsData: [Swift.String : MLCompute.MLCTensorData]? = nil) async throws -> Foundation.TimeInterval
-  #endif
-  #if compiler(>=5.3) && $AsyncAwait
   @discardableResult
   public func executeOptimizerUpdate(options: MLCompute.MLCExecutionOptions = []) async throws -> Foundation.TimeInterval
-  #endif
 }
 @available(macOS, introduced: 11.0, deprecated: 14.0, message: "Use Metal Performance Shaders Graph or BNNS instead.")
 @available(iOS, introduced: 14.0, deprecated: 17.0, message: "Use Metal Performance Shaders Graph or BNNS instead.")

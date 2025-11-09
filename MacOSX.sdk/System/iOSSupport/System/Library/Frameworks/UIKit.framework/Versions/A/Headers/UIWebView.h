@@ -20,7 +20,7 @@ typedef NS_ENUM(NSInteger, UIWebViewNavigationType) {
     UIWebViewNavigationTypeReload,
     UIWebViewNavigationTypeFormResubmitted,
     UIWebViewNavigationTypeOther
-} API_UNAVAILABLE(tvos);
+} API_UNAVAILABLE(tvos, watchos);
 
 typedef NS_ENUM(NSInteger, UIWebPaginationMode) {
     UIWebPaginationModeUnpaginated,
@@ -28,17 +28,17 @@ typedef NS_ENUM(NSInteger, UIWebPaginationMode) {
     UIWebPaginationModeTopToBottom,
     UIWebPaginationModeBottomToTop,
     UIWebPaginationModeRightToLeft
-} API_UNAVAILABLE(tvos);
+} API_UNAVAILABLE(tvos, watchos);
 
 typedef NS_ENUM(NSInteger, UIWebPaginationBreakingMode) {
     UIWebPaginationBreakingModePage,
     UIWebPaginationBreakingModeColumn
-} API_UNAVAILABLE(tvos);
+} API_UNAVAILABLE(tvos, watchos);
 
 @class UIWebViewInternal;
 @protocol UIWebViewDelegate;
 
-UIKIT_EXTERN API_DEPRECATED("No longer supported; please adopt WKWebView.", ios(2.0, 12.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos, macos, macCatalyst) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_DEPRECATED("No longer supported; please adopt WKWebView.", ios(2.0, 12.0)) API_UNAVAILABLE(tvos, macos, macCatalyst) API_UNAVAILABLE(visionos, watchos) NS_SWIFT_UI_ACTOR
 @interface UIWebView : UIView <NSCoding, UIScrollViewDelegate>
 
 @property (nullable, nonatomic, assign) id <UIWebViewDelegate> delegate;
@@ -65,7 +65,7 @@ UIKIT_EXTERN API_DEPRECATED("No longer supported; please adopt WKWebView.", ios(
 
 @property (nonatomic) BOOL scalesPageToFit;
 
-@property (nonatomic) BOOL detectsPhoneNumbers API_DEPRECATED("", ios(2.0, 3.0));
+@property (nonatomic) BOOL detectsPhoneNumbers API_DEPRECATED("", ios(2.0, 3.0)) API_UNAVAILABLE(watchos);
 @property (nonatomic) UIDataDetectorTypes dataDetectorTypes API_AVAILABLE(ios(3.0));
 
 @property (nonatomic) BOOL allowsInlineMediaPlayback API_AVAILABLE(ios(4.0)); // iPhone Safari defaults to NO. iPad Safari defaults to YES
@@ -88,14 +88,14 @@ UIKIT_EXTERN API_DEPRECATED("No longer supported; please adopt WKWebView.", ios(
 @property (nonatomic) BOOL allowsLinkPreview API_AVAILABLE(ios(9.0)); // default is NO
 @end
 
-API_UNAVAILABLE(tvos, macos, macCatalyst, visionos) NS_SWIFT_UI_ACTOR
+API_UNAVAILABLE(tvos, macos, macCatalyst, visionos, watchos) NS_SWIFT_UI_ACTOR
 @protocol UIWebViewDelegate <NSObject>
 
 @optional
-- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType API_DEPRECATED("No longer supported.", ios(2.0, 12.0));
-- (void)webViewDidStartLoad:(UIWebView *)webView API_DEPRECATED("No longer supported.", ios(2.0, 12.0));
-- (void)webViewDidFinishLoad:(UIWebView *)webView API_DEPRECATED("No longer supported.", ios(2.0, 12.0));
-- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error API_DEPRECATED("No longer supported.", ios(2.0, 12.0));
+- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType API_DEPRECATED("No longer supported.", ios(2.0, 12.0)) API_UNAVAILABLE(watchos);
+- (void)webViewDidStartLoad:(UIWebView *)webView API_DEPRECATED("No longer supported.", ios(2.0, 12.0)) API_UNAVAILABLE(watchos);
+- (void)webViewDidFinishLoad:(UIWebView *)webView API_DEPRECATED("No longer supported.", ios(2.0, 12.0)) API_UNAVAILABLE(watchos);
+- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error API_DEPRECATED("No longer supported.", ios(2.0, 12.0)) API_UNAVAILABLE(watchos);
 
 @end
 

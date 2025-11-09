@@ -68,6 +68,9 @@
 #include <stdint.h>
 #include <AvailabilityMacros.h>
 
+#ifndef DISC_RECORDING_TRACK
+#define DISC_RECORDING_TRACK
+
 @class DRMSF;
 @class DRBurn;
 
@@ -984,4 +987,4 @@ extern NSString* const DRSubchannelDataFormPack			AVAILABLE_MAC_OS_X_VERSION_10_
 extern NSString* const DRSubchannelDataFormRaw			AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 
 
-
+#endif // DISC_RECORDING_TRACK

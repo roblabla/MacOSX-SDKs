@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKitDefines.h>
 
-UIKIT_EXTERN API_AVAILABLE(ios(16.0)) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @interface UISceneWindowingBehaviors : NSObject
 
 // Clients should never make one of these directly. Access through UIWindowScene.windowingBehaviors.

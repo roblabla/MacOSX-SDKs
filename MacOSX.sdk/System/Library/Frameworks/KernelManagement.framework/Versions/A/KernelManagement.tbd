@@ -8,5 +8,5 @@ exports:
                        _KMLoadExtensionsWithPaths, _KMUnloadExtensionsWithIdentifiers, 
                        _KernelManagementVersionNumber, _KernelManagementVersionString, 
                        _OSKernelManagementErrorDomain ]
-    objc-classes:    [ KernelManagementClient ]
+    objc-classes:    [ KernelManagementClient, SimpleKernelExtension ]
 ...

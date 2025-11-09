@@ -15,6 +15,8 @@ API_UNAVAILABLE(visionos)
 
 @property (nonatomic, assign) BOOL allowsNetworkAccess API_AVAILABLE(ios(17.5), macCatalyst(15.0), macos(12.0));
 
+@property (nonatomic, copy) NSDictionary<NSString *, id> *configurationInfo API_AVAILABLE(ios(18.0), macCatalyst(18.0), macos(15.0));
+
 - (instancetype)init API_AVAILABLE(ios(17.5), macCatalyst(15.0), macos(12.0));
 + (instancetype)new API_AVAILABLE(ios(17.5), macCatalyst(15.0), macos(12.0));
 

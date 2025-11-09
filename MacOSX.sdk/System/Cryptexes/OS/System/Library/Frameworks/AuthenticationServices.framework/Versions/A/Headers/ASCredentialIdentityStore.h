@@ -35,6 +35,7 @@ typedef NS_OPTIONS(NSUInteger, ASCredentialIdentityTypes) {
     ASCredentialIdentityTypesAll = 0,
     ASCredentialIdentityTypesPassword = 1,
     ASCredentialIdentityTypesPasskey = 1 << 1,
+    ASCredentialIdentityTypesOneTimeCode = 1 << 2,
 } NS_SWIFT_NAME(ASCredentialIdentityStore.IdentityTypes) API_AVAILABLE(ios(17.4), macos(14.4), visionos(1.1)) API_UNAVAILABLE(tvos, watchos);
 
 AS_EXTERN API_AVAILABLE(ios(12.0), macCatalyst(14.0), macos(11.0)) API_UNAVAILABLE(tvos, watchos)

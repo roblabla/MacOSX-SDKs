@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/usr/lib/swift/libswiftCoreMedia.dylib'
-current-version: 3110.8.2
+current-version: 3145.74.5
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -1392,6 +1392,8 @@ exports:
                        '_$sSo22CMFormatDescriptionRefa9CoreMediaE8TimeCodeVN', '_$sSo22CMFormatDescriptionRefa9CoreMediaE8fontName11localFontIDSSSi_tKF', 
                        '_$sSo22CMFormatDescriptionRefa9CoreMediaE9mediaTypeAbCE0eG0Vvg', 
                        '_$sSo22CMFormatDescriptionRefa9CoreMediaE9mediaTypeAbCE0eG0VvpMV', 
+                       '_$sSo6CMTimea9CoreMediaE022fromSourceTimeToTargetF09speedRampABSaySo0A7MappingaG_tF', 
+                       '_$sSo6CMTimea9CoreMediaE022fromTargetTimeToSourceF09speedRampABSaySo0A7MappingaG_tF', 
                        '_$sSo6CMTimea9CoreMediaE12convertScale_6methodABs5Int32V_So0A14RoundingMethodVtF', 
                        '_$sSo6CMTimea9CoreMediaE12isIndefiniteSbvg', '_$sSo6CMTimea9CoreMediaE12isIndefiniteSbvpMV', 
                        '_$sSo6CMTimea9CoreMediaE14hasBeenRoundedSbvg', '_$sSo6CMTimea9CoreMediaE14hasBeenRoundedSbvpMV', 
@@ -1399,6 +1401,7 @@ exports:
                        '_$sSo6CMTimea9CoreMediaE18isPositiveInfinitySbvg', '_$sSo6CMTimea9CoreMediaE18isPositiveInfinitySbvpMV', 
                        '_$sSo6CMTimea9CoreMediaE1goiySbAB_ABtFZ', '_$sSo6CMTimea9CoreMediaE1loiySbAB_ABtFZ', 
                        '_$sSo6CMTimea9CoreMediaE1poiyA2B_ABtFZ', '_$sSo6CMTimea9CoreMediaE1soiyA2B_ABtFZ', 
+                       '_$sSo6CMTimea9CoreMediaE20compareApproximately2toSiAB_tF', 
                        '_$sSo6CMTimea9CoreMediaE2eeoiySbAB_ABtFZ', '_$sSo6CMTimea9CoreMediaE2geoiySbAB_ABtFZ', 
                        '_$sSo6CMTimea9CoreMediaE2leoiySbAB_ABtFZ', '_$sSo6CMTimea9CoreMediaE2neoiySbAB_ABtFZ', 
                        '_$sSo6CMTimea9CoreMediaE4hash4intoys6HasherVz_tF', '_$sSo6CMTimea9CoreMediaE5value9timescaleABs5Int64V_s5Int32VtcfC', 

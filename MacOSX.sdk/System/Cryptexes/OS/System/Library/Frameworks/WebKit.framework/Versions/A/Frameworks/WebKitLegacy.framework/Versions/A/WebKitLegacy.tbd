@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/Frameworks/WebKit.framework/Versions/A/Frameworks/WebKitLegacy.framework/Versions/A/WebKitLegacy'
-current-version: 618.2.12
+current-version: 619.1.26
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _DOMEventException, _DOMException, _DOMRangeException, _DOMXPathException, 
@@ -26,8 +26,8 @@ exports:
                        _WebElementLinkTargetFrameKey, _WebElementLinkTitleKey, _WebElementLinkURLKey, 
                        _WebElementMediaURLKey, _WebElementSpellingToolTipKey, _WebElementTitleKey, 
                        _WebFrameCanSuspendActiveDOMObjects, _WebFrameHasPlugins, 
-                       _WebFrameHasUnloadListener, _WebFrameMainDocumentError, _WebFrameUsesApplicationCache, 
-                       _WebFrameUsesDatabases, _WebFrameUsesGeolocation, _WebHistoryAllItemsRemovedNotification, 
+                       _WebFrameHasUnloadListener, _WebFrameMainDocumentError, _WebFrameUsesDatabases, 
+                       _WebFrameUsesGeolocation, _WebHistoryAllItemsRemovedNotification, 
                        _WebHistoryItemChangedNotification, _WebHistoryItemsAddedNotification, 
                        _WebHistoryItemsDiscardedWhileLoadingNotification, _WebHistoryItemsKey, 
                        _WebHistoryItemsRemovedNotification, _WebHistoryLoadedNotification, 
@@ -86,14 +86,14 @@ exports:
                        DOMProgressEvent, DOMRGBColor, DOMRange, DOMRect, DOMStyleSheet, 
                        DOMStyleSheetList, DOMText, DOMTextEvent, DOMTimeRanges, DOMTreeWalker, 
                        DOMUIEvent, DOMWheelEvent, DOMXPathExpression, DOMXPathResult, 
-                       WebApplicationCache, WebArchive, WebBackForwardList, WebCache, 
-                       WebCoreScrollView, WebCoreStatistics, WebDataSource, WebDatabaseManager, 
-                       WebDatabaseQuotaManager, WebDefaultPolicyDelegate, WebDeviceOrientation, 
-                       WebDeviceOrientationProviderMock, WebDownload, WebDynamicScrollBarsView, 
-                       WebFeature, WebFormDelegate, WebFrame, WebFrameView, WebGeolocationPosition, 
-                       WebHTMLRepresentation, WebHTMLView, WebHistory, WebHistoryItem, 
-                       WebIconDatabase, WebInspector, WebJavaScriptTextInputPanel, 
-                       WebKitStatistics, WebNavigationData, WebNotification, WebPanelAuthenticationHandler, 
+                       WebArchive, WebBackForwardList, WebCache, WebCoreScrollView, 
+                       WebCoreStatistics, WebDataSource, WebDatabaseManager, WebDatabaseQuotaManager, 
+                       WebDefaultPolicyDelegate, WebDeviceOrientation, WebDeviceOrientationProviderMock, 
+                       WebDownload, WebDynamicScrollBarsView, WebFeature, WebFormDelegate, 
+                       WebFrame, WebFrameView, WebGeolocationPosition, WebHTMLRepresentation, 
+                       WebHTMLView, WebHistory, WebHistoryItem, WebIconDatabase, 
+                       WebInspector, WebJavaScriptTextInputPanel, WebKitStatistics, 
+                       WebNavigationData, WebNotification, WebPanelAuthenticationHandler, 
                        WebPluginDatabase, WebPolicyDecisionListener, WebPreferences, 
                        WebResource, WebScriptCallFrame, WebScriptObject, WebScriptWorld, 
                        WebSecurityOrigin, WebStorageManager, WebStringTruncator, 

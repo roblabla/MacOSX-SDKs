@@ -12,19 +12,19 @@
 
 NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
-typedef NSString *UIActionIdentifier NS_SWIFT_NAME(UIAction.Identifier) NS_TYPED_EXTENSIBLE_ENUM API_AVAILABLE(ios(13.0));
+typedef NSString *UIActionIdentifier NS_SWIFT_NAME(UIAction.Identifier) NS_TYPED_EXTENSIBLE_ENUM API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos);
 
 /// Default action identifiers for paste variants
-UIKIT_EXTERN const UIActionIdentifier UIActionPaste API_AVAILABLE(ios(15.0));
-UIKIT_EXTERN const UIActionIdentifier UIActionPasteAndMatchStyle API_AVAILABLE(ios(15.0));
-UIKIT_EXTERN const UIActionIdentifier UIActionPasteAndGo API_AVAILABLE(ios(15.0));
-UIKIT_EXTERN const UIActionIdentifier UIActionPasteAndSearch API_AVAILABLE(ios(15.0));
+UIKIT_EXTERN const UIActionIdentifier UIActionPaste API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(watchos);
+UIKIT_EXTERN const UIActionIdentifier UIActionPasteAndMatchStyle API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(watchos);
+UIKIT_EXTERN const UIActionIdentifier UIActionPasteAndGo API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(watchos);
+UIKIT_EXTERN const UIActionIdentifier UIActionPasteAndSearch API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(watchos);
 
 @class UIAction;
 
-typedef void (^UIActionHandler)(__kindof UIAction *action);
+typedef void (^UIActionHandler)(__kindof UIAction *action) API_UNAVAILABLE(watchos);
 
-UIKIT_EXTERN API_AVAILABLE(ios(13.0)) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @interface UIAction : UIMenuElement <UIMenuLeaf>
 
 /// Short display title.
@@ -46,7 +46,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(13.0)) NS_SWIFT_UI_ACTOR
 @property (nonatomic) UIMenuElementState state;
 
 /// If available, the object on behalf of which the actionHandler is called.
-@property (nonatomic, readonly, nullable) id sender API_AVAILABLE(ios(14.0));
+@property (nonatomic, readonly, nullable) id sender API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos);
 
 /*!
  * @abstract Creates a UIAction with an empty title, nil image, and automatically generated identifier
@@ -55,7 +55,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(13.0)) NS_SWIFT_UI_ACTOR
  *
  * @return A new UIAction.
  */
-+ (instancetype)actionWithHandler:(UIActionHandler)handler API_AVAILABLE(ios(14.0)) NS_SWIFT_UNAVAILABLE("Use init(title:image:identifier:discoverabilityTitle:attributes:state:handler:) instead.");
++ (instancetype)actionWithHandler:(UIActionHandler)handler API_AVAILABLE(ios(14.0)) NS_SWIFT_UNAVAILABLE("Use init(title:image:identifier:discoverabilityTitle:attributes:state:handler:) instead.") API_UNAVAILABLE(watchos);
 
 /*!
  * @abstract Creates a UIAction with the given arguments.
@@ -91,7 +91,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(13.0)) NS_SWIFT_UI_ACTOR
  *
  * @return A new UIAction.
  */
-+ (instancetype)captureTextFromCameraActionForResponder:(UIResponder<UIKeyInput> *)responder identifier:(nullable UIActionIdentifier)identifier NS_SWIFT_NAME(captureTextFromCamera(responder:identifier:)) API_AVAILABLE(ios(15.0));
++ (instancetype)captureTextFromCameraActionForResponder:(UIResponder<UIKeyInput> *)responder identifier:(nullable UIActionIdentifier)identifier NS_SWIFT_NAME(captureTextFromCamera(responder:identifier:)) API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(watchos);
 
 @end
 

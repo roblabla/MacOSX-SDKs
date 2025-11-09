@@ -5,10 +5,6 @@
 #ifndef __GCL_H
 #define __GCL_H
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 #include <stdarg.h>
 #include <stdint.h>
 #include <AvailabilityMacros.h>
@@ -21,6 +17,10 @@ extern "C" {
 
 #include <OpenCL/opencl.h>
 #include <dispatch/dispatch.h>
+
+#ifdef __cplusplus
+extern "C" {
+#endif
   
 typedef struct _cl_ndrange {
   size_t work_dim;

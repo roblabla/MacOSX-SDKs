@@ -25,7 +25,7 @@ typedef NS_ENUM(NSUInteger, PKAutomaticPassPresentationSuppressionResult) {
     PKAutomaticPassPresentationSuppressionResultDenied,             // Suppression was denied due to lack of entitlement
     PKAutomaticPassPresentationSuppressionResultCancelled,          // Suppression was cancelled before the response handler was fired
     PKAutomaticPassPresentationSuppressionResultSuccess             // Suppression of automatic pass presentation was successful
-} __WATCHOS_PROHIBITED API_AVAILABLE(ios(9.0));
+} API_AVAILABLE(ios(9.0), watchos(10.2));
 
 typedef NSUInteger PKSuppressionRequestToken;
 
@@ -37,9 +37,9 @@ API_AVAILABLE(ios(6.0), watchos(3.0))
 
 // These methods may be used to temporarily disable the automatic presentation of passes when a device encounters a contactless field.
 // Use of these methods require an entitlement. Otherwise, requesting will always return a PKAutomaticPassPresentationSuppressionResultDenied as the result.
-+ (PKSuppressionRequestToken)requestAutomaticPassPresentationSuppressionWithResponseHandler:(void(^)(PKAutomaticPassPresentationSuppressionResult result))responseHandler API_AVAILABLE(ios(9.0)) __WATCHOS_PROHIBITED NS_EXTENSION_UNAVAILABLE("Not available to extensions");
-+ (void)endAutomaticPassPresentationSuppressionWithRequestToken:(PKSuppressionRequestToken)requestToken API_AVAILABLE(ios(9.0)) __WATCHOS_PROHIBITED NS_EXTENSION_UNAVAILABLE("Not available to extensions");
-+ (BOOL)isSuppressingAutomaticPassPresentation API_AVAILABLE(ios(9.0)) __WATCHOS_PROHIBITED NS_EXTENSION_UNAVAILABLE("Not available to extensions");
++ (PKSuppressionRequestToken)requestAutomaticPassPresentationSuppressionWithResponseHandler:(void(^)(PKAutomaticPassPresentationSuppressionResult result))responseHandler API_AVAILABLE(ios(9.0), watchos(10.2)) NS_EXTENSION_UNAVAILABLE("Not available to extensions");
++ (void)endAutomaticPassPresentationSuppressionWithRequestToken:(PKSuppressionRequestToken)requestToken API_AVAILABLE(ios(9.0), watchos(10.2)) NS_EXTENSION_UNAVAILABLE("Not available to extensions");
++ (BOOL)isSuppressingAutomaticPassPresentation API_AVAILABLE(ios(9.0), watchos(10.2)) NS_EXTENSION_UNAVAILABLE("Not available to extensions");
 
 // If device supports adding payment passes, this method will return YES. Otherwise, NO will be returned.
 + (BOOL)isPaymentPassActivationAvailable API_DEPRECATED("Use -[PKPassLibrary isPaymentPassActivationAvailable] instead", ios(8.0, 9.0));

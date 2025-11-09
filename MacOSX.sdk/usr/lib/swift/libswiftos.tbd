@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/usr/lib/swift/libswiftos.dylib'
-current-version: 1049.100.4
+current-version: 1062.0.2
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -331,7 +331,17 @@ exports:
                        '_$s2os24OSSignpostAnimationBeginO9hashValueSivg', '_$s2os24OSSignpostAnimationBeginO9hashValueSivpMV', 
                        '_$s2os24OSSignpostAnimationBeginOMa', '_$s2os24OSSignpostAnimationBeginOMn', 
                        '_$s2os24OSSignpostAnimationBeginON', '_$s2os24OSSignpostAnimationBeginOSHAAMc', 
-                       '_$s2os24OSSignpostAnimationBeginOSQAAMc', '_$s2os27_checkFormatStringAndBuffer_4withyAA12OSLogMessageV_ySS_SRys5UInt8VGtXEtF', 
+                       '_$s2os24OSSignpostAnimationBeginOSQAAMc', '_$s2os26OSAllocatedUnfairLockFlagsV12adaptiveSpinACvgZ', 
+                       '_$s2os26OSAllocatedUnfairLockFlagsV16_translatedValueSo0A20_unfair_lock_flags_tavg', 
+                       '_$s2os26OSAllocatedUnfairLockFlagsV16_translatedValueSo0A20_unfair_lock_flags_tavpMV', 
+                       '_$s2os26OSAllocatedUnfairLockFlagsV8rawValueACs6UInt32V_tcfC', 
+                       '_$s2os26OSAllocatedUnfairLockFlagsV8rawValues6UInt32Vvg', 
+                       '_$s2os26OSAllocatedUnfairLockFlagsV8rawValues6UInt32VvpMV', 
+                       '_$s2os26OSAllocatedUnfairLockFlagsVMa', '_$s2os26OSAllocatedUnfairLockFlagsVMn', 
+                       '_$s2os26OSAllocatedUnfairLockFlagsVN', '_$s2os26OSAllocatedUnfairLockFlagsVSQAAMc', 
+                       '_$s2os26OSAllocatedUnfairLockFlagsVSYAAMc', '_$s2os26OSAllocatedUnfairLockFlagsVs10SetAlgebraAAMc', 
+                       '_$s2os26OSAllocatedUnfairLockFlagsVs25ExpressibleByArrayLiteralAAMc', 
+                       '_$s2os26OSAllocatedUnfairLockFlagsVs9OptionSetAAMc', '_$s2os27_checkFormatStringAndBuffer_4withyAA12OSLogMessageV_ySS_SRys5UInt8VGtXEtF', 
                        '_$s2os28animationBeginSignpostHelper3dso3log4name10signpostID19formatStringPointer9argumentsySV_So03OS_a1_G0Cs06StaticL0VAA010OSSignpostJ0VSPys4Int8VGSays7CVarArg_pGtF', 
                        '_$s2os28checkForErrorAndConsumeState5stateAA010OSSignpostD0OAA0i8IntervalG0C_tF', 
                        '_$s2os28getNullTerminatedUTF8Pointer_5usingSVSS_SpyypGSgztF', 

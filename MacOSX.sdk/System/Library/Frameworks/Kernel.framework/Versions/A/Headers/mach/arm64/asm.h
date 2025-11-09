@@ -204,7 +204,6 @@
 
 #define EXT(x) _ ## x
 
-
 #else /* NOT __ASSEMBLER__ */
 
 /* These defines are here for .c files that wish to reference global symbols

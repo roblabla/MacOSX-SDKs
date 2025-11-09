@@ -64,6 +64,7 @@ protected:
 	
 	virtual bool		attach ( IOService * provider ) APPLE_KEXT_OVERRIDE;
 	virtual void		detach ( IOService * provider ) APPLE_KEXT_OVERRIDE;
+    virtual bool        terminate ( IOOptionBits options = 0 ) APPLE_KEXT_OVERRIDE;
 	virtual void		free ( void ) APPLE_KEXT_OVERRIDE;
     virtual IOReturn	newUserClient (
     						   task_t			owningTask,

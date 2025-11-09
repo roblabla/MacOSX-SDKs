@@ -5,8 +5,6 @@
 //  Copyright © 2022-2023 Apple Inc. All rights reserved.
 //
 
-/* WARNING: Preliminary API — subject to change without notice */
-
 #import <Foundation/Foundation.h>
 #import <CoreMedia/CoreMedia.h>
 #import <Metal/Metal.h>

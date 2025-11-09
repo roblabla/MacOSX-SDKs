@@ -91,13 +91,13 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  @c CPManeuver describes a navigation instruction.
  */
-API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(macos, watchos, tvos)
+API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(macos, watchos)
 @interface CPManeuver : NSObject <NSCopying, NSSecureCoding>
 
 /**
  symbolSet is a @c CPImageSet representing the maneuver.
  */
-@property (nullable, nonatomic, strong) CPImageSet *symbolSet API_DEPRECATED_WITH_REPLACEMENT("symbolImage", ios(12.0, 13.0)) API_UNAVAILABLE(macos, watchos, tvos);
+@property (nullable, nonatomic, strong) CPImageSet *symbolSet API_DEPRECATED_WITH_REPLACEMENT("symbolImage", ios(12.0, 13.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(macos, watchos);
 
 /**
  Takes precedence over @c guidanceBackgroundColor set in @c CPMapTemplate.

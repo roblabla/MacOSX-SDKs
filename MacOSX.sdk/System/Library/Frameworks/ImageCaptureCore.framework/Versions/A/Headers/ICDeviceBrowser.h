@@ -169,17 +169,17 @@ IC_AVAILABLE(macos(10.4), ios(13.0))
 @property (readonly, nullable) NSArray<ICDevice*>* devices IC_AVAILABLE(macos(10.4), ios(13.0));
 
 /*!
-  @method preferredDevice
-  @abstract This method returns a device object that should be selected by the client application when it is launched.
+  @property preferredDevice
+  @abstract This property returns a device object that should be selected by the client application when it is launched.
   @discussion If the client application that calls this method is the auto-launch application associated with a device and that device is the last device attached (through USB, FireWire or network), then that device will be the preferred device. The best place to call this method is in the implmentation of the ICDeviceBrowser delegate method "deviceBrowser:didAddDevice:moreComing:", if the "moreComing" parameter passed to the delegate is "NO"; or in the delegate method "deviceBrowserDidEnumerateLocalDevices:".
  */
-- (nullable ICDevice*) preferredDevice IC_AVAILABLE(macos(10.4)) IC_UNAVAILABLE(ios);
+@property (nonatomic, readonly, strong) ICDevice * _Nullable preferredDevice IC_AVAILABLE(macos(10.4)) IC_UNAVAILABLE(ios);
 
 /*!
   @method init
   @abstract This is the designated initializer.
  */
-- (id)init IC_AVAILABLE(macos(10.4), ios(13.0));
+- (instancetype)init IC_AVAILABLE(macos(10.4), ios(13.0));
 
 /*!
   @method start:
@@ -198,11 +198,11 @@ IC_AVAILABLE(macos(10.4), ios(13.0))
 #pragma mark - Authorization Status
 
 /*!
- @method contentsAuthorizationStatus
- @abstract This method returns a constant indicating whether the app has permission to acces the contents of an attached media device.
+ @property contentsAuthorizationStatus
+ @abstract This property returns a constant indicating whether the app has permission to acces the contents of an attached media device.
  @discussion A constant indicating authorization status.
 */
-- (ICAuthorizationStatus)contentsAuthorizationStatus IC_UNAVAILABLE(macos) IC_AVAILABLE(ios(14.0));
+@property (nonatomic, readonly, copy) ICAuthorizationStatus _Nonnull contentsAuthorizationStatus IC_UNAVAILABLE(macos) IC_AVAILABLE(ios(14.0));
 
 /*!
  @method requestContentsAuthorizationWithCompletion:
@@ -211,10 +211,10 @@ IC_AVAILABLE(macos(10.4), ios(13.0))
 - (void)requestContentsAuthorizationWithCompletion:(void (^)(ICAuthorizationStatus status)) completion IC_UNAVAILABLE(macos) IC_AVAILABLE(ios(14.0));
 
 /*!
- @method controlAuthorizationStatus
- @abstract This method returns a constant indicating whether the app has permission to control the attached camera device.
+ @property controlAuthorizationStatus
+ @abstract This property returns a constant indicating whether the app has permission to control the attached camera device.
 */
-- (ICAuthorizationStatus)controlAuthorizationStatus IC_UNAVAILABLE(macos) IC_AVAILABLE(ios(14.0));
+@property (nonatomic, readonly, copy) ICAuthorizationStatus _Nonnull controlAuthorizationStatus IC_UNAVAILABLE(macos) IC_AVAILABLE(ios(14.0));
 
 /*!
  @method requestControlAuthorizationWithCompletion:

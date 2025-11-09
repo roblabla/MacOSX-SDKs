@@ -12,6 +12,7 @@
 #import <ScreenCaptureKit/SCError.h>
 #import <ScreenCaptureKit/SCContentSharingPicker.h>
 #import <ScreenCaptureKit/SCScreenshotManager.h>
+#import <ScreenCaptureKit/SCRecordingOutput.h>
 
 
 

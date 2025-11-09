@@ -29,7 +29,7 @@ BROWSERENGINE_EXPORT
 @end
 
 
-/// An object that represents a media playback envirnment
+/// An object that represents a media playback environment
 NS_REFINED_FOR_SWIFT
 API_AVAILABLE(ios(17.4))
 API_UNAVAILABLE(macos, watchos, tvos, visionos)
@@ -118,6 +118,26 @@ BROWSERENGINE_EXPORT
 @end
 
 NS_REFINED_FOR_SWIFT
+API_AVAILABLE(ios(17.6))
+API_UNAVAILABLE(macos, watchos, tvos, visionos)
+BROWSERENGINE_EXPORT
+@interface BEWebContentProcess (CapabilityInvalidationHandler)
+
+/// Grants the specified capability to the process with invalidation handler.
+///
+/// This method grants the specified capability to the process or returns nil and an error if it can not be granted.
+///
+/// - Parameters:
+///   - capability: The capability to be granted
+///   - error: The error out param populated if the capability cannot be granted.
+///   - invalidationHandler: The invalidation handler
+///
+///  - Returns: an invalidatable grant object that represents the granted capability.
+-(nullable id<BEProcessCapabilityGrant>)grantCapability:(BEProcessCapability*)capability error:(NSError**)error invalidationHandler:(void (^)(void))invalidationHandler;
+
+@end
+
+NS_REFINED_FOR_SWIFT
 API_AVAILABLE(macos(14.3), ios(17.4))
 API_UNAVAILABLE(watchos, tvos, visionos)
 BROWSERENGINE_EXPORT
@@ -135,6 +155,27 @@ BROWSERENGINE_EXPORT
 -(nullable id<BEProcessCapabilityGrant>)grantCapability:(BEProcessCapability*)capability error:(NSError* _Nullable*)error;
 
 @end
+
+NS_REFINED_FOR_SWIFT
+API_AVAILABLE(ios(17.6))
+API_UNAVAILABLE(macos, watchos, tvos, visionos)
+BROWSERENGINE_EXPORT
+@interface BERenderingProcess (CapabilityInvalidationHandler)
+
+/// Grants the specified capability to the process with invalidation handler.
+///
+/// This method grants the specified capability to the process or returns nil and an error if it can not be granted.
+///
+/// - Parameters:
+///   - capability: The capability to be granted
+///   - error: The error out param populated if the capability cannot be granted.
+///   - invalidationHandler: The invalidation handler
+///
+///  - Returns: an invalidatable grant object that represents the granted capability.
+-(nullable id<BEProcessCapabilityGrant>)grantCapability:(BEProcessCapability*)capability error:(NSError**)error invalidationHandler:(void (^)(void))invalidationHandler;
+
+@end
+
 
 NS_REFINED_FOR_SWIFT
 API_AVAILABLE(macos(14.3), ios(17.4))
@@ -156,5 +197,24 @@ BROWSERENGINE_EXPORT
 
 @end
 
+NS_REFINED_FOR_SWIFT
+API_AVAILABLE(ios(17.6))
+API_UNAVAILABLE(macos, watchos, tvos, visionos)
+BROWSERENGINE_EXPORT
+@interface BENetworkingProcess (CapabilityInvalidationHandler)
+
+/// Grants the specified capability to the process with invalidation handler.
+///
+/// This method grants the specified capability to the process or returns nil and an error if it can not be granted.
+///
+/// - Parameters:
+///   - capability: The capability to be granted
+///   - error: The error out param populated if the capability cannot be granted.
+///   - invalidationHandler: The invalidation handler
+///
+///  - Returns: an invalidatable grant object that represents the granted capability.
+-(nullable id<BEProcessCapabilityGrant>)grantCapability:(BEProcessCapability*)capability error:(NSError**)error invalidationHandler:(void (^)(void))invalidationHandler;
+
+@end
 
 NS_ASSUME_NONNULL_END

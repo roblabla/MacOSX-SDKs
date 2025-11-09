@@ -11,4 +11,4 @@ typedef NS_ENUM(NSInteger, SFSpeechRecognitionTaskHint) {
     SFSpeechRecognitionTaskHintDictation = 1,       // General dictation/keyboard-style
     SFSpeechRecognitionTaskHintSearch = 2,          // Search-style requests
     SFSpeechRecognitionTaskHintConfirmation = 3,    // Short, confirmation-style requests ("Yes", "No", "Maybe")
-} API_AVAILABLE(ios(10.0), macos(10.15));
+} API_AVAILABLE(ios(10.0), macos(10.15), tvos(18));

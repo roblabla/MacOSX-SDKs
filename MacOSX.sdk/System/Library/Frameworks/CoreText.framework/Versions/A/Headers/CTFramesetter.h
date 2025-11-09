@@ -36,6 +36,7 @@ typedef const struct CF_BRIDGED_TYPE(id) __CTFramesetter * CTFramesetterRef;
     @abstract   Returns the CFType of the framesetter object
 */
 
+CT_EXPORT
 CFTypeID CTFramesetterGetTypeID( void ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 
@@ -60,6 +61,7 @@ CFTypeID CTFramesetterGetTypeID( void ) CT_AVAILABLE(macos(10.5), ios(3.2), watc
     @seealso    CTTypesetterCreateWithAttributedStringAndOptions
 */
 
+CT_EXPORT
 CTFramesetterRef CTFramesetterCreateWithTypesetter(
     CTTypesetterRef typesetter ) CT_AVAILABLE(macos(10.14), ios(12.0), watchos(5.0), tvos(12.0));
 
@@ -78,6 +80,7 @@ CTFramesetterRef CTFramesetterCreateWithTypesetter(
     @result     This function will return a reference to a CTFramesetter object.
 */
 
+CT_EXPORT
 CTFramesetterRef CTFramesetterCreateWithAttributedString(
     CFAttributedStringRef attrString ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
@@ -117,6 +120,7 @@ CTFramesetterRef CTFramesetterCreateWithAttributedString(
     @result     This function will return a reference to a new CTFrame object.
 */
 
+CT_EXPORT
 CTFrameRef CTFramesetterCreateFrame(
     CTFramesetterRef framesetter,
     CFRange stringRange,
@@ -141,6 +145,7 @@ CTFrameRef CTFramesetterCreateFrame(
                 object, which should not be released by the caller.
 */
 
+CT_EXPORT
 CTTypesetterRef CTFramesetterGetTypesetter(
     CTFramesetterRef framesetter ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
@@ -182,6 +187,7 @@ CTTypesetterRef CTFramesetterGetTypesetter(
     @result     The actual dimensions for the given string range and constraints.
 */
 
+CT_EXPORT
 CGSize CTFramesetterSuggestFrameSizeWithConstraints(
     CTFramesetterRef framesetter,
     CFRange stringRange,

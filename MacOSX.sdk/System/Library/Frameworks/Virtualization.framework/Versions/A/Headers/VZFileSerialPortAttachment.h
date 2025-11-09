@@ -26,7 +26,7 @@ VZ_EXPORT API_AVAILABLE(macos(11.0))
  @abstract Initialize the VZFileSerialPortAttachment from a URL of a file.
  @param url The URL of the file for the attachment on the local file system.
  @param shouldAppend True if the file should be opened in append mode, false otherwise.
-        When a file is opened in append mode, writing to that file will append to the end of it.
+    When a file is opened in append mode, writing to that file will append to the end of it.
  @param error If not nil, used to report errors if initialization fails.
  @return A newly initialized VZFileSerialPortAttachment. If an error was encountered returns @c nil, and @c error contains the error.
 

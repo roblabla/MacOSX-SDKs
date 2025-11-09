@@ -10,7 +10,7 @@ NS_ASSUME_NONNULL_BEGIN
 @class SFVoiceAnalytics;
 
 // Substrings of a hypothesized transcription
-API_AVAILABLE(ios(10.0), macos(10.15))
+API_AVAILABLE(ios(10.0), macos(10.15), tvos(18))
 @interface SFTranscriptionSegment : NSObject <NSCopying, NSSecureCoding>
 
 @property (nonatomic, readonly, copy) NSString *substring;

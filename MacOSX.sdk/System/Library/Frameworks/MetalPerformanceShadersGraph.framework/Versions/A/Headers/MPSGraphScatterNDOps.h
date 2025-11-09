@@ -11,7 +11,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-/// Scatter mode
+/// The scatter mode.
 typedef NS_ENUM(NSInteger, MPSGraphScatterMode)
 {
     /// Add
@@ -35,7 +35,7 @@ typedef NS_ENUM(NSInteger, MPSGraphScatterMode)
 MPS_CLASS_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))
 @interface MPSGraph(ScatterNDOps)
 
-/// Create ScatterND op and return the result tensor
+/// Creates a ScatterND operation and returns the result tensor.
 ///
 /// Scatters the slices in updatesTensor to the result tensor along the indices in indicesTensor. 
 /// The scatter is defined as 
@@ -57,12 +57,12 @@ MPS_CLASS_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))
 /// ```
 ///
 /// - Parameters:
-///   - updatesTensor: Tensor containing slices to be inserted into the result tensor
+///   - updatesTensor: Tensor containing slices to be inserted into the result tensor.
 ///   - indicesTensor: Tensor containg the result indices to insert slices at
-///   - shape: The shape of the result tensor
+///   - shape: The shape of the result tensor.
 ///   - batchDimensions: The number of batch dimensions
 ///   - mode: The type of update to use on the destination
-///   - name: The name for the operation
+///   - name: The name for the operation.
 /// - Returns: A valid MPSGraphTensor object
 - (MPSGraphTensor *) scatterNDWithUpdatesTensor:(MPSGraphTensor *) updatesTensor
                                   indicesTensor:(MPSGraphTensor *) indicesTensor
@@ -71,7 +71,7 @@ MPS_CLASS_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))
                                            mode:(MPSGraphScatterMode) mode
                                            name:(NSString * _Nullable) name;
 
-/// Create ScatterND op and return the result tensor
+/// Creates a ScatterND operation and returns the result tensor.
 ///
 /// Scatters the slices in updatesTensor to the result tensor along the indices in indicesTensor. 
 /// The scatter is defined as 
@@ -93,11 +93,11 @@ MPS_CLASS_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))
 /// ```
 ///
 /// - Parameters:
-///   - updatesTensor: Tensor containing slices to be inserted into the result tensor
+///   - updatesTensor: Tensor containing slices to be inserted into the result tensor.
 ///   - indicesTensor: Tensor containg the result indices to insert slices at
-///   - shape: The shape of the result tensor
+///   - shape: The shape of the result tensor.
 ///   - batchDimensions: The number of batch dimensions
-///   - name: The name for the operation
+///   - name: The name for the operation.
 /// - Returns: A valid MPSGraphTensor object
 - (MPSGraphTensor *) scatterNDWithUpdatesTensor:(MPSGraphTensor *) updatesTensor
                                   indicesTensor:(MPSGraphTensor *) indicesTensor
@@ -105,7 +105,7 @@ MPS_CLASS_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))
                                 batchDimensions:(NSUInteger) batchDimensions
                                            name:(NSString * _Nullable) name;
 
-/// Create ScatterND op and return the result tensor
+/// Creates a ScatterND operation and returns the result tensor.
 ///
 /// Scatters the slices in updatesTensor to the result tensor along the indices in indicesTensor, on top of dataTensor. 
 /// The scatter is defined as 
@@ -130,11 +130,11 @@ MPS_CLASS_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))
 ///
 /// - Parameters:
 ///   - dataTensor: Tensor containing inital values of same shape as result tensor
-///   - updatesTensor: Tensor containing slices to be inserted into the result tensor
+///   - updatesTensor: Tensor containing slices to be inserted into the result tensor.
 ///   - indicesTensor: Tensor containg the result indices to insert slices at
 ///   - batchDimensions: The number of batch dimensions
 ///   - mode: The type of update to use on the destination
-///   - name: The name for the operation
+///   - name: The name for the operation.
 /// - Returns: A valid MPSGraphTensor object
 - (MPSGraphTensor *) scatterNDWithDataTensor:(MPSGraphTensor *) dataTensor
                                updatesTensor:(MPSGraphTensor *) updatesTensor
@@ -151,7 +151,7 @@ MPS_AVAILABLE_STARTING(macos(12.0), ios(15.0), tvos(15.0));
 
 @interface MPSGraph(MPSGraphScatterOps)
 
-/// Create Scatter op and return the result tensor
+/// Creates a Scatter operation and returns the result tensor.
 ///
 /// Scatters the slices in updatesTensor to the result tensor along the indices in indicesTensor. 
 /// The scatter is defined as 
@@ -170,13 +170,13 @@ MPS_AVAILABLE_STARTING(macos(12.0), ios(15.0), tvos(15.0));
 /// ```
 ///
 /// - Parameters:
-///   - updatesTensor: Tensor containing values to be inserted into the result tensor
-///   - indicesTensor: Tensor containg the result indices to insert values at
-///   - shape: The shape of the result tensor
-///   - axis: The axis of the result tensor to scatter values along
-///   - mode: The type of update to use on the destination
-///   - name: The name for the operation
-/// - Returns: A valid MPSGraphTensor object
+///   - updatesTensor: Tensor containing values to be inserted into the result tensor.
+///   - indicesTensor: Tensor containg the result indices to insert values at.
+///   - shape: The shape of the result tensor.
+///   - axis: The axis of the result tensor to scatter values along.
+///   - mode: The type of update to use on the destination.
+///   - name: The name for the operation.
+/// - Returns: A valid MPSGraphTensor object.
 - (MPSGraphTensor *) scatterWithUpdatesTensor:(MPSGraphTensor *) updatesTensor
                                 indicesTensor:(MPSGraphTensor *) indicesTensor
                                         shape:(MPSShape *) shape
@@ -186,7 +186,7 @@ MPS_AVAILABLE_STARTING(macos(12.0), ios(15.0), tvos(15.0));
 MPS_SWIFT_NAME( scatter(_:indices:shape:axis:mode:name:) )
 MPS_AVAILABLE_STARTING(macos(12.0), ios(15.0), tvos(15.0));
 
-/// Create Scatter op and return the result tensor
+/// Creates a Scatter operation and returns the result tensor.
 ///
 /// Scatters the slices in updatesTensor to the result tensor along the indices in indicesTensor, on top of dataTensor. 
 /// The scatter is defined as 
@@ -208,11 +208,11 @@ MPS_AVAILABLE_STARTING(macos(12.0), ios(15.0), tvos(15.0));
 ///
 /// - Parameters:
 ///   - dataTensor: Tensor containing inital values of same shape as result tensor
-///   - updatesTensor: Tensor containing values to be inserted into the result tensor
+///   - updatesTensor: Tensor containing values to be inserted into the result tensor.
 ///   - indicesTensor: Tensor containg the result indices to insert values at
 ///   - axis: The axis of the result tensor to scatter values along
 ///   - mode: The type of update to use on the destination
-///   - name: The name for the operation
+///   - name: The name for the operation.
 /// - Returns: A valid MPSGraphTensor object
 - (MPSGraphTensor *) scatterWithDataTensor:(MPSGraphTensor *) dataTensor
                              updatesTensor:(MPSGraphTensor *) updatesTensor
@@ -226,7 +226,7 @@ MPS_AVAILABLE_STARTING(macos(12.0), ios(15.0), tvos(15.0));
 
 @interface MPSGraph(MPSGraphScatterAlongAxisOps)
 
-/// Create ScatterAlongAxis op and return the result tensor
+/// Creates a ScatterAlongAxis operation and returns the result tensor.
 ///
 /// Scatter values from `updatesTensor` along the specified `axis` at indices in `indicesTensor` into a result tensor. 
 /// Values are updated following `mode`. See MPSGraphScatterMode. 
@@ -237,9 +237,9 @@ MPS_AVAILABLE_STARTING(macos(12.0), ios(15.0), tvos(15.0));
 /// - Parameters:
 ///   - axis: The axis to scatter to. Negative values wrap around
 ///   - updatesTensor: The input tensor to scatter values from
-///   - indicesTensor: Int32 or Int64 tensor used to index the result tensor
+///   - indicesTensor: Int32 or Int64 tensor used to index the result tensor.
 ///   - mode: The type of update to use
-///   - name: The name for the operation
+///   - name: The name for the operation.
 /// - Returns: A valid MPSGraphTensor object
 - (MPSGraphTensor *) scatterAlongAxis:(NSInteger) axis
                     withUpdatesTensor:(MPSGraphTensor *) updatesTensor
@@ -250,7 +250,7 @@ MPS_AVAILABLE_STARTING(macos(12.0), ios(15.0), tvos(15.0));
 MPS_SWIFT_NAME( scatterAlongAxis(_:updates:indices:shape:mode:name:) )
 MPS_AVAILABLE_STARTING(macos(12.3), ios(15.4), tvos(15.4));
 
-/// Create ScatterAlongAxis op and return the result tensor
+/// Creates a ScatterAlongAxis operation and returns the result tensor.
 ///
 /// Scatter values from `updatesTensor` along the specified `axis` at indices in `indicesTensor` into a result tensor.
 /// Values are updated following `mode`. See MPSGraphScatterMode.
@@ -261,9 +261,9 @@ MPS_AVAILABLE_STARTING(macos(12.3), ios(15.4), tvos(15.4));
 /// - Parameters:
 ///   - axisTensor: Scalar Int32 tensor. The axis to scatter to. Negative values wrap around
 ///   - updatesTensor: The input tensor to scatter values from
-///   - indicesTensor: Int32 or Int64 tensor used to index the result tensor
+///   - indicesTensor: Int32 or Int64 tensor used to index the result tensor.
 ///   - mode: The type of update to use
-///   - name: The name for the operation
+///   - name: The name for the operation.
 /// - Returns: A valid MPSGraphTensor object
 - (MPSGraphTensor *) scatterAlongAxisTensor:(MPSGraphTensor *) axisTensor
                           withUpdatesTensor:(MPSGraphTensor *) updatesTensor
@@ -274,7 +274,7 @@ MPS_AVAILABLE_STARTING(macos(12.3), ios(15.4), tvos(15.4));
 MPS_SWIFT_NAME( scatterAlongAxisTensor(_:updates:indices:shape:mode:name:) )
 MPS_AVAILABLE_STARTING(macos(12.3), ios(15.4), tvos(15.4));
 
-/// Create ScatterAlongAxis op and return the result tensor
+/// Creates a ScatterAlongAxis operation and returns the result tensor.
 ///
 /// Scatter values from `updatesTensor` along the specified `axis` at indices in `indicesTensor` onto `dataTensor`. 
 /// Values in `dataTensor` are updated following `mode`. See MPSGraphScatterMode. 
@@ -302,9 +302,9 @@ MPS_AVAILABLE_STARTING(macos(12.3), ios(15.4), tvos(15.4));
 ///   - axis: The axis to scatter to. Negative values wrap around
 ///   - dataTensor: The input tensor to scatter values onto
 ///   - updatesTensor: The input tensor to scatter values from
-///   - indicesTensor: Int32 or Int64 tensor used to index the result tensor
+///   - indicesTensor: Int32 or Int64 tensor used to index the result tensor.
 ///   - mode: The type of update to use
-///   - name: The name for the operation
+///   - name: The name for the operation.
 /// - Returns: A valid MPSGraphTensor object
 - (MPSGraphTensor *) scatterAlongAxis:(NSInteger) axis
                        withDataTensor:(MPSGraphTensor *) dataTensor
@@ -315,7 +315,7 @@ MPS_AVAILABLE_STARTING(macos(12.3), ios(15.4), tvos(15.4));
 MPS_SWIFT_NAME( scatterAlongAxis(_:data:updates:indices:mode:name:) )
 MPS_AVAILABLE_STARTING(macos(12.3), ios(15.4), tvos(15.4));
 
-/// Create ScatterAlongAxis op and return the result tensor
+/// Creates a ScatterAlongAxis operation and returns the result tensor.
 ///
 /// Scatter values from `updatesTensor` along the specified `axis` at indices in `indicesTensor` onto `dataTensor`.
 /// Values in `dataTensor` are updated following `mode`. See MPSGraphScatterMode.
@@ -343,9 +343,9 @@ MPS_AVAILABLE_STARTING(macos(12.3), ios(15.4), tvos(15.4));
 ///   - axisTensor: Scalar Int32 tensor. The axis to scatter to. Negative values wrap around
 ///   - dataTensor: The input tensor to scatter values onto
 ///   - updatesTensor: The input tensor to scatter values from
-///   - indicesTensor: Int32 or Int64 tensor used to index the result tensor
+///   - indicesTensor: Int32 or Int64 tensor used to index the result tensor.
 ///   - mode: The type of update to use
-///   - name: The name for the operation
+///   - name: The name for the operation.
 /// - Returns: A valid MPSGraphTensor object
 - (MPSGraphTensor *) scatterAlongAxisTensor:(MPSGraphTensor *) axisTensor
                              withDataTensor:(MPSGraphTensor *) dataTensor

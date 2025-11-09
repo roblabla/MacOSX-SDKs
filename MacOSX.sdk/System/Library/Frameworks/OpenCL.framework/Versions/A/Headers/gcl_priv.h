@@ -5,11 +5,11 @@
 #ifndef __GRANDCL_PRIV_H
 #define __GRANDCL_PRIV_H
 
+#include <OpenCL/opencl.h>
+
 #ifdef __cplusplus
 extern "C" {
 #endif
-
-#include <OpenCL/opencl.h>
 
 // Internal type used to map blocks to kernels
 typedef struct {

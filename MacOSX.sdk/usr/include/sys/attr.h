@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2018 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 2000-2018, 2023 Apple Computer, Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  *
@@ -360,6 +360,9 @@ typedef struct vol_capabilities_attr {
  * VOL_CAP_INT_ATTRIBUTION_TAG: When set, the volume supports establishing
  * an owner relationship between a file (excluding small files) and a process
  * on the first read/write/truncate/clone operation.
+ *
+ * VOL_CAP_INT_PUNCHHOLE: When set, the volume supports the F_PUNCHHOLE
+ * fcntl.
  */
 #define VOL_CAP_INT_SEARCHFS                    0x00000001
 #define VOL_CAP_INT_ATTRLIST                    0x00000002
@@ -383,6 +386,7 @@ typedef struct vol_capabilities_attr {
 #define VOL_CAP_INT_RENAME_OPENFAIL             0x00100000
 #define VOL_CAP_INT_RENAME_SECLUDE              0x00200000
 #define VOL_CAP_INT_ATTRIBUTION_TAG             0x00400000
+#define VOL_CAP_INT_PUNCHHOLE                   0x00800000
 
 typedef struct vol_attributes_attr {
 	attribute_set_t validattr;
@@ -609,4 +613,6 @@ struct searchstate {
 #define FST_EOF (-1)                            /* end-of-file offset */
 
 #endif /* __APPLE_API_UNSTABLE */
+
+
 #endif /* !_SYS_ATTR_H_ */

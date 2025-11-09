@@ -19,7 +19,7 @@ API_UNAVAILABLE(visionos)
 
 - (instancetype)initWithBundleIdentifier:(NSString *)bundleIdentifier API_AVAILABLE(ios(17.5), macCatalyst(15.0), macos(12.0));
 - (instancetype)initWithBundleIdentifier:(NSString *)bundleIdentifier
-                          teamIdentifier:(nullable NSString *)API_AVAILABLE(macCatalyst(15.0), macos(12.0)) teamIdentifier API_UNAVAILABLE(ios);
+                          teamIdentifier:(nullable NSString *)teamIdentifier API_AVAILABLE(macCatalyst(15.0), macos(12.0)) API_UNAVAILABLE(ios);
 
 - (instancetype)init NS_UNAVAILABLE;
 + (instancetype)new NS_UNAVAILABLE;

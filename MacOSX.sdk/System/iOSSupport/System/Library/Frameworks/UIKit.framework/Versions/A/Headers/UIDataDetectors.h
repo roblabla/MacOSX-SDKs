@@ -13,15 +13,15 @@ typedef NS_OPTIONS(NSUInteger, UIDataDetectorTypes) {
     UIDataDetectorTypeLink                                            = 1 << 1, // URL detection
     UIDataDetectorTypeAddress API_AVAILABLE(ios(4.0))                 = 1 << 2, // Street address detection
     UIDataDetectorTypeCalendarEvent API_AVAILABLE(ios(4.0))           = 1 << 3, // Event detection
-    UIDataDetectorTypeShipmentTrackingNumber API_AVAILABLE(ios(10.0)) = 1 << 4, // Shipment tracking number detection
-    UIDataDetectorTypeFlightNumber API_AVAILABLE(ios(10.0))           = 1 << 5, // Flight number detection
-    UIDataDetectorTypeLookupSuggestion API_AVAILABLE(ios(10.0))       = 1 << 6, // Information users may want to look up
-    UIDataDetectorTypeMoney API_AVAILABLE(ios(16.0))                  = 1 << 7, // Money amounts
-    UIDataDetectorTypePhysicalValue API_AVAILABLE(ios(16.0))          = 1 << 8, // Physical values (length, temperatures, etc...)
+    UIDataDetectorTypeShipmentTrackingNumber API_AVAILABLE(ios(10.0)) API_UNAVAILABLE(watchos) = 1 << 4, // Shipment tracking number detection
+    UIDataDetectorTypeFlightNumber API_AVAILABLE(ios(10.0)) API_UNAVAILABLE(watchos)           = 1 << 5, // Flight number detection
+    UIDataDetectorTypeLookupSuggestion API_AVAILABLE(ios(10.0)) API_UNAVAILABLE(watchos)       = 1 << 6, // Information users may want to look up
+    UIDataDetectorTypeMoney API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(watchos)                  = 1 << 7, // Money amounts
+    UIDataDetectorTypePhysicalValue API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(watchos)          = 1 << 8, // Physical values (length, temperatures, etc...)
 
     UIDataDetectorTypeNone          = 0,               // Disable detection
     UIDataDetectorTypeAll           = NSUIntegerMax    // Enable all types, including types that may be added later
-} API_UNAVAILABLE(tvos);
+} API_UNAVAILABLE(tvos, watchos);
 
 #else
 #import <UIKitCore/UIDataDetectors.h>

@@ -38,7 +38,7 @@ typedef NS_OPTIONS(NSUInteger, NSStreamEvent) {
 - (void)open;
 - (void)close;
 
-@property (nullable, assign) id <NSStreamDelegate> delegate;
+@property (nullable, assign /* actually weak */) id <NSStreamDelegate> delegate;
     // By default, a stream is its own delegate, and subclassers of NSInputStream and NSOutputStream must maintain this contract. [someStream setDelegate:nil] must restore this behavior. As usual, delegates are not retained.
 
 - (nullable id)propertyForKey:(NSStreamPropertyKey)key;

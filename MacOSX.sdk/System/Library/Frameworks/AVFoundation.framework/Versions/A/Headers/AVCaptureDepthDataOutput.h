@@ -54,7 +54,7 @@ API_AVAILABLE(ios(11.0), macCatalyst(14.0), tvos(17.0)) API_UNAVAILABLE(macos, v
  
     Clients who need to minimize the chances of depth data being dropped should provide a dedicated queue and not share it with other data outputs. Processing of depth data may be deferred to another queue, but beware that the depth data pixel buffer maps may come from a finite buffer pool, which may be starved if your deferred processing fails to keep up.
  
-    A serial dispatch queue must be used to guarantee that depth data will be delivered in order. The callbackQueue parameter may not be NULL, except when setting the delegate to nil.
+    A serial dispatch queue must be used to guarantee that depth data will be delivered in order. The callbackQueue parameter may not be NULL, except when setting the delegate to nil otherwise -setDelegate:callbackQueue: throws an NSInvalidArgumentException.
  */
 - (void)setDelegate:(nullable id<AVCaptureDepthDataOutputDelegate>)delegate callbackQueue:(nullable dispatch_queue_t)callbackQueue;
 

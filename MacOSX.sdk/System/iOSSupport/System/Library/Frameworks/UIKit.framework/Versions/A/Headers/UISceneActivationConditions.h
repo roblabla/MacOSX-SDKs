@@ -11,7 +11,7 @@
 
 NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
-UIKIT_EXTERN API_AVAILABLE(ios(13.0)) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @interface UISceneActivationConditions : NSObject <NSSecureCoding>
 
 - (instancetype)init NS_DESIGNATED_INITIALIZER;
@@ -31,7 +31,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(13.0)) NS_SWIFT_UI_ACTOR
 
 UIKIT_EXTERN @interface NSUserActivity (UISceneActivationConditions)
 // used with UISceneActivationConditions to customize what scene should be activated for a user activity
-@property (nullable, nonatomic, copy) NSString *targetContentIdentifier API_AVAILABLE(ios(13.0)); //  default nil
+@property (nullable, nonatomic, copy) NSString *targetContentIdentifier API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos); //  default nil
 @end
 
 NS_HEADER_AUDIT_END(nullability, sendability)

@@ -2,7 +2,7 @@
 //  VZVirtualMachine.h
 //  Virtualization
 //
-//  Copyright © 2019-2023 Apple Inc. All rights reserved.
+//  Copyright © 2019-2024 Apple Inc. All rights reserved.
 //
 
 #import <Virtualization/VZDefines.h>
@@ -15,6 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 @class VZMemoryBalloonDevice;
 @class VZNetworkDevice;
 @class VZSocketDevice;
+@class VZUSBController;
 @class VZVirtualMachineConfiguration;
 @class VZVirtualMachineStartOptions;
 @protocol VZVirtualMachineDelegate;
@@ -189,6 +190,13 @@ VZ_EXPORT API_AVAILABLE(macos(11.0))
  @see VZVirtualMachineConfiguration
  */
 @property (readonly, copy) NSArray<VZSocketDevice *> *socketDevices;
+
+/*!
+ @abstract Return the list of USB controllers configured on this virtual machine. Return an empty array if no USB controller is configured.
+ @see VZUSBControllerConfiguration
+ @see VZVirtualMachineConfiguration
+ */
+@property (readonly, copy) NSArray<VZUSBController *> *usbControllers API_AVAILABLE(macos(15.0));
 
 /*!
  @abstract Start a virtual machine.

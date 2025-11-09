@@ -19,13 +19,14 @@ NS_ASSUME_NONNULL_BEGIN
  *
  * @discussion  Core NFC category for NSUserActivity.
  */
+API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos);
 @interface NSUserActivity (CoreNFC)
 /*!
  *  @property ndefMessagePayload
  *
- *  @discussion The NFC NDEF message with an Universial Link object that triggers the application launch.
+ *  @discussion The NFC NDEF message with an Universal Link object that triggers the application launch.
  */
-@property (readonly, nonnull, nonatomic) NFCNDEFMessage *ndefMessagePayload API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(watchos, macos, tvos);
+@property (readonly, nonnull, nonatomic) NFCNDEFMessage *ndefMessagePayload API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos);
 
 @end
 

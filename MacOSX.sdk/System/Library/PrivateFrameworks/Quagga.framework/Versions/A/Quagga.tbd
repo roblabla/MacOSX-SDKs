@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/Quagga.framework/Versions/A/Quagga'
-current-version: 149.1
+current-version: 150.11
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -19,6 +19,7 @@ exports:
                        _MRCContextCopySupportedComputeDevicesForDecoderUsingOptions, 
                        _MRCContextCreate, _MRCContextCreateWithOptions, _MRCContextGetTypeID, 
                        _MRCContextOptionComputeDevice, _MRCContextOptionInferenceFlags, 
+                       _MRCContextOptionIsStreaming, _MRCContextOptionMaximumBufferAge, 
                        _MRCContextOptionPreferredMetalDevice, _MRCContextOptionQoSClass, 
                        _MRCContextOptionRelativePriority, _MRCContextPerform, _MRCContextPerformAsync, 
                        _MRCContextPreflightForDecoderUsingOptions, _MRCContextPurge, 
@@ -59,13 +60,14 @@ exports:
                        _MRCDescriptorDecodePayloadWithOptions, _MRCDescriptorGetTypeID, 
                        _MRCDescriptorPayloadDecodingOptionDefaultEncoding, _MRCDescriptorPayloadDecodingOptionShouldForceInProcessDecoding, 
                        _MRCErrorACBSReturnCodeKey, _MRCErrorACBSReturnKey, _MRCErrorCVReturnKey, 
-                       _MRCErrorDomain, _MRCErrorEspressoReturnStatusKey, _MRCErrorEspressoReturnStatusStringKey, 
-                       _MRCErrorvImaggeErrorKey, _MRCRegionCreate, _MRCRegionGetConfidence, 
-                       _MRCRegionGetCornerPoints, _MRCRegionGetOrientation, _MRCRegionGetSymbology, 
-                       _MRCRegionGetTransform, _MRCRegionGetTypeID, _MRCSampleAttributeCameraIntrinsicMatrix, 
-                       _MRCSampleAttributePresentationTimeStamp, _MRCSampleAttributePyramid, 
-                       _MRCSampleAttributeRegionOfInterest, _MRCSampleCopyAttribute, 
-                       _MRCSampleCopyAttributes, _MRCSampleCreateByGeneratingPyramid, 
+                       _MRCErrorDomain, _MRCErrorE5RTErrorCodeKey, _MRCErrorE5RTErrorCodeStringKey, 
+                       _MRCErrorEspressoReturnStatusKey, _MRCErrorEspressoReturnStatusStringKey, 
+                       _MRCErrorKernReturnKey, _MRCErrorvImaggeErrorKey, _MRCRegionCreate, 
+                       _MRCRegionGetConfidence, _MRCRegionGetCornerPoints, _MRCRegionGetOrientation, 
+                       _MRCRegionGetSymbology, _MRCRegionGetTransform, _MRCRegionGetTypeID, 
+                       _MRCSampleAttributeCameraIntrinsicMatrix, _MRCSampleAttributePresentationTimeStamp, 
+                       _MRCSampleAttributePyramid, _MRCSampleAttributeRegionOfInterest, 
+                       _MRCSampleCopyAttribute, _MRCSampleCopyAttributes, _MRCSampleCreateByGeneratingPyramid, 
                        _MRCSampleCreateByReadingOpaqueRepresentationFromFile, _MRCSampleCreateWithCVPixelBuffer, 
                        _MRCSampleCreateWithCVPixelBufferAndAttributes, _MRCSampleCreateWithCVPixelBufferAndPyramid, 
                        _MRCSampleGeneratePyramidIfNotPresent, _MRCSampleGetCVPixelBuffer, 

@@ -163,6 +163,19 @@ MPS_CLASS_AVAILABLE_STARTING( macos(10.15), ios(13.0), macCatalyst(13.0), tvos(1
                   resultState: (MPSState * __nullable) outGradientState
              destinationArray: (MPSNDArray * __nonnull) destination;
 
+/*! @abstract   Encode a simple inference NDArray kernel and return a NDArray to hold the result
+ *  @param      encoder                       The MTLComputeCommandEncoder that the kernel will be encoded on
+ *  @param      commandBuffer          The command buffer into which to encode the kernel
+ *  @param      sourceArrays             The list of sources for the filter in a NSArray.
+ *                                Ordering to be defined by subclass
+ *  @param      destination               A destination array to contain the result of the calculation
+ *              when the command buffer completes successfully. */
+-(void) encodeToCommandEncoder: (id <MTLComputeCommandEncoder> _Nullable)encoder
+                 commandBuffer: (nonnull id <MTLCommandBuffer>) commandBuffer
+                  sourceArrays: (nonnull NSArray <MPSNDArray *> *) sourceArrays
+              destinationArray: (nonnull MPSNDArray *) destination
+MPS_AVAILABLE_STARTING(macos(15.0), ios(18.0), macCatalyst(18.0), tvos(18.0), xros(2.0));
+
 @end
 
 

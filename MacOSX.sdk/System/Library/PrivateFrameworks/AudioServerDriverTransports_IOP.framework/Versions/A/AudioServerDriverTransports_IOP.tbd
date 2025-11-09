@@ -40,8 +40,10 @@ exports:
                        __ZNK4ASDT8IOPAudio12VoiceTrigger10UserClient13CopyEventInfoEv, 
                        __ZNK4ASDT8IOPAudio12VoiceTrigger10UserClient14CopyIdentifierEv, 
                        __ZNK4ASDT8IOPAudio12VoiceTrigger10UserClient15GetControlValueEN8IOPAudio18VoiceTriggerDevice12ControlValueERj, 
+                       __ZNK4ASDT8IOPAudio12VoiceTrigger10UserClient15GetDebugEnabledERj, 
                        __ZNK4ASDT8IOPAudio12VoiceTrigger10UserClient15GetIsConfiguredEv, 
                        __ZNK4ASDT8IOPAudio12VoiceTrigger10UserClient15SetControlValueEN8IOPAudio18VoiceTriggerDevice12ControlValueEj, 
+                       __ZNK4ASDT8IOPAudio12VoiceTrigger10UserClient15SetDebugEnabledEj, 
                        __ZNK4ASDT8IOPAudio12VoiceTrigger10UserClient20GetActiveChannelMaskERj, 
                        __ZNK4ASDT8IOPAudio12VoiceTrigger10UserClient21CopyConfigurationInfoEv, 
                        __ZNK4ASDT8IOPAudio12VoiceTrigger10UserClient22GetVoiceTriggerEnabledERj, 
@@ -66,8 +68,8 @@ exports:
                        ASDTIOPAudioLPMicDeviceFactory, ASDTIOPAudioLPMicServiceManager, 
                        ASDTIOPAudioLPMicStream, ASDTIOPAudioLPMicUInt32Property, 
                        ASDTIOPAudioVTActiveChannelMaskProperty, ASDTIOPAudioVTAvailableProperty, 
-                       ASDTIOPAudioVTConfigurationProperty, ASDTIOPAudioVTDevice, 
-                       ASDTIOPAudioVTEnableProperty, ASDTIOPAudioVTModelCRCProperty, 
+                       ASDTIOPAudioVTConfigurationProperty, ASDTIOPAudioVTDebugProperty, 
+                       ASDTIOPAudioVTDevice, ASDTIOPAudioVTEnableProperty, ASDTIOPAudioVTModelCRCProperty, 
                        ASDTIOPAudioVTOccurredProperty, ASDTIOPAudioVTProperty, ASDTIOPAudioVTServiceManager, 
                        ASDTIOPAudioVTUInt32Property ]
 ...

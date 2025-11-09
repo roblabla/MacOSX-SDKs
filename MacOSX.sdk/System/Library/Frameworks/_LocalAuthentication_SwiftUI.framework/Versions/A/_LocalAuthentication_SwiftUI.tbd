@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/_LocalAuthentication_SwiftUI.framework/Versions/A/_LocalAuthentication_SwiftUI'
-current-version: 1394.120.27
+current-version: 1656.0.99
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -18,6 +18,5 @@ exports:
                        '_$s28_LocalAuthentication_SwiftUI0aB4ViewV_6reason7context6resultACy0cD04TextVGqd___AISo9LAContextCSgys6ResultOyyts5Error_pGctcAIRszSyRd__lufC', 
                        '_$s28_LocalAuthentication_SwiftUI0aB4ViewV_7contextACy0cD04TextVGAE18LocalizedStringKeyV_So9LAContextCtcAGRszrlufC', 
                        '_$s28_LocalAuthentication_SwiftUI0aB4ViewV_7contextACy0cD04TextVGqd___So9LAContextCtcAGRszSyRd__lufC', 
-                       '_$s28_LocalAuthentication_SwiftUI0aB4ViewVyxG0cD00E0AAMc', 
-                       '_$sSo9LAContextC7Combine16ObservableObject28_LocalAuthentication_SwiftUIMc' ]
+                       '_$s28_LocalAuthentication_SwiftUI0aB4ViewVyxG0cD00E0AAMc' ]
 ...

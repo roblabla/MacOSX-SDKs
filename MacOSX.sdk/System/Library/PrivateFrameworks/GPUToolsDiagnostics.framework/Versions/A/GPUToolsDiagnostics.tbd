@@ -7,6 +7,7 @@ compatibility-version: 0
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _GTCoreAlloc, _GTCoreAllocatorInit, _GTCoreAllocatorIsHiddingMemory, 
-                       _GTCoreFree, _GTCoreLogInit, _GTCoreLogTagEnabled, _g_signpostLog, 
-                       _gt_default_log, _gt_tagged_log ]
+                       _GTCoreFree, _GTCoreLogInit, _GTCoreLogTagEnabled, _GTCoreLogUseOsLog, 
+                       _GTCoreLogUseStandardOutputStreams, _g_signpostLog, _gt_default_log, 
+                       _gt_tagged_log ]
 ...

@@ -31,6 +31,7 @@ typedef NS_ENUM(NSInteger, ARCollaborationDataPriority) {
  */
 API_AVAILABLE(ios(13.0))
 NS_SWIFT_NAME(ARSession.CollaborationData)
+NS_SWIFT_SENDABLE
 @interface ARCollaborationData : NSObject <NSSecureCoding>
 
 /**

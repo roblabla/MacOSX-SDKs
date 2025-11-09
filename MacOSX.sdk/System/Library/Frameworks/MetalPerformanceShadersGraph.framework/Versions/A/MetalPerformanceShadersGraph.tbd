@@ -22,5 +22,8 @@ exports:
                        MPSGraphRandomOpDescriptor, MPSGraphShapedType, MPSGraphSingleGateRNNDescriptor, 
                        MPSGraphStencilOpDescriptor, MPSGraphStochasticGradientDescentOptimizer, 
                        MPSGraphTensor, MPSGraphTensorData, MPSGraphType, MPSGraphVariableInitializer, 
-                       MPSGraphVariableOp ]
+                       MPSGraphVariableOp, MPSGraphViewerNodePortSPI, MPSGraphViewerNodePropertyDataSPI, 
+                       MPSGraphViewerNodePropertyEnumCaseSPI, MPSGraphViewerNodePropertyEnumSPI, 
+                       MPSGraphViewerNodePropertyStringSPI, MPSGraphViewerNodeRegionSPI, 
+                       MPSGraphViewerNodeSPI, MPSGraphViewerSPI ]
 ...

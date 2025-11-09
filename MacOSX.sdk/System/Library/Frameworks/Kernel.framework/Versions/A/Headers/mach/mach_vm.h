@@ -419,7 +419,7 @@ extern
 kern_return_t mach_vm_deferred_reclamation_buffer_init
 (
 	task_t target_task,
-	mach_vm_offset_t address,
+	mach_vm_address_t *address,
 	mach_vm_size_t size
 );
 
@@ -826,7 +826,7 @@ __END_DECLS
 	typedef struct {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
-		mach_vm_offset_t address;
+		mach_vm_address_t address;
 		mach_vm_size_t size;
 	} __Request__mach_vm_deferred_reclamation_buffer_init_t __attribute__((unused));
 #ifdef  __MigPackStructs
@@ -1218,6 +1218,7 @@ union __RequestUnion__mach_vm_subsystem {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		kern_return_t RetCode;
+		mach_vm_address_t address;
 	} __Reply__mach_vm_deferred_reclamation_buffer_init_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack(pop)

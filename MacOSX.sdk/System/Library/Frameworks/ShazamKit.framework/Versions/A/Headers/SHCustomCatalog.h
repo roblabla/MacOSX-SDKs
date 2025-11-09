@@ -20,6 +20,9 @@ NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 SH_EXPORT API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0))
 @interface SHCustomCatalog : SHCatalog
 
+/// The data representation of this file, it can be written to disk
+@property (NS_NONATOMIC_IOSONLY, strong, readonly) NSData *dataRepresentation API_AVAILABLE(macos(15.0), ios(18.0), tvos(18.0), watchos(11.0), visionos(2.0));
+ 
 /// Add a reference @c SHSignature and its associated @c SHMediaItem for matching
 /// @param signature The reference to match against
 /// @param mediaItems The metadata associated with the @c SHSignature
@@ -39,10 +42,15 @@ SH_EXPORT API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0))
 /// @param destinationURL The location to write to
 /// @param error populated on error, otherwise nil
 /// @return YES on success, NO on failure with a populated error parameter
-- (BOOL)writeToURL:(NSURL *)destinationURL error:(NSError **)error;
+- (BOOL)writeToURL:(NSURL *)destinationURL error:(NSError **)error API_DEPRECATED("Use dataRepresentation", macos(12.0, 15.0), ios(15.0, 18.0), tvos(15.0, 18.0), watchos(8.0, 11.0));
 
 + (instancetype)new API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0)) NS_SWIFT_UNAVAILABLE("Use init in Swift");
 - (instancetype)init API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0));
+
+/// Load a @c SHCustomCatalog from data
+/// @param dataRepresentation The data representation of the @c SHCustomCatalog
+/// @param error Error populated if not a valid data representation
+- (nullable instancetype)initWithDataRepresentation:(NSData *)dataRepresentation error:(NSError **)error API_AVAILABLE(macos(15.0), ios(18.0), tvos(18.0), watchos(11.0), visionos(2.0));
 
 @end
 

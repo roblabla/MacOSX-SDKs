@@ -2,7 +2,7 @@
 //  VZError.h
 //  Virtualization
 //
-//  Copyright © 2019-2023 Apple Inc. All rights reserved.
+//  Copyright © 2019-2024 Apple Inc. All rights reserved.
 //
 
 #import <Virtualization/VZDefines.h>
@@ -58,7 +58,15 @@ VZ_EXPORT NSErrorDomain const VZErrorDomain API_AVAILABLE(macos(11.0));
  @constant VZErrorNetworkBlockDeviceNegotiationFailed
     The connection or the negotiation with the NBD server failed.
  @constant VZErrorNetworkBlockDeviceDisconnected
-     The NBD client is disconnected from the server.
+    The NBD client is disconnected from the server.
+ @constant VZErrorUSBControllerNotFound
+    Controller not found.
+ @constant VZErrorDeviceAlreadyAttached
+    Device is already attached.
+ @constant VZErrorDeviceInitializationFailure
+    Device initialization failure.
+ @constant VZErrorDeviceNotFound
+    Device not found.
  */
 typedef NS_ERROR_ENUM(VZErrorDomain, VZErrorCode) {
     VZErrorInternal NS_SWIFT_NAME(internalError) = 1,
@@ -86,4 +94,10 @@ typedef NS_ERROR_ENUM(VZErrorDomain, VZErrorCode) {
     /* Network Block Device errors. */
     VZErrorNetworkBlockDeviceNegotiationFailed API_AVAILABLE(macos(14.0)) = 20001,
     VZErrorNetworkBlockDeviceDisconnected API_AVAILABLE(macos(14.0)) = 20002,
+
+    /* USB device hot-plug errors. */
+    VZErrorUSBControllerNotFound API_AVAILABLE(macos(15.0)) = 30001,
+    VZErrorDeviceAlreadyAttached API_AVAILABLE(macos(15.0)) = 30002,
+    VZErrorDeviceInitializationFailure API_AVAILABLE(macos(15.0)) = 30003,
+    VZErrorDeviceNotFound API_AVAILABLE(macos(15.0)) = 30004,
 } API_AVAILABLE(macos(11.0));

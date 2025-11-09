@@ -7,6 +7,7 @@
 #error "Please import the NetworkExtension module instead of this file directly."
 #endif
 
+#import <Network/Network.h>
 #import <NetworkExtension/NENetworkRule.h>
 
 NS_ASSUME_NONNULL_BEGIN
@@ -120,11 +121,18 @@ API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, watchos, tvos)
 API_AVAILABLE(macos(10.15), ios(9.0)) API_UNAVAILABLE(watchos, tvos)
 @interface NEFilterSocketFlow : NEFilterFlow <NSSecureCoding,NSCopying>
 /*!
+ * @property remoteFlowEndpoint
+ * @discussion The flow's remote endpoint. This endpoint object may be nil when [NEFilterDataProvider handleNewFlow:] is invoked and if so will be populated upon receiving network data.
+		In such a case, filtering on the flow may still be performed based on its socket type, socket family or socket protocol.
+ */
+@property (readonly, nullable) nw_endpoint_t remoteFlowEndpoint API_AVAILABLE(macos(15.0), ios(18.0), visionos(2.0)) API_UNAVAILABLE(watchos, tvos);
+
+/*!
  * @property remoteEndpoint
  * @discussion The flow's remote endpoint. This endpoint object may be nil when [NEFilterDataProvider handleNewFlow:] is invoked and if so will be populated upon receiving network data.
 		In such a case, filtering on the flow may still be performed based on its socket type, socket family or socket protocol.
  */
-@property (readonly, nullable) NWEndpoint *remoteEndpoint API_AVAILABLE(macos(10.15), ios(9.0)) API_UNAVAILABLE(watchos, tvos);
+@property (readonly, nullable) NWEndpoint *remoteEndpoint API_DEPRECATED_WITH_REPLACEMENT("remoteFlowEndpoint", macos(10.15, 15.0), ios(9.0, 18.0), visionos(1.0, 2.0)) API_UNAVAILABLE(watchos, tvos);
 
 /*!
  * @property remoteHostname
@@ -133,11 +141,18 @@ API_AVAILABLE(macos(10.15), ios(9.0)) API_UNAVAILABLE(watchos, tvos)
 @property (readonly, nullable) NSString *remoteHostname API_AVAILABLE(macos(11.0), ios(14.0)) API_UNAVAILABLE(watchos, tvos);
 
 /*!
+ * @property localFlowEndpoint
+ * @discussion The flow's local endpoint. This endpoint object may be nil when [NEFilterDataProvider handleNewFlow:] is invoked and if so will be populated upon receiving network data.
+		In such a case, filtering on the flow may still be performed based on its socket type, socket family or socket protocol.
+ */
+@property (readonly, nullable) nw_endpoint_t localFlowEndpoint API_AVAILABLE(macos(15.0), ios(18.0), visionos(2.0)) API_UNAVAILABLE(watchos, tvos);
+
+/*!
  * @property localEndpoint
  * @discussion The flow's local endpoint. This endpoint object may be nil when [NEFilterDataProvider handleNewFlow:] is invoked and if so will be populated upon receiving network data.
 		In such a case, filtering on the flow may still be performed based on its socket type, socket family or socket protocol.
  */
-@property (readonly, nullable) NWEndpoint *localEndpoint API_AVAILABLE(macos(10.15), ios(9.0)) API_UNAVAILABLE(watchos, tvos);
+@property (readonly, nullable) NWEndpoint *localEndpoint API_DEPRECATED_WITH_REPLACEMENT("localFlowEndpoint", macos(10.15, 15.0), ios(9.0, 18.0), visionos(1.0, 2.0)) API_UNAVAILABLE(watchos, tvos);
 
 /*!
  *	@property socketFamily

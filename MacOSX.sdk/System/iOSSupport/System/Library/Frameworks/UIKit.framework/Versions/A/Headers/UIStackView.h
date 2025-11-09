@@ -50,7 +50,7 @@ typedef NS_ENUM(NSInteger, UIStackViewDistribution) {
      (edge-to-edge) spacing as a minimum.
      */
     UIStackViewDistributionEqualCentering,
-} API_AVAILABLE(ios(9.0));
+} API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(watchos);
 
 /* Alignment—the layout transverse to the stacking axis.
  */
@@ -80,14 +80,14 @@ typedef NS_ENUM(NSInteger, UIStackViewAlignment) {
     UIStackViewAlignmentTrailing,
     UIStackViewAlignmentBottom = UIStackViewAlignmentTrailing,
     UIStackViewAlignmentLastBaseline, // Valid for horizontal axis only
-} API_AVAILABLE(ios(9.0));
+} API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(watchos);
 
 /* Used when setting custom spacing after an arranged subview to indicate reverting to 
  the value specified by the spacing property. 
  
  See -setCustomSpacing:afterView:, -customSpacingAfterView:
  */
-static const CGFloat UIStackViewSpacingUseDefault API_AVAILABLE(ios(11.0),tvos(11.0)) = FLT_MAX;
+static const CGFloat UIStackViewSpacingUseDefault API_AVAILABLE(ios(11.0), tvos(11.0)) API_UNAVAILABLE(watchos) = FLT_MAX;
 
 /* Used when setting custom spacing after an arranged subview to request the system 
  spacing to the neighboring view. 
@@ -97,7 +97,7 @@ static const CGFloat UIStackViewSpacingUseDefault API_AVAILABLE(ios(11.0),tvos(1
  
  See spacing, -setCustomSpacing:afterView:, -customSpacingAfterView:
  */
-static const CGFloat UIStackViewSpacingUseSystem API_AVAILABLE(ios(11.0),tvos(11.0)) = FLT_MIN;
+static const CGFloat UIStackViewSpacingUseSystem API_AVAILABLE(ios(11.0), tvos(11.0)) API_UNAVAILABLE(watchos) = FLT_MIN;
 
 /* UIStackView is a non-rendering subclass of UIView, intended for managing layout of its subviews.
  You may not override +[UIStackView layerClass], and -drawLayer:inContext: will not be sent to
@@ -120,7 +120,7 @@ static const CGFloat UIStackViewSpacingUseSystem API_AVAILABLE(ios(11.0),tvos(11
  viewForFirst/LastBaselineLayout from that stack view.
  */
 NS_HEADER_AUDIT_BEGIN(nullability, sendability)
-UIKIT_EXTERN API_AVAILABLE(ios(9.0)) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @interface UIStackView : UIView
 
 - (instancetype)initWithFrame:(CGRect)frame NS_DESIGNATED_INITIALIZER;
@@ -209,8 +209,8 @@ and a stack with a vertical axis is a column of arrangedSubviews.
  
  Ignored if arrangedSubview is not actually an arranged subview.
  */
-- (void)setCustomSpacing:(CGFloat)spacing afterView:(UIView *)arrangedSubview API_AVAILABLE(ios(11.0),tvos(11.0));
-- (CGFloat)customSpacingAfterView:(UIView *)arrangedSubview API_AVAILABLE(ios(11.0),tvos(11.0));
+- (void)setCustomSpacing:(CGFloat)spacing afterView:(UIView *)arrangedSubview API_AVAILABLE(ios(11.0), tvos(11.0)) API_UNAVAILABLE(watchos);
+- (CGFloat)customSpacingAfterView:(UIView *)arrangedSubview API_AVAILABLE(ios(11.0), tvos(11.0)) API_UNAVAILABLE(watchos);
 
 /* Baseline-to-baseline spacing in vertical stacks.
     The baselineRelativeArrangement property supports specifications of vertical 

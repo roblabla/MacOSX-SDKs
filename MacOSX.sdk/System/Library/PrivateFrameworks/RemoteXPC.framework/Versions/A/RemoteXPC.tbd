@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/RemoteXPC.framework/Versions/A/RemoteXPC'
-current-version: 2748.120.20
+current-version: 2866.1.1
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _XPC_REMOTE_CONNECTION_PROTOCOL_VERSION_CURRENT, __xpc_type_remote_connection, 
@@ -16,12 +16,13 @@ exports:
                        _xpc_remote_connection_create_with_connected_fd, _xpc_remote_connection_create_with_nw_connection, 
                        _xpc_remote_connection_create_with_remote_service, _xpc_remote_connection_get_failsafe_version_flags, 
                        _xpc_remote_connection_get_remote_service_version, _xpc_remote_connection_get_version_flags, 
-                       _xpc_remote_connection_send_barrier, _xpc_remote_connection_send_message, 
-                       _xpc_remote_connection_send_message_with_reply, _xpc_remote_connection_send_message_with_reply_sync, 
-                       _xpc_remote_connection_set_event_handler, _xpc_remote_connection_set_local_service_version, 
-                       _xpc_remote_connection_set_target_queue, _xpc_remote_connection_set_tls, 
-                       _xpc_remote_connection_set_traffic_class, _xpc_remote_connection_setup_nw_parameters, 
-                       _xpc_remote_listener_cancel, _xpc_remote_listener_create_for_remote_service ]
+                       _xpc_remote_connection_is_server, _xpc_remote_connection_send_barrier, 
+                       _xpc_remote_connection_send_message, _xpc_remote_connection_send_message_with_reply, 
+                       _xpc_remote_connection_send_message_with_reply_sync, _xpc_remote_connection_set_event_handler, 
+                       _xpc_remote_connection_set_local_service_version, _xpc_remote_connection_set_target_queue, 
+                       _xpc_remote_connection_set_tls, _xpc_remote_connection_set_traffic_class, 
+                       _xpc_remote_connection_setup_nw_parameters, _xpc_remote_listener_cancel, 
+                       _xpc_remote_listener_create_for_remote_service ]
     objc-classes:    [ OS_xpc_remote_channel, OS_xpc_remote_connection, OS_xpc_remote_listener, 
                        OS_xpc_remote_message, OS_xpc_remote_outstanding_reply, OS_xpc_remote_pending_stream, 
                        OS_xpc_remote_stream ]

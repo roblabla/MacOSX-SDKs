@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/WebInspector.framework/Versions/A/WebInspector'
-current-version: 618.2.12
+current-version: 619.1.26
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _NSStringFromRWIDebuggerAvailability, _RWIAutomationAvailabilityFromString, 
@@ -31,11 +31,14 @@ exports:
                        RWIProtocolConfiguration, RWIProtocolConsoleCallFrame, RWIProtocolConsoleChannel, 
                        RWIProtocolConsoleDomainEventDispatcher, RWIProtocolConsoleMessage, 
                        RWIProtocolConsoleStackTrace, RWIProtocolDOMAccessibilityProperties, 
-                       RWIProtocolDOMDataBinding, RWIProtocolDOMDomainEventDispatcher, 
-                       RWIProtocolDOMEventListener, RWIProtocolDOMFlexOverlayConfig, 
-                       RWIProtocolDOMGridOverlayConfig, RWIProtocolDOMHighlightConfig, 
-                       RWIProtocolDOMNode, RWIProtocolDOMRGBAColor, RWIProtocolDOMStorageDomainEventDispatcher, 
-                       RWIProtocolDOMStorageStorageId, RWIProtocolDOMStyleable, RWIProtocolDebuggerAssertPauseReason, 
+                       RWIProtocolDOMAudioMediaStats, RWIProtocolDOMDataBinding, 
+                       RWIProtocolDOMDomainEventDispatcher, RWIProtocolDOMEventListener, 
+                       RWIProtocolDOMFlexOverlayConfig, RWIProtocolDOMGridOverlayConfig, 
+                       RWIProtocolDOMHighlightConfig, RWIProtocolDOMMediaStats, RWIProtocolDOMNode, 
+                       RWIProtocolDOMRGBAColor, RWIProtocolDOMStorageDomainEventDispatcher, 
+                       RWIProtocolDOMStorageStorageId, RWIProtocolDOMStyleable, RWIProtocolDOMVideoColorSpace, 
+                       RWIProtocolDOMVideoMediaStats, RWIProtocolDOMVideoPlaybackQuality, 
+                       RWIProtocolDOMViewportSize, RWIProtocolDebuggerAssertPauseReason, 
                        RWIProtocolDebuggerBreakpointAction, RWIProtocolDebuggerBreakpointOptions, 
                        RWIProtocolDebuggerBreakpointPauseReason, RWIProtocolDebuggerCSPViolationPauseReason, 
                        RWIProtocolDebuggerCallFrame, RWIProtocolDebuggerFunctionDetails, 

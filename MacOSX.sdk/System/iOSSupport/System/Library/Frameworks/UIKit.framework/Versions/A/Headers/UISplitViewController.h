@@ -20,37 +20,37 @@ typedef NS_ENUM(NSInteger, UISplitViewControllerDisplayMode) {
     UISplitViewControllerDisplayModeOneOverSecondary API_UNAVAILABLE(visionos), // Supplementary column overlaid on Secondary column for UISplitViewControllerStyleTripleColumn, Primary overlaid otherwise
     
     // For triple-column style only. Three different ways to lay out primary, supplementary, and secondary columns with the secondary more or less visible, and an additional layout that hides the secondary.
-    UISplitViewControllerDisplayModeTwoBesideSecondary NS_ENUM_AVAILABLE_IOS(14_0), // All three columns fully displayed side-by-side and interactive
-    UISplitViewControllerDisplayModeTwoOverSecondary NS_ENUM_AVAILABLE_IOS(14_0) API_UNAVAILABLE(visionos), // primary and supplementary columns side-by-side in overlay on top of partially visible detail column (detail column has dimming view). For widths too narrow to see much of the detail when the primary and supplementary columns are tiled.
-    UISplitViewControllerDisplayModeTwoDisplaceSecondary NS_ENUM_AVAILABLE_IOS(14_0) API_UNAVAILABLE(visionos), // primary, supplementary and detail columns side-by-side, but the dimmed, noninteractive detail has been displaced toward and cropped on the trailing edge. For wider widths than in TwoOverSecondary but still too narrow for TwoBesideSecondary
+    UISplitViewControllerDisplayModeTwoBesideSecondary API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos), // All three columns fully displayed side-by-side and interactive
+    UISplitViewControllerDisplayModeTwoOverSecondary API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(visionos, watchos), // primary and supplementary columns side-by-side in overlay on top of partially visible detail column (detail column has dimming view). For widths too narrow to see much of the detail when the primary and supplementary columns are tiled.
+    UISplitViewControllerDisplayModeTwoDisplaceSecondary API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(visionos, watchos), // primary, supplementary and detail columns side-by-side, but the dimmed, noninteractive detail has been displaced toward and cropped on the trailing edge. For wider widths than in TwoOverSecondary but still too narrow for TwoBesideSecondary
 
-    UISplitViewControllerDisplayModePrimaryHidden API_DEPRECATED_WITH_REPLACEMENT("UISplitViewControllerDisplayModeSecondaryOnly", ios(8.0, 14.0), visionos(1.0, 1.0)) = UISplitViewControllerDisplayModeSecondaryOnly,
-    UISplitViewControllerDisplayModeAllVisible API_DEPRECATED_WITH_REPLACEMENT("UISplitViewControllerDisplayModeOneBesideSecondary", ios(8.0, 14.0), visionos(1.0, 1.0)) = UISplitViewControllerDisplayModeOneBesideSecondary,
-    UISplitViewControllerDisplayModePrimaryOverlay API_UNAVAILABLE(visionos) API_DEPRECATED_WITH_REPLACEMENT("UISplitViewControllerDisplayModeOneOverSecondary", ios(8.0, 14.0)) = UISplitViewControllerDisplayModeOneOverSecondary,
-} API_AVAILABLE(ios(8.0));
+    UISplitViewControllerDisplayModePrimaryHidden API_DEPRECATED_WITH_REPLACEMENT("UISplitViewControllerDisplayModeSecondaryOnly", ios(8.0, 14.0), visionos(1.0, 1.0)) API_UNAVAILABLE(watchos) = UISplitViewControllerDisplayModeSecondaryOnly,
+    UISplitViewControllerDisplayModeAllVisible API_DEPRECATED_WITH_REPLACEMENT("UISplitViewControllerDisplayModeOneBesideSecondary", ios(8.0, 14.0), visionos(1.0, 1.0)) API_UNAVAILABLE(watchos) = UISplitViewControllerDisplayModeOneBesideSecondary,
+    UISplitViewControllerDisplayModePrimaryOverlay API_DEPRECATED_WITH_REPLACEMENT("UISplitViewControllerDisplayModeOneOverSecondary", ios(8.0, 14.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(watchos) = UISplitViewControllerDisplayModeOneOverSecondary,
+} API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(watchos);
 
 typedef NS_ENUM(NSInteger, UISplitViewControllerPrimaryEdge) {
     UISplitViewControllerPrimaryEdgeLeading,
     UISplitViewControllerPrimaryEdgeTrailing,
-} API_AVAILABLE(ios(11.0), tvos(11.0));
+} API_AVAILABLE(ios(11.0), tvos(11.0)) API_UNAVAILABLE(watchos);
 
 typedef NS_ENUM(NSInteger, UISplitViewControllerBackgroundStyle) {
     UISplitViewControllerBackgroundStyleNone,
     UISplitViewControllerBackgroundStyleSidebar,
-} API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(tvos);
+} API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(tvos, watchos);
 
 typedef NS_ENUM(NSInteger, UISplitViewControllerStyle) {
     UISplitViewControllerStyleUnspecified API_DEPRECATED_WITH_REPLACEMENT("UISplitViewControllerStyleDoubleColumn", visionos(1.0, 1.0)),
     UISplitViewControllerStyleDoubleColumn,
     UISplitViewControllerStyleTripleColumn,
-} API_AVAILABLE(ios(14.0));
+} API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos);
 
 typedef NS_ENUM(NSInteger, UISplitViewControllerColumn) {
     UISplitViewControllerColumnPrimary,
     UISplitViewControllerColumnSupplementary, // Valid for UISplitViewControllerStyleTripleColumn only
     UISplitViewControllerColumnSecondary,
     UISplitViewControllerColumnCompact, // If a vc is set for this column, it will be used when the UISVC is collapsed, instead of stacking the vc’s for the Primary, Supplementary, and Secondary columns
-} API_AVAILABLE(ios(14.0));
+} API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos);
 
 // Allowed displayModes depend on the splitBehavior
 // Tile behavior allows SecondaryOnly, OneBesideSecondary, and TwoBesideSecondary display modes
@@ -61,36 +61,36 @@ typedef NS_ENUM(NSInteger, UISplitViewControllerSplitBehavior) {
     UISplitViewControllerSplitBehaviorTile,
     UISplitViewControllerSplitBehaviorOverlay API_UNAVAILABLE(visionos),
     UISplitViewControllerSplitBehaviorDisplace API_UNAVAILABLE(visionos),
-} API_AVAILABLE(ios(14.0));
+} API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos);
 
 // Control the displayModeButtonItem visibility for column-style UISplitViewController
 typedef NS_ENUM(NSInteger, UISplitViewControllerDisplayModeButtonVisibility) {
     UISplitViewControllerDisplayModeButtonVisibilityAutomatic,
     UISplitViewControllerDisplayModeButtonVisibilityNever,
     UISplitViewControllerDisplayModeButtonVisibilityAlways
-} API_AVAILABLE(ios(14.5));
+} API_AVAILABLE(ios(14.5)) API_UNAVAILABLE(watchos);
 
 // This constant can be used with any sizing-related `UISplitViewController` properties to get the default system behavior.
-UIKIT_EXTERN CGFloat const UISplitViewControllerAutomaticDimension API_AVAILABLE(ios(8.0));
+UIKIT_EXTERN CGFloat const UISplitViewControllerAutomaticDimension API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(watchos);
 
-UIKIT_EXTERN API_AVAILABLE(ios(3.2)) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(3.2)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @interface UISplitViewController : UIViewController
 
 - (nullable instancetype)initWithCoder:(NSCoder *)coder NS_DESIGNATED_INITIALIZER;
 - (instancetype)initWithNibName:(nullable NSString *)nibNameOrNil bundle:(nullable NSBundle *)nibBundleOrNil NS_DESIGNATED_INITIALIZER;
-- (instancetype)initWithStyle:(UISplitViewControllerStyle)style NS_DESIGNATED_INITIALIZER API_AVAILABLE(ios(14.0));
-@property(nonatomic, readonly) UISplitViewControllerStyle style API_AVAILABLE(ios(14.0)); // For information only, will not be called from UIKit code
+- (instancetype)initWithStyle:(UISplitViewControllerStyle)style NS_DESIGNATED_INITIALIZER API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos);
+@property(nonatomic, readonly) UISplitViewControllerStyle style API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos); // For information only, will not be called from UIKit code
 @property (nullable, nonatomic, weak) id <UISplitViewControllerDelegate> delegate;
 
 // Default NO. The secondary-only shortcut button is applicable only for UISplitViewControllerStyleTripleColumn
-@property(nonatomic) BOOL showsSecondaryOnlyButton API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(visionos);
+@property(nonatomic) BOOL showsSecondaryOnlyButton API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(visionos, watchos);
 
 // Controls allowed display modes
-@property(nonatomic) UISplitViewControllerSplitBehavior preferredSplitBehavior API_AVAILABLE(ios(14.0)); // default Automatic, actual behavior will be determined by width buckets and view aspect ration
-@property(nonatomic, readonly) UISplitViewControllerSplitBehavior splitBehavior API_AVAILABLE(ios(14.0));
+@property(nonatomic) UISplitViewControllerSplitBehavior preferredSplitBehavior API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos); // default Automatic, actual behavior will be determined by width buckets and view aspect ration
+@property(nonatomic, readonly) UISplitViewControllerSplitBehavior splitBehavior API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos);
 
-- (void)setViewController:(nullable UIViewController *)vc forColumn:(UISplitViewControllerColumn)column API_AVAILABLE(ios(14.0)); // If the vc is not a UINavigationController, one will be created, except for UISplitViewControllerColumnCompact.
-- (nullable __kindof UIViewController *)viewControllerForColumn:(UISplitViewControllerColumn)column API_AVAILABLE(ios(14.0));
+- (void)setViewController:(nullable UIViewController *)vc forColumn:(UISplitViewControllerColumn)column API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos); // If the vc is not a UINavigationController, one will be created, except for UISplitViewControllerColumnCompact.
+- (nullable __kindof UIViewController *)viewControllerForColumn:(UISplitViewControllerColumn)column API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos);
 
 /*
 -hideColumn: and -showColumn: do not accept the Compact column
@@ -114,8 +114,8 @@ Expanded:
 
 If an animation is started due to -show/hideColumn:, the transitionCoordinator for the UISplitViewController is available following the -show/hideColumn: message.
 */
-- (void)hideColumn:(UISplitViewControllerColumn)column API_AVAILABLE(ios(14.0));
-- (void)showColumn:(UISplitViewControllerColumn)column API_AVAILABLE(ios(14.0));
+- (void)hideColumn:(UISplitViewControllerColumn)column API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos);
+- (void)showColumn:(UISplitViewControllerColumn)column API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos);
 
 @property (nonatomic, copy) NSArray<__kindof UIViewController *> *viewControllers; // -setViewController:forColumn:/-viewControllerForColumn: recommended for column-style UISplitViewController
 
@@ -140,7 +140,7 @@ If an animation is started due to -show/hideColumn:, the transitionCoordinator f
     Set to UISplitViewControllerDisplayModeButtonVisibilityNever to prevent the displayModeButton from showing.
     Set to UISplitViewControllerDisplayModeButtonVisibilityAlways to allow the displayModeButton to show when presentsWithGesture is NO. Note that in displayModes that would not be expected to show the button when presentsWithGesture is YES (e.g., UISplitViewControllerDisplayModeTwoOverSecondary), a value of Always will not force the button to show.
  */
-@property(nonatomic) UISplitViewControllerDisplayModeButtonVisibility displayModeButtonVisibility API_AVAILABLE(ios(14.5)) API_UNAVAILABLE(visionos); // default: automatic
+@property(nonatomic) UISplitViewControllerDisplayModeButtonVisibility displayModeButtonVisibility API_AVAILABLE(ios(14.5)) API_UNAVAILABLE(visionos, watchos); // default: automatic
 
 
 // An animatable property that can be used to adjust the relative width of the primary view controller in the split view controller. This preferred width will be limited by the maximum and minimum properties (and potentially other system heuristics).
@@ -148,7 +148,7 @@ If an animation is started due to -show/hideColumn:, the transitionCoordinator f
 
 // Allow setting the primary column width with point values. This is especially useful in Catalyst where the window may be resized more often.
 // If set to non-Automatic, takes precedence over preferredPrimaryColumnWidthFraction.
-@property(nonatomic, assign) CGFloat preferredPrimaryColumnWidth API_AVAILABLE(ios(14.0)); // default: UISplitViewControllerAutomaticDimension
+@property(nonatomic, assign) CGFloat preferredPrimaryColumnWidth API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos); // default: UISplitViewControllerAutomaticDimension
 
 // An animatable property that can be used to adjust the minimum absolute width of the primary view controller in the split view controller.
 @property(nonatomic, assign) CGFloat minimumPrimaryColumnWidth API_AVAILABLE(ios(8.0)); // default: UISplitViewControllerAutomaticDimension
@@ -160,15 +160,15 @@ If an animation is started due to -show/hideColumn:, the transitionCoordinator f
 @property(nonatomic,readonly) CGFloat primaryColumnWidth API_AVAILABLE(ios(8.0));
 
 // Same as the "Primary" versions but applying to the Supplementary column for the triple-column style UISplitViewController
-@property(nonatomic, assign) CGFloat preferredSupplementaryColumnWidthFraction API_AVAILABLE(ios(14.0));
-@property(nonatomic, assign) CGFloat preferredSupplementaryColumnWidth API_AVAILABLE(ios(14.0));
-@property(nonatomic, assign) CGFloat minimumSupplementaryColumnWidth API_AVAILABLE(ios(14.0));
-@property(nonatomic, assign) CGFloat maximumSupplementaryColumnWidth API_AVAILABLE(ios(14.0));
+@property(nonatomic, assign) CGFloat preferredSupplementaryColumnWidthFraction API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos);
+@property(nonatomic, assign) CGFloat preferredSupplementaryColumnWidth API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos);
+@property(nonatomic, assign) CGFloat minimumSupplementaryColumnWidth API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos);
+@property(nonatomic, assign) CGFloat maximumSupplementaryColumnWidth API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos);
 
-@property(nonatomic, readonly) CGFloat supplementaryColumnWidth API_AVAILABLE(ios(14.0));
+@property(nonatomic, readonly) CGFloat supplementaryColumnWidth API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos);
 
 // The edge of the UISplitViewController where the primary view controller should be positioned
-@property(nonatomic) UISplitViewControllerPrimaryEdge primaryEdge API_AVAILABLE(ios(11.0), tvos(11.0)); // default: UISplitViewControllerPrimaryEdgeLeading
+@property(nonatomic) UISplitViewControllerPrimaryEdge primaryEdge API_AVAILABLE(ios(11.0), tvos(11.0)) API_UNAVAILABLE(watchos); // default: UISplitViewControllerPrimaryEdgeLeading
 
 // In a horizontally-regular environment this will set either the master or detail view controller depending on the original target. In a compact environment this defaults to a full screen presentation. In general the master or detail view controller will have implemented showViewController:sender: so this method would not be invoked.
 - (void)showViewController:(UIViewController *)vc sender:(nullable id)sender API_AVAILABLE(ios(8.0));
@@ -177,11 +177,11 @@ If an animation is started due to -show/hideColumn:, the transitionCoordinator f
 - (void)showDetailViewController:(UIViewController *)vc sender:(nullable id)sender API_AVAILABLE(ios(8.0));
 
 // The background style of the primary view controller.
-@property (nonatomic) UISplitViewControllerBackgroundStyle primaryBackgroundStyle API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(tvos);
+@property (nonatomic) UISplitViewControllerBackgroundStyle primaryBackgroundStyle API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(tvos, watchos);
 
 @end
 
-NS_SWIFT_UI_ACTOR
+API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @protocol UISplitViewControllerDelegate
 
 @optional
@@ -229,26 +229,26 @@ NS_SWIFT_UI_ACTOR
 
 // Called when a button should be added to a toolbar for a hidden view controller.
 // Implementing this method allows the hidden view controller to be presented via a swipe gesture if 'presentsWithGesture' is 'YES' (the default).
-- (void)splitViewController:(UISplitViewController *)svc willHideViewController:(UIViewController *)aViewController withBarButtonItem:(UIBarButtonItem *)barButtonItem forPopoverController:(UIPopoverController *)pc API_DEPRECATED("Use splitViewController:willChangeToDisplayMode: and displayModeButtonItem instead", ios(2.0, 8.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos);
+- (void)splitViewController:(UISplitViewController *)svc willHideViewController:(UIViewController *)aViewController withBarButtonItem:(UIBarButtonItem *)barButtonItem forPopoverController:(UIPopoverController *)pc API_DEPRECATED("Use splitViewController:willChangeToDisplayMode: and displayModeButtonItem instead", ios(2.0, 8.0)) API_UNAVAILABLE(visionos, tvos, watchos);
 
 // Called when the view is shown again in the split view, invalidating the button and popover controller.
-- (void)splitViewController:(UISplitViewController *)svc willShowViewController:(UIViewController *)aViewController invalidatingBarButtonItem:(UIBarButtonItem *)barButtonItem API_DEPRECATED("Use splitViewController:willChangeToDisplayMode: and displayModeButtonItem instead", ios(2.0, 8.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos);
+- (void)splitViewController:(UISplitViewController *)svc willShowViewController:(UIViewController *)aViewController invalidatingBarButtonItem:(UIBarButtonItem *)barButtonItem API_DEPRECATED("Use splitViewController:willChangeToDisplayMode: and displayModeButtonItem instead", ios(2.0, 8.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(visionos, watchos);
 
 // Called when the view controller is shown in a popover so the delegate can take action like hiding other popovers.
-- (void)splitViewController:(UISplitViewController *)svc popoverController:(UIPopoverController *)pc willPresentViewController:(UIViewController *)aViewController API_DEPRECATED_WITH_REPLACEMENT("splitViewController:willChangeToDisplayMode:", ios(2.0, 8.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos);
+- (void)splitViewController:(UISplitViewController *)svc popoverController:(UIPopoverController *)pc willPresentViewController:(UIViewController *)aViewController API_DEPRECATED_WITH_REPLACEMENT("splitViewController:willChangeToDisplayMode:", ios(2.0, 8.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(visionos, watchos);
 
 // Returns YES if a view controller should be hidden by the split view controller in a given orientation.
 // (This method is only called on the leftmost view controller and only discriminates portrait from landscape.)
-- (BOOL)splitViewController:(UISplitViewController *)svc shouldHideViewController:(UIViewController *)vc inOrientation:(UIInterfaceOrientation)orientation  API_DEPRECATED_WITH_REPLACEMENT("preferredDisplayMode", ios(5.0, 8.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos);
+- (BOOL)splitViewController:(UISplitViewController *)svc shouldHideViewController:(UIViewController *)vc inOrientation:(UIInterfaceOrientation)orientation  API_DEPRECATED_WITH_REPLACEMENT("preferredDisplayMode", ios(5.0, 8.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(visionos, watchos);
 
-- (UISplitViewControllerColumn)splitViewController:(UISplitViewController *)svc topColumnForCollapsingToProposedTopColumn:(UISplitViewControllerColumn)proposedTopColumn API_AVAILABLE(ios(14.0));
-- (UISplitViewControllerDisplayMode)splitViewController:(UISplitViewController *)svc displayModeForExpandingToProposedDisplayMode:(UISplitViewControllerDisplayMode)proposedDisplayMode API_AVAILABLE(ios(14.0));
-- (void)splitViewControllerDidCollapse:(UISplitViewController *)svc API_AVAILABLE(ios(14.0));
-- (void)splitViewControllerDidExpand:(UISplitViewController *)svc API_AVAILABLE(ios(14.0));
-- (void)splitViewController:(UISplitViewController *)svc willShowColumn:(UISplitViewControllerColumn)column API_AVAILABLE(ios(14.0));
-- (void)splitViewController:(UISplitViewController *)svc willHideColumn:(UISplitViewControllerColumn)column API_AVAILABLE(ios(14.0));
-- (void)splitViewControllerInteractivePresentationGestureWillBegin:(UISplitViewController *)svc API_AVAILABLE(ios(14.0));
-- (void)splitViewControllerInteractivePresentationGestureDidEnd:(UISplitViewController *)svc API_AVAILABLE(ios(14.0));
+- (UISplitViewControllerColumn)splitViewController:(UISplitViewController *)svc topColumnForCollapsingToProposedTopColumn:(UISplitViewControllerColumn)proposedTopColumn API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos);
+- (UISplitViewControllerDisplayMode)splitViewController:(UISplitViewController *)svc displayModeForExpandingToProposedDisplayMode:(UISplitViewControllerDisplayMode)proposedDisplayMode API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos);
+- (void)splitViewControllerDidCollapse:(UISplitViewController *)svc API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos);
+- (void)splitViewControllerDidExpand:(UISplitViewController *)svc API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos);
+- (void)splitViewController:(UISplitViewController *)svc willShowColumn:(UISplitViewControllerColumn)column API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos);
+- (void)splitViewController:(UISplitViewController *)svc willHideColumn:(UISplitViewControllerColumn)column API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos);
+- (void)splitViewControllerInteractivePresentationGestureWillBegin:(UISplitViewController *)svc API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos);
+- (void)splitViewControllerInteractivePresentationGestureDidEnd:(UISplitViewController *)svc API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos);
 
 @end
 

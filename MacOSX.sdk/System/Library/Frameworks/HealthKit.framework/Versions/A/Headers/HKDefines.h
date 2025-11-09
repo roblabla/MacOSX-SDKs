@@ -2,7 +2,7 @@
 //  HKDefines.h
 //  HealthKit
 //
-//  Copyright (c) 2013-2022 Apple Inc. All rights reserved.
+//  Copyright (c) 2013-2024 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -39,6 +39,7 @@ HK_EXTERN NSString * const HKErrorDomain API_AVAILABLE(ios(8.0), watchos(2.0), m
  @constant  HKErrorWorkoutActivityNotAllowed    A workout session is not allowed to be created for the activity type.
  @constant  HKErrorDataSizeExceeded             The provided data's size exceeds the maximum allowed.
  @constant  HKErrorBackgroundWorkoutSessionNotAllowed   A workout session is not allowed to start or prepare when this app is in the background.
+ @constant  HKErrorNotPermissibleForGuestUserMode   Protected Health data changes are not allowed in Guest User mode on visionOS.
  */
 typedef NS_ENUM(NSInteger, HKErrorCode) {
     HKUnknownError = 0,
@@ -50,13 +51,14 @@ typedef NS_ENUM(NSInteger, HKErrorCode) {
     HKErrorAuthorizationNotDetermined,
     HKErrorDatabaseInaccessible,
     HKErrorUserCanceled,
-    HKErrorAnotherWorkoutSessionStarted     API_AVAILABLE(ios(9.0), watchos(2.0), macCatalyst(13.0), macos(13.0)),
-    HKErrorUserExitedWorkoutSession         API_AVAILABLE(ios(9.0), watchos(2.0), macCatalyst(13.0), macos(13.0)),
-    HKErrorRequiredAuthorizationDenied      API_AVAILABLE(ios(12.0), watchos(5.0), macCatalyst(13.0), macos(13.0)),
-    HKErrorNoData                           API_AVAILABLE(ios(14.0), watchos(7.0), macCatalyst(14.0), macos(13.0)),
-    HKErrorWorkoutActivityNotAllowed        API_AVAILABLE(ios(17.0), watchos(10.0), macCatalyst(17.0), macos(14.0)),
-    HKErrorDataSizeExceeded                 API_AVAILABLE(ios(17.0), watchos(10.0), macCatalyst(17.0), macos(14.0)),
+    HKErrorAnotherWorkoutSessionStarted         API_AVAILABLE(ios(9.0), watchos(2.0), macCatalyst(13.0), macos(13.0)),
+    HKErrorUserExitedWorkoutSession             API_AVAILABLE(ios(9.0), watchos(2.0), macCatalyst(13.0), macos(13.0)),
+    HKErrorRequiredAuthorizationDenied          API_AVAILABLE(ios(12.0), watchos(5.0), macCatalyst(13.0), macos(13.0)),
+    HKErrorNoData                               API_AVAILABLE(ios(14.0), watchos(7.0), macCatalyst(14.0), macos(13.0)),
+    HKErrorWorkoutActivityNotAllowed            API_AVAILABLE(ios(17.0), watchos(10.0), macCatalyst(17.0), macos(14.0)),
+    HKErrorDataSizeExceeded                     API_AVAILABLE(ios(17.0), watchos(10.0), macCatalyst(17.0), macos(14.0)),
     HKErrorBackgroundWorkoutSessionNotAllowed   API_AVAILABLE(ios(17.0), watchos(10.0), macCatalyst(17.0), macos(14.0)),
+    HKErrorNotPermissibleForGuestUserMode       API_AVAILABLE(ios(18.0), visionos(2.0)),
 } API_AVAILABLE(ios(8.0), watchos(2.0), macCatalyst(13.0), macos(13.0));
 
 /*!
@@ -102,7 +104,6 @@ typedef NS_ENUM(NSInteger, HKAuthorizationRequestStatus) {
 
 /// Returns the set of `HKCategoryValueSleepAnalysis` values that are considered to be asleep.
 HK_EXTERN NSSet<NSNumber *> * HKCategoryValueSleepAnalysisAsleepValues(void) API_AVAILABLE(ios(16.0), watchos(9.0), macCatalyst(16.0), macos(13.0)) NS_REFINED_FOR_SWIFT;
-
 
 NS_ASSUME_NONNULL_END
 

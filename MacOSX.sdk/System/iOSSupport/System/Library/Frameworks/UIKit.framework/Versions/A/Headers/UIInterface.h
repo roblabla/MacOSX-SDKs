@@ -19,15 +19,15 @@ typedef NS_ENUM(NSInteger, UIBarStyle) {
     UIBarStyleDefault          = 0,
     UIBarStyleBlack            = 1,
     
-    UIBarStyleBlackOpaque API_UNAVAILABLE(tvos, visionos) API_DEPRECATED("Use UIBarStyleBlack instead.", ios(2.0, 13.0)) = 1,
-    UIBarStyleBlackTranslucent API_UNAVAILABLE(tvos, visionos) API_DEPRECATED("Use UIBarStyleBlack and set the translucent property to YES instead.", ios(2.0, 13.0)) = 2,
-} API_UNAVAILABLE(tvos);
+    UIBarStyleBlackOpaque API_DEPRECATED("Use UIBarStyleBlack instead.", ios(2.0, 13.0)) API_UNAVAILABLE(tvos, visionos) API_UNAVAILABLE(watchos) = 1,
+    UIBarStyleBlackTranslucent API_DEPRECATED("Use UIBarStyleBlack and set the translucent property to YES instead.", ios(2.0, 13.0)) API_UNAVAILABLE(tvos, visionos) API_UNAVAILABLE(watchos) = 2,
+} API_UNAVAILABLE(tvos, watchos);
 
 typedef NS_ENUM(NSInteger, UIUserInterfaceSizeClass) {
     UIUserInterfaceSizeClassUnspecified = 0,
     UIUserInterfaceSizeClassCompact     = 1,
     UIUserInterfaceSizeClassRegular     = 2,
-} API_AVAILABLE(ios(8.0));
+} API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(watchos);
 
 typedef NS_ENUM(NSInteger, UIUserInterfaceStyle) {
     UIUserInterfaceStyleUnspecified,
@@ -38,20 +38,20 @@ typedef NS_ENUM(NSInteger, UIUserInterfaceStyle) {
 typedef NS_ENUM(NSInteger, UIUserInterfaceLayoutDirection) {
     UIUserInterfaceLayoutDirectionLeftToRight,
     UIUserInterfaceLayoutDirectionRightToLeft,
-} API_AVAILABLE(ios(5.0));
+} API_AVAILABLE(ios(5.0)) API_UNAVAILABLE(watchos);
 
 // These values are only used for the layout direction trait, which informs but does not completely dictate the layout direction of views. To determine the effective layout direction of a view, consult the UIView.effectiveUserInterfaceLayoutDirection property, whose values are members of the UIUserInterfaceLayoutDirection enum.
 typedef NS_ENUM(NSInteger, UITraitEnvironmentLayoutDirection) {
     UITraitEnvironmentLayoutDirectionUnspecified = -1,
     UITraitEnvironmentLayoutDirectionLeftToRight = UIUserInterfaceLayoutDirectionLeftToRight,
     UITraitEnvironmentLayoutDirectionRightToLeft = UIUserInterfaceLayoutDirectionRightToLeft,
-} API_AVAILABLE(ios(10.0));
+} API_AVAILABLE(ios(10.0)) API_UNAVAILABLE(watchos);
 
 typedef NS_ENUM(NSInteger, UIDisplayGamut) {
     UIDisplayGamutUnspecified = -1, // UIKit will not set this anymore, instead a sensible default is chosen based on the device capabilities and settings always
     UIDisplayGamutSRGB,
     UIDisplayGamutP3
-} API_AVAILABLE(ios(10.0));
+} API_AVAILABLE(ios(10.0)) API_UNAVAILABLE(watchos);
 
 /* The value of the "high contrast" Accessibility setting is available via `UIAccessibilityDarkerSystemColorsEnabled()`,
  * and is also expressed as the UIAccessibilityContrast trait.
@@ -67,7 +67,7 @@ typedef NS_ENUM(NSInteger, UILegibilityWeight) {
     UILegibilityWeightUnspecified = -1,
     UILegibilityWeightRegular,
     UILegibilityWeightBold
-} API_AVAILABLE(ios(13.0), tvos(13.0), watchos(6.0));
+} API_AVAILABLE(ios(13.0), tvos(13.0)) API_UNAVAILABLE(watchos);
 
 typedef NS_ENUM(NSInteger, UIUserInterfaceLevel) {
     UIUserInterfaceLevelUnspecified = -1,
@@ -79,14 +79,14 @@ typedef NS_ENUM(NSInteger, UIUserInterfaceActiveAppearance) {
     UIUserInterfaceActiveAppearanceUnspecified = -1,
     UIUserInterfaceActiveAppearanceInactive,
     UIUserInterfaceActiveAppearanceActive,
-} API_AVAILABLE(ios(14.0), tvos(14.0), watchos(7.0));
+} API_AVAILABLE(ios(14.0), tvos(14.0)) API_UNAVAILABLE(watchos);
 
 typedef NS_ENUM(NSInteger, UINSToolbarItemPresentationSize) {
     UINSToolbarItemPresentationSizeUnspecified = -1,
     UINSToolbarItemPresentationSizeRegular = 0,
     UINSToolbarItemPresentationSizeSmall = 1,
     UINSToolbarItemPresentationSizeLarge = 3
-} API_AVAILABLE(macCatalyst(16.0));
+} API_AVAILABLE(macCatalyst(16.0)) API_UNAVAILABLE(watchos);
 
 typedef NS_ENUM(NSInteger, UIImageDynamicRange) {
     /// Do not specify a preferred dynamic range.
@@ -97,7 +97,7 @@ typedef NS_ENUM(NSInteger, UIImageDynamicRange) {
     UIImageDynamicRangeConstrainedHigh = 1,
     /// Allow image content to use unrestricted extended range.
     UIImageDynamicRangeHigh = 2
-} API_AVAILABLE(ios(17.0), tvos(17.0), watchos(10.0));
+} API_AVAILABLE(ios(17.0), tvos(17.0)) API_UNAVAILABLE(watchos);
 
 // System colors
 
@@ -239,16 +239,16 @@ typedef NS_ENUM(NSInteger, UIImageDynamicRange) {
 /* lightTextColor is always light, and darkTextColor is always dark, regardless of the current UIUserInterfaceStyle.
  * When possible, we recommend using `labelColor` and its variants, instead.
  */
-@property(class, nonatomic, readonly) UIColor *lightTextColor API_UNAVAILABLE(tvos);    // for a dark background
-@property(class, nonatomic, readonly) UIColor *darkTextColor API_UNAVAILABLE(tvos);     // for a light background
+@property(class, nonatomic, readonly) UIColor *lightTextColor API_UNAVAILABLE(tvos, watchos);    // for a dark background
+@property(class, nonatomic, readonly) UIColor *darkTextColor API_UNAVAILABLE(tvos, watchos);     // for a light background
 
 /* groupTableViewBackgroundColor is now the same as systemGroupedBackgroundColor.
  */
-@property(class, nonatomic, readonly) UIColor *groupTableViewBackgroundColor API_DEPRECATED_WITH_REPLACEMENT("systemGroupedBackgroundColor", ios(2.0, 13.0), tvos(13.0, 13.0)) API_UNAVAILABLE(visionos);
+@property(class, nonatomic, readonly) UIColor *groupTableViewBackgroundColor API_DEPRECATED_WITH_REPLACEMENT("systemGroupedBackgroundColor", ios(2.0, 13.0), tvos(13.0, 13.0)) API_UNAVAILABLE(visionos, watchos);
 
-@property(class, nonatomic, readonly) UIColor *viewFlipsideBackgroundColor API_DEPRECATED("", ios(2.0, 7.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos);
-@property(class, nonatomic, readonly) UIColor *scrollViewTexturedBackgroundColor API_DEPRECATED("", ios(3.2, 7.0))  API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos);
-@property(class, nonatomic, readonly) UIColor *underPageBackgroundColor API_DEPRECATED("", ios(5.0, 7.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos);
+@property(class, nonatomic, readonly) UIColor *viewFlipsideBackgroundColor API_DEPRECATED("", ios(2.0, 7.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(visionos, watchos);
+@property(class, nonatomic, readonly) UIColor *scrollViewTexturedBackgroundColor API_DEPRECATED("", ios(3.2, 7.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(visionos, watchos);
+@property(class, nonatomic, readonly) UIColor *underPageBackgroundColor API_DEPRECATED("", ios(5.0, 7.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(visionos, watchos);
 
 @end
 
@@ -256,10 +256,10 @@ typedef NS_ENUM(NSInteger, UIImageDynamicRange) {
 // System fonts
 
 @interface UIFont (UIFontSystemFonts)
-@property(class, nonatomic, readonly) CGFloat labelFontSize API_UNAVAILABLE(tvos);
-@property(class, nonatomic, readonly) CGFloat buttonFontSize API_UNAVAILABLE(tvos);
-@property(class, nonatomic, readonly) CGFloat smallSystemFontSize API_UNAVAILABLE(tvos);
-@property(class, nonatomic, readonly) CGFloat systemFontSize API_UNAVAILABLE(tvos);
+@property(class, nonatomic, readonly) CGFloat labelFontSize API_UNAVAILABLE(tvos, watchos);
+@property(class, nonatomic, readonly) CGFloat buttonFontSize API_UNAVAILABLE(tvos, watchos);
+@property(class, nonatomic, readonly) CGFloat smallSystemFontSize API_UNAVAILABLE(tvos, watchos);
+@property(class, nonatomic, readonly) CGFloat systemFontSize API_UNAVAILABLE(tvos, watchos);
 @property(class, nonatomic, readonly) CGFloat defaultFontSize API_UNAVAILABLE(macos, ios, tvos, watchos);
 @property(class, nonatomic, readonly) CGFloat systemMinimumFontSize API_UNAVAILABLE(macos, ios, tvos, watchos);
 @end

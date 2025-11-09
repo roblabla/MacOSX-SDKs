@@ -30,9 +30,9 @@ typedef void (^CMHeadphoneDeviceMotionHandler)(CMDeviceMotion * __nullable motio
  *    The CMHeadphoneMotionManager object is your entry point to the headphone motion service.
  */
 #if defined(TARGET_OS_VISION) && TARGET_OS_VISION
-COREMOTION_EXPORT API_AVAILABLE(macos(14.0), ios(14.0)) API_UNAVAILABLE(visionos)
+COREMOTION_EXPORT API_AVAILABLE(macos(14.0), ios(14.0), watchos(7.0)) API_UNAVAILABLE(visionos)
 #else
-COREMOTION_EXPORT API_AVAILABLE(macos(14.0), ios(14.0))
+COREMOTION_EXPORT API_AVAILABLE(macos(14.0), ios(14.0), watchos(7.0))
 #endif // defined(TARGET_OS_VISION) && TARGET_OS_VISION
 @interface CMHeadphoneMotionManager : NSObject
 
@@ -51,6 +51,14 @@ COREMOTION_EXPORT API_AVAILABLE(macos(14.0), ios(14.0))
  *    The delegate object to receive motion manager events.
  */
 @property(weak, nonatomic, nullable) id<CMHeadphoneMotionManagerDelegate> delegate;
+
+/*
+ *  connectionStatusActive
+ *
+ *  Discussion:
+ *    Determines whether the CMHeadphoneMotionManager is currently providing connection updates to the delegate.
+ */
+@property(readonly, nonatomic, getter=isConnectionStatusActive) BOOL connectionStatusActive;
 
 /*
  *  deviceMotionAvailable
@@ -102,6 +110,23 @@ COREMOTION_EXPORT API_AVAILABLE(macos(14.0), ios(14.0))
  *    Stops device motion updates.
  */
 - (void)stopDeviceMotionUpdates;
+
+/*
+ *  startConnectionStatusUpdates
+ *
+ *  Discussion:
+ *    Starts event updates to the delegate object. This can be used to register for delegate updates before requesting device motion data.
+ *
+ */
+- (void)startConnectionStatusUpdates;
+
+/*
+ *  stopConnectionStatusUpdates
+ *
+ *  Discussion:
+ *    Stops connection status updates to the delegate object. This only applies if startConnectionStatusUpdates was called.
+ */
+- (void)stopConnectionStatusUpdates;
 
 @end
 

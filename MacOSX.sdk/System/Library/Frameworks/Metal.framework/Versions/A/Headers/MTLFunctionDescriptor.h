@@ -25,11 +25,19 @@ typedef NS_OPTIONS(NSUInteger, MTLFunctionOptions) {
      */
     MTLFunctionOptionCompileToBinary API_AVAILABLE(macos(11.0), ios(14.0)) = 1 << 0,
     /**
-     * @brief stores and tracks this function in a MetalScript
+     * @brief stores and tracks this function in a Metal Pipelines Script
      * This flag is optional and only supported in the context of binary archives.
      * @discussion This flag is required for inspecting and consuming binary archives with specialized MTLFunctions via the metal-source tool. It is not required for recompilation, nor for storing functions in binary archives. Set this flag only if you intend to use metal-source on a serialized binary archive.
      */
-    MTLFunctionOptionStoreFunctionInMetalScript API_AVAILABLE(macos(14.0), ios(17.0)) = 1 << 1,
+    MTLFunctionOptionStoreFunctionInMetalPipelinesScript API_AVAILABLE(macos(15.0), ios(18.0)) = 1 << 1,
+    MTLFunctionOptionStoreFunctionInMetalScript API_DEPRECATED_WITH_REPLACEMENT("MTLFunctionOptionStoreFunctionInMetalPipelinesScript", macos(14.0, 15.0), ios(17.0, 18.0), tvos(17.0, 18.0)) = 1 << 1,
+    
+    /**
+         * @brief Function creation fails (i.e nil is returned) if:
+         * - A lookup binary archive has been specified
+         * - The function has not been found in the archive
+         */
+         MTLFunctionOptionFailOnBinaryArchiveMiss API_AVAILABLE(macos(15.0), ios(18.0)) = 1 << 2,
 } API_AVAILABLE(macos(11.0), ios(14.0));
 
 MTL_EXPORT API_AVAILABLE(macos(11.0), ios(14.0))

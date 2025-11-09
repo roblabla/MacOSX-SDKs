@@ -41,7 +41,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(
 /*!
     @abstract Element identifiers are used to identify writable elements in the interaction's view, and will be supplied in every delegate callback. Any object that conforms to NSCopying and that can be compared for equality can be used. It is recommended to use simple immutable values, like NSString, NSNumber, or NSUUID.
  */
-typedef id<NSCopying, NSObject> UIScribbleElementIdentifier NS_REFINED_FOR_SWIFT; 
+typedef id<NSCopying, NSObject> UIScribbleElementIdentifier NS_REFINED_FOR_SWIFT API_UNAVAILABLE(watchos); 
 
 /*!
     @abstract The protocol to be implemented by the delegate of UIIndirectScribbleInteraction. It will be responsible for supplying a list of writable elements, focusing them, and ultimately providing a real UITextInput that will handle text editing operations.

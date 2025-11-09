@@ -13,7 +13,7 @@
 
 NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
-UIKIT_EXTERN const CGSize UICollectionViewFlowLayoutAutomaticSize API_AVAILABLE(ios(10.0));
+UIKIT_EXTERN const CGSize UICollectionViewFlowLayoutAutomaticSize API_AVAILABLE(ios(10.0)) API_UNAVAILABLE(watchos);
 
 typedef NS_ENUM(NSInteger, UICollectionViewFlowLayoutSectionInsetReference) {
     UICollectionViewFlowLayoutSectionInsetFromContentInset,
@@ -21,7 +21,7 @@ typedef NS_ENUM(NSInteger, UICollectionViewFlowLayoutSectionInsetReference) {
     UICollectionViewFlowLayoutSectionInsetFromLayoutMargins
 } API_AVAILABLE(ios(11.0), tvos(11.0)) API_UNAVAILABLE(watchos);
 
-UIKIT_EXTERN API_AVAILABLE(ios(7.0)) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(7.0)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @interface UICollectionViewFlowLayoutInvalidationContext : UICollectionViewLayoutInvalidationContext
 
 @property (nonatomic) BOOL invalidateFlowLayoutDelegateMetrics; // if set to NO, flow layout will not requery the collection view delegate for size information etc.
@@ -29,7 +29,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(7.0)) NS_SWIFT_UI_ACTOR
 
 @end
 
-NS_SWIFT_UI_ACTOR
+API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @protocol UICollectionViewDelegateFlowLayout <UICollectionViewDelegate>
 @optional
 
@@ -42,7 +42,7 @@ NS_SWIFT_UI_ACTOR
 
 @end
 
-UIKIT_EXTERN API_AVAILABLE(ios(6.0)) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(6.0)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @interface UICollectionViewFlowLayout : UICollectionViewLayout
 
 @property (nonatomic) CGFloat minimumLineSpacing;

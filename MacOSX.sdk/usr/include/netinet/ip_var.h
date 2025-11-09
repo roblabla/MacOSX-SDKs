@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2021 Apple Inc. All rights reserved.
+ * Copyright (c) 2000-2024 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  *
@@ -134,6 +134,9 @@ struct  ipstat {
 	u_int32_t ips_necp_policy_drop; /* NECP policy related drop */
 	u_int32_t ips_rcv_if_weak_match; /* packets whose receive interface that passed the Weak ES address check */
 	u_int32_t ips_rcv_if_no_match;  /* packets whose receive interface did not pass the address check */
+	u_int32_t ips_input_ipf_drop;   /* packets dropped by IP filters */
+	u_int32_t ips_input_no_proto;   /* packets dropped for unsuppported IP protocol */
+	u_int32_t ips_src_addr_not_avail; /* outgoing packets with source address not available */
 };
 
 struct ip_linklocal_stat {

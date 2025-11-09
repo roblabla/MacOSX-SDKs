@@ -26,6 +26,21 @@
  * @APPLE_OSREFERENCE_LICENSE_HEADER_END@
  */
 
+#define USE_CLANG_STDDEF 0
+
+#if USE_CLANG_STDDEF
+
+#ifndef __WCHAR_T
+#define __WCHAR_T
+
+#define __need_wchar_t
+#include <stddef.h>
+#undef __need_wchar_t
+
+#endif /* __WCHAR_T */
+
+#else
+
 /* wchar_t is a built-in type in C++ */
 #ifndef __cplusplus
 #ifndef _WCHAR_T
@@ -34,3 +49,7 @@
 typedef __darwin_wchar_t wchar_t;
 #endif /* _WCHAR_T */
 #endif /* __cplusplus */
+
+#endif
+
+#undef USE_CLANG_STDDEF

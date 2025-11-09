@@ -43,9 +43,9 @@ typedef NS_ENUM(NSInteger, UIApplicationShortcutIconType) {
     UIApplicationShortcutIconTypeShuffle        API_AVAILABLE(ios(9.1)),
     UIApplicationShortcutIconTypeAudio          API_AVAILABLE(ios(9.1)),
     UIApplicationShortcutIconTypeUpdate         API_AVAILABLE(ios(9.1))
-} API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(tvos);
+} API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(tvos, watchos);
 
-UIKIT_EXTERN API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(tvos)
+UIKIT_EXTERN API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(tvos, watchos)
 @interface UIApplicationShortcutIcon : NSObject <NSCopying>
 
 // Create an icon using a system-defined image.
@@ -62,7 +62,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(tvos)
 
 @end
 
-UIKIT_EXTERN API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(tvos)
+UIKIT_EXTERN API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(tvos, watchos)
 @interface UIApplicationShortcutItem : NSObject <NSCopying, NSMutableCopying>
 
 - (instancetype)init NS_UNAVAILABLE;
@@ -86,7 +86,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(tvos)
 
 @end
 
-UIKIT_EXTERN API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(tvos)
+UIKIT_EXTERN API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(tvos, watchos)
 @interface UIMutableApplicationShortcutItem : UIApplicationShortcutItem
 
 // An application-specific string that identifies the type of action to perform.

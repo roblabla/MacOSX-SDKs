@@ -2,11 +2,12 @@
 tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 install-name:    '/System/iOSSupport/System/Library/Frameworks/_AuthenticationServices_SwiftUI.framework/Versions/A/_AuthenticationServices_SwiftUI'
-current-version: 618.2.12
+current-version: 619.1.26
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
-    symbols:         [ '_$s31_AuthenticationServices_SwiftUI03WebA7SessionV07BrowserF0V6sharedAEvgZ', 
+    symbols:         [ '_$s31_AuthenticationServices_SwiftUI03WebA7SessionV07BrowserF0V10standaloneAEvgZ', 
+                       '_$s31_AuthenticationServices_SwiftUI03WebA7SessionV07BrowserF0V6sharedAEvgZ', 
                        '_$s31_AuthenticationServices_SwiftUI03WebA7SessionV07BrowserF0V9ephemeralAEvgZ', 
                        '_$s31_AuthenticationServices_SwiftUI03WebA7SessionV07BrowserF0VMa', 
                        '_$s31_AuthenticationServices_SwiftUI03WebA7SessionV07BrowserF0VMn', 

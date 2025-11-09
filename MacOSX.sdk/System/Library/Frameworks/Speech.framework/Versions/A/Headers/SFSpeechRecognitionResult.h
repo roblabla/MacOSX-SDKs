@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 @class SFSpeechRecognitionMetadata;
 
 // A recognized utterance, corresponding to a segment of recorded audio with speech and containing one or more transcriptions hypotheses
-API_AVAILABLE(ios(10.0), macos(10.15))
+API_AVAILABLE(ios(10.0), macos(10.15), tvos(18))
 @interface SFSpeechRecognitionResult : NSObject <NSCopying, NSSecureCoding>
 
 @property (nonatomic, readonly, copy) SFTranscription *bestTranscription;
@@ -23,7 +23,7 @@ API_AVAILABLE(ios(10.0), macos(10.15))
 // True if the hypotheses will not change; speech processing is complete.
 @property (nonatomic, readonly, getter=isFinal) BOOL final;
 
-@property (nonatomic, nullable, readonly) SFSpeechRecognitionMetadata *speechRecognitionMetadata API_AVAILABLE(ios(14.0), macos(11.0));
+@property (nonatomic, nullable, readonly) SFSpeechRecognitionMetadata *speechRecognitionMetadata API_AVAILABLE(ios(14.0), macos(11.0), tvos(18));
 
 @end
 

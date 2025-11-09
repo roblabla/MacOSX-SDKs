@@ -18,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 @class UITextSelectionDisplayInteraction;
 @protocol UITextCursorView;
 
-UIKIT_EXTERN API_AVAILABLE(ios(17.0)) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(17.0)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @protocol UITextSelectionDisplayInteractionDelegate <NSObject>
 
 @optional
@@ -34,7 +34,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(17.0)) NS_SWIFT_UI_ACTOR
 /// @discussion This is the component that @c UITextInteraction  generally talks to in order to accomplish all selection display
 ///             using a collection of "managed subviews", i.e., selection view components that actually manage the display of the selection
 ///             and the various affordances for changing the selection.
-UIKIT_EXTERN API_AVAILABLE(ios(17.0)) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(17.0)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @interface UITextSelectionDisplayInteraction : NSObject <UIInteraction>
 
 /// Controls both the hidden sate of contained selection views as well as interactions that follow.

@@ -17,7 +17,7 @@ exports:
                        __Z20DERParseSequenceSpecPK7DERItemPK15DERSequenceSpecPvm, 
                        __Z20DERParseSequenceSpecyP6NSDataPK15DERSequenceSpecPvm, 
                        __Z20DERParseSequenceSpecyPK7DERItemPK15DERSequenceSpecPvm, 
-                       __Z27DERParseSequenceSpecContentP6NSDataPK15DERSequenceSpecPvm, 
+                       __Z25encodeSequenceContentSpecPKvPK15DERSequenceSpec, __Z27DERParseSequenceSpecContentP6NSDataPK15DERSequenceSpecPvm, 
                        __Z27DERParseSequenceSpecContentPK7DERItemPK15DERSequenceSpecPvm, 
                        __Z9ReadS32BEPK7DERItem, __Z9ReadS32BEPKh, __Z9ReadU16BEPK7DERItem, 
                        __Z9ReadU16BEPKh, _certificateRequestInfoSpec, _certificateRequestSpec, 

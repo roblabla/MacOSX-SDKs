@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/login.framework/Versions/A/login'
-current-version: 254.2
+current-version: 258
 reexported-libraries:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -99,8 +99,7 @@ exports:
                        LFSessionAgentMessageHandler, LFSessionLogoutConnection, LFSessionLogoutDelegate, 
                        LFSessionLogoutListener, LFSessionOwnerConnection, LFSessionOwnerListener, 
                        LFVolume, LFlogindListenerDelegate ]
-    objc-ivars:      [ LFListenerDelegate._listener, LFLogindListener._privilegedInterface, 
-                       LFSessionAgentMessageHandler._faceTimeCallCallbackBlockQueue, 
+    objc-ivars:      [ LFLogindListener._privilegedInterface, LFSessionAgentMessageHandler._faceTimeCallCallbackBlockQueue, 
                        LFSessionAgentMessageHandler._faceTimeCallCancelCallbackBlock, 
                        LFSessionAgentMessageHandler._faceTimeCallMuteCallbackBlock, 
                        LFSessionAgentMessageHandler._logoutBlockQueue, LFSessionAgentMessageHandler._logoutFailureBlock, 
@@ -111,7 +110,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/login.framework/Versions/A/Frameworks/loginsupport.framework/Versions/A/loginsupport'
-current-version: 254.2
+current-version: 258
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]

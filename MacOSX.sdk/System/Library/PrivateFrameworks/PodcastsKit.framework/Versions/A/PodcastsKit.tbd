@@ -7,12 +7,12 @@ swift-abi-version: 7
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
-    clients:         [ AirPodcasts, AirTrafficDevice, AppStoreKit, AppStoreKitTests, 
-                       AppStoreTests, AudioInternalIntentExtension, CoreKnowledge, 
-                       CoreKnowledgeTests, CorePodcasts, IMDebug, IntentsExtension, 
-                       KoaMapper, KoaMapperTests, MTSyncBundle, MacPodcastsKit, MacPodcastsStorageExtension, 
-                       MacQuicklookExtension, MediaPlaybackCore, MusicLibrary, NMTDiagnosticExtension, 
-                       NanoMarmosetSettings, NanoMusicSync, NanoPodcastsBulletinContents, 
+    clients:         [ AirPodcasts, AirTrafficDevice, AppStoreTests, AudioInternalIntentExtension, 
+                       CoreKnowledge, CoreKnowledgeTests, CorePodcasts, IMDebug, 
+                       IntentsExtension, KoaMapper, KoaMapperTests, MTSyncBundle, 
+                       MacPodcastsKit, MacPodcastsStorageExtension, MacQuicklookExtension, 
+                       MediaPlaybackCore, MusicLibrary, NMTDiagnosticExtension, NanoMarmosetSettings, 
+                       NanoMarmosetWidget, NanoMusicSync, NanoPodcastsBulletinContents, 
                        NanoPodcastsNotificationCenter, NowPlayingUI, PodcastContentService, 
                        PodcastContentServiceInspector, PodcastServices, PodcastServicesCore, 
                        PodcastServicesTests_iosmac, PodcastServicesTests_mac, Podcasts, 
@@ -20,17 +20,18 @@ allowable-clients:
                        PodcastsCacheDelete, PodcastsClassKitExtension, PodcastsDatabaseCore, 
                        PodcastsFoundation, PodcastsFoundationTests, PodcastsKit, 
                        PodcastsKitTests, PodcastsNanoPreferencesSyncClient, PodcastsNanoPreferencesSyncServer, 
-                       PodcastsNotificationExtension, PodcastsPlatformSupport, PodcastsPodcastsTodayExtension, 
-                       PodcastsSettingsPlugin, PodcastsStoreUI, PodcastsStoreUITests, 
+                       PodcastsNotificationExtension, PodcastsPodcastsTodayExtension, 
+                       PodcastsSettingsAppIntentsExtension, PodcastsSettingsPlugin, 
                        PodcastsTVTopShelfExtension, PodcastsTestSupport, PodcastsTests, 
                        PodcastsTestsMock, PodcastsTodayExtension, PodcastsUI, PodcastsUITests, 
                        PodcastsUIUtil, PodcastsUsagePlugin, PodcastsWidget, SPI, 
-                       ShelfKitStacks, SiriAudioDESPlugin, SiriAudioHeavyweightTests, 
+                       ShelfKit, ShelfKitCollectionViews, ShelfKitCollectionViewsTests, 
+                       ShelfKitStacks, ShelfKitTests, SiriAudioDESPlugin, SiriAudioHeavyweightTests, 
                        SiriAudioInternal, SiriAudioInternalTests, SiriAudioSupport, 
                        SiriAudioSupportIntegrationTests, SiriAudioSupportTests, UnifiedSiriTest, 
-                       com.apple.podcasts.DiagnosticExtension, com.apple.podcasts.PodcastsProductPageExtension, 
-                       com.apple.podcasts.SpotlightIndexExtension, com.apple.podcasts.appremoval, 
-                       iTunesPodcastLibrary, podcastsctl, siriaudio_helper ]
+                       com.apple.podcasts.DiagnosticExtension, com.apple.podcasts.SpotlightIndexExtension, 
+                       com.apple.podcasts.appremoval, iTunesPodcastLibrary, podcastsctl, 
+                       siriaudio_helper ]
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]

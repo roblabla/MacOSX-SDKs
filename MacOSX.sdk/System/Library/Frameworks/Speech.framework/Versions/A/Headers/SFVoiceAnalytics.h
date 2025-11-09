@@ -7,7 +7,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 // An acoustic feature
-API_AVAILABLE(ios(13), macos(10.15))
+API_AVAILABLE(ios(13), macos(10.15), tvos(18))
 @interface SFAcousticFeature : NSObject <NSCopying, NSSecureCoding>
 
 // Array of feature values per audio frame, corresponding to a segment of recorded audio
@@ -19,7 +19,7 @@ API_AVAILABLE(ios(13), macos(10.15))
 @end
 
 // Voice analytics corresponding to a segment of recorded audio
-API_AVAILABLE(ios(13), macos(10.15))
+API_AVAILABLE(ios(13), macos(10.15), tvos(18))
 @interface SFVoiceAnalytics : NSObject <NSCopying, NSSecureCoding>
 
 // Jitter measures vocal stability and is measured as an absolute difference between consecutive periods, divided by the average period. It is expressed as a percentage

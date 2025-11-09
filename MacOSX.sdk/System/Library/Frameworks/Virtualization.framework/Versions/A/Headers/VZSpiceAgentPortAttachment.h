@@ -5,7 +5,6 @@
 //  Copyright © 2022-2023 Apple Inc. All rights reserved.
 //
 
-
 #import <Virtualization/VZSerialPortAttachment.h>
 
 NS_ASSUME_NONNULL_BEGIN
@@ -28,10 +27,10 @@ VZ_EXPORT API_AVAILABLE(macos(13.0))
 /*!
  @abstract The Spice agent port name.
  @discussion
-     A console port configured with this name will spawn a Spice guest agent if supported by the guest.
+    A console port configured with this name will spawn a Spice guest agent if supported by the guest.
 
-     VZConsolePortConfiguration.attachment must be set to VZSpiceAgentPortAttachment.
-     VZVirtioConsolePortConfiguration.isConsole must remain false on a Spice agent port.
+    VZConsolePortConfiguration.attachment must be set to VZSpiceAgentPortAttachment.
+    VZVirtioConsolePortConfiguration.isConsole must remain false on a Spice agent port.
  */
 @property (class, readonly, copy) NSString *spiceAgentPortName;
 

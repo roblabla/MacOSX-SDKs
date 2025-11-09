@@ -7,6 +7,8 @@
 #error "Please import the NetworkExtension module instead of this file directly."
 #endif
 
+#import <Network/Network.h>
+
 NS_ASSUME_NONNULL_BEGIN
 
 /*!
@@ -52,7 +54,7 @@ API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, watchos, tvos)
 @interface NENetworkRule : NSObject <NSSecureCoding,NSCopying>
 
 /*!
- * @method initWithDestinationNetwork:prefix:protocol
+ * @method initWithDestinationNetworkEndpoint:prefix:protocol:
  * @discussion Initialize a newly-allocated NENetworkRule object that matches network traffic destined for a host within a specific network.
  * @param networkEndpoint An endpoint object that contains the port and address or network that the rule matches. This endpoint must contain an address, not a hostname.
  *        If the address is a wildcard address (0.0.0.0 or ::) then the rule will match all destinations except for loopback (127.0.0.1 or ::1). To match loopback traffic set the address to the loopback address.
@@ -61,7 +63,36 @@ API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, watchos, tvos)
  * @param protocol A NENetworkRuleProtocol value indicating the protocol that the rule matches.
  * @return The initialized NENetworkRule instance.
  */
-- (instancetype)initWithDestinationNetwork:(NWHostEndpoint *)networkEndpoint prefix:(NSUInteger)destinationPrefix protocol:(NENetworkRuleProtocol)protocol API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, watchos, tvos);
+- (instancetype)initWithDestinationNetworkEndpoint:(nw_endpoint_t)networkEndpoint prefix:(NSUInteger)destinationPrefix protocol:(NENetworkRuleProtocol)protocol API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, watchos, tvos, visionos);
+
+/*!
+ * @method initWithDestinationNetwork:prefix:protocol:
+ * @discussion Initialize a newly-allocated NENetworkRule object that matches network traffic destined for a host within a specific network.
+ * @param networkEndpoint An endpoint object that contains the port and address or network that the rule matches. This endpoint must contain an address, not a hostname.
+ *        If the address is a wildcard address (0.0.0.0 or ::) then the rule will match all destinations except for loopback (127.0.0.1 or ::1). To match loopback traffic set the address to the loopback address.
+ *        If the port string of the endpoint is "0" or is the empty string, then the rule will match traffic on any port destined for the given address or network.
+ * @param destinationPrefix An integer that in combination with the address in the endpoint specifies the destination network that the rule matches.
+ * @param protocol A NENetworkRuleProtocol value indicating the protocol that the rule matches.
+ * @return The initialized NENetworkRule instance.
+ */
+- (instancetype)initWithDestinationNetwork:(NWHostEndpoint *)networkEndpoint prefix:(NSUInteger)destinationPrefix protocol:(NENetworkRuleProtocol)protocol API_DEPRECATED_WITH_REPLACEMENT("initWithDestinationNetworkEndpoint:prefix:protocol:", macos(10.15, 15.0)) API_DEPRECATED_WITH_REPLACEMENT("initWithDestinationNetworkEndpoint:prefix:protocol:", ios(13.0, 18.0), watchos(6.0, 11.0), tvos(13.0, 18.0), visionos(1.0, 2.0));
+
+/*!
+ * @method initWithDestinationHostEndpoint:protocol:
+ * @discussion Initialize a newly-allocated NENetworkRule object that matches network traffic destined for a host within a specific DNS domain.
+ * @param hostEndpoint An endpoint object that contains the port and hostname or domain that the rule matches. This endpoint must contain a hostname, not an address.
+ *    If the port string of the `nw_endpoint_t` is "0" or is the empty string, then the rule will match traffic on any port destined for the given hostname or domain.
+ *    If the hostname string of the endpoint consists of a single label, then the rule will match traffic destined to the specific host with that single label as its name.
+ *    If the hostname string of the endpoint consists of 2 or more labels, then the rule will match traffic destined to hosts within the domain specified by the hostname string.
+ *    Examples:
+ *        [[NENetworkRule alloc] initWithDestinationHost:nw_endpoint_create_host("com", "0") protocol:NENetworkRuleProtocolAny] - matches all TCP and UDP traffic to the host named "com".
+ *        [[NENetworkRule alloc] initWithDestinationHost:nw_endpoint_create_host("example.com", "0") protocol:NENetworkRuleProtocolAny] - matches all TCP and UDP traffic to hosts in the "example.com" DNS domain, including all DNS queries for names in the example.com DNS domain.
+ *        [[NENetworkRule alloc] initWithDestinationHost:nw_endpoint_create_host("example.com", "53") protocol:NENetworkRuleProtocolAny] - matches all DNS queries/responses for hosts in the "example.com" domain.
+ *        [[NENetworkRule alloc] initWithDestinationHost:nw_endpoint_create_host("example.com", "443") protocol:NENetworkRuleProtocolTCP] - matches all TCP port 443 traffic to hosts in the "example.com" domain.
+ * @param protocol A NENetworkRuleProtocol value indicating the protocol that the rule matches.
+ * @return The initialized NENetworkRule instance.
+ */
+- (instancetype)initWithDestinationHostEndpoint:(nw_endpoint_t)hostEndpoint protocol:(NENetworkRuleProtocol)protocol API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, watchos, tvos, visionos);
 
 /*!
  * @method initWithDestinationHost:protocol:
@@ -78,10 +109,37 @@ API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, watchos, tvos)
  * @param protocol A NENetworkRuleProtocol value indicating the protocol that the rule matches.
  * @return The initialized NENetworkRule instance.
  */
-- (instancetype)initWithDestinationHost:(NWHostEndpoint *)hostEndpoint protocol:(NENetworkRuleProtocol)protocol API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, watchos, tvos);
+- (instancetype)initWithDestinationHost:(NWHostEndpoint *)hostEndpoint protocol:(NENetworkRuleProtocol)protocol API_DEPRECATED_WITH_REPLACEMENT("initWithDestinationHostEndpoint:protocol:", macos(10.15, 15.0)) API_DEPRECATED_WITH_REPLACEMENT("initWithDestinationHostEndpoint:protocol:", ios(13.0, 18.0), watchos(6.0, 11.0), tvos(13.0, 18.0), visionos(1.0, 2.0));
 
 /*!
- * @method initWithRemoteNetwork:prefix:localNetwork:prefix:interface:protocol:direction:
+ * @method initWithRemoteNetworkEndpoint:remotePrefix:localNetworkEndpoint:localPrefix:protocol:direction:
+ * @discussion Initialize a newly-allocated NENetworkRule object that matches traffic by remote network, local network, protocol, and direction. If both remoteNetwork and localNetwork are nil
+ *    then the rule will match all traffic of the given protocol and direction, except for loopback traffic. To match loopback traffic create a NENetworkRule with remoteNetwork and/or localNetwork properties that
+ *    explicitly match traffic to the loopback address (127.0.0.1 or ::1).
+ * @param remoteNetwork An endpoint object that contains the remote port and the remote address or network that the rule matches. This endpoint must contain an address, not a hostname.
+ *    If the address is a wildcard address (0.0.0.0 or ::) then the rule will match all destinations except for loopback (127.0.0.1 or ::1). To match loopback traffic set the address to the loopback address.
+ *    If the port string of the endpoint is "0" or is the empty string, then the rule will match traffic on any port coming from the remote network.
+ *    Pass nil to cause the rule to match any remote network.
+ * @param remotePrefix An integer that in combination with the address in remoteNetwork specifies the remote network that the rule matches.
+ * @param localNetwork An endpoint object that contains the local port and the local address or network that the rule matches. This endpoint must contain an address, not a hostname.
+ *    If the address is a wildcard address (0.0.0.0 or ::) then the rule will match all local networks except for loopback (127.0.0.1 or ::1). To match loopback traffic set the address to the loopback address.
+ *    If the port string of the endpoint is "0" or is the empty string, then the rule will match traffic on any port coming from the local network.
+ *    Pass nil to cause the rule to match any local network.
+ * @param localPrefix An integer that in combination with the address in localNetwork specifies the local network that the rule matches. This parameter
+ *    is ignored if localNetwork is nil.
+ * @param protocol A NENetworkRuleProtocol value indicating the protocol that the rule matches.
+ * @param direction A NETrafficDirection value indicating the direction of network traffic that the rule matches.
+ * @return The initialized NENetworkRule instance.
+ */
+- (instancetype)initWithRemoteNetworkEndpoint:(nullable nw_endpoint_t)remoteNetwork
+								 remotePrefix:(NSUInteger)remotePrefix
+						 localNetworkEndpoint:(nullable nw_endpoint_t)localNetwork
+								  localPrefix:(NSUInteger)localPrefix
+									 protocol:(NENetworkRuleProtocol)protocol
+									direction:(NETrafficDirection)direction API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, watchos, tvos, visionos);
+
+/*!
+ * @method initWithRemoteNetwork:remotePrefix:localNetwork:localPrefix:protocol:direction:
  * @discussion Initialize a newly-allocated NENetworkRule object that matches traffic by remote network, local network, protocol, and direction. If both remoteNetwork and localNetwork are nil
  *    then the rule will match all traffic of the given protocol and direction, except for loopback traffic. To match loopback traffic create a NENetworkRule with remoteNetwork and/or localNetwork properties that
  *    explicitly match traffic to the loopback address (127.0.0.1 or ::1).
@@ -105,13 +163,19 @@ API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, watchos, tvos)
 						 localNetwork:(nullable NWHostEndpoint *)localNetwork
 						  localPrefix:(NSUInteger)localPrefix
 							 protocol:(NENetworkRuleProtocol)protocol
-							direction:(NETrafficDirection)direction API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, watchos, tvos);
+							direction:(NETrafficDirection)direction API_DEPRECATED_WITH_REPLACEMENT("initWithRemoteNetworkEndpoint:remotePrefix:localNetworkEndpoint:localPrefix:protocol:direction:", macos(10.15, 15.0)) API_DEPRECATED_WITH_REPLACEMENT("initWithRemoteNetworkEndpoint:remotePrefix:localNetworkEndpoint:localPrefix:protocol:direction:", ios(13.0, 18.0), watchos(6.0, 11.0), tvos(13.0, 18.0), visionos(1.0, 2.0));
+
+/*!
+ * @property matchRemoteHostOrNetworkEndpoint
+ * @discussion The remote endpoint that the rule matches.
+ */
+@property (readonly, nullable) nw_endpoint_t matchRemoteHostOrNetworkEndpoint API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, watchos, tvos, visionos);
 
 /*!
  * @property matchRemoteEndpoint
  * @discussion The remote endpoint that the rule matches.
  */
-@property (readonly, nullable) NWHostEndpoint *matchRemoteEndpoint API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, watchos, tvos);
+@property (readonly, nullable) NWHostEndpoint *matchRemoteEndpoint API_DEPRECATED_WITH_REPLACEMENT("matchRemoteHostOrNetworkEndpoint", macos(10.15, 15.0)) API_DEPRECATED_WITH_REPLACEMENT("matchRemoteHostOrNetworkEndpoint", ios(13.0, 18.0), watchos(6.0, 11.0), tvos(13.0, 18.0), visionos(1.0, 2.0));
 
 /*!
  * @property matchRemotePrefix
@@ -120,10 +184,16 @@ API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, watchos, tvos)
 @property (readonly) NSUInteger matchRemotePrefix API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*!
+ * @property matchLocalNetworkEndpoint
+ * @discussion The local network that the rule matches.
+ */
+@property (readonly, nullable) nw_endpoint_t matchLocalNetworkEndpoint API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, watchos, tvos, visionos);
+
+/*!
  * @property matchLocalNetwork
  * @discussion The local network that the rule matches.
  */
-@property (readonly, nullable) NWHostEndpoint *matchLocalNetwork API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, watchos, tvos);
+@property (readonly, nullable) NWHostEndpoint *matchLocalNetwork API_DEPRECATED_WITH_REPLACEMENT("matchLocalNetworkEndpoint", macos(10.15, 15.0)) API_DEPRECATED_WITH_REPLACEMENT("matchLocalNetworkEndpoint", ios(13.0, 18.0), watchos(6.0, 11.0), tvos(13.0, 18.0), visionos(1.0, 2.0));
 
 /*!
  * @property matchLocalPrefix

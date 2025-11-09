@@ -15,6 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
  Representation of a body in 2D.
  */
 API_AVAILABLE(ios(13.0))
+NS_SWIFT_SENDABLE
 @interface ARBody2D : NSObject
 
 /**

@@ -1,6 +1,6 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.10 (swiftlang-5.10.0.12.5 clang-1500.3.9.1.1)
-// swift-module-flags: -target arm64e-apple-ios17.5-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-bare-slash-regex -user-module-version 452.11 -module-name Accessibility
+// swift-compiler-version: Apple Swift version 6.0 effective-5.10 (swiftlang-6.0.0.7.24 clang-1600.0.25.1)
+// swift-module-flags: -target arm64e-apple-ios18.0-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-bare-slash-regex -user-module-version 496.0.1 -module-name Accessibility
 @_exported import Accessibility
 import Foundation
 import Swift
@@ -66,7 +66,9 @@ extension Foundation.AttributeScopes {
     public let accessibilitySpeechPhoneticNotation: Foundation.AttributeScopes.AccessibilityAttributes.IPANotationAttribute
     @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
     public let accessibilitySpeechAnnouncementPriority: Foundation.AttributeScopes.AccessibilityAttributes.AnnouncementPriorityAttribute
+    @available(iOS 15.0, tvOS 15.0, watchOS 8.0, macOS 12.0, *)
     public typealias DecodingConfiguration = Foundation.AttributeScopeCodableConfiguration
+    @available(iOS 15.0, tvOS 15.0, watchOS 8.0, macOS 12.0, *)
     public typealias EncodingConfiguration = Foundation.AttributeScopeCodableConfiguration
   }
 }
@@ -91,6 +93,7 @@ extension Foundation.AttributeScopes.AccessibilityAttributes {
     public enum HeadingLevel : Swift.Int, Swift.Codable {
       case unspecified, h1, h2, h3, h4, h5, h6
       public init?(rawValue: Swift.Int)
+      @available(iOS 15.0, tvOS 15.0, watchOS 8.0, macOS 12.0, *)
       public typealias RawValue = Swift.Int
       public var rawValue: Swift.Int {
         get
@@ -124,6 +127,7 @@ extension Foundation.AttributeScopes.AccessibilityAttributes {
       case spreadsheet
       case wordProcessing
       public init?(rawValue: Swift.String)
+      @available(iOS 15.0, tvOS 15.0, watchOS 8.0, macOS 12.0, *)
       public typealias RawValue = Swift.String
       public var rawValue: Swift.String {
         get
@@ -184,6 +188,7 @@ extension Foundation.AttributeScopes.AccessibilityAttributes {
       case `default`
       case high
       public init?(rawValue: Swift.String)
+      @available(iOS 17.0, tvOS 17.0, watchOS 10.0, macOS 14.0, *)
       public typealias RawValue = Swift.String
       public var rawValue: Swift.String {
         get
@@ -197,20 +202,24 @@ public enum AccessibilityNotification {
     public init(_ announcement: Foundation.AttributedString)
     public init(_ announcement: Swift.String)
     public init(_ announcement: Foundation.NSAttributedString)
+    @available(iOS 17.0, tvOS 17.0, watchOS 10.0, macOS 14.0, *)
     public typealias _Info = Foundation.NSAttributedString
   }
   public struct LayoutChanged : Accessibility._AccessibilityNotifications {
     public init(_ element: Any? = nil)
+    @available(iOS 17.0, tvOS 17.0, watchOS 10.0, macOS 14.0, *)
     public typealias _Info = Any?
   }
   public struct ScreenChanged : Accessibility._AccessibilityNotifications {
     public init(_ element: Any? = nil)
+    @available(iOS 17.0, tvOS 17.0, watchOS 10.0, macOS 14.0, *)
     public typealias _Info = Any?
   }
   public struct PageScrolled : Accessibility._AccessibilityNotifications {
     public init(_ announcement: Foundation.AttributedString)
     public init(_ announcement: Swift.String)
     public init(_ announcement: Foundation.NSAttributedString)
+    @available(iOS 17.0, tvOS 17.0, watchOS 10.0, macOS 14.0, *)
     public typealias _Info = Foundation.NSAttributedString
   }
 }
@@ -223,8 +232,62 @@ public protocol _AccessibilityNotifications {
 extension Accessibility._AccessibilityNotifications {
   public func post()
 }
+extension Accessibility.AccessibilitySettings {
+  @available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+  public static var prefersNonBlinkingTextInsertionIndicator: Swift.Bool {
+    get
+  }
+}
+@available(iOS, introduced: 17.0, deprecated: 18.0, renamed: "AccessibilitySettings.prefersHorizontalTextLayout")
+@available(macOS, introduced: 14.0, deprecated: 15.0, renamed: "AccessibilitySettings.prefersHorizontalTextLayout")
+@available(tvOS, introduced: 17.0, deprecated: 18.0, renamed: "AccessibilitySettings.prefersHorizontalTextLayout")
+@available(watchOS, introduced: 10.0, deprecated: 11.0, renamed: "AccessibilitySettings.prefersHorizontalTextLayout")
+public func AXPrefersHorizontalTextLayout() -> Swift.Bool
+extension Accessibility.AccessibilitySettings {
+  @available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+  public static var prefersHorizontalTextLayout: Swift.Bool {
+    get
+  }
+  @available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+  public static var prefersHorizontalTextLayoutDidChangeNotification: Foundation.Notification.Name {
+    get
+  }
+}
+@available(iOS, introduced: 17.0, deprecated: 18.0, renamed: "AccessibilitySettings.animatedImagesEnabled")
+@available(macOS, introduced: 14.0, deprecated: 15.0, renamed: "AccessibilitySettings.animatedImagesEnabled")
+@available(tvOS, introduced: 17.0, deprecated: 18.0, renamed: "AccessibilitySettings.animatedImagesEnabled")
+@available(watchOS, introduced: 10.0, deprecated: 11.0, renamed: "AccessibilitySettings.animatedImagesEnabled")
+public func AXAnimatedImagesEnabled() -> Swift.Bool
+extension Accessibility.AccessibilitySettings {
+  @available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+  public static var animatedImagesEnabled: Swift.Bool {
+    get
+  }
+  @available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+  public static var animatedImagesEnabledDidChangeNotification: Foundation.Notification.Name {
+    get
+  }
+}
+extension Accessibility.AccessibilitySettings {
+  @available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+  public static func openSettings(for feature: Accessibility.AccessibilitySettings.Feature) async throws
+}
+extension Foundation.NSNotification.Name {
+  @available(iOS, introduced: 17.0, deprecated: 18.0, renamed: "AccessibilitySettings.prefersHorizontalTextLayout")
+  @available(macOS, introduced: 14.0, deprecated: 15.0, renamed: "AccessibilitySettings.prefersHorizontalTextLayoutDidChangeNotification")
+  @available(tvOS, introduced: 17.0, deprecated: 18.0, renamed: "AccessibilitySettings.prefersHorizontalTextLayoutDidChangeNotification")
+  @available(watchOS, introduced: 10.0, deprecated: 11.0, renamed: "AccessibilitySettings.prefersHorizontalTextLayoutDidChangeNotification")
+  public static let AXPrefersHorizontalTextLayoutDidChange: Foundation.Notification.Name
+  @available(iOS, introduced: 17.0, deprecated: 18.0, renamed: "AccessibilitySettings.animatedImagesEnabledDidChangeNotification")
+  @available(macOS, introduced: 14.0, deprecated: 15.0, renamed: "AccessibilitySettings.animatedImagesEnabledDidChangeNotification")
+  @available(tvOS, introduced: 17.0, deprecated: 18.0, renamed: "AccessibilitySettings.animatedImagesEnabledDidChangeNotification")
+  @available(watchOS, introduced: 10.0, deprecated: 11.0, renamed: "AccessibilitySettings.animatedImagesEnabledDidChangeNotification")
+  public static let AXAnimatedImagesEnabledDidChange: Foundation.Notification.Name
+}
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 extension Foundation.AttributeScopes.AccessibilityAttributes.HeadingLevelAttribute : Swift.Sendable {}
+@available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
+extension Foundation.AttributeScopes.AccessibilityAttributes.HeadingLevelAttribute : Swift.BitwiseCopyable {}
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 extension Foundation.AttributeScopes.AccessibilityAttributes.HeadingLevelAttribute.HeadingLevel : Swift.Equatable {}
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
@@ -234,7 +297,11 @@ extension Foundation.AttributeScopes.AccessibilityAttributes.HeadingLevelAttribu
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 extension Foundation.AttributeScopes.AccessibilityAttributes.TextCustomAttribute : Swift.Sendable {}
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
+extension Foundation.AttributeScopes.AccessibilityAttributes.TextCustomAttribute : Swift.BitwiseCopyable {}
+@available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 extension Foundation.AttributeScopes.AccessibilityAttributes.TextualContextAttribute : Swift.Sendable {}
+@available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
+extension Foundation.AttributeScopes.AccessibilityAttributes.TextualContextAttribute : Swift.BitwiseCopyable {}
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 extension Foundation.AttributeScopes.AccessibilityAttributes.TextualContextAttribute.TextualContext : Swift.Equatable {}
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
@@ -244,16 +311,29 @@ extension Foundation.AttributeScopes.AccessibilityAttributes.TextualContextAttri
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 extension Foundation.AttributeScopes.AccessibilityAttributes.IncludesPunctuationAttribute : Swift.Sendable {}
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
+extension Foundation.AttributeScopes.AccessibilityAttributes.IncludesPunctuationAttribute : Swift.BitwiseCopyable {}
+@available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 extension Foundation.AttributeScopes.AccessibilityAttributes.AdjustedPitchAttribute : Swift.Sendable {}
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
+extension Foundation.AttributeScopes.AccessibilityAttributes.AdjustedPitchAttribute : Swift.BitwiseCopyable {}
+@available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 extension Foundation.AttributeScopes.AccessibilityAttributes.SpellOutAttribute : Swift.Sendable {}
+@available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
+extension Foundation.AttributeScopes.AccessibilityAttributes.SpellOutAttribute : Swift.BitwiseCopyable {}
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 @available(*, deprecated, renamed: "AnnouncementPriorityAttribute")
 extension Foundation.AttributeScopes.AccessibilityAttributes.QueueAnnouncementAttribute : Swift.Sendable {}
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
+@available(*, deprecated, renamed: "AnnouncementPriorityAttribute")
+extension Foundation.AttributeScopes.AccessibilityAttributes.QueueAnnouncementAttribute : Swift.BitwiseCopyable {}
+@available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 extension Foundation.AttributeScopes.AccessibilityAttributes.IPANotationAttribute : Swift.Sendable {}
+@available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
+extension Foundation.AttributeScopes.AccessibilityAttributes.IPANotationAttribute : Swift.BitwiseCopyable {}
 @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 extension Foundation.AttributeScopes.AccessibilityAttributes.AnnouncementPriorityAttribute : Swift.Sendable {}
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
+extension Foundation.AttributeScopes.AccessibilityAttributes.AnnouncementPriorityAttribute : Swift.BitwiseCopyable {}
 @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 extension Foundation.AttributeScopes.AccessibilityAttributes.AnnouncementPriorityAttribute.AnnouncementPriority : Swift.Equatable {}
 @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)

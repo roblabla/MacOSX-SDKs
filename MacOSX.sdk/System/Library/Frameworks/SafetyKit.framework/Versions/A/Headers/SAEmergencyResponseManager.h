@@ -22,7 +22,7 @@ typedef NS_ENUM(NSInteger, SAEmergencyResponseManagerVoiceCallStatus) {
     SAEmergencyResponseManagerVoiceCallStatusActive, /// < the system dialed voice call is connected and active
     SAEmergencyResponseManagerVoiceCallStatusDisconnected, ///< the system dialed voice call is disconnected after being active
     SAEmergencyResponseManagerVoiceCallStatusFailed, ///< the system dialed voice call failed to connect
-} NS_SWIFT_NAME(SAEmergencyResponseManager.VoiceCallStatus) API_AVAILABLE(ios(16.0), macos(13.0), watchos(9.0)) API_UNAVAILABLE(tvos);
+} NS_SWIFT_NAME(SAEmergencyResponseManager.VoiceCallStatus) API_AVAILABLE(ios(16.0), macos(13.0), watchos(10.1)) API_UNAVAILABLE(tvos);
 
 
 /**
@@ -36,7 +36,7 @@ typedef NS_ENUM(NSInteger, SAEmergencyResponseManagerVoiceCallStatus) {
  *
  * SAEmergencyResponseManager requires an entitlement from Apple to at least one of the emergency event detections. To apply for the entitlement, see respective detection mechanisms
  */
-SA_EXTERN API_AVAILABLE(ios(16.0), macos(13.0), watchos(9.0)) API_UNAVAILABLE(tvos)
+SA_EXTERN API_AVAILABLE(ios(16.0), macos(13.0), watchos(10.1)) API_UNAVAILABLE(tvos)
 @interface SAEmergencyResponseManager : NSObject
 
 /**
@@ -78,7 +78,7 @@ SA_EXTERN API_AVAILABLE(ios(16.0), macos(13.0), watchos(9.0)) API_UNAVAILABLE(tv
  *
  * @sa SAEmergencyResponseManager
  */
-SA_EXTERN API_AVAILABLE(ios(16.0), macos(13.0), watchos(9.0)) API_UNAVAILABLE(tvos)
+SA_EXTERN API_AVAILABLE(ios(16.0), macos(13.0), watchos(10.1)) API_UNAVAILABLE(tvos)
 @protocol SAEmergencyResponseDelegate <NSObject>
 @optional
 

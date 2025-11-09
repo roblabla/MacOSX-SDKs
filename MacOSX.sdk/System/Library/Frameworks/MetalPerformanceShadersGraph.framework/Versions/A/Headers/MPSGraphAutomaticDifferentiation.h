@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 MPS_CLASS_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))
 @interface MPSGraph(MPSGraphGradientOps)
 
-/// Calculates partial derivative of primaryTensor with respect to the tensors.
+/// Calculates a partial derivative of primaryTensor with respect to the tensors.
 ///
 /// - Parameters:
 ///   - primaryTensor: Tensor to be differentiated (numerator).

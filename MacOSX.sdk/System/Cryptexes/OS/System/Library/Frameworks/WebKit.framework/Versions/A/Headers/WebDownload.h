@@ -32,10 +32,14 @@
 #import <Foundation/Foundation.h>
 #import <WebKit/WebKitAvailability.h>
 
-#if defined(TARGET_OS_MACCATALYST) && TARGET_OS_MACCATALYST
-#import <CFNetwork/CFNSURLConnection.h>
-#else
+#if TARGET_OS_OSX || TARGET_OS_MACCATALYST || (defined(USE_APPLE_INTERNAL_SDK) && USE_APPLE_INTERNAL_SDK)
 #import <Foundation/NSURLDownload.h>
+#else
+__attribute__((visibility("hidden")))
+@interface NSURLDownload : NSObject
+@end
+
+@protocol NSURLDownloadDelegate;
 #endif
 
 @class NSWindow;

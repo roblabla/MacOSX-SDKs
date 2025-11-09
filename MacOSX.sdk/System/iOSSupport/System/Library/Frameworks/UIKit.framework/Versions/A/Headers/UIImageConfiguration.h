@@ -23,13 +23,13 @@ UIKIT_EXTERN API_AVAILABLE(ios(13.0), tvos(13.0), watchos(6.0)) NS_SWIFT_SENDABL
 
 #if __has_include(<UIKit/UITraitCollection.h>)
 // The configuration's trait collection.
-@property (nonatomic, nullable, readonly) UITraitCollection *traitCollection;
+@property (nonatomic, nullable, readonly) UITraitCollection *traitCollection API_UNAVAILABLE(watchos);
 
 // inserts/applies the traitCollection to this configuration
-- (instancetype)configurationWithTraitCollection:(nullable UITraitCollection *)traitCollection;
+- (instancetype)configurationWithTraitCollection:(nullable UITraitCollection *)traitCollection API_UNAVAILABLE(watchos);
 
 // Creates a new configuration object with the specified trait collection.
-+ (instancetype)configurationWithTraitCollection:(nullable UITraitCollection *)traitCollection API_AVAILABLE(ios(17.0), tvos(17.0), watchos(10.0));
++ (instancetype)configurationWithTraitCollection:(nullable UITraitCollection *)traitCollection API_AVAILABLE(ios(17.0), tvos(17.0)) API_UNAVAILABLE(watchos);
 #endif
 
 // The configuration's locale. If nil/unspecified, the image will be looked up using the current locale.

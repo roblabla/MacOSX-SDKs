@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/MessageProtection.framework/Versions/A/MessageProtection'
-current-version: 329.120.3
+current-version: 369.0.10
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -30,7 +30,11 @@ exports:
                        '_$s17MessageProtection16SymmetricRatchetVN', '_$s17MessageProtection17GLTDiversifiedKeyCACycfC', 
                        '_$s17MessageProtection17GLTDiversifiedKeyCACycfc', '_$s17MessageProtection17GLTDiversifiedKeyCMa', 
                        '_$s17MessageProtection17GLTDiversifiedKeyCMn', '_$s17MessageProtection17GLTDiversifiedKeyCN', 
-                       '_$s17MessageProtection17GLTDiversifiedKeyCfD', '_$s17MessageProtection17TetraRatchetStateV16lastRekeyingDate10Foundation0H0VSgvpfi', 
+                       '_$s17MessageProtection17GLTDiversifiedKeyCfD', '_$s17MessageProtection17TetraErrorHelpersC23shouldMarkForStateReset6stringSbSo8NSStringC_tFZ', 
+                       '_$s17MessageProtection17TetraErrorHelpersCACycfC', '_$s17MessageProtection17TetraErrorHelpersCACycfc', 
+                       '_$s17MessageProtection17TetraErrorHelpersCMa', '_$s17MessageProtection17TetraErrorHelpersCMn', 
+                       '_$s17MessageProtection17TetraErrorHelpersCN', '_$s17MessageProtection17TetraErrorHelpersCfD', 
+                       '_$s17MessageProtection17TetraRatchetStateV16lastRekeyingDate10Foundation0H0VSgvpfi', 
                        '_$s17MessageProtection17TetraRatchetStateV22kemAmortizationCounters6UInt32Vvpfi', 
                        '_$s17MessageProtection17TetraRatchetStateV4fromACs7Decoder_p_tKcfC', 
                        '_$s17MessageProtection17TetraRatchetStateV6encode2toys7Encoder_p_tKF', 
@@ -57,6 +61,24 @@ exports:
                        '_$s17MessageProtection26GLTKeyDiversificationSwiftCACycfc', 
                        '_$s17MessageProtection26GLTKeyDiversificationSwiftCMa', '_$s17MessageProtection26GLTKeyDiversificationSwiftCMn', 
                        '_$s17MessageProtection26GLTKeyDiversificationSwiftCN', '_$s17MessageProtection26GLTKeyDiversificationSwiftCfD', 
+                       '_$s17MessageProtection29PaddyIncomingSymmetricRatchetV14serializedData10Foundation0H0VyF', 
+                       '_$s17MessageProtection29PaddyIncomingSymmetricRatchetV18ratchetSenderKeyID10Foundation4DataVyF', 
+                       '_$s17MessageProtection29PaddyIncomingSymmetricRatchetV4data15conversationDSTAC10Foundation4DataV_AHtKcfC', 
+                       '_$s17MessageProtection29PaddyIncomingSymmetricRatchetV4open_17authenticatedData5index10Foundation0I0VAI_AIs6UInt32VtKF', 
+                       '_$s17MessageProtection29PaddyIncomingSymmetricRatchetV9senderKey15conversationDSTAC9CryptoKit0eH0V_10Foundation4DataVtKcfC', 
+                       '_$s17MessageProtection29PaddyIncomingSymmetricRatchetV9senderKey5index0gH2ID15conversationDSTAC9CryptoKit0eH0V_s6UInt32V10Foundation4DataVAOtKcfC', 
+                       '_$s17MessageProtection29PaddyIncomingSymmetricRatchetVMa', 
+                       '_$s17MessageProtection29PaddyIncomingSymmetricRatchetVMn', 
+                       '_$s17MessageProtection29PaddyIncomingSymmetricRatchetVN', 
+                       '_$s17MessageProtection29PaddyOutgoingSymmetricRatchetV14serializedData10Foundation0H0VyF', 
+                       '_$s17MessageProtection29PaddyOutgoingSymmetricRatchetV15conversationDSTAC10Foundation4DataV_tKcfC', 
+                       '_$s17MessageProtection29PaddyOutgoingSymmetricRatchetV15exportSenderKey9CryptoKit0eI0V3key_s6UInt64V5indextyF', 
+                       '_$s17MessageProtection29PaddyOutgoingSymmetricRatchetV18ratchetSenderKeyID10Foundation4DataVyF', 
+                       '_$s17MessageProtection29PaddyOutgoingSymmetricRatchetV4data15conversationDSTAC10Foundation4DataV_AHtKcfC', 
+                       '_$s17MessageProtection29PaddyOutgoingSymmetricRatchetV4seal7message17authenticatedData10Foundation0J0V10ciphertext_s6UInt32V0H8KeyIndextAI_AItKF', 
+                       '_$s17MessageProtection29PaddyOutgoingSymmetricRatchetVMa', 
+                       '_$s17MessageProtection29PaddyOutgoingSymmetricRatchetVMn', 
+                       '_$s17MessageProtection29PaddyOutgoingSymmetricRatchetVN', 
                        '_$s17MessageProtection4HKDFC13deriveKeyWith_4salt10outputSizeSo6NSDataCAH_AHSitFZ', 
                        '_$s17MessageProtection4HKDFCACycfC', '_$s17MessageProtection4HKDFCACycfc', 
                        '_$s17MessageProtection4HKDFCMa', '_$s17MessageProtection4HKDFCMn', 
@@ -126,7 +148,8 @@ exports:
                        NGMPublicDeviceIdentity, NGMReplayManager, NGMRollingBitmaskBuffer, 
                        NGMTimeBasedEvaluations, SecMessageLegacyFullIdentity, SecMessageLegacyPublicIdentity, 
                        TetraPublicSigningKeyWrapper, TetraSessionSerialized, TetraSigningKeyWrapper, 
-                       _TtC17MessageProtection17GLTDiversifiedKey, _TtC17MessageProtection17TetraRegistration, 
-                       _TtC17MessageProtection26GLTKeyDiversificationSwift, _TtC17MessageProtection27TetraMessageSignerFormatter, 
-                       _TtC17MessageProtection4HKDF, _TtC17MessageProtection8TetraAPI ]
+                       _TtC17MessageProtection17GLTDiversifiedKey, _TtC17MessageProtection17TetraErrorHelpers, 
+                       _TtC17MessageProtection17TetraRegistration, _TtC17MessageProtection26GLTKeyDiversificationSwift, 
+                       _TtC17MessageProtection27TetraMessageSignerFormatter, _TtC17MessageProtection4HKDF, 
+                       _TtC17MessageProtection8TetraAPI ]
 ...

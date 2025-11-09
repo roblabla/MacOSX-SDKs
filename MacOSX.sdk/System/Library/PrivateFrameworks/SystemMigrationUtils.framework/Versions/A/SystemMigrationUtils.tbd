@@ -20,7 +20,7 @@ exports:
                        _SMUDTFirmlinkDestinationKey, _SMUDTFirmlinkSourceKey, _SMUDTTemplateReceiptIdentifier, 
                        _SMUDataTemplateErrorDomain, _SystemMigrationUtilsVersionNumber, 
                        _SystemMigrationUtilsVersionString, _getPairedVolumeWithRole, 
-                       _isCaseSensitive, _logBatteryState ]
+                       _isCaseSensitive ]
     objc-classes:    [ SMAnalyticsFieldConverter, SMAnalyticsManager, SMConnectionFamilyIcons, 
                        SMLogging, SMPathSizer, SMSystemConfiguration, SMSystem_FileManager_DiskBased, 
                        SMSystem_FileManager_ROSV, SMSystem_FileManager_Traditional, 

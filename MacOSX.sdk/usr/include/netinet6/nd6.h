@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2022 Apple Inc. All rights reserved.
+ * Copyright (c) 2000-2024 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  *
@@ -119,20 +119,6 @@ struct in6_nbrinfo {
 };
 
 
-#define DRLSTSIZ 10
-#define PRLSTSIZ 10
-
-struct  in6_drlist {
-	char ifname[IFNAMSIZ];
-	struct {
-		struct  in6_addr rtaddr;
-		u_char  flags;
-		u_short rtlifetime;
-		u_long  expire;
-		u_short if_index;
-	} defrouter[DRLSTSIZ];
-};
-
 
 /* valid values for stateflags */
 #define NDDRF_INSTALLED 0x01     /* installed in the routing table */
@@ -140,6 +126,7 @@ struct  in6_drlist {
 #define NDDRF_STATIC    0x04     /* for internal use only */
 #define NDDRF_MAPPED    0x08     /* Default router addr is mapped to a different one for routing */
 #define NDDRF_INELIGIBLE     0x10     /* Default router entry is ineligible for default router selection */
+#define NDDRF_LOCAL          0x20     /* Router's address is locally hosted as well */
 
 struct  in6_defrouter {
 	struct  sockaddr_in6 rtaddr;
@@ -148,23 +135,6 @@ struct  in6_defrouter {
 	u_short rtlifetime;
 	u_long  expire;
 	u_short if_index;
-};
-
-
-struct  in6_prlist {
-	char ifname[IFNAMSIZ];
-	struct {
-		struct  in6_addr prefix;
-		struct prf_ra raflags;
-		u_char  prefixlen;
-		u_char  origin;
-		u_long  vltime;
-		u_long  pltime;
-		u_long  expire;
-		u_short if_index;
-		u_short advrtrs; /* number of advertisement routers */
-		struct  in6_addr advrtr[DRLSTSIZ]; /* XXX: explicit limit */
-	} prefix[PRLSTSIZ];
 };
 
 

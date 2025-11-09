@@ -14,7 +14,7 @@ NS_HEADER_AUDIT_BEGIN(nullability, sendability)
  * to gather information in order to create UICollectionViewLayoutAttributes) this protocol allows
  * translation between the data source index path into the presentation index path (i.e. layout) state.
  */
-API_AVAILABLE(ios(11.0), tvos(11.0)) NS_SWIFT_UI_ACTOR
+API_AVAILABLE(ios(11.0), tvos(11.0)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @protocol UIDataSourceTranslating <NSObject>
 
 /* Translate (if needed) a Data Source section index to its Presentation section index value.

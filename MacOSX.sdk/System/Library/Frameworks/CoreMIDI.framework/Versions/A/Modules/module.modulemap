@@ -5,6 +5,18 @@ framework module CoreMIDI [extern_c] {
 	exclude header "MIDICapabilityInquiry.h"
     exclude header "MIDICapabilityInquiryPriv.h"
 
+    exclude header "MIDIUMPCI.h"
+
+    exclude header "MIDIUMPEndpointManager.h"
+    exclude header "MIDIUMPEndpoint.h"
+    exclude header "MIDIUMPMutableEndpoint.h"
+    exclude header "MIDIUMPFunctionBlock.h"
+    exclude header "MIDIUMPMutableFunctionBlock.h"
+
+    exclude header "MIDICIDeviceManager.h"
+    exclude header "MIDICIDevice.h"
+    exclude header "MIDIUMPCIProfile.h"
+
 	export *
 	module * { export * }
 }

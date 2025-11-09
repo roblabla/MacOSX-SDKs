@@ -1,7 +1,7 @@
 /*
     NSWindow.h
     Application Kit
-    Copyright (c) 1994-2023, Apple Inc.
+    Copyright (c) 1994-2024, Apple Inc.
     All rights reserved.
 */
 
@@ -81,13 +81,11 @@ enum {
  * @typedef NSWindowSharingType
  *
  * @const NSWindowSharingNone          Window contents may not be read by another process.
- * @const NSWindowSharingReadOnly   Window contents may be read but not modified by another process.
- * @const NSWindowSharingReadWrite  Window contents may be read or modified by another process.
+ * @const NSWindowSharingReadOnly   Window contents may be read by another process.
  */
 typedef NS_ENUM(NSUInteger, NSWindowSharingType) {
     NSWindowSharingNone = 0,
     NSWindowSharingReadOnly = 1,
-    NSWindowSharingReadWrite = 2
 } API_AVAILABLE(macos(10.5));
 
 /*!
@@ -111,7 +109,7 @@ typedef NS_ENUM(NSUInteger, NSWindowSharingType) {
  *
  * @discussion You may specify at most one of \c NSWindowCollectionBehaviorParticipatesInCycle or \c NSWindowCollectionBehaviorIgnoresCycle.  If unspecified, the window gets the default behavior determined by its window level.
  *
- * @const NSWindowCollectionBehaviorParticipatesInCycle Default behavior if `windowLevel != NSNormalWindowLevel`.
+ * @const NSWindowCollectionBehaviorParticipatesInCycle Default behavior if `windowLevel == NSNormalWindowLevel`.
  * @const NSWindowCollectionBehaviorIgnoresCycle Default behavior if `windowLevel != NSNormalWindowLevel`.
  *
  * @discussion You may specify at most one of \c NSWindowCollectionBehaviorFullScreenPrimary, \c NSWindowCollectionBehaviorFullScreenAuxiliary, or \c NSWindowCollectionBehaviorFullScreenNone.
@@ -238,7 +236,7 @@ typedef NS_ENUM(NSInteger, NSWindowTitleVisibility) {
  *
  * @const NSWindowToolbarStyleAutomatic The default value. The style will be determined by the window's given configuration.
  * @const NSWindowToolbarStyleExpanded The toolbar will appear below the window title.
- * @const NSWindowToolbarStylePreference The toolbar will appear below the window title and the items in the toolbar will attempt to have equal widths when possible.
+ * @const NSWindowToolbarStylePreference For Settings windows only. The toolbar will appear below the window title and the items in the toolbar will attempt to have equal widths when possible.
  * @const NSWindowToolbarStyleUnified The window title will appear inline with the toolbar when visible.
  * @const NSWindowToolbarStyleUnifiedCompact Same as \c NSWindowToolbarStyleUnified, but with reduced margins in the toolbar allowing more focus to be on the contents of the window.
  */
@@ -352,6 +350,12 @@ typedef NSString * NSWindowTabbingIdentifier NS_SWIFT_BRIDGED_TYPEDEF;
 - (void)setFrameOrigin:(NSPoint)point;
 - (void)setFrameTopLeftPoint:(NSPoint)point;
 - (NSPoint)cascadeTopLeftFromPoint:(NSPoint)topLeftPoint;
+
+/*!
+ @abstract The frame to use when cascading or sizing a new window based on the receiver's position or size. This may be different from `frame` when the receiver is positioned by the system.
+*/
+@property (readonly) NSRect cascadingReferenceFrame API_AVAILABLE(macos(15.0));
+
 @property (readonly) NSRect frame;
 
 /*! Subclasses can override \c animationResizeTime: to control the total time for the frame change.
@@ -434,7 +438,7 @@ typedef NSString * NSWindowTabbingIdentifier NS_SWIFT_BRIDGED_TYPEDEF;
 @property (readonly) BOOL canBecomeKeyWindow;
 @property (readonly) BOOL canBecomeMainWindow;
 
-/*! Makes the window key and main if eligible, updating NSAppication's `-keyWindow` and `-mainWindow` properties.
+/*! Makes the window key and main if eligible, updating NSApplication's `-keyWindow` and `-mainWindow` properties.
  */
 - (void)makeKeyWindow;
 
@@ -512,7 +516,7 @@ typedef NSString * NSWindowTabbingIdentifier NS_SWIFT_BRIDGED_TYPEDEF;
 @property (getter=isOpaque) BOOL opaque;
 
 
-/*! `-setSharingType:` specifies whether the window content can be read and/or written from another process.  The default sharing type is \c NSWindowSharingReadOnly, which means other processes can read the window content (eg. for window capture) but cannot modify it.  If you set your window sharing type to \c NSWindowSharingNone, so that the content cannot be captured, your window will also not be able to participate in a number of system services, so this setting should be used with caution.  If you set your window sharing type to \c NSWindowSharingReadWrite, other processes can both read and modify the window content.
+/*! `-setSharingType:` specifies whether the window content can be read from another process.  The default sharing type is \c NSWindowSharingReadOnly, which means other processes can read the window content (eg. for window capture) but cannot modify it.  If you set your window sharing type to \c NSWindowSharingNone, so that the content cannot be captured, your window will also not be able to participate in a number of system services, so this setting should be used with caution.
 */
 @property NSWindowSharingType sharingType API_AVAILABLE(macos(10.5));
 
@@ -521,11 +525,6 @@ typedef NSString * NSWindowTabbingIdentifier NS_SWIFT_BRIDGED_TYPEDEF;
 @property BOOL allowsConcurrentViewDrawing API_AVAILABLE(macos(10.6));
 
 @property BOOL displaysWhenScreenProfileChanges;
-
-/*!
- In recent macOS versions this method does not do anything and should not be called. 
- */
-- (void)disableScreenUpdatesUntilFlush;
 
 /*! This API controls whether the receiver is permitted onscreen before the user has logged in.  This property is off by default.  Alert panels and windows presented by input managers are examples of windows which should have this property set.
 */
@@ -735,7 +734,7 @@ typedef NSString * NSWindowTabbingIdentifier NS_SWIFT_BRIDGED_TYPEDEF;
         A window that is replacing the reciever in representing the user's current activity.
      @param completionHandler
         A completion block that is called after the request finishes.
-        @param error
+        @c error
             In the event of a failed transfer request, a non-nil error contains details about the failure.
 */
 - (void)transferWindowSharingToWindow:(NSWindow *)window completionHandler:(void(^)(NSError * _Nullable error))completionHandler API_AVAILABLE(macos(13.3));
@@ -744,6 +743,30 @@ typedef NSString * NSWindowTabbingIdentifier NS_SWIFT_BRIDGED_TYPEDEF;
  @abstract Indicates whether the receiver is the subject of an active SharePlay sharing session.
  */
 @property (readonly) BOOL hasActiveWindowSharingSession API_AVAILABLE(macos(13.3));
+
+/*!
+ @abstract Request sharing of window.  If there is an available ScreenCaptureKit sharing session, an alert will be presented asking the user to confirm the share
+ @param window
+ The window to share
+ @param completionHandler
+ A completion block that is called after the request finishes.
+ @c error
+ The error will be non-nil if the request does not result in a window being shared.  The error will be NSUserCancelledError if there is no ScreenCaptureKit session, or if the user rejects the offer to share.  If sharing fails for some other reason, the error will provide the details.
+ */
+- (void)requestSharingOfWindow:(NSWindow *)window completionHandler:(void (^)(NSError * _Nullable error))completionHandler NS_SWIFT_NAME(requestSharingOfWindow(_:completionHandler:)) API_AVAILABLE(macos(15.0));
+
+/*!
+ @abstract Request sharing of window to be provided later.  If there is an available ScreenCaptureKit sharing session, an alert will be presented asking the user to confirm the share.  The delegate will be asked to provide the window to share via windowForSharingRequestFromWindow:
+ @param image
+ An image showing a preview of the window to share
+ @param title
+ The title to show in a confirmation dialog
+ @param completionHandler
+ A completion block that is called after the request finishes.
+ @c error
+ The error will be non-nil if the request does not result in a window being shared.  The error will be NSUserCancelledError if there is no ScreenCaptureKit session, or if the user rejects the offer to share.  If sharing fails for some other reason, the error will provide the details.
+ */
+- (void)requestSharingOfWindowUsingPreview:(NSImage *)image title:(NSString *)title completionHandler:(void (^)(NSError * _Nullable error))completionHandler NS_SWIFT_NAME(requestSharingOfWindow(usingPreview:title:completionHandler:)) API_AVAILABLE(macos(15.0));
 
 #pragma mark - Other
 
@@ -781,21 +804,13 @@ typedef NSString * NSWindowTabbingIdentifier NS_SWIFT_BRIDGED_TYPEDEF;
 @end
 
 @interface NSWindow(NSDrag)
-- (void)dragImage:(NSImage *)image at:(NSPoint)baseLocation offset:(NSSize)initialOffset event:(NSEvent *)event pasteboard:(NSPasteboard *)pboard source:(id)sourceObj slideBack:(BOOL)slideFlag;
+
+- (NSDraggingSession *)beginDraggingSessionWithItems:(NSArray<NSDraggingItem *> *)items event:(NSEvent *)event source:(id<NSDraggingSource>)source NS_SWIFT_NAME(beginDraggingSession(items:event:source:)) API_AVAILABLE(macos(15.0));
+
+- (void)dragImage:(NSImage *)image at:(NSPoint)baseLocation offset:(NSSize)initialOffset event:(NSEvent *)event pasteboard:(NSPasteboard *)pboard source:(id)sourceObj slideBack:(BOOL)slideFlag API_DEPRECATED("Use -[NSWindow beginDraggingSessionWithItems:event:source:] instead.", macos(10.0, API_TO_BE_DEPRECATED));
 
 - (void)registerForDraggedTypes:(NSArray<NSPasteboardType> *)newTypes;
 - (void)unregisterDraggedTypes;
-@end
-
-@interface NSWindow(NSCarbonExtensions)
-
-/*! Create an \c NSWindow for a Carbon window - \c windowRef must be a Carbon \c WindowRef - see `MacWindows.h`. This method can only be called on \c NSWindow, and not subclasses of \c NSWindow. On 10.11, it will throw an exception if this is done.
- */
-- (nullable NSWindow *)initWithWindowRef:(void * /* WindowRef */)windowRef;
-
-/*! Return the Carbon \c WindowRef for this window, creating if necessary: - see `MacWindows.h`.
- */
-@property (readonly) void * /* WindowRef */windowRef NS_RETURNS_INNER_POINTER;
 @end
 
 API_AVAILABLE(macos(14.0))
@@ -878,6 +893,10 @@ API_AVAILABLE(macos(14.0))
 /*! Preview representable activity items, used for sharing and collaboration.
 */
 - (NSArray<id<NSPreviewRepresentableActivityItem>> *_Nullable)previewRepresentableActivityItemsForWindow:(NSWindow *)window NS_SWIFT_UI_ACTOR API_AVAILABLE(macos(13.2)) API_UNAVAILABLE(ios);
+
+/*! Method called to get the window to share once sharing is confirmed, after a request is initiated by requestSharingOfWindowUsingPreview:title:completionHandler:. Implement this on the delegate of the requesting window
+ */
+- (nullable NSWindow *)windowForSharingRequestFromWindow:(NSWindow *)window NS_SWIFT_UI_ACTOR API_AVAILABLE(macos(15.0));
 
 /* Notifications
 */
@@ -1009,8 +1028,12 @@ typedef NS_ENUM(NSUInteger, NSWindowBackingLocation) {
 @property NSWindowBackingLocation preferredBackingLocation API_DEPRECATED("This property does not do anything and should not be used", macos(10.5,10.14));
 @property (readonly) NSWindowBackingLocation backingLocation API_DEPRECATED("This property does not do anything and should not be used", macos(10.5,10.14));
 
-// showsResizeIndicator is soft-deprecated in 10.14. It is ignored on 10.7 and newer, and should not be used.
-@property BOOL showsResizeIndicator;
+@property BOOL showsResizeIndicator API_DEPRECATED("This property does not do anything and should not be used.", macos(10.0,15.0));
+
+- (nullable NSWindow *)initWithWindowRef:(void * /* WindowRef */)windowRef API_DEPRECATED("This method should not be used.", macos(10.0,15.0));
+@property (readonly) void * /* WindowRef */windowRef NS_RETURNS_INNER_POINTER API_DEPRECATED("This method should not be used.", macos(10.0,15.0));
+
+- (void)disableScreenUpdatesUntilFlush API_DEPRECATED("This method does not do anything and should not be called.", macos(10.0,15.0));
 
 @end
 
@@ -1038,6 +1061,8 @@ static const NSWindowButton NSWindowFullScreenButton API_DEPRECATED("The standar
 /* Deprecated window levels
  */
 static const NSWindowLevel NSDockWindowLevel API_DEPRECATED("", macos(10.0,10.13)) = kCGDockWindowLevel;
+
+static const NSWindowSharingType NSWindowSharingReadWrite NS_SWIFT_NAME(NSWindowSharingType.readWrite) API_DEPRECATED("Use NSWindowSharingReadOnly instead", macos(10.5, 15.0)) = (NSWindowSharingType)2;
 
 
 

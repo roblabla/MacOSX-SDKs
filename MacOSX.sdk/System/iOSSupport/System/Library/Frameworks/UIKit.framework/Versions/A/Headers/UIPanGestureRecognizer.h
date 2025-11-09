@@ -27,7 +27,7 @@ typedef NS_OPTIONS(NSInteger, UIScrollTypeMask) {
     UIScrollTypeMaskAll         = UIScrollTypeMaskDiscrete | UIScrollTypeMaskContinuous,
 } API_AVAILABLE(ios(13.4)) API_UNAVAILABLE(tvos, watchos);
 
-UIKIT_EXTERN API_AVAILABLE(ios(3.2)) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(3.2)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @interface UIPanGestureRecognizer : UIGestureRecognizer 
 
 @property (nonatomic)          NSUInteger minimumNumberOfTouches API_UNAVAILABLE(tvos);   // default is 1. the minimum number of touches required to match

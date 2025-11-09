@@ -6,6 +6,7 @@
 //
 
 #import <MapKit/MKFoundation.h>
+#import <MapKit/MKMapItemIdentifier.h>
 #import <MapKit/MKPlacemark.h>
 #import <MapKit/MKPointOfInterestCategory.h>
 
@@ -17,6 +18,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 NS_CLASS_AVAILABLE(10_9, 6_0) __TVOS_AVAILABLE(9_2)
 @interface MKMapItem : NSObject
+
+@property (nonatomic, nullable, readonly) MKMapItemIdentifier *identifier API_AVAILABLE(ios(18.0), visionos(2.0), tvos(18.0), macos(15.0)) API_UNAVAILABLE(watchos);
+@property (nonatomic, readonly) NSSet<MKMapItemIdentifier *> *alternateIdentifiers API_AVAILABLE(ios(18.0), visionos(2.0), tvos(18.0), macos(15.0)) API_UNAVAILABLE(watchos);
 
 // If this MKMapItem represents your current location (isCurrentLocation == YES), then placemark will be nil.
 @property (nonatomic, readonly) MKPlacemark *placemark;

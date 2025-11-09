@@ -169,7 +169,7 @@ namespace coreimage
     
     //MARK: - Destination
     
-    typedef struct
+    typedef struct Destination
     {
         // Returns the position, in working space coordinates, of the pixel currently being computed.
         // The destination space refers to the coordinate space of the image you are rendering.

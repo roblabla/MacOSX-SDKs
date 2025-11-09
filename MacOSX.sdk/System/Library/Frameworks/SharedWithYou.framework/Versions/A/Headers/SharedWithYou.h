@@ -22,10 +22,8 @@
 
 #if TARGET_OS_IPHONE
 #import <SharedWithYou/SWRemoveParticipantAlertController.h>
-#else
-#import <SharedWithYou/SWRemoveParticipantAlert.h>
 #endif
 
-#if TARGET_OS_OSX
+#import <SharedWithYou/SWRemoveParticipantAlert.h>
+
 #import <SharedWithYou/NSPasteboardItem+SWCollaborationMetadata.h>
-#endif

@@ -28,7 +28,7 @@
 /* Return the Metal device for the GPU currently being used to drive a given display */
 /* Note: On systems with automatic graphics switching enabled, this value can change at
    almost any time. */
-CG_EXTERN id<MTLDevice> __nullable CGDirectDisplayCopyCurrentMetalDevice(CGDirectDisplayID display) NS_RETURNS_RETAINED CG_AVAILABLE_STARTING(10.11);
+CG_EXTERN id<MTLDevice> __nullable CGDirectDisplayCopyCurrentMetalDevice(CGDirectDisplayID display) NS_RETURNS_RETAINED API_AVAILABLE(macos(10.11));
 
 #ifdef __cplusplus
 }   /* extern "C" */

@@ -372,8 +372,6 @@ DRBurnSessionBeginProgressDialog(
 }
 #endif
 
-#endif /* _H_DRBurnSession */
-
-
 API_UNAVAILABLE_END
 
+#endif /* _H_DRBurnSession */

@@ -6,6 +6,8 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <LocalAuthentication/LABiometryType.h>
+#import <LocalAuthentication/LADomainState.h>
 #import <LocalAuthentication/LAPublicDefines.h>
 
 NS_ASSUME_NONNULL_BEGIN
@@ -48,8 +50,16 @@ typedef NS_ENUM(NSInteger, LAPolicy)
     ///
     ///             Watch authentication dialog looks and behaves similarly to the biometric variant. Users can
     ///             confirm authentication by double-clicking the side button on their watch.
-    LAPolicyDeviceOwnerAuthenticationWithWatch API_AVAILABLE(macos(10.15), macCatalyst(13.0)) API_UNAVAILABLE(ios, watchos, tvos) = kLAPolicyDeviceOwnerAuthenticationWithWatch,
+    LAPolicyDeviceOwnerAuthenticationWithWatch API_DEPRECATED_WITH_REPLACEMENT("LAPolicyDeviceOwnerAuthenticationWithCompanion", macos(10.15, 15.0), macCatalyst(13.0, 18.0)) API_UNAVAILABLE(ios, watchos, tvos) = kLAPolicyDeviceOwnerAuthenticationWithWatch,
     
+    /// Device owner will be authenticated by a companion device e.g. Watch, Mac, etc.
+    ///
+    /// @discussion Companion authentication is required. If no nearby paired companion device can be found,
+    ///             LAErrorCompanionNotAvailable is returned.
+    ///
+    ///             Users should follow instructions on the companion device to authenticate.
+    LAPolicyDeviceOwnerAuthenticationWithCompanion API_AVAILABLE(macos(15.0), macCatalyst(18.0), ios(18.0)) API_UNAVAILABLE(watchos, tvos, visionos) = kLAPolicyDeviceOwnerAuthenticationWithCompanion,
+
     /// Device owner will be authenticated by biometry or Watch.
     ///
     /// @discussion Watch or biometric authentication is required. If no nearby paired watch device can be found,
@@ -59,8 +69,18 @@ typedef NS_ENUM(NSInteger, LAPolicy)
     ///             Watch authentication dialog looks and behaves similarly to biometric variant. When both
     ///             mechanisms are available, user is asked to use biometry and watch authentication will run in
     ///             parallel.
-    LAPolicyDeviceOwnerAuthenticationWithBiometricsOrWatch API_AVAILABLE(macos(10.15), macCatalyst(13.0)) API_UNAVAILABLE(ios, watchos, tvos) = kLAPolicyDeviceOwnerAuthenticationWithBiometricsOrWatch,
-    
+    LAPolicyDeviceOwnerAuthenticationWithBiometricsOrWatch API_DEPRECATED_WITH_REPLACEMENT("LAPolicyDeviceOwnerAuthenticationWithBiometricsOrCompanion", macos(10.15, 15.0), macCatalyst(13.0, 18.0)) API_UNAVAILABLE(ios, watchos, tvos) = kLAPolicyDeviceOwnerAuthenticationWithBiometricsOrWatch,
+
+    /// Device owner will be authenticated by biometry or a companion device e.g. Watch, Mac, etc.
+    ///
+    /// @discussion Companion or biometric authentication is required. If no nearby paired companion device can be found,
+    ///             it behaves as LAPolicyDeviceOwnerAuthenticationWithBiometrics. Similarly, if biometry is
+    ///             unavailable it behaves as LAPolicyDeviceOwnerAuthenticationWithCompanion.
+    ///
+    ///             When both mechanisms are available, user is asked to use biometry and companion authentication
+    ///             will run in parallel. Users should follow instructions on the companion device to authenticate.
+    LAPolicyDeviceOwnerAuthenticationWithBiometricsOrCompanion API_AVAILABLE(macos(15.0), macCatalyst(18.0), ios(18.0)) API_UNAVAILABLE(watchos, tvos, visionos) = kLAPolicyDeviceOwnerAuthenticationWithBiometricsOrCompanion,
+
     /// Device owner will be authenticated by device passcode. The authentication will also succeed if the wrist detection is enabled,
     /// correct passcode was entered in the past and the watch has been on the wrist ever since.
     LAPolicyDeviceOwnerAuthenticationWithWristDetection API_AVAILABLE(watchos(9.0)) API_UNAVAILABLE(macos, ios, tvos) = kLAPolicyDeviceOwnerAuthenticationWithWristDetection,
@@ -291,20 +311,6 @@ typedef NS_ENUM(NSInteger, LAAccessControlOperation)
 ///             this property is left nil or is set to empty string.
 @property (nonatomic, nullable, copy) NSString *localizedCancelTitle API_AVAILABLE(macos(10.12), ios(10.0)) API_UNAVAILABLE(watchos, tvos);
 
-/// Contains policy domain state.
-///
-/// @discussion  This property is set only when evaluatePolicy is called and succesful Touch ID or Face ID authentication
-///              was performed, or when canEvaluatePolicy succeeds for a biometric policy.
-///              It stays nil for all other cases.
-///              If biometric database was modified (fingers or faces were removed or added), evaluatedPolicyDomainState
-///              data will change. Nature of such database changes cannot be determined
-///              but comparing data of evaluatedPolicyDomainState after different evaluatePolicy
-///              will reveal the fact database was changed between calls.
-///
-/// @warning Please note that the value returned by this property can change exceptionally between major OS versions even if
-///          the state of biometry has not changed.
-@property (nonatomic, nullable, readonly) NSData *evaluatedPolicyDomainState API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(watchos, tvos);
-
 /// Time interval for accepting a successful Touch ID or Face ID device unlock (on the lock screen) from the past.
 ///
 /// @discussion This property can be set with a time interval in seconds. If the device was successfully unlocked by
@@ -340,29 +346,26 @@ typedef NS_ENUM(NSInteger, LAAccessControlOperation)
 ///             LAErrorNotInteractive instead of displaying the authentication UI.
 @property (nonatomic) BOOL interactionNotAllowed API_AVAILABLE(macos(10.13), ios(11.0), watchos(4.0)) API_UNAVAILABLE(tvos);
 
-
-typedef NS_ENUM(NSInteger, LABiometryType)
-{
-    /// The device does not support biometry.
-    LABiometryTypeNone API_AVAILABLE(macos(10.13.2), ios(11.2)) = kLABiometryTypeNone,
-    LABiometryNone API_DEPRECATED_WITH_REPLACEMENT("LABiometryTypeNone", macos(10.13, 10.13.2), ios(11.0, 11.2)) = LABiometryTypeNone,
-    
-    /// The device supports Touch ID.
-    LABiometryTypeTouchID = kLABiometryTypeTouchID,
-
-    /// The device supports Face ID.
-    LABiometryTypeFaceID API_AVAILABLE(macos(10.15)) = kLABiometryTypeFaceID,
-
-    /// The device supports Optic ID
-    LABiometryTypeOpticID API_AVAILABLE(visionos(1.0), ios(17.0), macos(14.0)) = kLABiometryTypeOpticID,
-} API_AVAILABLE(macos(10.13.2), ios(11.0)) API_UNAVAILABLE(watchos, tvos);
-
 /// Indicates the type of the biometry supported by the device.
-///
-/// @discussion  This property is set when canEvaluatePolicy has been called for a biometric policy.
-///              The default value is LABiometryTypeNone.
-@property (nonatomic, readonly) LABiometryType biometryType API_AVAILABLE(macos(10.13.2), ios(11.0)) API_UNAVAILABLE(watchos, tvos);
+@property (nonatomic, readonly) LABiometryType biometryType API_AVAILABLE(macos(10.13.2), ios(11.0), watchos(11.0), tvos(18.0), visionos(1.0));
 
+/// Contains policy domain state.
+///
+/// @discussion  This property is set only when evaluatePolicy is called and succesful Touch ID or Face ID authentication
+///              was performed, or when canEvaluatePolicy succeeds for a biometric policy.
+///              It stays nil for all other cases.
+///              If biometric database was modified (fingers or faces were removed or added), evaluatedPolicyDomainState
+///              data will change. Nature of such database changes cannot be determined
+///              but comparing data of evaluatedPolicyDomainState after different evaluatePolicy
+///              will reveal the fact database was changed between calls.
+///
+/// @warning Please note that the value returned by this property can change exceptionally between major OS versions even if
+///          the state of biometry has not changed.
+@property (nonatomic, nullable, readonly) NSData *evaluatedPolicyDomainState
+API_DEPRECATED_WITH_REPLACEMENT("domainState.biometry.stateHash", macos(10.11, 15.0), ios(9.0, 18.0)) API_UNAVAILABLE(watchos, tvos);
+
+/// Contains authentication domain state.
+@property (nonatomic, readonly) LADomainState *domainState API_AVAILABLE(macos(15.0), ios(18.0), visionos(2.0)) API_UNAVAILABLE(watchos, tvos);
 
 @end
 

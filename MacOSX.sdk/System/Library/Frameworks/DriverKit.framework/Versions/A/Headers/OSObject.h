@@ -1,4 +1,4 @@
-/* iig(DriverKit-380.120.5) generated from OSObject.iig */
+/* iig(DriverKit-400.0.2) generated from OSObject.iig */
 
 /* OSObject.iig:1-258 */
 /*

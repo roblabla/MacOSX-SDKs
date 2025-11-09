@@ -16,7 +16,7 @@ typedef NS_ENUM(NSUInteger, MTLFunctionLogType) {
 };
 
 API_AVAILABLE(macos(11.0), ios(14.0))
-@protocol MTLLogContainer <NSFastEnumeration>
+@protocol MTLLogContainer <NSObject, NSFastEnumeration>
 @end
 
 API_AVAILABLE(macos(11.0), ios(14.0))

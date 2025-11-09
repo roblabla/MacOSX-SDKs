@@ -350,6 +350,10 @@ Functions:
   # replaced by draw(_ image: CGImage, in rect: CGRect, byTiling: Bool = false)
   SwiftName: CGContext.__draw(self:in:byTiling:)
   SwiftPrivate: true
+- Name: CGContextDrawImageApplyingToneMapping
+  # replaced by draw(_ image: CGImage, in rect: CGRect, applying: CGToneMapping = kCGToneMappingDefault, options: CFDictionaryRef = nil)
+  SwiftName: CGContext.__draw(self:in:image:applying:options:)
+  SwiftPrivate: true
 - Name: CGContextGetTextPosition
   # replaced by readwrite property
   SwiftName: getter:CGContext.__textPosition(self:)
@@ -463,6 +467,8 @@ Functions:
   SwiftName: CGImage.copy(self:)
 - Name: CGImageCreateCopyWithColorSpace
   SwiftName: CGImage.copy(self:colorSpace:)
+- Name: CGImageCreateCopyWithContentHeadroom
+  SwiftName: CGImage.copy(self:headroom:colorSpace:)
 - Name: CGImageCreateWithImageInRect
   SwiftName: CGImage.cropping(self:to:)
 - Name: CGImageCreateWithMask
@@ -473,12 +479,16 @@ Functions:
   SwiftName: getter:CGImage.typeID()
 - Name: CGImageCreate
   SwiftName: CGImage.init(width:height:bitsPerComponent:bitsPerPixel:bytesPerRow:space:bitmapInfo:provider:decode:shouldInterpolate:intent:)
+- Name: CGImageCreateWithContentHeadroom
+  SwiftName: CGImage.init(headroom:width:height:bitsPerComponent:bitsPerPixel:bytesPerRow:space:bitmapInfo:provider:decode:shouldInterpolate:intent:)
 - Name: CGImageMaskCreate
   SwiftName: CGImage.init(maskWidth:height:bitsPerComponent:bitsPerPixel:bytesPerRow:provider:decode:shouldInterpolate:)
 - Name: CGImageCreateWithJPEGDataProvider
   SwiftName: CGImage.init(jpegDataProviderSource:decode:shouldInterpolate:intent:)
 - Name: CGImageCreateWithPNGDataProvider
   SwiftName: CGImage.init(pngDataProviderSource:decode:shouldInterpolate:intent:)
+- Name: CGImageGetContentHeadroom
+  SwiftName: getter:CGImage.contentHeadroom(self:)
 - Name: CGImageGetWidth
   SwiftName: getter:CGImage.width(self:)
 - Name: CGImageGetHeight
@@ -497,8 +507,12 @@ Functions:
   SwiftName: getter:CGImage.dataProvider(self:)
 - Name: CGImageGetDecode
   SwiftName: getter:CGImage.decode(self:)
+- Name: CGImageShouldToneMap
+  SwiftName: getter:CGImage.shouldToneMap(self:)
 - Name: CGImageGetShouldInterpolate
   SwiftName: getter:CGImage.shouldInterpolate(self:)
+- Name: CGImageContainsImageSpecificToneMappingMetadata
+  SwiftName: getter:CGImage.containsImageSpecificToneMappingMetadata(self:)
 - Name: CGImageGetRenderingIntent
   SwiftName: getter:CGImage.renderingIntent(self:)
 - Name: CGImageGetBitmapInfo
@@ -856,6 +870,10 @@ Functions:
   SwiftName: CGContext.setStrokeColorSpace(self:_:)
 - Name: CGContextSetRenderingIntent
   SwiftName: CGContext.setRenderingIntent(self:_:)
+- Name: CGContextSetEDRTargetHeadroom
+  SwiftName: CGContext.setEDRTargetHeadroom(self:_:)
+- Name: CGContextGetEDRTargetHeadroom
+  SwiftName: getter:CGContext.edrTargetHeadroom(self:_:)
 - Name: CGContextGetInterpolationQuality
   SwiftName: getter:CGContext.interpolationQuality(self:)
 - Name: CGContextSetInterpolationQuality
@@ -1170,6 +1188,8 @@ Globals:
   SwiftName: CGColorSpace.linearGray
 - Name: kCGColorSpaceExtendedLinearGray
   SwiftName: CGColorSpace.extendedLinearGray
+- Name: kCGColorSpaceCoreMedia709
+  SwiftName: CGColorSpace.coreMedia709
 - Name: kCGFontVariationAxisName
   SwiftName: CGFont.variationAxisName
 - Name: kCGFontVariationAxisMinValue

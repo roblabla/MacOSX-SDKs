@@ -1,7 +1,7 @@
 /*
  NSSharingService.h
  Application Kit
- Copyright (c) 2011-2023, Apple Inc.
+ Copyright (c) 2011-2024, Apple Inc.
  All rights reserved.
  */
 
@@ -12,7 +12,7 @@
 #import <Foundation/NSObject.h>
 #import <Foundation/NSArray.h>
 
-@class NSString, NSImage, NSMenuItem, NSView, NSError, NSWindow;
+@class NSString, NSImage, NSMenuItem, NSView, NSError, NSWindow, NSSharingCollaborationModeRestriction;
 @class CKShare, CKContainer;
 
 NS_HEADER_AUDIT_BEGIN(nullability, sendability)
@@ -312,6 +312,12 @@ API_AVAILABLE(macos(10.8))
  Sent when the user has selected a service and before it is executed. Service will be nil if the picker was dismissed.
  */
 - (void)sharingServicePicker:(NSSharingServicePicker *)sharingServicePicker didChooseSharingService:(nullable NSSharingService *)service;
+
+/**
+ Used to specify the case where the share picker should not support some modes of sharing even if they are supported by the items being shared.
+ Disabling all possible modes at the same time is not supported behavior.
+ */
+- (nullable NSArray<NSSharingCollaborationModeRestriction *> *)sharingServicePickerCollaborationModeRestrictions:(NSSharingServicePicker *)sharingServicePicker API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 @end
 

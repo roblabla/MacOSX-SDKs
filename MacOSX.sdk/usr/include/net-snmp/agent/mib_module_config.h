@@ -275,8 +275,8 @@
 /* Define if compiling with the hardware/memory/hw_mem module files.  */
 #define USING_HARDWARE_MEMORY_HW_MEM_MODULE 1
  
-/* Define if compiling with the hardware/memory/memory_darwin module files.  */
-#define USING_HARDWARE_MEMORY_MEMORY_DARWIN_MODULE 1
+/* Define if compiling with the hardware/memory/memory_freebsd module files.  */
+#define USING_HARDWARE_MEMORY_MEMORY_FREEBSD_MODULE 1
  
 /* Define if compiling with the host/data_access/swinst_darwin module files.  */
 #define USING_HOST_DATA_ACCESS_SWINST_DARWIN_MODULE 1

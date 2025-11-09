@@ -160,7 +160,7 @@ typedef NS_ENUM(NSUInteger, CIRenderDestinationAlphaMode) {
 @property (getter=isFlipped) BOOL flipped;
 
 // Instructs the render to add pseudo-random luma noise given the depth of the destination.
-// The magnitude of the noise is approximatly ±pow(2,-(bitPerComponent+1))
+// The magnitude of the noise is approximately ±pow(2,-(bitPerComponent+1))
 @property (getter=isDithered) BOOL dithered;
 
 // If true, the render will clamp color channels

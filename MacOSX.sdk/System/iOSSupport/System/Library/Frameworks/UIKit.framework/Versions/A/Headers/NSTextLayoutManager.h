@@ -3,7 +3,7 @@
 //  NSTextLayoutManager.h
 //  Text Kit
 //
-//  Copyright (c) 2017-2021, Apple Inc. All rights reserved.
+//  Copyright (c) 2017-2024, Apple Inc. All rights reserved.
 //
 
 
@@ -28,7 +28,7 @@ typedef NS_ENUM(NSInteger, NSTextLayoutManagerSegmentType) {
     NSTextLayoutManagerSegmentTypeStandard = 0, // The standard segment matching the typographic bounds of range.
     NSTextLayoutManagerSegmentTypeSelection = 1, // The segment behavior suitable for the selection rendering. Extends the last segment in a line fragment to the trailing edge if continuing to the next line.
     NSTextLayoutManagerSegmentTypeHighlight = 2, // The segment behavior suitable for highlighting.
-} API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos);
+} API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 typedef NS_OPTIONS(NSUInteger, NSTextLayoutManagerSegmentOptions) {
     NSTextLayoutManagerSegmentOptionsNone = 0,
@@ -37,10 +37,10 @@ typedef NS_OPTIONS(NSUInteger, NSTextLayoutManagerSegmentOptions) {
     NSTextLayoutManagerSegmentOptionsHeadSegmentExtended = (1 << 2), // When specified, the segment is extended to the head edge
     NSTextLayoutManagerSegmentOptionsTailSegmentExtended = (1 << 3), // When specified, the segment is extended to the tail edge.
     NSTextLayoutManagerSegmentOptionsUpstreamAffinity = (1 << 4), // When specified, the segment is placed based on the upstream affinity for an empty range.
-} API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos);
+} API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 // NSTextLayoutManager is the center piece of the TextKit object network maintaining the layout geometry via an array of NSTextContainer and layout results with NSTextLayoutFragment associated with NSTextElement vended from the owner NSTextContentManager.
-API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos)
+API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), visionos(1.0)) API_UNAVAILABLE(watchos)
 @interface NSTextLayoutManager : NSObject <NSSecureCoding, NSTextSelectionDataSource>
 #pragma mark Initialization
 - (instancetype)init NS_DESIGNATED_INITIALIZER;
@@ -142,7 +142,7 @@ API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos)
 @end
 
 #pragma mark NSTextLayoutManagerDelegate
-API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos)
+API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), visionos(1.0)) API_UNAVAILABLE(watchos)
 @protocol NSTextLayoutManagerDelegate <NSObject>
 @optional
 // NSTextLayoutFragment management

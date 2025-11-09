@@ -111,6 +111,7 @@ AS_EXTERN API_AVAILABLE(ios(12.0), macCatalyst(13.0), macos(10.15), watchos(6.2)
 /*! @abstract Provides context to target where in an application's UI the authorization view should be shown.
  */
 API_AVAILABLE(ios(13.0), macos(10.15)) API_UNAVAILABLE(tvos, watchos)
+NS_SWIFT_UI_ACTOR
 @protocol ASWebAuthenticationPresentationContextProviding <NSObject>
 
 #if !TARGET_OS_WATCH

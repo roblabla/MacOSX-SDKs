@@ -38,7 +38,9 @@ CS_CLASS_AVAILABLE(10_13, 9_0)
 CS_TVOS_UNAVAILABLE
 @interface CSSearchableItem : NSObject <NSSecureCoding, NSCopying>
 
-- (instancetype)initWithUniqueIdentifier:(nullable NSString *)uniqueIdentifier //Can be null, one will be generated
+// uniqueIdentifier can be null, in which case one will be generated.
+// If passing in null, you must retrieve and store the generated identifier in persistent storage, so that you can open the appropriate item when recalled in a query
+- (instancetype)initWithUniqueIdentifier:(nullable NSString *)uniqueIdentifier
                         domainIdentifier:(nullable NSString *)domainIdentifier
                             attributeSet:(CSSearchableItemAttributeSet *)attributeSet;
 
@@ -63,6 +65,11 @@ CS_TVOS_UNAVAILABLE
 // Set of attributes containing meta data for the item
 @property (strong) CSSearchableItemAttributeSet *attributeSet;
 
+// A flag to specify whether or not this item should be treated as an update
+// By default index insertions are treated as a full delete of any existing item, followed by an insert, and the client needs to specify whether or not this should be treated as an update.
+// If an item is marked as an update, but does not already exist in the index, it will be dropped during the attempted indexing.
+// In update mode, attributes can be marked as deleted by setting their value to nil.
+@property (assign) BOOL isUpdate API_AVAILABLE(macos(10.11), ios(9.0)) CS_TVOS_UNAVAILABLE;
 @end
 
 NS_ASSUME_NONNULL_END

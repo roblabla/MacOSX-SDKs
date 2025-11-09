@@ -57,8 +57,17 @@ RK_API float3 geometry_normal(thread surface_data_t &data);
 RK_API float3 geometry_tangent(thread surface_data_t &data);
 RK_API float3 geometry_bitangent(thread surface_data_t &data);
 
+///
 RK_API float2 uv0(thread surface_data_t &data);
 RK_API float2 uv1(thread surface_data_t &data);
+
+/// UV2-7 have 4-channels each
+RK_API float4 uv2(thread surface_data_t &data) RK_AVAILABILITY_IOS_18 RK_AVAILABILITY_MACOS_15;
+RK_API float4 uv3(thread surface_data_t &data) RK_AVAILABILITY_IOS_18 RK_AVAILABILITY_MACOS_15;
+RK_API float4 uv4(thread surface_data_t &data) RK_AVAILABILITY_IOS_18 RK_AVAILABILITY_MACOS_15;
+RK_API float4 uv5(thread surface_data_t &data) RK_AVAILABILITY_IOS_18 RK_AVAILABILITY_MACOS_15;
+RK_API float4 uv6(thread surface_data_t &data) RK_AVAILABILITY_IOS_18 RK_AVAILABILITY_MACOS_15;
+RK_API float4 uv7(thread surface_data_t &data) RK_AVAILABILITY_IOS_18 RK_AVAILABILITY_MACOS_15;
 
 RK_API float4 custom_attribute(thread surface_data_t &data);
 
@@ -75,6 +84,8 @@ RK_API void set_emissive_color(half3 value, thread surface_data_t &data);
 
 RK_API half roughness(thread surface_data_t &data);
 RK_API void set_roughness(half value, thread surface_data_t &data);
+
+RK_API thread hover_state_t &hover_state(thread surface_data_t &data) RK_AVAILABILITY_IOS_18 RK_AVAILABILITY_MACOS_15;
 
 RK_API half metallic(thread surface_data_t &data);
 RK_API void set_metallic(half value, thread surface_data_t &data);
@@ -93,6 +104,29 @@ RK_API void set_clearcoat(half value, thread surface_data_t &data);
 
 RK_API half clearcoat_roughness(thread surface_data_t &data);
 RK_API void set_clearcoat_roughness(half value, thread surface_data_t &data);
+
+// clearcoat normal
+RK_API half3 clearcoat_normal(thread surface_data_t &data) RK_AVAILABILITY_IOS_18 RK_AVAILABILITY_MACOS_15;
+RK_API void set_clearcoat_normal(half3 value, thread surface_data_t &data) RK_AVAILABILITY_IOS_18 RK_AVAILABILITY_MACOS_15;
+
+// Hover State
+
+RK_API void environment_radiance(thread surface_data_t &data,
+                                 thread half3 &diffuseRadiance,
+                                 thread half3 &specularRadiance,
+                                 half3 baseColor,
+                                 half roughness,
+                                 half specular,
+                                 half metallic,
+                                 float3 normal) RK_AVAILABILITY_IOS_18 RK_AVAILABILITY_MACOS_15;
+
+RK_API float hover_intensity(thread hover_state_t &) RK_AVAILABILITY_IOS_18 RK_AVAILABILITY_MACOS_15;
+
+RK_API float3 hover_position(thread hover_state_t &) RK_AVAILABILITY_IOS_18 RK_AVAILABILITY_MACOS_15;
+
+RK_API float time_since_hover_start(thread hover_state_t &) RK_AVAILABILITY_IOS_18 RK_AVAILABILITY_MACOS_15;
+
+RK_API bool is_active(thread hover_state_t &) RK_AVAILABILITY_IOS_18 RK_AVAILABILITY_MACOS_15;
 
 } // namespace api
 
@@ -156,6 +190,35 @@ struct uniforms
 
 private:
     thread surface::surface_data_t &data;
+};
+
+// MARK: - Hover State
+
+struct hover_state
+{
+    RK_INLINE hover_state(thread hover_state_t &_data)
+    : data(_data)
+    {
+    }
+
+    RK_INLINE float hover_intensity() thread RK_AVAILABILITY_IOS_18 RK_AVAILABILITY_MACOS_15 {
+        return api::hover_intensity(data);
+    }
+
+    RK_INLINE float3 hover_position() thread RK_AVAILABILITY_IOS_18 RK_AVAILABILITY_MACOS_15 {
+        return api::hover_position(data);
+    }
+
+    RK_INLINE float time_since_hover_start() thread RK_AVAILABILITY_IOS_18 RK_AVAILABILITY_MACOS_15 {
+        return api::time_since_hover_start(data);
+    }
+
+    RK_INLINE bool is_active() thread RK_AVAILABILITY_IOS_18 RK_AVAILABILITY_MACOS_15 {
+        return api::is_active(data);
+    }
+
+private:
+    thread hover_state_t &data;
 };
 
 // MARK: - Geometry
@@ -232,6 +295,42 @@ struct geometry
         return surface::api::uv1(data);
     }
 
+    /// Returns the interpolated uv2 for the current fragment.
+    RK_INLINE float4 uv2() const thread RK_AVAILABILITY_IOS_18 RK_AVAILABILITY_MACOS_15
+    {
+        return surface::api::uv2(data);
+    }
+
+    /// Returns the interpolated uv3 for the current fragment.
+    RK_INLINE float4 uv3() const thread RK_AVAILABILITY_IOS_18 RK_AVAILABILITY_MACOS_15
+    {
+        return surface::api::uv3(data);
+    }
+
+    /// Returns the interpolated uv4 for the current fragment.
+    RK_INLINE float4 uv4() const thread RK_AVAILABILITY_IOS_18 RK_AVAILABILITY_MACOS_15
+    {
+        return surface::api::uv4(data);
+    }
+
+    /// Returns the interpolated uv5 for the current fragment.
+    RK_INLINE float4 uv5() const thread RK_AVAILABILITY_IOS_18 RK_AVAILABILITY_MACOS_15
+    {
+        return surface::api::uv5(data);
+    }
+
+    /// Returns the interpolated uv6 for the current fragment.
+    RK_INLINE float4 uv6() const thread RK_AVAILABILITY_IOS_18 RK_AVAILABILITY_MACOS_15
+    {
+        return surface::api::uv6(data);
+    }
+
+    /// Returns the interpolated uv7 for the current fragment.
+    RK_INLINE float4 uv7() const thread RK_AVAILABILITY_IOS_18 RK_AVAILABILITY_MACOS_15
+    {
+        return surface::api::uv7(data);
+    }
+
     /// Returns a user attribute set by a geometry modifier.
     ///
     /// You set this value in a geometry modifier and the value is interpolated per-fragment,
@@ -247,6 +346,57 @@ struct geometry
         return surface::api::view_direction(data);
     }
 
+private:
+    thread surface::surface_data_t &data;
+};
+
+/// Lighting evaluation for a surface shader
+struct lighting
+{
+    RK_INLINE lighting(thread surface::surface_data_t &_data)
+        : data(_data)
+    {
+    }
+
+    /// Radiance broken down into diffuse and specular components.
+    struct separated_radiance 
+    {
+        half3 diffuse;
+        half3 specular;
+    };
+
+    /// Returns reflected radiance in respose to environment lighting
+    ///
+    /// @discussion This function convolves environment lighting with RealityKit's physically based material model, resulting in
+    /// a reflected radiance, reflected from the surface fragment to the eye.  The radiance is returned in separate
+    /// components, which are typically summed for total radiance.
+    ///
+    /// @param base_color RGB color of the surface for convolving (integrating) the environment lighting
+    /// @param roughness Roughness value used for convolving (integrating) the envirnment lighting
+    /// @param metallic Mteallic value used for convolving (integrating) the envirnment lighting
+    /// @param specular Scale for an additional highlight comonent associated with the environment
+    /// @param normal The worldspace normal used for convolving environment lighting.
+    ///               This would typically be the surface normal,
+    ///
+    RK_INLINE separated_radiance environment_radiance(half3 base_color,
+                                                      half roughness,
+                                                      half metallic,
+                                                      half specular,
+                                                      float3 normal) const thread RK_AVAILABILITY_IOS_18 RK_AVAILABILITY_MACOS_15
+
+    {
+        half3 diffuse_radiance;
+        half3 specular_radiance;
+        surface::api::environment_radiance(data,
+                                           diffuse_radiance,
+                                           specular_radiance,
+                                           base_color,
+                                           roughness,
+                                           specular,
+                                           metallic,
+                                           normal);
+        return { diffuse_radiance, specular_radiance };
+    }
 private:
     thread surface::surface_data_t &data;
 };
@@ -377,6 +527,12 @@ struct surface_properties
         return surface::api::roughness(data);
     }
 
+    RK_INLINE hover_state hover_state() const thread RK_AVAILABILITY_IOS_18 RK_AVAILABILITY_MACOS_15
+
+    {
+        return surface::api::hover_state(data);
+    }
+
     /// Set the roughness value of this fragment.
     RK_INLINE void set_roughness(half value) thread
     {
@@ -463,6 +619,22 @@ struct surface_properties
     {
         surface::api::set_clearcoat_roughness(value, data);
     }
+    
+    /// Returns any previously set clearcoat normal for this fragment. The default value is (0,0,1).
+    RK_INLINE half3 clearcoat_normal() const thread RK_AVAILABILITY_IOS_18 RK_AVAILABILITY_MACOS_15
+    {
+        return surface::api::clearcoat_normal(data);
+    }
+
+    /// Set the clearcoat normal for this fragment.
+    ///
+    /// @discussion This requires that the CustomMaterial's lighting model is clearcoat, otherwise
+    /// its value will be ignored. You can set this value to influence lighting calculations. The value will
+    /// be normalized before storing.
+    RK_INLINE void set_clearcoat_normal(half3 value) thread RK_AVAILABILITY_IOS_18 RK_AVAILABILITY_MACOS_15
+    {
+        surface::api::set_clearcoat_normal(metal::normalize(value), data);
+    }
 
 private:
     thread surface::surface_data_t &data;
@@ -524,6 +696,12 @@ struct surface_parameters
     RK_INLINE surface::surface_properties surface() thread
     {
         return surface::surface_properties(data);
+    }
+
+    /// Returns results after applying lighting.
+    RK_INLINE surface::lighting lighting() thread RK_AVAILABILITY_IOS_18 RK_AVAILABILITY_MACOS_15
+    {
+        return surface::lighting(data);
     }
 
     /// Returns the textures associated with this model, allowing you to retrieve

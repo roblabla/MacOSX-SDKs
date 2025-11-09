@@ -1,6 +1,6 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.10 (swiftlang-5.10.0.12.5 clang-1500.3.9.1.1)
-// swift-module-flags: -target x86_64-apple-ios17.5-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftARKit -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-bare-slash-regex -user-module-version 467.1 -module-name ARKit
+// swift-compiler-version: Apple Swift version 6.0 effective-5.10 (swiftlang-6.0.0.7.24 clang-1600.0.25.1)
+// swift-module-flags: -target x86_64-apple-ios18.0-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftARKit -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-upcoming-feature StrictConcurrency -enable-bare-slash-regex -user-module-version 631 -module-name ARKit
 @_exported import ARKit
 import Swift
 import _Concurrency
@@ -9,8 +9,8 @@ import _SwiftConcurrencyShims
 import simd
 @available(iOS 12.0, *)
 extension ARKit.ARPlaneAnchor {
-  public enum Classification {
-    public enum Status {
+  public enum Classification : Swift.Sendable {
+    public enum Status : Swift.Sendable {
       case notAvailable
       case undetermined
       case unknown
@@ -85,7 +85,7 @@ extension ARKit.ARPlaneGeometry {
 }
 @available(iOS 12.0, *)
 extension ARKit.ARSCNView {
-  @nonobjc @_Concurrency.MainActor(unsafe) public func unprojectPoint(_ point: CoreFoundation.CGPoint, ontoPlane planeTransform: simd.simd_float4x4) -> simd.simd_float3?
+  @nonobjc @_Concurrency.MainActor @preconcurrency public func unprojectPoint(_ point: CoreFoundation.CGPoint, ontoPlane planeTransform: simd.simd_float4x4) -> simd.simd_float3?
 }
 @available(iOS 14.0, *)
 extension ARKit.ARGeoAnchor {
@@ -134,8 +134,8 @@ extension ARKit.ARFaceGeometry {
 }
 @available(iOS 11.0, *)
 extension ARKit.ARCamera {
-  @frozen public enum TrackingState {
-    public enum Reason {
+  @frozen public enum TrackingState : Swift.Sendable {
+    public enum Reason : Swift.Sendable {
       case initializing
       case excessiveMotion
       case insufficientFeatures

@@ -15,6 +15,7 @@ NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 @class ASAuthorizationRequest;
 @class ASAuthorizationController;
 
+NS_SWIFT_UI_ACTOR
 AS_EXTERN API_AVAILABLE(ios(13.0), macos(10.15), tvos(13.0), watchos(6.0))
 @protocol ASAuthorizationControllerDelegate <NSObject>
 @optional
@@ -26,6 +27,7 @@ AS_EXTERN API_AVAILABLE(ios(13.0), macos(10.15), tvos(13.0), watchos(6.0))
 @end
 
 AS_EXTERN API_AVAILABLE(ios(13.0), macos(10.15), tvos(13.0)) API_UNAVAILABLE(watchos)
+NS_SWIFT_UI_ACTOR
 @protocol ASAuthorizationControllerPresentationContextProviding <NSObject>
 @required
 
@@ -101,7 +103,7 @@ AS_EXTERN API_AVAILABLE(ios(13.0), macos(10.15), tvos(13.0), watchos(6.0))
 /*! @abstract Cancel the running authorization flows, if there are any. If a flow is canceled, the delegate callback will
  be made indicating the cancel.
  */
-- (void)cancel API_AVAILABLE(macos(13.0), ios(16.0)) API_UNAVAILABLE(watchos, tvos);
+- (void)cancel API_AVAILABLE(macos(13.0), ios(16.0), tvos(18.0)) API_UNAVAILABLE(watchos);
 
 + (instancetype)new NS_UNAVAILABLE;
 

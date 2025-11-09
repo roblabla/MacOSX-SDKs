@@ -38,24 +38,6 @@ typedef NS_ENUM(NSInteger, PDFDisplayDirection)
     kPDFDisplayDirectionHorizontal = 1,
 };
 
-// PDF areas of interest (bitfield, multiple bits below may be set).
-PDFKIT_AVAILABLE(10_4, 11_0)
-typedef NS_OPTIONS(NSInteger, PDFAreaOfInterest)
-{
-    kPDFNoArea =            0,
-    kPDFPageArea =          (1UL << 0),
-    kPDFTextArea =          (1UL << 1),
-    kPDFAnnotationArea =    (1UL << 2),
-    kPDFLinkArea =          (1UL << 3),
-    kPDFControlArea =       (1UL << 4),
-    kPDFTextFieldArea =     (1UL << 5),
-    kPDFIconArea =          (1UL << 6),
-    kPDFPopupArea =         (1UL << 7),
-    kPDFImageArea =         (1UL << 8),
-    
-    kPDFAnyArea =           NSIntegerMax
-};
-
 // Interpolation quality.
 PDFKIT_ENUM_AVAILABLE(10_7, 11_0)
 typedef NS_ENUM(NSInteger, PDFInterpolationQuality)
@@ -357,8 +339,8 @@ PDFKIT_CLASS_AVAILABLE(10_4, 11_0)
 
 // Turns on or off data detection. If enabled, page text will be scanned for results such as URL's, addresses, phone numbers,
 // times/dates, etc., as the page becomes visible. Where URL's are found, Link annotations are created in place. These are
-// temporary annotations and are not saved.
-@property (nonatomic) BOOL enableDataDetectors PDFKIT_AVAILABLE(10_6, 11_0);
+// temporary annotations and are not saved. It is deprecated in favor of -[PDFDocument enableDataDetectors].
+@property (nonatomic) BOOL enableDataDetectors PDFKIT_DEPRECATED(10_6, 15_0, 11_0, 18_0);
 
 // If YES, page overlay views will be hit tested and therefore receive gestures. If NO, PDFView will receive gestures,
 // namely those for text selection.

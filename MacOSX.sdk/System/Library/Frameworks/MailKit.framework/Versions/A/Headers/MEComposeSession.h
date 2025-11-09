@@ -49,6 +49,7 @@ typedef NS_ERROR_ENUM(MEComposeSessionErrorDomain, MEComposeSessionErrorCode) {
 
 /// @brief Methods in this protocol can be used by a mail app extension to keep track of new messages composed by the user and to make changes to the recipeint email address tokens.
 API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, watchos, macCatalyst) API_UNAVAILABLE(tvos)
+NS_SWIFT_UI_ACTOR
 @protocol MEComposeSessionHandler <NSObject>
 
 /// @brief This is invoked when a new message compose window is created.

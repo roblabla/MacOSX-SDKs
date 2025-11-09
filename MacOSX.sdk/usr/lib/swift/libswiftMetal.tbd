@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/usr/lib/swift/libswiftMetal.dylib'
-current-version: 343.19
+current-version: 366.22
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -20,6 +20,11 @@ exports:
                        '_$s5Metal29MTLIOCreateCompressionContextySvSgSS_So22MTLIOCompressionMethodVSitF', 
                        '_$sSo10MTLTextureP5MetalE15makeTextureView11pixelFormat11textureType6levels6slices7swizzleSoAA_pSgSo08MTLPixelG0V_So0aI0VSnySiGAOSo0A15SwizzleChannelsatF', 
                        '_$sSo10MTLTextureP5MetalE15makeTextureView11pixelFormat11textureType6levels6slicesSoAA_pSgSo08MTLPixelG0V_So0aI0VSnySiGANtF', 
+                       '_$sSo15MTLCommandQueueP5MetalE16addResidencySetsyySaySo15MTLResidencySet_pGF', 
+                       '_$sSo15MTLCommandQueueP5MetalE19removeResidencySetsyySaySo15MTLResidencySet_pGF', 
+                       '_$sSo15MTLResidencySetP5MetalE14addAllocationsyySaySo13MTLAllocation_pGF', 
+                       '_$sSo15MTLResidencySetP5MetalE17removeAllocationsyySaySo13MTLAllocation_pGF', 
+                       '_$sSo16MTLCommandBufferP5MetalE16useResidencySetsyySaySo15MTLResidencySet_pGF', 
                        '_$sSo16MTLCommandBufferP5MetalE4logsAC15MTLLogContainerVvg', 
                        '_$sSo16MTLCommandBufferP5MetalE4logsAC15MTLLogContainerVvpMV', 
                        '_$sSo18MTLArgumentEncoderP5MetalE10setBuffers_7offsets5rangeySaySo9MTLBuffer_pSgG_SaySiGSnySiGtF', 

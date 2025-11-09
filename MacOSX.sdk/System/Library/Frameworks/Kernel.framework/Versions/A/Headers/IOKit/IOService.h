@@ -1540,12 +1540,14 @@ private:
 	static void publishHiddenMedia(IOService * parent);
 	static bool publishHiddenMediaApplier(const OSObject * entry, void * context);
 	bool canTerminateForReplacement(IOService * client);
+	void unregisterAllInterrupts(void);
 
 private:
 
 	bool matchPassive(OSDictionary * table, uint32_t options);
 	bool matchInternal(OSDictionary * table, uint32_t options, unsigned int * did);
 	static bool instanceMatch(const OSObject * entry, void * context);
+	OSDictionary * _copyPropertiesForMatching(void);
 
 	static OSPtr<OSObject>  copyExistingServices( OSDictionary * matching,
 	    IOOptionBits inState, IOOptionBits options = 0 );
@@ -1588,7 +1590,8 @@ private:
 
 	IOReturn waitForState( UInt32 mask, UInt32 value, uint64_t timeout );
 
-	UInt32 _adjustBusy( SInt32 delta );
+	UInt32 _adjustBusy(SInt32 delta);
+	UInt32 _adjustBusy(SInt32 delta, bool unlock);
 
 	bool terminatePhase1( IOOptionBits options = 0 );
 	void scheduleTerminatePhase2( IOOptionBits options = 0 );

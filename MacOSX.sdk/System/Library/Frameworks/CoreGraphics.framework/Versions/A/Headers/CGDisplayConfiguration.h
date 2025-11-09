@@ -34,7 +34,7 @@ typedef struct _CGDisplayConfigRef *CGDisplayConfigRef;
 
 CG_EXTERN CGError CGBeginDisplayConfiguration(
     CGDisplayConfigRef __nullable * __nullable config)
-    CG_AVAILABLE_STARTING(10.0);
+    API_AVAILABLE(macos(10.0));
 
 /* Configure the origin of a display in global display coordinates.
 
@@ -52,7 +52,7 @@ CG_EXTERN CGError CGBeginDisplayConfiguration(
 CG_EXTERN CGError CGConfigureDisplayOrigin(
     CGDisplayConfigRef __nullable config,
     CGDirectDisplayID display, int32_t x, int32_t y)
-    CG_AVAILABLE_STARTING(10.0);
+    API_AVAILABLE(macos(10.0));
 
 /* Configure the display mode of a display. The "options" field is reserved
    for future expansion; pass NULL for now.
@@ -69,7 +69,7 @@ CG_EXTERN CGError CGConfigureDisplayWithDisplayMode(
     CGDisplayConfigRef __nullable config,
     CGDirectDisplayID display, CGDisplayModeRef __nullable mode,
     CFDictionaryRef __nullable options)
-    CG_AVAILABLE_STARTING(10.6);
+    API_AVAILABLE(macos(10.6));
 
 /* Enable or disable stereo operation for a display.
 
@@ -97,7 +97,7 @@ CG_EXTERN CGError CGConfigureDisplayWithDisplayMode(
 CG_EXTERN CGError CGConfigureDisplayStereoOperation(
     CGDisplayConfigRef __nullable config,
     CGDirectDisplayID display, boolean_t stereo, boolean_t forceBlueLine)
-    CG_AVAILABLE_STARTING(10.4);
+    API_AVAILABLE(macos(10.4));
 
 /* Make a display a mirror of a master display.
 
@@ -138,14 +138,14 @@ CG_EXTERN CGError CGConfigureDisplayStereoOperation(
 CG_EXTERN CGError CGConfigureDisplayMirrorOfDisplay(
     CGDisplayConfigRef __nullable config,
     CGDirectDisplayID display, CGDirectDisplayID master)
-    CG_AVAILABLE_STARTING(10.2);
+    API_AVAILABLE(macos(10.2));
 
 /* Cancel a set of display configuration changes. On return, the
    configuration is cancelled and is no longer valid. */
 
 CG_EXTERN CGError CGCancelDisplayConfiguration(
     CGDisplayConfigRef __nullable config)
-    CG_AVAILABLE_STARTING(10.0);
+    API_AVAILABLE(macos(10.0));
 
 /* Complete a set of display configuration changes. On return, the
    configuration is no longer valid.
@@ -176,13 +176,13 @@ typedef CF_OPTIONS(uint32_t, CGConfigureOption) {
 CG_EXTERN CGError CGCompleteDisplayConfiguration(
     CGDisplayConfigRef __nullable config,
     CGConfigureOption option)
-    CG_AVAILABLE_STARTING(10.0);
+    API_AVAILABLE(macos(10.0));
 
 /* Restore the permanent display configuration settings for the current
    user. */
 
 CG_EXTERN void CGRestorePermanentDisplayConfiguration(void)
-    CG_AVAILABLE_STARTING(10.2);
+    API_AVAILABLE(macos(10.2));
 
 /* Display changes are reported via a callback mechanism.
 
@@ -235,14 +235,14 @@ typedef void(*CGDisplayReconfigurationCallBack)(CGDirectDisplayID display,
 CG_EXTERN CGError CGDisplayRegisterReconfigurationCallback(
   CGDisplayReconfigurationCallBack __nullable callback,
   void * __nullable userInfo)
-  CG_AVAILABLE_STARTING(10.3);
+  API_AVAILABLE(macos(10.3));
 
 /* Remove a display reconfiguration callback procedure. */
 
 CG_EXTERN CGError CGDisplayRemoveReconfigurationCallback(
     CGDisplayReconfigurationCallBack __nullable callback,
     void * __nullable userInfo)
-    CG_AVAILABLE_STARTING(10.3);
+    API_AVAILABLE(macos(10.3));
 
 /* Specialized configuration changes should be done outside of the scope of
    a `CGBeginDisplayConfiguration'/`CGCompleteDisplayConfiguration' pair, as
@@ -274,103 +274,103 @@ CG_EXTERN CGError CGDisplayRemoveReconfigurationCallback(
 
 CG_EXTERN CGError CGDisplaySetStereoOperation(CGDirectDisplayID display,
     boolean_t stereo, boolean_t forceBlueLine, CGConfigureOption option)
-    CG_AVAILABLE_STARTING(10.4);
+    API_AVAILABLE(macos(10.4));
 
 /* Return true if the display is connected, awake, and available for
    drawing; false otherwise. */
 
 CG_EXTERN boolean_t CGDisplayIsActive(CGDirectDisplayID display)
-    CG_AVAILABLE_STARTING(10.2);
+    API_AVAILABLE(macos(10.2));
 
 /* Return true if the display is asleep (and is therefore not drawable);
    false otherwise. */
 
 CG_EXTERN boolean_t CGDisplayIsAsleep(CGDirectDisplayID display)
-    CG_AVAILABLE_STARTING(10.2);
+    API_AVAILABLE(macos(10.2));
 
 /* Return true if the display is connected or online; false otherwise. */
 
 CG_EXTERN boolean_t CGDisplayIsOnline(CGDirectDisplayID display)
-    CG_AVAILABLE_STARTING(10.2);
+    API_AVAILABLE(macos(10.2));
 
 /* Return true if the display is the current main display; false
    otherwise. */
 
 CG_EXTERN boolean_t CGDisplayIsMain(CGDirectDisplayID display)
-    CG_AVAILABLE_STARTING(10.2);
+    API_AVAILABLE(macos(10.2));
 
 /* Return true if the display is built-in, such as the internal display in
    portable systems; false otherwise. */
 
 CG_EXTERN boolean_t CGDisplayIsBuiltin(CGDirectDisplayID display)
-    CG_AVAILABLE_STARTING(10.2);
+    API_AVAILABLE(macos(10.2));
 
 /* Return true if the display is in a mirroring set; false otherwise. */
 
 CG_EXTERN boolean_t CGDisplayIsInMirrorSet(CGDirectDisplayID display)
-    CG_AVAILABLE_STARTING(10.2);
+    API_AVAILABLE(macos(10.2));
 
 /* Return true if the display is always in a mirroring set and cannot be
    unmirrored; false otherwise. */
 
 CG_EXTERN boolean_t CGDisplayIsAlwaysInMirrorSet(CGDirectDisplayID display)
-    CG_AVAILABLE_STARTING(10.2);
+    API_AVAILABLE(macos(10.2));
 
 /* Return true if the display is in a hardware mirroring set; false
    otherwise. */
 
 CG_EXTERN boolean_t CGDisplayIsInHWMirrorSet(CGDirectDisplayID display)
-    CG_AVAILABLE_STARTING(10.2);
+    API_AVAILABLE(macos(10.2));
 
 /* For a secondary display in a mirror set, return the display being
    mirrored (the primary display), or `kCGNullDirectDisplay' if the display
    is the primary display or if the display is unmirrored. */
 
 CG_EXTERN CGDirectDisplayID CGDisplayMirrorsDisplay(CGDirectDisplayID display)
-    CG_AVAILABLE_STARTING(10.2);
+    API_AVAILABLE(macos(10.2));
 
 /* Return true if the display is using OpenGL acceleration; false
    otherwise. */
 
 CG_EXTERN boolean_t CGDisplayUsesOpenGLAcceleration(CGDirectDisplayID display)
-    CG_AVAILABLE_STARTING(10.2);
+    API_AVAILABLE(macos(10.2));
 
 /* Return true if the display is running in a stereo graphics mode; false
    otherwise. */
 
 CG_EXTERN boolean_t CGDisplayIsStereo(CGDirectDisplayID display)
-    CG_AVAILABLE_STARTING(10.4); /* 10.4.3 and later. */
+    API_AVAILABLE(macos(10.4)); /* 10.4.3 and later. */
 
 /* Return the primary display in a hardware mirror set, or `display' if the
    display is not hardware-mirrored. */
 
 CG_EXTERN CGDirectDisplayID CGDisplayPrimaryDisplay(CGDirectDisplayID display)
-    CG_AVAILABLE_STARTING(10.2);
+    API_AVAILABLE(macos(10.2));
 
 /* Return the logical unit number of a display. */
 
 CG_EXTERN uint32_t CGDisplayUnitNumber(CGDirectDisplayID display)
-    CG_AVAILABLE_STARTING(10.2);
+    API_AVAILABLE(macos(10.2));
 
 /* Return the vendor number of a display's monitor. */
 
 CG_EXTERN uint32_t CGDisplayVendorNumber(CGDirectDisplayID display)
-    CG_AVAILABLE_STARTING(10.2);
+    API_AVAILABLE(macos(10.2));
 
 /* Return the model number of a display's monitor. */
 
 CG_EXTERN uint32_t CGDisplayModelNumber(CGDirectDisplayID display)
-    CG_AVAILABLE_STARTING(10.2);
+    API_AVAILABLE(macos(10.2));
 
 /* Return the serial number of a display's monitor. */
 
 CG_EXTERN uint32_t CGDisplaySerialNumber(CGDirectDisplayID display)
-    CG_AVAILABLE_STARTING(10.2);
+    API_AVAILABLE(macos(10.2));
 
 /* Return the IOKit service port of a display. */
 
 CG_EXTERN io_service_t CGDisplayIOServicePort(CGDirectDisplayID display)
-    CG_AVAILABLE_BUT_DEPRECATED(10.2, 10.9);
+    API_DEPRECATED("No longer supported", macos(10.2,10.9));
 
 /* Return the width and height of a display in millimeters.
 
@@ -384,7 +384,7 @@ CG_EXTERN io_service_t CGDisplayIOServicePort(CGDirectDisplayID display)
    support. */
 
 CG_EXTERN CGSize CGDisplayScreenSize(CGDirectDisplayID display)
-    CG_AVAILABLE_STARTING(10.3);
+    API_AVAILABLE(macos(10.3));
 
 /* Return the rotation angle of a display in degrees clockwise.
 
@@ -395,19 +395,19 @@ CG_EXTERN CGSize CGDisplayScreenSize(CGDirectDisplayID display)
    If `display' is not a valid display ID, the rotation returned is 0. */
 
 CG_EXTERN double CGDisplayRotation(CGDirectDisplayID display)
-    CG_AVAILABLE_STARTING(10.5);
+    API_AVAILABLE(macos(10.5));
 
 /* Return the color space of a display. */
 
 CG_EXTERN CGColorSpaceRef  CGDisplayCopyColorSpace(
   CGDirectDisplayID display)
-  CG_AVAILABLE_STARTING(10.5);
+  API_AVAILABLE(macos(10.5));
 
 /* These functions are deprecated; do not use them. */
 
 CG_EXTERN CGError CGConfigureDisplayMode(CGDisplayConfigRef __nullable config,
     CGDirectDisplayID display, CFDictionaryRef __nullable mode)
-    CG_AVAILABLE_BUT_DEPRECATED(10.0, 10.6);
+    API_DEPRECATED("No longer supported", macos(10.0,10.6));
 
 CF_ASSUME_NONNULL_END
 

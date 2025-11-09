@@ -1,6 +1,6 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.10 (swiftlang-5.10.0.12.5 clang-1500.3.9.1.1)
-// swift-module-flags: -target arm64e-apple-ios17.5-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftSpatial -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-bare-slash-regex -user-module-version 81.40.1 -module-name Spatial
+// swift-compiler-version: Apple Swift version 6.0 effective-5.10 (swiftlang-6.0.0.7.24 clang-1600.0.25.1)
+// swift-module-flags: -target arm64e-apple-ios18.0-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftSpatial -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-bare-slash-regex -user-module-version 99 -module-name Spatial
 @_exported import Spatial
 import Swift
 import _Concurrency
@@ -134,6 +134,28 @@ extension Spatial.Pose3D {
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
 extension Spatial.AffineTransform3D {
+  @available(*, deprecated, message: "Use `AffineTransform3D.init(truncating:)` instead.")
+  @inlinable public init?(projectiveTransform transform: Spatial.ProjectiveTransform3D) {
+        
+        let affine = __SPAffineTransform3DMakeWithProjective(transform)
+        
+        if __SPAffineTransform3DIsValid(affine) {
+            self = affine
+        } else {
+            return nil
+        }
+    }
+  @available(*, deprecated, message: "Use `AffineTransform3D.init(truncating:)` instead.")
+  @inlinable public init?(_ matrix: simd.simd_double4x4) {
+
+        let affine = __SPAffineTransform3DMakeWith4x4Matrix(matrix)
+
+        if __SPAffineTransform3DIsValid(affine) {
+            self = affine
+        } else {
+            return nil
+        }
+    }
   @available(*, deprecated, renamed: "init(offset:)", message: "Use `Vector3D` variant.")
   @inlinable public init(translation: Spatial.Size3D) {
         self.init(translation: Vector3D(translation))
@@ -168,6 +190,33 @@ extension Spatial.AffineTransform3D {
   @inlinable public init?(matrix: simd.simd_double4x4) {
         
         self.init(matrix)
+    }
+  @available(*, deprecated, message: "Use `AffineTransform3D.init(truncating:)` instead.")
+  @inlinable public init?(_ matrix: simd.simd_float4x4) {
+
+        let column0 = matrix.columns.0
+        let column1 = matrix.columns.1
+        let column2 = matrix.columns.2
+        let column3 = matrix.columns.3
+        
+        let m = simd_double4x4([
+            simd_double4(Double(column0.x), Double(column0.y),
+                         Double(column0.z), Double(column0.w)),
+            simd_double4(Double(column1.x), Double(column1.y),
+                         Double(column1.z), Double(column1.w)),
+            simd_double4(Double(column2.x), Double(column2.y),
+                         Double(column2.z), Double(column2.w)),
+            simd_double4(Double(column3.x), Double(column3.y),
+                         Double(column3.z), Double(column3.w))
+        ])
+        
+        let affine = __SPAffineTransform3DMakeWith4x4Matrix(m)
+
+        if __SPAffineTransform3DIsValid(affine) {
+            self = affine
+        } else {
+            return nil
+        }
     }
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
@@ -332,6 +381,11 @@ extension Spatial.Point3D : Spatial.Primitive3D {
   public func applying(_ pose: Spatial.Pose3D) -> Spatial.Point3D
   public func unapplying(_ pose: Spatial.Pose3D) -> Spatial.Point3D
 }
+@available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, *)
+extension Spatial.Point3D {
+  public func applying(_ scaledPose: Spatial.ScaledPose3D) -> Spatial.Point3D
+  public func unapplying(_ pose: Spatial.ScaledPose3D) -> Spatial.Point3D
+}
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
 extension Spatial.Point3D : Spatial.Rotatable3D {
 }
@@ -342,6 +396,13 @@ extension Spatial.Point3D : Spatial.Translatable3D {
 extension Spatial.Point3D : Swift.Equatable {
   @inlinable public static func == (lhs: Spatial.Point3D, rhs: Spatial.Point3D) -> Swift.Bool {
         return lhs.x == rhs.x && lhs.y == rhs.y && lhs.z == rhs.z
+    }
+}
+@available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, *)
+extension Spatial.Point3D {
+  @inlinable public func isApproximatelyEqual(to other: Spatial.Point3D, tolerance: Swift.Double = sqrt(.ulpOfOne)) -> Swift.Bool {
+        
+        return __SPPoint3DAlmostEqualToPoint(self, other, tolerance)
     }
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
@@ -359,6 +420,12 @@ extension Spatial.Point3D : Swift.Codable {
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
 extension Spatial.Point3D : Swift.CustomStringConvertible {
   public var description: Swift.String {
+    get
+  }
+}
+@available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, *)
+extension Spatial.Point3D : Swift.CustomReflectable {
+  public var customMirror: Swift.Mirror {
     get
   }
 }
@@ -692,6 +759,186 @@ extension Spatial.Angle2D : Swift.AdditiveArithmetic {
         lhs = lhs - rhs
     }
 }
+@available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, *)
+extension Spatial.ScaledPose3D {
+  @inlinable public static func * (lhs: Spatial.ScaledPose3D, rhs: Spatial.Pose3D) -> Spatial.ScaledPose3D {
+        return __SPScaledPose3DConcatenation(lhs, rhs)
+    }
+  @inlinable public static func * (lhs: Spatial.ScaledPose3D, rhs: Spatial.ScaledPose3D) -> Spatial.ScaledPose3D {
+        return __SPScaledPose3DConcatenation(lhs, rhs)
+    }
+  @inlinable public static func * (lhs: Spatial.Pose3D, rhs: Spatial.ScaledPose3D) -> Spatial.ScaledPose3D {
+        return __SPScaledPose3DConcatenation(lhs, rhs)
+    }
+  @inlinable public static func *= (lhs: inout Spatial.ScaledPose3D, rhs: Spatial.ScaledPose3D) {
+        
+        lhs = lhs.concatenating(rhs)
+    }
+}
+@available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, *)
+extension Spatial.ScaledPose3D {
+  @inlinable public init(position: Spatial.Point3D = .zero, rotation: Spatial.Rotation3D, scale: Swift.Double = 1) {
+        
+        self = __SPScaledPose3DMake(position, rotation, scale)
+    }
+  @inlinable public init(position: simd.simd_double3 = .zero, rotation: simd.simd_quatd, scale: Swift.Double = 1) {
+        
+        self = __SPScaledPose3DMakeWithVector(position, rotation, scale)
+    }
+  @inlinable public init(position: simd.simd_float3 = .zero, rotation: simd.simd_quatf, scale: Swift.Float = 1) {
+        
+        let quaternion = simd_quatd(vector: simd_double(rotation.vector))
+        
+        self = __SPScaledPose3DMakeWithVector(simd_double(position),
+                                              quaternion,
+                                              Double(scale))
+    }
+  @inlinable public init(position: Spatial.Point3D = .zero, target: Spatial.Point3D, scale: Swift.Double = 1, up: Spatial.Vector3D = Vector3D(x: 0, y: 1, z: 0)) {
+        
+        self = __SPScaledPose3DMakeLookAt(position, target, scale, up)
+    }
+  @inlinable public init(forward: Spatial.Vector3D, scale: Swift.Double = 1, up: Spatial.Vector3D = Vector3D(x: 0, y: 1, z: 0)) {
+        
+        self = __SPScaledPose3DMakeLookAt(forward, scale, up)
+    }
+  @inlinable public init?(transform: Spatial.AffineTransform3D) {
+        
+        let p = __SPScaledPose3DMakeWithAffineTransform(transform)
+        
+        if __SPScaledPose3DIsValid(p) {
+            self = p
+        } else {
+            return nil
+        }
+    }
+  @inlinable public init?(transform: Spatial.ProjectiveTransform3D) {
+        
+        let t = __SPScaledPose3DMakeWithProjectiveTransform(transform)
+        
+        if __SPScaledPose3DIsValid(t) {
+            self = t
+        } else {
+            return nil
+        }
+    }
+  @inlinable public init?(_ matrix: simd.simd_double4x4) {
+        
+        let p = __SPScaledPose3DMakeWith4x4Matrix(matrix)
+        
+        if __SPScaledPose3DIsValid(p) {
+            self = p
+        } else {
+            return nil
+        }
+    }
+  @inlinable public init?(_ matrix: simd.simd_float4x4) {
+        
+        let m = simd_double4x4(simd_double(matrix.columns.0),
+                               simd_double(matrix.columns.1),
+                               simd_double(matrix.columns.2),
+                               simd_double(matrix.columns.3))
+        
+        let p = __SPScaledPose3DMakeWith4x4Matrix(m)
+        
+        if __SPScaledPose3DIsValid(p) {
+            self = p
+        } else {
+            return nil
+        }
+    }
+  @inlinable public var matrix: simd.simd_double4x4 {
+    get {
+        return __SPScaledPose3DGet4x4Matrix(self)
+    }
+  }
+  @inlinable public var inverse: Spatial.ScaledPose3D {
+    get {
+        return __SPScaledPose3DGetInverse(self)
+    }
+  }
+  @inlinable public func concatenating(_ transform: Spatial.ScaledPose3D) -> Spatial.ScaledPose3D {
+        return __SPScaledPose3DConcatenation(self, transform)
+    }
+  @inlinable public func concatenating(_ transform: Spatial.Pose3D) -> Spatial.ScaledPose3D {
+        return __SPScaledPose3DConcatenation(self, transform)
+    }
+  @inlinable public static var identity: Spatial.ScaledPose3D {
+    get {
+        return __SPScaledPose3DIdentity
+    }
+  }
+  @inlinable public func flipped(along axis: Spatial.Axis3D) -> Spatial.ScaledPose3D {
+        return __SPScaledPose3DFlip(self, axis)
+    }
+  public mutating func flip(along axis: Spatial.Axis3D)
+}
+@available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, *)
+extension Spatial.ScaledPose3D : Spatial.Translatable3D {
+  @available(*, deprecated, message: "Use `Vector3D` variant.")
+  @inlinable public func translated(by size: Spatial.Size3D) -> Spatial.ScaledPose3D {
+        return self.translated(by: Vector3D(size))
+    }
+  @inlinable public func translated(by offset: Spatial.Vector3D) -> Spatial.ScaledPose3D {
+        return __SPScaledPose3DTranslate(self, offset)
+    }
+}
+@available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, *)
+extension Spatial.ScaledPose3D : Spatial.Rotatable3D {
+  @inlinable public func rotated(by rotation: Spatial.Rotation3D) -> Spatial.ScaledPose3D {
+        return __SPScaledPose3DRotate(self, rotation)
+    }
+  @inlinable public func rotated(by quaternion: simd.simd_quatd) -> Spatial.ScaledPose3D {
+        return __SPScaledPose3DRotateByQuaternion(self, quaternion)
+    }
+}
+@available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, *)
+extension Spatial.ScaledPose3D : @unchecked Swift.Sendable {
+}
+@available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, *)
+extension Spatial.ScaledPose3D : Swift.Equatable {
+  @inlinable public static func == (lhs: Spatial.ScaledPose3D, rhs: Spatial.ScaledPose3D) -> Swift.Bool {
+        return __SPScaledPose3DEqualToPose(lhs, rhs)
+    }
+  @inlinable public func isApproximatelyEqual(to other: Spatial.ScaledPose3D, tolerance: Swift.Double = sqrt(.ulpOfOne)) -> Swift.Bool {
+        
+        return __SPScaledPose3DAlmostEqualToPose(self, other, tolerance)
+    }
+  @inlinable public var isIdentity: Swift.Bool {
+    get {
+        return __SPScaledPose3DIsIdentity(self)
+    }
+  }
+}
+@available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, *)
+extension Spatial.ScaledPose3D : Swift.Hashable {
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+@available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, *)
+extension Spatial.ScaledPose3D : Swift.Codable {
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+@available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, *)
+extension Spatial.ScaledPose3D : Swift.CustomStringConvertible {
+  public var description: Swift.String {
+    get
+  }
+}
+@available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, *)
+extension Spatial.ScaledPose3D : Swift.CustomReflectable {
+  public var customMirror: Swift.Mirror {
+    get
+  }
+}
+@available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, *)
+extension Spatial.Pose3D {
+  @inlinable public func concatenating(_ transform: Spatial.ScaledPose3D) -> Spatial.ScaledPose3D {
+        return __SPScaledPose3DConcatenation(self, transform)
+    }
+}
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
 extension Spatial.Pose3D {
   @inlinable public init(position: Spatial.Point3D = .zero, rotation: Spatial.Rotation3D) {
@@ -836,6 +1083,58 @@ extension Spatial.Pose3D : Swift.CustomStringConvertible {
     get
   }
 }
+@available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, *)
+extension Spatial.Pose3D : Swift.CustomReflectable {
+  public var customMirror: Swift.Mirror {
+    get
+  }
+}
+@available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, *)
+extension Spatial.SphericalCoordinates3D : @unchecked Swift.Sendable {
+  public init(x: Swift.Double, y: Swift.Double, z: Swift.Double)
+  public init(_ vector: simd.simd_double3)
+  public init(_ point: Spatial.Point3D)
+  public init(_ vector: Spatial.Vector3D)
+}
+@available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, *)
+extension Spatial.Point3D {
+  public init(_ coords: Spatial.SphericalCoordinates3D)
+}
+@available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, *)
+extension Spatial.Vector3D {
+  public init(_ coords: Spatial.SphericalCoordinates3D)
+}
+@available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, *)
+extension Spatial.SphericalCoordinates3D : Swift.Equatable {
+  @inlinable public static func == (lhs: Spatial.SphericalCoordinates3D, rhs: Spatial.SphericalCoordinates3D) -> Swift.Bool {
+        
+        return lhs.radius == rhs.radius && lhs.inclination == rhs.inclination && lhs.azimuth == rhs.azimuth
+    }
+}
+@available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, *)
+extension Spatial.SphericalCoordinates3D : Swift.Hashable {
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+@available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, *)
+extension Spatial.SphericalCoordinates3D : Swift.Codable {
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+@available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, *)
+extension Spatial.SphericalCoordinates3D : Swift.CustomStringConvertible {
+  public var description: Swift.String {
+    get
+  }
+}
+@available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, *)
+extension Spatial.SphericalCoordinates3D : Swift.CustomReflectable {
+  public var customMirror: Swift.Mirror {
+    get
+  }
+}
 @available(macOS 14.0, iOS 17.0, tvOS 17.0, watchOS 10.0, *)
 extension Spatial.Angle2D {
   @inlinable public static func radians(_ radians: Swift.Double) -> Spatial.Angle2D {
@@ -869,6 +1168,12 @@ extension Spatial.Angle2D : Swift.Codable {
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
 extension Spatial.Angle2D : Swift.CustomStringConvertible {
   public var description: Swift.String {
+    get
+  }
+}
+@available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, *)
+extension Spatial.Angle2D : Swift.CustomReflectable {
+  public var customMirror: Swift.Mirror {
     get
   }
 }
@@ -958,6 +1263,11 @@ extension Spatial.ProjectiveTransform3D {
   @inlinable public init(pose: Spatial.Pose3D) {
         
         self = __SPProjectiveTransform3DMakeWithPose(pose)
+    }
+  @available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, *)
+  @inlinable public init(scaledPose: Spatial.ScaledPose3D) {
+        
+        self = __SPProjectiveTransform3DMakeWithScaledPose(scaledPose)
     }
   @inlinable public func isApproximatelyEqual(to other: Spatial.ProjectiveTransform3D, tolerance: Swift.Double = sqrt(.ulpOfOne)) -> Swift.Bool {
         
@@ -1061,6 +1371,12 @@ extension Spatial.ProjectiveTransform3D : Swift.CustomStringConvertible {
     get
   }
 }
+@available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, *)
+extension Spatial.ProjectiveTransform3D : Swift.CustomReflectable {
+  public var customMirror: Swift.Mirror {
+    get
+  }
+}
 @available(macOS 14.0, iOS 17.0, tvOS 17.0, watchOS 10.0, *)
 extension Spatial.ProjectiveTransform3D {
   @inlinable public var scaleComponent: Spatial.Size3D {
@@ -1097,6 +1413,11 @@ extension Spatial.Rect3D : Spatial.Primitive3D {
     }
   public func applying(_ pose: Spatial.Pose3D) -> Spatial.Rect3D
   public func unapplying(_ pose: Spatial.Pose3D) -> Spatial.Rect3D
+}
+@available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, *)
+extension Spatial.Rect3D {
+  public func applying(_ scaledPose: Spatial.ScaledPose3D) -> Spatial.Rect3D
+  public func unapplying(_ scaledPose: Spatial.ScaledPose3D) -> Spatial.Rect3D
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
 extension Spatial.Rect3D : Spatial.Translatable3D {
@@ -1172,6 +1493,12 @@ extension Spatial.Rect3D {
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
 extension Spatial.Rect3D : Swift.CustomStringConvertible {
   public var description: Swift.String {
+    get
+  }
+}
+@available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, *)
+extension Spatial.Rect3D : Swift.CustomReflectable {
+  public var customMirror: Swift.Mirror {
     get
   }
 }
@@ -1331,31 +1658,18 @@ extension Spatial.AffineTransform3D {
         
         self.init(m)
     }
-  @inlinable public init?(_ matrix: simd.simd_float4x4) {
+}
+@available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, *)
+extension Spatial.AffineTransform3D {
+  @inlinable public init(truncating matrix: simd.simd_float4x4) {
 
-        let column0 = matrix.columns.0
-        let column1 = matrix.columns.1
-        let column2 = matrix.columns.2
-        let column3 = matrix.columns.3
-        
         let m = simd_double4x4([
-            simd_double4(Double(column0.x), Double(column0.y),
-                         Double(column0.z), Double(column0.w)),
-            simd_double4(Double(column1.x), Double(column1.y),
-                         Double(column1.z), Double(column1.w)),
-            simd_double4(Double(column2.x), Double(column2.y),
-                         Double(column2.z), Double(column2.w)),
-            simd_double4(Double(column3.x), Double(column3.y),
-                         Double(column3.z), Double(column3.w))
-        ])
+            simd_double(matrix.columns.0),
+            simd_double(matrix.columns.1),
+            simd_double(matrix.columns.2),
+            simd_double(matrix.columns.3)])
         
-        let affine = __SPAffineTransform3DMakeWith4x4Matrix(m)
-
-        if __SPAffineTransform3DIsValid(affine) {
-            self = affine
-        } else {
-            return nil
-        }
+        self = .init(truncating: m)
     }
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
@@ -1434,6 +1748,11 @@ extension Spatial.Ray3D {
   public func applying(_ pose: Spatial.Pose3D) -> Spatial.Ray3D
   public mutating func apply(_ pose: Spatial.Pose3D)
 }
+@available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, *)
+extension Spatial.Ray3D {
+  public func unapplying(_ scaledPose: Spatial.ScaledPose3D) -> Spatial.Ray3D
+  public func applying(_ scaledPose: Spatial.ScaledPose3D) -> Spatial.Ray3D
+}
 @available(macOS 14.0, iOS 17.0, tvOS 17.0, watchOS 10.0, *)
 extension Spatial.Ray3D : Spatial.Primitive3D {
   public func applying(_ transform: Spatial.AffineTransform3D) -> Spatial.Ray3D
@@ -1485,6 +1804,12 @@ extension Spatial.Ray3D : Swift.Codable {
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
 extension Spatial.Ray3D : Swift.CustomStringConvertible {
   public var description: Swift.String {
+    get
+  }
+}
+@available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, *)
+extension Spatial.Ray3D : Swift.CustomReflectable {
+  public var customMirror: Swift.Mirror {
     get
   }
 }
@@ -1556,6 +1881,11 @@ extension Spatial.Vector3D : Spatial.Primitive3D {
   public func applying(_ pose: Spatial.Pose3D) -> Spatial.Vector3D
   public func unapplying(_ pose: Spatial.Pose3D) -> Spatial.Vector3D
 }
+@available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, *)
+extension Spatial.Vector3D {
+  public func applying(_ scaledPose: Spatial.ScaledPose3D) -> Spatial.Vector3D
+  public func unapplying(_ scaledPose: Spatial.ScaledPose3D) -> Spatial.Vector3D
+}
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
 extension Spatial.Vector3D : Spatial.Rotatable3D {
   @inlinable public func rotated(by rotation: Spatial.Rotation3D) -> Spatial.Vector3D {
@@ -1614,6 +1944,12 @@ extension Spatial.Vector3D : Swift.Codable {
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
 extension Spatial.Vector3D : Swift.CustomStringConvertible {
   public var description: Swift.String {
+    get
+  }
+}
+@available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, *)
+extension Spatial.Vector3D : Swift.CustomReflectable {
+  public var customMirror: Swift.Mirror {
     get
   }
 }
@@ -1738,8 +2074,11 @@ public struct Dimension3DSet : Swift.OptionSet {
   public static let z: Spatial.Dimension3DSet
   public static let all: Spatial.Dimension3DSet
   public init(rawValue: Swift.Int)
+  @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
   public typealias ArrayLiteralElement = Spatial.Dimension3DSet
+  @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
   public typealias Element = Spatial.Dimension3DSet
+  @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
   public typealias RawValue = Swift.Int
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
@@ -1785,6 +2124,11 @@ extension Spatial.Size3D : Spatial.Primitive3D {
     }
   public func applying(_ pose: Spatial.Pose3D) -> Spatial.Size3D
   public func unapplying(_ pose: Spatial.Pose3D) -> Spatial.Size3D
+}
+@available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, *)
+extension Spatial.Size3D {
+  public func applying(_ scaledPose: Spatial.ScaledPose3D) -> Spatial.Size3D
+  public func unapplying(_ scaledPose: Spatial.ScaledPose3D) -> Spatial.Size3D
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
 extension Spatial.Size3D : Spatial.Scalable3D {
@@ -1847,6 +2191,12 @@ extension Spatial.Size3D : Swift.CustomStringConvertible {
     get
   }
 }
+@available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, *)
+extension Spatial.Size3D : Swift.CustomReflectable {
+  public var customMirror: Swift.Mirror {
+    get
+  }
+}
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
 extension Spatial.Rotation3D : @unchecked Swift.Sendable {
   public init(_ quaternion: simd.simd_quatd)
@@ -1862,6 +2212,10 @@ extension Spatial.Rotation3D : @unchecked Swift.Sendable {
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
 extension Spatial.Rotation3D {
   public init(position: Spatial.Point3D = Point3D(x: 0, y: 0, z: 0), target: Spatial.Point3D, up: Spatial.Vector3D = Vector3D(x: 0, y: 1, z: 0))
+}
+@available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, *)
+extension Spatial.Rotation3D {
+  public init(forward: Spatial.Vector3D)
 }
 extension Spatial.Rotation3D {
   @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
@@ -1886,10 +2240,24 @@ extension Spatial.Rotation3D : Spatial.Rotatable3D {
   }
   public static func slerp(from: Spatial.Rotation3D, to: Spatial.Rotation3D, t: Swift.Double, along path: Spatial.Rotation3D.SlerpPath = .shortest) -> Spatial.Rotation3D
 }
+@available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, *)
+extension Spatial.Rotation3D.SlerpPath : @unchecked Swift.Sendable {
+}
+@available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, *)
+extension Spatial.Rotation3D {
+  public static func spline(leftEndpoint r0: Spatial.Rotation3D, from r1: Spatial.Rotation3D, to r2: Spatial.Rotation3D, rightEndpoint r3: Spatial.Rotation3D, t: Swift.Double) -> Spatial.Rotation3D
+}
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
 extension Spatial.Rotation3D : Swift.Equatable {
   @inlinable public static func == (lhs: Spatial.Rotation3D, rhs: Spatial.Rotation3D) -> Swift.Bool {
         __SPRotation3DEqualToRotation(lhs, rhs)
+    }
+}
+@available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, *)
+extension Spatial.Rotation3D {
+  @inlinable public func isApproximatelyEqual(to other: Spatial.Rotation3D, tolerance: Swift.Double = sqrt(.ulpOfOne)) -> Swift.Bool {
+        
+        return __SPRotation3DAlmostEqualToRotation(self, other, tolerance)
     }
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
@@ -1907,6 +2275,12 @@ extension Spatial.Rotation3D : Swift.Codable {
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
 extension Spatial.Rotation3D : Swift.CustomStringConvertible {
   public var description: Swift.String {
+    get
+  }
+}
+@available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, *)
+extension Spatial.Rotation3D : Swift.CustomReflectable {
+  public var customMirror: Swift.Mirror {
     get
   }
 }
@@ -1955,29 +2329,9 @@ extension Spatial.AffineTransform3D {
         
         return __SPAffineTransform3DAlmostEqualToTransform(self, other, tolerance)
     }
-  @inlinable public init?(projectiveTransform transform: Spatial.ProjectiveTransform3D) {
-        
-        let affine = __SPAffineTransform3DMakeWithProjective(transform)
-        
-        if __SPAffineTransform3DIsValid(affine) {
-            self = affine
-        } else {
-            return nil
-        }
-    }
   @inlinable public init() {
          self.init(scale: Size3D(width: 1, height: 1, depth: 1))
      }
-  @inlinable public init?(_ matrix: simd.simd_double4x4) {
-
-        let affine = __SPAffineTransform3DMakeWith4x4Matrix(matrix)
-
-        if __SPAffineTransform3DIsValid(affine) {
-            self = affine
-        } else {
-            return nil
-        }
-    }
   @available(*, deprecated, message: "Use `Vector3D` variant.")
   @inlinable public init(scale: Spatial.Size3D = Size3D(width: 1.0, height: 1, depth: 1), rotation: Spatial.Rotation3D = .zero, translation: Spatial.Size3D) {
         
@@ -2008,6 +2362,11 @@ extension Spatial.AffineTransform3D {
   @inlinable public init(pose: Spatial.Pose3D) {
         
         self = __SPAffineTransform3DMakeWithPose(pose)
+    }
+  @available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, *)
+  @inlinable public init(scaledPose: Spatial.ScaledPose3D) {
+        
+        self = __SPAffineTransform3DMakeWithScaledPose(scaledPose)
     }
   @inlinable public func sheared(_ shear: Spatial.AxisWithFactors) -> Spatial.AffineTransform3D {
         return _shear(shearFunc: __SPAffineTransform3DShear, shear: shear)
@@ -2069,9 +2428,19 @@ extension Spatial.AffineTransform3D : Swift.Codable {
   public func encode(to encoder: any Swift.Encoder) throws
   public init(from decoder: any Swift.Decoder) throws
 }
+@available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, *)
+extension Spatial.AffineTransform3D {
+  public func changeBasis(from: Spatial.AffineTransform3D = .identity, to: Spatial.AffineTransform3D) -> Spatial.AffineTransform3D?
+}
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
 extension Spatial.AffineTransform3D : Swift.CustomStringConvertible {
   public var description: Swift.String {
+    get
+  }
+}
+@available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, *)
+extension Spatial.AffineTransform3D : Swift.CustomReflectable {
+  public var customMirror: Swift.Mirror {
     get
   }
 }
@@ -2163,6 +2532,12 @@ extension Spatial.RotationAxis3D : Swift.Codable {
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
 extension Spatial.RotationAxis3D : Swift.CustomStringConvertible {
   public var description: Swift.String {
+    get
+  }
+}
+@available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, *)
+extension Spatial.RotationAxis3D : Swift.CustomReflectable {
+  public var customMirror: Swift.Mirror {
     get
   }
 }

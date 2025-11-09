@@ -5,6 +5,8 @@
 
 #import <AuthenticationServices/ASAuthorizationWebBrowserPlatformPublicKeyCredentialProvider.h>
 
+#import <AuthenticationServices/ASAuthorizationPlatformPublicKeyCredentialRegistrationRequest.h>
+
 @class ASAuthorizationPlatformPublicKeyCredentialAssertionRequest;
 @class ASAuthorizationPlatformPublicKeyCredentialRegistrationRequest;
 
@@ -21,6 +23,14 @@ API_AVAILABLE(macos(12.0), ios(15.0), tvos(16.0)) API_UNAVAILABLE(watchos)
     @param userID An identifier to be stored alongside the credential, which will be returned with the credential when it is used to authenticate.
  */
 - (ASAuthorizationPlatformPublicKeyCredentialRegistrationRequest *)createCredentialRegistrationRequestWithChallenge:(NSData *)challenge name:(NSString *)name userID:(NSData *)userID NS_SWIFT_NAME(createCredentialRegistrationRequest(challenge:name:userID:));
+
+/*! @abstract Create a request to register a new platform credential.
+    @param challenge The challenge to sign.
+    @param name The user name for the new credential.
+    @param userID An identifier to be stored alongside the credential, which will be returned with the credential when it is used to authenticate.
+    @param requestStyle The style for this request.
+ */
+- (ASAuthorizationPlatformPublicKeyCredentialRegistrationRequest *)createCredentialRegistrationRequestWithChallenge:(NSData *)challenge name:(NSString *)name userID:(NSData *)userID requestStyle:(ASAuthorizationPlatformPublicKeyCredentialRegistrationRequestStyle)requestStyle NS_SWIFT_NAME(createCredentialRegistrationRequest(challenge:name:userID:requestStyle:)) API_AVAILABLE(macos(15.0), ios(18.0), visionos(2.0)) API_UNAVAILABLE(tvos, watchos);
 
 /*! @abstract Create a request to authenticate using an existing credential.
     @param challenge The challenge to sign.

@@ -13,7 +13,7 @@
 
 NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
-UIKIT_EXTERN API_DEPRECATED("Use enumeration based NSFileProviderExtension instead", ios(8.0, 14.0), visionos(1.0, 1.0))  API_UNAVAILABLE(tvos) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_DEPRECATED("Use enumeration based NSFileProviderExtension instead", ios(8.0, 14.0), visionos(1.0, 1.0)) API_UNAVAILABLE(tvos, watchos) NS_SWIFT_UI_ACTOR
 @interface UIDocumentPickerExtensionViewController : UIViewController
 
 // The preconditions for the URL passed to dismissGrantingAccessToURL: vary depending on the document picker mode.

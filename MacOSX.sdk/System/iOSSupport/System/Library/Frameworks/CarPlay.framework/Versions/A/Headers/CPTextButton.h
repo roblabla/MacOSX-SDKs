@@ -22,9 +22,9 @@ typedef NS_ENUM(NSInteger, CPTextButtonStyle) {
      A style that indicates the button will confirm an action.
      */
     CPTextButtonStyleConfirm,
-} API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(macos, watchos, tvos);
+} API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(macos, watchos);
 
-API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(macos, watchos, tvos)
+API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(macos, watchos)
 @interface CPTextButton : NSObject
 
 /**

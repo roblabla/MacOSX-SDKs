@@ -28,7 +28,7 @@ NS_CLASS_AVAILABLE(10_9, 6_1) __TVOS_AVAILABLE(9_2) API_UNAVAILABLE(watchos)
 
 // Any calls to -startWithCompletionHandler: while -[MKLocalSearch isSearching] will fail.
 // completionHandler will be called on the main queue
-- (void)startWithCompletionHandler:(MKLocalSearchCompletionHandler)completionHandler;
+- (void)startWithCompletionHandler:(NS_SWIFT_UI_ACTOR MKLocalSearchCompletionHandler)completionHandler;
 - (void)cancel;
 
 @property (nonatomic, readonly, getter=isSearching) BOOL searching;

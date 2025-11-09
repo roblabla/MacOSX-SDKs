@@ -1,7 +1,7 @@
 /*
  NSStackView.h
  Application Kit
- Copyright (c) 2012-2023, Apple Inc.
+ Copyright (c) 2012-2024, Apple Inc.
  All rights reserved.
  */
 

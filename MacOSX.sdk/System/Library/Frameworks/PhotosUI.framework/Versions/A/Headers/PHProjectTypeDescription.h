@@ -18,6 +18,7 @@ API_AVAILABLE_BEGIN(macos(10.13))
  -[PHProjectExtensionController typeDescriptionDataSourceForCategory:invalidator:].
  The info includes a type, localized title, localized (attributed) description, image and optional subtype descriptions.
  */
+NS_SWIFT_SENDABLE
 @interface PHProjectTypeDescription : NSObject <NSSecureCoding>
 
 /// Identifier for the project type info. These should be added to the extensible string enum defined in PhotosUITypes.h.

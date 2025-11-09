@@ -24,13 +24,13 @@
 #ifndef __CL_EXT_H
 #define __CL_EXT_H
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 #include <stdarg.h>
 #include <OpenCL/cl.h>
 #include <AvailabilityMacros.h>
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 /* enum can be used if cl_khr_fp64 extension is supported by the OpenCL implementation. */
 #define CL_DEVICE_DOUBLE_FP_CONFIG                  0x1032

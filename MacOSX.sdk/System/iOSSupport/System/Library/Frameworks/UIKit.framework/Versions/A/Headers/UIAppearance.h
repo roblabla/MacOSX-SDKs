@@ -21,10 +21,10 @@ NS_HEADER_AUDIT_BEGIN(nullability, sendability)
  */
 #define UI_APPEARANCE_SELECTOR __attribute__((annotate("ui_appearance_selector")))
 
-NS_SWIFT_UI_ACTOR
+API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @protocol UIAppearanceContainer <NSObject> @end
 
-NS_SWIFT_UI_ACTOR
+API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @protocol UIAppearance <NSObject>
 /* To customize the appearance of all instances of a class, send the relevant appearance modification messages to the appearance proxy for the class. For example, to modify the bar tint color for all UINavigationBar instances:
     [[UINavigationBar appearance] setBarTintColor:myColor];
@@ -43,11 +43,11 @@ NS_SWIFT_UI_ACTOR
  
  In other words, the containment statement is treated as a partial ordering. Given a concrete ordering (actual subview hierarchy), we select the partial ordering that is the first unique match when reading the actual hierarchy from the window down.
 */
-+ (instancetype)appearanceWhenContainedIn:(nullable Class <UIAppearanceContainer>)ContainerClass, ... NS_REQUIRES_NIL_TERMINATION API_DEPRECATED_WITH_REPLACEMENT("appearanceWhenContainedInInstancesOfClasses:", ios(5.0, 9.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos);
++ (instancetype)appearanceWhenContainedIn:(nullable Class <UIAppearanceContainer>)ContainerClass, ... NS_REQUIRES_NIL_TERMINATION API_DEPRECATED_WITH_REPLACEMENT("appearanceWhenContainedInInstancesOfClasses:", ios(5.0, 9.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(visionos, watchos);
 + (instancetype)appearanceWhenContainedInInstancesOfClasses:(NSArray<Class <UIAppearanceContainer>> *)containerTypes API_AVAILABLE(ios(9.0));
 
 + (instancetype)appearanceForTraitCollection:(UITraitCollection *)trait API_AVAILABLE(ios(8.0));
-+ (instancetype)appearanceForTraitCollection:(UITraitCollection *)trait whenContainedIn:(nullable Class <UIAppearanceContainer>)ContainerClass, ... NS_REQUIRES_NIL_TERMINATION API_DEPRECATED_WITH_REPLACEMENT("appearanceForTraitCollection:whenContainedInInstancesOfClasses:", ios(8.0, 9.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos);
++ (instancetype)appearanceForTraitCollection:(UITraitCollection *)trait whenContainedIn:(nullable Class <UIAppearanceContainer>)ContainerClass, ... NS_REQUIRES_NIL_TERMINATION API_DEPRECATED_WITH_REPLACEMENT("appearanceForTraitCollection:whenContainedInInstancesOfClasses:", ios(8.0, 9.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(visionos, watchos);
 + (instancetype)appearanceForTraitCollection:(UITraitCollection *)trait whenContainedInInstancesOfClasses:(NSArray<Class <UIAppearanceContainer>> *)containerTypes  API_AVAILABLE(ios(9.0));
 
 @end

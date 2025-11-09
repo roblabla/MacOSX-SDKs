@@ -20,51 +20,51 @@ NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 @class UIPress;
 @class UIPressesEvent;
 
-typedef NSDictionary<NSAttributedStringKey, id> * _Nonnull(^UITextAttributesConversionHandler)(NSDictionary<NSAttributedStringKey, id> * _Nonnull);
+typedef NSDictionary<NSAttributedStringKey, id> * _Nonnull(^UITextAttributesConversionHandler)(NSDictionary<NSAttributedStringKey, id> * _Nonnull) API_UNAVAILABLE(watchos);
 
 typedef NS_ENUM(NSInteger, UIEditingInteractionConfiguration) {
     UIEditingInteractionConfigurationNone              = 0,
     UIEditingInteractionConfigurationDefault           = 1,      // Default
-} API_AVAILABLE(ios(13.0));
+} API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos);
 
-NS_SWIFT_UI_ACTOR
+API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @protocol UIResponderStandardEditActions <NSObject>
 @optional
-- (void)cut:(nullable id)sender API_AVAILABLE(ios(3.0));
-- (void)copy:(nullable id)sender API_AVAILABLE(ios(3.0));
-- (void)paste:(nullable id)sender API_AVAILABLE(ios(3.0));
-- (void)pasteAndMatchStyle:(nullable id)sender API_AVAILABLE(ios(15.0));
-- (void)pasteAndGo:(nullable id)sender API_AVAILABLE(ios(15.0));
-- (void)pasteAndSearch:(nullable id)sender API_AVAILABLE(ios(15.0));
-- (void)select:(nullable id)sender API_AVAILABLE(ios(3.0));
-- (void)selectAll:(nullable id)sender API_AVAILABLE(ios(3.0));
-- (void)delete:(nullable id)sender API_AVAILABLE(ios(3.2));
-- (void)makeTextWritingDirectionLeftToRight:(nullable id)sender API_AVAILABLE(ios(5.0));
-- (void)makeTextWritingDirectionRightToLeft:(nullable id)sender API_AVAILABLE(ios(5.0));
-- (void)toggleBoldface:(nullable id)sender API_AVAILABLE(ios(6.0));
-- (void)toggleItalics:(nullable id)sender API_AVAILABLE(ios(6.0));
-- (void)toggleUnderline:(nullable id)sender API_AVAILABLE(ios(6.0));
+- (void)cut:(nullable id)sender API_AVAILABLE(ios(3.0)) API_UNAVAILABLE(watchos);
+- (void)copy:(nullable id)sender API_AVAILABLE(ios(3.0)) API_UNAVAILABLE(watchos);
+- (void)paste:(nullable id)sender API_AVAILABLE(ios(3.0)) API_UNAVAILABLE(watchos);
+- (void)pasteAndMatchStyle:(nullable id)sender API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(watchos);
+- (void)pasteAndGo:(nullable id)sender API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(watchos);
+- (void)pasteAndSearch:(nullable id)sender API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(watchos);
+- (void)select:(nullable id)sender API_AVAILABLE(ios(3.0)) API_UNAVAILABLE(watchos);
+- (void)selectAll:(nullable id)sender API_AVAILABLE(ios(3.0)) API_UNAVAILABLE(watchos);
+- (void)delete:(nullable id)sender API_AVAILABLE(ios(3.2)) API_UNAVAILABLE(watchos);
+- (void)makeTextWritingDirectionLeftToRight:(nullable id)sender API_AVAILABLE(ios(5.0)) API_UNAVAILABLE(watchos);
+- (void)makeTextWritingDirectionRightToLeft:(nullable id)sender API_AVAILABLE(ios(5.0)) API_UNAVAILABLE(watchos);
+- (void)toggleBoldface:(nullable id)sender API_AVAILABLE(ios(6.0)) API_UNAVAILABLE(watchos);
+- (void)toggleItalics:(nullable id)sender API_AVAILABLE(ios(6.0)) API_UNAVAILABLE(watchos);
+- (void)toggleUnderline:(nullable id)sender API_AVAILABLE(ios(6.0)) API_UNAVAILABLE(watchos);
 
-- (void)increaseSize:(nullable id)sender API_AVAILABLE(ios(7.0));
-- (void)decreaseSize:(nullable id)sender API_AVAILABLE(ios(7.0));
+- (void)increaseSize:(nullable id)sender API_AVAILABLE(ios(7.0)) API_UNAVAILABLE(watchos);
+- (void)decreaseSize:(nullable id)sender API_AVAILABLE(ios(7.0)) API_UNAVAILABLE(watchos);
 
-- (void)find:(nullable id)sender API_AVAILABLE(ios(16.0));
-- (void)findAndReplace:(nullable id)sender API_AVAILABLE(ios(16.0));
-- (void)findNext:(nullable id)sender API_AVAILABLE(ios(16.0));
-- (void)findPrevious:(nullable id)sender API_AVAILABLE(ios(16.0));
-- (void)useSelectionForFind:(nullable id)sender API_AVAILABLE(ios(16.0));
+- (void)find:(nullable id)sender API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(watchos);
+- (void)findAndReplace:(nullable id)sender API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(watchos);
+- (void)findNext:(nullable id)sender API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(watchos);
+- (void)findPrevious:(nullable id)sender API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(watchos);
+- (void)useSelectionForFind:(nullable id)sender API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(watchos);
 
-- (void)updateTextAttributesWithConversionHandler:(NS_NOESCAPE UITextAttributesConversionHandler _Nonnull)conversionHandler API_AVAILABLE(ios(13.0));
-- (void)print:(nullable id)sender NS_SWIFT_NAME(printContent(_:)) API_AVAILABLE(ios(15.0));
+- (void)updateTextAttributesWithConversionHandler:(NS_NOESCAPE UITextAttributesConversionHandler _Nonnull)conversionHandler API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos);
+- (void)print:(nullable id)sender NS_SWIFT_NAME(printContent(_:)) API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(watchos);
 
-- (void)rename:(nullable id)sender API_AVAILABLE(ios(16.0));
-- (void)duplicate:(nullable id)sender API_AVAILABLE(ios(16.0));
-- (void)move:(nullable id)sender API_AVAILABLE(ios(16.0));
-- (void)export:(nullable id)sender API_AVAILABLE(ios(16.0));
+- (void)rename:(nullable id)sender API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(watchos);
+- (void)duplicate:(nullable id)sender API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(watchos);
+- (void)move:(nullable id)sender API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(watchos);
+- (void)export:(nullable id)sender API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(watchos);
 
 @end
 
-UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(2.0)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @interface UIResponder : NSObject <UIResponderStandardEditActions>
 
 @property(nonatomic, readonly, nullable) UIResponder *nextResponder;
@@ -111,13 +111,13 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
 - (nullable id)targetForAction:(SEL)action withSender:(nullable id)sender API_AVAILABLE(ios(7.0));
 
 // Overrides for menu building and validation
-- (void)buildMenuWithBuilder:(id<UIMenuBuilder>)builder API_AVAILABLE(ios(13.0));
-- (void)validateCommand:(UICommand *)command API_AVAILABLE(ios(13.0));
+- (void)buildMenuWithBuilder:(id<UIMenuBuilder>)builder API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos);
+- (void)validateCommand:(UICommand *)command API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos);
 
 @property(nullable, nonatomic,readonly) NSUndoManager *undoManager API_AVAILABLE(ios(3.0));
 
 // Productivity editing interaction support for undo/redo/cut/copy/paste gestures
-@property (nonatomic, readonly) UIEditingInteractionConfiguration editingInteractionConfiguration API_AVAILABLE(ios(13.0));
+@property (nonatomic, readonly) UIEditingInteractionConfiguration editingInteractionConfiguration API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos);
 
 @end
 
@@ -139,7 +139,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
 /// You may modify the returned inputAssistantItem to add to or replace the existing items on the bar.
 /// Modifications made to the returned UITextInputAssistantItem are reflected automatically.
 /// This method should not be overridden. Goes up the responder chain.
-@property (nonnull, nonatomic, readonly, strong) UITextInputAssistantItem *inputAssistantItem API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos) API_UNAVAILABLE(visionos);
+@property (nonnull, nonatomic, readonly, strong) UITextInputAssistantItem *inputAssistantItem API_AVAILABLE(ios(9.0), visionos(2.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos);
 
 // For viewController equivalents of -inputView and -inputAccessoryView
 // Called and presented when object becomes first responder.  Goes up the responder chain.
@@ -163,13 +163,13 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
 @end
 
 // These are pre-defined constants for use with the input property of UIKeyCommand objects.
-UIKIT_EXTERN NSString *const UIKeyInputUpArrow         API_AVAILABLE(ios(7.0));
-UIKIT_EXTERN NSString *const UIKeyInputDownArrow       API_AVAILABLE(ios(7.0));
-UIKIT_EXTERN NSString *const UIKeyInputLeftArrow       API_AVAILABLE(ios(7.0));
-UIKIT_EXTERN NSString *const UIKeyInputRightArrow      API_AVAILABLE(ios(7.0));
-UIKIT_EXTERN NSString *const UIKeyInputEscape          API_AVAILABLE(ios(7.0));
-UIKIT_EXTERN NSString *const UIKeyInputPageUp          API_AVAILABLE(ios(8.0));
-UIKIT_EXTERN NSString *const UIKeyInputPageDown        API_AVAILABLE(ios(8.0));
+UIKIT_EXTERN NSString *const UIKeyInputUpArrow         API_AVAILABLE(ios(7.0)) API_UNAVAILABLE(watchos);
+UIKIT_EXTERN NSString *const UIKeyInputDownArrow       API_AVAILABLE(ios(7.0)) API_UNAVAILABLE(watchos);
+UIKIT_EXTERN NSString *const UIKeyInputLeftArrow       API_AVAILABLE(ios(7.0)) API_UNAVAILABLE(watchos);
+UIKIT_EXTERN NSString *const UIKeyInputRightArrow      API_AVAILABLE(ios(7.0)) API_UNAVAILABLE(watchos);
+UIKIT_EXTERN NSString *const UIKeyInputEscape          API_AVAILABLE(ios(7.0)) API_UNAVAILABLE(watchos);
+UIKIT_EXTERN NSString *const UIKeyInputPageUp          API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(watchos);
+UIKIT_EXTERN NSString *const UIKeyInputPageDown        API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(watchos);
 UIKIT_EXTERN NSString *const UIKeyInputHome            API_AVAILABLE(ios(13.4), tvos(13.4)) API_UNAVAILABLE(watchos);
 UIKIT_EXTERN NSString *const UIKeyInputEnd             API_AVAILABLE(ios(13.4), tvos(13.4)) API_UNAVAILABLE(watchos);
 UIKIT_EXTERN NSString *const UIKeyInputF1              API_AVAILABLE(ios(13.4), tvos(13.4)) API_UNAVAILABLE(watchos);
@@ -199,7 +199,7 @@ UIKIT_EXTERN NSString *const UIKeyInputDelete          API_AVAILABLE(ios(15.0), 
 #endif
 
 @interface UIResponder (UICaptureTextFromCameraSupporting)
-- (void)captureTextFromCamera:(nullable id)sender API_AVAILABLE(ios(15.0));
+- (void)captureTextFromCamera:(nullable id)sender API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(watchos);
 @end
 
 NS_HEADER_AUDIT_END(nullability, sendability)

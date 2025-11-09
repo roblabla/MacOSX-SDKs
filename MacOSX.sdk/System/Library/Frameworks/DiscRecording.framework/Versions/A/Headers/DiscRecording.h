@@ -22,59 +22,59 @@
 #endif
 
 #ifndef __CORESERVICES__
-#include <CoreServices/CoreServices.h>
+#import <CoreServices/CoreServices.h>
 #endif
 
 #ifndef _H_DRCoreBurn
-#include <DiscRecording/DRCoreBurn.h>
+#import <DiscRecording/DRCoreBurn.h>
 #endif
 
 #ifndef _H_DRCoreCDText
-#include <DiscRecording/DRCoreCDText.h>
+#import <DiscRecording/DRCoreCDText.h>
 #endif
 
 #ifndef _H_DRCoreDevice
-#include <DiscRecording/DRCoreDevice.h>
+#import <DiscRecording/DRCoreDevice.h>
 #endif
 
 #ifndef _H_DRCoreErase
-#include <DiscRecording/DRCoreErase.h>
+#import <DiscRecording/DRCoreErase.h>
 #endif
 
 #ifndef _H_DRCoreErrors
-#include <DiscRecording/DRCoreErrors.h>
+#import <DiscRecording/DRCoreErrors.h>
 #endif
 
 #ifndef _H_DRCoreNotifications
-#include <DiscRecording/DRCoreNotifications.h>
+#import <DiscRecording/DRCoreNotifications.h>
 #endif
 
 #ifndef _H_DRCoreObject
-#include <DiscRecording/DRCoreObject.h>
+#import <DiscRecording/DRCoreObject.h>
 #endif
 
 #ifndef _H_DRCoreStatus
-#include <DiscRecording/DRCoreStatus.h>
+#import <DiscRecording/DRCoreStatus.h>
 #endif
 
 #ifndef _H_DRCoreTrack
-#include <DiscRecording/DRCoreTrack.h>
+#import <DiscRecording/DRCoreTrack.h>
 #endif
 
 #ifndef _H_DRContentFolder
-#include <DiscRecording/DRContentFolder.h>
+#import <DiscRecording/DRContentFolder.h>
 #endif
 
 #ifndef _H_DRContentFile
-#include <DiscRecording/DRContentFile.h>
+#import <DiscRecording/DRContentFile.h>
 #endif
 
 #ifndef _H_DRContentProperties
-#include <DiscRecording/DRContentProperties.h>
+#import <DiscRecording/DRContentProperties.h>
 #endif
 
 #ifndef _H_DRContentTrack
-#include <DiscRecording/DRContentTrack.h>
+#import <DiscRecording/DRContentTrack.h>
 #endif
 
 #ifdef __OBJC__

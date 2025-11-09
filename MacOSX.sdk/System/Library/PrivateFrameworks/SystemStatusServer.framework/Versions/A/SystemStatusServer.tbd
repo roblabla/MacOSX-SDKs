@@ -13,7 +13,7 @@ exports:
                        STLocalStatusServer, STLocationStatusDomainDisplayNameTransformer, 
                        STLocationStatusDomainDisplayNameTransformerProvider, STMediaStatusDomainDisplayNameTransformer, 
                        STMediaStatusDomainDisplayNameTransformerProvider, STReferenceCountedCache, 
-                       STStatusDomainPublisherXPCClientHandle, STStatusDomainPublisherXPCClientListener, 
-                       STStatusDomainXPCClientHandle, STStatusDomainXPCClientListener, 
-                       STStatusServer ]
+                       STStatusDomainClientHandleWrapper, STStatusDomainPublisherXPCClientHandle, 
+                       STStatusDomainPublisherXPCClientListener, STStatusDomainXPCClientHandle, 
+                       STStatusDomainXPCClientListener, STStatusServer ]
 ...

@@ -168,7 +168,7 @@ API_AVAILABLE(macos(11.0), ios(14.0), tvos(15.0), watchos(9.0))
 /// calling the
 /// ``DeviceCheck/DCAppAttestService/generateKeyWithCompletionHandler:`` method.
 ///   - clientDataHash: A SHA256 hash of a unique, single-use data block that
-/// embeds a challenge from your server.
+/// embeds a challenge from your server. Should be at least 16 bytes in length.
 ///   - completionHandler: A closure that the method calls upon completion with
 /// the following parameters:
 ///     - `attestationObject`: A statement from Apple about the validity of the key
@@ -211,7 +211,7 @@ API_AVAILABLE(macos(11.0), ios(14.0), tvos(15.0), watchos(9.0))
 /// calling the
 /// ``DeviceCheck/DCAppAttestService/generateKeyWithCompletionHandler:`` method.
 ///   - clientDataHash: A SHA256 hash of a unique, single-use data block that
-/// represents the client data to be signed with the attested private key.
+/// represents the client data to be signed with the attested private key. Should be at least 16 bytes in length.
 ///   - completionHandler: A closure that the method calls upon completion with
 /// the following parameters:
 ///     - `assertionObject`: A data structure that you send to your server for processing.

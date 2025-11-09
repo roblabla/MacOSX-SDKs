@@ -11,6 +11,7 @@
 #include <stddef.h>
 #include <stdint.h>
 #include <stdbool.h>
+#include <sys/types.h>
 #include "bnns_constants.h"
 
 #if __has_include( <Availability.h> )
@@ -140,6 +141,42 @@ typedef struct {
 
 } BNNSNDArrayDescriptor;
 
+/*!
+
+ @abstract Generic Tensor
+
+ @discussion
+ This type presents a simpler interface than `BNNSNDArrayDescriptor` that avoids unnecessary complexity that
+ is not required for the BNNSGraph family of APIs.
+
+ @field `data_type` - type of data stored in this tensor
+ @field `rank` - rank of the tensor, must satisfy `0 <= rank <= BNNS_MAX_TENSOR_DIMENSION`
+ @field `shape` - the first `rank` elements give the shape of the tensor. Negative values indicate the dimension has
+        unspecified dynamic size.
+ @field `stride`- the first `rank` elements give the strides of each dimension. `stride[d]` corresponds to `shape[d]`. 
+        Negative values indicate the stride is unspecified (normally due to the presence of a dynamic shape).
+        Unlike BNNSNDArrayDescriptor, a stride of 0 is not interpreted to mean contiguous, but is taken as a literal 0.
+        Unless otherwise stated, all BNNS routines expect data to be in first-major layout (`stride[d] >= stride[d+1]`).
+ @field `data` - pointer to memory containing the actual values of the tensor
+ @field `data_size_in_bytes` - the extent of `data`, used for bounds checking
+ @field `name` - optional name of this tensor. This field is not read by BNNS (but will be set to a pointer into the IR for
+        any BNNSTensors returned by BNNS) and is provided as a debugging aide only.
+ */
+typedef struct {
+
+  BNNSDataType data_type;
+
+  uint8_t rank;
+  ssize_t shape[BNNS_MAX_TENSOR_DIMENSION];
+  ssize_t stride[BNNS_MAX_TENSOR_DIMENSION];
+
+  void * _Nullable data;
+  size_t data_size_in_bytes;
+
+  char const * _Nullable name;
+
+} BNNSTensor;
+
 #pragma mark - Sub Layers Parameters
 
 /*!
@@ -180,7 +217,8 @@ typedef struct {
   BNNSNDArrayDescriptor cw_desc;
   BNNSNDArrayDescriptor b_desc;
   BNNSActivation activation;
-} BNNSLSTMGateDescriptor;
+} BNNSLSTMGateDescriptor
+__API_DEPRECATED("Use BNNSGraph* APIs", macos(11.0, 15.0), ios(14.0, 18.0), watchos(7.0, 11.0), tvos(14.0, 18.0));
 
 /*!
  @abstract contains NDarrat descriptors for inputs and outputs of LSTM
@@ -192,7 +230,8 @@ typedef struct {
   BNNSNDArrayDescriptor data_desc;
   BNNSNDArrayDescriptor hidden_desc;
   BNNSNDArrayDescriptor cell_state_desc;
-} BNNSLSTMDataDescriptor;
+} BNNSLSTMDataDescriptor
+__API_DEPRECATED("Use BNNSGraph* APIs", macos(11.0, 15.0), ios(14.0, 18.0), watchos(7.0, 11.0), tvos(14.0, 18.0));
 
 /*!
  @abstract Arithmetic struct that hold 1 input and an output descriptor
@@ -208,7 +247,8 @@ typedef struct {
   BNNSDescriptorType in_type;
   BNNSNDArrayDescriptor out;
   BNNSDescriptorType out_type;
-} BNNSArithmeticUnary;
+} BNNSArithmeticUnary
+__API_DEPRECATED("Use BNNSGraph* APIs", macos(11.0, 15.0), ios(14.0, 18.0), watchos(7.0, 11.0), tvos(14.0, 18.0));
 
 /*!
  @abstract Arithmetic struct that holds 2 input descriptors and an output descriptor
@@ -228,7 +268,8 @@ typedef struct {
   BNNSDescriptorType in2_type;
   BNNSNDArrayDescriptor out;
   BNNSDescriptorType out_type;
-} BNNSArithmeticBinary;
+} BNNSArithmeticBinary
+__API_DEPRECATED("Use BNNSGraph* APIs", macos(11.0, 15.0), ios(14.0, 18.0), watchos(7.0, 11.0), tvos(14.0, 18.0));
 
 /*!
  @abstract Arithmetic struct that holds 3 input descriptors and an output descriptor
@@ -252,7 +293,8 @@ typedef struct {
   BNNSDescriptorType in3_type;
   BNNSNDArrayDescriptor out;
   BNNSDescriptorType out_type;
-} BNNSArithmeticTernary;
+} BNNSArithmeticTernary
+__API_DEPRECATED("Use BNNSGraph* APIs", macos(11.0, 15.0), ios(14.0, 18.0), watchos(7.0, 11.0), tvos(14.0, 18.0));
 
 /*! @abstract Multihead Attention Projection Parameters
  *
@@ -337,7 +379,8 @@ typedef struct {
   size_t y_padding;
   size_t groups;
   size_t pad[4];
-} BNNSLayerParametersConvolution;
+} BNNSLayerParametersConvolution
+__API_DEPRECATED("Use BNNSGraph* APIs", macos(11.0, 15.0), ios(14.0, 18.0), watchos(7.0, 11.0), tvos(14.0, 18.0));
 
 /*!
 
@@ -369,7 +412,8 @@ typedef struct {
   BNNSNDArrayDescriptor bias;
   BNNSActivation activation;
 
-} BNNSLayerParametersFullyConnected;
+} BNNSLayerParametersFullyConnected
+__API_DEPRECATED("Use BNNSGraph* APIs", macos(11.0, 15.0), ios(14.0, 18.0), watchos(7.0, 11.0), tvos(14.0, 18.0));
 
 /*!
 
@@ -423,7 +467,8 @@ typedef struct {
   size_t x_padding;
   size_t y_padding;
   size_t pad[4];
-} BNNSLayerParametersPooling;
+} BNNSLayerParametersPooling
+__API_DEPRECATED("Use BNNSGraph* APIs", macos(11.0, 15.0), ios(14.0, 18.0), watchos(7.0, 11.0), tvos(14.0, 18.0));
 
 /*!
 
@@ -452,7 +497,8 @@ typedef struct {
   BNNSActivation activation;
   uint32_t axis_flags;
 
-} BNNSLayerParametersActivation;
+} BNNSLayerParametersActivation
+__API_DEPRECATED("Use BNNSGraph* APIs", macos(11.0, 15.0), ios(14.0, 18.0), watchos(7.0, 11.0), tvos(14.0, 18.0));
 
 /*!
 @abstract Loss layer parameters (basic version)
@@ -475,7 +521,8 @@ typedef struct {
   BNNSNDArrayDescriptor i_desc;
   BNNSNDArrayDescriptor o_desc;
   BNNSLossReductionFunction reduction;
-} BNNSLayerParametersLossBase;
+} BNNSLayerParametersLossBase
+__API_DEPRECATED("Use BNNSGraph* APIs", macos(11.0, 15.0), ios(14.0, 18.0), watchos(7.0, 11.0), tvos(14.0, 18.0));
 
 /*!
  @abstract Loss layer parameters (Softmax Cross Entropy version)
@@ -498,7 +545,8 @@ typedef struct {
 
     // Fields specific to Softmax Cross Entropy
     float label_smooth;
-} BNNSLayerParametersLossSoftmaxCrossEntropy;
+} BNNSLayerParametersLossSoftmaxCrossEntropy
+__API_DEPRECATED("Use BNNSGraph* APIs", macos(11.0, 15.0), ios(14.0, 18.0), watchos(7.0, 11.0), tvos(14.0, 18.0));
 
 /*!
  @abstract Loss layer parameters (Sigmoid Cross Entropy version)
@@ -521,7 +569,8 @@ typedef struct {
 
     // Fields specific to Softmax Cross Entropy
     float label_smooth;
-} BNNSLayerParametersLossSigmoidCrossEntropy;
+} BNNSLayerParametersLossSigmoidCrossEntropy
+__API_DEPRECATED("Use BNNSGraph* APIs", macos(11.0, 15.0), ios(14.0, 18.0), watchos(7.0, 11.0), tvos(14.0, 18.0));
 
 /*!
  @abstract Loss layer parameters (Huber version)
@@ -543,7 +592,8 @@ typedef struct {
 
     // Fields specific to Huber Loss
     float huber_delta;
-} BNNSLayerParametersLossHuber;
+} BNNSLayerParametersLossHuber
+__API_DEPRECATED("Use BNNSGraph* APIs", macos(11.0, 15.0), ios(14.0, 18.0), watchos(7.0, 11.0), tvos(14.0, 18.0));
 
 /*!
  @abstract Loss layer parameters (YoLo version)
@@ -596,7 +646,8 @@ typedef struct {
     float object_minimum_iou;
     float no_object_maximum_iou;
     float* anchors_data;
-} BNNSLayerParametersLossYolo;
+} BNNSLayerParametersLossYolo
+__API_DEPRECATED("Use BNNSGraph* APIs", macos(11.0, 15.0), ios(14.0, 18.0), watchos(7.0, 11.0), tvos(14.0, 18.0));
 
 /*!
  @abstract SGD with Momentum Optimizer Fields
@@ -634,7 +685,8 @@ typedef struct {
   bool nesterov;
   BNNSOptimizerRegularizationFunction regularization_func;
   BNNSOptimizerSGDMomentumVariant sgd_momentum_variant;
-} BNNSOptimizerSGDMomentumFields;
+} BNNSOptimizerSGDMomentumFields
+__API_DEPRECATED("Use BNNSGraph* APIs", macos(11.0, 15.0), ios(14.0, 18.0), watchos(7.0, 11.0), tvos(14.0, 18.0));
 
 /*!
  @abstract SGD with Momentum and gradient clipping Optimizer Fields
@@ -677,7 +729,8 @@ typedef struct {
   float clip_gradients_max;
   float clip_gradients_max_norm;
   float clip_gradients_use_norm;
-} BNNSOptimizerSGDMomentumWithClippingFields;
+} BNNSOptimizerSGDMomentumWithClippingFields
+__API_DEPRECATED("Use BNNSGraph* APIs", macos(11.0, 15.0), ios(14.0, 18.0), watchos(7.0, 11.0), tvos(14.0, 18.0));
 
 /*!
  @abstract Adam and AdamW Fields
@@ -725,7 +778,8 @@ typedef struct {
   float clip_gradients_min;
   float clip_gradients_max;
   BNNSOptimizerRegularizationFunction regularization_func;
-} BNNSOptimizerAdamFields;
+} BNNSOptimizerAdamFields
+__API_DEPRECATED("Use BNNSGraph* APIs", macos(11.0, 15.0), ios(14.0, 18.0), watchos(7.0, 11.0), tvos(14.0, 18.0));
 
 /*!
  @abstract Adam and AdamW with gradient clipping Fields
@@ -777,7 +831,8 @@ typedef struct {
   float clip_gradients_max;
   float clip_gradients_max_norm;
   float clip_gradients_use_norm;
-} BNNSOptimizerAdamWithClippingFields;
+} BNNSOptimizerAdamWithClippingFields
+__API_DEPRECATED("Use BNNSGraph* APIs", macos(11.0, 15.0), ios(14.0, 18.0), watchos(7.0, 11.0), tvos(14.0, 18.0));
 
 /*!
  @abstract RMSProp Fields
@@ -823,7 +878,8 @@ typedef struct {
   float clip_gradients_min;
   float clip_gradients_max;
   BNNSOptimizerRegularizationFunction regularization_func;
-} BNNSOptimizerRMSPropFields;
+} BNNSOptimizerRMSPropFields
+__API_DEPRECATED("Use BNNSGraph* APIs", macos(11.0, 15.0), ios(14.0, 18.0), watchos(7.0, 11.0), tvos(14.0, 18.0));
 
 /*!
  @abstract RMSProp with gradient clipping Fields
@@ -873,7 +929,8 @@ typedef struct {
   float clip_gradients_max;
   float clip_gradients_max_norm;
   float clip_gradients_use_norm;
-} BNNSOptimizerRMSPropWithClippingFields;
+} BNNSOptimizerRMSPropWithClippingFields
+__API_DEPRECATED("Use BNNSGraph* APIs", macos(11.0, 15.0), ios(14.0, 18.0), watchos(7.0, 11.0), tvos(14.0, 18.0));
 
 /*!
  @abstract Normalization layer parameters
@@ -928,7 +985,8 @@ typedef struct {
   BNNSActivation activation;
   size_t num_groups;
   size_t normalization_axis;
-} BNNSLayerParametersNormalization;
+} BNNSLayerParametersNormalization
+__API_DEPRECATED("Use BNNSGraph* APIs", macos(11.0, 15.0), ios(14.0, 18.0), watchos(7.0, 11.0), tvos(14.0, 18.0));
 
 /*!
  @abstract Dropout Layer Fields
@@ -945,7 +1003,8 @@ typedef struct {
   float                  rate;
   uint32_t               seed;
   uint8_t                control;
-} BNNSLayerParametersDropout;
+} BNNSLayerParametersDropout
+__API_DEPRECATED("Use BNNSGraph* APIs", macos(11.0, 15.0), ios(14.0, 18.0), watchos(7.0, 11.0), tvos(14.0, 18.0));
 
 /*!
  @abstract LSTM layer parameters
@@ -1094,7 +1153,7 @@ typedef struct {
  @field output_gate - output descriptor (default activation is sigmoid), memory pointers ordered as [num_layers][num_directions][hidden_size][input_size/hidden_size] (C style multi array notation)
  @field hidden_activation - hidden activation layer to compute hidden output (default actviation tanh)
  */
-typedef struct {
+typedef struct __API_DEPRECATED("Use BNNSGraph* APIs", macos(11.0, 15.0), ios(14.0, 18.0), watchos(7.0, 11.0), tvos(14.0, 18.0)) {
   size_t input_size;
   size_t hidden_size;
   size_t batch_size;
@@ -1110,7 +1169,8 @@ typedef struct {
   BNNSLSTMGateDescriptor candidate_gate;
   BNNSLSTMGateDescriptor output_gate;
   BNNSActivation hidden_activation;
-} BNNSLayerParametersLSTM;
+} BNNSLayerParametersLSTM
+__API_DEPRECATED("Use BNNSGraph* APIs", macos(11.0, 15.0), ios(14.0, 18.0), watchos(7.0, 11.0), tvos(14.0, 18.0));
 
 /*!
  @abstract Arithmetic layer parameters
@@ -1128,7 +1188,8 @@ typedef struct {
   BNNSArithmeticFunction arithmetic_function;
   void* _Nonnull arithmetic_function_fields;
   BNNSActivation activation;
-} BNNSLayerParametersArithmetic;
+} BNNSLayerParametersArithmetic
+__API_DEPRECATED("Use BNNSGraph* APIs", macos(11.0, 15.0), ios(14.0, 18.0), watchos(7.0, 11.0), tvos(14.0, 18.0));
 
 /*! @abstract Permute Layer Parameters
  *
@@ -1151,7 +1212,8 @@ typedef struct {
   BNNSNDArrayDescriptor i_desc;
   BNNSNDArrayDescriptor o_desc;
   size_t permutation[BNNS_MAX_TENSOR_DIMENSION];
-} BNNSLayerParametersPermute;
+} BNNSLayerParametersPermute
+__API_DEPRECATED("Use BNNSGraph* APIs", macos(11.0, 15.0), ios(14.0, 18.0), watchos(7.0, 11.0), tvos(14.0, 18.0));
 
 /*! @abstract Tensor Contraction Layer Parameters
  *
@@ -1201,7 +1263,8 @@ typedef struct {
   BNNSNDArrayDescriptor iA_desc;
   BNNSNDArrayDescriptor iB_desc;
   BNNSNDArrayDescriptor o_desc;
-} BNNSLayerParametersTensorContraction;
+} BNNSLayerParametersTensorContraction
+__API_DEPRECATED("Use BNNSGraph* APIs", macos(11.0, 15.0), ios(14.0, 18.0), watchos(7.0, 11.0), tvos(14.0, 18.0));
 
 /*! @abstract Gram Matrix Layer Parameters
  *
@@ -1220,7 +1283,8 @@ typedef struct {
   float alpha;
   BNNSNDArrayDescriptor i_desc;
   BNNSNDArrayDescriptor o_desc;
-} BNNSLayerParametersGram;
+} BNNSLayerParametersGram
+__API_DEPRECATED("Use BNNSGraph* APIs", macos(11.0, 15.0), ios(14.0, 18.0), watchos(7.0, 11.0), tvos(14.0, 18.0));
 
 /*! @abstract Resize Layer Parameters
  *
@@ -1242,7 +1306,8 @@ typedef struct {
   BNNSNDArrayDescriptor i_desc;
   BNNSNDArrayDescriptor o_desc;
   bool align_corners;
-} BNNSLayerParametersResize;
+} BNNSLayerParametersResize
+__API_DEPRECATED("Use BNNSGraph* APIs", macos(11.0, 15.0), ios(14.0, 18.0), watchos(7.0, 11.0), tvos(14.0, 18.0));
 
 /*! @abstract Crop and Resize Layer Parameters
  *  @discussion only bilinear interpolation is supported now.
@@ -1261,7 +1326,8 @@ typedef struct {
   BNNSLinearSamplingMode sampling_mode;
   BNNSBoxCoordinateMode box_coordinate_mode;
   BNNSInterpolationMethod method;
-} BNNSLayerParametersCropResize;
+} BNNSLayerParametersCropResize
+__API_DEPRECATED("Use BNNSGraph* APIs", macos(13.0, 15.0), ios(16.0, 18.0), watchos(9.0, 11.0), tvos(16.0, 18.0));
 
 /*! @abstract Broadcast Matrix Multiplication Layer Parameters
  *
@@ -1322,7 +1388,8 @@ typedef struct {
   BNNSNDArrayDescriptor iA_desc;
   BNNSNDArrayDescriptor iB_desc;
   BNNSNDArrayDescriptor o_desc;
-} BNNSLayerParametersBroadcastMatMul;
+} BNNSLayerParametersBroadcastMatMul
+__API_DEPRECATED("Use BNNSGraph* APIs", macos(11.0, 15.0), ios(14.0, 18.0), watchos(7.0, 11.0), tvos(14.0, 18.0));
 
 /*! @abstract Multihead Attention Parameters
  *
@@ -1397,7 +1464,8 @@ typedef struct {
   BNNSMHAProjectionParameters output;
   float dropout;
   uint32_t seed;
-} BNNSLayerParametersMultiheadAttention;
+} BNNSLayerParametersMultiheadAttention
+__API_DEPRECATED("Use BNNSGraph* APIs", macos(11.0, 15.0), ios(14.0, 18.0), watchos(7.0, 11.0), tvos(14.0, 18.0));
 
 /*!
  @discussion computing reduction function across selected dimensions
@@ -1482,7 +1550,8 @@ typedef struct {
     size_t                  padding_size[BNNS_MAX_TENSOR_DIMENSION][2];
     BNNSPaddingMode         padding_mode;
     uint32_t                padding_value;
-} BNNSLayerParametersPadding;
+} BNNSLayerParametersPadding
+__API_DEPRECATED("Use BNNSGraph* APIs", macos(11.0, 15.0), ios(14.0, 18.0), watchos(7.0, 11.0), tvos(14.0, 18.0));
 
 /*!
  * @abstract Embedding Layer Fields
@@ -1516,7 +1585,8 @@ typedef struct {
   size_t                padding_idx;
   float                 max_norm;
   float                 norm_type;
-} BNNSLayerParametersEmbedding;
+} BNNSLayerParametersEmbedding
+__API_DEPRECATED("Use BNNSGraph* APIs", macos(12.0, 15.0), ios(15.0, 18.0), watchos(8.0, 11.0), tvos(15.0, 18.0));
 
 /*!
  @abstract Quantization layer parameters
@@ -1550,7 +1620,8 @@ typedef struct {
   BNNSNDArrayDescriptor o_desc;
   BNNSNDArrayDescriptor scale;
   BNNSNDArrayDescriptor bias;
-} BNNSLayerParametersQuantization;
+} BNNSLayerParametersQuantization
+__API_DEPRECATED("Use BNNSGraph* APIs", macos(12.0, 15.0), ios(15.0, 18.0), watchos(8.0, 11.0), tvos(15.0, 18.0));
 
 /*!
  @abstract parameters to describe sparsity attributes

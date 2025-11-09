@@ -18,37 +18,37 @@ NS_ASSUME_NONNULL_BEGIN
  *
  * @discussion ISO7816 Application Data Unit (APDU).
  */
-API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos)
+API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos)
 @interface NFCISO7816APDU : NSObject<NSCopying>
 /*!
  * @property instructionClass   Class (CLA) byte.
  */
-@property (nonatomic, readonly, assign) uint8_t instructionClass API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos);
+@property (nonatomic, readonly, assign) uint8_t instructionClass API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos);
 
 /*!
  * @property instructionCode    Instruction (INS) byte.
  */
-@property (nonatomic, readonly, assign) uint8_t instructionCode API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos);
+@property (nonatomic, readonly, assign) uint8_t instructionCode API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos);
 
 /*!
  * @property p1Parameter     P1 parameter.
  */
-@property (nonatomic, readonly, assign) uint8_t p1Parameter API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos);
+@property (nonatomic, readonly, assign) uint8_t p1Parameter API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos);
 
 /*!
  * @property p2Parameter     P2 parameter.
  */
-@property (nonatomic, readonly, assign) uint8_t p2Parameter API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos);
+@property (nonatomic, readonly, assign) uint8_t p2Parameter API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos);
 
 /*!
  * @property data   Data field; nil if data field is absent
  */
-@property (nonatomic, readonly, copy, nullable) NSData *data API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos);
+@property (nonatomic, readonly, copy, nullable) NSData *data API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos);
 
 /*!
  * @property expectedResponseLength     Expected response length (Le).  -1 means no response data field is expected.
  */
-@property (readonly, assign, nonatomic) NSInteger expectedResponseLength API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos);
+@property (readonly, assign, nonatomic) NSInteger expectedResponseLength API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos);
 
 - (instancetype)init NS_UNAVAILABLE;
 
@@ -73,7 +73,7 @@ API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos)
                              p1Parameter:(uint8_t)p1Parameter
                              p2Parameter:(uint8_t)p2Parameter
                                     data:(NSData *)data
-                  expectedResponseLength:(NSInteger)expectedResponseLength API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos);
+                  expectedResponseLength:(NSInteger)expectedResponseLength API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos);
 
 /*!
  * @method initWithData:
@@ -82,7 +82,7 @@ API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos)
  *
  * @return nil if input data does not contain a valid APDU.
  */
-- (_Nullable instancetype)initWithData:(NSData *)data API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos);
+- (_Nullable instancetype)initWithData:(NSData *)data API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos);
 
 @end
 
@@ -106,7 +106,7 @@ API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos)
  *              is found.  Tag must be in the connected state for NFCNDEFTag protocol properties and methods to work correctly.
  *
  */
-API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos)
+API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos)
 @protocol NFCISO7816Tag <NFCTag, NFCNDEFTag>
 
 /*!
@@ -114,28 +114,28 @@ API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos)
  *                              This will match one of the entries in the "com.apple.developer.nfc.readersession.iso7816.select-identifiers"
  *                              in the Info.plist.
  */
-@property (nonatomic, retain, readonly) NSString *initialSelectedAID API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos);
+@property (nonatomic, retain, readonly) NSString *initialSelectedAID API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos);
 
 /*!
  * @discussion The hardware UID of the tag.
  */
-@property (nonatomic, readonly, copy) NSData *identifier API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos);
+@property (nonatomic, readonly, copy) NSData *identifier API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos);
 
 /*!
  * @discussion The optional historical bytes extracted from the Type A Answer To Select response.
  */
-@property (nonatomic, readonly, copy, nullable) NSData *historicalBytes API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos);
+@property (nonatomic, readonly, copy, nullable) NSData *historicalBytes API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos);
 
 /*!
  * @discussion The optional Application Data bytes extracted from the Type B Answer To Request response.
  */
-@property (nonatomic, readonly, copy, nullable) NSData *applicationData API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos);
+@property (nonatomic, readonly, copy, nullable) NSData *applicationData API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos);
 
 /*!
  * @discussion Indicates if @link applicationData @link/ follows proprietary data coding.  If false, the format of the application data is
  *             defined in the ISO14443-3 specification.
  */
-@property (nonatomic, readonly) BOOL proprietaryApplicationDataCoding API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos);
+@property (nonatomic, readonly) BOOL proprietaryApplicationDataCoding API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos);
 
 /*!
  * @method sendCommandAPDU:completionHandler:
@@ -145,12 +145,12 @@ API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos)
  *                          A @link NFCErrorDomain @link/ error is returned when there is a communication issue with the tag.  responseData may be
  *                          empty.  Command processing status bytes (SW1-SW2) are always valid.
  *
- * @discussion  Send a command APDU to the tag and receives a response APDU.  Note that a SELECT command with a P1 value of 0x04 (seelction by DF name)
+ * @discussion  Send a command APDU to the tag and receives a response APDU.  Note that a SELECT command with a P1 value of 0x04 (selection by DF name)
  *              will be checked against the values listed in the "com.apple.developer.nfc.readersession.iso7816.select-identifiers" in the Info.plist.
  *              Selecting an application outside of the permissible list will result in a NFCReaderErrorSecurityViolation error.
  */
 - (void)sendCommandAPDU:(NFCISO7816APDU *)apdu
-      completionHandler:(void(^)(NSData *responseData, uint8_t sw1, uint8_t sw2, NSError * _Nullable error))completionHandler API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos);
+      completionHandler:(void(^)(NSData *responseData, uint8_t sw1, uint8_t sw2, NSError * _Nullable error))completionHandler API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos);
 @end
 
 NS_ASSUME_NONNULL_END

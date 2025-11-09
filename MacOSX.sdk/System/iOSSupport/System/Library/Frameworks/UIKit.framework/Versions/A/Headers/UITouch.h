@@ -23,13 +23,13 @@ typedef NS_ENUM(NSInteger, UITouchPhase) {
     UITouchPhaseRegionEntered   API_AVAILABLE(ios(13.4), tvos(13.4)) API_UNAVAILABLE(watchos),  // whenever a touch is entering the region of a user interface
     UITouchPhaseRegionMoved     API_AVAILABLE(ios(13.4), tvos(13.4)) API_UNAVAILABLE(watchos),  // when a touch is inside the region of a user interface, but hasn’t yet made contact or left the region
     UITouchPhaseRegionExited    API_AVAILABLE(ios(13.4), tvos(13.4)) API_UNAVAILABLE(watchos),  // when a touch is exiting the region of a user interface
-};
+} API_UNAVAILABLE(watchos);
 
 typedef NS_ENUM(NSInteger, UIForceTouchCapability) {
     UIForceTouchCapabilityUnknown = 0,
     UIForceTouchCapabilityUnavailable = 1,
     UIForceTouchCapabilityAvailable = 2
-};
+} API_UNAVAILABLE(watchos);
 
 typedef NS_ENUM(NSInteger, UITouchType) {
     UITouchTypeDirect,                       // A direct touch from a finger (on a screen)
@@ -37,7 +37,7 @@ typedef NS_ENUM(NSInteger, UITouchType) {
     UITouchTypePencil API_AVAILABLE(ios(9.1)), // Add pencil name variant
     UITouchTypeStylus API_AVAILABLE(ios(9.1)) = UITouchTypePencil, // A touch from a stylus (deprecated name, use pencil)
     UITouchTypeIndirectPointer API_AVAILABLE(ios(13.4), tvos(13.4)) API_UNAVAILABLE(watchos), // A touch representing a button-based, indirect input device describing the input sequence from button press to button release
-} API_AVAILABLE(ios(9.0));
+} API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(watchos);
 
 typedef NS_OPTIONS(NSInteger, UITouchProperties) {
     UITouchPropertyForce = (1UL << 0),
@@ -45,9 +45,9 @@ typedef NS_OPTIONS(NSInteger, UITouchProperties) {
     UITouchPropertyAltitude = (1UL << 2),
     UITouchPropertyLocation = (1UL << 3), // For predicted Touches
     UITouchPropertyRoll API_AVAILABLE(ios(17.5)) API_UNAVAILABLE(watchos, tvos) = (1UL << 4),
-} API_AVAILABLE(ios(9.1));
+} API_AVAILABLE(ios(9.1)) API_UNAVAILABLE(watchos);
 
-UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(2.0)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @interface UITouch : NSObject
 
 @property(nonatomic,readonly) NSTimeInterval      timestamp;

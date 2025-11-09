@@ -14,7 +14,6 @@
 NS_ASSUME_NONNULL_BEGIN
 
 SF_EXTERN NSString * const SFExtensionMessageKey SF_AVAILABLE_MAC_SAFARI(14_0);
-
 SF_EXTERN NSString * const SFExtensionProfileKey SF_AVAILABLE_MAC_SAFARI(17_0);
 
 @class NSRunningApplication;

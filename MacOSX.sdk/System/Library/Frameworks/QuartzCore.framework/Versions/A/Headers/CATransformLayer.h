@@ -7,7 +7,7 @@
 
 #import <QuartzCore/CALayer.h>
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 /* "Transform" layers are used to create true 3D layer hierarchies.
  *
@@ -31,10 +31,10 @@ NS_ASSUME_NONNULL_BEGIN
  * their sublayers, applying the effects of the transform layer's
  * geometry when hit-testing each sublayer. */
 
-API_AVAILABLE(macos(10.6), ios(3.0), watchos(2.0), tvos(9.0))
+API_AVAILABLE(macos(10.6), ios(3.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 @interface CATransformLayer : CALayer
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)
 
 #endif

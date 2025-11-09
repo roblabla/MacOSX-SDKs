@@ -16,7 +16,7 @@ NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 @class UIDynamicBehavior;
 @class UIDynamicAnimator;
 
-NS_SWIFT_UI_ACTOR
+API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @protocol UIDynamicAnimatorDelegate <NSObject>
 
 @optional
@@ -25,7 +25,7 @@ NS_SWIFT_UI_ACTOR
 
 @end
 
-UIKIT_EXTERN API_AVAILABLE(ios(7.0)) @interface UIDynamicAnimator: NSObject
+UIKIT_EXTERN API_AVAILABLE(ios(7.0)) API_UNAVAILABLE(watchos) @interface UIDynamicAnimator: NSObject
 
 // When you initialize a dynamic animator with this method, you should only associates views with your behaviors.
 // the behaviors (and their dynamic items) that you add to the animator employ the reference view’s coordinate system.

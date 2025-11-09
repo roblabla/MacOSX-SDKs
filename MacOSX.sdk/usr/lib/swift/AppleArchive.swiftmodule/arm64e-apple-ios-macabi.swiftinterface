@@ -1,6 +1,6 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.10 (swiftlang-5.10.0.12.5 clang-1500.3.9.1.1)
-// swift-module-flags: -target arm64e-apple-ios17.5-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftAppleArchive -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-bare-slash-regex -user-module-version 405.100.1 -module-name AppleArchive
+// swift-compiler-version: Apple Swift version 6.0 effective-5.10 (swiftlang-6.0.0.7.24 clang-1600.0.25.1)
+// swift-module-flags: -target arm64e-apple-ios18.0-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftAppleArchive -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-bare-slash-regex -user-module-version 423.1.1 -module-name AppleArchive
 @_exported import AppleArchive
 import Compression
 import CryptoKit
@@ -46,10 +46,15 @@ extension AppleArchive.ArchiveHeader : Swift.RandomAccessCollection, Swift.Mutab
   public func remove(at i: Swift.Int) -> AppleArchive.ArchiveHeader.Field
   @available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
   public func append(_ newElement: AppleArchive.ArchiveHeader.Field)
+  @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
   public typealias Element = AppleArchive.ArchiveHeader.Field
+  @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
   public typealias Index = Swift.Int
+  @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
   public typealias Indices = Swift.Range<Swift.Int>
+  @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
   public typealias Iterator = Swift.IndexingIterator<AppleArchive.ArchiveHeader>
+  @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
   public typealias SubSequence = Swift.Slice<AppleArchive.ArchiveHeader>
 }
 @available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
@@ -66,10 +71,15 @@ extension AppleArchive.ArchiveHeader {
     public subscript(i: Swift.Int) -> AppleArchive.ArchiveHeader.FieldType {
       get
     }
+    @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
     public typealias Element = AppleArchive.ArchiveHeader.FieldType
+    @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
     public typealias Index = Swift.Int
+    @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
     public typealias Indices = Swift.Range<Swift.Int>
+    @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
     public typealias Iterator = Swift.IndexingIterator<AppleArchive.ArchiveHeader._FieldTypes>
+    @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
     public typealias SubSequence = Swift.Slice<AppleArchive.ArchiveHeader._FieldTypes>
   }
   @available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
@@ -85,10 +95,15 @@ extension AppleArchive.ArchiveHeader {
       get
     }
     public func _customIndexOfEquatableElement(_ element: AppleArchive.ArchiveHeader.FieldKey) -> Swift.Int??
+    @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
     public typealias Element = AppleArchive.ArchiveHeader.FieldKey
+    @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
     public typealias Index = Swift.Int
+    @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
     public typealias Indices = Swift.Range<Swift.Int>
+    @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
     public typealias Iterator = Swift.IndexingIterator<AppleArchive.ArchiveHeader._FieldKeys>
+    @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
     public typealias SubSequence = Swift.Slice<AppleArchive.ArchiveHeader._FieldKeys>
   }
   @available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
@@ -143,6 +158,7 @@ extension AppleArchive.ArchiveHeader {
     public var description: Swift.String {
       get
     }
+    @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
     public typealias RawValue = Swift.UInt32
   }
 }
@@ -153,7 +169,7 @@ extension AppleArchive.ArchiveHeader {
     case uint(key: AppleArchive.ArchiveHeader.FieldKey, value: Swift.UInt64)
     case string(key: AppleArchive.ArchiveHeader.FieldKey, value: Swift.String)
     case hash(key: AppleArchive.ArchiveHeader.FieldKey, hashFunction: AppleArchive.ArchiveHash, value: Swift.ContiguousArray<Swift.UInt8>)
-    case timespec(key: AppleArchive.ArchiveHeader.FieldKey, value: Darwin.timespec)
+    case timespec(key: AppleArchive.ArchiveHeader.FieldKey, value: _time.timespec)
     case blob(key: AppleArchive.ArchiveHeader.FieldKey, size: Swift.UInt64, offset: Swift.UInt64 = 0)
     public var type: AppleArchive.ArchiveHeader.FieldType {
       get
@@ -191,15 +207,15 @@ extension AppleArchive.ArchiveHeader {
       get
       set
     }
-    public var mtm: Darwin.timespec? {
+    public var mtm: _time.timespec? {
       get
       set
     }
-    public var ctm: Darwin.timespec? {
+    public var ctm: _time.timespec? {
       get
       set
     }
-    public var btm: Darwin.timespec? {
+    public var btm: _time.timespec? {
       get
       set
     }
@@ -234,6 +250,7 @@ public struct ArchiveHash : Swift.Equatable, Swift.Hashable, Swift.RawRepresenta
   public var description: Swift.String {
     get
   }
+  @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
   public typealias RawValue = Swift.UInt32
 }
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
@@ -248,6 +265,7 @@ extension AppleArchive.ArchiveEncryptionContext {
     public var description: Swift.String {
       get
     }
+    @available(iOS 15.0, tvOS 15.0, watchOS 8.0, macOS 12.0, *)
     public typealias RawValue = Swift.UInt32
   }
 }
@@ -262,6 +280,7 @@ extension AppleArchive.ArchiveHeader {
     public var description: Swift.String {
       get
     }
+    @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
     public typealias RawValue = Swift.Int32
   }
 }
@@ -314,6 +333,7 @@ extension AppleArchive.ArchiveHeader {
     public var description: Swift.String {
       get
     }
+    @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
     public typealias RawValue = Swift.UInt32
   }
 }
@@ -359,10 +379,15 @@ extension AppleArchive.ArchiveHeader.EntryXATBlob : Swift.RandomAccessCollection
   public func removeAll()
   public func remove(at i: Swift.Int) -> AppleArchive.ArchiveHeader.EntryXATBlob.ExtendedAttribute
   public func append(_ newElement: AppleArchive.ArchiveHeader.EntryXATBlob.ExtendedAttribute)
+  @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
   public typealias Element = AppleArchive.ArchiveHeader.EntryXATBlob.ExtendedAttribute
+  @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
   public typealias Index = Swift.Int
+  @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
   public typealias Indices = Swift.Range<Swift.Int>
+  @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
   public typealias Iterator = Swift.IndexingIterator<AppleArchive.ArchiveHeader.EntryXATBlob>
+  @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
   public typealias SubSequence = Swift.Slice<AppleArchive.ArchiveHeader.EntryXATBlob>
 }
 @available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
@@ -420,6 +445,7 @@ extension AppleArchive.ArchiveHeader {
     public var description: Swift.String {
       get
     }
+    @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
     public typealias RawValue = Swift.UInt32
   }
 }
@@ -462,8 +488,11 @@ public struct ArchiveFlags : Swift.Hashable, Swift.OptionSet {
   public var rawValue: Swift.UInt64
   public init()
   public init(rawValue: Swift.UInt64)
+  @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
   public typealias ArrayLiteralElement = AppleArchive.ArchiveFlags
+  @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
   public typealias Element = AppleArchive.ArchiveFlags
+  @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
   public typealias RawValue = Swift.UInt64
 }
 @available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
@@ -557,6 +586,7 @@ extension AppleArchive.ArchiveEncryptionContext {
     public var description: Swift.String {
       get
     }
+    @available(iOS 15.0, tvOS 15.0, watchOS 8.0, macOS 12.0, *)
     public typealias RawValue = Swift.UInt32
   }
 }
@@ -570,6 +600,7 @@ extension AppleArchive.ArchiveEncryptionContext {
     public var description: Swift.String {
       get
     }
+    @available(iOS 15.0, tvOS 15.0, watchOS 8.0, macOS 12.0, *)
     public typealias RawValue = Swift.UInt32
   }
 }
@@ -636,9 +667,13 @@ extension AppleArchive.ArchiveHeader.FieldKeySet : Swift.CustomStringConvertible
   final public var description: Swift.String {
     get
   }
+  @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
   public typealias ArrayLiteralElement = AppleArchive.ArchiveHeader.FieldKeySet.Element
+  @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
   public typealias Indices = Swift.Range<AppleArchive.ArchiveHeader.FieldKeySet.Index>
+  @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
   public typealias Iterator = Swift.IndexingIterator<AppleArchive.ArchiveHeader.FieldKeySet>
+  @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
   public typealias SubSequence = Swift.Slice<AppleArchive.ArchiveHeader.FieldKeySet>
 }
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
@@ -752,6 +787,7 @@ extension AppleArchive.ArchiveEncryptionContext {
     public var description: Swift.String {
       get
     }
+    @available(iOS 15.0, tvOS 15.0, watchOS 8.0, macOS 12.0, *)
     public typealias RawValue = Swift.UInt32
   }
 }

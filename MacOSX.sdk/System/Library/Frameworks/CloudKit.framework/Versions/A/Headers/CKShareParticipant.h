@@ -69,6 +69,9 @@ API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0), watchos(3.0))
 /*! The default permission for a new participant is @c CKShareParticipantPermissionReadOnly. */
 @property (assign) CKShareParticipantPermission permission;
 
+/*! A unique identifier for this participant. */
+@property (readonly, copy) NSString *participantID API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0), watchos(3.0)) NS_REFINED_FOR_SWIFT;
+
 @end
 
 NS_HEADER_AUDIT_END(nullability, sendability)

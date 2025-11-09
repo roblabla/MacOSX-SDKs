@@ -111,6 +111,7 @@
 #include <mach/dyld_kernel.h>
 
 
+#include <mach/vm_types_unsafe.h>
 #include <mach/vm_param.h>
 
 /*

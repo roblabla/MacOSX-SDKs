@@ -21,9 +21,9 @@ typedef NS_ENUM(NSInteger, UIEditMenuArrowDirection) {
     UIEditMenuArrowDirectionDown        = 2,
     UIEditMenuArrowDirectionLeft        = 3,
     UIEditMenuArrowDirectionRight       = 4,
-} API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(watchos, tvos);
+} API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos);
 
-UIKIT_EXTERN API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(watchos, tvos) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @interface UIEditMenuConfiguration : NSObject
 
 /// The unique identifier of the configuration.
@@ -47,7 +47,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(watchos, tvos) NS_SWIFT_UI
 
 #pragma mark - UIEditMenuInteraction
 
-UIKIT_EXTERN API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(watchos, tvos) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @interface UIEditMenuInteraction : NSObject <UIInteraction>
 
 /// The object that defines the delegate of the interaction.
@@ -85,7 +85,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(watchos, tvos) NS_SWIFT_UI
 
 #pragma mark - UIEditMenuInteractionAnimating
 
-API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(watchos, tvos) NS_SWIFT_UI_ACTOR
+API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos)  NS_SWIFT_UI_ACTOR
 @protocol UIEditMenuInteractionAnimating <NSObject>
 
 - (void)addAnimations:(void (^)(void))animations;
@@ -95,7 +95,7 @@ API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(watchos, tvos) NS_SWIFT_UI_ACTOR
 
 #pragma mark - UIEditMenuInteractionDelegate
 
-API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(watchos, tvos)
+API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos)
 @protocol UIEditMenuInteractionDelegate<NSObject>
 
 @optional

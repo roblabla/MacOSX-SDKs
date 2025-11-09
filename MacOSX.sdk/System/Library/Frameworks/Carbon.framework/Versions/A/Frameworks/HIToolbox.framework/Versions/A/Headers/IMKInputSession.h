@@ -12,7 +12,10 @@
 	@abstract	This header contains the protocol that is used to communicate with client input sessions.  An input method uses this protocol to send text or obtain information about a client's text.
 */
 
-#ifndef __IMKINPUTSESSION__
+#if HIToolbox_PRECOMPILING
+#	error ShippedHeaders/Headers/IMKInputSession.h refuses to contribute to precompiled headers.
+#elif ! defined (__IMKINPUTSESSION__)
+//#	warning ShippedHeaders/Headers/IMKInputSession.h contributing
 #define __IMKINPUTSESSION__
 
 //to use this header you must use Objective-C.  This will be part of HIToolbox/HIToolbox.h and many people who include that header
@@ -276,5 +279,4 @@ extern const NSString* IMKTextOrientationName;
 @end
 
 #endif
-#endif
-
+#endif // HIToolbox_PRECOMPILING / __IMKINPUTSESSION__

@@ -381,7 +381,13 @@ __LAPACK_ALIAS(slapy3)
 API_AVAILABLE(macos(13.3), ios(16.4), watchos(9.4), tvos(16.4));
 
 
-
+float
+slarmm_(
+  const float * _Nonnull anorm,
+  const float * _Nonnull bnorm,
+  const float * _Nonnull cnorm)
+__LAPACK_ALIAS(slarmm)
+API_AVAILABLE(macos(15.0), ios(18.0), watchos(11.0), tvos(18.0));
 
 
 
@@ -401,6 +407,14 @@ dlapy3_(
   const double * _Nonnull z)
 __LAPACK_ALIAS(dlapy3)
 API_AVAILABLE(macos(13.3), ios(16.4), watchos(9.4), tvos(16.4));
+
+double
+dlarmm_(
+  const double * _Nonnull anorm,
+  const double * _Nonnull bnorm,
+  const double * _Nonnull cnorm)
+__LAPACK_ALIAS(dlarmm)
+API_AVAILABLE(macos(15.0), ios(18.0), watchos(11.0), tvos(18.0));
 
 
 
@@ -14172,6 +14186,21 @@ dlag2_(
 __LAPACK_ALIAS(dlag2)
 API_AVAILABLE(macos(13.3), ios(16.4), watchos(9.4), tvos(16.4));
 
+void
+dlaqz1_(
+   const double * _Nullable a,
+   const __LAPACK_int * _Nonnull lda,
+   const double * _Nullable b,
+   const __LAPACK_int * _Nonnull ldb,
+   const double * _Nonnull sr1,
+   const double * _Nonnull sr2,
+   const double * _Nonnull si,
+   const double * _Nonnull beta1,
+   const double * _Nonnull beta2,
+   double * _Nullable v)
+__LAPACK_ALIAS(dlaqz1)
+API_AVAILABLE(macos(15.0), ios(18.0), watchos(11.0), tvos(18.0));
+
 
 
 void
@@ -14741,6 +14770,21 @@ slag2_(
   float * _Nonnull wi)
 __LAPACK_ALIAS(slag2)
 API_AVAILABLE(macos(13.3), ios(16.4), watchos(9.4), tvos(16.4));
+
+void
+slaqz1_(
+   const float * _Nullable a,
+   const __LAPACK_int * _Nonnull lda,
+   const float * _Nullable b,
+   const __LAPACK_int * _Nonnull ldb,
+   const float * _Nonnull sr1,
+   const float * _Nonnull sr2,
+   const float * _Nonnull si,
+   const float * _Nonnull beta1,
+   const float * _Nonnull beta2,
+   float * _Nullable v)
+__LAPACK_ALIAS(slaqz1)
+API_AVAILABLE(macos(15.0), ios(18.0), watchos(11.0), tvos(18.0));
 
 
 
@@ -15996,6 +16040,22 @@ cgels_(
 __LAPACK_ALIAS(cgels)
 API_AVAILABLE(macos(13.3), ios(16.4), watchos(9.4), tvos(16.4));
 
+void
+cgelst_(
+   const char * _Nonnull trans,
+   const __LAPACK_int * _Nonnull m,
+   const __LAPACK_int * _Nonnull n,
+   const __LAPACK_int * _Nonnull nrhs,
+   __LAPACK_float_complex * _Nullable a,
+   const __LAPACK_int * _Nonnull lda,
+   __LAPACK_float_complex * _Nullable b,
+   const __LAPACK_int * _Nonnull ldb,
+   __LAPACK_float_complex * _Nonnull work,
+   const __LAPACK_int * _Nonnull lwork,
+   __LAPACK_int * _Nonnull info)
+__LAPACK_ALIAS(cgelst)
+API_AVAILABLE(macos(15.0), ios(18.0), watchos(11.0), tvos(18.0));
+
 
 
 
@@ -16658,6 +16718,22 @@ dgels_(
 __LAPACK_ALIAS(dgels)
 API_AVAILABLE(macos(13.3), ios(16.4), watchos(9.4), tvos(16.4));
 
+void
+dgelst_(
+  const char * _Nonnull trans,
+  const __LAPACK_int * _Nonnull m,
+  const __LAPACK_int * _Nonnull n,
+  const __LAPACK_int * _Nonnull nrhs,
+  double * _Nullable a,
+  const __LAPACK_int * _Nonnull lda,
+  double * _Nullable b,
+  const __LAPACK_int * _Nonnull ldb,
+  double * _Nonnull work,
+  const __LAPACK_int * _Nonnull lwork,
+  __LAPACK_int * _Nonnull info)
+__LAPACK_ALIAS(dgelst)
+API_AVAILABLE(macos(15.0), ios(18.0), watchos(11.0), tvos(18.0));
+
 
 
 void
@@ -17293,6 +17369,22 @@ sgels_(
 __LAPACK_ALIAS(sgels)
 API_AVAILABLE(macos(13.3), ios(16.4), watchos(9.4), tvos(16.4));
 
+void
+sgelst_(
+  const char * _Nonnull trans,
+  const __LAPACK_int * _Nonnull m,
+  const __LAPACK_int * _Nonnull n,
+  const __LAPACK_int * _Nonnull nrhs,
+  float * _Nullable a,
+  const __LAPACK_int * _Nonnull lda,
+  float * _Nullable b,
+  const __LAPACK_int * _Nonnull ldb,
+  float * _Nonnull work,
+  const __LAPACK_int * _Nonnull lwork,
+  __LAPACK_int * _Nonnull info)
+__LAPACK_ALIAS(sgelst)
+API_AVAILABLE(macos(15.0), ios(18.0), watchos(11.0), tvos(18.0));
+
 
 
 void
@@ -17842,6 +17934,22 @@ zgels_(
   __LAPACK_int * _Nonnull info)
 __LAPACK_ALIAS(zgels)
 API_AVAILABLE(macos(13.3), ios(16.4), watchos(9.4), tvos(16.4));
+
+void
+zgelst_(
+  const char * _Nonnull trans,
+  const __LAPACK_int * _Nonnull m,
+  const __LAPACK_int * _Nonnull n,
+  const __LAPACK_int * _Nonnull nrhs,
+  __LAPACK_double_complex * _Nullable a,
+  const __LAPACK_int * _Nonnull lda,
+  __LAPACK_double_complex * _Nullable b,
+  const __LAPACK_int * _Nonnull ldb,
+  __LAPACK_double_complex * _Nonnull work,
+  const __LAPACK_int * _Nonnull lwork,
+  __LAPACK_int * _Nonnull info)
+__LAPACK_ALIAS(zgelst)
+API_AVAILABLE(macos(15.0), ios(18.0), watchos(11.0), tvos(18.0));
 
 
 
@@ -25449,6 +25557,26 @@ chprfs_(
 __LAPACK_ALIAS(chprfs)
 API_AVAILABLE(macos(13.3), ios(16.4), watchos(9.4), tvos(16.4));
 
+void
+clatrs3_(
+  const char * _Nonnull uplo,
+  const char * _Nonnull trans,
+  const char * _Nonnull diag,
+  const char * _Nonnull normin,
+  const __LAPACK_int * _Nonnull n,
+  const __LAPACK_int * _Nonnull nrhs,
+  const __LAPACK_float_complex * _Nullable a,
+  const __LAPACK_int * _Nonnull lda,
+  __LAPACK_float_complex * _Nullable x,
+  const __LAPACK_int * _Nonnull ldx,
+  float * _Nullable scale,
+  float * _Nullable cnorm,
+  float * _Nonnull work,
+  const __LAPACK_int * _Nonnull lwork,
+  __LAPACK_int * _Nonnull info)
+__LAPACK_ALIAS(clatrs3)
+API_AVAILABLE(macos(15.0), ios(18.0), watchos(11.0), tvos(18.0));
+
 
 
 void
@@ -25514,6 +25642,26 @@ ctrevc_(
   __LAPACK_int * _Nonnull info)
 __LAPACK_ALIAS(ctrevc)
 API_AVAILABLE(macos(13.3), ios(16.4), watchos(9.4), tvos(16.4));
+
+void
+ctrsyl3_(
+  const char * _Nonnull trana,
+  const char * _Nonnull tranb,
+  const __LAPACK_int * _Nonnull isgn,
+  const __LAPACK_int * _Nonnull m,
+  const __LAPACK_int * _Nonnull n,
+  const __LAPACK_float_complex * _Nullable a,
+  const __LAPACK_int * _Nonnull lda,
+  const __LAPACK_float_complex * _Nullable b,
+  const __LAPACK_int * _Nonnull ldb,
+  __LAPACK_float_complex * _Nullable c,
+  const __LAPACK_int * _Nonnull ldc,
+  float * _Nonnull scale,
+  float * _Nullable swork,
+  __LAPACK_int * _Nonnull ldswork,
+  __LAPACK_int * _Nonnull info)
+__LAPACK_ALIAS(ctrsyl3)
+API_AVAILABLE(macos(15.0), ios(18.0), watchos(11.0), tvos(18.0));
 
 
 
@@ -25668,6 +25816,27 @@ dtrevc3_(
   __LAPACK_int * _Nonnull info)
 __LAPACK_ALIAS(dtrevc3)
 API_AVAILABLE(macos(13.3), ios(16.4), watchos(9.4), tvos(16.4));
+
+
+void
+dlatrs3_(
+  const char * _Nonnull uplo,
+  const char * _Nonnull trans,
+  const char * _Nonnull diag,
+  const char * _Nonnull normin,
+  const __LAPACK_int * _Nonnull n,
+  const __LAPACK_int * _Nonnull nrhs,
+  const double * _Nullable a,
+  const __LAPACK_int * _Nonnull lda,
+  double * _Nullable x,
+  const __LAPACK_int * _Nonnull ldx,
+  double * _Nullable scale,
+  double * _Nullable cnorm,
+  double * _Nonnull work,
+  const __LAPACK_int * _Nonnull lwork,
+  __LAPACK_int * _Nonnull info)
+__LAPACK_ALIAS(dlatrs3)
+API_AVAILABLE(macos(15.0), ios(18.0), watchos(11.0), tvos(18.0));
 
 
 
@@ -25866,6 +26035,26 @@ strevc3_(
   __LAPACK_int * _Nonnull info)
 __LAPACK_ALIAS(strevc3)
 API_AVAILABLE(macos(13.3), ios(16.4), watchos(9.4), tvos(16.4));
+
+void
+slatrs3_(
+  const char * _Nonnull uplo,
+  const char * _Nonnull trans,
+  const char * _Nonnull diag,
+  const char * _Nonnull normin,
+  const __LAPACK_int * _Nonnull n,
+  const __LAPACK_int * _Nonnull nrhs,
+  const float * _Nullable a,
+  const __LAPACK_int * _Nonnull lda,
+  float * _Nullable x,
+  const __LAPACK_int * _Nonnull ldx,
+  float * _Nullable scale,
+  float * _Nullable cnorm,
+  float * _Nonnull work,
+  const __LAPACK_int * _Nonnull lwork,
+  __LAPACK_int * _Nonnull info)
+__LAPACK_ALIAS(slatrs3)
+API_AVAILABLE(macos(15.0), ios(18.0), watchos(11.0), tvos(18.0));
 
 
 
@@ -26263,6 +26452,26 @@ zhprfs_(
 __LAPACK_ALIAS(zhprfs)
 API_AVAILABLE(macos(13.3), ios(16.4), watchos(9.4), tvos(16.4));
 
+void
+zlatrs3_(
+  const char * _Nonnull uplo,
+  const char * _Nonnull trans,
+  const char * _Nonnull diag,
+  const char * _Nonnull normin,
+  const __LAPACK_int * _Nonnull n,
+  const __LAPACK_int * _Nonnull nrhs,
+  const __LAPACK_double_complex * _Nullable a,
+  const __LAPACK_int * _Nonnull lda,
+  __LAPACK_double_complex * _Nullable x,
+  const __LAPACK_int * _Nonnull ldx,
+  double * _Nullable scale,
+  double * _Nullable cnorm,
+  double * _Nonnull work,
+  const __LAPACK_int * _Nonnull lwork,
+  __LAPACK_int * _Nonnull info)
+__LAPACK_ALIAS(zlatrs3)
+API_AVAILABLE(macos(15.0), ios(18.0), watchos(11.0), tvos(18.0));
+
 
 
 void
@@ -26328,6 +26537,26 @@ ztrevc_(
   __LAPACK_int * _Nonnull info)
 __LAPACK_ALIAS(ztrevc)
 API_AVAILABLE(macos(13.3), ios(16.4), watchos(9.4), tvos(16.4));
+
+void
+ztrsyl3_(
+  const char * _Nonnull trana,
+  const char * _Nonnull tranb,
+  const __LAPACK_int * _Nonnull isgn,
+  const __LAPACK_int * _Nonnull m,
+  const __LAPACK_int * _Nonnull n,
+  const __LAPACK_double_complex * _Nullable a,
+  const __LAPACK_int * _Nonnull lda,
+  const __LAPACK_double_complex * _Nullable b,
+  const __LAPACK_int * _Nonnull ldb,
+  __LAPACK_double_complex * _Nullable c,
+  const __LAPACK_int * _Nonnull ldc,
+  double * _Nonnull scale,
+  double * _Nullable swork,
+  __LAPACK_int * _Nonnull ldswork,
+  __LAPACK_int * _Nonnull info)
+__LAPACK_ALIAS(ztrsyl3)
+API_AVAILABLE(macos(15.0), ios(18.0), watchos(11.0), tvos(18.0));
 
 
 
@@ -28571,6 +28800,28 @@ dtbrfs_(
 __LAPACK_ALIAS(dtbrfs)
 API_AVAILABLE(macos(13.3), ios(16.4), watchos(9.4), tvos(16.4));
 
+void
+dtrsyl3_(
+  const char * _Nonnull trana,
+  const char * _Nonnull tranb,
+  const __LAPACK_int * _Nonnull isgn,
+  const __LAPACK_int * _Nonnull m,
+  const __LAPACK_int * _Nonnull n,
+  const double * _Nullable a,
+  const __LAPACK_int * _Nonnull lda,
+  const double * _Nullable b,
+  const __LAPACK_int * _Nonnull ldb,
+  double * _Nullable c,
+  const __LAPACK_int * _Nonnull ldc,
+  double * _Nonnull scale,
+  __LAPACK_int * _Nullable iwork,
+  const __LAPACK_int * _Nonnull liwork,
+  double * _Nullable swork,
+  __LAPACK_int * _Nonnull ldswork,
+  __LAPACK_int * _Nonnull info)
+__LAPACK_ALIAS(dtrsyl3)
+API_AVAILABLE(macos(15.0), ios(18.0), watchos(11.0), tvos(18.0));
+
 
 
 void
@@ -28906,6 +29157,28 @@ stbrfs_(
   __LAPACK_int * _Nonnull info)
 __LAPACK_ALIAS(stbrfs)
 API_AVAILABLE(macos(13.3), ios(16.4), watchos(9.4), tvos(16.4));
+
+void
+strsyl3_(
+  const char * _Nonnull trana,
+  const char * _Nonnull tranb,
+  const __LAPACK_int * _Nonnull isgn,
+  const __LAPACK_int * _Nonnull m,
+  const __LAPACK_int * _Nonnull n,
+  const float * _Nullable a,
+  const __LAPACK_int * _Nonnull lda,
+  const float * _Nullable b,
+  const __LAPACK_int * _Nonnull ldb,
+  float * _Nullable c,
+  const __LAPACK_int * _Nonnull ldc,
+  float * _Nonnull scale,
+  __LAPACK_int * _Nullable iwork,
+  const __LAPACK_int * _Nonnull liwork,
+  float * _Nullable swork,
+  __LAPACK_int * _Nonnull ldswork,
+  __LAPACK_int * _Nonnull info)
+__LAPACK_ALIAS(strsyl3)
+API_AVAILABLE(macos(15.0), ios(18.0), watchos(11.0), tvos(18.0));
 
 
 
@@ -29465,6 +29738,29 @@ sstevx_(
 __LAPACK_ALIAS(sstevx)
 API_AVAILABLE(macos(13.3), ios(16.4), watchos(9.4), tvos(16.4));
 
+void
+claqz1_(
+  const __LAPACK_bool * _Nonnull ilq,
+  const __LAPACK_bool * _Nonnull ilz,
+  const __LAPACK_int * _Nonnull k,
+  const __LAPACK_int * _Nonnull istartm,
+  const __LAPACK_int * _Nonnull istopm,
+  const __LAPACK_int * _Nonnull ihi,
+  __LAPACK_float_complex * _Nullable a,
+  const __LAPACK_int * _Nonnull lda,
+  __LAPACK_float_complex * _Nullable b,
+  const __LAPACK_int * _Nonnull ldb,
+  const __LAPACK_int * _Nonnull nq,
+  const __LAPACK_int * _Nonnull qstart,
+  __LAPACK_float_complex * _Nullable q,
+  const __LAPACK_int * _Nonnull ldq,
+  const __LAPACK_int * _Nonnull nz,
+  const __LAPACK_int * _Nonnull zstart,
+  __LAPACK_float_complex * _Nullable z,
+  const __LAPACK_int * _Nonnull ldz)
+__LAPACK_ALIAS(claqz1)
+API_AVAILABLE(macos(15.0), ios(18.0), watchos(11.0), tvos(18.0));
+
 
 
 void
@@ -29715,6 +30011,29 @@ dtprfb_(
 __LAPACK_ALIAS(dtprfb)
 API_AVAILABLE(macos(13.3), ios(16.4), watchos(9.4), tvos(16.4));
 
+void
+dlaqz2_(
+  const __LAPACK_bool * _Nonnull ilq,
+  const __LAPACK_bool * _Nonnull ilz,
+  const __LAPACK_int * _Nonnull k,
+  const __LAPACK_int * _Nonnull istartm,
+  const __LAPACK_int * _Nonnull istopm,
+  const __LAPACK_int * _Nonnull ihi,
+  double * _Nullable a,
+  const __LAPACK_int * _Nonnull lda,
+  double * _Nullable b,
+  const __LAPACK_int * _Nonnull ldb,
+  const __LAPACK_int * _Nonnull nq,
+  const __LAPACK_int * _Nonnull qstart,
+  double * _Nullable q,
+  const __LAPACK_int * _Nonnull ldq,
+  const __LAPACK_int * _Nonnull nz,
+  const __LAPACK_int * _Nonnull zstart,
+  double * _Nullable z,
+  const __LAPACK_int * _Nonnull ldz)
+__LAPACK_ALIAS(dlaqz2)
+API_AVAILABLE(macos(15.0), ios(18.0), watchos(11.0), tvos(18.0));
+
 
 
 void
@@ -29940,6 +30259,29 @@ stprfb_(
 __LAPACK_ALIAS(stprfb)
 API_AVAILABLE(macos(13.3), ios(16.4), watchos(9.4), tvos(16.4));
 
+void
+slaqz2_(
+  const __LAPACK_bool * _Nonnull ilq,
+  const __LAPACK_bool * _Nonnull ilz,
+  const __LAPACK_int * _Nonnull k,
+  const __LAPACK_int * _Nonnull istartm,
+  const __LAPACK_int * _Nonnull istopm,
+  const __LAPACK_int * _Nonnull ihi,
+  float * _Nullable a,
+  const __LAPACK_int * _Nonnull lda,
+  float * _Nullable b,
+  const __LAPACK_int * _Nonnull ldb,
+  const __LAPACK_int * _Nonnull nq,
+  const __LAPACK_int * _Nonnull qstart,
+  float * _Nullable q,
+  const __LAPACK_int * _Nonnull ldq,
+  const __LAPACK_int * _Nonnull nz,
+  const __LAPACK_int * _Nonnull zstart,
+  float * _Nullable z,
+  const __LAPACK_int * _Nonnull ldz)
+__LAPACK_ALIAS(slaqz2)
+API_AVAILABLE(macos(15.0), ios(18.0), watchos(11.0), tvos(18.0));
+
 
 
 void
@@ -30089,6 +30431,29 @@ ztprfb_(
   const __LAPACK_int * _Nonnull ldwork)
 __LAPACK_ALIAS(ztprfb)
 API_AVAILABLE(macos(13.3), ios(16.4), watchos(9.4), tvos(16.4));
+
+void
+zlaqz1_(
+  const __LAPACK_bool * _Nonnull ilq,
+  const __LAPACK_bool * _Nonnull ilz,
+  const __LAPACK_int * _Nonnull k,
+  const __LAPACK_int * _Nonnull istartm,
+  const __LAPACK_int * _Nonnull istopm,
+  const __LAPACK_int * _Nonnull ihi,
+  __LAPACK_double_complex * _Nullable a,
+  const __LAPACK_int * _Nonnull lda,
+  __LAPACK_double_complex * _Nullable b,
+  const __LAPACK_int * _Nonnull ldb,
+  const __LAPACK_int * _Nonnull nq,
+  const __LAPACK_int * _Nonnull qstart,
+  __LAPACK_double_complex * _Nullable q,
+  const __LAPACK_int * _Nonnull ldq,
+  const __LAPACK_int * _Nonnull nz,
+  const __LAPACK_int * _Nonnull zstart,
+  __LAPACK_double_complex * _Nullable z,
+  const __LAPACK_int * _Nonnull ldz)
+__LAPACK_ALIAS(zlaqz1)
+API_AVAILABLE(macos(15.0), ios(18.0), watchos(11.0), tvos(18.0));
 
 
 
@@ -31775,6 +32140,32 @@ cgges_(
 __LAPACK_ALIAS(cgges)
 API_AVAILABLE(macos(13.3), ios(16.4), watchos(9.4), tvos(16.4));
 
+void
+claqz0_(
+  const char * _Nonnull wants,
+  const char * _Nonnull wantq,
+  const char * _Nonnull wantz,
+  const __LAPACK_int * _Nonnull n,
+  const __LAPACK_int * _Nonnull ilo,
+  const __LAPACK_int * _Nonnull ihi,
+  __LAPACK_float_complex * _Nullable a,
+  const __LAPACK_int * _Nonnull lda,
+  __LAPACK_float_complex * _Nullable b,
+  const __LAPACK_int * _Nonnull ldb,
+  __LAPACK_float_complex * _Nullable alpha,
+  __LAPACK_float_complex * _Nullable beta,
+  __LAPACK_float_complex * _Nullable q,
+  const __LAPACK_int * _Nonnull ldq,
+  __LAPACK_float_complex * _Nullable z,
+  const __LAPACK_int * _Nonnull ldz,
+  __LAPACK_float_complex * _Nonnull work,
+  const __LAPACK_int * _Nonnull lwork,
+  float * _Nullable rwork,
+  const __LAPACK_int * _Nonnull rec,
+  __LAPACK_int * _Nonnull info)
+__LAPACK_ALIAS(claqz0)
+API_AVAILABLE(macos(15.0), ios(18.0), watchos(11.0), tvos(18.0));
+
 
 
 void
@@ -32056,6 +32447,33 @@ __LAPACK_ALIAS(dgges)
 API_AVAILABLE(macos(13.3), ios(16.4), watchos(9.4), tvos(16.4));
 
 
+void
+dlaqz0_(
+  const char * _Nonnull wants,
+  const char * _Nonnull wantq,
+  const char * _Nonnull wantz,
+  const __LAPACK_int * _Nonnull n,
+  const __LAPACK_int * _Nonnull ilo,
+  const __LAPACK_int * _Nonnull ihi,
+  double * _Nullable a,
+  const __LAPACK_int * _Nonnull lda,
+  double * _Nullable b,
+  const __LAPACK_int * _Nonnull ldb,
+  double * _Nullable alphar,
+  double * _Nullable alphai,
+  double * _Nullable beta,
+  double * _Nullable q,
+  const __LAPACK_int * _Nonnull ldq,
+  double * _Nullable z,
+  const __LAPACK_int * _Nonnull ldz,
+  double * _Nonnull work,
+  const __LAPACK_int * _Nonnull lwork,
+  const __LAPACK_int * _Nonnull rec,
+  __LAPACK_int * _Nonnull info)
+__LAPACK_ALIAS(dlaqz0)
+API_AVAILABLE(macos(15.0), ios(18.0), watchos(11.0), tvos(18.0));
+
+
 
 void
 dgges3_(
@@ -32306,6 +32724,32 @@ sgges_(
   __LAPACK_int * _Nonnull info)
 __LAPACK_ALIAS(sgges)
 API_AVAILABLE(macos(13.3), ios(16.4), watchos(9.4), tvos(16.4));
+
+void
+slaqz0_(
+  const char * _Nonnull wants,
+  const char * _Nonnull wantq,
+  const char * _Nonnull wantz,
+  const __LAPACK_int * _Nonnull n,
+  const __LAPACK_int * _Nonnull ilo,
+  const __LAPACK_int * _Nonnull ihi,
+  float * _Nullable a,
+  const __LAPACK_int * _Nonnull lda,
+  float * _Nullable b,
+  const __LAPACK_int * _Nonnull ldb,
+  float * _Nullable alphar,
+  float * _Nullable alphai,
+  float * _Nullable beta,
+  float * _Nullable q,
+  const __LAPACK_int * _Nonnull ldq,
+  float * _Nullable z,
+  const __LAPACK_int * _Nonnull ldz,
+  float * _Nonnull work,
+  const __LAPACK_int * _Nonnull lwork,
+  const __LAPACK_int * _Nonnull rec,
+  __LAPACK_int * _Nonnull info)
+__LAPACK_ALIAS(slaqz0)
+API_AVAILABLE(macos(15.0), ios(18.0), watchos(11.0), tvos(18.0));
 
 
 
@@ -32558,6 +33002,32 @@ zgges_(
   __LAPACK_int * _Nonnull info)
 __LAPACK_ALIAS(zgges)
 API_AVAILABLE(macos(13.3), ios(16.4), watchos(9.4), tvos(16.4));
+
+void
+zlaqz0_(
+  const char * _Nonnull wants,
+  const char * _Nonnull wantq,
+  const char * _Nonnull wantz,
+  const __LAPACK_int * _Nonnull n,
+  const __LAPACK_int * _Nonnull ilo,
+  const __LAPACK_int * _Nonnull ihi,
+  __LAPACK_double_complex * _Nullable a,
+  const __LAPACK_int * _Nonnull lda,
+  __LAPACK_double_complex * _Nullable b,
+  const __LAPACK_int * _Nonnull ldb,
+  __LAPACK_double_complex * _Nullable alpha,
+  __LAPACK_double_complex * _Nullable beta,
+  __LAPACK_double_complex * _Nullable q,
+  const __LAPACK_int * _Nonnull ldq,
+  __LAPACK_double_complex * _Nullable z,
+  const __LAPACK_int * _Nonnull ldz,
+  __LAPACK_double_complex * _Nonnull work,
+  const __LAPACK_int * _Nonnull lwork,
+  double * _Nullable rwork,
+  const __LAPACK_int * _Nonnull rec,
+  __LAPACK_int * _Nonnull info)
+__LAPACK_ALIAS(zlaqz0)
+API_AVAILABLE(macos(15.0), ios(18.0), watchos(11.0), tvos(18.0));
 
 
 
@@ -35117,6 +35587,36 @@ claqr3_(
 __LAPACK_ALIAS(claqr3)
 API_AVAILABLE(macos(13.3), ios(16.4), watchos(9.4), tvos(16.4));
 
+void
+claqz3_(
+  const __LAPACK_bool * _Nonnull ilschur,
+  const __LAPACK_bool * _Nonnull ilq,
+  const __LAPACK_bool * _Nonnull ilz,
+  const __LAPACK_int * _Nonnull n,
+  const __LAPACK_int * _Nonnull ilo,
+  const __LAPACK_int * _Nonnull ihi,
+  const __LAPACK_int * _Nonnull nshifts,
+  const __LAPACK_int * _Nonnull nblock_desired,
+  __LAPACK_float_complex * _Nullable alpha,
+  __LAPACK_float_complex * _Nullable beta,
+  __LAPACK_float_complex * _Nullable a,
+  const __LAPACK_int * _Nonnull lda,
+  __LAPACK_float_complex * _Nullable b,
+  const __LAPACK_int * _Nonnull ldb,
+  __LAPACK_float_complex * _Nullable q,
+  const __LAPACK_int * _Nonnull ldq,
+  __LAPACK_float_complex * _Nullable z,
+  const __LAPACK_int * _Nonnull ldz,
+  __LAPACK_float_complex * _Nullable qc,
+  const __LAPACK_int * _Nonnull ldqc,
+  __LAPACK_float_complex * _Nullable zc,
+  const __LAPACK_int * _Nonnull ldzc,
+  __LAPACK_float_complex * _Nonnull work,
+  const __LAPACK_int * _Nonnull lwork,
+  __LAPACK_int * _Nonnull info)
+__LAPACK_ALIAS(claqz3)
+API_AVAILABLE(macos(15.0), ios(18.0), watchos(11.0), tvos(18.0));
+
 
 
 void
@@ -35817,6 +36317,37 @@ __LAPACK_ALIAS(zlaqr3)
 API_AVAILABLE(macos(13.3), ios(16.4), watchos(9.4), tvos(16.4));
 
 
+void
+zlaqz3_(
+  const __LAPACK_bool * _Nonnull ilschur,
+  const __LAPACK_bool * _Nonnull ilq,
+  const __LAPACK_bool * _Nonnull ilz,
+  const __LAPACK_int * _Nonnull n,
+  const __LAPACK_int * _Nonnull ilo,
+  const __LAPACK_int * _Nonnull ihi,
+  const __LAPACK_int * _Nonnull nshifts,
+  const __LAPACK_int * _Nonnull nblock_desired,
+  __LAPACK_double_complex * _Nullable alpha,
+  __LAPACK_double_complex * _Nullable beta,
+  __LAPACK_double_complex * _Nullable a,
+  const __LAPACK_int * _Nonnull lda,
+  __LAPACK_double_complex * _Nullable b,
+  const __LAPACK_int * _Nonnull ldb,
+  __LAPACK_double_complex * _Nullable q,
+  const __LAPACK_int * _Nonnull ldq,
+  __LAPACK_double_complex * _Nullable z,
+  const __LAPACK_int * _Nonnull ldz,
+  __LAPACK_double_complex * _Nullable qc,
+  const __LAPACK_int * _Nonnull ldqc,
+  __LAPACK_double_complex * _Nullable zc,
+  const __LAPACK_int * _Nonnull ldzc,
+  __LAPACK_double_complex * _Nonnull work,
+  const __LAPACK_int * _Nonnull lwork,
+  __LAPACK_int * _Nonnull info)
+__LAPACK_ALIAS(zlaqz3)
+API_AVAILABLE(macos(15.0), ios(18.0), watchos(11.0), tvos(18.0));
+
+
 
 void
 zggsvp_(
@@ -36242,6 +36773,38 @@ __LAPACK_ALIAS(dlalsa)
 API_AVAILABLE(macos(13.3), ios(16.4), watchos(9.4), tvos(16.4));
 
 
+void
+dlaqz4_(
+  const __LAPACK_bool * _Nonnull ilschur,
+  const __LAPACK_bool * _Nonnull ilq,
+  const __LAPACK_bool * _Nonnull ilz,
+  const __LAPACK_int * _Nonnull n,
+  const __LAPACK_int * _Nonnull ilo,
+  const __LAPACK_int * _Nonnull ihi,
+  const __LAPACK_int * _Nonnull nshifts,
+  const __LAPACK_int * _Nonnull nblock_desired,
+  double * _Nullable sr,
+  double * _Nullable si,
+  double * _Nullable ss,
+  double * _Nullable a,
+  const __LAPACK_int * _Nonnull lda,
+  double * _Nullable b,
+  const __LAPACK_int * _Nonnull ldb,
+  double * _Nullable q,
+  const __LAPACK_int * _Nonnull ldq,
+  double * _Nullable z,
+  const __LAPACK_int * _Nonnull ldz,
+  double * _Nullable qc,
+  const __LAPACK_int * _Nonnull ldqc,
+  double * _Nullable zc,
+  const __LAPACK_int * _Nonnull ldzc,
+  double * _Nonnull work,
+  const __LAPACK_int * _Nonnull lwork,
+  __LAPACK_int * _Nonnull info)
+__LAPACK_ALIAS(dlaqz4)
+API_AVAILABLE(macos(15.0), ios(18.0), watchos(11.0), tvos(18.0));
+
+
 
 void
 dggesx_(
@@ -36372,6 +36935,38 @@ slalsa_(
   __LAPACK_int * _Nonnull info)
 __LAPACK_ALIAS(slalsa)
 API_AVAILABLE(macos(13.3), ios(16.4), watchos(9.4), tvos(16.4));
+
+
+void
+slaqz4_(
+  const __LAPACK_bool * _Nonnull ilschur,
+  const __LAPACK_bool * _Nonnull ilq,
+  const __LAPACK_bool * _Nonnull ilz,
+  const __LAPACK_int * _Nonnull n,
+  const __LAPACK_int * _Nonnull ilo,
+  const __LAPACK_int * _Nonnull ihi,
+  const __LAPACK_int * _Nonnull nshifts,
+  const __LAPACK_int * _Nonnull nblock_desired,
+  float * _Nullable sr,
+  float * _Nullable si,
+  float * _Nullable ss,
+  float * _Nullable a,
+  const __LAPACK_int * _Nonnull lda,
+  float * _Nullable b,
+  const __LAPACK_int * _Nonnull ldb,
+  float * _Nullable q,
+  const __LAPACK_int * _Nonnull ldq,
+  float * _Nullable z,
+  const __LAPACK_int * _Nonnull ldz,
+  float * _Nullable qc,
+  const __LAPACK_int * _Nonnull ldqc,
+  float * _Nullable zc,
+  const __LAPACK_int * _Nonnull ldzc,
+  float * _Nonnull work,
+  const __LAPACK_int * _Nonnull lwork,
+  __LAPACK_int * _Nonnull info)
+__LAPACK_ALIAS(slaqz4)
+API_AVAILABLE(macos(15.0), ios(18.0), watchos(11.0), tvos(18.0));
 
 
 
@@ -36605,6 +37200,141 @@ dlasd7_(
   __LAPACK_int * _Nonnull info)
 __LAPACK_ALIAS(dlasd7)
 API_AVAILABLE(macos(13.3), ios(16.4), watchos(9.4), tvos(16.4));
+
+
+void
+claqz2_(
+  const __LAPACK_bool * _Nonnull ilschur,
+  const __LAPACK_bool * _Nonnull ilq,
+  const __LAPACK_bool * _Nonnull ilz,
+  const __LAPACK_int * _Nonnull n,
+  const __LAPACK_int * _Nonnull ilo,
+  const __LAPACK_int * _Nonnull ihi,
+  const __LAPACK_int * _Nonnull nw,
+  __LAPACK_float_complex * _Nullable a,
+  const __LAPACK_int * _Nonnull lda,
+  __LAPACK_float_complex * _Nullable b,
+  const __LAPACK_int * _Nonnull ldb,
+  __LAPACK_float_complex * _Nullable q,
+  const __LAPACK_int * _Nonnull ldq,
+  __LAPACK_float_complex * _Nullable z,
+  const __LAPACK_int * _Nonnull ldz,
+  __LAPACK_int * _Nonnull ns,
+  __LAPACK_int * _Nonnull nd,
+  __LAPACK_float_complex * _Nullable alpha,
+  __LAPACK_float_complex * _Nullable beta,
+  __LAPACK_float_complex * _Nullable qc,
+  const __LAPACK_int * _Nonnull ldqc,
+  __LAPACK_float_complex * _Nullable zc,
+  const __LAPACK_int * _Nonnull ldzc,
+  __LAPACK_float_complex * _Nonnull work,
+  const __LAPACK_int * _Nonnull lwork,
+  float * _Nullable rwork,
+  const __LAPACK_int * _Nonnull rec,
+  __LAPACK_int * _Nonnull info)
+__LAPACK_ALIAS(claqz2)
+API_AVAILABLE(macos(15.0), ios(18.0), watchos(11.0), tvos(18.0));
+
+
+void
+dlaqz3_(
+  const __LAPACK_bool * _Nonnull ilschur,
+  const __LAPACK_bool * _Nonnull ilq,
+  const __LAPACK_bool * _Nonnull ilz,
+  const __LAPACK_int * _Nonnull n,
+  const __LAPACK_int * _Nonnull ilo,
+  const __LAPACK_int * _Nonnull ihi,
+  const __LAPACK_int * _Nonnull nw,
+  double * _Nullable a,
+  const __LAPACK_int * _Nonnull lda,
+  double * _Nullable b,
+  const __LAPACK_int * _Nonnull ldb,
+  double * _Nullable q,
+  const __LAPACK_int * _Nonnull ldq,
+  double * _Nullable z,
+  const __LAPACK_int * _Nonnull ldz,
+  __LAPACK_int * _Nonnull ns,
+  __LAPACK_int * _Nonnull nd,
+  double * _Nullable alphar,
+  double * _Nullable alphai,
+  double * _Nullable beta,
+  double * _Nullable qc,
+  const __LAPACK_int * _Nonnull ldqc,
+  double * _Nullable zc,
+  const __LAPACK_int * _Nonnull ldzc,
+  double * _Nonnull work,
+  const __LAPACK_int * _Nonnull lwork,
+  const __LAPACK_int * _Nonnull rec,
+  __LAPACK_int * _Nonnull info)
+__LAPACK_ALIAS(dlaqz3)
+API_AVAILABLE(macos(15.0), ios(18.0), watchos(11.0), tvos(18.0));
+
+void
+slaqz3_(
+  const __LAPACK_bool * _Nonnull ilschur,
+  const __LAPACK_bool * _Nonnull ilq,
+  const __LAPACK_bool * _Nonnull ilz,
+  const __LAPACK_int * _Nonnull n,
+  const __LAPACK_int * _Nonnull ilo,
+  const __LAPACK_int * _Nonnull ihi,
+  const __LAPACK_int * _Nonnull nw,
+  float * _Nullable a,
+  const __LAPACK_int * _Nonnull lda,
+  float * _Nullable b,
+  const __LAPACK_int * _Nonnull ldb,
+  float * _Nullable q,
+  const __LAPACK_int * _Nonnull ldq,
+  float * _Nullable z,
+  const __LAPACK_int * _Nonnull ldz,
+  __LAPACK_int * _Nonnull ns,
+  __LAPACK_int * _Nonnull nd,
+  float * _Nullable alphar,
+  float * _Nullable alphai,
+  float * _Nullable beta,
+  float * _Nullable qc,
+  const __LAPACK_int * _Nonnull ldqc,
+  float * _Nullable zc,
+  const __LAPACK_int * _Nonnull ldzc,
+  float * _Nonnull work,
+  const __LAPACK_int * _Nonnull lwork,
+  const __LAPACK_int * _Nonnull rec,
+  __LAPACK_int * _Nonnull info)
+__LAPACK_ALIAS(slaqz3)
+API_AVAILABLE(macos(15.0), ios(18.0), watchos(11.0), tvos(18.0));
+
+
+void
+zlaqz2_(
+  const __LAPACK_bool * _Nonnull ilschur,
+  const __LAPACK_bool * _Nonnull ilq,
+  const __LAPACK_bool * _Nonnull ilz,
+  const __LAPACK_int * _Nonnull n,
+  const __LAPACK_int * _Nonnull ilo,
+  const __LAPACK_int * _Nonnull ihi,
+  const __LAPACK_int * _Nonnull nw,
+  __LAPACK_double_complex * _Nullable a,
+  const __LAPACK_int * _Nonnull lda,
+  __LAPACK_double_complex * _Nullable b,
+  const __LAPACK_int * _Nonnull ldb,
+  __LAPACK_double_complex * _Nullable q,
+  const __LAPACK_int * _Nonnull ldq,
+  __LAPACK_double_complex * _Nullable z,
+  const __LAPACK_int * _Nonnull ldz,
+  __LAPACK_int * _Nonnull ns,
+  __LAPACK_int * _Nonnull nd,
+  __LAPACK_double_complex * _Nullable alpha,
+  __LAPACK_double_complex * _Nullable beta,
+  __LAPACK_double_complex * _Nullable qc,
+  const __LAPACK_int * _Nonnull ldqc,
+  __LAPACK_double_complex * _Nullable zc,
+  const __LAPACK_int * _Nonnull ldzc,
+  __LAPACK_double_complex * _Nonnull work,
+  const __LAPACK_int * _Nonnull lwork,
+  double * _Nullable rwork,
+  const __LAPACK_int * _Nonnull rec,
+  __LAPACK_int * _Nonnull info)
+__LAPACK_ALIAS(zlaqz2)
+API_AVAILABLE(macos(15.0), ios(18.0), watchos(11.0), tvos(18.0));
 
 
 

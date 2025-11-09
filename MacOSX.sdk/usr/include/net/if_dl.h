@@ -65,6 +65,7 @@
 #define _NET_IF_DL_H_
 #include <sys/appleapiopts.h>
 
+#include <sys/_types.h> /* __offsetof() */
 #include <sys/types.h>
 
 
@@ -107,7 +108,7 @@ struct sockaddr_dl {
 #endif
 };
 
-#define LLADDR(s) ((caddr_t)((s)->sdl_data + (s)->sdl_nlen))
+#define LLADDR(s) ((caddr_t)(s) + __offsetof(struct sockaddr_dl, sdl_data) + (s)->sdl_nlen)
 
 
 

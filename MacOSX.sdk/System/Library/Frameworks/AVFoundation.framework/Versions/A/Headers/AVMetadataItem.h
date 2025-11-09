@@ -37,18 +37,17 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class AVMetadataItemInternal;
 
-NS_SWIFT_NONSENDABLE
-API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0))
+API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0), visionos(1.0))
 @interface AVMetadataItem : NSObject <AVAsynchronousKeyValueLoading, NSCopying, NSMutableCopying>
 {
 	AVMetadataItemInternal	*_priv;
 }
 
 /* Indicates the identifier of the metadata item. Publicly defined identifiers are declared in AVMetadataIdentifiers.h. */
-@property (nonatomic, readonly, copy, nullable) AVMetadataIdentifier identifier API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(1.0));
+@property (nonatomic, readonly, copy, nullable) AVMetadataIdentifier identifier API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(1.0), visionos(1.0));
 
 /* indicates the IETF BCP 47 (RFC 4646) language identifier of the metadata item; may be nil if no language tag information is available */
-@property (nonatomic, readonly, copy, nullable) NSString *extendedLanguageTag API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(1.0));
+@property (nonatomic, readonly, copy, nullable) NSString *extendedLanguageTag API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(1.0), visionos(1.0));
 
 /* indicates the locale of the metadata item; may be nil if no locale information is available for the metadata item */
 @property (nonatomic, readonly, copy, nullable) NSLocale *locale;
@@ -57,16 +56,16 @@ API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0))
 @property (nonatomic, readonly) CMTime time;
 
 /* indicates the duration of the metadata item */
-@property (nonatomic, readonly) CMTime duration API_AVAILABLE(macos(10.7), ios(4.2), tvos(9.0), watchos(1.0));
+@property (nonatomic, readonly) CMTime duration API_AVAILABLE(macos(10.7), ios(4.2), tvos(9.0), watchos(1.0), visionos(1.0));
 
 /* indicates the data type of the metadata item's value.  Publicly defined data types are declared in <CoreMedia/CMMetadata.h> */
-@property (nonatomic, readonly, copy, nullable) NSString *dataType API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(1.0));
+@property (nonatomic, readonly, copy, nullable) NSString *dataType API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(1.0), visionos(1.0));
 
 /* provides the value of the metadata item */
-@property (nonatomic, readonly, copy, nullable) id<NSObject, NSCopying> value AVF_DEPRECATED_FOR_SWIFT_ONLY("Use load(.value) instead", macos(10.7, 13.0), ios(4.0, 16.0), tvos(9.0, 16.0), watchos(1.0, 9.0));
+@property (nonatomic, readonly, copy, nullable) id<NSObject, NSCopying> value AVF_DEPRECATED_FOR_SWIFT_ONLY("Use load(.value) instead", macos(10.7, 13.0), ios(4.0, 16.0), tvos(9.0, 16.0), watchos(1.0, 9.0), visionos(1.0, 1.0));
 
 /* provides a dictionary of the additional attributes */
-@property (nonatomic, readonly, copy, nullable) NSDictionary<AVMetadataExtraAttributeKey, id> *extraAttributes AVF_DEPRECATED_FOR_SWIFT_ONLY("Use load(.extraAttributes) instead", macos(10.7, 13.0), ios(4.0, 16.0), tvos(9.0, 16.0), watchos(1.0, 9.0));
+@property (nonatomic, readonly, copy, nullable) NSDictionary<AVMetadataExtraAttributeKey, id> *extraAttributes AVF_DEPRECATED_FOR_SWIFT_ONLY("Use load(.extraAttributes) instead", macos(10.7, 13.0), ios(4.0, 16.0), tvos(9.0, 16.0), watchos(1.0, 9.0), visionos(1.0, 1.0));
 
 @end
 
@@ -74,7 +73,7 @@ API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0))
 @interface AVMetadataItem (AVMetadataItemDateRepresentation)
 
 /* indicates the start date of the timed metadata; nil if no date is indicated */
-@property (nonatomic, readonly, copy, nullable) NSDate *startDate API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(2.0));
+@property (nonatomic, readonly, copy, nullable) NSDate *startDate API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(2.0), visionos(1.0));
 
 @end
 
@@ -82,16 +81,16 @@ API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0))
 @interface AVMetadataItem (AVMetadataItemTypeCoercion)
 
 /* provides the value of the metadata item as a string; will be nil if the value cannot be represented as a string */
-@property (nonatomic, readonly, nullable) NSString *stringValue AVF_DEPRECATED_FOR_SWIFT_ONLY("Use load(.stringValue) instead", macos(10.7, 13.0), ios(4.0, 16.0), tvos(9.0, 16.0), watchos(1.0, 9.0));
+@property (nonatomic, readonly, nullable) NSString *stringValue AVF_DEPRECATED_FOR_SWIFT_ONLY("Use load(.stringValue) instead", macos(10.7, 13.0), ios(4.0, 16.0), tvos(9.0, 16.0), watchos(1.0, 9.0), visionos(1.0, 1.0));
 
 /* provides the value of the metadata item as an NSNumber. If the metadata item's value can't be coerced to a number, @"numberValue" will be nil. */
-@property (nonatomic, readonly, nullable) NSNumber *numberValue AVF_DEPRECATED_FOR_SWIFT_ONLY("Use load(.numberValue) instead", macos(10.7, 13.0), ios(4.0, 16.0), tvos(9.0, 16.0), watchos(1.0, 9.0));
+@property (nonatomic, readonly, nullable) NSNumber *numberValue AVF_DEPRECATED_FOR_SWIFT_ONLY("Use load(.numberValue) instead", macos(10.7, 13.0), ios(4.0, 16.0), tvos(9.0, 16.0), watchos(1.0, 9.0), visionos(1.0, 1.0));
 
 /* provides the value of the metadata item as an NSDate. If the metadata item's value can't be coerced to a date, @"dateValue" will be nil. */
-@property (nonatomic, readonly, nullable) NSDate *dateValue AVF_DEPRECATED_FOR_SWIFT_ONLY("Use load(.dateValue) instead", macos(10.7, 13.0), ios(4.0, 16.0), tvos(9.0, 16.0), watchos(1.0, 9.0));
+@property (nonatomic, readonly, nullable) NSDate *dateValue AVF_DEPRECATED_FOR_SWIFT_ONLY("Use load(.dateValue) instead", macos(10.7, 13.0), ios(4.0, 16.0), tvos(9.0, 16.0), watchos(1.0, 9.0), visionos(1.0, 1.0));
 
 /* provides the raw bytes of the value of the metadata item */
-@property (nonatomic, readonly, nullable) NSData *dataValue AVF_DEPRECATED_FOR_SWIFT_ONLY("Use load(.dataValue) instead", macos(10.7, 13.0), ios(4.0, 16.0), tvos(9.0, 16.0), watchos(1.0, 9.0));
+@property (nonatomic, readonly, nullable) NSData *dataValue AVF_DEPRECATED_FOR_SWIFT_ONLY("Use load(.dataValue) instead", macos(10.7, 13.0), ios(4.0, 16.0), tvos(9.0, 16.0), watchos(1.0, 9.0), visionos(1.0, 1.0));
 
 @end
 
@@ -104,14 +103,14 @@ API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0))
 #if __swift__
 API_DEPRECATED("Use status(of:) instead", macos(10.7, 13.0), ios(4.2, 16.0), tvos(9.0, 16.0), watchos(1.0, 9.0)) API_UNAVAILABLE(visionos);
 #else
-API_AVAILABLE(macos(10.7), ios(4.2), tvos(9.0), watchos(1.0));
+API_AVAILABLE(macos(10.7), ios(4.2), tvos(9.0), watchos(1.0), visionos(1.0));
 #endif
 
-- (void)loadValuesAsynchronouslyForKeys:(NSArray<NSString *> *)keys completionHandler:(nullable void (^)(void))handler
+- (void)loadValuesAsynchronouslyForKeys:(NSArray<NSString *> *)keys completionHandler:(nullable void (^ NS_SWIFT_SENDABLE)(void))handler
 #if __swift__
 API_DEPRECATED("Use load(_:) instead.  For non-deprecated properties that do not have an AVAsyncProperty equivalent, continue to query these properties synchronously", macos(10.7, 13.0), ios(4.2, 16.0), tvos(9.0, 16.0), watchos(1.0, 9.0)) API_UNAVAILABLE(visionos);
 #else
-API_AVAILABLE(macos(10.7), ios(4.2), tvos(9.0), watchos(1.0));
+API_AVAILABLE(macos(10.7), ios(4.2), tvos(9.0), watchos(1.0), visionos(1.0));
 #endif
 
 @end
@@ -128,7 +127,7 @@ API_AVAILABLE(macos(10.7), ios(4.2), tvos(9.0), watchos(1.0));
 				An array of language identifiers in order of preference, each of which is an IETF BCP 47 (RFC 4646) language identifier. Use +[NSLocale preferredLanguages] to obtain the user's list of preferred languages.
  @result		An instance of NSArray containing metadata items of the specified NSArray that match a preferred language, sorted according to the order of preference of the language each matches.
 */
-+ (NSArray<AVMetadataItem *> *)metadataItemsFromArray:(NSArray<AVMetadataItem *> *)metadataItems filteredAndSortedAccordingToPreferredLanguages:(NSArray<NSString *> *)preferredLanguages API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(1.0));
++ (NSArray<AVMetadataItem *> *)metadataItemsFromArray:(NSArray<AVMetadataItem *> *)metadataItems filteredAndSortedAccordingToPreferredLanguages:(NSArray<NSString *> *)preferredLanguages API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(1.0), visionos(1.0));
 
 /*!
 	@method			metadataItemsFromArray:filteredByIdentifier:
@@ -139,7 +138,7 @@ API_AVAILABLE(macos(10.7), ios(4.2), tvos(9.0), watchos(1.0));
 	The identifier that must be matched for a metadata item to be copied to the output array. Items are considered a match not only when their identifiers are equal to the specified identifier, and also when their identifiers conform to the specified identifier.
 	@result			An instance of NSArray containing the metadata items of the target NSArray that match the specified identifier.
 */
-+ (NSArray<AVMetadataItem *> *)metadataItemsFromArray:(NSArray<AVMetadataItem *> *)metadataItems filteredByIdentifier:(AVMetadataIdentifier)identifier API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(1.0));
++ (NSArray<AVMetadataItem *> *)metadataItemsFromArray:(NSArray<AVMetadataItem *> *)metadataItems filteredByIdentifier:(AVMetadataIdentifier)identifier API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(1.0), visionos(1.0));
 
 /*!
 	@method			metadataItemsFromArray:filteredByMetadataItemFilter:
@@ -150,7 +149,7 @@ API_AVAILABLE(macos(10.7), ios(4.2), tvos(9.0), watchos(1.0));
 					The AVMetadataItemFilter object for filtering the metadataItems.
 	@result			An instance of NSArray containing the metadata items of the target NSArray that have not been removed by metadataItemFilter.
 */
-+ (NSArray<AVMetadataItem *> *)metadataItemsFromArray:(NSArray<AVMetadataItem *> *)metadataItems filteredByMetadataItemFilter:(AVMetadataItemFilter *)metadataItemFilter API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(1.0));
++ (NSArray<AVMetadataItem *> *)metadataItemsFromArray:(NSArray<AVMetadataItem *> *)metadataItems filteredByMetadataItemFilter:(AVMetadataItemFilter *)metadataItemFilter API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(1.0), visionos(1.0));
 
 @end
 
@@ -169,13 +168,13 @@ API_AVAILABLE(macos(10.7), ios(4.2), tvos(9.0), watchos(1.0));
  
 		For custom identifiers, the keySpace AVMetadataKeySpaceQuickTimeMetadata is recommended.  This keySpace defines its key values to be expressed as reverse-DNS strings, which allows third parties to define their own keys in a well established way that avoids collisions.
 */
-+ (nullable AVMetadataIdentifier)identifierForKey:(id)key keySpace:(AVMetadataKeySpace)keySpace API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(1.0));
++ (nullable AVMetadataIdentifier)identifierForKey:(id)key keySpace:(AVMetadataKeySpace)keySpace API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(1.0), visionos(1.0));
 
 /* provides the metadata keySpace indicated by the identifier  */
-+ (nullable AVMetadataKeySpace)keySpaceForIdentifier:(AVMetadataIdentifier)identifier API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(1.0));
++ (nullable AVMetadataKeySpace)keySpaceForIdentifier:(AVMetadataIdentifier)identifier API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(1.0), visionos(1.0));
 
 /* provides the metadata key indicated by the identifier  */
-+ (nullable id)keyForIdentifier:(AVMetadataIdentifier)identifier API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(1.0));
++ (nullable id)keyForIdentifier:(AVMetadataIdentifier)identifier API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(1.0), visionos(1.0));
 
 /* indicates the key of the metadata item */
 @property (nonatomic, readonly, copy, nullable) id<NSObject, NSCopying> key;
@@ -202,17 +201,17 @@ API_AVAILABLE(macos(10.7), ios(4.2), tvos(9.0), watchos(1.0));
 @class AVMutableMetadataItemInternal;
 
 NS_SWIFT_NONSENDABLE
-API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0))
+API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0), visionos(1.0))
 @interface AVMutableMetadataItem : AVMetadataItem
 {
 	AVMutableMetadataItemInternal	*_mutablePriv;
 }
 
 /* Indicates the identifier of the metadata item. Publicly defined identifiers are declared in AVMetadataIdentifiers.h.  This property throws an exception if identifier is not of the form \"<keySpace>/<key>\". */
-@property (nonatomic, readwrite, copy, nullable) AVMetadataIdentifier identifier API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(1.0));
+@property (nonatomic, readwrite, copy, nullable) AVMetadataIdentifier identifier API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(1.0), visionos(1.0));
 
 /* indicates the IETF BCP 47 (RFC 4646) language identifier of the metadata item; may be nil if no language tag information is available */
-@property (nonatomic, readwrite, copy, nullable) NSString *extendedLanguageTag API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(1.0));
+@property (nonatomic, readwrite, copy, nullable) NSString *extendedLanguageTag API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(1.0), visionos(1.0));
 
 /* indicates the locale of the metadata item; may be nil if no locale information is available for the metadata item */
 @property (nonatomic, readwrite, copy, nullable) NSLocale *locale;
@@ -221,10 +220,10 @@ API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0))
 @property (nonatomic, readwrite) CMTime time;
 
 /* indicates the duration of the metadata item */
-@property (nonatomic, readwrite) CMTime duration API_AVAILABLE(macos(10.7), ios(4.2), tvos(9.0), watchos(1.0));
+@property (nonatomic, readwrite) CMTime duration API_AVAILABLE(macos(10.7), ios(4.2), tvos(9.0), watchos(1.0), visionos(1.0));
 
 /* indicates the data type of the metadata item's value.  Publicly defined data types are declared in <CoreMedia/CMMetadata.h> */
-@property (nonatomic, readwrite, copy, nullable) NSString *dataType API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(1.0));
+@property (nonatomic, readwrite, copy, nullable) NSString *dataType API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(1.0), visionos(1.0));
 
 /* provides the value of the metadata item */
 @property (nonatomic, readwrite, copy, nullable) id<NSObject, NSCopying> value;
@@ -243,7 +242,7 @@ API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0))
 @interface AVMutableMetadataItem (AVMutableMetadataItemDateRepresentation)
 
 /* indicates the start date of the timed metadata; nil if no date is indicated */
-@property (nonatomic, readwrite, copy, nullable) NSDate *startDate API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(2.0));
+@property (nonatomic, readwrite, copy, nullable) NSDate *startDate API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(2.0), visionos(1.0));
 
 @end
 
@@ -273,13 +272,13 @@ API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0))
  		This method is intended for the creation of metadata items for optional display purposes, when there is no immediate need to load specific metadata values. For example, see the interface for navigation markers as consumed by AVPlayerViewController. It's not intended for the creation of metadata items with values that are required immediately, such as metadata items that are provided for impending serialization operations (e.g. via -[AVAssetExportSession setMetadata:] and other similar methods defined on AVAssetWriter and AVAssetWriterInput). 
 		When -loadValuesAsynchronouslyForKeys:completionHandler: is invoked on an AVMetadataItem created via +metadataItemWithPropertiesOfMetadataItem:valueLoadingHandler: and @"value" is among the keys for which loading is requested, the block you provide as the value loading handler will be executed on an arbitrary dispatch queue, off the main thread. The handler can perform I/O and other necessary operations to obtain the value. If loading of the value succeeds, provide the value by invoking -[AVMetadataItemValueRequest respondWithValue:]. If loading of the value fails, provide an instance of NSError that describes the failure by invoking -[AVMetadataItemValueRequest respondWithError:].
 */
-+ (AVMetadataItem *)metadataItemWithPropertiesOfMetadataItem:(AVMetadataItem *)metadataItem valueLoadingHandler:(void (^ NS_SWIFT_SENDABLE)(AVMetadataItemValueRequest *valueRequest))handler API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(2.0));
++ (AVMetadataItem *)metadataItemWithPropertiesOfMetadataItem:(AVMetadataItem *)metadataItem valueLoadingHandler:(void (^ NS_SWIFT_SENDABLE)(AVMetadataItemValueRequest *valueRequest))handler API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(2.0), visionos(1.0));
 
 @end
 
 @class AVMetadataItemValueRequestInternal;
 
-API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(2.0))
+API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(2.0), visionos(1.0))
 @interface AVMetadataItemValueRequest : NSObject {
 @private
 	AVMetadataItemValueRequestInternal	*_valueRequest;
@@ -322,7 +321,7 @@ API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(2.0))
  @discussion    Subclasses of this type that are used from Swift must fulfill the requirements of a Sendable type.
 */
 NS_SWIFT_SENDABLE
-API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(1.0))
+API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(1.0), visionos(1.0))
 @interface AVMetadataItemFilter : NSObject {
 @private
 	AVMetadataItemFilterInternal	*_itemFilterInternal __attribute__((unused));

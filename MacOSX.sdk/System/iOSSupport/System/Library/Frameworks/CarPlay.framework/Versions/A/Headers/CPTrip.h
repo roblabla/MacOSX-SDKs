@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  @c CPRouteChoice describes a possible route for a @c CPTrip.
  */
-API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(macos, watchos, tvos)
+API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(macos, watchos)
 @interface CPRouteChoice : NSObject <NSCopying, NSSecureCoding>
 
 /**
@@ -55,7 +55,7 @@ API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(macos, watchos, tvos)
 /**
  @c CPTrip represents an origin and destination with route choices.
  */
-API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(macos, watchos, tvos)
+API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(macos, watchos)
 @interface CPTrip : NSObject <NSSecureCoding>
 
 /**

@@ -53,7 +53,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(17.0), visionos(1.0)) API_UNAVAILABLE(watchos, tv
 /// The hover style associated with this view. Defaults to `nil`,
 /// indicating that this view should not have any hover effect.
 /// Subclasses may configure this style to use a different default value.
-@property (nonatomic, copy, nullable) UIHoverStyle *hoverStyle;
+@property (nonatomic, copy, nullable) UIHoverStyle *hoverStyle API_UNAVAILABLE(watchos);
 
 @end
 
